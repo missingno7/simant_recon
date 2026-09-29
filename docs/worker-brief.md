@@ -29,6 +29,7 @@ pass flags literally (`--flags /AL /Os /Oe`).
 python tools/modmap.py root:0894            # module overview (functions, sizes, signals)
 python tools/context.py NAME                # disassembly with names, frame, callers/callees, Win16 pair
 python tools/xver.py show NAME              # Win16 correspondence evidence
+python tools/dataref.py root:0894           # DGROUP refs of the module: statics, literal pool, CONST seg words
 python tools/search.py NAME build/workers/<you>/m0894.c --flags /AL /Os [/Oe] [/Gs] [--placement _DATA=55B3:XXXX]
 python tools/promote.py build/workers/<you>/m0894.c --module root:0894 --flags ... --claim NAME ... --verify-only
 python tools/promote.py build/workers/<you>/m0894.c --module root:0894 --flags ... --claim NAME ...
