@@ -146,6 +146,32 @@
     "BIN/CL.MSG": "3379f283aec74842bc82205e4c848d759e6e2dcbb6d4820eec9719f1297213ec"
    },
    "note": "C2L.EXE bound from msc-6.00a-simantw/BIN/C2L.EXE (OS/2 NE) with BIND 1.30 + API.LIB/OS2.LIB; experimental"
+  },
+  "msc600ax": {
+   "product": "Microsoft C 6.00AX (DOS-extended CL /EM: C1L, C2L, C3L), archive.org Microsoft_c_60ax disk 8",
+   "runner": "dosbox-x",
+   "directory": "C:/tools/msc-6.00ax-archive",
+   "bin": "BIN",
+   "include_directory": "C:/tools/msc-6.00a-simantw/INCLUDE",
+   "executable": "CL.EXE",
+   "required_flags": [
+    "/EM"
+   ],
+   "flags": [
+    "/AL",
+    "/Os"
+   ],
+   "files": {
+    "BIN/CL.EXE": "92df4a0839aac77940189ce54f107381b829babe8103926cb05d1adffe947347",
+    "BIN/C1L.EXE": "d3db38b875a95048bca2809cd1f84783c6c070805f188fec9161054d6350ded3",
+    "BIN/C2L.EXE": "62490de22e7b279ea59218a54d677bfc752cb5fc1287533d2e23d03519f155e0",
+    "BIN/C3L.EXE": "9e82ecc87ffcdb2def53ac64c0d1f048b26421c1415b5600ad4d8d6fcbc06553",
+    "BIN/CL.ERR": "ca22f37e5e0c09faebde9e4d549dd1f53523cc6f23049d2239a040cd19a424e7",
+    "BIN/C1.ERR": "637444915870f3283d5df41c5cdb1be8c32cc6c19b080f2bb3891edbc3751c6e",
+    "BIN/C23.ERR": "22944a0dffef336c0ebb8f6d5aeb97b4dbeb5c9758a48759557176bff49d1151",
+    "BIN/CL.MSG": "3379f283aec74842bc82205e4c848d759e6e2dcbb6d4820eec9719f1297213ec"
+   },
+   "note": "Provenance C:/tools/msc-6.00ax-archive/provenance.json (disk images sha1/md5 = archive.org files.xml). No C4203 limit (global optimiser runs extended); ordinary modules give byte-identical objects to msc600a (worker ax: root 0093, 10F7, S25)."
   }
  },
  "hypotheses": {
@@ -202,6 +228,35 @@
   "build_date": {
    "status": "CONFIRMED",
    "value": "Fri Dec 06 14:51:14 1991 (DGROUP version string)"
+  }
+ },
+ "runners": {
+  "dosbox-x": {
+   "path": "C:/tools/dosbox-x/dosbox-x.exe",
+   "sha256": "b028a4d328302ea270722dec69f3ec3a10ebf76beba72a51970db33a88df2bf6",
+   "note": "headless DOSBox-X (SDL dummy drivers); XMS host for the 6.00AX DOS extender. Worker ax: objects identical for cputype 286/386/auto and memsize 4/16/64.",
+   "conf": {
+    "dosbox": {
+     "memsize": "16",
+     "quit warning": "false"
+    },
+    "cpu": {
+     "cycles": "max",
+     "core": "normal",
+     "cputype": "386"
+    },
+    "dos": {
+     "xms": "true",
+     "ems": "false",
+     "umb": "false"
+    },
+    "mixer": {
+     "nosound": "true"
+    },
+    "sdl": {
+     "output": "surface"
+    }
+   }
   }
  }
 }

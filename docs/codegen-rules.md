@@ -55,6 +55,8 @@ REG-1 below is a case where the MSC 5.10 rule is false for 6.00.
   bail reason: near-heap pool allocation fails). Repro: N copies of `if (g0==1) f(k);` on an
   extern far int: /Oe /Og warns at N=74 (73 fine); /Og alone 177 fine; near globals 106;
   bound C2L passes 100, warns by 150. Memory given to the DOS host does not matter.
+  **Resolved by 6.00AX**: the DOS-extended passes (`CL /EM`, profile `msc600ax`) give no
+  C4203 up to 900 statements. They fail with CL1319 at 1500.
 * **Declaration-count sensitivity is periodic modulo 17** (workers ovl25 and mem
   independently): e.g. ExitNest's compare order is right for 2..7 (mod 17) declarations
   between two globals; call-argument evaluation order cycles with k unused externs. Likely
@@ -76,5 +78,11 @@ REG-1 below is a case where the MSC 5.10 rule is false for 6.00.
 * Copying parameters into locals (`x = a; y = b;`) changes allocation (DI/SI plus kept
   homes); separate early returns (`if (x==0) return 0; if (x>0x3e) return 0;`) are not
   equivalent to a combined condition.
+* **Local stack slots follow first use, not declaration order** (worker mem, module 171C);
+  `char` locals are never enregistered under `/Oe /Og`.
+* **Module 171C (`/AL /Oeg /Gs`, no `/Os`) needs record breaks between almost every pair of
+  functions**: `/Zd` flushes too rarely, whereas `/Zi` (CodeView: a record per function)
+  satisfies 59 of 64 within-group order constraints. Open lead: the memory manager may have
+  been built with `/Zi`. Declaration-sensitive functions there: 07BE, 2086, 0EEA.
 * **Relocation order** inside a module is target-grouped by RTLink (open, see
   `docs/exe-format.md`).

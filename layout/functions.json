@@ -1248,6 +1248,20 @@
 {
 "unit": "root",
 "seg": 592,
+"off": 276,
+"size": 25,
+"region": "game_or_library",
+"extent": "REVIEWED",
+"evidence": [
+"reviewed"
+],
+"notes": [
+"atexit handler: f_0250_012D pushes 0250:0114 to _atexit; frameless chkstk stub ending in retf at 012C, next function 012D"
+]
+},
+{
+"unit": "root",
+"seg": 592,
 "off": 301,
 "size": 186,
 "region": "game_or_library",
@@ -1498,6 +1512,20 @@
 {
 "unit": "root",
 "seg": 592,
+"off": 3782,
+"size": 12,
+"region": "game_or_library",
+"extent": "REVIEWED",
+"evidence": [
+"reviewed"
+],
+"notes": [
+"gap between f_0250_0E9D..0EC6 and f_0250_0ED2: chkstk + push cs; call 0E9D; retf"
+]
+},
+{
+"unit": "root",
+"seg": 592,
 "off": 3794,
 "size": 8,
 "region": "game_or_library",
@@ -1686,6 +1714,20 @@
 "table": 19586,
 "count": 8
 }
+]
+},
+{
+"unit": "root",
+"seg": 592,
+"off": 16842,
+"size": 91,
+"region": "game_or_library",
+"extent": "REVIEWED",
+"evidence": [
+"reviewed"
+],
+"notes": [
+"gap after f_0250_2744 (ends 41CA) before f_0250_4225: chkstk, computes rect, push cs; call f_0250_006E; retf"
 ]
 },
 {

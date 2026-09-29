@@ -4,8 +4,8 @@ Validation: **PASS** (2026-09-30)
 
 | Measure | Value |
 |---|---:|
-| known_functions | 1,590 |
-| known_game_functions | 1,487 |
+| known_functions | 1,593 |
+| known_game_functions | 1,490 |
 | exact_c_functions | 516 |
 | exact_c_bytes | 78,100 |
 | exact_asm_bytes | 25 |

@@ -12,8 +12,11 @@ You recover original C (or genuine assembly) for the modules assigned to you in
   (see codegen-rules observations). Options are per *file*: one module = one flag set.
   Some modules use `_fastcall` (AX/DX args, `retf N`, `@name`). `_asm` exists in C modules.
 * Large functions: check the compiler log for **C4203** ("too large for global
-  optimizations"): the function then loses its /Oe/Og shape; shared `goto` exits keep it
-  under the budget (worker sim10F7).
+  optimizations"). Under real-mode 6.00A the function then loses its /Oe/Og shape. The
+  original was most likely compiled with **MSC 6.00AX** (profile `msc600ax`, DOS-extended
+  `/EM`, run in headless DOSBox-X, 2–4 s per compile), which has no such limit and gives
+  byte-identical objects for every accepted module. When C4203 appears, use
+  `--profile msc600ax` for search and promotion. Do not shape C around the 6.00A budget.
 * The set and order of earlier `extern` declarations can change register tie-breaks and
   commutative operand order: keep a module's declarations in first-use order.
 * Names: identifier spelling does not change code (only the number of identifiers declared

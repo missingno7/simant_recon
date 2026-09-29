@@ -44,6 +44,22 @@ re-executed by `python tools/validate.py`.
 * **`_fastcall` in the window-object module 2505** (AX/DX register arguments, callee
   pops stack arguments with `retf N`, `@name` decoration).
 
+* **Microsoft C 6.00AX (DOS-extended `CL /EM`: C1L, C2L, C3L)** as the build compiler
+  (worker ax, 2026-09-30). Pinned profile `msc600ax` (`C:/tools/msc-6.00ax-archive`, from the
+  archive.org item `Microsoft_c_60ax`, disk images verified against its checksums; runner
+  headless DOSBox-X). Evidence:
+  (1) all 36 accepted C modules (every claim, data placement and extent) verify unchanged
+  under `msc600ax`, including S06 without the bound C2L, so AX is consistent with every
+  accepted byte;
+  (2) the three functions that exceed the real-mode pass-2 budget (C4203) under 6.00A,
+  namely RandWorld (S08), SimKidInside (S06) and DoAntMoveY (S25), compile without C4203
+  under AX. Draft similarity rises from 0.70–0.75 to 0.96–0.98 with equal relocation
+  counts, so the original code was globally optimised, which 6.00A in real mode cannot do
+  for these sizes;
+  (3) AX was released in April 1991 and the build is dated December 1991.
+  It becomes CONFIRMED once one of those functions is byte-exact under AX and not under
+  6.00A or C2L.
+
 ## POSSIBLE
 
 * MASM 5.10 for the genuine assembly (it reproduces module 1959; other assemblers of the

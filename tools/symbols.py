@@ -104,6 +104,32 @@ def _rename(old: str, new: str, why: str) -> int:
     raise SystemExit(f"{old} not registered")
 
 
+def remove(name: str, why: str) -> int:
+    """Delete a mistaken registration: never a claimed function, an alias target, or a name
+    still used by canonical sources.  The removal is journaled in evidence/symbol-removals.jsonl."""
+    from lockfile import CanonicalLock
+    with CanonicalLock():
+        d = load()
+        sec = next((s for s in ("code", "data") if name in d[s]), None)
+        if sec is None:
+            raise SystemExit(f"{name} not registered")
+        man = json.loads((ROOT / "layout" / "manifest.json").read_text())
+        if any(c["name"] == name for m in man["modules"].values() for c in m["claims"]):
+            raise SystemExit(f"{name} is claimed")
+        if any(r.get("alias_of") == name for s in ("code", "data") for r in d[s].values()):
+            raise SystemExit(f"{name} is an alias target")
+        word = re.compile(r"\b" + re.escape(name) + r"\b")
+        for f in (ROOT / "src").rglob("*"):
+            if f.suffix.lower() in (".c", ".h", ".asm", ".inc") and word.search(f.read_text(errors="replace")):
+                raise SystemExit(f"{name} is used by {f.relative_to(ROOT)}")
+        rec = d[sec].pop(name)
+        save(d)
+        with open(ROOT / "evidence" / "symbol-removals.jsonl", "a", encoding="utf-8", newline="\n") as j:
+            j.write(json.dumps({"name": name, "section": sec, "record": rec, "why": why}) + "\n")
+        print(f"removed {name}")
+        return 0
+
+
 def add_data(name: str, seg: int, off: int, why: str) -> int:
     from lockfile import CanonicalLock
     with CanonicalLock():
@@ -131,9 +157,12 @@ def main() -> int:
     r = sub.add_parser("rename"); r.add_argument("old"); r.add_argument("new"); r.add_argument("--why", required=True)
     a = sub.add_parser("add-data"); a.add_argument("name"); a.add_argument("seg"); a.add_argument("off")
     a.add_argument("--why", required=True)
+    rm = sub.add_parser("remove"); rm.add_argument("name"); rm.add_argument("--why", required=True)
     args = ap.parse_args()
     if args.cmd == "bootstrap":
         return bootstrap()
+    if args.cmd == "remove":
+        return remove(args.name, args.why)
     if args.cmd == "rename":
         return rename(args.old, args.new, args.why)
     return add_data(args.name, int(args.seg, 16), int(args.off, 16), args.why)

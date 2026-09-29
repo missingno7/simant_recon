@@ -4217,6 +4217,12 @@
    "off": 110,
    "grounding": "inventory:far_call"
   },
+  "f_0250_0114": {
+   "unit": "root",
+   "seg": 592,
+   "off": 276,
+   "grounding": "reviewed: atexit handler: f_0250_012D pushes 0250:0114 to _atexit; frameless chkstk stub ending in retf at 012C, next function 012D"
+  },
   "f_0250_012D": {
    "unit": "root",
    "seg": 592,
@@ -4343,6 +4349,12 @@
    "off": 3741,
    "grounding": "inventory:far_call,push_cs_call"
   },
+  "f_0250_0EC6": {
+   "unit": "root",
+   "seg": 592,
+   "off": 3782,
+   "grounding": "reviewed: gap between f_0250_0E9D..0EC6 and f_0250_0ED2: chkstk + push cs; call 0E9D; retf"
+  },
   "f_0250_0ED2": {
    "unit": "root",
    "seg": 592,
@@ -4438,6 +4450,12 @@
    "seg": 592,
    "off": 10052,
    "grounding": "inventory:push_cs_call"
+  },
+  "f_0250_41CA": {
+   "unit": "root",
+   "seg": 592,
+   "off": 16842,
+   "grounding": "reviewed: gap after f_0250_2744 (ends 41CA) before f_0250_4225: chkstk, computes rect, push cs; call f_0250_006E; retf"
   },
   "f_0250_4225": {
    "unit": "root",
@@ -14958,11 +14976,6 @@
    "seg": 20726,
    "off": 15184,
    "alias_of": "db_handles"
-  },
-  "fd_50F6_3DA0": {
-   "seg": 20726,
-   "off": 15776,
-   "grounding": "f_22BF_0C38: es=[8A38] (seg 50F6) addresses 3DA2 then 3DA0 with the same ES -> one far object {x@3DA0, y@3DA2} (a clip/limit point)"
   },
   "fd_50F6_46E2": {
    "seg": 20726,

@@ -52,7 +52,7 @@ def verify_profile(name: str) -> dict:
     prof = tc["profiles"][name]
     if name in _verified:
         return prof
-    runner = tc["runner"]
+    runner = tc["runners"][prof["runner"]] if prof.get("runner") else tc["runner"]
     if _sha(Path(runner["path"])) != runner["sha256"]:
         raise CompileError("runner hash mismatch")
     d = Path(prof["directory"])
@@ -74,7 +74,7 @@ def expand_includes(text: str, prof: dict, seen: set | None = None) -> str:
         if kind == '"':
             path = ROOT / "include" / name
         else:
-            path = Path(prof["directory"]) / prof.get("include", "INCLUDE") / name
+            path = Path(prof.get("include_directory") or Path(prof["directory"]) / prof.get("include", "INCLUDE")) / name
         if not path.exists():
             raise CompileError(f"include not found under policy: {name}")
         key = str(path).lower()
@@ -109,14 +109,47 @@ def compile_c(source: str, profile: str, flags: list[str] | None = None,
         raise CompileError(f"non-ASCII source: {e}")
     src = work / f"{basename}.C"
     src.write_bytes(staged)
+    flags = [*(flags if flags is not None else prof["flags"]), *prof.get("required_flags", [])]
+    if prof.get("runner") == "dosbox-x":
+        return _compile_dosbox(prof, tc["runners"]["dosbox-x"], work, basename, flags, keep, timeout)
     bindir = Path(prof["directory"]) / prof.get("bin", ".")
     argv = [tc["runner"]["path"], *tc["runner"]["options"], str(bindir / prof["executable"]), "/c",
-            *(flags if flags is not None else prof["flags"]), src.name]
+            *flags, src.name]
     env = {"PATH": str(bindir), "MSDOS_PATH": str(bindir), "TEMP": ".", "TMP": ".", "MSDOS_TEMP": ".",
            "SYSTEMROOT": os.environ.get("SYSTEMROOT", "C:\\Windows")}
     r = subprocess.run(argv, cwd=work, env=env, stdout=subprocess.PIPE, stderr=subprocess.STDOUT,
                        timeout=timeout, creationflags=getattr(subprocess, "CREATE_NO_WINDOW", 0))
     log = r.stdout.decode("latin1", "replace")
+    objp = work / f"{basename}.OBJ"
+    obj = objp.read_bytes() if objp.exists() else None
+    (work / "compiler.log").write_text(log)
+    res = Result(r.returncode == 0 and obj is not None, obj, log, work, argv)
+    if not keep and res.ok:
+        shutil.rmtree(work, ignore_errors=True)
+    return res
+
+
+def _compile_dosbox(prof: dict, runner: dict, work: Path, basename: str, flags: list[str],
+                    keep: bool, timeout: int) -> Result:
+    """Run CL inside a headless DOSBox-X: the tool tree is mounted read-only as D:, the
+    work directory as E:.  The passes therefore always see the same DOS paths."""
+    bs = "\\"  # DOS path separator
+    bat = ["@echo off", f"{prof['executable']} /c {' '.join(flags)} {basename}.C > CL.LOG", "exit"]
+    (work / "RUN.BAT").write_bytes(("\r\n".join(bat) + "\r\n").encode("ascii"))
+    conf = []
+    for sec, kv in runner["conf"].items():
+        conf.append(f"[{sec}]")
+        conf += [f"{k}={v}" for k, v in kv.items()]
+    conf += ["[autoexec]", f'mount d "{prof["directory"]}" -ro', f'mount e "{work.resolve()}"', "e:",
+             f"set PATH=D:{bs}{prof.get('bin', '.')}", f"set TMP=E:{bs}", f"set TEMP=E:{bs}", "call RUN.BAT", "exit"]
+    (work / "dosbox.conf").write_text("\n".join(conf) + "\n")
+    env = os.environ.copy()
+    env.update(SDL_VIDEODRIVER="dummy", SDL_AUDIODRIVER="dummy")
+    argv = [runner["path"], "-conf", str(work / "dosbox.conf"), "-fastlaunch", "-exit", "-nomenu"]
+    r = subprocess.run(argv, cwd=work, env=env, stdout=subprocess.PIPE, stderr=subprocess.STDOUT,
+                       timeout=max(timeout, 180), creationflags=getattr(subprocess, "CREATE_NO_WINDOW", 0))
+    logp = work / "CL.LOG"
+    log = logp.read_text(encoding="latin1", errors="replace") if logp.exists() else r.stdout.decode("latin1", "replace")
     objp = work / f"{basename}.OBJ"
     obj = objp.read_bytes() if objp.exists() else None
     (work / "compiler.log").write_text(log)
