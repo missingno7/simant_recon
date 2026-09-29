@@ -16,6 +16,32 @@
    ]
   },
   {
+   "win16": "_GetSRandSeed",
+   "dos": "GetSRandSeed",
+   "confidence": "CONFIRMED",
+   "dos_source": "src/root/m0093.c",
+   "dos_compiler": "MSC 6.00 /AL /Os /Oe",
+   "evidence": [
+    "same translation unit as Win16 simone_1506 (SetSRandSeed..SRand256): member order preserved",
+    "unique LFSR feedback constant 0x1BF5 and seed mix constant 0x3751 on both sides",
+    "SRand2..SRand256: eight consecutive functions with masks 1,3,7,..,0xFF in ascending order as Win16",
+    "SeedRRand call sequence SeedSRand, SRand128, TickCount, srand, rand-loop matches Win16 source"
+   ]
+  },
+  {
+   "win16": "_SetRRandSeed",
+   "dos": "SetRRandSeed",
+   "confidence": "CONFIRMED",
+   "dos_source": "src/root/m0093.c",
+   "dos_compiler": "MSC 6.00 /AL /Os /Oe",
+   "evidence": [
+    "same translation unit as Win16 simone_1506 (SetSRandSeed..SRand256): member order preserved",
+    "unique LFSR feedback constant 0x1BF5 and seed mix constant 0x3751 on both sides",
+    "SRand2..SRand256: eight consecutive functions with masks 1,3,7,..,0xFF in ascending order as Win16",
+    "SeedRRand call sequence SeedSRand, SRand128, TickCount, srand, rand-loop matches Win16 source"
+   ]
+  },
+  {
    "win16": "_SeedSRand",
    "dos": "SeedSRand",
    "confidence": "CONFIRMED",

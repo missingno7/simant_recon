@@ -1,0 +1,8 @@
+{
+ "id": "DATA-1",
+ "data_segments": {
+  "globals_first": "41414141000000000000000001004242424200",
+  "globals_after_f1": "414141410042424242000000000000000100"
+ },
+ "finding": "globals defined before f1 are emitted after f1's literals (AAAA, vars, BBBB); defined between f1 and f2 they follow f2's literals (AAAA, BBBB, vars): initialised data is flushed one function late"
+}

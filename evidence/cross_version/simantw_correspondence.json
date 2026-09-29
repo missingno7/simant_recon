@@ -7,7 +7,7 @@
   "CONFIRMED": 22,
   "HIGH": 64,
   "MEDIUM": 67,
-  "LOW": 50
+  "LOW": 53
  },
  "pairs": [
   {
@@ -52,13 +52,13 @@
    "win16": "_OpenDB",
    "win16_address": "7:8BF0",
    "confidence": "CONFIRMED",
-   "score": 13.739,
+   "score": 13.132,
    "mutual_best": true,
    "evidence": [
     "'%s.dat' format plus unique 'cannot create data file.'",
     "sprintf runtime call in both",
     "runtime sprintf",
-    "string \"%s.dat\" (shared by 1/4)",
+    "string \"%s.dat\" (shared by 2/4)",
     "string \"cannot create data file.\"",
     "string \"out of handles.\""
    ],
@@ -143,8 +143,8 @@
    }
   },
   {
-   "dos": "root:0093:00A3",
-   "dos_address": null,
+   "dos": "GetSRandSeed",
+   "dos_address": "root:0093:00A3",
    "win16": "_GetSRandSeed",
    "win16_address": "5:1512",
    "confidence": "CONFIRMED",
@@ -156,11 +156,22 @@
     "SRand2..SRand256: eight consecutive functions with masks 1,3,7,..,0xFF in ascending order as Win16",
     "SeedRRand call sequence SeedSRand, SRand128, TickCount, srand, rand-loop matches Win16 source"
    ],
-   "method": "reviewed"
+   "method": "reviewed",
+   "dos_recovery": {
+    "status": "EXACT_C",
+    "module": "root:0093",
+    "source": "src/root/m0093.c",
+    "profile": "msc600",
+    "flags": [
+     "/AL",
+     "/Os",
+     "/Oe"
+    ]
+   }
   },
   {
-   "dos": "root:0093:00B0",
-   "dos_address": null,
+   "dos": "SetRRandSeed",
+   "dos_address": "root:0093:00B0",
    "win16": "_SetRRandSeed",
    "win16_address": "5:1518",
    "confidence": "CONFIRMED",
@@ -172,7 +183,18 @@
     "SRand2..SRand256: eight consecutive functions with masks 1,3,7,..,0xFF in ascending order as Win16",
     "SeedRRand call sequence SeedSRand, SRand128, TickCount, srand, rand-loop matches Win16 source"
    ],
-   "method": "reviewed"
+   "method": "reviewed",
+   "dos_recovery": {
+    "status": "EXACT_C",
+    "module": "root:0093",
+    "source": "src/root/m0093.c",
+    "profile": "msc600",
+    "flags": [
+     "/AL",
+     "/Os",
+     "/Oe"
+    ]
+   }
   },
   {
    "dos": "SeedSRand",
@@ -724,21 +746,6 @@
    "method": "features-v1"
   },
   {
-   "dos": "ShowIntro",
-   "dos_address": "S16:384C:0472",
-   "win16": "_ShowIntro",
-   "win16_address": "1:D3E2",
-   "confidence": "HIGH",
-   "score": 5.045,
-   "mutual_best": true,
-   "evidence": [
-    "constant 0x2711",
-    "constant 0x300",
-    "string \"malloc\""
-   ],
-   "method": "features-v1"
-  },
-  {
    "dos": "DrawCurBalloons",
    "dos_address": "root:0250:454D",
    "win16": "_DrawCurBalloons",
@@ -824,6 +831,20 @@
    "evidence": [
     "constant 0x700",
     "string \"antmenu\""
+   ],
+   "method": "features-v1"
+  },
+  {
+   "dos": "ShowIntro",
+   "dos_address": "S16:384C:0472",
+   "win16": "_ShowIntro",
+   "win16_address": "1:D3E2",
+   "confidence": "HIGH",
+   "score": 4.045,
+   "mutual_best": true,
+   "evidence": [
+    "constant 0x2711",
+    "string \"malloc\""
    ],
    "method": "features-v1"
   },
@@ -1503,20 +1524,6 @@
    "method": "neighbourhood-v1"
   },
   {
-   "dos": "o12_384C_0B76",
-   "dos_address": "S12:384C:0B76",
-   "win16": "_Mini_DrawMapI",
-   "win16_address": "3:D474",
-   "confidence": "MEDIUM",
-   "score": 9.134,
-   "mutual_best": false,
-   "evidence": [
-    "string \"generated map window\"",
-    "string \"map window image\""
-   ],
-   "method": "features-v1"
-  },
-  {
    "dos": "DosPunt",
    "dos_address": "root:1A28:0277",
    "win16": "_OpenDB",
@@ -1541,6 +1548,20 @@
    "evidence": [
     "string \"%s dos error: %d: %s\"",
     "string \"too many files open. you need a statement 'files=12' in your\""
+   ],
+   "method": "features-v1"
+  },
+  {
+   "dos": "o12_384C_0B76",
+   "dos_address": "S12:384C:0B76",
+   "win16": "_Mini_DrawMapI",
+   "win16_address": "3:D474",
+   "confidence": "MEDIUM",
+   "score": 9.134,
+   "mutual_best": false,
+   "evidence": [
+    "string \"generated map window\"",
+    "string \"map window image\""
    ],
    "method": "features-v1"
   },
@@ -1645,6 +1666,71 @@
    "method": "features-v1"
   },
   {
+   "dos": "f_2662_0100",
+   "dos_address": "root:2662:0100",
+   "win16": "_hanim_RenderAnimSet",
+   "win16_address": "2:6F3C",
+   "confidence": "MEDIUM",
+   "score": 5.57,
+   "mutual_best": true,
+   "evidence": [
+    "string \"buffer in set too small!!\""
+   ],
+   "method": "features-v1"
+  },
+  {
+   "dos": "f_20E8_0141",
+   "dos_address": "root:20E8:0141",
+   "win16": "_win_LoadAllWindows",
+   "win16_address": "7:C806",
+   "confidence": "MEDIUM",
+   "score": 5.57,
+   "mutual_best": true,
+   "evidence": [
+    "string \"cannot load resource please try another\""
+   ],
+   "method": "features-v1"
+  },
+  {
+   "dos": "f_20E8_0001",
+   "dos_address": "root:20E8:0001",
+   "win16": "_win_LoadWindow",
+   "win16_address": "7:C662",
+   "confidence": "MEDIUM",
+   "score": 5.57,
+   "mutual_best": true,
+   "evidence": [
+    "string \"cannot load window %03x\""
+   ],
+   "method": "features-v1"
+  },
+  {
+   "dos": "o12_384C_0008",
+   "dos_address": "S12:384C:0008",
+   "win16": "_InitMapFunctions",
+   "win16_address": "3:C19C",
+   "confidence": "MEDIUM",
+   "score": 5.57,
+   "mutual_best": true,
+   "evidence": [
+    "string \"generated buffer window\""
+   ],
+   "method": "features-v1"
+  },
+  {
+   "dos": "f_1A96_034E",
+   "dos_address": "root:1A96:034E",
+   "win16": "_ch_AddEntry",
+   "win16_address": "7:9470",
+   "confidence": "MEDIUM",
+   "score": 5.57,
+   "mutual_best": true,
+   "evidence": [
+    "string \"attemp to add id already present in lookup table\""
+   ],
+   "method": "features-v1"
+  },
+  {
    "dos": "f_22BF_0967",
    "dos_address": "root:22BF:0967",
    "win16": "_win_SetObjBitmap",
@@ -1684,19 +1770,6 @@
    "method": "features-v1"
   },
   {
-   "dos": "f_2662_0100",
-   "dos_address": "root:2662:0100",
-   "win16": "_hanim_RenderAnimSet",
-   "win16_address": "2:6F3C",
-   "confidence": "MEDIUM",
-   "score": 5.57,
-   "mutual_best": true,
-   "evidence": [
-    "string \"buffer in set too small!!\""
-   ],
-   "method": "features-v1"
-  },
-  {
    "dos": "o25_3BA4_0C01",
    "dos_address": "S25:3BA4:0C01",
    "win16": "_AnimYellowInsane",
@@ -1706,58 +1779,6 @@
    "mutual_best": true,
    "evidence": [
     "string \"animyellowinsane\""
-   ],
-   "method": "features-v1"
-  },
-  {
-   "dos": "f_20E8_0001",
-   "dos_address": "root:20E8:0001",
-   "win16": "_win_LoadWindow",
-   "win16_address": "7:C662",
-   "confidence": "MEDIUM",
-   "score": 5.57,
-   "mutual_best": true,
-   "evidence": [
-    "string \"cannot load window %03x\""
-   ],
-   "method": "features-v1"
-  },
-  {
-   "dos": "o12_384C_0008",
-   "dos_address": "S12:384C:0008",
-   "win16": "_InitMapFunctions",
-   "win16_address": "3:C19C",
-   "confidence": "MEDIUM",
-   "score": 5.57,
-   "mutual_best": true,
-   "evidence": [
-    "string \"generated buffer window\""
-   ],
-   "method": "features-v1"
-  },
-  {
-   "dos": "f_20E8_0141",
-   "dos_address": "root:20E8:0141",
-   "win16": "_win_LoadAllWindows",
-   "win16_address": "7:C806",
-   "confidence": "MEDIUM",
-   "score": 5.57,
-   "mutual_best": true,
-   "evidence": [
-    "string \"cannot load resource please try another\""
-   ],
-   "method": "features-v1"
-  },
-  {
-   "dos": "f_1A96_034E",
-   "dos_address": "root:1A96:034E",
-   "win16": "_ch_AddEntry",
-   "win16_address": "7:9470",
-   "confidence": "MEDIUM",
-   "score": 5.57,
-   "mutual_best": true,
-   "evidence": [
-    "string \"attemp to add id already present in lookup table\""
    ],
    "method": "features-v1"
   },
@@ -1893,19 +1914,6 @@
    "method": "features-v1"
   },
   {
-   "dos": "f_1A96_000C",
-   "dos_address": "root:1A96:000C",
-   "win16": "_ch_CreateTable",
-   "win16_address": "7:8F46",
-   "confidence": "MEDIUM",
-   "score": 3.714,
-   "mutual_best": true,
-   "evidence": [
-    "string \"cachetable\""
-   ],
-   "method": "features-v1"
-  },
-  {
    "dos": "f_075B_0242",
    "dos_address": "root:075B:0242",
    "win16": "_ms_LoadPopUpResource",
@@ -1919,10 +1927,36 @@
    "method": "features-v1"
   },
   {
+   "dos": "f_1A96_000C",
+   "dos_address": "root:1A96:000C",
+   "win16": "_ch_CreateTable",
+   "win16_address": "7:8F46",
+   "confidence": "MEDIUM",
+   "score": 3.714,
+   "mutual_best": true,
+   "evidence": [
+    "string \"cachetable\""
+   ],
+   "method": "features-v1"
+  },
+  {
+   "dos": "f_2662_07E9",
+   "dos_address": "root:2662:07E9",
+   "win16": "_hanim_ShowObject",
+   "win16_address": "2:69B8",
+   "confidence": "MEDIUM",
+   "score": 3.597,
+   "mutual_best": true,
+   "evidence": [
+    "string \"anim_hide object not found\""
+   ],
+   "method": "features-v1"
+  },
+  {
    "dos": "f_1629_000C",
    "dos_address": "root:1629:000C",
-   "win16": "_Draw_SimYard",
-   "win16_address": "3:B462",
+   "win16": "_MakeBalloon",
+   "win16_address": "2:59E4",
    "confidence": "MEDIUM",
    "score": 3.045,
    "mutual_best": true,
@@ -1962,49 +1996,10 @@
    "method": "neighbourhood-v1"
   },
   {
-   "dos": "f_0250_0C0F",
-   "dos_address": "root:0250:0C0F",
-   "win16": "_ProcEditEvent",
-   "win16_address": "3:0B7A",
-   "confidence": "MEDIUM",
-   "score": 2.0,
-   "mutual_best": true,
-   "evidence": [
-    "sole callee/caller of an anchored pair (2 aligned edge votes)"
-   ],
-   "method": "callgraph-propagation-v1"
-  },
-  {
-   "dos": "o19_384C_0246",
-   "dos_address": "S19:384C:0246",
-   "win16": "_DoKeyDown",
-   "win16_address": "1:0E8C",
-   "confidence": "MEDIUM",
-   "score": 2.0,
-   "mutual_best": true,
-   "evidence": [
-    "sole callee/caller of an anchored pair (2 aligned edge votes)"
-   ],
-   "method": "callgraph-propagation-v1"
-  },
-  {
    "dos": "f_00BA_01B6",
    "dos_address": "root:00BA:01B6",
    "win16": "_InitApplicationStuff",
    "win16_address": "1:552A",
-   "confidence": "MEDIUM",
-   "score": 2.0,
-   "mutual_best": true,
-   "evidence": [
-    "sole callee/caller of an anchored pair (2 aligned edge votes)"
-   ],
-   "method": "callgraph-propagation-v1"
-  },
-  {
-   "dos": "o23_39C7_0075",
-   "dos_address": "S23:39C7:0075",
-   "win16": "_win_DrawInfoWindow",
-   "win16_address": "4:534E",
    "confidence": "MEDIUM",
    "score": 2.0,
    "mutual_best": true,
@@ -2027,10 +2022,10 @@
    "method": "callgraph-propagation-v1"
   },
   {
-   "dos": "f_1629_000C",
-   "dos_address": "root:1629:000C",
-   "win16": "_MakeBalloon",
-   "win16_address": "2:59E4",
+   "dos": "f_259D_000E",
+   "dos_address": "root:259D:000E",
+   "win16": "_win_DrawBitMap",
+   "win16_address": "7:BD5A",
    "confidence": "MEDIUM",
    "score": 2.0,
    "mutual_best": true,
@@ -2040,10 +2035,36 @@
    "method": "callgraph-propagation-v1"
   },
   {
-   "dos": "f_259D_000E",
-   "dos_address": "root:259D:000E",
-   "win16": "_win_DrawBitMap",
-   "win16_address": "7:BD5A",
+   "dos": "f_0250_0C0F",
+   "dos_address": "root:0250:0C0F",
+   "win16": "_ProcEditEvent",
+   "win16_address": "3:0B7A",
+   "confidence": "MEDIUM",
+   "score": 2.0,
+   "mutual_best": true,
+   "evidence": [
+    "sole callee/caller of an anchored pair (2 aligned edge votes)"
+   ],
+   "method": "callgraph-propagation-v1"
+  },
+  {
+   "dos": "o23_39C7_0075",
+   "dos_address": "S23:39C7:0075",
+   "win16": "_win_DrawInfoWindow",
+   "win16_address": "4:534E",
+   "confidence": "MEDIUM",
+   "score": 2.0,
+   "mutual_best": true,
+   "evidence": [
+    "sole callee/caller of an anchored pair (2 aligned edge votes)"
+   ],
+   "method": "callgraph-propagation-v1"
+  },
+  {
+   "dos": "o19_384C_0246",
+   "dos_address": "S19:384C:0246",
+   "win16": "_DoKeyDown",
+   "win16_address": "1:0E8C",
    "confidence": "MEDIUM",
    "score": 2.0,
    "mutual_best": true,
@@ -2141,21 +2162,6 @@
    "method": "neighbourhood-v1"
   },
   {
-   "dos": "o08_35F5_059B",
-   "dos_address": "S08:35F5:059B",
-   "win16": "_RandYard",
-   "win16_address": "7:6086",
-   "confidence": "MEDIUM",
-   "score": 2.0,
-   "mutual_best": true,
-   "evidence": [
-    "2 anchored neighbours agree: callee:RRand, callee:o08_35F5_0050",
-    "size ratio 1.16"
-   ],
-   "neighbours": 2,
-   "method": "neighbourhood-v1"
-  },
-  {
    "dos": "o06_35F5_14CC",
    "dos_address": "S06:35F5:14CC",
    "win16": "_SimCat",
@@ -2166,6 +2172,21 @@
    "evidence": [
     "2 anchored neighbours agree: callee:SRand16, callee:SRand64",
     "size ratio 1.24"
+   ],
+   "neighbours": 2,
+   "method": "neighbourhood-v1"
+  },
+  {
+   "dos": "o08_35F5_059B",
+   "dos_address": "S08:35F5:059B",
+   "win16": "_RandYard",
+   "win16_address": "7:6086",
+   "confidence": "MEDIUM",
+   "score": 2.0,
+   "mutual_best": true,
+   "evidence": [
+    "2 anchored neighbours agree: callee:RRand, callee:o08_35F5_0050",
+    "size ratio 1.16"
    ],
    "neighbours": 2,
    "method": "neighbourhood-v1"
@@ -2456,8 +2477,8 @@
   {
    "dos": "f_2505_02D7",
    "dos_address": "root:2505:02D7",
-   "win16": "_win_ClearObjToEOL",
-   "win16_address": "7:D792",
+   "win16": "_win_SetObjFormatStr",
+   "win16_address": "7:D2F4",
    "confidence": "LOW",
    "score": 3.055,
    "mutual_best": true,
@@ -2469,8 +2490,8 @@
   {
    "dos": "f_1A53_025F",
    "dos_address": "root:1A53:025F",
-   "win16": "_db_ReleaseObject",
-   "win16_address": "7:8426",
+   "win16": "_db_PurgeObject",
+   "win16_address": "7:834E",
    "confidence": "LOW",
    "score": 2.542,
    "mutual_best": true,
@@ -2480,15 +2501,42 @@
    "method": "features-v1"
   },
   {
+   "dos": "f_1A28_02B6",
+   "dos_address": "root:1A28:02B6",
+   "win16": "_db_Exists",
+   "win16_address": "7:8176",
+   "confidence": "LOW",
+   "score": 2.192,
+   "mutual_best": true,
+   "evidence": [
+    "runtime access,sprintf",
+    "string \"%s.dat\" (shared by 2/4)"
+   ],
+   "method": "features-v1"
+  },
+  {
    "dos": "f_0250_16FD",
    "dos_address": "root:0250:16FD",
-   "win16": "_UnRecruit",
-   "win16_address": "7:078A",
+   "win16": "_InitApplicationWindows",
+   "win16_address": "1:5464",
    "confidence": "LOW",
    "score": 1.695,
    "mutual_best": true,
    "evidence": [
     "string \"simant\" (shared by 1/9)"
+   ],
+   "method": "features-v1"
+  },
+  {
+   "dos": "f_195A_01AF",
+   "dos_address": "root:195A:01AF",
+   "win16": "_GetAntIndex",
+   "win16_address": "5:573C",
+   "confidence": "LOW",
+   "score": 1.0,
+   "mutual_best": true,
+   "evidence": [
+    "unique constant 0x5800"
    ],
    "method": "features-v1"
   },
@@ -2636,6 +2684,30 @@
    "method": "features-v1"
   },
   {
+   "dos": "f_0093_00B8",
+   "dos_address": "root:0093:00B8",
+   "win16": "_GetRRandSeed",
+   "win16_address": "5:151A",
+   "confidence": "LOW",
+   "score": 1.0,
+   "mutual_best": true,
+   "evidence": [
+    "unique constant 0x46c"
+   ],
+   "method": "features-v1",
+   "dos_recovery": {
+    "status": "EXACT_C",
+    "module": "root:0093",
+    "source": "src/root/m0093.c",
+    "profile": "msc600",
+    "flags": [
+     "/AL",
+     "/Os",
+     "/Oe"
+    ]
+   }
+  },
+  {
    "dos": "o13_384C_09B5",
    "dos_address": "S13:384C:09B5",
    "win16": "_DrawMower",
@@ -2645,19 +2717,6 @@
    "mutual_best": true,
    "evidence": [
     "unique constant 0x2260"
-   ],
-   "method": "features-v1"
-  },
-  {
-   "dos": "o16_384C_0000",
-   "dos_address": "S16:384C:0000",
-   "win16": "_DrawSimPayoff",
-   "win16_address": "1:CDA8",
-   "confidence": "LOW",
-   "score": 1.0,
-   "mutual_best": true,
-   "evidence": [
-    "unique constant 0x3f48"
    ],
    "method": "features-v1"
   },
@@ -2753,19 +2812,6 @@
    "method": "features-v1"
   },
   {
-   "dos": "o14_384C_07ED",
-   "dos_address": "S14:384C:07ED",
-   "win16": "_DrawCastePopUp",
-   "win16_address": "1:5D9E",
-   "confidence": "LOW",
-   "score": 1.0,
-   "mutual_best": true,
-   "evidence": [
-    "unique constant 0x1700"
-   ],
-   "method": "features-v1"
-  },
-  {
    "dos": "o05_3663_0004",
    "dos_address": "S05:3663:0004",
    "win16": "_DoExpMenu",
@@ -2787,7 +2833,7 @@
    "score": 1.0,
    "mutual_best": true,
    "evidence": [
-    "unique constant 0x1305"
+    "unique constant 0x1303"
    ],
    "method": "features-v1"
   },
@@ -2922,6 +2968,19 @@
    "method": "features-v1"
   },
   {
+   "dos": "o16_384C_0000",
+   "dos_address": "S16:384C:0000",
+   "win16": "_DrawSimPayoff",
+   "win16_address": "1:CDA8",
+   "confidence": "LOW",
+   "score": 1.0,
+   "mutual_best": true,
+   "evidence": [
+    "unique constant 0x3f48"
+   ],
+   "method": "features-v1"
+  },
+  {
    "dos": "o13_384C_0EE0",
    "dos_address": "S13:384C:0EE0",
    "win16": "_DrawSwarm",
@@ -2974,6 +3033,19 @@
    "method": "features-v1"
   },
   {
+   "dos": "o14_384C_07ED",
+   "dos_address": "S14:384C:07ED",
+   "win16": "_DrawCastePopUp",
+   "win16_address": "1:5D9E",
+   "confidence": "LOW",
+   "score": 1.0,
+   "mutual_best": true,
+   "evidence": [
+    "unique constant 0x1700"
+   ],
+   "method": "features-v1"
+  },
+  {
    "dos": "o08_35F5_059B",
    "dos_address": "S08:35F5:059B",
    "win16": "_DoUserButton",
@@ -3013,19 +3085,6 @@
    "method": "features-v1"
   },
   {
-   "dos": "f_0BE8_0A5B",
-   "dos_address": "root:0BE8:0A5B",
-   "win16": "_PlaceEggB",
-   "win16_address": "5:1004",
-   "confidence": "LOW",
-   "score": 1.0,
-   "mutual_best": true,
-   "evidence": [
-    "aligned call-sequence gap in 1 anchored caller(s): CheatKeys"
-   ],
-   "method": "callseq-alignment-v1"
-  },
-  {
    "dos": "f_075B_00AE",
    "dos_address": "root:075B:00AE",
    "win16": "_LoadStringAnt",
@@ -3048,6 +3107,19 @@
    "mutual_best": true,
    "evidence": [
     "aligned call-sequence gap in 1 anchored caller(s): initStuff"
+   ],
+   "method": "callseq-alignment-v1"
+  },
+  {
+   "dos": "f_171C_1750",
+   "dos_address": "root:171C:1750",
+   "win16": "_RallocMemoryFree",
+   "win16_address": "2:59C0",
+   "confidence": "LOW",
+   "score": 1.0,
+   "mutual_best": true,
+   "evidence": [
+    "aligned call-sequence gap in 1 anchored caller(s): IBMInitStuff"
    ],
    "method": "callseq-alignment-v1"
   },
@@ -3078,15 +3150,15 @@
    "method": "callseq-alignment-v1"
   },
   {
-   "dos": "f_171C_1750",
-   "dos_address": "root:171C:1750",
-   "win16": "_RallocMemoryFree",
-   "win16_address": "2:59C0",
+   "dos": "f_0BE8_0A5B",
+   "dos_address": "root:0BE8:0A5B",
+   "win16": "_PlaceEggB",
+   "win16_address": "5:1004",
    "confidence": "LOW",
    "score": 1.0,
    "mutual_best": true,
    "evidence": [
-    "aligned call-sequence gap in 1 anchored caller(s): IBMInitStuff"
+    "aligned call-sequence gap in 1 anchored caller(s): CheatKeys"
    ],
    "method": "callseq-alignment-v1"
   }

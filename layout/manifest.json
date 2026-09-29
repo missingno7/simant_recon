@@ -457,6 +457,82 @@
    "scaffold": [],
    "object_sha256": "dc5962fb9bf49637913a69a10534341f921e4540bf4f4106aae7f47a5c561613"
   },
+  "root:1A53": {
+   "unit": "root",
+   "seg": 6739,
+   "profile": "msc600",
+   "flags": [
+    "/AL",
+    "/Os",
+    "/Oe",
+    "/Gs"
+   ],
+   "placements": {
+    "_DATA": {
+     "seg": 21939,
+     "off": 14828,
+     "size": 176
+    },
+    "CONST": {
+     "seg": 21939,
+     "off": 35268,
+     "size": 2
+    }
+   },
+   "lang": "c",
+   "source": "src/root/m1A53.c",
+   "source_sha256": "331e26f96de4b7c17e188a485120704790d73fc2c4d5ea2242621f8175be0a7e",
+   "claims": [
+    {
+     "name": "db_Exists",
+     "unit": "root",
+     "seg": 6739,
+     "off": 6,
+     "size": 60,
+     "target_sha256": "0b14eb47ff3351b149ced5458c5530d89cbef9c2eb481642496767becfda9694",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL",
+     "reloc_order": "PENDING_RTLINK_MODEL"
+    },
+    {
+     "name": "db_SetDataBase",
+     "unit": "root",
+     "seg": 6739,
+     "off": 66,
+     "size": 120,
+     "target_sha256": "679805c4768d13519023e635679e9acb4994b14df0527355071824b6115ab40f",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL",
+     "reloc_order": "PENDING_RTLINK_MODEL"
+    },
+    {
+     "name": "f_1A53_00BA",
+     "unit": "root",
+     "seg": 6739,
+     "off": 186,
+     "size": 54,
+     "target_sha256": "276afa778c5bd233ef5729e70b82e75081c11a9ed9e53d2573ad590e84655fd5",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL",
+     "reloc_order": "EXACT"
+    },
+    {
+     "name": "f_1A53_00F0",
+     "unit": "root",
+     "seg": 6739,
+     "off": 240,
+     "size": 53,
+     "target_sha256": "53595ede0253993466203572236acd18fc400c330c67b08764d355d7a756cc63",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL",
+     "reloc_order": "EXACT"
+    }
+   ],
+   "scaffold": [
+    "db_LoadObject"
+   ],
+   "object_sha256": "44ab41330007b3e783206eb25fdb77b66b6f33250e645e5a0a2d7c11761ab20b"
+  },
   "root:277D": {
    "unit": "root",
    "seg": 10109,

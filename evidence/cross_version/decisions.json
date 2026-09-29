@@ -242,6 +242,24 @@
     "DOS function is called only by crt0 __astart (C main); Win16 WINMAIN is the platform entry",
     "platform entry points pair semantically but keep their own platform names"
    ]
+  },
+  "root:1A53:0006": {
+   "win16": "_db_Exists",
+   "confidence": "CONFIRMED",
+   "reviewed": "2026-09-29",
+   "evidence": [
+    "identical body: sprintf(path,\"%s.dat\",name); access(path,0) != -1",
+    "first member of the same unit (Win16 simtwo_8176 / DOS module 1A53), byte-exact DOS source"
+   ]
+  },
+  "root:1A53:0042": {
+   "win16": "_db_SetDataBase",
+   "confidence": "CONFIRMED",
+   "reviewed": "2026-09-29",
+   "evidence": [
+    "shared diagnostic 'Cannot open database %s'",
+    "same OpenDB/db_handles/cache-table logic; second member of the same unit; byte-exact DOS source"
+   ]
   }
  }
 }

@@ -637,6 +637,22 @@
     }
    ]
   },
+  "db_Exists": {
+   "unit": "root",
+   "seg": 6739,
+   "off": 6,
+   "grounding": "reviewed: prologue scan in unreached gap; descent ends in a return; no references found (unreferenced or indirect)",
+   "history": [
+    {
+     "was": "f_1A28_02B6",
+     "why": "module boundary after LINK 00 fill"
+    },
+    {
+     "was": "f_1A53_0006",
+     "why": "Win16 unit simtwo_8176 first member db_Exists: same '%s.dat' + access(path,0)!=-1 body; module start after LINK fill"
+    }
+   ]
+  },
   "db_LoadObject": {
    "unit": "root",
    "seg": 6739,
@@ -646,6 +662,18 @@
     {
      "was": "f_1A53_0125",
      "why": "xver CONFIRMED features-v1+reviewed: three unique diagnostics shared verbatim: 'cache table full, can't load object', 'load attempt with database closed', 'memory full or object ...'; calls DBRecall and ch_AddEntry in the same order on both sides; string \"cache table full, can't load object\""
+    }
+   ]
+  },
+  "db_SetDataBase": {
+   "unit": "root",
+   "seg": 6739,
+   "off": 66,
+   "grounding": "inventory:far_call",
+   "history": [
+    {
+     "was": "f_1A53_0042",
+     "why": "Win16 _db_SetDataBase: shared diagnostic 'Cannot open database %s', same OpenDB/handles/cache-table logic, second member of the same unit"
     }
    ]
   },
@@ -3720,24 +3748,6 @@
    "seg": 6696,
    "off": 548,
    "grounding": "inventory:push_cs_call"
-  },
-  "f_1A53_0006": {
-   "unit": "root",
-   "seg": 6739,
-   "off": 6,
-   "grounding": "reviewed: prologue scan in unreached gap; descent ends in a return; no references found (unreferenced or indirect)",
-   "history": [
-    {
-     "was": "f_1A28_02B6",
-     "why": "module boundary after LINK 00 fill"
-    }
-   ]
-  },
-  "f_1A53_0042": {
-   "unit": "root",
-   "seg": 6739,
-   "off": 66,
-   "grounding": "inventory:far_call"
   },
   "f_1A53_00BA": {
    "unit": "root",
@@ -9245,6 +9255,11 @@
    "seg": 20726,
    "off": 3440,
    "grounding": "f_015B_01B8: mov es,[DS:7E28] (CONST word = 50F6 with S27 relocation) ; mov es:[0D70],ax"
+  },
+  "fd_50F6_3B50": {
+   "seg": 20726,
+   "off": 15184,
+   "grounding": "db module: mov es,[DS:89C4] (CONST word 50F6) ; es:[bx+3B50] handle array"
   },
   "g_8BA2": {
    "seg": 21939,

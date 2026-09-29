@@ -1,0 +1,6 @@
+{"id": "DATA-1", "question": "In what order does MSC 6.00 emit literals and initialised globals into _DATA? (module 1A53: literal of db_Exists, then the statics, then later literals)",
+ "header": "extern int far g1(char far *);\n",
+ "variants": {"globals_first": "int va = 0;\nlong vb = 0L;\nint vc = 1;\nint far f1(void){ return g1(\"AAAA\"); }\nint far f2(void){ return g1(\"BBBB\"); }",
+              "globals_after_f1": "int far f1(void){ return g1(\"AAAA\"); }\nint va = 0;\nlong vb = 0L;\nint vc = 1;\nint far f2(void){ return g1(\"BBBB\"); }"},
+ "profiles": [{"profile": "msc600", "flags": ["/AL", "/Os", "/Gs"]}],
+ "expect": {}}
