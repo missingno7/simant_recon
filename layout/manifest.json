@@ -2,6 +2,83 @@
  "schema": "simant-manifest-v1",
  "oracle_sha256": "aa0596c6766322a8229ee3c36e57048c92adc82d50fbe2ef37afb8b85fcf4f11",
  "modules": {
+  "S06:35F5": {
+   "unit": "S06",
+   "seg": 13813,
+   "profile": "msc600a",
+   "flags": [
+    "/AL",
+    "/Os",
+    "/Og",
+    "/Oe",
+    "/Zd"
+   ],
+   "placements": {
+    "CONST": {
+     "seg": 21939,
+     "off": 33878,
+     "size": 88
+    }
+   },
+   "lang": "c",
+   "source": "src/S06/m35F5.c",
+   "source_sha256": "4ba2a6873ae517b9a34d509bfdbcf4b2d4c89c852b736749a490016c0a164ea7",
+   "claims": [
+    {
+     "name": "o06_35F5_0000",
+     "unit": "S06",
+     "seg": 13813,
+     "off": 0,
+     "size": 371,
+     "target_sha256": "81cf45a6c8d0943c41618af6b6acea460f8f9d5b873478575d6a0908f1a972ea",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL",
+     "reloc_order": "EXACT"
+    },
+    {
+     "name": "o06_35F5_0173",
+     "unit": "S06",
+     "seg": 13813,
+     "off": 371,
+     "size": 87,
+     "target_sha256": "1e75122a1904e259f61b7ac43f9ff9c5cdc0bdcb6139363caf3d3347fe4fc167",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL",
+     "reloc_order": "EXACT"
+    },
+    {
+     "name": "o06_35F5_01CA",
+     "unit": "S06",
+     "seg": 13813,
+     "off": 458,
+     "size": 66,
+     "target_sha256": "bd3aed93182d978b80fcaf08ad2b3842869dddef1fc4cbd4041dfddb7bdfc73a",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL",
+     "reloc_order": "GROUPED"
+    },
+    {
+     "name": "o06_35F5_020C",
+     "unit": "S06",
+     "seg": 13813,
+     "off": 524,
+     "size": 173,
+     "target_sha256": "c09c759ff20455ba998c62fdf16374f14c904e5d9f75091da0c96cbf866c9b69",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL",
+     "reloc_order": "GROUPED"
+    }
+   ],
+   "scaffold": [
+    "SimKidInside",
+    "o06_35F5_02B9",
+    "o06_35F5_11FF",
+    "o06_35F5_14CC",
+    "o06_35F5_1803",
+    "o06_35F5_1E54"
+   ],
+   "object_sha256": "022f3340ad20a6d6b14229db9325b9b69e95f2f94daea7b03345d272576faa23"
+  },
   "S07:35F5": {
    "unit": "S07",
    "seg": 13813,
@@ -2583,7 +2660,7 @@
     "CONST": {
      "seg": 21939,
      "off": 35396,
-     "size": 4
+     "size": 6
     },
     "_DATA": {
      "seg": 21939,
@@ -2598,7 +2675,7 @@
    },
    "lang": "c",
    "source": "src/root/m2505.c",
-   "source_sha256": "3f7dd4b38b9772c1f95e567b32b860e3878af16c43cbacba06acaf76c24e3a12",
+   "source_sha256": "99fddfff137671a6927d54e742b83a3d9d24c36b724e4041903002bcfcaeacbb",
    "claims": [
     {
      "name": "f_2505_0006",
@@ -2698,10 +2775,135 @@
      "kind": "C",
      "provenance": "EXACT_NATURAL",
      "reloc_order": "EXACT"
+    },
+    {
+     "name": "f_2505_02D7",
+     "unit": "root",
+     "seg": 9477,
+     "off": 727,
+     "size": 101,
+     "target_sha256": "75a3721bf2a96e59c429c590bb27f0e2dd929e74293495970b95931d4b3b52f2",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL",
+     "reloc_order": "GROUPED"
+    },
+    {
+     "name": "f_2505_03B9",
+     "unit": "root",
+     "seg": 9477,
+     "off": 953,
+     "size": 154,
+     "target_sha256": "ae04d8e6d59ffcfcfeae9949e5b972913b29cf3bbe588e7b806fae0a9ab06875",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL",
+     "reloc_order": "EXACT"
+    },
+    {
+     "name": "f_2505_04D7",
+     "unit": "root",
+     "seg": 9477,
+     "off": 1239,
+     "size": 58,
+     "target_sha256": "f2ae8c368a8279d20803e005dd681d296df20e83475db88842d41b26523d3076",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL",
+     "reloc_order": "EXACT"
+    },
+    {
+     "name": "f_2505_0511",
+     "unit": "root",
+     "seg": 9477,
+     "off": 1297,
+     "size": 52,
+     "target_sha256": "4690ebbbdbbc8193dbeb347f3d229f9c55767df693c7afdbb71aba6e6318ea6a",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL",
+     "reloc_order": "EXACT"
+    },
+    {
+     "name": "f_2505_0545",
+     "unit": "root",
+     "seg": 9477,
+     "off": 1349,
+     "size": 372,
+     "target_sha256": "b142cab1334f46271c11561816f5d6464f3b2e1fad71509bb098058d1e17b13c",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL",
+     "reloc_order": "GROUPED"
+    },
+    {
+     "name": "f_2505_0831",
+     "unit": "root",
+     "seg": 9477,
+     "off": 2097,
+     "size": 185,
+     "target_sha256": "3f3d0e90d73a10551d26af5277a9f759d9fe58ef9f5c48cb1b73f61ba249c2da",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL",
+     "reloc_order": "GROUPED"
+    },
+    {
+     "name": "f_2505_08EA",
+     "unit": "root",
+     "seg": 9477,
+     "off": 2282,
+     "size": 164,
+     "target_sha256": "7e3ae557103b529590624ca110312d6fcda26acee1b1bb297962d8a544118c2d",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL",
+     "reloc_order": "GROUPED"
     }
    ],
    "scaffold": [],
-   "object_sha256": "8b5c611f24add50b71410e97c464b0fe28f7b323b2a57d09ca05fb542d436ef5"
+   "object_sha256": "012712f36c85509cf80b11477196272f4b7981d5a99f730cc5cbde76b523b3e9"
+  },
+  "root:259D": {
+   "unit": "root",
+   "seg": 9629,
+   "profile": "msc600a",
+   "flags": [
+    "/AL",
+    "/Os",
+    "/Oe",
+    "/Og",
+    "/Gs"
+   ],
+   "placements": {
+    "_DATA": {
+     "seg": 21939,
+     "off": 26296,
+     "size": 106
+    }
+   },
+   "lang": "c",
+   "source": "src/root/m259D.c",
+   "source_sha256": "bd69f6275d5b97908efad567df07a66941f661b08621376b6a002e16daa74b51",
+   "claims": [
+    {
+     "name": "f_259D_02A5",
+     "unit": "root",
+     "seg": 9629,
+     "off": 677,
+     "size": 51,
+     "target_sha256": "49c25f0af7247ea35b2d2cf754314afeec4e761717927cf3da335ef36e91abc1",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL",
+     "reloc_order": "EXACT"
+    },
+    {
+     "name": "f_259D_02D8",
+     "unit": "root",
+     "seg": 9629,
+     "off": 728,
+     "size": 82,
+     "target_sha256": "88c16b037f804ecac03103c887cf3cf3ea6af219ec4d98062fe92ed4c81e652f",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL",
+     "reloc_order": "GROUPED"
+    }
+   ],
+   "scaffold": [],
+   "object_sha256": "89264dcf8fb1b577ed07e6e503c6c79dd5a81c1331f0c2134e5411ed9a352220"
   },
   "root:277D": {
    "unit": "root",

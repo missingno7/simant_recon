@@ -1,0 +1,204 @@
+/* Root module 259D: DOS picture drawing for window objects (partial). */
+
+struct Rect {
+    int left;
+    int top;
+    int right;
+    int bottom;
+};
+
+struct Pic {
+    int type;
+    char mode;
+    char pad[5];
+    int width;
+    int height;
+};
+
+extern char far * far db_LoadObject(int object, int kind);
+extern void far f_1A53_02EB(int object, int kind);
+extern void far GPutPacked(int x, int y, char far *pic);
+extern void far f_1B4E_003B(int x, int y, char far *image);
+extern void far f_1B4E_005E(int x, int y, char far *image);
+extern char far * far f_171C_2208(unsigned int size);
+extern void far f_171C_2276(char far *block);
+extern int far WinPrintf(char far *format, ...);
+extern void far o03_3258_040D(char far *image, char far *buffer, int shift, int flag);
+extern void far o01_32B5_000F(char far *image, char far *buffer, int shift, int flag);
+extern void far o00_35A6_0007(char far *image, char far *buffer, int shift, int flag);
+extern void far f_1CE2_046D(struct Rect far *rect, int color);
+extern void _fastcall f_23AE_0377(int win);
+extern void _fastcall f_23AE_01DB(int win);
+extern char far * _fastcall f_2505_02D7(int obj);
+extern int far f_24AB_030B(void);
+extern int far f_24AB_0367(int c);
+extern void far f_24AB_038D(int x, int y, char far *text);
+extern char far * far _fstrncpy(char far *dst, char far *src, unsigned int n);
+
+extern int near g_3DE0;
+extern char near g_3DE4;
+extern char near g_5A97;
+extern unsigned int (far * near g_9140)(int x0, int y0, int x1, int y1);
+extern void (far * near g_9148)(int x0, int y0, int x1, int y1, char far *buffer);
+
+int _fastcall f_259D_000E(int x, int y, int id);
+
+void _fastcall f_259D_02A5(int id, struct Rect far *rect)
+{
+    if (!f_259D_000E(rect->left, rect->top, id))
+        f_1CE2_046D(rect, g_3DE4 | g_3DE0);
+}
+
+void _fastcall f_259D_02D8(int obj, int id)
+{
+    struct Rect far *rect;
+
+    f_23AE_0377(obj);
+    rect = (struct Rect far *)f_2505_02D7(obj);
+    if (!f_259D_000E(rect->left, rect->top, id))
+        f_1CE2_046D(rect, g_3DE4 | g_3DE0);
+    f_23AE_01DB(obj);
+}
+
+/* SCAFFOLD BEGIN: best drafts, not exact (see build/workers/win notes).
+ * f_259D_000E: register/slot allocation residue; its three direct root->overlay far calls
+ * (3258:040D, 32B5:000F, 35A6:0007) cannot be bound by the matcher (no RTLink vector).
+ * f_259D_032A: two dead zero-stores ([bp-4], [bp-0xc]) that /Og removes here survive in the original. */
+int _fastcall f_259D_000E(int x, int y, int id)
+{
+    char far *h;
+    struct Pic far *pic;
+    int x1;
+    int y1;
+    unsigned int n;
+
+    h = db_LoadObject(id, 2);
+    if (h != 0) {
+        pic = *(struct Pic far * far *)h;
+        if (pic->type == -1) {
+            GPutPacked(x, y, (char far *)pic);
+            f_1A53_02EB(id, 2);
+            return 1;
+        }
+        if ((*(struct Pic far * far *)h)->type == (int)0x8000) {
+            GPutPacked(x, y, *(char far * far *)h);
+            f_1A53_02EB(id, 2);
+            return 1;
+        }
+        if (pic->type == 0) {
+            if (pic->mode == 1)
+                f_1B4E_005E(x, y, (char far *)pic + 8);
+            else
+                f_1B4E_003B(x, y, (char far *)pic + 8);
+            f_1A53_02EB(id, 2);
+            return 1;
+        }
+        if (pic->type == 3) {
+            if (g_5A97 == 2) {
+                x1 = ((x & ~1) + pic->width + 3) & ~1;
+                y1 = pic->height + y;
+                h = f_171C_2208((*g_9140)(x & ~1, y, x1, y1));
+                (*g_9148)(x & ~1, y, x1, y1, h);
+                o03_3258_040D((char far *)pic + 8, h, x & 1, 0);
+                f_1B4E_003B(x & ~1, y, h);
+                f_171C_2276(h);
+            } else {
+                x1 = ((x & ~7) + pic->width + 15) & ~7;
+                y1 = pic->height + y;
+                n = (*g_9140)(x & ~7, y, x1, y1);
+                WinPrintf("\nGGetPic - trans @ %d, %d (%d, %d), bytes=%u", x & ~7, y, x1, y1, n);
+                h = f_171C_2208(n + 1);
+                h[n] = 0xf3;
+                (*g_9148)(x & ~7, y, x1, y1, h);
+                WinPrintf("\nGPutPic size AA %d, %d, tag=%x", *(int far *)h, *(int far *)h + 2, (unsigned char)h[n]);
+                if (g_5A97 & 1)
+                    o01_32B5_000F((char far *)pic + 8, h, x & 7, 0);
+                else
+                    o00_35A6_0007((char far *)pic + 8, h, x & 7, 0);
+                WinPrintf("\nGPutPic size %d, %d, tag=%x", *(int far *)h, *(int far *)h + 2, (unsigned char)h[n]);
+                f_1B4E_003B(x & ~7, y, h);
+                f_171C_2276(h);
+            }
+        }
+        f_1A53_02EB(id, 2);
+        return 1;
+    }
+    return 0;
+}
+
+void _fastcall f_259D_032A(int first, char far *text, struct Rect far *rect)
+{
+    int c;
+    int v4;
+    int pixw;
+    int va;
+    int vc;
+    int brk;
+    int line;
+    int done;
+    char far *p;
+    int y;
+    int w;
+    int lh;
+    int nlines;
+    int len;
+    char buf[150];
+    int i;
+
+    w = rect->right - rect->left;
+    y = rect->top;
+    lh = f_24AB_030B();
+    nlines = (rect->bottom - rect->top) / lh;
+    line = 0;
+    while (*text) {
+        if (first + nlines <= line)
+            break;
+        p = text;
+        pixw = brk = v4 = vc = done = i = 0;
+        while (pixw < w && !done) {
+            c = *p++;
+            pixw += f_24AB_0367(c);
+            if (pixw < w) {
+                switch (c) {
+                case 0:
+                case 10:
+                case 13:
+                    done = 1;
+                case ' ':
+                case '(':
+                case '[':
+                case '{':
+                    brk = i - 1;
+                    break;
+                case '!':
+                case ')':
+                case ',':
+                case '-':
+                case '.':
+                case '?':
+                case ']':
+                case '}':
+                    brk = i;
+                    break;
+                }
+            }
+            i++;
+        }
+        if (brk == 0)
+            brk = i - 1;
+        if (first <= line) {
+            len = brk + 1;
+            _fstrncpy(buf, text, len);
+            buf[len] = 0;
+            f_24AB_038D(rect->left, y, buf);
+        }
+        text += len;
+        while (*text == ' ')
+            text++;
+        if (*text == 10 || *text == 13)
+            text++;
+        y += lh;
+        line++;
+    }
+}
+/* SCAFFOLD END */

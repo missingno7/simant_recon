@@ -19,6 +19,16 @@ struct Pt {
     int y;
 };
 
+struct Win {
+    struct Rect rect;
+    char pad08[4];
+    int count;
+    char pad0E[0x1c - 0x0e];
+    int flags;
+    char pad1E[0x2c - 0x1e];
+    char far *objs[1];
+};
+
 extern struct Pt _fastcall f_22BF_000A(char far *text);
 extern void far f_208F_0419(struct Pt far *size, int id);
 
@@ -168,4 +178,243 @@ void _fastcall f_2505_0382(struct Pt far *center, struct Rect far *rect)
 {
     center->x = (rect->right + rect->left) / 2;
     center->y = (rect->top + rect->bottom) / 2;
+}
+
+extern void far f_1F58_0090(void);
+int _fastcall f_2505_0453(int obj, int kind);
+int _fastcall f_2505_04D7(int win, int idx);
+
+int _fastcall f_2505_03B9(int axis, int win, char far *obj)
+{
+    int v;
+    int kind;
+
+    switch (((int far *)(obj + 0x18))[axis]) {
+    default:
+        f_1F58_0090();
+        return 1;
+    case 0:
+        v = 0;
+        break;
+    case 1:
+        kind = 0;
+        goto get;
+    case 2:
+        kind = 1;
+        goto get;
+    case 3:
+        kind = 2;
+        goto get;
+    case 4:
+        kind = 3;
+    get:
+        v = f_2505_0453(((int far *)(obj + 0x10))[axis], kind);
+        break;
+    case 5:
+        v = f_2505_04D7(win, ((int far *)(obj + 0x10))[axis]);
+        break;
+    }
+    if (v != (int)0x8000)
+        return v + ((int far *)(obj + 8))[axis];
+    return 0x8000;
+}
+
+extern int far fd_50F6_47D8;
+
+int _fastcall f_2505_0453(int obj, int kind)
+{
+    int win;
+    int idx;
+    char far *w;
+    int far *r;
+
+    win = obj & 0xff00;
+    if ((win >> 8) < fd_50F6_47D8 || win >= 0x2800) {
+        f_23AE_0377(win);
+        idx = obj & 0xff;
+        w = f_2505_0006(win);
+        if (*(int far *)(w + 0xc) > idx) {
+            r = ((int far * far *)(w + 0x2c))[idx];
+            f_23AE_01DB(win);
+            return r[kind];
+        }
+        f_23AE_01DB(win);
+    }
+    return 0x8000;
+}
+
+int _fastcall f_2505_04D7(int win, int idx)
+{
+    if (fd_50F6_47D8 <= (win >> 8) && win < 0x2800)
+        return 0x8000;
+    return ((int far *)(f_2505_0006(win) + 0x10))[idx];
+}
+
+void _fastcall f_2505_0511(struct Rect far *r)
+{
+    int t;
+
+    t = r->left;
+    if (t > r->right) {
+        r->left = r->right;
+        r->right = t;
+    }
+    t = r->top;
+    if (t > r->bottom) {
+        r->top = r->bottom;
+        r->bottom = t;
+    }
+}
+
+extern char far * far f_171C_1B84(char far * far *handle);
+extern void far f_171C_1BBA(char far * far *handle);
+
+void _fastcall f_2505_0545(int win)
+{
+    char far * far *handle;
+    char far *w;
+    int n;
+    int i;
+    int changed;
+    int unresolved;
+    char far *obj;
+    struct Pt size;
+    int far *p;
+    int k;
+    int v;
+    struct Rect far *r;
+
+    handle = (char far * far *)g_9230[win >> 8];
+    w = f_171C_1B84(handle);
+    n = *(int far *)(w + 0xc);
+    for (i = 0; i < n; i++) {
+        r = ((struct Rect far * far *)(w + 0x2c))[i];
+        r->left = r->right = r->top = r->bottom = 0x8000;
+    }
+    changed = 1;
+    while (changed) {
+        unresolved = 0;
+        changed = 0;
+        for (i = 0; i < n; i++) {
+            obj = ((char far * far *)(w + 0x2c))[i];
+            if (obj[0x24] & 0x40) {
+                size = f_2505_0171(obj);
+                ((int far *)obj)[6] = size.x;
+                ((int far *)obj)[7] = size.y;
+            }
+            p = (int far *)obj;
+            for (k = 0; k < 4; k++, p++) {
+                v = f_2505_03B9(k, win, obj);
+                if (*p != v) {
+                    *p = v;
+                    changed++;
+                }
+                if (v == (int)0x8000)
+                    unresolved++;
+            }
+        }
+    }
+    for (i = 0; i < n; i++)
+        f_2505_0511(((struct Rect far * far *)(w + 0x2c))[i]);
+    *(struct Rect far *)w = *((struct Rect far * far *)(w + 0x2c))[0];
+    f_171C_1BBA(handle);
+}
+
+extern void far f_1FD2_0883(int x, int y, int id, int mode, int flag);
+
+void _fastcall f_2505_06B9(int flag, char far *w)
+{
+    int m;
+    struct Pt size;
+    struct Rect rect;
+
+    rect = *(struct Rect far *)w;
+    m = (*((char far * far *)(w + 0x2c)))[0x28];
+    rect.left += m;
+    rect.right -= m;
+    rect.top += m;
+    rect.bottom -= m;
+    if (*(int far *)(w + 0x1c) & 4) {
+        f_1FD2_0883(rect.left, rect.top, 0x64, 0xf083, flag);
+        f_208F_0419(&size, 0x64);
+        rect.left += size.x;
+    }
+    if (*(int far *)(w + 0x1c) & 8) {
+        f_208F_0419(&size, 0x70);
+        f_1FD2_0883(rect.right - size.x, rect.bottom - size.y, 0x70, 0xf084, flag);
+    }
+    if (*(int far *)(w + 0x1c) & 0x100) {
+        if (*(int far *)(w + 0x1c) & 0x80) {
+            f_208F_0419(&size, 0x66);
+            f_1FD2_0883(rect.right -= size.x, rect.top, 0x66, 0xf085, flag);
+        } else {
+            f_208F_0419(&size, 0x67);
+            f_1FD2_0883(rect.right -= size.x, rect.top, 0x67, 0xf085, flag);
+        }
+    }
+    if (*(int far *)(w + 0x1c) & 0x10)
+        f_1FD2_0883(rect.left, rect.top, 0x65, 0xf088, flag);
+    if (*(int far *)(w + 0x1c) & 0x400) {
+        f_208F_0419(&size, 0x69);
+        f_1FD2_0883(rect.right -= size.x, rect.top, 0x69, 0xf082, flag);
+    }
+}
+
+extern void far f_1FD2_03EB(char far *obj, int objNum);
+extern void far f_1FD2_044F(char far *w, int id);
+extern void far f_218D_01EB(void);
+
+void _fastcall f_2505_0831(int win)
+{
+    struct Win far *w;
+    char far *obj;
+    int dirty;
+    int n;
+    int i;
+
+    win &= 0xff00;
+    f_23AE_0377(win);
+    w = (struct Win far *)f_2505_0006(win);
+    n = w->count;
+    dirty = 0;
+    for (i = 0; i < n; i++) {
+        obj = w->objs[i];
+        if (obj[0x24] & 2)
+            f_1FD2_03EB(obj, win + i);
+        if (obj[0x24] & 0x10)
+            dirty = 1;
+    }
+    f_2505_06B9(1, (char far *)w);
+    if (dirty)
+        f_1FD2_044F((char far *)w, (win >> 8) - 0x500);
+    f_218D_01EB();
+    f_23AE_01DB(win);
+}
+
+extern void far f_1FD2_0438(int objNum);
+extern void far f_1FD2_049C(int id);
+
+void _fastcall f_2505_08EA(int win)
+{
+    struct Win far *w;
+    char far *obj;
+    int dirty;
+    int n;
+    int i;
+
+    win &= 0xff00;
+    f_23AE_0377(win);
+    w = (struct Win far *)f_2505_0006(win);
+    n = w->count;
+    for (i = 0; i < n; i++) {
+        obj = w->objs[i];
+        if (obj[0x24] & 2)
+            f_1FD2_0438(win + i);
+        if (obj[0x24] & 0x10)
+            dirty = 1;
+    }
+    f_2505_06B9(0, (char far *)w);
+    if (dirty)
+        f_1FD2_049C((win >> 8) - 0x500);
+    f_23AE_01DB(win);
 }

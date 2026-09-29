@@ -9414,10 +9414,20 @@
    "off": 26,
    "grounding": "S25:3BA4 DoAntMoveY:01C1 signed char es:[bx+001A] dir table (CONST seg word 8960 = 3D57)"
   },
+  "fd_3D57_0024": {
+   "seg": 15703,
+   "off": 36,
+   "grounding": "f_0894_0E8E: mov es,[8088] (3D57); mov al,es:[bx+0024] with bx=(attr&7)*8+SRand8(); cbw - signed char TurnTab[8][8]"
+  },
   "fd_3D57_006C": {
    "seg": 15703,
    "off": 108,
    "grounding": "f_10F7_1396 (root:10F7): mov es,[CONST word = 3D57]; es:[..006C] far data reference"
+  },
+  "fd_3D57_0074": {
+   "seg": 15703,
+   "off": 116,
+   "grounding": "f_0894_21ED: mov es,[80A6] (3D57); cmp word ptr es:[bx+0074],1 with bx=caste*2"
   },
   "fd_3D57_0094": {
    "seg": 15703,
@@ -9484,6 +9494,11 @@
    "off": 700,
    "grounding": "AddFood: mov es,[S08 CONST 8602]; mov es:[02BC],si ; mov es:[02BE],di (food centre x,y)"
   },
+  "fd_3D57_02C0": {
+   "seg": 15703,
+   "off": 704,
+   "grounding": "o06_35F5_1E54: mov es,[CONST 8510 = 3D57]; es:[02C0] (S06:35F5 InitSimYard/yard sim unit)"
+  },
   "fd_3D57_02C2": {
    "seg": 15703,
    "off": 706,
@@ -9508,6 +9523,11 @@
    "seg": 15703,
    "off": 1960,
    "grounding": "S25:3BA4 DoAntMoveY:04C5 cmp word es:[07A8],0 (CONST seg word 897E = 3D57)"
+  },
+  "fd_3D57_07AA": {
+   "seg": 15703,
+   "off": 1962,
+   "grounding": "S25:3BA4 o25_3BA4_0999:0A26 cmp word es:[07AA],1 (CONST seg word 897E = 3D57, shared with 07A8)"
   },
   "fd_3D57_07B2": {
    "seg": 15703,
@@ -9559,6 +9579,11 @@
    "off": 3102,
    "grounding": "f_0BE8_03AC: mov es,[DS:8114] (CONST 3D57); mov word es:[0C1E],1"
   },
+  "fd_3D57_0C20": {
+   "seg": 15703,
+   "off": 3104,
+   "grounding": "o06_35F5_1E54: mov es,[CONST 8508 = 3D57]; es:[0C20] (S06:35F5 InitSimYard/yard sim unit)"
+  },
   "fd_3D57_0C22": {
    "seg": 15703,
    "off": 3106,
@@ -9574,10 +9599,80 @@
    "off": 3110,
    "grounding": "f_10F7_1E71 (root:10F7): mov es,[CONST word = 3D57]; es:[..0C26] far data reference"
   },
+  "fd_3D57_0C28": {
+   "seg": 15703,
+   "off": 3112,
+   "grounding": "SimKidInside: mov es,[CONST 8474 = 3D57]; es:[0C28] (S06:35F5 InitSimYard/yard sim unit)"
+  },
+  "fd_3D57_0C2A": {
+   "seg": 15703,
+   "off": 3114,
+   "grounding": "o06_35F5_0000: mov es,[CONST 845E = 3D57]; es:[0C2A] (S06:35F5 InitSimYard/yard sim unit)"
+  },
+  "fd_3D57_0C2C": {
+   "seg": 15703,
+   "off": 3116,
+   "grounding": "SimKidInside: mov es,[CONST 8458 = 3D57]; es:[0C2C] (S06:35F5 InitSimYard/yard sim unit)"
+  },
+  "fd_3D57_0C2E": {
+   "seg": 15703,
+   "off": 3118,
+   "grounding": "SimKidInside: mov es,[CONST 845A = 3D57]; es:[0C2E] (S06:35F5 InitSimYard/yard sim unit)"
+  },
+  "fd_3D57_0C30": {
+   "seg": 15703,
+   "off": 3120,
+   "grounding": "FootFall: mov es,[CONST 8468 = 3D57]; es:[0C30] (S06:35F5 InitSimYard/yard sim unit)"
+  },
+  "fd_3D57_0C32": {
+   "seg": 15703,
+   "off": 3122,
+   "grounding": "SimKidInside: mov es,[CONST 8472 = 3D57]; es:[0C32] (S06:35F5 InitSimYard/yard sim unit)"
+  },
+  "fd_3D57_0C34": {
+   "seg": 15703,
+   "off": 3124,
+   "grounding": "o06_35F5_0000: mov es,[CONST 845C = 3D57]; es:[0C34] (S06:35F5 InitSimYard/yard sim unit)"
+  },
+  "fd_3D57_0C36": {
+   "seg": 15703,
+   "off": 3126,
+   "grounding": "o06_35F5_02B9 (SimKidOutside): mov es,[CONST 84B4 = 3D57]; mov al,es:[bx+0C36] char dx step by BoyDir"
+  },
+  "fd_3D57_0C3A": {
+   "seg": 15703,
+   "off": 3130,
+   "grounding": "o06_35F5_02B9 (SimKidOutside): mov es,[CONST 84B6 = 3D57]; mov al,es:[bx+0C3A] char dy step by BoyDir"
+  },
+  "fd_3D57_0C3E": {
+   "seg": 15703,
+   "off": 3134,
+   "grounding": "SimKidInside: mov es,[CONST 8488 = 3D57]; es:[0C3E] (S06:35F5 InitSimYard/yard sim unit)"
+  },
+  "fd_3D57_0C40": {
+   "seg": 15703,
+   "off": 3136,
+   "grounding": "o06_35F5_0000: mov es,[CONST 8476 = 3D57]; es:[0C40] (S06:35F5 InitSimYard/yard sim unit)"
+  },
+  "fd_3D57_0C42": {
+   "seg": 15703,
+   "off": 3138,
+   "grounding": "SimKidInside: mov es,[CONST 848A = 3D57]; es:[0C42] (S06:35F5 InitSimYard/yard sim unit)"
+  },
   "fd_3D57_0C44": {
    "seg": 15703,
    "off": 3140,
    "grounding": "o08_35F5_059B (RandYard): mov es,[S08 CONST word] ; es:[off]"
+  },
+  "fd_3D57_0C46": {
+   "seg": 15703,
+   "off": 3142,
+   "grounding": "SimKidInside: mov es,[CONST 8478 = 3D57]; es:[0C46] (S06:35F5 InitSimYard/yard sim unit)"
+  },
+  "fd_3D57_0C48": {
+   "seg": 15703,
+   "off": 3144,
+   "grounding": "SimKidInside: mov es,[CONST 847A = 3D57]; es:[0C48] (S06:35F5 InitSimYard/yard sim unit)"
   },
   "fd_3E1D_0000": {
    "seg": 15901,
@@ -9739,20 +9834,40 @@
    "off": 512,
    "grounding": "o08_35F5_0050 (RandWorld): mov es,[S08 CONST word] ; mov es:[off]"
   },
+  "fd_50F6_0202": {
+   "seg": 20726,
+   "off": 514,
+   "grounding": "o06_35F5_0000: mov es,[CONST 8494 = 50F6]; es:[0202] (S06:35F5 InitSimYard/yard sim unit)"
+  },
   "fd_50F6_0204": {
    "seg": 20726,
    "off": 516,
    "grounding": "o08_35F5_059B (RandYard): mov es,[S08 CONST word] ; es:[off]"
+  },
+  "fd_50F6_0208": {
+   "seg": 20726,
+   "off": 520,
+   "grounding": "o06_35F5_11FF: mov es,[CONST 84DE = 50F6]; es:[0208] (S06:35F5 InitSimYard/yard sim unit)"
   },
   "fd_50F6_020E": {
    "seg": 20726,
    "off": 526,
    "grounding": "o08_35F5_0050 (RandWorld): mov es,[S08 CONST word] ; mov es:[off]"
   },
+  "fd_50F6_0210": {
+   "seg": 20726,
+   "off": 528,
+   "grounding": "o06_35F5_11FF: mov es,[CONST 84DA = 50F6]; es:[0210] (S06:35F5 InitSimYard/yard sim unit)"
+  },
   "fd_50F6_0214": {
    "seg": 20726,
    "off": 532,
    "grounding": "o08_35F5_059B (RandYard): mov es,[S08 CONST word] ; es:[off]"
+  },
+  "fd_50F6_0220": {
+   "seg": 20726,
+   "off": 544,
+   "grounding": "o06_35F5_0000: mov es,[CONST 8462 = 50F6]; es:[0220] (S06:35F5 InitSimYard/yard sim unit)"
   },
   "fd_50F6_0224": {
    "seg": 20726,
@@ -9764,25 +9879,65 @@
    "off": 552,
    "grounding": "o08_35F5_059B (RandYard): mov es,[S08 CONST word] ; es:[off]"
   },
+  "fd_50F6_022C": {
+   "seg": 20726,
+   "off": 556,
+   "grounding": "o06_35F5_0000: mov es,[CONST 847E = 50F6]; es:[022C] (S06:35F5 InitSimYard/yard sim unit)"
+  },
   "fd_50F6_0232": {
    "seg": 20726,
    "off": 562,
    "grounding": "o08_35F5_0050 (RandWorld): mov es,[S08 CONST word] ; mov es:[off]"
+  },
+  "fd_50F6_023E": {
+   "seg": 20726,
+   "off": 574,
+   "grounding": "SimKidInside: mov es,[CONST 8470 = 50F6]; es:[023E] (S06:35F5 InitSimYard/yard sim unit)"
+  },
+  "fd_50F6_0240": {
+   "seg": 20726,
+   "off": 576,
+   "grounding": "o06_35F5_14CC: mov es,[CONST 84EA = 50F6]; es:[0240] (S06:35F5 InitSimYard/yard sim unit)"
   },
   "fd_50F6_0242": {
    "seg": 20726,
    "off": 578,
    "grounding": "o08_35F5_0050 (RandWorld): mov es,[S08 CONST word] ; mov es:[off]"
   },
+  "fd_50F6_0244": {
+   "seg": 20726,
+   "off": 580,
+   "grounding": "o06_35F5_0000: mov es,[CONST 8480 = 50F6]; es:[0244] (S06:35F5 InitSimYard/yard sim unit)"
+  },
+  "fd_50F6_0246": {
+   "seg": 20726,
+   "off": 582,
+   "grounding": "SimKidInside: mov es,[CONST 846E = 50F6]; es:[0246] (S06:35F5 InitSimYard/yard sim unit)"
+  },
+  "fd_50F6_0254": {
+   "seg": 20726,
+   "off": 596,
+   "grounding": "o06_35F5_0000: mov es,[CONST 8482 = 50F6]; es:[0254] (S06:35F5 InitSimYard/yard sim unit)"
+  },
   "fd_50F6_0256": {
    "seg": 20726,
    "off": 598,
    "grounding": "f_0BE8_03AC: mov es,[DS:811A] (CONST 50F6); mov bl,es:[si+0256] byte array indexed by drop"
   },
+  "fd_50F6_02BE": {
+   "seg": 20726,
+   "off": 702,
+   "grounding": "o06_35F5_14CC: mov es,[CONST 84EE = 50F6]; es:[02BE] (S06:35F5 InitSimYard/yard sim unit)"
+  },
   "fd_50F6_02C0": {
    "seg": 20726,
    "off": 704,
    "grounding": "f_0BE8_03AC: mov es,[DS:8118] (CONST 50F6); mov al,es:[si+02C0] byte array indexed by drop"
+  },
+  "fd_50F6_032C": {
+   "seg": 20726,
+   "off": 812,
+   "grounding": "o06_35F5_14CC: mov es,[CONST 84F0 = 50F6]; es:[032C] (S06:35F5 InitSimYard/yard sim unit)"
   },
   "fd_50F6_032E": {
    "seg": 20726,
@@ -9793,6 +9948,11 @@
    "seg": 20726,
    "off": 816,
    "grounding": "f_0BE8_0002: mov es,[DS:810C] (CONST 50F6); mov es:[0330],ax"
+  },
+  "fd_50F6_0334": {
+   "seg": 20726,
+   "off": 820,
+   "grounding": "o06_35F5_0A5F (InitGrassMap): mov ax,50F6; mov es,ax; es:[0334..0338]=0, es:[si+0334]=-1 for i=3..11 (int[12])"
   },
   "fd_50F6_034C": {
    "seg": 20726,
@@ -9814,6 +9974,11 @@
    "off": 852,
    "grounding": "f_0BE8_0002: mov es,[DS:80FE] (CONST 50F6); cmp word es:[0354],0"
   },
+  "fd_50F6_0356": {
+   "seg": 20726,
+   "off": 854,
+   "grounding": "o06_35F5_020C: mov es,[CONST 84AC = 50F6]; es:[0356] (S06:35F5 InitSimYard/yard sim unit)"
+  },
   "fd_50F6_035C": {
    "seg": 20726,
    "off": 860,
@@ -9823,6 +9988,11 @@
    "seg": 20726,
    "off": 862,
    "grounding": "o08_35F5_0050 (RandWorld): mov es,[S08 CONST word] ; mov es:[off]"
+  },
+  "fd_50F6_0364": {
+   "seg": 20726,
+   "off": 868,
+   "grounding": "o06_35F5_0000: mov es,[CONST 849E = 50F6]; es:[0364] (S06:35F5 InitSimYard/yard sim unit)"
   },
   "fd_50F6_0366": {
    "seg": 20726,
@@ -9834,25 +10004,75 @@
    "off": 876,
    "grounding": "o08_35F5_0050 (RandWorld): mov es,[S08 CONST word] ; mov es:[off]"
   },
+  "fd_50F6_036E": {
+   "seg": 20726,
+   "off": 878,
+   "grounding": "o06_35F5_0000: mov es,[CONST 84A0 = 50F6]; es:[036E] (S06:35F5 InitSimYard/yard sim unit)"
+  },
   "fd_50F6_0376": {
    "seg": 20726,
    "off": 886,
    "grounding": "f_0BE8_0002: mov es,[DS:8102] (CONST 50F6); mov word es:[0376],1"
+  },
+  "fd_50F6_037A": {
+   "seg": 20726,
+   "off": 890,
+   "grounding": "o06_35F5_2433: mov es,[CONST 851E = 50F6]; es:[037A] (S06:35F5 InitSimYard/yard sim unit)"
+  },
+  "fd_50F6_037C": {
+   "seg": 20726,
+   "off": 892,
+   "grounding": "DeadAntHere: mov es,[80A2] (50F6); byte es:[bx+037C] indexed by ring index (x ring)"
+  },
+  "fd_50F6_03E0": {
+   "seg": 20726,
+   "off": 992,
+   "grounding": "SimKidInside: mov es,[CONST 848C = 50F6]; es:[03E0] (S06:35F5 InitSimYard/yard sim unit)"
   },
   "fd_50F6_0400": {
    "seg": 20726,
    "off": 1024,
    "grounding": "f_0BE8_0002: mov es,[DS:8106] (CONST 50F6); cmp word es:[0400],1"
   },
+  "fd_50F6_0402": {
+   "seg": 20726,
+   "off": 1026,
+   "grounding": "o06_35F5_2433: mov es,[CONST 851C = 50F6]; es:[0402] (S06:35F5 InitSimYard/yard sim unit)"
+  },
+  "fd_50F6_0404": {
+   "seg": 20726,
+   "off": 1028,
+   "grounding": "DeadAntHere: mov es,[80A0] (50F6); byte es:[bx+0404] indexed by ring index (y ring)"
+  },
+  "fd_50F6_046A": {
+   "seg": 20726,
+   "off": 1130,
+   "grounding": "SimKidInside: mov es,[CONST 848E = 50F6]; es:[046A] (S06:35F5 InitSimYard/yard sim unit)"
+  },
+  "fd_50F6_0470": {
+   "seg": 20726,
+   "off": 1136,
+   "grounding": "o06_35F5_0000: mov es,[CONST 8490 = 50F6]; es:[0470] (S06:35F5 InitSimYard/yard sim unit)"
+  },
   "fd_50F6_0472": {
    "seg": 20726,
    "off": 1138,
    "grounding": "o08_35F5_0050 (RandWorld): mov es,[S08 CONST word] ; mov es:[off]"
   },
+  "fd_50F6_0476": {
+   "seg": 20726,
+   "off": 1142,
+   "grounding": "DeadAntHere: mov bx,0476; mov es,[809E] (50F6); inc word ptr es:[bx]; cmp 64h (ring index)"
+  },
   "fd_50F6_0478": {
    "seg": 20726,
    "off": 1144,
    "grounding": "o08_35F5_059B (RandYard): mov es,[S08 CONST word] ; es:[off]"
+  },
+  "fd_50F6_047A": {
+   "seg": 20726,
+   "off": 1146,
+   "grounding": "o06_35F5_0000: mov es,[CONST 8492 = 50F6]; es:[047A] (S06:35F5 InitSimYard/yard sim unit)"
   },
   "fd_50F6_047C": {
    "seg": 20726,
@@ -9863,6 +10083,16 @@
    "seg": 20726,
    "off": 1150,
    "grounding": "f_10F7_0B51 (root:10F7): mov es,[CONST word = 50F6]; es:[..047E] far data reference"
+  },
+  "fd_50F6_0480": {
+   "seg": 20726,
+   "off": 1152,
+   "grounding": "f_0894_09F4: mov es,[8082] (50F6); cmp word ptr es:[0480],ax (tile) - barrier tile level"
+  },
+  "fd_50F6_0488": {
+   "seg": 20726,
+   "off": 1160,
+   "grounding": "o06_35F5_02B9: mov es,[CONST 84AE = 50F6]; es:[0488] (S06:35F5 InitSimYard/yard sim unit)"
   },
   "fd_50F6_048A": {
    "seg": 20726,
@@ -9879,6 +10109,11 @@
    "off": 1166,
    "grounding": "f_10F7_0B51 (root:10F7): mov es,[CONST word = 50F6]; es:[..048E] far data reference"
   },
+  "fd_50F6_0492": {
+   "seg": 20726,
+   "off": 1170,
+   "grounding": "o06_35F5_02B9: mov es,[CONST 84B0 = 50F6]; es:[0492] (S06:35F5 InitSimYard/yard sim unit)"
+  },
   "fd_50F6_0496": {
    "seg": 20726,
    "off": 1174,
@@ -9888,6 +10123,11 @@
    "seg": 20726,
    "off": 1178,
    "grounding": "f_10F7_0CA8 (root:10F7): mov es,[CONST word = 50F6]; es:[..049A] far data reference"
+  },
+  "fd_50F6_04BE": {
+   "seg": 20726,
+   "off": 1214,
+   "grounding": "o06_35F5_0000: mov es,[CONST 8464 = 50F6]; es:[04BE] (S06:35F5 InitSimYard/yard sim unit)"
   },
   "fd_50F6_04C2": {
    "seg": 20726,
@@ -9899,10 +10139,20 @@
    "off": 1220,
    "grounding": "f_10F7_20BF (root:10F7): mov es,[CONST word = 50F6]; es:[..04C4] far data reference"
   },
+  "fd_50F6_04C6": {
+   "seg": 20726,
+   "off": 1222,
+   "grounding": "o06_35F5_0000: mov es,[CONST 8466 = 50F6]; es:[04C6] (S06:35F5 InitSimYard/yard sim unit)"
+  },
   "fd_50F6_04E2": {
    "seg": 20726,
    "off": 1250,
    "grounding": "f_0BE8_0002: mov es,[DS:80FA] (CONST 50F6); cmp word es:[04E2],0"
+  },
+  "fd_50F6_04E4": {
+   "seg": 20726,
+   "off": 1252,
+   "grounding": "o06_35F5_0000: mov es,[CONST 8484 = 50F6]; es:[04E4] (S06:35F5 InitSimYard/yard sim unit)"
   },
   "fd_50F6_0502": {
    "seg": 20726,
@@ -9914,15 +10164,35 @@
    "off": 1284,
    "grounding": "o08_35F5_059B (RandYard): mov es,[S08 CONST word] ; es:[off]"
   },
+  "fd_50F6_0506": {
+   "seg": 20726,
+   "off": 1286,
+   "grounding": "o06_35F5_0000: mov es,[CONST 8486 = 50F6]; es:[0506] (S06:35F5 InitSimYard/yard sim unit)"
+  },
   "fd_50F6_0508": {
    "seg": 20726,
    "off": 1288,
    "grounding": "o08_35F5_0050 (RandWorld): mov es,[S08 CONST word] ; mov es:[off]"
   },
+  "fd_50F6_0510": {
+   "seg": 20726,
+   "off": 1296,
+   "grounding": "o06_35F5_1A0F: mov es,[CONST 84F6 = 50F6]; es:[0510] (S06:35F5 InitSimYard/yard sim unit)"
+  },
   "fd_50F6_0596": {
    "seg": 20726,
    "off": 1430,
    "grounding": "o08_35F5_0050 (RandWorld): mov es,[S08 CONST word] ; mov es:[off]"
+  },
+  "fd_50F6_059E": {
+   "seg": 20726,
+   "off": 1438,
+   "grounding": "o06_35F5_1A0F: mov es,[CONST 84F4 = 50F6]; es:[059E] (S06:35F5 InitSimYard/yard sim unit)"
+  },
+  "fd_50F6_0624": {
+   "seg": 20726,
+   "off": 1572,
+   "grounding": "o06_35F5_0000: mov es,[CONST 846A = 50F6]; es:[0624] (S06:35F5 InitSimYard/yard sim unit)"
   },
   "fd_50F6_06A6": {
    "seg": 20726,
@@ -9944,6 +10214,11 @@
    "off": 1838,
    "grounding": "o08_35F5_0050 (RandWorld): mov es,[S08 CONST word] ; mov es:[off]"
   },
+  "fd_50F6_0736": {
+   "seg": 20726,
+   "off": 1846,
+   "grounding": "o06_35F5_1B08: mov es,[CONST 84F8 = 50F6]; es:[0736] (S06:35F5 InitSimYard/yard sim unit)"
+  },
   "fd_50F6_073A": {
    "seg": 20726,
    "off": 1850,
@@ -9958,6 +10233,11 @@
    "seg": 20726,
    "off": 1984,
    "grounding": "S25:3BA4 DoAntMoveY:0051 push word es:[07C0] (CONST seg word 8946 = 50F6)"
+  },
+  "fd_50F6_07C2": {
+   "seg": 20726,
+   "off": 1986,
+   "grounding": "o06_35F5_0000: mov es,[CONST 84A4 = 50F6]; es:[07C2] (S06:35F5 InitSimYard/yard sim unit)"
   },
   "fd_50F6_07C8": {
    "seg": 20726,
@@ -10044,6 +10324,11 @@
    "off": 2704,
    "grounding": "CheatKeys (S07): mov es,[S07 CONST word]; es:[off]"
   },
+  "fd_50F6_0A9E": {
+   "seg": 20726,
+   "off": 2718,
+   "grounding": "o06_35F5_02B9: mov es,[CONST 84BC = 50F6]; es:[0A9E] (S06:35F5 InitSimYard/yard sim unit)"
+  },
   "fd_50F6_0AA0": {
    "seg": 20726,
    "off": 2720,
@@ -10068,6 +10353,11 @@
    "seg": 20726,
    "off": 2758,
    "grounding": "S25:3BA4 DoAntMoveY:02D0 mov es:[0AC6],dx (CONST seg word 8966 = 50F6)"
+  },
+  "fd_50F6_0AC8": {
+   "seg": 20726,
+   "off": 2760,
+   "grounding": "o06_35F5_02B9: mov es,[CONST 84C0 = 50F6]; es:[0AC8] (S06:35F5 InitSimYard/yard sim unit)"
   },
   "fd_50F6_0AD6": {
    "seg": 20726,
@@ -10108,6 +10398,11 @@
    "seg": 20726,
    "off": 2846,
    "grounding": "f_10F7_20BF (root:10F7): mov es,[CONST word = 50F6]; es:[..0B1E] far data reference"
+  },
+  "fd_50F6_0B20": {
+   "seg": 20726,
+   "off": 2848,
+   "grounding": "o06_35F5_020C: mov es,[CONST 84AA = 50F6]; es:[0B20] (S06:35F5 InitSimYard/yard sim unit)"
   },
   "fd_50F6_0B22": {
    "seg": 20726,
@@ -10179,6 +10474,11 @@
    "off": 3830,
    "grounding": "f_0894_000E: mov es,[8038] (50F6); mov es:[0EF6],ax(0)"
   },
+  "fd_50F6_0EFC": {
+   "seg": 20726,
+   "off": 3836,
+   "grounding": "f_0894_1E34: mov es,[809A] (50F6); add es:[0EFC],1; adc es:[0EFE],0 (long counter)"
+  },
   "fd_50F6_0F06": {
    "seg": 20726,
    "off": 3846,
@@ -10188,6 +10488,11 @@
    "seg": 20726,
    "off": 3848,
    "grounding": "o08_35F5_0050 (RandWorld): mov es,[S08 CONST word] ; mov es:[off]"
+  },
+  "fd_50F6_0F0C": {
+   "seg": 20726,
+   "off": 3852,
+   "grounding": "o06_35F5_1CEA: mov es,[CONST 8506 = 50F6]; es:[0F0C] (S06:35F5 InitSimYard/yard sim unit)"
   },
   "fd_50F6_0F0E": {
    "seg": 20726,
@@ -10238,6 +10543,11 @@
    "seg": 20726,
    "off": 3898,
    "grounding": "f_0BE8_08BD: mov es,[DS:8130] (CONST 50F6); mov bx,es:[0F3A] direction index"
+  },
+  "fd_50F6_0F3E": {
+   "seg": 20726,
+   "off": 3902,
+   "grounding": "f_0894_1E34: mov es,[8096] (50F6); add es:[0F3E],1; adc es:[0F40],0 (long counter)"
   },
   "fd_50F6_0F42": {
    "seg": 20726,
@@ -10319,6 +10629,11 @@
    "off": 4184,
    "grounding": "S25:3BA4 DoAntMoveY:068B mov word es:[1058],1 (CONST seg word 8982 = 50F6)"
   },
+  "fd_50F6_105C": {
+   "seg": 20726,
+   "off": 4188,
+   "grounding": "o06_35F5_0000: mov es,[CONST 8498 = 50F6]; es:[105C] (S06:35F5 InitSimYard/yard sim unit)"
+  },
   "fd_50F6_105E": {
    "seg": 20726,
    "off": 4190,
@@ -10328,6 +10643,11 @@
    "seg": 20726,
    "off": 4192,
    "grounding": "o08_35F5_0050 (RandWorld): mov es,[S08 CONST word] ; mov es:[off]"
+  },
+  "fd_50F6_1066": {
+   "seg": 20726,
+   "off": 4198,
+   "grounding": "o06_35F5_0000: mov es,[CONST 849A = 50F6]; es:[1066] (S06:35F5 InitSimYard/yard sim unit)"
   },
   "fd_50F6_1068": {
    "seg": 20726,
@@ -10339,25 +10659,65 @@
    "off": 4212,
    "grounding": "f_10F7_0B51 (root:10F7): mov es,[CONST word = 50F6]; es:[..1074] far data reference"
   },
+  "fd_50F6_107E": {
+   "seg": 20726,
+   "off": 4222,
+   "grounding": "o06_35F5_0000: mov es,[CONST 8460 = 50F6]; es:[107E] (S06:35F5 InitSimYard/yard sim unit)"
+  },
   "fd_50F6_1082": {
    "seg": 20726,
    "off": 4226,
    "grounding": "o08_35F5_0050 (RandWorld): mov es,[S08 CONST word] ; mov es:[off]"
+  },
+  "fd_50F6_108C": {
+   "seg": 20726,
+   "off": 4236,
+   "grounding": "o06_35F5_0000: mov es,[CONST 849C = 50F6]; es:[108C] (S06:35F5 InitSimYard/yard sim unit)"
   },
   "fd_50F6_108E": {
    "seg": 20726,
    "off": 4238,
    "grounding": "o08_35F5_0050 (RandWorld): mov es,[S08 CONST word] ; mov es:[off]"
   },
+  "fd_50F6_109C": {
+   "seg": 20726,
+   "off": 4252,
+   "grounding": "o06_35F5_0000: mov es,[CONST 8456 = 50F6]; es:[109C] (S06:35F5 InitSimYard/yard sim unit)"
+  },
+  "fd_50F6_10A0": {
+   "seg": 20726,
+   "off": 4256,
+   "grounding": "o06_35F5_0000: mov es,[CONST 847C = 50F6]; es:[10A0] (S06:35F5 InitSimYard/yard sim unit)"
+  },
   "fd_50F6_10A2": {
    "seg": 20726,
    "off": 4258,
    "grounding": "o08_35F5_0050 (RandWorld): mov es,[S08 CONST word] ; mov es:[off]"
   },
+  "fd_50F6_10AC": {
+   "seg": 20726,
+   "off": 4268,
+   "grounding": "o06_35F5_11FF: mov es,[CONST 84D8 = 50F6]; es:[10AC] (S06:35F5 InitSimYard/yard sim unit)"
+  },
+  "fd_50F6_10B0": {
+   "seg": 20726,
+   "off": 4272,
+   "grounding": "o06_35F5_0000: mov es,[CONST 846C = 50F6]; es:[10B0] (S06:35F5 InitSimYard/yard sim unit)"
+  },
   "fd_50F6_10B2": {
    "seg": 20726,
    "off": 4274,
    "grounding": "o08_35F5_0050 (RandWorld): mov es,[S08 CONST word] ; mov es:[off]"
+  },
+  "fd_50F6_10BA": {
+   "seg": 20726,
+   "off": 4282,
+   "grounding": "o06_35F5_11FF: mov es,[CONST 84DC = 50F6]; es:[10BA] (S06:35F5 InitSimYard/yard sim unit)"
+  },
+  "fd_50F6_10BC": {
+   "seg": 20726,
+   "off": 4284,
+   "grounding": "o06_35F5_0000: mov es,[CONST 84A2 = 50F6]; es:[10BC] (S06:35F5 InitSimYard/yard sim unit)"
   },
   "fd_50F6_10BE": {
    "seg": 20726,
@@ -10368,6 +10728,11 @@
    "seg": 20726,
    "off": 4288,
    "grounding": "o08_35F5_0050 (RandWorld): mov es,[S08 CONST word] ; mov es:[off]"
+  },
+  "fd_50F6_383A": {
+   "seg": 20726,
+   "off": 14394,
+   "grounding": "o06_35F5_11FF: mov es,[CONST 84E8 = 50F6]; es:[383A] (S06:35F5 InitSimYard/yard sim unit)"
   },
   "fd_50F6_3948": {
    "seg": 20726,
@@ -10419,10 +10784,20 @@
    "off": 15184,
    "grounding": "db module: mov es,[DS:89C4] (CONST word 50F6) ; es:[bx+3B50] handle array"
   },
+  "fd_50F6_46E2": {
+   "seg": 20726,
+   "off": 18146,
+   "grounding": "f_21FA_00EE/0144/0315: 6*index + 46E2, seg 50F6 -> colour table entries (6 bytes each)"
+  },
   "fd_50F6_47D8": {
    "seg": 20726,
    "off": 18392,
    "grounding": "f_2505_0453/04D7: mov es,[8A48]; cmp ax,es:[47D8] (window count bound)"
+  },
+  "fd_50F6_47DE": {
+   "seg": 20726,
+   "off": 18398,
+   "grounding": "f_21FA_08E2: mov es,[8A30]; les es:[bx+47DE] indexed by (win>>8)*4 -> far function pointer per window (draw hook), called with 1 / 2"
   },
   "fd_55B3_360C": {
    "seg": 21939,
@@ -10454,10 +10829,50 @@
    "off": 7090,
    "grounding": "f_14EE_04B5: mov al,[si+1BB2] (DS=DGROUP) byte tile per direction"
   },
+  "g_3DA0": {
+   "seg": 21939,
+   "off": 15776,
+   "grounding": "f_21FA_0002: mov es,[8A2C]; push es:[3DA0] (far-declared DGROUP word, first arg of (*[9134]))"
+  },
+  "g_3DB2": {
+   "seg": 21939,
+   "off": 15794,
+   "grounding": "f_21FA_077D: cmp word ptr [3DB2],140h (screen width test halves frame margin)"
+  },
+  "g_3DDC": {
+   "seg": 21939,
+   "off": 15836,
+   "grounding": "f_21FA_0002: mov al,[3DDC]; cbw; add ax,y (underline offset byte)"
+  },
+  "g_3DE0": {
+   "seg": 21939,
+   "off": 15840,
+   "grounding": "f_259D_02A5/02D8: or ax,[3DE0] with (char)[3DE4] -> GRectFill colour (Win16 win_DrawBitMapAtObjNum: monoPat | _foreColor)"
+  },
+  "g_3DE2": {
+   "seg": 21939,
+   "off": 15842,
+   "grounding": "f_21FA_0002: push word ptr [3DE2] as colour argument of (*[9134])"
+  },
+  "g_3DE4": {
+   "seg": 21939,
+   "off": 15844,
+   "grounding": "f_259D_02A5/02D8: mov al,[3DE4]; cbw; or ax,[3DE0] (fill pattern byte)"
+  },
   "g_5702": {
    "seg": 21939,
    "off": 22274,
    "grounding": "f_2505_036E: mov es,[8A46]; cmp word ptr es:[5702],8000"
+  },
+  "g_5A97": {
+   "seg": 21939,
+   "off": 23191,
+   "grounding": "f_259D_000E: cmp byte ptr [5A97],2 / test byte ptr [5A97],1 selects picture transfer path (display type byte)"
+  },
+  "g_5AAC": {
+   "seg": 21939,
+   "off": 23212,
+   "grounding": "f_21FA_08E2: les bx,[5AAC]; cmp es:[bx+2],8000h (far pointer)"
   },
   "g_6300": {
    "seg": 21939,
@@ -10468,6 +10883,31 @@
    "seg": 21939,
    "off": 35746,
    "grounding": "f_0093_008F: mov [8BA2],ax (DS=DGROUP)"
+  },
+  "g_9128": {
+   "seg": 21939,
+   "off": 37160,
+   "grounding": "f_21FA_00EE/0144/01D0: lcall [9128](fore*0x101, back*0x101, pat*0x101) attribute setter (far function pointer)"
+  },
+  "g_9134": {
+   "seg": 21939,
+   "off": 37172,
+   "grounding": "f_21FA_0002/0413: lcall [9134](a,x0,y0,x1,y1) line drawer (far function pointer)"
+  },
+  "g_9138": {
+   "seg": 21939,
+   "off": 37176,
+   "grounding": "f_21FA_01D0: lcall [9138](left,top,right,bottom,0) rect primitive (far function pointer)"
+  },
+  "g_9140": {
+   "seg": 21939,
+   "off": 37184,
+   "grounding": "f_259D_000E: lcall [9140] (x0,y0,x1,y1) -> byte size of screen area (far function pointer)"
+  },
+  "g_9148": {
+   "seg": 21939,
+   "off": 37192,
+   "grounding": "f_259D_000E: lcall [9148] (x0,y0,x1,y1,buf) screen area to buffer (far function pointer)"
   },
   "g_91A0": {
    "seg": 21939,
