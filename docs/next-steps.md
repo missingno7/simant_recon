@@ -16,9 +16,12 @@ Ordered by expected leverage on byte-exact coverage and on the final historical 
    a single reference; the runtime's initialised `_DATA` bytes are not yet compared
    (placements are derived, their data contributions still count as unresolved).
 3. **Large functions (C4203).** Some originals were globally optimised although MSC 6.00A's
-   DOS pass 2 gives up ("too large for global optimizations"), e.g. RandWorld in S08. Test
-   the high-capacity pass (`CL /B2 C2L.EXE`; the local 6.00A C2L.EXE is OS/2-bound): obtain
-   a DOS-runnable C2L or run the OS/2 pass under an OS/2-capable host.
+   pass 2 gives up ("too large for global optimizations"), e.g. RandWorld in S08.
+   Tested 2026-09-30: the retail 6.00A `C2L.EXE`, DOS-bound with BIND 1.30
+   (`C:	ools\msc-6.00a-c2l-bound`, profile `msc600a-c2l`, `/B2 C2L.EXE`), runs but still
+   reports C4203. Next hypothesis: the limit is memory-bound in real mode; the original was
+   probably compiled with OS/2-hosted protected-mode passes. Test by running the unbound
+   OS/2 passes under an OS/2-capable host (e.g. an OS/2 1.x VM or an NE/OS2 API emulator).
 3b. **MSC 6.00 vs 6.00A — DONE:** 6.00A (VER-2). Only `/Ol` strength reduction differs (rule VER-1). 15 loops with
    `dec [bp-n]; jnz` exist; find one in a compiler-generated function and reconstruct it.
 4. **Per-module option map.** Record, per frame, stack-check presence, pads, `/Oe`
