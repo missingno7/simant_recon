@@ -47,7 +47,7 @@ extern int far fd_50F6_0D72[];
 extern int far f_10F7_003A(int value);
 extern int far fd_50F6_04E2;
 extern void far o25_3BA4_0DFB(int list, int index);
-extern int far f_0EC1_02DD(int x, int y, int life);
+extern int far FindInBList(int x, int y, int life);
 void far o25_39C7_0F30(int index);
 extern long far fd_50F6_1000;
 extern int far f_0894_1E34(int a, int b);
@@ -141,7 +141,7 @@ void far o25_39C7_006D(int x, int y, int attr)
             o25_3BA4_0DFB(2, fd_50F6_0F18);
             return;
         }
-        if (caste > 0 && caste < 0x68 && (i = f_0EC1_02DD(x, y, caste)) >= 0) {
+        if (caste > 0 && caste < 0x68 && (i = FindInBList(x, y, caste)) >= 0) {
             if (caste > 0x5f)
                 o25_39C7_0F30(i);
             if (caste < 8) {
@@ -313,7 +313,7 @@ int far o25_39C7_0853(int x, int y, int attacker)
         o25_3BA4_0DFB(2, fd_50F6_0F18);
         return 1;
     }
-    if (ant > 0x87 && ant < 0xe8 && (index = f_0EC1_02DD(x, y, ant)) >= 0) {
+    if (ant > 0x87 && ant < 0xe8 && (index = FindInBList(x, y, ant)) >= 0) {
         winner = f_0894_1E34(ant, attacker);
         fd_3E1D_BCE1[index] = winner;
         fd_3E1D_8180[x][y] = fd_3E1D_BAEC[index] = (winner & 0x80) + 0x70;
@@ -449,17 +449,529 @@ void far o25_39C7_0AB0(int x, int y, int caste, int attr)
     }
 }
 
+extern long far f_0BE8_0B83(int x1, int y1, int x2, int y2);
+extern int far GetMap(int plane, int x, int y);
+extern int far f_10F7_2489(int plane, int x, int y);
+extern int far f_10F7_0731(int plane, int tile);
+extern int far f_10F7_07C7(int plane, int x, int y);
+extern int far f_10F7_04EC(int plane, int x, int y);
+extern int far fd_50F6_10C0;
+extern int far fd_50F6_10B2;
+
+int far o25_39C7_0CBD(int plane, int x, int y, int a, int b)
+{
+    int fallback;
+    int best;
+    int threshold;
+    int dir;
+    int nx;
+    int ny;
+    int tile;
+    int dis;
+
+    best = -1;
+    threshold = f_0BE8_0B83(x, y, a, b);
+    if (threshold <= 0)
+        goto done;
+    fallback = -2;
+    for (dir = 0; dir < 8; dir++) {
+        nx = fd_3D57_0000[dir] + x;
+        ny = fd_3D57_0008[dir] + y;
+        tile = GetMap(plane, nx, ny);
+        if (f_10F7_2489(plane, nx, ny) != 1)
+            continue;
+        if (f_10F7_0731(plane, tile) != 0)
+            continue;
+        dis = f_0BE8_0B83(nx, ny, a, b);
+        if (dis >= threshold)
+            continue;
+        if (f_10F7_07C7(plane, nx, ny) <= 0 && f_10F7_04EC(plane, nx, ny) == 1)
+            best = dir;
+        else
+            fallback = dir;
+        threshold = dis;
+    }
+    if (best < 0)
+        best = fallback;
+done:
+    return best;
+}
+
+/* SCAFFOLD BEGIN: o25_39C7_0DAF (QueenMoveB) best draft: the original keeps dir in memory [bp-2] (no SI use); MSC puts it in SI here */
+int far o25_39C7_0DAF(int x, int y, int dirHint)
+{
+    int newRow;
+    int newCol;
+    int opp;
+    int index;
+    int dir;
+
+    dir = o25_39C7_0CBD(2, x, y, fd_50F6_10B2, fd_50F6_10C0);
+    if (dir < 0) {
+        if (dir == -1)
+            return 0;
+        dir = SRand8();
+    }
+    if (y < 3) {
+        if (dir > 5)
+            return 0;
+        if (dir < 3)
+            return 0;
+    }
+    if (o25_39C7_105B(x, y, dir) != 0) {
+        opp = (dirHint ^ 0xfc) & 7;
+        newCol = x + fd_3D57_0000[opp];
+        newRow = y + fd_3D57_0008[opp];
+        fd_3E1D_8180[newCol][newRow] = 0;
+        index = FindInBList(newCol, newRow, (dirHint & 7) + 0x68);
+        if (index >= 0 && fd_3E1D_BAEC[index] != 0) {
+            fd_3E1D_B50D[index] = x;
+            fd_3E1D_B702[index] = y;
+            fd_3E1D_8180[x][y] = fd_3E1D_BAEC[index] = dir + 0x68;
+        }
+        return 1;
+    }
+    return 0;
+}
+/* SCAFFOLD END */
+
+extern void far f_0EC1_05D4(int x, int y, int type, int mode, int flag);
+
+void far o25_39C7_0EC2(int index)
+{
+    unsigned char type;
+    int direction;
+    int life;
+    int column;
+
+    type = fd_3E1D_BAEC[index];
+    direction = type & 7;
+    direction ^= 4;
+    life = fd_3E1D_B50D[index] + fd_3D57_0000[direction];
+    column = fd_3E1D_B702[index] + fd_3D57_0008[direction];
+    f_0EC1_05D4(life, column, type + 8, 9, 0);
+}
+
+void far o25_39C7_0F30(int index)
+{
+    fd_3E1D_8180[fd_3E1D_B50D[index]][fd_3E1D_B702[index]] = fd_3E1D_BAEC[index] = 0;
+}
+
+int far o25_39C7_0F76(int x, int y, int attr)
+{
+    int dir;
+    int newY;
+    int headMarker;
+    int newX;
+    unsigned char cell;
+
+    dir = attr & 7;
+    newY = fd_3D57_0008[dir];
+    newX = x + fd_3D57_0000[dir];
+    newY += y;
+    headMarker = attr - 8;
+    cell = fd_3E1D_8180[newX][newY];
+    if (cell == headMarker)
+        return 0;
+    if (FindInBList(newX, newY, headMarker) >= 0)
+        return 0;
+    return 1;
+}
+
+int far o25_39C7_0FE7(int x, int y, int attr)
+{
+    int dir;
+    int newY;
+    int tailMarker;
+    int newX;
+    unsigned char cell;
+
+    dir = (attr ^ 0xfc) & 7;
+    newY = fd_3D57_0008[dir];
+    newX = x + fd_3D57_0000[dir];
+    newY += y;
+    tailMarker = attr + 8;
+    cell = fd_3E1D_8180[newX][newY];
+    if (cell == tailMarker)
+        return 0;
+    if (FindInBList(newX, newY, tailMarker) >= 0)
+        return 0;
+    return 1;
+}
+
+int far o25_39C7_1C81(int x);
+extern int far fd_50F6_1044;
+extern void far o22_39C7_19E5(int x, int y, int dir);
+
+int far o25_39C7_105B(int x, int y, int dir)
+{
+    int dy;
+    int dx;
+
+    if (dir < 0)
+        return 0;
+    dx = fd_3D57_0000[dir] + x;
+    dy = fd_3D57_0008[dir] + y;
+    if (dx > 0x3f)
+        return 0;
+    if (dx < 0)
+        return 0;
+    if (dy > 0x3f)
+        return 0;
+    if (dy < 1)
+        return o25_39C7_1C81(x);
+    if (fd_3E1D_2180[dx][dy] >= 0x1c)
+        return 0;
+    if (fd_3E1D_8180[dx][dy] == 0xff && fd_50F6_1044 && fd_3E1D_B50D[fd_50F6_0F18] < 0x80) {
+        fd_3E1D_8180[x][y] = fd_3E1D_BAEC[fd_50F6_0F18] & 0xf8 | (unsigned char)dir;
+        o22_39C7_19E5(x, y, dir);
+    }
+    fd_3E1D_8180[dx][dy] = fd_3E1D_BAEC[fd_50F6_0F18] & 0xf8 | (unsigned char)dir;
+    fd_3E1D_8180[x][y] = 0;
+    fd_3E1D_B50D[fd_50F6_0F18] = (unsigned char)dx;
+    fd_3E1D_B702[fd_50F6_0F18] = (unsigned char)dy;
+    fd_3E1D_BAEC[fd_50F6_0F18] = fd_3E1D_8180[dx][dy];
+    return 1;
+}
+
+void far o25_39C7_13EF(int x, int y);
+
+/* SCAFFOLD BEGIN: DoNestingB best draft: 1 byte differs, "mov si,cx" (original) vs "mov si,bx" when loading the Tindex copy before f_1383_099B (register tie-break) */
+void far DoNestingB(int x, int y, int attr, int caste)
+{
+    int dir;
+    unsigned char food;
+    int load;
+    unsigned char cell;
+    int index;
+
+    dir = attr & 7;
+    load = fd_3E1D_BCE1[fd_50F6_0F18] & 7;
+    cell = fd_3E1D_8180[x][y];
+    food = fd_3E1D_BCE1[fd_50F6_0F18] >> 3;
+    switch (caste) {
+    case 1:
+        if (food == 0) {
+            if ((dir = f_0BE8_0D67(x, y, attr & 7)) < 0)
+                fd_3E1D_BCE1[fd_50F6_0F18] = load | 8;
+            break;
+        }
+        if (cell == 0 || cell > 8) {
+            fd_3E1D_BAEC[fd_50F6_0F18] += 8;
+            f_0BE8_0A5B(x, y, load);
+            fd_3E1D_8180[x][y] = fd_3E1D_BAEC[fd_50F6_0F18];
+            fd_3E1D_BCE1[fd_50F6_0F18] = 8;
+            fd_3E1D_B8F7[fd_50F6_0F18] = f_1383_099B(caste);
+        }
+        if ((dir = f_0BE8_0C0F(x, y, attr & 7)) != 0)
+            dir--;
+        else
+            dir = SRand8();
+        break;
+    case 2:
+        if (food != 0) {
+            if (SRand8() == 0)
+                fd_3E1D_BCE1[fd_50F6_0F18] = 0;
+            if ((dir = f_0BE8_0C0F(x, y, attr & 7)) != 0)
+                dir--;
+            else
+                dir = SRand8();
+            break;
+        }
+        if (cell != 0 && cell < 8) {
+            if ((index = FindInBList(x, y, cell)) >= 0) {
+                fd_3E1D_BAEC[index] = 0;
+                fd_3E1D_BAEC[fd_50F6_0F18] -= 8;
+                fd_3E1D_BCE1[fd_50F6_0F18] = cell;
+                return;
+            }
+        } else if (SRand1(100) > fd_50F6_10BE)
+            o25_39C7_13EF(x, y);
+        else if (SRand16() == 0)
+            fd_3E1D_B8F7[fd_50F6_0F18] = f_1383_099B(caste);
+        dir = attr & 7;
+        break;
+    default:
+        if (SRand1(100) > fd_50F6_10BE)
+            o25_39C7_13EF(x, y);
+        if (SRand8() == 0)
+            fd_3E1D_B8F7[fd_50F6_0F18] = f_1383_099B(caste);
+        break;
+    }
+    if (o25_39C7_105B(x, y, dir) == 0)
+        o25_39C7_105B(x, y, SRand8());
+}
+/* SCAFFOLD END */
+
+extern int far fd_50F6_0AEC[6];
+extern int far fd_50F6_0212;
+extern int far fd_3D57_0C18;
+
+void far o25_39C7_13EF(int x, int y)
+{
+    int threshold;
+    int level;
+
+    level = fd_3E1D_2180[x][y];
+    if (level < 0x10 || level > 0x13)
+        return;
+    if (level == 0x10)
+        fd_3E1D_2180[x][y] = SRand8();
+    else
+        fd_3E1D_2180[x][y]--;
+    if (fd_50F6_1050 > 0)
+        fd_50F6_1050--;
+    threshold = (fd_50F6_0330 + fd_50F6_0AEC[2]) >> 4;
+    fd_50F6_0212 += 5;
+    if (threshold < fd_50F6_0212) {
+        fd_50F6_0212 = 0;
+        if (fd_50F6_10BE < 100)
+            fd_50F6_10BE++;
+    }
+}
+
+void far o25_39C7_14A8(int x, int y)
+{
+    if (fd_3E1D_2180[x][y] == 0x10)
+        fd_3E1D_2180[x][y] = SRand8();
+    else
+        fd_3E1D_2180[x][y]--;
+    if (fd_50F6_1050 > 0)
+        fd_50F6_1050--;
+    fd_50F6_0212 += 5;
+    if ((fd_50F6_0330 + fd_50F6_0AEC[2]) >> 4 < fd_50F6_0212) {
+        fd_50F6_0212 = 0;
+        if (fd_50F6_10BE < 100)
+            fd_50F6_10BE++;
+    }
+}
+
+void far o25_39C7_154F(int x, int y)
+{
+    if (fd_3E1D_2180[x][y] == 0x10)
+        fd_3E1D_2180[x][y] = SRand8();
+    else
+        fd_3E1D_2180[x][y]--;
+    if (fd_50F6_1050 > 0)
+        fd_50F6_1050--;
+}
+
+void far o25_39C7_15B4(void)
+{
+    --fd_50F6_0212;
+    if (fd_50F6_0212 < 0) {
+        fd_50F6_0212 = fd_50F6_0330 >> 5;
+        if (fd_50F6_10BE > 0 && !fd_3D57_0C18)
+            --fd_50F6_10BE;
+    }
+}
+
+
+void far DoFoodInB(int x, int y, int attr)
+{
+    int nx;
+    int dir;
+    int newattr;
+    int ny;
+
+    if ((dir = f_0BE8_0D67(x, y, attr & 7)) >= 0 && SRand16() != 0) {
+        newattr = (attr & 0xf8) | dir;
+        fd_3E1D_BAEC[fd_50F6_0F18] = fd_3E1D_8180[x][y] = newattr;
+        nx = fd_3D57_0000[dir] + x;
+        ny = fd_3D57_0008[dir] + y;
+        if (nx > 0x3f || nx < 0 || ny > 0x3f)
+            return;
+        if (ny < 1) {
+            o25_39C7_1C81(x);
+            return;
+        }
+        if (fd_3E1D_2180[nx][ny] >= 0x30)
+            return;
+        fd_3E1D_8180[x][y] = 0;
+        if ((fd_3E1D_8180[nx][ny] & 0x80)
+            && (!f_10F7_003A(fd_3E1D_8180[nx][ny]) || fd_50F6_04E2 != 0)
+            && o25_39C7_0853(nx, ny, newattr))
+            return;
+        newattr = (fd_3E1D_BAEC[fd_50F6_0F18] & 0xf8) | dir;
+        fd_3E1D_BAEC[fd_50F6_0F18] = newattr;
+        fd_3E1D_8180[nx][ny] = newattr;
+        fd_3E1D_B50D[fd_50F6_0F18] = nx;
+        fd_3E1D_B702[fd_50F6_0F18] = ny;
+        return;
+    }
+    o25_39C7_090A(x, y);
+    if (SRand1(100) > fd_50F6_10BE)
+        o25_39C7_14A8(x, y);
+    fd_3E1D_B8F7[fd_50F6_0F18] = f_1383_099B((attr & 0x78) >> 3);
+}
+
+extern int far IsItDirt(int value);
+extern int far DigTileThemB(int x, int y);
+extern void far f_00DF_00E8(int sound, int a, int b);
+extern void far f_14EE_0C9C(int x, int y);
+extern int far SRand4(void);
+
+/* SCAFFOLD BEGIN: DoDigInB best draft: the original keeps the GetEnterDirB result in DI and copies it to [bp-4] after the y==0x3f test (mov [bp-4],di; mov cx,di); MSC keeps dir in memory here */
+void far DoDigInB(int x, int y, int attr, int caste)
+{
+    int dir;
+    int newattr;
+    int nx;
+    int ny;
+    int tile;
+
+    if (caste != 2 && caste != 6) {
+        fd_3E1D_B8F7[fd_50F6_0F18] = f_1383_099B(caste);
+        return;
+    }
+    if ((dir = f_0BE8_0D67(x, y, attr & 7)) < 0)
+        dir = SRand8();
+    newattr = (attr & 0xf8) | dir;
+    fd_3E1D_BAEC[fd_50F6_0F18] = fd_3E1D_8180[x][y] = newattr;
+    if (y == 0x3f) {
+        fd_3E1D_B8F7[fd_50F6_0F18] = f_1383_099B(caste);
+        return;
+    }
+    nx = fd_3D57_0000[dir] + x;
+    ny = fd_3D57_0008[dir] + y;
+    if (nx > 0x3f || nx < 0 || ny > 0x3f)
+        return;
+    if (ny < 1) {
+        o25_39C7_1C81(x);
+        return;
+    }
+    tile = fd_3E1D_2180[nx][ny];
+    if (tile >= 0x30)
+        return;
+    if (IsItDirt(tile)) {
+        if (!DigTileThemB(nx, ny)) {
+            fd_3E1D_B8F7[fd_50F6_0F18] = f_1383_099B(caste);
+            return;
+        }
+        fd_3E1D_BAEC[fd_50F6_0F18] += 0x18;
+        fd_3E1D_B8F7[fd_50F6_0F18] = 5;
+        f_00DF_00E8(0x11, 0, 0);
+    }
+    fd_3E1D_8180[x][y] = 0;
+    if ((fd_3E1D_8180[nx][ny] & 0x80)
+        && (!f_10F7_003A(fd_3E1D_8180[nx][ny]) || fd_50F6_04E2 != 0)
+        && o25_39C7_0853(nx, ny, newattr))
+        return;
+    newattr = (fd_3E1D_BAEC[fd_50F6_0F18] & 0xf8) | dir;
+    fd_3E1D_BAEC[fd_50F6_0F18] = newattr;
+    fd_3E1D_8180[nx][ny] = newattr;
+    fd_3E1D_B50D[fd_50F6_0F18] = nx;
+    fd_3E1D_B702[fd_50F6_0F18] = ny;
+    if (SRand64() > fd_50F6_10BE)
+        o25_39C7_13EF(nx, ny);
+    if (SRand4() == 0)
+        f_14EE_0C9C(nx, ny);
+}
+/* SCAFFOLD END */
+
+extern int far f_0894_21C5(int dir);
+extern unsigned char far fd_3E1D_4180[64][64];
+
+void far DoDigOutB(int x, int y, int attr)
+{
+    int ny;
+    int nx;
+    int newattr;
+    int dir;
+    int caste;
+
+    if ((dir = f_0BE8_0C0F(x, y, attr & 7)) > 0)
+        dir--;
+    else
+        dir = f_0894_21C5(attr & 7);
+    newattr = (attr & 0xf8) | dir;
+    fd_3E1D_BAEC[fd_50F6_0F18] = fd_3E1D_8180[x][y] = newattr;
+    nx = fd_3D57_0000[dir] + x;
+    ny = fd_3D57_0008[dir] + y;
+    if (nx < 0 || nx > 0x3f || ny > 0x3f)
+        return;
+    if (ny < 1) {
+        o25_39C7_1C81(x);
+        return;
+    }
+    if (fd_3E1D_2180[nx][ny] >= 0x30) {
+        fd_3E1D_4180[x][y]--;
+        caste = (attr & 0x78) >> 3;
+        if (caste == 5 || caste == 9) {
+            fd_3E1D_BAEC[fd_50F6_0F18] -= 0x18;
+            fd_3E1D_B8F7[fd_50F6_0F18] = 4;
+        }
+        if (caste == 2 || caste == 6)
+            fd_3E1D_B8F7[fd_50F6_0F18] = 4;
+        return;
+    }
+    if (IsItDirt(fd_3E1D_2180[nx][ny]))
+        return;
+    fd_3E1D_8180[x][y] = 0;
+    if ((fd_3E1D_8180[nx][ny] & 0x80)
+        && (!f_10F7_003A(fd_3E1D_8180[nx][ny]) || fd_50F6_04E2 != 0)
+        && o25_39C7_0853(nx, ny, newattr))
+        return;
+    fd_3E1D_BAEC[fd_50F6_0F18] = fd_3E1D_8180[nx][ny] = (fd_3E1D_BAEC[fd_50F6_0F18] & 0xf8) | dir;
+    fd_3E1D_B50D[fd_50F6_0F18] = nx;
+    fd_3E1D_B702[fd_50F6_0F18] = ny;
+    if (SRand64() > fd_50F6_10BE)
+        o25_39C7_13EF(nx, ny);
+}
+
+extern unsigned char far fd_3D57_0224[];
+extern void far MakeNewHoleB(int x);
+extern int far ExitHole(int hole, int x, int dir, int mode, int state);
+extern int far SRand2(void);
+
+int far o25_39C7_1BBB(int x, int y)
+{
+    int dir;
+
+    dir = fd_3E1D_BAEC[fd_50F6_0F18];
+    fd_3E1D_BAEC[fd_50F6_0F18] = 0;
+    if (fd_3D57_0224[x] == 0)
+        MakeNewHoleB(x);
+    if (ExitHole(fd_3D57_0224[x], x, SRand8() + (dir & 0xf8),
+                    fd_3E1D_B8F7[fd_50F6_0F18], fd_3E1D_BCE1[fd_50F6_0F18])) {
+        fd_3E1D_8180[x][y] = 0;
+        return 1;
+    }
+    fd_3E1D_BAEC[fd_50F6_0F18] = dir;
+    fd_3E1D_B8F7[fd_50F6_0F18] = 0;
+    return 0;
+}
+
+int far o25_39C7_1C81(int x)
+{
+    int raw;
+
+    if (fd_3E1D_2180[x][0] == 0x18) {
+        raw = fd_3E1D_BAEC[fd_50F6_0F18];
+        fd_3E1D_BAEC[fd_50F6_0F18] = 0;
+        if (fd_3D57_0224[x] == 0)
+            MakeNewHoleB(x);
+        if (ExitHole(fd_3D57_0224[x], x, SRand8() + (raw & 0xf8),
+                        fd_3E1D_B8F7[fd_50F6_0F18], fd_3E1D_BCE1[fd_50F6_0F18]) != 0) {
+            fd_3E1D_8180[x][1] = 0;
+            return 1;
+        }
+        fd_3E1D_BAEC[fd_50F6_0F18] = raw;
+        fd_3E1D_B8F7[fd_50F6_0F18] = 0;
+        return 0;
+    }
+    if (fd_3E1D_4180[x][0] != 0)
+        fd_3E1D_4180[x][0]--;
+    if (SRand2() != 0) {
+        if (x > 0 && IsItDirt(fd_3E1D_2180[x - 1][1]) != 0)
+            DigTileThemB(x - 1, 1);
+    } else {
+        if (x < 0x3f && IsItDirt(fd_3E1D_2180[x + 1][1]) != 0)
+            DigTileThemB(x + 1, 1);
+    }
+    o25_39C7_105B(x, 1, SRand8());
+    return 0;
+}
+
 /* SCAFFOLD BEGIN: unrecovered same-module callees */
-void far o25_39C7_0F30(int index) { }
-void far DoNestingB(int x, int y, int attr, int caste) { }
-void far DoFoodInB(int x, int y, int attr) { }
-void far DoDigInB(int x, int y, int attr, int caste) { }
-void far DoDigOutB(int x, int y, int attr) { }
-void far o25_39C7_154F(int x, int y) { }
-int far o25_39C7_105B(int x, int y, int dir) { return 0; }
-void far o25_39C7_0EC2(int index) { }
-int far o25_39C7_0DAF(int x, int y, int dirHint) { return 0; }
-int far o25_39C7_0FE7(int x, int y, int attr) { return 0; }
-int far o25_39C7_0F76(int x, int y, int attr) { return 0; }
-void far o25_39C7_15B4(void) { }
 /* SCAFFOLD END */

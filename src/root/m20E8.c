@@ -145,3 +145,311 @@ int far f_20E8_0141(void)
     }
     return 1;
 }
+
+extern char far * far f_2505_0006(int win);
+extern int g_5702[];
+extern void _fastcall f_2505_08EA(int win);
+extern void far f_1E57_0115(int win);
+extern void _fastcall f_2505_0545(int win);
+extern void far f_1E57_00B1(int win);
+extern void _fastcall f_2505_0831(int win);
+extern void far f_1E57_0174(int win);
+extern void _fastcall f_21FA_08E2(int win);
+extern void far f_1E57_0362(void);
+
+void far f_20E8_032F(int from, int to, int unused, int p0, int p1, int p2, int p3)
+{
+    char far *w;
+    struct Rect origin;
+    struct Rect rect;
+    char far *obj;
+
+    f_23AE_0377(from);
+    w = f_2505_0006(from);
+    origin = *(struct Rect far *)(((char far * far *)(w + 0x2c))[0] + 8);
+    rect = *(struct Rect far *)w;
+    if (g_5702[0] != 0)
+        f_2505_08EA(g_5702[0]);
+    if (*(int far *)(w + 0x1c) & 0x200) {
+        (*g_62E4)();
+        (*g_62F4)(from);
+        f_1E57_0115(from);
+        *(int far *)(w + 0x1c) &= ~0x200;
+        (*g_62E0)(from);
+    }
+    f_23AE_01DB(from);
+    f_23AE_0377(to);
+    w = f_2505_0006(to);
+    obj = ((char far * far *)(w + 0x2c))[0];
+    *(int far *)(obj + 8) = origin.left;
+    *(int far *)(obj + 0xa) = origin.top;
+    *(struct Rect far *)w = rect;
+    *(struct Rect far *)obj = *(struct Rect far *)w;
+    ((int far *)(w + 0x10))[0] = p0;
+    ((int far *)(w + 0x10))[1] = p1;
+    ((int far *)(w + 0x10))[2] = p2;
+    ((int far *)(w + 0x10))[3] = p3;
+    f_2505_0545(to);
+    (*g_62E0)(to);
+    *(int far *)(f_2505_0006(to) + 0x1c) |= 0x200;
+    if (g_5702[0] != (int)0x8000)
+        f_2505_08EA(g_5702[0]);
+    f_1E57_00B1(to);
+    f_2505_0831(to);
+    f_1E57_0174(to);
+    f_21FA_08E2(to);
+    (*g_62E8)();
+    f_23AE_01DB(to);
+    f_1E57_0362();
+}
+
+/* SCAFFOLD BEGIN: f_20E8_04B6 best draft.
+   Residue: (1) the first w = f_2505_0006(win) is kept in BX (dead-store
+   eliminated) where the original assigns SI/[bp-0Eh]; (2) near globals
+   g_3DB4/g_3DB2 are compared as cmp [g],reg while the original loads the
+   global into AX first (mov ax,[3DB4]; cmp [bp-12h],ax; jle) - 388 vs 383. */
+extern void _fastcall f_23AE_036F(int win);
+extern void _fastcall f_2505_0288(int obj, struct Rect far *rect);
+extern int near g_3DB4;
+extern int far fd_50F6_3942;
+extern int near g_3DB2;
+extern void far f_218D_042B(void);
+
+void far f_20E8_04B6(int win, int p0, int p1, int p2, int p3)
+{
+    char far *w;
+    int dx;
+    int dy;
+    struct Rect r;
+    int far *origin;
+
+    if (g_5702[0] != win) {
+        f_23AE_036F(win);
+        (*g_62E4)();
+        w = f_2505_0006(win);
+        ((int far *)(w + 0x10))[0] = p0;
+        ((int far *)(w + 0x10))[1] = p1;
+        ((int far *)(w + 0x10))[2] = p2;
+        ((int far *)(w + 0x10))[3] = p3;
+        f_2505_0545(win);
+        w = f_2505_0006(win);
+        if (*(int far *)(w + 0x1c) & 0x1000) {
+            dx = dy = 0;
+            f_2505_0288(win, &r);
+            if (g_3DB4 < r.bottom)
+                dy = g_3DB4 - r.bottom;
+            else if (r.top <= fd_50F6_3942)
+                dy = fd_50F6_3942 - r.top;
+            if (r.left < 0)
+                dx = -r.left;
+            else if (g_3DB2 <= r.right)
+                dx = g_3DB2 - r.right;
+            origin = (int far *)(((char far * far *)(w + 0x2c))[0] + 8);
+            fd_50F6_4892[win >> 8] = *(struct Rect far *)origin;
+            origin[0] += dx;
+            origin[1] += dy;
+            f_2505_0545(win);
+        }
+        (*g_62E0)(win);
+        *(int far *)(f_2505_0006(win) + 0x1c) |= 0x200;
+        if (g_5702[0] != (int)0x8000)
+            f_2505_08EA(g_5702[0]);
+        f_1E57_00B1(win);
+        f_2505_0831(win);
+        f_1E57_0174(win);
+        f_21FA_08E2(win);
+        (*g_62E8)();
+        f_1E57_0362();
+        f_23AE_01DB(win);
+    }
+    f_218D_042B();
+}
+
+/* SCAFFOLD END */
+
+extern void _fastcall f_21FA_0B4B(struct Rect far *rect);
+
+void _fastcall f_20E8_0635(int win)
+{
+    char far *w;
+    struct Rect r;
+
+    f_23AE_0377(win);
+    w = f_2505_0006(win);
+    if (*(int far *)(w + 0x1c) & 0x200) {
+        (*g_62E4)();
+        (*g_62F4)(win);
+        if (g_5702[0] == win) {
+            f_2505_08EA(win);
+            f_1E57_0115(win);
+            if (g_5702[0] != (int)0x8000)
+                f_2505_0831(g_5702[0]);
+        } else {
+            f_1E57_0115(win);
+        }
+        *(int far *)(w + 0x1c) &= ~0x200;
+        if (*(int far *)(w + 0x1c) & 0x1000)
+            *(struct Rect far *)(((char far * far *)(w + 0x2c))[0] + 8) = fd_50F6_4892[(char)(win >> 8)];
+        (*g_62E0)(win);
+        r = *(struct Rect far *)w;
+        f_23AE_01DB(win);
+        f_21FA_0B4B(&r);
+        (*g_62E8)();
+        f_1E57_0362();
+    } else {
+        f_23AE_01DB(win);
+    }
+}
+
+extern char far * _fastcall f_2505_0345(int win);
+
+void _fastcall f_20E8_0725(int win)
+{
+    int top;
+    int flag;
+
+    top = g_5702[0];
+    if (top != win) {
+        if (top != (int)0x8000) {
+            f_23AE_0377(top);
+            flag = *(int far *)(f_2505_0345(top) + 0x1c) & 1;
+            f_23AE_01DB(top);
+            if (flag)
+                f_20E8_0635(top);
+        }
+        f_20E8_04B6(win);
+    }
+}
+
+extern void far f_1E57_0052(int win);
+extern void _fastcall f_21FA_0AD2(struct Rect far *rect);
+
+void _fastcall f_20E8_0776(int win)
+{
+    int flag;
+    char far *w;
+    struct Rect r;
+
+    f_23AE_0377(win);
+    f_2505_0006(win);
+    flag = *(int far *)(f_2505_0345(g_5702[0]) + 0x1c) & 1;
+    f_23AE_01DB(win);
+    (*g_62E4)();
+    if (g_5702[0] == win) {
+        if (g_5702[1] != (int)0x8000) {
+            if (flag) {
+                f_20E8_0635(g_5702[0]);
+                return;
+            }
+            f_1E57_0052(win);
+            if (g_5702[0] != win) {
+                f_2505_08EA(win);
+                f_2505_0831(g_5702[0]);
+            }
+        }
+    } else {
+        f_1E57_0052(win);
+    }
+    f_23AE_0377(win);
+    w = f_2505_0006(win);
+    *(int far *)(w + 0x1c) |= 0x200;
+    r = *(struct Rect far *)w;
+    f_23AE_01DB(win);
+    (*g_62E0)(win);
+    f_21FA_0AD2(&r);
+    (*g_62E8)();
+    f_1E57_0362();
+}
+
+void _fastcall f_20E8_0862(int win, void (far *hook)(int phase))
+{
+    fd_50F6_47DE[win >> 8] = hook;
+}
+
+void _fastcall f_20E8_088B(void (far *hook)(int win))
+{
+    g_62E0 = hook;
+}
+
+void _fastcall f_20E8_089F(void (far *hook)(int win))
+{
+    g_62F4 = hook;
+}
+
+void _fastcall f_20E8_08B3(void (far *hook)(void))
+{
+    g_62E4 = hook;
+}
+
+void _fastcall f_20E8_08C7(void (far *hook)(void))
+{
+    g_62E8 = hook;
+}
+
+void _fastcall f_20E8_08DB(void (far *hook)(void))
+{
+    g_62EC = hook;
+}
+
+void _fastcall f_20E8_08EF(void (far *hook)(void))
+{
+    g_62F0 = hook;
+}
+
+/* SCAFFOLD BEGIN: f_20E8_0903 best draft.
+   Residue: loops 2/3 index with DI=i*2 and base in BX (les bx,[ptr];
+   mov ax,es:[bx+di]); the original moves the index to BX and loads the far
+   base into DI (mov bx,di; les di,[ptr]; ...) with a dead les bx,[bp-20h]
+   before rect[i]-o[i]: 258 vs 286 bytes. */
+extern int far * _fastcall f_2505_02D7(int obj);
+
+void _fastcall f_20E8_0903(int obj, int far *rect)
+{
+    int j;
+    int win;
+    int far *o;
+    int far *origin;
+    int far *mode;
+    int far *ref;
+    int i;
+
+    win = obj & 0xff00;
+    f_23AE_0377(win);
+    o = f_2505_02D7(obj);
+    origin = o + 4;
+    mode = o + 12;
+    ref = o + 8;
+    for (j = 0; j < 4; j++)
+        origin[j] = 0;
+    f_2505_0545(win);
+    for (i = 0; i < 4; i++) {
+        if (mode[i] && mode[i] != 5 && ref[i] == obj)
+            origin[i] = 0;
+        else
+            origin[i] = rect[i] - o[i];
+    }
+    f_2505_0545(win);
+    for (i = 0; i < 4; i++) {
+        if (mode[i] && mode[i] != 5 && ref[i] == obj)
+            origin[i] = rect[i] - o[i];
+    }
+    f_2505_0545(win);
+    f_23AE_01DB(win);
+}
+
+/* SCAFFOLD END */
+
+extern int far f_2505_036E(void);
+
+void far f_20E8_0A21(void)
+{
+    int top;
+
+    top = g_5702[0];
+    if (f_2505_036E()) {
+        f_23AE_0377(top);
+        if (*(int far *)(f_2505_0345(top) + 0x1c) & 1)
+            f_20E8_0635(top);
+        f_23AE_01DB(top);
+    }
+}

@@ -4,19 +4,19 @@
  "oracle_sha256": "aa0596c6766322a8229ee3c36e57048c92adc82d50fbe2ef37afb8b85fcf4f11",
  "known_functions": 1590,
  "known_game_functions": 1487,
- "exact_c_functions": 377,
- "exact_c_bytes": 59405,
+ "exact_c_functions": 401,
+ "exact_c_bytes": 62950,
  "exact_asm_functions": 2,
  "exact_asm_bytes": 25,
  "historical_runtime_bytes_accepted": 12330,
  "historical_runtime_members_accepted": 87,
  "historical_runtime_bytes_located_unaccepted": 1048,
  "rtlink_manager_bytes_unaccepted": 17065,
- "data_bytes_accepted": 5980,
+ "data_bytes_accepted": 6000,
  "bss_bytes_placed": 261,
  "game_code_span_bytes": 304748,
- "unresolved_code_bytes": 245318,
- "unresolved_data_bytes": 129540,
+ "unresolved_code_bytes": 241773,
+ "unresolved_data_bytes": 129520,
  "overlay_coverage": {
   "S00": {
    "bytes": 19696,
@@ -120,18 +120,23 @@
   },
   "S25": {
    "bytes": 14592,
-   "claimed": 6206
+   "claimed": 8583
   },
   "S26": {
    "bytes": 2240,
    "claimed": 0
   }
  },
- "root_claimed_bytes": 43567,
- "scaffold_functions": 56,
- "exact_translation_units": 8,
+ "root_claimed_bytes": 44735,
+ "scaffold_functions": 49,
+ "exact_translation_units": 7,
  "codegen_rules_reproduced": 10,
  "whole_executable": "NOT_BUILT (no historical link yet; see docs/next-steps.md)",
- "validation": "PASS",
- "failures": []
+ "validation": "FAIL",
+ "failures": [
+  "S06:35F5: ['FootFall'] ",
+  "root:0894: ['DoSmells', 'LostHeadA', 'GoInNest', 'StartFightA'] ",
+  "root:0BE8: ['AddWater'] ",
+  "root:0F3F: ['CheckNestFightR', 'QueenMoveR', 'LostHeadR', 'LostTailR', 'GetOutR'] "
+ ]
 }

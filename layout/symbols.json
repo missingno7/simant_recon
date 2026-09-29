@@ -109,6 +109,18 @@
     }
    ]
   },
+  "BuildAntListA": {
+   "unit": "root",
+   "seg": 3777,
+   "off": 1817,
+   "grounding": "inventory:far_call",
+   "history": [
+    {
+     "was": "f_0EC1_0719",
+     "why": "Win16 unit SIMONE_MODULE 2A16..3046 (CompactListA..ClearListR, 17 members) aligns 1:1 with DOS module 0EC1 (17 functions); anchored by registered AddAntToAList/BList/RList at positions 11-13 and xver ExitHole/BuildAntListA MEDIUM; bodies match (list arrays, sizes)"
+    }
+   ]
+  },
   "CanBeHouseHole": {
    "unit": "root",
    "seg": 5358,
@@ -142,6 +154,30 @@
     {
      "was": "f_0F3F_08F6",
      "why": "Win16 MAPSYM member list of the matching unit aligns 1:1 in order and count with the DOS module (already-named members fall at their positions); bodies near-identical (worker simA)"
+    }
+   ]
+  },
+  "ClearListB": {
+   "unit": "root",
+   "seg": 3777,
+   "off": 1985,
+   "grounding": "inventory:far_call",
+   "history": [
+    {
+     "was": "f_0EC1_07C1",
+     "why": "Win16 unit SIMONE_MODULE 2A16..3046 (CompactListA..ClearListR, 17 members) aligns 1:1 with DOS module 0EC1 (17 functions); anchored by registered AddAntToAList/BList/RList at positions 11-13 and xver ExitHole/BuildAntListA MEDIUM; bodies match (list arrays, sizes)"
+    }
+   ]
+  },
+  "ClearListR": {
+   "unit": "root",
+   "seg": 3777,
+   "off": 2004,
+   "grounding": "inventory:far_call",
+   "history": [
+    {
+     "was": "f_0EC1_07D4",
+     "why": "Win16 unit SIMONE_MODULE 2A16..3046 (CompactListA..ClearListR, 17 members) aligns 1:1 with DOS module 0EC1 (17 functions); anchored by registered AddAntToAList/BList/RList at positions 11-13 and xver ExitHole/BuildAntListA MEDIUM; bodies match (list arrays, sizes)"
     }
    ]
   },
@@ -1009,6 +1045,30 @@
     }
    ]
   },
+  "DrownBList": {
+   "unit": "root",
+   "seg": 3777,
+   "off": 891,
+   "grounding": "inventory:far_call",
+   "history": [
+    {
+     "was": "f_0EC1_037B",
+     "why": "Win16 unit SIMONE_MODULE 2A16..3046 (CompactListA..ClearListR, 17 members) aligns 1:1 with DOS module 0EC1 (17 functions); anchored by registered AddAntToAList/BList/RList at positions 11-13 and xver ExitHole/BuildAntListA MEDIUM; bodies match (list arrays, sizes)"
+    }
+   ]
+  },
+  "DrownRList": {
+   "unit": "root",
+   "seg": 3777,
+   "off": 985,
+   "grounding": "inventory:far_call",
+   "history": [
+    {
+     "was": "f_0EC1_03D9",
+     "why": "Win16 unit SIMONE_MODULE 2A16..3046 (CompactListA..ClearListR, 17 members) aligns 1:1 with DOS module 0EC1 (17 functions); anchored by registered AddAntToAList/BList/RList at positions 11-13 and xver ExitHole/BuildAntListA MEDIUM; bodies match (list arrays, sizes)"
+    }
+   ]
+  },
   "EatFoodR": {
    "unit": "root",
    "seg": 3903,
@@ -1078,6 +1138,18 @@
     {
      "was": "f_10F7_0C11",
      "why": "worker sim10F7: Win16 counterpart body matched while recovering the byte-exact DOS function"
+    }
+   ]
+  },
+  "ExitHole": {
+   "unit": "root",
+   "seg": 3777,
+   "off": 1079,
+   "grounding": "inventory:far_call",
+   "history": [
+    {
+     "was": "f_0EC1_0437",
+     "why": "Win16 unit SIMONE_MODULE 2A16..3046 (CompactListA..ClearListR, 17 members) aligns 1:1 with DOS module 0EC1 (17 functions); anchored by registered AddAntToAList/BList/RList at positions 11-13 and xver ExitHole/BuildAntListA MEDIUM; bodies match (list arrays, sizes)"
     }
    ]
   },
@@ -1294,6 +1366,18 @@
     {
      "was": "f_0BE8_0CBB",
      "why": "dig worker: DOS body byte-exact and structurally identical to the Win16 function of this name (same statements, same data), plus module neighbourhood"
+    }
+   ]
+  },
+  "GetFromAlist": {
+   "unit": "root",
+   "seg": 3777,
+   "off": 1742,
+   "grounding": "reviewed: prologue scan in unreached gap; descent ends in a return; no references found (unreferenced or indirect)",
+   "history": [
+    {
+     "was": "f_0EC1_06CE",
+     "why": "Win16 unit SIMONE_MODULE 2A16..3046 (CompactListA..ClearListR, 17 members) aligns 1:1 with DOS module 0EC1 (17 functions); anchored by registered AddAntToAList/BList/RList at positions 11-13 and xver ExitHole/BuildAntListA MEDIUM; bodies match (list arrays, sizes)"
     }
    ]
   },
@@ -4163,24 +4247,6 @@
    "off": 1630,
    "grounding": "inventory:push_cs_call"
   },
-  "f_0EC1_037B": {
-   "unit": "root",
-   "seg": 3777,
-   "off": 891,
-   "grounding": "inventory:far_call"
-  },
-  "f_0EC1_03D9": {
-   "unit": "root",
-   "seg": 3777,
-   "off": 985,
-   "grounding": "inventory:far_call"
-  },
-  "f_0EC1_0437": {
-   "unit": "root",
-   "seg": 3777,
-   "off": 1079,
-   "grounding": "inventory:far_call"
-  },
   "f_0EC1_0557": {
    "unit": "root",
    "seg": 3777,
@@ -4198,30 +4264,6 @@
    "seg": 3777,
    "off": 1617,
    "alias_of": "AddAntToRList"
-  },
-  "f_0EC1_06CE": {
-   "unit": "root",
-   "seg": 3777,
-   "off": 1742,
-   "grounding": "reviewed: prologue scan in unreached gap; descent ends in a return; no references found (unreferenced or indirect)"
-  },
-  "f_0EC1_0719": {
-   "unit": "root",
-   "seg": 3777,
-   "off": 1817,
-   "grounding": "inventory:far_call"
-  },
-  "f_0EC1_07C1": {
-   "unit": "root",
-   "seg": 3777,
-   "off": 1985,
-   "grounding": "inventory:far_call"
-  },
-  "f_0EC1_07D4": {
-   "unit": "root",
-   "seg": 3777,
-   "off": 2004,
-   "grounding": "inventory:far_call"
   },
   "f_0F3F_0008": {
    "unit": "root",
@@ -13379,6 +13421,16 @@
    "off": 18578,
    "grounding": "f_23AE_01DB: es=[8A3A] (seg 50F6), lea di,[win*8+4892]; 8-byte rect saved per window on discard"
   },
+  "fd_50F6_49FA": {
+   "seg": 20726,
+   "off": 18938,
+   "grounding": "f_218D_02D5: f_1B73_032E(50F6:49FA) fills a 16-byte event record; +0Ch (4A06) is the event code (0xFF00, 0xFBxx, 0xF081..F087, object ids)"
+  },
+  "fd_50F6_4A0A": {
+   "seg": 20726,
+   "off": 18954,
+   "grounding": "f_218D_000C: rep movsw 8 words 50F6:49FA -> 4A0A (previous click event for double-click detection; +0Ch=4A16, +6=4A10)"
+  },
   "fd_55B3_360C": {
    "seg": 21939,
    "off": 13836,
@@ -13458,6 +13510,11 @@
    "seg": 21939,
    "off": 23191,
    "grounding": "f_259D_000E: cmp byte ptr [5A97],2 / test byte ptr [5A97],1 selects picture transfer path (display type byte)"
+  },
+  "g_5A9C": {
+   "seg": 21939,
+   "off": 23196,
+   "grounding": "f_218D_01F6: f_1E57_0A9C(DGROUP:5A9C) far pointer argument (mov cx,SEG; push)"
   },
   "g_5AAC": {
    "seg": 21939,
@@ -14718,4 +14775,23 @@
    "off": 6130,
    "library": "llibcr.lib",
    "member": "write.asm",
- 
+   "module_index": 44
+  },
+  "flsall": {
+   "unit": "root",
+   "seg": 10740,
+   "off": 3834,
+   "library": "llibcr.lib",
+   "member": "fflush.c",
+   "module_index": 33
+  },
+  "store_dt": {
+   "unit": "root",
+   "seg": 10740,
+   "off": 8102,
+   "library": "llibcr.lib",
+   "member": "asctime.c",
+   "module_index": 190
+  }
+ }
+}
