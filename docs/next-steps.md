@@ -10,11 +10,13 @@ Ordered by expected leverage on byte-exact coverage and on the final historical 
    `reloc_order: PENDING_RTLINK_MODEL` (3 claims today) and no whole-image order can be
    asserted. Get RTLink itself if at all possible (Pocket Soft RTLink/Plus 3.x/4.x, 1990–91):
    the historical link would then answer the question directly.
-2. **Runtime acceptance.** 77 `LLIBCR` and 24 `LIBH` members are located in library order
-   at `0x29F5C–0x2CFB0` with fixup fields wildcarded. Add a `promote_runtime` path that
-   binds each member's fixups symbolically (they are complete historical OMF members) and
-   accepts them as HISTORICAL_RUNTIME. That removes ~13.4 KB of debt and names ~150
-   runtime entry points for every caller.
+2. **Runtime acceptance — DONE (2026-09-29).** `tools/runtime.py accept`: 85 complete
+   MSC 6.00 `LLIBCR`/`LIBH` members (12,308 bytes) bind exactly and are owned as
+   HISTORICAL_RUNTIME; `validate.py` re-binds them. Binding corrected two locator errors
+   (the member at 0x2CD20 is `alrem`, not `aldiv`; LIBH holds near and far helpers under
+   the same module names). Remaining: 40 DGROUP placements of runtime data are anchored by
+   a single reference; the runtime's initialised `_DATA` bytes are not yet compared
+   (placements are derived, their data contributions still count as unresolved).
 3. **MSC 6.00 vs 6.00A.** Only `/Ol` strength reduction differs (rule VER-1). 15 loops with
    `dec [bp-n]; jnz` exist; find one in a compiler-generated function and reconstruct it.
 4. **Per-module option map.** Record, per frame, stack-check presence, pads, `/Oe`

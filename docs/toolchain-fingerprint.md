@@ -14,10 +14,10 @@ re-executed by `python tools/validate.py`.
 * **MSC 5.10 and QuickC 2.50 are ruled out for this code** (rule FRAME-1): both omit
   `mov sp,bp` in a stack-checked frame without locals; the original and MSC 6.00/6.00A
   emit it. QuickC also emits `mov ax,0` for zero locals under default options.
-* **Runtime: MSC 6.00(A)-generation large-model library.** 77 `LLIBCR.LIB` code
-  contributions (11,671 bytes) and 24 `LIBH.LIB` helpers (1,707 bytes) are located in
-  library order at `0x29F5C–0x2CFB0` (fixup fields wildcarded; binding not yet
-  accepted). MSC 5.10 `LLIBCR`/`LIBH`: 26/0 hits. No floating-point library code.
+* **Runtime: MSC 6.00(A)-generation large-model library.** 85 complete members of
+  `LLIBCR.LIB`/`LIBH.LIB` (12,308 bytes, library order at `0x29F5C–0x2CFB0`) bind
+  exactly — every fixup resolved symbolically — and are accepted as historical runtime
+  (`tools/runtime.py`, `layout/manifest.json` "runtime"). MSC 5.10 `LLIBCR`/`LIBH`: 26/0 hits. No floating-point library code.
   `MS Run-Time Library - Copyright (c) 1990, Microsoft Corp` in DGROUP.
 * **Library identity is non-discriminating between 6.00, 6.00A and QuickC 2.50/2.51**:
   their `LLIBCR.LIB` files are byte-identical (SHA-256 `3d0c6ae9…c884`; the 6.00A
