@@ -61,13 +61,21 @@ EMS/XMS/conventional cache messages, and the vector mechanism below.
 
 MZ relocation entries follow link order, and each entry's segment field is the frame of
 the module containing the site, so the table independently confirms module boundaries.
-*Within* a module the order is **not** MSC's descending FIXUPP order: entries are mostly
-grouped by target symbol (e.g. RNG module: `srand`, then every `__aFchkstk` site ascending,
-then `rand`, then `TickCount`). No single program-wide target order exists (208 conflicts),
-so the rule is open (probably per-object symbol order inside RTLink). The acceptance gate
-therefore requires the exact relocation **set** per extent and records the order as a
-separate proof level (`EXACT` or `PENDING_RTLINK_MODEL`); whole-image acceptance will
-require the exact order.
+
+Within a module RTLink **groups relocations by target symbol**:
+* inside a group the object's FIXUPP order is preserved (verified on all 85 authentic
+  runtime members and every accepted game claim);
+* the groups follow **one program-wide symbol order** (988 symbols, ~51,800 pairwise
+  constraints, 349 conflicts — all between `DGROUP`/segment fixups or aliases such as
+  `__fmemcpy`/`_memcpy`, plus rare same-bucket pairs).
+The global order is not address order, first-reference order in placement order, EXTDEF
+order, alphabetical order or a simple name hash (tested on the runtime's true names). It is
+most likely symbol-table insertion order from reading objects in *command-line* order,
+which only a historical link can reproduce.
+
+The gate therefore requires the exact relocation set and the exact within-group order
+(an object property) and records `reloc_order: GROUPED` when only the between-group order
+(a linker property) differs; whole-image acceptance will require the full order.
 
 ## The common tail
 

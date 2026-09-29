@@ -107,6 +107,7 @@ def verify_all():
         body = bytearray(obj.segments[seg])
         reasons = []
         cand_relocs = []
+        rkey = {}
         for f in obj.linker_fixups:
             if f["segment"] != seg:
                 continue
@@ -163,21 +164,28 @@ def verify_all():
                         derived[f"frame:{tn}"][fr].append((m["member"], site))
                     struct.pack_into("<H", body, f["offset"] + 2, fr)
                     cand_relocs.append(site + 2)
+                    rkey[site + 2] = f"{tk}:{tn}"
             elif loc == "base16":
                 fr = frame if frame is not None else oracle_word(site)
                 if frame is None:
                     derived[f"frame:{tn}"][fr].append((m["member"], site))
                 struct.pack_into("<H", body, f["offset"], fr)
                 cand_relocs.append(site)
+                rkey[site] = f"{tk}:{tn}"
             else:
                 reasons.append(f"unsupported {loc}")
         orig = x.image[start:start + len(body)]
         if bytes(body) != orig:
             n = next(i for i in range(len(body)) if body[i] != orig[i])
             reasons.append(f"bytes differ at +{n:#x}")
-        exp = sorted(a for a in root_relocs if start <= a < start + len(body))
+        exp_ordered = [sg * 16 + o for sg, o in x.relocs if start <= sg * 16 + o < start + len(body)]
+        exp = sorted(exp_ordered)
         if exp != sorted(cand_relocs):
             reasons.append(f"relocation set differs ({len(cand_relocs)} vs {len(exp)})")
+        else:
+            for g in set(rkey.values()):
+                if [a for a in exp_ordered if rkey.get(a) == g] != [a for a in cand_relocs if rkey.get(a) == g]:
+                    reasons.append(f"relocation order inside target group {g} differs from the object")
         row = {"library": m["library"], "member": m["member"], "module_index": m["module_index"],
                "linear": start, "size": len(body), "segment": seg, "member_sha256": sha(blob), "reasons": reasons,
                "publics": sorted(p["name"] for p in obj.publics if p["segment"] == seg),

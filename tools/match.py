@@ -93,7 +93,7 @@ class MatchResult:
     fixups: list = field(default_factory=list)
     data_checks: list = field(default_factory=list)
     unbound: list = field(default_factory=list)
-    reloc_order: str = "EXACT"      # EXACT | PENDING_RTLINK_MODEL (set exact, order differs)
+    reloc_order: str = "EXACT"      # EXACT | GROUPED (object order exact per target; group order = link)
 
     def summary(self) -> str:
         if self.exact:
@@ -179,6 +179,7 @@ class Binder:
         orig = data[t.linear - base:t.linear - base + t.size]
         res.original = bytes(orig)
         cand_relocs = []
+        reloc_key = {}
         delta = self.own_segment_delta(pub_off)
         for f in obj.linker_fixups:
             if f["segment"] != self.segment:
@@ -240,10 +241,12 @@ class Binder:
                     frame = seg if kind != "group" else DGROUP_SEG
                     struct.pack_into("<H", payload, rel + 2, frame)
                     cand_relocs.append(t.linear + rel + 2)
+                    reloc_key[t.linear + rel + 2] = f"{f['target_kind']}:{f['target']}"
             elif loc == "base16":
                 frame = seg if kind != "group" else DGROUP_SEG
                 struct.pack_into("<H", payload, rel, frame)
                 cand_relocs.append(t.linear + rel)
+                reloc_key[t.linear + rel] = f"{f['target_kind']}:{f['target']}"
             else:
                 res.unbound.append(f"unsupported fixup location {loc}")
                 continue
@@ -263,10 +266,18 @@ class Binder:
         if sorted(exp) != sorted(cand_relocs):
             res.reasons.append(f"relocation set differs ({len(cand_relocs)} vs {len(exp)})")
         elif exp != cand_relocs:
-            # Relocation *order* inside RTLink output is a module-level property whose
-            # generating rule is still open (docs/exe-format.md).  The set is a hard gate;
-            # the order is recorded as a separate proof level and enforced at image level.
-            res.reloc_order = "PENDING_RTLINK_MODEL"
+            # RTLink groups a module's relocations by target symbol in a program-wide symbol
+            # order (a linker property, docs/exe-format.md) and keeps the object's FIXUPP order
+            # inside each group (an object property).  The object part is checked here; the
+            # group order is left to the historical link.
+            groups = sorted(set(reloc_key.values()))
+            within_ok = all([a for a in exp if reloc_key.get(a) == g] == [a for a in cand_relocs if reloc_key.get(a) == g]
+                            for g in groups)
+            if within_ok:
+                res.reloc_order = "GROUPED"
+            else:
+                res.reloc_order = "WITHIN_GROUP_MISMATCH"
+                res.reasons.append("relocation order inside a target group differs from the object's FIXUPP order")
         res.exact = not res.reasons
         return res
 

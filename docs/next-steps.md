@@ -2,14 +2,12 @@
 
 Ordered by expected leverage on byte-exact coverage and on the final historical link.
 
-1. **RTLink relocation-order model.** Within a module, relocations are grouped by
-   target, not MSC's descending FIXUPP order, and no program-wide target order exists.
-   With complete TUs (0093 has 24 relocations of 5 targets) test hypotheses such as
-   "per-object EXTDEF order", "order of first reference in the object's FIXUPP stream",
-   "linker symbol-table hash order". Until solved, function claims carry
-   `reloc_order: PENDING_RTLINK_MODEL` (3 claims today) and no whole-image order can be
-   asserted. Get RTLink itself if at all possible (Pocket Soft RTLink/Plus 3.x/4.x, 1990–91):
-   the historical link would then answer the question directly.
+1. **RTLink relocation order — partly solved.** Relocations are grouped by target symbol
+   (object FIXUPP order inside a group, now a hard gate) in one program-wide symbol order
+   (see docs/exe-format.md). The global order is not derivable from the image alone; it
+   needs RTLink (Pocket Soft RTLink/Plus 1990–91) or its symbol-table rule. A candidate
+   copy exists in a third-party GitHub repository (Clipper 5 `RTLINK.EXE`); it was not
+   downloaded because its provenance is unverified — the user decides.
 2. **Runtime acceptance — DONE (2026-09-29).** `tools/runtime.py accept`: 85 complete
    MSC 6.00 `LLIBCR`/`LIBH` members (12,308 bytes) bind exactly and are owned as
    HISTORICAL_RUNTIME; `validate.py` re-binds them. Binding corrected two locator errors
