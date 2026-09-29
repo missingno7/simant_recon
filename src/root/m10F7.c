@@ -85,6 +85,9 @@ void far f_00DF_00E8(int, int, int);
 void far f_0250_000E(int, int, int);
 int far f_0894_2423(int);
 void far f_0250_0E91(void);
+void far o22_39C7_07FD(int, int, int);
+int far f_10F7_2548(int, int, int);
+void far f_10F7_1DD3(int);
 int far f_14EE_0002(int, int);
 void far o25_3BA4_1035(void);
 void far f_015B_06A2(void);
@@ -569,25 +572,172 @@ void far f_10F7_0C11(int a, int b, int c)
         f_00DF_00E8(1, 0, 0x7e);
 }
 
-/* SCAFFOLD BEGIN: f_10F7_0CA8 unrecovered; stub only reproduces its CONST word order. */
-int far f_10F7_0CA8(int a, int b, int c)
+/* SCAFFOLD BEGIN: f_10F7_0CA8 (DoLifeExchange-like) best draft, NOT exact
+ * (opcode similarity 0.961, length 1782 vs 1774).  Residue: /Oe register
+ * choice (life -> SI instead of DI, region-1 type value not in DI), home
+ * permutation of newLife/caste (-8/-2 swapped), block-scoped c gets no
+ * [bp-3A] slot.  Written with goto fail/done: with plain returns MSC emits
+ * C4203 "function too large for global optimizations". */
+int far f_10F7_0CA8(int plane, int x, int y)
 {
-    volatile int t;
-    t = fd_50F6_0F34;
-    t = fd_50F6_0F12;
-    t = fd_3D57_0C22;
-    t = fd_3D57_0094[a];
-    t = fd_50F6_04E2;
-    t = fd_50F6_0FFC;
-    t = fd_50F6_0F42;
-    t = fd_50F6_0F7E;
-    t = fd_50F6_0A06;
-    t = fd_50F6_0FB8;
-    t = fd_50F6_06AC;
-    t = fd_3D57_0798;
-    t = fd_50F6_049A;
-    t = fd_50F6_0502;
-    return t;
+    int newLife;
+    int t;
+    int index;
+    int caste;
+    int x2;
+    int y2;
+    int index2;
+    int egg;
+    int life;
+    int direction;
+    int state;
+    int attribute;
+    int column;
+    int lifeField;
+
+    life = f_10F7_07C7(plane, x, y);
+    if (life <= 0) {
+        if (plane != 1)
+            goto fail;
+        if (f_0BE8_0B83(x * 16 + 8, y * 16 + 8, fd_50F6_0F12, fd_50F6_0F34) >= 0x200)
+            goto fail;
+        caste = (fd_50F6_04C2 & 0x78) >> 3;
+        egg = 0;
+        if (fd_50F6_04C2 & 8) {
+            if (caste == 5 || caste == 9)
+                caste = fd_3D57_0094[caste];
+            else if (caste == 1)
+                egg = fd_3D57_0C22;
+        }
+        life = (fd_50F6_04E2 & 0x80) | fd_50F6_0496 | (caste << 3);
+        t = (fd_50F6_04C2 == 0x60) ? 9 : 0;
+        if (!f_10F7_054D(fd_50F6_048C, fd_50F6_047C, fd_50F6_048A, life, t, egg))
+            goto fail;
+        if (fd_50F6_04C2 == 0x60) {
+            if (!f_10F7_054D(fd_50F6_048C, fd_50F6_047C + fd_3D57_0000[fd_50F6_0496 ^ 4],
+                             fd_50F6_048A + fd_3D57_0008[fd_50F6_0496 ^ 4], life + 8, t, 0))
+                goto fail;
+        }
+        f_10F7_0A44(fd_50F6_048C, fd_50F6_047C, fd_50F6_048A, fd_50F6_04C2, fd_50F6_0496, 0);
+        fd_50F6_0FFC = -2;
+        fd_50F6_0F42 = fd_50F6_0F12 >> 4;
+        fd_50F6_0F7E = fd_50F6_0F34 >> 4;
+        fd_50F6_0A06 = 1;
+        fd_50F6_0FB8 = 0;
+        fd_50F6_06AC = 0;
+        fd_50F6_04E2 = 0;
+        o22_39C7_07FD(plane, fd_50F6_0F42, fd_50F6_0F7E);
+        f_10F7_1DD3(100);
+        goto done;
+    }
+    if (f_10F7_2548(plane, x, y) || f_10F7_003A(life))
+        goto done;
+    caste = (life & 0x78) >> 3;
+    if (caste == 0xc) {
+        x2 = x + fd_3D57_0000[(life ^ 4) & 7];
+        y2 = y + fd_3D57_0008[(life ^ 4) & 7];
+        newLife = f_10F7_07C7(plane, x2, y2);
+    } else if (caste == 0xd) {
+        x2 = x;
+        y2 = y;
+        newLife = life;
+        x += fd_3D57_0000[life & 7];
+        y += fd_3D57_0008[life & 7];
+        life = f_10F7_07C7(plane, x, y);
+        caste = 0xc;
+    }
+    index = f_10F7_03B7(plane, x, y, life);
+    if (caste == 0xc)
+        index2 = f_10F7_03B7(plane, x2, y2, newLife);
+    if (index < 0)
+        goto fail;
+    if (fd_50F6_0A06 == 0) {
+        int c;
+
+        t = (fd_50F6_04C2 & 0x78) >> 3;
+        egg = 0;
+        if (fd_50F6_04C2 & 8) {
+            if (t == 5 || t == 9)
+                t = fd_3D57_0094[t];
+            else if (t == 1)
+                egg = fd_3D57_0C22;
+        }
+        newLife = (t << 3) | fd_50F6_0496 | (life & 0x80);
+        if (life & 0x80) {
+            if (!(*(unsigned char far *)0x417L & 8) || !(*(unsigned char far *)0x417L & 3))
+                goto fail;
+        }
+        c = (life & 0x78) >> 3;
+        if (c <= 0 || c > 0xd || c == 0xa || c == 0xb) {
+            if (!(*(unsigned char far *)0x417L & 8) || !(*(unsigned char far *)0x417L & 3) || !fd_3D57_0798)
+                goto fail;
+        }
+        switch (c) {
+        case 5:
+        case 9:
+            life = (fd_3D57_0094[c] << 3) | (life & 7);
+            break;
+        case 1:
+            f_10F7_005D(plane, index, &lifeField, &column, &attribute, &state, &direction);
+            fd_3D57_0C22 = direction;
+            break;
+        }
+        t = (fd_50F6_04C2 == 0x60) ? 9 : 0;
+        f_0250_000E(fd_50F6_048C, fd_50F6_047C, fd_50F6_048A);
+        if (t)
+            f_0250_000E(fd_50F6_048C, fd_50F6_047C + fd_3D57_0000[fd_50F6_0496 ^ 4],
+                        fd_50F6_048A + fd_3D57_0008[fd_50F6_0496 ^ 4]);
+        f_0250_000E(plane, x, y);
+        if (caste == 0xc)
+            f_0250_000E(plane, x2, y2);
+        f_10F7_01B1(plane, index, 0, 0, 0, 0, 0);
+        if (caste == 0xc)
+            f_10F7_01B1(plane, index2, 0, 0, 0, 0, 0);
+        if (!f_10F7_054D(fd_50F6_048C, fd_50F6_047C, fd_50F6_048A, newLife, t, egg))
+            goto fail;
+        if (fd_50F6_04C2 == 0x60) {
+            if (!f_10F7_054D(fd_50F6_048C, fd_50F6_047C + fd_3D57_0000[fd_50F6_0496 ^ 4],
+                             fd_50F6_048A + fd_3D57_0008[fd_50F6_0496 ^ 4], newLife + 8, t, 0))
+                goto fail;
+        }
+    } else {
+        int c;
+
+        if (life & 0x80) {
+            if (!(*(unsigned char far *)0x417L & 8) || !(*(unsigned char far *)0x417L & 3))
+                goto fail;
+        }
+        c = (life & 0x78) >> 3;
+        if (c <= 0 || c > 0xd || c == 0xa || c == 0xb) {
+            if (!(*(unsigned char far *)0x417L & 8) || !(*(unsigned char far *)0x417L & 3) || !fd_3D57_0798)
+                goto fail;
+        }
+        switch (c) {
+        case 5:
+        case 9:
+            life = (fd_3D57_0094[c] << 3) | (life & 7);
+            break;
+        case 1:
+            f_10F7_005D(plane, index, &lifeField, &column, &attribute, &state, &direction);
+            fd_3D57_0C22 = direction;
+            break;
+        }
+        f_10F7_01B1(plane, index, 0, 0, 0, 0, 0);
+        if (caste == 0xc)
+            f_10F7_01B1(plane, index2, 0, 0, 0, 0, 0);
+    }
+    fd_50F6_04E2 = life & 0x80;
+    fd_50F6_049A = 0;
+    fd_50F6_0A06 = 0;
+    fd_50F6_06AC = 0;
+    f_10F7_1DD3(100);
+    f_10F7_0A44(plane, x, y, life & 0x78, life & 7, 0xff);
+    if (fd_50F6_04C2 < 8)
+        fd_50F6_0502 = fd_50F6_0496;
+done:
+    return 1;
+fail:
+    return 0;
 }
 /* SCAFFOLD END */
 
@@ -1052,12 +1202,59 @@ int far f_10F7_227A(int plane, int x, int y)
     return result;
 }
 
-/* SCAFFOLD BEGIN: f_10F7_22CE unrecovered (adds no CONST words). */
-int far f_10F7_22CE(int plane, int x, int y, int p4, int p5, int p6, int p7)
+int far f_10F7_22CE(int plane, int x, int y, int fromPlane, int fromX, int fromY, int digging)
 {
-    return 0;
+    int dig;
+    int ok;
+    int tile;
+
+    if (plane <= 1) {
+        if (x >= 0 && x <= 127 && y >= 0 && y <= 63) {
+            dig = fd_3E1D_0180[x][y];
+            if (!fd_50F6_0F24)
+                ok = dig <= 0x53;
+            else
+                ok = dig <= 0x90;
+        } else
+            ok = 0;
+    } else if (x >= 0 && x <= 63 && y >= 0 && y <= 63) {
+        if (plane == 2)
+            tile = fd_3E1D_2180[x][y];
+        else
+            tile = fd_3E1D_3180[x][y];
+        if (tile <= 0x18 || (tile >= 0x30 && tile <= 0x31)) {
+            ok = 1;
+            dig = 0;
+        } else if (digging && ((tile >= 0x20 && tile <= 0x2e) || (tile >= 0x1c && tile <= 0x1f))) {
+            ok = 1;
+            dig = 1;
+        } else
+            ok = 0;
+        if (ok && y <= 1 && fromPlane == plane) {
+            if (!digging) {
+                if (y == 0) {
+                    if (fromX != x || fromY != y)
+                        ok = 0;
+                } else if (fromX != x && !fromY)
+                    ok = 0;
+            } else if (dig) {
+                if (fromX != x)
+                    ok = 0;
+                else if (y == 0) {
+                    if (plane == 2)
+                        tile = fd_3E1D_2180[x][y + 1];
+                    else
+                        tile = fd_3E1D_3180[x][y + 1];
+                    if (tile >= 0x20 && tile <= 0x2e)
+                        ok = 0;
+                }
+            } else if (y == 0 && (fromX != x || fromY != y))
+                ok = 0;
+        }
+    } else
+        ok = 0;
+    return ok;
 }
-/* SCAFFOLD END */
 
 int far f_10F7_245C(int x)
 {

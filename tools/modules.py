@@ -100,7 +100,7 @@ def verify_module(text: str, module: dict, claims: list[dict]) -> dict:
             out.setdefault("data", {})[segname] = {"exact": False, "reasons": ["segment absent"]}
             all_ok = False
             continue
-        dres = verify_data_segment(obj, segname, p)
+        dres = verify_data_segment(obj, segname, p, placements)
         out.setdefault("data", {})[segname] = dres
         all_ok &= dres["exact"]
     ext = module.get("extent")
@@ -165,8 +165,34 @@ def verify_bss_placement(sdef: dict, p: dict) -> dict:
     return {"exact": not reasons, "reasons": reasons, "size": sdef["length"], "kind": "BSS"}
 
 
-def verify_data_segment(obj, segname: str, p: dict) -> dict:
-    """Bind a private data segment (CONST/_DATA) at its placement and compare with S27 bytes."""
+def _data_target(f: dict, placements: dict):
+    """(frame, offset-in-frame) of a data fixup target, or None."""
+    tk, tn = f["target_kind"], f["target"]
+    if tk == "group" and tn == "DGROUP":
+        return match.DGROUP_SEG, 0
+    if tk == "segment":
+        pl = placements.get(tn)
+        if pl is None:
+            return None
+        return pl["seg"], pl["off"]
+    s = match.obj_name_lookup(tn) if tk == "external" else None
+    if s is None:
+        return None
+    if s["kind"] == "code" and s.get("unit", "root") != "root":
+        v = match.vector_for(s["unit"], s["seg"], s["off"])
+        if v is None:
+            return None
+        return exemod.MANAGER_SEG, v.offset
+    return s["seg"], s["off"]
+
+
+def verify_data_segment(obj, segname: str, p: dict, placements: dict | None = None) -> dict:
+    """Bind a private data segment (CONST/_DATA) at its placement and compare with S27 bytes.
+
+    Supported fixups: base16 (segment words), offset16 (near/DGROUP or in-frame offsets) and
+    pointer32 (far pointers: code, far data, or this module's own placed segments)."""
+    placements = dict(placements or {})
+    placements.setdefault(segname, p)
     x = exemod.load()
     s27 = x.sections[27]
     body = bytearray(obj.segments[segname])
@@ -179,20 +205,35 @@ def verify_data_segment(obj, segname: str, p: dict) -> dict:
     for f in obj.linker_fixups:
         if f["segment"] != segname or f["offset"] >= size:
             continue
-        s = match.obj_name_lookup(f["target"]) if f["target_kind"] == "external" else None
-        if f["loc"] == "base16" and s is not None:
-            struct_pack(body, f["offset"], s["seg"])
-            relocs_c.append(start + f["offset"])
-            rkey[start + f["offset"]] = f"{f['target_kind']}:{f['target']}"
-        elif f["loc"] == "offset16" and s is not None:
-            if f["frame_kind"] == "group":
-                v = s["seg"] * 16 + s["off"] - match.DGROUP_SEG * 16
-            else:
-                v = s["off"]
-            addend = int.from_bytes(bytes.fromhex(f["encoded_addend"]), "little")
-            struct_pack(body, f["offset"], (v + addend) & 0xFFFF)
-        else:
+        tgt = _data_target(f, placements)
+        if tgt is None or f["self_relative"]:
             reasons.append(f"unsupported data fixup {f['loc']} {f['target_kind']}:{f['target']}")
+            continue
+        frame, off = tgt
+        addend = int.from_bytes(bytes.fromhex(f["encoded_addend"]), "little")
+        disp = f.get("displacement") or 0
+        if f["frame_kind"] == "group" and f["frame"] == "DGROUP":
+            value = frame * 16 + off - match.DGROUP_SEG * 16
+            base = match.DGROUP_SEG
+        else:
+            value = off
+            base = frame
+        at = f["offset"]
+        key = f"{f['target_kind']}:{f['target']}"
+        if f["loc"] == "base16":
+            struct_pack(body, at, frame)
+            relocs_c.append(start + at)
+            rkey[start + at] = key
+        elif f["loc"] == "offset16":
+            struct_pack(body, at, (value + addend + disp) & 0xFFFF)
+        elif f["loc"] == "pointer32":
+            struct_pack(body, at, (value + addend + disp) & 0xFFFF)
+            if at + 2 < size:
+                struct_pack(body, at + 2, base)
+            relocs_c.append(start + at + 2)
+            rkey[start + at + 2] = key
+        else:
+            reasons.append(f"unsupported data fixup {f['loc']} {key}")
     orig = s27.data[start - s27.load_linear:start - s27.load_linear + size]
     exp = [sg * 16 + o for sg, o in s27.relocs if start <= sg * 16 + o < start + size]
     if bytes(body) != orig:

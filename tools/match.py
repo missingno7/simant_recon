@@ -140,6 +140,11 @@ class Binder:
             if tname in self.placements:
                 p = self.placements[tname]
                 return "placed", None, p["seg"], p["off"]
+            # A segment of this object that belongs to DGROUP (e.g. `mov cx, SEG _DATA` to
+            # restore DS) has DGROUP's frame; only its *offsets* need a placement.
+            in_dgroup = any(g.get("name") == "DGROUP" and tname in g.get("segments", []) for g in self.obj.groups)
+            if in_dgroup and f["loc"] == "base16":
+                return "group", None, DGROUP_SEG, 0
             raise KeyError(f"no placement for segment {tname}")
         if tk == "group" and tname == "DGROUP":
             return "group", None, DGROUP_SEG, 0
