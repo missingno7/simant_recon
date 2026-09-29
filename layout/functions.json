@@ -85,6 +85,20 @@
 {
 "unit": "root",
 "seg": 147,
+"off": 2,
+"size": 41,
+"region": "game_or_library",
+"extent": "REVIEWED",
+"evidence": [
+"reviewed"
+],
+"notes": [
+"unreferenced far function at 0x932: preceding module ends with retf at 0x930, LINK word-alignment fill 00 at 0x931"
+]
+},
+{
+"unit": "root",
+"seg": 147,
 "off": 43,
 "size": 41,
 "region": "game_or_library",
@@ -113,6 +127,48 @@
 "extent": "DESCENT",
 "evidence": [
 "far_call"
+]
+},
+{
+"unit": "root",
+"seg": 147,
+"off": 163,
+"size": 13,
+"region": "game_or_library",
+"extent": "REVIEWED",
+"evidence": [
+"reviewed"
+],
+"notes": [
+"unreached: between SetSRandSeed retf (0x9D2) and next entry; stack-checked frameless function"
+]
+},
+{
+"unit": "root",
+"seg": 147,
+"off": 176,
+"size": 8,
+"region": "game_or_library",
+"extent": "REVIEWED",
+"evidence": [
+"reviewed"
+],
+"notes": [
+"unreached: chkstk + retf"
+]
+},
+{
+"unit": "root",
+"seg": 147,
+"off": 184,
+"size": 22,
+"region": "game_or_library",
+"extent": "REVIEWED",
+"evidence": [
+"reviewed"
+],
+"notes": [
+"unreached: chkstk, BIOS tick read at 046C:0000, retf at 0x9FD"
 ]
 },
 {
@@ -9465,6 +9521,34 @@
 "extent": "DESCENT",
 "evidence": [
 "far_call"
+]
+},
+{
+"unit": "root",
+"seg": 10109,
+"off": 14,
+"size": 1,
+"region": "game_or_library",
+"extent": "REVIEWED",
+"evidence": [
+"reviewed"
+],
+"notes": [
+"unreferenced retf between referenced stubs 277D:000D and segment 277E start at 0x277E0"
+]
+},
+{
+"unit": "root",
+"seg": 10109,
+"off": 15,
+"size": 1,
+"region": "game_or_library",
+"extent": "REVIEWED",
+"evidence": [
+"reviewed"
+],
+"notes": [
+"unreferenced retf immediately before segment 277E start at 0x277E0"
 ]
 },
 {

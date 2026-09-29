@@ -67,6 +67,7 @@ def main() -> int:
     ap.add_argument("--flags", nargs="*")
     ap.add_argument("--placement", action="append", default=[], help="SEGNAME=SEG:OFF:SIZE")
     ap.add_argument("--steered", default=None)
+    ap.add_argument("--extent", help="START:END linear (hex): claim the complete module segment (exact TU)")
     ap.add_argument("--verify-only", action="store_true")
     a = ap.parse_args()
 
@@ -113,9 +114,18 @@ def main() -> int:
                         if a0 < b1 and b0 < a1:
                             raise SystemExit(f"{n['name']} overlaps owned {c['name']}")
         module = {"unit": unit, "seg": seg, "profile": profile, "flags": flags, "placements": placements}
+        if a.extent:
+            s0, s1 = (int(v, 16) for v in a.extent.split(":"))
+            module["extent"] = {"start": s0, "end": s1}
+        elif mod and mod.get("extent"):
+            module["extent"] = mod["extent"]
         res = modmod.verify_module(text, module, claims)
         for n, r in res["claims"].items():
-            print(f"  {n}: {'EXACT' if r['exact'] else 'FAIL ' + '; '.join(r['reasons'])}")
+            print(f"  {n}: {'EXACT (reloc order ' + r.get('reloc_order', '?') + ')' if r['exact'] else 'FAIL ' + '; '.join(r['reasons'])}")
+        for c in claims:
+            r = res["claims"].get(c["name"], {})
+            if r.get("exact"):
+                c["reloc_order"] = r.get("reloc_order", "EXACT")
         for n, r in res.get("data", {}).items():
             print(f"  data {n}: {'EXACT' if r['exact'] else 'FAIL ' + '; '.join(r['reasons'])}")
         if not res["compile_ok"]:

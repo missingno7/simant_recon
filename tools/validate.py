@@ -55,6 +55,8 @@ def main() -> int:
     exact_c_bytes = 0
     data_bytes = 0
     scaffolds = 0
+    exact_tus = 0
+    bss_bytes = 0
     per_unit = defaultdict(int)
     for key, m in man["modules"].items():
         path = ROOT / m["source"]
@@ -74,9 +76,14 @@ def main() -> int:
                 exact_c += 1
                 exact_c_bytes += c["size"]
             per_unit[c["unit"]] += c["size"]
-        for n, p in m.get("placements", {}).items():
-            data_bytes += p["size"]
+        for n, d in res.get("data", {}).items():
+            if d.get("kind") == "BSS":
+                bss_bytes += d["size"]
+            elif d["exact"]:
+                data_bytes += d["size"]
         scaffolds += len(res.get("scaffold", []))
+        if m.get("extent") and res["exact"]:
+            exact_tus += 1
     claimed.sort()
     for (u1, a1, s1, n1), (u2, a2, s2, n2) in zip(claimed, claimed[1:]):
         if u1 == u2 and a1 + s1 > a2:
@@ -116,6 +123,7 @@ def main() -> int:
         "historical_runtime_bytes_located_unaccepted": runtime_located,
         "rtlink_manager_bytes_unaccepted": len(x.image) - 0x2CFB * 16,
         "data_bytes_accepted": data_bytes,
+        "bss_bytes_placed": bss_bytes,
         "game_code_span_bytes": code_total,
         "unresolved_code_bytes": code_total - exact_c_bytes,
         "unresolved_data_bytes": s27 - data_bytes,
@@ -123,7 +131,7 @@ def main() -> int:
                              for s in x.sections[:27]},
         "root_claimed_bytes": per_unit.get("root", 0),
         "scaffold_functions": scaffolds,
-        "exact_translation_units": 0,
+        "exact_translation_units": exact_tus,
         "whole_executable": "NOT_BUILT (no historical link yet; see docs/next-steps.md)",
         "validation": "PASS" if not failures else "FAIL",
         "failures": failures,

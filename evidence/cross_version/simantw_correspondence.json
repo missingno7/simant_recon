@@ -1,0 +1,1536 @@
+{
+ "schema": "simant-xver-correspondence-v1",
+ "dos_oracle_sha256": "aa0596c6766322a8229ee3c36e57048c92adc82d50fbe2ef37afb8b85fcf4f11",
+ "win16_exe": "D:/Prog/simantw_recon/assets/SIMANTW.EXE",
+ "policy": "Only CONFIRMED/HIGH pairs may transfer names; acceptance is always the DOS compiler output.",
+ "counts": {
+  "CONFIRMED": 5,
+  "HIGH": 20,
+  "MEDIUM": 37,
+  "LOW": 50
+ },
+ "pairs": [
+  {
+   "dos": "f_1A53_0125",
+   "dos_address": "root:1A53:0125",
+   "win16": "_db_LoadObject",
+   "win16_address": "7:8292",
+   "confidence": "CONFIRMED",
+   "score": 16.711,
+   "mutual_best": true,
+   "evidence": [
+    "three unique diagnostics shared verbatim: 'cache table full, can't load object', 'load attempt with database closed', 'memory full or object ...'",
+    "calls DBRecall and ch_AddEntry in the same order on both sides",
+    "string \"cache table full, can't load object\"",
+    "string \"load attempt with database closed\"",
+    "string \"memory full or object missing - cannot load object:id=%d, ty\""
+   ],
+   "method": "features-v1+reviewed"
+  },
+  {
+   "dos": "f_25E7_007A",
+   "dos_address": "root:25E7:007A",
+   "win16": "_font_ReadFont",
+   "win16_address": "7:AA4C",
+   "confidence": "CONFIRMED",
+   "score": 15.454,
+   "mutual_best": true,
+   "evidence": [
+    "unique strings 'fontheader' and 'fontimage'",
+    "runtime signature fopen/fread/fclose in both",
+    "runtime fclose,fopen,fread",
+    "string \"fontheader\"",
+    "string \"fontimage\"",
+    "string \"loctable\"",
+    "string \"owtable\""
+   ],
+   "method": "features-v1+reviewed"
+  },
+  {
+   "dos": "f_1A28_0006",
+   "dos_address": "root:1A28:0006",
+   "win16": "_OpenDB",
+   "win16_address": "7:8BF0",
+   "confidence": "CONFIRMED",
+   "score": 13.739,
+   "mutual_best": true,
+   "evidence": [
+    "'%s.dat' format plus unique 'cannot create data file.'",
+    "sprintf runtime call in both",
+    "runtime sprintf",
+    "string \"%s.dat\" (shared by 1/4)",
+    "string \"cannot create data file.\"",
+    "string \"out of handles.\""
+   ],
+   "method": "features-v1+reviewed"
+  },
+  {
+   "dos": "f_1986_0004",
+   "dos_address": "root:1986:0004",
+   "win16": "_OpenIndex",
+   "win16_address": "7:9A86",
+   "confidence": "CONFIRMED",
+   "score": 13.0,
+   "mutual_best": true,
+   "evidence": [
+    "'%s.ndx' format plus unique 'index file missing'",
+    "sprintf runtime call in both",
+    "runtime sprintf",
+    "string \"%s.ndx\" (shared by 1/3)",
+    "string \"index file missing\"",
+    "string \"not enough memory to read index file in.\""
+   ],
+   "method": "features-v1+reviewed"
+  },
+  {
+   "dos": "f_1C62_000C",
+   "dos_address": "root:1C62:000C",
+   "win16": "_Punt",
+   "win16_address": "2:18BE",
+   "confidence": "CONFIRMED",
+   "score": null,
+   "mutual_best": null,
+   "evidence": [
+    "variadic (char far *format, ...) formatted into an automatic buffer (DOS vsprintf, Win16 WVSPrintf) then fatal report and exit",
+    "DOS string 'FATAL ERROR: PROGRAM ABORTED\n%s' vs Win16 'Fatal Error' caption: same role",
+    "86 DOS callers; highest fan-in diagnostic sink on both sides",
+    "callee of CONFIRMED db_LoadObject in the same call position (first call)"
+   ],
+   "method": "reviewed"
+  },
+  {
+   "dos": "o20_39F1_000A",
+   "dos_address": "S20:39F1:000A",
+   "win16": "_IBMInitStuff",
+   "win16_address": "2:0220",
+   "confidence": "HIGH",
+   "score": 26.995,
+   "mutual_best": true,
+   "evidence": [
+    "runtime exit,getcwd,getenv,isdigit,stricmp",
+    "string \"cannot load menu\"",
+    "string \"language\"",
+    "string \"language.dat\"",
+    "string \"lrshare\"",
+    "string \"msmouse\"",
+    "string \"shared\""
+   ],
+   "method": "features-v1"
+  },
+  {
+   "dos": "f_24AB_047D",
+   "dos_address": "root:24AB:047D",
+   "win16": "_font_InitFonts",
+   "win16_address": "2:616C",
+   "confidence": "HIGH",
+   "score": 14.854,
+   "mutual_best": true,
+   "evidence": [
+    "string \"font1\"",
+    "string \"font2\"",
+    "string \"font3\"",
+    "string \"font4\""
+   ],
+   "method": "features-v1"
+  },
+  {
+   "dos": "o23_39C7_0668",
+   "dos_address": "S23:39C7:0668",
+   "win16": "_DisplayCard",
+   "win16_address": "4:5A1C",
+   "confidence": "HIGH",
+   "score": 12.541,
+   "mutual_best": true,
+   "evidence": [
+    "constant 0x501",
+    "runtime memchr,memmove",
+    "string \"card resource not found.\"",
+    "string \"unknown resource.\""
+   ],
+   "method": "features-v1"
+  },
+  {
+   "dos": "o04_35F5_04DE",
+   "dos_address": "S04:35F5:04DE",
+   "win16": "_Mini_DrawMapI",
+   "win16_address": "3:D474",
+   "confidence": "HIGH",
+   "score": 10.134,
+   "mutual_best": true,
+   "evidence": [
+    "constant 0x1401",
+    "string \"generated map window\"",
+    "string \"map window image\""
+   ],
+   "method": "features-v1"
+  },
+  {
+   "dos": "f_1CE2_05FB",
+   "dos_address": "root:1CE2:05FB",
+   "win16": "_GPutPacked",
+   "win16_address": "2:10A2",
+   "confidence": "HIGH",
+   "score": 9.284,
+   "mutual_best": true,
+   "evidence": [
+    "string \"gputpacked\"",
+    "string \"putpackedbuf\""
+   ],
+   "method": "features-v1"
+  },
+  {
+   "dos": "f_075B_0000",
+   "dos_address": "root:075B:0000",
+   "win16": "_initStuff",
+   "win16_address": "5:0000",
+   "confidence": "HIGH",
+   "score": 9.284,
+   "mutual_best": true,
+   "evidence": [
+    "string \"cannot getresource (hex, %d), reserr %d\"",
+    "string \"memdeath\""
+   ],
+   "method": "features-v1"
+  },
+  {
+   "dos": "f_1629_0531",
+   "dos_address": "root:1629:0531",
+   "win16": "_ConvertMonoMaskToColor",
+   "win16_address": "2:5F0E",
+   "confidence": "HIGH",
+   "score": 9.284,
+   "mutual_best": true,
+   "evidence": [
+    "string \"balloon size=%d, %d\"",
+    "string \"clrbln\""
+   ],
+   "method": "features-v1"
+  },
+  {
+   "dos": "f_15F8_0004",
+   "dos_address": "root:15F8:0004",
+   "win16": "WINMAIN",
+   "win16_address": "1:3FDA",
+   "confidence": "HIGH",
+   "score": 9.284,
+   "mutual_best": true,
+   "evidence": [
+    "string \"simant cancelled.\"",
+    "string \"sound\""
+   ],
+   "method": "features-v1"
+  },
+  {
+   "dos": "f_1A28_0277",
+   "dos_address": "root:1A28:0277",
+   "win16": "_DosPunt",
+   "win16_address": "7:8F0C",
+   "confidence": "HIGH",
+   "score": 9.134,
+   "mutual_best": true,
+   "evidence": [
+    "string \"%s dos error: %d: %s\"",
+    "string \"too many files open. you need a statement 'files=12' in your\""
+   ],
+   "method": "features-v1"
+  },
+  {
+   "dos": "o05_35F5_0064",
+   "dos_address": "S05:35F5:0064",
+   "win16": "_EditToolsMenu",
+   "win16_address": "3:67C6",
+   "confidence": "HIGH",
+   "score": 8.57,
+   "mutual_best": true,
+   "evidence": [
+    "constant 0x117",
+    "constant 0xa00",
+    "constant 0xb00",
+    "string \"item=%x, starttool=%x\""
+   ],
+   "method": "features-v1"
+  },
+  {
+   "dos": "f_277D_000A",
+   "dos_address": "root:277D:000A",
+   "win16": "_WinPrintf",
+   "win16_address": "2:62BC",
+   "confidence": "HIGH",
+   "score": 8.0,
+   "mutual_best": true,
+   "evidence": [
+    "8 anchored callers of the DOS function map onto callers of _WinPrintf",
+    "DOS body is an empty far function (debug formatter compiled out); Win16 body formats only when debugEnabled",
+    "8 anchored neighbours agree: caller:f_075B_0000, caller:f_1629_0531, caller:f_1A53_0125, caller:o05_35F5_0064, caller:o05_35F5_04D3"
+   ],
+   "method": "neighbourhood-v1+reviewed"
+  },
+  {
+   "dos": "o15_384C_0017",
+   "dos_address": "S15:384C:0017",
+   "win16": "_LoadMonoPats",
+   "win16_address": "1:D504",
+   "confidence": "HIGH",
+   "score": 7.57,
+   "mutual_best": true,
+   "evidence": [
+    "constant 0x2710",
+    "constant 0x271a",
+    "string \"cannot load monochrome patterns.\""
+   ],
+   "method": "features-v1"
+  },
+  {
+   "dos": "f_2662_0B63",
+   "dos_address": "root:2662:0B63",
+   "win16": "_hanim_MakeAnimSet",
+   "win16_address": "2:6E3A",
+   "confidence": "HIGH",
+   "score": 7.427,
+   "mutual_best": true,
+   "evidence": [
+    "string \"animhandle\"",
+    "string \"animobjs\""
+   ],
+   "method": "features-v1"
+  },
+  {
+   "dos": "o07_35F5_0000",
+   "dos_address": "S07:35F5:0000",
+   "win16": "_CheatKeys",
+   "win16_address": "4:67DE",
+   "confidence": "HIGH",
+   "score": 6.714,
+   "mutual_best": true,
+   "evidence": [
+    "constant 0x2724",
+    "constant 0x2726",
+    "constant 0x2728",
+    "string \"cheat %d\""
+   ],
+   "method": "features-v1"
+  },
+  {
+   "dos": "o22_39C7_0000",
+   "dos_address": "S22:39C7:0000",
+   "win16": "_processEdit",
+   "win16_address": "1:6A38",
+   "confidence": "HIGH",
+   "score": 6.57,
+   "mutual_best": true,
+   "evidence": [
+    "constant 0x6000",
+    "string \"eptr->mouse_flags=%x\""
+   ],
+   "method": "features-v1"
+  },
+  {
+   "dos": "o16_384C_0472",
+   "dos_address": "S16:384C:0472",
+   "win16": "_ShowIntro",
+   "win16_address": "1:D3E2",
+   "confidence": "HIGH",
+   "score": 5.045,
+   "mutual_best": true,
+   "evidence": [
+    "constant 0x2711",
+    "constant 0x300",
+    "string \"malloc\""
+   ],
+   "method": "features-v1"
+  },
+  {
+   "dos": "o05_35F5_04D3",
+   "dos_address": "S05:35F5:04D3",
+   "win16": "_AntMenu",
+   "win16_address": "3:6D24",
+   "confidence": "HIGH",
+   "score": 4.714,
+   "mutual_best": true,
+   "evidence": [
+    "constant 0x700",
+    "string \"antmenu\""
+   ],
+   "method": "features-v1"
+  },
+  {
+   "dos": "f_1A53_01FF",
+   "dos_address": "root:1A53:01FF",
+   "win16": "_db_PurgeObject",
+   "win16_address": "7:834E",
+   "confidence": "HIGH",
+   "score": 3.0,
+   "mutual_best": true,
+   "evidence": [
+    "3 anchored neighbours agree: callee:f_1C62_000C, caller:o15_384C_0017, caller:o23_39C7_0668"
+   ],
+   "method": "neighbourhood-v1"
+  },
+  {
+   "dos": "f_2505_0288",
+   "dos_address": "root:2505:0288",
+   "win16": "_win_GetObjRect",
+   "win16_address": "7:C2D2",
+   "confidence": "HIGH",
+   "score": 3.0,
+   "mutual_best": true,
+   "evidence": [
+    "3 anchored neighbours agree: caller:o04_35F5_04DE, caller:o05_35F5_0064, caller:o23_39C7_0668"
+   ],
+   "method": "neighbourhood-v1"
+  },
+  {
+   "dos": "o23_39C7_0C7C",
+   "dos_address": "S23:39C7:0C7C",
+   "win16": "_PopUpInfoWindow",
+   "win16_address": "4:610C",
+   "confidence": "HIGH",
+   "score": 3.0,
+   "mutual_best": true,
+   "evidence": [
+    "3 anchored neighbours agree: callee:f_1A53_01FF, callee:f_2505_0288, callee:o23_39C7_0092"
+   ],
+   "method": "neighbourhood-v1"
+  },
+  {
+   "dos": "f_1A28_0277",
+   "dos_address": "root:1A28:0277",
+   "win16": "_OpenDB",
+   "win16_address": "7:8BF0",
+   "confidence": "MEDIUM",
+   "score": 9.134,
+   "mutual_best": false,
+   "evidence": [
+    "string \"%s dos error: %d: %s\"",
+    "string \"too many files open. you need a statement 'files=12' in your\""
+   ],
+   "method": "features-v1"
+  },
+  {
+   "dos": "o12_384C_0B76",
+   "dos_address": "S12:384C:0B76",
+   "win16": "_Mini_DrawMapI",
+   "win16_address": "3:D474",
+   "confidence": "MEDIUM",
+   "score": 9.134,
+   "mutual_best": false,
+   "evidence": [
+    "string \"generated map window\"",
+    "string \"map window image\""
+   ],
+   "method": "features-v1"
+  },
+  {
+   "dos": "o09_35F5_0188",
+   "dos_address": "S09:35F5:0188",
+   "win16": "_SaveGame",
+   "win16_address": "3:A23E",
+   "confidence": "MEDIUM",
+   "score": 5.97,
+   "mutual_best": true,
+   "evidence": [
+    "runtime sprintf,unlink",
+    "string \"%s saved correctly\""
+   ],
+   "method": "features-v1"
+  },
+  {
+   "dos": "o23_39C7_0092",
+   "dos_address": "S23:39C7:0092",
+   "win16": "_win_PrintStyleTextInRect",
+   "win16_address": "4:5368",
+   "confidence": "MEDIUM",
+   "score": 5.77,
+   "mutual_best": true,
+   "evidence": [
+    "runtime strncpy",
+    "string \"error: cannot file text rez(%s)\""
+   ],
+   "method": "features-v1"
+  },
+  {
+   "dos": "f_19A9_001D",
+   "dos_address": "root:19A9:001D",
+   "win16": "_DBRecall",
+   "win16_address": "7:86D2",
+   "confidence": "MEDIUM",
+   "score": 5.77,
+   "mutual_best": true,
+   "evidence": [
+    "runtime sprintf",
+    "string \"couldn't allocate a buffer for dbrecall\""
+   ],
+   "method": "features-v1"
+  },
+  {
+   "dos": "f_1A96_034E",
+   "dos_address": "root:1A96:034E",
+   "win16": "_ch_AddEntry",
+   "win16_address": "7:9470",
+   "confidence": "MEDIUM",
+   "score": 5.57,
+   "mutual_best": true,
+   "evidence": [
+    "string \"attemp to add id already present in lookup table\""
+   ],
+   "method": "features-v1"
+  },
+  {
+   "dos": "f_22BF_0967",
+   "dos_address": "root:22BF:0967",
+   "win16": "_win_SetObjBitmap",
+   "win16_address": "7:D5BE",
+   "confidence": "MEDIUM",
+   "score": 5.57,
+   "mutual_best": true,
+   "evidence": [
+    "string \"attempt to set bitmap on non-bitmap object\""
+   ],
+   "method": "features-v1"
+  },
+  {
+   "dos": "f_20E8_0001",
+   "dos_address": "root:20E8:0001",
+   "win16": "_win_LoadWindow",
+   "win16_address": "7:C662",
+   "confidence": "MEDIUM",
+   "score": 5.57,
+   "mutual_best": true,
+   "evidence": [
+    "string \"cannot load window %03x\""
+   ],
+   "method": "features-v1"
+  },
+  {
+   "dos": "o09_35F5_0000",
+   "dos_address": "S09:35F5:0000",
+   "win16": "_LoadGame",
+   "win16_address": "3:9FA0",
+   "confidence": "MEDIUM",
+   "score": 5.57,
+   "mutual_best": true,
+   "evidence": [
+    "string \"read error game not loaded\""
+   ],
+   "method": "features-v1"
+  },
+  {
+   "dos": "f_1A53_0042",
+   "dos_address": "root:1A53:0042",
+   "win16": "_db_SetDataBase",
+   "win16_address": "7:81AC",
+   "confidence": "MEDIUM",
+   "score": 5.57,
+   "mutual_best": true,
+   "evidence": [
+    "string \"cannot open database %s\""
+   ],
+   "method": "features-v1"
+  },
+  {
+   "dos": "o25_3BA4_0C01",
+   "dos_address": "S25:3BA4:0C01",
+   "win16": "_AnimYellowInsane",
+   "win16_address": "6:8078",
+   "confidence": "MEDIUM",
+   "score": 5.57,
+   "mutual_best": true,
+   "evidence": [
+    "string \"animyellowinsane\""
+   ],
+   "method": "features-v1"
+  },
+  {
+   "dos": "f_1A96_0532",
+   "dos_address": "root:1A96:0532",
+   "win16": "_ch_DumpOldest",
+   "win16_address": "7:9886",
+   "confidence": "MEDIUM",
+   "score": 5.57,
+   "mutual_best": true,
+   "evidence": [
+    "string \"no memory over 0 in age!\""
+   ],
+   "method": "features-v1"
+  },
+  {
+   "dos": "o12_384C_0008",
+   "dos_address": "S12:384C:0008",
+   "win16": "_InitMapFunctions",
+   "win16_address": "3:C19C",
+   "confidence": "MEDIUM",
+   "score": 5.57,
+   "mutual_best": true,
+   "evidence": [
+    "string \"generated buffer window\""
+   ],
+   "method": "features-v1"
+  },
+  {
+   "dos": "f_2662_0100",
+   "dos_address": "root:2662:0100",
+   "win16": "_hanim_RenderAnimSet",
+   "win16_address": "2:6F3C",
+   "confidence": "MEDIUM",
+   "score": 5.57,
+   "mutual_best": true,
+   "evidence": [
+    "string \"buffer in set too small!!\""
+   ],
+   "method": "features-v1"
+  },
+  {
+   "dos": "f_20E8_0141",
+   "dos_address": "root:20E8:0141",
+   "win16": "_win_LoadAllWindows",
+   "win16_address": "7:C806",
+   "confidence": "MEDIUM",
+   "score": 5.57,
+   "mutual_best": true,
+   "evidence": [
+    "string \"cannot load resource please try another\""
+   ],
+   "method": "features-v1"
+  },
+  {
+   "dos": "f_2662_0CA2",
+   "dos_address": "root:2662:0CA2",
+   "win16": "_hanim_RenderAnimSet",
+   "win16_address": "2:6F3C",
+   "confidence": "MEDIUM",
+   "score": 4.714,
+   "mutual_best": false,
+   "evidence": [
+    "constant 0x1770",
+    "string \"to flush\""
+   ],
+   "method": "features-v1"
+  },
+  {
+   "dos": "f_0798_0A59",
+   "dos_address": "root:0798:0A59",
+   "win16": "_DrawControlLevels",
+   "win16_address": "1:C7C4",
+   "confidence": "MEDIUM",
+   "score": 4.314,
+   "mutual_best": true,
+   "evidence": [
+    "runtime aFldiv,aFuldiv,aFulmul",
+    "string \"%-ld%%\""
+   ],
+   "method": "features-v1"
+  },
+  {
+   "dos": "o09_35F5_03C6",
+   "dos_address": "S09:35F5:03C6",
+   "win16": "_FileSelect",
+   "win16_address": "3:9920",
+   "confidence": "MEDIUM",
+   "score": 3.914,
+   "mutual_best": true,
+   "evidence": [
+    "runtime sprintf",
+    "string \"*.ant\""
+   ],
+   "method": "features-v1"
+  },
+  {
+   "dos": "f_2662_0348",
+   "dos_address": "root:2662:0348",
+   "win16": "_hanim_AddAnimObject",
+   "win16_address": "2:6410",
+   "confidence": "MEDIUM",
+   "score": 3.914,
+   "mutual_best": true,
+   "evidence": [
+    "runtime memmove",
+    "string \"animbufs\""
+   ],
+   "method": "features-v1"
+  },
+  {
+   "dos": "f_1A96_000C",
+   "dos_address": "root:1A96:000C",
+   "win16": "_ch_CreateTable",
+   "win16_address": "7:8F46",
+   "confidence": "MEDIUM",
+   "score": 3.714,
+   "mutual_best": true,
+   "evidence": [
+    "string \"cachetable\""
+   ],
+   "method": "features-v1"
+  },
+  {
+   "dos": "f_075B_0242",
+   "dos_address": "root:075B:0242",
+   "win16": "_ms_LoadPopUpResource",
+   "win16_address": "2:4CCE",
+   "confidence": "MEDIUM",
+   "score": 3.714,
+   "mutual_best": true,
+   "evidence": [
+    "string \"strptrs\""
+   ],
+   "method": "features-v1"
+  },
+  {
+   "dos": "f_1629_000C",
+   "dos_address": "root:1629:000C",
+   "win16": "_Draw_SimYard",
+   "win16_address": "3:B462",
+   "confidence": "MEDIUM",
+   "score": 3.045,
+   "mutual_best": true,
+   "evidence": [
+    "string \"balloon\""
+   ],
+   "method": "features-v1"
+  },
+  {
+   "dos": "f_259D_000E",
+   "dos_address": "root:259D:000E",
+   "win16": "_win_DrawBitMap",
+   "win16_address": "7:BD5A",
+   "confidence": "MEDIUM",
+   "score": 2.0,
+   "mutual_best": true,
+   "evidence": [
+    "sole callee/caller of an anchored pair (2 aligned edge votes)"
+   ],
+   "method": "callgraph-propagation-v1"
+  },
+  {
+   "dos": "o19_384C_0246",
+   "dos_address": "S19:384C:0246",
+   "win16": "_DoKeyDown",
+   "win16_address": "1:0E8C",
+   "confidence": "MEDIUM",
+   "score": 2.0,
+   "mutual_best": true,
+   "evidence": [
+    "sole callee/caller of an anchored pair (2 aligned edge votes)"
+   ],
+   "method": "callgraph-propagation-v1"
+  },
+  {
+   "dos": "o04_35F5_075F",
+   "dos_address": "S04:35F5:075F",
+   "win16": "_OpenMiniMapWin",
+   "win16_address": "3:E374",
+   "confidence": "MEDIUM",
+   "score": 2.0,
+   "mutual_best": true,
+   "evidence": [
+    "sole callee/caller of an anchored pair (2 aligned edge votes)"
+   ],
+   "method": "callgraph-propagation-v1"
+  },
+  {
+   "dos": "f_00BA_01B6",
+   "dos_address": "root:00BA:01B6",
+   "win16": "_InitApplicationStuff",
+   "win16_address": "1:552A",
+   "confidence": "MEDIUM",
+   "score": 2.0,
+   "mutual_best": true,
+   "evidence": [
+    "sole callee/caller of an anchored pair (2 aligned edge votes)"
+   ],
+   "method": "callgraph-propagation-v1"
+  },
+  {
+   "dos": "f_0250_0C0F",
+   "dos_address": "root:0250:0C0F",
+   "win16": "_ProcEditEvent",
+   "win16_address": "3:0B7A",
+   "confidence": "MEDIUM",
+   "score": 2.0,
+   "mutual_best": true,
+   "evidence": [
+    "sole callee/caller of an anchored pair (2 aligned edge votes)"
+   ],
+   "method": "callgraph-propagation-v1"
+  },
+  {
+   "dos": "f_1629_000C",
+   "dos_address": "root:1629:000C",
+   "win16": "_MakeBalloon",
+   "win16_address": "2:59E4",
+   "confidence": "MEDIUM",
+   "score": 2.0,
+   "mutual_best": true,
+   "evidence": [
+    "sole callee/caller of an anchored pair (2 aligned edge votes)"
+   ],
+   "method": "callgraph-propagation-v1"
+  },
+  {
+   "dos": "o23_39C7_0075",
+   "dos_address": "S23:39C7:0075",
+   "win16": "_win_DrawInfoWindow",
+   "win16_address": "4:534E",
+   "confidence": "MEDIUM",
+   "score": 2.0,
+   "mutual_best": true,
+   "evidence": [
+    "sole callee/caller of an anchored pair (2 aligned edge votes)"
+   ],
+   "method": "callgraph-propagation-v1"
+  },
+  {
+   "dos": "o14_384C_10E5",
+   "dos_address": "S14:384C:10E5",
+   "win16": "_CustomerIDDialog",
+   "win16_address": "1:6954",
+   "confidence": "MEDIUM",
+   "score": 2.0,
+   "mutual_best": true,
+   "evidence": [
+    "2 anchored neighbours agree: callee:f_1A53_0125, caller:f_15F8_0004"
+   ],
+   "method": "neighbourhood-v1"
+  },
+  {
+   "dos": "f_00BA_0002",
+   "dos_address": "root:00BA:0002",
+   "win16": "_InitApplicationWindows",
+   "win16_address": "1:5464",
+   "confidence": "MEDIUM",
+   "score": 2.0,
+   "mutual_best": true,
+   "evidence": [
+    "2 anchored neighbours agree: callee:f_20E8_0141, caller:o20_39F1_000A"
+   ],
+   "method": "neighbourhood-v1"
+  },
+  {
+   "dos": "f_1A53_02EB",
+   "dos_address": "root:1A53:02EB",
+   "win16": "_db_ReleaseObject",
+   "win16_address": "7:8426",
+   "confidence": "MEDIUM",
+   "score": 2.0,
+   "mutual_best": true,
+   "evidence": [
+    "2 anchored neighbours agree: callee:f_1C62_000C, caller:f_259D_000E"
+   ],
+   "method": "neighbourhood-v1"
+  },
+  {
+   "dos": "f_1B73_0504",
+   "dos_address": "root:1B73:0504",
+   "win16": "_TickCount",
+   "win16_address": "2:18AC",
+   "confidence": "MEDIUM",
+   "score": 2.0,
+   "mutual_best": true,
+   "evidence": [
+    "2 anchored neighbours agree: caller:o20_39F1_000A, caller:o22_39C7_0000"
+   ],
+   "method": "neighbourhood-v1"
+  },
+  {
+   "dos": "f_22BF_0BAB",
+   "dos_address": "root:22BF:0BAB",
+   "win16": "_win_DoProxMenu",
+   "win16_address": "7:DE62",
+   "confidence": "MEDIUM",
+   "score": 2.0,
+   "mutual_best": true,
+   "evidence": [
+    "2 anchored neighbours agree: caller:o05_35F5_0064, caller:o05_35F5_04D3"
+   ],
+   "method": "neighbourhood-v1"
+  },
+  {
+   "dos": "f_259D_02D8",
+   "dos_address": "root:259D:02D8",
+   "win16": "_win_DrawBitMapAtObjNum",
+   "win16_address": "7:BE70",
+   "confidence": "MEDIUM",
+   "score": 2.0,
+   "mutual_best": true,
+   "evidence": [
+    "2 anchored neighbours agree: callee:f_259D_000E, caller:o05_35F5_0064"
+   ],
+   "method": "neighbourhood-v1"
+  },
+  {
+   "dos": "f_24AB_02AD",
+   "dos_address": "root:24AB:02AD",
+   "win16": "_font_SetFont",
+   "win16_address": "2:611C",
+   "confidence": "MEDIUM",
+   "score": 2.0,
+   "mutual_best": true,
+   "evidence": [
+    "2 anchored neighbours agree: caller:o23_39C7_0092, caller:o23_39C7_0668"
+   ],
+   "method": "neighbourhood-v1"
+  },
+  {
+   "dos": "o23_39C7_0F50",
+   "dos_address": "S23:39C7:0F50",
+   "win16": "_ProcInfoEvent",
+   "win16_address": "4:65DC",
+   "confidence": "MEDIUM",
+   "score": 2.0,
+   "mutual_best": true,
+   "evidence": [
+    "2 anchored neighbours agree: callee:f_2505_0288, callee:o23_39C7_0C7C"
+   ],
+   "method": "neighbourhood-v1"
+  },
+  {
+   "dos": "f_1A53_034F",
+   "dos_address": "root:1A53:034F",
+   "win16": "_db_UnhookObject",
+   "win16_address": "7:847E",
+   "confidence": "LOW",
+   "score": 3.994,
+   "mutual_best": true,
+   "evidence": [
+    "string \"unhook attempt with database closed\" (shared by 1/3)"
+   ],
+   "method": "features-v1"
+  },
+  {
+   "dos": "f_2505_02D7",
+   "dos_address": "root:2505:02D7",
+   "win16": "_win_ObjAddr",
+   "win16_address": "7:C32E",
+   "confidence": "LOW",
+   "score": 3.055,
+   "mutual_best": true,
+   "evidence": [
+    "string \"attempt to get obj address outsize window\" (shared by 1/6)"
+   ],
+   "method": "features-v1"
+  },
+  {
+   "dos": "f_1A53_025F",
+   "dos_address": "root:1A53:025F",
+   "win16": "_db_PurgeHandle",
+   "win16_address": "7:83B2",
+   "confidence": "LOW",
+   "score": 2.542,
+   "mutual_best": true,
+   "evidence": [
+    "string \"purge attempt with database closed\" (shared by 3/3)"
+   ],
+   "method": "features-v1"
+  },
+  {
+   "dos": "f_0250_16FD",
+   "dos_address": "root:0250:16FD",
+   "win16": "_UnRecruit",
+   "win16_address": "7:078A",
+   "confidence": "LOW",
+   "score": 1.695,
+   "mutual_best": true,
+   "evidence": [
+    "string \"simant\" (shared by 1/9)"
+   ],
+   "method": "features-v1"
+  },
+  {
+   "dos": "o21_39C7_016D",
+   "dos_address": "S21:39C7:016D",
+   "win16": "MAINWNDPROC",
+   "win16_address": "1:2930",
+   "confidence": "LOW",
+   "score": 1.0,
+   "mutual_best": true,
+   "evidence": [
+    "unique constant 0xf000"
+   ],
+   "method": "features-v1"
+  },
+  {
+   "dos": "o22_39C7_188D",
+   "dos_address": "S22:39C7:188D",
+   "win16": "_YellowDialog",
+   "win16_address": "1:8262",
+   "confidence": "LOW",
+   "score": 1.0,
+   "mutual_best": true,
+   "evidence": [
+    "unique constant 0x1a02"
+   ],
+   "method": "features-v1"
+  },
+  {
+   "dos": "f_0798_0387",
+   "dos_address": "root:0798:0387",
+   "win16": "_ProcModeEvent",
+   "win16_address": "1:C07A",
+   "confidence": "LOW",
+   "score": 1.0,
+   "mutual_best": true,
+   "evidence": [
+    "unique constant 0x1203"
+   ],
+   "method": "features-v1"
+  },
+  {
+   "dos": "o05_35F5_0000",
+   "dos_address": "S05:35F5:0000",
+   "win16": "_EditScentMenu",
+   "win16_address": "3:675E",
+   "confidence": "LOW",
+   "score": 1.0,
+   "mutual_best": true,
+   "evidence": [
+    "unique constant 0x600"
+   ],
+   "method": "features-v1"
+  },
+  {
+   "dos": "o14_384C_05C6",
+   "dos_address": "S14:384C:05C6",
+   "win16": "_win_DrawScoreWindow",
+   "win16_address": "1:5ACA",
+   "confidence": "LOW",
+   "score": 1.0,
+   "mutual_best": true,
+   "evidence": [
+    "unique constant 0x180a"
+   ],
+   "method": "features-v1"
+  },
+  {
+   "dos": "o16_384C_01E1",
+   "dos_address": "S16:384C:01E1",
+   "win16": "_AboutDialog",
+   "win16_address": "1:CF3A",
+   "confidence": "LOW",
+   "score": 1.0,
+   "mutual_best": true,
+   "evidence": [
+    "unique constant 0x1f02"
+   ],
+   "method": "features-v1"
+  },
+  {
+   "dos": "f_0BE8_0EB7",
+   "dos_address": "root:0BE8:0EB7",
+   "win16": "_TryAntTheme",
+   "win16_address": "5:1414",
+   "confidence": "LOW",
+   "score": 1.0,
+   "mutual_best": true,
+   "evidence": [
+    "unique constant 0x1c20"
+   ],
+   "method": "features-v1"
+  },
+  {
+   "dos": "o22_39C7_0900",
+   "dos_address": "S22:39C7:0900",
+   "win16": "_YellowBirth",
+   "win16_address": "1:739E",
+   "confidence": "LOW",
+   "score": 1.0,
+   "mutual_best": true,
+   "evidence": [
+    "unique constant 0x4e21"
+   ],
+   "method": "features-v1"
+  },
+  {
+   "dos": "o06_35F5_1E54",
+   "dos_address": "S06:35F5:1E54",
+   "win16": "_SimColonies",
+   "win16_address": "7:35F8",
+   "confidence": "LOW",
+   "score": 1.0,
+   "mutual_best": true,
+   "evidence": [
+    "unique constant 0x4e22"
+   ],
+   "method": "features-v1"
+  },
+  {
+   "dos": "o22_39C7_0D21",
+   "dos_address": "S22:39C7:0D21",
+   "win16": "_YellowDeath",
+   "win16_address": "1:7746",
+   "confidence": "LOW",
+   "score": 1.0,
+   "mutual_best": true,
+   "evidence": [
+    "unique constant 0x4e27"
+   ],
+   "method": "features-v1"
+  },
+  {
+   "dos": "f_0AD9_093C",
+   "dos_address": "root:0AD9:093C",
+   "win16": "_ProcEditEvent",
+   "win16_address": "3:0B7A",
+   "confidence": "LOW",
+   "score": 1.0,
+   "mutual_best": true,
+   "evidence": [
+    "unique constant 0xc36"
+   ],
+   "method": "features-v1"
+  },
+  {
+   "dos": "o13_384C_09B5",
+   "dos_address": "S13:384C:09B5",
+   "win16": "_DrawMower",
+   "win16_address": "3:B2C4",
+   "confidence": "LOW",
+   "score": 1.0,
+   "mutual_best": true,
+   "evidence": [
+    "unique constant 0x2260"
+   ],
+   "method": "features-v1"
+  },
+  {
+   "dos": "o16_384C_0000",
+   "dos_address": "S16:384C:0000",
+   "win16": "_DrawSimPayoff",
+   "win16_address": "1:CDA8",
+   "confidence": "LOW",
+   "score": 1.0,
+   "mutual_best": true,
+   "evidence": [
+    "unique constant 0x3f48"
+   ],
+   "method": "features-v1"
+  },
+  {
+   "dos": "o14_384C_0DE5",
+   "dos_address": "S14:384C:0DE5",
+   "win16": "_win_DrawEndGameWindow",
+   "win16_address": "1:64D4",
+   "confidence": "LOW",
+   "score": 1.0,
+   "mutual_best": true,
+   "evidence": [
+    "unique constant 0xce64"
+   ],
+   "method": "features-v1"
+  },
+  {
+   "dos": "o22_39C7_0405",
+   "dos_address": "S22:39C7:0405",
+   "win16": "_DoLaserFire",
+   "win16_address": "1:6EC8",
+   "confidence": "LOW",
+   "score": 1.0,
+   "mutual_best": true,
+   "evidence": [
+    "unique constant 0x8265"
+   ],
+   "method": "features-v1"
+  },
+  {
+   "dos": "f_0E2E_0204",
+   "dos_address": "root:0E2E:0204",
+   "win16": "_GiveLesson",
+   "win16_address": "7:7B4E",
+   "confidence": "LOW",
+   "score": 1.0,
+   "mutual_best": true,
+   "evidence": [
+    "unique constant 0x4268"
+   ],
+   "method": "features-v1"
+  },
+  {
+   "dos": "o25_3BA4_0999",
+   "dos_address": "S25:3BA4:0999",
+   "win16": "_AnimYellowFight",
+   "win16_address": "6:7E56",
+   "confidence": "LOW",
+   "score": 1.0,
+   "mutual_best": true,
+   "evidence": [
+    "unique constant 0x32c8"
+   ],
+   "method": "features-v1"
+  },
+  {
+   "dos": "o14_384C_0FA2",
+   "dos_address": "S14:384C:0FA2",
+   "win16": "_SpiderDialog",
+   "win16_address": "1:673A",
+   "confidence": "LOW",
+   "score": 1.0,
+   "mutual_best": true,
+   "evidence": [
+    "unique constant 0x2ee0"
+   ],
+   "method": "features-v1"
+  },
+  {
+   "dos": "o22_39C7_1CD9",
+   "dos_address": "S22:39C7:1CD9",
+   "win16": "_YellowCommand",
+   "win16_address": "1:87BA",
+   "confidence": "LOW",
+   "score": 1.0,
+   "mutual_best": true,
+   "evidence": [
+    "unique constant 0x56ee"
+   ],
+   "method": "features-v1"
+  },
+  {
+   "dos": "f_283E_0035",
+   "dos_address": "root:283E:0035",
+   "win16": "_RemoveFromAList",
+   "win16_address": "5:2B42",
+   "confidence": "LOW",
+   "score": 1.0,
+   "mutual_best": true,
+   "evidence": [
+    "unique constant 0x80f0"
+   ],
+   "method": "features-v1"
+  },
+  {
+   "dos": "o14_384C_07ED",
+   "dos_address": "S14:384C:07ED",
+   "win16": "_DrawCastePopUp",
+   "win16_address": "1:5D9E",
+   "confidence": "LOW",
+   "score": 1.0,
+   "mutual_best": true,
+   "evidence": [
+    "unique constant 0x1700"
+   ],
+   "method": "features-v1"
+  },
+  {
+   "dos": "o05_3663_0004",
+   "dos_address": "S05:3663:0004",
+   "win16": "_DoExpMenu",
+   "win16_address": "3:6EE2",
+   "confidence": "LOW",
+   "score": 1.0,
+   "mutual_best": true,
+   "evidence": [
+    "unique constant 0x902"
+   ],
+   "method": "features-v1"
+  },
+  {
+   "dos": "f_0798_0141",
+   "dos_address": "root:0798:0141",
+   "win16": "_ProcCasteEvent",
+   "win16_address": "1:BD08",
+   "confidence": "LOW",
+   "score": 1.0,
+   "mutual_best": true,
+   "evidence": [
+    "unique constant 0x1305"
+   ],
+   "method": "features-v1"
+  },
+  {
+   "dos": "o13_384C_0000",
+   "dos_address": "S13:384C:0000",
+   "win16": "_ProcYardEvent",
+   "win16_address": "3:A51E",
+   "confidence": "LOW",
+   "score": 1.0,
+   "mutual_best": true,
+   "evidence": [
+    "unique constant 0x1906"
+   ],
+   "method": "features-v1"
+  },
+  {
+   "dos": "o05_35F5_025C",
+   "dos_address": "S05:35F5:025C",
+   "win16": "_win_DrawExamineWindow",
+   "win16_address": "3:69C0",
+   "confidence": "LOW",
+   "score": 1.0,
+   "mutual_best": true,
+   "evidence": [
+    "unique constant 0x1d03"
+   ],
+   "method": "features-v1"
+  },
+  {
+   "dos": "f_0BE8_0002",
+   "dos_address": "root:0BE8:0002",
+   "win16": "_CountAnts",
+   "win16_address": "5:04DE",
+   "confidence": "LOW",
+   "score": 1.0,
+   "mutual_best": true,
+   "evidence": [
+    "unique constant 0x2b0d"
+   ],
+   "method": "features-v1"
+  },
+  {
+   "dos": "o24_39C7_0012",
+   "dos_address": "S24:39C7:0012",
+   "win16": "_ProcHistoryEvent",
+   "win16_address": "1:8A76",
+   "confidence": "LOW",
+   "score": 1.0,
+   "mutual_best": true,
+   "evidence": [
+    "unique constant 0x150d"
+   ],
+   "method": "features-v1"
+  },
+  {
+   "dos": "f_015B_0798",
+   "dos_address": "root:015B:0798",
+   "win16": "_XferPatch",
+   "win16_address": "1:AB90",
+   "confidence": "LOW",
+   "score": 1.0,
+   "mutual_best": true,
+   "evidence": [
+    "unique constant 0x2712"
+   ],
+   "method": "features-v1"
+  },
+  {
+   "dos": "o25_39C7_0AB0",
+   "dos_address": "S25:39C7:0AB0",
+   "win16": "_SimQueenB",
+   "win16_address": "6:3DC2",
+   "confidence": "LOW",
+   "score": 1.0,
+   "mutual_best": true,
+   "evidence": [
+    "unique constant 0x271f"
+   ],
+   "method": "features-v1"
+  },
+  {
+   "dos": "f_0F3F_0B1F",
+   "dos_address": "root:0F3F:0B1F",
+   "win16": "_SimQueenR",
+   "win16_address": "6:6386",
+   "confidence": "LOW",
+   "score": 1.0,
+   "mutual_best": true,
+   "evidence": [
+    "unique constant 0x2720"
+   ],
+   "method": "features-v1"
+  },
+  {
+   "dos": "f_0CDB_00B3",
+   "dos_address": "root:0CDB:00B3",
+   "win16": "_MoveSpider",
+   "win16_address": "5:4704",
+   "confidence": "LOW",
+   "score": 1.0,
+   "mutual_best": true,
+   "evidence": [
+    "unique constant 0x273e"
+   ],
+   "method": "features-v1"
+  },
+  {
+   "dos": "o13_384C_047E",
+   "dos_address": "S13:384C:047E",
+   "win16": "_DrawSimKid",
+   "win16_address": "3:AF14",
+   "confidence": "LOW",
+   "score": 1.0,
+   "mutual_best": true,
+   "evidence": [
+    "unique constant 0x1f40"
+   ],
+   "method": "features-v1"
+  },
+  {
+   "dos": "f_0AD9_03D3",
+   "dos_address": "root:0AD9:03D3",
+   "win16": "_DoAntLions",
+   "win16_address": "7:43FA",
+   "confidence": "LOW",
+   "score": 1.0,
+   "mutual_best": true,
+   "evidence": [
+    "unique constant 0x2742"
+   ],
+   "method": "features-v1"
+  },
+  {
+   "dos": "o13_384C_0EE0",
+   "dos_address": "S13:384C:0EE0",
+   "win16": "_DrawSwarm",
+   "win16_address": "3:BB0E",
+   "confidence": "LOW",
+   "score": 1.0,
+   "mutual_best": true,
+   "evidence": [
+    "unique constant 0x1b5e"
+   ],
+   "method": "features-v1"
+  },
+  {
+   "dos": "o22_3BBD_097D",
+   "dos_address": "S22:3BBD:097D",
+   "win16": "_ExpKillAnts",
+   "win16_address": "3:7D5C",
+   "confidence": "LOW",
+   "score": 1.0,
+   "mutual_best": true,
+   "evidence": [
+    "unique constant 0x278f"
+   ],
+   "method": "features-v1"
+  },
+  {
+   "dos": "f_10F7_1E71",
+   "dos_address": "root:10F7:1E71",
+   "win16": "_EatMyFood",
+   "win16_address": "5:8CDA",
+   "confidence": "LOW",
+   "score": 1.0,
+   "mutual_best": true,
+   "evidence": [
+    "unique constant 0x2396"
+   ],
+   "method": "features-v1"
+  },
+  {
+   "dos": "f_23AE_0022",
+   "dos_address": "root:23AE:0022",
+   "win16": "_myBeginSong",
+   "win16_address": "2:858E",
+   "confidence": "LOW",
+   "score": 1.0,
+   "mutual_best": true,
+   "evidence": [
+    "unique constant 0x8da6"
+   ],
+   "method": "features-v1"
+  },
+  {
+   "dos": "o08_35F5_059B",
+   "dos_address": "S08:35F5:059B",
+   "win16": "_DoUserButton",
+   "win16_address": "1:04C4",
+   "confidence": "LOW",
+   "score": 1.0,
+   "mutual_best": true,
+   "evidence": [
+    "unique constant 0x7bc"
+   ],
+   "method": "features-v1"
+  },
+  {
+   "dos": "o22_3BBD_02FF",
+   "dos_address": "S22:3BBD:02FF",
+   "win16": "_DropWall",
+   "win16_address": "3:7450",
+   "confidence": "LOW",
+   "score": 1.0,
+   "mutual_best": true,
+   "evidence": [
+    "unique constant 0x7d0"
+   ],
+   "method": "features-v1"
+  },
+  {
+   "dos": "o12_384C_0432",
+   "dos_address": "S12:384C:0432",
+   "win16": "_GenOverMap",
+   "win16_address": "4:46E9",
+   "confidence": "LOW",
+   "score": 1.0,
+   "mutual_best": true,
+   "evidence": [
+    "unique constant 0x1fff"
+   ],
+   "method": "features-v1"
+  },
+  {
+   "dos": "f_171C_13CA",
+   "dos_address": "root:171C:13CA",
+   "win16": "_mem_malloc",
+   "win16_address": "2:54BC",
+   "confidence": "LOW",
+   "score": 1.0,
+   "mutual_best": true,
+   "evidence": [
+    "aligned call-sequence gap in 1 anchored caller(s): f_1986_0004"
+   ],
+   "method": "callseq-alignment-v1"
+  },
+  {
+   "dos": "f_171C_2190",
+   "dos_address": "root:171C:2190",
+   "win16": "_mem_malloc",
+   "win16_address": "2:54BC",
+   "confidence": "LOW",
+   "score": 1.0,
+   "mutual_best": true,
+   "evidence": [
+    "aligned call-sequence gap in 1 anchored caller(s): f_25E7_007A"
+   ],
+   "method": "callseq-alignment-v1"
+  },
+  {
+   "dos": "f_25E7_0008",
+   "dos_address": "root:25E7:0008",
+   "win16": "_mem_malloc",
+   "win16_address": "2:54BC",
+   "confidence": "LOW",
+   "score": 1.0,
+   "mutual_best": true,
+   "evidence": [
+    "aligned call-sequence gap in 1 anchored caller(s): f_25E7_007A"
+   ],
+   "method": "callseq-alignment-v1"
+  },
+  {
+   "dos": "f_171C_1750",
+   "dos_address": "root:171C:1750",
+   "win16": "_RallocMemoryFree",
+   "win16_address": "2:59C0",
+   "confidence": "LOW",
+   "score": 1.0,
+   "mutual_best": true,
+   "evidence": [
+    "aligned call-sequence gap in 1 anchored caller(s): o20_39F1_000A"
+   ],
+   "method": "callseq-alignment-v1"
+  },
+  {
+   "dos": "f_075B_00AE",
+   "dos_address": "root:075B:00AE",
+   "win16": "_LoadStringAnt",
+   "win16_address": "5:03F4",
+   "confidence": "LOW",
+   "score": 1.0,
+   "mutual_best": true,
+   "evidence": [
+    "aligned call-sequence gap in 1 anchored caller(s): f_075B_0000"
+   ],
+   "method": "callseq-alignment-v1"
+  },
+  {
+   "dos": "f_1986_00F4",
+   "dos_address": "root:1986:00F4",
+   "win16": "_CreateIndex",
+   "win16_address": "7:9B48",
+   "confidence": "LOW",
+   "score": 1.0,
+   "mutual_best": true,
+   "evidence": [
+    "aligned call-sequence gap in 1 anchored caller(s): f_1A28_0006"
+   ],
+   "method": "callseq-alignment-v1"
+  }
+ ]
+}

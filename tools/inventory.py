@@ -271,6 +271,13 @@ class Inventory:
             callers[b].add(a)
             callees[a].add(b)
         self.edges = (callers, callees)
+        seqs = defaultdict(list)
+        for un, site, tu, tlin, kind in sorted(self.call_sites, key=lambda c: (c[0], c[1])):
+            src = self.insn_owner.get((un, site))
+            if src is None or tu is None:
+                continue
+            seqs[f"{src[0]}:{src[1]:05X}"].append(f"{tu}:{tlin:05X}")
+        self.call_seqs = seqs
         by_unit = defaultdict(list)
         for (u, lin), f in self.funcs.items():
             by_unit[u].append(f)
@@ -292,6 +299,7 @@ class Inventory:
                     "evidence": dict(f["evidence"]),
                     "callers": sorted(callers.get(f"{u}:{f['linear']:05X}", ())),
                     "callees": sorted(callees.get(f"{u}:{f['linear']:05X}", ())),
+                    "call_seq": self.call_seqs.get(f"{u}:{f['linear']:05X}", []),
                     "insns": f.get("insns", 0),
                 }
                 for k in ("jump_tables", "indirect_jmp", "bad"):

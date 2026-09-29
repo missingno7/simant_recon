@@ -8,25 +8,235 @@
    "profile": "msc600",
    "flags": [
     "/AL",
-    "/Os"
+    "/Os",
+    "/Oe"
    ],
-   "placements": {},
+   "placements": {
+    "_BSS": {
+     "seg": 21939,
+     "off": 35746,
+     "size": 2
+    }
+   },
+   "extent": {
+    "start": 2354,
+    "end": 2977
+   },
    "source": "src/root/m0093.c",
-   "source_sha256": "95fe359d64481c4f425dea4a537234da764fa17a5be3cd0c3a11803bef18007c",
+   "source_sha256": "c18223e85db841b155c7a5093a9824ba6b5803baa5eeb8e978014067912f188c",
    "claims": [
     {
-     "name": "f_0093_008F",
+     "name": "SetSRandSeed",
      "unit": "root",
      "seg": 147,
      "off": 143,
      "size": 20,
      "target_sha256": "699e2b15c0219a388c64e0fed655407e6a9475e6f71d68b513c7bc31787114b0",
      "kind": "C",
-     "provenance": "EXACT_NATURAL"
+     "provenance": "EXACT_NATURAL",
+     "reloc_order": "EXACT"
+    },
+    {
+     "name": "f_0093_0002",
+     "unit": "root",
+     "seg": 147,
+     "off": 2,
+     "size": 41,
+     "target_sha256": "489615186f20704a00309d9af4feea986d4faa7f3100669567aa6a6619559bee",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL",
+     "reloc_order": "EXACT"
+    },
+    {
+     "name": "f_0093_002B",
+     "unit": "root",
+     "seg": 147,
+     "off": 43,
+     "size": 41,
+     "target_sha256": "ff087bdade3bb6cf6d7a80477aaefeda1db3ee9712f9c4e0f33bf0968fd8e80c",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL",
+     "reloc_order": "EXACT"
+    },
+    {
+     "name": "f_0093_0054",
+     "unit": "root",
+     "seg": 147,
+     "off": 84,
+     "size": 59,
+     "target_sha256": "f2cb02b8ff2cb58e339c465beab81dffd8f18ceeab26512a3e0bcd51f4b40814",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL",
+     "reloc_order": "EXACT"
+    },
+    {
+     "name": "GetSRandSeed",
+     "unit": "root",
+     "seg": 147,
+     "off": 163,
+     "size": 13,
+     "target_sha256": "dfa018bc25f58958416e99079763a383dfe007c77dae5cef752b80ba53643b60",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL",
+     "reloc_order": "EXACT"
+    },
+    {
+     "name": "SetRRandSeed",
+     "unit": "root",
+     "seg": 147,
+     "off": 176,
+     "size": 8,
+     "target_sha256": "424dadfcf7b504a3a2053a972f7c12740b8fd864fbbf3e4585bdfd8180c3e6c5",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL",
+     "reloc_order": "EXACT"
+    },
+    {
+     "name": "f_0093_00B8",
+     "unit": "root",
+     "seg": 147,
+     "off": 184,
+     "size": 22,
+     "target_sha256": "51449eb3a1fa4951e9ccf0c165d410df5f70ac0fcb3f216e78a4c5b69da95238",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL",
+     "reloc_order": "EXACT"
+    },
+    {
+     "name": "SeedSRand",
+     "unit": "root",
+     "seg": 147,
+     "off": 206,
+     "size": 19,
+     "target_sha256": "df6a1126d16ceab8cd88e481fdfdbfed3d9e6547b6a65ace1ca46febaa16d451",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL",
+     "reloc_order": "PENDING_RTLINK_MODEL"
+    },
+    {
+     "name": "SeedRRand",
+     "unit": "root",
+     "seg": 147,
+     "off": 225,
+     "size": 55,
+     "target_sha256": "98fb0695427d9ac2a7c990161b803eae4bdfa96882dabcd28c63f6fd99081028",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL",
+     "reloc_order": "PENDING_RTLINK_MODEL"
+    },
+    {
+     "name": "RRand",
+     "unit": "root",
+     "seg": 147,
+     "off": 280,
+     "size": 37,
+     "target_sha256": "3fbb5967d813f0752482b5b237d96bb4cd6a2c1617ed496f4eacc5be8b7a5782",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL",
+     "reloc_order": "PENDING_RTLINK_MODEL"
+    },
+    {
+     "name": "SRand1",
+     "unit": "root",
+     "seg": 147,
+     "off": 317,
+     "size": 44,
+     "target_sha256": "920ab45c488dd6d29c03e83f13628e35624046bd3a3af4aa8a4eeb289bed7adb",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL",
+     "reloc_order": "EXACT"
+    },
+    {
+     "name": "SRand2",
+     "unit": "root",
+     "seg": 147,
+     "off": 361,
+     "size": 33,
+     "target_sha256": "49d8ec2f6d24bbfbe0d9044e825994665299c6af005b3114f068d0b6efe4a596",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL",
+     "reloc_order": "EXACT"
+    },
+    {
+     "name": "SRand4",
+     "unit": "root",
+     "seg": 147,
+     "off": 394,
+     "size": 33,
+     "target_sha256": "06a9b4be8f2462d5400d48a2bd9af4a6ff8d3b89910f961003a5f30b839b7fc7",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL",
+     "reloc_order": "EXACT"
+    },
+    {
+     "name": "SRand8",
+     "unit": "root",
+     "seg": 147,
+     "off": 427,
+     "size": 33,
+     "target_sha256": "472ccb6b9a094d57f4f5078179451884425ac72d792131c7836bde04fb34fa1f",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL",
+     "reloc_order": "EXACT"
+    },
+    {
+     "name": "SRand16",
+     "unit": "root",
+     "seg": 147,
+     "off": 460,
+     "size": 33,
+     "target_sha256": "00394409c6563bce9a7bfd4ebb82a6f8e4630aaacb66470052e2f77668b555f1",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL",
+     "reloc_order": "EXACT"
+    },
+    {
+     "name": "SRand32",
+     "unit": "root",
+     "seg": 147,
+     "off": 493,
+     "size": 33,
+     "target_sha256": "faf42d52878a661aefa535a24938726f0fb37ef85b7e9116f0359a176639ccbe",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL",
+     "reloc_order": "EXACT"
+    },
+    {
+     "name": "SRand64",
+     "unit": "root",
+     "seg": 147,
+     "off": 526,
+     "size": 33,
+     "target_sha256": "5d42cc2ebca5ecaa73c622ee13a1ad20c86975d166c76682e1eb9ce79f6b4570",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL",
+     "reloc_order": "EXACT"
+    },
+    {
+     "name": "SRand128",
+     "unit": "root",
+     "seg": 147,
+     "off": 559,
+     "size": 33,
+     "target_sha256": "8bcb4c434133960fcba96b825042f1153cf320b51c5237d3c110e62b36f2c262",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL",
+     "reloc_order": "EXACT"
+    },
+    {
+     "name": "SRand256",
+     "unit": "root",
+     "seg": 147,
+     "off": 592,
+     "size": 33,
+     "target_sha256": "ea054fc339edf9ce0146bd2f6b1edea93c9ce743fc0baa3abcd66c3cfd545c48",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL",
+     "reloc_order": "EXACT"
     }
    ],
    "scaffold": [],
-   "object_sha256": "8f4c51e7cee0097684e8db3cf219227016592c85f1013edd920dc2089b56f4d3"
+   "object_sha256": "1e35b30b7c439012bdeb3349ed9d8bba2194ef51e1368e74cd2fbd83128a8386"
   },
   "root:00DF": {
    "unit": "root",
@@ -109,6 +319,87 @@
     "f_0250_0D10"
    ],
    "object_sha256": "66fa63a9af911a5f8a0f18b40e64b9f80b9827ce9ca5558f0440ab8087c402e7"
+  },
+  "root:277D": {
+   "unit": "root",
+   "seg": 10109,
+   "profile": "msc600",
+   "flags": [
+    "/AL",
+    "/Os",
+    "/Gs"
+   ],
+   "placements": {},
+   "extent": {
+    "start": 161754,
+    "end": 161760
+   },
+   "source": "src/root/m277D.c",
+   "source_sha256": "6b7b7e4b468987b3ad3c869934df31e0e9325ab7e1771735d1e6113971047591",
+   "claims": [
+    {
+     "name": "WinPrintf",
+     "unit": "root",
+     "seg": 10109,
+     "off": 10,
+     "size": 1,
+     "target_sha256": "383e5d7d58caa41ce723cf16af471b38f6ee9065c032d07fa6bef1678cb72f1d",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL"
+    },
+    {
+     "name": "f_277D_000B",
+     "unit": "root",
+     "seg": 10109,
+     "off": 11,
+     "size": 1,
+     "target_sha256": "383e5d7d58caa41ce723cf16af471b38f6ee9065c032d07fa6bef1678cb72f1d",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL"
+    },
+    {
+     "name": "f_277D_000C",
+     "unit": "root",
+     "seg": 10109,
+     "off": 12,
+     "size": 1,
+     "target_sha256": "383e5d7d58caa41ce723cf16af471b38f6ee9065c032d07fa6bef1678cb72f1d",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL"
+    },
+    {
+     "name": "f_277D_000D",
+     "unit": "root",
+     "seg": 10109,
+     "off": 13,
+     "size": 1,
+     "target_sha256": "383e5d7d58caa41ce723cf16af471b38f6ee9065c032d07fa6bef1678cb72f1d",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL"
+    },
+    {
+     "name": "f_277D_000E",
+     "unit": "root",
+     "seg": 10109,
+     "off": 14,
+     "size": 1,
+     "target_sha256": "383e5d7d58caa41ce723cf16af471b38f6ee9065c032d07fa6bef1678cb72f1d",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL"
+    },
+    {
+     "name": "f_277D_000F",
+     "unit": "root",
+     "seg": 10109,
+     "off": 15,
+     "size": 1,
+     "target_sha256": "383e5d7d58caa41ce723cf16af471b38f6ee9065c032d07fa6bef1678cb72f1d",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL"
+    }
+   ],
+   "scaffold": [],
+   "object_sha256": "fb00f329c7319701e1955cdd0e96dd68d2df669d0146c2343f5300cfa1f04078"
   }
  }
 }

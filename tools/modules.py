@@ -82,11 +82,17 @@ def verify_module(text: str, module: dict, claims: list[dict]) -> dict:
         orig = x.read(c["unit"], t.linear, t.size)
         ok = res.exact and sha(orig) == c["target_sha256"]
         out["claims"][name] = {"exact": ok, "reasons": res.reasons, "fixups": len(res.fixups),
-                               "relocations": len(res.relocs_expected)}
+                               "relocations": len(res.relocs_expected), "reloc_order": res.reloc_order}
         all_ok &= ok
     # private data placements must reproduce the oracle bytes they claim
     for segname, p in module.get("placements", {}).items():
         body = obj.segments.get(segname)
+        sdef = next((s for s in obj.segment_defs if s["name"] == segname), None)
+        if body is None and sdef is not None and str(sdef.get("class", "")).upper() == "BSS":
+            dres = verify_bss_placement(sdef, p)
+            out.setdefault("data", {})[segname] = dres
+            all_ok &= dres["exact"]
+            continue
         if body is None:
             out.setdefault("data", {})[segname] = {"exact": False, "reasons": ["segment absent"]}
             all_ok = False
@@ -94,9 +100,66 @@ def verify_module(text: str, module: dict, claims: list[dict]) -> dict:
         dres = verify_data_segment(obj, segname, p)
         out.setdefault("data", {})[segname] = dres
         all_ok &= dres["exact"]
+    ext = module.get("extent")
+    if ext:
+        tres = verify_extent(obj, ext, claims, scaff)
+        out["extent"] = tres
+        all_ok &= tres["exact"]
     out["exact"] = all_ok
     out["scaffold"] = sorted(scaff)
     return out
+
+
+def verify_extent(obj, ext: dict, claims: list[dict], scaff: set) -> dict:
+    """Complete translation unit: the claims tile the whole original code segment.
+
+    The compiled code segment must have exactly ``end - start`` bytes, contain no
+    scaffold, and every byte must be covered by a (separately verified) claim,
+    except a trailing MSC word-alignment pad that must equal the oracle byte.
+    """
+    reasons = []
+    if scaff:
+        reasons.append("scaffold present")
+    start, end = ext["start"], ext["end"]
+    names = {c["name"] for c in claims}
+    segs = {p["segment"] for p in obj.publics if p["name"][1:] in names}
+    if len(segs) != 1:
+        return {"exact": False, "reasons": reasons + [f"claims span segments {sorted(segs)}"]}
+    seg = segs.pop()
+    body = bytes(obj.segments.get(seg, b""))
+    if len(body) != end - start:
+        reasons.append(f"segment length {len(body)} != extent {end - start}")
+    if {p["name"][1:] for p in obj.publics if p["segment"] == seg} != names:
+        reasons.append("segment publics differ from claims")
+    pos = start
+    for a, b in sorted((c["seg"] * 16 + c["off"], c["seg"] * 16 + c["off"] + c["size"]) for c in claims):
+        if a != pos:
+            reasons.append(f"gap/overlap at {pos:05X}")
+            break
+        pos = b
+    if pos != end:
+        tail = exemod.load().read(claims[0]["unit"], pos, end - pos)
+        if not (end - pos == 1 and body[-1:] == tail == bytes([0x90])):
+            reasons.append(f"uncovered tail {pos:05X}-{end:05X}")
+    return {"exact": not reasons, "reasons": reasons}
+
+
+def verify_bss_placement(sdef: dict, p: dict) -> dict:
+    """A private _BSS placement has no file bytes to compare.  Require that it lies in
+    DGROUP's uninitialised tail (beyond section 27's file data) and that its size is the
+    SEGDEF length.  Its address is proven only by the code operands that bind to it; the
+    placement within the BSS link order stays a hypothesis until the historical link."""
+    x = exemod.load()
+    s27 = x.sections[27]
+    start = p["seg"] * 16 + p["off"]
+    reasons = []
+    if start < s27.load_linear + len(s27.data) - 3:
+        reasons.append("BSS placement overlaps initialised data")
+    if start + sdef["length"] > s27.load_linear + s27.mem_paras * 16:
+        reasons.append("BSS placement beyond DGROUP memory")
+    if p.get("size", sdef["length"]) != sdef["length"]:
+        reasons.append(f"BSS size {sdef['length']} != placement {p.get('size')}")
+    return {"exact": not reasons, "reasons": reasons, "size": sdef["length"], "kind": "BSS"}
 
 
 def verify_data_segment(obj, segname: str, p: dict) -> dict:

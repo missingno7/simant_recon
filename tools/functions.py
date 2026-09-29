@@ -92,7 +92,31 @@ def freeze() -> int:
     return 0
 
 
+def add(addr: str, size: int, why: str) -> int:
+    """Add a reviewed function row (e.g. an unreferenced entry proven by layout)."""
+    unit, seg, off = addr.split(":")
+    seg, off = int(seg, 16), int(off, 16)
+    t = json.loads(TABLE.read_text())
+    if any(r["unit"] == unit and r["seg"] == seg and r["off"] == off for r in t["functions"]):
+        raise SystemExit("row exists")
+    lin = seg * 16 + off
+    for r in t["functions"]:
+        if r["unit"] == unit and r["seg"] * 16 + r["off"] < lin + size and lin < r["seg"] * 16 + r["off"] + r["size"]:
+            raise SystemExit(f"overlaps {r}")
+    t["functions"].append({"unit": unit, "seg": seg, "off": off, "size": size, "region": "game_or_library",
+                           "extent": "REVIEWED", "evidence": ["reviewed"], "notes": [why]})
+    t["functions"].sort(key=lambda r: (r["unit"] != "root", r["unit"], r["seg"] * 16 + r["off"]))
+    TABLE.write_text(json.dumps(t, indent=0) + "\n")
+    s = symmod.load()
+    s["code"][symmod.default_name(unit, seg, off)] = {"unit": unit, "seg": seg, "off": off, "grounding": "reviewed: " + why}
+    symmod.save(s)
+    print("added", addr)
+    return 0
+
+
 if __name__ == "__main__":
     if sys.argv[1:] == ["freeze"]:
         raise SystemExit(freeze())
+    if len(sys.argv) >= 5 and sys.argv[1] == "add":
+        raise SystemExit(add(sys.argv[2], int(sys.argv[3]), " ".join(sys.argv[4:])))
     print(__doc__)

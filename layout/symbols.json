@@ -1,6 +1,222 @@
 {
  "schema": "simant-symbols-v1",
  "code": {
+  "GetSRandSeed": {
+   "unit": "root",
+   "seg": 147,
+   "off": 163,
+   "grounding": "reviewed: unreached: between SetSRandSeed retf (0x9D2) and next entry; stack-checked frameless function",
+   "history": [
+    {
+     "was": "f_0093_00A3",
+     "why": "xver CONFIRMED (evidence/cross_version/decisions.json: RNG translation unit)"
+    }
+   ]
+  },
+  "Punt": {
+   "unit": "root",
+   "seg": 7266,
+   "off": 12,
+   "grounding": "inventory:far_call,far_jmp",
+   "history": [
+    {
+     "was": "f_1C62_000C",
+     "why": "xver CONFIRMED with Win16 _Punt (evidence/cross_version/decisions.json)"
+    }
+   ]
+  },
+  "RRand": {
+   "unit": "root",
+   "seg": 147,
+   "off": 280,
+   "grounding": "inventory:far_call",
+   "history": [
+    {
+     "was": "f_0093_0118",
+     "why": "xver CONFIRMED (evidence/cross_version/decisions.json: RNG translation unit)"
+    }
+   ]
+  },
+  "SRand1": {
+   "unit": "root",
+   "seg": 147,
+   "off": 317,
+   "grounding": "inventory:far_call,push_cs_call",
+   "history": [
+    {
+     "was": "f_0093_013D",
+     "why": "xver CONFIRMED (evidence/cross_version/decisions.json: RNG translation unit)"
+    }
+   ]
+  },
+  "SRand128": {
+   "unit": "root",
+   "seg": 147,
+   "off": 559,
+   "grounding": "inventory:far_call,push_cs_call",
+   "history": [
+    {
+     "was": "f_0093_022F",
+     "why": "xver CONFIRMED (evidence/cross_version/decisions.json: RNG translation unit)"
+    }
+   ]
+  },
+  "SRand16": {
+   "unit": "root",
+   "seg": 147,
+   "off": 460,
+   "grounding": "inventory:far_call",
+   "history": [
+    {
+     "was": "f_0093_01CC",
+     "why": "xver CONFIRMED (evidence/cross_version/decisions.json: RNG translation unit)"
+    }
+   ]
+  },
+  "SRand2": {
+   "unit": "root",
+   "seg": 147,
+   "off": 361,
+   "grounding": "inventory:far_call,push_cs_call",
+   "history": [
+    {
+     "was": "f_0093_0169",
+     "why": "xver CONFIRMED (evidence/cross_version/decisions.json: RNG translation unit)"
+    }
+   ]
+  },
+  "SRand256": {
+   "unit": "root",
+   "seg": 147,
+   "off": 592,
+   "grounding": "inventory:far_call",
+   "history": [
+    {
+     "was": "f_0093_0250",
+     "why": "xver CONFIRMED (evidence/cross_version/decisions.json: RNG translation unit)"
+    }
+   ]
+  },
+  "SRand32": {
+   "unit": "root",
+   "seg": 147,
+   "off": 493,
+   "grounding": "inventory:far_call",
+   "history": [
+    {
+     "was": "f_0093_01ED",
+     "why": "xver CONFIRMED (evidence/cross_version/decisions.json: RNG translation unit)"
+    }
+   ]
+  },
+  "SRand4": {
+   "unit": "root",
+   "seg": 147,
+   "off": 394,
+   "grounding": "inventory:far_call",
+   "history": [
+    {
+     "was": "f_0093_018A",
+     "why": "xver CONFIRMED (evidence/cross_version/decisions.json: RNG translation unit)"
+    }
+   ]
+  },
+  "SRand64": {
+   "unit": "root",
+   "seg": 147,
+   "off": 526,
+   "grounding": "inventory:far_call",
+   "history": [
+    {
+     "was": "f_0093_020E",
+     "why": "xver CONFIRMED (evidence/cross_version/decisions.json: RNG translation unit)"
+    }
+   ]
+  },
+  "SRand8": {
+   "unit": "root",
+   "seg": 147,
+   "off": 427,
+   "grounding": "inventory:far_call",
+   "history": [
+    {
+     "was": "f_0093_01AB",
+     "why": "xver CONFIRMED (evidence/cross_version/decisions.json: RNG translation unit)"
+    }
+   ]
+  },
+  "SeedRRand": {
+   "unit": "root",
+   "seg": 147,
+   "off": 225,
+   "grounding": "inventory:far_call",
+   "history": [
+    {
+     "was": "f_0093_00E1",
+     "why": "xver CONFIRMED (evidence/cross_version/decisions.json: RNG translation unit)"
+    }
+   ]
+  },
+  "SeedSRand": {
+   "unit": "root",
+   "seg": 147,
+   "off": 206,
+   "grounding": "inventory:far_call,push_cs_call",
+   "history": [
+    {
+     "was": "f_0093_00CE",
+     "why": "xver CONFIRMED (evidence/cross_version/decisions.json: RNG translation unit)"
+    }
+   ]
+  },
+  "SetRRandSeed": {
+   "unit": "root",
+   "seg": 147,
+   "off": 176,
+   "grounding": "reviewed: unreached: chkstk + retf",
+   "history": [
+    {
+     "was": "f_0093_00B0",
+     "why": "xver CONFIRMED (evidence/cross_version/decisions.json: RNG translation unit)"
+    }
+   ]
+  },
+  "SetSRandSeed": {
+   "unit": "root",
+   "seg": 147,
+   "off": 143,
+   "grounding": "inventory:far_call",
+   "history": [
+    {
+     "was": "f_0093_008F",
+     "why": "xver CONFIRMED (evidence/cross_version/decisions.json: RNG translation unit)"
+    }
+   ]
+  },
+  "TickCount": {
+   "unit": "root",
+   "seg": 7027,
+   "off": 1284,
+   "grounding": "inventory:far_call",
+   "history": [
+    {
+     "was": "f_1B73_0504",
+     "why": "xver CONFIRMED (evidence/cross_version/decisions.json: RNG translation unit)"
+    }
+   ]
+  },
+  "WinPrintf": {
+   "unit": "root",
+   "seg": 10109,
+   "off": 10,
+   "grounding": "inventory:far_call",
+   "history": [
+    {
+     "was": "f_277D_000A",
+     "why": "xver HIGH: 8 anchored callers agree with Win16 _WinPrintf callers; body is compiled-out debug formatter (evidence/cross_version/decisions.json)"
+    }
+   ]
+  },
   "f_0000_0090": {
    "unit": "root",
    "seg": 0,
@@ -43,6 +259,12 @@
    "off": 1135,
    "grounding": "inventory:far_call"
   },
+  "f_0093_0002": {
+   "unit": "root",
+   "seg": 147,
+   "off": 2,
+   "grounding": "reviewed: unreferenced function at 0x932 (word-aligned module start)"
+  },
   "f_0093_002B": {
    "unit": "root",
    "seg": 147,
@@ -55,83 +277,11 @@
    "off": 84,
    "grounding": "inventory:far_call"
   },
-  "f_0093_008F": {
+  "f_0093_00B8": {
    "unit": "root",
    "seg": 147,
-   "off": 143,
-   "grounding": "inventory:far_call"
-  },
-  "f_0093_00CE": {
-   "unit": "root",
-   "seg": 147,
-   "off": 206,
-   "grounding": "inventory:far_call,push_cs_call"
-  },
-  "f_0093_00E1": {
-   "unit": "root",
-   "seg": 147,
-   "off": 225,
-   "grounding": "inventory:far_call"
-  },
-  "f_0093_0118": {
-   "unit": "root",
-   "seg": 147,
-   "off": 280,
-   "grounding": "inventory:far_call"
-  },
-  "f_0093_013D": {
-   "unit": "root",
-   "seg": 147,
-   "off": 317,
-   "grounding": "inventory:far_call,push_cs_call"
-  },
-  "f_0093_0169": {
-   "unit": "root",
-   "seg": 147,
-   "off": 361,
-   "grounding": "inventory:far_call,push_cs_call"
-  },
-  "f_0093_018A": {
-   "unit": "root",
-   "seg": 147,
-   "off": 394,
-   "grounding": "inventory:far_call"
-  },
-  "f_0093_01AB": {
-   "unit": "root",
-   "seg": 147,
-   "off": 427,
-   "grounding": "inventory:far_call"
-  },
-  "f_0093_01CC": {
-   "unit": "root",
-   "seg": 147,
-   "off": 460,
-   "grounding": "inventory:far_call"
-  },
-  "f_0093_01ED": {
-   "unit": "root",
-   "seg": 147,
-   "off": 493,
-   "grounding": "inventory:far_call"
-  },
-  "f_0093_020E": {
-   "unit": "root",
-   "seg": 147,
-   "off": 526,
-   "grounding": "inventory:far_call"
-  },
-  "f_0093_022F": {
-   "unit": "root",
-   "seg": 147,
-   "off": 559,
-   "grounding": "inventory:far_call,push_cs_call"
-  },
-  "f_0093_0250": {
-   "unit": "root",
-   "seg": 147,
-   "off": 592,
-   "grounding": "inventory:far_call"
+   "off": 184,
+   "grounding": "reviewed: unreached: chkstk, BIOS tick read at 046C:0000, retf at 0x9FD"
   },
   "f_00BA_0002": {
    "unit": "root",
@@ -3301,12 +3451,6 @@
    "off": 1211,
    "grounding": "inventory:far_call"
   },
-  "f_1B73_0504": {
-   "unit": "root",
-   "seg": 7027,
-   "off": 1284,
-   "grounding": "inventory:far_call"
-  },
   "f_1B73_050E": {
    "unit": "root",
    "seg": 7027,
@@ -3432,12 +3576,6 @@
    "seg": 7027,
    "off": 3822,
    "grounding": "inventory:far_call"
-  },
-  "f_1C62_000C": {
-   "unit": "root",
-   "seg": 7266,
-   "off": 12,
-   "grounding": "inventory:far_call,far_jmp"
   },
   "f_1C62_0090": {
    "unit": "root",
@@ -4999,12 +5137,6 @@
    "off": 4384,
    "grounding": "inventory:far_call"
   },
-  "f_277D_000A": {
-   "unit": "root",
-   "seg": 10109,
-   "off": 10,
-   "grounding": "inventory:far_call"
-  },
   "f_277D_000B": {
    "unit": "root",
    "seg": 10109,
@@ -5022,6 +5154,18 @@
    "seg": 10109,
    "off": 13,
    "grounding": "inventory:far_call"
+  },
+  "f_277D_000E": {
+   "unit": "root",
+   "seg": 10109,
+   "off": 14,
+   "grounding": "reviewed: unreferenced retf between referenced stubs 277D:000D and segment 277E start at 0x277E0"
+  },
+  "f_277D_000F": {
+   "unit": "root",
+   "seg": 10109,
+   "off": 15,
+   "grounding": "reviewed: unreferenced retf immediately before segment 277E start at 0x277E0"
   },
   "f_277E_0000": {
    "unit": "root",

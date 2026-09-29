@@ -4,20 +4,20 @@ Validation: **PASS** (2026-09-29)
 
 | Measure | Value |
 |---|---:|
-| known_functions | 1,336 |
-| known_game_functions | 1,233 |
-| exact_c_functions | 4 |
-| exact_c_bytes | 103 |
+| known_functions | 1,342 |
+| known_game_functions | 1,239 |
+| exact_c_functions | 28 |
+| exact_c_bytes | 712 |
 | exact_asm_bytes | 0 |
 | historical_runtime_bytes_accepted | 0 |
 | historical_runtime_bytes_located_unaccepted | 13,378 |
 | rtlink_manager_bytes_unaccepted | 17,065 |
 | data_bytes_accepted | 0 |
 | game_code_span_bytes | 304,748 |
-| unresolved_code_bytes | 304,645 |
+| unresolved_code_bytes | 304,036 |
 | unresolved_data_bytes | 135,520 |
 | scaffold_functions | 2 |
-| exact_translation_units | 0 |
+| exact_translation_units | 2 |
 
 Whole executable: NOT_BUILT (no historical link yet; see docs/next-steps.md)
 

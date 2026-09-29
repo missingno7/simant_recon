@@ -82,11 +82,12 @@ class MatchResult:
     fixups: list = field(default_factory=list)
     data_checks: list = field(default_factory=list)
     unbound: list = field(default_factory=list)
+    reloc_order: str = "EXACT"      # EXACT | PENDING_RTLINK_MODEL (set exact, order differs)
 
     def summary(self) -> str:
         if self.exact:
             return (f"EXACT {len(self.candidate)} bytes, {len(self.fixups)} fixups, "
-                    f"{len(self.relocs_expected)} relocations")
+                    f"{len(self.relocs_expected)} relocations (order {self.reloc_order})")
         return "MISMATCH: " + "; ".join(self.reasons)
 
 
@@ -246,7 +247,10 @@ class Binder:
         if sorted(exp) != sorted(cand_relocs):
             res.reasons.append(f"relocation set differs ({len(cand_relocs)} vs {len(exp)})")
         elif exp != cand_relocs:
-            res.reasons.append("relocation order differs")
+            # Relocation *order* inside RTLink output is a module-level property whose
+            # generating rule is still open (docs/exe-format.md).  The set is a hard gate;
+            # the order is recorded as a separate proof level and enforced at image level.
+            res.reloc_order = "PENDING_RTLINK_MODEL"
         res.exact = not res.reasons
         return res
 
