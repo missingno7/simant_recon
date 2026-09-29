@@ -9,8 +9,8 @@ Validation: **PASS** (2026-09-29)
 | exact_c_functions | 36 |
 | exact_c_bytes | 825 |
 | exact_asm_bytes | 25 |
-| historical_runtime_bytes_accepted | 0 |
-| historical_runtime_bytes_located_unaccepted | 13,378 |
+| historical_runtime_bytes_accepted | 12,308 |
+| historical_runtime_bytes_located_unaccepted | 1,070 |
 | rtlink_manager_bytes_unaccepted | 17,065 |
 | data_bytes_accepted | 2 |
 | game_code_span_bytes | 304,748 |

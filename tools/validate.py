@@ -114,6 +114,25 @@ def main() -> int:
             failures.append("unit tests")
             print(t.stderr[-2000:])
 
+    # ---- historical runtime: fresh re-binding of every accepted member -------------------
+    runtime_bytes = 0
+    runtime_members = 0
+    acc = man.get("runtime", {}).get("members", [])
+    if acc:
+        import runtime as rtmod
+        results, _, conflicts, _ = rtmod.verify_all()
+        exact = {(r["member"], r["linear"]) for r in results if r["exact"]}
+        for mrow in acc:
+            if (mrow["member"], mrow["linear"]) in exact:
+                runtime_bytes += mrow["size"]
+                runtime_members += 1
+            else:
+                failures.append(f"runtime member {mrow['member']} no longer binds")
+        for lib, info in man["runtime"]["libraries"].items():
+            if hashlib.sha256(Path(info["path"]).read_bytes()).hexdigest() != info["sha256"]:
+                failures.append(f"runtime library {lib} hash changed")
+    print(f"historical runtime: {runtime_members} members, {runtime_bytes} bytes re-bound")
+
     # ---- accounting -------------------------------------------------------------------
     table = fnmod.table()["functions"]
     game = [f for f in table if f["region"] == "game_or_library"]
@@ -136,8 +155,9 @@ def main() -> int:
         "exact_c_bytes": exact_c_bytes,
         "exact_asm_functions": exact_asm,
         "exact_asm_bytes": exact_asm_bytes,
-        "historical_runtime_bytes_accepted": 0,
-        "historical_runtime_bytes_located_unaccepted": runtime_located,
+        "historical_runtime_bytes_accepted": runtime_bytes,
+        "historical_runtime_members_accepted": runtime_members,
+        "historical_runtime_bytes_located_unaccepted": max(0, runtime_located - runtime_bytes),
         "rtlink_manager_bytes_unaccepted": len(x.image) - 0x2CFB * 16,
         "data_bytes_accepted": data_bytes,
         "bss_bytes_placed": bss_bytes,

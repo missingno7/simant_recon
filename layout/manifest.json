@@ -597,5 +597,784 @@
    "scaffold": [],
    "object_sha256": "f544b634f7f643fa009e69db3ee7aa35aa2cfd24b6d90299f1a7cc2adaa1cbc8"
   }
+ },
+ "runtime": {
+  "libraries": {
+   "llibcr.lib": {
+    "path": "C:/tools/msc-6.00/LIB/llibcr.lib",
+    "sha256": "3d0c6ae92972789e87def01fa96351c39216d731d5c880370155c5613d78c884"
+   },
+   "libh.lib": {
+    "path": "C:/tools/msc-6.00/LIB/libh.lib",
+    "sha256": "a4492e8f63da409d949643fd448f29e65e2cc9a8f2deea977372177bbe0ad818"
+   }
+  },
+  "members": [
+   {
+    "library": "llibcr.lib",
+    "member": "dos\\crt0.asm",
+    "module_index": 0,
+    "linear": 171868,
+    "size": 255,
+    "segment": "_TEXT",
+    "member_sha256": "2e9a254b9bd00ea59884089e78e951f0e40343e11d24976f32d9582f4ded259d"
+   },
+   {
+    "library": "llibcr.lib",
+    "member": "dos\\crt0dat.asm",
+    "module_index": 1,
+    "linear": 172124,
+    "size": 392,
+    "segment": "_TEXT",
+    "member_sha256": "3b8d629ffcb8924d541685974c9387ac9744b783a7b0e5be0b212e170953fa18"
+   },
+   {
+    "library": "llibcr.lib",
+    "member": "dos\\crt0msg.asm",
+    "module_index": 2,
+    "linear": 172516,
+    "size": 34,
+    "segment": "_TEXT",
+    "member_sha256": "5db3773118ea0299a46b9a439f14f9e471493d6e3dea1b2a1eefabc26cd9cb92"
+   },
+   {
+    "library": "llibcr.lib",
+    "member": "crt0fp.asm",
+    "module_index": 3,
+    "linear": 172550,
+    "size": 6,
+    "segment": "_TEXT",
+    "member_sha256": "7c6d3419d89083e30fa0156f660c6b1b899af5244bb8c10906dd0f095519f19c"
+   },
+   {
+    "library": "llibcr.lib",
+    "member": "chkstk.asm",
+    "module_index": 5,
+    "linear": 172556,
+    "size": 36,
+    "segment": "_TEXT",
+    "member_sha256": "f49aabfb1b5d4442a9e8261817381a5d766df0f742e4a5d1b27a323915677a88"
+   },
+   {
+    "library": "llibcr.lib",
+    "member": "chksum.asm",
+    "module_index": 6,
+    "linear": 172592,
+    "size": 36,
+    "segment": "_TEXT",
+    "member_sha256": "e6e398e3ecd2753ffc18b67a6618a2a81214fdb6f6bec1886c81660c67911238"
+   },
+   {
+    "library": "llibcr.lib",
+    "member": "dos\\stdargv.asm",
+    "module_index": 7,
+    "linear": 172628,
+    "size": 429,
+    "segment": "_TEXT",
+    "member_sha256": "b253864805cfeaf039b45fa852d282c6349c6114a94efd6a1b6625d734d93e83"
+   },
+   {
+    "library": "llibcr.lib",
+    "member": "dos\\stdenvp.asm",
+    "module_index": 8,
+    "linear": 173058,
+    "size": 160,
+    "segment": "_TEXT",
+    "member_sha256": "3faf0b1d7a49f6139aab172b6a638d4a8a663e998a3f0c07c9b872100091b9a5"
+   },
+   {
+    "library": "llibcr.lib",
+    "member": "dos\\nmsghdr.asm",
+    "module_index": 9,
+    "linear": 173218,
+    "size": 97,
+    "segment": "_TEXT",
+    "member_sha256": "e9b58fa3aa27d2b06d906ea99bf7639e6d0c07c3b84ba9fdc0d05eac19f086ce"
+   },
+   {
+    "library": "llibcr.lib",
+    "member": "dos\\stdalloc.asm",
+    "module_index": 11,
+    "linear": 173316,
+    "size": 37,
+    "segment": "_TEXT",
+    "member_sha256": "912204613ceea6f6195774efb478941200f227a25b3165b1d950043591fee6a3"
+   },
+   {
+    "library": "llibcr.lib",
+    "member": "dos\\dosret.asm",
+    "module_index": 12,
+    "linear": 173354,
+    "size": 85,
+    "segment": "_TEXT",
+    "member_sha256": "cd1526b0f6398bdd10acd3b86252bab5984992706f0980e17c50f36a689c5a17"
+   },
+   {
+    "library": "llibcr.lib",
+    "member": "fclose.c",
+    "module_index": 17,
+    "linear": 173440,
+    "size": 198,
+    "segment": "_TEXT",
+    "member_sha256": "7bf43615707b019b3ad40071b242cc9c8eccef226eba03bee75fa302c155ee8d"
+   },
+   {
+    "library": "llibcr.lib",
+    "member": "fopen.c",
+    "module_index": 18,
+    "linear": 173638,
+    "size": 80,
+    "segment": "_TEXT",
+    "member_sha256": "bd7d05dff1cd2fc6e941673675634167d0fa1731e03c243d4f0e467055afc91d"
+   },
+   {
+    "library": "llibcr.lib",
+    "member": "fread.asm",
+    "module_index": 20,
+    "linear": 173718,
+    "size": 369,
+    "segment": "_TEXT",
+    "member_sha256": "988d9046a58dadb3888ae020015d0d6aa909e553e9f6f1a4454b7a65bee3a9eb"
+   },
+   {
+    "library": "llibcr.lib",
+    "member": "fwrite.asm",
+    "module_index": 22,
+    "linear": 174088,
+    "size": 407,
+    "segment": "_TEXT",
+    "member_sha256": "ba7366fe2843db14e67f2171d215191c10be04d07b80e1e51bbd306ac4be9063"
+   },
+   {
+    "library": "llibcr.lib",
+    "member": "printf.c",
+    "module_index": 23,
+    "linear": 174496,
+    "size": 68,
+    "segment": "_TEXT",
+    "member_sha256": "02530add7f76434c46b935b3a682732bc8ac013da0b80e4f929d8b62fd243111"
+   },
+   {
+    "library": "llibcr.lib",
+    "member": "_filbuf.asm",
+    "module_index": 27,
+    "linear": 174564,
+    "size": 156,
+    "segment": "_TEXT",
+    "member_sha256": "213fbebcc287f4c1cf2660cd5f2f22f56ed9f394a77a42fb522b066a80c7aa7a"
+   },
+   {
+    "library": "llibcr.lib",
+    "member": "_flsbuf.asm",
+    "module_index": 28,
+    "linear": 174720,
+    "size": 235,
+    "segment": "_TEXT",
+    "member_sha256": "d40da483b99213b7d9f495136be0d93a4b20265f183a37adbc0730499608d5f5"
+   },
+   {
+    "library": "llibcr.lib",
+    "member": "_freebuf.asm",
+    "module_index": 29,
+    "linear": 174956,
+    "size": 55,
+    "segment": "_TEXT",
+    "member_sha256": "8d8a94f85895f7bcf7a2a4b25668589b63ab5427d574fd904af58f7eeff72c9a"
+   },
+   {
+    "library": "llibcr.lib",
+    "member": "_getbuf.asm",
+    "module_index": 30,
+    "linear": 175012,
+    "size": 75,
+    "segment": "_TEXT",
+    "member_sha256": "6f3d7651ab2d73be01b6b01c3df930fbd351955b2ab0c137aea5253f955bd821"
+   },
+   {
+    "library": "llibcr.lib",
+    "member": "_open.c",
+    "module_index": 31,
+    "linear": 175088,
+    "size": 248,
+    "segment": "_TEXT",
+    "member_sha256": "32bfba8c23093662e5e747cc20e89a99153775a8eed4a1a801a77a877f792916"
+   },
+   {
+    "library": "llibcr.lib",
+    "member": "_sftbuf.asm",
+    "module_index": 32,
+    "linear": 175336,
+    "size": 201,
+    "segment": "_TEXT",
+    "member_sha256": "a4879639dd0ace136114e0e6e2e8cffc4829f76d0e8eee3dfcf73aef5c58c6c4"
+   },
+   {
+    "library": "llibcr.lib",
+    "member": "fflush.c",
+    "module_index": 33,
+    "linear": 175538,
+    "size": 212,
+    "segment": "_TEXT",
+    "member_sha256": "e867e71d9d0365b8117b5d3cefb9f014311d8061dcbca19eda7d728cb7868593"
+   },
+   {
+    "library": "llibcr.lib",
+    "member": "output.asm",
+    "module_index": 35,
+    "linear": 175750,
+    "size": 1274,
+    "segment": "_TEXT",
+    "member_sha256": "324603d53442717f74c29e59762e99b1563e487c5ae129b0bd6b07119504dcf8"
+   },
+   {
+    "library": "llibcr.lib",
+    "member": "stream.c",
+    "module_index": 36,
+    "linear": 177024,
+    "size": 78,
+    "segment": "_TEXT",
+    "member_sha256": "94f6b1c6cf0022204fe7acd89a637ea885af8719b74bba3439b639fbf425902a"
+   },
+   {
+    "library": "llibcr.lib",
+    "member": "dos\\close.asm",
+    "module_index": 40,
+    "linear": 177102,
+    "size": 32,
+    "segment": "_TEXT",
+    "member_sha256": "ae0ee3e459d3b0189e6e266e4b4faca3f3a1df3c8d0d7b0c5b3ab473542f547a"
+   },
+   {
+    "library": "llibcr.lib",
+    "member": "dos\\lseek.asm",
+    "module_index": 41,
+    "linear": 177134,
+    "size": 122,
+    "segment": "_TEXT",
+    "member_sha256": "3b5d9ed3cedbad4fa2dd75c8034eb59f1a2c5b8629391f2bede72ea4d02cebaf"
+   },
+   {
+    "library": "llibcr.lib",
+    "member": "dos\\open.asm",
+    "module_index": 42,
+    "linear": 177256,
+    "size": 460,
+    "segment": "_TEXT",
+    "member_sha256": "f4f0a50ba9bad363e5bc1dcb507ef19d7d71d192f43dc93275f5332b2d021c3a"
+   },
+   {
+    "library": "llibcr.lib",
+    "member": "dos\\read.asm",
+    "module_index": 43,
+    "linear": 177716,
+    "size": 254,
+    "segment": "_TEXT",
+    "member_sha256": "67b7894fabd4e937149f3a6e8543e80fe3d2f429928d622aac592598c09a2191"
+   },
+   {
+    "library": "llibcr.lib",
+    "member": "write.asm",
+    "module_index": 44,
+    "linear": 177970,
+    "size": 351,
+    "segment": "_TEXT",
+    "member_sha256": "97baec6766a6fad70e675ab360bb07eeaa848e0c737a173be48bc8678b7f2707"
+   },
+   {
+    "library": "llibcr.lib",
+    "member": "stackava.asm",
+    "module_index": 45,
+    "linear": 178322,
+    "size": 20,
+    "segment": "_TEXT",
+    "member_sha256": "1718bf66a572825efbaaf7b86e13a852637b5753dedd0361408a82d3179b5129"
+   },
+   {
+    "library": "llibcr.lib",
+    "member": "initseg.asm",
+    "module_index": 52,
+    "linear": 178342,
+    "size": 52,
+    "segment": "_TEXT",
+    "member_sha256": "8afd5571281e4e74c8e969293d9457b536b76a421547706b9e48ff4ff549671e"
+   },
+   {
+    "library": "llibcr.lib",
+    "member": "linkseg.asm",
+    "module_index": 53,
+    "linear": 178394,
+    "size": 54,
+    "segment": "_TEXT",
+    "member_sha256": "b6711b3cb2c126fa79646312012bff9b55f0be07d8c164815775ec2033556a65"
+   },
+   {
+    "library": "llibcr.lib",
+    "member": "searchsg.asm",
+    "module_index": 54,
+    "linear": 178448,
+    "size": 124,
+    "segment": "_TEXT",
+    "member_sha256": "5964e6c9dfd4de45ed54a592c35165c6dd851c32cca10ee25c6b652422c0a9e2"
+   },
+   {
+    "library": "llibcr.lib",
+    "member": "growseg.asm",
+    "module_index": 55,
+    "linear": 178572,
+    "size": 256,
+    "segment": "_TEXT",
+    "member_sha256": "086e6cc71b7f671e53f94876f48c058b1adb8ae2da800f4edac38a27dc6e50f9"
+   },
+   {
+    "library": "llibcr.lib",
+    "member": "newseg.asm",
+    "module_index": 56,
+    "linear": 178828,
+    "size": 68,
+    "segment": "_TEXT",
+    "member_sha256": "d34580f4f51bfc800a4f7a077457fa24fce2b483d1c497dbe811026721600fee"
+   },
+   {
+    "library": "llibcr.lib",
+    "member": "strcat.asm",
+    "module_index": 59,
+    "linear": 178896,
+    "size": 70,
+    "segment": "_TEXT",
+    "member_sha256": "583233f9cfa0fdfbcc266a2b70ee7e6e9ca306b1df60c400a503cc8aca3f484a"
+   },
+   {
+    "library": "llibcr.lib",
+    "member": "strcpy.asm",
+    "module_index": 60,
+    "linear": 178966,
+    "size": 54,
+    "segment": "_TEXT",
+    "member_sha256": "d4d6a8b32590105b6f721818882355d512221b19d55bfa6b2055170e4a7f9f18"
+   },
+   {
+    "library": "llibcr.lib",
+    "member": "strcmp.asm",
+    "module_index": 61,
+    "linear": 179020,
+    "size": 41,
+    "segment": "_TEXT",
+    "member_sha256": "647bb9bde2215e9aa469cae5ee0092d60dc70c8d6f36aeddfb93800be6d0d07c"
+   },
+   {
+    "library": "llibcr.lib",
+    "member": "strlen.asm",
+    "module_index": 62,
+    "linear": 179062,
+    "size": 23,
+    "segment": "_TEXT",
+    "member_sha256": "36407dec2d2121638e1743614974f899b5c156e863373de4f9499e8c60d4a714"
+   },
+   {
+    "library": "llibcr.lib",
+    "member": "strncpy.asm",
+    "module_index": 64,
+    "linear": 179086,
+    "size": 42,
+    "segment": "_TEXT",
+    "member_sha256": "d15c1ebde07f7440fedb487121acda58f5b47c9b485a28b74dc826ddc54efbd0"
+   },
+   {
+    "library": "llibcr.lib",
+    "member": "strncmp.asm",
+    "module_index": 65,
+    "linear": 179128,
+    "size": 59,
+    "segment": "_TEXT",
+    "member_sha256": "16a5aeec6757c33e60d2a6444779325ae8a56dbd5e336464997526561f8c9b95"
+   },
+   {
+    "library": "llibcr.lib",
+    "member": "atox.asm",
+    "module_index": 69,
+    "linear": 179192,
+    "size": 86,
+    "segment": "_TEXT",
+    "member_sha256": "6e131dd3778c38f8c81fb6d304de0f0a5f40ac94f0f9c287fa85525a68729cf7"
+   },
+   {
+    "library": "llibcr.lib",
+    "member": "itoa.asm",
+    "module_index": 70,
+    "linear": 179278,
+    "size": 28,
+    "segment": "_TEXT",
+    "member_sha256": "3918924affd48763fcbb530c6004549fb66796e4c224f4fa66c51d897f9f5f52"
+   },
+   {
+    "library": "llibcr.lib",
+    "member": "getenv.c",
+    "module_index": 79,
+    "linear": 179306,
+    "size": 142,
+    "segment": "_TEXT",
+    "member_sha256": "d1c9eecee72ea1d503430b8cde9e7608e24400ddf5b6a739407ad7be41f3c21c"
+   },
+   {
+    "library": "llibcr.lib",
+    "member": "dos\\hdiff.asm",
+    "module_index": 88,
+    "linear": 179448,
+    "size": 43,
+    "segment": "_TEXT",
+    "member_sha256": "f4800cbdc56ef7fe533073f711d1d61e088d8f4fa4e1f4b5a95257b747c56d71"
+   },
+   {
+    "library": "llibcr.lib",
+    "member": "puts.c",
+    "module_index": 106,
+    "linear": 179492,
+    "size": 138,
+    "segment": "_TEXT",
+    "member_sha256": "437368b1ddc2ea64066c552cbc8acc7d47a8d6ae1e87b288046f4daee88d47df"
+   },
+   {
+    "library": "llibcr.lib",
+    "member": "sprintf.c",
+    "module_index": 112,
+    "linear": 179630,
+    "size": 108,
+    "segment": "_TEXT",
+    "member_sha256": "2046a56192e8d658ec66eee895d24a636545ef81bac15341ec65c6bb0b4620d8"
+   },
+   {
+    "library": "llibcr.lib",
+    "member": "vsprintf.c",
+    "module_index": 118,
+    "linear": 179738,
+    "size": 106,
+    "segment": "_TEXT",
+    "member_sha256": "3af32017687ba0a50fe6c81b964f5b504f8bb505ea8b225706c0211becf6b48f"
+   },
+   {
+    "library": "llibcr.lib",
+    "member": "dos\\intdosx.asm",
+    "module_index": 182,
+    "linear": 179844,
+    "size": 97,
+    "segment": "_TEXT",
+    "member_sha256": "87abf3c9a07281a6f3671eff170b939066d02de88b5f16045680064f8db79226"
+   },
+   {
+    "library": "llibcr.lib",
+    "member": "asctime.c",
+    "module_index": 190,
+    "linear": 179942,
+    "size": 262,
+    "segment": "_TEXT",
+    "member_sha256": "4e0ba9b834e12e3191e87f0fcbf676e060ebab7a6af42f342093b34ff74090db"
+   },
+   {
+    "library": "llibcr.lib",
+    "member": "gmtime.c",
+    "module_index": 195,
+    "linear": 180204,
+    "size": 458,
+    "segment": "_TEXT",
+    "member_sha256": "8f84287235fef03576afb4247be1563e6fdc9debfeb08af851397e964c1ace71"
+   },
+   {
+    "library": "llibcr.lib",
+    "member": "localtim.c",
+    "module_index": 196,
+    "linear": 180662,
+    "size": 132,
+    "segment": "_TEXT",
+    "member_sha256": "7431c72ca3587a4dd76f147c74723842aa937fa16a1eb165d775ca0d41b2641e"
+   },
+   {
+    "library": "llibcr.lib",
+    "member": "dos\\time.asm",
+    "module_index": 197,
+    "linear": 180794,
+    "size": 85,
+    "segment": "_TEXT",
+    "member_sha256": "c0694a75a049ef372bede496f508dcafed697896fde2606ff0b4bdc71f7d81f6"
+   },
+   {
+    "library": "llibcr.lib",
+    "member": "tzset.c",
+    "module_index": 198,
+    "linear": 180880,
+    "size": 444,
+    "segment": "_TEXT",
+    "member_sha256": "ef179427d9299173693ba7d5ad39896ff8466c6f904bb0b3be3d32b2472436bb"
+   },
+   {
+    "library": "llibcr.lib",
+    "member": "dtoxtime.c",
+    "module_index": 201,
+    "linear": 181324,
+    "size": 260,
+    "segment": "_TEXT",
+    "member_sha256": "f67005a6ea6d9c843a6574cb6ee7ea680f45003c528de4fb20f947c9bf2fa996"
+   },
+   {
+    "library": "llibcr.lib",
+    "member": "strchr.asm",
+    "module_index": 208,
+    "linear": 181584,
+    "size": 45,
+    "segment": "_TEXT",
+    "member_sha256": "574ba5acb99f7e2f2b7a119c5568493d8a1b9a0041e74df68e9bb213a20ed00c"
+   },
+   {
+    "library": "llibcr.lib",
+    "member": "stricmp.asm",
+    "module_index": 209,
+    "linear": 181630,
+    "size": 69,
+    "segment": "_TEXT",
+    "member_sha256": "c7384f78630166042dca86b0987b5586e2eb861b4882e03a6291e33253ba0f40"
+   },
+   {
+    "library": "llibcr.lib",
+    "member": "strrchr.asm",
+    "module_index": 213,
+    "linear": 181700,
+    "size": 46,
+    "segment": "_TEXT",
+    "member_sha256": "80cb0091ea347397ce7ddf1eaec63330ea33b11bdc2d83d7226675b53bdde9e0"
+   },
+   {
+    "library": "llibcr.lib",
+    "member": "hmemchr.asm",
+    "module_index": 228,
+    "linear": 181746,
+    "size": 66,
+    "segment": "_TEXT",
+    "member_sha256": "ce7aa0828fcf48d7cad92aad0f6de5e72c523047fca1b1f6eb1ac8e025737aed"
+   },
+   {
+    "library": "llibcr.lib",
+    "member": "hmemcpy.asm",
+    "module_index": 229,
+    "linear": 181812,
+    "size": 202,
+    "segment": "_TEXT",
+    "member_sha256": "14a0812fedd20795eae41f5a9a7954e142573daa226ee198ac361ec8e1cb7892"
+   },
+   {
+    "library": "llibcr.lib",
+    "member": "hmemcmp.asm",
+    "module_index": 231,
+    "linear": 182014,
+    "size": 91,
+    "segment": "_TEXT",
+    "member_sha256": "6b59294b3c0087a8c3cdf144e3e33aa2a754af3ad90f311b3b2e02382d751b20"
+   },
+   {
+    "library": "llibcr.lib",
+    "member": "hmemcpy.asm",
+    "module_index": 232,
+    "linear": 182106,
+    "size": 94,
+    "segment": "_TEXT",
+    "member_sha256": "5ec3f7282a4b321542c3f2cf973a187a70202c7d76b7e79622a8a8213df493c4"
+   },
+   {
+    "library": "llibcr.lib",
+    "member": "hmemset.asm",
+    "module_index": 233,
+    "linear": 182200,
+    "size": 72,
+    "segment": "_TEXT",
+    "member_sha256": "5bf161343bd2af3a1d15d0b6ffa7ec9276b84b45160ebdfcd426a68ba61e10f0"
+   },
+   {
+    "library": "llibcr.lib",
+    "member": "xtoa.asm",
+    "module_index": 234,
+    "linear": 182272,
+    "size": 99,
+    "segment": "_TEXT",
+    "member_sha256": "7944af88d42348abedc47b239bab08ea84c1c972172082087e79ebea79c85f9f"
+   },
+   {
+    "library": "llibcr.lib",
+    "member": "_ctype.asm",
+    "module_index": 240,
+    "linear": 182372,
+    "size": 65,
+    "segment": "_TEXT",
+    "member_sha256": "e495ac7b08104d69cdffa3aed692f84de11ff1a5217477eb898283f1b8b935ea"
+   },
+   {
+    "library": "llibcr.lib",
+    "member": "onexit.asm",
+    "module_index": 250,
+    "linear": 182438,
+    "size": 50,
+    "segment": "_TEXT",
+    "member_sha256": "63d299d252d0221df6b86c3272775b18ddc24bb4d10939d50cc49f8482b5b05c"
+   },
+   {
+    "library": "llibcr.lib",
+    "member": "rand.c",
+    "module_index": 253,
+    "linear": 182488,
+    "size": 58,
+    "segment": "_TEXT",
+    "member_sha256": "b569e225824dcaef61bcaa7e351b1a764772804fa376b7be2586935616220f02"
+   },
+   {
+    "library": "llibcr.lib",
+    "member": "dos\\signal.asm",
+    "module_index": 255,
+    "linear": 182546,
+    "size": 407,
+    "segment": "_TEXT",
+    "member_sha256": "28f51622ab03720d4fc6d78e35f5bf2545d1ecd6c7b29e864841da896daba151"
+   },
+   {
+    "library": "llibcr.lib",
+    "member": "dos\\access.asm",
+    "module_index": 295,
+    "linear": 182954,
+    "size": 33,
+    "segment": "_TEXT",
+    "member_sha256": "d0023cbf5f7e7ce66ae546d56904273a496336f0e4ed31d417512353a1753d1f"
+   },
+   {
+    "library": "llibcr.lib",
+    "member": "dos\\dir.asm",
+    "module_index": 297,
+    "linear": 182988,
+    "size": 63,
+    "segment": "_TEXT",
+    "member_sha256": "944d6bd1d61d8723d9dc106224e64d547febbf09c7ddb3d4e89d0d2676274419"
+   },
+   {
+    "library": "llibcr.lib",
+    "member": "dos\\drive.asm",
+    "module_index": 298,
+    "linear": 183052,
+    "size": 35,
+    "segment": "_TEXT",
+    "member_sha256": "08957023a7e1a1efcb85c828b9fea508c3a2d9f364a12a3a0baa2309ba31b6b9"
+   },
+   {
+    "library": "llibcr.lib",
+    "member": "dos\\getcwd.c",
+    "module_index": 300,
+    "linear": 183088,
+    "size": 286,
+    "segment": "_TEXT",
+    "member_sha256": "c165bac32f08453c1e860290e4b9ee6dab7350334ed4cdc3171409427ea8426d"
+   },
+   {
+    "library": "llibcr.lib",
+    "member": "dos\\unlink.asm",
+    "module_index": 306,
+    "linear": 183374,
+    "size": 15,
+    "segment": "_TEXT",
+    "member_sha256": "ceacd3148954ab9ccca58bef8bb3df544f5874eed71969475e00dd51647cba63"
+   },
+   {
+    "library": "llibcr.lib",
+    "member": "dos\\allocmem.asm",
+    "module_index": 307,
+    "linear": 183390,
+    "size": 25,
+    "segment": "_TEXT",
+    "member_sha256": "0925a8da386770e20d50d129b53c1108fc2ab4b0d5e75849642d060e3525f91a"
+   },
+   {
+    "library": "llibcr.lib",
+    "member": "dos\\d_find.asm",
+    "module_index": 319,
+    "linear": 183416,
+    "size": 62,
+    "segment": "_TEXT",
+    "member_sha256": "4e5fbea275bc90541dcec9ba3f4856e34e86013aacac21c50fd62bdc10b6f32f"
+   },
+   {
+    "library": "llibcr.lib",
+    "member": "dos\\freemem.asm",
+    "module_index": 331,
+    "linear": 183482,
+    "size": 13,
+    "segment": "_TEXT",
+    "member_sha256": "2aca686ab79a5d51629b10c3b886957e2cc4a7634ffc56c2932569e3c48d9ece"
+   },
+   {
+    "library": "llibcr.lib",
+    "member": "dos\\harderr.asm",
+    "module_index": 335,
+    "linear": 183496,
+    "size": 87,
+    "segment": "_TEXT",
+    "member_sha256": "9ce5bb861411a27d8b3db967d3a52a20967eb823be47c58fe67a4b12c4d43b9d"
+   },
+   {
+    "library": "libh.lib",
+    "member": "alrem.asm",
+    "module_index": 2,
+    "linear": 183584,
+    "size": 34,
+    "segment": "_TEXT",
+    "member_sha256": "1de9dee0571baed68c28b4ac3f7f080a44d088b234d82dec5806a6486cb2e2b7"
+   },
+   {
+    "library": "libh.lib",
+    "member": "ldiv.asm",
+    "module_index": 8,
+    "linear": 183618,
+    "size": 154,
+    "segment": "_TEXT",
+    "member_sha256": "f79431ca0a0a0d6d62049af8c1dac37fece8b6e67fa593326e6e3016fa7fd17e"
+   },
+   {
+    "library": "libh.lib",
+    "member": "lmul.asm",
+    "module_index": 9,
+    "linear": 183772,
+    "size": 50,
+    "segment": "_TEXT",
+    "member_sha256": "d8822a76aac196541594109c77e8a91f4252d211d3e15096f9731dbd745a89dc"
+   },
+   {
+    "library": "libh.lib",
+    "member": "lrem.asm",
+    "module_index": 10,
+    "linear": 183822,
+    "size": 160,
+    "segment": "_TEXT",
+    "member_sha256": "dd8936d0d7bf0d4d042f0d47be1457a08dcdbe5c9a72bcae6ef623b7b6ae1591"
+   },
+   {
+    "library": "libh.lib",
+    "member": "almul.asm",
+    "module_index": 14,
+    "linear": 184006,
+    "size": 32,
+    "segment": "_TEXT",
+    "member_sha256": "bdf37d3e13ce899522f9dbed9578cd2bb6f9d15e37ce05e2dc0acb277060f59a"
+   },
+   {
+    "library": "libh.lib",
+    "member": "uldiv.asm",
+    "module_index": 21,
+    "linear": 184038,
+    "size": 95,
+    "segment": "_TEXT",
+    "member_sha256": "f3f49613336319e4ae671f45ade59f550dd058d010c53bdea7fafdbb05f1d50b"
+   },
+   {
+    "library": "libh.lib",
+    "member": "ulrem.asm",
+    "module_index": 22,
+    "linear": 184134,
+    "size": 106,
+    "segment": "_TEXT",
+    "member_sha256": "8f7db416cee2867c27a0944c0d5995f7847b76113af3c9d06e2b69eb22c4281a"
+   }
+  ]
  }
 }
