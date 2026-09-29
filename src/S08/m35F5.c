@@ -165,8 +165,6 @@ extern void far o22_39C7_07FD(int plane, int x, int y);
 extern void far f_14EE_0647(int x, int y);
 
 void far DigOutBNest(int count);
-/* DRAFT, not claimed (ClrArrays): only frame (4 vs 2) and a leading jmp to the first
- * outer-loop test differ. */
 void far o08_35F5_1240(void);
 void far o08_35F5_0923(int count);
 void far o08_35F5_0A00(void);
@@ -174,8 +172,6 @@ void far PlaceBlackQueen(void);
 void far o08_35F5_0C4C(int x, int y, int dir);
 void far o08_35F5_0DA0(int x, int y, int dir);
 void far o08_35F5_0D12(void);
-/* DRAFT, not claimed (AddFood): register allocation differs (target keeps x in [bp-2],
- * y in DI, (long)r CSE in SI:DI, far address CSE at [bp-16h]); 414 vs 427 bytes. */
 void far AddFood(int count, int sound);
 
 void far o08_35F5_0000(void)
@@ -668,7 +664,7 @@ int far o08_35F5_0EBB(int angle)
 
 void far AddFood(int count, int sound)
 {
-    int x, y, i, radius, r, angle, cx, cy;
+    int x, y, angle, r, i, radius, cx, cy;
 
     if (sound == 1)
         f_00DF_00E8(0x20, 0, 0x7e);
@@ -688,30 +684,29 @@ void far AddFood(int count, int sound)
         r = SRand1(radius);
         x = (long)r * o08_35F5_0EBB(angle) / 0x7fffL + cx;
         y = (long)r * o08_35F5_0E67(angle) / 0x7fffL + cy;
-        if (x < 0 || x > 0x7f || y < 0 || y > 0x3f)
-            continue;
-        if (fd_3E1D_6180[x][y] != 0)
-            continue;
-        angle = fd_3E1D_0180[x][y];
-        if (fd_50F6_0F24 != 0) {
-            if (angle < 0x18) {
-                if (angle < 4)
-                    fd_3E1D_0180[x][y] = (angle + 6) << 2;
-                else
-                    fd_3E1D_0180[x][y] = ((angle - 8) & 0xfc) + 0x18;
-            } else if (angle < 0x28 && angle % 4 < 3)
-                fd_3E1D_0180[x][y]++;
-            else
-                continue;
-        } else {
-            if (angle < 0x18)
-                fd_3E1D_0180[x][y] = 0x48;
-            else if (angle >= 0x48 && angle < 0x4b)
-                fd_3E1D_0180[x][y]++;
-            else
-                continue;
+        if (x >= 0 && x <= 0x7f && y >= 0 && y <= 0x3f && fd_3E1D_6180[x][y] == 0) {
+            angle = fd_3E1D_0180[x][y];
+            if (fd_50F6_0F24 != 0) {
+                if (angle < 0x18) {
+                    if (angle < 4)
+                        fd_3E1D_0180[x][y] = (angle + 6) << 2;
+                    else
+                        fd_3E1D_0180[x][y] = ((angle - 8) & 0xfc) + 0x18;
+                    fd_50F6_1040++;
+                } else if (angle < 0x28 && angle % 4 < 3) {
+                    fd_3E1D_0180[x][y]++;
+                    fd_50F6_1040++;
+                }
+            } else {
+                if (angle < 0x18) {
+                    fd_3E1D_0180[x][y] = 0x48;
+                    fd_50F6_1040++;
+                } else if (angle >= 0x48 && angle < 0x4b) {
+                    fd_3E1D_0180[x][y]++;
+                    fd_50F6_1040++;
+                }
+            }
         }
-        fd_50F6_1040++;
     }
 }
 
@@ -787,16 +782,27 @@ void far o08_35F5_1136(int count)
     }
 }
 
-/* DRAFT, not claimed: target puts col in BX and indexes with BX; ours copies to SI. */
 int far o08_35F5_11F0(int x, int y)
 {
     int col, row;
 
-    col = x > 0x7f ? 0 : (x < 0 ? 0x7f : x);
-    row = y > 0x3f ? 0 : (y < 0 ? 0x3f : y);
+    if (x > 0x7f)
+        col = 0;
+    else if (x < 0)
+        col = 0x7f;
+    else
+        col = x;
+    if (y > 0x3f)
+        row = 0;
+    else if (y < 0)
+        row = 0x3f;
+    else
+        row = y;
     return fd_3E1D_0180[col][row];
 }
 
+/* DRAFT, not claimed (ClrArrays): identical except the target's leading
+ * 'jmp <outer test>' of the first loop (2 bytes; 379 vs 381). */
 void far o08_35F5_1240(void)
 {
     int x, y;
@@ -840,10 +846,10 @@ void far o08_35F5_1240(void)
         fd_3E1D_C2C0[y] = 0;
         fd_3E1D_C6AA[y] = 0;
     }
-    for (x = 0; x < 12; x++) {
-        for (y = 0; y < 16; y++) {
-            fd_3D57_00A4[x][y] = 0;
-            fd_3D57_0164[x][y] = 0;
+    for (y = 0; y < 12; y++) {
+        for (x = 0; x < 16; x++) {
+            fd_3D57_00A4[y][x] = 0;
+            fd_3D57_0164[y][x] = 0;
         }
     }
 }

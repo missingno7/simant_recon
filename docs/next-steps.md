@@ -15,7 +15,11 @@ Ordered by expected leverage on byte-exact coverage and on the final historical 
    the same module names). Remaining: 40 DGROUP placements of runtime data are anchored by
    a single reference; the runtime's initialised `_DATA` bytes are not yet compared
    (placements are derived, their data contributions still count as unresolved).
-3. **MSC 6.00 vs 6.00A.** Only `/Ol` strength reduction differs (rule VER-1). 15 loops with
+3. **Large functions (C4203).** Some originals were globally optimised although MSC 6.00A's
+   DOS pass 2 gives up ("too large for global optimizations"), e.g. RandWorld in S08. Test
+   the high-capacity pass (`CL /B2 C2L.EXE`; the local 6.00A C2L.EXE is OS/2-bound): obtain
+   a DOS-runnable C2L or run the OS/2 pass under an OS/2-capable host.
+3b. **MSC 6.00 vs 6.00A — DONE:** 6.00A (VER-2). Only `/Ol` strength reduction differs (rule VER-1). 15 loops with
    `dec [bp-n]; jnz` exist; find one in a compiler-generated function and reconstruct it.
 4. **Per-module option map.** Record, per frame, stack-check presence, pads, `/Oe`
    frame signatures and `_fastcall` use (`tools/inventory.py` has the raw facts). This

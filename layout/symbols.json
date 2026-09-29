@@ -3155,6 +3155,18 @@
    "off": 1650,
    "grounding": "reviewed: prologue scan in unreached gap; descent ends in a return; no references found (unreferenced or indirect)"
   },
+  "f_171C_001E": {
+   "unit": "root",
+   "seg": 5916,
+   "off": 30,
+   "grounding": "reviewed: empty far function (retf) between MemPunt (171C:0002, misframed as 16B5:0672) and the EMS atexit handler; unreferenced"
+  },
+  "f_171C_0020": {
+   "unit": "root",
+   "seg": 5916,
+   "off": 32,
+   "grounding": "reviewed: EMS release handler: address 171C:0020 passed to atexit by f_171C_0034 (mov ax,20h; mov dx,171Ch)"
+  },
   "f_171C_0034": {
    "unit": "root",
    "seg": 5916,
@@ -3185,11 +3197,23 @@
    "off": 780,
    "grounding": "inventory:far_call"
   },
+  "f_171C_0674": {
+   "unit": "root",
+   "seg": 5916,
+   "off": 1652,
+   "grounding": "reviewed: empty far function (retf) after the dump function 030C; unreferenced"
+  },
   "f_171C_0676": {
    "unit": "root",
    "seg": 5916,
    "off": 1654,
    "grounding": "inventory:far_call"
+  },
+  "f_171C_0678": {
+   "unit": "root",
+   "seg": 5916,
+   "off": 1656,
+   "grounding": "reviewed: frees DOS block [91A2] via _dos_freemem, clears [2F34]; retf at 068A; unreferenced"
   },
   "f_171C_068C": {
    "unit": "root",
@@ -9380,6 +9404,16 @@
    "off": 8,
    "grounding": "f_10F7_048E (IsClear3x3-like): mov es,[CONST 829C = 3D57]; es:[si+0008] signed char dir offsets"
   },
+  "fd_3D57_0010": {
+   "seg": 15703,
+   "off": 16,
+   "grounding": "S25:3BA4 DoAntMoveY:01A7 signed char es:[bx+0010] dir table (CONST seg word 895E = 3D57)"
+  },
+  "fd_3D57_001A": {
+   "seg": 15703,
+   "off": 26,
+   "grounding": "S25:3BA4 DoAntMoveY:01C1 signed char es:[bx+001A] dir table (CONST seg word 8960 = 3D57)"
+  },
   "fd_3D57_006C": {
    "seg": 15703,
    "off": 108,
@@ -9450,6 +9484,11 @@
    "off": 700,
    "grounding": "AddFood: mov es,[S08 CONST 8602]; mov es:[02BC],si ; mov es:[02BE],di (food centre x,y)"
   },
+  "fd_3D57_02C2": {
+   "seg": 15703,
+   "off": 706,
+   "grounding": "f_0894_000E: mov es,[8044] (3D57); mov word ptr es:[02C2],1"
+  },
   "fd_3D57_067E": {
    "seg": 15703,
    "off": 1662,
@@ -9464,6 +9503,16 @@
    "seg": 15703,
    "off": 1944,
    "grounding": "f_10F7_0CA8 (root:10F7): mov es,[CONST word = 3D57]; es:[..0798] far data reference"
+  },
+  "fd_3D57_07A8": {
+   "seg": 15703,
+   "off": 1960,
+   "grounding": "S25:3BA4 DoAntMoveY:04C5 cmp word es:[07A8],0 (CONST seg word 897E = 3D57)"
+  },
+  "fd_3D57_07B2": {
+   "seg": 15703,
+   "off": 1970,
+   "grounding": "f_0894_000E: mov es,[8030] (3D57); cmp word ptr es:[07B2],1"
   },
   "fd_3D57_07BE": {
    "seg": 15703,
@@ -9499,6 +9548,11 @@
    "seg": 15703,
    "off": 3096,
    "grounding": "o08_35F5_059B (RandYard): mov es,[S08 CONST word] ; es:[off]"
+  },
+  "fd_3D57_0C1A": {
+   "seg": 15703,
+   "off": 3098,
+   "grounding": "f_0894_02D2: mov es,[805A] (3D57); mov ax,es:[0C1A]; cmp es:[1040],ax; later = SRand1(50)+1"
   },
   "fd_3D57_0C1E": {
    "seg": 15703,
@@ -9900,6 +9954,11 @@
    "off": 1980,
    "grounding": "o08_35F5_059B (RandYard): mov es,[S08 CONST word] ; es:[off]"
   },
+  "fd_50F6_07C0": {
+   "seg": 20726,
+   "off": 1984,
+   "grounding": "S25:3BA4 DoAntMoveY:0051 push word es:[07C0] (CONST seg word 8946 = 50F6)"
+  },
   "fd_50F6_07C8": {
    "seg": 20726,
    "off": 1992,
@@ -9910,10 +9969,50 @@
    "off": 1994,
    "grounding": "f_0BE8_0002: mov es,[DS:8108] (CONST 50F6); cmp es:[07CA],0B; cmp es:[07CC],8 (one CONST word: one object)"
   },
+  "fd_50F6_084E": {
+   "seg": 20726,
+   "off": 2126,
+   "grounding": "S25:3BA4 DoAntMoveY:006F mov al,es:[084E] (CONST seg word 894A = 50F6)"
+  },
   "fd_50F6_0850": {
    "seg": 20726,
    "off": 2128,
    "grounding": "o08_35F5_0000 (InitSimVars): mov es,[CONST word 50F6] ; mov es:[0850],..."
+  },
+  "fd_50F6_0852": {
+   "seg": 20726,
+   "off": 2130,
+   "grounding": "f_0894_000E: mov es,[8040] (50F6); long store es:[0852]/[0854] = -1"
+  },
+  "fd_50F6_08DA": {
+   "seg": 20726,
+   "off": 2266,
+   "grounding": "S25:3BA4 DoAntMoveY:005A push word es:[08DA] (CONST seg word 8948 = 50F6)"
+  },
+  "fd_50F6_08DC": {
+   "seg": 20726,
+   "off": 2268,
+   "grounding": "f_0894_019B: mov es,[804A] (50F6); if nonzero dec word ptr es:[08DC]"
+  },
+  "fd_50F6_08E2": {
+   "seg": 20726,
+   "off": 2274,
+   "grounding": "S25:3BA4 DoAntMoveY:0109 mov es:[08E2],ax (CONST seg word 8954 = 50F6)"
+  },
+  "fd_50F6_08E8": {
+   "seg": 20726,
+   "off": 2280,
+   "grounding": "f_0894_019B: mov es,[804C] (50F6); if nonzero dec word ptr es:[08E8]"
+  },
+  "fd_50F6_08EC": {
+   "seg": 20726,
+   "off": 2284,
+   "grounding": "f_0894_000E: mov es,[803A] (50F6); int[2] stores es:[08EE],[08EC] = -1 through one segment word"
+  },
+  "fd_50F6_09F0": {
+   "seg": 20726,
+   "off": 2544,
+   "grounding": "S25:3BA4 DoAntMoveY:011C mov es:[09F0],ax (CONST seg word 8958 = 50F6)"
   },
   "fd_50F6_09FA": {
    "seg": 20726,
@@ -9925,25 +10024,70 @@
    "off": 2560,
    "grounding": "o08_35F5_0050 (RandWorld): mov es,[S08 CONST word] ; mov es:[off]"
   },
+  "fd_50F6_0A02": {
+   "seg": 20726,
+   "off": 2562,
+   "grounding": "f_0894_000E: mov es,[803E] (50F6); long store es:[0A02]/[0A04] = -1"
+  },
   "fd_50F6_0A06": {
    "seg": 20726,
    "off": 2566,
    "grounding": "f_0BE8_0002: mov es,[DS:80F8] (CONST 50F6); cmp word es:[0A06],0"
+  },
+  "fd_50F6_0A8E": {
+   "seg": 20726,
+   "off": 2702,
+   "grounding": "S25:3BA4 DoAntMoveY:0029 cmp word es:[0A8E],3 (CONST seg word 8944 = 50F6)"
   },
   "fd_50F6_0A90": {
    "seg": 20726,
    "off": 2704,
    "grounding": "CheatKeys (S07): mov es,[S07 CONST word]; es:[off]"
   },
+  "fd_50F6_0AA0": {
+   "seg": 20726,
+   "off": 2720,
+   "grounding": "S25:3BA4 DoAntMoveY:0015 cmp word es:[0AA0],0 (CONST seg word 8942 = 50F6)"
+  },
+  "fd_50F6_0AA2": {
+   "seg": 20726,
+   "off": 2722,
+   "grounding": "f_0894_000E: mov es,[803C] (50F6); long store es:[0AA2]/[0AA4] = -1"
+  },
+  "fd_50F6_0AB6": {
+   "seg": 20726,
+   "off": 2742,
+   "grounding": "S25:3BA4 DoAntMoveY:02C1 mov es:[0AB6],cx (CONST seg word 8964 = 50F6)"
+  },
   "fd_50F6_0AC4": {
    "seg": 20726,
    "off": 2756,
    "grounding": "CheatKeys (S07): mov es,[S07 CONST word]; es:[off]"
   },
+  "fd_50F6_0AC6": {
+   "seg": 20726,
+   "off": 2758,
+   "grounding": "S25:3BA4 DoAntMoveY:02D0 mov es:[0AC6],dx (CONST seg word 8966 = 50F6)"
+  },
+  "fd_50F6_0AD6": {
+   "seg": 20726,
+   "off": 2774,
+   "grounding": "S25:3BA4 DoAntMoveY:0111 mov es:[0AD6],ax (CONST seg word 8956 = 50F6)"
+  },
+  "fd_50F6_0AE8": {
+   "seg": 20726,
+   "off": 2792,
+   "grounding": "S25:3BA4 DoAntMoveY:0124 mov es:[0AE8],ax (CONST seg word 895A = 50F6)"
+  },
   "fd_50F6_0AEC": {
    "seg": 20726,
    "off": 2796,
    "grounding": "f_0BE8_0002: mov es,[DS:80E8] (CONST 50F6); word array es:[0AEC..0AF6]"
+  },
+  "fd_50F6_0AF8": {
+   "seg": 20726,
+   "off": 2808,
+   "grounding": "S25:3BA4 DoAntMoveY:0148 cmp es:[0AF8],ax (CONST seg word 895C = 50F6)"
   },
   "fd_50F6_0AFA": {
    "seg": 20726,
@@ -9954,6 +10098,11 @@
    "seg": 20726,
    "off": 2826,
    "grounding": "CheatKeys (S07): mov es,[S07 CONST word]; es:[off]"
+  },
+  "fd_50F6_0B12": {
+   "seg": 20726,
+   "off": 2834,
+   "grounding": "f_0894_01E5: mov es,[804E] (50F6); int[6] stores es:[0B12..0B1C]"
   },
   "fd_50F6_0B1E": {
    "seg": 20726,
@@ -9970,10 +10119,25 @@
    "off": 3110,
    "grounding": "o08_35F5_059B (RandYard): mov es,[S08 CONST word] ; es:[off]"
   },
+  "fd_50F6_0C2A": {
+   "seg": 20726,
+   "off": 3114,
+   "grounding": "f_0894_01E5: mov es,[8050] (50F6); int[6] stores es:[0C2A..0C34]"
+  },
   "fd_50F6_0C38": {
    "seg": 20726,
    "off": 3128,
    "grounding": "f_10F7_20BF (root:10F7): mov es,[CONST word = 50F6]; es:[..0C38] far data reference"
+  },
+  "fd_50F6_0C3E": {
+   "seg": 20726,
+   "off": 3134,
+   "grounding": "S25:3BA4 DoAntMoveY:0309 inc word es:[0C3E] (CONST seg word 896C = 50F6)"
+  },
+  "fd_50F6_0D40": {
+   "seg": 20726,
+   "off": 3392,
+   "grounding": "f_0894_019B: mov es,[8046] (50F6); int[20] cleared es:[si+0D40] for i<20"
   },
   "fd_50F6_0D6A": {
    "seg": 20726,
@@ -9984,6 +10148,11 @@
    "seg": 20726,
    "off": 3440,
    "grounding": "f_015B_01B8: mov es,[DS:7E28] (CONST word = 50F6 with S27 relocation) ; mov es:[0D70],ax"
+  },
+  "fd_50F6_0D72": {
+   "seg": 20726,
+   "off": 3442,
+   "grounding": "f_0894_019B: mov es,[8048] (50F6); int[20] cleared es:[si+0D72] for i<20"
   },
   "fd_50F6_0DA8": {
    "seg": 20726,
@@ -10005,6 +10174,16 @@
    "off": 3766,
    "grounding": "f_0BE8_0002: mov es,[DS:80EA] (CONST 50F6); 32-word counter array es:[si*2+0EB6]"
   },
+  "fd_50F6_0EF6": {
+   "seg": 20726,
+   "off": 3830,
+   "grounding": "f_0894_000E: mov es,[8038] (50F6); mov es:[0EF6],ax(0)"
+  },
+  "fd_50F6_0F06": {
+   "seg": 20726,
+   "off": 3846,
+   "grounding": "f_0894_000E: mov es,[8032] (50F6); mov es:[0F06],ax(0)"
+  },
   "fd_50F6_0F08": {
    "seg": 20726,
    "off": 3848,
@@ -10015,10 +10194,20 @@
    "off": 3854,
    "grounding": "o08_35F5_0A00 (InitYelloAnt): mov es,[S08 CONST word]; es:[off]"
   },
+  "fd_50F6_0F10": {
+   "seg": 20726,
+   "off": 3856,
+   "grounding": "f_0894_000E: mov es,[8036] (50F6); mov es:[0F10],ax(0)"
+  },
   "fd_50F6_0F12": {
    "seg": 20726,
    "off": 3858,
    "grounding": "f_10F7_0CA8 (root:10F7): mov es,[CONST word = 50F6]; es:[..0F12] far data reference"
+  },
+  "fd_50F6_0F18": {
+   "seg": 20726,
+   "off": 3864,
+   "grounding": "f_0894_034B: mov es,[8060] (50F6); loop index es:[0F18] = [0D6A], dec while > 0"
   },
   "fd_50F6_0F24": {
    "seg": 20726,
@@ -10029,6 +10218,16 @@
    "seg": 20726,
    "off": 3878,
    "grounding": "o08_35F5_0A00 (InitYelloAnt): mov es,[S08 CONST word]; es:[off]"
+  },
+  "fd_50F6_0F2E": {
+   "seg": 20726,
+   "off": 3886,
+   "grounding": "f_0894_000E: mov es,[8034] (50F6); mov es:[0F2E],ax(0)"
+  },
+  "fd_50F6_0F30": {
+   "seg": 20726,
+   "off": 3888,
+   "grounding": "f_0894_034B: mov es,[8068] (50F6); add es:[0F30],1; adc es:[0F32],0 (long)"
   },
   "fd_50F6_0F34": {
    "seg": 20726,
@@ -10115,6 +10314,11 @@
    "off": 4176,
    "grounding": "o08_35F5_0050 (RandWorld): mov es,[S08 CONST word] ; mov es:[off]"
   },
+  "fd_50F6_1058": {
+   "seg": 20726,
+   "off": 4184,
+   "grounding": "S25:3BA4 DoAntMoveY:068B mov word es:[1058],1 (CONST seg word 8982 = 50F6)"
+  },
   "fd_50F6_105E": {
    "seg": 20726,
    "off": 4190,
@@ -10164,6 +10368,26 @@
    "seg": 20726,
    "off": 4288,
    "grounding": "o08_35F5_0050 (RandWorld): mov es,[S08 CONST word] ; mov es:[off]"
+  },
+  "fd_50F6_3948": {
+   "seg": 20726,
+   "off": 14664,
+   "grounding": "f_171C_07BE: mov es,[CONST 89AE]; mov es:[3948],ax / es:[394A],dx (far pointer to the DiscardEntry block data)"
+  },
+  "fd_50F6_394C": {
+   "seg": 20726,
+   "off": 14668,
+   "grounding": "f_171C_0034: mov es,[CONST 89A8]; mov es:[394C],ax (EMS heap base segment = page frame segment+1)"
+  },
+  "fd_50F6_394E": {
+   "seg": 20726,
+   "off": 14670,
+   "grounding": "f_171C_0034: mov es,[CONST 89AA]; mov word es:[394E],0BF8h (EMS heap size in paragraphs)"
+  },
+  "fd_50F6_3950": {
+   "seg": 20726,
+   "off": 14672,
+   "grounding": "f_171C_07BE: mov es,[CONST 89AC]; mov es:[3950],ax (memory manager heap end segment)"
   },
   "fd_50F6_3952": {
    "seg": 20726,
@@ -10244,6 +10468,31 @@
    "seg": 21939,
    "off": 35746,
    "grounding": "f_0093_008F: mov [8BA2],ax (DS=DGROUP)"
+  },
+  "g_91A0": {
+   "seg": 21939,
+   "off": 37280,
+   "grounding": "f_171C_07BE: _dos_allocmem(0xFF00, &[91A0]) max-paragraphs out, then sub [91A0],10h (heap size in paragraphs); also read by root:194D"
+  },
+  "g_91A2": {
+   "seg": 21939,
+   "off": 37282,
+   "grounding": "f_171C_07BE: _dos_allocmem([91A0], &[91A2]) segment out (heap DOS block segment); also read by root:194D"
+  },
+  "g_91A4": {
+   "seg": 21939,
+   "off": 37284,
+   "grounding": "f_171C_07BE: mov [91A4],0; mov [91A6],seg (far pointer to first heap block)"
+  },
+  "g_91A8": {
+   "seg": 21939,
+   "off": 37288,
+   "grounding": "f_171C_07BE: mov [91A8],0; mov [91AA],seg (far pointer to heap end)"
+  },
+  "g_91AC": {
+   "seg": 21939,
+   "off": 37292,
+   "grounding": "f_171C_07BE/0160: les bx,[91AC] (far pointer to free list head)"
   },
   "g_9230": {
    "seg": 21939,

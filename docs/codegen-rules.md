@@ -33,6 +33,12 @@ REG-1 below is a case where the MSC 5.10 rule is false for 6.00.
   holds its segment (`mov es,[DS:xxxx]`). Under `/Og`, *hoisted* ES loads become an
   immediate `mov ax,SEG var; mov es,ax` (sometimes with `mov cx,DGROUP; mov ds,cx`) —
   natural C reproduces both (worker dig, modules 0BE8/14EE).
+* **ZD-1 `/Zd` is used by the overlay modules S07/S08**: it does not change code bytes but
+  moves OMF LEDATA record boundaries (CheatKeys 0x3B1 -> 0x2F5), which reorders fixups
+  *within* a target group; the within-group relocation gate detects it.
+* **C4203 limit**: RandWorld (S08, 1355 bytes, 48 far arrays) exceeds pass-2's global
+  optimisation budget in every spelling; the original may have used the larger pass
+  (`C2L.EXE`, OS/2-bound in the local 6.00A tree).
 * **`/Og` is used** by the simulation and database modules (`/AL /Os /Oe /Og`, sometimes
   `/Gs`): e.g. f_0BE8_0652 is exact only with `/Og` (the `(x<<6)+y` CSE survives an if/else).
 * **Commutative operand order** of far-memory sums ignores source order but depends on the

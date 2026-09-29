@@ -5080,23 +5080,58 @@
 {
 "unit": "root",
 "seg": 5916,
-"off": 52,
-"size": 197,
+"off": 30,
+"size": 2,
 "region": "game_or_library",
-"extent": "DESCENT",
+"extent": "REVIEWED",
+"evidence": [
+"reviewed"
+],
+"notes": [
+"empty far function (retf) between MemPunt (171C:0002, misframed as 16B5:0672) and the EMS atexit handler; unreferenced",
+"resized 1 -> 2: include trailing alignment nop (90) emitted by MSC before the next word-aligned function (non-/Os module); candidate public range includes it"
+]
+},
+{
+"unit": "root",
+"seg": 5916,
+"off": 32,
+"size": 20,
+"region": "game_or_library",
+"extent": "REVIEWED",
+"evidence": [
+"reviewed"
+],
+"notes": [
+"EMS release handler: address 171C:0020 passed to atexit by f_171C_0034 (mov ax,20h; mov dx,171Ch)"
+]
+},
+{
+"unit": "root",
+"seg": 5916,
+"off": 52,
+"size": 198,
+"region": "game_or_library",
+"extent": "REVIEWED",
 "evidence": [
 "push_cs_call"
+],
+"notes": [
+"resized 197 -> 198: include trailing alignment nop (90) emitted by MSC before the next word-aligned function (non-/Os module); candidate public range includes it"
 ]
 },
 {
 "unit": "root",
 "seg": 5916,
 "off": 250,
-"size": 101,
+"size": 102,
 "region": "game_or_library",
-"extent": "DESCENT",
+"extent": "REVIEWED",
 "evidence": [
 "push_cs_call"
+],
+"notes": [
+"resized 101 -> 102: include trailing alignment nop (90) emitted by MSC before the next word-aligned function (non-/Os module); candidate public range includes it"
 ]
 },
 {
@@ -5114,11 +5149,14 @@
 "unit": "root",
 "seg": 5916,
 "off": 714,
-"size": 65,
+"size": 66,
 "region": "game_or_library",
-"extent": "DESCENT",
+"extent": "REVIEWED",
 "evidence": [
 "push_cs_call"
+],
+"notes": [
+"resized 65 -> 66: include trailing alignment nop (90) emitted by MSC before the next word-aligned function (non-/Os module); candidate public range includes it"
 ]
 },
 {
@@ -5135,12 +5173,45 @@
 {
 "unit": "root",
 "seg": 5916,
-"off": 1654,
-"size": 1,
+"off": 1652,
+"size": 2,
 "region": "game_or_library",
-"extent": "DESCENT",
+"extent": "REVIEWED",
+"evidence": [
+"reviewed"
+],
+"notes": [
+"empty far function (retf) after the dump function 030C; unreferenced",
+"resized 1 -> 2: include trailing alignment nop (90) emitted by MSC before the next word-aligned function (non-/Os module); candidate public range includes it"
+]
+},
+{
+"unit": "root",
+"seg": 5916,
+"off": 1654,
+"size": 2,
+"region": "game_or_library",
+"extent": "REVIEWED",
 "evidence": [
 "far_call"
+],
+"notes": [
+"resized 1 -> 2: include trailing alignment nop (90) emitted by MSC before the next word-aligned function (non-/Os module); candidate public range includes it"
+]
+},
+{
+"unit": "root",
+"seg": 5916,
+"off": 1656,
+"size": 20,
+"region": "game_or_library",
+"extent": "REVIEWED",
+"evidence": [
+"reviewed"
+],
+"notes": [
+"frees DOS block [91A2] via _dos_freemem, clears [2F34]; retf at 068A; unreferenced",
+"resized 19 -> 20: include trailing alignment nop (90) emitted by MSC before the next word-aligned function (non-/Os module); candidate public range includes it"
 ]
 },
 {
@@ -5180,22 +5251,28 @@
 "unit": "root",
 "seg": 5916,
 "off": 2652,
-"size": 127,
+"size": 128,
 "region": "game_or_library",
-"extent": "DESCENT",
+"extent": "REVIEWED",
 "evidence": [
 "push_cs_call"
+],
+"notes": [
+"resized 127 -> 128: include trailing alignment nop (90) emitted by MSC before the next word-aligned function (non-/Os module); candidate public range includes it"
 ]
 },
 {
 "unit": "root",
 "seg": 5916,
 "off": 2780,
-"size": 261,
+"size": 262,
 "region": "game_or_library",
-"extent": "DESCENT",
+"extent": "REVIEWED",
 "evidence": [
 "push_cs_call"
+],
+"notes": [
+"resized 261 -> 262: include trailing alignment nop (90) emitted by MSC before the next word-aligned function (non-/Os module); candidate public range includes it"
 ]
 },
 {
@@ -5224,55 +5301,70 @@
 "unit": "root",
 "seg": 5916,
 "off": 3806,
-"size": 11,
+"size": 12,
 "region": "game_or_library",
-"extent": "DESCENT",
+"extent": "REVIEWED",
 "evidence": [
 "far_call"
+],
+"notes": [
+"resized 11 -> 12: include trailing alignment nop (90) emitted by MSC before the next word-aligned function (non-/Os module); candidate public range includes it"
 ]
 },
 {
 "unit": "root",
 "seg": 5916,
 "off": 3818,
-"size": 209,
+"size": 210,
 "region": "game_or_library",
-"extent": "DESCENT",
+"extent": "REVIEWED",
 "evidence": [
 "push_cs_call"
+],
+"notes": [
+"resized 209 -> 210: include trailing alignment nop (90) emitted by MSC before the next word-aligned function (non-/Os module); candidate public range includes it"
 ]
 },
 {
 "unit": "root",
 "seg": 5916,
 "off": 4028,
-"size": 565,
+"size": 566,
 "region": "game_or_library",
-"extent": "DESCENT",
+"extent": "REVIEWED",
 "evidence": [
 "push_cs_call"
+],
+"notes": [
+"resized 565 -> 566: include trailing alignment nop (90) emitted by MSC before the next word-aligned function (non-/Os module); candidate public range includes it"
 ]
 },
 {
 "unit": "root",
 "seg": 5916,
 "off": 4594,
-"size": 83,
+"size": 84,
 "region": "game_or_library",
-"extent": "DESCENT",
+"extent": "REVIEWED",
 "evidence": [
 "push_cs_call"
+],
+"notes": [
+"resized 83 -> 84: include trailing alignment nop (90) emitted by MSC before the next word-aligned function (non-/Os module); candidate public range includes it"
 ]
 },
 {
 "unit": "root",
 "seg": 5916,
 "off": 4678,
-"size": 21,
+"size": 22,
 "region": "game_or_library",
-"extent": "DESCENT",
+"extent": "REVIEWED",
 "evidence": [
 "push_cs_call"
+],
+"notes": [
+"resized 21 -> 22: include trailing alignment nop (90) emitted by MSC before the next word-aligned function (non-/Os module); candidate public range includes it"
 ]
 },
 {
@@ -5314,11 +5406,14 @@
 "unit": "root",
 "seg": 5916,
 "off": 5310,
-"size": 109,
+"size": 110,
 "region": "game_or_library",
-"extent": "DESCENT",
+"extent": "REVIEWED",
 "evidence": [
 "far_call"
+],
+"notes": [
+"resized 109 -> 110: include trailing alignment nop (90) emitted by MSC before the next word-aligned function (non-/Os module); candidate public range includes it"
 ]
 },
 {
@@ -5348,55 +5443,70 @@
 "unit": "root",
 "seg": 5916,
 "off": 5766,
-"size": 99,
+"size": 100,
 "region": "game_or_library",
-"extent": "DESCENT",
+"extent": "REVIEWED",
 "evidence": [
 "far_call"
+],
+"notes": [
+"resized 99 -> 100: include trailing alignment nop (90) emitted by MSC before the next word-aligned function (non-/Os module); candidate public range includes it"
 ]
 },
 {
 "unit": "root",
 "seg": 5916,
 "off": 5866,
-"size": 101,
+"size": 102,
 "region": "game_or_library",
-"extent": "DESCENT",
+"extent": "REVIEWED",
 "evidence": [
 "far_call"
+],
+"notes": [
+"resized 101 -> 102: include trailing alignment nop (90) emitted by MSC before the next word-aligned function (non-/Os module); candidate public range includes it"
 ]
 },
 {
 "unit": "root",
 "seg": 5916,
 "off": 5968,
-"size": 33,
+"size": 34,
 "region": "game_or_library",
-"extent": "DESCENT",
+"extent": "REVIEWED",
 "evidence": [
 "far_call"
+],
+"notes": [
+"resized 33 -> 34: include trailing alignment nop (90) emitted by MSC before the next word-aligned function (non-/Os module); candidate public range includes it"
 ]
 },
 {
 "unit": "root",
 "seg": 5916,
 "off": 6002,
-"size": 33,
+"size": 34,
 "region": "game_or_library",
-"extent": "DESCENT",
+"extent": "REVIEWED",
 "evidence": [
 "far_call"
+],
+"notes": [
+"resized 33 -> 34: include trailing alignment nop (90) emitted by MSC before the next word-aligned function (non-/Os module); candidate public range includes it"
 ]
 },
 {
 "unit": "root",
 "seg": 5916,
 "off": 6036,
-"size": 111,
+"size": 112,
 "region": "game_or_library",
-"extent": "DESCENT",
+"extent": "REVIEWED",
 "evidence": [
 "far_call"
+],
+"notes": [
+"resized 111 -> 112: include trailing alignment nop (90) emitted by MSC before the next word-aligned function (non-/Os module); candidate public range includes it"
 ]
 },
 {
@@ -5426,22 +5536,28 @@
 "unit": "root",
 "seg": 5916,
 "off": 6814,
-"size": 53,
+"size": 54,
 "region": "game_or_library",
-"extent": "DESCENT",
+"extent": "REVIEWED",
 "evidence": [
 "far_call"
+],
+"notes": [
+"resized 53 -> 54: include trailing alignment nop (90) emitted by MSC before the next word-aligned function (non-/Os module); candidate public range includes it"
 ]
 },
 {
 "unit": "root",
 "seg": 5916,
 "off": 6868,
-"size": 87,
+"size": 88,
 "region": "game_or_library",
-"extent": "DESCENT",
+"extent": "REVIEWED",
 "evidence": [
 "far_call"
+],
+"notes": [
+"resized 87 -> 88: include trailing alignment nop (90) emitted by MSC before the next word-aligned function (non-/Os module); candidate public range includes it"
 ]
 },
 {
@@ -5459,56 +5575,71 @@
 "unit": "root",
 "seg": 5916,
 "off": 7044,
-"size": 53,
+"size": 54,
 "region": "game_or_library",
-"extent": "DESCENT",
+"extent": "REVIEWED",
 "evidence": [
 "far_call",
 "push_cs_call"
+],
+"notes": [
+"resized 53 -> 54: include trailing alignment nop (90) emitted by MSC before the next word-aligned function (non-/Os module); candidate public range includes it"
 ]
 },
 {
 "unit": "root",
 "seg": 5916,
 "off": 7098,
-"size": 79,
+"size": 80,
 "region": "game_or_library",
-"extent": "DESCENT",
+"extent": "REVIEWED",
 "evidence": [
 "far_call"
+],
+"notes": [
+"resized 79 -> 80: include trailing alignment nop (90) emitted by MSC before the next word-aligned function (non-/Os module); candidate public range includes it"
 ]
 },
 {
 "unit": "root",
 "seg": 5916,
 "off": 7178,
-"size": 17,
+"size": 18,
 "region": "game_or_library",
-"extent": "DESCENT",
+"extent": "REVIEWED",
 "evidence": [
 "far_call"
+],
+"notes": [
+"resized 17 -> 18: include trailing alignment nop (90) emitted by MSC before the next word-aligned function (non-/Os module); candidate public range includes it"
 ]
 },
 {
 "unit": "root",
 "seg": 5916,
 "off": 7196,
-"size": 101,
+"size": 102,
 "region": "game_or_library",
-"extent": "DESCENT",
+"extent": "REVIEWED",
 "evidence": [
 "far_call"
+],
+"notes": [
+"resized 101 -> 102: include trailing alignment nop (90) emitted by MSC before the next word-aligned function (non-/Os module); candidate public range includes it"
 ]
 },
 {
 "unit": "root",
 "seg": 5916,
 "off": 7298,
-"size": 83,
+"size": 84,
 "region": "game_or_library",
-"extent": "DESCENT",
+"extent": "REVIEWED",
 "evidence": [
 "far_call"
+],
+"notes": [
+"resized 83 -> 84: include trailing alignment nop (90) emitted by MSC before the next word-aligned function (non-/Os module); candidate public range includes it"
 ]
 },
 {
@@ -5529,11 +5660,14 @@
 "unit": "root",
 "seg": 5916,
 "off": 7488,
-"size": 325,
+"size": 326,
 "region": "game_or_library",
-"extent": "DESCENT",
+"extent": "REVIEWED",
 "evidence": [
 "far_call"
+],
+"notes": [
+"resized 325 -> 326: include trailing alignment nop (90) emitted by MSC before the next word-aligned function (non-/Os module); candidate public range includes it"
 ]
 },
 {
@@ -5551,81 +5685,100 @@
 "unit": "root",
 "seg": 5916,
 "off": 7834,
-"size": 95,
+"size": 96,
 "region": "game_or_library",
-"extent": "DESCENT",
+"extent": "REVIEWED",
 "evidence": [
 "far_call"
+],
+"notes": [
+"resized 95 -> 96: include trailing alignment nop (90) emitted by MSC before the next word-aligned function (non-/Os module); candidate public range includes it"
 ]
 },
 {
 "unit": "root",
 "seg": 5916,
 "off": 7930,
-"size": 87,
+"size": 88,
 "region": "game_or_library",
-"extent": "DESCENT",
+"extent": "REVIEWED",
 "evidence": [
 "far_call"
+],
+"notes": [
+"resized 87 -> 88: include trailing alignment nop (90) emitted by MSC before the next word-aligned function (non-/Os module); candidate public range includes it"
 ]
 },
 {
 "unit": "root",
 "seg": 5916,
 "off": 8018,
-"size": 111,
+"size": 112,
 "region": "game_or_library",
 "extent": "REVIEWED",
 "evidence": [
 "reviewed"
 ],
 "notes": [
-"prologue scan in unreached gap; descent ends in a return; no references found (unreferenced or indirect)"
+"prologue scan in unreached gap; descent ends in a return; no references found (unreferenced or indirect)",
+"resized 111 -> 112: include trailing alignment nop (90) emitted by MSC before the next word-aligned function (non-/Os module); candidate public range includes it"
 ]
 },
 {
 "unit": "root",
 "seg": 5916,
 "off": 8130,
-"size": 195,
+"size": 196,
 "region": "game_or_library",
-"extent": "DESCENT",
+"extent": "REVIEWED",
 "evidence": [
 "push_cs_call"
+],
+"notes": [
+"resized 195 -> 196: include trailing alignment nop (90) emitted by MSC before the next word-aligned function (non-/Os module); candidate public range includes it"
 ]
 },
 {
 "unit": "root",
 "seg": 5916,
 "off": 8326,
-"size": 91,
+"size": 92,
 "region": "game_or_library",
-"extent": "DESCENT",
+"extent": "REVIEWED",
 "evidence": [
 "far_call",
 "push_cs_call"
+],
+"notes": [
+"resized 91 -> 92: include trailing alignment nop (90) emitted by MSC before the next word-aligned function (non-/Os module); candidate public range includes it"
 ]
 },
 {
 "unit": "root",
 "seg": 5916,
 "off": 8418,
-"size": 83,
+"size": 84,
 "region": "game_or_library",
-"extent": "DESCENT",
+"extent": "REVIEWED",
 "evidence": [
 "far_call"
+],
+"notes": [
+"resized 83 -> 84: include trailing alignment nop (90) emitted by MSC before the next word-aligned function (non-/Os module); candidate public range includes it"
 ]
 },
 {
 "unit": "root",
 "seg": 5916,
 "off": 8502,
-"size": 89,
+"size": 90,
 "region": "game_or_library",
-"extent": "DESCENT",
+"extent": "REVIEWED",
 "evidence": [
 "push_cs_call"
+],
+"notes": [
+"resized 89 -> 90: include trailing alignment nop (90) emitted by MSC before the next word-aligned function (non-/Os module); candidate public range includes it"
 ]
 },
 {
@@ -5643,11 +5796,14 @@
 "unit": "root",
 "seg": 5916,
 "off": 8652,
-"size": 59,
+"size": 60,
 "region": "game_or_library",
-"extent": "DESCENT",
+"extent": "REVIEWED",
 "evidence": [
 "push_cs_call"
+],
+"notes": [
+"resized 59 -> 60: include trailing alignment nop (90) emitted by MSC before the next word-aligned function (non-/Os module); candidate public range includes it"
 ]
 },
 {
@@ -5665,22 +5821,28 @@
 "unit": "root",
 "seg": 5916,
 "off": 8726,
-"size": 95,
+"size": 96,
 "region": "game_or_library",
-"extent": "DESCENT",
+"extent": "REVIEWED",
 "evidence": [
 "push_cs_call"
+],
+"notes": [
+"resized 95 -> 96: include trailing alignment nop (90) emitted by MSC before the next word-aligned function (non-/Os module); candidate public range includes it"
 ]
 },
 {
 "unit": "root",
 "seg": 5916,
 "off": 8822,
-"size": 17,
+"size": 18,
 "region": "game_or_library",
-"extent": "DESCENT",
+"extent": "REVIEWED",
 "evidence": [
 "far_call"
+],
+"notes": [
+"resized 17 -> 18: include trailing alignment nop (90) emitted by MSC before the next word-aligned function (non-/Os module); candidate public range includes it"
 ]
 },
 {
