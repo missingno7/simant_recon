@@ -40,9 +40,15 @@ REG-1 below is a case where the MSC 5.10 rule is false for 6.00.
 * **ZD-1 `/Zd` is used by the overlay modules S07/S08**: it does not change code bytes but
   moves OMF LEDATA record boundaries (CheatKeys 0x3B1 -> 0x2F5), which reorders fixups
   *within* a target group; the within-group relocation gate detects it.
-* **C4203 limit**: RandWorld (S08, 1355 bytes, 48 far arrays) exceeds pass-2's global
-  optimisation budget in every spelling; the original may have used the larger pass
-  (`C2L.EXE`, OS/2-bound in the local 6.00A tree).
+* **C4203 limit and C2L**: pass 2's `/Oe` budget depends on the whole file so far (e.g. an
+  earlier function referencing >= ~30 far variables pushes SimKidOutside over). The
+  DOS-bound retail `C2L.EXE` (profile `msc600a-c2l`, `/B2 C2L.EXE`) raises it (synthetic
+  if-chain: C2 fails at 80, C2L at 90) and makes S06 SimKidOutside exact, so the original
+  build very likely used C2L. RandWorld (S08) and SimKidInside (S06) still exceed it.
+* **`/Zd` record flushing**: with `/Zd` the code record is flushed about every 52 line-number
+  entries counted from the start of the file, and at each function introducing new CONST
+  segment words; within-group relocation order therefore depends on statement-line counts
+  of all earlier source (worker ovl06 reproducers: omfdump2.py, linnum.py, fixord.py).
 * **`/Og` is used** by the simulation and database modules (`/AL /Os /Oe /Og`, sometimes
   `/Gs`): e.g. f_0BE8_0652 is exact only with `/Og` (the `(x<<6)+y` CSE survives an if/else).
 * **Symbol-table count (worker win)**: the number of identifiers entered before a function

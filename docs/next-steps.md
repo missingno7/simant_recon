@@ -17,9 +17,9 @@ Ordered by expected leverage on byte-exact coverage and on the final historical 
    (placements are derived, their data contributions still count as unresolved).
 3. **Large functions (C4203).** Some originals were globally optimised although MSC 6.00A's
    pass 2 gives up ("too large for global optimizations"), e.g. RandWorld in S08.
-   Tested 2026-09-30: the retail 6.00A `C2L.EXE`, DOS-bound with BIND 1.30
-   (`C:	ools\msc-6.00a-c2l-bound`, profile `msc600a-c2l`, `/B2 C2L.EXE`), runs but still
-   reports C4203. Next hypothesis: the limit is memory-bound in real mode; the original was
+   The retail 6.00A `C2L.EXE`, DOS-bound with BIND 1.30 (`C:	ools\msc-6.00a-c2l-bound`,
+   profile `msc600a-c2l`, `/B2 C2L.EXE`), raises the limit and makes S06 SimKidOutside exact
+   (module S06 uses it), but RandWorld and SimKidInside still report C4203. Next hypothesis: the limit is memory-bound in real mode; the original was
    probably compiled with OS/2-hosted protected-mode passes. Test by running the unbound
    OS/2 passes under an OS/2-capable host (e.g. an OS/2 1.x VM or an NE/OS2 API emulator).
 3b. **MSC 6.00 vs 6.00A — DONE:** 6.00A (VER-2). Only `/Ol` strength reduction differs (rule VER-1). 15 loops with

@@ -117,7 +117,7 @@ Handle far f_171C_2086(Handle h);
 Handle far f_171C_2136(char far *p);
 char far * far f_171C_21CC(unsigned size);
 
-/* SCAFFOLD BEGIN: MemPunt; exact bytes but its row is misframed as root:16B5:0672 in layout/functions.json (unclaimable) */
+/* SCAFFOLD BEGIN: MemPunt; bytes exact but its function-table row is misframed as root:16B5:0672 (unclaimable) */
 void far f_171C_0002(char far *where)
 {
     Punt("MemPunt @%s after %s", where, (char far *)b_8C62);
@@ -177,7 +177,7 @@ char far * far f_171C_00FA(int type)
     return "BAD";
 }
 
-/* SCAFFOLD BEGIN: draft; residue: register tie-break (mov dx,es vs mov cx,es) / les vs mov es in prologue, heap-state sensitive */
+/* SCAFFOLD BEGIN: draft; residue: prologue les vs mov es / register tie-break */
 Block far * far f_171C_0160(Block far *b, int merge)
 {
     unsigned paras;
@@ -242,16 +242,16 @@ void far f_171C_02CA(int fd, char far *format, ...)
     write(fd, buffer, _fstrlen(buffer));
 }
 
-/* SCAFFOLD BEGIN: draft (ralloc dump); residue: loop/local shapes */
 void far f_171C_030C(char far *where)
 {
+    int x;
+    int y;
+    int n;
     int fd;
+    Handle h;
+    Block far *b;
     long now;
     char name[30];
-    Handle h;
-    int n;
-    Block far *b;
-    Handle hp;
 
     if (s_2F2A)
         return;
@@ -282,24 +282,23 @@ void far f_171C_030C(char far *where)
     for (b = g_91A0.first; SEG(b) < SEG(g_91A0.end); b = BLK(SEG(b) + b->paras)) {
         _fstrncpy(name, b->name, 13);
         name[13] = 0;
-        hp = (Handle)((char far *)s_2F46 + b->handle);
+        h = (Handle)((char far *)s_2F46 + b->handle);
         switch (b->type) {
         case 2:
         case 5:
         case 0x80:
-            f_171C_02CA(fd, "----:----->%p:", (char far *)b + 0x20000L);
+            f_171C_02CA(fd, "----:----->%p:", (char far *)((long)b + 0x20000L));
             break;
         default:
-            f_171C_02CA(fd, "%p->%p:", hp, *hp);
+            f_171C_02CA(fd, "%p->%p:", h, *h);
             break;
         }
         f_171C_02CA(fd, "size=%x, %ld, type=%c%s", b->paras, (unsigned long)b->paras << 4,
-                    HDR(hp)->lock ? '*' : ' ', f_171C_00FA(b->type));
+                    HDR(h)->lock ? '*' : ' ', f_171C_00FA(b->type));
         f_171C_02CA(fd, " age=%5ld name=%s\n", s_2F30 - b->age, (char far *)name);
     }
     close(fd);
 }
-/* SCAFFOLD END */
 
 void far f_171C_0674(void)
 {
@@ -408,7 +407,7 @@ void far f_171C_07BE(void)
     atexit(f_171C_0678);
 }
 
-/* SCAFFOLD BEGIN: draft; residue: next-block locals shape */
+/* SCAFFOLD BEGIN: draft; residue: register allocation (original: paras in DI) */
 int far f_171C_09CC(Handle h, unsigned paras, int type)
 {
     Block far *b;
@@ -428,7 +427,7 @@ int far f_171C_09CC(Handle h, unsigned paras, int type)
 }
 /* SCAFFOLD END */
 
-/* SCAFFOLD BEGIN: draft; residue: operand order of s_2F42 < s_2F44 compare (mov ax,[2F44] in original) */
+/* SCAFFOLD BEGIN: draft; bytes exact only with reversed extern order; reloc order */
 Handle far f_171C_0A5C(void)
 {
     Handle h;
@@ -480,39 +479,36 @@ void far f_171C_0ADC(Block far *b)
 }
 /* SCAFFOLD END */
 
-/* SCAFFOLD BEGIN: draft */
 int far f_171C_0BE2(int emsOnly)
 {
-    long oldest;
+    Block far *b;
+    unsigned long oldest;
     Handle h;
     int n;
     Handle found;
-    Block far *b;
 
     oldest = 0;
     found = 0L;
     h = s_2F46 - 1;
-    for (n = s_2F44; n; n--, h--) {
-        if (!*h)
-            continue;
-        b = HDR(h);
-        if (emsOnly && SEG(b) >= fd_50F6_3950)
-            continue;
-        if (b->type == 3 && s_2F30 - b->age >= oldest && !b->lock) {
-            oldest = s_2F30 - b->age;
-            found = h;
+    for (n = s_2F44; n; h--) {
+        if (*h) {
+            b = HDR(h);
+            if ((!emsOnly || (unsigned)SEG(b) < fd_50F6_3950) && b->type == 3 && s_2F30 - b->age >= oldest && !b->lock) {
+                oldest = s_2F30 - b->age;
+                found = h;
+            }
+            n--;
         }
     }
     if (found) {
         WinPrintf("OLDESTH=%p", found);
         b = HDR(found);
-        *found = fd_50F6_3948 + 0x20000L;
+        *found = (char far *)((long)fd_50F6_3948 + 0x20000L);
         f_171C_0160(b, 1);
         return 1;
     }
     return 0;
 }
-/* SCAFFOLD END */
 
 /* SCAFFOLD BEGIN: draft; needs runtime __disable/__enable (29F4:2D76/2D78) registered */
 int far f_171C_0CF4(int emsOnly)
@@ -652,7 +648,6 @@ again:
 }
 /* SCAFFOLD END */
 
-/* SCAFFOLD BEGIN: draft; residue: compare operand order */
 void far f_171C_11F2(Block far *b)
 {
     Block far *cur;
@@ -660,14 +655,15 @@ void far f_171C_11F2(Block far *b)
 
     cur = g_91A0.free;
     prev = 0L;
-    while (SEG(b) > SEG(cur) && cur) {
+    while ((unsigned)SEG(b) > SEG(cur)) {
+        if (!cur)
+            break;
         prev = cur;
         cur = BLK(cur->next);
     }
     b->prev = SEG(prev);
     b->next = SEG(cur);
 }
-/* SCAFFOLD END */
 
 void far f_171C_1246(Handle h)
 {
@@ -746,7 +742,7 @@ void far f_171C_152C(Handle h)
     HDR(h)->age = s_2F30++;
 }
 
-/* SCAFFOLD BEGIN: draft; residue: register allocation (original: h offset in DI, type in SI, paras/type locals in memory) */
+/* SCAFFOLD BEGIN: draft; residue: register allocation */
 void far f_171C_15A2(Handle h, int flags)
 {
     int newType;
@@ -828,7 +824,6 @@ int far f_171C_1794(Handle h)
     return 0;
 }
 
-/* SCAFFOLD BEGIN: draft */
 void far f_171C_1804(Handle h)
 {
     Block far *b;
@@ -837,19 +832,17 @@ void far f_171C_1804(Handle h)
     CHECKH(h);
     if (h && HDR(h)->type != 5) {
         b = HDR(h);
-        *h = fd_50F6_3948 + 0x20000L;
+        *h = (char far *)((long)fd_50F6_3948 + 0x20000L);
         f_171C_0160(b, 1);
     }
 }
-/* SCAFFOLD END */
 
-/* SCAFFOLD BEGIN: draft */
 Handle far f_171C_18A6(Handle h, long size, int flags)
 {
     unsigned paras;
-    unsigned oldParas;
     int type;
     int lock;
+    unsigned oldParas;
     Block far *nb;
 
     INIT();
@@ -860,33 +853,29 @@ Handle far f_171C_18A6(Handle h, long size, int flags)
     if (HDR(h)->lock)
         Punt("Realloc on locked block");
     paras = ((int)size + 15) / 16 + 2;
-    if (HDR(h)->paras == paras) {
-        HDR(h)->age = s_2F30++;
-        return h;
+    if (HDR(h)->paras != paras) {
+        if (f_171C_09CC(h, paras, flags)) {
+            HDR(h)->size = size;
+            return h;
+        }
+        lock = HDR(h)->lock;
+        type = HDR(h)->type;
+        oldParas = HDR(h)->paras - 2;
+        HDR(h)->type = 0;
+        f_171C_068C(nb = f_171C_0EEA(paras, flags, HDR(h)->name, 0), paras, flags);
+        nb->handle = OFF(h);
+        nb->size = size;
+        nb->lock = lock;
+        HDR(h)->type = type;
+        if (type != 5) {
+            f_194D_0006((char far *)((long)nb + 0x20000L), *h, paras - 2 < oldParas ? paras - 2 : oldParas);
+            f_171C_0160(HDR(h), 1);
+        }
+        *h = (char far *)((long)nb + 0x20000L);
     }
-    if (f_171C_09CC(h, paras, flags)) {
-        HDR(h)->size = size;
-        return h;
-    }
-    lock = HDR(h)->lock;
-    type = HDR(h)->type;
-    oldParas = HDR(h)->paras - 2;
-    HDR(h)->type = 0;
-    nb = f_171C_0EEA(paras, flags, HDR(h)->name, flags);
-    f_171C_068C(nb, paras, flags);
-    nb->handle = OFF(h);
-    nb->size = size;
-    nb->lock = lock;
-    HDR(h)->type = type;
-    if (type != 5) {
-        f_194D_0006((char far *)nb + 0x20000L, *h, paras - 2 < oldParas ? paras - 2 : oldParas);
-        f_171C_0160(HDR(h), 1);
-    }
-    *h = (char far *)((long)nb + 0x20000L);
     HDR(h)->age = s_2F30++;
     return h;
 }
-/* SCAFFOLD END */
 
 Handle far f_171C_1A9E(long size, int flags, char far *name)
 {
@@ -950,7 +939,7 @@ char far * far f_171C_1CD6(Handle h)
     return 0L;
 }
 
-/* SCAFFOLD BEGIN: draft */
+/* SCAFFOLD BEGIN: code exact; within-group relocation order differs */
 char far * far f_171C_1D40(Handle h)
 {
     char far *p;
@@ -969,16 +958,16 @@ char far * far f_171C_1D40(Handle h)
     }
     if (HDR(h)->lock)
         Punt("Attempt to move block high which is locked");
-    if ((unsigned)(s_8C70 - SEG(p)) - paras >= 0x1800) {
-        BLK(SEG(p) - 2)->type = 1;
-        nb = f_171C_0FBC(paras, type);
-        b = HDR(h);
-        f_194D_0006(nb, b, paras);
-        nb->type = type;
-        nb->paras = paras;
-        *h = (char far *)((long)nb + 0x20000L);
-        f_171C_0160(b, 1);
-    }
+    if ((unsigned)(s_8C70 - SEG(p)) - paras < 0x1800)
+        return f_171C_1B84(h);
+    BLK(SEG(p) - 2)->type = 1;
+    nb = f_171C_0FBC(paras, type);
+    b = HDR(h);
+    f_194D_0006(nb, b, paras);
+    nb->type = type;
+    nb->paras = paras;
+    *h = (char far *)((long)nb + 0x20000L);
+    f_171C_0160(b, 1);
     return f_171C_1B84(h);
 }
 /* SCAFFOLD END */

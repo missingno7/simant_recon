@@ -205,6 +205,42 @@
     }
    ]
   },
+  "CompactListA": {
+   "unit": "root",
+   "seg": 3777,
+   "off": 2,
+   "grounding": "inventory:far_call,push_cs_call",
+   "history": [
+    {
+     "was": "f_0EC1_0002",
+     "why": "Win16 unit SIMONE_MODULE 2A16..3046 (CompactListA..ClearListR, 17 members) aligns 1:1 with DOS module 0EC1 (17 functions); anchored by registered AddAntToAList/BList/RList at positions 11-13 and xver ExitHole/BuildAntListA MEDIUM; bodies match (list arrays, sizes)"
+    }
+   ]
+  },
+  "CompactListB": {
+   "unit": "root",
+   "seg": 3777,
+   "off": 129,
+   "grounding": "inventory:far_call",
+   "history": [
+    {
+     "was": "f_0EC1_0081",
+     "why": "Win16 unit SIMONE_MODULE 2A16..3046 (CompactListA..ClearListR, 17 members) aligns 1:1 with DOS module 0EC1 (17 functions); anchored by registered AddAntToAList/BList/RList at positions 11-13 and xver ExitHole/BuildAntListA MEDIUM; bodies match (list arrays, sizes)"
+    }
+   ]
+  },
+  "CompactListR": {
+   "unit": "root",
+   "seg": 3777,
+   "off": 256,
+   "grounding": "inventory:far_call",
+   "history": [
+    {
+     "was": "f_0EC1_0100",
+     "why": "Win16 unit SIMONE_MODULE 2A16..3046 (CompactListA..ClearListR, 17 members) aligns 1:1 with DOS module 0EC1 (17 functions); anchored by registered AddAntToAList/BList/RList at positions 11-13 and xver ExitHole/BuildAntListA MEDIUM; bodies match (list arrays, sizes)"
+    }
+   ]
+  },
   "ConvertMonoMaskToColor": {
    "unit": "root",
    "seg": 5673,
@@ -1093,6 +1129,42 @@
     }
    ]
   },
+  "FindInAList": {
+   "unit": "root",
+   "seg": 3777,
+   "off": 657,
+   "grounding": "inventory:far_call",
+   "history": [
+    {
+     "was": "f_0EC1_0291",
+     "why": "Win16 unit SIMONE_MODULE 2A16..3046 (CompactListA..ClearListR, 17 members) aligns 1:1 with DOS module 0EC1 (17 functions); anchored by registered AddAntToAList/BList/RList at positions 11-13 and xver ExitHole/BuildAntListA MEDIUM; bodies match (list arrays, sizes)"
+    }
+   ]
+  },
+  "FindInBList": {
+   "unit": "root",
+   "seg": 3777,
+   "off": 733,
+   "grounding": "inventory:far_call",
+   "history": [
+    {
+     "was": "f_0EC1_02DD",
+     "why": "Win16 unit SIMONE_MODULE 2A16..3046 (CompactListA..ClearListR, 17 members) aligns 1:1 with DOS module 0EC1 (17 functions); anchored by registered AddAntToAList/BList/RList at positions 11-13 and xver ExitHole/BuildAntListA MEDIUM; bodies match (list arrays, sizes)"
+    }
+   ]
+  },
+  "FindInRList": {
+   "unit": "root",
+   "seg": 3777,
+   "off": 812,
+   "grounding": "inventory:far_call",
+   "history": [
+    {
+     "was": "f_0EC1_032C",
+     "why": "Win16 unit SIMONE_MODULE 2A16..3046 (CompactListA..ClearListR, 17 members) aligns 1:1 with DOS module 0EC1 (17 functions); anchored by registered AddAntToAList/BList/RList at positions 11-13 and xver ExitHole/BuildAntListA MEDIUM; bodies match (list arrays, sizes)"
+    }
+   ]
+  },
   "FindIndex": {
    "unit": "root",
    "seg": 6534,
@@ -1906,6 +1978,18 @@
     {
      "was": "o08_35F5_059B",
      "why": "worker ovl08: Win16 RandWorld unit member / call-site evidence (report 2026-09-30)"
+    }
+   ]
+  },
+  "RemoveFromAList": {
+   "unit": "root",
+   "seg": 3777,
+   "off": 383,
+   "grounding": "inventory:far_call",
+   "history": [
+    {
+     "was": "f_0EC1_017F",
+     "why": "Win16 unit SIMONE_MODULE 2A16..3046 (CompactListA..ClearListR, 17 members) aligns 1:1 with DOS module 0EC1 (17 functions); anchored by registered AddAntToAList/BList/RList at positions 11-13 and xver ExitHole/BuildAntListA MEDIUM; bodies match (list arrays, sizes)"
     }
    ]
   },
@@ -4078,48 +4162,6 @@
    "seg": 3630,
    "off": 1630,
    "grounding": "inventory:push_cs_call"
-  },
-  "f_0EC1_0002": {
-   "unit": "root",
-   "seg": 3777,
-   "off": 2,
-   "grounding": "inventory:far_call,push_cs_call"
-  },
-  "f_0EC1_0081": {
-   "unit": "root",
-   "seg": 3777,
-   "off": 129,
-   "grounding": "inventory:far_call"
-  },
-  "f_0EC1_0100": {
-   "unit": "root",
-   "seg": 3777,
-   "off": 256,
-   "grounding": "inventory:far_call"
-  },
-  "f_0EC1_017F": {
-   "unit": "root",
-   "seg": 3777,
-   "off": 383,
-   "grounding": "inventory:far_call"
-  },
-  "f_0EC1_0291": {
-   "unit": "root",
-   "seg": 3777,
-   "off": 657,
-   "grounding": "inventory:far_call"
-  },
-  "f_0EC1_02DD": {
-   "unit": "root",
-   "seg": 3777,
-   "off": 733,
-   "grounding": "inventory:far_call"
-  },
-  "f_0EC1_032C": {
-   "unit": "root",
-   "seg": 3777,
-   "off": 812,
-   "grounding": "inventory:far_call"
   },
   "f_0EC1_037B": {
    "unit": "root",
@@ -12307,6 +12349,11 @@
    "off": 528,
    "grounding": "o06_35F5_11FF: mov es,[CONST 84DA = 50F6]; es:[0210] (S06:35F5 InitSimYard/yard sim unit)"
   },
+  "fd_50F6_0212": {
+   "seg": 20726,
+   "off": 530,
+   "grounding": "S25:39C7 o25_39C7_15B4:15BF dec word es:[0212] (CONST 893A=50F6); Win16 DecEatB EatCountB"
+  },
   "fd_50F6_0214": {
    "seg": 20726,
    "off": 532,
@@ -12691,11 +12738,6 @@
    "seg": 20726,
    "off": 1850,
    "grounding": "o08_35F5_0000 (InitSimVars): mov es,[CONST word 50F6] ; mov es:[073A],..."
-  },
-  "fd_50F6_07AA": {
-   "seg": 20726,
-   "off": 1962,
-   "grounding": "o09_35F5_0000 (LoadGame): mov es,[CONST 861C = 50F6]; cmp es:[07AA],0 before f_284A_010A"
   },
   "fd_50F6_07BC": {
    "seg": 20726,
@@ -14676,23 +14718,4 @@
    "off": 6130,
    "library": "llibcr.lib",
    "member": "write.asm",
-   "module_index": 44
-  },
-  "flsall": {
-   "unit": "root",
-   "seg": 10740,
-   "off": 3834,
-   "library": "llibcr.lib",
-   "member": "fflush.c",
-   "module_index": 33
-  },
-  "store_dt": {
-   "unit": "root",
-   "seg": 10740,
-   "off": 8102,
-   "library": "llibcr.lib",
-   "member": "asctime.c",
-   "module_index": 190
-  }
- }
-}
+ 
