@@ -458,6 +458,7 @@ extern int far f_10F7_04EC(int plane, int x, int y);
 extern int far fd_50F6_10C0;
 extern int far fd_50F6_10B2;
 
+/* SCAFFOLD BEGIN: o25_39C7_0CBD (GetBestDir): bytes exact; within-group relocation order not: the original has no LEDATA boundary between the two GetDis calls (0CDC/0D54), this file layout puts the 52-entry /Zd LINNUM boundary at 0CF5 (source line layout differs from the original) */
 int far o25_39C7_0CBD(int plane, int x, int y, int a, int b)
 {
     int fallback;
@@ -496,6 +497,7 @@ int far o25_39C7_0CBD(int plane, int x, int y, int a, int b)
 done:
     return best;
 }
+/* SCAFFOLD END */
 
 /* SCAFFOLD BEGIN: o25_39C7_0DAF (QueenMoveB) best draft: the original keeps dir in memory [bp-2] (no SI use); MSC puts it in SI here */
 int far o25_39C7_0DAF(int x, int y, int dirHint)
@@ -942,6 +944,7 @@ int far o25_39C7_1BBB(int x, int y)
     return 0;
 }
 
+/* SCAFFOLD BEGIN: o25_39C7_1C81 (GetOutB): bytes exact; within-group relocation order not: the original has no LEDATA boundary in [1CFC,1DC0], this layout puts the /Zd LINNUM boundary at 1D5C */
 int far o25_39C7_1C81(int x)
 {
     int raw;
@@ -972,6 +975,5 @@ int far o25_39C7_1C81(int x)
     o25_39C7_105B(x, 1, SRand8());
     return 0;
 }
-
-/* SCAFFOLD BEGIN: unrecovered same-module callees */
 /* SCAFFOLD END */
+

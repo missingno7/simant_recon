@@ -5065,8 +5065,8 @@
 },
 {
 "unit": "root",
-"seg": 5813,
-"off": 1650,
+"seg": 5916,
+"off": 2,
 "size": 28,
 "region": "game_or_library",
 "extent": "REVIEWED",
@@ -5074,7 +5074,8 @@
 "reviewed"
 ],
 "notes": [
-"prologue scan in unreached gap; descent ends in a return; no references found (unreferenced or indirect)"
+"prologue scan in unreached gap; descent ends in a return; no references found (unreferenced or indirect)",
+"re-framed 16B5:0672 -> 171C:0002: MemPunt: frame 171C covers its atexit neighbours 171C:0020; its literal at 2F14 opens 171C's _DATA (worker mem)"
 ]
 },
 {

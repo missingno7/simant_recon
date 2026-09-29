@@ -109,6 +109,18 @@
     }
    ]
   },
+  "Bounce": {
+   "unit": "root",
+   "seg": 4995,
+   "off": 4264,
+   "grounding": "inventory:far_call,push_cs_call",
+   "history": [
+    {
+     "was": "f_1383_10A8",
+     "why": "Win16 unit SIMTWO_MODULE 0000..12EC (GetStrategy..Bounce, 22 members, next unit starts at InitSimYard) aligns 1:1 with DOS module 1383 (22 functions); anchored by xver GstrR MEDIUM (pos 5), GetNewModeB HIGH (pos 14), GetForageDir HIGH (pos 16); call graph agrees (GetStrategy calls GstrB/SetCasteProd/SetModeProd/GstrR, GetNewMode dispatches to GetNewModeB/R, Bounce called by the Get*Dir members)"
+    }
+   ]
+  },
   "BuildAntListA": {
    "unit": "root",
    "seg": 3777,
@@ -118,6 +130,18 @@
     {
      "was": "f_0EC1_0719",
      "why": "Win16 unit SIMONE_MODULE 2A16..3046 (CompactListA..ClearListR, 17 members) aligns 1:1 with DOS module 0EC1 (17 functions); anchored by registered AddAntToAList/BList/RList at positions 11-13 and xver ExitHole/BuildAntListA MEDIUM; bodies match (list arrays, sizes)"
+    }
+   ]
+  },
+  "CalcScore": {
+   "unit": "S14",
+   "seg": 14412,
+   "off": 0,
+   "grounding": "inventory:push_cs_call",
+   "history": [
+    {
+     "was": "o14_384C_0000",
+     "why": "Win16 SIMANT_MODULE MAPSYM run CalcScore,DoScenario,DoWinHelp,[win_DrawScoreWindow],ScoreDialog,DrawCastePopUp,SetDefaultWindPrompt,PictStrnDialog,[win_DrawPictureWindow],PictureDialog,[win_DrawEndGameWindow],EndGameDialog,SpiderDialog,CustomerIDDialog aligns 1:1 with the 11 DOS S14:384C functions (Windows paint callbacks absent in DOS); returns long score, fills 8 detail scores, called by ScoreDialog/EndGameDialog"
     }
    ]
   },
@@ -322,6 +346,18 @@
     {
      "was": "f_14EE_0079",
      "why": "dig worker: DOS body byte-exact and structurally identical to the Win16 function of this name (same statements, same data), plus module neighbourhood"
+    }
+   ]
+  },
+  "CustomerIDDialog": {
+   "unit": "S14",
+   "seg": 14412,
+   "off": 4325,
+   "grounding": "inventory:vector",
+   "history": [
+    {
+     "was": "o14_384C_10E5",
+     "why": "Win16 SIMANT_MODULE MAPSYM run CalcScore,DoScenario,DoWinHelp,[win_DrawScoreWindow],ScoreDialog,DrawCastePopUp,SetDefaultWindPrompt,PictStrnDialog,[win_DrawPictureWindow],PictureDialog,[win_DrawEndGameWindow],EndGameDialog,SpiderDialog,CustomerIDDialog aligns 1:1 with the 11 DOS S14:384C functions (Windows paint callbacks absent in DOS); body matches Win16 CustomerIDDialog (db_LoadObject 0x83/0x84 kind 10, PictureDialog(strings,6,0,1)), caller main"
     }
    ]
   },
@@ -901,6 +937,18 @@
     }
    ]
   },
+  "DoScenario": {
+   "unit": "S14",
+   "seg": 14412,
+   "off": 1169,
+   "grounding": "inventory:vector",
+   "history": [
+    {
+     "was": "o14_384C_0491",
+     "why": "Win16 SIMANT_MODULE MAPSYM run CalcScore,DoScenario,DoWinHelp,[win_DrawScoreWindow],ScoreDialog,DrawCastePopUp,SetDefaultWindPrompt,PictStrnDialog,[win_DrawPictureWindow],PictureDialog,[win_DrawEndGameWindow],EndGameDialog,SpiderDialog,CustomerIDDialog aligns 1:1 with the 11 DOS S14:384C functions (Windows paint callbacks absent in DOS); literal 'GOT Scenario %x'"
+    }
+   ]
+  },
   "DoSmells": {
    "unit": "root",
    "seg": 2196,
@@ -937,6 +985,18 @@
     }
    ]
   },
+  "DoWinHelp": {
+   "unit": "S14",
+   "seg": 14412,
+   "off": 1275,
+   "grounding": "inventory:vector",
+   "history": [
+    {
+     "was": "o14_384C_04FB",
+     "why": "Win16 SIMANT_MODULE MAPSYM run CalcScore,DoScenario,DoWinHelp,[win_DrawScoreWindow],ScoreDialog,DrawCastePopUp,SetDefaultWindPrompt,PictStrnDialog,[win_DrawPictureWindow],PictureDialog,[win_DrawEndGameWindow],EndGameDialog,SpiderDialog,CustomerIDDialog aligns 1:1 with the 11 DOS S14:384C functions (Windows paint callbacks absent in DOS); DOS shows the help window object passed as argument"
+    }
+   ]
+  },
   "DosPunt": {
    "unit": "root",
    "seg": 6696,
@@ -946,6 +1006,18 @@
     {
      "was": "f_1A28_0277",
      "why": "xver HIGH features-v1: string \"%s dos error: %d: %s\"; string \"too many files open. you need a statement 'files=12' in your\""
+    }
+   ]
+  },
+  "DrawCastePopUp": {
+   "unit": "S14",
+   "seg": 14412,
+   "off": 2029,
+   "grounding": "inventory:vector",
+   "history": [
+    {
+     "was": "o14_384C_07ED",
+     "why": "Win16 SIMANT_MODULE MAPSYM run CalcScore,DoScenario,DoWinHelp,[win_DrawScoreWindow],ScoreDialog,DrawCastePopUp,SetDefaultWindPrompt,PictStrnDialog,[win_DrawPictureWindow],PictureDialog,[win_DrawEndGameWindow],EndGameDialog,SpiderDialog,CustomerIDDialog aligns 1:1 with the 11 DOS S14:384C functions (Windows paint callbacks absent in DOS); xver unique constant 0x1700"
     }
    ]
   },
@@ -1102,6 +1174,18 @@
     {
      "was": "o05_35F5_0064",
      "why": "xver HIGH features-v1: constant 0x117; constant 0xa00; constant 0xb00"
+    }
+   ]
+  },
+  "EndGameDialog": {
+   "unit": "S14",
+   "seg": 14412,
+   "off": 3557,
+   "grounding": "inventory:vector",
+   "history": [
+    {
+     "was": "o14_384C_0DE5",
+     "why": "Win16 SIMANT_MODULE MAPSYM run CalcScore,DoScenario,DoWinHelp,[win_DrawScoreWindow],ScoreDialog,DrawCastePopUp,SetDefaultWindPrompt,PictStrnDialog,[win_DrawPictureWindow],PictureDialog,[win_DrawEndGameWindow],EndGameDialog,SpiderDialog,CustomerIDDialog aligns 1:1 with the 11 DOS S14:384C functions (Windows paint callbacks absent in DOS); called by DoAntSim, xver constant 0xce64"
     }
    ]
   },
@@ -1273,6 +1357,30 @@
     }
    ]
   },
+  "ForceModeA": {
+   "unit": "root",
+   "seg": 4995,
+   "off": 1363,
+   "grounding": "reviewed: prologue scan in unreached gap; descent ends in a return; no references found (unreferenced or indirect)",
+   "history": [
+    {
+     "was": "f_1383_0553",
+     "why": "Win16 unit SIMTWO_MODULE 0000..12EC (GetStrategy..Bounce, 22 members, next unit starts at InitSimYard) aligns 1:1 with DOS module 1383 (22 functions); anchored by xver GstrR MEDIUM (pos 5), GetNewModeB HIGH (pos 14), GetForageDir HIGH (pos 16); call graph agrees (GetStrategy calls GstrB/SetCasteProd/SetModeProd/GstrR, GetNewMode dispatches to GetNewModeB/R, Bounce called by the Get*Dir members)"
+    }
+   ]
+  },
+  "ForceModeB": {
+   "unit": "root",
+   "seg": 4995,
+   "off": 1609,
+   "grounding": "reviewed: prologue scan in unreached gap; descent ends in a return; no references found (unreferenced or indirect)",
+   "history": [
+    {
+     "was": "f_1383_0649",
+     "why": "Win16 unit SIMTWO_MODULE 0000..12EC (GetStrategy..Bounce, 22 members, next unit starts at InitSimYard) aligns 1:1 with DOS module 1383 (22 functions); anchored by xver GstrR MEDIUM (pos 5), GetNewModeB HIGH (pos 14), GetForageDir HIGH (pos 16); call graph agrees (GetStrategy calls GstrB/SetCasteProd/SetModeProd/GstrR, GetNewMode dispatches to GetNewModeB/R, Bounce called by the Get*Dir members)"
+    }
+   ]
+  },
   "FullCount": {
    "unit": "root",
    "seg": 3048,
@@ -1309,6 +1417,18 @@
     }
    ]
   },
+  "GetAlarmDir": {
+   "unit": "root",
+   "seg": 4995,
+   "off": 3532,
+   "grounding": "inventory:far_call",
+   "history": [
+    {
+     "was": "f_1383_0DCC",
+     "why": "Win16 unit SIMTWO_MODULE 0000..12EC (GetStrategy..Bounce, 22 members, next unit starts at InitSimYard) aligns 1:1 with DOS module 1383 (22 functions); anchored by xver GstrR MEDIUM (pos 5), GetNewModeB HIGH (pos 14), GetForageDir HIGH (pos 16); call graph agrees (GetStrategy calls GstrB/SetCasteProd/SetModeProd/GstrR, GetNewMode dispatches to GetNewModeB/R, Bounce called by the Get*Dir members)"
+    }
+   ]
+  },
   "GetAntIndex": {
    "unit": "root",
    "seg": 4343,
@@ -1318,6 +1438,18 @@
     {
      "was": "f_10F7_005D",
      "why": "worker sim10F7: Win16 counterpart body matched while recovering the byte-exact DOS function"
+    }
+   ]
+  },
+  "GetDefendDir": {
+   "unit": "root",
+   "seg": 4995,
+   "off": 3788,
+   "grounding": "inventory:far_call",
+   "history": [
+    {
+     "was": "f_1383_0ECC",
+     "why": "Win16 unit SIMTWO_MODULE 0000..12EC (GetStrategy..Bounce, 22 members, next unit starts at InitSimYard) aligns 1:1 with DOS module 1383 (22 functions); anchored by xver GstrR MEDIUM (pos 5), GetNewModeB HIGH (pos 14), GetForageDir HIGH (pos 16); call graph agrees (GetStrategy calls GstrB/SetCasteProd/SetModeProd/GstrR, GetNewMode dispatches to GetNewModeB/R, Bounce called by the Get*Dir members)"
     }
    ]
   },
@@ -1369,6 +1501,18 @@
     }
    ]
   },
+  "GetForageDir": {
+   "unit": "root",
+   "seg": 4995,
+   "off": 2709,
+   "grounding": "inventory:far_call",
+   "history": [
+    {
+     "was": "f_1383_0A95",
+     "why": "Win16 unit SIMTWO_MODULE 0000..12EC (GetStrategy..Bounce, 22 members, next unit starts at InitSimYard) aligns 1:1 with DOS module 1383 (22 functions); anchored by xver GstrR MEDIUM (pos 5), GetNewModeB HIGH (pos 14), GetForageDir HIGH (pos 16); call graph agrees (GetStrategy calls GstrB/SetCasteProd/SetModeProd/GstrR, GetNewMode dispatches to GetNewModeB/R, Bounce called by the Get*Dir members)"
+    }
+   ]
+  },
   "GetFromAlist": {
    "unit": "root",
    "seg": 3777,
@@ -1405,6 +1549,54 @@
     }
    ]
   },
+  "GetNestDir": {
+   "unit": "root",
+   "seg": 4995,
+   "off": 3114,
+   "grounding": "inventory:far_call,push_cs_call",
+   "history": [
+    {
+     "was": "f_1383_0C2A",
+     "why": "Win16 unit SIMTWO_MODULE 0000..12EC (GetStrategy..Bounce, 22 members, next unit starts at InitSimYard) aligns 1:1 with DOS module 1383 (22 functions); anchored by xver GstrR MEDIUM (pos 5), GetNewModeB HIGH (pos 14), GetForageDir HIGH (pos 16); call graph agrees (GetStrategy calls GstrB/SetCasteProd/SetModeProd/GstrR, GetNewMode dispatches to GetNewModeB/R, Bounce called by the Get*Dir members)"
+    }
+   ]
+  },
+  "GetNewMode": {
+   "unit": "root",
+   "seg": 4995,
+   "off": 2422,
+   "grounding": "inventory:far_call",
+   "history": [
+    {
+     "was": "f_1383_0976",
+     "why": "Win16 unit SIMTWO_MODULE 0000..12EC (GetStrategy..Bounce, 22 members, next unit starts at InitSimYard) aligns 1:1 with DOS module 1383 (22 functions); anchored by xver GstrR MEDIUM (pos 5), GetNewModeB HIGH (pos 14), GetForageDir HIGH (pos 16); call graph agrees (GetStrategy calls GstrB/SetCasteProd/SetModeProd/GstrR, GetNewMode dispatches to GetNewModeB/R, Bounce called by the Get*Dir members)"
+    }
+   ]
+  },
+  "GetNewModeB": {
+   "unit": "root",
+   "seg": 4995,
+   "off": 2459,
+   "grounding": "inventory:far_call,push_cs_call",
+   "history": [
+    {
+     "was": "f_1383_099B",
+     "why": "Win16 unit SIMTWO_MODULE 0000..12EC (GetStrategy..Bounce, 22 members, next unit starts at InitSimYard) aligns 1:1 with DOS module 1383 (22 functions); anchored by xver GstrR MEDIUM (pos 5), GetNewModeB HIGH (pos 14), GetForageDir HIGH (pos 16); call graph agrees (GetStrategy calls GstrB/SetCasteProd/SetModeProd/GstrR, GetNewMode dispatches to GetNewModeB/R, Bounce called by the Get*Dir members)"
+    }
+   ]
+  },
+  "GetNewModeR": {
+   "unit": "root",
+   "seg": 4995,
+   "off": 2608,
+   "grounding": "inventory:far_call,push_cs_call",
+   "history": [
+    {
+     "was": "f_1383_0A30",
+     "why": "Win16 unit SIMTWO_MODULE 0000..12EC (GetStrategy..Bounce, 22 members, next unit starts at InitSimYard) aligns 1:1 with DOS module 1383 (22 functions); anchored by xver GstrR MEDIUM (pos 5), GetNewModeB HIGH (pos 14), GetForageDir HIGH (pos 16); call graph agrees (GetStrategy calls GstrB/SetCasteProd/SetModeProd/GstrR, GetNewMode dispatches to GetNewModeB/R, Bounce called by the Get*Dir members)"
+    }
+   ]
+  },
   "GetOutR": {
    "unit": "root",
    "seg": 3903,
@@ -1417,6 +1609,30 @@
     }
    ]
   },
+  "GetRandDir": {
+   "unit": "root",
+   "seg": 4995,
+   "off": 3721,
+   "grounding": "inventory:far_call",
+   "history": [
+    {
+     "was": "f_1383_0E89",
+     "why": "Win16 unit SIMTWO_MODULE 0000..12EC (GetStrategy..Bounce, 22 members, next unit starts at InitSimYard) aligns 1:1 with DOS module 1383 (22 functions); anchored by xver GstrR MEDIUM (pos 5), GetNewModeB HIGH (pos 14), GetForageDir HIGH (pos 16); call graph agrees (GetStrategy calls GstrB/SetCasteProd/SetModeProd/GstrR, GetNewMode dispatches to GetNewModeB/R, Bounce called by the Get*Dir members)"
+    }
+   ]
+  },
+  "GetRedDefendDir": {
+   "unit": "root",
+   "seg": 4995,
+   "off": 4046,
+   "grounding": "inventory:far_call",
+   "history": [
+    {
+     "was": "f_1383_0FCE",
+     "why": "Win16 unit SIMTWO_MODULE 0000..12EC (GetStrategy..Bounce, 22 members, next unit starts at InitSimYard) aligns 1:1 with DOS module 1383 (22 functions); anchored by xver GstrR MEDIUM (pos 5), GetNewModeB HIGH (pos 14), GetForageDir HIGH (pos 16); call graph agrees (GetStrategy calls GstrB/SetCasteProd/SetModeProd/GstrR, GetNewMode dispatches to GetNewModeB/R, Bounce called by the Get*Dir members)"
+    }
+   ]
+  },
   "GetSRandSeed": {
    "unit": "root",
    "seg": 147,
@@ -1426,6 +1642,18 @@
     {
      "was": "f_0093_00A3",
      "why": "xver CONFIRMED (evidence/cross_version/decisions.json: RNG translation unit)"
+    }
+   ]
+  },
+  "GetStrategy": {
+   "unit": "root",
+   "seg": 4995,
+   "off": 2,
+   "grounding": "inventory:far_call",
+   "history": [
+    {
+     "was": "f_1383_0002",
+     "why": "Win16 unit SIMTWO_MODULE 0000..12EC (GetStrategy..Bounce, 22 members, next unit starts at InitSimYard) aligns 1:1 with DOS module 1383 (22 functions); anchored by xver GstrR MEDIUM (pos 5), GetNewModeB HIGH (pos 14), GetForageDir HIGH (pos 16); call graph agrees (GetStrategy calls GstrB/SetCasteProd/SetModeProd/GstrR, GetNewMode dispatches to GetNewModeB/R, Bounce called by the Get*Dir members)"
     }
    ]
   },
@@ -1450,6 +1678,30 @@
     {
      "was": "f_0894_1C6E",
      "why": "Win16 MAPSYM member list of the matching unit aligns 1:1 in order and count with the DOS module (already-named members fall at their positions); bodies near-identical (worker simA)"
+    }
+   ]
+  },
+  "GstrB": {
+   "unit": "root",
+   "seg": 4995,
+   "off": 299,
+   "grounding": "inventory:push_cs_call",
+   "history": [
+    {
+     "was": "f_1383_012B",
+     "why": "Win16 unit SIMTWO_MODULE 0000..12EC (GetStrategy..Bounce, 22 members, next unit starts at InitSimYard) aligns 1:1 with DOS module 1383 (22 functions); anchored by xver GstrR MEDIUM (pos 5), GetNewModeB HIGH (pos 14), GetForageDir HIGH (pos 16); call graph agrees (GetStrategy calls GstrB/SetCasteProd/SetModeProd/GstrR, GetNewMode dispatches to GetNewModeB/R, Bounce called by the Get*Dir members)"
+    }
+   ]
+  },
+  "GstrR": {
+   "unit": "root",
+   "seg": 4995,
+   "off": 947,
+   "grounding": "inventory:push_cs_call",
+   "history": [
+    {
+     "was": "f_1383_03B3",
+     "why": "Win16 unit SIMTWO_MODULE 0000..12EC (GetStrategy..Bounce, 22 members, next unit starts at InitSimYard) aligns 1:1 with DOS module 1383 (22 functions); anchored by xver GstrR MEDIUM (pos 5), GetNewModeB HIGH (pos 14), GetForageDir HIGH (pos 16); call graph agrees (GetStrategy calls GstrB/SetCasteProd/SetModeProd/GstrR, GetNewMode dispatches to GetNewModeB/R, Bounce called by the Get*Dir members)"
     }
    ]
   },
@@ -1897,6 +2149,30 @@
     }
    ]
   },
+  "PictStrnDialog": {
+   "unit": "S14",
+   "seg": 14412,
+   "off": 2922,
+   "grounding": "inventory:push_cs_call,vector",
+   "history": [
+    {
+     "was": "o14_384C_0B6A",
+     "why": "Win16 SIMANT_MODULE MAPSYM run CalcScore,DoScenario,DoWinHelp,[win_DrawScoreWindow],ScoreDialog,DrawCastePopUp,SetDefaultWindPrompt,PictStrnDialog,[win_DrawPictureWindow],PictureDialog,[win_DrawEndGameWindow],EndGameDialog,SpiderDialog,CustomerIDDialog aligns 1:1 with the 11 DOS S14:384C functions (Windows paint callbacks absent in DOS); xver HIGH, body identical, literal StrnID=%d"
+    }
+   ]
+  },
+  "PictureDialog": {
+   "unit": "S14",
+   "seg": 14412,
+   "off": 3078,
+   "grounding": "inventory:push_cs_call",
+   "history": [
+    {
+     "was": "o14_384C_0C06",
+     "why": "Win16 SIMANT_MODULE MAPSYM run CalcScore,DoScenario,DoWinHelp,[win_DrawScoreWindow],ScoreDialog,DrawCastePopUp,SetDefaultWindPrompt,PictStrnDialog,[win_DrawPictureWindow],PictureDialog,[win_DrawEndGameWindow],EndGameDialog,SpiderDialog,CustomerIDDialog aligns 1:1 with the 11 DOS S14:384C functions (Windows paint callbacks absent in DOS); called by PictStrnDialog/CustomerIDDialog with (strings,count,picture,force) exactly as Win16 PictureDialog"
+    }
+   ]
+  },
   "PlaceBlackQueen": {
    "unit": "S08",
    "seg": 13813,
@@ -2065,6 +2341,30 @@
     }
    ]
   },
+  "Recruit": {
+   "unit": "root",
+   "seg": 4995,
+   "off": 1794,
+   "grounding": "inventory:far_call",
+   "history": [
+    {
+     "was": "f_1383_0702",
+     "why": "Win16 unit SIMTWO_MODULE 0000..12EC (GetStrategy..Bounce, 22 members, next unit starts at InitSimYard) aligns 1:1 with DOS module 1383 (22 functions); anchored by xver GstrR MEDIUM (pos 5), GetNewModeB HIGH (pos 14), GetForageDir HIGH (pos 16); call graph agrees (GetStrategy calls GstrB/SetCasteProd/SetModeProd/GstrR, GetNewMode dispatches to GetNewModeB/R, Bounce called by the Get*Dir members)"
+    }
+   ]
+  },
+  "RecruitRed": {
+   "unit": "root",
+   "seg": 4995,
+   "off": 2228,
+   "grounding": "inventory:far_call",
+   "history": [
+    {
+     "was": "f_1383_08B4",
+     "why": "Win16 unit SIMTWO_MODULE 0000..12EC (GetStrategy..Bounce, 22 members, next unit starts at InitSimYard) aligns 1:1 with DOS module 1383 (22 functions); anchored by xver GstrR MEDIUM (pos 5), GetNewModeB HIGH (pos 14), GetForageDir HIGH (pos 16); call graph agrees (GetStrategy calls GstrB/SetCasteProd/SetModeProd/GstrR, GetNewMode dispatches to GetNewModeB/R, Bounce called by the Get*Dir members)"
+    }
+   ]
+  },
   "RemoveFromAList": {
    "unit": "root",
    "seg": 3777,
@@ -2197,6 +2497,18 @@
     }
    ]
   },
+  "ScoreDialog": {
+   "unit": "S14",
+   "seg": 14412,
+   "off": 1478,
+   "grounding": "inventory:vector",
+   "history": [
+    {
+     "was": "o14_384C_05C6",
+     "why": "Win16 SIMANT_MODULE MAPSYM run CalcScore,DoScenario,DoWinHelp,[win_DrawScoreWindow],ScoreDialog,DrawCastePopUp,SetDefaultWindPrompt,PictStrnDialog,[win_DrawPictureWindow],PictureDialog,[win_DrawEndGameWindow],EndGameDialog,SpiderDialog,CustomerIDDialog aligns 1:1 with the 11 DOS S14:384C functions (Windows paint callbacks absent in DOS); body = Win16 ScoreDialog+win_DrawScoreWindow (CalcScore, 0x1800 objects, %d%%, %ld)"
+    }
+   ]
+  },
   "SeedRRand": {
    "unit": "root",
    "seg": 147,
@@ -2233,6 +2545,30 @@
     }
    ]
   },
+  "SetCasteProd": {
+   "unit": "root",
+   "seg": 4995,
+   "off": 504,
+   "grounding": "inventory:push_cs_call",
+   "history": [
+    {
+     "was": "f_1383_01F8",
+     "why": "Win16 unit SIMTWO_MODULE 0000..12EC (GetStrategy..Bounce, 22 members, next unit starts at InitSimYard) aligns 1:1 with DOS module 1383 (22 functions); anchored by xver GstrR MEDIUM (pos 5), GetNewModeB HIGH (pos 14), GetForageDir HIGH (pos 16); call graph agrees (GetStrategy calls GstrB/SetCasteProd/SetModeProd/GstrR, GetNewMode dispatches to GetNewModeB/R, Bounce called by the Get*Dir members)"
+    }
+   ]
+  },
+  "SetDefaultWindPrompt": {
+   "unit": "S14",
+   "seg": 14412,
+   "off": 2765,
+   "grounding": "inventory:vector",
+   "history": [
+    {
+     "was": "o14_384C_0ACD",
+     "why": "Win16 SIMANT_MODULE MAPSYM run CalcScore,DoScenario,DoWinHelp,[win_DrawScoreWindow],ScoreDialog,DrawCastePopUp,SetDefaultWindPrompt,PictStrnDialog,[win_DrawPictureWindow],PictureDialog,[win_DrawEndGameWindow],EndGameDialog,SpiderDialog,CustomerIDDialog aligns 1:1 with the 11 DOS S14:384C functions (Windows paint callbacks absent in DOS); body identical to Win16 (GamePaused, CurGameTool -1/10/11, EditMessage)"
+    }
+   ]
+  },
   "SetLife": {
    "unit": "root",
    "seg": 4343,
@@ -2254,6 +2590,18 @@
     {
      "was": "f_10F7_08CE",
      "why": "worker sim10F7: Win16 counterpart body matched while recovering the byte-exact DOS function"
+    }
+   ]
+  },
+  "SetModeProd": {
+   "unit": "root",
+   "seg": 4995,
+   "off": 758,
+   "grounding": "inventory:push_cs_call",
+   "history": [
+    {
+     "was": "f_1383_02F6",
+     "why": "Win16 unit SIMTWO_MODULE 0000..12EC (GetStrategy..Bounce, 22 members, next unit starts at InitSimYard) aligns 1:1 with DOS module 1383 (22 functions); anchored by xver GstrR MEDIUM (pos 5), GetNewModeB HIGH (pos 14), GetForageDir HIGH (pos 16); call graph agrees (GetStrategy calls GstrB/SetCasteProd/SetModeProd/GstrR, GetNewMode dispatches to GetNewModeB/R, Bounce called by the Get*Dir members)"
     }
    ]
   },
@@ -2377,6 +2725,18 @@
     }
    ]
   },
+  "SpiderDialog": {
+   "unit": "S14",
+   "seg": 14412,
+   "off": 4002,
+   "grounding": "inventory:vector",
+   "history": [
+    {
+     "was": "o14_384C_0FA2",
+     "why": "Win16 SIMANT_MODULE MAPSYM run CalcScore,DoScenario,DoWinHelp,[win_DrawScoreWindow],ScoreDialog,DrawCastePopUp,SetDefaultWindPrompt,PictStrnDialog,[win_DrawPictureWindow],PictureDialog,[win_DrawEndGameWindow],EndGameDialog,SpiderDialog,CustomerIDDialog aligns 1:1 with the 11 DOS S14:384C functions (Windows paint callbacks absent in DOS); xver constant 0x2ee0"
+    }
+   ]
+  },
   "SpiderScan": {
    "unit": "root",
    "seg": 3291,
@@ -2386,6 +2746,18 @@
     {
      "was": "f_0CDB_0F90",
      "why": "xver HIGH neighbourhood-v1: 4 anchored neighbours agree: callee:SRand1, callee:SRand4, callee:f_0894_2021, caller:f_0CDB_00B3; size ratio 1.01"
+    }
+   ]
+  },
+  "StartAttack": {
+   "unit": "root",
+   "seg": 4995,
+   "off": 1285,
+   "grounding": "inventory:push_cs_call",
+   "history": [
+    {
+     "was": "f_1383_0505",
+     "why": "Win16 unit SIMTWO_MODULE 0000..12EC (GetStrategy..Bounce, 22 members, next unit starts at InitSimYard) aligns 1:1 with DOS module 1383 (22 functions); anchored by xver GstrR MEDIUM (pos 5), GetNewModeB HIGH (pos 14), GetForageDir HIGH (pos 16); call graph agrees (GetStrategy calls GstrB/SetCasteProd/SetModeProd/GstrR, GetNewMode dispatches to GetNewModeB/R, Bounce called by the Get*Dir members)"
     }
    ]
   },
@@ -2482,6 +2854,30 @@
     {
      "was": "f_0F3F_0FC9",
      "why": "Win16 MAPSYM member list of the matching unit aligns 1:1 in order and count with the DOS module (already-named members fall at their positions); bodies near-identical (worker simA)"
+    }
+   ]
+  },
+  "UnRecruit": {
+   "unit": "root",
+   "seg": 4995,
+   "off": 2005,
+   "grounding": "inventory:far_call",
+   "history": [
+    {
+     "was": "f_1383_07D5",
+     "why": "Win16 unit SIMTWO_MODULE 0000..12EC (GetStrategy..Bounce, 22 members, next unit starts at InitSimYard) aligns 1:1 with DOS module 1383 (22 functions); anchored by xver GstrR MEDIUM (pos 5), GetNewModeB HIGH (pos 14), GetForageDir HIGH (pos 16); call graph agrees (GetStrategy calls GstrB/SetCasteProd/SetModeProd/GstrR, GetNewMode dispatches to GetNewModeB/R, Bounce called by the Get*Dir members)"
+    }
+   ]
+  },
+  "UnRecruitRed": {
+   "unit": "root",
+   "seg": 4995,
+   "off": 2359,
+   "grounding": "inventory:far_call",
+   "history": [
+    {
+     "was": "f_1383_0937",
+     "why": "Win16 unit SIMTWO_MODULE 0000..12EC (GetStrategy..Bounce, 22 members, next unit starts at InitSimYard) aligns 1:1 with DOS module 1383 (22 functions); anchored by xver GstrR MEDIUM (pos 5), GetNewModeB HIGH (pos 14), GetForageDir HIGH (pos 16); call graph agrees (GetStrategy calls GstrB/SetCasteProd/SetModeProd/GstrR, GetNewMode dispatches to GetNewModeB/R, Bounce called by the Get*Dir members)"
     }
    ]
   },
@@ -4995,133 +5391,133 @@
    "unit": "root",
    "seg": 4995,
    "off": 2,
-   "grounding": "inventory:far_call"
+   "alias_of": "GetStrategy"
   },
   "f_1383_012B": {
    "unit": "root",
    "seg": 4995,
    "off": 299,
-   "grounding": "inventory:push_cs_call"
+   "alias_of": "GstrB"
   },
   "f_1383_01F8": {
    "unit": "root",
    "seg": 4995,
    "off": 504,
-   "grounding": "inventory:push_cs_call"
+   "alias_of": "SetCasteProd"
   },
   "f_1383_02F6": {
    "unit": "root",
    "seg": 4995,
    "off": 758,
-   "grounding": "inventory:push_cs_call"
+   "alias_of": "SetModeProd"
   },
   "f_1383_03B3": {
    "unit": "root",
    "seg": 4995,
    "off": 947,
-   "grounding": "inventory:push_cs_call"
+   "alias_of": "GstrR"
   },
   "f_1383_0505": {
    "unit": "root",
    "seg": 4995,
    "off": 1285,
-   "grounding": "inventory:push_cs_call"
+   "alias_of": "StartAttack"
   },
   "f_1383_0553": {
    "unit": "root",
    "seg": 4995,
    "off": 1363,
-   "grounding": "reviewed: prologue scan in unreached gap; descent ends in a return; no references found (unreferenced or indirect)"
+   "alias_of": "ForceModeA"
   },
   "f_1383_0649": {
    "unit": "root",
    "seg": 4995,
    "off": 1609,
-   "grounding": "reviewed: prologue scan in unreached gap; descent ends in a return; no references found (unreferenced or indirect)"
+   "alias_of": "ForceModeB"
   },
   "f_1383_0702": {
    "unit": "root",
    "seg": 4995,
    "off": 1794,
-   "grounding": "inventory:far_call"
+   "alias_of": "Recruit"
   },
   "f_1383_07D5": {
    "unit": "root",
    "seg": 4995,
    "off": 2005,
-   "grounding": "inventory:far_call"
+   "alias_of": "UnRecruit"
   },
   "f_1383_08B4": {
    "unit": "root",
    "seg": 4995,
    "off": 2228,
-   "grounding": "inventory:far_call"
+   "alias_of": "RecruitRed"
   },
   "f_1383_0937": {
    "unit": "root",
    "seg": 4995,
    "off": 2359,
-   "grounding": "inventory:far_call"
+   "alias_of": "UnRecruitRed"
   },
   "f_1383_0976": {
    "unit": "root",
    "seg": 4995,
    "off": 2422,
-   "grounding": "inventory:far_call"
+   "alias_of": "GetNewMode"
   },
   "f_1383_099B": {
    "unit": "root",
    "seg": 4995,
    "off": 2459,
-   "grounding": "inventory:far_call,push_cs_call"
+   "alias_of": "GetNewModeB"
   },
   "f_1383_0A30": {
    "unit": "root",
    "seg": 4995,
    "off": 2608,
-   "grounding": "inventory:far_call,push_cs_call"
+   "alias_of": "GetNewModeR"
   },
   "f_1383_0A95": {
    "unit": "root",
    "seg": 4995,
    "off": 2709,
-   "grounding": "inventory:far_call"
+   "alias_of": "GetForageDir"
   },
   "f_1383_0C2A": {
    "unit": "root",
    "seg": 4995,
    "off": 3114,
-   "grounding": "inventory:far_call,push_cs_call"
+   "alias_of": "GetNestDir"
   },
   "f_1383_0DCC": {
    "unit": "root",
    "seg": 4995,
    "off": 3532,
-   "grounding": "inventory:far_call"
+   "alias_of": "GetAlarmDir"
   },
   "f_1383_0E89": {
    "unit": "root",
    "seg": 4995,
    "off": 3721,
-   "grounding": "inventory:far_call"
+   "alias_of": "GetRandDir"
   },
   "f_1383_0ECC": {
    "unit": "root",
    "seg": 4995,
    "off": 3788,
-   "grounding": "inventory:far_call"
+   "alias_of": "GetDefendDir"
   },
   "f_1383_0FCE": {
    "unit": "root",
    "seg": 4995,
    "off": 4046,
-   "grounding": "inventory:far_call"
+   "alias_of": "GetRedDefendDir"
   },
   "f_1383_10A8": {
    "unit": "root",
    "seg": 4995,
    "off": 4264,
-   "grounding": "inventory:far_call,push_cs_call"
+   "alias_of": "Bounce"
   },
   "f_1496_0006": {
    "unit": "root",
@@ -5399,11 +5795,17 @@
    "off": 51,
    "grounding": "inventory:far_call"
   },
-  "f_16B5_0672": {
+  "f_171C_0002": {
    "unit": "root",
-   "seg": 5813,
-   "off": 1650,
-   "grounding": "reviewed: prologue scan in unreached gap; descent ends in a return; no references found (unreferenced or indirect)"
+   "seg": 5916,
+   "off": 2,
+   "grounding": "reviewed: prologue scan in unreached gap; descent ends in a return; no references found (unreferenced or indirect)",
+   "history": [
+    {
+     "was": "f_16B5_0672",
+     "why": "re-framed: MemPunt: frame 171C covers its atexit neighbours 171C:0020; its literal at 2F14 opens 171C's _DATA (worker mem)"
+    }
+   ]
   },
   "f_171C_001E": {
    "unit": "root",
@@ -10831,67 +11233,67 @@
    "unit": "S14",
    "seg": 14412,
    "off": 0,
-   "grounding": "inventory:push_cs_call"
+   "alias_of": "CalcScore"
   },
   "o14_384C_0491": {
    "unit": "S14",
    "seg": 14412,
    "off": 1169,
-   "grounding": "inventory:vector"
+   "alias_of": "DoScenario"
   },
   "o14_384C_04FB": {
    "unit": "S14",
    "seg": 14412,
    "off": 1275,
-   "grounding": "inventory:vector"
+   "alias_of": "DoWinHelp"
   },
   "o14_384C_05C6": {
    "unit": "S14",
    "seg": 14412,
    "off": 1478,
-   "grounding": "inventory:vector"
+   "alias_of": "ScoreDialog"
   },
   "o14_384C_07ED": {
    "unit": "S14",
    "seg": 14412,
    "off": 2029,
-   "grounding": "inventory:vector"
+   "alias_of": "DrawCastePopUp"
   },
   "o14_384C_0ACD": {
    "unit": "S14",
    "seg": 14412,
    "off": 2765,
-   "grounding": "inventory:vector"
+   "alias_of": "SetDefaultWindPrompt"
   },
   "o14_384C_0B6A": {
    "unit": "S14",
    "seg": 14412,
    "off": 2922,
-   "grounding": "inventory:push_cs_call,vector"
+   "alias_of": "PictStrnDialog"
   },
   "o14_384C_0C06": {
    "unit": "S14",
    "seg": 14412,
    "off": 3078,
-   "grounding": "inventory:push_cs_call"
+   "alias_of": "PictureDialog"
   },
   "o14_384C_0DE5": {
    "unit": "S14",
    "seg": 14412,
    "off": 3557,
-   "grounding": "inventory:vector"
+   "alias_of": "EndGameDialog"
   },
   "o14_384C_0FA2": {
    "unit": "S14",
    "seg": 14412,
    "off": 4002,
-   "grounding": "inventory:vector"
+   "alias_of": "SpiderDialog"
   },
   "o14_384C_10E5": {
    "unit": "S14",
    "seg": 14412,
    "off": 4325,
-   "grounding": "inventory:vector"
+   "alias_of": "CustomerIDDialog"
   },
   "o15_384C_0000": {
    "unit": "S15",
@@ -12101,6 +12503,11 @@
   }
  },
  "data": {
+  "AdviceStrs": {
+   "seg": 20726,
+   "off": 864,
+   "grounding": "StartAttack (root:1383:053D): les bx,es:[0360]; pushes entry 5 (far string) to f_15D9_009C(...,120L,0); Win16 StartAttack EditMessage(AdviceStrs[10],AdviceStrs[11],0x78,...)"
+  },
   "Barrier": {
    "seg": 20726,
    "off": 1152,
@@ -12111,6 +12518,21 @@
      "why": "worker data identification: Win16 variable of the same role at the same use sites (reports dig/ovl08/simA/sim10F7)"
     }
    ]
+  },
+  "CasteModeTabB": {
+   "seg": 15703,
+   "off": 3070,
+   "grounding": "GetNewModeB (root:1383:0A02): byte [0BFE+caste]; Win16 CasteModeTabB[caste]"
+  },
+  "CasteTabB": {
+   "seg": 15703,
+   "off": 2918,
+   "grounding": "SetCasteProd (root:1383:02E3): MakeMe = [0B66 + 2*best]; Win16 SetCasteProd MakeMe = CasteTabB[chosen]"
+  },
+  "ChaseSpid": {
+   "seg": 20726,
+   "off": 584,
+   "grounding": "GetStrategy (root:1383:0011): mov es:[0248],0 / =1 when spider near; Win16 GetStrategy writes ChaseSpid at the same sites (unit SIMTWO aligned 1:1)"
   },
   "Cycle": {
    "seg": 20726,
@@ -12189,6 +12611,16 @@
     }
    ]
   },
+  "FuzLocX": {
+   "seg": 20726,
+   "off": 554,
+   "grounding": "GetStrategy (root:1383:0049): SRand1(5)+MeLocX-2 stored/clamped 0..127; Win16 GetStrategy FuzLocX"
+  },
+  "FuzLocY": {
+   "seg": 20726,
+   "off": 568,
+   "grounding": "GetStrategy (root:1383:006E): SRand1(5)+MeLocY-2 clamped 0..63; Win16 GetStrategy FuzLocY"
+  },
   "HealthB": {
    "seg": 20726,
    "off": 4286,
@@ -12232,6 +12664,11 @@
      "why": "worker data identification: Win16 variable of the same role at the same use sites (reports dig/ovl08/simA/sim10F7)"
     }
    ]
+  },
+  "IdealCaste": {
+   "seg": 15703,
+   "off": 2010,
+   "grounding": "SetCasteProd (root:1383:021F): summed over 4 and 100L*x/total like Win16 SetCasteProd IdealCaste[i]"
   },
   "LifeA": {
    "seg": 15901,
@@ -12353,6 +12790,46 @@
      "why": "worker data identification: Win16 variable of the same role at the same use sites (reports dig/ovl08/simA/sim10F7)"
     }
    ]
+  },
+  "ModeMe": {
+   "seg": 15703,
+   "off": 3088,
+   "grounding": "SetModeProd (root:1383:03A9) store / GetNewModeB (0A27) return; Win16 ModeMe"
+  },
+  "ModeTabB": {
+   "seg": 15703,
+   "off": 2926,
+   "grounding": "SetModeProd (root:1383:03A0): ModeMe = [0B6E + 2*best]; Win16 SetModeProd ModeMe = ModeTabB[best]"
+  },
+  "ModeTabSB": {
+   "seg": 15703,
+   "off": 3022,
+   "grounding": "GetNewModeB (root:1383:09F7): caste 6 table; Win16 ModeTabSB"
+  },
+  "ModeTabWB": {
+   "seg": 15703,
+   "off": 2974,
+   "grounding": "GetNewModeB (root:1383:09D2): byte [0B9E + StrategicModeB*8 + SRand8()] for caste 2; Win16 ModeTabWB[StrategicModeB][SRand8()]"
+  },
+  "RedLocX": {
+   "seg": 20726,
+   "off": 1168,
+   "grounding": "GetRedDefendDir (root:1383:1035): GetDis(x,y,[0490],[0494]) 3rd arg; Win16 GetRedDefendDir GetDis(x,y,RedLocX,RedLocY)"
+  },
+  "RedLocY": {
+   "seg": 20726,
+   "off": 1172,
+   "grounding": "GetRedDefendDir (root:1383:102C): GetDis 4th arg; Win16 RedLocY"
+  },
+  "RedPlane": {
+   "seg": 20726,
+   "off": 1176,
+   "grounding": "GetRedDefendDir (root:1383:0FF9): switch on es:[0498] 1/2/3 like GetDefendDir on MePlane; Win16 GetRedDefendDir switch (RedPlane)"
+  },
+  "StrategicModeB": {
+   "seg": 20726,
+   "off": 4244,
+   "grounding": "GetStrategy (root:1383:010F): result of GstrB stored; GetNewModeB indexes ModeTabWB[StrategicModeB]; Win16 GetStrategy/GetNewModeB"
   },
   "TERRAINset": {
    "seg": 20726,
@@ -12557,6 +13034,11 @@
    "seg": 15703,
    "off": 1996,
    "grounding": "o08_35F5_0000 (InitSimVars): mov es,[CONST word 3D57] ; mov es:[07CC],..."
+  },
+  "fd_3D57_0828": {
+   "seg": 15703,
+   "off": 2088,
+   "grounding": "CalcScore (S14:384C:0000): mov si,0828; mov es,[873A]; cmp es:[si],di history count"
   },
   "fd_3D57_0B36": {
    "seg": 15703,
@@ -13203,6 +13685,11 @@
    "off": 1252,
    "grounding": "o06_35F5_0000: mov es,[CONST 8484 = 50F6]; es:[04E4] (S06:35F5 InitSimYard/yard sim unit)"
   },
+  "fd_50F6_04F4": {
+   "seg": 20726,
+   "off": 1268,
+   "grounding": "CalcScore (S14:384C:0000): mov es,[8738]; mov bl,es:[04F4] history ring head (byte)"
+  },
   "fd_50F6_0502": {
    "seg": 20726,
    "off": 1282,
@@ -13243,6 +13730,11 @@
    "off": 1572,
    "grounding": "o06_35F5_0000: mov es,[CONST 846A = 50F6]; es:[0624] (S06:35F5 InitSimYard/yard sim unit)"
   },
+  "fd_50F6_0626": {
+   "seg": 20726,
+   "off": 1574,
+   "grounding": "CalcScore (S14:384C:0000): mov es,[873E]; mov ax,es:[si+0626] int ring[64]"
+  },
   "fd_50F6_06A6": {
    "seg": 20726,
    "off": 1702,
@@ -13258,6 +13750,11 @@
    "off": 1708,
    "grounding": "f_10F7_0CA8 (root:10F7): mov es,[CONST word = 50F6]; es:[..06AC] far data reference"
   },
+  "fd_50F6_06AE": {
+   "seg": 20726,
+   "off": 1710,
+   "grounding": "CalcScore (S14:384C:0000): mov es,[8740]; mov ax,es:[si+06AE] int ring[64]"
+  },
   "fd_50F6_072E": {
    "seg": 20726,
    "off": 1838,
@@ -13272,6 +13769,11 @@
    "seg": 20726,
    "off": 1850,
    "grounding": "o08_35F5_0000 (InitSimVars): mov es,[CONST word 50F6] ; mov es:[073A],..."
+  },
+  "fd_50F6_073C": {
+   "seg": 20726,
+   "off": 1852,
+   "grounding": "CalcScore (S14:384C:0000): mov es,[873C]; mov ax,es:[si+073C] int ring[64]"
   },
   "fd_50F6_07BC": {
    "seg": 20726,
@@ -14078,6 +14580,11 @@
    "off": 37424,
    "grounding": "f_2505_0006/0545: les bx,[bx+9230] indexed by win>>8 (window handle table, 4-byte entries)"
   },
+  "modeLevels": {
+   "seg": 15703,
+   "off": 1182,
+   "grounding": "SetModeProd (root:1383:0337): (unsigned long)[049E+2i]*total/65535; Win16 SetModeProd modeLevels[i]"
+  },
   "sys_errlist": {
    "seg": 21939,
    "off": 32018,
@@ -14333,6 +14840,14 @@
    "member": "dos\\crt0.asm",
    "module_index": 0
   },
+  "__disable": {
+   "unit": "root",
+   "seg": 10740,
+   "off": 11638,
+   "library": "llibcr.lib",
+   "member": "dos\\disable.asm",
+   "module_index": 328
+  },
   "__dos_allocmem": {
    "unit": "root",
    "seg": 10740,
@@ -14396,6 +14911,14 @@
    "library": "llibcr.lib",
    "member": "dtoxtime.c",
    "module_index": 201
+  },
+  "__enable": {
+   "unit": "root",
+   "seg": 10740,
+   "off": 11640,
+   "library": "llibcr.lib",
+   "member": "dos\\enable.asm",
+   "module_index": 330
   },
   "__exit": {
    "unit": "root",

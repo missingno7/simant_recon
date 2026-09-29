@@ -56,6 +56,7 @@ def main() -> int:
     data_bytes = 0
     scaffolds = 0
     exact_tus = 0
+    pending_order = 0
     exact_asm = 0
     exact_asm_bytes = 0
     bss_bytes = 0
@@ -72,6 +73,7 @@ def main() -> int:
         print(f"  {key:<10} {len(m['claims']):3d} claims  {status}")
         if not res["exact"]:
             failures.append(f"{key}: {bad + dbad} {res.get('log', '')}")
+        pending_order += sum(1 for c in res["claims"].values() if c.get("reloc_order") == "WITHIN_GROUP_PENDING")
         for c in m["claims"]:
             claimed.append((c["unit"], c["seg"] * 16 + c["off"], c["size"], c["name"]))
             if c.get("kind", "C") == "C":
@@ -169,6 +171,7 @@ def main() -> int:
         "root_claimed_bytes": per_unit.get("root", 0),
         "scaffold_functions": scaffolds,
         "exact_translation_units": exact_tus,
+        "claims_within_group_order_pending": pending_order,
         "codegen_rules_reproduced": rules_ok,
         "whole_executable": "NOT_BUILT (no historical link yet; see docs/next-steps.md)",
         "validation": "PASS" if not failures else "FAIL",

@@ -126,6 +126,42 @@ def resize(addr: str, size: int, why: str) -> int:
         return 0
 
 
+def reframe(addr: str, newseg: int, why: str) -> int:
+    """Move an unclaimed row to another code frame (same linear address)."""
+    from lockfile import CanonicalLock
+    with CanonicalLock():
+        unit, seg, off = addr.split(":")
+        seg, off = int(seg, 16), int(off, 16)
+        t = json.loads(TABLE.read_text())
+        row = next((r for r in t["functions"] if r["unit"] == unit and r["seg"] == seg and r["off"] == off), None)
+        if row is None:
+            raise SystemExit("no such row")
+        man = json.loads((ROOT / "layout" / "manifest.json").read_text())
+        if any(c["unit"] == unit and c["seg"] == seg and c["off"] == off for m in man["modules"].values()
+               for c in m["claims"]):
+            raise SystemExit("row is claimed")
+        lin = seg * 16 + off
+        if not (newseg * 16 <= lin < newseg * 16 + 0x10000):
+            raise SystemExit("new frame does not cover the address")
+        row["seg"], row["off"] = newseg, lin - newseg * 16
+        row.setdefault("notes", []).append(f"re-framed {seg:04X}:{off:04X} -> {newseg:04X}:{row['off']:04X}: {why}")
+        TABLE.write_text(json.dumps(t, indent=0) + "\n")
+        s = symmod.load()
+        old = symmod.default_name(unit, seg, off)
+        new = symmod.default_name(unit, newseg, row["off"])
+        for sec in ("code",):
+            for n, r in list(s[sec].items()):
+                if r.get("unit") == unit and r["seg"] == seg and r["off"] == off:
+                    r["seg"], r["off"] = newseg, row["off"]
+                    if n == old:
+                        s[sec].pop(n)
+                        r.setdefault("history", []).append({"was": old, "why": "re-framed: " + why})
+                        s[sec][new] = r
+        symmod.save(s)
+        print("re-framed", addr, "->", f"{unit}:{newseg:04X}:{row['off']:04X}")
+        return 0
+
+
 def _add(addr: str, size: int, why: str) -> int:
     unit, seg, off = addr.split(":")
     seg, off = int(seg, 16), int(off, 16)
@@ -152,6 +188,8 @@ if __name__ == "__main__":
         raise SystemExit(freeze())
     if len(sys.argv) >= 5 and sys.argv[1] == "add":
         raise SystemExit(add(sys.argv[2], int(sys.argv[3]), " ".join(sys.argv[4:])))
+    if len(sys.argv) >= 5 and sys.argv[1] == "reframe":
+        raise SystemExit(reframe(sys.argv[2], int(sys.argv[3], 16), " ".join(sys.argv[4:])))
     if len(sys.argv) >= 5 and sys.argv[1] == "resize":
         raise SystemExit(resize(sys.argv[2], int(sys.argv[3]), " ".join(sys.argv[4:])))
     print(__doc__)

@@ -17,6 +17,8 @@ extern void far f_0250_0E91(void);
 extern int far fd_50F6_08E2;
 extern int far fd_50F6_0AD6;
 extern int far fd_50F6_09F0;
+extern int far fd_50F6_0AB6;
+extern int far fd_50F6_0AC6;
 extern int far fd_50F6_0AE8;
 extern int far fd_50F6_0AF8;
 extern signed char far fd_3D57_0010[];
@@ -24,8 +26,6 @@ extern signed char far fd_3D57_001A[];
 extern int far f_10F7_26D4(int plane, int x, int y);
 int far o25_3BA4_1A9F(int plane, int x, int y, int gplane, int gx, int gy);
 extern signed char far fd_3D57_0008[];
-extern int far fd_50F6_0AB6;
-extern int far fd_50F6_0AC6;
 extern int far fd_50F6_04C2;
 extern signed char far fd_3D57_0000[];
 extern void far f_10F7_0ACE(int plane, int x, int y, int type, int dir);
@@ -573,7 +573,6 @@ void far o25_3BA4_1035(void)
 }
 /* SCAFFOLD END */
 
-/* SCAFFOLD BEGIN: ExitNest best draft: exact except the MePlane/MeGoalPlane compare operand order (cmp [temp],ax vs cmp mem,ax), which follows the compiler symbol-table state (exact with 2..7 extra declarations before fd_50F6_0AE8) */
 void far ExitNest(void)
 {
     int step;
@@ -629,7 +628,6 @@ void far ExitNest(void)
     }
     f_10F7_0A44(fd_50F6_048C = 1, fd_50F6_047C, fd_50F6_048A, fd_50F6_04C2, fd_50F6_0496, 0xff);
 }
-/* SCAFFOLD END */
 
 extern int far fd_3D57_02AC[2];
 extern int far fd_3D57_02A4[2];

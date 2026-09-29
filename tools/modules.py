@@ -83,6 +83,14 @@ def verify_module(text: str, module: dict, claims: list[dict]) -> dict:
         t = match.Target(c["unit"], c["seg"], c["off"], c["size"])
         res = match.Binder(t, obj, seg, pub, placements).bind()
         orig = x.read(c["unit"], t.linear, t.size)
+        if (not res.exact and not module.get("extent") and res.reasons
+                and all(r.startswith("relocation order inside a target group") for r in res.reasons)):
+            # Partial module: record boundaries (hence within-group order) depend on the size of
+            # earlier, not yet exact code.  Accept as a lower proof level; a complete-TU claim
+            # (--extent) requires the exact within-group order.
+            res.exact = True
+            res.reloc_order = "WITHIN_GROUP_PENDING"
+            res.reasons = []
         ok = res.exact and sha(orig) == c["target_sha256"]
         out["claims"][name] = {"exact": ok, "reasons": res.reasons, "fixups": len(res.fixups),
                                "relocations": len(res.relocs_expected), "reloc_order": res.reloc_order}
@@ -101,6 +109,9 @@ def verify_module(text: str, module: dict, claims: list[dict]) -> dict:
             all_ok = False
             continue
         dres = verify_data_segment(obj, segname, p, placements)
+        if (not dres["exact"] and not module.get("extent") and dres["reasons"]
+                and all(r.startswith("data relocation order inside target group") for r in dres["reasons"])):
+            dres.update(exact=True, reasons=[], reloc_order="WITHIN_GROUP_PENDING")
         if p.get("size", len(body)) != len(body):
             dres["exact"] = False
             dres.setdefault("reasons", []).append(
