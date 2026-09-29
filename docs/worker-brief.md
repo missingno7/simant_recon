@@ -16,6 +16,13 @@ You recover original C (or genuine assembly) for the modules assigned to you in
 * Verified rules FRAME-1, OS-1, GS-1, TU-1, REG-1, OE-1, ASM-1 are in
   `docs/codegen-rules.md` — do not re-test them, use them.
 
+## Environment
+
+Inside the Codex sandbox `python` is `C:\msys64\mingw64in\python.exe` (3.10); the tools
+find capstone in `C:/tools/capstone-5.0.3` by themselves and compilers run through MS-DOS
+Player from `C:	ools` — no installation is needed. Do not `pip install`. In PowerShell
+pass flags literally (`--flags /AL /Os /Oe`).
+
 ## Loop
 
 ```
