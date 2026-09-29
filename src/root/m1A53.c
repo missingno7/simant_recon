@@ -15,6 +15,14 @@ extern char far * far f_1A96_01EC(int object, int kind, void far *table);
 extern int far f_1A96_034E(int object, int kind, void far *table, char far *handle);
 extern char far * far f_19A9_001D(int db, int object, int kind, int far *size);
 extern void far f_171C_15A2(char far *handle, int type);
+extern void far f_171C_13E4(char far *handle);
+extern int far f_1A96_0159(char far *handle, void far *table, int far *object, int far *kind);
+extern void far f_1A96_0421(int object, int kind, void far *table);
+extern void far f_1A96_008C(int object, int kind, void far *table);
+extern void far f_1A96_00EE(void far *table);
+extern void far f_1A28_0149(int db);
+extern void far f_19A9_031D(int db, int object, int kind);
+extern void far f_19A9_0310(int db, int a4, int a5, int a6, int object, int kind, int a3);
 extern int far fd_50F6_3B50[];
 
 int db_numOfHandles = 0;
@@ -69,11 +77,6 @@ char far * far f_1A53_00F0(int object, int kind, int type)
     return handle;
 }
 
-/* SCAFFOLD BEGIN: context only, not reconstruction.
- * db_LoadObject best draft: 216 vs 218 bytes.  Residue: the original keeps the lookup
- * handle's high word in the DBRecall result's home ([bp-8]) and reloads it into DI for the
- * final mem_SetType/return; this draft gives it a separate home.  Declaration order is
- * irrelevant (24 permutations tried). */
 char far * far db_LoadObject(int object, int kind)
 {
     char far *handle;
@@ -98,4 +101,87 @@ char far * far db_LoadObject(int object, int kind)
     f_171C_15A2(handle, 0);
     return handle;
 }
+
+void far db_PurgeObject(int object, int kind)
+{
+    char far *handle;
+
+    if (db_numOfHandles < 0)
+        Punt("Purge attempt with database closed");
+    handle = f_1A96_01EC(object, kind, db_cacheTable);
+    if (handle) {
+        f_1A96_0421(object, kind, db_cacheTable);
+        f_171C_13E4(handle);
+    }
+}
+
+void far f_1A53_025F(char far *handle)
+{
+    int object;
+    int kind;
+
+    if (db_numOfHandles < 0)
+        Punt("Purge attempt with database closed");
+    if (f_1A96_0159(handle, db_cacheTable, &object, &kind)) {
+        f_1A96_0421(object, kind, db_cacheTable);
+        f_171C_13E4(handle);
+    } else
+        WinPrintf("\a\nPurge handle - handle not found!! handle=%p", handle);
+}
+
+void far f_1A53_02D5(char far *handle)
+{
+    f_171C_15A2(handle, 3);
+}
+
+/* SCAFFOLD BEGIN: context only, not reconstruction.
+ * f_1A53_02EB best draft: 99 vs 100 bytes.  Residue: the original pushes the lookup
+ * handle's high word through AX (mov ax,[bp-2]; push ax) where this draft emits
+ * push word ptr [bp-2]; everything else (DI for the low word, frame 4) matches. */
+void far f_1A53_02EB(unsigned int object, int kind)
+{
+    char far *handle;
+
+    if (object < 30000) {
+        if (db_numOfHandles < 0)
+            Punt("Purge attempt with database closed");
+        handle = f_1A96_01EC(object, kind, db_cacheTable);
+        if (handle)
+            f_171C_15A2(handle, 3);
+        else
+            Punt("Release %d not in cache! ");
+    }
+}
 /* SCAFFOLD END */
+
+void far f_1A53_034F(int object, int kind)
+{
+    if (db_numOfHandles < 0)
+        Punt("Unhook attempt with database closed");
+    f_1A96_008C(object, kind, db_cacheTable);
+}
+
+void far f_1A53_037C(void)
+{
+    while (db_numOfHandles > 0) {
+        --db_numOfHandles;
+        f_1A28_0149(fd_50F6_3B50[db_numOfHandles]);
+    }
+    f_1A96_00EE(db_cacheTable);
+    db_cacheTable = 0L;
+}
+
+void far f_1A53_03B6(int object, int kind, int a3, int a4, int a5, int a6)
+{
+    f_1B28_0068();
+    f_19A9_031D(fd_50F6_3B50[0], object, kind);
+    f_1A53_034F(object, kind);
+    f_19A9_0310(fd_50F6_3B50[0], a4, a5, a6, object, kind, a3);
+}
+
+void far f_1A53_0404(int object, int kind, int a3, int a4, int a5, int a6)
+{
+    f_1B28_0068();
+    f_1A53_034F(object, kind);
+    f_19A9_0310(fd_50F6_3B50[0], a4, a5, a6, object, kind, a3);
+}

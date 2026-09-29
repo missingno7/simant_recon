@@ -665,6 +665,18 @@
     }
    ]
   },
+  "db_PurgeObject": {
+   "unit": "root",
+   "seg": 6739,
+   "off": 511,
+   "grounding": "inventory:far_call",
+   "history": [
+    {
+     "was": "f_1A53_01FF",
+     "why": "xver HIGH pair _db_PurgeObject (3 anchored neighbours: callee Punt, callers DisplayCard, LoadMonoPats); same body: closed-db Punt, ch_LookUpId, ch_DeleteEntry, mem_Free"
+    }
+   ]
+  },
   "db_SetDataBase": {
    "unit": "root",
    "seg": 6739,
@@ -3761,12 +3773,6 @@
    "off": 240,
    "grounding": "inventory:far_call"
   },
-  "f_1A53_01FF": {
-   "unit": "root",
-   "seg": 6739,
-   "off": 511,
-   "grounding": "inventory:far_call"
-  },
   "f_1A53_025F": {
    "unit": "root",
    "seg": 6739,
@@ -3790,6 +3796,12 @@
    "seg": 6739,
    "off": 847,
    "grounding": "inventory:far_call"
+  },
+  "f_1A53_037C": {
+   "unit": "root",
+   "seg": 6739,
+   "off": 892,
+   "grounding": "reviewed: unreferenced frameless /Gs function between f_1A53_034F (ends 037C) and f_1A53_03B6: dec db_numOfHandles loop calling 1A28:0149, 1A96:00EE, clears db_cacheTable; Win16 db_CloseDataBase semantics"
   },
   "f_1A53_03B6": {
    "unit": "root",
@@ -7827,6 +7839,12 @@
    "off": 1435,
    "grounding": "inventory:vector"
   },
+  "o08_35F5_07C2": {
+   "unit": "S08",
+   "seg": 13813,
+   "off": 1986,
+   "grounding": "reviewed: unreferenced function between RandYard (ends 07C2) and DigOutBNest (0846): gap holds a complete stack-checked BP-frame function; it loads CONST 85E6/85E8 (YMapPopB/R), whose CONST order places it after RandYard; Win16 GenerateTutorial sits at this position in the RandWorld unit"
+  },
   "o08_35F5_0923": {
    "unit": "S08",
    "seg": 13813,
@@ -9251,15 +9269,770 @@
   }
  },
  "data": {
+  "fd_3D57_0000": {
+   "seg": 15703,
+   "off": 0,
+   "grounding": "f_10F7_048E (IsClear3x3-like): mov es,[CONST 829E = 3D57]; es:[si+0000] signed char dir offsets"
+  },
+  "fd_3D57_0008": {
+   "seg": 15703,
+   "off": 8,
+   "grounding": "f_10F7_048E (IsClear3x3-like): mov es,[CONST 829C = 3D57]; es:[si+0008] signed char dir offsets"
+  },
+  "fd_3D57_006C": {
+   "seg": 15703,
+   "off": 108,
+   "grounding": "f_10F7_1396 (root:10F7): mov es,[CONST word = 3D57]; es:[..006C] far data reference"
+  },
+  "fd_3D57_0094": {
+   "seg": 15703,
+   "off": 148,
+   "grounding": "f_10F7_0CA8 (root:10F7): mov es,[CONST word = 3D57]; es:[..0094] far data reference"
+  },
+  "fd_3D57_00A4": {
+   "seg": 15703,
+   "off": 164,
+   "grounding": "o08_35F5_07C2 (GenerateTutorial): mov es,[S08 CONST 85E6/85E8]; es:[bx+00A4]/es:[bx+0164] (12x16 byte maps, cleared by ClrArrays)"
+  },
+  "fd_3D57_0164": {
+   "seg": 15703,
+   "off": 356,
+   "grounding": "o08_35F5_07C2 (GenerateTutorial): mov es,[S08 CONST 85E6/85E8]; es:[bx+00A4]/es:[bx+0164] (12x16 byte maps, cleared by ClrArrays)"
+  },
+  "fd_3D57_0184": {
+   "seg": 15703,
+   "off": 388,
+   "grounding": "f_0BE8_0002: mov es,[DS:810A] (CONST 3D57); mov byte es:[bx+0184],14 bx=SRand1(6)<<4"
+  },
+  "fd_3D57_0224": {
+   "seg": 15703,
+   "off": 548,
+   "grounding": "o08_35F5_0050 (RandWorld): mov es,[S08 CONST word] ; es:[bx+disp] array base"
+  },
+  "fd_3D57_0264": {
+   "seg": 15703,
+   "off": 612,
+   "grounding": "o08_35F5_0050 (RandWorld): mov es,[S08 CONST word] ; es:[bx+disp] array base"
+  },
+  "fd_3D57_02AC": {
+   "seg": 15703,
+   "off": 684,
+   "grounding": "f_10F7_20BF (root:10F7): mov es,[CONST word = 3D57]; es:[..02AC] far data reference"
+  },
+  "fd_3D57_02B4": {
+   "seg": 15703,
+   "off": 692,
+   "grounding": "o08_35F5_0050 (RandWorld): mov es,[S08 CONST word] ; mov es:[off]"
+  },
+  "fd_3D57_02B8": {
+   "seg": 15703,
+   "off": 696,
+   "grounding": "o08_35F5_0050 (RandWorld): mov es,[S08 CONST word] ; mov es:[off]"
+  },
+  "fd_3D57_02BC": {
+   "seg": 15703,
+   "off": 700,
+   "grounding": "AddFood: mov es,[S08 CONST 8602]; mov es:[02BC],si ; mov es:[02BE],di (food centre x,y)"
+  },
+  "fd_3D57_0798": {
+   "seg": 15703,
+   "off": 1944,
+   "grounding": "f_10F7_0CA8 (root:10F7): mov es,[CONST word = 3D57]; es:[..0798] far data reference"
+  },
+  "fd_3D57_07BE": {
+   "seg": 15703,
+   "off": 1982,
+   "grounding": "o08_35F5_0A00 (InitYelloAnt): mov es,[S08 CONST word]; es:[off]"
+  },
+  "fd_3D57_07C8": {
+   "seg": 15703,
+   "off": 1992,
+   "grounding": "o08_35F5_059B (RandYard): mov es,[S08 CONST word] ; es:[off]"
+  },
+  "fd_3D57_07CC": {
+   "seg": 15703,
+   "off": 1996,
+   "grounding": "o08_35F5_0000 (InitSimVars): mov es,[CONST word 3D57] ; mov es:[07CC],..."
+  },
+  "fd_3D57_0C14": {
+   "seg": 15703,
+   "off": 3092,
+   "grounding": "o08_35F5_059B (RandYard): mov es,[S08 CONST word] ; es:[off]"
+  },
+  "fd_3D57_0C16": {
+   "seg": 15703,
+   "off": 3094,
+   "grounding": "o08_35F5_059B (RandYard): mov es,[S08 CONST word] ; es:[off]"
+  },
+  "fd_3D57_0C18": {
+   "seg": 15703,
+   "off": 3096,
+   "grounding": "o08_35F5_059B (RandYard): mov es,[S08 CONST word] ; es:[off]"
+  },
+  "fd_3D57_0C1E": {
+   "seg": 15703,
+   "off": 3102,
+   "grounding": "f_0BE8_03AC: mov es,[DS:8114] (CONST 3D57); mov word es:[0C1E],1"
+  },
+  "fd_3D57_0C22": {
+   "seg": 15703,
+   "off": 3106,
+   "grounding": "f_10F7_0CA8 (root:10F7): mov es,[CONST word = 3D57]; es:[..0C22] far data reference"
+  },
+  "fd_3D57_0C24": {
+   "seg": 15703,
+   "off": 3108,
+   "grounding": "o08_35F5_059B (RandYard): mov es,[S08 CONST word] ; es:[off]"
+  },
+  "fd_3D57_0C26": {
+   "seg": 15703,
+   "off": 3110,
+   "grounding": "f_10F7_1E71 (root:10F7): mov es,[CONST word = 3D57]; es:[..0C26] far data reference"
+  },
+  "fd_3D57_0C44": {
+   "seg": 15703,
+   "off": 3140,
+   "grounding": "o08_35F5_059B (RandYard): mov es,[S08 CONST word] ; es:[off]"
+  },
+  "fd_3E1D_0000": {
+   "seg": 15901,
+   "off": 0,
+   "grounding": "o08_35F5_059B (RandYard): mov es,[S08 CONST word] ; es:[off]"
+  },
+  "fd_3E1D_0180": {
+   "seg": 15901,
+   "off": 384,
+   "grounding": "o08_35F5_0050 (RandWorld): mov es,[S08 CONST word] ; es:[bx+disp] array base"
+  },
+  "fd_3E1D_2180": {
+   "seg": 15901,
+   "off": 8576,
+   "grounding": "f_0BE8_0652: mov es,[DS:812A] (CONST word 3E1D) ; es:[bx+2180] 64x64 byte map (Win16 AddWater MapB)"
+  },
+  "fd_3E1D_3180": {
+   "seg": 15901,
+   "off": 12672,
+   "grounding": "f_0BE8_0652: mov es,[DS:812C] (CONST word 3E1D) ; es:[bx+3180] 64x64 byte map (Win16 AddWater MapR)"
+  },
+  "fd_3E1D_4180": {
+   "seg": 15901,
+   "off": 16768,
+   "grounding": "o08_35F5_0050 (RandWorld): mov es,[S08 CONST word] ; es:[bx+disp] array base"
+  },
+  "fd_3E1D_5180": {
+   "seg": 15901,
+   "off": 20864,
+   "grounding": "o08_35F5_0050 (RandWorld): mov es,[S08 CONST word] ; es:[bx+disp] array base"
+  },
+  "fd_3E1D_6180": {
+   "seg": 15901,
+   "off": 24960,
+   "grounding": "o08_35F5_0050 (RandWorld): mov es,[S08 CONST word] ; es:[bx+disp] array base"
+  },
+  "fd_3E1D_8180": {
+   "seg": 15901,
+   "off": 33152,
+   "grounding": "o08_35F5_0050 (RandWorld): mov es,[S08 CONST word] ; es:[bx+disp] array base"
+  },
+  "fd_3E1D_9180": {
+   "seg": 15901,
+   "off": 37248,
+   "grounding": "o08_35F5_0050 (RandWorld): mov es,[S08 CONST word] ; es:[bx+disp] array base"
+  },
+  "fd_3E1D_A180": {
+   "seg": 15901,
+   "off": 41344,
+   "grounding": "f_10F7_005D (GetAntIndex-like): mov es,[CONST word = 3E1D]; es:[..A180] list count/field array"
+  },
+  "fd_3E1D_A569": {
+   "seg": 15901,
+   "off": 42345,
+   "grounding": "f_10F7_005D (GetAntIndex-like): mov es,[CONST word = 3E1D]; es:[..A569] list count/field array"
+  },
+  "fd_3E1D_A952": {
+   "seg": 15901,
+   "off": 43346,
+   "grounding": "f_10F7_005D (GetAntIndex-like): mov es,[CONST word = 3E1D]; es:[..A952] list count/field array"
+  },
+  "fd_3E1D_AD3B": {
+   "seg": 15901,
+   "off": 44347,
+   "grounding": "f_10F7_005D (GetAntIndex-like): mov es,[CONST word = 3E1D]; es:[..AD3B] list count/field array"
+  },
+  "fd_3E1D_B124": {
+   "seg": 15901,
+   "off": 45348,
+   "grounding": "f_10F7_005D (GetAntIndex-like): mov es,[CONST word = 3E1D]; es:[..B124] list count/field array"
+  },
+  "fd_3E1D_B50D": {
+   "seg": 15901,
+   "off": 46349,
+   "grounding": "f_10F7_005D (GetAntIndex-like): mov es,[CONST word = 3E1D]; es:[..B50D] list count/field array"
+  },
+  "fd_3E1D_B702": {
+   "seg": 15901,
+   "off": 46850,
+   "grounding": "f_10F7_005D (GetAntIndex-like): mov es,[CONST word = 3E1D]; es:[..B702] list count/field array"
+  },
+  "fd_3E1D_B8F7": {
+   "seg": 15901,
+   "off": 47351,
+   "grounding": "f_10F7_005D (GetAntIndex-like): mov es,[CONST word = 3E1D]; es:[..B8F7] list count/field array"
+  },
+  "fd_3E1D_BAEC": {
+   "seg": 15901,
+   "off": 47852,
+   "grounding": "f_10F7_005D (GetAntIndex-like): mov es,[CONST word = 3E1D]; es:[..BAEC] list count/field array"
+  },
+  "fd_3E1D_BCE1": {
+   "seg": 15901,
+   "off": 48353,
+   "grounding": "f_10F7_005D (GetAntIndex-like): mov es,[CONST word = 3E1D]; es:[..BCE1] list count/field array"
+  },
+  "fd_3E1D_BED6": {
+   "seg": 15901,
+   "off": 48854,
+   "grounding": "f_10F7_005D (GetAntIndex-like): mov es,[CONST word = 3E1D]; es:[..BED6] list count/field array"
+  },
+  "fd_3E1D_C0CB": {
+   "seg": 15901,
+   "off": 49355,
+   "grounding": "f_10F7_005D (GetAntIndex-like): mov es,[CONST word = 3E1D]; es:[..C0CB] list count/field array"
+  },
+  "fd_3E1D_C2C0": {
+   "seg": 15901,
+   "off": 49856,
+   "grounding": "f_10F7_005D (GetAntIndex-like): mov es,[CONST word = 3E1D]; es:[..C2C0] list count/field array"
+  },
+  "fd_3E1D_C4B5": {
+   "seg": 15901,
+   "off": 50357,
+   "grounding": "f_10F7_005D (GetAntIndex-like): mov es,[CONST word = 3E1D]; es:[..C4B5] list count/field array"
+  },
+  "fd_3E1D_C6AA": {
+   "seg": 15901,
+   "off": 50858,
+   "grounding": "f_10F7_005D (GetAntIndex-like): mov es,[CONST word = 3E1D]; es:[..C6AA] list count/field array"
+  },
+  "fd_3E1D_D09F": {
+   "seg": 15901,
+   "off": 53407,
+   "grounding": "o08_35F5_0050 (RandWorld): mov es,[S08 CONST word] ; es:[bx+disp] array base"
+  },
+  "fd_3E1D_D89F": {
+   "seg": 15901,
+   "off": 55455,
+   "grounding": "o08_35F5_0050 (RandWorld): mov es,[S08 CONST word] ; es:[bx+disp] array base"
+  },
+  "fd_3E1D_E09F": {
+   "seg": 15901,
+   "off": 57503,
+   "grounding": "o08_35F5_0050 (RandWorld): mov es,[S08 CONST word] ; es:[bx+disp] array base"
+  },
+  "fd_3E1D_E89F": {
+   "seg": 15901,
+   "off": 59551,
+   "grounding": "o08_35F5_0050 (RandWorld): mov es,[S08 CONST word] ; es:[bx+disp] array base"
+  },
+  "fd_3E1D_F09F": {
+   "seg": 15901,
+   "off": 61599,
+   "grounding": "o08_35F5_0050 (RandWorld): mov es,[S08 CONST word] ; es:[bx+disp] array base"
+  },
+  "fd_4DA7_0000": {
+   "seg": 19879,
+   "off": 0,
+   "grounding": "o08_35F5_0050 (RandWorld): mov es,[S08 CONST word] ; es:[bx+disp] array base"
+  },
+  "fd_50F6_01FE": {
+   "seg": 20726,
+   "off": 510,
+   "grounding": "o08_35F5_0050 (RandWorld): mov es,[S08 CONST word] ; mov es:[off]"
+  },
+  "fd_50F6_0200": {
+   "seg": 20726,
+   "off": 512,
+   "grounding": "o08_35F5_0050 (RandWorld): mov es,[S08 CONST word] ; mov es:[off]"
+  },
+  "fd_50F6_0204": {
+   "seg": 20726,
+   "off": 516,
+   "grounding": "o08_35F5_059B (RandYard): mov es,[S08 CONST word] ; es:[off]"
+  },
+  "fd_50F6_020E": {
+   "seg": 20726,
+   "off": 526,
+   "grounding": "o08_35F5_0050 (RandWorld): mov es,[S08 CONST word] ; mov es:[off]"
+  },
+  "fd_50F6_0214": {
+   "seg": 20726,
+   "off": 532,
+   "grounding": "o08_35F5_059B (RandYard): mov es,[S08 CONST word] ; es:[off]"
+  },
+  "fd_50F6_0224": {
+   "seg": 20726,
+   "off": 548,
+   "grounding": "o08_35F5_0050 (RandWorld): mov es,[S08 CONST word] ; mov es:[off]"
+  },
+  "fd_50F6_0228": {
+   "seg": 20726,
+   "off": 552,
+   "grounding": "o08_35F5_059B (RandYard): mov es,[S08 CONST word] ; es:[off]"
+  },
+  "fd_50F6_0232": {
+   "seg": 20726,
+   "off": 562,
+   "grounding": "o08_35F5_0050 (RandWorld): mov es,[S08 CONST word] ; mov es:[off]"
+  },
+  "fd_50F6_0242": {
+   "seg": 20726,
+   "off": 578,
+   "grounding": "o08_35F5_0050 (RandWorld): mov es,[S08 CONST word] ; mov es:[off]"
+  },
+  "fd_50F6_0256": {
+   "seg": 20726,
+   "off": 598,
+   "grounding": "f_0BE8_03AC: mov es,[DS:811A] (CONST 50F6); mov bl,es:[si+0256] byte array indexed by drop"
+  },
+  "fd_50F6_02C0": {
+   "seg": 20726,
+   "off": 704,
+   "grounding": "f_0BE8_03AC: mov es,[DS:8118] (CONST 50F6); mov al,es:[si+02C0] byte array indexed by drop"
+  },
+  "fd_50F6_032E": {
+   "seg": 20726,
+   "off": 814,
+   "grounding": "o08_35F5_059B (RandYard): mov es,[S08 CONST word] ; es:[off]"
+  },
+  "fd_50F6_0330": {
+   "seg": 20726,
+   "off": 816,
+   "grounding": "f_0BE8_0002: mov es,[DS:810C] (CONST 50F6); mov es:[0330],ax"
+  },
+  "fd_50F6_034C": {
+   "seg": 20726,
+   "off": 844,
+   "grounding": "f_10F7_1E71 (root:10F7): mov es,[CONST word = 50F6]; es:[..034C] far data reference"
+  },
+  "fd_50F6_0350": {
+   "seg": 20726,
+   "off": 848,
+   "grounding": "f_0BE8_0002: mov es,[DS:810E] (CONST 50F6); mov es:[0350],ax"
+  },
+  "fd_50F6_0352": {
+   "seg": 20726,
+   "off": 850,
+   "grounding": "f_0BE8_03AC: mov es,[DS:8110] (CONST 50F6); cmp word es:[0352],0"
+  },
+  "fd_50F6_0354": {
+   "seg": 20726,
+   "off": 852,
+   "grounding": "f_0BE8_0002: mov es,[DS:80FE] (CONST 50F6); cmp word es:[0354],0"
+  },
+  "fd_50F6_035C": {
+   "seg": 20726,
+   "off": 860,
+   "grounding": "o08_35F5_059B (RandYard): mov es,[S08 CONST word] ; es:[off]"
+  },
+  "fd_50F6_035E": {
+   "seg": 20726,
+   "off": 862,
+   "grounding": "o08_35F5_0050 (RandWorld): mov es,[S08 CONST word] ; mov es:[off]"
+  },
+  "fd_50F6_0366": {
+   "seg": 20726,
+   "off": 870,
+   "grounding": "f_0BE8_0002: mov es,[DS:8104] (CONST 50F6); mov word es:[0366],0"
+  },
+  "fd_50F6_036C": {
+   "seg": 20726,
+   "off": 876,
+   "grounding": "o08_35F5_0050 (RandWorld): mov es,[S08 CONST word] ; mov es:[off]"
+  },
+  "fd_50F6_0376": {
+   "seg": 20726,
+   "off": 886,
+   "grounding": "f_0BE8_0002: mov es,[DS:8102] (CONST 50F6); mov word es:[0376],1"
+  },
+  "fd_50F6_0400": {
+   "seg": 20726,
+   "off": 1024,
+   "grounding": "f_0BE8_0002: mov es,[DS:8106] (CONST 50F6); cmp word es:[0400],1"
+  },
+  "fd_50F6_0472": {
+   "seg": 20726,
+   "off": 1138,
+   "grounding": "o08_35F5_0050 (RandWorld): mov es,[S08 CONST word] ; mov es:[off]"
+  },
+  "fd_50F6_0478": {
+   "seg": 20726,
+   "off": 1144,
+   "grounding": "o08_35F5_059B (RandYard): mov es,[S08 CONST word] ; es:[off]"
+  },
+  "fd_50F6_047C": {
+   "seg": 20726,
+   "off": 1148,
+   "grounding": "f_10F7_0A44 (root:10F7): mov es,[CONST word = 50F6]; es:[..047C] far data reference"
+  },
+  "fd_50F6_047E": {
+   "seg": 20726,
+   "off": 1150,
+   "grounding": "f_10F7_0B51 (root:10F7): mov es,[CONST word = 50F6]; es:[..047E] far data reference"
+  },
+  "fd_50F6_048A": {
+   "seg": 20726,
+   "off": 1162,
+   "grounding": "f_10F7_0A44 (root:10F7): mov es,[CONST word = 50F6]; es:[..048A] far data reference"
+  },
+  "fd_50F6_048C": {
+   "seg": 20726,
+   "off": 1164,
+   "grounding": "f_10F7_0A44 (root:10F7): mov es,[CONST word = 50F6]; es:[..048C] far data reference"
+  },
+  "fd_50F6_048E": {
+   "seg": 20726,
+   "off": 1166,
+   "grounding": "f_10F7_0B51 (root:10F7): mov es,[CONST word = 50F6]; es:[..048E] far data reference"
+  },
+  "fd_50F6_0496": {
+   "seg": 20726,
+   "off": 1174,
+   "grounding": "f_10F7_0A44 (root:10F7): mov es,[CONST word = 50F6]; es:[..0496] far data reference"
+  },
+  "fd_50F6_049A": {
+   "seg": 20726,
+   "off": 1178,
+   "grounding": "f_10F7_0CA8 (root:10F7): mov es,[CONST word = 50F6]; es:[..049A] far data reference"
+  },
+  "fd_50F6_04C2": {
+   "seg": 20726,
+   "off": 1218,
+   "grounding": "f_0BE8_0002: mov es,[DS:80FC] (CONST 50F6); mov bx,es:[04C2]"
+  },
+  "fd_50F6_04C4": {
+   "seg": 20726,
+   "off": 1220,
+   "grounding": "f_10F7_20BF (root:10F7): mov es,[CONST word = 50F6]; es:[..04C4] far data reference"
+  },
+  "fd_50F6_04E2": {
+   "seg": 20726,
+   "off": 1250,
+   "grounding": "f_0BE8_0002: mov es,[DS:80FA] (CONST 50F6); cmp word es:[04E2],0"
+  },
+  "fd_50F6_0502": {
+   "seg": 20726,
+   "off": 1282,
+   "grounding": "f_10F7_0CA8 (root:10F7): mov es,[CONST word = 50F6]; es:[..0502] far data reference"
+  },
+  "fd_50F6_0504": {
+   "seg": 20726,
+   "off": 1284,
+   "grounding": "o08_35F5_059B (RandYard): mov es,[S08 CONST word] ; es:[off]"
+  },
+  "fd_50F6_0508": {
+   "seg": 20726,
+   "off": 1288,
+   "grounding": "o08_35F5_0050 (RandWorld): mov es,[S08 CONST word] ; mov es:[off]"
+  },
+  "fd_50F6_0596": {
+   "seg": 20726,
+   "off": 1430,
+   "grounding": "o08_35F5_0050 (RandWorld): mov es,[S08 CONST word] ; mov es:[off]"
+  },
+  "fd_50F6_06A6": {
+   "seg": 20726,
+   "off": 1702,
+   "grounding": "o08_35F5_0050 (RandWorld): mov es,[S08 CONST word] ; mov es:[off]"
+  },
+  "fd_50F6_06AA": {
+   "seg": 20726,
+   "off": 1706,
+   "grounding": "o08_35F5_0000 (InitSimVars): mov es,[CONST word 50F6] ; mov es:[06AA],..."
+  },
+  "fd_50F6_06AC": {
+   "seg": 20726,
+   "off": 1708,
+   "grounding": "f_10F7_0CA8 (root:10F7): mov es,[CONST word = 50F6]; es:[..06AC] far data reference"
+  },
+  "fd_50F6_072E": {
+   "seg": 20726,
+   "off": 1838,
+   "grounding": "o08_35F5_0050 (RandWorld): mov es,[S08 CONST word] ; mov es:[off]"
+  },
+  "fd_50F6_073A": {
+   "seg": 20726,
+   "off": 1850,
+   "grounding": "o08_35F5_0000 (InitSimVars): mov es,[CONST word 50F6] ; mov es:[073A],..."
+  },
+  "fd_50F6_07BC": {
+   "seg": 20726,
+   "off": 1980,
+   "grounding": "o08_35F5_059B (RandYard): mov es,[S08 CONST word] ; es:[off]"
+  },
+  "fd_50F6_07C8": {
+   "seg": 20726,
+   "off": 1992,
+   "grounding": "o08_35F5_0000 (InitSimVars): mov es,[CONST word 50F6] ; mov es:[07C8],..."
+  },
+  "fd_50F6_07CA": {
+   "seg": 20726,
+   "off": 1994,
+   "grounding": "f_0BE8_0002: mov es,[DS:8108] (CONST 50F6); cmp es:[07CA],0B; cmp es:[07CC],8 (one CONST word: one object)"
+  },
+  "fd_50F6_0850": {
+   "seg": 20726,
+   "off": 2128,
+   "grounding": "o08_35F5_0000 (InitSimVars): mov es,[CONST word 50F6] ; mov es:[0850],..."
+  },
+  "fd_50F6_09FA": {
+   "seg": 20726,
+   "off": 2554,
+   "grounding": "o08_35F5_0050 (RandWorld): mov es,[S08 CONST word] ; mov es:[off]"
+  },
+  "fd_50F6_0A00": {
+   "seg": 20726,
+   "off": 2560,
+   "grounding": "o08_35F5_0050 (RandWorld): mov es,[S08 CONST word] ; mov es:[off]"
+  },
+  "fd_50F6_0A06": {
+   "seg": 20726,
+   "off": 2566,
+   "grounding": "f_0BE8_0002: mov es,[DS:80F8] (CONST 50F6); cmp word es:[0A06],0"
+  },
+  "fd_50F6_0AEC": {
+   "seg": 20726,
+   "off": 2796,
+   "grounding": "f_0BE8_0002: mov es,[DS:80E8] (CONST 50F6); word array es:[0AEC..0AF6]"
+  },
+  "fd_50F6_0AFA": {
+   "seg": 20726,
+   "off": 2810,
+   "grounding": "f_0BE8_0002: mov es,[DS:80E6] (CONST 50F6); word array es:[0AFA..0B04]"
+  },
+  "fd_50F6_0B1E": {
+   "seg": 20726,
+   "off": 2846,
+   "grounding": "f_10F7_20BF (root:10F7): mov es,[CONST word = 50F6]; es:[..0B1E] far data reference"
+  },
+  "fd_50F6_0B22": {
+   "seg": 20726,
+   "off": 2850,
+   "grounding": "o08_35F5_0E67 (fracSIN): mov es,[S08 CONST 8600]; les bx,es:[0B22] (far pointer to sine table)"
+  },
+  "fd_50F6_0C26": {
+   "seg": 20726,
+   "off": 3110,
+   "grounding": "o08_35F5_059B (RandYard): mov es,[S08 CONST word] ; es:[off]"
+  },
+  "fd_50F6_0C38": {
+   "seg": 20726,
+   "off": 3128,
+   "grounding": "f_10F7_20BF (root:10F7): mov es,[CONST word = 50F6]; es:[..0C38] far data reference"
+  },
+  "fd_50F6_0D6A": {
+   "seg": 20726,
+   "off": 3434,
+   "grounding": "f_10F7_005D (GetAntIndex-like): mov es,[CONST word = 50F6]; es:[..0D6A] list count/field array"
+  },
   "fd_50F6_0D70": {
    "seg": 20726,
    "off": 3440,
    "grounding": "f_015B_01B8: mov es,[DS:7E28] (CONST word = 50F6 with S27 relocation) ; mov es:[0D70],ax"
   },
+  "fd_50F6_0DA8": {
+   "seg": 20726,
+   "off": 3496,
+   "grounding": "f_10F7_005D (GetAntIndex-like): mov es,[CONST word = 50F6]; es:[..0DA8] list count/field array"
+  },
+  "fd_50F6_0EAA": {
+   "seg": 20726,
+   "off": 3754,
+   "grounding": "f_10F7_005D (GetAntIndex-like): mov es,[CONST word = 50F6]; es:[..0EAA] list count/field array"
+  },
+  "fd_50F6_0EAC": {
+   "seg": 20726,
+   "off": 3756,
+   "grounding": "o08_35F5_0050 (RandWorld): mov es,[S08 CONST word] ; mov es:[off]"
+  },
+  "fd_50F6_0EB6": {
+   "seg": 20726,
+   "off": 3766,
+   "grounding": "f_0BE8_0002: mov es,[DS:80EA] (CONST 50F6); 32-word counter array es:[si*2+0EB6]"
+  },
+  "fd_50F6_0F08": {
+   "seg": 20726,
+   "off": 3848,
+   "grounding": "o08_35F5_0050 (RandWorld): mov es,[S08 CONST word] ; mov es:[off]"
+  },
+  "fd_50F6_0F0E": {
+   "seg": 20726,
+   "off": 3854,
+   "grounding": "o08_35F5_0A00 (InitYelloAnt): mov es,[S08 CONST word]; es:[off]"
+  },
+  "fd_50F6_0F12": {
+   "seg": 20726,
+   "off": 3858,
+   "grounding": "f_10F7_0CA8 (root:10F7): mov es,[CONST word = 50F6]; es:[..0F12] far data reference"
+  },
+  "fd_50F6_0F24": {
+   "seg": 20726,
+   "off": 3876,
+   "grounding": "o08_35F5_0050 (RandWorld): mov es,[S08 CONST word] ; mov es:[off]"
+  },
+  "fd_50F6_0F26": {
+   "seg": 20726,
+   "off": 3878,
+   "grounding": "o08_35F5_0A00 (InitYelloAnt): mov es,[S08 CONST word]; es:[off]"
+  },
+  "fd_50F6_0F34": {
+   "seg": 20726,
+   "off": 3892,
+   "grounding": "f_10F7_0CA8 (root:10F7): mov es,[CONST word = 50F6]; es:[..0F34] far data reference"
+  },
+  "fd_50F6_0F3A": {
+   "seg": 20726,
+   "off": 3898,
+   "grounding": "f_0BE8_08BD: mov es,[DS:8130] (CONST 50F6); mov bx,es:[0F3A] direction index"
+  },
+  "fd_50F6_0F42": {
+   "seg": 20726,
+   "off": 3906,
+   "grounding": "f_10F7_0CA8 (root:10F7): mov es,[CONST word = 50F6]; es:[..0F42] far data reference"
+  },
+  "fd_50F6_0F78": {
+   "seg": 20726,
+   "off": 3960,
+   "grounding": "f_10F7_1DD3 (root:10F7): mov es,[CONST word = 50F6]; es:[..0F78] far data reference"
+  },
+  "fd_50F6_0F7E": {
+   "seg": 20726,
+   "off": 3966,
+   "grounding": "f_10F7_0CA8 (root:10F7): mov es,[CONST word = 50F6]; es:[..0F7E] far data reference"
+  },
+  "fd_50F6_0FB6": {
+   "seg": 20726,
+   "off": 4022,
+   "grounding": "o08_35F5_0050 (RandWorld): mov es,[S08 CONST word] ; mov es:[off]"
+  },
+  "fd_50F6_0FB8": {
+   "seg": 20726,
+   "off": 4024,
+   "grounding": "f_10F7_0CA8 (root:10F7): mov es,[CONST word = 50F6]; es:[..0FB8] far data reference"
+  },
+  "fd_50F6_0FBA": {
+   "seg": 20726,
+   "off": 4026,
+   "grounding": "o08_35F5_0000 (InitSimVars): mov es,[CONST word 50F6] ; mov es:[0FBA],..."
+  },
+  "fd_50F6_0FFA": {
+   "seg": 20726,
+   "off": 4090,
+   "grounding": "o08_35F5_0050 (RandWorld): mov es,[S08 CONST word] ; mov es:[off]"
+  },
+  "fd_50F6_0FFC": {
+   "seg": 20726,
+   "off": 4092,
+   "grounding": "f_10F7_0CA8 (root:10F7): mov es,[CONST word = 50F6]; es:[..0FFC] far data reference"
+  },
+  "fd_50F6_0FFE": {
+   "seg": 20726,
+   "off": 4094,
+   "grounding": "o08_35F5_0000 (InitSimVars): mov es,[CONST word 50F6] ; mov es:[0FFE],..."
+  },
+  "fd_50F6_1006": {
+   "seg": 20726,
+   "off": 4102,
+   "grounding": "f_10F7_1DD3 (root:10F7): mov es,[CONST word = 50F6]; es:[..1006] far data reference"
+  },
+  "fd_50F6_1040": {
+   "seg": 20726,
+   "off": 4160,
+   "grounding": "o08_35F5_0050 (RandWorld): mov es,[S08 CONST word] ; mov es:[off]"
+  },
+  "fd_50F6_1044": {
+   "seg": 20726,
+   "off": 4164,
+   "grounding": "f_10F7_1DD3 (root:10F7): mov es,[CONST word = 50F6]; es:[..1044] far data reference"
+  },
+  "fd_50F6_104C": {
+   "seg": 20726,
+   "off": 4172,
+   "grounding": "o08_35F5_0000 (InitSimVars): mov es,[CONST word 50F6] ; mov es:[104C],..."
+  },
+  "fd_50F6_104E": {
+   "seg": 20726,
+   "off": 4174,
+   "grounding": "o08_35F5_0A00 (InitYelloAnt): mov es,[S08 CONST word]; es:[off]"
+  },
+  "fd_50F6_1050": {
+   "seg": 20726,
+   "off": 4176,
+   "grounding": "o08_35F5_0050 (RandWorld): mov es,[S08 CONST word] ; mov es:[off]"
+  },
+  "fd_50F6_105E": {
+   "seg": 20726,
+   "off": 4190,
+   "grounding": "f_10F7_0B51 (root:10F7): mov es,[CONST word = 50F6]; es:[..105E] far data reference"
+  },
+  "fd_50F6_1060": {
+   "seg": 20726,
+   "off": 4192,
+   "grounding": "o08_35F5_0050 (RandWorld): mov es,[S08 CONST word] ; mov es:[off]"
+  },
+  "fd_50F6_1068": {
+   "seg": 20726,
+   "off": 4200,
+   "grounding": "o08_35F5_0050 (RandWorld): mov es,[S08 CONST word] ; mov es:[off]"
+  },
+  "fd_50F6_1074": {
+   "seg": 20726,
+   "off": 4212,
+   "grounding": "f_10F7_0B51 (root:10F7): mov es,[CONST word = 50F6]; es:[..1074] far data reference"
+  },
+  "fd_50F6_1082": {
+   "seg": 20726,
+   "off": 4226,
+   "grounding": "o08_35F5_0050 (RandWorld): mov es,[S08 CONST word] ; mov es:[off]"
+  },
+  "fd_50F6_108E": {
+   "seg": 20726,
+   "off": 4238,
+   "grounding": "o08_35F5_0050 (RandWorld): mov es,[S08 CONST word] ; mov es:[off]"
+  },
+  "fd_50F6_10A2": {
+   "seg": 20726,
+   "off": 4258,
+   "grounding": "o08_35F5_0050 (RandWorld): mov es,[S08 CONST word] ; mov es:[off]"
+  },
+  "fd_50F6_10B2": {
+   "seg": 20726,
+   "off": 4274,
+   "grounding": "o08_35F5_0050 (RandWorld): mov es,[S08 CONST word] ; mov es:[off]"
+  },
+  "fd_50F6_10BE": {
+   "seg": 20726,
+   "off": 4286,
+   "grounding": "o08_35F5_0050 (RandWorld): mov es,[S08 CONST word] ; mov es:[off]"
+  },
+  "fd_50F6_10C0": {
+   "seg": 20726,
+   "off": 4288,
+   "grounding": "o08_35F5_0050 (RandWorld): mov es,[S08 CONST word] ; mov es:[off]"
+  },
   "fd_50F6_3B50": {
    "seg": 20726,
    "off": 15184,
    "grounding": "db module: mov es,[DS:89C4] (CONST word 50F6) ; es:[bx+3B50] handle array"
+  },
+  "g_1B9A": {
+   "seg": 21939,
+   "off": 7066,
+   "grounding": "f_0BE8_08BD: mov al,[bx+1B9A] (DS=DGROUP) byte x-delta table indexed by direction"
+  },
+  "g_1B9E": {
+   "seg": 21939,
+   "off": 7070,
+   "grounding": "f_0BE8_08BD: mov al,[bx+1B9E] (DS=DGROUP) byte y-delta table indexed by direction"
   },
   "g_8BA2": {
    "seg": 21939,

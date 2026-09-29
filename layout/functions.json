@@ -6401,6 +6401,20 @@
 {
 "unit": "root",
 "seg": 6739,
+"off": 892,
+"size": 58,
+"region": "game_or_library",
+"extent": "REVIEWED",
+"evidence": [
+"reviewed"
+],
+"notes": [
+"unreferenced frameless /Gs function between f_1A53_034F (ends 037C) and f_1A53_03B6: dec db_numOfHandles loop calling 1A28:0149, 1A96:00EE, clears db_cacheTable; Win16 db_CloseDataBase semantics"
+]
+},
+{
+"unit": "root",
+"seg": 6739,
 "off": 950,
 "size": 78,
 "region": "game_or_library",
@@ -15686,6 +15700,20 @@
 "extent": "DESCENT",
 "evidence": [
 "vector"
+]
+},
+{
+"unit": "S08",
+"seg": 13813,
+"off": 1986,
+"size": 132,
+"region": "game_or_library",
+"extent": "REVIEWED",
+"evidence": [
+"reviewed"
+],
+"notes": [
+"unreferenced function between RandYard (ends 07C2) and DigOutBNest (0846): gap holds a complete stack-checked BP-frame function; it loads CONST 85E6/85E8 (YMapPopB/R), whose CONST order places it after RandYard; Win16 GenerateTutorial sits at this position in the RandWorld unit"
 ]
 },
 {
