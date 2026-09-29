@@ -6,10 +6,16 @@ You recover original C (or genuine assembly) for the modules assigned to you in
 
 ## Facts you can rely on
 
-* Compiler: MSC 6.00 (`profile msc600`), large model. Baseline flags `/AL /Os`; per module
-  add `/Oe` (autos enregistered while their unused BP homes stay) and/or `/Gs` (no
-  `__aFchkstk` call). Options are per *file*: one module = one flag set. Some modules use
-  `_fastcall` (AX/DX args, `retf N`, `@name`). `_asm` inline assembly exists in C modules.
+* Compiler: **MSC 6.00A** (`profile msc600a`, the default), large model. Typical module flags
+  `/AL /Os /Oe /Og` (simulation, database), plus `/Gs` when functions have no `__aFchkstk`
+  call. `/Oe` = autos enregistered while their unused BP homes stay; `/Og` = CSE/hoisting
+  (see codegen-rules observations). Options are per *file*: one module = one flag set.
+  Some modules use `_fastcall` (AX/DX args, `retf N`, `@name`). `_asm` exists in C modules.
+* Large functions: check the compiler log for **C4203** ("too large for global
+  optimizations"): the function then loses its /Oe/Og shape; shared `goto` exits keep it
+  under the budget (worker sim10F7).
+* The set and order of earlier `extern` declarations can change register tie-breaks and
+  commutative operand order: keep a module's declarations in first-use order.
 * One original code segment = one `.C` file = one module file `src/<unit>/m<SEG>.c`.
   Same-file far calls compile to `push cs; call near`; a relocated `call far` goes to
   another module. Functions appear in source order.
@@ -54,7 +60,12 @@ block per segment, so the recovered prefix must reproduce a prefix of the origin
   Use descriptive names only when you have evidence (Win16 source for a CONFIRMED/HIGH pair);
   otherwise address names.
 * Private data: pass `--placement _DATA=55B3:OFF` / `CONST=...` / `_BSS=55B3:OFF`
-  (search) and `--placement SEG=55B3:OFF:SIZE` (promote). Find OFF from the code operands.
+  (search) and `--placement SEG=55B3:OFF:SIZE` (promote; SIZE is decimal = the candidate
+  object's segment length). Find OFF from the code operands / `dataref.py`. Far pointers,
+  segment words and near offsets inside `_DATA`/`CONST` are bound and their relocations
+  checked per target group. `SEG _DATA` bases need no placement.
+* Runtime helpers (`__aFlshl`, `__aFldiv`, `_fmemcpy` …) and the memory hook table entries
+  `jt_171C_XXXX` (at 2CFB:0002.., far jumps into module 171C) are registered names.
 * Wrong extent in the function table? `python tools/functions.py resize UNIT:SEG:OFF SIZE why...`;
   missing unreferenced function: `python tools/functions.py add UNIT:SEG:OFF SIZE why...`.
 * Promote as soon as a function (or run of functions) is exact; promotion re-verifies all
@@ -78,7 +89,7 @@ with `--steered "construct -> decision it steers"`.
 
 Continue while you have a useful next experiment. Stop at: module(s) done, a concrete
 missing capability (tool/gate limitation — describe it precisely, do not work around the
-gate), or no useful next investigation. Leave `build/workers/<you>/REPORT.md` with: what
-was promoted, open functions with their best draft and precise residue, new compiler
-facts (with a minimal reproducer, positive and negative), proposed names with evidence,
-tool problems. Your final answer: ≤15 lines summarising that report.
+gate), or no useful next investigation. Your final answer is your report: what was
+promoted, open functions with their best draft and precise residue, new compiler facts
+(with a minimal reproducer, positive and negative), proposed names with evidence, tool
+problems. (Subagents cannot write REPORT.md files.)
