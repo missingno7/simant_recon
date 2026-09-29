@@ -1,0 +1,124 @@
+{
+ "schema": "simant-toolchain-v1",
+ "note": "Pinned tool identities. Directories are physical and part of the profile (pass environment affects codegen).",
+ "runner": {
+  "path": "C:/tools/nmlgcdos/msdos.exe",
+  "sha256": "f7f6cb0a3e816c5edb13112d327c1bddbf7463fe7bf9a005ca1eb5317751bd02",
+  "options": [
+   "-e",
+   "-v5.00"
+  ]
+ },
+ "profiles": {
+  "msc600": {
+   "product": "Microsoft C 6.00 (non-A)",
+   "directory": "C:/tools/msc-6.00",
+   "bin": "BIN",
+   "include": "INCLUDE",
+   "executable": "cl.exe",
+   "flags": [
+    "/AL",
+    "/Os"
+   ],
+   "files": {
+    "BIN/cl.exe": "136a092d68a206430b775f761d33d03ca350c385e1214ec6175f6690084b3598",
+    "BIN/c1l.exe": "6c9da03340f7455d8fa6bcf3c41a68e38522225517206602c7939525ec019b57",
+    "BIN/c1.exe": "e5b8f76467c03df795b96ce18f96901e4cf5a4bced12c13202e0f1f200afa8c0",
+    "BIN/c2.exe": "85231e08ee8348b7c5acbc692f531602f9920d8393339f76376fff375158350b",
+    "BIN/c3.exe": "9a48ebc4a1440f06cb3cfc6a0a8a48a461a16c0e3df40dde40a702abc0e0d907",
+    "BIN/c3l.exe": "d85c81fceb4f45cf594973451ee720b3f79f79d56bb8eb1ce02804a99d72fa13",
+    "BIN/cl.err": "ca22f37e5e0c09faebde9e4d549dd1f53523cc6f23049d2239a040cd19a424e7",
+    "BIN/c1.err": "637444915870f3283d5df41c5cdb1be8c32cc6c19b080f2bb3891edbc3751c6e",
+    "BIN/c23.err": "22944a0dffef336c0ebb8f6d5aeb97b4dbeb5c9758a48759557176bff49d1151",
+    "BIN/cl.msg": "3379f283aec74842bc82205e4c848d759e6e2dcbb6d4820eec9719f1297213ec"
+   }
+  },
+  "msc600a": {
+   "product": "Microsoft C 6.00A (simantw expanded tree)",
+   "directory": "C:/tools/msc-6.00a-simantw",
+   "bin": "BIN",
+   "include": "INCLUDE",
+   "executable": "CL.EXE",
+   "flags": [
+    "/AL",
+    "/Os"
+   ],
+   "files": {
+    "BIN/CL.EXE": "9f452b39def257b3e07a9f4e07857d6d8a6e36da869a30c6e20ac51ea98b9816",
+    "BIN/C1L.EXE": "d01c20b4a39185075f90b17b3ae6b53d27b8fbeda39f53d96641cf9d7825c731",
+    "BIN/C1.EXE": "286cee7fe1fe3770d98f198c57350a62596095e83ad6c106c1a59101490b6507",
+    "BIN/C2.EXE": "1b370eb86adc28e23ddca9d89c9ae627f8e280b28e63c67c4c3824004d4059d7",
+    "BIN/C2L.EXE": "48f7d15d0416b56dcb5d9e348b3561835f63097c88fe9f55d7883bfff33d0151",
+    "BIN/C3.EXE": "224727d55a715057288d56c00fdd524700f1354e79b487705f1888283c079344",
+    "BIN/C3L.EXE": "2660fae853cc8bfb2ca2aefa36b29f9af48d934a53d6feabdebaec18deaaa9b7",
+    "BIN/CL.ERR": "ca22f37e5e0c09faebde9e4d549dd1f53523cc6f23049d2239a040cd19a424e7",
+    "BIN/C1.ERR": "637444915870f3283d5df41c5cdb1be8c32cc6c19b080f2bb3891edbc3751c6e",
+    "BIN/C23.ERR": "22944a0dffef336c0ebb8f6d5aeb97b4dbeb5c9758a48759557176bff49d1151",
+    "BIN/CL.MSG": "3379f283aec74842bc82205e4c848d759e6e2dcbb6d4820eec9719f1297213ec"
+   }
+  },
+  "msc510": {
+   "product": "Microsoft C 5.10",
+   "directory": "C:/tools/msc-5.10",
+   "bin": ".",
+   "include": "INCLUDE",
+   "executable": "CL.EXE",
+   "flags": [
+    "/AL"
+   ],
+   "files": {
+    "CL.EXE": "cad40cef732beea3455225fbd62286c664166db7c3f87e2402e22b2e3f107771",
+    "C1L.EXE": "bdd8189be005009331ff61dd3cb7a0ce9b246ea522dd8ab2c83a8339e5c30f09",
+    "C1.EXE": "8d33c6d87aa74b042b7d7cb01a23241c4cc3b1b8b446b8f1548bd167e3c7bf62",
+    "C2.EXE": "a513c98bc2ce11bd00901b560252b5727ab9b6bacd9319b9eaba08f9e314b99b",
+    "C3.EXE": "c1269628534d5deb48171ba9e42f761dcb1c28a0087c73780db0ee2e4352e6fa"
+   }
+  },
+  "qc250": {
+   "product": "Microsoft QuickC 2.50",
+   "directory": "C:/tools/quickc-2.50",
+   "bin": "BIN",
+   "include": "INCLUDE",
+   "executable": "qcl.exe",
+   "flags": [
+    "/AL"
+   ],
+   "files": {
+    "BIN/qcl.exe": "ffe13e8ffb9925adac361889b4f687e259335beb2ca49808a9c5811734727afb",
+    "BIN/_qcl.exe": "3d0c00c8c92d404893d6dfd26910678294b6d893262e787a62ba84109914b247",
+    "BIN/c1.err": "9532939298e65d8640ae5330ff9109a13b395750debd8c70be2e6e4f4e4cadde",
+    "BIN/qcl.err": "ca22f37e5e0c09faebde9e4d549dd1f53523cc6f23049d2239a040cd19a424e7",
+    "BIN/qcl.msg": "e365f4497b573f34df52b972d7e0648e44d99b992a5fd5159fc2c753dc6ea50b"
+   }
+  },
+  "qc251": {
+   "product": "Microsoft QuickC 2.51",
+   "directory": "C:/tools/quickc-2.51",
+   "bin": "BIN",
+   "include": "INCLUDE",
+   "executable": "qcl.exe",
+   "flags": [
+    "/AL"
+   ],
+   "files": {
+    "BIN/qcl.exe": "e5f53d8a3f4587cbe726de5620ad6bc73931c0db43be00fe1a1144edc7d2390e",
+    "BIN/_qcl.exe": "6b158381a4aac7a7277c3668833432175835a3a765ab86681bb2981e3c8209ab",
+    "BIN/c1.err": "9532939298e65d8640ae5330ff9109a13b395750debd8c70be2e6e4f4e4cadde",
+    "BIN/qcl.err": "ca22f37e5e0c09faebde9e4d549dd1f53523cc6f23049d2239a040cd19a424e7",
+    "BIN/qcl.msg": "e365f4497b573f34df52b972d7e0648e44d99b992a5fd5159fc2c753dc6ea50b"
+   }
+  },
+  "masm510": {
+   "product": "Microsoft Macro Assembler 5.10",
+   "directory": "C:/tools/masm-5.10/files",
+   "bin": ".",
+   "executable": "MASM.EXE",
+   "flags": [
+    "/Mx"
+   ],
+   "files": {
+    "MASM.EXE": "233120302473749eafe9a54a30f8bda0127140c44346e5bcc047d113828a741e"
+   }
+  }
+ }
+}

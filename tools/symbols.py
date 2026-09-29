@@ -1,0 +1,124 @@
+"""Maintain layout/symbols.json, the program-wide names registry.
+
+Sections:
+  code     C name -> {unit, seg, off, grounding}   game code (default ``f_SSSS_OOOO`` /
+                                                    ``oNN_SSSS_OOOO`` until renamed)
+  data     C name -> {seg, off, grounding}          DGROUP or far data
+  runtime  OBJ name -> {unit, seg, off, library, member}   located historical library publics
+
+Every address must be grounded: an inventory entry (far/near call, vector,
+switch dispatch...) for code, an original instruction operand for data, or a
+unique library-member location for runtime names.
+
+    python tools/symbols.py bootstrap      # create from build/inventory + build/libmatch (refuses overwrite)
+    python tools/symbols.py rename OLD NEW --why "evidence"
+    python tools/symbols.py add-data NAME SEG OFF --why "anchor"
+"""
+from __future__ import annotations
+
+import argparse
+import json
+import re
+import sys
+from pathlib import Path
+
+sys.path.insert(0, str(Path(__file__).resolve().parent))
+import exe as exemod  # noqa: E402
+
+ROOT = exemod.ROOT
+SYMBOLS = ROOT / "layout" / "symbols.json"
+IDENT = re.compile(r"^[A-Za-z_][A-Za-z0-9_]{0,30}$")
+
+
+def default_name(unit: str, seg: int, off: int) -> str:
+    return f"f_{seg:04X}_{off:04X}" if unit == "root" else f"o{unit[1:]}_{seg:04X}_{off:04X}"
+
+
+def load() -> dict:
+    return json.loads(SYMBOLS.read_text())
+
+
+def save(d: dict) -> None:
+    for k in ("code", "data", "runtime"):
+        d[k] = dict(sorted(d.get(k, {}).items()))
+    SYMBOLS.write_text(json.dumps(d, indent=1) + "\n")
+
+
+def bootstrap() -> int:
+    if SYMBOLS.exists():
+        print("symbols.json exists; refusing to overwrite")
+        return 1
+    inv = json.loads((ROOT / "build/inventory/functions.json").read_text())
+    code = {}
+    for f in inv["functions"]:
+        if f["region"] != "game_or_library":
+            continue
+        n = default_name(f["unit"], f["seg"], f["off"])
+        code[n] = {"unit": f["unit"], "seg": f["seg"], "off": f["off"],
+                   "grounding": "inventory:" + ",".join(sorted(f["evidence"]))}
+    runtime = {}
+    lm = json.loads((ROOT / "build/libmatch/msc600-large.json").read_text())
+    for lib, rep in lm.items():
+        for r in rep["rows"]:
+            hits = r.get("hits") or []
+            if len(hits) != 1:
+                continue
+            h = hits[0]
+            for pub, off in r["publics"].items():
+                lin = h["linear"] + off
+                seg = 0x29F4 if h["unit"] == "root" and lin >= 0x29F40 else lin >> 4
+                runtime[pub] = {"unit": h["unit"], "seg": seg, "off": lin - seg * 16,
+                                "library": Path(lib).name, "member": r["module"]}
+    save({"schema": "simant-symbols-v1", "code": code, "data": {}, "runtime": runtime})
+    print(f"bootstrapped {len(code)} code, {len(runtime)} runtime names")
+    return 0
+
+
+def rename(old: str, new: str, why: str) -> int:
+    d = load()
+    if not IDENT.match(new):
+        raise SystemExit(f"bad identifier {new}")
+    for sec in ("code", "data"):
+        if old in d[sec]:
+            if new in d["code"] or new in d["data"]:
+                raise SystemExit(f"{new} already registered")
+            rec = d[sec].pop(old)
+            rec.setdefault("history", []).append({"was": old, "why": why})
+            d[sec][new] = rec
+            save(d)
+            print(f"renamed {old} -> {new}")
+            return 0
+    raise SystemExit(f"{old} not registered")
+
+
+def add_data(name: str, seg: int, off: int, why: str) -> int:
+    d = load()
+    if not IDENT.match(name):
+        raise SystemExit(f"bad identifier {name}")
+    if name in d["code"] or name in d["data"]:
+        raise SystemExit(f"{name} already registered")
+    for n, r in d["data"].items():
+        if r["seg"] == seg and r["off"] == off:
+            raise SystemExit(f"address already named {n}")
+    d["data"][name] = {"seg": seg, "off": off, "grounding": why}
+    save(d)
+    return 0
+
+
+def main() -> int:
+    ap = argparse.ArgumentParser()
+    sub = ap.add_subparsers(dest="cmd", required=True)
+    sub.add_parser("bootstrap")
+    r = sub.add_parser("rename"); r.add_argument("old"); r.add_argument("new"); r.add_argument("--why", required=True)
+    a = sub.add_parser("add-data"); a.add_argument("name"); a.add_argument("seg"); a.add_argument("off")
+    a.add_argument("--why", required=True)
+    args = ap.parse_args()
+    if args.cmd == "bootstrap":
+        return bootstrap()
+    if args.cmd == "rename":
+        return rename(args.old, args.new, args.why)
+    return add_data(args.name, int(args.seg, 16), int(args.off, 16), args.why)
+
+
+if __name__ == "__main__":
+    raise SystemExit(main())
