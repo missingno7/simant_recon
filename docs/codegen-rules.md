@@ -84,5 +84,20 @@ REG-1 below is a case where the MSC 5.10 rule is false for 6.00.
   functions**: `/Zd` flushes too rarely, whereas `/Zi` (CodeView: a record per function)
   satisfies 59 of 64 within-group order constraints. Open lead: the memory manager may have
   been built with `/Zi`. Declaration-sensitive functions there: 07BE, 2086, 0EEA.
+* **Private `_BSS` arrays are laid out in reverse declaration order** (worker win2, 23AE:
+  declaring `g_8DA6[45]` before `g_8CF2[45]` puts `g_8CF2` at the lower address, 8CF2).
+* **A BP-slot value while SI/DI are free is usually an /Og CSE temporary, not a named local**:
+  repeating the expression (`ev.code`, `g_5702[0]`) instead of caching it in a local made
+  218D:02D5 and 218D:000C exact; with a local the value goes to SI.
+* **Chained assignment order matters**: `cur = start = f()` vs `start = cur = f()` allocate
+  differently (218D:0656).
+* **Dead but incremented locals keep a frame word** and a dead load (22BF:04A7 `objNum`).
+* **Flag-field width**: testing a flag through a word (`*(unsigned far *)(o+0x24) & 4`) gives
+  `mov al,[..]; and ax,4`; an `unsigned char` field gives `and al,4 ... sub ah,ah`. Both occur
+  in one module (22BF:02AF word; 011F/01A9 byte).
+* **Index type**: a `char` field used directly as a far-array index gives a byte `imul`; via an
+  `int` local it gives `cbw; mov cx,6; imul cx` (22BF:0C38, 0CDD).
+* **The window library (218D, 22BF, and 20E8/23AE compatibly) needs `/Zd`**: some within-group
+  relocation orders require its record breaks (22BF:0D81, 218D:052F).
 * **Relocation order** inside a module is target-grouped by RTLink (open, see
   `docs/exe-format.md`).
