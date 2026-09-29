@@ -94,6 +94,10 @@ def _rename(old: str, new: str, why: str) -> int:
             rec = d[sec].pop(old)
             rec.setdefault("history", []).append({"was": old, "why": why})
             d[sec][new] = rec
+            # keep the old name bound as an alias: accepted sources may still use it
+            alias = {k: v for k, v in rec.items() if k not in ("history", "grounding")}
+            alias["alias_of"] = new
+            d[sec][old] = alias
             save(d)
             print(f"renamed {old} -> {new}")
             return 0

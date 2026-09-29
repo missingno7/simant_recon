@@ -177,7 +177,7 @@ char far * far f_171C_00FA(int type)
     return "BAD";
 }
 
-/* SCAFFOLD BEGIN: draft; residue: prologue les vs mov es / register tie-break */
+/* SCAFFOLD BEGIN: draft; exact except 2 bytes (mov dx,es vs mov cx,es in NEXTBLK(b)) when separate heap globals are used; with the Heap struct also les-vs-mov prologue */
 Block far * far f_171C_0160(Block far *b, int merge)
 {
     unsigned paras;
@@ -407,7 +407,7 @@ void far f_171C_07BE(void)
     atexit(f_171C_0678);
 }
 
-/* SCAFFOLD BEGIN: draft; residue: register allocation (original: paras in DI) */
+/* SCAFFOLD BEGIN: draft; residue: register allocation (original keeps paras in DI, next block pointer in memory with two copies [bp-0Ah]/[bp-2]) */
 int far f_171C_09CC(Handle h, unsigned paras, int type)
 {
     Block far *b;
@@ -427,7 +427,7 @@ int far f_171C_09CC(Handle h, unsigned paras, int type)
 }
 /* SCAFFOLD END */
 
-/* SCAFFOLD BEGIN: draft; bytes exact only with reversed extern order; reloc order */
+/* SCAFFOLD BEGIN: draft; code exact with public g_2F42/g_2F44 declared extern in reversed order (operand order of the used>allocated compare); blocked by within-group relocation order */
 Handle far f_171C_0A5C(void)
 {
     Handle h;
@@ -449,7 +449,7 @@ Handle far f_171C_0A5C(void)
 }
 /* SCAFFOLD END */
 
-/* SCAFFOLD BEGIN: draft; residue: long local seg kept in memory in original */
+/* SCAFFOLD BEGIN: draft; residue: original keeps the long local seg in memory ([bp-28h]); MSC here enregisters it in SI:DI */
 void far f_171C_0ADC(Block far *b)
 {
     Block far *n;
@@ -510,7 +510,7 @@ int far f_171C_0BE2(int emsOnly)
     return 0;
 }
 
-/* SCAFFOLD BEGIN: draft; needs runtime __disable/__enable (29F4:2D76/2D78) registered */
+/* SCAFFOLD BEGIN: draft; needs runtime __disable/__enable (29F4:2D76/2D78) registered; a 490-byte near-exact draft is in build/workers/mem (unsigned seg loop, comma-hoisted type test) but it shifts the object layout and breaks 125C relocation order */
 int far f_171C_0CF4(int emsOnly)
 {
     int moved;
@@ -563,7 +563,7 @@ int far f_171C_0EDE(void)
     return f_171C_0CF4(0);
 }
 
-/* SCAFFOLD BEGIN: draft */
+/* SCAFFOLD BEGIN: draft; code exact when 91A0..91AE are declared as separate globals (and heap-state dependent: flips with the number of preceding declarations) */
 Block far * far f_171C_0EEA(unsigned paras, int type, char far *name, int noems)
 {
     Block far *b;
@@ -588,7 +588,7 @@ Block far * far f_171C_0EEA(unsigned paras, int type, char far *name, int noems)
 }
 /* SCAFFOLD END */
 
-/* SCAFFOLD BEGIN: draft */
+/* SCAFFOLD BEGIN: draft; residue: register allocation (original: SI for inner-loop block/size/result, DI for best/paras by region) and frame layout */
 Block far * far f_171C_0FBC(unsigned paras, int type)
 {
     int first;
@@ -742,12 +742,11 @@ void far f_171C_152C(Handle h)
     HDR(h)->age = s_2F30++;
 }
 
-/* SCAFFOLD BEGIN: draft; residue: register allocation */
+/* SCAFFOLD BEGIN: code-exact draft; long paras + volatile type is a steering guess (natural forms keep type in CX); blocked by within-group relocation order */
 void far f_171C_15A2(Handle h, int flags)
 {
-    int newType;
-    unsigned paras;
-    int type;
+    long paras;
+    volatile int type;
 
     INIT();
     if (SEG(h) == 0xF0F)
@@ -755,7 +754,7 @@ void far f_171C_15A2(Handle h, int flags)
     paras = HDR(h)->paras;
     type = HDR(h)->type;
     HDR(h)->attr = flags & 0x78;
-    newType = flags & ~0x78;
+    flags &= ~0x78;
     switch (type) {
     case 0:
         s_2F36 -= paras;
@@ -769,7 +768,7 @@ void far f_171C_15A2(Handle h, int flags)
         s_2F38 -= paras;
         break;
     }
-    switch (newType) {
+    switch (flags) {
     case 0:
         s_2F36 += paras;
         break;
@@ -785,7 +784,7 @@ void far f_171C_15A2(Handle h, int flags)
         Punt("RallocSetType to illegal type");
         break;
     }
-    HDR(h)->type = newType;
+    HDR(h)->type = flags;
 }
 /* SCAFFOLD END */
 

@@ -2485,6 +2485,12 @@
     }
    ]
   },
+  "WINMAIN": {
+   "unit": "root",
+   "seg": 5624,
+   "off": 4,
+   "alias_of": "main"
+  },
   "WinPrintf": {
    "unit": "root",
    "seg": 10109,
@@ -2873,11 +2879,101 @@
    "off": 84,
    "grounding": "inventory:far_call"
   },
+  "f_0093_008F": {
+   "unit": "root",
+   "seg": 147,
+   "off": 143,
+   "alias_of": "SetSRandSeed"
+  },
+  "f_0093_00A3": {
+   "unit": "root",
+   "seg": 147,
+   "off": 163,
+   "alias_of": "GetSRandSeed"
+  },
+  "f_0093_00B0": {
+   "unit": "root",
+   "seg": 147,
+   "off": 176,
+   "alias_of": "SetRRandSeed"
+  },
   "f_0093_00B8": {
    "unit": "root",
    "seg": 147,
    "off": 184,
    "grounding": "reviewed: unreached: chkstk, BIOS tick read at 046C:0000, retf at 0x9FD"
+  },
+  "f_0093_00CE": {
+   "unit": "root",
+   "seg": 147,
+   "off": 206,
+   "alias_of": "SeedSRand"
+  },
+  "f_0093_00E1": {
+   "unit": "root",
+   "seg": 147,
+   "off": 225,
+   "alias_of": "SeedRRand"
+  },
+  "f_0093_0118": {
+   "unit": "root",
+   "seg": 147,
+   "off": 280,
+   "alias_of": "RRand"
+  },
+  "f_0093_013D": {
+   "unit": "root",
+   "seg": 147,
+   "off": 317,
+   "alias_of": "SRand1"
+  },
+  "f_0093_0169": {
+   "unit": "root",
+   "seg": 147,
+   "off": 361,
+   "alias_of": "SRand2"
+  },
+  "f_0093_018A": {
+   "unit": "root",
+   "seg": 147,
+   "off": 394,
+   "alias_of": "SRand4"
+  },
+  "f_0093_01AB": {
+   "unit": "root",
+   "seg": 147,
+   "off": 427,
+   "alias_of": "SRand8"
+  },
+  "f_0093_01CC": {
+   "unit": "root",
+   "seg": 147,
+   "off": 460,
+   "alias_of": "SRand16"
+  },
+  "f_0093_01ED": {
+   "unit": "root",
+   "seg": 147,
+   "off": 493,
+   "alias_of": "SRand32"
+  },
+  "f_0093_020E": {
+   "unit": "root",
+   "seg": 147,
+   "off": 526,
+   "alias_of": "SRand64"
+  },
+  "f_0093_022F": {
+   "unit": "root",
+   "seg": 147,
+   "off": 559,
+   "alias_of": "SRand128"
+  },
+  "f_0093_0250": {
+   "unit": "root",
+   "seg": 147,
+   "off": 592,
+   "alias_of": "SRand256"
   },
   "f_00BA_0002": {
    "unit": "root",
@@ -3503,6 +3599,12 @@
    "off": 6047,
    "grounding": "inventory:push_cs_call"
   },
+  "f_0250_18E7": {
+   "unit": "root",
+   "seg": 592,
+   "off": 6375,
+   "alias_of": "DrawSpider"
+  },
   "f_0250_1E80": {
    "unit": "root",
    "seg": 592,
@@ -3569,6 +3671,12 @@
    "off": 17514,
    "grounding": "inventory:push_cs_call"
   },
+  "f_0250_454D": {
+   "unit": "root",
+   "seg": 592,
+   "off": 17741,
+   "alias_of": "DrawCurBalloons"
+  },
   "f_0250_4BDD": {
    "unit": "root",
    "seg": 592,
@@ -3592,6 +3700,12 @@
    "seg": 592,
    "off": 20568,
    "grounding": "inventory:far_call,push_cs_call"
+  },
+  "f_075B_0000": {
+   "unit": "root",
+   "seg": 1883,
+   "off": 0,
+   "alias_of": "initStuff"
   },
   "f_075B_00A6": {
    "unit": "root",
@@ -3887,6 +4001,12 @@
    "off": 7985,
    "alias_of": "DoFightA"
   },
+  "f_0894_2021": {
+   "unit": "root",
+   "seg": 2196,
+   "off": 8225,
+   "alias_of": "DeadAntHere"
+  },
   "f_0894_21C5": {
    "unit": "root",
    "seg": 2196,
@@ -4133,6 +4253,12 @@
    "off": 3009,
    "alias_of": "InNestBounds"
   },
+  "f_0BE8_0BEE": {
+   "unit": "root",
+   "seg": 3048,
+   "off": 3054,
+   "alias_of": "IsItDirt"
+  },
   "f_0BE8_0C0F": {
    "unit": "root",
    "seg": 3048,
@@ -4193,6 +4319,12 @@
    "off": 3593,
    "grounding": "inventory:push_cs_call"
   },
+  "f_0CDB_0F90": {
+   "unit": "root",
+   "seg": 3291,
+   "off": 3984,
+   "alias_of": "SpiderScan"
+  },
   "f_0CDB_1118": {
    "unit": "root",
    "seg": 3291,
@@ -4247,6 +4379,66 @@
    "off": 1630,
    "grounding": "inventory:push_cs_call"
   },
+  "f_0EC1_0002": {
+   "unit": "root",
+   "seg": 3777,
+   "off": 2,
+   "alias_of": "CompactListA"
+  },
+  "f_0EC1_0081": {
+   "unit": "root",
+   "seg": 3777,
+   "off": 129,
+   "alias_of": "CompactListB"
+  },
+  "f_0EC1_0100": {
+   "unit": "root",
+   "seg": 3777,
+   "off": 256,
+   "alias_of": "CompactListR"
+  },
+  "f_0EC1_017F": {
+   "unit": "root",
+   "seg": 3777,
+   "off": 383,
+   "alias_of": "RemoveFromAList"
+  },
+  "f_0EC1_0291": {
+   "unit": "root",
+   "seg": 3777,
+   "off": 657,
+   "alias_of": "FindInAList"
+  },
+  "f_0EC1_02DD": {
+   "unit": "root",
+   "seg": 3777,
+   "off": 733,
+   "alias_of": "FindInBList"
+  },
+  "f_0EC1_032C": {
+   "unit": "root",
+   "seg": 3777,
+   "off": 812,
+   "alias_of": "FindInRList"
+  },
+  "f_0EC1_037B": {
+   "unit": "root",
+   "seg": 3777,
+   "off": 891,
+   "alias_of": "DrownBList"
+  },
+  "f_0EC1_03D9": {
+   "unit": "root",
+   "seg": 3777,
+   "off": 985,
+   "alias_of": "DrownRList"
+  },
+  "f_0EC1_0437": {
+   "unit": "root",
+   "seg": 3777,
+   "off": 1079,
+   "alias_of": "ExitHole"
+  },
   "f_0EC1_0557": {
    "unit": "root",
    "seg": 3777,
@@ -4264,6 +4456,30 @@
    "seg": 3777,
    "off": 1617,
    "alias_of": "AddAntToRList"
+  },
+  "f_0EC1_06CE": {
+   "unit": "root",
+   "seg": 3777,
+   "off": 1742,
+   "alias_of": "GetFromAlist"
+  },
+  "f_0EC1_0719": {
+   "unit": "root",
+   "seg": 3777,
+   "off": 1817,
+   "alias_of": "BuildAntListA"
+  },
+  "f_0EC1_07C1": {
+   "unit": "root",
+   "seg": 3777,
+   "off": 1985,
+   "alias_of": "ClearListB"
+  },
+  "f_0EC1_07D4": {
+   "unit": "root",
+   "seg": 3777,
+   "off": 2004,
+   "alias_of": "ClearListR"
   },
   "f_0F3F_0008": {
    "unit": "root",
@@ -4415,6 +4631,12 @@
    "off": 5236,
    "alias_of": "DoFoodInR"
   },
+  "f_0F3F_15FC": {
+   "unit": "root",
+   "seg": 3903,
+   "off": 5628,
+   "alias_of": "DoDigInR"
+  },
   "f_0F3F_186B": {
    "unit": "root",
    "seg": 3903,
@@ -4528,6 +4750,12 @@
    "seg": 4343,
    "off": 1991,
    "alias_of": "GetLife"
+  },
+  "f_10F7_0850": {
+   "unit": "root",
+   "seg": 4343,
+   "off": 2128,
+   "alias_of": "GetMap"
   },
   "f_10F7_08CE": {
    "unit": "root",
@@ -5003,6 +5231,12 @@
    "off": 337,
    "grounding": "inventory:far_call"
   },
+  "f_14EE_01D0": {
+   "unit": "root",
+   "seg": 5358,
+   "off": 464,
+   "alias_of": "MakeNewHoleB"
+  },
   "f_14EE_0317": {
    "unit": "root",
    "seg": 5358,
@@ -5032,6 +5266,18 @@
    "seg": 5358,
    "off": 1607,
    "alias_of": "DigTileR"
+  },
+  "f_14EE_0743": {
+   "unit": "root",
+   "seg": 5358,
+   "off": 1859,
+   "alias_of": "DigTileThemB"
+  },
+  "f_14EE_089E": {
+   "unit": "root",
+   "seg": 5358,
+   "off": 2206,
+   "alias_of": "DigTileThemR"
   },
   "f_14EE_09F1": {
    "unit": "root",
@@ -5081,6 +5327,12 @@
    "off": 156,
    "grounding": "inventory:far_call"
   },
+  "f_15F8_0004": {
+   "unit": "root",
+   "seg": 5624,
+   "off": 4,
+   "alias_of": "main"
+  },
   "f_15F8_0313": {
    "unit": "root",
    "seg": 5624,
@@ -5098,6 +5350,12 @@
    "seg": 5673,
    "off": 1123,
    "grounding": "inventory:push_cs_call"
+  },
+  "f_1629_0531": {
+   "unit": "root",
+   "seg": 5673,
+   "off": 1329,
+   "alias_of": "ConvertMonoMaskToColor"
   },
   "f_1699_0000": {
    "unit": "root",
@@ -5681,6 +5939,12 @@
    "off": 695,
    "grounding": "inventory:far_call"
   },
+  "f_1986_0004": {
+   "unit": "root",
+   "seg": 6534,
+   "off": 4,
+   "alias_of": "OpenIndex"
+  },
   "f_1986_00F4": {
    "unit": "root",
    "seg": 6534,
@@ -5789,6 +6053,12 @@
    "off": 1209,
    "grounding": "inventory:push_cs_call"
   },
+  "f_1A28_0006": {
+   "unit": "root",
+   "seg": 6696,
+   "off": 6,
+   "alias_of": "OpenDB"
+  },
   "f_1A28_0148": {
    "unit": "root",
    "seg": 6696,
@@ -5813,6 +6083,30 @@
    "off": 548,
    "grounding": "inventory:push_cs_call"
   },
+  "f_1A28_0277": {
+   "unit": "root",
+   "seg": 6696,
+   "off": 631,
+   "alias_of": "DosPunt"
+  },
+  "f_1A28_02B6": {
+   "unit": "root",
+   "seg": 6739,
+   "off": 6,
+   "alias_of": "db_Exists"
+  },
+  "f_1A53_0006": {
+   "unit": "root",
+   "seg": 6739,
+   "off": 6,
+   "alias_of": "db_Exists"
+  },
+  "f_1A53_0042": {
+   "unit": "root",
+   "seg": 6739,
+   "off": 66,
+   "alias_of": "db_SetDataBase"
+  },
   "f_1A53_00BA": {
    "unit": "root",
    "seg": 6739,
@@ -5824,6 +6118,18 @@
    "seg": 6739,
    "off": 240,
    "grounding": "inventory:far_call"
+  },
+  "f_1A53_0125": {
+   "unit": "root",
+   "seg": 6739,
+   "off": 293,
+   "alias_of": "db_LoadObject"
+  },
+  "f_1A53_01FF": {
+   "unit": "root",
+   "seg": 6739,
+   "off": 511,
+   "alias_of": "db_PurgeObject"
   },
   "f_1A53_025F": {
    "unit": "root",
@@ -6185,6 +6491,12 @@
    "off": 1211,
    "grounding": "inventory:far_call"
   },
+  "f_1B73_0504": {
+   "unit": "root",
+   "seg": 7027,
+   "off": 1284,
+   "alias_of": "TickCount"
+  },
   "f_1B73_050E": {
    "unit": "root",
    "seg": 7027,
@@ -6310,6 +6622,12 @@
    "seg": 7027,
    "off": 3822,
    "grounding": "inventory:far_call"
+  },
+  "f_1C62_000C": {
+   "unit": "root",
+   "seg": 7266,
+   "off": 12,
+   "alias_of": "Punt"
   },
   "f_1C62_0090": {
    "unit": "root",
@@ -6526,6 +6844,12 @@
    "seg": 7394,
    "off": 1503,
    "grounding": "reviewed: prologue scan in unreached gap; descent ends in a return; no references found (unreferenced or indirect)"
+  },
+  "f_1CE2_05FB": {
+   "unit": "root",
+   "seg": 7394,
+   "off": 1531,
+   "alias_of": "GPutPacked"
   },
   "f_1CE2_0951": {
    "unit": "root",
@@ -7090,6 +7414,18 @@
    "seg": 8287,
    "off": 4,
    "grounding": "inventory:far_call"
+  },
+  "f_205F_0308": {
+   "unit": "root",
+   "seg": 8335,
+   "off": 8,
+   "alias_of": "f_208F_0008"
+  },
+  "f_205F_032B": {
+   "unit": "root",
+   "seg": 8335,
+   "off": 43,
+   "alias_of": "f_208F_002B"
   },
   "f_208F_0008": {
    "unit": "root",
@@ -7955,6 +8291,12 @@
    "off": 1067,
    "grounding": "inventory:far_call"
   },
+  "f_24AB_047D": {
+   "unit": "root",
+   "seg": 9387,
+   "off": 1149,
+   "alias_of": "font_InitFonts"
+  },
   "f_24FA_0004": {
    "unit": "root",
    "seg": 9466,
@@ -8117,6 +8459,12 @@
    "off": 8,
    "grounding": "inventory:far_call"
   },
+  "f_25E7_007A": {
+   "unit": "root",
+   "seg": 9703,
+   "off": 122,
+   "alias_of": "font_ReadFont"
+  },
   "f_25E7_024C": {
    "unit": "root",
    "seg": 9703,
@@ -8164,6 +8512,12 @@
    "seg": 9808,
    "off": 263,
    "grounding": "inventory:far_call"
+  },
+  "f_2650_0128": {
+   "unit": "root",
+   "seg": 9826,
+   "off": 8,
+   "alias_of": "f_2662_0008"
   },
   "f_2662_0008": {
    "unit": "root",
@@ -8249,6 +8603,12 @@
    "off": 2317,
    "grounding": "inventory:far_call"
   },
+  "f_2662_0B63": {
+   "unit": "root",
+   "seg": 9826,
+   "off": 2915,
+   "alias_of": "hanim_MakeAnimSet"
+  },
   "f_2662_0C06": {
    "unit": "root",
    "seg": 9826,
@@ -8266,6 +8626,12 @@
    "seg": 9826,
    "off": 4384,
    "grounding": "inventory:far_call"
+  },
+  "f_277D_000A": {
+   "unit": "root",
+   "seg": 10109,
+   "off": 10,
+   "alias_of": "WinPrintf"
   },
   "f_277D_000B": {
    "unit": "root",
@@ -9777,6 +10143,12 @@
    "off": 1060,
    "grounding": "inventory:push_cs_call"
   },
+  "o04_35F5_04DE": {
+   "unit": "S04",
+   "seg": 13813,
+   "off": 1246,
+   "alias_of": "Mini_DrawMapI"
+  },
   "o04_35F5_075F": {
    "unit": "S04",
    "seg": 13813,
@@ -9801,11 +10173,23 @@
    "off": 0,
    "grounding": "inventory:vector"
   },
+  "o05_35F5_0064": {
+   "unit": "S05",
+   "seg": 13813,
+   "off": 100,
+   "alias_of": "EditToolsMenu"
+  },
   "o05_35F5_025C": {
    "unit": "S05",
    "seg": 13813,
    "off": 604,
    "grounding": "inventory:vector"
+  },
+  "o05_35F5_04D3": {
+   "unit": "S05",
+   "seg": 13813,
+   "off": 1235,
+   "alias_of": "AntMenu"
   },
   "o05_35F5_0629": {
    "unit": "S05",
@@ -9891,6 +10275,12 @@
    "off": 2655,
    "grounding": "inventory:push_cs_call"
   },
+  "o06_35F5_0A90": {
+   "unit": "S06",
+   "seg": 13813,
+   "off": 2704,
+   "alias_of": "SimKidInside"
+  },
   "o06_35F5_11FF": {
    "unit": "S06",
    "seg": 13813,
@@ -9926,6 +10316,12 @@
    "seg": 13813,
    "off": 6920,
    "grounding": "inventory:push_cs_call"
+  },
+  "o06_35F5_1BB3": {
+   "unit": "S06",
+   "seg": 13813,
+   "off": 7091,
+   "alias_of": "FootFall"
   },
   "o06_35F5_1CEA": {
    "unit": "S06",
@@ -9969,6 +10365,12 @@
    "off": 9418,
    "grounding": "reviewed: prologue scan in unreached gap; descent ends in a return; no references found (unreferenced or indirect)"
   },
+  "o07_35F5_0000": {
+   "unit": "S07",
+   "seg": 13813,
+   "off": 0,
+   "alias_of": "CheatKeys"
+  },
   "o08_35F5_0000": {
    "unit": "S08",
    "seg": 13813,
@@ -9993,6 +10395,12 @@
    "off": 1986,
    "alias_of": "GenerateTutorial"
   },
+  "o08_35F5_0846": {
+   "unit": "S08",
+   "seg": 13813,
+   "off": 2118,
+   "alias_of": "DigOutBNest"
+  },
   "o08_35F5_0923": {
    "unit": "S08",
    "seg": 13813,
@@ -10004,6 +10412,12 @@
    "seg": 13813,
    "off": 2560,
    "alias_of": "InitYelloAnt"
+  },
+  "o08_35F5_0B8C": {
+   "unit": "S08",
+   "seg": 13813,
+   "off": 2956,
+   "alias_of": "PlaceBlackQueen"
   },
   "o08_35F5_0C4C": {
    "unit": "S08",
@@ -10034,6 +10448,12 @@
    "seg": 13813,
    "off": 3771,
    "alias_of": "fracCOS"
+  },
+  "o08_35F5_0ED5": {
+   "unit": "S08",
+   "seg": 13813,
+   "off": 3797,
+   "alias_of": "AddFood"
   },
   "o08_35F5_1080": {
    "unit": "S08",
@@ -10479,6 +10899,12 @@
    "off": 0,
    "grounding": "inventory:vector"
   },
+  "o15_384C_0017": {
+   "unit": "S15",
+   "seg": 14412,
+   "off": 23,
+   "alias_of": "LoadMonoPats"
+  },
   "o15_384C_0125": {
    "unit": "S15",
    "seg": 14412,
@@ -10526,6 +10952,12 @@
    "seg": 14412,
    "off": 481,
    "grounding": "inventory:vector"
+  },
+  "o16_384C_0472": {
+   "unit": "S16",
+   "seg": 14412,
+   "off": 1138,
+   "alias_of": "ShowIntro"
   },
   "o17_384C_0000": {
    "unit": "S17",
@@ -10803,6 +11235,12 @@
    "off": 530,
    "grounding": "inventory:vector"
   },
+  "o20_39F1_000A": {
+   "unit": "S20",
+   "seg": 14833,
+   "off": 10,
+   "alias_of": "IBMInitStuff"
+  },
   "o20_39F1_03DE": {
    "unit": "S20",
    "seg": 14833,
@@ -10838,6 +11276,12 @@
    "seg": 14791,
    "off": 365,
    "grounding": "inventory:vector"
+  },
+  "o22_39C7_0000": {
+   "unit": "S22",
+   "seg": 14791,
+   "off": 0,
+   "alias_of": "processEdit"
   },
   "o22_39C7_0405": {
    "unit": "S22",
@@ -11091,6 +11535,12 @@
    "off": 1185,
    "grounding": "inventory:push_cs_call"
   },
+  "o23_39C7_0668": {
+   "unit": "S23",
+   "seg": 14791,
+   "off": 1640,
+   "alias_of": "DisplayCard"
+  },
   "o23_39C7_0C19": {
    "unit": "S23",
    "seg": 14791,
@@ -11271,6 +11721,12 @@
    "off": 4187,
    "grounding": "inventory:push_cs_call"
   },
+  "o25_39C7_118E": {
+   "unit": "S25",
+   "seg": 14791,
+   "off": 4494,
+   "alias_of": "DoNestingB"
+  },
   "o25_39C7_13EF": {
    "unit": "S25",
    "seg": 14791,
@@ -11295,6 +11751,24 @@
    "off": 5556,
    "grounding": "inventory:far_call,push_cs_call"
   },
+  "o25_39C7_15FC": {
+   "unit": "S25",
+   "seg": 14791,
+   "off": 5628,
+   "alias_of": "DoFoodInB"
+  },
+  "o25_39C7_17B7": {
+   "unit": "S25",
+   "seg": 14791,
+   "off": 6071,
+   "alias_of": "DoDigInB"
+  },
+  "o25_39C7_19CC": {
+   "unit": "S25",
+   "seg": 14791,
+   "off": 6604,
+   "alias_of": "DoDigOutB"
+  },
   "o25_39C7_1BBB": {
    "unit": "S25",
    "seg": 14791,
@@ -11306,6 +11780,18 @@
    "seg": 14791,
    "off": 7297,
    "grounding": "inventory:push_cs_call"
+  },
+  "o25_3BA4_0008": {
+   "unit": "S25",
+   "seg": 15268,
+   "off": 8,
+   "alias_of": "DoAntMoveY"
+  },
+  "o25_3BA4_07CE": {
+   "unit": "S25",
+   "seg": 15268,
+   "off": 1998,
+   "alias_of": "DoAntSimY"
   },
   "o25_3BA4_0999": {
    "unit": "S25",
@@ -11330,6 +11816,12 @@
    "seg": 15268,
    "off": 4149,
    "grounding": "inventory:push_cs_call,vector"
+  },
+  "o25_3BA4_114E": {
+   "unit": "S25",
+   "seg": 15268,
+   "off": 4430,
+   "alias_of": "ExitNest"
   },
   "o25_3BA4_13AB": {
    "unit": "S25",
