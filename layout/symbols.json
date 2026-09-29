@@ -9879,6 +9879,11 @@
    "off": 548,
    "grounding": "o08_35F5_0050 (RandWorld): mov es,[S08 CONST word] ; mov es:[off]"
   },
+  "fd_50F6_0226": {
+   "seg": 20726,
+   "off": 550,
+   "grounding": "f_0F3F_143C: mov es,[8270] (50F6); dec word ptr es:[0226]; jns; = [0350]>>5 (red eat counter)"
+  },
   "fd_50F6_0228": {
    "seg": 20726,
    "off": 552,
@@ -10444,6 +10449,11 @@
    "off": 3434,
    "grounding": "f_10F7_005D (GetAntIndex-like): mov es,[CONST word = 50F6]; es:[..0D6A] list count/field array"
   },
+  "fd_50F6_0D6C": {
+   "seg": 20726,
+   "off": 3436,
+   "grounding": "S25:3BA4 o25_3BA4_1935:1988 mov word es:[0D6C],-1 (CONST seg word 899C = 50F6); counter decremented in o25_3BA4_1A0D"
+  },
   "fd_50F6_0D70": {
    "seg": 20726,
    "off": 3440,
@@ -10478,6 +10488,16 @@
    "seg": 20726,
    "off": 3830,
    "grounding": "f_0894_000E: mov es,[8038] (50F6); mov es:[0EF6],ax(0)"
+  },
+  "fd_50F6_0EF8": {
+   "seg": 20726,
+   "off": 3832,
+   "grounding": "S25:3BA4 o25_3BA4_19AD:19CF mov es:[0EF8],ax (GetDir-1; CONST seg word 899E = 50F6); passed by far address to o25_3BA4_1686"
+  },
+  "fd_50F6_0EFA": {
+   "seg": 20726,
+   "off": 3834,
+   "grounding": "S25:3BA4 o25_3BA4_19AD:19E2 mov word es:[0EFA],0 (CONST seg word 89A0 = 50F6); passed by far address to o25_3BA4_1686"
   },
   "fd_50F6_0EFC": {
    "seg": 20726,
@@ -10813,6 +10833,11 @@
    "seg": 20726,
    "off": 18398,
    "grounding": "f_21FA_08E2: mov es,[8A30]; les es:[bx+47DE] indexed by (win>>8)*4 -> far function pointer per window (draw hook), called with 1 / 2"
+  },
+  "fd_50F6_4892": {
+   "seg": 20726,
+   "off": 18578,
+   "grounding": "f_23AE_01DB: es=[8A3A] (seg 50F6), lea di,[win*8+4892]; 8-byte rect saved per window on discard"
   },
   "fd_55B3_360C": {
    "seg": 21939,

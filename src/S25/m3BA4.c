@@ -432,7 +432,7 @@ void far o25_3BA4_0999(int plane, int x, int y, int dir, int type, int kind)
 }
 
 extern int far WinPrintf(char far *format, ...);
-extern int far f_0BE8_0B83(int x1, int y1, int x2, int y2);
+extern long far f_0BE8_0B83(int x1, int y1, int x2, int y2);
 extern int far RRand(int range);
 extern int far o25_39C7_0CBD(int plane, int x, int y, int gx, int gy);
 
@@ -463,7 +463,7 @@ void far o25_3BA4_0C01(int plane, int x, int y, int dir, int type)
             f_00F8_0265(1L);
         t = f_00F8_02BE() + 3;
         f_00DF_015C();
-        if (f_0BE8_0B83(x, y, svX, svY) == 0 && count - i - 1 != 0)
+        if ((int)f_0BE8_0B83(x, y, svX, svY) == 0 && count - i - 1 != 0)
             d = o25_39C7_0CBD(plane, x, y, RRand(7) + x - 3, RRand(7) + y - 3);
         else
             d = o25_39C7_0CBD(plane, x, y, svX, svY);
@@ -538,8 +538,204 @@ void far o25_3BA4_0DFB(int list, int index)
     }
 }
 
+extern void far f_0BE8_0EB7(void);
+extern void far o22_39C7_1A57(int state, int quiet);
+extern void far f_14EE_0151(int plane, int x, int y);
+extern unsigned char far fd_3D57_0224[];
+extern void far MakeNewHoleB(int x);
+extern unsigned char far fd_3D57_0264[];
+extern void far f_14EE_0367(int x);
+extern signed char far fd_3D57_006C[];
+extern int far f_10F7_2489(int plane, int x, int y);
+
+/* SCAFFOLD BEGIN: o25_3BA4_1035 (EnterNest) best draft: 3 bytes differ, the merged DigMyTile call loads &MeLocX via bx instead of si (register tie-break); the if/else with identical arms reproduces the dead "les bx,[bp-14h]" of the original */
+void far o25_3BA4_1035(void)
+{
+    f_0BE8_0EB7();
+    if (fd_50F6_104E != 0)
+        o22_39C7_1A57(0, 1);
+    f_10F7_09A8(fd_50F6_048C, fd_50F6_047C, fd_50F6_048A, fd_50F6_04C2, fd_50F6_0496);
+    if (fd_50F6_047C > 0x40)
+        fd_50F6_048C = 3;
+    else
+        fd_50F6_048C = 2;
+    fd_50F6_047C = fd_50F6_048A;
+    if (fd_50F6_04C2 == 0x60)
+        fd_50F6_048A = 2;
+    else
+        fd_50F6_048A = 1;
+    fd_50F6_0496 = 4;
+    if (fd_50F6_048C == 2)
+        f_14EE_0151(fd_50F6_048C, fd_50F6_047C, fd_50F6_048A);
+    else
+        f_14EE_0151(fd_50F6_048C, fd_50F6_047C, fd_50F6_048A);
+    f_10F7_0A44(fd_50F6_048C, fd_50F6_047C, fd_50F6_048A, fd_50F6_04C2, fd_50F6_0496, 0xff);
+}
+/* SCAFFOLD END */
+
+/* SCAFFOLD BEGIN: ExitNest best draft: exact except the MePlane/MeGoalPlane compare operand order (cmp [temp],ax vs cmp mem,ax), which follows the compiler symbol-table state (exact with 2..7 extra declarations before fd_50F6_0AE8) */
+void far ExitNest(void)
+{
+    int step;
+    int nx;
+    int ny;
+    int dir;
+    int i;
+    int d;
+
+    f_0BE8_0EB7();
+    f_10F7_0A44(fd_50F6_048C, fd_50F6_047C, fd_50F6_048A, fd_50F6_04C2, fd_50F6_0496, 0);
+    fd_50F6_048A = fd_50F6_047C & 0x3f;
+    if (fd_50F6_048C == 2) {
+        if (fd_3D57_0224[fd_50F6_048A] == 0)
+            MakeNewHoleB(fd_50F6_047C);
+        fd_50F6_047C = fd_3D57_0224[fd_50F6_048A];
+    } else {
+        if (fd_3D57_0264[fd_50F6_048A] == 0)
+            f_14EE_0367(fd_50F6_047C);
+        fd_50F6_047C = fd_3D57_0264[fd_50F6_048A];
+    }
+    step = (fd_50F6_04C2 == 0x60) ? 2 : 1;
+    if (fd_50F6_0AF8 == 1) {
+        d = f_0BE8_0B21(fd_50F6_047C, fd_50F6_048A, fd_50F6_0AD6, fd_50F6_0AE8);
+        if (d > 0)
+            d--;
+    } else if (fd_50F6_048C == fd_50F6_0AF8) {
+        if (fd_50F6_047C < 0x40)
+            d = 2;
+        else
+            d = 6;
+    } else {
+        d = o25_3BA4_1A9F(1, fd_50F6_047C, fd_50F6_048A, fd_50F6_0AF8, fd_50F6_0AD6, fd_50F6_0AE8);
+        if (d < 0)
+            d = SRand8();
+    }
+    i = 0;
+    dir = d;
+    for (; i < 8; i++) {
+        d = (fd_3D57_006C[i] + dir) & 7;
+        nx = fd_3D57_0000[d] * step + fd_50F6_047C;
+        ny = fd_3D57_0008[d] * step + fd_50F6_048A;
+        if (f_10F7_2489(1, nx, ny)) {
+            fd_50F6_047C = nx;
+            fd_50F6_048A = ny;
+            fd_50F6_0496 = d;
+            break;
+        }
+    }
+    if (i == 8) {
+        fd_50F6_0496 = dir;
+        fd_50F6_047C = (fd_50F6_047C + step) & 0x7f;
+    }
+    f_10F7_0A44(fd_50F6_048C = 1, fd_50F6_047C, fd_50F6_048A, fd_50F6_04C2, fd_50F6_0496, 0xff);
+}
+/* SCAFFOLD END */
+
+extern int far fd_3D57_02AC[2];
+extern int far fd_3D57_02A4[2];
+extern int far fd_3D57_02B0[2];
+extern int far fd_3D57_02A8[2];
+
+/* SCAFFOLD BEGIN: o25_3BA4_13AB (GetMyDis) best draft: the two/three GetDis calls of each sum are emitted in the opposite order (commutative operand order follows symbol-table state, not source order) */
+int far o25_3BA4_13AB(int p1, int x1, int y1, int p2, int x2, int y2)
+{
+    if (p2 == p1)
+        return f_0BE8_0B83(x1, y1, x2, y2);
+    if (p1 == 1 && p2 > p1) {
+        if (p2 == 2)
+            return f_0BE8_0B83(x1, y1, fd_3D57_02AC[0], fd_3D57_02AC[1])
+                 + f_0BE8_0B83(fd_3D57_02A4[0], fd_3D57_02A4[1], x2, y2);
+        return f_0BE8_0B83(x1, y1, fd_3D57_02B0[0], fd_3D57_02B0[1])
+             + f_0BE8_0B83(fd_3D57_02A4[0], fd_3D57_02A4[1], x2, y2);
+    }
+    if (p2 == 1) {
+        if (p1 == 2)
+            return f_0BE8_0B83(x1, y1, fd_3D57_02A4[0], fd_3D57_02A4[1])
+                 + f_0BE8_0B83(fd_3D57_02AC[0], fd_3D57_02AC[1], x2, y2);
+        return f_0BE8_0B83(x1, y1, fd_3D57_02A8[0], fd_3D57_02A8[1])
+             + f_0BE8_0B83(fd_3D57_02B0[0], fd_3D57_02B0[1], x2, y2);
+    }
+    if (p1 == 2)
+        return f_0BE8_0B83(x1, y1, fd_3D57_02A4[0], fd_3D57_02A4[1])
+             + f_0BE8_0B83(fd_3D57_02AC[0], fd_3D57_02AC[1], fd_3D57_02B0[0], fd_3D57_02B0[1])
+             + f_0BE8_0B83(fd_3D57_02A8[0], fd_3D57_02A8[1], x2, y2);
+    return f_0BE8_0B83(x1, y1, fd_3D57_02A8[0], fd_3D57_02A8[1])
+         + f_0BE8_0B83(fd_3D57_02B0[0], fd_3D57_02B0[1], fd_3D57_02AC[0], fd_3D57_02AC[1])
+         + f_0BE8_0B83(fd_3D57_02A4[0], fd_3D57_02A4[1], x2, y2);
+}
+/* SCAFFOLD END */
+
+extern int far f_10F7_22CE(int plane, int x, int y, int fromPlane, int fromX, int fromY, int digging);
+extern int far f_10F7_07C7(int plane, int x, int y);
+extern int far f_10F7_04EC(int plane, int x, int y);
+
+int far o25_3BA4_1581(int plane, int x, int y, int a, int b)
+{
+    int best;
+    int fallback;
+    int flag;
+    int threshold;
+    int dir;
+    int nx;
+    int ny;
+    int dis;
+
+    best = -1;
+    threshold = f_0BE8_0B83(x, y, a, b);
+    if (threshold > 0) {
+        fallback = -2;
+        flag = (fd_50F6_0A8E == 2) ? 1 : 0;
+        for (dir = 0; dir < 8; dir++) {
+            nx = fd_3D57_0000[dir] + x;
+            ny = fd_3D57_0008[dir] + y;
+            if (f_10F7_22CE(plane, nx, ny, fd_50F6_0AF8, fd_50F6_0AD6, fd_50F6_0AE8, flag) != 0) {
+                dis = f_0BE8_0B83(nx, ny, a, b);
+                if (dis < threshold) {
+                    if (f_10F7_07C7(plane, nx, ny) > 0 || f_10F7_04EC(plane, nx, ny) == 0)
+                        fallback = dir;
+                    else
+                        best = dir;
+                    threshold = dis;
+                }
+            }
+        }
+        if (best < 0)
+            best = fallback;
+    }
+    return best;
+}
+
+/* SCAFFOLD BEGIN: o25_3BA4_1686 not recovered yet */
+int far o25_3BA4_1686(void) { return 0; }
+/* SCAFFOLD END */
+
+int far o25_3BA4_188A(int far *steps, int plane, int x, int y, int a, int b)
+{
+    int nx;
+    int ny;
+    int count;
+    int dir;
+
+    count = 0;
+    dir = o25_3BA4_1581(plane, x, y, a, b);
+    if (dir >= 0) {
+        nx = fd_3D57_0000[dir] + x;
+        ny = fd_3D57_0008[dir] + y;
+        while (dir >= 0 && count < 0x40) {
+            dir = o25_3BA4_1581(plane, nx, ny, a, b);
+            if (dir >= 0) {
+                nx += fd_3D57_0000[dir];
+                ny += fd_3D57_0008[dir];
+            }
+            count++;
+        }
+    }
+    *steps = count;
+    if (dir >= 0)
+        dir = -1;
+    return dir;
+}
+
 /* SCAFFOLD BEGIN: unrecovered same-module callees */
-void far o25_3BA4_1035(void) { }
-void far ExitNest(void) { }
 int far o25_3BA4_1A9F(int plane, int x, int y, int gplane, int gx, int gy) { return 0; }
 /* SCAFFOLD END */

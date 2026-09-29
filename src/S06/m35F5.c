@@ -4,70 +4,70 @@ static char dogA[6] = { 3, 4, -3, -4, 0, 0 };  /* 2448 */
 static char dogB[6] = { -3, 0, 3, 0, 0, 0 };  /* 244E */
 static char dogC[4] = { 0, 1, 2, 1 };  /* 2454 */
 static char dogD[6] = { 0, 3, 6, 9, 100, 102 };  /* 2458 */
-static char nodeNext[22] = { 3, 3, 18, 18, 3, 3, 10, 10, 5, 5, 3, 3, 4, 4, 3, 3, 0, 0, 0, 0, 7, 4 };  /* 245E */
-static unsigned char n1x[4] = { 4, 5, 4, 3 };  /* 2474 */
-static unsigned char n1y[4] = { 135, 141, 147, 153 };  /* 2478 */
-static unsigned char n1f[4] = { 60, 60, 60, 60 };  /* 247C */
-static unsigned char n2x[4] = { 9, 10, 11, 10 };  /* 2480 */
-static unsigned char n2y[4] = { 150, 144, 138, 132 };  /* 2484 */
-static unsigned char n2f[4] = { 60, 60, 60, 60 };  /* 2488 */
-static unsigned char n3x[20] = { 6, 7, 8, 7, 6, 7, 8, 7, 6, 7, 8, 7, 6, 7, 8, 7, 6, 7, 8, 0 };  /* 248C */
-static unsigned char n3y[20] = { 154, 150, 147, 143, 140, 136, 133, 129, 126, 122, 119, 115, 111, 108, 104, 101, 97, 94, 91, 0 };  /* 24A0 */
-static unsigned char n3f[20] = { 60, 64, 68, 72, 76, 80, 84, 88, 92, 96, 100, 104, 108, 112, 116, 120, 124, 128, 132, 0 };  /* 24B4 */
-static unsigned char n4x[20] = { 0, 1, 2, 1, 0, 1, 2, 1, 0, 1, 2, 1, 0, 1, 2, 1, 0, 1, 2, 0 };  /* 24C8 */
-static unsigned char n4y[20] = { 91, 94, 97, 101, 104, 108, 111, 115, 119, 122, 126, 129, 133, 136, 140, 143, 147, 150, 154, 0 };  /* 24DC */
-static unsigned char n4f[20] = { 132, 128, 124, 120, 116, 112, 108, 104, 100, 96, 92, 88, 84, 80, 76, 72, 68, 64, 60, 0 };  /* 24F0 */
-static unsigned char n5x[4] = { 4, 5, 4, 3 };  /* 2504 */
-static unsigned char n5y[4] = { 65, 71, 77, 83 };  /* 2508 */
-static unsigned char n5f[4] = { 130, 130, 130, 130 };  /* 250C */
-static unsigned char n6x[4] = { 9, 10, 11, 10 };  /* 2510 */
-static unsigned char n6y[4] = { 80, 74, 68, 62 };  /* 2514 */
-static unsigned char n6f[4] = { 130, 130, 130, 130 };  /* 2518 */
-static unsigned char n7x[12] = { 7, 6, 7, 8, 7, 6, 7, 8, 7, 9, 22, 0 };  /* 251C */
-static unsigned char n7y[12] = { 84, 80, 76, 72, 68, 64, 60, 56, 52, 46, 44, 0 };  /* 2528 */
-static unsigned char n7f[12] = { 134, 138, 142, 146, 150, 154, 158, 162, 166, 166, 166, 0 };  /* 2534 */
-static unsigned char n8x[12] = { 22, 3, 0, 1, 2, 1, 0, 1, 2, 1, 0, 0 };  /* 2540 */
-static unsigned char n8y[12] = { 44, 46, 52, 56, 60, 64, 69, 73, 78, 82, 86, 0 };  /* 254C */
-static unsigned char n8f[12] = { 166, 166, 166, 162, 158, 154, 150, 146, 142, 138, 134, 0 };  /* 2558 */
-static unsigned char n9x[6] = { 4, 5, 4, 3, 4, 5 };  /* 2564 */
-static unsigned char n9y[6] = { 159, 165, 171, 177, 183, 189 };  /* 256A */
-static unsigned char n9f[6] = { 60, 60, 60, 60, 60, 60 };  /* 2570 */
-static unsigned char n10x[6] = { 10, 11, 10, 9, 10, 11 };  /* 2576 */
-static unsigned char n10y[6] = { 189, 183, 177, 171, 165, 159 };  /* 257C */
-static unsigned char n10f[6] = { 60, 60, 60, 60, 60, 60 };  /* 2582 */
-static unsigned char n11x[4] = { 0, 1, 2, 1 };  /* 2588 */
-static unsigned char n11y[4] = { 164, 168, 172, 176 };  /* 258C */
-static unsigned char n11f[4] = { 56, 52, 48, 44 };  /* 2590 */
-static unsigned char n12x[4] = { 6, 7, 8, 7 };  /* 2594 */
-static unsigned char n12y[4] = { 176, 172, 168, 164 };  /* 2598 */
-static unsigned char n12f[4] = { 44, 48, 52, 56 };  /* 259C */
-static unsigned char n13x[6] = { 3, 4, 5, 4, 3, 0 };  /* 25A0 */
-static unsigned char n13y[6] = { 182, 188, 194, 200, 206, 0 };  /* 25A6 */
-static unsigned char n13f[6] = { 44, 44, 44, 44, 44, 0 };  /* 25AC */
-static unsigned char n14x[6] = { 9, 10, 11, 10, 9, 0 };  /* 25B2 */
-static unsigned char n14y[6] = { 206, 200, 194, 188, 182, 0 };  /* 25B8 */
-static unsigned char n14f[6] = { 44, 44, 44, 44, 44, 0 };  /* 25BE */
-static unsigned char n15x[4] = { 0, 1, 2, 1 };  /* 25C4 */
-static unsigned char n15y[4] = { 196, 200, 204, 208 };  /* 25C8 */
-static unsigned char n15f[4] = { 56, 52, 48, 44 };  /* 25CC */
-static unsigned char n16x[4] = { 6, 7, 8, 7 };  /* 25D0 */
-static unsigned char n16y[4] = { 208, 204, 200, 196 };  /* 25D4 */
-static unsigned char n16f[4] = { 44, 48, 52, 56 };  /* 25D8 */
-static int n17x[8] = { 6, 7, 8, 900, 901, 902, 6, 7 };  /* 25DC */
-static unsigned char n17y[8] = { 192, 189, 186, 172, 172, 172, 174, 175 };  /* 25EC */
-static unsigned char n17f[8] = { 60, 64, 68, 73, 73, 73, 93, 99 };  /* 25F4 */
-static int n18x[5] = { 0, 903, 900, 1, 2 };  /* 25FC */
-static unsigned char n18y[6] = { 172, 172, 172, 186, 189, 0 };  /* 2606 */
-static unsigned char n18f[6] = { 93, 73, 73, 68, 64, 0 };  /* 260C */
-static unsigned char nodeAlt1[22] = { 10, 30, 6, 1, 3, 31, 32, 5, 14, 2, 33, 1, 34, 33, 34, 20, 0, 0, 0, 0, 38, 14 };  /* 2612 */
-static unsigned char nodeAlt2[22] = { 8, 30, 6, 10, 3, 31, 32, 3, 14, 1, 33, 2, 34, 11, 34, 20, 0, 0, 0, 0, 38, 14 };  /* 2628 */
-static unsigned char nodeAlt3[22] = { 2, 30, 5, 8, 6, 31, 32, 3, 20, 10, 12, 8, 15, 12, 13, 9, 0, 0, 0, 0, 38, 14 };  /* 263E */
-static int outX[9] = { -1, -1, 200, 20, 201, -1, 0, 0, 7 };  /* 2654 */
-static unsigned char outY[10] = { 0, 0, 45, 176, 207, 0, 0, 0, 176, 0 };  /* 2666 */
-static unsigned char outF[10] = { 0, 0, 166, 44, 47, 0, 0, 0, 104, 0 };  /* 2670 */
+static char nodeLen[22] = { 3, 3, 18, 18, 3, 3, 10, 10, 5, 5, 3, 3, 4, 4, 3, 3, 0, 0, 0, 0, 7, 4 };  /* 245E */
+static unsigned char kidF0[4] = { 4, 5, 4, 3 };  /* 2474 */
+static unsigned char kidX0[4] = { 135, 141, 147, 153 };  /* 2478 */
+static unsigned char kidY0[4] = { 60, 60, 60, 60 };  /* 247C */
+static unsigned char kidF1[4] = { 9, 10, 11, 10 };  /* 2480 */
+static unsigned char kidX1[4] = { 150, 144, 138, 132 };  /* 2484 */
+static unsigned char kidY1[4] = { 60, 60, 60, 60 };  /* 2488 */
+static unsigned char kidF2[20] = { 6, 7, 8, 7, 6, 7, 8, 7, 6, 7, 8, 7, 6, 7, 8, 7, 6, 7, 8, 0 };  /* 248C */
+static unsigned char kidX2[20] = { 154, 150, 147, 143, 140, 136, 133, 129, 126, 122, 119, 115, 111, 108, 104, 101, 97, 94, 91, 0 };  /* 24A0 */
+static unsigned char kidY2[20] = { 60, 64, 68, 72, 76, 80, 84, 88, 92, 96, 100, 104, 108, 112, 116, 120, 124, 128, 132, 0 };  /* 24B4 */
+static unsigned char kidF3[20] = { 0, 1, 2, 1, 0, 1, 2, 1, 0, 1, 2, 1, 0, 1, 2, 1, 0, 1, 2, 0 };  /* 24C8 */
+static unsigned char kidX3[20] = { 91, 94, 97, 101, 104, 108, 111, 115, 119, 122, 126, 129, 133, 136, 140, 143, 147, 150, 154, 0 };  /* 24DC */
+static unsigned char kidY3[20] = { 132, 128, 124, 120, 116, 112, 108, 104, 100, 96, 92, 88, 84, 80, 76, 72, 68, 64, 60, 0 };  /* 24F0 */
+static unsigned char kidF4[4] = { 4, 5, 4, 3 };  /* 2504 */
+static unsigned char kidX4[4] = { 65, 71, 77, 83 };  /* 2508 */
+static unsigned char kidY4[4] = { 130, 130, 130, 130 };  /* 250C */
+static unsigned char kidF5[4] = { 9, 10, 11, 10 };  /* 2510 */
+static unsigned char kidX5[4] = { 80, 74, 68, 62 };  /* 2514 */
+static unsigned char kidY5[4] = { 130, 130, 130, 130 };  /* 2518 */
+static unsigned char kidF6[12] = { 7, 6, 7, 8, 7, 6, 7, 8, 7, 9, 22, 0 };  /* 251C */
+static unsigned char kidX6[12] = { 84, 80, 76, 72, 68, 64, 60, 56, 52, 46, 44, 0 };  /* 2528 */
+static unsigned char kidY6[12] = { 134, 138, 142, 146, 150, 154, 158, 162, 166, 166, 166, 0 };  /* 2534 */
+static unsigned char kidF7[12] = { 22, 3, 0, 1, 2, 1, 0, 1, 2, 1, 0, 0 };  /* 2540 */
+static unsigned char kidX7[12] = { 44, 46, 52, 56, 60, 64, 69, 73, 78, 82, 86, 0 };  /* 254C */
+static unsigned char kidY7[12] = { 166, 166, 166, 162, 158, 154, 150, 146, 142, 138, 134, 0 };  /* 2558 */
+static unsigned char kidF8[6] = { 4, 5, 4, 3, 4, 5 };  /* 2564 */
+static unsigned char kidX8[6] = { 159, 165, 171, 177, 183, 189 };  /* 256A */
+static unsigned char kidY8[6] = { 60, 60, 60, 60, 60, 60 };  /* 2570 */
+static unsigned char kidF9[6] = { 10, 11, 10, 9, 10, 11 };  /* 2576 */
+static unsigned char kidX9[6] = { 189, 183, 177, 171, 165, 159 };  /* 257C */
+static unsigned char kidY9[6] = { 60, 60, 60, 60, 60, 60 };  /* 2582 */
+static unsigned char kidF10[4] = { 0, 1, 2, 1 };  /* 2588 */
+static unsigned char kidX10[4] = { 164, 168, 172, 176 };  /* 258C */
+static unsigned char kidY10[4] = { 56, 52, 48, 44 };  /* 2590 */
+static unsigned char kidF11[4] = { 6, 7, 8, 7 };  /* 2594 */
+static unsigned char kidX11[4] = { 176, 172, 168, 164 };  /* 2598 */
+static unsigned char kidY11[4] = { 44, 48, 52, 56 };  /* 259C */
+static unsigned char kidF12[6] = { 3, 4, 5, 4, 3, 0 };  /* 25A0 */
+static unsigned char kidX12[6] = { 182, 188, 194, 200, 206, 0 };  /* 25A6 */
+static unsigned char kidY12[6] = { 44, 44, 44, 44, 44, 0 };  /* 25AC */
+static unsigned char kidF13[6] = { 9, 10, 11, 10, 9, 0 };  /* 25B2 */
+static unsigned char kidX13[6] = { 206, 200, 194, 188, 182, 0 };  /* 25B8 */
+static unsigned char kidY13[6] = { 44, 44, 44, 44, 44, 0 };  /* 25BE */
+static unsigned char kidF14[4] = { 0, 1, 2, 1 };  /* 25C4 */
+static unsigned char kidX14[4] = { 196, 200, 204, 208 };  /* 25C8 */
+static unsigned char kidY14[4] = { 56, 52, 48, 44 };  /* 25CC */
+static unsigned char kidF15[4] = { 6, 7, 8, 7 };  /* 25D0 */
+static unsigned char kidX15[4] = { 208, 204, 200, 196 };  /* 25D4 */
+static unsigned char kidY15[4] = { 44, 48, 52, 56 };  /* 25D8 */
+static int kidF20[8] = { 6, 7, 8, 900, 901, 902, 6, 7 };  /* 25DC */
+static unsigned char kidX20[8] = { 192, 189, 186, 172, 172, 172, 174, 175 };  /* 25EC */
+static unsigned char kidY20[8] = { 60, 64, 68, 73, 73, 73, 93, 99 };  /* 25F4 */
+static int kidF21[5] = { 0, 903, 900, 1, 2 };  /* 25FC */
+static unsigned char kidX21[6] = { 172, 172, 172, 186, 189, 0 };  /* 2606 */
+static unsigned char kidY21[6] = { 93, 73, 73, 68, 64, 0 };  /* 260C */
+static unsigned char nodeNext0[22] = { 10, 30, 6, 1, 3, 31, 32, 5, 14, 2, 33, 1, 34, 33, 34, 20, 0, 0, 0, 0, 38, 14 };  /* 2612 */
+static unsigned char nodeNext1[22] = { 8, 30, 6, 10, 3, 31, 32, 3, 14, 1, 33, 2, 34, 11, 34, 20, 0, 0, 0, 0, 38, 14 };  /* 2628 */
+static unsigned char nodeNext2[22] = { 2, 30, 5, 8, 6, 31, 32, 3, 20, 10, 12, 8, 15, 12, 13, 9, 0, 0, 0, 0, 38, 14 };  /* 263E */
+static int outF[9] = { -1, -1, 200, 20, 201, -1, 0, 0, 7 };  /* 2654 */
+static unsigned char outX[10] = { 0, 0, 45, 176, 207, 0, 0, 0, 176, 0 };  /* 2666 */
+static unsigned char outY[10] = { 0, 0, 166, 44, 47, 0, 0, 0, 104, 0 };  /* 2670 */
 static unsigned char outChance[10] = { 40, 40, 35, 8, 8, 6, 0, 0, 10, 0 };  /* 267A */
 static unsigned char outNext[10] = { 0, 4, 7, 12, 15, 14, 0, 0, 38, 0 };  /* 2684 */
-static char nodeMsg[12] = { 0, 0, 0, 1, 1, 1, 2, 2, 2, 3, 3, 3 };  /* 268E */
+static unsigned char frameDir[12] = { 0, 0, 0, 1, 1, 1, 2, 2, 2, 3, 3, 3 };  /* 268E */
 static char stepAnim[4] = { 0, 1, 2, 1 };  /* 269A */
 static char dirFrame[4] = { 0, 3, 6, 9 };  /* 269E */
 static int footDx[4] = { -10, 25, -10, -33 };  /* 26A2 */
@@ -480,11 +480,314 @@ void far o06_35F5_0A5F(void)
         fd_50F6_0334[i] = -1;
 }
 
+
+/* SCAFFOLD BEGIN: SimKidInside draft (C4203 under MSC 6.00A C2 and C2L, see report) */
+extern int far fd_3D57_07C8;
+extern int far fd_50F6_035C;
+extern int far fd_50F6_0330;
+extern int far fd_50F6_0350;
+extern unsigned char far fd_3E1D_6180[128][64];
+extern int far fd_50F6_0F18;
+extern unsigned char far fd_3E1D_AD3B[];
+extern int far fd_50F6_0F12;
+extern int far fd_50F6_0F34;
+extern int far fd_50F6_048C;
+extern void far f_00DF_00E8(int sound, int a, int b);
+extern int far SRand128(void);
+extern int far SRand64(void);
+extern int far SRand4(void);
+extern int far f_0EC1_0291(int x, int y);
+extern void far DeadAntHere(int x, int y, int flag);
+extern void far f_0CDB_0DE0(void);
+extern void far o22_39C7_0D21(int a);
+
+/* SimKidInside: the boy's walk through the house, node by node */
+void far SimKidInside(void)
+{
+    int x, y, frame;
+    int i;
+
+    if (fd_3D57_0C44 == 1)
+        return;
+    if (fd_3D57_0C48 < 30 && nodeLen[fd_3D57_0C48] < ++fd_3D57_0C46) {
+        fd_3D57_0C46 = 0;
+        switch (SRand1(3)) {
+        case 0:
+            frame = nodeNext0[fd_3D57_0C48];
+            break;
+        case 1:
+            frame = nodeNext1[fd_3D57_0C48];
+            break;
+        case 2:
+            frame = nodeNext2[fd_3D57_0C48];
+            break;
+        }
+        fd_3D57_0C48 = frame;
+        switch (frame) {
+        case 6:
+            o06_35F5_01CA(21);
+            break;
+        case 7:
+            o06_35F5_01CA(22);
+            break;
+        case 14:
+            o06_35F5_01CA(SRand1(3) + 15);
+            break;
+        case 16:
+            o06_35F5_01CA(SRand1(2) + 18);
+            break;
+        case 33:
+            o06_35F5_01CA(20);
+            break;
+        }
+    }
+    if (fd_3D57_0C48 < 30) {
+        switch (fd_3D57_0C48) {
+        case 0:
+            frame = kidF0[fd_3D57_0C46];
+            x = kidX0[fd_3D57_0C46];
+            y = kidY0[fd_3D57_0C46];
+            break;
+        case 1:
+            frame = kidF1[fd_3D57_0C46];
+            x = kidX1[fd_3D57_0C46];
+            y = kidY1[fd_3D57_0C46];
+            break;
+        case 2:
+            frame = kidF2[fd_3D57_0C46];
+            x = kidX2[fd_3D57_0C46];
+            y = kidY2[fd_3D57_0C46];
+            break;
+        case 3:
+            frame = kidF3[fd_3D57_0C46];
+            x = kidX3[fd_3D57_0C46];
+            y = kidY3[fd_3D57_0C46];
+            break;
+        case 4:
+            frame = kidF4[fd_3D57_0C46];
+            x = kidX4[fd_3D57_0C46];
+            y = kidY4[fd_3D57_0C46];
+            break;
+        case 5:
+            frame = kidF5[fd_3D57_0C46];
+            x = kidX5[fd_3D57_0C46];
+            y = kidY5[fd_3D57_0C46];
+            break;
+        case 6:
+            frame = kidF6[fd_3D57_0C46];
+            x = kidX6[fd_3D57_0C46];
+            y = kidY6[fd_3D57_0C46];
+            break;
+        case 7:
+            frame = kidF7[fd_3D57_0C46];
+            x = kidX7[fd_3D57_0C46];
+            y = kidY7[fd_3D57_0C46];
+            break;
+        case 8:
+            frame = kidF8[fd_3D57_0C46];
+            x = kidX8[fd_3D57_0C46];
+            y = kidY8[fd_3D57_0C46];
+            break;
+        case 9:
+            frame = kidF9[fd_3D57_0C46];
+            x = kidX9[fd_3D57_0C46];
+            y = kidY9[fd_3D57_0C46];
+            break;
+        case 10:
+            frame = kidF10[fd_3D57_0C46];
+            x = kidX10[fd_3D57_0C46];
+            y = kidY10[fd_3D57_0C46];
+            break;
+        case 11:
+            frame = kidF11[fd_3D57_0C46];
+            x = kidX11[fd_3D57_0C46];
+            y = kidY11[fd_3D57_0C46];
+            break;
+        case 12:
+            frame = kidF12[fd_3D57_0C46];
+            x = kidX12[fd_3D57_0C46];
+            y = kidY12[fd_3D57_0C46];
+            break;
+        case 13:
+            frame = kidF13[fd_3D57_0C46];
+            x = kidX13[fd_3D57_0C46];
+            y = kidY13[fd_3D57_0C46];
+            break;
+        case 14:
+            frame = kidF14[fd_3D57_0C46];
+            x = kidX14[fd_3D57_0C46];
+            y = kidY14[fd_3D57_0C46];
+            break;
+        case 15:
+            frame = kidF15[fd_3D57_0C46];
+            x = kidX15[fd_3D57_0C46];
+            y = kidY15[fd_3D57_0C46];
+            break;
+        case 20:
+            frame = kidF20[fd_3D57_0C46];
+            x = kidX20[fd_3D57_0C46];
+            y = kidY20[fd_3D57_0C46];
+            break;
+        case 21:
+            frame = kidF21[fd_3D57_0C46];
+            x = kidX21[fd_3D57_0C46];
+            y = kidY21[fd_3D57_0C46];
+            break;
+        }
+    } else if (fd_3D57_0C48 < 39) {
+        frame = outF[fd_3D57_0C48 - 30];
+        x = outX[fd_3D57_0C48 - 30];
+        y = outY[fd_3D57_0C48 - 30];
+        if (SRand1(outChance[fd_3D57_0C48 - 30]) == 0) {
+            fd_3D57_0C48 = outNext[fd_3D57_0C48 - 30];
+            fd_3D57_0C46 = 0;
+        }
+    }
+    fd_3D57_0C28 = 0;
+    if (fd_3D57_0C48 == 38)
+        fd_3D57_0C30 = fd_3D57_0C28 = 1;
+    if (fd_3D57_0C48 == 20 && fd_3D57_0C46 > 2)
+        fd_3D57_0C28 = 1;
+    if (fd_3D57_0C48 == 21 && fd_3D57_0C46 < 3)
+        fd_3D57_0C28 = 1;
+    fd_3D57_0C2C = x;
+    fd_3D57_0C2E = y;
+    fd_3D57_0C32 = frame;
+    if (fd_3D57_07C8 == 0 && fd_50F6_035C < 2) {
+        if ((fd_3D57_0C46 == 3 && fd_3D57_0C48 == 20 && fd_3D57_0C32 == 900) ||
+            (fd_3D57_0C46 == 1 && fd_3D57_0C48 == 21 && fd_3D57_0C32 == 903) ||
+            (fd_3D57_0C46 == 6 && fd_3D57_0C48 == 20 && fd_3D57_0C32 == 6) ||
+            (fd_3D57_0C46 == 3 && fd_3D57_0C48 == 21 && fd_3D57_0C32 == 1))
+            f_00DF_00E8(0x18, 0, 0);
+    }
+    fd_50F6_0246 = (fd_3D57_0C2C + fd_3D57_0C2E - 200) / 28;
+    fd_3D57_0C3E = 0;
+    fd_3D57_0C42 = !fd_3D57_0C42;
+    fd_50F6_023E = (fd_3D57_0C2E - 38) / 10;
+    if (fd_50F6_023E != fd_50F6_07CA[1] || fd_50F6_07CA[0] != fd_50F6_0246)
+        return;
+    i = (fd_50F6_07CA[0] << 4) + fd_50F6_07CA[1];
+    if (i == 0 || i == 1 || i == 16 || i == 32)
+        return;
+    if (fd_3D57_0C32 >= 0 && fd_3D57_0C32 < 12)
+        fd_3D57_0C30 = frameDir[fd_3D57_0C32];
+    else
+        fd_3D57_0C30 = 2;
+    fd_3D57_0C3E = 1;
+    fd_50F6_046A = (fd_3D57_0C2E - 38) % 10;
+    fd_50F6_03E0 = (fd_3D57_0C2C + fd_3D57_0C2E - 200) % 28;
+    fd_50F6_03E0 = ((fd_50F6_03E0 << 2) + 6) & 0x7f;
+    fd_50F6_046A = ((fd_50F6_046A + 1) * 6) & 0x3f;
+    if (fd_3D57_0C30 & 1) {
+        if (fd_3D57_0C42 != 0)
+            fd_50F6_046A += 6;
+        else
+            fd_50F6_046A -= 6;
+    } else {
+        if (fd_3D57_0C42 != 0)
+            fd_50F6_03E0 += 6;
+        else
+            fd_50F6_03E0 -= 6;
+    }
+    FootFall(fd_50F6_03E0, fd_50F6_046A);
+    f_00DF_00E8(9, 0, 0x7e);
+    for (i = 0; i < (fd_50F6_0330 + fd_50F6_0350) << 3; i++) {
+        x = SRand128();
+        y = SRand64();
+        if (fd_3E1D_6180[x][y] != 0) {
+            fd_50F6_0F18 = f_0EC1_0291(x, y);
+            if (fd_50F6_0F18 >= 0) {
+                DeadAntHere(x, y, fd_3E1D_AD3B[fd_50F6_0F18] & 0x80);
+                fd_3E1D_6180[x][y] = fd_3E1D_AD3B[fd_50F6_0F18] = 0;
+            }
+        }
+        if ((fd_50F6_0F12 >> 4) == x && (fd_50F6_0F34 >> 4) == y)
+            f_0CDB_0DE0();
+    }
+    if (fd_50F6_0EAC == 2 && fd_50F6_048C == 1 && SRand4() == 0)
+        o22_39C7_0D21(9);
+}
+/* SCAFFOLD END */
+
+extern int far fd_50F6_10AC;
+extern int far fd_50F6_0210;
+extern int far fd_50F6_10BA;
+extern int far fd_50F6_0208;
+extern int far fd_50F6_06AA;
+extern int far fd_50F6_07C8;
+extern int far fd_50F6_073A;
+extern int far fd_50F6_0850;
+extern void far f_00F8_0395(void);
+extern int far SRand2(void);
+extern long far fd_50F6_383A;
+
+/* SimBird (Win16 pair MEDIUM, unit order): the bird flies over the yard and eats swarms */
+void far o06_35F5_11FF(void)
+{
+    int d;
+    int step;
+    int oldY;
+    int soundValue;
+    long now;
+
+    if (fd_50F6_10A0 != 0) {
+        if (fd_50F6_10A0 == 1)
+            fd_50F6_10AC += 0x10;
+        else
+            fd_50F6_10AC += 8;
+        if (fd_50F6_10A0 == 1) {
+            d = fd_50F6_0210 - fd_50F6_10BA;
+            if (d != 0) {
+                if (((d >= 0) ? d : -d) >= 4)
+                    fd_50F6_10BA += d > 0 ? 4 : -4;
+                else
+                    fd_50F6_10BA += d > 0 ? 1 : -1;
+            }
+        } else
+            fd_50F6_10BA -= 8;
+        fd_50F6_108C = (fd_50F6_108C + 1) & 1;
+        if (fd_50F6_10AC < 0 || fd_50F6_10AC > 0x1ff || fd_50F6_10BA < 0 || fd_50F6_10BA > 0xff) {
+            fd_50F6_10A0 = 0;
+            fd_50F6_107E = fd_50F6_383A + 30L;
+            return;
+        }
+        if (fd_50F6_10A0 != 1)
+            return;
+        if (fd_50F6_10AC < fd_50F6_0208 || fd_50F6_10BA < fd_50F6_0210 - 4 ||
+            fd_50F6_10BA > fd_50F6_0210 + 4)
+            return;
+        if (fd_50F6_06AA > 0)
+            fd_50F6_06AA -= (fd_50F6_06AA + 7) >> 3;
+        if (fd_50F6_07C8 > 0) {
+            fd_50F6_07C8 -= (fd_50F6_07C8 + 7) >> 3;
+            f_00F8_0395();
+        }
+        if (fd_50F6_073A > 0)
+            fd_50F6_073A -= (fd_50F6_073A + 7) >> 3;
+        if (fd_50F6_0850 > 0)
+            fd_50F6_0850 -= (fd_50F6_0850 + 7) >> 3;
+        if (fd_3D57_07C8 == 0 && fd_50F6_035C < 2) {
+            if (SRand2() == 0)
+                f_00DF_00E8(7, 0, 6);
+        }
+        fd_50F6_10A0 = 2;
+    } else if (fd_50F6_383A > fd_50F6_107E) {
+        fd_50F6_107E = fd_50F6_383A + 20L;
+        if (fd_50F6_07CA[0] >= 5 && SRand2() == 0 &&
+            (fd_50F6_06AA > 0 || fd_50F6_073A > 0)) {
+            fd_50F6_0208 = fd_50F6_07CA[0] * 0x1c - fd_50F6_07CA[1] * 10 + 0xb2;
+            fd_50F6_0210 = fd_50F6_07CA[1] * 10 + 0x2e;
+            fd_50F6_10A0 = 1;
+            fd_50F6_10AC = 0;
+            fd_50F6_10BA = SRand64() + 4;
+            fd_50F6_108C = 0;
+        }
+    }
+}
+
 /* SCAFFOLD BEGIN: unrecovered same-module functions */
-void far SimKidInside(void) {}
 void far FootFall(int x, int y) {}
 void far o06_35F5_1CEA(int x, int y) {}
-void far o06_35F5_11FF(void) {}
 void far o06_35F5_14CC(void) {}
 void far o06_35F5_1803(void) {}
 void far o06_35F5_1E54(void) {}

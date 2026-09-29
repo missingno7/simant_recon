@@ -19,7 +19,7 @@
     "CONST": {
      "seg": 21939,
      "off": 33878,
-     "size": 110
+     "size": 148
     },
     "_DATA": {
      "seg": 21939,
@@ -29,7 +29,7 @@
    },
    "lang": "c",
    "source": "src/S06/m35F5.c",
-   "source_sha256": "230ac4c3775001a0e9f09915b712b52e2497e0e3d87192226e58d16870783e5e",
+   "source_sha256": "7754440501557527c9f8aaed8b805fe44344c4b5a20643434ed5b3adbb1fee34",
    "claims": [
     {
      "name": "o06_35F5_0000",
@@ -129,18 +129,28 @@
      "kind": "C",
      "provenance": "EXACT_NATURAL",
      "reloc_order": "GROUPED"
+    },
+    {
+     "name": "o06_35F5_11FF",
+     "unit": "S06",
+     "seg": 13813,
+     "off": 4607,
+     "size": 717,
+     "target_sha256": "5db3f3ed674e81879512f5e57cb43eed2dd9d075a253ce0163870c85d13f1b81",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL",
+     "reloc_order": "GROUPED"
     }
    ],
    "scaffold": [
     "FootFall",
     "SimKidInside",
-    "o06_35F5_11FF",
     "o06_35F5_14CC",
     "o06_35F5_1803",
     "o06_35F5_1CEA",
     "o06_35F5_1E54"
    ],
-   "object_sha256": "a440a0ea6f3ea182e2d541ae84b8dd2ed00fd2a97f2360e2025f47b98df9bc14"
+   "object_sha256": "b48e21c97f0446b55c4934f8c9923a6f263a1f0d34b234e8f7cd4602eb0d56f2"
   },
   "S07:35F5": {
    "unit": "S07",
@@ -441,7 +451,7 @@
     "CONST": {
      "seg": 21939,
      "off": 35138,
-     "size": 76
+     "size": 90
     },
     "_DATA": {
      "seg": 21939,
@@ -451,7 +461,7 @@
    },
    "lang": "c",
    "source": "src/S25/m3BA4.c",
-   "source_sha256": "28722b8053431898b9ab274ae5f6c5526dbba175588970be19a29ac2eaa42061",
+   "source_sha256": "4c6a9a36e1969de0f1012d0b6d7d6d302f2d3ff9e654bb682ea93b01e82ee6ed",
    "claims": [
     {
      "name": "DoAntSimY",
@@ -500,15 +510,41 @@
      "provenance": "EXACT_STEERED",
      "steered": "DoAntMoveY scaffold stand-in: CONST word order + 21 filler lines -> /Zd LINNUM (52/record) LEDATA boundary that fixes within-group reloc order of o25_3BA4_0999",
      "reloc_order": "GROUPED"
+    },
+    {
+     "name": "o25_3BA4_1581",
+     "unit": "S25",
+     "seg": 15268,
+     "off": 5505,
+     "size": 261,
+     "target_sha256": "531016239825f5bc1f53ef58733bf8a7706bd234593683a28fe3968fe7b58926",
+     "kind": "C",
+     "provenance": "EXACT_STEERED",
+     "steered": "DoAntMoveY scaffold stand-in: CONST word order + 21 filler lines -> /Zd LINNUM (52/record) LEDATA boundary that fixes within-group reloc order of o25_3BA4_0999",
+     "reloc_order": "GROUPED"
+    },
+    {
+     "name": "o25_3BA4_188A",
+     "unit": "S25",
+     "seg": 15268,
+     "off": 6282,
+     "size": 171,
+     "target_sha256": "f4c9d8bbffde74f0184a4a0316f305a0869b210054d6405ce5a8673a65c15841",
+     "kind": "C",
+     "provenance": "EXACT_STEERED",
+     "steered": "DoAntMoveY scaffold stand-in: CONST word order + 21 filler lines -> /Zd LINNUM (52/record) LEDATA boundary that fixes within-group reloc order of o25_3BA4_0999",
+     "reloc_order": "EXACT"
     }
    ],
    "scaffold": [
     "DoAntMoveY",
     "ExitNest",
     "o25_3BA4_1035",
+    "o25_3BA4_13AB",
+    "o25_3BA4_1686",
     "o25_3BA4_1A9F"
    ],
-   "object_sha256": "3a4e5caf5cf5b6be1bf0b01cf4855301988f647b7ad3e75e6ca0b0551f6e03f9"
+   "object_sha256": "abaa9bc5312259062565e1c15d29573aa1e424db8ebb66f13473720351f56d42"
   },
   "root:0093": {
    "unit": "root",
@@ -2300,6 +2336,540 @@
     "f_14EE_0D71"
    ],
    "object_sha256": "4ebdf43d9ef57aa99283b1603eee45e7ddf02514df6adffac5ebd076a20dfc43"
+  },
+  "root:171C": {
+   "unit": "root",
+   "seg": 5916,
+   "profile": "msc600a",
+   "flags": [
+    "/AL",
+    "/Oeg",
+    "/Gs"
+   ],
+   "placements": {
+    "_DATA": {
+     "seg": 21939,
+     "off": 12052,
+     "size": 1726
+    },
+    "CONST": {
+     "seg": 21939,
+     "off": 35234,
+     "size": 14
+    },
+    "_BSS": {
+     "seg": 21939,
+     "off": 35938,
+     "size": 18
+    }
+   },
+   "lang": "c",
+   "source": "src/root/m171C.c",
+   "source_sha256": "5cbc22ff9079fd4d1c5fe23d4993504910b285704d338905b852af395501ec58",
+   "claims": [
+    {
+     "name": "f_171C_068C",
+     "unit": "root",
+     "seg": 5916,
+     "off": 1676,
+     "size": 306,
+     "target_sha256": "16c860fd505d3efc24d7084a0a0425d7378c63fe8eca4ee64d831061bf6027c8",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL",
+     "reloc_order": "EXACT"
+    },
+    {
+     "name": "f_171C_1246",
+     "unit": "root",
+     "seg": 5916,
+     "off": 4678,
+     "size": 22,
+     "target_sha256": "713c1e88b9a7e8375cf9f306547d567cc00f7224f4a5f02353090a73c4e6d6d0",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL",
+     "reloc_order": "EXACT"
+    },
+    {
+     "name": "f_171C_13CA",
+     "unit": "root",
+     "seg": 5916,
+     "off": 5066,
+     "size": 26,
+     "target_sha256": "602c57e73f951b9111bd2166d578814264bc2ea7562e6750156096d12142a5ad",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL",
+     "reloc_order": "EXACT"
+    },
+    {
+     "name": "f_171C_13E4",
+     "unit": "root",
+     "seg": 5916,
+     "off": 5092,
+     "size": 218,
+     "target_sha256": "8c233443273771e2c551f1ac005d4354a58d93d26295928323548bfbcc9e43f5",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL",
+     "reloc_order": "GROUPED"
+    },
+    {
+     "name": "f_171C_1FC2",
+     "unit": "root",
+     "seg": 5916,
+     "off": 8130,
+     "size": 196,
+     "target_sha256": "0e2240f99617b1e9308a177841fe40e87dc33d679cb7443849bfe64a3c20810d",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL",
+     "reloc_order": "EXACT"
+    },
+    {
+     "name": "f_171C_2136",
+     "unit": "root",
+     "seg": 5916,
+     "off": 8502,
+     "size": 90,
+     "target_sha256": "181f46668def18767dca44a1702a07a5988606da9f296402af4982a878b5479f",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL",
+     "reloc_order": "EXACT"
+    },
+    {
+     "name": "f_171C_21CC",
+     "unit": "root",
+     "seg": 5916,
+     "off": 8652,
+     "size": 60,
+     "target_sha256": "9880d89cda6f230d8756f02aad2e3b3859e802efe086b2977186c51ea313dbd7",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL",
+     "reloc_order": "EXACT"
+    },
+    {
+     "name": "f_171C_001E",
+     "unit": "root",
+     "seg": 5916,
+     "off": 30,
+     "size": 2,
+     "target_sha256": "c8a51d4867300f9df2241e4d32f72b027916ca03fcef86fac7fa83fae59c529c",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL",
+     "reloc_order": "EXACT"
+    },
+    {
+     "name": "f_171C_0020",
+     "unit": "root",
+     "seg": 5916,
+     "off": 32,
+     "size": 20,
+     "target_sha256": "96d79deabd187cd9e468f36ce69870e88ff1000e8f13414521b4f7ff3b4ad4b6",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL",
+     "reloc_order": "EXACT"
+    },
+    {
+     "name": "f_171C_0034",
+     "unit": "root",
+     "seg": 5916,
+     "off": 52,
+     "size": 198,
+     "target_sha256": "772e1acd6b9878c20ceaf974a44674bb684b6bd9ce0e4756a3b0d9fb2e577356",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL",
+     "reloc_order": "GROUPED"
+    },
+    {
+     "name": "f_171C_00FA",
+     "unit": "root",
+     "seg": 5916,
+     "off": 250,
+     "size": 102,
+     "target_sha256": "c364d52aff96ed62ff44962da240d47a4e51742807b6fed059e46039460cbc2d",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL",
+     "reloc_order": "EXACT"
+    },
+    {
+     "name": "f_171C_02CA",
+     "unit": "root",
+     "seg": 5916,
+     "off": 714,
+     "size": 66,
+     "target_sha256": "171ec04f9e534a54db77a2d760401e3b1f29a334a590ea6000e7ec1ec6084d3f",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL",
+     "reloc_order": "GROUPED"
+    },
+    {
+     "name": "f_171C_0674",
+     "unit": "root",
+     "seg": 5916,
+     "off": 1652,
+     "size": 2,
+     "target_sha256": "c8a51d4867300f9df2241e4d32f72b027916ca03fcef86fac7fa83fae59c529c",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL",
+     "reloc_order": "EXACT"
+    },
+    {
+     "name": "f_171C_0676",
+     "unit": "root",
+     "seg": 5916,
+     "off": 1654,
+     "size": 2,
+     "target_sha256": "c8a51d4867300f9df2241e4d32f72b027916ca03fcef86fac7fa83fae59c529c",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL",
+     "reloc_order": "EXACT"
+    },
+    {
+     "name": "f_171C_0678",
+     "unit": "root",
+     "seg": 5916,
+     "off": 1656,
+     "size": 20,
+     "target_sha256": "3242db1c7ab939a3186598b3182e0b84629cf8fb7f90d5888390b565caa3dec3",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL",
+     "reloc_order": "EXACT"
+    },
+    {
+     "name": "f_171C_0EDE",
+     "unit": "root",
+     "seg": 5916,
+     "off": 3806,
+     "size": 12,
+     "target_sha256": "c6b80446970716fd7308d3fbc3a510018d0f7464276b05f283bad2b088f66563",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL",
+     "reloc_order": "EXACT"
+    },
+    {
+     "name": "f_171C_125C",
+     "unit": "root",
+     "seg": 5916,
+     "off": 4700,
+     "size": 366,
+     "target_sha256": "d75a1fde5949e8e4b128328f03352176dd569ade9113a5ce7ecdf604b63a4c09",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL",
+     "reloc_order": "GROUPED"
+    },
+    {
+     "name": "f_171C_14BE",
+     "unit": "root",
+     "seg": 5916,
+     "off": 5310,
+     "size": 110,
+     "target_sha256": "38079231ebc74bc8b7106bb71ad5aa729ca067f3683e665cdbf8581817f6fefe",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL",
+     "reloc_order": "EXACT"
+    },
+    {
+     "name": "f_171C_152C",
+     "unit": "root",
+     "seg": 5916,
+     "off": 5420,
+     "size": 118,
+     "target_sha256": "a31595f137514de2a9784386be0a7eb76a7d14941055c3666f6abfa6c07f50c6",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL",
+     "reloc_order": "EXACT"
+    },
+    {
+     "name": "f_171C_1686",
+     "unit": "root",
+     "seg": 5916,
+     "off": 5766,
+     "size": 100,
+     "target_sha256": "f44185597c0d610b75c796a78bd1eaadca44f0eceb50e7935a4dcbb3d28aa962",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL",
+     "reloc_order": "EXACT"
+    },
+    {
+     "name": "f_171C_16EA",
+     "unit": "root",
+     "seg": 5916,
+     "off": 5866,
+     "size": 102,
+     "target_sha256": "f7a31e953f8bb57c8a77fa8e0a2456ffae4ec235191cf14fdbda9ae1dae3d145",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL",
+     "reloc_order": "EXACT"
+    },
+    {
+     "name": "f_171C_1750",
+     "unit": "root",
+     "seg": 5916,
+     "off": 5968,
+     "size": 34,
+     "target_sha256": "b340f8d322e88d22b0db390d7fea01d27cef9cce97ed094b0fbfbdc14165e270",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL",
+     "reloc_order": "EXACT"
+    },
+    {
+     "name": "f_171C_1772",
+     "unit": "root",
+     "seg": 5916,
+     "off": 6002,
+     "size": 34,
+     "target_sha256": "567985c3a3ede5104517ac15651a0a02ce367adda173695a1a07b93ba4ecc031",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL",
+     "reloc_order": "EXACT"
+    },
+    {
+     "name": "f_171C_1794",
+     "unit": "root",
+     "seg": 5916,
+     "off": 6036,
+     "size": 112,
+     "target_sha256": "087744078915bf326607d1130b2fcd9e55889b39eb631aa470f61ef4dc624c47",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL",
+     "reloc_order": "EXACT"
+    },
+    {
+     "name": "f_171C_1A9E",
+     "unit": "root",
+     "seg": 5916,
+     "off": 6814,
+     "size": 54,
+     "target_sha256": "9a247512e7ba6d9dc4da2e80af3669d42a8b5e73226b785bdd5532f329fd4b1c",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL",
+     "reloc_order": "EXACT"
+    },
+    {
+     "name": "f_171C_1AD4",
+     "unit": "root",
+     "seg": 5916,
+     "off": 6868,
+     "size": 88,
+     "target_sha256": "94219f9b9de83cdd6af536a41692f6e6b3fbcf0b70fb8cbfcf19ce93ef3c27ea",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL",
+     "reloc_order": "EXACT"
+    },
+    {
+     "name": "f_171C_1B2C",
+     "unit": "root",
+     "seg": 5916,
+     "off": 6956,
+     "size": 88,
+     "target_sha256": "3e6fae611ae57350f81e7e02c5f71c30101df16671d8405ed7dbd9baa3b72c1d",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL",
+     "reloc_order": "EXACT"
+    },
+    {
+     "name": "f_171C_1B84",
+     "unit": "root",
+     "seg": 5916,
+     "off": 7044,
+     "size": 54,
+     "target_sha256": "903f3387486481e68041f559bb12d1ecca0d0c368e1b3fa0289018e6ad86f136",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL",
+     "reloc_order": "EXACT"
+    },
+    {
+     "name": "f_171C_1BBA",
+     "unit": "root",
+     "seg": 5916,
+     "off": 7098,
+     "size": 80,
+     "target_sha256": "40497053ca61c4e10db03298097a6a0d01b7cf74dde186cb3994af4e34685752",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL",
+     "reloc_order": "EXACT"
+    },
+    {
+     "name": "f_171C_1C0A",
+     "unit": "root",
+     "seg": 5916,
+     "off": 7178,
+     "size": 18,
+     "target_sha256": "3ee0afaeaff6b5b14c8bff1b1dc598ef91cf85117143c6b098484726bd70f4fa",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL",
+     "reloc_order": "EXACT"
+    },
+    {
+     "name": "f_171C_1C1C",
+     "unit": "root",
+     "seg": 5916,
+     "off": 7196,
+     "size": 102,
+     "target_sha256": "a066026af1e65feb7ae61ebdf9b09582558656b1e9ad6d30d0c18fe39107bdba",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL",
+     "reloc_order": "EXACT"
+    },
+    {
+     "name": "f_171C_1C82",
+     "unit": "root",
+     "seg": 5916,
+     "off": 7298,
+     "size": 84,
+     "target_sha256": "dcbdc63a844af4329cd2aa4e9ad79c69e4ddc6864be4f289062d25ba4daf0c4b",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL",
+     "reloc_order": "EXACT"
+    },
+    {
+     "name": "f_171C_1CD6",
+     "unit": "root",
+     "seg": 5916,
+     "off": 7382,
+     "size": 106,
+     "target_sha256": "14eac7af1ada5dea4278b317900bd427f9c7aa0493c84f6dffcb347c5c9099e7",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL",
+     "reloc_order": "EXACT"
+    },
+    {
+     "name": "f_171C_1E86",
+     "unit": "root",
+     "seg": 5916,
+     "off": 7814,
+     "size": 20,
+     "target_sha256": "7c8935aacc5176f1f104b7380ba441a1c14aa9f88bcc06635aeb68937581a0e6",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL",
+     "reloc_order": "EXACT"
+    },
+    {
+     "name": "f_171C_1E9A",
+     "unit": "root",
+     "seg": 5916,
+     "off": 7834,
+     "size": 96,
+     "target_sha256": "57754d059e75eb43bb511249301eaa25ad3179dde38f70fba1bdf570a41ec3a1",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL",
+     "reloc_order": "EXACT"
+    },
+    {
+     "name": "f_171C_1EFA",
+     "unit": "root",
+     "seg": 5916,
+     "off": 7930,
+     "size": 88,
+     "target_sha256": "d9cf6ab5c41e13f335b75e7366b8fb291b952f9d9d1618fbb5a0f0af11bbf46b",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL",
+     "reloc_order": "EXACT"
+    },
+    {
+     "name": "f_171C_1F52",
+     "unit": "root",
+     "seg": 5916,
+     "off": 8018,
+     "size": 112,
+     "target_sha256": "a9611ff541d5032e111e8e52ca0057bd3444c391c722017d045a1580214ab818",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL",
+     "reloc_order": "EXACT"
+    },
+    {
+     "name": "f_171C_20E2",
+     "unit": "root",
+     "seg": 5916,
+     "off": 8418,
+     "size": 84,
+     "target_sha256": "7e02017820d78eb740a0b1627e4393d86c2a08210fa408970500200b7248480f",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL",
+     "reloc_order": "EXACT"
+    },
+    {
+     "name": "f_171C_2190",
+     "unit": "root",
+     "seg": 5916,
+     "off": 8592,
+     "size": 60,
+     "target_sha256": "a5ef542485dbaecaf4aebbac9522fe2d174a0aa0e062aaadd0be7dc626026fff",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL",
+     "reloc_order": "EXACT"
+    },
+    {
+     "name": "f_171C_2208",
+     "unit": "root",
+     "seg": 5916,
+     "off": 8712,
+     "size": 14,
+     "target_sha256": "57960131d609ce93b2082a39be260d7711d618b4d1b82d3a2ca51a3302fa6adc",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL",
+     "reloc_order": "EXACT"
+    },
+    {
+     "name": "f_171C_2216",
+     "unit": "root",
+     "seg": 5916,
+     "off": 8726,
+     "size": 96,
+     "target_sha256": "e58fe1b66bfee13cb2f334a97c21df7a8c9411b6794990a4c489cebfb1475d68",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL",
+     "reloc_order": "EXACT"
+    },
+    {
+     "name": "f_171C_2276",
+     "unit": "root",
+     "seg": 5916,
+     "off": 8822,
+     "size": 18,
+     "target_sha256": "32c52856ff74a050e96e1439a81f977b3669e5ed31973d6e15288b369dd12188",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL",
+     "reloc_order": "EXACT"
+    },
+    {
+     "name": "f_171C_2288",
+     "unit": "root",
+     "seg": 5916,
+     "off": 8840,
+     "size": 122,
+     "target_sha256": "ea883eaf30edf0206d4310840b2824bf82de0aaf22270119f924f9fb92861cff",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL",
+     "reloc_order": "EXACT"
+    },
+    {
+     "name": "f_171C_2302",
+     "unit": "root",
+     "seg": 5916,
+     "off": 8962,
+     "size": 20,
+     "target_sha256": "1e38c46ec78009c80a0af7b096de4a54c222ca5e4d087eb6a1a0bfc2e60e37b9",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL",
+     "reloc_order": "EXACT"
+    }
+   ],
+   "scaffold": [
+    "f_171C_0002",
+    "f_171C_0160",
+    "f_171C_030C",
+    "f_171C_09CC",
+    "f_171C_0A5C",
+    "f_171C_0ADC",
+    "f_171C_0BE2",
+    "f_171C_0CF4",
+    "f_171C_0EEA",
+    "f_171C_0FBC",
+    "f_171C_11F2",
+    "f_171C_15A2",
+    "f_171C_1804",
+    "f_171C_18A6",
+    "f_171C_1D40"
+   ],
+   "object_sha256": "92df92c4cc8d55ff7a0080c51f2dd00e0a5b87629170575ba3879fca328c9e5a"
   },
   "root:1959": {
    "unit": "root",
