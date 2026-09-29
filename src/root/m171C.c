@@ -735,7 +735,6 @@ void far f_171C_152C(Handle h)
     HDR(h)->age = s_2F30++;
 }
 
-/* SCAFFOLD BEGIN: code-exact draft; long paras + volatile type is a steering guess (natural forms keep type in CX); blocked by within-group relocation order */
 void far f_171C_15A2(Handle h, int flags)
 {
     long paras;
@@ -779,7 +778,6 @@ void far f_171C_15A2(Handle h, int flags)
     }
     HDR(h)->type = flags;
 }
-/* SCAFFOLD END */
 
 int far f_171C_1686(Handle h)
 {

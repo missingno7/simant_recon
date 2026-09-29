@@ -3200,6 +3200,471 @@
    ],
    "object_sha256": "17771767a007c3e08652724e1776f84860bfa29cc9420be5ee0b21b64e311b8d"
   },
+  "root:1383": {
+   "unit": "root",
+   "seg": 4995,
+   "profile": "msc600a",
+   "flags": [
+    "/AL",
+    "/Os",
+    "/Oe",
+    "/Og"
+   ],
+   "placements": {
+    "CONST": {
+     "seg": 21939,
+     "off": 33534,
+     "size": 120
+    }
+   },
+   "lang": "c",
+   "extent": {
+    "start": 79922,
+    "end": 84326
+   },
+   "source": "src/root/m1383.c",
+   "source_sha256": "9bb367ad32e393e69e2c2ac58bf73aab1b9b277d9f2853b85d19ba96d49cccee",
+   "claims": [
+    {
+     "name": "GetStrategy",
+     "unit": "root",
+     "seg": 4995,
+     "off": 2,
+     "size": 297,
+     "target_sha256": "b14be7c92a45b698d859c898c00328f5551123d62f90b3a0f5e79405bd616eb9",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL",
+     "reloc_order": "GROUPED"
+    },
+    {
+     "name": "GstrB",
+     "unit": "root",
+     "seg": 4995,
+     "off": 299,
+     "size": 205,
+     "target_sha256": "0531e5df2b8f63fa62c5cfe5a398c9988b78295ad5ecf3e7ccb07e6e89d26690",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL",
+     "reloc_order": "GROUPED"
+    },
+    {
+     "name": "SetCasteProd",
+     "unit": "root",
+     "seg": 4995,
+     "off": 504,
+     "size": 254,
+     "target_sha256": "ee46775bfe2b841610de5fccc3d59e11127213e83c19a68acfd1a4bb5543b37a",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL",
+     "reloc_order": "EXACT"
+    },
+    {
+     "name": "SetModeProd",
+     "unit": "root",
+     "seg": 4995,
+     "off": 758,
+     "size": 189,
+     "target_sha256": "3c8a5164a3daae17002609332d5c2419eb45f842d735acd104408b139cac7f06",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL",
+     "reloc_order": "GROUPED"
+    },
+    {
+     "name": "GstrR",
+     "unit": "root",
+     "seg": 4995,
+     "off": 947,
+     "size": 338,
+     "target_sha256": "6f2ac875d9e970f73afa429ae68a549a7a727206725e20439189e909153cbd68",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL",
+     "reloc_order": "GROUPED"
+    },
+    {
+     "name": "StartAttack",
+     "unit": "root",
+     "seg": 4995,
+     "off": 1285,
+     "size": 78,
+     "target_sha256": "754aafe87307e34ba28676a6000225c04aade7c8d9efc5f36224547be0285df0",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL",
+     "reloc_order": "GROUPED"
+    },
+    {
+     "name": "ForceModeA",
+     "unit": "root",
+     "seg": 4995,
+     "off": 1363,
+     "size": 246,
+     "target_sha256": "30c17494333c96ba95d298b01750037385e8e96d66a1a90593cb42a8a04b0623",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL",
+     "reloc_order": "EXACT"
+    },
+    {
+     "name": "ForceModeB",
+     "unit": "root",
+     "seg": 4995,
+     "off": 1609,
+     "size": 185,
+     "target_sha256": "7cbee59d7bd623eb78731dcfd46475b0953a8d434077ad82c598a778cff43550",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL",
+     "reloc_order": "EXACT"
+    },
+    {
+     "name": "Recruit",
+     "unit": "root",
+     "seg": 4995,
+     "off": 1794,
+     "size": 211,
+     "target_sha256": "62cf7bf8e44ac92b047acfe17dca8536e7a5e633afae05f272366d4f1eab88fe",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL",
+     "reloc_order": "EXACT"
+    },
+    {
+     "name": "UnRecruit",
+     "unit": "root",
+     "seg": 4995,
+     "off": 2005,
+     "size": 223,
+     "target_sha256": "a1450bb96ced5d90f9c5a3bf0e45a26a8dbc4b6f8a16d9be0d18fce0c9f25ac9",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL",
+     "reloc_order": "EXACT"
+    },
+    {
+     "name": "RecruitRed",
+     "unit": "root",
+     "seg": 4995,
+     "off": 2228,
+     "size": 131,
+     "target_sha256": "f847b2845739eefcefa99a92f8c60f78c419776dab8fc0f2a9153790f791f267",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL",
+     "reloc_order": "EXACT"
+    },
+    {
+     "name": "UnRecruitRed",
+     "unit": "root",
+     "seg": 4995,
+     "off": 2359,
+     "size": 63,
+     "target_sha256": "ddc4ecbcc295cfb2d06078465686a4570aeabcf389d67270f350f4e8b2cdeea0",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL",
+     "reloc_order": "EXACT"
+    },
+    {
+     "name": "GetNewMode",
+     "unit": "root",
+     "seg": 4995,
+     "off": 2422,
+     "size": 37,
+     "target_sha256": "db9e8333508ecb940d78b36303d8eae7fd71ac6fc4ef36418f606695f7168107",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL",
+     "reloc_order": "EXACT"
+    },
+    {
+     "name": "GetNewModeB",
+     "unit": "root",
+     "seg": 4995,
+     "off": 2459,
+     "size": 149,
+     "target_sha256": "a232992252fd5f26e95c52788b30203c12ef29d29dc25bc0c4f7a955f2ca4f81",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL",
+     "reloc_order": "EXACT"
+    },
+    {
+     "name": "GetNewModeR",
+     "unit": "root",
+     "seg": 4995,
+     "off": 2608,
+     "size": 101,
+     "target_sha256": "38d33c9e60a6874956cf659cc15c573086c2d3b2c690bc196376497cd2439ae0",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL",
+     "reloc_order": "EXACT"
+    },
+    {
+     "name": "GetForageDir",
+     "unit": "root",
+     "seg": 4995,
+     "off": 2709,
+     "size": 405,
+     "target_sha256": "0e648bff9cd363cad5420ce5cfb7f2ac02c6d14b6d75c4ba62bcb275a489eb53",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL",
+     "reloc_order": "GROUPED"
+    },
+    {
+     "name": "GetNestDir",
+     "unit": "root",
+     "seg": 4995,
+     "off": 3114,
+     "size": 418,
+     "target_sha256": "c6f612150dcda915cb9b045f1512df28a3a399aad538aec2088d7d23eab42cfd",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL",
+     "reloc_order": "GROUPED"
+    },
+    {
+     "name": "GetAlarmDir",
+     "unit": "root",
+     "seg": 4995,
+     "off": 3532,
+     "size": 189,
+     "target_sha256": "a26f310809084bc59ff155da567127a177b55ce6396eac3675550b72db17854f",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL",
+     "reloc_order": "EXACT"
+    },
+    {
+     "name": "GetRandDir",
+     "unit": "root",
+     "seg": 4995,
+     "off": 3721,
+     "size": 67,
+     "target_sha256": "dc8a92811d90434476ee01b42b59ce718fb5e7846b92ee0ffef46e1692f43e87",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL",
+     "reloc_order": "EXACT"
+    },
+    {
+     "name": "GetDefendDir",
+     "unit": "root",
+     "seg": 4995,
+     "off": 3788,
+     "size": 258,
+     "target_sha256": "02a1b848bdba104cf66c2e8873f459a6744acc98f6987974cc456f867c4de7d8",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL",
+     "reloc_order": "GROUPED"
+    },
+    {
+     "name": "GetRedDefendDir",
+     "unit": "root",
+     "seg": 4995,
+     "off": 4046,
+     "size": 218,
+     "target_sha256": "f045a9acc609439d8830b46c8eabb7973ac051eb2155665fce34df0ee258f607",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL",
+     "reloc_order": "EXACT"
+    },
+    {
+     "name": "Bounce",
+     "unit": "root",
+     "seg": 4995,
+     "off": 4264,
+     "size": 142,
+     "target_sha256": "dd633ea9db9e5e31afebff874317ee6e9e2b71910d2e3faedbaa1f48e2d6b8a5",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL",
+     "reloc_order": "EXACT"
+    }
+   ],
+   "scaffold": [],
+   "object_sha256": "b61447346ae432c82b8f8cff9a44a05259446eaa3f020c72ae6f6b83c2dbef79"
+  },
+  "root:1496": {
+   "unit": "root",
+   "seg": 5270,
+   "profile": "msc600a",
+   "flags": [
+    "/AL",
+    "/Os",
+    "/Oe",
+    "/Og"
+   ],
+   "placements": {
+    "CONST": {
+     "seg": 21939,
+     "off": 33654,
+     "size": 20
+    }
+   },
+   "lang": "c",
+   "extent": {
+    "start": 84326,
+    "end": 85730
+   },
+   "source": "src/root/m1496.c",
+   "source_sha256": "0d6cae0ce2929f35fecd58f5aa3728f3ee0a1c51c0d63cf5eef95542f0249803",
+   "claims": [
+    {
+     "name": "FillHolesBN",
+     "unit": "root",
+     "seg": 5270,
+     "off": 6,
+     "size": 131,
+     "target_sha256": "e3a3e94076431c40e0cee8756ef8c61e1c85490c9d0095cbb34f9c3d35daf31b",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL",
+     "reloc_order": "EXACT"
+    },
+    {
+     "name": "FillHolesRN",
+     "unit": "root",
+     "seg": 5270,
+     "off": 137,
+     "size": 131,
+     "target_sha256": "ef11f11ba07f7170aa236004974df226f540b50a8c1ced1eb6f2784ab63b60fa",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL",
+     "reloc_order": "EXACT"
+    },
+    {
+     "name": "ColonySmellBN",
+     "unit": "root",
+     "seg": 5270,
+     "off": 268,
+     "size": 71,
+     "target_sha256": "4f6535d66a5eaa53d721403b6716059a7433b3a5997cb9afdedb5593d63bf257",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL",
+     "reloc_order": "GROUPED"
+    },
+    {
+     "name": "ColonySmellRN",
+     "unit": "root",
+     "seg": 5270,
+     "off": 339,
+     "size": 71,
+     "target_sha256": "35dc0abd3895bf2b774d643209d883e1a5b0da8c909e8ef18d3a1ec70f96d26d",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL",
+     "reloc_order": "GROUPED"
+    },
+    {
+     "name": "ColonySmellBT",
+     "unit": "root",
+     "seg": 5270,
+     "off": 410,
+     "size": 100,
+     "target_sha256": "c15f604c4774f1941434e5c0ef2756a27eb92dda5b4a05dffda4a9c4e7f0469f",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL",
+     "reloc_order": "GROUPED"
+    },
+    {
+     "name": "ColonySmellRT",
+     "unit": "root",
+     "seg": 5270,
+     "off": 510,
+     "size": 96,
+     "target_sha256": "ce92d5baf0911ecea97e3a88351f3bffbc106faf19debb06cb4f92164688f8f6",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL",
+     "reloc_order": "GROUPED"
+    },
+    {
+     "name": "SmoothAlarm",
+     "unit": "root",
+     "seg": 5270,
+     "off": 606,
+     "size": 239,
+     "target_sha256": "c80ee68e03393017f55f75f0af09be89c8c6129d3ff224803d759c9b0b336227",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL",
+     "reloc_order": "GROUPED"
+    },
+    {
+     "name": "AlarmHere",
+     "unit": "root",
+     "seg": 5270,
+     "off": 845,
+     "size": 72,
+     "target_sha256": "6eada601f138317399bb74d456e243af3bf3f262885294155ae6dbfd0db3553f",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL",
+     "reloc_order": "EXACT"
+    },
+    {
+     "name": "AlarmHere2",
+     "unit": "root",
+     "seg": 5270,
+     "off": 917,
+     "size": 55,
+     "target_sha256": "e6abd3c70cceeeba22841fe4df577d46f363bdad2ce54db619209a367af4dd54",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL",
+     "reloc_order": "EXACT"
+    },
+    {
+     "name": "JamScentBN",
+     "unit": "root",
+     "seg": 5270,
+     "off": 972,
+     "size": 56,
+     "target_sha256": "a7f811e3a804a400aca4f2a5a8a46b2c75b6501b4697dae9cf307391ffb6d8f1",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL",
+     "reloc_order": "EXACT"
+    },
+    {
+     "name": "JamScentRN",
+     "unit": "root",
+     "seg": 5270,
+     "off": 1028,
+     "size": 56,
+     "target_sha256": "e10a96c54d66fafa35bb73aefc77700ef28880bdab7865d20d910dd6c539e39a",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL",
+     "reloc_order": "EXACT"
+    },
+    {
+     "name": "JamScentBT",
+     "unit": "root",
+     "seg": 5270,
+     "off": 1084,
+     "size": 56,
+     "target_sha256": "d4243ff52e0047f17888d4c7767a0c4db4ea3f11e0af59ab3595daa2fc28c750",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL",
+     "reloc_order": "EXACT"
+    },
+    {
+     "name": "JamScentRT",
+     "unit": "root",
+     "seg": 5270,
+     "off": 1140,
+     "size": 56,
+     "target_sha256": "3cd34565729d91de5c14b2911d61f539b88427a1df7106c8a5f6149b1f634dfa",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL",
+     "reloc_order": "EXACT"
+    },
+    {
+     "name": "DecTSmell",
+     "unit": "root",
+     "seg": 5270,
+     "off": 1196,
+     "size": 101,
+     "target_sha256": "e9683e7962fb4724a82f7f61a26b0488215306c79c85561c5dccc977d0b10ad5",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL",
+     "reloc_order": "EXACT"
+    },
+    {
+     "name": "GetSmellT",
+     "unit": "root",
+     "seg": 5270,
+     "off": 1297,
+     "size": 113,
+     "target_sha256": "1e1a919cee93804114fb4f7c41c7b59fd81e41d62b4df69bb8b80add64daa40b",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL",
+     "reloc_order": "EXACT"
+    }
+   ],
+   "scaffold": [],
+   "object_sha256": "79ef42fa9db2bcbcf9f32f09b552691a9559bdb02bf32d143d14d1306df25a63"
+  },
   "root:14EE": {
    "unit": "root",
    "seg": 5358,
@@ -3401,7 +3866,7 @@
    },
    "lang": "c",
    "source": "src/root/m171C.c",
-   "source_sha256": "c42645d7c3fe06d24da7e04fc63cd1c438daeb99ff37beedf5ad9895a7cd3201",
+   "source_sha256": "9c37418f59296e2bd51b02906309989eb731787e5d98ad63c72e3dd87769c68a",
    "claims": [
     {
      "name": "f_171C_068C",
@@ -4007,6 +4472,18 @@
      "kind": "C",
      "provenance": "EXACT_NATURAL",
      "reloc_order": "GROUPED"
+    },
+    {
+     "name": "f_171C_15A2",
+     "unit": "root",
+     "seg": 5916,
+     "off": 5538,
+     "size": 228,
+     "target_sha256": "ce0fa0e33ffe933517452e08d7215ef46935d191c2b82ce70ed989a341977274",
+     "kind": "C",
+     "provenance": "EXACT_STEERED",
+     "steered": "volatile int type in f_171C_15A2 -> old type kept in its [bp-6] home instead of CX; natural forms (int/unsigned/char/struct-free, inner scope, extra assignments) all keep it in CX",
+     "reloc_order": "WITHIN_GROUP_PENDING"
     }
    ],
    "scaffold": [
@@ -4014,8 +4491,7 @@
     "f_171C_09CC",
     "f_171C_0ADC",
     "f_171C_0CF4",
-    "f_171C_0FBC",
-    "f_171C_15A2"
+    "f_171C_0FBC"
    ],
    "object_sha256": "ee7dd80a8922e4bb57c1942d3fd03c0fa665ba9ba3a950c108802707f430cf57"
   },
@@ -5312,6 +5788,503 @@
    ],
    "scaffold": [],
    "object_sha256": "0a1b26041be208673346bf6f35d9de03781aa66cde3204b97396cd456ec14d61"
+  },
+  "root:22BF": {
+   "unit": "root",
+   "seg": 8895,
+   "profile": "msc600a",
+   "flags": [
+    "/AL",
+    "/Os",
+    "/Oe",
+    "/Og",
+    "/Gs",
+    "/Zd"
+   ],
+   "placements": {
+    "_DATA": {
+     "seg": 21939,
+     "off": 25560,
+     "size": 75
+    },
+    "CONST": {
+     "seg": 21939,
+     "off": 35380,
+     "size": 6
+    }
+   },
+   "lang": "c",
+   "source": "src/root/m22BF.c",
+   "source_sha256": "43d63d12a813b213fb05fe392ee4382a8ab1404ab5d3e1aec364335b7bbbe97a",
+   "claims": [
+    {
+     "name": "f_22BF_000A",
+     "unit": "root",
+     "seg": 8895,
+     "off": 10,
+     "size": 56,
+     "target_sha256": "1d2f87a15c3db14d9cfd79978d7db069722ea3b6fb5e91f7bd953d9209f928d5",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL",
+     "reloc_order": "GROUPED"
+    },
+    {
+     "name": "f_22BF_0042",
+     "unit": "root",
+     "seg": 8895,
+     "off": 66,
+     "size": 104,
+     "target_sha256": "dcf333fd49fe97ee4596f31c6061716a299a03472ef72bd6622dc7bed0dfea3c",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL",
+     "reloc_order": "EXACT"
+    },
+    {
+     "name": "f_22BF_00AA",
+     "unit": "root",
+     "seg": 8895,
+     "off": 170,
+     "size": 51,
+     "target_sha256": "9b34889547315f57c6b5f0573caef21ecbb1f5b20e6748e08b19758319e9efba",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL",
+     "reloc_order": "EXACT"
+    },
+    {
+     "name": "f_22BF_00DD",
+     "unit": "root",
+     "seg": 8895,
+     "off": 221,
+     "size": 66,
+     "target_sha256": "004dc6130b787bbf6cf51b5a881bbc5133e158f736bfb3246490b7c84f98c10a",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL",
+     "reloc_order": "EXACT"
+    },
+    {
+     "name": "f_22BF_011F",
+     "unit": "root",
+     "seg": 8895,
+     "off": 287,
+     "size": 123,
+     "target_sha256": "102afb0e7e79c67ea6065e16cbb3f9aeb929595fbdc3151492c6733c7021abca",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL",
+     "reloc_order": "GROUPED"
+    },
+    {
+     "name": "f_22BF_01A9",
+     "unit": "root",
+     "seg": 8895,
+     "off": 425,
+     "size": 185,
+     "target_sha256": "3cd7132b3674c17cb8b4a762f24c0796241e8102f414b797e0f04b9924b851f1",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL",
+     "reloc_order": "GROUPED"
+    },
+    {
+     "name": "f_22BF_0262",
+     "unit": "root",
+     "seg": 8895,
+     "off": 610,
+     "size": 8,
+     "target_sha256": "f72fcba4c61fe52a075cb69e5b1862d49fe260660662f4c5a8e3e7cababf9bb5",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL",
+     "reloc_order": "EXACT"
+    },
+    {
+     "name": "f_22BF_026A",
+     "unit": "root",
+     "seg": 8895,
+     "off": 618,
+     "size": 7,
+     "target_sha256": "74d2e14a239eab149f1a087edba2e747646034eda3d551971b740af6bd5432fc",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL",
+     "reloc_order": "EXACT"
+    },
+    {
+     "name": "f_22BF_02AF",
+     "unit": "root",
+     "seg": 8895,
+     "off": 687,
+     "size": 198,
+     "target_sha256": "cddd6bedbe7f5ebd4049d35a0d8de72f4de60979f9541591b86a6688a15e2406",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL",
+     "reloc_order": "GROUPED"
+    },
+    {
+     "name": "f_22BF_0375",
+     "unit": "root",
+     "seg": 8895,
+     "off": 885,
+     "size": 73,
+     "target_sha256": "f50c7499b086627a08920d1f5e3089ecc3dac9ca96ea79f2dcdbe3ff8c67f1f6",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL",
+     "reloc_order": "EXACT"
+    },
+    {
+     "name": "f_22BF_03BE",
+     "unit": "root",
+     "seg": 8895,
+     "off": 958,
+     "size": 8,
+     "target_sha256": "d8e53c0ca8ceb3e0b759cb241352ba4f398e166764c72c67caa631b9e5df441d",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL",
+     "reloc_order": "EXACT"
+    },
+    {
+     "name": "f_22BF_03C6",
+     "unit": "root",
+     "seg": 8895,
+     "off": 966,
+     "size": 7,
+     "target_sha256": "437812b47c158aae4588e89e10015a649076ec93cf2edbc4ad4a73cdae591bde",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL",
+     "reloc_order": "EXACT"
+    },
+    {
+     "name": "f_22BF_03CD",
+     "unit": "root",
+     "seg": 8895,
+     "off": 973,
+     "size": 107,
+     "target_sha256": "9cb92292d41bdb10ae6b5767458b8205779f52aafa4fd62024729d1c6a66453b",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL",
+     "reloc_order": "EXACT"
+    },
+    {
+     "name": "f_22BF_0440",
+     "unit": "root",
+     "seg": 8895,
+     "off": 1088,
+     "size": 7,
+     "target_sha256": "029c7196001426b3045c843a02c7210840857407eb1eb481c641e30e43dc2c5c",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL",
+     "reloc_order": "EXACT"
+    },
+    {
+     "name": "f_22BF_0447",
+     "unit": "root",
+     "seg": 8895,
+     "off": 1095,
+     "size": 81,
+     "target_sha256": "2520817dfccf657a7f8965082199c2161fb3ea2497f1a01a516d102ab6d6a474",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL",
+     "reloc_order": "EXACT"
+    },
+    {
+     "name": "f_22BF_0498",
+     "unit": "root",
+     "seg": 8895,
+     "off": 1176,
+     "size": 8,
+     "target_sha256": "2ca006f4b9ac6b1e64bf16b03e18818781b720a5593358411995544479c4300b",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL",
+     "reloc_order": "EXACT"
+    },
+    {
+     "name": "f_22BF_04A0",
+     "unit": "root",
+     "seg": 8895,
+     "off": 1184,
+     "size": 7,
+     "target_sha256": "4a1a2750420c704250163cf0476ccac8009ebb6c0602b1fe9cc5c6a5861515e2",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL",
+     "reloc_order": "EXACT"
+    },
+    {
+     "name": "f_22BF_04A7",
+     "unit": "root",
+     "seg": 8895,
+     "off": 1191,
+     "size": 159,
+     "target_sha256": "2c66a9909a00264bc012595f4bcae5cfecbda566d9296f7056e78484683cee19",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL",
+     "reloc_order": "GROUPED"
+    },
+    {
+     "name": "f_22BF_0546",
+     "unit": "root",
+     "seg": 8895,
+     "off": 1350,
+     "size": 8,
+     "target_sha256": "3c961706be083afb08d713fabb19de1f3d13bc12aa6056be766e3007cb89050f",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL",
+     "reloc_order": "EXACT"
+    },
+    {
+     "name": "f_22BF_054E",
+     "unit": "root",
+     "seg": 8895,
+     "off": 1358,
+     "size": 7,
+     "target_sha256": "3b8241199ef4b319caded8a0e17357775a99f2fa93f3506b2080cad842ddadf4",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL",
+     "reloc_order": "EXACT"
+    },
+    {
+     "name": "f_22BF_0555",
+     "unit": "root",
+     "seg": 8895,
+     "off": 1365,
+     "size": 69,
+     "target_sha256": "8d40fe29a9ee1f2865735eb0c403af738c82908ac0a0f8fde53a24b9dc629c99",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL",
+     "reloc_order": "GROUPED"
+    },
+    {
+     "name": "f_22BF_059A",
+     "unit": "root",
+     "seg": 8895,
+     "off": 1434,
+     "size": 292,
+     "target_sha256": "647ac7319acd4dc16236b1658e74c6c400cf6e88cfb2a4a81f2fb0fc3c7ed830",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL",
+     "reloc_order": "GROUPED"
+    },
+    {
+     "name": "f_22BF_06BE",
+     "unit": "root",
+     "seg": 8895,
+     "off": 1726,
+     "size": 72,
+     "target_sha256": "fcb5e2ae9877f676fa6ec91240d2f4dd6712fec001ebb4a0290397d4eace0a00",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL",
+     "reloc_order": "GROUPED"
+    },
+    {
+     "name": "f_22BF_0706",
+     "unit": "root",
+     "seg": 8895,
+     "off": 1798,
+     "size": 340,
+     "target_sha256": "690c2df5187453469940089b2fb4ad35de45d8d4db8fc5d55cd5597d3a1e4b9f",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL",
+     "reloc_order": "WITHIN_GROUP_PENDING"
+    },
+    {
+     "name": "f_22BF_085A",
+     "unit": "root",
+     "seg": 8895,
+     "off": 2138,
+     "size": 245,
+     "target_sha256": "18f947db809c91dabed0193e2874d68ed05e884182b4d7e63fa47e3e3b10e956",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL",
+     "reloc_order": "GROUPED"
+    },
+    {
+     "name": "f_22BF_094F",
+     "unit": "root",
+     "seg": 8895,
+     "off": 2383,
+     "size": 24,
+     "target_sha256": "eab83c41257145a228f82e381820227863dc906057f17b85f75e7d090659ec84",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL",
+     "reloc_order": "EXACT"
+    },
+    {
+     "name": "f_22BF_0967",
+     "unit": "root",
+     "seg": 8895,
+     "off": 2407,
+     "size": 73,
+     "target_sha256": "8a1b0725ef1916a0b421e3168ce734e24245e4b4eec1ff976dd59975374f0668",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL",
+     "reloc_order": "EXACT"
+    },
+    {
+     "name": "f_22BF_09B0",
+     "unit": "root",
+     "seg": 8895,
+     "off": 2480,
+     "size": 114,
+     "target_sha256": "f01e46ac1b3f83d9dbbb6d57882a2f37bbc51362416b4aef8187df56baba989c",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL",
+     "reloc_order": "EXACT"
+    },
+    {
+     "name": "f_22BF_0A22",
+     "unit": "root",
+     "seg": 8895,
+     "off": 2594,
+     "size": 18,
+     "target_sha256": "11e91d5426dc0b8a97f6d7ef6f33f0611e02b35e7041330c7cc1b683c17a576b",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL",
+     "reloc_order": "EXACT"
+    },
+    {
+     "name": "f_22BF_0A34",
+     "unit": "root",
+     "seg": 8895,
+     "off": 2612,
+     "size": 49,
+     "target_sha256": "e0d3676069cdf7d32c7b13249108ba0f9d1d016e530b9aca28066b42caf0ffc8",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL",
+     "reloc_order": "EXACT"
+    },
+    {
+     "name": "f_22BF_0A65",
+     "unit": "root",
+     "seg": 8895,
+     "off": 2661,
+     "size": 50,
+     "target_sha256": "036888827ca3480493e03d0692fab84044ba231d36e9f17e67c65c3398cc4c75",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL",
+     "reloc_order": "EXACT"
+    },
+    {
+     "name": "f_22BF_0A97",
+     "unit": "root",
+     "seg": 8895,
+     "off": 2711,
+     "size": 46,
+     "target_sha256": "3dee43668dbd3f0074d5918287b48cd05af7a47dfef60b2172e56113f710eb40",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL",
+     "reloc_order": "EXACT"
+    },
+    {
+     "name": "f_22BF_0AC5",
+     "unit": "root",
+     "seg": 8895,
+     "off": 2757,
+     "size": 42,
+     "target_sha256": "b84b295354e1ef960fe80053b5bdb27d9f478c53cacd99731f8e02bb0ffd4aac",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL",
+     "reloc_order": "EXACT"
+    },
+    {
+     "name": "f_22BF_0AEF",
+     "unit": "root",
+     "seg": 8895,
+     "off": 2799,
+     "size": 54,
+     "target_sha256": "f511892bb6fa8155b33e83f19849eda617b272d4b19b7371df5403e4251bc6c4",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL",
+     "reloc_order": "EXACT"
+    },
+    {
+     "name": "f_22BF_0B25",
+     "unit": "root",
+     "seg": 8895,
+     "off": 2853,
+     "size": 54,
+     "target_sha256": "c51e069177fa17082b14ba3cf4fbc617acf7bb6fb40b6311d8f709f52fea09d7",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL",
+     "reloc_order": "EXACT"
+    },
+    {
+     "name": "f_22BF_0B5B",
+     "unit": "root",
+     "seg": 8895,
+     "off": 2907,
+     "size": 80,
+     "target_sha256": "572e0b98d13202159cd5e23ca6dc7941790d52967f9dbd947b85925b9f305e7e",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL",
+     "reloc_order": "EXACT"
+    },
+    {
+     "name": "f_22BF_0C38",
+     "unit": "root",
+     "seg": 8895,
+     "off": 3128,
+     "size": 165,
+     "target_sha256": "7d3ca07d201bd5af06ef16d31a799a6a75b34fb583225fa7de3574f0c3ed89d6",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL",
+     "reloc_order": "GROUPED"
+    },
+    {
+     "name": "f_22BF_0CDD",
+     "unit": "root",
+     "seg": 8895,
+     "off": 3293,
+     "size": 118,
+     "target_sha256": "6911644674950c9eb01fa4b3b5ff25805c93f140cd8f5f04e815f5e6f18c0756",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL",
+     "reloc_order": "GROUPED"
+    },
+    {
+     "name": "f_22BF_0D53",
+     "unit": "root",
+     "seg": 8895,
+     "off": 3411,
+     "size": 46,
+     "target_sha256": "5ed32fe1543564a431bd2dc5ad08614255c0c1fed1e70bb31f68ced56754f628",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL",
+     "reloc_order": "EXACT"
+    },
+    {
+     "name": "f_22BF_0D81",
+     "unit": "root",
+     "seg": 8895,
+     "off": 3457,
+     "size": 128,
+     "target_sha256": "3dfe1b901eb7d3b83bb71c6949c5be51374578fc479f8a7e8ee50b7abcab901d",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL",
+     "reloc_order": "WITHIN_GROUP_PENDING"
+    },
+    {
+     "name": "f_22BF_0E01",
+     "unit": "root",
+     "seg": 8895,
+     "off": 3585,
+     "size": 130,
+     "target_sha256": "a6d1ec67c6e24e2b61d58e5aac7ec6eedcfb0051bd26fdd8bc0782157308f942",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL",
+     "reloc_order": "GROUPED"
+    },
+    {
+     "name": "f_22BF_0E83",
+     "unit": "root",
+     "seg": 8895,
+     "off": 3715,
+     "size": 113,
+     "target_sha256": "67b9a40f2851a8c23662e241eebb4742d644d44f65f53618473cfbae32f9d957",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL",
+     "reloc_order": "GROUPED"
+    }
+   ],
+   "scaffold": [
+    "f_22BF_0271",
+    "f_22BF_0BAB"
+   ],
+   "object_sha256": "515669fa1b5f358058b700aad940054e5e69c2c7ded1ae420f933ec8c5cb21c0"
   },
   "root:23AE": {
    "unit": "root",

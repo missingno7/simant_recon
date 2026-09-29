@@ -1,6 +1,18 @@
 {
  "schema": "simant-symbols-v1",
  "code": {
+  "AddAntLion": {
+   "unit": "root",
+   "seg": 2777,
+   "off": 780,
+   "grounding": "inventory:push_cs_call",
+   "history": [
+    {
+     "was": "f_0AD9_030C",
+     "why": "Win16 SIMTWO_MODULE run 3EF8..5A02 (InitSow..PillFoodTile, 19 members, between EndMigrate and InitSimVars) aligns 1:1 with DOS module 0AD9 (19 functions); xver DoAntLions (pos 6, LOW) agrees; call graph agrees (InitPillar->InitSow, DoPillar->DoSow, AddRandAntLion->AddAntLion, DoAntLions->SetAntLion/KillAntLion/FindInAList, DoPillar->pillar helpers)"
+    }
+   ]
+  },
   "AddAntToAList": {
    "unit": "root",
    "seg": 3777,
@@ -73,6 +85,18 @@
     }
    ]
   },
+  "AddRandAntLion": {
+   "unit": "root",
+   "seg": 2777,
+   "off": 646,
+   "grounding": "inventory:push_cs_call",
+   "history": [
+    {
+     "was": "f_0AD9_0286",
+     "why": "Win16 SIMTWO_MODULE run 3EF8..5A02 (InitSow..PillFoodTile, 19 members, between EndMigrate and InitSimVars) aligns 1:1 with DOS module 0AD9 (19 functions); xver DoAntLions (pos 6, LOW) agrees; call graph agrees (InitPillar->InitSow, DoPillar->DoSow, AddRandAntLion->AddAntLion, DoAntLions->SetAntLion/KillAntLion/FindInAList, DoPillar->pillar helpers)"
+    }
+   ]
+  },
   "AddRedAnts": {
    "unit": "S08",
    "seg": 13813,
@@ -94,6 +118,30 @@
     {
      "was": "f_0BE8_0652",
      "why": "dig worker: DOS body byte-exact and structurally identical to the Win16 function of this name (same statements, same data), plus module neighbourhood"
+    }
+   ]
+  },
+  "AlarmHere": {
+   "unit": "root",
+   "seg": 5270,
+   "off": 845,
+   "grounding": "inventory:far_call",
+   "history": [
+    {
+     "was": "f_1496_034D",
+     "why": "Win16 SIMANT1_MODULE run 91DE..9612 (FillHolesBN..GetSmellT, 15 members, between GetMyDir and MakeRedInitiator) aligns 1:1 with DOS module 1496 (15 functions); DoSmells calls members 1-7 in both builds (FillHoles/ColonySmell/SmoothAlarm), the AlarmHere/JamScent/DecTSmell members have the same ant-movement callers; bodies match (pheromone maps)"
+    }
+   ]
+  },
+  "AlarmHere2": {
+   "unit": "root",
+   "seg": 5270,
+   "off": 917,
+   "grounding": "inventory:far_call",
+   "history": [
+    {
+     "was": "f_1496_0395",
+     "why": "Win16 SIMANT1_MODULE run 91DE..9612 (FillHolesBN..GetSmellT, 15 members, between GetMyDir and MakeRedInitiator) aligns 1:1 with DOS module 1496 (15 functions); DoSmells calls members 1-7 in both builds (FillHoles/ColonySmell/SmoothAlarm), the AlarmHere/JamScent/DecTSmell members have the same ant-movement callers; bodies match (pheromone maps)"
     }
    ]
   },
@@ -265,6 +313,54 @@
     }
    ]
   },
+  "ColonySmellBN": {
+   "unit": "root",
+   "seg": 5270,
+   "off": 268,
+   "grounding": "inventory:far_call",
+   "history": [
+    {
+     "was": "f_1496_010C",
+     "why": "Win16 SIMANT1_MODULE run 91DE..9612 (FillHolesBN..GetSmellT, 15 members, between GetMyDir and MakeRedInitiator) aligns 1:1 with DOS module 1496 (15 functions); DoSmells calls members 1-7 in both builds (FillHoles/ColonySmell/SmoothAlarm), the AlarmHere/JamScent/DecTSmell members have the same ant-movement callers; bodies match (pheromone maps)"
+    }
+   ]
+  },
+  "ColonySmellBT": {
+   "unit": "root",
+   "seg": 5270,
+   "off": 410,
+   "grounding": "inventory:far_call",
+   "history": [
+    {
+     "was": "f_1496_019A",
+     "why": "Win16 SIMANT1_MODULE run 91DE..9612 (FillHolesBN..GetSmellT, 15 members, between GetMyDir and MakeRedInitiator) aligns 1:1 with DOS module 1496 (15 functions); DoSmells calls members 1-7 in both builds (FillHoles/ColonySmell/SmoothAlarm), the AlarmHere/JamScent/DecTSmell members have the same ant-movement callers; bodies match (pheromone maps)"
+    }
+   ]
+  },
+  "ColonySmellRN": {
+   "unit": "root",
+   "seg": 5270,
+   "off": 339,
+   "grounding": "inventory:far_call",
+   "history": [
+    {
+     "was": "f_1496_0153",
+     "why": "Win16 SIMANT1_MODULE run 91DE..9612 (FillHolesBN..GetSmellT, 15 members, between GetMyDir and MakeRedInitiator) aligns 1:1 with DOS module 1496 (15 functions); DoSmells calls members 1-7 in both builds (FillHoles/ColonySmell/SmoothAlarm), the AlarmHere/JamScent/DecTSmell members have the same ant-movement callers; bodies match (pheromone maps)"
+    }
+   ]
+  },
+  "ColonySmellRT": {
+   "unit": "root",
+   "seg": 5270,
+   "off": 510,
+   "grounding": "inventory:far_call",
+   "history": [
+    {
+     "was": "f_1496_01FE",
+     "why": "Win16 SIMANT1_MODULE run 91DE..9612 (FillHolesBN..GetSmellT, 15 members, between GetMyDir and MakeRedInitiator) aligns 1:1 with DOS module 1496 (15 functions); DoSmells calls members 1-7 in both builds (FillHoles/ColonySmell/SmoothAlarm), the AlarmHere/JamScent/DecTSmell members have the same ant-movement callers; bodies match (pheromone maps)"
+    }
+   ]
+  },
   "CompactListA": {
    "unit": "root",
    "seg": 3777,
@@ -433,6 +529,18 @@
     }
    ]
   },
+  "DecTSmell": {
+   "unit": "root",
+   "seg": 5270,
+   "off": 1196,
+   "grounding": "inventory:far_call",
+   "history": [
+    {
+     "was": "f_1496_04AC",
+     "why": "Win16 SIMANT1_MODULE run 91DE..9612 (FillHolesBN..GetSmellT, 15 members, between GetMyDir and MakeRedInitiator) aligns 1:1 with DOS module 1496 (15 functions); DoSmells calls members 1-7 in both builds (FillHoles/ColonySmell/SmoothAlarm), the AlarmHere/JamScent/DecTSmell members have the same ant-movement callers; bodies match (pheromone maps)"
+    }
+   ]
+  },
   "DigMyNewHole": {
    "unit": "root",
    "seg": 5358,
@@ -526,6 +634,18 @@
     {
      "was": "o23_39C7_0668",
      "why": "xver HIGH features-v1: constant 0x501; runtime memchr,memmove; string \"card resource not found.\""
+    }
+   ]
+  },
+  "DoAntLions": {
+   "unit": "root",
+   "seg": 2777,
+   "off": 979,
+   "grounding": "inventory:far_call",
+   "history": [
+    {
+     "was": "f_0AD9_03D3",
+     "why": "Win16 SIMTWO_MODULE run 3EF8..5A02 (InitSow..PillFoodTile, 19 members, between EndMigrate and InitSimVars) aligns 1:1 with DOS module 0AD9 (19 functions); xver DoAntLions (pos 6, LOW) agrees; call graph agrees (InitPillar->InitSow, DoPillar->DoSow, AddRandAntLion->AddAntLion, DoAntLions->SetAntLion/KillAntLion/FindInAList, DoPillar->pillar helpers)"
     }
    ]
   },
@@ -817,6 +937,18 @@
     }
    ]
   },
+  "DoPillar": {
+   "unit": "root",
+   "seg": 2777,
+   "off": 2364,
+   "grounding": "inventory:far_call",
+   "history": [
+    {
+     "was": "f_0AD9_093C",
+     "why": "Win16 SIMTWO_MODULE run 3EF8..5A02 (InitSow..PillFoodTile, 19 members, between EndMigrate and InitSimVars) aligns 1:1 with DOS module 0AD9 (19 functions); xver DoAntLions (pos 6, LOW) agrees; call graph agrees (InitPillar->InitSow, DoPillar->DoSow, AddRandAntLion->AddAntLion, DoAntLions->SetAntLion/KillAntLion/FindInAList, DoPillar->pillar helpers)"
+    }
+   ]
+  },
   "DoRandAntA": {
    "unit": "root",
    "seg": 2196,
@@ -958,6 +1090,18 @@
     {
      "was": "f_0894_0138",
      "why": "Win16 MAPSYM member list of the matching unit aligns 1:1 in order and count with the DOS module (already-named members fall at their positions); bodies near-identical (worker simA)"
+    }
+   ]
+  },
+  "DoSow": {
+   "unit": "root",
+   "seg": 2777,
+   "off": 188,
+   "grounding": "inventory:push_cs_call",
+   "history": [
+    {
+     "was": "f_0AD9_00BC",
+     "why": "Win16 SIMTWO_MODULE run 3EF8..5A02 (InitSow..PillFoodTile, 19 members, between EndMigrate and InitSimVars) aligns 1:1 with DOS module 0AD9 (19 functions); xver DoAntLions (pos 6, LOW) agrees; call graph agrees (InitPillar->InitSow, DoPillar->DoSow, AddRandAntLion->AddAntLion, DoAntLions->SetAntLion/KillAntLion/FindInAList, DoPillar->pillar helpers)"
     }
    ]
   },
@@ -1261,6 +1405,30 @@
     }
    ]
   },
+  "FillHolesBN": {
+   "unit": "root",
+   "seg": 5270,
+   "off": 6,
+   "grounding": "inventory:far_call",
+   "history": [
+    {
+     "was": "f_1496_0006",
+     "why": "Win16 SIMANT1_MODULE run 91DE..9612 (FillHolesBN..GetSmellT, 15 members, between GetMyDir and MakeRedInitiator) aligns 1:1 with DOS module 1496 (15 functions); DoSmells calls members 1-7 in both builds (FillHoles/ColonySmell/SmoothAlarm), the AlarmHere/JamScent/DecTSmell members have the same ant-movement callers; bodies match (pheromone maps)"
+    }
+   ]
+  },
+  "FillHolesRN": {
+   "unit": "root",
+   "seg": 5270,
+   "off": 137,
+   "grounding": "inventory:far_call",
+   "history": [
+    {
+     "was": "f_1496_0089",
+     "why": "Win16 SIMANT1_MODULE run 91DE..9612 (FillHolesBN..GetSmellT, 15 members, between GetMyDir and MakeRedInitiator) aligns 1:1 with DOS module 1496 (15 functions); DoSmells calls members 1-7 in both builds (FillHoles/ColonySmell/SmoothAlarm), the AlarmHere/JamScent/DecTSmell members have the same ant-movement callers; bodies match (pheromone maps)"
+    }
+   ]
+  },
   "FindAntIndex": {
    "unit": "root",
    "seg": 4343,
@@ -1306,6 +1474,18 @@
     {
      "was": "f_0EC1_02DD",
      "why": "Win16 unit SIMONE_MODULE 2A16..3046 (CompactListA..ClearListR, 17 members) aligns 1:1 with DOS module 0EC1 (17 functions); anchored by registered AddAntToAList/BList/RList at positions 11-13 and xver ExitHole/BuildAntListA MEDIUM; bodies match (list arrays, sizes)"
+    }
+   ]
+  },
+  "FindInLionList": {
+   "unit": "root",
+   "seg": 2777,
+   "off": 2044,
+   "grounding": "inventory:far_call",
+   "history": [
+    {
+     "was": "f_0AD9_07FC",
+     "why": "Win16 SIMTWO_MODULE run 3EF8..5A02 (InitSow..PillFoodTile, 19 members, between EndMigrate and InitSimVars) aligns 1:1 with DOS module 0AD9 (19 functions); xver DoAntLions (pos 6, LOW) agrees; call graph agrees (InitPillar->InitSow, DoPillar->DoSow, AddRandAntLion->AddAntLion, DoAntLions->SetAntLion/KillAntLion/FindInAList, DoPillar->pillar helpers)"
     }
    ]
   },
@@ -1645,6 +1825,18 @@
     }
    ]
   },
+  "GetSmellT": {
+   "unit": "root",
+   "seg": 5270,
+   "off": 1297,
+   "grounding": "reviewed: prologue scan in unreached gap; descent ends in a return; no references found (unreferenced or indirect)",
+   "history": [
+    {
+     "was": "f_1496_0511",
+     "why": "Win16 SIMANT1_MODULE run 91DE..9612 (FillHolesBN..GetSmellT, 15 members, between GetMyDir and MakeRedInitiator) aligns 1:1 with DOS module 1496 (15 functions); DoSmells calls members 1-7 in both builds (FillHoles/ColonySmell/SmoothAlarm), the AlarmHere/JamScent/DecTSmell members have the same ant-movement callers; bodies match (pheromone maps)"
+    }
+   ]
+  },
   "GetStrategy": {
    "unit": "root",
    "seg": 4995,
@@ -1729,6 +1921,30 @@
     }
    ]
   },
+  "InitAntLions": {
+   "unit": "root",
+   "seg": 2777,
+   "off": 574,
+   "grounding": "inventory:far_call",
+   "history": [
+    {
+     "was": "f_0AD9_023E",
+     "why": "Win16 SIMTWO_MODULE run 3EF8..5A02 (InitSow..PillFoodTile, 19 members, between EndMigrate and InitSimVars) aligns 1:1 with DOS module 0AD9 (19 functions); xver DoAntLions (pos 6, LOW) agrees; call graph agrees (InitPillar->InitSow, DoPillar->DoSow, AddRandAntLion->AddAntLion, DoAntLions->SetAntLion/KillAntLion/FindInAList, DoPillar->pillar helpers)"
+    }
+   ]
+  },
+  "InitPillar": {
+   "unit": "root",
+   "seg": 2777,
+   "off": 2268,
+   "grounding": "inventory:far_call",
+   "history": [
+    {
+     "was": "f_0AD9_08DC",
+     "why": "Win16 SIMTWO_MODULE run 3EF8..5A02 (InitSow..PillFoodTile, 19 members, between EndMigrate and InitSimVars) aligns 1:1 with DOS module 0AD9 (19 functions); xver DoAntLions (pos 6, LOW) agrees; call graph agrees (InitPillar->InitSow, DoPillar->DoSow, AddRandAntLion->AddAntLion, DoAntLions->SetAntLion/KillAntLion/FindInAList, DoPillar->pillar helpers)"
+    }
+   ]
+  },
   "InitSimVars": {
    "unit": "S08",
    "seg": 13813,
@@ -1738,6 +1954,18 @@
     {
      "was": "o08_35F5_0000",
      "why": "worker ovl08: Win16 RandWorld unit member / call-site evidence (report 2026-09-30)"
+    }
+   ]
+  },
+  "InitSow": {
+   "unit": "root",
+   "seg": 2777,
+   "off": 12,
+   "grounding": "inventory:push_cs_call",
+   "history": [
+    {
+     "was": "f_0AD9_000C",
+     "why": "Win16 SIMTWO_MODULE run 3EF8..5A02 (InitSow..PillFoodTile, 19 members, between EndMigrate and InitSimVars) aligns 1:1 with DOS module 0AD9 (19 functions); xver DoAntLions (pos 6, LOW) agrees; call graph agrees (InitPillar->InitSow, DoPillar->DoSow, AddRandAntLion->AddAntLion, DoAntLions->SetAntLion/KillAntLion/FindInAList, DoPillar->pillar helpers)"
     }
    ]
   },
@@ -1885,6 +2113,18 @@
     }
    ]
   },
+  "IsPillDead": {
+   "unit": "root",
+   "seg": 2777,
+   "off": 3972,
+   "grounding": "inventory:push_cs_call",
+   "history": [
+    {
+     "was": "f_0AD9_0F84",
+     "why": "Win16 SIMTWO_MODULE run 3EF8..5A02 (InitSow..PillFoodTile, 19 members, between EndMigrate and InitSimVars) aligns 1:1 with DOS module 0AD9 (19 functions); xver DoAntLions (pos 6, LOW) agrees; call graph agrees (InitPillar->InitSow, DoPillar->DoSow, AddRandAntLion->AddAntLion, DoAntLions->SetAntLion/KillAntLion/FindInAList, DoPillar->pillar helpers)"
+    }
+   ]
+  },
   "IsThisEgg": {
    "unit": "root",
    "seg": 4343,
@@ -1930,6 +2170,66 @@
     {
      "was": "f_10F7_003A",
      "why": "worker sim10F7: Win16 counterpart body matched while recovering the byte-exact DOS function"
+    }
+   ]
+  },
+  "JamScentBN": {
+   "unit": "root",
+   "seg": 5270,
+   "off": 972,
+   "grounding": "inventory:far_call",
+   "history": [
+    {
+     "was": "f_1496_03CC",
+     "why": "Win16 SIMANT1_MODULE run 91DE..9612 (FillHolesBN..GetSmellT, 15 members, between GetMyDir and MakeRedInitiator) aligns 1:1 with DOS module 1496 (15 functions); DoSmells calls members 1-7 in both builds (FillHoles/ColonySmell/SmoothAlarm), the AlarmHere/JamScent/DecTSmell members have the same ant-movement callers; bodies match (pheromone maps)"
+    }
+   ]
+  },
+  "JamScentBT": {
+   "unit": "root",
+   "seg": 5270,
+   "off": 1084,
+   "grounding": "inventory:far_call",
+   "history": [
+    {
+     "was": "f_1496_043C",
+     "why": "Win16 SIMANT1_MODULE run 91DE..9612 (FillHolesBN..GetSmellT, 15 members, between GetMyDir and MakeRedInitiator) aligns 1:1 with DOS module 1496 (15 functions); DoSmells calls members 1-7 in both builds (FillHoles/ColonySmell/SmoothAlarm), the AlarmHere/JamScent/DecTSmell members have the same ant-movement callers; bodies match (pheromone maps)"
+    }
+   ]
+  },
+  "JamScentRN": {
+   "unit": "root",
+   "seg": 5270,
+   "off": 1028,
+   "grounding": "inventory:far_call",
+   "history": [
+    {
+     "was": "f_1496_0404",
+     "why": "Win16 SIMANT1_MODULE run 91DE..9612 (FillHolesBN..GetSmellT, 15 members, between GetMyDir and MakeRedInitiator) aligns 1:1 with DOS module 1496 (15 functions); DoSmells calls members 1-7 in both builds (FillHoles/ColonySmell/SmoothAlarm), the AlarmHere/JamScent/DecTSmell members have the same ant-movement callers; bodies match (pheromone maps)"
+    }
+   ]
+  },
+  "JamScentRT": {
+   "unit": "root",
+   "seg": 5270,
+   "off": 1140,
+   "grounding": "inventory:far_call",
+   "history": [
+    {
+     "was": "f_1496_0474",
+     "why": "Win16 SIMANT1_MODULE run 91DE..9612 (FillHolesBN..GetSmellT, 15 members, between GetMyDir and MakeRedInitiator) aligns 1:1 with DOS module 1496 (15 functions); DoSmells calls members 1-7 in both builds (FillHoles/ColonySmell/SmoothAlarm), the AlarmHere/JamScent/DecTSmell members have the same ant-movement callers; bodies match (pheromone maps)"
+    }
+   ]
+  },
+  "KillAntLion": {
+   "unit": "root",
+   "seg": 2777,
+   "off": 2104,
+   "grounding": "inventory:far_call,push_cs_call",
+   "history": [
+    {
+     "was": "f_0AD9_0838",
+     "why": "Win16 SIMTWO_MODULE run 3EF8..5A02 (InitSow..PillFoodTile, 19 members, between EndMigrate and InitSimVars) aligns 1:1 with DOS module 0AD9 (19 functions); xver DoAntLions (pos 6, LOW) agrees; call graph agrees (InitPillar->InitSow, DoPillar->DoSow, AddRandAntLion->AddAntLion, DoAntLions->SetAntLion/KillAntLion/FindInAList, DoPillar->pillar helpers)"
     }
    ]
   },
@@ -1993,6 +2293,18 @@
     }
    ]
   },
+  "MakeAPill": {
+   "unit": "root",
+   "seg": 2777,
+   "off": 3599,
+   "grounding": "inventory:push_cs_call",
+   "history": [
+    {
+     "was": "f_0AD9_0E0F",
+     "why": "Win16 SIMTWO_MODULE run 3EF8..5A02 (InitSow..PillFoodTile, 19 members, between EndMigrate and InitSimVars) aligns 1:1 with DOS module 0AD9 (19 functions); xver DoAntLions (pos 6, LOW) agrees; call graph agrees (InitPillar->InitSow, DoPillar->DoSow, AddRandAntLion->AddAntLion, DoAntLions->SetAntLion/KillAntLion/FindInAList, DoPillar->pillar helpers)"
+    }
+   ]
+  },
   "MakeBlkQueen": {
    "unit": "S08",
    "seg": 13813,
@@ -2038,6 +2350,18 @@
     {
      "was": "f_0F3F_0E30",
      "why": "Win16 MAPSYM member list of the matching unit aligns 1:1 in order and count with the DOS module (already-named members fall at their positions); bodies near-identical (worker simA)"
+    }
+   ]
+  },
+  "MakePillFood": {
+   "unit": "root",
+   "seg": 2777,
+   "off": 4080,
+   "grounding": "inventory:push_cs_call",
+   "history": [
+    {
+     "was": "f_0AD9_0FF0",
+     "why": "Win16 SIMTWO_MODULE run 3EF8..5A02 (InitSow..PillFoodTile, 19 members, between EndMigrate and InitSimVars) aligns 1:1 with DOS module 0AD9 (19 functions); xver DoAntLions (pos 6, LOW) agrees; call graph agrees (InitPillar->InitSow, DoPillar->DoSow, AddRandAntLion->AddAntLion, DoAntLions->SetAntLion/KillAntLion/FindInAList, DoPillar->pillar helpers)"
     }
    ]
   },
@@ -2173,6 +2497,30 @@
     }
    ]
   },
+  "PillFoodTile": {
+   "unit": "root",
+   "seg": 2777,
+   "off": 4260,
+   "grounding": "inventory:push_cs_call",
+   "history": [
+    {
+     "was": "f_0AD9_10A4",
+     "why": "Win16 SIMTWO_MODULE run 3EF8..5A02 (InitSow..PillFoodTile, 19 members, between EndMigrate and InitSimVars) aligns 1:1 with DOS module 0AD9 (19 functions); xver DoAntLions (pos 6, LOW) agrees; call graph agrees (InitPillar->InitSow, DoPillar->DoSow, AddRandAntLion->AddAntLion, DoAntLions->SetAntLion/KillAntLion/FindInAList, DoPillar->pillar helpers)"
+    }
+   ]
+  },
+  "PillGetLife": {
+   "unit": "root",
+   "seg": 2777,
+   "off": 3918,
+   "grounding": "inventory:push_cs_call",
+   "history": [
+    {
+     "was": "f_0AD9_0F4E",
+     "why": "Win16 SIMTWO_MODULE run 3EF8..5A02 (InitSow..PillFoodTile, 19 members, between EndMigrate and InitSimVars) aligns 1:1 with DOS module 0AD9 (19 functions); xver DoAntLions (pos 6, LOW) agrees; call graph agrees (InitPillar->InitSow, DoPillar->DoSow, AddRandAntLion->AddAntLion, DoAntLions->SetAntLion/KillAntLion/FindInAList, DoPillar->pillar helpers)"
+    }
+   ]
+  },
   "PlaceBlackQueen": {
    "unit": "S08",
    "seg": 13813,
@@ -2218,6 +2566,18 @@
     {
      "was": "f_0BE8_0ABE",
      "why": "dig worker: DOS body byte-exact and structurally identical to the Win16 function of this name (same statements, same data), plus module neighbourhood"
+    }
+   ]
+  },
+  "PlacePillTile": {
+   "unit": "root",
+   "seg": 2777,
+   "off": 3866,
+   "grounding": "inventory:push_cs_call",
+   "history": [
+    {
+     "was": "f_0AD9_0F1A",
+     "why": "Win16 SIMTWO_MODULE run 3EF8..5A02 (InitSow..PillFoodTile, 19 members, between EndMigrate and InitSimVars) aligns 1:1 with DOS module 0AD9 (19 functions); xver DoAntLions (pos 6, LOW) agrees; call graph agrees (InitPillar->InitSow, DoPillar->DoSow, AddRandAntLion->AddAntLion, DoAntLions->SetAntLion/KillAntLion/FindInAList, DoPillar->pillar helpers)"
     }
    ]
   },
@@ -2374,6 +2734,18 @@
     {
      "was": "f_0EC1_017F",
      "why": "Win16 unit SIMONE_MODULE 2A16..3046 (CompactListA..ClearListR, 17 members) aligns 1:1 with DOS module 0EC1 (17 functions); anchored by registered AddAntToAList/BList/RList at positions 11-13 and xver ExitHole/BuildAntListA MEDIUM; bodies match (list arrays, sizes)"
+    }
+   ]
+  },
+  "ReplacePillarMap": {
+   "unit": "root",
+   "seg": 2777,
+   "off": 3511,
+   "grounding": "inventory:push_cs_call",
+   "history": [
+    {
+     "was": "f_0AD9_0DB7",
+     "why": "Win16 SIMTWO_MODULE run 3EF8..5A02 (InitSow..PillFoodTile, 19 members, between EndMigrate and InitSimVars) aligns 1:1 with DOS module 0AD9 (19 functions); xver DoAntLions (pos 6, LOW) agrees; call graph agrees (InitPillar->InitSow, DoPillar->DoSow, AddRandAntLion->AddAntLion, DoAntLions->SetAntLion/KillAntLion/FindInAList, DoPillar->pillar helpers)"
     }
    ]
   },
@@ -2542,6 +2914,18 @@
     {
      "was": "f_10F7_01B1",
      "why": "worker sim10F7: Win16 counterpart body matched while recovering the byte-exact DOS function"
+    }
+   ]
+  },
+  "SetAntLion": {
+   "unit": "root",
+   "seg": 2777,
+   "off": 1981,
+   "grounding": "inventory:push_cs_call",
+   "history": [
+    {
+     "was": "f_0AD9_07BD",
+     "why": "Win16 SIMTWO_MODULE run 3EF8..5A02 (InitSow..PillFoodTile, 19 members, between EndMigrate and InitSimVars) aligns 1:1 with DOS module 0AD9 (19 functions); xver DoAntLions (pos 6, LOW) agrees; call graph agrees (InitPillar->InitSow, DoPillar->DoSow, AddRandAntLion->AddAntLion, DoAntLions->SetAntLion/KillAntLion/FindInAList, DoPillar->pillar helpers)"
     }
    ]
   },
@@ -2725,6 +3109,18 @@
     }
    ]
   },
+  "SmoothAlarm": {
+   "unit": "root",
+   "seg": 5270,
+   "off": 606,
+   "grounding": "inventory:far_call",
+   "history": [
+    {
+     "was": "f_1496_025E",
+     "why": "Win16 SIMANT1_MODULE run 91DE..9612 (FillHolesBN..GetSmellT, 15 members, between GetMyDir and MakeRedInitiator) aligns 1:1 with DOS module 1496 (15 functions); DoSmells calls members 1-7 in both builds (FillHoles/ColonySmell/SmoothAlarm), the AlarmHere/JamScent/DecTSmell members have the same ant-movement callers; bodies match (pheromone maps)"
+    }
+   ]
+  },
   "SpiderDialog": {
    "unit": "S14",
    "seg": 14412,
@@ -2794,6 +3190,18 @@
     {
      "was": "f_0F3F_13D7",
      "why": "Win16 MAPSYM member list of the matching unit aligns 1:1 in order and count with the DOS module (already-named members fall at their positions); bodies near-identical (worker simA)"
+    }
+   ]
+  },
+  "StorePillarMap": {
+   "unit": "root",
+   "seg": 2777,
+   "off": 3371,
+   "grounding": "inventory:push_cs_call",
+   "history": [
+    {
+     "was": "f_0AD9_0D2B",
+     "why": "Win16 SIMTWO_MODULE run 3EF8..5A02 (InitSow..PillFoodTile, 19 members, between EndMigrate and InitSimVars) aligns 1:1 with DOS module 0AD9 (19 functions); xver DoAntLions (pos 6, LOW) agrees; call graph agrees (InitPillar->InitSow, DoPillar->DoSow, AddRandAntLion->AddAntLion, DoAntLions->SetAntLion/KillAntLion/FindInAList, DoPillar->pillar helpers)"
     }
    ]
   },
@@ -4431,115 +4839,115 @@
    "unit": "root",
    "seg": 2777,
    "off": 12,
-   "grounding": "inventory:push_cs_call"
+   "alias_of": "InitSow"
   },
   "f_0AD9_00BC": {
    "unit": "root",
    "seg": 2777,
    "off": 188,
-   "grounding": "inventory:push_cs_call"
+   "alias_of": "DoSow"
   },
   "f_0AD9_023E": {
    "unit": "root",
    "seg": 2777,
    "off": 574,
-   "grounding": "inventory:far_call"
+   "alias_of": "InitAntLions"
   },
   "f_0AD9_0286": {
    "unit": "root",
    "seg": 2777,
    "off": 646,
-   "grounding": "inventory:push_cs_call"
+   "alias_of": "AddRandAntLion"
   },
   "f_0AD9_030C": {
    "unit": "root",
    "seg": 2777,
    "off": 780,
-   "grounding": "inventory:push_cs_call"
+   "alias_of": "AddAntLion"
   },
   "f_0AD9_03D3": {
    "unit": "root",
    "seg": 2777,
    "off": 979,
-   "grounding": "inventory:far_call"
+   "alias_of": "DoAntLions"
   },
   "f_0AD9_07BD": {
    "unit": "root",
    "seg": 2777,
    "off": 1981,
-   "grounding": "inventory:push_cs_call"
+   "alias_of": "SetAntLion"
   },
   "f_0AD9_07FC": {
    "unit": "root",
    "seg": 2777,
    "off": 2044,
-   "grounding": "inventory:far_call"
+   "alias_of": "FindInLionList"
   },
   "f_0AD9_0838": {
    "unit": "root",
    "seg": 2777,
    "off": 2104,
-   "grounding": "inventory:far_call,push_cs_call"
+   "alias_of": "KillAntLion"
   },
   "f_0AD9_08DC": {
    "unit": "root",
    "seg": 2777,
    "off": 2268,
-   "grounding": "inventory:far_call"
+   "alias_of": "InitPillar"
   },
   "f_0AD9_093C": {
    "unit": "root",
    "seg": 2777,
    "off": 2364,
-   "grounding": "inventory:far_call"
+   "alias_of": "DoPillar"
   },
   "f_0AD9_0D2B": {
    "unit": "root",
    "seg": 2777,
    "off": 3371,
-   "grounding": "inventory:push_cs_call"
+   "alias_of": "StorePillarMap"
   },
   "f_0AD9_0DB7": {
    "unit": "root",
    "seg": 2777,
    "off": 3511,
-   "grounding": "inventory:push_cs_call"
+   "alias_of": "ReplacePillarMap"
   },
   "f_0AD9_0E0F": {
    "unit": "root",
    "seg": 2777,
    "off": 3599,
-   "grounding": "inventory:push_cs_call"
+   "alias_of": "MakeAPill"
   },
   "f_0AD9_0F1A": {
    "unit": "root",
    "seg": 2777,
    "off": 3866,
-   "grounding": "inventory:push_cs_call"
+   "alias_of": "PlacePillTile"
   },
   "f_0AD9_0F4E": {
    "unit": "root",
    "seg": 2777,
    "off": 3918,
-   "grounding": "inventory:push_cs_call"
+   "alias_of": "PillGetLife"
   },
   "f_0AD9_0F84": {
    "unit": "root",
    "seg": 2777,
    "off": 3972,
-   "grounding": "inventory:push_cs_call"
+   "alias_of": "IsPillDead"
   },
   "f_0AD9_0FF0": {
    "unit": "root",
    "seg": 2777,
    "off": 4080,
-   "grounding": "inventory:push_cs_call"
+   "alias_of": "MakePillFood"
   },
   "f_0AD9_10A4": {
    "unit": "root",
    "seg": 2777,
    "off": 4260,
-   "grounding": "inventory:push_cs_call"
+   "alias_of": "PillFoodTile"
   },
   "f_0BE8_0002": {
    "unit": "root",
@@ -5523,91 +5931,91 @@
    "unit": "root",
    "seg": 5270,
    "off": 6,
-   "grounding": "inventory:far_call"
+   "alias_of": "FillHolesBN"
   },
   "f_1496_0089": {
    "unit": "root",
    "seg": 5270,
    "off": 137,
-   "grounding": "inventory:far_call"
+   "alias_of": "FillHolesRN"
   },
   "f_1496_010C": {
    "unit": "root",
    "seg": 5270,
    "off": 268,
-   "grounding": "inventory:far_call"
+   "alias_of": "ColonySmellBN"
   },
   "f_1496_0153": {
    "unit": "root",
    "seg": 5270,
    "off": 339,
-   "grounding": "inventory:far_call"
+   "alias_of": "ColonySmellRN"
   },
   "f_1496_019A": {
    "unit": "root",
    "seg": 5270,
    "off": 410,
-   "grounding": "inventory:far_call"
+   "alias_of": "ColonySmellBT"
   },
   "f_1496_01FE": {
    "unit": "root",
    "seg": 5270,
    "off": 510,
-   "grounding": "inventory:far_call"
+   "alias_of": "ColonySmellRT"
   },
   "f_1496_025E": {
    "unit": "root",
    "seg": 5270,
    "off": 606,
-   "grounding": "inventory:far_call"
+   "alias_of": "SmoothAlarm"
   },
   "f_1496_034D": {
    "unit": "root",
    "seg": 5270,
    "off": 845,
-   "grounding": "inventory:far_call"
+   "alias_of": "AlarmHere"
   },
   "f_1496_0395": {
    "unit": "root",
    "seg": 5270,
    "off": 917,
-   "grounding": "inventory:far_call"
+   "alias_of": "AlarmHere2"
   },
   "f_1496_03CC": {
    "unit": "root",
    "seg": 5270,
    "off": 972,
-   "grounding": "inventory:far_call"
+   "alias_of": "JamScentBN"
   },
   "f_1496_0404": {
    "unit": "root",
    "seg": 5270,
    "off": 1028,
-   "grounding": "inventory:far_call"
+   "alias_of": "JamScentRN"
   },
   "f_1496_043C": {
    "unit": "root",
    "seg": 5270,
    "off": 1084,
-   "grounding": "inventory:far_call"
+   "alias_of": "JamScentBT"
   },
   "f_1496_0474": {
    "unit": "root",
    "seg": 5270,
    "off": 1140,
-   "grounding": "inventory:far_call"
+   "alias_of": "JamScentRT"
   },
   "f_1496_04AC": {
    "unit": "root",
    "seg": 5270,
    "off": 1196,
-   "grounding": "inventory:far_call"
+   "alias_of": "DecTSmell"
   },
   "f_1496_0511": {
    "unit": "root",
    "seg": 5270,
    "off": 1297,
-   "grounding": "reviewed: prologue scan in unreached gap; descent ends in a return; no references found (unreferenced or indirect)"
+   "alias_of": "GetSmellT"
   },
   "f_14EE_0002": {
    "unit": "root",
@@ -12508,6 +12916,16 @@
    "off": 864,
    "grounding": "StartAttack (root:1383:053D): les bx,es:[0360]; pushes entry 5 (far string) to f_15D9_009C(...,120L,0); Win16 StartAttack EditMessage(AdviceStrs[10],AdviceStrs[11],0x78,...)"
   },
+  "AntsEatenByLions": {
+   "seg": 20726,
+   "off": 2568,
+   "grounding": "InitAntLions (root:0AD9:025B) cleared, DoAntLions increments; Win16 InitAntLions AntsEatenByLions=0"
+  },
+  "BAntsEaten": {
+   "seg": 20726,
+   "off": 3872,
+   "grounding": "DoAntLions (root:0AD9:0591): long ++ when the eaten ant has no 0x80 (black) bit; Win16 DoAntLions pool BAntsEaten"
+  },
   "Barrier": {
    "seg": 20726,
    "off": 1152,
@@ -12670,6 +13088,11 @@
    "off": 2010,
    "grounding": "SetCasteProd (root:1383:021F): summed over 4 and 100L*x/total like Win16 SetCasteProd IdealCaste[i]"
   },
+  "InitialLions": {
+   "seg": 20726,
+   "off": 2282,
+   "grounding": "InitAntLions (root:0AD9:027B) = count (clamped 10); Win16 InitAntLions InitialLions=count"
+  },
   "LifeA": {
    "seg": 15901,
    "off": 24960,
@@ -12702,6 +13125,36 @@
      "why": "worker data identification: Win16 variable of the same role at the same use sites (reports dig/ovl08/simA/sim10F7)"
     }
    ]
+  },
+  "LionIndex": {
+   "seg": 15703,
+   "off": 3146,
+   "grounding": "InitAntLions (root:0AD9:0253) cleared; AddAntLion indexes LionList* with it and increments while <9; Win16 AddAntLion LionIndex"
+  },
+  "LionListM": {
+   "seg": 20726,
+   "off": 2746,
+   "grounding": "AddAntLion (root:0AD9:03A8): third list cleared; DoAntLions switches on it; Win16 LionListM"
+  },
+  "LionListS": {
+   "seg": 20726,
+   "off": 2764,
+   "grounding": "AddAntLion (root:0AD9:03B1): fourth list cleared; Win16 LionListS"
+  },
+  "LionListT": {
+   "seg": 20726,
+   "off": 2782,
+   "grounding": "AddAntLion (root:0AD9:03BA): fifth list cleared; SetAntLion SetMap(...,T+0x38); Win16 LionListT"
+  },
+  "LionListX": {
+   "seg": 20726,
+   "off": 2706,
+   "grounding": "AddAntLion (root:0AD9:0391): es:[0A92+LionIndex]=x; Win16 AddAntLion LionListX"
+  },
+  "LionListY": {
+   "seg": 20726,
+   "off": 2728,
+   "grounding": "AddAntLion (root:0AD9:039D): es:[0AA8+LionIndex]=y; Win16 LionListY"
   },
   "ListIndexA": {
    "seg": 20726,
@@ -12811,6 +13264,41 @@
    "off": 2974,
    "grounding": "GetNewModeB (root:1383:09D2): byte [0B9E + StrategicModeB*8 + SRand8()] for caste 2; Win16 ModeTabWB[StrategicModeB][SRand8()]"
   },
+  "PillDir": {
+   "seg": 20726,
+   "off": 3132,
+   "grounding": "InitPillar (root:0AD9:090E) cleared; MakeAPill = SRand1(4); Win16 PillDir"
+  },
+  "PillarMap": {
+   "seg": 20726,
+   "off": 3484,
+   "grounding": "InitPillar (root:0AD9:091D): int[6] cleared; StorePillarMap stores MapA tiles at [x%6]/[y%6]; Win16 PillarMap"
+  },
+  "PillarSeg": {
+   "seg": 20726,
+   "off": 3126,
+   "grounding": "InitPillar (root:0AD9:0905) cleared; DoPillar sets 4 and decrements; Win16 PillarSeg"
+  },
+  "PillarState": {
+   "seg": 15703,
+   "off": 3148,
+   "grounding": "InitPillar (root:0AD9:08EA) first cleared word; DoPillar tests 0 -> MakeAPill then =1; Win16 InitPillar PillarState"
+  },
+  "PillarX": {
+   "seg": 15703,
+   "off": 3150,
+   "grounding": "InitPillar (root:0AD9:08F3) cleared; MakeAPill sets SRand1(128)/0/127; Win16 PillarX"
+  },
+  "PillarY": {
+   "seg": 15703,
+   "off": 3152,
+   "grounding": "InitPillar (root:0AD9:08FC) cleared; MakeAPill sets 63/SRand1(64)/0; Win16 PillarY"
+  },
+  "RAntsEaten": {
+   "seg": 20726,
+   "off": 3968,
+   "grounding": "DoAntLions (root:0AD9:05A3): long ++ for red (0x80) ants; Win16 RAntsEaten"
+  },
   "RedLocX": {
    "seg": 20726,
    "off": 1168,
@@ -12825,6 +13313,31 @@
    "seg": 20726,
    "off": 1176,
    "grounding": "GetRedDefendDir (root:1383:0FF9): switch on es:[0498] 1/2/3 like GetDefendDir on MePlane; Win16 GetRedDefendDir switch (RedPlane)"
+  },
+  "SowDir": {
+   "seg": 20726,
+   "off": 3866,
+   "grounding": "InitSow (root:0AD9:0080): es:[0F1A+2i]=SRand1(8); Win16 InitSow SowDir[i]"
+  },
+  "SowSave": {
+   "seg": 20726,
+   "off": 3880,
+   "grounding": "InitSow (root:0AD9:0091): es:[0F28+2i]=MapA[x][y]; Win16 InitSow SowSave[i]"
+  },
+  "SowTab": {
+   "seg": 15703,
+   "off": 3154,
+   "grounding": "InitSow (root:0AD9:00A3): MapA[x][y]=byte es:[0C52+SowDir[i]]; Win16 InitSow SowTab[SowDir[i]]"
+  },
+  "SowX": {
+   "seg": 20726,
+   "off": 3758,
+   "grounding": "InitSow (root:0AD9:005B): es:[0EAE+2i]=x (SRand1(128)); Win16 InitSow SowX[i]=x"
+  },
+  "SowY": {
+   "seg": 20726,
+   "off": 3840,
+   "grounding": "InitSow (root:0AD9:0067): es:[0F00+2i]=y (SRand1(64)); Win16 InitSow SowY[i]=y"
   },
   "StrategicModeB": {
    "seg": 20726,
@@ -12872,6 +13385,17 @@
     {
      "was": "fd_50F6_3B50",
      "why": "worker data identification: Win16 variable of the same role at the same use sites (reports dig/ovl08/simA/sim10F7)"
+    }
+   ]
+  },
+  "err_3D57_049E": {
+   "seg": 15703,
+   "off": 1182,
+   "grounding": "SetModeProd (root:1383:0337): (unsigned long)[049E+2i]*total/65535; Win16 SetModeProd modeLevels[i]",
+   "history": [
+    {
+     "was": "modeLevels",
+     "why": "registration error by simB: SetModeProd's CONST word 831E holds 50F6, so the table is 50F6:049E, not 3D57:049E; this row has no valid grounding and should be deleted by the supervisor"
     }
    ]
   },
@@ -13010,6 +13534,16 @@
    "off": 1960,
    "grounding": "S25:3BA4 DoAntMoveY:04C5 cmp word es:[07A8],0 (CONST seg word 897E = 3D57)"
   },
+  "fd_3D57_07AA": {
+   "seg": 15703,
+   "off": 1962,
+   "grounding": "EndGameDialog (S14:384C:0DE5): mov es,[876A]; cmp word es:[07AA],0 sound option"
+  },
+  "fd_3D57_07AE": {
+   "seg": 15703,
+   "off": 1966,
+   "grounding": "PictStrnDialog (S14:384C:0B6A): mov es,[876A]; cmp word es:[07AE],0 option flag"
+  },
   "fd_3D57_07B2": {
    "seg": 15703,
    "off": 1970,
@@ -13034,6 +13568,11 @@
    "seg": 15703,
    "off": 2088,
    "grounding": "CalcScore (S14:384C:0000): mov si,0828; mov es,[873A]; cmp es:[si],di history count"
+  },
+  "fd_3D57_09B4": {
+   "seg": 15703,
+   "off": 2484,
+   "grounding": "SpiderDialog (S14:384C:0FA2): mov es,[8770]; mov di,es:[bx+09B4] int table of bitmap ids"
   },
   "fd_3D57_0B36": {
    "seg": 15703,
@@ -13290,6 +13829,11 @@
    "off": 50858,
    "grounding": "f_10F7_005D (GetAntIndex-like): mov es,[CONST word = 3E1D]; es:[..C6AA] list count/field array"
   },
+  "fd_3E1D_C89F": {
+   "seg": 15901,
+   "off": 51359,
+   "grounding": "SmoothAlarm (root:1496:0289): mov es:[bx-0x3761],al with ES=3E1D - copy of the alarm map fd_3E1D_D09F ([64][32]), read back at -0x3781/-0x3762/-0x3741/-0x3760 (4-neighbour smoothing)"
+  },
   "fd_3E1D_D09F": {
    "seg": 15901,
    "off": 53407,
@@ -13445,6 +13989,16 @@
    "off": 704,
    "grounding": "f_0BE8_03AC: mov es,[DS:8118] (CONST 50F6); mov al,es:[si+02C0] byte array indexed by drop"
   },
+  "fd_50F6_0324": {
+   "seg": 20726,
+   "off": 804,
+   "grounding": "ScoreDialog (S14:384C:05C6): mov es,[8760]; les si,es:[0324]; push es:[bx+si+2]/[bx+si] far string table indexed by 50F6:0EAC"
+  },
+  "fd_50F6_0328": {
+   "seg": 20726,
+   "off": 808,
+   "grounding": "EndGameDialog (S14:384C:0DE5): mov es,[876E]; les bx,es:[0328]; push es:[bx+di+2]/[bx+di] far string table"
+  },
   "fd_50F6_032C": {
    "seg": 20726,
    "off": 812,
@@ -13509,6 +14063,11 @@
    "seg": 20726,
    "off": 870,
    "grounding": "f_0BE8_0002: mov es,[DS:8104] (CONST 50F6); mov word es:[0366],0"
+  },
+  "fd_50F6_0368": {
+   "seg": 20726,
+   "off": 872,
+   "grounding": "ScoreDialog/SetDefaultWindPrompt (S14): mov es,[875E]; les bx,es:[0368]; push es:[bx+42]/[bx+40] far string table"
   },
   "fd_50F6_036C": {
    "seg": 20726,
@@ -13644,6 +14203,11 @@
    "seg": 20726,
    "off": 1178,
    "grounding": "f_10F7_0CA8 (root:10F7): mov es,[CONST word = 50F6]; es:[..049A] far data reference"
+  },
+  "fd_50F6_049E": {
+   "seg": 20726,
+   "off": 1182,
+   "grounding": "SetModeProd (root:1383:032F): mov es,[831E] (CONST word = 50F6); unsigned table es:[049E+2i], Win16 modeLevels (the name modeLevels is misregistered at 3D57:049E, see err_3D57_049E)"
   },
   "fd_50F6_04A2": {
    "seg": 20726,
@@ -13909,6 +14473,11 @@
    "seg": 20726,
    "off": 2774,
    "grounding": "S25:3BA4 DoAntMoveY:0111 mov es:[0AD6],ax (CONST seg word 8956 = 50F6)"
+  },
+  "fd_50F6_0ADA": {
+   "seg": 20726,
+   "off": 2778,
+   "grounding": "ScoreDialog (S14:384C:05C6): mov es,[875A]; mov es:[0ADA],ax; mov es:[0ADC],dx = CalcScore() long result"
   },
   "fd_50F6_0AE8": {
    "seg": 20726,
@@ -14310,6 +14879,11 @@
    "off": 4288,
    "grounding": "o08_35F5_0050 (RandWorld): mov es,[S08 CONST word] ; mov es:[off]"
   },
+  "fd_50F6_3836": {
+   "seg": 20726,
+   "off": 14390,
+   "grounding": "CustomerIDDialog (S14:384C:10E5): mov es,[8772]; push es:[3838]; push es:[3836] handle passed to f_171C_1B84"
+  },
   "fd_50F6_383A": {
    "seg": 20726,
    "off": 14394,
@@ -14319,6 +14893,16 @@
    "seg": 20726,
    "off": 14434,
    "grounding": "o09_35F5_0000 (LoadGame): _fstrcpy(MK_FP(50F6,3862), name) after FileSelect (last file name)"
+  },
+  "fd_50F6_3934": {
+   "seg": 20726,
+   "off": 14644,
+   "grounding": "CustomerIDDialog (S14:384C:10E5): mov es,[8776]; push es:[3936]; push es:[3934] handle passed to f_171C_1B84"
+  },
+  "fd_50F6_3938": {
+   "seg": 20726,
+   "off": 14648,
+   "grounding": "CustomerIDDialog (S14:384C:10E5): mov es,[8774]; push es:[393A]; push es:[3938] handle passed to f_171C_1B84"
   },
   "fd_50F6_3942": {
    "seg": 20726,
@@ -14515,6 +15099,11 @@
    "off": 23212,
    "grounding": "f_21FA_08E2: les bx,[5AAC]; cmp es:[bx+2],8000h (far pointer)"
   },
+  "g_62E0": {
+   "seg": 21939,
+   "off": 25312,
+   "grounding": "DoWinHelp (S14:384C:04FB): mov es,[8758] (=55B3); lcall es:[62E0] far function pointer declared far"
+  },
   "g_6300": {
    "seg": 21939,
    "off": 25344,
@@ -14583,7 +15172,7 @@
   "modeLevels": {
    "seg": 15703,
    "off": 1182,
-   "grounding": "SetModeProd (root:1383:0337): (unsigned long)[049E+2i]*total/65535; Win16 SetModeProd modeLevels[i]"
+   "alias_of": "err_3D57_049E"
   },
   "sys_errlist": {
    "seg": 21939,
