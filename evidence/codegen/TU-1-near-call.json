@@ -1,0 +1,7 @@
+{"id": "TU-1", "question": "When does a far call become 'push cs; call near'?",
+ "header": "void far callee(int a, int b, int c);\n",
+ "variants": {"defined_after": "void far f(int a, int b, int c) { callee(a, b, c); }\nvoid far callee(int a, int b, int c) { }",
+              "defined_before": "void far callee(int a, int b, int c) { }\nvoid far f(int a, int b, int c) { callee(a, b, c); }",
+              "prototype_only": "void far f(int a, int b, int c) { callee(a, b, c); }"},
+ "profiles": [{"profile": "msc600", "flags": ["/AL", "/Os"]}],
+ "expect": {"defined_after@0": "push cs; call", "defined_before@0": "push cs; call", "prototype_only@0": "!push cs; call"}}

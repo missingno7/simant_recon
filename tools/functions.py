@@ -67,7 +67,7 @@ def code_segment(obj_bytes: bytes, public: str) -> str:
     from omf import OmfReader
     obj = OmfReader(communals=True).read(obj_bytes)
     for p in obj.publics + getattr(obj, "local_publics", []):
-        if p["name"] == public:
+        if p["name"] in (public, "@" + public.lstrip("_")):
             return p["segment"]
     return "UNIT_TEXT"
 

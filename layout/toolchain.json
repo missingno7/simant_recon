@@ -120,5 +120,61 @@
     "MASM.EXE": "233120302473749eafe9a54a30f8bda0127140c44346e5bcc047d113828a741e"
    }
   }
+ },
+ "hypotheses": {
+  "compiler": {
+   "status": "STRONGLY_SUPPORTED",
+   "value": "Microsoft C 6.00 or 6.00A (CL), large model, /Os baseline",
+   "evidence": [
+    "36 functions exact under pinned msc600 profile",
+    "FRAME-1 excludes MSC 5.10 and QuickC 2.50",
+    "VER-1: 6.00 vs 6.00A differ only under /Ol (undecided)"
+   ]
+  },
+  "memory_model": {
+   "status": "CONFIRMED",
+   "value": "/AL",
+   "evidence": [
+    "far calls/returns, far data pointers",
+    "LLIBCR 77 hits vs MLIBCR 20"
+   ]
+  },
+  "cpu": {
+   "status": "CONFIRMED",
+   "value": "/G0 (8086)",
+   "evidence": [
+    "8 of ~100k decoded instructions are 186+, all in data"
+   ]
+  },
+  "per_module_options": {
+   "status": "CONFIRMED",
+   "value": "/Oe in root:0093; /Gs in root:277D, root:29F0; _fastcall in root:2505",
+   "evidence": [
+    "evidence/codegen/OE-1, GS-1",
+    "module promotions"
+   ]
+  },
+  "runtime": {
+   "status": "CONFIRMED",
+   "value": "MSC 6.00(A)-generation large-model C runtime (LLIBCR+LIBH, no FP)",
+   "evidence": [
+    "evidence/toolchain/runtime-location.json"
+   ]
+  },
+  "overlay_linker": {
+   "status": "CONFIRMED",
+   "value": "Pocket Soft RTLink/Plus",
+   "evidence": [
+    "docs/exe-format.md"
+   ]
+  },
+  "assembler": {
+   "status": "POSSIBLE",
+   "value": "MASM 5.10 (reproduces module 1959; not an attribution)"
+  },
+  "build_date": {
+   "status": "CONFIRMED",
+   "value": "Fri Dec 06 14:51:14 1991 (DGROUP version string)"
+  }
  }
 }

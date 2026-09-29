@@ -2,6 +2,37 @@
  "schema": "simant-manifest-v1",
  "oracle_sha256": "aa0596c6766322a8229ee3c36e57048c92adc82d50fbe2ef37afb8b85fcf4f11",
  "modules": {
+  "S11:35F5": {
+   "unit": "S11",
+   "seg": 13813,
+   "profile": "msc600",
+   "flags": [
+    "/AL",
+    "/Os",
+    "/Oe"
+   ],
+   "placements": {},
+   "lang": "c",
+   "source": "src/S11/m35F5.c",
+   "source_sha256": "d2f7560223bb704a0ef85f3b8a96710960264e5ac05d1513cdeaa419385c6a04",
+   "claims": [
+    {
+     "name": "o11_35F5_0088",
+     "unit": "S11",
+     "seg": 13813,
+     "off": 136,
+     "size": 22,
+     "target_sha256": "28ed0d1c8d61b2152ff4112ae3cb49babd116d151aaf3c90ee78a30d197c5e27",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL",
+     "reloc_order": "EXACT"
+    }
+   ],
+   "scaffold": [
+    "o11_35F5_009E"
+   ],
+   "object_sha256": "ce1b5a0047fb9ebdd26a2511386c95d51c626e9b89b4c16a39c640232002d464"
+  },
   "root:0093": {
    "unit": "root",
    "seg": 147,
@@ -292,6 +323,41 @@
    "scaffold": [],
    "object_sha256": "8caa934862e43e095c8b2d0aee42cd4c15c4ff28b32ddbdeb30d449f7ab2d7e2"
   },
+  "root:015B": {
+   "unit": "root",
+   "seg": 347,
+   "profile": "msc600",
+   "flags": [
+    "/AL",
+    "/Os",
+    "/Oe"
+   ],
+   "placements": {
+    "CONST": {
+     "seg": 21939,
+     "off": 32296,
+     "size": 2
+    }
+   },
+   "lang": "c",
+   "source": "src/root/m015B.c",
+   "source_sha256": "2a8a8d1603033e9b184800d02397c3ca99f5acf054534847ff891fe4e8897070",
+   "claims": [
+    {
+     "name": "f_015B_01B8",
+     "unit": "root",
+     "seg": 347,
+     "off": 440,
+     "size": 25,
+     "target_sha256": "393614bd968a35f15bc936f100b94313c8cfa3bf1d097690879f44050db92e94",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL",
+     "reloc_order": "EXACT"
+    }
+   ],
+   "scaffold": [],
+   "object_sha256": "06ac84bc5eed4cfd50bd09ec923c99f9836ef000ff96be16c85d91f9f3be28c2"
+  },
   "root:0250": {
    "unit": "root",
    "seg": 592,
@@ -319,6 +385,49 @@
     "f_0250_0D10"
    ],
    "object_sha256": "66fa63a9af911a5f8a0f18b40e64b9f80b9827ce9ca5558f0440ab8087c402e7"
+  },
+  "root:1959": {
+   "unit": "root",
+   "seg": 6489,
+   "profile": "masm510",
+   "flags": [
+    "/Mx"
+   ],
+   "placements": {},
+   "lang": "asm",
+   "asm_evidence": "docs/codegen-rules.md ASM-1: every C spelling of the word swap compiles to byte loads, inline _asm always adds mov sp,bp; original has neither",
+   "extent": {
+    "start": 103826,
+    "end": 103851
+   },
+   "source": "src/root/m1959.asm",
+   "source_sha256": "73186753eaea7bcf17b6419094a21937299b1cba5be10a79e7a513794d408f56",
+   "claims": [
+    {
+     "name": "f_1959_0002",
+     "unit": "root",
+     "seg": 6489,
+     "off": 2,
+     "size": 10,
+     "target_sha256": "4cd996ed6ac8e7d39335c985907384a00e88fde508ab5f29d7716a01c2548a42",
+     "kind": "ASM",
+     "provenance": "EXACT_NATURAL",
+     "reloc_order": "EXACT"
+    },
+    {
+     "name": "f_1959_000C",
+     "unit": "root",
+     "seg": 6489,
+     "off": 12,
+     "size": 15,
+     "target_sha256": "4c604cd567e1d30160dc3abdb18259f93e53c2f5a9acf1be922554cb03f80a47",
+     "kind": "ASM",
+     "provenance": "EXACT_NATURAL",
+     "reloc_order": "EXACT"
+    }
+   ],
+   "scaffold": [],
+   "object_sha256": "dc5962fb9bf49637913a69a10534341f921e4540bf4f4106aae7f47a5c561613"
   },
   "root:277D": {
    "unit": "root",
@@ -400,6 +509,93 @@
    ],
    "scaffold": [],
    "object_sha256": "fb00f329c7319701e1955cdd0e96dd68d2df669d0146c2343f5300cfa1f04078"
+  },
+  "root:29F0": {
+   "unit": "root",
+   "seg": 10736,
+   "profile": "msc600",
+   "flags": [
+    "/AL",
+    "/Os",
+    "/Gs"
+   ],
+   "placements": {},
+   "extent": {
+    "start": 171786,
+    "end": 171852
+   },
+   "source": "src/root/m29F0.c",
+   "source_sha256": "2787050f6b809856cde2d2a60fe120357a195041d396bb55caf7dd1b8084e302",
+   "claims": [
+    {
+     "name": "f_29F0_000A",
+     "unit": "root",
+     "seg": 10736,
+     "off": 10,
+     "size": 8,
+     "target_sha256": "f49f5ff012dc5a9fe3de5dffd7fa5160fd56958ff2fce6fe2085c6aa6ca50a8c",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL",
+     "reloc_order": "EXACT"
+    },
+    {
+     "name": "f_29F0_0012",
+     "unit": "root",
+     "seg": 10736,
+     "off": 18,
+     "size": 8,
+     "target_sha256": "051bf0ac61bf4e6075a9798ed1f80fe5030f5a56df1c846ea23042218fd3b2ae",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL",
+     "reloc_order": "EXACT"
+    },
+    {
+     "name": "f_29F0_001A",
+     "unit": "root",
+     "seg": 10736,
+     "off": 26,
+     "size": 8,
+     "target_sha256": "f49f5ff012dc5a9fe3de5dffd7fa5160fd56958ff2fce6fe2085c6aa6ca50a8c",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL",
+     "reloc_order": "EXACT"
+    },
+    {
+     "name": "f_29F0_0022",
+     "unit": "root",
+     "seg": 10736,
+     "off": 34,
+     "size": 8,
+     "target_sha256": "051bf0ac61bf4e6075a9798ed1f80fe5030f5a56df1c846ea23042218fd3b2ae",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL",
+     "reloc_order": "EXACT"
+    },
+    {
+     "name": "f_29F0_002A",
+     "unit": "root",
+     "seg": 10736,
+     "off": 42,
+     "size": 14,
+     "target_sha256": "5d9f516862a8474f6fd634e4bac8486f4efe30268c5f530e3b55323cae684c06",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL",
+     "reloc_order": "EXACT"
+    },
+    {
+     "name": "f_29F0_0038",
+     "unit": "root",
+     "seg": 10736,
+     "off": 56,
+     "size": 20,
+     "target_sha256": "250e94804ed6c32f419f423517875e43d788330fbbabad4673a7b7cb009b66d0",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL",
+     "reloc_order": "EXACT"
+    }
+   ],
+   "scaffold": [],
+   "object_sha256": "f544b634f7f643fa009e69db3ee7aa35aa2cfd24b6d90299f1a7cc2adaa1cbc8"
   }
  }
 }

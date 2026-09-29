@@ -1,0 +1,6 @@
+{"id": "OS-1", "question": "Does /Os share one epilogue and omit alignment NOPs for an early return (f_00F8_0459 abs)?",
+ "header": "",
+ "variants": {"if_return": "int far f(int v) { if (v < 0) return -v; return v; }",
+              "ternary": "int far f(int v) { return v < 0 ? -v : v; }"},
+ "profiles": [{"profile": "msc600", "flags": ["/AL", "/Os"]}, {"profile": "msc600", "flags": ["/AL", "/Ot"]}],
+ "expect": {"if_return@0": "neg ax; jmp", "if_return@1": "!neg ax; jmp", "ternary@0": "cdq; xor ax, dx; sub ax, dx"}}

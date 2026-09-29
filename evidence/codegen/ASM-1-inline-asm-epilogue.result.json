@@ -1,0 +1,104 @@
+{
+ "id": "ASM-1",
+ "question": "Can MSC 6.00 produce 'mov ax,[bp+6]; xchg al,ah (86 C4); pop bp; retf' (f_1959_0002)?",
+ "results": [
+  {
+   "variant": "c_shift",
+   "profile_index": 0,
+   "profile": "msc600",
+   "flags": [
+    "/AL",
+    "/Os",
+    "/Gs"
+   ],
+   "source_sha256": "48be300fc0b8b94f72004a50f93d364813080c7ba3000f960ce58163f6b29078",
+   "bytes": "558bec8a46078a66065dcb",
+   "disasm": "push bp; mov bp, sp; mov al, byte ptr [bp + 7]; mov ah, byte ptr [bp + 6]; pop bp; retf"
+  },
+  {
+   "variant": "c_mask",
+   "profile_index": 0,
+   "profile": "msc600",
+   "flags": [
+    "/AL",
+    "/Os",
+    "/Gs"
+   ],
+   "source_sha256": "b99b14591e8cbf555eb3c2445c004432c6aa31b9df6f6e643ad01cb229b6ed5f",
+   "bytes": "558bec8a46078a66065dcb",
+   "disasm": "push bp; mov bp, sp; mov al, byte ptr [bp + 7]; mov ah, byte ptr [bp + 6]; pop bp; retf"
+  },
+  {
+   "variant": "inline_asm",
+   "profile_index": 0,
+   "profile": "msc600",
+   "flags": [
+    "/AL",
+    "/Os",
+    "/Gs"
+   ],
+   "source_sha256": "e2bb8c61ea529887badfe18d91ea0da4933bc0779928583b99be99ba4347a2ef",
+   "bytes": "558bec8b460686c48be55dcb",
+   "disasm": "push bp; mov bp, sp; mov ax, word ptr [bp + 6]; xchg ah, al; mov sp, bp; pop bp; retf"
+  },
+  {
+   "variant": "c_shift",
+   "profile_index": 1,
+   "profile": "msc600",
+   "flags": [
+    "/AL",
+    "/Ox"
+   ],
+   "source_sha256": "48be300fc0b8b94f72004a50f93d364813080c7ba3000f960ce58163f6b29078",
+   "bytes": "558bec8b56068ac68ae25dcb",
+   "disasm": "push bp; mov bp, sp; mov dx, word ptr [bp + 6]; mov al, dh; mov ah, dl; pop bp; retf"
+  },
+  {
+   "variant": "c_mask",
+   "profile_index": 1,
+   "profile": "msc600",
+   "flags": [
+    "/AL",
+    "/Ox"
+   ],
+   "source_sha256": "b99b14591e8cbf555eb3c2445c004432c6aa31b9df6f6e643ad01cb229b6ed5f",
+   "bytes": "558bec8b56068ac68ae25dcb",
+   "disasm": "push bp; mov bp, sp; mov dx, word ptr [bp + 6]; mov al, dh; mov ah, dl; pop bp; retf"
+  },
+  {
+   "variant": "inline_asm",
+   "profile_index": 1,
+   "profile": "msc600",
+   "flags": [
+    "/AL",
+    "/Ox"
+   ],
+   "source_sha256": "e2bb8c61ea529887badfe18d91ea0da4933bc0779928583b99be99ba4347a2ef",
+   "bytes": "558bec8b460686c48be55dcb",
+   "disasm": "push bp; mov bp, sp; mov ax, word ptr [bp + 6]; xchg ah, al; mov sp, bp; pop bp; retf"
+  }
+ ],
+ "checks": [
+  {
+   "check": "c_shift@0",
+   "needle": "!xchg",
+   "ok": true
+  },
+  {
+   "check": "c_mask@0",
+   "needle": "!xchg",
+   "ok": true
+  },
+  {
+   "check": "inline_asm@0",
+   "needle": "mov sp, bp; pop bp",
+   "ok": true
+  },
+  {
+   "check": "c_shift@1",
+   "needle": "!xchg",
+   "ok": true
+  }
+ ],
+ "all_checks_pass": true
+}

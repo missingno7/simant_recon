@@ -1,0 +1,5 @@
+{"id": "OE-1", "question": "Does /Oe enregister plain autos while keeping an unused home (RNG module frame shape)?",
+ "header": "extern int far SRand1(unsigned int); extern int far SRand2(void);\n",
+ "variants": {"dice": "int far f(int range){ int first; int second; first = SRand1(range); second = SRand1(range); if (second > first) second = first; if (SRand2()) second = -second; return second; }"},
+ "profiles": [{"profile": "msc600", "flags": ["/AL", "/Os", "/Oe"]}, {"profile": "msc600", "flags": ["/AL", "/Os"]}],
+ "expect": {"dice@0": "push di", "dice@0": "mov ax, 2; lcall", "dice@1": "!push di"}}

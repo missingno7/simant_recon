@@ -1,0 +1,29 @@
+{
+ "id": "GS-1",
+ "question": "What does an empty far function compile to with and without /Gs (module 277D)?",
+ "header": "",
+ "variants": {
+  "empty": "void far f(void) { }"
+ },
+ "profiles": [
+  {
+   "profile": "msc600",
+   "flags": [
+    "/AL",
+    "/Os",
+    "/Gs"
+   ]
+  },
+  {
+   "profile": "msc600",
+   "flags": [
+    "/AL",
+    "/Os"
+   ]
+  }
+ ],
+ "expect": {
+  "empty@0": "retf",
+  "empty@1": "xor ax, ax; lcall 0, 0; retf"
+ }
+}

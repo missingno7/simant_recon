@@ -1,0 +1,77 @@
+{
+ "id": "FRAME-1",
+ "question": "Is 'mov sp,bp' emitted in a frame without locals (discriminates MSC 6.x from 5.10)?",
+ "results": [
+  {
+   "variant": "store",
+   "profile_index": 0,
+   "profile": "msc600",
+   "flags": [
+    "/AL",
+    "/Os"
+   ],
+   "source_sha256": "5ef367b51113f2cf4f6fd749f824a98608ad4c0790fb49e8b165e68244240fa3",
+   "bytes": "558bec33c09a000000008b4606a300008be55dcb",
+   "disasm": "push bp; mov bp, sp; xor ax, ax; lcall 0, 0; mov ax, word ptr [bp + 6]; mov word ptr [0], ax; mov sp, bp; pop bp; retf"
+  },
+  {
+   "variant": "store",
+   "profile_index": 1,
+   "profile": "msc510",
+   "flags": [
+    "/AL",
+    "/Os"
+   ],
+   "source_sha256": "5ef367b51113f2cf4f6fd749f824a98608ad4c0790fb49e8b165e68244240fa3",
+   "bytes": "558bec33c09a000000008b4606a300005dcb",
+   "disasm": "push bp; mov bp, sp; xor ax, ax; lcall 0, 0; mov ax, word ptr [bp + 6]; mov word ptr [0], ax; pop bp; retf"
+  },
+  {
+   "variant": "store",
+   "profile_index": 2,
+   "profile": "msc600a",
+   "flags": [
+    "/AL",
+    "/Os"
+   ],
+   "source_sha256": "5ef367b51113f2cf4f6fd749f824a98608ad4c0790fb49e8b165e68244240fa3",
+   "bytes": "558bec33c09a000000008b4606a300008be55dcb",
+   "disasm": "push bp; mov bp, sp; xor ax, ax; lcall 0, 0; mov ax, word ptr [bp + 6]; mov word ptr [0], ax; mov sp, bp; pop bp; retf"
+  },
+  {
+   "variant": "store",
+   "profile_index": 3,
+   "profile": "qc250",
+   "flags": [
+    "/AL",
+    "/Os"
+   ],
+   "source_sha256": "5ef367b51113f2cf4f6fd749f824a98608ad4c0790fb49e8b165e68244240fa3",
+   "bytes": "558bec33c09a000000008b4606a300005dcb",
+   "disasm": "push bp; mov bp, sp; xor ax, ax; lcall 0, 0; mov ax, word ptr [bp + 6]; mov word ptr [0], ax; pop bp; retf"
+  }
+ ],
+ "checks": [
+  {
+   "check": "store@0",
+   "needle": "mov sp, bp; pop bp",
+   "ok": true
+  },
+  {
+   "check": "store@1",
+   "needle": "!mov sp, bp",
+   "ok": true
+  },
+  {
+   "check": "store@2",
+   "needle": "mov sp, bp; pop bp",
+   "ok": true
+  },
+  {
+   "check": "store@3",
+   "needle": "!mov sp, bp",
+   "ok": true
+  }
+ ],
+ "all_checks_pass": true
+}

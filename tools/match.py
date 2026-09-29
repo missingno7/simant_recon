@@ -54,8 +54,19 @@ def symbols() -> dict:
 
 
 def obj_name_lookup(name: str) -> dict | None:
-    """Resolve an OBJ-level name (C names carry a leading underscore)."""
+    """Resolve an OBJ-level name (C names carry a leading underscore; MSC 6
+    _fastcall names carry a leading '@')."""
+    if name.startswith("@"):
+        name = "_" + name[1:]
     return symbols().get(name)
+
+
+def public_in(obj, cname: str):
+    """(decorated name, public record) of C function ``cname`` in ``obj``."""
+    for p in obj.publics + getattr(obj, "local_publics", []):
+        if p["name"] in ("_" + cname, "@" + cname):
+            return p["name"], p
+    return None, None
 
 
 @dataclass
@@ -145,6 +156,8 @@ class Binder:
         pubs = sorted((p for p in obj.publics + getattr(obj, "local_publics", [])
                        if p["segment"] == self.segment), key=lambda p: p["offset"])
         pub = next((p for p in pubs if p["name"] == self.public), None)
+        if pub is None and self.public.startswith("_"):
+            pub = next((p for p in pubs if p["name"] == "@" + self.public[1:]), None)
         if pub is None:
             res.reasons.append(f"candidate lacks public {self.public}")
             return res
@@ -176,6 +189,9 @@ class Binder:
                     res.reasons.append(f"fixup straddles extent at {o:#x}")
                 continue
             rel = o - pub_off
+            if o + f["width"] > pub_off + size:
+                res.reasons.append(f"fixup at +{rel:#x} crosses the extent end")
+                continue
             site_off = t.off + rel                     # offset within target frame
             addend = int.from_bytes(bytes.fromhex(f["encoded_addend"]), "little")
             disp = f.get("displacement") or 0

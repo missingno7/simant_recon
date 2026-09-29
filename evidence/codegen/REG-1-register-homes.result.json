@@ -1,0 +1,130 @@
+{
+ "id": "REG-1",
+ "question": "Do explicit register locals get a BP home, and which of SI/DI do they take?",
+ "results": [
+  {
+   "variant": "one_register",
+   "profile_index": 0,
+   "profile": "msc600",
+   "flags": [
+    "/AL",
+    "/Os"
+   ],
+   "source_sha256": "2684cb6f09d4ea1e9cda4017cefdb2aee677c99edda2c5cac7df8a302a3d706a",
+   "bytes": "558bec33c09a0000000056ff76069a000000005b8bf0569a000000005b8bc65e8be55dcb",
+   "disasm": "push bp; mov bp, sp; xor ax, ax; lcall 0, 0; push si; push word ptr [bp + 6]; lcall 0, 0; pop bx; mov si, ax; push si; lcall 0, 0; pop bx; mov ax, si; pop si; mov sp, bp; pop bp; retf"
+  },
+  {
+   "variant": "two_register_ab",
+   "profile_index": 0,
+   "profile": "msc600",
+   "flags": [
+    "/AL",
+    "/Os"
+   ],
+   "source_sha256": "a9cfd3bdd3919d2d0dc1cace60fe0a66058b9ce534bf6910c234acec6ede9fc4",
+   "bytes": "558bec33c09a000000005756ff76069a000000005b8bf0569a000000005b8bf8569a000000005b579a000000005b8bc603c75e5f8be55dcb",
+   "disasm": "push bp; mov bp, sp; xor ax, ax; lcall 0, 0; push di; push si; push word ptr [bp + 6]; lcall 0, 0; pop bx; mov si, ax; push si; lcall 0, 0; pop bx; mov di, ax; push si; lcall 0, 0; pop bx; push di; lcall 0, 0; pop bx; mov ax, si; add ax, di; pop si; pop di; mov sp, bp; pop bp; retf"
+  },
+  {
+   "variant": "two_register_ba",
+   "profile_index": 0,
+   "profile": "msc600",
+   "flags": [
+    "/AL",
+    "/Os"
+   ],
+   "source_sha256": "8a0c63691cab876ac6b7729cd95509221c8d3d0864279273aa4ddbc256c626cf",
+   "bytes": "558bec33c09a000000005756ff76069a000000005b8bf8579a000000005b8bf0579a000000005b569a000000005b8bc703c65e5f8be55dcb",
+   "disasm": "push bp; mov bp, sp; xor ax, ax; lcall 0, 0; push di; push si; push word ptr [bp + 6]; lcall 0, 0; pop bx; mov di, ax; push di; lcall 0, 0; pop bx; mov si, ax; push di; lcall 0, 0; pop bx; push si; lcall 0, 0; pop bx; mov ax, di; add ax, si; pop si; pop di; mov sp, bp; pop bp; retf"
+  },
+  {
+   "variant": "unused_auto",
+   "profile_index": 0,
+   "profile": "msc600",
+   "flags": [
+    "/AL",
+    "/Os"
+   ],
+   "source_sha256": "391a77254da3d43c93d3d1d66235198ac2a85c8f6621cca8e49493f5aed03e21",
+   "bytes": "558becb802009a00000000ff76069a000000005b8b46068be55dcb",
+   "disasm": "push bp; mov bp, sp; mov ax, 2; lcall 0, 0; push word ptr [bp + 6]; lcall 0, 0; pop bx; mov ax, word ptr [bp + 6]; mov sp, bp; pop bp; retf"
+  },
+  {
+   "variant": "one_register",
+   "profile_index": 1,
+   "profile": "msc510",
+   "flags": [
+    "/AL",
+    "/Os"
+   ],
+   "source_sha256": "2684cb6f09d4ea1e9cda4017cefdb2aee677c99edda2c5cac7df8a302a3d706a",
+   "bytes": "558becb802009a0000000056ff76069a0000000083c4028bf0569a0000000083c4028bc65e8be55dcb90",
+   "disasm": "push bp; mov bp, sp; mov ax, 2; lcall 0, 0; push si; push word ptr [bp + 6]; lcall 0, 0; add sp, 2; mov si, ax; push si; lcall 0, 0; add sp, 2; mov ax, si; pop si; mov sp, bp; pop bp; retf; nop"
+  },
+  {
+   "variant": "two_register_ab",
+   "profile_index": 1,
+   "profile": "msc510",
+   "flags": [
+    "/AL",
+    "/Os"
+   ],
+   "source_sha256": "a9cfd3bdd3919d2d0dc1cace60fe0a66058b9ce534bf6910c234acec6ede9fc4",
+   "bytes": "558becb804009a000000005756ff76069a0000000083c4028bf0569a0000000083c4028bf8569a0000000083c402579a0000000083c4028bc603c75e5f8be55dcb90",
+   "disasm": "push bp; mov bp, sp; mov ax, 4; lcall 0, 0; push di; push si; push word ptr [bp + 6]; lcall 0, 0; add sp, 2; mov si, ax; push si; lcall 0, 0; add sp, 2; mov di, ax; push si; lcall 0, 0; add sp, 2; push di; lcall 0, 0; add sp, 2; mov ax, si; add ax, di; pop si; pop di; mov sp, bp; pop bp; retf; nop"
+  },
+  {
+   "variant": "two_register_ba",
+   "profile_index": 1,
+   "profile": "msc510",
+   "flags": [
+    "/AL",
+    "/Os"
+   ],
+   "source_sha256": "8a0c63691cab876ac6b7729cd95509221c8d3d0864279273aa4ddbc256c626cf",
+   "bytes": "558becb804009a000000005756ff76069a0000000083c4028bf8579a0000000083c4028bf0579a0000000083c402569a0000000083c4028bc703c65e5f8be55dcb90",
+   "disasm": "push bp; mov bp, sp; mov ax, 4; lcall 0, 0; push di; push si; push word ptr [bp + 6]; lcall 0, 0; add sp, 2; mov di, ax; push di; lcall 0, 0; add sp, 2; mov si, ax; push di; lcall 0, 0; add sp, 2; push si; lcall 0, 0; add sp, 2; mov ax, di; add ax, si; pop si; pop di; mov sp, bp; pop bp; retf; nop"
+  },
+  {
+   "variant": "unused_auto",
+   "profile_index": 1,
+   "profile": "msc510",
+   "flags": [
+    "/AL",
+    "/Os"
+   ],
+   "source_sha256": "391a77254da3d43c93d3d1d66235198ac2a85c8f6621cca8e49493f5aed03e21",
+   "bytes": "558becb802009a00000000ff76069a000000008b46068be55dcb",
+   "disasm": "push bp; mov bp, sp; mov ax, 2; lcall 0, 0; push word ptr [bp + 6]; lcall 0, 0; mov ax, word ptr [bp + 6]; mov sp, bp; pop bp; retf"
+  }
+ ],
+ "checks": [
+  {
+   "check": "one_register@0",
+   "needle": "xor ax, ax; lcall",
+   "ok": true
+  },
+  {
+   "check": "one_register@1",
+   "needle": "mov ax, 2; lcall",
+   "ok": true
+  },
+  {
+   "check": "two_register_ab@0",
+   "needle": "pop bx; mov si, ax",
+   "ok": true
+  },
+  {
+   "check": "two_register_ba@0",
+   "needle": "pop bx; mov di, ax",
+   "ok": true
+  },
+  {
+   "check": "unused_auto@0",
+   "needle": "mov ax, 2; lcall",
+   "ok": true
+  }
+ ],
+ "all_checks_pass": true
+}

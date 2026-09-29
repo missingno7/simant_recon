@@ -1,247 +1,188 @@
 {
- "schema": "simant-xver-decisions-v1",
- "note": "Reviewed pair decisions. CONFIRMED needs >= 2 independent anchors (unique diagnostics, runtime-call signature, call-graph agreement, behaviour). Supervisor-maintained. Keys are DOS addresses UNIT:SEG:OFF (stable across renames).",
- "pairs": {
-  "root:1C62:000C": {
-   "win16": "_Punt",
+ "schema": "simant-dos-findings-v1",
+ "note": "DOS functions proven byte-exact whose Win16 counterparts are CONFIRMED/HIGH. The DOS source is the natural MSC 6 form; it is a semantic hint for Win16, never a Win16 byte proof.",
+ "findings": [
+  {
+   "win16": "_SetSRandSeed",
+   "dos": "SetSRandSeed",
    "confidence": "CONFIRMED",
-   "reviewed": "2026-09-29",
+   "dos_source": "src/root/m0093.c",
+   "dos_compiler": "MSC 6.00 /AL /Os /Oe",
    "evidence": [
-    "variadic (char far *format, ...) formatted into an automatic buffer (DOS vsprintf, Win16 WVSPrintf) then fatal report and exit",
-    "DOS string 'FATAL ERROR: PROGRAM ABORTED\n%s' vs Win16 'Fatal Error' caption: same role",
-    "86 DOS callers; highest fan-in diagnostic sink on both sides",
-    "callee of CONFIRMED db_LoadObject in the same call position (first call)"
+    "same translation unit as Win16 simone_1506 (SetSRandSeed..SRand256): member order preserved",
+    "unique LFSR feedback constant 0x1BF5 and seed mix constant 0x3751 on both sides",
+    "SRand2..SRand256: eight consecutive functions with masks 1,3,7,..,0xFF in ascending order as Win16",
+    "SeedRRand call sequence SeedSRand, SRand128, TickCount, srand, rand-loop matches Win16 source"
    ]
   },
-  "root:1A53:0125": {
-   "win16": "_db_LoadObject",
+  {
+   "win16": "_SeedSRand",
+   "dos": "SeedSRand",
    "confidence": "CONFIRMED",
-   "reviewed": "2026-09-29",
+   "dos_source": "src/root/m0093.c",
+   "dos_compiler": "MSC 6.00 /AL /Os /Oe",
    "evidence": [
-    "three unique diagnostics shared verbatim: 'cache table full, can't load object', 'load attempt with database closed', 'memory full or object ...'",
-    "calls DBRecall and ch_AddEntry in the same order on both sides"
+    "same translation unit as Win16 simone_1506 (SetSRandSeed..SRand256): member order preserved",
+    "unique LFSR feedback constant 0x1BF5 and seed mix constant 0x3751 on both sides",
+    "SRand2..SRand256: eight consecutive functions with masks 1,3,7,..,0xFF in ascending order as Win16",
+    "SeedRRand call sequence SeedSRand, SRand128, TickCount, srand, rand-loop matches Win16 source"
    ]
   },
-  "root:25E7:007A": {
-   "win16": "_font_ReadFont",
+  {
+   "win16": "_SeedRRand",
+   "dos": "SeedRRand",
    "confidence": "CONFIRMED",
-   "reviewed": "2026-09-29",
+   "dos_source": "src/root/m0093.c",
+   "dos_compiler": "MSC 6.00 /AL /Os /Oe",
    "evidence": [
-    "unique strings 'fontheader' and 'fontimage'",
-    "runtime signature fopen/fread/fclose in both"
+    "same translation unit as Win16 simone_1506 (SetSRandSeed..SRand256): member order preserved",
+    "unique LFSR feedback constant 0x1BF5 and seed mix constant 0x3751 on both sides",
+    "SRand2..SRand256: eight consecutive functions with masks 1,3,7,..,0xFF in ascending order as Win16",
+    "SeedRRand call sequence SeedSRand, SRand128, TickCount, srand, rand-loop matches Win16 source"
    ]
   },
-  "root:1A28:0006": {
-   "win16": "_OpenDB",
+  {
+   "win16": "_RRand",
+   "dos": "RRand",
    "confidence": "CONFIRMED",
-   "reviewed": "2026-09-29",
+   "dos_source": "src/root/m0093.c",
+   "dos_compiler": "MSC 6.00 /AL /Os /Oe",
    "evidence": [
-    "'%s.dat' format plus unique 'cannot create data file.'",
-    "sprintf runtime call in both"
+    "same translation unit as Win16 simone_1506 (SetSRandSeed..SRand256): member order preserved",
+    "unique LFSR feedback constant 0x1BF5 and seed mix constant 0x3751 on both sides",
+    "SRand2..SRand256: eight consecutive functions with masks 1,3,7,..,0xFF in ascending order as Win16",
+    "SeedRRand call sequence SeedSRand, SRand128, TickCount, srand, rand-loop matches Win16 source"
    ]
   },
-  "root:1986:0004": {
-   "win16": "_OpenIndex",
+  {
+   "win16": "_SRand1",
+   "dos": "SRand1",
    "confidence": "CONFIRMED",
-   "reviewed": "2026-09-29",
+   "dos_source": "src/root/m0093.c",
+   "dos_compiler": "MSC 6.00 /AL /Os /Oe",
    "evidence": [
-    "'%s.ndx' format plus unique 'index file missing'",
-    "sprintf runtime call in both"
+    "same translation unit as Win16 simone_1506 (SetSRandSeed..SRand256): member order preserved",
+    "unique LFSR feedback constant 0x1BF5 and seed mix constant 0x3751 on both sides",
+    "SRand2..SRand256: eight consecutive functions with masks 1,3,7,..,0xFF in ascending order as Win16",
+    "SeedRRand call sequence SeedSRand, SRand128, TickCount, srand, rand-loop matches Win16 source"
    ]
   },
-  "root:277D:000A": {
+  {
+   "win16": "_SRand2",
+   "dos": "SRand2",
+   "confidence": "CONFIRMED",
+   "dos_source": "src/root/m0093.c",
+   "dos_compiler": "MSC 6.00 /AL /Os /Oe",
+   "evidence": [
+    "same translation unit as Win16 simone_1506 (SetSRandSeed..SRand256): member order preserved",
+    "unique LFSR feedback constant 0x1BF5 and seed mix constant 0x3751 on both sides",
+    "SRand2..SRand256: eight consecutive functions with masks 1,3,7,..,0xFF in ascending order as Win16",
+    "SeedRRand call sequence SeedSRand, SRand128, TickCount, srand, rand-loop matches Win16 source"
+   ]
+  },
+  {
+   "win16": "_SRand4",
+   "dos": "SRand4",
+   "confidence": "CONFIRMED",
+   "dos_source": "src/root/m0093.c",
+   "dos_compiler": "MSC 6.00 /AL /Os /Oe",
+   "evidence": [
+    "same translation unit as Win16 simone_1506 (SetSRandSeed..SRand256): member order preserved",
+    "unique LFSR feedback constant 0x1BF5 and seed mix constant 0x3751 on both sides",
+    "SRand2..SRand256: eight consecutive functions with masks 1,3,7,..,0xFF in ascending order as Win16",
+    "SeedRRand call sequence SeedSRand, SRand128, TickCount, srand, rand-loop matches Win16 source"
+   ]
+  },
+  {
+   "win16": "_SRand8",
+   "dos": "SRand8",
+   "confidence": "CONFIRMED",
+   "dos_source": "src/root/m0093.c",
+   "dos_compiler": "MSC 6.00 /AL /Os /Oe",
+   "evidence": [
+    "same translation unit as Win16 simone_1506 (SetSRandSeed..SRand256): member order preserved",
+    "unique LFSR feedback constant 0x1BF5 and seed mix constant 0x3751 on both sides",
+    "SRand2..SRand256: eight consecutive functions with masks 1,3,7,..,0xFF in ascending order as Win16",
+    "SeedRRand call sequence SeedSRand, SRand128, TickCount, srand, rand-loop matches Win16 source"
+   ]
+  },
+  {
+   "win16": "_SRand16",
+   "dos": "SRand16",
+   "confidence": "CONFIRMED",
+   "dos_source": "src/root/m0093.c",
+   "dos_compiler": "MSC 6.00 /AL /Os /Oe",
+   "evidence": [
+    "same translation unit as Win16 simone_1506 (SetSRandSeed..SRand256): member order preserved",
+    "unique LFSR feedback constant 0x1BF5 and seed mix constant 0x3751 on both sides",
+    "SRand2..SRand256: eight consecutive functions with masks 1,3,7,..,0xFF in ascending order as Win16",
+    "SeedRRand call sequence SeedSRand, SRand128, TickCount, srand, rand-loop matches Win16 source"
+   ]
+  },
+  {
+   "win16": "_SRand32",
+   "dos": "SRand32",
+   "confidence": "CONFIRMED",
+   "dos_source": "src/root/m0093.c",
+   "dos_compiler": "MSC 6.00 /AL /Os /Oe",
+   "evidence": [
+    "same translation unit as Win16 simone_1506 (SetSRandSeed..SRand256): member order preserved",
+    "unique LFSR feedback constant 0x1BF5 and seed mix constant 0x3751 on both sides",
+    "SRand2..SRand256: eight consecutive functions with masks 1,3,7,..,0xFF in ascending order as Win16",
+    "SeedRRand call sequence SeedSRand, SRand128, TickCount, srand, rand-loop matches Win16 source"
+   ]
+  },
+  {
+   "win16": "_SRand64",
+   "dos": "SRand64",
+   "confidence": "CONFIRMED",
+   "dos_source": "src/root/m0093.c",
+   "dos_compiler": "MSC 6.00 /AL /Os /Oe",
+   "evidence": [
+    "same translation unit as Win16 simone_1506 (SetSRandSeed..SRand256): member order preserved",
+    "unique LFSR feedback constant 0x1BF5 and seed mix constant 0x3751 on both sides",
+    "SRand2..SRand256: eight consecutive functions with masks 1,3,7,..,0xFF in ascending order as Win16",
+    "SeedRRand call sequence SeedSRand, SRand128, TickCount, srand, rand-loop matches Win16 source"
+   ]
+  },
+  {
+   "win16": "_SRand128",
+   "dos": "SRand128",
+   "confidence": "CONFIRMED",
+   "dos_source": "src/root/m0093.c",
+   "dos_compiler": "MSC 6.00 /AL /Os /Oe",
+   "evidence": [
+    "same translation unit as Win16 simone_1506 (SetSRandSeed..SRand256): member order preserved",
+    "unique LFSR feedback constant 0x1BF5 and seed mix constant 0x3751 on both sides",
+    "SRand2..SRand256: eight consecutive functions with masks 1,3,7,..,0xFF in ascending order as Win16",
+    "SeedRRand call sequence SeedSRand, SRand128, TickCount, srand, rand-loop matches Win16 source"
+   ]
+  },
+  {
+   "win16": "_SRand256",
+   "dos": "SRand256",
+   "confidence": "CONFIRMED",
+   "dos_source": "src/root/m0093.c",
+   "dos_compiler": "MSC 6.00 /AL /Os /Oe",
+   "evidence": [
+    "same translation unit as Win16 simone_1506 (SetSRandSeed..SRand256): member order preserved",
+    "unique LFSR feedback constant 0x1BF5 and seed mix constant 0x3751 on both sides",
+    "SRand2..SRand256: eight consecutive functions with masks 1,3,7,..,0xFF in ascending order as Win16",
+    "SeedRRand call sequence SeedSRand, SRand128, TickCount, srand, rand-loop matches Win16 source"
+   ]
+  },
+  {
    "win16": "_WinPrintf",
+   "dos": "WinPrintf",
    "confidence": "HIGH",
-   "reviewed": "2026-09-29",
+   "dos_source": "src/root/m277D.c",
+   "dos_compiler": "MSC 6.00 /AL /Os /Gs",
    "evidence": [
     "8 anchored callers of the DOS function map onto callers of _WinPrintf",
-    "DOS body is an empty far function (debug formatter compiled out); Win16 body formats only when debugEnabled"
-   ]
-  },
-  "root:0093:008F": {
-   "win16": "_SetSRandSeed",
-   "confidence": "CONFIRMED",
-   "reviewed": "2026-09-29",
-   "evidence": [
-    "same translation unit as Win16 simone_1506 (SetSRandSeed..SRand256): member order preserved",
-    "unique LFSR feedback constant 0x1BF5 and seed mix constant 0x3751 on both sides",
-    "SRand2..SRand256: eight consecutive functions with masks 1,3,7,..,0xFF in ascending order as Win16",
-    "SeedRRand call sequence SeedSRand, SRand128, TickCount, srand, rand-loop matches Win16 source"
-   ]
-  },
-  "root:0093:00A3": {
-   "win16": "_GetSRandSeed",
-   "confidence": "CONFIRMED",
-   "reviewed": "2026-09-29",
-   "evidence": [
-    "same translation unit as Win16 simone_1506 (SetSRandSeed..SRand256): member order preserved",
-    "unique LFSR feedback constant 0x1BF5 and seed mix constant 0x3751 on both sides",
-    "SRand2..SRand256: eight consecutive functions with masks 1,3,7,..,0xFF in ascending order as Win16",
-    "SeedRRand call sequence SeedSRand, SRand128, TickCount, srand, rand-loop matches Win16 source"
-   ]
-  },
-  "root:0093:00B0": {
-   "win16": "_SetRRandSeed",
-   "confidence": "CONFIRMED",
-   "reviewed": "2026-09-29",
-   "evidence": [
-    "same translation unit as Win16 simone_1506 (SetSRandSeed..SRand256): member order preserved",
-    "unique LFSR feedback constant 0x1BF5 and seed mix constant 0x3751 on both sides",
-    "SRand2..SRand256: eight consecutive functions with masks 1,3,7,..,0xFF in ascending order as Win16",
-    "SeedRRand call sequence SeedSRand, SRand128, TickCount, srand, rand-loop matches Win16 source"
-   ]
-  },
-  "root:0093:00CE": {
-   "win16": "_SeedSRand",
-   "confidence": "CONFIRMED",
-   "reviewed": "2026-09-29",
-   "evidence": [
-    "same translation unit as Win16 simone_1506 (SetSRandSeed..SRand256): member order preserved",
-    "unique LFSR feedback constant 0x1BF5 and seed mix constant 0x3751 on both sides",
-    "SRand2..SRand256: eight consecutive functions with masks 1,3,7,..,0xFF in ascending order as Win16",
-    "SeedRRand call sequence SeedSRand, SRand128, TickCount, srand, rand-loop matches Win16 source"
-   ]
-  },
-  "root:0093:00E1": {
-   "win16": "_SeedRRand",
-   "confidence": "CONFIRMED",
-   "reviewed": "2026-09-29",
-   "evidence": [
-    "same translation unit as Win16 simone_1506 (SetSRandSeed..SRand256): member order preserved",
-    "unique LFSR feedback constant 0x1BF5 and seed mix constant 0x3751 on both sides",
-    "SRand2..SRand256: eight consecutive functions with masks 1,3,7,..,0xFF in ascending order as Win16",
-    "SeedRRand call sequence SeedSRand, SRand128, TickCount, srand, rand-loop matches Win16 source"
-   ]
-  },
-  "root:0093:0118": {
-   "win16": "_RRand",
-   "confidence": "CONFIRMED",
-   "reviewed": "2026-09-29",
-   "evidence": [
-    "same translation unit as Win16 simone_1506 (SetSRandSeed..SRand256): member order preserved",
-    "unique LFSR feedback constant 0x1BF5 and seed mix constant 0x3751 on both sides",
-    "SRand2..SRand256: eight consecutive functions with masks 1,3,7,..,0xFF in ascending order as Win16",
-    "SeedRRand call sequence SeedSRand, SRand128, TickCount, srand, rand-loop matches Win16 source"
-   ]
-  },
-  "root:0093:013D": {
-   "win16": "_SRand1",
-   "confidence": "CONFIRMED",
-   "reviewed": "2026-09-29",
-   "evidence": [
-    "same translation unit as Win16 simone_1506 (SetSRandSeed..SRand256): member order preserved",
-    "unique LFSR feedback constant 0x1BF5 and seed mix constant 0x3751 on both sides",
-    "SRand2..SRand256: eight consecutive functions with masks 1,3,7,..,0xFF in ascending order as Win16",
-    "SeedRRand call sequence SeedSRand, SRand128, TickCount, srand, rand-loop matches Win16 source"
-   ]
-  },
-  "root:0093:0169": {
-   "win16": "_SRand2",
-   "confidence": "CONFIRMED",
-   "reviewed": "2026-09-29",
-   "evidence": [
-    "same translation unit as Win16 simone_1506 (SetSRandSeed..SRand256): member order preserved",
-    "unique LFSR feedback constant 0x1BF5 and seed mix constant 0x3751 on both sides",
-    "SRand2..SRand256: eight consecutive functions with masks 1,3,7,..,0xFF in ascending order as Win16",
-    "SeedRRand call sequence SeedSRand, SRand128, TickCount, srand, rand-loop matches Win16 source"
-   ]
-  },
-  "root:0093:018A": {
-   "win16": "_SRand4",
-   "confidence": "CONFIRMED",
-   "reviewed": "2026-09-29",
-   "evidence": [
-    "same translation unit as Win16 simone_1506 (SetSRandSeed..SRand256): member order preserved",
-    "unique LFSR feedback constant 0x1BF5 and seed mix constant 0x3751 on both sides",
-    "SRand2..SRand256: eight consecutive functions with masks 1,3,7,..,0xFF in ascending order as Win16",
-    "SeedRRand call sequence SeedSRand, SRand128, TickCount, srand, rand-loop matches Win16 source"
-   ]
-  },
-  "root:0093:01AB": {
-   "win16": "_SRand8",
-   "confidence": "CONFIRMED",
-   "reviewed": "2026-09-29",
-   "evidence": [
-    "same translation unit as Win16 simone_1506 (SetSRandSeed..SRand256): member order preserved",
-    "unique LFSR feedback constant 0x1BF5 and seed mix constant 0x3751 on both sides",
-    "SRand2..SRand256: eight consecutive functions with masks 1,3,7,..,0xFF in ascending order as Win16",
-    "SeedRRand call sequence SeedSRand, SRand128, TickCount, srand, rand-loop matches Win16 source"
-   ]
-  },
-  "root:0093:01CC": {
-   "win16": "_SRand16",
-   "confidence": "CONFIRMED",
-   "reviewed": "2026-09-29",
-   "evidence": [
-    "same translation unit as Win16 simone_1506 (SetSRandSeed..SRand256): member order preserved",
-    "unique LFSR feedback constant 0x1BF5 and seed mix constant 0x3751 on both sides",
-    "SRand2..SRand256: eight consecutive functions with masks 1,3,7,..,0xFF in ascending order as Win16",
-    "SeedRRand call sequence SeedSRand, SRand128, TickCount, srand, rand-loop matches Win16 source"
-   ]
-  },
-  "root:0093:01ED": {
-   "win16": "_SRand32",
-   "confidence": "CONFIRMED",
-   "reviewed": "2026-09-29",
-   "evidence": [
-    "same translation unit as Win16 simone_1506 (SetSRandSeed..SRand256): member order preserved",
-    "unique LFSR feedback constant 0x1BF5 and seed mix constant 0x3751 on both sides",
-    "SRand2..SRand256: eight consecutive functions with masks 1,3,7,..,0xFF in ascending order as Win16",
-    "SeedRRand call sequence SeedSRand, SRand128, TickCount, srand, rand-loop matches Win16 source"
-   ]
-  },
-  "root:0093:020E": {
-   "win16": "_SRand64",
-   "confidence": "CONFIRMED",
-   "reviewed": "2026-09-29",
-   "evidence": [
-    "same translation unit as Win16 simone_1506 (SetSRandSeed..SRand256): member order preserved",
-    "unique LFSR feedback constant 0x1BF5 and seed mix constant 0x3751 on both sides",
-    "SRand2..SRand256: eight consecutive functions with masks 1,3,7,..,0xFF in ascending order as Win16",
-    "SeedRRand call sequence SeedSRand, SRand128, TickCount, srand, rand-loop matches Win16 source"
-   ]
-  },
-  "root:0093:022F": {
-   "win16": "_SRand128",
-   "confidence": "CONFIRMED",
-   "reviewed": "2026-09-29",
-   "evidence": [
-    "same translation unit as Win16 simone_1506 (SetSRandSeed..SRand256): member order preserved",
-    "unique LFSR feedback constant 0x1BF5 and seed mix constant 0x3751 on both sides",
-    "SRand2..SRand256: eight consecutive functions with masks 1,3,7,..,0xFF in ascending order as Win16",
-    "SeedRRand call sequence SeedSRand, SRand128, TickCount, srand, rand-loop matches Win16 source"
-   ]
-  },
-  "root:0093:0250": {
-   "win16": "_SRand256",
-   "confidence": "CONFIRMED",
-   "reviewed": "2026-09-29",
-   "evidence": [
-    "same translation unit as Win16 simone_1506 (SetSRandSeed..SRand256): member order preserved",
-    "unique LFSR feedback constant 0x1BF5 and seed mix constant 0x3751 on both sides",
-    "SRand2..SRand256: eight consecutive functions with masks 1,3,7,..,0xFF in ascending order as Win16",
-    "SeedRRand call sequence SeedSRand, SRand128, TickCount, srand, rand-loop matches Win16 source"
-   ]
-  },
-  "root:1B73:0504": {
-   "win16": "_TickCount",
-   "confidence": "CONFIRMED",
-   "reviewed": "2026-09-29",
-   "evidence": [
-    "sole callee of SeedSRand, whose body is seed = TickCount() ^ 0x3751 on both sides",
-    "24 callers; returns a 32-bit tick count (DX:AX) from the timer ISR counter"
-   ]
-  },
-  "root:15F8:0004": {
-   "win16": "WINMAIN",
-   "confidence": "CONFIRMED",
-   "reviewed": "2026-09-29",
-   "dos_name": "main",
-   "evidence": [
-    "shared unique strings \"simant cancelled.\" and \"sound\"",
-    "DOS function is called only by crt0 __astart (C main); Win16 WINMAIN is the platform entry",
-    "platform entry points pair semantically but keep their own platform names"
+    "DOS body is an empty far function (debug formatter compiled out); Win16 body formats only when debugEnabled",
+    "10 anchored neighbours agree: caller:AntMenu, caller:CheatKeys, caller:ConvertMonoMaskToColor, caller:DisplayCard, caller:EditToolsMenu",
+    "size ratio 0.01"
    ]
   }
- }
+ ]
 }

@@ -1,0 +1,7 @@
+{"id": "ASM-1", "question": "Can MSC 6.00 produce 'mov ax,[bp+6]; xchg al,ah (86 C4); pop bp; retf' (f_1959_0002)?",
+ "header": "",
+ "variants": {"c_shift": "unsigned far f(unsigned v) { return (v << 8) | (v >> 8); }",
+              "c_mask": "int far f(int v) { return ((v & 0xff) << 8) | ((v >> 8) & 0xff); }",
+              "inline_asm": "unsigned far f(unsigned v) { _asm { mov ax, v } _asm { xchg al, ah } }"},
+ "profiles": [{"profile": "msc600", "flags": ["/AL", "/Os", "/Gs"]}, {"profile": "msc600", "flags": ["/AL", "/Ox"]}],
+ "expect": {"c_shift@0": "!xchg", "c_mask@0": "!xchg", "inline_asm@0": "mov sp, bp; pop bp", "c_shift@1": "!xchg"}}

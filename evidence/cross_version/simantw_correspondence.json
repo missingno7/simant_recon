@@ -4,14 +4,14 @@
  "win16_exe": "D:/Prog/simantw_recon/assets/SIMANTW.EXE",
  "policy": "Only CONFIRMED/HIGH pairs may transfer names; acceptance is always the DOS compiler output.",
  "counts": {
-  "CONFIRMED": 5,
-  "HIGH": 20,
-  "MEDIUM": 37,
+  "CONFIRMED": 22,
+  "HIGH": 64,
+  "MEDIUM": 67,
   "LOW": 50
  },
  "pairs": [
   {
-   "dos": "f_1A53_0125",
+   "dos": "db_LoadObject",
    "dos_address": "root:1A53:0125",
    "win16": "_db_LoadObject",
    "win16_address": "7:8292",
@@ -28,7 +28,7 @@
    "method": "features-v1+reviewed"
   },
   {
-   "dos": "f_25E7_007A",
+   "dos": "font_ReadFont",
    "dos_address": "root:25E7:007A",
    "win16": "_font_ReadFont",
    "win16_address": "7:AA4C",
@@ -47,7 +47,7 @@
    "method": "features-v1+reviewed"
   },
   {
-   "dos": "f_1A28_0006",
+   "dos": "OpenDB",
    "dos_address": "root:1A28:0006",
    "win16": "_OpenDB",
    "win16_address": "7:8BF0",
@@ -65,7 +65,7 @@
    "method": "features-v1+reviewed"
   },
   {
-   "dos": "f_1986_0004",
+   "dos": "OpenIndex",
    "dos_address": "root:1986:0004",
    "win16": "_OpenIndex",
    "win16_address": "7:9A86",
@@ -83,7 +83,24 @@
    "method": "features-v1+reviewed"
   },
   {
-   "dos": "f_1C62_000C",
+   "dos": "main",
+   "dos_address": "root:15F8:0004",
+   "win16": "WINMAIN",
+   "win16_address": "1:3FDA",
+   "confidence": "CONFIRMED",
+   "score": 9.284,
+   "mutual_best": true,
+   "evidence": [
+    "shared unique strings \"simant cancelled.\" and \"sound\"",
+    "DOS function is called only by crt0 __astart (C main); Win16 WINMAIN is the platform entry",
+    "platform entry points pair semantically but keep their own platform names",
+    "string \"simant cancelled.\"",
+    "string \"sound\""
+   ],
+   "method": "features-v1+reviewed"
+  },
+  {
+   "dos": "Punt",
    "dos_address": "root:1C62:000C",
    "win16": "_Punt",
    "win16_address": "2:18BE",
@@ -99,7 +116,404 @@
    "method": "reviewed"
   },
   {
-   "dos": "o20_39F1_000A",
+   "dos": "SetSRandSeed",
+   "dos_address": "root:0093:008F",
+   "win16": "_SetSRandSeed",
+   "win16_address": "5:1506",
+   "confidence": "CONFIRMED",
+   "score": null,
+   "mutual_best": null,
+   "evidence": [
+    "same translation unit as Win16 simone_1506 (SetSRandSeed..SRand256): member order preserved",
+    "unique LFSR feedback constant 0x1BF5 and seed mix constant 0x3751 on both sides",
+    "SRand2..SRand256: eight consecutive functions with masks 1,3,7,..,0xFF in ascending order as Win16",
+    "SeedRRand call sequence SeedSRand, SRand128, TickCount, srand, rand-loop matches Win16 source"
+   ],
+   "method": "reviewed",
+   "dos_recovery": {
+    "status": "EXACT_C",
+    "module": "root:0093",
+    "source": "src/root/m0093.c",
+    "profile": "msc600",
+    "flags": [
+     "/AL",
+     "/Os",
+     "/Oe"
+    ]
+   }
+  },
+  {
+   "dos": "root:0093:00A3",
+   "dos_address": null,
+   "win16": "_GetSRandSeed",
+   "win16_address": "5:1512",
+   "confidence": "CONFIRMED",
+   "score": null,
+   "mutual_best": null,
+   "evidence": [
+    "same translation unit as Win16 simone_1506 (SetSRandSeed..SRand256): member order preserved",
+    "unique LFSR feedback constant 0x1BF5 and seed mix constant 0x3751 on both sides",
+    "SRand2..SRand256: eight consecutive functions with masks 1,3,7,..,0xFF in ascending order as Win16",
+    "SeedRRand call sequence SeedSRand, SRand128, TickCount, srand, rand-loop matches Win16 source"
+   ],
+   "method": "reviewed"
+  },
+  {
+   "dos": "root:0093:00B0",
+   "dos_address": null,
+   "win16": "_SetRRandSeed",
+   "win16_address": "5:1518",
+   "confidence": "CONFIRMED",
+   "score": null,
+   "mutual_best": null,
+   "evidence": [
+    "same translation unit as Win16 simone_1506 (SetSRandSeed..SRand256): member order preserved",
+    "unique LFSR feedback constant 0x1BF5 and seed mix constant 0x3751 on both sides",
+    "SRand2..SRand256: eight consecutive functions with masks 1,3,7,..,0xFF in ascending order as Win16",
+    "SeedRRand call sequence SeedSRand, SRand128, TickCount, srand, rand-loop matches Win16 source"
+   ],
+   "method": "reviewed"
+  },
+  {
+   "dos": "SeedSRand",
+   "dos_address": "root:0093:00CE",
+   "win16": "_SeedSRand",
+   "win16_address": "5:152A",
+   "confidence": "CONFIRMED",
+   "score": null,
+   "mutual_best": null,
+   "evidence": [
+    "same translation unit as Win16 simone_1506 (SetSRandSeed..SRand256): member order preserved",
+    "unique LFSR feedback constant 0x1BF5 and seed mix constant 0x3751 on both sides",
+    "SRand2..SRand256: eight consecutive functions with masks 1,3,7,..,0xFF in ascending order as Win16",
+    "SeedRRand call sequence SeedSRand, SRand128, TickCount, srand, rand-loop matches Win16 source"
+   ],
+   "method": "reviewed",
+   "dos_recovery": {
+    "status": "EXACT_C",
+    "module": "root:0093",
+    "source": "src/root/m0093.c",
+    "profile": "msc600",
+    "flags": [
+     "/AL",
+     "/Os",
+     "/Oe"
+    ]
+   }
+  },
+  {
+   "dos": "SeedRRand",
+   "dos_address": "root:0093:00E1",
+   "win16": "_SeedRRand",
+   "win16_address": "5:1536",
+   "confidence": "CONFIRMED",
+   "score": null,
+   "mutual_best": null,
+   "evidence": [
+    "same translation unit as Win16 simone_1506 (SetSRandSeed..SRand256): member order preserved",
+    "unique LFSR feedback constant 0x1BF5 and seed mix constant 0x3751 on both sides",
+    "SRand2..SRand256: eight consecutive functions with masks 1,3,7,..,0xFF in ascending order as Win16",
+    "SeedRRand call sequence SeedSRand, SRand128, TickCount, srand, rand-loop matches Win16 source"
+   ],
+   "method": "reviewed",
+   "dos_recovery": {
+    "status": "EXACT_C",
+    "module": "root:0093",
+    "source": "src/root/m0093.c",
+    "profile": "msc600",
+    "flags": [
+     "/AL",
+     "/Os",
+     "/Oe"
+    ]
+   }
+  },
+  {
+   "dos": "RRand",
+   "dos_address": "root:0093:0118",
+   "win16": "_RRand",
+   "win16_address": "5:156E",
+   "confidence": "CONFIRMED",
+   "score": null,
+   "mutual_best": null,
+   "evidence": [
+    "same translation unit as Win16 simone_1506 (SetSRandSeed..SRand256): member order preserved",
+    "unique LFSR feedback constant 0x1BF5 and seed mix constant 0x3751 on both sides",
+    "SRand2..SRand256: eight consecutive functions with masks 1,3,7,..,0xFF in ascending order as Win16",
+    "SeedRRand call sequence SeedSRand, SRand128, TickCount, srand, rand-loop matches Win16 source"
+   ],
+   "method": "reviewed",
+   "dos_recovery": {
+    "status": "EXACT_C",
+    "module": "root:0093",
+    "source": "src/root/m0093.c",
+    "profile": "msc600",
+    "flags": [
+     "/AL",
+     "/Os",
+     "/Oe"
+    ]
+   }
+  },
+  {
+   "dos": "SRand1",
+   "dos_address": "root:0093:013D",
+   "win16": "_SRand1",
+   "win16_address": "5:158A",
+   "confidence": "CONFIRMED",
+   "score": null,
+   "mutual_best": null,
+   "evidence": [
+    "same translation unit as Win16 simone_1506 (SetSRandSeed..SRand256): member order preserved",
+    "unique LFSR feedback constant 0x1BF5 and seed mix constant 0x3751 on both sides",
+    "SRand2..SRand256: eight consecutive functions with masks 1,3,7,..,0xFF in ascending order as Win16",
+    "SeedRRand call sequence SeedSRand, SRand128, TickCount, srand, rand-loop matches Win16 source"
+   ],
+   "method": "reviewed",
+   "dos_recovery": {
+    "status": "EXACT_C",
+    "module": "root:0093",
+    "source": "src/root/m0093.c",
+    "profile": "msc600",
+    "flags": [
+     "/AL",
+     "/Os",
+     "/Oe"
+    ]
+   }
+  },
+  {
+   "dos": "SRand2",
+   "dos_address": "root:0093:0169",
+   "win16": "_SRand2",
+   "win16_address": "5:15AE",
+   "confidence": "CONFIRMED",
+   "score": null,
+   "mutual_best": null,
+   "evidence": [
+    "same translation unit as Win16 simone_1506 (SetSRandSeed..SRand256): member order preserved",
+    "unique LFSR feedback constant 0x1BF5 and seed mix constant 0x3751 on both sides",
+    "SRand2..SRand256: eight consecutive functions with masks 1,3,7,..,0xFF in ascending order as Win16",
+    "SeedRRand call sequence SeedSRand, SRand128, TickCount, srand, rand-loop matches Win16 source"
+   ],
+   "method": "reviewed",
+   "dos_recovery": {
+    "status": "EXACT_C",
+    "module": "root:0093",
+    "source": "src/root/m0093.c",
+    "profile": "msc600",
+    "flags": [
+     "/AL",
+     "/Os",
+     "/Oe"
+    ]
+   }
+  },
+  {
+   "dos": "SRand4",
+   "dos_address": "root:0093:018A",
+   "win16": "_SRand4",
+   "win16_address": "5:15CE",
+   "confidence": "CONFIRMED",
+   "score": null,
+   "mutual_best": null,
+   "evidence": [
+    "same translation unit as Win16 simone_1506 (SetSRandSeed..SRand256): member order preserved",
+    "unique LFSR feedback constant 0x1BF5 and seed mix constant 0x3751 on both sides",
+    "SRand2..SRand256: eight consecutive functions with masks 1,3,7,..,0xFF in ascending order as Win16",
+    "SeedRRand call sequence SeedSRand, SRand128, TickCount, srand, rand-loop matches Win16 source"
+   ],
+   "method": "reviewed",
+   "dos_recovery": {
+    "status": "EXACT_C",
+    "module": "root:0093",
+    "source": "src/root/m0093.c",
+    "profile": "msc600",
+    "flags": [
+     "/AL",
+     "/Os",
+     "/Oe"
+    ]
+   }
+  },
+  {
+   "dos": "SRand8",
+   "dos_address": "root:0093:01AB",
+   "win16": "_SRand8",
+   "win16_address": "5:15EE",
+   "confidence": "CONFIRMED",
+   "score": null,
+   "mutual_best": null,
+   "evidence": [
+    "same translation unit as Win16 simone_1506 (SetSRandSeed..SRand256): member order preserved",
+    "unique LFSR feedback constant 0x1BF5 and seed mix constant 0x3751 on both sides",
+    "SRand2..SRand256: eight consecutive functions with masks 1,3,7,..,0xFF in ascending order as Win16",
+    "SeedRRand call sequence SeedSRand, SRand128, TickCount, srand, rand-loop matches Win16 source"
+   ],
+   "method": "reviewed",
+   "dos_recovery": {
+    "status": "EXACT_C",
+    "module": "root:0093",
+    "source": "src/root/m0093.c",
+    "profile": "msc600",
+    "flags": [
+     "/AL",
+     "/Os",
+     "/Oe"
+    ]
+   }
+  },
+  {
+   "dos": "SRand16",
+   "dos_address": "root:0093:01CC",
+   "win16": "_SRand16",
+   "win16_address": "5:160E",
+   "confidence": "CONFIRMED",
+   "score": null,
+   "mutual_best": null,
+   "evidence": [
+    "same translation unit as Win16 simone_1506 (SetSRandSeed..SRand256): member order preserved",
+    "unique LFSR feedback constant 0x1BF5 and seed mix constant 0x3751 on both sides",
+    "SRand2..SRand256: eight consecutive functions with masks 1,3,7,..,0xFF in ascending order as Win16",
+    "SeedRRand call sequence SeedSRand, SRand128, TickCount, srand, rand-loop matches Win16 source"
+   ],
+   "method": "reviewed",
+   "dos_recovery": {
+    "status": "EXACT_C",
+    "module": "root:0093",
+    "source": "src/root/m0093.c",
+    "profile": "msc600",
+    "flags": [
+     "/AL",
+     "/Os",
+     "/Oe"
+    ]
+   }
+  },
+  {
+   "dos": "SRand32",
+   "dos_address": "root:0093:01ED",
+   "win16": "_SRand32",
+   "win16_address": "5:162E",
+   "confidence": "CONFIRMED",
+   "score": null,
+   "mutual_best": null,
+   "evidence": [
+    "same translation unit as Win16 simone_1506 (SetSRandSeed..SRand256): member order preserved",
+    "unique LFSR feedback constant 0x1BF5 and seed mix constant 0x3751 on both sides",
+    "SRand2..SRand256: eight consecutive functions with masks 1,3,7,..,0xFF in ascending order as Win16",
+    "SeedRRand call sequence SeedSRand, SRand128, TickCount, srand, rand-loop matches Win16 source"
+   ],
+   "method": "reviewed",
+   "dos_recovery": {
+    "status": "EXACT_C",
+    "module": "root:0093",
+    "source": "src/root/m0093.c",
+    "profile": "msc600",
+    "flags": [
+     "/AL",
+     "/Os",
+     "/Oe"
+    ]
+   }
+  },
+  {
+   "dos": "SRand64",
+   "dos_address": "root:0093:020E",
+   "win16": "_SRand64",
+   "win16_address": "5:164E",
+   "confidence": "CONFIRMED",
+   "score": null,
+   "mutual_best": null,
+   "evidence": [
+    "same translation unit as Win16 simone_1506 (SetSRandSeed..SRand256): member order preserved",
+    "unique LFSR feedback constant 0x1BF5 and seed mix constant 0x3751 on both sides",
+    "SRand2..SRand256: eight consecutive functions with masks 1,3,7,..,0xFF in ascending order as Win16",
+    "SeedRRand call sequence SeedSRand, SRand128, TickCount, srand, rand-loop matches Win16 source"
+   ],
+   "method": "reviewed",
+   "dos_recovery": {
+    "status": "EXACT_C",
+    "module": "root:0093",
+    "source": "src/root/m0093.c",
+    "profile": "msc600",
+    "flags": [
+     "/AL",
+     "/Os",
+     "/Oe"
+    ]
+   }
+  },
+  {
+   "dos": "SRand128",
+   "dos_address": "root:0093:022F",
+   "win16": "_SRand128",
+   "win16_address": "5:166E",
+   "confidence": "CONFIRMED",
+   "score": null,
+   "mutual_best": null,
+   "evidence": [
+    "same translation unit as Win16 simone_1506 (SetSRandSeed..SRand256): member order preserved",
+    "unique LFSR feedback constant 0x1BF5 and seed mix constant 0x3751 on both sides",
+    "SRand2..SRand256: eight consecutive functions with masks 1,3,7,..,0xFF in ascending order as Win16",
+    "SeedRRand call sequence SeedSRand, SRand128, TickCount, srand, rand-loop matches Win16 source"
+   ],
+   "method": "reviewed",
+   "dos_recovery": {
+    "status": "EXACT_C",
+    "module": "root:0093",
+    "source": "src/root/m0093.c",
+    "profile": "msc600",
+    "flags": [
+     "/AL",
+     "/Os",
+     "/Oe"
+    ]
+   }
+  },
+  {
+   "dos": "SRand256",
+   "dos_address": "root:0093:0250",
+   "win16": "_SRand256",
+   "win16_address": "5:168E",
+   "confidence": "CONFIRMED",
+   "score": null,
+   "mutual_best": null,
+   "evidence": [
+    "same translation unit as Win16 simone_1506 (SetSRandSeed..SRand256): member order preserved",
+    "unique LFSR feedback constant 0x1BF5 and seed mix constant 0x3751 on both sides",
+    "SRand2..SRand256: eight consecutive functions with masks 1,3,7,..,0xFF in ascending order as Win16",
+    "SeedRRand call sequence SeedSRand, SRand128, TickCount, srand, rand-loop matches Win16 source"
+   ],
+   "method": "reviewed",
+   "dos_recovery": {
+    "status": "EXACT_C",
+    "module": "root:0093",
+    "source": "src/root/m0093.c",
+    "profile": "msc600",
+    "flags": [
+     "/AL",
+     "/Os",
+     "/Oe"
+    ]
+   }
+  },
+  {
+   "dos": "TickCount",
+   "dos_address": "root:1B73:0504",
+   "win16": "_TickCount",
+   "win16_address": "2:18AC",
+   "confidence": "CONFIRMED",
+   "score": null,
+   "mutual_best": null,
+   "evidence": [
+    "sole callee of SeedSRand, whose body is seed = TickCount() ^ 0x3751 on both sides",
+    "24 callers; returns a 32-bit tick count (DX:AX) from the timer ISR counter"
+   ],
+   "method": "reviewed"
+  },
+  {
+   "dos": "IBMInitStuff",
    "dos_address": "S20:39F1:000A",
    "win16": "_IBMInitStuff",
    "win16_address": "2:0220",
@@ -118,7 +532,7 @@
    "method": "features-v1"
   },
   {
-   "dos": "f_24AB_047D",
+   "dos": "font_InitFonts",
    "dos_address": "root:24AB:047D",
    "win16": "_font_InitFonts",
    "win16_address": "2:616C",
@@ -134,7 +548,7 @@
    "method": "features-v1"
   },
   {
-   "dos": "o23_39C7_0668",
+   "dos": "DisplayCard",
    "dos_address": "S23:39C7:0668",
    "win16": "_DisplayCard",
    "win16_address": "4:5A1C",
@@ -150,7 +564,7 @@
    "method": "features-v1"
   },
   {
-   "dos": "o04_35F5_04DE",
+   "dos": "Mini_DrawMapI",
    "dos_address": "S04:35F5:04DE",
    "win16": "_Mini_DrawMapI",
    "win16_address": "3:D474",
@@ -165,21 +579,35 @@
    "method": "features-v1"
   },
   {
-   "dos": "f_1CE2_05FB",
-   "dos_address": "root:1CE2:05FB",
-   "win16": "_GPutPacked",
-   "win16_address": "2:10A2",
+   "dos": "WinPrintf",
+   "dos_address": "root:277D:000A",
+   "win16": "_WinPrintf",
+   "win16_address": "2:62BC",
    "confidence": "HIGH",
-   "score": 9.284,
+   "score": 10.0,
    "mutual_best": true,
    "evidence": [
-    "string \"gputpacked\"",
-    "string \"putpackedbuf\""
+    "8 anchored callers of the DOS function map onto callers of _WinPrintf",
+    "DOS body is an empty far function (debug formatter compiled out); Win16 body formats only when debugEnabled",
+    "10 anchored neighbours agree: caller:AntMenu, caller:CheatKeys, caller:ConvertMonoMaskToColor, caller:DisplayCard, caller:EditToolsMenu",
+    "size ratio 0.01"
    ],
-   "method": "features-v1"
+   "neighbours": 10,
+   "method": "neighbourhood-v1+reviewed",
+   "dos_recovery": {
+    "status": "EXACT_C",
+    "module": "root:277D",
+    "source": "src/root/m277D.c",
+    "profile": "msc600",
+    "flags": [
+     "/AL",
+     "/Os",
+     "/Gs"
+    ]
+   }
   },
   {
-   "dos": "f_075B_0000",
+   "dos": "initStuff",
    "dos_address": "root:075B:0000",
    "win16": "_initStuff",
    "win16_address": "5:0000",
@@ -193,7 +621,7 @@
    "method": "features-v1"
   },
   {
-   "dos": "f_1629_0531",
+   "dos": "ConvertMonoMaskToColor",
    "dos_address": "root:1629:0531",
    "win16": "_ConvertMonoMaskToColor",
    "win16_address": "2:5F0E",
@@ -207,35 +635,21 @@
    "method": "features-v1"
   },
   {
-   "dos": "f_15F8_0004",
-   "dos_address": "root:15F8:0004",
-   "win16": "WINMAIN",
-   "win16_address": "1:3FDA",
+   "dos": "GPutPacked",
+   "dos_address": "root:1CE2:05FB",
+   "win16": "_GPutPacked",
+   "win16_address": "2:10A2",
    "confidence": "HIGH",
    "score": 9.284,
    "mutual_best": true,
    "evidence": [
-    "string \"simant cancelled.\"",
-    "string \"sound\""
+    "string \"gputpacked\"",
+    "string \"putpackedbuf\""
    ],
    "method": "features-v1"
   },
   {
-   "dos": "f_1A28_0277",
-   "dos_address": "root:1A28:0277",
-   "win16": "_DosPunt",
-   "win16_address": "7:8F0C",
-   "confidence": "HIGH",
-   "score": 9.134,
-   "mutual_best": true,
-   "evidence": [
-    "string \"%s dos error: %d: %s\"",
-    "string \"too many files open. you need a statement 'files=12' in your\""
-   ],
-   "method": "features-v1"
-  },
-  {
-   "dos": "o05_35F5_0064",
+   "dos": "EditToolsMenu",
    "dos_address": "S05:35F5:0064",
    "win16": "_EditToolsMenu",
    "win16_address": "3:67C6",
@@ -251,22 +665,7 @@
    "method": "features-v1"
   },
   {
-   "dos": "f_277D_000A",
-   "dos_address": "root:277D:000A",
-   "win16": "_WinPrintf",
-   "win16_address": "2:62BC",
-   "confidence": "HIGH",
-   "score": 8.0,
-   "mutual_best": true,
-   "evidence": [
-    "8 anchored callers of the DOS function map onto callers of _WinPrintf",
-    "DOS body is an empty far function (debug formatter compiled out); Win16 body formats only when debugEnabled",
-    "8 anchored neighbours agree: caller:f_075B_0000, caller:f_1629_0531, caller:f_1A53_0125, caller:o05_35F5_0064, caller:o05_35F5_04D3"
-   ],
-   "method": "neighbourhood-v1+reviewed"
-  },
-  {
-   "dos": "o15_384C_0017",
+   "dos": "LoadMonoPats",
    "dos_address": "S15:384C:0017",
    "win16": "_LoadMonoPats",
    "win16_address": "1:D504",
@@ -281,7 +680,7 @@
    "method": "features-v1"
   },
   {
-   "dos": "f_2662_0B63",
+   "dos": "hanim_MakeAnimSet",
    "dos_address": "root:2662:0B63",
    "win16": "_hanim_MakeAnimSet",
    "win16_address": "2:6E3A",
@@ -295,7 +694,7 @@
    "method": "features-v1"
   },
   {
-   "dos": "o07_35F5_0000",
+   "dos": "CheatKeys",
    "dos_address": "S07:35F5:0000",
    "win16": "_CheatKeys",
    "win16_address": "4:67DE",
@@ -311,7 +710,7 @@
    "method": "features-v1"
   },
   {
-   "dos": "o22_39C7_0000",
+   "dos": "processEdit",
    "dos_address": "S22:39C7:0000",
    "win16": "_processEdit",
    "win16_address": "1:6A38",
@@ -325,7 +724,7 @@
    "method": "features-v1"
   },
   {
-   "dos": "o16_384C_0472",
+   "dos": "ShowIntro",
    "dos_address": "S16:384C:0472",
    "win16": "_ShowIntro",
    "win16_address": "1:D3E2",
@@ -340,7 +739,82 @@
    "method": "features-v1"
   },
   {
-   "dos": "o05_35F5_04D3",
+   "dos": "DrawCurBalloons",
+   "dos_address": "root:0250:454D",
+   "win16": "_DrawCurBalloons",
+   "win16_address": "3:4CAC",
+   "confidence": "HIGH",
+   "score": 5.0,
+   "mutual_best": true,
+   "evidence": [
+    "5 anchored neighbours agree: callee:SRand2, callee:SRand32, callee:SRand4, callee:SRand64, callee:TickCount",
+    "size ratio 0.62"
+   ],
+   "neighbours": 5,
+   "method": "neighbourhood-v1"
+  },
+  {
+   "dos": "AddFood",
+   "dos_address": "S08:35F5:0ED5",
+   "win16": "_AddFood",
+   "win16_address": "7:6A58",
+   "confidence": "HIGH",
+   "score": 5.0,
+   "mutual_best": true,
+   "evidence": [
+    "5 anchored neighbours agree: callee:SRand1, callee:SRand128, callee:SRand256, callee:SRand64, callee:SRand8",
+    "size ratio 0.83"
+   ],
+   "neighbours": 5,
+   "method": "neighbourhood-v1"
+  },
+  {
+   "dos": "IsItDirt",
+   "dos_address": "root:0BE8:0BEE",
+   "win16": "_IsItDirt",
+   "win16_address": "5:1182",
+   "confidence": "HIGH",
+   "score": 5.0,
+   "mutual_best": true,
+   "evidence": [
+    "5 anchored neighbours agree: caller:DigTileThemB, caller:DoDigInB, caller:f_0F3F_1A37, caller:f_14EE_0519, caller:o25_39C7_1C81",
+    "size ratio 1.27"
+   ],
+   "neighbours": 5,
+   "method": "neighbourhood-v1"
+  },
+  {
+   "dos": "DoAntMoveY",
+   "dos_address": "S25:3BA4:0008",
+   "win16": "_DoAntMoveY",
+   "win16_address": "6:75F4",
+   "confidence": "HIGH",
+   "score": 5.0,
+   "mutual_best": true,
+   "evidence": [
+    "5 anchored neighbours agree: callee:f_10F7_0A44, callee:f_10F7_1DD3, callee:f_14EE_0C9C, callee:o22_39C7_0D21, callee:o25_3BA4_0DFB",
+    "size ratio 1.11"
+   ],
+   "neighbours": 5,
+   "method": "neighbourhood-v1"
+  },
+  {
+   "dos": "DoNestingB",
+   "dos_address": "S25:39C7:118E",
+   "win16": "_DoNestingB",
+   "win16_address": "6:44A8",
+   "confidence": "HIGH",
+   "score": 5.0,
+   "mutual_best": true,
+   "evidence": [
+    "5 anchored neighbours agree: callee:SRand1, callee:SRand16, callee:SRand8, callee:f_0BE8_0D67, callee:f_1383_099B",
+    "size ratio 0.76"
+   ],
+   "neighbours": 5,
+   "method": "neighbourhood-v1"
+  },
+  {
+   "dos": "AntMenu",
    "dos_address": "S05:35F5:04D3",
    "win16": "_AntMenu",
    "win16_address": "3:6D24",
@@ -354,6 +828,276 @@
    "method": "features-v1"
   },
   {
+   "dos": "SimKidInside",
+   "dos_address": "S06:35F5:0A90",
+   "win16": "_SimKidInside",
+   "win16_address": "7:20B6",
+   "confidence": "HIGH",
+   "score": 4.0,
+   "mutual_best": true,
+   "evidence": [
+    "4 anchored neighbours agree: callee:SRand1, callee:SRand128, callee:SRand4, callee:SRand64",
+    "size ratio 0.93"
+   ],
+   "neighbours": 4,
+   "method": "neighbourhood-v1"
+  },
+  {
+   "dos": "DrawSpider",
+   "dos_address": "root:0250:18E7",
+   "win16": "_DrawSpider",
+   "win16_address": "3:1D6A",
+   "confidence": "HIGH",
+   "score": 4.0,
+   "mutual_best": true,
+   "evidence": [
+    "4 anchored neighbours agree: callee:SRand2, callee:SRand32, callee:SRand64, callee:TickCount",
+    "size ratio 1.02"
+   ],
+   "neighbours": 4,
+   "method": "neighbourhood-v1"
+  },
+  {
+   "dos": "DeadAntHere",
+   "dos_address": "root:0894:2021",
+   "win16": "_DeadAntHere",
+   "win16_address": "6:28C0",
+   "confidence": "HIGH",
+   "score": 4.0,
+   "mutual_best": true,
+   "evidence": [
+    "4 anchored neighbours agree: callee:SRand1, callee:SRand16, callee:SRand4, caller:SimKidInside",
+    "size ratio 1.19"
+   ],
+   "neighbours": 4,
+   "method": "neighbourhood-v1"
+  },
+  {
+   "dos": "PlaceBlackQueen",
+   "dos_address": "S08:35F5:0B8C",
+   "win16": "_PlaceBlackQueen",
+   "win16_address": "7:65CE",
+   "confidence": "HIGH",
+   "score": 4.0,
+   "mutual_best": true,
+   "evidence": [
+    "4 anchored neighbours agree: callee:SRand1, callee:SRand2, callee:SRand4, caller:o08_35F5_0050",
+    "size ratio 0.58"
+   ],
+   "neighbours": 4,
+   "method": "neighbourhood-v1"
+  },
+  {
+   "dos": "FootFall",
+   "dos_address": "S06:35F5:1BB3",
+   "win16": "_FootFall",
+   "win16_address": "7:3386",
+   "confidence": "HIGH",
+   "score": 4.0,
+   "mutual_best": true,
+   "evidence": [
+    "4 anchored neighbours agree: callee:DeadAntHere, callee:f_10F7_003A, callee:o22_39C7_0D21, caller:SimKidInside",
+    "size ratio 0.92"
+   ],
+   "neighbours": 4,
+   "method": "neighbourhood-v1"
+  },
+  {
+   "dos": "MakeNewHoleB",
+   "dos_address": "root:14EE:01D0",
+   "win16": "_MakeNewHoleB",
+   "win16_address": "5:1B06",
+   "confidence": "HIGH",
+   "score": 4.0,
+   "mutual_best": true,
+   "evidence": [
+    "4 anchored neighbours agree: callee:SRand1, callee:f_14EE_0519, caller:CheatKeys, caller:o08_35F5_0050",
+    "size ratio 0.75"
+   ],
+   "neighbours": 4,
+   "method": "neighbourhood-v1"
+  },
+  {
+   "dos": "DigOutBNest",
+   "dos_address": "S08:35F5:0846",
+   "win16": "_DigOutBNest",
+   "win16_address": "7:62DE",
+   "confidence": "HIGH",
+   "score": 4.0,
+   "mutual_best": true,
+   "evidence": [
+    "4 anchored neighbours agree: callee:MakeNewHoleB, callee:SRand1, callee:f_14EE_0519, caller:o08_35F5_0050",
+    "size ratio 1.01"
+   ],
+   "neighbours": 4,
+   "method": "neighbourhood-v1"
+  },
+  {
+   "dos": "DigTileThemB",
+   "dos_address": "root:14EE:0743",
+   "win16": "_DigTileThemB",
+   "win16_address": "5:22D4",
+   "confidence": "HIGH",
+   "score": 4.0,
+   "mutual_best": true,
+   "evidence": [
+    "4 anchored neighbours agree: callee:MakeNewHoleB, callee:SRand8, caller:DigOutBNest, caller:o25_39C7_1C81",
+    "size ratio 1.06"
+   ],
+   "neighbours": 4,
+   "method": "neighbourhood-v1"
+  },
+  {
+   "dos": "DoDigInB",
+   "dos_address": "S25:39C7:17B7",
+   "win16": "_DoDigInB",
+   "win16_address": "6:4BD0",
+   "confidence": "HIGH",
+   "score": 4.0,
+   "mutual_best": true,
+   "evidence": [
+    "4 anchored neighbours agree: callee:SRand4, callee:SRand64, callee:SRand8, callee:o25_39C7_1C81",
+    "size ratio 0.73"
+   ],
+   "neighbours": 4,
+   "method": "neighbourhood-v1"
+  },
+  {
+   "dos": "DoDigInR",
+   "dos_address": "root:0F3F:15FC",
+   "win16": "_DoDigInR",
+   "win16_address": "6:6F0C",
+   "confidence": "HIGH",
+   "score": 4.0,
+   "mutual_best": true,
+   "evidence": [
+    "4 anchored neighbours agree: callee:SRand4, callee:SRand64, callee:SRand8, callee:f_0F3F_1A37",
+    "size ratio 0.78"
+   ],
+   "neighbours": 4,
+   "method": "neighbourhood-v1"
+  },
+  {
+   "dos": "DigTileThemR",
+   "dos_address": "root:14EE:089E",
+   "win16": "_DigTileThemR",
+   "win16_address": "5:241C",
+   "confidence": "HIGH",
+   "score": 4.0,
+   "mutual_best": true,
+   "evidence": [
+    "4 anchored neighbours agree: callee:SRand8, callee:f_14EE_0367, caller:f_0F3F_1A37, caller:o08_35F5_0923",
+    "size ratio 1.07"
+   ],
+   "neighbours": 4,
+   "method": "neighbourhood-v1"
+  },
+  {
+   "dos": "SpiderScan",
+   "dos_address": "root:0CDB:0F90",
+   "win16": "_SpiderScan",
+   "win16_address": "5:5536",
+   "confidence": "HIGH",
+   "score": 4.0,
+   "mutual_best": true,
+   "evidence": [
+    "4 anchored neighbours agree: callee:DeadAntHere, callee:SRand1, callee:SRand4, caller:f_0CDB_00B3",
+    "size ratio 1.01"
+   ],
+   "neighbours": 4,
+   "method": "neighbourhood-v1"
+  },
+  {
+   "dos": "DoFoodInB",
+   "dos_address": "S25:39C7:15FC",
+   "win16": "_DoFoodInB",
+   "win16_address": "6:492A",
+   "confidence": "HIGH",
+   "score": 4.0,
+   "mutual_best": true,
+   "evidence": [
+    "4 anchored neighbours agree: callee:SRand1, callee:SRand16, callee:f_10F7_003A, callee:o25_39C7_1C81",
+    "size ratio 0.65"
+   ],
+   "neighbours": 4,
+   "method": "neighbourhood-v1"
+  },
+  {
+   "dos": "DoDigOutB",
+   "dos_address": "S25:39C7:19CC",
+   "win16": "_DoDigOutB",
+   "win16_address": "6:4EB0",
+   "confidence": "HIGH",
+   "score": 4.0,
+   "mutual_best": true,
+   "evidence": [
+    "4 anchored neighbours agree: callee:IsItDirt, callee:SRand64, callee:f_10F7_003A, callee:o25_39C7_1C81",
+    "size ratio 0.72"
+   ],
+   "neighbours": 4,
+   "method": "neighbourhood-v1"
+  },
+  {
+   "dos": "DoAntSimY",
+   "dos_address": "S25:3BA4:07CE",
+   "win16": "_DoAntSimY",
+   "win16_address": "6:7CF6",
+   "confidence": "HIGH",
+   "score": 4.0,
+   "mutual_best": true,
+   "evidence": [
+    "4 anchored neighbours agree: callee:SRand128, callee:f_10F7_0A44, callee:f_10F7_1DD3, callee:o22_39C7_0D21",
+    "size ratio 1.31"
+   ],
+   "neighbours": 4,
+   "method": "neighbourhood-v1"
+  },
+  {
+   "dos": "GetMap",
+   "dos_address": "root:10F7:0850",
+   "win16": "_GetMap",
+   "win16_address": "5:60E2",
+   "confidence": "HIGH",
+   "score": 4.0,
+   "mutual_best": true,
+   "evidence": [
+    "4 anchored neighbours agree: caller:DoAntMoveY, caller:DoAntSimY, caller:f_0AD9_03D3, caller:processEdit",
+    "size ratio 0.83"
+   ],
+   "neighbours": 4,
+   "method": "neighbourhood-v1"
+  },
+  {
+   "dos": "ExitNest",
+   "dos_address": "S25:3BA4:114E",
+   "win16": "_ExitNest",
+   "win16_address": "6:84A4",
+   "confidence": "HIGH",
+   "score": 4.0,
+   "mutual_best": true,
+   "evidence": [
+    "4 anchored neighbours agree: callee:MakeNewHoleB, callee:SRand8, callee:f_10F7_0A44, callee:f_14EE_0367",
+    "size ratio 1.27"
+   ],
+   "neighbours": 4,
+   "method": "neighbourhood-v1"
+  },
+  {
+   "dos": "f_0894_16A5",
+   "dos_address": "root:0894:16A5",
+   "win16": "_DoForageAnt",
+   "win16_address": "6:1E42",
+   "confidence": "HIGH",
+   "score": 3.0,
+   "mutual_best": true,
+   "evidence": [
+    "3 anchored neighbours agree: callee:SRand16, callee:SRand32, callee:SRand8",
+    "size ratio 0.80"
+   ],
+   "neighbours": 3,
+   "method": "neighbourhood-v1"
+  },
+  {
    "dos": "f_1A53_01FF",
    "dos_address": "root:1A53:01FF",
    "win16": "_db_PurgeObject",
@@ -362,8 +1106,10 @@
    "score": 3.0,
    "mutual_best": true,
    "evidence": [
-    "3 anchored neighbours agree: callee:f_1C62_000C, caller:o15_384C_0017, caller:o23_39C7_0668"
+    "3 anchored neighbours agree: callee:Punt, caller:DisplayCard, caller:LoadMonoPats",
+    "size ratio 0.97"
    ],
+   "neighbours": 3,
    "method": "neighbourhood-v1"
   },
   {
@@ -375,36 +1121,386 @@
    "score": 3.0,
    "mutual_best": true,
    "evidence": [
-    "3 anchored neighbours agree: caller:o04_35F5_04DE, caller:o05_35F5_0064, caller:o23_39C7_0668"
+    "3 anchored neighbours agree: caller:DisplayCard, caller:EditToolsMenu, caller:Mini_DrawMapI",
+    "size ratio 0.87"
    ],
+   "neighbours": 3,
    "method": "neighbourhood-v1"
   },
   {
-   "dos": "o23_39C7_0C7C",
-   "dos_address": "S23:39C7:0C7C",
-   "win16": "_PopUpInfoWindow",
-   "win16_address": "4:610C",
+   "dos": "o08_35F5_0A00",
+   "dos_address": "S08:35F5:0A00",
+   "win16": "_InitYelloAnt",
+   "win16_address": "7:6492",
    "confidence": "HIGH",
    "score": 3.0,
    "mutual_best": true,
    "evidence": [
-    "3 anchored neighbours agree: callee:f_1A53_01FF, callee:f_2505_0288, callee:o23_39C7_0092"
+    "3 anchored neighbours agree: callee:SRand16, callee:SRand8, caller:EditToolsMenu",
+    "size ratio 1.26"
    ],
+   "neighbours": 3,
    "method": "neighbourhood-v1"
   },
   {
-   "dos": "f_1A28_0277",
-   "dos_address": "root:1A28:0277",
-   "win16": "_OpenDB",
-   "win16_address": "7:8BF0",
-   "confidence": "MEDIUM",
-   "score": 9.134,
-   "mutual_best": false,
+   "dos": "f_015B_0D0C",
+   "dos_address": "root:015B:0D0C",
+   "win16": "_MysteryButton",
+   "win16_address": "1:B0BC",
+   "confidence": "HIGH",
+   "score": 3.0,
+   "mutual_best": true,
    "evidence": [
-    "string \"%s dos error: %d: %s\"",
-    "string \"too many files open. you need a statement 'files=12' in your\""
+    "3 anchored neighbours agree: callee:AddFood, callee:MakeNewHoleB, callee:RRand",
+    "size ratio 0.63"
    ],
-   "method": "features-v1"
+   "neighbours": 3,
+   "method": "neighbourhood-v1"
+  },
+  {
+   "dos": "f_10F7_003A",
+   "dos_address": "root:10F7:003A",
+   "win16": "_IsYellowAnt",
+   "win16_address": "5:5720",
+   "confidence": "HIGH",
+   "score": 3.0,
+   "mutual_best": true,
+   "evidence": [
+    "3 anchored neighbours agree: caller:DoDigInB, caller:f_0894_16A5, caller:processEdit",
+    "size ratio 1.30"
+   ],
+   "neighbours": 3,
+   "method": "neighbourhood-v1"
+  },
+  {
+   "dos": "f_10F7_0A44",
+   "dos_address": "root:10F7:0A44",
+   "win16": "_SetMyLife",
+   "win16_address": "5:6536",
+   "confidence": "HIGH",
+   "score": 3.0,
+   "mutual_best": true,
+   "evidence": [
+    "3 anchored neighbours agree: caller:EditToolsMenu, caller:o08_35F5_0A00, caller:o22_39C7_0D21",
+    "size ratio 0.70"
+   ],
+   "neighbours": 3,
+   "method": "neighbourhood-v1"
+  },
+  {
+   "dos": "f_10F7_1DD3",
+   "dos_address": "root:10F7:1DD3",
+   "win16": "_SetMyHealth",
+   "win16_address": "5:8C70",
+   "confidence": "HIGH",
+   "score": 3.0,
+   "mutual_best": true,
+   "evidence": [
+    "3 anchored neighbours agree: caller:CheatKeys, caller:o08_35F5_0A00, caller:o22_39C7_0D21",
+    "size ratio 1.50"
+   ],
+   "neighbours": 3,
+   "method": "neighbourhood-v1"
+  },
+  {
+   "dos": "f_1383_0A95",
+   "dos_address": "root:1383:0A95",
+   "win16": "_GetForageDir",
+   "win16_address": "7:0AB0",
+   "confidence": "HIGH",
+   "score": 3.0,
+   "mutual_best": true,
+   "evidence": [
+    "3 anchored neighbours agree: callee:SRand1, callee:SRand8, caller:f_0894_16A5",
+    "size ratio 1.05"
+   ],
+   "neighbours": 3,
+   "method": "neighbourhood-v1"
+  },
+  {
+   "dos": "o14_384C_0B6A",
+   "dos_address": "S14:384C:0B6A",
+   "win16": "_PictStrnDialog",
+   "win16_address": "1:615A",
+   "confidence": "HIGH",
+   "score": 3.0,
+   "mutual_best": true,
+   "evidence": [
+    "3 anchored neighbours agree: callee:f_1A53_01FF, caller:CheatKeys, caller:f_015B_0D0C",
+    "size ratio 1.01"
+   ],
+   "neighbours": 3,
+   "method": "neighbourhood-v1"
+  },
+  {
+   "dos": "f_075B_0242",
+   "dos_address": "root:075B:0242",
+   "win16": "_LoadStringAnt",
+   "win16_address": "5:03F4",
+   "confidence": "HIGH",
+   "score": 3.0,
+   "mutual_best": true,
+   "evidence": [
+    "3 anchored neighbours agree: callee:db_LoadObject, caller:o14_384C_0B6A, caller:o16_384C_01E1",
+    "size ratio 1.05"
+   ],
+   "neighbours": 3,
+   "method": "neighbourhood-v1"
+  },
+  {
+   "dos": "f_14EE_0519",
+   "dos_address": "root:14EE:0519",
+   "win16": "_DigTileB",
+   "win16_address": "5:1FE4",
+   "confidence": "HIGH",
+   "score": 3.0,
+   "mutual_best": true,
+   "evidence": [
+    "3 anchored neighbours agree: callee:SRand1, callee:SRand8, caller:PlaceBlackQueen",
+    "size ratio 0.60"
+   ],
+   "neighbours": 3,
+   "method": "neighbourhood-v1"
+  },
+  {
+   "dos": "f_1C62_06DC",
+   "dos_address": "root:1C62:06DC",
+   "win16": "_WaitedEnough",
+   "win16_address": "2:47B8",
+   "confidence": "HIGH",
+   "score": 3.0,
+   "mutual_best": true,
+   "evidence": [
+    "3 anchored neighbours agree: callee:TickCount, caller:IBMInitStuff, caller:o16_384C_01E1",
+    "size ratio 0.97"
+   ],
+   "neighbours": 3,
+   "method": "neighbourhood-v1"
+  },
+  {
+   "dos": "o25_3BA4_0DFB",
+   "dos_address": "S25:3BA4:0DFB",
+   "win16": "_YellowFight",
+   "win16_address": "6:823E",
+   "confidence": "HIGH",
+   "score": 3.0,
+   "mutual_best": true,
+   "evidence": [
+    "3 anchored neighbours agree: callee:DeadAntHere, callee:o22_39C7_0D21, caller:f_0894_16A5",
+    "size ratio 1.25"
+   ],
+   "neighbours": 3,
+   "method": "neighbourhood-v1"
+  },
+  {
+   "dos": "f_14EE_0367",
+   "dos_address": "root:14EE:0367",
+   "win16": "_MakeNewHoleR",
+   "win16_address": "5:1D02",
+   "confidence": "HIGH",
+   "score": 3.0,
+   "mutual_best": true,
+   "evidence": [
+    "3 anchored neighbours agree: callee:SRand1, caller:CheatKeys, caller:o08_35F5_0050",
+    "size ratio 0.51"
+   ],
+   "neighbours": 3,
+   "method": "neighbourhood-v1"
+  },
+  {
+   "dos": "o25_39C7_1C81",
+   "dos_address": "S25:39C7:1C81",
+   "win16": "_GetOutB",
+   "win16_address": "6:520A",
+   "confidence": "HIGH",
+   "score": 3.0,
+   "mutual_best": true,
+   "evidence": [
+    "3 anchored neighbours agree: callee:MakeNewHoleB, callee:SRand2, callee:SRand8",
+    "size ratio 1.09"
+   ],
+   "neighbours": 3,
+   "method": "neighbourhood-v1"
+  },
+  {
+   "dos": "f_0F3F_1A37",
+   "dos_address": "root:0F3F:1A37",
+   "win16": "_GetOutR",
+   "win16_address": "6:74BA",
+   "confidence": "HIGH",
+   "score": 3.0,
+   "mutual_best": true,
+   "evidence": [
+    "3 anchored neighbours agree: callee:SRand2, callee:SRand8, callee:f_14EE_0367",
+    "size ratio 1.09"
+   ],
+   "neighbours": 3,
+   "method": "neighbourhood-v1"
+  },
+  {
+   "dos": "f_14EE_0647",
+   "dos_address": "root:14EE:0647",
+   "win16": "_SmoothEdgesR",
+   "win16_address": "5:26E4",
+   "confidence": "HIGH",
+   "score": 3.0,
+   "mutual_best": true,
+   "evidence": [
+    "3 anchored neighbours agree: callee:SRand8, caller:f_14EE_0367, caller:f_14EE_0519",
+    "size ratio 0.70"
+   ],
+   "neighbours": 3,
+   "method": "neighbourhood-v1"
+  },
+  {
+   "dos": "o08_35F5_0923",
+   "dos_address": "S08:35F5:0923",
+   "win16": "_DigOutRNest",
+   "win16_address": "7:63B8",
+   "confidence": "HIGH",
+   "score": 3.0,
+   "mutual_best": true,
+   "evidence": [
+    "3 anchored neighbours agree: callee:SRand1, callee:f_14EE_0367, caller:o08_35F5_0050",
+    "size ratio 1.01"
+   ],
+   "neighbours": 3,
+   "method": "neighbourhood-v1"
+  },
+  {
+   "dos": "f_0BE8_0D67",
+   "dos_address": "root:0BE8:0D67",
+   "win16": "_GetEnterDirB",
+   "win16_address": "5:12E4",
+   "confidence": "HIGH",
+   "score": 3.0,
+   "mutual_best": true,
+   "evidence": [
+    "3 anchored neighbours agree: callee:SRand2, caller:DoDigInB, caller:DoFoodInB",
+    "size ratio 1.11"
+   ],
+   "neighbours": 3,
+   "method": "neighbourhood-v1"
+  },
+  {
+   "dos": "f_14EE_09F1",
+   "dos_address": "root:14EE:09F1",
+   "win16": "_SmoothEdgesB",
+   "win16_address": "5:255A",
+   "confidence": "HIGH",
+   "score": 3.0,
+   "mutual_best": true,
+   "evidence": [
+    "3 anchored neighbours agree: callee:SRand8, caller:DigTileThemB, caller:f_14EE_0519",
+    "size ratio 0.89"
+   ],
+   "neighbours": 3,
+   "method": "neighbourhood-v1"
+  },
+  {
+   "dos": "f_14EE_0C9C",
+   "dos_address": "root:14EE:0C9C",
+   "win16": "_FixExitMapB",
+   "win16_address": "5:284E",
+   "confidence": "HIGH",
+   "score": 3.0,
+   "mutual_best": true,
+   "evidence": [
+    "3 anchored neighbours agree: caller:DigTileThemB, caller:DoDigInB, caller:f_14EE_0519",
+    "size ratio 1.08"
+   ],
+   "neighbours": 3,
+   "method": "neighbourhood-v1"
+  },
+  {
+   "dos": "f_14EE_0D71",
+   "dos_address": "root:14EE:0D71",
+   "win16": "_FixExitMapR",
+   "win16_address": "5:2914",
+   "confidence": "HIGH",
+   "score": 3.0,
+   "mutual_best": true,
+   "evidence": [
+    "3 anchored neighbours agree: caller:DigTileThemR, caller:DoAntMoveY, caller:DoDigInR",
+    "size ratio 1.08"
+   ],
+   "neighbours": 3,
+   "method": "neighbourhood-v1"
+  },
+  {
+   "dos": "f_1383_099B",
+   "dos_address": "root:1383:099B",
+   "win16": "_GetNewModeB",
+   "win16_address": "7:09D0",
+   "confidence": "HIGH",
+   "score": 3.0,
+   "mutual_best": true,
+   "evidence": [
+    "3 anchored neighbours agree: callee:SRand8, caller:DoDigInB, caller:DoFoodInB",
+    "size ratio 1.17"
+   ],
+   "neighbours": 3,
+   "method": "neighbourhood-v1"
+  },
+  {
+   "dos": "o06_35F5_02B9",
+   "dos_address": "S06:35F5:02B9",
+   "win16": "_SimKidOutside",
+   "win16_address": "7:169C",
+   "confidence": "HIGH",
+   "score": 3.0,
+   "mutual_best": true,
+   "evidence": [
+    "3 anchored neighbours agree: callee:FootFall, callee:SRand1, callee:SRand32",
+    "size ratio 0.76"
+   ],
+   "neighbours": 3,
+   "method": "neighbourhood-v1"
+  },
+  {
+   "dos": "f_0BE8_0B21",
+   "dos_address": "root:0BE8:0B21",
+   "win16": "_GetDir",
+   "win16_address": "5:10CC",
+   "confidence": "HIGH",
+   "score": 3.0,
+   "mutual_best": true,
+   "evidence": [
+    "3 anchored neighbours agree: caller:DoAntMoveY, caller:ExitNest, caller:f_0CDB_00B3",
+    "size ratio 1.14"
+   ],
+   "neighbours": 3,
+   "method": "neighbourhood-v1"
+  },
+  {
+   "dos": "o08_35F5_0C4C",
+   "dos_address": "S08:35F5:0C4C",
+   "win16": "_MakeBlkQueen",
+   "win16_address": "7:671A",
+   "confidence": "HIGH",
+   "score": 3.0,
+   "mutual_best": true,
+   "evidence": [
+    "3 anchored neighbours agree: callee:f_14EE_0519, caller:CheatKeys, caller:o22_39C7_0900",
+    "size ratio 1.03"
+   ],
+   "neighbours": 3,
+   "method": "neighbourhood-v1"
+  },
+  {
+   "dos": "f_00DF_00E8",
+   "dos_address": "root:00DF:00E8",
+   "win16": "_myBeginSound",
+   "win16_address": "2:98B0",
+   "confidence": "MEDIUM",
+   "score": 15.0,
+   "mutual_best": true,
+   "evidence": [
+    "15 anchored neighbours agree: caller:AddFood, caller:CheatKeys, caller:DoAntMoveY, caller:DoDigInB, caller:DoDigInR",
+    "size ratio 0.02"
+   ],
+   "neighbours": 15,
+   "method": "neighbourhood-v1"
   },
   {
    "dos": "o12_384C_0B76",
@@ -419,6 +1515,79 @@
     "string \"map window image\""
    ],
    "method": "features-v1"
+  },
+  {
+   "dos": "DosPunt",
+   "dos_address": "root:1A28:0277",
+   "win16": "_OpenDB",
+   "win16_address": "7:8BF0",
+   "confidence": "MEDIUM",
+   "score": 9.134,
+   "mutual_best": false,
+   "evidence": [
+    "string \"%s dos error: %d: %s\"",
+    "string \"too many files open. you need a statement 'files=12' in your\""
+   ],
+   "method": "features-v1"
+  },
+  {
+   "dos": "DosPunt",
+   "dos_address": "root:1A28:0277",
+   "win16": "_DosPunt",
+   "win16_address": "7:8F0C",
+   "confidence": "MEDIUM",
+   "score": 9.134,
+   "mutual_best": false,
+   "evidence": [
+    "string \"%s dos error: %d: %s\"",
+    "string \"too many files open. you need a statement 'files=12' in your\""
+   ],
+   "method": "features-v1"
+  },
+  {
+   "dos": "o25_39C7_006D",
+   "dos_address": "S25:39C7:006D",
+   "win16": "_DoNestAntB",
+   "win16_address": "6:2DAE",
+   "confidence": "MEDIUM",
+   "score": 7.0,
+   "mutual_best": true,
+   "evidence": [
+    "7 anchored neighbours agree: callee:DoDigInB, callee:DoDigOutB, callee:DoFoodInB, callee:SRand256, callee:SRand32",
+    "size ratio 0.42"
+   ],
+   "neighbours": 7,
+   "method": "neighbourhood-v1"
+  },
+  {
+   "dos": "f_00DF_00B1",
+   "dos_address": "root:00DF:00B1",
+   "win16": "_myBeginSong",
+   "win16_address": "2:858E",
+   "confidence": "MEDIUM",
+   "score": 6.0,
+   "mutual_best": true,
+   "evidence": [
+    "6 anchored neighbours agree: caller:EditToolsMenu, caller:ShowIntro, caller:f_0BE8_0002, caller:o06_35F5_1E54, caller:o22_39C7_0900",
+    "size ratio 0.01"
+   ],
+   "neighbours": 6,
+   "method": "neighbourhood-v1"
+  },
+  {
+   "dos": "f_10F7_09A8",
+   "dos_address": "root:10F7:09A8",
+   "win16": "_ClearMyLife",
+   "win16_address": "5:631E",
+   "confidence": "MEDIUM",
+   "score": 6.0,
+   "mutual_best": true,
+   "evidence": [
+    "6 anchored neighbours agree: caller:DoAntMoveY, caller:EditToolsMenu, caller:o22_39C7_0900, caller:o22_39C7_0D21, caller:o25_3BA4_0999",
+    "size ratio 0.18"
+   ],
+   "neighbours": 6,
+   "method": "neighbourhood-v1"
   },
   {
    "dos": "o09_35F5_0188",
@@ -463,15 +1632,15 @@
    "method": "features-v1"
   },
   {
-   "dos": "f_1A96_034E",
-   "dos_address": "root:1A96:034E",
-   "win16": "_ch_AddEntry",
-   "win16_address": "7:9470",
+   "dos": "o09_35F5_0000",
+   "dos_address": "S09:35F5:0000",
+   "win16": "_LoadGame",
+   "win16_address": "3:9FA0",
    "confidence": "MEDIUM",
    "score": 5.57,
    "mutual_best": true,
    "evidence": [
-    "string \"attemp to add id already present in lookup table\""
+    "string \"read error game not loaded\""
    ],
    "method": "features-v1"
   },
@@ -489,28 +1658,15 @@
    "method": "features-v1"
   },
   {
-   "dos": "f_20E8_0001",
-   "dos_address": "root:20E8:0001",
-   "win16": "_win_LoadWindow",
-   "win16_address": "7:C662",
+   "dos": "f_1A96_0532",
+   "dos_address": "root:1A96:0532",
+   "win16": "_ch_DumpOldest",
+   "win16_address": "7:9886",
    "confidence": "MEDIUM",
    "score": 5.57,
    "mutual_best": true,
    "evidence": [
-    "string \"cannot load window %03x\""
-   ],
-   "method": "features-v1"
-  },
-  {
-   "dos": "o09_35F5_0000",
-   "dos_address": "S09:35F5:0000",
-   "win16": "_LoadGame",
-   "win16_address": "3:9FA0",
-   "confidence": "MEDIUM",
-   "score": 5.57,
-   "mutual_best": true,
-   "evidence": [
-    "string \"read error game not loaded\""
+    "string \"no memory over 0 in age!\""
    ],
    "method": "features-v1"
   },
@@ -528,6 +1684,19 @@
    "method": "features-v1"
   },
   {
+   "dos": "f_2662_0100",
+   "dos_address": "root:2662:0100",
+   "win16": "_hanim_RenderAnimSet",
+   "win16_address": "2:6F3C",
+   "confidence": "MEDIUM",
+   "score": 5.57,
+   "mutual_best": true,
+   "evidence": [
+    "string \"buffer in set too small!!\""
+   ],
+   "method": "features-v1"
+  },
+  {
    "dos": "o25_3BA4_0C01",
    "dos_address": "S25:3BA4:0C01",
    "win16": "_AnimYellowInsane",
@@ -541,15 +1710,15 @@
    "method": "features-v1"
   },
   {
-   "dos": "f_1A96_0532",
-   "dos_address": "root:1A96:0532",
-   "win16": "_ch_DumpOldest",
-   "win16_address": "7:9886",
+   "dos": "f_20E8_0001",
+   "dos_address": "root:20E8:0001",
+   "win16": "_win_LoadWindow",
+   "win16_address": "7:C662",
    "confidence": "MEDIUM",
    "score": 5.57,
    "mutual_best": true,
    "evidence": [
-    "string \"no memory over 0 in age!\""
+    "string \"cannot load window %03x\""
    ],
    "method": "features-v1"
   },
@@ -567,19 +1736,6 @@
    "method": "features-v1"
   },
   {
-   "dos": "f_2662_0100",
-   "dos_address": "root:2662:0100",
-   "win16": "_hanim_RenderAnimSet",
-   "win16_address": "2:6F3C",
-   "confidence": "MEDIUM",
-   "score": 5.57,
-   "mutual_best": true,
-   "evidence": [
-    "string \"buffer in set too small!!\""
-   ],
-   "method": "features-v1"
-  },
-  {
    "dos": "f_20E8_0141",
    "dos_address": "root:20E8:0141",
    "win16": "_win_LoadAllWindows",
@@ -591,6 +1747,49 @@
     "string \"cannot load resource please try another\""
    ],
    "method": "features-v1"
+  },
+  {
+   "dos": "f_1A96_034E",
+   "dos_address": "root:1A96:034E",
+   "win16": "_ch_AddEntry",
+   "win16_address": "7:9470",
+   "confidence": "MEDIUM",
+   "score": 5.57,
+   "mutual_best": true,
+   "evidence": [
+    "string \"attemp to add id already present in lookup table\""
+   ],
+   "method": "features-v1"
+  },
+  {
+   "dos": "f_015B_06A2",
+   "dos_address": "root:015B:06A2",
+   "win16": "_GotoMyAnt",
+   "win16_address": "1:A764",
+   "confidence": "MEDIUM",
+   "score": 5.0,
+   "mutual_best": true,
+   "evidence": [
+    "5 anchored neighbours agree: caller:DoAntMoveY, caller:f_0CDB_00B3, caller:o22_39C7_0900, caller:o22_39C7_0D21, caller:o25_3BA4_0DFB",
+    "size ratio 0.37"
+   ],
+   "neighbours": 5,
+   "method": "neighbourhood-v1"
+  },
+  {
+   "dos": "f_10F7_0ACE",
+   "dos_address": "root:10F7:0ACE",
+   "win16": "_MoveMyLife",
+   "win16_address": "5:65FA",
+   "confidence": "MEDIUM",
+   "score": 5.0,
+   "mutual_best": true,
+   "evidence": [
+    "5 anchored neighbours agree: caller:DoAntMoveY, caller:f_0AD9_03D3, caller:f_0CDB_00B3, caller:o25_3BA4_0999, caller:o25_3BA4_0C01",
+    "size ratio 0.49"
+   ],
+   "neighbours": 5,
+   "method": "neighbourhood-v1"
   },
   {
    "dos": "f_2662_0CA2",
@@ -621,18 +1820,49 @@
    "method": "features-v1"
   },
   {
-   "dos": "o09_35F5_03C6",
-   "dos_address": "S09:35F5:03C6",
-   "win16": "_FileSelect",
-   "win16_address": "3:9920",
+   "dos": "f_0894_034B",
+   "dos_address": "root:0894:034B",
+   "win16": "_DoAntSimA",
+   "win16_address": "6:04D8",
    "confidence": "MEDIUM",
-   "score": 3.914,
+   "score": 4.0,
    "mutual_best": true,
    "evidence": [
-    "runtime sprintf",
-    "string \"*.ant\""
+    "4 anchored neighbours agree: callee:DeadAntHere, callee:SRand256, callee:SRand32, callee:f_0894_16A5",
+    "size ratio 0.41"
    ],
-   "method": "features-v1"
+   "neighbours": 4,
+   "method": "neighbourhood-v1"
+  },
+  {
+   "dos": "f_10F7_05FE",
+   "dos_address": "root:10F7:05FE",
+   "win16": "_SetLife",
+   "win16_address": "5:5D18",
+   "confidence": "MEDIUM",
+   "score": 4.0,
+   "mutual_best": true,
+   "evidence": [
+    "4 anchored neighbours agree: caller:DoAntMoveY, caller:f_10F7_0A44, caller:o22_39C7_0900, caller:o25_3BA4_0DFB",
+    "size ratio 0.45"
+   ],
+   "neighbours": 4,
+   "method": "neighbourhood-v1"
+  },
+  {
+   "dos": "f_0894_000E",
+   "dos_address": "root:0894:000E",
+   "win16": "_DoAntSim",
+   "win16_address": "6:0000",
+   "confidence": "MEDIUM",
+   "score": 4.0,
+   "mutual_best": true,
+   "evidence": [
+    "4 anchored neighbours agree: callee:DoAntMoveY, callee:DoAntSimY, callee:f_0AD9_03D3, callee:f_0CDB_00B3",
+    "size ratio 0.39"
+   ],
+   "neighbours": 4,
+   "method": "neighbourhood-v1"
   },
   {
    "dos": "f_2662_0348",
@@ -645,6 +1875,20 @@
    "evidence": [
     "runtime memmove",
     "string \"animbufs\""
+   ],
+   "method": "features-v1"
+  },
+  {
+   "dos": "o09_35F5_03C6",
+   "dos_address": "S09:35F5:03C6",
+   "win16": "_FileSelect",
+   "win16_address": "3:9920",
+   "confidence": "MEDIUM",
+   "score": 3.914,
+   "mutual_best": true,
+   "evidence": [
+    "runtime sprintf",
+    "string \"*.ant\""
    ],
    "method": "features-v1"
   },
@@ -688,10 +1932,40 @@
    "method": "features-v1"
   },
   {
-   "dos": "f_259D_000E",
-   "dos_address": "root:259D:000E",
-   "win16": "_win_DrawBitMap",
-   "win16_address": "7:BD5A",
+   "dos": "f_00F8_02F7",
+   "dos_address": "root:00F8:02F7",
+   "win16": "_DialogWaitInit",
+   "win16_address": "1:9BFE",
+   "confidence": "MEDIUM",
+   "score": 3.0,
+   "mutual_best": true,
+   "evidence": [
+    "3 anchored neighbours agree: callee:TickCount, caller:ShowIntro, caller:o14_384C_0FA2",
+    "size ratio 0.49"
+   ],
+   "neighbours": 3,
+   "method": "neighbourhood-v1"
+  },
+  {
+   "dos": "o06_35F5_0173",
+   "dos_address": "S06:35F5:0173",
+   "win16": "_DoSimYard",
+   "win16_address": "7:14A8",
+   "confidence": "MEDIUM",
+   "score": 3.0,
+   "mutual_best": true,
+   "evidence": [
+    "3 anchored neighbours agree: callee:SimKidInside, callee:o06_35F5_02B9, callee:o06_35F5_1E54",
+    "size ratio 0.33"
+   ],
+   "neighbours": 3,
+   "method": "neighbourhood-v1"
+  },
+  {
+   "dos": "f_0250_0C0F",
+   "dos_address": "root:0250:0C0F",
+   "win16": "_ProcEditEvent",
+   "win16_address": "3:0B7A",
    "confidence": "MEDIUM",
    "score": 2.0,
    "mutual_best": true,
@@ -714,49 +1988,10 @@
    "method": "callgraph-propagation-v1"
   },
   {
-   "dos": "o04_35F5_075F",
-   "dos_address": "S04:35F5:075F",
-   "win16": "_OpenMiniMapWin",
-   "win16_address": "3:E374",
-   "confidence": "MEDIUM",
-   "score": 2.0,
-   "mutual_best": true,
-   "evidence": [
-    "sole callee/caller of an anchored pair (2 aligned edge votes)"
-   ],
-   "method": "callgraph-propagation-v1"
-  },
-  {
    "dos": "f_00BA_01B6",
    "dos_address": "root:00BA:01B6",
    "win16": "_InitApplicationStuff",
    "win16_address": "1:552A",
-   "confidence": "MEDIUM",
-   "score": 2.0,
-   "mutual_best": true,
-   "evidence": [
-    "sole callee/caller of an anchored pair (2 aligned edge votes)"
-   ],
-   "method": "callgraph-propagation-v1"
-  },
-  {
-   "dos": "f_0250_0C0F",
-   "dos_address": "root:0250:0C0F",
-   "win16": "_ProcEditEvent",
-   "win16_address": "3:0B7A",
-   "confidence": "MEDIUM",
-   "score": 2.0,
-   "mutual_best": true,
-   "evidence": [
-    "sole callee/caller of an anchored pair (2 aligned edge votes)"
-   ],
-   "method": "callgraph-propagation-v1"
-  },
-  {
-   "dos": "f_1629_000C",
-   "dos_address": "root:1629:000C",
-   "win16": "_MakeBalloon",
-   "win16_address": "2:59E4",
    "confidence": "MEDIUM",
    "score": 2.0,
    "mutual_best": true,
@@ -779,6 +2014,58 @@
    "method": "callgraph-propagation-v1"
   },
   {
+   "dos": "o04_35F5_075F",
+   "dos_address": "S04:35F5:075F",
+   "win16": "_OpenMiniMapWin",
+   "win16_address": "3:E374",
+   "confidence": "MEDIUM",
+   "score": 2.0,
+   "mutual_best": true,
+   "evidence": [
+    "sole callee/caller of an anchored pair (2 aligned edge votes)"
+   ],
+   "method": "callgraph-propagation-v1"
+  },
+  {
+   "dos": "f_1629_000C",
+   "dos_address": "root:1629:000C",
+   "win16": "_MakeBalloon",
+   "win16_address": "2:59E4",
+   "confidence": "MEDIUM",
+   "score": 2.0,
+   "mutual_best": true,
+   "evidence": [
+    "sole callee/caller of an anchored pair (2 aligned edge votes)"
+   ],
+   "method": "callgraph-propagation-v1"
+  },
+  {
+   "dos": "f_259D_000E",
+   "dos_address": "root:259D:000E",
+   "win16": "_win_DrawBitMap",
+   "win16_address": "7:BD5A",
+   "confidence": "MEDIUM",
+   "score": 2.0,
+   "mutual_best": true,
+   "evidence": [
+    "sole callee/caller of an anchored pair (2 aligned edge votes)"
+   ],
+   "method": "callgraph-propagation-v1"
+  },
+  {
+   "dos": "o08_35F5_0050",
+   "dos_address": "S08:35F5:0050",
+   "win16": "_RandWorld",
+   "win16_address": "7:5AB0",
+   "confidence": "MEDIUM",
+   "score": 2.0,
+   "mutual_best": true,
+   "evidence": [
+    "sole callee/caller of an anchored pair (2 aligned edge votes)"
+   ],
+   "method": "callgraph-propagation-v1"
+  },
+  {
    "dos": "o14_384C_10E5",
    "dos_address": "S14:384C:10E5",
    "win16": "_CustomerIDDialog",
@@ -787,8 +2074,10 @@
    "score": 2.0,
    "mutual_best": true,
    "evidence": [
-    "2 anchored neighbours agree: callee:f_1A53_0125, caller:f_15F8_0004"
+    "2 anchored neighbours agree: callee:db_LoadObject, caller:main",
+    "size ratio 1.44"
    ],
+   "neighbours": 2,
    "method": "neighbourhood-v1"
   },
   {
@@ -800,86 +2089,355 @@
    "score": 2.0,
    "mutual_best": true,
    "evidence": [
-    "2 anchored neighbours agree: callee:f_20E8_0141, caller:o20_39F1_000A"
+    "2 anchored neighbours agree: callee:f_20E8_0141, caller:IBMInitStuff",
+    "size ratio 2.21"
    ],
+   "neighbours": 2,
    "method": "neighbourhood-v1"
   },
   {
-   "dos": "f_1A53_02EB",
-   "dos_address": "root:1A53:02EB",
-   "win16": "_db_ReleaseObject",
-   "win16_address": "7:8426",
+   "dos": "f_0BE8_0798",
+   "dos_address": "root:0BE8:0798",
+   "win16": "_PickupFoodA",
+   "win16_address": "5:0D18",
    "confidence": "MEDIUM",
    "score": 2.0,
    "mutual_best": true,
    "evidence": [
-    "2 anchored neighbours agree: callee:f_1C62_000C, caller:f_259D_000E"
+    "2 anchored neighbours agree: callee:SRand16, caller:f_0894_16A5",
+    "size ratio 1.12"
    ],
+   "neighbours": 2,
    "method": "neighbourhood-v1"
   },
   {
-   "dos": "f_1B73_0504",
-   "dos_address": "root:1B73:0504",
-   "win16": "_TickCount",
-   "win16_address": "2:18AC",
+   "dos": "f_0CDB_0000",
+   "dos_address": "root:0CDB:0000",
+   "win16": "_InitSpider",
+   "win16_address": "5:4668",
    "confidence": "MEDIUM",
    "score": 2.0,
    "mutual_best": true,
    "evidence": [
-    "2 anchored neighbours agree: caller:o20_39F1_000A, caller:o22_39C7_0000"
+    "2 anchored neighbours agree: caller:EditToolsMenu, caller:o08_35F5_0050",
+    "size ratio 1.15"
    ],
+   "neighbours": 2,
    "method": "neighbourhood-v1"
   },
   {
-   "dos": "f_22BF_0BAB",
-   "dos_address": "root:22BF:0BAB",
-   "win16": "_win_DoProxMenu",
-   "win16_address": "7:DE62",
+   "dos": "f_1A96_01EC",
+   "dos_address": "root:1A96:01EC",
+   "win16": "_ch_LookUpId",
+   "win16_address": "7:91E6",
    "confidence": "MEDIUM",
    "score": 2.0,
    "mutual_best": true,
    "evidence": [
-    "2 anchored neighbours agree: caller:o05_35F5_0064, caller:o05_35F5_04D3"
+    "2 anchored neighbours agree: caller:db_LoadObject, caller:f_1A53_01FF",
+    "size ratio 0.55"
    ],
+   "neighbours": 2,
    "method": "neighbourhood-v1"
   },
   {
-   "dos": "f_259D_02D8",
-   "dos_address": "root:259D:02D8",
-   "win16": "_win_DrawBitMapAtObjNum",
-   "win16_address": "7:BE70",
+   "dos": "o08_35F5_059B",
+   "dos_address": "S08:35F5:059B",
+   "win16": "_RandYard",
+   "win16_address": "7:6086",
    "confidence": "MEDIUM",
    "score": 2.0,
    "mutual_best": true,
    "evidence": [
-    "2 anchored neighbours agree: callee:f_259D_000E, caller:o05_35F5_0064"
+    "2 anchored neighbours agree: callee:RRand, callee:o08_35F5_0050",
+    "size ratio 1.16"
    ],
+   "neighbours": 2,
    "method": "neighbourhood-v1"
   },
   {
-   "dos": "f_24AB_02AD",
-   "dos_address": "root:24AB:02AD",
-   "win16": "_font_SetFont",
-   "win16_address": "2:611C",
+   "dos": "o06_35F5_14CC",
+   "dos_address": "S06:35F5:14CC",
+   "win16": "_SimCat",
+   "win16_address": "7:2B24",
    "confidence": "MEDIUM",
    "score": 2.0,
    "mutual_best": true,
    "evidence": [
-    "2 anchored neighbours agree: caller:o23_39C7_0092, caller:o23_39C7_0668"
+    "2 anchored neighbours agree: callee:SRand16, callee:SRand64",
+    "size ratio 1.24"
    ],
+   "neighbours": 2,
    "method": "neighbourhood-v1"
   },
   {
-   "dos": "o23_39C7_0F50",
-   "dos_address": "S23:39C7:0F50",
-   "win16": "_ProcInfoEvent",
-   "win16_address": "4:65DC",
+   "dos": "f_0250_2166",
+   "dos_address": "root:0250:2166",
+   "win16": "_DrawPalps",
+   "win16_address": "3:2594",
    "confidence": "MEDIUM",
    "score": 2.0,
    "mutual_best": true,
    "evidence": [
-    "2 anchored neighbours agree: callee:f_2505_0288, callee:o23_39C7_0C7C"
+    "2 anchored neighbours agree: callee:SRand1, caller:DrawSpider",
+    "size ratio 0.93"
    ],
+   "neighbours": 2,
+   "method": "neighbourhood-v1"
+  },
+  {
+   "dos": "f_0894_21C5",
+   "dos_address": "root:0894:21C5",
+   "win16": "_GetNewMode",
+   "win16_address": "7:0910",
+   "confidence": "MEDIUM",
+   "score": 2.0,
+   "mutual_best": true,
+   "evidence": [
+    "2 anchored neighbours agree: callee:SRand8, caller:f_0894_16A5",
+    "size ratio 0.21"
+   ],
+   "neighbours": 2,
+   "method": "neighbourhood-v1"
+  },
+  {
+   "dos": "o06_35F5_11FF",
+   "dos_address": "S06:35F5:11FF",
+   "win16": "_SimBird",
+   "win16_address": "7:28AA",
+   "confidence": "MEDIUM",
+   "score": 2.0,
+   "mutual_best": true,
+   "evidence": [
+    "2 anchored neighbours agree: callee:SRand2, callee:SRand64",
+    "size ratio 1.13"
+   ],
+   "neighbours": 2,
+   "method": "neighbourhood-v1"
+  },
+  {
+   "dos": "f_0894_1C6E",
+   "dos_address": "root:0894:1C6E",
+   "win16": "_GoInNest",
+   "win16_address": "6:257A",
+   "confidence": "MEDIUM",
+   "score": 2.0,
+   "mutual_best": true,
+   "evidence": [
+    "2 anchored neighbours agree: callee:f_14EE_0519, caller:f_0894_16A5",
+    "size ratio 1.18"
+   ],
+   "neighbours": 2,
+   "method": "neighbourhood-v1"
+  },
+  {
+   "dos": "f_015B_006F",
+   "dos_address": "root:015B:006F",
+   "win16": "_KillSomeAnts",
+   "win16_address": "1:9D5E",
+   "confidence": "MEDIUM",
+   "score": 2.0,
+   "mutual_best": true,
+   "evidence": [
+    "2 anchored neighbours agree: callee:DeadAntHere, caller:f_015B_0D0C",
+    "size ratio 1.17"
+   ],
+   "neighbours": 2,
+   "method": "neighbourhood-v1"
+  },
+  {
+   "dos": "o22_3BBD_0732",
+   "dos_address": "S22:3BBD:0732",
+   "win16": "_ExpAddAnt",
+   "win16_address": "3:79FC",
+   "confidence": "MEDIUM",
+   "score": 2.0,
+   "mutual_best": true,
+   "evidence": [
+    "2 anchored neighbours agree: callee:SRand1, callee:f_14EE_0519",
+    "size ratio 1.08"
+   ],
+   "neighbours": 2,
+   "method": "neighbourhood-v1"
+  },
+  {
+   "dos": "o25_39C7_105B",
+   "dos_address": "S25:39C7:105B",
+   "win16": "_TryMoveDirB",
+   "win16_address": "6:439E",
+   "confidence": "MEDIUM",
+   "score": 2.0,
+   "mutual_best": true,
+   "evidence": [
+    "2 anchored neighbours agree: callee:o25_39C7_1C81, caller:o25_39C7_1C81",
+    "size ratio 1.15"
+   ],
+   "neighbours": 2,
+   "method": "neighbourhood-v1"
+  },
+  {
+   "dos": "f_0F3F_0FC9",
+   "dos_address": "root:0F3F:0FC9",
+   "win16": "_TryMoveDirR",
+   "win16_address": "6:6850",
+   "confidence": "MEDIUM",
+   "score": 2.0,
+   "mutual_best": true,
+   "evidence": [
+    "2 anchored neighbours agree: callee:f_0F3F_1A37, caller:f_0F3F_1A37",
+    "size ratio 1.16"
+   ],
+   "neighbours": 2,
+   "method": "neighbourhood-v1"
+  },
+  {
+   "dos": "f_0BE8_0E0F",
+   "dos_address": "root:0BE8:0E0F",
+   "win16": "_GetEnterDirR",
+   "win16_address": "5:137C",
+   "confidence": "MEDIUM",
+   "score": 2.0,
+   "mutual_best": true,
+   "evidence": [
+    "2 anchored neighbours agree: callee:SRand2, caller:DoDigInR",
+    "size ratio 1.11"
+   ],
+   "neighbours": 2,
+   "method": "neighbourhood-v1"
+  },
+  {
+   "dos": "f_0CDB_0E09",
+   "dos_address": "root:0CDB:0E09",
+   "win16": "_SFoundAnt",
+   "win16_address": "5:53F6",
+   "confidence": "MEDIUM",
+   "score": 2.0,
+   "mutual_best": true,
+   "evidence": [
+    "2 anchored neighbours agree: callee:f_10F7_003A, caller:f_0CDB_00B3",
+    "size ratio 1.23"
+   ],
+   "neighbours": 2,
+   "method": "neighbourhood-v1"
+  },
+  {
+   "dos": "f_0EC1_0437",
+   "dos_address": "root:0EC1:0437",
+   "win16": "_ExitHole",
+   "win16_address": "5:2DB6",
+   "confidence": "MEDIUM",
+   "score": 2.0,
+   "mutual_best": true,
+   "evidence": [
+    "2 anchored neighbours agree: caller:f_0F3F_1A37, caller:o25_39C7_1C81",
+    "size ratio 0.92"
+   ],
+   "neighbours": 2,
+   "method": "neighbourhood-v1"
+  },
+  {
+   "dos": "f_0EC1_0719",
+   "dos_address": "root:0EC1:0719",
+   "win16": "_BuildAntListA",
+   "win16_address": "5:3046",
+   "confidence": "MEDIUM",
+   "score": 2.0,
+   "mutual_best": true,
+   "evidence": [
+    "2 anchored neighbours agree: callee:f_10F7_003A, caller:o08_35F5_0050",
+    "size ratio 1.04"
+   ],
+   "neighbours": 2,
+   "method": "neighbourhood-v1"
+  },
+  {
+   "dos": "f_10F7_24EE",
+   "dos_address": "root:10F7:24EE",
+   "win16": "_IsItDigable",
+   "win16_address": "5:95C6",
+   "confidence": "MEDIUM",
+   "score": 2.0,
+   "mutual_best": true,
+   "evidence": [
+    "2 anchored neighbours agree: callee:IsItDirt, caller:processEdit",
+    "size ratio 0.38"
+   ],
+   "neighbours": 2,
+   "method": "neighbourhood-v1"
+  },
+  {
+   "dos": "f_0BE8_0C0F",
+   "dos_address": "root:0BE8:0C0F",
+   "win16": "_GetExitDirB",
+   "win16_address": "5:119C",
+   "confidence": "MEDIUM",
+   "score": 2.0,
+   "mutual_best": true,
+   "evidence": [
+    "2 anchored neighbours agree: callee:SRand2, caller:DoDigOutB",
+    "size ratio 1.05"
+   ],
+   "neighbours": 2,
+   "method": "neighbourhood-v1"
+  },
+  {
+   "dos": "f_10F7_03B7",
+   "dos_address": "root:10F7:03B7",
+   "win16": "_FindAntIndex",
+   "win16_address": "5:59FC",
+   "confidence": "MEDIUM",
+   "score": 2.0,
+   "mutual_best": true,
+   "evidence": [
+    "2 anchored neighbours agree: caller:SpiderScan, caller:processEdit",
+    "size ratio 1.01"
+   ],
+   "neighbours": 2,
+   "method": "neighbourhood-v1"
+  },
+  {
+   "dos": "o23_39C7_0C7C",
+   "dos_address": "S23:39C7:0C7C",
+   "win16": "_PopUpInfoWindow",
+   "win16_address": "4:610C",
+   "confidence": "MEDIUM",
+   "score": 2.0,
+   "mutual_best": true,
+   "evidence": [
+    "2 anchored neighbours agree: callee:f_1A53_01FF, callee:f_2505_0288",
+    "size ratio 0.59"
+   ],
+   "neighbours": 2,
+   "method": "neighbourhood-v1"
+  },
+  {
+   "dos": "f_1383_03B3",
+   "dos_address": "root:1383:03B3",
+   "win16": "_GstrR",
+   "win16_address": "7:03C2",
+   "confidence": "MEDIUM",
+   "score": 2.0,
+   "mutual_best": true,
+   "evidence": [
+    "2 anchored neighbours agree: callee:SRand128, callee:SRand32",
+    "size ratio 1.02"
+   ],
+   "neighbours": 2,
+   "method": "neighbourhood-v1"
+  },
+  {
+   "dos": "o06_35F5_1CEA",
+   "dos_address": "S06:35F5:1CEA",
+   "win16": "_MowerFall",
+   "win16_address": "7:34DA",
+   "confidence": "MEDIUM",
+   "score": 2.0,
+   "mutual_best": true,
+   "evidence": [
+    "2 anchored neighbours agree: callee:SRand4, callee:o22_39C7_0D21",
+    "size ratio 1.08"
+   ],
+   "neighbours": 2,
    "method": "neighbourhood-v1"
   },
   {
@@ -898,8 +2456,8 @@
   {
    "dos": "f_2505_02D7",
    "dos_address": "root:2505:02D7",
-   "win16": "_win_ObjAddr",
-   "win16_address": "7:C32E",
+   "win16": "_win_ClearObjToEOL",
+   "win16_address": "7:D792",
    "confidence": "LOW",
    "score": 3.055,
    "mutual_best": true,
@@ -911,8 +2469,8 @@
   {
    "dos": "f_1A53_025F",
    "dos_address": "root:1A53:025F",
-   "win16": "_db_PurgeHandle",
-   "win16_address": "7:83B2",
+   "win16": "_db_ReleaseObject",
+   "win16_address": "7:8426",
    "confidence": "LOW",
    "score": 2.542,
    "mutual_best": true,
@@ -1455,54 +3013,15 @@
    "method": "features-v1"
   },
   {
-   "dos": "f_171C_13CA",
-   "dos_address": "root:171C:13CA",
-   "win16": "_mem_malloc",
-   "win16_address": "2:54BC",
+   "dos": "f_0BE8_0A5B",
+   "dos_address": "root:0BE8:0A5B",
+   "win16": "_PlaceEggB",
+   "win16_address": "5:1004",
    "confidence": "LOW",
    "score": 1.0,
    "mutual_best": true,
    "evidence": [
-    "aligned call-sequence gap in 1 anchored caller(s): f_1986_0004"
-   ],
-   "method": "callseq-alignment-v1"
-  },
-  {
-   "dos": "f_171C_2190",
-   "dos_address": "root:171C:2190",
-   "win16": "_mem_malloc",
-   "win16_address": "2:54BC",
-   "confidence": "LOW",
-   "score": 1.0,
-   "mutual_best": true,
-   "evidence": [
-    "aligned call-sequence gap in 1 anchored caller(s): f_25E7_007A"
-   ],
-   "method": "callseq-alignment-v1"
-  },
-  {
-   "dos": "f_25E7_0008",
-   "dos_address": "root:25E7:0008",
-   "win16": "_mem_malloc",
-   "win16_address": "2:54BC",
-   "confidence": "LOW",
-   "score": 1.0,
-   "mutual_best": true,
-   "evidence": [
-    "aligned call-sequence gap in 1 anchored caller(s): f_25E7_007A"
-   ],
-   "method": "callseq-alignment-v1"
-  },
-  {
-   "dos": "f_171C_1750",
-   "dos_address": "root:171C:1750",
-   "win16": "_RallocMemoryFree",
-   "win16_address": "2:59C0",
-   "confidence": "LOW",
-   "score": 1.0,
-   "mutual_best": true,
-   "evidence": [
-    "aligned call-sequence gap in 1 anchored caller(s): o20_39F1_000A"
+    "aligned call-sequence gap in 1 anchored caller(s): CheatKeys"
    ],
    "method": "callseq-alignment-v1"
   },
@@ -1515,20 +3034,59 @@
    "score": 1.0,
    "mutual_best": true,
    "evidence": [
-    "aligned call-sequence gap in 1 anchored caller(s): f_075B_0000"
+    "aligned call-sequence gap in 1 anchored caller(s): initStuff"
    ],
    "method": "callseq-alignment-v1"
   },
   {
-   "dos": "f_1986_00F4",
-   "dos_address": "root:1986:00F4",
-   "win16": "_CreateIndex",
-   "win16_address": "7:9B48",
+   "dos": "f_00F8_02DF",
+   "dos_address": "root:00F8:02DF",
+   "win16": "_SetSimCursor",
+   "win16_address": "1:96B0",
    "confidence": "LOW",
    "score": 1.0,
    "mutual_best": true,
    "evidence": [
-    "aligned call-sequence gap in 1 anchored caller(s): f_1A28_0006"
+    "aligned call-sequence gap in 1 anchored caller(s): initStuff"
+   ],
+   "method": "callseq-alignment-v1"
+  },
+  {
+   "dos": "f_171C_2190",
+   "dos_address": "root:171C:2190",
+   "win16": "_mem_malloc",
+   "win16_address": "2:54BC",
+   "confidence": "LOW",
+   "score": 1.0,
+   "mutual_best": true,
+   "evidence": [
+    "aligned call-sequence gap in 1 anchored caller(s): font_ReadFont"
+   ],
+   "method": "callseq-alignment-v1"
+  },
+  {
+   "dos": "f_25E7_0008",
+   "dos_address": "root:25E7:0008",
+   "win16": "_mem_malloc",
+   "win16_address": "2:54BC",
+   "confidence": "LOW",
+   "score": 1.0,
+   "mutual_best": true,
+   "evidence": [
+    "aligned call-sequence gap in 1 anchored caller(s): font_ReadFont"
+   ],
+   "method": "callseq-alignment-v1"
+  },
+  {
+   "dos": "f_171C_1750",
+   "dos_address": "root:171C:1750",
+   "win16": "_RallocMemoryFree",
+   "win16_address": "2:59C0",
+   "confidence": "LOW",
+   "score": 1.0,
+   "mutual_best": true,
+   "evidence": [
+    "aligned call-sequence gap in 1 anchored caller(s): IBMInitStuff"
    ],
    "method": "callseq-alignment-v1"
   }

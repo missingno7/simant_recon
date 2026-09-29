@@ -440,11 +440,14 @@ def neighbourhood_propagate(dos: dict, w16: dict, pairs: list, decisions: dict) 
             bw = best_for_w[w]
             if bw[0] != d or bw[2] != 1 or (d, w) in rejected:
                 continue
-            conf = "HIGH" if n >= 3 else "MEDIUM"
+            ratio = dos[d]["size"] / max(1, w16[w]["size"] or 1)
+            plausible = 0.5 <= ratio <= 2.0
+            conf = "HIGH" if n >= 3 and plausible else "MEDIUM"
             out[d] = {"dos": d, "dos_address": dos[d]["address"], "win16": w, "win16_address": w16[w]["address"],
                       "confidence": conf, "score": float(n), "mutual_best": True,
-                      "evidence": [f"{n} anchored neighbours agree: " + ", ".join(sorted(ev)[:5])],
-                      "method": "neighbourhood-v1"}
+                      "evidence": [f"{n} anchored neighbours agree: " + ", ".join(sorted(ev)[:5]),
+                                   f"size ratio {ratio:.2f}"],
+                      "neighbours": n, "method": "neighbourhood-v1"}
             if conf == "HIGH" and d not in anchors:
                 anchors[d] = w
                 changed = True
@@ -460,7 +463,9 @@ def build() -> int:
     w16 = w16_features()
     (FEATURES / "dos_features.json").write_text(json.dumps(dos, indent=0))
     (FEATURES / "w16_features.json").write_text(json.dumps(w16, indent=0))
-    decisions = json.loads(DECISIONS.read_text())["pairs"] if DECISIONS.exists() else {}
+    raw = json.loads(DECISIONS.read_text())["pairs"] if DECISIONS.exists() else {}
+    by_addr = {r["address"]: n for n, r in dos.items()}
+    decisions = {by_addr.get(k, k): v for k, v in raw.items()}
     pairs = rank(dos, w16, decisions)
     OUT.parent.mkdir(parents=True, exist_ok=True)
     counts = Counter(p["confidence"] for p in pairs)
@@ -470,6 +475,28 @@ def build() -> int:
           "policy": "Only CONFIRMED/HIGH pairs may transfer names; acceptance is always the DOS compiler output.",
           "counts": dict(counts),
           "pairs": pairs}
+    # bidirectional: attach DOS recovery status, export DOS findings for simantw_recon
+    man = json.loads((ROOT / "layout" / "manifest.json").read_text())
+    claimed = {}
+    for key, m in man["modules"].items():
+        for c in m["claims"]:
+            claimed[c["name"]] = {"status": f"EXACT_{c.get('kind', 'C')}", "module": key, "source": m["source"],
+                                  "profile": m["profile"], "flags": m["flags"]}
+    for p in pairs:
+        if p["dos"] in claimed:
+            p["dos_recovery"] = claimed[p["dos"]]
+    findings = []
+    for p in pairs:
+        if p["confidence"] in ("CONFIRMED", "HIGH") and p["dos"] in claimed:
+            findings.append({"win16": p["win16"], "dos": p["dos"], "confidence": p["confidence"],
+                             "dos_source": claimed[p["dos"]]["source"],
+                             "dos_compiler": "MSC 6.00 " + " ".join(claimed[p["dos"]]["flags"]),
+                             "evidence": p["evidence"][:4]})
+    (OUT.parent / "dos_findings.json").write_text(json.dumps(
+        {"schema": "simant-dos-findings-v1",
+         "note": "DOS functions proven byte-exact whose Win16 counterparts are CONFIRMED/HIGH. The DOS source is "
+                 "the natural MSC 6 form; it is a semantic hint for Win16, never a Win16 byte proof.",
+         "findings": findings}, indent=1) + "\n")
     OUT.write_text(json.dumps(db, indent=1) + "\n")
     print(f"DOS functions {len(dos)}, Win16 functions {len(w16)}; pairs {dict(counts)}")
     return 0
@@ -496,15 +523,65 @@ def strings(text: str) -> int:
     return 0
 
 
+def name_eligible(p: dict) -> bool:
+    """Name transfer policy (conservative): CONFIRMED; HIGH anchored by rare strings or constants;
+    neighbourhood HIGH with >= 4 agreeing anchored neighbours."""
+    if p["confidence"] == "CONFIRMED":
+        return True
+    if p["confidence"] != "HIGH":
+        return False
+    if p["method"].startswith("features"):
+        return any(e.startswith("string") or "constant" in e for e in p["evidence"])
+    return p["method"].startswith("neighbourhood") and p.get("neighbours", 0) >= 4
+
+
+def apply_names(dry: bool) -> int:
+    db = json.loads(OUT.read_text())
+    syms = symmod.load()
+    taken = set(syms["code"]) | set(syms["data"])
+    done = 0
+    for p in db["pairs"]:
+        if not name_eligible(p):
+            continue
+        old = p["dos"]
+        new = p["win16"].lstrip("_")
+        if new.upper() in ("WINMAIN", "LIBMAIN", "WEP") or new.upper().endswith(("WNDPROC", "DLGPROC")):
+            continue                      # platform entry points keep DOS-appropriate names
+        if not re.match(r"^[A-Za-z_][A-Za-z0-9_]{0,30}$", new) or old not in syms["code"] or new in taken:
+            continue
+        if not re.match(r"^(f|o\d\d)_[0-9A-F]{4}_[0-9A-F]{4}$", old):
+            continue                      # already named
+        print(f"{'would rename' if dry else 'rename'} {old} -> {new}  [{p['confidence']}] {p['evidence'][0][:70]}")
+        if not dry:
+            rec = syms["code"].pop(old)
+            rec.setdefault("history", []).append({"was": old, "why": f"xver {p['confidence']} {p['method']}: "
+                                                  + "; ".join(p["evidence"][:3])})
+            syms["code"][new] = rec
+            taken.add(new)
+        done += 1
+    if not dry:
+        man = json.loads((ROOT / "layout" / "manifest.json").read_text())
+        claimed = {c["name"] for m in man["modules"].values() for c in m["claims"]}
+        renamed_claimed = claimed - set(syms["code"]) - {n for n in claimed if n in syms["runtime"]}
+        if renamed_claimed:
+            raise SystemExit(f"refusing: would rename claimed functions {sorted(renamed_claimed)}")
+        symmod.save(syms)
+    print(f"{done} names {'eligible' if dry else 'applied'}")
+    return 0
+
+
 def main() -> int:
     ap = argparse.ArgumentParser()
     sub = ap.add_subparsers(dest="cmd", required=True)
     sub.add_parser("build")
+    an = sub.add_parser("apply-names"); an.add_argument("--dry-run", action="store_true")
     s = sub.add_parser("show"); s.add_argument("name")
     t = sub.add_parser("strings"); t.add_argument("text")
     a = ap.parse_args()
     if a.cmd == "build":
         return build()
+    if a.cmd == "apply-names":
+        return apply_names(a.dry_run)
     if a.cmd == "show":
         return show(a.name)
     return strings(a.text)

@@ -1,0 +1,1064 @@
+{
+ "method": "tools/libmatch.py: member CODE bytes with fixup fields wildcarded, unique hit in the oracle (diagnostic location, not acceptance)",
+ "members": [
+  {
+   "library": "llibcr.lib",
+   "member": "dos\\crt0.asm",
+   "linear": 171868,
+   "size": 255,
+   "fixup_bytes": 68,
+   "publics": {
+    "__astart": 0,
+    "__dataseg": 253,
+    "__cintDIV": 203,
+    "__amsg_exit": 219
+   }
+  },
+  {
+   "library": "llibcr.lib",
+   "member": "dos\\crt0dat.asm",
+   "linear": 172124,
+   "size": 392,
+   "fixup_bytes": 90,
+   "publics": {
+    "__exit": 204,
+    "__cinit": 0,
+    "__cexit": 212,
+    "__c_exit": 222,
+    "__ctermsub": 328,
+    "_exit": 197
+   }
+  },
+  {
+   "library": "llibcr.lib",
+   "member": "dos\\crt0msg.asm",
+   "linear": 172516,
+   "size": 34,
+   "fixup_bytes": 8,
+   "publics": {
+    "__FF_MSGBANNER": 0
+   }
+  },
+  {
+   "library": "llibcr.lib",
+   "member": "chkstk.asm",
+   "linear": 172556,
+   "size": 36,
+   "fixup_bytes": 8,
+   "publics": {
+    "__chkstk": 0,
+    "__aFchkstk": 0
+   }
+  },
+  {
+   "library": "llibcr.lib",
+   "member": "chksum.asm",
+   "linear": 172592,
+   "size": 36,
+   "fixup_bytes": 4,
+   "publics": {
+    "__nullcheck": 0
+   }
+  },
+  {
+   "library": "llibcr.lib",
+   "member": "dos\\stdargv.asm",
+   "linear": 172628,
+   "size": 429,
+   "fixup_bytes": 28,
+   "publics": {
+    "__setargv": 0
+   }
+  },
+  {
+   "library": "llibcr.lib",
+   "member": "dos\\stdenvp.asm",
+   "linear": 173058,
+   "size": 160,
+   "fixup_bytes": 14,
+   "publics": {
+    "__setenvp": 0
+   }
+  },
+  {
+   "library": "llibcr.lib",
+   "member": "dos\\nmsghdr.asm",
+   "linear": 173218,
+   "size": 97,
+   "fixup_bytes": 10,
+   "publics": {
+    "__NMSG_TEXT": 0,
+    "__NMSG_WRITE": 43
+   }
+  },
+  {
+   "library": "llibcr.lib",
+   "member": "dos\\stdalloc.asm",
+   "linear": 173316,
+   "size": 37,
+   "fixup_bytes": 10,
+   "publics": {
+    "__myalloc": 0
+   }
+  },
+  {
+   "library": "llibcr.lib",
+   "member": "dos\\dosret.asm",
+   "linear": 173354,
+   "size": 85,
+   "fixup_bytes": 14,
+   "publics": {
+    "__dosret0": 0,
+    "__maperror": 34,
+    "__dosretax": 21,
+    "__dosreturn": 8
+   }
+  },
+  {
+   "library": "llibcr.lib",
+   "member": "fclose.c",
+   "linear": 173440,
+   "size": 198,
+   "fixup_bytes": 34,
+   "publics": {
+    "_fclose": 0
+   }
+  },
+  {
+   "library": "llibcr.lib",
+   "member": "fopen.c",
+   "linear": 173638,
+   "size": 80,
+   "fixup_bytes": 12,
+   "publics": {
+    "__fsopen": 0,
+    "_fopen": 52
+   }
+  },
+  {
+   "library": "llibcr.lib",
+   "member": "fread.asm",
+   "linear": 173718,
+   "size": 369,
+   "fixup_bytes": 16,
+   "publics": {
+    "_fread": 0
+   }
+  },
+  {
+   "library": "llibcr.lib",
+   "member": "fwrite.asm",
+   "linear": 174088,
+   "size": 407,
+   "fixup_bytes": 22,
+   "publics": {
+    "_fwrite": 0
+   }
+  },
+  {
+   "library": "llibcr.lib",
+   "member": "printf.c",
+   "linear": 174496,
+   "size": 68,
+   "fixup_bytes": 14,
+   "publics": {
+    "_printf": 0
+   }
+  },
+  {
+   "library": "llibcr.lib",
+   "member": "_filbuf.asm",
+   "linear": 174564,
+   "size": 156,
+   "fixup_bytes": 10,
+   "publics": {
+    "__filbuf": 0
+   }
+  },
+  {
+   "library": "llibcr.lib",
+   "member": "_flsbuf.asm",
+   "linear": 174720,
+   "size": 235,
+   "fixup_bytes": 22,
+   "publics": {
+    "__flsbuf": 0
+   }
+  },
+  {
+   "library": "llibcr.lib",
+   "member": "_freebuf.asm",
+   "linear": 174956,
+   "size": 55,
+   "fixup_bytes": 4,
+   "publics": {
+    "__freebuf": 0
+   }
+  },
+  {
+   "library": "llibcr.lib",
+   "member": "_getbuf.asm",
+   "linear": 175012,
+   "size": 75,
+   "fixup_bytes": 8,
+   "publics": {
+    "__getbuf": 0
+   }
+  },
+  {
+   "library": "llibcr.lib",
+   "member": "_open.c",
+   "linear": 175088,
+   "size": 248,
+   "fixup_bytes": 10,
+   "publics": {
+    "__openfile": 0
+   }
+  },
+  {
+   "library": "llibcr.lib",
+   "member": "_sftbuf.asm",
+   "linear": 175336,
+   "size": 201,
+   "fixup_bytes": 28,
+   "publics": {
+    "__ftbuf": 129,
+    "__stbuf": 0
+   }
+  },
+  {
+   "library": "llibcr.lib",
+   "member": "fflush.c",
+   "linear": 175538,
+   "size": 212,
+   "fixup_bytes": 20,
+   "publics": {
+    "flsall": 136,
+    "_fflush": 0,
+    "_flushall": 128
+   }
+  },
+  {
+   "library": "llibcr.lib",
+   "member": "output.asm",
+   "linear": 175750,
+   "size": 1274,
+   "fixup_bytes": 128,
+   "publics": {
+    "__output": 16
+   }
+  },
+  {
+   "library": "llibcr.lib",
+   "member": "stream.c",
+   "linear": 177024,
+   "size": 78,
+   "fixup_bytes": 4,
+   "publics": {
+    "__getstream": 0
+   }
+  },
+  {
+   "library": "llibcr.lib",
+   "member": "dos\\close.asm",
+   "linear": 177102,
+   "size": 32,
+   "fixup_bytes": 6,
+   "publics": {
+    "_close": 0
+   }
+  },
+  {
+   "library": "llibcr.lib",
+   "member": "dos\\lseek.asm",
+   "linear": 177134,
+   "size": 122,
+   "fixup_bytes": 6,
+   "publics": {
+    "_lseek": 0
+   }
+  },
+  {
+   "library": "llibcr.lib",
+   "member": "dos\\open.asm",
+   "linear": 177256,
+   "size": 460,
+   "fixup_bytes": 28,
+   "publics": {
+    "_sopen": 0,
+    "_open": 26,
+    "__cXENIXtoDOSmode": 443
+   }
+  },
+  {
+   "library": "llibcr.lib",
+   "member": "dos\\read.asm",
+   "linear": 177716,
+   "size": 254,
+   "fixup_bytes": 22,
+   "publics": {
+    "_read": 0
+   }
+  },
+  {
+   "library": "llibcr.lib",
+   "member": "write.asm",
+   "linear": 177970,
+   "size": 351,
+   "fixup_bytes": 34,
+   "publics": {
+    "_write": 0
+   }
+  },
+  {
+   "library": "llibcr.lib",
+   "member": "stackava.asm",
+   "linear": 178322,
+   "size": 20,
+   "fixup_bytes": 2,
+   "publics": {
+    "_stackavail": 0
+   }
+  },
+  {
+   "library": "llibcr.lib",
+   "member": "initseg.asm",
+   "linear": 178342,
+   "size": 52,
+   "fixup_bytes": 0,
+   "publics": {
+    "__initseg": 0
+   }
+  },
+  {
+   "library": "llibcr.lib",
+   "member": "linkseg.asm",
+   "linear": 178394,
+   "size": 54,
+   "fixup_bytes": 0,
+   "publics": {
+    "__linkseg": 0
+   }
+  },
+  {
+   "library": "llibcr.lib",
+   "member": "searchsg.asm",
+   "linear": 178448,
+   "size": 124,
+   "fixup_bytes": 0,
+   "publics": {
+    "__searchseg": 0
+   }
+  },
+  {
+   "library": "llibcr.lib",
+   "member": "growseg.asm",
+   "linear": 178572,
+   "size": 256,
+   "fixup_bytes": 10,
+   "publics": {
+    "__incseg": 143,
+    "__growseg": 0,
+    "__findlast": 224
+   }
+  },
+  {
+   "library": "llibcr.lib",
+   "member": "newseg.asm",
+   "linear": 178828,
+   "size": 68,
+   "fixup_bytes": 10,
+   "publics": {
+    "__newseg": 0
+   }
+  },
+  {
+   "library": "llibcr.lib",
+   "member": "strcat.asm",
+   "linear": 178896,
+   "size": 70,
+   "fixup_bytes": 0,
+   "publics": {
+    "_strcat": 0
+   }
+  },
+  {
+   "library": "libh.lib",
+   "member": "strcat.asm",
+   "linear": 178896,
+   "size": 70,
+   "fixup_bytes": 0,
+   "publics": {
+    "__fstrcat": 0
+   }
+  },
+  {
+   "library": "llibcr.lib",
+   "member": "strcpy.asm",
+   "linear": 178966,
+   "size": 54,
+   "fixup_bytes": 0,
+   "publics": {
+    "_strcpy": 0
+   }
+  },
+  {
+   "library": "libh.lib",
+   "member": "strcpy.asm",
+   "linear": 178966,
+   "size": 54,
+   "fixup_bytes": 0,
+   "publics": {
+    "__fstrcpy": 0
+   }
+  },
+  {
+   "library": "llibcr.lib",
+   "member": "strcmp.asm",
+   "linear": 179020,
+   "size": 41,
+   "fixup_bytes": 0,
+   "publics": {
+    "_strcmp": 0
+   }
+  },
+  {
+   "library": "libh.lib",
+   "member": "strcmp.asm",
+   "linear": 179020,
+   "size": 41,
+   "fixup_bytes": 0,
+   "publics": {
+    "__fstrcmp": 0
+   }
+  },
+  {
+   "library": "llibcr.lib",
+   "member": "strlen.asm",
+   "linear": 179062,
+   "size": 23,
+   "fixup_bytes": 0,
+   "publics": {
+    "_strlen": 0
+   }
+  },
+  {
+   "library": "libh.lib",
+   "member": "strlen.asm",
+   "linear": 179062,
+   "size": 23,
+   "fixup_bytes": 0,
+   "publics": {
+    "__fstrlen": 0
+   }
+  },
+  {
+   "library": "llibcr.lib",
+   "member": "strncpy.asm",
+   "linear": 179086,
+   "size": 42,
+   "fixup_bytes": 0,
+   "publics": {
+    "_strncpy": 0
+   }
+  },
+  {
+   "library": "libh.lib",
+   "member": "strncpy.asm",
+   "linear": 179086,
+   "size": 42,
+   "fixup_bytes": 0,
+   "publics": {
+    "__fstrncpy": 0
+   }
+  },
+  {
+   "library": "llibcr.lib",
+   "member": "strncmp.asm",
+   "linear": 179128,
+   "size": 59,
+   "fixup_bytes": 0,
+   "publics": {
+    "_strncmp": 0
+   }
+  },
+  {
+   "library": "libh.lib",
+   "member": "strncmp.asm",
+   "linear": 179128,
+   "size": 59,
+   "fixup_bytes": 0,
+   "publics": {
+    "__fstrncmp": 0
+   }
+  },
+  {
+   "library": "llibcr.lib",
+   "member": "atox.asm",
+   "linear": 179192,
+   "size": 86,
+   "fixup_bytes": 0,
+   "publics": {
+    "__catox": 0
+   }
+  },
+  {
+   "library": "llibcr.lib",
+   "member": "itoa.asm",
+   "linear": 179278,
+   "size": 28,
+   "fixup_bytes": 2,
+   "publics": {
+    "_itoa": 0
+   }
+  },
+  {
+   "library": "llibcr.lib",
+   "member": "getenv.c",
+   "linear": 179306,
+   "size": 142,
+   "fixup_bytes": 16,
+   "publics": {
+    "_getenv": 0
+   }
+  },
+  {
+   "library": "llibcr.lib",
+   "member": "dos\\hdiff.asm",
+   "linear": 179448,
+   "size": 43,
+   "fixup_bytes": 0,
+   "publics": {
+    "__aFahdiff": 0
+   }
+  },
+  {
+   "library": "llibcr.lib",
+   "member": "puts.c",
+   "linear": 179492,
+   "size": 138,
+   "fixup_bytes": 28,
+   "publics": {
+    "_puts": 0
+   }
+  },
+  {
+   "library": "llibcr.lib",
+   "member": "sprintf.c",
+   "linear": 179630,
+   "size": 108,
+   "fixup_bytes": 24,
+   "publics": {
+    "_sprintf": 0
+   }
+  },
+  {
+   "library": "llibcr.lib",
+   "member": "vsprintf.c",
+   "linear": 179738,
+   "size": 106,
+   "fixup_bytes": 24,
+   "publics": {
+    "_vsprintf": 0
+   }
+  },
+  {
+   "library": "llibcr.lib",
+   "member": "dos\\intdosx.asm",
+   "linear": 179844,
+   "size": 97,
+   "fixup_bytes": 2,
+   "publics": {
+    "_intdosx": 0
+   }
+  },
+  {
+   "library": "llibcr.lib",
+   "member": "asctime.c",
+   "linear": 179942,
+   "size": 262,
+   "fixup_bytes": 8,
+   "publics": {
+    "store_dt": 0,
+    "_asctime": 46
+   }
+  },
+  {
+   "library": "llibcr.lib",
+   "member": "gmtime.c",
+   "linear": 180204,
+   "size": 458,
+   "fixup_bytes": 42,
+   "publics": {
+    "_gmtime": 0
+   }
+  },
+  {
+   "library": "llibcr.lib",
+   "member": "localtim.c",
+   "linear": 180662,
+   "size": 132,
+   "fixup_bytes": 22,
+   "publics": {
+    "_localtime": 0
+   }
+  },
+  {
+   "library": "llibcr.lib",
+   "member": "dos\\time.asm",
+   "linear": 180794,
+   "size": 85,
+   "fixup_bytes": 4,
+   "publics": {
+    "_time": 0
+   }
+  },
+  {
+   "library": "llibcr.lib",
+   "member": "tzset.c",
+   "linear": 180880,
+   "size": 444,
+   "fixup_bytes": 54,
+   "publics": {
+    "_tzset": 18,
+    "__isindst": 226,
+    "___tzset": 0
+   }
+  },
+  {
+   "library": "llibcr.lib",
+   "member": "dtoxtime.c",
+   "linear": 181324,
+   "size": 260,
+   "fixup_bytes": 32,
+   "publics": {
+    "__dtoxtime": 0
+   }
+  },
+  {
+   "library": "llibcr.lib",
+   "member": "strchr.asm",
+   "linear": 181584,
+   "size": 45,
+   "fixup_bytes": 0,
+   "publics": {
+    "_strchr": 0
+   }
+  },
+  {
+   "library": "libh.lib",
+   "member": "strchr.asm",
+   "linear": 181584,
+   "size": 45,
+   "fixup_bytes": 0,
+   "publics": {
+    "__fstrchr": 0
+   }
+  },
+  {
+   "library": "llibcr.lib",
+   "member": "stricmp.asm",
+   "linear": 181630,
+   "size": 69,
+   "fixup_bytes": 0,
+   "publics": {
+    "_stricmp": 0,
+    "_strcmpi": 0
+   }
+  },
+  {
+   "library": "libh.lib",
+   "member": "stricmp.asm",
+   "linear": 181630,
+   "size": 69,
+   "fixup_bytes": 0,
+   "publics": {
+    "__fstricmp": 0
+   }
+  },
+  {
+   "library": "llibcr.lib",
+   "member": "strrchr.asm",
+   "linear": 181700,
+   "size": 46,
+   "fixup_bytes": 0,
+   "publics": {
+    "_strrchr": 0
+   }
+  },
+  {
+   "library": "libh.lib",
+   "member": "strrchr.asm",
+   "linear": 181700,
+   "size": 46,
+   "fixup_bytes": 0,
+   "publics": {
+    "__fstrrchr": 0
+   }
+  },
+  {
+   "library": "llibcr.lib",
+   "member": "hmemchr.asm",
+   "linear": 181746,
+   "size": 66,
+   "fixup_bytes": 2,
+   "publics": {
+    "_memchr": 0
+   }
+  },
+  {
+   "library": "libh.lib",
+   "member": "hmemchr.asm",
+   "linear": 181746,
+   "size": 66,
+   "fixup_bytes": 2,
+   "publics": {
+    "__fmemchr": 0
+   }
+  },
+  {
+   "library": "llibcr.lib",
+   "member": "hmemcpy.asm",
+   "linear": 181812,
+   "size": 202,
+   "fixup_bytes": 18,
+   "publics": {
+    "_memmove": 0
+   }
+  },
+  {
+   "library": "libh.lib",
+   "member": "hmemcpy.asm",
+   "linear": 181812,
+   "size": 202,
+   "fixup_bytes": 18,
+   "publics": {
+    "__fmemmove": 0
+   }
+  },
+  {
+   "library": "llibcr.lib",
+   "member": "hmemcmp.asm",
+   "linear": 182014,
+   "size": 91,
+   "fixup_bytes": 4,
+   "publics": {
+    "_memcmp": 0
+   }
+  },
+  {
+   "library": "libh.lib",
+   "member": "hmemcmp.asm",
+   "linear": 182014,
+   "size": 91,
+   "fixup_bytes": 4,
+   "publics": {
+    "__fmemcmp": 0
+   }
+  },
+  {
+   "library": "llibcr.lib",
+   "member": "hmemcpy.asm",
+   "linear": 182106,
+   "size": 94,
+   "fixup_bytes": 4,
+   "publics": {
+    "_memcpy": 0
+   }
+  },
+  {
+   "library": "libh.lib",
+   "member": "hmemcpy.asm",
+   "linear": 182106,
+   "size": 94,
+   "fixup_bytes": 4,
+   "publics": {
+    "__fmemcpy": 0
+   }
+  },
+  {
+   "library": "llibcr.lib",
+   "member": "hmemset.asm",
+   "linear": 182200,
+   "size": 72,
+   "fixup_bytes": 2,
+   "publics": {
+    "_memset": 0
+   }
+  },
+  {
+   "library": "libh.lib",
+   "member": "hmemset.asm",
+   "linear": 182200,
+   "size": 72,
+   "fixup_bytes": 2,
+   "publics": {
+    "__fmemset": 0
+   }
+  },
+  {
+   "library": "llibcr.lib",
+   "member": "xtoa.asm",
+   "linear": 182272,
+   "size": 99,
+   "fixup_bytes": 0,
+   "publics": {
+    "__cxtoa": 13,
+    "__cltoasub": 0
+   }
+  },
+  {
+   "library": "llibcr.lib",
+   "member": "_ctype.asm",
+   "linear": 182372,
+   "size": 65,
+   "fixup_bytes": 2,
+   "publics": {
+    "_isalpha": 0,
+    "_isspace": 25,
+    "_isdigit": 15,
+    "_isgraph": 45,
+    "_isalnum": 35,
+    "_iscntrl": 50,
+    "_islower": 10,
+    "_ispunct": 30,
+    "_isupper": 5,
+    "_isprint": 40,
+    "_isxdigit": 20
+   }
+  },
+  {
+   "library": "llibcr.lib",
+   "member": "onexit.asm",
+   "linear": 182438,
+   "size": 50,
+   "fixup_bytes": 6,
+   "publics": {
+    "_atexit": 0,
+    "_onexit": 8
+   }
+  },
+  {
+   "library": "llibcr.lib",
+   "member": "rand.c",
+   "linear": 182488,
+   "size": 58,
+   "fixup_bytes": 16,
+   "publics": {
+    "_srand": 0,
+    "_rand": 18
+   }
+  },
+  {
+   "library": "llibcr.lib",
+   "member": "dos\\signal.asm",
+   "linear": 182546,
+   "size": 407,
+   "fixup_bytes": 62,
+   "publics": {
+    "_signal": 6,
+    "__sigentry": 180
+   }
+  },
+  {
+   "library": "llibcr.lib",
+   "member": "dos\\access.asm",
+   "linear": 182954,
+   "size": 33,
+   "fixup_bytes": 2,
+   "publics": {
+    "_access": 0
+   }
+  },
+  {
+   "library": "llibcr.lib",
+   "member": "dos\\dir.asm",
+   "linear": 182988,
+   "size": 63,
+   "fixup_bytes": 2,
+   "publics": {
+    "_chdir": 7,
+    "_mkdir": 0,
+    "_rmdir": 22
+   }
+  },
+  {
+   "library": "llibcr.lib",
+   "member": "dos\\drive.asm",
+   "linear": 183052,
+   "size": 35,
+   "fixup_bytes": 0,
+   "publics": {
+    "__chdrive": 8,
+    "__getdrive": 0
+   }
+  },
+  {
+   "library": "llibcr.lib",
+   "member": "dos\\getcwd.c",
+   "linear": 183088,
+   "size": 286,
+   "fixup_bytes": 32,
+   "publics": {
+    "_getcwd": 0,
+    "__getdcwd": 24
+   }
+  },
+  {
+   "library": "llibcr.lib",
+   "member": "dos\\unlink.asm",
+   "linear": 183374,
+   "size": 15,
+   "fixup_bytes": 2,
+   "publics": {
+    "_remove": 0,
+    "_unlink": 0
+   }
+  },
+  {
+   "library": "llibcr.lib",
+   "member": "dos\\allocmem.asm",
+   "linear": 183390,
+   "size": 25,
+   "fixup_bytes": 2,
+   "publics": {
+    "__dos_allocmem": 0
+   }
+  },
+  {
+   "library": "llibcr.lib",
+   "member": "dos\\d_find.asm",
+   "linear": 183416,
+   "size": 62,
+   "fixup_bytes": 2,
+   "publics": {
+    "__dos_findnext": 0,
+    "__dos_findfirst": 11
+   }
+  },
+  {
+   "library": "llibcr.lib",
+   "member": "dos\\freemem.asm",
+   "linear": 183482,
+   "size": 13,
+   "fixup_bytes": 2,
+   "publics": {
+    "__dos_freemem": 0
+   }
+  },
+  {
+   "library": "llibcr.lib",
+   "member": "dos\\harderr.asm",
+   "linear": 183496,
+   "size": 87,
+   "fixup_bytes": 14,
+   "publics": {
+    "__hardretn_return": 67,
+    "__hardresume": 79,
+    "__harderr": 0
+   }
+  },
+  {
+   "library": "libh.lib",
+   "member": "aldiv.asm",
+   "linear": 183584,
+   "size": 34,
+   "fixup_bytes": 2,
+   "publics": {
+    "__aFFaldiv": 0
+   }
+  },
+  {
+   "library": "libh.lib",
+   "member": "alrem.asm",
+   "linear": 183584,
+   "size": 34,
+   "fixup_bytes": 2,
+   "publics": {
+    "__aFFalrem": 0
+   }
+  },
+  {
+   "library": "libh.lib",
+   "member": "auldiv.asm",
+   "linear": 183584,
+   "size": 34,
+   "fixup_bytes": 2,
+   "publics": {
+    "__aFFauldiv": 0
+   }
+  },
+  {
+   "library": "libh.lib",
+   "member": "aulrem.asm",
+   "linear": 183584,
+   "size": 34,
+   "fixup_bytes": 2,
+   "publics": {
+    "__aFFaulrem": 0
+   }
+  },
+  {
+   "library": "libh.lib",
+   "member": "ldiv.asm",
+   "linear": 183618,
+   "size": 154,
+   "fixup_bytes": 0,
+   "publics": {
+    "__aFldiv": 0
+   }
+  },
+  {
+   "library": "libh.lib",
+   "member": "lmul.asm",
+   "linear": 183772,
+   "size": 50,
+   "fixup_bytes": 0,
+   "publics": {
+    "__aFlmul": 0,
+    "__aFulmul": 0
+   }
+  },
+  {
+   "library": "libh.lib",
+   "member": "lrem.asm",
+   "linear": 183822,
+   "size": 160,
+   "fixup_bytes": 0,
+   "publics": {
+    "__aFlrem": 0
+   }
+  },
+  {
+   "library": "libh.lib",
+   "member": "almul.asm",
+   "linear": 184006,
+   "size": 32,
+   "fixup_bytes": 2,
+   "publics": {
+    "__aFNalmul": 0,
+    "__aFNaulmul": 0
+   }
+  },
+  {
+   "library": "libh.lib",
+   "member": "uldiv.asm",
+   "linear": 184038,
+   "size": 95,
+   "fixup_bytes": 0,
+   "publics": {
+    "__aFuldiv": 0
+   }
+  },
+  {
+   "library": "libh.lib",
+   "member": "ulrem.asm",
+   "linear": 184134,
+   "size": 106,
+   "fixup_bytes": 0,
+   "publics": {
+    "__aFulrem": 0
+   }
+  }
+ ]
+}

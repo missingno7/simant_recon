@@ -1,0 +1,60 @@
+{
+ "id": "TU-1",
+ "question": "When does a far call become 'push cs; call near'?",
+ "results": [
+  {
+   "variant": "defined_after",
+   "profile_index": 0,
+   "profile": "msc600",
+   "flags": [
+    "/AL",
+    "/Os"
+   ],
+   "source_sha256": "42c9f21bdeebe34e0899b3773bc491f9affdb4a5d7f7d580f681220d18a7adf8",
+   "bytes": "558bec33c09a00000000ff760aff7608ff76060ee800008be55dcb33c09a00000000cb",
+   "disasm": "push bp; mov bp, sp; xor ax, ax; lcall 0, 0; push word ptr [bp + 0xa]; push word ptr [bp + 8]; push word ptr [bp + 6]; push cs; call 0x17; mov sp, bp; pop bp; retf; xor ax, ax; lcall 0, 0; retf"
+  },
+  {
+   "variant": "defined_before",
+   "profile_index": 0,
+   "profile": "msc600",
+   "flags": [
+    "/AL",
+    "/Os"
+   ],
+   "source_sha256": "975bf113e4018c0dfd3763ceac3dc079993e2d3cad00134df028b451463a1eac",
+   "bytes": "33c09a00000000cb558bec33c09a00000000ff760aff7608ff76060ee800008be55dcb",
+   "disasm": "xor ax, ax; lcall 0, 0; retf; push bp; mov bp, sp; xor ax, ax; lcall 0, 0; push word ptr [bp + 0xa]; push word ptr [bp + 8]; push word ptr [bp + 6]; push cs; call 0x1f; mov sp, bp; pop bp; retf"
+  },
+  {
+   "variant": "prototype_only",
+   "profile_index": 0,
+   "profile": "msc600",
+   "flags": [
+    "/AL",
+    "/Os"
+   ],
+   "source_sha256": "e16372da41059ddeebcdcd83e716e89854616fa23351bfb341e0769a9807f6e8",
+   "bytes": "558bec33c09a00000000ff760aff7608ff76069a000000008be55dcb",
+   "disasm": "push bp; mov bp, sp; xor ax, ax; lcall 0, 0; push word ptr [bp + 0xa]; push word ptr [bp + 8]; push word ptr [bp + 6]; lcall 0, 0; mov sp, bp; pop bp; retf"
+  }
+ ],
+ "checks": [
+  {
+   "check": "defined_after@0",
+   "needle": "push cs; call",
+   "ok": true
+  },
+  {
+   "check": "defined_before@0",
+   "needle": "push cs; call",
+   "ok": true
+  },
+  {
+   "check": "prototype_only@0",
+   "needle": "!push cs; call",
+   "ok": true
+  }
+ ],
+ "all_checks_pass": true
+}

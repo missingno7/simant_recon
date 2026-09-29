@@ -55,7 +55,10 @@ def verify_module(text: str, module: dict, claims: list[dict]) -> dict:
     """Compile ``text`` under the module profile and verify every claim strictly."""
     prof = module["profile"]
     flags = module["flags"]
-    r = compiler.compile_c(text, prof, flags)
+    if module.get("lang") == "asm":
+        r = compiler.assemble(text, prof, flags)
+    else:
+        r = compiler.compile_c(text, prof, flags)
     out = {"compile_ok": r.ok, "log": r.log[-600:] if not r.ok else "", "claims": {}, "exact": False}
     if not r.ok:
         return out
@@ -71,8 +74,8 @@ def verify_module(text: str, module: dict, claims: list[dict]) -> dict:
             out["claims"][name] = {"exact": False, "reasons": ["claimed function is inside SCAFFOLD block"]}
             all_ok = False
             continue
-        pub = "_" + name
-        seg = next((p["segment"] for p in obj.publics + getattr(obj, "local_publics", []) if p["name"] == pub), None)
+        pub, prec = match.public_in(obj, name)
+        seg = prec["segment"] if prec else None
         if seg is None:
             out["claims"][name] = {"exact": False, "reasons": [f"no public {pub}"]}
             all_ok = False

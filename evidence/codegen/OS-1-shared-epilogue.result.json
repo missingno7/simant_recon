@@ -1,0 +1,72 @@
+{
+ "id": "OS-1",
+ "question": "Does /Os share one epilogue and omit alignment NOPs for an early return (f_00F8_0459 abs)?",
+ "results": [
+  {
+   "variant": "if_return",
+   "profile_index": 0,
+   "profile": "msc600",
+   "flags": [
+    "/AL",
+    "/Os"
+   ],
+   "source_sha256": "4c29b8adadb47f90be3eab74bb18e15165d8616beaab46538894cc055ebcb283",
+   "bytes": "558bec33c09a00000000837e06007d078b4606f7d8eb038b46068be55dcb",
+   "disasm": "push bp; mov bp, sp; xor ax, ax; lcall 0, 0; cmp word ptr [bp + 6], 0; jge 0x17; mov ax, word ptr [bp + 6]; neg ax; jmp 0x1a; mov ax, word ptr [bp + 6]; mov sp, bp; pop bp; retf"
+  },
+  {
+   "variant": "ternary",
+   "profile_index": 0,
+   "profile": "msc600",
+   "flags": [
+    "/AL",
+    "/Os"
+   ],
+   "source_sha256": "d9b9d3d958eb8ef37b7bc0e20dc99fa05f24ccf82532635d2067c0d2fdafb597",
+   "bytes": "558bec33c09a000000008b46069933c22bc28be55dcb",
+   "disasm": "push bp; mov bp, sp; xor ax, ax; lcall 0, 0; mov ax, word ptr [bp + 6]; cdq; xor ax, dx; sub ax, dx; mov sp, bp; pop bp; retf"
+  },
+  {
+   "variant": "if_return",
+   "profile_index": 1,
+   "profile": "msc600",
+   "flags": [
+    "/AL",
+    "/Ot"
+   ],
+   "source_sha256": "4c29b8adadb47f90be3eab74bb18e15165d8616beaab46538894cc055ebcb283",
+   "bytes": "558bec33c09a00000000837e06007d0a8b4606f7d88be55dcb908b46068be55dcb90",
+   "disasm": "push bp; mov bp, sp; xor ax, ax; lcall 0, 0; cmp word ptr [bp + 6], 0; jge 0x1a; mov ax, word ptr [bp + 6]; neg ax; mov sp, bp; pop bp; retf; nop; mov ax, word ptr [bp + 6]; mov sp, bp; pop bp; retf; nop"
+  },
+  {
+   "variant": "ternary",
+   "profile_index": 1,
+   "profile": "msc600",
+   "flags": [
+    "/AL",
+    "/Ot"
+   ],
+   "source_sha256": "d9b9d3d958eb8ef37b7bc0e20dc99fa05f24ccf82532635d2067c0d2fdafb597",
+   "bytes": "558bec33c09a000000008b46069933c22bc28be55dcb",
+   "disasm": "push bp; mov bp, sp; xor ax, ax; lcall 0, 0; mov ax, word ptr [bp + 6]; cdq; xor ax, dx; sub ax, dx; mov sp, bp; pop bp; retf"
+  }
+ ],
+ "checks": [
+  {
+   "check": "if_return@0",
+   "needle": "neg ax; jmp",
+   "ok": true
+  },
+  {
+   "check": "if_return@1",
+   "needle": "!neg ax; jmp",
+   "ok": true
+  },
+  {
+   "check": "ternary@0",
+   "needle": "cdq; xor ax, dx; sub ax, dx",
+   "ok": true
+  }
+ ],
+ "all_checks_pass": true
+}

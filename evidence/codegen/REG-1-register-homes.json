@@ -1,0 +1,10 @@
+{"id": "REG-1", "question": "Do explicit register locals get a BP home, and which of SI/DI do they take?",
+ "header": "extern int far g(int); extern void far h(int);\n",
+ "variants": {"one_register": "int far f(int n){ register int a; a=g(n); h(a); return a; }",
+              "two_register_ab": "int far f(int n){ register int a; register int b; a=g(n); b=g(a); h(a); h(b); return a+b; }",
+              "two_register_ba": "int far f(int n){ register int b; register int a; a=g(n); b=g(a); h(a); h(b); return a+b; }",
+              "unused_auto": "int far f(int n){ int unused; h(n); return n; }"},
+ "profiles": [{"profile": "msc600", "flags": ["/AL", "/Os"]}, {"profile": "msc510", "flags": ["/AL", "/Os"]}],
+ "expect": {"one_register@0": "xor ax, ax; lcall", "one_register@1": "mov ax, 2; lcall",
+            "two_register_ab@0": "pop bx; mov si, ax", "two_register_ba@0": "pop bx; mov di, ax",
+            "unused_auto@0": "mov ax, 2; lcall"}}

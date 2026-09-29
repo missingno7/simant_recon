@@ -1,0 +1,44 @@
+{
+ "id": "FRAME-1",
+ "question": "Is 'mov sp,bp' emitted in a frame without locals (discriminates MSC 6.x from 5.10)?",
+ "header": "extern int near g;\n",
+ "variants": {
+  "store": "void far f(int a) { g = a; }"
+ },
+ "profiles": [
+  {
+   "profile": "msc600",
+   "flags": [
+    "/AL",
+    "/Os"
+   ]
+  },
+  {
+   "profile": "msc510",
+   "flags": [
+    "/AL",
+    "/Os"
+   ]
+  },
+  {
+   "profile": "msc600a",
+   "flags": [
+    "/AL",
+    "/Os"
+   ]
+  },
+  {
+   "profile": "qc250",
+   "flags": [
+    "/AL",
+    "/Os"
+   ]
+  }
+ ],
+ "expect": {
+  "store@0": "mov sp, bp; pop bp",
+  "store@1": "!mov sp, bp",
+  "store@2": "mov sp, bp; pop bp",
+  "store@3": "!mov sp, bp"
+ }
+}

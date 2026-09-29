@@ -1,0 +1,44 @@
+{
+ "id": "GS-1",
+ "question": "What does an empty far function compile to with and without /Gs (module 277D)?",
+ "results": [
+  {
+   "variant": "empty",
+   "profile_index": 0,
+   "profile": "msc600",
+   "flags": [
+    "/AL",
+    "/Os",
+    "/Gs"
+   ],
+   "source_sha256": "4a0f78c547e53238b53a23fa59f2301600386e21b8b10d0c72abc3f85b0e2ad3",
+   "bytes": "cb",
+   "disasm": "retf"
+  },
+  {
+   "variant": "empty",
+   "profile_index": 1,
+   "profile": "msc600",
+   "flags": [
+    "/AL",
+    "/Os"
+   ],
+   "source_sha256": "4a0f78c547e53238b53a23fa59f2301600386e21b8b10d0c72abc3f85b0e2ad3",
+   "bytes": "33c09a00000000cb",
+   "disasm": "xor ax, ax; lcall 0, 0; retf"
+  }
+ ],
+ "checks": [
+  {
+   "check": "empty@0",
+   "needle": "retf",
+   "ok": true
+  },
+  {
+   "check": "empty@1",
+   "needle": "xor ax, ax; lcall 0, 0; retf",
+   "ok": true
+  }
+ ],
+ "all_checks_pass": true
+}

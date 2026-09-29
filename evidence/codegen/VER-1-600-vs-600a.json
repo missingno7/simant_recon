@@ -1,0 +1,6 @@
+{"id": "VER-1", "question": "Where do MSC 6.00 and 6.00A differ? (/Ol strength-reduced array walk)",
+ "header": "extern int near arr[100];\n",
+ "variants": {"sum": "int far f(int n) { int i, t = 0; for (i = 0; i < n; i++) t += arr[i]; return t; }"},
+ "profiles": [{"profile": "msc600", "flags": ["/AL", "/Ol"]}, {"profile": "msc600a", "flags": ["/AL", "/Ol"]},
+              {"profile": "msc600", "flags": ["/AL", "/Os"]}, {"profile": "msc600a", "flags": ["/AL", "/Os"]}],
+ "expect": {"sum@0": "shl ax, 1; add ax, 0", "sum@1": "!shl ax, 1; add ax, 0"}}

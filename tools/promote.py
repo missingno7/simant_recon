@@ -68,6 +68,8 @@ def main() -> int:
     ap.add_argument("--placement", action="append", default=[], help="SEGNAME=SEG:OFF:SIZE")
     ap.add_argument("--steered", default=None)
     ap.add_argument("--extent", help="START:END linear (hex): claim the complete module segment (exact TU)")
+    ap.add_argument("--asm-evidence", default=None,
+                    help="required for .asm: why this code is genuine assembly (compiler experiments)")
     ap.add_argument("--verify-only", action="store_true")
     a = ap.parse_args()
 
@@ -75,13 +77,16 @@ def main() -> int:
     seg = int(segs, 16)
     key = f"{unit}:{seg:04X}"
     text = a.candidate.read_text(encoding="latin1")
+    lang = "asm" if a.candidate.suffix.lower() == ".asm" else "c"
+    if lang == "asm" and not a.asm_evidence and not (modmod.load_manifest()["modules"].get(a.module, {}).get("asm_evidence")):
+        raise SystemExit("an .asm module needs --asm-evidence naming the experiments that exclude compiler output")
     x = exemod.load()
 
     with Lock() if not a.verify_only else _NoLock():
         man = modmod.load_manifest()
         mod = man["modules"].get(key)
         old_claims = list(mod["claims"]) if mod else []
-        profile = a.profile or (mod["profile"] if mod else fnmod.DEFAULT_PROFILE)
+        profile = a.profile or (mod["profile"] if mod else ("masm510" if lang == "asm" else fnmod.DEFAULT_PROFILE))
         flags = a.flags if a.flags is not None else (mod["flags"] if mod else fnmod.profile_flags(profile))
         placements = dict(mod.get("placements", {})) if mod else {}
         for p in a.placement:
@@ -100,7 +105,7 @@ def main() -> int:
                 continue
             orig = x.read(unit, f["seg"] * 16 + f["off"], f["size"])
             new_claims.append({"name": name, "unit": unit, "seg": f["seg"], "off": f["off"], "size": f["size"],
-                               "target_sha256": sha(orig), "kind": "C",
+                               "target_sha256": sha(orig), "kind": "ASM" if lang == "asm" else "C",
                                "provenance": "EXACT_STEERED" if a.steered else "EXACT_NATURAL",
                                **({"steered": a.steered} if a.steered else {})})
         claims = old_claims + new_claims
@@ -113,7 +118,10 @@ def main() -> int:
                         b0, b1 = n["seg"] * 16 + n["off"], n["seg"] * 16 + n["off"] + n["size"]
                         if a0 < b1 and b0 < a1:
                             raise SystemExit(f"{n['name']} overlaps owned {c['name']}")
-        module = {"unit": unit, "seg": seg, "profile": profile, "flags": flags, "placements": placements}
+        module = {"unit": unit, "seg": seg, "profile": profile, "flags": flags, "placements": placements,
+                  "lang": lang}
+        if lang == "asm":
+            module["asm_evidence"] = a.asm_evidence or mod.get("asm_evidence")
         if a.extent:
             s0, s1 = (int(v, 16) for v in a.extent.split(":"))
             module["extent"] = {"start": s0, "end": s1}
@@ -136,7 +144,7 @@ def main() -> int:
         if a.verify_only:
             print(f"VERIFY-ONLY OK: {len(claims)} claims in {key}")
             return 0
-        path = module_path(unit, seg)
+        path = module_path(unit, seg).with_suffix(".asm" if lang == "asm" else ".c")
         before = path.read_bytes() if path.exists() else None
         if before is not None and mod and sha(before) != mod.get("source_sha256"):
             raise SystemExit(f"{path} differs from its manifest hash; refusing to overwrite unreviewed edits")

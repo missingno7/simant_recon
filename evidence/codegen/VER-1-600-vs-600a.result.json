@@ -1,0 +1,67 @@
+{
+ "id": "VER-1",
+ "question": "Where do MSC 6.00 and 6.00A differ? (/Ol strength-reduced array walk)",
+ "results": [
+  {
+   "variant": "sum",
+   "profile_index": 0,
+   "profile": "msc600",
+   "flags": [
+    "/AL",
+    "/Ol"
+   ],
+   "source_sha256": "ee3a35c95a046968226ec91fc6a52771f0594af899a28aa408f1f5459156800e",
+   "bytes": "558becb808009a000000002bc08946fe3946067e1fd1e00500008946fa8b46068946f88b5efa8346fa028b070146feff4ef875ef8b46fe8be55dcb90",
+   "disasm": "push bp; mov bp, sp; mov ax, 8; lcall 0, 0; sub ax, ax; mov word ptr [bp - 2], ax; cmp word ptr [bp + 6], ax; jle 0x34; shl ax, 1; add ax, 0; mov word ptr [bp - 6], ax; mov ax, word ptr [bp + 6]; mov word ptr [bp - 8], ax; mov bx, word ptr [bp - 6]; add word ptr [bp - 6], 2; mov ax, word ptr [bx]; add word ptr [bp - 2], ax; dec word ptr [bp - 8]; jne 0x23; mov ax, word ptr [bp - 2]; mov sp, bp; pop bp; retf; nop"
+  },
+  {
+   "variant": "sum",
+   "profile_index": 1,
+   "profile": "msc600a",
+   "flags": [
+    "/AL",
+    "/Ol"
+   ],
+   "source_sha256": "ee3a35c95a046968226ec91fc6a52771f0594af899a28aa408f1f5459156800e",
+   "bytes": "558becb808009a000000002bc08946fe3946067e1cc746fa00008b46068946f88b5efa8346fa028b070146feff4ef875ef8b46fe8be55dcb",
+   "disasm": "push bp; mov bp, sp; mov ax, 8; lcall 0, 0; sub ax, ax; mov word ptr [bp - 2], ax; cmp word ptr [bp + 6], ax; jle 0x31; mov word ptr [bp - 6], 0; mov ax, word ptr [bp + 6]; mov word ptr [bp - 8], ax; mov bx, word ptr [bp - 6]; add word ptr [bp - 6], 2; mov ax, word ptr [bx]; add word ptr [bp - 2], ax; dec word ptr [bp - 8]; jne 0x20; mov ax, word ptr [bp - 2]; mov sp, bp; pop bp; retf"
+  },
+  {
+   "variant": "sum",
+   "profile_index": 2,
+   "profile": "msc600",
+   "flags": [
+    "/AL",
+    "/Os"
+   ],
+   "source_sha256": "ee3a35c95a046968226ec91fc6a52771f0594af899a28aa408f1f5459156800e",
+   "bytes": "558becb804009a000000002bc08946fe8946fceb0f8b5efcd1e38b8700000146feff46fc8b46063946fc7ce98b46fe8be55dcb",
+   "disasm": "push bp; mov bp, sp; mov ax, 4; lcall 0, 0; sub ax, ax; mov word ptr [bp - 2], ax; mov word ptr [bp - 4], ax; jmp 0x24; mov bx, word ptr [bp - 4]; shl bx, 1; mov ax, word ptr [bx]; add word ptr [bp - 2], ax; inc word ptr [bp - 4]; mov ax, word ptr [bp + 6]; cmp word ptr [bp - 4], ax; jl 0x15; mov ax, word ptr [bp - 2]; mov sp, bp; pop bp; retf"
+  },
+  {
+   "variant": "sum",
+   "profile_index": 3,
+   "profile": "msc600a",
+   "flags": [
+    "/AL",
+    "/Os"
+   ],
+   "source_sha256": "ee3a35c95a046968226ec91fc6a52771f0594af899a28aa408f1f5459156800e",
+   "bytes": "558becb804009a000000002bc08946fe8946fceb0f8b5efcd1e38b8700000146feff46fc8b46063946fc7ce98b46fe8be55dcb",
+   "disasm": "push bp; mov bp, sp; mov ax, 4; lcall 0, 0; sub ax, ax; mov word ptr [bp - 2], ax; mov word ptr [bp - 4], ax; jmp 0x24; mov bx, word ptr [bp - 4]; shl bx, 1; mov ax, word ptr [bx]; add word ptr [bp - 2], ax; inc word ptr [bp - 4]; mov ax, word ptr [bp + 6]; cmp word ptr [bp - 4], ax; jl 0x15; mov ax, word ptr [bp - 2]; mov sp, bp; pop bp; retf"
+  }
+ ],
+ "checks": [
+  {
+   "check": "sum@0",
+   "needle": "shl ax, 1; add ax, 0",
+   "ok": true
+  },
+  {
+   "check": "sum@1",
+   "needle": "!shl ax, 1; add ax, 0",
+   "ok": true
+  }
+ ],
+ "all_checks_pass": true
+}

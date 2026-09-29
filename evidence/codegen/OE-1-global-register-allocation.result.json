@@ -1,0 +1,44 @@
+{
+ "id": "OE-1",
+ "question": "Does /Oe enregister plain autos while keeping an unused home (RNG module frame shape)?",
+ "results": [
+  {
+   "variant": "dice",
+   "profile_index": 0,
+   "profile": "msc600",
+   "flags": [
+    "/AL",
+    "/Os",
+    "/Oe"
+   ],
+   "source_sha256": "7d82b4453dcbda4f0adc27fe7f9b600d749e246d12885503d014153562715c15",
+   "bytes": "558becb802009a0000000057ff76069a000000005b8bf8ff76069a000000005b8946fe3bc77e03897efe9a000000000bc07403f75efe8b46fe5f8be55dcb",
+   "disasm": "push bp; mov bp, sp; mov ax, 2; lcall 0, 0; push di; push word ptr [bp + 6]; lcall 0, 0; pop bx; mov di, ax; push word ptr [bp + 6]; lcall 0, 0; pop bx; mov word ptr [bp - 2], ax; cmp ax, di; jle 0x2a; mov word ptr [bp - 2], di; lcall 0, 0; or ax, ax; je 0x36; neg word ptr [bp - 2]; mov ax, word ptr [bp - 2]; pop di; mov sp, bp; pop bp; retf"
+  },
+  {
+   "variant": "dice",
+   "profile_index": 1,
+   "profile": "msc600",
+   "flags": [
+    "/AL",
+    "/Os"
+   ],
+   "source_sha256": "7d82b4453dcbda4f0adc27fe7f9b600d749e246d12885503d014153562715c15",
+   "bytes": "558becb804009a00000000ff76069a000000005b8946feff76069a000000005b8946fc3b46fe7e068b46fe8946fc9a000000000bc07403f75efc8b46fc8be55dcb",
+   "disasm": "push bp; mov bp, sp; mov ax, 4; lcall 0, 0; push word ptr [bp + 6]; lcall 0, 0; pop bx; mov word ptr [bp - 2], ax; push word ptr [bp + 6]; lcall 0, 0; pop bx; mov word ptr [bp - 4], ax; cmp ax, word ptr [bp - 2]; jle 0x2e; mov ax, word ptr [bp - 2]; mov word ptr [bp - 4], ax; lcall 0, 0; or ax, ax; je 0x3a; neg word ptr [bp - 4]; mov ax, word ptr [bp - 4]; mov sp, bp; pop bp; retf"
+  }
+ ],
+ "checks": [
+  {
+   "check": "dice@0",
+   "needle": "mov ax, 2; lcall",
+   "ok": true
+  },
+  {
+   "check": "dice@1",
+   "needle": "!push di",
+   "ok": true
+  }
+ ],
+ "all_checks_pass": true
+}

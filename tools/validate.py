@@ -56,6 +56,8 @@ def main() -> int:
     data_bytes = 0
     scaffolds = 0
     exact_tus = 0
+    exact_asm = 0
+    exact_asm_bytes = 0
     bss_bytes = 0
     per_unit = defaultdict(int)
     for key, m in man["modules"].items():
@@ -75,6 +77,9 @@ def main() -> int:
             if c.get("kind", "C") == "C":
                 exact_c += 1
                 exact_c_bytes += c["size"]
+            elif c["kind"] == "ASM":
+                exact_asm += 1
+                exact_asm_bytes += c["size"]
             per_unit[c["unit"]] += c["size"]
         for n, d in res.get("data", {}).items():
             if d.get("kind") == "BSS":
@@ -88,6 +93,18 @@ def main() -> int:
     for (u1, a1, s1, n1), (u2, a2, s2, n2) in zip(claimed, claimed[1:]):
         if u1 == u2 and a1 + s1 > a2:
             failures.append(f"overlapping claims {n1} {n2}")
+
+    import probe
+    rules_ok = 0
+    for spec in sorted((ROOT / "evidence" / "codegen").glob("*.json")):
+        if spec.name.endswith(".result.json"):
+            continue
+        res = probe.run(json.loads(spec.read_text()))
+        if res["all_checks_pass"]:
+            rules_ok += 1
+        else:
+            failures.append(f"codegen rule {spec.stem} no longer reproduces")
+    print(f"codegen rules reproduced: {rules_ok}")
 
     if not a.no_tests:
         t = subprocess.run([sys.executable, "-m", "unittest", "discover", "-s", str(ROOT / "tests"), "-q"],
@@ -117,21 +134,22 @@ def main() -> int:
         "known_game_functions": len(game),
         "exact_c_functions": exact_c,
         "exact_c_bytes": exact_c_bytes,
-        "exact_asm_functions": 0,
-        "exact_asm_bytes": 0,
+        "exact_asm_functions": exact_asm,
+        "exact_asm_bytes": exact_asm_bytes,
         "historical_runtime_bytes_accepted": 0,
         "historical_runtime_bytes_located_unaccepted": runtime_located,
         "rtlink_manager_bytes_unaccepted": len(x.image) - 0x2CFB * 16,
         "data_bytes_accepted": data_bytes,
         "bss_bytes_placed": bss_bytes,
         "game_code_span_bytes": code_total,
-        "unresolved_code_bytes": code_total - exact_c_bytes,
+        "unresolved_code_bytes": code_total - exact_c_bytes - exact_asm_bytes,
         "unresolved_data_bytes": s27 - data_bytes,
         "overlay_coverage": {s.name: {"bytes": len(s.data), "claimed": per_unit.get(s.name, 0)}
                              for s in x.sections[:27]},
         "root_claimed_bytes": per_unit.get("root", 0),
         "scaffold_functions": scaffolds,
         "exact_translation_units": exact_tus,
+        "codegen_rules_reproduced": rules_ok,
         "whole_executable": "NOT_BUILT (no historical link yet; see docs/next-steps.md)",
         "validation": "PASS" if not failures else "FAIL",
         "failures": failures,

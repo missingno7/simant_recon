@@ -2,20 +2,20 @@
  "schema": "simant-progress-v1",
  "generated": "2026-09-29",
  "oracle_sha256": "aa0596c6766322a8229ee3c36e57048c92adc82d50fbe2ef37afb8b85fcf4f11",
- "known_functions": 1342,
- "known_game_functions": 1239,
- "exact_c_functions": 28,
- "exact_c_bytes": 712,
- "exact_asm_functions": 0,
- "exact_asm_bytes": 0,
+ "known_functions": 1343,
+ "known_game_functions": 1240,
+ "exact_c_functions": 36,
+ "exact_c_bytes": 825,
+ "exact_asm_functions": 2,
+ "exact_asm_bytes": 25,
  "historical_runtime_bytes_accepted": 0,
  "historical_runtime_bytes_located_unaccepted": 13378,
  "rtlink_manager_bytes_unaccepted": 17065,
- "data_bytes_accepted": 0,
+ "data_bytes_accepted": 2,
  "bss_bytes_placed": 2,
  "game_code_span_bytes": 304748,
- "unresolved_code_bytes": 304036,
- "unresolved_data_bytes": 135520,
+ "unresolved_code_bytes": 303898,
+ "unresolved_data_bytes": 135518,
  "overlay_coverage": {
   "S00": {
    "bytes": 19696,
@@ -63,7 +63,7 @@
   },
   "S11": {
    "bytes": 880,
-   "claimed": 0
+   "claimed": 22
   },
   "S12": {
    "bytes": 4992,
@@ -126,9 +126,10 @@
    "claimed": 0
   }
  },
- "root_claimed_bytes": 712,
- "scaffold_functions": 2,
- "exact_translation_units": 2,
+ "root_claimed_bytes": 828,
+ "scaffold_functions": 3,
+ "exact_translation_units": 4,
+ "codegen_rules_reproduced": 8,
  "whole_executable": "NOT_BUILT (no historical link yet; see docs/next-steps.md)",
  "validation": "PASS",
  "failures": []

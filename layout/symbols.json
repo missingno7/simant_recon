@@ -1,6 +1,294 @@
 {
  "schema": "simant-symbols-v1",
  "code": {
+  "AddFood": {
+   "unit": "S08",
+   "seg": 13813,
+   "off": 3797,
+   "grounding": "inventory:push_cs_call,vector",
+   "history": [
+    {
+     "was": "o08_35F5_0ED5",
+     "why": "xver HIGH neighbourhood-v1: 5 anchored neighbours agree: callee:SRand1, callee:SRand128, callee:SRand256, callee:SRand64, callee:SRand8; size ratio 0.83"
+    }
+   ]
+  },
+  "AntMenu": {
+   "unit": "S05",
+   "seg": 13813,
+   "off": 1235,
+   "grounding": "inventory:vector",
+   "history": [
+    {
+     "was": "o05_35F5_04D3",
+     "why": "xver HIGH features-v1: constant 0x700; string \"antmenu\""
+    }
+   ]
+  },
+  "CheatKeys": {
+   "unit": "S07",
+   "seg": 13813,
+   "off": 0,
+   "grounding": "inventory:vector",
+   "history": [
+    {
+     "was": "o07_35F5_0000",
+     "why": "xver HIGH features-v1: constant 0x2724; constant 0x2726; constant 0x2728"
+    }
+   ]
+  },
+  "ConvertMonoMaskToColor": {
+   "unit": "root",
+   "seg": 5673,
+   "off": 1329,
+   "grounding": "inventory:push_cs_call",
+   "history": [
+    {
+     "was": "f_1629_0531",
+     "why": "xver HIGH features-v1: string \"balloon size=%d, %d\"; string \"clrbln\""
+    }
+   ]
+  },
+  "DeadAntHere": {
+   "unit": "root",
+   "seg": 2196,
+   "off": 8225,
+   "grounding": "inventory:far_call,push_cs_call",
+   "history": [
+    {
+     "was": "f_0894_2021",
+     "why": "xver HIGH neighbourhood-v1: 4 anchored neighbours agree: callee:SRand1, callee:SRand16, callee:SRand4, caller:o06_35F5_0A90; size ratio 1.19"
+    }
+   ]
+  },
+  "DigOutBNest": {
+   "unit": "S08",
+   "seg": 13813,
+   "off": 2118,
+   "grounding": "inventory:push_cs_call",
+   "history": [
+    {
+     "was": "o08_35F5_0846",
+     "why": "xver HIGH neighbourhood-v1: 4 anchored neighbours agree: callee:SRand1, callee:f_14EE_01D0, callee:f_14EE_0519, caller:o08_35F5_0050; size ratio 1.01"
+    }
+   ]
+  },
+  "DigTileThemB": {
+   "unit": "root",
+   "seg": 5358,
+   "off": 1859,
+   "grounding": "inventory:far_call",
+   "history": [
+    {
+     "was": "f_14EE_0743",
+     "why": "xver HIGH neighbourhood-v1: 4 anchored neighbours agree: callee:SRand8, callee:f_14EE_01D0, caller:o08_35F5_0846, caller:o25_39C7_1C81; size ratio 1.06"
+    }
+   ]
+  },
+  "DigTileThemR": {
+   "unit": "root",
+   "seg": 5358,
+   "off": 2206,
+   "grounding": "inventory:far_call",
+   "history": [
+    {
+     "was": "f_14EE_089E",
+     "why": "xver HIGH neighbourhood-v1: 4 anchored neighbours agree: callee:SRand8, callee:f_14EE_0367, caller:f_0F3F_1A37, caller:o08_35F5_0923; size ratio 1.07"
+    }
+   ]
+  },
+  "DisplayCard": {
+   "unit": "S23",
+   "seg": 14791,
+   "off": 1640,
+   "grounding": "inventory:push_cs_call",
+   "history": [
+    {
+     "was": "o23_39C7_0668",
+     "why": "xver HIGH features-v1: constant 0x501; runtime memchr,memmove; string \"card resource not found.\""
+    }
+   ]
+  },
+  "DoAntMoveY": {
+   "unit": "S25",
+   "seg": 15268,
+   "off": 8,
+   "grounding": "inventory:vector",
+   "history": [
+    {
+     "was": "o25_3BA4_0008",
+     "why": "xver HIGH neighbourhood-v1: 5 anchored neighbours agree: callee:f_10F7_0A44, callee:f_10F7_1DD3, callee:f_14EE_0C9C, callee:o22_39C7_0D21, callee:o25_3BA4_0DFB; size ratio 1.11"
+    }
+   ]
+  },
+  "DoAntSimY": {
+   "unit": "S25",
+   "seg": 15268,
+   "off": 1998,
+   "grounding": "inventory:vector",
+   "history": [
+    {
+     "was": "o25_3BA4_07CE",
+     "why": "xver HIGH neighbourhood-v1: 4 anchored neighbours agree: callee:SRand128, callee:f_10F7_0A44, callee:f_10F7_1DD3, callee:o22_39C7_0D21; size ratio 1.31"
+    }
+   ]
+  },
+  "DoDigInB": {
+   "unit": "S25",
+   "seg": 14791,
+   "off": 6071,
+   "grounding": "inventory:push_cs_call",
+   "history": [
+    {
+     "was": "o25_39C7_17B7",
+     "why": "xver HIGH neighbourhood-v1: 4 anchored neighbours agree: callee:SRand4, callee:SRand64, callee:SRand8, callee:o25_39C7_1C81; size ratio 0.73"
+    }
+   ]
+  },
+  "DoDigInR": {
+   "unit": "root",
+   "seg": 3903,
+   "off": 5628,
+   "grounding": "inventory:push_cs_call",
+   "history": [
+    {
+     "was": "f_0F3F_15FC",
+     "why": "xver HIGH neighbourhood-v1: 4 anchored neighbours agree: callee:SRand4, callee:SRand64, callee:SRand8, callee:f_0F3F_1A37; size ratio 0.78"
+    }
+   ]
+  },
+  "DoDigOutB": {
+   "unit": "S25",
+   "seg": 14791,
+   "off": 6604,
+   "grounding": "inventory:push_cs_call",
+   "history": [
+    {
+     "was": "o25_39C7_19CC",
+     "why": "xver HIGH neighbourhood-v1: 4 anchored neighbours agree: callee:SRand64, callee:f_0BE8_0BEE, callee:f_10F7_003A, callee:o25_39C7_1C81; size ratio 0.72"
+    }
+   ]
+  },
+  "DoFoodInB": {
+   "unit": "S25",
+   "seg": 14791,
+   "off": 5628,
+   "grounding": "inventory:push_cs_call",
+   "history": [
+    {
+     "was": "o25_39C7_15FC",
+     "why": "xver HIGH neighbourhood-v1: 4 anchored neighbours agree: callee:SRand1, callee:SRand16, callee:f_10F7_003A, callee:o25_39C7_1C81; size ratio 0.65"
+    }
+   ]
+  },
+  "DoNestingB": {
+   "unit": "S25",
+   "seg": 14791,
+   "off": 4494,
+   "grounding": "inventory:push_cs_call",
+   "history": [
+    {
+     "was": "o25_39C7_118E",
+     "why": "xver HIGH neighbourhood-v1: 5 anchored neighbours agree: callee:SRand1, callee:SRand16, callee:SRand8, callee:f_0BE8_0D67, callee:f_1383_099B; size ratio 0.76"
+    }
+   ]
+  },
+  "DosPunt": {
+   "unit": "root",
+   "seg": 6696,
+   "off": 631,
+   "grounding": "inventory:far_call,push_cs_call",
+   "history": [
+    {
+     "was": "f_1A28_0277",
+     "why": "xver HIGH features-v1: string \"%s dos error: %d: %s\"; string \"too many files open. you need a statement 'files=12' in your\""
+    }
+   ]
+  },
+  "DrawCurBalloons": {
+   "unit": "root",
+   "seg": 592,
+   "off": 17741,
+   "grounding": "inventory:push_cs_call",
+   "history": [
+    {
+     "was": "f_0250_454D",
+     "why": "xver HIGH neighbourhood-v1: 5 anchored neighbours agree: callee:SRand2, callee:SRand32, callee:SRand4, callee:SRand64, callee:TickCount; size ratio 0.62"
+    }
+   ]
+  },
+  "DrawSpider": {
+   "unit": "root",
+   "seg": 592,
+   "off": 6375,
+   "grounding": "inventory:push_cs_call",
+   "history": [
+    {
+     "was": "f_0250_18E7",
+     "why": "xver HIGH neighbourhood-v1: 4 anchored neighbours agree: callee:SRand2, callee:SRand32, callee:SRand64, callee:TickCount; size ratio 1.02"
+    }
+   ]
+  },
+  "EditToolsMenu": {
+   "unit": "S05",
+   "seg": 13813,
+   "off": 100,
+   "grounding": "inventory:vector",
+   "history": [
+    {
+     "was": "o05_35F5_0064",
+     "why": "xver HIGH features-v1: constant 0x117; constant 0xa00; constant 0xb00"
+    }
+   ]
+  },
+  "ExitNest": {
+   "unit": "S25",
+   "seg": 15268,
+   "off": 4430,
+   "grounding": "inventory:push_cs_call",
+   "history": [
+    {
+     "was": "o25_3BA4_114E",
+     "why": "xver HIGH neighbourhood-v1: 4 anchored neighbours agree: callee:SRand8, callee:f_10F7_0A44, callee:f_14EE_01D0, callee:f_14EE_0367; size ratio 1.27"
+    }
+   ]
+  },
+  "FootFall": {
+   "unit": "S06",
+   "seg": 13813,
+   "off": 7091,
+   "grounding": "inventory:push_cs_call",
+   "history": [
+    {
+     "was": "o06_35F5_1BB3",
+     "why": "xver HIGH neighbourhood-v1: 4 anchored neighbours agree: callee:f_0894_2021, callee:f_10F7_003A, callee:o22_39C7_0D21, caller:o06_35F5_0A90; size ratio 0.92"
+    }
+   ]
+  },
+  "GPutPacked": {
+   "unit": "root",
+   "seg": 7394,
+   "off": 1531,
+   "grounding": "inventory:far_call",
+   "history": [
+    {
+     "was": "f_1CE2_05FB",
+     "why": "xver HIGH features-v1: string \"gputpacked\"; string \"putpackedbuf\""
+    }
+   ]
+  },
+  "GetMap": {
+   "unit": "root",
+   "seg": 4343,
+   "off": 2128,
+   "grounding": "inventory:far_call,push_cs_call",
+   "history": [
+    {
+     "was": "f_10F7_0850",
+     "why": "xver HIGH neighbourhood-v1: 4 anchored neighbours agree: caller:f_0AD9_03D3, caller:o22_39C7_0000, caller:o25_3BA4_0008, caller:o25_3BA4_07CE; size ratio 0.83"
+    }
+   ]
+  },
   "GetSRandSeed": {
    "unit": "root",
    "seg": 147,
@@ -10,6 +298,102 @@
     {
      "was": "f_0093_00A3",
      "why": "xver CONFIRMED (evidence/cross_version/decisions.json: RNG translation unit)"
+    }
+   ]
+  },
+  "IBMInitStuff": {
+   "unit": "S20",
+   "seg": 14833,
+   "off": 10,
+   "grounding": "inventory:vector",
+   "history": [
+    {
+     "was": "o20_39F1_000A",
+     "why": "xver HIGH features-v1: runtime exit,getcwd,getenv,isdigit,stricmp; string \"cannot load menu\"; string \"language\""
+    }
+   ]
+  },
+  "IsItDirt": {
+   "unit": "root",
+   "seg": 3048,
+   "off": 3054,
+   "grounding": "inventory:far_call",
+   "history": [
+    {
+     "was": "f_0BE8_0BEE",
+     "why": "xver HIGH neighbourhood-v1: 5 anchored neighbours agree: caller:f_0F3F_1A37, caller:f_14EE_0519, caller:f_14EE_0743, caller:o25_39C7_17B7, caller:o25_39C7_1C81; size ratio 1.27"
+    }
+   ]
+  },
+  "LoadMonoPats": {
+   "unit": "S15",
+   "seg": 14412,
+   "off": 23,
+   "grounding": "inventory:vector",
+   "history": [
+    {
+     "was": "o15_384C_0017",
+     "why": "xver HIGH features-v1: constant 0x2710; constant 0x271a; string \"cannot load monochrome patterns.\""
+    }
+   ]
+  },
+  "MakeNewHoleB": {
+   "unit": "root",
+   "seg": 5358,
+   "off": 464,
+   "grounding": "inventory:far_call,push_cs_call",
+   "history": [
+    {
+     "was": "f_14EE_01D0",
+     "why": "xver HIGH neighbourhood-v1: 4 anchored neighbours agree: callee:SRand1, callee:f_14EE_0519, caller:o07_35F5_0000, caller:o08_35F5_0050; size ratio 0.75"
+    }
+   ]
+  },
+  "Mini_DrawMapI": {
+   "unit": "S04",
+   "seg": 13813,
+   "off": 1246,
+   "grounding": "inventory:push_cs_call",
+   "history": [
+    {
+     "was": "o04_35F5_04DE",
+     "why": "xver HIGH features-v1: constant 0x1401; string \"generated map window\"; string \"map window image\""
+    }
+   ]
+  },
+  "OpenDB": {
+   "unit": "root",
+   "seg": 6696,
+   "off": 6,
+   "grounding": "inventory:far_call",
+   "history": [
+    {
+     "was": "f_1A28_0006",
+     "why": "xver CONFIRMED features-v1+reviewed: '%s.dat' format plus unique 'cannot create data file.'; sprintf runtime call in both; runtime sprintf"
+    }
+   ]
+  },
+  "OpenIndex": {
+   "unit": "root",
+   "seg": 6534,
+   "off": 4,
+   "grounding": "inventory:far_call",
+   "history": [
+    {
+     "was": "f_1986_0004",
+     "why": "xver CONFIRMED features-v1+reviewed: '%s.ndx' format plus unique 'index file missing'; sprintf runtime call in both; runtime sprintf"
+    }
+   ]
+  },
+  "PlaceBlackQueen": {
+   "unit": "S08",
+   "seg": 13813,
+   "off": 2956,
+   "grounding": "inventory:push_cs_call",
+   "history": [
+    {
+     "was": "o08_35F5_0B8C",
+     "why": "xver HIGH neighbourhood-v1: 4 anchored neighbours agree: callee:SRand1, callee:SRand2, callee:SRand4, caller:o08_35F5_0050; size ratio 0.58"
     }
    ]
   },
@@ -193,6 +577,42 @@
     }
    ]
   },
+  "ShowIntro": {
+   "unit": "S16",
+   "seg": 14412,
+   "off": 1138,
+   "grounding": "inventory:vector",
+   "history": [
+    {
+     "was": "o16_384C_0472",
+     "why": "xver HIGH features-v1: constant 0x2711; constant 0x300; string \"malloc\""
+    }
+   ]
+  },
+  "SimKidInside": {
+   "unit": "S06",
+   "seg": 13813,
+   "off": 2704,
+   "grounding": "inventory:push_cs_call",
+   "history": [
+    {
+     "was": "o06_35F5_0A90",
+     "why": "xver HIGH neighbourhood-v1: 4 anchored neighbours agree: callee:SRand1, callee:SRand128, callee:SRand4, callee:SRand64; size ratio 0.93"
+    }
+   ]
+  },
+  "SpiderScan": {
+   "unit": "root",
+   "seg": 3291,
+   "off": 3984,
+   "grounding": "inventory:push_cs_call",
+   "history": [
+    {
+     "was": "f_0CDB_0F90",
+     "why": "xver HIGH neighbourhood-v1: 4 anchored neighbours agree: callee:SRand1, callee:SRand4, callee:f_0894_2021, caller:f_0CDB_00B3; size ratio 1.01"
+    }
+   ]
+  },
   "TickCount": {
    "unit": "root",
    "seg": 7027,
@@ -214,6 +634,18 @@
     {
      "was": "f_277D_000A",
      "why": "xver HIGH: 8 anchored callers agree with Win16 _WinPrintf callers; body is compiled-out debug formatter (evidence/cross_version/decisions.json)"
+    }
+   ]
+  },
+  "db_LoadObject": {
+   "unit": "root",
+   "seg": 6739,
+   "off": 293,
+   "grounding": "inventory:far_call,push_cs_call",
+   "history": [
+    {
+     "was": "f_1A53_0125",
+     "why": "xver CONFIRMED features-v1+reviewed: three unique diagnostics shared verbatim: 'cache table full, can't load object', 'load attempt with database closed', 'memory full or object ...'; calls DBRecall and ch_AddEntry in the same order on both sides; string \"cache table full, can't load object\""
     }
    ]
   },
@@ -895,12 +1327,6 @@
    "off": 6047,
    "grounding": "inventory:push_cs_call"
   },
-  "f_0250_18E7": {
-   "unit": "root",
-   "seg": 592,
-   "off": 6375,
-   "grounding": "inventory:push_cs_call"
-  },
   "f_0250_20A5": {
    "unit": "root",
    "seg": 592,
@@ -961,12 +1387,6 @@
    "off": 17514,
    "grounding": "inventory:push_cs_call"
   },
-  "f_0250_454D": {
-   "unit": "root",
-   "seg": 592,
-   "off": 17741,
-   "grounding": "inventory:push_cs_call"
-  },
   "f_0250_4C28": {
    "unit": "root",
    "seg": 592,
@@ -984,12 +1404,6 @@
    "seg": 592,
    "off": 20568,
    "grounding": "inventory:far_call,push_cs_call"
-  },
-  "f_075B_0000": {
-   "unit": "root",
-   "seg": 1883,
-   "off": 0,
-   "grounding": "inventory:far_call"
   },
   "f_075B_00A6": {
    "unit": "root",
@@ -1273,12 +1687,6 @@
    "off": 7985,
    "grounding": "inventory:push_cs_call"
   },
-  "f_0894_2021": {
-   "unit": "root",
-   "seg": 2196,
-   "off": 8225,
-   "grounding": "inventory:far_call,push_cs_call"
-  },
   "f_0894_21C5": {
    "unit": "root",
    "seg": 2196,
@@ -1513,12 +1921,6 @@
    "off": 3009,
    "grounding": "inventory:far_call,push_cs_call"
   },
-  "f_0BE8_0BEE": {
-   "unit": "root",
-   "seg": 3048,
-   "off": 3054,
-   "grounding": "inventory:far_call"
-  },
   "f_0BE8_0C0F": {
    "unit": "root",
    "seg": 3048,
@@ -1577,12 +1979,6 @@
    "unit": "root",
    "seg": 3291,
    "off": 3593,
-   "grounding": "inventory:push_cs_call"
-  },
-  "f_0CDB_0F90": {
-   "unit": "root",
-   "seg": 3291,
-   "off": 3984,
    "grounding": "inventory:push_cs_call"
   },
   "f_0CDB_1118": {
@@ -1885,12 +2281,6 @@
    "off": 5236,
    "grounding": "inventory:push_cs_call"
   },
-  "f_0F3F_15FC": {
-   "unit": "root",
-   "seg": 3903,
-   "off": 5628,
-   "grounding": "inventory:push_cs_call"
-  },
   "f_0F3F_186B": {
    "unit": "root",
    "seg": 3903,
@@ -2003,12 +2393,6 @@
    "unit": "root",
    "seg": 4343,
    "off": 1991,
-   "grounding": "inventory:far_call,push_cs_call"
-  },
-  "f_10F7_0850": {
-   "unit": "root",
-   "seg": 4343,
-   "off": 2128,
    "grounding": "inventory:far_call,push_cs_call"
   },
   "f_10F7_08CE": {
@@ -2455,12 +2839,6 @@
    "off": 337,
    "grounding": "inventory:far_call"
   },
-  "f_14EE_01D0": {
-   "unit": "root",
-   "seg": 5358,
-   "off": 464,
-   "grounding": "inventory:far_call,push_cs_call"
-  },
   "f_14EE_0317": {
    "unit": "root",
    "seg": 5358,
@@ -2490,18 +2868,6 @@
    "seg": 5358,
    "off": 1607,
    "grounding": "inventory:far_call,push_cs_call"
-  },
-  "f_14EE_0743": {
-   "unit": "root",
-   "seg": 5358,
-   "off": 1859,
-   "grounding": "inventory:far_call"
-  },
-  "f_14EE_089E": {
-   "unit": "root",
-   "seg": 5358,
-   "off": 2206,
-   "grounding": "inventory:far_call"
   },
   "f_14EE_09F1": {
    "unit": "root",
@@ -2545,12 +2911,6 @@
    "off": 156,
    "grounding": "inventory:far_call"
   },
-  "f_15F8_0004": {
-   "unit": "root",
-   "seg": 5624,
-   "off": 4,
-   "grounding": "inventory:far_call"
-  },
   "f_15F8_0313": {
    "unit": "root",
    "seg": 5624,
@@ -2567,12 +2927,6 @@
    "unit": "root",
    "seg": 5673,
    "off": 1123,
-   "grounding": "inventory:push_cs_call"
-  },
-  "f_1629_0531": {
-   "unit": "root",
-   "seg": 5673,
-   "off": 1329,
    "grounding": "inventory:push_cs_call"
   },
   "f_1699_0000": {
@@ -2941,6 +3295,12 @@
    "off": 2,
    "grounding": "inventory:far_call"
   },
+  "f_1959_000C": {
+   "unit": "root",
+   "seg": 6489,
+   "off": 12,
+   "grounding": "reviewed: unreferenced far function at 0x1959C (dword byte swap) following f_1959_0002; module ends at 0x195AB, LINK fill 00 before 195A"
+  },
   "f_195A_000C": {
    "unit": "root",
    "seg": 6490,
@@ -3025,12 +3385,6 @@
    "off": 695,
    "grounding": "inventory:far_call"
   },
-  "f_1986_0004": {
-   "unit": "root",
-   "seg": 6534,
-   "off": 4,
-   "grounding": "inventory:far_call"
-  },
   "f_1986_00F4": {
    "unit": "root",
    "seg": 6534,
@@ -3103,12 +3457,6 @@
    "off": 1209,
    "grounding": "inventory:push_cs_call"
   },
-  "f_1A28_0006": {
-   "unit": "root",
-   "seg": 6696,
-   "off": 6,
-   "grounding": "inventory:far_call"
-  },
   "f_1A28_0149": {
    "unit": "root",
    "seg": 6696,
@@ -3127,12 +3475,6 @@
    "off": 548,
    "grounding": "inventory:push_cs_call"
   },
-  "f_1A28_0277": {
-   "unit": "root",
-   "seg": 6696,
-   "off": 631,
-   "grounding": "inventory:far_call,push_cs_call"
-  },
   "f_1A53_0042": {
    "unit": "root",
    "seg": 6739,
@@ -3150,12 +3492,6 @@
    "seg": 6739,
    "off": 240,
    "grounding": "inventory:far_call"
-  },
-  "f_1A53_0125": {
-   "unit": "root",
-   "seg": 6739,
-   "off": 293,
-   "grounding": "inventory:far_call,push_cs_call"
   },
   "f_1A53_01FF": {
    "unit": "root",
@@ -3732,12 +4068,6 @@
    "seg": 7394,
    "off": 1415,
    "grounding": "inventory:push_cs_call"
-  },
-  "f_1CE2_05FB": {
-   "unit": "root",
-   "seg": 7394,
-   "off": 1531,
-   "grounding": "inventory:far_call"
   },
   "f_1CE2_0951": {
    "unit": "root",
@@ -4849,12 +5179,6 @@
    "off": 1067,
    "grounding": "inventory:far_call"
   },
-  "f_24AB_047D": {
-   "unit": "root",
-   "seg": 9387,
-   "off": 1149,
-   "grounding": "inventory:far_call"
-  },
   "f_24FA_0004": {
    "unit": "root",
    "seg": 9466,
@@ -5011,12 +5335,6 @@
    "off": 8,
    "grounding": "inventory:far_call"
   },
-  "f_25E7_007A": {
-   "unit": "root",
-   "seg": 9703,
-   "off": 122,
-   "grounding": "inventory:far_call"
-  },
   "f_25E7_02FE": {
    "unit": "root",
    "seg": 9703,
@@ -5111,12 +5429,6 @@
    "unit": "root",
    "seg": 9826,
    "off": 2317,
-   "grounding": "inventory:far_call"
-  },
-  "f_2662_0B63": {
-   "unit": "root",
-   "seg": 9826,
-   "off": 2915,
    "grounding": "inventory:far_call"
   },
   "f_2662_0C06": {
@@ -5515,6 +5827,70 @@
    "off": 56,
    "grounding": "inventory:far_call"
   },
+  "font_InitFonts": {
+   "unit": "root",
+   "seg": 9387,
+   "off": 1149,
+   "grounding": "inventory:far_call",
+   "history": [
+    {
+     "was": "f_24AB_047D",
+     "why": "xver HIGH features-v1: string \"font1\"; string \"font2\"; string \"font3\""
+    }
+   ]
+  },
+  "font_ReadFont": {
+   "unit": "root",
+   "seg": 9703,
+   "off": 122,
+   "grounding": "inventory:far_call",
+   "history": [
+    {
+     "was": "f_25E7_007A",
+     "why": "xver CONFIRMED features-v1+reviewed: unique strings 'fontheader' and 'fontimage'; runtime signature fopen/fread/fclose in both; runtime fclose,fopen,fread"
+    }
+   ]
+  },
+  "hanim_MakeAnimSet": {
+   "unit": "root",
+   "seg": 9826,
+   "off": 2915,
+   "grounding": "inventory:far_call",
+   "history": [
+    {
+     "was": "f_2662_0B63",
+     "why": "xver HIGH features-v1: string \"animhandle\"; string \"animobjs\""
+    }
+   ]
+  },
+  "initStuff": {
+   "unit": "root",
+   "seg": 1883,
+   "off": 0,
+   "grounding": "inventory:far_call",
+   "history": [
+    {
+     "was": "f_075B_0000",
+     "why": "xver HIGH features-v1: string \"cannot getresource (hex, %d), reserr %d\"; string \"memdeath\""
+    }
+   ]
+  },
+  "main": {
+   "unit": "root",
+   "seg": 5624,
+   "off": 4,
+   "grounding": "inventory:far_call",
+   "history": [
+    {
+     "was": "f_15F8_0004",
+     "why": "xver HIGH features-v1: string \"simant cancelled.\"; string \"sound\""
+    },
+    {
+     "was": "WINMAIN",
+     "why": "sole caller is MSC crt0 __astart: this is C main(); Win16 WINMAIN is its platform counterpart (shared strings \"simant cancelled.\", \"sound\"), not the same symbol"
+    }
+   ]
+  },
   "o00_3126_06A3": {
    "unit": "S00",
    "seg": 12582,
@@ -5839,12 +6215,6 @@
    "off": 1060,
    "grounding": "inventory:push_cs_call"
   },
-  "o04_35F5_04DE": {
-   "unit": "S04",
-   "seg": 13813,
-   "off": 1246,
-   "grounding": "inventory:push_cs_call"
-  },
   "o04_35F5_075F": {
    "unit": "S04",
    "seg": 13813,
@@ -5869,22 +6239,10 @@
    "off": 0,
    "grounding": "inventory:vector"
   },
-  "o05_35F5_0064": {
-   "unit": "S05",
-   "seg": 13813,
-   "off": 100,
-   "grounding": "inventory:vector"
-  },
   "o05_35F5_025C": {
    "unit": "S05",
    "seg": 13813,
    "off": 604,
-   "grounding": "inventory:vector"
-  },
-  "o05_35F5_04D3": {
-   "unit": "S05",
-   "seg": 13813,
-   "off": 1235,
    "grounding": "inventory:vector"
   },
   "o05_35F5_0629": {
@@ -5971,12 +6329,6 @@
    "off": 2655,
    "grounding": "inventory:push_cs_call"
   },
-  "o06_35F5_0A90": {
-   "unit": "S06",
-   "seg": 13813,
-   "off": 2704,
-   "grounding": "inventory:push_cs_call"
-  },
   "o06_35F5_11FF": {
    "unit": "S06",
    "seg": 13813,
@@ -6013,12 +6365,6 @@
    "off": 6920,
    "grounding": "inventory:push_cs_call"
   },
-  "o06_35F5_1BB3": {
-   "unit": "S06",
-   "seg": 13813,
-   "off": 7091,
-   "grounding": "inventory:push_cs_call"
-  },
   "o06_35F5_1CEA": {
    "unit": "S06",
    "seg": 13813,
@@ -6049,12 +6395,6 @@
    "off": 9089,
    "grounding": "inventory:push_cs_call"
   },
-  "o07_35F5_0000": {
-   "unit": "S07",
-   "seg": 13813,
-   "off": 0,
-   "grounding": "inventory:vector"
-  },
   "o08_35F5_0000": {
    "unit": "S08",
    "seg": 13813,
@@ -6073,12 +6413,6 @@
    "off": 1435,
    "grounding": "inventory:vector"
   },
-  "o08_35F5_0846": {
-   "unit": "S08",
-   "seg": 13813,
-   "off": 2118,
-   "grounding": "inventory:push_cs_call"
-  },
   "o08_35F5_0923": {
    "unit": "S08",
    "seg": 13813,
@@ -6090,12 +6424,6 @@
    "seg": 13813,
    "off": 2560,
    "grounding": "inventory:push_cs_call,vector"
-  },
-  "o08_35F5_0B8C": {
-   "unit": "S08",
-   "seg": 13813,
-   "off": 2956,
-   "grounding": "inventory:push_cs_call"
   },
   "o08_35F5_0C4C": {
    "unit": "S08",
@@ -6125,12 +6453,6 @@
    "unit": "S08",
    "seg": 13813,
    "off": 3771,
-   "grounding": "inventory:push_cs_call,vector"
-  },
-  "o08_35F5_0ED5": {
-   "unit": "S08",
-   "seg": 13813,
-   "off": 3797,
    "grounding": "inventory:push_cs_call,vector"
   },
   "o08_35F5_1080": {
@@ -6559,12 +6881,6 @@
    "off": 0,
    "grounding": "inventory:vector"
   },
-  "o15_384C_0017": {
-   "unit": "S15",
-   "seg": 14412,
-   "off": 23,
-   "grounding": "inventory:vector"
-  },
   "o15_384C_0125": {
    "unit": "S15",
    "seg": 14412,
@@ -6611,12 +6927,6 @@
    "unit": "S16",
    "seg": 14412,
    "off": 481,
-   "grounding": "inventory:vector"
-  },
-  "o16_384C_0472": {
-   "unit": "S16",
-   "seg": 14412,
-   "off": 1138,
    "grounding": "inventory:vector"
   },
   "o17_384C_0000": {
@@ -6895,12 +7205,6 @@
    "off": 530,
    "grounding": "inventory:vector"
   },
-  "o20_39F1_000A": {
-   "unit": "S20",
-   "seg": 14833,
-   "off": 10,
-   "grounding": "inventory:vector"
-  },
   "o20_39F1_03DE": {
    "unit": "S20",
    "seg": 14833,
@@ -6935,12 +7239,6 @@
    "unit": "S21",
    "seg": 14791,
    "off": 365,
-   "grounding": "inventory:vector"
-  },
-  "o22_39C7_0000": {
-   "unit": "S22",
-   "seg": 14791,
-   "off": 0,
    "grounding": "inventory:vector"
   },
   "o22_39C7_0405": {
@@ -7195,12 +7493,6 @@
    "off": 1185,
    "grounding": "inventory:push_cs_call"
   },
-  "o23_39C7_0668": {
-   "unit": "S23",
-   "seg": 14791,
-   "off": 1640,
-   "grounding": "inventory:push_cs_call"
-  },
   "o23_39C7_0C19": {
    "unit": "S23",
    "seg": 14791,
@@ -7381,12 +7673,6 @@
    "off": 4187,
    "grounding": "inventory:push_cs_call"
   },
-  "o25_39C7_118E": {
-   "unit": "S25",
-   "seg": 14791,
-   "off": 4494,
-   "grounding": "inventory:push_cs_call"
-  },
   "o25_39C7_13EF": {
    "unit": "S25",
    "seg": 14791,
@@ -7411,41 +7697,11 @@
    "off": 5556,
    "grounding": "inventory:far_call,push_cs_call"
   },
-  "o25_39C7_15FC": {
-   "unit": "S25",
-   "seg": 14791,
-   "off": 5628,
-   "grounding": "inventory:push_cs_call"
-  },
-  "o25_39C7_17B7": {
-   "unit": "S25",
-   "seg": 14791,
-   "off": 6071,
-   "grounding": "inventory:push_cs_call"
-  },
-  "o25_39C7_19CC": {
-   "unit": "S25",
-   "seg": 14791,
-   "off": 6604,
-   "grounding": "inventory:push_cs_call"
-  },
   "o25_39C7_1C81": {
    "unit": "S25",
    "seg": 14791,
    "off": 7297,
    "grounding": "inventory:push_cs_call"
-  },
-  "o25_3BA4_0008": {
-   "unit": "S25",
-   "seg": 15268,
-   "off": 8,
-   "grounding": "inventory:vector"
-  },
-  "o25_3BA4_07CE": {
-   "unit": "S25",
-   "seg": 15268,
-   "off": 1998,
-   "grounding": "inventory:vector"
   },
   "o25_3BA4_0999": {
    "unit": "S25",
@@ -7470,12 +7726,6 @@
    "seg": 15268,
    "off": 4149,
    "grounding": "inventory:push_cs_call,vector"
-  },
-  "o25_3BA4_114E": {
-   "unit": "S25",
-   "seg": 15268,
-   "off": 4430,
-   "grounding": "inventory:push_cs_call"
   },
   "o25_3BA4_1581": {
    "unit": "S25",
@@ -7542,9 +7792,26 @@
    "seg": 14791,
    "off": 1649,
    "grounding": "inventory:vector"
+  },
+  "processEdit": {
+   "unit": "S22",
+   "seg": 14791,
+   "off": 0,
+   "grounding": "inventory:vector",
+   "history": [
+    {
+     "was": "o22_39C7_0000",
+     "why": "xver HIGH features-v1: constant 0x6000; string \"eptr->mouse_flags=%x\""
+    }
+   ]
   }
  },
  "data": {
+  "fd_50F6_0D70": {
+   "seg": 20726,
+   "off": 3440,
+   "grounding": "f_015B_01B8: mov es,[DS:7E28] (CONST word = 50F6 with S27 relocation) ; mov es:[0D70],ax"
+  },
   "g_8BA2": {
    "seg": 21939,
    "off": 35746,
