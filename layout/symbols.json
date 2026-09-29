@@ -9549,6 +9549,11 @@
    "off": 1996,
    "grounding": "o08_35F5_0000 (InitSimVars): mov es,[CONST word 3D57] ; mov es:[07CC],..."
   },
+  "fd_3D57_0B36": {
+   "seg": 15703,
+   "off": 2870,
+   "grounding": "f_0F3F_0A26: mov es,[8262] (3D57); mov al,es:[bx+0B36]; cbw with bx=(mode%7)*8+SRand8() (caste table)"
+  },
   "fd_3D57_0C12": {
    "seg": 15703,
    "off": 3090,
@@ -10579,6 +10584,11 @@
    "off": 4026,
    "grounding": "o08_35F5_0000 (InitSimVars): mov es,[CONST word 50F6] ; mov es:[0FBA],..."
   },
+  "fd_50F6_0FBC": {
+   "seg": 20726,
+   "off": 4028,
+   "grounding": "f_0F3F_0075: mov es,[8248] (50F6); add es:[0FBC],1; adc es:[0FBE],0 (long counter, red ants expired)"
+  },
   "fd_50F6_0FFA": {
    "seg": 20726,
    "off": 4090,
@@ -10693,6 +10703,11 @@
    "seg": 20726,
    "off": 4258,
    "grounding": "o08_35F5_0050 (RandWorld): mov es,[S08 CONST word] ; mov es:[off]"
+  },
+  "fd_50F6_10A6": {
+   "seg": 20726,
+   "off": 4262,
+   "grounding": "f_0F3F_0A26: mov es,[8260] (50F6); mov ax,es:[10A6]; idiv 7 (strategic mode % 7)"
   },
   "fd_50F6_10AC": {
    "seg": 20726,

@@ -213,12 +213,15 @@ class Binder:
                 off = None
             # far code targets in another overlay go through the RTLink vector
             if kind == "code" and unit != t.unit and unit != "root":
+                # RTLink routes a call into another overlay section through the vector it
+                # created for that entry; entries without a vector (e.g. the three root far
+                # calls into area 3126 in docs/exe-format.md) are called directly.
                 v = vector_for(unit, seg, off)
-                if v is None:
-                    res.unbound.append(f"no RTLink vector for {unit}:{seg:04X}:{off:04X}")
-                    continue
-                seg, off = MANAGER_SEG, v.offset
-                rec["via_vector"] = f"{v.offset:04X}"
+                if v is not None:
+                    seg, off = MANAGER_SEG, v.offset
+                    rec["via_vector"] = f"{v.offset:04X}"
+                else:
+                    rec["direct_overlay"] = f"{unit}:{seg:04X}:{off:04X}"
             if loc in ("offset16", "pointer32", "loader-offset16"):
                 if kind == "own":
                     tgt_off = (addend + disp + delta) & 0xFFFF

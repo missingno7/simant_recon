@@ -5,24 +5,31 @@
   "S06:35F5": {
    "unit": "S06",
    "seg": 13813,
-   "profile": "msc600a",
+   "profile": "msc600a-c2l",
    "flags": [
     "/AL",
     "/Os",
     "/Og",
     "/Oe",
-    "/Zd"
+    "/Zd",
+    "/B2",
+    "C2L.EXE"
    ],
    "placements": {
     "CONST": {
      "seg": 21939,
      "off": 33878,
-     "size": 88
+     "size": 110
+    },
+    "_DATA": {
+     "seg": 21939,
+     "off": 9288,
+     "size": 638
     }
    },
    "lang": "c",
    "source": "src/S06/m35F5.c",
-   "source_sha256": "4ba2a6873ae517b9a34d509bfdbcf4b2d4c89c852b736749a490016c0a164ea7",
+   "source_sha256": "230ac4c3775001a0e9f09915b712b52e2497e0e3d87192226e58d16870783e5e",
    "claims": [
     {
      "name": "o06_35F5_0000",
@@ -67,17 +74,73 @@
      "kind": "C",
      "provenance": "EXACT_NATURAL",
      "reloc_order": "GROUPED"
+    },
+    {
+     "name": "o06_35F5_02B9",
+     "unit": "S06",
+     "seg": 13813,
+     "off": 697,
+     "size": 1710,
+     "target_sha256": "2596a3fd398a363d8a8202a996ac2b96c813291524127f07dfea0032d8f10002",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL",
+     "reloc_order": "GROUPED"
+    },
+    {
+     "name": "o06_35F5_0967",
+     "unit": "S06",
+     "seg": 13813,
+     "off": 2407,
+     "size": 144,
+     "target_sha256": "49f3ec670870f88fe4d787162e41fb2c2aeb79dd93eb5bc32c831b17f07bfb91",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL",
+     "reloc_order": "EXACT"
+    },
+    {
+     "name": "o06_35F5_09F7",
+     "unit": "S06",
+     "seg": 13813,
+     "off": 2551,
+     "size": 59,
+     "target_sha256": "7fedcdfa6c060253a090a2c4628dcf97218c105f0e43c1e2d7198528c9f1a5b9",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL",
+     "reloc_order": "EXACT"
+    },
+    {
+     "name": "o06_35F5_0A32",
+     "unit": "S06",
+     "seg": 13813,
+     "off": 2610,
+     "size": 45,
+     "target_sha256": "273d9c1ddeacc6b1d32e98660c87846acee4100762cdd035f022a085117094f8",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL",
+     "reloc_order": "EXACT"
+    },
+    {
+     "name": "o06_35F5_0A5F",
+     "unit": "S06",
+     "seg": 13813,
+     "off": 2655,
+     "size": 49,
+     "target_sha256": "5a8c0d383109b7415eb43bcf6b8ab892b50c85451b0900c27c8cc34dbd3ef242",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL",
+     "reloc_order": "GROUPED"
     }
    ],
    "scaffold": [
+    "FootFall",
     "SimKidInside",
-    "o06_35F5_02B9",
     "o06_35F5_11FF",
     "o06_35F5_14CC",
     "o06_35F5_1803",
+    "o06_35F5_1CEA",
     "o06_35F5_1E54"
    ],
-   "object_sha256": "022f3340ad20a6d6b14229db9325b9b69e95f2f94daea7b03345d272576faa23"
+   "object_sha256": "a440a0ea6f3ea182e2d541ae84b8dd2ed00fd2a97f2360e2025f47b98df9bc14"
   },
   "S07:35F5": {
    "unit": "S07",
@@ -362,6 +425,90 @@
     "o11_35F5_009E"
    ],
    "object_sha256": "ce1b5a0047fb9ebdd26a2511386c95d51c626e9b89b4c16a39c640232002d464"
+  },
+  "S25:3BA4": {
+   "unit": "S25",
+   "seg": 15268,
+   "profile": "msc600a",
+   "flags": [
+    "/AL",
+    "/Os",
+    "/Oe",
+    "/Og",
+    "/Zd"
+   ],
+   "placements": {
+    "CONST": {
+     "seg": 21939,
+     "off": 35138,
+     "size": 76
+    },
+    "_DATA": {
+     "seg": 21939,
+     "off": 12030,
+     "size": 21
+    }
+   },
+   "lang": "c",
+   "source": "src/S25/m3BA4.c",
+   "source_sha256": "28722b8053431898b9ab274ae5f6c5526dbba175588970be19a29ac2eaa42061",
+   "claims": [
+    {
+     "name": "DoAntSimY",
+     "unit": "S25",
+     "seg": 15268,
+     "off": 1998,
+     "size": 459,
+     "target_sha256": "0c78c4097fbe73bb29c696fcf2e7890bd7e46d3be2b702aa719e0ac62d59ab78",
+     "kind": "C",
+     "provenance": "EXACT_STEERED",
+     "steered": "DoAntMoveY scaffold stand-in: CONST word order + 21 filler lines -> /Zd LINNUM (52/record) LEDATA boundary that fixes within-group reloc order of o25_3BA4_0999 (SRand2 sites 0AB8/0AEF in separate records)",
+     "reloc_order": "GROUPED"
+    },
+    {
+     "name": "o25_3BA4_0999",
+     "unit": "S25",
+     "seg": 15268,
+     "off": 2457,
+     "size": 616,
+     "target_sha256": "b5e562b101f820145e9edf2092bd50b9b9570711f8eae27b67beb9948457a050",
+     "kind": "C",
+     "provenance": "EXACT_STEERED",
+     "steered": "DoAntMoveY scaffold stand-in: CONST word order + 21 filler lines -> /Zd LINNUM (52/record) LEDATA boundary that fixes within-group reloc order of o25_3BA4_0999 (SRand2 sites 0AB8/0AEF in separate records)",
+     "reloc_order": "GROUPED"
+    },
+    {
+     "name": "o25_3BA4_0C01",
+     "unit": "S25",
+     "seg": 15268,
+     "off": 3073,
+     "size": 506,
+     "target_sha256": "639bc123b08318ab3694125b4e4f72098075ac99b63b4c466368b3f863991152",
+     "kind": "C",
+     "provenance": "EXACT_STEERED",
+     "steered": "DoAntMoveY scaffold stand-in: CONST word order + 21 filler lines -> /Zd LINNUM (52/record) LEDATA boundary that fixes within-group reloc order of o25_3BA4_0999",
+     "reloc_order": "GROUPED"
+    },
+    {
+     "name": "o25_3BA4_0DFB",
+     "unit": "S25",
+     "seg": 15268,
+     "off": 3579,
+     "size": 570,
+     "target_sha256": "0778a1e6ee1e455a387c3af9c71ec8a967dd6c2b65f2810e74d7949b90548bda",
+     "kind": "C",
+     "provenance": "EXACT_STEERED",
+     "steered": "DoAntMoveY scaffold stand-in: CONST word order + 21 filler lines -> /Zd LINNUM (52/record) LEDATA boundary that fixes within-group reloc order of o25_3BA4_0999",
+     "reloc_order": "GROUPED"
+    }
+   ],
+   "scaffold": [
+    "DoAntMoveY",
+    "ExitNest",
+    "o25_3BA4_1035",
+    "o25_3BA4_1A9F"
+   ],
+   "object_sha256": "3a4e5caf5cf5b6be1bf0b01cf4855301988f647b7ad3e75e6ca0b0551f6e03f9"
   },
   "root:0093": {
    "unit": "root",
@@ -737,12 +884,21 @@
     "CONST": {
      "seg": 21939,
      "off": 32812,
-     "size": 70
+     "size": 126
+    },
+    "_DATA": {
+     "seg": 21939,
+     "off": 7026,
+     "size": 32
     }
    },
    "lang": "c",
+   "extent": {
+    "start": 35150,
+    "end": 44444
+   },
    "source": "src/root/m0894.c",
-   "source_sha256": "215ea00fdd75a78ad474007adb44f146319d4c07981456aa6d3159224a7253f6",
+   "source_sha256": "1142ea00b754941825240f5ff3be93db448b2a8333a20e7feaa243817035fce9",
    "claims": [
     {
      "name": "f_0894_000E",
@@ -853,32 +1009,241 @@
      "kind": "C",
      "provenance": "EXACT_NATURAL",
      "reloc_order": "GROUPED"
+    },
+    {
+     "name": "f_0894_0751",
+     "unit": "root",
+     "seg": 2196,
+     "off": 1873,
+     "size": 98,
+     "target_sha256": "1cc9416ca672db4674aeeef4eac51d442ae1d3f8a989b5f9417dfa02dc8648d8",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL",
+     "reloc_order": "GROUPED"
+    },
+    {
+     "name": "f_0894_07B3",
+     "unit": "root",
+     "seg": 2196,
+     "off": 1971,
+     "size": 223,
+     "target_sha256": "81eeb1349c7af08d38b28479826e10314316d4558a4245bcb6b3433f12ab803d",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL",
+     "reloc_order": "EXACT"
+    },
+    {
+     "name": "f_0894_0892",
+     "unit": "root",
+     "seg": 2196,
+     "off": 2194,
+     "size": 207,
+     "target_sha256": "a335ba2c5a6de52f80381edd640569a1fab024f0ec66149b369371d579e50a43",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL",
+     "reloc_order": "GROUPED"
+    },
+    {
+     "name": "f_0894_0961",
+     "unit": "root",
+     "seg": 2196,
+     "off": 2401,
+     "size": 147,
+     "target_sha256": "241a1b2a81ece70b8eae16594188b023075959ed53db21d0b1dbeff9047b71a0",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL",
+     "reloc_order": "EXACT"
+    },
+    {
+     "name": "f_0894_09F4",
+     "unit": "root",
+     "seg": 2196,
+     "off": 2548,
+     "size": 777,
+     "target_sha256": "06d3d6edbd2c4643e6913e4f76f720d02d2990d305e379dc78c8de8788b250e3",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL",
+     "reloc_order": "GROUPED"
+    },
+    {
+     "name": "f_0894_0CFD",
+     "unit": "root",
+     "seg": 2196,
+     "off": 3325,
+     "size": 401,
+     "target_sha256": "5dd03757f529be7fcd081e41675ac2bf94d50f77135c6a90304e2381512ec301",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL",
+     "reloc_order": "GROUPED"
+    },
+    {
+     "name": "f_0894_0E8E",
+     "unit": "root",
+     "seg": 2196,
+     "off": 3726,
+     "size": 505,
+     "target_sha256": "eb28ec0d2ca11e07f7d94b8493edaf943e5de1368e82c89ecaabfd3cb1cc5162",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL",
+     "reloc_order": "GROUPED"
+    },
+    {
+     "name": "f_0894_1087",
+     "unit": "root",
+     "seg": 2196,
+     "off": 4231,
+     "size": 654,
+     "target_sha256": "c94c8f0d2230a5bed486ae6fd6a689f09bc8d4972c887dc79730a6a04fc04926",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL",
+     "reloc_order": "GROUPED"
+    },
+    {
+     "name": "f_0894_1315",
+     "unit": "root",
+     "seg": 2196,
+     "off": 4885,
+     "size": 528,
+     "target_sha256": "a3ae2480e0cb82cc727dec07dd34082fd4b5107a07584bd5dcd09efd7d00e6a6",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL",
+     "reloc_order": "GROUPED"
+    },
+    {
+     "name": "f_0894_1525",
+     "unit": "root",
+     "seg": 2196,
+     "off": 5413,
+     "size": 384,
+     "target_sha256": "ad08543d38d3d43a6833692c06defe8345560012e74f567d7db3fe788d9a5518",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL",
+     "reloc_order": "GROUPED"
+    },
+    {
+     "name": "f_0894_16A5",
+     "unit": "root",
+     "seg": 2196,
+     "off": 5797,
+     "size": 899,
+     "target_sha256": "7bdbdaf63773a65159d7a5c48d3e85174680802230b68fad85cd8cf21d2ff95e",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL",
+     "reloc_order": "GROUPED"
+    },
+    {
+     "name": "f_0894_1A28",
+     "unit": "root",
+     "seg": 2196,
+     "off": 6696,
+     "size": 582,
+     "target_sha256": "26e8d4066b18633119aa7e642bbe702c6a4e35c4ecd5485c49835e063f16326f",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL",
+     "reloc_order": "GROUPED"
+    },
+    {
+     "name": "f_0894_1C6E",
+     "unit": "root",
+     "seg": 2196,
+     "off": 7278,
+     "size": 283,
+     "target_sha256": "b9eda2328832a8ebb69665df60a13f81b5cff5589630966f7f7c721d18d9a5c5",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL",
+     "reloc_order": "GROUPED"
+    },
+    {
+     "name": "f_0894_1D89",
+     "unit": "root",
+     "seg": 2196,
+     "off": 7561,
+     "size": 171,
+     "target_sha256": "688653881ba37353c6aad51b081489989bdce92e8e7e46c409a809cd42e1579c",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL",
+     "reloc_order": "GROUPED"
+    },
+    {
+     "name": "f_0894_1E34",
+     "unit": "root",
+     "seg": 2196,
+     "off": 7732,
+     "size": 253,
+     "target_sha256": "36d26c52bec70afb3219cb9313e3d33eb8e08bbd155619b78d2c58fe581d78b6",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL",
+     "reloc_order": "GROUPED"
+    },
+    {
+     "name": "f_0894_1F31",
+     "unit": "root",
+     "seg": 2196,
+     "off": 7985,
+     "size": 240,
+     "target_sha256": "cdb01e932ff013dd6ff7c348909d2a660a3a200ab1586ba988670f2969d76590",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL",
+     "reloc_order": "GROUPED"
+    },
+    {
+     "name": "f_0894_21C5",
+     "unit": "root",
+     "seg": 2196,
+     "off": 8645,
+     "size": 40,
+     "target_sha256": "612453f7ca30afe0c64574cc2f85f296f2a6112349ed381ce43cf4eaaa06ca80",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL",
+     "reloc_order": "EXACT"
+    },
+    {
+     "name": "f_0894_21ED",
+     "unit": "root",
+     "seg": 2196,
+     "off": 8685,
+     "size": 462,
+     "target_sha256": "7b64741cb59ff61356f934f34f04f632f37d18b0a1a5f0409be3ffdc79997f9a",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL",
+     "reloc_order": "GROUPED"
+    },
+    {
+     "name": "f_0894_23BB",
+     "unit": "root",
+     "seg": 2196,
+     "off": 9147,
+     "size": 104,
+     "target_sha256": "aca1606ffc411bb6da93f93d28b37dff4cb69d9b9ef48cbfb143e7ca380e78d5",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL",
+     "reloc_order": "GROUPED"
+    },
+    {
+     "name": "f_0894_2423",
+     "unit": "root",
+     "seg": 2196,
+     "off": 9251,
+     "size": 57,
+     "target_sha256": "3b2e6d2bad990a55af10e20471dfdea32e1f8ab3b8146bc0297de7cbe6f273fa",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL",
+     "reloc_order": "EXACT"
+    },
+    {
+     "name": "DeadAntHere",
+     "unit": "root",
+     "seg": 2196,
+     "off": 8225,
+     "size": 420,
+     "target_sha256": "878cb4ef860762999974aed45959442eb6e9623daee3711a0ce10010ac54ea04",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL",
+     "reloc_order": "GROUPED"
     }
    ],
-   "scaffold": [
-    "DeadAntHere",
-    "f_0894_0751",
-    "f_0894_07B3",
-    "f_0894_0892",
-    "f_0894_0961",
-    "f_0894_09F4",
-    "f_0894_0CFD",
-    "f_0894_0E8E",
-    "f_0894_1087",
-    "f_0894_1315",
-    "f_0894_1525",
-    "f_0894_16A5",
-    "f_0894_1A28",
-    "f_0894_1C6E",
-    "f_0894_1D89",
-    "f_0894_1E34",
-    "f_0894_1F31",
-    "f_0894_21C5",
-    "f_0894_21ED",
-    "f_0894_23BB",
-    "f_0894_2423"
-   ],
-   "object_sha256": "0f9b909a66a887be3409bdc4b1f0228bb30409e84407aab9afed5586ae8700f7"
+   "scaffold": [],
+   "object_sha256": "aa6646d0885f2e5e69e5b418fcc84b1de6649603c121fad2c814466ce0cd5c34"
   },
   "root:0BE8": {
    "unit": "root",
@@ -2644,6 +3009,229 @@
     "f_1A96_065D"
    ],
    "object_sha256": "be58568f18d46af7c2e73ce7e5d53c584f15f108544aa9194cbae45466cc51ae"
+  },
+  "root:21FA": {
+   "unit": "root",
+   "seg": 8698,
+   "profile": "msc600a",
+   "flags": [
+    "/AL",
+    "/Os",
+    "/Oe",
+    "/Og",
+    "/Gs"
+   ],
+   "placements": {
+    "CONST": {
+     "seg": 21939,
+     "off": 35372,
+     "size": 8
+    },
+    "_DATA": {
+     "seg": 21939,
+     "off": 25450,
+     "size": 110
+    },
+    "_BSS": {
+     "seg": 21939,
+     "off": 36078,
+     "size": 4
+    }
+   },
+   "lang": "c",
+   "source": "src/root/m21FA.c",
+   "source_sha256": "d4b1ca67bb1e63e554066658348e2b0ff887aeed31879c17b33a914ebc386bdd",
+   "claims": [
+    {
+     "name": "f_21FA_0002",
+     "unit": "root",
+     "seg": 8698,
+     "off": 2,
+     "size": 236,
+     "target_sha256": "d5ddebdba068f6dd547a8e41b0371a51d84f9424ed2ff0de5e1e2428a737fa07",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL",
+     "reloc_order": "GROUPED"
+    },
+    {
+     "name": "f_21FA_00EE",
+     "unit": "root",
+     "seg": 8698,
+     "off": 238,
+     "size": 86,
+     "target_sha256": "a3676af0c806e85fd6f257ac48445b5455b704f46d4247f435ef49679d09b4ef",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL",
+     "reloc_order": "EXACT"
+    },
+    {
+     "name": "f_21FA_0144",
+     "unit": "root",
+     "seg": 8698,
+     "off": 324,
+     "size": 105,
+     "target_sha256": "1c067a32051969cf0d5002dd80169da59ee781c952404d47ac571b213efb4a34",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL",
+     "reloc_order": "EXACT"
+    },
+    {
+     "name": "f_21FA_01AD",
+     "unit": "root",
+     "seg": 8698,
+     "off": 429,
+     "size": 35,
+     "target_sha256": "0cf63a494da2b6826f8b2576f4d6414b944d5e08ed48f93e9299f948078dca2d",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL",
+     "reloc_order": "EXACT"
+    },
+    {
+     "name": "f_21FA_01D0",
+     "unit": "root",
+     "seg": 8698,
+     "off": 464,
+     "size": 144,
+     "target_sha256": "4272668c940c4fb43a90ce5fa1ace155bcd8cc58d8e07b745030d65abc1b3172",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL",
+     "reloc_order": "EXACT"
+    },
+    {
+     "name": "f_21FA_0260",
+     "unit": "root",
+     "seg": 8698,
+     "off": 608,
+     "size": 38,
+     "target_sha256": "83b98e1ad2e5af737195b41d95082dac0b3fbb78724af45b9f516d52a4575207",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL",
+     "reloc_order": "GROUPED"
+    },
+    {
+     "name": "f_21FA_0286",
+     "unit": "root",
+     "seg": 8698,
+     "off": 646,
+     "size": 34,
+     "target_sha256": "30014786f4a2422db6b86a773071848aebefbb1e54f3467218a14b6e3a1771c5",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL",
+     "reloc_order": "EXACT"
+    },
+    {
+     "name": "f_21FA_02A8",
+     "unit": "root",
+     "seg": 8698,
+     "off": 680,
+     "size": 21,
+     "target_sha256": "a8943f612e8d0a46669ec7a638ea9d42e11b57e556af7336806e1364d6b695ef",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL",
+     "reloc_order": "EXACT"
+    },
+    {
+     "name": "f_21FA_02BD",
+     "unit": "root",
+     "seg": 8698,
+     "off": 701,
+     "size": 44,
+     "target_sha256": "08a4b1e975b09181117ca48a865044b61fbaec56b90e7805d7146fc0fa5abe46",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL",
+     "reloc_order": "EXACT"
+    },
+    {
+     "name": "f_21FA_02E9",
+     "unit": "root",
+     "seg": 8698,
+     "off": 745,
+     "size": 44,
+     "target_sha256": "1c948f717d0352c3af9667fabd03524246074fe8e3545c15fc761e1ea62f2059",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL",
+     "reloc_order": "EXACT"
+    },
+    {
+     "name": "f_21FA_0315",
+     "unit": "root",
+     "seg": 8698,
+     "off": 789,
+     "size": 254,
+     "target_sha256": "a1bbb59e3a361abebbfb12645fff65804f9309a47b22a751a64a72511d796073",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL",
+     "reloc_order": "GROUPED"
+    },
+    {
+     "name": "f_21FA_0741",
+     "unit": "root",
+     "seg": 8698,
+     "off": 1857,
+     "size": 25,
+     "target_sha256": "f6124ca27133e5547e0222d21e526acbbb62bcfa4381c1dedd3b72e8bd2178f3",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL",
+     "reloc_order": "EXACT"
+    },
+    {
+     "name": "f_21FA_075A",
+     "unit": "root",
+     "seg": 8698,
+     "off": 1882,
+     "size": 35,
+     "target_sha256": "c926f4147cf73aee90bf194435643c83f938273d171b7241186e6af7b8d05965",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL",
+     "reloc_order": "EXACT"
+    },
+    {
+     "name": "f_21FA_077D",
+     "unit": "root",
+     "seg": 8698,
+     "off": 1917,
+     "size": 357,
+     "target_sha256": "386393465b776a44f0ea139c316f86b6b427d3cc810b55218f57a5f9bc7cbd7e",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL",
+     "reloc_order": "GROUPED"
+    },
+    {
+     "name": "f_21FA_0AA7",
+     "unit": "root",
+     "seg": 8698,
+     "off": 2727,
+     "size": 43,
+     "target_sha256": "e6949429d45d3b734f573f9a06612ef1e251089a8948cd3f1e4bf337cf18ed74",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL",
+     "reloc_order": "EXACT"
+    },
+    {
+     "name": "f_21FA_0AD2",
+     "unit": "root",
+     "seg": 8698,
+     "off": 2770,
+     "size": 121,
+     "target_sha256": "8f5977471ffba1ee40a39b9853622e4b705dab9a9607f9a928e632a78f7e65ba",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL",
+     "reloc_order": "GROUPED"
+    },
+    {
+     "name": "f_21FA_0B4B",
+     "unit": "root",
+     "seg": 8698,
+     "off": 2891,
+     "size": 270,
+     "target_sha256": "7a72d5548598c44a27aaa33c994b8bcc6650edc5fa4ba3be93b1cb1a4bce2a0c",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL",
+     "reloc_order": "GROUPED"
+    }
+   ],
+   "scaffold": [],
+   "object_sha256": "0a1b26041be208673346bf6f35d9de03781aa66cde3204b97396cd456ec14d61"
   },
   "root:2505": {
    "unit": "root",

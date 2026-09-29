@@ -41,6 +41,16 @@ REG-1 below is a case where the MSC 5.10 rule is false for 6.00.
   (`C2L.EXE`, OS/2-bound in the local 6.00A tree).
 * **`/Og` is used** by the simulation and database modules (`/AL /Os /Oe /Og`, sometimes
   `/Gs`): e.g. f_0BE8_0652 is exact only with `/Og` (the `(x<<6)+y` CSE survives an if/else).
+* **Symbol-table count (worker win)**: the number of identifiers entered before a function
+  (externs, typedef names, struct tags, *named* prototype parameters, locals/parameters of
+  earlier functions — not unnamed parameters, struct members, macros or comments) changes
+  its operand order, register choice and CSE placement, in non-monotonic windows
+  (f_2505_02D7 exact at +0..4 and +8..11, not +5..7). Renames have no effect. Keep drafts as
+  whole files in original order; placing `struct Win` at the top fixed 2505 naturally.
+* **LEDATA records**: code records hold at most 0x3B1 bytes and are flushed at the first
+  reference to a new CONST far-segment word; FIXUPPs are descending inside a record, so the
+  within-group relocation order reveals record breaks (21FA:0413/08E2 need breaks the
+  current build does not make).
 * **Commutative operand order** of far-memory sums ignores source order but depends on the
   number of earlier `extern` declarations (compiler symbol-table state): the declaration
   set of a module is part of its fingerprint. Renames did not change it.

@@ -31,7 +31,7 @@ from omf import OmfReader  # noqa: E402
 ROOT = exemod.ROOT
 MANIFEST = ROOT / "layout" / "manifest.json"
 SCAFFOLD_RE = re.compile(r"/\*\s*SCAFFOLD BEGIN.*?\*/(.*?)/\*\s*SCAFFOLD END\s*\*/", re.S)
-FUNC_DEF_RE = re.compile(r"\b(?:far|near)\s+(?:_loadds\s+)?(?:__?cdecl\s+|_pascal\s+)?([A-Za-z_]\w*)\s*\([^;{]*\)\s*\{", re.S)
+FUNC_DEF_RE = re.compile(r"(?<![\w.])(?!(?:if|while|for|switch|return|sizeof)\b)([A-Za-z_]\w*)\s*\([^;{}()]*(?:\([^;{}()]*\)[^;{}()]*)*\)\s*\{", re.S)
 
 
 def load_manifest() -> dict:
@@ -101,6 +101,10 @@ def verify_module(text: str, module: dict, claims: list[dict]) -> dict:
             all_ok = False
             continue
         dres = verify_data_segment(obj, segname, p, placements)
+        if p.get("size", len(body)) != len(body):
+            dres["exact"] = False
+            dres.setdefault("reasons", []).append(
+                f"placement size {p.get('size')} != segment length {len(body)} (claimed code could use unverified data)")
         out.setdefault("data", {})[segname] = dres
         all_ok &= dres["exact"]
     ext = module.get("extent")
