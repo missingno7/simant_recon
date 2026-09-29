@@ -16,7 +16,7 @@ struct Pic {
 };
 
 extern char far * far db_LoadObject(int object, int kind);
-extern void far f_1A53_02EB(int object, int kind);
+extern void far db_ReleaseObject(int object, int kind);
 extern void far GPutPacked(int x, int y, char far *pic);
 extern void far f_1B4E_003B(int x, int y, char far *image);
 extern void far f_1B4E_005E(int x, int y, char far *image);
@@ -29,7 +29,7 @@ extern void far o00_35A6_0007(char far *image, char far *buffer, int shift, int 
 extern void far f_1CE2_046D(struct Rect far *rect, int color);
 extern void _fastcall f_23AE_0377(int win);
 extern void _fastcall f_23AE_01DB(int win);
-extern char far * _fastcall f_2505_02D7(int obj);
+extern char far * _fastcall win_ObjAddr(int obj);
 extern int far f_24AB_030B(void);
 extern int far f_24AB_0367(int c);
 extern void far f_24AB_038D(int x, int y, char far *text);
@@ -41,30 +41,30 @@ extern char near g_5A97;
 extern unsigned int (far * near g_9140)(int x0, int y0, int x1, int y1);
 extern void (far * near g_9148)(int x0, int y0, int x1, int y1, char far *buffer);
 
-int _fastcall f_259D_000E(int x, int y, int id);
+int _fastcall win_DrawBitMap(int x, int y, int id);
 
-void _fastcall f_259D_02A5(int id, struct Rect far *rect)
+void _fastcall win_DrawBitMapAtObj(int id, struct Rect far *rect)
 {
-    if (!f_259D_000E(rect->left, rect->top, id))
+    if (!win_DrawBitMap(rect->left, rect->top, id))
         f_1CE2_046D(rect, g_3DE4 | g_3DE0);
 }
 
-void _fastcall f_259D_02D8(int obj, int id)
+void _fastcall win_DrawBitMapAtObjNum(int obj, int id)
 {
     struct Rect far *rect;
 
     f_23AE_0377(obj);
-    rect = (struct Rect far *)f_2505_02D7(obj);
-    if (!f_259D_000E(rect->left, rect->top, id))
+    rect = (struct Rect far *)win_ObjAddr(obj);
+    if (!win_DrawBitMap(rect->left, rect->top, id))
         f_1CE2_046D(rect, g_3DE4 | g_3DE0);
     f_23AE_01DB(obj);
 }
 
 /* SCAFFOLD BEGIN: best drafts, not exact (see build/workers/win notes).
- * f_259D_000E: register/slot allocation residue; its three direct root->overlay far calls
+ * win_DrawBitMap: register/slot allocation residue; its three direct root->overlay far calls
  * (3258:040D, 32B5:000F, 35A6:0007) cannot be bound by the matcher (no RTLink vector).
  * f_259D_032A: two dead zero-stores ([bp-4], [bp-0xc]) that /Og removes here survive in the original. */
-int _fastcall f_259D_000E(int x, int y, int id)
+int _fastcall win_DrawBitMap(int x, int y, int id)
 {
     char far *h;
     struct Pic far *pic;
@@ -77,12 +77,12 @@ int _fastcall f_259D_000E(int x, int y, int id)
         pic = *(struct Pic far * far *)h;
         if (pic->type == -1) {
             GPutPacked(x, y, (char far *)pic);
-            f_1A53_02EB(id, 2);
+            db_ReleaseObject(id, 2);
             return 1;
         }
         if ((*(struct Pic far * far *)h)->type == (int)0x8000) {
             GPutPacked(x, y, *(char far * far *)h);
-            f_1A53_02EB(id, 2);
+            db_ReleaseObject(id, 2);
             return 1;
         }
         if (pic->type == 0) {
@@ -90,7 +90,7 @@ int _fastcall f_259D_000E(int x, int y, int id)
                 f_1B4E_005E(x, y, (char far *)pic + 8);
             else
                 f_1B4E_003B(x, y, (char far *)pic + 8);
-            f_1A53_02EB(id, 2);
+            db_ReleaseObject(id, 2);
             return 1;
         }
         if (pic->type == 3) {
@@ -120,7 +120,7 @@ int _fastcall f_259D_000E(int x, int y, int id)
                 f_171C_2276(h);
             }
         }
-        f_1A53_02EB(id, 2);
+        db_ReleaseObject(id, 2);
         return 1;
     }
     return 0;

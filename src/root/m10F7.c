@@ -1,17 +1,17 @@
 /* root:10F7 draft: recovered prefix */
-extern signed char far fd_3D57_0000[];
-extern signed char far fd_3D57_0008[];
-extern unsigned char far fd_3E1D_6180[128][64];
-extern unsigned char far fd_3E1D_8180[64][64];
-extern unsigned char far fd_3E1D_9180[64][64];
-extern unsigned char far fd_3E1D_0180[128][64];
-extern unsigned char far fd_3E1D_2180[64][64];
-extern unsigned char far fd_3E1D_3180[64][64];
-extern int far fd_50F6_047C;
-extern int far fd_50F6_048A;
+extern signed char far Dx8[];
+extern signed char far Dy8[];
+extern unsigned char far LifeA[128][64];
+extern unsigned char far LifeB[64][64];
+extern unsigned char far LifeR[64][64];
+extern unsigned char far MapA[128][64];
+extern unsigned char far MapB[64][64];
+extern unsigned char far MapR[64][64];
+extern int far MeLocX;
+extern int far MeLocY;
 extern int far fd_50F6_0496;
 extern int far fd_50F6_04C2;
-extern int far fd_50F6_048C;
+extern int far MePlane;
 extern int far fd_50F6_105E;
 extern int far fd_50F6_047E;
 extern int far fd_50F6_048E;
@@ -31,20 +31,20 @@ extern int far fd_3D57_0798;
 extern int far fd_50F6_049A;
 extern int far fd_50F6_0502;
 extern signed char far fd_3D57_006C[];
-extern int far fd_50F6_1050;
-extern int far fd_50F6_1060;
-extern unsigned char far fd_3D57_0224[];
-extern unsigned char far fd_3D57_0264[];
-extern int far fd_50F6_0F24;
+extern int far FoodB;
+extern int far FoodR;
+extern unsigned char far HoleMapB[];
+extern unsigned char far HoleMapR[];
+extern int far TERRAINset;
 extern int far fd_3D57_0C16;
 extern int far fd_50F6_0FBA;
-extern int far fd_50F6_0F78;
+extern int far MeHealth;
 extern int far fd_50F6_1006;
 extern int far fd_50F6_1044;
 extern long far fd_50F6_0472;
 extern void far * far * far fd_50F6_034C;
 extern int far fd_50F6_0330;
-extern int far fd_50F6_10BE;
+extern int far HealthB;
 extern int far fd_3D57_0C26;
 extern int far fd_50F6_1044;
 extern int far fd_50F6_04C4;
@@ -52,7 +52,7 @@ extern int far fd_3D57_02AC[];
 extern int far fd_50F6_0B1E;
 extern int far fd_50F6_0C38;
 extern int far fd_3D57_0C24;
-extern int far fd_50F6_0D6A;
+extern int far ListIndexA;
 extern unsigned char far fd_3E1D_A180[];
 extern unsigned char far fd_3E1D_A569[];
 extern unsigned char far fd_3E1D_AD3B[];
@@ -72,28 +72,28 @@ extern unsigned char far fd_3E1D_C2C0[];
 extern unsigned char far fd_3E1D_C6AA[];
 
 int far f_10F7_2867(int, int);
-int far f_10F7_04EC(int, int, int);
-int far f_10F7_07C7(int, int, int);
+int far IsClearTile(int, int, int);
+int far GetLife(int, int, int);
 int far GetMap(int, int, int);
-void far f_10F7_05FE(int, int, int, int);
-int far f_10F7_24EE(int, int, int);
-void far f_0EC1_0557(int, int, int, int, int);
-void far f_0EC1_05D4(int, int, int, int, int);
-void far f_0EC1_0651(int, int, int, int, int);
+void far SetLife(int, int, int, int);
+int far IsItDigable(int, int, int);
+void far AddAntToAList(int, int, int, int, int);
+void far AddAntToBList(int, int, int, int, int);
+void far AddAntToRList(int, int, int, int, int);
 void far f_14EE_0151(int, int, int);
-void far f_00DF_00E8(int, int, int);
+void far myBeginSound(int, int, int);
 void far f_0250_000E(int, int, int);
-int far f_0894_2423(int);
+int far IsItFood(int);
 void far f_0250_0E91(void);
 void far o22_39C7_07FD(int, int, int);
 int far f_10F7_2548(int, int, int);
-void far f_10F7_1DD3(int);
-int far f_14EE_0002(int, int);
+void far SetMyHealth(int);
+int far DigMyNewHole(int, int);
 void far o25_3BA4_1035(void);
 void far f_015B_06A2(void);
-int far f_0894_23BB(int, int);
+int far IsItHole(int, int);
 void far f_0BE8_0798(int, int);
-unsigned long far f_0BE8_0B83(int, int, int, int);
+unsigned long far GetDis(int, int, int, int);
 int far IsItDirt(int);
 int far f_10F7_2640(int);
 int far f_10F7_2894(int, int);
@@ -105,16 +105,16 @@ int far SRand1(int);
 int far SRand8(void);
 int far SRand16(void);
 int far f_10F7_2821(int, int, int);
-int far f_0BE8_0B21(int, int, int, int);
+int far GetDir(int, int, int, int);
 void far f_0BE8_0812(int, int);
 void far o11_35F5_0088(int);
-void far f_10F7_0B8F(void);
-void far f_10F7_0BEF(void);
-int far f_10F7_0CA8(int, int, int);
+void far EndTargetMode(void);
+void far EndLifeTransferMode(void);
+int far DoLifeExchange(int, int, int);
 int far f_00DF_012D(void);
 void far f_00F8_0265(long);
 void far f_00DF_00B1(unsigned int, unsigned int);
-int far f_10F7_0766(int);
+int far IsItNFood(int);
 int far f_10F7_2894(int, int);
 
 int far f_10F7_000E(int map, int index, int out)
@@ -125,17 +125,17 @@ int far f_10F7_000E(int map, int index, int out)
         return f_10F7_2894(index, out);
 }
 
-int far f_10F7_003A(int value)
+int far IsYellowAnt(int value)
 {
     if (value != 0xff && value != 0xfe) return 0;
     return 1;
 }
 
-int far f_10F7_005D(int list, int index, int far *life, int far *column,
+int far GetAntIndex(int list, int index, int far *life, int far *column,
                     int far *attribute, int far *state, int far *direction)
 {
     if (list <= 1) {
-        if (index < 0 || index >= fd_50F6_0D6A)
+        if (index < 0 || index >= ListIndexA)
             return 0;
         *life = fd_3E1D_A180[index];
         *column = fd_3E1D_A569[index];
@@ -162,11 +162,11 @@ int far f_10F7_005D(int list, int index, int far *life, int far *column,
     return 1;
 }
 
-void far f_10F7_01B1(int list, int index, int life, int column,
+void far SetAntIndex(int list, int index, int life, int column,
                       int attribute, int state, int direction)
 {
     if (list <= 1) {
-        if (index < 0 || index >= fd_50F6_0D6A)
+        if (index < 0 || index >= ListIndexA)
             return;
         fd_3E1D_A180[index] = (unsigned char)life;
         fd_3E1D_A569[index] = (unsigned char)column;
@@ -192,7 +192,7 @@ void far f_10F7_01B1(int list, int index, int life, int column,
     }
 }
 
-int far f_10F7_02D6(int list, int matchLife, int matchColumn, int low, int high, int mask)
+int far FindLifeIndex(int list, int matchLife, int matchColumn, int low, int high, int mask)
 {
     unsigned char far *lifeArr;
     unsigned char far *columnArr;
@@ -202,7 +202,7 @@ int far f_10F7_02D6(int list, int matchLife, int matchColumn, int low, int high,
     int masked;
 
     if (list <= 1) {
-        count = fd_50F6_0D6A;
+        count = ListIndexA;
         lifeArr = fd_3E1D_A180;
         columnArr = fd_3E1D_A569;
         attrArr = fd_3E1D_AD3B;
@@ -226,7 +226,7 @@ int far f_10F7_02D6(int list, int matchLife, int matchColumn, int low, int high,
     return i;
 }
 
-int far f_10F7_03B7(int list, int matchLife, int matchColumn, int attribute)
+int far FindAntIndex(int list, int matchLife, int matchColumn, int attribute)
 {
     unsigned char far *lifeArr;
     unsigned char far *columnArr;
@@ -235,7 +235,7 @@ int far f_10F7_03B7(int list, int matchLife, int matchColumn, int attribute)
     int i;
 
     if (list <= 1) {
-        count = fd_50F6_0D6A;
+        count = ListIndexA;
         lifeArr = fd_3E1D_A180;
         columnArr = fd_3E1D_A569;
         attrArr = fd_3E1D_AD3B;
@@ -258,13 +258,13 @@ int far f_10F7_03B7(int list, int matchLife, int matchColumn, int attribute)
     return i;
 }
 
-int far f_10F7_048E(int type, int y, int x)
+int far IsClear3x3(int type, int y, int x)
 {
     register int index;
 
-    if (f_10F7_04EC(type, y, x) == 1) {
+    if (IsClearTile(type, y, x) == 1) {
         for (index = 0; index < 8; ++index) {
-            if (!f_10F7_04EC(type, y + fd_3D57_0000[index], x + fd_3D57_0008[index]))
+            if (!IsClearTile(type, y + Dx8[index], x + Dy8[index]))
                 return 0;
         }
         return 1;
@@ -272,7 +272,7 @@ int far f_10F7_048E(int type, int y, int x)
     return 0;
 }
 
-int far f_10F7_04EC(int plane, int x, int y)
+int far IsClearTile(int plane, int x, int y)
 {
     int result;
     int tile;
@@ -281,8 +281,8 @@ int far f_10F7_04EC(int plane, int x, int y)
     result = 0;
     tile = GetMap(plane, x, y);
     if (tile >= 0) {
-        life = f_10F7_07C7(plane, x, y);
-        if (life < 0 || f_10F7_003A(life) == 1) {
+        life = GetLife(plane, x, y);
+        if (life < 0 || IsYellowAnt(life) == 1) {
             if (plane <= 1) {
                 if (tile < 16)
                     result = 1;
@@ -295,50 +295,50 @@ int far f_10F7_04EC(int plane, int x, int y)
     return result;
 }
 
-int far f_10F7_054D(int plane, int x, int y, int type, int a, int b)
+int far AddAntToList(int plane, int x, int y, int type, int a, int b)
 {
     int added;
 
     added = 0;
     if (plane <= 1) {
-        if (fd_50F6_0D6A < 1000) {
-            f_0EC1_0557(x, y, type, a, b);
+        if (ListIndexA < 1000) {
+            AddAntToAList(x, y, type, a, b);
             added = 1;
         }
     } else if (plane == 2) {
         if (fd_50F6_0DA8 < 500) {
-            f_0EC1_05D4(x, y, type, a, b);
+            AddAntToBList(x, y, type, a, b);
             added = 1;
         }
     } else if (fd_50F6_0EAA < 500) {
-        f_0EC1_0651(x, y, type, a, b);
+        AddAntToRList(x, y, type, a, b);
         added = 1;
     }
     if (added == 1)
-        f_10F7_05FE(plane, x, y, type);
+        SetLife(plane, x, y, type);
     return added;
 }
 
-void far f_10F7_05FE(int plane, int x, int y, int value)
+void far SetLife(int plane, int x, int y, int value)
 {
     if (f_10F7_000E(plane, x, y) == 1) {
         switch (plane) {
         case 0:
         case 1:
-            fd_3E1D_6180[x][y] = value;
+            LifeA[x][y] = value;
             break;
         case 2:
-            fd_3E1D_8180[x][y] = value;
-            if (value > 0 && f_10F7_24EE(plane, x, y) == 1) {
+            LifeB[x][y] = value;
+            if (value > 0 && IsItDigable(plane, x, y) == 1) {
                 f_14EE_0151(plane, x, y);
-                f_00DF_00E8(0x13, 0, 0x3f);
+                myBeginSound(0x13, 0, 0x3f);
             }
             break;
         case 3:
-            fd_3E1D_9180[x][y] = value;
-            if (value > 0 && f_10F7_24EE(plane, x, y) == 1) {
+            LifeR[x][y] = value;
+            if (value > 0 && IsItDigable(plane, x, y) == 1) {
                 f_14EE_0151(plane, x, y);
-                f_00DF_00E8(0x13, 0, 0x3f);
+                myBeginSound(0x13, 0, 0x3f);
             }
             break;
         }
@@ -346,7 +346,7 @@ void far f_10F7_05FE(int plane, int x, int y, int value)
     }
 }
 
-int far f_10F7_06BF(value)
+int far IsThisEgg(value)
 unsigned char value;
 {
     int normalized;
@@ -356,7 +356,7 @@ unsigned char value;
     return 0;
 }
 
-int far f_10F7_06E4(int category, int tile)
+int far IsThisGrass(int category, int tile)
 {
     if (category < 2)
         return 0;
@@ -365,11 +365,11 @@ int far f_10F7_06E4(int category, int tile)
     return 1;
 }
 
-int far f_10F7_070B(int category, int tile)
+int far IsThisFood(int category, int tile)
 {
     if (category <= 1)
-        return f_0894_2423(tile);
-    return f_10F7_0766(tile);
+        return IsItFood(tile);
+    return IsItNFood(tile);
 }
 
 int far f_10F7_0731(int plane, int tile)
@@ -384,7 +384,7 @@ int far f_10F7_0731(int plane, int tile)
     return 0;
 }
 
-int far f_10F7_0766(int value)
+int far IsItNFood(int value)
 {
     if (value < 0x10 || value > 0x13) return 0;
     return 1;
@@ -398,11 +398,11 @@ int far f_10F7_0787(int plane, int x, int y)
     if (tile < 0)
         return 0;
     if (plane <= 1)
-        return f_0894_2423(tile);
-    return f_10F7_0766(tile);
+        return IsItFood(tile);
+    return IsItNFood(tile);
 }
 
-int far f_10F7_07C7(int plane, int x, int y)
+int far GetLife(int plane, int x, int y)
 {
     int result;
 
@@ -411,13 +411,13 @@ int far f_10F7_07C7(int plane, int x, int y)
         switch (plane) {
         case 0:
         case 1:
-            result = fd_3E1D_6180[x][y];
+            result = LifeA[x][y];
             break;
         case 2:
-            result = fd_3E1D_8180[x][y];
+            result = LifeB[x][y];
             break;
         case 3:
-            result = fd_3E1D_9180[x][y];
+            result = LifeR[x][y];
             break;
         }
         if (result == 0)
@@ -435,32 +435,32 @@ int far GetMap(int plane, int x, int y)
         switch (plane) {
         case 0:
         case 1:
-            result = fd_3E1D_0180[x][y];
+            result = MapA[x][y];
             break;
         case 2:
-            result = fd_3E1D_2180[x][y];
+            result = MapB[x][y];
             break;
         case 3:
-            result = fd_3E1D_3180[x][y];
+            result = MapR[x][y];
             break;
         }
     }
     return result;
 }
 
-void far f_10F7_08CE(int plane, int x, int y, int value)
+void far SetMap(int plane, int x, int y, int value)
 {
     if (f_10F7_000E(plane, x, y) == 1) {
         switch (plane) {
         case 0:
         case 1:
-            fd_3E1D_0180[x][y] = value;
+            MapA[x][y] = value;
             break;
         case 2:
-            fd_3E1D_2180[x][y] = value;
+            MapB[x][y] = value;
             break;
         case 3:
-            fd_3E1D_3180[x][y] = value;
+            MapR[x][y] = value;
             break;
         }
         f_0250_000E(plane, x, y);
@@ -470,61 +470,61 @@ void far f_10F7_08CE(int plane, int x, int y, int value)
 void far f_10F7_0954(int plane, int x, int y, int value)
 {
     if (f_10F7_000E(plane, x, y) == 1) {
-        if (f_10F7_07C7(plane, x, y) == value)
-            f_10F7_05FE(plane, x, y, 0);
+        if (GetLife(plane, x, y) == value)
+            SetLife(plane, x, y, 0);
         f_0250_000E(plane, x, y);
     }
 }
 
-void far f_10F7_09A8(int plane, int x, int y, int type, int dir)
+void far ClearMyLife(int plane, int x, int y, int type, int dir)
 {
     f_10F7_0954(plane, x, y, 0xff);
     if (type == 0x60)
-        f_10F7_0954(plane, x + fd_3D57_0000[dir ^ 4], y + fd_3D57_0008[dir ^ 4], 0xfe);
+        f_10F7_0954(plane, x + Dx8[dir ^ 4], y + Dy8[dir ^ 4], 0xfe);
 }
 
 void far f_10F7_09FC(int plane, int x, int y, int dir, int value)
 {
-    f_10F7_05FE(plane, x + fd_3D57_0000[dir ^ 4], y + fd_3D57_0008[dir ^ 4],
+    SetLife(plane, x + Dx8[dir ^ 4], y + Dy8[dir ^ 4],
                 (value == 0xff) ? 0xfe : value);
 }
 
-void far f_10F7_0A44(int plane, int x, int y, int type, int dir, int life)
+void far SetMyLife(int plane, int x, int y, int type, int dir, int life)
 {
     if (f_10F7_000E(plane, x, y) == 1) {
-        f_10F7_05FE(plane, x, y, life);
+        SetLife(plane, x, y, life);
         if (type == 0x60)
             f_10F7_09FC(plane, x, y, dir, life);
         if (life != 0) {
-            fd_50F6_047C = x;
-            fd_50F6_048A = y;
+            MeLocX = x;
+            MeLocY = y;
             fd_50F6_0496 = dir;
             fd_50F6_04C2 = type;
-            fd_50F6_048C = plane;
+            MePlane = plane;
         }
     }
 }
 
-void far f_10F7_0ACE(int plane, int x, int y, int type, int dir)
+void far MoveMyLife(int plane, int x, int y, int type, int dir)
 {
-    f_10F7_09A8(fd_50F6_048C, fd_50F6_047C, fd_50F6_048A, fd_50F6_04C2, fd_50F6_0496);
-    f_10F7_0A44(plane == 0 ? 1 : plane, x, y, type, dir, 0xff);
+    ClearMyLife(MePlane, MeLocX, MeLocY, fd_50F6_04C2, fd_50F6_0496);
+    SetMyLife(plane == 0 ? 1 : plane, x, y, type, dir, 0xff);
 }
 
-void far f_10F7_0B38(void)
+void far DoMapUpdateDraw(void)
 {
 }
 
-void far f_10F7_0B40(void)
+void far DoEditAndMapUpdateDraw(void)
 {
-    f_10F7_0B38();
+    DoMapUpdateDraw();
     f_0250_0E91();
 }
 
 void far f_10F7_0B51(void)
 {
     if (fd_50F6_105E == 0xb) {
-        f_10F7_0B8F();
+        EndTargetMode();
         return;
     }
     fd_50F6_048E = fd_50F6_047E;
@@ -532,7 +532,7 @@ void far f_10F7_0B51(void)
     o11_35F5_0088(1);
 }
 
-void far f_10F7_0B8F(void)
+void far EndTargetMode(void)
 {
     fd_50F6_105E = -1;
     o11_35F5_0088(fd_50F6_048E);
@@ -541,7 +541,7 @@ void far f_10F7_0B8F(void)
 void far f_10F7_0BB1(void)
 {
     if (fd_50F6_105E == 0xa) {
-        f_10F7_0BEF();
+        EndLifeTransferMode();
         return;
     }
     fd_50F6_048E = fd_50F6_047E;
@@ -549,36 +549,36 @@ void far f_10F7_0BB1(void)
     o11_35F5_0088(1);
 }
 
-void far f_10F7_0BEF(void)
+void far EndLifeTransferMode(void)
 {
     fd_50F6_105E = -1;
     o11_35F5_0088(fd_50F6_048E);
 }
 
-void far f_10F7_0C11(int a, int b, int c)
+void far ExchangeLives(int a, int b, int c)
 {
     fd_50F6_1074 = 1;
-    if (f_10F7_0CA8(a, b, c) == 1) {
-        f_10F7_0BEF();
+    if (DoLifeExchange(a, b, c) == 1) {
+        EndLifeTransferMode();
         if (fd_50F6_04C2 == 0x60) {
-            f_00DF_00E8(0xf, 0, 0x7e);
+            myBeginSound(0xf, 0, 0x7e);
             f_0250_0E91();
             while (!f_00DF_012D())
                 f_00F8_0265(5L);
             f_00DF_00B1(0x2afe, 0x7e);
         } else
-            f_00DF_00E8(0xf, 0, 0x7e);
+            myBeginSound(0xf, 0, 0x7e);
     } else
-        f_00DF_00E8(1, 0, 0x7e);
+        myBeginSound(1, 0, 0x7e);
 }
 
-/* SCAFFOLD BEGIN: f_10F7_0CA8 (DoLifeExchange-like) best draft, NOT exact
+/* SCAFFOLD BEGIN: DoLifeExchange (DoLifeExchange-like) best draft, NOT exact
  * (opcode similarity 0.961, length 1782 vs 1774).  Residue: /Oe register
  * choice (life -> SI instead of DI, region-1 type value not in DI), home
  * permutation of newLife/caste (-8/-2 swapped), block-scoped c gets no
  * [bp-3A] slot.  Written with goto fail/done: with plain returns MSC emits
  * C4203 "function too large for global optimizations". */
-int far f_10F7_0CA8(int plane, int x, int y)
+int far DoLifeExchange(int plane, int x, int y)
 {
     int newLife;
     int t;
@@ -595,11 +595,11 @@ int far f_10F7_0CA8(int plane, int x, int y)
     int column;
     int lifeField;
 
-    life = f_10F7_07C7(plane, x, y);
+    life = GetLife(plane, x, y);
     if (life <= 0) {
         if (plane != 1)
             goto fail;
-        if (f_0BE8_0B83(x * 16 + 8, y * 16 + 8, fd_50F6_0F12, fd_50F6_0F34) >= 0x200)
+        if (GetDis(x * 16 + 8, y * 16 + 8, fd_50F6_0F12, fd_50F6_0F34) >= 0x200)
             goto fail;
         caste = (fd_50F6_04C2 & 0x78) >> 3;
         egg = 0;
@@ -611,14 +611,14 @@ int far f_10F7_0CA8(int plane, int x, int y)
         }
         life = (fd_50F6_04E2 & 0x80) | fd_50F6_0496 | (caste << 3);
         t = (fd_50F6_04C2 == 0x60) ? 9 : 0;
-        if (!f_10F7_054D(fd_50F6_048C, fd_50F6_047C, fd_50F6_048A, life, t, egg))
+        if (!AddAntToList(MePlane, MeLocX, MeLocY, life, t, egg))
             goto fail;
         if (fd_50F6_04C2 == 0x60) {
-            if (!f_10F7_054D(fd_50F6_048C, fd_50F6_047C + fd_3D57_0000[fd_50F6_0496 ^ 4],
-                             fd_50F6_048A + fd_3D57_0008[fd_50F6_0496 ^ 4], life + 8, t, 0))
+            if (!AddAntToList(MePlane, MeLocX + Dx8[fd_50F6_0496 ^ 4],
+                             MeLocY + Dy8[fd_50F6_0496 ^ 4], life + 8, t, 0))
                 goto fail;
         }
-        f_10F7_0A44(fd_50F6_048C, fd_50F6_047C, fd_50F6_048A, fd_50F6_04C2, fd_50F6_0496, 0);
+        SetMyLife(MePlane, MeLocX, MeLocY, fd_50F6_04C2, fd_50F6_0496, 0);
         fd_50F6_0FFC = -2;
         fd_50F6_0F42 = fd_50F6_0F12 >> 4;
         fd_50F6_0F7E = fd_50F6_0F34 >> 4;
@@ -627,28 +627,28 @@ int far f_10F7_0CA8(int plane, int x, int y)
         fd_50F6_06AC = 0;
         fd_50F6_04E2 = 0;
         o22_39C7_07FD(plane, fd_50F6_0F42, fd_50F6_0F7E);
-        f_10F7_1DD3(100);
+        SetMyHealth(100);
         goto done;
     }
-    if (f_10F7_2548(plane, x, y) || f_10F7_003A(life))
+    if (f_10F7_2548(plane, x, y) || IsYellowAnt(life))
         goto done;
     caste = (life & 0x78) >> 3;
     if (caste == 0xc) {
-        x2 = x + fd_3D57_0000[(life ^ 4) & 7];
-        y2 = y + fd_3D57_0008[(life ^ 4) & 7];
-        newLife = f_10F7_07C7(plane, x2, y2);
+        x2 = x + Dx8[(life ^ 4) & 7];
+        y2 = y + Dy8[(life ^ 4) & 7];
+        newLife = GetLife(plane, x2, y2);
     } else if (caste == 0xd) {
         x2 = x;
         y2 = y;
         newLife = life;
-        x += fd_3D57_0000[life & 7];
-        y += fd_3D57_0008[life & 7];
-        life = f_10F7_07C7(plane, x, y);
+        x += Dx8[life & 7];
+        y += Dy8[life & 7];
+        life = GetLife(plane, x, y);
         caste = 0xc;
     }
-    index = f_10F7_03B7(plane, x, y, life);
+    index = FindAntIndex(plane, x, y, life);
     if (caste == 0xc)
-        index2 = f_10F7_03B7(plane, x2, y2, newLife);
+        index2 = FindAntIndex(plane, x2, y2, newLife);
     if (index < 0)
         goto fail;
     if (fd_50F6_0A06 == 0) {
@@ -678,26 +678,26 @@ int far f_10F7_0CA8(int plane, int x, int y)
             life = (fd_3D57_0094[c] << 3) | (life & 7);
             break;
         case 1:
-            f_10F7_005D(plane, index, &lifeField, &column, &attribute, &state, &direction);
+            GetAntIndex(plane, index, &lifeField, &column, &attribute, &state, &direction);
             fd_3D57_0C22 = direction;
             break;
         }
         t = (fd_50F6_04C2 == 0x60) ? 9 : 0;
-        f_0250_000E(fd_50F6_048C, fd_50F6_047C, fd_50F6_048A);
+        f_0250_000E(MePlane, MeLocX, MeLocY);
         if (t)
-            f_0250_000E(fd_50F6_048C, fd_50F6_047C + fd_3D57_0000[fd_50F6_0496 ^ 4],
-                        fd_50F6_048A + fd_3D57_0008[fd_50F6_0496 ^ 4]);
+            f_0250_000E(MePlane, MeLocX + Dx8[fd_50F6_0496 ^ 4],
+                        MeLocY + Dy8[fd_50F6_0496 ^ 4]);
         f_0250_000E(plane, x, y);
         if (caste == 0xc)
             f_0250_000E(plane, x2, y2);
-        f_10F7_01B1(plane, index, 0, 0, 0, 0, 0);
+        SetAntIndex(plane, index, 0, 0, 0, 0, 0);
         if (caste == 0xc)
-            f_10F7_01B1(plane, index2, 0, 0, 0, 0, 0);
-        if (!f_10F7_054D(fd_50F6_048C, fd_50F6_047C, fd_50F6_048A, newLife, t, egg))
+            SetAntIndex(plane, index2, 0, 0, 0, 0, 0);
+        if (!AddAntToList(MePlane, MeLocX, MeLocY, newLife, t, egg))
             goto fail;
         if (fd_50F6_04C2 == 0x60) {
-            if (!f_10F7_054D(fd_50F6_048C, fd_50F6_047C + fd_3D57_0000[fd_50F6_0496 ^ 4],
-                             fd_50F6_048A + fd_3D57_0008[fd_50F6_0496 ^ 4], newLife + 8, t, 0))
+            if (!AddAntToList(MePlane, MeLocX + Dx8[fd_50F6_0496 ^ 4],
+                             MeLocY + Dy8[fd_50F6_0496 ^ 4], newLife + 8, t, 0))
                 goto fail;
         }
     } else {
@@ -718,20 +718,20 @@ int far f_10F7_0CA8(int plane, int x, int y)
             life = (fd_3D57_0094[c] << 3) | (life & 7);
             break;
         case 1:
-            f_10F7_005D(plane, index, &lifeField, &column, &attribute, &state, &direction);
+            GetAntIndex(plane, index, &lifeField, &column, &attribute, &state, &direction);
             fd_3D57_0C22 = direction;
             break;
         }
-        f_10F7_01B1(plane, index, 0, 0, 0, 0, 0);
+        SetAntIndex(plane, index, 0, 0, 0, 0, 0);
         if (caste == 0xc)
-            f_10F7_01B1(plane, index2, 0, 0, 0, 0, 0);
+            SetAntIndex(plane, index2, 0, 0, 0, 0, 0);
     }
     fd_50F6_04E2 = life & 0x80;
     fd_50F6_049A = 0;
     fd_50F6_0A06 = 0;
     fd_50F6_06AC = 0;
-    f_10F7_1DD3(100);
-    f_10F7_0A44(plane, x, y, life & 0x78, life & 7, 0xff);
+    SetMyHealth(100);
+    SetMyLife(plane, x, y, life & 0x78, life & 7, 0xff);
     if (fd_50F6_04C2 < 8)
         fd_50F6_0502 = fd_50F6_0496;
 done:
@@ -741,7 +741,7 @@ fail:
 }
 /* SCAFFOLD END */
 
-int far f_10F7_1396(int plane, int x, int y, int tx, int ty)
+int far DropMyFood(int plane, int x, int y, int tx, int ty)
 {
     int i;
     int dir;
@@ -754,7 +754,7 @@ int far f_10F7_1396(int plane, int x, int y, int tx, int ty)
     if (fd_50F6_04C2 != 0x18 && fd_50F6_04C2 != 0x38)
         return 0;
     done = 0;
-    dir = f_0BE8_0B21(x, y, tx, ty);
+    dir = GetDir(x, y, tx, ty);
     if (dir > 0)
         dir--;
     else
@@ -763,15 +763,15 @@ int far f_10F7_1396(int plane, int x, int y, int tx, int ty)
         if (i >= 8)
             break;
         d = (fd_3D57_006C[i] + dir) & 7;
-        nx = x + fd_3D57_0000[d];
-        ny = y + fd_3D57_0008[d];
+        nx = x + Dx8[d];
+        ny = y + Dy8[d];
         if (f_10F7_000E(plane, nx, ny)) {
-            if (f_10F7_07C7(plane, nx, ny) < 0) {
+            if (GetLife(plane, nx, ny) < 0) {
                 tile = GetMap(plane, nx, ny);
-                if (f_10F7_070B(plane, tile) && (tile & 3) < 3) {
+                if (IsThisFood(plane, tile) && (tile & 3) < 3) {
                     tile++;
                     done = 1;
-                } else if (f_10F7_04EC(plane, nx, ny) || tile == 0x38) {
+                } else if (IsClearTile(plane, nx, ny) || tile == 0x38) {
                     tile = 0x10;
                     done = 1;
                 }
@@ -784,10 +784,10 @@ int far f_10F7_1396(int plane, int x, int y, int tx, int ty)
         ny = y;
         if (f_10F7_000E(plane, nx, ny)) {
             tile = GetMap(plane, nx, ny);
-            if (f_10F7_070B(plane, tile) && (tile & 3) < 3) {
+            if (IsThisFood(plane, tile) && (tile & 3) < 3) {
                 tile++;
                 done = 1;
-            } else if (f_10F7_04EC(plane, nx, ny) || tile == 0x38) {
+            } else if (IsClearTile(plane, nx, ny) || tile == 0x38) {
                 tile = 0x10;
                 done = 1;
             }
@@ -798,15 +798,15 @@ int far f_10F7_1396(int plane, int x, int y, int tx, int ty)
         if (plane <= 1)
             f_0BE8_0812(nx, ny);
         else {
-            f_10F7_08CE(plane, nx, ny, tile);
+            SetMap(plane, nx, ny, tile);
             if (plane == 2)
-                fd_50F6_1050++;
+                FoodB++;
             else
-                fd_50F6_1060++;
+                FoodR++;
         }
         if (!((*(unsigned char far *)0x417L & 3) && (*(unsigned char far *)0x417L & 8)))
             fd_50F6_04C2 &= 0xf7;
-        f_00DF_00E8(0x1d, 0, 0x7e);
+        myBeginSound(0x1d, 0, 0x7e);
     }
     return done;
 }
@@ -817,21 +817,21 @@ void far f_10F7_15BC(int plane, int x, int y)
 
     if (plane <= 1) {
         if (f_10F7_2821(plane, x, y)) {
-            if (x < 0x40 && fd_3D57_0224[y] == x)
-                fd_3E1D_2180[y][0] = 0x31;
-            else if (fd_3D57_0264[y] == x)
-                fd_3E1D_3180[y][0] = 0x31;
+            if (x < 0x40 && HoleMapB[y] == x)
+                MapB[y][0] = 0x31;
+            else if (HoleMapR[y] == x)
+                MapR[y][0] = 0x31;
         }
         tile = 0x51;
     } else if (f_10F7_2821(plane, x, y)) {
-        fd_3E1D_0180[plane == 2 ? fd_3D57_0224[x] : fd_3D57_0264[x]][x] = 0x51;
+        MapA[plane == 2 ? HoleMapB[x] : HoleMapR[x]][x] = 0x51;
         tile = 0x31;
     } else
         tile = 0x30;
-    f_10F7_08CE(plane, x, y, tile);
+    SetMap(plane, x, y, tile);
 }
 
-int far f_10F7_1696(int plane, int x, int y, int tx, int ty)
+int far DropMyRock(int plane, int x, int y, int tx, int ty)
 {
     int tile;
     int i;
@@ -844,7 +844,7 @@ int far f_10F7_1696(int plane, int x, int y, int tx, int ty)
     if (fd_50F6_04C2 != 0x28 && fd_50F6_04C2 != 0x48)
         return 0;
     done = 0;
-    dir = f_0BE8_0B21(x, y, tx, ty);
+    dir = GetDir(x, y, tx, ty);
     if (dir > 0)
         dir--;
     else
@@ -853,15 +853,15 @@ int far f_10F7_1696(int plane, int x, int y, int tx, int ty)
         if (i >= 8)
             break;
         d = (fd_3D57_006C[i] + dir) & 7;
-        nx = x + fd_3D57_0000[d];
-        ny = y + fd_3D57_0008[d];
+        nx = x + Dx8[d];
+        ny = y + Dy8[d];
         if (f_10F7_000E(plane, nx, ny)) {
-            if (f_10F7_07C7(plane, nx, ny) < 0) {
-                if (f_10F7_04EC(plane, nx, ny))
+            if (GetLife(plane, nx, ny) < 0) {
+                if (IsClearTile(plane, nx, ny))
                     done = 1;
                 else {
                     tile = GetMap(plane, nx, ny);
-                    if (!f_10F7_070B(plane, tile) && !f_10F7_0731(plane, tile) &&
+                    if (!IsThisFood(plane, tile) && !f_10F7_0731(plane, tile) &&
                         (f_10F7_2821(plane, nx, ny) || tile == 0x38))
                         done = 1;
                 }
@@ -873,11 +873,11 @@ int far f_10F7_1696(int plane, int x, int y, int tx, int ty)
         nx = x;
         ny = y;
         if (f_10F7_000E(plane, nx, ny)) {
-            if (f_10F7_04EC(plane, nx, ny))
+            if (IsClearTile(plane, nx, ny))
                 done = 1;
             else {
                 tile = GetMap(plane, nx, ny);
-                if (!f_10F7_070B(plane, tile) && !f_10F7_0731(plane, tile) &&
+                if (!IsThisFood(plane, tile) && !f_10F7_0731(plane, tile) &&
                     (f_10F7_2821(plane, nx, ny) || tile == 0x38))
                     done = 1;
             }
@@ -890,12 +890,12 @@ int far f_10F7_1696(int plane, int x, int y, int tx, int ty)
             if (fd_50F6_04C2 == 0x28 || fd_50F6_04C2 == 0x48)
                 fd_50F6_04C2 -= 0x18;
         }
-        f_00DF_00E8(0x1e, 0, 0x7e);
+        myBeginSound(0x1e, 0, 0x7e);
     }
     return done;
 }
 
-int far f_10F7_18B0(int plane, int x, int y, int tx, int ty)
+int far DropMyEgg(int plane, int x, int y, int tx, int ty)
 {
     int i;
     int done;
@@ -907,7 +907,7 @@ int far f_10F7_18B0(int plane, int x, int y, int tx, int ty)
     if (fd_50F6_04C2 != 8)
         return 0;
     done = 0;
-    dir = f_0BE8_0B21(x, y, tx, ty);
+    dir = GetDir(x, y, tx, ty);
     if (dir > 0)
         dir--;
     else
@@ -916,11 +916,11 @@ int far f_10F7_18B0(int plane, int x, int y, int tx, int ty)
         if (i >= 8)
             break;
         d = (fd_3D57_006C[i] + dir) & 7;
-        nx = x + fd_3D57_0000[d];
-        ny = y + fd_3D57_0008[d];
+        nx = x + Dx8[d];
+        ny = y + Dy8[d];
         if (f_10F7_000E(plane, nx, ny)) {
-            if (f_10F7_07C7(plane, nx, ny) < 0) {
-                if (f_10F7_04EC(plane, nx, ny) || GetMap(plane, nx, ny) == 0x38)
+            if (GetLife(plane, nx, ny) < 0) {
+                if (IsClearTile(plane, nx, ny) || GetMap(plane, nx, ny) == 0x38)
                     done = 1;
             }
         }
@@ -930,25 +930,25 @@ int far f_10F7_18B0(int plane, int x, int y, int tx, int ty)
         nx = x;
         ny = y;
         if (f_10F7_000E(plane, nx, ny)) {
-            if (f_10F7_04EC(plane, nx, ny) || GetMap(plane, nx, ny) == 0x38)
+            if (IsClearTile(plane, nx, ny) || GetMap(plane, nx, ny) == 0x38)
                 done = 1;
         }
     }
     if (done)
-        done = f_10F7_054D(plane, nx, ny, fd_3D57_0C22, 8, 0);
+        done = AddAntToList(plane, nx, ny, fd_3D57_0C22, 8, 0);
     if (done) {
         fd_50F6_0496 = d;
         if (!((*(unsigned char far *)0x417L & 3) && (*(unsigned char far *)0x417L & 8))) {
             fd_50F6_04C2 = 0x10;
             fd_3D57_0C22 = 0xfd;
         }
-        f_10F7_0A44(fd_50F6_048C, fd_50F6_047C, fd_50F6_048A, fd_50F6_04C2, fd_50F6_0496, 0xff);
-        f_00DF_00E8(0x1c, 0, 0x7e);
+        SetMyLife(MePlane, MeLocX, MeLocY, fd_50F6_04C2, fd_50F6_0496, 0xff);
+        myBeginSound(0x1c, 0, 0x7e);
     }
     return done;
 }
 
-int far f_10F7_1AAE(int plane, int x, int y)
+int far PickupMyRock(int plane, int x, int y)
 {
     int tile;
     int done;
@@ -960,37 +960,37 @@ int far f_10F7_1AAE(int plane, int x, int y)
     if (plane <= 1) {
         if (f_10F7_0731(plane, tile)) {
             if (x < 0x40) {
-                if (fd_3D57_0224[y] == x) {
-                    fd_3E1D_2180[y][0] = 0x18;
+                if (HoleMapB[y] == x) {
+                    MapB[y][0] = 0x18;
                     done = 1;
                 }
-            } else if (fd_3D57_0264[y] == x) {
-                fd_3E1D_3180[y][0] = 0x18;
+            } else if (HoleMapR[y] == x) {
+                MapR[y][0] = 0x18;
                 done = 1;
             }
             if (done) {
-                if (fd_50F6_0F24 == 0)
-                    fd_3E1D_0180[x][y] = 0x50;
+                if (TERRAINset == 0)
+                    MapA[x][y] = 0x50;
                 else
-                    fd_3E1D_0180[x][y] = SRand1(7) + 0x59;
+                    MapA[x][y] = SRand1(7) + 0x59;
             } else {
-                if (fd_50F6_0F24 == 0)
-                    fd_3E1D_0180[x][y] = SRand16();
+                if (TERRAINset == 0)
+                    MapA[x][y] = SRand16();
                 else
-                    fd_3E1D_0180[x][y] = 0;
+                    MapA[x][y] = 0;
                 done = 1;
             }
         }
     } else if (tile == 0x30) {
-        f_10F7_08CE(plane, x, y, SRand8());
+        SetMap(plane, x, y, SRand8());
         done = 1;
     } else if (tile == 0x31) {
         if (plane == 2) {
-            fd_3E1D_2180[x][y] = 0x18;
-            fd_3E1D_0180[fd_3D57_0224[x]][x] = 0x50;
+            MapB[x][y] = 0x18;
+            MapA[HoleMapB[x]][x] = 0x50;
         } else {
-            fd_3E1D_3180[x][y] = 0x18;
-            fd_3E1D_0180[fd_3D57_0264[x]][x] = 0x50;
+            MapR[x][y] = 0x18;
+            MapA[HoleMapR[x]][x] = 0x50;
         }
         done = 1;
     }
@@ -999,12 +999,12 @@ int far f_10F7_1AAE(int plane, int x, int y)
             fd_50F6_04C2 = 0x28;
         else
             fd_50F6_04C2 = 0x48;
-        f_00DF_00E8(0x1e, 0, 0x7e);
+        myBeginSound(0x1e, 0, 0x7e);
     }
     return done;
 }
 
-int far f_10F7_1C84(int far *index, int plane, int x, int y)
+int far FindEggAt(int far *index, int plane, int x, int y)
 {
     int i;
     int life;
@@ -1013,14 +1013,14 @@ int far f_10F7_1C84(int far *index, int plane, int x, int y)
     int column;
     int lifeField;
 
-    life = f_10F7_07C7(plane, x, y);
-    if (f_10F7_06BF(life) && !f_10F7_003A(life)) {
-        *index = f_10F7_03B7(plane, x, y, life);
+    life = GetLife(plane, x, y);
+    if (IsThisEgg(life) && !IsYellowAnt(life)) {
+        *index = FindAntIndex(plane, x, y, life);
         return life;
     }
-    i = f_10F7_02D6(plane, x, y, 1, 7, 0x7f);
+    i = FindLifeIndex(plane, x, y, 1, 7, 0x7f);
     if (i >= 0) {
-        f_10F7_005D(plane, i, &lifeField, &column, &life, &state, &direction);
+        GetAntIndex(plane, i, &lifeField, &column, &life, &state, &direction);
         *index = i;
         return life;
     }
@@ -1037,14 +1037,14 @@ int far f_10F7_1D31(int far *index, int plane, int x, int y)
     int column;
     int lifeField;
 
-    life = f_10F7_07C7(plane, x, y);
-    if (life >= 0 && !f_10F7_003A(life)) {
-        *index = f_10F7_03B7(plane, x, y, life);
+    life = GetLife(plane, x, y);
+    if (life >= 0 && !IsYellowAnt(life)) {
+        *index = FindAntIndex(plane, x, y, life);
         return life;
     }
-    i = f_10F7_02D6(plane, x, y, 1, 0x7f, 0x7f);
+    i = FindLifeIndex(plane, x, y, 1, 0x7f, 0x7f);
     if (i >= 0) {
-        f_10F7_005D(plane, i, &lifeField, &column, &life, &state, &direction);
+        GetAntIndex(plane, i, &lifeField, &column, &life, &state, &direction);
         *index = i;
         return life;
     }
@@ -1052,29 +1052,29 @@ int far f_10F7_1D31(int far *index, int plane, int x, int y)
     return -1;
 }
 
-void far f_10F7_1DD3(int health)
+void far SetMyHealth(int health)
 {
     if (!fd_3D57_0C16)
-        fd_50F6_0F78 = health;
+        MeHealth = health;
     else
-        fd_50F6_0F78 = 100;
-    if (fd_50F6_0F78 > 0)
+        MeHealth = 100;
+    if (MeHealth > 0)
         fd_50F6_1006 = 0;
-    if (fd_50F6_0F78 > 100)
-        fd_50F6_0F78 = 100;
-    else if (fd_50F6_0F78 < 0)
-        fd_50F6_0F78 = 0;
-    if (fd_50F6_0F78 > fd_50F6_0FBA && fd_50F6_0F78 >= 10)
+    if (MeHealth > 100)
+        MeHealth = 100;
+    else if (MeHealth < 0)
+        MeHealth = 0;
+    if (MeHealth > fd_50F6_0FBA && MeHealth >= 10)
         fd_50F6_1044 = 0;
     else
         fd_50F6_1044 = 1;
 }
 
-void far f_10F7_1E71(int kind)
+void far EatMyFood(int kind)
 {
     switch (kind) {
     case 0:
-        f_00DF_00E8(0x2c, 0, 0x7e);
+        myBeginSound(0x2c, 0, 0x7e);
         o14_384C_0ACD(1);
         break;
     case 1:
@@ -1086,39 +1086,39 @@ void far f_10F7_1E71(int kind)
         f_15D9_009C(fd_50F6_034C[12], 120L, 0);
         break;
     case 3:
-        f_00DF_00E8(0x2c, 0, 0x7e);
+        myBeginSound(0x2c, 0, 0x7e);
         while (!f_00DF_012D())
             f_00F8_0265(5L);
-        f_00DF_00E8(10, 0, 0x7e);
+        myBeginSound(10, 0, 0x7e);
         fd_50F6_0472 = 0L;
         f_15D9_009C(fd_50F6_034C[13], 180L, 0);
         break;
     }
     if (kind != 2) {
-        if (fd_50F6_0F78 + 100 > 100 && kind != 1 && fd_50F6_0330 - 1 > 0) {
-            fd_50F6_10BE += fd_50F6_0F78 / (fd_50F6_0330 - 1);
-            if (fd_50F6_10BE > 100)
-                fd_50F6_10BE = 100;
+        if (MeHealth + 100 > 100 && kind != 1 && fd_50F6_0330 - 1 > 0) {
+            HealthB += MeHealth / (fd_50F6_0330 - 1);
+            if (HealthB > 100)
+                HealthB = 100;
         }
-        f_10F7_1DD3(100);
-    } else if (fd_50F6_0F78 > 10)
-        f_10F7_1DD3(fd_50F6_0F78 - 10);
+        SetMyHealth(100);
+    } else if (MeHealth > 10)
+        SetMyHealth(MeHealth - 10);
 }
 
-int far f_10F7_1FDF(int plane, int x, int y)
+int far PickupMyEgg(int plane, int x, int y)
 {
     int egg;
     int index;
 
-    if (fd_50F6_04C2 == 0x10 || fd_50F6_0F78 < 10) {
+    if (fd_50F6_04C2 == 0x10 || MeHealth < 10) {
         fd_3D57_0C22 = 0xfd;
-        egg = f_10F7_1C84(&index, plane, x, y);
+        egg = FindEggAt(&index, plane, x, y);
         if (egg >= 0) {
-            f_10F7_01B1(plane, index, 0, 0, 0, 0, 0);
-            if (x != fd_50F6_047C || y != fd_50F6_048A)
-                f_10F7_05FE(plane, x, y, 0);
-            if (fd_50F6_0F78 >= 10) {
-                f_00DF_00E8(0x1c, 0, 0x7e);
+            SetAntIndex(plane, index, 0, 0, 0, 0, 0);
+            if (x != MeLocX || y != MeLocY)
+                SetLife(plane, x, y, 0);
+            if (MeHealth >= 10) {
+                myBeginSound(0x1c, 0, 0x7e);
                 fd_3D57_0C22 = egg;
                 fd_50F6_04C2 = 8;
             } else
@@ -1129,7 +1129,7 @@ int far f_10F7_1FDF(int plane, int x, int y)
     return 0;
 }
 
-int far f_10F7_20BF(int plane, int x, int y)
+int far PickupMyFood(int plane, int x, int y)
 {
     int eat;
     int tile;
@@ -1146,7 +1146,7 @@ int far f_10F7_20BF(int plane, int x, int y)
         f_0BE8_0798(x, y);
         if (!eat) {
             fd_50F6_04C4 = 200;
-            fd_50F6_0B1E = f_0BE8_0B83(x, y, fd_3D57_02AC[0], fd_3D57_02AC[1]);
+            fd_50F6_0B1E = GetDis(x, y, fd_3D57_02AC[0], fd_3D57_02AC[1]);
             fd_50F6_0C38 = fd_50F6_0B1E + 1;
             f_1496_043C(x, y, fd_50F6_04C4);
         }
@@ -1156,48 +1156,48 @@ int far f_10F7_20BF(int plane, int x, int y)
             tile = SRand8();
         else
             tile--;
-        f_10F7_08CE(plane, x, y, tile);
+        SetMap(plane, x, y, tile);
         if (plane == 2) {
-            if (fd_50F6_1050 > 0)
-                fd_50F6_1050--;
-        } else if (fd_50F6_1060 > 0)
-            fd_50F6_1060--;
+            if (FoodB > 0)
+                FoodB--;
+        } else if (FoodR > 0)
+            FoodR--;
     }
     if (eat)
         fd_3D57_0C26 = 0;
     else {
-        f_00DF_00E8(0x1d, 0, 0x7e);
+        myBeginSound(0x1d, 0, 0x7e);
         fd_50F6_04C2 += 8;
     }
     return 1;
 }
 
-int far f_10F7_220C(int first, int second, int third, int fourth, int fifth)
+int far DropMyObject(int first, int second, int third, int fourth, int fifth)
 {
     switch (fd_50F6_04C2) {
     case 8:
-        return f_10F7_18B0(first, second, third, fourth, fifth);
+        return DropMyEgg(first, second, third, fourth, fifth);
     case 0x18:
     case 0x38:
-        return f_10F7_1396(first, second, third, fourth, fifth);
+        return DropMyFood(first, second, third, fourth, fifth);
     case 0x28:
     case 0x48:
-        return f_10F7_1696(first, second, third, fourth, fifth);
+        return DropMyRock(first, second, third, fourth, fifth);
     }
     return 0;
 }
 
-int far f_10F7_227A(int plane, int x, int y)
+int far PickupMyObject(int plane, int x, int y)
 {
     int result;
 
     if (fd_50F6_04C2 & 8)
         return 0;
-    result = f_10F7_1FDF(plane, x, y);
+    result = PickupMyEgg(plane, x, y);
     if (result == 0) {
-        result = f_10F7_1AAE(plane, x, y);
+        result = PickupMyRock(plane, x, y);
         if (result == 0)
-            result = f_10F7_20BF(plane, x, y);
+            result = PickupMyFood(plane, x, y);
     }
     return result;
 }
@@ -1210,8 +1210,8 @@ int far f_10F7_22CE(int plane, int x, int y, int fromPlane, int fromX, int fromY
 
     if (plane <= 1) {
         if (x >= 0 && x <= 127 && y >= 0 && y <= 63) {
-            dig = fd_3E1D_0180[x][y];
-            if (!fd_50F6_0F24)
+            dig = MapA[x][y];
+            if (!TERRAINset)
                 ok = dig <= 0x53;
             else
                 ok = dig <= 0x90;
@@ -1219,9 +1219,9 @@ int far f_10F7_22CE(int plane, int x, int y, int fromPlane, int fromX, int fromY
             ok = 0;
     } else if (x >= 0 && x <= 63 && y >= 0 && y <= 63) {
         if (plane == 2)
-            tile = fd_3E1D_2180[x][y];
+            tile = MapB[x][y];
         else
-            tile = fd_3E1D_3180[x][y];
+            tile = MapR[x][y];
         if (tile <= 0x18 || (tile >= 0x30 && tile <= 0x31)) {
             ok = 1;
             dig = 0;
@@ -1242,9 +1242,9 @@ int far f_10F7_22CE(int plane, int x, int y, int fromPlane, int fromX, int fromY
                     ok = 0;
                 else if (y == 0) {
                     if (plane == 2)
-                        tile = fd_3E1D_2180[x][y + 1];
+                        tile = MapB[x][y + 1];
                     else
-                        tile = fd_3E1D_3180[x][y + 1];
+                        tile = MapR[x][y + 1];
                     if (tile >= 0x20 && tile <= 0x2e)
                         ok = 0;
                 }
@@ -1256,9 +1256,9 @@ int far f_10F7_22CE(int plane, int x, int y, int fromPlane, int fromX, int fromY
     return ok;
 }
 
-int far f_10F7_245C(int x)
+int far IsNotBarrier(int x)
 {
-    if (!fd_50F6_0F24)
+    if (!TERRAINset)
         return x <= 0x50;
     return x <= 0x5f;
 }
@@ -1272,10 +1272,10 @@ int far f_10F7_2489(int plane, int x, int y)
     if (tile < 0)
         ok = 0;
     else if (plane <= 1) {
-        if (!fd_50F6_0F24)
+        if (!TERRAINset)
             ok = tile <= 0x53;
         else
-            ok = f_10F7_245C(tile);
+            ok = IsNotBarrier(tile);
     } else if (tile <= 0x18 || f_10F7_0731(plane, tile))
         ok = 1;
     else
@@ -1283,7 +1283,7 @@ int far f_10F7_2489(int plane, int x, int y)
     return ok;
 }
 
-int far f_10F7_24EE(int plane, int x, int y)
+int far IsItDigable(int plane, int x, int y)
 {
     int tile;
 
@@ -1291,7 +1291,7 @@ int far f_10F7_24EE(int plane, int x, int y)
         tile = GetMap(plane, x, y);
         if (IsItDirt(tile))
             return 1;
-        if (f_10F7_06E4(plane, tile))
+        if (IsThisGrass(plane, tile))
             return 1;
     }
     return 0;
@@ -1306,48 +1306,48 @@ int far f_10F7_2548(int plane, int x, int y)
     if (fd_50F6_0A06 == 1) {
         if (plane > 1)
             return 0;
-        if (f_0BE8_0B83(x * 16 + 8, y * 16 + 8, fd_50F6_0F12, fd_50F6_0F34) < 0x200)
+        if (GetDis(x * 16 + 8, y * 16 + 8, fd_50F6_0F12, fd_50F6_0F34) < 0x200)
             return 1;
         return 0;
     }
     switch (plane) {
     case 0:
     case 1:
-        life = fd_3E1D_6180[x][y];
+        life = LifeA[x][y];
         break;
     case 2:
-        life = fd_3E1D_8180[x][y];
+        life = LifeB[x][y];
         break;
     case 3:
-        life = fd_3E1D_9180[x][y];
+        life = LifeR[x][y];
         break;
     }
-    return f_10F7_003A(life);
+    return IsYellowAnt(life);
 }
 
-int far f_10F7_2613(int x)
+int far IsLessThanHole(int x)
 {
-    if (!fd_50F6_0F24)
+    if (!TERRAINset)
         return x < 0x50;
     return x < 0x59;
 }
 
 int far f_10F7_2640(int plane)
 {
-    if (fd_50F6_048C == (plane == 0 ? 1 : plane))
+    if (MePlane == (plane == 0 ? 1 : plane))
         return 1;
     return 0;
 }
 
-int far f_10F7_266E(int plane, int x, int y)
+int far IsLiftable(int plane, int x, int y)
 {
     int tile;
     int eggIndex;
     int egg;
 
-    egg = f_10F7_1C84(&eggIndex, plane, x, y);
+    egg = FindEggAt(&eggIndex, plane, x, y);
     tile = GetMap(plane, x, y);
-    return f_10F7_070B(plane, tile) || f_10F7_0731(plane, tile) || f_10F7_06BF(egg);
+    return IsThisFood(plane, tile) || f_10F7_0731(plane, tile) || IsThisEgg(egg);
 }
 
 int far f_10F7_26D4(int plane, int x, int y)
@@ -1356,11 +1356,11 @@ int far f_10F7_26D4(int plane, int x, int y)
     int result;
 
     if (fd_50F6_04C2 & 8)
-        result = f_10F7_220C(plane, fd_50F6_047C, fd_50F6_048A, x, y) ? 1 : -1;
-    else if (!f_10F7_227A(plane, x, y)) {
+        result = DropMyObject(plane, MeLocX, MeLocY, x, y) ? 1 : -1;
+    else if (!PickupMyObject(plane, x, y)) {
         if ((fd_3D57_0798 || (fd_50F6_04C2 == 0x40 && !fd_3D57_0C24)) &&
-            fd_50F6_048C == 1 && fd_50F6_047C == x && fd_50F6_048A == y) {
-            if (f_14EE_0002(x, y)) {
+            MePlane == 1 && MeLocX == x && MeLocY == y) {
+            if (DigMyNewHole(x, y)) {
                 o25_3BA4_1035();
                 f_015B_06A2();
                 result = 1;
@@ -1369,12 +1369,12 @@ int far f_10F7_26D4(int plane, int x, int y)
         } else
             result = 0;
     } else {
-        dir = f_0BE8_0B21(fd_50F6_047C, fd_50F6_048A, x, y);
+        dir = GetDir(MeLocX, MeLocY, x, y);
         if (dir > 0)
-            f_10F7_0ACE(fd_50F6_048C, fd_50F6_047C, fd_50F6_048A, fd_50F6_04C2, dir - 1);
+            MoveMyLife(MePlane, MeLocX, MeLocY, fd_50F6_04C2, dir - 1);
         f_0250_0E91();
         if (fd_3D57_0C26 >= 0) {
-            f_10F7_1E71(fd_3D57_0C26);
+            EatMyFood(fd_3D57_0C26);
             fd_3D57_0C26 = -1;
         }
         result = 1;
@@ -1385,7 +1385,7 @@ int far f_10F7_26D4(int plane, int x, int y)
 int far f_10F7_2821(int plane, int x, int y)
 {
     if (plane <= 1)
-        return f_0894_23BB(x, y);
+        return IsItHole(x, y);
     if (y > 0)
         return 0;
     if (GetMap(plane, x, y) == 0x18)

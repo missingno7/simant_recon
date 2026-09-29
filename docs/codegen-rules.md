@@ -21,16 +21,10 @@ REG-1 below is a case where the MSC 5.10 rule is false for 6.00.
 
 ## Observations not yet promoted to rules
 
-* **NAME-1 (supervisor, 2026-09-30): identifier spelling changes code generation.** Module
-  S25:3BA4 is exact with the extern name `f_0BE8_0B83`; renaming only that identifier — to
-  `GetDis`, `GetDisXXXXX` or even the same-length `Q_0BE8_0B83` — changes o25_3BA4_0C01 and
-  o25_3BA4_1581. A 205-name rename batch left only 3 of 20 modules exact. MSC 6.00A's symbol
-  hashing feeds register/operand tie-breaks, so placeholder names can steer exactness and
-  original names should reproduce original code naturally. Consequences: (1) renames of
-  accepted code are re-proven (tools/rename.py keeps a module on the old names — aliases —
-  when its rewrite is not exact); (2) drafts should use the original (Win16-evidenced) names
-  from the start; (3) a residue that survives all spellings may be a *name* residue.
-
+* **NAME-1 RETRACTED (2026-09-30).** A supposed "identifier spelling changes codegen" effect was
+  a bug in tools/rename.py (new names were not registered before re-proving). Worker "names"
+  showed the object code of root:0F3F is byte-identical under original names and under random
+  respellings of all 142 identifiers; what moves code is the identifier *count* (below).
 * **Inline `_asm` without C return value** (SRand2..SRand256): the original bodies leave
   the result in AX with no `return` and no result local; SimAntW's reconstruction used a
   `result` variable (different compiler, different frame).

@@ -11,7 +11,7 @@ extern int far SRand16(void);
 extern int far SRand32(void);
 extern int far SRand256(void);
 
-extern int far fd_50F6_0F08;
+extern int far Cycle;
 extern unsigned long far fd_50F6_0C26;
 extern int far fd_3D57_07B2;
 extern int far fd_50F6_0F06;
@@ -36,38 +36,38 @@ extern int far fd_50F6_08E8;
 extern int far fd_50F6_0B12[6];
 extern int far fd_50F6_0C2A[6];
 extern int far fd_3D57_0C18;
-extern int far fd_50F6_10BE;
-extern int far fd_50F6_01FE;
+extern int far HealthB;
+extern int far HealthR;
 extern int far fd_50F6_0EAC;
 extern int far fd_3D57_0C1A;
 extern int far fd_50F6_1040;
-extern int far fd_50F6_0D6A;
-extern int far fd_50F6_0F18;
+extern int far ListIndexA;
+extern int far Tindex;
 extern unsigned char far fd_3E1D_AD3B[];
 extern unsigned char far fd_3E1D_A569[];
 extern unsigned char far fd_3E1D_A180[];
 extern long far fd_50F6_0F30;
 extern unsigned char far fd_3E1D_A952[];
-extern unsigned char far fd_3E1D_6180[128][64];
-extern char far fd_3D57_0008[8];
-extern char far fd_3D57_0000[8];
+extern unsigned char far LifeA[128][64];
+extern char far Dy8[8];
+extern char far Dx8[8];
 extern unsigned char far fd_3E1D_F09F[64][32];
 extern unsigned char far fd_3E1D_E09F[64][32];
 extern int far fd_50F6_06AA;
 extern int far fd_50F6_073A;
 extern int far fd_50F6_07C8;
 extern int far fd_50F6_0850;
-extern unsigned char far fd_3E1D_0180[128][64];
-extern int far fd_50F6_0480;
+extern unsigned char far MapA[128][64];
+extern int far Barrier;
 extern unsigned char far fd_3E1D_B124[];
 extern int far fd_50F6_04E2;
 extern int far fd_50F6_1044;
-extern signed char far fd_3D57_0024[8][8];
+extern signed char far TurnTab[8][8];
 extern unsigned char far fd_3E1D_D09F[64][32];
 extern int far fd_50F6_0DA8;
-extern unsigned char far fd_3D57_0224[];
+extern unsigned char far HoleMapB[];
 extern int far fd_50F6_0EAA;
-extern unsigned char far fd_3D57_0264[];
+extern unsigned char far HoleMapR[];
 extern int far fd_3D57_0C14;
 extern long far fd_50F6_0F3E;
 extern int far fd_50F6_09FA;
@@ -76,7 +76,7 @@ extern int far fd_50F6_0A00;
 extern int far fd_50F6_0476;
 extern unsigned char far fd_50F6_037C[100];
 extern unsigned char far fd_50F6_0404[100];
-extern int far fd_50F6_0F24;
+extern int far TERRAINset;
 extern int far fd_3D57_0074[16];
 extern signed char far fd_3D57_0094[];
 
@@ -87,13 +87,13 @@ extern void far f_0CDB_00B3(void);
 extern void far f_0AD9_093C(void);
 extern void far f_1383_0002(void);
 extern void far o25_39C7_0000(void);
-extern void far f_0F3F_0008(void);
+extern void far DoAntSimR(void);
 extern void far DoAntSimY(void);
 extern void far DoAntMoveY(void);
 extern void far f_0E2E_000A(void);
 extern void far o14_384C_0DE5(int a);
 extern void far f_0EC1_0002(void);
-extern void far f_0BE8_038F(void);
+extern void far FullCount(void);
 extern void far o24_39C7_0608(void);
 extern void far f_1496_025E(void);
 extern void far f_0EC1_0081(void);
@@ -115,7 +115,7 @@ extern void far f_0BE8_0798(int x, int y);
 extern void far f_1496_0404(int x, int y, int level);
 extern void far f_1496_03CC(int x, int y, int level);
 extern void far f_1496_04AC(int x, int y, int colour);
-extern int far f_10F7_003A(int value);
+extern int far IsYellowAnt(int value);
 extern void far o25_3BA4_0DFB(int a, int index);
 extern void far o22_39C7_19E5(int x, int y, int dir);
 extern int far f_1383_0976(int caste, int type);
@@ -125,50 +125,50 @@ extern int far f_1383_0DCC(int x, int y, int dir);
 extern int far f_1383_0A95(int x, int y, int dir, int attribute);
 extern int far f_1383_0FCE(int x, int y, int dir);
 extern int far f_1383_0ECC(int x, int y, int dir);
-extern void far f_0EC1_05D4(int x, int y, int type, int mode, int state);
-extern void far f_0EC1_0651(int x, int y, int type, int mode, int state);
-extern void far f_14EE_0519(int x, int y);
-extern void far f_14EE_0647(int x, int y);
+extern void far AddAntToBList(int x, int y, int type, int mode, int state);
+extern void far AddAntToRList(int x, int y, int type, int mode, int state);
+extern void far DigTileB(int x, int y);
+extern void far DigTileR(int x, int y);
 extern void far f_1496_0395(int x, int y, int level);
 extern int far RRand(int range);
 extern void far f_0250_4302(int x, int y, int plane);
 extern int far f_10F7_2867(int x, int y);
 
-void far f_0894_0138(void);
-void far f_0894_019B(void);
-void far f_0894_01E5(void);
-void far f_0894_02D2(void);
-void far f_0894_034B(void);
-void far f_0894_0572(int index);
-void far f_0894_05EE(int index);
-int far f_0894_0671(int x, int y, int life);
-void far f_0894_06D8(int index);
-void far f_0894_0751(int index);
-void far f_0894_07B3(int index);
-void far f_0894_0892(int index);
-void far f_0894_0961(int index);
-void far f_0894_09F4(int index);
-void far f_0894_0CFD(int index);
-void far f_0894_0E8E(int index);
-void far f_0894_1087(int index);
-void far f_0894_1315(int index);
-void far f_0894_1525(int index);
-void far f_0894_16A5(int index);
-void far f_0894_1A28(int index);
-void far f_0894_1C6E(int x, int y, int index);
-void far f_0894_1F31(int index);
+void far DoSmells(void);
+void far ClrModePop(void);
+void far TallyModePop(void);
+void far FeedAnts(void);
+void far DoAntSimA(void);
+void far SimEggA(int index);
+void far SimQueenA(int index);
+int far LostHeadA(int x, int y, int life);
+void far DoRestAnt(int index);
+void far DoRepoLoit(int index);
+void far DoRepoExit(int index);
+void far DoRepoFly(int index);
+void far DoDefendNest(int index);
+void far DoRandAntA(int index);
+void far DoRandAntAA(int index);
+void far DoDigOutAntA(int index);
+void far DoToNestAnt(int index);
+void far DoToAlarm(int index);
+void far DoReturnFoodAnt(int index);
+void far DoForageAnt(int index);
+void far DoRecruitAnt(int index);
+void far GoInNest(int x, int y, int index);
+void far DoFightA(int index);
 void far DeadAntHere(int x, int y, int type);
-void far f_0894_21ED(int index);
-int far f_0894_23BB(int x, int y);
-int far f_0894_2423(int tile);
-int far f_0894_21C5(int dir);
-void far f_0894_1D89(int index, int x, int y, int nx, int ny);
-int far f_0894_1E34(int a, int b);
+void far DoAttackAnt(int index);
+int far IsItHole(int x, int y);
+int far IsItFood(int tile);
+int far RandTurn(int dir);
+void far StartFightA(int index, int x, int y, int nx, int ny);
+int far GetWinner(int a, int b);
 
-void far f_0894_000E(void)
+void far DoAntSim(void)
 {
-    if (++fd_50F6_0F08 > 0x1000)
-        fd_50F6_0F08 = 0;
+    if (++Cycle > 0x1000)
+        Cycle = 0;
     fd_50F6_0C26++;
     if (fd_3D57_07B2 == 1) {
         fd_50F6_0F06 = 0;
@@ -181,23 +181,23 @@ void far f_0894_000E(void)
         fd_50F6_0A02 = fd_50F6_08EC;
         fd_50F6_0852 = fd_50F6_08EC;
     }
-    if ((fd_50F6_0F08 & 0x3f) == 0)
-        f_0894_02D2();
-    if ((fd_50F6_0F08 & 0x1f) == 0)
-        f_0894_0138();
+    if ((Cycle & 0x3f) == 0)
+        FeedAnts();
+    if ((Cycle & 0x1f) == 0)
+        DoSmells();
     o06_35F5_0173();
     f_0BE8_03AC();
     f_0AD9_03D3();
     f_0CDB_00B3();
-    if (fd_50F6_0F08 & 1)
+    if (Cycle & 1)
         f_0AD9_093C();
     f_1383_0002();
-    f_0894_019B();
-    f_0894_034B();
+    ClrModePop();
+    DoAntSimA();
     o25_39C7_0000();
-    f_0F3F_0008();
+    DoAntSimR();
     DoAntSimY();
-    f_0894_01E5();
+    TallyModePop();
     DoAntMoveY();
     f_0E2E_000A();
     if (fd_50F6_0376)
@@ -205,12 +205,12 @@ void far f_0894_000E(void)
     fd_3D57_02C2 = 1;
 }
 
-void far f_0894_0138(void)
+void far DoSmells(void)
 {
-    switch ((fd_50F6_0F08 & 0x60) >> 5) {
+    switch ((Cycle & 0x60) >> 5) {
     case 0:
         f_0EC1_0002();
-        f_0BE8_038F();
+        FullCount();
         o24_39C7_0608();
         f_1496_025E();
         break;
@@ -221,7 +221,7 @@ void far f_0894_0138(void)
         f_1496_019A();
         break;
     case 2:
-        f_0BE8_038F();
+        FullCount();
         o24_39C7_0608();
         f_1496_025E();
         break;
@@ -234,7 +234,7 @@ void far f_0894_0138(void)
     }
 }
 
-void far f_0894_019B(void)
+void far ClrModePop(void)
 {
     int i;
 
@@ -248,7 +248,7 @@ void far f_0894_019B(void)
         --fd_50F6_08E8;
 }
 
-void far f_0894_01E5(void)
+void far TallyModePop(void)
 {
     fd_50F6_0B12[0] = fd_50F6_0D40[2] + fd_50F6_0D40[3];
     fd_50F6_0B12[1] = fd_50F6_0D40[4] + fd_50F6_0D40[5];
@@ -266,14 +266,14 @@ void far f_0894_01E5(void)
         f_0DEF_0000();
 }
 
-void far f_0894_02D2(void)
+void far FeedAnts(void)
 {
     if (fd_3D57_0C18 == 0) {
-        if (--fd_50F6_10BE < 0)
-            fd_50F6_10BE = 0;
+        if (--HealthB < 0)
+            HealthB = 0;
     }
-    if (--fd_50F6_01FE < 0)
-        fd_50F6_01FE = 0;
+    if (--HealthR < 0)
+        HealthR = 0;
     if (fd_50F6_0EAC == 3)
         return;
     if (fd_50F6_1040 >= fd_3D57_0C1A)
@@ -282,95 +282,95 @@ void far f_0894_02D2(void)
     fd_3D57_0C1A = SRand1(0x32) + 1;
 }
 
-void far f_0894_034B(void)
+void far DoAntSimA(void)
 {
     int t;
     int mode;
 
-    fd_50F6_0F18 = fd_50F6_0D6A;
-    while (fd_50F6_0F18 > 0) {
-        fd_50F6_0F18--;
+    Tindex = ListIndexA;
+    while (Tindex > 0) {
+        Tindex--;
         if (SRand256() == 0) {
-            t = fd_3E1D_AD3B[fd_50F6_0F18];
+            t = fd_3E1D_AD3B[Tindex];
             if (t) {
                 if (t & 0x80)
-                    t = fd_50F6_01FE;
+                    t = HealthR;
                 else
-                    t = fd_50F6_10BE;
+                    t = HealthB;
                 if (SRand32() > t) {
-                    DeadAntHere(fd_3E1D_A180[fd_50F6_0F18], fd_3E1D_A569[fd_50F6_0F18],
-                                fd_3E1D_AD3B[fd_50F6_0F18] & 0x80);
-                    fd_3E1D_AD3B[fd_50F6_0F18] = 0;
+                    DeadAntHere(fd_3E1D_A180[Tindex], fd_3E1D_A569[Tindex],
+                                fd_3E1D_AD3B[Tindex] & 0x80);
+                    fd_3E1D_AD3B[Tindex] = 0;
                     fd_50F6_0F30++;
                 }
             }
         }
-        t = fd_3E1D_AD3B[fd_50F6_0F18];
+        t = fd_3E1D_AD3B[Tindex];
         if (t == 0)
             continue;
-        mode = fd_3E1D_A952[fd_50F6_0F18];
+        mode = fd_3E1D_A952[Tindex];
         if (t & 0x80)
             fd_50F6_0D72[mode]++;
         else
             fd_50F6_0D40[mode]++;
         switch (mode) {
         case 0:
-            f_0894_09F4(fd_50F6_0F18);
+            DoRandAntA(Tindex);
             break;
         case 1:
         case 4:
-            f_0894_1087(fd_50F6_0F18);
+            DoToNestAnt(Tindex);
             break;
         case 2:
-            f_0894_16A5(fd_50F6_0F18);
+            DoForageAnt(Tindex);
             break;
         case 3:
-            f_0894_1525(fd_50F6_0F18);
+            DoReturnFoodAnt(Tindex);
             break;
         case 5:
-            f_0894_0E8E(fd_50F6_0F18);
+            DoDigOutAntA(Tindex);
             break;
         case 6:
-            f_0894_1A28(fd_50F6_0F18);
+            DoRecruitAnt(Tindex);
             break;
         case 7:
-            f_0894_21ED(fd_50F6_0F18);
+            DoAttackAnt(Tindex);
             break;
         case 8:
-            f_0894_0572(fd_50F6_0F18);
+            SimEggA(Tindex);
             break;
         case 9:
-            f_0894_05EE(fd_50F6_0F18);
+            SimQueenA(Tindex);
             break;
         case 10:
-            f_0894_1F31(fd_50F6_0F18);
+            DoFightA(Tindex);
             break;
         case 11:
-            f_0894_1315(fd_50F6_0F18);
+            DoToAlarm(Tindex);
             break;
         case 12:
-            f_0894_0961(fd_50F6_0F18);
+            DoDefendNest(Tindex);
             break;
         case 13:
-            f_0894_06D8(fd_50F6_0F18);
+            DoRestAnt(Tindex);
             break;
         case 14:
-            f_0894_0751(fd_50F6_0F18);
+            DoRepoLoit(Tindex);
             break;
         case 15:
-            f_0894_07B3(fd_50F6_0F18);
+            DoRepoExit(Tindex);
             break;
         case 16:
-            f_0894_0892(fd_50F6_0F18);
+            DoRepoFly(Tindex);
             break;
         case 19:
-            f_0DEF_006B(fd_50F6_0F18);
+            f_0DEF_006B(Tindex);
             break;
         }
     }
 }
 
-void far f_0894_0572(int index)
+void far SimEggA(int index)
 {
     int x;
     int y;
@@ -379,14 +379,14 @@ void far f_0894_0572(int index)
     x = fd_3E1D_A180[index];
     y = fd_3E1D_A569[index];
     type = fd_3E1D_AD3B[index];
-    fd_3E1D_6180[x][y] = type;
+    LifeA[x][y] = type;
     if (SRand1(200) == 0) {
         fd_3E1D_AD3B[index] = 0;
-        fd_3E1D_6180[x][y] = 0;
+        LifeA[x][y] = 0;
     }
 }
 
-void far f_0894_05EE(int index)
+void far SimQueenA(int index)
 {
     int x;
     int y;
@@ -395,60 +395,60 @@ void far f_0894_05EE(int index)
     x = fd_3E1D_A180[index];
     y = fd_3E1D_A569[index];
     type = fd_3E1D_AD3B[index];
-    fd_3E1D_6180[x][y] = type;
+    LifeA[x][y] = type;
     if ((type & 0x7f) > 0x67) {
-        if (f_0894_0671(x, y, type)) {
-            fd_3E1D_6180[x][y] = 0;
+        if (LostHeadA(x, y, type)) {
+            LifeA[x][y] = 0;
             fd_3E1D_AD3B[index] = 0;
         }
     }
 }
 
-int far f_0894_0671(int x, int y, int life)
+int far LostHeadA(int x, int y, int life)
 {
     int row;
     int column;
 
-    row = x + fd_3D57_0000[life & 7];
-    column = y + fd_3D57_0008[life & 7];
-    if (fd_3E1D_6180[row][column] - life == -8)
+    row = x + Dx8[life & 7];
+    column = y + Dy8[life & 7];
+    if (LifeA[row][column] - life == -8)
         return 0;
     if (f_0EC1_0291(row, column) >= 0)
         return 0;
     return 1;
 }
 
-void far f_0894_06D8(int index)
+void far DoRestAnt(int index)
 {
     int x;
     int y;
 
     x = fd_3E1D_A180[index];
     y = fd_3E1D_A569[index];
-    if (f_0894_23BB(x, y) == 1)
-        f_0894_1C6E(x, y, index);
+    if (IsItHole(x, y) == 1)
+        GoInNest(x, y, index);
     else if (SRand4() == 0)
         fd_3E1D_A952[index] = 2;
     else if (fd_3D57_07B2 == 1)
         f_0250_43F2(x, y, 1);
 }
 
-void far f_0894_0751(int index)
+void far DoRepoLoit(int index)
 {
     if (SRand2())
-        f_0894_0CFD(index);
+        DoRandAntAA(index);
     else
-        f_0894_1087(index);
+        DoToNestAnt(index);
     if (fd_3E1D_AD3B[index] & 0x80) {
         if (fd_50F6_08E8 > 100)
-            fd_3E1D_A952[fd_50F6_0F18] = 0xf;
+            fd_3E1D_A952[Tindex] = 0xf;
     } else {
         if (fd_50F6_08DC > 100)
-            fd_3E1D_A952[fd_50F6_0F18] = 0xf;
+            fd_3E1D_A952[Tindex] = 0xf;
     }
 }
 
-void far f_0894_07B3(int index)
+void far DoRepoExit(int index)
 {
     int scent;
 
@@ -457,19 +457,19 @@ void far f_0894_07B3(int index)
     else
         scent = fd_3E1D_E09F[fd_3E1D_A180[index] >> 1][fd_3E1D_A569[index] >> 1];
     if (scent < 100)
-        f_0894_1087(index);
+        DoToNestAnt(index);
     else
-        f_0894_0CFD(index);
+        DoRandAntAA(index);
     if (fd_3E1D_AD3B[index] & 0x80) {
         if (fd_50F6_08E8 != 0 && (fd_50F6_08E8 == 1 || SRand1(fd_50F6_08E8) == 0))
-            fd_3E1D_A952[fd_50F6_0F18] = 0x10;
+            fd_3E1D_A952[Tindex] = 0x10;
     } else {
         if (fd_50F6_08DC != 0 && (fd_50F6_08DC == 1 || SRand1(fd_50F6_08DC) == 0))
-            fd_3E1D_A952[fd_50F6_0F18] = 0x10;
+            fd_3E1D_A952[Tindex] = 0x10;
     }
 }
 
-void far f_0894_0892(int index)
+void far DoRepoFly(int index)
 {
     int red;
 
@@ -477,7 +477,7 @@ void far f_0894_0892(int index)
     if (SRand32() == 0) {
         if ((red == 0 && fd_50F6_06AA < 50) || (red != 0 && fd_50F6_073A < 50)) {
             fd_3E1D_AD3B[index] = 0;
-            fd_3E1D_6180[fd_3E1D_A180[index]][fd_3E1D_A569[index]] = 0;
+            LifeA[fd_3E1D_A180[index]][fd_3E1D_A569[index]] = 0;
             if (fd_50F6_0EAC == 2) {
                 if (red == 0)
                     fd_50F6_06AA++;
@@ -495,7 +495,7 @@ void far f_0894_0892(int index)
     }
 }
 
-void far f_0894_0961(int index)
+void far DoDefendNest(int index)
 {
     int scent;
 
@@ -504,13 +504,13 @@ void far f_0894_0961(int index)
     else
         scent = fd_3E1D_E09F[fd_3E1D_A180[index] >> 1][fd_3E1D_A569[index] >> 1];
     if (scent < 0x6e)
-        f_0894_1087(index);
+        DoToNestAnt(index);
     else
-        f_0894_0CFD(index);
+        DoRandAntAA(index);
 }
 
 
-void far f_0894_09F4(int index)
+void far DoRandAntA(int index)
 {
     int x;
     int y;
@@ -525,34 +525,34 @@ void far f_0894_09F4(int index)
     x = fd_3E1D_A180[index];
     y = fd_3E1D_A569[index];
     attribute = fd_3E1D_AD3B[index];
-    if (f_0894_23BB(x, y)) {
-        f_0894_1C6E(x, y, index);
+    if (IsItHole(x, y)) {
+        GoInNest(x, y, index);
         return;
     }
     flags = attribute & 0xf8;
     caste = (attribute & 0x78) >> 3;
     dir = f_1383_0E89(x, y, attribute & 7);
-    nx = x + fd_3D57_0000[dir];
-    ny = y + fd_3D57_0008[dir];
-    tile = fd_3E1D_0180[nx][ny];
-    if (f_0894_2423(tile) == 1) {
+    nx = x + Dx8[dir];
+    ny = y + Dy8[dir];
+    tile = MapA[nx][ny];
+    if (IsItFood(tile) == 1) {
         if (caste == 6 || caste == 2) {
             fd_3E1D_AD3B[index] = dir | flags | 8;
-            fd_3E1D_6180[x][y] = fd_3E1D_AD3B[index];
+            LifeA[x][y] = fd_3E1D_AD3B[index];
             fd_3E1D_A952[index] = 3;
             f_0BE8_0798(nx, ny);
             fd_3E1D_B124[index] = 200;
             return;
         }
-    } else if (tile > fd_50F6_0480) {
-        fd_3E1D_AD3B[index] = f_0894_21C5(attribute & 7) | flags;
-        fd_3E1D_6180[x][y] = fd_3E1D_AD3B[index];
+    } else if (tile > Barrier) {
+        fd_3E1D_AD3B[index] = RandTurn(attribute & 7) | flags;
+        LifeA[x][y] = fd_3E1D_AD3B[index];
         return;
     }
-    tile = fd_3E1D_6180[nx][ny];
+    tile = LifeA[nx][ny];
     if (tile == 0) {
-        fd_3E1D_AD3B[index] = fd_3E1D_6180[nx][ny] = dir | flags;
-        fd_3E1D_6180[x][y] = 0;
+        fd_3E1D_AD3B[index] = LifeA[nx][ny] = dir | flags;
+        LifeA[x][y] = 0;
         fd_3E1D_A180[index] = nx;
         fd_3E1D_A569[index] = ny;
         if (fd_3E1D_B124[index] != 0) {
@@ -567,31 +567,31 @@ void far f_0894_09F4(int index)
             fd_3E1D_A952[index] = 2;
         return;
     }
-    if (f_10F7_003A(tile) == 1) {
+    if (IsYellowAnt(tile) == 1) {
         if ((fd_50F6_04E2 ^ attribute) & 0x80) {
             o25_3BA4_0DFB(1, index);
             return;
         }
         if (fd_50F6_1044 == 1) {
             fd_3E1D_AD3B[index] = dir | flags;
-            fd_3E1D_6180[x][y] = fd_3E1D_AD3B[index];
+            LifeA[x][y] = fd_3E1D_AD3B[index];
             o22_39C7_19E5(x, y, dir);
         }
-        fd_3E1D_AD3B[index] = f_0894_21C5(attribute & 7) | flags;
-        fd_3E1D_6180[x][y] = fd_3E1D_AD3B[index];
+        fd_3E1D_AD3B[index] = RandTurn(attribute & 7) | flags;
+        LifeA[x][y] = fd_3E1D_AD3B[index];
         return;
     }
     if (((tile ^ attribute) & 0x80) == 0) {
-        fd_3E1D_AD3B[index] = f_0894_21C5(attribute & 7) | flags;
-        fd_3E1D_6180[x][y] = fd_3E1D_AD3B[index];
+        fd_3E1D_AD3B[index] = RandTurn(attribute & 7) | flags;
+        LifeA[x][y] = fd_3E1D_AD3B[index];
         fd_3E1D_A952[index] = f_1383_0976(caste, attribute);
         return;
     }
-    f_0894_1D89(index, x, y, nx, ny);
+    StartFightA(index, x, y, nx, ny);
 }
 
 
-void far f_0894_0CFD(int index)
+void far DoRandAntAA(int index)
 {
     int x;
     int y;
@@ -606,46 +606,46 @@ void far f_0894_0CFD(int index)
     x = fd_3E1D_A180[index];
     y = fd_3E1D_A569[index];
     attribute = fd_3E1D_AD3B[index];
-    if (f_0894_23BB(x, y)) {
-        f_0894_1C6E(x, y, index);
+    if (IsItHole(x, y)) {
+        GoInNest(x, y, index);
         return;
     }
     flags = attribute & 0xf8;
     dir = f_1383_0E89(x, y, attribute & 7);
-    nx = x + fd_3D57_0000[dir];
-    ny = y + fd_3D57_0008[dir];
-    if (fd_3E1D_0180[nx][ny] > fd_50F6_0480) {
-        fd_3E1D_AD3B[index] = f_0894_21C5(attribute & 7) | flags;
-        fd_3E1D_6180[x][y] = fd_3E1D_AD3B[index];
+    nx = x + Dx8[dir];
+    ny = y + Dy8[dir];
+    if (MapA[nx][ny] > Barrier) {
+        fd_3E1D_AD3B[index] = RandTurn(attribute & 7) | flags;
+        LifeA[x][y] = fd_3E1D_AD3B[index];
         return;
     }
-    tile = fd_3E1D_6180[nx][ny];
+    tile = LifeA[nx][ny];
     if (tile == 0) {
-        fd_3E1D_AD3B[index] = fd_3E1D_6180[nx][ny] = dir | flags;
-        fd_3E1D_6180[x][y] = 0;
+        fd_3E1D_AD3B[index] = LifeA[nx][ny] = dir | flags;
+        LifeA[x][y] = 0;
         fd_3E1D_A180[index] = nx;
         fd_3E1D_A569[index] = ny;
         return;
     }
-    if (f_10F7_003A(tile) == 1) {
+    if (IsYellowAnt(tile) == 1) {
         if ((fd_50F6_04E2 ^ attribute) & 0x80) {
             o25_3BA4_0DFB(1, index);
             return;
         }
-        fd_3E1D_AD3B[index] = f_0894_21C5(attribute & 7) | flags;
-        fd_3E1D_6180[x][y] = fd_3E1D_AD3B[index];
+        fd_3E1D_AD3B[index] = RandTurn(attribute & 7) | flags;
+        LifeA[x][y] = fd_3E1D_AD3B[index];
         return;
     }
     if (((attribute ^ tile) & 0x80) == 0) {
-        fd_3E1D_AD3B[index] = f_0894_21C5(attribute & 7) | flags;
-        fd_3E1D_6180[x][y] = fd_3E1D_AD3B[index];
+        fd_3E1D_AD3B[index] = RandTurn(attribute & 7) | flags;
+        LifeA[x][y] = fd_3E1D_AD3B[index];
         return;
     }
-    f_0894_1D89(index, x, y, nx, ny);
+    StartFightA(index, x, y, nx, ny);
 }
 
 
-void far f_0894_0E8E(int index)
+void far DoDigOutAntA(int index)
 {
     int x;
     int y;
@@ -662,12 +662,12 @@ void far f_0894_0E8E(int index)
     attribute = fd_3E1D_AD3B[index];
     flags = attribute & 0xf8;
     digmode = (attribute & 0x78) >> 3;
-    dirindex = fd_3D57_0024[attribute & 7][SRand8()];
+    dirindex = TurnTab[attribute & 7][SRand8()];
     bdir = f_1383_10A8(x, y);
     if (bdir != 0)
         dirindex = (bdir - 1) & 7;
-    nx = x + fd_3D57_0000[dirindex];
-    ny = y + fd_3D57_0008[dirindex];
+    nx = x + Dx8[dirindex];
+    ny = y + Dy8[dirindex];
     if (digmode != 5 && digmode != 9) {
         fd_3E1D_A952[index] = f_1383_0976(digmode, attribute);
         fd_3E1D_B124[index] = 0;
@@ -677,22 +677,22 @@ void far f_0894_0E8E(int index)
         fd_3E1D_AD3B[index] -= 0x18;
         fd_3E1D_A952[index] = f_1383_0976(digmode, attribute);
         fd_3E1D_B124[index] = 0;
-        fd_3E1D_6180[x][y] = fd_3E1D_AD3B[index];
+        LifeA[x][y] = fd_3E1D_AD3B[index];
         return;
     }
-    if (fd_3E1D_0180[nx][ny] > fd_50F6_0480) {
-        fd_3E1D_AD3B[index] = f_0894_21C5(attribute & 7) | flags;
-        fd_3E1D_6180[x][y] = fd_3E1D_AD3B[index];
+    if (MapA[nx][ny] > Barrier) {
+        fd_3E1D_AD3B[index] = RandTurn(attribute & 7) | flags;
+        LifeA[x][y] = fd_3E1D_AD3B[index];
         return;
     }
-    if (fd_3E1D_6180[nx][ny] == 0) {
-        fd_3E1D_AD3B[index] = fd_3E1D_6180[nx][ny] = dirindex | flags;
-        fd_3E1D_6180[x][y] = 0;
+    if (LifeA[nx][ny] == 0) {
+        fd_3E1D_AD3B[index] = LifeA[nx][ny] = dirindex | flags;
+        LifeA[x][y] = 0;
         fd_3E1D_A180[index] = nx;
         fd_3E1D_A569[index] = ny;
     } else {
-        fd_3E1D_AD3B[index] = f_0894_21C5(attribute & 7) | flags;
-        fd_3E1D_6180[x][y] = fd_3E1D_AD3B[index];
+        fd_3E1D_AD3B[index] = RandTurn(attribute & 7) | flags;
+        LifeA[x][y] = fd_3E1D_AD3B[index];
         return;
     }
     if (fd_3E1D_B124[index] != 0) {
@@ -705,7 +705,7 @@ void far f_0894_0E8E(int index)
 }
 
 
-void far f_0894_1087(int index)
+void far DoToNestAnt(int index)
 {
     int x;
     int y;
@@ -720,34 +720,34 @@ void far f_0894_1087(int index)
     x = fd_3E1D_A180[index];
     y = fd_3E1D_A569[index];
     attribute = fd_3E1D_AD3B[index];
-    if (f_0894_23BB(x, y)) {
-        f_0894_1C6E(x, y, index);
+    if (IsItHole(x, y)) {
+        GoInNest(x, y, index);
         return;
     }
     flags = attribute & 0xf8;
     caste = (attribute & 0x78) >> 3;
     dir = f_1383_0C2A(x, y, attribute & 7, attribute);
-    nx = x + fd_3D57_0000[dir];
-    ny = y + fd_3D57_0008[dir];
-    tile = fd_3E1D_0180[nx][ny];
-    if (f_0894_2423(tile) == 1) {
+    nx = x + Dx8[dir];
+    ny = y + Dy8[dir];
+    tile = MapA[nx][ny];
+    if (IsItFood(tile) == 1) {
         if (caste == 6 || caste == 2) {
             fd_3E1D_AD3B[index] = dir | flags | 8;
-            fd_3E1D_6180[x][y] = fd_3E1D_AD3B[index];
+            LifeA[x][y] = fd_3E1D_AD3B[index];
             fd_3E1D_A952[index] = 3;
             f_0BE8_0798(nx, ny);
             fd_3E1D_B124[index] = 200;
             return;
         }
-    } else if (tile > fd_50F6_0480) {
-        fd_3E1D_AD3B[index] = f_0894_21C5(attribute & 7) | flags;
-        fd_3E1D_6180[x][y] = fd_3E1D_AD3B[index];
+    } else if (tile > Barrier) {
+        fd_3E1D_AD3B[index] = RandTurn(attribute & 7) | flags;
+        LifeA[x][y] = fd_3E1D_AD3B[index];
         return;
     }
-    tile = fd_3E1D_6180[nx][ny];
+    tile = LifeA[nx][ny];
     if (tile == 0) {
-        fd_3E1D_AD3B[index] = fd_3E1D_6180[nx][ny] = dir | flags;
-        fd_3E1D_6180[x][y] = 0;
+        fd_3E1D_AD3B[index] = LifeA[nx][ny] = dir | flags;
+        LifeA[x][y] = 0;
         fd_3E1D_A180[index] = nx;
         fd_3E1D_A569[index] = ny;
         if (fd_3E1D_B124[index] != 0) {
@@ -759,30 +759,30 @@ void far f_0894_1087(int index)
         }
         return;
     }
-    if (f_10F7_003A(tile) == 1) {
+    if (IsYellowAnt(tile) == 1) {
         if ((fd_50F6_04E2 ^ attribute) & 0x80) {
             o25_3BA4_0DFB(1, index);
             return;
         }
         if (fd_50F6_1044 == 1) {
             fd_3E1D_AD3B[index] = dir | flags;
-            fd_3E1D_6180[x][y] = fd_3E1D_AD3B[index];
+            LifeA[x][y] = fd_3E1D_AD3B[index];
             o22_39C7_19E5(x, y, dir);
         }
-        fd_3E1D_AD3B[index] = f_0894_21C5(attribute & 7) | flags;
-        fd_3E1D_6180[x][y] = fd_3E1D_AD3B[index];
+        fd_3E1D_AD3B[index] = RandTurn(attribute & 7) | flags;
+        LifeA[x][y] = fd_3E1D_AD3B[index];
         return;
     }
     if (((tile ^ attribute) & 0x80) == 0) {
-        fd_3E1D_AD3B[index] = f_0894_21C5(attribute & 7) | flags;
-        fd_3E1D_6180[x][y] = fd_3E1D_AD3B[index];
+        fd_3E1D_AD3B[index] = RandTurn(attribute & 7) | flags;
+        LifeA[x][y] = fd_3E1D_AD3B[index];
         return;
     }
-    f_0894_1D89(index, x, y, nx, ny);
+    StartFightA(index, x, y, nx, ny);
 }
 
 
-void far f_0894_1315(int index)
+void far DoToAlarm(int index)
 {
     int x;
     int y;
@@ -796,54 +796,54 @@ void far f_0894_1315(int index)
     x = fd_3E1D_A180[index];
     y = fd_3E1D_A569[index];
     attribute = fd_3E1D_AD3B[index];
-    if (f_0894_23BB(x, y)) {
-        f_0894_1C6E(x, y, index);
+    if (IsItHole(x, y)) {
+        GoInNest(x, y, index);
         return;
     }
     flags = attribute & 0xf8;
     if (fd_3E1D_D09F[x >> 1][y >> 1] == 0 && SRand4() == 0) {
-        fd_3E1D_6180[x][y] = fd_3E1D_AD3B[index];
+        LifeA[x][y] = fd_3E1D_AD3B[index];
         fd_3E1D_A952[index] = f_1383_0976((attribute & 0x78) >> 3, attribute);
         return;
     }
     dir = f_1383_0DCC(x, y, attribute & 7);
-    nx = x + fd_3D57_0000[dir];
-    ny = y + fd_3D57_0008[dir];
-    if (fd_3E1D_0180[nx][ny] > fd_50F6_0480) {
-        fd_3E1D_AD3B[index] = f_0894_21C5(attribute & 7) | flags;
-        fd_3E1D_6180[x][y] = fd_3E1D_AD3B[index];
+    nx = x + Dx8[dir];
+    ny = y + Dy8[dir];
+    if (MapA[nx][ny] > Barrier) {
+        fd_3E1D_AD3B[index] = RandTurn(attribute & 7) | flags;
+        LifeA[x][y] = fd_3E1D_AD3B[index];
         return;
     }
-    tile = fd_3E1D_6180[nx][ny];
+    tile = LifeA[nx][ny];
     if (tile == 0) {
-        fd_3E1D_AD3B[index] = fd_3E1D_6180[nx][ny] = dir | flags;
-        fd_3E1D_6180[x][y] = 0;
+        fd_3E1D_AD3B[index] = LifeA[nx][ny] = dir | flags;
+        LifeA[x][y] = 0;
         fd_3E1D_A180[index] = nx;
         fd_3E1D_A569[index] = ny;
         return;
     }
-    if (f_10F7_003A(tile) == 1) {
+    if (IsYellowAnt(tile) == 1) {
         if ((fd_50F6_04E2 ^ attribute) & 0x80) {
             o25_3BA4_0DFB(1, index);
             return;
         }
-        fd_3E1D_AD3B[index] = f_0894_21C5(attribute & 7) | flags;
-        fd_3E1D_6180[x][y] = fd_3E1D_AD3B[index];
+        fd_3E1D_AD3B[index] = RandTurn(attribute & 7) | flags;
+        LifeA[x][y] = fd_3E1D_AD3B[index];
         return;
     }
     if (((tile ^ attribute) & 0x80) == 0) {
-        fd_3E1D_AD3B[index] = f_0894_21C5(attribute & 7) | flags;
-        fd_3E1D_6180[x][y] = fd_3E1D_AD3B[index];
+        fd_3E1D_AD3B[index] = RandTurn(attribute & 7) | flags;
+        LifeA[x][y] = fd_3E1D_AD3B[index];
         return;
     }
-    f_0894_1D89(index, x, y, nx, ny);
+    StartFightA(index, x, y, nx, ny);
 }
 
 
 extern void far f_1496_0474(int x, int y, int level);
 extern void far f_1496_043C(int x, int y, int level);
 
-void far f_0894_1525(int index)
+void far DoReturnFoodAnt(int index)
 {
     int x;
     int y;
@@ -856,21 +856,21 @@ void far f_0894_1525(int index)
     x = fd_3E1D_A180[index];
     y = fd_3E1D_A569[index];
     attribute = fd_3E1D_AD3B[index];
-    if (f_0894_23BB(x, y)) {
-        f_0894_1C6E(x, y, index);
+    if (IsItHole(x, y)) {
+        GoInNest(x, y, index);
         return;
     }
     flags = attribute & 0xf8;
     ndir = f_1383_0C2A(x, y, attribute & 7, attribute);
-    nx = x + fd_3D57_0000[ndir];
-    ny = y + fd_3D57_0008[ndir];
-    if (fd_3E1D_0180[nx][ny] > fd_50F6_0480) {
-        fd_3E1D_AD3B[index] = f_0894_21C5(attribute & 7) | flags;
-        fd_3E1D_6180[x][y] = fd_3E1D_AD3B[index];
+    nx = x + Dx8[ndir];
+    ny = y + Dy8[ndir];
+    if (MapA[nx][ny] > Barrier) {
+        fd_3E1D_AD3B[index] = RandTurn(attribute & 7) | flags;
+        LifeA[x][y] = fd_3E1D_AD3B[index];
         return;
     }
-    fd_3E1D_AD3B[index] = fd_3E1D_6180[nx][ny] = ndir | flags;
-    fd_3E1D_6180[x][y] = 0;
+    fd_3E1D_AD3B[index] = LifeA[nx][ny] = ndir | flags;
+    LifeA[x][y] = 0;
     fd_3E1D_A180[index] = nx;
     fd_3E1D_A569[index] = ny;
     if (fd_3E1D_B124[index] != 0) {
@@ -882,7 +882,7 @@ void far f_0894_1525(int index)
     }
 }
 
-void far f_0894_16A5(int index)
+void far DoForageAnt(int index)
 {
     int x;
     int y;
@@ -897,8 +897,8 @@ void far f_0894_16A5(int index)
     x = fd_3E1D_A180[index];
     y = fd_3E1D_A569[index];
     attribute = fd_3E1D_AD3B[index];
-    if (f_0894_23BB(x, y)) {
-        f_0894_1C6E(x, y, index);
+    if (IsItHole(x, y)) {
+        GoInNest(x, y, index);
         return;
     }
     if (SRand32() == 0) {
@@ -926,30 +926,30 @@ void far f_0894_16A5(int index)
         f_1496_04AC(x >> 1, y >> 1, attribute & 0x80);
         return;
     }
-    nx = x + fd_3D57_0000[dir];
-    ny = y + fd_3D57_0008[dir];
-    tile = fd_3E1D_0180[nx][ny];
-    if (f_0894_2423(tile) == 1) {
+    nx = x + Dx8[dir];
+    ny = y + Dy8[dir];
+    tile = MapA[nx][ny];
+    if (IsItFood(tile) == 1) {
         fd_3E1D_AD3B[index] = dir | flags | 8;
-        fd_3E1D_6180[x][y] = fd_3E1D_AD3B[index];
+        LifeA[x][y] = fd_3E1D_AD3B[index];
         fd_3E1D_A952[index] = 3;
         f_0BE8_0798(nx, ny);
         fd_3E1D_B124[index] = 200;
         return;
     }
-    if (tile > fd_50F6_0480) {
-        fd_3E1D_AD3B[index] = f_0894_21C5(attribute & 7) | flags;
-        fd_3E1D_6180[x][y] = fd_3E1D_AD3B[index];
+    if (tile > Barrier) {
+        fd_3E1D_AD3B[index] = RandTurn(attribute & 7) | flags;
+        LifeA[x][y] = fd_3E1D_AD3B[index];
         if (SRand16() == 0) {
             fd_3E1D_A952[index] = f_1383_0976(caste, attribute);
             fd_3E1D_B124[index] = 0;
         }
         return;
     }
-    tile = fd_3E1D_6180[nx][ny];
+    tile = LifeA[nx][ny];
     if (tile == 0) {
-        fd_3E1D_AD3B[index] = fd_3E1D_6180[nx][ny] = dir | flags;
-        fd_3E1D_6180[x][y] = 0;
+        fd_3E1D_AD3B[index] = LifeA[nx][ny] = dir | flags;
+        LifeA[x][y] = 0;
         fd_3E1D_A180[index] = nx;
         fd_3E1D_A569[index] = ny;
         if (fd_3E1D_B124[index] != 0) {
@@ -962,29 +962,29 @@ void far f_0894_16A5(int index)
         f_1496_04AC(nx, ny, attribute & 0x80);
         return;
     }
-    if (f_10F7_003A(tile) == 1) {
+    if (IsYellowAnt(tile) == 1) {
         if ((fd_50F6_04E2 ^ attribute) & 0x80) {
             o25_3BA4_0DFB(1, index);
             return;
         }
         if (fd_50F6_1044 == 1) {
             fd_3E1D_AD3B[index] = dir | flags;
-            fd_3E1D_6180[x][y] = fd_3E1D_AD3B[index];
+            LifeA[x][y] = fd_3E1D_AD3B[index];
             o22_39C7_19E5(x, y, dir);
         }
-        fd_3E1D_AD3B[index] = f_0894_21C5(attribute & 7) | flags;
-        fd_3E1D_6180[x][y] = fd_3E1D_AD3B[index];
+        fd_3E1D_AD3B[index] = RandTurn(attribute & 7) | flags;
+        LifeA[x][y] = fd_3E1D_AD3B[index];
         return;
     }
     if (((tile ^ attribute) & 0x80) == 0) {
-        fd_3E1D_AD3B[index] = f_0894_21C5(attribute & 7) | flags;
-        fd_3E1D_6180[x][y] = fd_3E1D_AD3B[index];
+        fd_3E1D_AD3B[index] = RandTurn(attribute & 7) | flags;
+        LifeA[x][y] = fd_3E1D_AD3B[index];
         return;
     }
-    f_0894_1D89(index, x, y, nx, ny);
+    StartFightA(index, x, y, nx, ny);
 }
 
-void far f_0894_1A28(int index)
+void far DoRecruitAnt(int index)
 {
     int x;
     int y;
@@ -998,8 +998,8 @@ void far f_0894_1A28(int index)
     x = fd_3E1D_A180[index];
     y = fd_3E1D_A569[index];
     attribute = fd_3E1D_AD3B[index];
-    if (f_0894_23BB(x, y)) {
-        f_0894_1C6E(x, y, index);
+    if (IsItHole(x, y)) {
+        GoInNest(x, y, index);
         return;
     }
     flags = attribute & 0xf8;
@@ -1009,67 +1009,67 @@ void far f_0894_1A28(int index)
         dir = f_1383_0FCE(x, y, attribute & 7);
     else
         dir = f_1383_0ECC(x, y, attribute & 7);
-    nx = x + fd_3D57_0000[dir];
-    ny = y + fd_3D57_0008[dir];
-    if (fd_3E1D_0180[nx][ny] > fd_50F6_0480) {
+    nx = x + Dx8[dir];
+    ny = y + Dy8[dir];
+    if (MapA[nx][ny] > Barrier) {
         fd_3E1D_AD3B[index] = SRand8() | flags;
-        fd_3E1D_6180[x][y] = fd_3E1D_AD3B[index];
+        LifeA[x][y] = fd_3E1D_AD3B[index];
         return;
     }
-    tile = fd_3E1D_6180[nx][ny];
+    tile = LifeA[nx][ny];
     if (tile == 0) {
-        fd_3E1D_AD3B[index] = fd_3E1D_6180[nx][ny] = dir | flags;
-        fd_3E1D_6180[x][y] = 0;
+        fd_3E1D_AD3B[index] = LifeA[nx][ny] = dir | flags;
+        LifeA[x][y] = 0;
         fd_3E1D_A180[index] = nx;
         fd_3E1D_A569[index] = ny;
         return;
     }
-    if (f_10F7_003A(tile)) {
+    if (IsYellowAnt(tile)) {
         if ((fd_50F6_04E2 ^ attribute) & 0x80) {
             o25_3BA4_0DFB(1, index);
             return;
         }
         if (fd_50F6_1044) {
             fd_3E1D_AD3B[index] = dir | flags;
-            fd_3E1D_6180[x][y] = fd_3E1D_AD3B[index];
+            LifeA[x][y] = fd_3E1D_AD3B[index];
             o22_39C7_19E5(x, y, dir);
         }
-        fd_3E1D_AD3B[index] = f_0894_21C5(attribute & 7) | flags;
-        fd_3E1D_6180[x][y] = fd_3E1D_AD3B[index];
+        fd_3E1D_AD3B[index] = RandTurn(attribute & 7) | flags;
+        LifeA[x][y] = fd_3E1D_AD3B[index];
         return;
     }
     if (((tile ^ attribute) & 0x80) == 0) {
-        fd_3E1D_AD3B[index] = f_0894_21C5(attribute & 7) | flags;
-        fd_3E1D_6180[x][y] = fd_3E1D_AD3B[index];
+        fd_3E1D_AD3B[index] = RandTurn(attribute & 7) | flags;
+        LifeA[x][y] = fd_3E1D_AD3B[index];
         return;
     }
-    f_0894_1D89(index, x, y, nx, ny);
+    StartFightA(index, x, y, nx, ny);
 }
 
-void far f_0894_1C6E(int x, int y, int index)
+void far GoInNest(int x, int y, int index)
 {
     if (x < 0x40) {
         if (fd_50F6_0DA8 >= 500)
             f_0EC1_0081();
         if (fd_50F6_0DA8 >= 500)
             return;
-        f_0EC1_05D4(y, 1, (fd_3E1D_AD3B[index] & 0xf8) + 4, fd_3E1D_A952[index], fd_3E1D_B124[index]);
-        if (fd_3D57_0224[y] != 0)
-            f_14EE_0519(y, 1);
+        AddAntToBList(y, 1, (fd_3E1D_AD3B[index] & 0xf8) + 4, fd_3E1D_A952[index], fd_3E1D_B124[index]);
+        if (HoleMapB[y] != 0)
+            DigTileB(y, 1);
     } else {
         if (fd_50F6_0EAA >= 500)
             f_0EC1_0100();
         if (fd_50F6_0EAA >= 500)
             return;
-        f_0EC1_0651(y, 1, (fd_3E1D_AD3B[index] & 0xf8) + 4, fd_3E1D_A952[index], fd_3E1D_B124[index]);
-        if (fd_3D57_0264[y] != 0)
-            f_14EE_0647(y, 1);
+        AddAntToRList(y, 1, (fd_3E1D_AD3B[index] & 0xf8) + 4, fd_3E1D_A952[index], fd_3E1D_B124[index]);
+        if (HoleMapR[y] != 0)
+            DigTileR(y, 1);
     }
     fd_3E1D_AD3B[index] = 0;
-    fd_3E1D_6180[x][y] = 0;
+    LifeA[x][y] = 0;
 }
 
-void far f_0894_1D89(int ant, int x, int y, int nx, int ny)
+void far StartFightA(int ant, int x, int y, int nx, int ny)
 {
     int loser;
     int type;
@@ -1077,12 +1077,12 @@ void far f_0894_1D89(int ant, int x, int y, int nx, int ny)
 
     type = fd_3E1D_AD3B[ant];
     fd_3E1D_AD3B[ant] = 0;
-    fd_3E1D_6180[x][y] = 0;
+    LifeA[x][y] = 0;
     loser = f_0EC1_0291(nx, ny);
     if (loser >= 0) {
-        winner = f_0894_1E34(fd_3E1D_AD3B[loser], type);
+        winner = GetWinner(fd_3E1D_AD3B[loser], type);
         fd_3E1D_AD3B[loser] = (winner & 0x80) + 0x70;
-        fd_3E1D_6180[nx][ny] = (winner & 0x80) + 0x70;
+        LifeA[nx][ny] = (winner & 0x80) + 0x70;
         fd_3E1D_A952[loser] = 0xa;
         fd_3E1D_B124[loser] = winner;
         f_1496_0395(nx, ny, 0x28);
@@ -1096,7 +1096,7 @@ static unsigned char near combatOdds[16] = {
     5, 2, 7, 3, 8, 5, 9, 4, 3, 1, 5, 2, 7, 6, 8, 5
 };
 
-int far f_0894_1E34(int a, int b)
+int far GetWinner(int a, int b)
 {
     int levelA;
     int levelB;
@@ -1131,7 +1131,7 @@ int far f_0894_1E34(int a, int b)
     return b;
 }
 
-void far f_0894_1F31(int index)
+void far DoFightA(int index)
 {
     int x;
     int y;
@@ -1139,11 +1139,11 @@ void far f_0894_1F31(int index)
     x = fd_3E1D_A180[index];
     y = fd_3E1D_A569[index];
     fd_3E1D_AD3B[index] = (fd_3E1D_AD3B[index] & 0xf8) + SRand1(7);
-    fd_3E1D_6180[x][y] = fd_3E1D_AD3B[index];
+    LifeA[x][y] = fd_3E1D_AD3B[index];
     if (SRand16() == 0) {
-        fd_3E1D_6180[x][y] = fd_3E1D_B124[index];
-        fd_3E1D_AD3B[index] = fd_3E1D_6180[x][y];
-        fd_3E1D_A952[fd_50F6_0F18] = f_1383_0976((fd_3E1D_AD3B[index] & 0x78) >> 3, fd_3E1D_AD3B[index]);
+        LifeA[x][y] = fd_3E1D_B124[index];
+        fd_3E1D_AD3B[index] = LifeA[x][y];
+        fd_3E1D_A952[Tindex] = f_1383_0976((fd_3E1D_AD3B[index] & 0x78) >> 3, fd_3E1D_AD3B[index]);
         fd_3E1D_B124[index] = 0;
         DeadAntHere(x, y, fd_3E1D_AD3B[index] & 0x80);
     } else if (fd_3D57_07B2 == 1)
@@ -1160,40 +1160,40 @@ void far DeadAntHere(int x, int y, int type)
         fd_50F6_0476 = 0;
     oldX = fd_50F6_037C[fd_50F6_0476];
     oldY = fd_50F6_0404[fd_50F6_0476];
-    otile = fd_3E1D_0180[oldX][oldY];
-    if (fd_50F6_0F24 == 0) {
+    otile = MapA[oldX][oldY];
+    if (TERRAINset == 0) {
         if (otile >= 0x10 && otile < 0x18)
-            fd_3E1D_0180[oldX][oldY] = SRand16();
+            MapA[oldX][oldY] = SRand16();
         fd_50F6_037C[fd_50F6_0476] = x;
         fd_50F6_0404[fd_50F6_0476] = y;
-        if (fd_3E1D_0180[x][y] < 0x18) {
+        if (MapA[x][y] < 0x18) {
             if (type != 0)
-                fd_3E1D_0180[x][y] = SRand4() + 0x14;
+                MapA[x][y] = SRand4() + 0x14;
             else
-                fd_3E1D_0180[x][y] = SRand4() + 0x10;
+                MapA[x][y] = SRand4() + 0x10;
         }
     } else {
         if (otile >= 8 && otile < 0x18)
-            fd_3E1D_0180[oldX][oldY] = (otile - 8) >> 2;
+            MapA[oldX][oldY] = (otile - 8) >> 2;
         fd_50F6_037C[fd_50F6_0476] = x;
         fd_50F6_0404[fd_50F6_0476] = y;
-        otile = fd_3E1D_0180[x][y];
+        otile = MapA[x][y];
         if (otile < 4) {
             if (type != 0)
-                fd_3E1D_0180[x][y] = SRand1(2) + otile * 4 + 0xa;
+                MapA[x][y] = SRand1(2) + otile * 4 + 0xa;
             else
-                fd_3E1D_0180[x][y] = SRand1(2) + (otile + 2) * 4;
+                MapA[x][y] = SRand1(2) + (otile + 2) * 4;
         }
     }
-    fd_3E1D_6180[x][y] = 0;
+    LifeA[x][y] = 0;
 }
 
-int far f_0894_21C5(int dir)
+int far RandTurn(int dir)
 {
-    return fd_3D57_0024[dir][SRand8()];
+    return TurnTab[dir][SRand8()];
 }
 
-void far f_0894_21ED(int index)
+void far DoAttackAnt(int index)
 {
     int x;
     int y;
@@ -1208,8 +1208,8 @@ void far f_0894_21ED(int index)
     x = fd_3E1D_A180[index];
     y = fd_3E1D_A569[index];
     attribute = fd_3E1D_AD3B[index];
-    if (f_0894_23BB(x, y)) {
-        f_0894_1C6E(x, y, index);
+    if (IsItHole(x, y)) {
+        GoInNest(x, y, index);
         return;
     }
     caste = (attribute & 0x78) >> 3;
@@ -1217,50 +1217,50 @@ void far f_0894_21ED(int index)
         attribute = (fd_3D57_0094[caste] << 3) | (attribute & 0x87);
     flags = attribute & 0xf8;
     dir = f_1383_0C2A(x, y, attribute & 7, attribute ^ 0x80);
-    nx = x + fd_3D57_0000[dir];
-    ny = y + fd_3D57_0008[dir];
-    if (fd_3E1D_0180[nx][ny] > fd_50F6_0480) {
-        fd_3E1D_AD3B[index] = f_0894_21C5(attribute & 7) | flags;
-        fd_3E1D_6180[x][y] = fd_3E1D_AD3B[index];
+    nx = x + Dx8[dir];
+    ny = y + Dy8[dir];
+    if (MapA[nx][ny] > Barrier) {
+        fd_3E1D_AD3B[index] = RandTurn(attribute & 7) | flags;
+        LifeA[x][y] = fd_3E1D_AD3B[index];
         return;
     }
-    tile = fd_3E1D_6180[nx][ny];
+    tile = LifeA[nx][ny];
     if (tile == 0) {
-        fd_3E1D_AD3B[index] = fd_3E1D_6180[nx][ny] = dir | flags;
-        fd_3E1D_6180[x][y] = 0;
+        fd_3E1D_AD3B[index] = LifeA[nx][ny] = dir | flags;
+        LifeA[x][y] = 0;
         fd_3E1D_A180[index] = nx;
         fd_3E1D_A569[index] = ny;
         return;
     }
-    if (f_10F7_003A(tile) == 1) {
+    if (IsYellowAnt(tile) == 1) {
         if ((fd_50F6_04E2 ^ attribute) & 0x80) {
             o25_3BA4_0DFB(1, index);
             return;
         }
-        fd_3E1D_AD3B[index] = f_0894_21C5(attribute & 7) | flags;
-        fd_3E1D_6180[x][y] = fd_3E1D_AD3B[index];
+        fd_3E1D_AD3B[index] = RandTurn(attribute & 7) | flags;
+        LifeA[x][y] = fd_3E1D_AD3B[index];
         return;
     }
     if (((tile ^ attribute) & 0x80) == 0) {
-        fd_3E1D_AD3B[index] = f_0894_21C5(attribute & 7) | flags;
-        fd_3E1D_6180[x][y] = fd_3E1D_AD3B[index];
+        fd_3E1D_AD3B[index] = RandTurn(attribute & 7) | flags;
+        LifeA[x][y] = fd_3E1D_AD3B[index];
         return;
     }
-    f_0894_1D89(index, x, y, nx, ny);
+    StartFightA(index, x, y, nx, ny);
 }
 
-int far f_0894_23BB(int x, int y)
+int far IsItHole(int x, int y)
 {
     int tile;
 
     if (f_10F7_2867(x, y) == 0)
         return 0;
-    if (fd_50F6_0F24 == 0) {
-        if (fd_3E1D_0180[x][y] == 0x50)
+    if (TERRAINset == 0) {
+        if (MapA[x][y] == 0x50)
             return 1;
         return 0;
     }
-    tile = fd_3E1D_0180[x][y];
+    tile = MapA[x][y];
     if (tile < 0x80)
         return 0;
     if (tile > 0x8f)
@@ -1268,9 +1268,9 @@ int far f_0894_23BB(int x, int y)
     return 1;
 }
 
-int far f_0894_2423(int tile)
+int far IsItFood(int tile)
 {
-    if (fd_50F6_0F24 == 0) {
+    if (TERRAINset == 0) {
         if (tile < 0x48 || tile > 0x4b)
             return 0;
         return 1;

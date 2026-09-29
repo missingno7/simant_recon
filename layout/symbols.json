@@ -1,6 +1,66 @@
 {
  "schema": "simant-symbols-v1",
  "code": {
+  "AddAntToAList": {
+   "unit": "root",
+   "seg": 3777,
+   "off": 1367,
+   "grounding": "inventory:far_call",
+   "history": [
+    {
+     "was": "f_0EC1_0557",
+     "why": "worker ovl08: Win16 RandWorld unit member / call-site evidence (report 2026-09-30)"
+    }
+   ]
+  },
+  "AddAntToBList": {
+   "unit": "root",
+   "seg": 3777,
+   "off": 1492,
+   "grounding": "inventory:far_call",
+   "history": [
+    {
+     "was": "f_0EC1_05D4",
+     "why": "worker ovl08: Win16 RandWorld unit member / call-site evidence (report 2026-09-30)"
+    }
+   ]
+  },
+  "AddAntToList": {
+   "unit": "root",
+   "seg": 4343,
+   "off": 1357,
+   "grounding": "inventory:push_cs_call",
+   "history": [
+    {
+     "was": "f_10F7_054D",
+     "why": "worker sim10F7: Win16 counterpart body matched while recovering the byte-exact DOS function"
+    }
+   ]
+  },
+  "AddAntToRList": {
+   "unit": "root",
+   "seg": 3777,
+   "off": 1617,
+   "grounding": "inventory:far_call",
+   "history": [
+    {
+     "was": "f_0EC1_0651",
+     "why": "worker ovl08: Win16 RandWorld unit member / call-site evidence (report 2026-09-30)"
+    }
+   ]
+  },
+  "AddBlackAnts": {
+   "unit": "S08",
+   "seg": 13813,
+   "off": 4224,
+   "grounding": "inventory:vector",
+   "history": [
+    {
+     "was": "o08_35F5_1080",
+     "why": "worker ovl08: Win16 RandWorld unit member / call-site evidence (report 2026-09-30)"
+    }
+   ]
+  },
   "AddFood": {
    "unit": "S08",
    "seg": 13813,
@@ -10,6 +70,30 @@
     {
      "was": "o08_35F5_0ED5",
      "why": "xver HIGH neighbourhood-v1: 5 anchored neighbours agree: callee:SRand1, callee:SRand128, callee:SRand256, callee:SRand64, callee:SRand8; size ratio 0.83"
+    }
+   ]
+  },
+  "AddRedAnts": {
+   "unit": "S08",
+   "seg": 13813,
+   "off": 4406,
+   "grounding": "inventory:vector",
+   "history": [
+    {
+     "was": "o08_35F5_1136",
+     "why": "worker ovl08: Win16 RandWorld unit member / call-site evidence (report 2026-09-30)"
+    }
+   ]
+  },
+  "AddWater": {
+   "unit": "root",
+   "seg": 3048,
+   "off": 1618,
+   "grounding": "inventory:push_cs_call",
+   "history": [
+    {
+     "was": "f_0BE8_0652",
+     "why": "dig worker: DOS body byte-exact and structurally identical to the Win16 function of this name (same statements, same data), plus module neighbourhood"
     }
    ]
   },
@@ -25,6 +109,18 @@
     }
    ]
   },
+  "CanBeHouseHole": {
+   "unit": "root",
+   "seg": 5358,
+   "off": 791,
+   "grounding": "inventory:push_cs_call",
+   "history": [
+    {
+     "was": "f_14EE_0317",
+     "why": "dig worker: DOS body byte-exact and structurally identical to the Win16 function of this name (same statements, same data), plus module neighbourhood"
+    }
+   ]
+  },
   "CheatKeys": {
    "unit": "S07",
    "seg": 13813,
@@ -34,6 +130,78 @@
     {
      "was": "o07_35F5_0000",
      "why": "xver HIGH features-v1: constant 0x2724; constant 0x2726; constant 0x2728"
+    }
+   ]
+  },
+  "CheckNestFightR": {
+   "unit": "root",
+   "seg": 3903,
+   "off": 2294,
+   "grounding": "inventory:push_cs_call",
+   "history": [
+    {
+     "was": "f_0F3F_08F6",
+     "why": "Win16 MAPSYM member list of the matching unit aligns 1:1 in order and count with the DOS module (already-named members fall at their positions); bodies near-identical (worker simA)"
+    }
+   ]
+  },
+  "ClearMyLife": {
+   "unit": "root",
+   "seg": 4343,
+   "off": 2472,
+   "grounding": "inventory:far_call,push_cs_call",
+   "history": [
+    {
+     "was": "f_10F7_09A8",
+     "why": "worker sim10F7: Win16 counterpart body matched while recovering the byte-exact DOS function"
+    }
+   ]
+  },
+  "CloseDB": {
+   "unit": "root",
+   "seg": 6696,
+   "off": 329,
+   "grounding": "inventory:far_call",
+   "history": [
+    {
+     "was": "f_1A28_0149",
+     "why": "db worker: Win16 db/ch/DB unit member with matching diagnostics and body (report 2026-09-30)"
+    }
+   ]
+  },
+  "CloseIndex": {
+   "unit": "root",
+   "seg": 6534,
+   "off": 245,
+   "grounding": "inventory:far_call",
+   "history": [
+    {
+     "was": "f_1986_00F5",
+     "why": "db worker: Win16 db/ch/DB unit member with matching diagnostics and body (report 2026-09-30)"
+    }
+   ]
+  },
+  "ClrArrays": {
+   "unit": "S08",
+   "seg": 13813,
+   "off": 4672,
+   "grounding": "inventory:push_cs_call",
+   "history": [
+    {
+     "was": "o08_35F5_1240",
+     "why": "worker ovl08: Win16 RandWorld unit member / call-site evidence (report 2026-09-30)"
+    }
+   ]
+  },
+  "ClrModePop": {
+   "unit": "root",
+   "seg": 2196,
+   "off": 411,
+   "grounding": "inventory:push_cs_call",
+   "history": [
+    {
+     "was": "f_0894_019B",
+     "why": "Win16 MAPSYM member list of the matching unit aligns 1:1 in order and count with the DOS module (already-named members fall at their positions); bodies near-identical (worker simA)"
     }
    ]
   },
@@ -49,6 +217,90 @@
     }
    ]
   },
+  "CountUpdate": {
+   "unit": "root",
+   "seg": 3048,
+   "off": 927,
+   "grounding": "inventory:push_cs_call",
+   "history": [
+    {
+     "was": "f_0BE8_039F",
+     "why": "dig worker: DOS body byte-exact and structurally identical to the Win16 function of this name (same statements, same data), plus module neighbourhood"
+    }
+   ]
+  },
+  "CreateIndex": {
+   "unit": "root",
+   "seg": 6534,
+   "off": 244,
+   "grounding": "inventory:far_call",
+   "history": [
+    {
+     "was": "f_1986_00F4",
+     "why": "db worker: Win16 db/ch/DB unit member with matching diagnostics and body (report 2026-09-30)"
+    }
+   ]
+  },
+  "CreateNewHole": {
+   "unit": "root",
+   "seg": 5358,
+   "off": 121,
+   "grounding": "inventory:push_cs_call",
+   "history": [
+    {
+     "was": "f_14EE_0079",
+     "why": "dig worker: DOS body byte-exact and structurally identical to the Win16 function of this name (same statements, same data), plus module neighbourhood"
+    }
+   ]
+  },
+  "DBAdd": {
+   "unit": "root",
+   "seg": 6569,
+   "off": 784,
+   "grounding": "inventory:far_call",
+   "history": [
+    {
+     "was": "f_19A9_0310",
+     "why": "db worker: Win16 db/ch/DB unit member with matching diagnostics and body (report 2026-09-30)"
+    }
+   ]
+  },
+  "DBDelete": {
+   "unit": "root",
+   "seg": 6569,
+   "off": 797,
+   "grounding": "inventory:far_call",
+   "history": [
+    {
+     "was": "f_19A9_031D",
+     "why": "db worker: Win16 db/ch/DB unit member with matching diagnostics and body (report 2026-09-30)"
+    }
+   ]
+  },
+  "DBPack": {
+   "unit": "root",
+   "seg": 6569,
+   "off": 810,
+   "grounding": "reviewed: unreferenced frameless stub after f_19A9_031D: Punt(\"Attempt to ... during a READ-ONLY run\" @3875); third read-only DB stub, ends 0337 (odd, LINK fill)",
+   "history": [
+    {
+     "was": "f_19A9_032A",
+     "why": "db worker: Win16 db/ch/DB unit member with matching diagnostics and body (report 2026-09-30)"
+    }
+   ]
+  },
+  "DBRecall": {
+   "unit": "root",
+   "seg": 6569,
+   "off": 29,
+   "grounding": "inventory:far_call",
+   "history": [
+    {
+     "was": "f_19A9_001D",
+     "why": "db worker: Win16 db/ch/DB unit member with matching diagnostics and body (report 2026-09-30)"
+    }
+   ]
+  },
   "DeadAntHere": {
    "unit": "root",
    "seg": 2196,
@@ -61,6 +313,30 @@
     }
    ]
   },
+  "DecEatR": {
+   "unit": "root",
+   "seg": 3903,
+   "off": 5180,
+   "grounding": "inventory:far_call,push_cs_call",
+   "history": [
+    {
+     "was": "f_0F3F_143C",
+     "why": "Win16 MAPSYM member list of the matching unit aligns 1:1 in order and count with the DOS module (already-named members fall at their positions); bodies near-identical (worker simA)"
+    }
+   ]
+  },
+  "DigMyNewHole": {
+   "unit": "root",
+   "seg": 5358,
+   "off": 2,
+   "grounding": "inventory:far_call",
+   "history": [
+    {
+     "was": "f_14EE_0002",
+     "why": "dig worker: DOS body byte-exact and structurally identical to the Win16 function of this name (same statements, same data), plus module neighbourhood"
+    }
+   ]
+  },
   "DigOutBNest": {
    "unit": "S08",
    "seg": 13813,
@@ -70,6 +346,42 @@
     {
      "was": "o08_35F5_0846",
      "why": "xver HIGH neighbourhood-v1: 4 anchored neighbours agree: callee:SRand1, callee:f_14EE_01D0, callee:f_14EE_0519, caller:o08_35F5_0050; size ratio 1.01"
+    }
+   ]
+  },
+  "DigOutRNest": {
+   "unit": "S08",
+   "seg": 13813,
+   "off": 2339,
+   "grounding": "inventory:push_cs_call",
+   "history": [
+    {
+     "was": "o08_35F5_0923",
+     "why": "worker ovl08: Win16 RandWorld unit member / call-site evidence (report 2026-09-30)"
+    }
+   ]
+  },
+  "DigTileB": {
+   "unit": "root",
+   "seg": 5358,
+   "off": 1305,
+   "grounding": "inventory:far_call,push_cs_call",
+   "history": [
+    {
+     "was": "f_14EE_0519",
+     "why": "dig worker: DOS body byte-exact and structurally identical to the Win16 function of this name (same statements, same data), plus module neighbourhood"
+    }
+   ]
+  },
+  "DigTileR": {
+   "unit": "root",
+   "seg": 5358,
+   "off": 1607,
+   "grounding": "inventory:far_call,push_cs_call",
+   "history": [
+    {
+     "was": "f_14EE_0647",
+     "why": "dig worker: DOS body byte-exact and structurally identical to the Win16 function of this name (same statements, same data), plus module neighbourhood"
     }
    ]
   },
@@ -121,6 +433,42 @@
     }
    ]
   },
+  "DoAntSim": {
+   "unit": "root",
+   "seg": 2196,
+   "off": 14,
+   "grounding": "inventory:far_call",
+   "history": [
+    {
+     "was": "f_0894_000E",
+     "why": "Win16 MAPSYM member list of the matching unit aligns 1:1 in order and count with the DOS module (already-named members fall at their positions); bodies near-identical (worker simA)"
+    }
+   ]
+  },
+  "DoAntSimA": {
+   "unit": "root",
+   "seg": 2196,
+   "off": 843,
+   "grounding": "inventory:push_cs_call",
+   "history": [
+    {
+     "was": "f_0894_034B",
+     "why": "Win16 MAPSYM member list of the matching unit aligns 1:1 in order and count with the DOS module (already-named members fall at their positions); bodies near-identical (worker simA)"
+    }
+   ]
+  },
+  "DoAntSimR": {
+   "unit": "root",
+   "seg": 3903,
+   "off": 8,
+   "grounding": "inventory:far_call",
+   "history": [
+    {
+     "was": "f_0F3F_0008",
+     "why": "Win16 MAPSYM member list of the matching unit aligns 1:1 in order and count with the DOS module (already-named members fall at their positions); bodies near-identical (worker simA)"
+    }
+   ]
+  },
   "DoAntSimY": {
    "unit": "S25",
    "seg": 15268,
@@ -130,6 +478,30 @@
     {
      "was": "o25_3BA4_07CE",
      "why": "xver HIGH neighbourhood-v1: 4 anchored neighbours agree: callee:SRand128, callee:f_10F7_0A44, callee:f_10F7_1DD3, callee:o22_39C7_0D21; size ratio 1.31"
+    }
+   ]
+  },
+  "DoAttackAnt": {
+   "unit": "root",
+   "seg": 2196,
+   "off": 8685,
+   "grounding": "inventory:push_cs_call",
+   "history": [
+    {
+     "was": "f_0894_21ED",
+     "why": "Win16 MAPSYM member list of the matching unit aligns 1:1 in order and count with the DOS module (already-named members fall at their positions); bodies near-identical (worker simA)"
+    }
+   ]
+  },
+  "DoDefendNest": {
+   "unit": "root",
+   "seg": 2196,
+   "off": 2401,
+   "grounding": "inventory:push_cs_call",
+   "history": [
+    {
+     "was": "f_0894_0961",
+     "why": "Win16 MAPSYM member list of the matching unit aligns 1:1 in order and count with the DOS module (already-named members fall at their positions); bodies near-identical (worker simA)"
     }
    ]
   },
@@ -157,6 +529,18 @@
     }
    ]
   },
+  "DoDigOutAntA": {
+   "unit": "root",
+   "seg": 2196,
+   "off": 3726,
+   "grounding": "inventory:push_cs_call",
+   "history": [
+    {
+     "was": "f_0894_0E8E",
+     "why": "Win16 MAPSYM member list of the matching unit aligns 1:1 in order and count with the DOS module (already-named members fall at their positions); bodies near-identical (worker simA)"
+    }
+   ]
+  },
   "DoDigOutB": {
    "unit": "S25",
    "seg": 14791,
@@ -166,6 +550,54 @@
     {
      "was": "o25_39C7_19CC",
      "why": "xver HIGH neighbourhood-v1: 4 anchored neighbours agree: callee:SRand64, callee:f_0BE8_0BEE, callee:f_10F7_003A, callee:o25_39C7_1C81; size ratio 0.72"
+    }
+   ]
+  },
+  "DoDigOutR": {
+   "unit": "root",
+   "seg": 3903,
+   "off": 6251,
+   "grounding": "inventory:push_cs_call",
+   "history": [
+    {
+     "was": "f_0F3F_186B",
+     "why": "Win16 MAPSYM member list of the matching unit aligns 1:1 in order and count with the DOS module (already-named members fall at their positions); bodies near-identical (worker simA)"
+    }
+   ]
+  },
+  "DoDrownR": {
+   "unit": "root",
+   "seg": 3903,
+   "off": 1690,
+   "grounding": "inventory:push_cs_call",
+   "history": [
+    {
+     "was": "f_0F3F_069A",
+     "why": "Win16 MAPSYM member list of the matching unit aligns 1:1 in order and count with the DOS module (already-named members fall at their positions); bodies near-identical (worker simA)"
+    }
+   ]
+  },
+  "DoEditAndMapUpdateDraw": {
+   "unit": "root",
+   "seg": 4343,
+   "off": 2880,
+   "grounding": "inventory:far_call",
+   "history": [
+    {
+     "was": "f_10F7_0B40",
+     "why": "worker sim10F7: Win16 counterpart body matched while recovering the byte-exact DOS function"
+    }
+   ]
+  },
+  "DoFightA": {
+   "unit": "root",
+   "seg": 2196,
+   "off": 7985,
+   "grounding": "inventory:push_cs_call",
+   "history": [
+    {
+     "was": "f_0894_1F31",
+     "why": "Win16 MAPSYM member list of the matching unit aligns 1:1 in order and count with the DOS module (already-named members fall at their positions); bodies near-identical (worker simA)"
     }
    ]
   },
@@ -181,6 +613,78 @@
     }
    ]
   },
+  "DoFoodInR": {
+   "unit": "root",
+   "seg": 3903,
+   "off": 5236,
+   "grounding": "inventory:push_cs_call",
+   "history": [
+    {
+     "was": "f_0F3F_1474",
+     "why": "Win16 MAPSYM member list of the matching unit aligns 1:1 in order and count with the DOS module (already-named members fall at their positions); bodies near-identical (worker simA)"
+    }
+   ]
+  },
+  "DoForageAnt": {
+   "unit": "root",
+   "seg": 2196,
+   "off": 5797,
+   "grounding": "inventory:push_cs_call",
+   "history": [
+    {
+     "was": "f_0894_16A5",
+     "why": "Win16 MAPSYM member list of the matching unit aligns 1:1 in order and count with the DOS module (already-named members fall at their positions); bodies near-identical (worker simA)"
+    }
+   ]
+  },
+  "DoLifeExchange": {
+   "unit": "root",
+   "seg": 4343,
+   "off": 3240,
+   "grounding": "inventory:push_cs_call",
+   "history": [
+    {
+     "was": "f_10F7_0CA8",
+     "why": "worker sim10F7: Win16 counterpart body matched while recovering the byte-exact DOS function"
+    }
+   ]
+  },
+  "DoMapUpdateDraw": {
+   "unit": "root",
+   "seg": 4343,
+   "off": 2872,
+   "grounding": "inventory:push_cs_call",
+   "history": [
+    {
+     "was": "f_10F7_0B38",
+     "why": "worker sim10F7: Win16 counterpart body matched while recovering the byte-exact DOS function"
+    }
+   ]
+  },
+  "DoNestAntR": {
+   "unit": "root",
+   "seg": 3903,
+   "off": 117,
+   "grounding": "inventory:push_cs_call",
+   "history": [
+    {
+     "was": "f_0F3F_0075",
+     "why": "Win16 MAPSYM member list of the matching unit aligns 1:1 in order and count with the DOS module (already-named members fall at their positions); bodies near-identical (worker simA)"
+    }
+   ]
+  },
+  "DoNestFightR": {
+   "unit": "root",
+   "seg": 3903,
+   "off": 2029,
+   "grounding": "inventory:push_cs_call",
+   "history": [
+    {
+     "was": "f_0F3F_07ED",
+     "why": "Win16 MAPSYM member list of the matching unit aligns 1:1 in order and count with the DOS module (already-named members fall at their positions); bodies near-identical (worker simA)"
+    }
+   ]
+  },
   "DoNestingB": {
    "unit": "S25",
    "seg": 14791,
@@ -190,6 +694,174 @@
     {
      "was": "o25_39C7_118E",
      "why": "xver HIGH neighbourhood-v1: 5 anchored neighbours agree: callee:SRand1, callee:SRand16, callee:SRand8, callee:f_0BE8_0D67, callee:f_1383_099B; size ratio 0.76"
+    }
+   ]
+  },
+  "DoNestingR": {
+   "unit": "root",
+   "seg": 3903,
+   "off": 4257,
+   "grounding": "inventory:push_cs_call",
+   "history": [
+    {
+     "was": "f_0F3F_10A1",
+     "why": "Win16 MAPSYM member list of the matching unit aligns 1:1 in order and count with the DOS module (already-named members fall at their positions); bodies near-identical (worker simA)"
+    }
+   ]
+  },
+  "DoRandAntA": {
+   "unit": "root",
+   "seg": 2196,
+   "off": 2548,
+   "grounding": "inventory:push_cs_call",
+   "history": [
+    {
+     "was": "f_0894_09F4",
+     "why": "Win16 MAPSYM member list of the matching unit aligns 1:1 in order and count with the DOS module (already-named members fall at their positions); bodies near-identical (worker simA)"
+    }
+   ]
+  },
+  "DoRandAntAA": {
+   "unit": "root",
+   "seg": 2196,
+   "off": 3325,
+   "grounding": "inventory:push_cs_call",
+   "history": [
+    {
+     "was": "f_0894_0CFD",
+     "why": "Win16 MAPSYM member list of the matching unit aligns 1:1 in order and count with the DOS module (already-named members fall at their positions); bodies near-identical (worker simA)"
+    }
+   ]
+  },
+  "DoRandR": {
+   "unit": "root",
+   "seg": 3903,
+   "off": 1921,
+   "grounding": "inventory:push_cs_call",
+   "history": [
+    {
+     "was": "f_0F3F_0781",
+     "why": "Win16 MAPSYM member list of the matching unit aligns 1:1 in order and count with the DOS module (already-named members fall at their positions); bodies near-identical (worker simA)"
+    }
+   ]
+  },
+  "DoRecruitAnt": {
+   "unit": "root",
+   "seg": 2196,
+   "off": 6696,
+   "grounding": "inventory:push_cs_call",
+   "history": [
+    {
+     "was": "f_0894_1A28",
+     "why": "Win16 MAPSYM member list of the matching unit aligns 1:1 in order and count with the DOS module (already-named members fall at their positions); bodies near-identical (worker simA)"
+    }
+   ]
+  },
+  "DoRepoExit": {
+   "unit": "root",
+   "seg": 2196,
+   "off": 1971,
+   "grounding": "inventory:push_cs_call",
+   "history": [
+    {
+     "was": "f_0894_07B3",
+     "why": "Win16 MAPSYM member list of the matching unit aligns 1:1 in order and count with the DOS module (already-named members fall at their positions); bodies near-identical (worker simA)"
+    }
+   ]
+  },
+  "DoRepoFly": {
+   "unit": "root",
+   "seg": 2196,
+   "off": 2194,
+   "grounding": "inventory:push_cs_call",
+   "history": [
+    {
+     "was": "f_0894_0892",
+     "why": "Win16 MAPSYM member list of the matching unit aligns 1:1 in order and count with the DOS module (already-named members fall at their positions); bodies near-identical (worker simA)"
+    }
+   ]
+  },
+  "DoRepoLoit": {
+   "unit": "root",
+   "seg": 2196,
+   "off": 1873,
+   "grounding": "inventory:push_cs_call",
+   "history": [
+    {
+     "was": "f_0894_0751",
+     "why": "Win16 MAPSYM member list of the matching unit aligns 1:1 in order and count with the DOS module (already-named members fall at their positions); bodies near-identical (worker simA)"
+    }
+   ]
+  },
+  "DoRestAnt": {
+   "unit": "root",
+   "seg": 2196,
+   "off": 1752,
+   "grounding": "inventory:push_cs_call",
+   "history": [
+    {
+     "was": "f_0894_06D8",
+     "why": "Win16 MAPSYM member list of the matching unit aligns 1:1 in order and count with the DOS module (already-named members fall at their positions); bodies near-identical (worker simA)"
+    }
+   ]
+  },
+  "DoRestR": {
+   "unit": "root",
+   "seg": 3903,
+   "off": 1518,
+   "grounding": "inventory:push_cs_call",
+   "history": [
+    {
+     "was": "f_0F3F_05EE",
+     "why": "Win16 MAPSYM member list of the matching unit aligns 1:1 in order and count with the DOS module (already-named members fall at their positions); bodies near-identical (worker simA)"
+    }
+   ]
+  },
+  "DoReturnFoodAnt": {
+   "unit": "root",
+   "seg": 2196,
+   "off": 5413,
+   "grounding": "inventory:push_cs_call",
+   "history": [
+    {
+     "was": "f_0894_1525",
+     "why": "Win16 MAPSYM member list of the matching unit aligns 1:1 in order and count with the DOS module (already-named members fall at their positions); bodies near-identical (worker simA)"
+    }
+   ]
+  },
+  "DoSmells": {
+   "unit": "root",
+   "seg": 2196,
+   "off": 312,
+   "grounding": "inventory:push_cs_call",
+   "history": [
+    {
+     "was": "f_0894_0138",
+     "why": "Win16 MAPSYM member list of the matching unit aligns 1:1 in order and count with the DOS module (already-named members fall at their positions); bodies near-identical (worker simA)"
+    }
+   ]
+  },
+  "DoToAlarm": {
+   "unit": "root",
+   "seg": 2196,
+   "off": 4885,
+   "grounding": "inventory:push_cs_call",
+   "history": [
+    {
+     "was": "f_0894_1315",
+     "why": "Win16 MAPSYM member list of the matching unit aligns 1:1 in order and count with the DOS module (already-named members fall at their positions); bodies near-identical (worker simA)"
+    }
+   ]
+  },
+  "DoToNestAnt": {
+   "unit": "root",
+   "seg": 2196,
+   "off": 4231,
+   "grounding": "inventory:push_cs_call",
+   "history": [
+    {
+     "was": "f_0894_1087",
+     "why": "Win16 MAPSYM member list of the matching unit aligns 1:1 in order and count with the DOS module (already-named members fall at their positions); bodies near-identical (worker simA)"
     }
    ]
   },
@@ -229,6 +901,102 @@
     }
    ]
   },
+  "DropFoodR": {
+   "unit": "root",
+   "seg": 3903,
+   "off": 2480,
+   "grounding": "inventory:push_cs_call",
+   "history": [
+    {
+     "was": "f_0F3F_09B0",
+     "why": "Win16 MAPSYM member list of the matching unit aligns 1:1 in order and count with the DOS module (already-named members fall at their positions); bodies near-identical (worker simA)"
+    }
+   ]
+  },
+  "DropMyEgg": {
+   "unit": "root",
+   "seg": 4343,
+   "off": 6320,
+   "grounding": "inventory:push_cs_call",
+   "history": [
+    {
+     "was": "f_10F7_18B0",
+     "why": "worker sim10F7: Win16 counterpart body matched while recovering the byte-exact DOS function"
+    }
+   ]
+  },
+  "DropMyFood": {
+   "unit": "root",
+   "seg": 4343,
+   "off": 5014,
+   "grounding": "inventory:push_cs_call",
+   "history": [
+    {
+     "was": "f_10F7_1396",
+     "why": "worker sim10F7: Win16 counterpart body matched while recovering the byte-exact DOS function"
+    }
+   ]
+  },
+  "DropMyObject": {
+   "unit": "root",
+   "seg": 4343,
+   "off": 8716,
+   "grounding": "inventory:far_call,push_cs_call",
+   "history": [
+    {
+     "was": "f_10F7_220C",
+     "why": "worker sim10F7: Win16 counterpart body matched while recovering the byte-exact DOS function"
+    }
+   ]
+  },
+  "DropMyRock": {
+   "unit": "root",
+   "seg": 4343,
+   "off": 5782,
+   "grounding": "inventory:push_cs_call",
+   "history": [
+    {
+     "was": "f_10F7_1696",
+     "why": "worker sim10F7: Win16 counterpart body matched while recovering the byte-exact DOS function"
+    }
+   ]
+  },
+  "DropWater": {
+   "unit": "root",
+   "seg": 3048,
+   "off": 1774,
+   "grounding": "inventory:push_cs_call",
+   "history": [
+    {
+     "was": "f_0BE8_06EE",
+     "why": "dig worker: DOS body byte-exact and structurally identical to the Win16 function of this name (same statements, same data), plus module neighbourhood"
+    }
+   ]
+  },
+  "EatFoodR": {
+   "unit": "root",
+   "seg": 3903,
+   "off": 4912,
+   "grounding": "inventory:push_cs_call",
+   "history": [
+    {
+     "was": "f_0F3F_1330",
+     "why": "Win16 MAPSYM member list of the matching unit aligns 1:1 in order and count with the DOS module (already-named members fall at their positions); bodies near-identical (worker simA)"
+    }
+   ]
+  },
+  "EatMyFood": {
+   "unit": "root",
+   "seg": 4343,
+   "off": 7793,
+   "grounding": "inventory:far_call,push_cs_call",
+   "history": [
+    {
+     "was": "f_10F7_1E71",
+     "why": "worker sim10F7: Win16 counterpart body matched while recovering the byte-exact DOS function"
+    }
+   ]
+  },
   "EditToolsMenu": {
    "unit": "S05",
    "seg": 13813,
@@ -238,6 +1006,42 @@
     {
      "was": "o05_35F5_0064",
      "why": "xver HIGH features-v1: constant 0x117; constant 0xa00; constant 0xb00"
+    }
+   ]
+  },
+  "EndLifeTransferMode": {
+   "unit": "root",
+   "seg": 4343,
+   "off": 3055,
+   "grounding": "inventory:far_call,push_cs_call",
+   "history": [
+    {
+     "was": "f_10F7_0BEF",
+     "why": "worker sim10F7: Win16 counterpart body matched while recovering the byte-exact DOS function"
+    }
+   ]
+  },
+  "EndTargetMode": {
+   "unit": "root",
+   "seg": 4343,
+   "off": 2959,
+   "grounding": "inventory:far_call,push_cs_call",
+   "history": [
+    {
+     "was": "f_10F7_0B8F",
+     "why": "worker sim10F7: Win16 counterpart body matched while recovering the byte-exact DOS function"
+    }
+   ]
+  },
+  "ExchangeLives": {
+   "unit": "root",
+   "seg": 4343,
+   "off": 3089,
+   "grounding": "inventory:far_call",
+   "history": [
+    {
+     "was": "f_10F7_0C11",
+     "why": "worker sim10F7: Win16 counterpart body matched while recovering the byte-exact DOS function"
     }
    ]
   },
@@ -253,6 +1057,66 @@
     }
    ]
   },
+  "FeedAnts": {
+   "unit": "root",
+   "seg": 2196,
+   "off": 722,
+   "grounding": "inventory:push_cs_call",
+   "history": [
+    {
+     "was": "f_0894_02D2",
+     "why": "Win16 MAPSYM member list of the matching unit aligns 1:1 in order and count with the DOS module (already-named members fall at their positions); bodies near-identical (worker simA)"
+    }
+   ]
+  },
+  "FindAntIndex": {
+   "unit": "root",
+   "seg": 4343,
+   "off": 951,
+   "grounding": "inventory:far_call,push_cs_call",
+   "history": [
+    {
+     "was": "f_10F7_03B7",
+     "why": "worker sim10F7: Win16 counterpart body matched while recovering the byte-exact DOS function"
+    }
+   ]
+  },
+  "FindEggAt": {
+   "unit": "root",
+   "seg": 4343,
+   "off": 7300,
+   "grounding": "inventory:push_cs_call",
+   "history": [
+    {
+     "was": "f_10F7_1C84",
+     "why": "worker sim10F7: Win16 counterpart body matched while recovering the byte-exact DOS function"
+    }
+   ]
+  },
+  "FindIndex": {
+   "unit": "root",
+   "seg": 6534,
+   "off": 298,
+   "grounding": "inventory:far_call",
+   "history": [
+    {
+     "was": "f_1986_012A",
+     "why": "db worker: Win16 db/ch/DB unit member with matching diagnostics and body (report 2026-09-30)"
+    }
+   ]
+  },
+  "FindLifeIndex": {
+   "unit": "root",
+   "seg": 4343,
+   "off": 726,
+   "grounding": "inventory:push_cs_call",
+   "history": [
+    {
+     "was": "f_10F7_02D6",
+     "why": "worker sim10F7: Win16 counterpart body matched while recovering the byte-exact DOS function"
+    }
+   ]
+  },
   "FootFall": {
    "unit": "S06",
    "seg": 13813,
@@ -262,6 +1126,18 @@
     {
      "was": "o06_35F5_1BB3",
      "why": "xver HIGH neighbourhood-v1: 4 anchored neighbours agree: callee:f_0894_2021, callee:f_10F7_003A, callee:o22_39C7_0D21, caller:o06_35F5_0A90; size ratio 0.92"
+    }
+   ]
+  },
+  "FullCount": {
+   "unit": "root",
+   "seg": 3048,
+   "off": 911,
+   "grounding": "inventory:far_call",
+   "history": [
+    {
+     "was": "f_0BE8_038F",
+     "why": "dig worker: DOS body byte-exact and structurally identical to the Win16 function of this name (same statements, same data), plus module neighbourhood"
     }
    ]
   },
@@ -277,6 +1153,90 @@
     }
    ]
   },
+  "GenerateTutorial": {
+   "unit": "S08",
+   "seg": 13813,
+   "off": 1986,
+   "grounding": "reviewed: unreferenced function between RandYard (ends 07C2) and DigOutBNest (0846): gap holds a complete stack-checked BP-frame function; it loads CONST 85E6/85E8 (YMapPopB/R), whose CONST order places it after RandYard; Win16 GenerateTutorial sits at this position in the RandWorld unit",
+   "history": [
+    {
+     "was": "o08_35F5_07C2",
+     "why": "worker ovl08: Win16 RandWorld unit member / call-site evidence (report 2026-09-30)"
+    }
+   ]
+  },
+  "GetAntIndex": {
+   "unit": "root",
+   "seg": 4343,
+   "off": 93,
+   "grounding": "inventory:far_call,push_cs_call",
+   "history": [
+    {
+     "was": "f_10F7_005D",
+     "why": "worker sim10F7: Win16 counterpart body matched while recovering the byte-exact DOS function"
+    }
+   ]
+  },
+  "GetDir": {
+   "unit": "root",
+   "seg": 3048,
+   "off": 2849,
+   "grounding": "inventory:far_call",
+   "history": [
+    {
+     "was": "f_0BE8_0B21",
+     "why": "dig worker: DOS body byte-exact and structurally identical to the Win16 function of this name (same statements, same data), plus module neighbourhood"
+    }
+   ]
+  },
+  "GetDis": {
+   "unit": "root",
+   "seg": 3048,
+   "off": 2947,
+   "grounding": "inventory:far_call",
+   "history": [
+    {
+     "was": "f_0BE8_0B83",
+     "why": "dig worker: DOS body byte-exact and structurally identical to the Win16 function of this name (same statements, same data), plus module neighbourhood"
+    }
+   ]
+  },
+  "GetExitDirB": {
+   "unit": "root",
+   "seg": 3048,
+   "off": 3087,
+   "grounding": "inventory:far_call",
+   "history": [
+    {
+     "was": "f_0BE8_0C0F",
+     "why": "dig worker: DOS body byte-exact and structurally identical to the Win16 function of this name (same statements, same data), plus module neighbourhood"
+    }
+   ]
+  },
+  "GetExitDirR": {
+   "unit": "root",
+   "seg": 3048,
+   "off": 3259,
+   "grounding": "inventory:far_call",
+   "history": [
+    {
+     "was": "f_0BE8_0CBB",
+     "why": "dig worker: DOS body byte-exact and structurally identical to the Win16 function of this name (same statements, same data), plus module neighbourhood"
+    }
+   ]
+  },
+  "GetLife": {
+   "unit": "root",
+   "seg": 4343,
+   "off": 1991,
+   "grounding": "inventory:far_call,push_cs_call",
+   "history": [
+    {
+     "was": "f_10F7_07C7",
+     "why": "worker sim10F7: Win16 counterpart body matched while recovering the byte-exact DOS function"
+    }
+   ]
+  },
   "GetMap": {
    "unit": "root",
    "seg": 4343,
@@ -286,6 +1246,18 @@
     {
      "was": "f_10F7_0850",
      "why": "xver HIGH neighbourhood-v1: 4 anchored neighbours agree: caller:f_0AD9_03D3, caller:o22_39C7_0000, caller:o25_3BA4_0008, caller:o25_3BA4_07CE; size ratio 0.83"
+    }
+   ]
+  },
+  "GetOutR": {
+   "unit": "root",
+   "seg": 3903,
+   "off": 6711,
+   "grounding": "inventory:push_cs_call",
+   "history": [
+    {
+     "was": "f_0F3F_1A37",
+     "why": "Win16 MAPSYM member list of the matching unit aligns 1:1 in order and count with the DOS module (already-named members fall at their positions); bodies near-identical (worker simA)"
     }
    ]
   },
@@ -301,6 +1273,30 @@
     }
    ]
   },
+  "GetWinner": {
+   "unit": "root",
+   "seg": 2196,
+   "off": 7732,
+   "grounding": "inventory:far_call,push_cs_call",
+   "history": [
+    {
+     "was": "f_0894_1E34",
+     "why": "Win16 MAPSYM member list of the matching unit aligns 1:1 in order and count with the DOS module (already-named members fall at their positions); bodies near-identical (worker simA)"
+    }
+   ]
+  },
+  "GoInNest": {
+   "unit": "root",
+   "seg": 2196,
+   "off": 7278,
+   "grounding": "inventory:push_cs_call",
+   "history": [
+    {
+     "was": "f_0894_1C6E",
+     "why": "Win16 MAPSYM member list of the matching unit aligns 1:1 in order and count with the DOS module (already-named members fall at their positions); bodies near-identical (worker simA)"
+    }
+   ]
+  },
   "IBMInitStuff": {
    "unit": "S20",
    "seg": 14833,
@@ -310,6 +1306,90 @@
     {
      "was": "o20_39F1_000A",
      "why": "xver HIGH features-v1: runtime exit,getcwd,getenv,isdigit,stricmp; string \"cannot load menu\"; string \"language\""
+    }
+   ]
+  },
+  "InNestBounds": {
+   "unit": "root",
+   "seg": 3048,
+   "off": 3009,
+   "grounding": "inventory:far_call,push_cs_call",
+   "history": [
+    {
+     "was": "f_0BE8_0BC1",
+     "why": "dig worker: DOS body byte-exact and structurally identical to the Win16 function of this name (same statements, same data), plus module neighbourhood"
+    }
+   ]
+  },
+  "InitSimVars": {
+   "unit": "S08",
+   "seg": 13813,
+   "off": 0,
+   "grounding": "inventory:vector",
+   "history": [
+    {
+     "was": "o08_35F5_0000",
+     "why": "worker ovl08: Win16 RandWorld unit member / call-site evidence (report 2026-09-30)"
+    }
+   ]
+  },
+  "InitWater": {
+   "unit": "root",
+   "seg": 3048,
+   "off": 1594,
+   "grounding": "inventory:far_call",
+   "history": [
+    {
+     "was": "f_0BE8_063A",
+     "why": "dig worker: DOS body byte-exact and structurally identical to the Win16 function of this name (same statements, same data), plus module neighbourhood"
+    }
+   ]
+  },
+  "InitYelloAnt": {
+   "unit": "S08",
+   "seg": 13813,
+   "off": 2560,
+   "grounding": "inventory:push_cs_call,vector",
+   "history": [
+    {
+     "was": "o08_35F5_0A00",
+     "why": "worker ovl08: Win16 RandWorld unit member / call-site evidence (report 2026-09-30)"
+    }
+   ]
+  },
+  "IsClear3x3": {
+   "unit": "root",
+   "seg": 4343,
+   "off": 1166,
+   "grounding": "inventory:far_call",
+   "history": [
+    {
+     "was": "f_10F7_048E",
+     "why": "worker sim10F7: Win16 counterpart body matched while recovering the byte-exact DOS function"
+    }
+   ]
+  },
+  "IsClearTile": {
+   "unit": "root",
+   "seg": 4343,
+   "off": 1260,
+   "grounding": "inventory:far_call,push_cs_call",
+   "history": [
+    {
+     "was": "f_10F7_04EC",
+     "why": "worker sim10F7: Win16 counterpart body matched while recovering the byte-exact DOS function"
+    }
+   ]
+  },
+  "IsItDigable": {
+   "unit": "root",
+   "seg": 4343,
+   "off": 9454,
+   "grounding": "inventory:far_call,push_cs_call",
+   "history": [
+    {
+     "was": "f_10F7_24EE",
+     "why": "worker sim10F7: Win16 counterpart body matched while recovering the byte-exact DOS function"
     }
    ]
   },
@@ -325,6 +1405,138 @@
     }
    ]
   },
+  "IsItFood": {
+   "unit": "root",
+   "seg": 2196,
+   "off": 9251,
+   "grounding": "inventory:far_call,push_cs_call",
+   "history": [
+    {
+     "was": "f_0894_2423",
+     "why": "Win16 MAPSYM member list of the matching unit aligns 1:1 in order and count with the DOS module (already-named members fall at their positions); bodies near-identical (worker simA)"
+    }
+   ]
+  },
+  "IsItHole": {
+   "unit": "root",
+   "seg": 2196,
+   "off": 9147,
+   "grounding": "inventory:far_call,push_cs_call",
+   "history": [
+    {
+     "was": "f_0894_23BB",
+     "why": "Win16 MAPSYM member list of the matching unit aligns 1:1 in order and count with the DOS module (already-named members fall at their positions); bodies near-identical (worker simA)"
+    }
+   ]
+  },
+  "IsItNFood": {
+   "unit": "root",
+   "seg": 4343,
+   "off": 1894,
+   "grounding": "inventory:push_cs_call",
+   "history": [
+    {
+     "was": "f_10F7_0766",
+     "why": "worker sim10F7: Win16 counterpart body matched while recovering the byte-exact DOS function"
+    }
+   ]
+  },
+  "IsLessThanHole": {
+   "unit": "root",
+   "seg": 4343,
+   "off": 9747,
+   "grounding": "reviewed: prologue scan in unreached gap; descent ends in a return; no references found (unreferenced or indirect)",
+   "history": [
+    {
+     "was": "f_10F7_2613",
+     "why": "worker sim10F7: Win16 counterpart body matched while recovering the byte-exact DOS function"
+    }
+   ]
+  },
+  "IsLiftable": {
+   "unit": "root",
+   "seg": 4343,
+   "off": 9838,
+   "grounding": "inventory:far_call",
+   "history": [
+    {
+     "was": "f_10F7_266E",
+     "why": "worker sim10F7: Win16 counterpart body matched while recovering the byte-exact DOS function"
+    }
+   ]
+  },
+  "IsNotBarrier": {
+   "unit": "root",
+   "seg": 4343,
+   "off": 9308,
+   "grounding": "inventory:push_cs_call",
+   "history": [
+    {
+     "was": "f_10F7_245C",
+     "why": "worker sim10F7: Win16 counterpart body matched while recovering the byte-exact DOS function"
+    }
+   ]
+  },
+  "IsThisEgg": {
+   "unit": "root",
+   "seg": 4343,
+   "off": 1727,
+   "grounding": "inventory:push_cs_call",
+   "history": [
+    {
+     "was": "f_10F7_06BF",
+     "why": "worker sim10F7: Win16 counterpart body matched while recovering the byte-exact DOS function"
+    }
+   ]
+  },
+  "IsThisFood": {
+   "unit": "root",
+   "seg": 4343,
+   "off": 1803,
+   "grounding": "inventory:far_call,push_cs_call",
+   "history": [
+    {
+     "was": "f_10F7_070B",
+     "why": "worker sim10F7: Win16 counterpart body matched while recovering the byte-exact DOS function"
+    }
+   ]
+  },
+  "IsThisGrass": {
+   "unit": "root",
+   "seg": 4343,
+   "off": 1764,
+   "grounding": "inventory:far_call,push_cs_call",
+   "history": [
+    {
+     "was": "f_10F7_06E4",
+     "why": "worker sim10F7: Win16 counterpart body matched while recovering the byte-exact DOS function"
+    }
+   ]
+  },
+  "IsYellowAnt": {
+   "unit": "root",
+   "seg": 4343,
+   "off": 58,
+   "grounding": "inventory:far_call,push_cs_call",
+   "history": [
+    {
+     "was": "f_10F7_003A",
+     "why": "worker sim10F7: Win16 counterpart body matched while recovering the byte-exact DOS function"
+    }
+   ]
+  },
+  "KillTailR": {
+   "unit": "root",
+   "seg": 3903,
+   "off": 3742,
+   "grounding": "inventory:push_cs_call",
+   "history": [
+    {
+     "was": "f_0F3F_0E9E",
+     "why": "Win16 MAPSYM member list of the matching unit aligns 1:1 in order and count with the DOS module (already-named members fall at their positions); bodies near-identical (worker simA)"
+    }
+   ]
+  },
   "LoadMonoPats": {
    "unit": "S15",
    "seg": 14412,
@@ -334,6 +1546,54 @@
     {
      "was": "o15_384C_0017",
      "why": "xver HIGH features-v1: constant 0x2710; constant 0x271a; string \"cannot load monochrome patterns.\""
+    }
+   ]
+  },
+  "LostHeadA": {
+   "unit": "root",
+   "seg": 2196,
+   "off": 1649,
+   "grounding": "inventory:push_cs_call",
+   "history": [
+    {
+     "was": "f_0894_0671",
+     "why": "Win16 MAPSYM member list of the matching unit aligns 1:1 in order and count with the DOS module (already-named members fall at their positions); bodies near-identical (worker simA)"
+    }
+   ]
+  },
+  "LostHeadR": {
+   "unit": "root",
+   "seg": 3903,
+   "off": 3812,
+   "grounding": "inventory:push_cs_call",
+   "history": [
+    {
+     "was": "f_0F3F_0EE4",
+     "why": "Win16 MAPSYM member list of the matching unit aligns 1:1 in order and count with the DOS module (already-named members fall at their positions); bodies near-identical (worker simA)"
+    }
+   ]
+  },
+  "LostTailR": {
+   "unit": "root",
+   "seg": 3903,
+   "off": 3925,
+   "grounding": "inventory:push_cs_call",
+   "history": [
+    {
+     "was": "f_0F3F_0F55",
+     "why": "Win16 MAPSYM member list of the matching unit aligns 1:1 in order and count with the DOS module (already-named members fall at their positions); bodies near-identical (worker simA)"
+    }
+   ]
+  },
+  "MakeBlkQueen": {
+   "unit": "S08",
+   "seg": 13813,
+   "off": 3148,
+   "grounding": "inventory:push_cs_call,vector",
+   "history": [
+    {
+     "was": "o08_35F5_0C4C",
+     "why": "worker ovl08: Win16 RandWorld unit member / call-site evidence (report 2026-09-30)"
     }
    ]
   },
@@ -349,6 +1609,42 @@
     }
    ]
   },
+  "MakeNewHoleR": {
+   "unit": "root",
+   "seg": 5358,
+   "off": 871,
+   "grounding": "inventory:far_call,push_cs_call",
+   "history": [
+    {
+     "was": "f_14EE_0367",
+     "why": "dig worker: DOS body byte-exact and structurally identical to the Win16 function of this name (same statements, same data), plus module neighbourhood"
+    }
+   ]
+  },
+  "MakeNewTailR": {
+   "unit": "root",
+   "seg": 3903,
+   "off": 3632,
+   "grounding": "inventory:push_cs_call",
+   "history": [
+    {
+     "was": "f_0F3F_0E30",
+     "why": "Win16 MAPSYM member list of the matching unit aligns 1:1 in order and count with the DOS module (already-named members fall at their positions); bodies near-identical (worker simA)"
+    }
+   ]
+  },
+  "MakeRedQueen": {
+   "unit": "S08",
+   "seg": 13813,
+   "off": 3488,
+   "grounding": "inventory:push_cs_call,vector",
+   "history": [
+    {
+     "was": "o08_35F5_0DA0",
+     "why": "worker ovl08: Win16 RandWorld unit member / call-site evidence (report 2026-09-30)"
+    }
+   ]
+  },
   "Mini_DrawMapI": {
    "unit": "S04",
    "seg": 13813,
@@ -358,6 +1654,18 @@
     {
      "was": "o04_35F5_04DE",
      "why": "xver HIGH features-v1: constant 0x1401; string \"generated map window\"; string \"map window image\""
+    }
+   ]
+  },
+  "MoveMyLife": {
+   "unit": "root",
+   "seg": 4343,
+   "off": 2766,
+   "grounding": "inventory:far_call,push_cs_call",
+   "history": [
+    {
+     "was": "f_10F7_0ACE",
+     "why": "worker sim10F7: Win16 counterpart body matched while recovering the byte-exact DOS function"
     }
    ]
   },
@@ -385,6 +1693,54 @@
     }
    ]
   },
+  "PickupMyEgg": {
+   "unit": "root",
+   "seg": 4343,
+   "off": 8159,
+   "grounding": "inventory:push_cs_call",
+   "history": [
+    {
+     "was": "f_10F7_1FDF",
+     "why": "worker sim10F7: Win16 counterpart body matched while recovering the byte-exact DOS function"
+    }
+   ]
+  },
+  "PickupMyFood": {
+   "unit": "root",
+   "seg": 4343,
+   "off": 8383,
+   "grounding": "inventory:push_cs_call",
+   "history": [
+    {
+     "was": "f_10F7_20BF",
+     "why": "worker sim10F7: Win16 counterpart body matched while recovering the byte-exact DOS function"
+    }
+   ]
+  },
+  "PickupMyObject": {
+   "unit": "root",
+   "seg": 4343,
+   "off": 8826,
+   "grounding": "inventory:push_cs_call",
+   "history": [
+    {
+     "was": "f_10F7_227A",
+     "why": "worker sim10F7: Win16 counterpart body matched while recovering the byte-exact DOS function"
+    }
+   ]
+  },
+  "PickupMyRock": {
+   "unit": "root",
+   "seg": 4343,
+   "off": 6830,
+   "grounding": "inventory:push_cs_call",
+   "history": [
+    {
+     "was": "f_10F7_1AAE",
+     "why": "worker sim10F7: Win16 counterpart body matched while recovering the byte-exact DOS function"
+    }
+   ]
+  },
   "PlaceBlackQueen": {
    "unit": "S08",
    "seg": 13813,
@@ -394,6 +1750,54 @@
     {
      "was": "o08_35F5_0B8C",
      "why": "xver HIGH neighbourhood-v1: 4 anchored neighbours agree: callee:SRand1, callee:SRand2, callee:SRand4, caller:o08_35F5_0050; size ratio 0.58"
+    }
+   ]
+  },
+  "PlaceDrop": {
+   "unit": "root",
+   "seg": 3048,
+   "off": 1364,
+   "grounding": "inventory:push_cs_call",
+   "history": [
+    {
+     "was": "f_0BE8_0554",
+     "why": "dig worker: DOS body byte-exact and structurally identical to the Win16 function of this name (same statements, same data), plus module neighbourhood"
+    }
+   ]
+  },
+  "PlaceEggB": {
+   "unit": "root",
+   "seg": 3048,
+   "off": 2651,
+   "grounding": "inventory:far_call",
+   "history": [
+    {
+     "was": "f_0BE8_0A5B",
+     "why": "dig worker: DOS body byte-exact and structurally identical to the Win16 function of this name (same statements, same data), plus module neighbourhood"
+    }
+   ]
+  },
+  "PlaceEggR": {
+   "unit": "root",
+   "seg": 3048,
+   "off": 2750,
+   "grounding": "inventory:far_call",
+   "history": [
+    {
+     "was": "f_0BE8_0ABE",
+     "why": "dig worker: DOS body byte-exact and structurally identical to the Win16 function of this name (same statements, same data), plus module neighbourhood"
+    }
+   ]
+  },
+  "PlaceRedQueen": {
+   "unit": "S08",
+   "seg": 13813,
+   "off": 3346,
+   "grounding": "inventory:push_cs_call",
+   "history": [
+    {
+     "was": "o08_35F5_0D12",
+     "why": "worker ovl08: Win16 RandWorld unit member / call-site evidence (report 2026-09-30)"
     }
    ]
   },
@@ -409,6 +1813,30 @@
     }
    ]
   },
+  "QueenMoveR": {
+   "unit": "root",
+   "seg": 3903,
+   "off": 3355,
+   "grounding": "inventory:push_cs_call",
+   "history": [
+    {
+     "was": "f_0F3F_0D1B",
+     "why": "Win16 MAPSYM member list of the matching unit aligns 1:1 in order and count with the DOS module (already-named members fall at their positions); bodies near-identical (worker simA)"
+    }
+   ]
+  },
+  "RIsItDirt": {
+   "unit": "root",
+   "seg": 5358,
+   "off": 2867,
+   "grounding": "inventory:push_cs_call",
+   "history": [
+    {
+     "was": "f_14EE_0B33",
+     "why": "dig worker: DOS body byte-exact and structurally identical to the Win16 function of this name (same statements, same data), plus module neighbourhood"
+    }
+   ]
+  },
   "RRand": {
    "unit": "root",
    "seg": 147,
@@ -418,6 +1846,78 @@
     {
      "was": "f_0093_0118",
      "why": "xver CONFIRMED (evidence/cross_version/decisions.json: RNG translation unit)"
+    }
+   ]
+  },
+  "RaidInR": {
+   "unit": "root",
+   "seg": 3903,
+   "off": 944,
+   "grounding": "inventory:push_cs_call",
+   "history": [
+    {
+     "was": "f_0F3F_03B0",
+     "why": "Win16 MAPSYM member list of the matching unit aligns 1:1 in order and count with the DOS module (already-named members fall at their positions); bodies near-identical (worker simA)"
+    }
+   ]
+  },
+  "RaidOutR": {
+   "unit": "root",
+   "seg": 3903,
+   "off": 1385,
+   "grounding": "inventory:push_cs_call",
+   "history": [
+    {
+     "was": "f_0F3F_0569",
+     "why": "Win16 MAPSYM member list of the matching unit aligns 1:1 in order and count with the DOS module (already-named members fall at their positions); bodies near-identical (worker simA)"
+    }
+   ]
+  },
+  "RandTurn": {
+   "unit": "root",
+   "seg": 2196,
+   "off": 8645,
+   "grounding": "inventory:far_call,push_cs_call",
+   "history": [
+    {
+     "was": "f_0894_21C5",
+     "why": "Win16 MAPSYM member list of the matching unit aligns 1:1 in order and count with the DOS module (already-named members fall at their positions); bodies near-identical (worker simA)"
+    }
+   ]
+  },
+  "RandWorld": {
+   "unit": "S08",
+   "seg": 13813,
+   "off": 80,
+   "grounding": "inventory:push_cs_call,vector",
+   "history": [
+    {
+     "was": "o08_35F5_0050",
+     "why": "worker ovl08: Win16 RandWorld unit member / call-site evidence (report 2026-09-30)"
+    }
+   ]
+  },
+  "RandYard": {
+   "unit": "S08",
+   "seg": 13813,
+   "off": 1435,
+   "grounding": "inventory:vector",
+   "history": [
+    {
+     "was": "o08_35F5_059B",
+     "why": "worker ovl08: Win16 RandWorld unit member / call-site evidence (report 2026-09-30)"
+    }
+   ]
+  },
+  "SGRand": {
+   "unit": "root",
+   "seg": 147,
+   "off": 43,
+   "grounding": "inventory:far_call",
+   "history": [
+    {
+     "was": "f_0093_002B",
+     "why": "worker ovl08: Win16 RandWorld unit member / call-site evidence (report 2026-09-30)"
     }
    ]
   },
@@ -553,6 +2053,66 @@
     }
    ]
   },
+  "SetAntIndex": {
+   "unit": "root",
+   "seg": 4343,
+   "off": 433,
+   "grounding": "inventory:far_call,push_cs_call",
+   "history": [
+    {
+     "was": "f_10F7_01B1",
+     "why": "worker sim10F7: Win16 counterpart body matched while recovering the byte-exact DOS function"
+    }
+   ]
+  },
+  "SetLife": {
+   "unit": "root",
+   "seg": 4343,
+   "off": 1534,
+   "grounding": "inventory:far_call,push_cs_call",
+   "history": [
+    {
+     "was": "f_10F7_05FE",
+     "why": "worker sim10F7: Win16 counterpart body matched while recovering the byte-exact DOS function"
+    }
+   ]
+  },
+  "SetMap": {
+   "unit": "root",
+   "seg": 4343,
+   "off": 2254,
+   "grounding": "inventory:far_call,push_cs_call",
+   "history": [
+    {
+     "was": "f_10F7_08CE",
+     "why": "worker sim10F7: Win16 counterpart body matched while recovering the byte-exact DOS function"
+    }
+   ]
+  },
+  "SetMyHealth": {
+   "unit": "root",
+   "seg": 4343,
+   "off": 7635,
+   "grounding": "inventory:far_call,push_cs_call",
+   "history": [
+    {
+     "was": "f_10F7_1DD3",
+     "why": "worker sim10F7: Win16 counterpart body matched while recovering the byte-exact DOS function"
+    }
+   ]
+  },
+  "SetMyLife": {
+   "unit": "root",
+   "seg": 4343,
+   "off": 2628,
+   "grounding": "inventory:far_call,push_cs_call",
+   "history": [
+    {
+     "was": "f_10F7_0A44",
+     "why": "worker sim10F7: Win16 counterpart body matched while recovering the byte-exact DOS function"
+    }
+   ]
+  },
   "SetRRandSeed": {
    "unit": "root",
    "seg": 147,
@@ -589,6 +2149,30 @@
     }
    ]
   },
+  "SimEggA": {
+   "unit": "root",
+   "seg": 2196,
+   "off": 1394,
+   "grounding": "inventory:push_cs_call",
+   "history": [
+    {
+     "was": "f_0894_0572",
+     "why": "Win16 MAPSYM member list of the matching unit aligns 1:1 in order and count with the DOS module (already-named members fall at their positions); bodies near-identical (worker simA)"
+    }
+   ]
+  },
+  "SimEggR": {
+   "unit": "root",
+   "seg": 3903,
+   "off": 2598,
+   "grounding": "inventory:push_cs_call",
+   "history": [
+    {
+     "was": "f_0F3F_0A26",
+     "why": "Win16 MAPSYM member list of the matching unit aligns 1:1 in order and count with the DOS module (already-named members fall at their positions); bodies near-identical (worker simA)"
+    }
+   ]
+  },
   "SimKidInside": {
    "unit": "S06",
    "seg": 13813,
@@ -598,6 +2182,30 @@
     {
      "was": "o06_35F5_0A90",
      "why": "xver HIGH neighbourhood-v1: 4 anchored neighbours agree: callee:SRand1, callee:SRand128, callee:SRand4, callee:SRand64; size ratio 0.93"
+    }
+   ]
+  },
+  "SimQueenA": {
+   "unit": "root",
+   "seg": 2196,
+   "off": 1518,
+   "grounding": "inventory:push_cs_call",
+   "history": [
+    {
+     "was": "f_0894_05EE",
+     "why": "Win16 MAPSYM member list of the matching unit aligns 1:1 in order and count with the DOS module (already-named members fall at their positions); bodies near-identical (worker simA)"
+    }
+   ]
+  },
+  "SimQueenR": {
+   "unit": "root",
+   "seg": 3903,
+   "off": 2847,
+   "grounding": "inventory:push_cs_call",
+   "history": [
+    {
+     "was": "f_0F3F_0B1F",
+     "why": "Win16 MAPSYM member list of the matching unit aligns 1:1 in order and count with the DOS module (already-named members fall at their positions); bodies near-identical (worker simA)"
     }
    ]
   },
@@ -613,6 +2221,54 @@
     }
    ]
   },
+  "StartFightA": {
+   "unit": "root",
+   "seg": 2196,
+   "off": 7561,
+   "grounding": "inventory:push_cs_call",
+   "history": [
+    {
+     "was": "f_0894_1D89",
+     "why": "Win16 MAPSYM member list of the matching unit aligns 1:1 in order and count with the DOS module (already-named members fall at their positions); bodies near-identical (worker simA)"
+    }
+   ]
+  },
+  "StayInR": {
+   "unit": "root",
+   "seg": 3903,
+   "off": 1153,
+   "grounding": "inventory:push_cs_call",
+   "history": [
+    {
+     "was": "f_0F3F_0481",
+     "why": "Win16 MAPSYM member list of the matching unit aligns 1:1 in order and count with the DOS module (already-named members fall at their positions); bodies near-identical (worker simA)"
+    }
+   ]
+  },
+  "StealFoodR": {
+   "unit": "root",
+   "seg": 3903,
+   "off": 5079,
+   "grounding": "inventory:push_cs_call",
+   "history": [
+    {
+     "was": "f_0F3F_13D7",
+     "why": "Win16 MAPSYM member list of the matching unit aligns 1:1 in order and count with the DOS module (already-named members fall at their positions); bodies near-identical (worker simA)"
+    }
+   ]
+  },
+  "TallyModePop": {
+   "unit": "root",
+   "seg": 2196,
+   "off": 485,
+   "grounding": "inventory:push_cs_call",
+   "history": [
+    {
+     "was": "f_0894_01E5",
+     "why": "Win16 MAPSYM member list of the matching unit aligns 1:1 in order and count with the DOS module (already-named members fall at their positions); bodies near-identical (worker simA)"
+    }
+   ]
+  },
   "TickCount": {
    "unit": "root",
    "seg": 7027,
@@ -625,6 +2281,42 @@
     }
    ]
   },
+  "TryAntTheme": {
+   "unit": "root",
+   "seg": 3048,
+   "off": 3767,
+   "grounding": "inventory:far_call",
+   "history": [
+    {
+     "was": "f_0BE8_0EB7",
+     "why": "dig worker: DOS body byte-exact and structurally identical to the Win16 function of this name (same statements, same data), plus module neighbourhood"
+    }
+   ]
+  },
+  "TryEatFoodR": {
+   "unit": "root",
+   "seg": 3903,
+   "off": 4727,
+   "grounding": "inventory:push_cs_call",
+   "history": [
+    {
+     "was": "f_0F3F_1277",
+     "why": "Win16 MAPSYM member list of the matching unit aligns 1:1 in order and count with the DOS module (already-named members fall at their positions); bodies near-identical (worker simA)"
+    }
+   ]
+  },
+  "TryMoveDirR": {
+   "unit": "root",
+   "seg": 3903,
+   "off": 4041,
+   "grounding": "inventory:push_cs_call",
+   "history": [
+    {
+     "was": "f_0F3F_0FC9",
+     "why": "Win16 MAPSYM member list of the matching unit aligns 1:1 in order and count with the DOS module (already-named members fall at their positions); bodies near-identical (worker simA)"
+    }
+   ]
+  },
   "WinPrintf": {
    "unit": "root",
    "seg": 10109,
@@ -634,6 +2326,150 @@
     {
      "was": "f_277D_000A",
      "why": "xver HIGH: 8 anchored callers agree with Win16 _WinPrintf callers; body is compiled-out debug formatter (evidence/cross_version/decisions.json)"
+    }
+   ]
+  },
+  "ch_AddEntry": {
+   "unit": "root",
+   "seg": 6806,
+   "off": 846,
+   "grounding": "inventory:far_call",
+   "history": [
+    {
+     "was": "f_1A96_034E",
+     "why": "db worker: Win16 db/ch/DB unit member with matching diagnostics and body (report 2026-09-30)"
+    }
+   ]
+  },
+  "ch_CleanupTable": {
+   "unit": "root",
+   "seg": 6806,
+   "off": 1155,
+   "grounding": "inventory:push_cs_call",
+   "history": [
+    {
+     "was": "f_1A96_0483",
+     "why": "db worker: Win16 db/ch/DB unit member with matching diagnostics and body (report 2026-09-30)"
+    }
+   ]
+  },
+  "ch_CreateTable": {
+   "unit": "root",
+   "seg": 6806,
+   "off": 12,
+   "grounding": "inventory:far_call",
+   "history": [
+    {
+     "was": "f_1A96_000C",
+     "why": "db worker: Win16 db/ch/DB unit member with matching diagnostics and body (report 2026-09-30)"
+    }
+   ]
+  },
+  "ch_DeleteEntry": {
+   "unit": "root",
+   "seg": 6806,
+   "off": 1057,
+   "grounding": "inventory:far_call",
+   "history": [
+    {
+     "was": "f_1A96_0421",
+     "why": "db worker: Win16 db/ch/DB unit member with matching diagnostics and body (report 2026-09-30)"
+    }
+   ]
+  },
+  "ch_DumpOldest": {
+   "unit": "root",
+   "seg": 6806,
+   "off": 1330,
+   "grounding": "inventory:push_cs_call",
+   "history": [
+    {
+     "was": "f_1A96_0532",
+     "why": "db worker: Win16 db/ch/DB unit member with matching diagnostics and body (report 2026-09-30)"
+    }
+   ]
+  },
+  "ch_GetPrime": {
+   "unit": "root",
+   "seg": 6806,
+   "off": 1629,
+   "grounding": "inventory:push_cs_call",
+   "history": [
+    {
+     "was": "f_1A96_065D",
+     "why": "db worker: Win16 db/ch/DB unit member with matching diagnostics and body (report 2026-09-30)"
+    }
+   ]
+  },
+  "ch_LookUpHandle": {
+   "unit": "root",
+   "seg": 6806,
+   "off": 345,
+   "grounding": "inventory:far_call",
+   "history": [
+    {
+     "was": "f_1A96_0159",
+     "why": "db worker: Win16 db/ch/DB unit member with matching diagnostics and body (report 2026-09-30)"
+    }
+   ]
+  },
+  "ch_LookUpId": {
+   "unit": "root",
+   "seg": 6806,
+   "off": 492,
+   "grounding": "inventory:far_call,push_cs_call",
+   "history": [
+    {
+     "was": "f_1A96_01EC",
+     "why": "db worker: Win16 db/ch/DB unit member with matching diagnostics and body (report 2026-09-30)"
+    }
+   ]
+  },
+  "ch_PurgeCache": {
+   "unit": "root",
+   "seg": 6806,
+   "off": 238,
+   "grounding": "inventory:far_call",
+   "history": [
+    {
+     "was": "f_1A96_00EE",
+     "why": "db worker: Win16 db/ch/DB unit member with matching diagnostics and body (report 2026-09-30)"
+    }
+   ]
+  },
+  "ch_RemoveEntry": {
+   "unit": "root",
+   "seg": 6806,
+   "off": 140,
+   "grounding": "inventory:far_call",
+   "history": [
+    {
+     "was": "f_1A96_008C",
+     "why": "db worker: Win16 db/ch/DB unit member with matching diagnostics and body (report 2026-09-30)"
+    }
+   ]
+  },
+  "ch_SetCacheHooks": {
+   "unit": "root",
+   "seg": 6806,
+   "off": 1753,
+   "grounding": "inventory:far_call",
+   "history": [
+    {
+     "was": "f_1A96_06D9",
+     "why": "db worker: Win16 db/ch/DB unit member with matching diagnostics and body (report 2026-09-30)"
+    }
+   ]
+  },
+  "db_CloseDataBase": {
+   "unit": "root",
+   "seg": 6739,
+   "off": 892,
+   "grounding": "reviewed: unreferenced frameless /Gs function between f_1A53_034F (ends 037C) and f_1A53_03B6: dec db_numOfHandles loop calling 1A28:0149, 1A96:00EE, clears db_cacheTable; Win16 db_CloseDataBase semantics",
+   "history": [
+    {
+     "was": "f_1A53_037C",
+     "why": "db worker: Win16 db/ch/DB unit member with matching diagnostics and body (report 2026-09-30)"
     }
    ]
   },
@@ -665,6 +2501,18 @@
     }
    ]
   },
+  "db_PurgeHandle": {
+   "unit": "root",
+   "seg": 6739,
+   "off": 607,
+   "grounding": "inventory:far_call",
+   "history": [
+    {
+     "was": "f_1A53_025F",
+     "why": "db worker: Win16 db/ch/DB unit member with matching diagnostics and body (report 2026-09-30)"
+    }
+   ]
+  },
   "db_PurgeObject": {
    "unit": "root",
    "seg": 6739,
@@ -677,6 +2525,54 @@
     }
    ]
   },
+  "db_ReleaseHandle": {
+   "unit": "root",
+   "seg": 6739,
+   "off": 725,
+   "grounding": "inventory:far_call",
+   "history": [
+    {
+     "was": "f_1A53_02D5",
+     "why": "db worker: Win16 db/ch/DB unit member with matching diagnostics and body (report 2026-09-30)"
+    }
+   ]
+  },
+  "db_ReleaseObject": {
+   "unit": "root",
+   "seg": 6739,
+   "off": 747,
+   "grounding": "inventory:far_call",
+   "history": [
+    {
+     "was": "f_1A53_02EB",
+     "why": "db worker: Win16 db/ch/DB unit member with matching diagnostics and body (report 2026-09-30)"
+    }
+   ]
+  },
+  "db_ReplaceObject": {
+   "unit": "root",
+   "seg": 6739,
+   "off": 950,
+   "grounding": "reviewed: prologue scan in unreached gap; descent ends in a return; no references found (unreferenced or indirect)",
+   "history": [
+    {
+     "was": "f_1A53_03B6",
+     "why": "db worker: Win16 db/ch/DB unit member with matching diagnostics and body (report 2026-09-30)"
+    }
+   ]
+  },
+  "db_SaveObject": {
+   "unit": "root",
+   "seg": 6739,
+   "off": 1028,
+   "grounding": "reviewed: prologue scan in unreached gap; descent ends in a return; no references found (unreferenced or indirect)",
+   "history": [
+    {
+     "was": "f_1A53_0404",
+     "why": "db worker: Win16 db/ch/DB unit member with matching diagnostics and body (report 2026-09-30)"
+    }
+   ]
+  },
   "db_SetDataBase": {
    "unit": "root",
    "seg": 6739,
@@ -686,6 +2582,18 @@
     {
      "was": "f_1A53_0042",
      "why": "Win16 _db_SetDataBase: shared diagnostic 'Cannot open database %s', same OpenDB/handles/cache-table logic, second member of the same unit"
+    }
+   ]
+  },
+  "db_UnhookObject": {
+   "unit": "root",
+   "seg": 6739,
+   "off": 847,
+   "grounding": "inventory:far_call",
+   "history": [
+    {
+     "was": "f_1A53_034F",
+     "why": "db worker: Win16 db/ch/DB unit member with matching diagnostics and body (report 2026-09-30)"
     }
    ]
   },
@@ -789,7 +2697,7 @@
    "unit": "root",
    "seg": 147,
    "off": 43,
-   "grounding": "inventory:far_call"
+   "alias_of": "SGRand"
   },
   "f_0093_0054": {
    "unit": "root",
@@ -861,7 +2769,7 @@
    "unit": "root",
    "seg": 223,
    "off": 232,
-   "grounding": "inventory:far_call,push_cs_call"
+   "alias_of": "myBeginSound"
   },
   "f_00DF_0112": {
    "unit": "root",
@@ -1659,181 +3567,181 @@
    "unit": "root",
    "seg": 2196,
    "off": 14,
-   "grounding": "inventory:far_call"
+   "alias_of": "DoAntSim"
   },
   "f_0894_0138": {
    "unit": "root",
    "seg": 2196,
    "off": 312,
-   "grounding": "inventory:push_cs_call"
+   "alias_of": "DoSmells"
   },
   "f_0894_019B": {
    "unit": "root",
    "seg": 2196,
    "off": 411,
-   "grounding": "inventory:push_cs_call"
+   "alias_of": "ClrModePop"
   },
   "f_0894_01E5": {
    "unit": "root",
    "seg": 2196,
    "off": 485,
-   "grounding": "inventory:push_cs_call"
+   "alias_of": "TallyModePop"
   },
   "f_0894_02D2": {
    "unit": "root",
    "seg": 2196,
    "off": 722,
-   "grounding": "inventory:push_cs_call"
+   "alias_of": "FeedAnts"
   },
   "f_0894_034B": {
    "unit": "root",
    "seg": 2196,
    "off": 843,
-   "grounding": "inventory:push_cs_call"
+   "alias_of": "DoAntSimA"
   },
   "f_0894_0572": {
    "unit": "root",
    "seg": 2196,
    "off": 1394,
-   "grounding": "inventory:push_cs_call"
+   "alias_of": "SimEggA"
   },
   "f_0894_05EE": {
    "unit": "root",
    "seg": 2196,
    "off": 1518,
-   "grounding": "inventory:push_cs_call"
+   "alias_of": "SimQueenA"
   },
   "f_0894_0671": {
    "unit": "root",
    "seg": 2196,
    "off": 1649,
-   "grounding": "inventory:push_cs_call"
+   "alias_of": "LostHeadA"
   },
   "f_0894_06D8": {
    "unit": "root",
    "seg": 2196,
    "off": 1752,
-   "grounding": "inventory:push_cs_call"
+   "alias_of": "DoRestAnt"
   },
   "f_0894_0751": {
    "unit": "root",
    "seg": 2196,
    "off": 1873,
-   "grounding": "inventory:push_cs_call"
+   "alias_of": "DoRepoLoit"
   },
   "f_0894_07B3": {
    "unit": "root",
    "seg": 2196,
    "off": 1971,
-   "grounding": "inventory:push_cs_call"
+   "alias_of": "DoRepoExit"
   },
   "f_0894_0892": {
    "unit": "root",
    "seg": 2196,
    "off": 2194,
-   "grounding": "inventory:push_cs_call"
+   "alias_of": "DoRepoFly"
   },
   "f_0894_0961": {
    "unit": "root",
    "seg": 2196,
    "off": 2401,
-   "grounding": "inventory:push_cs_call"
+   "alias_of": "DoDefendNest"
   },
   "f_0894_09F4": {
    "unit": "root",
    "seg": 2196,
    "off": 2548,
-   "grounding": "inventory:push_cs_call"
+   "alias_of": "DoRandAntA"
   },
   "f_0894_0CFD": {
    "unit": "root",
    "seg": 2196,
    "off": 3325,
-   "grounding": "inventory:push_cs_call"
+   "alias_of": "DoRandAntAA"
   },
   "f_0894_0E8E": {
    "unit": "root",
    "seg": 2196,
    "off": 3726,
-   "grounding": "inventory:push_cs_call"
+   "alias_of": "DoDigOutAntA"
   },
   "f_0894_1087": {
    "unit": "root",
    "seg": 2196,
    "off": 4231,
-   "grounding": "inventory:push_cs_call"
+   "alias_of": "DoToNestAnt"
   },
   "f_0894_1315": {
    "unit": "root",
    "seg": 2196,
    "off": 4885,
-   "grounding": "inventory:push_cs_call"
+   "alias_of": "DoToAlarm"
   },
   "f_0894_1525": {
    "unit": "root",
    "seg": 2196,
    "off": 5413,
-   "grounding": "inventory:push_cs_call"
+   "alias_of": "DoReturnFoodAnt"
   },
   "f_0894_16A5": {
    "unit": "root",
    "seg": 2196,
    "off": 5797,
-   "grounding": "inventory:push_cs_call"
+   "alias_of": "DoForageAnt"
   },
   "f_0894_1A28": {
    "unit": "root",
    "seg": 2196,
    "off": 6696,
-   "grounding": "inventory:push_cs_call"
+   "alias_of": "DoRecruitAnt"
   },
   "f_0894_1C6E": {
    "unit": "root",
    "seg": 2196,
    "off": 7278,
-   "grounding": "inventory:push_cs_call"
+   "alias_of": "GoInNest"
   },
   "f_0894_1D89": {
    "unit": "root",
    "seg": 2196,
    "off": 7561,
-   "grounding": "inventory:push_cs_call"
+   "alias_of": "StartFightA"
   },
   "f_0894_1E34": {
    "unit": "root",
    "seg": 2196,
    "off": 7732,
-   "grounding": "inventory:far_call,push_cs_call"
+   "alias_of": "GetWinner"
   },
   "f_0894_1F31": {
    "unit": "root",
    "seg": 2196,
    "off": 7985,
-   "grounding": "inventory:push_cs_call"
+   "alias_of": "DoFightA"
   },
   "f_0894_21C5": {
    "unit": "root",
    "seg": 2196,
    "off": 8645,
-   "grounding": "inventory:far_call,push_cs_call"
+   "alias_of": "RandTurn"
   },
   "f_0894_21ED": {
    "unit": "root",
    "seg": 2196,
    "off": 8685,
-   "grounding": "inventory:push_cs_call"
+   "alias_of": "DoAttackAnt"
   },
   "f_0894_23BB": {
    "unit": "root",
    "seg": 2196,
    "off": 9147,
-   "grounding": "inventory:far_call,push_cs_call"
+   "alias_of": "IsItHole"
   },
   "f_0894_2423": {
    "unit": "root",
    "seg": 2196,
    "off": 9251,
-   "grounding": "inventory:far_call,push_cs_call"
+   "alias_of": "IsItFood"
   },
   "f_0AD9_000C": {
    "unit": "root",
@@ -1959,13 +3867,13 @@
    "unit": "root",
    "seg": 3048,
    "off": 911,
-   "grounding": "inventory:far_call"
+   "alias_of": "FullCount"
   },
   "f_0BE8_039F": {
    "unit": "root",
    "seg": 3048,
    "off": 927,
-   "grounding": "inventory:push_cs_call"
+   "alias_of": "CountUpdate"
   },
   "f_0BE8_03AC": {
    "unit": "root",
@@ -1977,25 +3885,25 @@
    "unit": "root",
    "seg": 3048,
    "off": 1364,
-   "grounding": "inventory:push_cs_call"
+   "alias_of": "PlaceDrop"
   },
   "f_0BE8_063A": {
    "unit": "root",
    "seg": 3048,
    "off": 1594,
-   "grounding": "inventory:far_call"
+   "alias_of": "InitWater"
   },
   "f_0BE8_0652": {
    "unit": "root",
    "seg": 3048,
    "off": 1618,
-   "grounding": "inventory:push_cs_call"
+   "alias_of": "AddWater"
   },
   "f_0BE8_06EE": {
    "unit": "root",
    "seg": 3048,
    "off": 1774,
-   "grounding": "inventory:push_cs_call"
+   "alias_of": "DropWater"
   },
   "f_0BE8_0798": {
    "unit": "root",
@@ -2031,43 +3939,43 @@
    "unit": "root",
    "seg": 3048,
    "off": 2651,
-   "grounding": "inventory:far_call"
+   "alias_of": "PlaceEggB"
   },
   "f_0BE8_0ABE": {
    "unit": "root",
    "seg": 3048,
    "off": 2750,
-   "grounding": "inventory:far_call"
+   "alias_of": "PlaceEggR"
   },
   "f_0BE8_0B21": {
    "unit": "root",
    "seg": 3048,
    "off": 2849,
-   "grounding": "inventory:far_call"
+   "alias_of": "GetDir"
   },
   "f_0BE8_0B83": {
    "unit": "root",
    "seg": 3048,
    "off": 2947,
-   "grounding": "inventory:far_call"
+   "alias_of": "GetDis"
   },
   "f_0BE8_0BC1": {
    "unit": "root",
    "seg": 3048,
    "off": 3009,
-   "grounding": "inventory:far_call,push_cs_call"
+   "alias_of": "InNestBounds"
   },
   "f_0BE8_0C0F": {
    "unit": "root",
    "seg": 3048,
    "off": 3087,
-   "grounding": "inventory:far_call"
+   "alias_of": "GetExitDirB"
   },
   "f_0BE8_0CBB": {
    "unit": "root",
    "seg": 3048,
    "off": 3259,
-   "grounding": "inventory:far_call"
+   "alias_of": "GetExitDirR"
   },
   "f_0BE8_0D67": {
    "unit": "root",
@@ -2085,7 +3993,7 @@
    "unit": "root",
    "seg": 3048,
    "off": 3767,
-   "grounding": "inventory:far_call"
+   "alias_of": "TryAntTheme"
   },
   "f_0CDB_0000": {
    "unit": "root",
@@ -2235,19 +4143,19 @@
    "unit": "root",
    "seg": 3777,
    "off": 1367,
-   "grounding": "inventory:far_call"
+   "alias_of": "AddAntToAList"
   },
   "f_0EC1_05D4": {
    "unit": "root",
    "seg": 3777,
    "off": 1492,
-   "grounding": "inventory:far_call"
+   "alias_of": "AddAntToBList"
   },
   "f_0EC1_0651": {
    "unit": "root",
    "seg": 3777,
    "off": 1617,
-   "grounding": "inventory:far_call"
+   "alias_of": "AddAntToRList"
   },
   "f_0EC1_06CE": {
    "unit": "root",
@@ -2277,163 +4185,163 @@
    "unit": "root",
    "seg": 3903,
    "off": 8,
-   "grounding": "inventory:far_call"
+   "alias_of": "DoAntSimR"
   },
   "f_0F3F_0075": {
    "unit": "root",
    "seg": 3903,
    "off": 117,
-   "grounding": "inventory:push_cs_call"
+   "alias_of": "DoNestAntR"
   },
   "f_0F3F_03B0": {
    "unit": "root",
    "seg": 3903,
    "off": 944,
-   "grounding": "inventory:push_cs_call"
+   "alias_of": "RaidInR"
   },
   "f_0F3F_0481": {
    "unit": "root",
    "seg": 3903,
    "off": 1153,
-   "grounding": "inventory:push_cs_call"
+   "alias_of": "StayInR"
   },
   "f_0F3F_0569": {
    "unit": "root",
    "seg": 3903,
    "off": 1385,
-   "grounding": "inventory:push_cs_call"
+   "alias_of": "RaidOutR"
   },
   "f_0F3F_05EE": {
    "unit": "root",
    "seg": 3903,
    "off": 1518,
-   "grounding": "inventory:push_cs_call"
+   "alias_of": "DoRestR"
   },
   "f_0F3F_069A": {
    "unit": "root",
    "seg": 3903,
    "off": 1690,
-   "grounding": "inventory:push_cs_call"
+   "alias_of": "DoDrownR"
   },
   "f_0F3F_0781": {
    "unit": "root",
    "seg": 3903,
    "off": 1921,
-   "grounding": "inventory:push_cs_call"
+   "alias_of": "DoRandR"
   },
   "f_0F3F_07ED": {
    "unit": "root",
    "seg": 3903,
    "off": 2029,
-   "grounding": "inventory:push_cs_call"
+   "alias_of": "DoNestFightR"
   },
   "f_0F3F_08F6": {
    "unit": "root",
    "seg": 3903,
    "off": 2294,
-   "grounding": "inventory:push_cs_call"
+   "alias_of": "CheckNestFightR"
   },
   "f_0F3F_09B0": {
    "unit": "root",
    "seg": 3903,
    "off": 2480,
-   "grounding": "inventory:push_cs_call"
+   "alias_of": "DropFoodR"
   },
   "f_0F3F_0A26": {
    "unit": "root",
    "seg": 3903,
    "off": 2598,
-   "grounding": "inventory:push_cs_call"
+   "alias_of": "SimEggR"
   },
   "f_0F3F_0B1F": {
    "unit": "root",
    "seg": 3903,
    "off": 2847,
-   "grounding": "inventory:push_cs_call"
+   "alias_of": "SimQueenR"
   },
   "f_0F3F_0D1B": {
    "unit": "root",
    "seg": 3903,
    "off": 3355,
-   "grounding": "inventory:push_cs_call"
+   "alias_of": "QueenMoveR"
   },
   "f_0F3F_0E30": {
    "unit": "root",
    "seg": 3903,
    "off": 3632,
-   "grounding": "inventory:push_cs_call"
+   "alias_of": "MakeNewTailR"
   },
   "f_0F3F_0E9E": {
    "unit": "root",
    "seg": 3903,
    "off": 3742,
-   "grounding": "inventory:push_cs_call"
+   "alias_of": "KillTailR"
   },
   "f_0F3F_0EE4": {
    "unit": "root",
    "seg": 3903,
    "off": 3812,
-   "grounding": "inventory:push_cs_call"
+   "alias_of": "LostHeadR"
   },
   "f_0F3F_0F55": {
    "unit": "root",
    "seg": 3903,
    "off": 3925,
-   "grounding": "inventory:push_cs_call"
+   "alias_of": "LostTailR"
   },
   "f_0F3F_0FC9": {
    "unit": "root",
    "seg": 3903,
    "off": 4041,
-   "grounding": "inventory:push_cs_call"
+   "alias_of": "TryMoveDirR"
   },
   "f_0F3F_10A1": {
    "unit": "root",
    "seg": 3903,
    "off": 4257,
-   "grounding": "inventory:push_cs_call"
+   "alias_of": "DoNestingR"
   },
   "f_0F3F_1277": {
    "unit": "root",
    "seg": 3903,
    "off": 4727,
-   "grounding": "inventory:push_cs_call"
+   "alias_of": "TryEatFoodR"
   },
   "f_0F3F_1330": {
    "unit": "root",
    "seg": 3903,
    "off": 4912,
-   "grounding": "inventory:push_cs_call"
+   "alias_of": "EatFoodR"
   },
   "f_0F3F_13D7": {
    "unit": "root",
    "seg": 3903,
    "off": 5079,
-   "grounding": "inventory:push_cs_call"
+   "alias_of": "StealFoodR"
   },
   "f_0F3F_143C": {
    "unit": "root",
    "seg": 3903,
    "off": 5180,
-   "grounding": "inventory:far_call,push_cs_call"
+   "alias_of": "DecEatR"
   },
   "f_0F3F_1474": {
    "unit": "root",
    "seg": 3903,
    "off": 5236,
-   "grounding": "inventory:push_cs_call"
+   "alias_of": "DoFoodInR"
   },
   "f_0F3F_186B": {
    "unit": "root",
    "seg": 3903,
    "off": 6251,
-   "grounding": "inventory:push_cs_call"
+   "alias_of": "DoDigOutR"
   },
   "f_0F3F_1A37": {
    "unit": "root",
    "seg": 3903,
    "off": 6711,
-   "grounding": "inventory:push_cs_call"
+   "alias_of": "GetOutR"
   },
   "f_10F7_000E": {
    "unit": "root",
@@ -2445,73 +4353,73 @@
    "unit": "root",
    "seg": 4343,
    "off": 58,
-   "grounding": "inventory:far_call,push_cs_call"
+   "alias_of": "IsYellowAnt"
   },
   "f_10F7_005D": {
    "unit": "root",
    "seg": 4343,
    "off": 93,
-   "grounding": "inventory:far_call,push_cs_call"
+   "alias_of": "GetAntIndex"
   },
   "f_10F7_01B1": {
    "unit": "root",
    "seg": 4343,
    "off": 433,
-   "grounding": "inventory:far_call,push_cs_call"
+   "alias_of": "SetAntIndex"
   },
   "f_10F7_02D6": {
    "unit": "root",
    "seg": 4343,
    "off": 726,
-   "grounding": "inventory:push_cs_call"
+   "alias_of": "FindLifeIndex"
   },
   "f_10F7_03B7": {
    "unit": "root",
    "seg": 4343,
    "off": 951,
-   "grounding": "inventory:far_call,push_cs_call"
+   "alias_of": "FindAntIndex"
   },
   "f_10F7_048E": {
    "unit": "root",
    "seg": 4343,
    "off": 1166,
-   "grounding": "inventory:far_call"
+   "alias_of": "IsClear3x3"
   },
   "f_10F7_04EC": {
    "unit": "root",
    "seg": 4343,
    "off": 1260,
-   "grounding": "inventory:far_call,push_cs_call"
+   "alias_of": "IsClearTile"
   },
   "f_10F7_054D": {
    "unit": "root",
    "seg": 4343,
    "off": 1357,
-   "grounding": "inventory:push_cs_call"
+   "alias_of": "AddAntToList"
   },
   "f_10F7_05FE": {
    "unit": "root",
    "seg": 4343,
    "off": 1534,
-   "grounding": "inventory:far_call,push_cs_call"
+   "alias_of": "SetLife"
   },
   "f_10F7_06BF": {
    "unit": "root",
    "seg": 4343,
    "off": 1727,
-   "grounding": "inventory:push_cs_call"
+   "alias_of": "IsThisEgg"
   },
   "f_10F7_06E4": {
    "unit": "root",
    "seg": 4343,
    "off": 1764,
-   "grounding": "inventory:far_call,push_cs_call"
+   "alias_of": "IsThisGrass"
   },
   "f_10F7_070B": {
    "unit": "root",
    "seg": 4343,
    "off": 1803,
-   "grounding": "inventory:far_call,push_cs_call"
+   "alias_of": "IsThisFood"
   },
   "f_10F7_0731": {
    "unit": "root",
@@ -2523,7 +4431,7 @@
    "unit": "root",
    "seg": 4343,
    "off": 1894,
-   "grounding": "inventory:push_cs_call"
+   "alias_of": "IsItNFood"
   },
   "f_10F7_0787": {
    "unit": "root",
@@ -2535,13 +4443,13 @@
    "unit": "root",
    "seg": 4343,
    "off": 1991,
-   "grounding": "inventory:far_call,push_cs_call"
+   "alias_of": "GetLife"
   },
   "f_10F7_08CE": {
    "unit": "root",
    "seg": 4343,
    "off": 2254,
-   "grounding": "inventory:far_call,push_cs_call"
+   "alias_of": "SetMap"
   },
   "f_10F7_0954": {
    "unit": "root",
@@ -2553,7 +4461,7 @@
    "unit": "root",
    "seg": 4343,
    "off": 2472,
-   "grounding": "inventory:far_call,push_cs_call"
+   "alias_of": "ClearMyLife"
   },
   "f_10F7_09FC": {
    "unit": "root",
@@ -2565,25 +4473,25 @@
    "unit": "root",
    "seg": 4343,
    "off": 2628,
-   "grounding": "inventory:far_call,push_cs_call"
+   "alias_of": "SetMyLife"
   },
   "f_10F7_0ACE": {
    "unit": "root",
    "seg": 4343,
    "off": 2766,
-   "grounding": "inventory:far_call,push_cs_call"
+   "alias_of": "MoveMyLife"
   },
   "f_10F7_0B38": {
    "unit": "root",
    "seg": 4343,
    "off": 2872,
-   "grounding": "inventory:push_cs_call"
+   "alias_of": "DoMapUpdateDraw"
   },
   "f_10F7_0B40": {
    "unit": "root",
    "seg": 4343,
    "off": 2880,
-   "grounding": "inventory:far_call"
+   "alias_of": "DoEditAndMapUpdateDraw"
   },
   "f_10F7_0B51": {
    "unit": "root",
@@ -2595,7 +4503,7 @@
    "unit": "root",
    "seg": 4343,
    "off": 2959,
-   "grounding": "inventory:far_call,push_cs_call"
+   "alias_of": "EndTargetMode"
   },
   "f_10F7_0BB1": {
    "unit": "root",
@@ -2607,25 +4515,25 @@
    "unit": "root",
    "seg": 4343,
    "off": 3055,
-   "grounding": "inventory:far_call,push_cs_call"
+   "alias_of": "EndLifeTransferMode"
   },
   "f_10F7_0C11": {
    "unit": "root",
    "seg": 4343,
    "off": 3089,
-   "grounding": "inventory:far_call"
+   "alias_of": "ExchangeLives"
   },
   "f_10F7_0CA8": {
    "unit": "root",
    "seg": 4343,
    "off": 3240,
-   "grounding": "inventory:push_cs_call"
+   "alias_of": "DoLifeExchange"
   },
   "f_10F7_1396": {
    "unit": "root",
    "seg": 4343,
    "off": 5014,
-   "grounding": "inventory:push_cs_call"
+   "alias_of": "DropMyFood"
   },
   "f_10F7_15BC": {
    "unit": "root",
@@ -2637,25 +4545,25 @@
    "unit": "root",
    "seg": 4343,
    "off": 5782,
-   "grounding": "inventory:push_cs_call"
+   "alias_of": "DropMyRock"
   },
   "f_10F7_18B0": {
    "unit": "root",
    "seg": 4343,
    "off": 6320,
-   "grounding": "inventory:push_cs_call"
+   "alias_of": "DropMyEgg"
   },
   "f_10F7_1AAE": {
    "unit": "root",
    "seg": 4343,
    "off": 6830,
-   "grounding": "inventory:push_cs_call"
+   "alias_of": "PickupMyRock"
   },
   "f_10F7_1C84": {
    "unit": "root",
    "seg": 4343,
    "off": 7300,
-   "grounding": "inventory:push_cs_call"
+   "alias_of": "FindEggAt"
   },
   "f_10F7_1D31": {
    "unit": "root",
@@ -2667,37 +4575,37 @@
    "unit": "root",
    "seg": 4343,
    "off": 7635,
-   "grounding": "inventory:far_call,push_cs_call"
+   "alias_of": "SetMyHealth"
   },
   "f_10F7_1E71": {
    "unit": "root",
    "seg": 4343,
    "off": 7793,
-   "grounding": "inventory:far_call,push_cs_call"
+   "alias_of": "EatMyFood"
   },
   "f_10F7_1FDF": {
    "unit": "root",
    "seg": 4343,
    "off": 8159,
-   "grounding": "inventory:push_cs_call"
+   "alias_of": "PickupMyEgg"
   },
   "f_10F7_20BF": {
    "unit": "root",
    "seg": 4343,
    "off": 8383,
-   "grounding": "inventory:push_cs_call"
+   "alias_of": "PickupMyFood"
   },
   "f_10F7_220C": {
    "unit": "root",
    "seg": 4343,
    "off": 8716,
-   "grounding": "inventory:far_call,push_cs_call"
+   "alias_of": "DropMyObject"
   },
   "f_10F7_227A": {
    "unit": "root",
    "seg": 4343,
    "off": 8826,
-   "grounding": "inventory:push_cs_call"
+   "alias_of": "PickupMyObject"
   },
   "f_10F7_22CE": {
    "unit": "root",
@@ -2709,7 +4617,7 @@
    "unit": "root",
    "seg": 4343,
    "off": 9308,
-   "grounding": "inventory:push_cs_call"
+   "alias_of": "IsNotBarrier"
   },
   "f_10F7_2489": {
    "unit": "root",
@@ -2721,7 +4629,7 @@
    "unit": "root",
    "seg": 4343,
    "off": 9454,
-   "grounding": "inventory:far_call,push_cs_call"
+   "alias_of": "IsItDigable"
   },
   "f_10F7_2548": {
    "unit": "root",
@@ -2733,7 +4641,7 @@
    "unit": "root",
    "seg": 4343,
    "off": 9747,
-   "grounding": "reviewed: prologue scan in unreached gap; descent ends in a return; no references found (unreferenced or indirect)"
+   "alias_of": "IsLessThanHole"
   },
   "f_10F7_2640": {
    "unit": "root",
@@ -2745,7 +4653,7 @@
    "unit": "root",
    "seg": 4343,
    "off": 9838,
-   "grounding": "inventory:far_call"
+   "alias_of": "IsLiftable"
   },
   "f_10F7_26D4": {
    "unit": "root",
@@ -2997,13 +4905,13 @@
    "unit": "root",
    "seg": 5358,
    "off": 2,
-   "grounding": "inventory:far_call"
+   "alias_of": "DigMyNewHole"
   },
   "f_14EE_0079": {
    "unit": "root",
    "seg": 5358,
    "off": 121,
-   "grounding": "inventory:push_cs_call"
+   "alias_of": "CreateNewHole"
   },
   "f_14EE_0151": {
    "unit": "root",
@@ -3015,13 +4923,13 @@
    "unit": "root",
    "seg": 5358,
    "off": 791,
-   "grounding": "inventory:push_cs_call"
+   "alias_of": "CanBeHouseHole"
   },
   "f_14EE_0367": {
    "unit": "root",
    "seg": 5358,
    "off": 871,
-   "grounding": "inventory:far_call,push_cs_call"
+   "alias_of": "MakeNewHoleR"
   },
   "f_14EE_04B5": {
    "unit": "root",
@@ -3033,13 +4941,13 @@
    "unit": "root",
    "seg": 5358,
    "off": 1305,
-   "grounding": "inventory:far_call,push_cs_call"
+   "alias_of": "DigTileB"
   },
   "f_14EE_0647": {
    "unit": "root",
    "seg": 5358,
    "off": 1607,
-   "grounding": "inventory:far_call,push_cs_call"
+   "alias_of": "DigTileR"
   },
   "f_14EE_09F1": {
    "unit": "root",
@@ -3051,7 +4959,7 @@
    "unit": "root",
    "seg": 5358,
    "off": 2867,
-   "grounding": "inventory:push_cs_call"
+   "alias_of": "RIsItDirt"
   },
   "f_14EE_0B5A": {
    "unit": "root",
@@ -3693,19 +5601,19 @@
    "unit": "root",
    "seg": 6534,
    "off": 244,
-   "grounding": "inventory:far_call"
+   "alias_of": "CreateIndex"
   },
   "f_1986_00F5": {
    "unit": "root",
    "seg": 6534,
    "off": 245,
-   "grounding": "inventory:far_call"
+   "alias_of": "CloseIndex"
   },
   "f_1986_012A": {
    "unit": "root",
    "seg": 6534,
    "off": 298,
-   "grounding": "inventory:far_call"
+   "alias_of": "FindIndex"
   },
   "f_19A9_0005": {
    "unit": "root",
@@ -3741,25 +5649,25 @@
    "unit": "root",
    "seg": 6569,
    "off": 29,
-   "grounding": "inventory:far_call"
+   "alias_of": "DBRecall"
   },
   "f_19A9_0310": {
    "unit": "root",
    "seg": 6569,
    "off": 784,
-   "grounding": "inventory:far_call"
+   "alias_of": "DBAdd"
   },
   "f_19A9_031D": {
    "unit": "root",
    "seg": 6569,
    "off": 797,
-   "grounding": "inventory:far_call"
+   "alias_of": "DBDelete"
   },
   "f_19A9_032A": {
    "unit": "root",
    "seg": 6569,
    "off": 810,
-   "grounding": "reviewed: unreferenced frameless stub after f_19A9_031D: Punt(\"Attempt to ... during a READ-ONLY run\" @3875); third read-only DB stub, ends 0337 (odd, LINK fill)"
+   "alias_of": "DBPack"
   },
   "f_19DC_0008": {
    "unit": "root",
@@ -3807,7 +5715,7 @@
    "unit": "root",
    "seg": 6696,
    "off": 329,
-   "grounding": "inventory:far_call"
+   "alias_of": "CloseDB"
   },
   "f_1A28_01B4": {
    "unit": "root",
@@ -3837,109 +5745,109 @@
    "unit": "root",
    "seg": 6739,
    "off": 607,
-   "grounding": "inventory:far_call"
+   "alias_of": "db_PurgeHandle"
   },
   "f_1A53_02D5": {
    "unit": "root",
    "seg": 6739,
    "off": 725,
-   "grounding": "inventory:far_call"
+   "alias_of": "db_ReleaseHandle"
   },
   "f_1A53_02EB": {
    "unit": "root",
    "seg": 6739,
    "off": 747,
-   "grounding": "inventory:far_call"
+   "alias_of": "db_ReleaseObject"
   },
   "f_1A53_034F": {
    "unit": "root",
    "seg": 6739,
    "off": 847,
-   "grounding": "inventory:far_call"
+   "alias_of": "db_UnhookObject"
   },
   "f_1A53_037C": {
    "unit": "root",
    "seg": 6739,
    "off": 892,
-   "grounding": "reviewed: unreferenced frameless /Gs function between f_1A53_034F (ends 037C) and f_1A53_03B6: dec db_numOfHandles loop calling 1A28:0149, 1A96:00EE, clears db_cacheTable; Win16 db_CloseDataBase semantics"
+   "alias_of": "db_CloseDataBase"
   },
   "f_1A53_03B6": {
    "unit": "root",
    "seg": 6739,
    "off": 950,
-   "grounding": "reviewed: prologue scan in unreached gap; descent ends in a return; no references found (unreferenced or indirect)"
+   "alias_of": "db_ReplaceObject"
   },
   "f_1A53_0404": {
    "unit": "root",
    "seg": 6739,
    "off": 1028,
-   "grounding": "reviewed: prologue scan in unreached gap; descent ends in a return; no references found (unreferenced or indirect)"
+   "alias_of": "db_SaveObject"
   },
   "f_1A96_000C": {
    "unit": "root",
    "seg": 6806,
    "off": 12,
-   "grounding": "inventory:far_call"
+   "alias_of": "ch_CreateTable"
   },
   "f_1A96_008C": {
    "unit": "root",
    "seg": 6806,
    "off": 140,
-   "grounding": "inventory:far_call"
+   "alias_of": "ch_RemoveEntry"
   },
   "f_1A96_00EE": {
    "unit": "root",
    "seg": 6806,
    "off": 238,
-   "grounding": "inventory:far_call"
+   "alias_of": "ch_PurgeCache"
   },
   "f_1A96_0159": {
    "unit": "root",
    "seg": 6806,
    "off": 345,
-   "grounding": "inventory:far_call"
+   "alias_of": "ch_LookUpHandle"
   },
   "f_1A96_01EC": {
    "unit": "root",
    "seg": 6806,
    "off": 492,
-   "grounding": "inventory:far_call,push_cs_call"
+   "alias_of": "ch_LookUpId"
   },
   "f_1A96_034E": {
    "unit": "root",
    "seg": 6806,
    "off": 846,
-   "grounding": "inventory:far_call"
+   "alias_of": "ch_AddEntry"
   },
   "f_1A96_0421": {
    "unit": "root",
    "seg": 6806,
    "off": 1057,
-   "grounding": "inventory:far_call"
+   "alias_of": "ch_DeleteEntry"
   },
   "f_1A96_0483": {
    "unit": "root",
    "seg": 6806,
    "off": 1155,
-   "grounding": "inventory:push_cs_call"
+   "alias_of": "ch_CleanupTable"
   },
   "f_1A96_0532": {
    "unit": "root",
    "seg": 6806,
    "off": 1330,
-   "grounding": "inventory:push_cs_call"
+   "alias_of": "ch_DumpOldest"
   },
   "f_1A96_065D": {
    "unit": "root",
    "seg": 6806,
    "off": 1629,
-   "grounding": "inventory:push_cs_call"
+   "alias_of": "ch_GetPrime"
   },
   "f_1A96_06D9": {
    "unit": "root",
    "seg": 6806,
    "off": 1753,
-   "grounding": "inventory:far_call"
+   "alias_of": "ch_SetCacheHooks"
   },
   "f_1B05_0008": {
    "unit": "root",
@@ -5415,25 +7323,25 @@
    "unit": "root",
    "seg": 8698,
    "off": 324,
-   "grounding": "inventory:push_cs_call"
+   "alias_of": "win_SetColorFromObj"
   },
   "f_21FA_01AD": {
    "unit": "root",
    "seg": 8698,
    "off": 429,
-   "grounding": "inventory:far_call"
+   "alias_of": "win_SetColorFromObjNum"
   },
   "f_21FA_01D0": {
    "unit": "root",
    "seg": 8698,
    "off": 464,
-   "grounding": "inventory:push_cs_call"
+   "alias_of": "win_ClearObjArea"
   },
   "f_21FA_0260": {
    "unit": "root",
    "seg": 8698,
    "off": 608,
-   "grounding": "inventory:far_call"
+   "alias_of": "win_FillObjRect"
   },
   "f_21FA_0286": {
    "unit": "root",
@@ -5463,13 +7371,13 @@
    "unit": "root",
    "seg": 8698,
    "off": 789,
-   "grounding": "inventory:push_cs_call"
+   "alias_of": "win_DrawButtonBorder"
   },
   "f_21FA_0413": {
    "unit": "root",
    "seg": 8698,
    "off": 1043,
-   "grounding": "inventory:push_cs_call"
+   "alias_of": "win_DrawObjectI"
   },
   "f_21FA_0741": {
    "unit": "root",
@@ -5481,13 +7389,13 @@
    "unit": "root",
    "seg": 8698,
    "off": 1882,
-   "grounding": "inventory:far_call,push_cs_call"
+   "alias_of": "win_DrawObjectNum"
   },
   "f_21FA_077D": {
    "unit": "root",
    "seg": 8698,
    "off": 1917,
-   "grounding": "inventory:push_cs_call"
+   "alias_of": "win_DrawWinIcons"
   },
   "f_21FA_08E2": {
    "unit": "root",
@@ -6015,25 +7923,25 @@
    "unit": "root",
    "seg": 9477,
    "off": 607,
-   "grounding": "inventory:far_call"
+   "alias_of": "win_WinRectAddr"
   },
   "f_2505_0288": {
    "unit": "root",
    "seg": 9477,
    "off": 648,
-   "grounding": "inventory:far_call"
+   "alias_of": "win_GetObjRect"
   },
   "f_2505_02D7": {
    "unit": "root",
    "seg": 9477,
    "off": 727,
-   "grounding": "inventory:far_call"
+   "alias_of": "win_ObjAddr"
   },
   "f_2505_0345": {
    "unit": "root",
    "seg": 9477,
    "off": 837,
-   "grounding": "inventory:far_call"
+   "alias_of": "win_WinAddr"
   },
   "f_2505_036E": {
    "unit": "root",
@@ -6069,7 +7977,7 @@
    "unit": "root",
    "seg": 9477,
    "off": 1297,
-   "grounding": "inventory:push_cs_call"
+   "alias_of": "win_SortRect"
   },
   "f_2505_0545": {
    "unit": "root",
@@ -6099,19 +8007,19 @@
    "unit": "root",
    "seg": 9629,
    "off": 14,
-   "grounding": "inventory:far_call,push_cs_call"
+   "alias_of": "win_DrawBitMap"
   },
   "f_259D_02A5": {
    "unit": "root",
    "seg": 9629,
    "off": 677,
-   "grounding": "inventory:far_call"
+   "alias_of": "win_DrawBitMapAtObj"
   },
   "f_259D_02D8": {
    "unit": "root",
    "seg": 9629,
    "off": 728,
-   "grounding": "inventory:far_call"
+   "alias_of": "win_DrawBitMapAtObjNum"
   },
   "f_259D_032A": {
    "unit": "root",
@@ -6929,6 +8837,30 @@
     }
    ]
   },
+  "fracCOS": {
+   "unit": "S08",
+   "seg": 13813,
+   "off": 3771,
+   "grounding": "inventory:push_cs_call,vector",
+   "history": [
+    {
+     "was": "o08_35F5_0EBB",
+     "why": "worker ovl08: Win16 RandWorld unit member / call-site evidence (report 2026-09-30)"
+    }
+   ]
+  },
+  "fracSIN": {
+   "unit": "S08",
+   "seg": 13813,
+   "off": 3687,
+   "grounding": "inventory:push_cs_call,vector",
+   "history": [
+    {
+     "was": "o08_35F5_0E67",
+     "why": "worker ovl08: Win16 RandWorld unit member / call-site evidence (report 2026-09-30)"
+    }
+   ]
+  },
   "hanim_MakeAnimSet": {
    "unit": "root",
    "seg": 9826,
@@ -7026,6 +8958,18 @@
     {
      "was": "WINMAIN",
      "why": "sole caller is MSC crt0 __astart: this is C main(); Win16 WINMAIN is its platform counterpart (shared strings \"simant cancelled.\", \"sound\"), not the same symbol"
+    }
+   ]
+  },
+  "myBeginSound": {
+   "unit": "root",
+   "seg": 223,
+   "off": 232,
+   "grounding": "inventory:far_call,push_cs_call",
+   "history": [
+    {
+     "was": "f_00DF_00E8",
+     "why": "worker ovl08: Win16 RandWorld unit member / call-site evidence (report 2026-09-30)"
     }
    ]
   },
@@ -7945,79 +9889,79 @@
    "unit": "S08",
    "seg": 13813,
    "off": 0,
-   "grounding": "inventory:vector"
+   "alias_of": "InitSimVars"
   },
   "o08_35F5_0050": {
    "unit": "S08",
    "seg": 13813,
    "off": 80,
-   "grounding": "inventory:push_cs_call,vector"
+   "alias_of": "RandWorld"
   },
   "o08_35F5_059B": {
    "unit": "S08",
    "seg": 13813,
    "off": 1435,
-   "grounding": "inventory:vector"
+   "alias_of": "RandYard"
   },
   "o08_35F5_07C2": {
    "unit": "S08",
    "seg": 13813,
    "off": 1986,
-   "grounding": "reviewed: unreferenced function between RandYard (ends 07C2) and DigOutBNest (0846): gap holds a complete stack-checked BP-frame function; it loads CONST 85E6/85E8 (YMapPopB/R), whose CONST order places it after RandYard; Win16 GenerateTutorial sits at this position in the RandWorld unit"
+   "alias_of": "GenerateTutorial"
   },
   "o08_35F5_0923": {
    "unit": "S08",
    "seg": 13813,
    "off": 2339,
-   "grounding": "inventory:push_cs_call"
+   "alias_of": "DigOutRNest"
   },
   "o08_35F5_0A00": {
    "unit": "S08",
    "seg": 13813,
    "off": 2560,
-   "grounding": "inventory:push_cs_call,vector"
+   "alias_of": "InitYelloAnt"
   },
   "o08_35F5_0C4C": {
    "unit": "S08",
    "seg": 13813,
    "off": 3148,
-   "grounding": "inventory:push_cs_call,vector"
+   "alias_of": "MakeBlkQueen"
   },
   "o08_35F5_0D12": {
    "unit": "S08",
    "seg": 13813,
    "off": 3346,
-   "grounding": "inventory:push_cs_call"
+   "alias_of": "PlaceRedQueen"
   },
   "o08_35F5_0DA0": {
    "unit": "S08",
    "seg": 13813,
    "off": 3488,
-   "grounding": "inventory:push_cs_call,vector"
+   "alias_of": "MakeRedQueen"
   },
   "o08_35F5_0E67": {
    "unit": "S08",
    "seg": 13813,
    "off": 3687,
-   "grounding": "inventory:push_cs_call,vector"
+   "alias_of": "fracSIN"
   },
   "o08_35F5_0EBB": {
    "unit": "S08",
    "seg": 13813,
    "off": 3771,
-   "grounding": "inventory:push_cs_call,vector"
+   "alias_of": "fracCOS"
   },
   "o08_35F5_1080": {
    "unit": "S08",
    "seg": 13813,
    "off": 4224,
-   "grounding": "inventory:vector"
+   "alias_of": "AddBlackAnts"
   },
   "o08_35F5_1136": {
    "unit": "S08",
    "seg": 13813,
    "off": 4406,
-   "grounding": "inventory:vector"
+   "alias_of": "AddRedAnts"
   },
   "o08_35F5_11F0": {
    "unit": "S08",
@@ -8029,7 +9973,7 @@
    "unit": "S08",
    "seg": 13813,
    "off": 4672,
-   "grounding": "inventory:push_cs_call"
+   "alias_of": "ClrArrays"
   },
   "o09_35F5_0000": {
    "unit": "S09",
@@ -9386,9 +11330,498 @@
      "why": "xver HIGH features-v1: constant 0x6000; string \"eptr->mouse_flags=%x\""
     }
    ]
+  },
+  "win_ClearObjArea": {
+   "unit": "root",
+   "seg": 8698,
+   "off": 464,
+   "grounding": "inventory:push_cs_call",
+   "history": [
+    {
+     "was": "f_21FA_01D0",
+     "why": "window worker: Win16 win_* function with the same structure/strings (report 2026-09-30)"
+    }
+   ]
+  },
+  "win_DrawBitMap": {
+   "unit": "root",
+   "seg": 9629,
+   "off": 14,
+   "grounding": "inventory:far_call,push_cs_call",
+   "history": [
+    {
+     "was": "f_259D_000E",
+     "why": "window worker: Win16 win_* function with the same structure/strings (report 2026-09-30)"
+    }
+   ]
+  },
+  "win_DrawBitMapAtObj": {
+   "unit": "root",
+   "seg": 9629,
+   "off": 677,
+   "grounding": "inventory:far_call",
+   "history": [
+    {
+     "was": "f_259D_02A5",
+     "why": "window worker: Win16 win_* function with the same structure/strings (report 2026-09-30)"
+    }
+   ]
+  },
+  "win_DrawBitMapAtObjNum": {
+   "unit": "root",
+   "seg": 9629,
+   "off": 728,
+   "grounding": "inventory:far_call",
+   "history": [
+    {
+     "was": "f_259D_02D8",
+     "why": "window worker: Win16 win_* function with the same structure/strings (report 2026-09-30)"
+    }
+   ]
+  },
+  "win_DrawButtonBorder": {
+   "unit": "root",
+   "seg": 8698,
+   "off": 789,
+   "grounding": "inventory:push_cs_call",
+   "history": [
+    {
+     "was": "f_21FA_0315",
+     "why": "window worker: Win16 win_* function with the same structure/strings (report 2026-09-30)"
+    }
+   ]
+  },
+  "win_DrawObjectI": {
+   "unit": "root",
+   "seg": 8698,
+   "off": 1043,
+   "grounding": "inventory:push_cs_call",
+   "history": [
+    {
+     "was": "f_21FA_0413",
+     "why": "window worker: Win16 win_* function with the same structure/strings (report 2026-09-30)"
+    }
+   ]
+  },
+  "win_DrawObjectNum": {
+   "unit": "root",
+   "seg": 8698,
+   "off": 1882,
+   "grounding": "inventory:far_call,push_cs_call",
+   "history": [
+    {
+     "was": "f_21FA_075A",
+     "why": "window worker: Win16 win_* function with the same structure/strings (report 2026-09-30)"
+    }
+   ]
+  },
+  "win_DrawWinIcons": {
+   "unit": "root",
+   "seg": 8698,
+   "off": 1917,
+   "grounding": "inventory:push_cs_call",
+   "history": [
+    {
+     "was": "f_21FA_077D",
+     "why": "window worker: Win16 win_* function with the same structure/strings (report 2026-09-30)"
+    }
+   ]
+  },
+  "win_FillObjRect": {
+   "unit": "root",
+   "seg": 8698,
+   "off": 608,
+   "grounding": "inventory:far_call",
+   "history": [
+    {
+     "was": "f_21FA_0260",
+     "why": "window worker: Win16 win_* function with the same structure/strings (report 2026-09-30)"
+    }
+   ]
+  },
+  "win_GetObjRect": {
+   "unit": "root",
+   "seg": 9477,
+   "off": 648,
+   "grounding": "inventory:far_call",
+   "history": [
+    {
+     "was": "f_2505_0288",
+     "why": "window worker: Win16 win_* function with the same structure/strings (report 2026-09-30)"
+    }
+   ]
+  },
+  "win_ObjAddr": {
+   "unit": "root",
+   "seg": 9477,
+   "off": 727,
+   "grounding": "inventory:far_call",
+   "history": [
+    {
+     "was": "f_2505_02D7",
+     "why": "window worker: Win16 win_* function with the same structure/strings (report 2026-09-30)"
+    }
+   ]
+  },
+  "win_SetColorFromObj": {
+   "unit": "root",
+   "seg": 8698,
+   "off": 324,
+   "grounding": "inventory:push_cs_call",
+   "history": [
+    {
+     "was": "f_21FA_0144",
+     "why": "window worker: Win16 win_* function with the same structure/strings (report 2026-09-30)"
+    }
+   ]
+  },
+  "win_SetColorFromObjNum": {
+   "unit": "root",
+   "seg": 8698,
+   "off": 429,
+   "grounding": "inventory:far_call",
+   "history": [
+    {
+     "was": "f_21FA_01AD",
+     "why": "window worker: Win16 win_* function with the same structure/strings (report 2026-09-30)"
+    }
+   ]
+  },
+  "win_SortRect": {
+   "unit": "root",
+   "seg": 9477,
+   "off": 1297,
+   "grounding": "inventory:push_cs_call",
+   "history": [
+    {
+     "was": "f_2505_0511",
+     "why": "window worker: Win16 win_* function with the same structure/strings (report 2026-09-30)"
+    }
+   ]
+  },
+  "win_WinAddr": {
+   "unit": "root",
+   "seg": 9477,
+   "off": 837,
+   "grounding": "inventory:far_call",
+   "history": [
+    {
+     "was": "f_2505_0345",
+     "why": "window worker: Win16 win_* function with the same structure/strings (report 2026-09-30)"
+    }
+   ]
+  },
+  "win_WinRectAddr": {
+   "unit": "root",
+   "seg": 9477,
+   "off": 607,
+   "grounding": "inventory:far_call",
+   "history": [
+    {
+     "was": "f_2505_025F",
+     "why": "window worker: Win16 win_* function with the same structure/strings (report 2026-09-30)"
+    }
+   ]
   }
  },
  "data": {
+  "Barrier": {
+   "seg": 20726,
+   "off": 1152,
+   "grounding": "f_0894_09F4: mov es,[8082] (50F6); cmp word ptr es:[0480],ax (tile) - barrier tile level",
+   "history": [
+    {
+     "was": "fd_50F6_0480",
+     "why": "worker data identification: Win16 variable of the same role at the same use sites (reports dig/ovl08/simA/sim10F7)"
+    }
+   ]
+  },
+  "Cycle": {
+   "seg": 20726,
+   "off": 3848,
+   "grounding": "o08_35F5_0050 (RandWorld): mov es,[S08 CONST word] ; mov es:[off]",
+   "history": [
+    {
+     "was": "fd_50F6_0F08",
+     "why": "worker data identification: Win16 variable of the same role at the same use sites (reports dig/ovl08/simA/sim10F7)"
+    }
+   ]
+  },
+  "Dx8": {
+   "seg": 15703,
+   "off": 0,
+   "grounding": "f_10F7_048E (IsClear3x3-like): mov es,[CONST 829E = 3D57]; es:[si+0000] signed char dir offsets",
+   "history": [
+    {
+     "was": "fd_3D57_0000",
+     "why": "worker data identification: Win16 variable of the same role at the same use sites (reports dig/ovl08/simA/sim10F7)"
+    }
+   ]
+  },
+  "Dy8": {
+   "seg": 15703,
+   "off": 8,
+   "grounding": "f_10F7_048E (IsClear3x3-like): mov es,[CONST 829C = 3D57]; es:[si+0008] signed char dir offsets",
+   "history": [
+    {
+     "was": "fd_3D57_0008",
+     "why": "worker data identification: Win16 variable of the same role at the same use sites (reports dig/ovl08/simA/sim10F7)"
+    }
+   ]
+  },
+  "ExitMapB": {
+   "seg": 15901,
+   "off": 16768,
+   "grounding": "o08_35F5_0050 (RandWorld): mov es,[S08 CONST word] ; es:[bx+disp] array base",
+   "history": [
+    {
+     "was": "fd_3E1D_4180",
+     "why": "worker data identification: Win16 variable of the same role at the same use sites (reports dig/ovl08/simA/sim10F7)"
+    }
+   ]
+  },
+  "ExitMapR": {
+   "seg": 15901,
+   "off": 20864,
+   "grounding": "o08_35F5_0050 (RandWorld): mov es,[S08 CONST word] ; es:[bx+disp] array base",
+   "history": [
+    {
+     "was": "fd_3E1D_5180",
+     "why": "worker data identification: Win16 variable of the same role at the same use sites (reports dig/ovl08/simA/sim10F7)"
+    }
+   ]
+  },
+  "FoodB": {
+   "seg": 20726,
+   "off": 4176,
+   "grounding": "o08_35F5_0050 (RandWorld): mov es,[S08 CONST word] ; mov es:[off]",
+   "history": [
+    {
+     "was": "fd_50F6_1050",
+     "why": "worker data identification: Win16 variable of the same role at the same use sites (reports dig/ovl08/simA/sim10F7)"
+    }
+   ]
+  },
+  "FoodR": {
+   "seg": 20726,
+   "off": 4192,
+   "grounding": "o08_35F5_0050 (RandWorld): mov es,[S08 CONST word] ; mov es:[off]",
+   "history": [
+    {
+     "was": "fd_50F6_1060",
+     "why": "worker data identification: Win16 variable of the same role at the same use sites (reports dig/ovl08/simA/sim10F7)"
+    }
+   ]
+  },
+  "HealthB": {
+   "seg": 20726,
+   "off": 4286,
+   "grounding": "o08_35F5_0050 (RandWorld): mov es,[S08 CONST word] ; mov es:[off]",
+   "history": [
+    {
+     "was": "fd_50F6_10BE",
+     "why": "worker data identification: Win16 variable of the same role at the same use sites (reports dig/ovl08/simA/sim10F7)"
+    }
+   ]
+  },
+  "HealthR": {
+   "seg": 20726,
+   "off": 510,
+   "grounding": "o08_35F5_0050 (RandWorld): mov es,[S08 CONST word] ; mov es:[off]",
+   "history": [
+    {
+     "was": "fd_50F6_01FE",
+     "why": "worker data identification: Win16 variable of the same role at the same use sites (reports dig/ovl08/simA/sim10F7)"
+    }
+   ]
+  },
+  "HoleMapB": {
+   "seg": 15703,
+   "off": 548,
+   "grounding": "o08_35F5_0050 (RandWorld): mov es,[S08 CONST word] ; es:[bx+disp] array base",
+   "history": [
+    {
+     "was": "fd_3D57_0224",
+     "why": "worker data identification: Win16 variable of the same role at the same use sites (reports dig/ovl08/simA/sim10F7)"
+    }
+   ]
+  },
+  "HoleMapR": {
+   "seg": 15703,
+   "off": 612,
+   "grounding": "o08_35F5_0050 (RandWorld): mov es,[S08 CONST word] ; es:[bx+disp] array base",
+   "history": [
+    {
+     "was": "fd_3D57_0264",
+     "why": "worker data identification: Win16 variable of the same role at the same use sites (reports dig/ovl08/simA/sim10F7)"
+    }
+   ]
+  },
+  "LifeA": {
+   "seg": 15901,
+   "off": 24960,
+   "grounding": "o08_35F5_0050 (RandWorld): mov es,[S08 CONST word] ; es:[bx+disp] array base",
+   "history": [
+    {
+     "was": "fd_3E1D_6180",
+     "why": "worker data identification: Win16 variable of the same role at the same use sites (reports dig/ovl08/simA/sim10F7)"
+    }
+   ]
+  },
+  "LifeB": {
+   "seg": 15901,
+   "off": 33152,
+   "grounding": "o08_35F5_0050 (RandWorld): mov es,[S08 CONST word] ; es:[bx+disp] array base",
+   "history": [
+    {
+     "was": "fd_3E1D_8180",
+     "why": "worker data identification: Win16 variable of the same role at the same use sites (reports dig/ovl08/simA/sim10F7)"
+    }
+   ]
+  },
+  "LifeR": {
+   "seg": 15901,
+   "off": 37248,
+   "grounding": "o08_35F5_0050 (RandWorld): mov es,[S08 CONST word] ; es:[bx+disp] array base",
+   "history": [
+    {
+     "was": "fd_3E1D_9180",
+     "why": "worker data identification: Win16 variable of the same role at the same use sites (reports dig/ovl08/simA/sim10F7)"
+    }
+   ]
+  },
+  "ListIndexA": {
+   "seg": 20726,
+   "off": 3434,
+   "grounding": "f_10F7_005D (GetAntIndex-like): mov es,[CONST word = 50F6]; es:[..0D6A] list count/field array",
+   "history": [
+    {
+     "was": "fd_50F6_0D6A",
+     "why": "worker data identification: Win16 variable of the same role at the same use sites (reports dig/ovl08/simA/sim10F7)"
+    }
+   ]
+  },
+  "MapA": {
+   "seg": 15901,
+   "off": 384,
+   "grounding": "o08_35F5_0050 (RandWorld): mov es,[S08 CONST word] ; es:[bx+disp] array base",
+   "history": [
+    {
+     "was": "fd_3E1D_0180",
+     "why": "worker data identification: Win16 variable of the same role at the same use sites (reports dig/ovl08/simA/sim10F7)"
+    }
+   ]
+  },
+  "MapB": {
+   "seg": 15901,
+   "off": 8576,
+   "grounding": "f_0BE8_0652: mov es,[DS:812A] (CONST word 3E1D) ; es:[bx+2180] 64x64 byte map (Win16 AddWater MapB)",
+   "history": [
+    {
+     "was": "fd_3E1D_2180",
+     "why": "worker data identification: Win16 variable of the same role at the same use sites (reports dig/ovl08/simA/sim10F7)"
+    }
+   ]
+  },
+  "MapR": {
+   "seg": 15901,
+   "off": 12672,
+   "grounding": "f_0BE8_0652: mov es,[DS:812C] (CONST word 3E1D) ; es:[bx+3180] 64x64 byte map (Win16 AddWater MapR)",
+   "history": [
+    {
+     "was": "fd_3E1D_3180",
+     "why": "worker data identification: Win16 variable of the same role at the same use sites (reports dig/ovl08/simA/sim10F7)"
+    }
+   ]
+  },
+  "MeHealth": {
+   "seg": 20726,
+   "off": 3960,
+   "grounding": "f_10F7_1DD3 (root:10F7): mov es,[CONST word = 50F6]; es:[..0F78] far data reference",
+   "history": [
+    {
+     "was": "fd_50F6_0F78",
+     "why": "worker data identification: Win16 variable of the same role at the same use sites (reports dig/ovl08/simA/sim10F7)"
+    }
+   ]
+  },
+  "MeLocX": {
+   "seg": 20726,
+   "off": 1148,
+   "grounding": "f_10F7_0A44 (root:10F7): mov es,[CONST word = 50F6]; es:[..047C] far data reference",
+   "history": [
+    {
+     "was": "fd_50F6_047C",
+     "why": "worker data identification: Win16 variable of the same role at the same use sites (reports dig/ovl08/simA/sim10F7)"
+    }
+   ]
+  },
+  "MeLocY": {
+   "seg": 20726,
+   "off": 1162,
+   "grounding": "f_10F7_0A44 (root:10F7): mov es,[CONST word = 50F6]; es:[..048A] far data reference",
+   "history": [
+    {
+     "was": "fd_50F6_048A",
+     "why": "worker data identification: Win16 variable of the same role at the same use sites (reports dig/ovl08/simA/sim10F7)"
+    }
+   ]
+  },
+  "MePlane": {
+   "seg": 20726,
+   "off": 1164,
+   "grounding": "f_10F7_0A44 (root:10F7): mov es,[CONST word = 50F6]; es:[..048C] far data reference",
+   "history": [
+    {
+     "was": "fd_50F6_048C",
+     "why": "worker data identification: Win16 variable of the same role at the same use sites (reports dig/ovl08/simA/sim10F7)"
+    }
+   ]
+  },
+  "TERRAINset": {
+   "seg": 20726,
+   "off": 3876,
+   "grounding": "o08_35F5_0050 (RandWorld): mov es,[S08 CONST word] ; mov es:[off]",
+   "history": [
+    {
+     "was": "fd_50F6_0F24",
+     "why": "worker data identification: Win16 variable of the same role at the same use sites (reports dig/ovl08/simA/sim10F7)"
+    }
+   ]
+  },
+  "Tindex": {
+   "seg": 20726,
+   "off": 3864,
+   "grounding": "f_0894_034B: mov es,[8060] (50F6); loop index es:[0F18] = [0D6A], dec while > 0",
+   "history": [
+    {
+     "was": "fd_50F6_0F18",
+     "why": "worker data identification: Win16 variable of the same role at the same use sites (reports dig/ovl08/simA/sim10F7)"
+    }
+   ]
+  },
+  "TurnTab": {
+   "seg": 15703,
+   "off": 36,
+   "grounding": "f_0894_0E8E: mov es,[8088] (3D57); mov al,es:[bx+0024] with bx=(attr&7)*8+SRand8(); cbw - signed char TurnTab[8][8]",
+   "history": [
+    {
+     "was": "fd_3D57_0024",
+     "why": "worker data identification: Win16 variable of the same role at the same use sites (reports dig/ovl08/simA/sim10F7)"
+    }
+   ]
+  },
+  "db_handles": {
+   "seg": 20726,
+   "off": 15184,
+   "grounding": "db module: mov es,[DS:89C4] (CONST word 50F6) ; es:[bx+3B50] handle array",
+   "history": [
+    {
+     "was": "fd_50F6_3B50",
+     "why": "worker data identification: Win16 variable of the same role at the same use sites (reports dig/ovl08/simA/sim10F7)"
+    }
+   ]
+  },
   "errno": {
    "seg": 21939,
    "off": 30522,
@@ -9397,12 +11830,12 @@
   "fd_3D57_0000": {
    "seg": 15703,
    "off": 0,
-   "grounding": "f_10F7_048E (IsClear3x3-like): mov es,[CONST 829E = 3D57]; es:[si+0000] signed char dir offsets"
+   "alias_of": "Dx8"
   },
   "fd_3D57_0008": {
    "seg": 15703,
    "off": 8,
-   "grounding": "f_10F7_048E (IsClear3x3-like): mov es,[CONST 829C = 3D57]; es:[si+0008] signed char dir offsets"
+   "alias_of": "Dy8"
   },
   "fd_3D57_0010": {
    "seg": 15703,
@@ -9417,7 +11850,7 @@
   "fd_3D57_0024": {
    "seg": 15703,
    "off": 36,
-   "grounding": "f_0894_0E8E: mov es,[8088] (3D57); mov al,es:[bx+0024] with bx=(attr&7)*8+SRand8(); cbw - signed char TurnTab[8][8]"
+   "alias_of": "TurnTab"
   },
   "fd_3D57_006C": {
    "seg": 15703,
@@ -9452,12 +11885,12 @@
   "fd_3D57_0224": {
    "seg": 15703,
    "off": 548,
-   "grounding": "o08_35F5_0050 (RandWorld): mov es,[S08 CONST word] ; es:[bx+disp] array base"
+   "alias_of": "HoleMapB"
   },
   "fd_3D57_0264": {
    "seg": 15703,
    "off": 612,
-   "grounding": "o08_35F5_0050 (RandWorld): mov es,[S08 CONST word] ; es:[bx+disp] array base"
+   "alias_of": "HoleMapR"
   },
   "fd_3D57_02A4": {
    "seg": 15703,
@@ -9553,6 +11986,11 @@
    "seg": 15703,
    "off": 2870,
    "grounding": "f_0F3F_0A26: mov es,[8262] (3D57); mov al,es:[bx+0B36]; cbw with bx=(mode%7)*8+SRand8() (caste table)"
+  },
+  "fd_3D57_0C0E": {
+   "seg": 15703,
+   "off": 3086,
+   "grounding": "S25:39C7 o25_39C7_0980:0A1F mov si,es:[0C0E] (CONST 8928=3D57); Win16 SimEggB MakeMe"
   },
   "fd_3D57_0C12": {
    "seg": 15703,
@@ -9687,42 +12125,42 @@
   "fd_3E1D_0180": {
    "seg": 15901,
    "off": 384,
-   "grounding": "o08_35F5_0050 (RandWorld): mov es,[S08 CONST word] ; es:[bx+disp] array base"
+   "alias_of": "MapA"
   },
   "fd_3E1D_2180": {
    "seg": 15901,
    "off": 8576,
-   "grounding": "f_0BE8_0652: mov es,[DS:812A] (CONST word 3E1D) ; es:[bx+2180] 64x64 byte map (Win16 AddWater MapB)"
+   "alias_of": "MapB"
   },
   "fd_3E1D_3180": {
    "seg": 15901,
    "off": 12672,
-   "grounding": "f_0BE8_0652: mov es,[DS:812C] (CONST word 3E1D) ; es:[bx+3180] 64x64 byte map (Win16 AddWater MapR)"
+   "alias_of": "MapR"
   },
   "fd_3E1D_4180": {
    "seg": 15901,
    "off": 16768,
-   "grounding": "o08_35F5_0050 (RandWorld): mov es,[S08 CONST word] ; es:[bx+disp] array base"
+   "alias_of": "ExitMapB"
   },
   "fd_3E1D_5180": {
    "seg": 15901,
    "off": 20864,
-   "grounding": "o08_35F5_0050 (RandWorld): mov es,[S08 CONST word] ; es:[bx+disp] array base"
+   "alias_of": "ExitMapR"
   },
   "fd_3E1D_6180": {
    "seg": 15901,
    "off": 24960,
-   "grounding": "o08_35F5_0050 (RandWorld): mov es,[S08 CONST word] ; es:[bx+disp] array base"
+   "alias_of": "LifeA"
   },
   "fd_3E1D_8180": {
    "seg": 15901,
    "off": 33152,
-   "grounding": "o08_35F5_0050 (RandWorld): mov es,[S08 CONST word] ; es:[bx+disp] array base"
+   "alias_of": "LifeB"
   },
   "fd_3E1D_9180": {
    "seg": 15901,
    "off": 37248,
-   "grounding": "o08_35F5_0050 (RandWorld): mov es,[S08 CONST word] ; es:[bx+disp] array base"
+   "alias_of": "LifeR"
   },
   "fd_3E1D_A180": {
    "seg": 15901,
@@ -9829,10 +12267,15 @@
    "off": 0,
    "grounding": "o08_35F5_0050 (RandWorld): mov es,[S08 CONST word] ; es:[bx+disp] array base"
   },
+  "fd_4E4B_0000": {
+   "seg": 20043,
+   "off": 0,
+   "grounding": "o09_35F5_0000 (LoadGame): mov ax,0; mov cx,4E4B; es:[bx+2]*es:[bx], es:[bx+4..6] far ptr: save-game table of {size,count,far ptr} (8-byte entries)"
+  },
   "fd_50F6_01FE": {
    "seg": 20726,
    "off": 510,
-   "grounding": "o08_35F5_0050 (RandWorld): mov es,[S08 CONST word] ; mov es:[off]"
+   "alias_of": "HealthR"
   },
   "fd_50F6_0200": {
    "seg": 20726,
@@ -10024,6 +12467,11 @@
    "off": 886,
    "grounding": "f_0BE8_0002: mov es,[DS:8102] (CONST 50F6); mov word es:[0376],1"
   },
+  "fd_50F6_0378": {
+   "seg": 20726,
+   "off": 888,
+   "grounding": "S25:39C7 o25_39C7_0980:09DF cmp word es:[0378],0 (CONST 8924=50F6); Win16 SimEggB ModeAuto"
+  },
   "fd_50F6_037A": {
    "seg": 20726,
    "off": 890,
@@ -10092,7 +12540,7 @@
   "fd_50F6_047C": {
    "seg": 20726,
    "off": 1148,
-   "grounding": "f_10F7_0A44 (root:10F7): mov es,[CONST word = 50F6]; es:[..047C] far data reference"
+   "alias_of": "MeLocX"
   },
   "fd_50F6_047E": {
    "seg": 20726,
@@ -10102,7 +12550,7 @@
   "fd_50F6_0480": {
    "seg": 20726,
    "off": 1152,
-   "grounding": "f_0894_09F4: mov es,[8082] (50F6); cmp word ptr es:[0480],ax (tile) - barrier tile level"
+   "alias_of": "Barrier"
   },
   "fd_50F6_0488": {
    "seg": 20726,
@@ -10112,12 +12560,12 @@
   "fd_50F6_048A": {
    "seg": 20726,
    "off": 1162,
-   "grounding": "f_10F7_0A44 (root:10F7): mov es,[CONST word = 50F6]; es:[..048A] far data reference"
+   "alias_of": "MeLocY"
   },
   "fd_50F6_048C": {
    "seg": 20726,
    "off": 1164,
-   "grounding": "f_10F7_0A44 (root:10F7): mov es,[CONST word = 50F6]; es:[..048C] far data reference"
+   "alias_of": "MePlane"
   },
   "fd_50F6_048E": {
    "seg": 20726,
@@ -10138,6 +12586,11 @@
    "seg": 20726,
    "off": 1178,
    "grounding": "f_10F7_0CA8 (root:10F7): mov es,[CONST word = 50F6]; es:[..049A] far data reference"
+  },
+  "fd_50F6_04A2": {
+   "seg": 20726,
+   "off": 1186,
+   "grounding": "S25:39C7 o25_39C7_0980:09F7 mov dx,es:[04A2]; shr dx,7 (CONST 8926=50F6); Win16 SimEggB modeLevels[2]"
   },
   "fd_50F6_04BE": {
    "seg": 20726,
@@ -10238,6 +12691,11 @@
    "seg": 20726,
    "off": 1850,
    "grounding": "o08_35F5_0000 (InitSimVars): mov es,[CONST word 50F6] ; mov es:[073A],..."
+  },
+  "fd_50F6_07AA": {
+   "seg": 20726,
+   "off": 1962,
+   "grounding": "o09_35F5_0000 (LoadGame): mov es,[CONST 861C = 50F6]; cmp es:[07AA],0 before f_284A_010A"
   },
   "fd_50F6_07BC": {
    "seg": 20726,
@@ -10452,7 +12910,7 @@
   "fd_50F6_0D6A": {
    "seg": 20726,
    "off": 3434,
-   "grounding": "f_10F7_005D (GetAntIndex-like): mov es,[CONST word = 50F6]; es:[..0D6A] list count/field array"
+   "alias_of": "ListIndexA"
   },
   "fd_50F6_0D6C": {
    "seg": 20726,
@@ -10517,7 +12975,7 @@
   "fd_50F6_0F08": {
    "seg": 20726,
    "off": 3848,
-   "grounding": "o08_35F5_0050 (RandWorld): mov es,[S08 CONST word] ; mov es:[off]"
+   "alias_of": "Cycle"
   },
   "fd_50F6_0F0C": {
    "seg": 20726,
@@ -10542,12 +13000,12 @@
   "fd_50F6_0F18": {
    "seg": 20726,
    "off": 3864,
-   "grounding": "f_0894_034B: mov es,[8060] (50F6); loop index es:[0F18] = [0D6A], dec while > 0"
+   "alias_of": "Tindex"
   },
   "fd_50F6_0F24": {
    "seg": 20726,
    "off": 3876,
-   "grounding": "o08_35F5_0050 (RandWorld): mov es,[S08 CONST word] ; mov es:[off]"
+   "alias_of": "TERRAINset"
   },
   "fd_50F6_0F26": {
    "seg": 20726,
@@ -10587,7 +13045,7 @@
   "fd_50F6_0F78": {
    "seg": 20726,
    "off": 3960,
-   "grounding": "f_10F7_1DD3 (root:10F7): mov es,[CONST word = 50F6]; es:[..0F78] far data reference"
+   "alias_of": "MeHealth"
   },
   "fd_50F6_0F7E": {
    "seg": 20726,
@@ -10614,6 +13072,11 @@
    "off": 4028,
    "grounding": "f_0F3F_0075: mov es,[8248] (50F6); add es:[0FBC],1; adc es:[0FBE],0 (long counter, red ants expired)"
   },
+  "fd_50F6_0FC2": {
+   "seg": 20726,
+   "off": 4034,
+   "grounding": "S25:39C7 o25_39C7_0AB0:0CAD add word es:[0FC2],1; adc es:[0FC4],0 (long counter; CONST 8932=50F6)"
+  },
   "fd_50F6_0FFA": {
    "seg": 20726,
    "off": 4090,
@@ -10628,6 +13091,11 @@
    "seg": 20726,
    "off": 4094,
    "grounding": "o08_35F5_0000 (InitSimVars): mov es,[CONST word 50F6] ; mov es:[0FFE],..."
+  },
+  "fd_50F6_1000": {
+   "seg": 20726,
+   "off": 4096,
+   "grounding": "S25:39C7 o25_39C7_006D:0300 mov es,[CONST 8912=50F6]; add word es:[1000],1; adc word es:[1002],0 (long counter)"
   },
   "fd_50F6_1006": {
    "seg": 20726,
@@ -10657,7 +13125,7 @@
   "fd_50F6_1050": {
    "seg": 20726,
    "off": 4176,
-   "grounding": "o08_35F5_0050 (RandWorld): mov es,[S08 CONST word] ; mov es:[off]"
+   "alias_of": "FoodB"
   },
   "fd_50F6_1058": {
    "seg": 20726,
@@ -10677,7 +13145,7 @@
   "fd_50F6_1060": {
    "seg": 20726,
    "off": 4192,
-   "grounding": "o08_35F5_0050 (RandWorld): mov es,[S08 CONST word] ; mov es:[off]"
+   "alias_of": "FoodR"
   },
   "fd_50F6_1066": {
    "seg": 20726,
@@ -10762,7 +13230,7 @@
   "fd_50F6_10BE": {
    "seg": 20726,
    "off": 4286,
-   "grounding": "o08_35F5_0050 (RandWorld): mov es,[S08 CONST word] ; mov es:[off]"
+   "alias_of": "HealthB"
   },
   "fd_50F6_10C0": {
    "seg": 20726,
@@ -10773,6 +13241,16 @@
    "seg": 20726,
    "off": 14394,
    "grounding": "o06_35F5_11FF: mov es,[CONST 84E8 = 50F6]; es:[383A] (S06:35F5 InitSimYard/yard sim unit)"
+  },
+  "fd_50F6_3862": {
+   "seg": 20726,
+   "off": 14434,
+   "grounding": "o09_35F5_0000 (LoadGame): _fstrcpy(MK_FP(50F6,3862), name) after FileSelect (last file name)"
+  },
+  "fd_50F6_3942": {
+   "seg": 20726,
+   "off": 14658,
+   "grounding": "f_20E8_04B6: mov es,[8A22] (seg 50F6); mov ax,es:[3942]"
   },
   "fd_50F6_3948": {
    "seg": 20726,
@@ -10822,17 +13300,32 @@
   "fd_50F6_3B50": {
    "seg": 20726,
    "off": 15184,
-   "grounding": "db module: mov es,[DS:89C4] (CONST word 50F6) ; es:[bx+3B50] handle array"
+   "alias_of": "db_handles"
   },
   "fd_50F6_46E2": {
    "seg": 20726,
    "off": 18146,
    "grounding": "f_21FA_00EE/0144/0315: 6*index + 46E2, seg 50F6 -> colour table entries (6 bytes each)"
   },
+  "fd_50F6_47D4": {
+   "seg": 20726,
+   "off": 18388,
+   "grounding": "f_20E8_0141: es=[8A1E] (50F6); mov es:[47D4],ax = third word of resource 0x80 (Win16 win_numOfGroups)"
+  },
+  "fd_50F6_47D6": {
+   "seg": 20726,
+   "off": 18390,
+   "grounding": "f_20E8_0141: es=[8A1C] (50F6); es:[47D6] = 2nd word of resource 0x80, *6 = colour table bytes (Win16 win_numOfColors)"
+  },
   "fd_50F6_47D8": {
    "seg": 20726,
    "off": 18392,
    "grounding": "f_2505_0453/04D7: mov es,[8A48]; cmp ax,es:[47D8] (window count bound)"
+  },
+  "fd_50F6_47DA": {
+   "seg": 20726,
+   "off": 18394,
+   "grounding": "f_20E8_0141: push 50F6:47DA as far Pt* to f_208F_0419(size, 0x6f)"
   },
   "fd_50F6_47DE": {
    "seg": 20726,
@@ -10884,10 +13377,20 @@
    "off": 15794,
    "grounding": "f_21FA_077D: cmp word ptr [3DB2],140h (screen width test halves frame margin)"
   },
+  "g_3DB4": {
+   "seg": 21939,
+   "off": 15796,
+   "grounding": "f_20E8_04B6: mov ax,[3DB4]; cmp with rect bottom (screen height?)"
+  },
   "g_3DDC": {
    "seg": 21939,
    "off": 15836,
    "grounding": "f_21FA_0002: mov al,[3DDC]; cbw; add ax,y (underline offset byte)"
+  },
+  "g_3DDE": {
+   "seg": 21939,
+   "off": 15838,
+   "grounding": "o09_36EE_000A: mov al,[3DDE]; cbw; add [bp+6],ax (text cell width advance)"
   },
   "g_3DE0": {
    "seg": 21939,

@@ -41,28 +41,28 @@ static long s_3B90 = 0L;
 static long s_3B94 = 0L;
 static int s_8C7A;
 
-int far f_1A96_065D(int n);
-int far f_1A96_0483(CacheHandle table);
-int far f_1A96_0532(CacheHandle table);
-char far * far f_1A96_01EC(int object, int type, CacheHandle table);
+int far ch_GetPrime(int n);
+int far ch_CleanupTable(CacheHandle table);
+int far ch_DumpOldest(CacheHandle table);
+char far * far ch_LookUpId(int object, int type, CacheHandle table);
 
-CacheHandle far f_1A96_000C(int size)
+CacheHandle far ch_CreateTable(int size)
 {
     CacheHandle table;
 
     if (size == 0)
         size = 503;
     else
-        size = f_1A96_065D(size);
+        size = ch_GetPrime(size);
     _fmemset(*(table = f_171C_13CA((long)(size * 8 + 4), 0, "cachetable")), -1, (size + 1) * 4);
     (*table)->count = size;
     (*table)->used = 0;
     return table;
 }
 
-int far f_1A96_008C(int object, int type, CacheHandle table)
+int far ch_RemoveEntry(int object, int type, CacheHandle table)
 {
-    if (f_1A96_01EC(object, type, table)) {
+    if (ch_LookUpId(object, type, table)) {
         (*table)->e[s_3B86].k.id = -1;
         (*table)->e[(*table)->count + s_3B86].h = 0L;
         (*table)->used--;
@@ -71,7 +71,7 @@ int far f_1A96_008C(int object, int type, CacheHandle table)
     return 0;
 }
 
-void far f_1A96_00EE(CacheHandle table)
+void far ch_PurgeCache(CacheHandle table)
 {
     int count;
     int i;
@@ -86,7 +86,7 @@ void far f_1A96_00EE(CacheHandle table)
     f_171C_13E4(table);
 }
 
-int far f_1A96_0159(char far *handle, CacheHandle table, int far *object, int far *type)
+int far ch_LookUpHandle(char far *handle, CacheHandle table, int far *object, int far *type)
 {
     int i;
     int count;
@@ -107,11 +107,11 @@ int far f_1A96_0159(char far *handle, CacheHandle table, int far *object, int fa
 }
 
 /* SCAFFOLD BEGIN: context only, not reconstruction.
- * f_1A96_01EC (ch_LookUpId) best draft (/Oeg): 359 vs 354 bytes, same control flow.  Residue:
+ * ch_LookUpId (ch_LookUpId) best draft (/Oeg): 359 vs 354 bytes, same control flow.  Residue:
  * the original keeps the hook result low word in SI (ours DI), computes base before the
  * hash and caches count in SI as the idiv divisor, and keeps the second-loop pointer in
  * ES:BX without storing its segment; 120 declaration orders give identical code. */
-char far * far f_1A96_01EC(int object, int type, CacheHandle table)
+char far * far ch_LookUpId(int object, int type, CacheHandle table)
 {
     char far *handle;
     int probes;
@@ -151,7 +151,7 @@ found:
     s_3B86 = i;
     handle = (*table)->e[count + i].h;
     if (f_171C_1794(handle)) {
-        f_1A96_0483(table);
+        ch_CleanupTable(table);
         goto missing;
     }
     f_171C_152C(handle);
@@ -164,7 +164,7 @@ missing:
 }
 /* SCAFFOLD END */
 
-int far f_1A96_034E(int object, int type, CacheHandle table, char far *handle)
+int far ch_AddEntry(int object, int type, CacheHandle table, char far *handle)
 {
     register int used;
     int count;
@@ -174,10 +174,10 @@ int far f_1A96_034E(int object, int type, CacheHandle table, char far *handle)
     s_8C7A++;
     if (used == count || s_8C7A > 30) {
         s_8C7A = 0;
-        if (f_1A96_0483(table) == count && f_1A96_0532(table) == count)
+        if (ch_CleanupTable(table) == count && ch_DumpOldest(table) == count)
             return 0;
     }
-    if (f_1A96_01EC(object, type, table))
+    if (ch_LookUpId(object, type, table))
         Punt("Attemp to add ID already present in lookup table");
     (*table)->e[s_3B86].k.id = object;
     (*table)->e[s_3B86].k.type = type;
@@ -186,9 +186,9 @@ int far f_1A96_034E(int object, int type, CacheHandle table, char far *handle)
     return 1;
 }
 
-int far f_1A96_0421(int object, int type, CacheHandle table)
+int far ch_DeleteEntry(int object, int type, CacheHandle table)
 {
-    if (f_1A96_01EC(object, type, table)) {
+    if (ch_LookUpId(object, type, table)) {
         (*table)->e[s_3B86].k.id = -1;
         (*table)->e[(*table)->count + s_3B86].h = 0L;
         (*table)->used--;
@@ -197,7 +197,7 @@ int far f_1A96_0421(int object, int type, CacheHandle table)
     return 0;
 }
 
-int far f_1A96_0483(CacheHandle table)
+int far ch_CleanupTable(CacheHandle table)
 {
     int count;
     CacheEntry far *hp;
@@ -218,7 +218,7 @@ int far f_1A96_0483(CacheHandle table)
     return (*table)->used;
 }
 
-int far f_1A96_0532(CacheHandle table)
+int far ch_DumpOldest(CacheHandle table)
 {
     unsigned long oldest;
     unsigned long age;
@@ -258,11 +258,11 @@ int far f_1A96_0532(CacheHandle table)
 }
 
 /* SCAFFOLD BEGIN: context only, not reconstruction.
- * f_1A96_065D best draft (/Oeg): equal length, 5 instructions differ.  Residue: the
+ * ch_GetPrime best draft (/Oeg): equal length, 5 instructions differ.  Residue: the
  * original stores prime = cand before forming the primes[nprimes] address (index BX,
  * base SI); this draft forms the address first (index SI, base BX).  Tried: 12 spellings
  * of the store, register j/nprimes, all 120 declaration orders, while/for/flag forms. */
-int far f_1A96_065D(int n)
+int far ch_GetPrime(int n)
 {
     int prime;
     int cand;
@@ -288,7 +288,7 @@ next:   ;
 }
 /* SCAFFOLD END */
 
-void far f_1A96_06D9(char far * (far *cache)(int object, int type),
+void far ch_SetCacheHooks(char far * (far *cache)(int object, int type),
                      char far * (far *release)(int object, int type))
 {
     g_3B7E = cache;

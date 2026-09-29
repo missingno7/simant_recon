@@ -4,12 +4,12 @@ extern int far fd_3D57_06DE;
 extern char far fd_50F6_0B0A[];
 extern char far fd_3D57_067E[][4];
 extern int far fd_50F6_0850;
-extern int far fd_50F6_048A;
-extern int far fd_50F6_047C;
-extern char far fd_3D57_0008[];
-extern char far fd_3D57_0000[];
-extern int far fd_50F6_10BE;
-extern int far fd_50F6_01FE;
+extern int far MeLocY;
+extern int far MeLocX;
+extern char far Dy8[];
+extern char far Dx8[];
+extern int far HealthB;
+extern int far HealthR;
 extern int far fd_3D57_0C18;
 extern int far fd_50F6_07C8;
 extern int far fd_3D57_0C14;
@@ -19,25 +19,25 @@ extern int far fd_50F6_0A90;
 extern unsigned char far fd_3D57_0164[12][16];
 extern int far fd_50F6_0AC4;
 extern int far fd_3D57_0C16;
-extern int far fd_50F6_0F78;
+extern int far MeHealth;
 
 extern void far WinPrintf(char far *fmt, ...);
-extern void far f_00DF_00E8(int sound, int a, int b);
+extern void far myBeginSound(int sound, int a, int b);
 extern void far f_00DF_00E0(int a);
-extern void far f_10F7_1DD3(int health);
+extern void far SetMyHealth(int health);
 extern void far o14_384C_0B6A(int a, int b, int c);
 extern void far f_00F8_059C(void);
 extern void far f_00F8_02DF(int a);
 extern void far f_00F8_0395(void);
 extern void far MakeNewHoleB(int x);
-extern void far f_14EE_0367(int x);
-extern void far o08_35F5_0C4C(int x, int y, int dir);
-extern void far o08_35F5_0DA0(int x, int y, int dir);
+extern void far MakeNewHoleR(int x);
+extern void far MakeBlkQueen(int x, int y, int dir);
+extern void far MakeRedQueen(int x, int y, int dir);
 extern int far RRand(int range);
 extern int far SRand2(void);
 extern int far SRand8(void);
-extern void far f_0BE8_0A5B(int x, int y, int type);
-extern void far f_0BE8_0ABE(int x, int y, int type);
+extern void far PlaceEggB(int x, int y, int type);
+extern void far PlaceEggR(int x, int y, int type);
 extern void far o16_384C_0000(void);
 
 void far CheatKeys(int key)
@@ -67,16 +67,16 @@ void far CheatKeys(int key)
     WinPrintf("CHEAT %d", i);
     switch (i) {
     case 0:
-        f_00DF_00E8(10, 0, 0x7e);
+        myBeginSound(10, 0, 0x7e);
         fd_50F6_0850 += 10;
         break;
     case 1:
-        f_00DF_00E8(1, 0, 0x7e);
-        f_10F7_1DD3(100);
+        myBeginSound(1, 0, 0x7e);
+        SetMyHealth(100);
         break;
     case 2:
-        f_00DF_00E8(1, 0, 0x7e);
-        f_10F7_1DD3(1);
+        myBeginSound(1, 0, 0x7e);
+        SetMyHealth(1);
         break;
     case 3:
         o14_384C_0B6A(0, 0x2724, 0);
@@ -95,56 +95,56 @@ void far CheatKeys(int key)
         break;
     case 6:
         for (i = 0; i < 64; i++)
-            f_14EE_0367(i);
+            MakeNewHoleR(i);
         break;
     case 7:
-        o08_35F5_0C4C(fd_50F6_047C + 2, fd_50F6_048A, 2);
+        MakeBlkQueen(MeLocX + 2, MeLocY, 2);
         break;
     case 8:
-        o08_35F5_0DA0(fd_50F6_047C + 2, fd_50F6_048A, 2);
+        MakeRedQueen(MeLocX + 2, MeLocY, 2);
         break;
     case 9:
         for (i = 0; i < 16; i++)
-            f_0BE8_0A5B(fd_3D57_0000[SRand8()] + fd_50F6_047C, fd_3D57_0008[SRand8()] + fd_50F6_048A, RRand(6) + 1);
+            PlaceEggB(Dx8[SRand8()] + MeLocX, Dy8[SRand8()] + MeLocY, RRand(6) + 1);
         break;
     case 10:
         for (i = 0; i < 16; i++)
-            f_0BE8_0ABE(fd_3D57_0000[SRand8()] + fd_50F6_047C, fd_3D57_0008[SRand8()] + fd_50F6_048A, RRand(6) + 0x81);
+            PlaceEggR(Dx8[SRand8()] + MeLocX, Dy8[SRand8()] + MeLocY, RRand(6) + 0x81);
         break;
     case 11:
-        fd_50F6_10BE = 100;
+        HealthB = 100;
         break;
     case 12:
-        fd_50F6_01FE = 100;
+        HealthR = 100;
         break;
     case 13:
-        fd_50F6_01FE = 0;
+        HealthR = 0;
         break;
     case 14:
         fd_3D57_0C18 = 0;
-        fd_50F6_10BE = 0;
+        HealthB = 0;
         break;
     case 15:
         fd_50F6_07C8 += 10;
         f_00F8_0395();
-        f_00DF_00E8(0x29, 0, 0x7e);
+        myBeginSound(0x29, 0, 0x7e);
         break;
     case 16:
         fd_3D57_0C14 = !fd_3D57_0C14;
         if (fd_3D57_0C14)
-            f_00DF_00E8(2, 0, 0x7e);
+            myBeginSound(2, 0, 0x7e);
         else
-            f_00DF_00E8(1, 0, 0x7e);
+            myBeginSound(1, 0, 0x7e);
         break;
     case 17:
         fd_3D57_0C12 = !fd_3D57_0C12;
         if (fd_3D57_0C12)
-            f_00DF_00E8(2, 0, 0x7e);
+            myBeginSound(2, 0, 0x7e);
         else
-            f_00DF_00E8(1, 0, 0x7e);
+            myBeginSound(1, 0, 0x7e);
         break;
     case 18:
-        f_00DF_00E8(2, 0, 0x7e);
+        myBeginSound(2, 0, 0x7e);
         for (i = 0; i < 12; i++)
             for (j = 0; j < 16; j++) {
                 fd_3D57_00A4[i][j] += 4;
@@ -152,7 +152,7 @@ void far CheatKeys(int key)
             }
         break;
     case 19:
-        f_00DF_00E8(1, 0, 0x7e);
+        myBeginSound(1, 0, 0x7e);
         for (i = 0; i < 12; i++)
             for (j = 0; j < 16; j++) {
                 if (SRand2() == 0) {
@@ -170,18 +170,18 @@ void far CheatKeys(int key)
     case 21:
         fd_3D57_0C16 = !fd_3D57_0C16;
         if (fd_3D57_0C16) {
-            fd_50F6_0F78 = 100;
-            f_00DF_00E8(2, 0, 0x7e);
+            MeHealth = 100;
+            myBeginSound(2, 0, 0x7e);
         } else
-            f_00DF_00E8(1, 0, 0x7e);
+            myBeginSound(1, 0, 0x7e);
         break;
     case 22:
         fd_3D57_0C18 = !fd_3D57_0C18;
         if (fd_3D57_0C18) {
-            fd_50F6_10BE = 100;
-            f_00DF_00E8(2, 0, 0x7e);
+            HealthB = 100;
+            myBeginSound(2, 0, 0x7e);
         } else
-            f_00DF_00E8(1, 0, 0x7e);
+            myBeginSound(1, 0, 0x7e);
         break;
     }
 }

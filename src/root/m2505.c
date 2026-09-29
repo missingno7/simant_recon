@@ -134,14 +134,14 @@ struct Pt _fastcall f_2505_0171(char far *obj)
     return size;
 }
 
-char far * _fastcall f_2505_025F(int win)
+char far * _fastcall win_WinRectAddr(int win)
 {
     if (!f_23AE_0051(win))
         Punt("\nWINDOW %x NOT LOCKED DURING CALL TO win_WinRectAddr!!", win);
     return f_2505_0006(win);
 }
 
-void _fastcall f_2505_0288(int obj, struct Rect far *rect)
+void _fastcall win_GetObjRect(int obj, struct Rect far *rect)
 {
     char far *w;
 
@@ -151,7 +151,7 @@ void _fastcall f_2505_0288(int obj, struct Rect far *rect)
     f_23AE_01DB(obj);
 }
 
-char far * _fastcall f_2505_02D7(int obj)
+char far * _fastcall win_ObjAddr(int obj)
 {
     if (!f_23AE_0051(obj))
         Punt("\nWINDOW %x NOT LOCKED DURING CALL TO win_ObjAddr!!", obj);
@@ -160,7 +160,7 @@ char far * _fastcall f_2505_02D7(int obj)
     return ((char far * far *)(f_2505_0006(obj) + 0x2c))[obj & 0xff];
 }
 
-char far * _fastcall f_2505_0345(int win)
+char far * _fastcall win_WinAddr(int win)
 {
     if (!f_23AE_0051(win))
         WinPrintf("\nWINDOW %x NOT LOCKED DURING CALL TO win_WinAddr!!", win);
@@ -250,7 +250,7 @@ int _fastcall f_2505_04D7(int win, int idx)
     return ((int far *)(f_2505_0006(win) + 0x10))[idx];
 }
 
-void _fastcall f_2505_0511(struct Rect far *r)
+void _fastcall win_SortRect(struct Rect far *r)
 {
     int t;
 
@@ -315,7 +315,7 @@ void _fastcall f_2505_0545(int win)
         }
     }
     for (i = 0; i < n; i++)
-        f_2505_0511(((struct Rect far * far *)(w + 0x2c))[i]);
+        win_SortRect(((struct Rect far * far *)(w + 0x2c))[i]);
     *(struct Rect far *)w = *((struct Rect far * far *)(w + 0x2c))[0];
     f_171C_1BBA(handle);
 }

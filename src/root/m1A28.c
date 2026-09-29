@@ -33,8 +33,8 @@ extern char far * far _fstrncpy(char far *dst, char far *src, unsigned int n);
 extern char far * far _fstrrchr(char far *s, int c);
 extern void far Punt(char far *format, ...);
 extern void far OpenIndex(char far *name, int db);
-extern void far f_1986_00F4(char far *name, int db);
-extern void far f_1986_00F5(int db);
+extern void far CreateIndex(char far *name, int db);
+extern void far CloseIndex(int db);
 
 static int s_394E = 0;
 
@@ -58,7 +58,7 @@ int far OpenDB(char far *name)
         fd_50F6_3958[db].header.magic = 0x12345678L;
         fd_50F6_3958[db].header.freeBytes = 0L;
         fd_50F6_3958[db].header.wastedBytes = 0L;
-        f_1986_00F4(fd_50F6_3958[db].name, db);
+        CreateIndex(fd_50F6_3958[db].name, db);
         fd_50F6_3958[db].dirty = 1;
     } else {
         read(fd_50F6_3958[db].file, &fd_50F6_3958[db].header, 14);
@@ -72,7 +72,7 @@ void far f_1A28_0148(void)
 {
 }
 
-void far f_1A28_0149(int db)
+void far CloseDB(int db)
 {
     int file;
 
@@ -82,7 +82,7 @@ void far f_1A28_0149(int db)
         write(file, &fd_50F6_3958[db].header, 14);
     }
     close(file);
-    f_1986_00F5(db);
+    CloseIndex(db);
     fd_50F6_3958[db].name[0] = 0;
 }
 

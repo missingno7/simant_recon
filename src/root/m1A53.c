@@ -10,20 +10,20 @@ extern void far Punt(char far *format, ...);
 extern int far WinPrintf(char far *format, ...);
 extern int far OpenDB(char far *name);
 extern void far f_1B28_0068(void);
-extern void far * far f_1A96_000C(int size);
-extern char far * far f_1A96_01EC(int object, int kind, void far *table);
-extern int far f_1A96_034E(int object, int kind, void far *table, char far *handle);
-extern char far * far f_19A9_001D(int db, int object, int kind, int far *size);
+extern void far * far ch_CreateTable(int size);
+extern char far * far ch_LookUpId(int object, int kind, void far *table);
+extern int far ch_AddEntry(int object, int kind, void far *table, char far *handle);
+extern char far * far DBRecall(int db, int object, int kind, int far *size);
 extern void far f_171C_15A2(char far *handle, int type);
 extern void far f_171C_13E4(char far *handle);
-extern int far f_1A96_0159(char far *handle, void far *table, int far *object, int far *kind);
-extern void far f_1A96_0421(int object, int kind, void far *table);
-extern void far f_1A96_008C(int object, int kind, void far *table);
-extern void far f_1A96_00EE(void far *table);
-extern void far f_1A28_0149(int db);
-extern void far f_19A9_031D(int db, int object, int kind);
-extern void far f_19A9_0310(int db, int a4, int a5, int a6, int object, int kind, int a3);
-extern int far fd_50F6_3B50[];
+extern int far ch_LookUpHandle(char far *handle, void far *table, int far *object, int far *kind);
+extern void far ch_DeleteEntry(int object, int kind, void far *table);
+extern void far ch_RemoveEntry(int object, int kind, void far *table);
+extern void far ch_PurgeCache(void far *table);
+extern void far CloseDB(int db);
+extern void far DBDelete(int db, int object, int kind);
+extern void far DBAdd(int db, int a4, int a5, int a6, int object, int kind, int a3);
+extern int far db_handles[];
 
 int db_numOfHandles = 0;
 void far *db_cacheTable = 0L;
@@ -47,9 +47,9 @@ int far db_SetDataBase(char far *name)
     if (db_numOfHandles)
         f_1B28_0068();
     if (db_cacheTable == 0L)
-        db_cacheTable = f_1A96_000C(0);
-    fd_50F6_3B50[db_numOfHandles] = OpenDB(name);
-    handle = fd_50F6_3B50[db_numOfHandles++];
+        db_cacheTable = ch_CreateTable(0);
+    db_handles[db_numOfHandles] = OpenDB(name);
+    handle = db_handles[db_numOfHandles++];
     if (handle < 0)
         Punt("Cannot open database %s", name);
     return handle;
@@ -85,12 +85,12 @@ char far * far db_LoadObject(int object, int kind)
 
     if (db_numOfHandles <= 0)
         Punt("Load attempt with database closed");
-    handle = f_1A96_01EC(object, kind, db_cacheTable);
+    handle = ch_LookUpId(object, kind, db_cacheTable);
     if (!handle) {
         f_1B28_0068();
         for (i = 0; i < db_numOfHandles; i++) {
-            if ((handle = f_19A9_001D(fd_50F6_3B50[i], object, kind, &size)) != 0L) {
-                if (!f_1A96_034E(object, kind, db_cacheTable, handle))
+            if ((handle = DBRecall(db_handles[i], object, kind, &size)) != 0L) {
+                if (!ch_AddEntry(object, kind, db_cacheTable, handle))
                     Punt("Cache table full, can't load object");
                 return handle;
             }
@@ -108,40 +108,40 @@ void far db_PurgeObject(int object, int kind)
 
     if (db_numOfHandles < 0)
         Punt("Purge attempt with database closed");
-    handle = f_1A96_01EC(object, kind, db_cacheTable);
+    handle = ch_LookUpId(object, kind, db_cacheTable);
     if (handle) {
-        f_1A96_0421(object, kind, db_cacheTable);
+        ch_DeleteEntry(object, kind, db_cacheTable);
         f_171C_13E4(handle);
     }
 }
 
-void far f_1A53_025F(char far *handle)
+void far db_PurgeHandle(char far *handle)
 {
     int object;
     int kind;
 
     if (db_numOfHandles < 0)
         Punt("Purge attempt with database closed");
-    if (f_1A96_0159(handle, db_cacheTable, &object, &kind)) {
-        f_1A96_0421(object, kind, db_cacheTable);
+    if (ch_LookUpHandle(handle, db_cacheTable, &object, &kind)) {
+        ch_DeleteEntry(object, kind, db_cacheTable);
         f_171C_13E4(handle);
     } else
         WinPrintf("\a\nPurge handle - handle not found!! handle=%p", handle);
 }
 
-void far f_1A53_02D5(char far *handle)
+void far db_ReleaseHandle(char far *handle)
 {
     f_171C_15A2(handle, 3);
 }
 
-void far f_1A53_02EB(unsigned int object, int kind)
+void far db_ReleaseObject(unsigned int object, int kind)
 {
     char far *handle;
 
     if (object < 30000) {
         if (db_numOfHandles < 0)
             Punt("Purge attempt with database closed");
-        handle = f_1A96_01EC(object, kind, db_cacheTable);
+        handle = ch_LookUpId(object, kind, db_cacheTable);
         if (handle)
             f_171C_15A2(handle, 3);
         else
@@ -149,34 +149,34 @@ void far f_1A53_02EB(unsigned int object, int kind)
     }
 }
 
-void far f_1A53_034F(int object, int kind)
+void far db_UnhookObject(int object, int kind)
 {
     if (db_numOfHandles < 0)
         Punt("Unhook attempt with database closed");
-    f_1A96_008C(object, kind, db_cacheTable);
+    ch_RemoveEntry(object, kind, db_cacheTable);
 }
 
-void far f_1A53_037C(void)
+void far db_CloseDataBase(void)
 {
     while (db_numOfHandles > 0) {
         --db_numOfHandles;
-        f_1A28_0149(fd_50F6_3B50[db_numOfHandles]);
+        CloseDB(db_handles[db_numOfHandles]);
     }
-    f_1A96_00EE(db_cacheTable);
+    ch_PurgeCache(db_cacheTable);
     db_cacheTable = 0L;
 }
 
-void far f_1A53_03B6(int object, int kind, int a3, int a4, int a5, int a6)
+void far db_ReplaceObject(int object, int kind, int a3, int a4, int a5, int a6)
 {
     f_1B28_0068();
-    f_19A9_031D(fd_50F6_3B50[0], object, kind);
-    f_1A53_034F(object, kind);
-    f_19A9_0310(fd_50F6_3B50[0], a4, a5, a6, object, kind, a3);
+    DBDelete(db_handles[0], object, kind);
+    db_UnhookObject(object, kind);
+    DBAdd(db_handles[0], a4, a5, a6, object, kind, a3);
 }
 
-void far f_1A53_0404(int object, int kind, int a3, int a4, int a5, int a6)
+void far db_SaveObject(int object, int kind, int a3, int a4, int a5, int a6)
 {
     f_1B28_0068();
-    f_1A53_034F(object, kind);
-    f_19A9_0310(fd_50F6_3B50[0], a4, a5, a6, object, kind, a3);
+    db_UnhookObject(object, kind);
+    DBAdd(db_handles[0], a4, a5, a6, object, kind, a3);
 }

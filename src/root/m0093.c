@@ -34,7 +34,7 @@ int far f_0093_0002(int range)
     return second;
 }
 
-int far f_0093_002B(int range)
+int far SGRand(int range)
 {
     int first;
     int second;

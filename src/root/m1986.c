@@ -63,23 +63,23 @@ void far OpenIndex(char far *path, int db)
     close(fd);
 }
 
-void far f_1986_00F4(char far *name, int db)
+void far CreateIndex(char far *name, int db)
 {
 }
 
-void far f_1986_00F5(int db)
+void far CloseIndex(int db)
 {
     if (fd_50F6_3958[db].index)
         f_171C_2276(fd_50F6_3958[db].index);
 }
 
 /* SCAFFOLD BEGIN: context only, not reconstruction.
- * f_1986_012A (index binary search) best draft (/Oeg): equal length, 17 bytes differ.
+ * FindIndex (index binary search) best draft (/Oeg): equal length, 17 bytes differ.
  * Residue: the original lays out the probe test as jg -> top=mid-1 (first), jne/jl ->
  * lastTop=mid+1 (last, falling into the loop test) and loads id before the entry
  * pointer for the id compare; every spelling tried (||/&& forms, negations, else-if,
  * continue/goto, operand order) compiles to the mirrored layout. */
-IndexEntry far * far f_1986_012A(int db, int id, int kind)
+IndexEntry far * far FindIndex(int db, int id, int kind)
 {
     int mid;
     int top;

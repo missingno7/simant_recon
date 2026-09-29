@@ -2,21 +2,21 @@
 
 extern int far SRand1(int range);
 extern int far SRand8(void);
-extern int far f_10F7_048E(int plane, int x, int y);
-extern int far f_10F7_24EE(int colony, int x, int y);
+extern int far IsClear3x3(int plane, int x, int y);
+extern int far IsItDigable(int colony, int x, int y);
 
-extern int far fd_50F6_0F24;
-extern unsigned char far fd_3E1D_0180[128][64];
-extern unsigned char far fd_3D57_0224[];
+extern int far TERRAINset;
+extern unsigned char far MapA[128][64];
+extern unsigned char far HoleMapB[];
 extern int far fd_3D57_02AC[2];
 extern int far fd_3D57_02A4[2];
-extern unsigned char far fd_3D57_0264[];
+extern unsigned char far HoleMapR[];
 extern int far fd_3D57_02B0[2];
 extern int far fd_3D57_02A8[2];
-extern unsigned char far fd_3E1D_2180[64][64];
-extern unsigned char far fd_3E1D_3180[64][64];
-extern char far fd_3D57_0008[8];
-extern char far fd_3D57_0000[8];
+extern unsigned char far MapB[64][64];
+extern unsigned char far MapR[64][64];
+extern char far Dy8[8];
+extern char far Dx8[8];
 extern unsigned char near g_1BB2[8];
 extern int far IsItDirt(int value);
 extern long far fd_50F6_1068;
@@ -29,60 +29,60 @@ extern long far fd_50F6_10A2;
 extern int far fd_50F6_0232;
 extern int far fd_50F6_0200;
 extern int far fd_50F6_020E;
-extern unsigned char far fd_3E1D_4180[64][64];
-extern unsigned char far fd_3E1D_5180[64][64];
+extern unsigned char far ExitMapB[64][64];
+extern unsigned char far ExitMapR[64][64];
 
-void far f_14EE_0079(int x, int y);
+void far CreateNewHole(int x, int y);
 void far MakeNewHoleB(int x);
-int far f_14EE_0317(int v);
-void far f_14EE_0367(int x);
+int far CanBeHouseHole(int v);
+void far MakeNewHoleR(int x);
 void far f_14EE_04B5(int x, int y);
-void far f_14EE_0519(int x, int y);
-void far f_14EE_0647(int x, int y);
+void far DigTileB(int x, int y);
+void far DigTileR(int x, int y);
 void far f_14EE_09F1(int x, int y);
 void far f_14EE_0B5A(int x, int y);
-int far f_14EE_0B33(int v);
+int far RIsItDirt(int v);
 void far f_14EE_0C9C(int x, int y);
 void far f_14EE_0D71(int x, int y);
 
-int far f_14EE_0002(int x, int y)
+int far DigMyNewHole(int x, int y)
 {
     int result;
 
     result = 0;
     if (x >= 1 && x <= 127 && y >= 1 && y <= 63) {
-        if (fd_50F6_0F24) {
-            if (fd_3E1D_0180[x][y] < 0xc8)
+        if (TERRAINset) {
+            if (MapA[x][y] < 0xc8)
                 result = 1;
         } else {
-            result = f_10F7_048E(1, x, y);
+            result = IsClear3x3(1, x, y);
         }
         if (result == 1)
-            f_14EE_0079(x, y);
+            CreateNewHole(x, y);
     }
     return result;
 }
 
-void far f_14EE_0079(int x, int y)
+void far CreateNewHole(int x, int y)
 {
     if (x < 1 || x >= 0x7f || y < 1 || y >= 0x3f)
         return;
-    if (fd_50F6_0F24)
-        fd_3E1D_0180[x][y] = 0x59;
+    if (TERRAINset)
+        MapA[x][y] = 0x59;
     else {
-        fd_3E1D_0180[x][y] = 0x50;
+        MapA[x][y] = 0x50;
         f_14EE_04B5(x, y);
     }
     if (x < 0x40) {
-        fd_3D57_0224[y] = x;
-        f_14EE_0519(y, 1);
+        HoleMapB[y] = x;
+        DigTileB(y, 1);
         fd_3D57_02AC[0] = x;
         fd_3D57_02AC[1] = y;
         fd_3D57_02A4[0] = y;
         fd_3D57_02A4[1] = 0;
     } else {
-        fd_3D57_0264[y] = x;
-        f_14EE_0647(y, 1);
+        HoleMapR[y] = x;
+        DigTileR(y, 1);
         fd_3D57_02B0[0] = x;
         fd_3D57_02B0[1] = y;
         fd_3D57_02A8[0] = y;
@@ -92,23 +92,23 @@ void far f_14EE_0079(int x, int y)
 
 void far f_14EE_0151(int colony, int x, int y)
 {
-    if (f_10F7_24EE(colony, x, y)) {
+    if (IsItDigable(colony, x, y)) {
         if (colony == 2) {
             if (y <= 1) {
-                fd_3E1D_2180[x][0] = 0x18;
+                MapB[x][0] = 0x18;
                 MakeNewHoleB(x);
                 if (y != 1)
                     return;
             }
-            f_14EE_0519(x, y);
+            DigTileB(x, y);
         } else {
             if (y <= 1) {
-                fd_3E1D_3180[x][0] = 0x18;
-                f_14EE_0367(x);
+                MapR[x][0] = 0x18;
+                MakeNewHoleR(x);
                 if (y != 1)
                     return;
             }
-            f_14EE_0647(x, y);
+            DigTileR(x, y);
         }
     }
 }
@@ -121,12 +121,12 @@ void far MakeNewHoleB(int x)
     int start;
 
     start = SRand1(31);
-    if (fd_50F6_0F24) {
+    if (TERRAINset) {
         for (i = 0; i < 34; i++) {
             y = (start + i) % 32 + 2;
-            v = f_14EE_0317(fd_3E1D_0180[y][x]);
+            v = CanBeHouseHole(MapA[y][x]);
             if (v) {
-                fd_3E1D_0180[y][x] = v;
+                MapA[y][x] = v;
                 fd_3D57_02AC[0] = y;
                 fd_3D57_02AC[1] = x;
                 fd_3D57_02A4[0] = x;
@@ -139,8 +139,8 @@ void far MakeNewHoleB(int x)
     } else {
         for (i = 0; i < 34; i++) {
             y = (i + start) % 32 + 2;
-            if (f_10F7_048E(1, y, x)) {
-                fd_3E1D_0180[y][x] = 0x50;
+            if (IsClear3x3(1, y, x)) {
+                MapA[y][x] = 0x50;
                 fd_3D57_02AC[0] = y;
                 fd_3D57_02AC[1] = x;
                 fd_3D57_02A4[0] = x;
@@ -152,11 +152,11 @@ void far MakeNewHoleB(int x)
         if (i == 34)
             return;
     }
-    fd_3D57_0224[x] = y;
-    f_14EE_0519(x, 1);
+    HoleMapB[x] = y;
+    DigTileB(x, 1);
 }
 
-int far f_14EE_0317(int v)
+int far CanBeHouseHole(int v)
 {
     if (v == 0)
         return 0x86;
@@ -175,7 +175,7 @@ int far f_14EE_0317(int v)
     return 0;
 }
 
-void far f_14EE_0367(int x)
+void far MakeNewHoleR(int x)
 {
     int i;
     int v;
@@ -183,12 +183,12 @@ void far f_14EE_0367(int x)
     int start;
 
     start = SRand1(31);
-    if (fd_50F6_0F24) {
+    if (TERRAINset) {
         for (i = 0; i < 34; i++) {
             y = 0x7e - (start + i) % 32;
-            v = f_14EE_0317(fd_3E1D_0180[y][x]);
+            v = CanBeHouseHole(MapA[y][x]);
             if (v) {
-                fd_3E1D_0180[y][x] = v;
+                MapA[y][x] = v;
                 fd_3D57_02B0[0] = y;
                 fd_3D57_02B0[1] = x;
                 fd_3D57_02A8[0] = x;
@@ -201,8 +201,8 @@ void far f_14EE_0367(int x)
     } else {
         for (i = 0; i < 34; i++) {
             y = 0x7e - (i + start) % 32;
-            if (f_10F7_048E(1, y, x)) {
-                fd_3E1D_0180[y][x] = 0x50;
+            if (IsClear3x3(1, y, x)) {
+                MapA[y][x] = 0x50;
                 fd_3D57_02B0[0] = y;
                 fd_3D57_02B0[1] = x;
                 fd_3D57_02A8[0] = x;
@@ -214,8 +214,8 @@ void far f_14EE_0367(int x)
         if (i == 34)
             return;
     }
-    fd_3D57_0264[x] = y;
-    f_14EE_0647(x, 1);
+    HoleMapR[x] = y;
+    DigTileR(x, 1);
 }
 
 void far f_14EE_04B5(int x, int y)
@@ -225,19 +225,19 @@ void far f_14EE_04B5(int x, int y)
     int ny;
 
     for (i = 0; i < 8; i++) {
-        ny = fd_3D57_0008[i] + y;
-        nx = fd_3D57_0000[i] + x;
+        ny = Dy8[i] + y;
+        nx = Dx8[i] + x;
         if (nx < 0 || nx > 127 || ny < 0 || ny > 63)
             continue;
-        if (fd_3E1D_0180[nx][ny] < 0x50)
-            fd_3E1D_0180[nx][ny] = g_1BB2[i];
+        if (MapA[nx][ny] < 0x50)
+            MapA[nx][ny] = g_1BB2[i];
     }
 }
 
-void far f_14EE_0519(int x, int y)
+void far DigTileB(int x, int y)
 {
-    if (IsItDirt(fd_3E1D_2180[x][y])) {
-        fd_3E1D_2180[x][y] = SRand8();
+    if (IsItDirt(MapB[x][y])) {
+        MapB[x][y] = SRand8();
         fd_50F6_1068 += x;
         fd_50F6_1082 += y;
         fd_50F6_0224++;
@@ -246,9 +246,9 @@ void far f_14EE_0519(int x, int y)
             fd_50F6_10C0 = fd_50F6_1082 / fd_50F6_0224;
         }
         if (y > 0x35 && SRand1(64) == 0) {
-            fd_3E1D_2180[x][y] = 0x14;
-            f_14EE_0647(x, y);
-            fd_3E1D_3180[x][y] = 0x14;
+            MapB[x][y] = 0x14;
+            DigTileR(x, y);
+            MapR[x][y] = 0x14;
         }
     }
     f_14EE_09F1(x, y - 1);
@@ -258,10 +258,10 @@ void far f_14EE_0519(int x, int y)
     f_14EE_0C9C(x, y);
 }
 
-void far f_14EE_0647(int x, int y)
+void far DigTileR(int x, int y)
 {
-    if (IsItDirt(fd_3E1D_3180[x][y])) {
-        fd_3E1D_3180[x][y] = SRand8();
+    if (IsItDirt(MapR[x][y])) {
+        MapR[x][y] = SRand8();
         fd_50F6_108E += x;
         fd_50F6_10A2 += y;
         fd_50F6_0232++;
@@ -279,17 +279,17 @@ void far f_14EE_0647(int x, int y)
 
 int far DigTileThemB(int x, int y)
 {
-    if (y < 0x3f && !IsItDirt(fd_3E1D_2180[x][y + 1]))
+    if (y < 0x3f && !IsItDirt(MapB[x][y + 1]))
         return 0;
-    if (y > 2 && !IsItDirt(fd_3E1D_2180[x][y - 1]))
+    if (y > 2 && !IsItDirt(MapB[x][y - 1]))
         return 0;
     if (x == 0 || x > 0x3e)
         return 0;
     if (y == 0) {
-        fd_3E1D_2180[x][y] = 0x18;
+        MapB[x][y] = 0x18;
         MakeNewHoleB(x);
     } else
-        fd_3E1D_2180[x][y] = SRand8();
+        MapB[x][y] = SRand8();
     fd_50F6_1068 += x;
     fd_50F6_1082 += y;
     fd_50F6_0224++;
@@ -308,11 +308,11 @@ int far DigTileThemB(int x, int y)
 int far DigTileThemR(int x, int y)
 {
     if (y < 0x3f) {
-        if (!IsItDirt(fd_3E1D_3180[x][y + 1]))
+        if (!IsItDirt(MapR[x][y + 1]))
             return 0;
     }
     if (y > 2) {
-        if (!IsItDirt(fd_3E1D_3180[x][y - 1]))
+        if (!IsItDirt(MapR[x][y - 1]))
             return 0;
     }
     if (x == 0)
@@ -320,10 +320,10 @@ int far DigTileThemR(int x, int y)
     if (x > 0x3e)
         return 0;
     if (y == 0) {
-        fd_3E1D_3180[x][y] = 0x18;
-        f_14EE_0367(x);
+        MapR[x][y] = 0x18;
+        MakeNewHoleR(x);
     } else
-        fd_3E1D_3180[x][y] = SRand8();
+        MapR[x][y] = SRand8();
     fd_50F6_108E += x;
     fd_50F6_10A2 += y;
     fd_50F6_0232++;
@@ -351,36 +351,36 @@ void far f_14EE_09F1(int x, int y)
     if (x < 0 || x > 63 || y > 63)
         return;
     if (y == 0) {
-        if (fd_3E1D_2180[x][y] < 0x30)
-            fd_3E1D_2180[x][y] = 0x18;
+        if (MapB[x][y] < 0x30)
+            MapB[x][y] = 0x18;
         return;
     }
-    v = fd_3E1D_2180[x][y];
+    v = MapB[x][y];
     if (v < 0x20)
         return;
     if (v > 0x2f && v < 0x4f)
         return;
     v = v > 0x4d ? 0x2f : 0;
     bits = 0;
-    if (y < 2 || f_14EE_0B33(fd_3E1D_2180[x][y - 1]))
+    if (y < 2 || RIsItDirt(MapB[x][y - 1]))
         bits = 1;
-    if (x > 0x3e || f_14EE_0B33(fd_3E1D_2180[x + 1][y]))
+    if (x > 0x3e || RIsItDirt(MapB[x + 1][y]))
         bits |= 2;
-    if (y > 0x3e || f_14EE_0B33(fd_3E1D_2180[x][y + 1]))
+    if (y > 0x3e || RIsItDirt(MapB[x][y + 1]))
         bits |= 4;
-    if (x < 1 || f_14EE_0B33(fd_3E1D_2180[x - 1][y]))
+    if (x < 1 || RIsItDirt(MapB[x - 1][y]))
         bits |= 8;
     if (bits)
-        fd_3E1D_2180[x][y] = bits + v + 0x1f;
+        MapB[x][y] = bits + v + 0x1f;
     else if (v == 0)
-        fd_3E1D_2180[x][y] = SRand8();
+        MapB[x][y] = SRand8();
     else
-        fd_3E1D_2180[x][y] = 0x4e;
+        MapB[x][y] = 0x4e;
 }
 
 /* SCAFFOLD END */
 
-int far f_14EE_0B33(int v)
+int far RIsItDirt(int v)
 {
     if (v < 0x20)
         return 0;
@@ -398,31 +398,31 @@ void far f_14EE_0B5A(int x, int y)
     if (x < 0 || x > 63 || y > 63)
         return;
     if (y == 0) {
-        if (fd_3E1D_3180[x][y] < 0x30)
-            fd_3E1D_3180[x][y] = 0x18;
+        if (MapR[x][y] < 0x30)
+            MapR[x][y] = 0x18;
         return;
     }
-    v = fd_3E1D_3180[x][y];
+    v = MapR[x][y];
     if (v < 0x20)
         return;
     if (v > 0x2f && v < 0x4f)
         return;
     v = v > 0x4d ? 0x2f : 0;
     bits = 0;
-    if (y < 2 || f_14EE_0B33(fd_3E1D_3180[x][y - 1]))
+    if (y < 2 || RIsItDirt(MapR[x][y - 1]))
         bits = 1;
-    if (x > 0x3e || f_14EE_0B33(fd_3E1D_3180[x + 1][y]))
+    if (x > 0x3e || RIsItDirt(MapR[x + 1][y]))
         bits |= 2;
-    if (y > 0x3e || f_14EE_0B33(fd_3E1D_3180[x][y + 1]))
+    if (y > 0x3e || RIsItDirt(MapR[x][y + 1]))
         bits |= 4;
-    if (x < 1 || f_14EE_0B33(fd_3E1D_3180[x - 1][y]))
+    if (x < 1 || RIsItDirt(MapR[x - 1][y]))
         bits |= 8;
     if (bits)
-        fd_3E1D_3180[x][y] = bits + v + 0x1f;
+        MapR[x][y] = bits + v + 0x1f;
     else if (v == 0)
-        fd_3E1D_3180[x][y] = SRand8();
+        MapR[x][y] = SRand8();
     else
-        fd_3E1D_3180[x][y] = 0x4e;
+        MapR[x][y] = 0x4e;
 }
 
 /* SCAFFOLD END */
@@ -441,26 +441,26 @@ void far f_14EE_0C9C(int x, int y)
     int value;
 
     if (y < 2) {
-        if (fd_3E1D_2180[x][y] == 0x18)
-            fd_3E1D_4180[x][y] = 0xff;
+        if (MapB[x][y] == 0x18)
+            ExitMapB[x][y] = 0xff;
         else
-            fd_3E1D_4180[x][y] = 0xfe;
+            ExitMapB[x][y] = 0xfe;
         return;
     }
     best = 0;
     for (i = 0; i < 8; i++) {
-        ny = fd_3D57_0008[i] + y;
-        nx = fd_3D57_0000[i] + x;
+        ny = Dy8[i] + y;
+        nx = Dx8[i] + x;
         if (nx < 0 || nx > 63 || ny < 0 || ny > 63)
             continue;
-        value = fd_3E1D_4180[nx][ny];
+        value = ExitMapB[nx][ny];
         if (value > best)
             best = value;
     }
     if (best)
-        fd_3E1D_4180[x][y] = best - 1;
+        ExitMapB[x][y] = best - 1;
     else
-        fd_3E1D_4180[x][y] = 0;
+        ExitMapB[x][y] = 0;
 }
 
 void far f_14EE_0D71(int x, int y)
@@ -472,26 +472,26 @@ void far f_14EE_0D71(int x, int y)
     int value;
 
     if (y < 2) {
-        if (fd_3E1D_3180[x][y] == 0x18)
-            fd_3E1D_5180[x][y] = 0xff;
+        if (MapR[x][y] == 0x18)
+            ExitMapR[x][y] = 0xff;
         else
-            fd_3E1D_5180[x][y] = 0xfe;
+            ExitMapR[x][y] = 0xfe;
         return;
     }
     best = 0;
     for (i = 0; i < 8; i++) {
-        ny = fd_3D57_0008[i] + y;
-        nx = fd_3D57_0000[i] + x;
+        ny = Dy8[i] + y;
+        nx = Dx8[i] + x;
         if (nx < 0 || nx > 63 || ny < 0 || ny > 63)
             continue;
-        value = fd_3E1D_5180[nx][ny];
+        value = ExitMapR[nx][ny];
         if (value > best)
             best = value;
     }
     if (best)
-        fd_3E1D_5180[x][y] = best - 1;
+        ExitMapR[x][y] = best - 1;
     else
-        fd_3E1D_5180[x][y] = 0;
+        ExitMapR[x][y] = 0;
 }
 
 /* SCAFFOLD END */
@@ -504,11 +504,11 @@ void far f_14EE_0E46(void)
 
     for (x = 0; x < 64; x++) {
         for (y = 3; y < 64; y++) {
-            v = fd_3E1D_2180[x][y];
+            v = MapB[x][y];
             if (v >= 0x20 && v <= 0x2d)
-                fd_3E1D_2180[x][y] += 0x31;
-            else if (fd_3E1D_2180[x][y] <= 0x13)
-                fd_3E1D_2180[x][y] = 0x50;
+                MapB[x][y] += 0x31;
+            else if (MapB[x][y] <= 0x13)
+                MapB[x][y] = 0x50;
         }
     }
 }

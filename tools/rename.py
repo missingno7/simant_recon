@@ -78,6 +78,15 @@ def main() -> int:
         # (symbol-table hashing), so a module whose rewrite is not exact keeps the old
         # names: they stay registered as aliases of the new ones.
         mapping = {o: n for o, n, _ in ren}
+        # bind the new names to the old addresses *before* re-proving (the registry is only
+        # rewritten after every module verifies)
+        import match as matchmod
+        base = dict(matchmod.symbols())
+        for o, n, _ in ren:
+            rec = base.get("_" + o)
+            if rec is not None:
+                base["_" + n] = rec
+        matchmod.symbols = lambda: base
         kept = {}
         for key in list(changed):
             if key in a.skip_module:

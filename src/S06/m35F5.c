@@ -484,8 +484,8 @@ void far o06_35F5_0A5F(void)
 /* SCAFFOLD BEGIN: SimKidInside draft (C4203 under MSC 6.00A C2 and C2L, see report) */
 extern int far fd_3D57_07C8;
 extern int far fd_50F6_035C;
-extern int far fd_50F6_0330;
 extern int far fd_50F6_0350;
+extern int far fd_50F6_0330;
 extern unsigned char far fd_3E1D_6180[128][64];
 extern int far fd_50F6_0F18;
 extern unsigned char far fd_3E1D_AD3B[];
@@ -1083,6 +1083,242 @@ void far o06_35F5_1D9D(void)
     fd_50F6_073A = n;
 }
 
+extern int far fd_3D57_0C20;
+extern int far fd_50F6_03E2;
+extern int far fd_50F6_0400;
+extern int far fd_50F6_0478;
+extern int far fd_3D57_02C0;
+extern int far fd_50F6_0376;
+extern int far fd_50F6_0366;
+extern int far fd_50F6_0AEC[6];
+extern int far SRand8(void);
+extern void far f_00DF_00B1(int id, int arg);
+extern void far o14_384C_0B6A(int a, int b, int c);
+extern void far o16_384C_0000(void);
+int far o06_35F5_2314(int x, int y);
+void far o06_35F5_2381(int x, int y, int colony);
+
+/* SimColonies (Win16 unit order): yard colony growth, swarms and the for-sale scenario */
+void far o06_35F5_1E54(void)
+{
+    int patches, b, y, r;
+    int x;
+    register int n;
+
+    if (fd_50F6_07C2 & 0x1f)
+        return;
+    fd_3D57_0C20 = 1;
+    o06_35F5_1D9D();
+    fd_50F6_03E2 = 0;
+    fd_50F6_0400 = 0;
+    fd_50F6_0478 = 0;
+    if (fd_50F6_0330 > 0)
+        fd_50F6_03E2 = 1;
+    if (fd_50F6_0350 > 0)
+        fd_50F6_0400 = 1;
+    n = fd_50F6_0330 & 0x3ff;
+    if (n > 250)
+        n = 250;
+    fd_3D57_00A4[fd_50F6_07CA[0]][fd_50F6_07CA[1]] = n;
+    n = fd_50F6_0350 & 0x3ff;
+    if (n > 250)
+        n = 250;
+    fd_3D57_0164[fd_50F6_07CA[0]][fd_50F6_07CA[1]] = n;
+    for (x = 0; x < 12; x++) {
+        for (y = 0; y < 16; y++) {
+            if (fd_50F6_07CA[0] == x && fd_50F6_07CA[1] == y)
+                continue;
+            r = fd_3D57_0164[x][y];
+            b = fd_3D57_00A4[x][y];
+            if (b == 0 && r == 0)
+                continue;
+            if (fd_50F6_0EAC == 2 && (x < 2 || (x == 3 && y < 5)))
+                fd_50F6_0478++;
+            patches = o06_35F5_2314(x, y);
+            if (b != 0) {
+                fd_50F6_03E2++;
+                if (patches != 0)
+                    b += patches;
+                else
+                    b++;
+                if (b <= 0) {
+                    fd_50F6_0A9E++;
+                    fd_3D57_00A4[x][y] = 0;
+                } else if (b < 250)
+                    fd_3D57_00A4[x][y] = b;
+                else {
+                    fd_3D57_00A4[x][y] = 250;
+                    if (SRand1(10) == 0)
+                        o06_35F5_2381(x, y, 0);
+                }
+            }
+            if (r != 0) {
+                fd_50F6_0400++;
+                if (patches != 0)
+                    r -= patches;
+                else
+                    r++;
+                if (r <= 0) {
+                    fd_50F6_0AC8++;
+                    fd_3D57_0164[x][y] = 0;
+                    if (x == 11) {
+                        y = 8;
+                        fd_3D57_0164[SRand1(6) + 2][0] = 20;
+                    }
+                } else if (r < 250)
+                    fd_3D57_0164[x][y] = r;
+                else {
+                    fd_3D57_0164[x][y] = 250;
+                    if (SRand1(10) == 0)
+                        o06_35F5_2381(x, y, 1);
+                }
+            }
+        }
+    }
+    if (fd_3D57_02C0 == 1) {
+        fd_50F6_105C++;
+        if (fd_50F6_105C > SRand8() + 10) {
+            fd_50F6_105C = 0;
+            while (fd_50F6_07C8 > 0) {
+                o06_35F5_2381(fd_50F6_07CA[0], fd_50F6_07CA[1], 0);
+                fd_50F6_07C8--;
+            }
+        }
+    }
+    fd_50F6_1066++;
+    if (fd_50F6_1066 > SRand8() + 10) {
+        fd_50F6_1066 = 0;
+        while (fd_50F6_0850 > 0) {
+            o06_35F5_2381(fd_50F6_07CA[0], fd_50F6_07CA[1], 1);
+            fd_50F6_0850--;
+        }
+    }
+    if (fd_50F6_0EAC != 2)
+        return;
+    if (fd_50F6_0400 == 0 && fd_50F6_036E != 0) {
+        f_00DF_00B1(0x4e22, 0x7e);
+        o14_384C_0B6A(0, 0x2744, 1);
+        if (fd_3D57_0C44 == 0)
+            o14_384C_0B6A(0, 0x2747, 1);
+    }
+    fd_50F6_0364 = fd_50F6_03E2;
+    fd_50F6_036E = fd_50F6_0400;
+    if (fd_3D57_0C44 == 0 && fd_50F6_0478 > 24) {
+        fd_3D57_0C44 = 1;
+        fd_3D57_0C48 = 0;
+        fd_3D57_0C28 = 0;
+        fd_3D57_0C32 = -1;
+        f_00DF_00B1(0x4e23, 0x7e);
+        o14_384C_0B6A(0, 0x2746, 1);
+        if (fd_50F6_0400 != 0)
+            o14_384C_0B6A(0, 0x2745, 1);
+    }
+    if (fd_3D57_0C44 != 0 && fd_50F6_0400 == 0) {
+        f_00DF_00B1(0x4e25, 0x7e);
+        o14_384C_0B6A(0, 0x2749, 1);
+        fd_50F6_0376 = 1;
+        fd_50F6_0366 = 1;
+        o16_384C_0000();
+        return;
+    }
+    if (fd_50F6_03E2 < 2 && fd_50F6_0AEC[5] == 0 && fd_50F6_0AEC[0] == 0 &&
+        fd_50F6_0AEC[3] == 0 && fd_50F6_0AEC[4] == 0) {
+        fd_50F6_0376 = 1;
+        fd_50F6_0366 = 0;
+        o14_384C_0B6A(0, 0x2748, 1);
+    }
+}
+
+/* GetNearbyPatches (Win16 unit order) */
+int far o06_35F5_2314(int x, int y)
+{
+    int index;
+    int count;
+    int offset;
+    register int patchY;
+
+    count = 0;
+    for (index = 0; index < 6; ++index) {
+        patchY = PatchY[index] + y;
+        if ((PatchX[index] + x) >= 0 && patchY >= 0 && (PatchX[index] + x) < 12 && patchY < 16) {
+            offset = ((PatchX[index] + x) << 4) + patchY;
+            if (fd_3D57_00A4[0][offset] != 0)
+                count += 3;
+            if (fd_3D57_0164[0][offset] != 0)
+                count -= 3;
+        }
+    }
+    return count;
+}
+
+extern int far f_0093_0054(int range);
+extern int far fd_50F6_0AC4;
+extern int far fd_50F6_0A90;
+
+/* grows a colony in a random neighbouring yard cell */
+void far o06_35F5_2381(int x, int y, int colony)
+{
+    register int nx;
+    register int ny;
+
+    nx = f_0093_0054(4) + x;
+    ny = f_0093_0054(4) + y;
+    if (nx < 0)
+        nx = 0;
+    if (nx > 11)
+        nx = 11;
+    if (ny < 0)
+        ny = 0;
+    if (ny > 15)
+        ny = 15;
+    if (x == nx && y == ny)
+        return;
+    if (colony != 0) {
+        if (fd_3D57_0164[nx][ny] == 0)
+            fd_50F6_0AC4++;
+        fd_3D57_0164[nx][ny]++;
+    } else {
+        if (fd_3D57_00A4[nx][ny] == 0)
+            fd_50F6_0A90++;
+        fd_3D57_00A4[nx][ny]++;
+    }
+}
+
+extern int far fd_50F6_0402;
+extern int far fd_50F6_037A;
+
+/* picks the source colony cell under a yard position */
+void far o06_35F5_2433(int x, int y)
+{
+    fd_50F6_0402 = (y - 0x42) / 10;
+    fd_50F6_037A = (x + y - 0xee) / 28;
+    if (fd_50F6_037A < 0 || fd_50F6_0402 < 0 || fd_50F6_037A > 11 || fd_50F6_0402 > 15)
+        fd_50F6_037A = -1;
+    if (fd_3D57_00A4[fd_50F6_037A][fd_50F6_0402] == 0)
+        fd_50F6_037A = -1;
+}
+
+/* moves half of the source colony to the yard cell under a position */
+void far o06_35F5_24CA(int x, int y)
+{
+    int sum, half;
+    register int nx;
+    register int ny;
+
+    if (fd_50F6_037A < 0)
+        return;
+    ny = (y - 0x42) / 10;
+    nx = (x + y - 0xee) / 28;
+    if (nx < 0 || ny < 0 || nx > 11 || ny > 15)
+        return;
+    half = fd_3D57_00A4[fd_50F6_037A][fd_50F6_0402] >> 1;
+    fd_3D57_00A4[fd_50F6_037A][fd_50F6_0402] -= half;
+    sum = fd_3D57_00A4[nx][ny] + half;
+    if (sum < 0xfb)
+        fd_3D57_00A4[nx][ny] = sum;
+    else
+        fd_3D57_00A4[nx][ny] = 0xfa;
+}
+
 /* SCAFFOLD BEGIN: unrecovered same-module functions */
-void far o06_35F5_1E54(void) {}
 /* SCAFFOLD END */

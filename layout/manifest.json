@@ -19,7 +19,7 @@
     "CONST": {
      "seg": 21939,
      "off": 33878,
-     "size": 178
+     "size": 202
     },
     "_DATA": {
      "seg": 21939,
@@ -29,7 +29,7 @@
    },
    "lang": "c",
    "source": "src/S06/m35F5.c",
-   "source_sha256": "4e6657e75d95d9fc437ae5e9d0d1f82a9b1159db19d6b14a177e2fecf0a26d6b",
+   "source_sha256": "be656f6e67633b1439faafa67508d2973c967d1f6989cb0f4fd098f04ba75d3e",
    "claims": [
     {
      "name": "o06_35F5_0000",
@@ -206,13 +206,45 @@
      "kind": "C",
      "provenance": "EXACT_NATURAL",
      "reloc_order": "EXACT"
+    },
+    {
+     "name": "o06_35F5_2381",
+     "unit": "S06",
+     "seg": 13813,
+     "off": 9089,
+     "size": 178,
+     "target_sha256": "3eac88337dd11a5ead6ba875cab70fdcf7aba931c3cd62f7a3ba768283a36151",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL",
+     "reloc_order": "GROUPED"
+    },
+    {
+     "name": "o06_35F5_2433",
+     "unit": "S06",
+     "seg": 13813,
+     "off": 9267,
+     "size": 151,
+     "target_sha256": "1edfdbed7614424d517f424199cf728a4807e99b84c07645d456c74556c7ecfa",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL",
+     "reloc_order": "EXACT"
+    },
+    {
+     "name": "o06_35F5_24CA",
+     "unit": "S06",
+     "seg": 13813,
+     "off": 9418,
+     "size": 165,
+     "target_sha256": "17086f4b437cf0d0f2f13b21caca484889803f7fe7735592c9431afa8d99f971",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL",
+     "reloc_order": "EXACT"
     }
    ],
    "scaffold": [
-    "SimKidInside",
-    "o06_35F5_1E54"
+    "SimKidInside"
    ],
-   "object_sha256": "cec1b54c1e4408249ea466172ff386e840489dd0f033e033557dd8818ee1de5b"
+   "object_sha256": "62734a04b117a89ed0115819cd935315b27cb1cd6975195c96c37a2a852d6ea8"
   },
   "S07:35F5": {
    "unit": "S07",
@@ -243,7 +275,7 @@
     "end": 222182
    },
    "source": "src/S07/m35F5.c",
-   "source_sha256": "806e352f7d31a505309126d2fc25945fa3fe145bd55c7f86b1b62e4f4ce3893d",
+   "source_sha256": "36c4646254996e1fe415d4d09c22b070f224bd9b2710c998df5e18e45c75e349",
    "claims": [
     {
      "name": "CheatKeys",
@@ -285,10 +317,10 @@
    },
    "lang": "c",
    "source": "src/S08/m35F5.c",
-   "source_sha256": "0d90cbd8fbcadce60385ab336e08fe6ccf3d90c2aa8e39be515a4dd7c0d47e6e",
+   "source_sha256": "4eb407cf35c90dc79f08b5422d71d3be18eca6308546f23e6775918b73843c2b",
    "claims": [
     {
-     "name": "o08_35F5_0000",
+     "name": "InitSimVars",
      "unit": "S08",
      "seg": 13813,
      "off": 0,
@@ -299,7 +331,7 @@
      "reloc_order": "EXACT"
     },
     {
-     "name": "o08_35F5_059B",
+     "name": "RandYard",
      "unit": "S08",
      "seg": 13813,
      "off": 1435,
@@ -310,7 +342,7 @@
      "reloc_order": "GROUPED"
     },
     {
-     "name": "o08_35F5_07C2",
+     "name": "GenerateTutorial",
      "unit": "S08",
      "seg": 13813,
      "off": 1986,
@@ -332,7 +364,7 @@
      "reloc_order": "GROUPED"
     },
     {
-     "name": "o08_35F5_0923",
+     "name": "DigOutRNest",
      "unit": "S08",
      "seg": 13813,
      "off": 2339,
@@ -343,7 +375,7 @@
      "reloc_order": "GROUPED"
     },
     {
-     "name": "o08_35F5_0A00",
+     "name": "InitYelloAnt",
      "unit": "S08",
      "seg": 13813,
      "off": 2560,
@@ -365,7 +397,7 @@
      "reloc_order": "GROUPED"
     },
     {
-     "name": "o08_35F5_0C4C",
+     "name": "MakeBlkQueen",
      "unit": "S08",
      "seg": 13813,
      "off": 3148,
@@ -376,7 +408,7 @@
      "reloc_order": "GROUPED"
     },
     {
-     "name": "o08_35F5_0D12",
+     "name": "PlaceRedQueen",
      "unit": "S08",
      "seg": 13813,
      "off": 3346,
@@ -387,7 +419,7 @@
      "reloc_order": "GROUPED"
     },
     {
-     "name": "o08_35F5_0DA0",
+     "name": "MakeRedQueen",
      "unit": "S08",
      "seg": 13813,
      "off": 3488,
@@ -398,7 +430,7 @@
      "reloc_order": "GROUPED"
     },
     {
-     "name": "o08_35F5_0E67",
+     "name": "fracSIN",
      "unit": "S08",
      "seg": 13813,
      "off": 3687,
@@ -409,7 +441,7 @@
      "reloc_order": "EXACT"
     },
     {
-     "name": "o08_35F5_0EBB",
+     "name": "fracCOS",
      "unit": "S08",
      "seg": 13813,
      "off": 3771,
@@ -420,7 +452,7 @@
      "reloc_order": "EXACT"
     },
     {
-     "name": "o08_35F5_1080",
+     "name": "AddBlackAnts",
      "unit": "S08",
      "seg": 13813,
      "off": 4224,
@@ -431,7 +463,7 @@
      "reloc_order": "GROUPED"
     },
     {
-     "name": "o08_35F5_1136",
+     "name": "AddRedAnts",
      "unit": "S08",
      "seg": 13813,
      "off": 4406,
@@ -467,6 +499,58 @@
    "scaffold": [],
    "object_sha256": "3f7e348c08d16818a17bf423911b4bf573320f7ac98d1dc0c35fcc46e8820674"
   },
+  "S09:36EE": {
+   "unit": "S09",
+   "seg": 14062,
+   "profile": "msc600a-c2l",
+   "flags": [
+    "/AL",
+    "/Os",
+    "/Og",
+    "/Oe",
+    "/Zd",
+    "/B2",
+    "C2L.EXE"
+   ],
+   "placements": {
+    "_DATA": {
+     "seg": 21939,
+     "off": 10608,
+     "size": 13
+    }
+   },
+   "lang": "c",
+   "source": "src/S09/m36EE.c",
+   "source_sha256": "adb75983bad058f26f699d0dec8a23c87cee58bfebf4470a9518027e0b65c4b7",
+   "claims": [
+    {
+     "name": "o09_36EE_000A",
+     "unit": "S09",
+     "seg": 14062,
+     "off": 10,
+     "size": 50,
+     "target_sha256": "6aa61b268866290c346094f81408b998e0ace5c60412d267e512ec2680afb1c1",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL",
+     "reloc_order": "GROUPED"
+    },
+    {
+     "name": "o09_36EE_003C",
+     "unit": "S09",
+     "seg": 14062,
+     "off": 60,
+     "size": 86,
+     "target_sha256": "3aea0cdd38e96aac68263335555c47f50b9a04335c26affcda13f5d6caee5cc5",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL",
+     "reloc_order": "EXACT"
+    }
+   ],
+   "scaffold": [
+    "o09_36EE_0092"
+   ],
+   "object_sha256": "af16a00bb421e28d462e023d7e3a05acd37c14a9b82d98997c947b54dbada969"
+  },
   "S11:35F5": {
    "unit": "S11",
    "seg": 13813,
@@ -497,6 +581,188 @@
     "o11_35F5_009E"
    ],
    "object_sha256": "ce1b5a0047fb9ebdd26a2511386c95d51c626e9b89b4c16a39c640232002d464"
+  },
+  "S25:39C7": {
+   "unit": "S25",
+   "seg": 14791,
+   "profile": "msc600a",
+   "flags": [
+    "/AL",
+    "/Os",
+    "/Oe",
+    "/Og",
+    "/Zd"
+   ],
+   "placements": {
+    "CONST": {
+     "seg": 21939,
+     "off": 35064,
+     "size": 60
+    }
+   },
+   "lang": "c",
+   "source": "src/S25/m39C7.c",
+   "source_sha256": "21708f00e1ce6e276e0763b50946552be3926ec09d9c12cc33a143dc4c146e96",
+   "claims": [
+    {
+     "name": "o25_39C7_0000",
+     "unit": "S25",
+     "seg": 14791,
+     "off": 0,
+     "size": 109,
+     "target_sha256": "10889bd3ad22498a3f07c7babf6c3bb0694268f4f8683f6c95793fe0d2c159d6",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL",
+     "reloc_order": "EXACT"
+    },
+    {
+     "name": "o25_39C7_006D",
+     "unit": "S25",
+     "seg": 14791,
+     "off": 109,
+     "size": 802,
+     "target_sha256": "be5ab1db2087b1aa1b26f4fd2a584d3e3a31dd31cf1c2dfe746a3ae7b5b79046",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL",
+     "reloc_order": "GROUPED"
+    },
+    {
+     "name": "o25_39C7_038F",
+     "unit": "S25",
+     "seg": 14791,
+     "off": 911,
+     "size": 209,
+     "target_sha256": "a5a2c4070d66f5c0912ebe3a2d46b7e30f06e79404b2dac641c850253c1f4741",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL",
+     "reloc_order": "GROUPED"
+    },
+    {
+     "name": "o25_39C7_0460",
+     "unit": "S25",
+     "seg": 14791,
+     "off": 1120,
+     "size": 133,
+     "target_sha256": "bf50678c1a1a951021f2bb120ea4701438ae86c542db16bb50fb419d13b46e00",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL",
+     "reloc_order": "GROUPED"
+    },
+    {
+     "name": "o25_39C7_04E5",
+     "unit": "S25",
+     "seg": 14791,
+     "off": 1253,
+     "size": 171,
+     "target_sha256": "30aedb0a8a30edab1d09535586a6f9bab7d9d103e2cd3a3172dea23f2bdfdb92",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL",
+     "reloc_order": "GROUPED"
+    },
+    {
+     "name": "o25_39C7_0590",
+     "unit": "S25",
+     "seg": 14791,
+     "off": 1424,
+     "size": 231,
+     "target_sha256": "075c41e9de555cf84b2efd965e8c786f135d1ce36e1f5690eaec41d8d59308df",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL",
+     "reloc_order": "GROUPED"
+    },
+    {
+     "name": "o25_39C7_0677",
+     "unit": "S25",
+     "seg": 14791,
+     "off": 1655,
+     "size": 107,
+     "target_sha256": "7e0ef9c042cf0f41f00873d063796663cc2e55c8282b8793056ce0ff418a554d",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL",
+     "reloc_order": "GROUPED"
+    },
+    {
+     "name": "o25_39C7_06E2",
+     "unit": "S25",
+     "seg": 14791,
+     "off": 1762,
+     "size": 100,
+     "target_sha256": "98c550b0ceebb918291e2225dce1d5027e9a0c566342a1884caaa88a25966782",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL",
+     "reloc_order": "EXACT"
+    },
+    {
+     "name": "o25_39C7_0746",
+     "unit": "S25",
+     "seg": 14791,
+     "off": 1862,
+     "size": 269,
+     "target_sha256": "6e2ef48ebfdb994838a7ac65634abae1520f6b124985bab26ea44ccb4470856a",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL",
+     "reloc_order": "GROUPED"
+    },
+    {
+     "name": "o25_39C7_0853",
+     "unit": "S25",
+     "seg": 14791,
+     "off": 2131,
+     "size": 183,
+     "target_sha256": "52333ac1a69c4b01ac625c6089de7857bcc2b623145dbe6fedaa682760da8efd",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL",
+     "reloc_order": "GROUPED"
+    },
+    {
+     "name": "o25_39C7_090A",
+     "unit": "S25",
+     "seg": 14791,
+     "off": 2314,
+     "size": 118,
+     "target_sha256": "13c254fb287ed679a0e6199800cfdbf839b5d2eb74839f5a5e5bd2395671901f",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL",
+     "reloc_order": "EXACT"
+    },
+    {
+     "name": "o25_39C7_0980",
+     "unit": "S25",
+     "seg": 14791,
+     "off": 2432,
+     "size": 304,
+     "target_sha256": "979f4a987ca46b6c3b7c99ce894ef14608c32e7869bcf39669321df755d0c91b",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL",
+     "reloc_order": "GROUPED"
+    },
+    {
+     "name": "o25_39C7_0AB0",
+     "unit": "S25",
+     "seg": 14791,
+     "off": 2736,
+     "size": 525,
+     "target_sha256": "2bed8322a8c0f5a93e8a0c83569a7245ca8bb23f4fc0aad3ead500db06b5c724",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL",
+     "reloc_order": "GROUPED"
+    }
+   ],
+   "scaffold": [
+    "DoDigInB",
+    "DoDigOutB",
+    "DoFoodInB",
+    "DoNestingB",
+    "o25_39C7_0DAF",
+    "o25_39C7_0EC2",
+    "o25_39C7_0F30",
+    "o25_39C7_0F76",
+    "o25_39C7_0FE7",
+    "o25_39C7_105B",
+    "o25_39C7_154F",
+    "o25_39C7_15B4"
+   ],
+   "object_sha256": "163f8da3578d3d5c2820ef5fd7f0ba672b7f3d406b5991db493303a1903e540f"
   },
   "S25:3BA4": {
    "unit": "S25",
@@ -665,7 +931,7 @@
     "end": 2977
    },
    "source": "src/root/m0093.c",
-   "source_sha256": "c18223e85db841b155c7a5093a9824ba6b5803baa5eeb8e978014067912f188c",
+   "source_sha256": "8a1ec7275e2e47dcfa375fdcf4ff55fa04573cdd84a5a5bb6096d88608008db8",
    "claims": [
     {
      "name": "SetSRandSeed",
@@ -690,7 +956,7 @@
      "reloc_order": "EXACT"
     },
     {
-     "name": "f_0093_002B",
+     "name": "SGRand",
      "unit": "root",
      "seg": 147,
      "off": 43,
@@ -891,7 +1157,7 @@
    "placements": {},
    "lang": "c",
    "source": "src/root/m00DF.c",
-   "source_sha256": "e3bb072fc7601c15be34481b72da5aa56b6447393a80914e63df5f2441a5822f",
+   "source_sha256": "767d10f0cef95c81adb17b23aa32b3df7db6278eda0b58fc454ed13c0986403b",
    "claims": [
     {
      "name": "f_00DF_0112",
@@ -906,7 +1172,7 @@
     }
    ],
    "scaffold": [
-    "f_00DF_00E8"
+    "myBeginSound"
    ],
    "object_sha256": "af65f2b5611318116f260b302fbb788ce80aacc05995aa5155b1b5dd283fe2a0"
   },
@@ -1031,10 +1297,10 @@
     "end": 44444
    },
    "source": "src/root/m0894.c",
-   "source_sha256": "1142ea00b754941825240f5ff3be93db448b2a8333a20e7feaa243817035fce9",
+   "source_sha256": "2b8319f834d724c084b0dfd4a386201aed1293715a600d7bae540beca409a642",
    "claims": [
     {
-     "name": "f_0894_000E",
+     "name": "DoAntSim",
      "unit": "root",
      "seg": 2196,
      "off": 14,
@@ -1045,7 +1311,7 @@
      "reloc_order": "GROUPED"
     },
     {
-     "name": "f_0894_0138",
+     "name": "DoSmells",
      "unit": "root",
      "seg": 2196,
      "off": 312,
@@ -1056,7 +1322,7 @@
      "reloc_order": "GROUPED"
     },
     {
-     "name": "f_0894_019B",
+     "name": "ClrModePop",
      "unit": "root",
      "seg": 2196,
      "off": 411,
@@ -1067,7 +1333,7 @@
      "reloc_order": "EXACT"
     },
     {
-     "name": "f_0894_01E5",
+     "name": "TallyModePop",
      "unit": "root",
      "seg": 2196,
      "off": 485,
@@ -1078,7 +1344,7 @@
      "reloc_order": "GROUPED"
     },
     {
-     "name": "f_0894_02D2",
+     "name": "FeedAnts",
      "unit": "root",
      "seg": 2196,
      "off": 722,
@@ -1089,7 +1355,7 @@
      "reloc_order": "GROUPED"
     },
     {
-     "name": "f_0894_034B",
+     "name": "DoAntSimA",
      "unit": "root",
      "seg": 2196,
      "off": 843,
@@ -1100,7 +1366,7 @@
      "reloc_order": "GROUPED"
     },
     {
-     "name": "f_0894_0572",
+     "name": "SimEggA",
      "unit": "root",
      "seg": 2196,
      "off": 1394,
@@ -1111,7 +1377,7 @@
      "reloc_order": "EXACT"
     },
     {
-     "name": "f_0894_05EE",
+     "name": "SimQueenA",
      "unit": "root",
      "seg": 2196,
      "off": 1518,
@@ -1122,7 +1388,7 @@
      "reloc_order": "EXACT"
     },
     {
-     "name": "f_0894_0671",
+     "name": "LostHeadA",
      "unit": "root",
      "seg": 2196,
      "off": 1649,
@@ -1133,7 +1399,7 @@
      "reloc_order": "GROUPED"
     },
     {
-     "name": "f_0894_06D8",
+     "name": "DoRestAnt",
      "unit": "root",
      "seg": 2196,
      "off": 1752,
@@ -1144,7 +1410,7 @@
      "reloc_order": "GROUPED"
     },
     {
-     "name": "f_0894_0751",
+     "name": "DoRepoLoit",
      "unit": "root",
      "seg": 2196,
      "off": 1873,
@@ -1155,7 +1421,7 @@
      "reloc_order": "GROUPED"
     },
     {
-     "name": "f_0894_07B3",
+     "name": "DoRepoExit",
      "unit": "root",
      "seg": 2196,
      "off": 1971,
@@ -1166,7 +1432,7 @@
      "reloc_order": "EXACT"
     },
     {
-     "name": "f_0894_0892",
+     "name": "DoRepoFly",
      "unit": "root",
      "seg": 2196,
      "off": 2194,
@@ -1177,7 +1443,7 @@
      "reloc_order": "GROUPED"
     },
     {
-     "name": "f_0894_0961",
+     "name": "DoDefendNest",
      "unit": "root",
      "seg": 2196,
      "off": 2401,
@@ -1188,7 +1454,7 @@
      "reloc_order": "EXACT"
     },
     {
-     "name": "f_0894_09F4",
+     "name": "DoRandAntA",
      "unit": "root",
      "seg": 2196,
      "off": 2548,
@@ -1199,7 +1465,7 @@
      "reloc_order": "GROUPED"
     },
     {
-     "name": "f_0894_0CFD",
+     "name": "DoRandAntAA",
      "unit": "root",
      "seg": 2196,
      "off": 3325,
@@ -1210,7 +1476,7 @@
      "reloc_order": "GROUPED"
     },
     {
-     "name": "f_0894_0E8E",
+     "name": "DoDigOutAntA",
      "unit": "root",
      "seg": 2196,
      "off": 3726,
@@ -1221,7 +1487,7 @@
      "reloc_order": "GROUPED"
     },
     {
-     "name": "f_0894_1087",
+     "name": "DoToNestAnt",
      "unit": "root",
      "seg": 2196,
      "off": 4231,
@@ -1232,7 +1498,7 @@
      "reloc_order": "GROUPED"
     },
     {
-     "name": "f_0894_1315",
+     "name": "DoToAlarm",
      "unit": "root",
      "seg": 2196,
      "off": 4885,
@@ -1243,7 +1509,7 @@
      "reloc_order": "GROUPED"
     },
     {
-     "name": "f_0894_1525",
+     "name": "DoReturnFoodAnt",
      "unit": "root",
      "seg": 2196,
      "off": 5413,
@@ -1254,7 +1520,7 @@
      "reloc_order": "GROUPED"
     },
     {
-     "name": "f_0894_16A5",
+     "name": "DoForageAnt",
      "unit": "root",
      "seg": 2196,
      "off": 5797,
@@ -1265,7 +1531,7 @@
      "reloc_order": "GROUPED"
     },
     {
-     "name": "f_0894_1A28",
+     "name": "DoRecruitAnt",
      "unit": "root",
      "seg": 2196,
      "off": 6696,
@@ -1276,7 +1542,7 @@
      "reloc_order": "GROUPED"
     },
     {
-     "name": "f_0894_1C6E",
+     "name": "GoInNest",
      "unit": "root",
      "seg": 2196,
      "off": 7278,
@@ -1287,7 +1553,7 @@
      "reloc_order": "GROUPED"
     },
     {
-     "name": "f_0894_1D89",
+     "name": "StartFightA",
      "unit": "root",
      "seg": 2196,
      "off": 7561,
@@ -1298,7 +1564,7 @@
      "reloc_order": "GROUPED"
     },
     {
-     "name": "f_0894_1E34",
+     "name": "GetWinner",
      "unit": "root",
      "seg": 2196,
      "off": 7732,
@@ -1309,7 +1575,7 @@
      "reloc_order": "GROUPED"
     },
     {
-     "name": "f_0894_1F31",
+     "name": "DoFightA",
      "unit": "root",
      "seg": 2196,
      "off": 7985,
@@ -1320,7 +1586,7 @@
      "reloc_order": "GROUPED"
     },
     {
-     "name": "f_0894_21C5",
+     "name": "RandTurn",
      "unit": "root",
      "seg": 2196,
      "off": 8645,
@@ -1331,7 +1597,7 @@
      "reloc_order": "EXACT"
     },
     {
-     "name": "f_0894_21ED",
+     "name": "DoAttackAnt",
      "unit": "root",
      "seg": 2196,
      "off": 8685,
@@ -1342,7 +1608,7 @@
      "reloc_order": "GROUPED"
     },
     {
-     "name": "f_0894_23BB",
+     "name": "IsItHole",
      "unit": "root",
      "seg": 2196,
      "off": 9147,
@@ -1353,7 +1619,7 @@
      "reloc_order": "GROUPED"
     },
     {
-     "name": "f_0894_2423",
+     "name": "IsItFood",
      "unit": "root",
      "seg": 2196,
      "off": 9251,
@@ -1397,7 +1663,7 @@
    },
    "lang": "c",
    "source": "src/root/m0BE8.c",
-   "source_sha256": "9f35d2879ce04d18a69710313ec9cef90a227c164bee8cb43d60b0d5a9fe2d94",
+   "source_sha256": "554bec8b85ab034a37c09c12b6a259d93d0f06d12d526cc22a6ac76844e9cb4e",
    "claims": [
     {
      "name": "IsItDirt",
@@ -1411,7 +1677,7 @@
      "reloc_order": "EXACT"
     },
     {
-     "name": "f_0BE8_038F",
+     "name": "FullCount",
      "unit": "root",
      "seg": 3048,
      "off": 911,
@@ -1422,7 +1688,7 @@
      "reloc_order": "EXACT"
     },
     {
-     "name": "f_0BE8_039F",
+     "name": "CountUpdate",
      "unit": "root",
      "seg": 3048,
      "off": 927,
@@ -1433,7 +1699,7 @@
      "reloc_order": "EXACT"
     },
     {
-     "name": "f_0BE8_063A",
+     "name": "InitWater",
      "unit": "root",
      "seg": 3048,
      "off": 1594,
@@ -1444,7 +1710,7 @@
      "reloc_order": "EXACT"
     },
     {
-     "name": "f_0BE8_0B21",
+     "name": "GetDir",
      "unit": "root",
      "seg": 3048,
      "off": 2849,
@@ -1455,7 +1721,7 @@
      "reloc_order": "EXACT"
     },
     {
-     "name": "f_0BE8_0B83",
+     "name": "GetDis",
      "unit": "root",
      "seg": 3048,
      "off": 2947,
@@ -1466,7 +1732,7 @@
      "reloc_order": "GROUPED"
     },
     {
-     "name": "f_0BE8_0BC1",
+     "name": "InNestBounds",
      "unit": "root",
      "seg": 3048,
      "off": 3009,
@@ -1488,7 +1754,7 @@
      "reloc_order": "GROUPED"
     },
     {
-     "name": "f_0BE8_0554",
+     "name": "PlaceDrop",
      "unit": "root",
      "seg": 3048,
      "off": 1364,
@@ -1499,7 +1765,7 @@
      "reloc_order": "GROUPED"
     },
     {
-     "name": "f_0BE8_0652",
+     "name": "AddWater",
      "unit": "root",
      "seg": 3048,
      "off": 1618,
@@ -1510,7 +1776,7 @@
      "reloc_order": "GROUPED"
     },
     {
-     "name": "f_0BE8_06EE",
+     "name": "DropWater",
      "unit": "root",
      "seg": 3048,
      "off": 1774,
@@ -1554,7 +1820,7 @@
      "reloc_order": "EXACT"
     },
     {
-     "name": "f_0BE8_0A5B",
+     "name": "PlaceEggB",
      "unit": "root",
      "seg": 3048,
      "off": 2651,
@@ -1565,7 +1831,7 @@
      "reloc_order": "GROUPED"
     },
     {
-     "name": "f_0BE8_0ABE",
+     "name": "PlaceEggR",
      "unit": "root",
      "seg": 3048,
      "off": 2750,
@@ -1576,7 +1842,7 @@
      "reloc_order": "GROUPED"
     },
     {
-     "name": "f_0BE8_0C0F",
+     "name": "GetExitDirB",
      "unit": "root",
      "seg": 3048,
      "off": 3087,
@@ -1587,7 +1853,7 @@
      "reloc_order": "GROUPED"
     },
     {
-     "name": "f_0BE8_0CBB",
+     "name": "GetExitDirR",
      "unit": "root",
      "seg": 3048,
      "off": 3259,
@@ -1598,7 +1864,7 @@
      "reloc_order": "GROUPED"
     },
     {
-     "name": "f_0BE8_0EB7",
+     "name": "TryAntTheme",
      "unit": "root",
      "seg": 3048,
      "off": 3767,
@@ -1642,10 +1908,10 @@
    },
    "lang": "c",
    "source": "src/root/m0F3F.c",
-   "source_sha256": "0b991374683f3b8c0b5cb4bfcb9a32ebaa105412ec4647b2cbcd80bcdf84482c",
+   "source_sha256": "f9e4991327f50a077de4df101ebbca0201ce56497d078e47b10e65baa23b7921",
    "claims": [
     {
-     "name": "f_0F3F_0008",
+     "name": "DoAntSimR",
      "unit": "root",
      "seg": 3903,
      "off": 8,
@@ -1656,7 +1922,7 @@
      "reloc_order": "EXACT"
     },
     {
-     "name": "f_0F3F_03B0",
+     "name": "RaidInR",
      "unit": "root",
      "seg": 3903,
      "off": 944,
@@ -1667,7 +1933,7 @@
      "reloc_order": "GROUPED"
     },
     {
-     "name": "f_0F3F_0481",
+     "name": "StayInR",
      "unit": "root",
      "seg": 3903,
      "off": 1153,
@@ -1678,7 +1944,7 @@
      "reloc_order": "GROUPED"
     },
     {
-     "name": "f_0F3F_0569",
+     "name": "RaidOutR",
      "unit": "root",
      "seg": 3903,
      "off": 1385,
@@ -1689,7 +1955,7 @@
      "reloc_order": "GROUPED"
     },
     {
-     "name": "f_0F3F_05EE",
+     "name": "DoRestR",
      "unit": "root",
      "seg": 3903,
      "off": 1518,
@@ -1700,7 +1966,7 @@
      "reloc_order": "GROUPED"
     },
     {
-     "name": "f_0F3F_069A",
+     "name": "DoDrownR",
      "unit": "root",
      "seg": 3903,
      "off": 1690,
@@ -1711,7 +1977,7 @@
      "reloc_order": "GROUPED"
     },
     {
-     "name": "f_0F3F_0781",
+     "name": "DoRandR",
      "unit": "root",
      "seg": 3903,
      "off": 1921,
@@ -1722,7 +1988,7 @@
      "reloc_order": "GROUPED"
     },
     {
-     "name": "f_0F3F_07ED",
+     "name": "DoNestFightR",
      "unit": "root",
      "seg": 3903,
      "off": 2029,
@@ -1733,7 +1999,7 @@
      "reloc_order": "GROUPED"
     },
     {
-     "name": "f_0F3F_08F6",
+     "name": "CheckNestFightR",
      "unit": "root",
      "seg": 3903,
      "off": 2294,
@@ -1744,7 +2010,7 @@
      "reloc_order": "GROUPED"
     },
     {
-     "name": "f_0F3F_09B0",
+     "name": "DropFoodR",
      "unit": "root",
      "seg": 3903,
      "off": 2480,
@@ -1755,7 +2021,7 @@
      "reloc_order": "EXACT"
     },
     {
-     "name": "f_0F3F_0A26",
+     "name": "SimEggR",
      "unit": "root",
      "seg": 3903,
      "off": 2598,
@@ -1766,7 +2032,7 @@
      "reloc_order": "GROUPED"
     },
     {
-     "name": "f_0F3F_0B1F",
+     "name": "SimQueenR",
      "unit": "root",
      "seg": 3903,
      "off": 2847,
@@ -1777,7 +2043,7 @@
      "reloc_order": "GROUPED"
     },
     {
-     "name": "f_0F3F_0D1B",
+     "name": "QueenMoveR",
      "unit": "root",
      "seg": 3903,
      "off": 3355,
@@ -1788,7 +2054,7 @@
      "reloc_order": "GROUPED"
     },
     {
-     "name": "f_0F3F_0E30",
+     "name": "MakeNewTailR",
      "unit": "root",
      "seg": 3903,
      "off": 3632,
@@ -1799,7 +2065,7 @@
      "reloc_order": "GROUPED"
     },
     {
-     "name": "f_0F3F_0E9E",
+     "name": "KillTailR",
      "unit": "root",
      "seg": 3903,
      "off": 3742,
@@ -1810,7 +2076,7 @@
      "reloc_order": "EXACT"
     },
     {
-     "name": "f_0F3F_0EE4",
+     "name": "LostHeadR",
      "unit": "root",
      "seg": 3903,
      "off": 3812,
@@ -1821,7 +2087,7 @@
      "reloc_order": "GROUPED"
     },
     {
-     "name": "f_0F3F_0F55",
+     "name": "LostTailR",
      "unit": "root",
      "seg": 3903,
      "off": 3925,
@@ -1832,7 +2098,7 @@
      "reloc_order": "GROUPED"
     },
     {
-     "name": "f_0F3F_0FC9",
+     "name": "TryMoveDirR",
      "unit": "root",
      "seg": 3903,
      "off": 4041,
@@ -1843,7 +2109,7 @@
      "reloc_order": "EXACT"
     },
     {
-     "name": "f_0F3F_1277",
+     "name": "TryEatFoodR",
      "unit": "root",
      "seg": 3903,
      "off": 4727,
@@ -1854,7 +2120,7 @@
      "reloc_order": "GROUPED"
     },
     {
-     "name": "f_0F3F_1330",
+     "name": "EatFoodR",
      "unit": "root",
      "seg": 3903,
      "off": 4912,
@@ -1865,7 +2131,7 @@
      "reloc_order": "GROUPED"
     },
     {
-     "name": "f_0F3F_13D7",
+     "name": "StealFoodR",
      "unit": "root",
      "seg": 3903,
      "off": 5079,
@@ -1876,7 +2142,7 @@
      "reloc_order": "GROUPED"
     },
     {
-     "name": "f_0F3F_143C",
+     "name": "DecEatR",
      "unit": "root",
      "seg": 3903,
      "off": 5180,
@@ -1887,7 +2153,7 @@
      "reloc_order": "EXACT"
     },
     {
-     "name": "f_0F3F_1474",
+     "name": "DoFoodInR",
      "unit": "root",
      "seg": 3903,
      "off": 5236,
@@ -1898,7 +2164,7 @@
      "reloc_order": "GROUPED"
     },
     {
-     "name": "f_0F3F_186B",
+     "name": "DoDigOutR",
      "unit": "root",
      "seg": 3903,
      "off": 6251,
@@ -1909,7 +2175,7 @@
      "reloc_order": "GROUPED"
     },
     {
-     "name": "f_0F3F_1A37",
+     "name": "GetOutR",
      "unit": "root",
      "seg": 3903,
      "off": 6711,
@@ -1922,8 +2188,8 @@
    ],
    "scaffold": [
     "DoDigInR",
-    "f_0F3F_0075",
-    "f_0F3F_10A1"
+    "DoNestAntR",
+    "DoNestingR"
    ],
    "object_sha256": "0e345e790f736cf6912f593ae8d7cea4519c9fa563413f83e991a97c8831bf51"
   },
@@ -1946,7 +2212,7 @@
    },
    "lang": "c",
    "source": "src/root/m10F7.c",
-   "source_sha256": "af2ea161e898b4d751a20aee686b551f0f255b84c9f9902ae453dcd3d1fe7828",
+   "source_sha256": "e8676d607a327ddb5bda05f8c2892cb2d86af8481ee89fb4088d65936902a78c",
    "claims": [
     {
      "name": "f_10F7_000E",
@@ -1960,7 +2226,7 @@
      "reloc_order": "EXACT"
     },
     {
-     "name": "f_10F7_003A",
+     "name": "IsYellowAnt",
      "unit": "root",
      "seg": 4343,
      "off": 58,
@@ -1971,7 +2237,7 @@
      "reloc_order": "EXACT"
     },
     {
-     "name": "f_10F7_04EC",
+     "name": "IsClearTile",
      "unit": "root",
      "seg": 4343,
      "off": 1260,
@@ -1982,7 +2248,7 @@
      "reloc_order": "EXACT"
     },
     {
-     "name": "f_10F7_06BF",
+     "name": "IsThisEgg",
      "unit": "root",
      "seg": 4343,
      "off": 1727,
@@ -1993,7 +2259,7 @@
      "reloc_order": "EXACT"
     },
     {
-     "name": "f_10F7_06E4",
+     "name": "IsThisGrass",
      "unit": "root",
      "seg": 4343,
      "off": 1764,
@@ -2004,7 +2270,7 @@
      "reloc_order": "EXACT"
     },
     {
-     "name": "f_10F7_070B",
+     "name": "IsThisFood",
      "unit": "root",
      "seg": 4343,
      "off": 1803,
@@ -2026,7 +2292,7 @@
      "reloc_order": "EXACT"
     },
     {
-     "name": "f_10F7_0766",
+     "name": "IsItNFood",
      "unit": "root",
      "seg": 4343,
      "off": 1894,
@@ -2059,7 +2325,7 @@
      "reloc_order": "GROUPED"
     },
     {
-     "name": "f_10F7_0B38",
+     "name": "DoMapUpdateDraw",
      "unit": "root",
      "seg": 4343,
      "off": 2872,
@@ -2070,7 +2336,7 @@
      "reloc_order": "EXACT"
     },
     {
-     "name": "f_10F7_0B40",
+     "name": "DoEditAndMapUpdateDraw",
      "unit": "root",
      "seg": 4343,
      "off": 2880,
@@ -2081,7 +2347,7 @@
      "reloc_order": "GROUPED"
     },
     {
-     "name": "f_10F7_1C84",
+     "name": "FindEggAt",
      "unit": "root",
      "seg": 4343,
      "off": 7300,
@@ -2103,7 +2369,7 @@
      "reloc_order": "EXACT"
     },
     {
-     "name": "f_10F7_24EE",
+     "name": "IsItDigable",
      "unit": "root",
      "seg": 4343,
      "off": 9454,
@@ -2114,7 +2380,7 @@
      "reloc_order": "GROUPED"
     },
     {
-     "name": "f_10F7_266E",
+     "name": "IsLiftable",
      "unit": "root",
      "seg": 4343,
      "off": 9838,
@@ -2158,7 +2424,7 @@
      "reloc_order": "EXACT"
     },
     {
-     "name": "f_10F7_005D",
+     "name": "GetAntIndex",
      "unit": "root",
      "seg": 4343,
      "off": 93,
@@ -2169,7 +2435,7 @@
      "reloc_order": "EXACT"
     },
     {
-     "name": "f_10F7_01B1",
+     "name": "SetAntIndex",
      "unit": "root",
      "seg": 4343,
      "off": 433,
@@ -2180,7 +2446,7 @@
      "reloc_order": "EXACT"
     },
     {
-     "name": "f_10F7_02D6",
+     "name": "FindLifeIndex",
      "unit": "root",
      "seg": 4343,
      "off": 726,
@@ -2191,7 +2457,7 @@
      "reloc_order": "GROUPED"
     },
     {
-     "name": "f_10F7_03B7",
+     "name": "FindAntIndex",
      "unit": "root",
      "seg": 4343,
      "off": 951,
@@ -2202,7 +2468,7 @@
      "reloc_order": "GROUPED"
     },
     {
-     "name": "f_10F7_048E",
+     "name": "IsClear3x3",
      "unit": "root",
      "seg": 4343,
      "off": 1166,
@@ -2213,7 +2479,7 @@
      "reloc_order": "EXACT"
     },
     {
-     "name": "f_10F7_054D",
+     "name": "AddAntToList",
      "unit": "root",
      "seg": 4343,
      "off": 1357,
@@ -2224,7 +2490,7 @@
      "reloc_order": "GROUPED"
     },
     {
-     "name": "f_10F7_05FE",
+     "name": "SetLife",
      "unit": "root",
      "seg": 4343,
      "off": 1534,
@@ -2235,7 +2501,7 @@
      "reloc_order": "GROUPED"
     },
     {
-     "name": "f_10F7_07C7",
+     "name": "GetLife",
      "unit": "root",
      "seg": 4343,
      "off": 1991,
@@ -2257,7 +2523,7 @@
      "reloc_order": "EXACT"
     },
     {
-     "name": "f_10F7_08CE",
+     "name": "SetMap",
      "unit": "root",
      "seg": 4343,
      "off": 2254,
@@ -2268,7 +2534,7 @@
      "reloc_order": "GROUPED"
     },
     {
-     "name": "f_10F7_09A8",
+     "name": "ClearMyLife",
      "unit": "root",
      "seg": 4343,
      "off": 2472,
@@ -2290,7 +2556,7 @@
      "reloc_order": "EXACT"
     },
     {
-     "name": "f_10F7_0A44",
+     "name": "SetMyLife",
      "unit": "root",
      "seg": 4343,
      "off": 2628,
@@ -2301,7 +2567,7 @@
      "reloc_order": "EXACT"
     },
     {
-     "name": "f_10F7_0ACE",
+     "name": "MoveMyLife",
      "unit": "root",
      "seg": 4343,
      "off": 2766,
@@ -2323,7 +2589,7 @@
      "reloc_order": "GROUPED"
     },
     {
-     "name": "f_10F7_0B8F",
+     "name": "EndTargetMode",
      "unit": "root",
      "seg": 4343,
      "off": 2959,
@@ -2345,7 +2611,7 @@
      "reloc_order": "GROUPED"
     },
     {
-     "name": "f_10F7_0BEF",
+     "name": "EndLifeTransferMode",
      "unit": "root",
      "seg": 4343,
      "off": 3055,
@@ -2356,7 +2622,7 @@
      "reloc_order": "GROUPED"
     },
     {
-     "name": "f_10F7_0C11",
+     "name": "ExchangeLives",
      "unit": "root",
      "seg": 4343,
      "off": 3089,
@@ -2367,7 +2633,7 @@
      "reloc_order": "GROUPED"
     },
     {
-     "name": "f_10F7_1396",
+     "name": "DropMyFood",
      "unit": "root",
      "seg": 4343,
      "off": 5014,
@@ -2389,7 +2655,7 @@
      "reloc_order": "EXACT"
     },
     {
-     "name": "f_10F7_1696",
+     "name": "DropMyRock",
      "unit": "root",
      "seg": 4343,
      "off": 5782,
@@ -2400,7 +2666,7 @@
      "reloc_order": "GROUPED"
     },
     {
-     "name": "f_10F7_18B0",
+     "name": "DropMyEgg",
      "unit": "root",
      "seg": 4343,
      "off": 6320,
@@ -2411,7 +2677,7 @@
      "reloc_order": "GROUPED"
     },
     {
-     "name": "f_10F7_1AAE",
+     "name": "PickupMyRock",
      "unit": "root",
      "seg": 4343,
      "off": 6830,
@@ -2422,7 +2688,7 @@
      "reloc_order": "GROUPED"
     },
     {
-     "name": "f_10F7_1DD3",
+     "name": "SetMyHealth",
      "unit": "root",
      "seg": 4343,
      "off": 7635,
@@ -2433,7 +2699,7 @@
      "reloc_order": "GROUPED"
     },
     {
-     "name": "f_10F7_1E71",
+     "name": "EatMyFood",
      "unit": "root",
      "seg": 4343,
      "off": 7793,
@@ -2444,7 +2710,7 @@
      "reloc_order": "GROUPED"
     },
     {
-     "name": "f_10F7_1FDF",
+     "name": "PickupMyEgg",
      "unit": "root",
      "seg": 4343,
      "off": 8159,
@@ -2455,7 +2721,7 @@
      "reloc_order": "EXACT"
     },
     {
-     "name": "f_10F7_20BF",
+     "name": "PickupMyFood",
      "unit": "root",
      "seg": 4343,
      "off": 8383,
@@ -2466,7 +2732,7 @@
      "reloc_order": "GROUPED"
     },
     {
-     "name": "f_10F7_220C",
+     "name": "DropMyObject",
      "unit": "root",
      "seg": 4343,
      "off": 8716,
@@ -2477,7 +2743,7 @@
      "reloc_order": "EXACT"
     },
     {
-     "name": "f_10F7_227A",
+     "name": "PickupMyObject",
      "unit": "root",
      "seg": 4343,
      "off": 8826,
@@ -2499,7 +2765,7 @@
      "reloc_order": "EXACT"
     },
     {
-     "name": "f_10F7_245C",
+     "name": "IsNotBarrier",
      "unit": "root",
      "seg": 4343,
      "off": 9308,
@@ -2532,7 +2798,7 @@
      "reloc_order": "EXACT"
     },
     {
-     "name": "f_10F7_2613",
+     "name": "IsLessThanHole",
      "unit": "root",
      "seg": 4343,
      "off": 9747,
@@ -2566,7 +2832,7 @@
     }
    ],
    "scaffold": [
-    "f_10F7_0CA8"
+    "DoLifeExchange"
    ],
    "object_sha256": "17771767a007c3e08652724e1776f84860bfa29cc9420be5ee0b21b64e311b8d"
   },
@@ -2589,10 +2855,10 @@
    },
    "lang": "c",
    "source": "src/root/m14EE.c",
-   "source_sha256": "c0d3cc85e4a377a3f70237fe0ea2e0a6c55375d6bffb50b9f8de15a219e7b996",
+   "source_sha256": "480f7f89169cfa7eb9bd3dbaf10c5ed65f6d5fbd53c93e73bccce7f8d276628f",
    "claims": [
     {
-     "name": "f_14EE_0317",
+     "name": "CanBeHouseHole",
      "unit": "root",
      "seg": 5358,
      "off": 791,
@@ -2603,7 +2869,7 @@
      "reloc_order": "EXACT"
     },
     {
-     "name": "f_14EE_0B33",
+     "name": "RIsItDirt",
      "unit": "root",
      "seg": 5358,
      "off": 2867,
@@ -2625,7 +2891,7 @@
      "reloc_order": "GROUPED"
     },
     {
-     "name": "f_14EE_0002",
+     "name": "DigMyNewHole",
      "unit": "root",
      "seg": 5358,
      "off": 2,
@@ -2636,7 +2902,7 @@
      "reloc_order": "GROUPED"
     },
     {
-     "name": "f_14EE_0079",
+     "name": "CreateNewHole",
      "unit": "root",
      "seg": 5358,
      "off": 121,
@@ -2669,7 +2935,7 @@
      "reloc_order": "GROUPED"
     },
     {
-     "name": "f_14EE_0367",
+     "name": "MakeNewHoleR",
      "unit": "root",
      "seg": 5358,
      "off": 871,
@@ -2691,7 +2957,7 @@
      "reloc_order": "EXACT"
     },
     {
-     "name": "f_14EE_0519",
+     "name": "DigTileB",
      "unit": "root",
      "seg": 5358,
      "off": 1305,
@@ -2702,7 +2968,7 @@
      "reloc_order": "GROUPED"
     },
     {
-     "name": "f_14EE_0647",
+     "name": "DigTileR",
      "unit": "root",
      "seg": 5358,
      "off": 1607,
@@ -3344,7 +3610,7 @@
    },
    "lang": "c",
    "source": "src/root/m1986.c",
-   "source_sha256": "9170d3bdb14b069d6e30d5345a4e1a8c2ce98c314edd2c7e4aa3f976d44d4732",
+   "source_sha256": "8caccbbffadbe5a31f7a0f35e675b01250d771dcfce7b79ac10ad17afbc466bf",
    "claims": [
     {
      "name": "OpenIndex",
@@ -3358,7 +3624,7 @@
      "reloc_order": "GROUPED"
     },
     {
-     "name": "f_1986_00F4",
+     "name": "CreateIndex",
      "unit": "root",
      "seg": 6534,
      "off": 244,
@@ -3369,7 +3635,7 @@
      "reloc_order": "EXACT"
     },
     {
-     "name": "f_1986_00F5",
+     "name": "CloseIndex",
      "unit": "root",
      "seg": 6534,
      "off": 245,
@@ -3381,7 +3647,7 @@
     }
    ],
    "scaffold": [
-    "f_1986_012A"
+    "FindIndex"
    ],
    "object_sha256": "4f416f528c13e677a35870f04f04046df3c0f5bf40c0c65f07b0ff2fa822f011"
   },
@@ -3409,7 +3675,7 @@
    },
    "lang": "c",
    "source": "src/root/m19A9.c",
-   "source_sha256": "c40c704c3f256a686fa48d0352130bea48f46d38a8bc64020ce410fc880d230d",
+   "source_sha256": "7c748395cc14cedefca86834ab04eda28b7ae1c9920d8dfee2af344e1c8bd0d0",
    "claims": [
     {
      "name": "f_19A9_0005",
@@ -3467,7 +3733,7 @@
      "reloc_order": "EXACT"
     },
     {
-     "name": "f_19A9_0310",
+     "name": "DBAdd",
      "unit": "root",
      "seg": 6569,
      "off": 784,
@@ -3478,7 +3744,7 @@
      "reloc_order": "EXACT"
     },
     {
-     "name": "f_19A9_031D",
+     "name": "DBDelete",
      "unit": "root",
      "seg": 6569,
      "off": 797,
@@ -3489,7 +3755,7 @@
      "reloc_order": "EXACT"
     },
     {
-     "name": "f_19A9_032A",
+     "name": "DBPack",
      "unit": "root",
      "seg": 6569,
      "off": 810,
@@ -3501,7 +3767,7 @@
     }
    ],
    "scaffold": [
-    "f_19A9_001D"
+    "DBRecall"
    ],
    "object_sha256": "a1417890274a5b59124b1c54aa20e77f8cb016dc67eef2439f7f3051295fca3f"
   },
@@ -3605,7 +3871,7 @@
     "end": 107829
    },
    "source": "src/root/m1A28.c",
-   "source_sha256": "d99874a04ec4f1a6ccdcf5d1105671cc5d190f790c45c39da2318c15388f745a",
+   "source_sha256": "26c1012296d315edb3ad6a3dc0580e949a9b8c0a47c40da0cd288a5e569c1074",
    "claims": [
     {
      "name": "OpenDB",
@@ -3630,7 +3896,7 @@
      "reloc_order": "EXACT"
     },
     {
-     "name": "f_1A28_0149",
+     "name": "CloseDB",
      "unit": "root",
      "seg": 6696,
      "off": 329,
@@ -3705,7 +3971,7 @@
     "end": 108908
    },
    "source": "src/root/m1A53.c",
-   "source_sha256": "43ee5d9582dacd8c9586191a729f13543c1bd42331637551bb58ebb6e9036f1b",
+   "source_sha256": "6bb066ea34c3721c90956a5b7e8849cb3c5916628a842c2684a8c0137154b698",
    "claims": [
     {
      "name": "db_Exists",
@@ -3774,7 +4040,7 @@
      "reloc_order": "GROUPED"
     },
     {
-     "name": "f_1A53_025F",
+     "name": "db_PurgeHandle",
      "unit": "root",
      "seg": 6739,
      "off": 607,
@@ -3785,7 +4051,7 @@
      "reloc_order": "GROUPED"
     },
     {
-     "name": "f_1A53_02D5",
+     "name": "db_ReleaseHandle",
      "unit": "root",
      "seg": 6739,
      "off": 725,
@@ -3796,7 +4062,7 @@
      "reloc_order": "EXACT"
     },
     {
-     "name": "f_1A53_034F",
+     "name": "db_UnhookObject",
      "unit": "root",
      "seg": 6739,
      "off": 847,
@@ -3807,7 +4073,7 @@
      "reloc_order": "GROUPED"
     },
     {
-     "name": "f_1A53_037C",
+     "name": "db_CloseDataBase",
      "unit": "root",
      "seg": 6739,
      "off": 892,
@@ -3818,7 +4084,7 @@
      "reloc_order": "GROUPED"
     },
     {
-     "name": "f_1A53_03B6",
+     "name": "db_ReplaceObject",
      "unit": "root",
      "seg": 6739,
      "off": 950,
@@ -3829,7 +4095,7 @@
      "reloc_order": "GROUPED"
     },
     {
-     "name": "f_1A53_0404",
+     "name": "db_SaveObject",
      "unit": "root",
      "seg": 6739,
      "off": 1028,
@@ -3840,7 +4106,7 @@
      "reloc_order": "EXACT"
     },
     {
-     "name": "f_1A53_02EB",
+     "name": "db_ReleaseObject",
      "unit": "root",
      "seg": 6739,
      "off": 747,
@@ -3878,10 +4144,10 @@
    },
    "lang": "c",
    "source": "src/root/m1A96.c",
-   "source_sha256": "c5b1255a3a885c4715e9f965c792bc4a9c0803f87d75c944bec21c696d600728",
+   "source_sha256": "fe5b982ce80123a7d6a542d9c87b6608ecdfc4a59e287b9c83e5e37d5904a038",
    "claims": [
     {
-     "name": "f_1A96_008C",
+     "name": "ch_RemoveEntry",
      "unit": "root",
      "seg": 6806,
      "off": 140,
@@ -3892,7 +4158,7 @@
      "reloc_order": "EXACT"
     },
     {
-     "name": "f_1A96_00EE",
+     "name": "ch_PurgeCache",
      "unit": "root",
      "seg": 6806,
      "off": 238,
@@ -3903,7 +4169,7 @@
      "reloc_order": "EXACT"
     },
     {
-     "name": "f_1A96_0159",
+     "name": "ch_LookUpHandle",
      "unit": "root",
      "seg": 6806,
      "off": 345,
@@ -3914,7 +4180,7 @@
      "reloc_order": "EXACT"
     },
     {
-     "name": "f_1A96_034E",
+     "name": "ch_AddEntry",
      "unit": "root",
      "seg": 6806,
      "off": 846,
@@ -3925,7 +4191,7 @@
      "reloc_order": "EXACT"
     },
     {
-     "name": "f_1A96_0421",
+     "name": "ch_DeleteEntry",
      "unit": "root",
      "seg": 6806,
      "off": 1057,
@@ -3936,7 +4202,7 @@
      "reloc_order": "EXACT"
     },
     {
-     "name": "f_1A96_0483",
+     "name": "ch_CleanupTable",
      "unit": "root",
      "seg": 6806,
      "off": 1155,
@@ -3947,7 +4213,7 @@
      "reloc_order": "GROUPED"
     },
     {
-     "name": "f_1A96_0532",
+     "name": "ch_DumpOldest",
      "unit": "root",
      "seg": 6806,
      "off": 1330,
@@ -3958,7 +4224,7 @@
      "reloc_order": "GROUPED"
     },
     {
-     "name": "f_1A96_06D9",
+     "name": "ch_SetCacheHooks",
      "unit": "root",
      "seg": 6806,
      "off": 1753,
@@ -3969,7 +4235,7 @@
      "reloc_order": "EXACT"
     },
     {
-     "name": "f_1A96_000C",
+     "name": "ch_CreateTable",
      "unit": "root",
      "seg": 6806,
      "off": 12,
@@ -3981,10 +4247,65 @@
     }
    ],
    "scaffold": [
-    "f_1A96_01EC",
-    "f_1A96_065D"
+    "ch_GetPrime",
+    "ch_LookUpId"
    ],
    "object_sha256": "be58568f18d46af7c2e73ce7e5d53c584f15f108544aa9194cbae45466cc51ae"
+  },
+  "root:20E8": {
+   "unit": "root",
+   "seg": 8424,
+   "profile": "msc600a",
+   "flags": [
+    "/AL",
+    "/Os",
+    "/Oe",
+    "/Og",
+    "/Gs"
+   ],
+   "placements": {
+    "_DATA": {
+     "seg": 21939,
+     "off": 25312,
+     "size": 132
+    },
+    "CONST": {
+     "seg": 21939,
+     "off": 35352,
+     "size": 8
+    }
+   },
+   "lang": "c",
+   "source": "src/root/m20E8.c",
+   "source_sha256": "9a5e3843f7834525a8e09cf074c010949787c61c8defe2d11b29d4f6833243f7",
+   "claims": [
+    {
+     "name": "f_20E8_0000",
+     "unit": "root",
+     "seg": 8424,
+     "off": 0,
+     "size": 1,
+     "target_sha256": "383e5d7d58caa41ce723cf16af471b38f6ee9065c032d07fa6bef1678cb72f1d",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL",
+     "reloc_order": "EXACT"
+    },
+    {
+     "name": "f_20E8_0141",
+     "unit": "root",
+     "seg": 8424,
+     "off": 321,
+     "size": 494,
+     "target_sha256": "598801dd0dd936edfda05a37ae8448fb90b3b1ff89dc936161166cc3c22ee137",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL",
+     "reloc_order": "GROUPED"
+    }
+   ],
+   "scaffold": [
+    "f_20E8_0001"
+   ],
+   "object_sha256": "e463aecd725f3a17446362b45a44bf0461438f0c50dfd33ba95fd27ff250a24d"
   },
   "root:21FA": {
    "unit": "root",
@@ -4016,7 +4337,7 @@
    },
    "lang": "c",
    "source": "src/root/m21FA.c",
-   "source_sha256": "d4b1ca67bb1e63e554066658348e2b0ff887aeed31879c17b33a914ebc386bdd",
+   "source_sha256": "3c2a7d1f5f8b628f6e1f5a43583e692c170a43724b87d7eb2c44b89c249bf178",
    "claims": [
     {
      "name": "f_21FA_0002",
@@ -4041,7 +4362,7 @@
      "reloc_order": "EXACT"
     },
     {
-     "name": "f_21FA_0144",
+     "name": "win_SetColorFromObj",
      "unit": "root",
      "seg": 8698,
      "off": 324,
@@ -4052,7 +4373,7 @@
      "reloc_order": "EXACT"
     },
     {
-     "name": "f_21FA_01AD",
+     "name": "win_SetColorFromObjNum",
      "unit": "root",
      "seg": 8698,
      "off": 429,
@@ -4063,7 +4384,7 @@
      "reloc_order": "EXACT"
     },
     {
-     "name": "f_21FA_01D0",
+     "name": "win_ClearObjArea",
      "unit": "root",
      "seg": 8698,
      "off": 464,
@@ -4074,7 +4395,7 @@
      "reloc_order": "EXACT"
     },
     {
-     "name": "f_21FA_0260",
+     "name": "win_FillObjRect",
      "unit": "root",
      "seg": 8698,
      "off": 608,
@@ -4129,7 +4450,7 @@
      "reloc_order": "EXACT"
     },
     {
-     "name": "f_21FA_0315",
+     "name": "win_DrawButtonBorder",
      "unit": "root",
      "seg": 8698,
      "off": 789,
@@ -4151,7 +4472,7 @@
      "reloc_order": "EXACT"
     },
     {
-     "name": "f_21FA_075A",
+     "name": "win_DrawObjectNum",
      "unit": "root",
      "seg": 8698,
      "off": 1882,
@@ -4162,7 +4483,7 @@
      "reloc_order": "EXACT"
     },
     {
-     "name": "f_21FA_077D",
+     "name": "win_DrawWinIcons",
      "unit": "root",
      "seg": 8698,
      "off": 1917,
@@ -4354,7 +4675,7 @@
    },
    "lang": "c",
    "source": "src/root/m2505.c",
-   "source_sha256": "99fddfff137671a6927d54e742b83a3d9d24c36b724e4041903002bcfcaeacbb",
+   "source_sha256": "d601708ac1d7d93de5e1491898f09791ba1152047a3360bd808491a78edb1b8f",
    "claims": [
     {
      "name": "f_2505_0006",
@@ -4401,7 +4722,7 @@
      "reloc_order": "GROUPED"
     },
     {
-     "name": "f_2505_025F",
+     "name": "win_WinRectAddr",
      "unit": "root",
      "seg": 9477,
      "off": 607,
@@ -4412,7 +4733,7 @@
      "reloc_order": "GROUPED"
     },
     {
-     "name": "f_2505_0288",
+     "name": "win_GetObjRect",
      "unit": "root",
      "seg": 9477,
      "off": 648,
@@ -4423,7 +4744,7 @@
      "reloc_order": "EXACT"
     },
     {
-     "name": "f_2505_0345",
+     "name": "win_WinAddr",
      "unit": "root",
      "seg": 9477,
      "off": 837,
@@ -4456,7 +4777,7 @@
      "reloc_order": "EXACT"
     },
     {
-     "name": "f_2505_02D7",
+     "name": "win_ObjAddr",
      "unit": "root",
      "seg": 9477,
      "off": 727,
@@ -4489,7 +4810,7 @@
      "reloc_order": "EXACT"
     },
     {
-     "name": "f_2505_0511",
+     "name": "win_SortRect",
      "unit": "root",
      "seg": 9477,
      "off": 1297,
@@ -4556,10 +4877,10 @@
    },
    "lang": "c",
    "source": "src/root/m259D.c",
-   "source_sha256": "bd69f6275d5b97908efad567df07a66941f661b08621376b6a002e16daa74b51",
+   "source_sha256": "c8f8d675e471cd38b8a2376cb1e200f392723f3fa7e02f7905535b07dbc0b704",
    "claims": [
     {
-     "name": "f_259D_02A5",
+     "name": "win_DrawBitMapAtObj",
      "unit": "root",
      "seg": 9629,
      "off": 677,
@@ -4570,7 +4891,7 @@
      "reloc_order": "EXACT"
     },
     {
-     "name": "f_259D_02D8",
+     "name": "win_DrawBitMapAtObjNum",
      "unit": "root",
      "seg": 9629,
      "off": 728,
