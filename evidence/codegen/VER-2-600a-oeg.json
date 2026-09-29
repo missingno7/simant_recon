@@ -1,0 +1,32 @@
+{
+ "id": "VER-2",
+ "question": "Does MSC 6.00A differ from 6.00 outside /Ol? (module 1A53 db_LoadObject under /AL /Os /Oeg /Gs)",
+ "header": "",
+ "variants": {
+  "m1A53": "/*\n * Object database front end (root module, code frame 1A53).\n * Win16 counterpart: unit simtwo_8176 (db_Exists .. db_CloseDataBase).\n * DOS memory handles are far pointers.\n */\n\nextern int far sprintf(char far *buffer, char far *format, ...);\nextern int far access(char far *path, int mode);\nextern void far Punt(char far *format, ...);\nextern int far WinPrintf(char far *format, ...);\nextern int far OpenDB(char far *name);\nextern void far f_1B28_0068(void);\nextern void far * far f_1A96_000C(int size);\nextern char far * far f_1A96_01EC(int object, int kind, void far *table);\nextern int far f_1A96_034E(int object, int kind, void far *table, char far *handle);\nextern char far * far f_19A9_001D(int db, int object, int kind, int far *size);\nextern void far f_171C_15A2(char far *handle, int type);\nextern void far f_171C_13E4(char far *handle);\nextern int far f_1A96_0159(char far *handle, void far *table, int far *object, int far *kind);\nextern void far f_1A96_0421(int object, int kind, void far *table);\nextern void far f_1A96_008C(int object, int kind, void far *table);\nextern void far f_1A96_00EE(void far *table);\nextern void far f_1A28_0149(int db);\nextern void far f_19A9_031D(int db, int object, int kind);\nextern void far f_19A9_0310(int db, int a4, int a5, int a6, int object, int kind, int a3);\nextern int far fd_50F6_3B50[];\n\nint db_numOfHandles = 0;\nvoid far *db_cacheTable = 0L;\nint db_closed = 1;\n\nint far db_Exists(char far *name)\n{\n    char path[100];\n\n    sprintf(path, \"%s.dat\", name);\n    if (access(path, 0) != -1)\n        return 1;\n    return 0;\n}\n\nint far db_SetDataBase(char far *name)\n{\n    int handle;\n\n    db_closed = 0;\n    if (db_numOfHandles)\n        f_1B28_0068();\n    if (db_cacheTable == 0L)\n        db_cacheTable = f_1A96_000C(0);\n    fd_50F6_3B50[db_numOfHandles] = OpenDB(name);\n    handle = fd_50F6_3B50[db_numOfHandles++];\n    if (handle < 0)\n        Punt(\"Cannot open database %s\", name);\n    return handle;\n}\n\nchar far * far db_LoadObject(int object, int kind);\n\nchar far * far f_1A53_00BA(int object, int kind)\n{\n    char far *handle;\n\n    handle = db_LoadObject(object, kind);\n    if (handle)\n        f_171C_15A2(handle, 1);\n    return handle;\n}\n\nchar far * far f_1A53_00F0(int object, int kind, int type)\n{\n    char far *handle;\n\n    handle = db_LoadObject(object, kind);\n    if (handle)\n        f_171C_15A2(handle, type);\n    return handle;\n}\n\nchar far * far db_LoadObject(int object, int kind)\n{\n    char far *handle;\n    int size;\n    int i;\n\n    if (db_numOfHandles <= 0)\n        Punt(\"Load attempt with database closed\");\n    handle = f_1A96_01EC(object, kind, db_cacheTable);\n    if (!handle) {\n        f_1B28_0068();\n        for (i = 0; i < db_numOfHandles; i++) {\n            if ((handle = f_19A9_001D(fd_50F6_3B50[i], object, kind, &size)) != 0L) {\n                if (!f_1A96_034E(object, kind, db_cacheTable, handle))\n                    Punt(\"Cache table full, can't load object\");\n                return handle;\n            }\n        }\n        WinPrintf(\"Memory full or object missing - cannot load object:id=%d, type=%d\", object, kind);\n        return 0L;\n    }\n    f_171C_15A2(handle, 0);\n    return handle;\n}\n\nvoid far db_PurgeObject(int object, int kind)\n{\n    char far *handle;\n\n    if (db_numOfHandles < 0)\n        Punt(\"Purge attempt with database closed\");\n    handle = f_1A96_01EC(object, kind, db_cacheTable);\n    if (handle) {\n        f_1A96_0421(object, kind, db_cacheTable);\n        f_171C_13E4(handle);\n    }\n}\n\nvoid far f_1A53_025F(char far *handle)\n{\n    int object;\n    int kind;\n\n    if (db_numOfHandles < 0)\n        Punt(\"Purge attempt with database closed\");\n    if (f_1A96_0159(handle, db_cacheTable, &object, &kind)) {\n        f_1A96_0421(object, kind, db_cacheTable);\n        f_171C_13E4(handle);\n    } else\n        WinPrintf(\"\\a\\nPurge handle - handle not found!! handle=%p\", handle);\n}\n\nvoid far f_1A53_02D5(char far *handle)\n{\n    f_171C_15A2(handle, 3);\n}\n\nvoid far f_1A53_02EB(unsigned int object, int kind)\n{\n    char far *handle;\n\n    if (object < 30000) {\n        if (db_numOfHandles < 0)\n            Punt(\"Purge attempt with database closed\");\n        handle = f_1A96_01EC(object, kind, db_cacheTable);\n        if (handle)\n            f_171C_15A2(handle, 3);\n        else\n            Punt(\"Release %d not in cache! \");\n    }\n}\n\nvoid far f_1A53_034F(int object, int kind)\n{\n    if (db_numOfHandles < 0)\n        Punt(\"Unhook attempt with database closed\");\n    f_1A96_008C(object, kind, db_cacheTable);\n}\n\nvoid far f_1A53_037C(void)\n{\n    while (db_numOfHandles > 0) {\n        --db_numOfHandles;\n        f_1A28_0149(fd_50F6_3B50[db_numOfHandles]);\n    }\n    f_1A96_00EE(db_cacheTable);\n    db_cacheTable = 0L;\n}\n\nvoid far f_1A53_03B6(int object, int kind, int a3, int a4, int a5, int a6)\n{\n    f_1B28_0068();\n    f_19A9_031D(fd_50F6_3B50[0], object, kind);\n    f_1A53_034F(object, kind);\n    f_19A9_0310(fd_50F6_3B50[0], a4, a5, a6, object, kind, a3);\n}\n\nvoid far f_1A53_0404(int object, int kind, int a3, int a4, int a5, int a6)\n{\n    f_1B28_0068();\n    f_1A53_034F(object, kind);\n    f_19A9_0310(fd_50F6_3B50[0], a4, a5, a6, object, kind, a3);\n}\n"
+ },
+ "profiles": [
+  {
+   "profile": "msc600a",
+   "flags": [
+    "/AL",
+    "/Os",
+    "/Oeg",
+    "/Gs"
+   ]
+  },
+  {
+   "profile": "msc600",
+   "flags": [
+    "/AL",
+    "/Os",
+    "/Oeg",
+    "/Gs"
+   ]
+  }
+ ],
+ "expect": {
+  "m1A53@0": "mov dx, di",
+  "m1A53@1": "!mov dx, di"
+ }
+}

@@ -3683,6 +3683,24 @@
    "off": 298,
    "grounding": "inventory:far_call"
   },
+  "f_19A9_0005": {
+   "unit": "root",
+   "seg": 6569,
+   "off": 5,
+   "grounding": "reviewed: unreferenced 1-byte retf at module start (after FindIndex's end at 19A9:0004): empty /Gs function (GS-1), needed to tile module 19A9"
+  },
+  "f_19A9_0006": {
+   "unit": "root",
+   "seg": 6569,
+   "off": 6,
+   "grounding": "reviewed: unreferenced 1-byte retf at module start (after FindIndex's end at 19A9:0004): empty /Gs function (GS-1), needed to tile module 19A9"
+  },
+  "f_19A9_0007": {
+   "unit": "root",
+   "seg": 6569,
+   "off": 7,
+   "grounding": "reviewed: unreferenced 1-byte retf at module start (after FindIndex's end at 19A9:0004): empty /Gs function (GS-1), needed to tile module 19A9"
+  },
   "f_19A9_0008": {
    "unit": "root",
    "seg": 6569,
@@ -3712,6 +3730,18 @@
    "seg": 6569,
    "off": 797,
    "grounding": "inventory:far_call"
+  },
+  "f_19A9_032A": {
+   "unit": "root",
+   "seg": 6569,
+   "off": 810,
+   "grounding": "reviewed: unreferenced frameless stub after f_19A9_031D: Punt(\"Attempt to ... during a READ-ONLY run\" @3875); third read-only DB stub, ends 0337 (odd, LINK fill)"
+  },
+  "f_19DC_0008": {
+   "unit": "root",
+   "seg": 6620,
+   "off": 8,
+   "grounding": "reviewed: unreferenced frameless function at module start (19A9:0338 = 19DC:0008): if ([389C]) call 195A:007D([389C])"
   },
   "f_19DC_001A": {
    "unit": "root",
@@ -9360,6 +9390,16 @@
    "off": 700,
    "grounding": "AddFood: mov es,[S08 CONST 8602]; mov es:[02BC],si ; mov es:[02BE],di (food centre x,y)"
   },
+  "fd_3D57_067E": {
+   "seg": 15703,
+   "off": 1662,
+   "grounding": "CheatKeys (S07): mov es,[S07 CONST word]; es:[off]"
+  },
+  "fd_3D57_06DE": {
+   "seg": 15703,
+   "off": 1758,
+   "grounding": "CheatKeys (S07): mov es,[S07 CONST word]; es:[off]"
+  },
   "fd_3D57_0798": {
    "seg": 15703,
    "off": 1944,
@@ -9379,6 +9419,11 @@
    "seg": 15703,
    "off": 1996,
    "grounding": "o08_35F5_0000 (InitSimVars): mov es,[CONST word 3D57] ; mov es:[07CC],..."
+  },
+  "fd_3D57_0C12": {
+   "seg": 15703,
+   "off": 3090,
+   "grounding": "CheatKeys (S07): mov es,[S07 CONST word]; es:[off]"
   },
   "fd_3D57_0C14": {
    "seg": 15703,
@@ -9825,6 +9870,16 @@
    "off": 2566,
    "grounding": "f_0BE8_0002: mov es,[DS:80F8] (CONST 50F6); cmp word es:[0A06],0"
   },
+  "fd_50F6_0A90": {
+   "seg": 20726,
+   "off": 2704,
+   "grounding": "CheatKeys (S07): mov es,[S07 CONST word]; es:[off]"
+  },
+  "fd_50F6_0AC4": {
+   "seg": 20726,
+   "off": 2756,
+   "grounding": "CheatKeys (S07): mov es,[S07 CONST word]; es:[off]"
+  },
   "fd_50F6_0AEC": {
    "seg": 20726,
    "off": 2796,
@@ -9834,6 +9889,11 @@
    "seg": 20726,
    "off": 2810,
    "grounding": "f_0BE8_0002: mov es,[DS:80E6] (CONST 50F6); word array es:[0AFA..0B04]"
+  },
+  "fd_50F6_0B0A": {
+   "seg": 20726,
+   "off": 2826,
+   "grounding": "CheatKeys (S07): mov es,[S07 CONST word]; es:[off]"
   },
   "fd_50F6_0B1E": {
    "seg": 20726,
@@ -10060,10 +10120,40 @@
    "off": 14680,
    "grounding": "OpenDB (root:1A28:0006): h*7Ch + 3958h with mov cx,50F6h (address) and es:[bx+3958h] via CONST word 89C2; 4 x 124-byte open-database records"
   },
+  "fd_50F6_3B48": {
+   "seg": 20726,
+   "off": 15176,
+   "grounding": "f_19DC_001A/0148: mov es,[DS:89BE] (CONST word 50F6); far pointer to the 16K EMS read window, returned by f_19DC_0148"
+  },
+  "fd_50F6_3B4C": {
+   "seg": 20726,
+   "off": 15180,
+   "grounding": "f_19DC_001A/0148: mov es,[DS:89C0] (CONST word 50F6); memory handle of the 6-byte-per-page EMS slot list ('DBEMSLIST')"
+  },
   "fd_50F6_3B50": {
    "seg": 20726,
    "off": 15184,
    "grounding": "db module: mov es,[DS:89C4] (CONST word 50F6) ; es:[bx+3B50] handle array"
+  },
+  "fd_50F6_47D8": {
+   "seg": 20726,
+   "off": 18392,
+   "grounding": "f_2505_0453/04D7: mov es,[8A48]; cmp ax,es:[47D8] (window count bound)"
+  },
+  "fd_55B3_360C": {
+   "seg": 21939,
+   "off": 13836,
+   "grounding": "f_19DC_001A: mov es,[DS:89B8] (CONST word 55B3); cmp byte ptr es:[360C],40h - far-declared byte in DGROUP (EMS module data)"
+  },
+  "fd_55B3_360E": {
+   "seg": 21939,
+   "off": 13838,
+   "grounding": "f_19DC_001A: mov es,[DS:89BC] (CONST word 55B3); es:[360E]/es:[3610] far pointer (EMS page frame), minus 4000h stored to 50F6:3B48"
+  },
+  "fd_55B3_3612": {
+   "seg": 21939,
+   "off": 13842,
+   "grounding": "f_19DC_001A: mov es,[DS:89BA] (CONST word 55B3); mov cx,es:[3612] - far-declared int in DGROUP (EMS pages available)"
   },
   "g_1B9A": {
    "seg": 21939,
@@ -10080,10 +10170,25 @@
    "off": 7090,
    "grounding": "f_14EE_04B5: mov al,[si+1BB2] (DS=DGROUP) byte tile per direction"
   },
+  "g_5702": {
+   "seg": 21939,
+   "off": 22274,
+   "grounding": "f_2505_036E: mov es,[8A46]; cmp word ptr es:[5702],8000"
+  },
+  "g_6300": {
+   "seg": 21939,
+   "off": 25344,
+   "grounding": "f_2505_0006: mov es,[8A44]; cmp word ptr es:[6300],0 (far-declared DGROUP flag checked before lock test)"
+  },
   "g_8BA2": {
    "seg": 21939,
    "off": 35746,
    "grounding": "f_0093_008F: mov [8BA2],ax (DS=DGROUP)"
+  },
+  "g_9230": {
+   "seg": 21939,
+   "off": 37424,
+   "grounding": "f_2505_0006/0545: les bx,[bx+9230] indexed by win>>8 (window handle table, 4-byte entries)"
   },
   "sys_errlist": {
    "seg": 21939,

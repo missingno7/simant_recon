@@ -16,7 +16,8 @@ REG-1 below is a case where the MSC 5.10 rule is false for 6.00.
 | OE-1 | VERIFIED | `/Oe` enregisters plain autos (SI/DI) while keeping their now-unused BP homes: frame size > 0 with no `[bp-n]` use is the `/Oe` signature. | `f_0093_0054`, `SeedRRand`, `RRand` | without `/Oe` autos stay in memory; with `register` the homes disappear |
 | ASM-1 | VERIFIED | An MSC function whose body is inline `_asm` always gets `mov sp,bp; pop bp`; C spellings of a byte swap never produce `xchg`. `mov ax,[bp+6]; xchg al,ah; pop bp; retf` is therefore not MSC output. | module 1959 reproduced with MASM 5.10 | inline-asm variant +2 bytes; C variants use two byte loads |
 | DATA-1 | VERIFIED | `_DATA` order: a function's string literals are emitted when it is compiled; initialised data definitions are queued and flushed after the *next* function's literals. Globals at the top of a file therefore follow the first function's literals. | module 1A53: `"%s.dat"` (db_Exists) at 39EC, statics at 39F4, then later literals | globals defined after f1 land after f2's literals |
-| VER-1 | VERIFIED | MSC 6.00 and 6.00A differ (in this corpus) only in `/Ol` strength reduction of an array walk: 6.00 computes `shl ax,1; add ax,offset arr` from a zero counter, 6.00A stores `offset arr` directly. | — (no accepted `/Ol` function yet) | all other probed flags byte-identical |
+| VER-2 | VERIFIED | MSC 6.00 and 6.00A also differ under `/Oeg`: module 1A53 `db_LoadObject` is 218 bytes (original) only under 6.00A; 6.00 cross-jumps the `mov dx,[bp-8]` tail (210 bytes). Every accepted module is exact under 6.00A. | db_LoadObject, f_1A28_0224 | msc600: 210 bytes |
+| VER-1 | VERIFIED | MSC 6.00 and 6.00A differ in `/Ol` strength reduction of an array walk: 6.00 computes `shl ax,1; add ax,offset arr` from a zero counter, 6.00A stores `offset arr` directly. | — (no accepted `/Ol` function yet) | all other probed flags byte-identical |
 
 ## Observations not yet promoted to rules
 

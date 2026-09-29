@@ -6116,6 +6116,48 @@
 {
 "unit": "root",
 "seg": 6569,
+"off": 5,
+"size": 1,
+"region": "game_or_library",
+"extent": "REVIEWED",
+"evidence": [
+"reviewed"
+],
+"notes": [
+"unreferenced 1-byte retf at module start (after FindIndex's end at 19A9:0004): empty /Gs function (GS-1), needed to tile module 19A9"
+]
+},
+{
+"unit": "root",
+"seg": 6569,
+"off": 6,
+"size": 1,
+"region": "game_or_library",
+"extent": "REVIEWED",
+"evidence": [
+"reviewed"
+],
+"notes": [
+"unreferenced 1-byte retf at module start (after FindIndex's end at 19A9:0004): empty /Gs function (GS-1), needed to tile module 19A9"
+]
+},
+{
+"unit": "root",
+"seg": 6569,
+"off": 7,
+"size": 1,
+"region": "game_or_library",
+"extent": "REVIEWED",
+"evidence": [
+"reviewed"
+],
+"notes": [
+"unreferenced 1-byte retf at module start (after FindIndex's end at 19A9:0004): empty /Gs function (GS-1), needed to tile module 19A9"
+]
+},
+{
+"unit": "root",
+"seg": 6569,
 "off": 8,
 "size": 3,
 "region": "game_or_library",
@@ -6169,6 +6211,34 @@
 "extent": "DESCENT",
 "evidence": [
 "far_call"
+]
+},
+{
+"unit": "root",
+"seg": 6569,
+"off": 810,
+"size": 13,
+"region": "game_or_library",
+"extent": "REVIEWED",
+"evidence": [
+"reviewed"
+],
+"notes": [
+"unreferenced frameless stub after f_19A9_031D: Punt(\"Attempt to ... during a READ-ONLY run\" @3875); third read-only DB stub, ends 0337 (odd, LINK fill)"
+]
+},
+{
+"unit": "root",
+"seg": 6620,
+"off": 8,
+"size": 18,
+"region": "game_or_library",
+"extent": "REVIEWED",
+"evidence": [
+"reviewed"
+],
+"notes": [
+"unreferenced frameless function at module start (19A9:0338 = 19DC:0008): if ([389C]) call 195A:007D([389C])"
 ]
 },
 {

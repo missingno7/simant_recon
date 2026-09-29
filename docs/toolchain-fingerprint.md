@@ -9,6 +9,9 @@ re-executed by `python tools/validate.py`.
 * **Microsoft C, large model (`/AL`), 8086 code (`/G0`).** Far calls/returns everywhere,
   far data pointers (`lds`/`les` on arguments). Only 8 instructions in 1,233 game
   functions decode as 186+ and they sit in data.
+* **Microsoft C 6.00A** (VER-2): two database functions are exact only under 6.00A
+  (`db_LoadObject` 218 bytes vs 210 under 6.00) and every accepted module is exact under
+  6.00A; all modules use the pinned `msc600a` profile (`C:/tools/msc-6.00a-simantw`).
 * **MSC 6.00-generation compiler.** 36 functions (825 bytes C + ASM) across 9 modules are
   byte-exact with pinned MSC 6.00 `CL.EXE`, including fixups and relocations.
 * **MSC 5.10 and QuickC 2.50 are ruled out for this code** (rule FRAME-1): both omit
@@ -36,16 +39,13 @@ re-executed by `python tools/validate.py`.
 
 * **Baseline profile `MSC 6.00 /AL /Os`** (+ `/Oe`, `/Gs` per module). `/Os` explains
   574 odd function entries (no alignment NOPs) and the shared-epilogue shape (rule OS-1).
-* **Compiler version 6.00 or 6.00A.** Both give identical bytes on every probe except
-  `/Ol` strength reduction (rule VER-1); no accepted function yet exercises that path.
-  The Dec 1991 build date is compatible with both (6.00A shipped in 1990; MSC 7.00 in
-  1992).
+* Baseline options per module: `/AL /Os` plus `/Oe`, `/Og` (simulation, database) and
+  `/Gs` (database, window and stub modules); `_fastcall` in the window-object module.
 * **`_fastcall` in the window-object module 2505** (AX/DX register arguments, callee
   pops stack arguments with `retf N`, `@name` decoration).
 
 ## POSSIBLE
 
-* MSC 6.00A rather than 6.00 (later release, nearer the build date) — undecided.
 * MASM 5.10 for the genuine assembly (it reproduces module 1959; other assemblers of the
   period encode these instructions identically, so this is a reproduction choice, not an
   attribution).

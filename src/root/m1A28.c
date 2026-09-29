@@ -36,7 +36,7 @@ extern void far OpenIndex(char far *name, int db);
 extern void far f_1986_00F4(char far *name, int db);
 extern void far f_1986_00F5(int db);
 
-static int dbInited = 0;
+static int s_394E = 0;
 
 int far f_1A28_0224(void);
 void far f_1A28_01B4(char far *dst, char far *src);
@@ -102,8 +102,8 @@ int far f_1A28_0224(void)
 {
     int i;
 
-    if (!dbInited) {
-        dbInited = 1;
+    if (!s_394E) {
+        s_394E = 1;
         for (i = 0; i < 4; i++)
             fd_50F6_3958[i].name[0] = 0;
     }

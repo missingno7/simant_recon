@@ -32,14 +32,14 @@ extern void far f_171C_2276(void far *p);
 extern void far * far _fmemset(void far *dst, int c, unsigned int n);
 extern void far Punt(char far *format, ...);
 
-char far * (far *cacheHook)(int object, int type) = 0L;
-char far * (far *releaseHook)(int object, int type) = 0L;
-static int chFoundIndex = 0;
-static long chLookupHits = 0L;
-static long chLookupMisses = 0L;
-static long chLookupHitProbes = 0L;
-static long chLookupMissProbes = 0L;
-static int chAddEntryAge;
+char far * (far *g_3B7E)(int object, int type) = 0L;
+char far * (far *g_3B82)(int object, int type) = 0L;
+static int s_3B86 = 0;
+static long s_3B88 = 0L;
+static long s_3B8C = 0L;
+static long s_3B90 = 0L;
+static long s_3B94 = 0L;
+static int s_8C7A;
 
 int far f_1A96_065D(int n);
 int far f_1A96_0483(CacheHandle table);
@@ -63,8 +63,8 @@ CacheHandle far f_1A96_000C(int size)
 int far f_1A96_008C(int object, int type, CacheHandle table)
 {
     if (f_1A96_01EC(object, type, table)) {
-        (*table)->e[chFoundIndex].k.id = -1;
-        (*table)->e[(*table)->count + chFoundIndex].h = 0L;
+        (*table)->e[s_3B86].k.id = -1;
+        (*table)->e[(*table)->count + s_3B86].h = 0L;
         (*table)->used--;
         return 1;
     }
@@ -122,8 +122,8 @@ char far * far f_1A96_01EC(int object, int type, CacheHandle table)
     CacheEntry far *p;
 
     probes = 0;
-    if (cacheHook) {
-        handle = (*cacheHook)(object, type);
+    if (g_3B7E) {
+        handle = (*g_3B7E)(object, type);
         if (handle)
             return handle;
     }
@@ -146,9 +146,9 @@ char far * far f_1A96_01EC(int object, int type, CacheHandle table)
     }
     goto missing;
 found:
-    chLookupHitProbes += probes;
-    chLookupHits++;
-    chFoundIndex = i;
+    s_3B90 += probes;
+    s_3B88++;
+    s_3B86 = i;
     handle = (*table)->e[count + i].h;
     if (f_171C_1794(handle)) {
         f_1A96_0483(table);
@@ -157,9 +157,9 @@ found:
     f_171C_152C(handle);
     return handle;
 missing:
-    chFoundIndex = i;
-    chLookupMissProbes += probes;
-    chLookupMisses++;
+    s_3B86 = i;
+    s_3B94 += probes;
+    s_3B8C++;
     return 0L;
 }
 /* SCAFFOLD END */
@@ -171,17 +171,17 @@ int far f_1A96_034E(int object, int type, CacheHandle table, char far *handle)
 
     count = (*table)->count;
     used = (*table)->used;
-    chAddEntryAge++;
-    if (used == count || chAddEntryAge > 30) {
-        chAddEntryAge = 0;
+    s_8C7A++;
+    if (used == count || s_8C7A > 30) {
+        s_8C7A = 0;
         if (f_1A96_0483(table) == count && f_1A96_0532(table) == count)
             return 0;
     }
     if (f_1A96_01EC(object, type, table))
         Punt("Attemp to add ID already present in lookup table");
-    (*table)->e[chFoundIndex].k.id = object;
-    (*table)->e[chFoundIndex].k.type = type;
-    (*table)->e[count + chFoundIndex].h = handle;
+    (*table)->e[s_3B86].k.id = object;
+    (*table)->e[s_3B86].k.type = type;
+    (*table)->e[count + s_3B86].h = handle;
     (*table)->used++;
     return 1;
 }
@@ -189,8 +189,8 @@ int far f_1A96_034E(int object, int type, CacheHandle table, char far *handle)
 int far f_1A96_0421(int object, int type, CacheHandle table)
 {
     if (f_1A96_01EC(object, type, table)) {
-        (*table)->e[chFoundIndex].k.id = -1;
-        (*table)->e[(*table)->count + chFoundIndex].h = 0L;
+        (*table)->e[s_3B86].k.id = -1;
+        (*table)->e[(*table)->count + s_3B86].h = 0L;
         (*table)->used--;
         return 1;
     }
@@ -291,6 +291,6 @@ next:   ;
 void far f_1A96_06D9(char far * (far *cache)(int object, int type),
                      char far * (far *release)(int object, int type))
 {
-    cacheHook = cache;
-    releaseHook = release;
+    g_3B7E = cache;
+    g_3B82 = release;
 }

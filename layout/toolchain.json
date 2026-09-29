@@ -123,12 +123,12 @@
  },
  "hypotheses": {
   "compiler": {
-   "status": "STRONGLY_SUPPORTED",
-   "value": "Microsoft C 6.00 or 6.00A (CL), large model, /Os baseline",
+   "status": "CONFIRMED",
+   "value": "Microsoft C 6.00A (CL), large model, /Os baseline + per-module /Oe /Og /Gs",
    "evidence": [
-    "36 functions exact under pinned msc600 profile",
-    "FRAME-1 excludes MSC 5.10 and QuickC 2.50",
-    "VER-1: 6.00 vs 6.00A differ only under /Ol (undecided)"
+    "evidence/codegen/VER-2: db_LoadObject exact only under 6.00A",
+    "all accepted modules exact under msc600a",
+    "FRAME-1 excludes MSC 5.10 and QuickC 2.50"
    ]
   },
   "memory_model": {
