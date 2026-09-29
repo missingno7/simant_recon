@@ -1,4 +1,11 @@
-/* Overlay section S25, code frame 3BA4: yellow ant movement (DoAntMoveY unit). */
+/* Overlay section S25, code frame 3BA4: yellow ant movement (DoAntMoveY unit).
+ * Built /AL /Os /Oe /Og /Zd.  The order of the extern declarations is part of the
+ * fingerprint: MSC 6.00A breaks some operand-order ties by symbol-table state
+ * (ExitNest's MePlane/MeGoalPlane compare, GetMyDis' GetDis call order), and this
+ * order (0D6C/0EF8 first, MeLastX/Y before MeGoalY, entrance arrays A4,B0,A8,AC)
+ * reproduces them. */
+extern int far fd_50F6_0D6C;
+extern int far fd_50F6_0EF8;
 
 extern int far fd_50F6_0AA0;
 extern int far fd_50F6_0A8E;
@@ -629,12 +636,11 @@ void far ExitNest(void)
     f_10F7_0A44(fd_50F6_048C = 1, fd_50F6_047C, fd_50F6_048A, fd_50F6_04C2, fd_50F6_0496, 0xff);
 }
 
-extern int far fd_3D57_02AC[2];
 extern int far fd_3D57_02A4[2];
 extern int far fd_3D57_02B0[2];
 extern int far fd_3D57_02A8[2];
+extern int far fd_3D57_02AC[2];
 
-/* SCAFFOLD BEGIN: o25_3BA4_13AB (GetMyDis) best draft: the two/three GetDis calls of each sum are emitted in the opposite order (commutative operand order follows symbol-table state, not source order) */
 int far o25_3BA4_13AB(int p1, int x1, int y1, int p2, int x2, int y2)
 {
     if (p2 == p1)
@@ -661,7 +667,6 @@ int far o25_3BA4_13AB(int p1, int x1, int y1, int p2, int x2, int y2)
          + f_0BE8_0B83(fd_3D57_02B0[0], fd_3D57_02B0[1], fd_3D57_02AC[0], fd_3D57_02AC[1])
          + f_0BE8_0B83(fd_3D57_02A4[0], fd_3D57_02A4[1], x2, y2);
 }
-/* SCAFFOLD END */
 
 extern int far f_10F7_22CE(int plane, int x, int y, int fromPlane, int fromX, int fromY, int digging);
 extern int far f_10F7_07C7(int plane, int x, int y);
@@ -808,8 +813,6 @@ int far o25_3BA4_188A(int far *steps, int plane, int x, int y, int a, int b)
     return dir;
 }
 
-extern int far fd_50F6_0D6C;
-extern int far fd_50F6_0EF8;
 extern int far fd_50F6_0EFA;
 
 int far o25_3BA4_1935(int plane, int x, int y, int a, int b)
@@ -849,6 +852,7 @@ int far o25_3BA4_1A0D(int plane, int x, int y, int a, int b)
     return dir;
 }
 
+/* SCAFFOLD BEGIN: o25_3BA4_1A9F best draft: 7 bytes differ, the original keeps p1 in DI (push di/pop di), MSC picks SI here; register choice is not moved by declaration order, unused locals or the register keyword */
 int far o25_3BA4_1A9F(int p1, int x1, int y1, int p2, int x2, int y2)
 {
     if (p1 <= 1) {
@@ -864,6 +868,5 @@ int far o25_3BA4_1A9F(int p1, int x1, int y1, int p2, int x2, int y2)
         return o25_3BA4_1A0D(p1, x1, y1, fd_3D57_02A4[0], fd_3D57_02A4[1]);
     return o25_3BA4_1A0D(p1, x1, y1, fd_3D57_02A8[0], fd_3D57_02A8[1]);
 }
-
-/* SCAFFOLD BEGIN: unrecovered same-module callees */
 /* SCAFFOLD END */
+

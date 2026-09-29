@@ -914,7 +914,7 @@
    },
    "lang": "c",
    "source": "src/S25/m3BA4.c",
-   "source_sha256": "af7c3f7afd13aa359fb570f4bcfaa5dc6c02ac95b1ce86047194117804474bf2",
+   "source_sha256": "93c57b0049c67dca6cb7a2da6b4b5509c3cd033f7f9049f97244e3154f863a04",
    "claims": [
     {
      "name": "DoAntSimY",
@@ -1035,15 +1035,27 @@
      "provenance": "EXACT_STEERED",
      "steered": "DoAntMoveY scaffold stand-in: CONST word order + 21 filler lines -> /Zd LINNUM (52/record) LEDATA boundary that fixes within-group reloc order of o25_3BA4_0999",
      "reloc_order": "GROUPED"
+    },
+    {
+     "name": "o25_3BA4_13AB",
+     "unit": "S25",
+     "seg": 15268,
+     "off": 5035,
+     "size": 470,
+     "target_sha256": "552cbca6f61c7bdbff16e397dec1fabe730bb02e67ada14f2b51d84e286c6a02",
+     "kind": "C",
+     "provenance": "EXACT_STEERED",
+     "steered": "DoAntMoveY scaffold stand-in: CONST word order + 21 filler lines -> /Zd LINNUM (52/record) LEDATA boundary that fixes within-group reloc order of o25_3BA4_0999",
+     "reloc_order": "GROUPED"
     }
    ],
    "scaffold": [
     "DoAntMoveY",
     "o25_3BA4_1035",
-    "o25_3BA4_13AB",
-    "o25_3BA4_1686"
+    "o25_3BA4_1686",
+    "o25_3BA4_1A9F"
    ],
-   "object_sha256": "3fcaa4dc7ce49012bef28ef89ca9a939b12feef1be3dcc4224bc278a5d957dbd"
+   "object_sha256": "160a48d1cbcba68d5194a35a1a327685d00dfffac7a85d547db87285e680cfbc"
   },
   "root:0093": {
    "unit": "root",
@@ -3389,7 +3401,7 @@
    },
    "lang": "c",
    "source": "src/root/m171C.c",
-   "source_sha256": "93fc46fd58c1b0af2fb935071acbe16e02fa85e3afe916a99ad266f375b4d27d",
+   "source_sha256": "c42645d7c3fe06d24da7e04fc63cd1c438daeb99ff37beedf5ad9895a7cd3201",
    "claims": [
     {
      "name": "f_171C_068C",
@@ -3576,7 +3588,7 @@
      "target_sha256": "d75a1fde5949e8e4b128328f03352176dd569ade9113a5ce7ecdf604b63a4c09",
      "kind": "C",
      "provenance": "EXACT_NATURAL",
-     "reloc_order": "GROUPED"
+     "reloc_order": "WITHIN_GROUP_PENDING"
     },
     {
      "name": "f_171C_14BE",
@@ -3951,21 +3963,61 @@
      "kind": "C",
      "provenance": "EXACT_NATURAL",
      "reloc_order": "EXACT"
+    },
+    {
+     "name": "f_171C_0002",
+     "unit": "root",
+     "seg": 5916,
+     "off": 2,
+     "size": 28,
+     "target_sha256": "39fb9014dd4a8b7097a2c04974cd3097f042c48386751cea13577eb784d46506",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL",
+     "reloc_order": "EXACT"
+    },
+    {
+     "name": "f_171C_1D40",
+     "unit": "root",
+     "seg": 5916,
+     "off": 7488,
+     "size": 326,
+     "target_sha256": "34cbd81d7e15eddc867b9408c123440d3032ce91a917b241de214ffb17673afd",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL",
+     "reloc_order": "WITHIN_GROUP_PENDING"
+    },
+    {
+     "name": "f_171C_0A5C",
+     "unit": "root",
+     "seg": 5916,
+     "off": 2652,
+     "size": 128,
+     "target_sha256": "5b4e4fbb4b6056bea273e65af8e6b45205cca452c9d699c5c94ca482a7a52570",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL",
+     "reloc_order": "WITHIN_GROUP_PENDING"
+    },
+    {
+     "name": "f_171C_0EEA",
+     "unit": "root",
+     "seg": 5916,
+     "off": 3818,
+     "size": 210,
+     "target_sha256": "df77e0ce91640b604499b62f2984501da60db906abb5c12ebf8f448b2c969de8",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL",
+     "reloc_order": "GROUPED"
     }
    ],
    "scaffold": [
-    "f_171C_0002",
     "f_171C_0160",
     "f_171C_09CC",
-    "f_171C_0A5C",
     "f_171C_0ADC",
     "f_171C_0CF4",
-    "f_171C_0EEA",
     "f_171C_0FBC",
-    "f_171C_15A2",
-    "f_171C_1D40"
+    "f_171C_15A2"
    ],
-   "object_sha256": "a7442a2a87ba5dd5a3ff7df3a8127557d61e199cd103eb7b7af4708b195b8f6f"
+   "object_sha256": "ee7dd80a8922e4bb57c1942d3fd03c0fa665ba9ba3a950c108802707f430cf57"
   },
   "root:1959": {
    "unit": "root",

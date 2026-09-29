@@ -13010,11 +13010,6 @@
    "off": 1960,
    "grounding": "S25:3BA4 DoAntMoveY:04C5 cmp word es:[07A8],0 (CONST seg word 897E = 3D57)"
   },
-  "fd_3D57_07AA": {
-   "seg": 15703,
-   "off": 1962,
-   "grounding": "S25:3BA4 o25_3BA4_0999:0A26 cmp word es:[07AA],1 (CONST seg word 897E = 3D57, shared with 07A8)"
-  },
   "fd_3D57_07B2": {
    "seg": 15703,
    "off": 1970,
@@ -14379,6 +14374,11 @@
    "seg": 20726,
    "off": 15184,
    "alias_of": "db_handles"
+  },
+  "fd_50F6_3DA0": {
+   "seg": 20726,
+   "off": 15776,
+   "grounding": "f_22BF_0C38: es=[8A38] (seg 50F6) addresses 3DA2 then 3DA0 with the same ES -> one far object {x@3DA0, y@3DA2} (a clip/limit point)"
   },
   "fd_50F6_46E2": {
    "seg": 20726,

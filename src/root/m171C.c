@@ -41,7 +41,7 @@ typedef char far * far *Handle;
 #define CHECKH(h) \
     if (SEG(h) == 0xF0F) { \
         int i = OFF(h); \
-        if (i >= 0 && i < s_2F42) \
+        if (i >= 0 && i < g_2F42) \
             h = s_2F46 - i - 1; \
         else \
             Punt("RL5: Invalid handle index"); \
@@ -56,15 +56,11 @@ extern unsigned far fd_50F6_394C;
 extern unsigned far fd_50F6_394E;
 extern unsigned far fd_50F6_3950;
 extern char far * far fd_50F6_3948;
-typedef struct {
-    unsigned paras;             /* 91A0 */
-    unsigned seg;               /* 91A2 */
-    Block far *first;           /* 91A4 */
-    Block far *end;             /* 91A8 */
-    Block far *free;            /* 91AC */
-} Heap;
-
-extern Heap near g_91A0;
+extern unsigned near g_91A0;
+extern unsigned near g_91A2;
+extern Block far * near g_91A4;
+extern Block far * near g_91A8;
+extern Block far * near g_91AC;
 
 extern void far Punt(char far *format, ...);
 extern void far WinPrintf(char far *format, ...);
@@ -76,6 +72,9 @@ extern void far f_195A_007D(int handle);
 extern void far f_195A_01CB(int handle, char far *name);
 extern int far f_195A_0260(void);
 extern void far f_194D_0006(void far *dst, void far *src, unsigned paras);
+
+extern int g_2F44;
+extern int g_2F42;
 
 static char b_8C62[14];
 static unsigned s_8C70;
@@ -92,8 +91,8 @@ static unsigned s_2F3A = 0;
 static unsigned s_2F3C = 0;
 static unsigned s_2F3E = 0;
 static unsigned s_2F40 = 0;
-static int s_2F42 = 0;
-static int s_2F44 = 0;
+int g_2F42 = 0;
+int g_2F44 = 0;
 static Handle s_2F46 = 0L;
 static int s_2F4A = 300;
 static int s_2F4C = 0;
@@ -117,12 +116,10 @@ Handle far f_171C_2086(Handle h);
 Handle far f_171C_2136(char far *p);
 char far * far f_171C_21CC(unsigned size);
 
-/* SCAFFOLD BEGIN: MemPunt; bytes exact but its function-table row is misframed as root:16B5:0672 (unclaimable) */
 void far f_171C_0002(char far *where)
 {
     Punt("MemPunt @%s after %s", where, (char far *)b_8C62);
 }
-/* SCAFFOLD END */
 
 void far f_171C_001E(void)
 {
@@ -203,8 +200,8 @@ Block far * far f_171C_0160(Block far *b, int merge)
     }
     s_2F3E += paras;
     s_2F3C -= paras;
-    if (g_91A0.free == 0L) {
-        g_91A0.free = b;
+    if (g_91AC == 0L) {
+        g_91AC = b;
         b->next = b->prev = 0;
     } else {
         f_171C_11F2(b);
@@ -228,7 +225,7 @@ Block far * far f_171C_0160(Block far *b, int merge)
                 next->prev = SEG(b);
         }
         if (b->prev == 0)
-            g_91A0.free = b;
+            g_91AC = b;
     }
     return b;
 }
@@ -262,9 +259,9 @@ void far f_171C_030C(char far *where)
                 (unsigned long)s_2F3E << 4, (unsigned long)s_2F3C << 4, (unsigned long)s_2F40 << 4);
     f_171C_02CA(fd, "Hard space:  %ld,  Firm space:  %ld, Soft Space : %ld\n",
                 (unsigned long)s_2F36 << 4, (unsigned long)s_2F3A << 4, (unsigned long)s_2F38 << 4);
-    f_171C_02CA(fd, "Handles allocated: %d,  handles used: %d max: %d", s_2F42, s_2F44, s_2F4C);
+    f_171C_02CA(fd, "Handles allocated: %d,  handles used: %d max: %d", g_2F42, g_2F44, s_2F4C);
     h = s_2F46 - 1;
-    n = s_2F44;
+    n = g_2F44;
     f_171C_02CA(fd, "\nBy handles: \n");
     while (n) {
         if (*h) {
@@ -279,7 +276,7 @@ void far f_171C_030C(char far *where)
         h--;
     }
     f_171C_02CA(fd, "\n\nBy location:\n");
-    for (b = g_91A0.first; SEG(b) < SEG(g_91A0.end); b = BLK(SEG(b) + b->paras)) {
+    for (b = g_91A4; SEG(b) < SEG(g_91A8); b = BLK(SEG(b) + b->paras)) {
         _fstrncpy(name, b->name, 13);
         name[13] = 0;
         h = (Handle)((char far *)s_2F46 + b->handle);
@@ -310,7 +307,7 @@ void far f_171C_0676(void)
 
 void far f_171C_0678(void)
 {
-    _dos_freemem(g_91A0.seg);
+    _dos_freemem(g_91A2);
     s_2F34 = 0;
 }
 
@@ -328,7 +325,7 @@ void far f_171C_068C(Block far *b, unsigned paras, int type)
         if (prev)
             prev->next = seg;
         else
-            g_91A0.free = BLK(seg);
+            g_91AC = BLK(seg);
         if (next)
             next->prev = seg;
         nb = BLK(seg);
@@ -339,7 +336,7 @@ void far f_171C_068C(Block far *b, unsigned paras, int type)
         if (prev)
             prev->next = SEG(next);
         else
-            g_91A0.free = next;
+            g_91AC = next;
         if (next)
             next->prev = SEG(prev);
         paras = b->paras;
@@ -374,32 +371,32 @@ void far f_171C_07BE(void)
     if (s_2F34)
         return;
     s_2F34 = 1;
-    if (_dos_allocmem(0xFF00, &g_91A0.paras)) {
-        g_91A0.paras -= 0x10;
-        _dos_allocmem(g_91A0.paras, &g_91A0.seg);
-        g_91A0.paras -= 0x10;
+    if (_dos_allocmem(0xFF00, &g_91A0)) {
+        g_91A0 -= 0x10;
+        _dos_allocmem(g_91A0, &g_91A2);
+        g_91A0 -= 0x10;
     } else
         exit(1);
     s_8C72 = (s_2F4A * 4 + 15) / 16;
-    s_2F46 = (Handle)(((unsigned long)s_8C72 + g_91A0.seg - 0x1000) << 16);
-    g_91A0.paras -= s_8C72 + 1;
-    g_91A0.seg += s_8C72 + 1;
-    g_91A0.free = g_91A0.first = BLK(g_91A0.seg);
-    g_91A0.free->type = 0x80;
-    g_91A0.free->next = 0;
-    g_91A0.free->prev = 0;
+    s_2F46 = (Handle)(((unsigned long)s_8C72 + g_91A2 - 0x1000) << 16);
+    g_91A0 -= s_8C72 + 1;
+    g_91A2 += s_8C72 + 1;
+    g_91AC = g_91A4 = BLK(g_91A2);
+    g_91AC->type = 0x80;
+    g_91AC->next = 0;
+    g_91AC->prev = 0;
     if (f_171C_0034()) {
-        g_91A0.free->paras = s_2F40 = s_2F3E = fd_50F6_394E + fd_50F6_394C - g_91A0.seg;
-        g_91A0.end = BLK(s_2F3E + SEG(BLK(g_91A0.seg)));
-        s_8C70 = SEG(g_91A0.end);
-        fd_50F6_3950 = SEG(BLK(g_91A0.seg)) + g_91A0.paras - 2;
-        f_171C_068C(BLK(g_91A0.seg), g_91A0.paras - 2, 0);
-        f_171C_068C(BLK(g_91A0.seg + g_91A0.paras - 2), fd_50F6_394C - g_91A0.seg - g_91A0.paras + 2, 2);
-        f_171C_0160(BLK(g_91A0.seg), 0);
+        g_91AC->paras = s_2F40 = s_2F3E = fd_50F6_394E + fd_50F6_394C - g_91A2;
+        g_91A8 = BLK(s_2F3E + SEG(BLK(g_91A2)));
+        s_8C70 = SEG(g_91A8);
+        fd_50F6_3950 = SEG(BLK(g_91A2)) + g_91A0 - 2;
+        f_171C_068C(BLK(g_91A2), g_91A0 - 2, 0);
+        f_171C_068C(BLK(g_91A2 + g_91A0 - 2), fd_50F6_394C - g_91A2 - g_91A0 + 2, 2);
+        f_171C_0160(BLK(g_91A2), 0);
     } else {
-        g_91A0.free->paras = s_2F40 = s_2F3E = g_91A0.paras;
-        g_91A0.end = BLK(s_2F3E + g_91A0.seg);
-        fd_50F6_3950 = s_8C70 = SEG(g_91A0.end);
+        g_91AC->paras = s_2F40 = s_2F3E = g_91A0;
+        g_91A8 = BLK(s_2F3E + g_91A2);
+        fd_50F6_3950 = s_8C70 = SEG(g_91A8);
     }
     _fmemset(s_2F46 - s_2F4A, 0, s_2F4A * 4);
     fd_50F6_3948 = *f_171C_13CA(0x20L, 0, "DiscardEntry");
@@ -419,7 +416,7 @@ int far f_171C_09CC(Handle h, unsigned paras, int type)
             return 1;
     } else {
         next = BLK(SEG(b) + b->paras);
-        if (SEG(next) >= SEG(g_91A0.end) || next->type != 0x80 || next->paras + b->paras < paras)
+        if (SEG(next) >= SEG(g_91A8) || next->type != 0x80 || next->paras + b->paras < paras)
             return 0;
     }
     f_171C_068C(f_171C_0160(b, 0), paras, type);
@@ -427,27 +424,25 @@ int far f_171C_09CC(Handle h, unsigned paras, int type)
 }
 /* SCAFFOLD END */
 
-/* SCAFFOLD BEGIN: draft; code exact with public g_2F42/g_2F44 declared extern in reversed order (operand order of the used>allocated compare); blocked by within-group relocation order */
 Handle far f_171C_0A5C(void)
 {
     Handle h;
     int i;
 
-    if (s_2F4A - 1 <= s_2F42)
+    if (s_2F4A - 1 <= g_2F42)
         Punt("ALL MEMORY HANDLES USED");
-    if (s_2F42 < s_2F44)
+    if (g_2F42 < g_2F44)
         Punt("HANDLES USED > HANDLES ALLOCATED");
     h = s_2F46 - 1;
-    for (i = 0; i < s_2F42 + 1; i++, h--) {
+    for (i = 0; i < g_2F42 + 1; i++, h--) {
         if (!*h) {
-            if (++s_2F44 > s_2F42)
-                s_2F42 = s_2F44;
+            if (++g_2F44 > g_2F42)
+                g_2F42 = g_2F44;
             return h;
         }
     }
     Punt("Handle free - but none found");
 }
-/* SCAFFOLD END */
 
 /* SCAFFOLD BEGIN: draft; residue: original keeps the long local seg in memory ([bp-28h]); MSC here enregisters it in SI:DI */
 void far f_171C_0ADC(Block far *b)
@@ -465,7 +460,7 @@ void far f_171C_0ADC(Block far *b)
     if (b->prev)
         BLK(b->prev)->next = SEG(b);
     else
-        g_91A0.free = b;
+        g_91AC = b;
     if (b->next) {
         n = BLK(b->next);
         if (b->next - b->paras == (unsigned)SEG(b)) {
@@ -490,7 +485,7 @@ int far f_171C_0BE2(int emsOnly)
     oldest = 0;
     found = 0L;
     h = s_2F46 - 1;
-    for (n = s_2F44; n; h--) {
+    for (n = g_2F44; n; h--) {
         if (*h) {
             b = HDR(h);
             if ((!emsOnly || (unsigned)SEG(b) < fd_50F6_3950) && b->type == 3 && s_2F30 - b->age >= oldest && !b->lock) {
@@ -522,7 +517,7 @@ int far f_171C_0CF4(int emsOnly)
     Block far *nb;
 
     moved = 0;
-    b = g_91A0.first;
+    b = g_91A4;
     end = emsOnly ? fd_50F6_3950 : s_8C70;
     for (; SEG(b) < end; b = BLK(SEG(b) + b->paras)) {
         if (b->type != 0x80)
@@ -563,14 +558,13 @@ int far f_171C_0EDE(void)
     return f_171C_0CF4(0);
 }
 
-/* SCAFFOLD BEGIN: draft; code exact when 91A0..91AE are declared as separate globals (and heap-state dependent: flips with the number of preceding declarations) */
 Block far * far f_171C_0EEA(unsigned paras, int type, char far *name, int noems)
 {
     Block far *b;
     char buffer[100];
 
     for (;;) {
-        for (b = g_91A0.free; b; b = BLK(b->next)) {
+        for (b = g_91AC; b; b = BLK(b->next)) {
             if (noems && SEG(b) >= fd_50F6_3950)
                 break;
             if (b->paras >= paras)
@@ -586,7 +580,6 @@ Block far * far f_171C_0EEA(unsigned paras, int type, char far *name, int noems)
     sprintf(buffer, "Cannot find a big enough space! (%ld bytes) @ %s", (unsigned long)paras << 4, name);
     Punt(buffer);
 }
-/* SCAFFOLD END */
 
 /* SCAFFOLD BEGIN: draft; residue: register allocation (original: SI for inner-loop block/size/result, DI for best/paras by region) and frame layout */
 Block far * far f_171C_0FBC(unsigned paras, int type)
@@ -601,8 +594,8 @@ Block far * far f_171C_0FBC(unsigned paras, int type)
     first = 1;
     compacted = 0;
     for (;;) {
-        best = g_91A0.free;
-        for (b = g_91A0.free; b; b = BLK(b->next))
+        best = g_91AC;
+        for (b = g_91AC; b; b = BLK(b->next))
             if (b->paras >= paras)
                 best = b;
         if (best && best->paras >= paras) {
@@ -653,7 +646,7 @@ void far f_171C_11F2(Block far *b)
     Block far *cur;
     Block far *prev;
 
-    cur = g_91A0.free;
+    cur = g_91AC;
     prev = 0L;
     while ((unsigned)SEG(b) > SEG(cur)) {
         if (!cur)
@@ -667,7 +660,7 @@ void far f_171C_11F2(Block far *b)
 
 void far f_171C_1246(Handle h)
 {
-    s_2F44--;
+    g_2F44--;
     *h = 0L;
 }
 
@@ -938,7 +931,6 @@ char far * far f_171C_1CD6(Handle h)
     return 0L;
 }
 
-/* SCAFFOLD BEGIN: code exact; within-group relocation order differs */
 char far * far f_171C_1D40(Handle h)
 {
     char far *p;
@@ -969,7 +961,6 @@ char far * far f_171C_1D40(Handle h)
     f_171C_0160(b, 1);
     return f_171C_1B84(h);
 }
-/* SCAFFOLD END */
 
 void far f_171C_1E86(Handle h, int flags)
 {
@@ -990,7 +981,7 @@ void far f_171C_1EFA(void)
     int n;
 
     h = s_2F46 - 1;
-    for (n = s_2F44; n; h--) {
+    for (n = g_2F44; n; h--) {
         if (*h) {
             if (HDR(h)->type == 3)
                 f_171C_1804(h);
@@ -1005,7 +996,7 @@ Handle far f_171C_1F52(char far *name)
     int n;
 
     h = s_2F46 - 1;
-    for (n = s_2F44; n; h--) {
+    for (n = g_2F44; n; h--) {
         if (*h && !_fstrncmp((char far *)(long)*name, HDR(h)->name, 13))
             return h;
     }
@@ -1026,7 +1017,7 @@ Handle far f_171C_1FC2(Handle h)
 
 Handle far f_171C_2086(Handle h)
 {
-    if (h > s_2F46 - 1 || h < s_2F46 - s_2F42)
+    if (h > s_2F46 - 1 || h < s_2F46 - g_2F42)
         Punt("RU: Bad handle in unlock");
     HDR(h)->lock--;
     return (Handle)((long)(s_2F46 - h) + 0xF0EFFFFL);

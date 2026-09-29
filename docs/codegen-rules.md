@@ -51,6 +51,14 @@ REG-1 below is a case where the MSC 5.10 rule is false for 6.00.
   of all earlier source (worker ovl06 reproducers: omfdump2.py, linnum.py, fixord.py).
 * **`/Og` is used** by the simulation and database modules (`/AL /Os /Oe /Og`, sometimes
   `/Gs`): e.g. f_0BE8_0652 is exact only with `/Og` (the `(x<<6)+y` CSE survives an if/else).
+* **C4203 is pass-2 near-heap exhaustion** (worker ovl25 patched a scratch C2 to print the
+  bail reason: near-heap pool allocation fails). Repro: N copies of `if (g0==1) f(k);` on an
+  extern far int: /Oe /Og warns at N=74 (73 fine); /Og alone 177 fine; near globals 106;
+  bound C2L passes 100, warns by 150. Memory given to the DOS host does not matter.
+* **Declaration-count sensitivity is periodic modulo 17** (workers ovl25 and mem
+  independently): e.g. ExitNest's compare order is right for 2..7 (mod 17) declarations
+  between two globals; call-argument evaluation order cycles with k unused externs. Likely
+  the compiler's 17-bucket symbol hash; name length and statement counts do not matter.
 * **Symbol-table count (worker win)**: the number of identifiers entered before a function
   (externs, typedef names, struct tags, *named* prototype parameters, locals/parameters of
   earlier functions — not unnamed parameters, struct members, macros or comments) changes
