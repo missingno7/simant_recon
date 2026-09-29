@@ -16,6 +16,14 @@ You recover original C (or genuine assembly) for the modules assigned to you in
   under the budget (worker sim10F7).
 * The set and order of earlier `extern` declarations can change register tie-breaks and
   commutative operand order: keep a module's declarations in first-use order.
+* **Names matter (NAME-1)**: identifier *spelling* changes MSC's register/operand
+  tie-breaks. Use the original names from the start wherever the evidence is strong
+  (xver CONFIRMED/HIGH, a Win16 unit whose MAPSYM member list aligns 1:1 with the DOS
+  module, identical bodies/strings): register them with
+  `python tools/symbols.py rename OLD NEW --why "evidence"` (unclaimed names only) before
+  drafting, including globals (`rename fd_50F6_0F24 TERRAINset`). When a residue survives
+  every source spelling, try the evidenced original names of the function, its locals'
+  neighbours and its callees/globals.
 * One original code segment = one `.C` file = one module file `src/<unit>/m<SEG>.c`.
   Same-file far calls compile to `push cs; call near`; a relocated `call far` goes to
   another module. Functions appear in source order.

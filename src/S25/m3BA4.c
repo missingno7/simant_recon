@@ -705,8 +705,82 @@ int far o25_3BA4_1581(int plane, int x, int y, int a, int b)
     return best;
 }
 
-/* SCAFFOLD BEGIN: o25_3BA4_1686 not recovered yet */
-int far o25_3BA4_1686(void) { return 0; }
+/* SCAFFOLD BEGIN: o25_3BA4_1686 (GetMyRandDirs) best draft, 0.93 similar: SI/DI roles of right/left and the web of best (DI at entry/exit, [bp-8] inside) differ */
+int far o25_3BA4_1686(int far *rot, int far *dir, int plane, int x, int y, int a, int b)
+{
+    int flag;
+    int d;
+    int left;
+    int best;
+    int threshold;
+    char ok[8];
+    int i;
+    int right;
+    int nx;
+    int ny;
+    int dis;
+
+    best = -1;
+    threshold = f_0BE8_0B83(x, y, a, b);
+    if (threshold > 0) {
+        best = -2;
+        flag = (fd_50F6_0A8E == 2) ? 1 : 0;
+        for (i = 0; i < 8; i++) {
+            nx = fd_3D57_0000[i] + x;
+            ny = fd_3D57_0008[i] + y;
+            if ((nx != fd_50F6_0AB6 || ny != fd_50F6_0AC6)
+                && f_10F7_22CE(plane, nx, ny, fd_50F6_0AF8, fd_50F6_0AD6, fd_50F6_0AE8, flag)) {
+                best = i;
+                ok[i] = 1;
+            } else
+                ok[i] = 0;
+        }
+        if (best < 0)
+            return best;
+        best = -1;
+        right = left = *dir;
+        if (*rot == 0) {
+            for (i = 0; i < 8; i++) {
+                if (ok[right]) {
+                    best = right;
+                    *dir = f_0BE8_0B21(x, y, a, b) - 1;
+                    *rot = 1;
+                    break;
+                }
+                if (ok[left]) {
+                    best = left;
+                    *dir = f_0BE8_0B21(x, y, a, b) - 1;
+                    *rot = -1;
+                    break;
+                }
+                right = (right + 1) & 7;
+                left = (left - 1) & 7;
+            }
+        } else {
+            for (i = 0; i < 8; i++) {
+                if (*rot > 0) {
+                    if (ok[right]) {
+                        d = right;
+                        goto found;
+                    }
+                } else if (ok[left]) {
+                    right = left;
+                    goto found;
+                }
+                right = (right + 1) & 7;
+                left = (left - 1) & 7;
+            }
+        }
+    }
+    return best;
+found:
+    dis = f_0BE8_0B83(fd_3D57_0000[right] + x, fd_3D57_0008[right] + y, a, b);
+    if (dis <= threshold) {
+        *dir = f_0BE8_0B21(x, y, a, b) - 1;
+        *rot = 0;
+    }
+    return right;
+}
 /* SCAFFOLD END */
 
 int far o25_3BA4_188A(int far *steps, int plane, int x, int y, int a, int b)
@@ -736,6 +810,62 @@ int far o25_3BA4_188A(int far *steps, int plane, int x, int y, int a, int b)
     return dir;
 }
 
+extern int far fd_50F6_0D6C;
+extern int far fd_50F6_0EF8;
+extern int far fd_50F6_0EFA;
+
+int far o25_3BA4_1935(int plane, int x, int y, int a, int b)
+{
+    int dir;
+    int steps;
+
+    if (o25_3BA4_188A(&steps, plane, x, y, a, b) == -2)
+        dir = o25_3BA4_1686(&fd_50F6_0EFA, &fd_50F6_0EF8, plane, x, y, a, b);
+    else {
+        fd_50F6_0D6C = -1;
+        dir = o25_3BA4_1581(plane, x, y, a, b);
+    }
+    return dir;
+}
+
+int far o25_3BA4_19AD(int far *rot, int far *dir, int plane, int x, int y, int a, int b)
+{
+    fd_50F6_0EF8 = f_0BE8_0B21(x, y, a, b) - 1;
+    fd_50F6_0D6C = 0x10;
+    fd_50F6_0EFA = 0;
+    o25_3BA4_1686(&fd_50F6_0EFA, &fd_50F6_0EF8, plane, x, y, a, b);
+}
+
+int far o25_3BA4_1A0D(int plane, int x, int y, int a, int b)
+{
+    int dir;
+
+    if (fd_50F6_0D6C < 0) {
+        dir = o25_3BA4_1581(plane, x, y, a, b);
+        if (dir == -2 && fd_50F6_0D6C == -2)
+            dir = o25_3BA4_19AD(&fd_50F6_0EFA, &fd_50F6_0EF8, plane, x, y, a, b);
+    } else {
+        dir = o25_3BA4_1935(plane, x, y, a, b);
+        fd_50F6_0D6C--;
+    }
+    return dir;
+}
+
+int far o25_3BA4_1A9F(int p1, int x1, int y1, int p2, int x2, int y2)
+{
+    if (p1 <= 1) {
+        if (p2 <= 1)
+            return o25_3BA4_1A0D(p1, x1, y1, x2, y2);
+        if (p2 == 2)
+            return o25_3BA4_1A0D(p1, x1, y1, fd_3D57_02AC[0], fd_3D57_02AC[1]);
+        return o25_3BA4_1A0D(p1, x1, y1, fd_3D57_02B0[0], fd_3D57_02B0[1]);
+    }
+    if (p2 == p1)
+        return o25_3BA4_1A0D(p1, x1, y1, x2, y2);
+    if (p1 == 2)
+        return o25_3BA4_1A0D(p1, x1, y1, fd_3D57_02A4[0], fd_3D57_02A4[1]);
+    return o25_3BA4_1A0D(p1, x1, y1, fd_3D57_02A8[0], fd_3D57_02A8[1]);
+}
+
 /* SCAFFOLD BEGIN: unrecovered same-module callees */
-int far o25_3BA4_1A9F(int plane, int x, int y, int gplane, int gx, int gy) { return 0; }
 /* SCAFFOLD END */

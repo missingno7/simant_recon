@@ -19,7 +19,7 @@
     "CONST": {
      "seg": 21939,
      "off": 33878,
-     "size": 148
+     "size": 178
     },
     "_DATA": {
      "seg": 21939,
@@ -29,7 +29,7 @@
    },
    "lang": "c",
    "source": "src/S06/m35F5.c",
-   "source_sha256": "7754440501557527c9f8aaed8b805fe44344c4b5a20643434ed5b3adbb1fee34",
+   "source_sha256": "4e6657e75d95d9fc437ae5e9d0d1f82a9b1159db19d6b14a177e2fecf0a26d6b",
    "claims": [
     {
      "name": "o06_35F5_0000",
@@ -140,17 +140,79 @@
      "kind": "C",
      "provenance": "EXACT_NATURAL",
      "reloc_order": "GROUPED"
+    },
+    {
+     "name": "o06_35F5_1A0F",
+     "unit": "S06",
+     "seg": 13813,
+     "off": 6671,
+     "size": 176,
+     "target_sha256": "3485e02eeee003319e9e69c8c4ab5a58ab4bdc47ae59b9daf2f4bc31aebb0b65",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL",
+     "reloc_order": "EXACT"
+    },
+    {
+     "name": "o06_35F5_1ABF",
+     "unit": "S06",
+     "seg": 13813,
+     "off": 6847,
+     "size": 73,
+     "target_sha256": "5a95e4298fb77dfcb2dea8a87188d7edf089f1bd4bbf69435a220793c13733a2",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL",
+     "reloc_order": "GROUPED"
+    },
+    {
+     "name": "o06_35F5_1B08",
+     "unit": "S06",
+     "seg": 13813,
+     "off": 6920,
+     "size": 171,
+     "target_sha256": "d3f39158fba93e4c255cdb6645e655627ff2a021dbbb4524df4676c7c3eee0d4",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL",
+     "reloc_order": "GROUPED"
+    },
+    {
+     "name": "FootFall",
+     "unit": "S06",
+     "seg": 13813,
+     "off": 7091,
+     "size": 311,
+     "target_sha256": "d26fcbcdadb5b72c77a2dc38e1b9d0307b440944e3266d1a743521470e4697db",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL",
+     "reloc_order": "GROUPED"
+    },
+    {
+     "name": "o06_35F5_1CEA",
+     "unit": "S06",
+     "seg": 13813,
+     "off": 7402,
+     "size": 179,
+     "target_sha256": "4dce6f868a063c79adba4d2452b0eacc36d168d1256721f2e42265fdef985f19",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL",
+     "reloc_order": "GROUPED"
+    },
+    {
+     "name": "o06_35F5_1D9D",
+     "unit": "S06",
+     "seg": 13813,
+     "off": 7581,
+     "size": 183,
+     "target_sha256": "4391940c0756618ddc3e65edbbea80d286901e15793005b72e091b68eb85273e",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL",
+     "reloc_order": "EXACT"
     }
    ],
    "scaffold": [
-    "FootFall",
     "SimKidInside",
-    "o06_35F5_14CC",
-    "o06_35F5_1803",
-    "o06_35F5_1CEA",
     "o06_35F5_1E54"
    ],
-   "object_sha256": "b48e21c97f0446b55c4934f8c9923a6f263a1f0d34b234e8f7cd4602eb0d56f2"
+   "object_sha256": "cec1b54c1e4408249ea466172ff386e840489dd0f033e033557dd8818ee1de5b"
   },
   "S07:35F5": {
    "unit": "S07",
@@ -451,7 +513,7 @@
     "CONST": {
      "seg": 21939,
      "off": 35138,
-     "size": 90
+     "size": 96
     },
     "_DATA": {
      "seg": 21939,
@@ -461,7 +523,7 @@
    },
    "lang": "c",
    "source": "src/S25/m3BA4.c",
-   "source_sha256": "4c6a9a36e1969de0f1012d0b6d7d6d302f2d3ff9e654bb682ea93b01e82ee6ed",
+   "source_sha256": "acddd7149caa36491fc7ece5f162f263bccbfea7f274f2b5c3cb3dad8e910434",
    "claims": [
     {
      "name": "DoAntSimY",
@@ -534,6 +596,42 @@
      "provenance": "EXACT_STEERED",
      "steered": "DoAntMoveY scaffold stand-in: CONST word order + 21 filler lines -> /Zd LINNUM (52/record) LEDATA boundary that fixes within-group reloc order of o25_3BA4_0999",
      "reloc_order": "EXACT"
+    },
+    {
+     "name": "o25_3BA4_1935",
+     "unit": "S25",
+     "seg": 15268,
+     "off": 6453,
+     "size": 120,
+     "target_sha256": "adfd85951a7ca45a4cc1803b2aa0194e69c9e4e63715c972f92c0b6fe5080edd",
+     "kind": "C",
+     "provenance": "EXACT_STEERED",
+     "steered": "DoAntMoveY scaffold stand-in: CONST word order + 21 filler lines -> /Zd LINNUM (52/record) LEDATA boundary that fixes within-group reloc order of o25_3BA4_0999",
+     "reloc_order": "GROUPED"
+    },
+    {
+     "name": "o25_3BA4_19AD",
+     "unit": "S25",
+     "seg": 15268,
+     "off": 6573,
+     "size": 96,
+     "target_sha256": "1c7028ba036dda2d794f5d1f74cee0a7bbb804314070c68735cbba7a12520d06",
+     "kind": "C",
+     "provenance": "EXACT_STEERED",
+     "steered": "DoAntMoveY scaffold stand-in: CONST word order + 21 filler lines -> /Zd LINNUM (52/record) LEDATA boundary that fixes within-group reloc order of o25_3BA4_0999",
+     "reloc_order": "GROUPED"
+    },
+    {
+     "name": "o25_3BA4_1A0D",
+     "unit": "S25",
+     "seg": 15268,
+     "off": 6669,
+     "size": 146,
+     "target_sha256": "f766fc29dcc74eeef23e1a7c078655424ca37d18995971aa99fccbdae6e9b338",
+     "kind": "C",
+     "provenance": "EXACT_STEERED",
+     "steered": "DoAntMoveY scaffold stand-in: CONST word order + 21 filler lines -> /Zd LINNUM (52/record) LEDATA boundary that fixes within-group reloc order of o25_3BA4_0999",
+     "reloc_order": "GROUPED"
     }
    ],
    "scaffold": [
@@ -541,10 +639,9 @@
     "ExitNest",
     "o25_3BA4_1035",
     "o25_3BA4_13AB",
-    "o25_3BA4_1686",
-    "o25_3BA4_1A9F"
+    "o25_3BA4_1686"
    ],
-   "object_sha256": "abaa9bc5312259062565e1c15d29573aa1e424db8ebb66f13473720351f56d42"
+   "object_sha256": "7fc1ce21b3c2330ce21c5c8287e2548905550da793437921da386e9f97c42838"
   },
   "root:0093": {
    "unit": "root",
@@ -1520,6 +1617,315 @@
     "f_0BE8_0E0F"
    ],
    "object_sha256": "ae31da4add88342d45e327141da90f79e738d3fab4af8130d0457771bffe3e27"
+  },
+  "root:0F3F": {
+   "unit": "root",
+   "seg": 3903,
+   "profile": "msc600a",
+   "flags": [
+    "/AL",
+    "/Os",
+    "/Oe",
+    "/Og"
+   ],
+   "placements": {
+    "CONST": {
+     "seg": 21939,
+     "off": 33334,
+     "size": 66
+    },
+    "_DATA": {
+     "seg": 21939,
+     "off": 7074,
+     "size": 16
+    }
+   },
+   "lang": "c",
+   "source": "src/root/m0F3F.c",
+   "source_sha256": "0b991374683f3b8c0b5cb4bfcb9a32ebaa105412ec4647b2cbcd80bcdf84482c",
+   "claims": [
+    {
+     "name": "f_0F3F_0008",
+     "unit": "root",
+     "seg": 3903,
+     "off": 8,
+     "size": 109,
+     "target_sha256": "24c153c4828e2ece828adaabce8a83589aa449979f494e4a009694b0bc6e893c",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL",
+     "reloc_order": "EXACT"
+    },
+    {
+     "name": "f_0F3F_03B0",
+     "unit": "root",
+     "seg": 3903,
+     "off": 944,
+     "size": 209,
+     "target_sha256": "e8f8c422a4e856f93ffd3f92e63e1e719f0bd1a22cc387965a957b78bbc0d246",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL",
+     "reloc_order": "GROUPED"
+    },
+    {
+     "name": "f_0F3F_0481",
+     "unit": "root",
+     "seg": 3903,
+     "off": 1153,
+     "size": 232,
+     "target_sha256": "0fa5248c04dacd21425b1dd0b6598478fe66746497c795b6aa8012ed68717d84",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL",
+     "reloc_order": "GROUPED"
+    },
+    {
+     "name": "f_0F3F_0569",
+     "unit": "root",
+     "seg": 3903,
+     "off": 1385,
+     "size": 133,
+     "target_sha256": "88f5c884e842f7042311805be38768dcf1dda60c000383a494de00bf79a612b0",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL",
+     "reloc_order": "GROUPED"
+    },
+    {
+     "name": "f_0F3F_05EE",
+     "unit": "root",
+     "seg": 3903,
+     "off": 1518,
+     "size": 172,
+     "target_sha256": "5efa07d548ebc0886b8b681a5d2f985221cc2bf845222a79201e8b51fd40a0f0",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL",
+     "reloc_order": "GROUPED"
+    },
+    {
+     "name": "f_0F3F_069A",
+     "unit": "root",
+     "seg": 3903,
+     "off": 1690,
+     "size": 231,
+     "target_sha256": "ca8ad0fa425ea71c89b175c0fe955d9e3e81664ca1856532d43c7e349b221719",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL",
+     "reloc_order": "GROUPED"
+    },
+    {
+     "name": "f_0F3F_0781",
+     "unit": "root",
+     "seg": 3903,
+     "off": 1921,
+     "size": 108,
+     "target_sha256": "05b1bd6b01a8de207e8b2fbad099863403ddb37fe201092f4be0d4c57a65f0ce",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL",
+     "reloc_order": "GROUPED"
+    },
+    {
+     "name": "f_0F3F_07ED",
+     "unit": "root",
+     "seg": 3903,
+     "off": 2029,
+     "size": 265,
+     "target_sha256": "836d7119876e5ce772e53d53ca276ae165fa0794d02d1f4b7abec3a8afadcd5e",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL",
+     "reloc_order": "GROUPED"
+    },
+    {
+     "name": "f_0F3F_08F6",
+     "unit": "root",
+     "seg": 3903,
+     "off": 2294,
+     "size": 186,
+     "target_sha256": "1d9b1189f76d10241bf03873027bf41991fee4932999e479a5ae792255374d4c",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL",
+     "reloc_order": "GROUPED"
+    },
+    {
+     "name": "f_0F3F_09B0",
+     "unit": "root",
+     "seg": 3903,
+     "off": 2480,
+     "size": 118,
+     "target_sha256": "a0fcd4a117ce4b114688c4aa1705c2052386e9656bb3be4a90d24080e0ca918e",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL",
+     "reloc_order": "EXACT"
+    },
+    {
+     "name": "f_0F3F_0A26",
+     "unit": "root",
+     "seg": 3903,
+     "off": 2598,
+     "size": 249,
+     "target_sha256": "3395027237b69fda24429589ececf15439b1fffc7b6d0f5516d3293cf5a42b64",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL",
+     "reloc_order": "GROUPED"
+    },
+    {
+     "name": "f_0F3F_0B1F",
+     "unit": "root",
+     "seg": 3903,
+     "off": 2847,
+     "size": 508,
+     "target_sha256": "a63a31f77198b97bf82f8ae45373ba475503e29c835361d8e42668970c08dd10",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL",
+     "reloc_order": "GROUPED"
+    },
+    {
+     "name": "f_0F3F_0D1B",
+     "unit": "root",
+     "seg": 3903,
+     "off": 3355,
+     "size": 277,
+     "target_sha256": "d47c650bcd5da3b317ec920c7126e5a8523ab1d7b0da2d8374cddcb6c3106a46",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL",
+     "reloc_order": "GROUPED"
+    },
+    {
+     "name": "f_0F3F_0E30",
+     "unit": "root",
+     "seg": 3903,
+     "off": 3632,
+     "size": 110,
+     "target_sha256": "8dc6b8f47ae6d521bade55588a36ed8736791bb6a9a0aeced363bb5f149f4335",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL",
+     "reloc_order": "GROUPED"
+    },
+    {
+     "name": "f_0F3F_0E9E",
+     "unit": "root",
+     "seg": 3903,
+     "off": 3742,
+     "size": 70,
+     "target_sha256": "8822155a1f5a487688ac9e16f8d963b621ce0ed4161af14a1b18e1c03d9b2f20",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL",
+     "reloc_order": "EXACT"
+    },
+    {
+     "name": "f_0F3F_0EE4",
+     "unit": "root",
+     "seg": 3903,
+     "off": 3812,
+     "size": 113,
+     "target_sha256": "00dd2713927f95f19f411f0df81812dbbda95034cab305b4ec4c26d4332cc97b",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL",
+     "reloc_order": "GROUPED"
+    },
+    {
+     "name": "f_0F3F_0F55",
+     "unit": "root",
+     "seg": 3903,
+     "off": 3925,
+     "size": 116,
+     "target_sha256": "742ad9eeb16bd566fc23e7718f329473b4d1a0ccc969ab1c72642ecbc784028e",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL",
+     "reloc_order": "GROUPED"
+    },
+    {
+     "name": "f_0F3F_0FC9",
+     "unit": "root",
+     "seg": 3903,
+     "off": 4041,
+     "size": 216,
+     "target_sha256": "154a21b4de16bed9131220bfd62d09b8aa44f9af7f54a170379f83990168328f",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL",
+     "reloc_order": "EXACT"
+    },
+    {
+     "name": "f_0F3F_1277",
+     "unit": "root",
+     "seg": 3903,
+     "off": 4727,
+     "size": 185,
+     "target_sha256": "6f60ab0e9cc78a33f88c69176979bbcfd0fe2e69ead34da3893aec3bb54c4842",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL",
+     "reloc_order": "GROUPED"
+    },
+    {
+     "name": "f_0F3F_1330",
+     "unit": "root",
+     "seg": 3903,
+     "off": 4912,
+     "size": 167,
+     "target_sha256": "8990d350eab7eb783840cbfcd38cff9a859576dbc5e8e48dd1543e2ba9269bec",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL",
+     "reloc_order": "GROUPED"
+    },
+    {
+     "name": "f_0F3F_13D7",
+     "unit": "root",
+     "seg": 3903,
+     "off": 5079,
+     "size": 101,
+     "target_sha256": "707462ebffe6f533dac230fcd3e5ee063b7c71b8fc4b3a106174fe463c23a1ca",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL",
+     "reloc_order": "GROUPED"
+    },
+    {
+     "name": "f_0F3F_143C",
+     "unit": "root",
+     "seg": 3903,
+     "off": 5180,
+     "size": 56,
+     "target_sha256": "e62e9f68f7ae0246e042944c7415bc899a0fe9a9e9201ac5711222ce5fcbe6a8",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL",
+     "reloc_order": "EXACT"
+    },
+    {
+     "name": "f_0F3F_1474",
+     "unit": "root",
+     "seg": 3903,
+     "off": 5236,
+     "size": 392,
+     "target_sha256": "9300500bcab688d37645929ea18a17f5a03472630a88602d2b8f6da0745726b3",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL",
+     "reloc_order": "GROUPED"
+    },
+    {
+     "name": "f_0F3F_186B",
+     "unit": "root",
+     "seg": 3903,
+     "off": 6251,
+     "size": 460,
+     "target_sha256": "8a01ec265e4ea8dbd9b7a3b58ea91bbffe3af9b1dee00e64df5b157907c2d9a2",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL",
+     "reloc_order": "GROUPED"
+    },
+    {
+     "name": "f_0F3F_1A37",
+     "unit": "root",
+     "seg": 3903,
+     "off": 6711,
+     "size": 342,
+     "target_sha256": "7fb531968433ee820aaf4a051672b89d9e3935d1f76ec3de78cd7759998e7d65",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL",
+     "reloc_order": "GROUPED"
+    }
+   ],
+   "scaffold": [
+    "DoDigInR",
+    "f_0F3F_0075",
+    "f_0F3F_10A1"
+   ],
+   "object_sha256": "0e345e790f736cf6912f593ae8d7cea4519c9fa563413f83e991a97c8831bf51"
   },
   "root:10F7": {
    "unit": "root",
@@ -3802,6 +4208,121 @@
    ],
    "scaffold": [],
    "object_sha256": "0a1b26041be208673346bf6f35d9de03781aa66cde3204b97396cd456ec14d61"
+  },
+  "root:23AE": {
+   "unit": "root",
+   "seg": 9134,
+   "profile": "msc600a",
+   "flags": [
+    "/AL",
+    "/Os",
+    "/Oe",
+    "/Og",
+    "/Gs"
+   ],
+   "placements": {
+    "_DATA": {
+     "seg": 21939,
+     "off": 25636,
+     "size": 203
+    },
+    "CONST": {
+     "seg": 21939,
+     "off": 35386,
+     "size": 2
+    },
+    "_BSS": {
+     "seg": 21939,
+     "off": 36082,
+     "size": 225
+    }
+   },
+   "lang": "c",
+   "source": "src/root/m23AE.c",
+   "source_sha256": "3bda842d211f80eee9a1d567357b470d8a2a41e6d0fe96674feadd0e2c50a652",
+   "claims": [
+    {
+     "name": "f_23AE_0004",
+     "unit": "root",
+     "seg": 9134,
+     "off": 4,
+     "size": 30,
+     "target_sha256": "7296c5853c7808f2903008b7654b8d9612bf30b5cfde4e27729adf30af1f1e08",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL",
+     "reloc_order": "EXACT"
+    },
+    {
+     "name": "f_23AE_0022",
+     "unit": "root",
+     "seg": 9134,
+     "off": 34,
+     "size": 47,
+     "target_sha256": "6d4edfe6b0047c04824ab514f7783f17257fe6443d851efbf5125a78c379e4ac",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL",
+     "reloc_order": "EXACT"
+    },
+    {
+     "name": "f_23AE_0051",
+     "unit": "root",
+     "seg": 9134,
+     "off": 81,
+     "size": 24,
+     "target_sha256": "e7467839131fdccd096b00d6acfd2cf4b65dc3a2fdaf8e52070e3c3f1845d131",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL",
+     "reloc_order": "EXACT"
+    },
+    {
+     "name": "f_23AE_0069",
+     "unit": "root",
+     "seg": 9134,
+     "off": 105,
+     "size": 370,
+     "target_sha256": "50f35feec0e52bfff3b4fa57da7ab70388fc5b1cf258252604caa39d5473433e",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL",
+     "reloc_order": "GROUPED"
+    },
+    {
+     "name": "f_23AE_035D",
+     "unit": "root",
+     "seg": 9134,
+     "off": 861,
+     "size": 18,
+     "target_sha256": "f4ff8adc03db3c7481fa7da61d1b376dff51246639b7bb5f5101a83bfcfc4c10",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL",
+     "reloc_order": "GROUPED"
+    },
+    {
+     "name": "f_23AE_036F",
+     "unit": "root",
+     "seg": 9134,
+     "off": 879,
+     "size": 8,
+     "target_sha256": "2263a3edad3af8312e7e2c055a7874ead7fc49b4db9ecc0a6afde1a036c166a8",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL",
+     "reloc_order": "EXACT"
+    },
+    {
+     "name": "f_23AE_0377",
+     "unit": "root",
+     "seg": 9134,
+     "off": 887,
+     "size": 7,
+     "target_sha256": "2ee8df406191f7e93f646bd5215c689717ceb2164fa94bd47dbb2eb3f52a3fa0",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL",
+     "reloc_order": "EXACT"
+    }
+   ],
+   "scaffold": [
+    "f_23AE_01DB"
+   ],
+   "object_sha256": "74ffba3050aebffe092298d897b53552b0b331d95b16aa92a3f9d1bd10d80d94"
   },
   "root:2505": {
    "unit": "root",

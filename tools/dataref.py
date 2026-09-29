@@ -78,6 +78,13 @@ def main() -> int:
                 kind = "CONSTSEG" if (i.mnemonic == "mov" and ops.startswith("es,") and off in dreloc) else "var"
                 refs[off]["kinds"].add(kind)
                 refs[off]["users"].add(name)
+            # DS-relative tables indexed by a register: [bx + 0x1b72], [bx + di + 0x1b82]
+            m3 = re.search(r"(?<![:\w])\[(?:bx|si|di)(?: \+ (?:si|di))? \+ (0x[0-9a-f]+)\]", ops)
+            if m3 and not re.search(r"(cs|es|ss):\[", ops):
+                off = int(m3.group(1), 16)
+                if off >= 0x100:
+                    refs[off]["kinds"].add("table")
+                    refs[off]["users"].add(name)
             m2 = re.match(r"(?:mov (?:ax|bx|cx|dx|si|di), |push )(0x[0-9a-f]+)$", ops if i.mnemonic != "push" else "push " + ops)
             if i.mnemonic == "mov":
                 m2 = re.match(r"(?:ax|bx|cx|dx|si|di), (0x[0-9a-f]+)$", ops)

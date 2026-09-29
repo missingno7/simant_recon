@@ -35,7 +35,7 @@ def by_address() -> dict:
 def name_of(unit: str, seg: int, off: int) -> str:
     syms = symmod.load()
     for n, s in syms["code"].items():
-        if s["unit"] == unit and s["seg"] == seg and s["off"] == off:
+        if s["unit"] == unit and s["seg"] == seg and s["off"] == off and not s.get("alias_of"):
             return n
     return symmod.default_name(unit, seg, off)
 

@@ -37,10 +37,10 @@ md = Cs(CS_ARCH_X86, CS_MODE_16)
 
 def name_maps():
     s = symmod.load()
-    code = {(r["unit"], r["seg"], r["off"]): n for n, r in s["code"].items()}
+    code = {(r["unit"], r["seg"], r["off"]): n for n, r in s["code"].items() if not r.get("alias_of")}
     for n, r in s["runtime"].items():
         code.setdefault((r["unit"], r["seg"], r["off"]), n)
-    data = {(r["seg"], r["off"]): n for n, r in s["data"].items()}
+    data = {(r["seg"], r["off"]): n for n, r in s["data"].items() if not r.get("alias_of")}
     return code, data
 
 

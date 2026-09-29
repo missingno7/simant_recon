@@ -106,8 +106,8 @@ extern int far fd_3D57_0C34;
 extern int far fd_3D57_0C2A;
 extern long far fd_50F6_107E;
 extern long far fd_50F6_0220;
-extern int far fd_50F6_04BE;
 extern int far fd_50F6_04C6;
+extern int far fd_50F6_04BE;
 extern int far fd_3D57_0C30;
 extern int far fd_50F6_0624;
 extern int far fd_50F6_10B0;
@@ -785,10 +785,304 @@ void far o06_35F5_11FF(void)
     }
 }
 
+extern int far fd_50F6_0240;
+extern char far fd_3D57_0000[];
+extern int far fd_50F6_02BE;
+extern int far fd_50F6_032C;
+extern char far fd_3D57_0008[];
+extern int far fd_50F6_0506;
+extern int far SRand16(void);
+extern unsigned long far f_0BE8_0B83(int x1, int y1, int x2, int y2);
+
+/* SimCat (Win16 pair MEDIUM, unit order) */
+void far o06_35F5_14CC(void)
+{
+    register int newX;
+    register int newY;
+
+    if (fd_50F6_0254 != 0) {
+        fd_50F6_022C = (fd_50F6_022C + 1) & 0xfff;
+        if (fd_50F6_0254 == 1) {
+            newX = fd_50F6_02BE + fd_3D57_0000[fd_50F6_0240] * 4;
+            newY = fd_50F6_032C + fd_3D57_0008[fd_50F6_0240] * 4;
+            if (SRand16() != 0 && newX >= 0xfc && newX <= 0x1ef) {
+                fd_50F6_02BE = newX;
+                fd_50F6_032C = newY;
+                fd_50F6_0244++;
+                if (fd_50F6_0240 == 2) {
+                    if (fd_50F6_0244 >= 3)
+                        fd_50F6_0244 = 1;
+                } else {
+                    if (fd_50F6_0244 >= 6)
+                        fd_50F6_0244 = 4;
+                }
+            } else if (fd_50F6_0240 == 2) {
+                fd_50F6_0240 = 6;
+                fd_50F6_0244 = 4;
+            } else {
+                fd_50F6_0240 = 2;
+                fd_50F6_0244 = 1;
+            }
+            if (fd_3D57_07C8 == 0 && fd_50F6_035C < 2 && SRand64() == 0) {
+                f_00DF_00E8(0xd, 0, 5);
+                return;
+            }
+            if (SRand16() == 0 && fd_50F6_022C > 100 && fd_50F6_0506 == 2 && fd_3D57_0C28 == 0) {
+                fd_50F6_0254 = 2;
+                fd_50F6_022C = 0;
+                fd_50F6_0244 = 10;
+                return;
+            }
+            if (fd_50F6_022C > 50) {
+                if (f_0BE8_0B83(fd_50F6_02BE, fd_50F6_032C, fd_50F6_04BE, fd_50F6_04C6) <= 0x960) {
+                    fd_50F6_0254 = 3;
+                    fd_50F6_0244 = 20;
+                    if (fd_3D57_07C8 == 0 && fd_50F6_035C < 2)
+                        f_00DF_00E8(0xe, 0, 5);
+                }
+            }
+        } else if (fd_50F6_0254 == 2) {
+            if (++fd_50F6_0244 >= 13)
+                fd_50F6_0244 = 11;
+            if (++fd_50F6_022C > 30) {
+                fd_50F6_022C = 0;
+                fd_50F6_0254 = 1;
+                fd_50F6_0244 = (fd_50F6_0240 == 2) ? 0 : 3;
+            }
+        } else {
+            if (++fd_50F6_0244 >= 30) {
+                fd_50F6_0244 = 0;
+                fd_50F6_0254 = 0;
+                fd_50F6_0220 = f_00F8_02BE() + 600L;
+            }
+        }
+    } else if (f_00F8_02BE() > fd_50F6_0220) {
+        fd_50F6_0220 = f_00F8_02BE() + 200L;
+        if (SRand16() == 0 || fd_50F6_0B20 == 0x8d) {
+            fd_50F6_0254 = 1;
+            fd_50F6_02BE = 0xfc;
+            fd_50F6_032C = 0x19;
+            fd_50F6_0240 = 2;
+            fd_50F6_0244 = 0;
+            fd_50F6_022C = 0;
+        }
+    }
+}
+
+extern long far fd_50F6_0736;
+extern int far fd_50F6_059E;
+extern int far fd_50F6_0510;
+int far o06_35F5_1A0F(void);
+int far o06_35F5_1ABF(void);
+void far o06_35F5_1B08(int kind, int level);
+
+/* SimDog (Win16 unit order) */
+void far o06_35F5_1803(void)
+{
+    if (--fd_50F6_0624 < 0) {
+        if (fd_50F6_0254 != 0)
+            fd_50F6_0506 = o06_35F5_1ABF();
+        else if (fd_3D57_0C48 < 0x26)
+            fd_50F6_0506 = (SRand1(3) + fd_50F6_0506 - 1) & 3;
+        else
+            fd_50F6_0506 = o06_35F5_1A0F();
+        fd_50F6_0624 = 4;
+    }
+    if (fd_50F6_0506 == 1 && SRand1(10) == 0) {
+        fd_50F6_0506 = SRand2() + 4;
+        fd_50F6_0624 = 6;
+    }
+    if (fd_50F6_0506 > 3)
+        fd_50F6_04E4 = dogD[fd_50F6_0506] + (fd_50F6_07C2 & 1);
+    else
+        fd_50F6_04E4 = dogD[fd_50F6_0506] + dogC[fd_50F6_07C2 & 3];
+    fd_50F6_04C6 += dogB[fd_50F6_0506];
+    fd_50F6_059E = (fd_50F6_04C6 - 38) / 10;
+    fd_50F6_04BE += dogA[fd_50F6_0506];
+    fd_50F6_0510 = (fd_50F6_04BE + fd_50F6_04C6 - 200) / 28;
+    if (fd_50F6_059E < 0)
+        fd_50F6_059E = 0;
+    if (fd_50F6_059E > 15)
+        fd_50F6_059E = 15;
+    if (fd_50F6_0510 < 0)
+        fd_50F6_0510 = 0;
+    if (fd_50F6_0510 > 11)
+        fd_50F6_0510 = 11;
+    if (fd_50F6_059E < 1)
+        fd_50F6_0506 = 2;
+    else if (fd_50F6_059E > 14)
+        fd_50F6_0506 = 0;
+    if (fd_50F6_0510 > 10)
+        fd_50F6_0506 = 3;
+    else if (fd_50F6_0510 < 4)
+        fd_50F6_0506 = 1;
+    if (fd_50F6_04E4 >= 100 && fd_50F6_04E4 <= 103 && SRand1(6) == 0)
+        o06_35F5_1B08(SRand4(), 5);
+}
+
+/* FollowBoyDir (Win16 unit order): dog direction toward the boy */
+int far o06_35F5_1A0F(void)
+{
+    register int dy;
+    int dx;
+    register int ady;
+    int adx;
+
+    dy = fd_50F6_059E - fd_50F6_023E;
+    dx = fd_50F6_0510 - fd_50F6_0246;
+    if (dx < 0)
+        adx = -dx;
+    else
+        adx = dx;
+    if (dy < 0)
+        ady = -dy;
+    else
+        ady = dy;
+    if (adx < 1 && ady < 1 && fd_50F6_0202 != 0)
+        o06_35F5_1B08(1, 0x7f);
+    if (adx < 2 && ady < 2)
+        return fd_50F6_07C2 & 3;
+    if (dy < 0)
+        return 2;
+    if (dy > 1)
+        return 0;
+    if (dx < 0)
+        return 1;
+    if (dx > 1)
+        return 3;
+    return fd_50F6_07C2 & 3;
+}
+
+/* FollowCatDir (Win16 unit order) */
+int far o06_35F5_1ABF(void)
+{
+    if (fd_50F6_0510 < 5)
+        return 1;
+    if (fd_50F6_0510 > 8)
+        return 3;
+    if (fd_50F6_059E > 0)
+        return 0;
+    return fd_50F6_07C2 & 3;
+}
+
+/* MakeBark (Win16 unit order) */
+void far o06_35F5_1B08(int kind, int level)
+{
+    if (fd_3D57_07C8 == 0 && fd_50F6_035C < 2 && f_00F8_02BE() > fd_50F6_0736) {
+        switch (kind) {
+        case 0:
+        case 2:
+            f_00DF_00E8(0x17, 0, level);
+            break;
+        case 1:
+            f_00DF_00E8(0x15, 0, level);
+            break;
+        case 3:
+            f_00DF_00E8(0x16, 0, level);
+            break;
+        }
+        fd_50F6_0736 = f_00F8_02BE() + SRand1(30) + 60;
+    }
+}
+
+extern int far f_10F7_003A(int a);
+extern int far fd_50F6_0F42;
+extern int far fd_50F6_0F7E;
+extern int far fd_50F6_0A06;
+
+/* FootFall: the boy's foot squashes ants under it */
+void far FootFall(int x, int y)
+{
+    int i, j, a, x2, y2;
+
+    f_00DF_00E8(0x23, 0, 0x14);
+    if (fd_3D57_0C30 & 1) {
+        x2 = x + 16;
+        y2 = y + 6;
+    } else {
+        x2 = x + 6;
+        y2 = y + 16;
+    }
+    for (i = x; i < x2; i++) {
+        for (j = y; j < y2; j++) {
+            if (i >= 0 && i <= 127 && j >= 0 && j <= 127) {
+                if ((a = fd_3E1D_6180[i][j]) != 0) {
+                    if (f_10F7_003A(a) == 0) {
+                        a = f_0EC1_0291(i, j);
+                        if (a >= 0) {
+                            DeadAntHere(i, j, fd_3E1D_AD3B[a] & 0x80);
+                            fd_3E1D_AD3B[a] = 0;
+                        }
+                    } else
+                        o22_39C7_0D21(5);
+                }
+            }
+        }
+    }
+    if (fd_50F6_0F42 >= x && fd_50F6_0F42 < x2 && fd_50F6_0F7E >= y && fd_50F6_0F7E < y2) {
+        f_0CDB_0DE0();
+        if (fd_50F6_0A06 == 1)
+            o22_39C7_0D21(5);
+    }
+}
+
+extern int far fd_50F6_0D6A;
+extern unsigned char far fd_3E1D_A180[];
+extern unsigned char far fd_3E1D_A569[];
+extern int far fd_50F6_0F0C;
+
+/* MowerFall (Win16 unit order): the mower kills ants in the yard */
+void far o06_35F5_1CEA(int x, int y)
+{
+    register int i;
+
+    if (fd_50F6_0EAC == 0)
+        return;
+    i = fd_50F6_0D6A;
+    while (i > 0) {
+        i--;
+        if (fd_3E1D_AD3B[i] != 0 && SRand4() != 0) {
+            fd_3E1D_AD3B[i] = fd_3E1D_6180[fd_3E1D_A180[i]][fd_3E1D_A569[i]] = 0;
+        }
+    }
+    if (fd_50F6_0F0C != 0 && SRand4() != 0)
+        f_0CDB_0DE0();
+    if (fd_50F6_0A06 <= 1 && fd_50F6_048C == 1 && SRand4() != 0)
+        o22_39C7_0D21(6);
+}
+
+/* MaintainSwarm (Win16 unit order) */
+void far o06_35F5_1D9D(void)
+{
+    register int n;
+
+    n = fd_50F6_06AA;
+    if (n > 0) {
+        if (n >= 4)
+            n = fd_50F6_06AA - (fd_50F6_06AA >> 2);
+        else
+            n = fd_50F6_06AA - 1;
+    }
+    if (fd_50F6_07C8 > n)
+        n = fd_50F6_07C8;
+    if (n > 50)
+        n = 50;
+    fd_50F6_06AA = n;
+
+    n = fd_50F6_073A;
+    if (n > 0) {
+        if (n >= 4)
+            n = fd_50F6_073A - (fd_50F6_073A >> 2);
+        else
+            n = fd_50F6_073A - 1;
+    }
+    if (fd_50F6_0850 > n)
+        n = fd_50F6_0850;
+    if (n > 50)
+        n = 50;
+    fd_50F6_073A = n;
+}
+
 /* SCAFFOLD BEGIN: unrecovered same-module functions */
-void far FootFall(int x, int y) {}
-void far o06_35F5_1CEA(int x, int y) {}
-void far o06_35F5_14CC(void) {}
-void far o06_35F5_1803(void) {}
 void far o06_35F5_1E54(void) {}
 /* SCAFFOLD END */

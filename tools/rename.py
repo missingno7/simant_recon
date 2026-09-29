@@ -39,6 +39,8 @@ def main() -> int:
     ap.add_argument("--why", default=None)
     ap.add_argument("--batch", type=Path)
     ap.add_argument("--verify-only", action="store_true")
+    ap.add_argument("--skip-module", action="append", default=[],
+                    help="UNIT:SEG modules to leave on the old names (e.g. being edited by a worker)")
     a = ap.parse_args()
     ren = []
     if a.batch:
@@ -57,6 +59,8 @@ def main() -> int:
                 raise SystemExit(f"bad identifier {n}")
             if o not in syms["code"] and o not in syms["data"]:
                 raise SystemExit(f"{o} is not registered")
+            if (syms["code"].get(o) or syms["data"].get(o) or {}).get("alias_of"):
+                raise SystemExit(f"{o} is already an alias")
             if n in taken and n not in olds:
                 raise SystemExit(f"{n} already registered")
         man = modmod.load_manifest()
@@ -70,16 +74,43 @@ def main() -> int:
                 new = pat[o].sub(n, new)
             if new != text:
                 changed[key] = new
-        # re-prove every changed module
+        # re-prove every changed module.  Identifier names can change MSC's code generation
+        # (symbol-table hashing), so a module whose rewrite is not exact keeps the old
+        # names: they stay registered as aliases of the new ones.
         mapping = {o: n for o, n, _ in ren}
-        for key, text in changed.items():
+        kept = {}
+        for key in list(changed):
+            if key in a.skip_module:
+                kept[key] = "skipped (worker module)"
+                del changed[key]
+                continue
+            text = changed[key]
             m = man["modules"][key]
             claims = [dict(c, name=mapping.get(c["name"], c["name"])) for c in m["claims"]]
             res = modmod.verify_module(text, m, claims)
             bad = [n for n, c in res["claims"].items() if not c["exact"]]
             if not res["exact"]:
-                raise SystemExit(f"{key}: rename breaks exactness ({bad or res.get('data') or res.get('extent')})")
+                kept[key] = f"keeps old names: rename changes code of {bad[:5] or 'data/extent'}"
+                del changed[key]
+                continue
             print(f"  {key}: {len(claims)} claims still exact")
+        for key, why in kept.items():
+            print(f"  {key}: {why}")
+        # a claimed function whose module keeps its old name cannot be renamed yet
+        blocked = set()
+        for key in kept:
+            for c in man["modules"][key]["claims"]:
+                if c["name"] in mapping:
+                    blocked.add(c["name"])
+        if blocked:
+            print(f"  not renamed (claimed in a module that keeps old names): {sorted(blocked)}")
+            ren = [r for r in ren if r[0] not in blocked]
+            mapping = {o: n for o, n, _ in ren}
+            for key in list(changed):
+                text = (ROOT / man["modules"][key]["source"]).read_text(encoding="latin1")
+                for o, n, _ in ren:
+                    text = pat[o].sub(n, text)
+                changed[key] = text
         if a.verify_only:
             print(f"VERIFY-ONLY OK: {len(ren)} renames, {len(changed)} modules re-proven")
             return 0
@@ -97,6 +128,10 @@ def main() -> int:
             rec = syms[sec].pop(o)
             rec.setdefault("history", []).append({"was": o, "why": why})
             syms[sec][n] = rec
+            # keep the old name bound to the same address so in-flight drafts still compile
+            alias = {k: v for k, v in rec.items() if k not in ("history", "grounding")}
+            alias["alias_of"] = n
+            syms[sec][o] = alias
         symmod.save(syms)
         with (ROOT / "evidence" / "promotions.jsonl").open("a") as fh:
             fh.write(json.dumps({"time": dt.datetime.now().isoformat(timespec="seconds"), "module": "RENAME",
