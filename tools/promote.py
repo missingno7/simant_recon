@@ -35,19 +35,7 @@ LOCK = ROOT / "build" / "promote.lock"
 JOURNAL = ROOT / "evidence" / "promotions.jsonl"
 
 
-class Lock:
-    def __enter__(self):
-        LOCK.parent.mkdir(parents=True, exist_ok=True)
-        try:
-            self.fd = os.open(LOCK, os.O_CREAT | os.O_EXCL | os.O_WRONLY)
-        except FileExistsError:
-            raise SystemExit(f"another publisher holds {LOCK} (remove it only if no promote.py is running)")
-        os.write(self.fd, str(os.getpid()).encode())
-        return self
-
-    def __exit__(self, *a):
-        os.close(self.fd)
-        LOCK.unlink(missing_ok=True)
+from lockfile import CanonicalLock as Lock  # noqa: E402
 
 
 def sha(b: bytes) -> str:

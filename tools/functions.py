@@ -94,6 +94,39 @@ def freeze() -> int:
 
 def add(addr: str, size: int, why: str) -> int:
     """Add a reviewed function row (e.g. an unreferenced entry proven by layout)."""
+    from lockfile import CanonicalLock
+    with CanonicalLock():
+        return _add(addr, size, why)
+
+
+def resize(addr: str, size: int, why: str) -> int:
+    """Correct the extent of an unclaimed function row (reviewed)."""
+    from lockfile import CanonicalLock
+    with CanonicalLock():
+        unit, seg, off = addr.split(":")
+        seg, off = int(seg, 16), int(off, 16)
+        t = json.loads(TABLE.read_text())
+        row = next((r for r in t["functions"] if r["unit"] == unit and r["seg"] == seg and r["off"] == off), None)
+        if row is None:
+            raise SystemExit("no such row")
+        man = json.loads((ROOT / "layout" / "manifest.json").read_text())
+        if any(c["unit"] == unit and c["seg"] == seg and c["off"] == off for m in man["modules"].values()
+               for c in m["claims"]):
+            raise SystemExit("row is claimed")
+        lin = seg * 16 + off
+        for r in t["functions"]:
+            if r is not row and r["unit"] == unit and r["seg"] * 16 + r["off"] < lin + size \
+                    and lin < r["seg"] * 16 + r["off"] + r["size"]:
+                raise SystemExit(f"new extent overlaps {r}")
+        row.setdefault("notes", []).append(f"resized {row['size']} -> {size}: {why}")
+        row["size"] = size
+        row["extent"] = "REVIEWED"
+        TABLE.write_text(json.dumps(t, indent=0) + "\n")
+        print("resized", addr, size)
+        return 0
+
+
+def _add(addr: str, size: int, why: str) -> int:
     unit, seg, off = addr.split(":")
     seg, off = int(seg, 16), int(off, 16)
     t = json.loads(TABLE.read_text())
@@ -119,4 +152,6 @@ if __name__ == "__main__":
         raise SystemExit(freeze())
     if len(sys.argv) >= 5 and sys.argv[1] == "add":
         raise SystemExit(add(sys.argv[2], int(sys.argv[3]), " ".join(sys.argv[4:])))
+    if len(sys.argv) >= 5 and sys.argv[1] == "resize":
+        raise SystemExit(resize(sys.argv[2], int(sys.argv[3]), " ".join(sys.argv[4:])))
     print(__doc__)

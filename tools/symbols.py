@@ -75,7 +75,16 @@ def bootstrap() -> int:
 
 
 def rename(old: str, new: str, why: str) -> int:
+    from lockfile import CanonicalLock
+    with CanonicalLock():
+        return _rename(old, new, why)
+
+
+def _rename(old: str, new: str, why: str) -> int:
     d = load()
+    man = json.loads((ROOT / "layout" / "manifest.json").read_text())
+    if any(c["name"] == old for m in man["modules"].values() for c in m["claims"]):
+        raise SystemExit(f"{old} is claimed; claimed functions are renamed by the supervisor with their source")
     if not IDENT.match(new):
         raise SystemExit(f"bad identifier {new}")
     for sec in ("code", "data"):
@@ -92,6 +101,12 @@ def rename(old: str, new: str, why: str) -> int:
 
 
 def add_data(name: str, seg: int, off: int, why: str) -> int:
+    from lockfile import CanonicalLock
+    with CanonicalLock():
+        return _add_data(name, seg, off, why)
+
+
+def _add_data(name: str, seg: int, off: int, why: str) -> int:
     d = load()
     if not IDENT.match(name):
         raise SystemExit(f"bad identifier {name}")
