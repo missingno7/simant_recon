@@ -29,7 +29,17 @@ REG-1 below is a case where the MSC 5.10 rule is false for 6.00.
   after a call are spilled (`push dx` → `[bp-6]`); far pointers on the stack; `retf N`.
 * **Switch tables under `/Os`** sit immediately after the `jmp cs:[bx+T]` (no pad).
 * **Far data**: an `extern` far variable is addressed through a private `CONST` word that
-  holds its segment (`mov es,[DS:xxxx]`); an immediate `mov ax,SEG` appears for others
-  (probably variables defined in the same file) — to be verified.
+  holds its segment (`mov es,[DS:xxxx]`). Under `/Og`, *hoisted* ES loads become an
+  immediate `mov ax,SEG var; mov es,ax` (sometimes with `mov cx,DGROUP; mov ds,cx`) —
+  natural C reproduces both (worker dig, modules 0BE8/14EE).
+* **`/Og` is used** by the simulation and database modules (`/AL /Os /Oe /Og`, sometimes
+  `/Gs`): e.g. f_0BE8_0652 is exact only with `/Og` (the `(x<<6)+y` CSE survives an if/else).
+* **Commutative operand order** of far-memory sums ignores source order but depends on the
+  number of earlier `extern` declarations (compiler symbol-table state): the declaration
+  set of a module is part of its fingerprint. Renames did not change it.
+* **`register` has no visible effect under `/Oe /Og`** (REG-1 is for builds without `/Og`).
+* Copying parameters into locals (`x = a; y = b;`) changes allocation (DI/SI plus kept
+  homes); separate early returns (`if (x==0) return 0; if (x>0x3e) return 0;`) are not
+  equivalent to a combined condition.
 * **Relocation order** inside a module is target-grouped by RTLink (open, see
   `docs/exe-format.md`).

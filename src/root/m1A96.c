@@ -46,12 +46,6 @@ int far f_1A96_0483(CacheHandle table);
 int far f_1A96_0532(CacheHandle table);
 char far * far f_1A96_01EC(int object, int type, CacheHandle table);
 
-/* SCAFFOLD BEGIN: context only, not reconstruction.
- * f_1A96_000C best draft: 123 vs 128 bytes.  Residue: under /Oe MSC 6.00A merges the
- * if/else assignment of size with its first use inside the nested allocation call, so
- * that call is evaluated (constant pushes hoisted above the if) before the memset
- * arguments; the original pushes (size+1)*4 and -1 first and keeps size in SI.  A
- * `register int n` copy compiled WITHOUT /Oe reproduces the first 0x48 bytes. */
 CacheHandle far f_1A96_000C(int size)
 {
     CacheHandle table;
@@ -65,7 +59,6 @@ CacheHandle far f_1A96_000C(int size)
     (*table)->used = 0;
     return table;
 }
-/* SCAFFOLD END */
 
 int far f_1A96_008C(int object, int type, CacheHandle table)
 {
@@ -114,7 +107,7 @@ int far f_1A96_0159(char far *handle, CacheHandle table, int far *object, int fa
 }
 
 /* SCAFFOLD BEGIN: context only, not reconstruction.
- * f_1A96_01EC (ch_LookUpId) best draft: 359 vs 354 bytes, same control flow.  Residue:
+ * f_1A96_01EC (ch_LookUpId) best draft (/Oeg): 359 vs 354 bytes, same control flow.  Residue:
  * the original keeps the hook result low word in SI (ours DI), computes base before the
  * hash and caches count in SI as the idiv divisor, and keeps the second-loop pointer in
  * ES:BX without storing its segment; 120 declaration orders give identical code. */
@@ -265,9 +258,10 @@ int far f_1A96_0532(CacheHandle table)
 }
 
 /* SCAFFOLD BEGIN: context only, not reconstruction.
- * f_1A96_065D best draft: equal length, 5 instructions differ.  Residue: the original
- * stores prime = cand before forming the primes[nprimes] address (index BX, base SI);
- * this draft forms the address first (index SI, base BX). */
+ * f_1A96_065D best draft (/Oeg): equal length, 5 instructions differ.  Residue: the
+ * original stores prime = cand before forming the primes[nprimes] address (index BX,
+ * base SI); this draft forms the address first (index SI, base BX).  Tried: 12 spellings
+ * of the store, register j/nprimes, all 120 declaration orders, while/for/flag forms. */
 int far f_1A96_065D(int n)
 {
     int prime;

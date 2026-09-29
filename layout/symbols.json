@@ -3743,6 +3743,12 @@
    "off": 1209,
    "grounding": "inventory:push_cs_call"
   },
+  "f_1A28_0148": {
+   "unit": "root",
+   "seg": 6696,
+   "off": 328,
+   "grounding": "reviewed: unreferenced 1-byte retf between OpenDB (ends 0148) and f_1A28_0149: empty /Gs function (GS-1), fills the module tiling"
+  },
   "f_1A28_0149": {
    "unit": "root",
    "seg": 6696,
@@ -9269,6 +9275,11 @@
   }
  },
  "data": {
+  "errno": {
+   "seg": 21939,
+   "off": 30522,
+   "grounding": "DosPunt (root:1A28:0277): cmp word ptr [773A],18h (EMFILE) then push [773A] as the %d of 'Dos error: %d: %s' and index into [7D12] message table; MSC runtime errno"
+  },
   "fd_3D57_0000": {
    "seg": 15703,
    "off": 0,
@@ -9314,10 +9325,25 @@
    "off": 612,
    "grounding": "o08_35F5_0050 (RandWorld): mov es,[S08 CONST word] ; es:[bx+disp] array base"
   },
+  "fd_3D57_02A4": {
+   "seg": 15703,
+   "off": 676,
+   "grounding": "f_14EE_0079: mov es,[DS:8392] (CONST 3D57); es:[02A4]=y es:[02A6]=0"
+  },
+  "fd_3D57_02A8": {
+   "seg": 15703,
+   "off": 680,
+   "grounding": "f_14EE_0079: mov es,[DS:8398] (CONST 3D57); es:[02A8]=y es:[02AA]=0"
+  },
   "fd_3D57_02AC": {
    "seg": 15703,
    "off": 684,
    "grounding": "f_10F7_20BF (root:10F7): mov es,[CONST word = 3D57]; es:[..02AC] far data reference"
+  },
+  "fd_3D57_02B0": {
+   "seg": 15703,
+   "off": 688,
+   "grounding": "f_14EE_0079: mov es,[DS:8396] (CONST 3D57); es:[02B0]=x es:[02B2]=y"
   },
   "fd_3D57_02B4": {
    "seg": 15703,
@@ -10019,6 +10045,21 @@
    "off": 4288,
    "grounding": "o08_35F5_0050 (RandWorld): mov es,[S08 CONST word] ; mov es:[off]"
   },
+  "fd_50F6_3952": {
+   "seg": 20726,
+   "off": 14674,
+   "grounding": "f_1986_012A: mov bx,3952h; mov es,[DS:89B4] (CONST word 50F6); far pointer to the probed 8-byte index entry stored es:[bx], es:[bx+2]"
+  },
+  "fd_50F6_3956": {
+   "seg": 20726,
+   "off": 14678,
+   "grounding": "f_1986_012A (index binary search): mov bx,3956h; mov es,[DS:89B2] (CONST word 50F6); es:[bx]=0, low bound read/written each probe"
+  },
+  "fd_50F6_3958": {
+   "seg": 20726,
+   "off": 14680,
+   "grounding": "OpenDB (root:1A28:0006): h*7Ch + 3958h with mov cx,50F6h (address) and es:[bx+3958h] via CONST word 89C2; 4 x 124-byte open-database records"
+  },
   "fd_50F6_3B50": {
    "seg": 20726,
    "off": 15184,
@@ -10034,10 +10075,20 @@
    "off": 7070,
    "grounding": "f_0BE8_08BD: mov al,[bx+1B9E] (DS=DGROUP) byte y-delta table indexed by direction"
   },
+  "g_1BB2": {
+   "seg": 21939,
+   "off": 7090,
+   "grounding": "f_14EE_04B5: mov al,[si+1BB2] (DS=DGROUP) byte tile per direction"
+  },
   "g_8BA2": {
    "seg": 21939,
    "off": 35746,
    "grounding": "f_0093_008F: mov [8BA2],ax (DS=DGROUP)"
+  },
+  "sys_errlist": {
+   "seg": 21939,
+   "off": 32018,
+   "grounding": "DosPunt (root:1A28:0277): bx=[773A]*4; push [bx+7D14]; push [bx+7D12] as the %s after 'Dos error: %d:'; MSC runtime far-pointer message table indexed by errno"
   }
  },
  "runtime": {

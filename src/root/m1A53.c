@@ -134,10 +134,6 @@ void far f_1A53_02D5(char far *handle)
     f_171C_15A2(handle, 3);
 }
 
-/* SCAFFOLD BEGIN: context only, not reconstruction.
- * f_1A53_02EB best draft: 99 vs 100 bytes.  Residue: the original pushes the lookup
- * handle's high word through AX (mov ax,[bp-2]; push ax) where this draft emits
- * push word ptr [bp-2]; everything else (DI for the low word, frame 4) matches. */
 void far f_1A53_02EB(unsigned int object, int kind)
 {
     char far *handle;
@@ -152,7 +148,6 @@ void far f_1A53_02EB(unsigned int object, int kind)
             Punt("Release %d not in cache! ");
     }
 }
-/* SCAFFOLD END */
 
 void far f_1A53_034F(int object, int kind)
 {

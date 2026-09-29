@@ -174,6 +174,7 @@ def verify_data_segment(obj, segname: str, p: dict) -> dict:
     size = p.get("size", len(body))
     body = body[:size]
     relocs_c = []
+    rkey = {}
     reasons = []
     for f in obj.linker_fixups:
         if f["segment"] != segname or f["offset"] >= size:
@@ -182,6 +183,7 @@ def verify_data_segment(obj, segname: str, p: dict) -> dict:
         if f["loc"] == "base16" and s is not None:
             struct_pack(body, f["offset"], s["seg"])
             relocs_c.append(start + f["offset"])
+            rkey[start + f["offset"]] = f"{f['target_kind']}:{f['target']}"
         elif f["loc"] == "offset16" and s is not None:
             if f["frame_kind"] == "group":
                 v = s["seg"] * 16 + s["off"] - match.DGROUP_SEG * 16
@@ -195,9 +197,17 @@ def verify_data_segment(obj, segname: str, p: dict) -> dict:
     exp = [sg * 16 + o for sg, o in s27.relocs if start <= sg * 16 + o < start + size]
     if bytes(body) != orig:
         reasons.append("data bytes differ")
-    if exp != relocs_c:
-        reasons.append(f"data relocations differ {len(relocs_c)} vs {len(exp)}")
-    return {"exact": not reasons, "reasons": reasons, "size": size}
+    order = "EXACT"
+    if sorted(exp) != sorted(relocs_c):
+        reasons.append(f"data relocation set differs {len(relocs_c)} vs {len(exp)}")
+    elif exp != relocs_c:
+        # same RTLink grouping as code relocations: object order inside each target group
+        # is required, the between-group order is a linker property (docs/exe-format.md)
+        for g in set(rkey.values()):
+            if [a for a in exp if rkey.get(a) == g] != [a for a in relocs_c if rkey.get(a) == g]:
+                reasons.append(f"data relocation order inside target group {g} differs")
+        order = "GROUPED"
+    return {"exact": not reasons, "reasons": reasons, "size": size, "reloc_order": order}
 
 
 def struct_pack(buf: bytearray, at: int, v: int) -> None:

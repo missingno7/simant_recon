@@ -48,6 +48,27 @@ extern unsigned char far fd_3E1D_E89F[64][32];
 extern unsigned char far fd_3E1D_F09F[64][32];
 extern unsigned char far fd_4DA7_0000[64][32];
 extern unsigned char far fd_3E1D_2180[64][64];
+extern int far SRand16(void);
+extern int far SRand8(void);
+extern int far fd_50F6_1040;
+extern int far fd_50F6_1050;
+extern int far fd_50F6_1060;
+extern int far fd_50F6_0F3A;
+extern unsigned char near g_1B9A[];
+extern unsigned char near g_1B9E[];
+extern unsigned char far fd_3E1D_8180[64][64];
+extern char far fd_3D57_0008[8];
+extern char far fd_3D57_0000[8];
+extern unsigned char far fd_3E1D_4180[64][64];
+extern unsigned char far fd_3E1D_5180[64][64];
+extern long far fd_50F6_0214;
+extern int far fd_50F6_0228;
+extern long far TickCount(void);
+extern unsigned char far fd_3E1D_9180[64][64];
+extern void far f_14EE_0519(int x, int y);
+extern void far f_14EE_0647(int x, int y);
+extern void far f_0EC1_05D4(int x, int y, int life, int state, int dir);
+extern void far f_0EC1_0651(int x, int y, int life, int state, int dir);
 extern unsigned char far fd_3E1D_3180[64][64];
 
 void far f_0BE8_0002(void);
@@ -55,6 +76,83 @@ void far f_0BE8_0554(int i);
 void far f_0BE8_039F(void);
 void far f_0BE8_0652(int y);
 void far f_0BE8_06EE(int y);
+void far f_0BE8_08BD(int x, int y);
+int far f_0BE8_0BC1(int x, int y);
+
+/* SCAFFOLD BEGIN: unrecovered f_0BE8_0002 kept in place for CONST order */
+/* f_0BE8_0002 (CountAnts?): best draft, 13 bytes differ: operand order of the
+   commutative far-memory sums (AEC[1], AFA[1], AFA[2], totals) depends on the
+   compiler's symbol-table state (number/names of earlier declarations), not on
+   source order; see REPORT.md (ORD-1 observation). */
+void far f_0BE8_0002(void)
+{
+    int i;
+    int n;
+    int v;
+
+    fd_50F6_0AFA[0] = 0;
+    fd_50F6_0AEC[0] = 0;
+    for (i = 0; i < 32; i++)
+        fd_50F6_0EB6[i] = 0;
+    for (n = fd_50F6_0D6A; n > 0; ) {
+        v = fd_3E1D_AD3B[--n];
+        if (v)
+            fd_50F6_0EB6[v >> 3]++;
+    }
+    for (n = fd_50F6_0DA8; n > 0; ) {
+        v = fd_3E1D_BAEC[--n];
+        if (v)
+            fd_50F6_0EB6[v >> 3]++;
+    }
+    for (n = fd_50F6_0EAA; n > 0; ) {
+        v = fd_3E1D_C4B5[--n];
+        if (v)
+            fd_50F6_0EB6[v >> 3]++;
+    }
+    if (fd_50F6_0A06 == 0) {
+        if (fd_50F6_04E2 == 0)
+            fd_50F6_0EB6[fd_50F6_04C2 >> 3]++;
+        else
+            fd_50F6_0EB6[(fd_50F6_04C2 | 0x80) >> 3]++;
+    }
+    fd_50F6_0AEC[0] = fd_50F6_0EB6[0];
+    fd_50F6_0AEC[1] = fd_50F6_0EB6[1] + fd_50F6_0EB6[2] + fd_50F6_0EB6[3] + fd_50F6_0EB6[5];
+    fd_50F6_0AEC[2] = fd_50F6_0EB6[6] + fd_50F6_0EB6[7] + fd_50F6_0EB6[9];
+    fd_50F6_0AEC[3] = fd_50F6_0EB6[4];
+    fd_50F6_0AEC[4] = fd_50F6_0EB6[8];
+    if (fd_50F6_0AEC[5] && fd_50F6_0EB6[12] == 0 && fd_50F6_0354 == 0) {
+        f_00DF_00B1(0x2b0c, 0x7e);
+        o14_384C_0B6A(0, 0x271a, 1);
+        if (fd_50F6_0EAC <= 1) {
+            o14_384C_0B6A(0, 0x271b, 1);
+            fd_50F6_0376 = 1;
+            fd_50F6_0366 = 0;
+        }
+    }
+    fd_50F6_0AEC[5] = fd_50F6_0EB6[12];
+    fd_50F6_0AFA[0] = fd_50F6_0EB6[16];
+    fd_50F6_0AFA[1] = fd_50F6_0EB6[18] + fd_50F6_0EB6[19] + fd_50F6_0EB6[21] + fd_50F6_0EB6[17];
+    fd_50F6_0AFA[2] = fd_50F6_0EB6[23] + fd_50F6_0EB6[22] + fd_50F6_0EB6[25];
+    fd_50F6_0AFA[3] = fd_50F6_0EB6[20];
+    fd_50F6_0AFA[4] = fd_50F6_0EB6[24];
+    if (fd_50F6_0AFA[5] && fd_50F6_0EB6[28] == 0 && fd_50F6_0354 == 0) {
+        f_00DF_00B1(0x2b0d, 0x7e);
+        o14_384C_0B6A(0, 0x271c, 1);
+        if (fd_50F6_0EAC <= 1) {
+            o14_384C_0B6A(0, 0x271d, 1);
+            fd_50F6_0376 = 1;
+            fd_50F6_0366 = 1;
+        }
+        if (fd_50F6_0EAC == 2 && fd_50F6_0400 == 1 && fd_50F6_07CA[0] == 0xb && fd_50F6_07CA[1] == 8)
+            fd_3D57_0184[SRand1(6)][0] = 0x14;
+    }
+    fd_50F6_0330 = fd_50F6_0AEC[3] + fd_50F6_0AEC[1] + fd_50F6_0AEC[2] + fd_50F6_0AEC[4] + fd_50F6_0AEC[5];
+    fd_50F6_0AFA[5] = fd_50F6_0EB6[28];
+    fd_50F6_0350 = fd_50F6_0AFA[5] + fd_50F6_0AFA[4] + fd_50F6_0AFA[1] + fd_50F6_0AFA[3] + fd_50F6_0AFA[2];
+    fd_50F6_0354 = 0;
+}
+
+/* SCAFFOLD END */
 
 void far f_0BE8_038F(void)
 {
@@ -197,6 +295,155 @@ void far f_0BE8_06EE(int y)
     }
 }
 
+void far f_0BE8_0798(int x, int y)
+{
+    int v;
+
+    v = fd_3E1D_0180[x][y];
+    if (!fd_50F6_0F24) {
+        if (v == 0x48)
+            fd_3E1D_0180[x][y] = SRand16();
+        else
+            fd_3E1D_0180[x][y]--;
+    } else {
+        if (v % 4 == 0)
+            fd_3E1D_0180[x][y] = (v - 0x18) >> 2;
+        else
+            fd_3E1D_0180[x][y]--;
+    }
+    if (fd_50F6_1040 > 0)
+        fd_50F6_1040--;
+}
+
+int far f_0BE8_0812(int x, int y)
+{
+    int v;
+
+    v = fd_3E1D_0180[x][y];
+    if (fd_50F6_0F24 == 1) {
+        if (v < 4) {
+            fd_3E1D_0180[x][y] = (v + 6) << 2;
+            fd_50F6_1040++;
+            return 1;
+        }
+        if (v >= 8 && v < 0x18) {
+            v = (v - 8) >> 2;
+            fd_3E1D_0180[x][y] = (v + 6) << 2;
+            fd_50F6_1040++;
+            return 1;
+        }
+        if (v >= 0x18 && v < 0x27) {
+            fd_3E1D_0180[x][y]++;
+            fd_50F6_1040++;
+            return 1;
+        }
+        if (v < 0x40) {
+            f_0BE8_08BD(x, y);
+            return 1;
+        }
+    } else {
+        if (v < 0x4b) {
+            if (v >= 0x48) {
+                fd_3E1D_0180[x][y]++;
+                fd_50F6_1040++;
+                return 1;
+            }
+            fd_3E1D_0180[x][y] = 0x48;
+            fd_50F6_1040++;
+            return 1;
+        }
+    }
+    return 0;
+}
+
+void far f_0BE8_08BD(int a, int b)
+{
+    int v;
+    int go;
+    int x;
+    int y;
+
+    go = 1;
+    x = a;
+    y = b;
+    while (go) {
+        v = fd_3E1D_0180[x][y];
+        if (v < 4) {
+            fd_3E1D_0180[x][y] = (v + 6) << 2;
+            fd_50F6_1040++;
+            go = 0;
+        }
+        x += g_1B9A[fd_50F6_0F3A];
+        y += g_1B9E[fd_50F6_0F3A];
+        if (x < 0 || x > 0x7f)
+            go = 0;
+        if (y < 0 || y > 0x3f)
+            go = 0;
+    }
+}
+
+/* SCAFFOLD BEGIN: f_0BE8_094B/f_0BE8_09D3 best drafts, 8 bytes differ each: the tile load into the SI variable
+   is `mov si,word es:[..]; and si,0FFh` here but `mov al,byte es:[..]; sub ah,ah; mov si,ax` in
+   the target. Everything else (immediate SEG load of the map, flag home, trailing
+   `mov cx,DGROUP; mov ds,cx`) is reproduced. Tried: unsigned/char/register v, cast,
+   assignment inside the if, far pointer temp, extra temp local. Also needs a _DATA placement
+   for the DGROUP fixup of `mov cx,DGROUP` */
+void far f_0BE8_094B(int x, int y)
+{
+    int v;
+    int flag;
+
+    flag = 0;
+    v = fd_3E1D_2180[x][y];
+    if (v == 0x10) {
+        fd_3E1D_2180[x][y] = SRand8();
+        flag = 1;
+    } else if (v >= 0x11 && v <= 0x13) {
+        fd_3E1D_2180[x][y]--;
+        flag = 1;
+    }
+    if (flag == 1 && fd_50F6_1050 > 0)
+        fd_50F6_1050--;
+}
+
+void far f_0BE8_09D3(int x, int y)
+{
+    int v;
+    int flag;
+
+    flag = 0;
+    v = fd_3E1D_3180[x][y];
+    if (v == 0x10) {
+        fd_3E1D_3180[x][y] = SRand8();
+        flag = 1;
+    } else if (v >= 0x11 && v <= 0x13) {
+        fd_3E1D_3180[x][y]--;
+        flag = 1;
+    }
+    if (flag == 1 && fd_50F6_1060 > 0)
+        fd_50F6_1060--;
+}
+
+/* SCAFFOLD END */
+
+void far f_0BE8_0A5B(int x, int y, int life)
+{
+    if (fd_50F6_0DA8 < 500 && f_0BE8_0BC1(x, y)) {
+        f_14EE_0519(x, y);
+        f_0EC1_05D4(x, y, life, 8, 0);
+        fd_3E1D_8180[x][y] = life;
+    }
+}
+
+void far f_0BE8_0ABE(int x, int y, int life)
+{
+    if (fd_50F6_0EAA < 500 && f_0BE8_0BC1(x, y)) {
+        f_14EE_0647(x, y);
+        f_0EC1_0651(x, y, life, 8, 0);
+        fd_3E1D_9180[x][y] = life;
+    }
+}
+
 int far f_0BE8_0B21(int x1, int y1, int x2, int y2)
 {
     int dx;
@@ -244,77 +491,152 @@ int far IsItDirt(int value)
     return 0;
 }
 
-/* SCAFFOLD BEGIN: unrecovered same-module callees */
-/* f_0BE8_0002 (CountAnts?): best draft, 13 bytes differ: operand order of the
-   commutative far-memory sums (AEC[1], AFA[1], AFA[2], totals) depends on the
-   compiler's symbol-table state (number/names of earlier declarations), not on
-   source order; see REPORT.md (ORD-1 observation). */
-void far f_0BE8_0002(void)
+int far f_0BE8_0C0F(int x, int y, int dir)
 {
+    int back;
+    int best;
+    int bestValue;
     int i;
-    int n;
-    int v;
+    int nx;
+    int ny;
+    int value;
 
-    fd_50F6_0AFA[0] = 0;
-    fd_50F6_0AEC[0] = 0;
-    for (i = 0; i < 32; i++)
-        fd_50F6_0EB6[i] = 0;
-    for (n = fd_50F6_0D6A; n > 0; ) {
-        v = fd_3E1D_AD3B[--n];
-        if (v)
-            fd_50F6_0EB6[v >> 3]++;
+    if (y == 1) {
+        if (fd_3E1D_2180[x][0] == 0x18)
+            return 1;
+        return SRand2() * 4 + 3;
     }
-    for (n = fd_50F6_0DA8; n > 0; ) {
-        v = fd_3E1D_BAEC[--n];
-        if (v)
-            fd_50F6_0EB6[v >> 3]++;
-    }
-    for (n = fd_50F6_0EAA; n > 0; ) {
-        v = fd_3E1D_C4B5[--n];
-        if (v)
-            fd_50F6_0EB6[v >> 3]++;
-    }
-    if (fd_50F6_0A06 == 0) {
-        if (fd_50F6_04E2 == 0)
-            fd_50F6_0EB6[fd_50F6_04C2 >> 3]++;
-        else
-            fd_50F6_0EB6[(fd_50F6_04C2 | 0x80) >> 3]++;
-    }
-    fd_50F6_0AEC[0] = fd_50F6_0EB6[0];
-    fd_50F6_0AEC[1] = fd_50F6_0EB6[1] + fd_50F6_0EB6[2] + fd_50F6_0EB6[3] + fd_50F6_0EB6[5];
-    fd_50F6_0AEC[2] = fd_50F6_0EB6[6] + fd_50F6_0EB6[7] + fd_50F6_0EB6[9];
-    fd_50F6_0AEC[3] = fd_50F6_0EB6[4];
-    fd_50F6_0AEC[4] = fd_50F6_0EB6[8];
-    if (fd_50F6_0AEC[5] && fd_50F6_0EB6[12] == 0 && fd_50F6_0354 == 0) {
-        f_00DF_00B1(0x2b0c, 0x7e);
-        o14_384C_0B6A(0, 0x271a, 1);
-        if (fd_50F6_0EAC <= 1) {
-            o14_384C_0B6A(0, 0x271b, 1);
-            fd_50F6_0376 = 1;
-            fd_50F6_0366 = 0;
+    back = dir ^ 4;
+    best = 0;
+    bestValue = 0;
+    for (i = 0; i < 8; i++) {
+        ny = fd_3D57_0008[i] + y;
+        nx = fd_3D57_0000[i] + x;
+        if (nx < 0 || nx > 63 || ny < 0 || ny > 63)
+            continue;
+        value = fd_3E1D_4180[nx][ny];
+        if (value > bestValue && back != i) {
+            bestValue = value;
+            best = i + 1;
         }
     }
-    fd_50F6_0AEC[5] = fd_50F6_0EB6[12];
-    fd_50F6_0AFA[0] = fd_50F6_0EB6[16];
-    fd_50F6_0AFA[1] = fd_50F6_0EB6[18] + fd_50F6_0EB6[19] + fd_50F6_0EB6[21] + fd_50F6_0EB6[17];
-    fd_50F6_0AFA[2] = fd_50F6_0EB6[23] + fd_50F6_0EB6[22] + fd_50F6_0EB6[25];
-    fd_50F6_0AFA[3] = fd_50F6_0EB6[20];
-    fd_50F6_0AFA[4] = fd_50F6_0EB6[24];
-    if (fd_50F6_0AFA[5] && fd_50F6_0EB6[28] == 0 && fd_50F6_0354 == 0) {
-        f_00DF_00B1(0x2b0d, 0x7e);
-        o14_384C_0B6A(0, 0x271c, 1);
-        if (fd_50F6_0EAC <= 1) {
-            o14_384C_0B6A(0, 0x271d, 1);
-            fd_50F6_0376 = 1;
-            fd_50F6_0366 = 1;
-        }
-        if (fd_50F6_0EAC == 2 && fd_50F6_0400 == 1 && fd_50F6_07CA[0] == 0xb && fd_50F6_07CA[1] == 8)
-            fd_3D57_0184[SRand1(6)][0] = 0x14;
+    return best;
+}
+
+int far f_0BE8_0CBB(int x, int y, int dir)
+{
+    int back;
+    int best;
+    int bestValue;
+    int i;
+    int nx;
+    int ny;
+    int value;
+
+    if (y == 1) {
+        if (fd_3E1D_3180[x][0] == 0x18)
+            return 1;
+        return SRand2() * 4 + 3;
     }
-    fd_50F6_0330 = fd_50F6_0AEC[3] + fd_50F6_0AEC[1] + fd_50F6_0AEC[2] + fd_50F6_0AEC[4] + fd_50F6_0AEC[5];
-    fd_50F6_0AFA[5] = fd_50F6_0EB6[28];
-    fd_50F6_0350 = fd_50F6_0AFA[5] + fd_50F6_0AFA[4] + fd_50F6_0AFA[1] + fd_50F6_0AFA[3] + fd_50F6_0AFA[2];
-    fd_50F6_0354 = 0;
+    back = dir ^ 4;
+    best = 0;
+    bestValue = 0;
+    for (i = 0; i < 8; i++) {
+        ny = fd_3D57_0008[i] + y;
+        nx = fd_3D57_0000[i] + x;
+        if (nx < 0 || nx > 63 || ny < 0 || ny > 63)
+            continue;
+        value = fd_3E1D_5180[nx][ny];
+        if (value > bestValue && back != i) {
+            bestValue = value;
+            best = i + 1;
+        }
+    }
+    return best;
+}
+
+/* SCAFFOLD BEGIN: f_0BE8_0D67/f_0BE8_0E0F (GetEnterDirB/R) best drafts: target keeps ny in memory [bp-2] and
+   value in DI, back/bestValue/best at [bp-6]/[bp-8]/[bp-A]. MSC gives DI to ny and puts
+   value in memory (ny and value have disjoint live ranges and share storage); a struct
+   {best,bestValue,back} fixes the slot order but not the DI choice. Tried: declaration orders,
+   block-scoped locals, register keyword (ignored under /Og), nested-if and || forms,
+   value-free expression form, 0..17 padding declarations */
+int far f_0BE8_0D67(int x, int y, int dir)
+{
+    int back;
+    int best;
+    int bestValue;
+    int i;
+    int nx;
+    int ny;
+    int value;
+
+    back = dir ^ 4;
+    best = -1;
+    bestValue = fd_3E1D_4180[x][y];
+    for (i = 0; i < 8; i++) {
+        if (back == i)
+            continue;
+        ny = fd_3D57_0008[i] + y;
+        nx = fd_3D57_0000[i] + x;
+        if (nx < 0 || nx > 63 || ny < 0 || ny > 63)
+            continue;
+        value = fd_3E1D_4180[nx][ny];
+        if (value == 0)
+            continue;
+        if (bestValue < value)
+            continue;
+        if (bestValue <= value && SRand2() == 0)
+            continue;
+        bestValue = value;
+        best = i;
+    }
+    return best;
+}
+
+int far f_0BE8_0E0F(int x, int y, int dir)
+{
+    int back;
+    int best;
+    int bestValue;
+    int i;
+    int nx;
+    int ny;
+    int value;
+
+    back = dir ^ 4;
+    best = -1;
+    bestValue = fd_3E1D_5180[x][y];
+    for (i = 0; i < 8; i++) {
+        if (back == i)
+            continue;
+        ny = fd_3D57_0008[i] + y;
+        nx = fd_3D57_0000[i] + x;
+        if (nx < 0 || nx > 63 || ny < 0 || ny > 63)
+            continue;
+        value = fd_3E1D_5180[nx][ny];
+        if (value == 0)
+            continue;
+        if (bestValue < value)
+            continue;
+        if (bestValue <= value && SRand2() == 0)
+            continue;
+        bestValue = value;
+        best = i;
+    }
+    return best;
 }
 
 /* SCAFFOLD END */
+
+void far f_0BE8_0EB7(void)
+{
+    if (TickCount() >= fd_50F6_0214 + 0x1c20) {
+        fd_50F6_0214 = TickCount();
+        if (++fd_50F6_0228 > 2)
+            fd_50F6_0228 = 0;
+        f_00DF_00B1(fd_50F6_0228 + 0x2713, 0x7e);
+    }
+}
+
+
