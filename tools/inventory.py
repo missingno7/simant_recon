@@ -22,6 +22,11 @@ import sys
 from collections import defaultdict
 from pathlib import Path
 
+try:
+    import capstone  # noqa: F401
+except ImportError:  # sandboxed users cannot see the per-user site-packages
+    import sys as _sys
+    _sys.path.insert(0, "C:/tools/capstone-5.0.3")
 from capstone import Cs, CS_ARCH_X86, CS_MODE_16
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
@@ -125,6 +130,12 @@ class Inventory:
 
     # -- seeds ----------------------------------------------------------------------------
     def seed(self):
+        # Reviewed function-table rows (layout/functions.json) are seeds too.
+        tbl = ROOT / "layout" / "functions.json"
+        if tbl.exists():
+            for r in json.loads(tbl.read_text())["functions"]:
+                if r["unit"] in self.units:
+                    self.add(r["unit"], r["seg"] * 16 + r["off"], r["seg"], "table")
         # Program entry points.
         self.add("root", 0x29F4 * 16 + 0x1C, 0x29F4, "msc_entry")
         for v in self.x.vectors:

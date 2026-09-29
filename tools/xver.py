@@ -37,6 +37,11 @@ import sys
 from collections import Counter, defaultdict
 from pathlib import Path
 
+try:
+    import capstone  # noqa: F401
+except ImportError:  # sandboxed users cannot see the per-user site-packages
+    import sys as _sys
+    _sys.path.insert(0, "C:/tools/capstone-5.0.3")
 from capstone import Cs, CS_ARCH_X86, CS_MODE_16
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
