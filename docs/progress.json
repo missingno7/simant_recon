@@ -4,19 +4,19 @@
  "oracle_sha256": "aa0596c6766322a8229ee3c36e57048c92adc82d50fbe2ef37afb8b85fcf4f11",
  "known_functions": 1600,
  "known_game_functions": 1497,
- "exact_c_functions": 842,
- "exact_c_bytes": 150485,
+ "exact_c_functions": 886,
+ "exact_c_bytes": 158180,
  "exact_asm_functions": 2,
  "exact_asm_bytes": 25,
  "historical_runtime_bytes_accepted": 12334,
  "historical_runtime_members_accepted": 89,
  "historical_runtime_bytes_located_unaccepted": 1044,
  "rtlink_manager_bytes_unaccepted": 17065,
- "data_bytes_accepted": 12182,
+ "data_bytes_accepted": 13314,
  "bss_bytes_placed": 402,
  "game_code_span_bytes": 304748,
- "unresolved_code_bytes": 154238,
- "unresolved_data_bytes": 123338,
+ "unresolved_code_bytes": 146543,
+ "unresolved_data_bytes": 122206,
  "overlay_coverage": {
   "S00": {
    "bytes": 19696,
@@ -72,7 +72,7 @@
   },
   "S13": {
    "bytes": 6064,
-   "claimed": 0
+   "claimed": 4591
   },
   "S14": {
    "bytes": 4656,
@@ -127,17 +127,14 @@
    "claimed": 0
   }
  },
- "root_claimed_bytes": 103045,
- "scaffold_functions": 69,
+ "root_claimed_bytes": 106149,
+ "scaffold_functions": 74,
  "exact_translation_units": 22,
- "claims_within_group_order_pending": 9,
- "complete_tus_relocation_order_proven": 17,
+ "claims_within_group_order_pending": 10,
+ "complete_tus_relocation_order_proven": 20,
  "complete_tus_cross_function_order_pending": [
-  "S18:384C",
-  "S20:39C7",
   "root:1383",
-  "root:1A28",
-  "root:1CE2"
+  "root:1A28"
  ],
  "codegen_rules_reproduced": 12,
  "whole_executable": "NOT_BUILT (no historical link yet; see docs/next-steps.md)",

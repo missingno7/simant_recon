@@ -242,7 +242,7 @@ def main() -> int:
                               "members": [{k: r[k] for k in ("library", "member", "module_index", "linear", "size",
                                                              "segment", "member_sha256")}
                                           for r in ok]}
-            modmod.MANIFEST.write_text(json.dumps(man, indent=1) + "\n")
+            modmod.write_manifest(man)
         print(f"accepted {len(ok)} runtime members into layout/manifest.json")
     return 0
 

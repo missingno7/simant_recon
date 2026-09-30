@@ -131,7 +131,7 @@ def main() -> int:
             for c in m["claims"]:
                 c["name"] = mapping.get(c["name"], c["name"])
             m["scaffold"] = sorted(mapping.get(s, s) for s in m.get("scaffold", []))
-        modmod.MANIFEST.write_text(json.dumps(man, indent=1) + "\n")
+        modmod.write_manifest(man)
         for o, n, why in ren:
             sec = "code" if o in syms["code"] else "data"
             rec = syms[sec].pop(o)

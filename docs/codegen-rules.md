@@ -18,7 +18,7 @@ REG-1 below is a case where the MSC 5.10 rule is false for 6.00.
 | DATA-1 | VERIFIED | `_DATA` order: a function's string literals are emitted when it is compiled; initialised data definitions are queued and flushed after the *next* function's literals. Globals at the top of a file therefore follow the first function's literals. | module 1A53: `"%s.dat"` (db_Exists) at 39EC, statics at 39F4, then later literals | globals defined after f1 land after f2's literals |
 | VER-2 | VERIFIED | MSC 6.00 and 6.00A also differ under `/Oeg`: module 1A53 `db_LoadObject` is 218 bytes (original) only under 6.00A; 6.00 cross-jumps the `mov dx,[bp-8]` tail (210 bytes). Every accepted module is exact under 6.00A. | db_LoadObject, f_1A28_0224 | msc600: 210 bytes |
 | VER-3 | VERIFIED | The build compiler is the DOS-extended **MSC 6.00AX** (`CL /EM`: C1L, C2L, C3L in protected mode). With the same source, module 0AD9 is a complete exact TU only under `msc600ax`. Real-mode 6.00A and the bound C2L both emit `DoAntLions` at 1001 bytes instead of 1002 (the global allocator is not applied); the other 18 functions are exact under all three. Every accepted C module is also exact under 6.00AX. | DoAntLions (root:0AD9) | msc600a / msc600a-c2l: 1001 bytes |
-| ZI-1 | STRONGLY SUPPORTED | The game modules were compiled with **`/Zi`** (CodeView). `/Zi` does not change code bytes, but it starts a new LEDATA record at every function (and keeps the ~52-line-entry flush), so the FIXUPP order inside each RTLink target group matches the original *across function boundaries*. The complete-TU gate now checks that order over the whole segment (`modules.extent_reloc_order`). With `/Zi` and the same sources, 18 of 22 complete C modules have proven cross-function order. Without it, 14 failed: records that are too large (no debug flag) or too sparse (`/Zd`). | S22 (worker ovl22), 171C (worker mem), 18 complete TUs (supervisor re-verification 2026-09-30) | same sources without /Zi or with /Zd: 14 of 22 complete TUs fail cross-function order |
+| ZI-1 | STRONGLY SUPPORTED | The game modules were compiled with **`/Zi`** (CodeView). `/Zi` does not change code bytes, but it starts a new LEDATA record at every function (and keeps the ~52-line-entry flush), so the FIXUPP order inside each RTLink target group matches the original *across function boundaries*. The complete-TU gate now checks that order over the whole segment (`modules.extent_reloc_order`). With `/Zi` and the same sources, 18 of 22 complete C modules have proven cross-function order. Without it, 14 failed: records that are too large (no debug flag) or too sparse (`/Zd`). /Zi also breaks a record at every C label, even an unreferenced one (worker rootD, build/workers/rootD/p/z1.c vs z2.c). Counterexample: the sound-device module 277E has proven cross-function order *without* /Zi and not with it (f_277E_097A), so it may have been built separately. | S22 (worker ovl22), 171C (worker mem), 18 complete TUs (supervisor re-verification 2026-09-30) | same sources without /Zi or with /Zd: 14 of 22 complete TUs fail cross-function order |
 | VER-1 | VERIFIED | MSC 6.00 and 6.00A differ in `/Ol` strength reduction of an array walk: 6.00 computes `shl ax,1; add ax,offset arr` from a zero counter, 6.00A stores `offset arr` directly. | — (no accepted `/Ol` function yet) | all other probed flags byte-identical |
 
 ## Observations not yet promoted to rules
@@ -117,5 +117,15 @@ REG-1 below is a case where the MSC 5.10 rule is false for 6.00.
   different constants are cross-jumped into `mov ax,K; jmp` tails.
 * **Frameless /Og functions**: no parameters and no stack locals means no BP frame, only
   `__aFchkstk` and `push si/di`.
+* **NAME-2: identifier spelling can matter in functions with `_asm`** (worker rootD, probe
+  `evidence/codegen/NAME-2-local-slot-order.json`): there the stack-slot order of locals follows
+  the names (f_277E_01FA exact only with i/base/bios-like names). No effect was seen in /Og
+  functions without `_asm`, so NAME-1 stays retracted for ordinary code.
+* **/Og overlays declared locals with disjoint lifetimes** (a `char` shared a slot with a
+  `long`) but never overlays CSE temporaries. Separate char slots in the original mean repeated
+  expressions, not variables (f_284A_05C5, 067F).
+* **Chained assignments store the rightmost variable first** (`s = base = ...`).
+* **Cross-jumping never merges `mov cx,SEG x` for different symbols**, so identical-looking
+  segment loads identify separate externs (voice tables of 277E).
 * **Relocation order** inside a module is target-grouped by RTLink (open, see
   `docs/exe-format.md`).

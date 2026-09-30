@@ -1,5 +1,20 @@
 /* Overlay section S14, code frame 384C: score, scenario and picture dialogs. */
 
+#include <stdio.h>
+#include <string.h>
+long far CalcScore(int far *);
+int far DoScenario(void);
+void far DoWinHelp(int);
+void far ScoreDialog(void);
+void far DrawCastePopUp(void);
+void far SetDefaultWindPrompt(int);
+void far PictStrnDialog(int, int, int);
+void far PictureDialog(char far * far *, int, int, int);
+void far EndGameDialog(void);
+void far SpiderDialog(void);
+void far CustomerIDDialog(void);
+
+
 extern int far fd_50F6_04F4;
 extern int far fd_3D57_0828;
 extern int far fd_50F6_073C[64];
@@ -231,7 +246,6 @@ extern int near g_3DB2;
 extern void far f_24AB_02AD(int font);
 extern void far f_22BF_0D53(int obj, char far *format, ...);
 extern char far * far * far fd_50F6_0368;
-extern char far * far _fstrcat(char far *dst, const char far *src);
 extern char far * far * far fd_50F6_0324;
 
 void far ScoreDialog(void)
@@ -286,7 +300,6 @@ extern int far f_24AB_030B(void);
 extern int far fd_50F6_0AEC[];
 extern int far fd_50F6_0AFA[];
 extern void _fastcall win_SetColorFromObjNum(int obj);
-extern int far sprintf(char *buf, const char *format, ...);
 extern void far f_24AB_038D(int x, int y, char far *text);
 extern int near g_3DE0;
 extern void (far * near g_9134)(int left, int top, int right, int bottom, int color);

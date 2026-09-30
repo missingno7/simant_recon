@@ -2,6 +2,95 @@
  "schema": "simant-manifest-v1",
  "oracle_sha256": "aa0596c6766322a8229ee3c36e57048c92adc82d50fbe2ef37afb8b85fcf4f11",
  "modules": {
+  "S04:35F5": {
+   "unit": "S04",
+   "seg": 13813,
+   "profile": "msc600ax",
+   "flags": [
+    "/AL",
+    "/Os",
+    "/Og",
+    "/Oe",
+    "/Zi"
+   ],
+   "placements": {
+    "_DATA": {
+     "seg": 21939,
+     "off": 9016,
+     "size": 91
+    },
+    "CONST": {
+     "seg": 21939,
+     "off": 33762,
+     "size": 52
+    }
+   },
+   "lang": "c",
+   "source": "src/S04/m35F5.c",
+   "source_sha256": "435a62518f3aa3871b3e8d13e06d4ed062c6bf875ecfa398ad6cbcb862b0651e",
+   "claims": [
+    {
+     "name": "MapToolsMenu",
+     "unit": "S04",
+     "seg": 13813,
+     "off": 0,
+     "size": 602,
+     "target_sha256": "edff4b7d845420ca77c211fed94b9c468f59a3b7eba62d0038e158d9e86bb7d2",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL",
+     "reloc_order": "GROUPED"
+    },
+    {
+     "name": "o04_35F5_025A",
+     "unit": "S04",
+     "seg": 13813,
+     "off": 602,
+     "size": 458,
+     "target_sha256": "1c6e47eb6b624c65614dd4180739a6710163693c785a73ec639ee5e5b8ae5b90",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL",
+     "reloc_order": "GROUPED"
+    },
+    {
+     "name": "Mini_MakeTable",
+     "unit": "S04",
+     "seg": 13813,
+     "off": 1060,
+     "size": 186,
+     "target_sha256": "e1148440a5aecc1857694a2709a22cdeecc8439860439980ead76dc4b0963d57",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL",
+     "reloc_order": "GROUPED"
+    },
+    {
+     "name": "OpenMiniMapWin",
+     "unit": "S04",
+     "seg": 13813,
+     "off": 1887,
+     "size": 361,
+     "target_sha256": "54e07f7b68e7ed14a5156eda25ff3f6d472fc817efd54dd37c25f7555335cda5",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL",
+     "reloc_order": "GROUPED"
+    },
+    {
+     "name": "EraseMiniMapCursor",
+     "unit": "S04",
+     "seg": 13813,
+     "off": 2398,
+     "size": 34,
+     "target_sha256": "83ab2846c7c7cf4dbab4155a03fac8bdc32601875dda35441780fe390d3fed2d",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL",
+     "reloc_order": "GROUPED"
+    }
+   ],
+   "scaffold": [
+    "DrawMiniMapCursor",
+    "Mini_DrawMapI"
+   ],
+   "object_sha256": "cd40c1b0dac6b13df88a107235f6abfbab7f710364d3a3bce6d5a7f7f88cbecc"
+  },
   "S05:35F5": {
    "unit": "S05",
    "seg": 13813,
@@ -11,7 +100,7 @@
     "/Os",
     "/Og",
     "/Oe",
-    "/Zd"
+    "/Zi"
    ],
    "placements": {
     "_DATA": {
@@ -80,20 +169,18 @@
     "DoWarnSetB",
     "o05_35F5_025C"
    ],
-   "object_sha256": "27a0a96bc29d77c0dcc3f3c8bfcedb6d8a834d4e082e233dced99f8f9e8b36da"
+   "object_sha256": "0ff48dbf96901e9e45cb38c51c947cb4e7ae8e34833d5fada2451e43cbe7e40b"
   },
   "S06:35F5": {
    "unit": "S06",
    "seg": 13813,
-   "profile": "msc600a-c2l",
+   "profile": "msc600ax",
    "flags": [
     "/AL",
     "/Os",
     "/Og",
     "/Oe",
-    "/Zd",
-    "/B2",
-    "C2L.EXE"
+    "/Zi"
    ],
    "placements": {
     "CONST": {
@@ -142,7 +229,7 @@
      "target_sha256": "bd3aed93182d978b80fcaf08ad2b3842869dddef1fc4cbd4041dfddb7bdfc73a",
      "kind": "C",
      "provenance": "EXACT_NATURAL",
-     "reloc_order": "GROUPED"
+     "reloc_order": "EXACT"
     },
     {
      "name": "o06_35F5_020C",
@@ -208,7 +295,7 @@
      "target_sha256": "5a8c0d383109b7415eb43bcf6b8ab892b50c85451b0900c27c8cc34dbd3ef242",
      "kind": "C",
      "provenance": "EXACT_NATURAL",
-     "reloc_order": "GROUPED"
+     "reloc_order": "EXACT"
     },
     {
      "name": "o06_35F5_11FF",
@@ -296,7 +383,7 @@
      "target_sha256": "3eac88337dd11a5ead6ba875cab70fdcf7aba931c3cd62f7a3ba768283a36151",
      "kind": "C",
      "provenance": "EXACT_NATURAL",
-     "reloc_order": "GROUPED"
+     "reloc_order": "EXACT"
     },
     {
      "name": "o06_35F5_2433",
@@ -324,7 +411,7 @@
    "scaffold": [
     "SimKidInside"
    ],
-   "object_sha256": "62734a04b117a89ed0115819cd935315b27cb1cd6975195c96c37a2a852d6ea8"
+   "object_sha256": "abfe8d1281057ff4bee9d0b37bbf309721ddc9ba179887ddee844b381424e066"
   },
   "S07:35F5": {
    "unit": "S07",
@@ -375,13 +462,13 @@
   "S08:35F5": {
    "unit": "S08",
    "seg": 13813,
-   "profile": "msc600a",
+   "profile": "msc600ax",
    "flags": [
     "/AL",
     "/Os",
     "/Og",
     "/Oe",
-    "/Zd"
+    "/Zi"
    ],
    "placements": {
     "CONST": {
@@ -430,7 +517,7 @@
      "target_sha256": "bf3a64a77a6eeaa97339b4b8aed2c8e07da2db9df75dc1891458eebd61677154",
      "kind": "C",
      "provenance": "EXACT_NATURAL",
-     "reloc_order": "GROUPED"
+     "reloc_order": "EXACT"
     },
     {
      "name": "DigOutBNest",
@@ -577,7 +664,7 @@
     }
    ],
    "scaffold": [],
-   "object_sha256": "3f7e348c08d16818a17bf423911b4bf573320f7ac98d1dc0c35fcc46e8820674"
+   "object_sha256": "2ce81de08406ec9806ea72a007715c4e0574b6acbe622a5f2203b78e46130d93"
   },
   "S09:36EE": {
    "unit": "S09",
@@ -641,7 +728,7 @@
     "/Og",
     "/Oe",
     "/Gs",
-    "/Zd"
+    "/Zi"
    ],
    "placements": {
     "_DATA": {
@@ -697,7 +784,7 @@
     "o10_35F5_0384",
     "o10_35F5_0A63"
    ],
-   "object_sha256": "4b5aca99711dad20a6dce4cf56b5d1074747e84e428361c8e7397db3f224f790"
+   "object_sha256": "5c4087be667e3ad23ccbc2612bb6b585bee38bebe18584e34ed74f45feb3834f"
   },
   "S11:35F5": {
    "unit": "S11",
@@ -739,7 +826,7 @@
     "/Os",
     "/Og",
     "/Oe",
-    "/Zd"
+    "/Zi"
    ],
    "placements": {
     "CONST": {
@@ -755,7 +842,7 @@
    },
    "lang": "c",
    "source": "src/S12/m384C.c",
-   "source_sha256": "6baad15ef7617684f7b5e35a15410ce35a5522b9e208f03ba89be431679b98eb",
+   "source_sha256": "94479e60481178e7acb7e55ea1af42774ab30601a7b72d7e93e5551c99196914",
    "claims": [
     {
      "name": "DeinitMapFunctions",
@@ -854,7 +941,7 @@
      "target_sha256": "2388fa247ce116b5676288ada24bb78a60477531cf779ada1f9e38a9da6f9ecc",
      "kind": "C",
      "provenance": "EXACT_NATURAL",
-     "reloc_order": "GROUPED"
+     "reloc_order": "EXACT"
     },
     {
      "name": "o12_384C_080E",
@@ -932,25 +1019,45 @@
      "kind": "C",
      "provenance": "EXACT_NATURAL",
      "reloc_order": "GROUPED"
+    },
+    {
+     "name": "o12_384C_0432",
+     "unit": "S12",
+     "seg": 14412,
+     "off": 1074,
+     "size": 724,
+     "target_sha256": "7e0161ce33a1e704d89899ab28d8f477b170504bac782a4f558464c9a6686805",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL",
+     "reloc_order": "GROUPED"
+    },
+    {
+     "name": "o12_384C_0B76",
+     "unit": "S12",
+     "seg": 14412,
+     "off": 2934,
+     "size": 1172,
+     "target_sha256": "f5295884dd2d26bef2001d0f8c2411fd02ad503c4374fbf47b21ef66aa8d5e2f",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL",
+     "reloc_order": "GROUPED"
     }
    ],
    "scaffold": [
-    "DrawMapCursor",
-    "o12_384C_0432",
-    "o12_384C_0B76"
+    "DrawMapCursor"
    ],
-   "object_sha256": "eee3e12713bb811e22b7b201a0e217aad060191edefeff8dbdf0fa3c7d0baa14"
+   "object_sha256": "7ad2ace7b5980d823d967768ff142be523f62181c0e3fc33143e674d27d5afdc"
   },
   "S13:384C": {
    "unit": "S13",
    "seg": 14412,
-   "profile": "msc600a",
+   "profile": "msc600ax",
    "flags": [
     "/AL",
     "/Os",
     "/Og",
     "/Oe",
-    "/Zd"
+    "/Zi"
    ],
    "placements": {
     "CONST": {
@@ -1186,7 +1293,7 @@
      "target_sha256": "cf24ed03c50fd3cb8f06b78bab5004c9e1f7ff50ec0ea05e71674840ac9bd15f",
      "kind": "C",
      "provenance": "EXACT_NATURAL",
-     "reloc_order": "EXACT"
+     "reloc_order": "GROUPED"
     }
    ],
    "scaffold": [
@@ -1195,18 +1302,18 @@
     "DrawSimColonies",
     "InvertPatch"
    ],
-   "object_sha256": "37aa19ffc972b0913446db819872b23dfde7c337a77cf0e7ef2aa7608da3c356"
+   "object_sha256": "62d90b6e20a35e8e9934cc372f4081db9ca803c9f4989aa3abe5948d4becb743"
   },
   "S14:384C": {
    "unit": "S14",
    "seg": 14412,
-   "profile": "msc600a",
+   "profile": "msc600ax",
    "flags": [
     "/AL",
     "/Os",
     "/Og",
     "/Oe",
-    "/Zd"
+    "/Zi"
    ],
    "placements": {
     "CONST": {
@@ -1222,7 +1329,7 @@
    },
    "lang": "c",
    "source": "src/S14/m384C.c",
-   "source_sha256": "b9c891643bf4a82f3c8eb83e7b27e3724ccbb2b938afb9bf054c827be7cd5b53",
+   "source_sha256": "3d31b032246165211ceda2688de7f0ddee32bed1abfdeb48d510877540f162f6",
    "claims": [
     {
      "name": "DoScenario",
@@ -1308,7 +1415,7 @@
     "PictureDialog",
     "SpiderDialog"
    ],
-   "object_sha256": "148d98e4d340da4abccadd553a833d232bded6882dd6825ee76a6b4441235e5d"
+   "object_sha256": "c7ab5aa438a8bf9ffe956f6fca7fe8e2a90f204c9c0d621f8a86d255ee55afb4"
   },
   "S18:384C": {
    "unit": "S18",
@@ -1319,7 +1426,7 @@
     "/Os",
     "/Og",
     "/Oe",
-    "/Zd"
+    "/Zi"
    ],
    "placements": {
     "_DATA": {
@@ -1361,7 +1468,7 @@
      "target_sha256": "154409a56a5b83398b6fd26c4b7b80456756ba332c6925d7f2639e04a0f592cc",
      "kind": "C",
      "provenance": "EXACT_NATURAL",
-     "reloc_order": "GROUPED"
+     "reloc_order": "EXACT"
     },
     {
      "name": "FloorTiles",
@@ -1372,7 +1479,7 @@
      "target_sha256": "e07db825140645ef57ec5eaed6163a19d742ed9d5ef436bb89d7cb5f5deaa4a4",
      "kind": "C",
      "provenance": "EXACT_NATURAL",
-     "reloc_order": "GROUPED"
+     "reloc_order": "EXACT"
     },
     {
      "name": "CarpetFloorL",
@@ -1394,7 +1501,7 @@
      "target_sha256": "3b4ff0a92c4011d58563898b2a12cff360fa339e1678faa8ef5e138e0a3002a4",
      "kind": "C",
      "provenance": "EXACT_NATURAL",
-     "reloc_order": "EXACT"
+     "reloc_order": "GROUPED"
     },
     {
      "name": "CarpetFloorR",
@@ -1416,7 +1523,7 @@
      "target_sha256": "f0d21412b7a711f6c4da24da75305782a84e2e7228d03710ddb452ec8f1b601c",
      "kind": "C",
      "provenance": "EXACT_NATURAL",
-     "reloc_order": "GROUPED"
+     "reloc_order": "EXACT"
     },
     {
      "name": "MakeSink",
@@ -1548,7 +1655,7 @@
      "target_sha256": "2947269f68bce7c1933dfa7a90db8ab7fddd1b1b0b54219ce0ce2e62d64f3f4c",
      "kind": "C",
      "provenance": "EXACT_NATURAL",
-     "reloc_order": "EXACT"
+     "reloc_order": "GROUPED"
     },
     {
      "name": "MakeYardPatch",
@@ -1570,7 +1677,7 @@
      "target_sha256": "c2e21f16ce61458a8757813add2838e41ae5383b4576a135e329ba074fef715f",
      "kind": "C",
      "provenance": "EXACT_NATURAL",
-     "reloc_order": "EXACT"
+     "reloc_order": "GROUPED"
     },
     {
      "name": "AddRock5",
@@ -1596,7 +1703,7 @@
     }
    ],
    "scaffold": [],
-   "object_sha256": "d8adba6514e11e6320ec8d4e6f8ed8abbd024fa101efe74c3c571d3ff65c08ee"
+   "object_sha256": "95cf40f86a8097ca498894c38279bf6f34efcd8eb3cafdbb02922f78de916b9d"
   },
   "S20:39C7": {
    "unit": "S20",
@@ -1608,7 +1715,7 @@
     "/Og",
     "/Oe",
     "/Gs",
-    "/Zd"
+    "/Zi"
    ],
    "placements": {
     "_DATA": {
@@ -1803,7 +1910,7 @@
     }
    ],
    "scaffold": [],
-   "object_sha256": "c619b922033e92730103c39242b8602a65e7a8439125a426a33f6bb931a941e4"
+   "object_sha256": "9f7af680cd5970e2d1ab83d08fdaf480cc12c27069284c2b14e05bac4afb5018"
   },
   "S20:39F1": {
    "unit": "S20",
@@ -1815,7 +1922,7 @@
     "/Og",
     "/Oe",
     "/Gs",
-    "/Zd"
+    "/Zi"
    ],
    "placements": {
     "_DATA": {
@@ -1883,7 +1990,7 @@
     }
    ],
    "scaffold": [],
-   "object_sha256": "3b32cdb04bb1cf71da1cd1b97ad7a9db265e7bced88b7949fdf01cbc19dff7d0"
+   "object_sha256": "a5ca522cb755a68e4c3074ce6b3c293bb1f80570807c19286d0c561e57b7ec3b"
   },
   "S22:39C7": {
    "unit": "S22",
@@ -2493,7 +2600,7 @@
     "/Os",
     "/Og",
     "/Oe",
-    "/Zd"
+    "/Zi"
    ],
    "placements": {
     "_DATA": {
@@ -2569,7 +2676,7 @@
      "target_sha256": "80b4e21eb93aeac2008e3344677958b8543f75274d141806f2887c72446913b4",
      "kind": "C",
      "provenance": "EXACT_NATURAL",
-     "reloc_order": "GROUPED"
+     "reloc_order": "EXACT"
     },
     {
      "name": "HistUpdate",
@@ -2586,7 +2693,7 @@
    "scaffold": [
     "drawHistGraph"
    ],
-   "object_sha256": "e86900fca019ed6bd9f6579aca6895500c175c92d9931777a015bf033ce31ec2"
+   "object_sha256": "e6c9605c0aa5ff2b00362fee934560ace869ccd2e03019c721b79e884b049c54"
   },
   "S25:39C7": {
    "unit": "S25",
@@ -2898,13 +3005,13 @@
   "S25:3BA4": {
    "unit": "S25",
    "seg": 15268,
-   "profile": "msc600a",
+   "profile": "msc600ax",
    "flags": [
     "/AL",
     "/Os",
     "/Oe",
     "/Og",
-    "/Zd"
+    "/Zi"
    ],
    "placements": {
     "CONST": {
@@ -3004,7 +3111,7 @@
      "kind": "C",
      "provenance": "EXACT_STEERED",
      "steered": "DoAntMoveY scaffold stand-in: CONST word order + 21 filler lines -> /Zd LINNUM (52/record) LEDATA boundary that fixes within-group reloc order of o25_3BA4_0999",
-     "reloc_order": "GROUPED"
+     "reloc_order": "EXACT"
     },
     {
      "name": "o25_3BA4_19AD",
@@ -3028,7 +3135,7 @@
      "kind": "C",
      "provenance": "EXACT_STEERED",
      "steered": "DoAntMoveY scaffold stand-in: CONST word order + 21 filler lines -> /Zd LINNUM (52/record) LEDATA boundary that fixes within-group reloc order of o25_3BA4_0999",
-     "reloc_order": "GROUPED"
+     "reloc_order": "EXACT"
     },
     {
      "name": "ExitNest",
@@ -3071,7 +3178,7 @@
     "o25_3BA4_1035",
     "o25_3BA4_1686"
    ],
-   "object_sha256": "076ed9e71578934a2eda04412d73713857bb33385cd21ea3ee34b0c379522258"
+   "object_sha256": "36e5dc1b0cd1ca74a9958f42e99eb2af91faf4897a68a0205ff454322db93c62"
   },
   "root:0093": {
    "unit": "root",
@@ -3413,7 +3520,7 @@
     "/Os",
     "/Oe",
     "/Og",
-    "/Zd"
+    "/Zi"
    ],
    "placements": {
     "CONST": {
@@ -3434,7 +3541,7 @@
    },
    "lang": "c",
    "source": "src/root/m0250.c",
-   "source_sha256": "d8b8bcae797b30e77385350d3d9101abb0e58802c6bad247c8de8c509f22c39a",
+   "source_sha256": "424573c6e30495c4319d5be7651270ef724cfed4bac4652b10df198fd192e1f1",
    "claims": [
     {
      "name": "f_0250_0CF6",
@@ -3456,7 +3563,7 @@
      "target_sha256": "5f1527e582b8756d81583518595cd77c73da833fdb83fbd55a4fcbc8db41f5a7",
      "kind": "C",
      "provenance": "EXACT_NATURAL",
-     "reloc_order": "GROUPED"
+     "reloc_order": "EXACT"
     },
     {
      "name": "f_0250_006E",
@@ -3610,7 +3717,7 @@
      "target_sha256": "9fb6dd800ca705dd5e900f637359ee8abbfad918375080d867e7e3188ba00992",
      "kind": "C",
      "provenance": "EXACT_NATURAL",
-     "reloc_order": "GROUPED"
+     "reloc_order": "EXACT"
     },
     {
      "name": "f_0250_0B86",
@@ -3797,7 +3904,7 @@
      "target_sha256": "8b06827dd511d3b3b779a5e90ebaedae34558c29970b1861499df7382cb282be",
      "kind": "C",
      "provenance": "EXACT_NATURAL",
-     "reloc_order": "GROUPED"
+     "reloc_order": "EXACT"
     },
     {
      "name": "DrawPalps",
@@ -3819,7 +3926,7 @@
      "target_sha256": "4dd442b5185a132c05de6feb22c105dd212ec24b19b722caa5d295d961b51fa9",
      "kind": "C",
      "provenance": "EXACT_NATURAL",
-     "reloc_order": "GROUPED"
+     "reloc_order": "EXACT"
     },
     {
      "name": "f_0250_41CA",
@@ -3922,7 +4029,7 @@
     }
    ],
    "scaffold": [],
-   "object_sha256": "8c65597d23439af42e40350eada72053c1d8b0be1c40ca4290047002466dcffc"
+   "object_sha256": "3309c7c60a1aa7b3bc7bc081e5d078f83d0cc95be171abc30cc6960391beff03"
   },
   "root:0798": {
    "unit": "root",
@@ -5025,7 +5132,8 @@
     "/AL",
     "/Os",
     "/Oe",
-    "/Og"
+    "/Og",
+    "/Zi"
    ],
    "placements": {
     "CONST": {
@@ -5098,7 +5206,7 @@
     "SFoundAnt",
     "SpiderScan"
    ],
-   "object_sha256": "16a1cc73aab736ce823544e7153c88befc85eea24043ac80a43616dd20cd4263"
+   "object_sha256": "21f2aac9d3192503e4811c1200624843e8340414f8872966daedddc9f413bac4"
   },
   "root:0EC1": {
    "unit": "root",
@@ -8445,7 +8553,8 @@
     "/Os",
     "/Oe",
     "/Og",
-    "/Gs"
+    "/Gs",
+    "/Zi"
    ],
    "placements": {
     "_DATA": {
@@ -8782,18 +8891,19 @@
     }
    ],
    "scaffold": [],
-   "object_sha256": "217bd8a005b2c696653c81bccde0daf86a65b65c441a9be685800f02c55753e2"
+   "object_sha256": "9ea22ad0dcda96061bf79cd3b651b865583dad4aea9a340b2d7d05dae673d7fc"
   },
   "root:1D8E": {
    "unit": "root",
    "seg": 7566,
-   "profile": "msc600a",
+   "profile": "msc600ax",
    "flags": [
     "/AL",
     "/Os",
     "/Oe",
     "/Og",
-    "/Gs"
+    "/Gs",
+    "/Zi"
    ],
    "placements": {
     "CONST": {
@@ -8933,7 +9043,305 @@
     }
    ],
    "scaffold": [],
-   "object_sha256": "2d52356f4f525f83acbd3564caa8cf1fc0dd7c3b7cb7e35fc1cf714dc6fda30c"
+   "object_sha256": "5c14a42d28ac3e3887892e032401096762988a55c98e462556a0dec584de5b55"
+  },
+  "root:1E57": {
+   "unit": "root",
+   "seg": 7767,
+   "profile": "msc600ax",
+   "flags": [
+    "/AL",
+    "/Os",
+    "/Oe",
+    "/Og",
+    "/Gs",
+    "/Zi"
+   ],
+   "placements": {
+    "_DATA": {
+     "seg": 21939,
+     "off": 22274,
+     "size": 806
+    },
+    "CONST": {
+     "seg": 21939,
+     "off": 35280,
+     "size": 6
+    }
+   },
+   "lang": "c",
+   "source": "src/root/m1E57.c",
+   "source_sha256": "459157f7311ab6d618bea7cbfd3717b0cfdfe2e8e3724a8124507fa65a14cff9",
+   "claims": [
+    {
+     "name": "f_1E57_0006",
+     "unit": "root",
+     "seg": 7767,
+     "off": 6,
+     "size": 1,
+     "target_sha256": "383e5d7d58caa41ce723cf16af471b38f6ee9065c032d07fa6bef1678cb72f1d",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL",
+     "reloc_order": "EXACT"
+    },
+    {
+     "name": "f_1E57_0007",
+     "unit": "root",
+     "seg": 7767,
+     "off": 7,
+     "size": 1,
+     "target_sha256": "383e5d7d58caa41ce723cf16af471b38f6ee9065c032d07fa6bef1678cb72f1d",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL",
+     "reloc_order": "EXACT"
+    },
+    {
+     "name": "f_1E57_0009",
+     "unit": "root",
+     "seg": 7767,
+     "off": 9,
+     "size": 58,
+     "target_sha256": "0f46829b0196ab454ad33e8f25b3b847a228954d8fb071b77866fa0098ad6d38",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL",
+     "reloc_order": "EXACT"
+    },
+    {
+     "name": "f_1E57_0043",
+     "unit": "root",
+     "seg": 7767,
+     "off": 67,
+     "size": 15,
+     "target_sha256": "190bda0c3d87ad49e3ea41f2158409d04493f225b1fd9fad246e970c59cb43be",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL",
+     "reloc_order": "EXACT"
+    },
+    {
+     "name": "f_1E57_0052",
+     "unit": "root",
+     "seg": 7767,
+     "off": 82,
+     "size": 95,
+     "target_sha256": "a8e719044587d8c22851ba69ecaaa948589c8eaf1cf7a08d6eac85a4385a39c6",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL",
+     "reloc_order": "EXACT"
+    },
+    {
+     "name": "f_1E57_00B1",
+     "unit": "root",
+     "seg": 7767,
+     "off": 177,
+     "size": 100,
+     "target_sha256": "c91037359761f037419dd44bf61038671d965112875a827384ccacf69949cb6a",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL",
+     "reloc_order": "EXACT"
+    },
+    {
+     "name": "f_1E57_0115",
+     "unit": "root",
+     "seg": 7767,
+     "off": 277,
+     "size": 95,
+     "target_sha256": "7de1fadb7c0e65698e747e6ed65907f2047e846521155a30c1ee7dfbadf38412",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL",
+     "reloc_order": "EXACT"
+    },
+    {
+     "name": "f_1E57_0174",
+     "unit": "root",
+     "seg": 7767,
+     "off": 372,
+     "size": 197,
+     "target_sha256": "66a5a24afbb6600bb76e538c03e2d3561607e0e2eac5f15b7a0855bf23013890",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL",
+     "reloc_order": "GROUPED"
+    },
+    {
+     "name": "f_1E57_0239",
+     "unit": "root",
+     "seg": 7767,
+     "off": 569,
+     "size": 93,
+     "target_sha256": "175415db8ae368c5497c3e19a98629ac2f36891a605a80cfd8a11a3e348ab882",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL",
+     "reloc_order": "EXACT"
+    },
+    {
+     "name": "f_1E57_0296",
+     "unit": "root",
+     "seg": 7767,
+     "off": 662,
+     "size": 187,
+     "target_sha256": "37655adff712a4d798bfc58ad6f2640e43400679279943347989f3353dc105c2",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL",
+     "reloc_order": "GROUPED"
+    },
+    {
+     "name": "f_1E57_0351",
+     "unit": "root",
+     "seg": 7767,
+     "off": 849,
+     "size": 17,
+     "target_sha256": "3502465d63c00a22bfee5dbc939b81512467bf8ca339f7db938236363009cddc",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL",
+     "reloc_order": "EXACT"
+    },
+    {
+     "name": "f_1E57_0362",
+     "unit": "root",
+     "seg": 7767,
+     "off": 866,
+     "size": 13,
+     "target_sha256": "b0a0b3cc643900a9a6202bc57203c3902202747e5fb4c89b50f90f37cd864fe6",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL",
+     "reloc_order": "EXACT"
+    },
+    {
+     "name": "f_1E57_036F",
+     "unit": "root",
+     "seg": 7767,
+     "off": 879,
+     "size": 31,
+     "target_sha256": "e5a8bf2d6dbbf63d24407a305e361c100eb841fdd2b14709afffb1f8a8fcc92c",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL",
+     "reloc_order": "EXACT"
+    },
+    {
+     "name": "f_1E57_0773",
+     "unit": "root",
+     "seg": 7767,
+     "off": 1907,
+     "size": 386,
+     "target_sha256": "8e782305bd59f2f2361dd038636e4b1802bcc5fe477d370a4d17aafe7dff6116",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL",
+     "reloc_order": "WITHIN_GROUP_PENDING"
+    },
+    {
+     "name": "f_1E57_08F5",
+     "unit": "root",
+     "seg": 7767,
+     "off": 2293,
+     "size": 423,
+     "target_sha256": "4dd6f2e1bcd4d448aee39ee99c681f580d953c8ae9e1784e18c78a75b52f8c9c",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL",
+     "reloc_order": "WITHIN_GROUP_PENDING"
+    },
+    {
+     "name": "f_1E57_0A9C",
+     "unit": "root",
+     "seg": 7767,
+     "off": 2716,
+     "size": 19,
+     "target_sha256": "4b698c722ebf895ea357a6df5e7517a73c4a6b545557d66dda4089a42875b216",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL",
+     "reloc_order": "EXACT"
+    },
+    {
+     "name": "f_1E57_0AAF",
+     "unit": "root",
+     "seg": 7767,
+     "off": 2735,
+     "size": 363,
+     "target_sha256": "d4d1047d2803beb945878282d05d1ab0455390084e3afb3a845380f72398f402",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL",
+     "reloc_order": "GROUPED"
+    },
+    {
+     "name": "f_1E57_0C1A",
+     "unit": "root",
+     "seg": 7767,
+     "off": 3098,
+     "size": 19,
+     "target_sha256": "7c6482b0222cb2d65ccf302d5b763cc2cf90853500fd1c386b6dcc383d153dcf",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL",
+     "reloc_order": "EXACT"
+    },
+    {
+     "name": "f_1E57_0C2D",
+     "unit": "root",
+     "seg": 7767,
+     "off": 3117,
+     "size": 362,
+     "target_sha256": "41e18dbb7fe88a8c5beb76f266dafdafae01c500eb903626c70dff53f2f3f2bc",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL",
+     "reloc_order": "GROUPED"
+    },
+    {
+     "name": "f_1E57_0D97",
+     "unit": "root",
+     "seg": 7767,
+     "off": 3479,
+     "size": 19,
+     "target_sha256": "e9e7547a7a3ed96c831b63040713eee8c9b8a4215c48893483961d32cb40f464",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL",
+     "reloc_order": "EXACT"
+    },
+    {
+     "name": "f_1E57_0DAA",
+     "unit": "root",
+     "seg": 7767,
+     "off": 3498,
+     "size": 262,
+     "target_sha256": "73b30aa09806a016d47347aff07d228fd6db7700abedd3814536ca491cedb2a1",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL",
+     "reloc_order": "WITHIN_GROUP_PENDING"
+    },
+    {
+     "name": "f_1E57_0EB9",
+     "unit": "root",
+     "seg": 7767,
+     "off": 3769,
+     "size": 213,
+     "target_sha256": "d046c2562af992745cd6118f21cdf62c286a03fca0430669042b0e6d33796455",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL",
+     "reloc_order": "GROUPED"
+    },
+    {
+     "name": "f_1E57_0F8E",
+     "unit": "root",
+     "seg": 7767,
+     "off": 3982,
+     "size": 78,
+     "target_sha256": "b782e6e94e944ec9b1bd3a69b6f8a8b5ae7f3e05ce63352a92e86447555bf8b7",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL",
+     "reloc_order": "EXACT"
+    },
+    {
+     "name": "f_1E57_0FDC",
+     "unit": "root",
+     "seg": 7767,
+     "off": 4060,
+     "size": 57,
+     "target_sha256": "22b551bb6f52494dc4d78e99b3513378dc5eca05d6c66eda6c9cad4cc31c2770",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL",
+     "reloc_order": "GROUPED"
+    }
+   ],
+   "scaffold": [
+    "f_1E57_038E"
+   ],
+   "object_sha256": "9a246f30023d320ad61818b30fdab8727099da91c5e35dfedd5fe8bdfa388499"
   },
   "root:20E8": {
    "unit": "root",
@@ -10589,7 +10997,8 @@
     "/Os",
     "/Oe",
     "/Og",
-    "/Gs"
+    "/Gs",
+    "/Zi"
    ],
    "placements": {
     "_DATA": {
@@ -10770,7 +11179,7 @@
      "target_sha256": "084f0168fa96907bf07e51d53bf5076392b16b310dea4d69ec43f61fe91ff46d",
      "kind": "C",
      "provenance": "EXACT_NATURAL",
-     "reloc_order": "WITHIN_GROUP_PENDING"
+     "reloc_order": "GROUPED"
     },
     {
      "name": "f_2662_1120",
@@ -10787,7 +11196,7 @@
    "scaffold": [
     "f_2662_090D"
    ],
-   "object_sha256": "270bd00b9159b9efd9c708c021da6ee4e1631134508a703726bc0ebad7b00463"
+   "object_sha256": "a9ed617ba0e54f287ff6cb852a28d6e4ae1505a13080b450b1d580c81dd7fd49"
   },
   "root:277D": {
    "unit": "root",
@@ -11131,7 +11540,8 @@
     "/Os",
     "/Oe",
     "/Og",
-    "/Gs"
+    "/Gs",
+    "/Zi"
    ],
    "placements": {
     "_DATA": {
@@ -11356,7 +11766,7 @@
    "scaffold": [
     "f_284A_0138"
    ],
-   "object_sha256": "f05a7e493e2a1cc5c983317a5684b7defb547f2be849cb0799c0acc0766a2094"
+   "object_sha256": "1b034912319ab8e1d9c7291209272a0ac1bc93e3be0edc4bcaef6a7e55a73691"
   },
   "root:29F0": {
    "unit": "root",

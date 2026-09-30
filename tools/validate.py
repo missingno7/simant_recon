@@ -41,7 +41,12 @@ def main() -> int:
     if r.returncode:
         failures.append("oracle lock")
 
-    man = modmod.load_manifest()
+    # consistent snapshot: promotions write the source and then the manifest under the canonical
+    # lock, so read both under it (quickly) and verify from memory afterwards
+    from lockfile import CanonicalLock
+    with CanonicalLock():
+        man = modmod.load_manifest()
+        snapshot = {k: (ROOT / m["source"]).read_bytes() for k, m in man["modules"].items()}
     for prof in sorted({m["profile"] for m in man["modules"].values()} | {"msc600", "msc600a", "masm510"}):
         try:
             compiler.verify_profile(prof)
@@ -64,7 +69,7 @@ def main() -> int:
     per_unit = defaultdict(int)
     for key, m in man["modules"].items():
         path = ROOT / m["source"]
-        text = path.read_text(encoding="latin1")
+        text = snapshot[key].decode("latin1")
         if sha(text.encode("latin1")) != m["source_sha256"]:
             failures.append(f"{key}: source hash differs from manifest (unpublished edit)")
         res = modmod.verify_module(text, m, m["claims"])

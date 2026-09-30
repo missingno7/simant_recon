@@ -109,75 +109,27 @@ extern void far DrawCastePopUp(void);
 void far ProcMapEvent(struct Event far *ev)
 {
     switch (ev->code) {
-    case 0x102:
-        o04_35F5_025A(ev);
-        break;
-    case 0x105:
-        f_00F8_04C7();
-        break;
-    case 0x106:
-        f_00F8_0252();
-        f_015B_053C(1);
-        break;
-    case 0x107:
-        f_00F8_0252();
-        f_015B_053C(2);
-        break;
-    case 0x108:
-        f_00F8_0252();
-        f_015B_053C(3);
-        f_20E8_0725(0x100);
-        break;
-    case 0x109:
-        f_015B_01D1(4);
-        f_20E8_0725(0x100);
-        break;
-    case 0x10a:
-        f_015B_01D1(5);
-        break;
-    case 0x10b:
-        f_015B_01D1(8);
-        break;
-    case 0x10c:
-        f_015B_01D1(6);
-        break;
-    case 0x10d:
-        f_015B_01D1(7);
-        break;
-    case 0x10e:
-        g_2994 = !g_2994;
-        break;
-    case 0x10f:
-        f_0798_012B();
-        break;
-    case 0x110:
-        o12_384C_12D3(ev);
-        break;
-    case 0x111:
-        f_0798_0115();
-        break;
-    case 0x112:
-        f_015B_0D0C();
-        break;
-    case 0x113:
-        o24_39C7_0000();
-        break;
-    case 0x114:
-        ScoreDialog();
-        break;
-    case 0x115:
-        o23_39C7_0C19();
-        break;
-    case 0x116:
-        fd_50F6_1074 = 1;
-        DoWinHelp(0x103);
-        break;
-    case 0x117:
-        o04_35F5_0000();
-        break;
-    case 0x118:
-        DrawCastePopUp();
-        break;
+    case 0x102: o04_35F5_025A(ev); break;
+    case 0x105: f_00F8_04C7(); break;
+    case 0x106: f_00F8_0252(); f_015B_053C(1); break;
+    case 0x107: f_00F8_0252(); f_015B_053C(2); break;
+    case 0x108: f_00F8_0252(); f_015B_053C(3); f_20E8_0725(0x100); break;
+    case 0x109: f_015B_01D1(4); f_20E8_0725(0x100); break;
+    case 0x10a: f_015B_01D1(5); break;
+    case 0x10b: f_015B_01D1(8); break;
+    case 0x10c: f_015B_01D1(6); break;
+    case 0x10d: f_015B_01D1(7); break;
+    case 0x10e: g_2994 = !g_2994; break;
+    case 0x10f: f_0798_012B(); break;
+    case 0x110: o12_384C_12D3(ev); break;
+    case 0x111: f_0798_0115(); break;
+    case 0x112: f_015B_0D0C(); break;
+    case 0x113: o24_39C7_0000(); break;
+    case 0x114: ScoreDialog(); break;
+    case 0x115: o23_39C7_0C19(); break;
+    case 0x116: fd_50F6_1074 = 1; DoWinHelp(0x103); break;
+    case 0x117: o04_35F5_0000(); break;
+    case 0x118: DrawCastePopUp(); break;
     }
 }
 
@@ -268,7 +220,6 @@ extern unsigned char far fd_3D57_061E[];
 extern unsigned char far fd_3D57_054E[];
 extern unsigned char far fd_3D57_04CE[];
 
-/* SCAFFOLD BEGIN: o12_384C_0432 draft: bytes exact, LEDATA record break (/Zd line count) differs */
 void far o12_384C_0432(void)
 {
     int fresh;
@@ -295,23 +246,13 @@ void far o12_384C_0432(void)
             for (x = 0; x < 64; x++, p -= 0x1fff, q -= 0x1fff)
                 for (y = 0; y < 128; y++, p += 64, q += 64) {
                     c = *p;
-                    if (c)
-                        *buf++ = fd_3D57_046E[c >> 3];
-                    else if (!fresh)
-                        *buf++ = fd_3D57_039E[*q];
-                    else
-                        buf++;
+                    if (c) *buf++ = fd_3D57_046E[c >> 3]; else if (!fresh) *buf++ = fd_3D57_039E[*q]; else buf++;
                 }
         } else {
             for (x = 0; x < 64; x++, p -= 0x1fff, q -= 0x1fff)
                 for (y = 0; y < 128; y++, p += 64, q += 64) {
                     c = *p;
-                    if (c)
-                        *buf++ = fd_3D57_046E[c >> 3];
-                    else if (!fresh)
-                        *buf++ = fd_3D57_030E[*q];
-                    else
-                        buf++;
+                    if (c) *buf++ = fd_3D57_046E[c >> 3]; else if (!fresh) *buf++ = fd_3D57_030E[*q]; else buf++;
                 }
         }
     } else {
@@ -319,30 +260,19 @@ void far o12_384C_0432(void)
             for (x = 0; x < 64; x++, p -= 0x1fff, q -= 0x1fff)
                 for (y = 0; y < 128; y++, p += 64, q += 64) {
                     c = *p;
-                    if (c)
-                        *buf++ = fd_3D57_061E[c >> 3];
-                    else if (!fresh)
-                        *buf++ = fd_3D57_054E[*q];
-                    else
-                        buf++;
+                    if (c) *buf++ = fd_3D57_061E[c >> 3]; else if (!fresh) *buf++ = fd_3D57_054E[*q]; else buf++;
                 }
         } else {
             for (x = 0; x < 64; x++, p -= 0x1fff, q -= 0x1fff)
                 for (y = 0; y < 128; y++, p += 64, q += 64) {
                     c = *p;
-                    if (c)
-                        *buf++ = fd_3D57_061E[c >> 3];
-                    else if (!fresh)
-                        *buf++ = fd_3D57_04CE[*q];
-                    else
-                        buf++;
+                    if (c) *buf++ = fd_3D57_061E[c >> 3]; else if (!fresh) *buf++ = fd_3D57_04CE[*q]; else buf++;
                 }
         }
     }
     f_171C_1BBA(fd_50F6_385A);
 }
 
-/* SCAFFOLD END */
 
 void far o12_384C_0706(unsigned char far *src)
 {
@@ -369,10 +299,8 @@ void far o12_384C_0706(unsigned char far *src)
                 i = ((x << 7) + y) << 1;
                 c = src[(y << 5) + x];
                 c = c ? (c >> 5) + 0x10 : 0xb;
-                buf[i] = c;
-                buf[i + 1] = c;
-                buf[i + 0x80] = c;
-                buf[i + 0x81] = c;
+                buf[i] = c; buf[i + 1] = c;
+                buf[i + 0x80] = c; buf[i + 0x81] = c;
             }
     }
     f_171C_1BBA(fd_50F6_385A);
@@ -417,20 +345,14 @@ void far o12_384C_080E(void)
                 c = *p;
                 switch (c) {
                 case 0:
-                    if (!fresh)
-                        *buf++ = fd_3D57_0656[*q >> 2];
-                    else
-                        buf++;
+                    if (!fresh) *buf++ = fd_3D57_0656[*q >> 2]; else buf++;
                     break;
                 case 0xfe:
                 case 0xff:
                     *buf++ = 0x27;
                     break;
                 default:
-                    if (c & 0x80)
-                        *buf++ = 0x25;
-                    else
-                        *buf++ = 0x23;
+                    if (c & 0x80) *buf++ = 0x25; else *buf++ = 0x23;
                     break;
                 }
             }
@@ -440,20 +362,14 @@ void far o12_384C_080E(void)
                 c = *p;
                 switch (c) {
                 case 0:
-                    if (!fresh)
-                        *buf++ = fd_3D57_04A6[*q >> 2];
-                    else
-                        buf++;
+                    if (!fresh) *buf++ = fd_3D57_04A6[*q >> 2]; else buf++;
                     break;
                 case 0xfe:
                 case 0xff:
                     *buf++ = 1;
                     break;
                 default:
-                    if (c & 0x80)
-                        *buf++ = 3;
-                    else
-                        *buf++ = 0xf;
+                    if (c & 0x80) *buf++ = 3; else *buf++ = 0xf;
                     break;
                 }
             }
@@ -516,7 +432,6 @@ void far o12_384C_10A5(int x, int y, int kind);
 void far o12_384C_1181(void);
 extern void far f_171C_1C0A(char far * far *handle);
 
-/* SCAFFOLD BEGIN: o12_384C_0B76 draft: bytes exact, LEDATA record break (/Zd line count) differs */
 void far o12_384C_0B76(void)
 {
     int n, row, off, y, sx, sy;
@@ -620,7 +535,6 @@ void far o12_384C_0B76(void)
     g_29A4 = 0;
 }
 
-/* SCAFFOLD END */
 
 extern void far f_1E57_0362(void);
 

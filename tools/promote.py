@@ -148,7 +148,7 @@ def main() -> int:
                                "source_sha256": sha(data), "claims": claims,
                                "scaffold": res["scaffold"], "object_sha256": res.get("object_sha256")}
         man["modules"] = dict(sorted(man["modules"].items()))
-        modmod.MANIFEST.write_text(json.dumps(man, indent=1) + "\n")
+        modmod.write_manifest(man)
         JOURNAL.parent.mkdir(parents=True, exist_ok=True)
         with JOURNAL.open("a") as fh:
             fh.write(json.dumps({"time": dt.datetime.now().isoformat(timespec="seconds"), "module": key,

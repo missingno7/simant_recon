@@ -18558,6 +18558,21 @@
    "off": 14394,
    "grounding": "o06_35F5_11FF: mov es,[CONST 84E8 = 50F6]; es:[383A] (S06:35F5 InitSimYard/yard sim unit)"
   },
+  "fd_50F6_3842": {
+   "seg": 20726,
+   "off": 14402,
+   "grounding": "S04 Mini_DrawMapI: win_GetObjRect(0x1401, 50F6:3842) then es:[3844]/[3846]/[3848] -> mini map window rect (Win16 miniMapRect)"
+  },
+  "fd_50F6_384A": {
+   "seg": 20726,
+   "off": 14410,
+   "grounding": "S04 DrawMiniMapCursor: es:[384A]/[384C]/[384E]/[3850] computed then f_1CE2_0410(50F6:384A, 1) -> mini map cursor rect (Win16 miniMapCursorRect)"
+  },
+  "fd_50F6_3852": {
+   "seg": 20726,
+   "off": 14418,
+   "grounding": "S04 Mini_DrawMapI: es:[3852] = 0 or miniXSize<<5; added to rect.left for the map (Win16 miniJust)"
+  },
   "fd_50F6_3854": {
    "seg": 20726,
    "off": 14420,
@@ -18953,6 +18968,11 @@
    "off": 10640,
    "grounding": "S13:384C:02D7: mov es,[86E4] (=55B3); mov es:[2990],0 flag defined in S12 _DATA (S12 0B76/1181 near access)"
   },
+  "fd_55B3_2996": {
+   "seg": 21939,
+   "off": 10646,
+   "grounding": "S04 Mini_DrawMapI: mov es,[CONST 8406 = 55B3]; cmp es:[2996],0 guards allocation/free of the two map buffers (far int in DGROUP)"
+  },
   "fd_55B3_299A": {
    "seg": 21939,
    "off": 10650,
@@ -19342,6 +19362,16 @@
    "seg": 21939,
    "off": 35746,
    "grounding": "f_0093_008F: mov [8BA2],ax (DS=DGROUP)"
+  },
+  "g_8BD2": {
+   "seg": 21939,
+   "off": 35794,
+   "grounding": "S04 OpenMiniMapWin: mov [8BD2],ax (1 or 2 by display type); imul [8BD2] in DrawMiniMapCursor x scaling (Win16 miniXSize)"
+  },
+  "g_8BD4": {
+   "seg": 21939,
+   "off": 35796,
+   "grounding": "S04 OpenMiniMapWin: mov [8BD4],ax; imul [8BD4] in DrawMiniMapCursor y scaling (Win16 miniYSize)"
   },
   "g_8CCB": {
    "seg": 21939,

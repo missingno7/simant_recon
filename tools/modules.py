@@ -303,3 +303,11 @@ def verify_data_segment(obj, segname: str, p: dict, placements: dict | None = No
 
 def struct_pack(buf: bytearray, at: int, v: int) -> None:
     buf[at:at + 2] = (v & 0xFFFF).to_bytes(2, "little")
+
+
+def write_manifest(man: dict) -> None:
+    """Atomic replace, so concurrent readers never see a partial manifest."""
+    import os
+    tmp = MANIFEST.with_suffix(f".tmp{os.getpid()}")
+    tmp.write_text(json.dumps(man, indent=1) + "\n")
+    os.replace(tmp, MANIFEST)

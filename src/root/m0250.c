@@ -1089,6 +1089,7 @@ extern char far Dx8[8];
 extern int far SRand32(void);
 void far AddMsgBalloon(int x, int y, int plane, int style, char far *msg);
 
+/*sx,sy,mx,my,l,t*/
 void far DrawSpider(void)
 {
     int py;
@@ -1185,7 +1186,7 @@ void far DrawSpider(void)
         DrawPalps(i, j, fd_50F6_1004);
     }
     if (fd_3D57_07B2) {
-        if (fd_50F6_047E == 0 && TickCount() > fd_3D57_098E) {
+        if (fd_50F6_047E == 0 && fd_3D57_098E < TickCount()) {
             fd_3D57_098E = TickCount() + SRand64() + 180;
             if (SRand2() == 0) {
                 fd_50F6_0D6E = 1;
@@ -1745,27 +1746,31 @@ void far AddMsgBalloon(int x, int y, int plane, int style, char far *msg)
     fd_50F6_1092++;
 }
 
-extern long far fd_50F6_0732;
-extern long far fd_50F6_050C;
 extern int far fd_50F6_1046;
 extern int far fd_50F6_0F3C;
 extern char far * far * far fd_50F6_020A;
 extern int far fd_50F6_1064;
 extern int far fd_50F6_0FF8;
 extern char far * far * far fd_50F6_0218;
-extern long far fd_50F6_059A;
 extern int far fd_50F6_104A;
+extern long far fd_50F6_050C;
+extern long far fd_50F6_0732;
+extern long far fd_50F6_059A;
+extern long far fd_50F6_0620;
 extern int far SRand4(void);
 extern int far fd_50F6_0F7A;
 extern char far * far * far fd_50F6_021C;
-extern long far fd_50F6_0620;
 extern int far fd_50F6_1062;
 extern int far fd_50F6_0FC0;
 extern char far * far * far fd_50F6_0234;
-extern long far fd_50F6_07C4;
 extern int far fd_50F6_107C;
 extern int far fd_50F6_103A;
 extern char far * far * far fd_50F6_023A;
+extern void far f_24AB_02AD(int font);
+extern Handle far f_1629_000C(char far *msg, int flags);
+extern long far fd_50F6_07C4;
+extern Handle far f_171C_1A9E(long size, int flags, char far *name);
+extern void (far * far fd_50F6_37EE)(void far *a, void far *b, void far *c, void far *d);
 
 void far DrawCurBalloons(void)
 {
@@ -1780,7 +1785,7 @@ void far DrawCurBalloons(void)
     }
     if (fd_50F6_0F06 > 0) {
         if (fd_50F6_047E == 0) {
-            if (TickCount() > fd_50F6_050C) {
+            if (fd_50F6_050C < TickCount()) {
                 fd_50F6_050C = TickCount() + SRand32() + 60;
                 if (SRand2() == 0) {
                     fd_50F6_1046 = 1;
@@ -1789,7 +1794,7 @@ void far DrawCurBalloons(void)
                 } else
                     fd_50F6_1046 = 0;
             }
-            if (TickCount() > fd_50F6_0732) {
+            if (fd_50F6_0732 < TickCount()) {
                 fd_50F6_0732 = TickCount() + SRand32() + 60;
                 if (SRand2() == 0) {
                     fd_50F6_1064 = 1;
@@ -1812,7 +1817,7 @@ void far DrawCurBalloons(void)
         fd_50F6_104A = 0;
     }
     if (fd_50F6_0EF6 > 0) {
-        if (fd_50F6_047E == 0 && TickCount() > fd_50F6_059A) {
+        if (fd_50F6_047E == 0 && fd_50F6_059A < TickCount()) {
             fd_50F6_059A = TickCount() + SRand32() + 170;
             if (SRand4() == 0) {
                 fd_50F6_104A = 1;
@@ -1832,7 +1837,7 @@ void far DrawCurBalloons(void)
         fd_50F6_1062 = 0;
     }
     if (fd_50F6_0F10 > 0) {
-        if (fd_50F6_047E == 0 && TickCount() > fd_50F6_0620) {
+        if (fd_50F6_047E == 0 && fd_50F6_0620 < TickCount()) {
             fd_50F6_0620 = TickCount() + SRand32() + 180;
             if (SRand4() == 0) {
                 fd_50F6_1062 = 1;
@@ -1852,7 +1857,7 @@ void far DrawCurBalloons(void)
         fd_50F6_107C = 0;
     }
     if (fd_50F6_0F2E > 0) {
-        if (fd_50F6_047E == 0 && TickCount() > fd_50F6_07C4) {
+        if (fd_50F6_047E == 0 && fd_50F6_07C4 < TickCount()) {
             fd_50F6_07C4 = TickCount() + SRand64() + 120;
             if (SRand2() == 0) {
                 fd_50F6_107C = 1;
@@ -1882,10 +1887,6 @@ void far PreDrawBalloons(void)
     DrawCurBalloons();
 }
 
-extern void far f_24AB_02AD(int font);
-extern Handle far f_1629_000C(char far *msg, int flags);
-extern Handle far f_171C_1A9E(long size, int flags, char far *name);
-extern void (far * far fd_50F6_37EE)(void far *a, void far *b, void far *c, void far *d);
 extern void (far * far fd_50F6_37EA)(char far *src, char far *dst, int x, int y);
 
 void far DrawBalloons(void)

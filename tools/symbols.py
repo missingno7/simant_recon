@@ -18,6 +18,7 @@ from __future__ import annotations
 
 import argparse
 import json
+import os
 import re
 import sys
 from pathlib import Path
@@ -41,7 +42,10 @@ def load() -> dict:
 def save(d: dict) -> None:
     for k in ("code", "data", "runtime"):
         d[k] = dict(sorted(d.get(k, {}).items()))
-    SYMBOLS.write_text(json.dumps(d, indent=1) + "\n")
+    # atomic replace: concurrent readers (modmap, context, search) never see a partial file
+    tmp = SYMBOLS.with_suffix(f".tmp{os.getpid()}")
+    tmp.write_text(json.dumps(d, indent=1) + "\n")
+    os.replace(tmp, SYMBOLS)
 
 
 def bootstrap() -> int:
