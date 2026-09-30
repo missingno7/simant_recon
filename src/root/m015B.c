@@ -32,7 +32,7 @@ extern unsigned char far AlistT[];
 extern void far DeadAntHere(int x, int y, int type);
 extern unsigned char far AlistY[];
 extern unsigned char far AlistX[];
-extern int far f_10F7_2548(int level, int x, int y);
+extern int far IsItYellow(int level, int x, int y);
 
 void far KillSomeAnts(int mode)
 {
@@ -54,7 +54,7 @@ void far KillSomeAnts(int mode)
             }
         } else {
             if (type & 0x80) {
-                if (!f_10F7_2548(1, AlistX[i], AlistY[i])) {
+                if (!IsItYellow(1, AlistX[i], AlistY[i])) {
                     DeadAntHere(AlistX[i], AlistY[i], 1);
                     AlistT[i] = 0;
                     if (++n > 50)

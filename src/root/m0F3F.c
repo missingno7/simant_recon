@@ -21,7 +21,7 @@ extern unsigned char far RlistS[];
 extern int far MePlane;
 extern unsigned char far MapR[64][64];
 extern int far SRand1(int range);
-extern int far f_0BE8_0E0F(int x, int y, int dir);
+extern int far GetEnterDirR(int x, int y, int dir);
 extern int far GetExitDirR(int x, int y, int dir);
 extern int far SRand8(void);
 extern int far f_1383_0976(int caste, int type);
@@ -253,7 +253,7 @@ void far RaidInR(int x, int y, int dirHint)
     }
     if (TryMoveDirR(x, y, (SRand1(3) + dirHint - 2) & 7))
         return;
-    dir = f_0BE8_0E0F(x, y, dirHint & 7);
+    dir = GetEnterDirR(x, y, dirHint & 7);
     if (dir < 0)
         dir = SRand1(8);
     if (TryMoveDirR(x, y, dir))
@@ -277,7 +277,7 @@ void far StayInR(int x, int y, int dirHint)
     RlistT[Tindex] = (RlistT[Tindex] & 0xf8) | dir;
     if (TryMoveDirR(x, y, dir))
         return;
-    dir = f_0BE8_0E0F(x, y, dirHint & 7);
+    dir = GetEnterDirR(x, y, dirHint & 7);
     if (dir < 0)
         dir = SRand1(8);
     if (TryMoveDirR(x, y, dir))
@@ -625,7 +625,7 @@ void far DoNestingR(int x, int y, int attr, int caste)
             RlistM[Tindex] = f_1383_0A30(caste);
             return;
         }
-        if (SRand4() == 0 || (dir = f_0BE8_0E0F(x, y, attr & 7)) < 0)
+        if (SRand4() == 0 || (dir = GetEnterDirR(x, y, attr & 7)) < 0)
             dir = SRand8();
     } else if (caste == 2) {
         if (SRand4() == 0) {
@@ -718,7 +718,7 @@ void far DoFoodInR(int x, int y, int attr)
     int nx;
     int ny;
 
-    dir = f_0BE8_0E0F(x, y, attr & 7);
+    dir = GetEnterDirR(x, y, attr & 7);
     if (dir < 0 || SRand16() == 0) {
         DropFoodR(x, y);
         if (SRand1(100) > HealthR)
@@ -765,7 +765,7 @@ void far DoDigInR(int x, int y, int attr, int caste)
         RlistM[Tindex] = f_1383_0A30(caste);
         return;
     }
-    dir = f_0BE8_0E0F(x, y, attr & 7);
+    dir = GetEnterDirR(x, y, attr & 7);
     if (dir < 0)
         dir = SRand8();
     newattr = (attr & 0xf8) | dir;

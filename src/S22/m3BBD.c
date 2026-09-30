@@ -17,7 +17,7 @@ struct Pt {
 
 extern int far MapPlane;
 extern int far fd_50F6_09FC[2];
-extern int far f_10F7_000E(int plane, int x, int y);
+extern int far IsValidLocation(int plane, int x, int y);
 void far DoTool(int x, int y);
 void far ExpAddAnt(int x, int y);
 void far ReDrawMapEdit(int flags);
@@ -46,7 +46,7 @@ void far processExp(int x, int y, int shift)
         count = 0;
         fd_50F6_09FC[0] = x;
         fd_50F6_09FC[1] = y;
-        if (f_10F7_000E(MapPlane, x, y))
+        if (IsValidLocation(MapPlane, x, y))
             DoTool(x, y);
         ReDrawMapEdit(count);
         while (myButton() == 1) {
@@ -66,10 +66,10 @@ void far processExp(int x, int y, int shift)
                 fd_50F6_09FC[1] = y;
                 x = nx;
                 y = ny;
-                if (f_10F7_000E(MapPlane, x, y))
+                if (IsValidLocation(MapPlane, x, y))
                     DoTool(x, y);
             }
-            if (CurExpTool >= 5 && f_10F7_000E(MapPlane, nx, ny)) {
+            if (CurExpTool >= 5 && IsValidLocation(MapPlane, nx, ny)) {
                 DoTool(nx, ny);
                 fd_50F6_106C ^= 1;
             }
@@ -146,7 +146,7 @@ void far ReDrawMapEdit(int flags)
     f_0250_0ED2();
 }
 
-extern int far f_10F7_2867(int x, int y);
+extern int far IsValidA(int x, int y);
 extern unsigned char far MapA[128][64];
 extern int far SRand1(int range);
 void far ConnectAll(int x, int y);
@@ -166,7 +166,7 @@ void far DropWall(int fromX, int fromY, int tx, int ty)
     x = fromX;
     y = fromY;
 
-    while (f_10F7_2867(x, y)) {
+    while (IsValidA(x, y)) {
         if (*(unsigned char far *)0x417L & 8) {
             if (MapA[x][y] > 0x50 && MapA[x][y] < 0x68)
                 MapA[x][y] = SRand1(16);
@@ -376,7 +376,7 @@ void far ExpAddFood(int x, int y)
         for (i = 0; i < 20; i++) {
             fx = SRand1(9) + x - 4;
             fy = SRand1(9) + y - 4;
-            if (f_10F7_000E(MapPlane, fx, fy))
+            if (IsValidLocation(MapPlane, fx, fy))
                 IncFoodHere(fx, fy);
         }
     }
@@ -441,7 +441,7 @@ void far ExpKillAnts(int x, int y)
             ky = SRand1(9) + y - 4;
             myBeginSound(9, SRand1(1000) + 0x278f, 0x7e);
         }
-        if (f_10F7_000E(MapPlane, kx, ky)) {
+        if (IsValidLocation(MapPlane, kx, ky)) {
             switch (MapPlane) {
             case 1:
                 if (LifeA[kx][ky]) {
@@ -539,13 +539,13 @@ int far IncFoodHere(int x, int y)
 void far ConnectAll(int x, int y)
 {
     ConnectWall(x, y);
-    if (f_10F7_2867(x, y - 1) == 1)
+    if (IsValidA(x, y - 1) == 1)
         ConnectWall(x, y - 1);
-    if (f_10F7_2867(x + 1, y) == 1)
+    if (IsValidA(x + 1, y) == 1)
         ConnectWall(x + 1, y);
-    if (f_10F7_2867(x, y + 1) == 1)
+    if (IsValidA(x, y + 1) == 1)
         ConnectWall(x, y + 1);
-    if (f_10F7_2867(x - 1, y) == 1)
+    if (IsValidA(x - 1, y) == 1)
         ConnectWall(x - 1, y);
 }
 
@@ -589,7 +589,7 @@ int far IsItWall(int value)
 extern int far fd_50F6_0224;
 extern long far fd_50F6_1068;
 extern long far fd_50F6_1082;
-extern void far f_14EE_09F1(int x, int y);
+extern void far SmoothEdgesB(int x, int y);
 extern unsigned char far ExitMapB[64][64];
 
 void far FillDirtB(int x, int y)
@@ -607,10 +607,10 @@ void far FillDirtB(int x, int y)
         --fd_50F6_0224;
     }
 
-    f_14EE_09F1(x, y - 1);
-    f_14EE_09F1(x + 1, y);
-    f_14EE_09F1(x, y + 1);
-    f_14EE_09F1(x - 1, y);
+    SmoothEdgesB(x, y - 1);
+    SmoothEdgesB(x + 1, y);
+    SmoothEdgesB(x, y + 1);
+    SmoothEdgesB(x - 1, y);
 
     ExitMapB[x][y] = 0;
 }
@@ -618,7 +618,7 @@ void far FillDirtB(int x, int y)
 extern int far TilesDugR;
 extern long far fd_50F6_108E;
 extern long far fd_50F6_10A2;
-extern void far f_14EE_0B5A(int x, int y);
+extern void far SmoothEdgesR(int x, int y);
 extern unsigned char far ExitMapR[64][64];
 
 void far FillDirtR(int x, int y)
@@ -636,10 +636,10 @@ void far FillDirtR(int x, int y)
         --TilesDugR;
     }
 
-    f_14EE_0B5A(x, y - 1);
-    f_14EE_0B5A(x + 1, y);
-    f_14EE_0B5A(x, y + 1);
-    f_14EE_0B5A(x - 1, y);
+    SmoothEdgesR(x, y - 1);
+    SmoothEdgesR(x + 1, y);
+    SmoothEdgesR(x, y + 1);
+    SmoothEdgesR(x - 1, y);
 
     ExitMapR[x][y] = 0;
 }

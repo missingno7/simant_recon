@@ -38,8 +38,8 @@ extern void far CloseIndex(int db);
 
 static int s_394E = 0;
 
-int far f_1A28_0224(void);
-void far f_1A28_01B4(char far *dst, char far *src);
+int far GetFreeHandle(void);
+void far CopyRootName(char far *dst, char far *src);
 void far DosPunt(char far *message);
 
 int far OpenDB(char far *name)
@@ -47,9 +47,9 @@ int far OpenDB(char far *name)
     char path[100];
     int db;
 
-    db = f_1A28_0224();
+    db = GetFreeHandle();
     if (db == -1) Punt("Out of handles.");
-    f_1A28_01B4(fd_50F6_3958[db].name, name);
+    CopyRootName(fd_50F6_3958[db].name, name);
     sprintf(path, "%s.dat", fd_50F6_3958[db].name);
     if ((fd_50F6_3958[db].file = open(path, 0x8002)) <= 0) {
         if ((fd_50F6_3958[db].file = open(path, 0x8102, 0x180)) <= 0)
@@ -85,7 +85,7 @@ void far CloseDB(int db)
     fd_50F6_3958[db].name[0] = 0;
 }
 
-void far f_1A28_01B4(char far *dst, char far *src)
+void far CopyRootName(char far *dst, char far *src)
 {
     char far *dot;
 
@@ -97,7 +97,7 @@ void far f_1A28_01B4(char far *dst, char far *src)
         *dot = 0;
 }
 
-int far f_1A28_0224(void)
+int far GetFreeHandle(void)
 {
     int i;
 

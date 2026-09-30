@@ -1,0 +1,113 @@
+{
+ "id": "SPLIT-1",
+ "question": "Does copying a far pointer parameter into a local (p = q) change how /Og loads it? Positive control f_1FAA_0006 (root:1FAA, complete TU): exact only with `p = q;` and p[...] accesses. The copy is propagated away (no store of its own); what remains is a split load `mov di,[bp+6]; mov es,[bp+8]` of the parameter, held in DI:ES and spilled to a temp. Indexing q directly gives `les di,[bp+6]` and a 3-byte-shorter function (295 vs 298). Same shape: S23 win_GetStyleTextHeight/win_PrintStyleTextInRect `mov bx,[bp+6]; mov es,[bp+8]`.",
+ "results": [
+  {
+   "variant": "local_copy",
+   "profile_index": 0,
+   "profile": "msc600ax",
+   "flags": [
+    "/AL",
+    "/Os",
+    "/Oe",
+    "/Og",
+    "/Gs",
+    "/Zi"
+   ],
+   "source_sha256": "b5eeba3519fc0954ce223890fd5af3895c385a5f3e5ddfd9924e38198ef013f3",
+   "bytes": "558bec83ec2257568b7e068e4608268b45028946fe268b4d0a894ee8268b158956f4268b5d04895ef28bf08bc12bc68bca9952508bf1262b4d0c8946e48956e62bc05150895ee2897ede8c46e09a000000008946ee8956f0ff76e6ff76e48b46e2c45ede262b47082bc950519a000000008946ea8956ecc746fa00008976fc8b46e2c746f600008946f8f60600000174068b460c89460aff760aff760cff760aff1e000083c4068b76feeb73837e0aff75148d440150ff76f256ff76f4ff1e000083c408eb308b460a39460c7512508d440150ff76f256ff76f4ff1e0000eb13b82000508d440150ff76f256ff76f4ff1e000083c40a8b46ee8b56f02946fa1956fc8b46fc8946f48b46ea8b56ec2946f61956f88b46f88946f28d44018bf03976e87f885e5f8be55dcb",
+   "disasm": "push bp; mov bp, sp; sub sp, 0x22; push di; push si; mov di, word ptr [bp + 6]; mov es, word ptr [bp + 8]; mov ax, word ptr es:[di + 2]; mov word ptr [bp - 2], ax; mov cx, word ptr es:[di + 0xa]; mov word ptr [bp - 0x18], cx; mov dx, word ptr es:[di]; mov word ptr [bp - 0xc], dx; mov bx, word ptr es:[di + 4]; mov word ptr [bp - 0xe], bx; mov si, ax; mov ax, cx; sub ax, si; mov cx, dx; cdq; push dx; push ax; mov si, cx; sub cx, word ptr es:[di + 0xc]; mov word ptr [bp - 0x1c], ax; mov word ptr [bp - 0x1a], dx; sub ax, ax; push cx; push ax; mov word ptr [bp - 0x1e], bx; mov word ptr [bp - 0x22], di; mov word ptr [bp - 0x20], es; lcall 0, 0; mov word ptr [bp - 0x12], ax; mov word ptr [bp - 0x10], dx; push word ptr [bp - 0x1a]; push word ptr [bp - 0x1c]; mov ax, word ptr [bp - 0x1e]; les bx, ptr [bp - 0x22]; sub ax, word ptr es:[bx + 8]; sub cx, cx; push ax; push cx; lcall 0, 0; mov word ptr [bp - 0x16], ax; mov word ptr [bp - 0x14], dx; mov word ptr [bp - 6], 0; mov word ptr [bp - 4], si; mov ax, word ptr [bp - 0x1e]; mov word ptr [bp - 0xa], 0; mov word ptr [bp - 8], ax; test byte ptr [0], 1; je 0x97; mov ax, word ptr [bp + 0xc]; mov word ptr [bp + 0xa], ax; push word ptr [bp + 0xa]; push word ptr [bp + 0xc]; push word ptr [bp + 0xa]; lcall [0]; add sp, 6; mov si, word ptr [bp - 2]; jmp 0x11f; cmp word ptr [bp + 0xa], -1; jne 0xc6; lea ax, [si + 1]; push ax; push word ptr [bp - 0xe]; push si; push word ptr [bp - 0xc]; lcall [0]; add sp, 8; jmp 0xf6; mov ax, word ptr [bp + 0xa]; cmp word ptr [bp + 0xc], ax; jne 0xe0; push ax; lea ax, [si + 1]; push ax; push word ptr [bp - 0xe]; push si; push word ptr [bp - 0xc]; lcall [0]; jmp 0xf3; mov ax, 0x20; push ax; lea ax, [si + 1]; push ax; push word ptr [bp - 0xe]; push si; push word ptr [bp - 0xc]; lcall [0]; add sp, 0xa; mov ax, word ptr [bp - 0x12]; mov dx, word ptr [bp - 0x10]; sub word ptr [bp - 6], ax; sbb word ptr [bp - 4], dx; mov ax, word ptr [bp - 4]; mov word ptr [bp - 0xc], ax; mov ax, word ptr [bp - 0x16]; mov dx, word ptr [bp - 0x14]; sub word ptr [bp - 0xa], ax; sbb word ptr [bp - 8], dx; mov ax, word ptr [bp - 8]; mov word ptr [bp - 0xe], ax; lea ax, [si + 1]; mov si, ax; cmp word ptr [bp - 0x18], si; jg 0xac; pop si; pop di; mov sp, bp; pop bp; retf",
+   "segments": {
+    "UNIT_TEXT": {
+     "class": "CODE",
+     "align": "word",
+     "combine": "public",
+     "length": 298,
+     "big": false
+    },
+    "_DATA": {
+     "class": "DATA",
+     "align": "word",
+     "combine": "public",
+     "length": 0,
+     "big": false
+    },
+    "CONST": {
+     "class": "CONST",
+     "align": "word",
+     "combine": "public",
+     "length": 0,
+     "big": false
+    },
+    "_BSS": {
+     "class": "BSS",
+     "align": "word",
+     "combine": "public",
+     "length": 0,
+     "big": false
+    }
+   },
+   "communals": {}
+  },
+  {
+   "variant": "direct",
+   "profile_index": 0,
+   "profile": "msc600ax",
+   "flags": [
+    "/AL",
+    "/Os",
+    "/Oe",
+    "/Og",
+    "/Gs",
+    "/Zi"
+   ],
+   "source_sha256": "0d2271e59bf7b4dd9ef54cbff7f386304b303562dee3e448452bdfadb606a7ef",
+   "bytes": "558bec83ec225756c47e06268b45028946fe268b4d0a894ee8268b158956f4268b5d04895ef28bf08bc12bc68bca9952508bf1262b4d0c8946e48956e62bc05150895ee2897ede8c46e09a000000008946ee8956f0ff76e6ff76e48b46e2c45ede262b47082bc950519a000000008946ea8956ecc746fa00008976fc8b46e2c746f600008946f8f60600000174068b460c89460aff760aff760cff760aff1e000083c4068b76feeb73837e0aff75148d440150ff76f256ff76f4ff1e000083c408eb308b460a39460c7512508d440150ff76f256ff76f4ff1e0000eb13b82000508d440150ff76f256ff76f4ff1e000083c40a8b46ee8b56f02946fa1956fc8b46fc8946f48b46ea8b56ec2946f61956f88b46f88946f28d44018bf03976e87f885e5f8be55dcb",
+   "disasm": "push bp; mov bp, sp; sub sp, 0x22; push di; push si; les di, ptr [bp + 6]; mov ax, word ptr es:[di + 2]; mov word ptr [bp - 2], ax; mov cx, word ptr es:[di + 0xa]; mov word ptr [bp - 0x18], cx; mov dx, word ptr es:[di]; mov word ptr [bp - 0xc], dx; mov bx, word ptr es:[di + 4]; mov word ptr [bp - 0xe], bx; mov si, ax; mov ax, cx; sub ax, si; mov cx, dx; cdq; push dx; push ax; mov si, cx; sub cx, word ptr es:[di + 0xc]; mov word ptr [bp - 0x1c], ax; mov word ptr [bp - 0x1a], dx; sub ax, ax; push cx; push ax; mov word ptr [bp - 0x1e], bx; mov word ptr [bp - 0x22], di; mov word ptr [bp - 0x20], es; lcall 0, 0; mov word ptr [bp - 0x12], ax; mov word ptr [bp - 0x10], dx; push word ptr [bp - 0x1a]; push word ptr [bp - 0x1c]; mov ax, word ptr [bp - 0x1e]; les bx, ptr [bp - 0x22]; sub ax, word ptr es:[bx + 8]; sub cx, cx; push ax; push cx; lcall 0, 0; mov word ptr [bp - 0x16], ax; mov word ptr [bp - 0x14], dx; mov word ptr [bp - 6], 0; mov word ptr [bp - 4], si; mov ax, word ptr [bp - 0x1e]; mov word ptr [bp - 0xa], 0; mov word ptr [bp - 8], ax; test byte ptr [0], 1; je 0x94; mov ax, word ptr [bp + 0xc]; mov word ptr [bp + 0xa], ax; push word ptr [bp + 0xa]; push word ptr [bp + 0xc]; push word ptr [bp + 0xa]; lcall [0]; add sp, 6; mov si, word ptr [bp - 2]; jmp 0x11c; cmp word ptr [bp + 0xa], -1; jne 0xc3; lea ax, [si + 1]; push ax; push word ptr [bp - 0xe]; push si; push word ptr [bp - 0xc]; lcall [0]; add sp, 8; jmp 0xf3; mov ax, word ptr [bp + 0xa]; cmp word ptr [bp + 0xc], ax; jne 0xdd; push ax; lea ax, [si + 1]; push ax; push word ptr [bp - 0xe]; push si; push word ptr [bp - 0xc]; lcall [0]; jmp 0xf0; mov ax, 0x20; push ax; lea ax, [si + 1]; push ax; push word ptr [bp - 0xe]; push si; push word ptr [bp - 0xc]; lcall [0]; add sp, 0xa; mov ax, word ptr [bp - 0x12]; mov dx, word ptr [bp - 0x10]; sub word ptr [bp - 6], ax; sbb word ptr [bp - 4], dx; mov ax, word ptr [bp - 4]; mov word ptr [bp - 0xc], ax; mov ax, word ptr [bp - 0x16]; mov dx, word ptr [bp - 0x14]; sub word ptr [bp - 0xa], ax; sbb word ptr [bp - 8], dx; mov ax, word ptr [bp - 8]; mov word ptr [bp - 0xe], ax; lea ax, [si + 1]; mov si, ax; cmp word ptr [bp - 0x18], si; jg 0xa9; pop si; pop di; mov sp, bp; pop bp; retf",
+   "segments": {
+    "UNIT_TEXT": {
+     "class": "CODE",
+     "align": "word",
+     "combine": "public",
+     "length": 295,
+     "big": false
+    },
+    "_DATA": {
+     "class": "DATA",
+     "align": "word",
+     "combine": "public",
+     "length": 0,
+     "big": false
+    },
+    "CONST": {
+     "class": "CONST",
+     "align": "word",
+     "combine": "public",
+     "length": 0,
+     "big": false
+    },
+    "_BSS": {
+     "class": "BSS",
+     "align": "word",
+     "combine": "public",
+     "length": 0,
+     "big": false
+    }
+   },
+   "communals": {}
+  }
+ ],
+ "checks": [
+  {
+   "check": "local_copy@0",
+   "needle": "push di; push si; mov di, word ptr [bp + 6]; mov es, word ptr [bp + 8]",
+   "ok": true
+  },
+  {
+   "check": "direct@0",
+   "needle": "push di; push si; les di, ptr [bp + 6]",
+   "ok": true
+  }
+ ],
+ "all_checks_pass": true
+}

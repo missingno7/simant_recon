@@ -2501,7 +2501,7 @@
    },
    "lang": "c",
    "source": "src/S06/m35F5.c",
-   "source_sha256": "e49cfa383e366eebea6ebc925cd04c984fbccc1e565095082cfe7affe5e4f75a",
+   "source_sha256": "b8825d0b284ac63e0e8dbf8c96f5cc9c180be47453a62bc1401c9e13c72c7702",
    "claims": [
     {
      "name": "o06_35F5_0000",
@@ -2812,7 +2812,7 @@
    },
    "lang": "c",
    "source": "src/S08/m35F5.c",
-   "source_sha256": "b7ff648bf5f2a13cefa73f2a22e714457cc20f20717823243b12e8078744bee9",
+   "source_sha256": "9c1f4efa90b8b6cf23929dfababdd4a7305ea89b37573cfa714c11d8bf0f51b3",
    "claims": [
     {
      "name": "InitSimVars",
@@ -2980,7 +2980,7 @@
      "reloc_order": "GROUPED"
     },
     {
-     "name": "o08_35F5_11F0",
+     "name": "GrabMap",
      "unit": "S08",
      "seg": 13813,
      "off": 4592,
@@ -3579,7 +3579,7 @@
    },
    "lang": "c",
    "source": "src/S13/m384C.c",
-   "source_sha256": "aae62b521e013baea725ba1768559839ed6adc27883b29f0c05adfc788c88151",
+   "source_sha256": "7af7d0f1e0de99a54efbaa7a8a0089676654ed0bceca0aa0ee6f3995bb3e6804",
    "claims": [
     {
      "name": "ProcYardEvent",
@@ -3811,14 +3811,24 @@
      "kind": "C",
      "provenance": "EXACT_NATURAL",
      "reloc_order": "EXACT"
+    },
+    {
+     "name": "DrawMower",
+     "unit": "S13",
+     "seg": 14412,
+     "off": 2485,
+     "size": 338,
+     "target_sha256": "4c9f1c2581d99dc3f4eac8efa048b735dcfba7fca5897654e0aefb35997f85e7",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL",
+     "reloc_order": "GROUPED"
     }
    ],
    "scaffold": [
     "DrawColonyBars",
-    "DrawMower",
     "InvertPatch"
    ],
-   "object_sha256": "5c1c19e55e8cb2df8e3e40aa229b78a153be9f31452b85cda72d0d6858407982"
+   "object_sha256": "df0671d754370002cac31de39c6f911aa74b18ef510d6a28bcae10d516b3bf78"
   },
   "S14:384C": {
    "unit": "S14",
@@ -3845,7 +3855,7 @@
    },
    "lang": "c",
    "source": "src/S14/m384C.c",
-   "source_sha256": "ac69fc9bb65256a6f99c6ce10094e9004aab7d9ea74b92446756a7f41392c57a",
+   "source_sha256": "78d36165e991c594cb0583426f9d0564bfdd4672e3aeae74c54361834902e15a",
    "claims": [
     {
      "name": "DoScenario",
@@ -3923,15 +3933,45 @@
      "kind": "C",
      "provenance": "EXACT_NATURAL",
      "reloc_order": "GROUPED"
+    },
+    {
+     "name": "DrawCastePopUp",
+     "unit": "S14",
+     "seg": 14412,
+     "off": 2029,
+     "size": 736,
+     "target_sha256": "f7919472a55d8c7b2efedf08a2547822289a046e6c62b58297d01c51add859f5",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL",
+     "reloc_order": "GROUPED"
+    },
+    {
+     "name": "PictureDialog",
+     "unit": "S14",
+     "seg": 14412,
+     "off": 3078,
+     "size": 479,
+     "target_sha256": "7bd28b7bb84557d0dd9595f2b6c2b0682958bd5042c97d334b709db376c37341",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL",
+     "reloc_order": "GROUPED"
+    },
+    {
+     "name": "SpiderDialog",
+     "unit": "S14",
+     "seg": 14412,
+     "off": 4002,
+     "size": 323,
+     "target_sha256": "dd0700abf9754b4ca8f541bc513ec5343c939b382ce16a421e47f059ef356519",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL",
+     "reloc_order": "GROUPED"
     }
    ],
    "scaffold": [
-    "CalcScore",
-    "DrawCastePopUp",
-    "PictureDialog",
-    "SpiderDialog"
+    "CalcScore"
    ],
-   "object_sha256": "1a0567f148c771d7d4670811488d18c9af471fe2bac36dc9161b10c5df463337"
+   "object_sha256": "f9e74615fb81c332dbe81a0241b905dca136b19cc2f0a8706147f1cf75edf7be"
   },
   "S15:384C": {
    "unit": "S15",
@@ -5003,7 +5043,7 @@
     "end": 244698
    },
    "source": "src/S22/m39C7.c",
-   "source_sha256": "b107910355a269351b6c3287e5dc1bc7894b513c38269263f7b2fd6d4ca95d21",
+   "source_sha256": "e9add4ebd445bd943f24a65764be2a79581f2fc26c349741fdfe8efae3b7030d",
    "claims": [
     {
      "name": "processEdit",
@@ -5203,7 +5243,7 @@
     "end": 249366
    },
    "source": "src/S22/m3BBD.c",
-   "source_sha256": "11e857622780d0e82cc001d148cc3fcb526f08b8c7d842de4044a26160fbf25a",
+   "source_sha256": "22ed7dc5dbf4687dc3e971e6845bf28ce1934f771c81ae551dd30bc782753da2",
    "claims": [
     {
      "name": "processExp",
@@ -5697,7 +5737,7 @@
    },
    "lang": "c",
    "source": "src/S25/m39C7.c",
-   "source_sha256": "cecdd5751fb315c17c5adb790c1286b73868a5153dc0efb48d57e87edd637c90",
+   "source_sha256": "bcf831c7028511e5b0dac698e3bec2c04594d3ebdd7b41a526ede5eedc2485f6",
    "claims": [
     {
      "name": "o25_39C7_0000",
@@ -6009,7 +6049,7 @@
    },
    "lang": "c",
    "source": "src/S25/m3BA4.c",
-   "source_sha256": "a4e92deef269026602037626752da76043d4dc95ef8122d25494031e62dfbfd9",
+   "source_sha256": "abf41cf1b34ca2350454ad95ef869f2e49a344a3566506435f2290582cbb252a",
    "claims": [
     {
      "name": "DoAntSimY",
@@ -6604,7 +6644,7 @@
     "end": 2977
    },
    "source": "src/root/m0093.c",
-   "source_sha256": "8a1ec7275e2e47dcfa375fdcf4ff55fa04573cdd84a5a5bb6096d88608008db8",
+   "source_sha256": "dd5a593457dd72297e41dabef1e00e0be2fbca53d7586adc2c47812e960297af",
    "claims": [
     {
      "name": "SetSRandSeed",
@@ -6618,7 +6658,7 @@
      "reloc_order": "EXACT"
     },
     {
-     "name": "f_0093_0002",
+     "name": "SGIRand",
      "unit": "root",
      "seg": 147,
      "off": 2,
@@ -6640,7 +6680,7 @@
      "reloc_order": "EXACT"
     },
     {
-     "name": "f_0093_0054",
+     "name": "SGSRand",
      "unit": "root",
      "seg": 147,
      "off": 84,
@@ -6673,7 +6713,7 @@
      "reloc_order": "EXACT"
     },
     {
-     "name": "f_0093_00B8",
+     "name": "GetRRandSeed",
      "unit": "root",
      "seg": 147,
      "off": 184,
@@ -7599,7 +7639,7 @@
     "end": 9279
    },
    "source": "src/root/m015B.c",
-   "source_sha256": "f5dcf534c436310b89b2bfb843d55e0cc1f1ac17c43fba19d70972610ae76a2e",
+   "source_sha256": "67f5c32deda5a49ab56243d50fba33647db7897c850706378fe2a8488277fa8f",
    "claims": [
     {
      "name": "SetEditMode",
@@ -8827,7 +8867,7 @@
     "end": 44444
    },
    "source": "src/root/m0894.c",
-   "source_sha256": "c9984f675b22c2dee9528b4c6a0aecee01032eeb39be057b13fdcb9c04ebb383",
+   "source_sha256": "57b40ad0a9ee74c501fbcb0d521b86b8158f206f44f4867e960bcb800b5e7484",
    "claims": [
     {
      "name": "DoAntSim",
@@ -9203,7 +9243,7 @@
     "end": 48769
    },
    "source": "src/root/m0AD9.c",
-   "source_sha256": "82933f2cca297b1c6ba9925866f01c3cd2dba3138a318437358d332490ede798",
+   "source_sha256": "726585ecdb17d969b478bf5a55b726736614dbaa2d5f6477b8f6907c86f73d0b",
    "claims": [
     {
      "name": "InitSow",
@@ -9441,7 +9481,7 @@
     "end": 52655
    },
    "source": "src/root/m0BE8.c",
-   "source_sha256": "3bdec8df550dd75bf21ee0c9ab74bda2e98b31cab150f67f19ce2e6ef804cea4",
+   "source_sha256": "ca7068324a08080710101eb569040b18426176b5a700fb7d2f38bca88a65814f",
    "claims": [
     {
      "name": "IsItDirt",
@@ -9521,7 +9561,7 @@
      "reloc_order": "EXACT"
     },
     {
-     "name": "f_0BE8_03AC",
+     "name": "DoWater",
      "unit": "root",
      "seg": 3048,
      "off": 940,
@@ -9565,7 +9605,7 @@
      "reloc_order": "GROUPED"
     },
     {
-     "name": "f_0BE8_0798",
+     "name": "PickupFoodA",
      "unit": "root",
      "seg": 3048,
      "off": 1944,
@@ -9576,7 +9616,7 @@
      "reloc_order": "GROUPED"
     },
     {
-     "name": "f_0BE8_0812",
+     "name": "DropFoodA",
      "unit": "root",
      "seg": 3048,
      "off": 2066,
@@ -9587,7 +9627,7 @@
      "reloc_order": "EXACT"
     },
     {
-     "name": "f_0BE8_08BD",
+     "name": "FoodFall",
      "unit": "root",
      "seg": 3048,
      "off": 2237,
@@ -9653,7 +9693,7 @@
      "reloc_order": "GROUPED"
     },
     {
-     "name": "f_0BE8_094B",
+     "name": "PickupFoodB",
      "unit": "root",
      "seg": 3048,
      "off": 2379,
@@ -9664,7 +9704,7 @@
      "reloc_order": "GROUPED"
     },
     {
-     "name": "f_0BE8_09D3",
+     "name": "PickupFoodR",
      "unit": "root",
      "seg": 3048,
      "off": 2515,
@@ -9675,7 +9715,7 @@
      "reloc_order": "GROUPED"
     },
     {
-     "name": "f_0BE8_0D67",
+     "name": "GetEnterDirB",
      "unit": "root",
      "seg": 3048,
      "off": 3431,
@@ -9686,7 +9726,7 @@
      "reloc_order": "GROUPED"
     },
     {
-     "name": "f_0BE8_0E0F",
+     "name": "GetEnterDirR",
      "unit": "root",
      "seg": 3048,
      "off": 3599,
@@ -9697,7 +9737,7 @@
      "reloc_order": "GROUPED"
     },
     {
-     "name": "f_0BE8_0002",
+     "name": "CountAnts",
      "unit": "root",
      "seg": 3048,
      "off": 2,
@@ -9829,7 +9869,7 @@
     "end": 58090
    },
    "source": "src/root/m0DEF.c",
-   "source_sha256": "13ff4f6f136fa6cbe3fcc548ecb44b6bb9773c2a30516c1868674b646c9aad84",
+   "source_sha256": "4325b570055de5daf8b96fe529d53f316b1a8a046daf845672672bd376d08142",
    "claims": [
     {
      "name": "f_0DEF_0000",
@@ -9964,7 +10004,7 @@
     "end": 62455
    },
    "source": "src/root/m0EC1.c",
-   "source_sha256": "5808c6c6fbff270935b4e957eb1dcdd72e9a76080b0364d78719de8c6045be72",
+   "source_sha256": "516121f3568fffaa6a6f17a0a87da5696dbb1e4db02cbcfa93ad5ad4497454cc",
    "claims": [
     {
      "name": "CompactListA",
@@ -10182,7 +10222,7 @@
    },
    "lang": "c",
    "source": "src/root/m0F3F.c",
-   "source_sha256": "05632ecf2215917654719f17df9c2328724ac8daab42677160dc91bbc0cda932",
+   "source_sha256": "948fb03811f951265e6b0da55c123a16a49a95ae0ebbdba5accfabf51383da1c",
    "claims": [
     {
      "name": "DoAntSimR",
@@ -10487,10 +10527,10 @@
    },
    "lang": "c",
    "source": "src/root/m10F7.c",
-   "source_sha256": "e85f6f831e4a2377283cce50f124d37ca70705e53fb87fd36eaecaeea758c665",
+   "source_sha256": "0aa79bb78d9dc5cbfe143ad9710643bec14b6db1e99bee844ab7f11e6f5ed9eb",
    "claims": [
     {
-     "name": "f_10F7_000E",
+     "name": "IsValidLocation",
      "unit": "root",
      "seg": 4343,
      "off": 14,
@@ -10556,7 +10596,7 @@
      "reloc_order": "EXACT"
     },
     {
-     "name": "f_10F7_0731",
+     "name": "IsThisPebble",
      "unit": "root",
      "seg": 4343,
      "off": 1841,
@@ -10578,7 +10618,7 @@
      "reloc_order": "EXACT"
     },
     {
-     "name": "f_10F7_0787",
+     "name": "IsItFoodAt",
      "unit": "root",
      "seg": 4343,
      "off": 1927,
@@ -10589,7 +10629,7 @@
      "reloc_order": "EXACT"
     },
     {
-     "name": "f_10F7_0954",
+     "name": "ClearLife",
      "unit": "root",
      "seg": 4343,
      "off": 2388,
@@ -10633,7 +10673,7 @@
      "reloc_order": "EXACT"
     },
     {
-     "name": "f_10F7_1D31",
+     "name": "FindLifeAt",
      "unit": "root",
      "seg": 4343,
      "off": 7473,
@@ -10666,7 +10706,7 @@
      "reloc_order": "EXACT"
     },
     {
-     "name": "f_10F7_2821",
+     "name": "IsItAHole",
      "unit": "root",
      "seg": 4343,
      "off": 10273,
@@ -10677,7 +10717,7 @@
      "reloc_order": "EXACT"
     },
     {
-     "name": "f_10F7_2867",
+     "name": "IsValidA",
      "unit": "root",
      "seg": 4343,
      "off": 10343,
@@ -10688,7 +10728,7 @@
      "reloc_order": "EXACT"
     },
     {
-     "name": "f_10F7_2894",
+     "name": "IsValidB",
      "unit": "root",
      "seg": 4343,
      "off": 10388,
@@ -10820,7 +10860,7 @@
      "reloc_order": "EXACT"
     },
     {
-     "name": "f_10F7_09FC",
+     "name": "SetQueenTail",
      "unit": "root",
      "seg": 4343,
      "off": 2556,
@@ -10853,7 +10893,7 @@
      "reloc_order": "EXACT"
     },
     {
-     "name": "f_10F7_0B51",
+     "name": "TargetAnt",
      "unit": "root",
      "seg": 4343,
      "off": 2897,
@@ -10875,7 +10915,7 @@
      "reloc_order": "GROUPED"
     },
     {
-     "name": "f_10F7_0BB1",
+     "name": "StartLifeTransfer",
      "unit": "root",
      "seg": 4343,
      "off": 2993,
@@ -10919,7 +10959,7 @@
      "reloc_order": "GROUPED"
     },
     {
-     "name": "f_10F7_15BC",
+     "name": "DropPebble",
      "unit": "root",
      "seg": 4343,
      "off": 5564,
@@ -11029,7 +11069,7 @@
      "reloc_order": "EXACT"
     },
     {
-     "name": "f_10F7_22CE",
+     "name": "TileCanBeMovedOn",
      "unit": "root",
      "seg": 4343,
      "off": 8910,
@@ -11051,7 +11091,7 @@
      "reloc_order": "EXACT"
     },
     {
-     "name": "f_10F7_2489",
+     "name": "IsNotObstacle",
      "unit": "root",
      "seg": 4343,
      "off": 9353,
@@ -11062,7 +11102,7 @@
      "reloc_order": "EXACT"
     },
     {
-     "name": "f_10F7_2548",
+     "name": "IsItYellow",
      "unit": "root",
      "seg": 4343,
      "off": 9544,
@@ -11084,7 +11124,7 @@
      "reloc_order": "EXACT"
     },
     {
-     "name": "f_10F7_2640",
+     "name": "IsSamePlane",
      "unit": "root",
      "seg": 4343,
      "off": 9792,
@@ -11095,7 +11135,7 @@
      "reloc_order": "EXACT"
     },
     {
-     "name": "f_10F7_26D4",
+     "name": "TryMyDropOrLift",
      "unit": "root",
      "seg": 4343,
      "off": 9940,
@@ -11598,7 +11638,7 @@
    },
    "lang": "c",
    "source": "src/root/m14EE.c",
-   "source_sha256": "daa9a073b38b9f516e61aae55a775082a5a28c354961dbbd0ec80ab322cb5539",
+   "source_sha256": "7c17444705eae77c967795bcff6859e41a07e70adef372a112f619a2685081a9",
    "claims": [
     {
      "name": "CanBeHouseHole",
@@ -11656,7 +11696,7 @@
      "reloc_order": "EXACT"
     },
     {
-     "name": "f_14EE_0151",
+     "name": "DigMyTile",
      "unit": "root",
      "seg": 5358,
      "off": 337,
@@ -11689,7 +11729,7 @@
      "reloc_order": "GROUPED"
     },
     {
-     "name": "f_14EE_04B5",
+     "name": "HoleBorder",
      "unit": "root",
      "seg": 5358,
      "off": 1205,
@@ -11744,7 +11784,7 @@
      "reloc_order": "GROUPED"
     },
     {
-     "name": "f_14EE_09F1",
+     "name": "SmoothEdgesB",
      "unit": "root",
      "seg": 5358,
      "off": 2545,
@@ -11755,7 +11795,7 @@
      "reloc_order": "GROUPED"
     },
     {
-     "name": "f_14EE_0B5A",
+     "name": "SmoothEdgesR",
      "unit": "root",
      "seg": 5358,
      "off": 2906,
@@ -13597,7 +13637,7 @@
     "end": 107829
    },
    "source": "src/root/m1A28.c",
-   "source_sha256": "8e15d8d5402e660cc086071d4004edbce45ee4d90a6c21b49bd32ab5e596a3d6",
+   "source_sha256": "5db49039ef64717680153a4b9445554b58ab2abf8a3c3fd9d67e6573af58a740",
    "claims": [
     {
      "name": "OpenDB",
@@ -13633,7 +13673,7 @@
      "reloc_order": "GROUPED"
     },
     {
-     "name": "f_1A28_01B4",
+     "name": "CopyRootName",
      "unit": "root",
      "seg": 6696,
      "off": 436,
@@ -13644,7 +13684,7 @@
      "reloc_order": "GROUPED"
     },
     {
-     "name": "f_1A28_0224",
+     "name": "GetFreeHandle",
      "unit": "root",
      "seg": 6696,
      "off": 548,

@@ -445,6 +445,18 @@
     }
    ]
   },
+  "ClearLife": {
+   "unit": "root",
+   "seg": 4343,
+   "off": 2388,
+   "grounding": "inventory:far_call,push_cs_call",
+   "history": [
+    {
+     "was": "f_10F7_0954",
+     "why": "names5 bonus pair CONFIRMED: (d) unit alignment: DOS root:10F7 (57 fns 000E..2894) = Win16 SIMONE_MODULE #112 _IsValidLocation..#168 _IsValidB (57 entries, 1:1, no insertions/deletions); independently anchored members IsYellowAnt!(003A/#113), GetMap!(0850/#129), SetMyLife!(0A44/#134), SetMyHealth!(1DD3/#151) sit at identical positions (their xver HIGH comes from external callers: DoDigInB/processEdit, 4 external callers, EditToolsMenu, CheatKeys); this entry @0954 <-> _ClearLife #131; (e) body identical to Win16 ClearLife-ea7fd72d50.c: bounds, GetLife==code -> SetLife 0, ZapEuMapAt; (c-weak) inlined twice in Win16 _ClearMyLife exactly where DOS ClearMyLife calls f_0954 twice"
+    }
+   ]
+  },
   "ClearLifeB": {
    "unit": "S22",
    "seg": 15293,
@@ -697,6 +709,30 @@
     }
    ]
   },
+  "CopyRootName": {
+   "unit": "root",
+   "seg": 6696,
+   "off": 436,
+   "grounding": "inventory:push_cs_call",
+   "history": [
+    {
+     "was": "f_1A28_01B4",
+     "why": "names5 bonus pair CONFIRMED: (e) strncpy(dst,src,79); dst[79]=0; skip leading '.'; strrchr '.' vs strrchr '\\\\' and truncate the extension = Win16 _CopyRootName card (push 0x4f, [si+0x4f]=0, cmp '.', strrchr 0x2e/0x5c); (c) sole caller OpenDB!, right after the handle allocation (Win16 OpenDB call_seq has strncpy/strrchr/strrchr at the same point); (d) DOS 1A28 OpenDB!(0006),0148,CloseDB(0149),01B4,0224,DosPunt(0277) = Win16 SIMTWO #119..#124 OpenDB,FlushDB,CloseDB,CopyRootName,GetFreeHandle,DosPunt (6:6, every member body-matched)"
+    }
+   ]
+  },
+  "CountAnts": {
+   "unit": "root",
+   "seg": 3048,
+   "off": 2,
+   "grounding": "inventory:far_call,push_cs_call",
+   "history": [
+    {
+     "was": "f_0BE8_0002",
+     "why": "names5 bonus pair CONFIRMED: (d) SIMONE_MODULE #5..#28 (CountAnts..TryAntTheme) aligns 1:1 with DOS module 0BE8 (24/24: CountAnts,FullCount,CountUpdate,DoWater,PlaceDrop,InitWater,AddWater,DropWater,PickupFoodA,DropFoodA,FoodFall,PickupFoodB,PickupFoodR,PlaceEggB,PlaceEggR,GetDir,GetDis,InNestBounds,IsItDirt,GetExitDirB,GetExitDirR,GetEnterDirB,GetEnterDirR,TryAntTheme), anchored by GetDir HIGH(#20), IsItDirt HIGH(#23), f_0BE8_0D67=GetEnterDirB xver HIGH(#26), and the head member CountAnts sharing exact immediates 0x271a..0x271d/0x2b0c/0x2b0d (pos 0); (a) exact immediates: myBeginSong(0x2b0c/0x2b0d,0x7e) and dialog ids 0x271a,0x271b,0x271c,0x271d in the same two blocks, SRand1(6) at the end, in both builds; (c) callers {FullCount, RandWorld} identical in both builds"
+    }
+   ]
+  },
   "CountUpdate": {
    "unit": "root",
    "seg": 3048,
@@ -910,6 +946,18 @@
     {
      "was": "f_14EE_0002",
      "why": "dig worker: DOS body byte-exact and structurally identical to the Win16 function of this name (same statements, same data), plus module neighbourhood"
+    }
+   ]
+  },
+  "DigMyTile": {
+   "unit": "root",
+   "seg": 5358,
+   "off": 337,
+   "grounding": "inventory:far_call",
+   "history": [
+    {
+     "was": "f_14EE_0151",
+     "why": "names5 bonus pair CONFIRMED: (e) DOS IsItDigable(colony,x,y); colony==2: y<=1 -> MapB[x][0]=0x18, MakeNewHoleB(x), y!=1 return; DigTileB(x,y); else the same with MapR/MakeNewHoleR/DigTileR -- Win16 _DigMyTile card 1914: _IsItDigable, cmp [bp+6],2, cmp si,1, MapB(0x48e8)=0x18, _MakeNewHoleB, _DigTileB, MapR(0x58e8)=0x18, _MakeNewHoleR, inlined DigTileR; (d) pos3 = #50 _DigMyTile between CreateNewHole (#49) and anchored MakeNewHoleB! (#51); (c) callees IsItDigable, MakeNewHoleB!, DigTileB!, MakeNewHoleR!, DigTileR in Win16 order; caller SetLife in both"
     }
    ]
   },
@@ -1585,6 +1633,18 @@
     }
    ]
   },
+  "DoWater": {
+   "unit": "root",
+   "seg": 3048,
+   "off": 940,
+   "grounding": "inventory:far_call",
+   "history": [
+    {
+     "was": "f_0BE8_03AC",
+     "why": "names5 bonus pair CONFIRMED: (d) SIMONE_MODULE #5..#28 (CountAnts..TryAntTheme) aligns 1:1 with DOS module 0BE8 (24/24: CountAnts,FullCount,CountUpdate,DoWater,PlaceDrop,InitWater,AddWater,DropWater,PickupFoodA,DropFoodA,FoodFall,PickupFoodB,PickupFoodR,PlaceEggB,PlaceEggR,GetDir,GetDis,InNestBounds,IsItDirt,GetExitDirB,GetExitDirR,GetEnterDirB,GetEnterDirR,TryAntTheme), anchored by GetDir HIGH(#20), IsItDirt HIGH(#23), f_0BE8_0D67=GetEnterDirB xver HIGH(#26), and the head member CountAnts sharing exact immediates 0x271a..0x271d/0x2b0c/0x2b0d (pos 3); (e) Win16 card: myBeginSound, drop tiles 0x74..0x77 cycle (cmp 0x74/0x77), SRand1, flood/drain rows via ZapEuMapAt (AddWater/DropWater inlined), PlaceDrop call; DOS: SRand1(50) myBeginSound, 100 drops 0x74..0x77, AddWater, PlaceDrop, DropWater; (c) sole caller DoAntSim (= Win16 _DoWater caller); callees PlaceDrop/AddWater/DropWater confirmed above"
+    }
+   ]
+  },
   "DoWinHelp": {
    "unit": "S14",
    "seg": 14412,
@@ -1921,6 +1981,18 @@
     }
    ]
   },
+  "DropFoodA": {
+   "unit": "root",
+   "seg": 3048,
+   "off": 2066,
+   "grounding": "inventory:far_call",
+   "history": [
+    {
+     "was": "f_0BE8_0812",
+     "why": "names5 bonus pair CONFIRMED: (d) SIMONE_MODULE #5..#28 (CountAnts..TryAntTheme) aligns 1:1 with DOS module 0BE8 (24/24: CountAnts,FullCount,CountUpdate,DoWater,PlaceDrop,InitWater,AddWater,DropWater,PickupFoodA,DropFoodA,FoodFall,PickupFoodB,PickupFoodR,PlaceEggB,PlaceEggR,GetDir,GetDis,InNestBounds,IsItDirt,GetExitDirB,GetExitDirR,GetEnterDirB,GetEnterDirR,TryAntTheme), anchored by GetDir HIGH(#20), IsItDirt HIGH(#23), f_0BE8_0D67=GetEnterDirB xver HIGH(#26), and the head member CountAnts sharing exact immediates 0x271a..0x271d/0x2b0c/0x2b0d (pos 9); (c) callers {DropMyFood, MoveSpider} == Win16 _DropFoodA callers exactly; (e) MapA <0x4b: >=0x48 increment else set 0x48 (Win16 card cmp 0x4b, cmp 0x48, mov 0x48)"
+    }
+   ]
+  },
   "DropFoodR": {
    "unit": "root",
    "seg": 3903,
@@ -1978,6 +2050,18 @@
     {
      "was": "f_10F7_1696",
      "why": "worker sim10F7: Win16 counterpart body matched while recovering the byte-exact DOS function"
+    }
+   ]
+  },
+  "DropPebble": {
+   "unit": "root",
+   "seg": 4343,
+   "off": 5564,
+   "grounding": "inventory:push_cs_call",
+   "history": [
+    {
+     "was": "f_10F7_15BC",
+     "why": "names5 bonus pair HIGH: (d) unit alignment: DOS root:10F7 (57 fns 000E..2894) = Win16 SIMONE_MODULE #112 _IsValidLocation..#168 _IsValidB (57 entries, 1:1, no insertions/deletions); independently anchored members IsYellowAnt!(003A/#113), GetMap!(0850/#129), SetMyLife!(0A44/#134), SetMyHealth!(1DD3/#151) sit at identical positions (their xver HIGH comes from external callers: DoDigInB/processEdit, 4 external callers, EditToolsMenu, CheatKeys); this entry @15BC <-> _DropPebble #145; (e) body: IsItAHole checks, HoleMapB/R, tiles 0x51/0x31/0x30, SetMap -- Win16 _DropPebble call_seq IsItHole,IsItHole,ZapEuMapAt; (c-weak) sole caller DropMyRock in both builds"
     }
    ]
   },
@@ -2485,6 +2569,18 @@
     }
    ]
   },
+  "FindLifeAt": {
+   "unit": "root",
+   "seg": 4343,
+   "off": 7473,
+   "grounding": "reviewed: prologue scan in unreached gap; descent ends in a return; no references found (unreferenced or indirect)",
+   "history": [
+    {
+     "was": "f_10F7_1D31",
+     "why": "names5 bonus pair CONFIRMED: (d) unit alignment: DOS root:10F7 (57 fns 000E..2894) = Win16 SIMONE_MODULE #112 _IsValidLocation..#168 _IsValidB (57 entries, 1:1, no insertions/deletions); independently anchored members IsYellowAnt!(003A/#113), GetMap!(0850/#129), SetMyLife!(0A44/#134), SetMyHealth!(1DD3/#151) sit at identical positions (their xver HIGH comes from external callers: DoDigInB/processEdit, 4 external callers, EditToolsMenu, CheatKeys); this entry @1D31 <-> _FindLifeAt #150; (e) body: GetLife>=0 && !yellow -> FindAntIndex; else FindLifeIndex(plane,x,y,1,0x7f,0x7f) + GetAntIndex -- Win16 card 8A96 pushes 1,0x7f,0x7f to _FindLifeIndex (FindEggAt uses 1,7,0x7f); no callers in either build (consistent)"
+    }
+   ]
+  },
   "FindLifeIndex": {
    "unit": "root",
    "seg": 4343,
@@ -2518,6 +2614,18 @@
     {
      "was": "o18_384C_0216",
      "why": "Win16 SIMONE_MODULE run 3100..45AC (MakeMap..AddRock3, 23 members, between ClearListR and InitSpider) aligns 1:1 in order and count with DOS section S18 frame 384C (23 functions); anchored member MakeYardPatch (0C13): body identical to Win16 MakeYardPatch (TERRAINset/0x3e8 tile set, 128x64 SRand16 fill, AddRocks, InitAntLions(SRand4()+1), InitPillar = registered DOS names, 20/30/100/128 SRand1(0x7d)/SRand1(0x3d) placement passes with tiles 0x20-0x23, (SRand1(2)+0x12)<<1, 0x28, 0x51); call graph agrees (MakeMap->MakeYardPatch/MakeHousePatch(x*16+y>0x25), MakeKitchenWall->MakeOutletV(0x24,2),(0x54,2)+DROPdir=2, FloorTiles DROPdir=0, MakeOutletV/H->TileFrame1+MakePlugV/H, AddRocks->AddRock5 x6/AddRock3 x6 with SRand1(122/58),(124/60)); equal-size pairs TileFrame1/2, MakeOutletV/H, CarpetFloorL/R match on both sides"
+    }
+   ]
+  },
+  "FoodFall": {
+   "unit": "root",
+   "seg": 3048,
+   "off": 2237,
+   "grounding": "inventory:push_cs_call",
+   "history": [
+    {
+     "was": "f_0BE8_08BD",
+     "why": "names5 bonus pair HIGH: (d) SIMONE_MODULE #5..#28 (CountAnts..TryAntTheme) aligns 1:1 with DOS module 0BE8 (24/24: CountAnts,FullCount,CountUpdate,DoWater,PlaceDrop,InitWater,AddWater,DropWater,PickupFoodA,DropFoodA,FoodFall,PickupFoodB,PickupFoodR,PlaceEggB,PlaceEggR,GetDir,GetDis,InNestBounds,IsItDirt,GetExitDirB,GetExitDirR,GetEnterDirB,GetEnterDirR,TryAntTheme), anchored by GetDir HIGH(#20), IsItDirt HIGH(#23), f_0BE8_0D67=GetEnterDirB xver HIGH(#26), and the head member CountAnts sharing exact immediates 0x271a..0x271d/0x2b0c/0x2b0d (pos 10); (e) Win16 card: walks MapA (0x28e8) along a direction until v<4 -> (v+6)<<2 and counter++ (inc [0x9e84]), stops at x>0x7f or y>0x3f; same loop as DOS"
     }
    ]
   },
@@ -2677,6 +2785,30 @@
     }
    ]
   },
+  "GetEnterDirB": {
+   "unit": "root",
+   "seg": 3048,
+   "off": 3431,
+   "grounding": "inventory:far_call",
+   "history": [
+    {
+     "was": "f_0BE8_0D67",
+     "why": "names5 bonus pair CONFIRMED: (d) SIMONE_MODULE #5..#28 (CountAnts..TryAntTheme) aligns 1:1 with DOS module 0BE8 (24/24: CountAnts,FullCount,CountUpdate,DoWater,PlaceDrop,InitWater,AddWater,DropWater,PickupFoodA,DropFoodA,FoodFall,PickupFoodB,PickupFoodR,PlaceEggB,PlaceEggR,GetDir,GetDis,InNestBounds,IsItDirt,GetExitDirB,GetExitDirR,GetEnterDirB,GetEnterDirR,TryAntTheme), anchored by GetDir HIGH(#20), IsItDirt HIGH(#23), f_0BE8_0D67=GetEnterDirB xver HIGH(#26), and the head member CountAnts sharing exact immediates 0x271a..0x271d/0x2b0c/0x2b0d (pos 21); (e) Win16 GetEnterDirB source: back=dir^4, best=-1, bestValue=ExitMapB[x][y], choose lowest non-zero neighbour, SRand2 tie-break; identical to DOS on ExitMapB; (c) callers DoDigInB!, DoFoodInB!, DoNestingB! (anchored) are Win16 _GetEnterDirB callers; xver HIGH pair"
+    }
+   ]
+  },
+  "GetEnterDirR": {
+   "unit": "root",
+   "seg": 3048,
+   "off": 3599,
+   "grounding": "inventory:far_call",
+   "history": [
+    {
+     "was": "f_0BE8_0E0F",
+     "why": "names5 bonus pair CONFIRMED: (d) SIMONE_MODULE #5..#28 (CountAnts..TryAntTheme) aligns 1:1 with DOS module 0BE8 (24/24: CountAnts,FullCount,CountUpdate,DoWater,PlaceDrop,InitWater,AddWater,DropWater,PickupFoodA,DropFoodA,FoodFall,PickupFoodB,PickupFoodR,PlaceEggB,PlaceEggR,GetDir,GetDis,InNestBounds,IsItDirt,GetExitDirB,GetExitDirR,GetEnterDirB,GetEnterDirR,TryAntTheme), anchored by GetDir HIGH(#20), IsItDirt HIGH(#23), f_0BE8_0D67=GetEnterDirB xver HIGH(#26), and the head member CountAnts sharing exact immediates 0x271a..0x271d/0x2b0c/0x2b0d (pos 22); (e) Win16 GetEnterDirR source uses ExitMapR with the same algorithm; DOS identical on ExitMapR; (c) callers DoDigInR! (anchored), DoFoodInR, DoNestingR, RaidInR, StayInR == Win16 _GetEnterDirR callers exactly; xver MEDIUM agrees"
+    }
+   ]
+  },
   "GetExitDirB": {
    "unit": "root",
    "seg": 3048,
@@ -2710,6 +2842,18 @@
     {
      "was": "f_1383_0A95",
      "why": "Win16 unit SIMTWO_MODULE 0000..12EC (GetStrategy..Bounce, 22 members, next unit starts at InitSimYard) aligns 1:1 with DOS module 1383 (22 functions); anchored by xver GstrR MEDIUM (pos 5), GetNewModeB HIGH (pos 14), GetForageDir HIGH (pos 16); call graph agrees (GetStrategy calls GstrB/SetCasteProd/SetModeProd/GstrR, GetNewMode dispatches to GetNewModeB/R, Bounce called by the Get*Dir members)"
+    }
+   ]
+  },
+  "GetFreeHandle": {
+   "unit": "root",
+   "seg": 6696,
+   "off": 548,
+   "grounding": "inventory:push_cs_call",
+   "history": [
+    {
+     "was": "f_1A28_0224",
+     "why": "names5 bonus pair CONFIRMED: (e) one-time init flag clearing name[0] of the 4 OpenDBRec slots, then return the first free slot index or -1 = Win16 recovered GetFreeHandle (openDBInitialized, 4 slots, -1); (c) sole caller OpenDB!, its first call, Punt('Out of handles.') on -1; (d) DOS 1A28 OpenDB!(0006),0148,CloseDB(0149),01B4,0224,DosPunt(0277) = Win16 SIMTWO #119..#124 OpenDB,FlushDB,CloseDB,CopyRootName,GetFreeHandle,DosPunt (6:6, every member body-matched)"
     }
    ]
   },
@@ -2806,6 +2950,18 @@
     {
      "was": "f_0F3F_1A37",
      "why": "Win16 MAPSYM member list of the matching unit aligns 1:1 in order and count with the DOS module (already-named members fall at their positions); bodies near-identical (worker simA)"
+    }
+   ]
+  },
+  "GetRRandSeed": {
+   "unit": "root",
+   "seg": 147,
+   "off": 184,
+   "grounding": "reviewed: unreached: chkstk, BIOS tick read at 046C:0000, retf at 0x9FD",
+   "history": [
+    {
+     "was": "f_0093_00B8",
+     "why": "names5 bonus pair CONFIRMED: (e) body reads the BIOS tick dword at 0x046C:0000 (mov bx,0x46c; mov es,bx; ax=es:[0]; dx=es:[2]) -- instruction-identical to Win16 _GetRRandSeed card apart from DOS __aFchkstk prologue; constant 0x46c unique; (d) index 6 of the RNG unit run, between anchored SetRRandSeed! (5) and SeedSRand! (7) in both builds"
     }
    ]
   },
@@ -2989,6 +3145,18 @@
     }
    ]
   },
+  "GrabMap": {
+   "unit": "S08",
+   "seg": 13813,
+   "off": 4592,
+   "grounding": "reviewed: prologue scan in unreached gap; descent ends in a return; no references found (unreferenced or indirect)",
+   "history": [
+    {
+     "was": "o08_35F5_11F0",
+     "why": "names5 bonus pair CONFIRMED: (e) body = Win16 recovered GrabMap: x>0x7f -> 0, x<0 -> 0x7f, y>0x3f -> 0, y<0 -> 0x3f wrap, then return MapA[x][y]; (d) DOS S08:35F5 18 functions = Win16 SIMTWO_MODULE #65-#82 (InitSimVars..ClrArrays) 1:1 in order; independently anchored DigOutBNest, DigOutRNest, InitYelloAnt, PlaceBlackQueen, MakeBlkQueen (pos 5-9) and AddFood (pos 14) at the same positions (pos 17 between AddRedAnts and ClrArrays = Win16 #81 _GrabMap)"
+    }
+   ]
+  },
   "GstrB": {
    "unit": "root",
    "seg": 4995,
@@ -3022,6 +3190,18 @@
     {
      "was": "o24_39C7_0608",
      "why": "Win16 SIMANT_MODULE run OpenHistoryWindow, ProcHistoryEvent (xver LOW, unique 0x150d), ToggleHistButton, ClearHistory, win_DrawHistoryWindow, drawHistGraph, HistUpdate (7 members) aligns 1:1 with DOS S24 frame 39C7 (7 functions); anchors by body identity: OpenHistoryWindow = win_Open(0x1500), ProcHistoryEvent = switch 0x150d DoWinHelp(0x150f) / 0x150e fill+graph loop+StillDown / 0x1503..0x150c ToggleHistButton"
+    }
+   ]
+  },
+  "HoleBorder": {
+   "unit": "root",
+   "seg": 5358,
+   "off": 1205,
+   "grounding": "inventory:push_cs_call",
+   "history": [
+    {
+     "was": "f_14EE_04B5",
+     "why": "names5 bonus pair CONFIRMED: (e) DOS for i<8: nx=x+Dx8[i], ny=y+Dy8[i]; bounds 0..127/0..63; MapA[nx][ny]<0x50 -> MapA=g_1BB2[i] -- Win16 _HoleBorder card 1F8E: 8-iteration loop over Dx8/Dy8, cmp 0x7f/0x3f, MapA (0x28e8) cmp 0x50 jae, store table[di+0x230c]; (d) pos7 = #54 _HoleBorder between anchored MakeNewHoleR! (#53) and DigTileB! (#55); (c) DOS callers CreateNewHole, MakeNewHoleB!, MakeNewHoleR! (non-TERRAIN branch); Win16 inlines the same loop in CreateNewHole (card 17A6..), so _HoleBorder has no listed callers"
     }
    ]
   },
@@ -3229,6 +3409,18 @@
     }
    ]
   },
+  "IsItAHole": {
+   "unit": "root",
+   "seg": 4343,
+   "off": 10273,
+   "grounding": "inventory:push_cs_call",
+   "history": [
+    {
+     "was": "f_10F7_2821",
+     "why": "names5 bonus pair CONFIRMED: (d) unit alignment: DOS root:10F7 (57 fns 000E..2894) = Win16 SIMONE_MODULE #112 _IsValidLocation..#168 _IsValidB (57 entries, 1:1, no insertions/deletions); independently anchored members IsYellowAnt!(003A/#113), GetMap!(0850/#129), SetMyLife!(0A44/#134), SetMyHealth!(1DD3/#151) sit at identical positions (their xver HIGH comes from external callers: DoDigInB/processEdit, 4 external callers, EditToolsMenu, CheatKeys); this entry @2821 <-> _IsItAHole #166; (e) body identical to Win16 wf_IsItAHole: plane<=1 -> IsItHole(x,y); y>0 -> 0; GetMap==0x18; (c-weak) callers DropMyRock/DropPebble correspond to Win16 inlined IsItHole+0x18 uses"
+    }
+   ]
+  },
   "IsItDigable": {
    "unit": "root",
    "seg": 4343,
@@ -3262,6 +3454,18 @@
     {
      "was": "f_0894_2423",
      "why": "Win16 MAPSYM member list of the matching unit aligns 1:1 in order and count with the DOS module (already-named members fall at their positions); bodies near-identical (worker simA)"
+    }
+   ]
+  },
+  "IsItFoodAt": {
+   "unit": "root",
+   "seg": 4343,
+   "off": 1927,
+   "grounding": "inventory:push_cs_call",
+   "history": [
+    {
+     "was": "f_10F7_0787",
+     "why": "names5 bonus pair HIGH: (d) unit alignment: DOS root:10F7 (57 fns 000E..2894) = Win16 SIMONE_MODULE #112 _IsValidLocation..#168 _IsValidB (57 entries, 1:1, no insertions/deletions); independently anchored members IsYellowAnt!(003A/#113), GetMap!(0850/#129), SetMyLife!(0A44/#134), SetMyHealth!(1DD3/#151) sit at identical positions (their xver HIGH comes from external callers: DoDigInB/processEdit, 4 external callers, EditToolsMenu, CheatKeys); this entry @0787 <-> _IsItFoodAt #127; (e) body: GetMap, <0 -> 0, plane<=1 -> IsItFood else 0x10..0x13 -- Win16 card 5F7E: bounds + Map read, IsItFood, cmp 0x10; (c-weak) DOS caller PickupMyFood; Win16 _IsItFoodAt has no listed callers (inlined in PickupMyFood)"
     }
    ]
   },
@@ -3301,6 +3505,18 @@
     }
    ]
   },
+  "IsItYellow": {
+   "unit": "root",
+   "seg": 4343,
+   "off": 9544,
+   "grounding": "inventory:far_call,push_cs_call",
+   "history": [
+    {
+     "was": "f_10F7_2548",
+     "why": "names5 bonus pair CONFIRMED: (d) unit alignment: DOS root:10F7 (57 fns 000E..2894) = Win16 SIMONE_MODULE #112 _IsValidLocation..#168 _IsValidB (57 entries, 1:1, no insertions/deletions); independently anchored members IsYellowAnt!(003A/#113), GetMap!(0850/#129), SetMyLife!(0A44/#134), SetMyHealth!(1DD3/#151) sit at identical positions (their xver HIGH comes from external callers: DoDigInB/processEdit, 4 external callers, EditToolsMenu, CheatKeys); this entry @2548 <-> _IsItYellow #161; (e) body identical to Win16 IsItYellow: IsSamePlane gate, MeMode==1 -> GetDis(x*16+8,y*16+8,SpidX,SpidY)<0x200, else Life[x][y] yellow test; (c) anchored caller processEdit! in both; KillSomeAnts also agrees"
+    }
+   ]
+  },
   "IsLessThanHole": {
    "unit": "root",
    "seg": 4343,
@@ -3337,6 +3553,18 @@
     }
    ]
   },
+  "IsNotObstacle": {
+   "unit": "root",
+   "seg": 4343,
+   "off": 9353,
+   "grounding": "inventory:far_call",
+   "history": [
+    {
+     "was": "f_10F7_2489",
+     "why": "names5 bonus pair CONFIRMED: (d) unit alignment: DOS root:10F7 (57 fns 000E..2894) = Win16 SIMONE_MODULE #112 _IsValidLocation..#168 _IsValidB (57 entries, 1:1, no insertions/deletions); independently anchored members IsYellowAnt!(003A/#113), GetMap!(0850/#129), SetMyLife!(0A44/#134), SetMyHealth!(1DD3/#151) sit at identical positions (their xver HIGH comes from external callers: DoDigInB/processEdit, 4 external callers, EditToolsMenu, CheatKeys); this entry @2489 <-> _IsNotObstacle #159; (e) body: GetMap; plane<=1 -> !TERRAINset ? tile<=0x53 : IsNotBarrier; else tile<=0x18 || IsThisPebble -- Win16 card 94C6 compares 0x53, 0x50/0x5f, 0x18, 0x51..0x53, 0x30..0x31; (c) anchored caller ExitNest! in both builds"
+    }
+   ]
+  },
   "IsPillDead": {
    "unit": "root",
    "seg": 2777,
@@ -3358,6 +3586,18 @@
     {
      "was": "f_0798_05BF",
      "why": "Win16 SIMANT_MODULE unit InitTriVars..initControls (MAPSYM B324..CC84, 20 members) aligns in order with the 18 functions of DOS root:0798 once the two Windows-only callbacks win_CasteControlChanged/win_ModeControlChanged are removed; InitTriVars body identical to Win16 recovered InitTriVars (win_GetObjRect, width/2, height, (half<<8)/height, 6 tri points); call graph agrees (OpenCaste->UpdateCaste+win_Open, ProcCaste->DrawCaste, ProcMode->DrawMode, Draw*->SetTriLatPoint, ProcCaste/initControls->cvtLevels2IdealCaste); ProcCasteEvent/ProcModeEvent xver unique constants 0x1303/0x1203; DrawControlLevels xver MEDIUM (%-ld%%)"
+    }
+   ]
+  },
+  "IsSamePlane": {
+   "unit": "root",
+   "seg": 4343,
+   "off": 9792,
+   "grounding": "inventory:push_cs_call",
+   "history": [
+    {
+     "was": "f_10F7_2640",
+     "why": "names5 bonus pair CONFIRMED: (d) unit alignment: DOS root:10F7 (57 fns 000E..2894) = Win16 SIMONE_MODULE #112 _IsValidLocation..#168 _IsValidB (57 entries, 1:1, no insertions/deletions); independently anchored members IsYellowAnt!(003A/#113), GetMap!(0850/#129), SetMyLife!(0A44/#134), SetMyHealth!(1DD3/#151) sit at identical positions (their xver HIGH comes from external callers: DoDigInB/processEdit, 4 external callers, EditToolsMenu, CheatKeys); this entry @2640 <-> _IsSamePlane #163; (e) body identical to Win16 IsSamePlane: (plane==0?1:plane)==MePlane; (c-weak) caller f_2548 (=IsItYellow) uses it as first gate; Win16 IsItYellow inlines the same test"
     }
    ]
   },
@@ -3394,6 +3634,54 @@
     {
      "was": "f_10F7_06E4",
      "why": "worker sim10F7: Win16 counterpart body matched while recovering the byte-exact DOS function"
+    }
+   ]
+  },
+  "IsThisPebble": {
+   "unit": "root",
+   "seg": 4343,
+   "off": 1841,
+   "grounding": "inventory:far_call,push_cs_call",
+   "history": [
+    {
+     "was": "f_10F7_0731",
+     "why": "names5 bonus pair CONFIRMED: (d) unit alignment: DOS root:10F7 (57 fns 000E..2894) = Win16 SIMONE_MODULE #112 _IsValidLocation..#168 _IsValidB (57 entries, 1:1, no insertions/deletions); independently anchored members IsYellowAnt!(003A/#113), GetMap!(0850/#129), SetMyLife!(0A44/#134), SetMyHealth!(1DD3/#151) sit at identical positions (their xver HIGH comes from external callers: DoDigInB/processEdit, 4 external callers, EditToolsMenu, CheatKeys); this entry @0731 <-> _IsThisPebble #125; (e) body identical to Win16 IsThisPebble: plane<=1 -> plane==1 && 0x51..0x53, else 0x30..0x31; (c-weak) caller DoAntLions agrees with Win16 _IsThisPebble caller; inlined identically in Win16 IsLiftable/IsNotObstacle"
+    }
+   ]
+  },
+  "IsValidA": {
+   "unit": "root",
+   "seg": 4343,
+   "off": 10343,
+   "grounding": "inventory:far_call,push_cs_call",
+   "history": [
+    {
+     "was": "f_10F7_2867",
+     "why": "names5 bonus pair CONFIRMED: (d) unit alignment: DOS root:10F7 (57 fns 000E..2894) = Win16 SIMONE_MODULE #112 _IsValidLocation..#168 _IsValidB (57 entries, 1:1, no insertions/deletions); independently anchored members IsYellowAnt!(003A/#113), GetMap!(0850/#129), SetMyLife!(0A44/#134), SetMyHealth!(1DD3/#151) sit at identical positions (their xver HIGH comes from external callers: DoDigInB/processEdit, 4 external callers, EditToolsMenu, CheatKeys); this entry @2867 <-> _IsValidA #167; (e) body identical to Win16 IsValidA: 0<=x<=127 && 0<=y<=63; (c) anchored callers ConnectAll!, PillGetLife!, PlacePillTile!, ReplacePillarMap! are in Win16 _IsValidA caller list"
+    }
+   ]
+  },
+  "IsValidB": {
+   "unit": "root",
+   "seg": 4343,
+   "off": 10388,
+   "grounding": "inventory:push_cs_call",
+   "history": [
+    {
+     "was": "f_10F7_2894",
+     "why": "names5 bonus pair HIGH: (d) unit alignment: DOS root:10F7 (57 fns 000E..2894) = Win16 SIMONE_MODULE #112 _IsValidLocation..#168 _IsValidB (57 entries, 1:1, no insertions/deletions); independently anchored members IsYellowAnt!(003A/#113), GetMap!(0850/#129), SetMyLife!(0A44/#134), SetMyHealth!(1DD3/#151) sit at identical positions (their xver HIGH comes from external callers: DoDigInB/processEdit, 4 external callers, EditToolsMenu, CheatKeys); this entry @2894 <-> _IsValidB #168; (e) body identical to Win16 IsValidB (9C26, immediately after IsValidA): 0<=x<=63 && 0<=y<=63 -- 63 bound excludes IsValidA; (c-weak) callers IsItDigable and f_000E(=IsValidLocation) only"
+    }
+   ]
+  },
+  "IsValidLocation": {
+   "unit": "root",
+   "seg": 4343,
+   "off": 14,
+   "grounding": "inventory:far_call,push_cs_call",
+   "history": [
+    {
+     "was": "f_10F7_000E",
+     "why": "names5 bonus pair CONFIRMED: (d) unit alignment: DOS root:10F7 (57 fns 000E..2894) = Win16 SIMONE_MODULE #112 _IsValidLocation..#168 _IsValidB (57 entries, 1:1, no insertions/deletions); independently anchored members IsYellowAnt!(003A/#113), GetMap!(0850/#129), SetMyLife!(0A44/#134), SetMyHealth!(1DD3/#151) sit at identical positions (their xver HIGH comes from external callers: DoDigInB/processEdit, 4 external callers, EditToolsMenu, CheatKeys); this entry @000E <-> _IsValidLocation #112; (e) body: plane<=1 -> IsValidA (128x64) else IsValidB (64x64) -- same as Win16 IsValidLocation.c; (c-weak) callers ExpAddFood, ExpKillAnts, processExp match Win16 _IsValidLocation callers"
     }
    ]
   },
@@ -4177,6 +4465,42 @@
     }
    ]
   },
+  "PickupFoodA": {
+   "unit": "root",
+   "seg": 3048,
+   "off": 1944,
+   "grounding": "inventory:far_call",
+   "history": [
+    {
+     "was": "f_0BE8_0798",
+     "why": "names5 bonus pair CONFIRMED: (d) SIMONE_MODULE #5..#28 (CountAnts..TryAntTheme) aligns 1:1 with DOS module 0BE8 (24/24: CountAnts,FullCount,CountUpdate,DoWater,PlaceDrop,InitWater,AddWater,DropWater,PickupFoodA,DropFoodA,FoodFall,PickupFoodB,PickupFoodR,PlaceEggB,PlaceEggR,GetDir,GetDis,InNestBounds,IsItDirt,GetExitDirB,GetExitDirR,GetEnterDirB,GetEnterDirR,TryAntTheme), anchored by GetDir HIGH(#20), IsItDirt HIGH(#23), f_0BE8_0D67=GetEnterDirB xver HIGH(#26), and the head member CountAnts sharing exact immediates 0x271a..0x271d/0x2b0c/0x2b0d (pos 8); (c) callers DoForageAnt! (anchored), DoRandAntA, DoToNestAnt, PickupMyFood == Win16 _PickupFoodA callers exactly; (e) MapA food tile 0x48 -> SRand16() else decrement (Win16 card cmp 0x48, sole call SRand16); xver MEDIUM pair agrees"
+    }
+   ]
+  },
+  "PickupFoodB": {
+   "unit": "root",
+   "seg": 3048,
+   "off": 2379,
+   "grounding": "reviewed: prologue scan in unreached gap; descent ends in a return; no references found (unreferenced or indirect)",
+   "history": [
+    {
+     "was": "f_0BE8_094B",
+     "why": "names5 bonus pair CONFIRMED: (d) SIMONE_MODULE #5..#28 (CountAnts..TryAntTheme) aligns 1:1 with DOS module 0BE8 (24/24: CountAnts,FullCount,CountUpdate,DoWater,PlaceDrop,InitWater,AddWater,DropWater,PickupFoodA,DropFoodA,FoodFall,PickupFoodB,PickupFoodR,PlaceEggB,PlaceEggR,GetDir,GetDis,InNestBounds,IsItDirt,GetExitDirB,GetExitDirR,GetEnterDirB,GetEnterDirR,TryAntTheme), anchored by GetDir HIGH(#20), IsItDirt HIGH(#23), f_0BE8_0D67=GetEnterDirB xver HIGH(#26), and the head member CountAnts sharing exact immediates 0x271a..0x271d/0x2b0c/0x2b0d (pos 11); (e) Win16 card: MapB (0x48e8, the map Win16 AddWater writes first) ==0x10 -> SRand8 else 0x11..0x13 decrement, then FoodB--; DOS uses MapB (the map DigTileB! writes) and FoodB; B-vs-R distinguisher: 094B touches MapB/FoodB, 09D3 touches MapR/FoodR; Win16 PickupFoodB 0x48e8 vs PickupFoodR 0x58e8, order B then R in both"
+    }
+   ]
+  },
+  "PickupFoodR": {
+   "unit": "root",
+   "seg": 3048,
+   "off": 2515,
+   "grounding": "reviewed: prologue scan in unreached gap; descent ends in a return; no references found (unreferenced or indirect)",
+   "history": [
+    {
+     "was": "f_0BE8_09D3",
+     "why": "names5 bonus pair CONFIRMED: (d) SIMONE_MODULE #5..#28 (CountAnts..TryAntTheme) aligns 1:1 with DOS module 0BE8 (24/24: CountAnts,FullCount,CountUpdate,DoWater,PlaceDrop,InitWater,AddWater,DropWater,PickupFoodA,DropFoodA,FoodFall,PickupFoodB,PickupFoodR,PlaceEggB,PlaceEggR,GetDir,GetDis,InNestBounds,IsItDirt,GetExitDirB,GetExitDirR,GetEnterDirB,GetEnterDirR,TryAntTheme), anchored by GetDir HIGH(#20), IsItDirt HIGH(#23), f_0BE8_0D67=GetEnterDirB xver HIGH(#26), and the head member CountAnts sharing exact immediates 0x271a..0x271d/0x2b0c/0x2b0d (pos 12); (e) Win16 card: same 0x10/0x13 logic on MapR (0x58e8) and FoodR; DOS uses MapR/FoodR; B-vs-R distinguisher as for PickupFoodB; position directly before PlaceEggB"
+    }
+   ]
+  },
   "PickupMyEgg": {
    "unit": "root",
    "seg": 4343,
@@ -4765,6 +5089,18 @@
     }
    ]
   },
+  "SGIRand": {
+   "unit": "root",
+   "seg": 147,
+   "off": 2,
+   "grounding": "reviewed: unreferenced function at 0x932 (word-aligned module start)",
+   "history": [
+    {
+     "was": "f_0093_0002",
+     "why": "names5 bonus pair CONFIRMED: (e) body = max of two SRand1(range) draws (cmp ax,si; jge), identical to Win16 SGIRand.c (result>=first?result:first); distinguished from SGRand (jle/min) and SGSRand (SRand2 negation); (d) index 0 of the RNG unit run SIMONE_MODULE #29..#47 aligned 1:1 with DOS root:0093 (anchors SetSRandSeed!..SRand256! at indices 3..18); no callers in either build"
+    }
+   ]
+  },
   "SGRand": {
    "unit": "root",
    "seg": 147,
@@ -4774,6 +5110,18 @@
     {
      "was": "f_0093_002B",
      "why": "worker ovl08: Win16 RandWorld unit member / call-site evidence (report 2026-09-30)"
+    }
+   ]
+  },
+  "SGSRand": {
+   "unit": "root",
+   "seg": 147,
+   "off": 84,
+   "grounding": "inventory:far_call",
+   "history": [
+    {
+     "was": "f_0093_0054",
+     "why": "names5 bonus pair CONFIRMED: (e) body: a=SRand1(v); b=SRand1(v); if b>a b=a; if SRand2() b=-b -- identical to Win16 SGSRand.c; unique SRand1,SRand1,SRand2! call sequence in the unit; (d) index 2 of the RNG unit run, immediately before anchored SetSRandSeed! (index 3 both builds)"
     }
    ]
   },
@@ -5209,6 +5557,18 @@
     }
    ]
   },
+  "SetQueenTail": {
+   "unit": "root",
+   "seg": 4343,
+   "off": 2556,
+   "grounding": "inventory:push_cs_call",
+   "history": [
+    {
+     "was": "f_10F7_09FC",
+     "why": "names5 bonus pair CONFIRMED: (d) unit alignment: DOS root:10F7 (57 fns 000E..2894) = Win16 SIMONE_MODULE #112 _IsValidLocation..#168 _IsValidB (57 entries, 1:1, no insertions/deletions); independently anchored members IsYellowAnt!(003A/#113), GetMap!(0850/#129), SetMyLife!(0A44/#134), SetMyHealth!(1DD3/#151) sit at identical positions (their xver HIGH comes from external callers: DoDigInB/processEdit, 4 external callers, EditToolsMenu, CheatKeys); this entry @09FC <-> _SetQueenTail #133; (e) body identical to Win16 wf_SetQueenTail: SetLife(x+Dx8[dir^4], y+Dy8[dir^4], v==0xff?0xfe:v); (c) anchored caller SetMyLife! (Win16 _SetMyLife calls _SetLife twice, tail inlined)"
+    }
+   ]
+  },
   "SetRRandSeed": {
    "unit": "root",
    "seg": 147,
@@ -5389,6 +5749,30 @@
     }
    ]
   },
+  "SmoothEdgesB": {
+   "unit": "root",
+   "seg": 5358,
+   "off": 2545,
+   "grounding": "inventory:far_call,push_cs_call",
+   "history": [
+    {
+     "was": "f_14EE_09F1",
+     "why": "names5 bonus pair CONFIRMED: (e) same smoothing body as 0B5A but on MapB (y==0 -> 0x18, +0x1f, SRand8, 0x4e); Win16 _SmoothEdgesB and _SmoothEdgesR are both 362 bytes, DOS 09F1 and 0B5A are both 322; (d) pos12 = #59 between DigTileThemR! (#58) and RIsItDirt (#60); (c) callers DigTileB!, DigTileThemB!, FillDirtB = Win16 _SmoothEdgesB callers; existing xver HIGH agrees"
+    }
+   ]
+  },
+  "SmoothEdgesR": {
+   "unit": "root",
+   "seg": 5358,
+   "off": 2906,
+   "grounding": "inventory:far_call,push_cs_call",
+   "history": [
+    {
+     "was": "f_14EE_0B5A",
+     "why": "names5 bonus pair CONFIRMED: (e) DOS: x<0||x>63||y>63 return; y==0 -> MapR<0x30 ? =0x18; v=MapR; skip <0x20 and 0x30..0x4e; v=v>0x4d?0x2f:0; 4 neighbour RIsItDirt tests -> bits 1/2/4/8 (edges 2/0x3e/0x3e/1); bits ? bits+v+0x1f : v==0 ? SRand8() : 0x4e -- Win16 _SmoothEdgesR card 26E4 on MapR 0x58e8: cmp 0x30 / store 0x18, cmp 0x2f, cmp 0x3e x2, add dl,0x1f, _SRand8, store 0x4e; (d) pos14 = #61 _SmoothEdgesR (after RIsItDirt #60, before FixExitMapB #62 = f_14EE_0C9C xver HIGH); its B twin f_14EE_09F1 (pos12=#59) is xver HIGH _SmoothEdgesB with the same body on MapB; (c) DOS callers DigTileR, DigTileThemR!, FillDirtR = Win16 _SmoothEdgesR callers (minus Win16 inlining sites); DigTileThemR! calls it 4x at (x,y-1),(x+1,y),(x,y+1),(x-1,y) in both"
+    }
+   ]
+  },
   "SmoothMany": {
    "unit": "S22",
    "seg": 15293,
@@ -5458,6 +5842,18 @@
     {
      "was": "f_0894_1D89",
      "why": "Win16 MAPSYM member list of the matching unit aligns 1:1 in order and count with the DOS module (already-named members fall at their positions); bodies near-identical (worker simA)"
+    }
+   ]
+  },
+  "StartLifeTransfer": {
+   "unit": "root",
+   "seg": 4343,
+   "off": 2993,
+   "grounding": "inventory:far_call",
+   "history": [
+    {
+     "was": "f_10F7_0BB1",
+     "why": "names5 bonus pair CONFIRMED: (d) unit alignment: DOS root:10F7 (57 fns 000E..2894) = Win16 SIMONE_MODULE #112 _IsValidLocation..#168 _IsValidB (57 entries, 1:1, no insertions/deletions); independently anchored members IsYellowAnt!(003A/#113), GetMap!(0850/#129), SetMyLife!(0A44/#134), SetMyHealth!(1DD3/#151) sit at identical positions (their xver HIGH comes from external callers: DoDigInB/processEdit, 4 external callers, EditToolsMenu, CheatKeys); this entry @0BB1 <-> _StartLifeTransfer #140; (e) body identical to Win16 card 6744 with mode 0xa (excludes TargetAnt 0xb); (c-weak) caller YellowCommand == Win16 caller _YellowCommand"
     }
    ]
   },
@@ -5545,6 +5941,18 @@
     }
    ]
   },
+  "TargetAnt": {
+   "unit": "root",
+   "seg": 4343,
+   "off": 2897,
+   "grounding": "inventory:far_call",
+   "history": [
+    {
+     "was": "f_10F7_0B51",
+     "why": "names5 bonus pair CONFIRMED: (d) unit alignment: DOS root:10F7 (57 fns 000E..2894) = Win16 SIMONE_MODULE #112 _IsValidLocation..#168 _IsValidB (57 entries, 1:1, no insertions/deletions); independently anchored members IsYellowAnt!(003A/#113), GetMap!(0850/#129), SetMyLife!(0A44/#134), SetMyHealth!(1DD3/#151) sit at identical positions (their xver HIGH comes from external callers: DoDigInB/processEdit, 4 external callers, EditToolsMenu, CheatKeys); this entry @0B51 <-> _TargetAnt #138; (e) body identical to Win16 card 66DC: CurGameTool==0xb -> end mode; else save pause state, CurGameTool=0xb, PauseGame(1); (c-weak) caller YellowCommand == Win16 caller _YellowCommand"
+    }
+   ]
+  },
   "TickCount": {
    "unit": "root",
    "seg": 7027,
@@ -5554,6 +5962,18 @@
     {
      "was": "f_1B73_0504",
      "why": "xver CONFIRMED (evidence/cross_version/decisions.json: RNG translation unit)"
+    }
+   ]
+  },
+  "TileCanBeMovedOn": {
+   "unit": "root",
+   "seg": 4343,
+   "off": 8910,
+   "grounding": "inventory:far_call",
+   "history": [
+    {
+     "was": "f_10F7_22CE",
+     "why": "names5 bonus pair HIGH: (d) unit alignment: DOS root:10F7 (57 fns 000E..2894) = Win16 SIMONE_MODULE #112 _IsValidLocation..#168 _IsValidB (57 entries, 1:1, no insertions/deletions); independently anchored members IsYellowAnt!(003A/#113), GetMap!(0850/#129), SetMyLife!(0A44/#134), SetMyHealth!(1DD3/#151) sit at identical positions (their xver HIGH comes from external callers: DoDigInB/processEdit, 4 external callers, EditToolsMenu, CheatKeys); this entry @22CE <-> _TileCanBeMovedOn #157; (e) Win16 card 9342 compares 0x7f/0x3f bounds, 0x53/0x90 (TERRAINset), 0x18, 0x30/0x31, 0x20..0x2e, 0x1c..0x1f -- same constants/structure in DOS body; callers not cross-checked (DOS o25_3BA4_1581/1686, f_0DEF_031F vs Win16 GetMyBestDirs/GetMyRandDirs/GetRedBestDirs, 3 each)"
     }
    ]
   },
@@ -5662,6 +6082,18 @@
     {
      "was": "f_0F3F_0FC9",
      "why": "Win16 MAPSYM member list of the matching unit aligns 1:1 in order and count with the DOS module (already-named members fall at their positions); bodies near-identical (worker simA)"
+    }
+   ]
+  },
+  "TryMyDropOrLift": {
+   "unit": "root",
+   "seg": 4343,
+   "off": 9940,
+   "grounding": "inventory:far_call",
+   "history": [
+    {
+     "was": "f_10F7_26D4",
+     "why": "names5 bonus pair CONFIRMED: (d) unit alignment: DOS root:10F7 (57 fns 000E..2894) = Win16 SIMONE_MODULE #112 _IsValidLocation..#168 _IsValidB (57 entries, 1:1, no insertions/deletions); independently anchored members IsYellowAnt!(003A/#113), GetMap!(0850/#129), SetMyLife!(0A44/#134), SetMyHealth!(1DD3/#151) sit at identical positions (their xver HIGH comes from external callers: DoDigInB/processEdit, 4 external callers, EditToolsMenu, CheatKeys); this entry @26D4 <-> _TryMyDropOrLift #165; (e) body: MeType&8 -> DropMyObject else PickupMyObject, DigMyNewHole, GetDir+MoveMyLife, DoEditUpdateDraw, EatMyFood(MeFoodInType) -- Win16 _TryMyDropOrLift call_seq has the same callees in the same order; (c) callers DoAntMoveY! and YellowCommand == Win16 callers {_DoAntMoveY,_YellowCommand}"
     }
    ]
   },
@@ -6501,7 +6933,7 @@
    "unit": "root",
    "seg": 147,
    "off": 2,
-   "grounding": "reviewed: unreferenced function at 0x932 (word-aligned module start)"
+   "alias_of": "SGIRand"
   },
   "f_0093_002B": {
    "unit": "root",
@@ -6513,7 +6945,7 @@
    "unit": "root",
    "seg": 147,
    "off": 84,
-   "grounding": "inventory:far_call"
+   "alias_of": "SGSRand"
   },
   "f_0093_008F": {
    "unit": "root",
@@ -6537,7 +6969,7 @@
    "unit": "root",
    "seg": 147,
    "off": 184,
-   "grounding": "reviewed: unreached: chkstk, BIOS tick read at 046C:0000, retf at 0x9FD"
+   "alias_of": "GetRRandSeed"
   },
   "f_0093_00CE": {
    "unit": "root",
@@ -7899,7 +8331,7 @@
    "unit": "root",
    "seg": 3048,
    "off": 2,
-   "grounding": "inventory:far_call,push_cs_call"
+   "alias_of": "CountAnts"
   },
   "f_0BE8_038F": {
    "unit": "root",
@@ -7917,7 +8349,7 @@
    "unit": "root",
    "seg": 3048,
    "off": 940,
-   "grounding": "inventory:far_call"
+   "alias_of": "DoWater"
   },
   "f_0BE8_0554": {
    "unit": "root",
@@ -7947,31 +8379,31 @@
    "unit": "root",
    "seg": 3048,
    "off": 1944,
-   "grounding": "inventory:far_call"
+   "alias_of": "PickupFoodA"
   },
   "f_0BE8_0812": {
    "unit": "root",
    "seg": 3048,
    "off": 2066,
-   "grounding": "inventory:far_call"
+   "alias_of": "DropFoodA"
   },
   "f_0BE8_08BD": {
    "unit": "root",
    "seg": 3048,
    "off": 2237,
-   "grounding": "inventory:push_cs_call"
+   "alias_of": "FoodFall"
   },
   "f_0BE8_094B": {
    "unit": "root",
    "seg": 3048,
    "off": 2379,
-   "grounding": "reviewed: prologue scan in unreached gap; descent ends in a return; no references found (unreferenced or indirect)"
+   "alias_of": "PickupFoodB"
   },
   "f_0BE8_09D3": {
    "unit": "root",
    "seg": 3048,
    "off": 2515,
-   "grounding": "reviewed: prologue scan in unreached gap; descent ends in a return; no references found (unreferenced or indirect)"
+   "alias_of": "PickupFoodR"
   },
   "f_0BE8_0A5B": {
    "unit": "root",
@@ -8025,13 +8457,13 @@
    "unit": "root",
    "seg": 3048,
    "off": 3431,
-   "grounding": "inventory:far_call"
+   "alias_of": "GetEnterDirB"
   },
   "f_0BE8_0E0F": {
    "unit": "root",
    "seg": 3048,
    "off": 3599,
-   "grounding": "inventory:far_call"
+   "alias_of": "GetEnterDirR"
   },
   "f_0BE8_0EB7": {
    "unit": "root",
@@ -8403,7 +8835,7 @@
    "unit": "root",
    "seg": 4343,
    "off": 14,
-   "grounding": "inventory:far_call,push_cs_call"
+   "alias_of": "IsValidLocation"
   },
   "f_10F7_003A": {
    "unit": "root",
@@ -8481,7 +8913,7 @@
    "unit": "root",
    "seg": 4343,
    "off": 1841,
-   "grounding": "inventory:far_call,push_cs_call"
+   "alias_of": "IsThisPebble"
   },
   "f_10F7_0766": {
    "unit": "root",
@@ -8493,7 +8925,7 @@
    "unit": "root",
    "seg": 4343,
    "off": 1927,
-   "grounding": "inventory:push_cs_call"
+   "alias_of": "IsItFoodAt"
   },
   "f_10F7_07C7": {
    "unit": "root",
@@ -8517,7 +8949,7 @@
    "unit": "root",
    "seg": 4343,
    "off": 2388,
-   "grounding": "inventory:far_call,push_cs_call"
+   "alias_of": "ClearLife"
   },
   "f_10F7_09A8": {
    "unit": "root",
@@ -8529,7 +8961,7 @@
    "unit": "root",
    "seg": 4343,
    "off": 2556,
-   "grounding": "inventory:push_cs_call"
+   "alias_of": "SetQueenTail"
   },
   "f_10F7_0A44": {
    "unit": "root",
@@ -8559,7 +8991,7 @@
    "unit": "root",
    "seg": 4343,
    "off": 2897,
-   "grounding": "inventory:far_call"
+   "alias_of": "TargetAnt"
   },
   "f_10F7_0B8F": {
    "unit": "root",
@@ -8571,7 +9003,7 @@
    "unit": "root",
    "seg": 4343,
    "off": 2993,
-   "grounding": "inventory:far_call"
+   "alias_of": "StartLifeTransfer"
   },
   "f_10F7_0BEF": {
    "unit": "root",
@@ -8601,7 +9033,7 @@
    "unit": "root",
    "seg": 4343,
    "off": 5564,
-   "grounding": "inventory:push_cs_call"
+   "alias_of": "DropPebble"
   },
   "f_10F7_1696": {
    "unit": "root",
@@ -8631,7 +9063,7 @@
    "unit": "root",
    "seg": 4343,
    "off": 7473,
-   "grounding": "reviewed: prologue scan in unreached gap; descent ends in a return; no references found (unreferenced or indirect)"
+   "alias_of": "FindLifeAt"
   },
   "f_10F7_1DD3": {
    "unit": "root",
@@ -8673,7 +9105,7 @@
    "unit": "root",
    "seg": 4343,
    "off": 8910,
-   "grounding": "inventory:far_call"
+   "alias_of": "TileCanBeMovedOn"
   },
   "f_10F7_245C": {
    "unit": "root",
@@ -8685,7 +9117,7 @@
    "unit": "root",
    "seg": 4343,
    "off": 9353,
-   "grounding": "inventory:far_call"
+   "alias_of": "IsNotObstacle"
   },
   "f_10F7_24EE": {
    "unit": "root",
@@ -8697,7 +9129,7 @@
    "unit": "root",
    "seg": 4343,
    "off": 9544,
-   "grounding": "inventory:far_call,push_cs_call"
+   "alias_of": "IsItYellow"
   },
   "f_10F7_2613": {
    "unit": "root",
@@ -8709,7 +9141,7 @@
    "unit": "root",
    "seg": 4343,
    "off": 9792,
-   "grounding": "inventory:push_cs_call"
+   "alias_of": "IsSamePlane"
   },
   "f_10F7_266E": {
    "unit": "root",
@@ -8721,25 +9153,25 @@
    "unit": "root",
    "seg": 4343,
    "off": 9940,
-   "grounding": "inventory:far_call"
+   "alias_of": "TryMyDropOrLift"
   },
   "f_10F7_2821": {
    "unit": "root",
    "seg": 4343,
    "off": 10273,
-   "grounding": "inventory:push_cs_call"
+   "alias_of": "IsItAHole"
   },
   "f_10F7_2867": {
    "unit": "root",
    "seg": 4343,
    "off": 10343,
-   "grounding": "inventory:far_call,push_cs_call"
+   "alias_of": "IsValidA"
   },
   "f_10F7_2894": {
    "unit": "root",
    "seg": 4343,
    "off": 10388,
-   "grounding": "inventory:push_cs_call"
+   "alias_of": "IsValidB"
   },
   "f_1383_0002": {
    "unit": "root",
@@ -8979,7 +9411,7 @@
    "unit": "root",
    "seg": 5358,
    "off": 337,
-   "grounding": "inventory:far_call"
+   "alias_of": "DigMyTile"
   },
   "f_14EE_01D0": {
    "unit": "root",
@@ -9003,7 +9435,7 @@
    "unit": "root",
    "seg": 5358,
    "off": 1205,
-   "grounding": "inventory:push_cs_call"
+   "alias_of": "HoleBorder"
   },
   "f_14EE_0519": {
    "unit": "root",
@@ -9033,7 +9465,7 @@
    "unit": "root",
    "seg": 5358,
    "off": 2545,
-   "grounding": "inventory:far_call,push_cs_call"
+   "alias_of": "SmoothEdgesB"
   },
   "f_14EE_0B33": {
    "unit": "root",
@@ -9045,7 +9477,7 @@
    "unit": "root",
    "seg": 5358,
    "off": 2906,
-   "grounding": "inventory:far_call,push_cs_call"
+   "alias_of": "SmoothEdgesR"
   },
   "f_14EE_0C9C": {
    "unit": "root",
@@ -9903,13 +10335,13 @@
    "unit": "root",
    "seg": 6696,
    "off": 436,
-   "grounding": "inventory:push_cs_call"
+   "alias_of": "CopyRootName"
   },
   "f_1A28_0224": {
    "unit": "root",
    "seg": 6696,
    "off": 548,
-   "grounding": "inventory:push_cs_call"
+   "alias_of": "GetFreeHandle"
   },
   "f_1A28_0277": {
    "unit": "root",
@@ -15361,7 +15793,7 @@
    "unit": "S08",
    "seg": 13813,
    "off": 4592,
-   "grounding": "reviewed: prologue scan in unreached gap; descent ends in a return; no references found (unreferenced or indirect)"
+   "alias_of": "GrabMap"
   },
   "o08_35F5_1240": {
    "unit": "S08",

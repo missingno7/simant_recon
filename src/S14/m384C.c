@@ -1,14 +1,27 @@
-/* Overlay section S14, code frame 384C: score, scenario and picture dialogs. */
+/* Overlay section S14, code frame 384C: score, scenario and picture dialogs.
+ *
+ * Source-form evidence (worker resF):
+ *  - Every font choice is written `if (g_3DB2 == 320) f_24AB_02AD(a); else f_24AB_02AD(b);`
+ *    (six sites).  The two calls are cross-jumped into the same bytes as a `?:` argument, but
+ *    each if/else adds two /Zi line entries; with all six the 52-entry LINNUM flushes land where
+ *    the oracle's relocation order needs record breaks (DrawCastePopUp, PictureDialog,
+ *    SpiderDialog: 0 violations of 115 order constraints).
+ *  - Identifier counts (symbol-table state, periodic mod 17) are set only by named prototype
+ *    parameters: the forward prototypes of CalcScore/DoWinHelp/SetDefaultWindPrompt/
+ *    PictStrnDialog are named (+6, CalcScore operand order), g_9134's and PictureDialog's forward
+ *    declaration are unnamed (-5 before DrawCastePopUp, -4 before PictureDialog).  Which
+ *    prototypes carry names is a byte-equivalent unknown; only the counts are fixed by the bytes.
+ */
 
 #include <stdio.h>
 #include <string.h>
-long far CalcScore(int far *);
+long far CalcScore(int far *scores);
 int far DoScenario(void);
-void far DoWinHelp(int);
+void far DoWinHelp(int win);
 void far ScoreDialog(void);
 void far DrawCastePopUp(void);
-void far SetDefaultWindPrompt(int);
-void far PictStrnDialog(int, int, int);
+void far SetDefaultWindPrompt(int mode);
+void far PictStrnDialog(int picture, int object, int force);
 void far PictureDialog(char far * far *, int, int, int);
 void far EndGameDialog(void);
 void far SpiderDialog(void);
@@ -34,10 +47,17 @@ extern long far fd_50F6_0C26;
 
 static char weights[8] = { 13, 17, 19, 23, 29, 31, 37, 41 };
 
-/* SCAFFOLD BEGIN: CalcScore draft (worker resA): with +6 or +9 identifiers declared before the first extern, 'n = fd_50F6_0A9E + fd_50F6_0A90' takes the original operand order (length exact, probe SYM-1); what remains is the slot layout: original k -2, {loop-2 index, j total, outer loop j} -4, sum2 -6, sum -8, score -6..-4, q -0x0A..-8 (this draft: k -2, i -4, sum2 -6, j -8, sum -0x0A); local declaration order has no effect */
+/* SCAFFOLD BEGIN: CalcScore best draft (worker resF).  Instruction stream identical; 12 bytes
+ * differ, all slot numbering: the original puts {loop-2 index, total, nested-loop j} at -4 and
+ * sum2 at -6, this draft swaps them (j -6, sum2 -4).  Reusing k for the loop-2 counter and the
+ * final weighting loop (m dropped) gives k -2 / sum -8 / score -6 / q -0x0A as in the original
+ * (resA's form had 51 differing bytes).  Tried without effect on the j/sum2 order: loop-2 index
+ * i/j/k/n and counter i/j/k/n role search (3456 variants), spelling, declaration order, unused
+ * locals, sum/sum2 init and accumulate order, j = sum + sum2.  The identifier count before
+ * CalcScore (+6 named prototype parameters above) is what SYM-1 needs for its operand order. */
 long far CalcScore(int far *scores)
 {
-    int i, j, k, n, m, t;
+    int i, j, k, n, t;
     int sum, sum2;
     long score, q;
 
@@ -55,12 +75,12 @@ long far CalcScore(int far *scores)
     else
         scores[0] = 0;
 
-    i = (fd_50F6_04F4 - fd_3D57_0828) & 0x3f;
+    j = (fd_50F6_04F4 - fd_3D57_0828) & 0x3f;
     sum = sum2 = 0;
-    for (n = 0; n < fd_3D57_0828; n++) {
-        sum += fd_50F6_0626[i];
-        sum2 += fd_50F6_06AE[i];
-        i = (i + 1) & 0x3f;
+    for (k = 0; k < fd_3D57_0828; k++) {
+        sum += fd_50F6_0626[j];
+        sum2 += fd_50F6_06AE[j];
+        j = (j + 1) & 0x3f;
     }
     j = sum2 + sum;
     if (j > 0)
@@ -113,8 +133,8 @@ long far CalcScore(int far *scores)
     }
 
     score = MeHealth;
-    for (m = 0; m < 8; m++)
-        score += (long)scores[m] * weights[m] * 51;
+    for (k = 0; k < 8; k++)
+        score += (long)scores[k] * weights[k] * 51;
 
     if (fd_50F6_0EAC != 2) {
         score = score * 29 / 10;
@@ -135,8 +155,8 @@ long far CalcScore(int far *scores)
     }
     return fd_50F6_0C26 + score;
 }
-
 /* SCAFFOLD END */
+
 
 struct Event {
     int what;
@@ -262,7 +282,10 @@ void far ScoreDialog(void)
     f_22BF_059A(0x180c, fd_50F6_034C[14]);
     f_218D_042B();
     f_20E8_04B6(0x1800);
-    f_24AB_02AD(g_3DB2 == 320 ? 0 : 4);
+    if (g_3DB2 == 320)
+        f_24AB_02AD(0);
+    else
+        f_24AB_02AD(4);
     if (fd_50F6_0EAC == 2) {
         for (i = 4; i < 8; i++)
             f_22BF_0D53(0x1802 + i, "%d%%", scores[i]);
@@ -270,7 +293,10 @@ void far ScoreDialog(void)
         for (i = 4; i < 8; i++)
             f_22BF_0D53(0x1802 + i, fd_50F6_0368[16]);
     }
-    f_24AB_02AD(g_3DB2 == 320 ? 3 : 4);
+    if (g_3DB2 == 320)
+        f_24AB_02AD(3);
+    else
+        f_24AB_02AD(4);
     if (fd_50F6_0EAC == 3) {
         f_22BF_0D53(0x180a, fd_50F6_0368[17]);
         f_22BF_0D53(0x180b, fd_50F6_0368[18]);
@@ -302,9 +328,8 @@ extern int far fd_50F6_0AFA[];
 extern void _fastcall win_SetColorFromObjNum(int obj);
 extern void far f_24AB_038D(int x, int y, char far *text);
 extern int near g_3DE0;
-extern void (far * near g_9134)(int left, int top, int right, int bottom, int color);
+extern void (far * near g_9134)(int, int, int, int, int);
 
-/* SCAFFOLD BEGIN: DrawCastePopUp draft (worker resA): 'y = top = r.top' gives the original frame (top keeps its own slot); the only byte residue is the operand order of 'left + a' (2 bytes), which is symbol-table state: +1..+8 identifiers declared after the weights table make it byte-exact (+1/+2 also keep PictureDialog's bytes). Its relocation order then needs /Zi line-entry flushes outside (0825,0AA3]: the original has 3..7 more line entries than this file between DoWinHelp's flush (0579) and 0825, and 11..15 more before PictureDialog's flush zone (0D2C,0D7A], see report */
 void far DrawCastePopUp(void)
 {
     struct Rect r;
@@ -318,7 +343,10 @@ void far DrawCastePopUp(void)
     f_1FD2_057F();
     win_GetObjRect(0x1702, &r);
     clip_SubInclude(&r);
-    f_24AB_02AD(g_3DB2 == 320 ? 0 : 2);
+    if (g_3DB2 == 320)
+        f_24AB_02AD(0);
+    else
+        f_24AB_02AD(2);
     maxw = 0;
     for (i = '0'; i <= '9'; i++) {
         w = f_24AB_0367(i);
@@ -374,7 +402,6 @@ void far DrawCastePopUp(void)
     f_20E8_0635(0x1700);
 }
 
-/* SCAFFOLD END */
 
 extern int far fd_50F6_047E;
 extern int far fd_50F6_105E;
@@ -394,7 +421,7 @@ void far SetDefaultWindPrompt(int mode)
 
 extern int far fd_3D57_07A8[];
 extern char far * far * far f_075B_0242(int object);
-void far PictureDialog(char far * far *strings, int count, int picture, int force);
+void far PictureDialog(char far * far *, int, int, int);
 extern void far free(char far * far *block);
 extern void far db_PurgeObject(int object, int kind);
 
@@ -426,7 +453,6 @@ extern void far f_208F_0093(struct Rect far *rect, char far *text);
 extern void far f_00F8_02F7(int ticks);
 extern int far f_00F8_05F2(void);
 
-/* SCAFFOLD BEGIN: PictureDialog draft: exact bytes with +3..7 identifiers; LEDATA record break inside the function */
 void far PictureDialog(char far * far *strings, int count, int picture, int force)
 {
     struct Pt size;
@@ -434,7 +460,10 @@ void far PictureDialog(char far * far *strings, int count, int picture, int forc
     struct Rect r;
     struct Event ev;
 
-    f_24AB_02AD(g_3DB2 == 320 ? 3 : 4);
+    if (g_3DB2 == 320)
+        f_24AB_02AD(3);
+    else
+        f_24AB_02AD(4);
     lineh = f_24AB_030B();
     if (picture)
         f_208F_0419(&size, picture);
@@ -456,7 +485,10 @@ void far PictureDialog(char far * far *strings, int count, int picture, int forc
         win_DrawBitMap((r.left + r.right - size.h) / 2, r.top, picture);
         r.top += size.v + 2;
     }
-    f_24AB_02AD(g_3DB2 == 320 ? 3 : 4);
+    if (g_3DB2 == 320)
+        f_24AB_02AD(3);
+    else
+        f_24AB_02AD(4);
     win_SetColorFromObjNum(0x1e01);
     for (i = 0; i < count; i++) {
         r.bottom = r.top + lineh;
@@ -474,7 +506,6 @@ void far PictureDialog(char far * far *strings, int count, int picture, int forc
     f_24AB_02AD(0);
 }
 
-/* SCAFFOLD END */
 
 extern int far fd_50F6_0366;
 extern void far f_00DF_00B1(int id, int arg);
@@ -513,7 +544,10 @@ void far EndGameDialog(void)
     if (fd_50F6_0366 == 0)
         level += 5;
     f_20E8_04B6(0x400);
-    f_24AB_02AD(g_3DB2 == 320 ? 2 : 4);
+    if (g_3DB2 == 320)
+        f_24AB_02AD(2);
+    else
+        f_24AB_02AD(4);
     f_22BF_0D53(0x402, fd_50F6_0324[fd_50F6_0EAC]);
     f_22BF_0D53(0x403, "%ld", score);
     f_22BF_0D53(0x404, fd_50F6_0328[level]);
@@ -539,7 +573,6 @@ extern int far fd_3D57_09B4[];
 extern void far f_00F8_0265(long ticks);
 extern int far SRand1(int range);
 
-/* SCAFFOLD BEGIN: SpiderDialog draft: bytes exact, LEDATA record break (/Zd line count) differs */
 void far SpiderDialog(void)
 {
     struct Rect r;
@@ -584,7 +617,6 @@ void far SpiderDialog(void)
     f_20E8_0635(0x1a00);
 }
 
-/* SCAFFOLD END */
 
 extern char far * far * far db_LoadObject(int object, int kind);
 extern char far * far f_171C_1B84(char far * far *handle);

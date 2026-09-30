@@ -74,7 +74,7 @@ extern void far f_0EC1_0719(void);
 extern void far f_0EC1_07C1(void);
 extern void far f_0EC1_07D4(void);
 extern void far o24_39C7_01B8(int a);
-extern void far f_0BE8_0002(void);
+extern void far CountAnts(void);
 extern void far InvalEuMap(int a, int b, int columns, int rows);
 
 extern int far fd_50F6_07CA[2];
@@ -362,7 +362,7 @@ void far RandWorld(unsigned seed, int blackSize, int redSize, int mapWidth, int 
     Cycle = 0;
 
     o24_39C7_01B8(0);
-    f_0BE8_0002();
+    CountAnts();
     InvalEuMap(0, 0, fd_50F6_0FB6, fd_50F6_0FFA);
 
     fd_50F6_0508[0] = 0x40;
@@ -788,7 +788,7 @@ void far AddRedAnts(int count)
     }
 }
 
-int far o08_35F5_11F0(int x, int y)
+int far GrabMap(int x, int y)
 {
     int col, row;
 

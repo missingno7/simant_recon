@@ -71,7 +71,7 @@ extern unsigned char far RlistT[];
 extern unsigned char far RlistM[];
 extern unsigned char far RlistS[];
 
-int far f_10F7_2867(int, int);
+int far IsValidA(int, int);
 int far IsClearTile(int, int, int);
 int far GetLife(int, int, int);
 int far GetMap(int, int, int);
@@ -80,23 +80,23 @@ int far IsItDigable(int, int, int);
 void far AddAntToAList(int, int, int, int, int);
 void far AddAntToBList(int, int, int, int, int);
 void far AddAntToRList(int, int, int, int, int);
-void far f_14EE_0151(int, int, int);
+void far DigMyTile(int, int, int);
 void far myBeginSound(int, int, int);
 void far ZapEuMapAt(int, int, int);
 int far IsItFood(int);
 void far DoEditUpdateDraw(void);
 void far o22_39C7_07FD(int, int, int);
-int far f_10F7_2548(int, int, int);
+int far IsItYellow(int, int, int);
 void far SetMyHealth(int);
 int far DigMyNewHole(int, int);
 void far o25_3BA4_1035(void);
 void far f_015B_06A2(void);
 int far IsItHole(int, int);
-void far f_0BE8_0798(int, int);
+void far PickupFoodA(int, int);
 unsigned long far GetDis(int, int, int, int);
 int far IsItDirt(int);
-int far f_10F7_2640(int);
-int far f_10F7_2894(int, int);
+int far IsSamePlane(int);
+int far IsValidB(int, int);
 void far f_1496_043C(int, int, int);
 void far o14_384C_0ACD(int);
 void far o22_39C7_188D(int, int);
@@ -104,9 +104,9 @@ void far EditMessage(void far *, long, int);
 int far SRand1(int);
 int far SRand8(void);
 int far SRand16(void);
-int far f_10F7_2821(int, int, int);
+int far IsItAHole(int, int, int);
 int far GetDir(int, int, int, int);
-void far f_0BE8_0812(int, int);
+void far DropFoodA(int, int);
 void far PauseGame(int);
 void far EndTargetMode(void);
 void far EndLifeTransferMode(void);
@@ -115,14 +115,14 @@ int far mySoundIsDone(void);
 void far myDelay(long);
 void far myBeginSong(unsigned int, unsigned int);
 int far IsItNFood(int);
-int far f_10F7_2894(int, int);
+int far IsValidB(int, int);
 
-int far f_10F7_000E(int map, int index, int out)
+int far IsValidLocation(int map, int index, int out)
 {
     if (map <= 1)
-        return f_10F7_2867(index, out);
+        return IsValidA(index, out);
     else
-        return f_10F7_2894(index, out);
+        return IsValidB(index, out);
 }
 
 int far IsYellowAnt(int value)
@@ -321,7 +321,7 @@ int far AddAntToList(int plane, int x, int y, int type, int a, int b)
 
 void far SetLife(int plane, int x, int y, int value)
 {
-    if (f_10F7_000E(plane, x, y) == 1) {
+    if (IsValidLocation(plane, x, y) == 1) {
         switch (plane) {
         case 0:
         case 1:
@@ -330,14 +330,14 @@ void far SetLife(int plane, int x, int y, int value)
         case 2:
             LifeB[x][y] = value;
             if (value > 0 && IsItDigable(plane, x, y) == 1) {
-                f_14EE_0151(plane, x, y);
+                DigMyTile(plane, x, y);
                 myBeginSound(0x13, 0, 0x3f);
             }
             break;
         case 3:
             LifeR[x][y] = value;
             if (value > 0 && IsItDigable(plane, x, y) == 1) {
-                f_14EE_0151(plane, x, y);
+                DigMyTile(plane, x, y);
                 myBeginSound(0x13, 0, 0x3f);
             }
             break;
@@ -372,7 +372,7 @@ int far IsThisFood(int category, int tile)
     return IsItNFood(tile);
 }
 
-int far f_10F7_0731(int plane, int tile)
+int far IsThisPebble(int plane, int tile)
 {
     if (plane <= 1) {
         if (plane == 1 && tile >= 0x51 && tile <= 0x53)
@@ -390,7 +390,7 @@ int far IsItNFood(int value)
     return 1;
 }
 
-int far f_10F7_0787(int plane, int x, int y)
+int far IsItFoodAt(int plane, int x, int y)
 {
     register int tile;
 
@@ -407,7 +407,7 @@ int far GetLife(int plane, int x, int y)
     int result;
 
     result = -1;
-    if (f_10F7_000E(plane, x, y) == 1) {
+    if (IsValidLocation(plane, x, y) == 1) {
         switch (plane) {
         case 0:
         case 1:
@@ -431,7 +431,7 @@ int far GetMap(int plane, int x, int y)
     int result;
 
     result = -1;
-    if (f_10F7_000E(plane, x, y) == 1) {
+    if (IsValidLocation(plane, x, y) == 1) {
         switch (plane) {
         case 0:
         case 1:
@@ -450,7 +450,7 @@ int far GetMap(int plane, int x, int y)
 
 void far SetMap(int plane, int x, int y, int value)
 {
-    if (f_10F7_000E(plane, x, y) == 1) {
+    if (IsValidLocation(plane, x, y) == 1) {
         switch (plane) {
         case 0:
         case 1:
@@ -467,9 +467,9 @@ void far SetMap(int plane, int x, int y, int value)
     }
 }
 
-void far f_10F7_0954(int plane, int x, int y, int value)
+void far ClearLife(int plane, int x, int y, int value)
 {
-    if (f_10F7_000E(plane, x, y) == 1) {
+    if (IsValidLocation(plane, x, y) == 1) {
         if (GetLife(plane, x, y) == value)
             SetLife(plane, x, y, 0);
         ZapEuMapAt(plane, x, y);
@@ -478,12 +478,12 @@ void far f_10F7_0954(int plane, int x, int y, int value)
 
 void far ClearMyLife(int plane, int x, int y, int type, int dir)
 {
-    f_10F7_0954(plane, x, y, 0xff);
+    ClearLife(plane, x, y, 0xff);
     if (type == 0x60)
-        f_10F7_0954(plane, x + Dx8[dir ^ 4], y + Dy8[dir ^ 4], 0xfe);
+        ClearLife(plane, x + Dx8[dir ^ 4], y + Dy8[dir ^ 4], 0xfe);
 }
 
-void far f_10F7_09FC(int plane, int x, int y, int dir, int value)
+void far SetQueenTail(int plane, int x, int y, int dir, int value)
 {
     SetLife(plane, x + Dx8[dir ^ 4], y + Dy8[dir ^ 4],
                 (value == 0xff) ? 0xfe : value);
@@ -491,10 +491,10 @@ void far f_10F7_09FC(int plane, int x, int y, int dir, int value)
 
 void far SetMyLife(int plane, int x, int y, int type, int dir, int life)
 {
-    if (f_10F7_000E(plane, x, y) == 1) {
+    if (IsValidLocation(plane, x, y) == 1) {
         SetLife(plane, x, y, life);
         if (type == 0x60)
-            f_10F7_09FC(plane, x, y, dir, life);
+            SetQueenTail(plane, x, y, dir, life);
         if (life != 0) {
             MeLocX = x;
             MeLocY = y;
@@ -521,7 +521,7 @@ void far DoEditAndMapUpdateDraw(void)
     DoEditUpdateDraw();
 }
 
-void far f_10F7_0B51(void)
+void far TargetAnt(void)
 {
     if (fd_50F6_105E == 0xb) {
         EndTargetMode();
@@ -538,7 +538,7 @@ void far EndTargetMode(void)
     PauseGame(fd_50F6_048E);
 }
 
-void far f_10F7_0BB1(void)
+void far StartLifeTransfer(void)
 {
     if (fd_50F6_105E == 0xa) {
         EndLifeTransferMode();
@@ -630,7 +630,7 @@ int far DoLifeExchange(int plane, int x, int y)
         SetMyHealth(100);
         goto done;
     }
-    if (f_10F7_2548(plane, x, y) || IsYellowAnt(life))
+    if (IsItYellow(plane, x, y) || IsYellowAnt(life))
         goto done;
     caste = (life & 0x78) >> 3;
     if (caste == 0xc) {
@@ -765,7 +765,7 @@ int far DropMyFood(int plane, int x, int y, int tx, int ty)
         d = (fd_3D57_006C[i] + dir) & 7;
         nx = x + Dx8[d];
         ny = y + Dy8[d];
-        if (f_10F7_000E(plane, nx, ny)) {
+        if (IsValidLocation(plane, nx, ny)) {
             if (GetLife(plane, nx, ny) < 0) {
                 tile = GetMap(plane, nx, ny);
                 if (IsThisFood(plane, tile) && (tile & 3) < 3) {
@@ -782,7 +782,7 @@ int far DropMyFood(int plane, int x, int y, int tx, int ty)
         d = dir;
         nx = x;
         ny = y;
-        if (f_10F7_000E(plane, nx, ny)) {
+        if (IsValidLocation(plane, nx, ny)) {
             tile = GetMap(plane, nx, ny);
             if (IsThisFood(plane, tile) && (tile & 3) < 3) {
                 tile++;
@@ -796,7 +796,7 @@ int far DropMyFood(int plane, int x, int y, int tx, int ty)
     if (done) {
         fd_50F6_0496 = d;
         if (plane <= 1)
-            f_0BE8_0812(nx, ny);
+            DropFoodA(nx, ny);
         else {
             SetMap(plane, nx, ny, tile);
             if (plane == 2)
@@ -811,19 +811,19 @@ int far DropMyFood(int plane, int x, int y, int tx, int ty)
     return done;
 }
 
-void far f_10F7_15BC(int plane, int x, int y)
+void far DropPebble(int plane, int x, int y)
 {
     int tile;
 
     if (plane <= 1) {
-        if (f_10F7_2821(plane, x, y)) {
+        if (IsItAHole(plane, x, y)) {
             if (x < 0x40 && HoleMapB[y] == x)
                 MapB[y][0] = 0x31;
             else if (HoleMapR[y] == x)
                 MapR[y][0] = 0x31;
         }
         tile = 0x51;
-    } else if (f_10F7_2821(plane, x, y)) {
+    } else if (IsItAHole(plane, x, y)) {
         MapA[plane == 2 ? HoleMapB[x] : HoleMapR[x]][x] = 0x51;
         tile = 0x31;
     } else
@@ -855,14 +855,14 @@ int far DropMyRock(int plane, int x, int y, int tx, int ty)
         d = (fd_3D57_006C[i] + dir) & 7;
         nx = x + Dx8[d];
         ny = y + Dy8[d];
-        if (f_10F7_000E(plane, nx, ny)) {
+        if (IsValidLocation(plane, nx, ny)) {
             if (GetLife(plane, nx, ny) < 0) {
                 if (IsClearTile(plane, nx, ny))
                     done = 1;
                 else {
                     tile = GetMap(plane, nx, ny);
-                    if (!IsThisFood(plane, tile) && !f_10F7_0731(plane, tile) &&
-                        (f_10F7_2821(plane, nx, ny) || tile == 0x38))
+                    if (!IsThisFood(plane, tile) && !IsThisPebble(plane, tile) &&
+                        (IsItAHole(plane, nx, ny) || tile == 0x38))
                         done = 1;
                 }
             }
@@ -872,20 +872,20 @@ int far DropMyRock(int plane, int x, int y, int tx, int ty)
         d = dir;
         nx = x;
         ny = y;
-        if (f_10F7_000E(plane, nx, ny)) {
+        if (IsValidLocation(plane, nx, ny)) {
             if (IsClearTile(plane, nx, ny))
                 done = 1;
             else {
                 tile = GetMap(plane, nx, ny);
-                if (!IsThisFood(plane, tile) && !f_10F7_0731(plane, tile) &&
-                    (f_10F7_2821(plane, nx, ny) || tile == 0x38))
+                if (!IsThisFood(plane, tile) && !IsThisPebble(plane, tile) &&
+                    (IsItAHole(plane, nx, ny) || tile == 0x38))
                     done = 1;
             }
         }
     }
     if (done) {
         fd_50F6_0496 = d;
-        f_10F7_15BC(plane, nx, ny);
+        DropPebble(plane, nx, ny);
         if (!((*(unsigned char far *)0x417L & 3) && (*(unsigned char far *)0x417L & 8))) {
             if (fd_50F6_04C2 == 0x28 || fd_50F6_04C2 == 0x48)
                 fd_50F6_04C2 -= 0x18;
@@ -918,7 +918,7 @@ int far DropMyEgg(int plane, int x, int y, int tx, int ty)
         d = (fd_3D57_006C[i] + dir) & 7;
         nx = x + Dx8[d];
         ny = y + Dy8[d];
-        if (f_10F7_000E(plane, nx, ny)) {
+        if (IsValidLocation(plane, nx, ny)) {
             if (GetLife(plane, nx, ny) < 0) {
                 if (IsClearTile(plane, nx, ny) || GetMap(plane, nx, ny) == 0x38)
                     done = 1;
@@ -929,7 +929,7 @@ int far DropMyEgg(int plane, int x, int y, int tx, int ty)
         d = dir;
         nx = x;
         ny = y;
-        if (f_10F7_000E(plane, nx, ny)) {
+        if (IsValidLocation(plane, nx, ny)) {
             if (IsClearTile(plane, nx, ny) || GetMap(plane, nx, ny) == 0x38)
                 done = 1;
         }
@@ -958,7 +958,7 @@ int far PickupMyRock(int plane, int x, int y)
     done = 0;
     tile = GetMap(plane, x, y);
     if (plane <= 1) {
-        if (f_10F7_0731(plane, tile)) {
+        if (IsThisPebble(plane, tile)) {
             if (x < 0x40) {
                 if (HoleMapB[y] == x) {
                     MapB[y][0] = 0x18;
@@ -1028,7 +1028,7 @@ int far FindEggAt(int far *index, int plane, int x, int y)
     return -1;
 }
 
-int far f_10F7_1D31(int far *index, int plane, int x, int y)
+int far FindLifeAt(int far *index, int plane, int x, int y)
 {
     int i;
     int life;
@@ -1134,7 +1134,7 @@ int far PickupMyFood(int plane, int x, int y)
     int eat;
     int tile;
 
-    if (!f_10F7_0787(plane, x, y))
+    if (!IsItFoodAt(plane, x, y))
         return 0;
     if (fd_50F6_1044)
         eat = 1;
@@ -1143,7 +1143,7 @@ int far PickupMyFood(int plane, int x, int y)
     else
         return 0;
     if (plane <= 1) {
-        f_0BE8_0798(x, y);
+        PickupFoodA(x, y);
         if (!eat) {
             fd_50F6_04C4 = 200;
             fd_50F6_0B1E = GetDis(x, y, fd_3D57_02AC[0], fd_3D57_02AC[1]);
@@ -1202,7 +1202,7 @@ int far PickupMyObject(int plane, int x, int y)
     return result;
 }
 
-int far f_10F7_22CE(int plane, int x, int y, int fromPlane, int fromX, int fromY, int digging)
+int far TileCanBeMovedOn(int plane, int x, int y, int fromPlane, int fromX, int fromY, int digging)
 {
     int dig;
     int ok;
@@ -1263,7 +1263,7 @@ int far IsNotBarrier(int x)
     return x <= 0x5f;
 }
 
-int far f_10F7_2489(int plane, int x, int y)
+int far IsNotObstacle(int plane, int x, int y)
 {
     int tile;
     int ok;
@@ -1276,7 +1276,7 @@ int far f_10F7_2489(int plane, int x, int y)
             ok = tile <= 0x53;
         else
             ok = IsNotBarrier(tile);
-    } else if (tile <= 0x18 || f_10F7_0731(plane, tile))
+    } else if (tile <= 0x18 || IsThisPebble(plane, tile))
         ok = 1;
     else
         ok = 0;
@@ -1287,7 +1287,7 @@ int far IsItDigable(int plane, int x, int y)
 {
     int tile;
 
-    if (plane >= 2 && f_10F7_2894(x, y)) {
+    if (plane >= 2 && IsValidB(x, y)) {
         tile = GetMap(plane, x, y);
         if (IsItDirt(tile))
             return 1;
@@ -1297,11 +1297,11 @@ int far IsItDigable(int plane, int x, int y)
     return 0;
 }
 
-int far f_10F7_2548(int plane, int x, int y)
+int far IsItYellow(int plane, int x, int y)
 {
     int life;
 
-    if (!f_10F7_2640(plane))
+    if (!IsSamePlane(plane))
         return 0;
     if (fd_50F6_0A06 == 1) {
         if (plane > 1)
@@ -1332,7 +1332,7 @@ int far IsLessThanHole(int x)
     return x < 0x59;
 }
 
-int far f_10F7_2640(int plane)
+int far IsSamePlane(int plane)
 {
     if (MePlane == (plane == 0 ? 1 : plane))
         return 1;
@@ -1347,10 +1347,10 @@ int far IsLiftable(int plane, int x, int y)
 
     egg = FindEggAt(&eggIndex, plane, x, y);
     tile = GetMap(plane, x, y);
-    return IsThisFood(plane, tile) || f_10F7_0731(plane, tile) || IsThisEgg(egg);
+    return IsThisFood(plane, tile) || IsThisPebble(plane, tile) || IsThisEgg(egg);
 }
 
-int far f_10F7_26D4(int plane, int x, int y)
+int far TryMyDropOrLift(int plane, int x, int y)
 {
     int dir;
     int result;
@@ -1382,7 +1382,7 @@ int far f_10F7_26D4(int plane, int x, int y)
     return result;
 }
 
-int far f_10F7_2821(int plane, int x, int y)
+int far IsItAHole(int plane, int x, int y)
 {
     if (plane <= 1)
         return IsItHole(x, y);
@@ -1393,14 +1393,14 @@ int far f_10F7_2821(int plane, int x, int y)
     return 0;
 }
 
-int far f_10F7_2867(int x, int y)
+int far IsValidA(int x, int y)
 {
     if (x >= 0 && x <= 127 && y >= 0 && y <= 63)
         return 1;
     return 0;
 }
 
-int far f_10F7_2894(int x, int y)
+int far IsValidB(int x, int y)
 {
     if (x >= 0 && x <= 63 && y >= 0 && y <= 63)
         return 1;

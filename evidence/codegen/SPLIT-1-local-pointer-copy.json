@@ -1,0 +1,26 @@
+{
+ "id": "SPLIT-1",
+ "question": "Does copying a far pointer parameter into a local (p = q) change how /Og loads it? Positive control f_1FAA_0006 (root:1FAA, complete TU): exact only with `p = q;` and p[...] accesses. The copy is propagated away (no store of its own); what remains is a split load `mov di,[bp+6]; mov es,[bp+8]` of the parameter, held in DI:ES and spilled to a temp. Indexing q directly gives `les di,[bp+6]` and a 3-byte-shorter function (295 vs 298). Same shape: S23 win_GetStyleTextHeight/win_PrintStyleTextInRect `mov bx,[bp+6]; mov es,[bp+8]`.",
+ "header": "struct Pt {\n    int x;\n    int y;\n};\n\nextern char near g_5A97;\nextern void (far * near g_9128)(int a, int b, int c);\nextern void (far * near g_913C)(int left, int top, int right, int bottom);\nextern void (far * near g_9134)(int x0, int y0, int x1, int y1, int color);\nextern void (far * near g_9138)(int x0, int y0, int x1, int y1, int color);\n\n",
+ "variants": {
+  "local_copy": "void far f_1FAA_0006(struct Pt far *q, int fore, int back)\n{\n    int top;\n    int x0;\n    int x1;\n    int bottom;\n    long dy;\n    long sl;\n    long sr;\n    long fl;\n    long fr;\n    struct Pt far *p;\n\n    p = q;\n    top = p[0].y;\n    bottom = p[2].y;\n    x0 = p[0].x;\n    x1 = p[1].x;\n    dy = bottom - top;\n    sl = ((long)(x0 - p[3].x) << 16) / dy;\n    sr = ((long)(x1 - p[2].x) << 16) / dy;\n    fl = (long)x0 << 16;\n    fr = (long)x1 << 16;\n    if (g_5A97 & 1)\n        fore = back;\n    (*g_9128)(fore, back, fore);\n    for (; top < bottom; top++) {\n        if (fore == -1)\n            (*g_913C)(x0, top, x1, top + 1);\n        else if (back == fore)\n            (*g_9134)(x0, top, x1, top + 1, fore);\n        else\n            (*g_9138)(x0, top, x1, top + 1, 0x20);\n        fl -= sl;\n        x0 = fl >> 16;\n        fr -= sr;\n        x1 = fr >> 16;\n    }\n}\n",
+  "direct": "void far f_1FAA_0006(struct Pt far *q, int fore, int back)\n{\n    int top;\n    int x0;\n    int x1;\n    int bottom;\n    long dy;\n    long sl;\n    long sr;\n    long fl;\n    long fr;\n\n    top = q[0].y;\n    bottom = q[2].y;\n    x0 = q[0].x;\n    x1 = q[1].x;\n    dy = bottom - top;\n    sl = ((long)(x0 - q[3].x) << 16) / dy;\n    sr = ((long)(x1 - q[2].x) << 16) / dy;\n    fl = (long)x0 << 16;\n    fr = (long)x1 << 16;\n    if (g_5A97 & 1)\n        fore = back;\n    (*g_9128)(fore, back, fore);\n    for (; top < bottom; top++) {\n        if (fore == -1)\n            (*g_913C)(x0, top, x1, top + 1);\n        else if (back == fore)\n            (*g_9134)(x0, top, x1, top + 1, fore);\n        else\n            (*g_9138)(x0, top, x1, top + 1, 0x20);\n        fl -= sl;\n        x0 = fl >> 16;\n        fr -= sr;\n        x1 = fr >> 16;\n    }\n}\n"
+ },
+ "profiles": [
+  {
+   "profile": "msc600ax",
+   "flags": [
+    "/AL",
+    "/Os",
+    "/Oe",
+    "/Og",
+    "/Gs",
+    "/Zi"
+   ]
+  }
+ ],
+ "expect": {
+  "local_copy@0": "push di; push si; mov di, word ptr [bp + 6]; mov es, word ptr [bp + 8]",
+  "direct@0": "push di; push si; les di, ptr [bp + 6]"
+ }
+}

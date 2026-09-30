@@ -174,7 +174,7 @@ extern unsigned char far fd_3E1D_2180[64][64];
 void far o25_39C7_154F(int x, int y);
 extern int far SRand1(int range);
 int far o25_39C7_105B(int x, int y, int dir);
-extern int far f_0BE8_0D67(int x, int y, int dir);
+extern int far GetEnterDirB(int x, int y, int dir);
 extern int far f_0BE8_0C0F(int x, int y, int limit);
 extern int far SRand8(void);
 int far o25_39C7_0853(int x, int y, int attacker);
@@ -196,7 +196,7 @@ void far o25_39C7_038F(int x, int y, int dirHint)
     dir = (SRand1(3) + dirHint - 2) & 7;
     if (o25_39C7_105B(x, y, dir) != 0)
         return;
-    dir = f_0BE8_0D67(x, y, dirHint & 7);
+    dir = GetEnterDirB(x, y, dirHint & 7);
     if (dir < 0)
         dir = SRand1(8);
     if (o25_39C7_105B(x, y, dir) != 0)
@@ -451,8 +451,8 @@ void far o25_39C7_0AB0(int x, int y, int caste, int attr)
 
 extern long far f_0BE8_0B83(int x1, int y1, int x2, int y2);
 extern int far GetMap(int plane, int x, int y);
-extern int far f_10F7_2489(int plane, int x, int y);
-extern int far f_10F7_0731(int plane, int tile);
+extern int far IsNotObstacle(int plane, int x, int y);
+extern int far IsThisPebble(int plane, int tile);
 extern int far f_10F7_07C7(int plane, int x, int y);
 extern int far f_10F7_04EC(int plane, int x, int y);
 extern int far fd_50F6_10C0;
@@ -479,9 +479,9 @@ int far o25_39C7_0CBD(int plane, int x, int y, int a, int b)
         nx = fd_3D57_0000[dir] + x;
         ny = fd_3D57_0008[dir] + y;
         tile = GetMap(plane, nx, ny);
-        if (f_10F7_2489(plane, nx, ny) != 1)
+        if (IsNotObstacle(plane, nx, ny) != 1)
             continue;
-        if (f_10F7_0731(plane, tile) != 0)
+        if (IsThisPebble(plane, tile) != 0)
             continue;
         dis = f_0BE8_0B83(nx, ny, a, b);
         if (dis >= threshold)
@@ -654,7 +654,7 @@ void far DoNestingB(int x, int y, int attr, int caste)
     switch (caste) {
     case 1:
         if (food == 0) {
-            if ((dir = f_0BE8_0D67(x, y, attr & 7)) < 0)
+            if ((dir = GetEnterDirB(x, y, attr & 7)) < 0)
                 BlistS[fd_50F6_0F18] = load | 8;
             break;
         }
@@ -776,7 +776,7 @@ void far DoFoodInB(int x, int y, int attr)
     int newattr;
     int ny;
 
-    if ((dir = f_0BE8_0D67(x, y, attr & 7)) >= 0 && SRand16() != 0) {
+    if ((dir = GetEnterDirB(x, y, attr & 7)) >= 0 && SRand16() != 0) {
         newattr = (attr & 0xf8) | dir;
         BlistT[fd_50F6_0F18] = fd_3E1D_8180[x][y] = newattr;
         nx = fd_3D57_0000[dir] + x;
@@ -826,7 +826,7 @@ void far DoDigInB(int x, int y, int attr, int caste)
         BlistM[fd_50F6_0F18] = f_1383_099B(caste);
         return;
     }
-    if ((dir = f_0BE8_0D67(x, y, attr & 7)) < 0)
+    if ((dir = GetEnterDirB(x, y, attr & 7)) < 0)
         dir = SRand8();
     newattr = (attr & 0xf8) | dir;
     BlistT[fd_50F6_0F18] = fd_3E1D_8180[x][y] = newattr;

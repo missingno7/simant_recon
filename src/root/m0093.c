@@ -2,7 +2,7 @@
  * Random numbers (root module, code frame 0093; linear 0x932-0xBA1).
  * Profile: MSC 6.00 /AL /Os /Oe.  /Oe (global register allocation) is required:
  * plain autos land in SI/DI while their unused BP homes remain, which is the
- * frame shape of f_0093_0054, SeedRRand and RRand.
+ * frame shape of SGSRand, SeedRRand and RRand.
  *
  * Same translation unit as the Win16 build's SetSRandSeed..SRand256 group
  * (simantw_recon unit simone_1506): an LFSR "S" generator with feedback
@@ -22,7 +22,7 @@ int far SRand128(void);
 
 static unsigned int seed;
 
-int far f_0093_0002(int range)
+int far SGIRand(int range)
 {
     int first;
     int second;
@@ -46,7 +46,7 @@ int far SGRand(int range)
     return second;
 }
 
-int far f_0093_0054(int range)
+int far SGSRand(int range)
 {
     int first;
     int second;
@@ -74,7 +74,7 @@ void far SetRRandSeed(void)
 {
 }
 
-unsigned long far f_0093_00B8(void)
+unsigned long far GetRRandSeed(void)
 {
     return *(unsigned long far *)0x046C0000L;
 }

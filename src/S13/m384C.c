@@ -443,10 +443,11 @@ void far DrawForSale(void)
 
 extern int far fd_3D57_0C28;
 
-/* SCAFFOLD BEGIN: DrawMower draft: x lives in SI/DI instead of BX (register allocation) */
+/* DrawMower: the final position goes to separate h, v; x and y then die before the call and
+ * x is allocated to BX (frame 8 keeps the h/v homes), as in the original (worker resF). */
 void far DrawMower(void)
 {
-    int frame, x, y;
+    int frame, x, y, h, v;
 
     frame = 0;
     if (fd_3D57_0C28 == 3 || fd_3D57_0C28 == 4) {
@@ -485,15 +486,13 @@ void far DrawMower(void)
         x = (x >> 1) + 5;
         y = (y >> 1) + 6;
     }
-    x += fd_50F6_10D2.left;
-    y += fd_50F6_10D2.top;
+    h = x + fd_50F6_10D2.left;
+    v = y + fd_50F6_10D2.top;
     if (g_2A32 != -1)
-        hanim_SetObjectPos(x, y, frame + 0x2260, fd_50F6_10DA, g_2A32, -1);
+        hanim_SetObjectPos(h, v, frame + 0x2260, fd_50F6_10DA, g_2A32, -1);
     else
-        g_2A32 = hanim_AddAnimObject(fd_50F6_10DA, x, y, frame + 0x2260, -1);
+        g_2A32 = hanim_AddAnimObject(fd_50F6_10DA, h, v, frame + 0x2260, -1);
 }
-
-/* SCAFFOLD END */
 
 extern Handle far hanim_MakeAnimSet(void);
 extern int far fd_50F6_38CA[15];

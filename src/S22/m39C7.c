@@ -44,7 +44,7 @@ extern void far processExp(int x, int y, int shift);
 extern int far fd_50F6_0F44;
 extern int far fd_50F6_105E;
 extern int far fd_50F6_048C;
-extern int far f_10F7_2548(int plane, int x, int y);
+extern int far IsItYellow(int plane, int x, int y);
 extern int far myButton(void);
 extern void far AntMenu(struct Event far *ev);
 extern int far GetLife(int plane, int x, int y);
@@ -105,7 +105,7 @@ void far processEdit(struct Event far *ePtr)
     switch (fd_50F6_105E) {
     case -1:
         if (!shift) {
-            if (f_10F7_2548(fd_50F6_048C, x, y) == 1) {
+            if (IsItYellow(fd_50F6_048C, x, y) == 1) {
                 if (myButton() == 1) {
                     AntMenu(ePtr);
                     return;
@@ -969,9 +969,9 @@ int far YellowCommandKey(int key)
 
 void far YellowHelp(void);
 extern void far Recruit(int count);
-extern void far f_10F7_0BB1(void);
-extern int far f_10F7_26D4(int plane, int x, int y);
-extern void far f_10F7_0B51(void);
+extern void far StartLifeTransfer(void);
+extern int far TryMyDropOrLift(int plane, int x, int y);
+extern void far TargetAnt(void);
 
 void far YellowCommand(int cmd)
 {
@@ -1002,13 +1002,13 @@ void far YellowCommand(int cmd)
         UnRecruit(1);
         break;
     case 6:
-        f_10F7_0BB1();
+        StartLifeTransfer();
         break;
     case 7:
         SetAlarmDropState(!fd_50F6_104E, 0);
         break;
     case 8:
-        if (fd_50F6_048C != 1 || f_10F7_26D4(fd_50F6_048C, fd_50F6_047C, fd_50F6_048A) == -1)
+        if (fd_50F6_048C != 1 || TryMyDropOrLift(fd_50F6_048C, fd_50F6_047C, fd_50F6_048A) == -1)
             myBeginSound(1, 0, 0x7e);
         break;
     case 9:
@@ -1020,7 +1020,7 @@ void far YellowCommand(int cmd)
             myBeginSound(1, 0, 0x7e);
         break;
     case 10:
-        f_10F7_0B51();
+        TargetAnt();
         break;
     case 11:
         if (fd_50F6_06AC == 7) {

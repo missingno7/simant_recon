@@ -1259,7 +1259,7 @@ int far o06_35F5_2314(int x, int y)
     return count;
 }
 
-extern int far f_0093_0054(int range);
+extern int far SGSRand(int range);
 extern int far fd_50F6_0AC4;
 extern int far fd_50F6_0A90;
 
@@ -1269,8 +1269,8 @@ void far o06_35F5_2381(int x, int y, int colony)
     register int nx;
     register int ny;
 
-    nx = f_0093_0054(4) + x;
-    ny = f_0093_0054(4) + y;
+    nx = SGSRand(4) + x;
+    ny = SGSRand(4) + y;
     if (nx < 0)
         nx = 0;
     if (nx > 11)

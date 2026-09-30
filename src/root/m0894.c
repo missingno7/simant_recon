@@ -81,7 +81,7 @@ extern int far fd_3D57_0074[16];
 extern signed char far fd_3D57_0094[];
 
 extern void far o06_35F5_0173(void);
-extern void far f_0BE8_03AC(void);
+extern void far DoWater(void);
 extern void far f_0AD9_03D3(void);
 extern void far f_0CDB_00B3(void);
 extern void far f_0AD9_093C(void);
@@ -111,7 +111,7 @@ extern int far f_0EC1_0291(int x, int y);
 extern void far f_0250_43F2(int x, int y, int a);
 extern void far InvalQueenStorageDisp(void);
 extern int far f_1383_0E89(int x, int y, int dir);
-extern void far f_0BE8_0798(int x, int y);
+extern void far PickupFoodA(int x, int y);
 extern void far f_1496_0404(int x, int y, int level);
 extern void far f_1496_03CC(int x, int y, int level);
 extern void far f_1496_04AC(int x, int y, int colour);
@@ -132,7 +132,7 @@ extern void far DigTileR(int x, int y);
 extern void far f_1496_0395(int x, int y, int level);
 extern int far RRand(int range);
 extern void far f_0250_4302(int x, int y, int plane);
-extern int far f_10F7_2867(int x, int y);
+extern int far IsValidA(int x, int y);
 
 void far DoSmells(void);
 void far ClrModePop(void);
@@ -186,7 +186,7 @@ void far DoAntSim(void)
     if ((Cycle & 0x1f) == 0)
         DoSmells();
     o06_35F5_0173();
-    f_0BE8_03AC();
+    DoWater();
     f_0AD9_03D3();
     f_0CDB_00B3();
     if (Cycle & 1)
@@ -540,7 +540,7 @@ void far DoRandAntA(int index)
             AlistT[index] = dir | flags | 8;
             LifeA[x][y] = AlistT[index];
             AlistM[index] = 3;
-            f_0BE8_0798(nx, ny);
+            PickupFoodA(nx, ny);
             AlistS[index] = 200;
             return;
         }
@@ -735,7 +735,7 @@ void far DoToNestAnt(int index)
             AlistT[index] = dir | flags | 8;
             LifeA[x][y] = AlistT[index];
             AlistM[index] = 3;
-            f_0BE8_0798(nx, ny);
+            PickupFoodA(nx, ny);
             AlistS[index] = 200;
             return;
         }
@@ -933,7 +933,7 @@ void far DoForageAnt(int index)
         AlistT[index] = dir | flags | 8;
         LifeA[x][y] = AlistT[index];
         AlistM[index] = 3;
-        f_0BE8_0798(nx, ny);
+        PickupFoodA(nx, ny);
         AlistS[index] = 200;
         return;
     }
@@ -1253,7 +1253,7 @@ int far IsItHole(int x, int y)
 {
     int tile;
 
-    if (f_10F7_2867(x, y) == 0)
+    if (IsValidA(x, y) == 0)
         return 0;
     if (TERRAINset == 0) {
         if (MapA[x][y] == 0x50)

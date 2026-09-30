@@ -141,7 +141,7 @@ void far f_0DEF_0233(void)
 }
 
 extern int far GetDis(int x1, int y1, int x2, int y2);
-extern int far f_10F7_22CE(int plane, int x, int y, int fromPlane, int fromX, int fromY, int digging);
+extern int far TileCanBeMovedOn(int plane, int x, int y, int fromPlane, int fromX, int fromY, int digging);
 extern int far GetLife(int plane, int x, int y);
 extern int far IsClearTile(int plane, int x, int y);
 
@@ -163,7 +163,7 @@ int far f_0DEF_031F(int plane, int x, int y, int a, int b)
     for (dir = 0; dir < 8; dir++) {
         nx = Dx8[dir] + x;
         ny = Dy8[dir] + y;
-        if (f_10F7_22CE(plane, nx, ny, plane, a, b, 0) == 1) {
+        if (TileCanBeMovedOn(plane, nx, ny, plane, a, b, 0) == 1) {
             dis = GetDis(nx, ny, a, b);
             if (dis < threshold) {
                 if (GetLife(plane, nx, ny) > 0 || IsClearTile(plane, nx, ny) != 1)

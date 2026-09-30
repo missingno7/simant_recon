@@ -71,18 +71,18 @@ extern void far DigTileR(int x, int y);
 extern void far AddAntToBList(int x, int y, int life, int state, int dir);
 extern void far AddAntToRList(int x, int y, int life, int state, int dir);
 
-void far f_0BE8_0002(void);
+void far CountAnts(void);
 void far PlaceDrop(int i);
 void far CountUpdate(void);
 void far AddWater(int y);
 void far DropWater(int y);
-void far f_0BE8_08BD(int x, int y);
+void far FoodFall(int x, int y);
 int far InNestBounds(int x, int y);
 
-/* f_0BE8_0002: counts ants per caste (Win16 CountAnts, LOW confidence).  The far data
+/* CountAnts: counts ants per caste (Win16 CountAnts, LOW confidence).  The far data
    externs above are declared in address order; with that declaration order the
    commutative sums below come out in the original operand order (SYM-1). */
-void far f_0BE8_0002(void)
+void far CountAnts(void)
 {
     int i;
     int n;
@@ -153,7 +153,7 @@ void far f_0BE8_0002(void)
 
 void far FullCount(void)
 {
-    f_0BE8_0002();
+    CountAnts();
     CountUpdate();
 }
 
@@ -162,7 +162,7 @@ void far CountUpdate(void)
     f_0E2E_000A();
 }
 
-void far f_0BE8_03AC(void)
+void far DoWater(void)
 {
     int i;
     int x;
@@ -292,7 +292,7 @@ void far DropWater(int y)
     }
 }
 
-void far f_0BE8_0798(int x, int y)
+void far PickupFoodA(int x, int y)
 {
     int v;
 
@@ -312,7 +312,7 @@ void far f_0BE8_0798(int x, int y)
         fd_50F6_1040--;
 }
 
-int far f_0BE8_0812(int x, int y)
+int far DropFoodA(int x, int y)
 {
     int v;
 
@@ -335,7 +335,7 @@ int far f_0BE8_0812(int x, int y)
             return 1;
         }
         if (v < 0x40) {
-            f_0BE8_08BD(x, y);
+            FoodFall(x, y);
             return 1;
         }
     } else {
@@ -353,7 +353,7 @@ int far f_0BE8_0812(int x, int y)
     return 0;
 }
 
-void far f_0BE8_08BD(int a, int b)
+void far FoodFall(int a, int b)
 {
     int v;
     int go;
@@ -379,7 +379,7 @@ void far f_0BE8_08BD(int a, int b)
     }
 }
 
-void far f_0BE8_094B(int x, int y)
+void far PickupFoodB(int x, int y)
 {
     int v;
     int flag;
@@ -397,7 +397,7 @@ void far f_0BE8_094B(int x, int y)
         FoodB--;
 }
 
-void far f_0BE8_09D3(int x, int y)
+void far PickupFoodR(int x, int y)
 {
     int v;
     int flag;
@@ -545,7 +545,7 @@ int far GetExitDirR(int x, int y, int dir)
     return best;
 }
 
-int far f_0BE8_0D67(int x, int y, int dir)
+int far GetEnterDirB(int x, int y, int dir)
 {
     int back;
     int best;
@@ -581,7 +581,7 @@ int far f_0BE8_0D67(int x, int y, int dir)
     return best;
 }
 
-int far f_0BE8_0E0F(int x, int y, int dir)
+int far GetEnterDirR(int x, int y, int dir)
 {
     int back;
     int best;

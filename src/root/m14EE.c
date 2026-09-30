@@ -36,11 +36,11 @@ void far CreateNewHole(int x, int y);
 void far MakeNewHoleB(int x);
 int far CanBeHouseHole(int v);
 void far MakeNewHoleR(int x);
-void far f_14EE_04B5(int x, int y);
+void far HoleBorder(int x, int y);
 void far DigTileB(int x, int y);
 void far DigTileR(int x, int y);
-void far f_14EE_09F1(int x, int y);
-void far f_14EE_0B5A(int x, int y);
+void far SmoothEdgesB(int x, int y);
+void far SmoothEdgesR(int x, int y);
 int far RIsItDirt(int v);
 void far f_14EE_0C9C(int x, int y);
 void far f_14EE_0D71(int x, int y);
@@ -71,7 +71,7 @@ void far CreateNewHole(int x, int y)
         MapA[x][y] = 0x59;
     else {
         MapA[x][y] = 0x50;
-        f_14EE_04B5(x, y);
+        HoleBorder(x, y);
     }
     if (x < 0x40) {
         HoleMapB[y] = x;
@@ -90,7 +90,7 @@ void far CreateNewHole(int x, int y)
     }
 }
 
-void far f_14EE_0151(int colony, int x, int y)
+void far DigMyTile(int colony, int x, int y)
 {
     if (IsItDigable(colony, x, y)) {
         if (colony == 2) {
@@ -145,7 +145,7 @@ void far MakeNewHoleB(int x)
                 fd_3D57_02AC[1] = x;
                 fd_3D57_02A4[0] = x;
                 fd_3D57_02A4[1] = 0;
-                f_14EE_04B5(y, x);
+                HoleBorder(y, x);
                 break;
             }
         }
@@ -207,7 +207,7 @@ void far MakeNewHoleR(int x)
                 fd_3D57_02B0[1] = x;
                 fd_3D57_02A8[0] = x;
                 fd_3D57_02A8[1] = 0;
-                f_14EE_04B5(y, x);
+                HoleBorder(y, x);
                 break;
             }
         }
@@ -218,7 +218,7 @@ void far MakeNewHoleR(int x)
     DigTileR(x, 1);
 }
 
-void far f_14EE_04B5(int x, int y)
+void far HoleBorder(int x, int y)
 {
     int i;
     int nx;
@@ -251,10 +251,10 @@ void far DigTileB(int x, int y)
             MapR[x][y] = 0x14;
         }
     }
-    f_14EE_09F1(x, y - 1);
-    f_14EE_09F1(x + 1, y);
-    f_14EE_09F1(x, y + 1);
-    f_14EE_09F1(x - 1, y);
+    SmoothEdgesB(x, y - 1);
+    SmoothEdgesB(x + 1, y);
+    SmoothEdgesB(x, y + 1);
+    SmoothEdgesB(x - 1, y);
     f_14EE_0C9C(x, y);
 }
 
@@ -270,10 +270,10 @@ void far DigTileR(int x, int y)
             fd_50F6_020E = fd_50F6_10A2 / TilesDugR;
         }
     }
-    f_14EE_0B5A(x, y - 1);
-    f_14EE_0B5A(x + 1, y);
-    f_14EE_0B5A(x, y + 1);
-    f_14EE_0B5A(x - 1, y);
+    SmoothEdgesR(x, y - 1);
+    SmoothEdgesR(x + 1, y);
+    SmoothEdgesR(x, y + 1);
+    SmoothEdgesR(x - 1, y);
     f_14EE_0D71(x, y);
 }
 
@@ -297,10 +297,10 @@ int far DigTileThemB(int x, int y)
         fd_50F6_10B2 = fd_50F6_1068 / fd_50F6_0224;
         fd_50F6_10C0 = fd_50F6_1082 / fd_50F6_0224;
     }
-    f_14EE_09F1(x, y - 1);
-    f_14EE_09F1(x + 1, y);
-    f_14EE_09F1(x, y + 1);
-    f_14EE_09F1(x - 1, y);
+    SmoothEdgesB(x, y - 1);
+    SmoothEdgesB(x + 1, y);
+    SmoothEdgesB(x, y + 1);
+    SmoothEdgesB(x - 1, y);
     f_14EE_0C9C(x, y);
     return 1;
 }
@@ -331,15 +331,15 @@ int far DigTileThemR(int x, int y)
         fd_50F6_0200 = fd_50F6_108E / TilesDugR;
         fd_50F6_020E = fd_50F6_10A2 / TilesDugR;
     }
-    f_14EE_0B5A(x, y - 1);
-    f_14EE_0B5A(x + 1, y);
-    f_14EE_0B5A(x, y + 1);
-    f_14EE_0B5A(x - 1, y);
+    SmoothEdgesR(x, y - 1);
+    SmoothEdgesR(x + 1, y);
+    SmoothEdgesR(x, y + 1);
+    SmoothEdgesR(x - 1, y);
     f_14EE_0D71(x, y);
     return 1;
 }
 
-void far f_14EE_09F1(int x, int y)
+void far SmoothEdgesB(int x, int y)
 {
     int v;
     int bits;
@@ -392,7 +392,7 @@ int far RIsItDirt(int v)
     return 1;
 }
 
-void far f_14EE_0B5A(int x, int y)
+void far SmoothEdgesR(int x, int y)
 {
     int v;
     int bits;

@@ -30,7 +30,7 @@ extern int far fd_50F6_0AE8;
 extern int far fd_50F6_0AF8;
 extern signed char far Dx9[];
 extern signed char far Dy9[];
-extern int far f_10F7_26D4(int plane, int x, int y);
+extern int far TryMyDropOrLift(int plane, int x, int y);
 int far o25_3BA4_1A9F(int plane, int x, int y, int gplane, int gx, int gy);
 extern signed char far fd_3D57_0008[];
 extern int far fd_50F6_04C2;
@@ -203,7 +203,7 @@ void far DoAntMoveY(void)
         if (y < 0 || y > 0x3f)
             y = fd_50F6_048A;
         if (fd_50F6_0AD6 == x && fd_50F6_0AE8 == y) {
-            if ((result = f_10F7_26D4(fd_50F6_048C, x, y)) != 0) {
+            if ((result = TryMyDropOrLift(fd_50F6_048C, x, y)) != 0) {
                 result = (result == 1) ? -1 : -2;
                 goto done;
             }
@@ -516,7 +516,7 @@ extern unsigned char far BlistT[];
 extern unsigned char far RlistX[];
 extern unsigned char far RlistY[];
 extern unsigned char far RlistT[];
-extern void far f_10F7_0954(int plane, int x, int y, int value);
+extern void far ClearLife(int plane, int x, int y, int value);
 extern int far f_0894_1E34(int a, int b);
 extern void far DeadAntHere(int x, int y, int type);
 
@@ -540,7 +540,7 @@ void far o25_3BA4_0DFB(int list, int index)
         py = RlistY;
         pl = RlistT;
     }
-    f_10F7_0954(list, px[index], py[index], pl[index]);
+    ClearLife(list, px[index], py[index], pl[index]);
     type = f_0894_1E34(fd_50F6_04C2, pl[index]);
     if (fd_50F6_04C2 != type)
         f_015B_06A2();
@@ -562,13 +562,13 @@ void far o25_3BA4_0DFB(int list, int index)
 
 extern void far f_0BE8_0EB7(void);
 extern void far o22_39C7_1A57(int state, int quiet);
-extern void far f_14EE_0151(int plane, int x, int y);
+extern void far DigMyTile(int plane, int x, int y);
 extern unsigned char far fd_3D57_0224[];
 extern void far MakeNewHoleB(int x);
 extern unsigned char far fd_3D57_0264[];
 extern void far f_14EE_0367(int x);
 extern signed char far fd_3D57_006C[];
-extern int far f_10F7_2489(int plane, int x, int y);
+extern int far IsNotObstacle(int plane, int x, int y);
 
 /* SCAFFOLD BEGIN: o25_3BA4_1035 (EnterNest) best draft: 3 bytes differ, the merged DigMyTile call loads &MeLocX via bx instead of si (register tie-break); the if/else with identical arms reproduces the dead "les bx,[bp-14h]" of the original */
 void far o25_3BA4_1035(void)
@@ -588,9 +588,9 @@ void far o25_3BA4_1035(void)
         fd_50F6_048A = 1;
     fd_50F6_0496 = 4;
     if (fd_50F6_048C == 2)
-        f_14EE_0151(fd_50F6_048C, fd_50F6_047C, fd_50F6_048A);
+        DigMyTile(fd_50F6_048C, fd_50F6_047C, fd_50F6_048A);
     else
-        f_14EE_0151(fd_50F6_048C, fd_50F6_047C, fd_50F6_048A);
+        DigMyTile(fd_50F6_048C, fd_50F6_047C, fd_50F6_048A);
     f_10F7_0A44(fd_50F6_048C, fd_50F6_047C, fd_50F6_048A, fd_50F6_04C2, fd_50F6_0496, 0xff);
 }
 /* SCAFFOLD END */
@@ -637,7 +637,7 @@ void far ExitNest(void)
         d = (fd_3D57_006C[i] + dir) & 7;
         nx = fd_3D57_0000[d] * step + fd_50F6_047C;
         ny = fd_3D57_0008[d] * step + fd_50F6_048A;
-        if (f_10F7_2489(1, nx, ny)) {
+        if (IsNotObstacle(1, nx, ny)) {
             fd_50F6_047C = nx;
             fd_50F6_048A = ny;
             fd_50F6_0496 = d;
@@ -683,7 +683,7 @@ int far o25_3BA4_13AB(int p1, int x1, int y1, int p2, int x2, int y2)
          + f_0BE8_0B83(fd_3D57_02A4[0], fd_3D57_02A4[1], x2, y2);
 }
 
-extern int far f_10F7_22CE(int plane, int x, int y, int fromPlane, int fromX, int fromY, int digging);
+extern int far TileCanBeMovedOn(int plane, int x, int y, int fromPlane, int fromX, int fromY, int digging);
 extern int far f_10F7_07C7(int plane, int x, int y);
 extern int far f_10F7_04EC(int plane, int x, int y);
 
@@ -706,7 +706,7 @@ int far o25_3BA4_1581(int plane, int x, int y, int a, int b)
         for (dir = 0; dir < 8; dir++) {
             nx = fd_3D57_0000[dir] + x;
             ny = fd_3D57_0008[dir] + y;
-            if (f_10F7_22CE(plane, nx, ny, fd_50F6_0AF8, fd_50F6_0AD6, fd_50F6_0AE8, flag) != 0) {
+            if (TileCanBeMovedOn(plane, nx, ny, fd_50F6_0AF8, fd_50F6_0AD6, fd_50F6_0AE8, flag) != 0) {
                 dis = f_0BE8_0B83(nx, ny, a, b);
                 if (dis < threshold) {
                     if (f_10F7_07C7(plane, nx, ny) > 0 || f_10F7_04EC(plane, nx, ny) == 0)
@@ -747,7 +747,7 @@ int far o25_3BA4_1686(int far *rot, int far *dir, int plane, int x, int y, int a
             nx = fd_3D57_0000[i] + x;
             ny = fd_3D57_0008[i] + y;
             if ((nx != fd_50F6_0AB6 || ny != fd_50F6_0AC6)
-                && f_10F7_22CE(plane, nx, ny, fd_50F6_0AF8, fd_50F6_0AD6, fd_50F6_0AE8, flag)) {
+                && TileCanBeMovedOn(plane, nx, ny, fd_50F6_0AF8, fd_50F6_0AD6, fd_50F6_0AE8, flag)) {
                 best = i;
                 ok[i] = 1;
             } else

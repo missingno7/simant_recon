@@ -22,7 +22,7 @@ extern unsigned char far LifeA[128][64];
 extern void far BlockMove(unsigned char far *src, unsigned char far *dst, long count);
 extern char far Dy8[8];
 extern char far Dx8[8];
-extern int far f_10F7_2867(int x, int y);
+extern int far IsValidA(int x, int y);
 extern unsigned char far MapA[128][64];
 extern unsigned char far LifeB[64][64];
 extern unsigned char far LifeR[64][64];
@@ -199,7 +199,7 @@ int far ExitHole(int x, int y, int type, int mode, int stat)
 
     for (i = 0; i < 8; i++) {
         nx = x + Dx8[i];
-        if (f_10F7_2867(nx, ny = y + Dy8[i]) == 1 && MapA[nx][ny] < 0x50)
+        if (IsValidA(nx, ny = y + Dy8[i]) == 1 && MapA[nx][ny] < 0x50)
             break;
     }
     if (i == 8)

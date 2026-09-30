@@ -10,7 +10,7 @@ extern unsigned char far SowTab[8];
 extern int far SRand4(void);
 extern char far Dy8[8];
 extern char far Dx8[8];
-extern int far f_10F7_2867(int x, int y);
+extern int far IsValidA(int x, int y);
 extern unsigned char far LifeA[128][64];
 extern int far LionIndex;
 extern int far AntsEatenByLions;
@@ -24,7 +24,7 @@ extern unsigned char far LionListM[];
 extern unsigned char far LionListS[];
 extern unsigned char far LionListT[];
 extern int far GetMap(int plane, int x, int y);
-extern int far f_10F7_0731(int plane, int tile);
+extern int far IsThisPebble(int plane, int tile);
 extern int far IsThisFood(int category, int tile);
 extern char far Dy9[9];
 extern char far Dx9[9];
@@ -105,7 +105,7 @@ void far DoSow(void)
             MapA[SowX[i]][SowY[i]] = SowTab[SowDir[i]];
         }
         newX = SowX[i] + Dx8[SowDir[i]];
-        if (!f_10F7_2867(newX, newY = SowY[i] + Dy8[SowDir[i]]))
+        if (!IsValidA(newX, newY = SowY[i] + Dy8[SowDir[i]]))
             continue;
         if (LifeA[newX][newY] != 0)
             continue;
@@ -195,7 +195,7 @@ void far DoAntLions(void)
         case 0:
             x = LionListX[i];
             tile = GetMap(1, x, y = LionListY[i]);
-            if (f_10F7_0731(1, tile) == 1 || IsThisFood(1, tile) == 1) {
+            if (IsThisPebble(1, tile) == 1 || IsThisFood(1, tile) == 1) {
                 if (SRand1(0x200) == 0) {
                     d = SRand8();
                     for (k = 0; k < 8; k++, d = (d + 1) & 7) {
@@ -452,7 +452,7 @@ void far DoPillar(void)
 
 void far StorePillarMap(int x, int y)
 {
-    if (f_10F7_2867(x, y) == 1) {
+    if (IsValidA(x, y) == 1) {
         if (PillDir & 1)
             PillarMap[x % 6] = MapA[x][y];
         else
@@ -462,7 +462,7 @@ void far StorePillarMap(int x, int y)
 
 void far ReplacePillarMap(int x, int y)
 {
-    if (f_10F7_2867(x, y) == 1) {
+    if (IsValidA(x, y) == 1) {
         if (PillDir & 1)
             MapA[x][y] = PillarMap[x % 6];
         else
@@ -502,13 +502,13 @@ void far MakeAPill(void)
 
 void far PlacePillTile(int x, int y, int value)
 {
-    if (f_10F7_2867(x, y) == 1)
+    if (IsValidA(x, y) == 1)
         MapA[x][y] = value;
 }
 
 int far PillGetLife(int x, int y)
 {
-    if (f_10F7_2867(x, y) == 0)
+    if (IsValidA(x, y) == 0)
         return 0;
     return LifeA[x][y];
 }
@@ -553,7 +553,7 @@ void far MakePillFood(void)
 
 void far PillFoodTile(int x, int y)
 {
-    if (f_10F7_2867(x, y) == 1) {
+    if (IsValidA(x, y) == 1) {
         ReplacePillarMap(x, y);
         if (MapA[x][y] < 0x18)
             MapA[x][y] = 0x4b;
