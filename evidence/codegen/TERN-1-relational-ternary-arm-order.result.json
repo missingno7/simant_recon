@@ -1,0 +1,162 @@
+{
+ "id": "TERN-1",
+ "question": "Which arm of a relational ?: does MSC 6.00AX /Og lay out first? With the variable on the left, 'v < K ? A : B' and its mirror 'v >= K ? B : A' compile identically: 'cmp v,K; jl <A>' with the v>=K arm (B) as the fall-through, so for '<' the second arm comes first and for '>=' the first arm comes first. Written constant-left, 'K > v ? A : B' compiles to 'cmp v,K; jge <B>' with A (the K>v arm) first. The arm order in the object is therefore decided by the operand order of the comparison, not by which arm is written first. Positive control root:0F3F DoDigInR (worker resG): 'newattr = 0x30 > (newattr & 0x7f) ? SRand8() + 0x90 : SRand8() + 0xb0' is exact (jge, 0x90 arm first); '(newattr & 0x7f) < 0x30 ? ...' and '(newattr & 0x7f) >= 0x30 ? SRand8() + 0xb0 : ...' both give jl with the 0xb0 arm first (3 bytes differ).",
+ "results": [
+  {
+   "variant": "var_left",
+   "profile_index": 0,
+   "profile": "msc600ax",
+   "flags": [
+    "/AL",
+    "/Os",
+    "/Oe",
+    "/Og",
+    "/Zi"
+   ],
+   "source_sha256": "7573b734572cb0847259ede050b882050dddbc7b8a928532755c95ebf1544134",
+   "bytes": "558bec33c09a000000002bc050b80300508a460a247f3c307c0a9a0000000005b000eb089a0000000005900089460a50ff7608ff76069a000000008b460a8e06000026a300008be55dcb",
+   "disasm": "push bp; mov bp, sp; xor ax, ax; lcall 0, 0; sub ax, ax; push ax; mov ax, 3; push ax; mov al, byte ptr [bp + 0xa]; and al, 0x7f; cmp al, 0x30; jl 0x24; lcall 0, 0; add ax, 0xb0; jmp 0x2c; lcall 0, 0; add ax, 0x90; mov word ptr [bp + 0xa], ax; push ax; push word ptr [bp + 8]; push word ptr [bp + 6]; lcall 0, 0; mov ax, word ptr [bp + 0xa]; mov es, word ptr [0]; mov word ptr es:[0], ax; mov sp, bp; pop bp; retf",
+   "segments": {
+    "UNIT_TEXT": {
+     "class": "CODE",
+     "align": "word",
+     "combine": "public",
+     "length": 74,
+     "big": false
+    },
+    "_DATA": {
+     "class": "DATA",
+     "align": "word",
+     "combine": "public",
+     "length": 0,
+     "big": false
+    },
+    "CONST": {
+     "class": "CONST",
+     "align": "word",
+     "combine": "public",
+     "length": 2,
+     "big": false
+    },
+    "_BSS": {
+     "class": "BSS",
+     "align": "word",
+     "combine": "public",
+     "length": 0,
+     "big": false
+    }
+   },
+   "communals": {}
+  },
+  {
+   "variant": "var_left_swapped",
+   "profile_index": 0,
+   "profile": "msc600ax",
+   "flags": [
+    "/AL",
+    "/Os",
+    "/Oe",
+    "/Og",
+    "/Zi"
+   ],
+   "source_sha256": "5f9918d6600c5db062061cb50bb4dfc56e2f3192093d3dca2a6876bb4e7b5c27",
+   "bytes": "558bec33c09a000000002bc050b80300508a460a247f3c307c0a9a0000000005b000eb089a0000000005900089460a50ff7608ff76069a000000008b460a8e06000026a300008be55dcb",
+   "disasm": "push bp; mov bp, sp; xor ax, ax; lcall 0, 0; sub ax, ax; push ax; mov ax, 3; push ax; mov al, byte ptr [bp + 0xa]; and al, 0x7f; cmp al, 0x30; jl 0x24; lcall 0, 0; add ax, 0xb0; jmp 0x2c; lcall 0, 0; add ax, 0x90; mov word ptr [bp + 0xa], ax; push ax; push word ptr [bp + 8]; push word ptr [bp + 6]; lcall 0, 0; mov ax, word ptr [bp + 0xa]; mov es, word ptr [0]; mov word ptr es:[0], ax; mov sp, bp; pop bp; retf",
+   "segments": {
+    "UNIT_TEXT": {
+     "class": "CODE",
+     "align": "word",
+     "combine": "public",
+     "length": 74,
+     "big": false
+    },
+    "_DATA": {
+     "class": "DATA",
+     "align": "word",
+     "combine": "public",
+     "length": 0,
+     "big": false
+    },
+    "CONST": {
+     "class": "CONST",
+     "align": "word",
+     "combine": "public",
+     "length": 2,
+     "big": false
+    },
+    "_BSS": {
+     "class": "BSS",
+     "align": "word",
+     "combine": "public",
+     "length": 0,
+     "big": false
+    }
+   },
+   "communals": {}
+  },
+  {
+   "variant": "const_left",
+   "profile_index": 0,
+   "profile": "msc600ax",
+   "flags": [
+    "/AL",
+    "/Os",
+    "/Oe",
+    "/Og",
+    "/Zi"
+   ],
+   "source_sha256": "7714550050e1ce7b3a6b275ce839b96c8fd8174c249089644ab2664b112edbd0",
+   "bytes": "558bec33c09a000000002bc050b80300508a460a247f3c307d0a9a00000000059000eb089a0000000005b00089460a50ff7608ff76069a000000008b460a8e06000026a300008be55dcb",
+   "disasm": "push bp; mov bp, sp; xor ax, ax; lcall 0, 0; sub ax, ax; push ax; mov ax, 3; push ax; mov al, byte ptr [bp + 0xa]; and al, 0x7f; cmp al, 0x30; jge 0x24; lcall 0, 0; add ax, 0x90; jmp 0x2c; lcall 0, 0; add ax, 0xb0; mov word ptr [bp + 0xa], ax; push ax; push word ptr [bp + 8]; push word ptr [bp + 6]; lcall 0, 0; mov ax, word ptr [bp + 0xa]; mov es, word ptr [0]; mov word ptr es:[0], ax; mov sp, bp; pop bp; retf",
+   "segments": {
+    "UNIT_TEXT": {
+     "class": "CODE",
+     "align": "word",
+     "combine": "public",
+     "length": 74,
+     "big": false
+    },
+    "_DATA": {
+     "class": "DATA",
+     "align": "word",
+     "combine": "public",
+     "length": 0,
+     "big": false
+    },
+    "CONST": {
+     "class": "CONST",
+     "align": "word",
+     "combine": "public",
+     "length": 2,
+     "big": false
+    },
+    "_BSS": {
+     "class": "BSS",
+     "align": "word",
+     "combine": "public",
+     "length": 0,
+     "big": false
+    }
+   },
+   "communals": {}
+  }
+ ],
+ "checks": [
+  {
+   "check": "var_left@0",
+   "needle": "cmp al, 0x30; jl 0x24; lcall 0, 0; add ax, 0xb0",
+   "ok": true
+  },
+  {
+   "check": "var_left_swapped@0",
+   "needle": "cmp al, 0x30; jl 0x24; lcall 0, 0; add ax, 0xb0",
+   "ok": true
+  },
+  {
+   "check": "const_left@0",
+   "needle": "cmp al, 0x30; jge 0x24; lcall 0, 0; add ax, 0x90",
+   "ok": true
+  }
+ ],
+ "all_checks_pass": true
+}

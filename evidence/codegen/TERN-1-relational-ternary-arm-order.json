@@ -1,0 +1,27 @@
+{
+ "id": "TERN-1",
+ "question": "Which arm of a relational ?: does MSC 6.00AX /Og lay out first? With the variable on the left, 'v < K ? A : B' and its mirror 'v >= K ? B : A' compile identically: 'cmp v,K; jl <A>' with the v>=K arm (B) as the fall-through, so for '<' the second arm comes first and for '>=' the first arm comes first. Written constant-left, 'K > v ? A : B' compiles to 'cmp v,K; jge <B>' with A (the K>v arm) first. The arm order in the object is therefore decided by the operand order of the comparison, not by which arm is written first. Positive control root:0F3F DoDigInR (worker resG): 'newattr = 0x30 > (newattr & 0x7f) ? SRand8() + 0x90 : SRand8() + 0xb0' is exact (jge, 0x90 arm first); '(newattr & 0x7f) < 0x30 ? ...' and '(newattr & 0x7f) >= 0x30 ? SRand8() + 0xb0 : ...' both give jl with the 0xb0 arm first (3 bytes differ).",
+ "header": "extern int far r(void);\nextern void far g(int a, int b, int c, int d, int e);\nextern int far G;\n",
+ "variants": {
+  "var_left": "void far f(int x, int y, int n)\n{\n    g(x, y, n = (n & 0x7f) < 0x30 ? r() + 0x90 : r() + 0xb0, 3, 0);\n    G = n;\n}\n",
+  "var_left_swapped": "void far f(int x, int y, int n)\n{\n    g(x, y, n = (n & 0x7f) >= 0x30 ? r() + 0xb0 : r() + 0x90, 3, 0);\n    G = n;\n}\n",
+  "const_left": "void far f(int x, int y, int n)\n{\n    g(x, y, n = 0x30 > (n & 0x7f) ? r() + 0x90 : r() + 0xb0, 3, 0);\n    G = n;\n}\n"
+ },
+ "profiles": [
+  {
+   "profile": "msc600ax",
+   "flags": [
+    "/AL",
+    "/Os",
+    "/Oe",
+    "/Og",
+    "/Zi"
+   ]
+  }
+ ],
+ "expect": {
+  "var_left@0": "cmp al, 0x30; jl 0x24; lcall 0, 0; add ax, 0xb0",
+  "var_left_swapped@0": "cmp al, 0x30; jl 0x24; lcall 0, 0; add ax, 0xb0",
+  "const_left@0": "cmp al, 0x30; jge 0x24; lcall 0, 0; add ax, 0x90"
+ }
+}

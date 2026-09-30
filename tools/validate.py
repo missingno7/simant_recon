@@ -256,6 +256,11 @@ def main() -> int:
     runtime_rows_owned = sum(1 for f in runtime_rows if any(
         lin <= f["seg"] * 16 + f["off"] and f["seg"] * 16 + f["off"] + f["size"] <= lin + n for lin, n in accepted_spans))
     root_game_span = 0x29F4 * 16 + 0x1C - 0     # game code precedes the MSC runtime _TEXT
+    # frame 2CFB (0x2CFB0-0x2CFF0) is not the RTLink manager: crt0dat EMULATOR_TEXT (runtime),
+    # the game's memory-hook jump table root:2CFB (0x2CFB2-0x2CFE4, 50 bytes) and paragraph fill;
+    # the manager starts at 2CFF0 (whole-build harness, worker link)
+    root_game_span += 0x2CFE4 - 0x2CFB2
+    MANAGER_START = 0x2CFF0
     overlay_code = sum(len(s.data) for s in x.sections[:27])
     code_total = root_game_span + overlay_code
     s27 = len(x.sections[27].data)
@@ -276,8 +281,8 @@ def main() -> int:
         "runtime_functions_known": len(runtime_rows),
         "runtime_functions_owned": runtime_rows_owned,
         "owned_functions": exact_c + exact_asm + runtime_rows_owned,
-        "rtlink_manager_bytes_unaccepted": len(x.image) - 0x2CFB * 16
-                                           - sum(1 for a in accepted_bytes_at if a >= 0x2CFB * 16),
+        "rtlink_manager_bytes_unaccepted": len(x.image) - MANAGER_START
+                                           - sum(1 for a in accepted_bytes_at if a >= MANAGER_START),
         "data_bytes_accepted": data_bytes,
         "far_data_bytes_accepted": far_data_bytes,
         "modules_data_only": sorted(data_only_modules),

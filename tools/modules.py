@@ -145,8 +145,12 @@ def sha(b: bytes) -> str:
     return hashlib.sha256(b).hexdigest()
 
 
-def verify_module(text: str, module: dict, claims: list[dict]) -> dict:
-    """Compile ``text`` under the module profile and verify every claim strictly."""
+def verify_module(text: str, module: dict, claims: list[dict], collect: dict | None = None) -> dict:
+    """Compile ``text`` under the module profile and verify every claim strictly.
+
+    ``collect`` (whole-build harness, tools/link.py): when a dict is given, the bound bytes and
+    relocation sites of every claim and data placement, the unbound code segment of a complete TU
+    and the object bytes are recorded in it.  It never changes a verdict."""
     prof = module["profile"]
     flags = module["flags"]
     if module.get("lang") == "asm":
@@ -158,6 +162,8 @@ def verify_module(text: str, module: dict, claims: list[dict]) -> dict:
         return out
     obj = OmfReader(communals=True).read(r.obj)
     out["object_sha256"] = sha(r.obj)
+    if collect is not None:
+        collect["object"] = r.obj
     scaff = scaffold_names(text)
     placements = {k: {"seg": v["seg"], "off": v["off"]} for k, v in module.get("placements", {}).items()}
     all_ok = True
@@ -230,6 +236,8 @@ def verify_module(text: str, module: dict, claims: list[dict]) -> dict:
         ok = res.exact and sha(orig) == c["target_sha256"]
         out["claims"][name] = {"exact": ok, "reasons": res.reasons, "fixups": len(res.fixups),
                                "relocations": len(res.relocs_expected), "reloc_order": res.reloc_order}
+        if collect is not None:
+            collect.setdefault("code", []).append(_collected(c, t, res, ok))
         all_ok &= ok
     for c in data_claims:
         # code-segment data (buffers, tables): the object's own bytes at the module placement,
@@ -256,6 +264,8 @@ def verify_module(text: str, module: dict, claims: list[dict]) -> dict:
         if sha(orig) != c["target_sha256"]:
             reasons.append("oracle bytes differ from the claim's target hash")
         ok = not reasons and res.exact
+        if collect is not None and res is not None:
+            collect.setdefault("code", []).append(_collected(c, t, res, ok))
         out["claims"][c["name"]] = {"exact": ok, "reasons": reasons, "kind": DATA_KIND,
                                     "fixups": len(res.fixups) if res else 0,
                                     "relocations": len(res.relocs_expected) if res else 0,
@@ -282,7 +292,8 @@ def verify_module(text: str, module: dict, claims: list[dict]) -> dict:
             out.setdefault("data", {})[segname] = {"exact": False, "reasons": ["segment absent"]}
             all_ok = False
             continue
-        dres = verify_data_segment(obj, segname, p, placements, own_code=own_code, unit=module.get("unit"))
+        dres = verify_data_segment(obj, segname, p, placements, own_code=own_code, unit=module.get("unit"),
+                                   collect=collect)
         if (not dres["exact"] and not module.get("extent") and dres["reasons"]
                 and all(r.startswith("data relocation order inside target group") for r in dres["reasons"])):
             dres.update(exact=True, reasons=[], reloc_order="WITHIN_GROUP_PENDING")
@@ -311,6 +322,12 @@ def verify_module(text: str, module: dict, claims: list[dict]) -> dict:
         tres = verify_extent(obj, ext, claims, scaff, site_key, site_index)
         out["extent"] = tres
         all_ok &= tres["exact"]
+        if collect is not None:
+            names = {c["name"] for c in claims if not is_data_claim(c)}
+            segs = {p["segment"] for p in obj.publics if p["name"][1:] in names}
+            if len(segs) == 1:
+                collect["code_segment"] = {"start": ext["start"], "end": ext["end"],
+                                           "bytes": bytes(obj.segments.get(segs.pop(), b""))}
     out["exact"] = all_ok
     out["scaffold"] = sorted(scaff)
     # functions compiled into the module that are neither claimed nor in a SCAFFOLD block
@@ -325,6 +342,14 @@ def verify_module(text: str, module: dict, claims: list[dict]) -> dict:
                                    if p["segment"] in code_segs and undecorated(p["name"]) not in claimed
                                    and undecorated(p["name"]) not in scaff)
     return out
+
+
+def _collected(c: dict, t, res, ok: bool) -> dict:
+    """What the whole-build harness needs from one bound claim (verify_module ``collect``)."""
+    return {"name": c["name"], "kind": c.get("kind", "C"), "unit": c["unit"], "seg": c["seg"],
+            "linear": t.linear, "bytes": res.candidate, "exact": ok, "reloc_order": res.reloc_order,
+            "relocs": [(a, res.reloc_key.get(a), res.reloc_index.get(a)) for a in res.relocs_candidate],
+            "fixups": res.fixups}
 
 
 def verify_extent(obj, ext: dict, claims: list[dict], scaff: set, site_key: dict | None = None,
@@ -461,7 +486,8 @@ def _data_target(f: dict, placements: dict, unit: str | None = None):
 
 
 def verify_data_segment(obj, segname: str, p: dict, placements: dict | None = None,
-                        own_code: dict | None = None, unit: str | None = None) -> dict:
+                        own_code: dict | None = None, unit: str | None = None,
+                        collect: dict | None = None) -> dict:
     """Bind a private data segment (CONST/_DATA/far data) at its placement and compare with
     S27 bytes.
 
@@ -533,6 +559,10 @@ def verify_data_segment(obj, segname: str, p: dict, placements: dict | None = No
             if [a for a in exp if rkey.get(a) == g] != [a for a in relocs_c if rkey.get(a) == g]:
                 reasons.append(f"data relocation order inside target group {g} differs")
         order = "GROUPED"
+    if collect is not None:
+        collect.setdefault("data", []).append({"segment": segname, "start": start, "seg": p["seg"],
+                                               "bytes": bytes(body), "exact": not reasons,
+                                               "relocs": [(a, rkey.get(a), i) for i, a in enumerate(relocs_c)]})
     return {"exact": not reasons, "reasons": reasons, "size": size, "reloc_order": order, "start": start,
             "class": str(sdef.get("class", "")), "align": sdef.get("alignment"), "far": p["seg"] != match.DGROUP_SEG}
 

@@ -16,7 +16,7 @@ Validation: **PASS** (2026-09-30)
 | runtime_functions_owned | 90 |
 | owned_functions | 1,664 |
 | historical_runtime_bytes_located_unaccepted | 0 |
-| rtlink_manager_bytes_unaccepted | 17,063 |
+| rtlink_manager_bytes_unaccepted | 17,001 |
 | data_bytes_accepted | 105,212 |
 | far_data_bytes_accepted | 77,846 |
 | historical_runtime_data_bytes_accepted | 1,057 |
@@ -25,8 +25,8 @@ Validation: **PASS** (2026-09-30)
 | far_bss_sizes_verified_bytes | 0 |
 | far_bss_sizes_consistent_bytes | 3,966 |
 | far_bss_sizes_unverified_bytes | 15,442 |
-| game_code_span_bytes | 304,748 |
-| unresolved_code_bytes | 40,272 |
+| game_code_span_bytes | 304,798 |
+| unresolved_code_bytes | 40,322 |
 | unresolved_data_bytes | 9,811 |
 | scaffold_functions | 44 |
 | exact_translation_units | 83 |

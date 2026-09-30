@@ -79,3 +79,13 @@ separate branch will then keep the simulation/game core and replace the DOS wind
 system with host-native windows (`game/`, `ui_model/`, `platform/{dos_legacy,native_windows}`),
 using the Win16 build as the design reference. Historical sources are not changed to
 ease that port.
+
+## Whole-build harness
+
+`python tools/link.py` compiles every module once, places all accepted contributions and
+reports three proof levels (docs/whole-build.md): (a) bytes proven by their own objects;
+(b) an oracle-assisted hybrid EXE in which every unreconstructed byte is explicit, labelled
+debt copied from the original (build/link/provenance.json) and which must be byte-identical
+to SIMANT.EXE (a failure pinpoints an accounting gap or overlap). Hybrid bytes are never
+counted as reconstruction. (c) An independent historical link is not yet possible
+(docs/level-c-link.md: RTLink/Plus symbol and vector order, manager object).

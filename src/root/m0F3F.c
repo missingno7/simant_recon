@@ -1,5 +1,5 @@
 /* Root module, code frame 0F3F: red colony nest ants (DoAntSimR, R-list ants).
- * MSC 6.00A /AL /Os /Oe /Og. */
+ * MSC 6.00AX /AL /Os /Oe /Og /Zi. */
 
 extern int far Tindex;
 extern int far ListIndexR;
@@ -117,29 +117,29 @@ void far DoAntSimR(void)
     }
 }
 
-/* SCAFFOLD BEGIN: DoNestAntR (DoNestAntR) best draft, 1 byte differs: the red branch indexes
-   TemRModePop with `mov bx,ax` where the original has `mov bx,si` (mode already copied to SI).
-   Tried: ++/+=/embedded assignment, unsigned/char/register mode, per-branch mode variables,
-   all 120 local declaration orders. */
+/* Locals follow the accepted black twin S25 o25_39C7_006D (caste reused for the cell value, t for
+   the mode and the fight winner).  The grouping of the DoDigOutR case labels is only partly
+   decided by the bytes: 5/6/7 and 11/12 merged with 15 and 16 separate is one of several forms
+   that give `mov bx,si` for the mode index; the fully merged 15/16 form gives `mov bx,ax`
+   (worker resG, build/workers/resG/v8.py: 108 of 406 groupings are exact). */
 void far DoNestAntR(int x, int y, int attr)
 {
     int caste;
-    int mode;
-    int ant;
-    int index;
-    int winner;
+    int task;
+    int i;
+    int t;
 
     caste = (attr & 0x78) >> 3;
     if (attr & 0x80) {
-        mode = RlistM[Tindex];
-        fd_50F6_0D72[mode]++;
-        if (SRand256() == 0 && mode != 9 && SRand32() > HealthR) {
+        t = RlistM[Tindex];
+        fd_50F6_0D72[t]++;
+        if (SRand256() == 0 && t != 9 && SRand32() > HealthR) {
             RlistT[Tindex] = 0;
             LifeR[x][y] = 0;
             fd_50F6_0FBC++;
             return;
         }
-        switch (mode) {
+        switch (t) {
         case 0:
             DoRandR(x, y, attr, caste);
             break;
@@ -182,6 +182,8 @@ void far DoNestAntR(int x, int y, int attr)
                 RlistM[Tindex] = 0xf;
             break;
         case 15:
+            DoDigOutR(x, y, attr);
+            break;
         case 16:
             DoDigOutR(x, y, attr);
             break;
@@ -192,53 +194,52 @@ void far DoNestAntR(int x, int y, int attr)
             DoRandR(x, y, attr, caste);
             break;
         }
-        return;
-    }
-    mode = RlistM[Tindex];
-    fd_50F6_0D40[mode]++;
-    if (attr < 8) {
-        RlistT[Tindex] = 0;
-        LifeR[RlistX[Tindex]][RlistY[Tindex]] = 0;
-        return;
-    }
-    if (attr > 0x6f) {
-        DoNestFightR(x, y);
-        return;
-    }
-    ant = LifeR[x][y];
-    if (ant > 0x80 && ant < 0xe8 && (index = f_0EC1_032C(x, y, ant)) >= 0) {
-        if (ant > 0xdf)
-            KillTailR(index);
-        if (ant < 0x88) {
-            RlistM[Tindex] = 3;
-            RlistT[Tindex] |= 8;
-            LifeR[x][y] = RlistT[Tindex];
-            RlistT[index] = 0;
+    } else {
+        task = RlistM[Tindex];
+        fd_50F6_0D40[task]++;
+        if (attr < 8) {
+            RlistT[Tindex] = 0;
+            LifeR[RlistX[Tindex]][RlistY[Tindex]] = 0;
             return;
         }
-        winner = GetWinner(RlistT[index], attr);
-        RlistT[Tindex] = 0;
-        RlistS[index] = winner;
-        LifeR[x][y] = RlistT[index] = (winner & 0x80) + 0x70;
-        RlistM[index] = 0xa;
-        return;
-    }
-    switch (mode) {
-    case 6:
-        if (MePlane == 3)
-            StayInR(x, y, attr);
-        else
+        if (attr > 0x6f) {
+            DoNestFightR(x, y);
+            return;
+        }
+        caste = LifeR[x][y];
+        if (caste > 0x80 && caste < 0xe8 && (i = f_0EC1_032C(x, y, caste)) >= 0) {
+            if (caste > 0xdf)
+                KillTailR(i);
+            if (caste < 0x88) {
+                RlistM[Tindex] = 3;
+                RlistT[Tindex] |= 8;
+                LifeR[x][y] = RlistT[Tindex];
+                RlistT[i] = 0;
+            } else {
+                t = GetWinner(RlistT[i], attr);
+                RlistT[Tindex] = 0;
+                RlistS[i] = t;
+                LifeR[x][y] = RlistT[i] = (t & 0x80) + 0x70;
+                RlistM[i] = 0xa;
+            }
+            return;
+        }
+        switch (task) {
+        case 6:
+            if (MePlane == 3)
+                StayInR(x, y, attr);
+            else
+                RaidOutR(x, y, attr);
+            break;
+        case 7:
+            RaidInR(x, y, attr);
+            break;
+        default:
             RaidOutR(x, y, attr);
-        break;
-    case 7:
-        RaidInR(x, y, attr);
-        break;
-    default:
-        RaidOutR(x, y, attr);
-        break;
+            break;
+        }
     }
 }
-/* SCAFFOLD END */
 
 void far RaidInR(int x, int y, int dirHint)
 {
@@ -605,10 +606,6 @@ int far TryMoveDirR(int x, int y, int dir)
     return 1;
 }
 
-/* SCAFFOLD BEGIN: DoNestingR (DoNestingR) best draft, 2 bytes differ (length 468 vs 470): in the
-   caste==2 / SRand1(100)>HealthR else-path the original pushes caste from [bp+0Ch] for
-   GetNewModeR, this draft reuses SI (caste's register region); tried nested/inverted/else-brace
-   forms and all local declaration orders. */
 void far DoNestingR(int x, int y, int attr, int caste)
 {
     int dir;
@@ -641,16 +638,15 @@ void far DoNestingR(int x, int y, int attr, int caste)
             else
                 RlistM[Tindex] = f_1383_0A30(caste);
         }
-        if (SRand4() == 0)
-            dir = SRand8();
-        else
+        if (SRand4() != 0)
             dir = attr & 7;
+        else
+            dir = SRand8();
     } else
         RlistM[Tindex] = f_1383_0A30(caste);
     if (TryMoveDirR(x, y, dir) == 0)
         TryMoveDirR(x, y, SRand8());
 }
-/* SCAFFOLD END */
 
 void far TryEatFoodR(int y, int x)
 {
@@ -749,11 +745,6 @@ void far DoFoodInR(int x, int y, int attr)
     RlistY[Tindex] = ny;
 }
 
-/* SCAFFOLD BEGIN: DoDigInR best draft, 3 bytes differ: the two arms of
-   `(newattr & 0x7f) < 0x30 ? SRand8() + 0x90 : SRand8() + 0xb0` are laid out swapped (jl vs jge);
-   the arm order flips together with the placement of the DigTileThemR()==0 `m = 0; return` block
-   (then-return form places it inline, 621 bytes). Condition spellings, arm orders, goto forms and
-   declaration orders do not change it. */
 void far DoDigInR(int x, int y, int attr, int caste)
 {
     int dir;
@@ -809,11 +800,12 @@ void far DoDigInR(int x, int y, int attr, int caste)
         f_14EE_0D71(nx, ny);
     if (MapR[nx][ny] == 0x14) {
         LifeR[nx][ny] = RlistT[Tindex] = 0;
-        AddAntToBList(nx, ny, newattr = (newattr & 0x7f) < 0x30 ? SRand8() + 0x90 : SRand8() + 0xb0, 3, 0);
+        /* constant-left comparison: `(newattr & 0x7f) < 0x30 ? ...` lays the 0xb0 arm out first
+           (jl), `0x30 > (newattr & 0x7f)` gives the original jge / 0x90-arm-first layout */
+        AddAntToBList(nx, ny, newattr = 0x30 > (newattr & 0x7f) ? SRand8() + 0x90 : SRand8() + 0xb0, 3, 0);
         LifeB[nx][ny] = newattr;
     }
 }
-/* SCAFFOLD END */
 
 void far DoDigOutR(int x, int y, int attr)
 {
