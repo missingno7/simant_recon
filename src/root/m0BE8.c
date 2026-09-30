@@ -382,12 +382,6 @@ void far f_0BE8_08BD(int a, int b)
     }
 }
 
-/* SCAFFOLD BEGIN: f_0BE8_094B/f_0BE8_09D3 best drafts, 8 bytes differ each: the tile load into the SI variable
-   is `mov si,word es:[..]; and si,0FFh` here but `mov al,byte es:[..]; sub ah,ah; mov si,ax` in
-   the target. Everything else (immediate SEG load of the map, flag home, trailing
-   `mov cx,DGROUP; mov ds,cx`) is reproduced. Tried: unsigned/char/register v, cast,
-   assignment inside the if, far pointer temp, extra temp local. Also needs a _DATA placement
-   for the DGROUP fixup of `mov cx,DGROUP` */
 void far f_0BE8_094B(int x, int y)
 {
     int v;
@@ -424,7 +418,6 @@ void far f_0BE8_09D3(int x, int y)
         FoodR--;
 }
 
-/* SCAFFOLD END */
 
 void far PlaceEggB(int x, int y, int life)
 {

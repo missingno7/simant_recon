@@ -15463,11 +15463,47 @@
    "off": 0,
    "grounding": "inventory:vector"
   },
+  "o21_39C7_003C": {
+   "unit": "S21",
+   "seg": 14791,
+   "off": 60,
+   "grounding": "reviewed: S21 video-adapter probe (Wilton VIDEO_ID layout): near proc reached only through the DGROUP test table at 35F7 (lodsb/lodsw/call ax in o21_39C7_0000); int 10h AX=1A00 PS/2 display combination probe, ends in ret at 008B"
+  },
+  "o21_39C7_008C": {
+   "unit": "S21",
+   "seg": 14791,
+   "off": 140,
+   "grounding": "reviewed: S21 video-adapter probe (Wilton VIDEO_ID layout): near proc from DGROUP test table 35FA; int 10h AH=12h BL=10h EGA probe, ret at 00B7"
+  },
+  "o21_39C7_00B8": {
+   "unit": "S21",
+   "seg": 14791,
+   "off": 184,
+   "grounding": "reviewed: S21 video-adapter probe (Wilton VIDEO_ID layout): near proc from DGROUP test table 35FD; CGA CRTC probe at 3D4 via near call 010B, ret at 00C7"
+  },
+  "o21_39C7_00C8": {
+   "unit": "S21",
+   "seg": 14791,
+   "off": 200,
+   "grounding": "reviewed: S21 video-adapter probe (Wilton VIDEO_ID layout): near proc from DGROUP test table 3600; MDA/Hercules probe at 3B4/3BA (in/loope), ret at 010A"
+  },
+  "o21_39C7_010B": {
+   "unit": "S21",
+   "seg": 14791,
+   "off": 267,
+   "grounding": "reviewed: S21 video-adapter probe (Wilton VIDEO_ID layout): near proc called from 00BB/00CB; CRTC cursor-register write/read-back test (out/in, loop delay, stc), ret at 0124"
+  },
   "o21_39C7_0125": {
    "unit": "S21",
    "seg": 14791,
    "off": 293,
    "grounding": "inventory:near_call"
+  },
+  "o21_39C7_0156": {
+   "unit": "S21",
+   "seg": 14791,
+   "off": 342,
+   "grounding": "reviewed: S21 video-adapter probe (Wilton VIDEO_ID layout): near proc called from 00A3/00C4/00E8/0107; stores AX into the first free device word [di] or [di+2], ret at 0162"
   },
   "o21_39C7_016D": {
    "unit": "S21",
@@ -19017,6 +19053,11 @@
    "off": 1832,
    "grounding": "f_1FD2_031A/032F/0379/0390: mov ax,0728; mov cx,SEG 5071 -> far pointer argument of f_1B73_0B5B/0B00/0AC3 (timer slot record)"
   },
+  "fd_50EF_0000": {
+   "seg": 20719,
+   "off": 0,
+   "grounding": "f_1F80_00B8: mov cx,0; mov dx,SEG 50EF (relocated) -> _fmemset/_fstrcpy destination and returned far pointer (centred-text buffer) (worker rootF)"
+  },
   "fd_50F6_0000": {
    "seg": 20726,
    "off": 0,
@@ -21507,6 +21548,41 @@
    "off": 10608,
    "grounding": "o09_35F5_03C6 (FileSelect): mov es,[CONST 8622 = 55B3]; mov es:[2970],al = typed key before calling o09_36EE_0092; defined in module S09:36EE (char g_2970 = 0, first byte of its _DATA)"
   },
+  "g_35D2": {
+   "seg": 21939,
+   "off": 13778,
+   "grounding": "S21 o21_39C7_0000/003C/008C: Device0 word pair base (mov di,35D2; [di],[di+2] adapter/display results); Wilton VIDEO_ID data, defined by the S21 assembly object (48 bytes 35D2-3601)"
+  },
+  "g_35D6": {
+   "seg": 21939,
+   "off": 13782,
+   "grounding": "S21 o21_39C7_0000/003C/008C: EGA switch -> display type table (mov bx,35D6; xlat); Wilton VIDEO_ID data, defined by the S21 assembly object (48 bytes 35D2-3601)"
+  },
+  "g_35DC": {
+   "seg": 21939,
+   "off": 13788,
+   "grounding": "S21 o21_39C7_0000/003C/008C: INT 10h 1A00h display combination code table (mov ax,[bx+35DC]); Wilton VIDEO_ID data, defined by the S21 assembly object (48 bytes 35D2-3601)"
+  },
+  "g_35F6": {
+   "seg": 21939,
+   "off": 13814,
+   "grounding": "S21 o21_39C7_0000/003C/008C: adapter test table: (flag byte, near proc offset) triples (mov si,35F6; lodsb; lodsw; call ax); Wilton VIDEO_ID data, defined by the S21 assembly object (48 bytes 35D2-3601)"
+  },
+  "g_35F9": {
+   "seg": 21939,
+   "off": 13817,
+   "grounding": "S21 o21_39C7_0000/003C/008C: EGA test flag byte of the adapter test table (mov byte [35F9],0/1); Wilton VIDEO_ID data, defined by the S21 assembly object (48 bytes 35D2-3601)"
+  },
+  "g_35FC": {
+   "seg": 21939,
+   "off": 13820,
+   "grounding": "S21 o21_39C7_0000/003C/008C: CGA test flag byte of the adapter test table (mov byte [35FC],0/1); Wilton VIDEO_ID data, defined by the S21 assembly object (48 bytes 35D2-3601)"
+  },
+  "g_35FF": {
+   "seg": 21939,
+   "off": 13823,
+   "grounding": "S21 o21_39C7_0000/003C/008C: mono test flag byte of the adapter test table (mov byte [35FF],0/1); Wilton VIDEO_ID data, defined by the S21 assembly object (48 bytes 35D2-3601)"
+  },
   "g_3D10": {
    "seg": 21939,
    "off": 15632,
@@ -22246,6 +22322,21 @@
    "seg": 21939,
    "off": 35796,
    "grounding": "S04 OpenMiniMapWin: mov [8BD4],ax; imul [8BD4] in DrawMiniMapCursor y scaling (Win16 miniYSize)"
+  },
+  "g_8C7C": {
+   "seg": 21939,
+   "off": 35964,
+   "grounding": "f_1B28_0006: mov [bx-7384h],ax / [bx-7382h],dx with bx=i*4, i<6 -> BSS array of 6 far pointers (cursor image handles, db kind 8) (worker rootF)"
+  },
+  "g_8C9C": {
+   "seg": 21939,
+   "off": 35996,
+   "grounding": "f_1B28_0006: mov [di-7364h],ax / [di-7362h],dx with di=i*4, i<6 -> BSS array of 6 far pointers (cursor mask handles, db kind 7) (worker rootF)"
+  },
+  "g_8CBC": {
+   "seg": 21939,
+   "off": 36028,
+   "grounding": "f_1B28_006A: mov [8CBC],bx (last cursor shape other than 1) (worker rootF)"
   },
   "g_8CCB": {
    "seg": 21939,

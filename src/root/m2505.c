@@ -59,6 +59,20 @@ void _fastcall RepointObjects(int win)
     }
 }
 
+int _fastcall f_2505_00AA(int type)
+{
+    switch (type) {
+    case 5:
+    case 9:
+    case 12:
+    case 16:
+    case 17:
+    case 18:
+        return 1;
+    }
+    return 0;
+}
+
 int _fastcall f_2505_00DD(char far *obj)
 {
     int size;
@@ -158,6 +172,11 @@ char far * _fastcall win_ObjAddr(int obj)
     if (*(int far *)(f_2505_0006(obj) + 0xc) <= (unsigned char)obj)
         Punt("Attempt to get obj address outsize window");
     return ((char far * far *)(f_2505_0006(obj) + 0x2c))[obj & 0xff];
+}
+
+char far * _fastcall f_2505_033C(int win, int obj)
+{
+    return win_ObjAddr((win & 0xff00) + obj);
 }
 
 char far * _fastcall win_WinAddr(int win)
@@ -266,6 +285,9 @@ void _fastcall win_SortRect(struct Rect far *r)
     }
 }
 
+void _fastcall win_Recalc(int win);
+void _fastcall f_2505_06B9(int flag, char far *w);
+void _fastcall f_2505_0831(int win);
 extern char far * far f_171C_1B84(char far * far *handle);
 extern void far f_171C_1BBA(char far * far *handle);
 

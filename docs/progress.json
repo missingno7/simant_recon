@@ -2,10 +2,10 @@
  "schema": "simant-progress-v1",
  "generated": "2026-09-30",
  "oracle_sha256": "aa0596c6766322a8229ee3c36e57048c92adc82d50fbe2ef37afb8b85fcf4f11",
- "known_functions": 1705,
- "known_game_functions": 1615,
- "exact_c_functions": 1100,
- "exact_c_bytes": 192414,
+ "known_functions": 1708,
+ "known_game_functions": 1618,
+ "exact_c_functions": 1122,
+ "exact_c_bytes": 196743,
  "exact_asm_functions": 286,
  "exact_asm_bytes": 43873,
  "exact_code_segment_data_bytes": 1385,
@@ -14,13 +14,13 @@
  "historical_runtime_bytes_located_unaccepted": 0,
  "runtime_functions_known": 90,
  "runtime_functions_owned": 90,
- "owned_functions": 1476,
+ "owned_functions": 1498,
  "rtlink_manager_bytes_unaccepted": 17063,
- "data_bytes_accepted": 16347,
+ "data_bytes_accepted": 16694,
  "bss_bytes_placed": 492,
  "game_code_span_bytes": 304748,
- "unresolved_code_bytes": 67076,
- "unresolved_data_bytes": 119173,
+ "unresolved_code_bytes": 62747,
+ "unresolved_data_bytes": 118826,
  "overlay_coverage": {
   "S00": {
    "bytes": 19696,
@@ -100,7 +100,7 @@
   },
   "S19": {
    "bytes": 1120,
-   "claimed": 0
+   "claimed": 1120
   },
   "S20": {
    "bytes": 2096,
@@ -131,17 +131,17 @@
    "claimed": 2236
   }
  },
- "root_claimed_bytes": 129526,
- "scaffold_functions": 64,
- "exact_translation_units": 51,
+ "root_claimed_bytes": 132735,
+ "scaffold_functions": 61,
+ "exact_translation_units": 53,
  "claims_within_group_order_pending": 7,
- "inplace_draft_functions": 19,
+ "inplace_draft_functions": 24,
  "claims_exact_steered": 18,
- "complete_tus_relocation_order_proven": 50,
+ "complete_tus_relocation_order_proven": 52,
  "complete_tus_cross_function_order_pending": [
   "S00:31AD"
  ],
- "codegen_rules_reproduced": 22,
+ "codegen_rules_reproduced": 23,
  "whole_executable": "NOT_BUILT (no historical link yet; see docs/next-steps.md)",
  "validation": "PASS",
  "failures": []

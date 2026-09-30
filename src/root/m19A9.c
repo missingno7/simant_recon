@@ -36,7 +36,7 @@ extern int far printf(char far *format, ...);
 extern int far WinPrintf(char far *format, ...);
 extern void far Punt(char far *format, ...);
 extern IndexEntry far * far FindIndex(int db, int id, int kind);
-extern void far f_19DC_02D9(int file, void far *buffer, long count);
+extern void far f_19DC_02D9(int file, void far *buffer, unsigned long count);
 extern void far f_19DC_02FB(int file, long offset, void far *buffer, long count);
 extern char far * far f_171C_1B84(char far *handle);
 extern void far f_171C_1BBA(char far *handle);
@@ -78,13 +78,6 @@ void far f_19A9_000B(int (far *hook)(char far * far *handle, int far *size, int 
     g_36F2 = hook;
 }
 
-/* SCAFFOLD BEGIN: context only, not reconstruction.
- * DBRecall (DBRecall) best draft (/Oeg): same instruction stream as the original except
- * (1) the frame is 0x6E vs 0x6A bytes (the original shares entry's high-word slot with the
- * unpack handle; every later home is 4 bytes lower), and (2) seven calls go through the
- * RTLink manager thunks 2CFB:0002 (jmp 171C:13CA), 2CFB:0007 (jmp 171C:13E4) and
- * 2CFB:002F (jmp 171C:15A2), which have no registered names; the f_2CFB_* externs below
- * are placeholders and cannot bind (tool gap, see REPORT.md). */
 char far * far DBRecall(int db, int object, int type, int far *size)
 {
     IndexEntry far *entry;
@@ -149,7 +142,6 @@ char far * far DBRecall(int db, int object, int type, int far *size)
     (*g_36F2)(&handle, size, object, type);
     return handle;
 }
-/* SCAFFOLD END */
 
 void far DBAdd(void)
 {

@@ -18,7 +18,7 @@ extern EmsSlot far * far * far fd_50F6_3B4C;
 extern void far Punt(char far *format, ...);
 extern void far DosPunt(char far *message);
 extern int far atexit(void (far *func)(void));
-extern void far * far _fmemcpy(void far *dst, void far *src, unsigned int n);
+extern void far * far _fmemcpy(void far *dst, void far *src, int n);
 extern long far lseek(int fd, long offset, int origin);
 extern int far read(int fd, void far *buffer, unsigned int count);
 extern void far f_195A_001D(void);
@@ -43,10 +43,6 @@ void far f_19DC_0008(void)
         f_195A_007D(g_389C);
 }
 
-/* SCAFFOLD BEGIN: context only, not reconstruction.
- * f_19DC_001A (EMS cache setup) draft: calls the RTLink thunk 2CFB:0002 (jmp 171C:13CA)
- * and the runtime long-shift helper 29F4:2F7A (__aFlshr), neither registered (see
- * REPORT.md), so it cannot bind yet. */
 int far f_19DC_001A(long size)
 {
     int i;
@@ -56,9 +52,7 @@ int far f_19DC_001A(long size)
 
     if (g_389C)
         return 1;
-    if (!f_195A_0260())
-        return 0;
-    if (fd_55B3_360C < 0x40)
+    if (!f_195A_0260() || fd_55B3_360C < 0x40)
         return 0;
     f_195A_0035();
     pages = (int)((size + 0x3FFF) >> 14);
@@ -82,15 +76,11 @@ int far f_19DC_001A(long size)
     atexit(f_19DC_0008);
     return 1;
 }
-/* SCAFFOLD END */
 
 int g_38B6 = -1;
 int g_38B8 = -1;
 int g_38BA = -1;
 
-/* SCAFFOLD BEGIN: context only, not reconstruction.
- * f_19DC_0148 (EMS page lookup) draft: uses the runtime long-shift helper 29F4:2F6E
- * (__aFlshl), not registered, so it cannot bind yet. */
 char far * far f_19DC_0148(int file, int page)
 {
     EmsSlot far *slot;
@@ -134,7 +124,7 @@ char far * far f_19DC_0148(int file, int page)
         f_195A_0062(g_389C, i, 3);
         g_38B6 = i;
         slot->age = 0;
-        while (lseek(file, (long)page << 14, 0) == -1L)
+        while ((int)lseek(file, (long)page << 14, 0) == -1)
             f_19DC_04B9();
         for (;;) {
             if (read(file, fd_50F6_3B48, 0x4000) != -1)
@@ -146,7 +136,6 @@ char far * far f_19DC_0148(int file, int page)
     g_38BA = page;
     return fd_50F6_3B48;
 }
-/* SCAFFOLD END */
 
 
 static long s_8C76;
@@ -162,9 +151,6 @@ int g_390C = 0;
 
 #define CHECK_FILE() if (s_8C74 != file) Punt("Handle mismatch")
 
-/* SCAFFOLD BEGIN: context only, not reconstruction.
- * f_19DC_02FB (positioned read through the EMS cache) draft: uses the runtime
- * long-shift helper 29F4:2F7A (__aFlshr), not registered, so it cannot bind yet. */
 int far f_19DC_02FB(int file, long offset, char far *buffer, long count)
 {
     int page;
@@ -211,7 +197,6 @@ plain:
     lseek(file, offset, 0);
     return read(file, buffer, (unsigned int)count);
 }
-/* SCAFFOLD END */
 
 void far f_19DC_04B9(void)
 {

@@ -1,0 +1,109 @@
+{
+ "id": "NAME-3",
+ "question": "In a function containing inline _asm (MSC 6.00AX /AL /Os /Oe /Og /Gs), locals are not enregistered and get BP slots in ascending order of (sum of the name's character codes) mod 16, ties going to the later declaration; declaration order and first use do not matter. Positive controls: f_29D6_00D9 exact only with names tmp/val/port/reg/freq (sums mod 16 = 1, 3, 5, 14, 14; reg declared after freq) giving [bp-2],[bp-4],[bp-6],[bp-8],[bp-10] as in the original; f_293A_002D exact with base/p (p=0 before base=11). Worker snd, build/workers/snd/hashprobe.py.",
+ "results": [
+  {
+   "variant": "names_c_b_a",
+   "profile_index": 0,
+   "profile": "msc600ax",
+   "flags": [
+    "/AL",
+    "/Os",
+    "/Oe",
+    "/Og",
+    "/Gs"
+   ],
+   "source_sha256": "ea22dd08f9ed174f83f0541baa66d3dc3cf4492e3154e8e4eca2b18d2c7d71ee",
+   "bytes": "558bec83ec068b46fe8b5efc8b4efa2bc08be55dcb",
+   "disasm": "push bp; mov bp, sp; sub sp, 6; mov ax, word ptr [bp - 2]; mov bx, word ptr [bp - 4]; mov cx, word ptr [bp - 6]; sub ax, ax; mov sp, bp; pop bp; retf"
+  },
+  {
+   "variant": "names_a_b_p",
+   "profile_index": 0,
+   "profile": "msc600ax",
+   "flags": [
+    "/AL",
+    "/Os",
+    "/Oe",
+    "/Og",
+    "/Gs"
+   ],
+   "source_sha256": "e78df7d395d7d851375e8b222f795a1cf2f777e155839ae97b986db400250f9e",
+   "bytes": "558bec83ec068b46fc8b5efa8b4efe2bc08be55dcb",
+   "disasm": "push bp; mov bp, sp; sub sp, 6; mov ax, word ptr [bp - 4]; mov bx, word ptr [bp - 6]; mov cx, word ptr [bp - 2]; sub ax, ax; mov sp, bp; pop bp; retf"
+  },
+  {
+   "variant": "tie_aa_b",
+   "profile_index": 0,
+   "profile": "msc600ax",
+   "flags": [
+    "/AL",
+    "/Os",
+    "/Oe",
+    "/Og",
+    "/Gs"
+   ],
+   "source_sha256": "41143642c3bc9d7ee024d94b2e6469e1d2fa3e94e50f559b04d273367abc9047",
+   "bytes": "558bec83ec048b46fc8b5efe2bc08be55dcb",
+   "disasm": "push bp; mov bp, sp; sub sp, 4; mov ax, word ptr [bp - 4]; mov bx, word ptr [bp - 2]; sub ax, ax; mov sp, bp; pop bp; retf"
+  },
+  {
+   "variant": "tie_b_aa",
+   "profile_index": 0,
+   "profile": "msc600ax",
+   "flags": [
+    "/AL",
+    "/Os",
+    "/Oe",
+    "/Og",
+    "/Gs"
+   ],
+   "source_sha256": "418112b78e309cdbde3d9df7c54b253be8c37b13bf95844b708e402f8b71b5fa",
+   "bytes": "558bec83ec048b46fe8b5efc2bc08be55dcb",
+   "disasm": "push bp; mov bp, sp; sub sp, 4; mov ax, word ptr [bp - 2]; mov bx, word ptr [bp - 4]; sub ax, ax; mov sp, bp; pop bp; retf"
+  },
+  {
+   "variant": "contrast_no_asm",
+   "profile_index": 0,
+   "profile": "msc600ax",
+   "flags": [
+    "/AL",
+    "/Os",
+    "/Oe",
+    "/Og",
+    "/Gs"
+   ],
+   "source_sha256": "49e87cc2490cbf899c22509500a6140fc67a0514a97773d4ca79073699085a3c",
+   "bytes": "558bec83ec0457562bffeb292bd2eb1f8956fe2bf6eb0f8b46fe03c603c7509a000000005b463976067fec8b56fe423956067fdc47397e067fd22bc05e5f8be55dcb",
+   "disasm": "push bp; mov bp, sp; sub sp, 4; push di; push si; sub di, di; jmp 0x35; sub dx, dx; jmp 0x2f; mov word ptr [bp - 2], dx; sub si, si; jmp 0x26; mov ax, word ptr [bp - 2]; add ax, si; add ax, di; push ax; lcall 0, 0; pop bx; inc si; cmp word ptr [bp + 6], si; jg 0x17; mov dx, word ptr [bp - 2]; inc dx; cmp word ptr [bp + 6], dx; jg 0x10; inc di; cmp word ptr [bp + 6], di; jg 0xc; sub ax, ax; pop si; pop di; mov sp, bp; pop bp; retf"
+  }
+ ],
+ "checks": [
+  {
+   "check": "names_c_b_a@0",
+   "needle": "mov ax, word ptr [bp - 2]; mov bx, word ptr [bp - 4]; mov cx, word ptr [bp - 6]",
+   "ok": true
+  },
+  {
+   "check": "names_a_b_p@0",
+   "needle": "mov ax, word ptr [bp - 4]; mov bx, word ptr [bp - 6]; mov cx, word ptr [bp - 2]",
+   "ok": true
+  },
+  {
+   "check": "tie_aa_b@0",
+   "needle": "mov ax, word ptr [bp - 4]; mov bx, word ptr [bp - 2]",
+   "ok": true
+  },
+  {
+   "check": "tie_b_aa@0",
+   "needle": "mov ax, word ptr [bp - 2]; mov bx, word ptr [bp - 4]",
+   "ok": true
+  },
+  {
+   "check": "contrast_no_asm@0",
+   "needle": "push si",
+   "ok": true
+  }
+ ],
+ "all_checks_pass": true
+}

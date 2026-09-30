@@ -1,4 +1,6 @@
-/* Root module 208F: window-object text and bitmap helpers, resource loading, delays. */
+/* Root module 208F: window-object text and bitmap helpers, resource loading, delays.
+   Built without /Zi: the cross-function relocation order forbids per-function record
+   breaks (e.g. none between 0x0074 and 0x0245); /Zd is equally consistent. */
 
 struct Rect {
     int left;
@@ -145,10 +147,14 @@ void far f_208F_027F(int obj, int n)
         g_914C(r.left, r.top, *fd_50F6_46D2 + (n << 5), 16, 16);
 }
 
+/* Two separate mode tests with identical calls: the 8x8 call of mode 6 is laid out inline
+   and cross-jumped into the 16x16 tail; `==6 || ==2` places the shared block last. */
 void far f_208F_02F0(int x, int y, int n)
 {
     if (!(g_5A97 & 1)) {
-        if (g_5A97 == 6 || g_5A97 == 2)
+        if (g_5A97 == 6)
+            g_914C(x, y, *fd_50F6_46D2 + (n << 5), 8, 8);
+        else if (g_5A97 == 2)
             g_914C(x, y, *fd_50F6_46D2 + (n << 5), 8, 8);
         else
             g_917C(x, y, (n << g_62C0) + g_62BE);

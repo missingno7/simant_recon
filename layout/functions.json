@@ -20686,12 +20686,96 @@
 {
 "unit": "S21",
 "seg": 14791,
+"off": 60,
+"size": 80,
+"region": "game_or_library",
+"extent": "REVIEWED",
+"evidence": [
+"reviewed"
+],
+"notes": [
+"S21 video-adapter probe (Wilton VIDEO_ID layout): near proc reached only through the DGROUP test table at 35F7 (lodsb/lodsw/call ax in o21_39C7_0000); int 10h AX=1A00 PS/2 display combination probe, ends in ret at 008B"
+]
+},
+{
+"unit": "S21",
+"seg": 14791,
+"off": 140,
+"size": 44,
+"region": "game_or_library",
+"extent": "REVIEWED",
+"evidence": [
+"reviewed"
+],
+"notes": [
+"S21 video-adapter probe (Wilton VIDEO_ID layout): near proc from DGROUP test table 35FA; int 10h AH=12h BL=10h EGA probe, ret at 00B7"
+]
+},
+{
+"unit": "S21",
+"seg": 14791,
+"off": 184,
+"size": 16,
+"region": "game_or_library",
+"extent": "REVIEWED",
+"evidence": [
+"reviewed"
+],
+"notes": [
+"S21 video-adapter probe (Wilton VIDEO_ID layout): near proc from DGROUP test table 35FD; CGA CRTC probe at 3D4 via near call 010B, ret at 00C7"
+]
+},
+{
+"unit": "S21",
+"seg": 14791,
+"off": 200,
+"size": 67,
+"region": "game_or_library",
+"extent": "REVIEWED",
+"evidence": [
+"reviewed"
+],
+"notes": [
+"S21 video-adapter probe (Wilton VIDEO_ID layout): near proc from DGROUP test table 3600; MDA/Hercules probe at 3B4/3BA (in/loope), ret at 010A"
+]
+},
+{
+"unit": "S21",
+"seg": 14791,
+"off": 267,
+"size": 26,
+"region": "game_or_library",
+"extent": "REVIEWED",
+"evidence": [
+"reviewed"
+],
+"notes": [
+"S21 video-adapter probe (Wilton VIDEO_ID layout): near proc called from 00BB/00CB; CRTC cursor-register write/read-back test (out/in, loop delay, stc), ret at 0124"
+]
+},
+{
+"unit": "S21",
+"seg": 14791,
 "off": 293,
 "size": 49,
 "region": "game_or_library",
 "extent": "DESCENT",
 "evidence": [
 "near_call"
+]
+},
+{
+"unit": "S21",
+"seg": 14791,
+"off": 342,
+"size": 13,
+"region": "game_or_library",
+"extent": "REVIEWED",
+"evidence": [
+"reviewed"
+],
+"notes": [
+"S21 video-adapter probe (Wilton VIDEO_ID layout): near proc called from 00A3/00C4/00E8/0107; stores AX into the first free device word [di] or [di+2], ret at 0162"
 ]
 },
 {

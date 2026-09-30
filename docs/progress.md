@@ -4,32 +4,32 @@ Validation: **PASS** (2026-09-30)
 
 | Measure | Value |
 |---|---:|
-| known_functions | 1,705 |
-| known_game_functions | 1,615 |
-| exact_c_functions | 1,100 |
-| exact_c_bytes | 192,414 |
+| known_functions | 1,708 |
+| known_game_functions | 1,618 |
+| exact_c_functions | 1,122 |
+| exact_c_bytes | 196,743 |
 | exact_asm_bytes | 43,873 |
 | exact_code_segment_data_bytes | 1,385 |
 | historical_runtime_bytes_accepted | 12,339 |
 | historical_runtime_members_accepted | 90 |
 | runtime_functions_known | 90 |
 | runtime_functions_owned | 90 |
-| owned_functions | 1,476 |
+| owned_functions | 1,498 |
 | historical_runtime_bytes_located_unaccepted | 0 |
 | rtlink_manager_bytes_unaccepted | 17,063 |
-| data_bytes_accepted | 16,347 |
+| data_bytes_accepted | 16,694 |
 | game_code_span_bytes | 304,748 |
-| unresolved_code_bytes | 67,076 |
-| unresolved_data_bytes | 119,173 |
-| scaffold_functions | 64 |
-| exact_translation_units | 51 |
-| complete_tus_relocation_order_proven | 50 |
+| unresolved_code_bytes | 62,747 |
+| unresolved_data_bytes | 118,826 |
+| scaffold_functions | 61 |
+| exact_translation_units | 53 |
+| complete_tus_relocation_order_proven | 52 |
 | claims_within_group_order_pending | 7 |
-| inplace_draft_functions | 19 |
+| inplace_draft_functions | 24 |
 | claims_exact_steered | 18 |
 
 Complete TUs with cross-function relocation order pending (record breaks between functions differ; see docs/codegen-rules.md ZI-1): S00:31AD
 
 Whole executable: NOT_BUILT (no historical link yet; see docs/next-steps.md)
 
-Overlay coverage (claimed/bytes): S00 19679/19696, S01 7051/7056, S02 2409/2416, S03 10963/10976, S04 2282/2464, S05 1764/2512, S06 6333/9584, S07 1174/1184, S08 3698/5056, S09 2820/5232, S10 972/2736, S11 870/880, S12 4773/4992, S13 4962/6064, S14 1946/4656, S15 1025/1360, S16 1763/1776, S17 0/448, S18 4359/4368, S19 0/1120, S20 2086/2096, S21 0/480, S22 12710/12720, S23 1411/4368, S24 1071/1808, S25 9789/14592, S26 2236/2240
+Overlay coverage (claimed/bytes): S00 19679/19696, S01 7051/7056, S02 2409/2416, S03 10963/10976, S04 2282/2464, S05 1764/2512, S06 6333/9584, S07 1174/1184, S08 3698/5056, S09 2820/5232, S10 972/2736, S11 870/880, S12 4773/4992, S13 4962/6064, S14 1946/4656, S15 1025/1360, S16 1763/1776, S17 0/448, S18 4359/4368, S19 1120/1120, S20 2086/2096, S21 0/480, S22 12710/12720, S23 1411/4368, S24 1071/1808, S25 9789/14592, S26 2236/2240
