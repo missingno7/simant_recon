@@ -1229,12 +1229,15 @@ extern int far fd_3D57_0C28;
 extern int far fd_50F6_0470;
 extern int far fd_50F6_047A;
 
-/* OPEN: residue commutative operand order MapPnt.x + EditColumns (original loads the
- * MapPnt member first) - structural, not changed by names or preceding declaration counts. */
+/* The original's second range test compares the ant-lion y (fd_50F6_047A) with MapPnt.x
+ * (object: les bx,[bp-4] = &MapPnt.x), kept here as in the original.  t is an unused local
+ * (byte-equivalent hypothesis): its frame word [bp-12h] is in the original, and without it
+ * /Og spills the fd_3D57_0C28 compare temp there ('mov [bp-12h],ax', 3 bytes); worker resJ. */
 void far f_0250_1E80(void)
 {
     int x;
     int y;
+    int t;
 
     if (fd_50F6_0508.x + fd_50F6_10E0 >= fd_50F6_03E0 && fd_50F6_03E0 + 15 >= fd_50F6_0508.x
         && fd_50F6_0508.y + fd_50F6_10DE >= fd_50F6_046A && fd_50F6_046A + 15 >= fd_50F6_0508.y) {
@@ -1249,7 +1252,7 @@ void far f_0250_1E80(void)
             InvalEuMap(x, y, x + 6, y + 16);
         if (fd_3D57_0C28 == 3 || fd_3D57_0C28 == 4) {
             if (fd_50F6_0508.x + fd_50F6_10E0 >= fd_50F6_0470 && fd_50F6_0470 + 0x1b >= fd_50F6_0508.x
-                && fd_50F6_0508.y + fd_50F6_10DE >= fd_50F6_047A && fd_50F6_047A + 0x1b >= fd_50F6_0508.y) {
+                && fd_50F6_0508.y + fd_50F6_10DE >= fd_50F6_047A && fd_50F6_047A + 0x1b >= fd_50F6_0508.x) {
                 x = (fd_50F6_0470 - fd_50F6_0508.x) * g_19BE + fd_50F6_110C.left;
                 y = (fd_50F6_047A - fd_50F6_0508.y) * g_19C0 + fd_50F6_110C.top;
                 (*g_9134)(x, y, 15 * g_19BE + x, 15 * g_19C0 + y, g_19C4 | 0x20);

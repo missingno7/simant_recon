@@ -481,14 +481,13 @@ void far o06_35F5_0A5F(void)
 }
 
 
-/* SCAFFOLD BEGIN: SimKidInside draft.  Under MSC 6.00A (C2 and the bound C2L) it gets C4203
- * (2014 bytes, 0.76 similar).  Under 6.00AX /Oe /Og /Zi (worker big) everything but one global
- * CSE matches: the original keeps (fd_3D57_0C2E - 38) in a temp [bp-24h] from the '/ 10' to the
- * '% 10' across the early returns; here C2 recomputes it (length 1906 vs 1903, frame 2Eh vs 30h).
- * Minimal reproducer: evidence-free mini in build/workers/big/cse3.c (the local CSE of the shared
- * operand into CX blocks the second global CSE; without the (c2c + c2e - 200) CSE it forms).
- * Variable roles follow the original's frame and registers: the else-if index (c48 - 30) is i
- * (DI); the final loop counts with y and draws i (SI) and x (DI). */
+/* SimKidInside (exact under 6.00AX /Oe /Og /Zi, worker resJ/s06).  The row division
+ * fd_50F6_023E = (BoyY - 38) / 10 comes before the column division in the source; /Og schedules
+ * the column store first, and only in this order is (BoyY - 38) kept as a global CSE temp
+ * [bp-24h] across the early returns (in column-first order the local CSE of BoyY into CX blocks
+ * it; micro contrast build/workers/resJ/s06/m/m1.c vs m2.c).  Local names are byte-equivalent
+ * hypotheses: the final loop counts with x (the kidX home [bp-2]) and draws the row into i (SI)
+ * and the column into frame (DI); the else-if index (c48 - 30) is i. */
 extern int far fd_3D57_07C8;
 extern int far YardMode;
 extern int far RpopT;
@@ -668,11 +667,11 @@ void far SimKidInside(void)
             (fd_3D57_0C46 == 3 && fd_3D57_0C48 == 21 && fd_3D57_0C32 == 1))
             f_00DF_00E8(0x18, 0, 0);
     }
+    fd_50F6_023E = (fd_3D57_0C2E - 38) / 10;
     fd_50F6_0246 = (fd_3D57_0C2C + fd_3D57_0C2E - 200) / 28;
     fd_3D57_0C3E = 0;
     fd_3D57_0C42 = !fd_3D57_0C42;
     i = (fd_50F6_07CA[0] << 4) + fd_50F6_07CA[1];
-    fd_50F6_023E = (fd_3D57_0C2E - 38) / 10;
     if (fd_50F6_023E != fd_50F6_07CA[1] || fd_50F6_07CA[0] != fd_50F6_0246)
         return;
     if (i == 0 || i == 1 || i == 16 || i == 32)
@@ -699,23 +698,22 @@ void far SimKidInside(void)
     }
     FootFall(fd_50F6_03E0, fd_50F6_046A);
     f_00DF_00E8(9, 0, 0x7e);
-    for (y = 0; y < (BpopT + RpopT) << 3; y++) {
+    for (x = 0; x < (BpopT + RpopT) << 3; x++) {
         i = SRand128();
-        x = SRand64();
-        if (fd_3E1D_6180[i][x] != 0) {
-            fd_50F6_0F18 = f_0EC1_0291(i, x);
+        frame = SRand64();
+        if (fd_3E1D_6180[i][frame] != 0) {
+            fd_50F6_0F18 = f_0EC1_0291(i, frame);
             if (fd_50F6_0F18 >= 0) {
-                DeadAntHere(i, x, AlistT[fd_50F6_0F18] & 0x80);
-                fd_3E1D_6180[i][x] = AlistT[fd_50F6_0F18] = 0;
+                DeadAntHere(i, frame, AlistT[fd_50F6_0F18] & 0x80);
+                fd_3E1D_6180[i][frame] = AlistT[fd_50F6_0F18] = 0;
             }
         }
-        if ((fd_50F6_0F12 >> 4) == i && (fd_50F6_0F34 >> 4) == x)
+        if ((fd_50F6_0F12 >> 4) == i && (fd_50F6_0F34 >> 4) == frame)
             f_0CDB_0DE0();
     }
     if (fd_50F6_0EAC == 2 && fd_50F6_048C == 1 && SRand4() == 0)
         o22_39C7_0D21(9);
 }
-/* SCAFFOLD END */
 
 extern int far fd_50F6_10AC;
 extern int far fd_50F6_0210;

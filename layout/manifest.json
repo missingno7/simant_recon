@@ -2515,8 +2515,9 @@
     }
    },
    "lang": "c",
+   "source_origin": "hand-written C",
    "source": "src/S06/m35F5.c",
-   "source_sha256": "b8825d0b284ac63e0e8dbf8c96f5cc9c180be47453a62bc1401c9e13c72c7702",
+   "source_sha256": "d19a9e3c428e698c0b13b81219ee1e62a6adb1c9159be624dd755edd9a3d28e9",
    "claims": [
     {
      "name": "o06_35F5_0000",
@@ -2748,13 +2749,44 @@
      "kind": "C",
      "provenance": "EXACT_STEERED",
      "steered": "record order only: the nested 'if (fd_50F6_0EAC == 2) if (x < 2 ...)' test adds one /Zi line entry so the 52-entry LINNUM flush falls in 229F..2309; the cumulative count also depends on the SimKidInside scaffold draft's line count (bytes are natural: r reused for the population clamps, b loaded before r)",
-     "reloc_order": "GROUPED"
+     "reloc_order": "WITHIN_GROUP_PENDING"
+    },
+    {
+     "name": "SimKidInside",
+     "unit": "S06",
+     "seg": 13813,
+     "off": 2704,
+     "size": 1903,
+     "target_sha256": "886f033b4d56bc4125ba278eaaf8d09bbe9b02b2f356cc746579d70661374f99",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL",
+     "reloc_order": "WITHIN_GROUP_PENDING"
+    },
+    {
+     "name": "o06_35F5_14CC",
+     "unit": "S06",
+     "seg": 13813,
+     "off": 5324,
+     "size": 823,
+     "target_sha256": "dcc91a06ea6b329413a5ef697e39cba2e05f06dd64d2fd8126e56d90bcf90194",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL",
+     "reloc_order": "WITHIN_GROUP_PENDING"
+    },
+    {
+     "name": "o06_35F5_1803",
+     "unit": "S06",
+     "seg": 13813,
+     "off": 6147,
+     "size": 524,
+     "target_sha256": "6158a8994db0bcd9f954c59825feb1c5715987754ab3fccbb8e35ba91cff56de",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL",
+     "reloc_order": "WITHIN_GROUP_PENDING"
     }
    ],
-   "scaffold": [
-    "SimKidInside"
-   ],
-   "object_sha256": "932185dbdb8e61daae26d4d87662b9cdbbfdbb990a8ecd51bc8b8f7cd20a935d"
+   "scaffold": [],
+   "object_sha256": "7ab48dc3b6b969d43454e5030b92c30ba87dfb49bb0c65d1b3f90e20e95dcbf7"
   },
   "S07:35F5": {
    "unit": "S07",
@@ -5766,8 +5798,12 @@
    },
    "lang": "c",
    "source_origin": "hand-written C",
+   "extent": {
+    "start": 236656,
+    "end": 244295
+   },
    "source": "src/S25/m39C7.c",
-   "source_sha256": "3c9e0eeb7e31f2d90432a6f3e8c96b8afeed30d6cece0b253606aeaae266fd1a",
+   "source_sha256": "90a2cf12a9e527d1836099c92e5327d47342eac0a8403639d66471ecbc859ba6",
    "claims": [
     {
      "name": "o25_39C7_0000",
@@ -6090,12 +6126,21 @@
      "kind": "C",
      "provenance": "EXACT_NATURAL",
      "reloc_order": "GROUPED"
+    },
+    {
+     "name": "DoNestingB",
+     "unit": "S25",
+     "seg": 14791,
+     "off": 4494,
+     "size": 609,
+     "target_sha256": "e42608423fe1b5c59af495c6e883839afbc1c355b795112e547638917c3465ca",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL",
+     "reloc_order": "GROUPED"
     }
    ],
-   "scaffold": [
-    "DoNestingB"
-   ],
-   "object_sha256": "f30ca025b09d15baaeb4252b0d07a1543e17e8f2dc2bd49503f26d4ca6ebbd13"
+   "scaffold": [],
+   "object_sha256": "946278d83a4b5e71373ee0e25b86e551b3575b68d1ba95c9fbe6ca3aa3b5808e"
   },
   "S25:3BA4": {
    "unit": "S25",
@@ -8153,7 +8198,7 @@
    "lang": "c",
    "source_origin": "hand-written C",
    "source": "src/root/m0250.c",
-   "source_sha256": "30ef5d233d709b7af5267b291409e079cc7bd753839393de713b99d79a5e3604",
+   "source_sha256": "a6b6f95dc6f310102abc4422bd8edb4f34199dc26e00831a77b7dc2dafe6867c",
    "claims": [
     {
      "name": "f_0250_0CF6",
@@ -8672,10 +8717,21 @@
      "provenance": "EXACT_NATURAL",
      "layout_inferred": "extern Pnt far fd_50F6_0508 declared after the Rect/win_GetObjRect declarations (still before its first use in f_0250_0D10): six identifiers before it make BalloonIsVisible exact (idscan: +3..15 at the old position)",
      "reloc_order": "EXACT"
+    },
+    {
+     "name": "f_0250_1E80",
+     "unit": "root",
+     "seg": 592,
+     "off": 7808,
+     "size": 549,
+     "target_sha256": "8abe61f7713068e86714f78fb241a765c20b524b07e4743b99641f0519d253fb",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL",
+     "reloc_order": "EXACT"
     }
    ],
    "scaffold": [],
-   "object_sha256": "f96de3fdcfbfb9f3ab4bbcd05dcfa40de6acbbea99d2e2a1ec0ff3bbdccb9b1c"
+   "object_sha256": "37be68870ce44803257925e0d42889fa7065690db200ac714d5169d978803577"
   },
   "root:075B": {
    "unit": "root",
@@ -10780,8 +10836,13 @@
     }
    },
    "lang": "c",
+   "source_origin": "hand-written C",
+   "extent": {
+    "start": 69502,
+    "end": 79921
+   },
    "source": "src/root/m10F7.c",
-   "source_sha256": "0aa79bb78d9dc5cbfe143ad9710643bec14b6db1e99bee844ab7f11e6f5ed9eb",
+   "source_sha256": "a4cc271d57a4a80dd255953554a886026297b0560453c4b2c7b302b5878fff88",
    "claims": [
     {
      "name": "IsValidLocation",
@@ -11398,12 +11459,21 @@
      "kind": "C",
      "provenance": "EXACT_NATURAL",
      "reloc_order": "GROUPED"
+    },
+    {
+     "name": "DoLifeExchange",
+     "unit": "root",
+     "seg": 4343,
+     "off": 3240,
+     "size": 1774,
+     "target_sha256": "b1fb8e76e861a5a95d3a5874472947f1d9579068e8df1f61abd10b908d6ad95e",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL",
+     "reloc_order": "GROUPED"
     }
    ],
-   "scaffold": [
-    "DoLifeExchange"
-   ],
-   "object_sha256": "d253d2f6cf05461ede91e6263f4686d673edd0cc1525127ed506ae685b3ed938"
+   "scaffold": [],
+   "object_sha256": "aac7adfd26401804b87d288a924570531080839f0629e78cd116ffd50b08b4f8"
   },
   "root:1383": {
    "unit": "root",
@@ -11900,8 +11970,13 @@
     }
    },
    "lang": "c",
+   "source_origin": "hand-written C",
+   "extent": {
+    "start": 85730,
+    "end": 89494
+   },
    "source": "src/root/m14EE.c",
-   "source_sha256": "3f7f1e97534488dd2408ee9fd4aefc9316a2ba84c929007b13e30da065cc2b3f",
+   "source_sha256": "a9947226c73c4502f00e2b319b3cd7abc7f2acbc8ca9ef72448b31e55c6bdb59",
    "claims": [
     {
      "name": "CanBeHouseHole",
@@ -12067,13 +12142,32 @@
      "kind": "C",
      "provenance": "EXACT_NATURAL",
      "reloc_order": "GROUPED"
+    },
+    {
+     "name": "f_14EE_0C9C",
+     "unit": "root",
+     "seg": 5358,
+     "off": 3228,
+     "size": 213,
+     "target_sha256": "f1bf4a02427b8c69dcea62b4f0aaed706dda3c46f4662444f91a3dbbe85f78ab",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL",
+     "reloc_order": "EXACT"
+    },
+    {
+     "name": "f_14EE_0D71",
+     "unit": "root",
+     "seg": 5358,
+     "off": 3441,
+     "size": 213,
+     "target_sha256": "c4d96de358fa466cffbd6103f42a1c42de7adaa059ca792451b017f76871f26b",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL",
+     "reloc_order": "EXACT"
     }
    ],
-   "scaffold": [
-    "f_14EE_0C9C",
-    "f_14EE_0D71"
-   ],
-   "object_sha256": "255e2329c10dbc737a9975f20c9b828801faa4ee44211f9c03e10cae55373c28"
+   "scaffold": [],
+   "object_sha256": "0820602369048b2e5311b9d6ea40525bdb9e27b6014b91d27f749ddab3f7259b"
   },
   "root:15D9": {
    "unit": "root",

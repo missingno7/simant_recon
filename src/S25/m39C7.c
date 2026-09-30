@@ -656,7 +656,7 @@ int far o25_39C7_105B(int x, int y, int dir)
 
 void far o25_39C7_13EF(int x, int y);
 
-/* SCAFFOLD BEGIN: DoNestingB best draft: 1 byte differs, mov si,cx (original) vs mov si,bx when loading the Tindex copy before f_1383_099B (register tie-break; declaration order, case order, statement forms and identifier counts 0..16 tried); record order is right with this layout */
+/* autosearch: exact after rules IF-NEG */
 void far DoNestingB(int x, int y, int attr, int caste)
 {
     int dir;
@@ -683,19 +683,19 @@ void far DoNestingB(int x, int y, int attr, int caste)
             BlistS[fd_50F6_0F18] = 8;
             BlistM[fd_50F6_0F18] = f_1383_099B(caste);
         }
-        if ((dir = f_0BE8_0C0F(x, y, attr & 7)) != 0)
-            dir--;
-        else
+        if ((dir = f_0BE8_0C0F(x, y, attr & 7)) == 0)
             dir = SRand8();
+        else
+            dir--;
         break;
     case 2:
         if (food != 0) {
             if (SRand8() == 0)
                 BlistS[fd_50F6_0F18] = 0;
-            if ((dir = f_0BE8_0C0F(x, y, attr & 7)) != 0)
-                dir--;
-            else
+            if ((dir = f_0BE8_0C0F(x, y, attr & 7)) == 0)
                 dir = SRand8();
+            else
+                dir--;
             break;
         }
         if (cell != 0 && cell < 8) {
@@ -721,7 +721,6 @@ void far DoNestingB(int x, int y, int attr, int caste)
     if (o25_39C7_105B(x, y, dir) == 0)
         o25_39C7_105B(x, y, SRand8());
 }
-/* SCAFFOLD END */
 
 extern int far fd_50F6_0AEC[6];
 extern int far fd_50F6_0212;

@@ -436,18 +436,13 @@ void far SmoothEdgesR(int x, int y)
 }
 
 
-/* SCAFFOLD BEGIN: f_14EE_0C9C/f_14EE_0D71 (FixExitMapB/R) best drafts: target frame 10 with i [bp-4], best
-   [bp-6], ny in SI, nx in AX, and the final ExitMap store hoists `mov ax,SEG; mov es,ax` above
-   the if/else. With an extra `value` local (as below) frame, loop and registers match but best
-   lands in [bp-8] and the final ES load is not hoisted (57 bytes differ); all 120 declaration
-   orders give the same result; without `value` DI is used for nx (198 bytes differ) */
+/* autosearch: exact after rules CSE-INLINE, STMT-SWAP */
 void far f_14EE_0C9C(int x, int y)
 {
     int i;
     int nx;
     int ny;
     int best;
-    int value;
 
     if (y < 2) {
         if (MapB[x][y] == 0x18)
@@ -458,13 +453,12 @@ void far f_14EE_0C9C(int x, int y)
     }
     best = 0;
     for (i = 0; i < 8; i++) {
-        ny = Dy8[i] + y;
         nx = Dx8[i] + x;
+        ny = Dy8[i] + y;
         if (nx < 0 || nx > 63 || ny < 0 || ny > 63)
             continue;
-        value = ExitMapB[nx][ny];
-        if (value > best)
-            best = value;
+        if (ExitMapB[nx][ny] > best)
+            best = ExitMapB[nx][ny];
     }
     if (best)
         ExitMapB[x][y] = best - 1;
@@ -472,13 +466,13 @@ void far f_14EE_0C9C(int x, int y)
         ExitMapB[x][y] = 0;
 }
 
+/* autosearch: exact after rules CSE-INLINE, STMT-SWAP */
 void far f_14EE_0D71(int x, int y)
 {
     int i;
     int nx;
     int ny;
     int best;
-    int value;
 
     if (y < 2) {
         if (MapR[x][y] == 0x18)
@@ -489,13 +483,12 @@ void far f_14EE_0D71(int x, int y)
     }
     best = 0;
     for (i = 0; i < 8; i++) {
-        ny = Dy8[i] + y;
         nx = Dx8[i] + x;
+        ny = Dy8[i] + y;
         if (nx < 0 || nx > 63 || ny < 0 || ny > 63)
             continue;
-        value = ExitMapR[nx][ny];
-        if (value > best)
-            best = value;
+        if (ExitMapR[nx][ny] > best)
+            best = ExitMapR[nx][ny];
     }
     if (best)
         ExitMapR[x][y] = best - 1;
@@ -503,7 +496,6 @@ void far f_14EE_0D71(int x, int y)
         ExitMapR[x][y] = 0;
 }
 
-/* SCAFFOLD END */
 
 void far f_14EE_0E46(void)
 {

@@ -572,12 +572,6 @@ void far ExchangeLives(int a, int b, int c)
         myBeginSound(1, 0, 0x7e);
 }
 
-/* SCAFFOLD BEGIN: DoLifeExchange (DoLifeExchange-like) best draft, NOT exact
- * (opcode similarity 0.961, length 1782 vs 1774).  Residue: /Oe register
- * choice (life -> SI instead of DI, region-1 type value not in DI), home
- * permutation of newLife/caste (-8/-2 swapped), block-scoped c gets no
- * [bp-3A] slot.  Written with goto fail/done: with plain returns MSC emits
- * C4203 "function too large for global optimizations". */
 int far DoLifeExchange(int plane, int x, int y)
 {
     int newLife;
@@ -594,6 +588,7 @@ int far DoLifeExchange(int plane, int x, int y)
     int attribute;
     int column;
     int lifeField;
+    int u;
 
     life = GetLife(plane, x, y);
     if (life <= 0) {
@@ -601,16 +596,19 @@ int far DoLifeExchange(int plane, int x, int y)
             goto fail;
         if (GetDis(x * 16 + 8, y * 16 + 8, fd_50F6_0F12, fd_50F6_0F34) >= 0x200)
             goto fail;
-        caste = (fd_50F6_04C2 & 0x78) >> 3;
+        newLife = (fd_50F6_04C2 & 0x78) >> 3;
         egg = 0;
         if (fd_50F6_04C2 & 8) {
-            if (caste == 5 || caste == 9)
-                caste = fd_3D57_0094[caste];
-            else if (caste == 1)
+            if (newLife == 5 || newLife == 9)
+                newLife = fd_3D57_0094[newLife];
+            else if (newLife == 1)
                 egg = fd_3D57_0C22;
         }
-        life = (fd_50F6_04E2 & 0x80) | fd_50F6_0496 | (caste << 3);
-        t = (fd_50F6_04C2 == 0x60) ? 9 : 0;
+        life = (fd_50F6_04E2 & 0x80) | fd_50F6_0496 | (newLife << 3);
+        if (fd_50F6_04C2 == 0x60)
+            t = 9;
+        else
+            t = 0;
         if (!AddAntToList(MePlane, MeLocX, MeLocY, life, t, egg))
             goto fail;
         if (fd_50F6_04C2 == 0x60) {
@@ -654,15 +652,15 @@ int far DoLifeExchange(int plane, int x, int y)
     if (fd_50F6_0A06 == 0) {
         int c;
 
-        t = (fd_50F6_04C2 & 0x78) >> 3;
+        u = (fd_50F6_04C2 & 0x78) >> 3;
         egg = 0;
         if (fd_50F6_04C2 & 8) {
-            if (t == 5 || t == 9)
-                t = fd_3D57_0094[t];
-            else if (t == 1)
+            if (u == 5 || u == 9)
+                u = fd_3D57_0094[u];
+            else if (u == 1)
                 egg = fd_3D57_0C22;
         }
-        newLife = (t << 3) | fd_50F6_0496 | (life & 0x80);
+        newLife = (u << 3) | fd_50F6_0496 | (life & 0x80);
         if (life & 0x80) {
             if (!(*(unsigned char far *)0x417L & 8) || !(*(unsigned char far *)0x417L & 3))
                 goto fail;
@@ -672,15 +670,11 @@ int far DoLifeExchange(int plane, int x, int y)
             if (!(*(unsigned char far *)0x417L & 8) || !(*(unsigned char far *)0x417L & 3) || !fd_3D57_0798)
                 goto fail;
         }
-        switch (c) {
-        case 5:
-        case 9:
-            life = (fd_3D57_0094[c] << 3) | (life & 7);
-            break;
-        case 1:
+        if (c == 5 || c == 9)
+            life = (fd_3D57_0094[(life & 0x78) >> 3] << 3) | (life & 7);
+        else if (c == 1) {
             GetAntIndex(plane, index, &lifeField, &column, &attribute, &state, &direction);
             fd_3D57_0C22 = direction;
-            break;
         }
         t = (fd_50F6_04C2 == 0x60) ? 9 : 0;
         ZapEuMapAt(MePlane, MeLocX, MeLocY);
@@ -712,15 +706,11 @@ int far DoLifeExchange(int plane, int x, int y)
             if (!(*(unsigned char far *)0x417L & 8) || !(*(unsigned char far *)0x417L & 3) || !fd_3D57_0798)
                 goto fail;
         }
-        switch (c) {
-        case 5:
-        case 9:
-            life = (fd_3D57_0094[c] << 3) | (life & 7);
-            break;
-        case 1:
+        if (c == 5 || c == 9)
+            life = (fd_3D57_0094[(life & 0x78) >> 3] << 3) | (life & 7);
+        else if (c == 1) {
             GetAntIndex(plane, index, &lifeField, &column, &attribute, &state, &direction);
             fd_3D57_0C22 = direction;
-            break;
         }
         SetAntIndex(plane, index, 0, 0, 0, 0, 0);
         if (caste == 0xc)
@@ -739,7 +729,6 @@ done:
 fail:
     return 0;
 }
-/* SCAFFOLD END */
 
 int far DropMyFood(int plane, int x, int y, int tx, int ty)
 {
