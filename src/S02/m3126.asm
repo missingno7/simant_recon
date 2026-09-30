@@ -10,11 +10,6 @@
 _DATA	segment word public 'DATA'
 	extrn	_fd_55B3_3DE6:byte
 	extrn	_fd_55B3_3DE8:byte
-	extrn	_g_219C:byte
-	extrn	_g_219E:byte
-	extrn	_g_21A0:byte
-	extrn	_g_21A2:byte
-	extrn	_g_220A:byte
 	extrn	_g_3DA4:byte
 	extrn	_g_3DA8:byte
 	extrn	_g_3DAE:byte
@@ -43,6 +38,40 @@ _DATA	segment word public 'DATA'
 	extrn	_g_4365:byte
 	extrn	_g_4366:byte
 	extrn	_g_5AAE:byte
+; S02 private data (DGROUP:219C-220D): blit scratch words, the dispatch table the game
+; calls through, and a far pointer to that table.
+_g_219C	dw	0
+_g_219E	dw	0
+_g_21A0	dw	0
+_g_21A2	dw	0
+	dw	0
+DispatchS02	label	dword
+	dd	_o02_3126_0040
+	dd	_o02_3126_005C
+	dd	_o02_3126_0079
+	dd	_o02_3126_027C
+	dd	_o02_3126_0185
+	dd	_o02_3126_03B1
+	dd	_o02_3126_03D4
+	dd	_o02_3126_03D4
+	dd	_o02_3126_03EF
+	dd	_o02_3126_0505
+	dd	_o02_3126_0512
+	dd	_o02_3126_0636
+	dd	_o02_3126_0643
+	dd	_o02_3126_04C6
+	dd	_o02_3126_0490
+	dd	_o02_3126_04B4
+	dd	_o02_3126_04A2
+	dd	_o02_3126_073A
+	dd	_o02_3126_0747
+	dd	_o02_3126_0096
+	dd	_o02_3126_0051
+	dd	_o02_3126_084E
+	dd	_o02_3126_0857
+	dd	_o02_3126_04D8
+	dd	_o02_3126_0860
+_g_220A	dd	DGROUP:DispatchS02
 _DATA	ends
 DGROUP	group	_DATA
 

@@ -18553,6 +18553,11 @@
    "off": 2130,
    "grounding": "S24 drawHistGraph (39C7:03A2): mov es,[CONST 88E6 = 3D57]; es:[bx+852]/[bx+854] -> table of far pointers to the second history array of each graph"
   },
+  "fd_3D57_087A": {
+   "seg": 15703,
+   "off": 2170,
+   "grounding": "data-only TU data:3D57 (build/workers/data/t3D57.c): 72-byte table 3D57:087A-08C1 after the fd_3D57_082A far-pointer table, no code reference; defined by the TU (FARSEG-1)"
+  },
   "fd_3D57_098E": {
    "seg": 15703,
    "off": 2446,
@@ -19132,6 +19137,11 @@
    "seg": 19879,
    "off": 0,
    "alias_of": "PherMapRT"
+  },
+  "fd_4DA7_0800": {
+   "seg": 19879,
+   "off": 2048,
+   "grounding": "data-only TU data:3E1D: 256-byte saved-game header after PherMapRT in the file's second far segment (UNIT8_DATA, FARSEG-1 64K split); S09's save table (4E4B) points to it"
   },
   "fd_4E37_0000": {
    "seg": 20023,

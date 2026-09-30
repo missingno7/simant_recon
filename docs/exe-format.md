@@ -57,6 +57,32 @@ EMS/XMS/conventional cache messages, and the vector mechanism below.
 | `3D57–55B2` | far data (section 27) |
 | `55B3–6002` | DGROUP (section 27) + BSS/stack |
 
+## Far pointers in data (rule DATAPTR-1)
+
+How a far pointer stored in *data* (a `dd` / far pointer initialiser in `_DATA`, `CONST` or a
+FAR_DATA segment, all in the resident section 27) to a code address is resolved:
+
+* Of section 27's 2,771 relocations, 177 are segment words of far pointers to code: 77 into the
+  root, 100 into overlay frames, **none into the vector table** (frame 2CFF).  The 100 are the
+  four display-driver dispatch tables: S00's (DGROUP 2098, 25 entries) point into frame 31AD,
+  S01's (211A), S02's (21A6) and S03's (2276) into frame 3126 -- each into its own section.
+* S01-S03 table entries are labels of the defining object's own code segment (fixup target =
+  segment; one ascending relocation group, EXACT order); S00's entries are external procedures
+  of another object of the same section (per-symbol groups, GROUPED).  None of the 100 targets
+  has an RTLink vector.
+* In code, all 248 references to vectors are far `call`/`jmp` instructions; no instruction
+  loads a vector address as data.
+
+Rule (tools/modules.py `_data_target`, the same as the code binder's): a far pointer or near
+offset (offset16, e.g. the near-proc tables of 16B5 at DGROUP 1E00/1F98, 28BC's output vectors,
+S21's probe table) into the module's own code segment binds to the module frame at the object's
+located origin; a far pointer to a root
+or same-section procedure it binds to the procedure's address; to a procedure of *another*
+overlay section it follows the RTLink vector when one exists (as far calls do), else the
+address.  The image has no data pointer across sections to a vectored procedure, so that last
+case is untested; a wrong choice there would show as a byte/relocation mismatch, never as a
+silent acceptance.
+
 ## Relocation order
 
 MZ relocation entries follow link order, and each entry's segment field is the frame of

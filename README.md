@@ -61,6 +61,8 @@ every fixup binds symbolically (runtime publics, registered code/data names, own
 declared placements, RTLink vectors for cross-overlay calls); bound bytes equal the
 original; the relocation set equals the oracle's; private `CONST`/`_DATA` placements
 reproduce their bytes and data relocations; `_BSS` placements lie in DGROUP's BSS.
+Data-only translation units (`data:FRAME`, `src/data/`) own far data placements and no claims;
+they count as accepted data, never as recovered code (docs/tu-evidence.md).
 Relocation *order* is recorded separately until the RTLink model is known.
 Similarity scores are diagnostics only.
 

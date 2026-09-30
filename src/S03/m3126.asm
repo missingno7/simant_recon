@@ -11,11 +11,6 @@
 _DATA	segment word public 'DATA'
 	extrn	_fd_55B3_3DE6:byte
 	extrn	_fd_55B3_3DE8:byte
-	extrn	_g_22DA:byte
-	extrn	_g_22DF:byte
-	extrn	_g_22E2:byte
-	extrn	_g_22E4:byte
-	extrn	_g_22E8:byte
 	extrn	_g_3DA4:byte
 	extrn	_g_3DA8:byte
 	extrn	_g_3DAE:byte
@@ -48,9 +43,8 @@ _DATA	segment word public 'DATA'
 	extrn	_g_4365:byte
 	extrn	_g_4366:byte
 	extrn	_g_5AAE:byte
-; S03A private data, first part (DGROUP:220E-2275): driver state words and bytes, the 16-entry
-; palette map (_g_2216), CGA/Tandy bank offsets, pixel mask table (_g_2236).  The dispatch
-; table (2276), its far pointer (22DA) and the colour tables (22DE-2307) follow.
+; S03 private data (DGROUP:220E-2307): driver state, palette map (_g_2216), bank offsets,
+; pixel masks, the dispatch table the game calls through and a far pointer to it, colour tables.
 _g_220E	db	0, 0
 _g_2210	db	0, 0
 _g_2212	db	0, 0
@@ -69,6 +63,40 @@ _g_2236	db	00Fh, 00Fh, 0F0h, 0F0h, 00Fh, 00Fh, 0F0h, 0F0h, 00Fh, 00Fh, 0F0h, 0F0
 	db	0FFh, 0FFh, 0FFh, 0FFh, 0FFh, 0FFh, 0FFh, 0FFh, 0FFh, 0FFh, 0FFh, 0FFh
 	db	0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0
 	db	0, 0, 0, 0
+DispatchS03	label	dword
+	dd	_o03_3126_019E
+	dd	_o03_3126_01BE
+	dd	_o03_3126_01DB
+	dd	_o03_3126_059C
+	dd	_o03_3126_03C2
+	dd	_o03_3126_070A
+	dd	_o03_3126_072D
+	dd	_o03_3126_072D
+	dd	_o03_3126_074E
+	dd	_o03_3126_091F
+	dd	_o03_3126_092C
+	dd	_o03_3126_0C11
+	dd	_o03_3126_0C1E
+	dd	_o03_3126_08B8
+	dd	_o03_3126_080A
+	dd	_o03_3126_087E
+	dd	_o03_3126_0844
+	dd	_o03_3126_104D
+	dd	_o03_3126_105A
+	dd	_o03_3126_01F8
+	dd	_o03_3126_01B3
+	dd	_o03_3126_1180
+	dd	_o03_3126_1189
+	dd	_o03_3126_08F2
+	dd	_o03_3126_1192
+_g_22DA	dd	DGROUP:DispatchS03
+	db	0
+_g_22DF	db	0FFh, 00Fh, 0
+_g_22E2	db	0F0h, 0FFh
+_g_22E4	db	0, 0, 0, 0
+_g_22E8	db	0, 0, 011h, 011h, 022h, 022h, 033h, 033h, 044h, 044h, 055h, 055h
+	db	066h, 066h, 077h, 077h, 088h, 088h, 099h, 099h, 0AAh, 0AAh, 0BBh, 0BBh
+	db	0CCh, 0CCh, 0DDh, 0DDh, 0EEh, 0EEh, 0FFh, 0FFh
 _DATA	ends
 DGROUP	group	_DATA
 

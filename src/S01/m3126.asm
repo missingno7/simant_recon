@@ -12,11 +12,6 @@ _DATA	segment word public 'DATA'
 	extrn	_fd_55B3_3DE6:byte
 	extrn	_fd_55B3_3DE8:byte
 	extrn	_g_2100:byte
-	extrn	_g_2118:byte
-	extrn	_g_217E:byte
-	extrn	_g_2182:byte
-	extrn	_g_2184:byte
-	extrn	_g_2190:byte
 	extrn	_g_3D20:byte
 	extrn	_g_3DA4:byte
 	extrn	_g_3DA8:byte
@@ -57,6 +52,41 @@ _DATA	segment word public 'DATA'
 	extrn	_g_4366:byte
 	extrn	_g_5AAE:byte
 	extrn	_g_9188:byte
+; S01 private data (DGROUP:2118-219B): raster scratch byte, the dispatch table the game
+; calls through, a far pointer to it, the text-mode page word and the 6845 CRTC tables
+; (o01_3126_1637 programs the CRTC from _g_2190).
+_g_2118	db	0
+	db	0
+DispatchS01	label	dword
+	dd	_o01_3126_0167
+	dd	_o01_3126_019A
+	dd	_o01_3126_01B2
+	dd	_o01_3126_024C
+	dd	_o01_3126_024C
+	dd	_o01_3126_0414
+	dd	_o01_3126_0437
+	dd	_o01_3126_0437
+	dd	_o01_3126_045D
+	dd	_o01_3126_073C
+	dd	_o01_3126_0749
+	dd	_o01_3126_0516
+	dd	_o01_3126_0523
+	dd	_o01_3126_0B26
+	dd	_o01_3126_0A20
+	dd	_o01_3126_0ACC
+	dd	_o01_3126_0A7A
+	dd	_o01_3126_0C7A
+	dd	_o01_3126_0C87
+	dd	_o01_3126_01CA
+	dd	_o01_3126_0F78
+	dd	_o01_3126_0F66
+	dd	_o01_3126_0F6F
+	dd	_o01_3126_0C53
+	dd	_o01_3126_109D
+_g_217E	dd	DGROUP:DispatchS01
+_g_2182	dw	0010h
+_g_2184	db	035h, 02Dh, 02Eh, 7, 05Bh, 2, 057h, 057h, 2, 3, 0, 0
+_g_2190	db	061h, 050h, 052h, 00Fh, 019h, 6, 019h, 019h, 2, 00Dh, 00Bh, 00Ch
 _DATA	ends
 DGROUP	group	_DATA
 

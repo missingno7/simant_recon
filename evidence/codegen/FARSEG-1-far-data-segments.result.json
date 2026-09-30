@@ -1,0 +1,541 @@
+{
+ "id": "FARSEG-1",
+ "question": "How does MSC 6.00AX (/AL) emit explicitly far data, and where do the bytes of a far variable come from?",
+ "results": [
+  {
+   "variant": "own_and_extern",
+   "profile_index": 0,
+   "profile": "msc600ax",
+   "flags": [
+    "/AL",
+    "/Os",
+    "/Oe",
+    "/Og",
+    "/Zi"
+   ],
+   "source_sha256": "02b8d6f856a753aeb3f9dea7a1dd97e839c59a65353d3ff76502a8bf97d979b1",
+   "bytes": "33c09a000000008e06000026a102002603060c008e06040026030602008e06060026030600008e0600002603061200cb",
+   "disasm": "xor ax, ax; lcall 0, 0; mov es, word ptr [0]; mov ax, word ptr es:[2]; add ax, word ptr es:[0xc]; mov es, word ptr [4]; add ax, word ptr es:[2]; mov es, word ptr [6]; add ax, word ptr es:[0]; mov es, word ptr [0]; add ax, word ptr es:[0x12]; retf",
+   "segments": {
+    "UNIT_TEXT": {
+     "class": "CODE",
+     "align": "word",
+     "combine": "public",
+     "length": 48,
+     "big": false
+    },
+    "_DATA": {
+     "class": "DATA",
+     "align": "word",
+     "combine": "public",
+     "length": 0,
+     "big": false
+    },
+    "CONST": {
+     "class": "CONST",
+     "align": "word",
+     "combine": "public",
+     "length": 10,
+     "big": false
+    },
+    "_BSS": {
+     "class": "BSS",
+     "align": "word",
+     "combine": "public",
+     "length": 0,
+     "big": false
+    },
+    "UNIT7_DATA": {
+     "class": "FAR_DATA",
+     "align": "paragraph",
+     "combine": "public",
+     "length": 20,
+     "big": false
+    }
+   },
+   "communals": {
+    "_ga": 8
+   }
+  },
+  {
+   "variant": "tentative_only",
+   "profile_index": 0,
+   "profile": "msc600ax",
+   "flags": [
+    "/AL",
+    "/Os",
+    "/Oe",
+    "/Og",
+    "/Zi"
+   ],
+   "source_sha256": "99ff299002c496d8da4ee924490b8dd2ce8cf8630c4550838518e96fb2261a52",
+   "bytes": "33c09a000000008e06000026a10200cb",
+   "disasm": "xor ax, ax; lcall 0, 0; mov es, word ptr [0]; mov ax, word ptr es:[2]; retf",
+   "segments": {
+    "UNIT_TEXT": {
+     "class": "CODE",
+     "align": "word",
+     "combine": "public",
+     "length": 16,
+     "big": false
+    },
+    "_DATA": {
+     "class": "DATA",
+     "align": "word",
+     "combine": "public",
+     "length": 0,
+     "big": false
+    },
+    "CONST": {
+     "class": "CONST",
+     "align": "word",
+     "combine": "public",
+     "length": 2,
+     "big": false
+    },
+    "_BSS": {
+     "class": "BSS",
+     "align": "word",
+     "combine": "public",
+     "length": 0,
+     "big": false
+    }
+   },
+   "communals": {
+    "_ga": 8
+   }
+  },
+  {
+   "variant": "split_64k",
+   "profile_index": 0,
+   "profile": "msc600ax",
+   "flags": [
+    "/AL",
+    "/Os",
+    "/Oe",
+    "/Og",
+    "/Zi"
+   ],
+   "source_sha256": "170f61276a75bdea2006ab5ded071f762146fad3aa7a6155973c82b875704443",
+   "bytes": "33c09a000000008e06000026a00000988e060200268a0e02f02aed03c1268a0e010003c1cb",
+   "disasm": "xor ax, ax; lcall 0, 0; mov es, word ptr [0]; mov al, byte ptr es:[0]; cwde; mov es, word ptr [2]; mov cl, byte ptr es:[0xf002]; sub ch, ch; add ax, cx; mov cl, byte ptr es:[1]; add ax, cx; retf",
+   "segments": {
+    "UNIT_TEXT": {
+     "class": "CODE",
+     "align": "word",
+     "combine": "public",
+     "length": 37,
+     "big": false
+    },
+    "_DATA": {
+     "class": "DATA",
+     "align": "word",
+     "combine": "public",
+     "length": 0,
+     "big": false
+    },
+    "CONST": {
+     "class": "CONST",
+     "align": "word",
+     "combine": "public",
+     "length": 6,
+     "big": false
+    },
+    "_BSS": {
+     "class": "BSS",
+     "align": "word",
+     "combine": "public",
+     "length": 0,
+     "big": false
+    },
+    "UNIT7_DATA": {
+     "class": "FAR_DATA",
+     "align": "paragraph",
+     "combine": "public",
+     "length": 65536,
+     "big": true
+    },
+    "UNIT8_DATA": {
+     "class": "FAR_DATA",
+     "align": "paragraph",
+     "combine": "public",
+     "length": 256,
+     "big": false
+    }
+   },
+   "communals": {}
+  },
+  {
+   "variant": "split_over",
+   "profile_index": 0,
+   "profile": "msc600ax",
+   "flags": [
+    "/AL",
+    "/Os",
+    "/Oe",
+    "/Og",
+    "/Zi"
+   ],
+   "source_sha256": "f88efe2d87e0d7b1417011e9a01b689329d03ee32a7eef5ae54dba05a0cf1ceb",
+   "bytes": "33c09a000000008e06000026a0011098268a0e02002aed03c18e060400268a0e010003c1cb",
+   "disasm": "xor ax, ax; lcall 0, 0; mov es, word ptr [0]; mov al, byte ptr es:[0x1001]; cwde; mov cl, byte ptr es:[2]; sub ch, ch; add ax, cx; mov es, word ptr [4]; mov cl, byte ptr es:[1]; add ax, cx; retf",
+   "segments": {
+    "UNIT_TEXT": {
+     "class": "CODE",
+     "align": "word",
+     "combine": "public",
+     "length": 37,
+     "big": false
+    },
+    "_DATA": {
+     "class": "DATA",
+     "align": "word",
+     "combine": "public",
+     "length": 0,
+     "big": false
+    },
+    "CONST": {
+     "class": "CONST",
+     "align": "word",
+     "combine": "public",
+     "length": 6,
+     "big": false
+    },
+    "_BSS": {
+     "class": "BSS",
+     "align": "word",
+     "combine": "public",
+     "length": 0,
+     "big": false
+    },
+    "UNIT7_DATA": {
+     "class": "FAR_DATA",
+     "align": "paragraph",
+     "combine": "public",
+     "length": 61440,
+     "big": false
+    },
+    "UNIT8_DATA": {
+     "class": "FAR_DATA",
+     "align": "paragraph",
+     "combine": "public",
+     "length": 4353,
+     "big": false
+    }
+   },
+   "communals": {}
+  },
+  {
+   "variant": "own_and_extern",
+   "profile_index": 1,
+   "profile": "msc600ax",
+   "flags": [
+    "/AL",
+    "/Os",
+    "/Oe",
+    "/Og"
+   ],
+   "source_sha256": "02b8d6f856a753aeb3f9dea7a1dd97e839c59a65353d3ff76502a8bf97d979b1",
+   "bytes": "33c09a000000008e06000026a102002603060c008e06040026030602008e06060026030600008e0600002603061200cb",
+   "disasm": "xor ax, ax; lcall 0, 0; mov es, word ptr [0]; mov ax, word ptr es:[2]; add ax, word ptr es:[0xc]; mov es, word ptr [4]; add ax, word ptr es:[2]; mov es, word ptr [6]; add ax, word ptr es:[0]; mov es, word ptr [0]; add ax, word ptr es:[0x12]; retf",
+   "segments": {
+    "UNIT_TEXT": {
+     "class": "CODE",
+     "align": "word",
+     "combine": "public",
+     "length": 48,
+     "big": false
+    },
+    "_DATA": {
+     "class": "DATA",
+     "align": "word",
+     "combine": "public",
+     "length": 0,
+     "big": false
+    },
+    "CONST": {
+     "class": "CONST",
+     "align": "word",
+     "combine": "public",
+     "length": 10,
+     "big": false
+    },
+    "_BSS": {
+     "class": "BSS",
+     "align": "word",
+     "combine": "public",
+     "length": 0,
+     "big": false
+    },
+    "UNIT5_DATA": {
+     "class": "FAR_DATA",
+     "align": "paragraph",
+     "combine": "public",
+     "length": 20,
+     "big": false
+    }
+   },
+   "communals": {
+    "_ga": 8
+   }
+  },
+  {
+   "variant": "tentative_only",
+   "profile_index": 1,
+   "profile": "msc600ax",
+   "flags": [
+    "/AL",
+    "/Os",
+    "/Oe",
+    "/Og"
+   ],
+   "source_sha256": "99ff299002c496d8da4ee924490b8dd2ce8cf8630c4550838518e96fb2261a52",
+   "bytes": "33c09a000000008e06000026a10200cb",
+   "disasm": "xor ax, ax; lcall 0, 0; mov es, word ptr [0]; mov ax, word ptr es:[2]; retf",
+   "segments": {
+    "UNIT_TEXT": {
+     "class": "CODE",
+     "align": "word",
+     "combine": "public",
+     "length": 16,
+     "big": false
+    },
+    "_DATA": {
+     "class": "DATA",
+     "align": "word",
+     "combine": "public",
+     "length": 0,
+     "big": false
+    },
+    "CONST": {
+     "class": "CONST",
+     "align": "word",
+     "combine": "public",
+     "length": 2,
+     "big": false
+    },
+    "_BSS": {
+     "class": "BSS",
+     "align": "word",
+     "combine": "public",
+     "length": 0,
+     "big": false
+    }
+   },
+   "communals": {
+    "_ga": 8
+   }
+  },
+  {
+   "variant": "split_64k",
+   "profile_index": 1,
+   "profile": "msc600ax",
+   "flags": [
+    "/AL",
+    "/Os",
+    "/Oe",
+    "/Og"
+   ],
+   "source_sha256": "170f61276a75bdea2006ab5ded071f762146fad3aa7a6155973c82b875704443",
+   "bytes": "33c09a000000008e06000026a00000988e060200268a0e02f02aed03c1268a0e010003c1cb",
+   "disasm": "xor ax, ax; lcall 0, 0; mov es, word ptr [0]; mov al, byte ptr es:[0]; cwde; mov es, word ptr [2]; mov cl, byte ptr es:[0xf002]; sub ch, ch; add ax, cx; mov cl, byte ptr es:[1]; add ax, cx; retf",
+   "segments": {
+    "UNIT_TEXT": {
+     "class": "CODE",
+     "align": "word",
+     "combine": "public",
+     "length": 37,
+     "big": false
+    },
+    "_DATA": {
+     "class": "DATA",
+     "align": "word",
+     "combine": "public",
+     "length": 0,
+     "big": false
+    },
+    "CONST": {
+     "class": "CONST",
+     "align": "word",
+     "combine": "public",
+     "length": 6,
+     "big": false
+    },
+    "_BSS": {
+     "class": "BSS",
+     "align": "word",
+     "combine": "public",
+     "length": 0,
+     "big": false
+    },
+    "UNIT5_DATA": {
+     "class": "FAR_DATA",
+     "align": "paragraph",
+     "combine": "public",
+     "length": 65536,
+     "big": true
+    },
+    "UNIT6_DATA": {
+     "class": "FAR_DATA",
+     "align": "paragraph",
+     "combine": "public",
+     "length": 256,
+     "big": false
+    }
+   },
+   "communals": {}
+  },
+  {
+   "variant": "split_over",
+   "profile_index": 1,
+   "profile": "msc600ax",
+   "flags": [
+    "/AL",
+    "/Os",
+    "/Oe",
+    "/Og"
+   ],
+   "source_sha256": "f88efe2d87e0d7b1417011e9a01b689329d03ee32a7eef5ae54dba05a0cf1ceb",
+   "bytes": "33c09a000000008e06000026a0011098268a0e02002aed03c18e060400268a0e010003c1cb",
+   "disasm": "xor ax, ax; lcall 0, 0; mov es, word ptr [0]; mov al, byte ptr es:[0x1001]; cwde; mov cl, byte ptr es:[2]; sub ch, ch; add ax, cx; mov es, word ptr [4]; mov cl, byte ptr es:[1]; add ax, cx; retf",
+   "segments": {
+    "UNIT_TEXT": {
+     "class": "CODE",
+     "align": "word",
+     "combine": "public",
+     "length": 37,
+     "big": false
+    },
+    "_DATA": {
+     "class": "DATA",
+     "align": "word",
+     "combine": "public",
+     "length": 0,
+     "big": false
+    },
+    "CONST": {
+     "class": "CONST",
+     "align": "word",
+     "combine": "public",
+     "length": 6,
+     "big": false
+    },
+    "_BSS": {
+     "class": "BSS",
+     "align": "word",
+     "combine": "public",
+     "length": 0,
+     "big": false
+    },
+    "UNIT5_DATA": {
+     "class": "FAR_DATA",
+     "align": "paragraph",
+     "combine": "public",
+     "length": 61440,
+     "big": false
+    },
+    "UNIT6_DATA": {
+     "class": "FAR_DATA",
+     "align": "paragraph",
+     "combine": "public",
+     "length": 4353,
+     "big": false
+    }
+   },
+   "communals": {}
+  }
+ ],
+ "checks": [
+  {
+   "check": "own_and_extern@0",
+   "needle": "UNIT7_DATA.class=FAR_DATA",
+   "ok": true
+  },
+  {
+   "check": "own_and_extern@0",
+   "needle": "UNIT7_DATA.align=paragraph",
+   "ok": true
+  },
+  {
+   "check": "own_and_extern@0",
+   "needle": "UNIT7_DATA.length=20",
+   "ok": true
+  },
+  {
+   "check": "own_and_extern@0",
+   "needle": "communal _ga 8",
+   "ok": true
+  },
+  {
+   "check": "own_and_extern@1",
+   "needle": "UNIT5_DATA.class=FAR_DATA",
+   "ok": true
+  },
+  {
+   "check": "own_and_extern@1",
+   "needle": "UNIT5_DATA.align=paragraph",
+   "ok": true
+  },
+  {
+   "check": "own_and_extern@1",
+   "needle": "UNIT5_DATA.length=20",
+   "ok": true
+  },
+  {
+   "check": "own_and_extern@1",
+   "needle": "no segment UNIT7_DATA",
+   "ok": true
+  },
+  {
+   "check": "tentative_only@0",
+   "needle": "no segment UNIT7_DATA",
+   "ok": true
+  },
+  {
+   "check": "tentative_only@0",
+   "needle": "communal _ga 8",
+   "ok": true
+  },
+  {
+   "check": "split_64k@0",
+   "needle": "UNIT7_DATA.class=FAR_DATA",
+   "ok": true
+  },
+  {
+   "check": "split_64k@0",
+   "needle": "UNIT7_DATA.length=65536",
+   "ok": true
+  },
+  {
+   "check": "split_64k@0",
+   "needle": "UNIT7_DATA.big=True",
+   "ok": true
+  },
+  {
+   "check": "split_64k@0",
+   "needle": "UNIT8_DATA.class=FAR_DATA",
+   "ok": true
+  },
+  {
+   "check": "split_64k@0",
+   "needle": "UNIT8_DATA.length=256",
+   "ok": true
+  },
+  {
+   "check": "split_over@0",
+   "needle": "UNIT7_DATA.length=61440",
+   "ok": true
+  },
+  {
+   "check": "split_over@0",
+   "needle": "UNIT7_DATA.big=False",
+   "ok": true
+  },
+  {
+   "check": "split_over@0",
+   "needle": "UNIT8_DATA.length=4353",
+   "ok": true
+  }
+ ],
+ "all_checks_pass": true
+}

@@ -7,28 +7,34 @@
 ; entries save "push si; push di" (MSC always saves DI first, rule ASM-2) without a BP
 ; frame.  None of this is MSC 6.00 output (rules ASM-1, ASM-2).
 
-; The adapter tables live in DGROUP 35D2-3601 (48 bytes: Device0/Device1, EGADisplays,
-; DCCtable and TestSequence, whose triples hold the near offsets of FindPS2/FindEGA/FindCGA/
-; FindMono).  They belong to this object, but the gate cannot yet bind near code offsets in
-; a _DATA placement, so they are referenced here and stay unrecovered data debt.
-_DATA           segment word public 'DATA'
-                extrn   _g_35D2:word
-                extrn   _g_35D6:byte
-                extrn   _g_35DC:byte
-                extrn   _g_35F6:byte
-                extrn   _g_35F9:byte
-                extrn   _g_35FC:byte
-                extrn   _g_35FF:byte
-_DATA           ends
 DGROUP          group   _DATA
 
-Device0         equ     _g_35D2
-EGADisplays     equ     _g_35D6
-DCCtable        equ     _g_35DC
-TestSequence    equ     _g_35F6
-EGAflag         equ     _g_35F9
-CGAflag         equ     _g_35FC
-Monoflag        equ     _g_35FF
+_DATA           segment word public 'DATA'
+Device0         dw      0               ; subsystem type (low byte), display type (high byte)
+Device1         dw      0
+EGADisplays     db      2, 3, 1, 2, 3, 1        ; EGA switch setting -> display type
+DCCtable        db      0, 0                    ; INT 10h AX=1A00h display combination codes
+                db      1, 1
+                db      2, 2
+                db      0, 0
+                db      3, 3
+                db      3, 1
+                db      0, 0
+                db      5, 4
+                db      5, 5
+                db      0, 0
+                db      4, 3
+                db      4, 4
+                db      4, 5
+TestSequence    db      0
+                dw      FindPS2
+EGAflag         db      0
+                dw      FindEGA
+CGAflag         db      0
+                dw      FindCGA
+Monoflag        db      0
+                dw      FindMono
+_DATA           ends
 
 VIDEO_TEXT      segment word public 'CODE'
                 assume  cs:VIDEO_TEXT, ds:DGROUP

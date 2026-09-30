@@ -1,0 +1,33 @@
+{
+ "id": "FARSEG-1",
+ "status": "VERIFIED (segment/communal expectations, tools/probe.py expect_segments)",
+ "question": "How does MSC 6.00AX (/AL) emit explicitly far data, and where do the bytes of a far variable come from?",
+ "findings": [
+  "Initialised far data and static far data (initialised or not) of a file go to one segment <BASENAME><n>_DATA, class FAR_DATA, combine public, PARAGRAPH aligned; n is the SEGDEF index (7 with /Zi because $$SYMBOLS/$$TYPES take 5 and 6, 5 without).",
+  "Static uninitialised far arrays are laid out first (zeros), initialised definitions after them.",
+  "A public far variable without initialiser is a COMDEF far communal (no bytes in the object); the linker allocates it (FAR_BSS).",
+  "When the next item does not fit into 64K (exactly 0x10000 still fits: the SEGDEF then has the big bit and length 0), MSC closes the segment and opens <BASENAME><n+1>_DATA: with the real sizes this reproduces the 3E1D (0xF89F) / 4DA7 (0x900) frames of SIMANT.EXE.",
+  "Code of the defining file references its own far variables with fixup target = the SEGMENT, other files with target = the EXTERNAL symbol; RTLink groups relocations by target, so the defining file's references form one group (the ownership test of build/workers/data/exclude.py)."
+ ],
+ "positive_control": "S23:39C7 UNIT7_DATA at 4EE5:0000 (placed, exact): its code relocations 97-102 to 4EE5 interleave fd_4EE5_0280/0000/0500 in one run in FIXUPP order; data:3E1D reproduces the 3E1D/4DA7 split byte for byte.",
+ "negative_contrast": "root:1FD2 references 5071:03C4, 0728 and 0060 as externs: three separate relocation groups with a 50F6 group between them. In this probe: a tentative definition gives a communal and no segment bytes; without /Zi the segment is UNIT5_DATA; one byte more than 64K moves the next array into UNIT8_DATA.",
+ "reproducers": "build/workers/data/exp1.py, build/workers/data/exp2.py (worker data)",
+ "header": "",
+ "variants": {
+  "own_and_extern": "int far ga[4];\nint far gb[3] = {1,2,3};\nstatic int far sa[5];\nstatic int far sb[2] = {7,8};\nextern int far ex;\nint far f1(void) { return ga[1] + gb[1] + sa[1] + sb[1] + ex; }",
+  "tentative_only": "int far ga[4];\nint far f1(void) { return ga[1]; }",
+  "split_64k": "unsigned char far a[0xF000] = {0};\nunsigned char far b[0x1000] = {0};\nchar far h[256] = \"pSimAnt\";\nint far f(void){ return a[1] + b[2] + h[0]; }",
+  "split_over": "unsigned char far a[0xF000] = {0};\nunsigned char far b[0x1001] = {0};\nchar far h[256] = \"pSimAnt\";\nint far f(void){ return a[1] + b[2] + h[0]; }"
+ },
+ "profiles": [
+  {"profile": "msc600ax", "flags": ["/AL", "/Os", "/Oe", "/Og", "/Zi"]},
+  {"profile": "msc600ax", "flags": ["/AL", "/Os", "/Oe", "/Og"]}
+ ],
+ "expect_segments": {
+  "own_and_extern@0": {"UNIT7_DATA": {"class": "FAR_DATA", "align": "paragraph", "length": 20}, "communals": {"_ga": 8}},
+  "own_and_extern@1": {"UNIT5_DATA": {"class": "FAR_DATA", "align": "paragraph", "length": 20}, "UNIT7_DATA": null},
+  "tentative_only@0": {"UNIT7_DATA": null, "communals": {"_ga": 8}},
+  "split_64k@0": {"UNIT7_DATA": {"class": "FAR_DATA", "length": 65536, "big": true}, "UNIT8_DATA": {"class": "FAR_DATA", "length": 256}},
+  "split_over@0": {"UNIT7_DATA": {"length": 61440, "big": false}, "UNIT8_DATA": {"length": 4353}}
+ }
+}

@@ -428,9 +428,8 @@ extern int far FindAntIndex(int plane, int x, int y, int life);
 extern signed char far Dy8[8];
 extern signed char far Dx8[8];
 
-/* SCAFFOLD BEGIN: SFoundAnt best draft (383 vs 391 bytes).  The original computes SY (F34>>4)
- * first into DI and keeps the start-x copy and the walking y in memory ([bp-0Ah], [bp-0Ch],
- * frame 12); here both copies are propagated away (frame 8).  Loop/test shapes otherwise match. */
+/* SFoundAnt: the scan loop of the queen-hunt mode reuses i; the walk result goes through n
+ * (eliminated, REG-2) so life keeps its own slot. */
 int far SFoundAnt(void)
 {
     int sx;
@@ -439,15 +438,16 @@ int far SFoundAnt(void)
     int y;
     int i;
     int life;
+    int n;
 
+    sx = fd_50F6_0F12 >> 4;
     sy = fd_50F6_0F34 >> 4;
-    x = fd_50F6_0F12 >> 4;
-    sx = x;
+    x = sx;
     y = sy;
     if (fd_50F6_06AC == 7) {
-        for (x = ListIndexA - 1; x >= 0; x--)
-            if (AlistT[x] && GetDis(sx, sy, AlistX[x], AlistY[x]) <= 800)
-                return x;
+        for (i = ListIndexA - 1; i >= 0; i--)
+            if (AlistT[i] && GetDis(sx, sy, AlistX[i], AlistY[i]) <= 800)
+                return i;
         if (fd_50F6_0A06 == 0 && MePlane == 1 && GetDis(sx, sy, MeLocX, MeLocY) <= 800)
             return -1;
         return -2;
@@ -463,13 +463,12 @@ int far SFoundAnt(void)
         if (life) {
             if (IsYellowAnt(life))
                 return -1;
-            if ((life = FindAntIndex(1, x, y, life)) >= 0)
-                return life;
+            if ((n = FindAntIndex(1, x, y, life)) >= 0)
+                return n;
         }
     }
     return -2;
 }
-/* SCAFFOLD END */
 
 extern int far fracCOS(int angle);
 extern int far fracSIN(int angle);

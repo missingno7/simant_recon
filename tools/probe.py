@@ -7,11 +7,18 @@ SPEC:
   {"id": "RULE-ID", "question": "...", "header": "common C text",
    "variants": {"name": "C text", ...},
    "profiles": [{"profile": "msc600", "flags": ["/AL", "/Os"]}, ...],
-   "expect": {"variant@profileindex": "exact disassembly substring", ...}}   (optional)
+   "expect": {"variant@profileindex": "exact disassembly substring", ...},   (optional)
+   "expect_segments": {"variant@profileindex": {                              (optional)
+        "SEGNAME": {"class": "FAR_DATA", "align": "paragraph", "length": 20, "combine": "public"},
+        "OTHER_SEG": null,                      # the object must not define this segment
+        "communals": {"_ga": 8} or ["_ga"]}}}   # far/near COMDEF names (and sizes)
 
 Each variant is compiled freshly under each pinned profile; the code segment is
-disassembled with fixup fields left as emitted.  --record stores the bytes,
-disassembly and tool identities so the rule can be re-checked by validate.py.
+disassembled with fixup fields left as emitted.  Segment expectations compare the
+object's SEGDEFs (class, alignment, combine, length -- 64K for a big segment with length
+field 0) and its COMDEF communals, so data layout rules (FARSEG-1) are probes too.
+--record stores the bytes, disassembly and tool identities so the rule can be re-checked
+by validate.py.
 """
 from __future__ import annotations
 
@@ -50,6 +57,8 @@ def run(spec: dict) -> dict:
                 code = b"".join(bytes(v) for k, v in obj.segments.items() if k.endswith("_TEXT"))
                 row["bytes"] = code.hex()
                 row["disasm"] = "; ".join(f"{i.mnemonic} {i.op_str}".strip() for i in md.disasm(code, 0))
+                row["segments"] = segment_summary(obj)
+                row["communals"] = {c["name"]: c["length"] for c in getattr(obj, "communals", [])}
             out["results"].append(row)
     checks = []
     for key, needle in spec.get("expect", {}).items():
@@ -59,8 +68,47 @@ def run(spec: dict) -> dict:
         n = needle[1:] if want_absent else needle
         ok = (n not in row.get("disasm", "")) if want_absent else (n in row.get("disasm", ""))
         checks.append({"check": key, "needle": needle, "ok": ok})
+    for key, want in spec.get("expect_segments", {}).items():
+        v, pi = key.split("@")
+        row = next(r for r in out["results"] if r["variant"] == v and r["profile_index"] == int(pi))
+        checks += segment_checks(key, row, want)
     out["checks"] = checks
     out["all_checks_pass"] = all(c["ok"] for c in checks)
+    return out
+
+
+def segdef_length(sd: dict) -> int:
+    n = sd.get("length") or 0
+    return 0x10000 if sd.get("big") and n == 0 else n
+
+
+def segment_summary(obj) -> dict:
+    """Non-debug SEGDEFs of an object: class, alignment, combine, true length, big bit."""
+    return {sd["name"]: {"class": sd.get("class"), "align": sd.get("alignment"), "combine": sd.get("combine"),
+                         "length": segdef_length(sd), "big": bool(sd.get("big"))}
+            for sd in obj.segment_defs if str(sd.get("class", "")).upper() not in ("DEBSYM", "DEBTYP")}
+
+
+def segment_checks(key: str, row: dict, want: dict) -> list[dict]:
+    segs, comm = row.get("segments"), row.get("communals")
+    if segs is None:
+        return [{"check": key, "needle": "segments", "ok": False}]
+    out = []
+    for name, exp in want.items():
+        if name == "communals":
+            items = exp.items() if isinstance(exp, dict) else ((n, None) for n in exp)
+            for n, size in items:
+                ok = n in comm and (size is None or comm[n] == size)
+                out.append({"check": key, "needle": f"communal {n}" + (f" {size}" if size is not None else ""), "ok": ok})
+            continue
+        if exp is None:
+            out.append({"check": key, "needle": f"no segment {name}", "ok": name not in segs})
+            continue
+        got = segs.get(name)
+        for field, val in exp.items():
+            if field not in ("class", "align", "length", "combine", "big"):
+                continue                  # notes and other annotations
+            out.append({"check": key, "needle": f"{name}.{field}={val}", "ok": got is not None and got.get(field) == val})
     return out
 
 

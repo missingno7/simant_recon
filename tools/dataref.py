@@ -2,6 +2,7 @@
 
     python tools/dataref.py root:0894            # all DS offsets used by the module's functions
     python tools/dataref.py root:0894 --strings  # only immediates that address strings
+    python tools/dataref.py root:0894 --far      # far-frame references (ES via CONST words, SEG immediates)
 
 For every function in the module it collects
   * memory operands  [imm]            (DGROUP variables, DS-relative)
@@ -10,6 +11,14 @@ For every function in the module it collects
 and prints them sorted by DGROUP offset with the functions using them, the byte
 class (initialised data < 0x8BA0 <= BSS) and a preview.  Contiguous runs of
 literals used only by this module are the likely private `_DATA` block.
+
+``--far`` follows ES through each function: loaded from a CONST segment word
+(``mov es,[w]`` or via a register), from a relocated SEG immediate (``mov ax,SEG x;
+mov es,ax``) or from a DGROUP far pointer (``les``); every ``es:[...+disp]`` operand is
+then a reference to FRAME:disp.  It prints the references per far frame (with the
+registered name, or nearest name+delta) and, per CONST word, the far offsets reached
+through it.  A module that *defines* a far frame reaches all its variables through its
+own segment (FARSEG-1): many offsets behind one word are the signature.
 """
 from __future__ import annotations
 
@@ -52,10 +61,94 @@ def preview(dg: bytes, off: int) -> str:
     return b[:8].hex()
 
 
+def far_refs(unit: str, rows: list) -> tuple[dict, dict]:
+    """(refs, words): refs {(frame, off): {"via": set, "users": set}}; words {DG offset: {"frame",
+    "offs": set, "users": set}} for the CONST segment words used to load ES."""
+    x = exemod.load()
+    base, data = x.unit_bytes(unit)
+    relsites = x.reloc_sites(unit)
+    dg, dreloc = dgroup_bytes()
+    refs = defaultdict(lambda: {"via": set(), "users": set()})
+    words = defaultdict(lambda: {"frame": None, "offs": set(), "users": set()})
+    for r in rows:
+        name = fnmod.name_of(unit, r["seg"], r["off"])
+        lin = r["seg"] * 16 + r["off"]
+        es = None                          # (frame, via, DG word or None)
+        regs = {}                          # register -> (frame, via, word)
+        for i in md.disasm(data[lin - base:lin - base + r["size"]], lin):
+            mn, ops = i.mnemonic, i.op_str
+            if mn in ("call", "lcall", "ret", "retf", "int", "iret"):
+                es, regs = None, {}
+                continue
+            m = re.match(r"(ax|bx|cx|dx|si|di|bp), (0x[0-9a-f]+|\d+)$", ops)
+            if mn == "mov" and m:
+                if i.address + 1 in relsites:
+                    v = struct.unpack_from("<H", data, i.address + 1 - base)[0]
+                    regs[m.group(1)] = (v, "SEG", None)
+                else:
+                    regs.pop(m.group(1), None)
+                continue
+            m = re.match(r"(ax|bx|cx|dx|si|di|bp), word ptr \[(0x[0-9a-f]+|\d+)\]$", ops)
+            if mn == "mov" and m:
+                w = int(m.group(2), 0)
+                if w in dreloc and w + 2 <= len(dg):
+                    regs[m.group(1)] = (struct.unpack_from("<H", dg, w)[0], f"CONST DG:{w:04X}", w)
+                else:
+                    regs.pop(m.group(1), None)
+                continue
+            if mn == "mov" and ops.startswith("es, "):
+                src = ops[4:]
+                mm = re.match(r"word ptr \[(0x[0-9a-f]+|\d+)\]$", src)
+                if mm and int(mm.group(1), 0) in dreloc:
+                    w = int(mm.group(1), 0)
+                    es = (struct.unpack_from("<H", dg, w)[0], f"CONST DG:{w:04X}", w)
+                else:
+                    es = regs.get(src)
+                if es and es[2] is not None:
+                    words[es[2]]["frame"] = es[0]
+                    words[es[2]]["users"].add(name)
+                continue
+            if mn == "les":
+                mm = re.search(r"dword ptr \[(0x[0-9a-f]+|\d+)\]$", ops)
+                w = int(mm.group(1), 0) + 2 if mm else None
+                es = (struct.unpack_from("<H", dg, w)[0], f"far ptr DG:{w - 2:04X}", None) \
+                    if w is not None and w in dreloc else None
+                continue
+            if mn == "pop" and ops == "es":
+                es = None
+                continue
+            dst = ops.split(",")[0]
+            if mn not in ("cmp", "test", "push") and re.match(r"(ax|bx|cx|dx|si|di|bp)$", dst):
+                regs.pop(dst, None)
+            mm = re.search(r"es:\[(?:(?:bx|si|di|bp)(?: \+ (?:si|di))?(?: [+-] )?)?(0x[0-9a-f]+|\d+)?\]", ops)
+            if mm and es is not None and 0x3D57 <= es[0] < 0x55B3 and mn != "lea":
+                off = int(mm.group(1), 0) if mm.group(1) else 0
+                if "- " + (mm.group(1) or "") in ops:
+                    off = -off & 0xFFFF
+                refs[(es[0], off)]["via"].add(es[1])
+                refs[(es[0], off)]["users"].add(name)
+                if es[2] is not None:
+                    words[es[2]]["offs"].add(off)
+    return refs, words
+
+
+def far_name(frame: int, off: int) -> str:
+    import symbols as symmod
+    best = None
+    for n, r in symmod.load()["data"].items():
+        if r["seg"] == frame and r["off"] <= off and not r.get("alias_of"):
+            if best is None or r["off"] > best[1]["off"] or (r["off"] == best[1]["off"] and best[0].startswith("fd_")):
+                best = (n, r)
+    if best is None:
+        return "?"
+    return best[0] + (f"+{off - best[1]['off']:X}" if off != best[1]["off"] else "")
+
+
 def main() -> int:
     ap = argparse.ArgumentParser()
     ap.add_argument("module")
     ap.add_argument("--strings", action="store_true")
+    ap.add_argument("--far", action="store_true", help="far-frame references (ES) instead of DGROUP")
     a = ap.parse_args()
     import modules as modmod
     unit, seg, origin = modmod.parse_key(a.module)   # UNIT:SEG or UNIT:SEG@OFF
@@ -67,6 +160,21 @@ def main() -> int:
     rows = sorted((r for r in fnmod.table()["functions"]
                    if r["unit"] == unit and r["seg"] == seg and lo <= r["off"] < hi),
                   key=lambda r: r["off"])
+    if a.far:
+        frefs, words = far_refs(unit, rows)
+        print(f"{a.module}: {len(rows)} functions, {len(frefs)} far references in "
+              f"{len({f for f, _ in frefs})} frames, {len(words)} CONST segment words")
+        for (fr, off) in sorted(frefs):
+            r = frefs[(fr, off)]
+            print(f"  {fr:04X}:{off:04X} {far_name(fr, off):<24} via {', '.join(sorted(r['via'])):<22} "
+                  f"{', '.join(sorted(r['users']))[:60]}")
+        for w in sorted(words):
+            r = words[w]
+            offs = sorted(r["offs"])
+            print(f"  CONST DG:{w:04X} -> {r['frame']:04X}: {len(offs)} offsets "
+                  f"{' '.join(f'{o:04X}' for o in offs[:12])}{' ...' if len(offs) > 12 else ''}  "
+                  f"({', '.join(sorted(r['users']))[:50]})")
+        return 0
     for r in rows:
         name = fnmod.name_of(unit, seg, r["off"])
         lin = r["seg"] * 16 + r["off"]

@@ -25,6 +25,23 @@ code segment that are not a procedure (a buffer or table assembled into the code
 segment).  Its bytes come from the candidate object at the module's placement
 delta, its fixups are bound like code, and it is compared with the oracle; it
 never lies inside a public's range and lets a complete TU tile such segments.
+
+Data-only translation units: a file that defines far data and no code (e.g. the far
+tables of frame 3D57) is the module ``data:FRAME`` (FRAME = its first far frame; a file
+that MSC split at 64K into two segments stays one module), source ``src/data/dFRAME.c``.
+It has placements and zero claims: every segment with bytes must be placed, it may not
+contain code, every public must lie at its registered address, and ``link_after`` names
+the module whose far data precedes it in the link ("" = the first far data of the
+program).  A module with zero claims is reported as data only, never as recovered code.
+
+Code addresses in data (rule DATAPTR-1, docs/exe-format.md): a far pointer or a near
+offset (offset16) into the module's own code segment binds to the module frame at the
+object's located origin (dispatch tables of S01-S03, near-proc tables of 16B5, 28BC,
+S21); a far pointer to
+a procedure of the same overlay section (or of the root) binds to its address, like a
+same-section far call; into another overlay section it follows RTLink's vector when one
+exists (the code binder's rule).  Several far segments of one module (FAR_DATA class) are
+laid out in SEGDEF order and are contiguous up to paragraph link fill.
 """
 from __future__ import annotations
 
@@ -48,6 +65,8 @@ FUNC_DEF_RE = re.compile(r"(?<![\w.])(?!(?:if|while|for|switch|return|sizeof)\b)
 
 KEY_RE = re.compile(r"^(\w+)[:;]([0-9A-Fa-f]{1,4})(?:@([0-9A-Fa-f]{1,4}))?$")
 DATA_KIND = "DATA_IN_CODE"
+DATA_UNIT = "data"          # data-only translation units: key data:FRAME
+DEBUG_CLASSES = {"DEBSYM", "DEBTYP"}
 
 
 def parse_key(s: str) -> tuple[str, int, int | None]:
@@ -57,6 +76,8 @@ def parse_key(s: str) -> tuple[str, int, int | None]:
     if not m:
         raise SystemExit(f"bad module key {s!r} (expected UNIT:SEG or UNIT:SEG@OFF)")
     origin = int(m.group(3), 16) if m.group(3) else None
+    if m.group(1) == DATA_UNIT and m.group(3):
+        raise SystemExit(f"module key {s!r}: a data-only module is keyed data:FRAME (its first far frame)")
     if origin == 0:
         raise SystemExit(f"module key {s!r}: the first object of a frame is keyed UNIT:SEG")
     return m.group(1), int(m.group(2), 16), origin
@@ -68,6 +89,8 @@ def module_key(unit: str, seg: int, origin: int | None = None) -> str:
 
 def module_source(unit: str, seg: int, origin: int | None, lang: str) -> str:
     """Canonical source path (relative to the repository root)."""
+    if unit == DATA_UNIT:
+        return f"src/data/d{seg:04X}" + (".asm" if lang == "asm" else ".c")
     return f"src/{unit}/m{seg:04X}" + (f"_{origin:04X}" if origin else "") + (".asm" if lang == "asm" else ".c")
 
 
@@ -82,6 +105,27 @@ def object_range(man: dict, unit: str, seg: int, origin: int | None) -> tuple[in
 
 def is_data_claim(c: dict) -> bool:
     return c.get("kind") == DATA_KIND
+
+
+def is_data_module(m: dict) -> bool:
+    """A data-only translation unit (key ``data:FRAME``)."""
+    return m.get("unit") == DATA_UNIT
+
+
+def segdef_length(sdef: dict) -> int:
+    """SEGDEF length; a segment of exactly 64K has the B (big) bit and length field 0."""
+    n = sdef.get("length") or 0
+    return 0x10000 if sdef.get("big") and n == 0 else n
+
+
+def segment_def(obj, segname: str) -> dict | None:
+    return next((s for s in reversed(obj.segment_defs) if s["name"] == segname), None)
+
+
+def segment_length(obj, segname: str) -> int:
+    """True length of an object segment: its SEGDEF length (64K for big), at least its data."""
+    sdef = segment_def(obj, segname)
+    return max(len(obj.segments.get(segname, b"")), segdef_length(sdef) if sdef else 0)
 
 
 def load_manifest() -> dict:
@@ -119,6 +163,12 @@ def verify_module(text: str, module: dict, claims: list[dict]) -> dict:
     all_ok = True
     x = exemod.load()
     site_key, site_index = {}, {}
+    if is_data_module(module) and claims:
+        # a data-only translation unit owns placements, never code or claims
+        for c in claims:
+            out["claims"][c["name"]] = {"exact": False, "reasons": ["a data-only module has no claims"]}
+        all_ok = False
+        claims = []
     # where the object lies in its frame: frame offset - object offset of each code claim
     located = {}
     for c in claims:
@@ -211,29 +261,51 @@ def verify_module(text: str, module: dict, claims: list[dict]) -> dict:
                                     "relocations": len(res.relocs_expected) if res else 0,
                                     "reloc_order": res.reloc_order if res else "?"}
         all_ok &= ok
+    # the module's own code segments: a far pointer or near offset in its data to one of them
+    # binds to the module frame at the located object origin (dispatch tables of the display
+    # drivers, near-proc tables of 16B5/28BC/S21)
+    own_code = {}
+    for sname in {s for s, _ in deltas}:
+        ds = {d for s, d in deltas if s == sname}
+        if len(ds) == 1:
+            own_code[sname] = {"seg": module["seg"], "off": ds.pop()}
     # private data placements must reproduce the oracle bytes they claim
     for segname, p in module.get("placements", {}).items():
         body = obj.segments.get(segname)
-        sdef = next((s for s in obj.segment_defs if s["name"] == segname), None)
+        sdef = segment_def(obj, segname)
         if body is None and sdef is not None and str(sdef.get("class", "")).upper() == "BSS":
             dres = verify_bss_placement(sdef, p)
             out.setdefault("data", {})[segname] = dres
             all_ok &= dres["exact"]
             continue
-        if body is None:
+        if body is None and (sdef is None or not segdef_length(sdef)):
             out.setdefault("data", {})[segname] = {"exact": False, "reasons": ["segment absent"]}
             all_ok = False
             continue
-        dres = verify_data_segment(obj, segname, p, placements)
+        dres = verify_data_segment(obj, segname, p, placements, own_code=own_code, unit=module.get("unit"))
         if (not dres["exact"] and not module.get("extent") and dres["reasons"]
                 and all(r.startswith("data relocation order inside target group") for r in dres["reasons"])):
             dres.update(exact=True, reasons=[], reloc_order="WITHIN_GROUP_PENDING")
-        if p.get("size", len(body)) != len(body):
+        seglen = segment_length(obj, segname)
+        if p.get("size", seglen) != seglen:
             dres["exact"] = False
             dres.setdefault("reasons", []).append(
-                f"placement size {p.get('size')} != segment length {len(body)} (claimed code could use unverified data)")
+                f"placement size {p.get('size')} != segment length {seglen} (claimed code could use unverified data)")
         out.setdefault("data", {})[segname] = dres
         all_ok &= dres["exact"]
+    # module-level data rules: far segment order/contiguity, public addresses, data-only TUs
+    mreasons = placement_order_reasons(obj, module.get("placements", {}))
+    mreasons += public_address_reasons(obj, module.get("placements", {}), strict=is_data_module(module))
+    if is_data_module(module):
+        mreasons += data_module_reasons(obj, module, claims)
+    elif not claims and not module.get("placements"):
+        mreasons.append("a module without claims must have placements")
+    out["data_only"] = not claims
+    out["communals"] = [{"name": c["name"], "kind": c["kind"], "length": c["length"]}
+                        for c in getattr(obj, "communals", [])]
+    if mreasons:
+        out["module_reasons"] = mreasons
+        all_ok = False
     ext = module.get("extent")
     if ext:
         tres = verify_extent(obj, ext, claims, scaff, site_key, site_index)
@@ -361,8 +433,15 @@ def verify_bss_placement(sdef: dict, p: dict) -> dict:
     return {"exact": not reasons, "reasons": reasons, "size": sdef["length"], "kind": "BSS"}
 
 
-def _data_target(f: dict, placements: dict):
-    """(frame, offset-in-frame) of a data fixup target, or None."""
+def _data_target(f: dict, placements: dict, unit: str | None = None):
+    """(frame, offset-in-frame) of a data fixup target, or None.
+
+    Segment targets: the module's placed segments and its own code segments (``placements``
+    carries both).  Code externals (rule DATAPTR-1): root and same-section procedures are
+    addressed directly (the S00-S03 dispatch tables in DGROUP point into their own overlay
+    frames; no S27 pointer addresses the vector table); a procedure of *another* overlay
+    section goes through its RTLink vector when RTLink built one, else it is addressed
+    directly, exactly like a far call in code (match.Binder)."""
     tk, tn = f["target_kind"], f["target"]
     if tk == "group" and tn == "DGROUP":
         return match.DGROUP_SEG, 0
@@ -374,34 +453,44 @@ def _data_target(f: dict, placements: dict):
     s = match.obj_name_lookup(tn) if tk == "external" else None
     if s is None:
         return None
-    if s["kind"] == "code" and s.get("unit", "root") != "root":
+    if s["kind"] == "code" and s.get("unit", "root") not in ("root", unit):
         v = match.vector_for(s["unit"], s["seg"], s["off"])
-        if v is None:
-            return None
-        return exemod.MANAGER_SEG, v.offset
+        if v is not None:
+            return exemod.MANAGER_SEG, v.offset
     return s["seg"], s["off"]
 
 
-def verify_data_segment(obj, segname: str, p: dict, placements: dict | None = None) -> dict:
-    """Bind a private data segment (CONST/_DATA) at its placement and compare with S27 bytes.
+def verify_data_segment(obj, segname: str, p: dict, placements: dict | None = None,
+                        own_code: dict | None = None, unit: str | None = None) -> dict:
+    """Bind a private data segment (CONST/_DATA/far data) at its placement and compare with
+    S27 bytes.
 
     Supported fixups: base16 (segment words), offset16 (near/DGROUP or in-frame offsets) and
-    pointer32 (far pointers: code, far data, or this module's own placed segments)."""
-    placements = dict(placements or {})
+    pointer32 (far pointers: code, far data, this module's own placed segments and its own
+    code segments ``own_code`` {segname: {"seg": frame, "off": origin}}).  The segment length
+    is its SEGDEF length (a 64K segment has the big bit and length 0); bytes the object does
+    not initialise are the linker's zero fill."""
+    placements = {**(own_code or {}), **(placements or {})}
     placements.setdefault(segname, p)
     x = exemod.load()
     s27 = x.sections[27]
-    body = bytearray(obj.segments[segname])
+    seglen = segment_length(obj, segname)
+    body = bytearray(obj.segments.get(segname, b""))
+    body += bytes(seglen - len(body))
     start = p["seg"] * 16 + p["off"]
-    size = p.get("size", len(body))
+    size = p.get("size", seglen)
     body = body[:size]
     relocs_c = []
     rkey = {}
     reasons = []
+    sdef = segment_def(obj, segname) or {}
+    if not (s27.load_linear <= start and start + size <= s27.load_linear + len(s27.data)):
+        return {"exact": False, "reasons": [f"placement {start:05X}+{size} outside section 27's file data"],
+                "size": size, "start": start}
     for f in obj.linker_fixups:
         if f["segment"] != segname or f["offset"] >= size:
             continue
-        tgt = _data_target(f, placements)
+        tgt = _data_target(f, placements, unit)
         if tgt is None or f["self_relative"]:
             reasons.append(f"unsupported data fixup {f['loc']} {f['target_kind']}:{f['target']}")
             continue
@@ -444,7 +533,130 @@ def verify_data_segment(obj, segname: str, p: dict, placements: dict | None = No
             if [a for a in exp if rkey.get(a) == g] != [a for a in relocs_c if rkey.get(a) == g]:
                 reasons.append(f"data relocation order inside target group {g} differs")
         order = "GROUPED"
-    return {"exact": not reasons, "reasons": reasons, "size": size, "reloc_order": order}
+    return {"exact": not reasons, "reasons": reasons, "size": size, "reloc_order": order, "start": start,
+            "class": str(sdef.get("class", "")), "align": sdef.get("alignment"), "far": p["seg"] != match.DGROUP_SEG}
+
+
+def _far_class(sdef: dict | None) -> bool:
+    return sdef is not None and str(sdef.get("class", "")).upper() == "FAR_DATA"
+
+
+def placement_order_reasons(obj, placements: dict) -> list[str]:
+    """Far segments of one object (class FAR_DATA, e.g. UNIT7_DATA and UNIT8_DATA of a file MSC
+    split at 64K) are laid out by the linker in SEGDEF order, each paragraph aligned right after
+    the previous one: the gap may only be paragraph fill (zero bytes, checked by validate)."""
+    far = [(sd["index"], sd["name"]) for sd in obj.segment_defs
+           if sd["name"] in placements and _far_class(sd)]
+    reasons = []
+    prev = None
+    for _, name in sorted(far):
+        p = placements[name]
+        start = p["seg"] * 16 + p["off"]
+        if prev is not None:
+            pname, pend = prev
+            want = (pend + 15) & ~15
+            if start != want:
+                reasons.append(f"far segment {name} at {start:05X}: after {pname} (SEGDEF order) it must "
+                               f"start at {want:05X} (segment order / contiguity)")
+            elif any(exemod.load().read("S27", pend, start - pend)):
+                reasons.append(f"bytes between far segments {pname} and {name} are not link fill")
+        prev = (name, start + p.get("size", segment_length(obj, name)))
+    return reasons
+
+
+def public_address_reasons(obj, placements: dict, strict: bool = False) -> list[str]:
+    """Publics defined in placed data segments define the addresses other modules bind to:
+    a registered name must sit at its registered address.  ``strict`` (data-only modules):
+    every such public must also be registered."""
+    reasons = []
+    for pb in obj.publics:
+        p = placements.get(pb["segment"])
+        if p is None:
+            continue
+        lin = p["seg"] * 16 + p["off"] + pb["offset"]
+        s = match.obj_name_lookup(pb["name"])
+        if s is None:
+            if strict:
+                reasons.append(f"public {pb['name']} at {lin:05X} is not a registered data symbol")
+            continue
+        if s["kind"] != "data" or s["seg"] * 16 + s["off"] != lin:
+            reasons.append(f"public {pb['name']} at {lin:05X}, registered at {s['seg']:04X}:{s['off']:04X}")
+    return reasons
+
+
+def data_module_reasons(obj, module: dict, claims: list) -> list[str]:
+    """A data-only translation unit: no claims, no code, every segment with bytes placed."""
+    reasons = []
+    if claims:
+        reasons.append("a data-only module has no claims")
+    places = module.get("placements", {})
+    if not places:
+        reasons.append("a data-only module needs placements")
+    for sd in obj.segment_defs:
+        n, cls = sd["name"], str(sd.get("class", "")).upper()
+        if cls in DEBUG_CLASSES:
+            continue
+        length = segment_length(obj, n)
+        if cls.endswith("CODE") and length:
+            reasons.append(f"data-only module has code ({n}, {length} bytes)")
+        elif length and n not in places:
+            reasons.append(f"segment {n} ({cls}, {length} bytes) is not placed")
+    if "link_after" not in module:
+        reasons.append("a data-only module records its link position (link_after)")
+    return reasons
+
+
+def far_placements(module: dict) -> list[tuple[int, int, str]]:
+    """(linear start, size, segname) of a manifest module's far (non-DGROUP) placements."""
+    return sorted((p["seg"] * 16 + p["off"], p.get("size", 0), n)
+                  for n, p in module.get("placements", {}).items() if p["seg"] != match.DGROUP_SEG)
+
+
+def link_after_reasons(man: dict, key: str, module: dict) -> list[str]:
+    """``link_after``: the module whose far data immediately precedes this module's first far
+    segment in the link ("" = the first far data of the program, section 27's start).  The gap
+    may only be paragraph fill.  This is the link-order position of a module without code."""
+    if "link_after" not in module:
+        return []
+    la = module["link_after"]
+    mine = far_placements(module)
+    if not mine:
+        return ["link_after is recorded but the module has no far placement"]
+    x = exemod.load()
+    s27 = x.sections[27]
+    start = mine[0][0]
+    if la == "":
+        return [] if start == s27.load_linear else [
+            f"first far data of the program must start at {s27.load_linear:05X}, not {start:05X}"]
+    prev = man["modules"].get(la)
+    if prev is None:
+        return [f"link_after {la}: no such module in the manifest"]
+    theirs = far_placements(prev)
+    if not theirs:
+        return [f"link_after {la}: that module has no far placement"]
+    end = max(a + n for a, n, _ in theirs)
+    if start != (end + 15) & ~15 or start < end:
+        return [f"link_after {la}: its far data ends at {end:05X}, this module starts at {start:05X}"]
+    gap = x.read("S27", end, start - end)
+    if any(gap):
+        return [f"link_after {la}: bytes between {end:05X} and {start:05X} are not link fill"]
+    return []
+
+
+def placement_overlap_reasons(man: dict, key: str) -> list[str]:
+    """No two modules place the same bytes (every placement has one owner)."""
+    mine = [(p["seg"] * 16 + p["off"], p.get("size", 0), n)
+            for n, p in man["modules"][key].get("placements", {}).items()]
+    reasons = []
+    for k, m in man["modules"].items():
+        if k == key:
+            continue
+        for n2, p in m.get("placements", {}).items():
+            a0, a1 = p["seg"] * 16 + p["off"], p["seg"] * 16 + p["off"] + p.get("size", 0)
+            for b0, size, n in mine:
+                if a0 < b0 + size and b0 < a1:
+                    reasons.append(f"placement {n} {b0:05X}+{size} overlaps {k} {n2} {a0:05X}+{a1 - a0}")
+    return reasons
 
 
 def struct_pack(buf: bytearray, at: int, v: int) -> None:

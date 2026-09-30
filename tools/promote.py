@@ -4,13 +4,23 @@
         [--profile msc600] [--flags /AL /Os] [--placement CONST=55B3:7E28:2]
         [--code-data START:END] [--extent START:END]
         [--steered "construct -> decision it steers"] [--verify-only]
+    python tools/promote.py CANDIDATE.c --module data:FRAME --placement SEG=FRAME:OFF:SIZE [...]
+        --link-after KEY|FIRST [--verify-only]
 
 CANDIDATE.c is the complete proposed content of the module file
 ``src/<unit>/m<SEG>.c`` (``m<SEG>_<OFF>.c|.asm`` for a later object ``UNIT:SEG@OFF``
 of a frame that LINK built from several objects; see tools/modules.py).
+Address ranges ``START:END`` (``--extent``, ``--code-data``) are linear hex with END
+*exclusive* (the first byte after the range), e.g. ``--extent 28BC0:290DD`` for a module
+whose last byte is 290DC.
 ``--code-data START:END`` claims code-segment bytes that are data (a buffer or table
 assembled into the code segment, linear hex) as kind DATA_IN_CODE: they come from
 the candidate object and are compared with the oracle like code.
+``--module data:FRAME`` promotes a data-only translation unit (far data, no code) into
+``src/data/dFRAME.c``: placements only, zero claims, and ``--link-after`` names the module
+whose far data precedes it in the link (FIRST = the first far data of the program).  Any
+module may be promoted with placements and zero claims; validate.py reports such modules as
+data only, never as recovered code.
 Promotion freshly compiles it and requires every already-claimed function of that
 module *and* every new claim to be strictly exact (see tools/match.py).  It refuses:
   * claims outside the module frame, unknown functions, double ownership;
@@ -66,9 +76,13 @@ def main() -> int:
                     help="NAME=WHY: drop a claim that belongs to another module (journaled)")
     ap.add_argument("--unsteer", action="append", default=[],
                     help="NAME=WHY: the steering construct of an existing claim was removed (kept as history)")
-    ap.add_argument("--extent", help="START:END linear (hex): claim the complete module segment (exact TU)")
+    ap.add_argument("--extent", help="START:END linear (hex), END exclusive (the first byte after the module): "
+                                     "claim the complete module segment (exact TU)")
     ap.add_argument("--code-data", action="append", default=[],
-                    help="START:END linear (hex): code-segment data (buffer/table) claimed as DATA_IN_CODE")
+                    help="START:END linear (hex), END exclusive: code-segment data (buffer/table) claimed as DATA_IN_CODE")
+    ap.add_argument("--link-after", default=None,
+                    help="data:FRAME modules: KEY of the module whose far data precedes this one in the "
+                         "link, or FIRST (the program's first far data)")
     ap.add_argument("--asm-evidence", default=None,
                     help="required for .asm: why this code is genuine assembly (compiler experiments)")
     ap.add_argument("--verify-only", action="store_true")
@@ -81,6 +95,11 @@ def main() -> int:
     if lang == "asm" and not a.asm_evidence and not (modmod.load_manifest()["modules"].get(key, {}).get("asm_evidence")):
         raise SystemExit("an .asm module needs --asm-evidence naming the experiments that exclude compiler output")
     x = exemod.load()
+    data_only_key = unit == modmod.DATA_UNIT
+    if data_only_key and (a.claim or a.code_data or a.extent):
+        raise SystemExit(f"{key}: a data-only module takes placements only (no --claim/--code-data/--extent)")
+    if a.link_after is not None and not data_only_key:
+        raise SystemExit("--link-after applies to data:FRAME modules")
 
     with Lock() if not a.verify_only else _NoLock():
         man = modmod.load_manifest()
@@ -179,6 +198,17 @@ def main() -> int:
                   "lang": lang}
         if origin is not None:
             module["origin"] = origin
+        if data_only_key:
+            la = a.link_after if a.link_after is not None else (mod or {}).get("link_after")
+            if la is None:
+                raise SystemExit(f"{key}: --link-after KEY|FIRST is required (link-order position of a data-only module)")
+            la = "" if la.upper() == "FIRST" else la
+            if la:
+                la = modmod.module_key(*modmod.parse_key(la))
+            module["link_after"] = la
+            module["kind"] = "data"
+        if not claims and not placements:
+            raise SystemExit(f"{key}: nothing to promote (no claims and no placements)")
         if lang == "asm":
             module["asm_evidence"] = a.asm_evidence or mod.get("asm_evidence")
         if a.extent:
@@ -189,6 +219,18 @@ def main() -> int:
         elif mod and mod.get("extent"):
             module["extent"] = mod["extent"]
         res = modmod.verify_module(text, module, claims)
+        # manifest-level data rules: link position, and no two modules place the same bytes
+        man_after = {**man, "modules": {**man["modules"], key: module}}
+        mreasons = modmod.link_after_reasons(man_after, key, module)
+        mreasons += modmod.placement_overlap_reasons(man_after, key)
+        if mreasons:
+            res.setdefault("module_reasons", []).extend(mreasons)
+            res["exact"] = False
+        mr = res.get("module_reasons", [])
+        for r in mr[:8]:
+            print(f"  module: FAIL {r}")
+        if len(mr) > 8:
+            print(f"  module: ... {len(mr) - 8} more")
         for n, r in res["claims"].items():
             print(f"  {n}: {'EXACT (reloc order ' + r.get('reloc_order', '?') + ')' if r['exact'] else 'FAIL ' + '; '.join(r['reasons'])}")
         for c in claims:
@@ -196,7 +238,8 @@ def main() -> int:
             if r.get("exact"):
                 c["reloc_order"] = r.get("reloc_order", "EXACT")
         for n, r in res.get("data", {}).items():
-            print(f"  data {n}: {'EXACT' if r['exact'] else 'FAIL ' + '; '.join(r['reasons'])}")
+            print(f"  data {n}: {'EXACT' if r['exact'] else 'FAIL ' + '; '.join(r['reasons'])}"
+                  + (f" ({r['size']} bytes, relocation order {r.get('reloc_order')})" if r["exact"] else ""))
         if res.get("extent"):
             e = res["extent"]
             print(f"  extent: {'EXACT' if e['exact'] else 'FAIL ' + '; '.join(e['reasons'])}, "
@@ -208,7 +251,8 @@ def main() -> int:
             print("REFUSED: not every claim is exact (existing claims must not regress)")
             return 1
         if a.verify_only:
-            print(f"VERIFY-ONLY OK: {len(claims)} claims in {key}")
+            print(f"VERIFY-ONLY OK: {len(claims)} claims in {key}"
+                  + (f", {len(placements)} placement(s) (data only)" if not claims else ""))
             return 0
         path = module_path(unit, seg, origin, lang)
         before = path.read_bytes() if path.exists() else None
@@ -226,10 +270,12 @@ def main() -> int:
         with JOURNAL.open("a") as fh:
             fh.write(json.dumps({"time": dt.datetime.now().isoformat(timespec="seconds"), "module": key,
                                  "new_claims": [c["name"] for c in new_claims], "profile": profile,
+                                 "placements": sorted(placements),
                                  **({"released": released} if released else {}),
                                  "flags": flags, "source_sha256": sha(data),
                                  "object_sha256": res.get("object_sha256")}) + "\n")
-        print(f"PROMOTED {len(new_claims)} new claim(s) into {path.relative_to(ROOT)}")
+        print(f"PROMOTED {len(new_claims)} new claim(s)"
+              + (f", {len(placements)} placement(s)" if placements else "") + f" into {path.relative_to(ROOT)}")
     return 0
 
 

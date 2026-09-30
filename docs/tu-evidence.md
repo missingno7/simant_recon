@@ -50,6 +50,25 @@ Their bytes come from the candidate object at the module's placement, fixups are
 code and compared with the oracle; a data claim cannot cover a public or a function-table
 entry. With them, such modules are complete TUs under the same tiling rule.
 
+**Data-only translation units.** A file that defines far data and no code has no code frame.
+Its module key is `data:FRAME` (its first far frame; a file MSC split at 64K, e.g. 3E1D+4DA7, is
+one module), source `src/data/dFRAME.c`.  It is promoted with placements and zero claims
+(`promote.py --module data:3D57 --placement UNIT7_DATA=3D57:0000:3162 --link-after FIRST`): every
+segment with bytes must be placed and byte-exact with its data relocations, it may contain no
+code, every public must lie at its registered address, and `link_after` records its link-order
+position (the module whose far data precedes it; FIRST = section 27's start), checked with the
+paragraph fill in between.  Far segments of one object must be placed in SEGDEF order and
+contiguous up to paragraph fill (FARSEG-1).  Ownership evidence: the defining file references its
+own far variables through its *segment* (one relocation group), other files through external
+symbols (per-symbol groups); for 3D57 and 3E1D every referencing module is of the second kind
+(build/workers/data/exclude.py), so the definitions are in files without code.  Any module with
+zero claims is reported as `modules_data_only` by validate.py and never counted as recovered code.
+
+**FAR_BSS.** Frame 50F6 (19,408 zero bytes) holds the far communals the linker allocated
+(`tools/farbss.py`): the region must be zero and tiled by registered variables from offset 0;
+sizes are verified by COMDEFs of accepted objects, or consistent with extern declarations or
+S09's save table; the rest is reported as unverified.
+
 ## Partial modules
 
 Modules may be recovered function by function. Same-module callees that are not yet

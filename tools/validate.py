@@ -5,6 +5,14 @@
 
 Nothing cached is trusted: every module file is recompiled from src/ and every
 claim is re-bound and compared.  Writes docs/progress.json and docs/progress.md.
+
+Data accounting: modules with zero claims (data-only translation units ``data:FRAME`` and
+code modules promoted with placements only) are listed as ``modules_data_only`` and never
+counted as recovered code; their placements count in ``data_bytes_accepted``.  Placements
+of different modules (and accepted runtime data) may not overlap; the paragraph fill between
+adjacent far segments must be zero (``data_link_fill_bytes``); ``link_after`` positions are
+checked; FAR_BSS (frame 50F6) is accounted by tools/farbss.py as linker zero fill; accepted
+runtime DGROUP data segments are re-verified (tools/runtime.py verify_data).
 """
 from __future__ import annotations
 
@@ -69,6 +77,11 @@ def main() -> int:
     exact_asm_bytes = 0
     code_data_bytes = 0
     bss_bytes = 0
+    far_data_bytes = 0
+    data_only_modules = []
+    placed = []                  # (linear, size, owner, segment, far) of every exact file placement
+    comdefs = defaultdict(list)  # C name -> [(bytes, module)] far communals of accepted objects
+    link_after_seen = {}
     per_unit = defaultdict(int)
     listed = {str((ROOT / m["source"]).resolve()).lower() for m in man["modules"].values()}
     for f in sorted((ROOT / "src").rglob("*")):
@@ -89,10 +102,21 @@ def main() -> int:
         res = modmod.verify_module(text, m, m["claims"])
         bad = [n for n, c in res["claims"].items() if not c["exact"]]
         dbad = [n for n, d in res.get("data", {}).items() if not d["exact"]]
-        status = "OK" if res["exact"] else f"FAIL {bad + dbad}"
+        mreasons = list(res.get("module_reasons", [])) + modmod.link_after_reasons(man, key, m)
+        if "link_after" in m:
+            if m["link_after"] in link_after_seen:
+                mreasons.append(f"link_after {m['link_after'] or 'FIRST'} also claimed by {link_after_seen[m['link_after']]}")
+            link_after_seen[m["link_after"]] = key
+        ok_mod = res["exact"] and not mreasons
+        status = ("OK" + (" (data only)" if not m["claims"] else "")) if ok_mod else f"FAIL {bad + dbad} {mreasons[:3]}"
         print(f"  {key:<10} {len(m['claims']):3d} claims  {status}")
-        if not res["exact"]:
-            failures.append(f"{key}: {bad + dbad} {res.get('log', '')}")
+        if not ok_mod:
+            failures.append(f"{key}: {bad + dbad} {mreasons[:3]} {res.get('log', '')}")
+        if not m["claims"]:
+            data_only_modules.append(key)
+        for c in res.get("communals", []):
+            if c.get("kind") == "far":
+                comdefs[c["name"][1:] if c["name"][:1] == "_" else c["name"]].append((c["length"], key))
         pending_order += sum(1 for c in res["claims"].values() if c.get("reloc_order") == "WITHIN_GROUP_PENDING")
         inplace_drafts += len(res.get("inplace_drafts", []))
         steered += sum(1 for c in m["claims"] if c.get("provenance") == "EXACT_STEERED")
@@ -115,6 +139,10 @@ def main() -> int:
                 bss_bytes += d["size"]
             elif d["exact"]:
                 data_bytes += d["size"]
+                if d.get("far"):
+                    far_data_bytes += d["size"]
+                if d.get("start") is not None:
+                    placed.append((d["start"], d["size"], key, n, bool(d.get("far"))))
         scaffolds += len(res.get("scaffold", []))
         if m.get("extent") and res["exact"]:
             exact_tus += 1
@@ -152,9 +180,10 @@ def main() -> int:
     runtime_members = 0
     acc = man.get("runtime", {}).get("members", [])
     located_spans, accepted_spans = set(), set()   # (linear, size) of located / accepted code segments
+    import runtime as rtmod
+    results, _derived = [], {}
     if acc or (ROOT / "evidence" / "toolchain" / "runtime-location.json").exists():
-        import runtime as rtmod
-        results, _, conflicts, _ = rtmod.verify_all()
+        results, _derived, conflicts, _ = rtmod.verify_all()
         exact = {(r["member"], r["linear"]): r for r in results if r["exact"]}
         for r in results:
             located_spans |= {(r["linear"], r["size"])} | {(e["linear"], e["size"]) for e in r["extra_segments"]}
@@ -174,6 +203,45 @@ def main() -> int:
             if hashlib.sha256(Path(info["path"]).read_bytes()).hexdigest() != info["sha256"]:
                 failures.append(f"runtime library {lib} hash changed")
     print(f"historical runtime: {runtime_members} members, {runtime_bytes} bytes re-bound")
+    # ---- runtime DGROUP data: re-verify every accepted data segment -------------------------
+    runtime_data_bytes = 0
+    acc_data = rtmod.accepted_data_segments(man) if acc else []
+    if acc_data:
+        rows = {(d["member"], d["segment"], d.get("linear")): d for d in rtmod.verify_data(results, _derived)}
+        spans = set()               # common segments (PAD, EPAD) of several members are one area
+        for d in acc_data:
+            r = rows.get((d["member"], d["segment"], d["linear"]))
+            if r is not None and r["exact"] and r["size"] == d["size"]:
+                if (d["linear"], d["size"], d["segment"]) in spans:
+                    continue
+                spans.add((d["linear"], d["size"], d["segment"]))
+                runtime_data_bytes += d["size"]
+                placed.append((d["linear"], d["size"], f"runtime:{d['member']}", d["segment"], False))
+            else:
+                failures.append(f"runtime data {d['member']} {d['segment']} no longer verifies "
+                                f"({'; '.join((r or {}).get('reasons', ['not placed'])[:2])})")
+    print(f"historical runtime data: {len(acc_data)} DGROUP segments, {runtime_data_bytes} bytes re-verified")
+
+    # ---- data placements: single ownership, link fill between far segments ---------------
+    placed.sort()
+    link_fill = 0
+    for (a0, n0, k0, s0, f0), (a1, n1, k1, s1, f1) in zip(placed, placed[1:]):
+        if a0 + n0 > a1:
+            failures.append(f"overlapping placements {k0} {s0} {a0:05X}+{n0} and {k1} {s1} {a1:05X}+{n1}")
+        elif f0 and f1 and a1 == (a0 + n0 + 15) & ~15 and a1 > a0 + n0:
+            gap = x.read("S27", a0 + n0, a1 - a0 - n0)
+            if any(gap):
+                failures.append(f"bytes between far segments {k0} {s0} and {k1} {s1} are not link fill")
+            else:
+                link_fill += len(gap)
+    import farbss
+    fb = farbss.account({k: snapshot[k].decode("latin1") for k, m in man["modules"].items() if m.get("lang", "c") == "c"},
+                        dict(comdefs), [(a, n) for a, n, *_ in placed])
+    failures += [f"FAR_BSS: {f}" for f in fb["failures"]]
+    far_bss_bytes = fb["size"] if fb["accounted"] else 0
+    print(f"FAR_BSS {fb['size']} bytes zero fill, {fb['variables']} communals: sizes verified {fb['bytes_verified']}, "
+          f"consistent {fb['bytes_consistent']}, unverified {fb['bytes_unverified']}"
+          + (f"; {len(fb['warnings'])} size conflicts to review (tools/farbss.py)" if fb["warnings"] else ""))
 
     # ---- accounting -------------------------------------------------------------------
     table = fnmod.table()["functions"]
@@ -211,10 +279,20 @@ def main() -> int:
         "rtlink_manager_bytes_unaccepted": len(x.image) - 0x2CFB * 16
                                            - sum(1 for a in accepted_bytes_at if a >= 0x2CFB * 16),
         "data_bytes_accepted": data_bytes,
+        "far_data_bytes_accepted": far_data_bytes,
+        "modules_data_only": sorted(data_only_modules),
+        "historical_runtime_data_bytes_accepted": runtime_data_bytes,
+        "data_link_fill_bytes": link_fill,
+        "far_bss_zero_fill_bytes": far_bss_bytes,
+        "far_bss_sizes_verified_bytes": fb["bytes_verified"],
+        "far_bss_sizes_consistent_bytes": fb["bytes_consistent"],
+        "far_bss_sizes_unverified_bytes": fb["bytes_unverified"],
         "bss_bytes_placed": bss_bytes,
         "game_code_span_bytes": code_total,
         "unresolved_code_bytes": code_total - exact_c_bytes - exact_asm_bytes - code_data_bytes,
-        "unresolved_data_bytes": s27 - data_bytes,
+        # section 27 file bytes not yet owned: game data placements, runtime data, link fill and
+        # the FAR_BSS zero fill (linker output) are owned
+        "unresolved_data_bytes": s27 - data_bytes - runtime_data_bytes - link_fill - far_bss_bytes,
         "overlay_coverage": {s.name: {"bytes": len(s.data), "claimed": per_unit.get(s.name, 0)}
                              for s in x.sections[:27]},
         "root_claimed_bytes": per_unit.get("root", 0),
@@ -240,19 +318,27 @@ def main() -> int:
               "historical_runtime_bytes_accepted", "historical_runtime_members_accepted",
               "runtime_functions_known", "runtime_functions_owned", "owned_functions",
               "historical_runtime_bytes_located_unaccepted", "rtlink_manager_bytes_unaccepted",
-              "data_bytes_accepted", "game_code_span_bytes", "unresolved_code_bytes", "unresolved_data_bytes",
+              "data_bytes_accepted", "far_data_bytes_accepted", "historical_runtime_data_bytes_accepted",
+              "data_link_fill_bytes", "far_bss_zero_fill_bytes", "far_bss_sizes_verified_bytes",
+              "far_bss_sizes_consistent_bytes", "far_bss_sizes_unverified_bytes",
+              "game_code_span_bytes", "unresolved_code_bytes", "unresolved_data_bytes",
               "scaffold_functions", "exact_translation_units", "complete_tus_relocation_order_proven",
               "claims_within_group_order_pending", "inplace_draft_functions", "claims_exact_steered"):
         md.append(f"| {k} | {progress[k]:,} |")
     md += ["", "Complete TUs with cross-function relocation order pending (record breaks between "
            "functions differ; see docs/codegen-rules.md ZI-1): "
            + (", ".join(progress["complete_tus_cross_function_order_pending"]) or "none")]
+    md += ["", "Modules with data placements only (never counted as recovered code): "
+           + (", ".join(progress["modules_data_only"]) or "none")]
     md += ["", f"Whole executable: {progress['whole_executable']}", "",
            "Overlay coverage (claimed/bytes): " + ", ".join(
                f"{k} {v['claimed']}/{v['bytes']}" for k, v in progress["overlay_coverage"].items()), ""]
     (ROOT / "docs" / "progress.md").write_text("\n".join(md))
     print(f"exact C: {exact_c} functions, {exact_c_bytes} bytes; unresolved code {progress['unresolved_code_bytes']}"
           + (f"; code-segment data {code_data_bytes} bytes" if code_data_bytes else ""))
+    print(f"data: {data_bytes} bytes accepted ({far_data_bytes} far), runtime data {runtime_data_bytes}, link fill "
+          f"{link_fill}, FAR_BSS {far_bss_bytes}; unresolved data {progress['unresolved_data_bytes']}; "
+          f"data-only modules {len(data_only_modules)}")
     if failures:
         print("VALIDATION FAILED:")
         for f in failures:

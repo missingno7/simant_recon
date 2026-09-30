@@ -3,11 +3,9 @@
 
 _DATA	segment word public 'DATA'
 	extrn	_g_3DB2:byte
-; S00A private data, first part (DGROUP:1F9E-2065): the two 100-byte dither tables the
-; mini-map builders index (o00_3126_0000/0137/026A/03A9/04D8/06A3).  Not placed yet: DGROUP
-; 2066-2117 (EGA palette, dword table, the dispatch table at 2098 whose 25 entries reach S00B procs
-; as externals, its far pointer at 20FC, bit masks, palette map); its split between this object
-; and S00B is open (build/workers/data/s27_map.md).
+; S00 driver data (DGROUP:1F9E-20FF): dither tables of the mini-map builders, EGA palette and
+; plane data used by S00B, the dispatch table the game calls through (entries in S00B, referenced
+; as externals: RTLink keeps their relocations in per-symbol groups) and a far pointer to it.
 _g_1F9E	db	0, 0, 0, 0, 0FFh, 0, 0, 0, 0, 0FFh, 0, 0
 	db	0FFh, 0FFh, 0, 0, 0, 0, 0FFh, 0, 0FFh, 0, 0FFh, 0
 	db	0, 0FFh, 0FFh, 0, 0FFh, 0FFh, 0FFh, 0, 0, 0, 0, 0FFh
@@ -26,9 +24,64 @@ _g_2002	db	0FFh, 0FFh, 0FFh, 0FFh, 0, 0FFh, 0FFh, 0FFh, 0, 0, 0FFh, 0FFh
 	db	0, 0FFh, 0FFh, 0FFh, 0, 055h, 0FFh, 0FFh, 0, 0, 0FFh, 0FFh
 	db	0, 0, 0FFh, 055h, 0, 0, 0FFh, 0, 0AAh, 0, 0FFh, 0AAh
 	db	0FFh, 0, 0FFh, 0FFh
+D2066	db	0, 1, 010h, 030h, 4, 5, 014h, 7, 038h, 9, 2, 00Bh, 024h, 02Dh, 036h, 03Fh	; EGA attribute-controller palette registers 0-15
+	db	0, 0
+_g_2078	dd	004000h, 008000h, 00C000h, 010000h, 020000h, 020000h, 020000h, 020000h
+DispatchS00	label	dword
+	dd	_o00_31AD_1659
+	dd	_o00_31AD_166A
+	dd	_o00_31AD_168C
+	dd	_o00_31AD_16A9
+	dd	_o00_31AD_0122
+	dd	_o00_31AD_037C
+	dd	_o00_31AD_0522
+	dd	_o00_31AD_11FB
+	dd	_o00_31AD_0550
+	dd	_o00_31AD_0CF9
+	dd	_o00_31AD_0D06
+	dd	_o00_31AD_1206
+	dd	_o00_31AD_1213
+	dd	_o00_31AD_062A
+	dd	_o00_31AD_062E
+	dd	_o00_31AD_0632
+	dd	_o00_31AD_0636
+	dd	_o00_31AD_148C
+	dd	_o00_31AD_1499
+	dd	_o00_31AD_0004
+	dd	_o00_31AD_1481
+	dd	_o00_31AD_0647
+	dd	_o00_31AD_18BA
+	dd	_o00_31AD_063C
+	dd	_o00_31AD_1950
+_g_20FC	dd	DGROUP:DispatchS00
 _DATA	ends
 DGROUP	group	_DATA
 
+	extrn	_o00_31AD_0004:far
+	extrn	_o00_31AD_0122:far
+	extrn	_o00_31AD_037C:far
+	extrn	_o00_31AD_0522:far
+	extrn	_o00_31AD_0550:far
+	extrn	_o00_31AD_062A:far
+	extrn	_o00_31AD_062E:far
+	extrn	_o00_31AD_0632:far
+	extrn	_o00_31AD_0636:far
+	extrn	_o00_31AD_063C:far
+	extrn	_o00_31AD_0647:far
+	extrn	_o00_31AD_0CF9:far
+	extrn	_o00_31AD_0D06:far
+	extrn	_o00_31AD_11FB:far
+	extrn	_o00_31AD_1206:far
+	extrn	_o00_31AD_1213:far
+	extrn	_o00_31AD_1481:far
+	extrn	_o00_31AD_148C:far
+	extrn	_o00_31AD_1499:far
+	extrn	_o00_31AD_1659:far
+	extrn	_o00_31AD_166A:far
+	extrn	_o00_31AD_168C:far
+	extrn	_o00_31AD_16A9:far
+	extrn	_o00_31AD_18BA:far
+	extrn	_o00_31AD_1950:far
 	extrn	_o15_384C_0000:far
 
 S00A_TEXT	segment word public 'CODE'

@@ -4,26 +4,30 @@
 ; tables of near code offsets (call word ptr [bx+table]), a shared clip subroutine returning in the
 ; carry flag, pushf/cld/popf around the indirect call, push es; push ds; push si; push di saves
 ; (MSC saves DI first, rule ASM-2) and pop bp without mov sp,bp (rule ASM-1).  The dispatch
-; tables at DGROUP 1E00/1F98 hold near offsets of this segment; they are referenced as extrn.
+; tables at DGROUP 1E00/1F98 hold near offsets of this segment (defined below with the module's _DATA).
 
 _DATA	segment word public 'DATA'
-	extrn	_g_1DE8:byte
-	extrn	_g_1DEA:byte
-	extrn	_g_1DEC:byte
-	extrn	_g_1DEE:byte
-	extrn	_g_1DF0:byte
-	extrn	_g_1DF2:byte
-	extrn	_g_1DF4:byte
-	extrn	_g_1DF6:byte
-	extrn	_g_1DF8:byte
-	extrn	_g_1DF9:byte
-	extrn	_g_1DFA:byte
-	extrn	_g_1DFC:byte
-	extrn	_g_1DFE:byte
-	extrn	_g_1E00:byte
-	extrn	_g_1E06:byte
-	extrn	_g_1F96:byte
-	extrn	_g_1F98:byte
+; 16B5 private data (DGROUP:1DE8-1F9D): line state (end points, deltas, error terms, the far
+; destination at 1DF0/1DF2, step bytes), the per-mode init dispatch table (1E00: near offsets of
+; this segment), a 200-word row-offset table filled at run time (1E06), the current plot
+; procedure (1F96) and the per-mode plot dispatch table (1F98).
+_g_1DE8	dw	0
+_g_1DEA	dw	0
+_g_1DEC	dw	0
+_g_1DEE	dw	0
+_g_1DF0	dw	0
+_g_1DF2	dw	0
+_g_1DF4	dw	0
+_g_1DF6	dw	0
+_g_1DF8	db	0
+_g_1DF9	db	0
+_g_1DFA	dw	0
+_g_1DFC	dw	0
+_g_1DFE	dw	0
+_g_1E00	dw	_f_16B5_007F, _f_16B5_00AB, _f_16B5_00A5
+_g_1E06	dw	200 dup (0)
+_g_1F96	dw	0
+_g_1F98	dw	_f_16B5_00B1, _f_16B5_03B5, _f_16B5_01D4
 _DATA	ends
 DGROUP	group	_DATA
 
