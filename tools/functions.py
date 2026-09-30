@@ -157,6 +157,8 @@ def reframe(addr: str, newseg: int, why: str) -> int:
                         s[sec].pop(n)
                         r.setdefault("history", []).append({"was": old, "why": "re-framed: " + why})
                         s[sec][new] = r
+                        # keep the old default name bound (same linear address) for in-flight drafts
+                        s[sec][old] = {"unit": unit, "seg": newseg, "off": r["off"], "alias_of": new}
         symmod.save(s)
         print("re-framed", addr, "->", f"{unit}:{newseg:04X}:{row['off']:04X}")
         return 0

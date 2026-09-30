@@ -64,6 +64,7 @@ def main() -> int:
     pending_order = 0
     tu_order_proven, tu_order_pending = [], []
     inplace_drafts = 0
+    steered = 0
     exact_asm = 0
     exact_asm_bytes = 0
     bss_bytes = 0
@@ -86,6 +87,7 @@ def main() -> int:
             failures.append(f"{key}: {bad + dbad} {res.get('log', '')}")
         pending_order += sum(1 for c in res["claims"].values() if c.get("reloc_order") == "WITHIN_GROUP_PENDING")
         inplace_drafts += len(res.get("inplace_drafts", []))
+        steered += sum(1 for c in m["claims"] if c.get("provenance") == "EXACT_STEERED")
         if res.get("extent"):
             (tu_order_proven if res["extent"].get("reloc_order") in ("EXACT", "GROUPED")
              else tu_order_pending).append(key)
@@ -188,6 +190,7 @@ def main() -> int:
         "exact_translation_units": exact_tus,
         "claims_within_group_order_pending": pending_order,
         "inplace_draft_functions": inplace_drafts,
+        "claims_exact_steered": steered,
         "complete_tus_relocation_order_proven": len(tu_order_proven),
         "complete_tus_cross_function_order_pending": sorted(tu_order_pending),
         "codegen_rules_reproduced": rules_ok,
@@ -205,7 +208,7 @@ def main() -> int:
               "historical_runtime_bytes_located_unaccepted", "rtlink_manager_bytes_unaccepted",
               "data_bytes_accepted", "game_code_span_bytes", "unresolved_code_bytes", "unresolved_data_bytes",
               "scaffold_functions", "exact_translation_units", "complete_tus_relocation_order_proven",
-              "claims_within_group_order_pending", "inplace_draft_functions"):
+              "claims_within_group_order_pending", "inplace_draft_functions", "claims_exact_steered"):
         md.append(f"| {k} | {progress[k]:,} |")
     md += ["", "Complete TUs with cross-function relocation order pending (record breaks between "
            "functions differ; see docs/codegen-rules.md ZI-1): "

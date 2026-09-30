@@ -21,6 +21,7 @@ Validation: **PASS** (2026-09-30)
 | complete_tus_relocation_order_proven | 23 |
 | claims_within_group_order_pending | 10 |
 | inplace_draft_functions | 20 |
+| claims_exact_steered | 14 |
 
 Complete TUs with cross-function relocation order pending (record breaks between functions differ; see docs/codegen-rules.md ZI-1): none
 
