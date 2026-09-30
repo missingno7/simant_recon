@@ -7388,6 +7388,20 @@
 {
 "unit": "root",
 "seg": 7027,
+"off": 36,
+"size": 1,
+"region": "game_or_library",
+"extent": "REVIEWED",
+"evidence": [
+"reviewed"
+],
+"notes": [
+"iret stub (CF) installed as the INT 33h vector by f_1B73_0046 (mov es:[CC],0024h; mov es:[CE],SEG 1B73) when no mouse driver is present; worker rootF, genuine-asm module 1B73"
+]
+},
+{
+"unit": "root",
+"seg": 7027,
 "off": 37,
 "size": 33,
 "region": "game_or_library",
@@ -7438,6 +7452,34 @@
 "extent": "DESCENT",
 "evidence": [
 "far_call"
+]
+},
+{
+"unit": "root",
+"seg": 7027,
+"off": 459,
+"size": 10,
+"region": "game_or_library",
+"extent": "REVIEWED",
+"evidence": [
+"reviewed"
+],
+"notes": [
+"inc byte [3DD4]; call far f_1B73_0196; retf (unreferenced far entry after a retf); worker rootF, genuine-asm module 1B73"
+]
+},
+{
+"unit": "root",
+"seg": 7027,
+"off": 469,
+"size": 12,
+"region": "game_or_library",
+"extent": "REVIEWED",
+"evidence": [
+"reviewed"
+],
+"notes": [
+"dec byte [3DD4]; jne; call far f_1B73_00D9; retf (unreferenced far entry after a retf); worker rootF, genuine-asm module 1B73"
 ]
 },
 {
@@ -7535,11 +7577,28 @@
 "unit": "root",
 "seg": 7027,
 "off": 878,
-"size": 126,
+"size": 128,
 "region": "game_or_library",
-"extent": "DESCENT",
+"extent": "REVIEWED",
 "evidence": [
 "far_call"
+],
+"notes": [
+"resized 126 -> 128: include the popf; retf exit at 03EC (target of jne in 0445's reentrancy check) so the rows tile the segment before the 03EE mouse handler; worker rootF"
+]
+},
+{
+"unit": "root",
+"seg": 7027,
+"off": 1006,
+"size": 87,
+"region": "game_or_library",
+"extent": "REVIEWED",
+"evidence": [
+"reviewed"
+],
+"notes": [
+"mouse driver user event handler: f_1B73_0235 installs cs:03EE with INT 33h fn 0Ch (es=cs, dx=03EEh, cx=7Fh); falls through into f_1B73_0445; worker rootF, genuine-asm module 1B73"
 ]
 },
 {
@@ -7589,12 +7648,110 @@
 {
 "unit": "root",
 "seg": 7027,
+"off": 1295,
+"size": 1,
+"region": "game_or_library",
+"extent": "REVIEWED",
+"evidence": [
+"reviewed"
+],
+"notes": [
+"retf between the far-called retf stubs 050E and 0510 (unreferenced); worker rootF, genuine-asm module 1B73"
+]
+},
+{
+"unit": "root",
+"seg": 7027,
 "off": 1296,
 "size": 1,
 "region": "game_or_library",
 "extent": "DESCENT",
 "evidence": [
 "far_call"
+]
+},
+{
+"unit": "root",
+"seg": 7027,
+"off": 1297,
+"size": 7,
+"region": "game_or_library",
+"extent": "REVIEWED",
+"evidence": [
+"reviewed"
+],
+"notes": [
+"mov byte cs:[0011],0; retf - disables the timer tick counter (unreferenced far entry); worker rootF, genuine-asm module 1B73"
+]
+},
+{
+"unit": "root",
+"seg": 7027,
+"off": 1304,
+"size": 7,
+"region": "game_or_library",
+"extent": "REVIEWED",
+"evidence": [
+"reviewed"
+],
+"notes": [
+"mov byte cs:[0011],1; retf - enables the timer tick counter (unreferenced far entry); worker rootF, genuine-asm module 1B73"
+]
+},
+{
+"unit": "root",
+"seg": 7027,
+"off": 1311,
+"size": 315,
+"region": "game_or_library",
+"extent": "REVIEWED",
+"evidence": [
+"reviewed"
+],
+"notes": [
+"INT 08h handler installed by f_1B73_0235 (lea dx,[051F]; INT 21h/2508h), chains with jmp cs:[000A]; row includes the INT 15h chain stubs 0654-0659 (popf; jmp cs:[0020]) that precede the INT 15h entry; worker rootF, genuine-asm module 1B73"
+]
+},
+{
+"unit": "root",
+"seg": 7027,
+"off": 1626,
+"size": 137,
+"region": "game_or_library",
+"extent": "REVIEWED",
+"evidence": [
+"reviewed"
+],
+"notes": [
+"INT 15h handler (AH=4Fh keyboard intercept) installed by f_1B73_0235 (lea dx,[065A]; INT 21h/2515h); row includes the INT 09h chain stub 06DD-06E2; worker rootF, genuine-asm module 1B73"
+]
+},
+{
+"unit": "root",
+"seg": 7027,
+"off": 1763,
+"size": 99,
+"region": "game_or_library",
+"extent": "REVIEWED",
+"evidence": [
+"reviewed"
+],
+"notes": [
+"INT 09h handler installed by f_1B73_0235 (lea dx,[06E3]; INT 21h/2509h), ends with iret; code-segment byte 0746 follows; worker rootF, genuine-asm module 1B73"
+]
+},
+{
+"unit": "root",
+"seg": 7027,
+"off": 1863,
+"size": 674,
+"region": "game_or_library",
+"extent": "REVIEWED",
+"evidence": [
+"reviewed"
+],
+"notes": [
+"keyboard scan-code processor (near proc called from the INT 09h/15h handlers) with the scan-code jump table in DGROUP 5460, its targets and near helpers up to 09E8; worker rootF, genuine-asm module 1B73"
 ]
 },
 {
@@ -7612,25 +7769,43 @@
 "unit": "root",
 "seg": 7027,
 "off": 2551,
-"size": 36,
+"size": 8,
 "region": "game_or_library",
-"extent": "DESCENT",
+"extent": "REVIEWED",
 "evidence": [
 "near_call"
+],
+"notes": [
+"resized 36 -> 8: near proc entry 09F7 loads cx/dx from 9122/9124 and falls into the near-called entry 09FF; split at 09FF; worker rootF"
 ]
 },
 {
 "unit": "root",
 "seg": 7027,
 "off": 2559,
-"size": 0,
+"size": 28,
 "region": "game_or_library",
-"extent": "DESCENT",
+"extent": "REVIEWED",
 "evidence": [
 "near_call"
 ],
 "notes": [
-"overlaps root:1C127"
+"overlaps root:1C127",
+"resized 0 -> 28: near proc 09FF-0A1A (ret at 0A1A), called from 09E9; was size 0; worker rootF"
+]
+},
+{
+"unit": "root",
+"seg": 7027,
+"off": 2587,
+"size": 21,
+"region": "game_or_library",
+"extent": "REVIEWED",
+"evidence": [
+"reviewed"
+],
+"notes": [
+"call 0A21; jmp 07F3 + near helper 0A21 (mov al,ah; cx/dx=cursor; push cs; call 0445; ret); worker rootF, genuine-asm module 1B73"
 ]
 },
 {
@@ -7692,25 +7867,29 @@
 "unit": "root",
 "seg": 7027,
 "off": 2755,
-"size": 152,
+"size": 61,
 "region": "game_or_library",
-"extent": "DESCENT",
+"extent": "REVIEWED",
 "evidence": [
 "far_call"
+],
+"notes": [
+"resized 152 -> 61: 0AC3 ends with call far Punt at 0AFB (no return); 0B00 (far-called by f_1FD2_032F/03EB/044F) is the next proc: push bp; mov bp,sp; worker rootF"
 ]
 },
 {
 "unit": "root",
 "seg": 7027,
 "off": 2816,
-"size": 0,
+"size": 91,
 "region": "game_or_library",
-"extent": "DESCENT",
+"extent": "REVIEWED",
 "evidence": [
 "far_call"
 ],
 "notes": [
-"overlaps root:1C1F3"
+"overlaps root:1C1F3",
+"resized 0 -> 91: separate far proc 0B00-0B5A (push bp ... retf at 0B5A), was size 0 inside 0AC3; worker rootF"
 ]
 },
 {
@@ -7766,6 +7945,20 @@
 "extent": "DESCENT",
 "evidence": [
 "far_call"
+]
+},
+{
+"unit": "root",
+"seg": 7027,
+"off": 3251,
+"size": 60,
+"region": "game_or_library",
+"extent": "REVIEWED",
+"evidence": [
+"reviewed"
+],
+"notes": [
+"near handler whose offset f_1B73_0AA3 stores in DGROUP 5FFA (lea ax,[0CB3]) and 0445 calls through call [5FFA]; worker rootF, genuine-asm module 1B73"
 ]
 },
 {

@@ -4093,6 +4093,18 @@
     }
    ]
   },
+  "ProcMenu": {
+   "unit": "S11",
+   "seg": 13813,
+   "off": 397,
+   "grounding": "inventory:vector",
+   "history": [
+    {
+     "was": "o11_35F5_018D",
+     "why": "Win16 ProcMenu: reviewed CONFIRMED (supervisor assignment 2026-09-30); decisions.json StopSong/OpenMapYard entries: 70-case menu switch, call order myBeginSong, NewGame, OpenEditWindow, OpenMapYard, OpenModeWindow, OpenCasteWindow, OpenHistoryWindow, OpenInfoWindow, ScoreDialog, SetYardMode, SetMapPlane, StopSong as Win16 ProcMenu; same TU as Win16 SetMenuEntries/PauseGame/SetPause twins (S11:0000/0088/009E)"
+    }
+   ]
+  },
   "ProcModeEvent": {
    "unit": "root",
    "seg": 1944,
@@ -9575,6 +9587,12 @@
    "off": 576,
    "grounding": "reviewed: prologue scan in unreached gap; descent ends in a return; no references found (unreferenced or indirect)"
   },
+  "f_1B73_0024": {
+   "unit": "root",
+   "seg": 7027,
+   "off": 36,
+   "grounding": "reviewed: iret stub (CF) installed as the INT 33h vector by f_1B73_0046 (mov es:[CC],0024h; mov es:[CE],SEG 1B73) when no mouse driver is present; worker rootF, genuine-asm module 1B73"
+  },
   "f_1B73_0025": {
    "unit": "root",
    "seg": 7027,
@@ -9604,6 +9622,18 @@
    "seg": 7027,
    "off": 406,
    "grounding": "inventory:far_call"
+  },
+  "f_1B73_01CB": {
+   "unit": "root",
+   "seg": 7027,
+   "off": 459,
+   "grounding": "reviewed: inc byte [3DD4]; call far f_1B73_0196; retf (unreferenced far entry after a retf); worker rootF, genuine-asm module 1B73"
+  },
+  "f_1B73_01D5": {
+   "unit": "root",
+   "seg": 7027,
+   "off": 469,
+   "grounding": "reviewed: dec byte [3DD4]; jne; call far f_1B73_00D9; retf (unreferenced far entry after a retf); worker rootF, genuine-asm module 1B73"
   },
   "f_1B73_01E1": {
    "unit": "root",
@@ -9659,6 +9689,12 @@
    "off": 878,
    "grounding": "inventory:far_call"
   },
+  "f_1B73_03EE": {
+   "unit": "root",
+   "seg": 7027,
+   "off": 1006,
+   "grounding": "reviewed: mouse driver user event handler: f_1B73_0235 installs cs:03EE with INT 33h fn 0Ch (es=cs, dx=03EEh, cx=7Fh); falls through into f_1B73_0445; worker rootF, genuine-asm module 1B73"
+  },
   "f_1B73_0445": {
    "unit": "root",
    "seg": 7027,
@@ -9683,11 +9719,53 @@
    "off": 1294,
    "grounding": "inventory:far_call"
   },
+  "f_1B73_050F": {
+   "unit": "root",
+   "seg": 7027,
+   "off": 1295,
+   "grounding": "reviewed: retf between the far-called retf stubs 050E and 0510 (unreferenced); worker rootF, genuine-asm module 1B73"
+  },
   "f_1B73_0510": {
    "unit": "root",
    "seg": 7027,
    "off": 1296,
    "grounding": "inventory:far_call"
+  },
+  "f_1B73_0511": {
+   "unit": "root",
+   "seg": 7027,
+   "off": 1297,
+   "grounding": "reviewed: mov byte cs:[0011],0; retf - disables the timer tick counter (unreferenced far entry); worker rootF, genuine-asm module 1B73"
+  },
+  "f_1B73_0518": {
+   "unit": "root",
+   "seg": 7027,
+   "off": 1304,
+   "grounding": "reviewed: mov byte cs:[0011],1; retf - enables the timer tick counter (unreferenced far entry); worker rootF, genuine-asm module 1B73"
+  },
+  "f_1B73_051F": {
+   "unit": "root",
+   "seg": 7027,
+   "off": 1311,
+   "grounding": "reviewed: INT 08h handler installed by f_1B73_0235 (lea dx,[051F]; INT 21h/2508h), chains with jmp cs:[000A]; row includes the INT 15h chain stubs 0654-0659 (popf; jmp cs:[0020]) that precede the INT 15h entry; worker rootF, genuine-asm module 1B73"
+  },
+  "f_1B73_065A": {
+   "unit": "root",
+   "seg": 7027,
+   "off": 1626,
+   "grounding": "reviewed: INT 15h handler (AH=4Fh keyboard intercept) installed by f_1B73_0235 (lea dx,[065A]; INT 21h/2515h); row includes the INT 09h chain stub 06DD-06E2; worker rootF, genuine-asm module 1B73"
+  },
+  "f_1B73_06E3": {
+   "unit": "root",
+   "seg": 7027,
+   "off": 1763,
+   "grounding": "reviewed: INT 09h handler installed by f_1B73_0235 (lea dx,[06E3]; INT 21h/2509h), ends with iret; code-segment byte 0746 follows; worker rootF, genuine-asm module 1B73"
+  },
+  "f_1B73_0747": {
+   "unit": "root",
+   "seg": 7027,
+   "off": 1863,
+   "grounding": "reviewed: keyboard scan-code processor (near proc called from the INT 09h/15h handlers) with the scan-code jump table in DGROUP 5460, its targets and near helpers up to 09E8; worker rootF, genuine-asm module 1B73"
   },
   "f_1B73_09E9": {
    "unit": "root",
@@ -9706,6 +9784,12 @@
    "seg": 7027,
    "off": 2559,
    "grounding": "inventory:near_call"
+  },
+  "f_1B73_0A1B": {
+   "unit": "root",
+   "seg": 7027,
+   "off": 2587,
+   "grounding": "reviewed: call 0A21; jmp 07F3 + near helper 0A21 (mov al,ah; cx/dx=cursor; push cs; call 0445; ret); worker rootF, genuine-asm module 1B73"
   },
   "f_1B73_0A30": {
    "unit": "root",
@@ -9778,6 +9862,12 @@
    "seg": 7027,
    "off": 3200,
    "grounding": "inventory:far_call"
+  },
+  "f_1B73_0CB3": {
+   "unit": "root",
+   "seg": 7027,
+   "off": 3251,
+   "grounding": "reviewed: near handler whose offset f_1B73_0AA3 stores in DGROUP 5FFA (lea ax,[0CB3]) and 0445 calls through call [5FFA]; worker rootF, genuine-asm module 1B73"
   },
   "f_1B73_0CEF": {
    "unit": "root",
@@ -14645,7 +14735,7 @@
    "unit": "S11",
    "seg": 13813,
    "off": 397,
-   "grounding": "inventory:vector"
+   "alias_of": "ProcMenu"
   },
   "o12_384C_0000": {
    "unit": "S12",

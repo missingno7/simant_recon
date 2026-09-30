@@ -165,5 +165,16 @@ REG-1 below is a case where the MSC 5.10 rule is false for 6.00.
 * **RTLink groups own-segment far references by target offset** (per called label), e.g. the
   S00:31AD / S01 call runs; the relocation key of an own-segment pointer includes the target
   offset.
+* **/Zi line entries** (worker resA): an entry goes on the last line of each statement; a `for`
+  header gets two; a braced `while` adds one on its closing `}` line; `else`, braces, labels, dead
+  statements and a final `return;` add none. The LINNUM buffer flushes every 52 entries counted
+  across the whole file, so line layout anywhere earlier in the file moves later record breaks.
+* **Byte-equivalent unknowns.** Some exact sources contain choices the bytes cannot decide: which
+  far variable of the same segment a dead expression names (only its CONST segment word
+  survives, e.g. S05 AntMenu), the spelling of private statics beyond their BSS hash (BSS-1/2),
+  and local names outside `_asm` or `/Od` functions. These are hypotheses consistent with the
+  bytes. They are marked in source comments and never counted as recovered names.
+* **Per-file debug options**: S05:35F5, 277E, 0798 and 295C are proven *without* /Zi. Choose /Zi,
+  /Zd or neither per module by the relocation-order evidence.
 * **Relocation order** inside a module is target-grouped by RTLink (open, see
   `docs/exe-format.md`).
