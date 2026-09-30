@@ -4,28 +4,28 @@ Validation: **PASS** (2026-09-30)
 
 | Measure | Value |
 |---|---:|
-| known_functions | 1,692 |
-| known_game_functions | 1,602 |
-| exact_c_functions | 1,092 |
-| exact_c_bytes | 191,270 |
+| known_functions | 1,705 |
+| known_game_functions | 1,615 |
+| exact_c_functions | 1,097 |
+| exact_c_bytes | 191,566 |
 | exact_asm_bytes | 40,075 |
 | exact_code_segment_data_bytes | 1,353 |
 | historical_runtime_bytes_accepted | 12,339 |
 | historical_runtime_members_accepted | 90 |
 | runtime_functions_known | 90 |
 | runtime_functions_owned | 90 |
-| owned_functions | 1,416 |
+| owned_functions | 1,421 |
 | historical_runtime_bytes_located_unaccepted | 0 |
 | rtlink_manager_bytes_unaccepted | 17,063 |
-| data_bytes_accepted | 15,697 |
+| data_bytes_accepted | 15,979 |
 | game_code_span_bytes | 304,748 |
-| unresolved_code_bytes | 72,050 |
-| unresolved_data_bytes | 119,823 |
+| unresolved_code_bytes | 71,754 |
+| unresolved_data_bytes | 119,541 |
 | scaffold_functions | 65 |
 | exact_translation_units | 49 |
 | complete_tus_relocation_order_proven | 48 |
 | claims_within_group_order_pending | 7 |
-| inplace_draft_functions | 18 |
+| inplace_draft_functions | 19 |
 | claims_exact_steered | 18 |
 
 Complete TUs with cross-function relocation order pending (record breaks between functions differ; see docs/codegen-rules.md ZI-1): S00:31AD

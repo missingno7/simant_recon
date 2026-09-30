@@ -11,18 +11,6 @@
 _DATA	segment word public 'DATA'
 	extrn	_fd_55B3_3DE6:byte
 	extrn	_fd_55B3_3DE8:byte
-	extrn	_g_220E:byte
-	extrn	_g_2210:byte
-	extrn	_g_2212:byte
-	extrn	_g_2214:byte
-	extrn	_g_2216:byte
-	extrn	_g_2226:byte
-	extrn	_g_2227:byte
-	extrn	_g_2228:byte
-	extrn	_g_2229:byte
-	extrn	_g_222A:byte
-	extrn	_g_222C:byte
-	extrn	_g_2236:byte
 	extrn	_g_22DA:byte
 	extrn	_g_22DF:byte
 	extrn	_g_22E2:byte
@@ -60,6 +48,27 @@ _DATA	segment word public 'DATA'
 	extrn	_g_4365:byte
 	extrn	_g_4366:byte
 	extrn	_g_5AAE:byte
+; S03A private data, first part (DGROUP:220E-2275): driver state words and bytes, the 16-entry
+; palette map (_g_2216), CGA/Tandy bank offsets, pixel mask table (_g_2236).  The dispatch
+; table (2276), its far pointer (22DA) and the colour tables (22DE-2307) follow.
+_g_220E	db	0, 0
+_g_2210	db	0, 0
+_g_2212	db	0, 0
+_g_2214	db	0, 0
+_g_2216	db	00Fh, 00Eh, 00Ch, 4, 00Dh, 5, 1, 00Bh, 2, 00Ah, 6, 6
+	db	7, 7, 8, 0
+_g_2226	db	0
+_g_2227	db	0
+_g_2228	db	0
+_g_2229	db	0
+_g_222A	db	0, 0
+_g_222C	db	0, 0, 0, 0, 0, 020h, 0, 040h, 0, 060h
+_g_2236	db	00Fh, 00Fh, 0F0h, 0F0h, 00Fh, 00Fh, 0F0h, 0F0h, 00Fh, 00Fh, 0F0h, 0F0h
+	db	00Fh, 00Fh, 0F0h, 0F0h, 0FFh, 0F0h, 00Fh, 0FFh, 0F0h, 0FFh, 0FFh, 00Fh
+	db	0FFh, 0F0h, 00Fh, 0FFh, 0F0h, 0FFh, 0FFh, 00Fh, 0FFh, 0FFh, 0FFh, 0FFh
+	db	0FFh, 0FFh, 0FFh, 0FFh, 0FFh, 0FFh, 0FFh, 0FFh, 0FFh, 0FFh, 0FFh, 0FFh
+	db	0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0
+	db	0, 0, 0, 0
 _DATA	ends
 DGROUP	group	_DATA
 

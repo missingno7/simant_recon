@@ -20969,6 +20969,11 @@
    "off": 19370,
    "grounding": "f_284A_0013: mov es,[8AB0]; mov es:[di+4BAA],ax (far int array[14])"
   },
+  "fd_55B3_0064": {
+   "seg": 21939,
+   "off": 100,
+   "grounding": "o19_384C_0246: mov es,[CONST 87AE = 55B3]; push es:[0066]; push es:[0064] -> f_1C62_00C0 (far pointer in DGROUP declared far)"
+  },
   "fd_55B3_00B4": {
    "seg": 21939,
    "off": 180,
@@ -21479,6 +21484,26 @@
    "off": 10608,
    "grounding": "o09_35F5_03C6 (FileSelect): mov es,[CONST 8622 = 55B3]; mov es:[2970],al = typed key before calling o09_36EE_0092; defined in module S09:36EE (char g_2970 = 0, first byte of its _DATA)"
   },
+  "g_3D10": {
+   "seg": 21939,
+   "off": 15632,
+   "grounding": "module 1B73 at 1B73:0E53: les bx, ptr [0x3d10] (worker rootF)"
+  },
+  "g_3D14": {
+   "seg": 21939,
+   "off": 15636,
+   "grounding": "module 1B73 at 1B73:0E31: les bx, ptr [0x3d14] (worker rootF)"
+  },
+  "g_3D18": {
+   "seg": 21939,
+   "off": 15640,
+   "grounding": "module 1B73 at 1B73:0E1A: les bx, ptr [0x3d18] (worker rootF)"
+  },
+  "g_3D1C": {
+   "seg": 21939,
+   "off": 15644,
+   "grounding": "module 1B73 at 1B73:0DC9: les bx, ptr [0x3d1c] (worker rootF)"
+  },
   "g_3D20": {
    "seg": 21939,
    "off": 15648,
@@ -21664,15 +21689,65 @@
    "off": 17194,
    "grounding": "IBMInitStuff (S20:39F1:0088/016D): mov byte ptr [432A],1 for option /b or getenv(BUG) MSMOUSE match (DGROUP byte flag)"
   },
+  "g_432B": {
+   "seg": 21939,
+   "off": 17195,
+   "grounding": "module 1B73 at 1B73:0690: mov dl, byte ptr [0x432b] (worker rootF)"
+  },
+  "g_432C": {
+   "seg": 21939,
+   "off": 17196,
+   "grounding": "module 1B73 at 1B73:040D: sub ax, word ptr [0x432c] (worker rootF)"
+  },
+  "g_432E": {
+   "seg": 21939,
+   "off": 17198,
+   "grounding": "module 1B73 at 1B73:0428: sub ax, word ptr [0x432e] (worker rootF)"
+  },
   "g_4331": {
    "seg": 21939,
    "off": 17201,
    "grounding": "S02 driver (3126) : extrn\t_g_4331:byte (DGROUP operand of genuine-assembly display driver; worker ovlA)"
   },
+  "g_4332": {
+   "seg": 21939,
+   "off": 17202,
+   "grounding": "module 1B73 at 1B73:00E4: mov byte ptr [0x4332], 0 (worker rootF)"
+  },
   "g_4333": {
    "seg": 21939,
    "off": 17203,
    "grounding": "S02 driver (3126) : extrn\t_g_4333:byte (DGROUP operand of genuine-assembly display driver; worker ovlA)"
+  },
+  "g_4334": {
+   "seg": 21939,
+   "off": 17204,
+   "grounding": "module 1B73 at 1B73:0DDD: test word ptr [0x4334], 0xff (worker rootF)"
+  },
+  "g_4336": {
+   "seg": 21939,
+   "off": 17206,
+   "grounding": "module 1B73 at 1B73:0DED: cmp cx, word ptr [0x4336] (worker rootF)"
+  },
+  "g_4338": {
+   "seg": 21939,
+   "off": 17208,
+   "grounding": "module 1B73 at 1B73:0DF9: cmp dx, word ptr [0x4338] (worker rootF)"
+  },
+  "g_433A": {
+   "seg": 21939,
+   "off": 17210,
+   "grounding": "module 1B73 at 1B73:0DF3: cmp cx, word ptr [0x433a] (worker rootF)"
+  },
+  "g_433C": {
+   "seg": 21939,
+   "off": 17212,
+   "grounding": "module 1B73 at 1B73:0DFF: cmp dx, word ptr [0x433c] (worker rootF)"
+  },
+  "g_433E": {
+   "seg": 21939,
+   "off": 17214,
+   "grounding": "module 1B73 at 1B73:023F: mov byte ptr [0x433e], al (worker rootF)"
   },
   "g_4340": {
    "seg": 21939,
@@ -21694,6 +21769,51 @@
    "off": 17222,
    "grounding": "S02 driver (3126) : extrn\t_g_4346:byte (DGROUP operand of genuine-assembly display driver; worker ovlA)"
   },
+  "g_4348": {
+   "seg": 21939,
+   "off": 17224,
+   "grounding": "module 1B73 at 1B73:01F4: mov word ptr [0x4348], ax (worker rootF)"
+  },
+  "g_434A": {
+   "seg": 21939,
+   "off": 17226,
+   "grounding": "module 1B73 at 1B73:01FB: mov word ptr [0x434a], ax (worker rootF)"
+  },
+  "g_434E": {
+   "seg": 21939,
+   "off": 17230,
+   "grounding": "module 1B73 at 1B73:01B3: inc word ptr [0x434e] (worker rootF)"
+  },
+  "g_4352": {
+   "seg": 21939,
+   "off": 17234,
+   "grounding": "module 1B73 at 1B73:00DA: inc word ptr [0x4352] (worker rootF)"
+  },
+  "g_4356": {
+   "seg": 21939,
+   "off": 17238,
+   "grounding": "module 1B73 at 1B73:04BC: inc word ptr [0x4356] (worker rootF)"
+  },
+  "g_435A": {
+   "seg": 21939,
+   "off": 17242,
+   "grounding": "module 1B73 at 1B73:00D2: mov word ptr [0x435a], 1 (worker rootF)"
+  },
+  "g_4362": {
+   "seg": 21939,
+   "off": 17250,
+   "grounding": "module 1B73 at 1B73:05CB: mov bl, byte ptr [0x4362] (worker rootF)"
+  },
+  "g_4363": {
+   "seg": 21939,
+   "off": 17251,
+   "grounding": "module 1B73 at 1B73:05D3: mov bh, byte ptr [0x4363] (worker rootF)"
+  },
+  "g_4364": {
+   "seg": 21939,
+   "off": 17252,
+   "grounding": "module 1B73 at 1B73:05F4: inc byte ptr [0x4364] (worker rootF)"
+  },
   "g_4365": {
    "seg": 21939,
    "off": 17253,
@@ -21703,6 +21823,156 @@
    "seg": 21939,
    "off": 17254,
    "grounding": "S02 driver (3126) : extrn\t_g_4366:byte (DGROUP operand of genuine-assembly display driver; worker ovlA)"
+  },
+  "g_4368": {
+   "seg": 21939,
+   "off": 17256,
+   "grounding": "module 1B73 at 1B73:05CF: add bl, byte ptr [0x4368] (worker rootF)"
+  },
+  "g_4369": {
+   "seg": 21939,
+   "off": 17257,
+   "grounding": "module 1B73 at 1B73:05D7: add bh, byte ptr [0x4369] (worker rootF)"
+  },
+  "g_4D8E": {
+   "seg": 21939,
+   "off": 19854,
+   "grounding": "module 1B73 at 1B73:01E9: mov word ptr [0x4d8e], bx (worker rootF)"
+  },
+  "g_4D92": {
+   "seg": 21939,
+   "off": 19858,
+   "grounding": "module 1B73 at 1B73:0201: mov word ptr [0x4d92], bx (worker rootF)"
+  },
+  "g_4D96": {
+   "seg": 21939,
+   "off": 19862,
+   "grounding": "module 1B73 at 1B73:0DA8: mov word ptr [0x4d96], bx (worker rootF)"
+  },
+  "g_4D9A": {
+   "seg": 21939,
+   "off": 19866,
+   "grounding": "module 1B73 at 1B73:0DC1: mov word ptr [0x4d9a], bx (worker rootF)"
+  },
+  "g_4D9E": {
+   "seg": 21939,
+   "off": 19870,
+   "grounding": "module 1B73 at 1B73:0DBA: mov word ptr [0x4d9e], ax (worker rootF)"
+  },
+  "g_4DA0": {
+   "seg": 21939,
+   "off": 19872,
+   "grounding": "module 1B73 at 1B73:0DB3: mov word ptr [0x4da0], ax (worker rootF)"
+  },
+  "g_4DA2": {
+   "seg": 21939,
+   "off": 19874,
+   "grounding": "module 1B73 at 1B73:0D7B: push word ptr [0x4da2] (worker rootF)"
+  },
+  "g_4DA4": {
+   "seg": 21939,
+   "off": 19876,
+   "grounding": "module 1B73 at 1B73:00BA: mov byte ptr [0x4da4], al (worker rootF)"
+  },
+  "g_4DA5": {
+   "seg": 21939,
+   "off": 19877,
+   "grounding": "module 1B73 at 1B73:010C: mov word ptr [0x4da5], bx (worker rootF)"
+  },
+  "g_4FAA": {
+   "seg": 21939,
+   "off": 20394,
+   "grounding": "module 1B73 at 1B73:0476: mov sp, 0x4faa (worker rootF)"
+  },
+  "g_51AC": {
+   "seg": 21939,
+   "off": 20908,
+   "grounding": "module 1B73 at 1B73:0569: mov sp, 0x51ac (worker rootF)"
+  },
+  "g_53AE": {
+   "seg": 21939,
+   "off": 21422,
+   "grounding": "module 1B73 at 1B73:068D: mov sp, 0x53ae (worker rootF)"
+  },
+  "g_53B0": {
+   "seg": 21939,
+   "off": 21424,
+   "grounding": "module 1B73 at 1B73:0687: mov word ptr [0x53b0], sp (worker rootF)"
+  },
+  "g_53B2": {
+   "seg": 21939,
+   "off": 21426,
+   "grounding": "module 1B73 at 1B73:0683: mov word ptr [0x53b2], ss (worker rootF)"
+  },
+  "g_53B4": {
+   "seg": 21939,
+   "off": 21428,
+   "grounding": "module 1B73 at 1B73:046C: mov word ptr [0x53b4], ss (worker rootF)"
+  },
+  "g_53B6": {
+   "seg": 21939,
+   "off": 21430,
+   "grounding": "module 1B73 at 1B73:0470: mov word ptr [0x53b6], sp (worker rootF)"
+  },
+  "g_53B8": {
+   "seg": 21939,
+   "off": 21432,
+   "grounding": "module 1B73 at 1B73:055F: mov word ptr [0x53b8], ss (worker rootF)"
+  },
+  "g_53BA": {
+   "seg": 21939,
+   "off": 21434,
+   "grounding": "module 1B73 at 1B73:0563: mov word ptr [0x53ba], sp (worker rootF)"
+  },
+  "g_53BC": {
+   "seg": 21939,
+   "off": 21436,
+   "grounding": "module 1B73 at 1B73:02A4: inc byte ptr [0x53bc] (worker rootF)"
+  },
+  "g_53BD": {
+   "seg": 21939,
+   "off": 21437,
+   "grounding": "module 1B73 at 1B73:0A4C: mov byte ptr [0x53bd], bl (worker rootF)"
+  },
+  "g_53BE": {
+   "seg": 21939,
+   "off": 21438,
+   "grounding": "module 1B73 at 1B73:01A5: mov ax, 0x53be (worker rootF)"
+  },
+  "g_53CD": {
+   "seg": 21939,
+   "off": 21453,
+   "grounding": "module 1B73 at 1B73:07A1: cmp byte ptr [bx + 0x53cd], ah (worker rootF)"
+  },
+  "g_544D": {
+   "seg": 21939,
+   "off": 21581,
+   "grounding": "module 1B73 at 1B73:07C6: mov di, 0x544d (worker rootF)"
+  },
+  "g_5460": {
+   "seg": 21939,
+   "off": 21600,
+   "grounding": "module 1B73 at 1B73:07EF: jmp word ptr [bx+545E] with bx = 2*(1-based index from repne scasb over the 19-byte scan-code list g_544D) - table of near code offsets into 1B73 (08AB, 08C0, ...) starting at 5460 (worker rootF)"
+  },
+  "g_5484": {
+   "seg": 21939,
+   "off": 21636,
+   "grounding": "module 1B73 at 1B73:0AA3: les bx, ptr [0x5484] (worker rootF)"
+  },
+  "g_549A": {
+   "seg": 21939,
+   "off": 21658,
+   "grounding": "module 1B73 at 1B73:00F9: lds di, ptr [0x549a] (worker rootF)"
+  },
+  "g_54A0": {
+   "seg": 21939,
+   "off": 21664,
+   "grounding": "module 1B73 at 1B73:0AF2: mov ax, 0x54a0 (worker rootF)"
+  },
+  "g_54B0": {
+   "seg": 21939,
+   "off": 21680,
+   "grounding": "module 1B73 at 1B73:0D96: mov ax, 0x54b0 (worker rootF)"
   },
   "g_5702": {
    "seg": 21939,
@@ -21773,6 +22043,46 @@
    "seg": 21939,
    "off": 23214,
    "grounding": "S02 driver (3126) : extrn\t_g_5AAE:byte (DGROUP operand of genuine-assembly display driver; worker ovlA)"
+  },
+  "g_5FF0": {
+   "seg": 21939,
+   "off": 24560,
+   "grounding": "module 1B73 at 1B73:0343: cmp word ptr [0x5ff0], bx (worker rootF)"
+  },
+  "g_5FF2": {
+   "seg": 21939,
+   "off": 24562,
+   "grounding": "module 1B73 at 1B73:032A: mov ax, word ptr [0x5ff2] (worker rootF)"
+  },
+  "g_5FF4": {
+   "seg": 21939,
+   "off": 24564,
+   "grounding": "module 1B73 at 1B73:0378: mov bx, word ptr [0x5ff4] (worker rootF)"
+  },
+  "g_5FF6": {
+   "seg": 21939,
+   "off": 24566,
+   "grounding": "module 1B73 at 1B73:033C: mov bx, word ptr [0x5ff6] (worker rootF)"
+  },
+  "g_5FF8": {
+   "seg": 21939,
+   "off": 24568,
+   "grounding": "module 1B73 at 1B73:0AB3: mov byte ptr [0x5ff8], al (worker rootF)"
+  },
+  "g_5FF9": {
+   "seg": 21939,
+   "off": 24569,
+   "grounding": "module 1B73 at 1B73:04A0: test byte ptr [0x5ff9], ah (worker rootF)"
+  },
+  "g_5FFA": {
+   "seg": 21939,
+   "off": 24570,
+   "grounding": "module 1B73 at 1B73:04A6: call word ptr [0x5ffa] (worker rootF)"
+  },
+  "g_5FFE": {
+   "seg": 21939,
+   "off": 24574,
+   "grounding": "module 1B73 at 1B73:0353: mov si, word ptr [0x5ffe] (worker rootF)"
   },
   "g_62E0": {
    "seg": 21939,
@@ -22009,6 +22319,21 @@
    "off": 37208,
    "grounding": "f_1D8E_070E: lcall [9158] (far code pointer, BSS)"
   },
+  "g_9160": {
+   "seg": 21939,
+   "off": 37216,
+   "grounding": "module 1B73 at 1B73:0ED1: lcall [0x9160] (worker rootF)"
+  },
+  "g_9164": {
+   "seg": 21939,
+   "off": 37220,
+   "grounding": "module 1B73 at 1B73:0EB8: lcall [0x9164] (worker rootF)"
+  },
+  "g_9168": {
+   "seg": 21939,
+   "off": 37224,
+   "grounding": "module 1B73 at 1B73:0154: lcall [0x9168] (worker rootF)"
+  },
   "g_916C": {
    "seg": 21939,
    "off": 37228,
@@ -22033,6 +22358,11 @@
    "seg": 21939,
    "off": 37244,
    "grounding": "f_0250_0ADB: lcall [917C](x,y,(tile-300h)<<5) far function pointer (tile blitter, mode 1)"
+  },
+  "g_9184": {
+   "seg": 21939,
+   "off": 37252,
+   "grounding": "module 1B73 at 1B73:017B: lcall [0x9184] (worker rootF)"
   },
   "g_9188": {
    "seg": 21939,

@@ -2,9 +2,30 @@
 ; Overlay section S00, code frame 3126, linear 31260-31AD3.
 
 _DATA	segment word public 'DATA'
-	extrn	_g_1F9E:byte
-	extrn	_g_2002:byte
 	extrn	_g_3DB2:byte
+; S00A private data, first part (DGROUP:1F9E-2065): the two 100-byte dither tables the
+; mini-map builders index (o00_3126_0000/0137/026A/03A9/04D8/06A3).  Not placed yet: DGROUP
+; 2066-2117 (EGA palette, dword table, the dispatch table at 2098 whose 25 entries reach S00B procs
+; as externals, its far pointer at 20FC, bit masks, palette map); its split between this object
+; and S00B is open (build/workers/data/s27_map.md).
+_g_1F9E	db	0, 0, 0, 0, 0FFh, 0, 0, 0, 0, 0FFh, 0, 0
+	db	0FFh, 0FFh, 0, 0, 0, 0, 0FFh, 0, 0FFh, 0, 0FFh, 0
+	db	0, 0FFh, 0FFh, 0, 0FFh, 0FFh, 0FFh, 0, 0, 0, 0, 0FFh
+	db	0FFh, 0, 0, 0FFh, 0, 0FFh, 0, 0FFh, 0FFh, 0FFh, 0, 0FFh
+	db	0, 0, 0FFh, 0FFh, 0FFh, 0, 0FFh, 0FFh, 0, 0FFh, 0FFh, 0FFh
+	db	0FFh, 0FFh, 0FFh, 0FFh, 0FFh, 055h, 0, 055h, 0FFh, 055h, 0, 055h
+	db	0FFh, 0, 0, 0, 055h, 0AAh, 0, 0, 0, 0FFh, 0, 0
+	db	0AAh, 0FFh, 0, 0, 0FFh, 0FFh, 0, 0, 055h, 055h, 0AAh, 0
+	db	0, 0, 0FFh, 0
+_g_2002	db	0FFh, 0FFh, 0FFh, 0FFh, 0, 0FFh, 0FFh, 0FFh, 0, 0, 0FFh, 0FFh
+	db	0, 0, 0FFh, 0, 0FFh, 0, 0FFh, 0FFh, 0FFh, 0, 0FFh, 0
+	db	0FFh, 0, 0, 0, 0FFh, 0FFh, 0, 0FFh, 0, 0FFh, 0, 0FFh
+	db	0, 0FFh, 0, 0, 0, 0FFh, 0FFh, 0, 0, 0FFh, 0FFh, 0
+	db	0FFh, 0FFh, 0FFh, 0FFh, 0FFh, 0FFh, 0FFh, 0, 0, 0, 0, 0FFh
+	db	0, 0, 0, 0, 0, 0FFh, 0FFh, 0AAh, 0, 0FFh, 0FFh, 0AAh
+	db	0, 0FFh, 0FFh, 0FFh, 0, 055h, 0FFh, 0FFh, 0, 0, 0FFh, 0FFh
+	db	0, 0, 0FFh, 055h, 0, 0, 0FFh, 0, 0AAh, 0, 0FFh, 0AAh
+	db	0FFh, 0, 0FFh, 0FFh
 _DATA	ends
 DGROUP	group	_DATA
 
