@@ -42,6 +42,17 @@ is its own module `UNIT:SEG@OFF` (OFF = its first byte in the frame, hex), sourc
 `src/<unit>/m<SEG>_<OFF>.<ext>`, `"origin"` in the manifest. The gate requires every claim
 of such a module to be linked at exactly that origin, and the objects of one frame own
 disjoint offset ranges (`promote.py --module S00:31AD@2AB4 ... --extent 34584:35A65`).
+A new `@OFF` key needs `--origin-evidence "..."` (odd-end `00` fill, relocation frames, a
+relocation-order break), recorded in the manifest.
+
+**Extent boundaries.** A complete TU's extent lies inside its object's frame range and every
+function-table row of the frame whose offset lies in `[origin, next object's origin)` lies
+inside the extent; the function right after the extent end may belong to the same frame only
+when a later object (`@OFF` module) owns it. An extent can therefore not be trimmed at either
+end, and a function released with `--release` stays listed by validate.py until a module
+re-owns it. The claims must also be one object placement (claim offset in the compiled
+segment = claim linear address - extent start), so a permutation of individually exact
+functions is refused.
 
 **Code-segment data.** Buffers and tables assembled into a code segment (S03:3126's
 320-byte line buffer, S03:3258's xlat tables) are claimed explicitly with

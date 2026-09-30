@@ -17,6 +17,7 @@
     }
    },
    "lang": "asm",
+   "source_origin": "asm-transcribed: build/workers/ovlA/d2a.py@82fd68401b90aba50d1c43aee3550792510f13e697c45118e373c31aaf2401fb",
    "asm_evidence": "ASM-2 (build/workers/ovlA/probe/ASM-2-saved-register-order.json, recorded): MSC 6.00/6.00A/6.00AX always save DI before SI (push di; push si / pop si; pop di), also around inline _asm; every framed proc of this module saves push si; push di; push ds and restores in reverse order, and uses frameless lodsb/xlat loops with DS reloaded from the argument. MASM 5.10 reproduces all bytes and fixups.",
    "extent": {
     "start": 201312,
@@ -115,6 +116,7 @@
    ],
    "placements": {},
    "lang": "asm",
+   "source_origin": "asm-transcribed: build/workers/ovlA/d2a.py@82fd68401b90aba50d1c43aee3550792510f13e697c45118e373c31aaf2401fb",
    "asm_evidence": "ASM-2 (build/workers/ovlA/probe/ASM-2-saved-register-order.json, recorded): MSC 6.00/6.00A/6.00AX always save DI before SI, also around inline _asm; the framed procs here save push si; push di. The object programs the EGA/VGA sequencer and graphics controller with out dx sequences, selects raster operations by self-modifying code (mov cs:[label],ax copies instruction templates over loop instructions) and calls retn subroutines inside far procs; MSC generates none of these. MASM 5.10 reproduces all bytes and fixups.",
    "extent": {
     "start": 203476,
@@ -621,6 +623,8 @@
    "placements": {},
    "lang": "asm",
    "origin": 10932,
+   "origin_evidence": "LINK fill 00 at 34583 after the odd end of object 1 (31AD4-34582); the second object starts word-aligned at 34584 (docs/tu-evidence.md 'Several objects in one frame')",
+   "source_origin": "asm-transcribed: build/workers/ovlA/d2a.py@82fd68401b90aba50d1c43aee3550792510f13e697c45118e373c31aaf2401fb",
    "asm_evidence": "ASM-2 (build/workers/ovlA/probe/ASM-2-saved-register-order.json, recorded): MSC 6.00/6.00A/6.00AX always save DI before SI, also around inline _asm; the framed procs here save push si; push di. The object programs the EGA/VGA sequencer and graphics controller with out dx sequences, selects raster operations by self-modifying code (mov cs:[label],ax copies instruction templates over loop instructions) and calls retn subroutines inside far procs; MSC generates none of these. MASM 5.10 reproduces all bytes and fixups.",
    "extent": {
     "start": 214404,
@@ -708,6 +712,7 @@
    ],
    "placements": {},
    "lang": "asm",
+   "source_origin": "asm-transcribed: build/workers/ovlA/d2a.py@82fd68401b90aba50d1c43aee3550792510f13e697c45118e373c31aaf2401fb",
    "asm_evidence": "ASM-2 (build/workers/ovlA/probe/ASM-2-saved-register-order.json, recorded): MSC 6.00/6.00A/6.00AX always save DI before SI (push di; push si / pop si; pop di), also around inline _asm; every framed proc of this module saves push si; push di; push ds and restores pop ds; pop di; pop si. The ror/rol twin loops after the first retf of 0007 and 0177 are unreachable code, which MSC never emits. MASM 5.10 reproduces all bytes and fixups.",
    "extent": {
     "start": 219750,
@@ -790,6 +795,7 @@
     }
    },
    "lang": "asm",
+   "source_origin": "asm-transcribed: build/workers/ovlA/d2a.py@82fd68401b90aba50d1c43aee3550792510f13e697c45118e373c31aaf2401fb",
    "asm_evidence": "ASM-2 (build/workers/ovlA/probe/ASM-2-saved-register-order.json, recorded): MSC 6.00/6.00A/6.00AX always save DI before SI, also around inline _asm; the framed procs here save push si; push di. The module selects raster operations by self-modifying code (mov cs:[label],ax copies instruction templates over loop instructions), calls retn subroutines inside far procs and programs the 6845 CRTC with out dx loops; MSC generates none of these. MASM 5.10 reproduces all bytes and fixups.",
    "extent": {
     "start": 201312,
@@ -1251,6 +1257,7 @@
    ],
    "placements": {},
    "lang": "asm",
+   "source_origin": "asm-transcribed: build/workers/ovlA/d2a.py@82fd68401b90aba50d1c43aee3550792510f13e697c45118e373c31aaf2401fb",
    "asm_evidence": "ASM-2 (build/workers/ovlA/probe/ASM-2-saved-register-order.json, recorded): MSC 6.00/6.00A/6.00AX always save DI before SI (push di; push si / pop si; pop di), also around inline _asm; every framed proc of this module saves push si; push di (push ds) and restores in reverse order. MASM 5.10 reproduces all bytes and fixups.",
    "extent": {
     "start": 207082,
@@ -1316,6 +1323,7 @@
    ],
    "placements": {},
    "lang": "asm",
+   "source_origin": "asm-transcribed: build/workers/ovlA/d2a.py@82fd68401b90aba50d1c43aee3550792510f13e697c45118e373c31aaf2401fb",
    "asm_evidence": "ASM-2 (build/workers/ovlA/probe/ASM-2-saved-register-order.json, recorded): MSC 6.00/6.00A/6.00AX always save DI before SI (push di; push si / pop si; pop di), also around inline _asm; every framed proc of this module saves push si; push di (push ds) and restores in reverse order. MASM 5.10 reproduces all bytes and fixups.",
    "extent": {
     "start": 207710,
@@ -1398,6 +1406,7 @@
     }
    },
    "lang": "asm",
+   "source_origin": "asm-transcribed: build/workers/ovlA/d2a.py@82fd68401b90aba50d1c43aee3550792510f13e697c45118e373c31aaf2401fb",
    "asm_evidence": "ASM-2 (build/workers/ovlA/probe/ASM-2-saved-register-order.json, recorded): MSC 6.00/6.00A/6.00AX always save DI before SI, also around inline _asm; the framed procs here save push si; push di. The module selects raster operations by self-modifying code (mov cs:[label],ax copies instruction templates such as xor al,ah over loop instructions) and calls retn subroutines inside far procs, which MSC does not generate. MASM 5.10 reproduces all bytes and fixups.",
    "extent": {
     "start": 201312,
@@ -1722,6 +1731,7 @@
     }
    },
    "lang": "asm",
+   "source_origin": "asm-transcribed: build/workers/ovlA/d2a.py@82fd68401b90aba50d1c43aee3550792510f13e697c45118e373c31aaf2401fb",
    "asm_evidence": "ASM-2 (build/workers/ovlA/probe/ASM-2-saved-register-order.json, recorded): MSC 6.00/6.00A/6.00AX always save DI before SI, also around inline _asm; the framed procs here save push si; push di. The module keeps a 320-byte line buffer at offset 0 of its code segment (cs:[di]), selects raster operations by self-modifying code (mov cs:[label],ax copies instruction templates over loop instructions) and calls retn subroutines inside far procs; MSC generates none of these. MASM 5.10 reproduces all bytes and fixups.",
    "extent": {
     "start": 201312,
@@ -2112,6 +2122,7 @@
     }
    },
    "lang": "asm",
+   "source_origin": "asm-transcribed: build/workers/ovlA/d2a.py@82fd68401b90aba50d1c43aee3550792510f13e697c45118e373c31aaf2401fb",
    "asm_evidence": "ASM-2 (build/workers/ovlA/probe/ASM-2-saved-register-order.json, recorded): MSC 6.00/6.00A/6.00AX always save DI before SI (push di; push si / pop si; pop di), also around inline _asm; every framed proc of this module saves push si; push di (push ds) and restores in reverse order. MASM 5.10 reproduces all bytes and fixups. Both procs use ss: xlat on DGROUP tables while DS holds the source, which MSC does not generate.",
    "extent": {
     "start": 206136,
@@ -2155,6 +2166,7 @@
    ],
    "placements": {},
    "lang": "asm",
+   "source_origin": "asm-transcribed: build/workers/ovlA/d2a.py@82fd68401b90aba50d1c43aee3550792510f13e697c45118e373c31aaf2401fb",
    "asm_evidence": "ASM-2 (build/workers/ovlA/probe/ASM-2-saved-register-order.json, recorded): MSC 6.00/6.00A/6.00AX always save DI before SI, also around inline _asm; the framed procs here save push si; push di. The module keeps four 256-byte colour translation tables at the start of its code segment and translates pixels with xlat cs:[bx] / cs:[bx+table]; MSC does not place data in code segments. MASM 5.10 reproduces all bytes and fixups (tables generated by rept macros, checked byte-exact).",
    "extent": {
     "start": 206220,
@@ -2377,6 +2389,7 @@
     }
    },
    "lang": "c",
+   "source_origin": "hand-written C",
    "extent": {
     "start": 221008,
     "end": 222772
@@ -2437,7 +2450,8 @@
      "target_sha256": "8e67dbc62c8e43935e23cf85f937325fe0b2583963e66651d6cffa372a4a63e7",
      "kind": "C",
      "provenance": "EXACT_NATURAL",
-     "reloc_order": "GROUPED"
+     "reloc_order": "GROUPED",
+     "layout_inferred": "extern declarations of AntMenu placed and unnamed parameters of SetMyLife/myBeginSound reproduce the symbol-table state (register choices; source comment)"
     },
     {
      "name": "DoWarnSetB",
@@ -2470,7 +2484,8 @@
      "target_sha256": "86a6244c2e98eddba5017b1803907cb76ca5fd657515fdeeada49235ae602a57",
      "kind": "C",
      "provenance": "EXACT_NATURAL",
-     "reloc_order": "GROUPED"
+     "reloc_order": "GROUPED",
+     "layout_inferred": "declaration layout before MagnifyMenu decides its register choices (source comment)"
     }
    ],
    "scaffold": [],
@@ -3854,6 +3869,10 @@
     }
    },
    "lang": "c",
+   "source_origin": "hand-written C",
+   "layout_inferred": [
+    "font choices written as six if/else statements instead of ?: arguments (same bytes, two /Zi line entries each) so the 52-entry LINNUM flushes give the record breaks the relocation order needs (DrawCastePopUp, PictureDialog, SpiderDialog; source header, worker resF)"
+   ],
    "source": "src/S14/m384C.c",
    "source_sha256": "78d36165e991c594cb0583426f9d0564bfdd4672e3aeae74c54361834902e15a",
    "claims": [
@@ -3943,7 +3962,8 @@
      "target_sha256": "f7919472a55d8c7b2efedf08a2547822289a046e6c62b58297d01c51add859f5",
      "kind": "C",
      "provenance": "EXACT_NATURAL",
-     "reloc_order": "GROUPED"
+     "reloc_order": "GROUPED",
+     "layout_inferred": "unnamed forward declaration of g_9134 (-5 identifiers before DrawCastePopUp): named vs unnamed prototype parameters chosen by identifier-count windows (source header)"
     },
     {
      "name": "PictureDialog",
@@ -3954,7 +3974,8 @@
      "target_sha256": "7bd28b7bb84557d0dd9595f2b6c2b0682958bd5042c97d334b709db376c37341",
      "kind": "C",
      "provenance": "EXACT_NATURAL",
-     "reloc_order": "GROUPED"
+     "reloc_order": "GROUPED",
+     "layout_inferred": "unnamed forward declaration of PictureDialog (-4 identifiers before it); which prototypes carry parameter names is a byte-equivalent unknown (source header)"
     },
     {
      "name": "SpiderDialog",
@@ -4892,6 +4913,7 @@
     }
    },
    "lang": "asm",
+   "source_origin": "asm-transcribed: manual - symbolic transcription of the disassembly by a worker (no generator)",
    "asm_evidence": "ASM-1/ASM-2: the module is R. Wilton's VIDEO_ID adapter probe (DCC and EGA tables identical to the book): near procs dispatched through a DGROUP table of (flag, near address) triples with lodsb/lodsw/call ax, carry-flag results (stc/jc), register arguments (DX port, AX device word), in/out/loop/loope/xlat/repne scasb, frameless far entries saving push si; push di (MSC 6.00/6.00A/6.00AX always push di first, probe ASM-2 in build/workers/ovlA/probe), a code-segment string with a far pointer to it. MASM 5.10 /Mx reproduces all 472 bytes and the relocation. The 48-byte DGROUP table (35D2-3601) is referenced as extrn: the gate cannot bind near code offsets in a _DATA placement (full version build/workers/misc/m39C7_S21_withdata.asm)",
    "extent": {
     "start": 236656,
@@ -5038,6 +5060,7 @@
     }
    },
    "lang": "c",
+   "source_origin": "hand-written C",
    "extent": {
     "start": 236656,
     "end": 244698
@@ -5120,7 +5143,8 @@
      "target_sha256": "41fc84aaa00a13d801ac23020f59a0b0542f7f50ef81f114141cd8f1d57fd898",
      "kind": "C",
      "provenance": "EXACT_NATURAL",
-     "reloc_order": "GROUPED"
+     "reloc_order": "GROUPED",
+     "layout_inferred": "one-line ifs and while loops place the line-number record breaks (every 52 entries) where the original has them (source header)"
     },
     {
      "name": "SpecialXfer",
@@ -5186,7 +5210,8 @@
      "target_sha256": "93efbc233fb01f60c781c0a89a04df28e02191098c2e564a2d487c6c529f9f85",
      "kind": "C",
      "provenance": "EXACT_NATURAL",
-     "reloc_order": "GROUPED"
+     "reloc_order": "GROUPED",
+     "layout_inferred": "the fd_50F6_048A declaration after 0AE8 decides the compare order in YellowCommandKey (source header)"
     },
     {
      "name": "YellowCommand",
@@ -5212,7 +5237,7 @@
     }
    ],
    "scaffold": [],
-   "object_sha256": "754a8535822c85cd85580d555d9c20b717ff976711b900531b42baa26ce92a15"
+   "object_sha256": "2aed031ef53a3efb32f720324c989845141d7dd126d85be61276cef1830620be"
   },
   "S22:3BBD": {
    "unit": "S22",
@@ -5238,6 +5263,7 @@
     }
    },
    "lang": "c",
+   "source_origin": "hand-written C",
    "extent": {
     "start": 244698,
     "end": 249366
@@ -5254,7 +5280,8 @@
      "target_sha256": "b36b3d7123ee257d5e959421ee129df3a7a0a651cf26e123d33a7e74d1636961",
      "kind": "C",
      "provenance": "EXACT_NATURAL",
-     "reloc_order": "GROUPED"
+     "reloc_order": "GROUPED",
+     "layout_inferred": "ExpAddAnt prototype placed ahead of processExp fixes its compare order (identifier count; source header)"
     },
     {
      "name": "DoTool",
@@ -5375,7 +5402,8 @@
      "target_sha256": "0dd698a4d9c684ded42904274397e59a9b5000ea9000c241fcd02cb4e9b30918",
      "kind": "C",
      "provenance": "EXACT_NATURAL",
-     "reloc_order": "GROUPED"
+     "reloc_order": "GROUPED",
+     "layout_inferred": "IsItWall prototype placement fixes its compares; one-line '} else v++;' puts the 52-line-entry record break inside ConnectAll (source header)"
     },
     {
      "name": "ConnectAll",
@@ -5500,7 +5528,7 @@
     }
    ],
    "scaffold": [],
-   "object_sha256": "64c9d7bde0d89246bbcf03dfde9ca868188c237c9019ad2a60bffb438eb19735"
+   "object_sha256": "dfaf1e53b2f5c2597c0d17331c14013beb469a13b639d58c4753d0f78fd28c59"
   },
   "S23:39C7": {
    "unit": "S23",
@@ -5726,7 +5754,7 @@
     "/Os",
     "/Oe",
     "/Og",
-    "/Zd"
+    "/Zi"
    ],
    "placements": {
     "CONST": {
@@ -5736,8 +5764,9 @@
     }
    },
    "lang": "c",
+   "source_origin": "hand-written C",
    "source": "src/S25/m39C7.c",
-   "source_sha256": "bcf831c7028511e5b0dac698e3bec2c04594d3ebdd7b41a526ede5eedc2485f6",
+   "source_sha256": "96853b2f3463877b7a660109afb8fe72a0f8494889d5b3d6bb3f827092d7675c",
    "claims": [
     {
      "name": "o25_39C7_0000",
@@ -5825,7 +5854,7 @@
      "target_sha256": "98c550b0ceebb918291e2225dce1d5027e9a0c566342a1884caaa88a25966782",
      "kind": "C",
      "provenance": "EXACT_NATURAL",
-     "reloc_order": "EXACT"
+     "reloc_order": "GROUPED"
     },
     {
      "name": "o25_39C7_0746",
@@ -5891,7 +5920,7 @@
      "target_sha256": "83214a620402ce22fd0112fcfd269e36372cd9576834114f4e7e74e42a4f9628",
      "kind": "C",
      "provenance": "EXACT_NATURAL",
-     "reloc_order": "EXACT"
+     "reloc_order": "GROUPED"
     },
     {
      "name": "o25_39C7_0F30",
@@ -5913,7 +5942,7 @@
      "target_sha256": "0f8ae7003052ebe6c5396da63f2e3cdff0d0d78e15c86f7cc9d66abaa6b01398",
      "kind": "C",
      "provenance": "EXACT_NATURAL",
-     "reloc_order": "GROUPED"
+     "reloc_order": "EXACT"
     },
     {
      "name": "o25_39C7_0FE7",
@@ -5924,7 +5953,7 @@
      "target_sha256": "a3fa4f52179cc41826780193f58d71d35852de03f8f0667e0f490b3ed37b7588",
      "kind": "C",
      "provenance": "EXACT_NATURAL",
-     "reloc_order": "GROUPED"
+     "reloc_order": "EXACT"
     },
     {
      "name": "o25_39C7_105B",
@@ -5935,7 +5964,7 @@
      "target_sha256": "68c57be27dc32d892a0885d750c09f118b892033278db1277ad62c28f9ca206b",
      "kind": "C",
      "provenance": "EXACT_NATURAL",
-     "reloc_order": "GROUPED"
+     "reloc_order": "EXACT"
     },
     {
      "name": "o25_39C7_13EF",
@@ -6013,16 +6042,26 @@
      "kind": "C",
      "provenance": "EXACT_NATURAL",
      "reloc_order": "GROUPED"
+    },
+    {
+     "name": "o25_39C7_0CBD",
+     "unit": "S25",
+     "seg": 14791,
+     "off": 3261,
+     "size": 242,
+     "target_sha256": "c9939fb0fd9f7ed7c6a09a4fbe5dd600e346e2e8eee8b4829c9ef0fb905068b1",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL",
+     "reloc_order": "GROUPED"
     }
    ],
    "scaffold": [
     "DoDigInB",
     "DoNestingB",
-    "o25_39C7_0CBD",
     "o25_39C7_0DAF",
     "o25_39C7_1C81"
    ],
-   "object_sha256": "9be727bced978609b984e78636564b6d59d184016d77f1113c8f250a1f98f057"
+   "object_sha256": "39c3840f56c4a754ede6240cbf18224cab8d5dab77ac1f4a42b88fdf2130d42a"
   },
   "S25:3BA4": {
    "unit": "S25",
@@ -6883,8 +6922,12 @@
     }
    },
    "lang": "c",
+   "extent": {
+    "start": 2978,
+    "end": 3561
+   },
    "source": "src/root/m00BA.c",
-   "source_sha256": "47e1976b21cc95498b3b1f5356e6752bf6e718fc2f50f1a94c235d53a29123c0",
+   "source_sha256": "d72629d827e2bccd7557566b725f652862d2b1199f40390361179c61cc9ff5dc",
    "claims": [
     {
      "name": "f_00BA_01B6",
@@ -6929,10 +6972,21 @@
      "kind": "C",
      "provenance": "EXACT_NATURAL",
      "reloc_order": "GROUPED"
+    },
+    {
+     "name": "f_00BA_0002",
+     "unit": "root",
+     "seg": 186,
+     "off": 2,
+     "size": 436,
+     "target_sha256": "dd08ecc3a11fabf4219405d266891a4ad05426b2af1cc9ea278741fbe69b74bb",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL",
+     "reloc_order": "GROUPED"
     }
    ],
    "scaffold": [],
-   "object_sha256": "fde1d35771dbd781f82e6bb3d99217f9c3600398725255695174e64a7f249ced"
+   "object_sha256": "9dfc0215f7e98b558576689ec2488b4d4c2f98f9cf4fe65d4cc8e0d2903389b7"
   },
   "root:00DE": {
    "unit": "root",
@@ -7972,8 +8026,9 @@
     }
    },
    "lang": "c",
+   "source_origin": "hand-written C",
    "source": "src/root/m0250.c",
-   "source_sha256": "3f3e7080f926ab1b08fdd74bf3c0e0b1ffff5523e19046cb13940c31a1ef061e",
+   "source_sha256": "cdfaec1e0a00a039911e7028bb65e890fa1daa1e31732b36d70c4cf24a32261e",
    "claims": [
     {
      "name": "f_0250_0CF6",
@@ -8458,10 +8513,32 @@
      "kind": "C",
      "provenance": "EXACT_NATURAL",
      "reloc_order": "GROUPED"
+    },
+    {
+     "name": "DrawEditGraphs",
+     "unit": "root",
+     "seg": 592,
+     "off": 5507,
+     "size": 378,
+     "target_sha256": "f4a94eee2a12bffd619d0f4380bf78af31c4d235911faeb31931716cfe92de48",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL",
+     "reloc_order": "GROUPED"
+    },
+    {
+     "name": "f_0250_13A6",
+     "unit": "root",
+     "seg": 592,
+     "off": 5030,
+     "size": 477,
+     "target_sha256": "1d5843d5861d9448a3b4d6d4d790844be0b8f27d8d68ea534a362397744da785",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL",
+     "reloc_order": "GROUPED"
     }
    ],
    "scaffold": [],
-   "object_sha256": "c4444df346c156a7ce70949ef14394459efa36a595742f4dcc3231f5da03e87b"
+   "object_sha256": "aaa1f5e3ef08106cc28c3adf22467b855ddae4b03ba85bc12a35f5b55eaef461"
   },
   "root:075B": {
    "unit": "root",
@@ -11208,6 +11285,10 @@
     }
    },
    "lang": "c",
+   "source_origin": "hand-written C",
+   "layout_inferred": [
+    "one-line 'if (...) return ...;' statements chosen for the LINNUM flush positions (records.py FORBID intervals, e.g. GetForageDir (0B72,0C0E])"
+   ],
    "extent": {
     "start": 79922,
     "end": 84326
@@ -11459,7 +11540,7 @@
     }
    ],
    "scaffold": [],
-   "object_sha256": "4609fd7342ba858443d18a3d0d4b4160d5b8051b61f916eb147aaa04abde93e1"
+   "object_sha256": "6c478937f2ec7716ed23349020ca10167ed99e9a98faa69e2814020a8c58842f"
   },
   "root:1496": {
    "unit": "root",
@@ -12051,6 +12132,7 @@
     }
    },
    "lang": "asm",
+   "source_origin": "asm-transcribed: build/workers/misc/d2a.py@08db93914b424ae8f748f04861bfae30d35928505444a83add39eb5b0c5a8b57 (version at migration)",
    "asm_evidence": "ASM-1/ASM-2: 'add bp,6' argument frames, DS loaded with DGROUP inside the procs (mov ax,DGROUP; mov ds,ax), push es; push ds; push si; push di saves (MSC 6.00/6.00A/6.00AX always push di first, probe ASM-2), no stack check, pop bp without mov sp,bp (ASM-1). MASM 5.10 /Mx reproduces all 456 bytes",
    "extent": {
     "start": 92560,
@@ -12133,6 +12215,7 @@
     }
    },
    "lang": "asm",
+   "source_origin": "asm-transcribed: build/workers/misc/d2a.py@08db93914b424ae8f748f04861bfae30d35928505444a83add39eb5b0c5a8b57 (version at migration)",
    "asm_evidence": "ASM-1/ASM-2: 'add bp,6' argument frames, near plot/init procs dispatched through DGROUP tables of near code offsets (call word ptr [bx+table], call word ptr [1F96]) with pushf/cld/popf around the call and register arguments (DI,SI,BX,DX,AX), a shared Cohen-Sutherland clip subroutine returning in the carry flag, retn procs, push es; push ds; push si; push di saves (MSC 6.00/6.00A/6.00AX always push di first, probe ASM-2) and pop bp without mov sp,bp (ASM-1). MASM 5.10 /Mx reproduces all 1642 bytes; the dispatch tables (DGROUP 1E00, 1F98) are referenced as extrn",
    "extent": {
     "start": 93016,
@@ -12911,6 +12994,7 @@
    ],
    "placements": {},
    "lang": "asm",
+   "source_origin": "asm-transcribed: build/workers/misc/d2a.py@08db93914b424ae8f748f04861bfae30d35928505444a83add39eb5b0c5a8b57 (version at migration)",
    "asm_evidence": "ASM-1/ASM-2: 386 instructions in 16-bit code (xor edx,edx; lodsd; add edx,eax; shr edx,10h) and 186 'shr cx,2' (MSC /G0 never emits them), 'and ax,ax'/'and dx,dx' zero tests (MSC emits or r,r), rep movsw with manual segment stepping and rep stosw/repe scasw, push ds; push di; push si and push si; push ds saves (MSC 6.00/6.00A/6.00AX always push di first, probe ASM-2), no stack check with a BP frame and pop bp without mov sp,bp (ASM-1). MASM 5.10 /Mx reproduces all 187 bytes",
    "extent": {
     "start": 103638,
@@ -12965,6 +13049,7 @@
    ],
    "placements": {},
    "lang": "asm",
+   "source_origin": "asm-transcribed: manual - symbolic transcription of the disassembly by a worker (no generator)",
    "asm_evidence": "docs/codegen-rules.md ASM-1: every C spelling of the word swap compiles to byte loads, inline _asm always adds mov sp,bp; original has neither",
    "extent": {
     "start": 103826,
@@ -13014,6 +13099,7 @@
     }
    },
    "lang": "asm",
+   "source_origin": "asm-transcribed: manual - from worker rootF's copy of the d2a generator (not kept), then hand-finished",
    "asm_evidence": "ASM-1 applied (worker rootF, build/workers/rootF/p/x195A.c, MSC 6.00AX /AL /Os /Gs /Zi): the same bodies as C functions with inline _asm always get push bp/mov bp,sp ... mov sp,bp/pop bp, a frame even for the register-only wrappers, and an extra push si/pop si around _asm that uses SI; the original has 12 frameless far procs (000C, 0018, 001D, 0035, 00E9, 019C, 0206..021A, 023A, 0260, 02B7), framed procs ending pop bp/retf without mov sp,bp, the device name EMMXXXX0 in the code segment opened with DS=CS, and int 3 + jmp far Punt followed by an unreachable retf; MASM 5.10 reproduces code, code data and _DATA exactly",
    "extent": {
     "start": 103852,
@@ -13686,6 +13772,10 @@
     }
    },
    "lang": "c",
+   "source_origin": "hand-written C",
+   "layout_inferred": [
+    "one-line 'if (db == -1) Punt(\"Out of handles.\");' (one fewer /Zi line entry) moves the flush from 0287 to 02AB, clearing DosPunt's forbidden interval (0283,02A9] (worker zifix)"
+   ],
    "extent": {
     "start": 107142,
     "end": 107829
@@ -13761,7 +13851,7 @@
     }
    ],
    "scaffold": [],
-   "object_sha256": "dcb96788dd771fe6ed6d87354fe8cfdd55d88ef4f6bae421642a533e4bd3c9ec"
+   "object_sha256": "99915ceabd1cff1fcb47662873b8e749bbec3fad9a8ae456c7d5412e2d512e82"
   },
   "root:1A53": {
    "unit": "root",
@@ -14104,6 +14194,7 @@
     }
    },
    "lang": "asm",
+   "source_origin": "asm-transcribed: build/workers/misc/d2a.py@08db93914b424ae8f748f04861bfae30d35928505444a83add39eb5b0c5a8b57 (version at migration)",
    "asm_evidence": "ASM-1: LZSS decoder written as a resumable state machine (State word dispatched by a dec/je chain), DGROUP variables addressed with ss: while DS points at the input or the far ring buffer, xchg bx,cx ring copying, 'and ax,ax'/'and ax,ax; jns' tests and 'mov ax,0' (MSC emits or r,r and sub r,r), a far call to its own segment, 'pop ax' to drop an argument, BP frames without stack check ending pop bp without mov sp,bp (MSC always emits mov sp,bp with inline asm, ASM-1). MASM 5.10 /Mx reproduces all 557 bytes and the 288-byte _DATA (state, 256-byte read buffer, far pointers)",
    "extent": {
     "start": 110680,
@@ -14298,6 +14389,7 @@
     }
    },
    "lang": "asm",
+   "source_origin": "asm-transcribed: build/workers/misc/d2a.py@08db93914b424ae8f748f04861bfae30d35928505444a83add39eb5b0c5a8b57 (version at migration)",
    "asm_evidence": "ASM-1/ASM-2: frameless register procs (xchg bx,ax/stosw loop, rep movsw with DS loaded from ES, a bare retf entry), int 10h wrappers with BIOS data at 0:449h, a 40-byte fold table in the code segment read with cs:[bx+table], 'and al,al' tests, pop ax used to discard a pushed word, push si; push di and push ds; push di saves (MSC 6.00/6.00A/6.00AX always push di first, probe ASM-2), BP frames without stack check ending pop bp without mov sp,bp (ASM-1). MASM 5.10 /Mx reproduces all 586 bytes",
    "extent": {
     "start": 111852,
@@ -14517,6 +14609,7 @@
     }
    },
    "lang": "asm",
+   "source_origin": "asm-transcribed: manual - from worker rootF's copy of the d2a generator (not kept), then hand-finished",
    "asm_evidence": "ASM-1 and ASM-2 (build/workers/ovlA/probe/ASM-2-saved-register-order.json, recorded): MSC 6.00/6.00A/6.00AX save DI before SI and always emit mov sp,bp before pop bp in inline-asm bodies (rootF p/x195A.c); this module's framed procs save push si; push di (032E, 0AC3, 0B00, 0B5B, 0BC5, 0C42) and end pop bp/retf without mov sp,bp; it keeps variables and an iret stub in its code segment and installs the stub as the INT 33h vector by writing the IVT, has INT 08h/09h/15h handlers that switch to DGROUP stacks and chain with jmp dword ptr cs:[old], reads port 60h, returns flags from near procs (stc/clc), enters far procs with push cs/call near, contains dead code after unconditional jumps (081D, 089A) and an entry label on an alignment NOP (0D4B). MASM 5.10 reproduces code and code-segment data exactly",
    "extent": {
     "start": 112438,
@@ -16119,6 +16212,7 @@
     }
    },
    "lang": "asm",
+   "source_origin": "asm-transcribed: build/workers/misc/d2a.py@08db93914b424ae8f748f04861bfae30d35928505444a83add39eb5b0c5a8b57 (version at migration)",
    "asm_evidence": "ASM-1/ASM-2: frameless far procs with register results (xor ax,ax; retf; BIOS data via ES=0), cli/sti around interrupt-vector swaps, xchg with memory, int 16h, a far call to its own segment and 'push cs; lea bx,label' far code pointer for atexit, framed procs saving push ds; push si; push di (MSC 6.00/6.00A/6.00AX always push di first, probe ASM-2) and ending pop bp without mov sp,bp (MSC always emits it with inline asm, ASM-1). MASM 5.10 /Mx reproduces all 226 bytes; the 81-form 'and word ptr es:[417h],not NumLockState' is MASM's pass-1 size for a forward-referenced EQU",
    "extent": {
     "start": 128390,
@@ -16239,6 +16333,7 @@
    ],
    "placements": {},
    "lang": "asm",
+   "source_origin": "asm-transcribed: build/workers/misc/d2a.py@08db93914b424ae8f748f04861bfae30d35928505444a83add39eb5b0c5a8b57 (version at migration)",
    "asm_evidence": "ASM-1/ASM-2: third-party library object ('Copyright (C)1990, Daniel Goldman' in the code segment), two 4-byte entry stubs (mov dl,1/0; jmp) sharing one body, register-only procs with DOS int 21h calls returning flags through cmc/adc, lodsb/rol/loop checksum, a proc that saves all registers including ES/DS, framed procs saving push ds; push si; push di (MSC 6.00/6.00A/6.00AX always push di first, probe ASM-2) and ending pop bp without mov sp,bp (ASM-1). MASM 5.10 /Mx reproduces all 419 bytes",
    "extent": {
     "start": 128616,
@@ -16518,6 +16613,7 @@
     }
    },
    "lang": "asm",
+   "source_origin": "asm-transcribed: build/workers/misc/d2a.py@08db93914b424ae8f748f04861bfae30d35928505444a83add39eb5b0c5a8b57 (version at migration)",
    "asm_evidence": "ASM-1/ASM-2: push si; push di saves (MSC 6.00/6.00A/6.00AX always push di first, probe ASM-2), BP frame without stack check ending pop bp without mov sp,bp at four exits (ASM-1), 'je L; jne L2' pair, DS switched to the font segment with lds and restored from ES, lodsb/stosb/movsb/loop glyph copying and push bx/pop bx around an indexed fold-table load. MASM 5.10 /Mx reproduces all 343 bytes",
    "extent": {
     "start": 130000,
@@ -17321,6 +17417,7 @@
     }
    },
    "lang": "c",
+   "source_origin": "hand-written C",
    "source": "src/root/m20E8.c",
    "source_sha256": "1914ab3756a0699159d3eb74ac90562b2d4eee3bb1456c9c0cbc507788d723bd",
    "claims": [
@@ -17344,7 +17441,8 @@
      "target_sha256": "598801dd0dd936edfda05a37ae8448fb90b3b1ff89dc936161166cc3c22ee137",
      "kind": "C",
      "provenance": "EXACT_NATURAL",
-     "reloc_order": "GROUPED"
+     "reloc_order": "GROUPED",
+     "layout_inferred": "one-line 'for (...) win_offsets[i] = g_635C;' loop (line-entry count / record break)"
     },
     {
      "name": "win_Swap",
@@ -17504,7 +17602,7 @@
    "scaffold": [
     "f_20E8_0903"
    ],
-   "object_sha256": "3ca9a17d71e7f5998dce197002e9f32c9629fb7f4109af1d5198c9b1e7ee5c11"
+   "object_sha256": "4f14767b31112e3c0dd68c4134f051fc6ddc963af7eec05d1317ee974babae23"
   },
   "root:218D": {
    "unit": "root",
@@ -17709,6 +17807,7 @@
     }
    },
    "lang": "c",
+   "source_origin": "hand-written C",
    "extent": {
     "start": 139170,
     "end": 142329
@@ -17923,11 +18022,12 @@
      "target_sha256": "692ebca55559dd6cd2a0342af75ab2e5b212b6f2f28159a9f9b59fb5ee16510e",
      "kind": "C",
      "provenance": "EXACT_NATURAL",
-     "reloc_order": "GROUPED"
+     "reloc_order": "GROUPED",
+     "layout_inferred": "goto label 'hooks' placed for the sprintf-group record break between 0A35 and 0A55 (source comment: 52-entry line flush)"
     }
    ],
    "scaffold": [],
-   "object_sha256": "f7aa1fb932bdab70590ec3dd24951f277f0aa62a1017b1c04ff7c104dbdacb7e"
+   "object_sha256": "afe0bfebdb158c22c2c9ff4d9411506975bfbb89efe0127767afd1d30b2522b6"
   },
   "root:22BF": {
    "unit": "root",
@@ -17954,6 +18054,7 @@
     }
    },
    "lang": "c",
+   "source_origin": "hand-written C",
    "extent": {
     "start": 142330,
     "end": 146148
@@ -18399,7 +18500,8 @@
      "target_sha256": "3dfe1b901eb7d3b83bb71c6949c5be51374578fc479f8a7e8ee50b7abcab901d",
      "kind": "C",
      "provenance": "EXACT_NATURAL",
-     "reloc_order": "GROUPED"
+     "reloc_order": "GROUPED",
+     "layout_inferred": "label inferred from the relocation order (ZI-2): the original has a record break at 0DDD (source comment)"
     },
     {
      "name": "win_DrawVBar",
@@ -18480,7 +18582,7 @@
     }
    ],
    "scaffold": [],
-   "object_sha256": "8bb72c085b49500031d529fcb21d5ab557f9bee3d39b18c2f7aa59b67b21c8ac"
+   "object_sha256": "50707334d0908aa29f54b29c1bd9b0c37ecc6ae7e05a4ce33105263988c4cecc"
   },
   "root:23AE": {
    "unit": "root",
@@ -18930,6 +19032,7 @@
    ],
    "placements": {},
    "lang": "asm",
+   "source_origin": "asm-transcribed: build/workers/misc/d2a.py@08db93914b424ae8f748f04861bfae30d35928505444a83add39eb5b0c5a8b57 (version at migration)",
    "asm_evidence": "ASM-1/ASM-2: a 4-byte translation table in the code segment read with cs:[bx+table], std/repne scasb/cld, an unrolled rol/stosb pixel expander, a bare 'int 3' far entry, framed procs that save push si; push di (MSC 6.00/6.00A/6.00AX always push di first, probe ASM-2) and end pop bp without mov sp,bp (ASM-1). MASM 5.10 /Mx reproduces all 178 bytes",
    "extent": {
     "start": 151460,
@@ -19441,6 +19544,7 @@
     }
    },
    "lang": "asm",
+   "source_origin": "asm-transcribed: build/workers/misc/d2a.py@08db93914b424ae8f748f04861bfae30d35928505444a83add39eb5b0c5a8b57 (version at migration)",
    "asm_evidence": "ASM-1/ASM-2: 'add bp,6' argument frames with BP then reused as a row counter, a 9-byte mask table in the code segment read by 'xlat cs:', lodsw/xchg al,ah/shl/shr with xchg ch,cl, rep stosw with 'adc di,-1' for the odd byte, push es; push ds; push si; push di saves (MSC 6.00/6.00A/6.00AX always push di first, probe ASM-2), pop bp without mov sp,bp (ASM-1). MASM 5.10 /Mx reproduces all 289 bytes",
    "extent": {
     "start": 156934,
@@ -20106,6 +20210,7 @@
    ],
    "placements": {},
    "lang": "asm",
+   "source_origin": "asm-transcribed: manual - symbolic transcription of the disassembly by a worker (no generator)",
    "asm_evidence": "ASM-1 applied (worker snd, build/workers/snd/p/x283E.c): the same bodies as MSC 6.00AX /AL /Os /Gs functions with inline _asm always get push bp/mov bp,sp ... mov sp,bp/pop bp; the original has a frameless register-called far proc (f_283E_0020, AH/AL/DX in, loop delays), 'add bp,6' argument frames ending pop bp/retf without mov sp,bp, and far calls to its own register proc; MASM 5.10 reproduces the segment exactly",
    "extent": {
     "start": 164842,
@@ -20403,6 +20508,7 @@
     }
    },
    "lang": "asm",
+   "source_origin": "asm-transcribed: manual - from the disassembly by worker snd, edited by hand",
    "asm_evidence": "worker snd, genuine assembly (sound driver library): INT 8 handlers ending in iret mix four sample channels through xlat volume tables and output through a near vector; the code segment holds its own data (old vector, saved SS:SP, private stack pointer, re-entry counter); C entry points address arguments through 'add bp,6'. MSC 6.00 produces none of this (rule ASM-1).",
    "extent": {
     "start": 166848,
@@ -20965,6 +21071,7 @@
     }
    },
    "lang": "asm",
+   "source_origin": "asm-transcribed: manual - symbolic transcription of the disassembly by a worker (no generator)",
    "asm_evidence": "ASM-1 applied (worker snd, build/workers/snd/p/x29BF.c, x283E.c): MSC 6.00AX /AL /Os /Gs gives every function with an inline-asm body a push bp/mov bp,sp ... mov sp,bp/pop bp frame, even near helpers; the original has frameless near procs with register arguments and carry-flag results (stc/clc, jb/jae after call), loop counters, 'add bp,6' far entries ending pop bp/retf, and an unreferenced helper (0048); MASM 5.10 reproduces code and _DATA exactly",
    "extent": {
     "start": 171000,
@@ -21283,6 +21390,7 @@
    ],
    "placements": {},
    "lang": "asm",
+   "source_origin": "asm-transcribed: manual - symbolic transcription of the disassembly by a worker (no generator)",
    "asm_evidence": "worker snd build/workers/snd/p/x2CFB.c: MSC 6.00AX (/AL /Ox /Gs) compiles a forwarding function to lcall+retf (or a BP frame), never a bare 'jmp far' (no tail calls); each original entry is exactly one 5-byte EA far jump (ten entries, no returns); MASM 5.10 reproduces the segment",
    "extent": {
     "start": 184242,

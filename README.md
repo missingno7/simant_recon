@@ -63,8 +63,16 @@ original; the relocation set equals the oracle's; private `CONST`/`_DATA` placem
 reproduce their bytes and data relocations; `_BSS` placements lie in DGROUP's BSS.
 Data-only translation units (`data:FRAME`, `src/data/`) own far data placements and no claims;
 they count as accepted data, never as recovered code (docs/tu-evidence.md).
+A complete TU (`--extent`) is one object placement: every claim sits at its extent offset, the
+whole code segment bound at the extent start equals the original, and every function-table
+row of the object's frame range lies inside the extent (a later object of the frame is its
+own `UNIT:SEG@OFF` module with recorded origin evidence). Sources pass a content lint (no
+`_emit`, no `db`/`dw`/`dd` inside procs, no `org`/asm `include`, symbolic branch targets,
+pinned headers only); placements have one owner and respect SEGDEF alignment.
 Relocation *order* is recorded separately until the RTLink model is known.
-Similarity scores are diagnostics only.
+Similarity scores are diagnostics only. `docs/progress.md` keeps the proof levels apart
+(complete-TU vs partial-module bytes, steered, layout-inferred, transcribed ASM, unmarked
+opaque data, oracle-derived runtime words, manifest hash).
 
 ## Proof levels (kept distinct)
 

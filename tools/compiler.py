@@ -11,7 +11,13 @@ profile directory without re-running the toolchain probes.
 
 Include policy: ``#include "x.h"`` resolves only to tracked ``include/`` files
 and ``<x.h>`` only to the profile's INCLUDE directory; both are inlined here
-before CL runs so the compiler never searches the host.
+before CL runs so the compiler never searches the host.  Every file reached must be
+pinned in the profile's ``include_files`` ({key: sha256}; key = the path relative to
+the INCLUDE directory, lower case with ``/``, or ``repo:include/<name>`` for a tracked
+header), and names with ``..``, a drive or a leading slash are refused.
+
+DOSBox-X profiles mount a scratch copy that holds only the profile's pinned files
+(build/cc/pinned/), never the whole tool directory.
 """
 from __future__ import annotations
 
@@ -59,8 +65,27 @@ def verify_profile(name: str) -> dict:
     for rel, sha in prof["files"].items():
         if _sha(d / rel) != sha:
             raise CompileError(f"{name}: hash mismatch for {d / rel}")
+    inc = include_root(prof)
+    for key, sha in (prof.get("include_files") or {}).items():
+        path = ROOT / key[5:] if key.startswith("repo:") else (inc / key if inc else None)
+        if path is None or not path.is_file() or _sha(path) != sha:
+            raise CompileError(f"{name}: pinned include {key} missing or changed")
     _verified.add(name)
     return prof
+
+
+def include_root(prof: dict) -> Path | None:
+    if prof.get("include_directory"):
+        return Path(prof["include_directory"])
+    if prof.get("include"):
+        return Path(prof["directory"]) / prof["include"]
+    return None
+
+
+def _include_name_ok(name: str) -> bool:
+    parts = name.replace("\\", "/").split("/")
+    return (bool(name) and ":" not in name and not name.startswith(("/", "\\"))
+            and ".." not in parts and all(parts))
 
 
 INCLUDE_RE = re.compile(r'^\s*#\s*include\s*([<"])([^>"]+)[>"]', re.M)
@@ -68,20 +93,29 @@ INCLUDE_RE = re.compile(r'^\s*#\s*include\s*([<"])([^>"]+)[>"]', re.M)
 
 def expand_includes(text: str, prof: dict, seen: set | None = None) -> str:
     seen = set() if seen is None else seen
+    pins = prof.get("include_files") or {}
 
     def repl(m):
-        kind, name = m.group(1), m.group(2)
+        kind, name = m.group(1), m.group(2).strip()
+        if not _include_name_ok(name):
+            raise CompileError(f"include name refused (path traversal/absolute): {name}")
+        rel = name.replace("\\", "/")
         if kind == '"':
-            path = ROOT / "include" / name
+            path = ROOT / "include" / rel
+            pin = "repo:include/" + rel
         else:
-            path = Path(prof.get("include_directory") or Path(prof["directory"]) / prof.get("include", "INCLUDE")) / name
+            path = (include_root(prof) or Path(prof["directory"]) / "INCLUDE") / rel
+            pin = rel.lower()
         if not path.exists():
             raise CompileError(f"include not found under policy: {name}")
+        body = path.read_bytes()
+        if pins.get(pin) != hashlib.sha256(body).hexdigest():
+            raise CompileError(f"include {name} is not pinned in the profile's include_files (key {pin!r})")
         key = str(path).lower()
         if key in seen:
             return ""
         seen.add(key)
-        return expand_includes(path.read_text(encoding="latin1"), prof, seen)
+        return expand_includes(body.decode("latin1"), prof, seen)
 
     return INCLUDE_RE.sub(repl, text)
 
@@ -141,10 +175,43 @@ def check_flags(flags: list[str]) -> None:
         prev = f
 
 
+_pinned_ok: set[str] = set()
+
+
+def pinned_tree(prof: dict) -> Path:
+    """A scratch directory holding exactly the profile's pinned files (same relative paths),
+    hash-checked once per process; DOSBox mounts it instead of the whole tool directory, so
+    the compiler can only reach pinned files (DOS paths are unchanged: D:\BIN\...)."""
+    import hashlib as _h
+    files = prof["files"]
+    tag = _h.sha256(json.dumps(sorted(files.items())).encode()).hexdigest()[:16]
+    dest = WORK / "pinned" / tag
+    if str(dest) in _pinned_ok:
+        return dest
+    if not dest.exists():
+        dest.parent.mkdir(parents=True, exist_ok=True)
+        tmp = Path(tempfile.mkdtemp(prefix="tmp", dir=dest.parent))
+        for rel in files:
+            (tmp / rel).parent.mkdir(parents=True, exist_ok=True)
+            shutil.copyfile(Path(prof["directory"]) / rel, tmp / rel)
+        try:
+            os.rename(tmp, dest)
+        except OSError:                      # another process created it first
+            shutil.rmtree(tmp, ignore_errors=True)
+    present = {p.relative_to(dest).as_posix().lower() for p in dest.rglob("*") if p.is_file()}
+    if present != {r.lower() for r in files}:
+        raise CompileError(f"pinned tree {dest} holds unpinned or lacks pinned files")
+    for rel, sha in files.items():
+        if _sha(dest / rel) != sha:
+            raise CompileError(f"pinned tree {dest}: hash mismatch for {rel}")
+    _pinned_ok.add(str(dest))
+    return dest
+
+
 def _compile_dosbox(prof: dict, runner: dict, work: Path, basename: str, flags: list[str],
                     keep: bool, timeout: int) -> Result:
-    """Run CL inside a headless DOSBox-X: the tool tree is mounted read-only as D:, the
-    work directory as E:.  The passes therefore always see the same DOS paths."""
+    """Run CL inside a headless DOSBox-X: the pinned files of the tool tree (pinned_tree) are
+    mounted read-only as D:, the work directory as E:.  The passes therefore always see the same DOS paths."""
     bs = "\\"  # DOS path separator
     bat = ["@echo off", f"{prof['executable']} /c {' '.join(flags)} {basename}.C > CL.LOG", "exit"]
     (work / "RUN.BAT").write_bytes(("\r\n".join(bat) + "\r\n").encode("ascii"))
@@ -152,7 +219,7 @@ def _compile_dosbox(prof: dict, runner: dict, work: Path, basename: str, flags: 
     for sec, kv in runner["conf"].items():
         conf.append(f"[{sec}]")
         conf += [f"{k}={v}" for k, v in kv.items()]
-    conf += ["[autoexec]", f'mount d "{prof["directory"]}" -ro', f'mount e "{work.resolve()}"', "e:",
+    conf += ["[autoexec]", f'mount d "{pinned_tree(prof)}" -ro', f'mount e "{work.resolve()}"', "e:",
              f"set PATH=D:{bs}{prof.get('bin', '.')}", f"set TMP=E:{bs}", f"set TEMP=E:{bs}", "call RUN.BAT", "exit"]
     (work / "dosbox.conf").write_text("\n".join(conf) + "\n")
     env = os.environ.copy()

@@ -1,6 +1,6 @@
 """Compile many source variants of one module in parallel and report per-claim exactness.
 
-    python tools/variants.py SOURCE [SOURCE ...] [--module KEY] [options]
+    python tools/variants.py SOURCE|DIR [SOURCE|DIR ...] [--list FILE] [--module KEY] [options]
     python tools/variants.py --base BASE.c --spec VARIANTS.py|.json [--module KEY] [options]
 
 options: [--profile P] [--flags /AL /Os ...] [--placement SEG=SSSS:OOOO[:SIZE] ...]
@@ -33,6 +33,14 @@ Examples (Git Bash: ``export MSYS_NO_PATHCONV=1``):
     python tools/variants.py build/workers/me/a.c build/workers/me/b.c --module root:218D
     python tools/variants.py --base src/root/m218D.c --spec build/workers/me/v.py --show f_218D_0656
     python tools/variants.py --base draft.c --spec v.json --module "S25;3BA4" --jobs 8
+
+Many variants: a DIR argument stands for every ``*.c``/``*.asm`` file in it (sorted), and
+``--list FILE`` reads one variant path per line (blank lines and ``#`` comments ignored;
+relative paths resolve against the list file's directory), so thousands of variants do not
+overflow the Git Bash argument list:
+
+    python tools/variants.py build/workers/me/vars/ --module root:218D
+    python tools/variants.py --list build/workers/me/vars.txt --module root:218D --quiet
 
 Warnings such as C4203 in a variant's compiler log are reported per variant.
 """
@@ -237,10 +245,29 @@ def out_dir_for(tool: str, out: Path | None) -> Path:
     return d
 
 
+def expand_sources(sources: list[Path], listfile: Path | None) -> list[Path]:
+    """Variant files from arguments (a directory = its *.c/*.asm files, sorted) and a list file."""
+    out = []
+    for p in sources:
+        if p.is_dir():
+            out += sorted(f for f in p.iterdir() if f.is_file() and f.suffix.lower() in (".c", ".asm"))
+        else:
+            out.append(p)
+    if listfile is not None:
+        for line in listfile.read_text(encoding="latin1").splitlines():
+            line = line.strip()
+            if line and not line.startswith("#"):
+                q = Path(line)
+                out.append(q if q.is_absolute() else listfile.parent / q)
+    return out
+
+
 def main(argv=None) -> int:
     ap = argparse.ArgumentParser(description=__doc__.split("\n\n")[0],
                                  formatter_class=argparse.RawDescriptionHelpFormatter)
-    ap.add_argument("sources", nargs="*", type=Path, help="complete variant files (one variant each)")
+    ap.add_argument("sources", nargs="*", type=Path,
+                    help="complete variant files (one variant each), or directories of them")
+    ap.add_argument("--list", type=Path, help="file with one variant path per line")
     ap.add_argument("--base", type=Path, help="base source for --spec")
     ap.add_argument("--spec", type=Path, help="VARIANTS.py (V = {...}) or .json")
     ap.add_argument("--module")
@@ -255,6 +282,7 @@ def main(argv=None) -> int:
     ap.add_argument("--out", type=Path)
     ap.add_argument("--quiet", action="store_true")
     a = ap.parse_args(argv)
+    a.sources = expand_sources(a.sources, a.list)
     if bool(a.base) != bool(a.spec) or (not a.base and not a.sources):
         ap.error("give SOURCE files, or --base with --spec")
     variants = []

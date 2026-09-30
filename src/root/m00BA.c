@@ -30,8 +30,9 @@ void far f_00BA_0211(void);
 extern void far f_22BF_0E83(int, int);
 extern void far InitMapFunctions(void);
 extern int far fd_50F6_10D0;
-extern long far lseek(int fh, long pos, int origin);
-extern int far read(int fh, void far *buf, unsigned int count);
+/* read() and lseek() are called without prototypes (no <io.h>): with the MSC prototype
+   (unsigned count) the 0x100 size argument of f_171C_1A9E is pushed as mov ax,100h; cwd
+   instead of the original mov cx,100h; sub dx,dx (PROTO-1 family, worker resG). */
 extern Handle far f_171C_1A9E(long size, int flags, char far *name);
 extern char far * far f_171C_1B84(Handle h);
 extern Handle far f_171C_1BBA(Handle h);
@@ -62,7 +63,7 @@ void far f_00BA_0002(void)
     lseek(fd_50F6_10D0, 0L, 0);
     read(fd_50F6_10D0, &hdr, sizeof hdr);
     lseek(fd_50F6_10D0, hdr.headers + sizeof hdr, 0);
-    h = f_171C_1A9E(0x100L, 1, "winheaders");
+    h = f_171C_1A9E(0x100UL, 1, "winheaders");
     n = read(fd_50F6_10D0, f_171C_1B84(h), 0x100);
     read(fd_50F6_10D0, f_171C_1B84(h), 1);
     f_171C_1BBA(h);
@@ -83,8 +84,8 @@ void far f_00BA_01B6(void)
 extern void far win_CasteControlChanged(void);
 extern void far win_ModeControlChanged(void);
 extern void far f_0250_0E15(void);
-extern void far win_MapChanged(void);
-extern void far win_YardClosed(void);
+extern void far f_00F8_00A4(void);
+extern void far f_00F8_0002(void);
 
 void far f_00BA_01C3(int item)
 {
@@ -99,8 +100,8 @@ void far f_00BA_01C3(int item)
     win_CasteControlChanged();
     win_ModeControlChanged();
     f_0250_0E15();
-    win_MapChanged();
-    win_YardClosed();
+    f_00F8_00A4();
+    f_00F8_0002();
 }
 
 extern void far win_ModeControlClosed(void);
@@ -108,7 +109,7 @@ extern void far win_CasteControlClosed(void);
 
 void far f_00BA_0211(void)
 {
-    win_YardClosed();
+    f_00F8_0002();
     win_ModeControlClosed();
     win_CasteControlClosed();
 }
@@ -118,6 +119,6 @@ void far f_00BA_0228(void)
     win_CasteControlClosed();
     win_ModeControlClosed();
     f_0250_0E15();
-    win_MapChanged();
-    win_YardClosed();
+    f_00F8_00A4();
+    f_00F8_0002();
 }

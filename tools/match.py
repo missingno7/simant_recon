@@ -53,35 +53,56 @@ def symbols() -> dict:
     return out
 
 
+def pascal_name(obj_name: str) -> str | None:
+    """The registered C name whose pascal spelling (upper-cased, no underscore) is
+    ``obj_name``.  Only symbols registered with ``"convention": "pascal"`` bind this way
+    (tools/symbols.py set-convention); a pascal declaration of a cdecl function does not."""
+    if obj_name[:1] in ("_", "@"):
+        return None
+    hits = [n[1:] for n, r in symbols().items()
+            if n[:1] == "_" and r.get("convention") == "pascal" and n[1:].upper() == obj_name.upper()]
+    return hits[0] if len(hits) == 1 else None
+
+
+def c_name(obj_name: str) -> str:
+    """C-level name of an OBJ public: ``_x`` (cdecl) and ``@x`` (_fastcall) -> ``x``; an
+    undecorated upper-case name -> the registered pascal function it spells, else itself.
+    The one normalisation used by public_in, verify_extent and the in-place draft listing."""
+    if obj_name[:1] in ("_", "@"):
+        return obj_name[1:]
+    return pascal_name(obj_name) or obj_name
+
+
 def obj_name_lookup(name: str) -> dict | None:
     """Resolve an OBJ-level name (C names carry a leading underscore; MSC 6
-    _fastcall names carry a leading '@')."""
+    _fastcall names carry a leading '@'; pascal names are upper-cased without underscore
+    and bind only to symbols registered with convention pascal)."""
     if name.startswith("@"):
         name = "_" + name[1:]
     rec = symbols().get(name)
     if rec is None and not name.startswith("_"):
-        # pascal convention: no underscore, upper-cased; accept only a unique case-insensitive match
-        hits = [r for n, r in symbols().items() if n[1:].upper() == name.upper()]
-        if len(hits) == 1:
-            rec = hits[0]
+        pn = pascal_name(name)
+        if pn is not None:
+            rec = symbols()["_" + pn]
     return rec
 
 
 def public_in(obj, cname: str):
     """(decorated name, public record) of C function ``cname`` in ``obj``."""
-    for p in obj.publics + getattr(obj, "local_publics", []):
+    pubs = obj.publics + getattr(obj, "local_publics", [])
+    for p in pubs:
         if p["name"] in ("_" + cname, "@" + cname):
             return p["name"], p
-    # pascal convention: upper-cased, no underscore (e.g. F_00DE_000A)
-    for p in obj.publics + getattr(obj, "local_publics", []):
-        if p["name"] == cname.upper() and not cname.upper().startswith("_"):
+    # pascal convention: upper-cased, no underscore (e.g. F_00DE_000A), registered as pascal
+    for p in pubs:
+        if p["name"][:1] not in ("_", "@") and c_name(p["name"]) == cname:
             return p["name"], p
     # a draft may still spell the function by an older registered name (alias of the same
     # address) after a supervisor rename; accept exactly those spellings
     import symbols as symmod
     code = symmod.load()["code"]
     olds = {n for n, r in code.items() if r.get("alias_of") == cname}
-    for p in obj.publics + getattr(obj, "local_publics", []):
+    for p in pubs:
         if p["name"][1:] in olds and p["name"][0] in "_@":
             return p["name"], p
     return None, None

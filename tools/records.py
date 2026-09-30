@@ -2,7 +2,7 @@
 
     python tools/records.py MODULE_OR_SOURCE [SOURCE] [--module KEY] [--profile P] [--flags ...]
                             [--placement SEG=SSSS:OOOO[:SIZE] ...] [--func NAME ...] [--all] [--obj]
-                            [--records] [--lines] [--sim [FUNC]] [--plan] [--range R] [--period 52]
+                            [--records] [--lines] [--all-lines] [--sim [FUNC]] [--plan] [--range R] [--period 52]
                             [--json OUT]
 
 MODULE_OR_SOURCE is a module key (``root:1383``; ``root;1383`` from Git Bash is fine), which
@@ -32,6 +32,8 @@ Output:
     the interval in object offsets, e.g. ``(0B72,0C0E] obj (0B70,0C0C]`` for root:1383, whose
     first function starts at frame offset 0002);
   * ``--lines``: line entries around each flush with their source lines;
+  * ``--all-lines``: every line entry (counted index, frame and object offset, LINNUM record,
+    source line and text, ``*`` = the entry that starts a flush record); also in ``--json``;
   * ``--sim [FUNC]``: violations when d line entries (d = -R..R) are added before FUNC (default:
     file start).  Line entries do not change code; the flush every PERIOD (52) counted entries
     moves the flush record breaks (rules ZI-1/ZI-2);
@@ -321,6 +323,7 @@ def main(argv=None) -> int:
     ap.add_argument("--records", action="store_true", help="list LEDATA/LINNUM records")
     ap.add_argument("--obj", action="store_true", help="also print constraint intervals in object offsets")
     ap.add_argument("--lines", action="store_true", help="line entries around each flush")
+    ap.add_argument("--all-lines", action="store_true", help="every line entry with its source line")
     ap.add_argument("--sim", nargs="?", const="", default=None, metavar="FUNC",
                     help="violations for d = -R..R line entries added before FUNC (default: file start)")
     ap.add_argument("--plan", action="store_true", help="per-flush windows and a greedy add/remove plan")
@@ -378,7 +381,7 @@ def main(argv=None) -> int:
             print(f"  {c.text(an.fm if a.obj else None):<90} {st}")
     print(f"violations: {len(viol)} ({sum(c.scope == 'within' for c in viol)} within, "
           f"{sum(c.scope == 'cross' for c in viol)} cross)")
-    src = line_text(an) if (a.lines or a.plan) else []
+    src = line_text(an) if (a.lines or a.plan or a.all_lines) else []
 
     def where(fr):
         if fr is None:
@@ -392,10 +395,20 @@ def main(argv=None) -> int:
                 if e.idx - 2 <= f.idx <= e.idx + 1:
                     t = src[f.line - 1].strip()[:70] if 0 < f.line <= len(src) else ""
                     print(f"   {'*' if f.idx == e.idx else ' '}#{f.idx:<4} {f.frame or 0:04X} L{f.line}: {t}")
+    if a.all_lines:
+        flush_idx = {e.idx for e in an.flushes}
+        print(f"line entries ({len(an.entries)}):")
+        for f in an.entries:
+            t = src[f.line - 1].strip()[:70] if 0 < f.line <= len(src) else ""
+            fr = f"{f.frame:04X}" if f.frame is not None else "----"
+            print(f"  {'*' if f.idx in flush_idx else ' '}#{f.idx:<4} frame {fr} obj {f.obj:04X} rec {f.rec:<3} "
+                  f"{(an.func_at_frame(f.frame) if f.frame is not None else None) or '?':<24} L{f.line}: {t}")
     out = {"module": ctx.key, "violations": [c.text(an.fm) for c in viol],
            "constraints": [dict(kind=c.kind, lo=c.lo, hi=c.hi, key=c.key, fa=c.fa, fb=c.fb, approx=c.approx,
                                 scope=c.scope, checkable=an.checkable(c), violated=c in viol) for c in cons],
            "breaks": [dict(frame=rc.frame, obj=rc.obj, len=rc.length, cause=rc.cause) for rc in an.recs]}
+    if a.all_lines:
+        out["entries"] = [dict(idx=f.idx, line=f.line, obj=f.obj, frame=f.frame, rec=f.rec) for f in an.entries]
     if a.sim is not None:
         p0 = an.insert_point(a.sim or None)
         print(f"simulation: d line entries added before counted entry {p0} ({a.sim or 'file start'}):")

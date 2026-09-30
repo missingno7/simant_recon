@@ -267,7 +267,7 @@ class FrameMap:
         by_name = {r["name"]: r for r in ctx.functions}
         pubs = []
         for p in obj.publics + getattr(obj, "local_publics", []):
-            n = p["name"][1:] if p["name"][:1] in "_@" else p["name"]
+            n = match.c_name(p["name"])
             if n in by_name and (segment is None or p["segment"] == segment):
                 pubs.append((p["offset"], n, p["segment"]))
         if segment is None and pubs:

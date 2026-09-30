@@ -145,19 +145,290 @@ def sha(b: bytes) -> str:
     return hashlib.sha256(b).hexdigest()
 
 
-def verify_module(text: str, module: dict, claims: list[dict], collect: dict | None = None) -> dict:
+# ---- source-content lint (rule SRC-1; audit F-3) ------------------------------------------
+# Refused: opcode bytes instead of instructions (C `_emit`, asm db/dw/dd inside a proc), asm
+# `org` and `include`, numeric (non-symbolic) call/jump targets, `#include` names that leave the
+# include directories.  Flagged, not refused: data initialisers of >= OPAQUE_MIN bytes of numeric
+# literals without an ``OPAQUE-DATA:`` comment (tables transcribed as bytes instead of recovered
+# as structured data); validate.py counts their bytes as data_bytes_opaque_unmarked.
+OPAQUE_MIN = 64
+OPAQUE_MARK = "OPAQUE-DATA:"
+_C_NUM_RE = re.compile(r"(?<![\w.])(?:0[xX][0-9A-Fa-f]+|\d+)[uUlL]*(?![\w.])")
+_C_ESC_RE = re.compile(r"\\(?:x[0-9A-Fa-f]+|[0-7]{1,3})")
+_ASM_NUM_RE = re.compile(r"^[-+]?(?:[0-9][0-9A-Fa-f]*[hH]|\d+[dD]?|[01]+[bB]|[0-7]+[oOqQ])$")
+_ASM_DATA = {"db": 1, "dw": 2, "dd": 4, "df": 6, "dq": 8, "dt": 10}
+_ASM_NONCODE = {"assume", "public", "extrn", "label", "even", "align", "comment", "title", "subttl", "page"}
+_ASM_BRANCH_RE = re.compile(r"^(?:call|jmp|j[a-z]{1,4}|loop[a-z]*)$", re.I)
+
+
+def _strip_c(text: str) -> tuple[str, list[tuple[int, int]]]:
+    """(text with comments blanked and string/char literal contents replaced by 'x', comment
+    spans).  Newlines and offsets are preserved."""
+    out, comments, i, n = list(text), [], 0, len(text)
+    while i < n:
+        ch = text[i]
+        if text.startswith("/*", i):
+            j = text.find("*/", i + 2)
+            j = n if j < 0 else j + 2
+            comments.append((i, j))
+            for k in range(i, j):
+                if out[k] != "\n":
+                    out[k] = " "
+            i = j
+        elif text.startswith("//", i):
+            j = text.find("\n", i)
+            j = n if j < 0 else j
+            comments.append((i, j))
+            for k in range(i, j):
+                out[k] = " "
+            i = j
+        elif ch in "\"'":
+            j = i + 1
+            while j < n and text[j] != ch and text[j] != "\n":
+                j += 2 if text[j] == "\\" else 1
+            for k in range(i + 1, min(j, n)):
+                out[k] = "x"
+            i = j + 1
+        else:
+            i += 1
+    return "".join(out), comments
+
+
+def _string_spans(text: str, stripped: str, a: int, b: int):
+    """(start, end) of the string literals that begin in [a, b) (found in the stripped text,
+    whose literal delimiters are kept)."""
+    i = a
+    while i < b:
+        if stripped[i] == '"':
+            j = stripped.find('"', i + 1)
+            j = b if j < 0 else j
+            yield i, j
+            i = j + 1
+        else:
+            i += 1
+
+
+def _c_opaque(text: str, stripped: str, comments) -> list[dict]:
+    """Brace initialisers (and escaped string initialisers) with >= OPAQUE_MIN bytes of
+    numeric literals; ``marked`` when a comment between the previous declaration and the
+    initialiser end carries OPAQUE-DATA:."""
+    found = []
+
+    def marked(k: int, j: int) -> bool:
+        return any(OPAQUE_MARK in text[a:b] for a, b in comments if k < a < j)
+
+    def escapes(a: int, b: int) -> int:
+        return sum(len(_C_ESC_RE.findall(text[s:e])) for s, e in _string_spans(text, stripped, a, b))
+
+    for m in re.finditer(r"=\s*\{", stripped):
+        depth, j = 0, m.end() - 1
+        while j < len(stripped):
+            if stripped[j] == "{":
+                depth += 1
+            elif stripped[j] == "}":
+                depth -= 1
+                if depth == 0:
+                    break
+            j += 1
+        k = max(stripped.rfind(";", 0, m.start()), stripped.rfind("}", 0, m.start()),
+                stripped.rfind("{", 0, m.start()))
+        decl = stripped[k + 1:m.start()]
+        width = 4 if re.search(r"\blong\b", decl) else 1 if re.search(r"\bchar\b", decl) and "*" not in decl else 2
+        nbytes = len(_C_NUM_RE.findall(stripped[m.end():j])) * width + escapes(m.end(), j)
+        if nbytes >= OPAQUE_MIN:
+            found.append({"line": text.count("\n", 0, m.start()) + 1, "bytes": nbytes, "marked": marked(k, j),
+                          "what": " ".join(decl.split())[-60:]})
+    for m in re.finditer(r"=\s*\"", stripped):          # char s[] = "\x12\x34..." byte dumps
+        end = stripped.find(";", m.end())
+        end = len(stripped) if end < 0 else end
+        nbytes = escapes(m.end() - 1, end)
+        if nbytes >= OPAQUE_MIN:
+            k = max(stripped.rfind(";", 0, m.start()), stripped.rfind("}", 0, m.start()))
+            found.append({"line": text.count("\n", 0, m.start()) + 1, "bytes": nbytes, "marked": marked(k, end),
+                          "what": " ".join(stripped[k + 1:m.start()].split())[-60:]})
+    return found
+
+
+def _asm_code(line: str) -> tuple[str, str]:
+    """(code, comment) of one MASM line (';' outside quotes starts the comment)."""
+    q = None
+    for i, ch in enumerate(line):
+        if q:
+            if ch == q:
+                q = None
+        elif ch in "'\"":
+            q = ch
+        elif ch == ";":
+            return line[:i], line[i:]
+    return line, ""
+
+
+def _split_operands(s: str) -> list[str]:
+    out, cur, q = [], "", None
+    for ch in s:
+        if q:
+            cur += ch
+            if ch == q:
+                q = None
+        elif ch in "'\"":
+            q = ch
+            cur += ch
+        elif ch == ",":
+            out.append(cur.strip())
+            cur = ""
+        else:
+            cur += ch
+    if cur.strip():
+        out.append(cur.strip())
+    return out
+
+
+def _lint_asm(text: str) -> tuple[list[str], list[dict]]:
+    refused, opaque = [], []
+    in_proc, comment_delim, body = None, None, 0
+    run = None                      # current data run outside procs: {line, bytes, marked, what}
+    pending_mark = False            # OPAQUE-DATA: in the comment block right above
+
+    def close():
+        nonlocal run
+        if run and run["bytes"] >= OPAQUE_MIN:
+            opaque.append(run)
+        run = None
+
+    for no, raw in enumerate(text.split("\n"), 1):
+        if comment_delim:
+            if comment_delim in raw:
+                comment_delim = None
+            continue
+        code, com = _asm_code(raw)
+        toks = code.split()
+        if toks and toks[0].lower() == "comment" and len(toks) > 1:
+            comment_delim = toks[1][0]
+            if code.count(comment_delim) >= 2:
+                comment_delim = None
+            continue
+        if not toks:                # comment-only or blank line
+            if OPAQUE_MARK in com:
+                pending_mark = True
+                if run:
+                    run["marked"] = True
+            continue
+        low = [t.lower() for t in toks]
+        if len(low) > 1 and low[1] == "proc":
+            in_proc, body = toks[0], 0
+        elif len(low) > 1 and low[1] == "endp":
+            if in_proc and not body:
+                # an empty proc followed by data would give its public the data bytes (a capsule)
+                refused.append(f"line {no}: proc {in_proc} has no instructions")
+            in_proc = None
+        elif in_proc and not (len(toks) == 1 and toks[0].endswith(":")) and low[0] not in _ASM_NONCODE:
+            body += 1
+        if low[0] == "org" or (len(low) > 1 and low[1] == "org"):
+            refused.append(f"line {no}: 'org' is not admitted in module sources")
+        if low[0] in ("include", "includelib"):
+            refused.append(f"line {no}: asm '{low[0]}' is not admitted (sources are self-contained)")
+        di = 0 if low[0] in _ASM_DATA else 1 if len(low) > 1 and low[1] in _ASM_DATA else None
+        if di is not None:
+            if in_proc:
+                refused.append(f"line {no}: '{low[di]}' inside proc {in_proc} (opcode bytes instead of instructions)")
+            rest = code.split(None, di + 1)
+            items = _split_operands(rest[di + 1]) if len(rest) > di + 1 else []
+            nbytes = sum(_ASM_DATA[low[di]] for it in items if _ASM_NUM_RE.match(it))
+            if run is None or di == 1:
+                close()
+                run = {"line": no, "bytes": 0, "marked": pending_mark, "what": toks[0] if di == 1 else "(data)"}
+            run["bytes"] += nbytes
+            run["marked"] |= OPAQUE_MARK in com
+            pending_mark = False
+            continue
+        close()
+        pending_mark = OPAQUE_MARK in com
+        mi = 1 if toks[0].endswith(":") and len(toks) > 1 else 0
+        if _ASM_BRANCH_RE.match(toks[mi]) and len(toks) > mi + 1:
+            tgt = " ".join(toks[mi + 1:])
+            tgt = re.sub(r"(?i)^(?:short|near\s+ptr|far\s+ptr|near|far)\s+", "", tgt).strip()
+            if all(_ASM_NUM_RE.match(p.strip()) for p in tgt.split(":")):
+                refused.append(f"line {no}: numeric branch target '{tgt}' (targets must be symbolic)")
+    close()
+    return refused, opaque
+
+
+def source_lint(text: str, lang: str) -> dict:
+    """Source-content rules for every module file (promote.py and validate.py): see above.
+    ``$``-relative branch targets (``jmp short $+2`` I/O delays) are symbolic and admitted."""
+    text = text.replace("\r\n", "\n")
+    if lang == "asm":
+        refused, opaque = _lint_asm(text)
+    else:
+        refused = []
+        stripped, comments = _strip_c(text)
+        for m in re.finditer(r"(?<![\w$])_?_emit\b", stripped):
+            refused.append(f"line {text.count(chr(10), 0, m.start()) + 1}: '_emit' (opcode bytes instead of instructions)")
+        for m in re.finditer(r'(?m)^[ \t]*#[ \t]*include[ \t]*([<"])([^>"\n]*)', stripped):
+            name = text[m.start(2):m.end(2)].strip()
+            if not compiler._include_name_ok(name):
+                refused.append(f"#include {m.group(1)}{name}: path traversal or absolute include")
+        for m in re.finditer(r'_?_segname\s*\(\s*"', stripped):
+            seg = text[m.end():text.find('"', m.end())]
+            if seg.upper() == "_CODE" or seg.upper().endswith("_TEXT"):
+                refused.append(f"line {text.count(chr(10), 0, m.start()) + 1}: data based in the code segment "
+                               f"(_segname(\"{seg}\")) could stand in for a function's bytes")
+        opaque = _c_opaque(text, stripped, comments)
+    return {"refused": refused, "opaque": opaque,
+            "opaque_unmarked_bytes": sum(o["bytes"] for o in opaque if not o["marked"])}
+
+
+# ---- provenance of module sources (audit F-4) ----------------------------------------------
+SOURCE_ORIGIN_RE = re.compile(r"^(?:hand-written (?:C|asm)(?:: .+)?|asm-transcribed: manual - .+|asm-transcribed: (\S+)@([0-9a-f]{64})(?: .+)?"
+                              r"|generated: (\S+)@([0-9a-f]{64})(?: .+)?)$")
+EVIDENCE_PATH_RE = re.compile(r"(?<![\w/.-])((?:build|evidence|docs|src|tools|tests|layout)/[\w./-]*[\w])")
+
+
+def source_origin_reasons(origin: str | None, lang: str) -> list[str]:
+    """``source_origin`` of a module: "hand-written C", "hand-written asm", or
+    "asm-transcribed: <generator path>@<sha256>" / "generated: <path>@<sha256>" for sources
+    produced by a tool from the original (e.g. a disassembly-to-MASM transcriber)."""
+    if origin is None:
+        return ["an .asm module records its source_origin (hand-written asm, or "
+                "asm-transcribed: <generator path>@<sha256>)"] if lang == "asm" else []
+    if not SOURCE_ORIGIN_RE.match(origin):
+        return [f"source_origin {origin!r} is not 'hand-written C|asm' or 'asm-transcribed: PATH@SHA256'"]
+    return []
+
+
+def evidence_paths(text: str | None) -> list[str]:
+    """Repository paths (build/, evidence/, docs/ ...) named in a free-text evidence note."""
+    return sorted(set(EVIDENCE_PATH_RE.findall(text or "")))
+
+
+def evidence_path_reasons(text: str | None) -> list[str]:
+    """Every repository path named in asm_evidence must exist (the probe or draft it cites)."""
+    return [f"asm_evidence names {p}, which does not exist" for p in evidence_paths(text)
+            if not (ROOT / p).exists()]
+
+
+def verify_module(text: str, module: dict, claims: list[dict], collect: dict | None = None,
+                  man: dict | None = None) -> dict:
     """Compile ``text`` under the module profile and verify every claim strictly.
 
     ``collect`` (whole-build harness, tools/link.py): when a dict is given, the bound bytes and
     relocation sites of every claim and data placement, the unbound code segment of a complete TU
-    and the object bytes are recorded in it.  It never changes a verdict."""
+    and the object bytes are recorded in it.  It never changes a verdict.  ``man`` is the
+    manifest the module belongs to (other objects of its frame; default: layout/manifest.json)."""
     prof = module["profile"]
     flags = module["flags"]
-    if module.get("lang") == "asm":
-        r = compiler.assemble(text, prof, flags)
-    else:
-        r = compiler.compile_c(text, prof, flags)
-    out = {"compile_ok": r.ok, "log": r.log[-600:] if not r.ok else "", "claims": {}, "exact": False}
+    lint = source_lint(text, module.get("lang", "c"))
+    try:
+        if module.get("lang") == "asm":
+            r = compiler.assemble(text, prof, flags)
+        else:
+            r = compiler.compile_c(text, prof, flags)
+    except compiler.CompileError as e:          # include policy, non-ASCII source, flags
+        r = compiler.Result(False, None, f"CompileError: {e}", compiler.WORK, [])
+    out = {"compile_ok": r.ok, "log": r.log[-600:] if not r.ok else "", "claims": {}, "exact": False,
+           "opaque_data": lint["opaque"], "opaque_unmarked_bytes": lint["opaque_unmarked_bytes"]}
+    if lint["refused"]:
+        out["module_reasons"] = list(lint["refused"])
     if not r.ok:
         return out
     obj = OmfReader(communals=True).read(r.obj)
@@ -251,6 +522,9 @@ def verify_module(text: str, module: dict, claims: list[dict], collect: dict | N
             reasons.append(f"code-segment data covers publics {inside[:4]}")
         if s0 < 0 or s1 > len(obj.segments.get(dseg, b"")):
             reasons.append(f"code-segment data {s0:#x}-{s1:#x} outside the object segment")
+        rows = row_overlaps(c["unit"], c["seg"] * 16 + c["off"], c["size"])
+        if rows:
+            reasons.append(f"code-segment data overlaps function-table rows {rows[:4]}")
         t = match.Target(c["unit"], c["seg"], c["off"], c["size"])
         res = match.Binder(t, obj, dseg, None, placements, span=(s0, s1)).bind() if not reasons else None
         if res is not None:
@@ -305,7 +579,8 @@ def verify_module(text: str, module: dict, claims: list[dict], collect: dict | N
         out.setdefault("data", {})[segname] = dres
         all_ok &= dres["exact"]
     # module-level data rules: far segment order/contiguity, public addresses, data-only TUs
-    mreasons = placement_order_reasons(obj, module.get("placements", {}))
+    mreasons = list(lint["refused"])
+    mreasons += placement_order_reasons(obj, module.get("placements", {}))
     mreasons += public_address_reasons(obj, module.get("placements", {}), strict=is_data_module(module))
     if is_data_module(module):
         mreasons += data_module_reasons(obj, module, claims)
@@ -319,12 +594,13 @@ def verify_module(text: str, module: dict, claims: list[dict], collect: dict | N
         all_ok = False
     ext = module.get("extent")
     if ext:
-        tres = verify_extent(obj, ext, claims, scaff, site_key, site_index)
+        tres = verify_extent(obj, ext, claims, scaff, site_key, site_index, placements=placements,
+                             data_spans=data_spans, module=module, man=man)
         out["extent"] = tres
         all_ok &= tres["exact"]
         if collect is not None:
             names = {c["name"] for c in claims if not is_data_claim(c)}
-            segs = {p["segment"] for p in obj.publics if p["name"][1:] in names}
+            segs = {p["segment"] for p in obj.publics if match.c_name(p["name"]) in names}
             if len(segs) == 1:
                 collect["code_segment"] = {"start": ext["start"], "end": ext["end"],
                                            "bytes": bytes(obj.segments.get(segs.pop(), b""))}
@@ -333,15 +609,19 @@ def verify_module(text: str, module: dict, claims: list[dict], collect: dict | N
     # functions compiled into the module that are neither claimed nor in a SCAFFOLD block
     # (e.g. drafts kept in place for data order): unverified code, reported as debt
     claimed = {c["name"] for c in claims}
-
-    def undecorated(n: str) -> str:
-        return n[1:] if n[:1] in ("_", "@") else n
-
+    undecorated = match.c_name
     code_segs = {p["segment"] for p in obj.publics if undecorated(p["name"]) in claimed}
     out["inplace_drafts"] = sorted(undecorated(p["name"]) for p in obj.publics
                                    if p["segment"] in code_segs and undecorated(p["name"]) not in claimed
                                    and undecorated(p["name"]) not in scaff)
     return out
+
+
+def row_overlaps(unit: str, lin: int, size: int) -> list[str]:
+    """Function-table rows of ``unit`` whose extent overlaps [lin, lin + size)."""
+    import functions as fnmod
+    return [f"{r['seg']:04X}:{r['off']:04X}+{r['size']}" for r in fnmod.table()["functions"]
+            if r["unit"] == unit and r["seg"] * 16 + r["off"] < lin + size and lin < r["seg"] * 16 + r["off"] + r["size"]]
 
 
 def _collected(c: dict, t, res, ok: bool) -> dict:
@@ -353,28 +633,57 @@ def _collected(c: dict, t, res, ok: bool) -> dict:
 
 
 def verify_extent(obj, ext: dict, claims: list[dict], scaff: set, site_key: dict | None = None,
-                  site_index: dict | None = None) -> dict:
+                  site_index: dict | None = None, placements: dict | None = None,
+                  data_spans: dict | None = None, module: dict | None = None, man: dict | None = None) -> dict:
     """Complete translation unit: the claims tile the whole original code segment.
 
     The compiled code segment must have exactly ``end - start`` bytes, contain no
     scaffold, and every byte must be covered by a (separately verified) claim -- a
     procedure or explicit code-segment data (DATA_IN_CODE) -- except a trailing MSC
     word-alignment pad that must equal the oracle byte.
+
+    One object placement (audit F-1): every claim lies at object offset (claim linear -
+    extent start), and the whole code segment, bound as one span at the extent start, equals
+    the oracle (bytes, fixups, relocation set).  A permutation of individually exact
+    functions therefore fails.  Boundaries (F-2): every function-table row of the object's
+    frame range lies inside the extent (``module``/``man`` given; extent_row_reasons).
     """
     reasons = []
     if scaff:
         reasons.append("scaffold present")
     start, end = ext["start"], ext["end"]
     names = {c["name"] for c in claims if not is_data_claim(c)}     # code-segment data has no public
-    segs = {p["segment"] for p in obj.publics if p["name"][1:] in names}
+    segs = {p["segment"] for p in obj.publics if match.c_name(p["name"]) in names}
     if len(segs) != 1:
         return {"exact": False, "reasons": reasons + [f"claims span segments {sorted(segs)}"]}
     seg = segs.pop()
     body = bytes(obj.segments.get(seg, b""))
     if len(body) != end - start:
         reasons.append(f"segment length {len(body)} != extent {end - start}")
-    if {p["name"][1:] for p in obj.publics if p["segment"] == seg} != names:
+    if {match.c_name(p["name"]) for p in obj.publics if p["segment"] == seg} != names:
         reasons.append("segment publics differ from claims")
+    misplaced = []
+    for c in claims:
+        want = c["seg"] * 16 + c["off"] - start
+        if is_data_claim(c):
+            got = (data_spans or {}).get(c["name"], (None,))[0]
+        else:
+            _, prec = match.public_in(obj, c["name"])
+            got = prec["offset"] if prec is not None and prec["segment"] == seg else None
+        if got != want:
+            misplaced.append(f"{c['name']} at object offset " + ("?" if got is None else f"{got:04X}")
+                             + f", extent needs {want:04X}")
+    if misplaced:
+        reasons.append("claims are not one object placement at the extent start: " + "; ".join(misplaced[:4]))
+    if len(body) == end - start:
+        cseg = claims[0]["seg"]
+        whole = match.Binder(match.Target(claims[0]["unit"], cseg, start - cseg * 16, end - start), obj, seg, None,
+                             placements or {}, span=(0, len(body))).bind()
+        wr = [r for r in whole.reasons if not r.startswith("relocation order inside a target group")]
+        if wr:
+            reasons.append("whole object segment at the extent start: " + "; ".join(wr[:3]))
+    if module is not None:
+        reasons += extent_row_reasons(man if man is not None else load_manifest(), module, start, end)
     pos = start
     for a, b in sorted((c["seg"] * 16 + c["off"], c["seg"] * 16 + c["off"] + c["size"]) for c in claims):
         if a != pos:
@@ -388,7 +697,12 @@ def verify_extent(obj, ext: dict, claims: list[dict], scaff: set, site_key: dict
     # Cross-function relocation order is a separate proof level: bytes and per-function order are
     # already gated per claim; a complete TU whose record breaks between functions differ from the
     # original (e.g. a wrong /Zd-/Zi choice or source line layout) is reported, not hidden.
-    reasons += extent_tail_reasons(claims[0]["unit"], end, claims[0]["seg"])
+    hi_lin = None
+    if module is not None:
+        _, hi = object_range(man if man is not None else load_manifest(), module["unit"], module["seg"],
+                             module.get("origin"))
+        hi_lin = module["seg"] * 16 + hi
+    reasons += extent_tail_reasons(claims[0]["unit"], end, claims[0]["seg"], hi_lin)
     order = extent_reloc_order(claims[0]["unit"], start, end, site_key or {}, site_index or {})
     if order["order"] == "SET_MISMATCH":
         reasons += order["reasons"]
@@ -398,15 +712,22 @@ def verify_extent(obj, ext: dict, claims: list[dict], scaff: set, site_key: dict
             "order_reasons": order["reasons"]}
 
 
-def extent_tail_reasons(unit: str, end: int, seg: int | None = None) -> list[str]:
+def extent_tail_reasons(unit: str, end: int, seg: int | None = None, hi_lin: int | None = None) -> list[str]:
     """The bytes between the extent end and the next known function must be link fill (00),
     so an extent cannot silently stop before a trailing function of the same frame (worker
     ovlB, S20).  When the next function belongs to another code frame, the gap is that
-    module's leading bytes (e.g. 2650's mask table after 25E7) and is owned by its extent."""
+    module's leading bytes (e.g. 2650's mask table after 25E7) and is owned by its extent.
+    A next function of the same frame that starts right at the extent end must belong to a
+    later object of the frame (``hi_lin`` = linear start of the next object; audit F-2)."""
     import functions as fnmod
     rows = sorted((r["seg"] * 16 + r["off"], r["seg"]) for r in fnmod.table()["functions"] if r["unit"] == unit)
     nxt, nseg = next(((a, s) for a, s in rows if a >= end), (None, None))
-    if nxt is None or nxt == end:
+    if nxt is None:
+        return []
+    if nxt == end:
+        if seg is not None and nseg == seg and (hi_lin is None or nxt < hi_lin):
+            return [f"the function at the extent end {end:05X} is in the same frame and owned by no later object "
+                    f"(UNIT:SEG@OFF): the extent stops inside the module"]
         return []
     if seg is not None and nseg != seg:
         return []
@@ -416,6 +737,30 @@ def extent_tail_reasons(unit: str, end: int, seg: int | None = None) -> list[str
     if any(gap):
         return [f"bytes after extent end {end:05X} up to next function {nxt:05X} are not fill: {gap.hex()}"]
     return []
+
+
+def extent_row_reasons(man: dict, module: dict, start: int, end: int) -> list[str]:
+    """Extent boundaries (audit F-2): the extent lies inside the object's frame range, starts at
+    the object origin for a later object, and every function-table row of the frame whose
+    offset lies in the object's range [origin, next object's origin) lies inside the extent.
+    A row outside it must belong to another object of the frame (a manifest module
+    ``UNIT:SEG@OFF``, whose key needs recorded origin evidence), so an extent cannot be
+    trimmed at either end, and a frame cannot be split without an owner."""
+    import functions as fnmod
+    unit, seg, origin = module["unit"], module["seg"], module.get("origin")
+    lo, hi = object_range(man, unit, seg, origin)
+    reasons = []
+    if not (seg * 16 + lo <= start < end <= seg * 16 + hi):
+        reasons.append(f"extent {start:05X}-{end:05X} is outside the object's frame offsets {lo:04X}-{hi - 1:04X}")
+    if origin is not None and start != seg * 16 + origin:
+        reasons.append(f"extent start {start:05X} is not the object origin {seg * 16 + origin:05X}")
+    outside = [f"{r['off']:04X}" for r in fnmod.table()["functions"]
+               if r["unit"] == unit and r["seg"] == seg and lo <= r["off"] < hi
+               and not start <= seg * 16 + r["off"] < end]
+    if outside:
+        reasons.append(f"function-table rows {seg:04X}:{','.join(outside[:6])} of this object's frame range lie "
+                       f"outside the extent (trimmed extent, or another object needs its own UNIT:SEG@OFF module)")
+    return reasons
 
 
 def extent_reloc_order(unit: str, start: int, end: int, site_key: dict, site_index: dict) -> dict:
@@ -455,7 +800,21 @@ def verify_bss_placement(sdef: dict, p: dict) -> dict:
         reasons.append("BSS placement beyond DGROUP memory")
     if p.get("size", sdef["length"]) != sdef["length"]:
         reasons.append(f"BSS size {sdef['length']} != placement {p.get('size')}")
-    return {"exact": not reasons, "reasons": reasons, "size": sdef["length"], "kind": "BSS"}
+    reasons += alignment_reasons(sdef, start)
+    return {"exact": not reasons, "reasons": reasons, "size": sdef["length"], "kind": "BSS", "start": start,
+            "align": sdef.get("alignment")}
+
+
+ALIGN_BYTES = {"byte": 1, "word": 2, "dword": 4, "paragraph": 16, "page": 256}
+
+
+def alignment_reasons(sdef: dict | None, start: int) -> list[str]:
+    """A segment contribution starts at a multiple of its SEGDEF alignment (audit F-5): a
+    word-aligned _DATA cannot be placed at an odd address."""
+    a = ALIGN_BYTES.get(str((sdef or {}).get("alignment", "")), 1)
+    if start % a:
+        return [f"placement {start:05X} violates the segment's {sdef.get('alignment')} alignment"]
+    return []
 
 
 def _data_target(f: dict, placements: dict, unit: str | None = None):
@@ -511,6 +870,7 @@ def verify_data_segment(obj, segname: str, p: dict, placements: dict | None = No
     rkey = {}
     reasons = []
     sdef = segment_def(obj, segname) or {}
+    reasons += alignment_reasons(sdef, start)
     if not (s27.load_linear <= start and start + size <= s27.load_linear + len(s27.data)):
         return {"exact": False, "reasons": [f"placement {start:05X}+{size} outside section 27's file data"],
                 "size": size, "start": start}

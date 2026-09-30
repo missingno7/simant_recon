@@ -15,6 +15,10 @@ unique library-member location for runtime names.
     python tools/symbols.py add-data NAME SEG OFF --why "anchor"
     python tools/symbols.py add-runtime NAME SEG OFF --why "evidence"   # public of a located runtime member
     python tools/symbols.py add-runtime --batch FILE                    # [{"name","unit","seg","off","why"}]
+    python tools/symbols.py set-convention NAME pascal --why "evidence" # (or cdecl to clear)
+
+A code record may carry ``"convention": "pascal"``: only then does an upper-cased,
+undecorated OBJ name (MSC pascal) bind to it (tools/match.py pascal_name).
 """
 from __future__ import annotations
 
@@ -140,6 +144,43 @@ def remove(name: str, why: str) -> int:
         return 0
 
 
+CONVENTIONS = ("pascal", "cdecl")
+
+
+def set_convention(name: str, conv: str, why: str) -> int:
+    """Record the calling convention of a registered code name (and its aliases).  ``pascal``
+    lets upper-cased undecorated OBJ names bind to it; ``cdecl`` (the default) removes the
+    field.  Evidence is required: the convention changes which declarations bind."""
+    if conv not in CONVENTIONS:
+        raise SystemExit(f"convention must be one of {CONVENTIONS}")
+    if not why.strip():
+        raise SystemExit("--why is required")
+    from lockfile import CanonicalLock
+    with CanonicalLock():
+        d = load()
+        rec = d["code"].get(name)
+        if rec is None:
+            raise SystemExit(f"{name} is not a registered code name")
+        if rec.get("alias_of"):
+            raise SystemExit(f"{name} is an alias of {rec['alias_of']}; set the convention there")
+        if conv == "pascal":
+            clash = [n for n, r in d["code"].items() if n != name and n.upper() == name.upper()
+                     and r.get("convention") == "pascal" and r.get("alias_of") != name]
+            if clash:
+                raise SystemExit(f"{name}: pascal spelling {name.upper()} already used by {clash}")
+        was = rec.get("convention", "cdecl")
+        for n, r in d["code"].items():
+            if n == name or r.get("alias_of") == name:
+                if conv == "cdecl":
+                    r.pop("convention", None)
+                else:
+                    r["convention"] = conv
+        rec.setdefault("history", []).append({"convention": f"{was} -> {conv}", "why": why})
+        save(d)
+        print(f"{name}: convention {was} -> {conv}")
+        return 0
+
+
 def add_data(name: str, seg: int, off: int, why: str) -> int:
     from lockfile import CanonicalLock
     with CanonicalLock():
@@ -219,7 +260,11 @@ def main() -> int:
     rm = sub.add_parser("remove"); rm.add_argument("name"); rm.add_argument("--why", required=True)
     rt = sub.add_parser("add-runtime"); rt.add_argument("name", nargs="?"); rt.add_argument("seg", nargs="?")
     rt.add_argument("off", nargs="?"); rt.add_argument("--why"); rt.add_argument("--batch", type=Path)
+    sc = sub.add_parser("set-convention"); sc.add_argument("name"); sc.add_argument("convention", choices=CONVENTIONS)
+    sc.add_argument("--why", required=True)
     args = ap.parse_args()
+    if args.cmd == "set-convention":
+        return set_convention(args.name, args.convention, args.why)
     if args.cmd == "add-runtime":
         if args.batch:
             return add_runtime(json.loads(args.batch.read_text()))

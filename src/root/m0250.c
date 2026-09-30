@@ -886,8 +886,9 @@ static char far *balBufPtr;
 
 extern void far clip_Pop(void);
 
-/* OPEN: residue frame slot assignment (flags at [bp-8]/[bp-6], 18-byte frame) and the dead
- * loads of editRect.top/left + g_19C0 in the tile loops; logic and BSS layout are exact. */
+/* px and py are never read: their stepping keeps the dead loads of editRect.left/top (and of
+ * g_19C0) alive.  The px step constant is not decided by the bytes (px += 16 is a hypothesis;
+ * px++ compiles identically).  balloon = spider = 0 stores spider first (worker resG). */
 void far f_0250_13A6(void)
 {
     int spider;
@@ -897,7 +898,7 @@ void far f_0250_13A6(void)
     int px;
     int py;
 
-    spider = balloon = 0;
+    balloon = spider = 0;
     clip_Push();
     f_0250_5058();
     if (g_19C6) {
@@ -919,7 +920,7 @@ void far f_0250_13A6(void)
     py = fd_50F6_110C.top;
     for (y = 0; y < fd_50F6_10DE; y++, py += g_19C0) {
         px = fd_50F6_110C.left;
-        for (x = 0; x < fd_50F6_10E0; x++) {
+        for (x = 0; x < fd_50F6_10E0; x++, px += 16) {
             if (x >= balTileRect.left && x < balTileRect.right && y >= balTileRect.top && y < balTileRect.bottom)
                 goto drawballoon;
             if ((y >= fd_50F6_37D4 && y < fd_50F6_37D4 + 7 && x >= fd_50F6_37D2 && x < fd_50F6_37D2 + 7)
@@ -962,8 +963,10 @@ extern int far f_1B4E_000D(int color);
 extern int far fd_50F6_0FFE;
 extern void far f_1CE2_0430(struct Rect far *rect);
 
-/* OPEN: residue only the evaluation point of h = r.bottom - top: the original computes it
- * after pushing 0x10000L and frac (inside the __aFlmul argument list). */
+/* h is computed from r before top is copied: /Og then sinks h = r.bottom - r.top into the
+ * __aFlmul argument list (after the 0x10000L and frac pushes) as in the original.  The three
+ * vals[] stores share one source line: the /Zi line-entry flush must fall after 16BA
+ * (records.py FORBID (1680,16BA]); line layout is a hypothesis (worker resG). */
 void far DrawEditGraphs(void)
 {
     static int objs[3] = { 0x11, 0x12, 0x13 };
@@ -975,16 +978,15 @@ void far DrawEditGraphs(void)
     int i;
     int top;
 
-    vals[0] = &fd_50F6_0F78;
-    vals[1] = &fd_50F6_10BE;
-    vals[2] = &fd_50F6_01FE;
+    vals[0] = &fd_50F6_0F78; vals[1] = &fd_50F6_10BE; vals[2] = &fd_50F6_01FE;
     for (i = 0; i < 3; i++) {
         obj = objs[i];
         frac = ((long)*vals[i] << 16) / 100;
         win_SetColorFromObjNum(obj);
         win_GetObjRect(obj, &r);
+        h = r.bottom - r.top;
         top = r.top;
-        r.top = r.bottom - (int)((h = r.bottom - top) * frac / 0x10000L);
+        r.top = r.bottom - (int)(h * frac / 0x10000L);
         if (r.top < r.bottom) {
             f_1CE2_046D(&r, g_3DE0);
             if ((g_5A97 & 1) && i == 0) {

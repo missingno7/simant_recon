@@ -13,6 +13,14 @@ of different modules (and accepted runtime data) may not overlap; the paragraph 
 adjacent far segments must be zero (``data_link_fill_bytes``); ``link_after`` positions are
 checked; FAR_BSS (frame 50F6) is accounted by tools/farbss.py as linker zero fill; accepted
 runtime DGROUP data segments are re-verified (tools/runtime.py verify_data).
+
+Proof levels are reported separately (audit F-9): C bytes in complete TUs vs partial
+modules, steered and layout-inferred claims, claims whose within-group relocation order is
+pending, ASM bytes transcribed by a generator (source_origin), unmarked opaque data
+initialisers (source_lint), runtime words derived from oracle operands, and the manifest
+hash the report was computed from.  Every placement (file data, _BSS, runtime data) has one
+owner and respects its SEGDEF alignment; ASM modules record source_origin; paths named in
+asm_evidence exist; released claims that no module re-owned are listed.
 """
 from __future__ import annotations
 
@@ -53,7 +61,8 @@ def main() -> int:
     # lock, so read both under it (quickly) and verify from memory afterwards
     from lockfile import CanonicalLock
     with CanonicalLock():
-        man = modmod.load_manifest()
+        man_bytes = modmod.MANIFEST.read_bytes()
+        man = json.loads(man_bytes)
         snapshot = {k: (ROOT / m["source"]).read_bytes() for k, m in man["modules"].items()}
     for prof in sorted({m["profile"] for m in man["modules"].values()} | {"msc600", "msc600a", "masm510"}):
         try:
@@ -82,6 +91,9 @@ def main() -> int:
     placed = []                  # (linear, size, owner, segment, far) of every exact file placement
     comdefs = defaultdict(list)  # C name -> [(bytes, module)] far communals of accepted objects
     link_after_seen = {}
+    bss_placed = []              # (linear, size, owner, segment, False) of every _BSS placement
+    acct = defaultdict(int)      # proof-level accounting (audit F-9)
+    layout_modules, origin_unevidenced = [], []
     per_unit = defaultdict(int)
     listed = {str((ROOT / m["source"]).resolve()).lower() for m in man["modules"].values()}
     for f in sorted((ROOT / "src").rglob("*")):
@@ -99,10 +111,16 @@ def main() -> int:
             failures.append(f"{key}: claims outside the object's frame offsets {lo:04X}-{hi - 1:04X}")
         if sha(text.encode("latin1")) != m["source_sha256"]:
             failures.append(f"{key}: source hash differs from manifest (unpublished edit)")
-        res = modmod.verify_module(text, m, m["claims"])
+        res = modmod.verify_module(text, m, m["claims"], man=man)
         bad = [n for n, c in res["claims"].items() if not c["exact"]]
         dbad = [n for n, d in res.get("data", {}).items() if not d["exact"]]
         mreasons = list(res.get("module_reasons", [])) + modmod.link_after_reasons(man, key, m)
+        # provenance (audit F-4): ASM modules record how their source was produced, and the probe
+        # files their asm_evidence names exist
+        mreasons += modmod.source_origin_reasons(m.get("source_origin"), m.get("lang", "c"))
+        mreasons += modmod.evidence_path_reasons(m.get("asm_evidence"))
+        if m.get("origin") and not m.get("origin_evidence"):
+            origin_unevidenced.append(key)
         if "link_after" in m:
             if m["link_after"] in link_after_seen:
                 mreasons.append(f"link_after {m['link_after'] or 'FIRST'} also claimed by {link_after_seen[m['link_after']]}")
@@ -123,9 +141,25 @@ def main() -> int:
         if res.get("extent"):
             (tu_order_proven if res["extent"].get("reloc_order") in ("EXACT", "GROUPED")
              else tu_order_pending).append(key)
+        complete = bool(m.get("extent")) and res["exact"]
+        transcribed = str(m.get("source_origin", "")).startswith(("asm-transcribed:", "generated:"))
+        if m.get("layout_inferred"):
+            layout_modules.append(key)
+        acct["data_bytes_opaque_unmarked"] += res.get("opaque_unmarked_bytes", 0)
         for c in m["claims"]:
             claimed.append((c["unit"], c["seg"] * 16 + c["off"], c["size"], c["name"]))
+            if transcribed and c.get("kind") in ("ASM", modmod.DATA_KIND):
+                acct["asm_transcribed_bytes"] += c["size"]
+            if c.get("layout_inferred"):
+                acct["claims_layout_inferred"] += 1
             if c.get("kind", "C") == "C":
+                acct["exact_c_bytes_in_complete_tus" if complete else "exact_c_bytes_in_partial_modules"] += c["size"]
+                if c.get("provenance") == "EXACT_STEERED":
+                    acct["exact_c_bytes_steered"] += c["size"]
+                if c.get("layout_inferred") or m.get("layout_inferred"):
+                    acct["exact_c_bytes_layout_inferred"] += c["size"]
+                if res["claims"].get(c["name"], {}).get("reloc_order") == "WITHIN_GROUP_PENDING":
+                    acct["exact_c_bytes_within_group_pending"] += c["size"]
                 exact_c += 1
                 exact_c_bytes += c["size"]
             elif c["kind"] == "ASM":
@@ -137,6 +171,8 @@ def main() -> int:
         for n, d in res.get("data", {}).items():
             if d.get("kind") == "BSS":
                 bss_bytes += d["size"]
+                if d.get("start") is not None:
+                    bss_placed.append((d["start"], d["size"], key, n, False))
             elif d["exact"]:
                 data_bytes += d["size"]
                 if d.get("far"):
@@ -154,6 +190,23 @@ def main() -> int:
     for (u1, a1, s1, n1), (u2, a2, s2, n2) in zip(claimed, claimed[1:]):
         if u1 == u2 and a1 + s1 > a2:
             failures.append(f"overlapping claims {n1} {n2}")
+    # released claims (promote.py --release) must be re-owned by their true module (audit F-2)
+    # (by address: a released function may have been renamed or re-framed since, e.g. f_277E_097A)
+    owned_at = {(u, lin) for u, lin, _, _ in claimed}
+    import symbols as symmod
+    code_syms = symmod.load()["code"]
+    released_unowned = []
+    journal = ROOT / "evidence" / "promotions.jsonl"
+    if journal.exists():
+        for line in journal.read_text().splitlines():
+            rec = json.loads(line) if line.strip() else {}
+            for r in rec.get("released", []):
+                s = code_syms.get(r["name"])
+                at = (s["unit"], s["seg"] * 16 + s["off"]) if s else None
+                if at not in owned_at and r["name"] not in released_unowned:
+                    released_unowned.append(r["name"])
+    if released_unowned:
+        print(f"released and not re-owned: {released_unowned}")
 
     import probe
     rules_ok = 0
@@ -223,6 +276,12 @@ def main() -> int:
     print(f"historical runtime data: {len(acc_data)} DGROUP segments, {runtime_data_bytes} bytes re-verified")
 
     # ---- data placements: single ownership, link fill between far segments ---------------
+    # _BSS placements share DGROUP with file data and runtime data: one owner per byte (audit F-5)
+    everything = sorted(placed + bss_placed)
+    bss_keys = {(a0, k0, s0) for a0, _, k0, s0, _ in bss_placed}
+    for (a0, n0, k0, s0, _), (a1, n1, k1, s1, _) in zip(everything, everything[1:]):
+        if a0 + n0 > a1 and ((a0, k0, s0) in bss_keys or (a1, k1, s1) in bss_keys):
+            failures.append(f"overlapping placements {k0} {s0} {a0:05X}+{n0} and {k1} {s1} {a1:05X}+{n1}")
     placed.sort()
     link_fill = 0
     for (a0, n0, k0, s0, f0), (a1, n1, k1, s1, f1) in zip(placed, placed[1:]):
@@ -264,6 +323,9 @@ def main() -> int:
     overlay_code = sum(len(s.data) for s in x.sections[:27])
     code_total = root_game_span + overlay_code
     s27 = len(x.sections[27].data)
+    acc_members = {m["member"] for m in acc}
+    derived_words = sum(1 for vals in _derived.values() for users in vals.values() for mem, _ in users
+                        if mem in acc_members)
     progress = {
         "schema": "simant-progress-v1",
         "generated": dt.date.today().isoformat(),
@@ -306,6 +368,20 @@ def main() -> int:
         "claims_within_group_order_pending": pending_order,
         "inplace_draft_functions": inplace_drafts,
         "claims_exact_steered": steered,
+        # proof levels kept apart (audit F-9)
+        "exact_c_bytes_in_complete_tus": acct["exact_c_bytes_in_complete_tus"],
+        "exact_c_bytes_in_partial_modules": acct["exact_c_bytes_in_partial_modules"],
+        "exact_c_bytes_steered": acct["exact_c_bytes_steered"],
+        "exact_c_bytes_layout_inferred": acct["exact_c_bytes_layout_inferred"],
+        "exact_c_bytes_within_group_pending": acct["exact_c_bytes_within_group_pending"],
+        "claims_layout_inferred": acct["claims_layout_inferred"],
+        "modules_layout_inferred": sorted(layout_modules),
+        "asm_transcribed_bytes": acct["asm_transcribed_bytes"],
+        "data_bytes_opaque_unmarked": acct["data_bytes_opaque_unmarked"],
+        "runtime_oracle_derived_words": derived_words,
+        "released_claims_unowned": released_unowned,
+        "modules_origin_unevidenced": sorted(origin_unevidenced),
+        "manifest_sha256": sha(man_bytes),
         "complete_tus_relocation_order_proven": len(tu_order_proven),
         "complete_tus_cross_function_order_pending": sorted(tu_order_pending),
         "codegen_rules_reproduced": rules_ok,
@@ -328,8 +404,12 @@ def main() -> int:
               "far_bss_sizes_consistent_bytes", "far_bss_sizes_unverified_bytes",
               "game_code_span_bytes", "unresolved_code_bytes", "unresolved_data_bytes",
               "scaffold_functions", "exact_translation_units", "complete_tus_relocation_order_proven",
-              "claims_within_group_order_pending", "inplace_draft_functions", "claims_exact_steered"):
+              "claims_within_group_order_pending", "inplace_draft_functions", "claims_exact_steered",
+              "exact_c_bytes_in_complete_tus", "exact_c_bytes_in_partial_modules", "exact_c_bytes_steered",
+              "exact_c_bytes_layout_inferred", "exact_c_bytes_within_group_pending", "claims_layout_inferred",
+              "asm_transcribed_bytes", "data_bytes_opaque_unmarked", "runtime_oracle_derived_words"):
         md.append(f"| {k} | {progress[k]:,} |")
+    md += ["", f"Manifest: `{progress['manifest_sha256']}`"]
     md += ["", "Complete TUs with cross-function relocation order pending (record breaks between "
            "functions differ; see docs/codegen-rules.md ZI-1): "
            + (", ".join(progress["complete_tus_cross_function_order_pending"]) or "none")]
@@ -344,6 +424,12 @@ def main() -> int:
     print(f"data: {data_bytes} bytes accepted ({far_data_bytes} far), runtime data {runtime_data_bytes}, link fill "
           f"{link_fill}, FAR_BSS {far_bss_bytes}; unresolved data {progress['unresolved_data_bytes']}; "
           f"data-only modules {len(data_only_modules)}")
+    print("proof levels: C bytes in complete TUs {exact_c_bytes_in_complete_tus}, in partial modules "
+          "{exact_c_bytes_in_partial_modules}; steered {exact_c_bytes_steered}, layout-inferred "
+          "{exact_c_bytes_layout_inferred}, within-group pending {exact_c_bytes_within_group_pending}; "
+          "ASM transcribed {asm_transcribed_bytes}; opaque data unmarked {data_bytes_opaque_unmarked}; "
+          "runtime oracle-derived words {runtime_oracle_derived_words}".format(**progress))
+    print(f"manifest sha256 {progress['manifest_sha256']}")
     if failures:
         print("VALIDATION FAILED:")
         for f in failures:

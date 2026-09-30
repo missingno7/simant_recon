@@ -1,4 +1,10 @@
-/* Overlay section S25, code frame 39C7: black colony nest simulation (DoAntSimB unit). */
+/* Overlay section S25, code frame 39C7: black colony nest simulation (DoAntSimB unit).
+ * Built /AL /Os /Oe /Og /Zi (like the sibling S25:3BA4): under /Zd 27 cross-function
+ * relocation-order constraints are violated, under /Zi none.  Line layout: the seven
+ * "map = list = value" stores are written as two statements (the file's own style, e.g.
+ * "BlistT[..] = ..; fd_3E1D_8180[x][y] = BlistT[..];"); byte-identical either way, but the
+ * extra /Zi line entries put the fourth 52-entry flush before GetBestDir's first GetDis
+ * call, as its within-group relocation order requires (FORBID (0CDC,0D54]). */
 
 extern int far ListIndexB;
 extern int far fd_50F6_0F18;
@@ -154,7 +160,8 @@ void far o25_39C7_006D(int x, int y, int attr)
                 t = f_0894_1E34(BlistT[i], attr);
                 BlistT[fd_50F6_0F18] = 0;
                 BlistS[i] = t;
-                fd_3E1D_8180[x][y] = BlistT[i] = (t & 0x80) + 0x70;
+                BlistT[i] = (t & 0x80) + 0x70;
+                fd_3E1D_8180[x][y] = BlistT[i];
                 BlistM[i] = 0xa;
             }
             return;
@@ -247,9 +254,11 @@ void far o25_39C7_0590(int x, int y, int attr)
         return;
     }
     attr = ((SRand1(3) + attr - 1) & 7) | (attr & 0xf8);
-    fd_3E1D_8180[x][y] = BlistT[fd_50F6_0F18] = attr;
+    BlistT[fd_50F6_0F18] = attr;
+    fd_3E1D_8180[x][y] = BlistT[fd_50F6_0F18];
     if (SRand1(100) == 0) {
-        BlistT[fd_50F6_0F18] = fd_3E1D_8180[x][y] = 0;
+        fd_3E1D_8180[x][y] = 0;
+        BlistT[fd_50F6_0F18] = fd_3E1D_8180[x][y];
         if (attr & 0x80)
             fd_50F6_0FBC++;
         else
@@ -291,7 +300,8 @@ void far o25_39C7_0746(int x, int y)
     BlistT[fd_50F6_0F18] = (BlistT[fd_50F6_0F18] & 0xf8) + SRand1(7);
     fd_3E1D_8180[x][y] = BlistT[fd_50F6_0F18];
     if (SRand16() == 0) {
-        BlistT[fd_50F6_0F18] = fd_3E1D_8180[x][y] = BlistS[fd_50F6_0F18];
+        fd_3E1D_8180[x][y] = BlistS[fd_50F6_0F18];
+        BlistT[fd_50F6_0F18] = fd_3E1D_8180[x][y];
         if ((BlistT[fd_50F6_0F18] & 0x78) == 0x60)
             o25_39C7_0EC2(fd_50F6_0F18);
         if (BlistT[fd_50F6_0F18] & 0x80)
@@ -316,7 +326,8 @@ int far o25_39C7_0853(int x, int y, int attacker)
     if (ant > 0x87 && ant < 0xe8 && (index = FindInBList(x, y, ant)) >= 0) {
         winner = f_0894_1E34(ant, attacker);
         BlistS[index] = winner;
-        fd_3E1D_8180[x][y] = BlistT[index] = (winner & 0x80) + 0x70;
+        BlistT[index] = (winner & 0x80) + 0x70;
+        fd_3E1D_8180[x][y] = BlistT[index];
         BlistM[index] = 0xa;
         return 1;
     }
@@ -411,7 +422,8 @@ void far o25_39C7_0AB0(int x, int y, int caste, int attr)
     if (caste == 12) {
         if (SRand64() == 0) {
             if (fd_50F6_10BE == 0) {
-                fd_3E1D_8180[x][y] = BlistT[fd_50F6_0F18] = 0;
+                BlistT[fd_50F6_0F18] = 0;
+                fd_3E1D_8180[x][y] = BlistT[fd_50F6_0F18];
                 o14_384C_0B6A(0, 0x271f, 1);
                 return;
             }
@@ -432,7 +444,8 @@ void far o25_39C7_0AB0(int x, int y, int caste, int attr)
         fd_3E1D_8180[x][y] = t;
         if (fd_50F6_035E > 0 && o25_39C7_0F76(x, y, t) != 0) {
             fd_50F6_035E--;
-            fd_3E1D_8180[x][y] = BlistT[fd_50F6_0F18] = 0;
+            BlistT[fd_50F6_0F18] = 0;
+            fd_3E1D_8180[x][y] = BlistT[fd_50F6_0F18];
             return;
         }
         nx = fd_3D57_0000[(attr ^ 4) & 7] + x;
@@ -458,7 +471,6 @@ extern int far f_10F7_04EC(int plane, int x, int y);
 extern int far fd_50F6_10C0;
 extern int far fd_50F6_10B2;
 
-/* SCAFFOLD BEGIN: o25_39C7_0CBD (GetBestDir): bytes exact; within-group relocation order not: the original has no LEDATA boundary between the two GetDis calls (0CDC/0D54), this file layout puts the 52-entry /Zd LINNUM boundary at 0CF5 (source line layout differs from the original) */
 int far o25_39C7_0CBD(int plane, int x, int y, int a, int b)
 {
     int fallback;
@@ -497,7 +509,6 @@ int far o25_39C7_0CBD(int plane, int x, int y, int a, int b)
 done:
     return best;
 }
-/* SCAFFOLD END */
 
 /* SCAFFOLD BEGIN: o25_39C7_0DAF (QueenMoveB) best draft: the original keeps dir in memory [bp-2] (no SI use); MSC puts it in SI here */
 int far o25_39C7_0DAF(int x, int y, int dirHint)
@@ -638,7 +649,7 @@ int far o25_39C7_105B(int x, int y, int dir)
 
 void far o25_39C7_13EF(int x, int y);
 
-/* SCAFFOLD BEGIN: DoNestingB best draft: 1 byte differs, "mov si,cx" (original) vs "mov si,bx" when loading the Tindex copy before f_1383_099B (register tie-break) */
+/* SCAFFOLD BEGIN: DoNestingB best draft: 1 byte differs, "mov si,cx" (original) vs "mov si,bx" when loading the Tindex copy before f_1383_099B (register tie-break; no identifier count 0..16 at the top fixes it).  /Zi records: the sixth flush must fall in (12E3,12FE]; it is at 132A here */
 void far DoNestingB(int x, int y, int attr, int caste)
 {
     int dir;
@@ -944,7 +955,7 @@ int far o25_39C7_1BBB(int x, int y)
     return 0;
 }
 
-/* SCAFFOLD BEGIN: o25_39C7_1C81 (GetOutB): bytes exact; within-group relocation order not: the original has no LEDATA boundary in [1CFC,1DC0], this layout puts the /Zd LINNUM boundary at 1D5C */
+/* SCAFFOLD BEGIN: o25_39C7_1C81 (GetOutB): bytes exact; within-group relocation order not: the original has no LEDATA boundary in (1CFC,1DC0], this layout puts the ninth /Zi LINNUM flush at 1D33.  records.py --sim DoNestingB: 3..6 more line entries before DoNestingB's "dir = SRand8()" fix both this and DoNestingB's NEED (12E3,131E]/FORBID (12FE,132D] */
 int far o25_39C7_1C81(int x)
 {
     int raw;

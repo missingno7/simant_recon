@@ -7077,7 +7077,14 @@
    "unit": "root",
    "seg": 222,
    "off": 10,
-   "grounding": "inventory:far_call"
+   "grounding": "inventory:far_call",
+   "convention": "pascal",
+   "history": [
+    {
+     "convention": "cdecl -> pascal",
+     "why": "gatefix migration: src/root/m00DE.c defines it 'void far pascal f_00DE_000A(int code)' (claim exact: pascal ret 2 / upper-case public F_00DE_000A); src/S15/m384C.c calls it through the same pascal declaration"
+    }
+   ]
   },
   "f_00DF_0004": {
    "unit": "root",

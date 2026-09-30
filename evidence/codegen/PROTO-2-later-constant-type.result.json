@@ -1,0 +1,111 @@
+{
+ "id": "PROTO-2",
+ "question": "Does the prototype of a later call change how an earlier long constant argument is materialised? Positive control root:00BA f_00BA_0002 (worker resG, after VEC-1): 'f_171C_1A9E(0x100L, 1, \"winheaders\"); n = read(fd, f_171C_1B84(h), 0x100);' pushes the long 0x100 as 'mov cx,100h; sub dx,dx' only when read() has no prototype (or an old-style one, or count declared int); with the <io.h>-style prototype 'int read(int, void far *, unsigned int)' it is 'mov ax,100h; cwd'. Same family as PROTO-1 (the declared parameter type of a constant argument decides register choice for a neighbouring value). A two-call micro test does not show it; the probe therefore compiles the whole module 00BA. Spelling the constant as 0x100, 0x100U, 0x100L or 0x100UL makes no difference.",
+ "results": [
+  {
+   "variant": "implicit_read",
+   "profile_index": 0,
+   "profile": "msc600ax",
+   "flags": [
+    "/AL",
+    "/Os",
+    "/Oe",
+    "/Og",
+    "/Zi"
+   ],
+   "source_sha256": "8f15e1894bd4983e07982b8b94d7d4e049f8119887b8ebdff5d3bafb2e157118",
+   "bytes": "558becb816009a0000000057569a00000000b80000ba000052502bc09a00000000b80000ba00005250b800019a00000000b80000ba00005250b800159a00000000b80000ba00005250b800129a00000000b80000ba00005250b800139a00000000b80000ba00005250b800199a00000000b80000ba00005250b800059a00000000b80000ba000052509a00000000b80000ba000052509a00000000b80000ba000052509a00000000b8000150b80019509a000000005b5b9a00000000bb00008e060000895eea8c46ec26833f007503e9dc002bc0502bc9515126ff379a0000000083c408b80e00508d46ee1650c45eea26ff379a0000000083c4082bc0508b46f48b56f6050e0083d2005250c45eea26ff379a0000000083c408b800001e50b8010050b900012bd252519a0000000083c40a8bf08956feb800015052569a000000005b5b5250c45eea26ff379a0000000083c4088bf8b8010050ff76fe569a000000005b5b5250c45eea26ff379a0000000083c408ff76fe569a000000005b5bff76fe569a000000005b5b81ff0001740dff76fe569a000000005b5beb108b46fe8e060200268936000026a302005e5f8be55dcb33c09a000000009a00000000cb558bec33c09a000000008b46062d000174072d0018740beb18b8001950b80001eb07b8000150b80019509a000000005b5b9a000000009a000000009a000000009a000000009a000000008be55dcb33c09a000000009a000000009a000000009a00000000cb33c09a000000009a000000009a000000009a000000009a000000009a00000000cb",
+   "disasm": "push bp; mov bp, sp; mov ax, 0x16; lcall 0, 0; push di; push si; lcall 0, 0; mov ax, 0; mov dx, 0; push dx; push ax; sub ax, ax; lcall 0, 0; mov ax, 0; mov dx, 0; push dx; push ax; mov ax, 0x100; lcall 0, 0; mov ax, 0; mov dx, 0; push dx; push ax; mov ax, 0x1500; lcall 0, 0; mov ax, 0; mov dx, 0; push dx; push ax; mov ax, 0x1200; lcall 0, 0; mov ax, 0; mov dx, 0; push dx; push ax; mov ax, 0x1300; lcall 0, 0; mov ax, 0; mov dx, 0; push dx; push ax; mov ax, 0x1900; lcall 0, 0; mov ax, 0; mov dx, 0; push dx; push ax; mov ax, 0x500; lcall 0, 0; mov ax, 0; mov dx, 0; push dx; push ax; lcall 0, 0; mov ax, 0; mov dx, 0; push dx; push ax; lcall 0, 0; mov ax, 0; mov dx, 0; push dx; push ax; lcall 0, 0; mov ax, 0x100; push ax; mov ax, 0x1900; push ax; lcall 0, 0; pop bx; pop bx; lcall 0, 0; mov bx, 0; mov es, word ptr [0]; mov word ptr [bp - 0x16], bx; mov word ptr [bp - 0x14], es; cmp word ptr es:[bx], 0; jne 0xd2; jmp 0x1ae; sub ax, ax; push ax; sub cx, cx; push cx; push cx; push word ptr es:[bx]; lcall 0, 0; add sp, 8; mov ax, 0xe; push ax; lea ax, [bp - 0x12]; push ss; push ax; les bx, ptr [bp - 0x16]; push word ptr es:[bx]; lcall 0, 0; add sp, 8; sub ax, ax; push ax; mov ax, word ptr [bp - 0xc]; mov dx, word ptr [bp - 0xa]; add ax, 0xe; adc dx, 0; push dx; push ax; les bx, ptr [bp - 0x16]; push word ptr es:[bx]; lcall 0, 0; add sp, 8; mov ax, 0; push ds; push ax; mov ax, 1; push ax; mov cx, 0x100; sub dx, dx; push dx; push cx; lcall 0, 0; add sp, 0xa; mov si, ax; mov word ptr [bp - 2], dx; mov ax, 0x100; push ax; push dx; push si; lcall 0, 0; pop bx; pop bx; push dx; push ax; les bx, ptr [bp - 0x16]; push word ptr es:[bx]; lcall 0, 0; add sp, 8; mov di, ax; mov ax, 1; push ax; push word ptr [bp - 2]; push si; lcall 0, 0; pop bx; pop bx; push dx; push ax; les bx, ptr [bp - 0x16]; push word ptr es:[bx]; lcall 0, 0; add sp, 8; push word ptr [bp - 2]; push si; lcall 0, 0; pop bx; pop bx; push word ptr [bp - 2]; push si; lcall 0, 0; pop bx; pop bx; cmp di, 0x100; je 0x19e; push word ptr [bp - 2]; push si; lcall 0, 0; pop bx; pop bx; jmp 0x1ae; mov ax, word ptr [bp - 2]; mov es, word ptr [2]; mov word ptr es:[0], si; mov word ptr es:[2], ax; pop si; pop di; mov sp, bp; pop bp; retf; xor ax, ax; lcall 0, 0; lcall 0, 0; retf; push bp; mov bp, sp; xor ax, ax; lcall 0, 0; mov ax, word ptr [bp + 6]; sub ax, 0x100; je 0x1da; sub ax, 0x1800; je 0x1e3; jmp 0x1f2; mov ax, 0x1900; push ax; mov ax, 0x100; jmp 0x1ea; mov ax, 0x100; push ax; mov ax, 0x1900; push ax; lcall 0, 0; pop bx; pop bx; lcall 0, 0; lcall 0, 0; lcall 0, 0; lcall 0, 0; lcall 0, 0; mov sp, bp; pop bp; retf; xor ax, ax; lcall 0, 0; lcall 0, 0; lcall 0, 0; lcall 0, 0; retf; xor ax, ax; lcall 0, 0; lcall 0, 0; lcall 0, 0; lcall 0, 0; lcall 0, 0; lcall 0, 0; retf",
+   "segments": {
+    "UNIT_TEXT": {
+     "class": "CODE",
+     "align": "word",
+     "combine": "public",
+     "length": 583,
+     "big": false
+    },
+    "_DATA": {
+     "class": "DATA",
+     "align": "word",
+     "combine": "public",
+     "length": 11,
+     "big": false
+    },
+    "CONST": {
+     "class": "CONST",
+     "align": "word",
+     "combine": "public",
+     "length": 4,
+     "big": false
+    },
+    "_BSS": {
+     "class": "BSS",
+     "align": "word",
+     "combine": "public",
+     "length": 0,
+     "big": false
+    }
+   },
+   "communals": {}
+  },
+  {
+   "variant": "io_h_prototypes",
+   "profile_index": 0,
+   "profile": "msc600ax",
+   "flags": [
+    "/AL",
+    "/Os",
+    "/Oe",
+    "/Og",
+    "/Zi"
+   ],
+   "source_sha256": "8909342e84eb4e1a1c227d93fbaf2c5b29f5f84713a28fd7b2ac9bae317b7a03",
+   "bytes": "558becb816009a0000000057569a00000000b80000ba000052502bc09a00000000b80000ba00005250b800019a00000000b80000ba00005250b800159a00000000b80000ba00005250b800129a00000000b80000ba00005250b800139a00000000b80000ba00005250b800199a00000000b80000ba00005250b800059a00000000b80000ba000052509a00000000b80000ba000052509a00000000b80000ba000052509a00000000b8000150b80019509a000000005b5b9a00000000bb00008e060000895eea8c46ec26833f007503e9db002bc0502bc9515126ff379a0000000083c408b80e00508d46ee1650c45eea26ff379a0000000083c4082bc0508b46f48b56f6050e0083d2005250c45eea26ff379a0000000083c408b800001e50b8010050b800019952509a0000000083c40a8bf08956feb800015052569a000000005b5b5250c45eea26ff379a0000000083c4088bf8b8010050ff76fe569a000000005b5b5250c45eea26ff379a0000000083c408ff76fe569a000000005b5bff76fe569a000000005b5b81ff0001740dff76fe569a000000005b5beb108b46fe8e060200268936000026a302005e5f8be55dcb33c09a000000009a00000000cb558bec33c09a000000008b46062d000174072d0018740beb18b8001950b80001eb07b8000150b80019509a000000005b5b9a000000009a000000009a000000009a000000009a000000008be55dcb33c09a000000009a000000009a000000009a00000000cb33c09a000000009a000000009a000000009a000000009a000000009a00000000cb",
+   "disasm": "push bp; mov bp, sp; mov ax, 0x16; lcall 0, 0; push di; push si; lcall 0, 0; mov ax, 0; mov dx, 0; push dx; push ax; sub ax, ax; lcall 0, 0; mov ax, 0; mov dx, 0; push dx; push ax; mov ax, 0x100; lcall 0, 0; mov ax, 0; mov dx, 0; push dx; push ax; mov ax, 0x1500; lcall 0, 0; mov ax, 0; mov dx, 0; push dx; push ax; mov ax, 0x1200; lcall 0, 0; mov ax, 0; mov dx, 0; push dx; push ax; mov ax, 0x1300; lcall 0, 0; mov ax, 0; mov dx, 0; push dx; push ax; mov ax, 0x1900; lcall 0, 0; mov ax, 0; mov dx, 0; push dx; push ax; mov ax, 0x500; lcall 0, 0; mov ax, 0; mov dx, 0; push dx; push ax; lcall 0, 0; mov ax, 0; mov dx, 0; push dx; push ax; lcall 0, 0; mov ax, 0; mov dx, 0; push dx; push ax; lcall 0, 0; mov ax, 0x100; push ax; mov ax, 0x1900; push ax; lcall 0, 0; pop bx; pop bx; lcall 0, 0; mov bx, 0; mov es, word ptr [0]; mov word ptr [bp - 0x16], bx; mov word ptr [bp - 0x14], es; cmp word ptr es:[bx], 0; jne 0xd2; jmp 0x1ad; sub ax, ax; push ax; sub cx, cx; push cx; push cx; push word ptr es:[bx]; lcall 0, 0; add sp, 8; mov ax, 0xe; push ax; lea ax, [bp - 0x12]; push ss; push ax; les bx, ptr [bp - 0x16]; push word ptr es:[bx]; lcall 0, 0; add sp, 8; sub ax, ax; push ax; mov ax, word ptr [bp - 0xc]; mov dx, word ptr [bp - 0xa]; add ax, 0xe; adc dx, 0; push dx; push ax; les bx, ptr [bp - 0x16]; push word ptr es:[bx]; lcall 0, 0; add sp, 8; mov ax, 0; push ds; push ax; mov ax, 1; push ax; mov ax, 0x100; cdq; push dx; push ax; lcall 0, 0; add sp, 0xa; mov si, ax; mov word ptr [bp - 2], dx; mov ax, 0x100; push ax; push dx; push si; lcall 0, 0; pop bx; pop bx; push dx; push ax; les bx, ptr [bp - 0x16]; push word ptr es:[bx]; lcall 0, 0; add sp, 8; mov di, ax; mov ax, 1; push ax; push word ptr [bp - 2]; push si; lcall 0, 0; pop bx; pop bx; push dx; push ax; les bx, ptr [bp - 0x16]; push word ptr es:[bx]; lcall 0, 0; add sp, 8; push word ptr [bp - 2]; push si; lcall 0, 0; pop bx; pop bx; push word ptr [bp - 2]; push si; lcall 0, 0; pop bx; pop bx; cmp di, 0x100; je 0x19d; push word ptr [bp - 2]; push si; lcall 0, 0; pop bx; pop bx; jmp 0x1ad; mov ax, word ptr [bp - 2]; mov es, word ptr [2]; mov word ptr es:[0], si; mov word ptr es:[2], ax; pop si; pop di; mov sp, bp; pop bp; retf; xor ax, ax; lcall 0, 0; lcall 0, 0; retf; push bp; mov bp, sp; xor ax, ax; lcall 0, 0; mov ax, word ptr [bp + 6]; sub ax, 0x100; je 0x1d9; sub ax, 0x1800; je 0x1e2; jmp 0x1f1; mov ax, 0x1900; push ax; mov ax, 0x100; jmp 0x1e9; mov ax, 0x100; push ax; mov ax, 0x1900; push ax; lcall 0, 0; pop bx; pop bx; lcall 0, 0; lcall 0, 0; lcall 0, 0; lcall 0, 0; lcall 0, 0; mov sp, bp; pop bp; retf; xor ax, ax; lcall 0, 0; lcall 0, 0; lcall 0, 0; lcall 0, 0; retf; xor ax, ax; lcall 0, 0; lcall 0, 0; lcall 0, 0; lcall 0, 0; lcall 0, 0; lcall 0, 0; retf",
+   "segments": {
+    "UNIT_TEXT": {
+     "class": "CODE",
+     "align": "word",
+     "combine": "public",
+     "length": 582,
+     "big": false
+    },
+    "_DATA": {
+     "class": "DATA",
+     "align": "word",
+     "combine": "public",
+     "length": 11,
+     "big": false
+    },
+    "CONST": {
+     "class": "CONST",
+     "align": "word",
+     "combine": "public",
+     "length": 4,
+     "big": false
+    },
+    "_BSS": {
+     "class": "BSS",
+     "align": "word",
+     "combine": "public",
+     "length": 0,
+     "big": false
+    }
+   },
+   "communals": {}
+  }
+ ],
+ "checks": [
+  {
+   "check": "implicit_read@0",
+   "needle": "mov ax, 1; push ax; mov cx, 0x100; sub dx, dx; push dx; push cx",
+   "ok": true
+  },
+  {
+   "check": "io_h_prototypes@0",
+   "needle": "mov ax, 1; push ax; mov ax, 0x100; cdq; push dx; push ax",
+   "ok": true
+  }
+ ],
+ "all_checks_pass": true
+}

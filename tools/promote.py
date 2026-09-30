@@ -26,7 +26,18 @@ module *and* every new claim to be strictly exact (see tools/match.py).  It refu
   * claims outside the module frame, unknown functions, double ownership;
   * any regression of an existing claim (bytes, fixups, relocation order);
   * claims inside the SCAFFOLD block;
-  * a canonical file that changed while the promotion ran.
+  * a canonical file that changed while the promotion ran;
+  * source-content violations (tools/modules.py source_lint: `_emit`, db/dw/dd inside a proc,
+    `org`, asm `include`, numeric branch targets, `#include` traversal);
+  * an extent that is not one object placement or does not reach the object's boundaries
+    (modules.verify_extent), a new ``UNIT:SEG@OFF`` key without ``--origin-evidence``;
+  * ``--unsteer`` when the module source did not change.
+Provenance recorded in the manifest: ``--source-origin`` ("hand-written C", "hand-written asm",
+"asm-transcribed: <generator path>@<sha256>"; required for .asm modules), ``--mark-steered
+NAME=WHY`` (an existing claim whose source holds a steering construct: a dummy construct
+with no plausible original purpose), ``--layout-inferred NAME=WHY`` (formatting, labels or
+declaration order chosen to satisfy relocation-order or identifier-count evidence; NAME may
+be the module key for a module-wide note).
 On success it writes the source, updates layout/manifest.json and appends a
 proof record to evidence/promotions.jsonl, all under an exclusive lock.
 """
@@ -85,6 +96,16 @@ def main() -> int:
                          "link, or FIRST (the program's first far data)")
     ap.add_argument("--asm-evidence", default=None,
                     help="required for .asm: why this code is genuine assembly (compiler experiments)")
+    ap.add_argument("--source-origin", default=None,
+                    help='"hand-written C" | "hand-written asm" | "asm-transcribed: <generator path>@<sha256>"')
+    ap.add_argument("--origin-evidence", default=None,
+                    help="UNIT:SEG@OFF modules: why a new object starts at OFF (odd-end 00 fill, relocation "
+                         "frames, relocation-order break); required for a new @OFF key")
+    ap.add_argument("--mark-steered", action="append", default=[],
+                    help="NAME=WHY: an existing claim depends on a steering construct (declared later)")
+    ap.add_argument("--layout-inferred", action="append", default=[],
+                    help="NAME=WHY (NAME = claim or the module key): formatting/label/declaration order "
+                         "inferred from relocation-order or identifier-count evidence")
     ap.add_argument("--verify-only", action="store_true")
     a = ap.parse_args()
 
@@ -94,6 +115,10 @@ def main() -> int:
     lang = "asm" if a.candidate.suffix.lower() == ".asm" else "c"
     if lang == "asm" and not a.asm_evidence and not (modmod.load_manifest()["modules"].get(key, {}).get("asm_evidence")):
         raise SystemExit("an .asm module needs --asm-evidence naming the experiments that exclude compiler output")
+    if a.asm_evidence and modmod.evidence_path_reasons(a.asm_evidence):
+        raise SystemExit("--asm-evidence: " + "; ".join(modmod.evidence_path_reasons(a.asm_evidence)))
+    if a.source_origin is not None and modmod.source_origin_reasons(a.source_origin, lang):
+        raise SystemExit("--source-origin: " + "; ".join(modmod.source_origin_reasons(a.source_origin, lang)))
     x = exemod.load()
     data_only_key = unit == modmod.DATA_UNIT
     if data_only_key and (a.claim or a.code_data or a.extent):
@@ -104,7 +129,12 @@ def main() -> int:
     with Lock() if not a.verify_only else _NoLock():
         man = modmod.load_manifest()
         mod = man["modules"].get(key)
-        old_claims = list(mod["claims"]) if mod else []
+        old_claims = [dict(c) for c in mod["claims"]] if mod else []
+        if origin is not None and mod is None and not (a.origin_evidence or "").strip():
+            raise SystemExit(f"{key}: a new object UNIT:SEG@OFF needs --origin-evidence (why LINK started an "
+                             f"object at {origin:04X}: odd-end 00 fill, relocation frames, relocation-order break)")
+        if a.origin_evidence is not None and origin is None:
+            raise SystemExit("--origin-evidence applies to UNIT:SEG@OFF modules")
         profile = a.profile or (mod["profile"] if mod else ("masm510" if lang == "asm" else fnmod.DEFAULT_PROFILE))
         flags = a.flags if a.flags is not None else (mod["flags"] if mod else fnmod.profile_flags(profile))
         placements = dict(mod.get("placements", {})) if mod else {}
@@ -140,15 +170,14 @@ def main() -> int:
                                "target_sha256": sha(orig), "kind": "ASM" if lang == "asm" else "C",
                                "provenance": "EXACT_STEERED" if a.steered else "EXACT_NATURAL",
                                **({"steered": a.steered} if a.steered else {})})
-        fstarts = {r["seg"] * 16 + r["off"]: r for r in fnmod.table()["functions"] if r["unit"] == unit}
         for spec in a.code_data:
             d0, d1 = (int(v, 16) for v in spec.replace(";", ":").split(":"))
             off = d0 - seg * 16
             if not (d0 < d1 and lo <= off and off + (d1 - d0) <= hi):
                 raise SystemExit(f"--code-data {spec}: not inside module {key} (frame offsets {lo:04X}-{hi - 1:04X})")
-            hidden = [f"{r['seg']:04X}:{r['off']:04X}" for lin, r in fstarts.items() if d0 <= lin < d1]
+            hidden = modmod.row_overlaps(unit, d0, d1 - d0)
             if hidden:
-                raise SystemExit(f"--code-data {spec}: covers function table entries {hidden[:4]}")
+                raise SystemExit(f"--code-data {spec}: overlaps function table entries {hidden[:4]}")
             name = f"cd_{unit}_{seg:04X}_{off:04X}"
             if name in owned and owned[name] != key:
                 raise SystemExit(f"{name} already owned by module {owned[name]}")
@@ -176,6 +205,9 @@ def main() -> int:
         claims = old_claims + new_claims
         # steering removed from the source: the claim becomes natural once this source re-verifies;
         # the old note is kept as history (the author asserts the steering construct is gone)
+        data_new = text.replace("\r\n", "\n").encode("latin1")
+        if a.unsteer and (mod is None or sha(data_new) == mod.get("source_sha256")):
+            raise SystemExit("--unsteer: the module source is unchanged; remove the steering construct first")
         for spec in a.unsteer:
             name, _, why = spec.partition("=")
             c = next((c for c in claims if c["name"] == name), None)
@@ -185,6 +217,32 @@ def main() -> int:
                 raise SystemExit("--unsteer NAME=WHY: say what replaced the steering")
             c.setdefault("steered_history", []).append({"steered": c.pop("steered", ""), "cleared": why})
             c["provenance"] = "EXACT_NATURAL"
+        # steering found later in an existing claim (a construct added only to move record breaks
+        # or identifier counts), and layout inferred from relocation-order / identifier-count evidence
+        marked = []
+        for spec in a.mark_steered:
+            name, _, why = spec.partition("=")
+            c = next((c for c in claims if c["name"] == name), None)
+            if c is None or not why.strip():
+                raise SystemExit(f"--mark-steered {spec}: NAME=WHY with NAME a claim of {key}")
+            if c.get("provenance") == "EXACT_STEERED":
+                raise SystemExit(f"--mark-steered {name}: already steered ({c.get('steered')})")
+            c["provenance"], c["steered"] = "EXACT_STEERED", why
+            marked.append({"name": name, "steered": why})
+        layout_notes = list(mod.get("layout_inferred", [])) if mod else []
+        inferred = []
+        for spec in a.layout_inferred:
+            name, _, why = spec.partition("=")
+            if not why.strip():
+                raise SystemExit(f"--layout-inferred {spec}: NAME=WHY")
+            if name in (key, a.module):
+                layout_notes.append(why)
+            else:
+                c = next((c for c in claims if c["name"] == name), None)
+                if c is None:
+                    raise SystemExit(f"--layout-inferred {name}: not a claim of {key} (or the module key)")
+                c["layout_inferred"] = why
+            inferred.append({"name": name, "why": why})
         # extent overlap with every other claim in the program
         for k, m in man["modules"].items():
             for c in m["claims"]:
@@ -198,6 +256,16 @@ def main() -> int:
                   "lang": lang}
         if origin is not None:
             module["origin"] = origin
+            ev = a.origin_evidence or (mod or {}).get("origin_evidence")
+            if ev:
+                module["origin_evidence"] = ev
+        origin_src = a.source_origin or (mod or {}).get("source_origin") or ("hand-written C" if lang == "c" else None)
+        if modmod.source_origin_reasons(origin_src, lang):
+            raise SystemExit(f"{key}: " + "; ".join(modmod.source_origin_reasons(origin_src, lang))
+                             + " (--source-origin)")
+        module["source_origin"] = origin_src
+        if layout_notes:
+            module["layout_inferred"] = layout_notes
         if data_only_key:
             la = a.link_after if a.link_after is not None else (mod or {}).get("link_after")
             if la is None:
@@ -218,7 +286,7 @@ def main() -> int:
             module["extent"] = {"start": s0, "end": s1}
         elif mod and mod.get("extent"):
             module["extent"] = mod["extent"]
-        res = modmod.verify_module(text, module, claims)
+        res = modmod.verify_module(text, module, claims, man=man)
         # manifest-level data rules: link position, and no two modules place the same bytes
         man_after = {**man, "modules": {**man["modules"], key: module}}
         mreasons = modmod.link_after_reasons(man_after, key, module)
@@ -272,6 +340,12 @@ def main() -> int:
                                  "new_claims": [c["name"] for c in new_claims], "profile": profile,
                                  "placements": sorted(placements),
                                  **({"released": released} if released else {}),
+                                 **({"unsteered": a.unsteer} if a.unsteer else {}),
+                                 **({"marked_steered": marked} if marked else {}),
+                                 **({"layout_inferred": inferred} if inferred else {}),
+                                 **({"source_origin": origin_src} if origin_src != (mod or {}).get("source_origin") else {}),
+                                 **({"origin_evidence": module["origin_evidence"]}
+                                    if module.get("origin_evidence") and module.get("origin_evidence") != (mod or {}).get("origin_evidence") else {}),
                                  "flags": flags, "source_sha256": sha(data),
                                  "object_sha256": res.get("object_sha256")}) + "\n")
         print(f"PROMOTED {len(new_claims)} new claim(s)"

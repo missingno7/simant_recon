@@ -107,8 +107,17 @@ def run(func: str, sources: list[Path], profile: str | None, flags, public: str 
             print(f"[{src.name}] COMPILER_ERROR\n{r.log[-800:]}")
             results.append(row)
             continue
-        res = match.match_object(r.obj, target, f"{pub[1:].upper()}_TEXT" if False else fnmod.code_segment(r.obj, pub),
-                                 pub, placements)
+        # the public as the module check sees it (match.public_in: _cdecl, @fastcall, pascal
+        # names registered with convention pascal, older alias spellings)
+        obj = match.OmfReader(communals=True).read(r.obj)
+        pname, prec = match.public_in(obj, pub[1:])
+        if prec is None:
+            hint = [p["name"] for p in obj.publics if p["name"] == pub[1:].upper()]
+            if hint:
+                print(f"  note: pascal public {hint[0]}: bind it by registering the convention "
+                      f"(python tools/symbols.py set-convention {pub[1:]} pascal --why ...)")
+        res = match.Binder(target, obj, prec["segment"] if prec else fnmod.code_segment(r.obj, pub),
+                           pname or pub, placements).bind()
         d = diagnose(res, f["off"])
         row.update({"status": "EXACT" if res.exact else "MISMATCH", "reasons": res.reasons,
                     "opcode_ratio": d["opcode_ratio"], "first_diff_insn": d["first_diff_insn"],

@@ -6,15 +6,15 @@ Validation: **PASS** (2026-09-30)
 |---|---:|
 | known_functions | 1,730 |
 | known_game_functions | 1,640 |
-| exact_c_functions | 1,210 |
-| exact_c_bytes | 214,474 |
+| exact_c_functions | 1,214 |
+| exact_c_bytes | 216,147 |
 | exact_asm_bytes | 50,441 |
 | exact_code_segment_data_bytes | 1,481 |
 | historical_runtime_bytes_accepted | 12,339 |
 | historical_runtime_members_accepted | 90 |
 | runtime_functions_known | 90 |
 | runtime_functions_owned | 90 |
-| owned_functions | 1,667 |
+| owned_functions | 1,671 |
 | historical_runtime_bytes_located_unaccepted | 0 |
 | rtlink_manager_bytes_unaccepted | 17,001 |
 | data_bytes_accepted | 105,212 |
@@ -26,14 +26,25 @@ Validation: **PASS** (2026-09-30)
 | far_bss_sizes_consistent_bytes | 3,966 |
 | far_bss_sizes_unverified_bytes | 15,442 |
 | game_code_span_bytes | 304,798 |
-| unresolved_code_bytes | 38,402 |
+| unresolved_code_bytes | 36,729 |
 | unresolved_data_bytes | 9,811 |
-| scaffold_functions | 41 |
-| exact_translation_units | 84 |
-| complete_tus_relocation_order_proven | 83 |
+| scaffold_functions | 40 |
+| exact_translation_units | 85 |
+| complete_tus_relocation_order_proven | 84 |
 | claims_within_group_order_pending | 6 |
-| inplace_draft_functions | 21 |
+| inplace_draft_functions | 18 |
 | claims_exact_steered | 18 |
+| exact_c_bytes_in_complete_tus | 114,834 |
+| exact_c_bytes_in_partial_modules | 101,313 |
+| exact_c_bytes_steered | 8,119 |
+| exact_c_bytes_layout_inferred | 13,850 |
+| exact_c_bytes_within_group_pending | 1,696 |
+| claims_layout_inferred | 11 |
+| asm_transcribed_bytes | 51,922 |
+| data_bytes_opaque_unmarked | 4,383 |
+| runtime_oracle_derived_words | 244 |
+
+Manifest: `bff34ea6e424ce424ce62794188df77282a69ba7c11acc895a5cac8ccd20ac63`
 
 Complete TUs with cross-function relocation order pending (record breaks between functions differ; see docs/codegen-rules.md ZI-1): S00:31AD
 

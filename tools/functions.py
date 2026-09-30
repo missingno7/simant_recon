@@ -100,6 +100,19 @@ def freeze() -> int:
     return 0
 
 
+def claim_overlaps(unit: str, lin: int, size: int, skip: tuple | None = None) -> list[str]:
+    """Manifest claims (functions and DATA_IN_CODE spans) of ``unit`` that overlap
+    [lin, lin + size); ``skip`` = (seg, off) of the row being edited (its own claim)."""
+    man = json.loads((ROOT / "layout" / "manifest.json").read_text())
+    out = []
+    for k, m in man["modules"].items():
+        for c in m["claims"]:
+            a0 = c["seg"] * 16 + c["off"]
+            if c["unit"] == unit and (c["seg"], c["off"]) != skip and a0 < lin + size and lin < a0 + c["size"]:
+                out.append(f"{c['name']} ({k})")
+    return out
+
+
 def add(addr: str, size: int, why: str) -> int:
     """Add a reviewed function row (e.g. an unreferenced entry proven by layout)."""
     from lockfile import CanonicalLock
@@ -126,6 +139,9 @@ def resize(addr: str, size: int, why: str) -> int:
             if r is not row and r["unit"] == unit and r["seg"] * 16 + r["off"] < lin + size \
                     and lin < r["seg"] * 16 + r["off"] + r["size"]:
                 raise SystemExit(f"new extent overlaps {r}")
+        hit = claim_overlaps(unit, lin, size, skip=(seg, off))
+        if hit:
+            raise SystemExit(f"new extent overlaps claims {hit[:4]}")
         row.setdefault("notes", []).append(f"resized {row['size']} -> {size}: {why}")
         row["size"] = size
         row["extent"] = "REVIEWED"
@@ -230,6 +246,9 @@ def _add(addr: str, size: int, why: str) -> int:
     for r in t["functions"]:
         if r["unit"] == unit and r["seg"] * 16 + r["off"] < lin + size and lin < r["seg"] * 16 + r["off"] + r["size"]:
             raise SystemExit(f"overlaps {r}")
+    hit = claim_overlaps(unit, lin, size)
+    if hit:
+        raise SystemExit(f"overlaps claims {hit[:4]} (e.g. code-segment data)")
     t["functions"].append({"unit": unit, "seg": seg, "off": off, "size": size, "region": "game_or_library",
                            "extent": "REVIEWED", "evidence": ["reviewed"], "notes": [why]})
     t["functions"].sort(key=lambda r: (r["unit"] != "root", r["unit"], r["seg"] * 16 + r["off"]))

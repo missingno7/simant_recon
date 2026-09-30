@@ -113,9 +113,11 @@ python tools/slots.py FUNC draft.c                 # slot/register map vs origin
 python tools/records.py root:1383 [draft.c]        # LEDATA/LINNUM record breaks vs the NEED/FORBID break intervals
                                                    #   implied by the oracle's relocation order (within/cross function)
 python tools/records.py root:1383 draft.c --plan   # where to add/remove /Zi line entries so the 52-entry flushes
-                                                   #   land in allowed intervals; --sim FUNC, --lines, --records, --obj
+                                                   #   land in allowed intervals; --sim FUNC, --lines, --records, --obj,
+                                                   #   --all-lines (every line entry with its source line)
 python tools/variants.py a.c b.c c.c --module K    # one compile per variant, in parallel; every claim + in-place drafts
 python tools/variants.py --base m.c --spec v.py    #   V = {name: [(old, new), ...]} edits; E/r/./S/- per function
+python tools/variants.py DIR/ | --list FILE --module K   # many variants: a directory of files or a path list
 python tools/idscan.py draft.c [--before FUNC]     # N = 0..16 dummy externs: which functions become exact at which N
 ```
 
@@ -142,6 +144,23 @@ python tools/idscan.py draft.c [--before FUNC]     # N = 0..16 dummy externs: wh
   typedef, named prototype parameters, or a missing extern in first-use order. Only when no
   natural form exists may you promote with `--steered "construct -> decision it steers"`.
   Never promote `idscan_pad` declarations.
+
+## Provenance flags (promote.py)
+
+* `--source-origin`: `"hand-written C"` (default for .c), `"hand-written asm"`, or
+  `"asm-transcribed: <generator path>@<sha256>"` for MASM produced from the original's
+  disassembly (e.g. `tools/d2a.py`). Required for every .asm module.
+* `--steered "construct -> decision"` (new claims) / `--mark-steered NAME=WHY` (an existing
+  claim found to depend on a dummy construct); `--unsteer NAME=WHY` only with a changed source.
+* `--layout-inferred NAME=WHY` (NAME = claim, or the module key for a module-wide note):
+  formatting, labels or declaration order chosen to satisfy relocation-order (record breaks)
+  or identifier-count evidence. Not steering (the construct is plausible original source),
+  but reported separately.
+* Tables of 64 bytes or more written as numeric literals are flagged unless a comment
+  `OPAQUE-DATA: <why no structure is recovered>` precedes them (validate reports the
+  unmarked bytes).
+* A pascal declaration binds only to a symbol registered with
+  `python tools/symbols.py set-convention NAME pascal --why "..."`.
 
 ## Never
 
