@@ -4388,6 +4388,85 @@
    "scaffold": [],
    "object_sha256": "95cf40f86a8097ca498894c38279bf6f34efcd8eb3cafdbb02922f78de916b9d"
   },
+  "S19:384C": {
+   "unit": "S19",
+   "seg": 14412,
+   "profile": "msc600ax",
+   "flags": [
+    "/AL",
+    "/Os",
+    "/Oe",
+    "/Og",
+    "/Zi"
+   ],
+   "placements": {
+    "_DATA": {
+     "seg": 21939,
+     "off": 11440,
+     "size": 289
+    },
+    "CONST": {
+     "seg": 21939,
+     "off": 34732,
+     "size": 6
+    }
+   },
+   "lang": "c",
+   "extent": {
+    "start": 230592,
+    "end": 231712
+   },
+   "source": "src/S19/m384C.c",
+   "source_sha256": "1943df3cd203d6c4cce4193b2ada725097d4bd67c4dacc4322217ffbabc45b53",
+   "claims": [
+    {
+     "name": "o19_384C_0000",
+     "unit": "S19",
+     "seg": 14412,
+     "off": 0,
+     "size": 582,
+     "target_sha256": "87d79c0412a1dc1abd841977e99a5df0719509438e87237b145ea8efbfb1fdc9",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL",
+     "reloc_order": "GROUPED"
+    },
+    {
+     "name": "o19_384C_0246",
+     "unit": "S19",
+     "seg": 14412,
+     "off": 582,
+     "size": 218,
+     "target_sha256": "540a53834f52b5b247b7a5455d4f0795f31f302b70bd55ee3aec020e64e7cea8",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL",
+     "reloc_order": "GROUPED"
+    },
+    {
+     "name": "o19_384C_0320",
+     "unit": "S19",
+     "seg": 14412,
+     "off": 800,
+     "size": 99,
+     "target_sha256": "6be64eb45139c0df27f8c91a5a4616d325a6dc44223b3841dea5fe95003189a3",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL",
+     "reloc_order": "GROUPED"
+    },
+    {
+     "name": "o19_384C_0383",
+     "unit": "S19",
+     "seg": 14412,
+     "off": 899,
+     "size": 221,
+     "target_sha256": "f2f339581c29e8b267d487f6252f3f4b100cb967151382e7434880841527fab4",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL",
+     "reloc_order": "GROUPED"
+    }
+   ],
+   "scaffold": [],
+   "object_sha256": "4cd11e9156059cc4fe1ab773cb2d5a23406f1dd973327e89998f0dfa1762c1c6"
+  },
   "S20:39C7": {
    "unit": "S20",
    "seg": 14791,
@@ -12329,7 +12408,7 @@
    },
    "lang": "c",
    "source": "src/root/m1A96.c",
-   "source_sha256": "d84f59f4bf32aa0886edcf3005d37aca25f426bf1e315c93c8b4706865464c60",
+   "source_sha256": "0b96adc3b8cc8d4929a030896f944427de96d4bab73cb37e7fd412032ff36f45",
    "claims": [
     {
      "name": "ch_RemoveEntry",
@@ -12429,13 +12508,23 @@
      "kind": "C",
      "provenance": "EXACT_NATURAL",
      "reloc_order": "EXACT"
+    },
+    {
+     "name": "ch_GetPrime",
+     "unit": "root",
+     "seg": 6806,
+     "off": 1629,
+     "size": 124,
+     "target_sha256": "a168e891e16fe7ac91eadea5a78c0aa6e9bc1283bdf3c2c593b9fdd4aa838c5c",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL",
+     "reloc_order": "GROUPED"
     }
    ],
    "scaffold": [
-    "ch_GetPrime",
     "ch_LookUpId"
    ],
-   "object_sha256": "3712ac94505e58d693cb42c733822d125cd11981dc8b06ff7eae9c34e4ee76ba"
+   "object_sha256": "189fd819ecf1d94f42ce49503f56bd043411725f5d96f5b031fd94e429d4d3b4"
   },
   "root:1B73": {
    "unit": "root",
@@ -17137,6 +17226,51 @@
    "scaffold": [],
    "object_sha256": "7d89def9ce8af33c7a0307a147147662c74ab437b799ae2140a7a7db09eeae79"
   },
+  "root:2815": {
+   "unit": "root",
+   "seg": 10261,
+   "profile": "msc600ax",
+   "flags": [
+    "/AL",
+    "/Os",
+    "/Oe",
+    "/Og",
+    "/Gs",
+    "/Zi"
+   ],
+   "placements": {},
+   "lang": "c",
+   "source": "src/root/m2815.c",
+   "source_sha256": "aa9651ef304fe36b72dfb7171fb5c43a3dff48b5f2a80304b341b96bf5d46fc4",
+   "claims": [
+    {
+     "name": "f_2815_0118",
+     "unit": "root",
+     "seg": 10261,
+     "off": 280,
+     "size": 77,
+     "target_sha256": "ee3a52ec357a67c42885e6cbcdf23632ccb7b256682d383adbc7dcb15b67ac45",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL",
+     "reloc_order": "EXACT"
+    },
+    {
+     "name": "f_2815_024D",
+     "unit": "root",
+     "seg": 10261,
+     "off": 589,
+     "size": 40,
+     "target_sha256": "155d8aa2fa7c303055dc8e9768d47c62ca318840c83d5c60553a260672e7b667",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL",
+     "reloc_order": "EXACT"
+    }
+   ],
+   "scaffold": [
+    "f_277E_097A"
+   ],
+   "object_sha256": "08b8777c8dd9c9ea10acf4c4dd4ec11de1bad5eae3de14ff365104ad27ddd59d"
+  },
   "root:283E": {
    "unit": "root",
    "seg": 10302,
@@ -17427,6 +17561,71 @@
     "f_284A_0138"
    ],
    "object_sha256": "1b034912319ab8e1d9c7291209272a0ac1bc93e3be0edc4bcaef6a7e55a73691"
+  },
+  "root:290D": {
+   "unit": "root",
+   "seg": 10509,
+   "profile": "msc600ax",
+   "flags": [
+    "/AL",
+    "/Os",
+    "/Oe",
+    "/Og",
+    "/Gs",
+    "/Zi"
+   ],
+   "placements": {
+    "_DATA": {
+     "seg": 21939,
+     "off": 29888,
+     "size": 26
+    },
+    "CONST": {
+     "seg": 21939,
+     "off": 35474,
+     "size": 8
+    }
+   },
+   "lang": "c",
+   "source": "src/root/m290D.c",
+   "source_sha256": "eaa7ea68aefe755b01322ce9f273e6e2e1a968b82f8fec2f8f71dda8eda00d7f",
+   "claims": [
+    {
+     "name": "f_290D_0098",
+     "unit": "root",
+     "seg": 10509,
+     "off": 152,
+     "size": 251,
+     "target_sha256": "03577d10412397a264b92d795357ac780859301076ff074c73c0491e053939aa",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL",
+     "reloc_order": "GROUPED"
+    },
+    {
+     "name": "f_290D_0193",
+     "unit": "root",
+     "seg": 10509,
+     "off": 403,
+     "size": 217,
+     "target_sha256": "a4f89fe0ab7faef38e6310e080386fdf9553858ef9f2397de27920617702fc79",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL",
+     "reloc_order": "EXACT"
+    },
+    {
+     "name": "f_290D_026C",
+     "unit": "root",
+     "seg": 10509,
+     "off": 620,
+     "size": 106,
+     "target_sha256": "c2eb0597b37c8fdd8c93f6cd044a63b5a58c65fdc99d068f98d2814d757dfece",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL",
+     "reloc_order": "GROUPED"
+    }
+   ],
+   "scaffold": [],
+   "object_sha256": "c22cf9957b4bf94734069858c0d4e81878dc6f4903b377c810fb0fcab87e38a1"
   },
   "root:293A": {
    "unit": "root",

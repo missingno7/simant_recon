@@ -210,6 +210,48 @@
 },
 {
 "unit": "root",
+"seg": 74,
+"off": 685,
+"size": 222,
+"region": "game_or_library",
+"extent": "REVIEWED",
+"evidence": [
+"reviewed"
+],
+"notes": [
+"far function after f_004A_0253 (xor ax,ax; call __aFchkstk; switch on fd_50F6_032E), called push cs/call near by 010A/0172/01E9/0253; worker rootF"
+]
+},
+{
+"unit": "root",
+"seg": 74,
+"off": 907,
+"size": 131,
+"region": "game_or_library",
+"extent": "REVIEWED",
+"evidence": [
+"reviewed"
+],
+"notes": [
+"far function (chkstk, switch on fd_50F6_032E, x only), called push cs/call near by 000A/0052; worker rootF"
+]
+},
+{
+"unit": "root",
+"seg": 74,
+"off": 1038,
+"size": 131,
+"region": "game_or_library",
+"extent": "REVIEWED",
+"evidence": [
+"reviewed"
+],
+"notes": [
+"far function (chkstk, switch on fd_50F6_032E, y only), called push cs/call near by 008A/00D2; ends at 0491 (LINK fill 00); worker rootF"
+]
+},
+{
+"unit": "root",
 "seg": 147,
 "off": 2,
 "size": 41,

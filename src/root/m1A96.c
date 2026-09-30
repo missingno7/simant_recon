@@ -4,6 +4,8 @@
  * A cache table is a DOS memory handle (far pointer to a far master pointer).
  */
 
+#include <string.h>
+
 typedef union {
     struct {
         int id;
@@ -29,7 +31,6 @@ extern int far f_171C_1794(char far *handle);
 extern int far f_171C_1AD4(char far *handle);
 extern void far * far malloc(int size);
 extern void far free(void far *p);
-extern void far * far _fmemset(void far *dst, int c, unsigned int n);
 extern void far Punt(char far *format, ...);
 
 char far * (far *g_3B7E)(int object, int type) = 0L;
@@ -257,11 +258,6 @@ int far ch_DumpOldest(CacheHandle table)
     return (*table)->used;
 }
 
-/* SCAFFOLD BEGIN: context only, not reconstruction.
- * ch_GetPrime best draft (/Oeg): equal length, 5 instructions differ.  Residue: the
- * original stores prime = cand before forming the primes[nprimes] address (index BX,
- * base SI); this draft forms the address first (index SI, base BX).  Tried: 12 spellings
- * of the store, register j/nprimes, all 120 declaration orders, while/for/flag forms. */
 int far ch_GetPrime(int n)
 {
     int prime;
@@ -286,7 +282,6 @@ next:   ;
     free(primes);
     return prime;
 }
-/* SCAFFOLD END */
 
 void far ch_SetCacheHooks(char far * (far *cache)(int object, int type),
                      char far * (far *release)(int object, int type))

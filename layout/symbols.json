@@ -5939,6 +5939,24 @@
    "off": 595,
    "grounding": "reviewed: far code pointer in section 27 data at 57380; descent extent"
   },
+  "f_004A_02AD": {
+   "unit": "root",
+   "seg": 74,
+   "off": 685,
+   "grounding": "reviewed: far function after f_004A_0253 (xor ax,ax; call __aFchkstk; switch on fd_50F6_032E), called push cs/call near by 010A/0172/01E9/0253; worker rootF"
+  },
+  "f_004A_038B": {
+   "unit": "root",
+   "seg": 74,
+   "off": 907,
+   "grounding": "reviewed: far function (chkstk, switch on fd_50F6_032E, x only), called push cs/call near by 000A/0052; worker rootF"
+  },
+  "f_004A_040E": {
+   "unit": "root",
+   "seg": 74,
+   "off": 1038,
+   "grounding": "reviewed: far function (chkstk, switch on fd_50F6_032E, y only), called push cs/call near by 008A/00D2; ends at 0491 (LINK fill 00); worker rootF"
+  },
   "f_0093_0002": {
    "unit": "root",
    "seg": 147,
@@ -20064,6 +20082,11 @@
    "off": 3894,
    "grounding": "f_015B_03C6: mov es,[7E36] (CONST 50F6); mov es:[0F36],ax = (plane==1?0x80:0x40)-es:[0FB6]"
   },
+  "fd_50F6_0F38": {
+   "seg": 20726,
+   "off": 3896,
+   "grounding": "f_004A_008A: mov es,[7DE8] (CONST word 50F6); mov ax,es:[0F38] = upper bound of es:[050A] (view y) - separate CONST word from 0F36 (worker rootF)"
+  },
   "fd_50F6_0F3A": {
    "seg": 20726,
    "off": 3898,
@@ -22043,6 +22066,31 @@
    "seg": 21939,
    "off": 23214,
    "grounding": "S02 driver (3126) : extrn\t_g_5AAE:byte (DGROUP operand of genuine-assembly display driver; worker ovlA)"
+  },
+  "g_5FE6": {
+   "seg": 21939,
+   "off": 24550,
+   "grounding": "defined in root:1FD2 _DATA (int g_5FE6, menu colour word); S17 o17_384C_0143/0169 store it through CONST far-segment words 89EC..89F4 (=55B3)"
+  },
+  "g_5FE8": {
+   "seg": 21939,
+   "off": 24552,
+   "grounding": "defined in root:1FD2 _DATA (int g_5FE8, menu colour word); S17 o17_384C_0143/0169 store it through CONST far-segment words 89EC..89F4 (=55B3)"
+  },
+  "g_5FEA": {
+   "seg": 21939,
+   "off": 24554,
+   "grounding": "defined in root:1FD2 _DATA (int g_5FEA, menu colour word); S17 o17_384C_0143/0169 store it through CONST far-segment words 89EC..89F4 (=55B3)"
+  },
+  "g_5FEC": {
+   "seg": 21939,
+   "off": 24556,
+   "grounding": "defined in root:1FD2 _DATA (int g_5FEC, menu colour word); S17 o17_384C_0143/0169 store it through CONST far-segment words 89EC..89F4 (=55B3)"
+  },
+  "g_5FEE": {
+   "seg": 21939,
+   "off": 24558,
+   "grounding": "defined in root:1FD2 _DATA (int g_5FEE, menu colour word); S17 o17_384C_0143/0169 store it through CONST far-segment words 89EC..89F4 (=55B3)"
   },
   "g_5FF0": {
    "seg": 21939,

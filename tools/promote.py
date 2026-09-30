@@ -62,6 +62,8 @@ def main() -> int:
     ap.add_argument("--placement", action="append", default=[], help="SEGNAME=SEG:OFF:SIZE")
     ap.add_argument("--drop-placement", action="append", default=[], help="SEGNAME to remove (e.g. renamed segment)")
     ap.add_argument("--steered", default=None)
+    ap.add_argument("--unsteer", action="append", default=[],
+                    help="NAME=WHY: the steering construct of an existing claim was removed (kept as history)")
     ap.add_argument("--extent", help="START:END linear (hex): claim the complete module segment (exact TU)")
     ap.add_argument("--code-data", action="append", default=[],
                     help="START:END linear (hex): code-segment data (buffer/table) claimed as DATA_IN_CODE")
@@ -139,6 +141,17 @@ def main() -> int:
                                "provenance": "EXACT_STEERED" if a.steered else "EXACT_NATURAL",
                                **({"steered": a.steered} if a.steered else {})})
         claims = old_claims + new_claims
+        # steering removed from the source: the claim becomes natural once this source re-verifies;
+        # the old note is kept as history (the author asserts the steering construct is gone)
+        for spec in a.unsteer:
+            name, _, why = spec.partition("=")
+            c = next((c for c in claims if c["name"] == name), None)
+            if c is None or c.get("provenance") != "EXACT_STEERED":
+                raise SystemExit(f"--unsteer {name}: not a steered claim of {key}")
+            if not why:
+                raise SystemExit("--unsteer NAME=WHY: say what replaced the steering")
+            c.setdefault("steered_history", []).append({"steered": c.pop("steered", ""), "cleared": why})
+            c["provenance"] = "EXACT_NATURAL"
         # extent overlap with every other claim in the program
         for k, m in man["modules"].items():
             for c in m["claims"]:
