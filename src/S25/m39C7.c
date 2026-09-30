@@ -10,7 +10,11 @@
  * others, and TryMoveDirB (105B) tests its three trophallaxis conditions as nested ifs.  Both
  * are byte-identical to the one-line forms; their three extra /Zi line entries put the sixth
  * flush at 12FB (DoNestingB NEED (12E3,131E], FORBID (12FE,132D]) and the ninth outside
- * GetOutB's FORBID (1CFC,1DC0]. */
+ * GetOutB's FORBID (1CFC,1DC0].  DoDigInB writes the DigTileThemB test as
+ * "if (DigTileThemB(..)) {..} else {..; return;}" like its red twin DoDigInR (root:0F3F); the
+ * negated early-return form compiles to the same instructions except that dir then loses DI
+ * in the first region (allocation: the if/else form puts the GetEnterDirB result in DI and
+ * spills it to [bp-4] after the y == 0x3f test, as the original does). */
 
 extern int far ListIndexB;
 extern int far fd_50F6_0F18;
@@ -364,7 +368,7 @@ extern int far BpopT;
 extern int far fd_50F6_0F08;
 extern int far ModeAuto;
 extern int far f_0093_002B(int range);
-extern unsigned int far fd_50F6_04A2;
+extern unsigned int far modeLevels[3];
 extern int far fd_3D57_0C0E;
 extern void far f_0250_428A(int x, int y, int plane);
 
@@ -383,7 +387,7 @@ void far o25_39C7_0980(int x, int y)
     if (!(fd_50F6_0F08 & mask)) {
         attr++;
         if ((attr & 0xf) == 8) {
-            if (ModeAuto != 0 || (int)(fd_50F6_04A2 >> 7) >= f_0093_002B(255)) {
+            if (ModeAuto != 0 || (int)(modeLevels[2] >> 7) >= f_0093_002B(255)) {
                 mode = fd_3D57_0C0E;
                 attr = (mode << 3) + 2;
                 if (mode == 2)
@@ -652,7 +656,7 @@ int far o25_39C7_105B(int x, int y, int dir)
 
 void far o25_39C7_13EF(int x, int y);
 
-/* SCAFFOLD BEGIN: DoNestingB best draft: 1 byte differs, mov si,cx (original) vs mov si,bx when loading the Tindex copy before f_1383_099B (register tie-break); record order is right with this layout */
+/* SCAFFOLD BEGIN: DoNestingB best draft: 1 byte differs, mov si,cx (original) vs mov si,bx when loading the Tindex copy before f_1383_099B (register tie-break; declaration order, case order, statement forms and identifier counts 0..16 tried); record order is right with this layout */
 void far DoNestingB(int x, int y, int attr, int caste)
 {
     int dir;
@@ -827,7 +831,6 @@ extern void far f_00DF_00E8(int sound, int a, int b);
 extern void far f_14EE_0C9C(int x, int y);
 extern int far SRand4(void);
 
-/* SCAFFOLD BEGIN: DoDigInB best draft: the original keeps the GetEnterDirB result in DI and copies it to [bp-4] after the y==0x3f test (mov [bp-4],di; mov cx,di); MSC keeps dir in memory here */
 void far DoDigInB(int x, int y, int attr, int caste)
 {
     int dir;
@@ -860,13 +863,14 @@ void far DoDigInB(int x, int y, int attr, int caste)
     if (tile >= 0x30)
         return;
     if (IsItDirt(tile)) {
-        if (!DigTileThemB(nx, ny)) {
+        if (DigTileThemB(nx, ny)) {
+            BlistT[fd_50F6_0F18] += 0x18;
+            BlistM[fd_50F6_0F18] = 5;
+            f_00DF_00E8(0x11, 0, 0);
+        } else {
             BlistM[fd_50F6_0F18] = f_1383_099B(caste);
             return;
         }
-        BlistT[fd_50F6_0F18] += 0x18;
-        BlistM[fd_50F6_0F18] = 5;
-        f_00DF_00E8(0x11, 0, 0);
     }
     fd_3E1D_8180[x][y] = 0;
     if ((fd_3E1D_8180[nx][ny] & 0x80)
@@ -883,7 +887,6 @@ void far DoDigInB(int x, int y, int attr, int caste)
     if (SRand4() == 0)
         f_14EE_0C9C(nx, ny);
 }
-/* SCAFFOLD END */
 
 extern int far f_0894_21C5(int dir);
 extern unsigned char far fd_3E1D_4180[64][64];

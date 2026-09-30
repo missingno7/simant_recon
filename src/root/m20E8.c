@@ -200,7 +200,7 @@ void far win_Swap(int from, int to, int unused, int p0, int p1, int p2, int p3)
 extern void _fastcall win_LockWinHigh(int win);
 extern void _fastcall f_2505_0288(int obj, struct Rect far *rect);
 extern int near g_3DB4;
-extern int far fd_50F6_3942;
+extern struct Rect far fd_50F6_393C;
 extern int near g_3DB2;
 extern void far win_FlushEvents(void);
 
@@ -227,8 +227,8 @@ void far win_Open(int win, ...)
             f_2505_0288(win, &r);
             if (r.bottom > g_3DB4)
                 dy = g_3DB4 - r.bottom;
-            else if (r.top <= fd_50F6_3942)
-                dy = fd_50F6_3942 - r.top;
+            else if (r.top <= fd_50F6_393C.bottom)
+                dy = fd_50F6_393C.bottom - r.top;
             if (r.left < 0)
                 dx = -r.left;
             else if (r.right >= g_3DB2)

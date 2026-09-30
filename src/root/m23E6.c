@@ -226,7 +226,12 @@ void _fastcall f_23E6_0392(char far *o)
 }
 
 extern void far Punt(char far *format, ...);
-extern int far fd_50F6_47DC;
+struct Pt {
+    int x;
+    int y;
+};
+
+extern struct Pt far fd_50F6_47DA;
 extern int far WinPrintf(char far *format, ...);
 extern int near g_3DE0;
 
@@ -253,8 +258,8 @@ void _fastcall win_DrawElevator(char far *o)
     f_21FA_00EE(o[0x26]);
     r.left++;
     r.right--;
-    r.top += fd_50F6_47DC + 1;
-    r.bottom -= fd_50F6_47DC + 1;
+    r.top += fd_50F6_47DA.y + 1;
+    r.bottom -= fd_50F6_47DA.y + 1;
     height = r.bottom - r.top;
     eleHeight = height * list->visible / list->count;
     WinPrintf("SliderHeight=%d, eleHeight=%d", height, eleHeight);
@@ -278,8 +283,8 @@ void _fastcall f_23E6_066C(char far *o)
     r = *(struct Rect far *)o;
     if (o[0x21] == 8) {
         win_DrawBitMap(r.left, r.top, 0x6d);
-        win_DrawBitMap(r.left, r.bottom - fd_50F6_47DC, 0x6f);
-        g_9134(r.left, fd_50F6_47DC + r.top, r.right, r.bottom - fd_50F6_47DC, g_3DE2);
+        win_DrawBitMap(r.left, r.bottom - fd_50F6_47DA.y, 0x6f);
+        g_9134(r.left, fd_50F6_47DA.y + r.top, r.right, r.bottom - fd_50F6_47DA.y, g_3DE2);
         win_DrawElevator(o);
     }
 }
@@ -440,7 +445,7 @@ void _fastcall win_ProcSliderEvent(struct Event far *ev)
     if (list->count <= list->visible)
         return;
     r = *(struct Rect far *)o;
-    if (fd_50F6_47DC + r.top > ev->v) {
+    if (fd_50F6_47DA.y + r.top > ev->v) {
         if (ev->modifiers & 0x6800) {
             f_23E6_06F1(0, lo);
             win_DrawElevator(o);
@@ -451,7 +456,7 @@ void _fastcall win_ProcSliderEvent(struct Event far *ev)
                 f_1F80_0081(1);
             } while (f_1FD2_0542());
         }
-    } else if (r.bottom - fd_50F6_47DC < ev->v) {
+    } else if (r.bottom - fd_50F6_47DA.y < ev->v) {
         if (ev->modifiers & 0x6800) {
             f_23E6_06F1(list->count - list->visible, lo);
             win_DrawElevator(o);

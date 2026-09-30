@@ -20847,11 +20847,6 @@
    "off": 1182,
    "alias_of": "modeLevels"
   },
-  "fd_50F6_04A2": {
-   "seg": 20726,
-   "off": 1186,
-   "grounding": "S25:39C7 o25_39C7_0980:09F7 mov dx,es:[04A2]; shr dx,7 (CONST 8926=50F6); Win16 SimEggB modeLevels[2]"
-  },
   "fd_50F6_04A4": {
    "seg": 20726,
    "off": 1188,
@@ -21306,11 +21301,6 @@
    "seg": 20726,
    "off": 2834,
    "grounding": "f_0894_01E5: mov es,[804E] (50F6); int[6] stores es:[0B12..0B1C]"
-  },
-  "fd_50F6_0B1C": {
-   "seg": 20726,
-   "off": 2844,
-   "grounding": "f_0E2E_065E: mov es,[81FE] (CONST 50F6); cmp es:[0B1C],1 / 0x28 (lesson done tests)"
   },
   "fd_50F6_0B1E": {
    "seg": 20726,
@@ -22187,11 +22177,6 @@
    "off": 14652,
    "grounding": "f_1FD2_0663: mov bx,393C; mov cx,SEG 50F6; movsw x4 (Rect copy from f_1CE2_000C()); &fd_50F6_393C passed to f_1CE2_046D (menu bar rect)"
   },
-  "fd_50F6_3942": {
-   "seg": 20726,
-   "off": 14658,
-   "grounding": "f_20E8_04B6: mov es,[8A22] (seg 50F6); mov ax,es:[3942]"
-  },
   "fd_50F6_3944": {
    "seg": 20726,
    "off": 14660,
@@ -22311,11 +22296,6 @@
    "seg": 20726,
    "off": 18394,
    "grounding": "f_20E8_0141: push 50F6:47DA as far Pt* to f_208F_0419(size, 0x6f)"
-  },
-  "fd_50F6_47DC": {
-   "seg": 20726,
-   "off": 18396,
-   "grounding": "f_23E6_0518: mov es,[8A3C (CONST segword 50F6)]; mov ax,es:[47DC] (far int, slider arrow height)"
   },
   "fd_50F6_47DE": {
    "seg": 20726,

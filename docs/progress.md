@@ -6,15 +6,15 @@ Validation: **PASS** (2026-09-30)
 |---|---:|
 | known_functions | 1,730 |
 | known_game_functions | 1,640 |
-| exact_c_functions | 1,217 |
-| exact_c_bytes | 217,006 |
+| exact_c_functions | 1,219 |
+| exact_c_bytes | 217,640 |
 | exact_asm_bytes | 50,441 |
 | exact_code_segment_data_bytes | 1,481 |
 | historical_runtime_bytes_accepted | 12,339 |
 | historical_runtime_members_accepted | 90 |
 | runtime_functions_known | 90 |
 | runtime_functions_owned | 90 |
-| owned_functions | 1,674 |
+| owned_functions | 1,676 |
 | historical_runtime_bytes_located_unaccepted | 0 |
 | rtlink_manager_bytes_unaccepted | 17,001 |
 | data_bytes_accepted | 111,308 |
@@ -25,30 +25,30 @@ Validation: **PASS** (2026-09-30)
 | far_bss_zero_fill_bytes | 19,408 |
 | far_bss_sizes_verified_bytes | 0 |
 | far_bss_sizes_pinned_bytes | 180 |
-| far_bss_sizes_consistent_bytes | 4,282 |
-| far_bss_sizes_unverified_bytes | 14,946 |
+| far_bss_sizes_consistent_bytes | 4,300 |
+| far_bss_sizes_unverified_bytes | 14,928 |
 | game_code_span_bytes | 304,798 |
-| unresolved_code_bytes | 35,870 |
+| unresolved_code_bytes | 35,236 |
 | unresolved_data_bytes | 3,181 |
-| scaffold_functions | 37 |
+| scaffold_functions | 36 |
 | exact_translation_units | 85 |
 | complete_tus_relocation_order_proven | 84 |
 | claims_within_group_order_pending | 6 |
-| inplace_draft_functions | 18 |
+| inplace_draft_functions | 17 |
 | claims_exact_steered | 18 |
 | exact_c_bytes_in_complete_tus | 114,834 |
-| exact_c_bytes_in_partial_modules | 102,172 |
+| exact_c_bytes_in_partial_modules | 102,806 |
 | exact_c_bytes_steered | 8,119 |
-| exact_c_bytes_layout_inferred | 14,674 |
+| exact_c_bytes_layout_inferred | 14,775 |
 | exact_c_bytes_within_group_pending | 1,696 |
-| claims_layout_inferred | 14 |
+| claims_layout_inferred | 15 |
 | asm_transcribed_bytes | 51,922 |
 | exact_asm_bytes_genuine | 50,441 |
 | exact_asm_bytes_workaround | 0 |
 | data_bytes_opaque_unmarked | 5,161 |
 | runtime_oracle_derived_words | 244 |
 
-Manifest: `c5903d7c2f282f394680e47b317d75ceb659dd2609ebf8968cad94aaf7c747dc`
+Manifest: `415ac59b15e4234772a90e8c4f0983d8212c500082e757ae09422ff15b740f6f`
 
 Complete TUs with cross-function relocation order pending (record breaks between functions differ; see docs/codegen-rules.md ZI-1): S00:31AD
 
@@ -56,4 +56,4 @@ Modules with data placements only (never counted as recovered code): data:3D57, 
 
 Whole executable: NOT_BUILT (no historical link yet; see docs/next-steps.md)
 
-Overlay coverage (claimed/bytes): S00 19679/19696, S01 7051/7056, S02 2409/2416, S03 10963/10976, S04 2282/2464, S05 1764/2512, S06 6333/9584, S07 1174/1184, S08 3698/5056, S09 2820/5232, S10 972/2736, S11 870/880, S12 4773/4992, S13 5300/6064, S14 3484/4656, S15 1025/1360, S16 1763/1776, S17 177/448, S18 4359/4368, S19 1120/1120, S20 2086/2096, S21 472/480, S22 12710/12720, S23 1411/4368, S24 1071/1808, S25 10648/14592, S26 2236/2240
+Overlay coverage (claimed/bytes): S00 19679/19696, S01 7051/7056, S02 2409/2416, S03 10963/10976, S04 2282/2464, S05 1764/2512, S06 6333/9584, S07 1174/1184, S08 3698/5056, S09 2820/5232, S10 972/2736, S11 870/880, S12 4773/4992, S13 5300/6064, S14 3484/4656, S15 1025/1360, S16 1763/1776, S17 177/448, S18 4359/4368, S19 1120/1120, S20 2086/2096, S21 472/480, S22 12710/12720, S23 1411/4368, S24 1071/1808, S25 11181/14592, S26 2236/2240

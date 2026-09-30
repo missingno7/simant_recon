@@ -84,7 +84,7 @@ extern int far fd_50F6_1074;
 extern Point far fd_50F6_0508;
 extern void far SetMyHealth(int);
 extern void far AddBlackAnts(int count);
-extern int far fd_50F6_049E[2];
+extern int far modeLevels[3];
 extern unsigned char far fd_3E1D_D09F[64][32];
 
 void far GiveLesson(int lesson)
@@ -227,7 +227,7 @@ void far GiveLesson(int lesson)
         break;
     case 41:
         PictStrnDialog(0x4270, 0x2b48, 1);
-        fd_50F6_1074 = fd_50F6_049E[1] + fd_50F6_049E[0];
+        fd_50F6_1074 = modeLevels[1] + modeLevels[0];
         break;
     case 42:
         PictStrnDialog(0, 0x2b4a, 1);
@@ -293,7 +293,7 @@ extern int far fd_50F6_0B1E;
 extern unsigned char far MapA[128][64];
 extern int _fastcall f_22BF_0A22(int);
 extern int far fd_50F6_04C2;
-extern int far fd_50F6_0B1C;
+extern int far fd_50F6_0B12[6];
 extern int far fd_50F6_104E;
 extern void far SetAlarmDropState(int state, int quiet);
 extern int far fd_50F6_032E;
@@ -382,7 +382,7 @@ int far LessonDone(int lesson)
     case 23:
         return 1;
     case 24:
-        if (fd_50F6_0B1C > 1)
+        if (fd_50F6_0B12[5] > 1)
             return 1;
         break;
     case 25:
@@ -436,7 +436,7 @@ int far LessonDone(int lesson)
     case 40:
         return 1;
     case 41:
-        if (fd_50F6_049E[1] + fd_50F6_049E[0] != fd_50F6_1074)
+        if (modeLevels[1] + modeLevels[0] != fd_50F6_1074)
             return 1;
         break;
     case 42:
@@ -472,7 +472,7 @@ int far LessonDone(int lesson)
     case 51:
         return 1;
     case 52:
-        if (fd_50F6_0B1C > 0x28)
+        if (fd_50F6_0B12[5] > 0x28)
             return 1;
         break;
     case 53:
