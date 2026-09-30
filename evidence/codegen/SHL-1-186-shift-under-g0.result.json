@@ -1,0 +1,124 @@
+{
+ "id": "SHL-1",
+ "question": "Does MSC 6.00A(X) emit the 80186 immediate shift 'shl ax,2' (C1 E0 02) under the default /G0? Yes, when CL is known to hold 2 (left by a preceding byte 'idiv cl' for a char / 2 in the same expression): a following *4 is emitted as 'shl ax,2' instead of two 'shl ax,1'. Without the preceding mov cl,2 the 8086 form is used. Positive control S10:35F5:096F (o10_35F5_0384: g_3DDC / 2 ... g_3DDE * 4 + x).",
+ "results": [
+  {
+   "variant": "char_times_4",
+   "profile_index": 0,
+   "profile": "msc600ax",
+   "flags": [
+    "/AL",
+    "/Os",
+    "/Og",
+    "/Oe",
+    "/Gs"
+   ],
+   "source_sha256": "f391af9545f57aaf2e8f21981bfdb7029b795bc639f5f34bc6b57ddc009f4841",
+   "bytes": "558beca00000b10298f6f9988bd0a00000988bdaf76e0803d8035e0a53a0000098c1e002034606509a000000005b5b8be55dcb",
+   "disasm": "push bp; mov bp, sp; mov al, byte ptr [0]; mov cl, 2; cwde; idiv cl; cwde; mov dx, ax; mov al, byte ptr [0]; cwde; mov bx, dx; imul word ptr [bp + 8]; add bx, ax; add bx, word ptr [bp + 0xa]; push bx; mov al, byte ptr [0]; cwde; shl ax, 2; add ax, word ptr [bp + 6]; push ax; lcall 0, 0; pop bx; pop bx; mov sp, bp; pop bp; retf"
+  },
+  {
+   "variant": "char_times_4_alone",
+   "profile_index": 0,
+   "profile": "msc600ax",
+   "flags": [
+    "/AL",
+    "/Os",
+    "/Og",
+    "/Oe",
+    "/Gs"
+   ],
+   "source_sha256": "0fdba83a8197fce9073d0dbc81ac3e7e44afb0c4fd5926753f90fa7d26b55f61",
+   "bytes": "558becff760aa0000098d1e0d1e0034606509a000000005b5b8be55dcb",
+   "disasm": "push bp; mov bp, sp; push word ptr [bp + 0xa]; mov al, byte ptr [0]; cwde; shl ax, 1; shl ax, 1; add ax, word ptr [bp + 6]; push ax; lcall 0, 0; pop bx; pop bx; mov sp, bp; pop bp; retf"
+  },
+  {
+   "variant": "int_times_4",
+   "profile_index": 0,
+   "profile": "msc600ax",
+   "flags": [
+    "/AL",
+    "/Os",
+    "/Og",
+    "/Oe",
+    "/Gs"
+   ],
+   "source_sha256": "df0b73a7f5454b5f9c1dbd60cdf56c15fc3937f6d1af08c6a31808db09ad51d1",
+   "bytes": "558beca00000b10298f6f9988bd0a00000988bdaf76e0803d8035e0a538b4608c1e002034606509a000000005b5b8be55dcb",
+   "disasm": "push bp; mov bp, sp; mov al, byte ptr [0]; mov cl, 2; cwde; idiv cl; cwde; mov dx, ax; mov al, byte ptr [0]; cwde; mov bx, dx; imul word ptr [bp + 8]; add bx, ax; add bx, word ptr [bp + 0xa]; push bx; mov ax, word ptr [bp + 8]; shl ax, 2; add ax, word ptr [bp + 6]; push ax; lcall 0, 0; pop bx; pop bx; mov sp, bp; pop bp; retf"
+  },
+  {
+   "variant": "char_times_4",
+   "profile_index": 1,
+   "profile": "msc600a",
+   "flags": [
+    "/AL",
+    "/Os",
+    "/Og",
+    "/Oe",
+    "/Gs"
+   ],
+   "source_sha256": "f391af9545f57aaf2e8f21981bfdb7029b795bc639f5f34bc6b57ddc009f4841",
+   "bytes": "558beca00000b10298f6f9988bd0a00000988bdaf76e0803d8035e0a53a0000098c1e002034606509a000000005b5b8be55dcb",
+   "disasm": "push bp; mov bp, sp; mov al, byte ptr [0]; mov cl, 2; cwde; idiv cl; cwde; mov dx, ax; mov al, byte ptr [0]; cwde; mov bx, dx; imul word ptr [bp + 8]; add bx, ax; add bx, word ptr [bp + 0xa]; push bx; mov al, byte ptr [0]; cwde; shl ax, 2; add ax, word ptr [bp + 6]; push ax; lcall 0, 0; pop bx; pop bx; mov sp, bp; pop bp; retf"
+  },
+  {
+   "variant": "char_times_4_alone",
+   "profile_index": 1,
+   "profile": "msc600a",
+   "flags": [
+    "/AL",
+    "/Os",
+    "/Og",
+    "/Oe",
+    "/Gs"
+   ],
+   "source_sha256": "0fdba83a8197fce9073d0dbc81ac3e7e44afb0c4fd5926753f90fa7d26b55f61",
+   "bytes": "558becff760aa0000098d1e0d1e0034606509a000000005b5b8be55dcb",
+   "disasm": "push bp; mov bp, sp; push word ptr [bp + 0xa]; mov al, byte ptr [0]; cwde; shl ax, 1; shl ax, 1; add ax, word ptr [bp + 6]; push ax; lcall 0, 0; pop bx; pop bx; mov sp, bp; pop bp; retf"
+  },
+  {
+   "variant": "int_times_4",
+   "profile_index": 1,
+   "profile": "msc600a",
+   "flags": [
+    "/AL",
+    "/Os",
+    "/Og",
+    "/Oe",
+    "/Gs"
+   ],
+   "source_sha256": "df0b73a7f5454b5f9c1dbd60cdf56c15fc3937f6d1af08c6a31808db09ad51d1",
+   "bytes": "558beca00000b10298f6f9988bd0a00000988bdaf76e0803d8035e0a538b4608c1e002034606509a000000005b5b8be55dcb",
+   "disasm": "push bp; mov bp, sp; mov al, byte ptr [0]; mov cl, 2; cwde; idiv cl; cwde; mov dx, ax; mov al, byte ptr [0]; cwde; mov bx, dx; imul word ptr [bp + 8]; add bx, ax; add bx, word ptr [bp + 0xa]; push bx; mov ax, word ptr [bp + 8]; shl ax, 2; add ax, word ptr [bp + 6]; push ax; lcall 0, 0; pop bx; pop bx; mov sp, bp; pop bp; retf"
+  }
+ ],
+ "checks": [
+  {
+   "check": "char_times_4@0",
+   "needle": "shl ax, 2",
+   "ok": true
+  },
+  {
+   "check": "char_times_4@1",
+   "needle": "shl ax, 2",
+   "ok": true
+  },
+  {
+   "check": "int_times_4@0",
+   "needle": "shl ax, 2",
+   "ok": true
+  },
+  {
+   "check": "char_times_4_alone@0",
+   "needle": "!shl ax, 2",
+   "ok": true
+  },
+  {
+   "check": "char_times_4_alone@1",
+   "needle": "!shl ax, 2",
+   "ok": true
+  }
+ ],
+ "all_checks_pass": true
+}

@@ -1,0 +1,69 @@
+{
+ "id": "BSS-1",
+ "question": "Does the spelling of file-scope static uninitialised arrays decide their _BSS order (MSC 6.00AX /Oe /Og)? Positive control S24:39C7 (history window): int[20] at 8C26 below char[10] at 8C4E is reproduced with the names histColor/histShown but not with graphColor/graphOn (declaration order has no effect either way).",
+ "results": [
+  {
+   "variant": "hist_names",
+   "profile_index": 0,
+   "profile": "msc600ax",
+   "flags": [
+    "/AL",
+    "/Os",
+    "/Og",
+    "/Oe",
+    "/Gs"
+   ],
+   "source_sha256": "8d52392911360aeef2971af70646a4a7a8ec299998f38520cc0a8de3c101cba2",
+   "bytes": "558bec8b5e06c687280001d1e3c787000002005dcb",
+   "disasm": "push bp; mov bp, sp; mov bx, word ptr [bp + 6]; mov byte ptr [bx + 0x28], 1; shl bx, 1; mov word ptr [bx], 2; pop bp; retf"
+  },
+  {
+   "variant": "graph_names",
+   "profile_index": 0,
+   "profile": "msc600ax",
+   "flags": [
+    "/AL",
+    "/Os",
+    "/Og",
+    "/Oe",
+    "/Gs"
+   ],
+   "source_sha256": "2ba04c0431025ae1524de556c05089194d06005951099cfaa8d335085da85918",
+   "bytes": "558bec8b5e06c687000001d1e3c7870a0002005dcb",
+   "disasm": "push bp; mov bp, sp; mov bx, word ptr [bp + 6]; mov byte ptr [bx], 1; shl bx, 1; mov word ptr [bx + 0xa], 2; pop bp; retf"
+  },
+  {
+   "variant": "graph_names_swapped_decl",
+   "profile_index": 0,
+   "profile": "msc600ax",
+   "flags": [
+    "/AL",
+    "/Os",
+    "/Og",
+    "/Oe",
+    "/Gs"
+   ],
+   "source_sha256": "5b55bf99c7ef78776c940c86804489cfce1b3832181d6b1d743e051d79f7755a",
+   "bytes": "558bec8b5e06c687000001d1e3c7870a0002005dcb",
+   "disasm": "push bp; mov bp, sp; mov bx, word ptr [bp + 6]; mov byte ptr [bx], 1; shl bx, 1; mov word ptr [bx + 0xa], 2; pop bp; retf"
+  }
+ ],
+ "checks": [
+  {
+   "check": "hist_names@0",
+   "needle": "mov byte ptr [bx + 0x28], 1",
+   "ok": true
+  },
+  {
+   "check": "graph_names@0",
+   "needle": "mov byte ptr [bx], 1",
+   "ok": true
+  },
+  {
+   "check": "graph_names_swapped_decl@0",
+   "needle": "mov byte ptr [bx], 1",
+   "ok": true
+  }
+ ],
+ "all_checks_pass": true
+}

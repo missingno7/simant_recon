@@ -16316,6 +16316,16 @@
    "off": 1944,
    "grounding": "f_10F7_0CA8 (root:10F7): mov es,[CONST word = 3D57]; es:[..0798] far data reference"
   },
+  "fd_3D57_07A4": {
+   "seg": 15703,
+   "off": 1956,
+   "grounding": "o15_384C_03C6: mov es,[CONST 8788 = 3D57]; mov es:[07A4],1"
+  },
+  "fd_3D57_07A6": {
+   "seg": 15703,
+   "off": 1958,
+   "grounding": "o15_384C_03C6: mov es,[CONST 878A = 3D57]; mov es:[07A6],0"
+  },
   "fd_3D57_07A8": {
    "seg": 15703,
    "off": 1960,
@@ -16345,6 +16355,11 @@
    "seg": 15703,
    "off": 1982,
    "grounding": "o08_35F5_0A00 (InitYelloAnt): mov es,[S08 CONST word]; es:[off]"
+  },
+  "fd_3D57_07C0": {
+   "seg": 15703,
+   "off": 1984,
+   "grounding": "f_015B_053C: mov es,[7E3E] (CONST 3D57); push es:[si+07C0], si=2*MapPlane -> f_015B_01B8 (int table per plane)"
   },
   "fd_3D57_07C8": {
    "seg": 15703,
@@ -17181,6 +17196,11 @@
    "off": 816,
    "grounding": "f_0BE8_0002: mov es,[DS:810C] (CONST 50F6); mov es:[0330],ax"
   },
+  "fd_50F6_0332": {
+   "seg": 20726,
+   "off": 818,
+   "grounding": "f_015B_0273: mov es,[7E30] (CONST 50F6); push es:[0332] -> f_015B_053C(plane); f_015B_03C6 stores MapPlane (032E) here (last plane)"
+  },
   "fd_50F6_0334": {
    "seg": 20726,
    "off": 820,
@@ -17746,6 +17766,11 @@
    "off": 2722,
    "grounding": "f_0894_000E: mov es,[803C] (50F6); long store es:[0AA2]/[0AA4] = -1"
   },
+  "fd_50F6_0AA6": {
+   "seg": 20726,
+   "off": 2726,
+   "grounding": "f_015B_04F7: mov es,[7E3C] (CONST 50F6); mov word ptr es:[0AA6],0 after f_0250_0FC4 (Win16 GotoMapPoint UDMapFlip=0)"
+  },
   "fd_50F6_0AB2": {
    "seg": 20726,
    "off": 2738,
@@ -18020,6 +18045,11 @@
    "seg": 20726,
    "off": 3892,
    "grounding": "f_10F7_0CA8 (root:10F7): mov es,[CONST word = 50F6]; es:[..0F34] far data reference"
+  },
+  "fd_50F6_0F36": {
+   "seg": 20726,
+   "off": 3894,
+   "grounding": "f_015B_03C6: mov es,[7E36] (CONST 50F6); mov es:[0F36],ax = (plane==1?0x80:0x40)-es:[0FB6]"
   },
   "fd_50F6_0F3A": {
    "seg": 20726,
@@ -19061,6 +19091,11 @@
    "off": 24660,
    "grounding": "o10_35F5_01C3 (S10 menu bar): mov bx,6054h; mov es,[CONST 89DC = 55B3]; les bx,es:[bx] -> far pointer to menu table (entry 0 = title strings, entry m+1 = item strings of menu m)"
   },
+  "fd_55B3_610A": {
+   "seg": 21939,
+   "off": 24842,
+   "grounding": "o15_384C_0152: mov es,[CONST 8778 = 55B3 DGROUP]; cmp es:[610A],0 (far-declared DGROUP variable)"
+  },
   "fd_55B3_6262": {
    "seg": 21939,
    "off": 25186,
@@ -19420,6 +19455,16 @@
    "seg": 21939,
    "off": 36354,
    "grounding": "f_284A_038F: les bx,[8E02]; cmp byte ptr es:[bx],2Fh (far pointer to current running status; _BSS)"
+  },
+  "g_8EC0": {
+   "seg": 21939,
+   "off": 36544,
+   "grounding": "LoadMonoPats: far pointer 8EC0:DS destination of 24 inverted pattern bytes"
+  },
+  "g_8ED8": {
+   "seg": 21939,
+   "off": 36568,
+   "grounding": "LoadMonoPats: far pointer 8ED8:DS destination of inverted pattern bytes (second object 0x271a)"
   },
   "g_9122": {
    "seg": 21939,

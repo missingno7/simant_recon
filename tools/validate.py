@@ -68,6 +68,10 @@ def main() -> int:
     exact_asm_bytes = 0
     bss_bytes = 0
     per_unit = defaultdict(int)
+    listed = {str((ROOT / m["source"]).resolve()).lower() for m in man["modules"].values()}
+    for f in sorted((ROOT / "src").rglob("*")):
+        if f.is_file() and str(f.resolve()).lower() not in listed:
+            failures.append(f"{f.relative_to(ROOT)}: file in src/ not published by promote.py (drafts belong in build/workers/)")
     for key, m in man["modules"].items():
         path = ROOT / m["source"]
         text = snapshot[key].decode("latin1")

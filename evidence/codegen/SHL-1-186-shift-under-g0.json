@@ -1,0 +1,39 @@
+{
+ "id": "SHL-1",
+ "question": "Does MSC 6.00A(X) emit the 80186 immediate shift 'shl ax,2' (C1 E0 02) under the default /G0? Yes, when CL is known to hold 2 (left by a preceding byte 'idiv cl' for a char / 2 in the same expression): a following *4 is emitted as 'shl ax,2' instead of two 'shl ax,1'. Without the preceding mov cl,2 the 8086 form is used. Positive control S10:35F5:096F (o10_35F5_0384: g_3DDC / 2 ... g_3DDE * 4 + x).",
+ "header": "extern char near g_3DDE;\nextern char near g_3DDC;\nextern void far f_1B73_09E9(int x, int y);\n",
+ "variants": {
+  "char_times_4": "void far t1(int x, int k, int top)\n{\n    f_1B73_09E9(g_3DDE * 4 + x, g_3DDC / 2 + g_3DDC * k + top);\n}\n",
+  "char_times_4_alone": "void far t2(int x, int k, int top)\n{\n    f_1B73_09E9(g_3DDE * 4 + x, top);\n}\n",
+  "int_times_4": "void far t3(int x, int k, int top)\n{\n    f_1B73_09E9(k * 4 + x, g_3DDC / 2 + g_3DDC * k + top);\n}\n"
+ },
+ "profiles": [
+  {
+   "profile": "msc600ax",
+   "flags": [
+    "/AL",
+    "/Os",
+    "/Og",
+    "/Oe",
+    "/Gs"
+   ]
+  },
+  {
+   "profile": "msc600a",
+   "flags": [
+    "/AL",
+    "/Os",
+    "/Og",
+    "/Oe",
+    "/Gs"
+   ]
+  }
+ ],
+ "expect": {
+  "char_times_4@0": "shl ax, 2",
+  "char_times_4@1": "shl ax, 2",
+  "int_times_4@0": "shl ax, 2",
+  "char_times_4_alone@0": "!shl ax, 2",
+  "char_times_4_alone@1": "!shl ax, 2"
+ }
+}

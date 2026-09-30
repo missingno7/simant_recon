@@ -1,0 +1,16 @@
+{
+ "id": "BSS-1",
+ "question": "Does the spelling of file-scope static uninitialised arrays decide their _BSS order (MSC 6.00AX /Oe /Og)? Positive control S24:39C7 (history window): int[20] at 8C26 below char[10] at 8C4E is reproduced with the names histColor/histShown but not with graphColor/graphOn (declaration order has no effect either way).",
+ "header": "",
+ "variants": {
+  "hist_names": "static int histColor[20];\nstatic char histShown[10];\nvoid far f(int g)\n{\n    histShown[g] = 1;\n    histColor[g] = 2;\n}\n",
+  "graph_names": "static int graphColor[20];\nstatic char graphOn[10];\nvoid far f(int g)\n{\n    graphOn[g] = 1;\n    graphColor[g] = 2;\n}\n",
+  "graph_names_swapped_decl": "static char graphOn[10];\nstatic int graphColor[20];\nvoid far f(int g)\n{\n    graphOn[g] = 1;\n    graphColor[g] = 2;\n}\n"
+ },
+ "profiles": [{"profile": "msc600ax", "flags": ["/AL", "/Os", "/Og", "/Oe", "/Gs"]}],
+ "expect": {
+  "hist_names@0": "mov byte ptr [bx + 0x28], 1",
+  "graph_names@0": "mov byte ptr [bx], 1",
+  "graph_names_swapped_decl@0": "mov byte ptr [bx], 1"
+ }
+}
