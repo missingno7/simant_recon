@@ -338,7 +338,7 @@ void _fastcall win_DrawObjectNum(int objNum)
     win_UnlockWin(objNum);
 }
 
-void _fastcall win_DrawWinIcons(char far *w)
+void _fastcall f_21FA_077D(char far *w)
 {
     struct Rect rect;
     struct Pt size;
@@ -413,7 +413,7 @@ void _fastcall win_DrawWindow(int win)
             sprintf(buf, "xxw:%x, i:%x", win, i);
         }
         sprintf(buf, "zzw:%x, i:%x", win, i);
-        win_DrawWinIcons(w);
+        f_21FA_077D(w);
 hooks:
         sprintf(buf, "ppw:%x, i:%x", win, i);
         if (win_drawHooks[win >> 8])
@@ -427,7 +427,7 @@ void _fastcall win_DrawTitle(int win)
 {
     win_DrawObjectNum(win);
     win_LockWin(win);
-    win_DrawWinIcons(f_2505_0006(win));
+    f_21FA_077D(f_2505_0006(win));
     win_UnlockWin(win);
 }
 

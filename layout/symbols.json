@@ -11799,7 +11799,17 @@
    "unit": "root",
    "seg": 8698,
    "off": 1917,
-   "alias_of": "win_DrawWinIcons"
+   "grounding": "inventory:push_cs_call",
+   "history": [
+    {
+     "was": "f_21FA_077D",
+     "why": "window worker: Win16 win_* function with the same structure/strings (report 2026-09-30)"
+    },
+    {
+     "was": "win_DrawWinIcons",
+     "why": "revert (audit F-6, names5): names5: MEDIUM: names5 downgrade: only one policy anchor (member order (d) in the 17:17 run); Win16 body is an empty stub (no body equivalence) and Win16 has no callers || anchors: (d) DOS 21FA 17 functions gr_JustifyStrInRect!,SetColorNum!,SetColorFromObj,SetColorFromObjNum,RectFill!,FillObjRect,RectFillOutline!,RectOutline!,RectVOutline!,RectHOutline!,DrawButtonBorder,DrawObjectI,DrawObject!,DrawObjectNum,DrawWinIcons,DrawWindow!,DrawTitle! = Win16 SIMTWO #167..#183 same order; every unsupported slot is bracketed by anchored members (Win16 #181 between DrawObjectNum and DrawWindow); (weak) DOS body draws the window-frame icon bitmaps 0x64..0x70 selected by the window flag word +0x1c and is called at the end of win_DrawWindow!/win_DrawTitle!; Win16 _win_DrawWinIcons is an empty 1-byte stub (MS Windows draws the frame), consistent with the name but not comparable"
+    }
+   ]
   },
   "f_21FA_08E2": {
    "unit": "root",
@@ -12417,7 +12427,17 @@
    "unit": "root",
    "seg": 9477,
    "off": 1297,
-   "alias_of": "win_SortRect"
+   "grounding": "inventory:push_cs_call",
+   "history": [
+    {
+     "was": "f_2505_0511",
+     "why": "window worker: Win16 win_* function with the same structure/strings (report 2026-09-30)"
+    },
+    {
+     "was": "win_SortRect",
+     "why": "revert (audit F-6, names5): names5: MEDIUM: names5 downgrade: only one policy anchor (exact body, (e)); the Recalc-cluster position is not a 1:1 member-order alignment and Win16 has no callers, so no second anchor || anchors: (e) if left>right swap left/right; if top>bottom swap top/bottom on a far Rect (+0/+4, +2/+6), retf 4 = Win16 byte-matched win_SortRect.c; _win_SortRect is the only such symbol in the Win16 symbols; (d, weak) sits in the Recalc cluster (DOS just before win_Recalc!, after GetVal/CalcObjElement/GetArg; Win16 #240 two slots before AutoSize/GetVal/GetArg/CalcObjElement/Recalc), but the 2505 module order is not 1:1"
+    }
+   ]
   },
   "f_2505_0545": {
    "unit": "root",
@@ -17115,13 +17135,7 @@
    "unit": "root",
    "seg": 8698,
    "off": 1917,
-   "grounding": "inventory:push_cs_call",
-   "history": [
-    {
-     "was": "f_21FA_077D",
-     "why": "window worker: Win16 win_* function with the same structure/strings (report 2026-09-30)"
-    }
-   ]
+   "alias_of": "f_21FA_077D"
   },
   "win_DrawWindow": {
    "unit": "root",
@@ -17867,13 +17881,7 @@
    "unit": "root",
    "seg": 9477,
    "off": 1297,
-   "grounding": "inventory:push_cs_call",
-   "history": [
-    {
-     "was": "f_2505_0511",
-     "why": "window worker: Win16 win_* function with the same structure/strings (report 2026-09-30)"
-    }
-   ]
+   "alias_of": "f_2505_0511"
   },
   "win_StringSize": {
    "unit": "root",

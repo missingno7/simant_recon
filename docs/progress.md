@@ -6,15 +6,15 @@ Validation: **PASS** (2026-09-30)
 |---|---:|
 | known_functions | 1,730 |
 | known_game_functions | 1,640 |
-| exact_c_functions | 1,202 |
-| exact_c_bytes | 210,380 |
+| exact_c_functions | 1,203 |
+| exact_c_bytes | 210,678 |
 | exact_asm_bytes | 50,441 |
 | exact_code_segment_data_bytes | 1,481 |
 | historical_runtime_bytes_accepted | 12,339 |
 | historical_runtime_members_accepted | 90 |
 | runtime_functions_known | 90 |
 | runtime_functions_owned | 90 |
-| owned_functions | 1,659 |
+| owned_functions | 1,660 |
 | historical_runtime_bytes_located_unaccepted | 0 |
 | rtlink_manager_bytes_unaccepted | 17,063 |
 | data_bytes_accepted | 91,233 |
@@ -26,11 +26,11 @@ Validation: **PASS** (2026-09-30)
 | far_bss_sizes_consistent_bytes | 3,966 |
 | far_bss_sizes_unverified_bytes | 15,442 |
 | game_code_span_bytes | 304,748 |
-| unresolved_code_bytes | 42,446 |
+| unresolved_code_bytes | 42,148 |
 | unresolved_data_bytes | 23,815 |
 | scaffold_functions | 48 |
-| exact_translation_units | 82 |
-| complete_tus_relocation_order_proven | 81 |
+| exact_translation_units | 83 |
+| complete_tus_relocation_order_proven | 82 |
 | claims_within_group_order_pending | 6 |
 | inplace_draft_functions | 21 |
 | claims_exact_steered | 18 |

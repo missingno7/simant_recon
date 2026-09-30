@@ -269,7 +269,7 @@ int _fastcall f_2505_04D7(int win, int idx)
     return ((int far *)(f_2505_0006(win) + 0x10))[idx];
 }
 
-void _fastcall win_SortRect(struct Rect far *r)
+void _fastcall f_2505_0511(struct Rect far *r)
 {
     int t;
 
@@ -337,7 +337,7 @@ void _fastcall win_Recalc(int win)
         }
     }
     for (i = 0; i < n; i++)
-        win_SortRect(((struct Rect far * far *)(w + 0x2c))[i]);
+        f_2505_0511(((struct Rect far * far *)(w + 0x2c))[i]);
     *(struct Rect far *)w = *((struct Rect far * far *)(w + 0x2c))[0];
     f_171C_1BBA(handle);
 }

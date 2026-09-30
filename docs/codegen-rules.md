@@ -177,5 +177,9 @@ REG-1 below is a case where the MSC 5.10 rule is false for 6.00.
   bytes. They are marked in source comments and never counted as recovered names.
 * **Per-file debug options**: S05:35F5, 277E, 0798 and 295C are proven *without* /Zi. Choose /Zi,
   /Zd or neither per module by the relocation-order evidence.
+* **Identifier spelling can change code in the `_fastcall` module 2505**: renaming
+  win_WinRectAddr (2505:025F) to its address name changes the code of win_WinAddr and win_ObjAddr,
+  so rename.py keeps the old name (supervisor, 2026-09-30). This is a third instance of
+  name-dependent code generation, after NAME-3 (/Od) and NAME-4 (`_asm`).
 * **Relocation order** inside a module is target-grouped by RTLink (open, see
   `docs/exe-format.md`).
