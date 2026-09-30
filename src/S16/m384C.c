@@ -137,7 +137,7 @@ extern int near g_3DE2;
 extern int far g_3DA0;
 extern void (far * near g_9134)(int x0, int y0, int x1, int y1, int color);
 extern void far f_1E57_0362(void);
-extern void far f_171C_2276(char far *p);
+extern void far free(char far *p);
 extern void far db_PurgeObject(int object, int kind);
 
 void far o16_384C_01E1(void)
@@ -222,7 +222,7 @@ void far o16_384C_01E1(void)
         win_DrawObjectNum(0x1f02);
     }
 out:
-    f_171C_2276((char far *)list);
+    free((char far *)list);
     db_PurgeObject(0x6a4, 4);
     win_FlushEvents();
     win_Close(0x1f00);

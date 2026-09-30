@@ -108,6 +108,10 @@ def main() -> int:
         scaffolds += len(res.get("scaffold", []))
         if m.get("extent") and res["exact"]:
             exact_tus += 1
+    # accepted historical runtime segments are owned too: no game claim may overlap them
+    for mrow in man.get("runtime", {}).get("members", []):
+        for lin, size in [(mrow["linear"], mrow["size"])] + [(e["linear"], e["size"]) for e in mrow.get("extra_segments", [])]:
+            claimed.append(("root", lin, size, f"runtime:{mrow['member']}@{lin:05X}"))
     claimed.sort()
     for (u1, a1, s1, n1), (u2, a2, s2, n2) in zip(claimed, claimed[1:]):
         if u1 == u2 and a1 + s1 > a2:
@@ -137,14 +141,23 @@ def main() -> int:
     runtime_bytes = 0
     runtime_members = 0
     acc = man.get("runtime", {}).get("members", [])
-    if acc:
+    located_spans, accepted_spans = set(), set()   # (linear, size) of located / accepted code segments
+    if acc or (ROOT / "evidence" / "toolchain" / "runtime-location.json").exists():
         import runtime as rtmod
         results, _, conflicts, _ = rtmod.verify_all()
-        exact = {(r["member"], r["linear"]) for r in results if r["exact"]}
+        exact = {(r["member"], r["linear"]): r for r in results if r["exact"]}
+        for r in results:
+            located_spans |= {(r["linear"], r["size"])} | {(e["linear"], e["size"]) for e in r["extra_segments"]}
         for mrow in acc:
-            if (mrow["member"], mrow["linear"]) in exact:
-                runtime_bytes += mrow["size"]
+            r = exact.get((mrow["member"], mrow["linear"]))
+            extra = mrow.get("extra_segments", [])
+            if r is not None and r["size"] == mrow["size"] and r["extra_segments"] == extra:
+                runtime_bytes += mrow["size"] + sum(e["size"] for e in extra)
                 runtime_members += 1
+                accepted_spans |= {(mrow["linear"], mrow["size"])} | {(e["linear"], e["size"]) for e in extra}
+            elif r is not None:
+                failures.append(f"runtime member {mrow['member']} binds with other segments than accepted "
+                                f"(re-run tools/runtime.py accept)")
             else:
                 failures.append(f"runtime member {mrow['member']} no longer binds")
         for lib, info in man["runtime"]["libraries"].items():
@@ -155,11 +168,15 @@ def main() -> int:
     # ---- accounting -------------------------------------------------------------------
     table = fnmod.table()["functions"]
     game = [f for f in table if f["region"] == "game_or_library"]
-    runtime_located = 0
-    lm = ROOT / "build" / "libmatch" / "msc600-large.json"
-    if lm.exists():
-        for rep in json.loads(lm.read_text()).values():
-            runtime_located += sum(r["size"] for r in rep["rows"] if len(r.get("hits") or []) == 1)
+
+    def span_bytes(spans):      # unique bytes covered (located members can share code)
+        return len({a for lin, n in spans for a in range(lin, lin + n)})
+    accepted_bytes_at = {a for lin, n in accepted_spans for a in range(lin, lin + n)}
+    runtime_located_unaccepted = span_bytes(located_spans) - len(accepted_bytes_at)
+    # function-table rows over the runtime text are owned when an accepted member contains them
+    runtime_rows = [f for f in table if f["region"] == "msc_runtime_text"]
+    runtime_rows_owned = sum(1 for f in runtime_rows if any(
+        lin <= f["seg"] * 16 + f["off"] and f["seg"] * 16 + f["off"] + f["size"] <= lin + n for lin, n in accepted_spans))
     root_game_span = 0x29F4 * 16 + 0x1C - 0     # game code precedes the MSC runtime _TEXT
     overlay_code = sum(len(s.data) for s in x.sections[:27])
     code_total = root_game_span + overlay_code
@@ -176,8 +193,12 @@ def main() -> int:
         "exact_asm_bytes": exact_asm_bytes,
         "historical_runtime_bytes_accepted": runtime_bytes,
         "historical_runtime_members_accepted": runtime_members,
-        "historical_runtime_bytes_located_unaccepted": max(0, runtime_located - runtime_bytes),
-        "rtlink_manager_bytes_unaccepted": len(x.image) - 0x2CFB * 16,
+        "historical_runtime_bytes_located_unaccepted": runtime_located_unaccepted,
+        "runtime_functions_known": len(runtime_rows),
+        "runtime_functions_owned": runtime_rows_owned,
+        "owned_functions": exact_c + exact_asm + runtime_rows_owned,
+        "rtlink_manager_bytes_unaccepted": len(x.image) - 0x2CFB * 16
+                                           - sum(1 for a in accepted_bytes_at if a >= 0x2CFB * 16),
         "data_bytes_accepted": data_bytes,
         "bss_bytes_placed": bss_bytes,
         "game_code_span_bytes": code_total,
@@ -204,7 +225,8 @@ def main() -> int:
           f"Validation: **{progress['validation']}** ({progress['generated']})", "",
           "| Measure | Value |", "|---|---:|"]
     for k in ("known_functions", "known_game_functions", "exact_c_functions", "exact_c_bytes",
-              "exact_asm_bytes", "historical_runtime_bytes_accepted",
+              "exact_asm_bytes", "historical_runtime_bytes_accepted", "historical_runtime_members_accepted",
+              "runtime_functions_known", "runtime_functions_owned", "owned_functions",
               "historical_runtime_bytes_located_unaccepted", "rtlink_manager_bytes_unaccepted",
               "data_bytes_accepted", "game_code_span_bytes", "unresolved_code_bytes", "unresolved_data_bytes",
               "scaffold_functions", "exact_translation_units", "complete_tus_relocation_order_proven",

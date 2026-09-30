@@ -131,10 +131,14 @@ def verify_module(text: str, module: dict, claims: list[dict]) -> dict:
     # functions compiled into the module that are neither claimed nor in a SCAFFOLD block
     # (e.g. drafts kept in place for data order): unverified code, reported as debt
     claimed = {c["name"] for c in claims}
-    code_segs = {p["segment"] for p in obj.publics if p["name"].lstrip("_@") in claimed}
-    out["inplace_drafts"] = sorted(p["name"].lstrip("_@") for p in obj.publics
-                                   if p["segment"] in code_segs and p["name"].lstrip("_@") not in claimed
-                                   and p["name"].lstrip("_@") not in scaff)
+
+    def undecorated(n: str) -> str:
+        return n[1:] if n[:1] in ("_", "@") else n
+
+    code_segs = {p["segment"] for p in obj.publics if undecorated(p["name"]) in claimed}
+    out["inplace_drafts"] = sorted(undecorated(p["name"]) for p in obj.publics
+                                   if p["segment"] in code_segs and undecorated(p["name"]) not in claimed
+                                   and undecorated(p["name"]) not in scaff)
     return out
 
 

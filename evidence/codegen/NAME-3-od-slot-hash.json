@@ -1,0 +1,30 @@
+{
+ "id": "NAME-3",
+ "question": "Under /Od (no optimisation) how are non-register autos assigned stack slots, and which operand of a commutative op / comparison is loaded first? Observed (worker rootE, module 25E7): slots are handed out from [bp-2] downwards in ascending bucket order, bucket = (sum of the identifier's characters) mod 16, and inside one bucket in reverse declaration order. For a+b the later-declared local is loaded into AX first, for a<b the earlier-declared one; the source order of the operands has no effect. Positive control: root:25E7 f_25E7_0008 (w,i,ch1,ch2 -> [bp-2],[bp-4],[bp-6],[bp-8]) and font_MakeImage.",
+ "header": "extern void far g(int a);\n",
+ "variants": {
+  "abcd": "void far f(void)\n{\n    int d;\n    int c;\n    int b;\n    int a;\n\n    a = 1;\n    b = 2;\n    c = 3;\n    d = 4;\n}\n",
+  "w_i_lo_hi": "void far f(void)\n{\n    int w;\n    int i;\n    int lo;\n    int hi;\n\n    w = 1;\n    i = 2;\n    lo = 3;\n    hi = 4;\n}\n",
+  "same_bucket_decl_ab": "void far f(void)\n{\n    int aa;\n    int b;\n\n    aa = 1;\n    b = 2;\n}\n",
+  "add_decl_ab": "void far f(void)\n{\n    int a;\n    int b;\n\n    a = 1;\n    b = 2;\n    g(a + b);\n}\n",
+  "add_decl_ba": "void far f(void)\n{\n    int b;\n    int a;\n\n    a = 1;\n    b = 2;\n    g(a + b);\n}\n",
+  "cmp_decl_ab": "void far f(void)\n{\n    int a;\n    int b;\n\n    a = 1;\n    b = 2;\n    if (a < b)\n        g(0);\n}\n"
+ },
+ "profiles": [
+  {
+   "profile": "msc600ax",
+   "flags": [
+    "/AL",
+    "/Od"
+   ]
+  }
+ ],
+ "expect": {
+  "abcd@0": "mov word ptr [bp - 2], 1",
+  "w_i_lo_hi@0": "mov word ptr [bp - 2], 4",
+  "same_bucket_decl_ab@0": "mov word ptr [bp - 2], 2",
+  "add_decl_ab@0": "mov ax, word ptr [bp - 4]",
+  "add_decl_ba@0": "mov ax, word ptr [bp - 2]",
+  "cmp_decl_ab@0": "mov ax, word ptr [bp - 2]"
+ }
+}

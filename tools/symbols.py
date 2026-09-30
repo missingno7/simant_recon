@@ -13,6 +13,8 @@ unique library-member location for runtime names.
     python tools/symbols.py bootstrap      # create from build/inventory + build/libmatch (refuses overwrite)
     python tools/symbols.py rename OLD NEW --why "evidence"
     python tools/symbols.py add-data NAME SEG OFF --why "anchor"
+    python tools/symbols.py add-runtime NAME SEG OFF --why "evidence"   # public of a located runtime member
+    python tools/symbols.py add-runtime --batch FILE                    # [{"name","unit","seg","off","why"}]
 """
 from __future__ import annotations
 
@@ -158,6 +160,55 @@ def _add_data(name: str, seg: int, off: int, why: str) -> int:
     return 0
 
 
+def add_runtime(entries: list[dict]) -> int:
+    """Register publics of runtime members located in evidence/toolchain/runtime-location.json
+    (e.g. one located below libmatch's minimum size).  Each name must be a public of a located
+    member at exactly SEG:OFF, and that member must bind exactly under tools/runtime.py, so the
+    address is grounded by the library member's own location, never by a referencing operand."""
+    import runtime as rtmod
+    from lockfile import CanonicalLock
+    with CanonicalLock():
+        results, *_ = rtmod.verify_all()
+        where = {}
+        for r in results:
+            for n, (seg, off) in r.get("public_addresses", {}).items():
+                where.setdefault(n, []).append((r, seg, off))
+        d = load()
+        added = 0
+        for e in entries:
+            num = lambda v: int(v, 16) if isinstance(v, str) else int(v)   # noqa: E731  hex strings or ints
+            name, unit, seg, off = e["name"], e.get("unit", "root"), num(e["seg"]), num(e["off"])
+            if not e.get("why"):
+                raise SystemExit(f"{name}: --why is required")
+            hits = [(r, sg, of) for r, sg, of in where.get(name, []) if sg == seg and of == off]
+            if unit != "root" or not hits:
+                found = [f"{r['member']} {sg:04X}:{of:04X}" for r, sg, of in where.get(name, [])]
+                raise SystemExit(f"{name} is not a public of a located runtime member at {unit}:{seg:04X}:{off:04X}"
+                                 f" (located: {found or 'none'})")
+            r = hits[0][0]
+            if not r["exact"]:
+                raise SystemExit(f"{name}: member {r['member']} does not bind exactly: {r['reasons'][:3]}")
+            rec = {"unit": unit, "seg": seg, "off": off, "library": r["library"], "member": r["member"],
+                   "module_index": r["module_index"],
+                   "grounding": f"runtime-location: {r['library']} {r['member']} located at {r['linear']:#x}, "
+                                f"binds exactly (tools/runtime.py); {e['why']}"}
+            old = d["runtime"].get(name)
+            if old is not None:
+                if (old["unit"], old["seg"], old["off"]) != (unit, seg, off):
+                    raise SystemExit(f"{name} already registered at {old['unit']}:{old['seg']:04X}:{old['off']:04X}")
+                print(f"{name} already registered")
+                continue
+            cname = name[1:] if name.startswith("_") else None
+            if name in d["code"] or name in d["data"] or (cname and (cname in d["code"] or cname in d["data"])):
+                raise SystemExit(f"{name} clashes with a registered code/data name")
+            d["runtime"][name] = rec
+            added += 1
+            print(f"registered runtime {name} = {unit}:{seg:04X}:{off:04X} ({r['member']})")
+        save(d)
+        print(f"added {added} runtime names")
+        return 0
+
+
 def main() -> int:
     ap = argparse.ArgumentParser()
     sub = ap.add_subparsers(dest="cmd", required=True)
@@ -166,7 +217,15 @@ def main() -> int:
     a = sub.add_parser("add-data"); a.add_argument("name"); a.add_argument("seg"); a.add_argument("off")
     a.add_argument("--why", required=True)
     rm = sub.add_parser("remove"); rm.add_argument("name"); rm.add_argument("--why", required=True)
+    rt = sub.add_parser("add-runtime"); rt.add_argument("name", nargs="?"); rt.add_argument("seg", nargs="?")
+    rt.add_argument("off", nargs="?"); rt.add_argument("--why"); rt.add_argument("--batch", type=Path)
     args = ap.parse_args()
+    if args.cmd == "add-runtime":
+        if args.batch:
+            return add_runtime(json.loads(args.batch.read_text()))
+        if not (args.name and args.seg and args.off):
+            raise SystemExit("add-runtime NAME SEG OFF --why ... or --batch FILE")
+        return add_runtime([{"name": args.name, "seg": int(args.seg, 16), "off": int(args.off, 16), "why": args.why}])
     if args.cmd == "bootstrap":
         return bootstrap()
     if args.cmd == "remove":

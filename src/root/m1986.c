@@ -41,7 +41,7 @@ extern int far close(int fd);
 extern void far Punt(char far *format, ...);
 extern void far DosPunt(char far *message);
 extern void far * far * far f_171C_13CA(long size, int flags, char far *name);
-extern void far f_171C_2276(void far *p);
+extern void far free(void far *p);
 
 void far OpenIndex(char far *path, int db)
 {
@@ -70,7 +70,7 @@ void far CreateIndex(char far *name, int db)
 void far CloseIndex(int db)
 {
     if (fd_50F6_3958[db].index)
-        f_171C_2276(fd_50F6_3958[db].index);
+        free(fd_50F6_3958[db].index);
 }
 
 /* SCAFFOLD BEGIN: context only, not reconstruction.

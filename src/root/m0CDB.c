@@ -96,7 +96,8 @@ void far MoveSpider(void)
     y = fd_50F6_0F34 >> 4;
     if (fd_50F6_0A06 == 1 && SMode != 2 && SMode != 3) {
         if (fd_50F6_06AC == 7) {
-            if ((Starg = SFoundAnt()) != -2) {
+            Starg = SFoundAnt();
+            if (Starg != -2) {
                 SMode = 2;
                 if (Starg >= 0)
                     StargLife = AlistT[Starg];

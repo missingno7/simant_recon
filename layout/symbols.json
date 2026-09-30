@@ -5371,6 +5371,54 @@
     }
    ]
   },
+  "_font_CharWidth": {
+   "unit": "root",
+   "seg": 9703,
+   "off": 981,
+   "grounding": "inventory:far_call",
+   "history": [
+    {
+     "was": "f_25E7_03D5",
+     "why": "MAPSYM SIMTWO_MODULE unit font_ReadFont, font_DumpFont, _font_StringWidth, _font_CharWidth, _font_FontHeight, _font_LineHeight, font_MakeImage aligns 1:1 with DOS module 25E7 functions 007A..04BE; anchor font_ReadFont (xver CONFIRMED); body: owTable width of one char (widMax for fixed fonts)"
+    }
+   ]
+  },
+  "_font_FontHeight": {
+   "unit": "root",
+   "seg": 9703,
+   "off": 1147,
+   "grounding": "inventory:far_call",
+   "history": [
+    {
+     "was": "f_25E7_047B",
+     "why": "MAPSYM SIMTWO_MODULE unit font_ReadFont, font_DumpFont, _font_StringWidth, _font_CharWidth, _font_FontHeight, _font_LineHeight, font_MakeImage aligns 1:1 with DOS module 25E7 functions 007A..04BE; anchor font_ReadFont (xver CONFIRMED); body identical to Win16 _font_FontHeight: return font->height - 1 (field 0x0E)"
+    }
+   ]
+  },
+  "_font_LineHeight": {
+   "unit": "root",
+   "seg": 9703,
+   "off": 1177,
+   "grounding": "reviewed: prologue scan in unreached gap; descent ends in a return; no references found (unreferenced or indirect)",
+   "history": [
+    {
+     "was": "f_25E7_0499",
+     "why": "MAPSYM SIMTWO_MODULE unit font_ReadFont, font_DumpFont, _font_StringWidth, _font_CharWidth, _font_FontHeight, _font_LineHeight, font_MakeImage aligns 1:1 with DOS module 25E7 functions 007A..04BE; anchor font_ReadFont (xver CONFIRMED); body identical to Win16 _font_LineHeight: font->height + font->leading - 1 (fields 0x0E, 0x16)"
+    }
+   ]
+  },
+  "_font_StringWidth": {
+   "unit": "root",
+   "seg": 9703,
+   "off": 766,
+   "grounding": "inventory:far_call",
+   "history": [
+    {
+     "was": "f_25E7_02FE",
+     "why": "MAPSYM SIMTWO_MODULE unit font_ReadFont, font_DumpFont, _font_StringWidth, _font_CharWidth, _font_FontHeight, _font_LineHeight, font_MakeImage aligns 1:1 with DOS module 25E7 functions 007A..04BE; anchor font_ReadFont (xver CONFIRMED); body sums owTable widths over a string (strlen*widMax for fixed fonts)"
+    }
+   ]
+  },
   "_hanim_FindObject": {
    "unit": "root",
    "seg": 9826,
@@ -8841,7 +8889,7 @@
    "unit": "root",
    "seg": 5916,
    "off": 8712,
-   "grounding": "inventory:far_call"
+   "alias_of": "malloc"
   },
   "f_171C_2216": {
    "unit": "root",
@@ -8853,7 +8901,7 @@
    "unit": "root",
    "seg": 5916,
    "off": 8822,
-   "grounding": "inventory:far_call"
+   "alias_of": "free"
   },
   "f_171C_2288": {
    "unit": "root",
@@ -11625,37 +11673,37 @@
    "unit": "root",
    "seg": 9703,
    "off": 588,
-   "grounding": "reviewed: prologue scan in unreached gap; descent ends in a return; no references found (unreferenced or indirect)"
+   "alias_of": "font_DumpFont"
   },
   "f_25E7_02FE": {
    "unit": "root",
    "seg": 9703,
    "off": 766,
-   "grounding": "inventory:far_call"
+   "alias_of": "_font_StringWidth"
   },
   "f_25E7_03D5": {
    "unit": "root",
    "seg": 9703,
    "off": 981,
-   "grounding": "inventory:far_call"
+   "alias_of": "_font_CharWidth"
   },
   "f_25E7_047B": {
    "unit": "root",
    "seg": 9703,
    "off": 1147,
-   "grounding": "inventory:far_call"
+   "alias_of": "_font_FontHeight"
   },
   "f_25E7_0499": {
    "unit": "root",
    "seg": 9703,
    "off": 1177,
-   "grounding": "reviewed: prologue scan in unreached gap; descent ends in a return; no references found (unreferenced or indirect)"
+   "alias_of": "_font_LineHeight"
   },
   "f_25E7_04BE": {
    "unit": "root",
    "seg": 9703,
    "off": 1214,
-   "grounding": "inventory:far_call"
+   "alias_of": "font_MakeImage"
   },
   "f_2650_000F": {
    "unit": "root",
@@ -12083,6 +12131,36 @@
    "off": 1663,
    "grounding": "inventory:far_call"
   },
+  "f_28BC_0000": {
+   "unit": "root",
+   "seg": 10428,
+   "off": 0,
+   "grounding": "reviewed: code-segment data of the asm timer handler (not code): old INT 8 vector (cs:0000, saved by 28BC:04B4, chained by jmp far cs:[0]), saved SS:SP (cs:0004/0006), private stack pointer 6B3E and relocated DGROUP word (cs:0008/000A, R55B3), nesting counter cs:000C, EVEN pad 90; row needed so the complete TU tiles the segment"
+  },
+  "f_28BC_000E": {
+   "unit": "root",
+   "seg": 10428,
+   "off": 14,
+   "grounding": "reviewed: shared ISR exit (pop ax; dec byte cs:[0C]; iret), reached by jne from the INT 8 handler 28BC:0015 when re-entered"
+  },
+  "f_28BC_0015": {
+   "unit": "root",
+   "seg": 10428,
+   "off": 21,
+   "grounding": "reviewed: INT 8 handler (2-channel mix), installed by 28BC:0488 (mov [74BC],0015h; cmp bx,0015h) as the vector target; includes the output routines 0164-020D reached through jmp [6B9C] (offsets in DGROUP 6B9C/74AD-74B9) that jump back to 0124"
+  },
+  "f_28BC_020E": {
+   "unit": "root",
+   "seg": 10428,
+   "off": 526,
+   "grounding": "reviewed: INT 8 handler (4-channel mix), installed by 28BC:046B (mov [74BC],020Eh; cmp bx,020Eh); ends in jmp [6B9C] into the output routines of 28BC:0015"
+  },
+  "f_28BC_0354": {
+   "unit": "root",
+   "seg": 10428,
+   "off": 852,
+   "grounding": "reviewed: fast INT 8 handler (sequencer only) installed by 28BC:0422 (mov dx,0354h; mov es:[20h],dx); ends iret / jmp far cs:[0]"
+  },
   "f_28BC_03CC": {
    "unit": "root",
    "seg": 10428,
@@ -12094,6 +12172,12 @@
    "seg": 10428,
    "off": 1036,
    "grounding": "reviewed: prologue scan in unreached gap; descent ends in a return; no references found (unreferenced or indirect)"
+  },
+  "f_28BC_0422": {
+   "unit": "root",
+   "seg": 10428,
+   "off": 1058,
+   "grounding": "reviewed: near procedure (pushf; call 0422 from 28BC:040C; also entered at 0428 by jmp from 28BC:0149): reprogram PIT, install 28BC:0354 as INT 8, iret"
   },
   "f_28BC_046B": {
    "unit": "root",
@@ -12497,6 +12581,18 @@
    "off": 47,
    "grounding": "reviewed: memory-hook thunk: EA far jump to 171C:15A2 (relocated, frame 2CFB); ten 5-byte entries tile 2CFB:0002-0033 after crt0dat EMULATOR_TEXT (2CFB:0000-0001); 2CFB:0002/0007/002F are called far by 19A9/19DC; registered as jt_171C_15A2"
   },
+  "font_DumpFont": {
+   "unit": "root",
+   "seg": 9703,
+   "off": 588,
+   "grounding": "reviewed: prologue scan in unreached gap; descent ends in a return; no references found (unreferenced or indirect)",
+   "history": [
+    {
+     "was": "f_25E7_024C",
+     "why": "MAPSYM SIMTWO_MODULE unit font_ReadFont, font_DumpFont, _font_StringWidth, _font_CharWidth, _font_FontHeight, _font_LineHeight, font_MakeImage aligns 1:1 with DOS module 25E7 functions 007A..04BE; anchor font_ReadFont (xver CONFIRMED); body frees the three font tables and the font record"
+    }
+   ]
+  },
   "font_InitFonts": {
    "unit": "root",
    "seg": 9387,
@@ -12506,6 +12602,18 @@
     {
      "was": "f_24AB_047D",
      "why": "xver HIGH features-v1: string \"font1\"; string \"font2\"; string \"font3\""
+    }
+   ]
+  },
+  "font_MakeImage": {
+   "unit": "root",
+   "seg": 9703,
+   "off": 1214,
+   "grounding": "inventory:far_call",
+   "history": [
+    {
+     "was": "f_25E7_04BE",
+     "why": "MAPSYM SIMTWO_MODULE unit font_ReadFont, font_DumpFont, _font_StringWidth, _font_CharWidth, _font_FontHeight, _font_LineHeight, font_MakeImage aligns 1:1 with DOS module 25E7 functions 007A..04BE; anchor font_ReadFont (xver CONFIRMED); body renders a string through the font image into a bitmap buffer"
     }
    ]
   },
@@ -12542,6 +12650,18 @@
     {
      "was": "o08_35F5_0E67",
      "why": "worker ovl08: Win16 RandWorld unit member / call-site evidence (report 2026-09-30)"
+    }
+   ]
+  },
+  "free": {
+   "unit": "root",
+   "seg": 5916,
+   "off": 8822,
+   "grounding": "inventory:far_call",
+   "history": [
+    {
+     "was": "f_171C_2276",
+     "why": "the runtime's external _free binds here: far-call operand 171C:2276 in _freebuf.asm; body is _ffree(p) (f_171C_2216, Punt \"_ffree: ...\")"
     }
    ]
   },
@@ -12790,6 +12910,18 @@
     {
      "was": "WINMAIN",
      "why": "sole caller is MSC crt0 __astart: this is C main(); Win16 WINMAIN is its platform counterpart (shared strings \"simant cancelled.\", \"sound\"), not the same symbol"
+    }
+   ]
+  },
+  "malloc": {
+   "unit": "root",
+   "seg": 5916,
+   "off": 8712,
+   "grounding": "inventory:far_call",
+   "history": [
+    {
+     "was": "f_171C_2208",
+     "why": "the runtime's external _malloc binds here: far-call operands 171C:2208 in stdalloc.asm, _getbuf.asm, _sftbuf.asm and getcwd.c (4 references); body is return _fmalloc(size) (f_171C_21CC, debug name \"malloc\")"
     }
    ]
   },
@@ -20875,6 +21007,16 @@
    "off": 25186,
    "grounding": "f_1C62_0090: mov es,[89C8 (CONST segword 55B3)]; cmp word ptr es:[6262],0 (far int flag)"
   },
+  "fd_55B3_6770": {
+   "seg": 21939,
+   "off": 26480,
+   "grounding": "font_MakeImage (root:25E7:04BE): mov es,[8A54] (CONST 55B3, DGROUP declared far); mov es:[6770],ax = font->rowWords*2 (image row bytes)"
+  },
+  "fd_55B3_6772": {
+   "seg": 21939,
+   "off": 26482,
+   "grounding": "font_MakeImage: mov es,[8A56] (CONST 55B3); mov es:[6772],ax = (width+x+7)>>3 (destination row bytes)"
+  },
   "fd_55B3_6B42": {
    "seg": 21939,
    "off": 27458,
@@ -20899,6 +21041,11 @@
    "seg": 21939,
    "off": 27552,
    "grounding": "f_277E_04E8: mov es,[8A82]; mov es:[6BA0],ax (far int port)"
+  },
+  "fd_55B3_6BA4": {
+   "seg": 21939,
+   "off": 27556,
+   "grounding": "f_2815_0165: mov es,[8A90] (CONST segment word 55B3); shl di,1; mov cl,es:[di+6BA4] (far table in the DGROUP data of the asm module 28BC, AdLib output level)"
   },
   "fd_55B3_74AD": {
    "seg": 21939,
@@ -20944,6 +21091,11 @@
    "seg": 21939,
    "off": 29914,
    "grounding": "f_277E_0000: mov es,[8A60 CONST segword 55B3]; lcall es:[bx+74DA], bx=4*mode (far table of far code pointers)"
+  },
+  "fd_55B3_74FE": {
+   "seg": 21939,
+   "off": 29950,
+   "grounding": "f_00DF_0004: mov es,[7DFA] (CONST segment word 55B3); les bx,es:[74FE] (far pointer to the driver info words fd_50F6_01F0, relocated in section 27 at 7500); _DATA of module 293A after the detector table 74DA"
   },
   "fd_55B3_7564": {
    "seg": 21939,
@@ -21889,6 +22041,15 @@
   }
  },
  "runtime": {
+  "__EmDataSeg": {
+   "unit": "root",
+   "seg": 11515,
+   "off": 0,
+   "library": "llibcr.lib",
+   "member": "dos\\crt0dat.asm",
+   "module_index": 1,
+   "grounding": "runtime-location: llibcr.lib dos\\crt0dat.asm located at 0x2a05c, binds exactly (tools/runtime.py); public of crt0dat.asm's second code segment EMULATOR_TEXT, located at 0x2CFB0 = 2CFB:0000 (paragraph after _TEXT; its base16 site is MZ relocation #3468 -> EMULATOR_DATA frame 50F6); registered so every public of an accepted member is named"
+  },
   "__FF_MSGBANNER": {
    "unit": "root",
    "seg": 10740,
@@ -22600,6 +22761,15 @@
    "library": "llibcr.lib",
    "member": "onexit.asm",
    "module_index": 250
+  },
+  "_atol": {
+   "unit": "root",
+   "seg": 10740,
+   "off": 7348,
+   "library": "llibcr.lib",
+   "member": "atol.asm",
+   "module_index": 67,
+   "grounding": "runtime-location: llibcr.lib atol.asm located at 0x2bbf4, binds exactly (tools/runtime.py); atol.asm (llibcr.lib) located at 0x2BBF4 = 29F4:1CB4 between strncmp.asm and atox.asm: E9 01 00 = jmp __catox (0x2BBF8), below libmatch's minimum size; tzset.c's external _atol is the only reference"
   },
   "_chdir": {
    "unit": "root",

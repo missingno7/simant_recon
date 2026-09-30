@@ -12405,6 +12405,76 @@
 {
 "unit": "root",
 "seg": 10428,
+"off": 0,
+"size": 14,
+"region": "game_or_library",
+"extent": "REVIEWED",
+"evidence": [
+"reviewed"
+],
+"notes": [
+"code-segment data of the asm timer handler (not code): old INT 8 vector (cs:0000, saved by 28BC:04B4, chained by jmp far cs:[0]), saved SS:SP (cs:0004/0006), private stack pointer 6B3E and relocated DGROUP word (cs:0008/000A, R55B3), nesting counter cs:000C, EVEN pad 90; row needed so the complete TU tiles the segment"
+]
+},
+{
+"unit": "root",
+"seg": 10428,
+"off": 14,
+"size": 7,
+"region": "game_or_library",
+"extent": "REVIEWED",
+"evidence": [
+"reviewed"
+],
+"notes": [
+"shared ISR exit (pop ax; dec byte cs:[0C]; iret), reached by jne from the INT 8 handler 28BC:0015 when re-entered"
+]
+},
+{
+"unit": "root",
+"seg": 10428,
+"off": 21,
+"size": 505,
+"region": "game_or_library",
+"extent": "REVIEWED",
+"evidence": [
+"reviewed"
+],
+"notes": [
+"INT 8 handler (2-channel mix), installed by 28BC:0488 (mov [74BC],0015h; cmp bx,0015h) as the vector target; includes the output routines 0164-020D reached through jmp [6B9C] (offsets in DGROUP 6B9C/74AD-74B9) that jump back to 0124"
+]
+},
+{
+"unit": "root",
+"seg": 10428,
+"off": 526,
+"size": 326,
+"region": "game_or_library",
+"extent": "REVIEWED",
+"evidence": [
+"reviewed"
+],
+"notes": [
+"INT 8 handler (4-channel mix), installed by 28BC:046B (mov [74BC],020Eh; cmp bx,020Eh); ends in jmp [6B9C] into the output routines of 28BC:0015"
+]
+},
+{
+"unit": "root",
+"seg": 10428,
+"off": 852,
+"size": 120,
+"region": "game_or_library",
+"extent": "REVIEWED",
+"evidence": [
+"reviewed"
+],
+"notes": [
+"fast INT 8 handler (sequencer only) installed by 28BC:0422 (mov dx,0354h; mov es:[20h],dx); ends iret / jmp far cs:[0]"
+]
+},
+{
+"unit": "root",
+"seg": 10428,
 "off": 972,
 "size": 64,
 "region": "game_or_library",
@@ -12425,6 +12495,20 @@
 ],
 "notes": [
 "prologue scan in unreached gap; descent ends in a return; no references found (unreferenced or indirect)"
+]
+},
+{
+"unit": "root",
+"seg": 10428,
+"off": 1058,
+"size": 73,
+"region": "game_or_library",
+"extent": "REVIEWED",
+"evidence": [
+"reviewed"
+],
+"notes": [
+"near procedure (pushf; call 0422 from 28BC:040C; also entered at 0428 by jmp from 28BC:0149): reprogram PIT, install 28BC:0354 as INT 8, iret"
 ]
 },
 {
@@ -13112,59 +13196,82 @@
 "unit": "root",
 "seg": 10740,
 "off": 28,
-"size": 203,
+"size": 255,
 "region": "msc_runtime_text",
-"extent": "DESCENT",
+"extent": "RUNTIME_MEMBER",
 "evidence": [
+"runtime_member",
 "msc_entry"
+],
+"library": "llibcr.lib",
+"member": "dos\\crt0.asm",
+"module_index": 0,
+"entries": [
+{
+"off": 28,
+"name": "__astart"
+},
+{
+"off": 231,
+"name": "__cintDIV"
+},
+{
+"off": 247,
+"name": "__amsg_exit"
+},
+{
+"off": 281,
+"name": "__dataseg"
+}
+],
+"notes": [
+"member extent from tools/runtime.py binding; replaces 1 DESCENT rows"
 ]
 },
 {
 "unit": "root",
 "seg": 10740,
 "off": 284,
-"size": 3,
+"size": 392,
 "region": "msc_runtime_text",
-"extent": "DESCENT",
+"extent": "RUNTIME_MEMBER",
 "evidence": [
-"far_call"
+"runtime_member",
+"far_call",
+"near_call",
+"push_cs_call"
+],
+"library": "llibcr.lib",
+"member": "dos\\crt0dat.asm",
+"module_index": 1,
+"entries": [
+{
+"off": 284,
+"name": "__cinit"
+},
+{
+"off": 481,
+"name": "_exit"
+},
+{
+"off": 488,
+"name": "__exit"
+},
+{
+"off": 496,
+"name": "__cexit"
+},
+{
+"off": 506,
+"name": "__c_exit"
+},
+{
+"off": 612,
+"name": "__ctermsub"
+}
 ],
 "notes": [
-"overlaps root:2A504"
-]
-},
-{
-"unit": "root",
-"seg": 10740,
-"off": 481,
-"size": 131,
-"region": "msc_runtime_text",
-"extent": "DESCENT",
-"evidence": [
-"far_call",
-"push_cs_call"
-]
-},
-{
-"unit": "root",
-"seg": 10740,
-"off": 612,
-"size": 45,
-"region": "msc_runtime_text",
-"extent": "DESCENT",
-"evidence": [
-"near_call"
-]
-},
-{
-"unit": "root",
-"seg": 10740,
-"off": 657,
-"size": 19,
-"region": "msc_runtime_text",
-"extent": "DESCENT",
-"evidence": [
-"near_call"
+"member extent from tools/runtime.py binding; replaces 4 DESCENT rows"
 ]
 },
 {
@@ -13173,85 +13280,174 @@
 "off": 676,
 "size": 34,
 "region": "msc_runtime_text",
-"extent": "DESCENT",
+"extent": "RUNTIME_MEMBER",
 "evidence": [
+"runtime_member",
 "push_cs_call"
+],
+"library": "llibcr.lib",
+"member": "dos\\crt0msg.asm",
+"module_index": 2,
+"entries": [
+{
+"off": 676,
+"name": "__FF_MSGBANNER"
+}
+],
+"notes": [
+"member extent from tools/runtime.py binding; replaces 1 DESCENT rows"
+]
+},
+{
+"unit": "root",
+"seg": 10740,
+"off": 710,
+"size": 6,
+"region": "msc_runtime_text",
+"extent": "RUNTIME_MEMBER",
+"evidence": [
+"runtime_member"
+],
+"library": "llibcr.lib",
+"member": "crt0fp.asm",
+"module_index": 3,
+"entries": [
+{
+"off": 710,
+"name": "__fptrap"
+}
+],
+"notes": [
+"member extent from tools/runtime.py binding; replaces 0 DESCENT rows"
 ]
 },
 {
 "unit": "root",
 "seg": 10740,
 "off": 716,
-"size": 72,
+"size": 36,
 "region": "msc_runtime_text",
-"extent": "DESCENT",
+"extent": "RUNTIME_MEMBER",
 "evidence": [
+"runtime_member",
 "far_call",
 "push_cs_call"
 ],
+"library": "llibcr.lib",
+"member": "chkstk.asm",
+"module_index": 5,
+"entries": [
+{
+"off": 716,
+"name": "__aFchkstk"
+},
+{
+"off": 716,
+"name": "__chkstk"
+}
+],
 "notes": [
-"overlaps root:2A504"
+"member extent from tools/runtime.py binding; replaces 1 DESCENT rows"
 ]
 },
 {
 "unit": "root",
 "seg": 10740,
 "off": 752,
-"size": 0,
+"size": 36,
 "region": "msc_runtime_text",
-"extent": "DESCENT",
+"extent": "RUNTIME_MEMBER",
 "evidence": [
+"runtime_member",
 "far_call"
 ],
+"library": "llibcr.lib",
+"member": "chksum.asm",
+"module_index": 6,
+"entries": [
+{
+"off": 752,
+"name": "__nullcheck"
+}
+],
 "notes": [
-"overlaps root:2A20C"
+"member extent from tools/runtime.py binding; replaces 1 DESCENT rows"
 ]
 },
 {
 "unit": "root",
 "seg": 10740,
 "off": 788,
-"size": 590,
+"size": 429,
 "region": "msc_runtime_text",
-"extent": "DESCENT",
+"extent": "RUNTIME_MEMBER",
 "evidence": [
+"runtime_member",
 "far_call"
+],
+"library": "llibcr.lib",
+"member": "dos\\stdargv.asm",
+"module_index": 7,
+"entries": [
+{
+"off": 788,
+"name": "__setargv"
+}
+],
+"notes": [
+"member extent from tools/runtime.py binding; replaces 1 DESCENT rows"
 ]
 },
 {
 "unit": "root",
 "seg": 10740,
 "off": 1218,
-"size": 3,
+"size": 160,
 "region": "msc_runtime_text",
-"extent": "DESCENT",
+"extent": "RUNTIME_MEMBER",
 "evidence": [
+"runtime_member",
 "far_call"
 ],
+"library": "llibcr.lib",
+"member": "dos\\stdenvp.asm",
+"module_index": 8,
+"entries": [
+{
+"off": 1218,
+"name": "__setenvp"
+}
+],
 "notes": [
-"overlaps root:2A254"
+"member extent from tools/runtime.py binding; replaces 1 DESCENT rows"
 ]
 },
 {
 "unit": "root",
 "seg": 10740,
 "off": 1378,
-"size": 43,
+"size": 97,
 "region": "msc_runtime_text",
-"extent": "DESCENT",
+"extent": "RUNTIME_MEMBER",
 "evidence": [
+"runtime_member",
 "push_cs_call"
-]
+],
+"library": "llibcr.lib",
+"member": "dos\\nmsghdr.asm",
+"module_index": 9,
+"entries": [
+{
+"off": 1378,
+"name": "__NMSG_TEXT"
 },
 {
-"unit": "root",
-"seg": 10740,
 "off": 1421,
-"size": 54,
-"region": "msc_runtime_text",
-"extent": "DESCENT",
-"evidence": [
-"push_cs_call"
+"name": "__NMSG_WRITE"
+}
+],
+"notes": [
+"member extent from tools/runtime.py binding; replaces 2 DESCENT rows"
 ]
 },
 {
@@ -13260,31 +13456,59 @@
 "off": 1476,
 "size": 37,
 "region": "msc_runtime_text",
-"extent": "DESCENT",
+"extent": "RUNTIME_MEMBER",
 "evidence": [
+"runtime_member",
 "near_call"
+],
+"library": "llibcr.lib",
+"member": "dos\\stdalloc.asm",
+"module_index": 11,
+"entries": [
+{
+"off": 1476,
+"name": "__myalloc"
+}
+],
+"notes": [
+"member extent from tools/runtime.py binding; replaces 1 DESCENT rows"
 ]
 },
 {
 "unit": "root",
 "seg": 10740,
-"off": 1548,
-"size": 6,
+"off": 1514,
+"size": 85,
 "region": "msc_runtime_text",
-"extent": "DESCENT",
+"extent": "RUNTIME_MEMBER",
 "evidence": [
+"runtime_member",
+"near_call",
 "push_cs_call"
-]
+],
+"library": "llibcr.lib",
+"member": "dos\\dosret.asm",
+"module_index": 12,
+"entries": [
+{
+"off": 1514,
+"name": "__dosret0"
 },
 {
-"unit": "root",
-"seg": 10740,
-"off": 1554,
-"size": 45,
-"region": "msc_runtime_text",
-"extent": "DESCENT",
-"evidence": [
-"near_call"
+"off": 1522,
+"name": "__dosreturn"
+},
+{
+"off": 1535,
+"name": "__dosretax"
+},
+{
+"off": 1548,
+"name": "__maperror"
+}
+],
+"notes": [
+"member extent from tools/runtime.py binding; replaces 2 DESCENT rows"
 ]
 },
 {
@@ -13293,86 +13517,124 @@
 "off": 1600,
 "size": 198,
 "region": "msc_runtime_text",
-"extent": "DESCENT",
+"extent": "RUNTIME_MEMBER",
 "evidence": [
+"runtime_member",
 "far_call"
+],
+"library": "llibcr.lib",
+"member": "fclose.c",
+"module_index": 17,
+"entries": [
+{
+"off": 1600,
+"name": "_fclose"
+}
+],
+"notes": [
+"member extent from tools/runtime.py binding; replaces 1 DESCENT rows"
 ]
 },
 {
 "unit": "root",
 "seg": 10740,
 "off": 1798,
-"size": 52,
+"size": 80,
 "region": "msc_runtime_text",
-"extent": "DESCENT",
+"extent": "RUNTIME_MEMBER",
 "evidence": [
+"runtime_member",
 "far_call"
-]
+],
+"library": "llibcr.lib",
+"member": "fopen.c",
+"module_index": 18,
+"entries": [
+{
+"off": 1798,
+"name": "__fsopen"
 },
 {
-"unit": "root",
-"seg": 10740,
 "off": 1850,
-"size": 27,
-"region": "msc_runtime_text",
-"extent": "DESCENT",
-"evidence": [
-"far_call"
+"name": "_fopen"
+}
+],
+"notes": [
+"member extent from tools/runtime.py binding; replaces 2 DESCENT rows"
 ]
 },
 {
 "unit": "root",
 "seg": 10740,
 "off": 1878,
-"size": 161,
+"size": 369,
 "region": "msc_runtime_text",
-"extent": "DESCENT",
+"extent": "RUNTIME_MEMBER",
 "evidence": [
-"far_call"
-]
-},
-{
-"unit": "root",
-"seg": 10740,
-"off": 2039,
-"size": 208,
-"region": "msc_runtime_text",
-"extent": "DESCENT",
-"evidence": [
+"runtime_member",
+"far_call",
 "near_call"
+],
+"library": "llibcr.lib",
+"member": "fread.asm",
+"module_index": 20,
+"entries": [
+{
+"off": 1878,
+"name": "_fread"
+}
+],
+"notes": [
+"member extent from tools/runtime.py binding; replaces 2 DESCENT rows"
 ]
 },
 {
 "unit": "root",
 "seg": 10740,
 "off": 2248,
-"size": 161,
+"size": 407,
 "region": "msc_runtime_text",
-"extent": "DESCENT",
+"extent": "RUNTIME_MEMBER",
 "evidence": [
-"far_call"
-]
-},
-{
-"unit": "root",
-"seg": 10740,
-"off": 2409,
-"size": 246,
-"region": "msc_runtime_text",
-"extent": "DESCENT",
-"evidence": [
+"runtime_member",
+"far_call",
 "near_call"
+],
+"library": "llibcr.lib",
+"member": "fwrite.asm",
+"module_index": 22,
+"entries": [
+{
+"off": 2248,
+"name": "_fwrite"
+}
+],
+"notes": [
+"member extent from tools/runtime.py binding; replaces 2 DESCENT rows"
 ]
 },
 {
 "unit": "root",
 "seg": 10740,
 "off": 2656,
-"size": 67,
+"size": 68,
 "region": "msc_runtime_text",
-"extent": "DESCENT",
+"extent": "RUNTIME_MEMBER",
 "evidence": [
+"runtime_member",
 "far_call"
+],
+"library": "llibcr.lib",
+"member": "printf.c",
+"module_index": 23,
+"entries": [
+{
+"off": 2656,
+"name": "_printf"
+}
+],
+"notes": [
+"member extent from tools/runtime.py binding; replaces 1 DESCENT rows"
 ]
 },
 {
@@ -13381,9 +13643,22 @@
 "off": 2724,
 "size": 156,
 "region": "msc_runtime_text",
-"extent": "DESCENT",
+"extent": "RUNTIME_MEMBER",
 "evidence": [
+"runtime_member",
 "push_cs_call"
+],
+"library": "llibcr.lib",
+"member": "_filbuf.asm",
+"module_index": 27,
+"entries": [
+{
+"off": 2724,
+"name": "__filbuf"
+}
+],
+"notes": [
+"member extent from tools/runtime.py binding; replaces 1 DESCENT rows"
 ]
 },
 {
@@ -13392,10 +13667,23 @@
 "off": 2880,
 "size": 235,
 "region": "msc_runtime_text",
-"extent": "DESCENT",
+"extent": "RUNTIME_MEMBER",
 "evidence": [
+"runtime_member",
 "far_call",
 "push_cs_call"
+],
+"library": "llibcr.lib",
+"member": "_flsbuf.asm",
+"module_index": 28,
+"entries": [
+{
+"off": 2880,
+"name": "__flsbuf"
+}
+],
+"notes": [
+"member extent from tools/runtime.py binding; replaces 1 DESCENT rows"
 ]
 },
 {
@@ -13404,9 +13692,22 @@
 "off": 3116,
 "size": 55,
 "region": "msc_runtime_text",
-"extent": "DESCENT",
+"extent": "RUNTIME_MEMBER",
 "evidence": [
+"runtime_member",
 "near_call"
+],
+"library": "llibcr.lib",
+"member": "_freebuf.asm",
+"module_index": 29,
+"entries": [
+{
+"off": 3116,
+"name": "__freebuf"
+}
+],
+"notes": [
+"member extent from tools/runtime.py binding; replaces 1 DESCENT rows"
 ]
 },
 {
@@ -13415,76 +13716,132 @@
 "off": 3172,
 "size": 75,
 "region": "msc_runtime_text",
-"extent": "DESCENT",
+"extent": "RUNTIME_MEMBER",
 "evidence": [
+"runtime_member",
 "near_call"
+],
+"library": "llibcr.lib",
+"member": "_getbuf.asm",
+"module_index": 30,
+"entries": [
+{
+"off": 3172,
+"name": "__getbuf"
+}
+],
+"notes": [
+"member extent from tools/runtime.py binding; replaces 1 DESCENT rows"
 ]
 },
 {
 "unit": "root",
 "seg": 10740,
 "off": 3248,
-"size": 247,
+"size": 248,
 "region": "msc_runtime_text",
-"extent": "DESCENT",
+"extent": "RUNTIME_MEMBER",
 "evidence": [
+"runtime_member",
 "far_call"
+],
+"library": "llibcr.lib",
+"member": "_open.c",
+"module_index": 31,
+"entries": [
+{
+"off": 3248,
+"name": "__openfile"
+}
+],
+"notes": [
+"member extent from tools/runtime.py binding; replaces 1 DESCENT rows"
 ]
 },
 {
 "unit": "root",
 "seg": 10740,
 "off": 3496,
-"size": 129,
+"size": 201,
 "region": "msc_runtime_text",
-"extent": "DESCENT",
+"extent": "RUNTIME_MEMBER",
 "evidence": [
+"runtime_member",
 "near_call"
-]
+],
+"library": "llibcr.lib",
+"member": "_sftbuf.asm",
+"module_index": 32,
+"entries": [
+{
+"off": 3496,
+"name": "__stbuf"
 },
 {
-"unit": "root",
-"seg": 10740,
 "off": 3625,
-"size": 72,
-"region": "msc_runtime_text",
-"extent": "DESCENT",
-"evidence": [
-"near_call"
+"name": "__ftbuf"
+}
+],
+"notes": [
+"member extent from tools/runtime.py binding; replaces 2 DESCENT rows"
 ]
 },
 {
 "unit": "root",
 "seg": 10740,
 "off": 3698,
-"size": 127,
+"size": 212,
 "region": "msc_runtime_text",
-"extent": "DESCENT",
+"extent": "RUNTIME_MEMBER",
 "evidence": [
+"runtime_member",
 "far_call",
+"near_call",
 "push_cs_call"
-]
+],
+"library": "llibcr.lib",
+"member": "fflush.c",
+"module_index": 33,
+"entries": [
+{
+"off": 3698,
+"name": "_fflush"
 },
 {
-"unit": "root",
-"seg": 10740,
+"off": 3826,
+"name": "_flushall"
+},
+{
 "off": 3834,
-"size": 75,
-"region": "msc_runtime_text",
-"extent": "DESCENT",
-"evidence": [
-"near_call"
+"name": "flsall"
+}
+],
+"notes": [
+"member extent from tools/runtime.py binding; replaces 2 DESCENT rows"
 ]
 },
 {
 "unit": "root",
 "seg": 10740,
-"off": 3926,
-"size": 1258,
+"off": 3910,
+"size": 1274,
 "region": "msc_runtime_text",
-"extent": "DESCENT",
+"extent": "RUNTIME_MEMBER",
 "evidence": [
+"runtime_member",
 "far_call"
+],
+"library": "llibcr.lib",
+"member": "output.asm",
+"module_index": 35,
+"entries": [
+{
+"off": 3926,
+"name": "__output"
+}
+],
+"notes": [
+"member extent from tools/runtime.py binding; replaces 1 DESCENT rows"
 ]
 },
 {
@@ -13493,9 +13850,22 @@
 "off": 5184,
 "size": 78,
 "region": "msc_runtime_text",
-"extent": "DESCENT",
+"extent": "RUNTIME_MEMBER",
 "evidence": [
+"runtime_member",
 "far_call"
+],
+"library": "llibcr.lib",
+"member": "stream.c",
+"module_index": 36,
+"entries": [
+{
+"off": 5184,
+"name": "__getstream"
+}
+],
+"notes": [
+"member extent from tools/runtime.py binding; replaces 1 DESCENT rows"
 ]
 },
 {
@@ -13504,12 +13874,22 @@
 "off": 5262,
 "size": 32,
 "region": "msc_runtime_text",
-"extent": "DESCENT",
+"extent": "RUNTIME_MEMBER",
 "evidence": [
+"runtime_member",
 "far_call"
 ],
+"library": "llibcr.lib",
+"member": "dos\\close.asm",
+"module_index": 40,
+"entries": [
+{
+"off": 5262,
+"name": "_close"
+}
+],
 "notes": [
-"overlaps root:2CAD3"
+"member extent from tools/runtime.py binding; replaces 1 DESCENT rows"
 ]
 },
 {
@@ -13518,52 +13898,56 @@
 "off": 5294,
 "size": 122,
 "region": "msc_runtime_text",
-"extent": "DESCENT",
+"extent": "RUNTIME_MEMBER",
 "evidence": [
+"runtime_member",
 "far_call",
 "push_cs_call"
 ],
+"library": "llibcr.lib",
+"member": "dos\\lseek.asm",
+"module_index": 41,
+"entries": [
+{
+"off": 5294,
+"name": "_lseek"
+}
+],
 "notes": [
-"overlaps root:2CAD3"
+"member extent from tools/runtime.py binding; replaces 1 DESCENT rows"
 ]
 },
 {
 "unit": "root",
 "seg": 10740,
 "off": 5416,
-"size": 443,
+"size": 460,
 "region": "msc_runtime_text",
-"extent": "DESCENT",
+"extent": "RUNTIME_MEMBER",
 "evidence": [
-"far_call"
-],
-"notes": [
-"overlaps root:2B3EE"
-]
-},
-{
-"unit": "root",
-"seg": 10740,
-"off": 5442,
-"size": 8,
-"region": "msc_runtime_text",
-"extent": "DESCENT",
-"evidence": [
-"far_call"
-],
-"notes": [
-"overlaps root:2B468"
-]
-},
-{
-"unit": "root",
-"seg": 10740,
-"off": 5859,
-"size": 17,
-"region": "msc_runtime_text",
-"extent": "DESCENT",
-"evidence": [
+"runtime_member",
+"far_call",
 "near_call"
+],
+"library": "llibcr.lib",
+"member": "dos\\open.asm",
+"module_index": 42,
+"entries": [
+{
+"off": 5416,
+"name": "_sopen"
+},
+{
+"off": 5442,
+"name": "_open"
+},
+{
+"off": 5859,
+"name": "__cXENIXtoDOSmode"
+}
+],
+"notes": [
+"member extent from tools/runtime.py binding; replaces 3 DESCENT rows"
 ]
 },
 {
@@ -13572,13 +13956,23 @@
 "off": 5876,
 "size": 254,
 "region": "msc_runtime_text",
-"extent": "DESCENT",
+"extent": "RUNTIME_MEMBER",
 "evidence": [
+"runtime_member",
 "far_call",
 "push_cs_call"
 ],
+"library": "llibcr.lib",
+"member": "dos\\read.asm",
+"module_index": 43,
+"entries": [
+{
+"off": 5876,
+"name": "_read"
+}
+],
 "notes": [
-"overlaps root:2B3EE"
+"member extent from tools/runtime.py binding; replaces 1 DESCENT rows"
 ]
 },
 {
@@ -13587,27 +13981,24 @@
 "off": 6130,
 "size": 351,
 "region": "msc_runtime_text",
-"extent": "DESCENT",
+"extent": "RUNTIME_MEMBER",
 "evidence": [
+"runtime_member",
 "far_call",
+"near_call",
 "push_cs_call"
 ],
-"notes": [
-"overlaps root:2B3EE"
-]
-},
+"library": "llibcr.lib",
+"member": "write.asm",
+"module_index": 44,
+"entries": [
 {
-"unit": "root",
-"seg": 10740,
-"off": 6322,
-"size": 0,
-"region": "msc_runtime_text",
-"extent": "DESCENT",
-"evidence": [
-"near_call"
+"off": 6130,
+"name": "_write"
+}
 ],
 "notes": [
-"overlaps root:2B732"
+"member extent from tools/runtime.py binding; replaces 2 DESCENT rows"
 ]
 },
 {
@@ -13616,9 +14007,145 @@
 "off": 6482,
 "size": 20,
 "region": "msc_runtime_text",
-"extent": "DESCENT",
+"extent": "RUNTIME_MEMBER",
 "evidence": [
+"runtime_member",
 "far_call"
+],
+"library": "llibcr.lib",
+"member": "stackava.asm",
+"module_index": 45,
+"entries": [
+{
+"off": 6482,
+"name": "_stackavail"
+}
+],
+"notes": [
+"member extent from tools/runtime.py binding; replaces 1 DESCENT rows"
+]
+},
+{
+"unit": "root",
+"seg": 10740,
+"off": 6502,
+"size": 52,
+"region": "msc_runtime_text",
+"extent": "RUNTIME_MEMBER",
+"evidence": [
+"runtime_member"
+],
+"library": "llibcr.lib",
+"member": "initseg.asm",
+"module_index": 52,
+"entries": [
+{
+"off": 6502,
+"name": "__initseg"
+}
+],
+"notes": [
+"member extent from tools/runtime.py binding; replaces 0 DESCENT rows"
+]
+},
+{
+"unit": "root",
+"seg": 10740,
+"off": 6554,
+"size": 54,
+"region": "msc_runtime_text",
+"extent": "RUNTIME_MEMBER",
+"evidence": [
+"runtime_member"
+],
+"library": "llibcr.lib",
+"member": "linkseg.asm",
+"module_index": 53,
+"entries": [
+{
+"off": 6554,
+"name": "__linkseg"
+}
+],
+"notes": [
+"member extent from tools/runtime.py binding; replaces 0 DESCENT rows"
+]
+},
+{
+"unit": "root",
+"seg": 10740,
+"off": 6608,
+"size": 124,
+"region": "msc_runtime_text",
+"extent": "RUNTIME_MEMBER",
+"evidence": [
+"runtime_member"
+],
+"library": "llibcr.lib",
+"member": "searchsg.asm",
+"module_index": 54,
+"entries": [
+{
+"off": 6608,
+"name": "__searchseg"
+}
+],
+"notes": [
+"member extent from tools/runtime.py binding; replaces 0 DESCENT rows"
+]
+},
+{
+"unit": "root",
+"seg": 10740,
+"off": 6732,
+"size": 256,
+"region": "msc_runtime_text",
+"extent": "RUNTIME_MEMBER",
+"evidence": [
+"runtime_member"
+],
+"library": "llibcr.lib",
+"member": "growseg.asm",
+"module_index": 55,
+"entries": [
+{
+"off": 6732,
+"name": "__growseg"
+},
+{
+"off": 6875,
+"name": "__incseg"
+},
+{
+"off": 6956,
+"name": "__findlast"
+}
+],
+"notes": [
+"member extent from tools/runtime.py binding; replaces 0 DESCENT rows"
+]
+},
+{
+"unit": "root",
+"seg": 10740,
+"off": 6988,
+"size": 68,
+"region": "msc_runtime_text",
+"extent": "RUNTIME_MEMBER",
+"evidence": [
+"runtime_member"
+],
+"library": "llibcr.lib",
+"member": "newseg.asm",
+"module_index": 56,
+"entries": [
+{
+"off": 6988,
+"name": "__newseg"
+}
+],
+"notes": [
+"member extent from tools/runtime.py binding; replaces 0 DESCENT rows"
 ]
 },
 {
@@ -13627,9 +14154,22 @@
 "off": 7056,
 "size": 70,
 "region": "msc_runtime_text",
-"extent": "DESCENT",
+"extent": "RUNTIME_MEMBER",
 "evidence": [
+"runtime_member",
 "far_call"
+],
+"library": "llibcr.lib",
+"member": "strcat.asm",
+"module_index": 59,
+"entries": [
+{
+"off": 7056,
+"name": "_strcat"
+}
+],
+"notes": [
+"member extent from tools/runtime.py binding; replaces 1 DESCENT rows"
 ]
 },
 {
@@ -13638,9 +14178,22 @@
 "off": 7126,
 "size": 54,
 "region": "msc_runtime_text",
-"extent": "DESCENT",
+"extent": "RUNTIME_MEMBER",
 "evidence": [
+"runtime_member",
 "far_call"
+],
+"library": "llibcr.lib",
+"member": "strcpy.asm",
+"module_index": 60,
+"entries": [
+{
+"off": 7126,
+"name": "_strcpy"
+}
+],
+"notes": [
+"member extent from tools/runtime.py binding; replaces 1 DESCENT rows"
 ]
 },
 {
@@ -13649,9 +14202,22 @@
 "off": 7180,
 "size": 41,
 "region": "msc_runtime_text",
-"extent": "DESCENT",
+"extent": "RUNTIME_MEMBER",
 "evidence": [
+"runtime_member",
 "far_call"
+],
+"library": "llibcr.lib",
+"member": "strcmp.asm",
+"module_index": 61,
+"entries": [
+{
+"off": 7180,
+"name": "_strcmp"
+}
+],
+"notes": [
+"member extent from tools/runtime.py binding; replaces 1 DESCENT rows"
 ]
 },
 {
@@ -13660,9 +14226,22 @@
 "off": 7222,
 "size": 23,
 "region": "msc_runtime_text",
-"extent": "DESCENT",
+"extent": "RUNTIME_MEMBER",
 "evidence": [
+"runtime_member",
 "far_call"
+],
+"library": "llibcr.lib",
+"member": "strlen.asm",
+"module_index": 62,
+"entries": [
+{
+"off": 7222,
+"name": "_strlen"
+}
+],
+"notes": [
+"member extent from tools/runtime.py binding; replaces 1 DESCENT rows"
 ]
 },
 {
@@ -13671,9 +14250,22 @@
 "off": 7246,
 "size": 42,
 "region": "msc_runtime_text",
-"extent": "DESCENT",
+"extent": "RUNTIME_MEMBER",
 "evidence": [
+"runtime_member",
 "far_call"
+],
+"library": "llibcr.lib",
+"member": "strncpy.asm",
+"module_index": 64,
+"entries": [
+{
+"off": 7246,
+"name": "_strncpy"
+}
+],
+"notes": [
+"member extent from tools/runtime.py binding; replaces 1 DESCENT rows"
 ]
 },
 {
@@ -13682,31 +14274,93 @@
 "off": 7288,
 "size": 59,
 "region": "msc_runtime_text",
-"extent": "DESCENT",
+"extent": "RUNTIME_MEMBER",
 "evidence": [
+"runtime_member",
 "far_call"
+],
+"library": "llibcr.lib",
+"member": "strncmp.asm",
+"module_index": 65,
+"entries": [
+{
+"off": 7288,
+"name": "_strncmp"
+}
+],
+"notes": [
+"member extent from tools/runtime.py binding; replaces 1 DESCENT rows"
 ]
 },
 {
 "unit": "root",
 "seg": 10740,
 "off": 7348,
-"size": 90,
+"size": 3,
 "region": "msc_runtime_text",
-"extent": "DESCENT",
+"extent": "RUNTIME_MEMBER",
 "evidence": [
+"runtime_member",
 "far_call"
+],
+"library": "llibcr.lib",
+"member": "atol.asm",
+"module_index": 67,
+"entries": [
+{
+"off": 7348,
+"name": "_atol"
+}
+],
+"notes": [
+"member extent from tools/runtime.py binding; replaces 1 DESCENT rows"
+]
+},
+{
+"unit": "root",
+"seg": 10740,
+"off": 7352,
+"size": 86,
+"region": "msc_runtime_text",
+"extent": "RUNTIME_MEMBER",
+"evidence": [
+"runtime_member"
+],
+"library": "llibcr.lib",
+"member": "atox.asm",
+"module_index": 69,
+"entries": [
+{
+"off": 7352,
+"name": "__catox"
+}
+],
+"notes": [
+"member extent from tools/runtime.py binding; replaces 0 DESCENT rows"
 ]
 },
 {
 "unit": "root",
 "seg": 10740,
 "off": 7438,
-"size": 3093,
+"size": 28,
 "region": "msc_runtime_text",
-"extent": "DESCENT",
+"extent": "RUNTIME_MEMBER",
 "evidence": [
+"runtime_member",
 "far_call"
+],
+"library": "llibcr.lib",
+"member": "itoa.asm",
+"module_index": 70,
+"entries": [
+{
+"off": 7438,
+"name": "_itoa"
+}
+],
+"notes": [
+"member extent from tools/runtime.py binding; replaces 1 DESCENT rows"
 ]
 },
 {
@@ -13715,9 +14369,22 @@
 "off": 7466,
 "size": 142,
 "region": "msc_runtime_text",
-"extent": "DESCENT",
+"extent": "RUNTIME_MEMBER",
 "evidence": [
+"runtime_member",
 "far_call"
+],
+"library": "llibcr.lib",
+"member": "getenv.c",
+"module_index": 79,
+"entries": [
+{
+"off": 7466,
+"name": "_getenv"
+}
+],
+"notes": [
+"member extent from tools/runtime.py binding; replaces 1 DESCENT rows"
 ]
 },
 {
@@ -13726,42 +14393,94 @@
 "off": 7608,
 "size": 43,
 "region": "msc_runtime_text",
-"extent": "DESCENT",
+"extent": "RUNTIME_MEMBER",
 "evidence": [
+"runtime_member",
 "far_call"
+],
+"library": "llibcr.lib",
+"member": "dos\\hdiff.asm",
+"module_index": 88,
+"entries": [
+{
+"off": 7608,
+"name": "__aFahdiff"
+}
+],
+"notes": [
+"member extent from tools/runtime.py binding; replaces 1 DESCENT rows"
 ]
 },
 {
 "unit": "root",
 "seg": 10740,
 "off": 7652,
-"size": 137,
+"size": 138,
 "region": "msc_runtime_text",
-"extent": "DESCENT",
+"extent": "RUNTIME_MEMBER",
 "evidence": [
+"runtime_member",
 "far_call"
+],
+"library": "llibcr.lib",
+"member": "puts.c",
+"module_index": 106,
+"entries": [
+{
+"off": 7652,
+"name": "_puts"
+}
+],
+"notes": [
+"member extent from tools/runtime.py binding; replaces 1 DESCENT rows"
 ]
 },
 {
 "unit": "root",
 "seg": 10740,
 "off": 7790,
-"size": 107,
+"size": 108,
 "region": "msc_runtime_text",
-"extent": "DESCENT",
+"extent": "RUNTIME_MEMBER",
 "evidence": [
+"runtime_member",
 "far_call"
+],
+"library": "llibcr.lib",
+"member": "sprintf.c",
+"module_index": 112,
+"entries": [
+{
+"off": 7790,
+"name": "_sprintf"
+}
+],
+"notes": [
+"member extent from tools/runtime.py binding; replaces 1 DESCENT rows"
 ]
 },
 {
 "unit": "root",
 "seg": 10740,
 "off": 7898,
-"size": 105,
+"size": 106,
 "region": "msc_runtime_text",
-"extent": "DESCENT",
+"extent": "RUNTIME_MEMBER",
 "evidence": [
+"runtime_member",
 "far_call"
+],
+"library": "llibcr.lib",
+"member": "vsprintf.c",
+"module_index": 118,
+"entries": [
+{
+"off": 7898,
+"name": "_vsprintf"
+}
+],
+"notes": [
+"member extent from tools/runtime.py binding; replaces 1 DESCENT rows"
 ]
 },
 {
@@ -13770,42 +14489,75 @@
 "off": 8004,
 "size": 97,
 "region": "msc_runtime_text",
-"extent": "DESCENT",
+"extent": "RUNTIME_MEMBER",
 "evidence": [
+"runtime_member",
 "far_call"
+],
+"library": "llibcr.lib",
+"member": "dos\\intdosx.asm",
+"module_index": 182,
+"entries": [
+{
+"off": 8004,
+"name": "_intdosx"
+}
+],
+"notes": [
+"member extent from tools/runtime.py binding; replaces 1 DESCENT rows"
 ]
 },
 {
 "unit": "root",
 "seg": 10740,
 "off": 8102,
-"size": 45,
+"size": 262,
 "region": "msc_runtime_text",
-"extent": "DESCENT",
+"extent": "RUNTIME_MEMBER",
 "evidence": [
+"runtime_member",
+"far_call",
 "near_call"
-]
+],
+"library": "llibcr.lib",
+"member": "asctime.c",
+"module_index": 190,
+"entries": [
+{
+"off": 8102,
+"name": "store_dt"
 },
 {
-"unit": "root",
-"seg": 10740,
 "off": 8148,
-"size": 216,
-"region": "msc_runtime_text",
-"extent": "DESCENT",
-"evidence": [
-"far_call"
+"name": "_asctime"
+}
+],
+"notes": [
+"member extent from tools/runtime.py binding; replaces 2 DESCENT rows"
 ]
 },
 {
 "unit": "root",
 "seg": 10740,
 "off": 8364,
-"size": 457,
+"size": 458,
 "region": "msc_runtime_text",
-"extent": "DESCENT",
+"extent": "RUNTIME_MEMBER",
 "evidence": [
+"runtime_member",
 "far_call"
+],
+"library": "llibcr.lib",
+"member": "gmtime.c",
+"module_index": 195,
+"entries": [
+{
+"off": 8364,
+"name": "_gmtime"
+}
+],
+"notes": [
+"member extent from tools/runtime.py binding; replaces 1 DESCENT rows"
 ]
 },
 {
@@ -13814,9 +14566,22 @@
 "off": 8822,
 "size": 132,
 "region": "msc_runtime_text",
-"extent": "DESCENT",
+"extent": "RUNTIME_MEMBER",
 "evidence": [
+"runtime_member",
 "far_call"
+],
+"library": "llibcr.lib",
+"member": "localtim.c",
+"module_index": 196,
+"entries": [
+{
+"off": 8822,
+"name": "_localtime"
+}
+],
+"notes": [
+"member extent from tools/runtime.py binding; replaces 1 DESCENT rows"
 ]
 },
 {
@@ -13825,53 +14590,78 @@
 "off": 8954,
 "size": 85,
 "region": "msc_runtime_text",
-"extent": "DESCENT",
+"extent": "RUNTIME_MEMBER",
 "evidence": [
+"runtime_member",
 "far_call"
+],
+"library": "llibcr.lib",
+"member": "dos\\time.asm",
+"module_index": 197,
+"entries": [
+{
+"off": 8954,
+"name": "_time"
+}
+],
+"notes": [
+"member extent from tools/runtime.py binding; replaces 1 DESCENT rows"
 ]
 },
 {
 "unit": "root",
 "seg": 10740,
 "off": 9040,
-"size": 17,
+"size": 444,
 "region": "msc_runtime_text",
-"extent": "DESCENT",
+"extent": "RUNTIME_MEMBER",
 "evidence": [
+"runtime_member",
 "far_call"
-]
+],
+"library": "llibcr.lib",
+"member": "tzset.c",
+"module_index": 198,
+"entries": [
+{
+"off": 9040,
+"name": "___tzset"
 },
 {
-"unit": "root",
-"seg": 10740,
 "off": 9058,
-"size": 207,
-"region": "msc_runtime_text",
-"extent": "DESCENT",
-"evidence": [
-"far_call"
-]
+"name": "_tzset"
 },
 {
-"unit": "root",
-"seg": 10740,
 "off": 9266,
-"size": 218,
-"region": "msc_runtime_text",
-"extent": "DESCENT",
-"evidence": [
-"far_call"
+"name": "__isindst"
+}
+],
+"notes": [
+"member extent from tools/runtime.py binding; replaces 3 DESCENT rows"
 ]
 },
 {
 "unit": "root",
 "seg": 10740,
 "off": 9484,
-"size": 259,
+"size": 260,
 "region": "msc_runtime_text",
-"extent": "DESCENT",
+"extent": "RUNTIME_MEMBER",
 "evidence": [
+"runtime_member",
 "far_call"
+],
+"library": "llibcr.lib",
+"member": "dtoxtime.c",
+"module_index": 201,
+"entries": [
+{
+"off": 9484,
+"name": "__dtoxtime"
+}
+],
+"notes": [
+"member extent from tools/runtime.py binding; replaces 1 DESCENT rows"
 ]
 },
 {
@@ -13880,9 +14670,22 @@
 "off": 9744,
 "size": 45,
 "region": "msc_runtime_text",
-"extent": "DESCENT",
+"extent": "RUNTIME_MEMBER",
 "evidence": [
+"runtime_member",
 "far_call"
+],
+"library": "llibcr.lib",
+"member": "strchr.asm",
+"module_index": 208,
+"entries": [
+{
+"off": 9744,
+"name": "_strchr"
+}
+],
+"notes": [
+"member extent from tools/runtime.py binding; replaces 1 DESCENT rows"
 ]
 },
 {
@@ -13891,9 +14694,26 @@
 "off": 9790,
 "size": 69,
 "region": "msc_runtime_text",
-"extent": "DESCENT",
+"extent": "RUNTIME_MEMBER",
 "evidence": [
+"runtime_member",
 "far_call"
+],
+"library": "llibcr.lib",
+"member": "stricmp.asm",
+"module_index": 209,
+"entries": [
+{
+"off": 9790,
+"name": "_strcmpi"
+},
+{
+"off": 9790,
+"name": "_stricmp"
+}
+],
+"notes": [
+"member extent from tools/runtime.py binding; replaces 1 DESCENT rows"
 ]
 },
 {
@@ -13902,9 +14722,22 @@
 "off": 9860,
 "size": 46,
 "region": "msc_runtime_text",
-"extent": "DESCENT",
+"extent": "RUNTIME_MEMBER",
 "evidence": [
+"runtime_member",
 "far_call"
+],
+"library": "llibcr.lib",
+"member": "strrchr.asm",
+"module_index": 213,
+"entries": [
+{
+"off": 9860,
+"name": "_strrchr"
+}
+],
+"notes": [
+"member extent from tools/runtime.py binding; replaces 1 DESCENT rows"
 ]
 },
 {
@@ -13913,9 +14746,22 @@
 "off": 9906,
 "size": 66,
 "region": "msc_runtime_text",
-"extent": "DESCENT",
+"extent": "RUNTIME_MEMBER",
 "evidence": [
+"runtime_member",
 "far_call"
+],
+"library": "llibcr.lib",
+"member": "hmemchr.asm",
+"module_index": 228,
+"entries": [
+{
+"off": 9906,
+"name": "_memchr"
+}
+],
+"notes": [
+"member extent from tools/runtime.py binding; replaces 1 DESCENT rows"
 ]
 },
 {
@@ -13924,9 +14770,22 @@
 "off": 9972,
 "size": 202,
 "region": "msc_runtime_text",
-"extent": "DESCENT",
+"extent": "RUNTIME_MEMBER",
 "evidence": [
+"runtime_member",
 "far_call"
+],
+"library": "llibcr.lib",
+"member": "hmemcpy.asm",
+"module_index": 229,
+"entries": [
+{
+"off": 9972,
+"name": "_memmove"
+}
+],
+"notes": [
+"member extent from tools/runtime.py binding; replaces 1 DESCENT rows"
 ]
 },
 {
@@ -13935,9 +14794,22 @@
 "off": 10174,
 "size": 91,
 "region": "msc_runtime_text",
-"extent": "DESCENT",
+"extent": "RUNTIME_MEMBER",
 "evidence": [
+"runtime_member",
 "far_call"
+],
+"library": "llibcr.lib",
+"member": "hmemcmp.asm",
+"module_index": 231,
+"entries": [
+{
+"off": 10174,
+"name": "_memcmp"
+}
+],
+"notes": [
+"member extent from tools/runtime.py binding; replaces 1 DESCENT rows"
 ]
 },
 {
@@ -13946,10 +14818,23 @@
 "off": 10266,
 "size": 94,
 "region": "msc_runtime_text",
-"extent": "DESCENT",
+"extent": "RUNTIME_MEMBER",
 "evidence": [
+"runtime_member",
 "far_call",
 "push_cs_call"
+],
+"library": "llibcr.lib",
+"member": "hmemcpy.asm",
+"module_index": 232,
+"entries": [
+{
+"off": 10266,
+"name": "_memcpy"
+}
+],
+"notes": [
+"member extent from tools/runtime.py binding; replaces 1 DESCENT rows"
 ]
 },
 {
@@ -13958,34 +14843,113 @@
 "off": 10360,
 "size": 72,
 "region": "msc_runtime_text",
-"extent": "DESCENT",
+"extent": "RUNTIME_MEMBER",
 "evidence": [
-"far_call"
-]
-},
-{
-"unit": "root",
-"seg": 10740,
-"off": 10547,
-"size": 50,
-"region": "msc_runtime_text",
-"extent": "DESCENT",
-"evidence": [
-"far_call"
-]
-},
-{
-"unit": "root",
-"seg": 10740,
-"off": 10557,
-"size": 5,
-"region": "msc_runtime_text",
-"extent": "DESCENT",
-"evidence": [
+"runtime_member",
 "far_call"
 ],
+"library": "llibcr.lib",
+"member": "hmemset.asm",
+"module_index": 233,
+"entries": [
+{
+"off": 10360,
+"name": "_memset"
+}
+],
 "notes": [
-"overlaps root:2C873"
+"member extent from tools/runtime.py binding; replaces 1 DESCENT rows"
+]
+},
+{
+"unit": "root",
+"seg": 10740,
+"off": 10432,
+"size": 99,
+"region": "msc_runtime_text",
+"extent": "RUNTIME_MEMBER",
+"evidence": [
+"runtime_member"
+],
+"library": "llibcr.lib",
+"member": "xtoa.asm",
+"module_index": 234,
+"entries": [
+{
+"off": 10432,
+"name": "__cltoasub"
+},
+{
+"off": 10445,
+"name": "__cxtoa"
+}
+],
+"notes": [
+"member extent from tools/runtime.py binding; replaces 0 DESCENT rows"
+]
+},
+{
+"unit": "root",
+"seg": 10740,
+"off": 10532,
+"size": 65,
+"region": "msc_runtime_text",
+"extent": "RUNTIME_MEMBER",
+"evidence": [
+"runtime_member",
+"far_call"
+],
+"library": "llibcr.lib",
+"member": "_ctype.asm",
+"module_index": 240,
+"entries": [
+{
+"off": 10532,
+"name": "_isalpha"
+},
+{
+"off": 10537,
+"name": "_isupper"
+},
+{
+"off": 10542,
+"name": "_islower"
+},
+{
+"off": 10547,
+"name": "_isdigit"
+},
+{
+"off": 10552,
+"name": "_isxdigit"
+},
+{
+"off": 10557,
+"name": "_isspace"
+},
+{
+"off": 10562,
+"name": "_ispunct"
+},
+{
+"off": 10567,
+"name": "_isalnum"
+},
+{
+"off": 10572,
+"name": "_isprint"
+},
+{
+"off": 10577,
+"name": "_isgraph"
+},
+{
+"off": 10582,
+"name": "_iscntrl"
+}
+],
+"notes": [
+"member extent from tools/runtime.py binding; replaces 2 DESCENT rows"
 ]
 },
 {
@@ -13994,57 +14958,83 @@
 "off": 10598,
 "size": 50,
 "region": "msc_runtime_text",
-"extent": "DESCENT",
+"extent": "RUNTIME_MEMBER",
 "evidence": [
+"runtime_member",
 "far_call"
+],
+"library": "llibcr.lib",
+"member": "onexit.asm",
+"module_index": 250,
+"entries": [
+{
+"off": 10598,
+"name": "_atexit"
+},
+{
+"off": 10606,
+"name": "_onexit"
+}
+],
+"notes": [
+"member extent from tools/runtime.py binding; replaces 1 DESCENT rows"
 ]
 },
 {
 "unit": "root",
 "seg": 10740,
 "off": 10648,
-"size": 17,
+"size": 58,
 "region": "msc_runtime_text",
-"extent": "DESCENT",
+"extent": "RUNTIME_MEMBER",
 "evidence": [
-"far_call"
-]
-},
-{
-"unit": "root",
-"seg": 10740,
-"off": 10666,
-"size": 40,
-"region": "msc_runtime_text",
-"extent": "DESCENT",
-"evidence": [
-"far_call"
-]
-},
-{
-"unit": "root",
-"seg": 10740,
-"off": 10712,
-"size": 174,
-"region": "msc_runtime_text",
-"extent": "DESCENT",
-"evidence": [
+"runtime_member",
 "far_call"
 ],
+"library": "llibcr.lib",
+"member": "rand.c",
+"module_index": 253,
+"entries": [
+{
+"off": 10648,
+"name": "_srand"
+},
+{
+"off": 10666,
+"name": "_rand"
+}
+],
 "notes": [
-"overlaps root:2B3EE"
+"member extent from tools/runtime.py binding; replaces 2 DESCENT rows"
 ]
 },
 {
 "unit": "root",
 "seg": 10740,
-"off": 10886,
-"size": 39,
+"off": 10706,
+"size": 407,
 "region": "msc_runtime_text",
-"extent": "DESCENT",
+"extent": "RUNTIME_MEMBER",
 "evidence": [
+"runtime_member",
 "far_call",
 "push_cs_call"
+],
+"library": "llibcr.lib",
+"member": "dos\\signal.asm",
+"module_index": 255,
+"entries": [
+{
+"off": 10712,
+"name": "_signal"
+},
+{
+"off": 10886,
+"name": "__sigentry"
+}
+],
+"notes": [
+"member extent from tools/runtime.py binding; replaces 2 DESCENT rows"
 ]
 },
 {
@@ -14053,56 +15043,110 @@
 "off": 11114,
 "size": 33,
 "region": "msc_runtime_text",
-"extent": "DESCENT",
+"extent": "RUNTIME_MEMBER",
 "evidence": [
+"runtime_member",
 "far_call"
 ],
+"library": "llibcr.lib",
+"member": "dos\\access.asm",
+"module_index": 295,
+"entries": [
+{
+"off": 11114,
+"name": "_access"
+}
+],
 "notes": [
-"overlaps root:2CAD3"
+"member extent from tools/runtime.py binding; replaces 1 DESCENT rows"
 ]
 },
 {
 "unit": "root",
 "seg": 10740,
-"off": 11155,
-"size": 15,
+"off": 11148,
+"size": 63,
 "region": "msc_runtime_text",
-"extent": "DESCENT",
+"extent": "RUNTIME_MEMBER",
 "evidence": [
+"runtime_member",
 "far_call"
+],
+"library": "llibcr.lib",
+"member": "dos\\dir.asm",
+"module_index": 297,
+"entries": [
+{
+"off": 11148,
+"name": "_mkdir"
+},
+{
+"off": 11155,
+"name": "_chdir"
+},
+{
+"off": 11170,
+"name": "_rmdir"
+}
+],
+"notes": [
+"member extent from tools/runtime.py binding; replaces 1 DESCENT rows"
 ]
 },
 {
 "unit": "root",
 "seg": 10740,
 "off": 11212,
-"size": 8,
+"size": 35,
 "region": "msc_runtime_text",
-"extent": "DESCENT",
+"extent": "RUNTIME_MEMBER",
 "evidence": [
+"runtime_member",
 "far_call"
+],
+"library": "llibcr.lib",
+"member": "dos\\drive.asm",
+"module_index": 298,
+"entries": [
+{
+"off": 11212,
+"name": "__getdrive"
+},
+{
+"off": 11220,
+"name": "__chdrive"
+}
+],
+"notes": [
+"member extent from tools/runtime.py binding; replaces 1 DESCENT rows"
 ]
 },
 {
 "unit": "root",
 "seg": 10740,
 "off": 11248,
-"size": 24,
+"size": 286,
 "region": "msc_runtime_text",
-"extent": "DESCENT",
+"extent": "RUNTIME_MEMBER",
 "evidence": [
+"runtime_member",
 "far_call"
-]
+],
+"library": "llibcr.lib",
+"member": "dos\\getcwd.c",
+"module_index": 300,
+"entries": [
+{
+"off": 11248,
+"name": "_getcwd"
 },
 {
-"unit": "root",
-"seg": 10740,
 "off": 11272,
-"size": 261,
-"region": "msc_runtime_text",
-"extent": "DESCENT",
-"evidence": [
-"far_call"
+"name": "__getdcwd"
+}
+],
+"notes": [
+"member extent from tools/runtime.py binding; replaces 2 DESCENT rows"
 ]
 },
 {
@@ -14111,12 +15155,26 @@
 "off": 11534,
 "size": 15,
 "region": "msc_runtime_text",
-"extent": "DESCENT",
+"extent": "RUNTIME_MEMBER",
 "evidence": [
+"runtime_member",
 "far_call"
 ],
+"library": "llibcr.lib",
+"member": "dos\\unlink.asm",
+"module_index": 306,
+"entries": [
+{
+"off": 11534,
+"name": "_remove"
+},
+{
+"off": 11534,
+"name": "_unlink"
+}
+],
 "notes": [
-"overlaps root:2CAD3"
+"member extent from tools/runtime.py binding; replaces 1 DESCENT rows"
 ]
 },
 {
@@ -14125,12 +15183,22 @@
 "off": 11550,
 "size": 25,
 "region": "msc_runtime_text",
-"extent": "DESCENT",
+"extent": "RUNTIME_MEMBER",
 "evidence": [
+"runtime_member",
 "far_call"
 ],
+"library": "llibcr.lib",
+"member": "dos\\allocmem.asm",
+"module_index": 307,
+"entries": [
+{
+"off": 11550,
+"name": "__dos_allocmem"
+}
+],
 "notes": [
-"overlaps root:2CC78"
+"member extent from tools/runtime.py binding; replaces 1 DESCENT rows"
 ]
 },
 {
@@ -14139,26 +15207,26 @@
 "off": 11576,
 "size": 62,
 "region": "msc_runtime_text",
-"extent": "DESCENT",
+"extent": "RUNTIME_MEMBER",
 "evidence": [
+"runtime_member",
 "far_call"
 ],
-"notes": [
-"overlaps root:2CAD3"
-]
+"library": "llibcr.lib",
+"member": "dos\\d_find.asm",
+"module_index": 319,
+"entries": [
+{
+"off": 11576,
+"name": "__dos_findnext"
 },
 {
-"unit": "root",
-"seg": 10740,
 "off": 11587,
-"size": 9,
-"region": "msc_runtime_text",
-"extent": "DESCENT",
-"evidence": [
-"far_call"
+"name": "__dos_findfirst"
+}
 ],
 "notes": [
-"overlaps root:2CC78"
+"member extent from tools/runtime.py binding; replaces 2 DESCENT rows"
 ]
 },
 {
@@ -14167,9 +15235,22 @@
 "off": 11638,
 "size": 2,
 "region": "msc_runtime_text",
-"extent": "DESCENT",
+"extent": "RUNTIME_MEMBER",
 "evidence": [
+"runtime_member",
 "far_call"
+],
+"library": "llibcr.lib",
+"member": "dos\\disable.asm",
+"module_index": 328,
+"entries": [
+{
+"off": 11638,
+"name": "__disable"
+}
+],
+"notes": [
+"member extent from tools/runtime.py binding; replaces 1 DESCENT rows"
 ]
 },
 {
@@ -14178,9 +15259,22 @@
 "off": 11640,
 "size": 2,
 "region": "msc_runtime_text",
-"extent": "DESCENT",
+"extent": "RUNTIME_MEMBER",
 "evidence": [
+"runtime_member",
 "far_call"
+],
+"library": "llibcr.lib",
+"member": "dos\\enable.asm",
+"module_index": 330,
+"entries": [
+{
+"off": 11640,
+"name": "__enable"
+}
+],
+"notes": [
+"member extent from tools/runtime.py binding; replaces 1 DESCENT rows"
 ]
 },
 {
@@ -14189,23 +15283,54 @@
 "off": 11642,
 "size": 13,
 "region": "msc_runtime_text",
-"extent": "DESCENT",
+"extent": "RUNTIME_MEMBER",
 "evidence": [
+"runtime_member",
 "far_call"
 ],
+"library": "llibcr.lib",
+"member": "dos\\freemem.asm",
+"module_index": 331,
+"entries": [
+{
+"off": 11642,
+"name": "__dos_freemem"
+}
+],
 "notes": [
-"overlaps root:2CC78"
+"member extent from tools/runtime.py binding; replaces 1 DESCENT rows"
 ]
 },
 {
 "unit": "root",
 "seg": 10740,
 "off": 11656,
-"size": 35,
+"size": 87,
 "region": "msc_runtime_text",
-"extent": "DESCENT",
+"extent": "RUNTIME_MEMBER",
 "evidence": [
+"runtime_member",
 "far_call"
+],
+"library": "llibcr.lib",
+"member": "dos\\harderr.asm",
+"module_index": 335,
+"entries": [
+{
+"off": 11656,
+"name": "__harderr"
+},
+{
+"off": 11723,
+"name": "__hardretn_return"
+},
+{
+"off": 11735,
+"name": "__hardresume"
+}
+],
+"notes": [
+"member extent from tools/runtime.py binding; replaces 1 DESCENT rows"
 ]
 },
 {
@@ -14214,9 +15339,22 @@
 "off": 11744,
 "size": 34,
 "region": "msc_runtime_text",
-"extent": "DESCENT",
+"extent": "RUNTIME_MEMBER",
 "evidence": [
+"runtime_member",
 "far_call"
+],
+"library": "libh.lib",
+"member": "alrem.asm",
+"module_index": 2,
+"entries": [
+{
+"off": 11744,
+"name": "__aFFalrem"
+}
+],
+"notes": [
+"member extent from tools/runtime.py binding; replaces 1 DESCENT rows"
 ]
 },
 {
@@ -14225,9 +15363,22 @@
 "off": 11778,
 "size": 154,
 "region": "msc_runtime_text",
-"extent": "DESCENT",
+"extent": "RUNTIME_MEMBER",
 "evidence": [
+"runtime_member",
 "far_call"
+],
+"library": "libh.lib",
+"member": "ldiv.asm",
+"module_index": 8,
+"entries": [
+{
+"off": 11778,
+"name": "__aFldiv"
+}
+],
+"notes": [
+"member extent from tools/runtime.py binding; replaces 1 DESCENT rows"
 ]
 },
 {
@@ -14236,10 +15387,27 @@
 "off": 11932,
 "size": 50,
 "region": "msc_runtime_text",
-"extent": "DESCENT",
+"extent": "RUNTIME_MEMBER",
 "evidence": [
+"runtime_member",
 "far_call",
 "push_cs_call"
+],
+"library": "libh.lib",
+"member": "lmul.asm",
+"module_index": 9,
+"entries": [
+{
+"off": 11932,
+"name": "__aFlmul"
+},
+{
+"off": 11932,
+"name": "__aFulmul"
+}
+],
+"notes": [
+"member extent from tools/runtime.py binding; replaces 1 DESCENT rows"
 ]
 },
 {
@@ -14248,10 +15416,23 @@
 "off": 11982,
 "size": 160,
 "region": "msc_runtime_text",
-"extent": "DESCENT",
+"extent": "RUNTIME_MEMBER",
 "evidence": [
+"runtime_member",
 "far_call",
 "push_cs_call"
+],
+"library": "libh.lib",
+"member": "lrem.asm",
+"module_index": 10,
+"entries": [
+{
+"off": 11982,
+"name": "__aFlrem"
+}
+],
+"notes": [
+"member extent from tools/runtime.py binding; replaces 1 DESCENT rows"
 ]
 },
 {
@@ -14260,9 +15441,22 @@
 "off": 12142,
 "size": 11,
 "region": "msc_runtime_text",
-"extent": "DESCENT",
+"extent": "RUNTIME_MEMBER",
 "evidence": [
+"runtime_member",
 "far_call"
+],
+"library": "libh.lib",
+"member": "lshl.asm",
+"module_index": 11,
+"entries": [
+{
+"off": 12142,
+"name": "__aFlshl"
+}
+],
+"notes": [
+"member extent from tools/runtime.py binding; replaces 1 DESCENT rows"
 ]
 },
 {
@@ -14271,9 +15465,22 @@
 "off": 12154,
 "size": 11,
 "region": "msc_runtime_text",
-"extent": "DESCENT",
+"extent": "RUNTIME_MEMBER",
 "evidence": [
+"runtime_member",
 "far_call"
+],
+"library": "libh.lib",
+"member": "lshr.asm",
+"module_index": 12,
+"entries": [
+{
+"off": 12154,
+"name": "__aFlshr"
+}
+],
+"notes": [
+"member extent from tools/runtime.py binding; replaces 1 DESCENT rows"
 ]
 },
 {
@@ -14282,9 +15489,26 @@
 "off": 12166,
 "size": 32,
 "region": "msc_runtime_text",
-"extent": "DESCENT",
+"extent": "RUNTIME_MEMBER",
 "evidence": [
+"runtime_member",
 "far_call"
+],
+"library": "libh.lib",
+"member": "almul.asm",
+"module_index": 14,
+"entries": [
+{
+"off": 12166,
+"name": "__aFNalmul"
+},
+{
+"off": 12166,
+"name": "__aFNaulmul"
+}
+],
+"notes": [
+"member extent from tools/runtime.py binding; replaces 1 DESCENT rows"
 ]
 },
 {
@@ -14293,9 +15517,22 @@
 "off": 12198,
 "size": 95,
 "region": "msc_runtime_text",
-"extent": "DESCENT",
+"extent": "RUNTIME_MEMBER",
 "evidence": [
+"runtime_member",
 "far_call"
+],
+"library": "libh.lib",
+"member": "uldiv.asm",
+"module_index": 21,
+"entries": [
+{
+"off": 12198,
+"name": "__aFuldiv"
+}
+],
+"notes": [
+"member extent from tools/runtime.py binding; replaces 1 DESCENT rows"
 ]
 },
 {
@@ -14304,9 +15541,22 @@
 "off": 12294,
 "size": 106,
 "region": "msc_runtime_text",
-"extent": "DESCENT",
+"extent": "RUNTIME_MEMBER",
 "evidence": [
+"runtime_member",
 "far_call"
+],
+"library": "libh.lib",
+"member": "ulrem.asm",
+"module_index": 22,
+"entries": [
+{
+"off": 12294,
+"name": "__aFulrem"
+}
+],
+"notes": [
+"member extent from tools/runtime.py binding; replaces 1 DESCENT rows"
 ]
 },
 {

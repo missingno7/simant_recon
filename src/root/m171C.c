@@ -1061,7 +1061,7 @@ char far * far f_171C_21CC(unsigned size)
     return p;
 }
 
-char far * far f_171C_2208(unsigned size)
+void far * far malloc(unsigned size)
 {
     return f_171C_21CC(size);
 }
@@ -1080,7 +1080,7 @@ void far f_171C_2216(char far *p)
     s_2F2A--;
 }
 
-void far f_171C_2276(char far *p)
+void far free(void far *p)
 {
     f_171C_2216(p);
 }
@@ -1101,7 +1101,7 @@ char far * far f_171C_2288(char far *p, unsigned size)
     return *h;
 }
 
-char far * far f_171C_2302(char far *p, unsigned size)
+void far * far f_171C_2302(void far *p, unsigned size)
 {
     return f_171C_2288(p, size);
 }

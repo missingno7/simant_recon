@@ -27,8 +27,8 @@ extern void far f_171C_152C(char far *handle);
 extern int far f_171C_1686(char far *handle);
 extern int far f_171C_1794(char far *handle);
 extern int far f_171C_1AD4(char far *handle);
-extern void far * far f_171C_2208(int size);
-extern void far f_171C_2276(void far *p);
+extern void far * far malloc(int size);
+extern void far free(void far *p);
 extern void far * far _fmemset(void far *dst, int c, unsigned int n);
 extern void far Punt(char far *format, ...);
 
@@ -273,7 +273,7 @@ int far ch_GetPrime(int n)
     prime = 1;
     cand = 2;
     nprimes = 0;
-    primes = f_171C_2208(800);
+    primes = malloc(800);
     for (; prime < n; cand++) {
         if (nprimes >= 400)
             break;
@@ -283,7 +283,7 @@ int far ch_GetPrime(int n)
         primes[nprimes++] = prime = cand;
 next:   ;
     }
-    f_171C_2276(primes);
+    free(primes);
     return prime;
 }
 /* SCAFFOLD END */

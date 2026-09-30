@@ -57,12 +57,12 @@ extern void far ClearMyLife(int plane, int x, int y, int type, int dir);
 extern int far fd_50F6_0A06;
 extern void far InitSpider(void);
 extern void far SetEditWinTitle();
-extern void far myBeginSound(int sound, int a, int b);
+extern void far myBeginSound(int, int, int);
 extern int far DoExpMenu(int x, int y);
 extern void far WinPrintf(char far *fmt, ...);
 extern void far InitYelloAnt(void);
 extern int far fd_50F6_032E;
-extern void far SetMyLife(int plane, int x, int y, int type, int dir, int code);
+extern void far SetMyLife(int, int, int, int, int, int);
 extern void far f_00DF_00B1(int id, int arg);
 extern void far clip_Push(void);
 extern void _fastcall win_DrawBitMapAtObjNum(int obj, int id);
@@ -139,13 +139,19 @@ extern unsigned char far BlistM[];
 extern int far FindInRList(int x, int y, int t);
 extern unsigned char far RlistM[];
 extern char far * far * far fd_50F6_1086;
+/* AntMenu's externs are declared here, and SetMyLife/myBeginSound use unnamed
+   parameters: the declaration layout reproduces the original's symbol-table state
+   (register choices in MagnifyMenu and AntMenu depend on it). */
+extern int far fd_3D57_0C24;
+extern int far fd_50F6_10E0;
+extern int far fd_50F6_10DE;
+extern void far YellowCommand(int cmd);
 extern char far * far * far fd_50F6_1096;
 extern void far f_1FD2_057F(void);
 extern int far f_1FD2_0598(void);
 extern void far f_1FD2_05EF(void);
 extern void _fastcall win_Close(int win);
 
-/* SCAFFOLD BEGIN: MagnifyMenu (examine window, Win16 win_DrawExamineWindow LOW) best draft: 2 bytes short; the original indexes fd_50F6_1086[k] via mov bx,di;shl bx,1;shl bx,1;les si (k kept in DI), MSC here shifts DI in place and uses les bx */
 int far MagnifyMenu(int x, int y, int plane)
 {
     int k;
@@ -211,12 +217,7 @@ int far MagnifyMenu(int x, int y, int plane)
     WinPrintf("tileNum=%d", t);
     return t;
 }
-/* SCAFFOLD END */
 
-extern int far fd_3D57_0C24;
-extern int far fd_50F6_10E0;
-extern int far fd_50F6_10DE;
-extern void far YellowCommand(int cmd);
 
 int far AntMenu(struct Event far *ev)
 {

@@ -146,7 +146,7 @@ next:
     goto again;
 }
 
-extern char far * far f_171C_2208(unsigned size);
+extern char far * far malloc(unsigned size);
 extern char far * near g_5AAC;
 extern void far f_1F80_0081(int a);
 extern void far f_1B73_0A40(void);
@@ -165,7 +165,7 @@ extern void far f_1B73_030F();
 extern void far f_1FD2_031A(void);
 extern void far f_1B73_0A6C(void);
 extern void far f_1CE2_056C(struct Rect far *r, char far *buf);
-extern void far f_171C_2276(char far *block);
+extern void far free(char far *block);
 
 /* SCAFFOLD BEGIN: o10_35F5_0384 (pull-down menu) best draft: logic and length close; block order of the key switch, local slot layout and the dead old=0 store differ */
 int far o10_35F5_0384(char far *sel, char far * far *items)
@@ -200,7 +200,7 @@ int far o10_35F5_0384(char far *sel, char far * far *items)
     result = down = 0;
     if (items == 0 || *items == 0)
         goto none;
-    buf = f_171C_2208(4000);
+    buf = malloc(4000);
     saved = g_5AAC;
     g_5AAC = 0;
     last.x = last.y = -1;
@@ -393,7 +393,7 @@ done:
     f_1B73_0A6C();
     f_1CE2_056C(&saveR, saveBuf);
     g_5AAC = saved;
-    f_171C_2276(buf);
+    free(buf);
     return result;
 other:
     f_1B73_030F(ev.code, ev.xE, ev.h, ev.v, 0);

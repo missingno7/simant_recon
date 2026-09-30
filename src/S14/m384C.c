@@ -395,7 +395,7 @@ void far SetDefaultWindPrompt(int mode)
 extern int far fd_3D57_07A8[];
 extern char far * far * far f_075B_0242(int object);
 void far PictureDialog(char far * far *strings, int count, int picture, int force);
-extern void far f_171C_2276(char far * far *block);
+extern void far free(char far * far *block);
 extern void far db_PurgeObject(int object, int kind);
 
 void far PictStrnDialog(int picture, int object, int force)
@@ -412,7 +412,7 @@ void far PictStrnDialog(int picture, int object, int force)
                 count++;
         PictureDialog(strings, count, picture, force);
         if (strings) {
-            f_171C_2276(strings);
+            free(strings);
             db_PurgeObject(object, 4);
         }
     }

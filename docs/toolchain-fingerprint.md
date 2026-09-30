@@ -17,8 +17,8 @@ re-executed by `python tools/validate.py`.
 * **MSC 5.10 and QuickC 2.50 are ruled out for this code** (rule FRAME-1): both omit
   `mov sp,bp` in a stack-checked frame without locals; the original and MSC 6.00/6.00A
   emit it. QuickC also emits `mov ax,0` for zero locals under default options.
-* **Runtime: MSC 6.00(A)-generation large-model library.** 85 complete members of
-  `LLIBCR.LIB`/`LIBH.LIB` (12,308 bytes, library order at `0x29F5C–0x2CFB0`) bind
+* **Runtime: MSC 6.00(A)-generation large-model library.** 90 complete members of
+  `LLIBCR.LIB`/`LIBH.LIB` (12,339 bytes, library order at `0x29F5C–0x2CFB0`) bind
   exactly — every fixup resolved symbolically — and are accepted as historical runtime
   (`tools/runtime.py`, `layout/manifest.json` "runtime"). MSC 5.10 `LLIBCR`/`LIBH`: 26/0 hits. No floating-point library code.
   `MS Run-Time Library - Copyright (c) 1990, Microsoft Corp` in DGROUP.
@@ -44,6 +44,12 @@ re-executed by `python tools/validate.py`.
   SimKidInside (S06) and DoAntMoveY (S25) exceed the real-mode pass-2 budget (C4203) but
   compile under AX. AX was released in April 1991; the build is dated December 1991.
   The 6.00A-only evidence (VER-2) stays valid: AX *is* 6.00A with protected-mode passes.
+
+* **Runtime binding never reads the oracle for code targets** (worker rtpatch, 2026-09-30):
+  every code external of an accepted runtime member must resolve through `layout/symbols.json`.
+  The game supplies its own heap: the runtime's `_malloc` and `_free` calls resolve to module
+  171C (`malloc` 171C:2208, `free` 171C:2276). crt0dat's second code segment `EMULATOR_TEXT`
+  (2CFB:0000) and `atol.asm` (29F4:1CB4) are located and accepted: 90 members, 12,339 bytes.
 
 ## STRONGLY SUPPORTED
 

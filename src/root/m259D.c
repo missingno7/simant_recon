@@ -20,8 +20,8 @@ extern void far db_ReleaseObject(int object, int kind);
 extern void far GPutPacked(int x, int y, char far *pic);
 extern void far f_1B4E_003B(int x, int y, char far *image);
 extern void far f_1B4E_005E(int x, int y, char far *image);
-extern char far * far f_171C_2208(unsigned int size);
-extern void far f_171C_2276(char far *block);
+extern char far * far malloc(unsigned int size);
+extern void far free(char far *block);
 extern int far WinPrintf(char far *format, ...);
 extern void far o03_3258_040D(char far *image, char far *buffer, int shift, int flag);
 extern void far o01_32B5_000F(char far *image, char far *buffer, int shift, int flag);
@@ -97,17 +97,17 @@ int _fastcall win_DrawBitMap(int x, int y, int id)
             if (g_5A97 == 2) {
                 x1 = ((x & ~1) + pic->width + 3) & ~1;
                 y1 = pic->height + y;
-                h = f_171C_2208((*g_9140)(x & ~1, y, x1, y1));
+                h = malloc((*g_9140)(x & ~1, y, x1, y1));
                 (*g_9148)(x & ~1, y, x1, y1, h);
                 o03_3258_040D((char far *)pic + 8, h, x & 1, 0);
                 f_1B4E_003B(x & ~1, y, h);
-                f_171C_2276(h);
+                free(h);
             } else {
                 x1 = ((x & ~7) + pic->width + 15) & ~7;
                 y1 = pic->height + y;
                 n = (*g_9140)(x & ~7, y, x1, y1);
                 WinPrintf("\nGGetPic - trans @ %d, %d (%d, %d), bytes=%u", x & ~7, y, x1, y1, n);
-                h = f_171C_2208(n + 1);
+                h = malloc(n + 1);
                 h[n] = 0xf3;
                 (*g_9148)(x & ~7, y, x1, y1, h);
                 WinPrintf("\nGPutPic size AA %d, %d, tag=%x", *(int far *)h, *(int far *)h + 2, (unsigned char)h[n]);
@@ -117,7 +117,7 @@ int _fastcall win_DrawBitMap(int x, int y, int id)
                     o00_35A6_0007((char far *)pic + 8, h, x & 7, 0);
                 WinPrintf("\nGPutPic size %d, %d, tag=%x", *(int far *)h, *(int far *)h + 2, (unsigned char)h[n]);
                 f_1B4E_003B(x & ~7, y, h);
-                f_171C_2276(h);
+                free(h);
             }
         }
         db_ReleaseObject(id, 2);

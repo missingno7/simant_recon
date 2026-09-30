@@ -9,7 +9,7 @@ Ordered by expected leverage on byte-exact coverage and on the final historical 
    copy exists in a third-party GitHub repository (Clipper 5 `RTLINK.EXE`); it was not
    downloaded because its provenance is unverified — the user decides.
 2. **Runtime acceptance — DONE (2026-09-29).** `tools/runtime.py accept`: 85 complete
-   MSC 6.00 `LLIBCR`/`LIBH` members (12,308 bytes) bind exactly and are owned as
+   MSC 6.00 `LLIBCR`/`LIBH` members (12,339 bytes) bind exactly and are owned as
    HISTORICAL_RUNTIME; `validate.py` re-binds them. Binding corrected two locator errors
    (the member at 0x2CD20 is `alrem`, not `aldiv`; LIBH holds near and far helpers under
    the same module names). Remaining: 40 DGROUP placements of runtime data are anchored by

@@ -2,21 +2,24 @@
  "schema": "simant-progress-v1",
  "generated": "2026-09-30",
  "oracle_sha256": "aa0596c6766322a8229ee3c36e57048c92adc82d50fbe2ef37afb8b85fcf4f11",
- "known_functions": 1691,
- "known_game_functions": 1588,
- "exact_c_functions": 979,
- "exact_c_bytes": 178803,
- "exact_asm_functions": 188,
- "exact_asm_bytes": 33674,
- "historical_runtime_bytes_accepted": 12334,
- "historical_runtime_members_accepted": 89,
- "historical_runtime_bytes_located_unaccepted": 1044,
- "rtlink_manager_bytes_unaccepted": 17065,
- "data_bytes_accepted": 14189,
- "bss_bytes_placed": 406,
+ "known_functions": 1686,
+ "known_game_functions": 1596,
+ "exact_c_functions": 1025,
+ "exact_c_bytes": 182707,
+ "exact_asm_functions": 199,
+ "exact_asm_bytes": 34044,
+ "historical_runtime_bytes_accepted": 12339,
+ "historical_runtime_members_accepted": 90,
+ "historical_runtime_bytes_located_unaccepted": 0,
+ "runtime_functions_known": 90,
+ "runtime_functions_owned": 90,
+ "owned_functions": 1314,
+ "rtlink_manager_bytes_unaccepted": 17063,
+ "data_bytes_accepted": 14929,
+ "bss_bytes_placed": 484,
  "game_code_span_bytes": 304748,
- "unresolved_code_bytes": 92271,
- "unresolved_data_bytes": 121331,
+ "unresolved_code_bytes": 87997,
+ "unresolved_data_bytes": 120591,
  "overlay_coverage": {
   "S00": {
    "bytes": 19696,
@@ -40,7 +43,7 @@
   },
   "S05": {
    "bytes": 2512,
-   "claimed": 1133
+   "claimed": 1764
   },
   "S06": {
    "bytes": 9584,
@@ -56,7 +59,7 @@
   },
   "S09": {
    "bytes": 5232,
-   "claimed": 136
+   "claimed": 1725
   },
   "S10": {
    "bytes": 2736,
@@ -127,17 +130,17 @@
    "claimed": 2236
   }
  },
- "root_claimed_bytes": 117307,
+ "root_claimed_bytes": 119361,
  "scaffold_functions": 68,
- "exact_translation_units": 36,
- "claims_within_group_order_pending": 10,
- "inplace_draft_functions": 21,
+ "exact_translation_units": 40,
+ "claims_within_group_order_pending": 8,
+ "inplace_draft_functions": 19,
  "claims_exact_steered": 17,
- "complete_tus_relocation_order_proven": 35,
+ "complete_tus_relocation_order_proven": 39,
  "complete_tus_cross_function_order_pending": [
   "S00:31AD"
  ],
- "codegen_rules_reproduced": 16,
+ "codegen_rules_reproduced": 17,
  "whole_executable": "NOT_BUILT (no historical link yet; see docs/next-steps.md)",
  "validation": "PASS",
  "failures": []

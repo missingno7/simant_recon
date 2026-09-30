@@ -194,7 +194,7 @@ void far f_1CE2_056C(struct Rect far *r, char far *buf)
 }
 
 extern void far f_1B4E_003B(int x, int y, char far *image);
-extern void far f_171C_2276(char far *block);
+extern void far free(char far *block);
 extern void _fastcall f_21FA_0AD2(struct Rect far *rect);
 
 void far f_1CE2_0587(struct Rect far *r, char far *buf, int release)
@@ -207,7 +207,7 @@ void far f_1CE2_0587(struct Rect far *r, char far *buf, int release)
         f_1B4E_003B(x, r->top, buf);
         g_21A4 = 0;
         if (release)
-            f_171C_2276(buf);
+            free(buf);
     } else
         f_21FA_0AD2(r);
 }
@@ -215,7 +215,7 @@ void far f_1CE2_0587(struct Rect far *r, char far *buf, int release)
 void far f_1CE2_05DF(char far *buf)
 {
     if (buf)
-        f_171C_2276(buf);
+        free(buf);
 }
 
 struct PackHdr {
@@ -307,7 +307,7 @@ void far GPutPacked(int x, int y, char far *pic)
             g_9148(x & ~7, y, right, rem + y, (char far *)save);
             fd_50F6_37EA(buf, save, x & 7, 0);
             blit(x & ~7, y, save + 2, save[0], save[1], 0);
-            f_171C_2276((char far *)save);
+            free((char far *)save);
         }
     }
     f_171C_1BBA(h);

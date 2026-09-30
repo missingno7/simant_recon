@@ -342,17 +342,15 @@ void far f_1E57_08F5(struct Rect far *r)
         if (!g_5AAC) {
             for (n = 0; r->top != (int)0x8000; p++, r++, n++)
                 *p = *r;
-            goto done;
+        } else {
+            for (; r->top != (int)0x8000; r++)
+                for (c = g_5AAC; c->top != (int)0x8000; c++)
+                    p = f_1D8E_003F(c, r, p, 0L);
+            if ((n = p - buf) >= 256)
+                Punt("CL074:Temp clip overflow in SubInclude");
         }
-        for (; r->top != (int)0x8000; r++)
-            for (c = g_5AAC; c->top != (int)0x8000; c++)
-                p = f_1D8E_003F(c, r, p, 0L);
-        if ((n = p - buf) < 256)
-            goto done;
-        Punt("CL074:Temp clip overflow in SubInclude");
     } else
         Punt("Sub include NULL rect!!");
-done:
     buf[n].top = 0x8000;
     f_171C_1BBA(h);
     if (!(h = f_171C_1B2C(h, (long)(n + 1) << 3, 1)))

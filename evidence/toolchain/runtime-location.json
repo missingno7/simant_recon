@@ -27,7 +27,11 @@
     "__c_exit": 222,
     "__ctermsub": 328,
     "_exit": 197
-   }
+   },
+   "segments": {
+    "EMULATOR_TEXT": 184240
+   },
+   "segments_located_by": "EMULATOR_TEXT: paragraph-aligned CODE segment after _TEXT; base16 fixup site 0x2CFB0 is relocation #3468 (frame 2CFB)"
   },
   {
    "library": "llibcr.lib",
@@ -502,6 +506,17 @@
    "publics": {
     "__fstrncmp": 0
    }
+  },
+  {
+   "library": "llibcr.lib",
+   "member": "atol.asm",
+   "linear": 179188,
+   "size": 3,
+   "fixup_bytes": 2,
+   "publics": {
+    "_atol": 0
+   },
+   "located_by": "near-jump stub (below libmatch min-size) between strncmp.asm and atox.asm: E9 0001 -> __catox at 0x2BBF8; tzset.c references _atol (not _atoi)"
   },
   {
    "library": "llibcr.lib",
