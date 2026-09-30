@@ -34,10 +34,20 @@ You recover original C (or genuine assembly) for the modules assigned to you in
 
 ## Environment
 
-Inside the Codex sandbox `python` is `C:\msys64\mingw64in\python.exe` (3.10); the tools
-find capstone in `C:/tools/capstone-5.0.3` by themselves and compilers run through MS-DOS
-Player from `C:	ools` — no installation is needed. Do not `pip install`. In PowerShell
-pass flags literally (`--flags /AL /Os /Oe`).
+Workers run in Git Bash (Claude subagents) or in the Codex sandbox, where `python` is
+`C:\msys64\mingw64\bin\python.exe` (3.10). The tools find capstone in
+`C:/tools/capstone-5.0.3` by themselves. `msc600ax` compiles in headless DOSBox-X; the other
+profiles run through MS-DOS Player from `C:\tools`. No installation is needed; do not
+`pip install`.
+
+* **Git Bash rewrites arguments that look like paths.** Always prefix commands that pass MSC
+  flags with `MSYS_NO_PATHCONV=1`, and pass each flag as its own argument (`--flags /AL /Os
+  /Oe`, never one quoted string). compiler.py refuses mangled flags. Colon-containing
+  arguments such as `root:1383` can become Windows path lists (`root;1383`); tools that take
+  module keys normalise or refuse them, but when in doubt also set `MSYS2_ARG_CONV_EXCL="*"`.
+* In PowerShell pass flags literally (`--flags /AL /Os /Oe`).
+* Only `promote.py` writes to `src/`. Compile and keep drafts, listings and objects in
+  `build/workers/NAME/`; `validate.py` fails on any other file under `src/`.
 
 ## Loop
 
