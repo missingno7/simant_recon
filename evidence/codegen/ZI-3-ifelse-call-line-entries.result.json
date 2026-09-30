@@ -1,0 +1,111 @@
+{
+ "id": "ZI-3",
+ "question": "Do `f(c ? a : b);` and `if (c) f(a); else f(b);` differ only in /Zi line entries? Under /Os the two calls are cross-jumped into the ternary's code (mov ax,K / jmp / mov ax,K2 / push ax / call), so the code bytes are identical, but the if/else form contributes two more /Zi line entries (one per call statement), which moves the 52-entry LINNUM flush record breaks of everything after it. Positive control S14:384C (worker resF): the six font choices written as if/else put the flushes where the oracle's relocation order needs record breaks (DrawCastePopUp FORBID (0825,0AA3], PictureDialog NEED (0D2C,0D7A], SpiderDialog NEED (0FF6,102B]); with ?: all three are violated. The if/else form also changes later functions' codegen like +2 identifiers (symbol-table state), so it is not free. Line entries are not visible to this probe (see tools/records.py); the probe pins the byte identity.",
+ "results": [
+  {
+   "variant": "ternary_arg",
+   "profile_index": 0,
+   "profile": "msc600ax",
+   "flags": [
+    "/AL",
+    "/Os",
+    "/Oe",
+    "/Og",
+    "/Zi"
+   ],
+   "source_sha256": "430299cc9b176e6c44bd06525bb460179894f4ed862fa1058fe676fdad626883",
+   "bytes": "33c09a000000009a00000000813e000040017505b80300eb03b80400509a000000005b9a00000000cb",
+   "disasm": "xor ax, ax; lcall 0, 0; lcall 0, 0; cmp word ptr [0], 0x140; jne 0x19; mov ax, 3; jmp 0x1c; mov ax, 4; push ax; lcall 0, 0; pop bx; lcall 0, 0; retf",
+   "segments": {
+    "UNIT_TEXT": {
+     "class": "CODE",
+     "align": "word",
+     "combine": "public",
+     "length": 41,
+     "big": false
+    },
+    "_DATA": {
+     "class": "DATA",
+     "align": "word",
+     "combine": "public",
+     "length": 0,
+     "big": false
+    },
+    "CONST": {
+     "class": "CONST",
+     "align": "word",
+     "combine": "public",
+     "length": 0,
+     "big": false
+    },
+    "_BSS": {
+     "class": "BSS",
+     "align": "word",
+     "combine": "public",
+     "length": 0,
+     "big": false
+    }
+   },
+   "communals": {}
+  },
+  {
+   "variant": "if_else_calls",
+   "profile_index": 0,
+   "profile": "msc600ax",
+   "flags": [
+    "/AL",
+    "/Os",
+    "/Oe",
+    "/Og",
+    "/Zi"
+   ],
+   "source_sha256": "7b69b94ba17c2cdaa1147106b47d02831dcf83b162447749dbb392634901c4c6",
+   "bytes": "33c09a000000009a00000000813e000040017505b80300eb03b80400509a000000005b9a00000000cb",
+   "disasm": "xor ax, ax; lcall 0, 0; lcall 0, 0; cmp word ptr [0], 0x140; jne 0x19; mov ax, 3; jmp 0x1c; mov ax, 4; push ax; lcall 0, 0; pop bx; lcall 0, 0; retf",
+   "segments": {
+    "UNIT_TEXT": {
+     "class": "CODE",
+     "align": "word",
+     "combine": "public",
+     "length": 41,
+     "big": false
+    },
+    "_DATA": {
+     "class": "DATA",
+     "align": "word",
+     "combine": "public",
+     "length": 0,
+     "big": false
+    },
+    "CONST": {
+     "class": "CONST",
+     "align": "word",
+     "combine": "public",
+     "length": 0,
+     "big": false
+    },
+    "_BSS": {
+     "class": "BSS",
+     "align": "word",
+     "combine": "public",
+     "length": 0,
+     "big": false
+    }
+   },
+   "communals": {}
+  }
+ ],
+ "checks": [
+  {
+   "check": "ternary_arg@0",
+   "needle": "jne 0x19; mov ax, 3; jmp 0x1c; mov ax, 4; push ax; lcall 0, 0",
+   "ok": true
+  },
+  {
+   "check": "if_else_calls@0",
+   "needle": "jne 0x19; mov ax, 3; jmp 0x1c; mov ax, 4; push ax; lcall 0, 0",
+   "ok": true
+  }
+ ],
+ "all_checks_pass": true
+}

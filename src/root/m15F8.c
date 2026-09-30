@@ -12,7 +12,12 @@ char g_1CE8 = 0;
 extern int far fd_55B3_38A0;
 extern int far open(char far *name, int mode, ...);
 extern int near errno;
-extern char far fd_4E37_0000[];
+char far fd_4E37_0000[] =
+    "\nSimAnt cannot open enough files to run.  Please increase the 'FILES=n'\n"
+    "statement in the CONFIG.SYS file on your boot drive by %d.  If there \n"
+    "is no 'FILES=n' (where n is some number) in your CONFIG.SYS file, or \n"
+    "you have no CONFIG.SYS file, please refer to your DOS manual about   \n"
+    "how to edit/create one.";
 extern int far printf(char far *format, ...);
 extern void far exit(int code);
 extern char far * near sys_errlist[];

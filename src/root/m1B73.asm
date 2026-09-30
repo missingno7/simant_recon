@@ -9,8 +9,8 @@
 ; writing the IVT directly), "in al,60h", near procs returning flags (stc/clc), far
 ; procs entered with push cs / call near, frames saved "push si; push di", dead code
 ; after unconditional jumps (081D, 089A) and a NOP-aligned entry label (0D4B).
-; DGROUP data (queues, stacks, tables) is referenced by address name; the module's own
-; _DATA contribution is not reconstructed here.
+; The module owns DGROUP 432A-54D0 (mouse state, cursor save-under buffer, handler
+; stacks, key tables, queue descriptors) and the far queue segment at 5071.
 
 _DATA	segment word public 'DATA'
 	extrn	_fd_55B3_3DE6:byte
@@ -27,56 +27,6 @@ _DATA	segment word public 'DATA'
 	extrn	_g_3DE0:byte
 	extrn	_g_3DE2:byte
 	extrn	_g_3DE4:byte
-	extrn	_g_432A:byte
-	extrn	_g_432B:byte
-	extrn	_g_432C:byte
-	extrn	_g_432E:byte
-	extrn	_g_4331:byte
-	extrn	_g_4332:byte
-	extrn	_g_4333:byte
-	extrn	_g_4334:byte
-	extrn	_g_4336:byte
-	extrn	_g_4338:byte
-	extrn	_g_433A:byte
-	extrn	_g_433C:byte
-	extrn	_g_433E:byte
-	extrn	_g_4340:byte
-	extrn	_g_4342:byte
-	extrn	_g_4344:byte
-	extrn	_g_4346:byte
-	extrn	_g_4348:byte
-	extrn	_g_434A:byte
-	extrn	_g_434E:byte
-	extrn	_g_4352:byte
-	extrn	_g_4356:byte
-	extrn	_g_435A:byte
-	extrn	_g_4362:byte
-	extrn	_g_4363:byte
-	extrn	_g_4364:byte
-	extrn	_g_4365:byte
-	extrn	_g_4366:byte
-	extrn	_g_4368:byte
-	extrn	_g_4369:byte
-	extrn	_g_4D8E:byte
-	extrn	_g_4D92:byte
-	extrn	_g_4D96:byte
-	extrn	_g_4D9A:byte
-	extrn	_g_4D9E:byte
-	extrn	_g_4DA0:byte
-	extrn	_g_4DA2:byte
-	extrn	_g_4DA4:byte
-	extrn	_g_4DA5:byte
-	extrn	_g_53B0:byte
-	extrn	_g_53B2:byte
-	extrn	_g_53B4:byte
-	extrn	_g_53B6:byte
-	extrn	_g_53B8:byte
-	extrn	_g_53BA:byte
-	extrn	_g_53BC:byte
-	extrn	_g_53BD:byte
-	extrn	_g_53CD:byte
-	extrn	_g_5484:byte
-	extrn	_g_549A:byte
 	extrn	_g_5AAC:byte
 	extrn	_g_5AAE:byte
 	extrn	_g_5FF0:byte
@@ -96,20 +46,112 @@ _DATA	segment word public 'DATA'
 	extrn	_g_9164:byte
 	extrn	_g_9168:byte
 	extrn	_g_9184:byte
-	extrn	_g_4FAA:byte
-	extrn	_g_51AC:byte
-	extrn	_g_53AE:byte
-	extrn	_g_544D:byte
-	extrn	_g_54A0:byte
-	extrn	_g_54B0:byte
-	extrn	_g_53BE:byte
 	extrn	_g_5A9C:byte
-	extrn	_g_5460:byte
+; ---- the module's DGROUP data (DGROUP 432A-54D0) -----------------------------------
+	public	_g_432A, _g_4331, _g_4333, _g_4340, _g_4342, _g_4344, _g_4346
+	public	_g_4365, _g_4366, _g_53BD
+_g_432A		db	0		; set by IBMInitStuff (/b option or BUG=MSMOUSE)
+_g_432B		db	0
+_g_432C		dw	0		; last mickey count x
+_g_432E		dw	0		; last mickey count y
+		db	0
+_g_4331		db	0		; cursor drawn flag (read by the display drivers)
+_g_4332		db	0
+_g_4333		db	0		; cursor update lock (display drivers)
+_g_4334		dw	0		; hide rectangle active
+_g_4336		dw	0		; hide rectangle left, top, right, bottom
+_g_4338		dw	0
+_g_433A		dw	0
+_g_433C		dw	0
+_g_433E		db	0		; button state
+		db	0
+_g_4340		dw	0		; cursor x, y (display drivers)
+_g_4342		dw	0
+_g_4344		dw	0
+_g_4346		dw	0
+_g_4348		dw	16h		; cursor image width, height
+_g_434A		dw	16h
+		dw	32h
+_g_434E		dd	0		; event counters
+_g_4352		dd	0
+_g_4356		dd	0
+_g_435A		dw	0
+		dw	3 dup (0)
+_g_4362		db	0		; keyboard cursor step x, y
+_g_4363		db	0
+_g_4364		db	0
+_g_4365		db	0		; cursor show level (display drivers)
+_g_4366		db	0
+		db	0
+_g_4368		db	0
+_g_4369		db	0
+SaveUnder	db	2596 dup (0)	; screen bytes under the cursor
+_g_4D8E		dd	0		; cursor image
+_g_4D92		dd	0		; cursor mask
+_g_4D96		dd	0
+_g_4D9A		dd	0
+_g_4D9E		dw	0
+_g_4DA0		dw	0
+_g_4DA2		dw	DGROUP:SaveUnder
+_g_4DA4		db	0
+_g_4DA5		dw	0		; current hot-box record
+		db	0
+; private stacks of the interrupt handlers (sp is loaded with the label above each one)
+		dw	80h
+		db	512 dup (0)
+_g_4FAA		dw	80h
+		db	512 dup (0)
+_g_51AC		dw	80h
+		db	512 dup (0)
+_g_53AE		dw	80h
+_g_53B0		dw	0		; saved sp, ss
+_g_53B2		dw	0
+_g_53B4		dw	0
+_g_53B6		dw	0
+_g_53B8		dw	0
+_g_53BA		dw	0
+_g_53BC		db	0
+_g_53BD		db	1
+_g_53BE		db	10h, 'MouseHide < 0', 0
+_g_53CD		db	128 dup (80h)	; key state per scan code
+_g_544D		db	48h, 50h, 4Bh, 4Dh, 47h, 4Fh, 49h, 51h, 4Ch, 52h	; cursor keypad scan codes
+		db	53h, 39h, 3Bh, 19h, 4Eh, 4Ah, 13h, 2Ch, 0
+_g_5460		dw	L08AB, L08C0, L08FA, L08DF, L0946, L095E, L0979, L0990	; their handlers
+		dw	L092F, L09AF, L09C2, L09AF, L0803, L0821, L0834, L084B
+		dw	L0862, L0877
+_g_5484		dd	Queue0		; event queues: count word, capacity at -2, 18-byte entries
+		dw	0FFh
+		dd	_fd_5071_0060
+		dw	0FFh
+		dd	_fd_5071_03C4
+		dw	1Eh
+		dd	0
+_g_549A		dd	_fd_5071_0728
+		dw	1Fh
+_g_54A0		db	'HotBox overflow', 0
+_g_54B0		db	'MouseError**********************', 0
 _DATA	ends
 DGROUP	group	_DATA
 
+; ---- event and hot-box queues (far data) ---------------------------------------------
+QUEUE_DATA	segment para public 'FAR_DATA'
+	public	_fd_5071_0060, _fd_5071_03C4, _fd_5071_0728
+		dw	4
+Queue0		dw	0
+		db	5 * 18 dup (0)
+		dw	47
+_fd_5071_0060	dw	0
+		db	48 * 18 dup (0)
+		dw	47
+_fd_5071_03C4	dw	0
+		db	48 * 18 dup (0)
+		dw	9
+_fd_5071_0728	dw	0
+		db	10 * 18 dup (0)
+		dw	5
+QUEUE_DATA	ends
+
 	extrn	_Punt:far
-	extrn	_fd_5071_0728:byte
 	extrn	_f_1B4E_003B:far
 	extrn	_f_1B4E_005E:far
 	extrn	_f_277D_000B:far
@@ -1134,6 +1176,7 @@ L07F8:
 	pop es
 	mov byte ptr cs:kbd_last_scan, al
 	retn
+L0803:
 	test cl, 0Fh
 	je L0811
 	xor ah, ah
@@ -1147,6 +1190,7 @@ L0818:
 	jmp L07F7
 	mov al, 10h
 	jmp short L088A
+L0821:
 	test cl, 4
 	je L07F7
 	test cl, 0Bh
@@ -1155,6 +1199,7 @@ L0818:
 	je L07F7
 	mov al, 1
 	jmp short L088A
+L0834:
 	test cl, 0Bh
 	jne L07F7
 	test ah, 1
@@ -1166,6 +1211,7 @@ L0818:
 L0847:
 	mov al, 6
 	jmp short L088A
+L084B:
 	test ah, 1
 	je L07F7
 	test cl, 0Bh
@@ -1177,6 +1223,7 @@ L0847:
 L085E:
 	mov al, 7
 	jmp short L088A
+L0862:
 	test cl, 4
 	je L07F7
 	test cl, 0Bh
@@ -1187,6 +1234,7 @@ L085E:
 	jmp short L088A
 L0875:
 	jmp L07F7
+L0877:
 	test cl, 4
 	je L0875
 	test cl, 0Bh
@@ -1209,6 +1257,7 @@ L088A:
 	call far ptr _f_1B73_036E
 	jmp L07F7
 	nop
+L08AB:
 	and ah, ah
 	je L08D3
 	mov bx, word ptr _g_3DB4
@@ -1219,6 +1268,7 @@ L088A:
 	mov bh, bl
 	xor bl, bl
 	jmp short L0915
+L08C0:
 	and ah, ah
 	je L08D3
 	mov bx, word ptr _g_3DB4
@@ -1234,6 +1284,7 @@ L08D3:
 L08D9:
 	mov byte ptr _g_4362, ah
 	jmp short L0929
+L08DF:
 	and ah, ah
 	je L08D9
 	mov bx, word ptr _g_3DB2
@@ -1246,6 +1297,7 @@ L08D9:
 	shr bx, 1
 	or bx, 1
 	jmp short L0915
+L08FA:
 	and ah, ah
 	je L08D9
 	mov bx, word ptr _g_3DB2
@@ -1273,6 +1325,7 @@ L091F:
 L0929:
 	call near ptr L09D9
 	jmp L07F3
+L092F:
 	mov bx, word ptr _g_3DB4
 	shr bx, 1
 	mov word ptr _g_9124, bx
@@ -1280,6 +1333,7 @@ L0929:
 	shr bx, 1
 	mov word ptr _g_9122, bx
 	jmp near ptr L09E3
+L0946:
 	and ah, ah
 	je L09AC
 	xor ax, ax
@@ -1290,6 +1344,7 @@ L0929:
 L0958:
 	mov word ptr _g_9122, ax
 	jmp near ptr L09E3
+L095E:
 	and ah, ah
 	je L09AC
 	mov ax, word ptr _g_3DB2
@@ -1302,6 +1357,7 @@ L0958:
 L0974:
 	mov word ptr _g_9122, ax
 	jmp short L09E3
+L0979:
 	and ah, ah
 	je L09AC
 	xor ax, ax
@@ -1312,6 +1368,7 @@ L0974:
 L098B:
 	mov word ptr _g_9124, ax
 	jmp short L09E3
+L0990:
 	and ah, ah
 	je L09AC
 	mov ax, word ptr _g_3DB4
@@ -1326,6 +1383,7 @@ L09A6:
 	call near ptr _f_1B73_09F7
 L09AC:
 	jmp L07F3
+L09AF:
 	mov al, byte ptr _g_9120
 	and al, 0FEh
 	or al, ah
@@ -1335,6 +1393,7 @@ L09AC:
 	jne _f_1B73_0A1B
 	mov ah, 4
 	jmp short _f_1B73_0A1B
+L09C2:
 	mov al, byte ptr _g_9120
 	and al, 0FDh
 	shl ah, 1

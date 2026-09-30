@@ -1,0 +1,25 @@
+{
+ "id": "ZI-3",
+ "question": "Do `f(c ? a : b);` and `if (c) f(a); else f(b);` differ only in /Zi line entries? Under /Os the two calls are cross-jumped into the ternary's code (mov ax,K / jmp / mov ax,K2 / push ax / call), so the code bytes are identical, but the if/else form contributes two more /Zi line entries (one per call statement), which moves the 52-entry LINNUM flush record breaks of everything after it. Positive control S14:384C (worker resF): the six font choices written as if/else put the flushes where the oracle's relocation order needs record breaks (DrawCastePopUp FORBID (0825,0AA3], PictureDialog NEED (0D2C,0D7A], SpiderDialog NEED (0FF6,102B]); with ?: all three are violated. The if/else form also changes later functions' codegen like +2 identifiers (symbol-table state), so it is not free. Line entries are not visible to this probe (see tools/records.py); the probe pins the byte identity.",
+ "header": "extern int near g_3DB2;\nextern void far f_24AB_02AD(int font);\nextern void far k(void);\n",
+ "variants": {
+  "ternary_arg": "void far f(void)\n{\n    k();\n    f_24AB_02AD(g_3DB2 == 320 ? 3 : 4);\n    k();\n}\n",
+  "if_else_calls": "void far f(void)\n{\n    k();\n    if (g_3DB2 == 320)\n        f_24AB_02AD(3);\n    else\n        f_24AB_02AD(4);\n    k();\n}\n"
+ },
+ "profiles": [
+  {
+   "profile": "msc600ax",
+   "flags": [
+    "/AL",
+    "/Os",
+    "/Oe",
+    "/Og",
+    "/Zi"
+   ]
+  }
+ ],
+ "expect": {
+  "ternary_arg@0": "jne 0x19; mov ax, 3; jmp 0x1c; mov ax, 4; push ax; lcall 0, 0",
+  "if_else_calls@0": "jne 0x19; mov ax, 3; jmp 0x1c; mov ax, 4; push ax; lcall 0, 0"
+ }
+}

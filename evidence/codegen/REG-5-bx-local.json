@@ -1,0 +1,25 @@
+{
+ "id": "REG-5",
+ "question": "Can /Oe /Og allocate a plain auto to BX, and what source shape gives it? Positive control S13:384C DrawMower (worker resF): exact only when the final position is written to new locals (h = x + left; v = y + top; call(h, v, ...)). x then lives in BX (no call inside its live range, frame 8 = frame word + h/v homes) and y in SI; with the in-place form (x += left; y += top; call(x, y, ...)) x and y take SI/DI (push di added), the frame shrinks to 4 and the function grows by 2 bytes.",
+ "header": "struct Rect { int left; int top; int right; int bottom; };\ntypedef void far *Handle;\nextern int far fd_3D57_0C28;\nextern int far fd_50F6_047E;\nextern int far fd_3D57_0C32;\nextern int far fd_3D57_0C2C;\nextern int far fd_3D57_0C2E;\nextern int near g_2A32;\nextern int near g_3DB2;\nextern struct Rect far fd_50F6_10D2;\nextern Handle far fd_50F6_10DA;\nextern void far myBeginSound(int sound, int a, int b);\nextern void far hanim_RemoveAnimObject(Handle h, int id);\nextern void far hanim_SetObjectPos(int x, int y, int frame, Handle h, int id, int z);\nextern int far hanim_AddAnimObject(Handle h, int x, int y, int frame, int z);\n",
+ "variants": {
+  "new_locals": "void far DrawMower(void)\n{\n    int frame, x, y, h, v;\n\n    frame = 0;\n    if (fd_3D57_0C28 == 3 || fd_3D57_0C28 == 4) {\n        if (fd_50F6_047E == 0)\n            myBeginSound(0x24, 0, 0x40);\n        switch (fd_3D57_0C32) {\n        case 0x67:\n        case 0x68:\n        case 0x69:\n            frame = 1;\n            break;\n        case 0x6d:\n        case 0x6e:\n        case 0x6f:\n            frame = 2;\n            break;\n        default:\n            if (g_2A32 != -1) {\n                hanim_RemoveAnimObject(fd_50F6_10DA, g_2A32);\n                g_2A32 = -1;\n            }\n            return;\n        }\n    }\n    if (frame == 0) {\n        x = 0x62;\n        y = 0xb5;\n    } else {\n        if (frame == 1)\n            x = fd_3D57_0C2C + 0x13;\n        else\n            x = fd_3D57_0C2C - 0xf;\n        y = fd_3D57_0C2E + 0xf;\n    }\n    if (g_3DB2 == 320) {\n        x = (x >> 1) + 5;\n        y = (y >> 1) + 6;\n    }\n    h = x + fd_50F6_10D2.left;\n    v = y + fd_50F6_10D2.top;\n    if (g_2A32 != -1)\n        hanim_SetObjectPos(h, v, frame + 0x2260, fd_50F6_10DA, g_2A32, -1);\n    else\n        g_2A32 = hanim_AddAnimObject(fd_50F6_10DA, h, v, frame + 0x2260, -1);\n}\n",
+  "in_place": "void far DrawMower(void)\n{\n    int frame, x, y;\n\n    frame = 0;\n    if (fd_3D57_0C28 == 3 || fd_3D57_0C28 == 4) {\n        if (fd_50F6_047E == 0)\n            myBeginSound(0x24, 0, 0x40);\n        switch (fd_3D57_0C32) {\n        case 0x67:\n        case 0x68:\n        case 0x69:\n            frame = 1;\n            break;\n        case 0x6d:\n        case 0x6e:\n        case 0x6f:\n            frame = 2;\n            break;\n        default:\n            if (g_2A32 != -1) {\n                hanim_RemoveAnimObject(fd_50F6_10DA, g_2A32);\n                g_2A32 = -1;\n            }\n            return;\n        }\n    }\n    if (frame == 0) {\n        x = 0x62;\n        y = 0xb5;\n    } else {\n        if (frame == 1)\n            x = fd_3D57_0C2C + 0x13;\n        else\n            x = fd_3D57_0C2C - 0xf;\n        y = fd_3D57_0C2E + 0xf;\n    }\n    if (g_3DB2 == 320) {\n        x = (x >> 1) + 5;\n        y = (y >> 1) + 6;\n    }\n    x += fd_50F6_10D2.left;\n    y += fd_50F6_10D2.top;\n    if (g_2A32 != -1)\n        hanim_SetObjectPos(x, y, frame + 0x2260, fd_50F6_10DA, g_2A32, -1);\n    else\n        g_2A32 = hanim_AddAnimObject(fd_50F6_10DA, x, y, frame + 0x2260, -1);\n}\n"
+ },
+ "profiles": [
+  {
+   "profile": "msc600ax",
+   "flags": [
+    "/AL",
+    "/Os",
+    "/Og",
+    "/Oe",
+    "/Zi"
+   ]
+  }
+ ],
+ "expect": {
+  "new_locals@0": "mov ax, 8; lcall 0, 0; push si; mov word ptr [bp - 2], 0",
+  "in_place@0": "mov ax, 4; lcall 0, 0; push di; push si"
+ }
+}

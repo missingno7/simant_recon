@@ -17,7 +17,7 @@ extern unsigned char far MapB[64][64];
 extern unsigned char far MapR[64][64];
 extern char far Dy8[8];
 extern char far Dx8[8];
-extern unsigned char near g_1BB2[8];
+unsigned char g_1BB2[8] = { 0x19, 0x1A, 0x1C, 0x1F, 0x1E, 0x1D, 0x1B, 0x18 };
 extern int far IsItDirt(int value);
 extern long far fd_50F6_1068;
 extern long far fd_50F6_1082;

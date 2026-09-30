@@ -5,18 +5,80 @@
 ; push ds; push di saves (MSC saves DI first, rule ASM-2), pop bp without mov sp,bp (ASM-1).
 
 _DATA	segment word public 'DATA'
-	extrn	_g_3DA0:byte
-	extrn	_g_3DA2:byte
-	extrn	_g_3DB2:byte
-	extrn	_g_3DD6:byte
-	extrn	_g_3DDA:byte
-	extrn	_g_3DDC:byte
-	extrn	_g_3DDE:byte
-	extrn	_g_3DF4:byte
-	extrn	_g_3DF8:byte
-	extrn	_g_41C0:byte
 	extrn	_g_914C:byte
 	extrn	_g_9154:byte
+	extrn	_g_9128:byte
+	public	_g_3D20, _g_3DA0, _g_3DA2, _g_3DA4, _g_3DA8, _g_3DAA, _g_3DAC, _g_3DAE
+	public	_g_3DB0, _g_3DB2, _g_3DB4, _g_3DB6, _g_3DC1, _g_3DCA, _g_3DD2, _g_3DD4
+	public	_g_3DD6, _g_3DD8, _g_3DDA, _g_3DDC, _g_3DDE, _g_3DE0, _g_3DE1, _g_3DE2
+	public	_g_3DE3, _g_3DE4, _g_3DE5, _fd_55B3_3DE6, _fd_55B3_3DE8, _g_3DEA, _g_3DEC
+	public	_g_3DED, _g_3DEE, _g_3DEF, _g_3DF1, _g_3DF2, _g_3DF4, _g_3DF8, _g_3DFC
+	public	_g_41C0, _g_4220
+_g_3D20		db	128 dup (0)	; scratch bitmap row buffer
+_g_3DA0		dw	0		; text pen x, y
+_g_3DA2		dw	0
+_g_3DA4		dd	0		; font objects
+_g_3DA8		dw	0
+_g_3DAA		dw	0
+_g_3DAC		dw	0		; screen bitmap (DGROUP:0 until the driver sets it)
+_g_3DAE		dw	DGROUP
+_g_3DB0		dw	0A000h		; video segment
+_g_3DB2		dw	640		; screen width, height, bytes per row
+_g_3DB4		dw	350
+_g_3DB6		dw	80
+		db	9 dup (0)
+_g_3DC1		db	0FFh, 7Fh, 3Fh, 1Fh, 0Fh, 07h, 03h, 01h, 00h	; left edge masks
+_g_3DCA		db	80h, 0C0h, 0E0h, 0F0h, 0F8h, 0FCh, 0FEh, 0FFh	; right edge masks
+_g_3DD2		dw	0
+_g_3DD4		dw	0
+_g_3DD6		dw	0		; current font bitmap (far pointer)
+_g_3DD8		dw	0
+_g_3DDA		dw	0
+_g_3DDC		dw	0		; character cell height, width
+_g_3DDE		dw	8
+_g_3DE0		db	0Fh		; pen colour
+_g_3DE1		db	0
+_g_3DE2		db	0
+_g_3DE3		db	0
+_g_3DE4		db	0		; fill pattern
+_g_3DE5		db	0
+_fd_55B3_3DE6	dw	0
+_fd_55B3_3DE8	dw	0
+_g_3DEA		dw	0
+_g_3DEC		db	0
+_g_3DED		db	0
+_g_3DEE		db	0
+_g_3DEF		db	0
+		db	0
+_g_3DF1		db	0
+_g_3DF2		dw	0
+_g_3DF4		dd	_f_1B4E_000C	; empty driver entry
+_g_3DF8		dd	_g_9128		; driver entry table (25 far pointers)
+_g_3DFC		db	964 dup (0)
+_g_41C0		db	0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15	; colour map
+		; 16-byte fill patterns
+		db	55h, 55h, 0AAh, 0AAh, 55h, 55h, 0AAh, 0AAh, 55h, 55h, 0AAh, 0AAh, 55h, 55h, 0AAh, 0AAh
+		db	0BBh, 0BBh, 0DDh, 0DDh, 0EEh, 0EEh, 77h, 77h, 0BBh, 0BBh, 0DDh, 0DDh, 0EEh, 0EEh, 77h, 77h
+		db	16 dup (0FFh)
+		db	16 dup (0)
+		db	10h, 10h, 04h, 04h, 10h, 10h, 04h, 04h, 10h, 10h, 04h, 04h, 10h, 10h, 04h, 04h
+_g_4220		db	16 dup (0)
+		db	44h, 44h, 22h, 22h, 11h, 11h, 88h, 88h, 44h, 44h, 22h, 22h, 11h, 11h, 88h, 88h
+		db	55h, 55h, 0AAh, 0AAh, 55h, 55h, 0AAh, 0AAh, 55h, 55h, 0AAh, 0AAh, 55h, 55h, 0AAh, 0AAh
+		db	0BBh, 0BBh, 0DDh, 0DDh, 0EEh, 0EEh, 77h, 77h, 0BBh, 0BBh, 0DDh, 0DDh, 0EEh, 0EEh, 77h, 77h
+		db	16 dup (0FFh)
+		db	44h, 44h, 00h, 00h, 11h, 11h, 00h, 00h, 44h, 44h, 00h, 00h, 11h, 11h, 00h, 00h
+		db	0CCh, 0CCh, 0FFh, 0FFh, 0EEh, 0EEh, 0FFh, 0FFh, 0CCh, 0CCh, 0FFh, 0FFh, 0EEh, 0EEh, 0FFh, 0FFh
+		db	77h, 77h, 0BBh, 0BBh, 0DDh, 0DDh, 0EEh, 0EEh, 77h, 77h, 0BBh, 0BBh, 0DDh, 0DDh, 0EEh, 0EEh
+		db	16 dup (0FFh)
+		db	16 dup (0)
+		db	55h, 55h, 0AAh, 0AAh, 55h, 55h, 0AAh, 0AAh, 55h, 55h, 0AAh, 0AAh, 55h, 55h, 0AAh, 0AAh
+		db	16 dup (0)
+		db	44h, 44h, 22h, 22h, 11h, 11h, 88h, 88h, 88h, 88h, 44h, 44h, 22h, 22h, 11h, 11h
+		db	0AAh, 0AAh, 55h, 55h, 0AAh, 0AAh, 55h, 55h, 0AAh, 0AAh, 55h, 55h, 0AAh, 0AAh, 55h, 55h
+		db	0BBh, 0BBh, 0DDh, 0DDh, 0EEh, 0EEh, 77h, 77h, 0BBh, 0BBh, 0DDh, 0DDh, 0EEh, 0EEh, 77h, 77h
+		db	16 dup (0FFh)
+		db	9 dup (12h)
 _DATA	ends
 DGROUP	group	_DATA
 

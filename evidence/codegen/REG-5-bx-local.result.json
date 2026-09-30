@@ -1,0 +1,111 @@
+{
+ "id": "REG-5",
+ "question": "Can /Oe /Og allocate a plain auto to BX, and what source shape gives it? Positive control S13:384C DrawMower (worker resF): exact only when the final position is written to new locals (h = x + left; v = y + top; call(h, v, ...)). x then lives in BX (no call inside its live range, frame 8 = frame word + h/v homes) and y in SI; with the in-place form (x += left; y += top; call(x, y, ...)) x and y take SI/DI (push di added), the frame shrinks to 4 and the function grows by 2 bytes.",
+ "results": [
+  {
+   "variant": "new_locals",
+   "profile_index": 0,
+   "profile": "msc600ax",
+   "flags": [
+    "/AL",
+    "/Os",
+    "/Og",
+    "/Oe",
+    "/Zi"
+   ],
+   "source_sha256": "bfbc4cb71dfb0436e6bf738b1ace11fc39ba51db3b6b5998087ef80e5c88243c",
+   "bytes": "558becb808009a0000000056c746fe00008e06000026a100003d030074053d040075728e06020026833e0000007513b84000502bc050b82400509a0000000083c4068e06040026a100002d67007c0d48487e362d04007c0448487e34833e0000ff7503e9e700ff3600008e06060026ff36020026ff3600009a0000000083c406c7060000ffffe9c400c746fe0100eb05c746fe0200837efe007508bb6200beb500eb2c837efe01750e8e060800268b1e000083c313eb0c8e060800268b1e000083eb0f8e060a00268b36000083c60f813e0000400175128bc3d1f80505008bd88bc6d1f80506008bf08e060c0026031e00002603360200833e0000ff7429b8ffff50ff3600008e06060026ff36020026ff3600008b46fe0560225056539a0000000083c40eeb26b8ffff508b46fe0560225056538e06060026ff36020026ff3600009a0000000083c40ca300005e8be55dcb",
+   "disasm": "push bp; mov bp, sp; mov ax, 8; lcall 0, 0; push si; mov word ptr [bp - 2], 0; mov es, word ptr [0]; mov ax, word ptr es:[0]; cmp ax, 3; je 0x23; cmp ax, 4; jne 0x95; mov es, word ptr [2]; cmp word ptr es:[0], 0; jne 0x42; mov ax, 0x40; push ax; sub ax, ax; push ax; mov ax, 0x24; push ax; lcall 0, 0; add sp, 6; mov es, word ptr [4]; mov ax, word ptr es:[0]; sub ax, 0x67; jl 0x5c; dec ax; dec ax; jle 0x89; sub ax, 4; jl 0x5c; dec ax; dec ax; jle 0x90; cmp word ptr [0], -1; jne 0x66; jmp 0x14d; push word ptr [0]; mov es, word ptr [6]; push word ptr es:[2]; push word ptr es:[0]; lcall 0, 0; add sp, 6; mov word ptr [0], 0xffff; jmp 0x14d; mov word ptr [bp - 2], 1; jmp 0x95; mov word ptr [bp - 2], 2; cmp word ptr [bp - 2], 0; jne 0xa3; mov bx, 0x62; mov si, 0xb5; jmp 0xcf; cmp word ptr [bp - 2], 1; jne 0xb7; mov es, word ptr [8]; mov bx, word ptr es:[0]; add bx, 0x13; jmp 0xc3; mov es, word ptr [8]; mov bx, word ptr es:[0]; sub bx, 0xf; mov es, word ptr [0xa]; mov si, word ptr es:[0]; add si, 0xf; cmp word ptr [0], 0x140; jne 0xe9; mov ax, bx; sar ax, 1; add ax, 5; mov bx, ax; mov ax, si; sar ax, 1; add ax, 6; mov si, ax; mov es, word ptr [0xc]; add bx, word ptr es:[0]; add si, word ptr es:[2]; cmp word ptr [0], -1; je 0x127; mov ax, 0xffff; push ax; push word ptr [0]; mov es, word ptr [6]; push word ptr es:[2]; push word ptr es:[0]; mov ax, word ptr [bp - 2]; add ax, 0x2260; push ax; push si; push bx; lcall 0, 0; add sp, 0xe; jmp 0x14d; mov ax, 0xffff; push ax; mov ax, word ptr [bp - 2]; add ax, 0x2260; push ax; push si; push bx; mov es, word ptr [6]; push word ptr es:[2]; push word ptr es:[0]; lcall 0, 0; add sp, 0xc; mov word ptr [0], ax; pop si; mov sp, bp; pop bp; retf",
+   "segments": {
+    "UNIT_TEXT": {
+     "class": "CODE",
+     "align": "word",
+     "combine": "public",
+     "length": 338,
+     "big": false
+    },
+    "_DATA": {
+     "class": "DATA",
+     "align": "word",
+     "combine": "public",
+     "length": 0,
+     "big": false
+    },
+    "CONST": {
+     "class": "CONST",
+     "align": "word",
+     "combine": "public",
+     "length": 14,
+     "big": false
+    },
+    "_BSS": {
+     "class": "BSS",
+     "align": "word",
+     "combine": "public",
+     "length": 0,
+     "big": false
+    }
+   },
+   "communals": {}
+  },
+  {
+   "variant": "in_place",
+   "profile_index": 0,
+   "profile": "msc600ax",
+   "flags": [
+    "/AL",
+    "/Os",
+    "/Og",
+    "/Oe",
+    "/Zi"
+   ],
+   "source_sha256": "533960369770d21ad0088749058037b1adb1f97c71026f0e30690f9468fb1b7d",
+   "bytes": "558becb804009a000000005756c746fe00008e06000026a100003d030074053d040075728e06020026833e0000007513b84000502bc050b82400509a0000000083c4068e06040026a100002d67007c0d48487e362d04007c0448487e34833e0000ff7503e9e700ff3600008e06060026ff36020026ff3600009a0000000083c406c7060000ffffe9c400c746fe0100eb05c746fe0200837efe007508be6200bfb500eb2c837efe01750e8e060800268b36000083c613eb0c8e060800268b36000083ee0f8e060a00268b3e000083c70f813e0000400175128bc6d1f80505008bf08bc7d1f80506008bf88e060c00260336000026033e0200833e0000ff7429b8ffff50ff3600008e06060026ff36020026ff3600008b46fe0560225057569a0000000083c40eeb26b8ffff508b46fe0560225057568e06060026ff36020026ff3600009a0000000083c40ca300005e5f8be55dcb",
+   "disasm": "push bp; mov bp, sp; mov ax, 4; lcall 0, 0; push di; push si; mov word ptr [bp - 2], 0; mov es, word ptr [0]; mov ax, word ptr es:[0]; cmp ax, 3; je 0x24; cmp ax, 4; jne 0x96; mov es, word ptr [2]; cmp word ptr es:[0], 0; jne 0x43; mov ax, 0x40; push ax; sub ax, ax; push ax; mov ax, 0x24; push ax; lcall 0, 0; add sp, 6; mov es, word ptr [4]; mov ax, word ptr es:[0]; sub ax, 0x67; jl 0x5d; dec ax; dec ax; jle 0x8a; sub ax, 4; jl 0x5d; dec ax; dec ax; jle 0x91; cmp word ptr [0], -1; jne 0x67; jmp 0x14e; push word ptr [0]; mov es, word ptr [6]; push word ptr es:[2]; push word ptr es:[0]; lcall 0, 0; add sp, 6; mov word ptr [0], 0xffff; jmp 0x14e; mov word ptr [bp - 2], 1; jmp 0x96; mov word ptr [bp - 2], 2; cmp word ptr [bp - 2], 0; jne 0xa4; mov si, 0x62; mov di, 0xb5; jmp 0xd0; cmp word ptr [bp - 2], 1; jne 0xb8; mov es, word ptr [8]; mov si, word ptr es:[0]; add si, 0x13; jmp 0xc4; mov es, word ptr [8]; mov si, word ptr es:[0]; sub si, 0xf; mov es, word ptr [0xa]; mov di, word ptr es:[0]; add di, 0xf; cmp word ptr [0], 0x140; jne 0xea; mov ax, si; sar ax, 1; add ax, 5; mov si, ax; mov ax, di; sar ax, 1; add ax, 6; mov di, ax; mov es, word ptr [0xc]; add si, word ptr es:[0]; add di, word ptr es:[2]; cmp word ptr [0], -1; je 0x128; mov ax, 0xffff; push ax; push word ptr [0]; mov es, word ptr [6]; push word ptr es:[2]; push word ptr es:[0]; mov ax, word ptr [bp - 2]; add ax, 0x2260; push ax; push di; push si; lcall 0, 0; add sp, 0xe; jmp 0x14e; mov ax, 0xffff; push ax; mov ax, word ptr [bp - 2]; add ax, 0x2260; push ax; push di; push si; mov es, word ptr [6]; push word ptr es:[2]; push word ptr es:[0]; lcall 0, 0; add sp, 0xc; mov word ptr [0], ax; pop si; pop di; mov sp, bp; pop bp; retf",
+   "segments": {
+    "UNIT_TEXT": {
+     "class": "CODE",
+     "align": "word",
+     "combine": "public",
+     "length": 340,
+     "big": false
+    },
+    "_DATA": {
+     "class": "DATA",
+     "align": "word",
+     "combine": "public",
+     "length": 0,
+     "big": false
+    },
+    "CONST": {
+     "class": "CONST",
+     "align": "word",
+     "combine": "public",
+     "length": 14,
+     "big": false
+    },
+    "_BSS": {
+     "class": "BSS",
+     "align": "word",
+     "combine": "public",
+     "length": 0,
+     "big": false
+    }
+   },
+   "communals": {}
+  }
+ ],
+ "checks": [
+  {
+   "check": "new_locals@0",
+   "needle": "mov ax, 8; lcall 0, 0; push si; mov word ptr [bp - 2], 0",
+   "ok": true
+  },
+  {
+   "check": "in_place@0",
+   "needle": "mov ax, 4; lcall 0, 0; push di; push si",
+   "ok": true
+  }
+ ],
+ "all_checks_pass": true
+}

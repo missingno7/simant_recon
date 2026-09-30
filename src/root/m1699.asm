@@ -5,9 +5,10 @@
 ; mov sp,bp (ASM-1).
 
 _DATA	segment word public 'DATA'
-	extrn	_g_1DE2:byte
-	extrn	_g_1DE6:byte
-	extrn	_g_1DE7:byte
+_g_1DE2		dw	0
+		dw	0		; not referenced
+_g_1DE6		db	0
+_g_1DE7		db	0
 _DATA	ends
 DGROUP	group	_DATA
 

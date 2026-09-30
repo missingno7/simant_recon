@@ -11,12 +11,14 @@ _DATA	segment word public 'DATA'
 	extrn	_g_3DDC:byte
 	extrn	_g_3DDE:byte
 	extrn	_g_5A97:byte
-	extrn	_g_5ABA:byte
-	extrn	_g_5ABC:byte
-	extrn	_g_5ABE:byte
-	extrn	_g_5ECE:byte
-	extrn	_g_5F1D:byte
-	extrn	_g_5FBE:byte
+	public	_g_5ABA, _g_5ABC, _g_5ABE
+_g_5ABA		dw	0		; text bitmap: width, height, pixel rows
+_g_5ABC		dw	0
+_g_5ABE		db	1040 dup (0)
+_g_5ECE		db	79 dup (0)	; copy of the string (at most 79 characters)
+_g_5F1D		db	0
+		db	160 dup (0)	; not referenced
+_g_5FBE		db	'cueaaaaceeeiiiAAEaAooouuyoucLYPfaiounNao'	; folding of characters 80h-A7h
 _DATA	ends
 DGROUP	group	_DATA
 

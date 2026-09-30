@@ -9473,6 +9473,11 @@
      "seg": 21939,
      "off": 32998,
      "size": 92
+    },
+    "_DATA": {
+     "seg": 21939,
+     "off": 7066,
+     "size": 8
     }
    },
    "lang": "c",
@@ -9481,7 +9486,7 @@
     "end": 52655
    },
    "source": "src/root/m0BE8.c",
-   "source_sha256": "ca7068324a08080710101eb569040b18426176b5a700fb7d2f38bca88a65814f",
+   "source_sha256": "42664e07331fbba4cc257f1e49e03dff5e93deddb764d33101ad0f454a9377d7",
    "claims": [
     {
      "name": "IsItDirt",
@@ -9749,7 +9754,7 @@
     }
    ],
    "scaffold": [],
-   "object_sha256": "794f4df4d60a25d03f89be99f38e70dd3664f9292f4ff5ed14ee5ba81be7cdd5"
+   "object_sha256": "2bd81d3d0124063b18c78637c7e9ee5186c0423b0f6ec3a47b40f66a2546c8f9"
   },
   "root:0CDB": {
    "unit": "root",
@@ -11634,11 +11639,16 @@
      "seg": 21939,
      "off": 33674,
      "size": 48
+    },
+    "_DATA": {
+     "seg": 21939,
+     "off": 7090,
+     "size": 8
     }
    },
    "lang": "c",
    "source": "src/root/m14EE.c",
-   "source_sha256": "7c17444705eae77c967795bcff6859e41a07e70adef372a112f619a2685081a9",
+   "source_sha256": "3f7f1e97534488dd2408ee9fd4aefc9316a2ba84c929007b13e30da065cc2b3f",
    "claims": [
     {
      "name": "CanBeHouseHole",
@@ -11810,7 +11820,7 @@
     "f_14EE_0C9C",
     "f_14EE_0D71"
    ],
-   "object_sha256": "9ffbf77413b0352b0be37ae0d6c7a24d7c7db9f9295a745218fdd88246bbe642"
+   "object_sha256": "255e2329c10dbc737a9975f20c9b828801faa4ee44211f9c03e10cae55373c28"
   },
   "root:15D9": {
    "unit": "root",
@@ -11884,6 +11894,11 @@
      "seg": 21939,
      "off": 33736,
      "size": 24
+    },
+    "UNIT5_DATA": {
+     "seg": 20023,
+     "off": 0,
+     "size": 306
     }
    },
    "lang": "c",
@@ -11892,7 +11907,7 @@
     "end": 90779
    },
    "source": "src/root/m15F8.c",
-   "source_sha256": "187cbdcfed3ed2b7b572206121abbb4be11694211143a8f35e03c5a15eb7f404",
+   "source_sha256": "d6d4daddab943ee3436ca0e9c8dbc866a9d67659f7448f3c307f858abe06b70a",
    "claims": [
     {
      "name": "main",
@@ -11918,7 +11933,7 @@
     }
    ],
    "scaffold": [],
-   "object_sha256": "f82e82a5f5d57fc53e8585740d34e7c85791a1dba0f8c16dc6e3cebbd267fb1b"
+   "object_sha256": "6702227024b7c1b6516e98437ad09dad4d31d864fd607a460b760fdff14fbf2a"
   },
   "root:1629": {
    "unit": "root",
@@ -11995,7 +12010,13 @@
    "flags": [
     "/Mx"
    ],
-   "placements": {},
+   "placements": {
+    "_DATA": {
+     "seg": 21939,
+     "off": 7650,
+     "size": 6
+    }
+   },
    "lang": "asm",
    "asm_evidence": "ASM-1/ASM-2: 'add bp,6' argument frames, DS loaded with DGROUP inside the procs (mov ax,DGROUP; mov ds,ax), push es; push ds; push si; push di saves (MSC 6.00/6.00A/6.00AX always push di first, probe ASM-2), no stack check, pop bp without mov sp,bp (ASM-1). MASM 5.10 /Mx reproduces all 456 bytes",
    "extent": {
@@ -12003,7 +12024,7 @@
     "end": 93016
    },
    "source": "src/root/m1699.asm",
-   "source_sha256": "3669d1c496f62b9cd4ad94c3eb027961520ddcda239b091c06a4aaec4bb7f763",
+   "source_sha256": "26d9a76b86a8854105e905a11b59b83f84cac821edec495900bd296b2914a5fb",
    "claims": [
     {
      "name": "f_1699_0000",
@@ -12062,7 +12083,7 @@
     }
    ],
    "scaffold": [],
-   "object_sha256": "60dd12d84f4e661a2bd987b28ad39739863e42c31de4fa0dcb92234616012dd4"
+   "object_sha256": "7b8ab4c28b61399d05baa8de8142fdac6696c2fe4aa57dde8d58085c7f5538f5"
   },
   "root:16B5": {
    "unit": "root",
@@ -14042,6 +14063,11 @@
      "seg": 21939,
      "off": 15330,
      "size": 288
+    },
+    "LZSS_DATA": {
+     "seg": 20335,
+     "off": 0,
+     "size": 4113
     }
    },
    "lang": "asm",
@@ -14051,7 +14077,7 @@
     "end": 111237
    },
    "source": "src/root/m1B05.asm",
-   "source_sha256": "dfe420bfc5de3aa468e6d30c8711f206976547fafc861866d4845b3e672e26ff",
+   "source_sha256": "3124ef4a45c572a54529bd5a57cd9225b40fdcafadd63c6b06cb748683cacca4",
    "claims": [
     {
      "name": "f_1B05_0008",
@@ -14121,7 +14147,7 @@
     }
    ],
    "scaffold": [],
-   "object_sha256": "a801eb281e77908010776a311242e0ce5de1347a9bc7f56768838e4c6e7e849d"
+   "object_sha256": "ab5fcbe897925c2126b0b3384fe82d1a77ee477375cf818afe838c0e50f9415a"
   },
   "root:1B28": {
    "unit": "root",
@@ -14231,7 +14257,13 @@
    "flags": [
     "/Mx"
    ],
-   "placements": {},
+   "placements": {
+    "_DATA": {
+     "seg": 21939,
+     "off": 15648,
+     "size": 1545
+    }
+   },
    "lang": "asm",
    "asm_evidence": "ASM-1/ASM-2: frameless register procs (xchg bx,ax/stosw loop, rep movsw with DS loaded from ES, a bare retf entry), int 10h wrappers with BIOS data at 0:449h, a 40-byte fold table in the code segment read with cs:[bx+table], 'and al,al' tests, pop ax used to discard a pushed word, push si; push di and push ds; push di saves (MSC 6.00/6.00A/6.00AX always push di first, probe ASM-2), BP frames without stack check ending pop bp without mov sp,bp (ASM-1). MASM 5.10 /Mx reproduces all 586 bytes",
    "extent": {
@@ -14239,7 +14271,7 @@
     "end": 112438
    },
    "source": "src/root/m1B4E.asm",
-   "source_sha256": "639378010180e272f4f49e53a3999200097ef643297808edd0b2eb008480b467",
+   "source_sha256": "a32d75d2d4ea36980b659d26e9ddd86bcde65d9e250ebac4cdc29c0e847c67a2",
    "claims": [
     {
      "name": "f_1B4E_000C",
@@ -14430,7 +14462,7 @@
     }
    ],
    "scaffold": [],
-   "object_sha256": "157ae8dce85478a410487dfd2bbab0c9387c94a8f37e8c09451b9241f2bc159f"
+   "object_sha256": "888f44f9a00cdd30faf474bc05462f947aa0a8bf6327d8d8c0fbf81fa23c8764"
   },
   "root:1B73": {
    "unit": "root",
@@ -14439,7 +14471,18 @@
    "flags": [
     "/Mx"
    ],
-   "placements": {},
+   "placements": {
+    "_DATA": {
+     "seg": 21939,
+     "off": 17194,
+     "size": 4519
+    },
+    "QUEUE_DATA": {
+     "seg": 20593,
+     "off": 0,
+     "size": 2016
+    }
+   },
    "lang": "asm",
    "asm_evidence": "ASM-1 and ASM-2 (build/workers/ovlA/probe/ASM-2-saved-register-order.json, recorded): MSC 6.00/6.00A/6.00AX save DI before SI and always emit mov sp,bp before pop bp in inline-asm bodies (rootF p/x195A.c); this module's framed procs save push si; push di (032E, 0AC3, 0B00, 0B5B, 0BC5, 0C42) and end pop bp/retf without mov sp,bp; it keeps variables and an iret stub in its code segment and installs the stub as the INT 33h vector by writing the IVT, has INT 08h/09h/15h handlers that switch to DGROUP stacks and chain with jmp dword ptr cs:[old], reads port 60h, returns flags from near procs (stc/clc), enters far procs with push cs/call near, contains dead code after unconditional jumps (081D, 089A) and an entry label on an alignment NOP (0D4B). MASM 5.10 reproduces code and code-segment data exactly",
    "extent": {
@@ -14447,7 +14490,7 @@
     "end": 116268
    },
    "source": "src/root/m1B73.asm",
-   "source_sha256": "dabe1fa3276cb31781310a15ee4f45d969b255d561e33595baaffc87ca53b9dc",
+   "source_sha256": "3097a6b03ff1d8bdfa7d573632d9905de88d754c8b1e047de4014c4f186cb848",
    "claims": [
     {
      "name": "f_1B73_0024",
@@ -15056,7 +15099,7 @@
     }
    ],
    "scaffold": [],
-   "object_sha256": "039239213de8e7c6828a3b9e7a12ed9cfa8d366b32f8c1aa53b98a8d4032aa8e"
+   "object_sha256": "d137f322ccf1b5e7c2bda324b2555805b3ce30a7d2c6f909e3b54d792d5605f7"
   },
   "root:1C62": {
    "unit": "root",
@@ -16035,7 +16078,13 @@
    "flags": [
     "/Mx"
    ],
-   "placements": {},
+   "placements": {
+    "_DATA": {
+     "seg": 21939,
+     "off": 23082,
+     "size": 8
+    }
+   },
    "lang": "asm",
    "asm_evidence": "ASM-1/ASM-2: frameless far procs with register results (xor ax,ax; retf; BIOS data via ES=0), cli/sti around interrupt-vector swaps, xchg with memory, int 16h, a far call to its own segment and 'push cs; lea bx,label' far code pointer for atexit, framed procs saving push ds; push si; push di (MSC 6.00/6.00A/6.00AX always push di first, probe ASM-2) and ending pop bp without mov sp,bp (MSC always emits it with inline asm, ASM-1). MASM 5.10 /Mx reproduces all 226 bytes; the 81-form 'and word ptr es:[417h],not NumLockState' is MASM's pass-1 size for a forward-referenced EQU",
    "extent": {
@@ -16043,7 +16092,7 @@
     "end": 128616
    },
    "source": "src/root/m1F58.asm",
-   "source_sha256": "071ebb2f8ca11c225ce9cee86535ac606d763e7a8cb30e015ff05274d9b61209",
+   "source_sha256": "9f314c6e964bcb0955c1f3e976819bdbeddf048781c1bb257c30b2c0b25d49d2",
    "claims": [
     {
      "name": "f_1F58_0006",
@@ -16146,7 +16195,7 @@
     }
    ],
    "scaffold": [],
-   "object_sha256": "b892f141f74241ccb6c41006b79d3d84e5e5c9111906569446cdca717fb4b4b3"
+   "object_sha256": "a5656c890171744eb635d2e8515214fc2bbf7551190accdba84c51ebb990a800"
   },
   "root:1F66": {
    "unit": "root",
@@ -16267,6 +16316,11 @@
      "seg": 21939,
      "off": 36056,
      "size": 4
+    },
+    "UNIT5_DATA": {
+     "seg": 20719,
+     "off": 0,
+     "size": 100
     }
    },
    "lang": "c",
@@ -16275,7 +16329,7 @@
     "end": 129701
    },
    "source": "src/root/m1F80.c",
-   "source_sha256": "a16d1b462c1855e0b5fb50ede83199acce1da501498457c0cbfc06942958ae0e",
+   "source_sha256": "8832c414385ec5b69a1805c9271196e17cb0b91961ef4db0ca83aaff04a3bc34",
    "claims": [
     {
      "name": "f_1F80_0081",
@@ -16378,7 +16432,7 @@
     }
    ],
    "scaffold": [],
-   "object_sha256": "900113f9a47e86326c0d22f922b2bb8992165c2b316c1196374212c9cf3d2c64"
+   "object_sha256": "6e7e70861104e9d5bed66aced947de2f05fd7c58bbeaf89e9eac5b4965ceb9d8"
   },
   "root:1FAA": {
    "unit": "root",
@@ -16423,7 +16477,13 @@
    "flags": [
     "/Mx"
    ],
-   "placements": {},
+   "placements": {
+    "_DATA": {
+     "seg": 21939,
+     "off": 23226,
+     "size": 1324
+    }
+   },
    "lang": "asm",
    "asm_evidence": "ASM-1/ASM-2: push si; push di saves (MSC 6.00/6.00A/6.00AX always push di first, probe ASM-2), BP frame without stack check ending pop bp without mov sp,bp at four exits (ASM-1), 'je L; jne L2' pair, DS switched to the font segment with lds and restored from ES, lodsb/stosb/movsb/loop glyph copying and push bx/pop bx around an indexed fold-table load. MASM 5.10 /Mx reproduces all 343 bytes",
    "extent": {
@@ -16431,7 +16491,7 @@
     "end": 130343
    },
    "source": "src/root/m1FBD.asm",
-   "source_sha256": "0bd0043baa737e00777f3b8e61bf3ab4bbdd98f0ad96102c29eb2802b14210b5",
+   "source_sha256": "5e32f1c409a2fc20cb7bba200a3d2fd11e43edc0b7e2b8781ca91415a1a43417",
    "claims": [
     {
      "name": "f_1FBD_0000",
@@ -16446,7 +16506,7 @@
     }
    ],
    "scaffold": [],
-   "object_sha256": "5c0aeff2ead5974b063b326216accb10c5dce0a31cdf65cadfc331a87dd19f0f"
+   "object_sha256": "46992a4ac97fc3b7942280de929ed0481c4bcf50eb3a71c6be80f4b5e40f4297"
   },
   "root:1FD2": {
    "unit": "root",
@@ -19330,7 +19390,13 @@
    "flags": [
     "/Mx"
    ],
-   "placements": {},
+   "placements": {
+    "_DATA": {
+     "seg": 21939,
+     "off": 26476,
+     "size": 20
+    }
+   },
    "lang": "asm",
    "asm_evidence": "ASM-1/ASM-2: 'add bp,6' argument frames with BP then reused as a row counter, a 9-byte mask table in the code segment read by 'xlat cs:', lodsw/xchg al,ah/shl/shr with xchg ch,cl, rep stosw with 'adc di,-1' for the odd byte, push es; push ds; push si; push di saves (MSC 6.00/6.00A/6.00AX always push di first, probe ASM-2), pop bp without mov sp,bp (ASM-1). MASM 5.10 /Mx reproduces all 289 bytes",
    "extent": {
@@ -19338,7 +19404,7 @@
     "end": 157223
    },
    "source": "src/root/m2650.asm",
-   "source_sha256": "78574600b3c736c701a142046bc7bdf871f8c693c9fa7f9b3d5adcfc90763f39",
+   "source_sha256": "8b86e1416ac34675a6f638ed8a17d8e5e3092e155e314cebc807a75711a410d8",
    "claims": [
     {
      "name": "f_2650_000F",
@@ -19375,7 +19441,7 @@
     }
    ],
    "scaffold": [],
-   "object_sha256": "17f702205870a782960f4226d3383b5f5c9aa9a4b25f4eed4051c41e15e1d2da"
+   "object_sha256": "8af45fbbd3a589e5dbe02ff0947502de7b197c699cbd629e75117ded826a9e45"
   },
   "root:2662": {
    "unit": "root",
@@ -19940,6 +20006,11 @@
      "seg": 21939,
      "off": 26878,
      "size": 62
+    },
+    "CONST": {
+     "seg": 21939,
+     "off": 35468,
+     "size": 6
     }
    },
    "lang": "c",

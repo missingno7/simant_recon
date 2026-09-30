@@ -5,10 +5,10 @@
 
 _DATA	segment word public 'DATA'
 	extrn	_g_53BD:byte
-	extrn	_g_5A2A:word
-	extrn	_g_5A2C:word
-	extrn	_g_5A2E:word
-	extrn	_g_5A30:word
+_g_5A2A		dw	0		; pending key (scan code in AH, 80h = pushed back)
+_g_5A2C		dw	0		; second pending key
+_g_5A2E		dw	0		; saved INT 23h vector (offset, segment)
+_g_5A30		dw	0
 _DATA	ends
 DGROUP	group	_DATA
 

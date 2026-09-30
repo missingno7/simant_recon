@@ -63,7 +63,9 @@ void far f_1F80_0081(int ticks)
     }
 }
 
-extern char far fd_50EF_0000[];
+/* size: byte-equivalent hypothesis -- the segment ends before FAR_BSS 50F6, so 97..112 all give
+   the same image (all zero, no callers of f_1F80_00B8 fix a width) */
+static char far fd_50EF_0000[100];
 extern void far * far _fmemset(void far *dst, int c, unsigned int n);
 extern char far * far _fstrcpy(char far *dst, char far *src);
 

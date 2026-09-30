@@ -5,7 +5,11 @@
 ; the loop, xchg bx,cx ring copying, "and ax,ax" tests and "mov ax,0" (MSC emits or r,r / sub r,r),
 ; BP frames without stack check and 'pop bp' without 'mov sp,bp' (rule ASM-1).
 
-	extrn	_fd_4F6F_0000:byte		; 4096-byte ring buffer (far segment 4F6F)
+; LZSS ring buffer: N + F - 1 = 4096 + 18 - 1 bytes (N = 4096 ring, F = 18 lookahead); the
+; decoder fills 0FEEh (N - F) bytes with spaces and masks positions with 0FFFh (N - 1).
+LZSS_DATA	segment para public 'FAR_DATA'
+_fd_4F6F_0000	db	4096 + 18 - 1 dup (0)
+LZSS_DATA	ends
 
 _DATA	segment word public 'DATA'
 RingBuf		dd	_fd_4F6F_0000	; ring buffer
