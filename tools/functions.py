@@ -72,6 +72,13 @@ def code_segment(obj_bytes: bytes, public: str) -> str:
     return "UNIT_TEXT"
 
 
+def _write_table(t: dict) -> None:
+    from lockfile import atomic_write_text
+    atomic_write_text(TABLE, json.dumps(t, indent=0) + "\n")
+    table.cache_clear()
+    by_address.cache_clear()
+
+
 def freeze() -> int:
     if TABLE.exists():
         print("layout/functions.json exists; refusing to overwrite")

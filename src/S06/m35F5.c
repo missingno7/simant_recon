@@ -1240,19 +1240,16 @@ void far o06_35F5_1E54(void)
 /* GetNearbyPatches (Win16 unit order) */
 int far o06_35F5_2314(int x, int y)
 {
-    int index;
-    int count;
-    int offset;
-    register int patchY;
+    int i, count, px, py;
 
     count = 0;
-    for (index = 0; index < 6; ++index) {
-        patchY = PatchY[index] + y;
-        if ((PatchX[index] + x) >= 0 && patchY >= 0 && (PatchX[index] + x) < 12 && patchY < 16) {
-            offset = ((PatchX[index] + x) << 4) + patchY;
-            if (fd_3D57_00A4[0][offset] != 0)
+    for (i = 0; i < 6; i++) {
+        px = PatchX[i] + x;
+        py = PatchY[i] + y;
+        if (px >= 0 && py >= 0 && px < 12 && py < 16) {
+            if (fd_3D57_00A4[px][py] != 0)
                 count += 3;
-            if (fd_3D57_0164[0][offset] != 0)
+            if (fd_3D57_0164[px][py] != 0)
                 count -= 3;
         }
     }

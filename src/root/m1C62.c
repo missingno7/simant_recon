@@ -77,6 +77,10 @@ void far f_1C62_00A1(void)
     f_1B73_0025();
 }
 
+/* Alert box.  The only exit from the key switch is "goto done"; under /Zi that label would
+ * start a LEDATA record (02CB) which the original FIXUPP order excludes (no break in
+ * 02A7..02F0), so this module is built with /Zd like the window library (worker resB).
+ * hit[] carries the original's dead store of -1 ([bp-0Ch], never read). */
 void far f_1C62_00D5(char far *msg, int timed);
 
 void far f_1C62_00AC(char far *msg)
@@ -122,10 +126,6 @@ extern void far f_1CE2_056C(struct Rect far *r, char far *buf);
 extern void far win_FlushEvents(void);
 extern void far f_1B73_050E(void);
 
-/* SCAFFOLD BEGIN: context only, not reconstruction.
- * f_1C62_00D5 (alert box): bytes exact only with the dead store kept
- * (hit[1]); the /Zi record break at the "done:" label violates the
- * original FIXUPP order (no record break 02A7..02F0). */
 void far f_1C62_00D5(char far *msg, int timed)
 {
     int x;
@@ -193,7 +193,6 @@ done:
     win_FlushEvents();
     f_1B73_050E();
 }
-/* SCAFFOLD END */
 
 extern int far f_24AB_030B(void);
 extern char far * far _fstrchr(char far *s, int c);

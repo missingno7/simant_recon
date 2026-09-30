@@ -1,5 +1,7 @@
 /* Overlay section S26, code frame 39C7: window zoom, drag and grow with screen constraints (_fastcall window API). */
 
+#include <string.h>
+
 struct Rect {
     int left;
     int top;
@@ -147,7 +149,6 @@ void _fastcall o26_39C7_0000(int win)
 }
 
 extern void _fastcall f_22BF_0B5B(struct Rect far *dst, struct Rect far *src, int l, int t, int r, int b);
-extern int far _fmemcmp(void far *a, void far *b, unsigned n);
 
 void _fastcall o26_39C7_022F(int win, int mode, struct Rect far *r)
 {
@@ -218,7 +219,6 @@ extern void _fastcall f_21FA_0B4B(struct Rect far *rect);
 extern int far f_1FD2_0542(void);
 extern void far win_FlushEvents(void);
 
-/* SCAFFOLD BEGIN: o26_39C7_040F (drag front window) best draft, 615 vs 610 bytes: logic complete; the original keeps the early "win_UnlockWin; return" block inline after the count test (the type test jumps back to it) and stores the object pointer at [bp-12h]; MSC 6.00AX here moves that block to the end and lays out the frame differently */
 void _fastcall o26_39C7_040F(struct Event far *ev)
 {
     int win;
@@ -238,13 +238,14 @@ void _fastcall o26_39C7_040F(struct Event far *ev)
     orig = *wr;
     w = win_WinAddr(win);
     if (w->count < 2) {
-unlock:
         win_UnlockWin(win);
         return;
     }
     o = w->objs[1];
-    if (o->type != 0x0c && o->type != 0x12)
-        goto unlock;
+    if (o->type != 0x0c && o->type != 0x12) {
+        win_UnlockWin(win);
+        return;
+    }
     f_1E57_0351();
     orect = o->rect;
     if (ev == 0) {
@@ -285,12 +286,10 @@ unlock:
         ;
     win_FlushEvents();
 }
-/* SCAFFOLD END */
 
 extern int far f_1FD2_04B3(int id, struct Rect far *r);
 extern void far Punt(char far *fmt, ...);
 
-/* SCAFFOLD BEGIN: o26_39C7_0671 (grow front window) best draft, 589 vs 587 bytes: same frame/block-order residue as o26_39C7_040F */
 void _fastcall o26_39C7_0671(struct Event far *ev)
 {
     int win;
@@ -359,4 +358,3 @@ void _fastcall o26_39C7_0671(struct Event far *ev)
     f_2505_0831(win);
     win_FlushEvents();
 }
-/* SCAFFOLD END */

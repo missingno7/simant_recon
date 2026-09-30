@@ -214,9 +214,10 @@ int far MagnifyMenu(int x, int y, int plane)
 /* SCAFFOLD END */
 
 extern int far fd_3D57_0C24;
+extern int far fd_50F6_10E0;
+extern int far fd_50F6_10DE;
 extern void far YellowCommand(int cmd);
 
-/* SCAFFOLD BEGIN: AntMenu best draft: the original keeps dead code after the n=5/2 test (ES loads of CONST 8430, 8448, 8422, 8430, fd_50F6_0508[1]+2 > MeLocY compare, ES load 8448/844A) that MSC 6.00AX removes completely from every dead-variable form tried; 8448/844A are two unidentified 50F6 variables (only their CONST segment words survive) */
 int far AntMenu(struct Event far *ev)
 {
     static char antCmds[4] = { 8, 9, 0, 0 };
@@ -225,10 +226,19 @@ int far AntMenu(struct Event far *ev)
     int n;
     int r;
     int cmd;
+    int x, y;
 
     n = 5;
     if (fd_50F6_04C2 == 0x40 && fd_3D57_0C24 == 0)
         n = 2;
+    /* Dead menu-placement test (x, y unused).  MSC eliminates the arithmetic but keeps
+       the ES segment loads, the first compare of the || and the n = 5/2 setup; only
+       those survive in the original, so the exact expressions are a hypothesis. */
+    x = fd_50F6_0508[0] + fd_50F6_10E0;
+    if (x < MeLocX)
+        x = MeLocX;
+    if (fd_50F6_0508[1] + 2 > MeLocY || MeLocY - fd_50F6_10DE < n)
+        y = x;
     WinPrintf("ANTMENU");
     if (fd_50F6_0A06 == 0) {
         if (fd_50F6_04C2 == 0x40 && fd_3D57_0C24 == 0)
@@ -256,7 +266,6 @@ int far AntMenu(struct Event far *ev)
     }
     return r;
 }
-/* SCAFFOLD END */
 
 void far SetExpTool(int tool)
 {
@@ -266,7 +275,6 @@ void far SetExpTool(int tool)
 extern int far fd_50F6_0FFE;
 extern void far f_0250_0E9D(void);
 
-/* SCAFFOLD BEGIN: DoWarnSetB: exact except its CONST word (8448 here, 844C in the original) because AntMenu does not yet introduce CONST words 8448/844A */
 void far DoWarnSetB(struct Event far *ev)
 {
     struct Rect r;
@@ -275,11 +283,9 @@ void far DoWarnSetB(struct Event far *ev)
     fd_50F6_0FFE = (r.bottom - ev->v) * 100 / (r.bottom - r.top);
     f_0250_0E9D();
 }
-/* SCAFFOLD END */
 
 extern int far fd_50F6_0FBA;
 
-/* SCAFFOLD BEGIN: DoHealthSetY: exact except CONST word (844A vs 844E), same cause as DoWarnSetB */
 void far DoHealthSetY(struct Event far *ev)
 {
     struct Rect r;
@@ -288,7 +294,6 @@ void far DoHealthSetY(struct Event far *ev)
     fd_50F6_0FBA = (r.bottom - ev->v) * 100 / (r.bottom - r.top);
     f_0250_0E9D();
 }
-/* SCAFFOLD END */
 
 extern int _fastcall win_IsWinInFront(int win);
 extern void far OpenMapYard(void);

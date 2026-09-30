@@ -54,6 +54,7 @@ def main() -> int:
     ap.add_argument("--profile")
     ap.add_argument("--flags", nargs="*")
     ap.add_argument("--placement", action="append", default=[], help="SEGNAME=SEG:OFF:SIZE")
+    ap.add_argument("--drop-placement", action="append", default=[], help="SEGNAME to remove (e.g. renamed segment)")
     ap.add_argument("--steered", default=None)
     ap.add_argument("--extent", help="START:END linear (hex): claim the complete module segment (exact TU)")
     ap.add_argument("--asm-evidence", default=None,
@@ -61,7 +62,7 @@ def main() -> int:
     ap.add_argument("--verify-only", action="store_true")
     a = ap.parse_args()
 
-    unit, segs = a.module.split(":")
+    unit, segs = a.module.replace(";", ":").split(":")  # undo MSYS path-list conversion
     seg = int(segs, 16)
     key = f"{unit}:{seg:04X}"
     text = a.candidate.read_text(encoding="latin1")
@@ -77,9 +78,14 @@ def main() -> int:
         profile = a.profile or (mod["profile"] if mod else ("masm510" if lang == "asm" else fnmod.DEFAULT_PROFILE))
         flags = a.flags if a.flags is not None else (mod["flags"] if mod else fnmod.profile_flags(profile))
         placements = dict(mod.get("placements", {})) if mod else {}
+        for n in a.drop_placement:
+            # e.g. /Zi renumbers a module-defined far segment (UNIT5_DATA -> UNIT7_DATA); the
+            # replacement placement is verified like any other before anything is written
+            if placements.pop(n, None) is None:
+                raise SystemExit(f"--drop-placement: {n} is not a placement of {key}")
         for p in a.placement:
             n, addr = p.split("=")
-            s, o, z = addr.split(":")
+            s, o, z = addr.replace(";", ":").split(":")  # undo MSYS path-list conversion
             placements[n] = {"seg": int(s, 16), "off": int(o, 16), "size": int(z)}
         owned = {c["name"]: k for k, m in man["modules"].items() for c in m["claims"]}
         new_claims = []

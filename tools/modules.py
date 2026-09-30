@@ -331,7 +331,5 @@ def struct_pack(buf: bytearray, at: int, v: int) -> None:
 
 def write_manifest(man: dict) -> None:
     """Atomic replace, so concurrent readers never see a partial manifest."""
-    import os
-    tmp = MANIFEST.with_suffix(f".tmp{os.getpid()}")
-    tmp.write_text(json.dumps(man, indent=1) + "\n")
-    os.replace(tmp, MANIFEST)
+    from lockfile import atomic_write_text
+    atomic_write_text(MANIFEST, json.dumps(man, indent=1) + "\n")

@@ -42,10 +42,8 @@ def load() -> dict:
 def save(d: dict) -> None:
     for k in ("code", "data", "runtime"):
         d[k] = dict(sorted(d.get(k, {}).items()))
-    # atomic replace: concurrent readers (modmap, context, search) never see a partial file
-    tmp = SYMBOLS.with_suffix(f".tmp{os.getpid()}")
-    tmp.write_text(json.dumps(d, indent=1) + "\n")
-    os.replace(tmp, SYMBOLS)
+    from lockfile import atomic_write_text
+    atomic_write_text(SYMBOLS, json.dumps(d, indent=1) + "\n")
 
 
 def bootstrap() -> int:

@@ -19,6 +19,8 @@ REG-1 below is a case where the MSC 5.10 rule is false for 6.00.
 | VER-2 | VERIFIED | MSC 6.00 and 6.00A also differ under `/Oeg`: module 1A53 `db_LoadObject` is 218 bytes (original) only under 6.00A; 6.00 cross-jumps the `mov dx,[bp-8]` tail (210 bytes). Every accepted module is exact under 6.00A. | db_LoadObject, f_1A28_0224 | msc600: 210 bytes |
 | VER-3 | VERIFIED | The build compiler is the DOS-extended **MSC 6.00AX** (`CL /EM`: C1L, C2L, C3L in protected mode). With the same source, module 0AD9 is a complete exact TU only under `msc600ax`. Real-mode 6.00A and the bound C2L both emit `DoAntLions` at 1001 bytes instead of 1002 (the global allocator is not applied); the other 18 functions are exact under all three. Every accepted C module is also exact under 6.00AX. | DoAntLions (root:0AD9) | msc600a / msc600a-c2l: 1001 bytes |
 | ZI-1 | STRONGLY SUPPORTED | The game modules were compiled with **`/Zi`** (CodeView). `/Zi` does not change code bytes, but it starts a new LEDATA record at every function (and keeps the ~52-line-entry flush), so the FIXUPP order inside each RTLink target group matches the original *across function boundaries*. The complete-TU gate now checks that order over the whole segment (`modules.extent_reloc_order`). With `/Zi` and the same sources, 18 of 22 complete C modules have proven cross-function order. Without it, 14 failed: records that are too large (no debug flag) or too sparse (`/Zd`). /Zi also breaks a record at every C label, even an unreferenced one (worker rootD, build/workers/rootD/p/z1.c vs z2.c). Counterexamples: modules 277E (sound device setup) and 0798 (caste/mode triangles) have proven cross-function order *without* /Zi and fail with it, so /Zi was a per-file option, not global. Decide it per module by the order evidence. | S22 (worker ovl22), 171C (worker mem), 18 complete TUs (supervisor re-verification 2026-09-30) | same sources without /Zi or with /Zd: 14 of 22 complete TUs fail cross-function order |
+| ASM-2 | VERIFIED | MSC 6.00, 6.00A and 6.00AX always save DI before SI (`push di; push si` ... `pop si; pop di`), including around inline `_asm` and under /Gs, /Oeg and /Ox. A framed procedure that saves `push si; push di` is not MSC output. This, together with self-modifying raster-op templates, data in code segments and `retn` subroutines inside far procs, classifies display drivers S00–S03 as genuine assembly. | every S15/S16 C function (positive control) | driver procs S00–S03 (`push si; push di [push ds]`) |
+| ZI-2 | STRONGLY SUPPORTED | Under /Zi a *referenced* goto label starts a new LEDATA record (forward or backward); an unreferenced label, or the same code under /Zd or without debug info, does not. A label is therefore visible in the within-group relocation order, and relocation order can prove that a label is absent (21FA win_DrawObjectI). /Zi model: breaks at every function start and at the body start, at referenced labels, and a LINNUM/LEDATA flush every 52 counted line entries (entries merged at one offset still count). | build/workers/zifix/lab1.c, lab3.c | lab2.c, lab4.c, lab5.c; lab1.c under /Zd |
 | VER-1 | VERIFIED | MSC 6.00 and 6.00A differ in `/Ol` strength reduction of an array walk: 6.00 computes `shl ax,1; add ax,offset arr` from a zero counter, 6.00A stores `offset arr` directly. | — (no accepted `/Ol` function yet) | all other probed flags byte-identical |
 
 ## Observations not yet promoted to rules
@@ -151,5 +153,17 @@ REG-1 below is a case where the MSC 5.10 rule is false for 6.00.
   hash of their names, and ties go to the later declaration. Private static names are unknown,
   so names that reproduce the layout are *layout-consistent hypotheses*, not recovered names.
   Record them as such.
+* **Genuine-assembly sources are symbolic transcriptions.** For modules classified as assembly
+  (ASM-1/ASM-2), the source is a readable MASM rendering of the original instructions (labels,
+  named procs, named data and far targets; generator build/workers/ovlA/d2a.py). It is the only
+  form an assembly reconstruction can take, so it is counted separately from C
+  (`exact_asm_bytes`) and never as recovered C.
+* **MASM 5.10 encoding details** (worker ovlA): a forward `jmp` becomes `EB xx 90` (write
+  `jmp short` when the original has no pad, `jmp near ptr` for an in-range `E9`); `xchg r,r` puts
+  the first operand in the reg field; a forward code label in a memory operand needs an explicit
+  `cs:`.
+* **RTLink groups own-segment far references by target offset** (per called label), e.g. the
+  S00:31AD / S01 call runs; the relocation key of an own-segment pointer includes the target
+  offset.
 * **Relocation order** inside a module is target-grouped by RTLink (open, see
   `docs/exe-format.md`).

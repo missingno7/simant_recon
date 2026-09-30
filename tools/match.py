@@ -58,7 +58,13 @@ def obj_name_lookup(name: str) -> dict | None:
     _fastcall names carry a leading '@')."""
     if name.startswith("@"):
         name = "_" + name[1:]
-    return symbols().get(name)
+    rec = symbols().get(name)
+    if rec is None and not name.startswith("_"):
+        # pascal convention: no underscore, upper-cased; accept only a unique case-insensitive match
+        hits = [r for n, r in symbols().items() if n[1:].upper() == name.upper()]
+        if len(hits) == 1:
+            rec = hits[0]
+    return rec
 
 
 def public_in(obj, cname: str):
@@ -259,7 +265,10 @@ class Binder:
                     frame = seg if kind != "group" else DGROUP_SEG
                     struct.pack_into("<H", payload, rel + 2, frame)
                     cand_relocs.append(t.linear + rel + 2)
-                    reloc_key[t.linear + rel + 2] = f"{f['target_kind']}:{f['target']}"
+                    # RTLink groups own-segment far references by target offset (per called label),
+                    # not as one segment group (worker ovlA, S00:31AD / S01 call runs)
+                    reloc_key[t.linear + rel + 2] = (f"{f['target_kind']}:{f['target']}"
+                                                     + (f"+{tgt_off:04X}" if kind == "own" else ""))
                     res.reloc_index[t.linear + rel + 2] = fix_index
             elif loc == "base16":
                 frame = seg if kind != "group" else DGROUP_SEG

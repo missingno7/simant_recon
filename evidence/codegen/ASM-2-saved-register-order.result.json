@@ -1,0 +1,161 @@
+{
+ "id": "ASM-2",
+ "question": "Does MSC 6.00(A/AX) ever save SI before DI ('push si; push di' ... 'pop di; pop si'), as the display-driver overlays S00-S03 do?",
+ "results": [
+  {
+   "variant": "c_si_di",
+   "profile_index": 0,
+   "profile": "msc600ax",
+   "flags": [
+    "/AL",
+    "/Os",
+    "/Gs"
+   ],
+   "source_sha256": "47494e1b1d050cde419f520dc7c90a8aef2d86e9ee6852698dff7c86e6a0e951",
+   "bytes": "558bec83ec0657568b46068b56088946fa8956fc2bf68976feeb0e8bded1e3c47efa268b010146fe4639760a7fed8b46fe5e5f8be55dcb",
+   "disasm": "push bp; mov bp, sp; sub sp, 6; push di; push si; mov ax, word ptr [bp + 6]; mov dx, word ptr [bp + 8]; mov word ptr [bp - 6], ax; mov word ptr [bp - 4], dx; sub si, si; mov word ptr [bp - 2], si; jmp 0x29; mov bx, si; shl bx, 1; les di, ptr [bp - 6]; mov ax, word ptr es:[bx + di]; add word ptr [bp - 2], ax; inc si; cmp word ptr [bp + 0xa], si; jg 0x1b; mov ax, word ptr [bp - 2]; pop si; pop di; mov sp, bp; pop bp; retf"
+  },
+  {
+   "variant": "inline_asm_si_di",
+   "profile_index": 0,
+   "profile": "msc600ax",
+   "flags": [
+    "/AL",
+    "/Os",
+    "/Gs"
+   ],
+   "source_sha256": "9220d1245a34aa1f8213d9e24016555a7325c204f8310970c1a1263d1953b2e7",
+   "bytes": "558bec83ec0257561ec57606c47e0aad8946fe1f5e5f8be55dcb",
+   "disasm": "push bp; mov bp, sp; sub sp, 2; push di; push si; push ds; lds si, ptr [bp + 6]; les di, ptr [bp + 0xa]; lodsw ax, word ptr [si]; mov word ptr [bp - 2], ax; pop ds; pop si; pop di; mov sp, bp; pop bp; retf"
+  },
+  {
+   "variant": "inline_asm_di_first",
+   "profile_index": 0,
+   "profile": "msc600ax",
+   "flags": [
+    "/AL",
+    "/Os",
+    "/Gs"
+   ],
+   "source_sha256": "661299dcaf19afa0ba3058272906965553fdfad24310c9b2a1c4a9ce12930bb2",
+   "bytes": "558bec83ec025756c47e0ac57606ad5e5f8be55dcb",
+   "disasm": "push bp; mov bp, sp; sub sp, 2; push di; push si; les di, ptr [bp + 0xa]; lds si, ptr [bp + 6]; lodsw ax, word ptr [si]; pop si; pop di; mov sp, bp; pop bp; retf"
+  },
+  {
+   "variant": "c_si_di",
+   "profile_index": 1,
+   "profile": "msc600ax",
+   "flags": [
+    "/AL",
+    "/Os",
+    "/Oe",
+    "/Og"
+   ],
+   "source_sha256": "47494e1b1d050cde419f520dc7c90a8aef2d86e9ee6852698dff7c86e6a0e951",
+   "bytes": "558becb808009a0000000057568b46068b56088946f88ec22bdb8bfbeb0b8bf3d1e60376f826033c43395e0a7ff08bc75e5f8be55dcb",
+   "disasm": "push bp; mov bp, sp; mov ax, 8; lcall 0, 0; push di; push si; mov ax, word ptr [bp + 6]; mov dx, word ptr [bp + 8]; mov word ptr [bp - 8], ax; mov es, dx; sub bx, bx; mov di, bx; jmp 0x29; mov si, bx; shl si, 1; add si, word ptr [bp - 8]; add di, word ptr es:[si]; inc bx; cmp word ptr [bp + 0xa], bx; jg 0x1e; mov ax, di; pop si; pop di; mov sp, bp; pop bp; retf"
+  },
+  {
+   "variant": "inline_asm_si_di",
+   "profile_index": 1,
+   "profile": "msc600ax",
+   "flags": [
+    "/AL",
+    "/Os",
+    "/Oe",
+    "/Og"
+   ],
+   "source_sha256": "9220d1245a34aa1f8213d9e24016555a7325c204f8310970c1a1263d1953b2e7",
+   "bytes": "558becb802009a0000000057561ec57606c47e0aad8946fe1f5e5f8be55dcb",
+   "disasm": "push bp; mov bp, sp; mov ax, 2; lcall 0, 0; push di; push si; push ds; lds si, ptr [bp + 6]; les di, ptr [bp + 0xa]; lodsw ax, word ptr [si]; mov word ptr [bp - 2], ax; pop ds; pop si; pop di; mov sp, bp; pop bp; retf"
+  },
+  {
+   "variant": "inline_asm_di_first",
+   "profile_index": 1,
+   "profile": "msc600ax",
+   "flags": [
+    "/AL",
+    "/Os",
+    "/Oe",
+    "/Og"
+   ],
+   "source_sha256": "661299dcaf19afa0ba3058272906965553fdfad24310c9b2a1c4a9ce12930bb2",
+   "bytes": "558becb802009a000000005756c47e0ac57606ad5e5f8be55dcb",
+   "disasm": "push bp; mov bp, sp; mov ax, 2; lcall 0, 0; push di; push si; les di, ptr [bp + 0xa]; lds si, ptr [bp + 6]; lodsw ax, word ptr [si]; pop si; pop di; mov sp, bp; pop bp; retf"
+  },
+  {
+   "variant": "c_si_di",
+   "profile_index": 2,
+   "profile": "msc600a",
+   "flags": [
+    "/AL",
+    "/Ox"
+   ],
+   "source_sha256": "47494e1b1d050cde419f520dc7c90a8aef2d86e9ee6852698dff7c86e6a0e951",
+   "bytes": "558bec83ec1257568b5e0a8b46068b56088bc88956f02bc08946f80bdb7f058bd8eb15908b46f08ed88bf18bcb8b5ef88bfe4646031de2f8b800008ed88bc35e5f8be55dcb90",
+   "disasm": "push bp; mov bp, sp; sub sp, 0x12; push di; push si; mov bx, word ptr [bp + 0xa]; mov ax, word ptr [bp + 6]; mov dx, word ptr [bp + 8]; mov cx, ax; mov word ptr [bp - 0x10], dx; sub ax, ax; mov word ptr [bp - 8], ax; or bx, bx; jg 0x24; mov bx, ax; jmp 0x38; nop; mov ax, word ptr [bp - 0x10]; mov ds, ax; mov si, cx; mov cx, bx; mov bx, word ptr [bp - 8]; mov di, si; inc si; inc si; add bx, word ptr [di]; loop 0x30; mov ax, 0; mov ds, ax; mov ax, bx; pop si; pop di; mov sp, bp; pop bp; retf; nop"
+  },
+  {
+   "variant": "inline_asm_si_di",
+   "profile_index": 2,
+   "profile": "msc600a",
+   "flags": [
+    "/AL",
+    "/Ox"
+   ],
+   "source_sha256": "9220d1245a34aa1f8213d9e24016555a7325c204f8310970c1a1263d1953b2e7",
+   "bytes": "558bec83ec0257561ec57606c47e0aad8946fe1f5e5f8be55dcb",
+   "disasm": "push bp; mov bp, sp; sub sp, 2; push di; push si; push ds; lds si, ptr [bp + 6]; les di, ptr [bp + 0xa]; lodsw ax, word ptr [si]; mov word ptr [bp - 2], ax; pop ds; pop si; pop di; mov sp, bp; pop bp; retf"
+  },
+  {
+   "variant": "inline_asm_di_first",
+   "profile_index": 2,
+   "profile": "msc600a",
+   "flags": [
+    "/AL",
+    "/Ox"
+   ],
+   "source_sha256": "661299dcaf19afa0ba3058272906965553fdfad24310c9b2a1c4a9ce12930bb2",
+   "bytes": "558bec83ec025756c47e0ac57606ad5e5f8be55dcb90",
+   "disasm": "push bp; mov bp, sp; sub sp, 2; push di; push si; les di, ptr [bp + 0xa]; lds si, ptr [bp + 6]; lodsw ax, word ptr [si]; pop si; pop di; mov sp, bp; pop bp; retf; nop"
+  }
+ ],
+ "checks": [
+  {
+   "check": "c_si_di@0",
+   "needle": "push di; push si",
+   "ok": true
+  },
+  {
+   "check": "inline_asm_si_di@0",
+   "needle": "push di; push si",
+   "ok": true
+  },
+  {
+   "check": "inline_asm_di_first@0",
+   "needle": "push di; push si",
+   "ok": true
+  },
+  {
+   "check": "c_si_di@1",
+   "needle": "push di; push si",
+   "ok": true
+  },
+  {
+   "check": "inline_asm_si_di@1",
+   "needle": "push di; push si",
+   "ok": true
+  },
+  {
+   "check": "c_si_di@2",
+   "needle": "push di; push si",
+   "ok": true
+  },
+  {
+   "check": "inline_asm_si_di@2",
+   "needle": "push di; push si",
+   "ok": true
+  }
+ ],
+ "all_checks_pass": true
+}

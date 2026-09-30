@@ -281,18 +281,17 @@ void _fastcall win_DrawObjectI(struct WinObj far *obj)
         f_24AB_02AD(*(char far *)&obj->data[1]);
         if (*(char far * far * far *)&obj->data[2] == 0) {
             text = (char far *)obj + 0x2e;
-            if (g_6300 == 0 && _fstrchr(text, '%') != 0)
-                goto doneText;
+            if (g_6300 != 0 || _fstrchr(text, '%') == 0) {
         drawText:
-            f_24AB_02AD(*(char far *)&obj->data[1]);
-            gr_JustifyStrInRect(((unsigned)obj->flags & 0x180) >> 7, rect, text);
+                f_24AB_02AD(*(char far *)&obj->data[1]);
+                gr_JustifyStrInRect(((unsigned)obj->flags & 0x180) >> 7, rect, text);
+            }
         } else {
             h = *(char far * far * far *)&obj->data[2];
             p = f_171C_1B84(h);
             gr_JustifyStrInRect(((unsigned)obj->flags & 0x180) >> 7, rect, p);
             f_171C_1BBA(h);
         }
-    doneText:
         f_24AB_02AD(0);
         break;
     case 18:
@@ -384,8 +383,9 @@ void _fastcall win_DrawWinIcons(char far *w)
     }
 }
 
-/* Unclaimed draft: bytes exact; the original object breaks its LEDATA record between
- * 0A35 and 0A55 (sprintf relocation group order). */
+/* Bytes exact; relocation order WITHIN_GROUP_PENDING: the original object breaks its
+ * LEDATA record between 0A35 and 0A55 (sprintf group).  Under /Zi that is the 52-entry
+ * line flush landing 9-10 line entries earlier than in this source (or a goto label). */
 void _fastcall win_DrawWindow(int win)
 {
     char buf[40];

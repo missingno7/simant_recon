@@ -34,6 +34,25 @@ def _alive(pid: int) -> bool:
             return False
 
 
+def atomic_write_text(path, text: str, attempts: int = 50) -> None:
+    """Write via a temp file and os.replace, retrying while a concurrent reader holds the
+    target open (Windows PermissionError); never leaves a partial target or a stray temp."""
+    import os
+    import time
+    from pathlib import Path
+    path = Path(path)
+    tmp = path.with_suffix(path.suffix + f".tmp{os.getpid()}")
+    tmp.write_text(text)
+    for i in range(attempts):
+        try:
+            os.replace(tmp, path)
+            return
+        except PermissionError:
+            time.sleep(0.05 * (i + 1))
+    tmp.unlink(missing_ok=True)
+    raise PermissionError(f"could not replace {path}")
+
+
 class CanonicalLock:
     def __init__(self, timeout: float = 900.0):
         self.timeout = timeout

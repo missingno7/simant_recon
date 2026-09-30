@@ -122,12 +122,6 @@ void far win_PrintfAtObj(int, char far *, ...);
 void far win_DrawHBar(int, long);
 void far win_DrawVBar(int, long);
 void far f_22BF_0E83(int, int);
-void far win_DrawVBar(int, long);
-void far f_22BF_0E83(int, int);
-
-
-
-
 
 struct Pt _fastcall win_StringSize(char far *text)
 {
@@ -137,7 +131,6 @@ struct Pt _fastcall win_StringSize(char far *text)
     size.y = f_24AB_030B();
     return size;
 }
-
 
 void _fastcall win_GetObjSize(int obj, struct Pt far *size)
 {
@@ -152,7 +145,6 @@ void _fastcall win_GetObjSize(int obj, struct Pt far *size)
     win_UnlockWin(obj);
 }
 
-
 void _fastcall f_22BF_00AA(int obj, struct Rect far *r)
 {
     win_LockWin(obj);
@@ -166,7 +158,6 @@ void _fastcall f_22BF_00DD(int obj, struct Rect far *r)
     *(struct Rect far *)(win_ObjAddr(obj) + 8) = *r;
     win_UnlockWin(obj);
 }
-
 
 void _fastcall win_SetObjSelectableState(int obj, int state)
 {
@@ -233,8 +224,6 @@ void _fastcall win_MakeGroupUnselectable(int win, int group)
     win_SetGroupSelectableState(win, group, 0);
 }
 
-
-
 void _fastcall win_ObjInv(int obj)
 {
     char far *w;
@@ -266,7 +255,6 @@ void _fastcall win_SetObjSelectedStateI(int obj, int selected)
     win_UnlockWin(obj);
 }
 
-
 void _fastcall win_SetObjSelectedState(int obj, int selected)
 {
     unsigned char far *o;
@@ -288,7 +276,6 @@ void _fastcall win_MakeObjUnselected(int obj)
 {
     win_SetObjSelectedState(obj, 0);
 }
-
 
 void _fastcall win_SetGroupSelectedState(int win, int group, int selected)
 {
@@ -338,7 +325,6 @@ void _fastcall win_MakeObjInvisible(int obj)
     win_SetObjVisibleState(obj, 0);
 }
 
-
 void _fastcall win_SetGroupVisibleState(int win, int group, int visible)
 {
     char far *w;
@@ -370,7 +356,6 @@ void _fastcall win_MakeGroupInvisible(int win, int group)
     win_SetGroupVisibleState(win, group, 0);
 }
 
-
 void _fastcall f_22BF_0555(int obj, char far *text)
 {
     char far *p;
@@ -379,7 +364,6 @@ void _fastcall f_22BF_0555(int obj, char far *text)
     if (p)
         _fstrcpy(p + 1, text);
 }
-
 
 void far win_SetObjFormatStr(int obj, ...)
 {
@@ -407,7 +391,6 @@ void far win_SetObjFormatStr(int obj, ...)
     win_UnlockWin(obj);
 }
 
-
 void far win_CenterStrAtObj(int obj, char far *text)
 {
     struct Rect r;
@@ -419,7 +402,6 @@ void far win_CenterStrAtObj(int obj, char far *text)
     f_208F_011F(&r, text);
     clip_Pop();
 }
-
 
 void far win_ObjFormatPrint(int obj, ...)
 {
@@ -449,7 +431,6 @@ void far win_ObjFormatPrint(int obj, ...)
     f_171C_1BBA(rec);
     win_UnlockWin(obj);
 }
-
 
 int _fastcall win_SetPalette(int id)
 {
@@ -487,7 +468,6 @@ void _fastcall f_22BF_094F(int obj, int color)
     win_ObjAddr(obj)[0x26] = color;
 }
 
-
 void _fastcall win_SetObjBitmap(int obj, int bitmap)
 {
     char far *o;
@@ -499,7 +479,6 @@ void _fastcall win_SetObjBitmap(int obj, int bitmap)
     *(int far *)(o + 0x28) = bitmap;
     win_UnlockWin(obj);
 }
-
 
 int _fastcall win_IsWinOpen(int win)
 {
@@ -600,10 +579,6 @@ void _fastcall f_22BF_0B5B(struct Rect far *dst, struct Rect far *src, int l, in
     dst->bottom = src->bottom + b;
 }
 
-
-
-
-
 /* SCAFFOLD BEGIN: win_DoProxMenu draft (modal dialog loop).
    Residue: symbol-table count; with +12 identifiers before 0271, +5 before 04A7
    and +14 before this function the whole module is exact (result = -1 lives in DI,
@@ -637,7 +612,6 @@ int far win_DoProxMenu(int win, int item, int p0, int p1)
     return result;
 }
 /* SCAFFOLD END */
-
 
 void far f_22BF_0C38(int obj)
 {
@@ -684,7 +658,6 @@ void far win_PrintfAtObj(int obj, char far *format, ...)
     win_CenterStrAtObj(obj, buf);
 }
 
-
 void far win_DrawHBar(int obj, long fraction)
 {
     struct Rect r;
@@ -729,7 +702,6 @@ void far win_DrawVBar(int obj, long fraction)
         f_1CE2_046D(&r, g_3DE2);
     }
 }
-
 
 void far f_22BF_0E83(int src, int dst)
 {
