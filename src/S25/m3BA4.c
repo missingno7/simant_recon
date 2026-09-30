@@ -17,12 +17,12 @@ extern int far fd_50F6_084E;
 extern int far fd_50F6_048C;
 extern int far fd_50F6_047C;
 extern int far f_00F8_0459(int value);
+extern int far fd_50F6_0AD6;
 extern int far fd_50F6_048A;
 extern int far f_0BE8_0B21(int x1, int y1, int x2, int y2);
 extern int far fd_50F6_0496;
 extern void far f_0250_0E91(void);
 extern int far fd_50F6_08E2;
-extern int far fd_50F6_0AD6;
 extern int far fd_50F6_09F0;
 extern int far fd_50F6_0AB6;
 extern int far fd_50F6_0AC6;
@@ -146,6 +146,15 @@ void far DoAntMoveY(void)
 }
 
 #if 0
+/* Best draft under MSC 6.00AX /Oe /Og /Zi (worker big): same length, same relocation set,
+ * 13 bytes differ -- only the frame slots of tx and tattr are swapped ([bp-0Ch]/[bp-0Ah]).
+ * Slots of address-taken locals are ordered by use weight (ties by push order); the
+ * original needs one more use of tattr (or one fewer of tx) than this text has: any added
+ * tattr read flips the order but changes code.  The duplicated "entered" test after
+ * EnterNest and ExitNest is cross-jumped by C2 exactly as in the original; the separate
+ * 'tile' local restores o25_3BA4_13AB's identifier count.  Under 6.00A and the bound C2L
+ * this body gets C4203 (2147 bytes, 0.72 similar).  Enabling it also needs the /Zi
+ * line-entry layout of the stand-in (filler reads) to be matched by the real line count. */
 void far DoAntMoveY(void)
 {
     int dir;
@@ -160,6 +169,7 @@ void far DoAntMoveY(void)
     int d;
     int dx;
     int dy;
+    int tile;
 
     if (fd_50F6_0AA0 == 0)
         return;
@@ -205,10 +215,11 @@ void far DoAntMoveY(void)
         result = d;
         goto done;
     }
+    x = fd_3D57_0000[d] + fd_50F6_047C;
     y = fd_3D57_0008[d] + fd_50F6_048A;
     fd_50F6_0AB6 = fd_50F6_047C;
     fd_50F6_0AC6 = fd_50F6_048A;
-    f_10F7_0ACE(fd_50F6_048C, x = fd_3D57_0000[d] + fd_50F6_047C, y, fd_50F6_04C2, d);
+    f_10F7_0ACE(fd_50F6_048C, x, y, fd_50F6_04C2, d);
     fd_50F6_0C3E++;
     if (fd_50F6_048C == 1) {
         if (fd_50F6_04C4 > 0 && (fd_50F6_04C2 == 0x18 || fd_50F6_04C2 == 0x38)) {
@@ -238,7 +249,12 @@ void far DoAntMoveY(void)
             f_10F7_0B40();
             d = fd_50F6_048C;
             o25_3BA4_1035();
-            goto entered;
+            if (fd_50F6_0AF8 != d || fd_50F6_0AD6 != x || fd_50F6_0AE8 != y
+                || fd_50F6_048C == fd_50F6_032E)
+                goto done;
+            if (fd_3D57_07A8[0] == 0)
+                f_015B_06A2();
+            goto moved;
         }
         goto done;
     }
@@ -246,7 +262,6 @@ void far DoAntMoveY(void)
         f_10F7_0B40();
         d = fd_50F6_048C;
         ExitNest();
-    entered:
         if (fd_50F6_0AF8 != d || fd_50F6_0AD6 != x || fd_50F6_0AE8 != y
             || fd_50F6_048C == fd_50F6_032E)
             goto done;
@@ -297,8 +312,8 @@ done:
     }
     o22_39C7_07FD(fd_50F6_048C, fd_50F6_047C, fd_50F6_048A);
     if (fd_50F6_0F24 != 0 && fd_50F6_048C == 1) {
-        d = fd_3E1D_0180[fd_50F6_047C][fd_50F6_048A];
-        if (d == 0x76 || d == 0x78)
+        tile = fd_3E1D_0180[fd_50F6_047C][fd_50F6_048A];
+        if (tile == 0x76 || tile == 0x78)
             o22_39C7_0D21(10);
     }
 }

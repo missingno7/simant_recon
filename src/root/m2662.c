@@ -343,12 +343,12 @@ void far f_2662_087B(Handle h, int id)
     f_171C_1BBA(h);
 }
 
-/* SCAFFOLD BEGIN: f_2662_090D (SetObjectPos-like) best draft, kept in place for the _DATA
- * literal order.  Byte-exact (only within-group relocation order pending) when the identifier
- * count before it is 7 higher (mod 17), e.g. seven extra `extern int` declarations between
- * f_2662_0348 and this function; with the natural declaration set the `and` operand order of
- * the width comparison and of `pri = y + size.h` differ.  The dead `reinsert = 0` store and the
- * absent ES save around f_208F_0419 need the (constant-folded) reinsert test. */
+/* The two prototypes below (named parameters) precede f_2662_090D, which calls both functions.
+ * They add seven identifiers before it: f_2662_090D's operand order (width-mask comparison,
+ * pri = y + size.h) is exact only at this identifier count (see promotion --steered). */
+int far f_2662_0348(Handle h, int x, int y, int pic, int pri);
+void far f_2662_059C(Handle h, int id);
+
 void far f_2662_090D(int x, int y, int pic, Handle h, int id, int pri)
 {
     int reinsert;
@@ -413,7 +413,6 @@ again:
     f_171C_1BBA(set->objs);
     f_171C_1BBA(h);
 }
-/* SCAFFOLD END */
 
 static int s_688A = 0;
 

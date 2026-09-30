@@ -1,0 +1,87 @@
+{
+ "id": "REG-2",
+ "question": "Does a local that only carries the return value (and is therefore eliminated) still take part in SI/DI assignment under /Oe /Og? Positive control o25_3BA4_1A9F (S25:3BA4): exact only when each branch assigns r and the function ends with 'return r;' (p1 lands in DI: push di ... pop di); with direct 'return call(...)' p1 takes SI.",
+ "results": [
+  {
+   "variant": "result_local",
+   "profile_index": 0,
+   "profile": "msc600ax",
+   "flags": [
+    "/AL",
+    "/Os",
+    "/Oe",
+    "/Og",
+    "/Zi"
+   ],
+   "source_sha256": "7d9e4452d17422d2940852434142a1d9d0653043872bdb38874af40e3fb9608d",
+   "bytes": "558bec33c09a00000000578b7e0683ff017f16837e0c017e158e06000026ff36020026ff360000eb1b397e0c7508ff7610ff760eeb0e8e06020026ff36020026ff360000ff760aff7608579a0000000083c40a5f8be55dcb",
+   "disasm": "push bp; mov bp, sp; xor ax, ax; lcall 0, 0; push di; mov di, word ptr [bp + 6]; cmp di, 1; jg 0x29; cmp word ptr [bp + 0xc], 1; jle 0x2e; mov es, word ptr [0]; push word ptr es:[2]; push word ptr es:[0]; jmp 0x44; cmp word ptr [bp + 0xc], di; jne 0x36; push word ptr [bp + 0x10]; push word ptr [bp + 0xe]; jmp 0x44; mov es, word ptr [2]; push word ptr es:[2]; push word ptr es:[0]; push word ptr [bp + 0xa]; push word ptr [bp + 8]; push di; lcall 0, 0; add sp, 0xa; pop di; mov sp, bp; pop bp; retf"
+  },
+  {
+   "variant": "direct_return",
+   "profile_index": 0,
+   "profile": "msc600ax",
+   "flags": [
+    "/AL",
+    "/Os",
+    "/Oe",
+    "/Og",
+    "/Zi"
+   ],
+   "source_sha256": "1b68eb2debad30bbea2f53fcdada3883cf148b8d4a3d83375c77d0c34ac6ae3b",
+   "bytes": "558bec33c09a00000000568b760683fe017f16837e0c017e158e06000026ff36020026ff360000eb1b39760c7508ff7610ff760eeb0e8e06020026ff36020026ff360000ff760aff7608569a0000000083c40a5e8be55dcb",
+   "disasm": "push bp; mov bp, sp; xor ax, ax; lcall 0, 0; push si; mov si, word ptr [bp + 6]; cmp si, 1; jg 0x29; cmp word ptr [bp + 0xc], 1; jle 0x2e; mov es, word ptr [0]; push word ptr es:[2]; push word ptr es:[0]; jmp 0x44; cmp word ptr [bp + 0xc], si; jne 0x36; push word ptr [bp + 0x10]; push word ptr [bp + 0xe]; jmp 0x44; mov es, word ptr [2]; push word ptr es:[2]; push word ptr es:[0]; push word ptr [bp + 0xa]; push word ptr [bp + 8]; push si; lcall 0, 0; add sp, 0xa; pop si; mov sp, bp; pop bp; retf"
+  },
+  {
+   "variant": "result_local",
+   "profile_index": 1,
+   "profile": "msc600a",
+   "flags": [
+    "/AL",
+    "/Os",
+    "/Oe",
+    "/Og"
+   ],
+   "source_sha256": "7d9e4452d17422d2940852434142a1d9d0653043872bdb38874af40e3fb9608d",
+   "bytes": "558bec33c09a00000000578b7e0683ff017f16837e0c017e158e06000026ff36020026ff360000eb1b397e0c7508ff7610ff760eeb0e8e06020026ff36020026ff360000ff760aff7608579a0000000083c40a5f8be55dcb",
+   "disasm": "push bp; mov bp, sp; xor ax, ax; lcall 0, 0; push di; mov di, word ptr [bp + 6]; cmp di, 1; jg 0x29; cmp word ptr [bp + 0xc], 1; jle 0x2e; mov es, word ptr [0]; push word ptr es:[2]; push word ptr es:[0]; jmp 0x44; cmp word ptr [bp + 0xc], di; jne 0x36; push word ptr [bp + 0x10]; push word ptr [bp + 0xe]; jmp 0x44; mov es, word ptr [2]; push word ptr es:[2]; push word ptr es:[0]; push word ptr [bp + 0xa]; push word ptr [bp + 8]; push di; lcall 0, 0; add sp, 0xa; pop di; mov sp, bp; pop bp; retf"
+  },
+  {
+   "variant": "direct_return",
+   "profile_index": 1,
+   "profile": "msc600a",
+   "flags": [
+    "/AL",
+    "/Os",
+    "/Oe",
+    "/Og"
+   ],
+   "source_sha256": "1b68eb2debad30bbea2f53fcdada3883cf148b8d4a3d83375c77d0c34ac6ae3b",
+   "bytes": "558bec33c09a00000000568b760683fe017f16837e0c017e158e06000026ff36020026ff360000eb1b39760c7508ff7610ff760eeb0e8e06020026ff36020026ff360000ff760aff7608569a0000000083c40a5e8be55dcb",
+   "disasm": "push bp; mov bp, sp; xor ax, ax; lcall 0, 0; push si; mov si, word ptr [bp + 6]; cmp si, 1; jg 0x29; cmp word ptr [bp + 0xc], 1; jle 0x2e; mov es, word ptr [0]; push word ptr es:[2]; push word ptr es:[0]; jmp 0x44; cmp word ptr [bp + 0xc], si; jne 0x36; push word ptr [bp + 0x10]; push word ptr [bp + 0xe]; jmp 0x44; mov es, word ptr [2]; push word ptr es:[2]; push word ptr es:[0]; push word ptr [bp + 0xa]; push word ptr [bp + 8]; push si; lcall 0, 0; add sp, 0xa; pop si; mov sp, bp; pop bp; retf"
+  }
+ ],
+ "checks": [
+  {
+   "check": "result_local@0",
+   "needle": "push di; mov di, word ptr [bp + 6]",
+   "ok": true
+  },
+  {
+   "check": "direct_return@0",
+   "needle": "push si; mov si, word ptr [bp + 6]",
+   "ok": true
+  },
+  {
+   "check": "result_local@1",
+   "needle": "push di; mov di, word ptr [bp + 6]",
+   "ok": true
+  },
+  {
+   "check": "direct_return@1",
+   "needle": "push si; mov si, word ptr [bp + 6]",
+   "ok": true
+  }
+ ],
+ "all_checks_pass": true
+}

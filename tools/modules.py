@@ -128,6 +128,13 @@ def verify_module(text: str, module: dict, claims: list[dict]) -> dict:
         all_ok &= tres["exact"]
     out["exact"] = all_ok
     out["scaffold"] = sorted(scaff)
+    # functions compiled into the module that are neither claimed nor in a SCAFFOLD block
+    # (e.g. drafts kept in place for data order): unverified code, reported as debt
+    claimed = {c["name"] for c in claims}
+    code_segs = {p["segment"] for p in obj.publics if p["name"].lstrip("_@") in claimed}
+    out["inplace_drafts"] = sorted(p["name"].lstrip("_@") for p in obj.publics
+                                   if p["segment"] in code_segs and p["name"].lstrip("_@") not in claimed
+                                   and p["name"].lstrip("_@") not in scaff)
     return out
 
 

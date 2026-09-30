@@ -5963,6 +5963,24 @@
    "off": 1887,
    "grounding": "inventory:far_call"
   },
+  "f_015B_0780": {
+   "unit": "root",
+   "seg": 347,
+   "off": 1920,
+   "grounding": "reviewed: empty stack-checked far function (xor ax,ax; call __aFchkstk; retf) between f_015B_075F and f_015B_0798, unreferenced; worker rootE"
+  },
+  "f_015B_0788": {
+   "unit": "root",
+   "seg": 347,
+   "off": 1928,
+   "grounding": "reviewed: empty stack-checked far function (xor ax,ax; call __aFchkstk; retf) between f_015B_075F and f_015B_0798, unreferenced; worker rootE"
+  },
+  "f_015B_0790": {
+   "unit": "root",
+   "seg": 347,
+   "off": 1936,
+   "grounding": "reviewed: empty stack-checked far function (xor ax,ax; call __aFchkstk; retf) between f_015B_075F and f_015B_0798, unreferenced; worker rootE"
+  },
   "f_015B_0798": {
    "unit": "root",
    "seg": 347,
@@ -19268,6 +19286,11 @@
    "off": 25312,
    "grounding": "DoWinHelp (S14:384C:04FB): mov es,[8758] (=55B3); lcall es:[62E0] far function pointer declared far"
   },
+  "g_62EC": {
+   "seg": 21939,
+   "off": 25324,
+   "grounding": "defined in root:20E8 (void (far *g_62EC)() = f_20E8_0000) at DGROUP 62EC; S26 o26_39C7_0000 calls it through mov es,[CONST 8A4C = 55B3]; lcall es:[62EC] with the window id"
+  },
   "g_6300": {
    "seg": 21939,
    "off": 25344,
@@ -19397,6 +19420,16 @@
    "seg": 21939,
    "off": 36354,
    "grounding": "f_284A_038F: les bx,[8E02]; cmp byte ptr es:[bx],2Fh (far pointer to current running status; _BSS)"
+  },
+  "g_9122": {
+   "seg": 21939,
+   "off": 37154,
+   "grounding": "S26 o26_39C7_040F/0671 drag loops: cmp [bp-22h],[9122] / [bp-20h],[9124] - current mouse position (DGROUP BSS pair compared with the last tracked point)"
+  },
+  "g_9124": {
+   "seg": 21939,
+   "off": 37156,
+   "grounding": "S26 o26_39C7_040F/0671: cmp [bp-20h],[9124] mouse y paired with g_9122"
   },
   "g_9126": {
    "seg": 21939,

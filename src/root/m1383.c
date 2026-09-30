@@ -474,24 +474,19 @@ int far GetForageDir(int x, int y, int dir, int attribute)
     int value;
 
     if (x == 0) {
-        if (y == 0)
-            return 3;
-        if (y == 63)
-            return 1;
+        if (y == 0) return 3;
+        if (y == 63) return 1;
         return SRand1(3) + 1;
     }
     if (y == 0) {
-        if (x == 127)
-            return 5;
+        if (x == 127) return 5;
         return SRand1(3) + 3;
     }
     if (x == 127) {
-        if (y == 63)
-            return 7;
+        if (y == 63) return 7;
         return SRand1(3) + 5;
     }
-    if (y == 63)
-        return (SRand1(3) - 1) & 7;
+    if (y == 63) return (SRand1(3) - 1) & 7;
 
     xCell = x >> 1;
     yCell = y >> 1;
@@ -518,8 +513,7 @@ int far GetForageDir(int x, int y, int dir, int attribute)
         }
     }
     if (best > 0) {
-        if (current > best)
-            return -1;
+        if (current > best) return -1;
         return TurnTab[dir][bestDir];
     }
     return TurnTab[dir][SRand8()];
@@ -542,8 +536,7 @@ int far GetNestDir(int x, int y, int dir, int type)
     yCell = y >> 1;
     plane = type >> 7;
     nx = Bounce(x, y);
-    if (nx)
-        return (nx - 1) & 7;
+    if (nx) return (nx - 1) & 7;
     if (plane)
         current = fd_3E1D_F09F[xCell][yCell];
     else
@@ -573,12 +566,10 @@ int far GetNestDir(int x, int y, int dir, int type)
     }
     if (plane) {
         nx = GetDir(x, y, fd_3D57_02B0[0], fd_3D57_02B0[1]);
-        if (nx && SRand4())
-            return TurnTab[dir][nx - 1];
+        if (nx && SRand4()) return TurnTab[dir][nx - 1];
     } else {
         nx = GetDir(x, y, fd_3D57_02AC[0], fd_3D57_02AC[1]);
-        if (nx == 0 || SRand4() == 0)
-            return TurnTab[dir][SRand8()];
+        if (nx == 0 || SRand4() == 0) return TurnTab[dir][SRand8()];
         return TurnTab[dir][nx - 1];
     }
     return TurnTab[dir][SRand8()];
@@ -597,8 +588,7 @@ int far GetAlarmDir(int x, int y, int dir)
     xc = x >> 1;
     yc = y >> 1;
     r = Bounce(x, y);
-    if (r)
-        return (r - 1) & 7;
+    if (r) return (r - 1) & 7;
     best = 0;
     bestDir = 0;
     for (i = 0; i < 8; i++) {
@@ -608,8 +598,7 @@ int far GetAlarmDir(int x, int y, int dir)
             bestDir = i;
         }
     }
-    if (best != 0)
-        return TurnTab[dir][bestDir];
+    if (best != 0) return TurnTab[dir][bestDir];
     return TurnTab[dir][SRand8()];
 }
 
@@ -618,8 +607,7 @@ int far GetRandDir(int x, int y, int dir)
     int r;
 
     r = Bounce(x, y);
-    if (r)
-        return (r - 1) & 7;
+    if (r) return (r - 1) & 7;
     return TurnTab[dir][SRand8()];
 }
 
@@ -628,8 +616,7 @@ int far GetDefendDir(int x, int y, int dir)
     int r;
 
     r = Bounce(x, y);
-    if (r)
-        return (r - 1) & 7;
+    if (r) return (r - 1) & 7;
     switch (MePlane) {
     case 1:
         if (ChaseSpid == 1)
@@ -647,8 +634,7 @@ int far GetDefendDir(int x, int y, int dir)
     case 3:
         return GetNestDir(x, y, dir, 0x80);
     }
-    if (r)
-        return TurnTab[dir][r - 1];
+    if (r) return TurnTab[dir][r - 1];
     return dir;
 }
 
@@ -657,8 +643,7 @@ int far GetRedDefendDir(int x, int y, int dir)
     int r;
 
     r = Bounce(x, y);
-    if (r)
-        return (r - 1) & 7;
+    if (r) return (r - 1) & 7;
     switch (RedPlane) {
     case 1:
         r = GetDis(x, y, RedLocX, RedLocY);
@@ -672,31 +657,25 @@ int far GetRedDefendDir(int x, int y, int dir)
     case 3:
         return GetNestDir(x, y, dir, 0x80);
     }
-    if (r)
-        return TurnTab[dir][r - 1];
+    if (r) return TurnTab[dir][r - 1];
     return dir;
 }
 
 int far Bounce(int x, int y)
 {
     if (x == 0) {
-        if (y == 0)
-            return SRand1(3) + 3;
-        if (y == 0x3f)
-            return SRand1(3) + 1;
+        if (y == 0) return SRand1(3) + 3;
+        if (y == 0x3f) return SRand1(3) + 1;
         return SRand1(5) + 1;
     }
     if (y == 0) {
-        if (x == 0x7f)
-            return SRand1(3) + 5;
+        if (x == 0x7f) return SRand1(3) + 5;
         return SRand1(5) + 3;
     }
     if (x == 0x7f) {
-        if (y == 0x3f)
-            return SRand1(3) + 7;
+        if (y == 0x3f) return SRand1(3) + 7;
         return SRand1(5) + 5;
     }
-    if (y == 0x3f)
-        return SRand1(5) + 7;
+    if (y == 0x3f) return SRand1(5) + 7;
     return 0;
 }

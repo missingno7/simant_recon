@@ -1,0 +1,19 @@
+{
+ "id": "REG-2",
+ "question": "Does a local that only carries the return value (and is therefore eliminated) still take part in SI/DI assignment under /Oe /Og? Positive control o25_3BA4_1A9F (S25:3BA4): exact only when each branch assigns r and the function ends with 'return r;' (p1 lands in DI: push di ... pop di); with direct 'return call(...)' p1 takes SI.",
+ "header": "extern int far A[2], far B[2];\nextern int far g(int p, int x1, int y1, int x2, int y2);\n",
+ "variants": {
+  "result_local": "int far f(int p1, int x1, int y1, int p2, int x2, int y2)\n{\n    int r;\n\n    if (p1 <= 1) {\n        if (p2 <= 1)\n            r = g(p1, x1, y1, x2, y2);\n        else\n            r = g(p1, x1, y1, A[0], A[1]);\n    } else if (p2 == p1)\n        r = g(p1, x1, y1, x2, y2);\n    else\n        r = g(p1, x1, y1, B[0], B[1]);\n    return r;\n}\n",
+  "direct_return": "int far f(int p1, int x1, int y1, int p2, int x2, int y2)\n{\n    if (p1 <= 1) {\n        if (p2 <= 1)\n            return g(p1, x1, y1, x2, y2);\n        return g(p1, x1, y1, A[0], A[1]);\n    }\n    if (p2 == p1)\n        return g(p1, x1, y1, x2, y2);\n    return g(p1, x1, y1, B[0], B[1]);\n}\n"
+ },
+ "profiles": [
+  {"profile": "msc600ax", "flags": ["/AL", "/Os", "/Oe", "/Og", "/Zi"]},
+  {"profile": "msc600a", "flags": ["/AL", "/Os", "/Oe", "/Og"]}
+ ],
+ "expect": {
+  "result_local@0": "push di; mov di, word ptr [bp + 6]",
+  "direct_return@0": "push si; mov si, word ptr [bp + 6]",
+  "result_local@1": "push di; mov di, word ptr [bp + 6]",
+  "direct_return@1": "push si; mov si, word ptr [bp + 6]"
+ }
+}

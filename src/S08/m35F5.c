@@ -186,9 +186,15 @@ void far InitSimVars(void)
     fd_50F6_07C8 = 0;
 }
 
-/* DRAFT, not claimed (RandWorld): MSC 6.00 reports C4203 'function too large for
- * global optimizations' for this body, so it compiles without /Oe/Og loop and register
- * shape.  The original was globally optimised (rotated loops, SI/DI, hoisted SEG). */
+/* DRAFT, not claimed (RandWorld).  MSC 6.00A and the bound C2L report C4203 for it
+ * (1456 bytes, 0.70 similar).  Under 6.00AX /Oe /Og /Zi (worker big) this Win16-shaped text
+ * is 1371 bytes (0.98): the dead store 'y = 0' stays (mov [bp-4],ax, y shares n's slot, which
+ * is read) and loop 2 then keeps count<<6 in DI instead of the [bp-0Eh] temp, which stops the
+ * cross-jump of the two MapR tails.  Without y ([count][0]) the whole function matches except
+ * loop 1's entry: 'mov [bp-2],0 / mov di,[bp-2]' instead of the original 'sub ax,ax / mov di,ax'
+ * (4 bytes).  With a single [count][y] use only the y store remains (3 bytes).  A store is
+ * dropped only when its frame slot is never read (the y store vanishes in small functions),
+ * so the original must have placed y in an unread slot; no source form tried does that. */
 void far RandWorld(unsigned seed, int blackSize, int redSize, int mapWidth, int mapKind)
 {
     int count, y, roll, tries, lim1, lim2, x, n;

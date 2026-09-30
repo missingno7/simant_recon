@@ -725,6 +725,11 @@ extern unsigned char far LifeB[64][64];
 extern unsigned char far MapR[64][64];
 extern unsigned char far LifeR[64][64];
 
+/* OPEN (unclaimed draft, kept in place for CONST/_DATA order and identifier counts):
+ * residue: the original keeps the tile value v in [bp-2] (memory) and mx/my in SI/DI with a
+ * 4-byte frame; here v wins SI.  Taking &v reproduces the allocation (not adopted).  The
+ * sums fd_049A+fd_04C2(+fd_0496) load in the original order only with one declaration
+ * between fd_049A and fd_04C2 (mod-17 symbol order). */
 void far f_0250_1018(int x, int y)
 {
     int v;
@@ -830,6 +835,8 @@ noscent:
 
 extern unsigned char far fd_50F6_1114[30 * 40];
 
+/* OPEN: residue 2 extra frame words ([bp-2],[bp-4]) and SI/DI swapped (y param in DI,
+ * index in SI in the original). */
 void far f_0250_129E(int x, int y)
 {
     int ay;
@@ -879,6 +886,8 @@ static char far *balBufPtr;
 
 extern void far f_1E57_0EB9(void);
 
+/* OPEN: residue frame slot assignment (flags at [bp-8]/[bp-6], 18-byte frame) and the dead
+ * loads of editRect.top/left + g_19C0 in the tile loops; logic and BSS layout are exact. */
 void far f_0250_13A6(void)
 {
     int spider;
@@ -953,6 +962,8 @@ extern int far f_1B4E_000D(int color);
 extern int far fd_50F6_0FFE;
 extern void far f_1CE2_0430(struct Rect far *rect);
 
+/* OPEN: residue only the evaluation point of h = r.bottom - top: the original computes it
+ * after pushing 0x10000L and frac (inside the __aFlmul argument list). */
 void far DrawEditGraphs(void)
 {
     static int objs[3] = { 0x11, 0x12, 0x13 };
@@ -1090,6 +1101,9 @@ extern int far SRand32(void);
 void far AddMsgBalloon(int x, int y, int plane, int style, char far *msg);
 
 /*sx,sy,mx,my,l,t*/
+/* OPEN: residue register/slot allocation (px in SI, lx/ly in [bp-2]/[bp-4]), statement
+ * scheduling of the SpidX/SpidY block and TickCount()/fd_098E compare operand order.
+ * NOTE: its local identifier count is load-bearing for later claims (keep 18). */
 void far DrawSpider(void)
 {
     int py;
@@ -1215,6 +1229,8 @@ extern int far fd_3D57_0C28;
 extern int far fd_50F6_0470;
 extern int far fd_50F6_047A;
 
+/* OPEN: residue commutative operand order MapPnt.x + EditColumns (original loads the
+ * MapPnt member first) - structural, not changed by names or preceding declaration counts. */
 void far f_0250_1E80(void)
 {
     int x;
@@ -1621,6 +1637,8 @@ void far f_0250_41CA(void)
                 (fd_50F6_0F34 - fd_50F6_0508.y * g_19C0) / g_19C0 + 3);
 }
 
+/* OPEN: residue as f_0250_1E80: original keeps MapPnt.x in AX after the compare and adds
+ * EditColumns; this compiles to load EditColumns then add the [bp-2] CSE temp. */
 int far BalloonIsVisible(int plane, int x, int y)
 {
     if (plane != fd_50F6_032E)
@@ -1772,6 +1790,9 @@ extern long far fd_50F6_07C4;
 extern Handle far f_171C_1A9E(long size, int flags, char far *name);
 extern void (far * far fd_50F6_37EE)(void far *a, void far *b, void far *c, void far *d);
 
+/* OPEN: residue only the operand order of the five TickCount() vs long-timer compares
+ * (original: cmp mem,dx / cmp mem,ax).  A declaration order of the timer externs was found
+ * that fixes all five in a different DrawSpider state; it is count-coupled with DrawSpider. */
 void far DrawCurBalloons(void)
 {
     if (!fd_3D57_07B2 || fd_3D57_07BE != -1)
@@ -1889,6 +1910,7 @@ void far PreDrawBalloons(void)
 
 extern void (far * far fd_50F6_37EA)(char far *src, char far *dst, int x, int y);
 
+/* OPEN: residue frame layout (0x58), i in DI, pic pointer in memory; logic complete. */
 void far DrawBalloons(void)
 {
     int idx;

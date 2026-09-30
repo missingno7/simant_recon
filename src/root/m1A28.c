@@ -48,8 +48,7 @@ int far OpenDB(char far *name)
     int db;
 
     db = f_1A28_0224();
-    if (db == -1)
-        Punt("Out of handles.");
+    if (db == -1) Punt("Out of handles.");
     f_1A28_01B4(fd_50F6_3958[db].name, name);
     sprintf(path, "%s.dat", fd_50F6_3958[db].name);
     if ((fd_50F6_3958[db].file = open(path, 0x8002)) <= 0) {

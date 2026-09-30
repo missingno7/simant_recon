@@ -4,25 +4,26 @@ Validation: **PASS** (2026-09-30)
 
 | Measure | Value |
 |---|---:|
-| known_functions | 1,600 |
-| known_game_functions | 1,497 |
-| exact_c_functions | 886 |
-| exact_c_bytes | 158,180 |
+| known_functions | 1,603 |
+| known_game_functions | 1,500 |
+| exact_c_functions | 894 |
+| exact_c_bytes | 162,315 |
 | exact_asm_bytes | 25 |
 | historical_runtime_bytes_accepted | 12,334 |
 | historical_runtime_bytes_located_unaccepted | 1,044 |
 | rtlink_manager_bytes_unaccepted | 17,065 |
-| data_bytes_accepted | 13,314 |
+| data_bytes_accepted | 13,457 |
 | game_code_span_bytes | 304,748 |
-| unresolved_code_bytes | 146,543 |
-| unresolved_data_bytes | 122,206 |
-| scaffold_functions | 74 |
-| exact_translation_units | 22 |
-| complete_tus_relocation_order_proven | 20 |
+| unresolved_code_bytes | 142,408 |
+| unresolved_data_bytes | 122,063 |
+| scaffold_functions | 73 |
+| exact_translation_units | 23 |
+| complete_tus_relocation_order_proven | 23 |
 | claims_within_group_order_pending | 10 |
+| inplace_draft_functions | 20 |
 
-Complete TUs with cross-function relocation order pending (record breaks between functions differ; see docs/codegen-rules.md ZI-1): root:1383, root:1A28
+Complete TUs with cross-function relocation order pending (record breaks between functions differ; see docs/codegen-rules.md ZI-1): none
 
 Whole executable: NOT_BUILT (no historical link yet; see docs/next-steps.md)
 
-Overlay coverage (claimed/bytes): S00 0/19696, S01 0/7056, S02 0/2416, S03 0/10976, S04 0/2464, S05 659/2512, S06 5008/9584, S07 1174/1184, S08 3317/5056, S09 136/5232, S10 900/2736, S11 22/880, S12 2877/4992, S13 4591/6064, S14 1946/4656, S15 0/1360, S16 0/1776, S17 0/448, S18 4359/4368, S19 0/1120, S20 2086/2096, S21 0/480, S22 12710/12720, S23 1411/4368, S24 1071/1808, S25 9789/14592, S26 0/2240
+Overlay coverage (claimed/bytes): S00 0/19696, S01 0/7056, S02 0/2416, S03 0/10976, S04 1641/2464, S05 659/2512, S06 5008/9584, S07 1174/1184, S08 3317/5056, S09 136/5232, S10 900/2736, S11 22/880, S12 4773/4992, S13 4591/6064, S14 1946/4656, S15 0/1360, S16 0/1776, S17 0/448, S18 4359/4368, S19 0/1120, S20 2086/2096, S21 0/480, S22 12710/12720, S23 1411/4368, S24 1071/1808, S25 9789/14592, S26 0/2240

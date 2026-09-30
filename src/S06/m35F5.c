@@ -481,7 +481,14 @@ void far o06_35F5_0A5F(void)
 }
 
 
-/* SCAFFOLD BEGIN: SimKidInside draft (C4203 under MSC 6.00A C2 and C2L, see report) */
+/* SCAFFOLD BEGIN: SimKidInside draft.  Under MSC 6.00A (C2 and the bound C2L) it gets C4203
+ * (2014 bytes, 0.76 similar).  Under 6.00AX /Oe /Og /Zi (worker big) everything but one global
+ * CSE matches: the original keeps (fd_3D57_0C2E - 38) in a temp [bp-24h] from the '/ 10' to the
+ * '% 10' across the early returns; here C2 recomputes it (length 1906 vs 1903, frame 2Eh vs 30h).
+ * Minimal reproducer: evidence-free mini in build/workers/big/cse3.c (the local CSE of the shared
+ * operand into CX blocks the second global CSE; without the (c2c + c2e - 200) CSE it forms).
+ * Variable roles follow the original's frame and registers: the else-if index (c48 - 30) is i
+ * (DI); the final loop counts with y and draws i (SI) and x (DI). */
 extern int far fd_3D57_07C8;
 extern int far fd_50F6_035C;
 extern int far fd_50F6_0350;
@@ -635,17 +642,18 @@ void far SimKidInside(void)
             break;
         }
     } else if (fd_3D57_0C48 < 39) {
-        frame = outF[fd_3D57_0C48 - 30];
-        x = outX[fd_3D57_0C48 - 30];
-        y = outY[fd_3D57_0C48 - 30];
-        if (SRand1(outChance[fd_3D57_0C48 - 30]) == 0) {
-            fd_3D57_0C48 = outNext[fd_3D57_0C48 - 30];
+        i = fd_3D57_0C48 - 30;
+        frame = outF[i];
+        x = outX[i];
+        y = outY[i];
+        if (SRand1(outChance[i]) == 0) {
+            fd_3D57_0C48 = outNext[i];
             fd_3D57_0C46 = 0;
         }
     }
     fd_3D57_0C28 = 0;
     if (fd_3D57_0C48 == 38)
-        fd_3D57_0C30 = fd_3D57_0C28 = 1;
+        fd_3D57_0C28 = fd_3D57_0C30 = 1;
     if (fd_3D57_0C48 == 20 && fd_3D57_0C46 > 2)
         fd_3D57_0C28 = 1;
     if (fd_3D57_0C48 == 21 && fd_3D57_0C46 < 3)
@@ -663,10 +671,10 @@ void far SimKidInside(void)
     fd_50F6_0246 = (fd_3D57_0C2C + fd_3D57_0C2E - 200) / 28;
     fd_3D57_0C3E = 0;
     fd_3D57_0C42 = !fd_3D57_0C42;
+    i = (fd_50F6_07CA[0] << 4) + fd_50F6_07CA[1];
     fd_50F6_023E = (fd_3D57_0C2E - 38) / 10;
     if (fd_50F6_023E != fd_50F6_07CA[1] || fd_50F6_07CA[0] != fd_50F6_0246)
         return;
-    i = (fd_50F6_07CA[0] << 4) + fd_50F6_07CA[1];
     if (i == 0 || i == 1 || i == 16 || i == 32)
         return;
     if (fd_3D57_0C32 >= 0 && fd_3D57_0C32 < 12)
@@ -691,17 +699,17 @@ void far SimKidInside(void)
     }
     FootFall(fd_50F6_03E0, fd_50F6_046A);
     f_00DF_00E8(9, 0, 0x7e);
-    for (i = 0; i < (fd_50F6_0330 + fd_50F6_0350) << 3; i++) {
-        x = SRand128();
-        y = SRand64();
-        if (fd_3E1D_6180[x][y] != 0) {
-            fd_50F6_0F18 = f_0EC1_0291(x, y);
+    for (y = 0; y < (fd_50F6_0330 + fd_50F6_0350) << 3; y++) {
+        i = SRand128();
+        x = SRand64();
+        if (fd_3E1D_6180[i][x] != 0) {
+            fd_50F6_0F18 = f_0EC1_0291(i, x);
             if (fd_50F6_0F18 >= 0) {
-                DeadAntHere(x, y, fd_3E1D_AD3B[fd_50F6_0F18] & 0x80);
-                fd_3E1D_6180[x][y] = fd_3E1D_AD3B[fd_50F6_0F18] = 0;
+                DeadAntHere(i, x, fd_3E1D_AD3B[fd_50F6_0F18] & 0x80);
+                fd_3E1D_6180[i][x] = fd_3E1D_AD3B[fd_50F6_0F18] = 0;
             }
         }
-        if ((fd_50F6_0F12 >> 4) == x && (fd_50F6_0F34 >> 4) == y)
+        if ((fd_50F6_0F12 >> 4) == i && (fd_50F6_0F34 >> 4) == x)
             f_0CDB_0DE0();
     }
     if (fd_50F6_0EAC == 2 && fd_50F6_048C == 1 && SRand4() == 0)
