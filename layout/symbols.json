@@ -229,6 +229,30 @@
     }
    ]
   },
+  "ClearLifeB": {
+   "unit": "S22",
+   "seg": 15293,
+   "off": 1634,
+   "grounding": "inventory:push_cs_call",
+   "history": [
+    {
+     "was": "o22_3BBD_0662",
+     "why": "Win16 MAPSYM ANTEDIT_MODULE run _processExp.._SetSM (23 members, DoTool..SetSM) aligns 1:1 with DOS S22:3BBD (23 functions, same order); Win16 exact bodies of DoTool/ReDrawMapEdit/ClearLifeB/R/ExpAddAnt/ExpAddFood/WallNeighbors/IsItWall/FillDirtB/R/SmoothMany/IsValidSLoc/GetSM/SetSM match the DOS code; xver DropWall/ExpAddAnt/ExpKillAnts agree positionally; wallShape table 2DF4 = Win16 ConnectWall data"
+    }
+   ]
+  },
+  "ClearLifeR": {
+   "unit": "S22",
+   "seg": 15293,
+   "off": 1738,
+   "grounding": "inventory:push_cs_call",
+   "history": [
+    {
+     "was": "o22_3BBD_06CA",
+     "why": "Win16 MAPSYM ANTEDIT_MODULE run _processExp.._SetSM (23 members, DoTool..SetSM) aligns 1:1 with DOS S22:3BBD (23 functions, same order); Win16 exact bodies of DoTool/ReDrawMapEdit/ClearLifeB/R/ExpAddAnt/ExpAddFood/WallNeighbors/IsItWall/FillDirtB/R/SmoothMany/IsValidSLoc/GetSM/SetSM match the DOS code; xver DropWall/ExpAddAnt/ExpKillAnts agree positionally; wallShape table 2DF4 = Win16 ConnectWall data"
+    }
+   ]
+  },
   "ClearListB": {
    "unit": "root",
    "seg": 3777,
@@ -394,6 +418,30 @@
     {
      "was": "f_0EC1_0100",
      "why": "Win16 unit SIMONE_MODULE 2A16..3046 (CompactListA..ClearListR, 17 members) aligns 1:1 with DOS module 0EC1 (17 functions); anchored by registered AddAntToAList/BList/RList at positions 11-13 and xver ExitHole/BuildAntListA MEDIUM; bodies match (list arrays, sizes)"
+    }
+   ]
+  },
+  "ConnectAll": {
+   "unit": "S22",
+   "seg": 15293,
+   "off": 3244,
+   "grounding": "inventory:push_cs_call",
+   "history": [
+    {
+     "was": "o22_3BBD_0CAC",
+     "why": "Win16 MAPSYM ANTEDIT_MODULE run _processExp.._SetSM (23 members, DoTool..SetSM) aligns 1:1 with DOS S22:3BBD (23 functions, same order); Win16 exact bodies of DoTool/ReDrawMapEdit/ClearLifeB/R/ExpAddAnt/ExpAddFood/WallNeighbors/IsItWall/FillDirtB/R/SmoothMany/IsValidSLoc/GetSM/SetSM match the DOS code; xver DropWall/ExpAddAnt/ExpKillAnts agree positionally; wallShape table 2DF4 = Win16 ConnectWall data"
+    }
+   ]
+  },
+  "ConnectWall": {
+   "unit": "S22",
+   "seg": 15293,
+   "off": 3380,
+   "grounding": "inventory:push_cs_call",
+   "history": [
+    {
+     "was": "o22_3BBD_0D34",
+     "why": "Win16 MAPSYM ANTEDIT_MODULE run _processExp.._SetSM (23 members, DoTool..SetSM) aligns 1:1 with DOS S22:3BBD (23 functions, same order); Win16 exact bodies of DoTool/ReDrawMapEdit/ClearLifeB/R/ExpAddAnt/ExpAddFood/WallNeighbors/IsItWall/FillDirtB/R/SmoothMany/IsValidSLoc/GetSM/SetSM match the DOS code; xver DropWall/ExpAddAnt/ExpKillAnts agree positionally; wallShape table 2DF4 = Win16 ConnectWall data"
     }
    ]
   },
@@ -865,6 +913,18 @@
     }
    ]
   },
+  "DoLaserFire": {
+   "unit": "S22",
+   "seg": 14791,
+   "off": 1029,
+   "grounding": "inventory:vector",
+   "history": [
+    {
+     "was": "o22_39C7_0405",
+     "why": "Win16 MAPSYM SIMANT_MODULE run _processEdit.._YellowHelp (15 members) aligns 1:1 with DOS S22:39C7 (15 functions, same order, similar sizes); processEdit is xver HIGH at position 1; xver DoLaserFire/YellowBirth/YellowDeath/YellowDialog/YellowCommand (LOW, unique constants) agree positionally"
+    }
+   ]
+  },
   "DoLifeExchange": {
    "unit": "root",
    "seg": 4343,
@@ -1129,6 +1189,30 @@
     }
    ]
   },
+  "DoTool": {
+   "unit": "S22",
+   "seg": 15293,
+   "off": 438,
+   "grounding": "inventory:push_cs_call",
+   "history": [
+    {
+     "was": "o22_3BBD_01B6",
+     "why": "Win16 MAPSYM ANTEDIT_MODULE run _processExp.._SetSM (23 members, DoTool..SetSM) aligns 1:1 with DOS S22:3BBD (23 functions, same order); Win16 exact bodies of DoTool/ReDrawMapEdit/ClearLifeB/R/ExpAddAnt/ExpAddFood/WallNeighbors/IsItWall/FillDirtB/R/SmoothMany/IsValidSLoc/GetSM/SetSM match the DOS code; xver DropWall/ExpAddAnt/ExpKillAnts agree positionally; wallShape table 2DF4 = Win16 ConnectWall data"
+    }
+   ]
+  },
+  "DoTroph": {
+   "unit": "S22",
+   "seg": 14791,
+   "off": 6629,
+   "grounding": "inventory:vector",
+   "history": [
+    {
+     "was": "o22_39C7_19E5",
+     "why": "Win16 MAPSYM SIMANT_MODULE run _processEdit.._YellowHelp (15 members) aligns 1:1 with DOS S22:39C7 (15 functions, same order, similar sizes); processEdit is xver HIGH at position 1; xver DoLaserFire/YellowBirth/YellowDeath/YellowDialog/YellowCommand (LOW, unique constants) agree positionally"
+    }
+   ]
+  },
   "DoWinHelp": {
    "unit": "S14",
    "seg": 14412,
@@ -1246,6 +1330,18 @@
     {
      "was": "f_10F7_1696",
      "why": "worker sim10F7: Win16 counterpart body matched while recovering the byte-exact DOS function"
+    }
+   ]
+  },
+  "DropWall": {
+   "unit": "S22",
+   "seg": 15293,
+   "off": 767,
+   "grounding": "inventory:push_cs_call",
+   "history": [
+    {
+     "was": "o22_3BBD_02FF",
+     "why": "Win16 MAPSYM ANTEDIT_MODULE run _processExp.._SetSM (23 members, DoTool..SetSM) aligns 1:1 with DOS S22:3BBD (23 functions, same order); Win16 exact bodies of DoTool/ReDrawMapEdit/ClearLifeB/R/ExpAddAnt/ExpAddFood/WallNeighbors/IsItWall/FillDirtB/R/SmoothMany/IsValidSLoc/GetSM/SetSM match the DOS code; xver DropWall/ExpAddAnt/ExpKillAnts agree positionally; wallShape table 2DF4 = Win16 ConnectWall data"
     }
    ]
   },
@@ -1393,6 +1489,66 @@
     }
    ]
   },
+  "ExpAddAnt": {
+   "unit": "S22",
+   "seg": 15293,
+   "off": 1842,
+   "grounding": "inventory:push_cs_call",
+   "history": [
+    {
+     "was": "o22_3BBD_0732",
+     "why": "Win16 MAPSYM ANTEDIT_MODULE run _processExp.._SetSM (23 members, DoTool..SetSM) aligns 1:1 with DOS S22:3BBD (23 functions, same order); Win16 exact bodies of DoTool/ReDrawMapEdit/ClearLifeB/R/ExpAddAnt/ExpAddFood/WallNeighbors/IsItWall/FillDirtB/R/SmoothMany/IsValidSLoc/GetSM/SetSM match the DOS code; xver DropWall/ExpAddAnt/ExpKillAnts agree positionally; wallShape table 2DF4 = Win16 ConnectWall data"
+    }
+   ]
+  },
+  "ExpAddFood": {
+   "unit": "S22",
+   "seg": 15293,
+   "off": 2128,
+   "grounding": "inventory:push_cs_call",
+   "history": [
+    {
+     "was": "o22_3BBD_0850",
+     "why": "Win16 MAPSYM ANTEDIT_MODULE run _processExp.._SetSM (23 members, DoTool..SetSM) aligns 1:1 with DOS S22:3BBD (23 functions, same order); Win16 exact bodies of DoTool/ReDrawMapEdit/ClearLifeB/R/ExpAddAnt/ExpAddFood/WallNeighbors/IsItWall/FillDirtB/R/SmoothMany/IsValidSLoc/GetSM/SetSM match the DOS code; xver DropWall/ExpAddAnt/ExpKillAnts agree positionally; wallShape table 2DF4 = Win16 ConnectWall data"
+    }
+   ]
+  },
+  "ExpDig": {
+   "unit": "S22",
+   "seg": 15293,
+   "off": 1119,
+   "grounding": "inventory:push_cs_call",
+   "history": [
+    {
+     "was": "o22_3BBD_045F",
+     "why": "Win16 MAPSYM ANTEDIT_MODULE run _processExp.._SetSM (23 members, DoTool..SetSM) aligns 1:1 with DOS S22:3BBD (23 functions, same order); Win16 exact bodies of DoTool/ReDrawMapEdit/ClearLifeB/R/ExpAddAnt/ExpAddFood/WallNeighbors/IsItWall/FillDirtB/R/SmoothMany/IsValidSLoc/GetSM/SetSM match the DOS code; xver DropWall/ExpAddAnt/ExpKillAnts agree positionally; wallShape table 2DF4 = Win16 ConnectWall data"
+    }
+   ]
+  },
+  "ExpIncSmell": {
+   "unit": "S22",
+   "seg": 15293,
+   "off": 2298,
+   "grounding": "inventory:push_cs_call",
+   "history": [
+    {
+     "was": "o22_3BBD_08FA",
+     "why": "Win16 MAPSYM ANTEDIT_MODULE run _processExp.._SetSM (23 members, DoTool..SetSM) aligns 1:1 with DOS S22:3BBD (23 functions, same order); Win16 exact bodies of DoTool/ReDrawMapEdit/ClearLifeB/R/ExpAddAnt/ExpAddFood/WallNeighbors/IsItWall/FillDirtB/R/SmoothMany/IsValidSLoc/GetSM/SetSM match the DOS code; xver DropWall/ExpAddAnt/ExpKillAnts agree positionally; wallShape table 2DF4 = Win16 ConnectWall data"
+    }
+   ]
+  },
+  "ExpKillAnts": {
+   "unit": "S22",
+   "seg": 15293,
+   "off": 2429,
+   "grounding": "inventory:push_cs_call",
+   "history": [
+    {
+     "was": "o22_3BBD_097D",
+     "why": "Win16 MAPSYM ANTEDIT_MODULE run _processExp.._SetSM (23 members, DoTool..SetSM) aligns 1:1 with DOS S22:3BBD (23 functions, same order); Win16 exact bodies of DoTool/ReDrawMapEdit/ClearLifeB/R/ExpAddAnt/ExpAddFood/WallNeighbors/IsItWall/FillDirtB/R/SmoothMany/IsValidSLoc/GetSM/SetSM match the DOS code; xver DropWall/ExpAddAnt/ExpKillAnts agree positionally; wallShape table 2DF4 = Win16 ConnectWall data"
+    }
+   ]
+  },
   "FeedAnts": {
    "unit": "root",
    "seg": 2196,
@@ -1402,6 +1558,30 @@
     {
      "was": "f_0894_02D2",
      "why": "Win16 MAPSYM member list of the matching unit aligns 1:1 in order and count with the DOS module (already-named members fall at their positions); bodies near-identical (worker simA)"
+    }
+   ]
+  },
+  "FillDirtB": {
+   "unit": "S22",
+   "seg": 15293,
+   "off": 3637,
+   "grounding": "inventory:push_cs_call",
+   "history": [
+    {
+     "was": "o22_3BBD_0E35",
+     "why": "Win16 MAPSYM ANTEDIT_MODULE run _processExp.._SetSM (23 members, DoTool..SetSM) aligns 1:1 with DOS S22:3BBD (23 functions, same order); Win16 exact bodies of DoTool/ReDrawMapEdit/ClearLifeB/R/ExpAddAnt/ExpAddFood/WallNeighbors/IsItWall/FillDirtB/R/SmoothMany/IsValidSLoc/GetSM/SetSM match the DOS code; xver DropWall/ExpAddAnt/ExpKillAnts agree positionally; wallShape table 2DF4 = Win16 ConnectWall data"
+    }
+   ]
+  },
+  "FillDirtR": {
+   "unit": "S22",
+   "seg": 15293,
+   "off": 3844,
+   "grounding": "inventory:push_cs_call",
+   "history": [
+    {
+     "was": "o22_3BBD_0F04",
+     "why": "Win16 MAPSYM ANTEDIT_MODULE run _processExp.._SetSM (23 members, DoTool..SetSM) aligns 1:1 with DOS S22:3BBD (23 functions, same order); Win16 exact bodies of DoTool/ReDrawMapEdit/ClearLifeB/R/ExpAddAnt/ExpAddFood/WallNeighbors/IsItWall/FillDirtB/R/SmoothMany/IsValidSLoc/GetSM/SetSM match the DOS code; xver DropWall/ExpAddAnt/ExpKillAnts agree positionally; wallShape table 2DF4 = Win16 ConnectWall data"
     }
    ]
   },
@@ -1522,6 +1702,18 @@
     {
      "was": "f_10F7_02D6",
      "why": "worker sim10F7: Win16 counterpart body matched while recovering the byte-exact DOS function"
+    }
+   ]
+  },
+  "FlipWords": {
+   "unit": "S23",
+   "seg": 14791,
+   "off": 36,
+   "grounding": "inventory:push_cs_call",
+   "history": [
+    {
+     "was": "o23_39C7_0024",
+     "why": "Win16 MAPSYM _TEXT run _XFlipLong.._ProcInfoEvent (9 members) aligns 1:1 with DOS S23:39C7 (9 functions, same order); DisplayCard is xver HIGH at position 6; xver win_DrawInfoWindow/win_PrintStyleTextInRect/PopUpInfoWindow (MEDIUM) agree positionally; XFlipLong/FlipWords/win_DrawInfoWindow/OpenInfoWindow Win16 exact bodies match"
     }
    ]
   },
@@ -1813,6 +2005,18 @@
     }
    ]
   },
+  "GetSM": {
+   "unit": "S22",
+   "seg": 15293,
+   "off": 4325,
+   "grounding": "inventory:push_cs_call",
+   "history": [
+    {
+     "was": "o22_3BBD_10E5",
+     "why": "Win16 MAPSYM ANTEDIT_MODULE run _processExp.._SetSM (23 members, DoTool..SetSM) aligns 1:1 with DOS S22:3BBD (23 functions, same order); Win16 exact bodies of DoTool/ReDrawMapEdit/ClearLifeB/R/ExpAddAnt/ExpAddFood/WallNeighbors/IsItWall/FillDirtB/R/SmoothMany/IsValidSLoc/GetSM/SetSM match the DOS code; xver DropWall/ExpAddAnt/ExpKillAnts agree positionally; wallShape table 2DF4 = Win16 ConnectWall data"
+    }
+   ]
+  },
   "GetSRandSeed": {
    "unit": "root",
    "seg": 147,
@@ -1918,6 +2122,18 @@
     {
      "was": "f_0BE8_0BC1",
      "why": "dig worker: DOS body byte-exact and structurally identical to the Win16 function of this name (same statements, same data), plus module neighbourhood"
+    }
+   ]
+  },
+  "IncFoodHere": {
+   "unit": "S22",
+   "seg": 15293,
+   "off": 2966,
+   "grounding": "inventory:push_cs_call",
+   "history": [
+    {
+     "was": "o22_3BBD_0B96",
+     "why": "Win16 MAPSYM ANTEDIT_MODULE run _processExp.._SetSM (23 members, DoTool..SetSM) aligns 1:1 with DOS S22:3BBD (23 functions, same order); Win16 exact bodies of DoTool/ReDrawMapEdit/ClearLifeB/R/ExpAddAnt/ExpAddFood/WallNeighbors/IsItWall/FillDirtB/R/SmoothMany/IsValidSLoc/GetSM/SetSM match the DOS code; xver DropWall/ExpAddAnt/ExpKillAnts agree positionally; wallShape table 2DF4 = Win16 ConnectWall data"
     }
    ]
   },
@@ -2077,6 +2293,18 @@
     }
    ]
   },
+  "IsItWall": {
+   "unit": "S22",
+   "seg": 15293,
+   "off": 3604,
+   "grounding": "inventory:push_cs_call",
+   "history": [
+    {
+     "was": "o22_3BBD_0E14",
+     "why": "Win16 MAPSYM ANTEDIT_MODULE run _processExp.._SetSM (23 members, DoTool..SetSM) aligns 1:1 with DOS S22:3BBD (23 functions, same order); Win16 exact bodies of DoTool/ReDrawMapEdit/ClearLifeB/R/ExpAddAnt/ExpAddFood/WallNeighbors/IsItWall/FillDirtB/R/SmoothMany/IsValidSLoc/GetSM/SetSM match the DOS code; xver DropWall/ExpAddAnt/ExpKillAnts agree positionally; wallShape table 2DF4 = Win16 ConnectWall data"
+    }
+   ]
+  },
   "IsLessThanHole": {
    "unit": "root",
    "seg": 4343,
@@ -2161,6 +2389,18 @@
     }
    ]
   },
+  "IsValidSLoc": {
+   "unit": "S22",
+   "seg": 15293,
+   "off": 4280,
+   "grounding": "inventory:push_cs_call",
+   "history": [
+    {
+     "was": "o22_3BBD_10B8",
+     "why": "Win16 MAPSYM ANTEDIT_MODULE run _processExp.._SetSM (23 members, DoTool..SetSM) aligns 1:1 with DOS S22:3BBD (23 functions, same order); Win16 exact bodies of DoTool/ReDrawMapEdit/ClearLifeB/R/ExpAddAnt/ExpAddFood/WallNeighbors/IsItWall/FillDirtB/R/SmoothMany/IsValidSLoc/GetSM/SetSM match the DOS code; xver DropWall/ExpAddAnt/ExpKillAnts agree positionally; wallShape table 2DF4 = Win16 ConnectWall data"
+    }
+   ]
+  },
   "IsYellowAnt": {
    "unit": "root",
    "seg": 4343,
@@ -2242,6 +2482,18 @@
     {
      "was": "f_0F3F_0E9E",
      "why": "Win16 MAPSYM member list of the matching unit aligns 1:1 in order and count with the DOS module (already-named members fall at their positions); bodies near-identical (worker simA)"
+    }
+   ]
+  },
+  "LionDialog": {
+   "unit": "S22",
+   "seg": 14791,
+   "off": 5927,
+   "grounding": "inventory:push_cs_call",
+   "history": [
+    {
+     "was": "o22_39C7_1727",
+     "why": "Win16 MAPSYM SIMANT_MODULE run _processEdit.._YellowHelp (15 members) aligns 1:1 with DOS S22:39C7 (15 functions, same order, similar sizes); processEdit is xver HIGH at position 1; xver DoLaserFire/YellowBirth/YellowDeath/YellowDialog/YellowCommand (LOW, unique constants) agree positionally"
     }
    ]
   },
@@ -2425,6 +2677,18 @@
     }
    ]
   },
+  "OpenInfoWindow": {
+   "unit": "S23",
+   "seg": 14791,
+   "off": 3097,
+   "grounding": "inventory:vector",
+   "history": [
+    {
+     "was": "o23_39C7_0C19",
+     "why": "Win16 MAPSYM _TEXT run _XFlipLong.._ProcInfoEvent (9 members) aligns 1:1 with DOS S23:39C7 (9 functions, same order); DisplayCard is xver HIGH at position 6; xver win_DrawInfoWindow/win_PrintStyleTextInRect/PopUpInfoWindow (MEDIUM) agree positionally; XFlipLong/FlipWords/win_DrawInfoWindow/OpenInfoWindow Win16 exact bodies match"
+    }
+   ]
+  },
   "PickupMyEgg": {
    "unit": "root",
    "seg": 4343,
@@ -2593,6 +2857,30 @@
     }
    ]
   },
+  "PopUpInfoWindow": {
+   "unit": "S23",
+   "seg": 14791,
+   "off": 3196,
+   "grounding": "inventory:push_cs_call",
+   "history": [
+    {
+     "was": "o23_39C7_0C7C",
+     "why": "Win16 MAPSYM _TEXT run _XFlipLong.._ProcInfoEvent (9 members) aligns 1:1 with DOS S23:39C7 (9 functions, same order); DisplayCard is xver HIGH at position 6; xver win_DrawInfoWindow/win_PrintStyleTextInRect/PopUpInfoWindow (MEDIUM) agree positionally; XFlipLong/FlipWords/win_DrawInfoWindow/OpenInfoWindow Win16 exact bodies match"
+    }
+   ]
+  },
+  "ProcInfoEvent": {
+   "unit": "S23",
+   "seg": 14791,
+   "off": 3920,
+   "grounding": "inventory:push_cs_call,vector",
+   "history": [
+    {
+     "was": "o23_39C7_0F50",
+     "why": "Win16 MAPSYM _TEXT run _XFlipLong.._ProcInfoEvent (9 members) aligns 1:1 with DOS S23:39C7 (9 functions, same order); DisplayCard is xver HIGH at position 6; xver win_DrawInfoWindow/win_PrintStyleTextInRect/PopUpInfoWindow (MEDIUM) agree positionally; XFlipLong/FlipWords/win_DrawInfoWindow/OpenInfoWindow Win16 exact bodies match"
+    }
+   ]
+  },
   "Punt": {
    "unit": "root",
    "seg": 7266,
@@ -2701,6 +2989,18 @@
     }
    ]
   },
+  "ReDrawMapEdit": {
+   "unit": "S22",
+   "seg": 15293,
+   "off": 655,
+   "grounding": "inventory:push_cs_call",
+   "history": [
+    {
+     "was": "o22_3BBD_028F",
+     "why": "Win16 MAPSYM ANTEDIT_MODULE run _processExp.._SetSM (23 members, DoTool..SetSM) aligns 1:1 with DOS S22:3BBD (23 functions, same order); Win16 exact bodies of DoTool/ReDrawMapEdit/ClearLifeB/R/ExpAddAnt/ExpAddFood/WallNeighbors/IsItWall/FillDirtB/R/SmoothMany/IsValidSLoc/GetSM/SetSM match the DOS code; xver DropWall/ExpAddAnt/ExpKillAnts agree positionally; wallShape table 2DF4 = Win16 ConnectWall data"
+    }
+   ]
+  },
   "Recruit": {
    "unit": "root",
    "seg": 4995,
@@ -2746,6 +3046,18 @@
     {
      "was": "f_0AD9_0DB7",
      "why": "Win16 SIMTWO_MODULE run 3EF8..5A02 (InitSow..PillFoodTile, 19 members, between EndMigrate and InitSimVars) aligns 1:1 with DOS module 0AD9 (19 functions); xver DoAntLions (pos 6, LOW) agrees; call graph agrees (InitPillar->InitSow, DoPillar->DoSow, AddRandAntLion->AddAntLion, DoAntLions->SetAntLion/KillAntLion/FindInAList, DoPillar->pillar helpers)"
+    }
+   ]
+  },
+  "ResetYellowVars": {
+   "unit": "S22",
+   "seg": 14791,
+   "off": 2045,
+   "grounding": "inventory:push_cs_call,vector",
+   "history": [
+    {
+     "was": "o22_39C7_07FD",
+     "why": "Win16 MAPSYM SIMANT_MODULE run _processEdit.._YellowHelp (15 members) aligns 1:1 with DOS S22:39C7 (15 functions, same order, similar sizes); processEdit is xver HIGH at position 1; xver DoLaserFire/YellowBirth/YellowDeath/YellowDialog/YellowCommand (LOW, unique constants) agree positionally"
     }
    ]
   },
@@ -2905,6 +3217,18 @@
     }
    ]
   },
+  "SetAlarmDropState": {
+   "unit": "S22",
+   "seg": 14791,
+   "off": 6743,
+   "grounding": "inventory:push_cs_call,vector",
+   "history": [
+    {
+     "was": "o22_39C7_1A57",
+     "why": "Win16 MAPSYM SIMANT_MODULE run _processEdit.._YellowHelp (15 members) aligns 1:1 with DOS S22:39C7 (15 functions, same order, similar sizes); processEdit is xver HIGH at position 1; xver DoLaserFire/YellowBirth/YellowDeath/YellowDialog/YellowCommand (LOW, unique constants) agree positionally"
+    }
+   ]
+  },
   "SetAntIndex": {
    "unit": "root",
    "seg": 4343,
@@ -2950,6 +3274,18 @@
     {
      "was": "o14_384C_0ACD",
      "why": "Win16 SIMANT_MODULE MAPSYM run CalcScore,DoScenario,DoWinHelp,[win_DrawScoreWindow],ScoreDialog,DrawCastePopUp,SetDefaultWindPrompt,PictStrnDialog,[win_DrawPictureWindow],PictureDialog,[win_DrawEndGameWindow],EndGameDialog,SpiderDialog,CustomerIDDialog aligns 1:1 with the 11 DOS S14:384C functions (Windows paint callbacks absent in DOS); body identical to Win16 (GamePaused, CurGameTool -1/10/11, EditMessage)"
+    }
+   ]
+  },
+  "SetGoalsY": {
+   "unit": "S22",
+   "seg": 14791,
+   "off": 2185,
+   "grounding": "inventory:push_cs_call",
+   "history": [
+    {
+     "was": "o22_39C7_0889",
+     "why": "Win16 MAPSYM SIMANT_MODULE run _processEdit.._YellowHelp (15 members) aligns 1:1 with DOS S22:39C7 (15 functions, same order, similar sizes); processEdit is xver HIGH at position 1; xver DoLaserFire/YellowBirth/YellowDeath/YellowDialog/YellowCommand (LOW, unique constants) agree positionally"
     }
    ]
   },
@@ -3022,6 +3358,18 @@
     {
      "was": "f_0093_00B0",
      "why": "xver CONFIRMED (evidence/cross_version/decisions.json: RNG translation unit)"
+    }
+   ]
+  },
+  "SetSM": {
+   "unit": "S22",
+   "seg": 15293,
+   "off": 4493,
+   "grounding": "inventory:push_cs_call",
+   "history": [
+    {
+     "was": "o22_3BBD_118D",
+     "why": "Win16 MAPSYM ANTEDIT_MODULE run _processExp.._SetSM (23 members, DoTool..SetSM) aligns 1:1 with DOS S22:3BBD (23 functions, same order); Win16 exact bodies of DoTool/ReDrawMapEdit/ClearLifeB/R/ExpAddAnt/ExpAddFood/WallNeighbors/IsItWall/FillDirtB/R/SmoothMany/IsValidSLoc/GetSM/SetSM match the DOS code; xver DropWall/ExpAddAnt/ExpKillAnts agree positionally; wallShape table 2DF4 = Win16 ConnectWall data"
     }
    ]
   },
@@ -3109,6 +3457,18 @@
     }
    ]
   },
+  "SmoothACell": {
+   "unit": "S22",
+   "seg": 15293,
+   "off": 4145,
+   "grounding": "inventory:push_cs_call",
+   "history": [
+    {
+     "was": "o22_3BBD_1031",
+     "why": "Win16 MAPSYM ANTEDIT_MODULE run _processExp.._SetSM (23 members, DoTool..SetSM) aligns 1:1 with DOS S22:3BBD (23 functions, same order); Win16 exact bodies of DoTool/ReDrawMapEdit/ClearLifeB/R/ExpAddAnt/ExpAddFood/WallNeighbors/IsItWall/FillDirtB/R/SmoothMany/IsValidSLoc/GetSM/SetSM match the DOS code; xver DropWall/ExpAddAnt/ExpKillAnts agree positionally; wallShape table 2DF4 = Win16 ConnectWall data"
+    }
+   ]
+  },
   "SmoothAlarm": {
    "unit": "root",
    "seg": 5270,
@@ -3118,6 +3478,30 @@
     {
      "was": "f_1496_025E",
      "why": "Win16 SIMANT1_MODULE run 91DE..9612 (FillHolesBN..GetSmellT, 15 members, between GetMyDir and MakeRedInitiator) aligns 1:1 with DOS module 1496 (15 functions); DoSmells calls members 1-7 in both builds (FillHoles/ColonySmell/SmoothAlarm), the AlarmHere/JamScent/DecTSmell members have the same ant-movement callers; bodies match (pheromone maps)"
+    }
+   ]
+  },
+  "SmoothMany": {
+   "unit": "S22",
+   "seg": 15293,
+   "off": 4051,
+   "grounding": "inventory:push_cs_call",
+   "history": [
+    {
+     "was": "o22_3BBD_0FD3",
+     "why": "Win16 MAPSYM ANTEDIT_MODULE run _processExp.._SetSM (23 members, DoTool..SetSM) aligns 1:1 with DOS S22:3BBD (23 functions, same order); Win16 exact bodies of DoTool/ReDrawMapEdit/ClearLifeB/R/ExpAddAnt/ExpAddFood/WallNeighbors/IsItWall/FillDirtB/R/SmoothMany/IsValidSLoc/GetSM/SetSM match the DOS code; xver DropWall/ExpAddAnt/ExpKillAnts agree positionally; wallShape table 2DF4 = Win16 ConnectWall data"
+    }
+   ]
+  },
+  "SpecialXfer": {
+   "unit": "S22",
+   "seg": 14791,
+   "off": 5420,
+   "grounding": "inventory:push_cs_call",
+   "history": [
+    {
+     "was": "o22_39C7_152C",
+     "why": "Win16 MAPSYM SIMANT_MODULE run _processEdit.._YellowHelp (15 members) aligns 1:1 with DOS S22:39C7 (15 functions, same order, similar sizes); processEdit is xver HIGH at position 1; xver DoLaserFire/YellowBirth/YellowDeath/YellowDialog/YellowCommand (LOW, unique constants) agree positionally"
     }
    ]
   },
@@ -3295,6 +3679,18 @@
    "off": 4,
    "alias_of": "main"
   },
+  "WallNeighbors": {
+   "unit": "S22",
+   "seg": 15293,
+   "off": 3460,
+   "grounding": "inventory:push_cs_call",
+   "history": [
+    {
+     "was": "o22_3BBD_0D84",
+     "why": "Win16 MAPSYM ANTEDIT_MODULE run _processExp.._SetSM (23 members, DoTool..SetSM) aligns 1:1 with DOS S22:3BBD (23 functions, same order); Win16 exact bodies of DoTool/ReDrawMapEdit/ClearLifeB/R/ExpAddAnt/ExpAddFood/WallNeighbors/IsItWall/FillDirtB/R/SmoothMany/IsValidSLoc/GetSM/SetSM match the DOS code; xver DropWall/ExpAddAnt/ExpKillAnts agree positionally; wallShape table 2DF4 = Win16 ConnectWall data"
+    }
+   ]
+  },
   "WinPrintf": {
    "unit": "root",
    "seg": 10109,
@@ -3304,6 +3700,90 @@
     {
      "was": "f_277D_000A",
      "why": "xver HIGH: 8 anchored callers agree with Win16 _WinPrintf callers; body is compiled-out debug formatter (evidence/cross_version/decisions.json)"
+    }
+   ]
+  },
+  "XFlipLong": {
+   "unit": "S23",
+   "seg": 14791,
+   "off": 0,
+   "grounding": "inventory:push_cs_call",
+   "history": [
+    {
+     "was": "o23_39C7_0000",
+     "why": "Win16 MAPSYM _TEXT run _XFlipLong.._ProcInfoEvent (9 members) aligns 1:1 with DOS S23:39C7 (9 functions, same order); DisplayCard is xver HIGH at position 6; xver win_DrawInfoWindow/win_PrintStyleTextInRect/PopUpInfoWindow (MEDIUM) agree positionally; XFlipLong/FlipWords/win_DrawInfoWindow/OpenInfoWindow Win16 exact bodies match"
+    }
+   ]
+  },
+  "YellowBirth": {
+   "unit": "S22",
+   "seg": 14791,
+   "off": 2304,
+   "grounding": "inventory:push_cs_call",
+   "history": [
+    {
+     "was": "o22_39C7_0900",
+     "why": "Win16 MAPSYM SIMANT_MODULE run _processEdit.._YellowHelp (15 members) aligns 1:1 with DOS S22:39C7 (15 functions, same order, similar sizes); processEdit is xver HIGH at position 1; xver DoLaserFire/YellowBirth/YellowDeath/YellowDialog/YellowCommand (LOW, unique constants) agree positionally"
+    }
+   ]
+  },
+  "YellowCommand": {
+   "unit": "S22",
+   "seg": 14791,
+   "off": 7385,
+   "grounding": "inventory:push_cs_call,vector",
+   "history": [
+    {
+     "was": "o22_39C7_1CD9",
+     "why": "Win16 MAPSYM SIMANT_MODULE run _processEdit.._YellowHelp (15 members) aligns 1:1 with DOS S22:39C7 (15 functions, same order, similar sizes); processEdit is xver HIGH at position 1; xver DoLaserFire/YellowBirth/YellowDeath/YellowDialog/YellowCommand (LOW, unique constants) agree positionally"
+    }
+   ]
+  },
+  "YellowCommandKey": {
+   "unit": "S22",
+   "seg": 14791,
+   "off": 6923,
+   "grounding": "inventory:vector",
+   "history": [
+    {
+     "was": "o22_39C7_1B0B",
+     "why": "Win16 MAPSYM SIMANT_MODULE run _processEdit.._YellowHelp (15 members) aligns 1:1 with DOS S22:39C7 (15 functions, same order, similar sizes); processEdit is xver HIGH at position 1; xver DoLaserFire/YellowBirth/YellowDeath/YellowDialog/YellowCommand (LOW, unique constants) agree positionally"
+    }
+   ]
+  },
+  "YellowDeath": {
+   "unit": "S22",
+   "seg": 14791,
+   "off": 3361,
+   "grounding": "inventory:vector",
+   "history": [
+    {
+     "was": "o22_39C7_0D21",
+     "why": "Win16 MAPSYM SIMANT_MODULE run _processEdit.._YellowHelp (15 members) aligns 1:1 with DOS S22:39C7 (15 functions, same order, similar sizes); processEdit is xver HIGH at position 1; xver DoLaserFire/YellowBirth/YellowDeath/YellowDialog/YellowCommand (LOW, unique constants) agree positionally"
+    }
+   ]
+  },
+  "YellowDialog": {
+   "unit": "S22",
+   "seg": 14791,
+   "off": 6285,
+   "grounding": "inventory:push_cs_call,vector",
+   "history": [
+    {
+     "was": "o22_39C7_188D",
+     "why": "Win16 MAPSYM SIMANT_MODULE run _processEdit.._YellowHelp (15 members) aligns 1:1 with DOS S22:39C7 (15 functions, same order, similar sizes); processEdit is xver HIGH at position 1; xver DoLaserFire/YellowBirth/YellowDeath/YellowDialog/YellowCommand (LOW, unique constants) agree positionally"
+    }
+   ]
+  },
+  "YellowHelp": {
+   "unit": "S22",
+   "seg": 14791,
+   "off": 7893,
+   "grounding": "inventory:push_cs_call",
+   "history": [
+    {
+     "was": "o22_39C7_1ED5",
+     "why": "Win16 MAPSYM SIMANT_MODULE run _processEdit.._YellowHelp (15 members) aligns 1:1 with DOS S22:39C7 (15 functions, same order, similar sizes); processEdit is xver HIGH at position 1; xver DoLaserFire/YellowBirth/YellowDeath/YellowDialog/YellowCommand (LOW, unique constants) agree positionally"
     }
    ]
   },
@@ -12115,253 +12595,253 @@
    "unit": "S22",
    "seg": 14791,
    "off": 1029,
-   "grounding": "inventory:vector"
+   "alias_of": "DoLaserFire"
   },
   "o22_39C7_06C6": {
    "unit": "S22",
    "seg": 14791,
    "off": 1734,
-   "grounding": "inventory:push_cs_call"
+   "alias_of": "processSpider"
   },
   "o22_39C7_07FD": {
    "unit": "S22",
    "seg": 14791,
    "off": 2045,
-   "grounding": "inventory:push_cs_call,vector"
+   "alias_of": "ResetYellowVars"
   },
   "o22_39C7_0889": {
    "unit": "S22",
    "seg": 14791,
    "off": 2185,
-   "grounding": "inventory:push_cs_call"
+   "alias_of": "SetGoalsY"
   },
   "o22_39C7_0900": {
    "unit": "S22",
    "seg": 14791,
    "off": 2304,
-   "grounding": "inventory:push_cs_call"
+   "alias_of": "YellowBirth"
   },
   "o22_39C7_0D21": {
    "unit": "S22",
    "seg": 14791,
    "off": 3361,
-   "grounding": "inventory:vector"
+   "alias_of": "YellowDeath"
   },
   "o22_39C7_152C": {
    "unit": "S22",
    "seg": 14791,
    "off": 5420,
-   "grounding": "inventory:push_cs_call"
+   "alias_of": "SpecialXfer"
   },
   "o22_39C7_1727": {
    "unit": "S22",
    "seg": 14791,
    "off": 5927,
-   "grounding": "inventory:push_cs_call"
+   "alias_of": "LionDialog"
   },
   "o22_39C7_188D": {
    "unit": "S22",
    "seg": 14791,
    "off": 6285,
-   "grounding": "inventory:push_cs_call,vector"
+   "alias_of": "YellowDialog"
   },
   "o22_39C7_19E5": {
    "unit": "S22",
    "seg": 14791,
    "off": 6629,
-   "grounding": "inventory:vector"
+   "alias_of": "DoTroph"
   },
   "o22_39C7_1A57": {
    "unit": "S22",
    "seg": 14791,
    "off": 6743,
-   "grounding": "inventory:push_cs_call,vector"
+   "alias_of": "SetAlarmDropState"
   },
   "o22_39C7_1B0B": {
    "unit": "S22",
    "seg": 14791,
    "off": 6923,
-   "grounding": "inventory:vector"
+   "alias_of": "YellowCommandKey"
   },
   "o22_39C7_1CD9": {
    "unit": "S22",
    "seg": 14791,
    "off": 7385,
-   "grounding": "inventory:push_cs_call,vector"
+   "alias_of": "YellowCommand"
   },
   "o22_39C7_1ED5": {
    "unit": "S22",
    "seg": 14791,
    "off": 7893,
-   "grounding": "inventory:push_cs_call"
+   "alias_of": "YellowHelp"
   },
   "o22_3BBD_000A": {
    "unit": "S22",
    "seg": 15293,
    "off": 10,
-   "grounding": "inventory:far_call"
+   "alias_of": "processExp"
   },
   "o22_3BBD_01B6": {
    "unit": "S22",
    "seg": 15293,
    "off": 438,
-   "grounding": "inventory:push_cs_call"
+   "alias_of": "DoTool"
   },
   "o22_3BBD_028F": {
    "unit": "S22",
    "seg": 15293,
    "off": 655,
-   "grounding": "inventory:push_cs_call"
+   "alias_of": "ReDrawMapEdit"
   },
   "o22_3BBD_02FF": {
    "unit": "S22",
    "seg": 15293,
    "off": 767,
-   "grounding": "inventory:push_cs_call"
+   "alias_of": "DropWall"
   },
   "o22_3BBD_045F": {
    "unit": "S22",
    "seg": 15293,
    "off": 1119,
-   "grounding": "inventory:push_cs_call"
+   "alias_of": "ExpDig"
   },
   "o22_3BBD_0662": {
    "unit": "S22",
    "seg": 15293,
    "off": 1634,
-   "grounding": "inventory:push_cs_call"
+   "alias_of": "ClearLifeB"
   },
   "o22_3BBD_06CA": {
    "unit": "S22",
    "seg": 15293,
    "off": 1738,
-   "grounding": "inventory:push_cs_call"
+   "alias_of": "ClearLifeR"
   },
   "o22_3BBD_0732": {
    "unit": "S22",
    "seg": 15293,
    "off": 1842,
-   "grounding": "inventory:push_cs_call"
+   "alias_of": "ExpAddAnt"
   },
   "o22_3BBD_0850": {
    "unit": "S22",
    "seg": 15293,
    "off": 2128,
-   "grounding": "inventory:push_cs_call"
+   "alias_of": "ExpAddFood"
   },
   "o22_3BBD_08FA": {
    "unit": "S22",
    "seg": 15293,
    "off": 2298,
-   "grounding": "inventory:push_cs_call"
+   "alias_of": "ExpIncSmell"
   },
   "o22_3BBD_097D": {
    "unit": "S22",
    "seg": 15293,
    "off": 2429,
-   "grounding": "inventory:push_cs_call"
+   "alias_of": "ExpKillAnts"
   },
   "o22_3BBD_0B96": {
    "unit": "S22",
    "seg": 15293,
    "off": 2966,
-   "grounding": "inventory:push_cs_call"
+   "alias_of": "IncFoodHere"
   },
   "o22_3BBD_0CAC": {
    "unit": "S22",
    "seg": 15293,
    "off": 3244,
-   "grounding": "inventory:push_cs_call"
+   "alias_of": "ConnectAll"
   },
   "o22_3BBD_0D34": {
    "unit": "S22",
    "seg": 15293,
    "off": 3380,
-   "grounding": "inventory:push_cs_call"
+   "alias_of": "ConnectWall"
   },
   "o22_3BBD_0D84": {
    "unit": "S22",
    "seg": 15293,
    "off": 3460,
-   "grounding": "inventory:push_cs_call"
+   "alias_of": "WallNeighbors"
   },
   "o22_3BBD_0E14": {
    "unit": "S22",
    "seg": 15293,
    "off": 3604,
-   "grounding": "inventory:push_cs_call"
+   "alias_of": "IsItWall"
   },
   "o22_3BBD_0E35": {
    "unit": "S22",
    "seg": 15293,
    "off": 3637,
-   "grounding": "inventory:push_cs_call"
+   "alias_of": "FillDirtB"
   },
   "o22_3BBD_0F04": {
    "unit": "S22",
    "seg": 15293,
    "off": 3844,
-   "grounding": "inventory:push_cs_call"
+   "alias_of": "FillDirtR"
   },
   "o22_3BBD_0FD3": {
    "unit": "S22",
    "seg": 15293,
    "off": 4051,
-   "grounding": "inventory:push_cs_call"
+   "alias_of": "SmoothMany"
   },
   "o22_3BBD_1031": {
    "unit": "S22",
    "seg": 15293,
    "off": 4145,
-   "grounding": "inventory:push_cs_call"
+   "alias_of": "SmoothACell"
   },
   "o22_3BBD_10B8": {
    "unit": "S22",
    "seg": 15293,
    "off": 4280,
-   "grounding": "inventory:push_cs_call"
+   "alias_of": "IsValidSLoc"
   },
   "o22_3BBD_10E5": {
    "unit": "S22",
    "seg": 15293,
    "off": 4325,
-   "grounding": "inventory:push_cs_call"
+   "alias_of": "GetSM"
   },
   "o22_3BBD_118D": {
    "unit": "S22",
    "seg": 15293,
    "off": 4493,
-   "grounding": "inventory:push_cs_call"
+   "alias_of": "SetSM"
   },
   "o23_39C7_0000": {
    "unit": "S23",
    "seg": 14791,
    "off": 0,
-   "grounding": "inventory:push_cs_call"
+   "alias_of": "XFlipLong"
   },
   "o23_39C7_0024": {
    "unit": "S23",
    "seg": 14791,
    "off": 36,
-   "grounding": "inventory:push_cs_call"
+   "alias_of": "FlipWords"
   },
   "o23_39C7_0075": {
    "unit": "S23",
    "seg": 14791,
    "off": 117,
-   "grounding": "inventory:vector"
+   "alias_of": "win_DrawInfoWindow"
   },
   "o23_39C7_0092": {
    "unit": "S23",
    "seg": 14791,
    "off": 146,
-   "grounding": "inventory:push_cs_call"
+   "alias_of": "win_PrintStyleTextInRect"
   },
   "o23_39C7_04A1": {
    "unit": "S23",
    "seg": 14791,
    "off": 1185,
-   "grounding": "inventory:push_cs_call"
+   "alias_of": "win_GetStyleTextHeight"
   },
   "o23_39C7_0668": {
    "unit": "S23",
@@ -12373,19 +12853,19 @@
    "unit": "S23",
    "seg": 14791,
    "off": 3097,
-   "grounding": "inventory:vector"
+   "alias_of": "OpenInfoWindow"
   },
   "o23_39C7_0C7C": {
    "unit": "S23",
    "seg": 14791,
    "off": 3196,
-   "grounding": "inventory:push_cs_call"
+   "alias_of": "PopUpInfoWindow"
   },
   "o23_39C7_0F50": {
    "unit": "S23",
    "seg": 14791,
    "off": 3920,
-   "grounding": "inventory:push_cs_call,vector"
+   "alias_of": "ProcInfoEvent"
   },
   "o24_39C7_0000": {
    "unit": "S24",
@@ -12735,6 +13215,30 @@
     }
    ]
   },
+  "processExp": {
+   "unit": "S22",
+   "seg": 15293,
+   "off": 10,
+   "grounding": "inventory:far_call",
+   "history": [
+    {
+     "was": "o22_3BBD_000A",
+     "why": "Win16 MAPSYM ANTEDIT_MODULE run _processExp.._SetSM (23 members, DoTool..SetSM) aligns 1:1 with DOS S22:3BBD (23 functions, same order); Win16 exact bodies of DoTool/ReDrawMapEdit/ClearLifeB/R/ExpAddAnt/ExpAddFood/WallNeighbors/IsItWall/FillDirtB/R/SmoothMany/IsValidSLoc/GetSM/SetSM match the DOS code; xver DropWall/ExpAddAnt/ExpKillAnts agree positionally; wallShape table 2DF4 = Win16 ConnectWall data"
+    }
+   ]
+  },
+  "processSpider": {
+   "unit": "S22",
+   "seg": 14791,
+   "off": 1734,
+   "grounding": "inventory:push_cs_call",
+   "history": [
+    {
+     "was": "o22_39C7_06C6",
+     "why": "Win16 MAPSYM SIMANT_MODULE run _processEdit.._YellowHelp (15 members) aligns 1:1 with DOS S22:39C7 (15 functions, same order, similar sizes); processEdit is xver HIGH at position 1; xver DoLaserFire/YellowBirth/YellowDeath/YellowDialog/YellowCommand (LOW, unique constants) agree positionally"
+    }
+   ]
+  },
   "win_ClearObjArea": {
    "unit": "root",
    "seg": 8698,
@@ -12792,6 +13296,18 @@
     {
      "was": "f_21FA_0315",
      "why": "window worker: Win16 win_* function with the same structure/strings (report 2026-09-30)"
+    }
+   ]
+  },
+  "win_DrawInfoWindow": {
+   "unit": "S23",
+   "seg": 14791,
+   "off": 117,
+   "grounding": "inventory:vector",
+   "history": [
+    {
+     "was": "o23_39C7_0075",
+     "why": "Win16 MAPSYM _TEXT run _XFlipLong.._ProcInfoEvent (9 members) aligns 1:1 with DOS S23:39C7 (9 functions, same order); DisplayCard is xver HIGH at position 6; xver win_DrawInfoWindow/win_PrintStyleTextInRect/PopUpInfoWindow (MEDIUM) agree positionally; XFlipLong/FlipWords/win_DrawInfoWindow/OpenInfoWindow Win16 exact bodies match"
     }
    ]
   },
@@ -12855,6 +13371,18 @@
     }
    ]
   },
+  "win_GetStyleTextHeight": {
+   "unit": "S23",
+   "seg": 14791,
+   "off": 1185,
+   "grounding": "inventory:push_cs_call",
+   "history": [
+    {
+     "was": "o23_39C7_04A1",
+     "why": "Win16 MAPSYM _TEXT run _XFlipLong.._ProcInfoEvent (9 members) aligns 1:1 with DOS S23:39C7 (9 functions, same order); DisplayCard is xver HIGH at position 6; xver win_DrawInfoWindow/win_PrintStyleTextInRect/PopUpInfoWindow (MEDIUM) agree positionally; XFlipLong/FlipWords/win_DrawInfoWindow/OpenInfoWindow Win16 exact bodies match"
+    }
+   ]
+  },
   "win_ObjAddr": {
    "unit": "root",
    "seg": 9477,
@@ -12864,6 +13392,18 @@
     {
      "was": "f_2505_02D7",
      "why": "window worker: Win16 win_* function with the same structure/strings (report 2026-09-30)"
+    }
+   ]
+  },
+  "win_PrintStyleTextInRect": {
+   "unit": "S23",
+   "seg": 14791,
+   "off": 146,
+   "grounding": "inventory:push_cs_call",
+   "history": [
+    {
+     "was": "o23_39C7_0092",
+     "why": "Win16 MAPSYM _TEXT run _XFlipLong.._ProcInfoEvent (9 members) aligns 1:1 with DOS S23:39C7 (9 functions, same order); DisplayCard is xver HIGH at position 6; xver win_DrawInfoWindow/win_PrintStyleTextInRect/PopUpInfoWindow (MEDIUM) agree positionally; XFlipLong/FlipWords/win_DrawInfoWindow/OpenInfoWindow Win16 exact bodies match"
     }
    ]
   },
@@ -14352,6 +14892,11 @@
    "off": 1852,
    "grounding": "CalcScore (S14:384C:0000): mov es,[873C]; mov ax,es:[si+073C] int ring[64]"
   },
+  "fd_50F6_07B6": {
+   "seg": 20726,
+   "off": 1974,
+   "grounding": "S22:3BBD ExpSubStates-like char array: DropWall es:[07B7], ExpDig [07B8], ExpAddAnt [07B9], ExpAddFood [07BA], GetSM [07BB], ExpKillAnts [07BC] share CONST word 8866 (Win16 ExpSubStates[1..6])"
+  },
   "fd_50F6_07BC": {
    "seg": 20726,
    "off": 1980,
@@ -14427,6 +14972,11 @@
    "off": 2554,
    "grounding": "o08_35F5_0050 (RandWorld): mov es,[S08 CONST word] ; mov es:[off]"
   },
+  "fd_50F6_09FC": {
+   "seg": 20726,
+   "off": 2556,
+   "grounding": "processExp (S22:3BBD:000A): CONST word 884E, mov es:[09FC],x / es:[09FE],y (ExpLastPnt pair; DoTool passes both to DropWall/ExpDig)"
+  },
   "fd_50F6_0A00": {
    "seg": 20726,
    "off": 2560,
@@ -14451,6 +15001,11 @@
    "seg": 20726,
    "off": 2704,
    "grounding": "CheatKeys (S07): mov es,[S07 CONST word]; es:[off]"
+  },
+  "fd_50F6_0A9C": {
+   "seg": 20726,
+   "off": 2716,
+   "grounding": "processExp (S22:3BBD:000A): CONST word 8850, inc word es:[0A9C] per mouse-drag step"
   },
   "fd_50F6_0A9E": {
    "seg": 20726,
@@ -14817,6 +15372,11 @@
    "off": 4200,
    "grounding": "o08_35F5_0050 (RandWorld): mov es,[S08 CONST word] ; mov es:[off]"
   },
+  "fd_50F6_106C": {
+   "seg": 20726,
+   "off": 4204,
+   "grounding": "processExp (S22:3BBD:000A): CONST word 8862, xor byte es:[106C],1"
+  },
   "fd_50F6_1074": {
    "seg": 20726,
    "off": 4212,
@@ -14897,6 +15457,71 @@
    "off": 4288,
    "grounding": "o08_35F5_0050 (RandWorld): mov es,[S08 CONST word] ; mov es:[off]"
   },
+  "fd_50F6_10D2": {
+   "seg": 20726,
+   "off": 4306,
+   "grounding": "processExp (S22:3BBD:000A): CONST word 8852, pt.x-es:[10D2], pt.y-es:[10D4] (map window origin pair)"
+  },
+  "fd_50F6_10DE": {
+   "seg": 20726,
+   "off": 4318,
+   "grounding": "f_0250_000E: mov es,[7E8E] (CONST word 50F6); cmp es:[10DE],bx (edit rows bound)"
+  },
+  "fd_50F6_10E0": {
+   "seg": 20726,
+   "off": 4320,
+   "grounding": "f_0250_000E: mov es,[7E8C] (CONST word 50F6); cmp es:[10E0],di (edit columns bound of the 40-wide edit update map)"
+  },
+  "fd_50F6_10E6": {
+   "seg": 20726,
+   "off": 4326,
+   "grounding": "f_0250_01E7: mov es,[7E9A]; far handle es:[10E6]/[10E8] tested, passed to db_ReleaseHandle, cleared"
+  },
+  "fd_50F6_10EA": {
+   "seg": 20726,
+   "off": 4330,
+   "grounding": "f_0250_01E7: mov es,[7E98]; far handle es:[10EA]/[10EC] tested, passed to db_ReleaseHandle, cleared"
+  },
+  "fd_50F6_10EE": {
+   "seg": 20726,
+   "off": 4334,
+   "grounding": "f_0250_0256: mov es,[7EA0]; far handle es:[10EE] freed by f_171C_1C0A then = f_1A53_00BA(10-set,9)"
+  },
+  "fd_50F6_1102": {
+   "seg": 20726,
+   "off": 4354,
+   "grounding": "f_0250_03B6: mov es,[7EA4]; mov word ptr es:[1102],1/2/3 (tile drawing mode), switch in f_0250_0ADB"
+  },
+  "fd_50F6_110C": {
+   "seg": 20726,
+   "off": 4364,
+   "grounding": "processExp (S22:3BBD:000A): CONST word 8858, pt.x-es:[110C], pt.y-es:[110E] (edit window origin pair)"
+  },
+  "fd_50F6_1114": {
+   "seg": 20726,
+   "off": 4372,
+   "grounding": "f_0250_129E: mov es,[7ED4]; cmp byte ptr es:[si+1114],al (g_94E4) with si=y*40+x; mov es:[si+1114],al (edit tile shadow bytes)"
+  },
+  "fd_50F6_15C4": {
+   "seg": 20726,
+   "off": 5572,
+   "grounding": "f_0250_000E: mov es,[7E90]; mov es:[bx+15C4],-1 with bx=(y*40+x)*2; f_0250_05CB _fmemset(50F6:15C4,-1,0x960)"
+  },
+  "fd_50F6_37DE": {
+   "seg": 20726,
+   "off": 14302,
+   "grounding": "f_0250_0256: mov es,[7E9E]; es:[37DE]/[37E0] = f_1A53_00BA(10-set,9); les bx,es:[37DE] handle deref"
+  },
+  "fd_50F6_37EA": {
+   "seg": 20726,
+   "off": 14314,
+   "grounding": "f_2662_0CA2/f_2662_1120: mov es,[8A5E]; lcall es:[37EA] (pic+8, dest, shift, flag) for picture type 3 or display type 2"
+  },
+  "fd_50F6_37EE": {
+   "seg": 20726,
+   "off": 14318,
+   "grounding": "f_2662_0262: mov es,[8A58]; lcall es:[37EE] (rect, buffer, clip, dest) far function pointer"
+  },
   "fd_50F6_3836": {
    "seg": 20726,
    "off": 14390,
@@ -14906,6 +15531,16 @@
    "seg": 20726,
    "off": 14394,
    "grounding": "o06_35F5_11FF: mov es,[CONST 84E8 = 50F6]; es:[383A] (S06:35F5 InitSimYard/yard sim unit)"
+  },
+  "fd_50F6_3856": {
+   "seg": 20726,
+   "off": 14422,
+   "grounding": "processExp (S22:3BBD:000A): CONST word 8854, idiv es:[3856] (map x scale)"
+  },
+  "fd_50F6_3858": {
+   "seg": 20726,
+   "off": 14424,
+   "grounding": "processExp (S22:3BBD:000A): CONST word 8856, idiv es:[3858] (map y scale)"
   },
   "fd_50F6_3862": {
    "seg": 20726,
@@ -14977,6 +15612,11 @@
    "off": 15184,
    "alias_of": "db_handles"
   },
+  "fd_50F6_3B58": {
+   "seg": 20726,
+   "off": 15192,
+   "grounding": "f_2662_0CA2/f_2662_1120: mov es,[8A5C]; lcall es:[3B58] (pic+8, dest, shift, flag) for picture type 0"
+  },
   "fd_50F6_46E2": {
    "seg": 20726,
    "off": 18146,
@@ -15022,6 +15662,21 @@
    "off": 18954,
    "grounding": "f_218D_000C: rep movsw 8 words 50F6:49FA -> 4A0A (previous click event for double-click detection; +0Ch=4A16, +6=4A10)"
   },
+  "fd_50F6_4A42": {
+   "seg": 20726,
+   "off": 19010,
+   "grounding": "f_2662_0348: mov es,[8A5A]; mov es:[4A42],si / es:[4A44],ax stores the new animation object far pointer; f_2662_090D les bx,es:[4A42]"
+  },
+  "fd_55B3_19BE": {
+   "seg": 21939,
+   "off": 6590,
+   "grounding": "processExp (S22:3BBD:000A): far variable in DGROUP via CONST word 885A (=DGROUP), idiv es:[19BE]"
+  },
+  "fd_55B3_19C0": {
+   "seg": 21939,
+   "off": 6592,
+   "grounding": "processExp (S22:3BBD:000A): far variable in DGROUP via CONST word 885E (=DGROUP), idiv es:[19C0]"
+  },
   "fd_55B3_360C": {
    "seg": 21939,
    "off": 13836,
@@ -15037,6 +15692,21 @@
    "off": 13842,
    "grounding": "f_19DC_001A: mov es,[DS:89BA] (CONST word 55B3); mov cx,es:[3612] - far-declared int in DGROUP (EMS pages available)"
   },
+  "fd_55B3_3614": {
+   "seg": 21939,
+   "off": 13844,
+   "grounding": "f_0250_012D: mov es,[7E94] (CONST word 55B3); push es:[3614] for WinPrintf total pages"
+  },
+  "fd_55B3_3DE6": {
+   "seg": 21939,
+   "off": 15846,
+   "grounding": "f_1D8E_070E: mov es,[89CC-CONST segword=55B3]; mov es:[3DE6],ax (far int)"
+  },
+  "fd_55B3_3DE8": {
+   "seg": 21939,
+   "off": 15848,
+   "grounding": "f_1D8E_070E: mov es,[89CC]; mov es:[3DE8],ax (far int)"
+  },
   "g_1B9A": {
    "seg": 21939,
    "off": 7066,
@@ -15051,6 +15721,11 @@
    "seg": 21939,
    "off": 7090,
    "grounding": "f_14EE_04B5: mov al,[si+1BB2] (DS=DGROUP) byte tile per direction"
+  },
+  "g_3D20": {
+   "seg": 21939,
+   "off": 15648,
+   "grounding": "f_0250_0B86: _fmemcpy(DS:3D20, tile bytes, 48h/20h) near buffer passed as far pointer (push ds; mov ax,3D20)"
   },
   "g_3DA0": {
    "seg": 21939,
@@ -15127,6 +15802,11 @@
    "off": 35746,
    "grounding": "f_0093_008F: mov [8BA2],ax (DS=DGROUP)"
   },
+  "g_9126": {
+   "seg": 21939,
+   "off": 37158,
+   "grounding": "f_0250_0721: cmp word ptr [9126],380h; sub [9126],280h (DS word life/tile value)"
+  },
   "g_9128": {
    "seg": 21939,
    "off": 37160,
@@ -15151,6 +15831,31 @@
    "seg": 21939,
    "off": 37192,
    "grounding": "f_259D_000E: lcall [9148] (x0,y0,x1,y1,buf) screen area to buffer (far function pointer)"
+  },
+  "g_914C": {
+   "seg": 21939,
+   "off": 37196,
+   "grounding": "f_0250_0ADB: lcall [914C](x,y,far tile ptr,w,h) far function pointer (tile blitter, modes 2/3)"
+  },
+  "g_9150": {
+   "seg": 21939,
+   "off": 37200,
+   "grounding": "f_1D8E_07F6: lcall [9150] (far code pointer, BSS)"
+  },
+  "g_9158": {
+   "seg": 21939,
+   "off": 37208,
+   "grounding": "f_1D8E_070E: lcall [9158] (far code pointer, BSS)"
+  },
+  "g_9170": {
+   "seg": 21939,
+   "off": 37232,
+   "grounding": "f_1D8E_0435: lcall [9170] (far code pointer, BSS)"
+  },
+  "g_917C": {
+   "seg": 21939,
+   "off": 37244,
+   "grounding": "f_0250_0ADB: lcall [917C](x,y,(tile-300h)<<5) far function pointer (tile blitter, mode 1)"
   },
   "g_91A0": {
    "seg": 21939,
@@ -15181,6 +15886,11 @@
    "seg": 21939,
    "off": 37424,
    "grounding": "f_2505_0006/0545: les bx,[bx+9230] indexed by win>>8 (window handle table, 4-byte entries)"
+  },
+  "g_94E4": {
+   "seg": 21939,
+   "off": 38116,
+   "grounding": "f_0250_0721: mov al,[94E4] (DS) byte tile number; shr 6 / and 3F; Punt 'Tile >= 256'"
   },
   "modeLevels": {
    "seg": 15703,

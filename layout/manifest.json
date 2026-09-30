@@ -1393,12 +1393,26 @@
    "profile": "msc600a",
    "flags": [
     "/AL",
-    "/Os"
+    "/Os",
+    "/Oe",
+    "/Og",
+    "/Zd"
    ],
-   "placements": {},
+   "placements": {
+    "CONST": {
+     "seg": 21939,
+     "off": 32396,
+     "size": 32
+    },
+    "_DATA": {
+     "seg": 21939,
+     "off": 6590,
+     "size": 221
+    }
+   },
    "lang": "c",
    "source": "src/root/m0250.c",
-   "source_sha256": "1e5bb93eab7bca812484b93a58e09ed6f847540638585507c07a3abc805c19c2",
+   "source_sha256": "5ec9b5a865e75970d2a719c2a5dba154eacc7918109c1554202d1be9e1c50b12",
    "claims": [
     {
      "name": "f_0250_0CF6",
@@ -1410,12 +1424,199 @@
      "kind": "C",
      "provenance": "EXACT_NATURAL",
      "reloc_order": "EXACT"
+    },
+    {
+     "name": "f_0250_000E",
+     "unit": "root",
+     "seg": 592,
+     "off": 14,
+     "size": 96,
+     "target_sha256": "5f1527e582b8756d81583518595cd77c73da833fdb83fbd55a4fcbc8db41f5a7",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL",
+     "reloc_order": "GROUPED"
+    },
+    {
+     "name": "f_0250_006E",
+     "unit": "root",
+     "seg": 592,
+     "off": 110,
+     "size": 166,
+     "target_sha256": "647796488458b027e4337a5bc9d3d773bc595caed75f569997103a23cb0eff85",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL",
+     "reloc_order": "EXACT"
+    },
+    {
+     "name": "f_0250_0114",
+     "unit": "root",
+     "seg": 592,
+     "off": 276,
+     "size": 25,
+     "target_sha256": "ae1279cdc5391fbbfe72ad7f43ba9380457f8d39fb7f6e2b1c9c7fe52d980331",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL",
+     "reloc_order": "GROUPED"
+    },
+    {
+     "name": "f_0250_012D",
+     "unit": "root",
+     "seg": 592,
+     "off": 301,
+     "size": 186,
+     "target_sha256": "d4d49ecaa3b5a9135a42a58493629ba0902ce233224eaf6246c0f1df7a86b263",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL",
+     "reloc_order": "GROUPED"
+    },
+    {
+     "name": "f_0250_01E7",
+     "unit": "root",
+     "seg": 592,
+     "off": 487,
+     "size": 111,
+     "target_sha256": "bc368eec9cc0fd5210ef35dd872f30866d1038e1e10df5c12625fff9af856dde",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL",
+     "reloc_order": "GROUPED"
+    },
+    {
+     "name": "f_0250_0256",
+     "unit": "root",
+     "seg": 592,
+     "off": 598,
+     "size": 276,
+     "target_sha256": "cb32307f8fe20ef0e9fa3d0059033af273bdb91679c75ab16ac81c815c85e2fd",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL",
+     "reloc_order": "GROUPED"
+    },
+    {
+     "name": "f_0250_036A",
+     "unit": "root",
+     "seg": 592,
+     "off": 874,
+     "size": 76,
+     "target_sha256": "7f0c25e84498733f288a719ea7368374afc74a1fd8004dfe928337f55e714a9b",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL",
+     "reloc_order": "EXACT"
+    },
+    {
+     "name": "f_0250_03B6",
+     "unit": "root",
+     "seg": 592,
+     "off": 950,
+     "size": 533,
+     "target_sha256": "dfcf5be13d6b8df2569384338d8b81eb8054b53e0e0ed30398af78029b19a33a",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL",
+     "reloc_order": "GROUPED"
+    },
+    {
+     "name": "f_0250_05CB",
+     "unit": "root",
+     "seg": 592,
+     "off": 1483,
+     "size": 32,
+     "target_sha256": "3a8583a0656ffeb55e5c82b8738b15306b7a66123eb44e0b635a982ef9f44be2",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL",
+     "reloc_order": "GROUPED"
+    },
+    {
+     "name": "f_0250_05EB",
+     "unit": "root",
+     "seg": 592,
+     "off": 1515,
+     "size": 63,
+     "target_sha256": "8e774f9aa8cc69c18de6faf5ad4292fda5acaab3fa54926b988c867fa201e6fe",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL",
+     "reloc_order": "GROUPED"
+    },
+    {
+     "name": "f_0250_062A",
+     "unit": "root",
+     "seg": 592,
+     "off": 1578,
+     "size": 25,
+     "target_sha256": "410f570659ae3f4681609550301968cdba164aa32041d302868c80f30be9be5f",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL",
+     "reloc_order": "GROUPED"
+    },
+    {
+     "name": "f_0250_0643",
+     "unit": "root",
+     "seg": 592,
+     "off": 1603,
+     "size": 222,
+     "target_sha256": "61e411be7407cee6cf2a16e445378c78036f9346bb3b2c21e75f445191ba6d34",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL",
+     "reloc_order": "GROUPED"
+    },
+    {
+     "name": "f_0250_0721",
+     "unit": "root",
+     "seg": 592,
+     "off": 1825,
+     "size": 500,
+     "target_sha256": "b4d374c0ba19853e860ef58304ff3e6d67140cbdd3359b1528a570f2f30b5091",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL",
+     "reloc_order": "GROUPED"
+    },
+    {
+     "name": "f_0250_0915",
+     "unit": "root",
+     "seg": 592,
+     "off": 2325,
+     "size": 454,
+     "target_sha256": "7cd6f0c28d613247041b624e09b5647db4bdc0afcd836d651a523ea2efbef389",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL",
+     "reloc_order": "GROUPED"
+    },
+    {
+     "name": "f_0250_0ADB",
+     "unit": "root",
+     "seg": 592,
+     "off": 2779,
+     "size": 171,
+     "target_sha256": "9fb6dd800ca705dd5e900f637359ee8abbfad918375080d867e7e3188ba00992",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL",
+     "reloc_order": "GROUPED"
+    },
+    {
+     "name": "f_0250_0B86",
+     "unit": "root",
+     "seg": 592,
+     "off": 2950,
+     "size": 137,
+     "target_sha256": "3b63663f8e62007cc5ddf95d2e88de6e5166dbdd9668d4666e08397bc3c79804",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL",
+     "reloc_order": "GROUPED"
+    },
+    {
+     "name": "f_0250_0C0F",
+     "unit": "root",
+     "seg": 592,
+     "off": 3087,
+     "size": 231,
+     "target_sha256": "00c027acbee510aa3d99835a84a4d5aab27ace4251761a2232b36ce14dfa8e87",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL",
+     "reloc_order": "GROUPED"
     }
    ],
    "scaffold": [
     "f_0250_0D10"
    ],
-   "object_sha256": "66fa63a9af911a5f8a0f18b40e64b9f80b9827ce9ca5558f0440ab8087c402e7"
+   "object_sha256": "b9bb73cf466b89d5dfd298334c8b397b6fafaf9eaec1e8479e6bbba7699e6cf6"
   },
   "root:0894": {
    "unit": "root",
@@ -1791,6 +1992,250 @@
    ],
    "scaffold": [],
    "object_sha256": "aa6646d0885f2e5e69e5b418fcc84b1de6649603c121fad2c814466ce0cd5c34"
+  },
+  "root:0AD9": {
+   "unit": "root",
+   "seg": 2777,
+   "profile": "msc600ax",
+   "flags": [
+    "/AL",
+    "/Os",
+    "/Oe",
+    "/Og",
+    "/Zd"
+   ],
+   "placements": {
+    "CONST": {
+     "seg": 21939,
+     "off": 32938,
+     "size": 60
+    },
+    "_DATA": {
+     "seg": 21939,
+     "off": 7058,
+     "size": 8
+    }
+   },
+   "lang": "c",
+   "extent": {
+    "start": 44444,
+    "end": 48769
+   },
+   "source": "src/root/m0AD9.c",
+   "source_sha256": "5e7b58e31cbd367a4ca357a94ff98b61051cc1c7ad31167d259357724432af47",
+   "claims": [
+    {
+     "name": "InitSow",
+     "unit": "root",
+     "seg": 2777,
+     "off": 12,
+     "size": 176,
+     "target_sha256": "f3a3e49bcf29f7a500877fb0e0020e8ffc2176e51cd695e997b12a0b3737a19a",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL",
+     "reloc_order": "EXACT"
+    },
+    {
+     "name": "DoSow",
+     "unit": "root",
+     "seg": 2777,
+     "off": 188,
+     "size": 386,
+     "target_sha256": "cce1244cdbf7be74b8402decab3ff4d1d93c0f48d5beb637cdb6706d3bcb0eed",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL",
+     "reloc_order": "GROUPED"
+    },
+    {
+     "name": "InitAntLions",
+     "unit": "root",
+     "seg": 2777,
+     "off": 574,
+     "size": 72,
+     "target_sha256": "18433daf94df7b2fc4f91fe98f2a9e885a74eb6d479085a9c035ae19f53dc8aa",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL",
+     "reloc_order": "EXACT"
+    },
+    {
+     "name": "AddRandAntLion",
+     "unit": "root",
+     "seg": 2777,
+     "off": 646,
+     "size": 134,
+     "target_sha256": "bf0211a90f040947c0d519eb4f0c5f0eb18d105bcefad67b7eac99f024f8466c",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL",
+     "reloc_order": "GROUPED"
+    },
+    {
+     "name": "AddAntLion",
+     "unit": "root",
+     "seg": 2777,
+     "off": 780,
+     "size": 199,
+     "target_sha256": "37ecd7eb4cfe837aedeb45d25480d8b10306587ee0f9f942ad6e9abc35b420f2",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL",
+     "reloc_order": "GROUPED"
+    },
+    {
+     "name": "DoAntLions",
+     "unit": "root",
+     "seg": 2777,
+     "off": 979,
+     "size": 1002,
+     "target_sha256": "e52e9314c351d0d76aed3ccd15d3c269f0ade8614a48cb0ba3c890e04f0582af",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL",
+     "reloc_order": "GROUPED"
+    },
+    {
+     "name": "SetAntLion",
+     "unit": "root",
+     "seg": 2777,
+     "off": 1981,
+     "size": 63,
+     "target_sha256": "19fe17849de82b735c09b003e6febefd6449a2b63aa6f07c1f7b624b7c57ce25",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL",
+     "reloc_order": "GROUPED"
+    },
+    {
+     "name": "FindInLionList",
+     "unit": "root",
+     "seg": 2777,
+     "off": 2044,
+     "size": 60,
+     "target_sha256": "1e3e572e2a959257bd64df13a28e81108e0c5364815bcafdcc7cd2093ccb7564",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL",
+     "reloc_order": "EXACT"
+    },
+    {
+     "name": "KillAntLion",
+     "unit": "root",
+     "seg": 2777,
+     "off": 2104,
+     "size": 164,
+     "target_sha256": "107ce12de2691b3641be18db30a2370d2aba3343abc6cf4fa5e6031cecc284c3",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL",
+     "reloc_order": "GROUPED"
+    },
+    {
+     "name": "InitPillar",
+     "unit": "root",
+     "seg": 2777,
+     "off": 2268,
+     "size": 96,
+     "target_sha256": "95cb14dc83ac699a8c2181c5472f91d33a663236b83c6bbd4408dbd42a1674d2",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL",
+     "reloc_order": "EXACT"
+    },
+    {
+     "name": "DoPillar",
+     "unit": "root",
+     "seg": 2777,
+     "off": 2364,
+     "size": 1007,
+     "target_sha256": "f1172730099b07405285c9c119b6b9f6283a56f7073cc018a99ab4799295521b",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL",
+     "reloc_order": "EXACT"
+    },
+    {
+     "name": "StorePillarMap",
+     "unit": "root",
+     "seg": 2777,
+     "off": 3371,
+     "size": 140,
+     "target_sha256": "589860b796a0ee3674c6d4edf020063ee60ee986f6a9d3d6d4aaa616953249aa",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL",
+     "reloc_order": "GROUPED"
+    },
+    {
+     "name": "ReplacePillarMap",
+     "unit": "root",
+     "seg": 2777,
+     "off": 3511,
+     "size": 88,
+     "target_sha256": "138cadc08a66310c62362585eca42fa96ac2d4db6aeebd21cc3dc9b82297e41d",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL",
+     "reloc_order": "GROUPED"
+    },
+    {
+     "name": "MakeAPill",
+     "unit": "root",
+     "seg": 2777,
+     "off": 3599,
+     "size": 267,
+     "target_sha256": "313413b37e1a89f256a0f6060f75c00b454fb1b0d2ba6e42ede1be071a00bf5b",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL",
+     "reloc_order": "EXACT"
+    },
+    {
+     "name": "PlacePillTile",
+     "unit": "root",
+     "seg": 2777,
+     "off": 3866,
+     "size": 52,
+     "target_sha256": "9fecd6bdd0c85adeae44705014f64e0bd382a4b1bdd17753f966433803ab2c9d",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL",
+     "reloc_order": "GROUPED"
+    },
+    {
+     "name": "IsPillDead",
+     "unit": "root",
+     "seg": 2777,
+     "off": 3972,
+     "size": 108,
+     "target_sha256": "672cfcc3f44dc720054d1c97d5f16927bde729d10b0d6eaf1bf1a24099d487ba",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL",
+     "reloc_order": "EXACT"
+    },
+    {
+     "name": "MakePillFood",
+     "unit": "root",
+     "seg": 2777,
+     "off": 4080,
+     "size": 180,
+     "target_sha256": "22008a2dd35f13292d093d187031bab9498448fb843457110a07fad32207bdac",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL",
+     "reloc_order": "EXACT"
+    },
+    {
+     "name": "PillFoodTile",
+     "unit": "root",
+     "seg": 2777,
+     "off": 4260,
+     "size": 77,
+     "target_sha256": "1077c85ea2cf2771a6b74740957c2daf1beef1ca650a4620575b658ec1808b70",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL",
+     "reloc_order": "GROUPED"
+    },
+    {
+     "name": "PillGetLife",
+     "unit": "root",
+     "seg": 2777,
+     "off": 3918,
+     "size": 54,
+     "target_sha256": "2ec97b6f82d7e104a3bb4f1aafa8a279e74e6766b95ba26846621c644bbc63be",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL",
+     "reloc_order": "GROUPED"
+    }
+   ],
+   "scaffold": [],
+   "object_sha256": "e4411db29ced7726a7d4e5461343dff10236b7083cac8d0560d23a58d9ac6612"
   },
   "root:0BE8": {
    "unit": "root",
@@ -5203,6 +5648,157 @@
     "ch_LookUpId"
    ],
    "object_sha256": "be58568f18d46af7c2e73ce7e5d53c584f15f108544aa9194cbae45466cc51ae"
+  },
+  "root:1D8E": {
+   "unit": "root",
+   "seg": 7566,
+   "profile": "msc600a",
+   "flags": [
+    "/AL",
+    "/Os",
+    "/Oe",
+    "/Og",
+    "/Gs"
+   ],
+   "placements": {
+    "CONST": {
+     "seg": 21939,
+     "off": 35276,
+     "size": 4
+    }
+   },
+   "lang": "c",
+   "extent": {
+    "start": 121058,
+    "end": 124277
+   },
+   "source": "src/root/m1D8E.c",
+   "source_sha256": "afe9364f319633dd85c276bed18e848a605934156bfbb4fc276d304cd2ec2556",
+   "claims": [
+    {
+     "name": "f_1D8E_0002",
+     "unit": "root",
+     "seg": 7566,
+     "off": 2,
+     "size": 61,
+     "target_sha256": "f824eeeba9f95d254f654eef4348eba57dd5716b2ba4c3425e12d2c9a9ef713c",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL",
+     "reloc_order": "EXACT"
+    },
+    {
+     "name": "f_1D8E_003F",
+     "unit": "root",
+     "seg": 7566,
+     "off": 63,
+     "size": 638,
+     "target_sha256": "ecfeb877c92bb79e6d6aba3a222fed282b0dd6f029542b697ae5949b75fbdd48",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL",
+     "reloc_order": "EXACT"
+    },
+    {
+     "name": "f_1D8E_02BD",
+     "unit": "root",
+     "seg": 7566,
+     "off": 701,
+     "size": 199,
+     "target_sha256": "5ea46440af74e65694b052521c7b0388bcbafa9cf568b50d55fc78ac887961e6",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL",
+     "reloc_order": "EXACT"
+    },
+    {
+     "name": "f_1D8E_0384",
+     "unit": "root",
+     "seg": 7566,
+     "off": 900,
+     "size": 177,
+     "target_sha256": "ae64a27d15a7f4c5bdfbcddefebb6526e2f0b88915fdac9af4bff6c8d6c15757",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL",
+     "reloc_order": "EXACT"
+    },
+    {
+     "name": "f_1D8E_0435",
+     "unit": "root",
+     "seg": 7566,
+     "off": 1077,
+     "size": 729,
+     "target_sha256": "b06865489cca62f2580aabc55d65be7b971d9c943edf28101805f621f86b83a5",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL",
+     "reloc_order": "GROUPED"
+    },
+    {
+     "name": "f_1D8E_070E",
+     "unit": "root",
+     "seg": 7566,
+     "off": 1806,
+     "size": 232,
+     "target_sha256": "330fc9e41e4eda5f7a95395023e31ec33c0ea91dd62eec13d6784aa8f6f73fa1",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL",
+     "reloc_order": "EXACT"
+    },
+    {
+     "name": "f_1D8E_07F6",
+     "unit": "root",
+     "seg": 7566,
+     "off": 2038,
+     "size": 244,
+     "target_sha256": "88cdb1227505c427c66da0a456468f853d98709aa7a80da163ce2ddb469fb9ad",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL",
+     "reloc_order": "EXACT"
+    },
+    {
+     "name": "f_1D8E_08EA",
+     "unit": "root",
+     "seg": 7566,
+     "off": 2282,
+     "size": 244,
+     "target_sha256": "916104c7d706cde6061f07f5388cc1625b9aaacd20f251e78a29c433c40a10eb",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL",
+     "reloc_order": "EXACT"
+    },
+    {
+     "name": "f_1D8E_09DE",
+     "unit": "root",
+     "seg": 7566,
+     "off": 2526,
+     "size": 233,
+     "target_sha256": "5e3dd72f57ca4bf4bd099d622bc415d52a1a722f6ff31d80c6e53b8c0eb51f29",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL",
+     "reloc_order": "EXACT"
+    },
+    {
+     "name": "f_1D8E_0AC7",
+     "unit": "root",
+     "seg": 7566,
+     "off": 2759,
+     "size": 231,
+     "target_sha256": "fbd11f7ddb48df0dc3033a9c820928a838fdbce75903976dc75b40f28be7cfde",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL",
+     "reloc_order": "EXACT"
+    },
+    {
+     "name": "f_1D8E_0BAE",
+     "unit": "root",
+     "seg": 7566,
+     "off": 2990,
+     "size": 231,
+     "target_sha256": "1aafca714d58678b3cb3297d888dc454d912d19c222151aee73fc5ce8255fdfe",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL",
+     "reloc_order": "EXACT"
+    }
+   ],
+   "scaffold": [],
+   "object_sha256": "2d52356f4f525f83acbd3564caa8cf1fc0dd7c3b7cb7e35fc1cf714dc6fda30c"
   },
   "root:20E8": {
    "unit": "root",
