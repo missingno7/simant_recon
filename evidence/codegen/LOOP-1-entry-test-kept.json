@@ -1,0 +1,25 @@
+{
+ "id": "LOOP-1",
+ "question": "When does MSC 6.00AX /Og keep the entry 'jmp <test>' of a for loop whose initial test is provably true? Positive control S08 ClrArrays (worker resB): the original's first loop keeps 'sub di,di / jmp <outer test>' (381 bytes). With a literal 0 stored in the body MSC rotates the outer loop (no entry jump, 379 bytes). A zero held in a local assigned before the loop (the definition is constant-propagated away, no store remains, but the local keeps a /Oe home) keeps the entry jump. Other pre-loop forms tried in micro tests (y = 0; x = y = 0; while loops; register) are rotated; a preceding store of 0 to a far global also keeps the jump.",
+ "header": "extern unsigned char far MapA[128][64];\nextern unsigned char far LifeA[128][64];\n",
+ "variants": {
+  "zero_local": "void far f(void)\n{\n    int x, y, v;\n\n    v = 0;\n    for (x = 0; x < 128; x++) {\n        for (y = 0; y < 64; y++) {\n            MapA[x][y] = v;\n            LifeA[x][y] = v;\n        }\n    }\n}\n",
+  "literal": "void far f(void)\n{\n    int x, y;\n\n    for (x = 0; x < 128; x++) {\n        for (y = 0; y < 64; y++) {\n            MapA[x][y] = 0;\n            LifeA[x][y] = 0;\n        }\n    }\n}\n"
+ },
+ "profiles": [
+  {
+   "profile": "msc600ax",
+   "flags": [
+    "/AL",
+    "/Os",
+    "/Oe",
+    "/Og",
+    "/Zi"
+   ]
+  }
+ ],
+ "expect": {
+  "zero_local@0": "sub di, di; jmp 0x38; sub si, si; jmp 0x32",
+  "literal@0": "sub di, di; sub si, si; jmp 0x30"
+ }
+}

@@ -1,0 +1,49 @@
+{
+ "id": "LOOP-1",
+ "question": "When does MSC 6.00AX /Og keep the entry 'jmp <test>' of a for loop whose initial test is provably true? Positive control S08 ClrArrays (worker resB): the original's first loop keeps 'sub di,di / jmp <outer test>' (381 bytes). With a literal 0 stored in the body MSC rotates the outer loop (no entry jump, 379 bytes). A zero held in a local assigned before the loop (the definition is constant-propagated away, no store remains, but the local keeps a /Oe home) keeps the entry jump. Other pre-loop forms tried in micro tests (y = 0; x = y = 0; while loops; register) are rotated; a preceding store of 0 to a far global also keeps the jump.",
+ "results": [
+  {
+   "variant": "zero_local",
+   "profile_index": 0,
+   "profile": "msc600ax",
+   "flags": [
+    "/AL",
+    "/Os",
+    "/Oe",
+    "/Og",
+    "/Zi"
+   ],
+   "source_sha256": "8c3d558458104bac0fc3f915437c33e836b2060a989853693dd53b3762d7a058",
+   "bytes": "558becb804009a0000000057562bffeb272bf6eb1d2ac08e060000b1068bdfd3e303de26888700008e06020026888700004683fe407cde4781ff80007cd35e5f8be55dcb",
+   "disasm": "push bp; mov bp, sp; mov ax, 4; lcall 0, 0; push di; push si; sub di, di; jmp 0x38; sub si, si; jmp 0x32; sub al, al; mov es, word ptr [0]; mov cl, 6; mov bx, di; shl bx, cl; add bx, si; mov byte ptr es:[bx], al; mov es, word ptr [2]; mov byte ptr es:[bx], al; inc si; cmp si, 0x40; jl 0x15; inc di; cmp di, 0x80; jl 0x11; pop si; pop di; mov sp, bp; pop bp; retf"
+  },
+  {
+   "variant": "literal",
+   "profile_index": 0,
+   "profile": "msc600ax",
+   "flags": [
+    "/AL",
+    "/Os",
+    "/Oe",
+    "/Og",
+    "/Zi"
+   ],
+   "source_sha256": "5f9d29246c23ebc6168e54ccc4f22bf9564e7c2f8416742c06eed2c625cbed48",
+   "bytes": "558becb802009a0000000057562bff2bf6eb1d2ac08e060000b1068bdfd3e303de26888700008e06020026888700004683fe407cde4781ff80007cd35e5f8be55dcb",
+   "disasm": "push bp; mov bp, sp; mov ax, 2; lcall 0, 0; push di; push si; sub di, di; sub si, si; jmp 0x30; sub al, al; mov es, word ptr [0]; mov cl, 6; mov bx, di; shl bx, cl; add bx, si; mov byte ptr es:[bx], al; mov es, word ptr [2]; mov byte ptr es:[bx], al; inc si; cmp si, 0x40; jl 0x13; inc di; cmp di, 0x80; jl 0xf; pop si; pop di; mov sp, bp; pop bp; retf"
+  }
+ ],
+ "checks": [
+  {
+   "check": "zero_local@0",
+   "needle": "sub di, di; jmp 0x38; sub si, si; jmp 0x32",
+   "ok": true
+  },
+  {
+   "check": "literal@0",
+   "needle": "sub di, di; sub si, si; jmp 0x30",
+   "ok": true
+  }
+ ],
+ "all_checks_pass": true
+}

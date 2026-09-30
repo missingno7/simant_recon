@@ -35,6 +35,21 @@ directly, which is much stronger evidence than in small/medium-model or grouped 
 A complete TU claim (`promote.py --extent`) requires the compiled segment to have exactly
 the module's length, contain no scaffold, and be tiled by individually exact claims.
 
+**Several objects in one frame.** When LINK concatenated two objects with the same segment
+name into one frame (S00 frame 31AD: object 1 at 31AD4-34582, LINK fill `00` at 34583,
+object 2 at 34584-35A65), the first object keeps the key `UNIT:SEG` and every later object
+is its own module `UNIT:SEG@OFF` (OFF = its first byte in the frame, hex), source
+`src/<unit>/m<SEG>_<OFF>.<ext>`, `"origin"` in the manifest. The gate requires every claim
+of such a module to be linked at exactly that origin, and the objects of one frame own
+disjoint offset ranges (`promote.py --module S00:31AD@2AB4 ... --extent 34584:35A65`).
+
+**Code-segment data.** Buffers and tables assembled into a code segment (S03:3126's
+320-byte line buffer, S03:3258's xlat tables) are claimed explicitly with
+`--code-data START:END` (linear hex) as kind `DATA_IN_CODE` (named `cd_<unit>_<SEG>_<OFF>`).
+Their bytes come from the candidate object at the module's placement, fixups are bound like
+code and compared with the oracle; a data claim cannot cover a public or a function-table
+entry. With them, such modules are complete TUs under the same tiling rule.
+
 ## Partial modules
 
 Modules may be recovered function by function. Same-module callees that are not yet

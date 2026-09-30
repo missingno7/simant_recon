@@ -807,55 +807,57 @@ int far o08_35F5_11F0(int x, int y)
     return MapA[col][row];
 }
 
-/* DRAFT, not claimed (ClrArrays): identical except the target's leading
- * 'jmp <outer test>' of the first loop (2 bytes; 379 vs 381). */
+/* The zero is held in a local: its constant-propagated definition before the first
+ * loop keeps that loop's entry test (sub di,di / jmp <outer test>), which a literal 0
+ * lets MSC rotate away (worker resB). */
 void far ClrArrays(void)
 {
-    int x, y;
+    int x, y, v;
 
+    v = 0;
     for (x = 0; x < 128; x++) {
         for (y = 0; y < 64; y++) {
-            MapA[x][y] = 0;
-            LifeA[x][y] = 0;
+            MapA[x][y] = v;
+            LifeA[x][y] = v;
         }
     }
     for (x = 0; x < 64; x++) {
         for (y = 0; y < 64; y++) {
-            MapB[x][y] = 0;
-            MapR[x][y] = 0;
-            ExitMapB[x][y] = 0;
-            ExitMapR[x][y] = 0;
-            LifeB[x][y] = 0;
-            LifeR[x][y] = 0;
+            MapB[x][y] = v;
+            MapR[x][y] = v;
+            ExitMapB[x][y] = v;
+            ExitMapR[x][y] = v;
+            LifeB[x][y] = v;
+            LifeR[x][y] = v;
         }
     }
     for (x = 0; x < 64; x++) {
         for (y = 0; y < 32; y++) {
-            fd_3E1D_D89F[x][y] = 0;
-            PherMapA[x][y] = 0;
-            PherMapBN[x][y] = 0;
-            PherMapBT[x][y] = 0;
-            PherMapRN[x][y] = 0;
-            PherMapRT[x][y] = 0;
+            fd_3E1D_D89F[x][y] = v;
+            PherMapA[x][y] = v;
+            PherMapBN[x][y] = v;
+            PherMapBT[x][y] = v;
+            PherMapRN[x][y] = v;
+            PherMapRT[x][y] = v;
         }
     }
     for (y = 0; y < 1000; y++) {
-        AlistT[y] = 0;
-        AlistM[y] = 0;
-        AlistS[y] = 0;
+        AlistT[y] = v;
+        AlistM[y] = v;
+        AlistS[y] = v;
     }
     for (y = 0; y < 500; y++) {
-        BlistT[y] = 0;
-        BlistM[y] = 0;
-        BlistS[y] = 0;
-        RlistT[y] = 0;
-        RlistM[y] = 0;
-        RlistS[y] = 0;
+        BlistT[y] = v;
+        BlistM[y] = v;
+        BlistS[y] = v;
+        RlistT[y] = v;
+        RlistM[y] = v;
+        RlistS[y] = v;
     }
-    for (y = 0; y < 12; y++) {
-        for (x = 0; x < 16; x++) {
-            fd_3D57_00A4[y][x] = 0;
-            fd_3D57_0164[y][x] = 0;
+    for (x = 0; x < 12; x++) {
+        for (y = 0; y < 16; y++) {
+            fd_3D57_00A4[x][y] = v;
+            fd_3D57_0164[x][y] = v;
         }
     }
 }

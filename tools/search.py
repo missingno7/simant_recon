@@ -4,7 +4,9 @@
                            [--public NAME] [--placement SEG=OFF ...] [--quiet]
 
 FUNCTION is a registered code name (layout/symbols.json) or ``UNIT:SEG:OFF``.
-The target extent comes from layout/functions.json.  Output: the strict result
+The target extent comes from layout/functions.json.  A ``.asm`` candidate is
+assembled (profile ``masm510`` unless --profile names another assembler profile)
+and bound exactly like a C object.  Output: the strict result
 plus diagnostics (first differing instruction, aligned opcode similarity,
 fixup/relocation differences).  The best draft per function (strict exact
 first, then aligned-opcode score) is kept under build/search/FUNCTION/.
@@ -83,7 +85,7 @@ def print_side_by_side(d: dict, limit: int = 400):
                 return
 
 
-def run(func: str, sources: list[Path], profile: str, flags, public: str | None,
+def run(func: str, sources: list[Path], profile: str | None, flags, public: str | None,
         placements: dict, quiet: bool = False) -> list[dict]:
     f = fnmod.get(func)
     target = match.Target(f["unit"], f["seg"], f["off"], f["size"])
@@ -93,9 +95,11 @@ def run(func: str, sources: list[Path], profile: str, flags, public: str | None,
     results = []
     for src in sources:
         text = src.read_text(encoding="latin1")
-        fl = flags if flags is not None else fnmod.profile_flags(profile)
-        r = compiler.compile_c(text, profile, fl)
-        row = {"source": str(src), "profile": profile, "flags": fl,
+        asm = src.suffix.lower() == ".asm"
+        prof = (profile if profile and profile.startswith("masm") else "masm510") if asm else             (profile or f.get("profile") or fnmod.DEFAULT_PROFILE)
+        fl = flags if flags is not None else fnmod.profile_flags(prof)
+        r = compiler.assemble(text, prof, fl) if asm else compiler.compile_c(text, prof, fl)
+        row = {"source": str(src), "profile": prof, "flags": fl,
                "source_sha256": hashlib.sha256(text.encode("latin1")).hexdigest()}
         if not r.ok:
             row["status"] = "COMPILER_ERROR"
@@ -122,7 +126,7 @@ def run(func: str, sources: list[Path], profile: str, flags, public: str | None,
         score = (1 if res.exact else 0, d["opcode_ratio"])
         prev = json.loads(best.read_text()) if best.exists() else None
         if prev is None or tuple(prev["score"]) < score:
-            shutil.copyfile(src, outdir / "best.c")
+            shutil.copyfile(src, outdir / ("best.asm" if asm else "best.c"))
             best.write_text(json.dumps({"score": score, **row}, indent=1))
     log = outdir / "history.jsonl"
     with log.open("a") as fh:
@@ -145,11 +149,9 @@ def main() -> int:
     placements = {}
     for p in a.placement:
         name, addr = p.split("=")
-        s, o = addr.split(":")
+        s, o = addr.replace(";", ":").split(":")  # undo MSYS path-list conversion
         placements[name] = {"seg": int(s, 16), "off": int(o, 16)}
-    f = fnmod.get(a.function)
-    profile = a.profile or f.get("profile") or fnmod.DEFAULT_PROFILE
-    rows = run(a.function, a.sources, profile, a.flags, a.public, placements, a.quiet)
+    rows = run(a.function, a.sources, a.profile, a.flags, a.public, placements, a.quiet)
     return 0 if any(r["status"] == "EXACT" for r in rows) else 1
 
 

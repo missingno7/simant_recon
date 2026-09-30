@@ -1,0 +1,66 @@
+{
+ "id": "SYM-1",
+ "question": "Is the symbol-table sensitivity a function of the identifiers declared before the *referenced declarations* rather than before the function? Commutative operand order of 'n = e9 + a0' (a0 already held through a CSE far pointer) flips when one identifier is declared before the three externs, and does not flip when the same identifier is declared after them (directly before the function). Positive controls (worker resA): S14 CalcScore 'n = 0A9E + 0A90' (orig loads the CSE'd 0A90 first) needs +6/+9 identifiers before the externs; S05 MagnifyMenu needed identifiers before its externs (inserting after them had no effect for any count 1..16); S12 DrawMapCursor's value-CSE of fd_50F6_3858 appears with +2..13 identifiers before the first extern.",
+ "results": [
+  {
+   "variant": "baseline",
+   "profile_index": 0,
+   "profile": "msc600ax",
+   "flags": [
+    "/AL",
+    "/Os",
+    "/Oe",
+    "/Og"
+   ],
+   "source_sha256": "5de34ad6f9bb31662aadb6e4e577c8ff57f162785cd85189f0a638f9b999618b",
+   "bytes": "558becb804009a00000000578e060000268b3e0000bb00008e060200895efc8c46fe26033f0bff7e1b8bc7995250b8640026f72f52509a00000000c45e0626894708eb09c45e0626c7470864008e060400268b3e0000c45efc26033f0bff7e1b8bc7995250b8640026f72f52509a00000000c45e062689470aeb09c45e0626c7470a64002bc05f8be55dcb",
+   "disasm": "push bp; mov bp, sp; mov ax, 4; lcall 0, 0; push di; mov es, word ptr [0]; mov di, word ptr es:[0]; mov bx, 0; mov es, word ptr [2]; mov word ptr [bp - 4], bx; mov word ptr [bp - 2], es; add di, word ptr es:[bx]; or di, di; jle 0x44; mov ax, di; cdq; push dx; push ax; mov ax, 0x64; imul word ptr es:[bx]; push dx; push ax; lcall 0, 0; les bx, ptr [bp + 6]; mov word ptr es:[bx + 8], ax; jmp 0x4d; les bx, ptr [bp + 6]; mov word ptr es:[bx + 8], 0x64; mov es, word ptr [4]; mov di, word ptr es:[0]; les bx, ptr [bp - 4]; add di, word ptr es:[bx]; or di, di; jle 0x7b; mov ax, di; cdq; push dx; push ax; mov ax, 0x64; imul word ptr es:[bx]; push dx; push ax; lcall 0, 0; les bx, ptr [bp + 6]; mov word ptr es:[bx + 0xa], ax; jmp 0x84; les bx, ptr [bp + 6]; mov word ptr es:[bx + 0xa], 0x64; sub ax, ax; pop di; mov sp, bp; pop bp; retf"
+  },
+  {
+   "variant": "ident_before_externs",
+   "profile_index": 0,
+   "profile": "msc600ax",
+   "flags": [
+    "/AL",
+    "/Os",
+    "/Oe",
+    "/Og"
+   ],
+   "source_sha256": "e224673b7a788fcb5ea3bbcba4af05822f1515212571e4f73028457148807293",
+   "bytes": "558becb804009a00000000578e060000268b3e0000bb00008e060200895efc8c46fe26033f0bff7e1b8bc7995250b8640026f72f52509a00000000c45e0626894708eb09c45e0626c747086400c45efc268b3f8e06040026033e00000bff7e1e8bc79952508e46feb8640026f72f52509a00000000c45e062689470aeb09c45e0626c7470a64002bc05f8be55dcb",
+   "disasm": "push bp; mov bp, sp; mov ax, 4; lcall 0, 0; push di; mov es, word ptr [0]; mov di, word ptr es:[0]; mov bx, 0; mov es, word ptr [2]; mov word ptr [bp - 4], bx; mov word ptr [bp - 2], es; add di, word ptr es:[bx]; or di, di; jle 0x44; mov ax, di; cdq; push dx; push ax; mov ax, 0x64; imul word ptr es:[bx]; push dx; push ax; lcall 0, 0; les bx, ptr [bp + 6]; mov word ptr es:[bx + 8], ax; jmp 0x4d; les bx, ptr [bp + 6]; mov word ptr es:[bx + 8], 0x64; les bx, ptr [bp - 4]; mov di, word ptr es:[bx]; mov es, word ptr [4]; add di, word ptr es:[0]; or di, di; jle 0x7e; mov ax, di; cdq; push dx; push ax; mov es, word ptr [bp - 2]; mov ax, 0x64; imul word ptr es:[bx]; push dx; push ax; lcall 0, 0; les bx, ptr [bp + 6]; mov word ptr es:[bx + 0xa], ax; jmp 0x87; les bx, ptr [bp + 6]; mov word ptr es:[bx + 0xa], 0x64; sub ax, ax; pop di; mov sp, bp; pop bp; retf"
+  },
+  {
+   "variant": "ident_after_externs",
+   "profile_index": 0,
+   "profile": "msc600ax",
+   "flags": [
+    "/AL",
+    "/Os",
+    "/Oe",
+    "/Og"
+   ],
+   "source_sha256": "18bb09f4d5cc34c788a838ae9a727385388933652af03f7db760c8f587734bd2",
+   "bytes": "558becb804009a00000000578e060000268b3e0000bb00008e060200895efc8c46fe26033f0bff7e1b8bc7995250b8640026f72f52509a00000000c45e0626894708eb09c45e0626c7470864008e060400268b3e0000c45efc26033f0bff7e1b8bc7995250b8640026f72f52509a00000000c45e062689470aeb09c45e0626c7470a64002bc05f8be55dcb",
+   "disasm": "push bp; mov bp, sp; mov ax, 4; lcall 0, 0; push di; mov es, word ptr [0]; mov di, word ptr es:[0]; mov bx, 0; mov es, word ptr [2]; mov word ptr [bp - 4], bx; mov word ptr [bp - 2], es; add di, word ptr es:[bx]; or di, di; jle 0x44; mov ax, di; cdq; push dx; push ax; mov ax, 0x64; imul word ptr es:[bx]; push dx; push ax; lcall 0, 0; les bx, ptr [bp + 6]; mov word ptr es:[bx + 8], ax; jmp 0x4d; les bx, ptr [bp + 6]; mov word ptr es:[bx + 8], 0x64; mov es, word ptr [4]; mov di, word ptr es:[0]; les bx, ptr [bp - 4]; add di, word ptr es:[bx]; or di, di; jle 0x7b; mov ax, di; cdq; push dx; push ax; mov ax, 0x64; imul word ptr es:[bx]; push dx; push ax; lcall 0, 0; les bx, ptr [bp + 6]; mov word ptr es:[bx + 0xa], ax; jmp 0x84; les bx, ptr [bp + 6]; mov word ptr es:[bx + 0xa], 0x64; sub ax, ax; pop di; mov sp, bp; pop bp; retf"
+  }
+ ],
+ "checks": [
+  {
+   "check": "baseline@0",
+   "needle": "mov es, word ptr [4]; mov di, word ptr es:[0]; les bx, ptr [bp - 4]; add di, word ptr es:[bx]",
+   "ok": true
+  },
+  {
+   "check": "ident_after_externs@0",
+   "needle": "mov es, word ptr [4]; mov di, word ptr es:[0]; les bx, ptr [bp - 4]; add di, word ptr es:[bx]",
+   "ok": true
+  },
+  {
+   "check": "ident_before_externs@0",
+   "needle": "les bx, ptr [bp - 4]; mov di, word ptr es:[bx]; mov es, word ptr [4]; add di, word ptr es:[0]",
+   "ok": true
+  }
+ ],
+ "all_checks_pass": true
+}

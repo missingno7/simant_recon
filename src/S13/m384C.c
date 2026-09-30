@@ -714,7 +714,7 @@ extern void far clip_Push(void);
 extern void far f_1FAA_0006(struct Pt far *pts, int a, int b);
 extern void far clip_Pop(void);
 
-/* SCAFFOLD BEGIN: InvertPatch draft: one byte short, point arithmetic order */
+/* SCAFFOLD BEGIN: InvertPatch draft: one byte short. Original layout (worker resA): i -2, org -6/-4 directly above pts[4] (-0x16), CSE temps x*28 -0x1c, y*10 -0x1a, left -0x18, top -0x1e; h and v live in SI/DI with no BP homes and x, y are not enregistered; the first org.h is computed as x*28 + (left - y*10). The sibling DrawSimColonies became exact once org was dropped (h/v homes) and color = c == 0 ? 3 : 2 */
 void far InvertPatch(int x, int y)
 {
     struct Pt pts[4];
@@ -756,11 +756,9 @@ extern unsigned char far fd_3D57_0164[12][16];
 extern unsigned char far fd_3D57_00A4[12][16];
 extern int far f_1B4E_000D(int color);
 
-/* SCAFFOLD BEGIN: DrawSimColonies draft */
 void far DrawSimColonies(int mode)
 {
     struct Pt pts[4];
-    struct Pt org;
     int x, y, i, c, color, h, v;
 
     if (mode == 2)
@@ -768,7 +766,7 @@ void far DrawSimColonies(int mode)
             for (y = 0; y < 16; y++) {
                 c = fd_3D57_0164[x][y];
                 if (fd_3D57_00A4[x][y] == 0)
-                    color = (c == 0) + 2;
+                    color = c == 0 ? 3 : 2;
                 else
                     color = c != 0;
                 h = x * 28 - y * 10;
@@ -778,18 +776,15 @@ void far DrawSimColonies(int mode)
                     v >>= 1;
                     h += fd_50F6_10D2.left + 4;
                     v += fd_50F6_10D2.top + 10;
-                    org.h = h;
                     for (i = 0; i < 4; i++) {
-                        pts[i].h = (i >= 2 ? 0 : -1) + g_2A42[i * 2] / 2 + org.h;
+                        pts[i].h = (i >= 2 ? 0 : -1) + g_2A42[i * 2] / 2 + h;
                         pts[i].v = (i >= 2 ? -1 : 1) + g_2A42[i * 2 + 1] / 2 + v;
                     }
                 } else {
                     h += fd_50F6_10D2.left;
                     v += fd_50F6_10D2.top;
-                    org.h = h;
-                    org.v = v;
                     for (i = 0; i < 4; i++) {
-                        pts[i].h = g_2A42[i * 2] + org.h;
+                        pts[i].h = g_2A42[i * 2] + h;
                         pts[i].v = g_2A42[i * 2 + 1] + v;
                     }
                 }
@@ -797,45 +792,50 @@ void far DrawSimColonies(int mode)
             }
 }
 
-/* SCAFFOLD END */
 
 extern void far f_1CE2_046D(struct Rect far *rect, int color);
 
-/* SCAFFOLD BEGIN: DrawColonyBars draft */
+/* SCAFFOLD BEGIN: DrawColonyBars draft (482 vs 490 bytes, worker resA): the left edge kept in l stops MSC from sinking the r.left store below r.top, and t = y*10+12 stops (x+6)*28 - (y*10+12) being folded; remaining: the original evaluates h/2 right after r.left (before r.bottom), and in the 640 branches computes (x+6)*28 + left before y*10 (ours computes y*10 first); frame 0x10 vs 0x0E */
 void far DrawColonyBars(int mode)
 {
     struct Rect r;
-    int x, y, h;
+    int x, y, h, l, t;
 
     for (x = 0; x < 12; x++)
         for (y = 0; y < 16; y++) {
             h = (fd_3D57_00A4[x][y] + 3) >> 2;
             if (h > 0) {
                 if (g_3DB2 == 320) {
-                    r.left = ((x + 6) * 28 - (y * 10 + 12)) / 2 + fd_50F6_10D2.left + 10;
-                    r.bottom = (y * 10 + 12 + 0x47) / 2 + fd_50F6_10D2.top + 4;
+                    t = y * 10 + 12;
+                    l = ((x + 6) * 28 - t) / 2 + fd_50F6_10D2.left + 10;
+                    r.left = l;
+                    r.bottom = (t + 0x47) / 2 + fd_50F6_10D2.top + 4;
                     r.top = r.bottom - h / 2;
-                    r.right = r.left + 4;
+                    r.right = l + 4;
                 } else {
-                    r.left = (x + 6) * 28 + fd_50F6_10D2.left - y * 10;
+                    l = (x + 6) * 28 + fd_50F6_10D2.left - y * 10;
+                    r.left = l;
                     r.bottom = y * 10 + fd_50F6_10D2.top + 0x47;
                     r.top = r.bottom - h;
-                    r.right = r.left + 9;
+                    r.right = l + 9;
                 }
                 f_1CE2_046D(&r, f_1B4E_000D(15));
             }
             h = (fd_3D57_0164[x][y] + 3) >> 2;
             if (h > 0) {
                 if (g_3DB2 == 320) {
-                    r.left = (x * 28 - (y * 10 + 12) + 0xb4) / 2 + fd_50F6_10D2.left + 10;
-                    r.bottom = (y * 10 + 12 + 0x47) / 2 + fd_50F6_10D2.top + 4;
+                    t = y * 10 + 12;
+                    l = (x * 28 - t + 0xb4) / 2 + fd_50F6_10D2.left + 10;
+                    r.left = l;
+                    r.bottom = (t + 0x47) / 2 + fd_50F6_10D2.top + 4;
                     r.top = r.bottom - h / 2;
-                    r.right = r.left + 4;
+                    r.right = l + 4;
                 } else {
-                    r.left = x * 28 + (fd_50F6_10D2.left - y * 10) + 0xb4;
+                    l = x * 28 + (fd_50F6_10D2.left - y * 10) + 0xb4;
+                    r.left = l;
                     r.bottom = y * 10 + fd_50F6_10D2.top + 0x47;
                     r.top = r.bottom - h;
-                    r.right = r.left + 9;
+                    r.right = l + 9;
                 }
                 f_1CE2_046D(&r, f_1B4E_000D(0x23));
             }

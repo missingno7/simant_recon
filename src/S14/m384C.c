@@ -34,7 +34,7 @@ extern long far fd_50F6_0C26;
 
 static char weights[8] = { 13, 17, 19, 23, 29, 31, 37, 41 };
 
-/* SCAFFOLD BEGIN: CalcScore draft: bytes differ only in stack-slot assignment of locals (see report) */
+/* SCAFFOLD BEGIN: CalcScore draft (worker resA): with +6 or +9 identifiers declared before the first extern, 'n = fd_50F6_0A9E + fd_50F6_0A90' takes the original operand order (length exact, probe SYM-1); what remains is the slot layout: original k -2, {loop-2 index, j total, outer loop j} -4, sum2 -6, sum -8, score -6..-4, q -0x0A..-8 (this draft: k -2, i -4, sum2 -6, j -8, sum -0x0A); local declaration order has no effect */
 long far CalcScore(int far *scores)
 {
     int i, j, k, n, m, t;
@@ -304,7 +304,7 @@ extern void far f_24AB_038D(int x, int y, char far *text);
 extern int near g_3DE0;
 extern void (far * near g_9134)(int left, int top, int right, int bottom, int color);
 
-/* SCAFFOLD BEGIN: DrawCastePopUp draft: stack-slot assignment differs (one frame word short) */
+/* SCAFFOLD BEGIN: DrawCastePopUp draft (worker resA): 'y = top = r.top' gives the original frame (top keeps its own slot); the only byte residue is the operand order of 'left + a' (2 bytes), which is symbol-table state: +1..+8 identifiers declared after the weights table make it byte-exact (+1/+2 also keep PictureDialog's bytes). Its relocation order then needs /Zi line-entry flushes outside (0825,0AA3]: the original has 3..7 more line entries than this file between DoWinHelp's flush (0579) and 0825, and 11..15 more before PictureDialog's flush zone (0D2C,0D7A], see report */
 void far DrawCastePopUp(void)
 {
     struct Rect r;
@@ -337,7 +337,7 @@ void far DrawCastePopUp(void)
     acc = 0;
     gap /= 5;
     h = lineh;
-    top = r.top;
+    y = top = r.top;
     max = 1;
     for (i = 1; i < 6; i++) {
         if (fd_50F6_0AEC[i] > max)
@@ -345,7 +345,7 @@ void far DrawCastePopUp(void)
         if (fd_50F6_0AFA[i] > max)
             max = fd_50F6_0AFA[i];
     }
-    for (i = 0, y = top; i < 6; i++, y += lineh * 2 + gap) {
+    for (i = 0; i < 6; i++, y += lineh * 2 + gap) {
         acc += rem;
         if (acc > 5) {
             y++;

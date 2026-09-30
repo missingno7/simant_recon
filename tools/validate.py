@@ -67,6 +67,7 @@ def main() -> int:
     steered = 0
     exact_asm = 0
     exact_asm_bytes = 0
+    code_data_bytes = 0
     bss_bytes = 0
     per_unit = defaultdict(int)
     listed = {str((ROOT / m["source"]).resolve()).lower() for m in man["modules"].values()}
@@ -76,6 +77,13 @@ def main() -> int:
     for key, m in man["modules"].items():
         path = ROOT / m["source"]
         text = snapshot[key].decode("latin1")
+        # UNIT:SEG[@OFF] keys, origins and object ranges of multi-object frames (tools/modules.py)
+        if modmod.module_key(m["unit"], m["seg"], m.get("origin")) != key:
+            failures.append(f"{key}: key does not match unit/seg/origin of its record")
+        lo, hi = modmod.object_range(man, m["unit"], m["seg"], m.get("origin"))
+        if any(c["unit"] != m["unit"] or c["seg"] != m["seg"] or not lo <= c["off"] < hi
+               or c["off"] + c["size"] > hi for c in m["claims"]):
+            failures.append(f"{key}: claims outside the object's frame offsets {lo:04X}-{hi - 1:04X}")
         if sha(text.encode("latin1")) != m["source_sha256"]:
             failures.append(f"{key}: source hash differs from manifest (unpublished edit)")
         res = modmod.verify_module(text, m, m["claims"])
@@ -99,6 +107,8 @@ def main() -> int:
             elif c["kind"] == "ASM":
                 exact_asm += 1
                 exact_asm_bytes += c["size"]
+            elif c["kind"] == modmod.DATA_KIND:
+                code_data_bytes += c["size"]
             per_unit[c["unit"]] += c["size"]
         for n, d in res.get("data", {}).items():
             if d.get("kind") == "BSS":
@@ -191,6 +201,7 @@ def main() -> int:
         "exact_c_bytes": exact_c_bytes,
         "exact_asm_functions": exact_asm,
         "exact_asm_bytes": exact_asm_bytes,
+        "exact_code_segment_data_bytes": code_data_bytes,
         "historical_runtime_bytes_accepted": runtime_bytes,
         "historical_runtime_members_accepted": runtime_members,
         "historical_runtime_bytes_located_unaccepted": runtime_located_unaccepted,
@@ -202,7 +213,7 @@ def main() -> int:
         "data_bytes_accepted": data_bytes,
         "bss_bytes_placed": bss_bytes,
         "game_code_span_bytes": code_total,
-        "unresolved_code_bytes": code_total - exact_c_bytes - exact_asm_bytes,
+        "unresolved_code_bytes": code_total - exact_c_bytes - exact_asm_bytes - code_data_bytes,
         "unresolved_data_bytes": s27 - data_bytes,
         "overlay_coverage": {s.name: {"bytes": len(s.data), "claimed": per_unit.get(s.name, 0)}
                              for s in x.sections[:27]},
@@ -225,7 +236,8 @@ def main() -> int:
           f"Validation: **{progress['validation']}** ({progress['generated']})", "",
           "| Measure | Value |", "|---|---:|"]
     for k in ("known_functions", "known_game_functions", "exact_c_functions", "exact_c_bytes",
-              "exact_asm_bytes", "historical_runtime_bytes_accepted", "historical_runtime_members_accepted",
+              "exact_asm_bytes", "exact_code_segment_data_bytes",
+              "historical_runtime_bytes_accepted", "historical_runtime_members_accepted",
               "runtime_functions_known", "runtime_functions_owned", "owned_functions",
               "historical_runtime_bytes_located_unaccepted", "rtlink_manager_bytes_unaccepted",
               "data_bytes_accepted", "game_code_span_bytes", "unresolved_code_bytes", "unresolved_data_bytes",
@@ -239,7 +251,8 @@ def main() -> int:
            "Overlay coverage (claimed/bytes): " + ", ".join(
                f"{k} {v['claimed']}/{v['bytes']}" for k, v in progress["overlay_coverage"].items()), ""]
     (ROOT / "docs" / "progress.md").write_text("\n".join(md))
-    print(f"exact C: {exact_c} functions, {exact_c_bytes} bytes; unresolved code {progress['unresolved_code_bytes']}")
+    print(f"exact C: {exact_c} functions, {exact_c_bytes} bytes; unresolved code {progress['unresolved_code_bytes']}"
+          + (f"; code-segment data {code_data_bytes} bytes" if code_data_bytes else ""))
     if failures:
         print("VALIDATION FAILED:")
         for f in failures:

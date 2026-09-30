@@ -1,0 +1,16 @@
+{
+ "id": "DEAD-1",
+ "question": "What survives of dead local computations under /Oe /Og (MSC 6.00AX)? Positive control S05 AntMenu (worker resA): the original keeps ES loads of far operands, the first compare of a || whose second operand is dead, and the n = 5 / n = 2 register setup that only feeds that dead second operand. Dead arithmetic and dead stores vanish, but 'mov es,[CONST]' segment loads are never removed; a compare survives when its branch jumps over such a load; a register variable read by the eliminated part keeps its assignments (allocation happens before the late cleanup).",
+ "header": "extern int far MapPnt[2];\nextern int far VA;\nextern int far VB;\nextern int far MeLocX;\nextern int far MeLocY;\nextern int far MeType;\nextern int far MeNest;\nextern void far g(int);\n",
+ "variants": {
+  "n_in_dead_or": "void far f(void)\n{\n    int n, x, y;\n\n    n = 5;\n    if (MeType == 0x40 && MeNest == 0)\n        n = 2;\n    x = MapPnt[0] + VA;\n    if (x < MeLocX)\n        x = MeLocX;\n    if (MapPnt[1] + 2 > MeLocY || MeLocY - VB < n)\n        y = x;\n    g(1);\n}\n",
+  "n_in_dead_body": "void far f(void)\n{\n    int n, x, y;\n\n    n = 5;\n    if (MeType == 0x40 && MeNest == 0)\n        n = 2;\n    x = MapPnt[0] + VA;\n    if (x < MeLocX)\n        x = MeLocX;\n    if (MapPnt[1] + 2 > MeLocY)\n        y = MeLocY - n;\n    g(1);\n}\n"
+ },
+ "profiles": [
+  {"profile": "msc600ax", "flags": ["/AL", "/Os", "/Oe", "/Og"]}
+ ],
+ "expect": {
+  "n_in_dead_or@0": "mov bx, 5",
+  "n_in_dead_body@0": "!mov bx, 5"
+ }
+}

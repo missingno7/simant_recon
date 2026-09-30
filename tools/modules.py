@@ -13,6 +13,18 @@ An explicitly delimited scaffold block may follow the recovered code:
 Scaffold functions exist only so MSC sees same-module callees as defined in the
 TU (``push cs; call near``); they are never claimed and are reported as debt.
 Claims inside the scaffold block are refused.
+
+Module keys: ``UNIT:SEG`` is the (first) object of code frame SEG.  When LINK
+combined several objects into one frame, every later object is its own module
+``UNIT:SEG@OFF`` (OFF = the object's first byte as an offset in the frame, hex),
+with source ``src/<unit>/m<SEG>_<OFF>.<ext>`` and ``"origin": OFF`` in the
+manifest.  Its code must be linked at exactly that offset.
+
+Code-segment data: a claim of kind ``DATA_IN_CODE`` covers bytes of the module's
+code segment that are not a procedure (a buffer or table assembled into the code
+segment).  Its bytes come from the candidate object at the module's placement
+delta, its fixups are bound like code, and it is compared with the oracle; it
+never lies inside a public's range and lets a complete TU tile such segments.
 """
 from __future__ import annotations
 
@@ -32,6 +44,44 @@ ROOT = exemod.ROOT
 MANIFEST = ROOT / "layout" / "manifest.json"
 SCAFFOLD_RE = re.compile(r"/\*\s*SCAFFOLD BEGIN.*?\*/(.*?)/\*\s*SCAFFOLD END\s*\*/", re.S)
 FUNC_DEF_RE = re.compile(r"(?<![\w.])(?!(?:if|while|for|switch|return|sizeof)\b)([A-Za-z_]\w*)\s*\([^;{}()]*(?:\([^;{}()]*\)[^;{}()]*)*\)\s*\{", re.S)
+
+
+KEY_RE = re.compile(r"^(\w+)[:;]([0-9A-Fa-f]{1,4})(?:@([0-9A-Fa-f]{1,4}))?$")
+DATA_KIND = "DATA_IN_CODE"
+
+
+def parse_key(s: str) -> tuple[str, int, int | None]:
+    """``UNIT:SEG`` or ``UNIT:SEG@OFF`` -> (unit, seg, origin or None).  Git Bash may turn the
+    colon into ';' (path-list conversion); that is undone here."""
+    m = KEY_RE.match(s.strip())
+    if not m:
+        raise SystemExit(f"bad module key {s!r} (expected UNIT:SEG or UNIT:SEG@OFF)")
+    origin = int(m.group(3), 16) if m.group(3) else None
+    if origin == 0:
+        raise SystemExit(f"module key {s!r}: the first object of a frame is keyed UNIT:SEG")
+    return m.group(1), int(m.group(2), 16), origin
+
+
+def module_key(unit: str, seg: int, origin: int | None = None) -> str:
+    return f"{unit}:{seg:04X}" + (f"@{origin:04X}" if origin else "")
+
+
+def module_source(unit: str, seg: int, origin: int | None, lang: str) -> str:
+    """Canonical source path (relative to the repository root)."""
+    return f"src/{unit}/m{seg:04X}" + (f"_{origin:04X}" if origin else "") + (".asm" if lang == "asm" else ".c")
+
+
+def object_range(man: dict, unit: str, seg: int, origin: int | None) -> tuple[int, int]:
+    """[lo, hi) frame offsets owned by the object ``unit:seg[@origin]``: from its origin to the
+    origin of the next object of the same frame in the manifest."""
+    lo = origin or 0
+    later = [m.get("origin") or 0 for m in man["modules"].values()
+             if m["unit"] == unit and m["seg"] == seg and (m.get("origin") or 0) > lo]
+    return lo, min(later, default=0x10000)
+
+
+def is_data_claim(c: dict) -> bool:
+    return c.get("kind") == DATA_KIND
 
 
 def load_manifest() -> dict:
@@ -69,8 +119,36 @@ def verify_module(text: str, module: dict, claims: list[dict]) -> dict:
     all_ok = True
     x = exemod.load()
     site_key, site_index = {}, {}
+    # where the object lies in its frame: frame offset - object offset of each code claim
+    located = {}
+    for c in claims:
+        if not is_data_claim(c) and c["name"] not in scaff:
+            pub, prec = match.public_in(obj, c["name"])
+            if prec is not None:
+                located[c["name"]] = (pub, prec["segment"], c["off"] - prec["offset"])
+    deltas = {(s, d) for _, s, d in located.values()}
+    data_claims = [c for c in claims if is_data_claim(c)]
+    stops, data_spans = {}, {}
+    if data_claims:
+        # code-segment data is located through the module placement: the origin of a later
+        # object of a frame, otherwise the single (segment, delta) shared by the code claims
+        segs_d = {s for s, _ in deltas}
+        dset = {d for _, d in deltas} | ({module["origin"]} if module.get("origin") else set())
+        if len(segs_d) != 1 or len(dset) != 1:
+            for c in data_claims:
+                out["claims"][c["name"]] = {"exact": False, "reasons": [
+                    f"code-segment data needs one code segment and placement delta, have {sorted(deltas)}"]}
+            all_ok = False
+            data_claims = []
+        else:
+            dseg, delta = segs_d.pop(), dset.pop()
+            for c in data_claims:
+                data_spans[c["name"]] = (c["off"] - delta, c["off"] - delta + c["size"])
+                stops.setdefault(dseg, []).append(c["off"] - delta)
     for c in claims:
         name = c["name"]
+        if is_data_claim(c):
+            continue
         if name in scaff:
             out["claims"][name] = {"exact": False, "reasons": ["claimed function is inside SCAFFOLD block"]}
             all_ok = False
@@ -81,8 +159,13 @@ def verify_module(text: str, module: dict, claims: list[dict]) -> dict:
             out["claims"][name] = {"exact": False, "reasons": [f"no public {pub}"]}
             all_ok = False
             continue
+        if module.get("origin") is not None and located[name][2] != module["origin"]:
+            out["claims"][name] = {"exact": False, "reasons": [
+                f"object linked at frame offset {located[name][2]:04X}, module origin is {module['origin']:04X}"]}
+            all_ok = False
+            continue
         t = match.Target(c["unit"], c["seg"], c["off"], c["size"])
-        res = match.Binder(t, obj, seg, pub, placements).bind()
+        res = match.Binder(t, obj, seg, pub, placements, stops=stops.get(seg)).bind()
         site_key.update(res.reloc_key)
         site_index.update(res.reloc_index)
         orig = x.read(c["unit"], t.linear, t.size)
@@ -97,6 +180,36 @@ def verify_module(text: str, module: dict, claims: list[dict]) -> dict:
         ok = res.exact and sha(orig) == c["target_sha256"]
         out["claims"][name] = {"exact": ok, "reasons": res.reasons, "fixups": len(res.fixups),
                                "relocations": len(res.relocs_expected), "reloc_order": res.reloc_order}
+        all_ok &= ok
+    for c in data_claims:
+        # code-segment data (buffers, tables): the object's own bytes at the module placement,
+        # fixups bound like code, compared with the oracle; never inside a public's range
+        dseg = next(iter(stops))
+        s0, s1 = data_spans[c["name"]]
+        reasons = []
+        inside = [p["name"] for p in obj.publics + getattr(obj, "local_publics", [])
+                  if p["segment"] == dseg and s0 <= p["offset"] < s1]
+        if inside:
+            reasons.append(f"code-segment data covers publics {inside[:4]}")
+        if s0 < 0 or s1 > len(obj.segments.get(dseg, b"")):
+            reasons.append(f"code-segment data {s0:#x}-{s1:#x} outside the object segment")
+        t = match.Target(c["unit"], c["seg"], c["off"], c["size"])
+        res = match.Binder(t, obj, dseg, None, placements, span=(s0, s1)).bind() if not reasons else None
+        if res is not None:
+            site_key.update(res.reloc_key)
+            site_index.update(res.reloc_index)
+            if (not res.exact and not module.get("extent") and res.reasons
+                    and all(r.startswith("relocation order inside a target group") for r in res.reasons)):
+                res.exact, res.reloc_order, res.reasons = True, "WITHIN_GROUP_PENDING", []
+            reasons += res.reasons
+        orig = x.read(c["unit"], t.linear, t.size)
+        if sha(orig) != c["target_sha256"]:
+            reasons.append("oracle bytes differ from the claim's target hash")
+        ok = not reasons and res.exact
+        out["claims"][c["name"]] = {"exact": ok, "reasons": reasons, "kind": DATA_KIND,
+                                    "fixups": len(res.fixups) if res else 0,
+                                    "relocations": len(res.relocs_expected) if res else 0,
+                                    "reloc_order": res.reloc_order if res else "?"}
         all_ok &= ok
     # private data placements must reproduce the oracle bytes they claim
     for segname, p in module.get("placements", {}).items():
@@ -147,14 +260,15 @@ def verify_extent(obj, ext: dict, claims: list[dict], scaff: set, site_key: dict
     """Complete translation unit: the claims tile the whole original code segment.
 
     The compiled code segment must have exactly ``end - start`` bytes, contain no
-    scaffold, and every byte must be covered by a (separately verified) claim,
-    except a trailing MSC word-alignment pad that must equal the oracle byte.
+    scaffold, and every byte must be covered by a (separately verified) claim -- a
+    procedure or explicit code-segment data (DATA_IN_CODE) -- except a trailing MSC
+    word-alignment pad that must equal the oracle byte.
     """
     reasons = []
     if scaff:
         reasons.append("scaffold present")
     start, end = ext["start"], ext["end"]
-    names = {c["name"] for c in claims}
+    names = {c["name"] for c in claims if not is_data_claim(c)}     # code-segment data has no public
     segs = {p["segment"] for p in obj.publics if p["name"][1:] in names}
     if len(segs) != 1:
         return {"exact": False, "reasons": reasons + [f"claims span segments {sorted(segs)}"]}

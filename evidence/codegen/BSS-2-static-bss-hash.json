@@ -1,0 +1,25 @@
+{
+ "id": "BSS-2",
+ "question": "What decides the _BSS order of file-scope statics (extends BSS-1)? Observed (worker rootE, module 1FD2, fitted on 14 randomized probes): ascending key = (sum of the UPPER-CASED identifier characters) mod 256, ties in reverse declaration order; declaration order otherwise has no effect. Positive control root:1FD2 (8CDC long, 8CE0 int, 8CE2 int reproduced as lastTick/shiftHeld/countdown); negative contrast: lastTime/pressed/delay put pressed first.",
+ "header": "",
+ "variants": {
+  "lastTime_pressed_delay": "static long lastTime;\nstatic int pressed;\nstatic int delay;\nvoid far zzfunc(void)\n{\n    lastTime = 1;\n    pressed = 2;\n    delay = 3;\n}\n",
+  "lastTick_shiftHeld_countdown": "static long lastTick;\nstatic int shiftHeld;\nstatic int countdown;\nvoid far zzfunc(void)\n{\n    lastTick = 1;\n    shiftHeld = 2;\n    countdown = 3;\n}\n",
+  "aa_b_c": "static int aa;\nstatic int b;\nstatic int c;\nvoid far zzfunc(void)\n{\n    aa = 1;\n    b = 2;\n    c = 3;\n}\n"
+ },
+ "profiles": [
+  {
+   "profile": "msc600ax",
+   "flags": [
+    "/AL",
+    "/Os",
+    "/Gs"
+   ]
+  }
+ ],
+ "expect": {
+  "lastTime_pressed_delay@0": "mov word ptr [0], 2",
+  "lastTick_shiftHeld_countdown@0": "mov word ptr [4], 2",
+  "aa_b_c@0": "mov word ptr [0], 2"
+ }
+}

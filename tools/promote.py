@@ -1,13 +1,18 @@
 """The only route into canonical reconstructed source.
 
-    python tools/promote.py CANDIDATE.c --module UNIT:SEG --claim NAME [--claim NAME ...]
+    python tools/promote.py CANDIDATE.c --module UNIT:SEG[@OFF] --claim NAME [--claim NAME ...]
         [--profile msc600] [--flags /AL /Os] [--placement CONST=55B3:7E28:2]
+        [--code-data START:END] [--extent START:END]
         [--steered "construct -> decision it steers"] [--verify-only]
 
 CANDIDATE.c is the complete proposed content of the module file
-``src/<unit>/m<SEG>.c``.  Promotion freshly compiles it and requires every
-already-claimed function of that module *and* every new claim to be strictly
-exact (see tools/match.py).  It refuses:
+``src/<unit>/m<SEG>.c`` (``m<SEG>_<OFF>.c|.asm`` for a later object ``UNIT:SEG@OFF``
+of a frame that LINK built from several objects; see tools/modules.py).
+``--code-data START:END`` claims code-segment bytes that are data (a buffer or table
+assembled into the code segment, linear hex) as kind DATA_IN_CODE: they come from
+the candidate object and are compared with the oracle like code.
+Promotion freshly compiles it and requires every already-claimed function of that
+module *and* every new claim to be strictly exact (see tools/match.py).  It refuses:
   * claims outside the module frame, unknown functions, double ownership;
   * any regression of an existing claim (bytes, fixups, relocation order);
   * claims inside the SCAFFOLD block;
@@ -42,14 +47,15 @@ def sha(b: bytes) -> str:
     return hashlib.sha256(b).hexdigest()
 
 
-def module_path(unit: str, seg: int) -> Path:
-    return ROOT / "src" / unit / f"m{seg:04X}.c"
+def module_path(unit: str, seg: int, origin: int | None, lang: str) -> Path:
+    return ROOT / modmod.module_source(unit, seg, origin, lang)
 
 
 def main() -> int:
     ap = argparse.ArgumentParser()
     ap.add_argument("candidate", type=Path)
-    ap.add_argument("--module", required=True, help="UNIT:SEG, e.g. root:00F8 or S05:35F5")
+    ap.add_argument("--module", required=True,
+                    help="UNIT:SEG, e.g. root:00F8 or S05:35F5; UNIT:SEG@OFF for a later object of a frame")
     ap.add_argument("--claim", action="append", default=[])
     ap.add_argument("--profile")
     ap.add_argument("--flags", nargs="*")
@@ -57,17 +63,18 @@ def main() -> int:
     ap.add_argument("--drop-placement", action="append", default=[], help="SEGNAME to remove (e.g. renamed segment)")
     ap.add_argument("--steered", default=None)
     ap.add_argument("--extent", help="START:END linear (hex): claim the complete module segment (exact TU)")
+    ap.add_argument("--code-data", action="append", default=[],
+                    help="START:END linear (hex): code-segment data (buffer/table) claimed as DATA_IN_CODE")
     ap.add_argument("--asm-evidence", default=None,
                     help="required for .asm: why this code is genuine assembly (compiler experiments)")
     ap.add_argument("--verify-only", action="store_true")
     a = ap.parse_args()
 
-    unit, segs = a.module.replace(";", ":").split(":")  # undo MSYS path-list conversion
-    seg = int(segs, 16)
-    key = f"{unit}:{seg:04X}"
+    unit, seg, origin = modmod.parse_key(a.module)   # also undoes MSYS path-list conversion
+    key = modmod.module_key(unit, seg, origin)
     text = a.candidate.read_text(encoding="latin1")
     lang = "asm" if a.candidate.suffix.lower() == ".asm" else "c"
-    if lang == "asm" and not a.asm_evidence and not (modmod.load_manifest()["modules"].get(a.module, {}).get("asm_evidence")):
+    if lang == "asm" and not a.asm_evidence and not (modmod.load_manifest()["modules"].get(key, {}).get("asm_evidence")):
         raise SystemExit("an .asm module needs --asm-evidence naming the experiments that exclude compiler output")
     x = exemod.load()
 
@@ -88,11 +95,19 @@ def main() -> int:
             s, o, z = addr.replace(";", ":").split(":")  # undo MSYS path-list conversion
             placements[n] = {"seg": int(s, 16), "off": int(o, 16), "size": int(z)}
         owned = {c["name"]: k for k, m in man["modules"].items() for c in m["claims"]}
+        lo, hi = modmod.object_range(man, unit, seg, origin)
+        for k, m in man["modules"].items():
+            # objects of one frame own disjoint offset ranges: a new later object must not cut
+            # into claims of an earlier one
+            if k != key and m["unit"] == unit and m["seg"] == seg and (m.get("origin") or 0) < lo:
+                if (any(c["off"] + c["size"] > lo for c in m["claims"])
+                        or m.get("extent", {}).get("end", 0) > seg * 16 + lo):
+                    raise SystemExit(f"{key}: module {k} has claims or extent beyond frame offset {lo:04X}")
         new_claims = []
         for name in a.claim:
             f = fnmod.get(name)
-            if f["unit"] != unit or f["seg"] != seg:
-                raise SystemExit(f"{name} is not in module {key}")
+            if f["unit"] != unit or f["seg"] != seg or not lo <= f["off"] < hi:
+                raise SystemExit(f"{name} is not in module {key} (frame offsets {lo:04X}-{hi - 1:04X})")
             if name in owned and owned[name] != key:
                 raise SystemExit(f"{name} already owned by module {owned[name]}")
             if any(c["name"] == name for c in old_claims):
@@ -100,6 +115,27 @@ def main() -> int:
             orig = x.read(unit, f["seg"] * 16 + f["off"], f["size"])
             new_claims.append({"name": name, "unit": unit, "seg": f["seg"], "off": f["off"], "size": f["size"],
                                "target_sha256": sha(orig), "kind": "ASM" if lang == "asm" else "C",
+                               "provenance": "EXACT_STEERED" if a.steered else "EXACT_NATURAL",
+                               **({"steered": a.steered} if a.steered else {})})
+        fstarts = {r["seg"] * 16 + r["off"]: r for r in fnmod.table()["functions"] if r["unit"] == unit}
+        for spec in a.code_data:
+            d0, d1 = (int(v, 16) for v in spec.replace(";", ":").split(":"))
+            off = d0 - seg * 16
+            if not (d0 < d1 and lo <= off and off + (d1 - d0) <= hi):
+                raise SystemExit(f"--code-data {spec}: not inside module {key} (frame offsets {lo:04X}-{hi - 1:04X})")
+            hidden = [f"{r['seg']:04X}:{r['off']:04X}" for lin, r in fstarts.items() if d0 <= lin < d1]
+            if hidden:
+                raise SystemExit(f"--code-data {spec}: covers function table entries {hidden[:4]}")
+            name = f"cd_{unit}_{seg:04X}_{off:04X}"
+            if name in owned and owned[name] != key:
+                raise SystemExit(f"{name} already owned by module {owned[name]}")
+            prev = next((c for c in old_claims if c["name"] == name), None)
+            if prev is not None:
+                if prev["size"] != d1 - d0:
+                    raise SystemExit(f"--code-data {spec}: {name} is already claimed with size {prev['size']}")
+                continue
+            new_claims.append({"name": name, "unit": unit, "seg": seg, "off": off, "size": d1 - d0,
+                               "target_sha256": sha(x.read(unit, d0, d1 - d0)), "kind": modmod.DATA_KIND,
                                "provenance": "EXACT_STEERED" if a.steered else "EXACT_NATURAL",
                                **({"steered": a.steered} if a.steered else {})})
         claims = old_claims + new_claims
@@ -114,10 +150,14 @@ def main() -> int:
                             raise SystemExit(f"{n['name']} overlaps owned {c['name']}")
         module = {"unit": unit, "seg": seg, "profile": profile, "flags": flags, "placements": placements,
                   "lang": lang}
+        if origin is not None:
+            module["origin"] = origin
         if lang == "asm":
             module["asm_evidence"] = a.asm_evidence or mod.get("asm_evidence")
         if a.extent:
-            s0, s1 = (int(v, 16) for v in a.extent.split(":"))
+            s0, s1 = (int(v, 16) for v in a.extent.replace(";", ":").split(":"))
+            if origin is not None and s0 != seg * 16 + origin:
+                raise SystemExit(f"--extent {a.extent}: an object keyed {key} starts at {seg * 16 + origin:05X}")
             module["extent"] = {"start": s0, "end": s1}
         elif mod and mod.get("extent"):
             module["extent"] = mod["extent"]
@@ -143,7 +183,7 @@ def main() -> int:
         if a.verify_only:
             print(f"VERIFY-ONLY OK: {len(claims)} claims in {key}")
             return 0
-        path = module_path(unit, seg).with_suffix(".asm" if lang == "asm" else ".c")
+        path = module_path(unit, seg, origin, lang)
         before = path.read_bytes() if path.exists() else None
         if before is not None and mod and sha(before) != mod.get("source_sha256"):
             raise SystemExit(f"{path} differs from its manifest hash; refusing to overwrite unreviewed edits")

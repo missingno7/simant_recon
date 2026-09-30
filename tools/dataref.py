@@ -57,13 +57,15 @@ def main() -> int:
     ap.add_argument("module")
     ap.add_argument("--strings", action="store_true")
     a = ap.parse_args()
-    unit, seg = a.module.split(":")
-    seg = int(seg, 16)
+    import modules as modmod
+    unit, seg, origin = modmod.parse_key(a.module)   # UNIT:SEG or UNIT:SEG@OFF
+    lo, hi = modmod.object_range(modmod.load_manifest(), unit, seg, origin)
     x = exemod.load()
     base, data = x.unit_bytes(unit)
     dg, dreloc = dgroup_bytes()
     refs = defaultdict(lambda: {"kinds": set(), "users": set()})
-    rows = sorted((r for r in fnmod.table()["functions"] if r["unit"] == unit and r["seg"] == seg),
+    rows = sorted((r for r in fnmod.table()["functions"]
+                   if r["unit"] == unit and r["seg"] == seg and lo <= r["off"] < hi),
                   key=lambda r: r["off"])
     for r in rows:
         name = fnmod.name_of(unit, seg, r["off"])

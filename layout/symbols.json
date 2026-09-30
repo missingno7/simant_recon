@@ -9755,6 +9755,12 @@
    "off": 3311,
    "grounding": "inventory:near_call"
   },
+  "f_1B73_0D4B": {
+   "unit": "root",
+   "seg": 7027,
+   "off": 3403,
+   "grounding": "reviewed: entry label used as a far code pointer: DGROUP 601E/6030 hold 1B73:0D4B (relocated) and f_1FD2_02FF passes mov ax,0D4B / mov dx,SEG 1B73; the byte is a NOP (90) that falls into f_1B73_0D4C (ASM module, entry label placed before the alignment nop); worker rootE"
+  },
   "f_1B73_0D4C": {
    "unit": "root",
    "seg": 7027,
@@ -18847,6 +18853,21 @@
    "off": 0,
    "grounding": "o09_35F5_0000 (LoadGame): mov ax,0; mov cx,4E4B; es:[bx+2]*es:[bx], es:[bx+4..6] far ptr: save-game table of {size,count,far ptr} (8-byte entries)"
   },
+  "fd_5071_0060": {
+   "seg": 20593,
+   "off": 96,
+   "grounding": "f_1FD2_044F/049C: mov cx,0060; mov dx,SEG 5071 -> far pointer argument of f_1B73_0B5B/0B00 (timer slot record)"
+  },
+  "fd_5071_03C4": {
+   "seg": 20593,
+   "off": 964,
+   "grounding": "f_1FD2_03EB/0438/04B3/052B: mov cx,03C4; mov dx,SEG 5071 -> far pointer argument of f_1B73_0B5B/0B00/0C42/0BC5 (timer slot record)"
+  },
+  "fd_5071_0728": {
+   "seg": 20593,
+   "off": 1832,
+   "grounding": "f_1FD2_031A/032F/0379/0390: mov ax,0728; mov cx,SEG 5071 -> far pointer argument of f_1B73_0B5B/0B00/0AC3 (timer slot record)"
+  },
   "fd_50F6_0000": {
    "seg": 20726,
    "off": 0,
@@ -20582,6 +20603,11 @@
    "off": 14648,
    "grounding": "CustomerIDDialog (S14:384C:10E5): mov es,[8774]; push es:[393A]; push es:[3938] handle passed to f_171C_1B84"
   },
+  "fd_50F6_393C": {
+   "seg": 20726,
+   "off": 14652,
+   "grounding": "f_1FD2_0663: mov bx,393C; mov cx,SEG 50F6; movsw x4 (Rect copy from f_1CE2_000C()); &fd_50F6_393C passed to f_1CE2_046D (menu bar rect)"
+  },
   "fd_50F6_3942": {
    "seg": 20726,
    "off": 14658,
@@ -21007,6 +21033,11 @@
    "off": 25186,
    "grounding": "f_1C62_0090: mov es,[89C8 (CONST segword 55B3)]; cmp word ptr es:[6262],0 (far int flag)"
   },
+  "fd_55B3_65A4": {
+   "seg": 21939,
+   "off": 26020,
+   "grounding": "MakeBalloon (root:1629:000C): mov bx,65A4; mov es,[83E0] (CONST word 55B3: DGROUP declared far); or es:[bx],es:[bx+2] -> Punt 'BAD font in MakeBaloon'; the far pointer is passed as the font to the string-width/height/image calls (current balloon font)"
+  },
   "fd_55B3_6770": {
    "seg": 21939,
    "off": 26480,
@@ -21027,6 +21058,11 @@
    "off": 27466,
    "grounding": "f_277E_01FA: mov es,[8A76]; mov es:[6B4A],ax (far int)"
   },
+  "fd_55B3_6B4C": {
+   "seg": 21939,
+   "off": 27468,
+   "grounding": "f_290D_0098: mov ax,14h; imul [bp+0Eh]; add ax,6B4Ch; mov cx,SEG (55B3) -> far array of four 20-byte sample channel records (DGROUP data of the asm timer module 28BC, read by its handlers via mov si,6B4Ch)"
+  },
   "fd_55B3_6B4E": {
    "seg": 21939,
    "off": 27470,
@@ -21036,6 +21072,11 @@
    "seg": 21939,
    "off": 27548,
    "grounding": "f_277E_017D: mov es,[8A6E]; mov es:[6B9C],ax (far int)"
+  },
+  "fd_55B3_6B9E": {
+   "seg": 21939,
+   "off": 27550,
+   "grounding": "f_290D_0098: mov es,[8A94] (CONST word 55B3); add bx,es:[6B9E] (volume table base, DGROUP data of asm module 28BC)"
   },
   "fd_55B3_6BA0": {
    "seg": 21939,
@@ -21746,6 +21787,11 @@
    "seg": 21939,
    "off": 36568,
    "grounding": "LoadMonoPats: far pointer 8ED8:DS destination of inverted pattern bytes (second object 0x271a)"
+  },
+  "g_9120": {
+   "seg": 21939,
+   "off": 37152,
+   "grounding": "f_1FD2_0542: mov al,[9120]; and ax,3 (BIOS-style shift state byte kept by the keyboard handler)"
   },
   "g_9122": {
    "seg": 21939,

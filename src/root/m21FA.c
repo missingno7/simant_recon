@@ -398,22 +398,23 @@ void _fastcall win_DrawWindow(int win)
     sprintf(buf, "QQW:%x", win);
     w = f_2505_0006(win);
     if ((*(int far *)(w + 0x1c) & 0x20) == 0) {
-        if (g_5AAC == 0 || g_5AAC[1] != (int)0x8000) {
-            sprintf(buf, "##W:%x", win);
-            if (win_drawHooks[win >> 8])
-                (*win_drawHooks[win >> 8])(1);
-            sprintf(buf, "**W:%x", win);
-            n = *(int far *)(w + 0xc);
-            for (i = 0; i < n; i++) {
-                sprintf(buf, "w:%x, i:%x", win, i);
-                win_DrawObject(((struct WinObj far * far *)(w + 0x2c))[i]);
-                if (i == 0)
-                    *(struct Rect far *)w = *((struct Rect far * far *)(w + 0x2c))[0];
-                sprintf(buf, "xxw:%x, i:%x", win, i);
-            }
-            sprintf(buf, "zzw:%x, i:%x", win, i);
-            win_DrawWinIcons(w);
+        if (g_5AAC != 0 && g_5AAC[1] == (int)0x8000)
+            goto hooks;
+        sprintf(buf, "##W:%x", win);
+        if (win_drawHooks[win >> 8])
+            (*win_drawHooks[win >> 8])(1);
+        sprintf(buf, "**W:%x", win);
+        n = *(int far *)(w + 0xc);
+        for (i = 0; i < n; i++) {
+            sprintf(buf, "w:%x, i:%x", win, i);
+            win_DrawObject(((struct WinObj far * far *)(w + 0x2c))[i]);
+            if (i == 0)
+                *(struct Rect far *)w = *((struct Rect far * far *)(w + 0x2c))[0];
+            sprintf(buf, "xxw:%x, i:%x", win, i);
         }
+        sprintf(buf, "zzw:%x, i:%x", win, i);
+        win_DrawWinIcons(w);
+hooks:
         sprintf(buf, "ppw:%x, i:%x", win, i);
         if (win_drawHooks[win >> 8])
             (*win_drawHooks[win >> 8])(2);

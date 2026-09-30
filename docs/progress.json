@@ -2,28 +2,29 @@
  "schema": "simant-progress-v1",
  "generated": "2026-09-30",
  "oracle_sha256": "aa0596c6766322a8229ee3c36e57048c92adc82d50fbe2ef37afb8b85fcf4f11",
- "known_functions": 1686,
- "known_game_functions": 1596,
- "exact_c_functions": 1025,
- "exact_c_bytes": 182707,
- "exact_asm_functions": 199,
- "exact_asm_bytes": 34044,
+ "known_functions": 1687,
+ "known_game_functions": 1597,
+ "exact_c_functions": 1069,
+ "exact_c_bytes": 188483,
+ "exact_asm_functions": 205,
+ "exact_asm_bytes": 39389,
+ "exact_code_segment_data_bytes": 1344,
  "historical_runtime_bytes_accepted": 12339,
  "historical_runtime_members_accepted": 90,
  "historical_runtime_bytes_located_unaccepted": 0,
  "runtime_functions_known": 90,
  "runtime_functions_owned": 90,
- "owned_functions": 1314,
+ "owned_functions": 1364,
  "rtlink_manager_bytes_unaccepted": 17063,
- "data_bytes_accepted": 14929,
- "bss_bytes_placed": 484,
+ "data_bytes_accepted": 15153,
+ "bss_bytes_placed": 492,
  "game_code_span_bytes": 304748,
- "unresolved_code_bytes": 87997,
- "unresolved_data_bytes": 120591,
+ "unresolved_code_bytes": 75532,
+ "unresolved_data_bytes": 120367,
  "overlay_coverage": {
   "S00": {
    "bytes": 19696,
-   "claimed": 14334
+   "claimed": 19679
   },
   "S01": {
    "bytes": 7056,
@@ -35,7 +36,7 @@
   },
   "S03": {
    "bytes": 10976,
-   "claimed": 9619
+   "claimed": 10963
   },
   "S04": {
    "bytes": 2464,
@@ -55,11 +56,11 @@
   },
   "S08": {
    "bytes": 5056,
-   "claimed": 3317
+   "claimed": 3698
   },
   "S09": {
    "bytes": 5232,
-   "claimed": 1725
+   "claimed": 2820
   },
   "S10": {
    "bytes": 2736,
@@ -75,7 +76,7 @@
   },
   "S13": {
    "bytes": 6064,
-   "claimed": 4591
+   "claimed": 4962
   },
   "S14": {
    "bytes": 4656,
@@ -130,17 +131,17 @@
    "claimed": 2236
   }
  },
- "root_claimed_bytes": 119361,
- "scaffold_functions": 68,
- "exact_translation_units": 40,
- "claims_within_group_order_pending": 8,
- "inplace_draft_functions": 19,
+ "root_claimed_bytes": 123290,
+ "scaffold_functions": 66,
+ "exact_translation_units": 46,
+ "claims_within_group_order_pending": 7,
+ "inplace_draft_functions": 18,
  "claims_exact_steered": 17,
- "complete_tus_relocation_order_proven": 39,
+ "complete_tus_relocation_order_proven": 45,
  "complete_tus_cross_function_order_pending": [
   "S00:31AD"
  ],
- "codegen_rules_reproduced": 17,
+ "codegen_rules_reproduced": 21,
  "whole_executable": "NOT_BUILT (no historical link yet; see docs/next-steps.md)",
  "validation": "PASS",
  "failures": []

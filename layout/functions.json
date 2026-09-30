@@ -7712,6 +7712,20 @@
 {
 "unit": "root",
 "seg": 7027,
+"off": 3403,
+"size": 1,
+"region": "game_or_library",
+"extent": "REVIEWED",
+"evidence": [
+"reviewed"
+],
+"notes": [
+"entry label used as a far code pointer: DGROUP 601E/6030 hold 1B73:0D4B (relocated) and f_1FD2_02FF passes mov ax,0D4B / mov dx,SEG 1B73; the byte is a NOP (90) that falls into f_1B73_0D4C (ASM module, entry label placed before the alignment nop); worker rootE"
+]
+},
+{
+"unit": "root",
+"seg": 7027,
 "off": 3404,
 "size": 88,
 "region": "game_or_library",

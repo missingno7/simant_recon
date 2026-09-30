@@ -1,0 +1,26 @@
+{
+ "id": "SYM-1",
+ "question": "Is the symbol-table sensitivity a function of the identifiers declared before the *referenced declarations* rather than before the function? Commutative operand order of 'n = e9 + a0' (a0 already held through a CSE far pointer) flips when one identifier is declared before the three externs, and does not flip when the same identifier is declared after them (directly before the function). Positive controls (worker resA): S14 CalcScore 'n = 0A9E + 0A90' (orig loads the CSE'd 0A90 first) needs +6/+9 identifiers before the externs; S05 MagnifyMenu needed identifiers before its externs (inserting after them had no effect for any count 1..16); S12 DrawMapCursor's value-CSE of fd_50F6_3858 appears with +2..13 identifiers before the first extern.",
+ "header": "",
+ "variants": {
+  "baseline": "extern int far a0;\nextern int far c4;\nextern int far e9;\nint far f(int far *s)\n{\n    int n;\n\n    n = c4 + a0;\n    if (n > 0)\n        s[4] = (long)a0 * 100 / n;\n    else\n        s[4] = 100;\n    n = e9 + a0;\n    if (n > 0)\n        s[5] = (long)a0 * 100 / n;\n    else\n        s[5] = 100;\n    return 0;\n}\n",
+  "ident_before_externs": "extern int d0;\nextern int far a0;\nextern int far c4;\nextern int far e9;\nint far f(int far *s)\n{\n    int n;\n\n    n = c4 + a0;\n    if (n > 0)\n        s[4] = (long)a0 * 100 / n;\n    else\n        s[4] = 100;\n    n = e9 + a0;\n    if (n > 0)\n        s[5] = (long)a0 * 100 / n;\n    else\n        s[5] = 100;\n    return 0;\n}\n",
+  "ident_after_externs": "extern int far a0;\nextern int far c4;\nextern int far e9;\nextern int d0;\nint far f(int far *s)\n{\n    int n;\n\n    n = c4 + a0;\n    if (n > 0)\n        s[4] = (long)a0 * 100 / n;\n    else\n        s[4] = 100;\n    n = e9 + a0;\n    if (n > 0)\n        s[5] = (long)a0 * 100 / n;\n    else\n        s[5] = 100;\n    return 0;\n}\n"
+ },
+ "profiles": [
+  {
+   "profile": "msc600ax",
+   "flags": [
+    "/AL",
+    "/Os",
+    "/Oe",
+    "/Og"
+   ]
+  }
+ ],
+ "expect": {
+  "baseline@0": "mov es, word ptr [4]; mov di, word ptr es:[0]; les bx, ptr [bp - 4]; add di, word ptr es:[bx]",
+  "ident_after_externs@0": "mov es, word ptr [4]; mov di, word ptr es:[0]; les bx, ptr [bp - 4]; add di, word ptr es:[bx]",
+  "ident_before_externs@0": "les bx, ptr [bp - 4]; mov di, word ptr es:[bx]; mov es, word ptr [4]; add di, word ptr es:[0]"
+ }
+}

@@ -1,0 +1,47 @@
+{
+ "id": "DEAD-1",
+ "question": "What survives of dead local computations under /Oe /Og (MSC 6.00AX)? Positive control S05 AntMenu (worker resA): the original keeps ES loads of far operands, the first compare of a || whose second operand is dead, and the n = 5 / n = 2 register setup that only feeds that dead second operand. Dead arithmetic and dead stores vanish, but 'mov es,[CONST]' segment loads are never removed; a compare survives when its branch jumps over such a load; a register variable read by the eliminated part keeps its assignments (allocation happens before the late cleanup).",
+ "results": [
+  {
+   "variant": "n_in_dead_or",
+   "profile_index": 0,
+   "profile": "msc600ax",
+   "flags": [
+    "/AL",
+    "/Os",
+    "/Oe",
+    "/Og"
+   ],
+   "source_sha256": "d2d93f2a76be3116bbef2b06fc3b87747cbe59cff37a4a0070c936f744a652e5",
+   "bytes": "558becb806009a00000000bb05008e06000026833e000040750f8e06020026833e0000007503bb02008e0604008e0606008e0608008e06060026a1020040408e060a00268b0e00003bc17f048e060c00b80100509a000000005b8be55dcb",
+   "disasm": "push bp; mov bp, sp; mov ax, 6; lcall 0, 0; mov bx, 5; mov es, word ptr [0]; cmp word ptr es:[0], 0x40; jne 0x29; mov es, word ptr [2]; cmp word ptr es:[0], 0; jne 0x29; mov bx, 2; mov es, word ptr [4]; mov es, word ptr [6]; mov es, word ptr [8]; mov es, word ptr [6]; mov ax, word ptr es:[2]; inc ax; inc ax; mov es, word ptr [0xa]; mov cx, word ptr es:[0]; cmp ax, cx; jg 0x50; mov es, word ptr [0xc]; mov ax, 1; push ax; lcall 0, 0; pop bx; mov sp, bp; pop bp; retf"
+  },
+  {
+   "variant": "n_in_dead_body",
+   "profile_index": 0,
+   "profile": "msc600ax",
+   "flags": [
+    "/AL",
+    "/Os",
+    "/Oe",
+    "/Og"
+   ],
+   "source_sha256": "d75640281039acec3bc14bebf30209dc1d8978bbab1d32dd453d1a93b3195d0b",
+   "bytes": "558becb802009a000000008e06000026833e00004075048e0602008e0604008e0606008e0608008e0606008e060a00b80100509a000000005b8be55dcb",
+   "disasm": "push bp; mov bp, sp; mov ax, 2; lcall 0, 0; mov es, word ptr [0]; cmp word ptr es:[0], 0x40; jne 0x1b; mov es, word ptr [2]; mov es, word ptr [4]; mov es, word ptr [6]; mov es, word ptr [8]; mov es, word ptr [6]; mov es, word ptr [0xa]; mov ax, 1; push ax; lcall 0, 0; pop bx; mov sp, bp; pop bp; retf"
+  }
+ ],
+ "checks": [
+  {
+   "check": "n_in_dead_or@0",
+   "needle": "mov bx, 5",
+   "ok": true
+  },
+  {
+   "check": "n_in_dead_body@0",
+   "needle": "!mov bx, 5",
+   "ok": true
+  }
+ ],
+ "all_checks_pass": true
+}

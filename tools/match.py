@@ -128,13 +128,16 @@ def vector_for(unit: str, seg: int, off: int):
 
 
 class Binder:
-    def __init__(self, target: Target, obj, segment: str, public: str,
-                 placements: dict | None = None):
+    def __init__(self, target: Target, obj, segment: str, public: str | None,
+                 placements: dict | None = None, span: tuple[int, int] | None = None,
+                 stops: list[int] | None = None):
         self.t = target
         self.obj = obj
         self.segment = segment
         self.public = public
         self.placements = placements or {}   # segment name -> {"seg": frame, "off": offset}
+        self.span = span        # explicit [start, end) in the object segment (code-segment data)
+        self.stops = stops or []  # object offsets where claimed code-segment data begins
         self.x = exemod.load()
 
     def own_segment_delta(self, pub_off: int) -> int:
@@ -176,14 +179,18 @@ class Binder:
         body = bytearray(obj.segments[self.segment])
         pubs = sorted((p for p in obj.publics + getattr(obj, "local_publics", [])
                        if p["segment"] == self.segment), key=lambda p: p["offset"])
-        pub = next((p for p in pubs if p["name"] == self.public), None)
-        if pub is None and self.public.startswith("_"):
-            pub = next((p for p in pubs if p["name"] == "@" + self.public[1:]), None)
-        if pub is None:
-            res.reasons.append(f"candidate lacks public {self.public}")
-            return res
-        pub_off = pub["offset"]
-        nxt = next((p["offset"] for p in pubs if p["offset"] > pub_off), None)
+        if self.span is not None:
+            pub_off, end = self.span
+            nxt = end
+        else:
+            pub = next((p for p in pubs if p["name"] == self.public), None)
+            if pub is None and self.public.startswith("_"):
+                pub = next((p for p in pubs if p["name"] == "@" + self.public[1:]), None)
+            if pub is None:
+                res.reasons.append(f"candidate lacks public {self.public}")
+                return res
+            pub_off = pub["offset"]
+            nxt = min((o for o in [p["offset"] for p in pubs] + self.stops if o > pub_off), default=None)
         seglen = len(body)
         if nxt is None:
             end = seglen

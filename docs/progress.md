@@ -4,31 +4,32 @@ Validation: **PASS** (2026-09-30)
 
 | Measure | Value |
 |---|---:|
-| known_functions | 1,686 |
-| known_game_functions | 1,596 |
-| exact_c_functions | 1,025 |
-| exact_c_bytes | 182,707 |
-| exact_asm_bytes | 34,044 |
+| known_functions | 1,687 |
+| known_game_functions | 1,597 |
+| exact_c_functions | 1,069 |
+| exact_c_bytes | 188,483 |
+| exact_asm_bytes | 39,389 |
+| exact_code_segment_data_bytes | 1,344 |
 | historical_runtime_bytes_accepted | 12,339 |
 | historical_runtime_members_accepted | 90 |
 | runtime_functions_known | 90 |
 | runtime_functions_owned | 90 |
-| owned_functions | 1,314 |
+| owned_functions | 1,364 |
 | historical_runtime_bytes_located_unaccepted | 0 |
 | rtlink_manager_bytes_unaccepted | 17,063 |
-| data_bytes_accepted | 14,929 |
+| data_bytes_accepted | 15,153 |
 | game_code_span_bytes | 304,748 |
-| unresolved_code_bytes | 87,997 |
-| unresolved_data_bytes | 120,591 |
-| scaffold_functions | 68 |
-| exact_translation_units | 40 |
-| complete_tus_relocation_order_proven | 39 |
-| claims_within_group_order_pending | 8 |
-| inplace_draft_functions | 19 |
+| unresolved_code_bytes | 75,532 |
+| unresolved_data_bytes | 120,367 |
+| scaffold_functions | 66 |
+| exact_translation_units | 46 |
+| complete_tus_relocation_order_proven | 45 |
+| claims_within_group_order_pending | 7 |
+| inplace_draft_functions | 18 |
 | claims_exact_steered | 17 |
 
 Complete TUs with cross-function relocation order pending (record breaks between functions differ; see docs/codegen-rules.md ZI-1): S00:31AD
 
 Whole executable: NOT_BUILT (no historical link yet; see docs/next-steps.md)
 
-Overlay coverage (claimed/bytes): S00 14334/19696, S01 7051/7056, S02 2409/2416, S03 9619/10976, S04 2282/2464, S05 1764/2512, S06 5117/9584, S07 1174/1184, S08 3317/5056, S09 1725/5232, S10 972/2736, S11 22/880, S12 4773/4992, S13 4591/6064, S14 1946/4656, S15 869/1360, S16 1763/1776, S17 0/448, S18 4359/4368, S19 0/1120, S20 2086/2096, S21 0/480, S22 12710/12720, S23 1411/4368, S24 1071/1808, S25 9789/14592, S26 2236/2240
+Overlay coverage (claimed/bytes): S00 19679/19696, S01 7051/7056, S02 2409/2416, S03 10963/10976, S04 2282/2464, S05 1764/2512, S06 5117/9584, S07 1174/1184, S08 3698/5056, S09 2820/5232, S10 972/2736, S11 22/880, S12 4773/4992, S13 4962/6064, S14 1946/4656, S15 869/1360, S16 1763/1776, S17 0/448, S18 4359/4368, S19 0/1120, S20 2086/2096, S21 0/480, S22 12710/12720, S23 1411/4368, S24 1071/1808, S25 9789/14592, S26 2236/2240

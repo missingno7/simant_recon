@@ -566,7 +566,8 @@ def apply_names(dry: bool) -> int:
         done += 1
     if not dry:
         man = json.loads((ROOT / "layout" / "manifest.json").read_text())
-        claimed = {c["name"] for m in man["modules"].values() for c in m["claims"]}
+        claimed = {c["name"] for m in man["modules"].values() for c in m["claims"]
+                   if c.get("kind") != "DATA_IN_CODE"}     # code-segment data claims have no symbol
         renamed_claimed = claimed - set(syms["code"]) - {n for n in claimed if n in syms["runtime"]}
         if renamed_claimed:
             raise SystemExit(f"refusing: would rename claimed functions {sorted(renamed_claimed)}")

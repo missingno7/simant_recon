@@ -99,5 +99,37 @@ class Gate(unittest.TestCase):
         self.assertFalse(res["exact"])
 
 
+class ModuleKeys(unittest.TestCase):
+    def test_keys(self):
+        self.assertEqual(modules.parse_key("S00:31AD"), ("S00", 0x31AD, None))
+        self.assertEqual(modules.parse_key("S00;31AD@2AB4"), ("S00", 0x31AD, 0x2AB4))  # MSYS-mangled
+        self.assertEqual(modules.module_key("S00", 0x31AD, 0x2AB4), "S00:31AD@2AB4")
+        self.assertEqual(modules.module_source("S00", 0x31AD, 0x2AB4, "asm"), "src/S00/m31AD_2AB4.asm")
+        self.assertEqual(modules.module_source("root", 0x93, None, "c"), "src/root/m0093.c")
+        with self.assertRaises(SystemExit):
+            modules.parse_key("S00:31AD@0000")
+
+    def test_object_ranges(self):
+        man = {"modules": {"S00:31AD": {"unit": "S00", "seg": 0x31AD},
+                           "S00:31AD@2AB4": {"unit": "S00", "seg": 0x31AD, "origin": 0x2AB4}}}
+        self.assertEqual(modules.object_range(man, "S00", 0x31AD, None), (0, 0x2AB4))
+        self.assertEqual(modules.object_range(man, "S00", 0x31AD, 0x2AB4), (0x2AB4, 0x10000))
+
+
+class CodeSegmentData(unittest.TestCase):
+    """A DATA_IN_CODE span is compared with the oracle like code (positive and negative)."""
+    def test_span(self):
+        o = match.OmfReader(communals=True).read(obj(ABS_OK))
+        t = match.Target("root", 0x00F8, 0x0459, 4)
+        self.assertTrue(match.Binder(t, o, "UNIT_TEXT", None, span=(0, 4)).bind().exact)
+        bad = match.Binder(match.Target("root", 0x00F8, 0x045A, 4), o, "UNIT_TEXT", None, span=(0, 4)).bind()
+        self.assertFalse(bad.exact)
+
+    def test_stop_ends_code_claim(self):
+        o = match.OmfReader(communals=True).read(obj(ABS_OK))
+        r = match.Binder(match.Target("root", 0x00F8, 0x0459, 30), o, "UNIT_TEXT", "_f_00F8_0459", stops=[20]).bind()
+        self.assertTrue(any("length 20" in s for s in r.reasons))
+
+
 if __name__ == "__main__":
     unittest.main()
