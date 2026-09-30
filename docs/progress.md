@@ -4,21 +4,21 @@ Validation: **PASS** (2026-09-30)
 
 | Measure | Value |
 |---|---:|
-| known_functions | 1,593 |
-| known_game_functions | 1,490 |
-| exact_c_functions | 597 |
-| exact_c_bytes | 96,225 |
+| known_functions | 1,594 |
+| known_game_functions | 1,491 |
+| exact_c_functions | 682 |
+| exact_c_bytes | 113,164 |
 | exact_asm_bytes | 25 |
 | historical_runtime_bytes_accepted | 12,334 |
 | historical_runtime_bytes_located_unaccepted | 1,044 |
 | rtlink_manager_bytes_unaccepted | 17,065 |
-| data_bytes_accepted | 6,982 |
+| data_bytes_accepted | 7,363 |
 | game_code_span_bytes | 304,748 |
-| unresolved_code_bytes | 208,498 |
-| unresolved_data_bytes | 128,538 |
-| scaffold_functions | 59 |
-| exact_translation_units | 14 |
+| unresolved_code_bytes | 191,559 |
+| unresolved_data_bytes | 128,157 |
+| scaffold_functions | 52 |
+| exact_translation_units | 17 |
 
 Whole executable: NOT_BUILT (no historical link yet; see docs/next-steps.md)
 
-Overlay coverage (claimed/bytes): S00 0/19696, S01 0/7056, S02 0/2416, S03 0/10976, S04 0/2464, S05 0/2512, S06 5008/9584, S07 1174/1184, S08 3317/5056, S09 136/5232, S10 0/2736, S11 22/880, S12 0/4992, S13 0/6064, S14 0/4656, S15 0/1360, S16 0/1776, S17 0/448, S18 0/4368, S19 0/1120, S20 0/2096, S21 0/480, S22 3361/12720, S23 146/4368, S24 0/1808, S25 9658/14592, S26 0/2240
+Overlay coverage (claimed/bytes): S00 0/19696, S01 0/7056, S02 0/2416, S03 0/10976, S04 0/2464, S05 0/2512, S06 5008/9584, S07 1174/1184, S08 3317/5056, S09 136/5232, S10 0/2736, S11 22/880, S12 0/4992, S13 0/6064, S14 0/4656, S15 0/1360, S16 0/1776, S17 0/448, S18 4359/4368, S19 0/1120, S20 0/2096, S21 0/480, S22 12710/12720, S23 146/4368, S24 0/1808, S25 9658/14592, S26 0/2240

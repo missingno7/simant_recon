@@ -14841,8 +14841,8 @@
 },
 {
 "unit": "S01",
-"seg": 12582,
-"off": 5770,
+"seg": 12942,
+"off": 10,
 "size": 147,
 "region": "game_or_library",
 "extent": "REVIEWED",
@@ -14850,13 +14850,14 @@
 "reviewed"
 ],
 "notes": [
-"prologue scan in unreached gap; descent ends in a return; no references found (unreferenced or indirect)"
+"prologue scan in unreached gap; descent ends in a return; no references found (unreferenced or indirect)",
+"re-framed 3126:168A -> 328E:000A: S12:384C InitMapFunctions (0103..011C) stores far pointers 328E:000A and 328E:009D: the code frame is 328E (like o01_328E_012C)"
 ]
 },
 {
 "unit": "S01",
-"seg": 12582,
-"off": 5917,
+"seg": 12942,
+"off": 157,
 "size": 143,
 "region": "game_or_library",
 "extent": "REVIEWED",
@@ -14864,7 +14865,8 @@
 "reviewed"
 ],
 "notes": [
-"prologue scan in unreached gap; descent ends in a return; no references found (unreferenced or indirect)"
+"prologue scan in unreached gap; descent ends in a return; no references found (unreferenced or indirect)",
+"re-framed 3126:171D -> 328E:009D: S12:384C InitMapFunctions stores far pointer 328E:009D: code frame 328E"
 ]
 },
 {
@@ -15379,8 +15381,8 @@
 },
 {
 "unit": "S03",
-"seg": 12582,
-"off": 4824,
+"seg": 12883,
+"off": 8,
 "size": 39,
 "region": "game_or_library",
 "extent": "REVIEWED",
@@ -15388,7 +15390,8 @@
 "reviewed"
 ],
 "notes": [
-"prologue scan in unreached gap; descent ends in a return; no references found (unreferenced or indirect)"
+"prologue scan in unreached gap; descent ends in a return; no references found (unreferenced or indirect)",
+"re-framed 3126:12D8 -> 3253:0008: S12:384C InitMapFunctions (00CC..00E4) stores far pointer 3253:0008 twice: code frame 3253 (like o03_3253_002F)"
 ]
 },
 {
@@ -16380,6 +16383,20 @@
 "table": 221446,
 "count": 70
 }
+]
+},
+{
+"unit": "S12",
+"seg": 14412,
+"off": 0,
+"size": 8,
+"region": "game_or_library",
+"extent": "REVIEWED",
+"evidence": [
+"reviewed"
+],
+"notes": [
+"empty far function before InitMapFunctions: xor ax,ax; call __aFchkstk; retf (GS-1 shape); Win16 DeinitMapFunctions (2 bytes) directly precedes InitMapFunctions in ANTEDIT MAPSYM"
 ]
 },
 {

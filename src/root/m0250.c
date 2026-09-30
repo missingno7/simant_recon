@@ -22,10 +22,8 @@ int g_19BE = 16;
 int g_19C0 = 16;
 int g_19C2 = 13;
 int g_19C4 = 7;
-int g_19C6 = 0;
-int g_19C8 = 0;
-int g_19CA = 0;
-int g_19CC = 0;
+char far *g_19C6 = 0;
+long g_19CA = 0;
 int g_19CE = 1;
 int g_19D0 = 0;
 int g_19D2[8] = { 0, 0, 1, 1, 2, 2, 3, 3 };
@@ -625,16 +623,16 @@ void far f_0250_0E91(void)
 
 extern int _fastcall f_22BF_09B0(int win);
 void far f_0250_13A6(void);
-void far f_0250_1583(void);
+void far DrawEditGraphs(void);
 void far f_0250_13A6(void);
-void far f_0250_1583(void);
+void far DrawEditGraphs(void);
 
 void far f_0250_0E9D(void)
 {
     if (f_22BF_09B0(0)) {
         f_1E57_0174(0);
         f_0250_13A6();
-        f_0250_1583();
+        DrawEditGraphs();
         f_1E57_0362();
     }
 }
@@ -858,7 +856,216 @@ void far f_0250_129E(int x, int y)
     }
 }
 
+extern void far f_1E57_0DAA(void);
+void far f_0250_5058(void);
+extern long far TickCount(void);
+extern void _fastcall f_21FA_00EE(int color);
+extern void far f_15D9_0006(char far *msg, struct Rect far *rect, int y);
+void far PreDrawSpider(void);
+void far PreDrawBalloons(void);
+extern int far fd_50F6_37D2;
+void far DrawSpider(void);
+void far DrawBalloons(void);
+extern int far fd_50F6_37D4;
+extern void far f_1B4E_003B(int x, int y, char far *image);
+extern Pnt far fd_50F6_1F26;
+extern struct Rect far fd_50F6_37D6;
+
+static struct Rect balTileRect;
+static struct Rect balloonRect;
+static Handle balBufHandle;
+static Pnt edPenPos;
+static char far *balBufPtr;
+
+extern void far f_1E57_0EB9(void);
+
+void far f_0250_13A6(void)
+{
+    int spider;
+    int balloon;
+    int x;
+    int y;
+    int px;
+    int py;
+
+    spider = balloon = 0;
+    f_1E57_0DAA();
+    f_0250_5058();
+    if (g_19C6) {
+        if (TickCount() > g_19CA) {
+            if (g_19C6)
+                g_19CE = 1;
+            g_19C6 = 0;
+        } else {
+            f_21FA_00EE(3);
+            f_15D9_0006(g_19C6, &fd_50F6_110C, fd_50F6_110C.top + 4);
+        }
+    }
+    PreDrawSpider();
+    PreDrawBalloons();
+    if (fd_50F6_37D2 != 500)
+        DrawSpider();
+    DrawBalloons();
+    f_0250_0643(fd_50F6_032E / 2);
+    py = fd_50F6_110C.top;
+    for (y = 0; y < fd_50F6_10DE; y++, py += g_19C0) {
+        px = fd_50F6_110C.left;
+        for (x = 0; x < fd_50F6_10E0; x++) {
+            if (x >= balTileRect.left && x < balTileRect.right && y >= balTileRect.top && y < balTileRect.bottom)
+                goto drawballoon;
+            if ((y >= fd_50F6_37D4 && y < fd_50F6_37D4 + 7 && x >= fd_50F6_37D2 && x < fd_50F6_37D2 + 7)
+                || (y == fd_50F6_10DE - 1 && x == fd_50F6_10E0 - 1)) {
+                if (spider)
+                    continue;
+                f_1B4E_003B(fd_50F6_37D6.left, fd_50F6_37D6.top, (char far *)&fd_50F6_1F26);
+                spider = 1;
+                if (balTileRect.left == 500)
+                    continue;
+            drawballoon:
+                if (balloon)
+                    continue;
+                f_1B4E_003B(balloonRect.left, balloonRect.top, balBufPtr);
+                balloon = 1;
+                continue;
+            }
+            f_0250_129E(x, y);
+        }
+    }
+    f_0250_062A();
+    if (balTileRect.left != 500) {
+        f_171C_1BBA(balBufHandle);
+        f_171C_1C0A(balBufHandle);
+    }
+    f_1E57_0EB9();
+    g_19CE = 0;
+}
+
+extern int far fd_50F6_0F78;
+extern int far fd_50F6_10BE;
+extern int far fd_50F6_01FE;
+extern int near g_3DE0;
+extern void far f_1CE2_046D(struct Rect far *rect, int color);
+extern void (far * near g_9128)(int a, int b, int c);
+extern void far f_1CE2_044D(struct Rect far *rect, int width);
+extern int near g_3DE2;
+extern int far fd_50F6_0FBA;
+extern int far f_1B4E_000D(int color);
+extern int far fd_50F6_0FFE;
+extern void far f_1CE2_0430(struct Rect far *rect);
+
+void far DrawEditGraphs(void)
+{
+    static int objs[3] = { 0x11, 0x12, 0x13 };
+    int obj;
+    int h;
+    long frac;
+    struct Rect r;
+    int far *vals[3];
+    int i;
+    int top;
+
+    vals[0] = &fd_50F6_0F78;
+    vals[1] = &fd_50F6_10BE;
+    vals[2] = &fd_50F6_01FE;
+    for (i = 0; i < 3; i++) {
+        obj = objs[i];
+        frac = ((long)*vals[i] << 16) / 100;
+        win_SetColorFromObjNum(obj);
+        win_GetObjRect(obj, &r);
+        top = r.top;
+        r.top = r.bottom - (int)((h = r.bottom - top) * frac / 0x10000L);
+        if (r.top < r.bottom) {
+            f_1CE2_046D(&r, g_3DE0);
+            if ((g_5A97 & 1) && i == 0) {
+                (*g_9128)(0, 0, 0);
+                f_1CE2_044D(&r, 1);
+                win_SetColorFromObjNum(obj);
+            }
+        }
+        if (r.top > top) {
+            r.bottom = r.top;
+            r.top = top;
+            f_1CE2_046D(&r, g_3DE2);
+        }
+        if (i == 0) {
+            r.top = (100 - fd_50F6_0FBA) * h / 100 + top;
+            r.bottom = r.top + 1;
+            f_1CE2_046D(&r, f_1B4E_000D(15));
+        }
+        if (i == 1) {
+            r.top = (100 - fd_50F6_0FFE) * h / 100 + top;
+            r.bottom = r.top + 1;
+            f_1CE2_0430(&r);
+        }
+    }
+}
+
+extern char far * far _fstrcpy(char far *dest, char far *src);
+extern char far * far * far fd_50F6_0368;
+extern char far * far _fstrcat(char far *dest, char far *src);
+extern char far * far * far fd_50F6_0324;
+extern void far f_22BF_059A(int obj, char far *text);
+extern void _fastcall f_21FA_0AA7(int obj);
+
+void far SetEditWinTitle(void)
+{
+    char buf[80];
+
+    _fstrcpy(buf, "SimAnt");
+    _fstrcat(buf, fd_50F6_0368[15]);
+    _fstrcat(buf, fd_50F6_0324[fd_50F6_0EAC]);
+    f_22BF_059A(1, buf);
+    if (f_22BF_09B0(0)) {
+        f_1E57_0DAA();
+        f_1E57_0174(0);
+        f_21FA_0AA7(1);
+        f_1E57_0EB9();
+    }
+}
+
+extern int far fd_50F6_0F0C;
+extern int far fd_50F6_0F12;
+extern int far fd_50F6_0F34;
+
+void far PreDrawSpider(void)
+{
+    int x, y, px, py;
+    int sx, sy;
+
+    fd_50F6_37D6.top = 0x8000;
+    fd_50F6_37D2 = 500;
+    fd_50F6_37D4 = 500;
+    if (!fd_50F6_0F0C)
+        return;
+    y = fd_50F6_0508.y;
+    x = fd_50F6_0508.x;
+    px = x * g_19BE;
+    py = y * g_19C0;
+    sx = fd_50F6_0F12;
+    sy = fd_50F6_0F34;
+    if (g_5A97 == 2) {
+        sx = sx * 3 / 4;
+        sy = sy * 3 / 4;
+    }
+    if (fd_50F6_032E != 1)
+        return;
+    if (px > sx)
+        return;
+    if (fd_50F6_10E0 * g_19BE + px < sx)
+        return;
+    if (py > sy)
+        return;
+    if (fd_50F6_10DE * g_19C0 + py < sy)
+        return;
+    fd_50F6_1F26.x = 7 * g_19BE;
+    fd_50F6_1F26.y = 7 * g_19C0;
+    fd_50F6_37D2 = fd_50F6_0F12 / 16 - x - 3;
+    fd_50F6_37D4 = fd_50F6_0F34 / 16 - y - 3;
+}
+
 /* SCAFFOLD BEGIN: context only, not reconstruction */
-void far f_0250_13A6(void) { }
-void far f_0250_1583(void) { }
+void far DrawSpider(void) { }
+void far PreDrawBalloons(void) { }
+void far DrawBalloons(void) { }
+void far f_0250_5058(void) { }
 /* SCAFFOLD END */

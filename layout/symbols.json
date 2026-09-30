@@ -673,6 +673,18 @@
     }
    ]
   },
+  "DeinitMapFunctions": {
+   "unit": "S12",
+   "seg": 14412,
+   "off": 0,
+   "grounding": "reviewed: empty far function before InitMapFunctions: xor ax,ax; call __aFchkstk; retf (GS-1 shape); Win16 DeinitMapFunctions (2 bytes) directly precedes InitMapFunctions in ANTEDIT MAPSYM",
+   "history": [
+    {
+     "was": "o12_384C_0000",
+     "why": "Win16 ANTEDIT_MODULE MAPSYM run DeinitMapFunctions,InitMapFunctions,...,DrawMapCursor,EraseMapCursor: empty function directly before InitMapFunctions (Win16 DeinitMapFunctions@c19a, 2 bytes, immediately precedes InitMapFunctions@c19c)"
+    }
+   ]
+  },
   "DigMyNewHole": {
    "unit": "root",
    "seg": 5358,
@@ -1381,6 +1393,30 @@
     }
    ]
   },
+  "DrawMapCursor": {
+   "unit": "S12",
+   "seg": 14412,
+   "off": 674,
+   "grounding": "inventory:push_cs_call,vector",
+   "history": [
+    {
+     "was": "o12_384C_02A2",
+     "why": "Win16 ANTEDIT_MODULE MAPSYM run DeinitMapFunctions,InitMapFunctions,...,DrawMapCursor,EraseMapCursor: body identical to Win16 DrawMapCursor (win 0x100 open & state==0, clip push/setwin, cursor rect from MapPnt*mapXsize/Ysize+tile rect, GRectInvOutline(rect,2), state=1, clip pop)"
+    }
+   ]
+  },
+  "DrawMapData": {
+   "unit": "S12",
+   "seg": 14412,
+   "off": 2629,
+   "grounding": "inventory:push_cs_call",
+   "history": [
+    {
+     "was": "o12_384C_0A45",
+     "why": "Win16 ANTEDIT MAPSYM map unit member; body matches Win16 DrawMapData (popMax=max(1,BpopT,RpopT), redHealth=RpopT?HealthR:0, two '%-d' counts, health/population bars with (long)x<<16/100 and /maxPop); xver string evidence for this unit"
+    }
+   ]
+  },
   "DrawPalps": {
    "unit": "root",
    "seg": 592,
@@ -1606,6 +1642,18 @@
     {
      "was": "f_10F7_0B8F",
      "why": "worker sim10F7: Win16 counterpart body matched while recovering the byte-exact DOS function"
+    }
+   ]
+  },
+  "EraseMapCursor": {
+   "unit": "S12",
+   "seg": 14412,
+   "off": 879,
+   "grounding": "inventory:push_cs_call,vector",
+   "history": [
+    {
+     "was": "o12_384C_036F",
+     "why": "Win16 ANTEDIT_MODULE MAPSYM run DeinitMapFunctions,InitMapFunctions,...,DrawMapCursor,EraseMapCursor: body identical to Win16 EraseMapCursor (state==1, clip, GRectInvOutline(rect,2), state=0)"
     }
    ]
   },
@@ -2353,6 +2401,18 @@
     }
    ]
   },
+  "InitMapFunctions": {
+   "unit": "S12",
+   "seg": 14412,
+   "off": 8,
+   "grounding": "inventory:vector",
+   "history": [
+    {
+     "was": "o12_384C_0008",
+     "why": "Win16 ANTEDIT_MODULE MAPSYM run DeinitMapFunctions,InitMapFunctions,...,DrawMapCursor,EraseMapCursor: xver MEDIUM string 'Generated buffer window'; body matches (free-memory report, mem_Alloc(0x2000,1,name), mapXsize/mapYsize, makea/makeb by display type)"
+    }
+   ]
+  },
   "InitPillar": {
    "unit": "root",
    "seg": 2777,
@@ -2386,6 +2446,18 @@
     {
      "was": "f_0AD9_000C",
      "why": "Win16 SIMTWO_MODULE run 3EF8..5A02 (InitSow..PillFoodTile, 19 members, between EndMigrate and InitSimVars) aligns 1:1 with DOS module 0AD9 (19 functions); xver DoAntLions (pos 6, LOW) agrees; call graph agrees (InitPillar->InitSow, DoPillar->DoSow, AddRandAntLion->AddAntLion, DoAntLions->SetAntLion/KillAntLion/FindInAList, DoPillar->pillar helpers)"
+    }
+   ]
+  },
+  "InitSpider": {
+   "unit": "root",
+   "seg": 3291,
+   "off": 0,
+   "grounding": "inventory:far_call",
+   "history": [
+    {
+     "was": "f_0CDB_0000",
+     "why": "Win16 SIMONE_MODULE MAPSYM run _InitSpider,_MoveSpider,_ScanForAnts,_KillSpider,_SFoundAnt,_SpiderScan,_SGetDis aligns 1:1 in order with the 7 functions of DOS module root:0CDB; SpiderScan xver HIGH; KillSpider body identical to Win16 recovered KillSpider (SMode=5, DeathCnt=500, Scycle=0); SGetDis body identical to Win16 recovered SGetDis (|x2-x1|+|y2-y1|); position 1"
     }
    ]
   },
@@ -2674,6 +2746,18 @@
     {
      "was": "f_0AD9_0838",
      "why": "Win16 SIMTWO_MODULE run 3EF8..5A02 (InitSow..PillFoodTile, 19 members, between EndMigrate and InitSimVars) aligns 1:1 with DOS module 0AD9 (19 functions); xver DoAntLions (pos 6, LOW) agrees; call graph agrees (InitPillar->InitSow, DoPillar->DoSow, AddRandAntLion->AddAntLion, DoAntLions->SetAntLion/KillAntLion/FindInAList, DoPillar->pillar helpers)"
+    }
+   ]
+  },
+  "KillSpider": {
+   "unit": "root",
+   "seg": 3291,
+   "off": 3552,
+   "grounding": "inventory:far_call,push_cs_call",
+   "history": [
+    {
+     "was": "f_0CDB_0DE0",
+     "why": "Win16 SIMONE_MODULE MAPSYM run _InitSpider,_MoveSpider,_ScanForAnts,_KillSpider,_SFoundAnt,_SpiderScan,_SGetDis aligns 1:1 in order with the 7 functions of DOS module root:0CDB; SpiderScan xver HIGH; KillSpider body identical to Win16 recovered KillSpider (SMode=5, DeathCnt=500, Scycle=0); SGetDis body identical to Win16 recovered SGetDis (|x2-x1|+|y2-y1|); position 4"
     }
    ]
   },
@@ -3010,6 +3094,18 @@
     {
      "was": "f_10F7_0ACE",
      "why": "worker sim10F7: Win16 counterpart body matched while recovering the byte-exact DOS function"
+    }
+   ]
+  },
+  "MoveSpider": {
+   "unit": "root",
+   "seg": 3291,
+   "off": 179,
+   "grounding": "inventory:far_call",
+   "history": [
+    {
+     "was": "f_0CDB_00B3",
+     "why": "Win16 SIMONE_MODULE MAPSYM run _InitSpider,_MoveSpider,_ScanForAnts,_KillSpider,_SFoundAnt,_SpiderScan,_SGetDis aligns 1:1 in order with the 7 functions of DOS module root:0CDB; SpiderScan xver HIGH; KillSpider body identical to Win16 recovered KillSpider (SMode=5, DeathCnt=500, Scycle=0); SGetDis body identical to Win16 recovered SGetDis (|x2-x1|+|y2-y1|); position 2"
     }
    ]
   },
@@ -3481,6 +3577,18 @@
     }
    ]
   },
+  "SFoundAnt": {
+   "unit": "root",
+   "seg": 3291,
+   "off": 3593,
+   "grounding": "inventory:push_cs_call",
+   "history": [
+    {
+     "was": "f_0CDB_0E09",
+     "why": "Win16 SIMONE_MODULE MAPSYM run _InitSpider,_MoveSpider,_ScanForAnts,_KillSpider,_SFoundAnt,_SpiderScan,_SGetDis aligns 1:1 in order with the 7 functions of DOS module root:0CDB; SpiderScan xver HIGH; KillSpider body identical to Win16 recovered KillSpider (SMode=5, DeathCnt=500, Scycle=0); SGetDis body identical to Win16 recovered SGetDis (|x2-x1|+|y2-y1|); position 5"
+    }
+   ]
+  },
   "SGRand": {
    "unit": "root",
    "seg": 147,
@@ -3490,6 +3598,18 @@
     {
      "was": "f_0093_002B",
      "why": "worker ovl08: Win16 RandWorld unit member / call-site evidence (report 2026-09-30)"
+    }
+   ]
+  },
+  "SGetDis": {
+   "unit": "root",
+   "seg": 3291,
+   "off": 4376,
+   "grounding": "inventory:push_cs_call",
+   "history": [
+    {
+     "was": "f_0CDB_1118",
+     "why": "Win16 SIMONE_MODULE MAPSYM run _InitSpider,_MoveSpider,_ScanForAnts,_KillSpider,_SFoundAnt,_SpiderScan,_SGetDis aligns 1:1 in order with the 7 functions of DOS module root:0CDB; SpiderScan xver HIGH; KillSpider body identical to Win16 recovered KillSpider (SMode=5, DeathCnt=500, Scycle=0); SGetDis body identical to Win16 recovered SGetDis (|x2-x1|+|y2-y1|); position 7"
     }
    ]
   },
@@ -3598,6 +3718,18 @@
     {
      "was": "f_0093_01AB",
      "why": "xver CONFIRMED (evidence/cross_version/decisions.json: RNG translation unit)"
+    }
+   ]
+  },
+  "ScanForAnts": {
+   "unit": "root",
+   "seg": 3291,
+   "off": 3424,
+   "grounding": "inventory:push_cs_call",
+   "history": [
+    {
+     "was": "f_0CDB_0D60",
+     "why": "Win16 SIMONE_MODULE MAPSYM run _InitSpider,_MoveSpider,_ScanForAnts,_KillSpider,_SFoundAnt,_SpiderScan,_SGetDis aligns 1:1 in order with the 7 functions of DOS module root:0CDB; SpiderScan xver HIGH; KillSpider body identical to Win16 recovered KillSpider (SMode=5, DeathCnt=500, Scycle=0); SGetDis body identical to Win16 recovered SGetDis (|x2-x1|+|y2-y1|); position 3"
     }
    ]
   },
@@ -4134,6 +4266,18 @@
    "seg": 5624,
    "off": 4,
    "alias_of": "main"
+  },
+  "WaitedEnough": {
+   "unit": "root",
+   "seg": 7266,
+   "off": 1756,
+   "grounding": "inventory:far_call,push_cs_call",
+   "history": [
+    {
+     "was": "f_1C62_06DC",
+     "why": "xver HIGH: f_1C62_06DC <-> Win16 _WaitedEnough (callee TickCount, callers IBMInitStuff and o16_384C_01E1 agree; size ratio 0.97); body matches Win16 wf_WaitedEnough (TickCount < *timer || *timer+delay <= TickCount -> reset stamp)"
+    }
+   ]
   },
   "WallNeighbors": {
    "unit": "S22",
@@ -6087,31 +6231,31 @@
    "unit": "root",
    "seg": 3291,
    "off": 0,
-   "grounding": "inventory:far_call"
+   "alias_of": "InitSpider"
   },
   "f_0CDB_00B3": {
    "unit": "root",
    "seg": 3291,
    "off": 179,
-   "grounding": "inventory:far_call"
+   "alias_of": "MoveSpider"
   },
   "f_0CDB_0D60": {
    "unit": "root",
    "seg": 3291,
    "off": 3424,
-   "grounding": "inventory:push_cs_call"
+   "alias_of": "ScanForAnts"
   },
   "f_0CDB_0DE0": {
    "unit": "root",
    "seg": 3291,
    "off": 3552,
-   "grounding": "inventory:far_call,push_cs_call"
+   "alias_of": "KillSpider"
   },
   "f_0CDB_0E09": {
    "unit": "root",
    "seg": 3291,
    "off": 3593,
-   "grounding": "inventory:push_cs_call"
+   "alias_of": "SFoundAnt"
   },
   "f_0CDB_0F90": {
    "unit": "root",
@@ -6123,7 +6267,7 @@
    "unit": "root",
    "seg": 3291,
    "off": 4376,
-   "grounding": "inventory:push_cs_call"
+   "alias_of": "SGetDis"
   },
   "f_0DEF_0000": {
    "unit": "root",
@@ -8487,7 +8631,7 @@
    "unit": "root",
    "seg": 7266,
    "off": 1756,
-   "grounding": "inventory:far_call,push_cs_call"
+   "alias_of": "WaitedEnough"
   },
   "f_1C62_0737": {
    "unit": "root",
@@ -11643,17 +11787,29 @@
    "off": 5720,
    "grounding": "inventory:near_call"
   },
-  "o01_3126_168A": {
+  "o01_328E_000A": {
    "unit": "S01",
-   "seg": 12582,
-   "off": 5770,
-   "grounding": "reviewed: prologue scan in unreached gap; descent ends in a return; no references found (unreferenced or indirect)"
+   "seg": 12942,
+   "off": 10,
+   "grounding": "reviewed: prologue scan in unreached gap; descent ends in a return; no references found (unreferenced or indirect)",
+   "history": [
+    {
+     "was": "o01_3126_168A",
+     "why": "re-framed: S12:384C InitMapFunctions (0103..011C) stores far pointers 328E:000A and 328E:009D: the code frame is 328E (like o01_328E_012C)"
+    }
+   ]
   },
-  "o01_3126_171D": {
+  "o01_328E_009D": {
    "unit": "S01",
-   "seg": 12582,
-   "off": 5917,
-   "grounding": "reviewed: prologue scan in unreached gap; descent ends in a return; no references found (unreferenced or indirect)"
+   "seg": 12942,
+   "off": 157,
+   "grounding": "reviewed: prologue scan in unreached gap; descent ends in a return; no references found (unreferenced or indirect)",
+   "history": [
+    {
+     "was": "o01_3126_171D",
+     "why": "re-framed: S12:384C InitMapFunctions stores far pointer 328E:009D: code frame 328E"
+    }
+   ]
   },
   "o01_328E_012C": {
    "unit": "S01",
@@ -11889,11 +12045,17 @@
    "off": 4489,
    "grounding": "reviewed: prologue scan in unreached gap; descent ends in a return; no references found (unreferenced or indirect)"
   },
-  "o03_3126_12D8": {
+  "o03_3253_0008": {
    "unit": "S03",
-   "seg": 12582,
-   "off": 4824,
-   "grounding": "reviewed: prologue scan in unreached gap; descent ends in a return; no references found (unreferenced or indirect)"
+   "seg": 12883,
+   "off": 8,
+   "grounding": "reviewed: prologue scan in unreached gap; descent ends in a return; no references found (unreferenced or indirect)",
+   "history": [
+    {
+     "was": "o03_3126_12D8",
+     "why": "re-framed: S12:384C InitMapFunctions (00CC..00E4) stores far pointer 3253:0008 twice: code frame 3253 (like o03_3253_002F)"
+    }
+   ]
   },
   "o03_3253_002F": {
    "unit": "S03",
@@ -12399,11 +12561,17 @@
    "off": 397,
    "grounding": "inventory:vector"
   },
+  "o12_384C_0000": {
+   "unit": "S12",
+   "seg": 14412,
+   "off": 0,
+   "alias_of": "DeinitMapFunctions"
+  },
   "o12_384C_0008": {
    "unit": "S12",
    "seg": 14412,
    "off": 8,
-   "grounding": "inventory:vector"
+   "alias_of": "InitMapFunctions"
   },
   "o12_384C_0160": {
    "unit": "S12",
@@ -12415,13 +12583,13 @@
    "unit": "S12",
    "seg": 14412,
    "off": 674,
-   "grounding": "inventory:push_cs_call,vector"
+   "alias_of": "DrawMapCursor"
   },
   "o12_384C_036F": {
    "unit": "S12",
    "seg": 14412,
    "off": 879,
-   "grounding": "inventory:push_cs_call,vector"
+   "alias_of": "EraseMapCursor"
   },
   "o12_384C_03D0": {
    "unit": "S12",
@@ -12457,7 +12625,7 @@
    "unit": "S12",
    "seg": 14412,
    "off": 2629,
-   "grounding": "inventory:push_cs_call"
+   "alias_of": "DrawMapData"
   },
   "o12_384C_0B76": {
    "unit": "S12",
@@ -15283,6 +15451,46 @@
    "off": 706,
    "grounding": "f_0894_000E: mov es,[8044] (3D57); mov word ptr es:[02C2],1"
   },
+  "fd_3D57_030E": {
+   "seg": 15703,
+   "off": 782,
+   "grounding": "S12:384C:0432 map image generation: mov es,[8694]; mov al,es:[bx+030E] byte colour table (own CONST word)"
+  },
+  "fd_3D57_039E": {
+   "seg": 15703,
+   "off": 926,
+   "grounding": "S12:384C:0432 map image generation: mov es,[8692]; mov al,es:[bx+039E] byte colour table (own CONST word)"
+  },
+  "fd_3D57_046E": {
+   "seg": 15703,
+   "off": 1134,
+   "grounding": "S12:384C:0432 map image generation: mov es,[8690]; mov al,es:[bx+046E] byte colour table (own CONST word)"
+  },
+  "fd_3D57_04A6": {
+   "seg": 15703,
+   "off": 1190,
+   "grounding": "S12:384C:080E map image generation: mov es,[869E]; mov al,es:[bx+04A6] byte colour table (own CONST word)"
+  },
+  "fd_3D57_04CE": {
+   "seg": 15703,
+   "off": 1230,
+   "grounding": "S12:384C:0432 map image generation: mov es,[869A]; mov al,es:[bx+04CE] byte colour table (own CONST word)"
+  },
+  "fd_3D57_054E": {
+   "seg": 15703,
+   "off": 1358,
+   "grounding": "S12:384C:0432 map image generation: mov es,[8698]; mov al,es:[bx+054E] byte colour table (own CONST word)"
+  },
+  "fd_3D57_061E": {
+   "seg": 15703,
+   "off": 1566,
+   "grounding": "S12:384C:0432 map image generation: mov es,[8696]; mov al,es:[bx+061E] byte colour table (own CONST word)"
+  },
+  "fd_3D57_0656": {
+   "seg": 15703,
+   "off": 1622,
+   "grounding": "S12:384C:080E map image generation: mov es,[869C]; mov al,es:[bx+0656] byte colour table (own CONST word)"
+  },
   "fd_3D57_067E": {
    "seg": 15703,
    "off": 1662,
@@ -15308,11 +15516,6 @@
    "off": 1962,
    "grounding": "EndGameDialog (S14:384C:0DE5): mov es,[876A]; cmp word es:[07AA],0 sound option"
   },
-  "fd_3D57_07AC": {
-   "seg": 15703,
-   "off": 1964,
-   "grounding": "YellowBirth (S22:39C7:090D): mov es,[CONST 8804 = 3D57]; saved from es:[07AC], cleared, restored after the birth animation (option flag, next to fd_3D57_07AA)"
-  },
   "fd_3D57_07AE": {
    "seg": 15703,
    "off": 1966,
@@ -15322,6 +15525,11 @@
    "seg": 15703,
    "off": 1970,
    "grounding": "f_0894_000E: mov es,[8030] (3D57); cmp word ptr es:[07B2],1"
+  },
+  "fd_3D57_07B6": {
+   "seg": 15703,
+   "off": 1974,
+   "grounding": "S22:3BBD ExpSubStates-like char array (CONST word 8866 = seg 3D57): DropWall es:[07B7], ExpDig [07B8], ExpAddAnt [07B9], ExpAddFood [07BA], GetSM [07BB], ExpKillAnts [07BC] (Win16 ExpSubStates[1..6])"
   },
   "fd_3D57_07BE": {
    "seg": 15703,
@@ -15343,10 +15551,290 @@
    "off": 2088,
    "grounding": "CalcScore (S14:384C:0000): mov si,0828; mov es,[873A]; cmp es:[si],di history count"
   },
+  "fd_3D57_098E": {
+   "seg": 15703,
+   "off": 2446,
+   "grounding": "DrawSpider: mov es,[7EFE]; es:[98E]/[990] long compared with TickCount() and set to TickCount()+SRand64()+180"
+  },
+  "fd_3D57_0992": {
+   "seg": 15703,
+   "off": 2450,
+   "grounding": "DrawSpider: mov es,[7F02]; inc es:[992]; cmp 5; reset (spider message index)"
+  },
+  "fd_3D57_0994": {
+   "seg": 15703,
+   "off": 2452,
+   "grounding": "MoveSpider (root:0CDB): mov es,[CONST 81xx = 3D57]; signed char es:[bx+0994] direction table indexed by spider direction"
+  },
+  "fd_3D57_099C": {
+   "seg": 15703,
+   "off": 2460,
+   "grounding": "MoveSpider (root:0CDB): mov es,[CONST 81xx = 3D57]; signed char es:[bx+099C] direction table indexed by spider direction"
+  },
+  "fd_3D57_09A4": {
+   "seg": 15703,
+   "off": 2468,
+   "grounding": "MoveSpider (root:0CDB): mov es,[CONST 81xx = 3D57]; signed char es:[bx+09A4] direction table indexed by spider direction"
+  },
+  "fd_3D57_09AC": {
+   "seg": 15703,
+   "off": 2476,
+   "grounding": "MoveSpider (root:0CDB): mov es,[CONST 81xx = 3D57]; signed char es:[bx+09AC] direction table indexed by spider direction"
+  },
   "fd_3D57_09B4": {
    "seg": 15703,
    "off": 2484,
    "grounding": "SpiderDialog (S14:384C:0FA2): mov es,[8770]; mov di,es:[bx+09B4] int table of bitmap ids"
+  },
+  "fd_3D57_09BC": {
+   "seg": 15703,
+   "off": 2492,
+   "grounding": "DrawSpider: mov es,[7EF8]; mov al,es:[bx+9BC]; cbw; +30h (x-offset table indexed by spider dir 50F6:1004)"
+  },
+  "fd_3D57_09C4": {
+   "seg": 15703,
+   "off": 2500,
+   "grounding": "DrawSpider: mov es,[7EFA]; mov al,es:[bx+9C4]; cbw; +30h (y-offset table indexed by spider dir 50F6:1004)"
+  },
+  "fd_3D57_09CC": {
+   "seg": 15703,
+   "off": 2508,
+   "grounding": "DrawSpider (0250:18E7): mov es,[7EF2]; mov al,es:[bx+9CC]; cbw (signed byte x-offset table indexed by 50F6:1042)"
+  },
+  "fd_3D57_09D0": {
+   "seg": 15703,
+   "off": 2512,
+   "grounding": "DrawSpider: mov es,[7EF4]; mov al,es:[bx+9D0]; cbw (signed byte y-offset table indexed by 50F6:1042)"
+  },
+  "fd_3D57_09E4": {
+   "seg": 15703,
+   "off": 2532,
+   "grounding": "DrawPalps (0250:2166): mov al,es:[si+9E4]; cbw (signed palp offset table indexed by SRand1(4))"
+  },
+  "fd_3D57_09E8": {
+   "seg": 15703,
+   "off": 2536,
+   "grounding": "DrawPalps (0250:2166): mov al,es:[si+9E8]; cbw (signed palp offset table indexed by SRand1(4))"
+  },
+  "fd_3D57_09EC": {
+   "seg": 15703,
+   "off": 2540,
+   "grounding": "DrawPalps (0250:2166): mov al,es:[si+9EC]; cbw (signed palp offset table indexed by SRand1(4))"
+  },
+  "fd_3D57_09F0": {
+   "seg": 15703,
+   "off": 2544,
+   "grounding": "DrawPalps (0250:2166): mov al,es:[si+9F0]; cbw (signed palp offset table indexed by SRand1(4))"
+  },
+  "fd_3D57_09F4": {
+   "seg": 15703,
+   "off": 2548,
+   "grounding": "DrawPalps (0250:2166): mov al,es:[si+9F4]; cbw (signed palp offset table indexed by SRand1(4))"
+  },
+  "fd_3D57_09F8": {
+   "seg": 15703,
+   "off": 2552,
+   "grounding": "DrawPalps (0250:2166): mov al,es:[si+9F8]; cbw (signed palp offset table indexed by SRand1(4))"
+  },
+  "fd_3D57_09FC": {
+   "seg": 15703,
+   "off": 2556,
+   "grounding": "DrawPalps (0250:2166): mov al,es:[si+9FC]; cbw (signed palp offset table indexed by SRand1(4))"
+  },
+  "fd_3D57_0A00": {
+   "seg": 15703,
+   "off": 2560,
+   "grounding": "DrawPalps (0250:2166): mov al,es:[si+A00]; cbw (signed palp offset table indexed by SRand1(4))"
+  },
+  "fd_3D57_0A04": {
+   "seg": 15703,
+   "off": 2564,
+   "grounding": "DrawLegs (0250:2744): mov al,es:[A04(+si/di/k)]; cbw (signed leg offset table)"
+  },
+  "fd_3D57_0A08": {
+   "seg": 15703,
+   "off": 2568,
+   "grounding": "DrawLegs (0250:2744): mov al,es:[A08(+si/di/k)]; cbw (signed leg offset table)"
+  },
+  "fd_3D57_0A0C": {
+   "seg": 15703,
+   "off": 2572,
+   "grounding": "DrawLegs (0250:2744): mov al,es:[A0C(+si/di/k)]; cbw (signed leg offset table)"
+  },
+  "fd_3D57_0A14": {
+   "seg": 15703,
+   "off": 2580,
+   "grounding": "DrawLegs (0250:2744): mov al,es:[A14(+si/di/k)]; cbw (signed leg offset table)"
+  },
+  "fd_3D57_0A1C": {
+   "seg": 15703,
+   "off": 2588,
+   "grounding": "DrawLegs (0250:2744): mov al,es:[A1C(+si/di/k)]; cbw (signed leg offset table)"
+  },
+  "fd_3D57_0A24": {
+   "seg": 15703,
+   "off": 2596,
+   "grounding": "DrawLegs (0250:2744): mov al,es:[A24(+si/di/k)]; cbw (signed leg offset table)"
+  },
+  "fd_3D57_0A2C": {
+   "seg": 15703,
+   "off": 2604,
+   "grounding": "DrawLegs (0250:2744): mov al,es:[A2C(+si/di/k)]; cbw (signed leg offset table)"
+  },
+  "fd_3D57_0A34": {
+   "seg": 15703,
+   "off": 2612,
+   "grounding": "DrawLegs (0250:2744): mov al,es:[A34(+si/di/k)]; cbw (signed leg offset table)"
+  },
+  "fd_3D57_0A3C": {
+   "seg": 15703,
+   "off": 2620,
+   "grounding": "DrawLegs (0250:2744): mov al,es:[A3C(+si/di/k)]; cbw (signed leg offset table)"
+  },
+  "fd_3D57_0A44": {
+   "seg": 15703,
+   "off": 2628,
+   "grounding": "DrawLegs (0250:2744): mov al,es:[A44(+si/di/k)]; cbw (signed leg offset table)"
+  },
+  "fd_3D57_0A4C": {
+   "seg": 15703,
+   "off": 2636,
+   "grounding": "DrawLegs (0250:2744): mov al,es:[A4C(+si/di/k)]; cbw (signed leg offset table)"
+  },
+  "fd_3D57_0A54": {
+   "seg": 15703,
+   "off": 2644,
+   "grounding": "DrawLegs (0250:2744): mov al,es:[A54(+si/di/k)]; cbw (signed leg offset table)"
+  },
+  "fd_3D57_0A5C": {
+   "seg": 15703,
+   "off": 2652,
+   "grounding": "DrawLegs (0250:2744): mov al,es:[A5C(+si/di/k)]; cbw (signed leg offset table)"
+  },
+  "fd_3D57_0A64": {
+   "seg": 15703,
+   "off": 2660,
+   "grounding": "DrawLegs (0250:2744): mov al,es:[A64(+si/di/k)]; cbw (signed leg offset table)"
+  },
+  "fd_3D57_0A6C": {
+   "seg": 15703,
+   "off": 2668,
+   "grounding": "DrawLegs (0250:2744): mov al,es:[A6C(+si/di/k)]; cbw (signed leg offset table)"
+  },
+  "fd_3D57_0A74": {
+   "seg": 15703,
+   "off": 2676,
+   "grounding": "DrawLegs (0250:2744): mov al,es:[A74(+si/di/k)]; cbw (signed leg offset table)"
+  },
+  "fd_3D57_0A7C": {
+   "seg": 15703,
+   "off": 2684,
+   "grounding": "DrawLegs (0250:2744): mov al,es:[A7C(+si/di/k)]; cbw (signed leg offset table)"
+  },
+  "fd_3D57_0A84": {
+   "seg": 15703,
+   "off": 2692,
+   "grounding": "DrawLegs (0250:2744): mov al,es:[A84(+si/di/k)]; cbw (signed leg offset table)"
+  },
+  "fd_3D57_0A8C": {
+   "seg": 15703,
+   "off": 2700,
+   "grounding": "DrawLegs (0250:2744): mov al,es:[A8C(+si/di/k)]; cbw (signed leg offset table)"
+  },
+  "fd_3D57_0A90": {
+   "seg": 15703,
+   "off": 2704,
+   "grounding": "DrawLegs (0250:2744): mov al,es:[A90(+si/di/k)]; cbw (signed leg offset table)"
+  },
+  "fd_3D57_0A94": {
+   "seg": 15703,
+   "off": 2708,
+   "grounding": "DrawLegs (0250:2744): mov al,es:[A94(+si/di/k)]; cbw (signed leg offset table)"
+  },
+  "fd_3D57_0A9C": {
+   "seg": 15703,
+   "off": 2716,
+   "grounding": "DrawLegs (0250:2744): mov al,es:[A9C(+si/di/k)]; cbw (signed leg offset table)"
+  },
+  "fd_3D57_0AA4": {
+   "seg": 15703,
+   "off": 2724,
+   "grounding": "DrawLegs (0250:2744): mov al,es:[AA4(+si/di/k)]; cbw (signed leg offset table)"
+  },
+  "fd_3D57_0AAC": {
+   "seg": 15703,
+   "off": 2732,
+   "grounding": "DrawLegs (0250:2744): mov al,es:[AAC(+si/di/k)]; cbw (signed leg offset table)"
+  },
+  "fd_3D57_0AB4": {
+   "seg": 15703,
+   "off": 2740,
+   "grounding": "DrawLegs (0250:2744): mov al,es:[AB4(+si/di/k)]; cbw (signed leg offset table)"
+  },
+  "fd_3D57_0ABC": {
+   "seg": 15703,
+   "off": 2748,
+   "grounding": "DrawLegs (0250:2744): mov al,es:[ABC(+si/di/k)]; cbw (signed leg offset table)"
+  },
+  "fd_3D57_0AC4": {
+   "seg": 15703,
+   "off": 2756,
+   "grounding": "DrawLegs (0250:2744): mov al,es:[AC4(+si/di/k)]; cbw (signed leg offset table)"
+  },
+  "fd_3D57_0ACC": {
+   "seg": 15703,
+   "off": 2764,
+   "grounding": "DrawLegs (0250:2744): mov al,es:[ACC(+si/di/k)]; cbw (signed leg offset table)"
+  },
+  "fd_3D57_0AD4": {
+   "seg": 15703,
+   "off": 2772,
+   "grounding": "DrawLegs (0250:2744): mov al,es:[AD4(+si/di/k)]; cbw (signed leg offset table)"
+  },
+  "fd_3D57_0ADC": {
+   "seg": 15703,
+   "off": 2780,
+   "grounding": "DrawLegs (0250:2744): mov al,es:[ADC(+si/di/k)]; cbw (signed leg offset table)"
+  },
+  "fd_3D57_0AE4": {
+   "seg": 15703,
+   "off": 2788,
+   "grounding": "DrawLegs (0250:2744): mov al,es:[AE4(+si/di/k)]; cbw (signed leg offset table)"
+  },
+  "fd_3D57_0AEC": {
+   "seg": 15703,
+   "off": 2796,
+   "grounding": "DrawLegs (0250:2744): mov al,es:[AEC(+si/di/k)]; cbw (signed leg offset table)"
+  },
+  "fd_3D57_0AF4": {
+   "seg": 15703,
+   "off": 2804,
+   "grounding": "DrawLegs (0250:2744): mov al,es:[AF4(+si/di/k)]; cbw (signed leg offset table)"
+  },
+  "fd_3D57_0AFC": {
+   "seg": 15703,
+   "off": 2812,
+   "grounding": "DrawLegs (0250:2744): mov al,es:[AFC(+si/di/k)]; cbw (signed leg offset table)"
+  },
+  "fd_3D57_0B04": {
+   "seg": 15703,
+   "off": 2820,
+   "grounding": "DrawLegs (0250:2744): mov al,es:[B04(+si/di/k)]; cbw (signed leg offset table)"
+  },
+  "fd_3D57_0B0C": {
+   "seg": 15703,
+   "off": 2828,
+   "grounding": "DrawLegs (0250:2744): mov al,es:[B0C(+si/di/k)]; cbw (signed leg offset table)"
+  },
+  "fd_3D57_0B14": {
+   "seg": 15703,
+   "off": 2836,
+   "grounding": "LionDialog (S22:39C7:181A): mov es,[CONST 883E = 3D57]; es:[si*4+0B14]/[si*4+0B16] frame x,y offsets added to the dialog object origin (Win16 LionTrapPnts)"
+  },
+  "fd_3D57_0B24": {
+   "seg": 15703,
+   "off": 2852,
+   "grounding": "YellowDialog (S22:39C7:1943): mov es,[CONST 8840 = 3D57]; es:[0B24]=0x28, es:[0B26]=0x23 on 320-wide screens, then added to the dialog origin for bitmap 0x2397 (Win16 YellowEatPnt)"
   },
   "fd_3D57_0B36": {
    "seg": 15703,
@@ -15668,6 +16156,11 @@
    "off": 520,
    "grounding": "o06_35F5_11FF: mov es,[CONST 84DE = 50F6]; es:[0208] (S06:35F5 InitSimYard/yard sim unit)"
   },
+  "fd_50F6_020A": {
+   "seg": 20726,
+   "off": 522,
+   "grounding": "DrawCurBalloons: mov es,[7FAE]; les si,es:[20A] far pointer to far string table"
+  },
   "fd_50F6_020E": {
    "seg": 20726,
    "off": 526,
@@ -15687,6 +16180,16 @@
    "seg": 20726,
    "off": 532,
    "grounding": "o08_35F5_059B (RandYard): mov es,[S08 CONST word] ; es:[off]"
+  },
+  "fd_50F6_0218": {
+   "seg": 20726,
+   "off": 536,
+   "grounding": "DrawCurBalloons: mov es,[7FB4]; les si,es:[218] far string table"
+  },
+  "fd_50F6_021C": {
+   "seg": 20726,
+   "off": 540,
+   "grounding": "DrawCurBalloons: mov es,[7FBC]; les si,es:[21C] far string table"
   },
   "fd_50F6_0220": {
    "seg": 20726,
@@ -15717,6 +16220,16 @@
    "seg": 20726,
    "off": 562,
    "grounding": "o08_35F5_0050 (RandWorld): mov es,[S08 CONST word] ; mov es:[off]"
+  },
+  "fd_50F6_0234": {
+   "seg": 20726,
+   "off": 564,
+   "grounding": "DrawCurBalloons: mov es,[7FC4]; les si,es:[234] far string table"
+  },
+  "fd_50F6_023A": {
+   "seg": 20726,
+   "off": 570,
+   "grounding": "DrawCurBalloons: mov es,[7FCC]; les si,es:[23A] far string table"
   },
   "fd_50F6_023E": {
    "seg": 20726,
@@ -15988,6 +16501,11 @@
    "off": 1186,
    "grounding": "S25:39C7 o25_39C7_0980:09F7 mov dx,es:[04A2]; shr dx,7 (CONST 8926=50F6); Win16 SimEggB modeLevels[2]"
   },
+  "fd_50F6_04A6": {
+   "seg": 20726,
+   "off": 1190,
+   "grounding": "AddMsgBalloon: es:[bx+4A6]/[4A8] = far msg (Win16 CurBalloonMsgs)"
+  },
   "fd_50F6_04BE": {
    "seg": 20726,
    "off": 1214,
@@ -16008,6 +16526,11 @@
    "off": 1222,
    "grounding": "o06_35F5_0000: mov es,[CONST 8466 = 50F6]; es:[04C6] (S06:35F5 InitSimYard/yard sim unit)"
   },
+  "fd_50F6_04C8": {
+   "seg": 20726,
+   "off": 1224,
+   "grounding": "AddMsgBalloon: es:[bx+4C8]/[bx+4CA] = x,y with bx=count*4 (Win16 CurBalloonPnts)"
+  },
   "fd_50F6_04E2": {
    "seg": 20726,
    "off": 1250,
@@ -16018,10 +16541,20 @@
    "off": 1252,
    "grounding": "o06_35F5_0000: mov es,[CONST 8484 = 50F6]; es:[04E4] (S06:35F5 InitSimYard/yard sim unit)"
   },
+  "fd_50F6_04E6": {
+   "seg": 20726,
+   "off": 1254,
+   "grounding": "AddMsgBalloon: es:[si+4E6]=style (Win16 CurBalloonFlags)"
+  },
   "fd_50F6_04F4": {
    "seg": 20726,
    "off": 1268,
    "grounding": "CalcScore (S14:384C:0000): mov es,[8738]; mov bl,es:[04F4] history ring head (byte)"
+  },
+  "fd_50F6_04F6": {
+   "seg": 20726,
+   "off": 1270,
+   "grounding": "AddMsgBalloon: es:[si+4F6]=plane with si=count*2 (Win16 CurBalloonPlane)"
   },
   "fd_50F6_0502": {
    "seg": 20726,
@@ -16043,6 +16576,11 @@
    "off": 1288,
    "grounding": "o08_35F5_0050 (RandWorld): mov es,[S08 CONST word] ; mov es:[off]"
   },
+  "fd_50F6_050C": {
+   "seg": 20726,
+   "off": 1292,
+   "grounding": "DrawCurBalloons: mov es,[7FA8]; long es:[50C]/[50E] timer vs TickCount()"
+  },
   "fd_50F6_0510": {
    "seg": 20726,
    "off": 1296,
@@ -16053,10 +16591,20 @@
    "off": 1430,
    "grounding": "o08_35F5_0050 (RandWorld): mov es,[S08 CONST word] ; mov es:[off]"
   },
+  "fd_50F6_059A": {
+   "seg": 20726,
+   "off": 1434,
+   "grounding": "DrawCurBalloons: mov es,[7FB6]; long es:[59A]/[59C] egg balloon timer"
+  },
   "fd_50F6_059E": {
    "seg": 20726,
    "off": 1438,
    "grounding": "o06_35F5_1A0F: mov es,[CONST 84F4 = 50F6]; es:[059E] (S06:35F5 InitSimYard/yard sim unit)"
+  },
+  "fd_50F6_0620": {
+   "seg": 20726,
+   "off": 1568,
+   "grounding": "DrawCurBalloons: mov es,[7FBE]; long es:[620]/[622] queen balloon timer"
   },
   "fd_50F6_0624": {
    "seg": 20726,
@@ -16093,6 +16641,11 @@
    "off": 1838,
    "grounding": "o08_35F5_0050 (RandWorld): mov es,[S08 CONST word] ; mov es:[off]"
   },
+  "fd_50F6_0732": {
+   "seg": 20726,
+   "off": 1842,
+   "grounding": "DrawCurBalloons (0250:454D): mov es,[7FA6]; long es:[732]/[734] timer vs TickCount()"
+  },
   "fd_50F6_0736": {
    "seg": 20726,
    "off": 1846,
@@ -16108,11 +16661,6 @@
    "off": 1852,
    "grounding": "CalcScore (S14:384C:0000): mov es,[873C]; mov ax,es:[si+073C] int ring[64]"
   },
-  "fd_50F6_07B6": {
-   "seg": 20726,
-   "off": 1974,
-   "grounding": "S22:3BBD ExpSubStates-like char array: DropWall es:[07B7], ExpDig [07B8], ExpAddAnt [07B9], ExpAddFood [07BA], GetSM [07BB], ExpKillAnts [07BC] share CONST word 8866 (Win16 ExpSubStates[1..6])"
-  },
   "fd_50F6_07BC": {
    "seg": 20726,
    "off": 1980,
@@ -16127,6 +16675,11 @@
    "seg": 20726,
    "off": 1986,
    "grounding": "o06_35F5_0000: mov es,[CONST 84A4 = 50F6]; es:[07C2] (S06:35F5 InitSimYard/yard sim unit)"
+  },
+  "fd_50F6_07C4": {
+   "seg": 20726,
+   "off": 1988,
+   "grounding": "DrawCurBalloons: mov es,[7FC6]; long es:[7C4]/[7C6] rest balloon timer"
   },
   "fd_50F6_07C8": {
    "seg": 20726,
@@ -16163,6 +16716,11 @@
    "off": 2268,
    "grounding": "f_0894_019B: mov es,[804A] (50F6); if nonzero dec word ptr es:[08DC]"
   },
+  "fd_50F6_08DE": {
+   "seg": 20726,
+   "off": 2270,
+   "grounding": "EggBalloons (0250:428A): mov es,[7F76]; cmp es:[8DE],x / es:[8E0],y (Win16 CurEggPnt)"
+  },
   "fd_50F6_08E2": {
    "seg": 20726,
    "off": 2274,
@@ -16182,6 +16740,11 @@
    "seg": 20726,
    "off": 2544,
    "grounding": "S25:3BA4 DoAntMoveY:011C mov es:[09F0],ax (CONST seg word 8958 = 50F6)"
+  },
+  "fd_50F6_09F2": {
+   "seg": 20726,
+   "off": 2546,
+   "grounding": "FightBalloons (0250:4302): mov es,[7F80]; cmp es:[9F2],x / [9F4],y (Win16 CurFightPnt)"
   },
   "fd_50F6_09FA": {
    "seg": 20726,
@@ -16207,6 +16770,11 @@
    "seg": 20726,
    "off": 2566,
    "grounding": "f_0BE8_0002: mov es,[DS:80F8] (CONST 50F6); cmp word es:[0A06],0"
+  },
+  "fd_50F6_0A8A": {
+   "seg": 20726,
+   "off": 2698,
+   "grounding": "QueenBalloons (0250:437A): mov es,[7F8A]; cmp es:[A8A],x / [A8C],y (Win16 CurQueenPnt)"
   },
   "fd_50F6_0A8E": {
    "seg": 20726,
@@ -16238,6 +16806,11 @@
    "off": 2722,
    "grounding": "f_0894_000E: mov es,[803C] (50F6); long store es:[0AA2]/[0AA4] = -1"
   },
+  "fd_50F6_0AB2": {
+   "seg": 20726,
+   "off": 2738,
+   "grounding": "RestBalloons (0250:43F2): mov es,[7F94]; cmp es:[AB2],x / [AB4],y (Win16 CurRestPnt)"
+  },
   "fd_50F6_0AB6": {
    "seg": 20726,
    "off": 2742,
@@ -16258,10 +16831,20 @@
    "off": 2760,
    "grounding": "o06_35F5_02B9: mov es,[CONST 84C0 = 50F6]; es:[0AC8] (S06:35F5 InitSimYard/yard sim unit)"
   },
+  "fd_50F6_0ACA": {
+   "seg": 20726,
+   "off": 2762,
+   "grounding": "EggBalloons: mov es,[7F7C]; mov es:[ACA],plane (Win16 LastEggPlane)"
+  },
   "fd_50F6_0AD6": {
    "seg": 20726,
    "off": 2774,
    "grounding": "S25:3BA4 DoAntMoveY:0111 mov es:[0AD6],ax (CONST seg word 8956 = 50F6)"
+  },
+  "fd_50F6_0AD8": {
+   "seg": 20726,
+   "off": 2776,
+   "grounding": "EggBalloons: mov es,[7F78]; cmp es:[AD8],plane (Win16 CurEggPlane)"
   },
   "fd_50F6_0ADA": {
    "seg": 20726,
@@ -16272,6 +16855,11 @@
    "seg": 20726,
    "off": 2792,
    "grounding": "S25:3BA4 DoAntMoveY:0124 mov es:[0AE8],ax (CONST seg word 895A = 50F6)"
+  },
+  "fd_50F6_0AEA": {
+   "seg": 20726,
+   "off": 2794,
+   "grounding": "FightBalloons: mov es,[7F86]; mov es:[AEA],plane (Win16 LastFightPlane)"
   },
   "fd_50F6_0AEC": {
    "seg": 20726,
@@ -16287,6 +16875,16 @@
    "seg": 20726,
    "off": 2810,
    "grounding": "f_0BE8_0002: mov es,[DS:80E6] (CONST 50F6); word array es:[0AFA..0B04]"
+  },
+  "fd_50F6_0B06": {
+   "seg": 20726,
+   "off": 2822,
+   "grounding": "FightBalloons: mov es,[7F82]; cmp es:[B06],plane (Win16 CurFightPlane)"
+  },
+  "fd_50F6_0B08": {
+   "seg": 20726,
+   "off": 2824,
+   "grounding": "QueenBalloons: mov es,[7F90]; mov es:[B08],plane (Win16 LastQueenPlane)"
   },
   "fd_50F6_0B0A": {
    "seg": 20726,
@@ -16328,6 +16926,11 @@
    "off": 3128,
    "grounding": "f_10F7_20BF (root:10F7): mov es,[CONST word = 50F6]; es:[..0C38] far data reference"
   },
+  "fd_50F6_0C3A": {
+   "seg": 20726,
+   "off": 3130,
+   "grounding": "QueenBalloons: mov es,[7F8C]; cmp es:[C3A],plane (Win16 CurQueenPlane)"
+  },
   "fd_50F6_0C3E": {
    "seg": 20726,
    "off": 3134,
@@ -16337,6 +16940,11 @@
    "seg": 20726,
    "off": 3392,
    "grounding": "f_0894_019B: mov es,[8046] (50F6); int[20] cleared es:[si+0D40] for i<20"
+  },
+  "fd_50F6_0D68": {
+   "seg": 20726,
+   "off": 3432,
+   "grounding": "RestBalloons: mov es,[7F9A]; mov es:[D68],plane (Win16 LastRestPlane)"
   },
   "fd_50F6_0D6A": {
    "seg": 20726,
@@ -16348,6 +16956,11 @@
    "off": 3436,
    "grounding": "S25:3BA4 o25_3BA4_1935:1988 mov word es:[0D6C],-1 (CONST seg word 899C = 50F6); counter decremented in o25_3BA4_1A0D"
   },
+  "fd_50F6_0D6E": {
+   "seg": 20726,
+   "off": 3438,
+   "grounding": "DrawSpider: mov es,[7F00]; mov es:[0D6E],1/0 after SRand2() (spider balloon on flag)"
+  },
   "fd_50F6_0D70": {
    "seg": 20726,
    "off": 3440,
@@ -16357,6 +16970,11 @@
    "seg": 20726,
    "off": 3442,
    "grounding": "f_0894_019B: mov es,[8048] (50F6); int[20] cleared es:[si+0D72] for i<20"
+  },
+  "fd_50F6_0D9A": {
+   "seg": 20726,
+   "off": 3482,
+   "grounding": "RestBalloons: mov es,[7F96]; cmp es:[D9A],plane (Win16 CurRestPlane)"
   },
   "fd_50F6_0DA8": {
    "seg": 20726,
@@ -16372,6 +16990,11 @@
    "seg": 20726,
    "off": 3756,
    "grounding": "o08_35F5_0050 (RandWorld): mov es,[S08 CONST word] ; mov es:[off]"
+  },
+  "fd_50F6_0EB4": {
+   "seg": 20726,
+   "off": 3764,
+   "grounding": "DrawSpider: mov es,[7F04]; cmp ax=es:[0EB4] with 50F6:0FB8; es:[0EB4]=es:[0FB8]"
   },
   "fd_50F6_0EB6": {
    "seg": 20726,
@@ -16463,6 +17086,11 @@
    "off": 3898,
    "alias_of": "DROPdir"
   },
+  "fd_50F6_0F3C": {
+   "seg": 20726,
+   "off": 3900,
+   "grounding": "DrawCurBalloons: mov es,[7FAC]; inc es:[F3C] message index into 50F6:020A table"
+  },
   "fd_50F6_0F3E": {
    "seg": 20726,
    "off": 3902,
@@ -16482,6 +17110,11 @@
    "seg": 20726,
    "off": 3960,
    "alias_of": "MeHealth"
+  },
+  "fd_50F6_0F7A": {
+   "seg": 20726,
+   "off": 3962,
+   "grounding": "DrawCurBalloons: mov es,[7FBA]; inc es:[F7A] index into 50F6:021C"
   },
   "fd_50F6_0F7E": {
    "seg": 20726,
@@ -16508,10 +17141,20 @@
    "off": 4028,
    "grounding": "f_0F3F_0075: mov es,[8248] (50F6); add es:[0FBC],1; adc es:[0FBE],0 (long counter, red ants expired)"
   },
+  "fd_50F6_0FC0": {
+   "seg": 20726,
+   "off": 4032,
+   "grounding": "DrawCurBalloons: mov es,[7FC2]; inc es:[FC0] index into 50F6:0234"
+  },
   "fd_50F6_0FC2": {
    "seg": 20726,
    "off": 4034,
    "grounding": "S25:39C7 o25_39C7_0AB0:0CAD add word es:[0FC2],1; adc es:[0FC4],0 (long counter; CONST 8932=50F6)"
+  },
+  "fd_50F6_0FF8": {
+   "seg": 20726,
+   "off": 4088,
+   "grounding": "DrawCurBalloons: mov es,[7FB2]; inc es:[FF8] message index into 50F6:0218"
   },
   "fd_50F6_0FFA": {
    "seg": 20726,
@@ -16533,20 +17176,45 @@
    "off": 4096,
    "grounding": "S25:39C7 o25_39C7_006D:0300 mov es,[CONST 8912=50F6]; add word es:[1000],1; adc word es:[1002],0 (long counter)"
   },
+  "fd_50F6_1004": {
+   "seg": 20726,
+   "off": 4100,
+   "grounding": "S12:384C:0B76: mov es,[86B2]; push es:[1004] third argument of 384C:10A5"
+  },
   "fd_50F6_1006": {
    "seg": 20726,
    "off": 4102,
    "grounding": "f_10F7_1DD3 (root:10F7): mov es,[CONST word = 50F6]; es:[..1006] far data reference"
+  },
+  "fd_50F6_103A": {
+   "seg": 20726,
+   "off": 4154,
+   "grounding": "DrawCurBalloons: mov es,[7FCA]; inc es:[103A] index into 50F6:023A"
   },
   "fd_50F6_1040": {
    "seg": 20726,
    "off": 4160,
    "grounding": "o08_35F5_0050 (RandWorld): mov es,[S08 CONST word] ; mov es:[off]"
   },
+  "fd_50F6_1042": {
+   "seg": 20726,
+   "off": 4162,
+   "grounding": "InitSpider/MoveSpider (root:0CDB): mov es,[CONST 81xx = 50F6]; word es:[1042] spider state variable"
+  },
   "fd_50F6_1044": {
    "seg": 20726,
    "off": 4164,
    "grounding": "f_10F7_1DD3 (root:10F7): mov es,[CONST word = 50F6]; es:[..1044] far data reference"
+  },
+  "fd_50F6_1046": {
+   "seg": 20726,
+   "off": 4166,
+   "grounding": "DrawCurBalloons: mov es,[7FAA]; es:[1046]=1/0 after SRand2() (fight balloon 0 on flag)"
+  },
+  "fd_50F6_104A": {
+   "seg": 20726,
+   "off": 4170,
+   "grounding": "DrawCurBalloons: mov es,[7FB8]; es:[104A]=1/0 after SRand4()"
   },
   "fd_50F6_104C": {
    "seg": 20726,
@@ -16563,10 +17231,20 @@
    "off": 4176,
    "alias_of": "FoodB"
   },
+  "fd_50F6_1054": {
+   "seg": 20726,
+   "off": 4180,
+   "grounding": "InitSpider/MoveSpider (root:0CDB): mov es,[CONST 81xx = 50F6]; word es:[1054] spider state variable"
+  },
   "fd_50F6_1058": {
    "seg": 20726,
    "off": 4184,
    "grounding": "S25:3BA4 DoAntMoveY:068B mov word es:[1058],1 (CONST seg word 8982 = 50F6)"
+  },
+  "fd_50F6_105A": {
+   "seg": 20726,
+   "off": 4186,
+   "grounding": "InitSpider/MoveSpider (root:0CDB): mov es,[CONST 81xx = 50F6]; word es:[105A] spider state variable"
   },
   "fd_50F6_105C": {
    "seg": 20726,
@@ -16583,6 +17261,16 @@
    "off": 4192,
    "alias_of": "FoodR"
   },
+  "fd_50F6_1062": {
+   "seg": 20726,
+   "off": 4194,
+   "grounding": "DrawCurBalloons: mov es,[7FC0]; es:[1062]=1/0 after SRand4()"
+  },
+  "fd_50F6_1064": {
+   "seg": 20726,
+   "off": 4196,
+   "grounding": "DrawCurBalloons: mov es,[7FB0]; es:[1064]=1/0 after SRand2()"
+  },
   "fd_50F6_1066": {
    "seg": 20726,
    "off": 4198,
@@ -16598,10 +17286,25 @@
    "off": 4204,
    "grounding": "processExp (S22:3BBD:000A): CONST word 8862, xor byte es:[106C],1"
   },
+  "fd_50F6_1072": {
+   "seg": 20726,
+   "off": 4210,
+   "grounding": "InitSpider/MoveSpider (root:0CDB): mov es,[CONST 81xx = 50F6]; word es:[1072] spider state variable"
+  },
   "fd_50F6_1074": {
    "seg": 20726,
    "off": 4212,
    "grounding": "f_10F7_0B51 (root:10F7): mov es,[CONST word = 50F6]; es:[..1074] far data reference"
+  },
+  "fd_50F6_1076": {
+   "seg": 20726,
+   "off": 4214,
+   "grounding": "InitSpider/MoveSpider (root:0CDB): mov es,[CONST 81xx = 50F6]; word es:[1076] spider state variable"
+  },
+  "fd_50F6_107C": {
+   "seg": 20726,
+   "off": 4220,
+   "grounding": "DrawCurBalloons: mov es,[7FC8]; es:[107C]=1/0 after SRand2()"
   },
   "fd_50F6_107E": {
    "seg": 20726,
@@ -16613,6 +17316,11 @@
    "off": 4226,
    "grounding": "o08_35F5_0050 (RandWorld): mov es,[S08 CONST word] ; mov es:[off]"
   },
+  "fd_50F6_108A": {
+   "seg": 20726,
+   "off": 4234,
+   "grounding": "InitSpider/MoveSpider (root:0CDB): mov es,[CONST 81xx = 50F6]; word es:[108A] spider state variable"
+  },
   "fd_50F6_108C": {
    "seg": 20726,
    "off": 4236,
@@ -16622,6 +17330,16 @@
    "seg": 20726,
    "off": 4238,
    "grounding": "o08_35F5_0050 (RandWorld): mov es,[S08 CONST word] ; mov es:[off]"
+  },
+  "fd_50F6_1092": {
+   "seg": 20726,
+   "off": 4242,
+   "grounding": "AddMsgBalloon (0250:446A): mov es,[7F9C]; cmp es:[1092],6; inc es:[1092] (Win16 CurBalloonCnt)"
+  },
+  "fd_50F6_109A": {
+   "seg": 20726,
+   "off": 4250,
+   "grounding": "InitSpider/MoveSpider (root:0CDB): mov es,[CONST 81xx = 50F6]; word es:[109A] spider state variable"
   },
   "fd_50F6_109C": {
    "seg": 20726,
@@ -16663,6 +17381,11 @@
    "off": 4274,
    "grounding": "o08_35F5_0050 (RandWorld): mov es,[S08 CONST word] ; mov es:[off]"
   },
+  "fd_50F6_10B4": {
+   "seg": 20726,
+   "off": 4276,
+   "grounding": "DrawSpider: mov es,[7F06]; les si,es:[10B4]; push es:[bx+si+2],es:[bx+si] (far pointer to far string table) passed to AddMsgBalloon"
+  },
   "fd_50F6_10BA": {
    "seg": 20726,
    "off": 4282,
@@ -16698,6 +17421,11 @@
    "off": 4320,
    "grounding": "f_0250_000E: mov es,[7E8C] (CONST word 50F6); cmp es:[10E0],di (edit columns bound of the 40-wide edit update map)"
   },
+  "fd_50F6_10E2": {
+   "seg": 20726,
+   "off": 4322,
+   "grounding": "InitMapFunctions (S12:384C:0008): mov es,[8670]; mov es:[10E2],ax; mov es:[10E4],dx = mem_Alloc(0x2000,1,'Generated buffer window') handle"
+  },
   "fd_50F6_10E6": {
    "seg": 20726,
    "off": 4326,
@@ -16718,6 +17446,11 @@
    "off": 4354,
    "grounding": "f_0250_03B6: mov es,[7EA4]; mov word ptr es:[1102],1/2/3 (tile drawing mode), switch in f_0250_0ADB"
   },
+  "fd_50F6_1104": {
+   "seg": 20726,
+   "off": 4356,
+   "grounding": "f_0250_5058: win_GetObjRect(15h, 50F6:1104) then copies the 8-byte rect to a local"
+  },
   "fd_50F6_110C": {
    "seg": 20726,
    "off": 4364,
@@ -16733,10 +17466,35 @@
    "off": 5572,
    "grounding": "f_0250_000E: mov es,[7E90]; mov es:[bx+15C4],-1 with bx=(y*40+x)*2; f_0250_05CB _fmemset(50F6:15C4,-1,0x960)"
   },
+  "fd_50F6_1F26": {
+   "seg": 20726,
+   "off": 7974,
+   "grounding": "PreDrawSpider (0250:179F): mov es,[7EEA]; es:[1F26]=7*tileW, es:[1F28]=7*tileH (Win16 spiderBuf.x/.y); f_0250_13A6 passes 50F6:1F26 as far pointer"
+  },
+  "fd_50F6_37D2": {
+   "seg": 20726,
+   "off": 14290,
+   "grounding": "PreDrawSpider: mov es,[7ED6]; es:[37D2]=500 then SpidX/16-x-3 (Win16 spiderTileLeft)"
+  },
+  "fd_50F6_37D4": {
+   "seg": 20726,
+   "off": 14292,
+   "grounding": "PreDrawSpider: mov es,[7ED8]; es:[37D4]=500 then SpidY/16-y-3 (Win16 spiderTileTop)"
+  },
+  "fd_50F6_37D6": {
+   "seg": 20726,
+   "off": 14294,
+   "grounding": "PreDrawSpider: mov es,[7EDA]; es:[37D8]=8000h (Win16 spiderRect.top; rect at 37D6..37DC shares one CONST word)"
+  },
   "fd_50F6_37DE": {
    "seg": 20726,
    "off": 14302,
    "grounding": "f_0250_0256: mov es,[7E9E]; es:[37DE]/[37E0] = f_1A53_00BA(10-set,9); les bx,es:[37DE] handle deref"
+  },
+  "fd_50F6_37E6": {
+   "seg": 20726,
+   "off": 14310,
+   "grounding": "DrawBalloons (0250:4C34): mov es,[7EEC]; lcall es:[37E6] far function pointer (tile copy)"
   },
   "fd_50F6_37EA": {
    "seg": 20726,
@@ -16758,6 +17516,11 @@
    "off": 14394,
    "grounding": "o06_35F5_11FF: mov es,[CONST 84E8 = 50F6]; es:[383A] (S06:35F5 InitSimYard/yard sim unit)"
   },
+  "fd_50F6_3854": {
+   "seg": 20726,
+   "off": 14420,
+   "grounding": "S12:384C:03D0: mov es,[8688]; mov ax,es:[3854]; cmp ax,40"
+  },
   "fd_50F6_3856": {
    "seg": 20726,
    "off": 14422,
@@ -16768,10 +17531,40 @@
    "off": 14424,
    "grounding": "processExp (S22:3BBD:000A): CONST word 8856, idiv es:[3858] (map y scale)"
   },
+  "fd_50F6_385A": {
+   "seg": 20726,
+   "off": 14426,
+   "grounding": "S12:384C:0432: mov es,[868C]; push es:[385C]; push es:[385A] handle passed to f_171C_1B84/1BBA"
+  },
+  "fd_50F6_385E": {
+   "seg": 20726,
+   "off": 14430,
+   "grounding": "S12:384C:0B76: mov bx,385E; mov es,[86A8]; es:[bx]/[bx+2] = mem_Alloc(0x400,1,'Map window image') handle"
+  },
   "fd_50F6_3862": {
    "seg": 20726,
    "off": 14434,
    "grounding": "o09_35F5_0000 (LoadGame): _fstrcpy(MK_FP(50F6,3862), name) after FileSelect (last file name)"
+  },
+  "fd_50F6_38B8": {
+   "seg": 20726,
+   "off": 14520,
+   "grounding": "InitMapFunctions: mov es,[8676]; mov es:[38B8]/[38BA] far function pointer (makea); called in S12:03D0 lcall es:[38B8]"
+  },
+  "fd_50F6_38BC": {
+   "seg": 20726,
+   "off": 14524,
+   "grounding": "InitMapFunctions: mov es,[8678]; mov es:[38BC]/[38BE] far function pointer (makeb); called in S12:03D0 lcall es:[38BC]"
+  },
+  "fd_50F6_38C0": {
+   "seg": 20726,
+   "off": 14528,
+   "grounding": "DrawMapCursor: mov es,[8684]; add ax,es:[38C0] horizontal offset"
+  },
+  "fd_50F6_38C2": {
+   "seg": 20726,
+   "off": 14530,
+   "grounding": "DrawMapCursor (S12:384C:02A2): mov es,[8680]; es:[38C2..38C8] Rect written then passed as far pointer 50F6:38C2 to f_1CE2_0410"
   },
   "fd_50F6_3934": {
    "seg": 20726,
@@ -16913,6 +17706,11 @@
    "off": 10658,
    "grounding": "DoLaserFire (S22:39C7:06B4): mov es,[CONST 87DE = 55B3]; mov word es:[29A2],1 after map-window laser draw (far variable in DGROUP)"
   },
+  "fd_55B3_2A42": {
+   "seg": 21939,
+   "off": 10818,
+   "grounding": "SpecialXfer (S22:39C7:163A): mov es,[CONST 883A = 55B3]; sub ax,es:[2A44] / es:[2A42] (origin x,y of the 12x16 nest-picker grid, far variable in DGROUP)"
+  },
   "fd_55B3_360C": {
    "seg": 21939,
    "off": 13836,
@@ -16943,6 +17741,11 @@
    "off": 15848,
    "grounding": "f_1D8E_070E: mov es,[89CC]; mov es:[3DE8],ax (far int)"
   },
+  "fd_55B3_6262": {
+   "seg": 21939,
+   "off": 25186,
+   "grounding": "f_1C62_0090: mov es,[89C8 (CONST segword 55B3)]; cmp word ptr es:[6262],0 (far int flag)"
+  },
   "g_1B9A": {
    "seg": 21939,
    "off": 7066,
@@ -16957,6 +17760,11 @@
    "seg": 21939,
    "off": 7090,
    "grounding": "f_14EE_04B5: mov al,[si+1BB2] (DS=DGROUP) byte tile per direction"
+  },
+  "g_21A4": {
+   "seg": 21939,
+   "off": 8612,
+   "grounding": "f_1CE2_04C9: mov byte ptr [21A4],1 ... mov byte ptr [21A4],0 around GSaveRect (char flag)"
   },
   "g_3D20": {
    "seg": 21939,
@@ -17038,6 +17846,11 @@
    "off": 35746,
    "grounding": "f_0093_008F: mov [8BA2],ax (DS=DGROUP)"
   },
+  "g_8CCB": {
+   "seg": 21939,
+   "off": 36043,
+   "grounding": "f_1C62_06A6: mov al,[8CCB]; cbw; index far string table 567A (critical-error code, char)"
+  },
   "g_9126": {
    "seg": 21939,
    "off": 37158,
@@ -17058,10 +17871,20 @@
    "off": 37176,
    "grounding": "f_21FA_01D0: lcall [9138](left,top,right,bottom,0) rect primitive (far function pointer)"
   },
+  "g_913C": {
+   "seg": 21939,
+   "off": 37180,
+   "grounding": "f_1CE2_0430: lcall [913C] (far code pointer, BSS; 4-arg xor rect)"
+  },
   "g_9140": {
    "seg": 21939,
    "off": 37184,
    "grounding": "f_259D_000E: lcall [9140] (x0,y0,x1,y1) -> byte size of screen area (far function pointer)"
+  },
+  "g_9144": {
+   "seg": 21939,
+   "off": 37188,
+   "grounding": "GPutPacked: mov ax,[9144]; mov dx,[9146] (far code pointer, BSS)"
   },
   "g_9148": {
    "seg": 21939,
@@ -17078,6 +17901,11 @@
    "off": 37200,
    "grounding": "f_1D8E_07F6: lcall [9150] (far code pointer, BSS)"
   },
+  "g_9154": {
+   "seg": 21939,
+   "off": 37204,
+   "grounding": "GPutPacked: mov ax,[9154]; mov dx,[9156] (far code pointer, BSS)"
+  },
   "g_9158": {
    "seg": 21939,
    "off": 37208,
@@ -17092,6 +17920,16 @@
    "seg": 21939,
    "off": 37232,
    "grounding": "f_1D8E_0435: lcall [9170] (far code pointer, BSS)"
+  },
+  "g_9174": {
+   "seg": 21939,
+   "off": 37236,
+   "grounding": "f_1CE2_0104: lcall [9174] (far code pointer, BSS)"
+  },
+  "g_9178": {
+   "seg": 21939,
+   "off": 37240,
+   "grounding": "f_1C62_0090: lcall [9178] (far code pointer, BSS)"
   },
   "g_917C": {
    "seg": 21939,
@@ -17147,6 +17985,11 @@
    "seg": 21939,
    "off": 32018,
    "grounding": "DosPunt (root:1A28:0277): bx=[773A]*4; push [bx+7D14]; push [bx+7D12] as the %s after 'Dos error: %d:'; MSC runtime far-pointer message table indexed by errno"
+  },
+  "sys_nerr": {
+   "seg": 21939,
+   "off": 32170,
+   "grounding": "f_1C62_06A6: cmp [bp+6],[7DAA]; jg / jl 0 then index sys_errlist[7D12]; word directly after the 38-entry far-pointer sys_errlist, value 37 (MSC runtime sys_nerr)"
   },
   "win_colors": {
    "seg": 20726,
