@@ -41,6 +41,8 @@ Validation: **PASS** (2026-09-30)
 | exact_c_bytes_within_group_pending | 1,696 |
 | claims_layout_inferred | 12 |
 | asm_transcribed_bytes | 51,922 |
+| exact_asm_bytes_genuine | 50,441 |
+| exact_asm_bytes_workaround | 0 |
 | data_bytes_opaque_unmarked | 4,383 |
 | runtime_oracle_derived_words | 244 |
 

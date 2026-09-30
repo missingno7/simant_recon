@@ -103,6 +103,9 @@ def main() -> int:
                          "frames, relocation-order break); required for a new @OFF key")
     ap.add_argument("--mark-steered", action="append", default=[],
                     help="NAME=WHY: an existing claim depends on a steering construct (declared later)")
+    ap.add_argument("--asm-workaround", action="append", default=[],
+                    help="NAME=WHY: this ASM claim reproduces code that was originally C (a matching "
+                         "workaround, counted separately from genuine assembly); NAME=- clears it")
     ap.add_argument("--layout-inferred", action="append", default=[],
                     help="NAME=WHY (NAME = claim or the module key): formatting/label/declaration order "
                          "inferred from relocation-order or identifier-count evidence")
@@ -229,6 +232,17 @@ def main() -> int:
                 raise SystemExit(f"--mark-steered {name}: already steered ({c.get('steered')})")
             c["provenance"], c["steered"] = "EXACT_STEERED", why
             marked.append({"name": name, "steered": why})
+        for spec in a.asm_workaround:
+            name, _, why = spec.partition("=")
+            c = next((c for c in claims if c["name"] == name), None)
+            if c is None or c.get("kind") != "ASM":
+                raise SystemExit(f"--asm-workaround {name}: not an ASM claim of {key}")
+            if why.strip() == "-":
+                c.pop("asm_workaround", None)
+            elif why.strip():
+                c["asm_workaround"] = why
+            else:
+                raise SystemExit("--asm-workaround NAME=WHY (or NAME=- to clear)")
         layout_notes = list(mod.get("layout_inferred", [])) if mod else []
         inferred = []
         for spec in a.layout_inferred:

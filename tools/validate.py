@@ -165,6 +165,9 @@ def main() -> int:
             elif c["kind"] == "ASM":
                 exact_asm += 1
                 exact_asm_bytes += c["size"]
+                # user policy: original assembly reproduced exactly is finished; ASM standing in
+                # for code that was originally C is a matching workaround and reported apart
+                acct["exact_asm_bytes_workaround" if c.get("asm_workaround") else "exact_asm_bytes_genuine"] += c["size"]
             elif c["kind"] == modmod.DATA_KIND:
                 code_data_bytes += c["size"]
             per_unit[c["unit"]] += c["size"]
@@ -377,6 +380,8 @@ def main() -> int:
         "claims_layout_inferred": acct["claims_layout_inferred"],
         "modules_layout_inferred": sorted(layout_modules),
         "asm_transcribed_bytes": acct["asm_transcribed_bytes"],
+        "exact_asm_bytes_genuine": acct["exact_asm_bytes_genuine"],
+        "exact_asm_bytes_workaround": acct["exact_asm_bytes_workaround"],
         "data_bytes_opaque_unmarked": acct["data_bytes_opaque_unmarked"],
         "runtime_oracle_derived_words": derived_words,
         "released_claims_unowned": released_unowned,
@@ -407,7 +412,8 @@ def main() -> int:
               "claims_within_group_order_pending", "inplace_draft_functions", "claims_exact_steered",
               "exact_c_bytes_in_complete_tus", "exact_c_bytes_in_partial_modules", "exact_c_bytes_steered",
               "exact_c_bytes_layout_inferred", "exact_c_bytes_within_group_pending", "claims_layout_inferred",
-              "asm_transcribed_bytes", "data_bytes_opaque_unmarked", "runtime_oracle_derived_words"):
+              "asm_transcribed_bytes", "exact_asm_bytes_genuine", "exact_asm_bytes_workaround",
+              "data_bytes_opaque_unmarked", "runtime_oracle_derived_words"):
         md.append(f"| {k} | {progress[k]:,} |")
     md += ["", f"Manifest: `{progress['manifest_sha256']}`"]
     md += ["", "Complete TUs with cross-function relocation order pending (record breaks between "
