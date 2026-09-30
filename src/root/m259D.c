@@ -27,8 +27,8 @@ extern void far o03_3258_040D(char far *image, char far *buffer, int shift, int 
 extern void far o01_32B5_000F(char far *image, char far *buffer, int shift, int flag);
 extern void far o00_35A6_0007(char far *image, char far *buffer, int shift, int flag);
 extern void far f_1CE2_046D(struct Rect far *rect, int color);
-extern void _fastcall f_23AE_0377(int win);
-extern void _fastcall f_23AE_01DB(int win);
+extern void _fastcall win_LockWin(int win);
+extern void _fastcall win_UnlockWin(int win);
 extern char far * _fastcall win_ObjAddr(int obj);
 extern int far f_24AB_030B(void);
 extern int far f_24AB_0367(int c);
@@ -53,17 +53,17 @@ void _fastcall win_DrawBitMapAtObjNum(int obj, int id)
 {
     struct Rect far *rect;
 
-    f_23AE_0377(obj);
+    win_LockWin(obj);
     rect = (struct Rect far *)win_ObjAddr(obj);
     if (!win_DrawBitMap(rect->left, rect->top, id))
         f_1CE2_046D(rect, g_3DE4 | g_3DE0);
-    f_23AE_01DB(obj);
+    win_UnlockWin(obj);
 }
 
 /* SCAFFOLD BEGIN: best drafts, not exact (see build/workers/win notes).
  * win_DrawBitMap: register/slot allocation residue; its three direct root->overlay far calls
  * (3258:040D, 32B5:000F, 35A6:0007) cannot be bound by the matcher (no RTLink vector).
- * f_259D_032A: two dead zero-stores ([bp-4], [bp-0xc]) that /Og removes here survive in the original. */
+ * win_PrintTextInRect: two dead zero-stores ([bp-4], [bp-0xc]) that /Og removes here survive in the original. */
 int _fastcall win_DrawBitMap(int x, int y, int id)
 {
     char far *h;
@@ -126,7 +126,7 @@ int _fastcall win_DrawBitMap(int x, int y, int id)
     return 0;
 }
 
-void _fastcall f_259D_032A(int first, char far *text, struct Rect far *rect)
+void _fastcall win_PrintTextInRect(int first, char far *text, struct Rect far *rect)
 {
     int c;
     int v4;

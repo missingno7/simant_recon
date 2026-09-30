@@ -15,7 +15,7 @@ long g_6364 = -1;
 int g_6368 = -1;
 static char g_8CEC;
 
-extern void _fastcall f_23AE_0377(int win);
+extern void _fastcall win_LockWin(int win);
 extern char far * _fastcall win_ObjAddr(int obj);
 extern void _fastcall f_23E6_0A53(struct Event far *ev);
 extern void _fastcall f_23E6_0B11(struct Event far *ev);
@@ -23,19 +23,19 @@ extern char far * _fastcall win_WinAddr(int win);
 extern void _fastcall o26_39C7_040F(struct Event far *ev);
 extern void far f_1E57_0DAA(void);
 extern void far f_1E57_0351(void);
-extern void _fastcall f_22BF_0375(int obj, int state);
+extern void _fastcall win_SetObjSelectedState(int obj, int state);
 extern void far f_208F_0530(int ticks);
 extern void far f_1E57_0EB9(void);
 extern struct Event far fd_50F6_49FA;
 extern struct Event far fd_50F6_4A0A;
 extern long far TickCount(void);
-extern void _fastcall f_23AE_01DB(int win);
+extern void _fastcall win_UnlockWin(int win);
 
 void _fastcall f_218D_000C(struct Event far *ev)
 {
     char far *obj;
 
-    f_23AE_0377(ev->code);
+    win_LockWin(ev->code);
     obj = win_ObjAddr(ev->code);
     switch (obj[0x21]) {
     case 4:
@@ -56,11 +56,11 @@ void _fastcall f_218D_000C(struct Event far *ev)
         f_1E57_0351();
         if (*(int far *)(obj + 0x24) & 8) {
             if (!(*(int far *)(obj + 0x24) & 0x20) || !(*(int far *)(obj + 0x24) & 0x400) || !(*(int far *)(obj + 0x24) & 4))
-                f_22BF_0375(ev->code, !(*(int far *)(obj + 0x24) & 4));
+                win_SetObjSelectedState(ev->code, !(*(int far *)(obj + 0x24) & 4));
         } else if (*(int far *)(obj + 0x24) & 1) {
-            f_22BF_0375(ev->code, !(*(int far *)(obj + 0x24) & 4));
+            win_SetObjSelectedState(ev->code, !(*(int far *)(obj + 0x24) & 4));
             f_208F_0530(5);
-            f_22BF_0375(ev->code, !(*(int far *)(obj + 0x24) & 4));
+            win_SetObjSelectedState(ev->code, !(*(int far *)(obj + 0x24) & 4));
         }
         f_1E57_0EB9();
     }
@@ -79,7 +79,7 @@ check:
     g_6364 = TickCount();
     fd_50F6_4A0A = fd_50F6_49FA;
 done:
-    f_23AE_01DB(ev->code);
+    win_UnlockWin(ev->code);
 }
 
 void far f_218D_01EB(void)
@@ -87,23 +87,23 @@ void far f_218D_01EB(void)
     g_6368 = -1;
 }
 
-int far f_218D_01F2(void)
+int far win_GetProxEvent(void)
 {
     return g_6368;
 }
 
 extern void far f_1E57_0A9C(char far *p);
 extern char g_5A9C[];
-extern void _fastcall f_22BF_0271(int obj);
+extern void _fastcall win_ObjInv(int obj);
 
-void _fastcall f_218D_01F6(int obj)
+void _fastcall _win_SetProxItem(int obj)
 {
     f_1E57_0DAA();
     f_1E57_0A9C(g_5A9C);
     if (g_6368 != -1)
-        f_22BF_0271(g_6368);
+        win_ObjInv(g_6368);
     if (obj != -1)
-        f_22BF_0271(obj);
+        win_ObjInv(obj);
     g_6368 = obj;
     f_1E57_0EB9();
 }
@@ -116,14 +116,14 @@ void _fastcall f_218D_023A(struct Event far *ev)
     int obj;
 
     if ((char)(g_5702[0] >> 8) == (unsigned char)ev->code) {
-        f_23AE_0377(g_5702[0]);
+        win_LockWin(g_5702[0]);
         obj = f_1B73_0BFF();
         if (obj != 0 && (obj & 0xff00) == g_5702[0] && g_6368 != obj &&
             (*(int far *)(win_ObjAddr(obj) + 0x24) & 0x10))
-            f_218D_01F6(obj);
+            _win_SetProxItem(obj);
         else if (g_6368 != -1 && !(*(int far *)(win_ObjAddr(g_6368) + 0x24) & 0x400) && obj != g_6368)
-            f_218D_01F6(-1);
-        f_23AE_01DB(g_5702[0]);
+            _win_SetProxItem(-1);
+        win_UnlockWin(g_5702[0]);
     }
 }
 
@@ -133,8 +133,8 @@ extern int far f_1B73_032A(void);
 extern void far f_1B73_032E(struct Event far *ev);
 void _fastcall f_218D_0451(struct Event far *ev);
 extern void _fastcall f_20E8_0776(int win);
-void far f_218D_042B(void);
-extern void _fastcall f_20E8_0635(int win);
+void far win_FlushEvents(void);
+extern void _fastcall win_Close(int win);
 extern void _fastcall o26_39C7_0671(struct Event far *ev);
 extern void _fastcall o26_39C7_0000(int win);
 void _fastcall f_218D_0656(int dir);
@@ -158,18 +158,18 @@ void far f_218D_02D5(void)
                 break;
             case 0xf082:
                 f_20E8_0776(g_5702[0]);
-                f_218D_042B();
+                win_FlushEvents();
                 return;
             case 0xf083:
-                f_20E8_0635(g_5702[0]);
-                f_218D_042B();
+                win_Close(g_5702[0]);
+                win_FlushEvents();
                 return;
             case 0xf084:
                 o26_39C7_0671(0L);
                 return;
             case 0xf085:
                 o26_39C7_0000(g_5702[0]);
-                f_218D_042B();
+                win_FlushEvents();
                 return;
             case 0xf086:
                 if (g_5702[0] != (int)0x8000)
@@ -192,13 +192,13 @@ void far f_218D_02D5(void)
     g_8CEC = 1;
 }
 
-int far f_218D_03E8(void)
+int far win_Events(void)
 {
     f_218D_02D5();
     return g_8CEC;
 }
 
-int _fastcall f_218D_03F1(struct Event far *ev)
+int _fastcall win_GetEvent(struct Event far *ev)
 {
     f_218D_02D5();
     if (g_8CEC) {
@@ -210,7 +210,7 @@ int _fastcall f_218D_03F1(struct Event far *ev)
     return 0;
 }
 
-void far f_218D_042B(void)
+void far win_FlushEvents(void)
 {
     struct Event ev;
 
@@ -241,11 +241,11 @@ void _fastcall f_218D_0451(struct Event far *ev)
     if (top == (int)0x8000)
         return;
     win_GetObjRect(top, &r);
-    f_23AE_0377(top);
+    win_LockWin(top);
     noClose = (*(unsigned far *)(win_WinAddr(top) + 0x1c) & 0x40) >> 6;
     if (!f_1FD2_04E5(&ev->h, &r) && (*(int far *)(win_WinAddr(top) + 0x1c) & 1))
-        f_20E8_0635(top);
-    f_23AE_01DB(top);
+        win_Close(top);
+    win_UnlockWin(top);
     if (noClose == 0) {
         for (i = 0; g_5702[i] != (int)0x8000; i++) {
             win_GetObjRect(g_5702[i], &r);
@@ -282,14 +282,14 @@ int far f_218D_052F(void)
     found = -1;
     top = g_5702[0];
     best = 0xffffffffL;
-    f_23AE_0377(top);
+    win_LockWin(top);
     w = f_2505_0006(top);
     f_1FD2_04D0(&pt);
     for (i = 1; i < *(int far *)(w + 0xc); i++) {
         obj = ((char far * far *)(w + 0x2c))[i];
         if (*(int far *)(obj + 0x24) & 2) {
             if (f_1FD2_04E5((int far *)&pt, (struct Rect far *)obj)) {
-                f_23AE_01DB(top);
+                win_UnlockWin(top);
                 return top + i;
             }
             dy = pt.y - (((struct Rect far *)obj)->top + ((struct Rect far *)obj)->top) / 2;
@@ -303,7 +303,7 @@ int far f_218D_052F(void)
     }
     if (found != -1)
         f_1B73_0C80(found);
-    f_23AE_01DB(top);
+    win_UnlockWin(top);
     return -1;
 }
 

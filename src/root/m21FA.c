@@ -28,8 +28,8 @@ extern void far f_1CE2_044D(struct Rect far *rect, int width);
 extern void far f_1CE2_09E2(struct Rect far *rect, int width, struct Sides sides, int light, int dark);
 extern void far f_1CE2_0278(struct Rect far *rect, int width, struct Sides sides, int color);
 extern void far f_1CE2_0430(struct Rect far *rect);
-extern void _fastcall f_23AE_0377(int win);
-extern void _fastcall f_23AE_01DB(int win);
+extern void _fastcall win_LockWin(int win);
+extern void _fastcall win_UnlockWin(int win);
 extern char far * _fastcall win_ObjAddr(int obj);
 extern void _fastcall win_GetObjRect(int obj, struct Rect far *rect);
 extern void far f_1E57_0DAA(void);
@@ -42,7 +42,7 @@ extern char far * far _fstrchr(char far *s, int c);
 extern char far * far f_171C_1B84(char far * far *handle);
 extern void far f_208F_0419(struct Pt far *size, int id);
 extern int _fastcall win_DrawBitMap(int x, int y, int id);
-extern void _fastcall f_23AE_036F(int win);
+extern void _fastcall win_LockWinHigh(int win);
 extern char far * far f_2505_0006(int win);
 extern int far sprintf(char far *buffer, char far *format, ...);
 extern void far f_1E57_0296(void);
@@ -62,15 +62,15 @@ extern int g_6300;
 extern int g_5702[];
 extern int near g_3DB2;
 extern int far * near g_5AAC;
-extern void (far * far fd_50F6_47DE[])(int phase);
-extern char far fd_50F6_46E2[][6];
+extern void (far * far win_drawHooks[])(int phase);
+extern char far win_colors[][6];
 extern void (far * near g_9128)(int fore, int back, int pattern);
 extern void (far * near g_9134)(int x0, int y0, int x1, int y1, int color);
 extern void (far * near g_9138)(int left, int top, int right, int bottom, int mode);
 
 static char far *colorEntry;
 
-void _fastcall f_21FA_0002(int mode, struct Rect far *rect, char far *text)
+void _fastcall gr_JustifyStrInRect(int mode, struct Rect far *rect, char far *text)
 {
     struct Rect r;
     int x;
@@ -98,9 +98,9 @@ void _fastcall f_21FA_0002(int mode, struct Rect far *rect, char far *text)
     }
 }
 
-void _fastcall f_21FA_00EE(int color)
+void _fastcall win_SetColorNum(int color)
 {
-    colorEntry = fd_50F6_46E2[color];
+    colorEntry = win_colors[color];
     if ((g_5A97 & 1) == 0)
         (*g_9128)(colorEntry[0] * 0x101, colorEntry[2] * 0x101, colorEntry[0] * 0x101);
     else
@@ -110,9 +110,9 @@ void _fastcall f_21FA_00EE(int color)
 void _fastcall win_SetColorFromObj(char far *obj)
 {
     if (obj[0x24] & 4)
-        colorEntry = fd_50F6_46E2[obj[0x27]];
+        colorEntry = win_colors[obj[0x27]];
     else
-        colorEntry = fd_50F6_46E2[obj[0x26]];
+        colorEntry = win_colors[obj[0x26]];
     if ((g_5A97 & 1) == 0)
         (*g_9128)(colorEntry[0] * 0x101, colorEntry[2] * 0x101, colorEntry[0] * 0x101);
     else
@@ -121,12 +121,12 @@ void _fastcall win_SetColorFromObj(char far *obj)
 
 void _fastcall win_SetColorFromObjNum(int obj)
 {
-    f_23AE_0377(obj);
+    win_LockWin(obj);
     win_SetColorFromObj(win_ObjAddr(obj));
-    f_23AE_01DB(obj);
+    win_UnlockWin(obj);
 }
 
-void _fastcall win_ClearObjArea(struct Rect far *rect)
+void _fastcall win_RectFill(struct Rect far *rect)
 {
     if (colorEntry[2] != colorEntry[3] && (g_5A97 & 1) == 0) {
         (*g_9128)(colorEntry[3] * 0x101, colorEntry[2] * 0x101, colorEntry[0] * 0x101);
@@ -144,18 +144,18 @@ void _fastcall win_FillObjRect(int obj, int color)
     f_1CE2_046D(&r, color);
 }
 
-void _fastcall f_21FA_0286(int width, struct Rect far *rect)
+void _fastcall win_RectFillOutline(int width, struct Rect far *rect)
 {
-    win_ClearObjArea(rect);
+    win_RectFill(rect);
     f_1CE2_044D(rect, width);
 }
 
-void far f_21FA_02A8(struct Rect far *rect, int width)
+void far win_RectOutline(struct Rect far *rect, int width)
 {
     f_1CE2_044D(rect, width);
 }
 
-void far f_21FA_02BD(struct Rect far *rect, int width)
+void far win_RectVOutline(struct Rect far *rect, int width)
 {
     struct Sides sides;
 
@@ -166,7 +166,7 @@ void far f_21FA_02BD(struct Rect far *rect, int width)
     f_1CE2_09E2(rect, width, sides, g_3DE0, g_3DE0);
 }
 
-void far f_21FA_02E9(struct Rect far *rect, int width)
+void far win_RectHOutline(struct Rect far *rect, int width)
 {
     struct Sides sides;
 
@@ -185,7 +185,7 @@ void _fastcall win_DrawButtonBorder(char far *obj)
     int i;
 
     rect = (struct Rect far *)obj;
-    entry = fd_50F6_46E2[obj[0x26]];
+    entry = win_colors[obj[0x26]];
     if ((obj[0x24] & 4) == 0) {
         for (i = 3; i > 0; i--) {
             sides.left = 1;
@@ -239,10 +239,10 @@ void _fastcall win_DrawObjectI(struct WinObj far *obj)
     }
     switch (obj->type) {
     case 0:
-        f_21FA_0286(*(char far *)&obj->data[1], rect);
+        win_RectFillOutline(*(char far *)&obj->data[1], rect);
         break;
     case 2:
-        win_ClearObjArea(rect);
+        win_RectFill(rect);
         break;
     case 4:
         f_23E6_0392((char far *)obj);
@@ -263,14 +263,14 @@ void _fastcall win_DrawObjectI(struct WinObj far *obj)
         f_23E6_066C((char far *)obj);
         break;
     case 12:
-        win_ClearObjArea(rect);
+        win_RectFill(rect);
         (*g_9134)(rect->left, rect->bottom - 1, rect->right, rect->bottom, colorEntry[0] * 0x101);
         goto plainText;
     case 13:
         win_DrawBitMapAtObj(*(int far *)((char far *)obj->data + ((obj->flags & 4) ? 2 : 4)), (struct Rect far *)obj);
         break;
     case 15:
-        f_21FA_02A8(rect, *(char far *)&obj->data[1]);
+        win_RectOutline(rect, *(char far *)&obj->data[1]);
         break;
     case 17:
         f_1CE2_046D(rect, colorEntry[2] * 0x101);
@@ -285,33 +285,33 @@ void _fastcall win_DrawObjectI(struct WinObj far *obj)
                 goto doneText;
         drawText:
             f_24AB_02AD(*(char far *)&obj->data[1]);
-            f_21FA_0002(((unsigned)obj->flags & 0x180) >> 7, rect, text);
+            gr_JustifyStrInRect(((unsigned)obj->flags & 0x180) >> 7, rect, text);
         } else {
             h = *(char far * far * far *)&obj->data[2];
             p = f_171C_1B84(h);
-            f_21FA_0002(((unsigned)obj->flags & 0x180) >> 7, rect, p);
+            gr_JustifyStrInRect(((unsigned)obj->flags & 0x180) >> 7, rect, p);
             f_171C_1BBA(h);
         }
     doneText:
         f_24AB_02AD(0);
         break;
     case 18:
-        win_ClearObjArea(rect);
+        win_RectFill(rect);
         (*g_9134)(rect->left, rect->bottom - 1, rect->right, rect->bottom, colorEntry[0] * 0x101);
         goto formatText;
     case 19:
-        f_21FA_02E9(rect, *(char far *)&obj->data[1]);
+        win_RectHOutline(rect, *(char far *)&obj->data[1]);
         break;
     case 20:
-        f_21FA_02BD(rect, *(char far *)&obj->data[1]);
+        win_RectVOutline(rect, *(char far *)&obj->data[1]);
         break;
     case 21:
-        win_ClearObjArea(rect);
-        f_21FA_02E9(rect, *(char far *)&obj->data[1]);
+        win_RectFill(rect);
+        win_RectHOutline(rect, *(char far *)&obj->data[1]);
         break;
     case 22:
-        win_ClearObjArea(rect);
-        f_21FA_02BD(rect, *(char far *)&obj->data[1]);
+        win_RectFill(rect);
+        win_RectVOutline(rect, *(char far *)&obj->data[1]);
         break;
     }
     if (obj->flags & 4) {
@@ -326,7 +326,7 @@ void _fastcall win_DrawObjectI(struct WinObj far *obj)
         f_1E57_0EB9();
 }
 
-void _fastcall f_21FA_0741(struct WinObj far *obj)
+void _fastcall win_DrawObject(struct WinObj far *obj)
 {
     if (obj->flags & 1)
         win_DrawObjectI(obj);
@@ -334,9 +334,9 @@ void _fastcall f_21FA_0741(struct WinObj far *obj)
 
 void _fastcall win_DrawObjectNum(int objNum)
 {
-    f_23AE_0377(objNum);
+    win_LockWin(objNum);
     win_DrawObjectI((struct WinObj far *)win_ObjAddr(objNum));
-    f_23AE_01DB(objNum);
+    win_UnlockWin(objNum);
 }
 
 void _fastcall win_DrawWinIcons(char far *w)
@@ -386,7 +386,7 @@ void _fastcall win_DrawWinIcons(char far *w)
 
 /* Unclaimed draft: bytes exact; the original object breaks its LEDATA record between
  * 0A35 and 0A55 (sprintf relocation group order). */
-void _fastcall f_21FA_08E2(int win)
+void _fastcall win_DrawWindow(int win)
 {
     char buf[40];
     char far *w;
@@ -394,19 +394,19 @@ void _fastcall f_21FA_08E2(int win)
     int i;
 
     sprintf(buf, "!!W:%x", win);
-    f_23AE_036F(win);
+    win_LockWinHigh(win);
     sprintf(buf, "QQW:%x", win);
     w = f_2505_0006(win);
     if ((*(int far *)(w + 0x1c) & 0x20) == 0) {
         if (g_5AAC == 0 || g_5AAC[1] != (int)0x8000) {
             sprintf(buf, "##W:%x", win);
-            if (fd_50F6_47DE[win >> 8])
-                (*fd_50F6_47DE[win >> 8])(1);
+            if (win_drawHooks[win >> 8])
+                (*win_drawHooks[win >> 8])(1);
             sprintf(buf, "**W:%x", win);
             n = *(int far *)(w + 0xc);
             for (i = 0; i < n; i++) {
                 sprintf(buf, "w:%x, i:%x", win, i);
-                f_21FA_0741(((struct WinObj far * far *)(w + 0x2c))[i]);
+                win_DrawObject(((struct WinObj far * far *)(w + 0x2c))[i]);
                 if (i == 0)
                     *(struct Rect far *)w = *((struct Rect far * far *)(w + 0x2c))[0];
                 sprintf(buf, "xxw:%x, i:%x", win, i);
@@ -415,19 +415,19 @@ void _fastcall f_21FA_08E2(int win)
             win_DrawWinIcons(w);
         }
         sprintf(buf, "ppw:%x, i:%x", win, i);
-        if (fd_50F6_47DE[win >> 8])
-            (*fd_50F6_47DE[win >> 8])(2);
+        if (win_drawHooks[win >> 8])
+            (*win_drawHooks[win >> 8])(2);
     }
     sprintf(buf, "%%w:%x, i:%x", win, i);
-    f_23AE_01DB(win);
+    win_UnlockWin(win);
 }
 
-void _fastcall f_21FA_0AA7(int win)
+void _fastcall win_DrawTitle(int win)
 {
     win_DrawObjectNum(win);
-    f_23AE_0377(win);
+    win_LockWin(win);
     win_DrawWinIcons(f_2505_0006(win));
-    f_23AE_01DB(win);
+    win_UnlockWin(win);
 }
 
 void _fastcall f_21FA_0AD2(char far *p)
@@ -442,7 +442,7 @@ void _fastcall f_21FA_0AD2(char far *p)
     while (--i >= 0) {
         f_1E57_0174(g_5702[i]);
         f_1E57_0A9C(p);
-        f_21FA_08E2(g_5702[i]);
+        win_DrawWindow(g_5702[i]);
     }
     f_1E57_0362();
 }
@@ -469,11 +469,11 @@ void _fastcall f_21FA_0B4B(char far *p)
         sprintf(buf, "!!i:%x", i);
         f_1E57_0AAF(&r);
         sprintf(buf, "@@i:%x", i);
-        f_21FA_08E2(g_5702[i]);
+        win_DrawWindow(g_5702[i]);
     }
     if (g_5702[0] != (int)0x8000) {
         f_1E57_0174(g_5702[0]);
-        f_21FA_08E2(g_5702[0]);
+        win_DrawWindow(g_5702[0]);
     }
     f_1E57_0362();
 }

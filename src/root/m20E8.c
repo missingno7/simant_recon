@@ -25,19 +25,19 @@ void far f_20E8_0000(void)
 {
 }
 
-/* SCAFFOLD BEGIN: f_20E8_0001 (win_LoadWindow) best draft.
+/* SCAFFOLD BEGIN: win_LoadWindow (win_LoadWindow) best draft.
    Residue: case 4 of the object loop computes the _fmemset pointer with
    mov ax,bx; mov dx,es; add ax,2Ah - the original reuses DX (obj segment
    from the objs[i] load): mov ax,bx; add ax,2Ah; push dx. 322 vs 320 bytes. */
 extern char far * far * far f_1A53_00F0(int object, int kind, int type);
 extern void far Punt(char far *format, ...);
-extern char far * far * near g_9230[];
-extern void _fastcall f_23AE_0377(int win);
-extern void _fastcall f_2505_0048(int win);
-extern struct Rect far fd_50F6_4892[];
-extern void _fastcall f_23AE_01DB(int win);
+extern char far * far * near win_handles[];
+extern void _fastcall win_LockWin(int win);
+extern void _fastcall RepointObjects(int win);
+extern struct Rect far win_offsets[];
+extern void _fastcall win_UnlockWin(int win);
 
-void far f_20E8_0001(int win)
+void far win_LoadWindow(int win)
 {
     char far * far *h;
     char far *obj;
@@ -47,15 +47,15 @@ void far f_20E8_0001(int win)
     h = f_1A53_00F0((char)(win >> 8), 0, 1);
     if (h == 0)
         Punt("CANNOT LOAD WINDOW %03x", win);
-    g_9230[(char)(win >> 8)] = h;
+    win_handles[(char)(win >> 8)] = h;
     w = *h;
-    f_23AE_0377(win);
-    f_2505_0048(win);
+    win_LockWin(win);
+    RepointObjects(win);
     obj = ((char far * far *)(w + 0x2c))[0];
-    if (fd_50F6_4892[(char)(win >> 8)].left != (int)0x8000)
-        *(struct Rect far *)(obj + 8) = fd_50F6_4892[(char)(win >> 8)];
+    if (win_offsets[(char)(win >> 8)].left != (int)0x8000)
+        *(struct Rect far *)(obj + 8) = win_offsets[(char)(win >> 8)];
     else
-        fd_50F6_4892[(char)(win >> 8)] = *(struct Rect far *)(obj + 8);
+        win_offsets[(char)(win >> 8)] = *(struct Rect far *)(obj + 8);
     for (i = 0; i < *(int far *)(w + 0xc); i++) {
         obj = ((char far * far *)(w + 0x2c))[i];
         if (i == 0)
@@ -71,7 +71,7 @@ void far f_20E8_0001(int win)
             break;
         }
     }
-    f_23AE_01DB(win);
+    win_UnlockWin(win);
 }
 
 /* SCAFFOLD END */
@@ -79,8 +79,8 @@ void far f_20E8_0001(int win)
 struct Rect g_635C = { (int)0x8000, (int)0x8000, (int)0x8000, (int)0x8000 };
 
 extern void far font_InitFonts(void);
-extern void far f_23AE_0022(void);
-extern void (far * far fd_50F6_47DE[])(int phase);
+extern void far win_LockInit(void);
+extern void (far * far win_drawHooks[])(int phase);
 extern char near g_5A97;
 extern char far * far * far db_LoadObject(int object, int kind);
 extern char far * far f_171C_1B84(char far * far *handle);
@@ -92,13 +92,13 @@ struct Pt {
 };
 extern void far f_208F_0419(struct Pt far *size, int id);
 extern struct Pt far fd_50F6_47DA;
-extern int far fd_50F6_47D8;
-extern int far fd_50F6_47D6;
-extern int far fd_50F6_47D4;
-extern char far fd_50F6_46E2[][6];
+extern int far win_numOfWindows;
+extern int far win_numOfColors;
+extern int far win_numOfGroups;
+extern char far win_colors[][6];
 extern void far f_1A53_034F(int object, int kind);
 
-int far f_20E8_0141(void)
+int far win_LoadAllWindows(void)
 {
     char purge[0x28];
     int i;
@@ -107,13 +107,13 @@ int far f_20E8_0141(void)
     char far *q;
 
     font_InitFonts();
-    f_23AE_0022();
-    _fmemset(fd_50F6_47DE, 0, 0xb4);
+    win_LockInit();
+    _fmemset(win_drawHooks, 0, 0xb4);
     for (i = 0; i < 45; i++)
-        fd_50F6_4892[i] = g_635C;
+        win_offsets[i] = g_635C;
     h = db_LoadObject(g_5A97, 9);
     if (h) {
-        _fmemcpy(fd_50F6_4892, f_171C_1B84(h), 0x140);
+        _fmemcpy(win_offsets, f_171C_1B84(h), 0x140);
         f_171C_1BBA(h);
         db_PurgeObject(g_5A97, 9);
     }
@@ -123,13 +123,13 @@ int far f_20E8_0141(void)
         Punt("Cannot load resource\nplease try another");
     } else {
         p = (int far *)*h;
-        fd_50F6_47D8 = p[0];
-        fd_50F6_47D6 = p[1];
-        fd_50F6_47D4 = p[2];
+        win_numOfWindows = p[0];
+        win_numOfColors = p[1];
+        win_numOfGroups = p[2];
         db_PurgeObject(0x80, 0);
     }
     h = db_LoadObject(0x81, 0);
-    _fmemcpy(fd_50F6_46E2, *h, fd_50F6_47D6 * 6);
+    _fmemcpy(win_colors, *h, win_numOfColors * 6);
     db_PurgeObject(0x81, 0);
     h = db_LoadObject(0x83, 0);
     q = *h;
@@ -137,9 +137,9 @@ int far f_20E8_0141(void)
         Punt("Could not load purge list");
     _fmemcpy(purge, q, 0x28);
     db_PurgeObject(0x83, 0);
-    for (i = 0; i < fd_50F6_47D8; i++) {
+    for (i = 0; i < win_numOfWindows; i++) {
         if (purge[i] == 0) {
-            f_20E8_0001(i << 8);
+            win_LoadWindow(i << 8);
             f_1A53_034F(i, 0);
         }
     }
@@ -150,21 +150,21 @@ extern char far * far f_2505_0006(int win);
 extern int g_5702[];
 extern void _fastcall f_2505_08EA(int win);
 extern void far f_1E57_0115(int win);
-extern void _fastcall f_2505_0545(int win);
+extern void _fastcall win_Recalc(int win);
 extern void far f_1E57_00B1(int win);
 extern void _fastcall f_2505_0831(int win);
 extern void far f_1E57_0174(int win);
-extern void _fastcall f_21FA_08E2(int win);
+extern void _fastcall win_DrawWindow(int win);
 extern void far f_1E57_0362(void);
 
-void far f_20E8_032F(int from, int to, int unused, int p0, int p1, int p2, int p3)
+void far win_Swap(int from, int to, int unused, int p0, int p1, int p2, int p3)
 {
     char far *w;
     struct Rect origin;
     struct Rect rect;
     char far *obj;
 
-    f_23AE_0377(from);
+    win_LockWin(from);
     w = f_2505_0006(from);
     origin = *(struct Rect far *)(((char far * far *)(w + 0x2c))[0] + 8);
     rect = *(struct Rect far *)w;
@@ -177,8 +177,8 @@ void far f_20E8_032F(int from, int to, int unused, int p0, int p1, int p2, int p
         *(int far *)(w + 0x1c) &= ~0x200;
         (*g_62E0)(from);
     }
-    f_23AE_01DB(from);
-    f_23AE_0377(to);
+    win_UnlockWin(from);
+    win_LockWin(to);
     w = f_2505_0006(to);
     obj = ((char far * far *)(w + 0x2c))[0];
     *(int far *)(obj + 8) = origin.left;
@@ -189,7 +189,7 @@ void far f_20E8_032F(int from, int to, int unused, int p0, int p1, int p2, int p
     ((int far *)(w + 0x10))[1] = p1;
     ((int far *)(w + 0x10))[2] = p2;
     ((int far *)(w + 0x10))[3] = p3;
-    f_2505_0545(to);
+    win_Recalc(to);
     (*g_62E0)(to);
     *(int far *)(f_2505_0006(to) + 0x1c) |= 0x200;
     if (g_5702[0] != (int)0x8000)
@@ -197,25 +197,25 @@ void far f_20E8_032F(int from, int to, int unused, int p0, int p1, int p2, int p
     f_1E57_00B1(to);
     f_2505_0831(to);
     f_1E57_0174(to);
-    f_21FA_08E2(to);
+    win_DrawWindow(to);
     (*g_62E8)();
-    f_23AE_01DB(to);
+    win_UnlockWin(to);
     f_1E57_0362();
 }
 
-/* SCAFFOLD BEGIN: f_20E8_04B6 best draft.
+/* SCAFFOLD BEGIN: win_Open best draft.
    Residue: (1) the first w = f_2505_0006(win) is kept in BX (dead-store
    eliminated) where the original assigns SI/[bp-0Eh]; (2) near globals
    g_3DB4/g_3DB2 are compared as cmp [g],reg while the original loads the
    global into AX first (mov ax,[3DB4]; cmp [bp-12h],ax; jle) - 388 vs 383. */
-extern void _fastcall f_23AE_036F(int win);
+extern void _fastcall win_LockWinHigh(int win);
 extern void _fastcall f_2505_0288(int obj, struct Rect far *rect);
 extern int near g_3DB4;
 extern int far fd_50F6_3942;
 extern int near g_3DB2;
-extern void far f_218D_042B(void);
+extern void far win_FlushEvents(void);
 
-void far f_20E8_04B6(int win, int p0, int p1, int p2, int p3)
+void far win_Open(int win, int p0, int p1, int p2, int p3)
 {
     char far *w;
     int dx;
@@ -224,14 +224,14 @@ void far f_20E8_04B6(int win, int p0, int p1, int p2, int p3)
     int far *origin;
 
     if (g_5702[0] != win) {
-        f_23AE_036F(win);
+        win_LockWinHigh(win);
         (*g_62E4)();
         w = f_2505_0006(win);
         ((int far *)(w + 0x10))[0] = p0;
         ((int far *)(w + 0x10))[1] = p1;
         ((int far *)(w + 0x10))[2] = p2;
         ((int far *)(w + 0x10))[3] = p3;
-        f_2505_0545(win);
+        win_Recalc(win);
         w = f_2505_0006(win);
         if (*(int far *)(w + 0x1c) & 0x1000) {
             dx = dy = 0;
@@ -245,10 +245,10 @@ void far f_20E8_04B6(int win, int p0, int p1, int p2, int p3)
             else if (g_3DB2 <= r.right)
                 dx = g_3DB2 - r.right;
             origin = (int far *)(((char far * far *)(w + 0x2c))[0] + 8);
-            fd_50F6_4892[win >> 8] = *(struct Rect far *)origin;
+            win_offsets[win >> 8] = *(struct Rect far *)origin;
             origin[0] += dx;
             origin[1] += dy;
-            f_2505_0545(win);
+            win_Recalc(win);
         }
         (*g_62E0)(win);
         *(int far *)(f_2505_0006(win) + 0x1c) |= 0x200;
@@ -257,24 +257,24 @@ void far f_20E8_04B6(int win, int p0, int p1, int p2, int p3)
         f_1E57_00B1(win);
         f_2505_0831(win);
         f_1E57_0174(win);
-        f_21FA_08E2(win);
+        win_DrawWindow(win);
         (*g_62E8)();
         f_1E57_0362();
-        f_23AE_01DB(win);
+        win_UnlockWin(win);
     }
-    f_218D_042B();
+    win_FlushEvents();
 }
 
 /* SCAFFOLD END */
 
 extern void _fastcall f_21FA_0B4B(struct Rect far *rect);
 
-void _fastcall f_20E8_0635(int win)
+void _fastcall win_Close(int win)
 {
     char far *w;
     struct Rect r;
 
-    f_23AE_0377(win);
+    win_LockWin(win);
     w = f_2505_0006(win);
     if (*(int far *)(w + 0x1c) & 0x200) {
         (*g_62E4)();
@@ -289,15 +289,15 @@ void _fastcall f_20E8_0635(int win)
         }
         *(int far *)(w + 0x1c) &= ~0x200;
         if (*(int far *)(w + 0x1c) & 0x1000)
-            *(struct Rect far *)(((char far * far *)(w + 0x2c))[0] + 8) = fd_50F6_4892[(char)(win >> 8)];
+            *(struct Rect far *)(((char far * far *)(w + 0x2c))[0] + 8) = win_offsets[(char)(win >> 8)];
         (*g_62E0)(win);
         r = *(struct Rect far *)w;
-        f_23AE_01DB(win);
+        win_UnlockWin(win);
         f_21FA_0B4B(&r);
         (*g_62E8)();
         f_1E57_0362();
     } else {
-        f_23AE_01DB(win);
+        win_UnlockWin(win);
     }
 }
 
@@ -311,13 +311,13 @@ void _fastcall f_20E8_0725(int win)
     top = g_5702[0];
     if (top != win) {
         if (top != (int)0x8000) {
-            f_23AE_0377(top);
+            win_LockWin(top);
             flag = *(int far *)(f_2505_0345(top) + 0x1c) & 1;
-            f_23AE_01DB(top);
+            win_UnlockWin(top);
             if (flag)
-                f_20E8_0635(top);
+                win_Close(top);
         }
-        f_20E8_04B6(win);
+        win_Open(win);
     }
 }
 
@@ -330,15 +330,15 @@ void _fastcall f_20E8_0776(int win)
     char far *w;
     struct Rect r;
 
-    f_23AE_0377(win);
+    win_LockWin(win);
     f_2505_0006(win);
     flag = *(int far *)(f_2505_0345(g_5702[0]) + 0x1c) & 1;
-    f_23AE_01DB(win);
+    win_UnlockWin(win);
     (*g_62E4)();
     if (g_5702[0] == win) {
         if (g_5702[1] != (int)0x8000) {
             if (flag) {
-                f_20E8_0635(g_5702[0]);
+                win_Close(g_5702[0]);
                 return;
             }
             f_1E57_0052(win);
@@ -350,20 +350,20 @@ void _fastcall f_20E8_0776(int win)
     } else {
         f_1E57_0052(win);
     }
-    f_23AE_0377(win);
+    win_LockWin(win);
     w = f_2505_0006(win);
     *(int far *)(w + 0x1c) |= 0x200;
     r = *(struct Rect far *)w;
-    f_23AE_01DB(win);
+    win_UnlockWin(win);
     (*g_62E0)(win);
     f_21FA_0AD2(&r);
     (*g_62E8)();
     f_1E57_0362();
 }
 
-void _fastcall f_20E8_0862(int win, void (far *hook)(int phase))
+void _fastcall win_SetWinDrawHook(int win, void (far *hook)(int phase))
 {
-    fd_50F6_47DE[win >> 8] = hook;
+    win_drawHooks[win >> 8] = hook;
 }
 
 void _fastcall f_20E8_088B(void (far *hook)(int win))
@@ -414,27 +414,27 @@ void _fastcall f_20E8_0903(int obj, int far *rect)
     int i;
 
     win = obj & 0xff00;
-    f_23AE_0377(win);
+    win_LockWin(win);
     o = f_2505_02D7(obj);
     origin = o + 4;
     mode = o + 12;
     ref = o + 8;
     for (j = 0; j < 4; j++)
         origin[j] = 0;
-    f_2505_0545(win);
+    win_Recalc(win);
     for (i = 0; i < 4; i++) {
         if (mode[i] && mode[i] != 5 && ref[i] == obj)
             origin[i] = 0;
         else
             origin[i] = rect[i] - o[i];
     }
-    f_2505_0545(win);
+    win_Recalc(win);
     for (i = 0; i < 4; i++) {
         if (mode[i] && mode[i] != 5 && ref[i] == obj)
             origin[i] = rect[i] - o[i];
     }
-    f_2505_0545(win);
-    f_23AE_01DB(win);
+    win_Recalc(win);
+    win_UnlockWin(win);
 }
 
 /* SCAFFOLD END */
@@ -447,9 +447,9 @@ void far f_20E8_0A21(void)
 
     top = g_5702[0];
     if (f_2505_036E()) {
-        f_23AE_0377(top);
+        win_LockWin(top);
         if (*(int far *)(f_2505_0345(top) + 0x1c) & 1)
-            f_20E8_0635(top);
-        f_23AE_01DB(top);
+            win_Close(top);
+        win_UnlockWin(top);
     }
 }

@@ -15,7 +15,7 @@ struct Rect {
 extern int far f_24AB_0329(char far *text);
 extern int far f_24AB_030B(void);
 
-struct Pt _fastcall f_22BF_000A(char far *text)
+struct Pt _fastcall win_StringSize(char far *text)
 {
     struct Pt size;
 
@@ -24,48 +24,48 @@ struct Pt _fastcall f_22BF_000A(char far *text)
     return size;
 }
 
-extern void _fastcall f_23AE_0377(int win);
+extern void _fastcall win_LockWin(int win);
 extern char far * far f_2505_0006(int win);
-extern void _fastcall f_23AE_01DB(int win);
+extern void _fastcall win_UnlockWin(int win);
 
-void _fastcall f_22BF_0042(int obj, struct Pt far *size)
+void _fastcall win_GetObjSize(int obj, struct Pt far *size)
 {
     char far *w;
     struct Rect r;
 
-    f_23AE_0377(obj);
+    win_LockWin(obj);
     w = f_2505_0006(obj);
     r = *((struct Rect far * far *)(w + 0x2c))[obj & 0xff];
     size->x = r.right - r.left;
     size->y = r.bottom - r.top;
-    f_23AE_01DB(obj);
+    win_UnlockWin(obj);
 }
 
 extern char far * _fastcall win_ObjAddr(int obj);
 
 void _fastcall f_22BF_00AA(int obj, struct Rect far *r)
 {
-    f_23AE_0377(obj);
+    win_LockWin(obj);
     *r = *(struct Rect far *)(win_ObjAddr(obj) + 8);
-    f_23AE_01DB(obj);
+    win_UnlockWin(obj);
 }
 
 void _fastcall f_22BF_00DD(int obj, struct Rect far *r)
 {
-    f_23AE_0377(obj);
+    win_LockWin(obj);
     *(struct Rect far *)(win_ObjAddr(obj) + 8) = *r;
-    f_23AE_01DB(obj);
+    win_UnlockWin(obj);
 }
 
 extern int g_5702[];
 extern void far f_1FD2_03EB(char far *obj, int objNum);
 extern void far f_1FD2_0438(int objNum);
 
-void _fastcall f_22BF_011F(int obj, int state)
+void _fastcall win_SetObjSelectableState(int obj, int state)
 {
     unsigned char far *o;
 
-    f_23AE_0377(obj);
+    win_LockWin(obj);
     o = (unsigned char far *)win_ObjAddr(obj);
     if (g_5702[0] == (obj & 0xff00)) {
         if (state == 1) {
@@ -76,17 +76,17 @@ void _fastcall f_22BF_011F(int obj, int state)
         }
     }
     *(unsigned far *)(o + 0x24) ^= (o[0x24] ^ (state << 1)) & 2;
-    f_23AE_01DB(obj);
+    win_UnlockWin(obj);
 }
 
-void _fastcall f_22BF_01A9(int win, int group, int state)
+void _fastcall win_SetGroupSelectableState(int win, int group, int state)
 {
     char far *w;
     int i;
     int objNum;
     unsigned char far *o;
 
-    f_23AE_0377(win);
+    win_LockWin(win);
     objNum = win & 0xff00;
     w = f_2505_0006(win);
     for (i = 0; i < *(int far *)(w + 0xc); i++, objNum++) {
@@ -103,107 +103,107 @@ void _fastcall f_22BF_01A9(int win, int group, int state)
             *(unsigned far *)(o + 0x24) ^= (o[0x24] ^ (state << 1)) & 2;
         }
     }
-    f_23AE_01DB(win);
+    win_UnlockWin(win);
 }
 
-void _fastcall f_22BF_0262(int win, int group)
+void _fastcall win_MakeGroupSelectable(int win, int group)
 {
-    f_22BF_01A9(win, group, 1);
+    win_SetGroupSelectableState(win, group, 1);
 }
 
-void _fastcall f_22BF_026A(int win, int group)
+void _fastcall win_MakeGroupUnselectable(int win, int group)
 {
-    f_22BF_01A9(win, group, 0);
+    win_SetGroupSelectableState(win, group, 0);
 }
 
 extern void far f_1CE2_0430(char far *rect);
 
-/* SCAFFOLD BEGIN: f_22BF_0271 (win_ObjInv) draft.
+/* SCAFFOLD BEGIN: win_ObjInv (win_ObjInv) draft.
    Residue: bytes exact only with 9, 12 or 13 more identifiers declared before it
    (symbol-table count): the index is then built as mov si,[bp-2]; and si,0FFh
    instead of mov bl,[bp-2]; sub bh,bh; ...; mov si,bx. */
-void _fastcall f_22BF_0271(int obj)
+void _fastcall win_ObjInv(int obj)
 {
     char far *w;
 
-    f_23AE_0377(obj);
+    win_LockWin(obj);
     w = f_2505_0006(obj);
     f_1CE2_0430(((char far * far *)(w + 0x2c))[obj & 0xff]);
-    f_23AE_01DB(obj);
+    win_UnlockWin(obj);
 }
 /* SCAFFOLD END */
 
-int _fastcall f_22BF_09B0(int win);
+int _fastcall win_IsWinOpen(int win);
 extern void _fastcall win_DrawBitMapAtObj(int id, char far *obj);
-extern void _fastcall f_21FA_0741(char far *obj);
+extern void _fastcall win_DrawObject(char far *obj);
 
-void _fastcall f_22BF_02AF(int obj, int selected)
+void _fastcall win_SetObjSelectedStateI(int obj, int selected)
 {
     char far *o;
 
-    f_23AE_0377(obj);
+    win_LockWin(obj);
     o = win_ObjAddr(obj);
-    if (f_22BF_09B0(obj) && ((*(unsigned far *)(o + 0x24) & 4) >> 2) != selected) {
+    if (win_IsWinOpen(obj) && ((*(unsigned far *)(o + 0x24) & 4) >> 2) != selected) {
         *(unsigned far *)(o + 0x24) ^= (*(unsigned far *)(o + 0x24) ^ (selected << 2)) & 4;
         if (*(unsigned far *)(o + 0x24) & 1) {
             if (o[0x21] == 13)
                 win_DrawBitMapAtObj(*(int far *)(o + 0x26 + ((*(unsigned far *)(o + 0x24) & 4) == 0 ? 4 : 2)), o);
             else if (o[0x21] == 5 || o[0x21] == 17)
-                f_21FA_0741(o);
+                win_DrawObject(o);
             else
                 f_1CE2_0430(o);
         }
     }
     *(unsigned far *)(o + 0x24) ^= (*(unsigned far *)(o + 0x24) ^ (selected << 2)) & 4;
-    f_23AE_01DB(obj);
+    win_UnlockWin(obj);
 }
 
-void _fastcall f_22BF_03CD(int win, int group, int selected);
+void _fastcall win_SetGroupSelectedState(int win, int group, int selected);
 
-void _fastcall f_22BF_0375(int obj, int selected)
+void _fastcall win_SetObjSelectedState(int obj, int selected)
 {
     unsigned char far *o;
 
-    f_23AE_0377(obj);
+    win_LockWin(obj);
     o = (unsigned char far *)win_ObjAddr(obj);
     if (o[0x24] & 0x20)
-        f_22BF_03CD(obj, o[0x20], 0);
-    f_22BF_02AF(obj, selected);
-    f_23AE_01DB(obj);
+        win_SetGroupSelectedState(obj, o[0x20], 0);
+    win_SetObjSelectedStateI(obj, selected);
+    win_UnlockWin(obj);
 }
 
-void _fastcall f_22BF_03BE(int obj)
+void _fastcall win_MakeObjSelected(int obj)
 {
-    f_22BF_0375(obj, 1);
+    win_SetObjSelectedState(obj, 1);
 }
 
-void _fastcall f_22BF_03C6(int obj)
+void _fastcall win_MakeObjUnselected(int obj)
 {
-    f_22BF_0375(obj, 0);
+    win_SetObjSelectedState(obj, 0);
 }
 
-void _fastcall f_22BF_03CD(int win, int group, int selected)
+void _fastcall win_SetGroupSelectedState(int win, int group, int selected)
 {
     char far *w;
     int i;
     int objNum;
 
-    f_23AE_0377(win);
+    win_LockWin(win);
     w = f_2505_0006(win);
     objNum = win & 0xff00;
     for (i = 0; i < *(int far *)(w + 0xc); i++, objNum++) {
         if (((unsigned char far * far *)(w + 0x2c))[i][0x20] == group)
-            f_22BF_02AF(objNum, selected);
+            win_SetObjSelectedStateI(objNum, selected);
     }
-    f_23AE_01DB(win);
+    win_UnlockWin(win);
 }
 
-void _fastcall f_22BF_0440(int win, int group)
+void _fastcall win_MakeGroupUnselected(int win, int group)
 {
-    f_22BF_03CD(win, group, 0);
+    win_SetGroupSelectedState(win, group, 0);
 }
 
-void _fastcall f_22BF_0447(int obj, int visible)
+void _fastcall win_SetObjVisibleState(int obj, int visible)
 {
     unsigned char far *o;
 
@@ -215,24 +215,24 @@ void _fastcall f_22BF_0447(int obj, int visible)
     }
 }
 
-void _fastcall f_22BF_0498(int obj)
+void _fastcall win_MakeObjVisible(int obj)
 {
-    f_22BF_0447(obj, 1);
+    win_SetObjVisibleState(obj, 1);
 }
 
-void _fastcall f_22BF_04A0(int obj)
+void _fastcall win_MakeObjInvisible(int obj)
 {
-    f_22BF_0447(obj, 0);
+    win_SetObjVisibleState(obj, 0);
 }
 
-void _fastcall f_22BF_04A7(int win, int group, int visible)
+void _fastcall win_SetGroupVisibleState(int win, int group, int visible)
 {
     char far *w;
     int i;
     int objNum;
     unsigned char far *o;
 
-    f_23AE_0377(win);
+    win_LockWin(win);
     w = f_2505_0006(win);
     objNum = win;
     for (i = 0; i < *(int far *)(w + 0xc); i++, objNum++) {
@@ -243,17 +243,17 @@ void _fastcall f_22BF_04A7(int win, int group, int visible)
                 f_1CE2_0430((char far *)o);
         }
     }
-    f_23AE_01DB(win);
+    win_UnlockWin(win);
 }
 
-void _fastcall f_22BF_0546(int win, int group)
+void _fastcall win_MakeGroupVisible(int win, int group)
 {
-    f_22BF_04A7(win, group, 1);
+    win_SetGroupVisibleState(win, group, 1);
 }
 
-void _fastcall f_22BF_054E(int win, int group)
+void _fastcall win_MakeGroupInvisible(int win, int group)
 {
-    f_22BF_04A7(win, group, 0);
+    win_SetGroupVisibleState(win, group, 0);
 }
 
 extern char far * far _fstrrchr(char far *s, int c);
@@ -276,14 +276,14 @@ extern char far * far * far f_171C_13CA(long size, int flags, char far *name);
 extern char far * far f_171C_1B84(char far * far *handle);
 extern void far f_171C_1BBA(char far * far *handle);
 
-void far f_22BF_059A(int obj, ...)
+void far win_SetObjFormatStr(int obj, ...)
 {
     char far *o;
     char buf[100];
     int len;
     char far * far *rec;
 
-    f_23AE_0377(obj);
+    win_LockWin(obj);
     vsprintf(buf, (o = win_ObjAddr(obj)) + 0x2e, (char far *)(&obj + 1));
     WinPrintf("\n= %s", (char far *)buf);
     vsprintf(buf, o + 0x2e, (char far *)(&obj + 1));
@@ -299,7 +299,7 @@ void far f_22BF_059A(int obj, ...)
     }
     _fstrcpy(f_171C_1B84(rec), buf);
     f_171C_1BBA(rec);
-    f_23AE_01DB(obj);
+    win_UnlockWin(obj);
 }
 
 extern void _fastcall win_SetColorFromObjNum(int obj);
@@ -309,7 +309,7 @@ extern void far f_1E57_0773(struct Rect far *rect);
 extern void far f_208F_011F(struct Rect far *rect, char far *text);
 extern void far f_1E57_0EB9(void);
 
-void far f_22BF_06BE(int obj, char far *text)
+void far win_CenterStrAtObj(int obj, char far *text)
 {
     struct Rect r;
 
@@ -323,14 +323,14 @@ void far f_22BF_06BE(int obj, char far *text)
 
 extern void far f_24AB_02AD(int font);
 
-void far f_22BF_0706(int obj, ...)
+void far win_ObjFormatPrint(int obj, ...)
 {
     char far *o;
     char buf[100];
     int len;
     char far * far *rec;
 
-    f_23AE_0377(obj);
+    win_LockWin(obj);
     vsprintf(buf, (o = win_ObjAddr(obj)) + 0x2e, (char far *)(&obj + 1));
     WinPrintf("\n= %s", (char far *)buf);
     vsprintf(buf, o + 0x2e, (char far *)(&obj + 1));
@@ -346,10 +346,10 @@ void far f_22BF_0706(int obj, ...)
     }
     _fstrcpy(f_171C_1B84(rec), buf);
     f_24AB_02AD(o[0x28]);
-    f_22BF_06BE(obj, buf);
+    win_CenterStrAtObj(obj, buf);
     f_24AB_02AD(0);
     f_171C_1BBA(rec);
-    f_23AE_01DB(obj);
+    win_UnlockWin(obj);
 }
 
 extern char far * far * far db_LoadObject(int object, int kind);
@@ -358,7 +358,7 @@ extern void far f_1B4E_01A1(char far *pal, int count);
 extern void far f_1B4E_01AE(char far *pal, int count);
 extern void far db_ReleaseObject(int object, int kind);
 
-int _fastcall f_22BF_085A(int id)
+int _fastcall win_SetPalette(int id)
 {
     char far * far *h;
     char far *p;
@@ -396,33 +396,33 @@ void _fastcall f_22BF_094F(int obj, int color)
 
 extern void far Punt(char far *format, ...);
 
-void _fastcall f_22BF_0967(int obj, int bitmap)
+void _fastcall win_SetObjBitmap(int obj, int bitmap)
 {
     char far *o;
 
-    f_23AE_0377(obj);
+    win_LockWin(obj);
     o = win_ObjAddr(obj);
     if (o[0x21] != 6)
         Punt("Attempt to set bitmap on non-bitmap object");
     *(int far *)(o + 0x28) = bitmap;
-    f_23AE_01DB(obj);
+    win_UnlockWin(obj);
 }
 
-extern char far * far * near g_9230[];
+extern char far * far * near win_handles[];
 
-int _fastcall f_22BF_09B0(int win)
+int _fastcall win_IsWinOpen(int win)
 {
     int open;
     char far * far *h;
     char far *w;
 
     open = 0;
-    if ((h = g_9230[win >> 8]) != 0) {
+    if ((h = win_handles[win >> 8]) != 0) {
         if ((w = f_171C_1B84(h)) != 0) {
             open = (*(unsigned far *)(w + 0x1c) & 0x200) >> 9;
             f_171C_1BBA(h);
         } else {
-            g_9230[win >> 8] = 0;
+            win_handles[win >> 8] = 0;
         }
     }
     return open;
@@ -439,9 +439,9 @@ int _fastcall f_22BF_0A34(int win)
 {
     int r;
 
-    f_23AE_0377(win);
+    win_LockWin(win);
     r = (*(unsigned far *)(f_2505_0006(win) + 0x1c) & 0x40) >> 6;
-    f_23AE_01DB(win);
+    win_UnlockWin(win);
     return r;
 }
 
@@ -449,9 +449,9 @@ int _fastcall f_22BF_0A65(int win)
 {
     int r;
 
-    f_23AE_0377(win);
+    win_LockWin(win);
     r = (*(unsigned far *)(f_2505_0006(win) + 0x1c) & 0x80) >> 7;
-    f_23AE_01DB(win);
+    win_UnlockWin(win);
     return r;
 }
 
@@ -459,9 +459,9 @@ int _fastcall f_22BF_0A97(int obj)
 {
     int r;
 
-    f_23AE_0377(obj);
+    win_LockWin(obj);
     r = (*(unsigned far *)(win_ObjAddr(obj) + 0x24) & 2) >> 1;
-    f_23AE_01DB(obj);
+    win_UnlockWin(obj);
     return r;
 }
 
@@ -469,9 +469,9 @@ int _fastcall f_22BF_0AC5(int win)
 {
     int n;
 
-    f_23AE_0377(win);
+    win_LockWin(win);
     n = *(int far *)(f_2505_0006(win) + 0xc);
-    f_23AE_01DB(win);
+    win_UnlockWin(win);
     return n;
 }
 
@@ -480,11 +480,11 @@ int _fastcall f_22BF_0AEF(int win)
     char far *w;
     int r;
 
-    f_23AE_0377(win);
+    win_LockWin(win);
     w = f_2505_0006(win);
     r = (*(unsigned far *)(w + 0x1c) & 0x40) >> 6;
     *(unsigned far *)(w + 0x1c) |= 0x40;
-    f_23AE_01DB(win);
+    win_UnlockWin(win);
     return r;
 }
 
@@ -493,11 +493,11 @@ int _fastcall f_22BF_0B25(int win)
     char far *w;
     int r;
 
-    f_23AE_0377(win);
+    win_LockWin(win);
     w = f_2505_0006(win);
     r = (*(unsigned far *)(w + 0x1c) & 0x40) >> 6;
     *(unsigned far *)(w + 0x1c) &= ~0x40;
-    f_23AE_01DB(win);
+    win_UnlockWin(win);
     return r;
 }
 
@@ -509,11 +509,11 @@ void _fastcall f_22BF_0B5B(struct Rect far *dst, struct Rect far *src, int l, in
     dst->bottom = src->bottom + b;
 }
 
-extern void far f_20E8_04B6(int win, int p0, int p1);
-extern void _fastcall f_218D_01F6(int obj);
+extern void far win_Open(int win, int p0, int p1);
+extern void _fastcall _win_SetProxItem(int obj);
 extern void far f_1FD2_057F(void);
 extern int far f_1FD2_0598(void);
-extern int far f_218D_01F2(void);
+extern int far win_GetProxEvent(void);
 
 struct Event {
     int what;
@@ -526,31 +526,31 @@ struct Event {
     int xE;
 };
 
-extern int _fastcall f_218D_03F1(struct Event far *ev);
-extern void _fastcall f_20E8_0635(int win);
+extern int _fastcall win_GetEvent(struct Event far *ev);
+extern void _fastcall win_Close(int win);
 
-/* SCAFFOLD BEGIN: f_22BF_0BAB draft (modal dialog loop).
+/* SCAFFOLD BEGIN: win_DoProxMenu draft (modal dialog loop).
    Residue: symbol-table count; with +12 identifiers before 0271, +5 before 04A7
    and +14 before this function the whole module is exact (result = -1 lives in DI,
    copied to [bp-2] before the loop). 144 vs 141 bytes as is. */
-int far f_22BF_0BAB(int win, int item, int p0, int p1)
+int far win_DoProxMenu(int win, int item, int p0, int p1)
 {
     int result;
     int last;
     struct Event ev;
 
     result = -1;
-    f_20E8_04B6(win, p0, p1);
+    win_Open(win, p0, p1);
     if (item != -1)
-        f_218D_01F6(win + item + 2);
+        _win_SetProxItem(win + item + 2);
     f_1FD2_057F();
     last = -1;
     for (;;) {
-        if (!f_22BF_09B0(win))
+        if (!win_IsWinOpen(win))
             break;
         if (!f_1FD2_0598())
-            ev.code = f_218D_01F2();
-        else if (!f_218D_03F1(&ev))
+            ev.code = win_GetProxEvent();
+        else if (!win_GetEvent(&ev))
             continue;
         if ((unsigned)ev.code < (unsigned)win || (unsigned)win + 0x100 <= (unsigned)ev.code)
             continue;
@@ -558,12 +558,12 @@ int far f_22BF_0BAB(int win, int item, int p0, int p1)
             result = ev.code - win - 2;
         break;
     }
-    f_20E8_0635(win);
+    win_Close(win);
     return result;
 }
 /* SCAFFOLD END */
 
-extern char far fd_50F6_46E2[][6];
+extern char far win_colors[][6];
 extern struct Pt g_3DA0;
 extern void (far * near g_9134)(int left, int top, int right, int bottom, int color);
 
@@ -574,20 +574,20 @@ void far f_22BF_0C38(int obj)
     int top;
     int left;
 
-    f_23AE_0377(obj);
+    win_LockWin(obj);
     win_GetObjRect(obj, &r);
     c = win_ObjAddr(obj)[0x26];
     if (g_5A97 & 1)
-        c = fd_50F6_46E2[c][3];
+        c = win_colors[c][3];
     else
-        c = fd_50F6_46E2[c][2];
+        c = win_colors[c][2];
     c = (c << 8) | (c & 0xff);
     top = g_3DA0.y;
     if (top < r.top)
         top = r.top;
     if (r.bottom > top && (left = g_3DA0.x) >= r.left && r.right > left)
         (*g_9134)(left, top, r.right, r.bottom, c);
-    f_23AE_01DB(obj);
+    win_UnlockWin(obj);
 }
 
 void far f_22BF_0CDD(int obj)
@@ -595,28 +595,28 @@ void far f_22BF_0CDD(int obj)
     struct Rect r;
     int c;
 
-    f_23AE_0377(obj);
+    win_LockWin(obj);
     win_GetObjRect(obj, &r);
     c = win_ObjAddr(obj)[0x26];
-    c = fd_50F6_46E2[c][2];
+    c = win_colors[c][2];
     c = (c & 0xf) | (((c & 0xf) << 4) | (c << 8));
     (*g_9134)(r.left, r.top, r.right, r.bottom, c);
-    f_23AE_01DB(obj);
+    win_UnlockWin(obj);
 }
 
-void far f_22BF_0D53(int obj, char far *format, ...)
+void far win_PrintfAtObj(int obj, char far *format, ...)
 {
     char buf[100];
 
     vsprintf(buf, format, (char far *)(&format + 1));
-    f_22BF_06BE(obj, buf);
+    win_CenterStrAtObj(obj, buf);
 }
 
 extern void far f_1CE2_046D(struct Rect far *rect, int color);
 extern int near g_3DE0;
 extern int near g_3DE2;
 
-void far f_22BF_0D81(int obj, long fraction)
+void far win_DrawHBar(int obj, long fraction)
 {
     struct Rect r;
     int right;
@@ -638,7 +638,7 @@ void far f_22BF_0D81(int obj, long fraction)
     }
 }
 
-void far f_22BF_0E01(int obj, long fraction)
+void far win_DrawVBar(int obj, long fraction)
 {
     struct Rect r;
     int top;
@@ -661,20 +661,20 @@ void far f_22BF_0E01(int obj, long fraction)
     }
 }
 
-extern void _fastcall f_2505_0545(int win);
+extern void _fastcall win_Recalc(int win);
 
 void far f_22BF_0E83(int src, int dst)
 {
     int far *o;
     struct Rect r;
 
-    f_23AE_0377(src);
-    f_23AE_0377(dst);
+    win_LockWin(src);
+    win_LockWin(dst);
     o = (int far *)(win_ObjAddr(dst) + 8);
     r = *(struct Rect far *)(win_ObjAddr(src) + 8);
     o[0] = r.left;
     o[1] = r.top;
-    f_2505_0545(dst);
-    f_23AE_01DB(src);
-    f_23AE_01DB(dst);
+    win_Recalc(dst);
+    win_UnlockWin(src);
+    win_UnlockWin(dst);
 }

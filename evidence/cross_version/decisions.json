@@ -260,6 +260,771 @@
     "shared diagnostic 'Cannot open database %s'",
     "same OpenDB/db_handles/cache-table logic; second member of the same unit; byte-exact DOS source"
    ]
+  },
+  "root:23AE:0004": {
+   "win16": "_win_NoWindowsShouldBeLocked",
+   "confidence": "CONFIRMED",
+   "reviewed": "2026-09-30",
+   "evidence": [
+    "DOS diagnostic 'Window %d locked when it should not be!' (Punt) scans all 45 lock counters: the body states the Win16 name (Win16 body is a 3-byte stub returning 0, so no shared string)",
+    "member order: Win16 SIMTWO E39A..E3A8 is the contiguous run NoWindowsShouldBeLocked, LockInit, IsWinLocked, UnlockWin, LockWinHigh, LockWin; DOS module 23AE holds exactly these six publics in the same order (0004, 0022, 0051, 01DB, 036F, 0377) plus two DOS-only statics (0069 lock worker, 035D 'WINLOCKERR!!' reporter) that vanished when Win16 stubbed the lock layer; position 1 of 6",
+    "DOS callers are main and o19 (shutdown/restore paths): an assertion, consistent with the Win16 stub"
+   ],
+   "reviewer": "worker names2, supervisor spot-checked 2026-09-30"
+  },
+  "root:23AE:0022": {
+   "win16": "_win_LockInit",
+   "confidence": "CONFIRMED",
+   "reviewed": "2026-09-30",
+   "evidence": [
+    "call position: sole caller win_LoadAllWindows (20E8:0141) calls it 2nd, immediately after font_InitFonts, exactly as Win16 win_LoadAllWindows call_seq [_font_InitFonts, _win_LockInit, ...] (Win16 sole caller too)",
+    "body: clears the two 45-entry lock tables and sets the lock-enabled flag g_644C read by IsWinLocked and the lock worker",
+    "member order: Win16 SIMTWO E39A..E3A8 is the contiguous run NoWindowsShouldBeLocked, LockInit, IsWinLocked, UnlockWin, LockWinHigh, LockWin; DOS module 23AE holds exactly these six publics in the same order (0004, 0022, 0051, 01DB, 036F, 0377) plus two DOS-only statics (0069 lock worker, 035D 'WINLOCKERR!!' reporter) that vanished when Win16 stubbed the lock layer; position 2 of 6",
+    "supersedes xver features-v1 LOW _myBeginSong (single constant 0x8DA6 = lock-count table address, coincidental)"
+   ],
+   "reviewer": "worker names2, supervisor spot-checked 2026-09-30"
+  },
+  "root:23AE:0051": {
+   "win16": "_win_IsWinLocked",
+   "confidence": "CONFIRMED",
+   "reviewed": "2026-09-30",
+   "evidence": [
+    "behaviour: returns the lock count of window win>>8 (1 when locking is disabled); its only callers are the address getters 2505:0006/025F/02D7/0345, which report '\\nWINDOW %x NOT LOCKED DURING CALL TO win_ObjAddr!!' (and win_WinAddr / win_WinRectAddr / GETWINPTR variants) when it returns 0",
+    "member order: Win16 SIMTWO E39A..E3A8 is the contiguous run NoWindowsShouldBeLocked, LockInit, IsWinLocked, UnlockWin, LockWinHigh, LockWin; DOS module 23AE holds exactly these six publics in the same order (0004, 0022, 0051, 01DB, 036F, 0377) plus two DOS-only statics (0069 lock worker, 035D 'WINLOCKERR!!' reporter) that vanished when Win16 stubbed the lock layer; position 3 of 6"
+   ],
+   "reviewer": "worker names2, supervisor spot-checked 2026-09-30"
+  },
+  "root:23AE:01DB": {
+   "win16": "_win_UnlockWin",
+   "confidence": "CONFIRMED",
+   "reviewed": "2026-09-30",
+   "evidence": [
+    "DOS diagnostics 'Attemp to unlock when not locked!!' and 'Attemp to unlock when discarded win %x'",
+    "call-graph: closes every LockWin/LockWinHigh bracket; last call of win_LoadWindow (Win16 call_seq [.., _win_LockWin, _win_UnlockWin]); called by win_SetObjBitmap, win_GetObjSize, win_ObjInv, win_SetObjFormatStr, win_Open, win_Swap etc. as Win16 _win_UnlockWin",
+    "member order: Win16 SIMTWO E39A..E3A8 is the contiguous run NoWindowsShouldBeLocked, LockInit, IsWinLocked, UnlockWin, LockWinHigh, LockWin; DOS module 23AE holds exactly these six publics in the same order (0004, 0022, 0051, 01DB, 036F, 0377) plus two DOS-only statics (0069 lock worker, 035D 'WINLOCKERR!!' reporter) that vanished when Win16 stubbed the lock layer; position 4 of 6"
+   ],
+   "reviewer": "worker names2, supervisor spot-checked 2026-09-30"
+  },
+  "root:23AE:036F": {
+   "win16": "_win_LockWinHigh",
+   "confidence": "CONFIRMED",
+   "reviewed": "2026-09-30",
+   "evidence": [
+    "caller set: exactly two DOS callers, 20E8:04B6 (win_Open) and 21FA:08E2 (win_DrawWindow); Win16 _win_LockWinHigh callers are exactly _win_Open and _win_DrawWindow, first lock call in both",
+    "body: lock worker 23AE:0069 with high=1 (lock block high in memory); sibling of 0377 (high=0)",
+    "member order: Win16 SIMTWO E39A..E3A8 is the contiguous run NoWindowsShouldBeLocked, LockInit, IsWinLocked, UnlockWin, LockWinHigh, LockWin; DOS module 23AE holds exactly these six publics in the same order (0004, 0022, 0051, 01DB, 036F, 0377) plus two DOS-only statics (0069 lock worker, 035D 'WINLOCKERR!!' reporter) that vanished when Win16 stubbed the lock layer; position 5 of 6"
+   ],
+   "reviewer": "worker names2, supervisor spot-checked 2026-09-30"
+  },
+  "root:23AE:0377": {
+   "win16": "_win_LockWin",
+   "confidence": "CONFIRMED",
+   "reviewed": "2026-09-30",
+   "evidence": [
+    "body: lock worker 0069 with high=0; the worker Punts 'win_Lock > 10 levels deep!!', naming the family",
+    "call-graph: first lock in win_LoadWindow after the load/Punt as in Win16 call_seq [_db_LoadObject, _Punt, _mem_Lock, _win_LockWin, _win_UnlockWin]; opens every bracket closed by win_UnlockWin (same caller population as Win16 _win_LockWin)",
+    "member order: Win16 SIMTWO E39A..E3A8 is the contiguous run NoWindowsShouldBeLocked, LockInit, IsWinLocked, UnlockWin, LockWinHigh, LockWin; DOS module 23AE holds exactly these six publics in the same order (0004, 0022, 0051, 01DB, 036F, 0377) plus two DOS-only statics (0069 lock worker, 035D 'WINLOCKERR!!' reporter) that vanished when Win16 stubbed the lock layer; position 6 of 6"
+   ],
+   "reviewer": "worker names2, supervisor spot-checked 2026-09-30"
+  },
+  "root:20E8:0001": {
+   "win16": "_win_LoadWindow",
+   "confidence": "CONFIRMED",
+   "reviewed": "2026-09-30",
+   "evidence": [
+    "shared diagnostic verbatim 'CANNOT LOAD WINDOW %03x' (Win16 DGROUP windowPrivate.loadWindowMessage)",
+    "call order: resource load, Punt, win_LockWin, ..., win_UnlockWin as Win16 call_seq [_db_LoadObject, _Punt, _mem_Lock, _win_LockWin, _win_UnlockWin]",
+    "caller win_LoadAllWindows on both sides (DOS also reloads from the lock worker after discard)",
+    "member order: immediately precedes win_LoadAllWindows on both sides (Win16 C662/C806, DOS 0001/0141)"
+   ],
+   "reviewer": "worker names2, supervisor spot-checked 2026-09-30"
+  },
+  "root:20E8:0141": {
+   "win16": "_win_LoadAllWindows",
+   "confidence": "CONFIRMED",
+   "reviewed": "2026-09-30",
+   "evidence": [
+    "shared diagnostic verbatim 'Cannot load resource\\nplease try another' (Win16 windowPrivate.loadAllWindowsMessage)",
+    "same sequence: font_InitFonts, win_LockInit, memset(win_drawHooks,0,0xB4), 45x win_offsets[i] = {0x8000 x4} (DOS g_635C = Win16 windowPrivate.windowSentinel, stored between the two strings in both images), kind-9 object memcpy 0x140 into win_offsets, resource 0x80 -> numOfWindows/numOfColors/numOfGroups, resource 0x81 -> win_colors (numOfColors*6), loop win_LoadWindow",
+    "caller f_00BA_0002 = xver MEDIUM _InitApplicationWindows, the Win16 sole caller",
+    "DOS-only extra: resource 0x83 purge list ('Could not load purge list')"
+   ],
+   "reviewer": "worker names2, supervisor spot-checked 2026-09-30"
+  },
+  "root:20E8:0862": {
+   "win16": "_win_SetWinDrawHook",
+   "confidence": "CONFIRMED",
+   "reviewed": "2026-09-30",
+   "evidence": [
+    "body identical: win_drawHooks[id>>8] = f (Win16 'win_drawHooks[id>>8]=f;')",
+    "data identity: fd_50F6_47DE is the 45 x far-pointer table memset 0xB4 in win_LoadAllWindows and called with phase 1/2 in win_DrawWindow (Win16 DrawWindow references _win_drawHooks, constant 0x77B2)",
+    "caller f_00BA_0002 (xver _InitApplicationWindows) also calls win_LoadAllWindows; in Win16 _InitApplicationWindows is the only caller of both",
+    "the only per-window hook setter; 088B..08EF set single global hooks (DOS-only)"
+   ],
+   "reviewer": "worker names2, supervisor spot-checked 2026-09-30"
+  },
+  "root:20E8:04B6": {
+   "win16": "_win_Open",
+   "confidence": "CONFIRMED",
+   "reviewed": "2026-09-30",
+   "evidence": [
+    "first call is win_LockWinHigh (only other user: win_DrawWindow) and it calls win_Recalc, as Win16 _win_Open call_seq [_win_LockWinHigh, _win_Recalc, ..., _win_UnlockWin]",
+    "named-caller agreement with Win16 _win_Open callers: ShowIntro (xver HIGH), win_DoProxMenu (22BF:0BAB), OpenMiniMapWin (o04_35F5_075F), DoExpMenu (o05_3663_0004), DrawCastePopUp (o14_384C_07ED), SpiderDialog (o14_384C_0FA2), DrawSimPayoff (o16_384C_0000), AboutDialog (o16_384C_01E1)",
+    "behaviour: sets window flag 0x200 (open), tested by win_IsWinOpen and cleared by win_Close",
+    "member order: Open, Close adjacent after LoadAllWindows on both sides (Win16 CA2E/CF98, DOS 04B6/0635)"
+   ],
+   "reviewer": "worker names2, supervisor spot-checked 2026-09-30"
+  },
+  "root:20E8:0635": {
+   "win16": "_win_Close",
+   "confidence": "CONFIRMED",
+   "reviewed": "2026-09-30",
+   "evidence": [
+    "behaviour: clears the open flag 0x200 set by win_Open, restores the saved offset rect, redraws beneath",
+    "named-caller agreement with Win16 _win_Close callers: ShowIntro, OpenMiniMapWin, DoExpMenu, DrawCastePopUp, SpiderDialog, DrawSimPayoff, AboutDialog",
+    "member order: immediately follows win_Open on both sides"
+   ],
+   "reviewer": "worker names2, supervisor spot-checked 2026-09-30"
+  },
+  "root:20E8:032F": {
+   "win16": "_win_Swap",
+   "confidence": "HIGH",
+   "reviewed": "2026-09-30",
+   "evidence": [
+    "lock pattern Lock(from)..Unlock(from), Lock(to)..win_Recalc(to)..Unlock(to) = Win16 _win_Swap call_seq [_win_LockWin, _win_UnlockWin, _win_LockWin, _win_Recalc, _win_UnlockWin]; only function besides win_Open that recalcs a window it opens",
+    "behaviour: replaces window 'from' by 'to' at the same origin and rect",
+    "caller f_015B_0273 also calls win_SetObjBitmap and win_MakeObjVisible/Invisible like Win16 _SetYardMode (a Win16 Swap caller), but it is not yet paired",
+    "member order differs (DOS before Open, Win16 after ToTop)"
+   ],
+   "reviewer": "worker names2, supervisor spot-checked 2026-09-30"
+  },
+  "root:20E8:0725": {
+   "win16": "_win_ToTop",
+   "confidence": "MEDIUM",
+   "reviewed": "2026-09-30",
+   "evidence": [
+    "behaviour: brings win to the top of the stack (closes an auto-close top window first, then opens win); Win16 is BringWindowToTop",
+    "order slot after Close and before SetWinDrawHook on both sides",
+    "callers not paired (Win16 OpenMapYard, ProcMapEvent, SpecialXfer)"
+   ],
+   "reviewer": "worker names2, supervisor spot-checked 2026-09-30"
+  },
+  "root:218D:01F2": {
+   "win16": "_win_GetProxEvent",
+   "confidence": "CONFIRMED",
+   "reviewed": "2026-09-30",
+   "evidence": [
+    "body: returns g_6368 (initialised -1) = Win16 'return lastProxObj;' (lastProxObj initialised -1)",
+    "shared global: g_6368 is written only by 01F6 (win_SetProxItem) and reset by 01EB, the role of Win16 _lastProxObj written by __win_SetProxItem",
+    "member order: GetProxEvent immediately followed by SetProxItem on both sides (Win16 DD08/DD0C, DOS 01F2/01F6)",
+    "callers win_DoProxMenu (22BF:0BAB) and DoExpMenu (o05_3663_0004, xver LOW); Win16 callers include _DoExpMenu"
+   ],
+   "reviewer": "worker names2, supervisor spot-checked 2026-09-30"
+  },
+  "root:218D:01F6": {
+   "win16": "__win_SetProxItem",
+   "confidence": "CONFIRMED",
+   "reviewed": "2026-09-30",
+   "evidence": [
+    "body: clip on; if last != -1 invert last item's rect; if obj != -1 invert obj's rect; last = obj; clip off = Win16 __win_SetProxItem (clip_Push/MSClipStart, GRectInv old, GRectInv new, lastProxObj = obj, clip_Pop)",
+    "member order: follows win_GetProxEvent on both sides",
+    "callers win_DoProxMenu, 023A (mouse proximity tracker), DoExpMenu (o05_3663_0004); Win16 callers MAINWNDPROC, _DoExpMenu, _DoMouse, _DoUserButton",
+    "DOS C name drops one underscore of MAPSYM '__win_SetProxItem' (source spelling _win_SetProxItem)"
+   ],
+   "reviewer": "worker names2, supervisor spot-checked 2026-09-30"
+  },
+  "root:218D:042B": {
+   "win16": "_win_FlushEvents",
+   "confidence": "CONFIRMED",
+   "reviewed": "2026-09-30",
+   "evidence": [
+    "behaviour: drains the pending input queue (fetch and discard while available) and clears the pending flag; Win16 drains the mouse/key PeekMessage ranges",
+    "named-caller agreement with Win16 _win_FlushEvents callers: ShowIntro (xver HIGH), DialogWaitInit (f_00F8_02F7, MEDIUM), CustomerIDDialog (o14_384C_10E5, MEDIUM), SpiderDialog (o14_384C_0FA2), AboutDialog (o16_384C_01E1)",
+    "no member-order support (Win16 C20A sits among IsWinExposed/IsWinOpen)"
+   ],
+   "reviewer": "worker names2, supervisor spot-checked 2026-09-30"
+  },
+  "root:218D:03E8": {
+   "win16": "_win_Events",
+   "confidence": "HIGH",
+   "reviewed": "2026-09-30",
+   "evidence": [
+    "behaviour: polls input and returns whether an event is pending (Win16 returns whether a mouse/key message arrived)",
+    "named-caller agreement with Win16 _win_Events callers: ShowIntro, DrawCastePopUp (o14_384C_07ED), SpiderDialog (o14_384C_0FA2), AboutDialog (o16_384C_01E1)",
+    "order: precedes win_GetEvent on both sides; bodies differ by platform"
+   ],
+   "reviewer": "worker names2, supervisor spot-checked 2026-09-30"
+  },
+  "root:218D:03F1": {
+   "win16": "_win_GetEvent",
+   "confidence": "HIGH",
+   "reviewed": "2026-09-30",
+   "evidence": [
+    "behaviour: fetches the next event into *ev and returns 1, else 0; the event pump of win_DoProxMenu (Win16 _win_DoProxMenu calls _win_GetEvent)",
+    "named-caller agreement with Win16 _win_GetEvent callers: DoExpMenu (o05_3663_0004), OpenMiniMapWin (o04_35F5_075F), win_DoProxMenu",
+    "bodies differ by platform (Win16 uses MyGetCapture/PointInRect)"
+   ],
+   "reviewer": "worker names2, supervisor spot-checked 2026-09-30"
+  },
+  "root:22BF:000A": {
+   "win16": "_win_StringSize",
+   "confidence": "CONFIRMED",
+   "reviewed": "2026-09-30",
+   "evidence": [
+    "body: size.x = font_StringWidth(text) (24AB:0329); size.y = font_FontHeight() (24AB:030B) = Win16 win_StringSize",
+    "call-site agreement: DOS win_AutoSize (2505:0171) calls it for object types 5/12, 9, 16/18, 17, exactly the four cases where Win16 win_AutoSize has this body expanded inline (StringWidth then FontHeight)",
+    "member order not aligned (Win16 E3E0 between SortRect and AutoSize; DOS is the first function of 22BF)"
+   ],
+   "reviewer": "worker names2, supervisor spot-checked 2026-09-30"
+  },
+  "root:22BF:0042": {
+   "win16": "_win_GetObjSize",
+   "confidence": "HIGH",
+   "reviewed": "2026-09-30",
+   "evidence": [
+    "body identical: lock; r = *objs[obj & 0xFF]; size->x = right-left; size->y = bottom-top; unlock (Win16 DC5E: LockWin, copy the object rect, two subtractions, UnlockWin)",
+    "unique: no other DOS window function returns width/height (00AA/00DD copy the +8 offset rect instead)",
+    "callers o04_35F5_0000/o05_35F5_025C/o05_3663_0004 are not paired with Win16 MapToolsMenu/RibbonToolsMenu, so no second anchor"
+   ],
+   "reviewer": "worker names2, supervisor spot-checked 2026-09-30"
+  },
+  "root:22BF:011F": {
+   "win16": "_win_SetObjSelectableState",
+   "confidence": "CONFIRMED",
+   "reviewed": "2026-09-30",
+   "evidence": [
+    "same formula: *(unsigned*)(o+0x24) ^= (o[0x24] ^ (state<<1)) & 2 (Win16 win_SetObjSelectableState), bracketed by LockWin/ObjAddr/UnlockWin; DOS also registers/unregisters the hot spot (1FD2:03EB/0438) when the window is on top",
+    "state word at object+0x24: bit 1 = visible, bit 2 = selectable, bit 4 = selected (Win16 win_MakeObjSelectable |= 2, win_IsObjSelected & 4, win_SetObjVisibleState & 1); separates it from SelectedStateI (bit 4) and VisibleState (bit 1)",
+    "member order: Win16 E9C4..F52E selectable/selected/visible cluster and DOS 22BF 011F..054E align as an ordered subsequence (SetObjSelectableState, SetGroupSelectableState, MakeGroupSelectable, MakeGroupUnselectable, SetObjSelectedStateI, SetObjSelectedState, MakeObjSelected, MakeObjUnselected, SetGroupSelectedState, MakeGroupUnselected, SetObjVisibleState, MakeObjVisible, MakeObjInvisible, SetGroupVisibleState, MakeGroupVisible, MakeGroupInvisible); Win16-only extras are MakeObj(Un)Selectable, AutoToggle, SelFlash, SetGroupSelectedObj, MakeGroupSelected; DOS-only insertion is 0271 (ObjInv); position 1"
+   ],
+   "reviewer": "worker names2, supervisor spot-checked 2026-09-30"
+  },
+  "root:22BF:01A9": {
+   "win16": "_win_SetGroupSelectableState",
+   "confidence": "HIGH",
+   "reviewed": "2026-09-30",
+   "evidence": [
+    "group loop (objects with o[0x20]==group) applying the same bit-2 update as SetObjSelectableState",
+    "member order: Win16 E9C4..F52E selectable/selected/visible cluster and DOS 22BF 011F..054E align as an ordered subsequence (SetObjSelectableState, SetGroupSelectableState, MakeGroupSelectable, MakeGroupUnselectable, SetObjSelectedStateI, SetObjSelectedState, MakeObjSelected, MakeObjUnselected, SetGroupSelectedState, MakeGroupUnselected, SetObjVisibleState, MakeObjVisible, MakeObjInvisible, SetGroupVisibleState, MakeGroupVisible, MakeGroupInvisible); Win16-only extras are MakeObj(Un)Selectable, AutoToggle, SelFlash, SetGroupSelectedObj, MakeGroupSelected; DOS-only insertion is 0271 (ObjInv); position 2",
+    "Win16 body not recovered (nosrc, 118 bytes, Lock/Unlock only)"
+   ],
+   "reviewer": "worker names2, supervisor spot-checked 2026-09-30"
+  },
+  "root:22BF:0262": {
+   "win16": "_win_MakeGroupSelectable",
+   "confidence": "HIGH",
+   "reviewed": "2026-09-30",
+   "evidence": [
+    "wrapper SetGroupSelectableState(win, group, 1)",
+    "member order: Win16 E9C4..F52E selectable/selected/visible cluster and DOS 22BF 011F..054E align as an ordered subsequence (SetObjSelectableState, SetGroupSelectableState, MakeGroupSelectable, MakeGroupUnselectable, SetObjSelectedStateI, SetObjSelectedState, MakeObjSelected, MakeObjUnselected, SetGroupSelectedState, MakeGroupUnselected, SetObjVisibleState, MakeObjVisible, MakeObjInvisible, SetGroupVisibleState, MakeGroupVisible, MakeGroupInvisible); Win16-only extras are MakeObj(Un)Selectable, AutoToggle, SelFlash, SetGroupSelectedObj, MakeGroupSelected; DOS-only insertion is 0271 (ObjInv); position 3"
+   ],
+   "reviewer": "worker names2, supervisor spot-checked 2026-09-30"
+  },
+  "root:22BF:026A": {
+   "win16": "_win_MakeGroupUnselectable",
+   "confidence": "HIGH",
+   "reviewed": "2026-09-30",
+   "evidence": [
+    "wrapper SetGroupSelectableState(win, group, 0)",
+    "member order: Win16 E9C4..F52E selectable/selected/visible cluster and DOS 22BF 011F..054E align as an ordered subsequence (SetObjSelectableState, SetGroupSelectableState, MakeGroupSelectable, MakeGroupUnselectable, SetObjSelectedStateI, SetObjSelectedState, MakeObjSelected, MakeObjUnselected, SetGroupSelectedState, MakeGroupUnselected, SetObjVisibleState, MakeObjVisible, MakeObjInvisible, SetGroupVisibleState, MakeGroupVisible, MakeGroupInvisible); Win16-only extras are MakeObj(Un)Selectable, AutoToggle, SelFlash, SetGroupSelectedObj, MakeGroupSelected; DOS-only insertion is 0271 (ObjInv); position 4"
+   ],
+   "reviewer": "worker names2, supervisor spot-checked 2026-09-30"
+  },
+  "root:22BF:0271": {
+   "win16": "_win_ObjInv",
+   "confidence": "HIGH",
+   "reviewed": "2026-09-30",
+   "evidence": [
+    "body identical: LockWin; GRectInv(objs[obj & 0xFF]); UnlockWin (Win16 win_ObjInv)",
+    "usage: DOS win_SetProxItem calls it for the old and new item where Win16 __win_SetProxItem inlines the identical Lock/GRectInv/Unlock sequence twice",
+    "not in the aligned run (Win16 DCC0 after GetObjSize); 1CE2:0430 = GRectInv inferred, not yet paired"
+   ],
+   "reviewer": "worker names2, supervisor spot-checked 2026-09-30"
+  },
+  "root:22BF:02AF": {
+   "win16": "_win_SetObjSelectedStateI",
+   "confidence": "CONFIRMED",
+   "reviewed": "2026-09-30",
+   "evidence": [
+    "body equivalent to Win16 win_SetObjSelectedStateI: gate win_IsWinOpen(obj), compare (state&4)>>2 with selected, toggle bit 4 by (state^(selected<<2))&4, redraw if visible (bit 1): type 13 -> win_DrawBitMapAtObj with bitmap at +0x26+((state&4)==0?4:2), types 5/17 -> win_DrawObject, else GRectInv",
+    "callers SetObjSelectedState (0375) and SetGroupSelectedState (03CD) as in Win16",
+    "member order: Win16 E9C4..F52E selectable/selected/visible cluster and DOS 22BF 011F..054E align as an ordered subsequence (SetObjSelectableState, SetGroupSelectableState, MakeGroupSelectable, MakeGroupUnselectable, SetObjSelectedStateI, SetObjSelectedState, MakeObjSelected, MakeObjUnselected, SetGroupSelectedState, MakeGroupUnselected, SetObjVisibleState, MakeObjVisible, MakeObjInvisible, SetGroupVisibleState, MakeGroupVisible, MakeGroupInvisible); Win16-only extras are MakeObj(Un)Selectable, AutoToggle, SelFlash, SetGroupSelectedObj, MakeGroupSelected; DOS-only insertion is 0271 (ObjInv); position 5"
+   ],
+   "reviewer": "worker names2, supervisor spot-checked 2026-09-30"
+  },
+  "root:22BF:0375": {
+   "win16": "_win_SetObjSelectedState",
+   "confidence": "HIGH",
+   "reviewed": "2026-09-30",
+   "evidence": [
+    "Lock, ObjAddr, if radio flag 0x20 deselect the group via SetGroupSelectedState(obj, group, 0), then SetObjSelectedStateI, Unlock = Win16 call_seq [_win_LockWin, _win_ObjAddr, _win_LockWin, _win_SetObjSelectedStateI, _win_UnlockWin, _win_SetObjSelectedStateI, _win_UnlockWin] (group step inlined in Win16)",
+    "member order: Win16 E9C4..F52E selectable/selected/visible cluster and DOS 22BF 011F..054E align as an ordered subsequence (SetObjSelectableState, SetGroupSelectableState, MakeGroupSelectable, MakeGroupUnselectable, SetObjSelectedStateI, SetObjSelectedState, MakeObjSelected, MakeObjUnselected, SetGroupSelectedState, MakeGroupUnselected, SetObjVisibleState, MakeObjVisible, MakeObjInvisible, SetGroupVisibleState, MakeGroupVisible, MakeGroupInvisible); Win16-only extras are MakeObj(Un)Selectable, AutoToggle, SelFlash, SetGroupSelectedObj, MakeGroupSelected; DOS-only insertion is 0271 (ObjInv); position 6"
+   ],
+   "reviewer": "worker names2, supervisor spot-checked 2026-09-30"
+  },
+  "root:22BF:03BE": {
+   "win16": "_win_MakeObjSelected",
+   "confidence": "HIGH",
+   "reviewed": "2026-09-30",
+   "evidence": [
+    "wrapper SetObjSelectedState(obj, 1) (Win16 inlines it to 194 bytes with the same call_seq)",
+    "member order: Win16 E9C4..F52E selectable/selected/visible cluster and DOS 22BF 011F..054E align as an ordered subsequence (SetObjSelectableState, SetGroupSelectableState, MakeGroupSelectable, MakeGroupUnselectable, SetObjSelectedStateI, SetObjSelectedState, MakeObjSelected, MakeObjUnselected, SetGroupSelectedState, MakeGroupUnselected, SetObjVisibleState, MakeObjVisible, MakeObjInvisible, SetGroupVisibleState, MakeGroupVisible, MakeGroupInvisible); Win16-only extras are MakeObj(Un)Selectable, AutoToggle, SelFlash, SetGroupSelectedObj, MakeGroupSelected; DOS-only insertion is 0271 (ObjInv); position 7"
+   ],
+   "reviewer": "worker names2, supervisor spot-checked 2026-09-30"
+  },
+  "root:22BF:03C6": {
+   "win16": "_win_MakeObjUnselected",
+   "confidence": "HIGH",
+   "reviewed": "2026-09-30",
+   "evidence": [
+    "wrapper SetObjSelectedState(obj, 0)",
+    "member order: Win16 E9C4..F52E selectable/selected/visible cluster and DOS 22BF 011F..054E align as an ordered subsequence (SetObjSelectableState, SetGroupSelectableState, MakeGroupSelectable, MakeGroupUnselectable, SetObjSelectedStateI, SetObjSelectedState, MakeObjSelected, MakeObjUnselected, SetGroupSelectedState, MakeGroupUnselected, SetObjVisibleState, MakeObjVisible, MakeObjInvisible, SetGroupVisibleState, MakeGroupVisible, MakeGroupInvisible); Win16-only extras are MakeObj(Un)Selectable, AutoToggle, SelFlash, SetGroupSelectedObj, MakeGroupSelected; DOS-only insertion is 0271 (ObjInv); position 8"
+   ],
+   "reviewer": "worker names2, supervisor spot-checked 2026-09-30"
+  },
+  "root:22BF:03CD": {
+   "win16": "_win_SetGroupSelectedState",
+   "confidence": "HIGH",
+   "reviewed": "2026-09-30",
+   "evidence": [
+    "loop over group members calling SetObjSelectedStateI = Win16 call_seq [_win_LockWin, _win_SetObjSelectedStateI, _win_UnlockWin]",
+    "member order: Win16 E9C4..F52E selectable/selected/visible cluster and DOS 22BF 011F..054E align as an ordered subsequence (SetObjSelectableState, SetGroupSelectableState, MakeGroupSelectable, MakeGroupUnselectable, SetObjSelectedStateI, SetObjSelectedState, MakeObjSelected, MakeObjUnselected, SetGroupSelectedState, MakeGroupUnselected, SetObjVisibleState, MakeObjVisible, MakeObjInvisible, SetGroupVisibleState, MakeGroupVisible, MakeGroupInvisible); Win16-only extras are MakeObj(Un)Selectable, AutoToggle, SelFlash, SetGroupSelectedObj, MakeGroupSelected; DOS-only insertion is 0271 (ObjInv); position 9"
+   ],
+   "reviewer": "worker names2, supervisor spot-checked 2026-09-30"
+  },
+  "root:22BF:0440": {
+   "win16": "_win_MakeGroupUnselected",
+   "confidence": "HIGH",
+   "reviewed": "2026-09-30",
+   "evidence": [
+    "wrapper SetGroupSelectedState(win, group, 0); DOS has no value-1 twin, so it maps to the 'Un' member by the 1/0 convention of 03BE/03C6",
+    "member order: Win16 E9C4..F52E selectable/selected/visible cluster and DOS 22BF 011F..054E align as an ordered subsequence (SetObjSelectableState, SetGroupSelectableState, MakeGroupSelectable, MakeGroupUnselectable, SetObjSelectedStateI, SetObjSelectedState, MakeObjSelected, MakeObjUnselected, SetGroupSelectedState, MakeGroupUnselected, SetObjVisibleState, MakeObjVisible, MakeObjInvisible, SetGroupVisibleState, MakeGroupVisible, MakeGroupInvisible); Win16-only extras are MakeObj(Un)Selectable, AutoToggle, SelFlash, SetGroupSelectedObj, MakeGroupSelected; DOS-only insertion is 0271 (ObjInv); position 10"
+   ],
+   "reviewer": "worker names2, supervisor spot-checked 2026-09-30"
+  },
+  "root:22BF:0447": {
+   "win16": "_win_SetObjVisibleState",
+   "confidence": "CONFIRMED",
+   "reviewed": "2026-09-30",
+   "evidence": [
+    "same core as Win16 win_SetObjVisibleState: ObjAddr without lock, return if (flags&1)==state, flags ^= ((flags&1)^state)&1, then for a selected (bit 4) type-1 object GRectInv (Win16 case 1: GRectInv); Win16 adds the IsWinOpen gate and bitmap/DrawObject cases",
+    "only callers are the wrappers 0498/04A0 (Win16 callers MakeObjVisible/MakeObjInvisible and the group functions)",
+    "state word at object+0x24: bit 1 = visible, bit 2 = selectable, bit 4 = selected (Win16 win_MakeObjSelectable |= 2, win_IsObjSelected & 4, win_SetObjVisibleState & 1)",
+    "member order: Win16 E9C4..F52E selectable/selected/visible cluster and DOS 22BF 011F..054E align as an ordered subsequence (SetObjSelectableState, SetGroupSelectableState, MakeGroupSelectable, MakeGroupUnselectable, SetObjSelectedStateI, SetObjSelectedState, MakeObjSelected, MakeObjUnselected, SetGroupSelectedState, MakeGroupUnselected, SetObjVisibleState, MakeObjVisible, MakeObjInvisible, SetGroupVisibleState, MakeGroupVisible, MakeGroupInvisible); Win16-only extras are MakeObj(Un)Selectable, AutoToggle, SelFlash, SetGroupSelectedObj, MakeGroupSelected; DOS-only insertion is 0271 (ObjInv); position 11"
+   ],
+   "reviewer": "worker names2, supervisor spot-checked 2026-09-30"
+  },
+  "root:22BF:0498": {
+   "win16": "_win_MakeObjVisible",
+   "confidence": "CONFIRMED",
+   "reviewed": "2026-09-30",
+   "evidence": [
+    "body = Win16 win_MakeObjVisible: SetObjVisibleState(obj, 1)",
+    "member order: Win16 E9C4..F52E selectable/selected/visible cluster and DOS 22BF 011F..054E align as an ordered subsequence (SetObjSelectableState, SetGroupSelectableState, MakeGroupSelectable, MakeGroupUnselectable, SetObjSelectedStateI, SetObjSelectedState, MakeObjSelected, MakeObjUnselected, SetGroupSelectedState, MakeGroupUnselected, SetObjVisibleState, MakeObjVisible, MakeObjInvisible, SetGroupVisibleState, MakeGroupVisible, MakeGroupInvisible); Win16-only extras are MakeObj(Un)Selectable, AutoToggle, SelFlash, SetGroupSelectedObj, MakeGroupSelected; DOS-only insertion is 0271 (ObjInv); position 12, immediately after SetObjVisibleState on both sides",
+    "shared caller f_015B_0273 calls both 0498 and 04A0, as Win16 _SetYardMode calls both MakeObjVisible and MakeObjInvisible"
+   ],
+   "reviewer": "worker names2, supervisor spot-checked 2026-09-30"
+  },
+  "root:22BF:04A0": {
+   "win16": "_win_MakeObjInvisible",
+   "confidence": "CONFIRMED",
+   "reviewed": "2026-09-30",
+   "evidence": [
+    "body = Win16 win_MakeObjInvisible: SetObjVisibleState(obj, 0)",
+    "member order: Win16 E9C4..F52E selectable/selected/visible cluster and DOS 22BF 011F..054E align as an ordered subsequence (SetObjSelectableState, SetGroupSelectableState, MakeGroupSelectable, MakeGroupUnselectable, SetObjSelectedStateI, SetObjSelectedState, MakeObjSelected, MakeObjUnselected, SetGroupSelectedState, MakeGroupUnselected, SetObjVisibleState, MakeObjVisible, MakeObjInvisible, SetGroupVisibleState, MakeGroupVisible, MakeGroupInvisible); Win16-only extras are MakeObj(Un)Selectable, AutoToggle, SelFlash, SetGroupSelectedObj, MakeGroupSelected; DOS-only insertion is 0271 (ObjInv); position 13",
+    "shared caller f_015B_0273 (see MakeObjVisible)"
+   ],
+   "reviewer": "worker names2, supervisor spot-checked 2026-09-30"
+  },
+  "root:22BF:04A7": {
+   "win16": "_win_SetGroupVisibleState",
+   "confidence": "HIGH",
+   "reviewed": "2026-09-30",
+   "evidence": [
+    "group loop applying the bit-1 visibility update (Win16 call_seq Lock, SetObjVisibleState, Unlock; DOS inlines)",
+    "member order: Win16 E9C4..F52E selectable/selected/visible cluster and DOS 22BF 011F..054E align as an ordered subsequence (SetObjSelectableState, SetGroupSelectableState, MakeGroupSelectable, MakeGroupUnselectable, SetObjSelectedStateI, SetObjSelectedState, MakeObjSelected, MakeObjUnselected, SetGroupSelectedState, MakeGroupUnselected, SetObjVisibleState, MakeObjVisible, MakeObjInvisible, SetGroupVisibleState, MakeGroupVisible, MakeGroupInvisible); Win16-only extras are MakeObj(Un)Selectable, AutoToggle, SelFlash, SetGroupSelectedObj, MakeGroupSelected; DOS-only insertion is 0271 (ObjInv); position 14"
+   ],
+   "reviewer": "worker names2, supervisor spot-checked 2026-09-30"
+  },
+  "root:22BF:0546": {
+   "win16": "_win_MakeGroupVisible",
+   "confidence": "HIGH",
+   "reviewed": "2026-09-30",
+   "evidence": [
+    "wrapper SetGroupVisibleState(win, group, 1)",
+    "member order: Win16 E9C4..F52E selectable/selected/visible cluster and DOS 22BF 011F..054E align as an ordered subsequence (SetObjSelectableState, SetGroupSelectableState, MakeGroupSelectable, MakeGroupUnselectable, SetObjSelectedStateI, SetObjSelectedState, MakeObjSelected, MakeObjUnselected, SetGroupSelectedState, MakeGroupUnselected, SetObjVisibleState, MakeObjVisible, MakeObjInvisible, SetGroupVisibleState, MakeGroupVisible, MakeGroupInvisible); Win16-only extras are MakeObj(Un)Selectable, AutoToggle, SelFlash, SetGroupSelectedObj, MakeGroupSelected; DOS-only insertion is 0271 (ObjInv); position 15"
+   ],
+   "reviewer": "worker names2, supervisor spot-checked 2026-09-30"
+  },
+  "root:22BF:054E": {
+   "win16": "_win_MakeGroupInvisible",
+   "confidence": "HIGH",
+   "reviewed": "2026-09-30",
+   "evidence": [
+    "wrapper SetGroupVisibleState(win, group, 0)",
+    "member order: Win16 E9C4..F52E selectable/selected/visible cluster and DOS 22BF 011F..054E align as an ordered subsequence (SetObjSelectableState, SetGroupSelectableState, MakeGroupSelectable, MakeGroupUnselectable, SetObjSelectedStateI, SetObjSelectedState, MakeObjSelected, MakeObjUnselected, SetGroupSelectedState, MakeGroupUnselected, SetObjVisibleState, MakeObjVisible, MakeObjInvisible, SetGroupVisibleState, MakeGroupVisible, MakeGroupInvisible); Win16-only extras are MakeObj(Un)Selectable, AutoToggle, SelFlash, SetGroupSelectedObj, MakeGroupSelected; DOS-only insertion is 0271 (ObjInv); position 16"
+   ],
+   "reviewer": "worker names2, supervisor spot-checked 2026-09-30"
+  },
+  "root:22BF:059A": {
+   "win16": "_win_SetObjFormatStr",
+   "confidence": "CONFIRMED",
+   "reviewed": "2026-09-30",
+   "evidence": [
+    "shared Ralloc tag string 'formatStr' and runtime vsprintf",
+    "body: vsprintf(buf, obj+0x2E format, varargs); len = strlen+1; if record and strlen(record)+1 < len RallocRealloc(len+4) else Ralloc(len+8, 1, 'formatStr'); strcpy: same '+1' threshold and +4/+8 sizes as Win16 win_SetObjFormatStr (win_ObjFormatPrint uses '+2', see 0706); DOS adds a WinPrintf('\\n= %s') debug echo and a second vsprintf",
+    "no draw tail, which separates it from ObjFormatPrint"
+   ],
+   "reviewer": "worker names2, supervisor spot-checked 2026-09-30"
+  },
+  "root:22BF:06BE": {
+   "win16": "_win_CenterStrAtObj",
+   "confidence": "HIGH",
+   "reviewed": "2026-09-30",
+   "evidence": [
+    "body: win_SetColorFromObjNum(obj); win_GetObjRect; clip to rect; 208F:011F(rect, text) [= gr_CenterStrInRectClear]; unclip = Win16 win_CenterStrAtObj (SetColorFromObjNum, rect under lock, SaveDC/IntersectClipRect, gr_CenterStrInRectClear, RestoreDC)",
+    "DOS PrintfAtObj and ObjFormatPrint call it where Win16 has the identical body inlined",
+    "208F:011F not yet independently paired"
+   ],
+   "reviewer": "worker names2, supervisor spot-checked 2026-09-30"
+  },
+  "root:22BF:0706": {
+   "win16": "_win_ObjFormatPrint",
+   "confidence": "CONFIRMED",
+   "reviewed": "2026-09-30",
+   "evidence": [
+    "shared 'formatStr' tag and vsprintf twice (Win16 also calls vsprintf twice: relic of DOS's WinPrintf('\\n= %s') debug echo between them)",
+    "distinguishing body detail: '+2 < len' realloc threshold (Win16 ObjFormatPrint '+2', SetObjFormatStr '+1'), then font_SetFont(o[0x28]), centred print, font_SetFont(0), as Win16 call_seq [..., _font_SetFont, _win_SetColorFromObjNum, ..., _gr_CenterStrInRectClear, _font_SetFont, _win_UnlockWin]"
+   ],
+   "reviewer": "worker names2, supervisor spot-checked 2026-09-30"
+  },
+  "root:22BF:085A": {
+   "win16": "_win_SetPalette",
+   "confidence": "CONFIRMED",
+   "reviewed": "2026-09-30",
+   "evidence": [
+    "named caller: sole caller IBMInitStuff (named DOS function) = Win16 sole caller _IBMInitStuff",
+    "body: db_LoadObject(id, 0x0F), the same resource kind 0x0F as Win16 (push 0xf); if p[1]==0 and displayType==0 build 16 EGA palette bytes with the identical 0x10/0x20 bit shuffle over RGB triples; displayType==8 alternative path; db_ReleaseObject(id, 0x0F)"
+   ],
+   "reviewer": "worker names2, supervisor spot-checked 2026-09-30"
+  },
+  "root:22BF:0967": {
+   "win16": "_win_SetObjBitmap",
+   "confidence": "CONFIRMED",
+   "reviewed": "2026-09-30",
+   "evidence": [
+    "shared unique diagnostic verbatim 'Attempt to set bitmap on non-bitmap object'",
+    "body: Lock, ObjAddr, type (+0x21) != 6 -> Punt, store bitmap at +0x28, Unlock; Win16 WinObject {reserved[0x21], type, pad[6], bitmap} also puts bitmap at +0x28"
+   ],
+   "reviewer": "worker names2, supervisor spot-checked 2026-09-30"
+  },
+  "root:22BF:09B0": {
+   "win16": "_win_IsWinOpen",
+   "confidence": "CONFIRMED",
+   "reviewed": "2026-09-30",
+   "evidence": [
+    "behaviour: returns the window-open flag (w+0x1C & 0x200)>>9, set by win_Open and cleared by win_Close; Win16 tests the window's HWND (same-shape sibling IsWinZoomed has a single caller, NewGame)",
+    "structural use: gate at the start of win_SetObjSelectedStateI on both sides, and loop condition of win_DoProxMenu",
+    "named-caller agreement: ShowIntro and EditToolsMenu (both xver HIGH) call it on both sides; 39 DOS / 65 Win16 callers (highest fan-in query of both window layers)"
+   ],
+   "reviewer": "worker names2, supervisor spot-checked 2026-09-30"
+  },
+  "root:22BF:0BAB": {
+   "win16": "_win_DoProxMenu",
+   "confidence": "CONFIRMED",
+   "reviewed": "2026-09-30",
+   "evidence": [
+    "named callers AntMenu and EditToolsMenu (both xver HIGH) plus o05_35F5_0000 (xver LOW _EditScentMenu) are all Win16 _win_DoProxMenu callers",
+    "body: win_Open, preselect via win_SetProxItem, loop while win_IsWinOpen fetching win_GetEvent/win_GetProxEvent, return the item index, win_Close; Win16 call_seq opens with _win_Open and pumps _win_GetEvent with the same inline proximity highlighting"
+   ],
+   "reviewer": "worker names2, supervisor spot-checked 2026-09-30"
+  },
+  "root:22BF:0D53": {
+   "win16": "_win_PrintfAtObj",
+   "confidence": "CONFIRMED",
+   "reviewed": "2026-09-30",
+   "evidence": [
+    "runtime vsprintf into a 100-byte local from (obj, format, ...) then centred print at the object = Win16 win_PrintfAtObj (char buffer[100]; vsprintf; CenterStrAtObj body inline)",
+    "only DOS (obj, fmt, ...) printf-at-object; calls win_CenterStrAtObj"
+   ],
+   "reviewer": "worker names2, supervisor spot-checked 2026-09-30"
+  },
+  "root:22BF:0D81": {
+   "win16": "_win_DrawHBar",
+   "confidence": "CONFIRMED",
+   "reviewed": "2026-09-30",
+   "evidence": [
+    "body identical to Win16 win_DrawHBar: SetColorFromObjNum, rect, right = left + (width*fraction)/65536 (aFulmul/aFldiv), fill fore part, then remainder with back colour",
+    "horizontal vs vertical fixed by the edge computed (right from left); 0E01 computes top from bottom",
+    "member order HBar then VBar adjacent on both sides; HBar has callers and VBar none on both sides"
+   ],
+   "reviewer": "worker names2, supervisor spot-checked 2026-09-30"
+  },
+  "root:22BF:0E01": {
+   "win16": "_win_DrawVBar",
+   "confidence": "CONFIRMED",
+   "reviewed": "2026-09-30",
+   "evidence": [
+    "body identical to Win16 win_DrawVBar: top = bottom - (height*fraction)/65536, fore fill then back fill of the remainder",
+    "member order follows DrawHBar on both sides; no callers on either side"
+   ],
+   "reviewer": "worker names2, supervisor spot-checked 2026-09-30"
+  },
+  "root:22BF:0A97": {
+   "win16": "_win_IsObjSelected",
+   "confidence": "REJECTED",
+   "reviewed": "2026-09-30",
+   "evidence": [
+    "returns (state & 2) >> 1, the selectable bit, whereas Win16 win_IsObjSelected returns (flags & 4) >> 2; used by keyboard navigation 218D:0656 to skip unselectable objects. Not win_IsObjSelected (a DOS 'is selectable' query)"
+   ],
+   "reviewer": "worker names2, supervisor spot-checked 2026-09-30"
+  },
+  "root:21FA:0002": {
+   "win16": "_gr_JustifyStrInRect",
+   "confidence": "CONFIRMED",
+   "reviewed": "2026-09-30",
+   "evidence": [
+    "body identical to Win16 gr_JustifyStrInRect: modes 0/3 centre, 1 left+4, 2 right-width-4, clamp to left, vertical centring by font height, font_PrintStr, mode 3 clears both sides with the back colour from lastStrPos",
+    "called by win_DrawObjectI on both sides",
+    "member order: DOS 21FA 0002..0AA7 aligns 1:1 with Win16 SIMTWO B300..BC98 (gr_JustifyStrInRect, SetColorNum, SetColorFromObj, SetColorFromObjNum, RectFill, FillObjRect, RectFillOutline, RectOutline, RectVOutline, RectHOutline, DrawButtonBorder, DrawObjectI, DrawObject, DrawObjectNum, DrawWinIcons, DrawWindow, DrawTitle: 17/17); DOS adds 0AD2 and 0B4B (sprintf-debug redraw helpers) after it; position 1"
+   ],
+   "reviewer": "worker names2, supervisor spot-checked 2026-09-30"
+  },
+  "root:21FA:00EE": {
+   "win16": "_win_SetColorNum",
+   "confidence": "CONFIRMED",
+   "reviewed": "2026-09-30",
+   "evidence": [
+    "body identical: colorEntry = win_colors[color]; GSetAttrib(e[0]*0x101, e[displayType&1 ? 3 : 2]*0x101, e[0]*0x101)",
+    "member order: DOS 21FA 0002..0AA7 aligns 1:1 with Win16 SIMTWO B300..BC98 (gr_JustifyStrInRect, SetColorNum, SetColorFromObj, SetColorFromObjNum, RectFill, FillObjRect, RectFillOutline, RectOutline, RectVOutline, RectHOutline, DrawButtonBorder, DrawObjectI, DrawObject, DrawObjectNum, DrawWinIcons, DrawWindow, DrawTitle: 17/17); DOS adds 0AD2 and 0B4B (sprintf-debug redraw helpers) after it; position 2, before the already named win_SetColorFromObj/win_SetColorFromObjNum"
+   ],
+   "reviewer": "worker names2, supervisor spot-checked 2026-09-30"
+  },
+  "root:21FA:01D0": {
+   "win16": "_win_RectFill",
+   "confidence": "CONFIRMED",
+   "reviewed": "2026-09-30",
+   "evidence": [
+    "body identical to Win16 win_RectFill(rect): if colorEntry[2]!=colorEntry[3] && !(displayType&1) {GSetAttrib(e3,e2,e0); pattern box mode 0; GSetAttrib(e0,e2,e0)} else fill with e[2]*0x101",
+    "callers RectFillOutline (0286) and DrawObjectI = Win16 _win_RectFill callers (_win_RectFillOutline, _win_DrawObjectI, _win_ClearObjArea)",
+    "member order: DOS 21FA 0002..0AA7 aligns 1:1 with Win16 SIMTWO B300..BC98 (gr_JustifyStrInRect, SetColorNum, SetColorFromObj, SetColorFromObjNum, RectFill, FillObjRect, RectFillOutline, RectOutline, RectVOutline, RectHOutline, DrawButtonBorder, DrawObjectI, DrawObject, DrawObjectNum, DrawWinIcons, DrawWindow, DrawTitle: 17/17); DOS adds 0AD2 and 0B4B (sprintf-debug redraw helpers) after it; position 5",
+    "REJECTS the current DOS name win_ClearObjArea (applied from a worker report): Win16 win_ClearObjArea takes an object number, locks, reads the rect, then calls SetColorFromObjNum and win_RectFill; DOS 01D0 takes a rect pointer and is the RectFill body"
+   ],
+   "reviewer": "worker names2, supervisor spot-checked 2026-09-30"
+  },
+  "root:21FA:0286": {
+   "win16": "_win_RectFillOutline",
+   "confidence": "CONFIRMED",
+   "reviewed": "2026-09-30",
+   "evidence": [
+    "body: win_RectFill(rect); GRectOutline(rect, width) = Win16 win_RectFillOutline",
+    "member order: DOS 21FA 0002..0AA7 aligns 1:1 with Win16 SIMTWO B300..BC98 (gr_JustifyStrInRect, SetColorNum, SetColorFromObj, SetColorFromObjNum, RectFill, FillObjRect, RectFillOutline, RectOutline, RectVOutline, RectHOutline, DrawButtonBorder, DrawObjectI, DrawObject, DrawObjectNum, DrawWinIcons, DrawWindow, DrawTitle: 17/17); DOS adds 0AD2 and 0B4B (sprintf-debug redraw helpers) after it; position 7"
+   ],
+   "reviewer": "worker names2, supervisor spot-checked 2026-09-30"
+  },
+  "root:21FA:02A8": {
+   "win16": "_win_RectOutline",
+   "confidence": "HIGH",
+   "reviewed": "2026-09-30",
+   "evidence": [
+    "body: GRectOutline(rect, width) wrapper = Win16 win_RectOutline (trivial body; the order carries the weight)",
+    "member order: DOS 21FA 0002..0AA7 aligns 1:1 with Win16 SIMTWO B300..BC98 (gr_JustifyStrInRect, SetColorNum, SetColorFromObj, SetColorFromObjNum, RectFill, FillObjRect, RectFillOutline, RectOutline, RectVOutline, RectHOutline, DrawButtonBorder, DrawObjectI, DrawObject, DrawObjectNum, DrawWinIcons, DrawWindow, DrawTitle: 17/17); DOS adds 0AD2 and 0B4B (sprintf-debug redraw helpers) after it; position 8"
+   ],
+   "reviewer": "worker names2, supervisor spot-checked 2026-09-30"
+  },
+  "root:21FA:02BD": {
+   "win16": "_win_RectVOutline",
+   "confidence": "CONFIRMED",
+   "reviewed": "2026-09-30",
+   "evidence": [
+    "sides bitfield top=1, bottom=1 (mask 0x0A; Win16 '&= 0xFA; |= 0x0A') with the fore colour twice into GRectPartialMixedOutline = Win16 win_RectVOutline",
+    "member order: DOS 21FA 0002..0AA7 aligns 1:1 with Win16 SIMTWO B300..BC98 (gr_JustifyStrInRect, SetColorNum, SetColorFromObj, SetColorFromObjNum, RectFill, FillObjRect, RectFillOutline, RectOutline, RectVOutline, RectHOutline, DrawButtonBorder, DrawObjectI, DrawObject, DrawObjectNum, DrawWinIcons, DrawWindow, DrawTitle: 17/17); DOS adds 0AD2 and 0B4B (sprintf-debug redraw helpers) after it; position 9 (V before H on both sides)"
+   ],
+   "reviewer": "worker names2, supervisor spot-checked 2026-09-30"
+  },
+  "root:21FA:02E9": {
+   "win16": "_win_RectHOutline",
+   "confidence": "CONFIRMED",
+   "reviewed": "2026-09-30",
+   "evidence": [
+    "sides left=1, right=1 (mask 0x05; Win16 '|= 0x05; &= 0xF5') with the fore colour twice = Win16 win_RectHOutline",
+    "member order: DOS 21FA 0002..0AA7 aligns 1:1 with Win16 SIMTWO B300..BC98 (gr_JustifyStrInRect, SetColorNum, SetColorFromObj, SetColorFromObjNum, RectFill, FillObjRect, RectFillOutline, RectOutline, RectVOutline, RectHOutline, DrawButtonBorder, DrawObjectI, DrawObject, DrawObjectNum, DrawWinIcons, DrawWindow, DrawTitle: 17/17); DOS adds 0AD2 and 0B4B (sprintf-debug redraw helpers) after it; position 10"
+   ],
+   "reviewer": "worker names2, supervisor spot-checked 2026-09-30"
+  },
+  "root:21FA:0741": {
+   "win16": "_win_DrawObject",
+   "confidence": "CONFIRMED",
+   "reviewed": "2026-09-30",
+   "evidence": [
+    "body identical: if (obj->flags & 1) win_DrawObjectI(obj)",
+    "callers win_DrawWindow and win_SetObjSelectedStateI (Win16 callers SetObjSelectedStateI, SetObjVisibleState)",
+    "member order: DOS 21FA 0002..0AA7 aligns 1:1 with Win16 SIMTWO B300..BC98 (gr_JustifyStrInRect, SetColorNum, SetColorFromObj, SetColorFromObjNum, RectFill, FillObjRect, RectFillOutline, RectOutline, RectVOutline, RectHOutline, DrawButtonBorder, DrawObjectI, DrawObject, DrawObjectNum, DrawWinIcons, DrawWindow, DrawTitle: 17/17); DOS adds 0AD2 and 0B4B (sprintf-debug redraw helpers) after it; position 13, between the named DrawObjectI and DrawObjectNum"
+   ],
+   "reviewer": "worker names2, supervisor spot-checked 2026-09-30"
+  },
+  "root:21FA:08E2": {
+   "win16": "_win_DrawWindow",
+   "confidence": "CONFIRMED",
+   "reviewed": "2026-09-30",
+   "evidence": [
+    "first lock is win_LockWinHigh (only other user win_Open) = Win16 _win_DrawWindow call_seq [_win_LockWinHigh, _win_DrawObjectI, _win_UnlockWin]",
+    "calls win_drawHooks[win>>8](1) before and (2) after drawing (Win16 DrawWindow references _win_drawHooks, constant 0x77B2); draws each object via win_DrawObject, then win_DrawWinIcons",
+    "member order: DOS 21FA 0002..0AA7 aligns 1:1 with Win16 SIMTWO B300..BC98 (gr_JustifyStrInRect, SetColorNum, SetColorFromObj, SetColorFromObjNum, RectFill, FillObjRect, RectFillOutline, RectOutline, RectVOutline, RectHOutline, DrawButtonBorder, DrawObjectI, DrawObject, DrawObjectNum, DrawWinIcons, DrawWindow, DrawTitle: 17/17); DOS adds 0AD2 and 0B4B (sprintf-debug redraw helpers) after it; position 16"
+   ],
+   "reviewer": "worker names2, supervisor spot-checked 2026-09-30"
+  },
+  "root:21FA:0AA7": {
+   "win16": "_win_DrawTitle",
+   "confidence": "HIGH",
+   "reviewed": "2026-09-30",
+   "evidence": [
+    "member order: DOS 21FA 0002..0AA7 aligns 1:1 with Win16 SIMTWO B300..BC98 (gr_JustifyStrInRect, SetColorNum, SetColorFromObj, SetColorFromObjNum, RectFill, FillObjRect, RectFillOutline, RectOutline, RectVOutline, RectHOutline, DrawButtonBorder, DrawObjectI, DrawObject, DrawObjectNum, DrawWinIcons, DrawWindow, DrawTitle: 17/17); DOS adds 0AD2 and 0B4B (sprintf-debug redraw helpers) after it; position 17 (last Win16 member of the run)",
+    "caller DisplayCard (xver HIGH) is also a Win16 _win_DrawTitle caller",
+    "bodies differ by platform: DOS redraws object 0 (title bar) + win_DrawWinIcons; Win16 finds the title text object (types 12/18) and calls USER SetWindowText"
+   ],
+   "reviewer": "worker names2, supervisor spot-checked 2026-09-30"
+  },
+  "root:2505:0171": {
+   "win16": "_win_AutoSize",
+   "confidence": "CONFIRMED",
+   "reviewed": "2026-09-30",
+   "evidence": [
+    "body: identical switch on type (5/12 text size +8, 6/13 gr_BitMapSize, 9 text size, 16/18 text at +0x2C, 17 text +8, default right-left/bottom-top) returning a static (Win16 static AutoSizeResult)",
+    "sole caller win_Recalc on both sides"
+   ],
+   "reviewer": "worker names2, supervisor spot-checked 2026-09-30"
+  },
+  "root:2505:0545": {
+   "win16": "_win_Recalc",
+   "confidence": "CONFIRMED",
+   "reviewed": "2026-09-30",
+   "evidence": [
+    "callers include win_Open and win_Swap (DOS 04B6, 032F), as Win16 _win_Recalc callers _win_Open, _win_Swap",
+    "calls win_AutoSize for auto-size objects and the per-coordinate resolver (03B9) until stable, then win_SortRect; Win16 calls _win_AutoSize and _win_GetVal"
+   ],
+   "reviewer": "worker names2, supervisor spot-checked 2026-09-30"
+  },
+  "root:2505:0048": {
+   "win16": "_RepointObjects",
+   "confidence": "HIGH",
+   "reviewed": "2026-09-30",
+   "evidence": [
+    "body identical to Win16 RepointObjects (C606 disassembly): p = w + n*4 + 0x2C; for i<n: objs[i] = p; p += *(int*)(p+0x22)",
+    "DOS calls it after the window block moved (win_LoadWindow, lock worker); the Win16 member has no callers (relic) and sits just before win_LoadWindow, so no second anchor"
+   ],
+   "reviewer": "worker names2, supervisor spot-checked 2026-09-30"
+  },
+  "root:2505:03B9": {
+   "win16": "_win_GetVal",
+   "confidence": "MEDIUM",
+   "reviewed": "2026-09-30",
+   "evidence": [
+    "per-coordinate resolver called 4x per object from win_Recalc (Win16 Recalc callees are AutoSize and GetVal); constant 0x8000 shared; DOS splits the work into 0453/04D7"
+   ],
+   "reviewer": "worker names2, supervisor spot-checked 2026-09-30"
+  },
+  "root:2505:0453": {
+   "win16": "__win_CalcObjElement",
+   "confidence": "MEDIUM",
+   "reviewed": "2026-09-30",
+   "evidence": [
+    "constants 0x2800/0x8000 and Lock/Unlock/Unlock pattern match Win16 __win_CalcObjElement (10240, 32768; LockWin, UnlockWin, UnlockWin) but equally fit _win_GetVal: ambiguous"
+   ],
+   "reviewer": "worker names2, supervisor spot-checked 2026-09-30"
+  },
+  "root:2505:04D7": {
+   "win16": "_win_GetArg",
+   "confidence": "MEDIUM",
+   "reviewed": "2026-09-30",
+   "evidence": [
+    "constants 0x2800/0x8000 = Win16 _win_GetArg constants (10240, 32768), size 58 vs 60; Win16 body not recovered"
+   ],
+   "reviewer": "worker names2, supervisor spot-checked 2026-09-30"
+  },
+  "root:259D:032A": {
+   "win16": "_win_PrintTextInRect",
+   "confidence": "CONFIRMED",
+   "reviewed": "2026-09-30",
+   "evidence": [
+    "call sequence font_FontHeight (24AB:030B), font_CharWidth (24AB:0367), runtime strncpy, font_PrintStr (24AB:038D) = Win16 _win_PrintTextInRect call_seq [_font_FontHeight, _font_CharWidth, rt:strncpy, _font_PrintStr]",
+    "member order: DOS 259D (DrawBitMap, DrawBitMapAtObj, DrawBitMapAtObjNum, 032A) = Win16 BD5A..BED2 (the same three named members, then win_PrintTextInRect)"
+   ],
+   "reviewer": "worker names2, supervisor spot-checked 2026-09-30"
+  },
+  "root:50F6:4892": {
+   "win16": "_win_offsets",
+   "confidence": "CONFIRMED",
+   "reviewed": "2026-09-30",
+   "evidence": [
+    "45 rects filled with the 0x8000 sentinel and loaded by memcpy 0x140 from the kind-9 object in win_LoadAllWindows (Win16 win_offsets identical)",
+    "win_LoadWindow copies it to/from object 0's +8 origin; win_Close restores from it (Win16 same)"
+   ],
+   "reviewer": "worker names2, supervisor spot-checked 2026-09-30"
+  },
+  "root:50F6:47DE": {
+   "win16": "_win_drawHooks",
+   "confidence": "CONFIRMED",
+   "reviewed": "2026-09-30",
+   "evidence": [
+    "memset 0xB4 (45 far pointers) in win_LoadAllWindows; written by win_SetWinDrawHook; called with 1/2 in win_DrawWindow (Win16 same three uses)"
+   ],
+   "reviewer": "worker names2, supervisor spot-checked 2026-09-30"
+  },
+  "root:50F6:47D8": {
+   "win16": "_win_numOfWindows",
+   "confidence": "CONFIRMED",
+   "reviewed": "2026-09-30",
+   "evidence": [
+    "word 0 of resource 0x80 in win_LoadAllWindows; LoadWindow loop bound (Win16 identical)"
+   ],
+   "reviewer": "worker names2, supervisor spot-checked 2026-09-30"
+  },
+  "root:50F6:47D6": {
+   "win16": "_win_numOfColors",
+   "confidence": "CONFIRMED",
+   "reviewed": "2026-09-30",
+   "evidence": [
+    "word 1 of resource 0x80; times 6 for the win_colors memcpy (Win16 identical)"
+   ],
+   "reviewer": "worker names2, supervisor spot-checked 2026-09-30"
+  },
+  "root:50F6:47D4": {
+   "win16": "_win_numOfGroups",
+   "confidence": "CONFIRMED",
+   "reviewed": "2026-09-30",
+   "evidence": [
+    "word 2 of resource 0x80 (Win16 identical)"
+   ],
+   "reviewer": "worker names2, supervisor spot-checked 2026-09-30"
+  },
+  "root:50F6:46E2": {
+   "win16": "_win_colors",
+   "confidence": "CONFIRMED",
+   "reviewed": "2026-09-30",
+   "evidence": [
+    "6-byte entries copied from resource 0x81 (numOfColors*6); indexed by win_SetColorNum/SetColorFromObj (Win16 char win_colors[][6])"
+   ],
+   "reviewer": "worker names2, supervisor spot-checked 2026-09-30"
+  },
+  "root:55B3:6368": {
+   "win16": "_lastProxObj",
+   "confidence": "CONFIRMED",
+   "reviewed": "2026-09-30",
+   "evidence": [
+    "DGROUP int initialised -1, returned by win_GetProxEvent and stored by win_SetProxItem (Win16 'unsigned int near lastProxObj = -1' with the same reader and writer)"
+   ],
+   "reviewer": "worker names2, supervisor spot-checked 2026-09-30"
+  },
+  "root:55B3:9230": {
+   "win16": "_win_handles",
+   "confidence": "HIGH",
+   "reviewed": "2026-09-30",
+   "evidence": [
+    "near table of far window handles indexed win>>8: written by win_LoadWindow, cleared on discard by win_UnlockWin, dereferenced by the address getters (Win16 win_WinAddr returns win_handles[id>>8])",
+    "Win16 entries are locked pointers rather than handles"
+   ],
+   "reviewer": "worker names2, supervisor spot-checked 2026-09-30"
   }
  }
 }

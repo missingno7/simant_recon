@@ -5825,7 +5825,7 @@
    },
    "lang": "c",
    "source": "src/root/m20E8.c",
-   "source_sha256": "ae6cbe453d653afb2c6b419c2b768de69e24fa7e45e2a07c6d96096d14d38387",
+   "source_sha256": "172f0d7fe9eb3630f82f1b4dc76935c88c41e060e01f06331fb16ade192f3bf5",
    "claims": [
     {
      "name": "f_20E8_0000",
@@ -5839,7 +5839,7 @@
      "reloc_order": "EXACT"
     },
     {
-     "name": "f_20E8_0141",
+     "name": "win_LoadAllWindows",
      "unit": "root",
      "seg": 8424,
      "off": 321,
@@ -5850,7 +5850,7 @@
      "reloc_order": "GROUPED"
     },
     {
-     "name": "f_20E8_032F",
+     "name": "win_Swap",
      "unit": "root",
      "seg": 8424,
      "off": 815,
@@ -5861,7 +5861,7 @@
      "reloc_order": "GROUPED"
     },
     {
-     "name": "f_20E8_0635",
+     "name": "win_Close",
      "unit": "root",
      "seg": 8424,
      "off": 1589,
@@ -5894,7 +5894,7 @@
      "reloc_order": "GROUPED"
     },
     {
-     "name": "f_20E8_0862",
+     "name": "win_SetWinDrawHook",
      "unit": "root",
      "seg": 8424,
      "off": 2146,
@@ -5983,9 +5983,9 @@
     }
    ],
    "scaffold": [
-    "f_20E8_0001",
-    "f_20E8_04B6",
-    "f_20E8_0903"
+    "f_20E8_0903",
+    "win_LoadWindow",
+    "win_Open"
    ],
    "object_sha256": "0f4e8a0ce200379d6b5a4b74078c51f756176b96a4b01198065137a360221950"
   },
@@ -6024,7 +6024,7 @@
     "end": 139170
    },
    "source": "src/root/m218D.c",
-   "source_sha256": "7e422a17e79194448323f5fde98fc090f7a01c1df8f04dcc1c34868b355c0818",
+   "source_sha256": "56974c858cc2cb3e987343bbfe040a1af4ac05d6eb3cc282c0fa8a9e55cec5b6",
    "claims": [
     {
      "name": "f_218D_000C",
@@ -6049,7 +6049,7 @@
      "reloc_order": "EXACT"
     },
     {
-     "name": "f_218D_01F2",
+     "name": "win_GetProxEvent",
      "unit": "root",
      "seg": 8589,
      "off": 498,
@@ -6060,7 +6060,7 @@
      "reloc_order": "EXACT"
     },
     {
-     "name": "f_218D_01F6",
+     "name": "_win_SetProxItem",
      "unit": "root",
      "seg": 8589,
      "off": 502,
@@ -6093,7 +6093,7 @@
      "reloc_order": "GROUPED"
     },
     {
-     "name": "f_218D_03E8",
+     "name": "win_Events",
      "unit": "root",
      "seg": 8589,
      "off": 1000,
@@ -6104,7 +6104,7 @@
      "reloc_order": "EXACT"
     },
     {
-     "name": "f_218D_03F1",
+     "name": "win_GetEvent",
      "unit": "root",
      "seg": 8589,
      "off": 1009,
@@ -6115,7 +6115,7 @@
      "reloc_order": "EXACT"
     },
     {
-     "name": "f_218D_042B",
+     "name": "win_FlushEvents",
      "unit": "root",
      "seg": 8589,
      "off": 1067,
@@ -6192,10 +6192,10 @@
    },
    "lang": "c",
    "source": "src/root/m21FA.c",
-   "source_sha256": "3c2a7d1f5f8b628f6e1f5a43583e692c170a43724b87d7eb2c44b89c249bf178",
+   "source_sha256": "7aa9987ae7cd4ce3c9cd1d6f37d50f29003eb81e34fe09f84345549b7ebb11eb",
    "claims": [
     {
-     "name": "f_21FA_0002",
+     "name": "gr_JustifyStrInRect",
      "unit": "root",
      "seg": 8698,
      "off": 2,
@@ -6206,7 +6206,7 @@
      "reloc_order": "GROUPED"
     },
     {
-     "name": "f_21FA_00EE",
+     "name": "win_SetColorNum",
      "unit": "root",
      "seg": 8698,
      "off": 238,
@@ -6239,7 +6239,7 @@
      "reloc_order": "EXACT"
     },
     {
-     "name": "win_ClearObjArea",
+     "name": "win_RectFill",
      "unit": "root",
      "seg": 8698,
      "off": 464,
@@ -6261,7 +6261,7 @@
      "reloc_order": "GROUPED"
     },
     {
-     "name": "f_21FA_0286",
+     "name": "win_RectFillOutline",
      "unit": "root",
      "seg": 8698,
      "off": 646,
@@ -6272,7 +6272,7 @@
      "reloc_order": "EXACT"
     },
     {
-     "name": "f_21FA_02A8",
+     "name": "win_RectOutline",
      "unit": "root",
      "seg": 8698,
      "off": 680,
@@ -6283,7 +6283,7 @@
      "reloc_order": "EXACT"
     },
     {
-     "name": "f_21FA_02BD",
+     "name": "win_RectVOutline",
      "unit": "root",
      "seg": 8698,
      "off": 701,
@@ -6294,7 +6294,7 @@
      "reloc_order": "EXACT"
     },
     {
-     "name": "f_21FA_02E9",
+     "name": "win_RectHOutline",
      "unit": "root",
      "seg": 8698,
      "off": 745,
@@ -6316,7 +6316,7 @@
      "reloc_order": "GROUPED"
     },
     {
-     "name": "f_21FA_0741",
+     "name": "win_DrawObject",
      "unit": "root",
      "seg": 8698,
      "off": 1857,
@@ -6349,7 +6349,7 @@
      "reloc_order": "GROUPED"
     },
     {
-     "name": "f_21FA_0AA7",
+     "name": "win_DrawTitle",
      "unit": "root",
      "seg": 8698,
      "off": 2727,
@@ -6411,10 +6411,10 @@
    },
    "lang": "c",
    "source": "src/root/m22BF.c",
-   "source_sha256": "43d63d12a813b213fb05fe392ee4382a8ab1404ab5d3e1aec364335b7bbbe97a",
+   "source_sha256": "d55780c2cfcb3960bde619170380c4014d03c2aab70f6568e62f46cdca1852a4",
    "claims": [
     {
-     "name": "f_22BF_000A",
+     "name": "win_StringSize",
      "unit": "root",
      "seg": 8895,
      "off": 10,
@@ -6425,7 +6425,7 @@
      "reloc_order": "GROUPED"
     },
     {
-     "name": "f_22BF_0042",
+     "name": "win_GetObjSize",
      "unit": "root",
      "seg": 8895,
      "off": 66,
@@ -6458,7 +6458,7 @@
      "reloc_order": "EXACT"
     },
     {
-     "name": "f_22BF_011F",
+     "name": "win_SetObjSelectableState",
      "unit": "root",
      "seg": 8895,
      "off": 287,
@@ -6469,7 +6469,7 @@
      "reloc_order": "GROUPED"
     },
     {
-     "name": "f_22BF_01A9",
+     "name": "win_SetGroupSelectableState",
      "unit": "root",
      "seg": 8895,
      "off": 425,
@@ -6480,7 +6480,7 @@
      "reloc_order": "GROUPED"
     },
     {
-     "name": "f_22BF_0262",
+     "name": "win_MakeGroupSelectable",
      "unit": "root",
      "seg": 8895,
      "off": 610,
@@ -6491,7 +6491,7 @@
      "reloc_order": "EXACT"
     },
     {
-     "name": "f_22BF_026A",
+     "name": "win_MakeGroupUnselectable",
      "unit": "root",
      "seg": 8895,
      "off": 618,
@@ -6502,7 +6502,7 @@
      "reloc_order": "EXACT"
     },
     {
-     "name": "f_22BF_02AF",
+     "name": "win_SetObjSelectedStateI",
      "unit": "root",
      "seg": 8895,
      "off": 687,
@@ -6513,7 +6513,7 @@
      "reloc_order": "GROUPED"
     },
     {
-     "name": "f_22BF_0375",
+     "name": "win_SetObjSelectedState",
      "unit": "root",
      "seg": 8895,
      "off": 885,
@@ -6524,7 +6524,7 @@
      "reloc_order": "EXACT"
     },
     {
-     "name": "f_22BF_03BE",
+     "name": "win_MakeObjSelected",
      "unit": "root",
      "seg": 8895,
      "off": 958,
@@ -6535,7 +6535,7 @@
      "reloc_order": "EXACT"
     },
     {
-     "name": "f_22BF_03C6",
+     "name": "win_MakeObjUnselected",
      "unit": "root",
      "seg": 8895,
      "off": 966,
@@ -6546,7 +6546,7 @@
      "reloc_order": "EXACT"
     },
     {
-     "name": "f_22BF_03CD",
+     "name": "win_SetGroupSelectedState",
      "unit": "root",
      "seg": 8895,
      "off": 973,
@@ -6557,7 +6557,7 @@
      "reloc_order": "EXACT"
     },
     {
-     "name": "f_22BF_0440",
+     "name": "win_MakeGroupUnselected",
      "unit": "root",
      "seg": 8895,
      "off": 1088,
@@ -6568,7 +6568,7 @@
      "reloc_order": "EXACT"
     },
     {
-     "name": "f_22BF_0447",
+     "name": "win_SetObjVisibleState",
      "unit": "root",
      "seg": 8895,
      "off": 1095,
@@ -6579,7 +6579,7 @@
      "reloc_order": "EXACT"
     },
     {
-     "name": "f_22BF_0498",
+     "name": "win_MakeObjVisible",
      "unit": "root",
      "seg": 8895,
      "off": 1176,
@@ -6590,7 +6590,7 @@
      "reloc_order": "EXACT"
     },
     {
-     "name": "f_22BF_04A0",
+     "name": "win_MakeObjInvisible",
      "unit": "root",
      "seg": 8895,
      "off": 1184,
@@ -6601,7 +6601,7 @@
      "reloc_order": "EXACT"
     },
     {
-     "name": "f_22BF_04A7",
+     "name": "win_SetGroupVisibleState",
      "unit": "root",
      "seg": 8895,
      "off": 1191,
@@ -6612,7 +6612,7 @@
      "reloc_order": "GROUPED"
     },
     {
-     "name": "f_22BF_0546",
+     "name": "win_MakeGroupVisible",
      "unit": "root",
      "seg": 8895,
      "off": 1350,
@@ -6623,7 +6623,7 @@
      "reloc_order": "EXACT"
     },
     {
-     "name": "f_22BF_054E",
+     "name": "win_MakeGroupInvisible",
      "unit": "root",
      "seg": 8895,
      "off": 1358,
@@ -6645,7 +6645,7 @@
      "reloc_order": "GROUPED"
     },
     {
-     "name": "f_22BF_059A",
+     "name": "win_SetObjFormatStr",
      "unit": "root",
      "seg": 8895,
      "off": 1434,
@@ -6656,7 +6656,7 @@
      "reloc_order": "GROUPED"
     },
     {
-     "name": "f_22BF_06BE",
+     "name": "win_CenterStrAtObj",
      "unit": "root",
      "seg": 8895,
      "off": 1726,
@@ -6667,7 +6667,7 @@
      "reloc_order": "GROUPED"
     },
     {
-     "name": "f_22BF_0706",
+     "name": "win_ObjFormatPrint",
      "unit": "root",
      "seg": 8895,
      "off": 1798,
@@ -6678,7 +6678,7 @@
      "reloc_order": "WITHIN_GROUP_PENDING"
     },
     {
-     "name": "f_22BF_085A",
+     "name": "win_SetPalette",
      "unit": "root",
      "seg": 8895,
      "off": 2138,
@@ -6700,7 +6700,7 @@
      "reloc_order": "EXACT"
     },
     {
-     "name": "f_22BF_0967",
+     "name": "win_SetObjBitmap",
      "unit": "root",
      "seg": 8895,
      "off": 2407,
@@ -6711,7 +6711,7 @@
      "reloc_order": "EXACT"
     },
     {
-     "name": "f_22BF_09B0",
+     "name": "win_IsWinOpen",
      "unit": "root",
      "seg": 8895,
      "off": 2480,
@@ -6832,7 +6832,7 @@
      "reloc_order": "GROUPED"
     },
     {
-     "name": "f_22BF_0D53",
+     "name": "win_PrintfAtObj",
      "unit": "root",
      "seg": 8895,
      "off": 3411,
@@ -6843,7 +6843,7 @@
      "reloc_order": "EXACT"
     },
     {
-     "name": "f_22BF_0D81",
+     "name": "win_DrawHBar",
      "unit": "root",
      "seg": 8895,
      "off": 3457,
@@ -6854,7 +6854,7 @@
      "reloc_order": "WITHIN_GROUP_PENDING"
     },
     {
-     "name": "f_22BF_0E01",
+     "name": "win_DrawVBar",
      "unit": "root",
      "seg": 8895,
      "off": 3585,
@@ -6877,8 +6877,8 @@
     }
    ],
    "scaffold": [
-    "f_22BF_0271",
-    "f_22BF_0BAB"
+    "win_DoProxMenu",
+    "win_ObjInv"
    ],
    "object_sha256": "515669fa1b5f358058b700aad940054e5e69c2c7ded1ae420f933ec8c5cb21c0"
   },
@@ -6912,10 +6912,10 @@
    },
    "lang": "c",
    "source": "src/root/m23AE.c",
-   "source_sha256": "3bda842d211f80eee9a1d567357b470d8a2a41e6d0fe96674feadd0e2c50a652",
+   "source_sha256": "531c983e47c1f39b6be2d94bb9fa0ccc1fa557ca9ec35542178a566f4d48076c",
    "claims": [
     {
-     "name": "f_23AE_0004",
+     "name": "win_NoWindowsShouldBeLocked",
      "unit": "root",
      "seg": 9134,
      "off": 4,
@@ -6926,7 +6926,7 @@
      "reloc_order": "EXACT"
     },
     {
-     "name": "f_23AE_0022",
+     "name": "win_LockInit",
      "unit": "root",
      "seg": 9134,
      "off": 34,
@@ -6937,7 +6937,7 @@
      "reloc_order": "EXACT"
     },
     {
-     "name": "f_23AE_0051",
+     "name": "win_IsWinLocked",
      "unit": "root",
      "seg": 9134,
      "off": 81,
@@ -6970,7 +6970,7 @@
      "reloc_order": "GROUPED"
     },
     {
-     "name": "f_23AE_036F",
+     "name": "win_LockWinHigh",
      "unit": "root",
      "seg": 9134,
      "off": 879,
@@ -6981,7 +6981,7 @@
      "reloc_order": "EXACT"
     },
     {
-     "name": "f_23AE_0377",
+     "name": "win_LockWin",
      "unit": "root",
      "seg": 9134,
      "off": 887,
@@ -6993,7 +6993,7 @@
     }
    ],
    "scaffold": [
-    "f_23AE_01DB"
+    "win_UnlockWin"
    ],
    "object_sha256": "74ffba3050aebffe092298d897b53552b0b331d95b16aa92a3f9d1bd10d80d94"
   },
@@ -7027,7 +7027,7 @@
    },
    "lang": "c",
    "source": "src/root/m2505.c",
-   "source_sha256": "d601708ac1d7d93de5e1491898f09791ba1152047a3360bd808491a78edb1b8f",
+   "source_sha256": "673f7a2f655f8fbcbe950ecaa50beff507b02c98893143566b0cded82c8562b7",
    "claims": [
     {
      "name": "f_2505_0006",
@@ -7041,7 +7041,7 @@
      "reloc_order": "GROUPED"
     },
     {
-     "name": "f_2505_0048",
+     "name": "RepointObjects",
      "unit": "root",
      "seg": 9477,
      "off": 72,
@@ -7063,7 +7063,7 @@
      "reloc_order": "EXACT"
     },
     {
-     "name": "f_2505_0171",
+     "name": "win_AutoSize",
      "unit": "root",
      "seg": 9477,
      "off": 369,
@@ -7173,7 +7173,7 @@
      "reloc_order": "EXACT"
     },
     {
-     "name": "f_2505_0545",
+     "name": "win_Recalc",
      "unit": "root",
      "seg": 9477,
      "off": 1349,
@@ -7229,7 +7229,7 @@
    },
    "lang": "c",
    "source": "src/root/m259D.c",
-   "source_sha256": "c8f8d675e471cd38b8a2376cb1e200f392723f3fa7e02f7905535b07dbc0b704",
+   "source_sha256": "81a071f6e60d9eb763bbebc6a4ec82050b730b07fb2ff28e8f5a89e76eb9f38f",
    "claims": [
     {
      "name": "win_DrawBitMapAtObj",

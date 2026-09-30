@@ -3,9 +3,9 @@
 extern void far Punt(char far *format, ...);
 extern int far WinPrintf(char far *format, ...);
 extern unsigned int far _fstrlen(char far *s);
-extern int _fastcall f_23AE_0051(int win);
-extern void _fastcall f_23AE_0377(int win);
-extern void _fastcall f_23AE_01DB(int win);
+extern int _fastcall win_IsWinLocked(int win);
+extern void _fastcall win_LockWin(int win);
+extern void _fastcall win_UnlockWin(int win);
 
 struct Rect {
     int left;
@@ -29,21 +29,21 @@ struct Win {
     char far *objs[1];
 };
 
-extern struct Pt _fastcall f_22BF_000A(char far *text);
+extern struct Pt _fastcall win_StringSize(char far *text);
 extern void far f_208F_0419(struct Pt far *size, int id);
 
 extern int g_6300;
 extern int g_5702;
-extern char far * far * near g_9230[];
+extern char far * far * near win_handles[];
 
 char far * far f_2505_0006(int win)
 {
-    if (g_6300 == 0 && !f_23AE_0051(win))
+    if (g_6300 == 0 && !win_IsWinLocked(win))
         Punt("\nWINDOW %x NOT LOCKED DURING CALL TO GETWINPTR!!", win);
-    return *g_9230[win >> 8];
+    return *win_handles[win >> 8];
 }
 
-void _fastcall f_2505_0048(int win)
+void _fastcall RepointObjects(int win)
 {
     char far *w;
     int n;
@@ -99,7 +99,7 @@ int _fastcall f_2505_00DD(char far *obj)
     return size;
 }
 
-struct Pt _fastcall f_2505_0171(char far *obj)
+struct Pt _fastcall win_AutoSize(char far *obj)
 {
     static struct Pt size;
 
@@ -110,7 +110,7 @@ struct Pt _fastcall f_2505_0171(char far *obj)
         break;
     case 5:
     case 12:
-        size = f_22BF_000A(obj + 0x28);
+        size = win_StringSize(obj + 0x28);
         size.x += 8;
         size.y += 8;
         break;
@@ -119,14 +119,14 @@ struct Pt _fastcall f_2505_0171(char far *obj)
         f_208F_0419(&size, *(int far *)(obj + 0x28));
         break;
     case 9:
-        size = f_22BF_000A(obj + 0x28);
+        size = win_StringSize(obj + 0x28);
         break;
     case 16:
     case 18:
-        size = f_22BF_000A(obj + 0x2c);
+        size = win_StringSize(obj + 0x2c);
         break;
     case 17:
-        size = f_22BF_000A(obj + 0x2c);
+        size = win_StringSize(obj + 0x2c);
         size.x += 8;
         size.y += 8;
         break;
@@ -136,7 +136,7 @@ struct Pt _fastcall f_2505_0171(char far *obj)
 
 char far * _fastcall win_WinRectAddr(int win)
 {
-    if (!f_23AE_0051(win))
+    if (!win_IsWinLocked(win))
         Punt("\nWINDOW %x NOT LOCKED DURING CALL TO win_WinRectAddr!!", win);
     return f_2505_0006(win);
 }
@@ -145,15 +145,15 @@ void _fastcall win_GetObjRect(int obj, struct Rect far *rect)
 {
     char far *w;
 
-    f_23AE_0377(obj);
+    win_LockWin(obj);
     w = f_2505_0006(obj);
     *rect = *((struct Rect far * far *)(w + 0x2c))[obj & 0xff];
-    f_23AE_01DB(obj);
+    win_UnlockWin(obj);
 }
 
 char far * _fastcall win_ObjAddr(int obj)
 {
-    if (!f_23AE_0051(obj))
+    if (!win_IsWinLocked(obj))
         Punt("\nWINDOW %x NOT LOCKED DURING CALL TO win_ObjAddr!!", obj);
     if (*(int far *)(f_2505_0006(obj) + 0xc) <= (unsigned char)obj)
         Punt("Attempt to get obj address outsize window");
@@ -162,7 +162,7 @@ char far * _fastcall win_ObjAddr(int obj)
 
 char far * _fastcall win_WinAddr(int win)
 {
-    if (!f_23AE_0051(win))
+    if (!win_IsWinLocked(win))
         WinPrintf("\nWINDOW %x NOT LOCKED DURING CALL TO win_WinAddr!!", win);
     return f_2505_0006(win);
 }
@@ -219,7 +219,7 @@ int _fastcall f_2505_03B9(int axis, int win, char far *obj)
     return 0x8000;
 }
 
-extern int far fd_50F6_47D8;
+extern int far win_numOfWindows;
 
 int _fastcall f_2505_0453(int obj, int kind)
 {
@@ -229,23 +229,23 @@ int _fastcall f_2505_0453(int obj, int kind)
     int far *r;
 
     win = obj & 0xff00;
-    if ((win >> 8) < fd_50F6_47D8 || win >= 0x2800) {
-        f_23AE_0377(win);
+    if ((win >> 8) < win_numOfWindows || win >= 0x2800) {
+        win_LockWin(win);
         idx = obj & 0xff;
         w = f_2505_0006(win);
         if (*(int far *)(w + 0xc) > idx) {
             r = ((int far * far *)(w + 0x2c))[idx];
-            f_23AE_01DB(win);
+            win_UnlockWin(win);
             return r[kind];
         }
-        f_23AE_01DB(win);
+        win_UnlockWin(win);
     }
     return 0x8000;
 }
 
 int _fastcall f_2505_04D7(int win, int idx)
 {
-    if (fd_50F6_47D8 <= (win >> 8) && win < 0x2800)
+    if (win_numOfWindows <= (win >> 8) && win < 0x2800)
         return 0x8000;
     return ((int far *)(f_2505_0006(win) + 0x10))[idx];
 }
@@ -269,7 +269,7 @@ void _fastcall win_SortRect(struct Rect far *r)
 extern char far * far f_171C_1B84(char far * far *handle);
 extern void far f_171C_1BBA(char far * far *handle);
 
-void _fastcall f_2505_0545(int win)
+void _fastcall win_Recalc(int win)
 {
     char far * far *handle;
     char far *w;
@@ -284,7 +284,7 @@ void _fastcall f_2505_0545(int win)
     int v;
     struct Rect far *r;
 
-    handle = (char far * far *)g_9230[win >> 8];
+    handle = (char far * far *)win_handles[win >> 8];
     w = f_171C_1B84(handle);
     n = *(int far *)(w + 0xc);
     for (i = 0; i < n; i++) {
@@ -298,7 +298,7 @@ void _fastcall f_2505_0545(int win)
         for (i = 0; i < n; i++) {
             obj = ((char far * far *)(w + 0x2c))[i];
             if (obj[0x24] & 0x40) {
-                size = f_2505_0171(obj);
+                size = win_AutoSize(obj);
                 ((int far *)obj)[6] = size.x;
                 ((int far *)obj)[7] = size.y;
             }
@@ -373,7 +373,7 @@ void _fastcall f_2505_0831(int win)
     int i;
 
     win &= 0xff00;
-    f_23AE_0377(win);
+    win_LockWin(win);
     w = (struct Win far *)f_2505_0006(win);
     n = w->count;
     dirty = 0;
@@ -388,7 +388,7 @@ void _fastcall f_2505_0831(int win)
     if (dirty)
         f_1FD2_044F((char far *)w, (win >> 8) - 0x500);
     f_218D_01EB();
-    f_23AE_01DB(win);
+    win_UnlockWin(win);
 }
 
 extern void far f_1FD2_0438(int objNum);
@@ -403,7 +403,7 @@ void _fastcall f_2505_08EA(int win)
     int i;
 
     win &= 0xff00;
-    f_23AE_0377(win);
+    win_LockWin(win);
     w = (struct Win far *)f_2505_0006(win);
     n = w->count;
     for (i = 0; i < n; i++) {
@@ -416,5 +416,5 @@ void _fastcall f_2505_08EA(int win)
     f_2505_06B9(0, (char far *)w);
     if (dirty)
         f_1FD2_049C((win >> 8) - 0x500);
-    f_23AE_01DB(win);
+    win_UnlockWin(win);
 }

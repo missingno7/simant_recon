@@ -3049,6 +3049,18 @@
     }
    ]
   },
+  "RepointObjects": {
+   "unit": "root",
+   "seg": 9477,
+   "off": 72,
+   "grounding": "inventory:far_call",
+   "history": [
+    {
+     "was": "f_2505_0048",
+     "why": "identical object-pointer rebuild (+0x22 size stride)"
+    }
+   ]
+  },
   "ResetYellowVars": {
    "unit": "S22",
    "seg": 14791,
@@ -3784,6 +3796,18 @@
     {
      "was": "o22_39C7_1ED5",
      "why": "Win16 MAPSYM SIMANT_MODULE run _processEdit.._YellowHelp (15 members) aligns 1:1 with DOS S22:39C7 (15 functions, same order, similar sizes); processEdit is xver HIGH at position 1; xver DoLaserFire/YellowBirth/YellowDeath/YellowDialog/YellowCommand (LOW, unique constants) agree positionally"
+    }
+   ]
+  },
+  "_win_SetProxItem": {
+   "unit": "root",
+   "seg": 8589,
+   "off": 502,
+   "grounding": "inventory:far_call,push_cs_call",
+   "history": [
+    {
+     "was": "f_218D_01F6",
+     "why": "invert old/new proximity item and store lastProxObj, as Win16"
     }
    ]
   },
@@ -8871,31 +8895,31 @@
    "unit": "root",
    "seg": 8424,
    "off": 1,
-   "grounding": "inventory:far_call,push_cs_call"
+   "alias_of": "win_LoadWindow"
   },
   "f_20E8_0141": {
    "unit": "root",
    "seg": 8424,
    "off": 321,
-   "grounding": "inventory:far_call"
+   "alias_of": "win_LoadAllWindows"
   },
   "f_20E8_032F": {
    "unit": "root",
    "seg": 8424,
    "off": 815,
-   "grounding": "inventory:far_call"
+   "alias_of": "win_Swap"
   },
   "f_20E8_04B6": {
    "unit": "root",
    "seg": 8424,
    "off": 1206,
-   "grounding": "inventory:far_call,push_cs_call"
+   "alias_of": "win_Open"
   },
   "f_20E8_0635": {
    "unit": "root",
    "seg": 8424,
    "off": 1589,
-   "grounding": "inventory:far_call,push_cs_call"
+   "alias_of": "win_Close"
   },
   "f_20E8_0725": {
    "unit": "root",
@@ -8913,7 +8937,7 @@
    "unit": "root",
    "seg": 8424,
    "off": 2146,
-   "grounding": "inventory:far_call"
+   "alias_of": "win_SetWinDrawHook"
   },
   "f_20E8_088B": {
    "unit": "root",
@@ -8979,13 +9003,13 @@
    "unit": "root",
    "seg": 8589,
    "off": 498,
-   "grounding": "inventory:far_call"
+   "alias_of": "win_GetProxEvent"
   },
   "f_218D_01F6": {
    "unit": "root",
    "seg": 8589,
    "off": 502,
-   "grounding": "inventory:far_call,push_cs_call"
+   "alias_of": "_win_SetProxItem"
   },
   "f_218D_023A": {
    "unit": "root",
@@ -9003,19 +9027,19 @@
    "unit": "root",
    "seg": 8589,
    "off": 1000,
-   "grounding": "inventory:far_call"
+   "alias_of": "win_Events"
   },
   "f_218D_03F1": {
    "unit": "root",
    "seg": 8589,
    "off": 1009,
-   "grounding": "inventory:far_call"
+   "alias_of": "win_GetEvent"
   },
   "f_218D_042B": {
    "unit": "root",
    "seg": 8589,
    "off": 1067,
-   "grounding": "inventory:far_call,push_cs_call"
+   "alias_of": "win_FlushEvents"
   },
   "f_218D_0451": {
    "unit": "root",
@@ -9039,13 +9063,13 @@
    "unit": "root",
    "seg": 8698,
    "off": 2,
-   "grounding": "inventory:far_call,push_cs_call"
+   "alias_of": "gr_JustifyStrInRect"
   },
   "f_21FA_00EE": {
    "unit": "root",
    "seg": 8698,
    "off": 238,
-   "grounding": "inventory:far_call"
+   "alias_of": "win_SetColorNum"
   },
   "f_21FA_0144": {
    "unit": "root",
@@ -9075,25 +9099,25 @@
    "unit": "root",
    "seg": 8698,
    "off": 646,
-   "grounding": "inventory:push_cs_call"
+   "alias_of": "win_RectFillOutline"
   },
   "f_21FA_02A8": {
    "unit": "root",
    "seg": 8698,
    "off": 680,
-   "grounding": "inventory:push_cs_call"
+   "alias_of": "win_RectOutline"
   },
   "f_21FA_02BD": {
    "unit": "root",
    "seg": 8698,
    "off": 701,
-   "grounding": "inventory:push_cs_call"
+   "alias_of": "win_RectVOutline"
   },
   "f_21FA_02E9": {
    "unit": "root",
    "seg": 8698,
    "off": 745,
-   "grounding": "inventory:push_cs_call"
+   "alias_of": "win_RectHOutline"
   },
   "f_21FA_0315": {
    "unit": "root",
@@ -9111,7 +9135,7 @@
    "unit": "root",
    "seg": 8698,
    "off": 1857,
-   "grounding": "inventory:far_call,push_cs_call"
+   "alias_of": "win_DrawObject"
   },
   "f_21FA_075A": {
    "unit": "root",
@@ -9129,13 +9153,13 @@
    "unit": "root",
    "seg": 8698,
    "off": 2274,
-   "grounding": "inventory:far_call,push_cs_call"
+   "alias_of": "win_DrawWindow"
   },
   "f_21FA_0AA7": {
    "unit": "root",
    "seg": 8698,
    "off": 2727,
-   "grounding": "inventory:far_call"
+   "alias_of": "win_DrawTitle"
   },
   "f_21FA_0AD2": {
    "unit": "root",
@@ -9153,13 +9177,13 @@
    "unit": "root",
    "seg": 8895,
    "off": 10,
-   "grounding": "inventory:far_call"
+   "alias_of": "win_StringSize"
   },
   "f_22BF_0042": {
    "unit": "root",
    "seg": 8895,
    "off": 66,
-   "grounding": "inventory:far_call"
+   "alias_of": "win_GetObjSize"
   },
   "f_22BF_00AA": {
    "unit": "root",
@@ -9177,103 +9201,103 @@
    "unit": "root",
    "seg": 8895,
    "off": 287,
-   "grounding": "reviewed: prologue scan in unreached gap; descent ends in a return; no references found (unreferenced or indirect)"
+   "alias_of": "win_SetObjSelectableState"
   },
   "f_22BF_01A9": {
    "unit": "root",
    "seg": 8895,
    "off": 425,
-   "grounding": "inventory:push_cs_call"
+   "alias_of": "win_SetGroupSelectableState"
   },
   "f_22BF_0262": {
    "unit": "root",
    "seg": 8895,
    "off": 610,
-   "grounding": "inventory:far_call"
+   "alias_of": "win_MakeGroupSelectable"
   },
   "f_22BF_026A": {
    "unit": "root",
    "seg": 8895,
    "off": 618,
-   "grounding": "inventory:far_call"
+   "alias_of": "win_MakeGroupUnselectable"
   },
   "f_22BF_0271": {
    "unit": "root",
    "seg": 8895,
    "off": 625,
-   "grounding": "inventory:far_call"
+   "alias_of": "win_ObjInv"
   },
   "f_22BF_02AF": {
    "unit": "root",
    "seg": 8895,
    "off": 687,
-   "grounding": "inventory:push_cs_call"
+   "alias_of": "win_SetObjSelectedStateI"
   },
   "f_22BF_0375": {
    "unit": "root",
    "seg": 8895,
    "off": 885,
-   "grounding": "inventory:far_call,push_cs_call"
+   "alias_of": "win_SetObjSelectedState"
   },
   "f_22BF_03BE": {
    "unit": "root",
    "seg": 8895,
    "off": 958,
-   "grounding": "inventory:far_call"
+   "alias_of": "win_MakeObjSelected"
   },
   "f_22BF_03C6": {
    "unit": "root",
    "seg": 8895,
    "off": 966,
-   "grounding": "inventory:far_call"
+   "alias_of": "win_MakeObjUnselected"
   },
   "f_22BF_03CD": {
    "unit": "root",
    "seg": 8895,
    "off": 973,
-   "grounding": "inventory:push_cs_call"
+   "alias_of": "win_SetGroupSelectedState"
   },
   "f_22BF_0440": {
    "unit": "root",
    "seg": 8895,
    "off": 1088,
-   "grounding": "inventory:far_call"
+   "alias_of": "win_MakeGroupUnselected"
   },
   "f_22BF_0447": {
    "unit": "root",
    "seg": 8895,
    "off": 1095,
-   "grounding": "inventory:push_cs_call"
+   "alias_of": "win_SetObjVisibleState"
   },
   "f_22BF_0498": {
    "unit": "root",
    "seg": 8895,
    "off": 1176,
-   "grounding": "inventory:far_call"
+   "alias_of": "win_MakeObjVisible"
   },
   "f_22BF_04A0": {
    "unit": "root",
    "seg": 8895,
    "off": 1184,
-   "grounding": "inventory:far_call"
+   "alias_of": "win_MakeObjInvisible"
   },
   "f_22BF_04A7": {
    "unit": "root",
    "seg": 8895,
    "off": 1191,
-   "grounding": "inventory:push_cs_call"
+   "alias_of": "win_SetGroupVisibleState"
   },
   "f_22BF_0546": {
    "unit": "root",
    "seg": 8895,
    "off": 1350,
-   "grounding": "inventory:far_call"
+   "alias_of": "win_MakeGroupVisible"
   },
   "f_22BF_054E": {
    "unit": "root",
    "seg": 8895,
    "off": 1358,
-   "grounding": "inventory:far_call"
+   "alias_of": "win_MakeGroupInvisible"
   },
   "f_22BF_0555": {
    "unit": "root",
@@ -9285,25 +9309,25 @@
    "unit": "root",
    "seg": 8895,
    "off": 1434,
-   "grounding": "inventory:far_call"
+   "alias_of": "win_SetObjFormatStr"
   },
   "f_22BF_06BE": {
    "unit": "root",
    "seg": 8895,
    "off": 1726,
-   "grounding": "inventory:push_cs_call"
+   "alias_of": "win_CenterStrAtObj"
   },
   "f_22BF_0706": {
    "unit": "root",
    "seg": 8895,
    "off": 1798,
-   "grounding": "inventory:far_call"
+   "alias_of": "win_ObjFormatPrint"
   },
   "f_22BF_085A": {
    "unit": "root",
    "seg": 8895,
    "off": 2138,
-   "grounding": "inventory:far_call"
+   "alias_of": "win_SetPalette"
   },
   "f_22BF_094F": {
    "unit": "root",
@@ -9315,13 +9339,13 @@
    "unit": "root",
    "seg": 8895,
    "off": 2407,
-   "grounding": "inventory:far_call"
+   "alias_of": "win_SetObjBitmap"
   },
   "f_22BF_09B0": {
    "unit": "root",
    "seg": 8895,
    "off": 2480,
-   "grounding": "inventory:far_call,push_cs_call"
+   "alias_of": "win_IsWinOpen"
   },
   "f_22BF_0A22": {
    "unit": "root",
@@ -9375,7 +9399,7 @@
    "unit": "root",
    "seg": 8895,
    "off": 2987,
-   "grounding": "inventory:far_call"
+   "alias_of": "win_DoProxMenu"
   },
   "f_22BF_0C38": {
    "unit": "root",
@@ -9393,19 +9417,19 @@
    "unit": "root",
    "seg": 8895,
    "off": 3411,
-   "grounding": "inventory:far_call"
+   "alias_of": "win_PrintfAtObj"
   },
   "f_22BF_0D81": {
    "unit": "root",
    "seg": 8895,
    "off": 3457,
-   "grounding": "inventory:far_call"
+   "alias_of": "win_DrawHBar"
   },
   "f_22BF_0E01": {
    "unit": "root",
    "seg": 8895,
    "off": 3585,
-   "grounding": "reviewed: prologue scan in unreached gap; descent ends in a return; no references found (unreferenced or indirect)"
+   "alias_of": "win_DrawVBar"
   },
   "f_22BF_0E83": {
    "unit": "root",
@@ -9417,19 +9441,19 @@
    "unit": "root",
    "seg": 9134,
    "off": 4,
-   "grounding": "inventory:far_call"
+   "alias_of": "win_NoWindowsShouldBeLocked"
   },
   "f_23AE_0022": {
    "unit": "root",
    "seg": 9134,
    "off": 34,
-   "grounding": "inventory:far_call"
+   "alias_of": "win_LockInit"
   },
   "f_23AE_0051": {
    "unit": "root",
    "seg": 9134,
    "off": 81,
-   "grounding": "inventory:far_call"
+   "alias_of": "win_IsWinLocked"
   },
   "f_23AE_0069": {
    "unit": "root",
@@ -9441,7 +9465,7 @@
    "unit": "root",
    "seg": 9134,
    "off": 475,
-   "grounding": "inventory:far_call"
+   "alias_of": "win_UnlockWin"
   },
   "f_23AE_035D": {
    "unit": "root",
@@ -9453,13 +9477,13 @@
    "unit": "root",
    "seg": 9134,
    "off": 879,
-   "grounding": "inventory:far_call"
+   "alias_of": "win_LockWinHigh"
   },
   "f_23AE_0377": {
    "unit": "root",
    "seg": 9134,
    "off": 887,
-   "grounding": "inventory:far_call"
+   "alias_of": "win_LockWin"
   },
   "f_23E6_0000": {
    "unit": "root",
@@ -9639,7 +9663,7 @@
    "unit": "root",
    "seg": 9477,
    "off": 72,
-   "grounding": "inventory:far_call"
+   "alias_of": "RepointObjects"
   },
   "f_2505_00DD": {
    "unit": "root",
@@ -9651,7 +9675,7 @@
    "unit": "root",
    "seg": 9477,
    "off": 369,
-   "grounding": "inventory:push_cs_call"
+   "alias_of": "win_AutoSize"
   },
   "f_2505_025F": {
    "unit": "root",
@@ -9717,7 +9741,7 @@
    "unit": "root",
    "seg": 9477,
    "off": 1349,
-   "grounding": "inventory:far_call"
+   "alias_of": "win_Recalc"
   },
   "f_2505_06B9": {
    "unit": "root",
@@ -9759,7 +9783,7 @@
    "unit": "root",
    "seg": 9629,
    "off": 810,
-   "grounding": "inventory:far_call"
+   "alias_of": "win_PrintTextInRect"
   },
   "f_25E7_0008": {
    "unit": "root",
@@ -10616,6 +10640,18 @@
     {
      "was": "o08_35F5_0E67",
      "why": "worker ovl08: Win16 RandWorld unit member / call-site evidence (report 2026-09-30)"
+    }
+   ]
+  },
+  "gr_JustifyStrInRect": {
+   "unit": "root",
+   "seg": 8698,
+   "off": 2,
+   "grounding": "inventory:far_call,push_cs_call",
+   "history": [
+    {
+     "was": "f_21FA_0002",
+     "why": "identical justify modes; DrawObjectI callee; 21FA run position 1"
     }
    ]
   },
@@ -13239,15 +13275,57 @@
     }
    ]
   },
+  "win_AutoSize": {
+   "unit": "root",
+   "seg": 9477,
+   "off": 369,
+   "grounding": "inventory:push_cs_call",
+   "history": [
+    {
+     "was": "f_2505_0171",
+     "why": "identical per-type size switch; caller Recalc"
+    }
+   ]
+  },
+  "win_CenterStrAtObj": {
+   "unit": "root",
+   "seg": 8895,
+   "off": 1726,
+   "grounding": "inventory:push_cs_call",
+   "history": [
+    {
+     "was": "f_22BF_06BE",
+     "why": "SetColorFromObjNum + clipped centred string, as Win16"
+    }
+   ]
+  },
   "win_ClearObjArea": {
    "unit": "root",
    "seg": 8698,
    "off": 464,
-   "grounding": "inventory:push_cs_call",
+   "alias_of": "win_RectFill"
+  },
+  "win_Close": {
+   "unit": "root",
+   "seg": 8424,
+   "off": 1589,
+   "grounding": "inventory:far_call,push_cs_call",
    "history": [
     {
-     "was": "f_21FA_01D0",
-     "why": "window worker: Win16 win_* function with the same structure/strings (report 2026-09-30)"
+     "was": "f_20E8_0635",
+     "why": "inverse of win_Open (clears 0x200); matching caller set; adjacent after Open"
+    }
+   ]
+  },
+  "win_DoProxMenu": {
+   "unit": "root",
+   "seg": 8895,
+   "off": 2987,
+   "grounding": "inventory:far_call",
+   "history": [
+    {
+     "was": "f_22BF_0BAB",
+     "why": "AntMenu/EditToolsMenu callers; Open + proximity + GetEvent loop"
     }
    ]
   },
@@ -13299,6 +13377,18 @@
     }
    ]
   },
+  "win_DrawHBar": {
+   "unit": "root",
+   "seg": 8895,
+   "off": 3457,
+   "grounding": "inventory:far_call",
+   "history": [
+    {
+     "was": "f_22BF_0D81",
+     "why": "identical horizontal bar formula; precedes VBar"
+    }
+   ]
+  },
   "win_DrawInfoWindow": {
    "unit": "S23",
    "seg": 14791,
@@ -13308,6 +13398,18 @@
     {
      "was": "o23_39C7_0075",
      "why": "Win16 MAPSYM _TEXT run _XFlipLong.._ProcInfoEvent (9 members) aligns 1:1 with DOS S23:39C7 (9 functions, same order); DisplayCard is xver HIGH at position 6; xver win_DrawInfoWindow/win_PrintStyleTextInRect/PopUpInfoWindow (MEDIUM) agree positionally; XFlipLong/FlipWords/win_DrawInfoWindow/OpenInfoWindow Win16 exact bodies match"
+    }
+   ]
+  },
+  "win_DrawObject": {
+   "unit": "root",
+   "seg": 8698,
+   "off": 1857,
+   "grounding": "inventory:far_call,push_cs_call",
+   "history": [
+    {
+     "was": "f_21FA_0741",
+     "why": "visible-check wrapper of DrawObjectI between DrawObjectI and DrawObjectNum"
     }
    ]
   },
@@ -13335,6 +13437,30 @@
     }
    ]
   },
+  "win_DrawTitle": {
+   "unit": "root",
+   "seg": 8698,
+   "off": 2727,
+   "grounding": "inventory:far_call",
+   "history": [
+    {
+     "was": "f_21FA_0AA7",
+     "why": "21FA run position 17; DisplayCard caller"
+    }
+   ]
+  },
+  "win_DrawVBar": {
+   "unit": "root",
+   "seg": 8895,
+   "off": 3585,
+   "grounding": "reviewed: prologue scan in unreached gap; descent ends in a return; no references found (unreferenced or indirect)",
+   "history": [
+    {
+     "was": "f_22BF_0E01",
+     "why": "identical vertical bar formula; follows HBar"
+    }
+   ]
+  },
   "win_DrawWinIcons": {
    "unit": "root",
    "seg": 8698,
@@ -13344,6 +13470,30 @@
     {
      "was": "f_21FA_077D",
      "why": "window worker: Win16 win_* function with the same structure/strings (report 2026-09-30)"
+    }
+   ]
+  },
+  "win_DrawWindow": {
+   "unit": "root",
+   "seg": 8698,
+   "off": 2274,
+   "grounding": "inventory:far_call,push_cs_call",
+   "history": [
+    {
+     "was": "f_21FA_08E2",
+     "why": "LockWinHigh + drawHooks + object loop; 21FA run position 16"
+    }
+   ]
+  },
+  "win_Events": {
+   "unit": "root",
+   "seg": 8589,
+   "off": 1000,
+   "grounding": "inventory:far_call",
+   "history": [
+    {
+     "was": "f_218D_03E8",
+     "why": "poll returning pending flag; ShowIntro/DrawCastePopUp/SpiderDialog/AboutDialog callers"
     }
    ]
   },
@@ -13359,6 +13509,30 @@
     }
    ]
   },
+  "win_FlushEvents": {
+   "unit": "root",
+   "seg": 8589,
+   "off": 1067,
+   "grounding": "inventory:far_call,push_cs_call",
+   "history": [
+    {
+     "was": "f_218D_042B",
+     "why": "drains input queue; caller matches ShowIntro, DialogWaitInit, CustomerIDDialog, SpiderDialog, AboutDialog"
+    }
+   ]
+  },
+  "win_GetEvent": {
+   "unit": "root",
+   "seg": 8589,
+   "off": 1009,
+   "grounding": "inventory:far_call",
+   "history": [
+    {
+     "was": "f_218D_03F1",
+     "why": "event fetch used by DoProxMenu/DoExpMenu/OpenMiniMapWin"
+    }
+   ]
+  },
   "win_GetObjRect": {
    "unit": "root",
    "seg": 9477,
@@ -13368,6 +13542,30 @@
     {
      "was": "f_2505_0288",
      "why": "window worker: Win16 win_* function with the same structure/strings (report 2026-09-30)"
+    }
+   ]
+  },
+  "win_GetObjSize": {
+   "unit": "root",
+   "seg": 8895,
+   "off": 66,
+   "grounding": "inventory:far_call",
+   "history": [
+    {
+     "was": "f_22BF_0042",
+     "why": "identical width/height body"
+    }
+   ]
+  },
+  "win_GetProxEvent": {
+   "unit": "root",
+   "seg": 8589,
+   "off": 498,
+   "grounding": "inventory:far_call",
+   "history": [
+    {
+     "was": "f_218D_01F2",
+     "why": "returns lastProxObj; adjacent to SetProxItem on both sides"
     }
    ]
   },
@@ -13383,6 +13581,210 @@
     }
    ]
   },
+  "win_IsWinLocked": {
+   "unit": "root",
+   "seg": 9134,
+   "off": 81,
+   "grounding": "inventory:far_call",
+   "history": [
+    {
+     "was": "f_23AE_0051",
+     "why": "lock query behind 'NOT LOCKED DURING CALL TO win_ObjAddr'; lock-run position 3"
+    }
+   ]
+  },
+  "win_IsWinOpen": {
+   "unit": "root",
+   "seg": 8895,
+   "off": 2480,
+   "grounding": "inventory:far_call,push_cs_call",
+   "history": [
+    {
+     "was": "f_22BF_09B0",
+     "why": "open-flag query; SelectedStateI gate; ShowIntro/EditToolsMenu callers"
+    }
+   ]
+  },
+  "win_LoadAllWindows": {
+   "unit": "root",
+   "seg": 8424,
+   "off": 321,
+   "grounding": "inventory:far_call",
+   "history": [
+    {
+     "was": "f_20E8_0141",
+     "why": "'Cannot load resource' + identical init sequence"
+    }
+   ]
+  },
+  "win_LoadWindow": {
+   "unit": "root",
+   "seg": 8424,
+   "off": 1,
+   "grounding": "inventory:far_call,push_cs_call",
+   "history": [
+    {
+     "was": "f_20E8_0001",
+     "why": "'CANNOT LOAD WINDOW %03x'; lock/unlock order; caller LoadAllWindows"
+    }
+   ]
+  },
+  "win_LockInit": {
+   "unit": "root",
+   "seg": 9134,
+   "off": 34,
+   "grounding": "inventory:far_call",
+   "history": [
+    {
+     "was": "f_23AE_0022",
+     "why": "called 2nd by LoadAllWindows after font_InitFonts as in Win16; lock-run position 2"
+    }
+   ]
+  },
+  "win_LockWin": {
+   "unit": "root",
+   "seg": 9134,
+   "off": 887,
+   "grounding": "inventory:far_call",
+   "history": [
+    {
+     "was": "f_23AE_0377",
+     "why": "universal lock paired with UnlockWin; LoadWindow call position; lock-run position 6"
+    }
+   ]
+  },
+  "win_LockWinHigh": {
+   "unit": "root",
+   "seg": 9134,
+   "off": 879,
+   "grounding": "inventory:far_call",
+   "history": [
+    {
+     "was": "f_23AE_036F",
+     "why": "only callers are win_Open and win_DrawWindow, as in Win16; lock-run position 5"
+    }
+   ]
+  },
+  "win_MakeGroupInvisible": {
+   "unit": "root",
+   "seg": 8895,
+   "off": 1358,
+   "grounding": "inventory:far_call",
+   "history": [
+    {
+     "was": "f_22BF_054E",
+     "why": "SetGroupVisibleState(..,0) wrapper; cluster position 16"
+    }
+   ]
+  },
+  "win_MakeGroupSelectable": {
+   "unit": "root",
+   "seg": 8895,
+   "off": 610,
+   "grounding": "inventory:far_call",
+   "history": [
+    {
+     "was": "f_22BF_0262",
+     "why": "SetGroupSelectableState(..,1) wrapper; cluster position 3"
+    }
+   ]
+  },
+  "win_MakeGroupUnselectable": {
+   "unit": "root",
+   "seg": 8895,
+   "off": 618,
+   "grounding": "inventory:far_call",
+   "history": [
+    {
+     "was": "f_22BF_026A",
+     "why": "SetGroupSelectableState(..,0) wrapper; cluster position 4"
+    }
+   ]
+  },
+  "win_MakeGroupUnselected": {
+   "unit": "root",
+   "seg": 8895,
+   "off": 1088,
+   "grounding": "inventory:far_call",
+   "history": [
+    {
+     "was": "f_22BF_0440",
+     "why": "SetGroupSelectedState(..,0) wrapper; cluster position 10"
+    }
+   ]
+  },
+  "win_MakeGroupVisible": {
+   "unit": "root",
+   "seg": 8895,
+   "off": 1350,
+   "grounding": "inventory:far_call",
+   "history": [
+    {
+     "was": "f_22BF_0546",
+     "why": "SetGroupVisibleState(..,1) wrapper; cluster position 15"
+    }
+   ]
+  },
+  "win_MakeObjInvisible": {
+   "unit": "root",
+   "seg": 8895,
+   "off": 1184,
+   "grounding": "inventory:far_call",
+   "history": [
+    {
+     "was": "f_22BF_04A0",
+     "why": "SetObjVisibleState(obj,0) wrapper in Win16 order"
+    }
+   ]
+  },
+  "win_MakeObjSelected": {
+   "unit": "root",
+   "seg": 8895,
+   "off": 958,
+   "grounding": "inventory:far_call",
+   "history": [
+    {
+     "was": "f_22BF_03BE",
+     "why": "SetObjSelectedState(obj,1) wrapper; cluster position 7"
+    }
+   ]
+  },
+  "win_MakeObjUnselected": {
+   "unit": "root",
+   "seg": 8895,
+   "off": 966,
+   "grounding": "inventory:far_call",
+   "history": [
+    {
+     "was": "f_22BF_03C6",
+     "why": "SetObjSelectedState(obj,0) wrapper; cluster position 8"
+    }
+   ]
+  },
+  "win_MakeObjVisible": {
+   "unit": "root",
+   "seg": 8895,
+   "off": 1176,
+   "grounding": "inventory:far_call",
+   "history": [
+    {
+     "was": "f_22BF_0498",
+     "why": "SetObjVisibleState(obj,1) wrapper in Win16 order"
+    }
+   ]
+  },
+  "win_NoWindowsShouldBeLocked": {
+   "unit": "root",
+   "seg": 9134,
+   "off": 4,
+   "grounding": "inventory:far_call",
+   "history": [
+    {
+     "was": "f_23AE_0004",
+     "why": "Win16 lock-run position 1; 'locked when it should not be' diagnostic"
+    }
+   ]
+  },
   "win_ObjAddr": {
    "unit": "root",
    "seg": 9477,
@@ -13395,6 +13797,42 @@
     }
    ]
   },
+  "win_ObjFormatPrint": {
+   "unit": "root",
+   "seg": 8895,
+   "off": 1798,
+   "grounding": "inventory:far_call",
+   "history": [
+    {
+     "was": "f_22BF_0706",
+     "why": "'formatStr' + '+2' threshold + SetFont/print/SetFont(0) tail as Win16"
+    }
+   ]
+  },
+  "win_ObjInv": {
+   "unit": "root",
+   "seg": 8895,
+   "off": 625,
+   "grounding": "inventory:far_call",
+   "history": [
+    {
+     "was": "f_22BF_0271",
+     "why": "identical Lock/GRectInv/Unlock body; SetProxItem usage"
+    }
+   ]
+  },
+  "win_Open": {
+   "unit": "root",
+   "seg": 8424,
+   "off": 1206,
+   "grounding": "inventory:far_call,push_cs_call",
+   "history": [
+    {
+     "was": "f_20E8_04B6",
+     "why": "LockWinHigh+Recalc user; caller set matches Win16 win_Open"
+    }
+   ]
+  },
   "win_PrintStyleTextInRect": {
    "unit": "S23",
    "seg": 14791,
@@ -13404,6 +13842,106 @@
     {
      "was": "o23_39C7_0092",
      "why": "Win16 MAPSYM _TEXT run _XFlipLong.._ProcInfoEvent (9 members) aligns 1:1 with DOS S23:39C7 (9 functions, same order); DisplayCard is xver HIGH at position 6; xver win_DrawInfoWindow/win_PrintStyleTextInRect/PopUpInfoWindow (MEDIUM) agree positionally; XFlipLong/FlipWords/win_DrawInfoWindow/OpenInfoWindow Win16 exact bodies match"
+    }
+   ]
+  },
+  "win_PrintTextInRect": {
+   "unit": "root",
+   "seg": 9629,
+   "off": 810,
+   "grounding": "inventory:far_call",
+   "history": [
+    {
+     "was": "f_259D_032A",
+     "why": "FontHeight/CharWidth/strncpy/PrintStr sequence; follows DrawBitMapAtObjNum on both sides"
+    }
+   ]
+  },
+  "win_PrintfAtObj": {
+   "unit": "root",
+   "seg": 8895,
+   "off": 3411,
+   "grounding": "inventory:far_call",
+   "history": [
+    {
+     "was": "f_22BF_0D53",
+     "why": "vsprintf(buf[100]) + centred print at object"
+    }
+   ]
+  },
+  "win_Recalc": {
+   "unit": "root",
+   "seg": 9477,
+   "off": 1349,
+   "grounding": "inventory:far_call",
+   "history": [
+    {
+     "was": "f_2505_0545",
+     "why": "Open/Swap callee; AutoSize + resolver loop"
+    }
+   ]
+  },
+  "win_RectFill": {
+   "unit": "root",
+   "seg": 8698,
+   "off": 464,
+   "grounding": "inventory:push_cs_call",
+   "history": [
+    {
+     "was": "f_21FA_01D0",
+     "why": "window worker: Win16 win_* function with the same structure/strings (report 2026-09-30)"
+    },
+    {
+     "was": "win_ClearObjArea",
+     "why": "body is Win16 win_RectFill(rect); win_ClearObjArea is the object-number wrapper"
+    }
+   ]
+  },
+  "win_RectFillOutline": {
+   "unit": "root",
+   "seg": 8698,
+   "off": 646,
+   "grounding": "inventory:push_cs_call",
+   "history": [
+    {
+     "was": "f_21FA_0286",
+     "why": "RectFill + GRectOutline; 21FA run position 7"
+    }
+   ]
+  },
+  "win_RectHOutline": {
+   "unit": "root",
+   "seg": 8698,
+   "off": 745,
+   "grounding": "inventory:push_cs_call",
+   "history": [
+    {
+     "was": "f_21FA_02E9",
+     "why": "partial-outline mask 0x05 = Win16 RectHOutline"
+    }
+   ]
+  },
+  "win_RectOutline": {
+   "unit": "root",
+   "seg": 8698,
+   "off": 680,
+   "grounding": "inventory:push_cs_call",
+   "history": [
+    {
+     "was": "f_21FA_02A8",
+     "why": "GRectOutline wrapper; 21FA run position 8"
+    }
+   ]
+  },
+  "win_RectVOutline": {
+   "unit": "root",
+   "seg": 8698,
+   "off": 701,
+   "grounding": "inventory:push_cs_call",
+   "history": [
+    {
+     "was": "f_21FA_02BD",
+     "why": "partial-outline mask 0x0A = Win16 RectVOutline"
     }
    ]
   },
@@ -13431,6 +13969,150 @@
     }
    ]
   },
+  "win_SetColorNum": {
+   "unit": "root",
+   "seg": 8698,
+   "off": 238,
+   "grounding": "inventory:far_call",
+   "history": [
+    {
+     "was": "f_21FA_00EE",
+     "why": "identical colour-entry body; precedes SetColorFromObj"
+    }
+   ]
+  },
+  "win_SetGroupSelectableState": {
+   "unit": "root",
+   "seg": 8895,
+   "off": 425,
+   "grounding": "inventory:push_cs_call",
+   "history": [
+    {
+     "was": "f_22BF_01A9",
+     "why": "group version of the bit-2 update; cluster position 2"
+    }
+   ]
+  },
+  "win_SetGroupSelectedState": {
+   "unit": "root",
+   "seg": 8895,
+   "off": 973,
+   "grounding": "inventory:push_cs_call",
+   "history": [
+    {
+     "was": "f_22BF_03CD",
+     "why": "group loop over SetObjSelectedStateI; cluster position 9"
+    }
+   ]
+  },
+  "win_SetGroupVisibleState": {
+   "unit": "root",
+   "seg": 8895,
+   "off": 1191,
+   "grounding": "inventory:push_cs_call",
+   "history": [
+    {
+     "was": "f_22BF_04A7",
+     "why": "group visibility loop; cluster position 14"
+    }
+   ]
+  },
+  "win_SetObjBitmap": {
+   "unit": "root",
+   "seg": 8895,
+   "off": 2407,
+   "grounding": "inventory:far_call",
+   "history": [
+    {
+     "was": "f_22BF_0967",
+     "why": "unique diagnostic + identical type-6 check and +0x28 store"
+    }
+   ]
+  },
+  "win_SetObjFormatStr": {
+   "unit": "root",
+   "seg": 8895,
+   "off": 1434,
+   "grounding": "inventory:far_call",
+   "history": [
+    {
+     "was": "f_22BF_059A",
+     "why": "'formatStr' + vsprintf; +1 length threshold; no print"
+    }
+   ]
+  },
+  "win_SetObjSelectableState": {
+   "unit": "root",
+   "seg": 8895,
+   "off": 287,
+   "grounding": "reviewed: prologue scan in unreached gap; descent ends in a return; no references found (unreferenced or indirect)",
+   "history": [
+    {
+     "was": "f_22BF_011F",
+     "why": "bit-2 formula identical to Win16; head of selection cluster"
+    }
+   ]
+  },
+  "win_SetObjSelectedState": {
+   "unit": "root",
+   "seg": 8895,
+   "off": 885,
+   "grounding": "inventory:far_call,push_cs_call",
+   "history": [
+    {
+     "was": "f_22BF_0375",
+     "why": "radio-group deselect then StateI, as Win16 call_seq"
+    }
+   ]
+  },
+  "win_SetObjSelectedStateI": {
+   "unit": "root",
+   "seg": 8895,
+   "off": 687,
+   "grounding": "inventory:push_cs_call",
+   "history": [
+    {
+     "was": "f_22BF_02AF",
+     "why": "identical bit-4 selection redraw logic incl. type-13 bitmap offset"
+    }
+   ]
+  },
+  "win_SetObjVisibleState": {
+   "unit": "root",
+   "seg": 8895,
+   "off": 1095,
+   "grounding": "inventory:push_cs_call",
+   "history": [
+    {
+     "was": "f_22BF_0447",
+     "why": "bit-1 visibility toggle as Win16; wrappers follow in the same order"
+    }
+   ]
+  },
+  "win_SetPalette": {
+   "unit": "root",
+   "seg": 8895,
+   "off": 2138,
+   "grounding": "inventory:far_call",
+   "history": [
+    {
+     "was": "f_22BF_085A",
+     "why": "IBMInitStuff sole caller; kind-0x0F palette load with identical EGA bit shuffle"
+    }
+   ]
+  },
+  "win_SetWinDrawHook": {
+   "unit": "root",
+   "seg": 8424,
+   "off": 2146,
+   "grounding": "inventory:far_call",
+   "history": [
+    {
+     "was": "f_20E8_0862",
+     "why": "identical body drawHooks[id>>8]=f; shared caller InitApplicationWindows"
+    }
+   ]
+  },
   "win_SortRect": {
    "unit": "root",
    "seg": 9477,
@@ -13440,6 +14122,42 @@
     {
      "was": "f_2505_0511",
      "why": "window worker: Win16 win_* function with the same structure/strings (report 2026-09-30)"
+    }
+   ]
+  },
+  "win_StringSize": {
+   "unit": "root",
+   "seg": 8895,
+   "off": 10,
+   "grounding": "inventory:far_call",
+   "history": [
+    {
+     "was": "f_22BF_000A",
+     "why": "StringWidth/FontHeight pair; called by AutoSize at Win16's inline sites"
+    }
+   ]
+  },
+  "win_Swap": {
+   "unit": "root",
+   "seg": 8424,
+   "off": 815,
+   "grounding": "inventory:far_call",
+   "history": [
+    {
+     "was": "f_20E8_032F",
+     "why": "two-window lock pattern with Recalc as Win16 win_Swap"
+    }
+   ]
+  },
+  "win_UnlockWin": {
+   "unit": "root",
+   "seg": 9134,
+   "off": 475,
+   "grounding": "inventory:far_call",
+   "history": [
+    {
+     "was": "f_23AE_01DB",
+     "why": "unlock diagnostics; closes every lock bracket; lock-run position 4"
     }
    ]
   },
@@ -15620,37 +16338,42 @@
   "fd_50F6_46E2": {
    "seg": 20726,
    "off": 18146,
-   "grounding": "f_21FA_00EE/0144/0315: 6*index + 46E2, seg 50F6 -> colour table entries (6 bytes each)"
+   "alias_of": "win_colors"
   },
   "fd_50F6_47D4": {
    "seg": 20726,
    "off": 18388,
-   "grounding": "f_20E8_0141: es=[8A1E] (50F6); mov es:[47D4],ax = third word of resource 0x80 (Win16 win_numOfGroups)"
+   "alias_of": "win_numOfGroups"
   },
   "fd_50F6_47D6": {
    "seg": 20726,
    "off": 18390,
-   "grounding": "f_20E8_0141: es=[8A1C] (50F6); es:[47D6] = 2nd word of resource 0x80, *6 = colour table bytes (Win16 win_numOfColors)"
+   "alias_of": "win_numOfColors"
   },
   "fd_50F6_47D8": {
    "seg": 20726,
    "off": 18392,
-   "grounding": "f_2505_0453/04D7: mov es,[8A48]; cmp ax,es:[47D8] (window count bound)"
+   "alias_of": "win_numOfWindows"
   },
   "fd_50F6_47DA": {
    "seg": 20726,
    "off": 18394,
    "grounding": "f_20E8_0141: push 50F6:47DA as far Pt* to f_208F_0419(size, 0x6f)"
   },
+  "fd_50F6_47DC": {
+   "seg": 20726,
+   "off": 18396,
+   "grounding": "f_23E6_0518: mov es,[8A3C (CONST segword 50F6)]; mov ax,es:[47DC] (far int, slider arrow height)"
+  },
   "fd_50F6_47DE": {
    "seg": 20726,
    "off": 18398,
-   "grounding": "f_21FA_08E2: mov es,[8A30]; les es:[bx+47DE] indexed by (win>>8)*4 -> far function pointer per window (draw hook), called with 1 / 2"
+   "alias_of": "win_drawHooks"
   },
   "fd_50F6_4892": {
    "seg": 20726,
    "off": 18578,
-   "grounding": "f_23AE_01DB: es=[8A3A] (seg 50F6), lea di,[win*8+4892]; 8-byte rect saved per window on discard"
+   "alias_of": "win_offsets"
   },
   "fd_50F6_49FA": {
    "seg": 20726,
@@ -15857,6 +16580,11 @@
    "off": 37244,
    "grounding": "f_0250_0ADB: lcall [917C](x,y,(tile-300h)<<5) far function pointer (tile blitter, mode 1)"
   },
+  "g_9188": {
+   "seg": 21939,
+   "off": 37256,
+   "grounding": "f_23E6_07A2: lcall [9188] (far code pointer, BSS; 6-arg rect blit)"
+  },
   "g_91A0": {
    "seg": 21939,
    "off": 37280,
@@ -15885,7 +16613,7 @@
   "g_9230": {
    "seg": 21939,
    "off": 37424,
-   "grounding": "f_2505_0006/0545: les bx,[bx+9230] indexed by win>>8 (window handle table, 4-byte entries)"
+   "alias_of": "win_handles"
   },
   "g_94E4": {
    "seg": 21939,
@@ -15901,6 +16629,83 @@
    "seg": 21939,
    "off": 32018,
    "grounding": "DosPunt (root:1A28:0277): bx=[773A]*4; push [bx+7D14]; push [bx+7D12] as the %s after 'Dos error: %d:'; MSC runtime far-pointer message table indexed by errno"
+  },
+  "win_colors": {
+   "seg": 20726,
+   "off": 18146,
+   "grounding": "f_21FA_00EE/0144/0315: 6*index + 46E2, seg 50F6 -> colour table entries (6 bytes each)",
+   "history": [
+    {
+     "was": "fd_50F6_46E2",
+     "why": "resource 0x81 6-byte colour table"
+    }
+   ]
+  },
+  "win_drawHooks": {
+   "seg": 20726,
+   "off": 18398,
+   "grounding": "f_21FA_08E2: mov es,[8A30]; les es:[bx+47DE] indexed by (win>>8)*4 -> far function pointer per window (draw hook), called with 1 / 2",
+   "history": [
+    {
+     "was": "fd_50F6_47DE",
+     "why": "memset 0xB4 in LoadAllWindows; SetWinDrawHook target"
+    }
+   ]
+  },
+  "win_handles": {
+   "seg": 21939,
+   "off": 37424,
+   "grounding": "f_2505_0006/0545: les bx,[bx+9230] indexed by win>>8 (window handle table, 4-byte entries)",
+   "history": [
+    {
+     "was": "g_9230",
+     "why": "per-window handle table indexed win>>8"
+    }
+   ]
+  },
+  "win_numOfColors": {
+   "seg": 20726,
+   "off": 18390,
+   "grounding": "f_20E8_0141: es=[8A1C] (50F6); es:[47D6] = 2nd word of resource 0x80, *6 = colour table bytes (Win16 win_numOfColors)",
+   "history": [
+    {
+     "was": "fd_50F6_47D6",
+     "why": "resource 0x80 word 1; *6 colour copy"
+    }
+   ]
+  },
+  "win_numOfGroups": {
+   "seg": 20726,
+   "off": 18388,
+   "grounding": "f_20E8_0141: es=[8A1E] (50F6); mov es:[47D4],ax = third word of resource 0x80 (Win16 win_numOfGroups)",
+   "history": [
+    {
+     "was": "fd_50F6_47D4",
+     "why": "resource 0x80 word 2"
+    }
+   ]
+  },
+  "win_numOfWindows": {
+   "seg": 20726,
+   "off": 18392,
+   "grounding": "f_2505_0453/04D7: mov es,[8A48]; cmp ax,es:[47D8] (window count bound)",
+   "history": [
+    {
+     "was": "fd_50F6_47D8",
+     "why": "resource 0x80 word 0; LoadWindow loop bound"
+    }
+   ]
+  },
+  "win_offsets": {
+   "seg": 20726,
+   "off": 18578,
+   "grounding": "f_23AE_01DB: es=[8A3A] (seg 50F6), lea di,[win*8+4892]; 8-byte rect saved per window on discard",
+   "history": [
+    {
+     "was": "fd_50F6_4892",
+     "why": "sentinel fill + 0x140 memcpy in LoadAllWindows"
+    }
+   ]
   }
  },
  "runtime": {

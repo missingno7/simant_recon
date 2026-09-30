@@ -7,7 +7,7 @@ static int g_644E = 0;
 static unsigned char g_8DA6[45];
 static char far *g_8CF2[45];
 
-void far f_23AE_0004(void)
+void far win_NoWindowsShouldBeLocked(void)
 {
     int i;
 
@@ -16,30 +16,30 @@ void far f_23AE_0004(void)
             Punt("Window %d locked when it should not be!");
 }
 
-void far f_23AE_0022(void)
+void far win_LockInit(void)
 {
     _fmemset(g_8CF2, 0, sizeof g_8CF2);
     _fmemset(g_8DA6, 0, sizeof g_8DA6);
     g_644C = 1;
 }
 
-int _fastcall f_23AE_0051(int win)
+int _fastcall win_IsWinLocked(int win)
 {
     if (g_644C == 0)
         return 1;
     return g_8DA6[win >> 8];
 }
 
-extern char far * far * near g_9230[];
-extern void far f_20E8_0001(int win);
+extern char far * far * near win_handles[];
+extern void far win_LoadWindow(int win);
 extern int far f_171C_1AD4(char far * far *handle);
 void far f_23AE_035D(void);
 extern char far * far f_171C_1D40(char far * far *handle);
 extern char far * far f_171C_1B84(char far * far *handle);
 extern void far f_171C_1C0A(char far * far *handle);
 extern void far f_171C_1E86(char far * far *handle, int flag);
-extern void _fastcall f_2505_0048(int win);
-extern void _fastcall f_2505_0545(int win);
+extern void _fastcall RepointObjects(int win);
+extern void _fastcall win_Recalc(int win);
 
 void _fastcall f_23AE_0069(int win, int high)
 {
@@ -54,11 +54,11 @@ void _fastcall f_23AE_0069(int win, int high)
     n = (char)(win >> 8);
     if (n > 40 || n < 0)
         Punt("Illegal win num %x at lock", n);
-    if (g_9230[n] == 0) {
-        f_20E8_0001(win);
+    if (win_handles[n] == 0) {
+        win_LoadWindow(win);
         loaded = 1;
     }
-    h = g_9230[n];
+    h = win_handles[n];
     if (g_8DA6[n] == 0) {
         g_8DA6[n]++;
         if (f_171C_1AD4(h)) {
@@ -71,8 +71,8 @@ void _fastcall f_23AE_0069(int win, int high)
             w = f_171C_1B84(h);
         if (w == 0) {
             f_171C_1C0A(h);
-            f_20E8_0001(win);
-            h = g_9230[n];
+            win_LoadWindow(win);
+            h = win_handles[n];
             if (high)
                 w = f_171C_1D40(h);
             else
@@ -82,10 +82,10 @@ void _fastcall f_23AE_0069(int win, int high)
             f_171C_1E86(h, 1);
         if (g_8CF2[n] != w) {
             g_8CF2[n] = w;
-            f_2505_0048(win);
+            RepointObjects(win);
         }
         if (loaded)
-            f_2505_0545(win);
+            win_Recalc(win);
     } else if (g_8DA6[n]++ > 10) {
         Punt("win_Lock > 10 levels deep!!");
     }
@@ -99,7 +99,7 @@ struct Rect {
     int bottom;
 };
 
-/* SCAFFOLD BEGIN: f_23AE_01DB best draft (original position: after f_23AE_0069).
+/* SCAFFOLD BEGIN: win_UnlockWin best draft (original position: after f_23AE_0069).
    Residue: the object pointer w->objs[i] is kept in es:bx and p computed as dx:ax
    (mov ax,bx; mov dx,es; add ax,34h); the original copies it to DI and uses
    lea bx,[di+34h]/[di+2Ah]; frame 20h vs 1Ch. */
@@ -126,9 +126,9 @@ extern int far f_171C_1686(struct Win far * far *handle);
 extern void far f_171C_13E4(char far * far *handle);
 extern void far f_171C_2086(struct Win far * far *handle);
 extern void far f_171C_20E2(struct Win far * far *handle);
-extern struct Rect far fd_50F6_4892[];
+extern struct Rect far win_offsets[];
 
-void _fastcall f_23AE_01DB(int win)
+void _fastcall win_UnlockWin(int win)
 {
     char far * far * far *p;
     int n;
@@ -139,7 +139,7 @@ void _fastcall f_23AE_01DB(int win)
 
     if (g_644C) {
         n = win >> 8;
-        h = (struct Win far * far *)g_9230[n];
+        h = (struct Win far * far *)win_handles[n];
         if (g_8DA6[n] == 0)
             Punt("Attemp to unlock when not locked!!");
         if (f_171C_1686(h) == 5)
@@ -169,9 +169,9 @@ void _fastcall f_23AE_01DB(int win)
                 }
                 f_171C_2086(h);
                 f_171C_20E2(h);
-                g_9230[n] = 0;
+                win_handles[n] = 0;
                 g_8CF2[n] = 0;
-                fd_50F6_4892[n] = *(struct Rect far *)((char far *)w->objs[0] + 8);
+                win_offsets[n] = *(struct Rect far *)((char far *)w->objs[0] + 8);
             } else {
                 f_171C_2086(h);
             }
@@ -189,12 +189,12 @@ void far f_23AE_035D(void)
     f_24FA_00B5();
 }
 
-void _fastcall f_23AE_036F(int win)
+void _fastcall win_LockWinHigh(int win)
 {
     f_23AE_0069(win, 1);
 }
 
-void _fastcall f_23AE_0377(int win)
+void _fastcall win_LockWin(int win)
 {
     f_23AE_0069(win, 0);
 }
