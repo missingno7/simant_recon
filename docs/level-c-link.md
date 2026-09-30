@@ -109,3 +109,38 @@ Next experiments, all oracle-read-only analysis:
   manager (≈ 3.4 % of the file) stays **third-party debt** in every scenario without the
   distribution. The project should report (a), (b) and (c-core) side by side and never
   collapse them into one number.
+
+## Findings with real RTLink linkers (worker rtlink, 2026-09-30)
+
+Tools (C:\tools, provenance.json each): .RTLink/Plus 6.10 (1993; archive.org BBS dump "prog21-29",
+warez-scene copy, research instrument only, kept outside Git), .RTLink for Clipper 3.11 and 3.13
+(Clipper 5.0 / 5.01 from WinWorld, SHA-512 verified). The Dec 1991 RTLink/Plus (4.x/5.0) that
+linked SIMANT.EXE was not found; the clean route is Pocket Soft (today RTPatch).
+
+* **Relocation group order is not a hash of names.** Entries are grouped per frame by target
+  symbol; groups are ordered by a 101-bucket hash of the target's internal record *handle*
+  (most recently inserted first). The handle is the symbol record's creation index while objects
+  are read in command-line order: PUBDEF creates it at once, an external at its first FIXUPP
+  reference, an unreferenced declared external at the end of its object. The chain position is
+  that of the first relocating fixup. Names, EXTDEF order, unreferenced externals, site
+  addresses, fixup counts and extra segments do not matter. The bucket function differs between
+  versions (3.11 = 3.13, 6.10 differs); SimAnt's order matches none of them (<= 66%), so level
+  (c) needs the exact 1991 linker and the complete object set in the original command-line order.
+  This refutes the "hash of original names" hypothesis above.
+* **Vectors**: `ALWAYS` lists create vectors first, in listed order (the 18 up-front vectors of
+  VEC-1; the original list happened to be alphabetical); all others follow first reference.
+  6.10 vectors every cross-unit reference to an overlay symbol, including data pointers, so the
+  original's direct references into S00-S03 require `NEVER` directives. Vector entry format is
+  identical.
+* **Manager**: SIMANT's is the RELOAD variant (`$$RTLOVLINITR`, reload stack 0x1800 =
+  `RELOAD FAR 400`) plus the real cache modules, in 6.10's pull-in order for `RELOAD FAR` + `CACHE`;
+  no available version is byte-identical (masked similarity 20-55% per module to 6.10). Section
+  record words: 3-byte file position + flags byte (0x05 PRELOAD+CACHE, 0x04 CACHE, 0x01 PRELOAD).
+* **Trial link t3** (6.10; `python tools/rtlink.py`, build/rtlink/t3): 83/85 complete modules
+  land at their accepted addresses (exceptions: root:19A9 accepted at odd 0x19A95 while its MSC
+  code segment is WORD aligned; root:2CFB MEMHOOK_TEXT placed after the runtime _TEXT in the
+  original, i.e. read after the library search); the section table's relative load segments,
+  flags, ids and memory sizes match; the 13 overlay sections built only from real objects have
+  identical relocation sets, frames and within-group order and all 63,102 non-fixup bytes
+  identical. Script inputs read from the original (ALWAYS/NEVER lists, areas, PRELOAD/RELOAD)
+  are labelled as such in build/workers/rtlink/linkscripts/SIMANT_derived.lnk.

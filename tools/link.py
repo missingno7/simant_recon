@@ -831,8 +831,24 @@ def main() -> int:
     ap.add_argument("--jobs", type=int, default=8)
     ap.add_argument("--reuse", action="store_true", help="reuse build/link/collection.json if the manifest is unchanged")
     ap.add_argument("--no-hybrid-file", action="store_true")
+    ap.add_argument("--rtlink-trial", metavar="DIR", help="level-(c) instrument: build real objects + stubs + an RTLink "
+                    "script in DIR, link with the pinned RTLink profile and write DIR/summary.json (tools/rtlink.py); "
+                    "stub bytes are trial debt, never counted as reconstruction")
+    ap.add_argument("--rtlink-profile", default="rtlink610")
     a = ap.parse_args()
-    return run(Path(a.root).resolve(), a.jobs, a.reuse, not a.no_hybrid_file)
+    rc = run(Path(a.root).resolve(), a.jobs, a.reuse, not a.no_hybrid_file)
+    if a.rtlink_trial:
+        import rtlink
+        out = Path(a.rtlink_trial)
+        sys.argv = ["rtlink.py", str(out)] + (["--reuse"] if (out / "trial.json").exists() else [])
+        rtlink.main()
+        rtlink.run_link(out, a.rtlink_profile)
+        if (out / "SIMANT.EXE").exists():
+            (out / "summary.json").write_text(json.dumps(rtlink.summarize(out), indent=1))
+            print(f"rtlink trial: {out / 'summary.json'} (level (c) instrument; not an acceptance)")
+        else:
+            print(f"rtlink trial: link failed, see {out / 'LINK.LOG'}")
+    return rc
 
 
 if __name__ == "__main__":

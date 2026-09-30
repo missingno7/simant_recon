@@ -572,5 +572,47 @@
     }
    }
   }
+ },
+ "linkers": {
+  "rtlink610": {
+   "directory": "C:/tools/rtlink-plus-6.10/installed",
+   "runner": "dosbox-x",
+   "executable": "RTL-SWAP.EXE",
+   "note": "RTLink/Plus 6.10 (1993). NOT the SIMANT.EXE linker version (1991, manager differs); experimental instrument for level (c) trials. RTL-REAL.EXE/RTL-SWAP.EXE run under headless DOSBox-X, not under MS-DOS Player (hangs silently). Large links need RTL-SWAP.EXE (RTL-REAL runs out of memory, evmd0018).",
+   "files": {
+    "RTL-REAL.EXE": "228c5d429438ea32ee21dd02c65b7f8e198715b3fa957be9da328f9857482773",
+    "RTL-SWAP.EXE": "daae0a8c358edc26f95540f4bc1629c0dc5c30652155d85ccd79bead4381cfe3",
+    "RTLINK.DAT": "10723fb4d4381b6a38417a18409e32d254e59850bcd3b465fbb824e01367a77b",
+    "RTLUTILS.LIB": "c718bac09b0b1204a259494446acfa8bfffb129144cc7d36799855621f4fdccb",
+    "RTLINKST.COM": "635425a8feff822ca98ec536c55a31824161bffbf9d24d37851cc0d9f7ce3b5f",
+    "RTLINK.EXE": "ea6f57a470a26801086593d54aa99f6bf983dd024fc19b5e13361a07f43e17fb",
+    "DOS4GW.EXE": "7192b80d1551769c2d2897b2f58015dc18fadca2b7e093a20f45b34011933c6c"
+   },
+   "status": "experimental instrument for level (c) trials; NOT the historical SIMANT.EXE linker (Dec 1991 RTLink/Plus 4.x/5.0 not obtained)"
+  },
+  "rtlink311_clipper50": {
+   "directory": "C:/tools/clipper-5.0-nantucket/unpacked/BIN",
+   "runner": "dosbox-x",
+   "executable": "RTLINK.EXE",
+   "note": ".RTLink for Clipper 3.11 (Sept 1990); links only Nantucket-format programs (add a compiled .PRG object)",
+   "files": {
+    "RTLINK.EXE": "7ed000cf8739e4dc1b53248745ea26639f053defc3f5f8c0e494edf11bbd4121",
+    "RTLINK.DAT": "7c9a042d670727a2c19ca8b08eb6197676c152e0f496c01273571e8b9fc2450d",
+    "RTLINKST.COM": "27584a8d89073d456cef33f71e221a3f4083459e661cde7eae884893a69fd5a2"
+   },
+   "status": "experimental instrument for level (c) trials; NOT the historical SIMANT.EXE linker (Dec 1991 RTLink/Plus 4.x/5.0 not obtained)"
+  },
+  "rtlink313_clipper501": {
+   "directory": "C:/tools/clipper-5.01-nantucket/unpacked/BIN1",
+   "runner": "dosbox-x",
+   "executable": "RTLINK.EXE",
+   "note": ".RTLink for Clipper 3.13 (April 1991)",
+   "files": {
+    "RTLINK.EXE": "f955a2c1912aac5af08214e167723888fb0dfc9097b18e64978d7b090ce7731d",
+    "RTLINK.DAT": "0a22565f9861b825898549a9e38016a159800bcf721e8d037196ec6306f8aae2",
+    "RTLINKST.COM": "d5acd6ee4c947400db648747f5c0de427de645c793a471244ba44db399962598"
+   },
+   "status": "experimental instrument for level (c) trials; NOT the historical SIMANT.EXE linker (Dec 1991 RTLink/Plus 4.x/5.0 not obtained)"
+  }
  }
 }
