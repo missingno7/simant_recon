@@ -98,6 +98,9 @@ def _rename(old: str, new: str, why: str) -> int:
             alias = {k: v for k, v in rec.items() if k not in ("history", "grounding")}
             alias["alias_of"] = new
             d[sec][old] = alias
+            for r in d[sec].values():  # keep aliases flat: older names point at the newest
+                if r.get("alias_of") == old:
+                    r["alias_of"] = new
             save(d)
             print(f"renamed {old} -> {new}")
             return 0
@@ -116,8 +119,11 @@ def remove(name: str, why: str) -> int:
         man = json.loads((ROOT / "layout" / "manifest.json").read_text())
         if any(c["name"] == name for m in man["modules"].values() for c in m["claims"]):
             raise SystemExit(f"{name} is claimed")
-        if any(r.get("alias_of") == name for s in ("code", "data") for r in d[s].values()):
+        dependents = [r for r in d[sec].values() if r.get("alias_of") == name]
+        if dependents and not d[sec][name].get("alias_of"):
             raise SystemExit(f"{name} is an alias target")
+        for r in dependents:  # removing a middle alias: re-point to its own target
+            r["alias_of"] = d[sec][name]["alias_of"]
         word = re.compile(r"\b" + re.escape(name) + r"\b")
         for f in (ROOT / "src").rglob("*"):
             if f.suffix.lower() in (".c", ".h", ".asm", ".inc") and word.search(f.read_text(errors="replace")):

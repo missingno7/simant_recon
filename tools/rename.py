@@ -141,6 +141,9 @@ def main() -> int:
             alias = {k: v for k, v in rec.items() if k not in ("history", "grounding")}
             alias["alias_of"] = n
             syms[sec][o] = alias
+            for r in syms[sec].values():  # keep aliases flat: older names point at the newest
+                if r.get("alias_of") == o:
+                    r["alias_of"] = n
         symmod.save(syms)
         with (ROOT / "evidence" / "promotions.jsonl").open("a") as fh:
             fh.write(json.dumps({"time": dt.datetime.now().isoformat(timespec="seconds"), "module": "RENAME",
