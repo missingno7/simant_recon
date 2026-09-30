@@ -17,17 +17,19 @@ Validation: **PASS** (2026-09-30)
 | owned_functions | 1,672 |
 | historical_runtime_bytes_located_unaccepted | 0 |
 | rtlink_manager_bytes_unaccepted | 17,001 |
-| data_bytes_accepted | 105,212 |
+| data_bytes_accepted | 105,246 |
 | far_data_bytes_accepted | 77,846 |
-| historical_runtime_data_bytes_accepted | 1,057 |
-| data_link_fill_bytes | 32 |
+| historical_runtime_data_bytes_accepted | 1,559 |
+| data_link_fill_bytes | 64 |
+| data_link_fill_dgroup_bytes | 32 |
 | far_bss_zero_fill_bytes | 19,408 |
 | far_bss_sizes_verified_bytes | 0 |
-| far_bss_sizes_consistent_bytes | 3,966 |
-| far_bss_sizes_unverified_bytes | 15,442 |
+| far_bss_sizes_pinned_bytes | 0 |
+| far_bss_sizes_consistent_bytes | 4,414 |
+| far_bss_sizes_unverified_bytes | 14,994 |
 | game_code_span_bytes | 304,798 |
 | unresolved_code_bytes | 36,487 |
-| unresolved_data_bytes | 9,811 |
+| unresolved_data_bytes | 9,243 |
 | scaffold_functions | 39 |
 | exact_translation_units | 85 |
 | complete_tus_relocation_order_proven | 84 |
@@ -46,11 +48,11 @@ Validation: **PASS** (2026-09-30)
 | data_bytes_opaque_unmarked | 4,383 |
 | runtime_oracle_derived_words | 244 |
 
-Manifest: `4ce52c95f62e61ceb3590680d333873a58f3a8409043e529453d18672b29828d`
+Manifest: `230a352c82c2364cc9f73a49f00c8055f362017b70d5d005ec7821a7f0362fbd`
 
 Complete TUs with cross-function relocation order pending (record breaks between functions differ; see docs/codegen-rules.md ZI-1): S00:31AD
 
-Modules with data placements only (never counted as recovered code): data:3D57, data:3E1D
+Modules with data placements only (never counted as recovered code): data:3D57, data:3E1D, data:55B3@0042
 
 Whole executable: NOT_BUILT (no historical link yet; see docs/next-steps.md)
 

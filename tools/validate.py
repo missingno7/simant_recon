@@ -2,6 +2,7 @@
 
     python tools/validate.py            # full: oracle, toolchain, fresh rebuild of every module, tests, report
     python tools/validate.py --no-tests
+    python tools/validate.py --no-farbss-probe   # FAR_BSS declarations parsed instead of compiler-measured
 
 Nothing cached is trusted: every module file is recompiled from src/ and every
 claim is re-bound and compared.  Writes docs/progress.json and docs/progress.md.
@@ -9,8 +10,11 @@ claim is re-bound and compared.  Writes docs/progress.json and docs/progress.md.
 Data accounting: modules with zero claims (data-only translation units ``data:FRAME`` and
 code modules promoted with placements only) are listed as ``modules_data_only`` and never
 counted as recovered code; their placements count in ``data_bytes_accepted``.  Placements
-of different modules (and accepted runtime data) may not overlap; the paragraph fill between
-adjacent far segments must be zero (``data_link_fill_bytes``); ``link_after`` positions are
+of different modules (and accepted runtime data) may not overlap; the fill between adjacent
+placements that the next segment's SEGDEF alignment explains (paragraph fill between far
+segments, the single 00 after an odd-length DGROUP segment before a word-aligned one) must be
+zero and is counted as link fill (``data_link_fill_bytes``, of it ``data_link_fill_dgroup_bytes``);
+``link_after`` positions are
 checked; FAR_BSS (frame 50F6) is accounted by tools/farbss.py as linker zero fill; accepted
 runtime DGROUP data segments are re-verified (tools/runtime.py verify_data).
 
@@ -49,6 +53,8 @@ def sha(b: bytes) -> str:
 def main() -> int:
     ap = argparse.ArgumentParser()
     ap.add_argument("--no-tests", action="store_true")
+    ap.add_argument("--no-farbss-probe", action="store_true",
+                    help="skip the compile-only FAR_BSS declaration probes (tools/farbss.py probe_declarations)")
     a = ap.parse_args()
     failures = []
 
@@ -88,7 +94,7 @@ def main() -> int:
     bss_bytes = 0
     far_data_bytes = 0
     data_only_modules = []
-    placed = []                  # (linear, size, owner, segment, far) of every exact file placement
+    placed = []                  # (linear, size, owner, segment, far, alignment) of every exact file placement
     comdefs = defaultdict(list)  # C name -> [(bytes, module)] far communals of accepted objects
     link_after_seen = {}
     bss_placed = []              # (linear, size, owner, segment, False) of every _BSS placement
@@ -114,7 +120,8 @@ def main() -> int:
         res = modmod.verify_module(text, m, m["claims"], man=man)
         bad = [n for n, c in res["claims"].items() if not c["exact"]]
         dbad = [n for n, d in res.get("data", {}).items() if not d["exact"]]
-        mreasons = list(res.get("module_reasons", [])) + modmod.link_after_reasons(man, key, m)
+        mreasons = list(res.get("module_reasons", [])) + modmod.link_after_reasons(
+            man, key, m, {n: d.get("align") for n, d in res.get("data", {}).items()})
         # provenance (audit F-4): ASM modules record how their source was produced, and the probe
         # files their asm_evidence names exist
         mreasons += modmod.source_origin_reasons(m.get("source_origin"), m.get("lang", "c"))
@@ -122,9 +129,11 @@ def main() -> int:
         if m.get("origin") and not m.get("origin_evidence"):
             origin_unevidenced.append(key)
         if "link_after" in m:
-            if m["link_after"] in link_after_seen:
-                mreasons.append(f"link_after {m['link_after'] or 'FIRST'} also claimed by {link_after_seen[m['link_after']]}")
-            link_after_seen[m["link_after"]] = key
+            # far and DGROUP link orders are separate sequences (FIRST exists in each)
+            lk = (m["seg"] == modmod.match.DGROUP_SEG and modmod.is_data_module(m), m["link_after"])
+            if lk in link_after_seen:
+                mreasons.append(f"link_after {m['link_after'] or 'FIRST'} also claimed by {link_after_seen[lk]}")
+            link_after_seen[lk] = key
         ok_mod = res["exact"] and not mreasons
         status = ("OK" + (" (data only)" if not m["claims"] else "")) if ok_mod else f"FAIL {bad + dbad} {mreasons[:3]}"
         print(f"  {key:<10} {len(m['claims']):3d} claims  {status}")
@@ -181,7 +190,7 @@ def main() -> int:
                 if d.get("far"):
                     far_data_bytes += d["size"]
                 if d.get("start") is not None:
-                    placed.append((d["start"], d["size"], key, n, bool(d.get("far"))))
+                    placed.append((d["start"], d["size"], key, n, bool(d.get("far")), d.get("align")))
         scaffolds += len(res.get("scaffold", []))
         if m.get("extent") and res["exact"]:
             exact_tus += 1
@@ -272,37 +281,31 @@ def main() -> int:
                     continue
                 spans.add((d["linear"], d["size"], d["segment"]))
                 runtime_data_bytes += d["size"]
-                placed.append((d["linear"], d["size"], f"runtime:{d['member']}", d["segment"], False))
+                placed.append((d["linear"], d["size"], f"runtime:{d['member']}", d["segment"], False, r.get("align")))
             else:
                 failures.append(f"runtime data {d['member']} {d['segment']} no longer verifies "
                                 f"({'; '.join((r or {}).get('reasons', ['not placed'])[:2])})")
     print(f"historical runtime data: {len(acc_data)} DGROUP segments, {runtime_data_bytes} bytes re-verified")
 
-    # ---- data placements: single ownership, link fill between far segments ---------------
+    # ---- data placements: single ownership, alignment link fill between placements --------
     # _BSS placements share DGROUP with file data and runtime data: one owner per byte (audit F-5)
-    everything = sorted(placed + bss_placed)
+    everything = sorted([p[:5] for p in placed] + bss_placed)
     bss_keys = {(a0, k0, s0) for a0, _, k0, s0, _ in bss_placed}
     for (a0, n0, k0, s0, _), (a1, n1, k1, s1, _) in zip(everything, everything[1:]):
         if a0 + n0 > a1 and ((a0, k0, s0) in bss_keys or (a1, k1, s1) in bss_keys):
             failures.append(f"overlapping placements {k0} {s0} {a0:05X}+{n0} and {k1} {s1} {a1:05X}+{n1}")
-    placed.sort()
-    link_fill = 0
-    for (a0, n0, k0, s0, f0), (a1, n1, k1, s1, f1) in zip(placed, placed[1:]):
-        if a0 + n0 > a1:
-            failures.append(f"overlapping placements {k0} {s0} {a0:05X}+{n0} and {k1} {s1} {a1:05X}+{n1}")
-        elif f0 and f1 and a1 == (a0 + n0 + 15) & ~15 and a1 > a0 + n0:
-            gap = x.read("S27", a0 + n0, a1 - a0 - n0)
-            if any(gap):
-                failures.append(f"bytes between far segments {k0} {s0} and {k1} {s1} are not link fill")
-            else:
-                link_fill += len(gap)
+    link_fill, link_fill_dgroup, fill_failures = modmod.placement_link_fill(placed)
+    failures += fill_failures
     import farbss
-    fb = farbss.account({k: snapshot[k].decode("latin1") for k, m in man["modules"].items() if m.get("lang", "c") == "c"},
-                        dict(comdefs), [(a, n) for a, n, *_ in placed])
+    c_sources = {k: snapshot[k].decode("latin1") for k, m in man["modules"].items() if m.get("lang", "c") == "c"}
+    probed = None if a.no_farbss_probe else farbss.probe_declarations(man, c_sources)
+    fb = farbss.account(c_sources, dict(comdefs), [(a, n) for a, n, *_ in placed], probed=probed)
     failures += [f"FAR_BSS: {f}" for f in fb["failures"]]
     far_bss_bytes = fb["size"] if fb["accounted"] else 0
     print(f"FAR_BSS {fb['size']} bytes zero fill, {fb['variables']} communals: sizes verified {fb['bytes_verified']}, "
-          f"consistent {fb['bytes_consistent']}, unverified {fb['bytes_unverified']}"
+          f"pinned {fb['bytes_pinned']}, consistent {fb['bytes_consistent']}, unverified {fb['bytes_unverified']}"
+          + ("" if probed is None else f" (declarations of {probed['modules']} modules measured by the compiler"
+             + (f"; {len(probed['failures'])} probe notes" if probed["failures"] else "") + ")")
           + (f"; {len(fb['warnings'])} size conflicts to review (tools/farbss.py)" if fb["warnings"] else ""))
 
     # ---- accounting -------------------------------------------------------------------
@@ -353,8 +356,10 @@ def main() -> int:
         "modules_data_only": sorted(data_only_modules),
         "historical_runtime_data_bytes_accepted": runtime_data_bytes,
         "data_link_fill_bytes": link_fill,
+        "data_link_fill_dgroup_bytes": link_fill_dgroup,
         "far_bss_zero_fill_bytes": far_bss_bytes,
         "far_bss_sizes_verified_bytes": fb["bytes_verified"],
+        "far_bss_sizes_pinned_bytes": fb["bytes_pinned"],
         "far_bss_sizes_consistent_bytes": fb["bytes_consistent"],
         "far_bss_sizes_unverified_bytes": fb["bytes_unverified"],
         "bss_bytes_placed": bss_bytes,
@@ -405,7 +410,8 @@ def main() -> int:
               "runtime_functions_known", "runtime_functions_owned", "owned_functions",
               "historical_runtime_bytes_located_unaccepted", "rtlink_manager_bytes_unaccepted",
               "data_bytes_accepted", "far_data_bytes_accepted", "historical_runtime_data_bytes_accepted",
-              "data_link_fill_bytes", "far_bss_zero_fill_bytes", "far_bss_sizes_verified_bytes",
+              "data_link_fill_bytes", "data_link_fill_dgroup_bytes", "far_bss_zero_fill_bytes", "far_bss_sizes_verified_bytes",
+              "far_bss_sizes_pinned_bytes",
               "far_bss_sizes_consistent_bytes", "far_bss_sizes_unverified_bytes",
               "game_code_span_bytes", "unresolved_code_bytes", "unresolved_data_bytes",
               "scaffold_functions", "exact_translation_units", "complete_tus_relocation_order_proven",
@@ -428,7 +434,7 @@ def main() -> int:
     print(f"exact C: {exact_c} functions, {exact_c_bytes} bytes; unresolved code {progress['unresolved_code_bytes']}"
           + (f"; code-segment data {code_data_bytes} bytes" if code_data_bytes else ""))
     print(f"data: {data_bytes} bytes accepted ({far_data_bytes} far), runtime data {runtime_data_bytes}, link fill "
-          f"{link_fill}, FAR_BSS {far_bss_bytes}; unresolved data {progress['unresolved_data_bytes']}; "
+          f"{link_fill} ({link_fill_dgroup} DGROUP), FAR_BSS {far_bss_bytes}; unresolved data {progress['unresolved_data_bytes']}; "
           f"data-only modules {len(data_only_modules)}")
     print("proof levels: C bytes in complete TUs {exact_c_bytes_in_complete_tus}, in partial modules "
           "{exact_c_bytes_in_partial_modules}; steered {exact_c_bytes_steered}, layout-inferred "

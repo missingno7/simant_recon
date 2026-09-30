@@ -75,10 +75,29 @@ symbols (per-symbol groups); for 3D57 and 3E1D every referencing module is of th
 (build/workers/data/exclude.py), so the definitions are in files without code.  Any module with
 zero claims is reported as `modules_data_only` by validate.py and never counted as recovered code.
 
+A data-only file with **DGROUP data only** has no far frame: its key is `data:55B3@OFF` (OFF = the
+DGROUP offset of its first contribution; source `src/data/d55B3_OFF.c`).  Its `link_after` names the
+module whose contribution to the same DGROUP segment (`_DATA`) precedes it: objects' `_DATA`
+contributions follow link order, FIRST = the first `_DATA` after the DOSSEG `BEGDATA` class (the
+runtime NULL segment, 0000-0041).  The gap may only be alignment fill of its own segment (SEGDEF
+alignment), which must be zero.  Example: the version stamp `"Ver 1.00 Fri Dec 06 14:51:14 1991"` at
+0042 (`data:55B3@0042`): its only reference is the far pointer `fd_55B3_0064`, whose relocation
+(S27 #365) forms a target group of its own, i.e. an external symbol, so the pointer's object (0064-)
+is not the string's.  DGROUP 0042-1811 holds at least three objects (the pointer at 00B4 follows the
+0C46-17FE object's entries inside the `_DATA` segment group).
+
+**Alignment fill.** validate.py counts a gap between two accepted placements as link fill when the
+next segment's SEGDEF alignment explains it (paragraph fill before a far segment, the single `00`
+after an odd-length DGROUP segment before a word-aligned one); the bytes must be zero
+(`data_link_fill_bytes`, of it `data_link_fill_dgroup_bytes`).
+
 **FAR_BSS.** Frame 50F6 (19,408 zero bytes) holds the far communals the linker allocated
 (`tools/farbss.py`): the region must be zero and tiled by registered variables from offset 0;
-sizes are verified by COMDEFs of accepted objects, or consistent with extern declarations or
-S09's save table; the rest is reported as unverified.
+sizes are verified by COMDEFs of accepted objects, *pinned* when the byte-exact code of an accepted
+module depends on the declared size (a compile-only probe enlarges the declaration's first dimension
+and the object changes), or consistent with extern declarations (sizes measured by the compiler,
+`sizeof` probes of the canonical sources) or S09's save table; the rest is reported as unverified.
+Declarations are never turned into definitions.
 
 ## Partial modules
 

@@ -5,6 +5,7 @@ Sections:
                                                     ``oNN_SSSS_OOOO`` until renamed)
   data     C name -> {seg, off, grounding}          DGROUP or far data
   runtime  OBJ name -> {unit, seg, off, library, member}   located historical library publics
+           (runtime data publics carry "kind": "data", unit S27; see add-runtime)
 
 Every address must be grounded: an inventory entry (far/near call, vector,
 switch dispatch...) for code, an original instruction operand for data, or a
@@ -205,15 +206,32 @@ def add_runtime(entries: list[dict]) -> int:
     """Register publics of runtime members located in evidence/toolchain/runtime-location.json
     (e.g. one located below libmatch's minimum size).  Each name must be a public of a located
     member at exactly SEG:OFF, and that member must bind exactly under tools/runtime.py, so the
-    address is grounded by the library member's own location, never by a referencing operand."""
+    address is grounded by the library member's own location, never by a referencing operand.
+
+    Runtime *data* publics (e.g. ``__iob`` of _file.c, SEG 55B3) are accepted when they are
+    publics of a runtime DGROUP data segment that tools/runtime.py places by a symbolic rule and
+    verifies exactly (bytes, fixups, relocations), or near communals placed by COMDEF_ANCHORS
+    (at least two agreeing data fixups).  They are recorded with ``"kind": "data"`` so that game
+    modules bind them as data; the grounding names the rule and its anchors."""
     import runtime as rtmod
     from lockfile import CanonicalLock
     with CanonicalLock():
-        results, *_ = rtmod.verify_all()
+        results, derived, *_ = rtmod.verify_all()
         where = {}
         for r in results:
             for n, (seg, off) in r.get("public_addresses", {}).items():
                 where.setdefault(n, []).append((r, seg, off))
+        comm = {}
+        data_where = {}
+        for d in rtmod.verify_data(results, derived, communals=comm):
+            for n, (seg, off) in d.get("public_addresses", {}).items():
+                data_where.setdefault(n, []).append((d, seg, off, f"{d['segment']} placed by rule {d['rule']} at "
+                                                                    f"{d['linear']:#x}, verifies exactly"))
+        for n, c in comm.items():
+            if c["exact"]:
+                data_where.setdefault(n, []).append(
+                    (c, rtmod.DGROUP, c["linear"] - rtmod.DGROUP * 16,
+                     f"near communal ({c['size']} bytes) placed by rule COMDEF_ANCHORS: {', '.join(c['anchors'])}"))
         d = load()
         added = 0
         for e in entries:
@@ -221,21 +239,31 @@ def add_runtime(entries: list[dict]) -> int:
             name, unit, seg, off = e["name"], e.get("unit", "root"), num(e["seg"]), num(e["off"])
             if not e.get("why"):
                 raise SystemExit(f"{name}: --why is required")
+            dhits = [h for h in data_where.get(name, []) if h[1] == seg and h[2] == off]
+            if dhits and not where.get(name):
+                r, _, _, how = dhits[0]
+                rec = {"kind": "data", "unit": "S27", "seg": seg, "off": off, "library": r["library"],
+                       "member": r["member"], "grounding": f"runtime data: {r['library']} {r['member']} {how} "
+                                                           f"(tools/runtime.py); {e['why']}"}
+            else:
+                rec = None
             hits = [(r, sg, of) for r, sg, of in where.get(name, []) if sg == seg and of == off]
-            if unit != "root" or not hits:
-                found = [f"{r['member']} {sg:04X}:{of:04X}" for r, sg, of in where.get(name, [])]
+            if rec is None and (unit != "root" or not hits):
+                found = ([f"{r['member']} {sg:04X}:{of:04X}" for r, sg, of in where.get(name, [])]
+                         + [f"{h[0]['member']} data {h[1]:04X}:{h[2]:04X}" for h in data_where.get(name, [])])
                 raise SystemExit(f"{name} is not a public of a located runtime member at {unit}:{seg:04X}:{off:04X}"
                                  f" (located: {found or 'none'})")
-            r = hits[0][0]
-            if not r["exact"]:
-                raise SystemExit(f"{name}: member {r['member']} does not bind exactly: {r['reasons'][:3]}")
-            rec = {"unit": unit, "seg": seg, "off": off, "library": r["library"], "member": r["member"],
-                   "module_index": r["module_index"],
-                   "grounding": f"runtime-location: {r['library']} {r['member']} located at {r['linear']:#x}, "
-                                f"binds exactly (tools/runtime.py); {e['why']}"}
+            if rec is None:
+                r = hits[0][0]
+                if not r["exact"]:
+                    raise SystemExit(f"{name}: member {r['member']} does not bind exactly: {r['reasons'][:3]}")
+                rec = {"unit": unit, "seg": seg, "off": off, "library": r["library"], "member": r["member"],
+                       "module_index": r["module_index"],
+                       "grounding": f"runtime-location: {r['library']} {r['member']} located at {r['linear']:#x}, "
+                                    f"binds exactly (tools/runtime.py); {e['why']}"}
             old = d["runtime"].get(name)
             if old is not None:
-                if (old["unit"], old["seg"], old["off"]) != (unit, seg, off):
+                if (old["seg"], old["off"]) != (rec["seg"], rec["off"]):
                     raise SystemExit(f"{name} already registered at {old['unit']}:{old['seg']:04X}:{old['off']:04X}")
                 print(f"{name} already registered")
                 continue
@@ -244,7 +272,8 @@ def add_runtime(entries: list[dict]) -> int:
                 raise SystemExit(f"{name} clashes with a registered code/data name")
             d["runtime"][name] = rec
             added += 1
-            print(f"registered runtime {name} = {unit}:{seg:04X}:{off:04X} ({r['member']})")
+            print(f"registered runtime {rec.get('kind', 'code')} {name} = {rec['unit']}:{seg:04X}:{off:04X} "
+                  f"({rec['member']})")
         save(d)
         print(f"added {added} runtime names")
         return 0

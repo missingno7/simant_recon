@@ -33,6 +33,11 @@ It has placements and zero claims: every segment with bytes must be placed, it m
 contain code, every public must lie at its registered address, and ``link_after`` names
 the module whose far data precedes it in the link ("" = the first far data of the
 program).  A module with zero claims is reported as data only, never as recovered code.
+A data-only file with DGROUP data only (no far segment) has no far frame: it is keyed
+``data:55B3@OFF`` (OFF = DGROUP offset of its first contribution, source
+``src/data/d55B3_OFF.c``), and its ``link_after`` names the module whose contribution of the
+same DGROUP segment (``_DATA``) precedes it (DGROUP link order: "" = the first ``_DATA``
+after the DOSSEG ``BEGDATA`` class); the gap may only be alignment fill of its segment.
 
 Code addresses in data (rule DATAPTR-1, docs/exe-format.md): a far pointer or a near
 offset (offset16) into the module's own code segment binds to the module frame at the
@@ -76,8 +81,9 @@ def parse_key(s: str) -> tuple[str, int, int | None]:
     if not m:
         raise SystemExit(f"bad module key {s!r} (expected UNIT:SEG or UNIT:SEG@OFF)")
     origin = int(m.group(3), 16) if m.group(3) else None
-    if m.group(1) == DATA_UNIT and m.group(3):
-        raise SystemExit(f"module key {s!r}: a data-only module is keyed data:FRAME (its first far frame)")
+    if m.group(1) == DATA_UNIT and (int(m.group(2), 16) == match.DGROUP_SEG) != bool(m.group(3)):
+        raise SystemExit(f"module key {s!r}: a data-only module is keyed data:FRAME (its first far frame), "
+                         f"or data:{match.DGROUP_SEG:04X}@OFF when it has DGROUP data only")
     if origin == 0:
         raise SystemExit(f"module key {s!r}: the first object of a frame is keyed UNIT:SEG")
     return m.group(1), int(m.group(2), 16), origin
@@ -90,7 +96,7 @@ def module_key(unit: str, seg: int, origin: int | None = None) -> str:
 def module_source(unit: str, seg: int, origin: int | None, lang: str) -> str:
     """Canonical source path (relative to the repository root)."""
     if unit == DATA_UNIT:
-        return f"src/data/d{seg:04X}" + (".asm" if lang == "asm" else ".c")
+        return f"src/data/d{seg:04X}" + (f"_{origin:04X}" if origin else "") + (".asm" if lang == "asm" else ".c")
     return f"src/{unit}/m{seg:04X}" + (f"_{origin:04X}" if origin else "") + (".asm" if lang == "asm" else ".c")
 
 
@@ -994,6 +1000,16 @@ def data_module_reasons(obj, module: dict, claims: list) -> list[str]:
             reasons.append(f"segment {n} ({cls}, {length} bytes) is not placed")
     if "link_after" not in module:
         reasons.append("a data-only module records its link position (link_after)")
+    far = far_placements(module)
+    near = near_placements(module)
+    if module.get("seg") == match.DGROUP_SEG:
+        if far:
+            reasons.append("a data-only module with far data is keyed by its first far frame, not data:55B3@OFF")
+        elif near and near[0][0] != match.DGROUP_SEG * 16 + (module.get("origin") or 0):
+            reasons.append(f"key origin {module.get('origin') or 0:04X} is not the DGROUP offset of the first "
+                           f"contribution ({near[0][0] - match.DGROUP_SEG * 16:04X})")
+    elif far and far[0][0] >> 4 != module.get("seg"):
+        reasons.append(f"key frame {module.get('seg'):04X} is not the first far frame ({far[0][0] >> 4:04X})")
     return reasons
 
 
@@ -1003,12 +1019,64 @@ def far_placements(module: dict) -> list[tuple[int, int, str]]:
                   for n, p in module.get("placements", {}).items() if p["seg"] != match.DGROUP_SEG)
 
 
-def link_after_reasons(man: dict, key: str, module: dict) -> list[str]:
+def near_placements(module: dict) -> list[tuple[int, int, str]]:
+    """(linear start, size, segname) of a manifest module's DGROUP placements."""
+    return sorted((p["seg"] * 16 + p["off"], p.get("size", 0), n)
+                  for n, p in module.get("placements", {}).items() if p["seg"] == match.DGROUP_SEG)
+
+
+
+def begdata_end(man: dict) -> int | None:
+    """End of the DOSSEG BEGDATA class (the runtime NULL segment, placed at DGROUP:0 by rule
+    DOSSEG_BEGDATA and accepted by tools/runtime.py): where the first _DATA may start."""
+    rt = man.get("runtime", {})
+    ends = [d["linear"] + d["size"] for m in rt.get("members", []) + rt.get("data_members", [])
+            for d in m.get("data_segments", []) if d.get("rule") == "DOSSEG_BEGDATA"]
+    return max(ends) if ends else None
+
+
+def near_link_after_reasons(man: dict, module: dict, aligns: dict | None = None) -> list[str]:
+    """``link_after`` of a DGROUP-only data module (``data:55B3@OFF``): the objects' contributions
+    to one DGROUP segment (``_DATA``) follow link order, so the module named by ``link_after``
+    must place the same segment and end where this one starts, up to alignment fill of this
+    segment (SEGDEF alignment, ``aligns`` {segname: alignment}; word when unknown), which must
+    be zero.  "" = the first contribution after the DOSSEG BEGDATA class (runtime NULL)."""
+    la = module["link_after"]
+    mine = near_placements(module)
+    if not mine:
+        return ["link_after is recorded but the module has no DGROUP placement"]
+    start, _, seg = mine[0]
+    al = ALIGN_BYTES.get((aligns or {}).get(seg) or "word", 2)
+    if la == "":
+        end, what = begdata_end(man), "the BEGDATA class (runtime NULL segment)"
+        if end is None:
+            return ["link_after FIRST (DGROUP): the runtime BEGDATA segment is not accepted (tools/runtime.py accept)"]
+    else:
+        prev = man["modules"].get(la)
+        if prev is None:
+            return [f"link_after {la}: no such module in the manifest"]
+        theirs = [(a, n) for a, n, s in near_placements(prev) if s == seg]
+        if not theirs:
+            return [f"link_after {la}: that module has no {seg} placement"]
+        end, what = theirs[0][0] + theirs[0][1], f"{la} {seg}"
+    want = (end + al - 1) // al * al
+    if start != want:
+        return [f"link_after {la or 'FIRST'}: {what} ends at {end:05X}, so {seg} (align {al}) must start at "
+                f"{want:05X}, not {start:05X}"]
+    if any(exemod.load().read("S27", end, start - end)):
+        return [f"link_after {la or 'FIRST'}: bytes between {end:05X} and {start:05X} are not link fill"]
+    return []
+
+
+def link_after_reasons(man: dict, key: str, module: dict, aligns: dict | None = None) -> list[str]:
     """``link_after``: the module whose far data immediately precedes this module's first far
     segment in the link ("" = the first far data of the program, section 27's start).  The gap
-    may only be paragraph fill.  This is the link-order position of a module without code."""
+    may only be paragraph fill.  This is the link-order position of a module without code.
+    DGROUP-only data modules (``data:55B3@OFF``): near_link_after_reasons."""
     if "link_after" not in module:
         return []
+    if is_data_module(module) and module.get("seg") == match.DGROUP_SEG:
+        return near_link_after_reasons(man, module, aligns)
     la = module["link_after"]
     mine = far_placements(module)
     if not mine:
@@ -1032,6 +1100,31 @@ def link_after_reasons(man: dict, key: str, module: dict) -> list[str]:
     if any(gap):
         return [f"link_after {la}: bytes between {end:05X} and {start:05X} are not link fill"]
     return []
+
+
+def placement_link_fill(placed: list[tuple]) -> tuple[int, int, list[str]]:
+    """Link fill between the accepted file placements of section 27 (validate.py).
+    ``placed`` = [(linear, size, owner, segname, far, alignment)].  A gap between two adjacent
+    placements that the *next* segment's SEGDEF alignment explains (paragraph fill before a far
+    segment, the single byte after an odd-length DGROUP segment before a word-aligned one) is
+    linker fill and must be zero; overlaps fail.  Returns (fill bytes, of which in DGROUP,
+    failures)."""
+    x = exemod.load()
+    fill = fill_dgroup = 0
+    failures = []
+    placed = sorted(placed, key=lambda p: p[:4])
+    for (a0, n0, k0, s0, *_), (a1, n1, k1, s1, _f1, al1) in zip(placed, placed[1:]):
+        al = ALIGN_BYTES.get(al1 or "", 0)
+        if a0 + n0 > a1:
+            failures.append(f"overlapping placements {k0} {s0} {a0:05X}+{n0} and {k1} {s1} {a1:05X}+{n1}")
+        elif al and 0 < a1 - a0 - n0 < al and a1 % al == 0:
+            gap = x.read("S27", a0 + n0, a1 - a0 - n0)
+            if any(gap):
+                failures.append(f"bytes between {k0} {s0} and {k1} {s1} ({al1} aligned) are not link fill")
+            else:
+                fill += len(gap)
+                fill_dgroup += len(gap) if a0 >= match.DGROUP_SEG * 16 else 0
+    return fill, fill_dgroup, failures
 
 
 def placement_overlap_reasons(man: dict, key: str) -> list[str]:

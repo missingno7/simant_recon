@@ -708,14 +708,17 @@ def run(root: Path, jobs: int, reuse: bool, write_hybrid: bool) -> int:
         code_like = ("C", "ASM", "DATA_IN_CODE", "PAD")
         pairs["unresolved_code_bytes"] = cls_count([(hdr, hdr + TEXT_PREFIX_END)] + ovl, code_like)
         pairs["rtlink_manager_bytes_unaccepted"] = cls_count([(hdr + MANAGER_START, hdr + len(x.image))], OWN)
+        # validate.py counts alignment fill between placements (far paragraph and DGROUP word
+        # fill) as link fill, like LINK_FILL in section 27 here
         pairs["unresolved_data_bytes"] = cls_count(s27r + [(s27r[-1][1], s27_end)],
-                                                   ("DATA", "RUNTIME_DATA", "FAR_BSS")) - link_fill_far
-        pairs["data_link_fill_bytes"] = link_fill_far
+                                                   ("DATA", "RUNTIME_DATA", "FAR_BSS")) - link_fill_data
         why = {"unresolved_code_bytes": "validate counts root:2CFB (50 ASM bytes, frame 2CFB) as exact code but "
                                         "outside its game span 0..29F5C, so its residual is 50 bytes too low",
                "rtlink_manager_bytes_unaccepted": "validate starts the manager at 2CFB0; frame 2CFB holds root:2CFB "
                                                   "(50 ASM) and 12 bytes of paragraph fill -- the manager starts at 2CFF0",
-               "unresolved_data_bytes": "validate counts only far paragraph fill as link fill"}
+               "unresolved_data_bytes": "link fill differs (validate: fill explained by the next segment's alignment)",
+               "data_link_fill_bytes": "validate: fill explained by the next segment's SEGDEF alignment; harness: "
+                                       "1 byte before an even or < 16 before a paragraph address"}
         recon = {k: {"validate": prog.get(k), "harness": v, "same": prog.get(k) == v,
                      **({"note": why[k]} if k in why and prog.get(k) != v else {})} for k, v in pairs.items()}
     vec_owned = sum(1 for v in x.vectors if ("root" if v.section == 0xFFFF else f"S{v.section:02d}",

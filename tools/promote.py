@@ -6,6 +6,8 @@
         [--steered "construct -> decision it steers"] [--verify-only]
     python tools/promote.py CANDIDATE.c --module data:FRAME --placement SEG=FRAME:OFF:SIZE [...]
         --link-after KEY|FIRST [--verify-only]
+    python tools/promote.py CANDIDATE.c --module data:55B3@OFF --placement _DATA=55B3:OFF:SIZE
+        --link-after KEY|FIRST [--verify-only]
 
 CANDIDATE.c is the complete proposed content of the module file
 ``src/<unit>/m<SEG>.c`` (``m<SEG>_<OFF>.c|.asm`` for a later object ``UNIT:SEG@OFF``
@@ -18,7 +20,11 @@ assembled into the code segment, linear hex) as kind DATA_IN_CODE: they come fro
 the candidate object and are compared with the oracle like code.
 ``--module data:FRAME`` promotes a data-only translation unit (far data, no code) into
 ``src/data/dFRAME.c``: placements only, zero claims, and ``--link-after`` names the module
-whose far data precedes it in the link (FIRST = the first far data of the program).  Any
+whose far data precedes it in the link (FIRST = the first far data of the program).  A data-only
+file with DGROUP data only is ``--module data:55B3@OFF`` (OFF = DGROUP offset of its first
+contribution; source ``src/data/d55B3_OFF.c``); its ``--link-after`` names the module whose
+``_DATA`` contribution precedes it (FIRST = the first ``_DATA`` after the runtime BEGDATA class),
+the gap being alignment fill of its segment only.  Any
 module may be promoted with placements and zero claims; validate.py reports such modules as
 data only, never as recovered code.
 Promotion freshly compiles it and requires every already-claimed function of that
@@ -93,7 +99,8 @@ def main() -> int:
                     help="START:END linear (hex), END exclusive: code-segment data (buffer/table) claimed as DATA_IN_CODE")
     ap.add_argument("--link-after", default=None,
                     help="data:FRAME modules: KEY of the module whose far data precedes this one in the "
-                         "link, or FIRST (the program's first far data)")
+                         "link, or FIRST (the program's first far data); data:55B3@OFF modules: KEY of the "
+                         "module whose _DATA precedes this one, or FIRST (the first _DATA after BEGDATA)")
     ap.add_argument("--asm-evidence", default=None,
                     help="required for .asm: why this code is genuine assembly (compiler experiments)")
     ap.add_argument("--source-origin", default=None,
@@ -303,7 +310,8 @@ def main() -> int:
         res = modmod.verify_module(text, module, claims, man=man)
         # manifest-level data rules: link position, and no two modules place the same bytes
         man_after = {**man, "modules": {**man["modules"], key: module}}
-        mreasons = modmod.link_after_reasons(man_after, key, module)
+        mreasons = modmod.link_after_reasons(man_after, key, module,
+                                             {n: d.get("align") for n, d in res.get("data", {}).items()})
         mreasons += modmod.placement_overlap_reasons(man_after, key)
         if mreasons:
             res.setdefault("module_reasons", []).extend(mreasons)

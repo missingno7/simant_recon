@@ -6381,6 +6381,36 @@
    "scaffold": [],
    "object_sha256": "2b373bd83d3304d734a3748145ad937c088d8ae9cef7fedc0eb0c7656021f712"
   },
+  "data:55B3@0042": {
+   "unit": "data",
+   "seg": 21939,
+   "profile": "msc600ax",
+   "flags": [
+    "/AL",
+    "/Os",
+    "/Oe",
+    "/Og",
+    "/Zi"
+   ],
+   "placements": {
+    "_DATA": {
+     "seg": 21939,
+     "off": 66,
+     "size": 34
+    }
+   },
+   "lang": "c",
+   "origin": 66,
+   "origin_evidence": "first _DATA contribution after the runtime BEGDATA class (NULL, DGROUP 0000-0041); its only reference is the initialiser of fd_55B3_0064, an external-symbol relocation (S27 #365, a target group of its own), so 0064- is another object",
+   "source_origin": "hand-written C",
+   "link_after": "",
+   "kind": "data",
+   "source": "src/data/d55B3_0042.c",
+   "source_sha256": "c5953a15914be21c0df170962254d663da6a163a44a7db96b558e7612c0f3c3f",
+   "claims": [],
+   "scaffold": [],
+   "object_sha256": "e4ebada196867a877340cdeb80bc9ec0becb6ccfb4ac06b4ae10b0b1b20058f2"
+  },
   "root:0000": {
    "unit": "root",
    "seg": 0,
@@ -21541,6 +21571,12 @@
       "linear": 381488,
       "size": 30,
       "rule": "REFERENCED"
+     },
+     {
+      "segment": "DBDATA",
+      "linear": 383204,
+      "size": 14,
+      "rule": "REFERENCED"
      }
     ]
    },
@@ -22562,6 +22598,26 @@
       "segment": "_DATA",
       "linear": 381642,
       "size": 2,
+      "rule": "REFERENCED_PUBLIC"
+     },
+     {
+      "segment": "XP",
+      "linear": 383232,
+      "size": 4,
+      "rule": "BRACKETED"
+     }
+    ]
+   },
+   {
+    "library": "llibcr.lib",
+    "member": "_file.c",
+    "module_index": 26,
+    "member_sha256": "b13407f0e9d74f4e62c12f719ed6b075d9826938a2402510310795059cbec625",
+    "data_segments": [
+     {
+      "segment": "_DATA",
+      "linear": 381644,
+      "size": 484,
       "rule": "REFERENCED_PUBLIC"
      }
     ]

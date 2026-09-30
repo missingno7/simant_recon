@@ -39,6 +39,22 @@ relocations are verified against section 27 exactly like a game data placement:
   appearance in member link order (= code order in _TEXT), public contributions concatenated
   at their alignment, common ones (PAD/EPAD) overlaid; the sequence is anchored by a
   REFERENCED contribution (nmsghdr's HDR) and every anchor must agree.
+* BRACKETED: a member (crt0dat) declares the empty segments ``SB``, ``S``, ``SE`` (e.g. XPB, XP,
+  XPE) in this order; the contributions of ``S`` of the code members are concatenated in member
+  link order at their alignment from ``SB``, and must end exactly at ``SE``.  Both bounds are
+  derived placements (REFERENCED) of the bracketing member, so the concatenation is checked by
+  two independent anchors (e.g. _cflush's XP ``dd _flushall`` between XPB and XPE).
+
+Fixup targets in runtime data that no placement above covers:
+
+* ENDCODE: a segment of class ENDCODE (crt0's C_ETEXT, length 0) follows the last CODE-class
+  segment of the program; its frame is the first paragraph after the code areas of the layout
+  model (the root image and the overlay areas of the RTLink section table), which must be
+  section 27's load frame (3D57).  Never taken from the fixup's value.
+* COMDEF_ANCHORS: a near communal of a member (COMDEF, class c_common in DGROUP, e.g. _file.c's
+  ``__bufin``, 512 bytes) is placed where at least two data fixups of placed runtime data
+  segments agree it lies (the original operands minus the fixup addend); it must lie in
+  DGROUP's uninitialised part.  Reported as derived, with its anchors (``communal_placements``).
 
 ``accept`` records the exact data segments per member ("data_segments") and the data-only
 members ("data_members") in layout/manifest.json; validate.py re-verifies them.
@@ -230,7 +246,7 @@ def verify_all(collect: dict | None = None):
                   frame, off = frame_of[tn], placed[tn] - frame_of[tn] * 16
               elif s is not None and s["kind"] == "code":
                   frame, off = s["seg"], s["off"]
-              elif s is not None and s["kind"] == "data":
+              elif s is not None and s["kind"] == "data" and not s.get("library"):
                   frame, off = s["seg"], s["off"]
               elif tk == "external":
                   why = classify_unregistered(tn, idx)
@@ -310,6 +326,12 @@ def verify_all(collect: dict | None = None):
       results.append(best)
     # placement consistency
     conflicts = {k: {hex(v): len(u) for v, u in vals.items()} for k, vals in derived.items() if len(vals) > 1}
+    for n, s in match.symbols().items():
+        # a registered runtime data public must sit where every reference places it
+        if s.get("kind") == "data" and s.get("library"):
+            for k in (f"ext::{n}:DGROUP", f"ext::{n}:{n}"):
+                if k in derived and set(derived[k]) != {s["off"]}:
+                    conflicts[k] = {**{hex(v): len(u) for v, u in derived[k].items()}, "registered": hex(s["off"])}
     anchors = {k: sum(len(u) for u in vals.values()) for k, vals in derived.items()}
     bad_members = set()
     for k in conflicts:
@@ -343,6 +365,10 @@ def _dgroup_segments(obj) -> list[dict]:
             out.append(sd)
             seen.add(sd["name"])
     return out
+
+
+def segment_def_of(obj, name: str) -> dict | None:
+    return next((sd for sd in obj.segment_defs if sd["name"] == name), None)
 
 
 def _single(derived: dict, key: str):
@@ -409,8 +435,37 @@ def _place_data(members, derived) -> dict:
                 place[(mem, sn)] = (got.pop(), "REFERENCED_PUBLIC")
             elif str(sd.get("class", "")).upper() == "BEGDATA":
                 place[(mem, sn)] = (dgbase, "DOSSEG_BEGDATA")
-    # the MSG class: relative layout by the linker rule, anchored by REFERENCED contributions
     code_members = [m for m in members if m["code"]]
+    # rule BRACKETED: SB <= S <= SE (crt0dat's XPB/XP/XPE, ...); the S contributions are
+    # concatenated in member link order from SB and must end exactly at SE (two derived anchors)
+    for m in code_members:
+        names = [sd["name"] for sd in m["obj"].segment_defs]
+        for i in range(len(names) - 2):
+            b, s, e = names[i:i + 3]
+            if b != s + "B" or e != s + "E":
+                continue
+            # SB and SE are empty: their placements are the derived ones (references to them)
+            lo = _single(derived, f"seg:{m['row']['member']}:{b}:DGROUP")
+            hi = _single(derived, f"seg:{m['row']['member']}:{e}:DGROUP")
+            if lo is None or hi is None:
+                continue
+            # contributions in link order: code members by their code position; a data-only
+            # member has no known position, so it may only be the single contribution
+            contrib = [c for c in members if segment_def_of(c["obj"], s) is not None
+                       and _seglen(c["obj"], segment_def_of(c["obj"], s))]
+            if len(contrib) > 1 and not all(c["code"] for c in contrib):
+                continue
+            pos, rel = DGROUP * 16 + lo, {}
+            for c in contrib:
+                sd = segment_def_of(c["obj"], s)
+                al = ALIGN.get(sd.get("alignment"), 1)
+                pos = (pos + al - 1) // al * al
+                rel[(c["row"]["member"], s)] = pos
+                pos += _seglen(c["obj"], sd)
+            if rel and pos == DGROUP * 16 + hi and all(place.get(k, (v,))[0] == v for k, v in rel.items()):
+                for k, v in rel.items():
+                    place.setdefault(k, (v, "BRACKETED"))
+    # the MSG class: relative layout by the linker rule, anchored by REFERENCED contributions
     for cls in ("MSG",):
         order, rel, pos = [], {}, 0
         for m in code_members:
@@ -445,14 +500,69 @@ def _place_data(members, derived) -> dict:
     return place
 
 
-def verify_data(results=None, derived=None, collect: list | None = None) -> list[dict]:
-    """Place and verify the runtime members' DGROUP data segments (module docstring)."""
+def endcode_linear(x=None) -> tuple[int, list[str]]:
+    """Rule ENDCODE: (linear address of an ENDCODE-class segment, reasons).  It is the first
+    paragraph after the last CODE-class segment: the end of the root image's code and of the
+    overlay areas (RTLink section table: load paragraph + memory paragraphs), which must be
+    where section 27 (far data, DGROUP) is loaded."""
+    x = x or exemod.load()
+    ends = [len(x.image)] + [s.load_linear + s.mem_paras * 16 for s in x.sections[:27]]
+    end = (max(ends) + 15) & ~15
+    s27 = x.sections[27].load_linear
+    return end, ([] if end == s27 else [f"ENDCODE: code ends at {end:05X}, section 27 loads at {s27:05X}"])
+
+
+def communal_placements(members, place, x=None) -> dict:
+    """Rule COMDEF_ANCHORS (module docstring): name -> {"linear", "size", "member", "anchors",
+    "exact", "reasons"} for the near communals that fixups of placed runtime data segments
+    reference.  The anchors are the original operands of those fixups."""
+    x = x or exemod.load()
+    s27 = x.sections[27]
+    comm = {}
+    for m in members:
+        for c in getattr(m["obj"], "communals", []):
+            if c.get("kind") == "near":
+                comm.setdefault(c["name"], (m["row"]["member"], c["length"], m["row"]["library"]))
+    anchors = defaultdict(lambda: defaultdict(list))
+    for m in members:
+        mem, obj = m["row"]["member"], m["obj"]
+        for f in obj.linker_fixups:
+            if (f["target_kind"] != "external" or f["target"] not in comm or (mem, f["segment"]) not in place
+                    or f["loc"] not in ("offset16", "pointer32") or f["self_relative"]):
+                continue
+            site = place[(mem, f["segment"])][0] + f["offset"]
+            addend = int.from_bytes(bytes.fromhex(f["encoded_addend"]), "little") + (f.get("displacement") or 0)
+            v = (struct.unpack_from("<H", x.read("S27", site, 2))[0] - addend) & 0xFFFF
+            anchors[f["target"]][v].append(f"{mem} {f['segment']}+{f['offset']:#x}")
+    out = {}
+    for name, vals in anchors.items():
+        mem, size, lib = comm[name]
+        reasons = []
+        if len(vals) != 1:
+            reasons.append(f"anchors disagree: {sorted(hex(v) for v in vals)}")
+        if sum(len(u) for u in vals.values()) < 2:
+            reasons.append("single anchor (at least two agreeing data fixups are required)")
+        lin = DGROUP * 16 + next(iter(vals))
+        if lin < s27.load_linear + len(s27.data) - 3 or lin + size > s27.load_linear + s27.mem_paras * 16:
+            reasons.append(f"{lin:05X}+{size} is not in DGROUP's uninitialised part")
+        out[name] = {"linear": lin, "size": size, "member": mem, "library": lib, "rule": "COMDEF_ANCHORS",
+                     "anchors": [a for u in vals.values() for a in u], "exact": not reasons, "reasons": reasons}
+    return out
+
+
+def verify_data(results=None, derived=None, collect: list | None = None, communals: dict | None = None) -> list[dict]:
+    """Place and verify the runtime members' DGROUP data segments (module docstring).
+    ``communals`` (dict), when given, receives communal_placements."""
     x = exemod.load()
     s27 = x.sections[27]
     if results is None:
         results, derived, _, _ = verify_all()
     members = _data_members(results, derived)
     place = _place_data(members, derived)
+    comm = communal_placements(members, place, x)
+    if communals is not None:
+        communals.update(comm)
+    commons = {n: c["linear"] - DGROUP * 16 for n, c in comm.items() if c["exact"]}
     dgbase = DGROUP * 16
     rows = []
     for m in members:
@@ -468,19 +578,24 @@ def verify_data(results=None, derived=None, collect: list | None = None) -> list
             n = _seglen(obj, sd)
             row = {"library": m["row"]["library"], "member": mem, "module_index": m["row"]["module_index"],
                    "segment": sn, "class": str(sd.get("class", "")), "size": n, "code_member": m["code"],
-                   "member_sha256": m["row"]["member_sha256"]}
+                   "member_sha256": m["row"]["member_sha256"], "align": sd.get("alignment")}
             if (mem, sn) not in place:
                 row.update(exact=False, reasons=["no symbolic placement (no reference anchors this segment)"])
                 rows.append(row)
                 continue
             start, rule = place[(mem, sn)]
             row.update(linear=start, rule=rule)
-            row.update(bind_data_segment(obj, sn, n, start, mem, place, code_place, derived, x, s27, collect))
+            row.update(bind_data_segment(obj, sn, n, start, mem, place, code_place, derived, x, s27, collect,
+                                         commons=commons))
+            if row["exact"]:
+                row["public_addresses"] = {p["name"]: [DGROUP, start - dgbase + p["offset"]]
+                                           for p in obj.publics if p["segment"] == sn}
             rows.append(row)
     return rows
 
 
-def bind_data_segment(obj, sn, n, start, mem, place, code_place, derived, x, s27, collect=None) -> dict:
+def bind_data_segment(obj, sn, n, start, mem, place, code_place, derived, x, s27, collect=None,
+                      commons: dict | None = None) -> dict:
     """Bind one runtime data segment at ``start`` and compare bytes and relocations with S27.
     ``collect`` (list, tools/link.py) receives the bound bytes, relocation sites and the fixup
     fields bound through a placement derived from original operands."""
@@ -513,6 +628,15 @@ def bind_data_segment(obj, sn, n, start, mem, place, code_place, derived, x, s27
             frame, off = code_place[tn]
         elif tk == "segment" and _single(derived, f"seg:{mem}:{tn}:DGROUP") is not None:
             frame, off = DGROUP, _single(derived, f"seg:{mem}:{tn}:DGROUP")   # e.g. a BSS segment
+            via_derived = True
+        elif tk == "segment" and str((segment_def_of(obj, tn) or {}).get("class", "")).upper() == "ENDCODE":
+            lin, why = endcode_linear(x)                  # rule ENDCODE (layout model)
+            if why:
+                reasons += why
+                continue
+            frame, off = lin >> 4, lin & 15
+        elif tk == "external" and tn in (commons or {}) and match.obj_name_lookup(tn) is None:
+            frame, off = DGROUP, commons[tn]              # rule COMDEF_ANCHORS
             via_derived = True
         elif tk == "external":
             s = match.obj_name_lookup(tn)
@@ -591,13 +715,18 @@ def main() -> int:
     out.write_text(json.dumps({"results": results, "conflicts": conflicts, "data": verify_data(results, derived),
                                "placements": {k: {hex(v): [f"{m}@{s:05X}" for m, s in u] for v, u in vals.items()}
                                               for k, vals in derived.items()}}, indent=1))
-    data_rows = verify_data(results, derived)
+    comm = {}
+    data_rows = verify_data(results, derived, communals=comm)
     dok = [d for d in data_rows if d["exact"]]
     print(f"DGROUP data segments {len(data_rows)}: exact {len(dok)} ({sum(d['size'] for d in dok)} bytes; "
           f"{sum(1 for d in dok if not d['code_member'])} of data-only members)")
     for d in data_rows:
         if not d["exact"]:
             print(f"  data {d['member']} {d['segment']}: {'; '.join(d['reasons'][:2])}")
+    for n, c in sorted(comm.items()):
+        print(f"  near communal {n} ({c['member']}, {c['size']} bytes) at DGROUP:{c['linear'] - DGROUP * 16:04X}: "
+              f"{'derived from ' + str(len(c['anchors'])) + ' agreeing anchors' if c['exact'] else 'NOT PLACED'} "
+              f"({', '.join(c['anchors'][:4])}){'; ' + '; '.join(c['reasons']) if c['reasons'] else ''}")
     if a.cmd == "accept":
         from lockfile import CanonicalLock
         import modules as modmod
