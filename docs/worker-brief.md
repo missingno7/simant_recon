@@ -96,6 +96,53 @@ block per segment, so the recovered prefix must reproduce a prefix of the origin
   frameless register-calling code, `lodsw/xlat/loop/in/out`, code-segment data, IVT writes,
   no `mov sp,bp` after inline asm.
 
+## Shared helpers
+
+Analysis tools for the loop. They read the manifest, compile through `compiler.py`, and bind
+through `match.py` and `modules.py`, so they see exactly what search and promote see. They
+never write to `src/` or `layout/`. Their output goes under `build/`. Options default to the
+module's manifest record: profile, flags and placements. `--profile`, `--flags` and
+`--placement` override them. Module keys may be written `root;1383`. The tools refuse a flag
+that Git Bash rewrote, so still `export MSYS_NO_PATHCONV=1`. Each tool's docstring (`-h`) has
+more examples. Do not keep private copies of these helpers in your scratch directory. If one
+is missing a feature, report it.
+
+```
+python tools/slots.py FUNC draft.c                 # slot/register map vs original: "swap tx -0x0a <-> tattr -0x0c",
+                                                   #   unmatched original slots (CSE temps), non-BP differences; --sbs
+python tools/records.py root:1383 [draft.c]        # LEDATA/LINNUM record breaks vs the NEED/FORBID break intervals
+                                                   #   implied by the oracle's relocation order (within/cross function)
+python tools/records.py root:1383 draft.c --plan   # where to add/remove /Zi line entries so the 52-entry flushes
+                                                   #   land in allowed intervals; --sim FUNC, --lines, --records, --obj
+python tools/variants.py a.c b.c c.c --module K    # one compile per variant, in parallel; every claim + in-place drafts
+python tools/variants.py --base m.c --spec v.py    #   V = {name: [(old, new), ...]} edits; E/r/./S/- per function
+python tools/idscan.py draft.c [--before FUNC]     # N = 0..16 dummy externs: which functions become exact at which N
+```
+
+* **slots.py** compiles with `/Fc` (neither `/Fc` nor `/Fa` changes the object). It aligns
+  the candidate's instructions with the original's, masking BP offsets and branch targets,
+  and names the candidate slots from the listing. A *swap* has at least one isolated use. An
+  *operand-order exchange* has every use mirrored within a few instructions, which usually
+  means commutative operands or argument order rather than slot assignment.
+* **records.py**: for two sites of one target group, the oracle order a-then-b with a < b
+  needs a break in (a, b]. With a > b it forbids any break in (b, a], because MSC writes a
+  record's FIXUPPs in descending order. `--obj` prints object offsets, which is what earlier
+  workers quoted. For example, root:1383 GetForageDir has FORBID (0B72,0C0E], which is
+  object (0B70,0C0C]. It is satisfied only while the fifth flush is at 0C25. One extra line
+  entry moves that flush to 0C0B. The line-entry count model is approximate where a LINNUM
+  record stores fewer than 52 entries (merged offsets). records.py warns when its model does
+  not reproduce the object's flushes.
+* **variants.py / idscan.py** use `modules.verify_module`, the same check that promote.py
+  runs, including data placements and the complete-TU extent. Results and every variant
+  source go to `build/helpers/<tool>/<run>/`. File names are `NNN_name.c`, so they stay
+  unique on case-insensitive Windows.
+* **idscan.py is an analysis tool.** A dummy-identifier count that makes a function exact is
+  steering. Use the scan to learn how many identifiers are missing before which function.
+  Then find the natural declarations that supply them: an `#include`, a struct tag or
+  typedef, named prototype parameters, or a missing extern in first-use order. Only when no
+  natural form exists may you promote with `--steered "construct -> decision it steers"`.
+  Never promote `idscan_pad` declarations.
+
 ## Never
 
 Copy original bytes into source (`db`/`_emit` capsules, byte arrays, absolute-address casts

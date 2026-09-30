@@ -6905,17 +6905,47 @@
    "off": 578,
    "grounding": "inventory:far_call,push_cs_call"
   },
-  "f_075B_033C": {
+  "f_075B_0334": {
    "unit": "root",
    "seg": 1883,
-   "off": 828,
-   "grounding": "reviewed: prologue scan in unreached gap; descent ends in a return; no references found (unreferenced or indirect)"
+   "off": 820,
+   "grounding": "reviewed: empty function (xor ax,ax; call __aFchkstk; retf) after f_075B_0242; its relocation 078E9 is recorded in frame 075B, so it is the last function of module 075B (worker rootF)"
+  },
+  "f_075B_033C": {
+   "unit": "root",
+   "seg": 1934,
+   "off": 12,
+   "alias_of": "f_078E_000C"
   },
   "f_075B_0383": {
    "unit": "root",
-   "seg": 1883,
-   "off": 899,
-   "grounding": "reviewed: prologue scan in unreached gap; descent ends in a return; no references found (unreferenced or indirect)"
+   "seg": 1934,
+   "off": 83,
+   "alias_of": "f_078E_0053"
+  },
+  "f_078E_000C": {
+   "unit": "root",
+   "seg": 1934,
+   "off": 12,
+   "grounding": "reviewed: prologue scan in unreached gap; descent ends in a return; no references found (unreferenced or indirect)",
+   "history": [
+    {
+     "was": "f_075B_033C",
+     "why": "re-framed: MZ relocations 078F4/0790C/07922 of this function are recorded in frame 078E, so it belongs to a separate object (module root:078E, starting at 078EC) (worker rootF)"
+    }
+   ]
+  },
+  "f_078E_0053": {
+   "unit": "root",
+   "seg": 1934,
+   "off": 83,
+   "grounding": "reviewed: prologue scan in unreached gap; descent ends in a return; no references found (unreferenced or indirect)",
+   "history": [
+    {
+     "was": "f_075B_0383",
+     "why": "re-framed: MZ relocations 0793B/07955/0796C are recorded in frame 078E (module root:078E) (worker rootF)"
+    }
+   ]
   },
   "f_0798_0000": {
    "unit": "root",
@@ -8579,6 +8609,48 @@
    "off": 51,
    "grounding": "inventory:far_call"
   },
+  "f_16B5_007F": {
+   "unit": "root",
+   "seg": 5813,
+   "off": 127,
+   "grounding": "reviewed: genuine-assembly module 16B5 (line drawing): near proc reached through DGROUP dispatch tables 1E00 (init by depth: 007F/00AB/00A5) and 1F98 (plot by depth: 00B1/03B5/01D4) or near-called clip routine 04D8; extent to the next proc"
+  },
+  "f_16B5_00A5": {
+   "unit": "root",
+   "seg": 5813,
+   "off": 165,
+   "grounding": "reviewed: genuine-assembly module 16B5 (line drawing): near proc reached through DGROUP dispatch tables 1E00 (init by depth: 007F/00AB/00A5) and 1F98 (plot by depth: 00B1/03B5/01D4) or near-called clip routine 04D8; extent to the next proc"
+  },
+  "f_16B5_00AB": {
+   "unit": "root",
+   "seg": 5813,
+   "off": 171,
+   "grounding": "reviewed: genuine-assembly module 16B5 (line drawing): near proc reached through DGROUP dispatch tables 1E00 (init by depth: 007F/00AB/00A5) and 1F98 (plot by depth: 00B1/03B5/01D4) or near-called clip routine 04D8; extent to the next proc"
+  },
+  "f_16B5_00B1": {
+   "unit": "root",
+   "seg": 5813,
+   "off": 177,
+   "grounding": "reviewed: genuine-assembly module 16B5 (line drawing): near proc reached through DGROUP dispatch tables 1E00 (init by depth: 007F/00AB/00A5) and 1F98 (plot by depth: 00B1/03B5/01D4) or near-called clip routine 04D8; extent to the next proc"
+  },
+  "f_16B5_01D4": {
+   "unit": "root",
+   "seg": 5813,
+   "off": 468,
+   "grounding": "reviewed: genuine-assembly module 16B5 (line drawing): near proc reached through DGROUP dispatch tables 1E00 (init by depth: 007F/00AB/00A5) and 1F98 (plot by depth: 00B1/03B5/01D4) or near-called clip routine 04D8; extent to the next proc"
+  },
+  "f_16B5_03B5": {
+   "unit": "root",
+   "seg": 5813,
+   "off": 949,
+   "grounding": "reviewed: genuine-assembly module 16B5 (line drawing): near proc reached through DGROUP dispatch tables 1E00 (init by depth: 007F/00AB/00A5) and 1F98 (plot by depth: 00B1/03B5/01D4) or near-called clip routine 04D8; extent to the next proc"
+  },
+  "f_16B5_04D8": {
+   "unit": "root",
+   "seg": 5813,
+   "off": 1240,
+   "grounding": "reviewed: genuine-assembly module 16B5 (line drawing): near proc reached through DGROUP dispatch tables 1E00 (init by depth: 007F/00AB/00A5) and 1F98 (plot by depth: 00B1/03B5/01D4) or near-called clip routine 04D8; extent to the next proc"
+  },
   "f_171C_0002": {
    "unit": "root",
    "seg": 5916,
@@ -9484,6 +9556,12 @@
    "seg": 6917,
    "off": 455,
    "grounding": "reviewed: prologue scan in unreached gap; descent ends in a return; no references found (unreferenced or indirect)"
+  },
+  "f_1B05_022A": {
+   "unit": "root",
+   "seg": 6917,
+   "off": 554,
+   "grounding": "reviewed: genuine-assembly module 1B05: close proc (push [3D00]; call _close; pop ax; retf) after 01C7, module ends 1B285 (fill, 1B28 at 1B286)"
   },
   "f_1B28_0006": {
    "unit": "root",
@@ -18425,6 +18503,11 @@
    "off": 1996,
    "grounding": "o08_35F5_0000 (InitSimVars): mov es,[CONST word 3D57] ; mov es:[07CC],..."
   },
+  "fd_3D57_07CE": {
+   "seg": 15703,
+   "off": 1998,
+   "grounding": "main: mov es,[83DA] (CONST 3D57); es:[bx+07CE] with bx=2*es:[3D57:07CC] -> far int table indexed by game speed (worker rootF)"
+  },
   "fd_3D57_07E8": {
    "seg": 15703,
    "off": 2024,
@@ -18790,6 +18873,11 @@
    "off": 3098,
    "grounding": "f_0894_02D2: mov es,[805A] (3D57); mov ax,es:[0C1A]; cmp es:[1040],ax; later = SRand1(50)+1"
   },
+  "fd_3D57_0C1C": {
+   "seg": 15703,
+   "off": 3100,
+   "grounding": "f_0DEF_0000: mov es,[8198] (CONST 3D57); mov es:[0C1C],0/1 - Win16 MakeRedInitiator RedInitOn (worker rootF)"
+  },
   "fd_3D57_0C1E": {
    "seg": 15703,
    "off": 3102,
@@ -19045,10 +19133,20 @@
    "off": 0,
    "alias_of": "PherMapRT"
   },
+  "fd_4E37_0000": {
+   "seg": 20023,
+   "off": 0,
+   "grounding": "main: mov ax,0; mov cx,SEG 4E37 (relocated) -> far format string 'SimAnt cannot open enough files to run...' passed to printf (worker rootF)"
+  },
   "fd_4E4B_0000": {
    "seg": 20043,
    "off": 0,
    "grounding": "o09_35F5_0000 (LoadGame): mov ax,0; mov cx,4E4B; es:[bx+2]*es:[bx], es:[bx+4..6] far ptr: save-game table of {size,count,far ptr} (8-byte entries)"
+  },
+  "fd_4F6F_0000": {
+   "seg": 20335,
+   "off": 0,
+   "grounding": "root:1B05 _DATA 3BE2: dd 4F6F:0000 (only reference to segment 4F6F in the image): the 4096-byte LZSS ring buffer (f_1B05_0008 fills 0FEEh bytes with spaces through les di,[3BE2]; f_1B05_0046 indexes it with bx & 0FFFh)"
   },
   "fd_5071_0060": {
    "seg": 20593,
@@ -19510,6 +19608,11 @@
    "off": 1186,
    "grounding": "S25:39C7 o25_39C7_0980:09F7 mov dx,es:[04A2]; shr dx,7 (CONST 8926=50F6); Win16 SimEggB modeLevels[2]"
   },
+  "fd_50F6_04A4": {
+   "seg": 20726,
+   "off": 1188,
+   "grounding": "f_0DEF_0000: mov es,[81A4] (CONST 50F6); mov es:[04A4],0 - Win16 MakeRedInitiator/GetNewRedTask RedTask (worker rootF)"
+  },
   "fd_50F6_04A6": {
    "seg": 20726,
    "off": 1190,
@@ -19519,6 +19622,11 @@
    "seg": 20726,
    "off": 1214,
    "grounding": "o06_35F5_0000: mov es,[CONST 8464 = 50F6]; es:[04BE] (S06:35F5 InitSimYard/yard sim unit)"
+  },
+  "fd_50F6_04C0": {
+   "seg": 20726,
+   "off": 1216,
+   "grounding": "main: mov es,[83DC] (CONST 50F6); cmp es:[04C0],ax (worker rootF)"
   },
   "fd_50F6_04C2": {
    "seg": 20726,
@@ -19540,6 +19648,11 @@
    "off": 1224,
    "grounding": "AddMsgBalloon: es:[bx+4C8]/[bx+4CA] = x,y with bx=count*4 (Win16 CurBalloonPnts)"
   },
+  "fd_50F6_04E0": {
+   "seg": 20726,
+   "off": 1248,
+   "grounding": "f_0DEF_0233: mov es,[81B4] (CONST 50F6); es:[04E0] = es:[3D57:02BC], adjusted by 5 - Win16 GetNewRedTask RedDestX (worker rootF)"
+  },
   "fd_50F6_04E2": {
    "seg": 20726,
    "off": 1250,
@@ -19554,6 +19667,11 @@
    "seg": 20726,
    "off": 1254,
    "grounding": "AddMsgBalloon: es:[si+4E6]=style (Win16 CurBalloonFlags)"
+  },
+  "fd_50F6_04F2": {
+   "seg": 20726,
+   "off": 1266,
+   "grounding": "f_0DEF_0233: mov bx,04F2; mov es,[81B8] (CONST 50F6) = es:[3D57:02BE] - Win16 GetNewRedTask RedDestY (worker rootF)"
   },
   "fd_50F6_04F4": {
    "seg": 20726,
@@ -20975,6 +21093,11 @@
    "off": 18954,
    "grounding": "f_218D_000C: rep movsw 8 words 50F6:49FA -> 4A0A (previous click event for double-click detection; +0Ch=4A16, +6=4A10)"
   },
+  "fd_50F6_4A12": {
+   "seg": 20726,
+   "off": 18962,
+   "grounding": "f_24AB_02AD: mov es,[8A40] (CONST 50F6); mov ax,es:[si+4A12h]/dx,es:[si+4A14h] with si=4*font -> far array of font pointers (Win16 font_SetFont fonts[]); font_InitFonts stores [2..5] (worker rootF)"
+  },
   "fd_50F6_4A42": {
    "seg": 20726,
    "off": 19010,
@@ -21054,11 +21177,6 @@
    "seg": 20726,
    "off": 19370,
    "grounding": "f_284A_0013: mov es,[8AB0]; mov es:[di+4BAA],ax (far int array[14])"
-  },
-  "fd_50F6_5AA0": {
-   "seg": 20726,
-   "off": 23200,
-   "grounding": "f_205F_0004: mov es,[8A06] (CONST 50F6); es:[5AA0]=g_3DB2, es:[5AA2]=g_3DB4 (screen width/height copy) (worker rootF)"
   },
   "fd_55B3_0064": {
    "seg": 21939,
@@ -21235,6 +21353,11 @@
    "off": 13844,
    "grounding": "f_0250_012D: mov es,[7E94] (CONST word 55B3); push es:[3614] for WinPrintf total pages"
   },
+  "fd_55B3_38A0": {
+   "seg": 21939,
+   "off": 14496,
+   "grounding": "main: mov es,[83C8] (CONST 55B3); mov es:[38A0],8 - far-declared DGROUP int (worker rootF)"
+  },
   "fd_55B3_3DE6": {
    "seg": 21939,
    "off": 15846,
@@ -21405,6 +21528,11 @@
    "off": 7090,
    "grounding": "f_14EE_04B5: mov al,[si+1BB2] (DS=DGROUP) byte tile per direction"
   },
+  "g_1CE8": {
+   "seg": 21939,
+   "off": 7400,
+   "grounding": "main: mov byte ptr [1CE8],1 (first statement) (worker rootF)"
+  },
   "g_1DE2": {
    "seg": 21939,
    "off": 7650,
@@ -21419,6 +21547,91 @@
    "seg": 21939,
    "off": 7655,
    "grounding": "f_1699_0110: mask height byte (mov [1DE7],al)"
+  },
+  "g_1DE8": {
+   "seg": 21939,
+   "off": 7656,
+   "grounding": "root:16B5 line-drawing module (genuine assembly): bitmap width (from header word 0; mov [1DE8],ax in f_16B5_0033)"
+  },
+  "g_1DEA": {
+   "seg": 21939,
+   "off": 7658,
+   "grounding": "root:16B5 line-drawing module (genuine assembly): bitmap height (header word 1)"
+  },
+  "g_1DEC": {
+   "seg": 21939,
+   "off": 7660,
+   "grounding": "root:16B5 line-drawing module (genuine assembly): bitmap width-1 (clip max x)"
+  },
+  "g_1DEE": {
+   "seg": 21939,
+   "off": 7662,
+   "grounding": "root:16B5 line-drawing module (genuine assembly): bitmap height-1 (clip max y)"
+  },
+  "g_1DF0": {
+   "seg": 21939,
+   "off": 7664,
+   "grounding": "root:16B5 line-drawing module (genuine assembly): bitmap bits segment (mov [1DF0],es)"
+  },
+  "g_1DF2": {
+   "seg": 21939,
+   "off": 7666,
+   "grounding": "root:16B5 line-drawing module (genuine assembly): bitmap bits offset (header+4)"
+  },
+  "g_1DF4": {
+   "seg": 21939,
+   "off": 7668,
+   "grounding": "root:16B5 line-drawing module (genuine assembly): line work word"
+  },
+  "g_1DF6": {
+   "seg": 21939,
+   "off": 7670,
+   "grounding": "root:16B5 line-drawing module (genuine assembly): line work word"
+  },
+  "g_1DF8": {
+   "seg": 21939,
+   "off": 7672,
+   "grounding": "root:16B5 line-drawing module (genuine assembly): line work byte"
+  },
+  "g_1DF9": {
+   "seg": 21939,
+   "off": 7673,
+   "grounding": "root:16B5 line-drawing module (genuine assembly): line work byte"
+  },
+  "g_1DFA": {
+   "seg": 21939,
+   "off": 7674,
+   "grounding": "root:16B5 line-drawing module (genuine assembly): clip outcode work word"
+  },
+  "g_1DFC": {
+   "seg": 21939,
+   "off": 7676,
+   "grounding": "root:16B5 line-drawing module (genuine assembly): plot work word"
+  },
+  "g_1DFE": {
+   "seg": 21939,
+   "off": 7678,
+   "grounding": "root:16B5 line-drawing module (genuine assembly): row stride (bytes per row)"
+  },
+  "g_1E00": {
+   "seg": 21939,
+   "off": 7680,
+   "grounding": "root:16B5 line-drawing module (genuine assembly): table of 3 near init procs by bitmap depth (call [bx+1E00])"
+  },
+  "g_1E06": {
+   "seg": 21939,
+   "off": 7686,
+   "grounding": "root:16B5 line-drawing module (genuine assembly): row start offset table built by f_16B5_007F (mov di,1E06h; stosw)"
+  },
+  "g_1F96": {
+   "seg": 21939,
+   "off": 8086,
+   "grounding": "root:16B5 line-drawing module (genuine assembly): current near plot proc (call word ptr [1F96])"
+  },
+  "g_1F98": {
+   "seg": 21939,
+   "off": 8088,
+   "grounding": "root:16B5 line-drawing module (genuine assembly): table of 3 near plot procs by depth (mov ax,[bx+1F98]; mov [1F96],ax)"
   },
   "g_1F9E": {
    "seg": 21939,

@@ -339,10 +339,6 @@ int far DigTileThemR(int x, int y)
     return 1;
 }
 
-/* SCAFFOLD BEGIN: f_14EE_09F1 best draft (SmoothEdgesB): 272 bytes differ. Target keeps x in DI, bits in SI
-   (no home, frame 8) and y in memory; MSC here enregisters x (SI) and y (DI) and puts bits in
-   memory (frame 10). `register` has no effect under /Og; declaration order, local copy of x,
-   |=/+= spellings and a far pointer temp were tried */
 void far f_14EE_09F1(int x, int y)
 {
     int v;
@@ -362,13 +358,21 @@ void far f_14EE_09F1(int x, int y)
         return;
     v = v > 0x4d ? 0x2f : 0;
     bits = 0;
-    if (y < 2 || RIsItDirt(MapB[x][y - 1]))
+    if (y < 2)
         bits = 1;
-    if (x > 0x3e || RIsItDirt(MapB[x + 1][y]))
+    else if (RIsItDirt(MapB[x][y - 1]))
+        bits = 1;
+    if (x > 0x3e)
         bits |= 2;
-    if (y > 0x3e || RIsItDirt(MapB[x][y + 1]))
+    else if (RIsItDirt(MapB[x + 1][y]))
+        bits |= 2;
+    if (y > 0x3e)
         bits |= 4;
-    if (x < 1 || RIsItDirt(MapB[x - 1][y]))
+    else if (RIsItDirt(MapB[x][y + 1]))
+        bits |= 4;
+    if (x < 1)
+        bits |= 8;
+    else if (RIsItDirt(MapB[x - 1][y]))
         bits |= 8;
     if (bits)
         MapB[x][y] = bits + v + 0x1f;
@@ -378,7 +382,6 @@ void far f_14EE_09F1(int x, int y)
         MapB[x][y] = 0x4e;
 }
 
-/* SCAFFOLD END */
 
 int far RIsItDirt(int v)
 {
@@ -389,7 +392,6 @@ int far RIsItDirt(int v)
     return 1;
 }
 
-/* SCAFFOLD BEGIN: f_14EE_0B5A (SmoothEdgesR) mirror of f_14EE_09F1, same residue */
 void far f_14EE_0B5A(int x, int y)
 {
     int v;
@@ -409,13 +411,21 @@ void far f_14EE_0B5A(int x, int y)
         return;
     v = v > 0x4d ? 0x2f : 0;
     bits = 0;
-    if (y < 2 || RIsItDirt(MapR[x][y - 1]))
+    if (y < 2)
         bits = 1;
-    if (x > 0x3e || RIsItDirt(MapR[x + 1][y]))
+    else if (RIsItDirt(MapR[x][y - 1]))
+        bits = 1;
+    if (x > 0x3e)
         bits |= 2;
-    if (y > 0x3e || RIsItDirt(MapR[x][y + 1]))
+    else if (RIsItDirt(MapR[x + 1][y]))
+        bits |= 2;
+    if (y > 0x3e)
         bits |= 4;
-    if (x < 1 || RIsItDirt(MapR[x - 1][y]))
+    else if (RIsItDirt(MapR[x][y + 1]))
+        bits |= 4;
+    if (x < 1)
+        bits |= 8;
+    else if (RIsItDirt(MapR[x - 1][y]))
         bits |= 8;
     if (bits)
         MapR[x][y] = bits + v + 0x1f;
@@ -425,7 +435,6 @@ void far f_14EE_0B5A(int x, int y)
         MapR[x][y] = 0x4e;
 }
 
-/* SCAFFOLD END */
 
 /* SCAFFOLD BEGIN: f_14EE_0C9C/f_14EE_0D71 (FixExitMapB/R) best drafts: target frame 10 with i [bp-4], best
    [bp-6], ny in SI, nx in AX, and the final ExitMap store hoists `mov ax,SEG; mov es,ax` above

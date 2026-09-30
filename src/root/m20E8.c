@@ -104,8 +104,7 @@ int far win_LoadAllWindows(void)
     font_InitFonts();
     win_LockInit();
     _fmemset(win_drawHooks, 0, 0xb4);
-    for (i = 0; i < 45; i++)
-        win_offsets[i] = g_635C;
+    for (i = 0; i < 45; i++) win_offsets[i] = g_635C;
     h = db_LoadObject(g_5A97, 9);
     if (h) {
         _fmemcpy(win_offsets, f_171C_1B84(h), 0x140);

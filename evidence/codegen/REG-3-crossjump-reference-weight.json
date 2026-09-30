@@ -1,0 +1,27 @@
+{
+ "id": "REG-3",
+ "question": "Do statements that are later cross-jumped (tail-merged) still count as references for /Oe register priority? Positive control f_14EE_09F1/0B5A (SmoothEdgesB/R) and f_0BE8_0D67/0E0F (GetEnterDirB/R): exact only with duplicated `else if (...) same-statement` forms; the `||` forms compile to the same control flow but give SI/DI to other variables. Rule: under /Oe /Og the SI/DI priority counts source references before cross-jumping; writing `if (a) s; else if (b) s;` instead of `if (a || b) s;` adds references to the variables in s without changing the control flow, so it can move a variable into a register (and a parameter out of one).",
+ "header": "extern unsigned char far M[64][64];\nextern int far D(int v);\nextern int far R8(void);\n",
+ "variants": {
+  "or_form": "void far f(int x, int y)\n{\n    int v;\n    int bits;\n\n    if (x < 0 || x > 63 || y > 63)\n        return;\n    v = M[x][y];\n    if (v < 0x20)\n        return;\n    v = v > 0x4d ? 0x2f : 0;\n    bits = 0;\n    if (y < 2 || D(M[x][y - 1]))\n        bits = 1;\n    if (x > 62 || D(M[x + 1][y]))\n        bits |= 2;\n    if (y > 62 || D(M[x][y + 1]))\n        bits |= 4;\n    if (x < 1 || D(M[x - 1][y]))\n        bits |= 8;\n    if (bits)\n        M[x][y] = bits + v;\n    else if (v == 0)\n        M[x][y] = R8();\n}\n",
+  "else_if_duplicate": "void far f(int x, int y)\n{\n    int v;\n    int bits;\n\n    if (x < 0 || x > 63 || y > 63)\n        return;\n    v = M[x][y];\n    if (v < 0x20)\n        return;\n    v = v > 0x4d ? 0x2f : 0;\n    bits = 0;\n    if (y < 2)\n        bits = 1;\n    else if (D(M[x][y - 1]))\n        bits = 1;\n    if (x > 62)\n        bits |= 2;\n    else if (D(M[x + 1][y]))\n        bits |= 2;\n    if (y > 62)\n        bits |= 4;\n    else if (D(M[x][y + 1]))\n        bits |= 4;\n    if (x < 1)\n        bits |= 8;\n    else if (D(M[x - 1][y]))\n        bits |= 8;\n    if (bits)\n        M[x][y] = bits + v;\n    else if (v == 0)\n        M[x][y] = R8();\n}\n"
+ },
+ "profiles": [
+  {
+   "profile": "msc600ax",
+   "flags": [
+    "/AL",
+    "/Os",
+    "/Oe",
+    "/Og",
+    "/Zi"
+   ]
+  }
+ ],
+ "expect": {
+  "or_form@0": "mov word ptr [bp - 2], 0",
+  "else_if_duplicate@0": "sub si, si",
+  "or_form@0 ": "mov si, word ptr [bp + 6]",
+  "else_if_duplicate@0 ": "mov di, word ptr [bp + 6]"
+ }
+}

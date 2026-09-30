@@ -98,6 +98,41 @@ void far f_295C_0015(void)
     }
 }
 
+int far f_295C_00C9(int type, int prio)
+{
+    int i;
+    int bestIdx;
+    int bestAge;
+    struct Chan far *c;
+    int best;
+    struct Snd far *s;
+
+    best = 15;
+    bestAge = bestIdx = i = 0;
+    if (prio < 1)
+        return -1;
+    for (c = fd_50F6_4A4E; c->type; c = &fd_50F6_4A4E[++i]) {
+        if (c->type == 1 && fd_55B3_6B4E[c->num].busy == 0) {
+            c->c2 = 0;
+            s = fd_55B3_6B4E[c->num].snd;
+            if (s && s->state == 1)
+                f_0000_0149(s);
+            fd_55B3_6B4E[c->num].snd = 0;
+        }
+        if (c->type == type) {
+            if (c->c2 < best || (c->c2 == best && c->c5 > bestAge)) {
+                best = c->c2;
+                bestIdx = i;
+                bestAge = c->c5;
+            }
+        }
+        c->c5++;
+    }
+    if (prio >= best)
+        return bestIdx;
+    return -1;
+}
+
 extern struct Drv far fd_50F6_0000[];
 
 void far f_295C_01EC(int prio, int dev, int note, int vel)
@@ -217,42 +252,7 @@ void far f_295C_0578(int dev, int a)
     }
 }
 
-/* SCAFFOLD BEGIN: best drafts, not exact (00C9: stack-slot order of best/c/bestAge/i/bestIdx and one compare operand order; 0391: missing dead spill of the i*6 CSE to [bp-2], char local slot) */
-int far f_295C_00C9(int type, int prio)
-{
-    int best;
-    int i;
-    int bestIdx;
-    int bestAge;
-    struct Chan far *c;
-    struct Snd far *s;
-
-    best = 15;
-    bestAge = bestIdx = i = 0;
-    if (prio >= 1) {
-    for (c = fd_50F6_4A4E; c->type; c = &fd_50F6_4A4E[++i]) {
-        if (c->type == 1 && fd_55B3_6B4E[c->num].busy == 0) {
-            c->c2 = 0;
-            s = fd_55B3_6B4E[c->num].snd;
-            if (s && s->state == 1)
-                f_0000_0149(s);
-            fd_55B3_6B4E[c->num].snd = 0;
-        }
-        if (c->type == type) {
-            if (c->c2 < best || (c->c2 == best && c->c5 > bestAge)) {
-                best = c->c2;
-                bestIdx = i;
-                bestAge = c->c5;
-            }
-        }
-        c->c5++;
-    }
-    if (prio >= best)
-        return bestIdx;
-    }
-    return -1;
-}
-
+/* SCAFFOLD BEGIN: best draft of f_295C_0391, not exact (original spills the i*6 CSE to [bp-2] and keeps the char at [bp-4]; this draft puts the char at [bp-1] and drops the spill) */
 void far f_295C_0391(void)
 {
     int i;

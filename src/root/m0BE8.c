@@ -13,63 +13,63 @@ extern void far myBeginSound(int a, int b, int c);
 extern void far f_00DF_00B1(int id, int arg);
 extern void far o14_384C_0B6A(int a, int b, int c);
 
-extern int far fd_50F6_0AFA[6];
-extern int far fd_50F6_0AEC[6];
-extern int far fd_50F6_0EB6[32];
-extern int far ListIndexA;
-extern unsigned char far AlistT[];
-extern int far ListIndexB;
-extern unsigned char far BlistT[];
-extern int far ListIndexR;
-extern unsigned char far RlistT[];
-extern int far fd_50F6_0A06;
-extern int far fd_50F6_04E2;
-extern int far fd_50F6_04C2;
-extern int far fd_50F6_0354;
-extern int far fd_50F6_0EAC;
-extern int far fd_50F6_0376;
-extern int far fd_50F6_0366;
-extern int far fd_50F6_0400;
-extern int far fd_50F6_07CA[2];
+extern char far Dx8[8];
+extern char far Dy8[8];
 extern unsigned char far fd_3D57_0184[][16];
-extern int far BpopT;
-extern int far RpopT;
-extern int far fd_50F6_0352;
-extern int far TERRAINset;
 extern int far fd_3D57_0C1E;
-extern int far fd_50F6_0242;
-extern unsigned char far fd_50F6_02C0[];
-extern unsigned char far fd_50F6_0256[];
 extern unsigned char far MapA[128][64];
+extern unsigned char far MapB[64][64];
+extern unsigned char far MapR[64][64];
+extern unsigned char far ExitMapB[64][64];
+extern unsigned char far ExitMapR[64][64];
+extern unsigned char far LifeB[64][64];
+extern unsigned char far LifeR[64][64];
+extern unsigned char far AlistT[];
+extern unsigned char far BlistT[];
+extern unsigned char far RlistT[];
 extern unsigned char far PherMapA[64][32];
 extern unsigned char far fd_3E1D_D89F[64][32];
 extern unsigned char far PherMapBN[64][32];
 extern unsigned char far PherMapBT[64][32];
 extern unsigned char far PherMapRN[64][32];
 extern unsigned char far PherMapRT[64][32];
-extern unsigned char far MapB[64][64];
-extern int far SRand16(void);
-extern int far SRand8(void);
+extern long far fd_50F6_0214;
+extern int far fd_50F6_0228;
+extern int far fd_50F6_0242;
+extern unsigned char far fd_50F6_0256[];
+extern unsigned char far fd_50F6_02C0[];
+extern int far BpopT;
+extern int far RpopT;
+extern int far fd_50F6_0352;
+extern int far fd_50F6_0354;
+extern int far fd_50F6_0366;
+extern int far fd_50F6_0376;
+extern int far fd_50F6_0400;
+extern int far fd_50F6_04C2;
+extern int far fd_50F6_04E2;
+extern int far fd_50F6_07CA[2];
+extern int far fd_50F6_0A06;
+extern int far fd_50F6_0AEC[6];
+extern int far fd_50F6_0AFA[6];
+extern int far ListIndexA;
+extern int far ListIndexB;
+extern int far ListIndexR;
+extern int far fd_50F6_0EAC;
+extern int far fd_50F6_0EB6[32];
+extern int far TERRAINset;
+extern int far fd_50F6_0F3A;
 extern int far fd_50F6_1040;
 extern int far FoodB;
 extern int far FoodR;
-extern int far fd_50F6_0F3A;
 extern unsigned char near g_1B9A[];
 extern unsigned char near g_1B9E[];
-extern unsigned char far LifeB[64][64];
-extern char far Dy8[8];
-extern char far Dx8[8];
-extern unsigned char far ExitMapB[64][64];
-extern unsigned char far ExitMapR[64][64];
-extern long far fd_50F6_0214;
-extern int far fd_50F6_0228;
+extern int far SRand16(void);
+extern int far SRand8(void);
 extern long far TickCount(void);
-extern unsigned char far LifeR[64][64];
 extern void far DigTileB(int x, int y);
 extern void far DigTileR(int x, int y);
 extern void far AddAntToBList(int x, int y, int life, int state, int dir);
 extern void far AddAntToRList(int x, int y, int life, int state, int dir);
-extern unsigned char far MapR[64][64];
 
 void far f_0BE8_0002(void);
 void far PlaceDrop(int i);
@@ -79,11 +79,9 @@ void far DropWater(int y);
 void far f_0BE8_08BD(int x, int y);
 int far InNestBounds(int x, int y);
 
-/* SCAFFOLD BEGIN: unrecovered f_0BE8_0002 kept in place for CONST order */
-/* f_0BE8_0002 (CountAnts?): best draft, 13 bytes differ: operand order of the
-   commutative far-memory sums (AEC[1], AFA[1], AFA[2], totals) depends on the
-   compiler's symbol-table state (number/names of earlier declarations), not on
-   source order; see REPORT.md (ORD-1 observation). */
+/* f_0BE8_0002: counts ants per caste (Win16 CountAnts, LOW confidence).  The far data
+   externs above are declared in address order; with that declaration order the
+   commutative sums below come out in the original operand order (SYM-1). */
 void far f_0BE8_0002(void)
 {
     int i;
@@ -152,7 +150,6 @@ void far f_0BE8_0002(void)
     fd_50F6_0354 = 0;
 }
 
-/* SCAFFOLD END */
 
 void far FullCount(void)
 {
@@ -548,12 +545,6 @@ int far GetExitDirR(int x, int y, int dir)
     return best;
 }
 
-/* SCAFFOLD BEGIN: f_0BE8_0D67/f_0BE8_0E0F (GetEnterDirB/R) best drafts: target keeps ny in memory [bp-2] and
-   value in DI, back/bestValue/best at [bp-6]/[bp-8]/[bp-A]. MSC gives DI to ny and puts
-   value in memory (ny and value have disjoint live ranges and share storage); a struct
-   {best,bestValue,back} fixes the slot order but not the DI choice. Tried: declaration orders,
-   block-scoped locals, register keyword (ignored under /Og), nested-if and || forms,
-   value-free expression form, 0..17 padding declarations */
 int far f_0BE8_0D67(int x, int y, int dir)
 {
     int back;
@@ -579,10 +570,13 @@ int far f_0BE8_0D67(int x, int y, int dir)
             continue;
         if (bestValue < value)
             continue;
-        if (bestValue <= value && SRand2() == 0)
-            continue;
-        bestValue = value;
-        best = i;
+        if (bestValue > value) {
+            bestValue = value;
+            best = i;
+        } else if (SRand2()) {
+            bestValue = value;
+            best = i;
+        }
     }
     return best;
 }
@@ -612,15 +606,17 @@ int far f_0BE8_0E0F(int x, int y, int dir)
             continue;
         if (bestValue < value)
             continue;
-        if (bestValue <= value && SRand2() == 0)
-            continue;
-        bestValue = value;
-        best = i;
+        if (bestValue > value) {
+            bestValue = value;
+            best = i;
+        } else if (SRand2()) {
+            bestValue = value;
+            best = i;
+        }
     }
     return best;
 }
 
-/* SCAFFOLD END */
 
 void far TryAntTheme(void)
 {

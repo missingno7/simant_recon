@@ -1,0 +1,59 @@
+{
+ "id": "REG-3",
+ "question": "Do statements that are later cross-jumped (tail-merged) still count as references for /Oe register priority? Positive control f_14EE_09F1/0B5A (SmoothEdgesB/R) and f_0BE8_0D67/0E0F (GetEnterDirB/R): exact only with duplicated `else if (...) same-statement` forms; the `||` forms compile to the same control flow but give SI/DI to other variables. Rule: under /Oe /Og the SI/DI priority counts source references before cross-jumping; writing `if (a) s; else if (b) s;` instead of `if (a || b) s;` adds references to the variables in s without changing the control flow, so it can move a variable into a register (and a parameter out of one).",
+ "results": [
+  {
+   "variant": "or_form",
+   "profile_index": 0,
+   "profile": "msc600ax",
+   "flags": [
+    "/AL",
+    "/Os",
+    "/Oe",
+    "/Og",
+    "/Zi"
+   ],
+   "source_sha256": "6405065f8aa927bb22d9b5e57e6238ca802c5c32963b73c5ef857e23208f8aa8",
+   "bytes": "558becb80a009a0000000057568b76060bf67c3383fe3f7f2e8b7e0883ff3f7f26b1068bded3e303df895ef681c300008e060000895ef88c46fa268a072ae48946fc3d20007d03e9b8003d4d007e05b82f00eb022bc08946fcc746fe000083ff027c158b5ef6268a87ffff2ae4509a000000005b0bc07405c746fe010083fe3e7f198e0600008b5ef6268a8740002ae4509a000000005b0bc07404804efe0283ff3e7f198e0600008b5ef6268a8701002ae4509a000000005b0bc07404804efe0483fe017c198e0600008b5ef6268a87c0ff2ae4509a000000005b0bc07404834efe08837efe0074088a46fe0246fceb0b837efc00750b9a00000000c45ef82688075e5f8be55dcb",
+   "disasm": "push bp; mov bp, sp; mov ax, 0xa; lcall 0, 0; push di; push si; mov si, word ptr [bp + 6]; or si, si; jl 0x47; cmp si, 0x3f; jg 0x47; mov di, word ptr [bp + 8]; cmp di, 0x3f; jg 0x47; mov cl, 6; mov bx, si; shl bx, cl; add bx, di; mov word ptr [bp - 0xa], bx; add bx, 0; mov es, word ptr [0]; mov word ptr [bp - 8], bx; mov word ptr [bp - 6], es; mov al, byte ptr es:[bx]; sub ah, ah; mov word ptr [bp - 4], ax; cmp ax, 0x20; jge 0x4a; jmp 0x102; cmp ax, 0x4d; jle 0x54; mov ax, 0x2f; jmp 0x56; sub ax, ax; mov word ptr [bp - 4], ax; mov word ptr [bp - 2], 0; cmp di, 2; jl 0x78; mov bx, word ptr [bp - 0xa]; mov al, byte ptr es:[bx - 1]; sub ah, ah; push ax; lcall 0, 0; pop bx; or ax, ax; je 0x7d; mov word ptr [bp - 2], 1; cmp si, 0x3e; jg 0x9b; mov es, word ptr [0]; mov bx, word ptr [bp - 0xa]; mov al, byte ptr es:[bx + 0x40]; sub ah, ah; push ax; lcall 0, 0; pop bx; or ax, ax; je 0x9f; or byte ptr [bp - 2], 2; cmp di, 0x3e; jg 0xbd; mov es, word ptr [0]; mov bx, word ptr [bp - 0xa]; mov al, byte ptr es:[bx + 1]; sub ah, ah; push ax; lcall 0, 0; pop bx; or ax, ax; je 0xc1; or byte ptr [bp - 2], 4; cmp si, 1; jl 0xdf; mov es, word ptr [0]; mov bx, word ptr [bp - 0xa]; mov al, byte ptr es:[bx - 0x40]; sub ah, ah; push ax; lcall 0, 0; pop bx; or ax, ax; je 0xe3; or word ptr [bp - 2], 8; cmp word ptr [bp - 2], 0; je 0xf1; mov al, byte ptr [bp - 2]; add al, byte ptr [bp - 4]; jmp 0xfc; cmp word ptr [bp - 4], 0; jne 0x102; lcall 0, 0; les bx, ptr [bp - 8]; mov byte ptr es:[bx], al; pop si; pop di; mov sp, bp; pop bp; retf"
+  },
+  {
+   "variant": "else_if_duplicate",
+   "profile_index": 0,
+   "profile": "msc600ax",
+   "flags": [
+    "/AL",
+    "/Os",
+    "/Oe",
+    "/Og",
+    "/Zi"
+   ],
+   "source_sha256": "a989989d58228341fb3c6815e638b7f0f4c057e0117e5b9a6cbd70540c48a711",
+   "bytes": "558becb808009a0000000057568b7e060bff7c3283ff3f7f2d837e083f7f27b1068bdfd3e3035e08895ef881c300008e060000895efa8c46fc268a072ae48946fe3d20007d03e9af003d4d007e05b82f00eb022bc08946fe2bf6837e08027c158b5ef8268a87ffff2ae4509a000000005b0bc07403be010083ff3e7f198e0600008b5ef8268a8740002ae4509a000000005b0bc0740383ce02837e083e7f198e0600008b5ef8268a8701002ae4509a000000005b0bc0740383ce0483ff017c198e0600008b5ef8268a87c0ff2ae4509a000000005b0bc0740383ce080bf674078bc60246feeb0b837efe00750b9a00000000c45efa2688075e5f8be55dcb",
+   "disasm": "push bp; mov bp, sp; mov ax, 8; lcall 0, 0; push di; push si; mov di, word ptr [bp + 6]; or di, di; jl 0x46; cmp di, 0x3f; jg 0x46; cmp word ptr [bp + 8], 0x3f; jg 0x46; mov cl, 6; mov bx, di; shl bx, cl; add bx, word ptr [bp + 8]; mov word ptr [bp - 8], bx; add bx, 0; mov es, word ptr [0]; mov word ptr [bp - 6], bx; mov word ptr [bp - 4], es; mov al, byte ptr es:[bx]; sub ah, ah; mov word ptr [bp - 2], ax; cmp ax, 0x20; jge 0x49; jmp 0xf8; cmp ax, 0x4d; jle 0x53; mov ax, 0x2f; jmp 0x55; sub ax, ax; mov word ptr [bp - 2], ax; sub si, si; cmp word ptr [bp + 8], 2; jl 0x75; mov bx, word ptr [bp - 8]; mov al, byte ptr es:[bx - 1]; sub ah, ah; push ax; lcall 0, 0; pop bx; or ax, ax; je 0x78; mov si, 1; cmp di, 0x3e; jg 0x96; mov es, word ptr [0]; mov bx, word ptr [bp - 8]; mov al, byte ptr es:[bx + 0x40]; sub ah, ah; push ax; lcall 0, 0; pop bx; or ax, ax; je 0x99; or si, 2; cmp word ptr [bp + 8], 0x3e; jg 0xb8; mov es, word ptr [0]; mov bx, word ptr [bp - 8]; mov al, byte ptr es:[bx + 1]; sub ah, ah; push ax; lcall 0, 0; pop bx; or ax, ax; je 0xbb; or si, 4; cmp di, 1; jl 0xd9; mov es, word ptr [0]; mov bx, word ptr [bp - 8]; mov al, byte ptr es:[bx - 0x40]; sub ah, ah; push ax; lcall 0, 0; pop bx; or ax, ax; je 0xdc; or si, 8; or si, si; je 0xe7; mov ax, si; add al, byte ptr [bp - 2]; jmp 0xf2; cmp word ptr [bp - 2], 0; jne 0xf8; lcall 0, 0; les bx, ptr [bp - 6]; mov byte ptr es:[bx], al; pop si; pop di; mov sp, bp; pop bp; retf"
+  }
+ ],
+ "checks": [
+  {
+   "check": "or_form@0",
+   "needle": "mov word ptr [bp - 2], 0",
+   "ok": true
+  },
+  {
+   "check": "else_if_duplicate@0",
+   "needle": "sub si, si",
+   "ok": true
+  },
+  {
+   "check": "or_form@0 ",
+   "needle": "mov si, word ptr [bp + 6]",
+   "ok": true
+  },
+  {
+   "check": "else_if_duplicate@0 ",
+   "needle": "mov di, word ptr [bp + 6]",
+   "ok": true
+  }
+ ],
+ "all_checks_pass": true
+}

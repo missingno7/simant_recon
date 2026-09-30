@@ -4,27 +4,27 @@ Validation: **PASS** (2026-09-30)
 
 | Measure | Value |
 |---|---:|
-| known_functions | 1,718 |
-| known_game_functions | 1,628 |
-| exact_c_functions | 1,159 |
-| exact_c_bytes | 200,333 |
-| exact_asm_bytes | 44,561 |
-| exact_code_segment_data_bytes | 1,395 |
+| known_functions | 1,730 |
+| known_game_functions | 1,640 |
+| exact_c_functions | 1,193 |
+| exact_c_bytes | 206,966 |
+| exact_asm_bytes | 49,132 |
+| exact_code_segment_data_bytes | 1,481 |
 | historical_runtime_bytes_accepted | 12,339 |
 | historical_runtime_members_accepted | 90 |
 | runtime_functions_known | 90 |
 | runtime_functions_owned | 90 |
-| owned_functions | 1,553 |
+| owned_functions | 1,639 |
 | historical_runtime_bytes_located_unaccepted | 0 |
 | rtlink_manager_bytes_unaccepted | 17,063 |
-| data_bytes_accepted | 16,800 |
+| data_bytes_accepted | 17,429 |
 | game_code_span_bytes | 304,748 |
-| unresolved_code_bytes | 58,459 |
-| unresolved_data_bytes | 118,720 |
-| scaffold_functions | 55 |
-| exact_translation_units | 61 |
-| complete_tus_relocation_order_proven | 60 |
-| claims_within_group_order_pending | 7 |
+| unresolved_code_bytes | 47,169 |
+| unresolved_data_bytes | 118,091 |
+| scaffold_functions | 49 |
+| exact_translation_units | 76 |
+| complete_tus_relocation_order_proven | 75 |
+| claims_within_group_order_pending | 6 |
 | inplace_draft_functions | 25 |
 | claims_exact_steered | 18 |
 

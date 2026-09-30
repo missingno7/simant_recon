@@ -72,6 +72,10 @@ def public_in(obj, cname: str):
     for p in obj.publics + getattr(obj, "local_publics", []):
         if p["name"] in ("_" + cname, "@" + cname):
             return p["name"], p
+    # pascal convention: upper-cased, no underscore (e.g. F_00DE_000A)
+    for p in obj.publics + getattr(obj, "local_publics", []):
+        if p["name"] == cname.upper() and not cname.upper().startswith("_"):
+            return p["name"], p
     # a draft may still spell the function by an older registered name (alias of the same
     # address) after a supervisor rename; accept exactly those spellings
     import symbols as symmod

@@ -1,0 +1,26 @@
+{
+ "id": "REG-4",
+ "question": "Does taking the address of a parameter (variadic access (&item)[k]) change /Oe register allocation of other locals in the same region? Positive control win_DoProxMenu (root:22BF:0BAB): exact only as 'int far win_DoProxMenu(int win, int item, ...)' reading the window position as (&item)[1], (&item)[2] (callers pass 2 or 4 arguments); with named parameters p0, p1 the -1 result stays in memory before the loop (mov [bp-2],-1 ... mov di,[bp-2]) instead of DI (mov di,-1; cmp [bp+8],di ... mov [bp-2],di).",
+ "header": "extern void far g(int, int, int);\nextern void _fastcall s(int);\nextern void far f57(void);\nextern int far f98(void);\nextern int far gp(void);\nextern int _fastcall ge(int far *);\nextern void _fastcall cl(int);\nint _fastcall isopen(int w) { return w; }\n",
+ "variants": {
+  "named_params": "int far t2(int win, int item, int p0, int p1)\n{\n    int result;\n    int ev[8];\n\n    result = -1;\n    g(win, p0, p1);\n    if (item != -1)\n        s(win + item + 2);\n    f57();\n    for (;;) {\n        if (!isopen(win))\n            break;\n        if (!f98())\n            ev[6] = gp();\n        else if (!ge(ev))\n            continue;\n        if ((unsigned)ev[6] < (unsigned)win || (unsigned)win + 0x100 <= (unsigned)ev[6])\n            continue;\n        if ((unsigned)win + 2 <= (unsigned)ev[6])\n            result = ev[6] - win - 2;\n        break;\n    }\n    cl(win);\n    return result;\n}\n",
+  "address_taken": "int far t2(int win, int item, ...)\n{\n    int result;\n    int ev[8];\n\n    result = -1;\n    g(win, (&item)[1], (&item)[2]);\n    if (item != -1)\n        s(win + item + 2);\n    f57();\n    for (;;) {\n        if (!isopen(win))\n            break;\n        if (!f98())\n            ev[6] = gp();\n        else if (!ge(ev))\n            continue;\n        if ((unsigned)ev[6] < (unsigned)win || (unsigned)win + 0x100 <= (unsigned)ev[6])\n            continue;\n        if ((unsigned)win + 2 <= (unsigned)ev[6])\n            result = ev[6] - win - 2;\n        break;\n    }\n    cl(win);\n    return result;\n}\n"
+ },
+ "profiles": [
+  {
+   "profile": "msc600ax",
+   "flags": [
+    "/AL",
+    "/Os",
+    "/Oe",
+    "/Og",
+    "/Gs",
+    "/Zi"
+   ]
+  }
+ ],
+ "expect": {
+  "address_taken@0": "mov di, 0xffff; push word ptr [bp + 0xc]",
+  "named_params@0": "mov word ptr [bp - 2], 0xffff"
+ }
+}

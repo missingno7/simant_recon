@@ -1,0 +1,51 @@
+{
+ "id": "REG-4",
+ "question": "Does taking the address of a parameter (variadic access (&item)[k]) change /Oe register allocation of other locals in the same region? Positive control win_DoProxMenu (root:22BF:0BAB): exact only as 'int far win_DoProxMenu(int win, int item, ...)' reading the window position as (&item)[1], (&item)[2] (callers pass 2 or 4 arguments); with named parameters p0, p1 the -1 result stays in memory before the loop (mov [bp-2],-1 ... mov di,[bp-2]) instead of DI (mov di,-1; cmp [bp+8],di ... mov [bp-2],di).",
+ "results": [
+  {
+   "variant": "named_params",
+   "profile_index": 0,
+   "profile": "msc600ax",
+   "flags": [
+    "/AL",
+    "/Os",
+    "/Oe",
+    "/Og",
+    "/Gs",
+    "/Zi"
+   ],
+   "source_sha256": "9e2d49c25088ee574e2fcb0b1f8f80df67309e0a09bb345a506cc0bd5bd23d9f",
+   "bytes": "cb558bec83ec1257568b7606c746feffffff760cff760a569a0000000083c406837e08ff740c8b460803c640409a000000009a000000008b7efe8bc60ee800000bc0743e9a000000000bc0750a9a000000008946faeb0e8d46ee16509a000000000bc074d53976fa72d08d8400013b46fa76c78d44023b46fa77078b7efa2bfe4f4f8bc69a000000008bc75e5f8be55dcb",
+   "disasm": "retf; push bp; mov bp, sp; sub sp, 0x12; push di; push si; mov si, word ptr [bp + 6]; mov word ptr [bp - 2], 0xffff; push word ptr [bp + 0xc]; push word ptr [bp + 0xa]; push si; lcall 0, 0; add sp, 6; cmp word ptr [bp + 8], -1; je 0x32; mov ax, word ptr [bp + 8]; add ax, si; inc ax; inc ax; lcall 0, 0; lcall 0, 0; mov di, word ptr [bp - 2]; mov ax, si; push cs; call 0x40; or ax, ax; je 0x82; lcall 0, 0; or ax, ax; jne 0x57; lcall 0, 0; mov word ptr [bp - 6], ax; jmp 0x65; lea ax, [bp - 0x12]; push ss; push ax; lcall 0, 0; or ax, ax; je 0x3a; cmp word ptr [bp - 6], si; jb 0x3a; lea ax, [si + 0x100]; cmp ax, word ptr [bp - 6]; jbe 0x3a; lea ax, [si + 2]; cmp ax, word ptr [bp - 6]; ja 0x82; mov di, word ptr [bp - 6]; sub di, si; dec di; dec di; mov ax, si; lcall 0, 0; mov ax, di; pop si; pop di; mov sp, bp; pop bp; retf"
+  },
+  {
+   "variant": "address_taken",
+   "profile_index": 0,
+   "profile": "msc600ax",
+   "flags": [
+    "/AL",
+    "/Os",
+    "/Oe",
+    "/Og",
+    "/Gs",
+    "/Zi"
+   ],
+   "source_sha256": "d57e381809168544cff07f0a0943a7870084c79413a4ae749caf82972616a1c0",
+   "bytes": "cb558bec83ec1257568b7606bfffffff760cff760a569a0000000083c406397e08740c8b460803c640409a000000009a00000000897efe8bc60ee800000bc0743e9a000000000bc0750a9a000000008946faeb0e8d46ee16509a000000000bc074d53976fa72d08d8400013b46fa76c78d44023b46fa77078b7efa2bfe4f4f8bc69a000000008bc75e5f8be55dcb",
+   "disasm": "retf; push bp; mov bp, sp; sub sp, 0x12; push di; push si; mov si, word ptr [bp + 6]; mov di, 0xffff; push word ptr [bp + 0xc]; push word ptr [bp + 0xa]; push si; lcall 0, 0; add sp, 6; cmp word ptr [bp + 8], di; je 0x2f; mov ax, word ptr [bp + 8]; add ax, si; inc ax; inc ax; lcall 0, 0; lcall 0, 0; mov word ptr [bp - 2], di; mov ax, si; push cs; call 0x3d; or ax, ax; je 0x7f; lcall 0, 0; or ax, ax; jne 0x54; lcall 0, 0; mov word ptr [bp - 6], ax; jmp 0x62; lea ax, [bp - 0x12]; push ss; push ax; lcall 0, 0; or ax, ax; je 0x37; cmp word ptr [bp - 6], si; jb 0x37; lea ax, [si + 0x100]; cmp ax, word ptr [bp - 6]; jbe 0x37; lea ax, [si + 2]; cmp ax, word ptr [bp - 6]; ja 0x7f; mov di, word ptr [bp - 6]; sub di, si; dec di; dec di; mov ax, si; lcall 0, 0; mov ax, di; pop si; pop di; mov sp, bp; pop bp; retf"
+  }
+ ],
+ "checks": [
+  {
+   "check": "address_taken@0",
+   "needle": "mov di, 0xffff; push word ptr [bp + 0xc]",
+   "ok": true
+  },
+  {
+   "check": "named_params@0",
+   "needle": "mov word ptr [bp - 2], 0xffff",
+   "ok": true
+  }
+ ],
+ "all_checks_pass": true
+}

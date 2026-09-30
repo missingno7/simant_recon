@@ -2113,7 +2113,21 @@
 {
 "unit": "root",
 "seg": 1883,
-"off": 828,
+"off": 820,
+"size": 8,
+"region": "game_or_library",
+"extent": "REVIEWED",
+"evidence": [
+"reviewed"
+],
+"notes": [
+"empty function (xor ax,ax; call __aFchkstk; retf) after f_075B_0242; its relocation 078E9 is recorded in frame 075B, so it is the last function of module 075B (worker rootF)"
+]
+},
+{
+"unit": "root",
+"seg": 1934,
+"off": 12,
 "size": 71,
 "region": "game_or_library",
 "extent": "REVIEWED",
@@ -2121,13 +2135,14 @@
 "reviewed"
 ],
 "notes": [
-"prologue scan in unreached gap; descent ends in a return; no references found (unreferenced or indirect)"
+"prologue scan in unreached gap; descent ends in a return; no references found (unreferenced or indirect)",
+"re-framed 075B:033C -> 078E:000C: MZ relocations 078F4/0790C/07922 of this function are recorded in frame 078E, so it belongs to a separate object (module root:078E, starting at 078EC) (worker rootF)"
 ]
 },
 {
 "unit": "root",
-"seg": 1883,
-"off": 899,
+"seg": 1934,
+"off": 83,
 "size": 77,
 "region": "game_or_library",
 "extent": "REVIEWED",
@@ -2135,7 +2150,8 @@
 "reviewed"
 ],
 "notes": [
-"prologue scan in unreached gap; descent ends in a return; no references found (unreferenced or indirect)"
+"prologue scan in unreached gap; descent ends in a return; no references found (unreferenced or indirect)",
+"re-framed 075B:0383 -> 078E:0053: MZ relocations 0793B/07955/0796C are recorded in frame 078E (module root:078E) (worker rootF)"
 ]
 },
 {
@@ -5317,6 +5333,104 @@
 },
 {
 "unit": "root",
+"seg": 5813,
+"off": 127,
+"size": 38,
+"region": "game_or_library",
+"extent": "REVIEWED",
+"evidence": [
+"reviewed"
+],
+"notes": [
+"genuine-assembly module 16B5 (line drawing): near proc reached through DGROUP dispatch tables 1E00 (init by depth: 007F/00AB/00A5) and 1F98 (plot by depth: 00B1/03B5/01D4) or near-called clip routine 04D8; extent to the next proc"
+]
+},
+{
+"unit": "root",
+"seg": 5813,
+"off": 165,
+"size": 6,
+"region": "game_or_library",
+"extent": "REVIEWED",
+"evidence": [
+"reviewed"
+],
+"notes": [
+"genuine-assembly module 16B5 (line drawing): near proc reached through DGROUP dispatch tables 1E00 (init by depth: 007F/00AB/00A5) and 1F98 (plot by depth: 00B1/03B5/01D4) or near-called clip routine 04D8; extent to the next proc"
+]
+},
+{
+"unit": "root",
+"seg": 5813,
+"off": 171,
+"size": 6,
+"region": "game_or_library",
+"extent": "REVIEWED",
+"evidence": [
+"reviewed"
+],
+"notes": [
+"genuine-assembly module 16B5 (line drawing): near proc reached through DGROUP dispatch tables 1E00 (init by depth: 007F/00AB/00A5) and 1F98 (plot by depth: 00B1/03B5/01D4) or near-called clip routine 04D8; extent to the next proc"
+]
+},
+{
+"unit": "root",
+"seg": 5813,
+"off": 177,
+"size": 291,
+"region": "game_or_library",
+"extent": "REVIEWED",
+"evidence": [
+"reviewed"
+],
+"notes": [
+"genuine-assembly module 16B5 (line drawing): near proc reached through DGROUP dispatch tables 1E00 (init by depth: 007F/00AB/00A5) and 1F98 (plot by depth: 00B1/03B5/01D4) or near-called clip routine 04D8; extent to the next proc"
+]
+},
+{
+"unit": "root",
+"seg": 5813,
+"off": 468,
+"size": 481,
+"region": "game_or_library",
+"extent": "REVIEWED",
+"evidence": [
+"reviewed"
+],
+"notes": [
+"genuine-assembly module 16B5 (line drawing): near proc reached through DGROUP dispatch tables 1E00 (init by depth: 007F/00AB/00A5) and 1F98 (plot by depth: 00B1/03B5/01D4) or near-called clip routine 04D8; extent to the next proc"
+]
+},
+{
+"unit": "root",
+"seg": 5813,
+"off": 949,
+"size": 291,
+"region": "game_or_library",
+"extent": "REVIEWED",
+"evidence": [
+"reviewed"
+],
+"notes": [
+"genuine-assembly module 16B5 (line drawing): near proc reached through DGROUP dispatch tables 1E00 (init by depth: 007F/00AB/00A5) and 1F98 (plot by depth: 00B1/03B5/01D4) or near-called clip routine 04D8; extent to the next proc"
+]
+},
+{
+"unit": "root",
+"seg": 5813,
+"off": 1240,
+"size": 410,
+"region": "game_or_library",
+"extent": "REVIEWED",
+"evidence": [
+"reviewed"
+],
+"notes": [
+"genuine-assembly module 16B5 (line drawing): near proc reached through DGROUP dispatch tables 1E00 (init by depth: 007F/00AB/00A5) and 1F98 (plot by depth: 00B1/03B5/01D4) or near-called clip routine 04D8; extent to the next proc"
+]
+},
+{
+"unit": "root",
 "seg": 5916,
 "off": 2,
 "size": 28,
@@ -7193,6 +7307,20 @@
 ],
 "notes": [
 "prologue scan in unreached gap; descent ends in a return; no references found (unreferenced or indirect)"
+]
+},
+{
+"unit": "root",
+"seg": 6917,
+"off": 554,
+"size": 11,
+"region": "game_or_library",
+"extent": "REVIEWED",
+"evidence": [
+"reviewed"
+],
+"notes": [
+"genuine-assembly module 1B05: close proc (push [3D00]; call _close; pop ax; retf) after 01C7, module ends 1B285 (fill, 1B28 at 1B286)"
 ]
 },
 {
