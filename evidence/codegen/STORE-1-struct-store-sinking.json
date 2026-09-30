@@ -1,0 +1,24 @@
+{
+ "id": "STORE-1",
+ "question": "Does /Og keep source order for stores into a local struct? When a member's value is reused later (r.right = r.left + 9), MSC 6.00AX sinks the computation and store of r.left below the following member stores; computing it into a local first (a = ...; r.left = a; ... r.right = a + 9) keeps r.left first. Observed in S13 DrawColonyBars (worker resA: the original stores r.left first and keeps it in BX for r.right; the draft improved from 466 to 482 of 490 bytes with the local).",
+ "header": "struct Rect { int left, top, right, bottom; };\nextern int far L, far T;\nextern void far g(struct Rect far *r);\n",
+ "variants": {
+  "member_reuse": "void far f(int x, int y, int h)\n{\n    struct Rect r;\n    r.left = (x + 6) * 28 + L - y * 10;\n    r.bottom = y * 10 + T + 0x47;\n    r.top = r.bottom - h;\n    r.right = r.left + 9;\n    g(&r);\n}\n",
+  "local_copy": "void far f(int x, int y, int h)\n{\n    struct Rect r;\n    int a;\n    a = (x + 6) * 28 + L - y * 10;\n    r.left = a;\n    r.bottom = y * 10 + T + 0x47;\n    r.top = r.bottom - h;\n    r.right = a + 9;\n    g(&r);\n}\n"
+ },
+ "profiles": [
+  {
+   "profile": "msc600ax",
+   "flags": [
+    "/AL",
+    "/Os",
+    "/Oe",
+    "/Og"
+   ]
+  }
+ ],
+ "expect": {
+  "member_reuse@0": "mov word ptr [bp - 2], ax; sub ax, word ptr [bp + 0xa]; mov word ptr [bp - 6], ax; mov ax, word ptr [bp + 6]",
+  "local_copy@0": "sub ax, cx; mov word ptr [bp - 8], ax; mov es, word ptr [2]"
+ }
+}

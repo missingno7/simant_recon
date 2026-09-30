@@ -152,7 +152,7 @@ extern int far fd_50F6_10E0;
 extern void far f_1CE2_0410(struct Rect far *rect, int width);
 extern void far clip_Pop(void);
 
-/* SCAFFOLD BEGIN: DrawMapCursor draft: MSC 6.00AX register/operand choice for the right edge differs */
+/* SCAFFOLD BEGIN: DrawMapCursor draft (worker resA): with +2..+13 identifiers declared before the first extern the length is exact and the original value-CSE of fd_50F6_3858 appears (symbol-table state, probe SYM-1); left over (37 bytes): the original saves the rect segment (mov dx,es) after the left store and adds fd_50F6_10D2.left before fd_50F6_38C0; a 1024-point search over dummy positions found no exact state. Same residue as S04 DrawMiniMapCursor */
 void far DrawMapCursor(void)
 {
     if (!f_22BF_09B0(0x100) || g_298E != 0)

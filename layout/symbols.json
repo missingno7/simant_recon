@@ -9005,6 +9005,12 @@
    "off": 200,
    "grounding": "reviewed: prologue scan in unreached gap; descent ends in a return; no references found (unreferenced or indirect)"
   },
+  "f_195A_00E9": {
+   "unit": "root",
+   "seg": 6490,
+   "off": 233,
+   "grounding": "reviewed: EMS INT 67h wrapper after a retf (mov ax,4E03h/5801h/5B00h/5B02h/5B03h; int 67h ... retf); unreferenced entry of the EMS asm module (worker rootF)"
+  },
   "f_195A_00F8": {
    "unit": "root",
    "seg": 6490,
@@ -9041,6 +9047,12 @@
    "off": 386,
    "grounding": "reviewed: prologue scan in unreached gap; descent ends in a return; no references found (unreferenced or indirect)"
   },
+  "f_195A_019C": {
+   "unit": "root",
+   "seg": 6490,
+   "off": 412,
+   "grounding": "reviewed: EMS INT 67h wrapper after a retf (mov ax,4E03h/5801h/5B00h/5B02h/5B03h; int 67h ... retf); unreferenced entry of the EMS asm module (worker rootF)"
+  },
   "f_195A_01AF": {
    "unit": "root",
    "seg": 6490,
@@ -9064,6 +9076,24 @@
    "seg": 6490,
    "off": 498,
    "grounding": "reviewed: prologue scan in unreached gap; descent ends in a return; no references found (unreferenced or indirect)"
+  },
+  "f_195A_0206": {
+   "unit": "root",
+   "seg": 6490,
+   "off": 518,
+   "grounding": "reviewed: EMS INT 67h wrapper after a retf (mov ax,4E03h/5801h/5B00h/5B02h/5B03h; int 67h ... retf); unreferenced entry of the EMS asm module (worker rootF)"
+  },
+  "f_195A_0210": {
+   "unit": "root",
+   "seg": 6490,
+   "off": 528,
+   "grounding": "reviewed: EMS INT 67h wrapper after a retf (mov ax,4E03h/5801h/5B00h/5B02h/5B03h; int 67h ... retf); unreferenced entry of the EMS asm module (worker rootF)"
+  },
+  "f_195A_021A": {
+   "unit": "root",
+   "seg": 6490,
+   "off": 538,
+   "grounding": "reviewed: EMS INT 67h wrapper after a retf (mov ax,4E03h/5801h/5B00h/5B02h/5B03h; int 67h ... retf); unreferenced entry of the EMS asm module (worker rootF)"
   },
   "f_195A_0222": {
    "unit": "root",
@@ -10672,6 +10702,12 @@
    "seg": 8335,
    "off": 956,
    "grounding": "reviewed: prologue scan in unreached gap; descent ends in a return; no references found (unreferenced or indirect)"
+  },
+  "f_208F_0403": {
+   "unit": "root",
+   "seg": 8335,
+   "off": 1027,
+   "grounding": "reviewed: empty /Gs far function (retf) after f_208F_03BC; worker rootE (symbol restored by supervisor after a failed save)"
   },
   "f_208F_0404": {
    "unit": "root",
@@ -17955,6 +17991,11 @@
    "off": 31262,
    "grounding": "MSC runtime ctype table (_ctype.asm data): 55B3:7A1E holds 00 then 20h x9 (control), 'a'+1 -> 82h (_LOWER|_HEX); S23 win_PrintStyleTextInRect: test byte ptr [bx+7A1F],2 = islower via (_ctype+1)[c]"
   },
+  "_psp": {
+   "seg": 21939,
+   "off": 30528,
+   "grounding": "MSC crt0 (accepted runtime member, 29F4:0097): mov ss:[7740],ds at program entry stores the PSP segment = crt0dat public _psp; f_195A_0260 scans es:[80h] command tail after mov es,[7740]"
+  },
   "casteLevels": {
    "seg": 20726,
    "off": 1154,
@@ -21142,6 +21183,11 @@
    "seg": 21939,
    "off": 30052,
    "grounding": "f_277E_04E8: mov bx,7564h; mov es,[8A80] (address of far int taken; cmp es:[bx],210h)"
+  },
+  "g_1926": {
+   "seg": 21939,
+   "off": 6438,
+   "grounding": "f_00DF_0004: cmp word ptr [1926],0 ... mov word ptr [1926],1 (sound driver initialised flag; _DATA word of module 00DF after the literals of f_00DF_0004)"
   },
   "g_1B9A": {
    "seg": 21939,

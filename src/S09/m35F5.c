@@ -1,5 +1,16 @@
 /* Overlay section S09, code frame 35F5: saved games (LoadGame, SaveGame, FileSelect). */
 
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+#include <dos.h>
+#include <io.h>
+#include <direct.h>
+#include <ctype.h>
+#include <fcntl.h>
+#include <sys/types.h>
+#include <sys/stat.h>
+
 struct SaveRec {
     int size;
     int count;
@@ -11,8 +22,6 @@ extern int far fd_50F6_0EAC;
 extern int far fd_3D57_07AA;
 extern char far fd_50F6_3862[];
 extern struct SaveRec far fd_4E4B_0000[];
-extern int near errno;
-extern char far * near sys_errlist[];
 
 extern int far o15_384C_0239(int a);
 extern void far f_1C62_00AC(char far *msg);
@@ -23,13 +32,6 @@ extern void far o11_35F5_0000(void);
 extern void far o11_35F5_0088(int a);
 extern void far StopSong(void);
 extern void far WinPrintf(char far *fmt, ...);
-extern int far open(char far *name, int mode, ...);
-extern int far read(int fd, void far *buf, unsigned n);
-extern int far write(int fd, void far *buf, unsigned n);
-extern int far close(int fd);
-extern int far remove(char far *name);
-extern char far * far _fstrcpy(char far *d, char far *s);
-extern int far sprintf(char far *buf, char far *fmt, ...);
 
 extern int far fd_50F6_0354;
 extern long far fd_50F6_0214;
@@ -104,7 +106,7 @@ int far LoadGame(void)
     if (o09_35F5_03C6(name, "Load Game", "LOAD", 0) != 0) {
         _fstrcpy(fd_50F6_3862, name);
         fd_3D57_02C2 = 0;
-        fd = open(name, 0x8000);
+        fd = open(name, O_RDONLY | O_BINARY);
         if (fd <= 0)
             f_1C62_00AC(sys_errlist[errno]);
         else {
@@ -156,7 +158,7 @@ select:
     _fstrcpy(fd_50F6_3862, name);
     WinPrintf("\nlastFileName==%s", fd_50F6_3862);
 tryit:
-    fd = open(name, 0x8002);
+    fd = open(name, O_RDWR | O_BINARY);
     if (fd > 0) {
         sprintf(msg, "OVERWRITE\n%s", name);
         if (f_1C62_0415(msg, 0) == 0)
@@ -164,7 +166,7 @@ tryit:
         close(fd);
         goto select;
     }
-    fd = open(name, 0x8302, 0x180);
+    fd = open(name, O_RDWR | O_CREAT | O_TRUNC | O_BINARY, S_IREAD | S_IWRITE);
     if (fd <= 0) {
         f_1C62_00AC(sys_errlist[errno]);
         *fd_50F6_3862 = 0;
@@ -215,29 +217,15 @@ struct Event {
     int xE;
 };
 
-struct find_t {
-    char reserved[21];
-    char attrib;
-    unsigned wr_time;
-    unsigned wr_date;
-    long size;
-    char name[13];
-};
-
 typedef char far * far *Handle;
 
 extern int far fd_50F6_38B6;
 extern char far * far fd_50F6_38B2;
 extern char far g_2970;
-extern unsigned char near _ctype[];
 
-extern int far chdir(char far *path);
 extern int far f_1F66_00AF(int drive, char far *path);
-extern char far * far _fstrcat(char far *d, char far *s);
-extern unsigned far _fstrlen(char far *s);
 extern Handle far f_171C_13CA(long size, int flags, char far *name);
 extern void far f_171C_13E4(Handle h);
-extern void far * far _fmemset(void far *p, int c, unsigned n);
 extern void _fastcall win_LockWin(int win);
 extern void _fastcall win_UnlockWin(int win);
 extern void far win_SetObjFormatStr(int obj, ...);
@@ -256,13 +244,8 @@ extern void far f_22BF_0C38(int obj);
 extern void _fastcall win_GetObjRect(int obj, struct Rect far *rect);
 extern int far f_24AB_030B(void);
 extern void _fastcall win_SetColorFromObjNum(int obj);
-extern char far * far _fstrrchr(char far *s, int c);
 extern void far f_1FBD_0000(int x, int y, char far *text);
-extern unsigned far _dos_findfirst(char far *path, unsigned attr, struct find_t far *ff);
-extern unsigned far _dos_findnext(struct find_t far *ff);
-extern int far _fstrcmp(char far *a, char far *b);
 extern int far f_1F66_002D(char far *pattern, char far *name);
-extern int far _fmemcmp(void far *a, void far *b, unsigned n);
 extern void far f_1F58_0017(void far *a, void far *b, unsigned n);
 extern void _fastcall f_23E6_0266(int obj, char far *text);
 extern int far f_1F58_0038(void);
@@ -274,14 +257,13 @@ extern int _fastcall f_23E6_0109(int obj);
 extern int _fastcall f_23E6_009F(int obj, int line);
 extern char far * _fastcall f_23E6_0132(int obj, int line);
 
-#define isalnum(c) ((_ctype + 1)[c] & 7)
 
 static int s_2966 = 0;
 static int s_2968 = 0;
 static char lastDir[67];
 static char oneFloppy;
 
-/* SCAFFOLD BEGIN: FileSelect draft (not exact yet: stack slots of list/path swapped, drive-retry loop register SI vs DI, (bottom+top) operand order, cmp operand order) */
+/* SCAFFOLD BEGIN: FileSelect draft, same length as the original (2405 bytes), 30 bytes differ: (1) list/path frame slots swapped ([bp-0x9a]/[bp-0xde] vs [bp-0xde]/[bp-0xda]) - appears with the duplicated 'ok = *name = 0; goto redraw' tail that the cross-jump layout needs; (2) drive-retry loop caches oldDrive in SI, original DI; (3) (bottom - f() + top) operand order, fixed by +5 declarations before this function (symbol-count window); (4) cmp si,[sel] vs cmp [sel],si */
 /* file selector: returns 1 with the chosen path in name, 0 when cancelled */
 int far o09_35F5_03C6(char far *name, char far *title, char far *verb, int save)
 {
@@ -384,13 +366,13 @@ retry:
             f_1FBD_0000(x, y, name);
         }
     }
-    if (_dos_findfirst(buf, 0x10, &ff) == 0)
+    if (_dos_findfirst(buf, _A_SUBDIR, &ff) == 0)
         goto first;
     while (_dos_findnext(&ff) == 0) {
 first:
         if (count >= 200 - s_2968)
             break;
-        if (ff.attrib & 0x10) {
+        if (ff.attrib & _A_SUBDIR) {
             if (_fstrcmp(ff.name, "..") == 0)
                 _fstrcpy(p + 1, "\1..>");
             else {

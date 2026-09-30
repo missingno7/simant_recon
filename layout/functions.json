@@ -6256,6 +6256,20 @@
 {
 "unit": "root",
 "seg": 6490,
+"off": 233,
+"size": 15,
+"region": "game_or_library",
+"extent": "REVIEWED",
+"evidence": [
+"reviewed"
+],
+"notes": [
+"EMS INT 67h wrapper after a retf (mov ax,4E03h/5801h/5B00h/5B02h/5B03h; int 67h ... retf); unreferenced entry of the EMS asm module (worker rootF)"
+]
+},
+{
+"unit": "root",
+"seg": 6490,
 "off": 248,
 "size": 21,
 "region": "game_or_library",
@@ -6331,6 +6345,20 @@
 {
 "unit": "root",
 "seg": 6490,
+"off": 412,
+"size": 19,
+"region": "game_or_library",
+"extent": "REVIEWED",
+"evidence": [
+"reviewed"
+],
+"notes": [
+"EMS INT 67h wrapper after a retf (mov ax,4E03h/5801h/5B00h/5B02h/5B03h; int 67h ... retf); unreferenced entry of the EMS asm module (worker rootF)"
+]
+},
+{
+"unit": "root",
+"seg": 6490,
 "off": 431,
 "size": 28,
 "region": "game_or_library",
@@ -6379,6 +6407,48 @@
 ],
 "notes": [
 "prologue scan in unreached gap; descent ends in a return; no references found (unreferenced or indirect)"
+]
+},
+{
+"unit": "root",
+"seg": 6490,
+"off": 518,
+"size": 10,
+"region": "game_or_library",
+"extent": "REVIEWED",
+"evidence": [
+"reviewed"
+],
+"notes": [
+"EMS INT 67h wrapper after a retf (mov ax,4E03h/5801h/5B00h/5B02h/5B03h; int 67h ... retf); unreferenced entry of the EMS asm module (worker rootF)"
+]
+},
+{
+"unit": "root",
+"seg": 6490,
+"off": 528,
+"size": 10,
+"region": "game_or_library",
+"extent": "REVIEWED",
+"evidence": [
+"reviewed"
+],
+"notes": [
+"EMS INT 67h wrapper after a retf (mov ax,4E03h/5801h/5B00h/5B02h/5B03h; int 67h ... retf); unreferenced entry of the EMS asm module (worker rootF)"
+]
+},
+{
+"unit": "root",
+"seg": 6490,
+"off": 538,
+"size": 8,
+"region": "game_or_library",
+"extent": "REVIEWED",
+"evidence": [
+"reviewed"
+],
+"notes": [
+"EMS INT 67h wrapper after a retf (mov ax,4E03h/5801h/5B00h/5B02h/5B03h; int 67h ... retf); unreferenced entry of the EMS asm module (worker rootF)"
 ]
 },
 {

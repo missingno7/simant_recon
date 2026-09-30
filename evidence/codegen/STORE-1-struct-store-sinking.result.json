@@ -1,0 +1,47 @@
+{
+ "id": "STORE-1",
+ "question": "Does /Og keep source order for stores into a local struct? When a member's value is reused later (r.right = r.left + 9), MSC 6.00AX sinks the computation and store of r.left below the following member stores; computing it into a local first (a = ...; r.left = a; ... r.right = a + 9) keeps r.left first. Observed in S13 DrawColonyBars (worker resA: the original stores r.left first and keeps it in BX for r.right; the draft improved from 466 to 482 of 490 bytes with the local).",
+ "results": [
+  {
+   "variant": "member_reuse",
+   "profile_index": 0,
+   "profile": "msc600ax",
+   "flags": [
+    "/AL",
+    "/Os",
+    "/Oe",
+    "/Og"
+   ],
+   "source_sha256": "671a1d9f0b93955eb4428cabb90409ef9e718b8fb37320b9865a197e4eefe3b9",
+   "bytes": "558becb808009a00000000b80a00f76e088e0600008bc826030600000547008946fe2b460a8946fa8b4606050600bb1c00f7eb8e06020026030600002bc18946f80509008946fc8d46f816509a000000005b5b8be55dcb",
+   "disasm": "push bp; mov bp, sp; mov ax, 8; lcall 0, 0; mov ax, 0xa; imul word ptr [bp + 8]; mov es, word ptr [0]; mov cx, ax; add ax, word ptr es:[0]; add ax, 0x47; mov word ptr [bp - 2], ax; sub ax, word ptr [bp + 0xa]; mov word ptr [bp - 6], ax; mov ax, word ptr [bp + 6]; add ax, 6; mov bx, 0x1c; imul bx; mov es, word ptr [2]; add ax, word ptr es:[0]; sub ax, cx; mov word ptr [bp - 8], ax; add ax, 9; mov word ptr [bp - 4], ax; lea ax, [bp - 8]; push ss; push ax; lcall 0, 0; pop bx; pop bx; mov sp, bp; pop bp; retf"
+  },
+  {
+   "variant": "local_copy",
+   "profile_index": 0,
+   "profile": "msc600ax",
+   "flags": [
+    "/AL",
+    "/Os",
+    "/Oe",
+    "/Og"
+   ],
+   "source_sha256": "c33d518533e4f759d44bdfd4cd6f57e5eadebf8307fe2ac0318849780b37d5d3",
+   "bytes": "558becb808009a00000000b80a00f76e088bc88b4606050600bb1c00f7eb8e06000026030600002bc18946f88e06020026030e000083c147894efe2b4e0a894efa0509008946fc8d46f816509a000000005b5b8be55dcb",
+   "disasm": "push bp; mov bp, sp; mov ax, 8; lcall 0, 0; mov ax, 0xa; imul word ptr [bp + 8]; mov cx, ax; mov ax, word ptr [bp + 6]; add ax, 6; mov bx, 0x1c; imul bx; mov es, word ptr [0]; add ax, word ptr es:[0]; sub ax, cx; mov word ptr [bp - 8], ax; mov es, word ptr [2]; add cx, word ptr es:[0]; add cx, 0x47; mov word ptr [bp - 2], cx; sub cx, word ptr [bp + 0xa]; mov word ptr [bp - 6], cx; add ax, 9; mov word ptr [bp - 4], ax; lea ax, [bp - 8]; push ss; push ax; lcall 0, 0; pop bx; pop bx; mov sp, bp; pop bp; retf"
+  }
+ ],
+ "checks": [
+  {
+   "check": "member_reuse@0",
+   "needle": "mov word ptr [bp - 2], ax; sub ax, word ptr [bp + 0xa]; mov word ptr [bp - 6], ax; mov ax, word ptr [bp + 6]",
+   "ok": true
+  },
+  {
+   "check": "local_copy@0",
+   "needle": "sub ax, cx; mov word ptr [bp - 8], ax; mov es, word ptr [2]",
+   "ok": true
+  }
+ ],
+ "all_checks_pass": true
+}

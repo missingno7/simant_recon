@@ -1107,11 +1107,13 @@ int far o06_35F5_2314(int x, int y);
 void far o06_35F5_2381(int x, int y, int colony);
 
 /* SimColonies (Win16 unit order): yard colony growth, swarms and the for-sale scenario */
+/* r also carries the two home-nest populations before the loops and b is read before r: both
+ * decide the frame layout (r at [bp-8], b [bp-4], patches [bp-2]); the nested game-type test
+ * keeps the /Zi line-entry count that places a LEDATA break in 229F..2309 (worker resB). */
 void far o06_35F5_1E54(void)
 {
     int patches, b, y, r;
     int x;
-    register int n;
 
     if (fd_50F6_07C2 & 0x1f)
         return;
@@ -1124,24 +1126,25 @@ void far o06_35F5_1E54(void)
         fd_50F6_03E2 = 1;
     if (RpopT > 0)
         fd_50F6_0400 = 1;
-    n = BpopT & 0x3ff;
-    if (n > 250)
-        n = 250;
-    fd_3D57_00A4[fd_50F6_07CA[0]][fd_50F6_07CA[1]] = n;
-    n = RpopT & 0x3ff;
-    if (n > 250)
-        n = 250;
-    fd_3D57_0164[fd_50F6_07CA[0]][fd_50F6_07CA[1]] = n;
+    r = BpopT & 0x3ff;
+    if (r > 250)
+        r = 250;
+    fd_3D57_00A4[fd_50F6_07CA[0]][fd_50F6_07CA[1]] = r;
+    r = RpopT & 0x3ff;
+    if (r > 250)
+        r = 250;
+    fd_3D57_0164[fd_50F6_07CA[0]][fd_50F6_07CA[1]] = r;
     for (x = 0; x < 12; x++) {
         for (y = 0; y < 16; y++) {
             if (fd_50F6_07CA[0] == x && fd_50F6_07CA[1] == y)
                 continue;
-            r = fd_3D57_0164[x][y];
             b = fd_3D57_00A4[x][y];
+            r = fd_3D57_0164[x][y];
             if (b == 0 && r == 0)
                 continue;
-            if (fd_50F6_0EAC == 2 && (x < 2 || (x == 3 && y < 5)))
-                fd_50F6_0478++;
+            if (fd_50F6_0EAC == 2)
+                if (x < 2 || (x == 3 && y < 5))
+                    fd_50F6_0478++;
             patches = o06_35F5_2314(x, y);
             if (b != 0) {
                 fd_50F6_03E2++;

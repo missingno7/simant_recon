@@ -291,7 +291,7 @@ def verify_extent(obj, ext: dict, claims: list[dict], scaff: set, site_key: dict
     # Cross-function relocation order is a separate proof level: bytes and per-function order are
     # already gated per claim; a complete TU whose record breaks between functions differ from the
     # original (e.g. a wrong /Zd-/Zi choice or source line layout) is reported, not hidden.
-    reasons += extent_tail_reasons(claims[0]["unit"], end)
+    reasons += extent_tail_reasons(claims[0]["unit"], end, claims[0]["seg"])
     order = extent_reloc_order(claims[0]["unit"], start, end, site_key or {}, site_index or {})
     if order["order"] == "SET_MISMATCH":
         reasons += order["reasons"]
@@ -301,13 +301,17 @@ def verify_extent(obj, ext: dict, claims: list[dict], scaff: set, site_key: dict
             "order_reasons": order["reasons"]}
 
 
-def extent_tail_reasons(unit: str, end: int) -> list[str]:
+def extent_tail_reasons(unit: str, end: int, seg: int | None = None) -> list[str]:
     """The bytes between the extent end and the next known function must be link fill (00),
-    so an extent cannot silently stop before a trailing function (worker ovlB, S20)."""
+    so an extent cannot silently stop before a trailing function of the same frame (worker
+    ovlB, S20).  When the next function belongs to another code frame, the gap is that
+    module's leading bytes (e.g. 2650's mask table after 25E7) and is owned by its extent."""
     import functions as fnmod
-    starts = sorted(r["seg"] * 16 + r["off"] for r in fnmod.table()["functions"] if r["unit"] == unit)
-    nxt = next((a for a in starts if a >= end), None)
+    rows = sorted((r["seg"] * 16 + r["off"], r["seg"]) for r in fnmod.table()["functions"] if r["unit"] == unit)
+    nxt, nseg = next(((a, s) for a, s in rows if a >= end), (None, None))
     if nxt is None or nxt == end:
+        return []
+    if seg is not None and nseg != seg:
         return []
     if nxt - end >= 16:
         return []          # a data/unknown gap, not module padding; the extent must be reviewed separately

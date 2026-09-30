@@ -358,7 +358,7 @@ void far OpenMiniMapWin(void)
 }
 
 
-/* SCAFFOLD BEGIN: DrawMiniMapCursor best draft (148 vs 150 bytes): the original saves ES (segment of fd_50F6_384A) in CX after the left store and reuses it for the right store and the pushed rect segment; here left goes to CX and ES is reloaded from CONST */
+/* SCAFFOLD BEGIN: DrawMiniMapCursor best draft (148 vs 150 bytes): the original saves ES (segment of fd_50F6_384A) in CX after the left store and reuses it for the right store and the pushed rect segment; here left goes to CX and ES is reloaded from CONST. Not symbol-table state (worker resA: dummy identifiers before each referenced declaration, 1..16, no change); pointer, array, chained-assignment and operand-order forms tried; same residue as S12 DrawMapCursor */
 void far DrawMiniMapCursor(void)
 {
     fd_50F6_384A.top = fd_50F6_0508[1] * g_8BD4 + fd_50F6_3842.top;
