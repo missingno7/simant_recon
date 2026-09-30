@@ -1,0 +1,24 @@
+{
+ "id": "ALIAS-1",
+ "question": "When does MSC 6.00AX /Og keep a local array element in a CSE temporary across a call? If the array's address never escapes, a repeated element value (lines[i] passed to two calls) is loaded once into a 4-byte value temporary and pushed from it after the call. Once the array's address has been taken anywhere in the function (p = lines; *p = buf; even when the pointer is otherwise dead and copy-propagated away), the element is assumed to be changed by calls: MSC keeps only the element ADDRESS (lea/add into a 2-byte temporary) and reloads the value after each call; a first-loop 'arr[0][i]' access likewise becomes a spilled far-pointer CSE of arr[0]+i. Positive control root:1629 MakeBalloon (worker resE): exact only with 'lp = lines; *lp = buf;' (frame 110, address temporaries at [bp-0x58], [bp-0x56]); without the address escape the loops keep value temporaries and the function is 1095-1102 bytes instead of 1111.",
+ "header": "extern int far w(char far *s, void far *font);\nextern void far * far font;\nextern char far *buf;\n",
+ "variants": {
+  "no_escape": "int far f(int n)\n{\n    char far *lines[10];\n    int i;\n    int widest;\n\n    lines[0] = buf;\n    lines[1] = buf + 4;\n    widest = 0;\n    for (i = 0; i <= n; i++)\n        if (w(lines[i], font) > widest)\n            widest = w(lines[i], font);\n    return widest;\n}\n",
+  "escaped": "int far f(int n)\n{\n    char far *lines[10];\n    int i;\n    int widest;\n    char far * *lp;\n\n    lp = lines;\n    *lp = buf;\n    lines[1] = buf + 4;\n    widest = 0;\n    for (i = 0; i <= n; i++)\n        if (w(lines[i], font) > widest)\n            widest = w(lines[i], font);\n    return widest;\n}\n"
+ },
+ "profiles": [
+  {
+   "profile": "msc600ax",
+   "flags": [
+    "/AL",
+    "/Os",
+    "/Oe",
+    "/Og"
+   ]
+  }
+ ],
+ "expect": {
+  "no_escape@0": "mov word ptr [bp - 0x2c], ax; mov word ptr [bp - 0x2a], dx; push dx; push ax",
+  "escaped@0": "mov word ptr [bp - 0x2a], bx; push word ptr [bx + 2]; push word ptr [bx]"
+ }
+}

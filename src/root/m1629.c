@@ -43,32 +43,34 @@ Handle far ConvertMonoMaskToTandy(Handle h);
 Handle far ConvertMonoMaskToColor(Handle h);
 extern void far f_1699_01AA(char far *dest, char far *src, int n);
 
-/* MakeBalloon: in-place best draft (not exact: stack-slot layout and first-loop pointer CSE differ);
- * kept here because it emits the module's literals and balloon patterns in order. */
+/* MakeBalloon.  lp is kept from the original's frame evidence: storing the first line through a
+ * pointer to lines[] takes the array's address, so the loops reload lines[i] after every call
+ * (address CSE temporaries, as in the original) and the 4-byte slot is accounted for.  The
+ * variable names are byte-equivalent hypotheses. */
 Handle far MakeBalloon(char far *text, int tail)
 {
     char far *buf;
     char far *lines[10];
+    int bottom;
     int n;
     int i;
     int widest;
     int height;
     int bytes;
     int cols;
-    int y;
-    int bottom;
     int rowBytes;
     Handle h;
     char far *p;
     char far *q;
+    char far * *lp;
 
     buf = f_171C_2208(300);
     if (fd_55B3_65A4 == 0)
         Punt("BAD font in MakeBaloon");
     _fstrcpy(buf, text);
-    lines[0] = buf;
-    n = 0;
-    for (i = 0; lines[0][i]; i++) {
+    lp = lines;
+    *lp = buf;
+    for (n = i = 0; lines[0][i]; i++) {
         if (n >= 10)
             break;
         if (lines[0][i] == '\\' && lines[0][i + 1] == 'n') {
@@ -82,7 +84,8 @@ Handle far MakeBalloon(char far *text, int tail)
         if (f_24AB_0329(lines[i], fd_55B3_65A4) > widest)
             widest = f_24AB_0329(lines[i], fd_55B3_65A4);
     height = _font_FontHeight(fd_55B3_65A4) * (n + 1) + 16;
-    widest = (widest + 16 + 7) & ~7;
+    widest += 16;
+    widest = (widest + 7) & ~7;
     bytes = (height + 1) * widest / 4;
     h = f_171C_13CA((long)(bytes + 12), 1, "balloon");
     p = f_171C_1B84(h);
@@ -94,22 +97,22 @@ Handle far MakeBalloon(char far *text, int tail)
     f_1699_0000(g_1D0A, 0, 0, p + 8);
     f_1699_0050(g_1D2A, 1, 0, p + 8, cols);
     f_1699_0000(g_1D1A, cols + 1, 0, p + 8);
-    for (y = 8; y < bottom; y += 8) {
-        f_1699_0050(g_1D8A, 1, y, p + 8, cols);
-        f_1699_0000(g_1D4A, 0, y, p + 8);
-        f_1699_0000(g_1D3A, cols + 1, y, p + 8);
+    for (i = 8; i < bottom; i += 8) {
+        f_1699_0050(g_1D8A, 1, i, p + 8, cols);
+        f_1699_0000(g_1D4A, 0, i, p + 8);
+        f_1699_0000(g_1D3A, cols + 1, i, p + 8);
     }
     for (i = 0; i <= n; i++)
-        f_1699_00A6(font_MakeImage(lines[i], (unsigned char)(-f_24AB_0329(lines[i], fd_55B3_65A4) & 6) >> 1,
+        f_1699_00A6(font_MakeImage(lines[i], (unsigned)(-f_24AB_0329(lines[i], fd_55B3_65A4) & 6) >> 1,
                                    fd_55B3_65A4), p + 8, 1, _font_FontHeight(fd_55B3_65A4) * i + 6);
-    y = _font_FontHeight(fd_55B3_65A4) * i + 6;
-    f_1699_0000(g_1D6A, cols + 1, y, p + 8);
-    f_1699_0000(g_1D5A, 0, y, p + 8);
-    f_1699_0050(g_1D7A, 1, y, p + 8, cols);
+    bottom = _font_FontHeight(fd_55B3_65A4) * i + 6;
+    f_1699_0000(g_1D6A, cols + 1, bottom, p + 8);
+    f_1699_0000(g_1D5A, 0, bottom, p + 8);
+    f_1699_0050(g_1D7A, 1, bottom, p + 8, cols);
     if (tail)
-        f_1699_0000(g_1D9A, cols - 1, y, p + 8);
+        f_1699_0000(g_1D9A, cols - 1, bottom, p + 8);
     else
-        f_1699_0000(g_1DAA, 1, y, p + 8);
+        f_1699_0000(g_1DAA, 1, bottom, p + 8);
     (*(int far *)(p + 10))--;
     if (n < 1)
         (*(int far *)(p + 10))--;
@@ -123,6 +126,7 @@ Handle far MakeBalloon(char far *text, int tail)
     q = p + 12;
     for (i = 0; i < height; i++) {
         f_1699_01AA(q, q + rowBytes, rowBytes);
+        q += rowBytes;
         q += rowBytes;
     }
     *(int far *)p = 3;

@@ -1,0 +1,47 @@
+{
+ "id": "ALIAS-1",
+ "question": "When does MSC 6.00AX /Og keep a local array element in a CSE temporary across a call? If the array's address never escapes, a repeated element value (lines[i] passed to two calls) is loaded once into a 4-byte value temporary and pushed from it after the call. Once the array's address has been taken anywhere in the function (p = lines; *p = buf; even when the pointer is otherwise dead and copy-propagated away), the element is assumed to be changed by calls: MSC keeps only the element ADDRESS (lea/add into a 2-byte temporary) and reloads the value after each call; a first-loop 'arr[0][i]' access likewise becomes a spilled far-pointer CSE of arr[0]+i. Positive control root:1629 MakeBalloon (worker resE): exact only with 'lp = lines; *lp = buf;' (frame 110, address temporaries at [bp-0x58], [bp-0x56]); without the address escape the loops keep value temporaries and the function is 1095-1102 bytes instead of 1111.",
+ "results": [
+  {
+   "variant": "no_escape",
+   "profile_index": 0,
+   "profile": "msc600ax",
+   "flags": [
+    "/AL",
+    "/Os",
+    "/Oe",
+    "/Og"
+   ],
+   "source_sha256": "6aa2d773e3a1ed554dba3c4bb0500de2b1824cbe0d84b855da0057050a9a1d55",
+   "bytes": "558becb82c009a0000000057568e06000026a10000268b1602008946d88956da0504008946dc8956de2bf68bfeeb518e06020026ff36020026ff3600008bded1e3d1e38d46d803d88b078b57028946d48956d652509a0000000083c4083bc77e1e8e06020026ff36020026ff360000ff76d6ff76d49a0000000083c4088bf8463976067daa8bc75e5f8be55dcb",
+   "disasm": "push bp; mov bp, sp; mov ax, 0x2c; lcall 0, 0; push di; push si; mov es, word ptr [0]; mov ax, word ptr es:[0]; mov dx, word ptr es:[2]; mov word ptr [bp - 0x28], ax; mov word ptr [bp - 0x26], dx; add ax, 4; mov word ptr [bp - 0x24], ax; mov word ptr [bp - 0x22], dx; sub si, si; mov di, si; jmp 0x80; mov es, word ptr [2]; push word ptr es:[2]; push word ptr es:[0]; mov bx, si; shl bx, 1; shl bx, 1; lea ax, [bp - 0x28]; add bx, ax; mov ax, word ptr [bx]; mov dx, word ptr [bx + 2]; mov word ptr [bp - 0x2c], ax; mov word ptr [bp - 0x2a], dx; push dx; push ax; lcall 0, 0; add sp, 8; cmp ax, di; jle 0x7f; mov es, word ptr [2]; push word ptr es:[2]; push word ptr es:[0]; push word ptr [bp - 0x2a]; push word ptr [bp - 0x2c]; lcall 0, 0; add sp, 8; mov di, ax; inc si; cmp word ptr [bp + 6], si; jge 0x2f; mov ax, di; pop si; pop di; mov sp, bp; pop bp; retf"
+  },
+  {
+   "variant": "escaped",
+   "profile_index": 0,
+   "profile": "msc600ax",
+   "flags": [
+    "/AL",
+    "/Os",
+    "/Oe",
+    "/Og"
+   ],
+   "source_sha256": "d7859084d4497208959dddf664032a903197fad2fb4fc59cac60cc793774402e",
+   "bytes": "558becb82a009a0000000057568e06000026a10000268b1602008946d88956da0504008946dc8956de2bf68bfeeb4e8e06020026ff36020026ff3600008bded1e3d1e38d46d803d8895ed6ff7702ff379a0000000083c4083bc77e208e06020026ff36020026ff3600008b5ed6ff7702ff379a0000000083c4088bf8463976067dad8bc75e5f8be55dcb",
+   "disasm": "push bp; mov bp, sp; mov ax, 0x2a; lcall 0, 0; push di; push si; mov es, word ptr [0]; mov ax, word ptr es:[0]; mov dx, word ptr es:[2]; mov word ptr [bp - 0x28], ax; mov word ptr [bp - 0x26], dx; add ax, 4; mov word ptr [bp - 0x24], ax; mov word ptr [bp - 0x22], dx; sub si, si; mov di, si; jmp 0x7d; mov es, word ptr [2]; push word ptr es:[2]; push word ptr es:[0]; mov bx, si; shl bx, 1; shl bx, 1; lea ax, [bp - 0x28]; add bx, ax; mov word ptr [bp - 0x2a], bx; push word ptr [bx + 2]; push word ptr [bx]; lcall 0, 0; add sp, 8; cmp ax, di; jle 0x7c; mov es, word ptr [2]; push word ptr es:[2]; push word ptr es:[0]; mov bx, word ptr [bp - 0x2a]; push word ptr [bx + 2]; push word ptr [bx]; lcall 0, 0; add sp, 8; mov di, ax; inc si; cmp word ptr [bp + 6], si; jge 0x2f; mov ax, di; pop si; pop di; mov sp, bp; pop bp; retf"
+  }
+ ],
+ "checks": [
+  {
+   "check": "no_escape@0",
+   "needle": "mov word ptr [bp - 0x2c], ax; mov word ptr [bp - 0x2a], dx; push dx; push ax",
+   "ok": true
+  },
+  {
+   "check": "escaped@0",
+   "needle": "mov word ptr [bp - 0x2a], bx; push word ptr [bx + 2]; push word ptr [bx]",
+   "ok": true
+  }
+ ],
+ "all_checks_pass": true
+}
