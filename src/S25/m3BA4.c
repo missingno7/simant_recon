@@ -852,21 +852,25 @@ int far o25_3BA4_1A0D(int plane, int x, int y, int a, int b)
     return dir;
 }
 
-/* SCAFFOLD BEGIN: o25_3BA4_1A9F best draft: 7 bytes differ, the original keeps p1 in DI (push di/pop di), MSC picks SI here; register choice is not moved by declaration order, unused locals or the register keyword */
+/* The result goes through a local that MSC eliminates (value only returned); as a
+ * register candidate it still takes SI first, so p1 lands in DI as in the original. */
 int far o25_3BA4_1A9F(int p1, int x1, int y1, int p2, int x2, int y2)
 {
+    int r;
+
     if (p1 <= 1) {
         if (p2 <= 1)
-            return o25_3BA4_1A0D(p1, x1, y1, x2, y2);
-        if (p2 == 2)
-            return o25_3BA4_1A0D(p1, x1, y1, fd_3D57_02AC[0], fd_3D57_02AC[1]);
-        return o25_3BA4_1A0D(p1, x1, y1, fd_3D57_02B0[0], fd_3D57_02B0[1]);
-    }
-    if (p2 == p1)
-        return o25_3BA4_1A0D(p1, x1, y1, x2, y2);
-    if (p1 == 2)
-        return o25_3BA4_1A0D(p1, x1, y1, fd_3D57_02A4[0], fd_3D57_02A4[1]);
-    return o25_3BA4_1A0D(p1, x1, y1, fd_3D57_02A8[0], fd_3D57_02A8[1]);
+            r = o25_3BA4_1A0D(p1, x1, y1, x2, y2);
+        else if (p2 == 2)
+            r = o25_3BA4_1A0D(p1, x1, y1, fd_3D57_02AC[0], fd_3D57_02AC[1]);
+        else
+            r = o25_3BA4_1A0D(p1, x1, y1, fd_3D57_02B0[0], fd_3D57_02B0[1]);
+    } else if (p2 == p1)
+        r = o25_3BA4_1A0D(p1, x1, y1, x2, y2);
+    else if (p1 == 2)
+        r = o25_3BA4_1A0D(p1, x1, y1, fd_3D57_02A4[0], fd_3D57_02A4[1]);
+    else
+        r = o25_3BA4_1A0D(p1, x1, y1, fd_3D57_02A8[0], fd_3D57_02A8[1]);
+    return r;
 }
-/* SCAFFOLD END */
 

@@ -1,12 +1,14 @@
 /* Overlay section S22, code frame 3BBD: experiment-mode map editor tools (Win16
  * ANTEDIT run processExp..SetSM, same 23 members in the same order).
- * Built /AL /Os /Oe /Og /Zd.  Declaration placement is part of the fingerprint
- * (MSC 6.00A identifier-count sensitivity): the ExpAddAnt prototype ahead of
- * processExp fixes its compare order, the IsItWall/WallNeighbors prototypes ahead
- * of IncFoodHere fix its compares.  DropWall/ExpDig walk local copies of their
- * start point (the copies decide the SI/DI assignment).  IncFoodHere keeps the
- * original dangling else.  With /Zd the one-line "} else v++;" puts the LEDATA
- * record break inside ConnectAll where the original has it. */
+ * Built /AL /Os /Oe /Og /Zi (like S22:39C7: one code record per function, which
+ * the program-wide __aFchkstk relocation order requires).  processExp takes the
+ * third argument processEdit passes (unused).  Declaration placement is part of
+ * the fingerprint (identifier-count sensitivity): the ExpAddAnt prototype ahead of
+ * processExp fixes its compare order, the IsItWall prototype ahead of IncFoodHere
+ * fixes its compares.  DropWall/ExpDig walk local copies of their start point
+ * (the copies decide the SI/DI assignment).  IncFoodHere keeps the original
+ * dangling else.  The one-line "} else v++;" puts the 52-line-entry record break
+ * inside ConnectAll where the original has it. */
 
 struct Pt {
     int x;
@@ -33,7 +35,7 @@ extern int far fd_55B3_19C0;
 extern int far fd_50F6_104C;
 extern unsigned char far fd_50F6_106C;
 
-void far processExp(int x, int y)
+void far processExp(int x, int y, int shift)
 {
     int nx;
     int ny;
@@ -489,7 +491,6 @@ extern void far SetMap(int plane, int x, int y, int value);
 
 void far ConnectWall(int x, int y);
 int far IsItWall(int value);
-int far WallNeighbors(int x, int y, int plane);
 
 int far IncFoodHere(int x, int y)
 {
@@ -547,6 +548,8 @@ void far ConnectAll(int x, int y)
     if (f_10F7_2867(x - 1, y) == 1)
         ConnectWall(x - 1, y);
 }
+
+int far WallNeighbors(int x, int y, int plane);
 
 static unsigned char wallShape[16] = {
     0x60, 0x64, 0x65, 0x66, 0x62, 0x61, 0x62, 0x61,

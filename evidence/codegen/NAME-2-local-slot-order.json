@@ -1,0 +1,25 @@
+{
+ "id": "NAME-2",
+ "question": "Does the spelling of local identifiers change the stack-slot order of non-register autos (MSC 6.00A /Oe /Og, function with inline _asm)? Positive control f_277E_01FA: exact only with names whose hash order puts i, then the port int, then the BIOS pointer at [bp-2],[bp-4],[bp-8] (e.g. i/base/bios), not with i/port/model.",
+ "header": "extern int far k(void);\nextern void far h(int a);\n",
+ "variants": {
+  "names_m_p_i": "int far f(void)\n{\n    char far *m;\n    int p;\n    int i;\n\n    for (i = 0; i < k(); i++)\n        h(i);\n    m = (char far *)0xF000FFFEL;\n    p = 0xc4;\n    _asm {\n        mov ax, 8100h\n        mov p, ax\n    }\n    if (*m == 0xfc) h(1);\n    h(p);\n    return 1;\n}\n",
+  "names_model_port_i": "int far f(void)\n{\n    char far *model;\n    int port;\n    int i;\n\n    for (i = 0; i < k(); i++)\n        h(i);\n    model = (char far *)0xF000FFFEL;\n    port = 0xc4;\n    _asm {\n        mov ax, 8100h\n        mov port, ax\n    }\n    if (*model == 0xfc) h(1);\n    h(port);\n    return 1;\n}\n"
+ },
+ "profiles": [
+  {
+   "profile": "msc600a",
+   "flags": [
+    "/AL",
+    "/Os",
+    "/Oe",
+    "/Og",
+    "/Gs"
+   ]
+  }
+ ],
+ "expect": {
+  "names_m_p_i@0": "mov word ptr [bp - 2], 0xc4",
+  "names_model_port_i@0": "!mov word ptr [bp - 2], 0xc4"
+ }
+}

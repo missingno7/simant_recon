@@ -229,6 +229,18 @@
     }
    ]
   },
+  "BoundPointToTri": {
+   "unit": "root",
+   "seg": 1944,
+   "off": 1681,
+   "grounding": "inventory:push_cs_call",
+   "history": [
+    {
+     "was": "f_0798_0691",
+     "why": "Win16 SIMANT_MODULE unit InitTriVars..initControls (MAPSYM B324..CC84, 20 members) aligns in order with the 18 functions of DOS root:0798 once the two Windows-only callbacks win_CasteControlChanged/win_ModeControlChanged are removed; InitTriVars body identical to Win16 recovered InitTriVars (win_GetObjRect, width/2, height, (half<<8)/height, 6 tri points); call graph agrees (OpenCaste->UpdateCaste+win_Open, ProcCaste->DrawCaste, ProcMode->DrawMode, Draw*->SetTriLatPoint, ProcCaste/initControls->cvtLevels2IdealCaste); ProcCasteEvent/ProcModeEvent xver unique constants 0x1303/0x1203; DrawControlLevels xver MEDIUM (%-ld%%)"
+    }
+   ]
+  },
   "BuildAntListA": {
    "unit": "root",
    "seg": 3777,
@@ -310,6 +322,18 @@
     {
      "was": "f_0F3F_08F6",
      "why": "Win16 MAPSYM member list of the matching unit aligns 1:1 in order and count with the DOS module (already-named members fall at their positions); bodies near-identical (worker simA)"
+    }
+   ]
+  },
+  "ClearHistory": {
+   "unit": "S24",
+   "seg": 14791,
+   "off": 440,
+   "grounding": "inventory:vector",
+   "history": [
+    {
+     "was": "o24_39C7_01B8",
+     "why": "Win16 SIMANT_MODULE run OpenHistoryWindow, ProcHistoryEvent (xver LOW, unique 0x150d), ToggleHistButton, ClearHistory, win_DrawHistoryWindow, drawHistGraph, HistUpdate (7 members) aligns 1:1 with DOS S24 frame 39C7 (7 functions); anchors by body identity: OpenHistoryWindow = win_Open(0x1500), ProcHistoryEvent = switch 0x150d DoWinHelp(0x150f) / 0x150e fill+graph loop+StillDown / 0x1503..0x150c ToggleHistButton"
     }
    ]
   },
@@ -961,6 +985,18 @@
     }
    ]
   },
+  "DoExpMenu": {
+   "unit": "S05",
+   "seg": 13923,
+   "off": 4,
+   "grounding": "inventory:far_call,vector",
+   "history": [
+    {
+     "was": "o05_3663_0004",
+     "why": "Win16 ANTEDIT_MODULE order EditScentMenu, EditToolsMenu (xver HIGH), [win_DrawExamineWindow, MagnifyMenu], AntMenu (xver HIGH), SetExpTool, DoWarnSetB, DoHealthSetY, DoTab, DoExpMenu; DOS S05 frames 35F5 (0000,EditToolsMenu,025C,AntMenu,0629,0642,0684,06C6) + 3663 (0004); fifth after AntMenu (next section frame 3663); xver LOW _DoExpMenu (unique constant 0x902 prox items 0x902..0x909 with CurExpTool 50F6:104C)"
+    }
+   ]
+  },
   "DoFightA": {
    "unit": "root",
    "seg": 2196,
@@ -1006,6 +1042,18 @@
     {
      "was": "f_0894_16A5",
      "why": "Win16 MAPSYM member list of the matching unit aligns 1:1 in order and count with the DOS module (already-named members fall at their positions); bodies near-identical (worker simA)"
+    }
+   ]
+  },
+  "DoHealthSetY": {
+   "unit": "S05",
+   "seg": 13813,
+   "off": 1668,
+   "grounding": "inventory:vector",
+   "history": [
+    {
+     "was": "o05_35F5_0684",
+     "why": "Win16 ANTEDIT_MODULE order EditScentMenu, EditToolsMenu (xver HIGH), [win_DrawExamineWindow, MagnifyMenu], AntMenu (xver HIGH), SetExpTool, DoWarnSetB, DoHealthSetY, DoTab, DoExpMenu; DOS S05 frames 35F5 (0000,EditToolsMenu,025C,AntMenu,0629,0642,0684,06C6) + 3663 (0004); third after AntMenu in both; same shape as DoWarnSetB with object 0x11 (50F6:0FBA)"
     }
    ]
   },
@@ -1261,6 +1309,18 @@
     }
    ]
   },
+  "DoTab": {
+   "unit": "S05",
+   "seg": 13813,
+   "off": 1734,
+   "grounding": "inventory:vector",
+   "history": [
+    {
+     "was": "o05_35F5_06C6",
+     "why": "Win16 ANTEDIT_MODULE order EditScentMenu, EditToolsMenu (xver HIGH), [win_DrawExamineWindow, MagnifyMenu], AntMenu (xver HIGH), SetExpTool, DoWarnSetB, DoHealthSetY, DoTab, DoExpMenu; DOS S05 frames 35F5 (0000,EditToolsMenu,025C,AntMenu,0629,0642,0684,06C6) + 3663 (0004); fourth after AntMenu in both; body = if (f_22BF_0A22(0)) f_00F8_050A(); else f_0250_0E70(); identical to Win16 DoTab (win_IsWinInFront(0) ? OpenMapYard() : OpenEditWindow())"
+    }
+   ]
+  },
   "DoToAlarm": {
    "unit": "root",
    "seg": 2196,
@@ -1309,6 +1369,18 @@
     }
    ]
   },
+  "DoWarnSetB": {
+   "unit": "S05",
+   "seg": 13813,
+   "off": 1602,
+   "grounding": "inventory:vector",
+   "history": [
+    {
+     "was": "o05_35F5_0642",
+     "why": "Win16 ANTEDIT_MODULE order EditScentMenu, EditToolsMenu (xver HIGH), [win_DrawExamineWindow, MagnifyMenu], AntMenu (xver HIGH), SetExpTool, DoWarnSetB, DoHealthSetY, DoTab, DoExpMenu; DOS S05 frames 35F5 (0000,EditToolsMenu,025C,AntMenu,0629,0642,0684,06C6) + 3663 (0004); second after AntMenu in both; body = win_GetObjRect(0x12,&r); 50F6:0FFE = (r.bottom - obj->y)*100/(r.bottom-r.top), the 0x12 branch of Win16 DoWarnSetB (BlkWarnHealth)"
+    }
+   ]
+  },
   "DoWinHelp": {
    "unit": "S14",
    "seg": 14412,
@@ -1330,6 +1402,18 @@
     {
      "was": "f_1A28_0277",
      "why": "xver HIGH features-v1: string \"%s dos error: %d: %s\"; string \"too many files open. you need a statement 'files=12' in your\""
+    }
+   ]
+  },
+  "DrawAnimYardMessage": {
+   "unit": "S13",
+   "seg": 14412,
+   "off": 3387,
+   "grounding": "inventory:push_cs_call",
+   "history": [
+    {
+     "was": "o13_384C_0D3B",
+     "why": "Win16 ANTEDIT MAPSYM yard unit aligned with S13:384C; renders the yard message (55B3:299A) like Win16 DrawAnimYardMessage"
     }
    ]
   },
@@ -1357,6 +1441,30 @@
     }
    ]
   },
+  "DrawColonyBars": {
+   "unit": "S13",
+   "seg": 14412,
+   "off": 5381,
+   "grounding": "inventory:push_cs_call",
+   "history": [
+    {
+     "was": "o13_384C_1505",
+     "why": "Win16 ANTEDIT MAPSYM yard unit aligned with S13:384C; position before YardArea, draws colony bars (f_1CE2_046D rects)"
+    }
+   ]
+  },
+  "DrawControlLevels": {
+   "unit": "root",
+   "seg": 1944,
+   "off": 2649,
+   "grounding": "inventory:push_cs_call",
+   "history": [
+    {
+     "was": "f_0798_0A59",
+     "why": "Win16 SIMANT_MODULE unit InitTriVars..initControls (MAPSYM B324..CC84, 20 members) aligns in order with the 18 functions of DOS root:0798 once the two Windows-only callbacks win_CasteControlChanged/win_ModeControlChanged are removed; InitTriVars body identical to Win16 recovered InitTriVars (win_GetObjRect, width/2, height, (half<<8)/height, 6 tri points); call graph agrees (OpenCaste->UpdateCaste+win_Open, ProcCaste->DrawCaste, ProcMode->DrawMode, Draw*->SetTriLatPoint, ProcCaste/initControls->cvtLevels2IdealCaste); ProcCasteEvent/ProcModeEvent xver unique constants 0x1303/0x1203; DrawControlLevels xver MEDIUM (%-ld%%)"
+    }
+   ]
+  },
   "DrawCurBalloons": {
    "unit": "root",
    "seg": 592,
@@ -1369,6 +1477,18 @@
     }
    ]
   },
+  "DrawDog": {
+   "unit": "S13",
+   "seg": 14412,
+   "off": 1731,
+   "grounding": "inventory:push_cs_call",
+   "history": [
+    {
+     "was": "o13_384C_06C3",
+     "why": "Win16 ANTEDIT MAPSYM yard unit aligns with DOS S13:384C; body matches Win16 DrawDog (DogX/DogY, ForSaleState==0, dogWalkX/dogWalk-Y tables, frame+0x2134, hanim_SetObjectPos/AddAnimObject)"
+    }
+   ]
+  },
   "DrawEditGraphs": {
    "unit": "root",
    "seg": 592,
@@ -1378,6 +1498,18 @@
     {
      "was": "f_0250_1583",
      "why": "Win16 MAPSYM ...BoundEditPosition,CenterEdit,DrawEditGraphs,SetEditWinTitle,...,PreDrawSpider; DOS 0F2C/0FC4 (bound/center bodies match Win16) ... 1583, 16FD(SetEditWinTitle), 179F(PreDrawSpider); 1583 draws the three edit-window bar graphs"
+    }
+   ]
+  },
+  "DrawForSale": {
+   "unit": "S13",
+   "seg": 14412,
+   "off": 2358,
+   "grounding": "inventory:push_cs_call",
+   "history": [
+    {
+     "was": "o13_384C_0936",
+     "why": "Win16 ANTEDIT MAPSYM yard unit aligns with DOS S13:384C; body matches Win16 DrawForSale (0xaa,0xba, picture 0x4ec)"
     }
    ]
   },
@@ -1417,6 +1549,30 @@
     }
    ]
   },
+  "DrawMiniMapCursor": {
+   "unit": "S04",
+   "seg": 13813,
+   "off": 2248,
+   "grounding": "inventory:push_cs_call",
+   "history": [
+    {
+     "was": "o04_35F5_08C8",
+     "why": "Win16 ANTEDIT_MODULE map-window members (Mini_DrawMapI xver HIGH anchor in the same DOS frame S04:35F5); body identical to Win16 DrawMiniMapCursor: cursor rect (50F6:384A..3850) = miniSize*MapPnt + origin (+just), extent = miniSize*editSize, GRectInvOutline(&rect,1) (f_1CE2_0410), state (DS:2338) = 1"
+    }
+   ]
+  },
+  "DrawMower": {
+   "unit": "S13",
+   "seg": 14412,
+   "off": 2485,
+   "grounding": "inventory:push_cs_call",
+   "history": [
+    {
+     "was": "o13_384C_09B5",
+     "why": "Win16 ANTEDIT MAPSYM yard unit aligned with S13 (DrawForSale, DrawMower order); xver constant 0x2260 (mower pictures)"
+    }
+   ]
+  },
   "DrawPalps": {
    "unit": "root",
    "seg": 592,
@@ -1429,6 +1585,66 @@
     }
    ]
   },
+  "DrawRain": {
+   "unit": "S13",
+   "seg": 14412,
+   "off": 3601,
+   "grounding": "inventory:push_cs_call",
+   "history": [
+    {
+     "was": "o13_384C_0E11",
+     "why": "Win16 ANTEDIT MAPSYM yard unit aligned with S13:384C; body matches Win16 DrawRain (14 drops, SRand1(400)+50, SRand1(150), picture 0x1b5d, layer 0x8000/1000)"
+    }
+   ]
+  },
+  "DrawSimBird": {
+   "unit": "S13",
+   "seg": 14412,
+   "off": 1955,
+   "grounding": "inventory:push_cs_call",
+   "history": [
+    {
+     "was": "o13_384C_07A3",
+     "why": "Win16 ANTEDIT MAPSYM yard unit aligns with DOS S13:384C; body matches Win16 DrawSimBird (BirdX-10, BirdY-3, frame adjust, frame+0x4e2)"
+    }
+   ]
+  },
+  "DrawSimCat": {
+   "unit": "S13",
+   "seg": 14412,
+   "off": 2142,
+   "grounding": "inventory:push_cs_call",
+   "history": [
+    {
+     "was": "o13_384C_085E",
+     "why": "Win16 ANTEDIT MAPSYM yard unit aligns with DOS S13:384C; body matches Win16 DrawSimCat (catFrameOffsets first/second X/Y for frames 10..19/20+, frame+0x514)"
+    }
+   ]
+  },
+  "DrawSimColonies": {
+   "unit": "S13",
+   "seg": 14412,
+   "off": 5010,
+   "grounding": "inventory:push_cs_call",
+   "history": [
+    {
+     "was": "o13_384C_1392",
+     "why": "Win16 ANTEDIT MAPSYM yard unit aligned with S13:384C; position after InvertPatch, draws colony tiles from 3D57:0164/00A4 with InvertPatch geometry"
+    }
+   ]
+  },
+  "DrawSimKid": {
+   "unit": "S13",
+   "seg": 14412,
+   "off": 1150,
+   "grounding": "inventory:push_cs_call",
+   "history": [
+    {
+     "was": "o13_384C_047E",
+     "why": "Win16 ANTEDIT MAPSYM yard unit aligns with DOS S13:384C; xver constant 0x1f40; kid position + frame tables, hanim object create/move, balloon text"
+    }
+   ]
+  },
   "DrawSpider": {
    "unit": "root",
    "seg": 592,
@@ -1438,6 +1654,54 @@
     {
      "was": "f_0250_18E7",
      "why": "xver HIGH neighbourhood-v1: 4 anchored neighbours agree: callee:SRand2, callee:SRand32, callee:SRand64, callee:TickCount; size ratio 1.02"
+    }
+   ]
+  },
+  "DrawSwarm": {
+   "unit": "S13",
+   "seg": 14412,
+   "off": 3808,
+   "grounding": "inventory:push_cs_call",
+   "history": [
+    {
+     "was": "o13_384C_0EE0",
+     "why": "Win16 ANTEDIT MAPSYM yard unit aligned with S13:384C; xver constant 0x1b5e, swarm pictures 0x1b5e/0x1b5f"
+    }
+   ]
+  },
+  "DrawYard": {
+   "unit": "S13",
+   "seg": 14412,
+   "off": 1094,
+   "grounding": "inventory:push_cs_call,vector",
+   "history": [
+    {
+     "was": "o13_384C_0446",
+     "why": "Win16 ANTEDIT MAPSYM yard unit ProcYardEvent..YardArea aligns with DOS S13:384C (24 functions, ribbon handler absent); if yard window 0x1900 open: redraw it (Win16 DrawYard), called by UpdateYard"
+    }
+   ]
+  },
+  "DrawYardCursor": {
+   "unit": "S13",
+   "seg": 14412,
+   "off": 403,
+   "grounding": "inventory:push_cs_call",
+   "history": [
+    {
+     "was": "o13_384C_0193",
+     "why": "Win16 ANTEDIT MAPSYM yard unit ProcYardEvent..YardArea aligns with DOS S13:384C (24 functions, ribbon handler absent); body identical to Win16 DrawYardCursor (if !flag: InvertPatch(CurYardPnt.x,y); flag=1)"
+    }
+   ]
+  },
+  "Draw_SimYard": {
+   "unit": "S13",
+   "seg": 14412,
+   "off": 2823,
+   "grounding": "inventory:push_cs_call",
+   "history": [
+    {
+     "was": "o13_384C_0B07",
+     "why": "Win16 ANTEDIT MAPSYM yard unit aligned with S13:384C; called as Draw_SimYard(YardMode,1) from 027C exactly like Win16 DrawYard; dispatches DrawSimCat/Dog/Kid/Mower/Bird/ForSale/Rain/Swarm/AnimYardMessage"
     }
    ]
   },
@@ -1585,6 +1849,18 @@
     }
    ]
   },
+  "EditScentMenu": {
+   "unit": "S05",
+   "seg": 13813,
+   "off": 0,
+   "grounding": "inventory:vector",
+   "history": [
+    {
+     "was": "o05_35F5_0000",
+     "why": "Win16 ANTEDIT_MODULE order EditScentMenu, EditToolsMenu (xver HIGH), [win_DrawExamineWindow, MagnifyMenu], AntMenu (xver HIGH), SetExpTool, DoWarnSetB, DoHealthSetY, DoTab, DoExpMenu; DOS S05 frames 35F5 (0000,EditToolsMenu,025C,AntMenu,0629,0642,0684,06C6) + 3663 (0004); body identical to Win16 EditScentMenu: win_DoProxMenu(0x600, ELayerMode+1) (xver LOW, unique constant 0x600), -1 check, ELayerMode=r-1, clip reset, win_SetObjSelectedState(0x10, ELayerMode != -1), then update call; immediately precedes EditToolsMenu in both"
+    }
+   ]
+  },
   "EditToolsMenu": {
    "unit": "S05",
    "seg": 13813,
@@ -1654,6 +1930,30 @@
     {
      "was": "o12_384C_036F",
      "why": "Win16 ANTEDIT_MODULE MAPSYM run DeinitMapFunctions,InitMapFunctions,...,DrawMapCursor,EraseMapCursor: body identical to Win16 EraseMapCursor (state==1, clip, GRectInvOutline(rect,2), state=0)"
+    }
+   ]
+  },
+  "EraseMiniMapCursor": {
+   "unit": "S04",
+   "seg": 13813,
+   "off": 2398,
+   "grounding": "inventory:push_cs_call",
+   "history": [
+    {
+     "was": "o04_35F5_095E",
+     "why": "Win16 ANTEDIT_MODULE map-window members (Mini_DrawMapI xver HIGH anchor in the same DOS frame S04:35F5); body identical to Win16 EraseMiniMapCursor: GRectInvOutline(&miniMapCursorRect 50F6:384A, 1) (f_1CE2_0410), state (DS:2338) = 0"
+    }
+   ]
+  },
+  "EraseYardCursor": {
+   "unit": "S13",
+   "seg": 14412,
+   "off": 444,
+   "grounding": "inventory:push_cs_call,vector",
+   "history": [
+    {
+     "was": "o13_384C_01BC",
+     "why": "Win16 ANTEDIT MAPSYM yard unit ProcYardEvent..YardArea aligns with DOS S13:384C (24 functions, ribbon handler absent); body identical to Win16 EraseYardCursor (if flag: InvertPatch(CurYardPnt.x,y); flag=0)"
     }
    ]
   },
@@ -2305,6 +2605,18 @@
     }
    ]
   },
+  "GetTriLatDist": {
+   "unit": "root",
+   "seg": 1944,
+   "off": 3361,
+   "grounding": "inventory:push_cs_call",
+   "history": [
+    {
+     "was": "f_0798_0D21",
+     "why": "Win16 SIMANT_MODULE unit InitTriVars..initControls (MAPSYM B324..CC84, 20 members) aligns in order with the 18 functions of DOS root:0798 once the two Windows-only callbacks win_CasteControlChanged/win_ModeControlChanged are removed; InitTriVars body identical to Win16 recovered InitTriVars (win_GetObjRect, width/2, height, (half<<8)/height, 6 tri points); call graph agrees (OpenCaste->UpdateCaste+win_Open, ProcCaste->DrawCaste, ProcMode->DrawMode, Draw*->SetTriLatPoint, ProcCaste/initControls->cvtLevels2IdealCaste); ProcCasteEvent/ProcModeEvent xver unique constants 0x1303/0x1203; DrawControlLevels xver MEDIUM (%-ld%%)"
+    }
+   ]
+  },
   "GetWinner": {
    "unit": "root",
    "seg": 2196,
@@ -2350,6 +2662,18 @@
     {
      "was": "f_1383_03B3",
      "why": "Win16 unit SIMTWO_MODULE 0000..12EC (GetStrategy..Bounce, 22 members, next unit starts at InitSimYard) aligns 1:1 with DOS module 1383 (22 functions); anchored by xver GstrR MEDIUM (pos 5), GetNewModeB HIGH (pos 14), GetForageDir HIGH (pos 16); call graph agrees (GetStrategy calls GstrB/SetCasteProd/SetModeProd/GstrR, GetNewMode dispatches to GetNewModeB/R, Bounce called by the Get*Dir members)"
+    }
+   ]
+  },
+  "HistUpdate": {
+   "unit": "S24",
+   "seg": 14791,
+   "off": 1544,
+   "grounding": "inventory:vector",
+   "history": [
+    {
+     "was": "o24_39C7_0608",
+     "why": "Win16 SIMANT_MODULE run OpenHistoryWindow, ProcHistoryEvent (xver LOW, unique 0x150d), ToggleHistButton, ClearHistory, win_DrawHistoryWindow, drawHistGraph, HistUpdate (7 members) aligns 1:1 with DOS S24 frame 39C7 (7 functions); anchors by body identity: OpenHistoryWindow = win_Open(0x1500), ProcHistoryEvent = switch 0x150d DoWinHelp(0x150f) / 0x150e fill+graph loop+StillDown / 0x1503..0x150c ToggleHistButton"
     }
    ]
   },
@@ -2461,6 +2785,18 @@
     }
    ]
   },
+  "InitTriVars": {
+   "unit": "root",
+   "seg": 1944,
+   "off": 0,
+   "grounding": "inventory:push_cs_call",
+   "history": [
+    {
+     "was": "f_0798_0000",
+     "why": "Win16 SIMANT_MODULE unit InitTriVars..initControls (MAPSYM B324..CC84, 20 members) aligns in order with the 18 functions of DOS root:0798 once the two Windows-only callbacks win_CasteControlChanged/win_ModeControlChanged are removed; InitTriVars body identical to Win16 recovered InitTriVars (win_GetObjRect, width/2, height, (half<<8)/height, 6 tri points); call graph agrees (OpenCaste->UpdateCaste+win_Open, ProcCaste->DrawCaste, ProcMode->DrawMode, Draw*->SetTriLatPoint, ProcCaste/initControls->cvtLevels2IdealCaste); ProcCasteEvent/ProcModeEvent xver unique constants 0x1303/0x1203; DrawControlLevels xver MEDIUM (%-ld%%)"
+    }
+   ]
+  },
   "InitWater": {
    "unit": "root",
    "seg": 3048,
@@ -2482,6 +2818,18 @@
     {
      "was": "o08_35F5_0A00",
      "why": "worker ovl08: Win16 RandWorld unit member / call-site evidence (report 2026-09-30)"
+    }
+   ]
+  },
+  "InvertPatch": {
+   "unit": "S13",
+   "seg": 14412,
+   "off": 4749,
+   "grounding": "inventory:push_cs_call,vector",
+   "history": [
+    {
+     "was": "o13_384C_128D",
+     "why": "Win16 ANTEDIT MAPSYM yard unit ProcYardEvent..YardArea aligns with DOS S13:384C (24 functions, ribbon handler absent); called by DrawYardCursor/EraseYardCursor with CurYardPnt.x/y exactly as Win16 InvertPatch"
     }
    ]
   },
@@ -2626,6 +2974,18 @@
     {
      "was": "f_0AD9_0F84",
      "why": "Win16 SIMTWO_MODULE run 3EF8..5A02 (InitSow..PillFoodTile, 19 members, between EndMigrate and InitSimVars) aligns 1:1 with DOS module 0AD9 (19 functions); xver DoAntLions (pos 6, LOW) agrees; call graph agrees (InitPillar->InitSow, DoPillar->DoSow, AddRandAntLion->AddAntLion, DoAntLions->SetAntLion/KillAntLion/FindInAList, DoPillar->pillar helpers)"
+    }
+   ]
+  },
+  "IsPointInIsoTri": {
+   "unit": "root",
+   "seg": 1944,
+   "off": 1471,
+   "grounding": "inventory:push_cs_call",
+   "history": [
+    {
+     "was": "f_0798_05BF",
+     "why": "Win16 SIMANT_MODULE unit InitTriVars..initControls (MAPSYM B324..CC84, 20 members) aligns in order with the 18 functions of DOS root:0798 once the two Windows-only callbacks win_CasteControlChanged/win_ModeControlChanged are removed; InitTriVars body identical to Win16 recovered InitTriVars (win_GetObjRect, width/2, height, (half<<8)/height, 6 tri points); call graph agrees (OpenCaste->UpdateCaste+win_Open, ProcCaste->DrawCaste, ProcMode->DrawMode, Draw*->SetTriLatPoint, ProcCaste/initControls->cvtLevels2IdealCaste); ProcCasteEvent/ProcModeEvent xver unique constants 0x1303/0x1203; DrawControlLevels xver MEDIUM (%-ld%%)"
     }
    ]
   },
@@ -3073,6 +3433,18 @@
     }
    ]
   },
+  "MapToolsMenu": {
+   "unit": "S04",
+   "seg": 13813,
+   "off": 0,
+   "grounding": "inventory:vector",
+   "history": [
+    {
+     "was": "o04_35F5_0000",
+     "why": "Win16 ANTEDIT_MODULE map-window members (Mini_DrawMapI xver HIGH anchor in the same DOS frame S04:35F5); body identical to Win16 MapToolsMenu: win_GetObjRect(0x117), switch *(50F6:0EAC) 1/2/3, GetObjSize(0xa00/0xb00/0x900) + DoProxMenu(id,-1,(top+bottom-h)/2,right-w-4), SetExpTool(CurExpTool), state=3, ClearMyLife(Me...), MeMode=2, InitSpider, SetEditWinTitle, myBeginSound(2,0,0x7e); DoExpMenu case 7 -> SetMyLife ... 0x117 bitmap redraw"
+    }
+   ]
+  },
   "Mini_DrawMapI": {
    "unit": "S04",
    "seg": 13813,
@@ -3082,6 +3454,18 @@
     {
      "was": "o04_35F5_04DE",
      "why": "xver HIGH features-v1: constant 0x1401; string \"generated map window\"; string \"map window image\""
+    }
+   ]
+  },
+  "Mini_MakeTable": {
+   "unit": "S04",
+   "seg": 13813,
+   "off": 1060,
+   "grounding": "inventory:push_cs_call",
+   "history": [
+    {
+     "was": "o04_35F5_0424",
+     "why": "Win16 ANTEDIT_MODULE map-window members (Mini_DrawMapI xver HIGH anchor in the same DOS frame S04:35F5); body identical to Win16 Mini_MakeTable: switch on the display type byte (g_5A97), multiplier (50F6:3854) == 0x40 selects the 2x2b/2x2a table builder, called only by Mini_DrawMapI"
     }
    ]
   },
@@ -3109,6 +3493,18 @@
     }
    ]
   },
+  "OpenCasteWindow": {
+   "unit": "root",
+   "seg": 1944,
+   "off": 277,
+   "grounding": "inventory:far_call",
+   "history": [
+    {
+     "was": "f_0798_0115",
+     "why": "Win16 SIMANT_MODULE unit InitTriVars..initControls (MAPSYM B324..CC84, 20 members) aligns in order with the 18 functions of DOS root:0798 once the two Windows-only callbacks win_CasteControlChanged/win_ModeControlChanged are removed; InitTriVars body identical to Win16 recovered InitTriVars (win_GetObjRect, width/2, height, (half<<8)/height, 6 tri points); call graph agrees (OpenCaste->UpdateCaste+win_Open, ProcCaste->DrawCaste, ProcMode->DrawMode, Draw*->SetTriLatPoint, ProcCaste/initControls->cvtLevels2IdealCaste); ProcCasteEvent/ProcModeEvent xver unique constants 0x1303/0x1203; DrawControlLevels xver MEDIUM (%-ld%%)"
+    }
+   ]
+  },
   "OpenDB": {
    "unit": "root",
    "seg": 6696,
@@ -3118,6 +3514,18 @@
     {
      "was": "f_1A28_0006",
      "why": "xver CONFIRMED features-v1+reviewed: '%s.dat' format plus unique 'cannot create data file.'; sprintf runtime call in both; runtime sprintf"
+    }
+   ]
+  },
+  "OpenHistoryWindow": {
+   "unit": "S24",
+   "seg": 14791,
+   "off": 0,
+   "grounding": "inventory:vector",
+   "history": [
+    {
+     "was": "o24_39C7_0000",
+     "why": "Win16 SIMANT_MODULE run OpenHistoryWindow, ProcHistoryEvent (xver LOW, unique 0x150d), ToggleHistButton, ClearHistory, win_DrawHistoryWindow, drawHistGraph, HistUpdate (7 members) aligns 1:1 with DOS S24 frame 39C7 (7 functions); anchors by body identity: OpenHistoryWindow = win_Open(0x1500), ProcHistoryEvent = switch 0x150d DoWinHelp(0x150f) / 0x150e fill+graph loop+StillDown / 0x1503..0x150c ToggleHistButton"
     }
    ]
   },
@@ -3142,6 +3550,42 @@
     {
      "was": "o23_39C7_0C19",
      "why": "Win16 MAPSYM _TEXT run _XFlipLong.._ProcInfoEvent (9 members) aligns 1:1 with DOS S23:39C7 (9 functions, same order); DisplayCard is xver HIGH at position 6; xver win_DrawInfoWindow/win_PrintStyleTextInRect/PopUpInfoWindow (MEDIUM) agree positionally; XFlipLong/FlipWords/win_DrawInfoWindow/OpenInfoWindow Win16 exact bodies match"
+    }
+   ]
+  },
+  "OpenMapWindow": {
+   "unit": "S12",
+   "seg": 14412,
+   "off": 656,
+   "grounding": "reviewed: unreferenced function in gap after ProcMapEvent: xor ax,ax; call __aFchkstk; f_20E8_04B6(0x100); retf (relocation order of __aFchkstk group lists its chkstk site 0295)",
+   "history": [
+    {
+     "was": "o12_384C_0290",
+     "why": "Win16 ANTEDIT MAPSYM order ProcMapEvent, ProcMapRibbonEvent, OpenMapWindow, DrawMapCursor: body identical to Win16 OpenMapWindow (win_Open(0x100))"
+    }
+   ]
+  },
+  "OpenMiniMapWin": {
+   "unit": "S04",
+   "seg": 13813,
+   "off": 1887,
+   "grounding": "inventory:vector",
+   "history": [
+    {
+     "was": "o04_35F5_075F",
+     "why": "Win16 ANTEDIT_MODULE map-window members (Mini_DrawMapI xver HIGH anchor in the same DOS frame S04:35F5); xver MEDIUM _OpenMiniMapWin (sole caller/callee of anchored Mini_DrawMapI); calls DrawMiniMapCursor/EraseMiniMapCursor and win_Open/win_Close"
+    }
+   ]
+  },
+  "OpenModeWindow": {
+   "unit": "root",
+   "seg": 1944,
+   "off": 299,
+   "grounding": "inventory:far_call",
+   "history": [
+    {
+     "was": "f_0798_012B",
+     "why": "Win16 SIMANT_MODULE unit InitTriVars..initControls (MAPSYM B324..CC84, 20 members) aligns in order with the 18 functions of DOS root:0798 once the two Windows-only callbacks win_CasteControlChanged/win_ModeControlChanged are removed; InitTriVars body identical to Win16 recovered InitTriVars (win_GetObjRect, width/2, height, (half<<8)/height, 6 tri points); call graph agrees (OpenCaste->UpdateCaste+win_Open, ProcCaste->DrawCaste, ProcMode->DrawMode, Draw*->SetTriLatPoint, ProcCaste/initControls->cvtLevels2IdealCaste); ProcCasteEvent/ProcModeEvent xver unique constants 0x1303/0x1203; DrawControlLevels xver MEDIUM (%-ld%%)"
     }
    ]
   },
@@ -3349,6 +3793,30 @@
     }
    ]
   },
+  "ProcCasteEvent": {
+   "unit": "root",
+   "seg": 1944,
+   "off": 321,
+   "grounding": "inventory:far_call",
+   "history": [
+    {
+     "was": "f_0798_0141",
+     "why": "Win16 SIMANT_MODULE unit InitTriVars..initControls (MAPSYM B324..CC84, 20 members) aligns in order with the 18 functions of DOS root:0798 once the two Windows-only callbacks win_CasteControlChanged/win_ModeControlChanged are removed; InitTriVars body identical to Win16 recovered InitTriVars (win_GetObjRect, width/2, height, (half<<8)/height, 6 tri points); call graph agrees (OpenCaste->UpdateCaste+win_Open, ProcCaste->DrawCaste, ProcMode->DrawMode, Draw*->SetTriLatPoint, ProcCaste/initControls->cvtLevels2IdealCaste); ProcCasteEvent/ProcModeEvent xver unique constants 0x1303/0x1203; DrawControlLevels xver MEDIUM (%-ld%%)"
+    }
+   ]
+  },
+  "ProcHistoryEvent": {
+   "unit": "S24",
+   "seg": 14791,
+   "off": 18,
+   "grounding": "inventory:vector",
+   "history": [
+    {
+     "was": "o24_39C7_0012",
+     "why": "Win16 SIMANT_MODULE run OpenHistoryWindow, ProcHistoryEvent (xver LOW, unique 0x150d), ToggleHistButton, ClearHistory, win_DrawHistoryWindow, drawHistGraph, HistUpdate (7 members) aligns 1:1 with DOS S24 frame 39C7 (7 functions); anchors by body identity: OpenHistoryWindow = win_Open(0x1500), ProcHistoryEvent = switch 0x150d DoWinHelp(0x150f) / 0x150e fill+graph loop+StillDown / 0x1503..0x150c ToggleHistButton"
+    }
+   ]
+  },
   "ProcInfoEvent": {
    "unit": "S23",
    "seg": 14791,
@@ -3358,6 +3826,42 @@
     {
      "was": "o23_39C7_0F50",
      "why": "Win16 MAPSYM _TEXT run _XFlipLong.._ProcInfoEvent (9 members) aligns 1:1 with DOS S23:39C7 (9 functions, same order); DisplayCard is xver HIGH at position 6; xver win_DrawInfoWindow/win_PrintStyleTextInRect/PopUpInfoWindow (MEDIUM) agree positionally; XFlipLong/FlipWords/win_DrawInfoWindow/OpenInfoWindow Win16 exact bodies match"
+    }
+   ]
+  },
+  "ProcMapEvent": {
+   "unit": "S12",
+   "seg": 14412,
+   "off": 352,
+   "grounding": "inventory:vector",
+   "history": [
+    {
+     "was": "o12_384C_0160",
+     "why": "Win16 ANTEDIT MAPSYM: ProcMapEvent follows InitMapFunctions; body identical to Win16 ProcMapEvent (switch on event code 0x102..0x118 with the same callees per case: MapAreaEvent, MapToYard, ClearMapScentButtons+SetMapPlane(1..3), SetMapModeAnt(4..8), showTrails toggle, ...)"
+    }
+   ]
+  },
+  "ProcModeEvent": {
+   "unit": "root",
+   "seg": 1944,
+   "off": 903,
+   "grounding": "inventory:far_call",
+   "history": [
+    {
+     "was": "f_0798_0387",
+     "why": "Win16 SIMANT_MODULE unit InitTriVars..initControls (MAPSYM B324..CC84, 20 members) aligns in order with the 18 functions of DOS root:0798 once the two Windows-only callbacks win_CasteControlChanged/win_ModeControlChanged are removed; InitTriVars body identical to Win16 recovered InitTriVars (win_GetObjRect, width/2, height, (half<<8)/height, 6 tri points); call graph agrees (OpenCaste->UpdateCaste+win_Open, ProcCaste->DrawCaste, ProcMode->DrawMode, Draw*->SetTriLatPoint, ProcCaste/initControls->cvtLevels2IdealCaste); ProcCasteEvent/ProcModeEvent xver unique constants 0x1303/0x1203; DrawControlLevels xver MEDIUM (%-ld%%)"
+    }
+   ]
+  },
+  "ProcYardEvent": {
+   "unit": "S13",
+   "seg": 14412,
+   "off": 0,
+   "grounding": "inventory:vector",
+   "history": [
+    {
+     "was": "o13_384C_0000",
+     "why": "Win16 ANTEDIT MAPSYM yard unit ProcYardEvent..YardArea aligns with DOS S13:384C (24 functions, ribbon handler absent); first member, switch on yard window event codes 0x1902..0x1911, xver constant 0x1906"
     }
    ]
   },
@@ -3490,6 +3994,30 @@
     {
      "was": "o22_3BBD_028F",
      "why": "Win16 MAPSYM ANTEDIT_MODULE run _processExp.._SetSM (23 members, DoTool..SetSM) aligns 1:1 with DOS S22:3BBD (23 functions, same order); Win16 exact bodies of DoTool/ReDrawMapEdit/ClearLifeB/R/ExpAddAnt/ExpAddFood/WallNeighbors/IsItWall/FillDirtB/R/SmoothMany/IsValidSLoc/GetSM/SetSM match the DOS code; xver DropWall/ExpAddAnt/ExpKillAnts agree positionally; wallShape table 2DF4 = Win16 ConnectWall data"
+    }
+   ]
+  },
+  "ReadConfig": {
+   "unit": "S20",
+   "seg": 14833,
+   "off": 1140,
+   "grounding": "inventory:push_cs_call",
+   "history": [
+    {
+     "was": "o20_39F1_0474",
+     "why": "Win16 GR_MODULE run IBMInitStuff, ReadWord, SkipWords, ReadConfig (then GBoxFillOutline) aligns 1:1 with DOS S20 frame 39F1 (IBMInitStuff xver HIGH, then 03DE, 044F, 0474); opens the configuration file, SkipWords(fd,2), reads two chars, close, 'Bad Display Mode in configuration file' -> display mode byte g_5A97; called first by IBMInitStuff"
+    }
+   ]
+  },
+  "ReadWord": {
+   "unit": "S20",
+   "seg": 14833,
+   "off": 990,
+   "grounding": "inventory:push_cs_call",
+   "history": [
+    {
+     "was": "o20_39F1_03DE",
+     "why": "Win16 GR_MODULE run IBMInitStuff, ReadWord, SkipWords, ReadConfig (then GBoxFillOutline) aligns 1:1 with DOS S20 frame 39F1 (IBMInitStuff xver HIGH, then 03DE, 044F, 0474); body identical to Win16 ReadWord: read(fd,&c,1) while isspace, then store chars until read fails or isspace, then NUL"
     }
    ]
   },
@@ -3841,6 +4369,18 @@
     }
    ]
   },
+  "SetExpTool": {
+   "unit": "S05",
+   "seg": 13813,
+   "off": 1577,
+   "grounding": "inventory:push_cs_call,vector",
+   "history": [
+    {
+     "was": "o05_35F5_0629",
+     "why": "Win16 ANTEDIT_MODULE order EditScentMenu, EditToolsMenu (xver HIGH), [win_DrawExamineWindow, MagnifyMenu], AntMenu (xver HIGH), SetExpTool, DoWarnSetB, DoHealthSetY, DoTab, DoExpMenu; DOS S05 frames 35F5 (0000,EditToolsMenu,025C,AntMenu,0629,0642,0684,06C6) + 3663 (0004); first member after anchored AntMenu in both; body = CurExpTool (50F6:104C) = arg, as Win16 SetExpTool; called by EditToolsMenu"
+    }
+   ]
+  },
   "SetGoalsY": {
    "unit": "S22",
    "seg": 14791,
@@ -3949,6 +4489,18 @@
     }
    ]
   },
+  "SetTriLatPoint": {
+   "unit": "root",
+   "seg": 1944,
+   "off": 3655,
+   "grounding": "inventory:push_cs_call",
+   "history": [
+    {
+     "was": "f_0798_0E47",
+     "why": "Win16 SIMANT_MODULE unit InitTriVars..initControls (MAPSYM B324..CC84, 20 members) aligns in order with the 18 functions of DOS root:0798 once the two Windows-only callbacks win_CasteControlChanged/win_ModeControlChanged are removed; InitTriVars body identical to Win16 recovered InitTriVars (win_GetObjRect, width/2, height, (half<<8)/height, 6 tri points); call graph agrees (OpenCaste->UpdateCaste+win_Open, ProcCaste->DrawCaste, ProcMode->DrawMode, Draw*->SetTriLatPoint, ProcCaste/initControls->cvtLevels2IdealCaste); ProcCasteEvent/ProcModeEvent xver unique constants 0x1303/0x1203; DrawControlLevels xver MEDIUM (%-ld%%)"
+    }
+   ]
+  },
   "ShowIntro": {
    "unit": "S16",
    "seg": 14412,
@@ -4018,6 +4570,18 @@
     {
      "was": "f_0F3F_0B1F",
      "why": "Win16 MAPSYM member list of the matching unit aligns 1:1 in order and count with the DOS module (already-named members fall at their positions); bodies near-identical (worker simA)"
+    }
+   ]
+  },
+  "SkipWords": {
+   "unit": "S20",
+   "seg": 14833,
+   "off": 1103,
+   "grounding": "inventory:push_cs_call",
+   "history": [
+    {
+     "was": "o20_39F1_044F",
+     "why": "Win16 GR_MODULE run IBMInitStuff, ReadWord, SkipWords, ReadConfig (then GBoxFillOutline) aligns 1:1 with DOS S20 frame 39F1 (IBMInitStuff xver HIGH, then 03DE, 044F, 0474); body = while (count--) ReadWord(fd, buf[30]) (Win16 SkipWords inlines the same loop)"
     }
    ]
   },
@@ -4201,6 +4765,42 @@
     }
    ]
   },
+  "ToggleHistButton": {
+   "unit": "S24",
+   "seg": 14791,
+   "off": 179,
+   "grounding": "inventory:push_cs_call",
+   "history": [
+    {
+     "was": "o24_39C7_00B3",
+     "why": "Win16 SIMANT_MODULE run OpenHistoryWindow, ProcHistoryEvent (xver LOW, unique 0x150d), ToggleHistButton, ClearHistory, win_DrawHistoryWindow, drawHistGraph, HistUpdate (7 members) aligns 1:1 with DOS S24 frame 39C7 (7 functions); anchors by body identity: OpenHistoryWindow = win_Open(0x1500), ProcHistoryEvent = switch 0x150d DoWinHelp(0x150f) / 0x150e fill+graph loop+StillDown / 0x1503..0x150c ToggleHistButton"
+    }
+   ]
+  },
+  "ToggleMapCursor": {
+   "unit": "S12",
+   "seg": 14412,
+   "off": 952,
+   "grounding": "reviewed: unreferenced function in gap after EraseMapCursor: if (state 298E) EraseMapCursor() else DrawMapCursor() (chkstk site 03BD in relocation order)",
+   "history": [
+    {
+     "was": "o12_384C_03B8",
+     "why": "Win16 ANTEDIT MAPSYM order ... EraseMapCursor, ToggleMapCursor: body = if (mapCursorState) EraseMapCursor(); else DrawMapCursor();"
+    }
+   ]
+  },
+  "TooFar": {
+   "unit": "S13",
+   "seg": 14412,
+   "off": 4704,
+   "grounding": "inventory:push_cs_call",
+   "history": [
+    {
+     "was": "o13_384C_1260",
+     "why": "Win16 ANTEDIT MAPSYM yard unit aligned with S13:384C; body identical to Win16 TooFar (|x|,|y| > 15)"
+    }
+   ]
+  },
   "TryAntTheme": {
    "unit": "root",
    "seg": 3048,
@@ -4261,6 +4861,42 @@
     }
    ]
   },
+  "UpdateCasteWindow": {
+   "unit": "root",
+   "seg": 1944,
+   "off": 153,
+   "grounding": "inventory:far_call,push_cs_call",
+   "history": [
+    {
+     "was": "f_0798_0099",
+     "why": "Win16 SIMANT_MODULE unit InitTriVars..initControls (MAPSYM B324..CC84, 20 members) aligns in order with the 18 functions of DOS root:0798 once the two Windows-only callbacks win_CasteControlChanged/win_ModeControlChanged are removed; InitTriVars body identical to Win16 recovered InitTriVars (win_GetObjRect, width/2, height, (half<<8)/height, 6 tri points); call graph agrees (OpenCaste->UpdateCaste+win_Open, ProcCaste->DrawCaste, ProcMode->DrawMode, Draw*->SetTriLatPoint, ProcCaste/initControls->cvtLevels2IdealCaste); ProcCasteEvent/ProcModeEvent xver unique constants 0x1303/0x1203; DrawControlLevels xver MEDIUM (%-ld%%)"
+    }
+   ]
+  },
+  "UpdateModeWindow": {
+   "unit": "root",
+   "seg": 1944,
+   "off": 215,
+   "grounding": "inventory:far_call,push_cs_call",
+   "history": [
+    {
+     "was": "f_0798_00D7",
+     "why": "Win16 SIMANT_MODULE unit InitTriVars..initControls (MAPSYM B324..CC84, 20 members) aligns in order with the 18 functions of DOS root:0798 once the two Windows-only callbacks win_CasteControlChanged/win_ModeControlChanged are removed; InitTriVars body identical to Win16 recovered InitTriVars (win_GetObjRect, width/2, height, (half<<8)/height, 6 tri points); call graph agrees (OpenCaste->UpdateCaste+win_Open, ProcCaste->DrawCaste, ProcMode->DrawMode, Draw*->SetTriLatPoint, ProcCaste/initControls->cvtLevels2IdealCaste); ProcCasteEvent/ProcModeEvent xver unique constants 0x1303/0x1203; DrawControlLevels xver MEDIUM (%-ld%%)"
+    }
+   ]
+  },
+  "UpdateYard": {
+   "unit": "S13",
+   "seg": 14412,
+   "off": 1138,
+   "grounding": "inventory:push_cs_call,vector",
+   "history": [
+    {
+     "was": "o13_384C_0472",
+     "why": "Win16 ANTEDIT MAPSYM yard unit ProcYardEvent..YardArea aligns with DOS S13:384C (24 functions, ribbon handler absent); follows DrawYard, body = DrawYard()"
+    }
+   ]
+  },
   "WINMAIN": {
    "unit": "root",
    "seg": 5624,
@@ -4312,6 +4948,18 @@
     {
      "was": "o23_39C7_0000",
      "why": "Win16 MAPSYM _TEXT run _XFlipLong.._ProcInfoEvent (9 members) aligns 1:1 with DOS S23:39C7 (9 functions, same order); DisplayCard is xver HIGH at position 6; xver win_DrawInfoWindow/win_PrintStyleTextInRect/PopUpInfoWindow (MEDIUM) agree positionally; XFlipLong/FlipWords/win_DrawInfoWindow/OpenInfoWindow Win16 exact bodies match"
+    }
+   ]
+  },
+  "YardArea": {
+   "unit": "S13",
+   "seg": 14412,
+   "off": 5871,
+   "grounding": "inventory:push_cs_call",
+   "history": [
+    {
+     "was": "o13_384C_16EF",
+     "why": "Win16 ANTEDIT MAPSYM yard unit ProcYardEvent..YardArea aligns with DOS S13:384C (24 functions, ribbon handler absent); last member, literal 'YARD AREA @ %d, %d : %d, %d', called for yard click event 0x1902"
     }
    ]
   },
@@ -4531,6 +5179,18 @@
     }
    ]
   },
+  "cvtLevels2IdealCaste": {
+   "unit": "root",
+   "seg": 1944,
+   "off": 3192,
+   "grounding": "inventory:push_cs_call",
+   "history": [
+    {
+     "was": "f_0798_0C78",
+     "why": "Win16 SIMANT_MODULE unit InitTriVars..initControls (MAPSYM B324..CC84, 20 members) aligns in order with the 18 functions of DOS root:0798 once the two Windows-only callbacks win_CasteControlChanged/win_ModeControlChanged are removed; InitTriVars body identical to Win16 recovered InitTriVars (win_GetObjRect, width/2, height, (half<<8)/height, 6 tri points); call graph agrees (OpenCaste->UpdateCaste+win_Open, ProcCaste->DrawCaste, ProcMode->DrawMode, Draw*->SetTriLatPoint, ProcCaste/initControls->cvtLevels2IdealCaste); ProcCasteEvent/ProcModeEvent xver unique constants 0x1303/0x1203; DrawControlLevels xver MEDIUM (%-ld%%)"
+    }
+   ]
+  },
   "db_CloseDataBase": {
    "unit": "root",
    "seg": 6739,
@@ -4667,6 +5327,18 @@
     }
    ]
   },
+  "drawHistGraph": {
+   "unit": "S24",
+   "seg": 14791,
+   "off": 812,
+   "grounding": "inventory:push_cs_call",
+   "history": [
+    {
+     "was": "o24_39C7_032C",
+     "why": "Win16 SIMANT_MODULE run OpenHistoryWindow, ProcHistoryEvent (xver LOW, unique 0x150d), ToggleHistButton, ClearHistory, win_DrawHistoryWindow, drawHistGraph, HistUpdate (7 members) aligns 1:1 with DOS S24 frame 39C7 (7 functions); anchors by body identity: OpenHistoryWindow = win_Open(0x1500), ProcHistoryEvent = switch 0x150d DoWinHelp(0x150f) / 0x150e fill+graph loop+StillDown / 0x1503..0x150c ToggleHistButton"
+    }
+   ]
+  },
   "ed_LineTo": {
    "unit": "root",
    "seg": 592,
@@ -4690,6 +5362,12 @@
      "why": "Win16 MAPSYM DrawSpider,ed_MoveTo,ed_LineTo,DrawPalps,DrawLegs; DOS 20A5 stores (x,y) (3/4 scaled on display 2) into the pen position used by 20FA, like Win16 ed_MoveTo"
     }
    ]
+  },
+  "f_0000_0000": {
+   "unit": "root",
+   "seg": 0,
+   "off": 0,
+   "grounding": "reviewed: entry of root frame 0000 (push bp..retf at 008F), referenced only as a far data pointer: f_277E_0000 passes 0000:0000 (relocated) to f_19A9_000B, the DB load hook setter (g_36F2); body checks type==5 (PCM)"
   },
   "f_0000_0090": {
    "unit": "root",
@@ -5679,109 +6357,109 @@
    "unit": "root",
    "seg": 1944,
    "off": 0,
-   "grounding": "inventory:push_cs_call"
+   "alias_of": "InitTriVars"
   },
   "f_0798_0099": {
    "unit": "root",
    "seg": 1944,
    "off": 153,
-   "grounding": "inventory:far_call,push_cs_call"
+   "alias_of": "UpdateCasteWindow"
   },
   "f_0798_00D7": {
    "unit": "root",
    "seg": 1944,
    "off": 215,
-   "grounding": "inventory:far_call,push_cs_call"
+   "alias_of": "UpdateModeWindow"
   },
   "f_0798_0115": {
    "unit": "root",
    "seg": 1944,
    "off": 277,
-   "grounding": "inventory:far_call"
+   "alias_of": "OpenCasteWindow"
   },
   "f_0798_012B": {
    "unit": "root",
    "seg": 1944,
    "off": 299,
-   "grounding": "inventory:far_call"
+   "alias_of": "OpenModeWindow"
   },
   "f_0798_0141": {
    "unit": "root",
    "seg": 1944,
    "off": 321,
-   "grounding": "inventory:far_call"
+   "alias_of": "ProcCasteEvent"
   },
   "f_0798_0387": {
    "unit": "root",
    "seg": 1944,
    "off": 903,
-   "grounding": "inventory:far_call"
+   "alias_of": "ProcModeEvent"
   },
   "f_0798_05BF": {
    "unit": "root",
    "seg": 1944,
    "off": 1471,
-   "grounding": "inventory:push_cs_call"
+   "alias_of": "IsPointInIsoTri"
   },
   "f_0798_0691": {
    "unit": "root",
    "seg": 1944,
    "off": 1681,
-   "grounding": "inventory:push_cs_call"
+   "alias_of": "BoundPointToTri"
   },
   "f_0798_0751": {
    "unit": "root",
    "seg": 1944,
    "off": 1873,
-   "grounding": "inventory:push_cs_call,vector"
+   "alias_of": "win_DrawModeWindow"
   },
   "f_0798_0896": {
    "unit": "root",
    "seg": 1944,
    "off": 2198,
-   "grounding": "inventory:far_call,push_cs_call"
+   "alias_of": "win_ModeControlClosed"
   },
   "f_0798_08D5": {
    "unit": "root",
    "seg": 1944,
    "off": 2261,
-   "grounding": "inventory:push_cs_call,vector"
+   "alias_of": "win_DrawCasteWindow"
   },
   "f_0798_0A1A": {
    "unit": "root",
    "seg": 1944,
    "off": 2586,
-   "grounding": "inventory:far_call,push_cs_call"
+   "alias_of": "win_CasteControlClosed"
   },
   "f_0798_0A59": {
    "unit": "root",
    "seg": 1944,
    "off": 2649,
-   "grounding": "inventory:push_cs_call"
+   "alias_of": "DrawControlLevels"
   },
   "f_0798_0C78": {
    "unit": "root",
    "seg": 1944,
    "off": 3192,
-   "grounding": "inventory:push_cs_call"
+   "alias_of": "cvtLevels2IdealCaste"
   },
   "f_0798_0D21": {
    "unit": "root",
    "seg": 1944,
    "off": 3361,
-   "grounding": "inventory:push_cs_call"
+   "alias_of": "GetTriLatDist"
   },
   "f_0798_0E47": {
    "unit": "root",
    "seg": 1944,
    "off": 3655,
-   "grounding": "inventory:push_cs_call"
+   "alias_of": "SetTriLatPoint"
   },
   "f_0798_0F0D": {
    "unit": "root",
    "seg": 1944,
    "off": 3853,
-   "grounding": "inventory:far_call"
+   "alias_of": "initControls"
   },
   "f_0894_000E": {
    "unit": "root",
@@ -9497,6 +10175,12 @@
    "off": 1386,
    "grounding": "reviewed: prologue scan in unreached gap; descent ends in a return; no references found (unreferenced or indirect)"
   },
+  "f_208F_058B": {
+   "unit": "root",
+   "seg": 8335,
+   "off": 1419,
+   "grounding": "reviewed: frameless 'mov ax,3; retf' after f_208F_056A; address passed as far code pointer (mov ax,058Bh; mov dx,SEG 208F) to _harderr by IBMInitStuff (S20:39F1:02AE) - the critical-error handler returning _HARDERR_FAIL"
+  },
   "f_20E8_0000": {
    "unit": "root",
    "seg": 8424,
@@ -11279,6 +11963,18 @@
     }
    ]
   },
+  "initControls": {
+   "unit": "root",
+   "seg": 1944,
+   "off": 3853,
+   "grounding": "inventory:far_call",
+   "history": [
+    {
+     "was": "f_0798_0F0D",
+     "why": "Win16 SIMANT_MODULE unit InitTriVars..initControls (MAPSYM B324..CC84, 20 members) aligns in order with the 18 functions of DOS root:0798 once the two Windows-only callbacks win_CasteControlChanged/win_ModeControlChanged are removed; InitTriVars body identical to Win16 recovered InitTriVars (win_GetObjRect, width/2, height, (half<<8)/height, 6 tri points); call graph agrees (OpenCaste->UpdateCaste+win_Open, ProcCaste->DrawCaste, ProcMode->DrawMode, Draw*->SetTriLatPoint, ProcCaste/initControls->cvtLevels2IdealCaste); ProcCasteEvent/ProcModeEvent xver unique constants 0x1303/0x1203; DrawControlLevels xver MEDIUM (%-ld%%)"
+    }
+   ]
+  },
   "initStuff": {
    "unit": "root",
    "seg": 1883,
@@ -12103,7 +12799,7 @@
    "unit": "S04",
    "seg": 13813,
    "off": 0,
-   "grounding": "inventory:vector"
+   "alias_of": "MapToolsMenu"
   },
   "o04_35F5_025A": {
    "unit": "S04",
@@ -12115,7 +12811,7 @@
    "unit": "S04",
    "seg": 13813,
    "off": 1060,
-   "grounding": "inventory:push_cs_call"
+   "alias_of": "Mini_MakeTable"
   },
   "o04_35F5_04DE": {
    "unit": "S04",
@@ -12127,25 +12823,25 @@
    "unit": "S04",
    "seg": 13813,
    "off": 1887,
-   "grounding": "inventory:vector"
+   "alias_of": "OpenMiniMapWin"
   },
   "o04_35F5_08C8": {
    "unit": "S04",
    "seg": 13813,
    "off": 2248,
-   "grounding": "inventory:push_cs_call"
+   "alias_of": "DrawMiniMapCursor"
   },
   "o04_35F5_095E": {
    "unit": "S04",
    "seg": 13813,
    "off": 2398,
-   "grounding": "inventory:push_cs_call"
+   "alias_of": "EraseMiniMapCursor"
   },
   "o05_35F5_0000": {
    "unit": "S05",
    "seg": 13813,
    "off": 0,
-   "grounding": "inventory:vector"
+   "alias_of": "EditScentMenu"
   },
   "o05_35F5_0064": {
    "unit": "S05",
@@ -12169,31 +12865,31 @@
    "unit": "S05",
    "seg": 13813,
    "off": 1577,
-   "grounding": "inventory:push_cs_call,vector"
+   "alias_of": "SetExpTool"
   },
   "o05_35F5_0642": {
    "unit": "S05",
    "seg": 13813,
    "off": 1602,
-   "grounding": "inventory:vector"
+   "alias_of": "DoWarnSetB"
   },
   "o05_35F5_0684": {
    "unit": "S05",
    "seg": 13813,
    "off": 1668,
-   "grounding": "inventory:vector"
+   "alias_of": "DoHealthSetY"
   },
   "o05_35F5_06C6": {
    "unit": "S05",
    "seg": 13813,
    "off": 1734,
-   "grounding": "inventory:vector"
+   "alias_of": "DoTab"
   },
   "o05_3663_0004": {
    "unit": "S05",
    "seg": 13923,
    "off": 4,
-   "grounding": "inventory:far_call,vector"
+   "alias_of": "DoExpMenu"
   },
   "o06_35F5_0000": {
    "unit": "S06",
@@ -12577,7 +13273,13 @@
    "unit": "S12",
    "seg": 14412,
    "off": 352,
-   "grounding": "inventory:vector"
+   "alias_of": "ProcMapEvent"
+  },
+  "o12_384C_0290": {
+   "unit": "S12",
+   "seg": 14412,
+   "off": 656,
+   "alias_of": "OpenMapWindow"
   },
   "o12_384C_02A2": {
    "unit": "S12",
@@ -12590,6 +13292,12 @@
    "seg": 14412,
    "off": 879,
    "alias_of": "EraseMapCursor"
+  },
+  "o12_384C_03B8": {
+   "unit": "S12",
+   "seg": 14412,
+   "off": 952,
+   "alias_of": "ToggleMapCursor"
   },
   "o12_384C_03D0": {
    "unit": "S12",
@@ -12667,19 +13375,19 @@
    "unit": "S13",
    "seg": 14412,
    "off": 0,
-   "grounding": "inventory:vector"
+   "alias_of": "ProcYardEvent"
   },
   "o13_384C_0193": {
    "unit": "S13",
    "seg": 14412,
    "off": 403,
-   "grounding": "inventory:push_cs_call"
+   "alias_of": "DrawYardCursor"
   },
   "o13_384C_01BC": {
    "unit": "S13",
    "seg": 14412,
    "off": 444,
-   "grounding": "inventory:push_cs_call,vector"
+   "alias_of": "EraseYardCursor"
   },
   "o13_384C_01E5": {
    "unit": "S13",
@@ -12697,7 +13405,7 @@
    "unit": "S13",
    "seg": 14412,
    "off": 727,
-   "grounding": "inventory:push_cs_call,vector"
+   "alias_of": "win_DrawYardWindow"
   },
   "o13_384C_03F8": {
    "unit": "S13",
@@ -12709,103 +13417,103 @@
    "unit": "S13",
    "seg": 14412,
    "off": 1094,
-   "grounding": "inventory:push_cs_call,vector"
+   "alias_of": "DrawYard"
   },
   "o13_384C_0472": {
    "unit": "S13",
    "seg": 14412,
    "off": 1138,
-   "grounding": "inventory:push_cs_call,vector"
+   "alias_of": "UpdateYard"
   },
   "o13_384C_047E": {
    "unit": "S13",
    "seg": 14412,
    "off": 1150,
-   "grounding": "inventory:push_cs_call"
+   "alias_of": "DrawSimKid"
   },
   "o13_384C_06C3": {
    "unit": "S13",
    "seg": 14412,
    "off": 1731,
-   "grounding": "inventory:push_cs_call"
+   "alias_of": "DrawDog"
   },
   "o13_384C_07A3": {
    "unit": "S13",
    "seg": 14412,
    "off": 1955,
-   "grounding": "inventory:push_cs_call"
+   "alias_of": "DrawSimBird"
   },
   "o13_384C_085E": {
    "unit": "S13",
    "seg": 14412,
    "off": 2142,
-   "grounding": "inventory:push_cs_call"
+   "alias_of": "DrawSimCat"
   },
   "o13_384C_0936": {
    "unit": "S13",
    "seg": 14412,
    "off": 2358,
-   "grounding": "inventory:push_cs_call"
+   "alias_of": "DrawForSale"
   },
   "o13_384C_09B5": {
    "unit": "S13",
    "seg": 14412,
    "off": 2485,
-   "grounding": "inventory:push_cs_call"
+   "alias_of": "DrawMower"
   },
   "o13_384C_0B07": {
    "unit": "S13",
    "seg": 14412,
    "off": 2823,
-   "grounding": "inventory:push_cs_call"
+   "alias_of": "Draw_SimYard"
   },
   "o13_384C_0D3B": {
    "unit": "S13",
    "seg": 14412,
    "off": 3387,
-   "grounding": "inventory:push_cs_call"
+   "alias_of": "DrawAnimYardMessage"
   },
   "o13_384C_0E11": {
    "unit": "S13",
    "seg": 14412,
    "off": 3601,
-   "grounding": "inventory:push_cs_call"
+   "alias_of": "DrawRain"
   },
   "o13_384C_0EE0": {
    "unit": "S13",
    "seg": 14412,
    "off": 3808,
-   "grounding": "inventory:push_cs_call"
+   "alias_of": "DrawSwarm"
   },
   "o13_384C_1260": {
    "unit": "S13",
    "seg": 14412,
    "off": 4704,
-   "grounding": "inventory:push_cs_call"
+   "alias_of": "TooFar"
   },
   "o13_384C_128D": {
    "unit": "S13",
    "seg": 14412,
    "off": 4749,
-   "grounding": "inventory:push_cs_call,vector"
+   "alias_of": "InvertPatch"
   },
   "o13_384C_1392": {
    "unit": "S13",
    "seg": 14412,
    "off": 5010,
-   "grounding": "inventory:push_cs_call"
+   "alias_of": "DrawSimColonies"
   },
   "o13_384C_1505": {
    "unit": "S13",
    "seg": 14412,
    "off": 5381,
-   "grounding": "inventory:push_cs_call"
+   "alias_of": "DrawColonyBars"
   },
   "o13_384C_16EF": {
    "unit": "S13",
    "seg": 14412,
    "off": 5871,
-   "grounding": "inventory:push_cs_call"
+   "alias_of": "YardArea"
   },
   "o14_384C_0000": {
    "unit": "S14",
@@ -13173,6 +13881,12 @@
    "off": 6,
    "grounding": "inventory:vector"
   },
+  "o20_39C7_0007": {
+   "unit": "S20",
+   "seg": 14791,
+   "off": 7,
+   "grounding": "reviewed: 8th 1-byte retf stub in S20 frame 39C7 (bytes 39C70..39C77 are eight CB); descent found 0000-0006 only; module is a font/driver stub table, GS-1 empty /Gs functions"
+  },
   "o20_39C7_0008": {
    "unit": "S20",
    "seg": 14791,
@@ -13215,6 +13929,12 @@
    "off": 530,
    "grounding": "inventory:vector"
   },
+  "o20_39C7_02A8": {
+   "unit": "S20",
+   "seg": 14791,
+   "off": 680,
+   "grounding": "reviewed: 1-byte retf at 39F18 (39F1:0008) followed by LINK fill 00 at 39F19 and IBMInitStuff's module at 39F1A: odd end of the 39C7 module, so this stub is its last member"
+  },
   "o20_39F1_000A": {
    "unit": "S20",
    "seg": 14833,
@@ -13225,19 +13945,19 @@
    "unit": "S20",
    "seg": 14833,
    "off": 990,
-   "grounding": "inventory:push_cs_call"
+   "alias_of": "ReadWord"
   },
   "o20_39F1_044F": {
    "unit": "S20",
    "seg": 14833,
    "off": 1103,
-   "grounding": "inventory:push_cs_call"
+   "alias_of": "SkipWords"
   },
   "o20_39F1_0474": {
    "unit": "S20",
    "seg": 14833,
    "off": 1140,
-   "grounding": "inventory:push_cs_call"
+   "alias_of": "ReadConfig"
   },
   "o21_39C7_0000": {
    "unit": "S21",
@@ -13543,43 +14263,43 @@
    "unit": "S24",
    "seg": 14791,
    "off": 0,
-   "grounding": "inventory:vector"
+   "alias_of": "OpenHistoryWindow"
   },
   "o24_39C7_0012": {
    "unit": "S24",
    "seg": 14791,
    "off": 18,
-   "grounding": "inventory:vector"
+   "alias_of": "ProcHistoryEvent"
   },
   "o24_39C7_00B3": {
    "unit": "S24",
    "seg": 14791,
    "off": 179,
-   "grounding": "inventory:push_cs_call"
+   "alias_of": "ToggleHistButton"
   },
   "o24_39C7_01B8": {
    "unit": "S24",
    "seg": 14791,
    "off": 440,
-   "grounding": "inventory:vector"
+   "alias_of": "ClearHistory"
   },
   "o24_39C7_02DA": {
    "unit": "S24",
    "seg": 14791,
    "off": 730,
-   "grounding": "inventory:push_cs_call,vector"
+   "alias_of": "win_DrawHistoryWindow"
   },
   "o24_39C7_032C": {
    "unit": "S24",
    "seg": 14791,
    "off": 812,
-   "grounding": "inventory:push_cs_call"
+   "alias_of": "drawHistGraph"
   },
   "o24_39C7_0608": {
    "unit": "S24",
    "seg": 14791,
    "off": 1544,
-   "grounding": "inventory:vector"
+   "alias_of": "HistUpdate"
   },
   "o25_39C7_0000": {
    "unit": "S25",
@@ -13923,6 +14643,18 @@
     }
    ]
   },
+  "win_CasteControlClosed": {
+   "unit": "root",
+   "seg": 1944,
+   "off": 2586,
+   "grounding": "inventory:far_call,push_cs_call",
+   "history": [
+    {
+     "was": "f_0798_0A1A",
+     "why": "Win16 SIMANT_MODULE unit InitTriVars..initControls (MAPSYM B324..CC84, 20 members) aligns in order with the 18 functions of DOS root:0798 once the two Windows-only callbacks win_CasteControlChanged/win_ModeControlChanged are removed; InitTriVars body identical to Win16 recovered InitTriVars (win_GetObjRect, width/2, height, (half<<8)/height, 6 tri points); call graph agrees (OpenCaste->UpdateCaste+win_Open, ProcCaste->DrawCaste, ProcMode->DrawMode, Draw*->SetTriLatPoint, ProcCaste/initControls->cvtLevels2IdealCaste); ProcCasteEvent/ProcModeEvent xver unique constants 0x1303/0x1203; DrawControlLevels xver MEDIUM (%-ld%%)"
+    }
+   ]
+  },
   "win_CenterStrAtObj": {
    "unit": "root",
    "seg": 8895,
@@ -14007,6 +14739,18 @@
     }
    ]
   },
+  "win_DrawCasteWindow": {
+   "unit": "root",
+   "seg": 1944,
+   "off": 2261,
+   "grounding": "inventory:push_cs_call,vector",
+   "history": [
+    {
+     "was": "f_0798_08D5",
+     "why": "Win16 SIMANT_MODULE unit InitTriVars..initControls (MAPSYM B324..CC84, 20 members) aligns in order with the 18 functions of DOS root:0798 once the two Windows-only callbacks win_CasteControlChanged/win_ModeControlChanged are removed; InitTriVars body identical to Win16 recovered InitTriVars (win_GetObjRect, width/2, height, (half<<8)/height, 6 tri points); call graph agrees (OpenCaste->UpdateCaste+win_Open, ProcCaste->DrawCaste, ProcMode->DrawMode, Draw*->SetTriLatPoint, ProcCaste/initControls->cvtLevels2IdealCaste); ProcCasteEvent/ProcModeEvent xver unique constants 0x1303/0x1203; DrawControlLevels xver MEDIUM (%-ld%%)"
+    }
+   ]
+  },
   "win_DrawHBar": {
    "unit": "root",
    "seg": 8895,
@@ -14019,6 +14763,18 @@
     }
    ]
   },
+  "win_DrawHistoryWindow": {
+   "unit": "S24",
+   "seg": 14791,
+   "off": 730,
+   "grounding": "inventory:push_cs_call,vector",
+   "history": [
+    {
+     "was": "o24_39C7_02DA",
+     "why": "Win16 SIMANT_MODULE run OpenHistoryWindow, ProcHistoryEvent (xver LOW, unique 0x150d), ToggleHistButton, ClearHistory, win_DrawHistoryWindow, drawHistGraph, HistUpdate (7 members) aligns 1:1 with DOS S24 frame 39C7 (7 functions); anchors by body identity: OpenHistoryWindow = win_Open(0x1500), ProcHistoryEvent = switch 0x150d DoWinHelp(0x150f) / 0x150e fill+graph loop+StillDown / 0x1503..0x150c ToggleHistButton"
+    }
+   ]
+  },
   "win_DrawInfoWindow": {
    "unit": "S23",
    "seg": 14791,
@@ -14028,6 +14784,18 @@
     {
      "was": "o23_39C7_0075",
      "why": "Win16 MAPSYM _TEXT run _XFlipLong.._ProcInfoEvent (9 members) aligns 1:1 with DOS S23:39C7 (9 functions, same order); DisplayCard is xver HIGH at position 6; xver win_DrawInfoWindow/win_PrintStyleTextInRect/PopUpInfoWindow (MEDIUM) agree positionally; XFlipLong/FlipWords/win_DrawInfoWindow/OpenInfoWindow Win16 exact bodies match"
+    }
+   ]
+  },
+  "win_DrawModeWindow": {
+   "unit": "root",
+   "seg": 1944,
+   "off": 1873,
+   "grounding": "inventory:push_cs_call,vector",
+   "history": [
+    {
+     "was": "f_0798_0751",
+     "why": "Win16 SIMANT_MODULE unit InitTriVars..initControls (MAPSYM B324..CC84, 20 members) aligns in order with the 18 functions of DOS root:0798 once the two Windows-only callbacks win_CasteControlChanged/win_ModeControlChanged are removed; InitTriVars body identical to Win16 recovered InitTriVars (win_GetObjRect, width/2, height, (half<<8)/height, 6 tri points); call graph agrees (OpenCaste->UpdateCaste+win_Open, ProcCaste->DrawCaste, ProcMode->DrawMode, Draw*->SetTriLatPoint, ProcCaste/initControls->cvtLevels2IdealCaste); ProcCasteEvent/ProcModeEvent xver unique constants 0x1303/0x1203; DrawControlLevels xver MEDIUM (%-ld%%)"
     }
    ]
   },
@@ -14112,6 +14880,18 @@
     {
      "was": "f_21FA_08E2",
      "why": "LockWinHigh + drawHooks + object loop; 21FA run position 16"
+    }
+   ]
+  },
+  "win_DrawYardWindow": {
+   "unit": "S13",
+   "seg": 14412,
+   "off": 727,
+   "grounding": "inventory:push_cs_call,vector",
+   "history": [
+    {
+     "was": "o13_384C_02D7",
+     "why": "Win16 ANTEDIT MAPSYM yard unit ProcYardEvent..YardArea aligns with DOS S13:384C (24 functions, ribbon handler absent); window draw callback with flag bits 1/2/4 like the other win_Draw*Window members, draws yard objects 0x1902/0x1914/0x1915"
     }
    ]
   },
@@ -14400,6 +15180,18 @@
     {
      "was": "f_22BF_0498",
      "why": "SetObjVisibleState(obj,1) wrapper in Win16 order"
+    }
+   ]
+  },
+  "win_ModeControlClosed": {
+   "unit": "root",
+   "seg": 1944,
+   "off": 2198,
+   "grounding": "inventory:far_call,push_cs_call",
+   "history": [
+    {
+     "was": "f_0798_0896",
+     "why": "Win16 SIMANT_MODULE unit InitTriVars..initControls (MAPSYM B324..CC84, 20 members) aligns in order with the 18 functions of DOS root:0798 once the two Windows-only callbacks win_CasteControlChanged/win_ModeControlChanged are removed; InitTriVars body identical to Win16 recovered InitTriVars (win_GetObjRect, width/2, height, (half<<8)/height, 6 tri points); call graph agrees (OpenCaste->UpdateCaste+win_Open, ProcCaste->DrawCaste, ProcMode->DrawMode, Draw*->SetTriLatPoint, ProcCaste/initControls->cvtLevels2IdealCaste); ProcCasteEvent/ProcModeEvent xver unique constants 0x1303/0x1203; DrawControlLevels xver MEDIUM (%-ld%%)"
     }
    ]
   },
@@ -15546,10 +16338,50 @@
    "off": 1996,
    "grounding": "o08_35F5_0000 (InitSimVars): mov es,[CONST word 3D57] ; mov es:[07CC],..."
   },
+  "fd_3D57_07E8": {
+   "seg": 15703,
+   "off": 2024,
+   "grounding": "ProcCasteEvent (root:0798): mov es,[CONST 8002 = 3D57]; es:[07E8] caste auto flag (0/1); initControls stores 1"
+  },
+  "fd_3D57_07EA": {
+   "seg": 15703,
+   "off": 2026,
+   "grounding": "initControls (root:0798): mov es,[CONST 801C = 3D57]; es:[07EA] = 1"
+  },
+  "fd_3D57_07EC": {
+   "seg": 15703,
+   "off": 2028,
+   "grounding": "initControls (root:0798 (control-triangle unit)): es:[07EC+2i] caste level defaults"
+  },
+  "fd_3D57_07F2": {
+   "seg": 15703,
+   "off": 2034,
+   "grounding": "ProcCasteEvent/initControls (root:0798 (control-triangle unit)): 3D57:07F2 caste preset table, 6-byte entries indexed by the caste preset"
+  },
+  "fd_3D57_080A": {
+   "seg": 15703,
+   "off": 2058,
+   "grounding": "initControls (root:0798 (control-triangle unit)): es:[080A+2i] mode level defaults"
+  },
+  "fd_3D57_0810": {
+   "seg": 15703,
+   "off": 2064,
+   "grounding": "ProcModeEvent/initControls (root:0798 (control-triangle unit)): 3D57:0810 mode preset table, 6-byte entries"
+  },
   "fd_3D57_0828": {
    "seg": 15703,
    "off": 2088,
    "grounding": "CalcScore (S14:384C:0000): mov si,0828; mov es,[873A]; cmp es:[si],di history count"
+  },
+  "fd_3D57_082A": {
+   "seg": 15703,
+   "off": 2090,
+   "grounding": "S24 drawHistGraph (39C7:038E): mov es,[CONST 88E4 = 3D57]; es:[bx+82A]/[bx+82C], bx=graph*4 -> table of far pointers to the first history array of each graph"
+  },
+  "fd_3D57_0852": {
+   "seg": 15703,
+   "off": 2130,
+   "grounding": "S24 drawHistGraph (39C7:03A2): mov es,[CONST 88E6 = 3D57]; es:[bx+852]/[bx+854] -> table of far pointers to the second history array of each graph"
   },
   "fd_3D57_098E": {
    "seg": 15703,
@@ -16131,6 +16963,16 @@
    "off": 0,
    "grounding": "o09_35F5_0000 (LoadGame): mov ax,0; mov cx,4E4B; es:[bx+2]*es:[bx], es:[bx+4..6] far ptr: save-game table of {size,count,far ptr} (8-byte entries)"
   },
+  "fd_50F6_0000": {
+   "seg": 20726,
+   "off": 0,
+   "grounding": "f_277E_010A: mov es,[8A68]; mov es:[di],cx; di=6*i, 0x38 six-byte entries (far struct array)"
+  },
+  "fd_50F6_01F0": {
+   "seg": 20726,
+   "off": 496,
+   "grounding": "f_277E_0000: mov es,[8A66]; mov es:[1F0],si; f_277E_00AF clears 1F2..1FC (far int array)"
+  },
   "fd_50F6_01FE": {
    "seg": 20726,
    "off": 510,
@@ -16216,6 +17058,16 @@
    "off": 556,
    "grounding": "o06_35F5_0000: mov es,[CONST 847E = 50F6]; es:[022C] (S06:35F5 InitSimYard/yard sim unit)"
   },
+  "fd_50F6_022E": {
+   "seg": 20726,
+   "off": 558,
+   "grounding": "UpdateCasteWindow (root:0798 (control-triangle unit)): far address 50F6:022E output point of SetTriLatPoint"
+  },
+  "fd_50F6_0230": {
+   "seg": 20726,
+   "off": 560,
+   "grounding": "win_DrawCasteWindow (root:0798 (control-triangle unit)): es:[0230] y of the caste knob point (022E+2)"
+  },
   "fd_50F6_0232": {
    "seg": 20726,
    "off": 562,
@@ -16256,6 +17108,11 @@
    "off": 582,
    "grounding": "SimKidInside: mov es,[CONST 846E = 50F6]; es:[0246] (S06:35F5 InitSimYard/yard sim unit)"
   },
+  "fd_50F6_024E": {
+   "seg": 20726,
+   "off": 590,
+   "grounding": "initControls (root:0798 (control-triangle unit)): es:[024E] = -1"
+  },
   "fd_50F6_0254": {
    "seg": 20726,
    "off": 596,
@@ -16265,6 +17122,11 @@
    "seg": 20726,
    "off": 598,
    "grounding": "f_0BE8_03AC: mov es,[DS:811A] (CONST 50F6); mov bl,es:[si+0256] byte array indexed by drop"
+  },
+  "fd_50F6_02BA": {
+   "seg": 20726,
+   "off": 698,
+   "grounding": "S24 drawHistGraph (39C7:0546): mov es,[CONST 88E8 = 50F6]; les bx,es:[2BA]; es:[bx+si] with si=graph*4 -> far pointer to table of far graph-name strings"
   },
   "fd_50F6_02BE": {
    "seg": 20726,
@@ -16331,6 +17193,16 @@
    "off": 854,
    "grounding": "o06_35F5_020C: mov es,[CONST 84AC = 50F6]; es:[0356] (S06:35F5 InitSimYard/yard sim unit)"
   },
+  "fd_50F6_0358": {
+   "seg": 20726,
+   "off": 856,
+   "grounding": "UpdateModeWindow (root:0798 (control-triangle unit)): far address 50F6:0358 output point of SetTriLatPoint"
+  },
+  "fd_50F6_035A": {
+   "seg": 20726,
+   "off": 858,
+   "grounding": "win_DrawModeWindow (root:0798 (control-triangle unit)): es:[035A] y of the mode knob point (0358+2)"
+  },
   "fd_50F6_035C": {
    "seg": 20726,
    "off": 860,
@@ -16365,6 +17237,11 @@
    "seg": 20726,
    "off": 878,
    "grounding": "o06_35F5_0000: mov es,[CONST 84A0 = 50F6]; es:[036E] (S06:35F5 InitSimYard/yard sim unit)"
+  },
+  "fd_50F6_0370": {
+   "seg": 20726,
+   "off": 880,
+   "grounding": "initControls (root:0798 (control-triangle unit)): es:[0370] = -1"
   },
   "fd_50F6_0376": {
    "seg": 20726,
@@ -16411,6 +17288,11 @@
    "off": 1028,
    "grounding": "DeadAntHere: mov es,[80A0] (50F6); byte es:[bx+0404] indexed by ring index (y ring)"
   },
+  "fd_50F6_0468": {
+   "seg": 20726,
+   "off": 1128,
+   "grounding": "initControls (root:0798 (control-triangle unit)): es:[0468] = 1"
+  },
   "fd_50F6_046A": {
    "seg": 20726,
    "off": 1130,
@@ -16455,6 +17337,11 @@
    "seg": 20726,
    "off": 1152,
    "alias_of": "Barrier"
+  },
+  "fd_50F6_0482": {
+   "seg": 20726,
+   "off": 1154,
+   "grounding": "UpdateCasteWindow/cvtLevels2IdealCaste (root:0798 (control-triangle unit)): caste level triple (unsigned words 0482/0484/0486)"
   },
   "fd_50F6_0488": {
    "seg": 20726,
@@ -16586,6 +17473,11 @@
    "off": 1296,
    "grounding": "o06_35F5_1A0F: mov es,[CONST 84F6 = 50F6]; es:[0510] (S06:35F5 InitSimYard/yard sim unit)"
   },
+  "fd_50F6_0516": {
+   "seg": 20726,
+   "off": 1302,
+   "grounding": "S24 ClearHistory (39C7:01B8) zeroes es:[si+0516] for i<64 and HistUpdate (39C7:0608) stores a sampled counter at es:[HistStart*2+0516]: int[64] history ring buffer (Win16 H_* arrays)"
+  },
   "fd_50F6_0596": {
    "seg": 20726,
    "off": 1430,
@@ -16600,6 +17492,11 @@
    "seg": 20726,
    "off": 1438,
    "grounding": "o06_35F5_1A0F: mov es,[CONST 84F4 = 50F6]; es:[059E] (S06:35F5 InitSimYard/yard sim unit)"
+  },
+  "fd_50F6_05A0": {
+   "seg": 20726,
+   "off": 1440,
+   "grounding": "S24 ClearHistory (39C7:01B8) zeroes es:[si+05A0] for i<64 and HistUpdate (39C7:0608) stores a sampled counter at es:[HistStart*2+05A0]: int[64] history ring buffer (Win16 H_* arrays)"
   },
   "fd_50F6_0620": {
    "seg": 20726,
@@ -16691,6 +17588,11 @@
    "off": 1994,
    "grounding": "f_0BE8_0002: mov es,[DS:8108] (CONST 50F6); cmp es:[07CA],0B; cmp es:[07CC],8 (one CONST word: one object)"
   },
+  "fd_50F6_07CE": {
+   "seg": 20726,
+   "off": 1998,
+   "grounding": "S24 ClearHistory (39C7:01B8) zeroes es:[si+07CE] for i<64 and HistUpdate (39C7:0608) stores a sampled counter at es:[HistStart*2+07CE]: int[64] history ring buffer (Win16 H_* arrays)"
+  },
   "fd_50F6_084E": {
    "seg": 20726,
    "off": 2126,
@@ -16705,6 +17607,11 @@
    "seg": 20726,
    "off": 2130,
    "grounding": "f_0894_000E: mov es,[8040] (50F6); long store es:[0852]/[0854] = -1"
+  },
+  "fd_50F6_0856": {
+   "seg": 20726,
+   "off": 2134,
+   "grounding": "S24 ClearHistory (39C7:01B8) zeroes es:[si+0856] for i<64 and HistUpdate (39C7:0608) stores a sampled counter at es:[HistStart*2+0856]: int[64] history ring buffer (Win16 H_* arrays)"
   },
   "fd_50F6_08DA": {
    "seg": 20726,
@@ -16735,6 +17642,16 @@
    "seg": 20726,
    "off": 2284,
    "grounding": "f_0894_000E: mov es,[803A] (50F6); int[2] stores es:[08EE],[08EC] = -1 through one segment word"
+  },
+  "fd_50F6_08F0": {
+   "seg": 20726,
+   "off": 2288,
+   "grounding": "S24 ClearHistory (39C7:01B8) zeroes es:[si+08F0] for i<64 and HistUpdate (39C7:0608) stores a sampled counter at es:[HistStart*2+08F0]: int[64] history ring buffer (Win16 H_* arrays)"
+  },
+  "fd_50F6_0970": {
+   "seg": 20726,
+   "off": 2416,
+   "grounding": "S24 ClearHistory (39C7:01B8) zeroes es:[si+0970] for i<64 and HistUpdate (39C7:0608) stores a sampled counter at es:[HistStart*2+0970]: int[64] history ring buffer (Win16 H_* arrays)"
   },
   "fd_50F6_09F0": {
    "seg": 20726,
@@ -16770,6 +17687,11 @@
    "seg": 20726,
    "off": 2566,
    "grounding": "f_0BE8_0002: mov es,[DS:80F8] (CONST 50F6); cmp word es:[0A06],0"
+  },
+  "fd_50F6_0A0A": {
+   "seg": 20726,
+   "off": 2570,
+   "grounding": "S24 ClearHistory (39C7:01B8) zeroes es:[si+0A0A] for i<64 and HistUpdate (39C7:0608) stores a sampled counter at es:[HistStart*2+0A0A]: int[64] history ring buffer (Win16 H_* arrays)"
   },
   "fd_50F6_0A8A": {
    "seg": 20726,
@@ -17106,6 +18028,11 @@
    "off": 3908,
    "grounding": "processEdit (S22:39C7:011A): mov es,[CONST 87BC]; cmp es:[0F44],0 / mov es:[0F44],0 (Win16 YellowDied clear)"
   },
+  "fd_50F6_0F46": {
+   "seg": 20726,
+   "off": 3910,
+   "grounding": "S13:384C:0EE0 (DrawSwarm): mov bx,si; add bx,0F46; mov es,[8724]; signed char offset array"
+  },
   "fd_50F6_0F78": {
    "seg": 20726,
    "off": 3960,
@@ -17120,6 +18047,11 @@
    "seg": 20726,
    "off": 3966,
    "grounding": "f_10F7_0CA8 (root:10F7): mov es,[CONST word = 50F6]; es:[..0F7E] far data reference"
+  },
+  "fd_50F6_0F84": {
+   "seg": 20726,
+   "off": 3972,
+   "grounding": "S13:384C:0EE0 (DrawSwarm): mov bx,si; add bx,0F84; mov es,[8722]; signed char offset array"
   },
   "fd_50F6_0FB6": {
    "seg": 20726,
@@ -17150,6 +18082,11 @@
    "seg": 20726,
    "off": 4034,
    "grounding": "S25:39C7 o25_39C7_0AB0:0CAD add word es:[0FC2],1; adc es:[0FC4],0 (long counter; CONST 8932=50F6)"
+  },
+  "fd_50F6_0FC6": {
+   "seg": 20726,
+   "off": 4038,
+   "grounding": "S13:384C:0EE0 (DrawSwarm): mov bx,si; add bx,0FC6; mov es,[872E]; signed char offset array"
   },
   "fd_50F6_0FF8": {
    "seg": 20726,
@@ -17186,10 +18123,20 @@
    "off": 4102,
    "grounding": "f_10F7_1DD3 (root:10F7): mov es,[CONST word = 50F6]; es:[..1006] far data reference"
   },
+  "fd_50F6_1008": {
+   "seg": 20726,
+   "off": 4104,
+   "grounding": "S13:384C:0EE0 (DrawSwarm): mov bx,si; add bx,1008; mov es,[872C]; signed char offset array"
+  },
   "fd_50F6_103A": {
    "seg": 20726,
    "off": 4154,
    "grounding": "DrawCurBalloons: mov es,[7FCA]; inc es:[103A] index into 50F6:023A"
+  },
+  "fd_50F6_103C": {
+   "seg": 20726,
+   "off": 4156,
+   "grounding": "S13:384C:0EE0 (DrawSwarm): mov bx,103C; mov es,[871E]; es:[bx] = CurYardPnt.x*28-y*10+0xb2 swarm origin x"
   },
   "fd_50F6_1040": {
    "seg": 20726,
@@ -17210,6 +18157,11 @@
    "seg": 20726,
    "off": 4166,
    "grounding": "DrawCurBalloons: mov es,[7FAA]; es:[1046]=1/0 after SRand2() (fight balloon 0 on flag)"
+  },
+  "fd_50F6_1048": {
+   "seg": 20726,
+   "off": 4168,
+   "grounding": "S13:384C:0EE0 (DrawSwarm): mov bx,1048; mov es,[871C]; es:[bx] = CurYardPnt.y*10+0x2e swarm origin y"
   },
   "fd_50F6_104A": {
    "seg": 20726,
@@ -17286,6 +18238,11 @@
    "off": 4204,
    "grounding": "processExp (S22:3BBD:000A): CONST word 8862, xor byte es:[106C],1"
   },
+  "fd_50F6_106E": {
+   "seg": 20726,
+   "off": 4206,
+   "grounding": "S05 o05_35F5_025C (examine window): mov es,[CONST 8438 = 50F6]; les di,es:[106E]; es:[bx+di] with bx=(t&7)*4 -> far pointer to a table of far name strings (caste 0 names)"
+  },
   "fd_50F6_1072": {
    "seg": 20726,
    "off": 4210,
@@ -17301,6 +18258,11 @@
    "off": 4214,
    "grounding": "InitSpider/MoveSpider (root:0CDB): mov es,[CONST 81xx = 50F6]; word es:[1076] spider state variable"
   },
+  "fd_50F6_1078": {
+   "seg": 20726,
+   "off": 4216,
+   "grounding": "o05_35F5_025C: mov es,[CONST 843A]; les bx,es:[1078]; es:[bx+di], di=caste*4 -> far pointer to caste name string table"
+  },
   "fd_50F6_107C": {
    "seg": 20726,
    "off": 4220,
@@ -17315,6 +18277,11 @@
    "seg": 20726,
    "off": 4226,
    "grounding": "o08_35F5_0050 (RandWorld): mov es,[S08 CONST word] ; mov es:[off]"
+  },
+  "fd_50F6_1086": {
+   "seg": 20726,
+   "off": 4230,
+   "grounding": "o05_35F5_025C: mov es,[CONST 8442]; les si,es:[1086]; push es:[bx+si+2],es:[bx+si] (bx=k*4) -> far pointer to string table printed at object 1D03"
   },
   "fd_50F6_108A": {
    "seg": 20726,
@@ -17335,6 +18302,11 @@
    "seg": 20726,
    "off": 4242,
    "grounding": "AddMsgBalloon (0250:446A): mov es,[7F9C]; cmp es:[1092],6; inc es:[1092] (Win16 CurBalloonCnt)"
+  },
+  "fd_50F6_1096": {
+   "seg": 20726,
+   "off": 4246,
+   "grounding": "o05_35F5_025C: mov es,[CONST 8444]; les bx,es:[1096]; push es:[bx+si+2],es:[bx+si] (si=caste*4) -> far pointer to string table printed at object 1D04"
   },
   "fd_50F6_109A": {
    "seg": 20726,
@@ -17360,6 +18332,11 @@
    "seg": 20726,
    "off": 4262,
    "grounding": "f_0F3F_0A26: mov es,[8260] (50F6); mov ax,es:[10A6]; idiv 7 (strategic mode % 7)"
+  },
+  "fd_50F6_10A8": {
+   "seg": 20726,
+   "off": 4264,
+   "grounding": "S13:384C:047E: mov es,[86F6]; les si,es:[10A8]; push es:[bx+si+2]/[bx+si] far string table indexed by 50F6:10BC"
   },
   "fd_50F6_10AC": {
    "seg": 20726,
@@ -17410,6 +18387,11 @@
    "seg": 20726,
    "off": 4306,
    "grounding": "processExp (S22:3BBD:000A): CONST word 8852, pt.x-es:[10D2], pt.y-es:[10D4] (map window origin pair)"
+  },
+  "fd_50F6_10DA": {
+   "seg": 20726,
+   "off": 4314,
+   "grounding": "S13 DrawDog/DrawSimBird/...: mov es,[86EC]; push es:[10DC]; push es:[10DA] animation handle passed to f_2662_090D/0348 (hanim)"
   },
   "fd_50F6_10DE": {
    "seg": 20726,
@@ -17506,6 +18488,66 @@
    "off": 14318,
    "grounding": "f_2662_0262: mov es,[8A58]; lcall es:[37EE] (rect, buffer, clip, dest) far function pointer"
   },
+  "fd_50F6_37F2": {
+   "seg": 20726,
+   "off": 14322,
+   "grounding": "win_CasteControlClosed (root:0798 (control-triangle unit)): far Handle es:[37F2] caste anim set freed by f_2662_0C06"
+  },
+  "fd_50F6_37F6": {
+   "seg": 20726,
+   "off": 14326,
+   "grounding": "win_ModeControlClosed (root:0798 (control-triangle unit)): far Handle es:[37F6] mode anim set freed by f_2662_0C06"
+  },
+  "fd_50F6_37FA": {
+   "seg": 20726,
+   "off": 14330,
+   "grounding": "win_DrawCasteWindow (root:0798 (control-triangle unit)): es:[37FA] anim object id returned by f_2662_0348"
+  },
+  "fd_50F6_37FC": {
+   "seg": 20726,
+   "off": 14332,
+   "grounding": "win_DrawModeWindow (root:0798 (control-triangle unit)): es:[37FC] anim object id returned by f_2662_0348"
+  },
+  "fd_50F6_380E": {
+   "seg": 20726,
+   "off": 14350,
+   "grounding": "InitTriVars (root:0798 (control-triangle unit)): es:[380E] = rect height"
+  },
+  "fd_50F6_3810": {
+   "seg": 20726,
+   "off": 14352,
+   "grounding": "InitTriVars (root:0798 (control-triangle unit)): es:[3810] = width/2 (left half); SetTriLatPoint/GetTriLatDist multiplier"
+  },
+  "fd_50F6_3812": {
+   "seg": 20726,
+   "off": 14354,
+   "grounding": "InitTriVars (root:0798 (control-triangle unit)): es:[3812] = width/2"
+  },
+  "fd_50F6_3814": {
+   "seg": 20726,
+   "off": 14356,
+   "grounding": "InitTriVars (root:0798 (control-triangle unit)): es:[3814] = rect width (triangle width)"
+  },
+  "fd_50F6_3816": {
+   "seg": 20726,
+   "off": 14358,
+   "grounding": "UpdateModeWindow (root:0798 (control-triangle unit)): far address 50F6:3816 passed as the mode triangle points (6 ints)"
+  },
+  "fd_50F6_3822": {
+   "seg": 20726,
+   "off": 14370,
+   "grounding": "UpdateCasteWindow (root:0798 (control-triangle unit)): far address 50F6:3822 passed as the caste triangle points (6 ints)"
+  },
+  "fd_50F6_382E": {
+   "seg": 20726,
+   "off": 14382,
+   "grounding": "InitTriVars (root:0798 (control-triangle unit)): long es:[382E] = (half<<8)/height"
+  },
+  "fd_50F6_3832": {
+   "seg": 20726,
+   "off": 14386,
+   "grounding": "initControls (root:0798 (control-triangle unit)): far address 50F6:3832 size struct filled by f_208F_0419(,0x578) (knob size w)"
+  },
   "fd_50F6_3836": {
    "seg": 20726,
    "off": 14390,
@@ -17546,6 +18588,16 @@
    "off": 14434,
    "grounding": "o09_35F5_0000 (LoadGame): _fstrcpy(MK_FP(50F6,3862), name) after FileSelect (last file name)"
   },
+  "fd_50F6_38B2": {
+   "seg": 20726,
+   "off": 14514,
+   "grounding": "IBMInitStuff (S20:39F1:01D2): mov es,[CONST 89FC = 50F6]; es:[38B2]/[38B4] = getcwd(0,0,0) far pointer (current directory)"
+  },
+  "fd_50F6_38B6": {
+   "seg": 20726,
+   "off": 14518,
+   "grounding": "IBMInitStuff (S20:39F1:01EA): mov es,[CONST 89FE = 50F6]; mov es:[38B6],ax = first char of the getcwd string (drive letter)"
+  },
   "fd_50F6_38B8": {
    "seg": 20726,
    "off": 14520,
@@ -17566,6 +18618,26 @@
    "off": 14530,
    "grounding": "DrawMapCursor (S12:384C:02A2): mov es,[8680]; es:[38C2..38C8] Rect written then passed as far pointer 50F6:38C2 to f_1CE2_0410"
   },
+  "fd_50F6_38CA": {
+   "seg": 20726,
+   "off": 14538,
+   "grounding": "S13:384C:0E11 (DrawRain): bx=i*2+38CA; mov es,[8714]; int rain object ids (memset -1, 0x1e bytes in Draw_SimYard)"
+  },
+  "fd_50F6_38E8": {
+   "seg": 20726,
+   "off": 14568,
+   "grounding": "S13:384C:0EE0 (DrawSwarm): bx=si*2+38E8; mov es,[8726]; int hanim object ids (memset -1, 0x22 bytes, in Draw_SimYard)"
+  },
+  "fd_50F6_390A": {
+   "seg": 20726,
+   "off": 14602,
+   "grounding": "S13:384C:0EE0 (DrawSwarm): bx=si*2+390A; mov es,[8730]; int hanim object ids (memset -1, 0x22 bytes)"
+  },
+  "fd_50F6_392C": {
+   "seg": 20726,
+   "off": 14636,
+   "grounding": "S13:384C:0D3B: mov es,[8718]; sub ax,es:[392C] message bitmap width"
+  },
   "fd_50F6_3934": {
    "seg": 20726,
    "off": 14644,
@@ -17580,6 +18652,11 @@
    "seg": 20726,
    "off": 14658,
    "grounding": "f_20E8_04B6: mov es,[8A22] (seg 50F6); mov ax,es:[3942]"
+  },
+  "fd_50F6_3944": {
+   "seg": 20726,
+   "off": 14660,
+   "grounding": "IBMInitStuff (S20:39F1:0177): mov es,[CONST 89F8 = 50F6]; mov es:[3944],ax; es:[3946],dx = long result of f_171C_1750 (free memory), compared with 1FBD0h"
   },
   "fd_50F6_3948": {
    "seg": 20726,
@@ -17636,6 +18713,31 @@
    "off": 15192,
    "grounding": "f_2662_0CA2/f_2662_1120: mov es,[8A5C]; lcall es:[3B58] (pic+8, dest, shift, flag) for picture type 0"
   },
+  "fd_50F6_3B5C": {
+   "seg": 20726,
+   "off": 15196,
+   "grounding": "clip_Push/clip_Pop (root:1E57 clip unit): mov es,[CONST 89D2 = 50F6]; far Handle es:[3B5C] head of the clip save stack"
+  },
+  "fd_50F6_3B60": {
+   "seg": 20726,
+   "off": 15200,
+   "grounding": "f_1E57_0174 (root:1E57 clip unit): mov es,[CONST 89D0 = 50F6]; es:[bx+3B60] per-window clip Handle table indexed by (win>>8)*4; f_1E57_038E _fmemset(50F6:3B60,0,0xB4)"
+  },
+  "fd_50F6_3C14": {
+   "seg": 20726,
+   "off": 15380,
+   "grounding": "f_1E57_0174 (root:1E57 clip unit): far address 50F6:3C14 temporary clip rect buffer (memcpy target, stored into g_5AAC)"
+  },
+  "fd_50F6_46A8": {
+   "seg": 20726,
+   "off": 18088,
+   "grounding": "o10_35F5_01C3/0384: mov es,[CONST 89DE = 50F6]; push es:[bx+46A8] with bx=menu*2 -> x position of menu title (int array)"
+  },
+  "fd_50F6_46BC": {
+   "seg": 20726,
+   "off": 18108,
+   "grounding": "o10_35F5_0384: mov es,[CONST 89E2 = 50F6]; mov ax,es:[bx+46BC] with bx=menu*2; sub ax,maxLen; sar ax,1 -> width of menu title (int array)"
+  },
   "fd_50F6_46E2": {
    "seg": 20726,
    "off": 18146,
@@ -17691,6 +18793,126 @@
    "off": 19010,
    "grounding": "f_2662_0348: mov es,[8A5A]; mov es:[4A42],si / es:[4A44],ax stores the new animation object far pointer; f_2662_090D les bx,es:[4A42]"
   },
+  "fd_50F6_4A46": {
+   "seg": 20726,
+   "off": 19014,
+   "grounding": "f_277E_0606: mov es,[8A86]; mov es:[4A46],ax (far int)"
+  },
+  "fd_50F6_4A48": {
+   "seg": 20726,
+   "off": 19016,
+   "grounding": "f_277E_0000: mov es,[8A62 CONST segword 50F6]; mov es:[4A48],2/4 (far int)"
+  },
+  "fd_50F6_4A4A": {
+   "seg": 20726,
+   "off": 19018,
+   "grounding": "f_277E_01FA: mov es,[8A72]; mov es:[4A4A],ax (far int)"
+  },
+  "fd_50F6_4A4C": {
+   "seg": 20726,
+   "off": 19020,
+   "grounding": "f_277E_0000: mov es,[8A64]; mov es:[4A4C],0; f_277E_017D inc es:[4A4C] (far int count)"
+  },
+  "fd_50F6_4A4E": {
+   "seg": 20726,
+   "off": 19022,
+   "grounding": "f_277E_00AF/017D: es:[bx+4A4E..4A53], bx=6*i (far array of 6-byte records)"
+  },
+  "fd_50F6_4B14": {
+   "seg": 20726,
+   "off": 19220,
+   "grounding": "f_277E_01FA: mov es,[8A74]; mov es:[4B14],1E0h/C0h (far int)"
+  },
+  "fd_50F6_4B16": {
+   "seg": 20726,
+   "off": 19222,
+   "grounding": "f_277E_040E: mov es,[8A7E]; mov es:[4B16],-28h (far int)"
+  },
+  "fd_50F6_4B28": {
+   "seg": 20726,
+   "off": 19240,
+   "grounding": "f_284A_0013: mov es,[8AA8]; mov es:[4B28],bx; es:[4B2A],ax (far handle)"
+  },
+  "fd_50F6_4B2C": {
+   "seg": 20726,
+   "off": 19244,
+   "grounding": "f_284A_0013: mov es,[8AAA]; mov es:[4B2C],ax"
+  },
+  "fd_50F6_4B2E": {
+   "seg": 20726,
+   "off": 19246,
+   "grounding": "f_284A_0256: mov es,[8AB2]; mov es:[4B2E],ax (MIDI division)"
+  },
+  "fd_50F6_4B30": {
+   "seg": 20726,
+   "off": 19248,
+   "grounding": "f_284A_0256: mov es,[8AB6]; mov es:[si+4B30],al (far byte array, running status per track)"
+  },
+  "fd_50F6_4B42": {
+   "seg": 20726,
+   "off": 19266,
+   "grounding": "f_284A_0256: mov es,[8AB4]; mov es:[bx+4B42],ax; es:[bx+4B44],dx (far long array, next event time per track)"
+  },
+  "fd_50F6_4B8A": {
+   "seg": 20726,
+   "off": 19338,
+   "grounding": "f_284A_0325: mov es,[8AB8]; mov es:[4B8A],ax; es:[4B8C],dx (far long tick scale)"
+  },
+  "fd_50F6_4B8E": {
+   "seg": 20726,
+   "off": 19342,
+   "grounding": "f_284A_0013: mov es,[8AAE]; mov es:[di+4B8E],cx (far int array[14], channel program)"
+  },
+  "fd_50F6_4BAA": {
+   "seg": 20726,
+   "off": 19370,
+   "grounding": "f_284A_0013: mov es,[8AB0]; mov es:[di+4BAA],ax (far int array[14])"
+  },
+  "fd_55B3_00B4": {
+   "seg": 21939,
+   "off": 180,
+   "grounding": "f_284A_0013: mov bx,0B4h; mov es,[8AA6] (CONST segword = 55B3); push es:[bx+2],es:[bx] (far pointer variable in DGROUP, current song record)"
+  },
+  "fd_55B3_0C42": {
+   "seg": 21939,
+   "off": 3138,
+   "grounding": "f_277E_017D..07FF: push SEG 55B3 (relocated) : 0C42h + k*150h (k=0..7) to f_277E_010A; eight 56-entry tables of 6-byte records (far 2-D array in DGROUP)"
+  },
+  "fd_55B3_0D92": {
+   "seg": 21939,
+   "off": 3474,
+   "grounding": "f_277E_*: mov ax,0D92h; mov cx,SEG (relocated) pushed to f_277E_010A; 56 x 6-byte voice table; separate symbol because f_277E_01FA/07FF do not cross-jump the two segment fixups (distinct targets)"
+  },
+  "fd_55B3_0EE2": {
+   "seg": 21939,
+   "off": 3810,
+   "grounding": "f_277E_*: mov ax,0EE2h; mov cx,SEG (relocated) pushed to f_277E_010A; 56 x 6-byte voice table; separate symbol because f_277E_01FA/07FF do not cross-jump the two segment fixups (distinct targets)"
+  },
+  "fd_55B3_1032": {
+   "seg": 21939,
+   "off": 4146,
+   "grounding": "f_277E_*: mov ax,1032h; mov cx,SEG (relocated) pushed to f_277E_010A; 56 x 6-byte voice table; separate symbol because f_277E_01FA/07FF do not cross-jump the two segment fixups (distinct targets)"
+  },
+  "fd_55B3_1182": {
+   "seg": 21939,
+   "off": 4482,
+   "grounding": "f_277E_*: mov ax,1182h; mov cx,SEG (relocated) pushed to f_277E_010A; 56 x 6-byte voice table; separate symbol because f_277E_01FA/07FF do not cross-jump the two segment fixups (distinct targets)"
+  },
+  "fd_55B3_12D2": {
+   "seg": 21939,
+   "off": 4818,
+   "grounding": "f_277E_*: mov ax,12D2h; mov cx,SEG (relocated) pushed to f_277E_010A; 56 x 6-byte voice table; separate symbol because f_277E_01FA/07FF do not cross-jump the two segment fixups (distinct targets)"
+  },
+  "fd_55B3_1422": {
+   "seg": 21939,
+   "off": 5154,
+   "grounding": "f_277E_*: mov ax,1422h; mov cx,SEG (relocated) pushed to f_277E_010A; 56 x 6-byte voice table; separate symbol because f_277E_01FA/07FF do not cross-jump the two segment fixups (distinct targets)"
+  },
+  "fd_55B3_1572": {
+   "seg": 21939,
+   "off": 5490,
+   "grounding": "f_277E_*: mov ax,1572h; mov cx,SEG (relocated) pushed to f_277E_010A; 56 x 6-byte voice table; separate symbol because f_277E_01FA/07FF do not cross-jump the two segment fixups (distinct targets)"
+  },
   "fd_55B3_19BE": {
    "seg": 21939,
    "off": 6590,
@@ -17700,6 +18922,46 @@
    "seg": 21939,
    "off": 6592,
    "grounding": "processExp (S22:3BBD:000A): far variable in DGROUP via CONST word 885E (=DGROUP), idiv es:[19C0]"
+  },
+  "fd_55B3_1CD4": {
+   "seg": 21939,
+   "off": 7380,
+   "grounding": "IBMInitStuff (S20:39F1:026B): mov es,[CONST 8A00 = 55B3]; push es:[1CD6],es:[1CD4] -> far pointer argument of f_205F_0004"
+  },
+  "fd_55B3_1CD8": {
+   "seg": 21939,
+   "off": 7384,
+   "grounding": "IBMInitStuff (S20:39F1:0197): mov es,[CONST 89FA = 55B3]; push es:[1CDA],es:[1CD8]; call _printf then exit(1) -> far message pointer (not enough memory)"
+  },
+  "fd_55B3_1CDC": {
+   "seg": 21939,
+   "off": 7388,
+   "grounding": "IBMInitStuff (S20:39F1:00BE): mov es,[CONST 89F6 = 55B3]; push es:[1CDE],es:[1CDC]; call _printf then exit(4) -> far usage message pointer"
+  },
+  "fd_55B3_1CE0": {
+   "seg": 21939,
+   "off": 7392,
+   "grounding": "ReadConfig (S20:39F1:049A): mov es,[CONST 8A04 = 55B3]; es:[1CE0]/[1CE2] -> far message pointer passed to puts when the configuration file does not open"
+  },
+  "fd_55B3_1CE4": {
+   "seg": 21939,
+   "off": 7396,
+   "grounding": "ReadConfig (S20:39F1:047E): mov es,[CONST 8A02 = 55B3]; push es:[1CE6],es:[1CE4]; call _open(name, 0) -> far pointer to configuration file name"
+  },
+  "fd_55B3_2990": {
+   "seg": 21939,
+   "off": 10640,
+   "grounding": "S13:384C:02D7: mov es,[86E4] (=55B3); mov es:[2990],0 flag defined in S12 _DATA (S12 0B76/1181 near access)"
+  },
+  "fd_55B3_299A": {
+   "seg": 21939,
+   "off": 10650,
+   "grounding": "S13:384C:01E5: mov bx,299A; mov es,[86D6] (=55B3); es:[bx]/[bx+2] long message pointer; defined in S12 _DATA (0B76 near access)"
+  },
+  "fd_55B3_299E": {
+   "seg": 21939,
+   "off": 10654,
+   "grounding": "S13:384C:01E5: mov es,[86D8] (=55B3); cmp es:[29A0],dx / es:[299E],ax long tick deadline; defined in S12 _DATA"
   },
   "fd_55B3_29A2": {
    "seg": 21939,
@@ -17741,10 +19003,100 @@
    "off": 15848,
    "grounding": "f_1D8E_070E: mov es,[89CC]; mov es:[3DE8],ax (far int)"
   },
+  "fd_55B3_5AA0": {
+   "seg": 21939,
+   "off": 23200,
+   "grounding": "o10_35F5_0384: mov es,[CONST 89E4 = 55B3]; mov cx,es:[5AA0]; clamp of pull-down rect right edge (screen width)"
+  },
+  "fd_55B3_5AA2": {
+   "seg": 21939,
+   "off": 23202,
+   "grounding": "o10_35F5_0384: mov cx,es:[5AA2] (es = CONST 89E4 = 55B3); clamp of pull-down rect bottom (screen height)"
+  },
+  "fd_55B3_604C": {
+   "seg": 21939,
+   "off": 24652,
+   "grounding": "o10_35F5_01C3: mov es,[CONST 89E0 = 55B3]; mov si,es:[604C]; dec si / idiv es:[604C] -> number of menu titles (wraps left/right arrow)"
+  },
+  "fd_55B3_6054": {
+   "seg": 21939,
+   "off": 24660,
+   "grounding": "o10_35F5_01C3 (S10 menu bar): mov bx,6054h; mov es,[CONST 89DC = 55B3]; les bx,es:[bx] -> far pointer to menu table (entry 0 = title strings, entry m+1 = item strings of menu m)"
+  },
   "fd_55B3_6262": {
    "seg": 21939,
    "off": 25186,
    "grounding": "f_1C62_0090: mov es,[89C8 (CONST segword 55B3)]; cmp word ptr es:[6262],0 (far int flag)"
+  },
+  "fd_55B3_6B42": {
+   "seg": 21939,
+   "off": 27458,
+   "grounding": "f_284A_0013: mov es,[8AAC CONST segword 55B3]; mov es:[6B42],5 (far int)"
+  },
+  "fd_55B3_6B4A": {
+   "seg": 21939,
+   "off": 27466,
+   "grounding": "f_277E_01FA: mov es,[8A76]; mov es:[6B4A],ax (far int)"
+  },
+  "fd_55B3_6B9C": {
+   "seg": 21939,
+   "off": 27548,
+   "grounding": "f_277E_017D: mov es,[8A6E]; mov es:[6B9C],ax (far int)"
+  },
+  "fd_55B3_6BA0": {
+   "seg": 21939,
+   "off": 27552,
+   "grounding": "f_277E_04E8: mov es,[8A82]; mov es:[6BA0],ax (far int port)"
+  },
+  "fd_55B3_74AD": {
+   "seg": 21939,
+   "off": 29869,
+   "grounding": "f_277E_017D: mov es,[8A6C]; mov ax,es:[74AD] (far int)"
+  },
+  "fd_55B3_74AF": {
+   "seg": 21939,
+   "off": 29871,
+   "grounding": "f_277E_040E: mov es,[8A7C]; mov ax,es:[74AF] (far int)"
+  },
+  "fd_55B3_74B1": {
+   "seg": 21939,
+   "off": 29873,
+   "grounding": "f_277E_0760: mov es,[8A8A]; mov ax,es:[74B1] (far int)"
+  },
+  "fd_55B3_74B3": {
+   "seg": 21939,
+   "off": 29875,
+   "grounding": "f_277E_034F: mov es,[8A7A]; mov ax,es:[74B3] (far int)"
+  },
+  "fd_55B3_74B5": {
+   "seg": 21939,
+   "off": 29877,
+   "grounding": "f_277E_04E8: mov es,[8A84]; mov ax,es:[74B5] (far int)"
+  },
+  "fd_55B3_74B7": {
+   "seg": 21939,
+   "off": 29879,
+   "grounding": "f_277E_0606: mov es,[8A88]; mov ax,es:[74B7] (far int)"
+  },
+  "fd_55B3_74B9": {
+   "seg": 21939,
+   "off": 29881,
+   "grounding": "f_277E_01FA: mov es,[8A78]; mov ax,es:[74B9] (far int)"
+  },
+  "fd_55B3_74C0": {
+   "seg": 21939,
+   "off": 29888,
+   "grounding": "f_277E_017D: mov es,[8A70]; mov es:[74C0],40h (far int)"
+  },
+  "fd_55B3_74DA": {
+   "seg": 21939,
+   "off": 29914,
+   "grounding": "f_277E_0000: mov es,[8A60 CONST segword 55B3]; lcall es:[bx+74DA], bx=4*mode (far table of far code pointers)"
+  },
+  "fd_55B3_7564": {
+   "seg": 21939,
+   "off": 30052,
+   "grounding": "f_277E_04E8: mov bx,7564h; mov es,[8A80] (address of far int taken; cmp es:[bx],210h)"
   },
   "g_1B9A": {
    "seg": 21939,
@@ -17775,6 +19127,16 @@
    "seg": 21939,
    "off": 15776,
    "grounding": "f_21FA_0002: mov es,[8A2C]; push es:[3DA0] (far-declared DGROUP word, first arg of (*[9134]))"
+  },
+  "g_3DA4": {
+   "seg": 21939,
+   "off": 15780,
+   "grounding": "S20 o20_39C7_0008/0069/00FF: mov [3DA4],ax / [3DA6],dx = first far pointer of font object db_LoadObject(0x15|0x14, 9)"
+  },
+  "g_3DA8": {
+   "seg": 21939,
+   "off": 15784,
+   "grounding": "S20 o20_39C7_0008/0069/01C1: mov [3DA8],ax / [3DAA],dx = first far pointer of font object db_LoadObject(0x14|0x13, 9)"
   },
   "g_3DB2": {
    "seg": 21939,
@@ -17811,10 +19173,60 @@
    "off": 15844,
    "grounding": "f_259D_02A5/02D8: mov al,[3DE4]; cbw; or ax,[3DE0] (fill pattern byte)"
   },
+  "g_432A": {
+   "seg": 21939,
+   "off": 17194,
+   "grounding": "IBMInitStuff (S20:39F1:0088/016D): mov byte ptr [432A],1 for option /b or getenv(BUG) MSMOUSE match (DGROUP byte flag)"
+  },
   "g_5702": {
    "seg": 21939,
    "off": 22274,
    "grounding": "f_2505_036E: mov es,[8A46]; cmp word ptr es:[5702],8000"
+  },
+  "g_5742": {
+   "seg": 21939,
+   "off": 22338,
+   "grounding": "root:1E57 clip unit _DATA: word/far pointer at DGROUP 5742 referenced by module 1E57 (dataref)"
+  },
+  "g_5746": {
+   "seg": 21939,
+   "off": 22342,
+   "grounding": "root:1E57 clip unit _DATA: word/far pointer at DGROUP 5746 referenced by module 1E57 (dataref)"
+  },
+  "g_574A": {
+   "seg": 21939,
+   "off": 22346,
+   "grounding": "root:1E57 clip unit _DATA: word/far pointer at DGROUP 574A referenced by module 1E57 (dataref)"
+  },
+  "g_574E": {
+   "seg": 21939,
+   "off": 22350,
+   "grounding": "root:1E57 clip unit _DATA: word/far pointer at DGROUP 574E referenced by module 1E57 (dataref)"
+  },
+  "g_5752": {
+   "seg": 21939,
+   "off": 22354,
+   "grounding": "root:1E57 clip unit _DATA: word/far pointer at DGROUP 5752 referenced by module 1E57 (dataref)"
+  },
+  "g_5756": {
+   "seg": 21939,
+   "off": 22358,
+   "grounding": "root:1E57 clip unit _DATA: word/far pointer at DGROUP 5756 referenced by module 1E57 (dataref)"
+  },
+  "g_5758": {
+   "seg": 21939,
+   "off": 22360,
+   "grounding": "root:1E57 clip unit _DATA: word/far pointer at DGROUP 5758 referenced by module 1E57 (dataref)"
+  },
+  "g_575A": {
+   "seg": 21939,
+   "off": 22362,
+   "grounding": "root:1E57 clip unit _DATA: word/far pointer at DGROUP 575A referenced by module 1E57 (dataref)"
+  },
+  "g_584C": {
+   "seg": 21939,
+   "off": 22604,
+   "grounding": "root:1E57 clip unit _DATA: word/far pointer at DGROUP 584C referenced by module 1E57 (dataref)"
   },
   "g_5A97": {
    "seg": 21939,
@@ -17841,6 +19253,91 @@
    "off": 25344,
    "grounding": "f_2505_0006: mov es,[8A44]; cmp word ptr es:[6300],0 (far-declared DGROUP flag checked before lock test)"
   },
+  "g_68B6": {
+   "seg": 21939,
+   "off": 26806,
+   "grounding": "f_277E_0000: lcall [bx+68B6], bx=4*mode; 9 far pointers to f_277E functions"
+  },
+  "g_68DA": {
+   "seg": 21939,
+   "off": 26842,
+   "grounding": "f_277E_0154: lcall [bx+68DA], bx=4*mode; 9 far pointers to f_277E functions"
+  },
+  "g_68FE": {
+   "seg": 21939,
+   "off": 26878,
+   "grounding": "f_277E_097A: mov al,[bx+68FE] (byte table)"
+  },
+  "g_6908": {
+   "seg": 21939,
+   "off": 26888,
+   "grounding": "f_277E_097A: mov al,[bx+6908] (byte table)"
+  },
+  "g_6912": {
+   "seg": 21939,
+   "off": 26898,
+   "grounding": "f_277E_097A: mov al,[di+6912] (byte table)"
+  },
+  "g_6924": {
+   "seg": 21939,
+   "off": 26916,
+   "grounding": "_DATA word table between f_277E tables 6912 and 693C (12 words 0157h..0287h, OPL note F-numbers); referenced by module 283E at linear 2835D"
+  },
+  "g_693C": {
+   "seg": 21939,
+   "off": 26940,
+   "grounding": "f_277E_0760 inline asm: mov [693C],ax (LPT port from 0040:0008); _DATA word 03BCh"
+  },
+  "g_7566": {
+   "seg": 21939,
+   "off": 30054,
+   "grounding": "f_284A_0256: mov [7566],ax (MIDI track count, read BE16 at offset 10); _DATA of module 284A"
+  },
+  "g_7568": {
+   "seg": 21939,
+   "off": 30056,
+   "grounding": "f_284A_038F: sub ax,[7568]; sbb dx,[756A] (long current time); f_284A_02E4 clears it"
+  },
+  "g_756C": {
+   "seg": 21939,
+   "off": 30060,
+   "grounding": "f_284A_038F: mov bx,[756C]; index into far long array 4B42 (current track)"
+  },
+  "g_756E": {
+   "seg": 21939,
+   "off": 30062,
+   "grounding": "f_284A_0004: cmp word ptr [756E],1 (music state; 1 playing, 2 finished)"
+  },
+  "g_7570": {
+   "seg": 21939,
+   "off": 30064,
+   "grounding": "f_284A_024B: mov [7570],ax; f_284A_04C9: mul by velocity then shr 7 (volume, init 7Fh)"
+  },
+  "g_7572": {
+   "seg": 21939,
+   "off": 30066,
+   "grounding": "f_284A_0013: mov word ptr [7572],0"
+  },
+  "g_7574": {
+   "seg": 21939,
+   "off": 30068,
+   "grounding": "f_284A_067F: mov word ptr [7574],1 ... 0 around the event loop (busy flag)"
+  },
+  "g_7576": {
+   "seg": 21939,
+   "off": 30070,
+   "grounding": "f_284A_0537: add ax,[7576] (note transpose); module 0000 stores es:[7576]"
+  },
+  "g_7578": {
+   "seg": 21939,
+   "off": 30072,
+   "grounding": "f_284A_010A: push word ptr [7578] to f_0000_039B; module 0000 stores es:[7578]"
+  },
+  "g_75A4": {
+   "seg": 21939,
+   "off": 30116,
+   "grounding": "f_284A_0537: mov ax,[di+75A4], di=2*type (MIDI data byte counts 2,2,2,2,1,1,2)"
+  },
   "g_8BA2": {
    "seg": 21939,
    "off": 35746,
@@ -17851,6 +19348,26 @@
    "off": 36043,
    "grounding": "f_1C62_06A6: mov al,[8CCB]; cbw; index far string table 567A (critical-error code, char)"
   },
+  "g_8DD8": {
+   "seg": 21939,
+   "off": 36312,
+   "grounding": "f_284A_0199: mov [bx-7228h],ax (= 8DD8h+2*i, int track offsets; _BSS)"
+  },
+  "g_8DFC": {
+   "seg": 21939,
+   "off": 36348,
+   "grounding": "f_284A_0138: mov es,[8DFC] (segment of the loaded song; _BSS)"
+  },
+  "g_8DFE": {
+   "seg": 21939,
+   "off": 36350,
+   "grounding": "f_284A_01D5: les bx,[8DFE]; mov bx,es:[bx] (far pointer to current track offset; _BSS)"
+  },
+  "g_8E02": {
+   "seg": 21939,
+   "off": 36354,
+   "grounding": "f_284A_038F: les bx,[8E02]; cmp byte ptr es:[bx],2Fh (far pointer to current running status; _BSS)"
+  },
   "g_9126": {
    "seg": 21939,
    "off": 37158,
@@ -17860,6 +19377,11 @@
    "seg": 21939,
    "off": 37160,
    "grounding": "f_21FA_00EE/0144/01D0: lcall [9128](fore*0x101, back*0x101, pat*0x101) attribute setter (far function pointer)"
+  },
+  "g_9130": {
+   "seg": 21939,
+   "off": 37168,
+   "grounding": "o10_35F5_01C3: lcall [9130] with no arguments (far function pointer in BSS, next to g_9128/g_9134)"
   },
   "g_9134": {
    "seg": 21939,

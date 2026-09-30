@@ -94,6 +94,8 @@ class MatchResult:
     data_checks: list = field(default_factory=list)
     unbound: list = field(default_factory=list)
     reloc_order: str = "EXACT"      # EXACT | GROUPED (object order exact per target; group order = link)
+    reloc_key: dict = field(default_factory=dict)    # relocation site -> target key
+    reloc_index: dict = field(default_factory=dict)  # relocation site -> position in the object's FIXUPP order
 
     def summary(self) -> str:
         if self.exact:
@@ -186,7 +188,7 @@ class Binder:
         cand_relocs = []
         reloc_key = {}
         delta = self.own_segment_delta(pub_off)
-        for f in obj.linker_fixups:
+        for fix_index, f in enumerate(obj.linker_fixups):
             if f["segment"] != self.segment:
                 continue
             o = f["offset"]
@@ -250,11 +252,13 @@ class Binder:
                     struct.pack_into("<H", payload, rel + 2, frame)
                     cand_relocs.append(t.linear + rel + 2)
                     reloc_key[t.linear + rel + 2] = f"{f['target_kind']}:{f['target']}"
+                    res.reloc_index[t.linear + rel + 2] = fix_index
             elif loc == "base16":
                 frame = seg if kind != "group" else DGROUP_SEG
                 struct.pack_into("<H", payload, rel, frame)
                 cand_relocs.append(t.linear + rel)
                 reloc_key[t.linear + rel] = f"{f['target_kind']}:{f['target']}"
+                res.reloc_index[t.linear + rel] = fix_index
             else:
                 res.unbound.append(f"unsupported fixup location {loc}")
                 continue
@@ -263,6 +267,7 @@ class Binder:
         exp = [s * 16 + o for s, o in self.x.unit_relocs(t.unit) if t.linear <= s * 16 + o < t.linear + t.size]
         res.relocs_expected = exp
         res.relocs_candidate = cand_relocs
+        res.reloc_key = reloc_key
         res.candidate = bytes(payload)
         if res.unbound:
             res.reasons.append(f"{len(res.unbound)} unbound fixups: " + ", ".join(sorted(set(res.unbound))[:4]))

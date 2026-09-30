@@ -370,8 +370,10 @@ int _fastcall f_23E6_08D6(char far *o)
         if (s == 0)
             Punt("PrevListLine punt");
         s++;
-    } else
-        s = base;
+        goto found;
+    }
+    s = base;
+found:
     list->topOff = s - base;
     f_21FA_00EE((*s & 1) ? o[0x27] : o[0x26]);
     f_24AB_042B(&r, r.top, s + 1);

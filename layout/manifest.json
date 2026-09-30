@@ -2,6 +2,86 @@
  "schema": "simant-manifest-v1",
  "oracle_sha256": "aa0596c6766322a8229ee3c36e57048c92adc82d50fbe2ef37afb8b85fcf4f11",
  "modules": {
+  "S05:35F5": {
+   "unit": "S05",
+   "seg": 13813,
+   "profile": "msc600ax",
+   "flags": [
+    "/AL",
+    "/Os",
+    "/Og",
+    "/Oe",
+    "/Zd"
+   ],
+   "placements": {
+    "_DATA": {
+     "seg": 21939,
+     "off": 9108,
+     "size": 74
+    },
+    "CONST": {
+     "seg": 21939,
+     "off": 33814,
+     "size": 54
+    }
+   },
+   "lang": "c",
+   "source": "src/S05/m35F5.c",
+   "source_sha256": "f29846312a3c6a1ca8a99cb4c364988f8d0ec86d139a07adbc2bed74d7c55d2e",
+   "claims": [
+    {
+     "name": "EditScentMenu",
+     "unit": "S05",
+     "seg": 13813,
+     "off": 0,
+     "size": 100,
+     "target_sha256": "d1b335e5d88ba06cdf4b18fa2d2a2fe58686ea465e956b3da91980bef54c3892",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL",
+     "reloc_order": "GROUPED"
+    },
+    {
+     "name": "EditToolsMenu",
+     "unit": "S05",
+     "seg": 13813,
+     "off": 100,
+     "size": 504,
+     "target_sha256": "8057587c2764c1e4321e7a6ba6b6340ee9050ad8e9aa22714a5cdbfa09ee4298",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL",
+     "reloc_order": "GROUPED"
+    },
+    {
+     "name": "SetExpTool",
+     "unit": "S05",
+     "seg": 13813,
+     "off": 1577,
+     "size": 25,
+     "target_sha256": "53b12e4520b44939f6495bed5d86772cb7171c039561532c97d2a2cda9b9b3dd",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL",
+     "reloc_order": "EXACT"
+    },
+    {
+     "name": "DoTab",
+     "unit": "S05",
+     "seg": 13813,
+     "off": 1734,
+     "size": 30,
+     "target_sha256": "f796f59c99bf64fc5fe930de32cd8492244fd83fc06cd00130acc33c5984dad4",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL",
+     "reloc_order": "GROUPED"
+    }
+   ],
+   "scaffold": [
+    "AntMenu",
+    "DoHealthSetY",
+    "DoWarnSetB",
+    "o05_35F5_025C"
+   ],
+   "object_sha256": "27a0a96bc29d77c0dcc3f3c8bfcedb6d8a834d4e082e233dced99f8f9e8b36da"
+  },
   "S06:35F5": {
    "unit": "S06",
    "seg": 13813,
@@ -249,13 +329,13 @@
   "S07:35F5": {
    "unit": "S07",
    "seg": 13813,
-   "profile": "msc600a",
+   "profile": "msc600ax",
    "flags": [
     "/AL",
     "/Os",
     "/Og",
     "/Oe",
-    "/Zd"
+    "/Zi"
    ],
    "placements": {
     "CONST": {
@@ -290,7 +370,7 @@
     }
    ],
    "scaffold": [],
-   "object_sha256": "969160c0c6942c8d761fa07deb31a8e97dd18a988039e91e4efbe865553247a6"
+   "object_sha256": "ae600f1831a7df31032a6ef4e209a67f033fd4f86c5d7eeb7bc913a400aae478"
   },
   "S08:35F5": {
    "unit": "S08",
@@ -551,6 +631,74 @@
    ],
    "object_sha256": "af16a00bb421e28d462e023d7e3a05acd37c14a9b82d98997c947b54dbada969"
   },
+  "S10:35F5": {
+   "unit": "S10",
+   "seg": 13813,
+   "profile": "msc600ax",
+   "flags": [
+    "/AL",
+    "/Os",
+    "/Og",
+    "/Oe",
+    "/Gs",
+    "/Zd"
+   ],
+   "placements": {
+    "_DATA": {
+     "seg": 21939,
+     "off": 24714,
+     "size": 38
+    },
+    "CONST": {
+     "seg": 21939,
+     "off": 35292,
+     "size": 10
+    }
+   },
+   "lang": "c",
+   "source": "src/S10/m35F5.c",
+   "source_sha256": "a9aa70789a1783eb5963bee6922c31d957bbb8fa32f83ea8d28aeafbc1fe1787",
+   "claims": [
+    {
+     "name": "o10_35F5_0000",
+     "unit": "S10",
+     "seg": 13813,
+     "off": 0,
+     "size": 215,
+     "target_sha256": "be3a167feaf3fb081668926fad9dd6ad6bb5b8baf5892c8007578da7b6b2bda4",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL",
+     "reloc_order": "GROUPED"
+    },
+    {
+     "name": "o10_35F5_00D7",
+     "unit": "S10",
+     "seg": 13813,
+     "off": 215,
+     "size": 236,
+     "target_sha256": "9d68fce88443079ebef0b2cc02ac67c32e508574d55342af473d1822b2d5f801",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL",
+     "reloc_order": "GROUPED"
+    },
+    {
+     "name": "o10_35F5_01C3",
+     "unit": "S10",
+     "seg": 13813,
+     "off": 451,
+     "size": 449,
+     "target_sha256": "e922cbfcfa5b41d70b833998678f9a616b9f95c818eb3d0139912bae53bd4316",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL",
+     "reloc_order": "GROUPED"
+    }
+   ],
+   "scaffold": [
+    "o10_35F5_0384",
+    "o10_35F5_0A63"
+   ],
+   "object_sha256": "4b5aca99711dad20a6dce4cf56b5d1074747e84e428361c8e7397db3f224f790"
+  },
   "S11:35F5": {
    "unit": "S11",
    "seg": 13813,
@@ -581,6 +729,586 @@
     "o11_35F5_009E"
    ],
    "object_sha256": "ce1b5a0047fb9ebdd26a2511386c95d51c626e9b89b4c16a39c640232002d464"
+  },
+  "S12:384C": {
+   "unit": "S12",
+   "seg": 14412,
+   "profile": "msc600ax",
+   "flags": [
+    "/AL",
+    "/Os",
+    "/Og",
+    "/Oe",
+    "/Zd"
+   ],
+   "placements": {
+    "CONST": {
+     "seg": 21939,
+     "off": 34416,
+     "size": 86
+    },
+    "_DATA": {
+     "seg": 21939,
+     "off": 10638,
+     "size": 156
+    }
+   },
+   "lang": "c",
+   "source": "src/S12/m384C.c",
+   "source_sha256": "6baad15ef7617684f7b5e35a15410ce35a5522b9e208f03ba89be431679b98eb",
+   "claims": [
+    {
+     "name": "DeinitMapFunctions",
+     "unit": "S12",
+     "seg": 14412,
+     "off": 0,
+     "size": 8,
+     "target_sha256": "424dadfcf7b504a3a2053a972f7c12740b8fd864fbbf3e4585bdfd8180c3e6c5",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL",
+     "reloc_order": "EXACT"
+    },
+    {
+     "name": "InitMapFunctions",
+     "unit": "S12",
+     "seg": 14412,
+     "off": 8,
+     "size": 344,
+     "target_sha256": "7b47f02cd49051af1c999311da99d4d6630c6bee76137ad131e9255a647d9fca",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL",
+     "reloc_order": "GROUPED"
+    },
+    {
+     "name": "ProcMapEvent",
+     "unit": "S12",
+     "seg": 14412,
+     "off": 352,
+     "size": 304,
+     "target_sha256": "8e73a6ca6b1b85a7f1b10b9cabee977bc80273cb62bba75f61def39aa1745881",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL",
+     "reloc_order": "GROUPED"
+    },
+    {
+     "name": "OpenMapWindow",
+     "unit": "S12",
+     "seg": 14412,
+     "off": 656,
+     "size": 18,
+     "target_sha256": "4624a5fae5b0f9afae211b08d76c20de6fbee874f902e4d43319d1716a5c8697",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL",
+     "reloc_order": "GROUPED"
+    },
+    {
+     "name": "EraseMapCursor",
+     "unit": "S12",
+     "seg": 14412,
+     "off": 879,
+     "size": 73,
+     "target_sha256": "b4b2ce291b3a1494d7fd14ef8f28e4f03894807323981c5d0dfd92e667488e0a",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL",
+     "reloc_order": "GROUPED"
+    },
+    {
+     "name": "ToggleMapCursor",
+     "unit": "S12",
+     "seg": 14412,
+     "off": 952,
+     "size": 24,
+     "target_sha256": "f3d6e87ecbae4cbb4c5ff5790987e76ed187fd44ed03750b1736c5ed17c0fbc5",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL",
+     "reloc_order": "EXACT"
+    },
+    {
+     "name": "o12_384C_03D0",
+     "unit": "S12",
+     "seg": 14412,
+     "off": 976,
+     "size": 85,
+     "target_sha256": "75caa75c6cc555c4a78fc607eed07b7e2ebadc46715c9b3be6a57299c6fbe6d2",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL",
+     "reloc_order": "EXACT"
+    },
+    {
+     "name": "o12_384C_0425",
+     "unit": "S12",
+     "seg": 14412,
+     "off": 1061,
+     "size": 13,
+     "target_sha256": "d32f8b46a76032fe013fc5f52fc12d5e5c7b4285c6b39fd08bc553f45f3b1c8c",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL",
+     "reloc_order": "GROUPED"
+    },
+    {
+     "name": "o12_384C_0706",
+     "unit": "S12",
+     "seg": 14412,
+     "off": 1798,
+     "size": 264,
+     "target_sha256": "2388fa247ce116b5676288ada24bb78a60477531cf779ada1f9e38a9da6f9ecc",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL",
+     "reloc_order": "GROUPED"
+    },
+    {
+     "name": "o12_384C_080E",
+     "unit": "S12",
+     "seg": 14412,
+     "off": 2062,
+     "size": 567,
+     "target_sha256": "d542f26667ea35522bbfde6b00a356ab209e5b84b7e1f90f1c5aa132ccb95b45",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL",
+     "reloc_order": "GROUPED"
+    },
+    {
+     "name": "DrawMapData",
+     "unit": "S12",
+     "seg": 14412,
+     "off": 2629,
+     "size": 305,
+     "target_sha256": "9646331ea5b276b9a6cb042f686bca7e4bb794537d6c67f1cb89a9cdc20005a8",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL",
+     "reloc_order": "GROUPED"
+    },
+    {
+     "name": "o12_384C_100A",
+     "unit": "S12",
+     "seg": 14412,
+     "off": 4106,
+     "size": 43,
+     "target_sha256": "75ead486de50a10b93a33332e4244dce1a7cd02f0c1ea075cc7af02447bc99bb",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL",
+     "reloc_order": "GROUPED"
+    },
+    {
+     "name": "o12_384C_1035",
+     "unit": "S12",
+     "seg": 14412,
+     "off": 4149,
+     "size": 112,
+     "target_sha256": "defb17fed1658d79c0e1054e1d61855c09d2da360d53d752d50159c242c72399",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL",
+     "reloc_order": "GROUPED"
+    },
+    {
+     "name": "o12_384C_10A5",
+     "unit": "S12",
+     "seg": 14412,
+     "off": 4261,
+     "size": 220,
+     "target_sha256": "144ded1a06f4a31a87e10d956d755020f82048cfe2b268b0a9a264ed5ad787cf",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL",
+     "reloc_order": "GROUPED"
+    },
+    {
+     "name": "o12_384C_1181",
+     "unit": "S12",
+     "seg": 14412,
+     "off": 4481,
+     "size": 338,
+     "target_sha256": "146aee6827745c22d6cf6ffd493e12b48063cd5a61fbd1f16816cca7d0cfeacb",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL",
+     "reloc_order": "GROUPED"
+    },
+    {
+     "name": "o12_384C_12D3",
+     "unit": "S12",
+     "seg": 14412,
+     "off": 4819,
+     "size": 159,
+     "target_sha256": "b4ea6190711236ffea8f015bd9df1bebd047bd38fd9b4336405469d8446f3b8a",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL",
+     "reloc_order": "GROUPED"
+    }
+   ],
+   "scaffold": [
+    "DrawMapCursor",
+    "o12_384C_0432",
+    "o12_384C_0B76"
+   ],
+   "object_sha256": "eee3e12713bb811e22b7b201a0e217aad060191edefeff8dbdf0fa3c7d0baa14"
+  },
+  "S13:384C": {
+   "unit": "S13",
+   "seg": 14412,
+   "profile": "msc600a",
+   "flags": [
+    "/AL",
+    "/Os",
+    "/Og",
+    "/Oe",
+    "/Zd"
+   ],
+   "placements": {
+    "CONST": {
+     "seg": 21939,
+     "off": 34502,
+     "size": 114
+    },
+    "_DATA": {
+     "seg": 21939,
+     "off": 10794,
+     "size": 206
+    }
+   },
+   "lang": "c",
+   "source": "src/S13/m384C.c",
+   "source_sha256": "55387112f6321e63c56c6990b57ff3b32b3be21eef28ed21f09dfab778d8a65e",
+   "claims": [
+    {
+     "name": "ProcYardEvent",
+     "unit": "S13",
+     "seg": 14412,
+     "off": 0,
+     "size": 403,
+     "target_sha256": "feecd57f661ef2d1a1587fd9f111748d56dd063e5d3b80f3ab2cbce32ee675a1",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL",
+     "reloc_order": "GROUPED"
+    },
+    {
+     "name": "DrawYardCursor",
+     "unit": "S13",
+     "seg": 14412,
+     "off": 403,
+     "size": 41,
+     "target_sha256": "cfc23942a0b172b371f7315aef5024582fb96d329438379254325f2696c7dea3",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL",
+     "reloc_order": "EXACT"
+    },
+    {
+     "name": "EraseYardCursor",
+     "unit": "S13",
+     "seg": 14412,
+     "off": 444,
+     "size": 41,
+     "target_sha256": "854dddb326d0f6ae66d32d788566c089279837c1db680a7368ff3276452049b4",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL",
+     "reloc_order": "EXACT"
+    },
+    {
+     "name": "o13_384C_01E5",
+     "unit": "S13",
+     "seg": 14412,
+     "off": 485,
+     "size": 151,
+     "target_sha256": "569e0ec2d1c5537bd8953b6f46cbb7aa36146b7179082cb9c2fcd92291dcc6fa",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL",
+     "reloc_order": "GROUPED"
+    },
+    {
+     "name": "o13_384C_027C",
+     "unit": "S13",
+     "seg": 14412,
+     "off": 636,
+     "size": 91,
+     "target_sha256": "2650f3f22109718d59919ee126d42c10092e9b57528da2972910df45b520e245",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL",
+     "reloc_order": "GROUPED"
+    },
+    {
+     "name": "win_DrawYardWindow",
+     "unit": "S13",
+     "seg": 14412,
+     "off": 727,
+     "size": 289,
+     "target_sha256": "0a967814df06c0e9f34a021bc42a70d3d362d0a690f63ba8ed8cc3002b5925fc",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL",
+     "reloc_order": "GROUPED"
+    },
+    {
+     "name": "o13_384C_03F8",
+     "unit": "S13",
+     "seg": 14412,
+     "off": 1016,
+     "size": 78,
+     "target_sha256": "3b8281dc890fa43cd5d5567c7248855f3748df95d755f94abdc6c59583b9392c",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL",
+     "reloc_order": "GROUPED"
+    },
+    {
+     "name": "DrawYard",
+     "unit": "S13",
+     "seg": 14412,
+     "off": 1094,
+     "size": 44,
+     "target_sha256": "d5de6a152f7eb5aa5ecd6865cf25843c4bb4c16b4a4fe12c6e0c7c15146eff1f",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL",
+     "reloc_order": "GROUPED"
+    },
+    {
+     "name": "UpdateYard",
+     "unit": "S13",
+     "seg": 14412,
+     "off": 1138,
+     "size": 12,
+     "target_sha256": "d6c2f1243245fc8a05f32f267feb0a7a4c4b499ba0dff6b0b5bb82c82d604acb",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL",
+     "reloc_order": "EXACT"
+    },
+    {
+     "name": "DrawSimKid",
+     "unit": "S13",
+     "seg": 14412,
+     "off": 1150,
+     "size": 581,
+     "target_sha256": "ed4682092cfd645544d9a7ada937dd66244d57841fc699e7469bfeb118373269",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL",
+     "reloc_order": "GROUPED"
+    },
+    {
+     "name": "DrawDog",
+     "unit": "S13",
+     "seg": 14412,
+     "off": 1731,
+     "size": 224,
+     "target_sha256": "4828a18572092963a244294c5856b08f5072027df760c8287529dcd0ce0e2551",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL",
+     "reloc_order": "GROUPED"
+    },
+    {
+     "name": "DrawSimBird",
+     "unit": "S13",
+     "seg": 14412,
+     "off": 1955,
+     "size": 187,
+     "target_sha256": "aab716dabace0e9c6b08ffb267cb70604abf6cb8d77868f5d5abafa0094847ca",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL",
+     "reloc_order": "GROUPED"
+    },
+    {
+     "name": "DrawSimCat",
+     "unit": "S13",
+     "seg": 14412,
+     "off": 2142,
+     "size": 216,
+     "target_sha256": "aea0138c7fba7acad0822ff795777bcfeb5dc8a9b1553e333ef3a091f07f06ac",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL",
+     "reloc_order": "GROUPED"
+    },
+    {
+     "name": "DrawForSale",
+     "unit": "S13",
+     "seg": 14412,
+     "off": 2358,
+     "size": 127,
+     "target_sha256": "dad71dc91747e36781df2a47b904717c8167b4550b6e098e9f5f1e09b98e9a1b",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL",
+     "reloc_order": "GROUPED"
+    },
+    {
+     "name": "Draw_SimYard",
+     "unit": "S13",
+     "seg": 14412,
+     "off": 2823,
+     "size": 564,
+     "target_sha256": "8862dd51da6f0fe1d62cb7d421dd98b3c60b5ac0e777f9ae6fbc0025e3be3799",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL",
+     "reloc_order": "GROUPED"
+    },
+    {
+     "name": "DrawAnimYardMessage",
+     "unit": "S13",
+     "seg": 14412,
+     "off": 3387,
+     "size": 214,
+     "target_sha256": "a81d09b409fb824036775819d534f776b2d7f287170277acdb33ef9d9b7a03e8",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL",
+     "reloc_order": "GROUPED"
+    },
+    {
+     "name": "DrawRain",
+     "unit": "S13",
+     "seg": 14412,
+     "off": 3601,
+     "size": 207,
+     "target_sha256": "9caf307242866a21abe976aab327f5c9c99a7e27e4569e967c40f8f458c07093",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL",
+     "reloc_order": "GROUPED"
+    },
+    {
+     "name": "DrawSwarm",
+     "unit": "S13",
+     "seg": 14412,
+     "off": 3808,
+     "size": 896,
+     "target_sha256": "d288eebbfb10564dafe349a6ef94020724f85ccdde670e4c380a7f9edefb0a93",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL",
+     "reloc_order": "GROUPED"
+    },
+    {
+     "name": "TooFar",
+     "unit": "S13",
+     "seg": 14412,
+     "off": 4704,
+     "size": 45,
+     "target_sha256": "7b688c3a941252bf298a6a163e0fdee36e0fdce75cdf2015d4d26202608029c5",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL",
+     "reloc_order": "EXACT"
+    },
+    {
+     "name": "YardArea",
+     "unit": "S13",
+     "seg": 14412,
+     "off": 5871,
+     "size": 180,
+     "target_sha256": "cf24ed03c50fd3cb8f06b78bab5004c9e1f7ff50ec0ea05e71674840ac9bd15f",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL",
+     "reloc_order": "EXACT"
+    }
+   ],
+   "scaffold": [
+    "DrawColonyBars",
+    "DrawMower",
+    "DrawSimColonies",
+    "InvertPatch"
+   ],
+   "object_sha256": "37aa19ffc972b0913446db819872b23dfde7c337a77cf0e7ef2aa7608da3c356"
+  },
+  "S14:384C": {
+   "unit": "S14",
+   "seg": 14412,
+   "profile": "msc600a",
+   "flags": [
+    "/AL",
+    "/Os",
+    "/Og",
+    "/Oe",
+    "/Zd"
+   ],
+   "placements": {
+    "CONST": {
+     "seg": 21939,
+     "off": 34616,
+     "size": 64
+    },
+    "_DATA": {
+     "seg": 21939,
+     "off": 11000,
+     "size": 94
+    }
+   },
+   "lang": "c",
+   "source": "src/S14/m384C.c",
+   "source_sha256": "b9c891643bf4a82f3c8eb83e7b27e3724ccbb2b938afb9bf054c827be7cd5b53",
+   "claims": [
+    {
+     "name": "DoScenario",
+     "unit": "S14",
+     "seg": 14412,
+     "off": 1169,
+     "size": 106,
+     "target_sha256": "7ac1ac3bcec4678a289be2be413b188c71ba0b6b181d2a92736187e50ac3efd5",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL",
+     "reloc_order": "GROUPED"
+    },
+    {
+     "name": "DoWinHelp",
+     "unit": "S14",
+     "seg": 14412,
+     "off": 1275,
+     "size": 203,
+     "target_sha256": "46bd30a88c3afb7fa9edd307e159884970dfb6c3994e9ae22a7fc8ccf22ee16f",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL",
+     "reloc_order": "GROUPED"
+    },
+    {
+     "name": "ScoreDialog",
+     "unit": "S14",
+     "seg": 14412,
+     "off": 1478,
+     "size": 551,
+     "target_sha256": "6c80d3654f226a9d285fe749531ad59597e545da8be2baee66c41b27aa6de30d",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL",
+     "reloc_order": "GROUPED"
+    },
+    {
+     "name": "SetDefaultWindPrompt",
+     "unit": "S14",
+     "seg": 14412,
+     "off": 2765,
+     "size": 157,
+     "target_sha256": "a0ea068887efe43773933a616174683deda79b8ec19b40c557ea1178c7d816ae",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL",
+     "reloc_order": "GROUPED"
+    },
+    {
+     "name": "PictStrnDialog",
+     "unit": "S14",
+     "seg": 14412,
+     "off": 2922,
+     "size": 156,
+     "target_sha256": "0836e9b6cb0e86310c99e9882362ad95cbb8157a7062397601554d1c557790c5",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL",
+     "reloc_order": "GROUPED"
+    },
+    {
+     "name": "EndGameDialog",
+     "unit": "S14",
+     "seg": 14412,
+     "off": 3557,
+     "size": 445,
+     "target_sha256": "da248a7208cff45aee4bdbae7ddce4638bb8d37f132a6a945e76da72a9fee940",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL",
+     "reloc_order": "GROUPED"
+    },
+    {
+     "name": "CustomerIDDialog",
+     "unit": "S14",
+     "seg": 14412,
+     "off": 4325,
+     "size": 328,
+     "target_sha256": "e8c8d22bb03c347677f4b832c077ad13726e8eedad34b7b626e2fac3756b6477",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL",
+     "reloc_order": "GROUPED"
+    }
+   ],
+   "scaffold": [
+    "CalcScore",
+    "DrawCastePopUp",
+    "PictureDialog",
+    "SpiderDialog"
+   ],
+   "object_sha256": "148d98e4d340da4abccadd553a833d232bded6882dd6825ee76a6b4441235e5d"
   },
   "S18:384C": {
    "unit": "S18",
@@ -870,6 +1598,293 @@
    "scaffold": [],
    "object_sha256": "d8adba6514e11e6320ec8d4e6f8ed8abbd024fa101efe74c3c571d3ff65c08ee"
   },
+  "S20:39C7": {
+   "unit": "S20",
+   "seg": 14791,
+   "profile": "msc600ax",
+   "flags": [
+    "/AL",
+    "/Os",
+    "/Og",
+    "/Oe",
+    "/Gs",
+    "/Zd"
+   ],
+   "placements": {
+    "_DATA": {
+     "seg": 21939,
+     "off": 23090,
+     "size": 100
+    }
+   },
+   "lang": "c",
+   "extent": {
+    "start": 236656,
+    "end": 237337
+   },
+   "source": "src/S20/m39C7.c",
+   "source_sha256": "a392244a7023099b7e9930ea45bf3989eb0bff37202889249795db8b5ae7d13a",
+   "claims": [
+    {
+     "name": "o20_39C7_0000",
+     "unit": "S20",
+     "seg": 14791,
+     "off": 0,
+     "size": 1,
+     "target_sha256": "383e5d7d58caa41ce723cf16af471b38f6ee9065c032d07fa6bef1678cb72f1d",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL",
+     "reloc_order": "EXACT"
+    },
+    {
+     "name": "o20_39C7_0001",
+     "unit": "S20",
+     "seg": 14791,
+     "off": 1,
+     "size": 1,
+     "target_sha256": "383e5d7d58caa41ce723cf16af471b38f6ee9065c032d07fa6bef1678cb72f1d",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL",
+     "reloc_order": "EXACT"
+    },
+    {
+     "name": "o20_39C7_0002",
+     "unit": "S20",
+     "seg": 14791,
+     "off": 2,
+     "size": 1,
+     "target_sha256": "383e5d7d58caa41ce723cf16af471b38f6ee9065c032d07fa6bef1678cb72f1d",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL",
+     "reloc_order": "EXACT"
+    },
+    {
+     "name": "o20_39C7_0003",
+     "unit": "S20",
+     "seg": 14791,
+     "off": 3,
+     "size": 1,
+     "target_sha256": "383e5d7d58caa41ce723cf16af471b38f6ee9065c032d07fa6bef1678cb72f1d",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL",
+     "reloc_order": "EXACT"
+    },
+    {
+     "name": "o20_39C7_0004",
+     "unit": "S20",
+     "seg": 14791,
+     "off": 4,
+     "size": 1,
+     "target_sha256": "383e5d7d58caa41ce723cf16af471b38f6ee9065c032d07fa6bef1678cb72f1d",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL",
+     "reloc_order": "EXACT"
+    },
+    {
+     "name": "o20_39C7_0005",
+     "unit": "S20",
+     "seg": 14791,
+     "off": 5,
+     "size": 1,
+     "target_sha256": "383e5d7d58caa41ce723cf16af471b38f6ee9065c032d07fa6bef1678cb72f1d",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL",
+     "reloc_order": "EXACT"
+    },
+    {
+     "name": "o20_39C7_0006",
+     "unit": "S20",
+     "seg": 14791,
+     "off": 6,
+     "size": 1,
+     "target_sha256": "383e5d7d58caa41ce723cf16af471b38f6ee9065c032d07fa6bef1678cb72f1d",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL",
+     "reloc_order": "EXACT"
+    },
+    {
+     "name": "o20_39C7_0007",
+     "unit": "S20",
+     "seg": 14791,
+     "off": 7,
+     "size": 1,
+     "target_sha256": "383e5d7d58caa41ce723cf16af471b38f6ee9065c032d07fa6bef1678cb72f1d",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL",
+     "reloc_order": "EXACT"
+    },
+    {
+     "name": "o20_39C7_0008",
+     "unit": "S20",
+     "seg": 14791,
+     "off": 8,
+     "size": 97,
+     "target_sha256": "15ff762bf44cb51f6b0f0c7630a8df3df26f7d388334d15d55b3d5b69a04e952",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL",
+     "reloc_order": "EXACT"
+    },
+    {
+     "name": "o20_39C7_0069",
+     "unit": "S20",
+     "seg": 14791,
+     "off": 105,
+     "size": 150,
+     "target_sha256": "a2058cc17f823f99fce96cf6e5c7dbd153c3411029413fc32016734e5d9d0c32",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL",
+     "reloc_order": "GROUPED"
+    },
+    {
+     "name": "o20_39C7_00FF",
+     "unit": "S20",
+     "seg": 14791,
+     "off": 255,
+     "size": 97,
+     "target_sha256": "15ff762bf44cb51f6b0f0c7630a8df3df26f7d388334d15d55b3d5b69a04e952",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL",
+     "reloc_order": "EXACT"
+    },
+    {
+     "name": "o20_39C7_0160",
+     "unit": "S20",
+     "seg": 14791,
+     "off": 352,
+     "size": 97,
+     "target_sha256": "15ff762bf44cb51f6b0f0c7630a8df3df26f7d388334d15d55b3d5b69a04e952",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL",
+     "reloc_order": "EXACT"
+    },
+    {
+     "name": "o20_39C7_01C1",
+     "unit": "S20",
+     "seg": 14791,
+     "off": 449,
+     "size": 80,
+     "target_sha256": "e36b3730f551f9fe863265771b01f4b54c214a994a0026d722d19556a68dc408",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL",
+     "reloc_order": "GROUPED"
+    },
+    {
+     "name": "o20_39C7_0211",
+     "unit": "S20",
+     "seg": 14791,
+     "off": 529,
+     "size": 1,
+     "target_sha256": "383e5d7d58caa41ce723cf16af471b38f6ee9065c032d07fa6bef1678cb72f1d",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL",
+     "reloc_order": "EXACT"
+    },
+    {
+     "name": "o20_39C7_0212",
+     "unit": "S20",
+     "seg": 14791,
+     "off": 530,
+     "size": 150,
+     "target_sha256": "d58e4842b109e26d97e620006aa81c01c4b5e4a2bed644c79d27e6b30f4fdb6d",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL",
+     "reloc_order": "GROUPED"
+    },
+    {
+     "name": "o20_39C7_02A8",
+     "unit": "S20",
+     "seg": 14791,
+     "off": 680,
+     "size": 1,
+     "target_sha256": "383e5d7d58caa41ce723cf16af471b38f6ee9065c032d07fa6bef1678cb72f1d",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL",
+     "reloc_order": "EXACT"
+    }
+   ],
+   "scaffold": [],
+   "object_sha256": "c619b922033e92730103c39242b8602a65e7a8439125a426a33f6bb931a941e4"
+  },
+  "S20:39F1": {
+   "unit": "S20",
+   "seg": 14833,
+   "profile": "msc600ax",
+   "flags": [
+    "/AL",
+    "/Os",
+    "/Og",
+    "/Oe",
+    "/Gs",
+    "/Zd"
+   ],
+   "placements": {
+    "_DATA": {
+     "seg": 21939,
+     "off": 24770,
+     "size": 133
+    },
+    "CONST": {
+     "seg": 21939,
+     "off": 35318,
+     "size": 16
+    }
+   },
+   "lang": "c",
+   "extent": {
+    "start": 237338,
+    "end": 238743
+   },
+   "source": "src/S20/m39F1.c",
+   "source_sha256": "f2f4ad6453f20bbeaa451924aee88dbb7742c997d64eeb8d95456949fa6271f9",
+   "claims": [
+    {
+     "name": "IBMInitStuff",
+     "unit": "S20",
+     "seg": 14833,
+     "off": 10,
+     "size": 980,
+     "target_sha256": "1b68a9506cee800aaf7f5860a95af774d33ff21b2099db5548dc1fb54d61d461",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL",
+     "reloc_order": "GROUPED"
+    },
+    {
+     "name": "ReadWord",
+     "unit": "S20",
+     "seg": 14833,
+     "off": 990,
+     "size": 113,
+     "target_sha256": "ec396b0013f1cd999d25545ecfac44888090fca071324d38e5572358cc03fb30",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL",
+     "reloc_order": "GROUPED"
+    },
+    {
+     "name": "SkipWords",
+     "unit": "S20",
+     "seg": 14833,
+     "off": 1103,
+     "size": 37,
+     "target_sha256": "f51fd55bb787d4288de2a0e95bba7a509bd3f194a95b6d0163447b2c83031bf0",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL",
+     "reloc_order": "EXACT"
+    },
+    {
+     "name": "ReadConfig",
+     "unit": "S20",
+     "seg": 14833,
+     "off": 1140,
+     "size": 275,
+     "target_sha256": "220b1914d040b3e55c66e60f373ee59581b16283fda00502bf9159cc0f4b3a4c",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL",
+     "reloc_order": "GROUPED"
+    }
+   ],
+   "scaffold": [],
+   "object_sha256": "3b32cdb04bb1cf71da1cd1b97ad7a9db265e7bced88b7949fdf01cbc19dff7d0"
+  },
   "S22:39C7": {
    "unit": "S22",
    "seg": 14791,
@@ -879,7 +1894,7 @@
     "/Os",
     "/Oe",
     "/Og",
-    "/Zd"
+    "/Zi"
    ],
    "placements": {
     "CONST": {
@@ -894,8 +1909,12 @@
     }
    },
    "lang": "c",
+   "extent": {
+    "start": 236656,
+    "end": 244698
+   },
    "source": "src/S22/m39C7.c",
-   "source_sha256": "3b249eb09eb3217b0d9d65edd6bcf1b9cd4bf2572986b597e585ff9549332a04",
+   "source_sha256": "62645666f88f2c16f3f9cd91528ac391315366130e5822f0c5b6966435271e97",
    "claims": [
     {
      "name": "processEdit",
@@ -961,7 +1980,7 @@
      "target_sha256": "909be7b3a0343ad2a27a54b295a37241b15e2e0a06f0c53a84e178e37865d630",
      "kind": "C",
      "provenance": "EXACT_NATURAL",
-     "reloc_order": "WITHIN_GROUP_PENDING"
+     "reloc_order": "GROUPED"
     },
     {
      "name": "YellowDeath",
@@ -972,7 +1991,7 @@
      "target_sha256": "41fc84aaa00a13d801ac23020f59a0b0542f7f50ef81f114141cd8f1d57fd898",
      "kind": "C",
      "provenance": "EXACT_NATURAL",
-     "reloc_order": "WITHIN_GROUP_PENDING"
+     "reloc_order": "GROUPED"
     },
     {
      "name": "SpecialXfer",
@@ -1064,7 +2083,7 @@
     }
    ],
    "scaffold": [],
-   "object_sha256": "f4ddc9f42770c94a49411dd24dfe35c0d5863d4a9909e300b918de7b17b56cd2"
+   "object_sha256": "754a8535822c85cd85580d555d9c20b717ff976711b900531b42baa26ce92a15"
   },
   "S22:3BBD": {
    "unit": "S22",
@@ -1075,7 +2094,7 @@
     "/Os",
     "/Oe",
     "/Og",
-    "/Zd"
+    "/Zi"
    ],
    "placements": {
     "CONST": {
@@ -1095,7 +2114,7 @@
     "end": 249366
    },
    "source": "src/S22/m3BBD.c",
-   "source_sha256": "496329817f38169b496d3ae6f5b8d71395b2f8c9ad2dade6e099d900dbd10e40",
+   "source_sha256": "77071a4a427dd9aa3244adee376dfe69c09a0fd4b4ed62f37c6371fe333114a5",
    "claims": [
     {
      "name": "processExp",
@@ -1117,7 +2136,7 @@
      "target_sha256": "cd053f0c495c1bd5cc2936448fa7eea8d8787751d515c3e0b727b6bdcb35fc1a",
      "kind": "C",
      "provenance": "EXACT_NATURAL",
-     "reloc_order": "GROUPED"
+     "reloc_order": "EXACT"
     },
     {
      "name": "ReDrawMapEdit",
@@ -1205,7 +2224,7 @@
      "target_sha256": "dc8815b07589e3f53cc6d05430e104e4aa46bb65367d2bb60d7748aaf30d668e",
      "kind": "C",
      "provenance": "EXACT_NATURAL",
-     "reloc_order": "EXACT"
+     "reloc_order": "GROUPED"
     },
     {
      "name": "ExpKillAnts",
@@ -1238,7 +2257,7 @@
      "target_sha256": "ee0226138bbd6097a1b287d64938eaaf22026d5189a50d19eaf2e6ba4c7cd32e",
      "kind": "C",
      "provenance": "EXACT_NATURAL",
-     "reloc_order": "GROUPED"
+     "reloc_order": "EXACT"
     },
     {
      "name": "ConnectWall",
@@ -1260,7 +2279,7 @@
      "target_sha256": "a8e1f304af6067709389d379d1b3b3eb62cd8445407516f0ae1d2a27fd5d2028",
      "kind": "C",
      "provenance": "EXACT_NATURAL",
-     "reloc_order": "GROUPED"
+     "reloc_order": "EXACT"
     },
     {
      "name": "IsItWall",
@@ -1282,7 +2301,7 @@
      "target_sha256": "b73e2151426383336fb9af3705a1a2a40384375617e8c44f23e5f1b593c80594",
      "kind": "C",
      "provenance": "EXACT_NATURAL",
-     "reloc_order": "GROUPED"
+     "reloc_order": "EXACT"
     },
     {
      "name": "FillDirtR",
@@ -1352,7 +2371,7 @@
     }
    ],
    "scaffold": [],
-   "object_sha256": "a0956c4a548f7691f5c4aae02a57ea3e828d749a65066909cc728d3fb4e69ad2"
+   "object_sha256": "64c9d7bde0d89246bbcf03dfde9ca868188c237c9019ad2a60bffb438eb19735"
   },
   "S23:39C7": {
    "unit": "S23",
@@ -1369,12 +2388,27 @@
     "_DATA": {
      "seg": 21939,
      "off": 11780,
-     "size": 36
+     "size": 228
+    },
+    "CONST": {
+     "seg": 21939,
+     "off": 34992,
+     "size": 2
+    },
+    "_BSS": {
+     "seg": 21939,
+     "off": 35874,
+     "size": 4
+    },
+    "UNIT5_DATA": {
+     "seg": 20197,
+     "off": 0,
+     "size": 2198
     }
    },
    "lang": "c",
    "source": "src/S23/m39C7.c",
-   "source_sha256": "1370469a744ec79526c50cfacd8d05822110170d9cf52c674c550b7845c97bf3",
+   "source_sha256": "0b8d13c147ab7514317dae29ea75168290100e6e4d834236519c6bc41bbbe4c8",
    "claims": [
     {
      "name": "XFlipLong",
@@ -1408,12 +2442,151 @@
      "kind": "C",
      "provenance": "EXACT_NATURAL",
      "reloc_order": "EXACT"
+    },
+    {
+     "name": "OpenInfoWindow",
+     "unit": "S23",
+     "seg": 14791,
+     "off": 3097,
+     "size": 99,
+     "target_sha256": "32671e2c503edc16bcf7c4e8a8e4598c265ab04f30cdc0361ef2eac3b817a06b",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL",
+     "reloc_order": "GROUPED"
+    },
+    {
+     "name": "PopUpInfoWindow",
+     "unit": "S23",
+     "seg": 14791,
+     "off": 3196,
+     "size": 724,
+     "target_sha256": "ce4008881c82c42f52b06ff27b4fa020c239bb1ec556400e1acd4f9f3dbef65c",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL",
+     "reloc_order": "GROUPED"
+    },
+    {
+     "name": "ProcInfoEvent",
+     "unit": "S23",
+     "seg": 14791,
+     "off": 3920,
+     "size": 442,
+     "target_sha256": "2808ae1caa66a37c3396f526515cfe13fede11f4a405ba886eb87c4a65597b91",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL",
+     "reloc_order": "GROUPED"
     }
    ],
    "scaffold": [
-    "DisplayCard"
+    "DisplayCard",
+    "win_GetStyleTextHeight",
+    "win_PrintStyleTextInRect"
    ],
-   "object_sha256": "30555cc27542985e5b8ed3c3b7852785e464d25eb747be42b1d99c6cba671fe1"
+   "object_sha256": "8296f220b793818ab92c0511835e6343155c0a6fe870c859e73f1cdbc7b6a52f"
+  },
+  "S24:39C7": {
+   "unit": "S24",
+   "seg": 14791,
+   "profile": "msc600ax",
+   "flags": [
+    "/AL",
+    "/Os",
+    "/Og",
+    "/Oe",
+    "/Zd"
+   ],
+   "placements": {
+    "_DATA": {
+     "seg": 21939,
+     "off": 12008,
+     "size": 21
+    },
+    "CONST": {
+     "seg": 21939,
+     "off": 34994,
+     "size": 70
+    },
+    "_BSS": {
+     "seg": 21939,
+     "off": 35878,
+     "size": 50
+    }
+   },
+   "lang": "c",
+   "source": "src/S24/m39C7.c",
+   "source_sha256": "95024f99a6ac03e1f926f4bf520464e0eda91dea32e5654b00c0bede3726ec25",
+   "claims": [
+    {
+     "name": "OpenHistoryWindow",
+     "unit": "S24",
+     "seg": 14791,
+     "off": 0,
+     "size": 18,
+     "target_sha256": "61601499f6701512a695f337431875daeadecd4fa118e50eb5cf5a0c0a8e3610",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL",
+     "reloc_order": "GROUPED"
+    },
+    {
+     "name": "ProcHistoryEvent",
+     "unit": "S24",
+     "seg": 14791,
+     "off": 18,
+     "size": 161,
+     "target_sha256": "4fc2030a315436340c524a437df9222ab6fa17f5ca80179dedda5c9a9ad0491f",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL",
+     "reloc_order": "GROUPED"
+    },
+    {
+     "name": "ToggleHistButton",
+     "unit": "S24",
+     "seg": 14791,
+     "off": 179,
+     "size": 261,
+     "target_sha256": "ddcba3c3072d8b9fc9bec494d132bd0f1c80538a7e1f0e94af3797ad0cd4a3af",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL",
+     "reloc_order": "GROUPED"
+    },
+    {
+     "name": "ClearHistory",
+     "unit": "S24",
+     "seg": 14791,
+     "off": 440,
+     "size": 290,
+     "target_sha256": "1206a0e761655e7f81bd6f15f29bc2ffd3100df06a3efd142eb10c5cdc250bc6",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL",
+     "reloc_order": "EXACT"
+    },
+    {
+     "name": "win_DrawHistoryWindow",
+     "unit": "S24",
+     "seg": 14791,
+     "off": 730,
+     "size": 82,
+     "target_sha256": "80b4e21eb93aeac2008e3344677958b8543f75274d141806f2887c72446913b4",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL",
+     "reloc_order": "GROUPED"
+    },
+    {
+     "name": "HistUpdate",
+     "unit": "S24",
+     "seg": 14791,
+     "off": 1544,
+     "size": 259,
+     "target_sha256": "50253e24101878b4426eb52b04be42679d6725a3ddf65a87d7e8638ae7d71dcb",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL",
+     "reloc_order": "GROUPED"
+    }
+   ],
+   "scaffold": [
+    "drawHistGraph"
+   ],
+   "object_sha256": "e86900fca019ed6bd9f6579aca6895500c175c92d9931777a015bf033ce31ec2"
   },
   "S25:39C7": {
    "unit": "S25",
@@ -1747,7 +2920,7 @@
    },
    "lang": "c",
    "source": "src/S25/m3BA4.c",
-   "source_sha256": "93c57b0049c67dca6cb7a2da6b4b5509c3cd033f7f9049f97244e3154f863a04",
+   "source_sha256": "72533edb48f19c22618f02bfd298a0aedd883e23e52ab408e02c2aa3efd83a0c",
    "claims": [
     {
      "name": "DoAntSimY",
@@ -1880,24 +3053,35 @@
      "provenance": "EXACT_STEERED",
      "steered": "DoAntMoveY scaffold stand-in: CONST word order + 21 filler lines -> /Zd LINNUM (52/record) LEDATA boundary that fixes within-group reloc order of o25_3BA4_0999",
      "reloc_order": "GROUPED"
+    },
+    {
+     "name": "o25_3BA4_1A9F",
+     "unit": "S25",
+     "seg": 15268,
+     "off": 6815,
+     "size": 131,
+     "target_sha256": "fea4087fede4bf28d0d04e2f254614e773b5ad86d9a2b0cb058d7ef8a1061701",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL",
+     "reloc_order": "EXACT"
     }
    ],
    "scaffold": [
     "DoAntMoveY",
     "o25_3BA4_1035",
-    "o25_3BA4_1686",
-    "o25_3BA4_1A9F"
+    "o25_3BA4_1686"
    ],
-   "object_sha256": "160a48d1cbcba68d5194a35a1a327685d00dfffac7a85d547db87285e680cfbc"
+   "object_sha256": "076ed9e71578934a2eda04412d73713857bb33385cd21ea3ee34b0c379522258"
   },
   "root:0093": {
    "unit": "root",
    "seg": 147,
-   "profile": "msc600a",
+   "profile": "msc600ax",
    "flags": [
     "/AL",
     "/Os",
-    "/Oe"
+    "/Oe",
+    "/Zi"
    ],
    "placements": {
     "_BSS": {
@@ -2022,7 +3206,7 @@
      "target_sha256": "3fbb5967d813f0752482b5b237d96bb4cd6a2c1617ed496f4eacc5be8b7a5782",
      "kind": "C",
      "provenance": "EXACT_NATURAL",
-     "reloc_order": "GROUPED"
+     "reloc_order": "EXACT"
     },
     {
      "name": "SRand1",
@@ -2125,7 +3309,7 @@
     }
    ],
    "scaffold": [],
-   "object_sha256": "1e35b30b7c439012bdeb3349ed9d8bba2194ef51e1368e74cd2fbd83128a8386"
+   "object_sha256": "a26be1614bca353e1f9dbcebdded1d9bd6970218c07186f74d5cd53955d0ff2a"
   },
   "root:00DF": {
    "unit": "root",
@@ -2223,7 +3407,7 @@
   "root:0250": {
    "unit": "root",
    "seg": 592,
-   "profile": "msc600a",
+   "profile": "msc600ax",
    "flags": [
     "/AL",
     "/Os",
@@ -2235,12 +3419,12 @@
     "CONST": {
      "seg": 21939,
      "off": 32396,
-     "size": 96
+     "size": 326
     },
     "_DATA": {
      "seg": 21939,
      "off": 6590,
-     "size": 243
+     "size": 274
     },
     "_BSS": {
      "seg": 21939,
@@ -2250,7 +3434,7 @@
    },
    "lang": "c",
    "source": "src/root/m0250.c",
-   "source_sha256": "74baad4b4ef36846cb5dc2644a61b90fd8e48bd12e27ad839692bc465444f90e",
+   "source_sha256": "d8b8bcae797b30e77385350d3d9101abb0e58802c6bad247c8de8c509f22c39a",
    "claims": [
     {
      "name": "f_0250_0CF6",
@@ -2592,25 +3776,397 @@
      "kind": "C",
      "provenance": "EXACT_NATURAL",
      "reloc_order": "EXACT"
+    },
+    {
+     "name": "ed_MoveTo",
+     "unit": "root",
+     "seg": 592,
+     "off": 8357,
+     "size": 85,
+     "target_sha256": "9df2b60e08db6c4d4da55ae8324cb74251dcfbda27b4d9f774776fe838e778d3",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL",
+     "reloc_order": "EXACT"
+    },
+    {
+     "name": "ed_LineTo",
+     "unit": "root",
+     "seg": 592,
+     "off": 8442,
+     "size": 108,
+     "target_sha256": "8b06827dd511d3b3b779a5e90ebaedae34558c29970b1861499df7382cb282be",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL",
+     "reloc_order": "GROUPED"
+    },
+    {
+     "name": "DrawPalps",
+     "unit": "root",
+     "seg": 592,
+     "off": 8550,
+     "size": 1502,
+     "target_sha256": "3b7823b48e2ecc0a509094ea0dea7d6f01d2484876487e66730375a69e4379e4",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL",
+     "reloc_order": "GROUPED"
+    },
+    {
+     "name": "DrawLegs",
+     "unit": "root",
+     "seg": 592,
+     "off": 10052,
+     "size": 6790,
+     "target_sha256": "4dd442b5185a132c05de6feb22c105dd212ec24b19b722caa5d295d961b51fa9",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL",
+     "reloc_order": "GROUPED"
+    },
+    {
+     "name": "f_0250_41CA",
+     "unit": "root",
+     "seg": 592,
+     "off": 16842,
+     "size": 91,
+     "target_sha256": "b98b106450e248bb33da128121596f1f5ba2d928c66c137281ae44225671c131",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL",
+     "reloc_order": "EXACT"
+    },
+    {
+     "name": "EggBalloons",
+     "unit": "root",
+     "seg": 592,
+     "off": 17034,
+     "size": 120,
+     "target_sha256": "6a3ff70f1957ee1755f95761d5e6ff39628cc1fa996a6ddc953605c25ca887a8",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL",
+     "reloc_order": "EXACT"
+    },
+    {
+     "name": "FightBalloons",
+     "unit": "root",
+     "seg": 592,
+     "off": 17154,
+     "size": 120,
+     "target_sha256": "de38bfa4c4461868a8cc385a38bb173da7caae59859e41b46722a26b2d0f9aaa",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL",
+     "reloc_order": "EXACT"
+    },
+    {
+     "name": "QueenBalloons",
+     "unit": "root",
+     "seg": 592,
+     "off": 17274,
+     "size": 120,
+     "target_sha256": "cc55925f7c48d23ca9aeb993cae8f6fd5970127eb859d71cdea2c2d1fe2f1e92",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL",
+     "reloc_order": "EXACT"
+    },
+    {
+     "name": "RestBalloons",
+     "unit": "root",
+     "seg": 592,
+     "off": 17394,
+     "size": 120,
+     "target_sha256": "733e1114a21ee70ea0e71c8b072c03a9a29326a31e5f69e30121a9157cb559f3",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL",
+     "reloc_order": "EXACT"
+    },
+    {
+     "name": "AddMsgBalloon",
+     "unit": "root",
+     "seg": 592,
+     "off": 17514,
+     "size": 227,
+     "target_sha256": "1ed1ed12564e263ac47e8422fde8246593352e0aa10427c9f204132986693cca",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL",
+     "reloc_order": "EXACT"
+    },
+    {
+     "name": "EditMsgBalloon",
+     "unit": "root",
+     "seg": 592,
+     "off": 19421,
+     "size": 75,
+     "target_sha256": "90f971b29f1711424698978550d34f070d40dae7de64b9bf47d432298d285eef",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL",
+     "reloc_order": "EXACT"
+    },
+    {
+     "name": "PreDrawBalloons",
+     "unit": "root",
+     "seg": 592,
+     "off": 19496,
+     "size": 12,
+     "target_sha256": "80c198e98695633113beec1696a00f66700965d1bc613690233c96504c52659c",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL",
+     "reloc_order": "EXACT"
+    },
+    {
+     "name": "f_0250_5058",
+     "unit": "root",
+     "seg": 592,
+     "off": 20568,
+     "size": 87,
+     "target_sha256": "3b4bbed0d771ff78c03b865f74d4634204014f3d0a3b6a4eb8324c7b8b30c35f",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL",
+     "reloc_order": "GROUPED"
     }
    ],
-   "scaffold": [
-    "DrawBalloons",
-    "DrawSpider",
-    "PreDrawBalloons",
-    "f_0250_5058"
-   ],
-   "object_sha256": "b46fe6b53e7e5abe5729e7f15a52c49e33d338d36559484488287e55adc9529c"
+   "scaffold": [],
+   "object_sha256": "8c65597d23439af42e40350eada72053c1d8b0be1c40ca4290047002466dcffc"
   },
-  "root:0894": {
+  "root:0798": {
    "unit": "root",
-   "seg": 2196,
-   "profile": "msc600a",
+   "seg": 1944,
+   "profile": "msc600ax",
    "flags": [
     "/AL",
     "/Os",
     "/Oe",
     "/Og"
+   ],
+   "placements": {
+    "_DATA": {
+     "seg": 21939,
+     "off": 6982,
+     "size": 44
+    },
+    "CONST": {
+     "seg": 21939,
+     "off": 32760,
+     "size": 52
+    }
+   },
+   "lang": "c",
+   "extent": {
+    "start": 31104,
+    "end": 35149
+   },
+   "source": "src/root/m0798.c",
+   "source_sha256": "029e4ced851590fdd0ac93f1b70c82890466e0577df50a8d145f01f95ba6562d",
+   "claims": [
+    {
+     "name": "InitTriVars",
+     "unit": "root",
+     "seg": 1944,
+     "off": 0,
+     "size": 153,
+     "target_sha256": "b96e547a0c0e1331a6f7d86314c9a923512c09a56ab71f0a5aee75e22ed14d4d",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL",
+     "reloc_order": "GROUPED"
+    },
+    {
+     "name": "UpdateCasteWindow",
+     "unit": "root",
+     "seg": 1944,
+     "off": 153,
+     "size": 62,
+     "target_sha256": "6c7e69c80960c7df0dacc6a0a850b153dc99c6b657b7d91f441d68f2874f1fa1",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL",
+     "reloc_order": "GROUPED"
+    },
+    {
+     "name": "UpdateModeWindow",
+     "unit": "root",
+     "seg": 1944,
+     "off": 215,
+     "size": 62,
+     "target_sha256": "5d01da80cb46e6c67045aa0d677ec3807e434db63b0c2abe29d26bfe1e5f04ca",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL",
+     "reloc_order": "GROUPED"
+    },
+    {
+     "name": "OpenCasteWindow",
+     "unit": "root",
+     "seg": 1944,
+     "off": 277,
+     "size": 22,
+     "target_sha256": "ea1dd18ddcabf9b7f987244c1b0923a68a4116c0b87ba6a2fa0c7c20bd3dc3ec",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL",
+     "reloc_order": "GROUPED"
+    },
+    {
+     "name": "OpenModeWindow",
+     "unit": "root",
+     "seg": 1944,
+     "off": 299,
+     "size": 22,
+     "target_sha256": "6efbd3c101ad37d8217556de40ffb3711629a3a6ccc0aee5f4693c8ae9a90305",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL",
+     "reloc_order": "GROUPED"
+    },
+    {
+     "name": "ProcCasteEvent",
+     "unit": "root",
+     "seg": 1944,
+     "off": 321,
+     "size": 582,
+     "target_sha256": "73a20c29aa9abed84eaec025c56ba529d94f6f17f3e5c13486828894afe2c501",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL",
+     "reloc_order": "GROUPED"
+    },
+    {
+     "name": "ProcModeEvent",
+     "unit": "root",
+     "seg": 1944,
+     "off": 903,
+     "size": 568,
+     "target_sha256": "8599705d6004702228559f4db3d6e618c40097b61e274efa30d603ad58fed1a1",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL",
+     "reloc_order": "GROUPED"
+    },
+    {
+     "name": "IsPointInIsoTri",
+     "unit": "root",
+     "seg": 1944,
+     "off": 1471,
+     "size": 210,
+     "target_sha256": "ef5c6bb29ed39b5f05c8c722f45caac14601ea3ad79c525be251d7fd97d866c7",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL",
+     "reloc_order": "EXACT"
+    },
+    {
+     "name": "BoundPointToTri",
+     "unit": "root",
+     "seg": 1944,
+     "off": 1681,
+     "size": 192,
+     "target_sha256": "d8fc5375a3da7ab9fc0196ea59f0941d6d467d4a1edd75b70fbdef338fd61baf",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL",
+     "reloc_order": "EXACT"
+    },
+    {
+     "name": "win_DrawModeWindow",
+     "unit": "root",
+     "seg": 1944,
+     "off": 1873,
+     "size": 325,
+     "target_sha256": "2ca3bed90b1318030fe06a899d96f0474e72502b5ddb66f2dfab32c56bd08de4",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL",
+     "reloc_order": "GROUPED"
+    },
+    {
+     "name": "win_ModeControlClosed",
+     "unit": "root",
+     "seg": 1944,
+     "off": 2198,
+     "size": 63,
+     "target_sha256": "5a04d64138227d7bd83b9e373233360a0c58d6e2ea12831147ba530a8dda1d6a",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL",
+     "reloc_order": "GROUPED"
+    },
+    {
+     "name": "win_DrawCasteWindow",
+     "unit": "root",
+     "seg": 1944,
+     "off": 2261,
+     "size": 325,
+     "target_sha256": "d9e98727ef96d6c368092cf819dfe57f7fdd783518e6846f4f03659e690cbb77",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL",
+     "reloc_order": "GROUPED"
+    },
+    {
+     "name": "win_CasteControlClosed",
+     "unit": "root",
+     "seg": 1944,
+     "off": 2586,
+     "size": 63,
+     "target_sha256": "149c61fa5bd0afa16b102a32f21df96c2765f22f9f2ca7bacbd104ec382f4fd5",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL",
+     "reloc_order": "GROUPED"
+    },
+    {
+     "name": "DrawControlLevels",
+     "unit": "root",
+     "seg": 1944,
+     "off": 2649,
+     "size": 543,
+     "target_sha256": "98253ac62713f67f0f11e0320a91cf7e923def6bf42aeed987d7a1c571af2063",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL",
+     "reloc_order": "GROUPED"
+    },
+    {
+     "name": "cvtLevels2IdealCaste",
+     "unit": "root",
+     "seg": 1944,
+     "off": 3192,
+     "size": 169,
+     "target_sha256": "ffdcaae02fe68aff45c6cf3ed31ace5b8158a06454e7ddc432a188ab974aee10",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL",
+     "reloc_order": "GROUPED"
+    },
+    {
+     "name": "SetTriLatPoint",
+     "unit": "root",
+     "seg": 1944,
+     "off": 3655,
+     "size": 198,
+     "target_sha256": "922d7eed82eff920dfd66e789ce6c0b12d3b1f26af4a168680213ddfe83bd091",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL",
+     "reloc_order": "GROUPED"
+    },
+    {
+     "name": "initControls",
+     "unit": "root",
+     "seg": 1944,
+     "off": 3853,
+     "size": 192,
+     "target_sha256": "afbb069f3871b601984ad08ba4ef9ff2745822670429744537bfde36f7ee0a5c",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL",
+     "reloc_order": "GROUPED"
+    },
+    {
+     "name": "GetTriLatDist",
+     "unit": "root",
+     "seg": 1944,
+     "off": 3361,
+     "size": 294,
+     "target_sha256": "ce016e6c5183eaaacde69ed24ce1b54b771c78087da56600b2ee1a084cd51606",
+     "kind": "C",
+     "provenance": "EXACT_STEERED",
+     "steered": "three unused locals x, y, j in DrawControlLevels -> identifier count before GetTriLatDist (+5..7 mod 17 after DrawControlLevels selects the dx-w CSE/operand order)",
+     "reloc_order": "GROUPED"
+    }
+   ],
+   "scaffold": [],
+   "object_sha256": "95a80f73865644f1afdcb8cb7beba58d0304838358f29c599b3693b1dcff85a3"
+  },
+  "root:0894": {
+   "unit": "root",
+   "seg": 2196,
+   "profile": "msc600ax",
+   "flags": [
+    "/AL",
+    "/Os",
+    "/Oe",
+    "/Og",
+    "/Zi"
    ],
    "placements": {
     "CONST": {
@@ -2707,7 +4263,7 @@
      "target_sha256": "c9d26744abe35e5a6a2543038d7e21ae4ec3a89053b1811f22abd21e95aa57e6",
      "kind": "C",
      "provenance": "EXACT_NATURAL",
-     "reloc_order": "EXACT"
+     "reloc_order": "GROUPED"
     },
     {
      "name": "SimQueenA",
@@ -2729,7 +4285,7 @@
      "target_sha256": "bcf634e63fd0a3f2823bba79386f5241e3a949295ae921761db305312cd22169",
      "kind": "C",
      "provenance": "EXACT_NATURAL",
-     "reloc_order": "GROUPED"
+     "reloc_order": "EXACT"
     },
     {
      "name": "DoRestAnt",
@@ -2740,7 +4296,7 @@
      "target_sha256": "0b256197bf42215af6f8ff970221d54d257c47a197feac0f4658b09254b8a712",
      "kind": "C",
      "provenance": "EXACT_NATURAL",
-     "reloc_order": "GROUPED"
+     "reloc_order": "EXACT"
     },
     {
      "name": "DoRepoLoit",
@@ -2751,7 +4307,7 @@
      "target_sha256": "1cc9416ca672db4674aeeef4eac51d442ae1d3f8a989b5f9417dfa02dc8648d8",
      "kind": "C",
      "provenance": "EXACT_NATURAL",
-     "reloc_order": "GROUPED"
+     "reloc_order": "EXACT"
     },
     {
      "name": "DoRepoExit",
@@ -2762,7 +4318,7 @@
      "target_sha256": "81eeb1349c7af08d38b28479826e10314316d4558a4245bcb6b3433f12ab803d",
      "kind": "C",
      "provenance": "EXACT_NATURAL",
-     "reloc_order": "EXACT"
+     "reloc_order": "GROUPED"
     },
     {
      "name": "DoRepoFly",
@@ -2905,7 +4461,7 @@
      "target_sha256": "36d26c52bec70afb3219cb9313e3d33eb8e08bbd155619b78d2c58fe581d78b6",
      "kind": "C",
      "provenance": "EXACT_NATURAL",
-     "reloc_order": "GROUPED"
+     "reloc_order": "EXACT"
     },
     {
      "name": "DoFightA",
@@ -2927,7 +4483,7 @@
      "target_sha256": "612453f7ca30afe0c64574cc2f85f296f2a6112349ed381ce43cf4eaaa06ca80",
      "kind": "C",
      "provenance": "EXACT_NATURAL",
-     "reloc_order": "EXACT"
+     "reloc_order": "GROUPED"
     },
     {
      "name": "DoAttackAnt",
@@ -2949,7 +4505,7 @@
      "target_sha256": "aca1606ffc411bb6da93f93d28b37dff4cb69d9b9ef48cbfb143e7ca380e78d5",
      "kind": "C",
      "provenance": "EXACT_NATURAL",
-     "reloc_order": "GROUPED"
+     "reloc_order": "EXACT"
     },
     {
      "name": "IsItFood",
@@ -2975,7 +4531,7 @@
     }
    ],
    "scaffold": [],
-   "object_sha256": "aa6646d0885f2e5e69e5b418fcc84b1de6649603c121fad2c814466ce0cd5c34"
+   "object_sha256": "ebf6df3bab232fd6aa0bc7e505d93cf2db45a586dbb2e966642f159db87e9622"
   },
   "root:0AD9": {
    "unit": "root",
@@ -2986,7 +4542,7 @@
     "/Os",
     "/Oe",
     "/Og",
-    "/Zd"
+    "/Zi"
    ],
    "placements": {
     "CONST": {
@@ -3017,7 +4573,7 @@
      "target_sha256": "f3a3e49bcf29f7a500877fb0e0020e8ffc2176e51cd695e997b12a0b3737a19a",
      "kind": "C",
      "provenance": "EXACT_NATURAL",
-     "reloc_order": "EXACT"
+     "reloc_order": "GROUPED"
     },
     {
      "name": "DoSow",
@@ -3083,7 +4639,7 @@
      "target_sha256": "19fe17849de82b735c09b003e6febefd6449a2b63aa6f07c1f7b624b7c57ce25",
      "kind": "C",
      "provenance": "EXACT_NATURAL",
-     "reloc_order": "GROUPED"
+     "reloc_order": "EXACT"
     },
     {
      "name": "FindInLionList",
@@ -3105,7 +4661,7 @@
      "target_sha256": "107ce12de2691b3641be18db30a2370d2aba3343abc6cf4fa5e6031cecc284c3",
      "kind": "C",
      "provenance": "EXACT_NATURAL",
-     "reloc_order": "GROUPED"
+     "reloc_order": "EXACT"
     },
     {
      "name": "InitPillar",
@@ -3138,7 +4694,7 @@
      "target_sha256": "589860b796a0ee3674c6d4edf020063ee60ee986f6a9d3d6d4aaa616953249aa",
      "kind": "C",
      "provenance": "EXACT_NATURAL",
-     "reloc_order": "GROUPED"
+     "reloc_order": "EXACT"
     },
     {
      "name": "ReplacePillarMap",
@@ -3149,7 +4705,7 @@
      "target_sha256": "138cadc08a66310c62362585eca42fa96ac2d4db6aeebd21cc3dc9b82297e41d",
      "kind": "C",
      "provenance": "EXACT_NATURAL",
-     "reloc_order": "GROUPED"
+     "reloc_order": "EXACT"
     },
     {
      "name": "MakeAPill",
@@ -3171,7 +4727,7 @@
      "target_sha256": "9fecd6bdd0c85adeae44705014f64e0bd382a4b1bdd17753f966433803ab2c9d",
      "kind": "C",
      "provenance": "EXACT_NATURAL",
-     "reloc_order": "GROUPED"
+     "reloc_order": "EXACT"
     },
     {
      "name": "IsPillDead",
@@ -3204,7 +4760,7 @@
      "target_sha256": "1077c85ea2cf2771a6b74740957c2daf1beef1ca650a4620575b658ec1808b70",
      "kind": "C",
      "provenance": "EXACT_NATURAL",
-     "reloc_order": "GROUPED"
+     "reloc_order": "EXACT"
     },
     {
      "name": "PillGetLife",
@@ -3215,11 +4771,11 @@
      "target_sha256": "2ec97b6f82d7e104a3bb4f1aafa8a279e74e6766b95ba26846621c644bbc63be",
      "kind": "C",
      "provenance": "EXACT_NATURAL",
-     "reloc_order": "GROUPED"
+     "reloc_order": "EXACT"
     }
    ],
    "scaffold": [],
-   "object_sha256": "e4411db29ced7726a7d4e5461343dff10236b7083cac8d0560d23a58d9ac6612"
+   "object_sha256": "4f5e771e539d5f5004892ec25970255e36e2beb9424aeda63db9cf6dede1e0ad"
   },
   "root:0BE8": {
    "unit": "root",
@@ -3461,15 +5017,99 @@
    ],
    "object_sha256": "ae31da4add88342d45e327141da90f79e738d3fab4af8130d0457771bffe3e27"
   },
-  "root:0EC1": {
+  "root:0CDB": {
    "unit": "root",
-   "seg": 3777,
-   "profile": "msc600a",
+   "seg": 3291,
+   "profile": "msc600ax",
    "flags": [
     "/AL",
     "/Os",
     "/Oe",
     "/Og"
+   ],
+   "placements": {
+    "CONST": {
+     "seg": 21939,
+     "off": 33090,
+     "size": 86
+    }
+   },
+   "lang": "c",
+   "source": "src/root/m0CDB.c",
+   "source_sha256": "9ac0ce42071ecc26996242ae562f8d5386ffb95ac7d96f6c28c3ffe48ec98151",
+   "claims": [
+    {
+     "name": "InitSpider",
+     "unit": "root",
+     "seg": 3291,
+     "off": 0,
+     "size": 179,
+     "target_sha256": "6a1e37e811aa09d26e8849c0c8a9a4718a18233b43c3eba3fb547ce5e748da1e",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL",
+     "reloc_order": "EXACT"
+    },
+    {
+     "name": "MoveSpider",
+     "unit": "root",
+     "seg": 3291,
+     "off": 179,
+     "size": 3245,
+     "target_sha256": "53ea16011121c847b9eabca08d9bfcfd3a5037a3e39b52df1db9835b44305053",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL",
+     "reloc_order": "WITHIN_GROUP_PENDING"
+    },
+    {
+     "name": "ScanForAnts",
+     "unit": "root",
+     "seg": 3291,
+     "off": 3424,
+     "size": 128,
+     "target_sha256": "0aec00a4df0d276e444ce11dff03ff56e006ab00189047beafff9ffa25375605",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL",
+     "reloc_order": "EXACT"
+    },
+    {
+     "name": "KillSpider",
+     "unit": "root",
+     "seg": 3291,
+     "off": 3552,
+     "size": 41,
+     "target_sha256": "7558b59a58bd29818df720580143e9627e0ad2a3eb54a667b1ca326f85710f27",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL",
+     "reloc_order": "EXACT"
+    },
+    {
+     "name": "SGetDis",
+     "unit": "root",
+     "seg": 3291,
+     "off": 4376,
+     "size": 40,
+     "target_sha256": "20181f562ae458e77479beaccf3eb9cf62e33471c4ceef99a9c9ff197143f08a",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL",
+     "reloc_order": "EXACT"
+    }
+   ],
+   "scaffold": [
+    "SFoundAnt",
+    "SpiderScan"
+   ],
+   "object_sha256": "16a1cc73aab736ce823544e7153c88befc85eea24043ac80a43616dd20cd4263"
+  },
+  "root:0EC1": {
+   "unit": "root",
+   "seg": 3777,
+   "profile": "msc600ax",
+   "flags": [
+    "/AL",
+    "/Os",
+    "/Oe",
+    "/Og",
+    "/Zi"
    ],
    "placements": {
     "CONST": {
@@ -3594,7 +5234,7 @@
      "target_sha256": "14c38602331f0f6ecc0bb39e26e1352fc0b9b9d4701a7340e5aa137d0d54db56",
      "kind": "C",
      "provenance": "EXACT_NATURAL",
-     "reloc_order": "GROUPED"
+     "reloc_order": "EXACT"
     },
     {
      "name": "AddAntToAList",
@@ -3649,7 +5289,7 @@
      "target_sha256": "791a4653827c4bee354208e4c86f305786857bd270aaf65a475c2959da87064a",
      "kind": "C",
      "provenance": "EXACT_NATURAL",
-     "reloc_order": "GROUPED"
+     "reloc_order": "EXACT"
     },
     {
      "name": "ClearListB",
@@ -3675,7 +5315,7 @@
     }
    ],
    "scaffold": [],
-   "object_sha256": "db128c5df87c0c951cf1a9aa789927f585e5a22a45aeb7455897ae43d976d9f0"
+   "object_sha256": "1d1d712deb9dfc5eda4473a0db4e8567b6407e580466eb4a98e2ccaee9586210"
   },
   "root:0F3F": {
    "unit": "root",
@@ -4903,12 +6543,13 @@
   "root:1496": {
    "unit": "root",
    "seg": 5270,
-   "profile": "msc600a",
+   "profile": "msc600ax",
    "flags": [
     "/AL",
     "/Os",
     "/Oe",
-    "/Og"
+    "/Og",
+    "/Zi"
    ],
    "placements": {
     "CONST": {
@@ -4956,7 +6597,7 @@
      "target_sha256": "4f6535d66a5eaa53d721403b6716059a7433b3a5997cb9afdedb5593d63bf257",
      "kind": "C",
      "provenance": "EXACT_NATURAL",
-     "reloc_order": "GROUPED"
+     "reloc_order": "EXACT"
     },
     {
      "name": "ColonySmellRN",
@@ -4967,7 +6608,7 @@
      "target_sha256": "35dc0abd3895bf2b774d643209d883e1a5b0da8c909e8ef18d3a1ec70f96d26d",
      "kind": "C",
      "provenance": "EXACT_NATURAL",
-     "reloc_order": "GROUPED"
+     "reloc_order": "EXACT"
     },
     {
      "name": "ColonySmellBT",
@@ -4978,7 +6619,7 @@
      "target_sha256": "c15f604c4774f1941434e5c0ef2756a27eb92dda5b4a05dffda4a9c4e7f0469f",
      "kind": "C",
      "provenance": "EXACT_NATURAL",
-     "reloc_order": "GROUPED"
+     "reloc_order": "EXACT"
     },
     {
      "name": "ColonySmellRT",
@@ -4989,7 +6630,7 @@
      "target_sha256": "ce92d5baf0911ecea97e3a88351f3bffbc106faf19debb06cb4f92164688f8f6",
      "kind": "C",
      "provenance": "EXACT_NATURAL",
-     "reloc_order": "GROUPED"
+     "reloc_order": "EXACT"
     },
     {
      "name": "SmoothAlarm",
@@ -5092,7 +6733,7 @@
     }
    ],
    "scaffold": [],
-   "object_sha256": "79ef42fa9db2bcbcf9f32f09b552691a9559bdb02bf32d143d14d1306df25a63"
+   "object_sha256": "c2239695dc781acba44d17d511ed4b121b508ca897aade5b21243c11236731aa"
   },
   "root:14EE": {
    "unit": "root",
@@ -6327,12 +7968,13 @@
   "root:1A53": {
    "unit": "root",
    "seg": 6739,
-   "profile": "msc600a",
+   "profile": "msc600ax",
    "flags": [
     "/AL",
     "/Os",
     "/Oeg",
-    "/Gs"
+    "/Gs",
+    "/Zi"
    ],
    "placements": {
     "_DATA": {
@@ -6499,7 +8141,7 @@
     }
    ],
    "scaffold": [],
-   "object_sha256": "8145ea1a3d3fb74c03cdae0ff9430d69aaa007580fe318b8409222b61b00e9ce"
+   "object_sha256": "9941305cc7e9658712fe6c4be38e826dd281ad1a4bb960533dc147318a271c54"
   },
   "root:1A96": {
    "unit": "root",
@@ -6632,6 +8274,167 @@
     "ch_LookUpId"
    ],
    "object_sha256": "be58568f18d46af7c2e73ce7e5d53c584f15f108544aa9194cbae45466cc51ae"
+  },
+  "root:1C62": {
+   "unit": "root",
+   "seg": 7266,
+   "profile": "msc600ax",
+   "flags": [
+    "/AL",
+    "/Os",
+    "/Oe",
+    "/Og",
+    "/Gs",
+    "/Zi"
+   ],
+   "placements": {
+    "_DATA": {
+     "seg": 21939,
+     "off": 21714,
+     "size": 482
+    },
+    "CONST": {
+     "seg": 21939,
+     "off": 35272,
+     "size": 2
+    },
+    "_BSS": {
+     "seg": 21939,
+     "off": 36030,
+     "size": 4
+    }
+   },
+   "lang": "c",
+   "source": "src/root/m1C62.c",
+   "source_sha256": "13321f08408050f748cef6c3ee6021f3b8000700f40153001b80fc8c17ddab99",
+   "claims": [
+    {
+     "name": "Punt",
+     "unit": "root",
+     "seg": 7266,
+     "off": 12,
+     "size": 132,
+     "target_sha256": "e62db67a9e3945a4bde86967970ab147ca7302c3457269777b091fce8322c859",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL",
+     "reloc_order": "EXACT"
+    },
+    {
+     "name": "f_1C62_0090",
+     "unit": "root",
+     "seg": 7266,
+     "off": 144,
+     "size": 17,
+     "target_sha256": "6684a88be3b8668aea8341f6cf19a2e577a2d49fc4ec8730bdc9d77c5d02e647",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL",
+     "reloc_order": "EXACT"
+    },
+    {
+     "name": "f_1C62_00A1",
+     "unit": "root",
+     "seg": 7266,
+     "off": 161,
+     "size": 11,
+     "target_sha256": "4b01de341a181a0b70b4d9c344f52be20c0318f890463f9b0ad8e9694f9cee70",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL",
+     "reloc_order": "EXACT"
+    },
+    {
+     "name": "f_1C62_00AC",
+     "unit": "root",
+     "seg": 7266,
+     "off": 172,
+     "size": 20,
+     "target_sha256": "9a45a82267219e9c7999321dc306c365d645a44b5aacb689e24979ea06e697dc",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL",
+     "reloc_order": "EXACT"
+    },
+    {
+     "name": "f_1C62_00C0",
+     "unit": "root",
+     "seg": 7266,
+     "off": 192,
+     "size": 21,
+     "target_sha256": "53a3a80adb7181655cd2f6d9286e8042ed2ea6e2b1bcc788aa932d9f20149bcb",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL",
+     "reloc_order": "EXACT"
+    },
+    {
+     "name": "f_1C62_0306",
+     "unit": "root",
+     "seg": 7266,
+     "off": 774,
+     "size": 212,
+     "target_sha256": "646dd38eb223125bb05fc5cae07e1a237c055148eb91a2d6b00f5157b04f2198",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL",
+     "reloc_order": "GROUPED"
+    },
+    {
+     "name": "f_1C62_03DA",
+     "unit": "root",
+     "seg": 7266,
+     "off": 986,
+     "size": 59,
+     "target_sha256": "2e84a42e87e180b5700385f438811a5e5855bd9a7a57b1c1287fe2f8613e6e5b",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL",
+     "reloc_order": "EXACT"
+    },
+    {
+     "name": "f_1C62_06A6",
+     "unit": "root",
+     "seg": 7266,
+     "off": 1702,
+     "size": 54,
+     "target_sha256": "4f78c1abb0b4264afb395c29b5d8731a30874c54095d1af322f846dec72f2740",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL",
+     "reloc_order": "EXACT"
+    },
+    {
+     "name": "WaitedEnough",
+     "unit": "root",
+     "seg": 7266,
+     "off": 1756,
+     "size": 91,
+     "target_sha256": "3a043d5c555a35af71f4592b742f661a815d74bd39a3483fe59211a221609263",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL",
+     "reloc_order": "EXACT"
+    },
+    {
+     "name": "f_1C62_0737",
+     "unit": "root",
+     "seg": 7266,
+     "off": 1847,
+     "size": 23,
+     "target_sha256": "d8b10886b1dda6727f09a7c30046b97316c6d43ab489c4a5ae1ffbdd79edf50b",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL",
+     "reloc_order": "EXACT"
+    },
+    {
+     "name": "f_1C62_074E",
+     "unit": "root",
+     "seg": 7266,
+     "off": 1870,
+     "size": 189,
+     "target_sha256": "9757c348590d49acbfa29944b3f2c276fd4de6b5567e1bab5d735d55029e8db3",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL",
+     "reloc_order": "GROUPED"
+    }
+   ],
+   "scaffold": [
+    "f_1C62_00D5",
+    "f_1C62_0415"
+   ],
+   "object_sha256": "64f7a3a52886a8767c4c3e4315b984d71536f74729e4b2a68801f977249e0e14"
   },
   "root:1CE2": {
    "unit": "root",
@@ -7324,14 +9127,14 @@
   "root:218D": {
    "unit": "root",
    "seg": 8589,
-   "profile": "msc600a",
+   "profile": "msc600ax",
    "flags": [
     "/AL",
     "/Os",
     "/Oe",
     "/Og",
     "/Gs",
-    "/Zd"
+    "/Zi"
    ],
    "placements": {
     "_DATA": {
@@ -7492,7 +9295,7 @@
     }
    ],
    "scaffold": [],
-   "object_sha256": "4b14161cbdec45d10b6ab462492d8d66941d46fdd54de4186334f97f8fb35a38"
+   "object_sha256": "fd06e0952a1b7e4ac9a312b3f97def16c63ad44449e26edeae0ed83dcd89b404"
   },
   "root:21FA": {
    "unit": "root",
@@ -8355,7 +10158,7 @@
    },
    "lang": "c",
    "source": "src/root/m23E6.c",
-   "source_sha256": "a81069ab0d9e4aa22c503cd6569553dede24babb8a63da98854e8e702b1bd907",
+   "source_sha256": "f26cd4549a042222f107f5899c5800587b47ab13acd9f774ecb8a312bf92fada",
    "claims": [
     {
      "name": "f_23E6_009F",
@@ -8487,7 +10290,7 @@
      "target_sha256": "0879bd53d95ebaf5349da75538d3b7d848b61cd960c107bf4db14b084f8a7e76",
      "kind": "C",
      "provenance": "EXACT_NATURAL",
-     "reloc_order": "WITHIN_GROUP_PENDING"
+     "reloc_order": "GROUPED"
     },
     {
      "name": "f_23E6_0A53",
@@ -8515,7 +10318,7 @@
    "scaffold": [
     "f_23E6_0000"
    ],
-   "object_sha256": "53941465ff5bec433f92781208c8782ad1d70113071e11f75504d5fe5dbfaebd"
+   "object_sha256": "31b82402b030b5c079bbaac6be3f77dd6ecd8223449732ee440f33cce5554bf8"
   },
   "root:2505": {
    "unit": "root",
@@ -8777,14 +10580,224 @@
    "scaffold": [],
    "object_sha256": "89264dcf8fb1b577ed07e6e503c6c79dd5a81c1331f0c2134e5411ed9a352220"
   },
-  "root:277D": {
+  "root:2662": {
    "unit": "root",
-   "seg": 10109,
-   "profile": "msc600a",
+   "seg": 9826,
+   "profile": "msc600ax",
    "flags": [
     "/AL",
     "/Os",
+    "/Oe",
+    "/Og",
     "/Gs"
+   ],
+   "placements": {
+    "_DATA": {
+     "seg": 21939,
+     "off": 26496,
+     "size": 300
+    },
+    "CONST": {
+     "seg": 21939,
+     "off": 35416,
+     "size": 8
+    }
+   },
+   "lang": "c",
+   "source": "src/root/m2662.c",
+   "source_sha256": "53c90675d70dcf8aebda3c3780c783f5542301443fdce9efdae830a2384e39b0",
+   "claims": [
+    {
+     "name": "f_2662_0008",
+     "unit": "root",
+     "seg": 9826,
+     "off": 8,
+     "size": 248,
+     "target_sha256": "9aeb58fe9fda26da3bbb0c6087f9088eed69bbacc7d92cd6e71d074e841f0b1b",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL",
+     "reloc_order": "GROUPED"
+    },
+    {
+     "name": "f_2662_0100",
+     "unit": "root",
+     "seg": 9826,
+     "off": 256,
+     "size": 181,
+     "target_sha256": "e2be6ccf7810a1f486d344ac31369bb588db6b3e9ddbbbad1d7cc8b390cd3adb",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL",
+     "reloc_order": "GROUPED"
+    },
+    {
+     "name": "f_2662_01B5",
+     "unit": "root",
+     "seg": 9826,
+     "off": 437,
+     "size": 138,
+     "target_sha256": "cf0787c1383d42f03def5f7bf3bec173744af92e05f08c39bd847538dca2dff8",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL",
+     "reloc_order": "EXACT"
+    },
+    {
+     "name": "f_2662_023F",
+     "unit": "root",
+     "seg": 9826,
+     "off": 575,
+     "size": 35,
+     "target_sha256": "6a9fe6abbb6b743a13f366ce4371aa01b7da68fc454343f683cde70fd4c5d6eb",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL",
+     "reloc_order": "EXACT"
+    },
+    {
+     "name": "f_2662_0262",
+     "unit": "root",
+     "seg": 9826,
+     "off": 610,
+     "size": 170,
+     "target_sha256": "002a32c5baf9c26c2dcaf0ae5a3256102a6bf29080cf0193d1b117253562bd6c",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL",
+     "reloc_order": "EXACT"
+    },
+    {
+     "name": "f_2662_030C",
+     "unit": "root",
+     "seg": 9826,
+     "off": 780,
+     "size": 60,
+     "target_sha256": "46c9b73634eea8d53690da5c9f88ba98837cd5efed10d74a2de2e320f54574f9",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL",
+     "reloc_order": "EXACT"
+    },
+    {
+     "name": "f_2662_0348",
+     "unit": "root",
+     "seg": 9826,
+     "off": 840,
+     "size": 596,
+     "target_sha256": "16c53d08ba1a9d0211982a71ba7b52f68e90a57cead25a57b37bb35e636ae088",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL",
+     "reloc_order": "GROUPED"
+    },
+    {
+     "name": "f_2662_059C",
+     "unit": "root",
+     "seg": 9826,
+     "off": 1436,
+     "size": 178,
+     "target_sha256": "e586f37e7d50340a74fdecca99ce99c16d00fdd4890400fd5939c51cdc636752",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL",
+     "reloc_order": "GROUPED"
+    },
+    {
+     "name": "f_2662_064E",
+     "unit": "root",
+     "seg": 9826,
+     "off": 1614,
+     "size": 125,
+     "target_sha256": "5edae9ee89eb2cbb60d85a6a33e407304826a751c1be3f3569fc3982c42367cf",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL",
+     "reloc_order": "EXACT"
+    },
+    {
+     "name": "f_2662_06CB",
+     "unit": "root",
+     "seg": 9826,
+     "off": 1739,
+     "size": 286,
+     "target_sha256": "18fd7d70bad19dca93096727eb3934ec1a08fea274e49ebb597fb1bb8db79cac",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL",
+     "reloc_order": "GROUPED"
+    },
+    {
+     "name": "f_2662_07E9",
+     "unit": "root",
+     "seg": 9826,
+     "off": 2025,
+     "size": 146,
+     "target_sha256": "420bd75d55e6ca7b1783e2022e1f463e3895e65ecea40d8fda7b7b2d83173049",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL",
+     "reloc_order": "GROUPED"
+    },
+    {
+     "name": "f_2662_087B",
+     "unit": "root",
+     "seg": 9826,
+     "off": 2171,
+     "size": 146,
+     "target_sha256": "f2e441da0763204331b08da24a1cabd2a43de3b19e462c69974568a27c160542",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL",
+     "reloc_order": "GROUPED"
+    },
+    {
+     "name": "hanim_MakeAnimSet",
+     "unit": "root",
+     "seg": 9826,
+     "off": 2915,
+     "size": 163,
+     "target_sha256": "fcd60aae4e84713ecc8b3a1b55d8b74445009c9d36f3e5e69b90d8f58bee94e4",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL",
+     "reloc_order": "GROUPED"
+    },
+    {
+     "name": "f_2662_0C06",
+     "unit": "root",
+     "seg": 9826,
+     "off": 3078,
+     "size": 156,
+     "target_sha256": "8ef3d100e63c79ccc5e0dc57d41cd1fdef3dbf4b98337174b854b35b6ebd6b84",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL",
+     "reloc_order": "GROUPED"
+    },
+    {
+     "name": "f_2662_0CA2",
+     "unit": "root",
+     "seg": 9826,
+     "off": 3234,
+     "size": 1150,
+     "target_sha256": "084f0168fa96907bf07e51d53bf5076392b16b310dea4d69ec43f61fe91ff46d",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL",
+     "reloc_order": "WITHIN_GROUP_PENDING"
+    },
+    {
+     "name": "f_2662_1120",
+     "unit": "root",
+     "seg": 9826,
+     "off": 4384,
+     "size": 154,
+     "target_sha256": "b2bfad8432f3b5c4880c0ca4b1e8c7fc2f9d8ed0945a58d43766036875ac4681",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL",
+     "reloc_order": "GROUPED"
+    }
+   ],
+   "scaffold": [
+    "f_2662_090D"
+   ],
+   "object_sha256": "270bd00b9159b9efd9c708c021da6ee4e1631134508a703726bc0ebad7b00463"
+  },
+  "root:277D": {
+   "unit": "root",
+   "seg": 10109,
+   "profile": "msc600ax",
+   "flags": [
+    "/AL",
+    "/Os",
+    "/Gs",
+    "/Zi"
    ],
    "placements": {},
    "lang": "c",
@@ -8863,16 +10876,497 @@
     }
    ],
    "scaffold": [],
-   "object_sha256": "fb00f329c7319701e1955cdd0e96dd68d2df669d0146c2343f5300cfa1f04078"
+   "object_sha256": "6bb49fe92f9ffd55aabff724c31338af1bd79ed619c166465e1944de68799a51"
+  },
+  "root:277E": {
+   "unit": "root",
+   "seg": 10110,
+   "profile": "msc600ax",
+   "flags": [
+    "/AL",
+    "/Os",
+    "/Oe",
+    "/Og",
+    "/Gs"
+   ],
+   "placements": {
+    "_DATA": {
+     "seg": 21939,
+     "off": 26806,
+     "size": 136
+    },
+    "CONST": {
+     "seg": 21939,
+     "off": 35424,
+     "size": 44
+    }
+   },
+   "lang": "c",
+   "extent": {
+    "start": 161760,
+    "end": 164456
+   },
+   "source": "src/root/m277E.c",
+   "source_sha256": "eca97a0af7c1322f20600809824de4950f9b40cd42dbb50edb6f761b4fd3cbb0",
+   "claims": [
+    {
+     "name": "f_277E_0000",
+     "unit": "root",
+     "seg": 10110,
+     "off": 0,
+     "size": 175,
+     "target_sha256": "164ab6cfbdea387d37ce14321ada625d3750309a70e710a4d3cdd99d222bad92",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL",
+     "reloc_order": "GROUPED"
+    },
+    {
+     "name": "f_277E_00AF",
+     "unit": "root",
+     "seg": 10110,
+     "off": 175,
+     "size": 91,
+     "target_sha256": "49e1651fc2bc08a12762bed189bc858cc255001bb8aa121e700ca684b14f6da2",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL",
+     "reloc_order": "EXACT"
+    },
+    {
+     "name": "f_277E_010A",
+     "unit": "root",
+     "seg": 10110,
+     "off": 266,
+     "size": 74,
+     "target_sha256": "6cd23069ba62d4778b64531fbbc6d17063c17640b60e52c3d27b4746ba8d13f4",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL",
+     "reloc_order": "EXACT"
+    },
+    {
+     "name": "f_277E_0154",
+     "unit": "root",
+     "seg": 10110,
+     "off": 340,
+     "size": 37,
+     "target_sha256": "137bec0679686ae8557c693bd60e384c357864cf1986c840e22d29a276fce435",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL",
+     "reloc_order": "GROUPED"
+    },
+    {
+     "name": "f_277E_0179",
+     "unit": "root",
+     "seg": 10110,
+     "off": 377,
+     "size": 4,
+     "target_sha256": "b0a0bb0a83976533b6319fb25dff5de5fed9bb0e804be1f40c2aeb5272e0ec2f",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL",
+     "reloc_order": "EXACT"
+    },
+    {
+     "name": "f_277E_017D",
+     "unit": "root",
+     "seg": 10110,
+     "off": 381,
+     "size": 125,
+     "target_sha256": "451d85184cdbaa0a47fefe4b204d8a26225615aca5bd50abd651430d120e4f78",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL",
+     "reloc_order": "EXACT"
+    },
+    {
+     "name": "f_277E_01FA",
+     "unit": "root",
+     "seg": 10110,
+     "off": 506,
+     "size": 341,
+     "target_sha256": "17e8302f5b7dc3dd86cba91e578db353f22645ac1c1690a54e0b3d299623a202",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL",
+     "reloc_order": "EXACT"
+    },
+    {
+     "name": "f_277E_034F",
+     "unit": "root",
+     "seg": 10110,
+     "off": 847,
+     "size": 191,
+     "target_sha256": "7d1de272310be1d4ef9f878a0277999a449bb0352b9c14af56a915cae4250895",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL",
+     "reloc_order": "GROUPED"
+    },
+    {
+     "name": "f_277E_040E",
+     "unit": "root",
+     "seg": 10110,
+     "off": 1038,
+     "size": 218,
+     "target_sha256": "dbcfea66347a7d93f73e943cb539fb67b661840eea6a980d37c7948f64909af0",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL",
+     "reloc_order": "GROUPED"
+    },
+    {
+     "name": "f_277E_04E8",
+     "unit": "root",
+     "seg": 10110,
+     "off": 1256,
+     "size": 286,
+     "target_sha256": "0275f98ca0154d2d515425b6c5d82603ec008f5cc04326604d7addc25e0757d5",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL",
+     "reloc_order": "GROUPED"
+    },
+    {
+     "name": "f_277E_0606",
+     "unit": "root",
+     "seg": 10110,
+     "off": 1542,
+     "size": 346,
+     "target_sha256": "e2edda3815c8e94739ab6886c6ce2d4f19974e19efc6795ce036798d56cee7ee",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL",
+     "reloc_order": "GROUPED"
+    },
+    {
+     "name": "f_277E_0760",
+     "unit": "root",
+     "seg": 10110,
+     "off": 1888,
+     "size": 159,
+     "target_sha256": "80ccd206538a948d905077cee84e31e014f30bc5745f63a7855cc38d8b493b8e",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL",
+     "reloc_order": "EXACT"
+    },
+    {
+     "name": "f_277E_07FF",
+     "unit": "root",
+     "seg": 10110,
+     "off": 2047,
+     "size": 313,
+     "target_sha256": "21dd41b1e1541709eaa4192fc44357b5fabb3edf8879f246a4bf310a1d8659b0",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL",
+     "reloc_order": "GROUPED"
+    },
+    {
+     "name": "f_277E_0938",
+     "unit": "root",
+     "seg": 10110,
+     "off": 2360,
+     "size": 1,
+     "target_sha256": "383e5d7d58caa41ce723cf16af471b38f6ee9065c032d07fa6bef1678cb72f1d",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL",
+     "reloc_order": "EXACT"
+    },
+    {
+     "name": "f_277E_0939",
+     "unit": "root",
+     "seg": 10110,
+     "off": 2361,
+     "size": 25,
+     "target_sha256": "0c8f27ac9646ffbc02cbcae82221bef810834ea45e935ccf4a697474717a031d",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL",
+     "reloc_order": "EXACT"
+    },
+    {
+     "name": "f_277E_0952",
+     "unit": "root",
+     "seg": 10110,
+     "off": 2386,
+     "size": 6,
+     "target_sha256": "cbb0d4c9fb697f4cbb475aa85c72a45315660af8dde2ea7d957c7387f669c454",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL",
+     "reloc_order": "EXACT"
+    },
+    {
+     "name": "f_277E_0958",
+     "unit": "root",
+     "seg": 10110,
+     "off": 2392,
+     "size": 13,
+     "target_sha256": "a3ed3600464b0f068e4c8385a55f94f912eafa7de03b2ce54db1d8cf1eefab40",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL",
+     "reloc_order": "EXACT"
+    },
+    {
+     "name": "f_277E_0965",
+     "unit": "root",
+     "seg": 10110,
+     "off": 2405,
+     "size": 21,
+     "target_sha256": "c5ee3c462e19a92790641ee7ecec9eadb8daf14d8e081b1d94d11696e2fdb7d5",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL",
+     "reloc_order": "EXACT"
+    },
+    {
+     "name": "f_277E_097A",
+     "unit": "root",
+     "seg": 10110,
+     "off": 2426,
+     "size": 270,
+     "target_sha256": "47943f62f8a9f74035a568556ddeb3e387c64c198b581713246946a767e58303",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL",
+     "reloc_order": "EXACT"
+    }
+   ],
+   "scaffold": [],
+   "object_sha256": "7d89def9ce8af33c7a0307a147147662c74ab437b799ae2140a7a7db09eeae79"
+  },
+  "root:284A": {
+   "unit": "root",
+   "seg": 10314,
+   "profile": "msc600ax",
+   "flags": [
+    "/AL",
+    "/Os",
+    "/Oe",
+    "/Og",
+    "/Gs"
+   ],
+   "placements": {
+    "_DATA": {
+     "seg": 21939,
+     "off": 30054,
+     "size": 76
+    },
+    "CONST": {
+     "seg": 21939,
+     "off": 35494,
+     "size": 20
+    },
+    "_BSS": {
+     "seg": 21939,
+     "off": 36312,
+     "size": 46
+    }
+   },
+   "lang": "c",
+   "source": "src/root/m284A.c",
+   "source_sha256": "d04381b7cbded6c77e5e7aedcc4608691b22ffe3bf689e194673a35c35c35502",
+   "claims": [
+    {
+     "name": "f_284A_0004",
+     "unit": "root",
+     "seg": 10314,
+     "off": 4,
+     "size": 15,
+     "target_sha256": "24158a8e39b0e9a902b282333f8120994c2ce75f6877dd4278e0ce58ce68be75",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL",
+     "reloc_order": "EXACT"
+    },
+    {
+     "name": "f_284A_0013",
+     "unit": "root",
+     "seg": 10314,
+     "off": 19,
+     "size": 247,
+     "target_sha256": "7067493b196098161a0512d8631d533da5bc3f343e528b5e492f1b2d4b5bd0f2",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL",
+     "reloc_order": "GROUPED"
+    },
+    {
+     "name": "f_284A_010A",
+     "unit": "root",
+     "seg": 10314,
+     "off": 266,
+     "size": 45,
+     "target_sha256": "edadd012500d4eed417f719baae1ca6dcf37d23a74ee101c7e3b5c2f0ad3bc7e",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL",
+     "reloc_order": "EXACT"
+    },
+    {
+     "name": "f_284A_0151",
+     "unit": "root",
+     "seg": 10314,
+     "off": 337,
+     "size": 72,
+     "target_sha256": "af346c527994dabc588a791ac7cc05d34fe29a1098803ef277e0a5c1c364f668",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL",
+     "reloc_order": "EXACT"
+    },
+    {
+     "name": "f_284A_0199",
+     "unit": "root",
+     "seg": 10314,
+     "off": 409,
+     "size": 60,
+     "target_sha256": "8cc18b0a7e3d01fda3036f1e26c2e80183edb39a9cc17f1365cdb9eefe4c2af9",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL",
+     "reloc_order": "EXACT"
+    },
+    {
+     "name": "f_284A_01D5",
+     "unit": "root",
+     "seg": 10314,
+     "off": 469,
+     "size": 118,
+     "target_sha256": "9af53d406aa074841025133ae2799620b3e6214f770a3b6f403430a81dab87ea",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL",
+     "reloc_order": "EXACT"
+    },
+    {
+     "name": "f_284A_024B",
+     "unit": "root",
+     "seg": 10314,
+     "off": 587,
+     "size": 11,
+     "target_sha256": "21fbcac1d0d1874145155cfd2ca80a796218a48563dd4683aaada8fe4ecc56c2",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL",
+     "reloc_order": "EXACT"
+    },
+    {
+     "name": "f_284A_0256",
+     "unit": "root",
+     "seg": 10314,
+     "off": 598,
+     "size": 142,
+     "target_sha256": "ba2e6e7d2346c3a50d4e8090b0202f14f77b51740601a5c6520b92e0ca8b459d",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL",
+     "reloc_order": "EXACT"
+    },
+    {
+     "name": "f_284A_02E4",
+     "unit": "root",
+     "seg": 10314,
+     "off": 740,
+     "size": 64,
+     "target_sha256": "f02016ea291db9ad495d432e733d38475d028a4474ec836eca7b3c9dbaf910a4",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL",
+     "reloc_order": "EXACT"
+    },
+    {
+     "name": "f_284A_0324",
+     "unit": "root",
+     "seg": 10314,
+     "off": 804,
+     "size": 1,
+     "target_sha256": "383e5d7d58caa41ce723cf16af471b38f6ee9065c032d07fa6bef1678cb72f1d",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL",
+     "reloc_order": "EXACT"
+    },
+    {
+     "name": "f_284A_0325",
+     "unit": "root",
+     "seg": 10314,
+     "off": 805,
+     "size": 106,
+     "target_sha256": "44597d9ca83e528f06a2f91d3308896c960f7e95c3710987fc406a3b01528fc1",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL",
+     "reloc_order": "GROUPED"
+    },
+    {
+     "name": "f_284A_038F",
+     "unit": "root",
+     "seg": 10314,
+     "off": 911,
+     "size": 314,
+     "target_sha256": "c4577a2135f2fa4e9db47abed170124abb7ed1f768f9d85e25cc2be8fef4d8df",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL",
+     "reloc_order": "EXACT"
+    },
+    {
+     "name": "f_284A_04C9",
+     "unit": "root",
+     "seg": 10314,
+     "off": 1225,
+     "size": 88,
+     "target_sha256": "8044a72633b491d74920b8504081da09ea529be8b8367e02a787ca52ec869805",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL",
+     "reloc_order": "GROUPED"
+    },
+    {
+     "name": "f_284A_0521",
+     "unit": "root",
+     "seg": 10314,
+     "off": 1313,
+     "size": 22,
+     "target_sha256": "3a901e4f2b9520d7b78bab09a30374f69301cf40b4074ba259e8b76c52d168d7",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL",
+     "reloc_order": "EXACT"
+    },
+    {
+     "name": "f_284A_0537",
+     "unit": "root",
+     "seg": 10314,
+     "off": 1335,
+     "size": 142,
+     "target_sha256": "1bf0de5979cfc995cd82fc838fe47ce1377a3b4c0681a160d5aefec117f13228",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL",
+     "reloc_order": "EXACT"
+    },
+    {
+     "name": "f_284A_0673",
+     "unit": "root",
+     "seg": 10314,
+     "off": 1651,
+     "size": 12,
+     "target_sha256": "09833c981c78ffce1523f1c0f36c05bd9a5ccaf1aea273004bb84d4b94a86f6d",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL",
+     "reloc_order": "EXACT"
+    },
+    {
+     "name": "f_284A_05C5",
+     "unit": "root",
+     "seg": 10314,
+     "off": 1477,
+     "size": 174,
+     "target_sha256": "210bf83d7f5f1cb55c777d8f2574a131e227b290934f2c8b70fcd9d723edbc51",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL",
+     "reloc_order": "EXACT"
+    },
+    {
+     "name": "f_284A_067F",
+     "unit": "root",
+     "seg": 10314,
+     "off": 1663,
+     "size": 161,
+     "target_sha256": "4ebdf700db94c1937c999bc38a02bdf1edc76ba18986a5922555eee38714edc4",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL",
+     "reloc_order": "EXACT"
+    }
+   ],
+   "scaffold": [
+    "f_284A_0138"
+   ],
+   "object_sha256": "f05a7e493e2a1cc5c983317a5684b7defb547f2be849cb0799c0acc0766a2094"
   },
   "root:29F0": {
    "unit": "root",
    "seg": 10736,
-   "profile": "msc600a",
+   "profile": "msc600ax",
    "flags": [
     "/AL",
     "/Os",
-    "/Gs"
+    "/Gs",
+    "/Zi"
    ],
    "placements": {},
    "lang": "c",
@@ -8951,7 +11445,7 @@
     }
    ],
    "scaffold": [],
-   "object_sha256": "f544b634f7f643fa009e69db3ee7aa35aa2cfd24b6d90299f1a7cc2adaa1cbc8"
+   "object_sha256": "e0880ade56f53bf9b3430d01c93709e798cccfb1e314dc76670fb3ede093eb93"
   }
  },
  "runtime": {

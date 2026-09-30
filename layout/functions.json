@@ -5,6 +5,20 @@
 {
 "unit": "root",
 "seg": 0,
+"off": 0,
+"size": 144,
+"region": "game_or_library",
+"extent": "REVIEWED",
+"evidence": [
+"reviewed"
+],
+"notes": [
+"entry of root frame 0000 (push bp..retf at 008F), referenced only as a far data pointer: f_277E_0000 passes 0000:0000 (relocated) to f_19A9_000B, the DB load hook setter (g_36F2); body checks type==5 (PCM)"
+]
+},
+{
+"unit": "root",
+"seg": 0,
 "off": 144,
 "size": 78,
 "region": "game_or_library",
@@ -9425,6 +9439,20 @@
 },
 {
 "unit": "root",
+"seg": 8335,
+"off": 1419,
+"size": 4,
+"region": "game_or_library",
+"extent": "REVIEWED",
+"evidence": [
+"reviewed"
+],
+"notes": [
+"frameless 'mov ax,3; retf' after f_208F_056A; address passed as far code pointer (mov ax,058Bh; mov dx,SEG 208F) to _harderr by IBMInitStuff (S20:39F1:02AE) - the critical-error handler returning _HARDERR_FAIL"
+]
+},
+{
+"unit": "root",
 "seg": 8424,
 "off": 0,
 "size": 1,
@@ -16438,6 +16466,20 @@
 {
 "unit": "S12",
 "seg": 14412,
+"off": 656,
+"size": 18,
+"region": "game_or_library",
+"extent": "REVIEWED",
+"evidence": [
+"reviewed"
+],
+"notes": [
+"unreferenced function in gap after ProcMapEvent: xor ax,ax; call __aFchkstk; f_20E8_04B6(0x100); retf (relocation order of __aFchkstk group lists its chkstk site 0295)"
+]
+},
+{
+"unit": "S12",
+"seg": 14412,
 "off": 674,
 "size": 205,
 "region": "game_or_library",
@@ -16457,6 +16499,20 @@
 "evidence": [
 "push_cs_call",
 "vector"
+]
+},
+{
+"unit": "S12",
+"seg": 14412,
+"off": 952,
+"size": 24,
+"region": "game_or_library",
+"extent": "REVIEWED",
+"evidence": [
+"reviewed"
+],
+"notes": [
+"unreferenced function in gap after EraseMapCursor: if (state 298E) EraseMapCursor() else DrawMapCursor() (chkstk site 03BD in relocation order)"
 ]
 },
 {
@@ -17562,6 +17618,20 @@
 {
 "unit": "S20",
 "seg": 14791,
+"off": 7,
+"size": 1,
+"region": "game_or_library",
+"extent": "REVIEWED",
+"evidence": [
+"reviewed"
+],
+"notes": [
+"8th 1-byte retf stub in S20 frame 39C7 (bytes 39C70..39C77 are eight CB); descent found 0000-0006 only; module is a font/driver stub table, GS-1 empty /Gs functions"
+]
+},
+{
+"unit": "S20",
+"seg": 14791,
 "off": 8,
 "size": 97,
 "region": "game_or_library",
@@ -17634,6 +17704,20 @@
 "extent": "DESCENT",
 "evidence": [
 "vector"
+]
+},
+{
+"unit": "S20",
+"seg": 14791,
+"off": 680,
+"size": 1,
+"region": "game_or_library",
+"extent": "REVIEWED",
+"evidence": [
+"reviewed"
+],
+"notes": [
+"1-byte retf at 39F18 (39F1:0008) followed by LINK fill 00 at 39F19 and IBMInitStuff's module at 39F1A: odd end of the 39C7 module, so this stub is its last member"
 ]
 },
 {

@@ -124,6 +124,11 @@ def main() -> int:
                 c["reloc_order"] = r.get("reloc_order", "EXACT")
         for n, r in res.get("data", {}).items():
             print(f"  data {n}: {'EXACT' if r['exact'] else 'FAIL ' + '; '.join(r['reasons'])}")
+        if res.get("extent"):
+            e = res["extent"]
+            print(f"  extent: {'EXACT' if e['exact'] else 'FAIL ' + '; '.join(e['reasons'])}, "
+                  f"cross-function relocation order {e.get('reloc_order')}"
+                  + (" (" + "; ".join(e.get("order_reasons", [])) + ")" if e.get("order_reasons") else ""))
         if not res["compile_ok"]:
             print(res["log"])
         if not res["exact"]:

@@ -1,5 +1,13 @@
 /* Overlay section S22, code frame 39C7: editor mouse dispatch and the yellow ant
- * (processEdit..YellowHelp; Win16 SIMANT unit processEdit..YellowHelp). */
+ * (processEdit..YellowHelp; Win16 SIMANT unit processEdit..YellowHelp).
+ * Built /AL /Os /Oe /Og /Zi under MSC 6.00AX: 6.00A allocates CONST segment words for
+ * far variables whose loads were all hoisted to immediate segments (YellowDeath), 6.00AX
+ * does not.  /Zi (a code record per function) reproduces the original relocation order
+ * across all 15 functions, /Zd cannot (SetGoalsY and YellowCommandKey start records).
+ * The one-line ifs and the while loops in YellowDeath place the line-number record
+ * breaks (every 52 entries) where the original has them.  The MapPnt/editTileRect
+ * struct types decide the imul operand order in DoLaserFire; the fd_50F6_048A
+ * declaration after 0AE8 decides the compare order in YellowCommandKey. */
 
 struct Event {
     int what;
@@ -93,8 +101,7 @@ void far processEdit(struct Event far *ePtr)
         processExp(x, y, shift);
         return;
     }
-    if (fd_50F6_0F44)
-        fd_50F6_0F44 = 0;
+    if (fd_50F6_0F44) fd_50F6_0F44 = 0;
     switch (fd_50F6_105E) {
     case -1:
         if (!shift) {
@@ -103,8 +110,7 @@ void far processEdit(struct Event far *ePtr)
                     AntMenu(ePtr);
                     return;
                 }
-                if (GetLife(fd_50F6_048C, x, y) != 0xfe)
-                    f_015B_0653();
+                if (GetLife(fd_50F6_048C, x, y) != 0xfe) f_015B_0653();
                 return;
             }
             if (f_00F8_02AC() == 1 && o05_35F5_025C(x, y, fd_50F6_032E) >= 0)
@@ -510,19 +516,16 @@ void far YellowDeath(int cause)
     case 0:
         f_00DF_00B1(SRand1(5) + 0x4e27, 0x7e);
         strn = fd_50F6_1058 ? 0x272e : 0x2730;
-        if (fd_3D57_07A8[3])
-            PictStrnDialog(0x23c4, strn, 1);
+        if (fd_3D57_07A8[3]) PictStrnDialog(0x23c4, strn, 1);
         break;
     case 1:
-        if (fd_3D57_07A8[3])
-            SpiderDialog();
+        if (fd_3D57_07A8[3]) SpiderDialog();
         BAntsEaten++;
         f_00DF_00B1(SRand1(5) + 0x4e27, 0x7e);
         o25_3BA4_0999(fd_50F6_048C, fd_50F6_047C, fd_50F6_048A, fd_50F6_0496, fd_50F6_04C2, cause);
         break;
     case 2:
-        if (fd_3D57_07A8[3])
-            LionDialog();
+        if (fd_3D57_07A8[3]) LionDialog();
         BAntsEaten++;
         f_00DF_00B1(SRand1(5) + 0x4e27, 0x7e);
         o25_3BA4_0999(fd_50F6_048C, fd_50F6_047C, fd_50F6_048A, fd_50F6_0496, fd_50F6_04C2, cause);
@@ -586,7 +589,8 @@ void far YellowDeath(int cause)
     if (fd_50F6_104E)
         SetAlarmDropState(0, 1);
     found = 0;
-    for (i = fd_50F6_0DA8; i >= 0; i--) {
+    i = fd_50F6_0DA8;
+    while (i >= 0) {
         t = fd_3E1D_BAEC[i];
         if (t != 0 && t < 8) {
             LifeB[fd_50F6_0F0E = fd_3E1D_B50D[i]][fd_50F6_0F26 = fd_3E1D_B702[i]] = fd_3E1D_BAEC[i] = 0;
@@ -594,9 +598,11 @@ void far YellowDeath(int cause)
             fd_50F6_048C = 2;
             break;
         }
+        i--;
     }
     if (!found) {
-        for (i = fd_50F6_0DA8; i >= 0; i--) {
+        i = fd_50F6_0DA8;
+        while (i >= 0) {
             t = fd_3E1D_BAEC[i];
             if (t != 0 && t > 7 && t < 0x68) {
                 LifeB[fd_50F6_0F0E = fd_3E1D_B50D[i]][fd_50F6_0F26 = fd_3E1D_B702[i]] =
@@ -605,10 +611,12 @@ void far YellowDeath(int cause)
                 fd_50F6_048C = found;
                 break;
             }
+            i--;
         }
     }
     if (!found) {
-        for (i = ListIndexA; i >= 0; i--) {
+        i = ListIndexA;
+        while (i >= 0) {
             t = fd_3E1D_AD3B[i];
             if (t != 0 && t > 7 && t < 0x68) {
                 LifeA[fd_50F6_0F0E = fd_3E1D_A180[i]][fd_50F6_0F26 = fd_3E1D_A569[i]] =
@@ -617,10 +625,12 @@ void far YellowDeath(int cause)
                 fd_50F6_048C = 1;
                 break;
             }
+            i--;
         }
     }
     if (!found) {
-        for (i = fd_50F6_0EAA; i >= 0; i--) {
+        i = fd_50F6_0EAA;
+        while (i >= 0) {
             t = fd_3E1D_C4B5[i];
             if (t != 0 && t > 7 && t < 0x68) {
                 LifeR[fd_50F6_0F0E = fd_3E1D_BED6[i]][fd_50F6_0F26 = fd_3E1D_C0CB[i]] =
@@ -629,6 +639,7 @@ void far YellowDeath(int cause)
                 fd_50F6_048C = 3;
                 break;
             }
+            i--;
         }
     }
     if (!found) {

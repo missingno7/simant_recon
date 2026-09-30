@@ -68,6 +68,7 @@ def verify_module(text: str, module: dict, claims: list[dict]) -> dict:
     placements = {k: {"seg": v["seg"], "off": v["off"]} for k, v in module.get("placements", {}).items()}
     all_ok = True
     x = exemod.load()
+    site_key, site_index = {}, {}
     for c in claims:
         name = c["name"]
         if name in scaff:
@@ -82,6 +83,8 @@ def verify_module(text: str, module: dict, claims: list[dict]) -> dict:
             continue
         t = match.Target(c["unit"], c["seg"], c["off"], c["size"])
         res = match.Binder(t, obj, seg, pub, placements).bind()
+        site_key.update(res.reloc_key)
+        site_index.update(res.reloc_index)
         orig = x.read(c["unit"], t.linear, t.size)
         if (not res.exact and not module.get("extent") and res.reasons
                 and all(r.startswith("relocation order inside a target group") for r in res.reasons)):
@@ -120,7 +123,7 @@ def verify_module(text: str, module: dict, claims: list[dict]) -> dict:
         all_ok &= dres["exact"]
     ext = module.get("extent")
     if ext:
-        tres = verify_extent(obj, ext, claims, scaff)
+        tres = verify_extent(obj, ext, claims, scaff, site_key, site_index)
         out["extent"] = tres
         all_ok &= tres["exact"]
     out["exact"] = all_ok
@@ -128,7 +131,8 @@ def verify_module(text: str, module: dict, claims: list[dict]) -> dict:
     return out
 
 
-def verify_extent(obj, ext: dict, claims: list[dict], scaff: set) -> dict:
+def verify_extent(obj, ext: dict, claims: list[dict], scaff: set, site_key: dict | None = None,
+                  site_index: dict | None = None) -> dict:
     """Complete translation unit: the claims tile the whole original code segment.
 
     The compiled code segment must have exactly ``end - start`` bytes, contain no
@@ -159,7 +163,38 @@ def verify_extent(obj, ext: dict, claims: list[dict], scaff: set) -> dict:
         tail = exemod.load().read(claims[0]["unit"], pos, end - pos)
         if not (end - pos == 1 and body[-1:] == tail == bytes([0x90])):
             reasons.append(f"uncovered tail {pos:05X}-{end:05X}")
-    return {"exact": not reasons, "reasons": reasons}
+    # Cross-function relocation order is a separate proof level: bytes and per-function order are
+    # already gated per claim; a complete TU whose record breaks between functions differ from the
+    # original (e.g. a wrong /Zd-/Zi choice or source line layout) is reported, not hidden.
+    order = extent_reloc_order(claims[0]["unit"], start, end, site_key or {}, site_index or {})
+    if order["order"] == "SET_MISMATCH":
+        reasons += order["reasons"]
+    elif order["reasons"]:
+        order["order"] = "CROSS_FUNCTION_PENDING"
+    return {"exact": not reasons, "reasons": reasons, "reloc_order": order["order"],
+            "order_reasons": order["reasons"]}
+
+
+def extent_reloc_order(unit: str, start: int, end: int, site_key: dict, site_index: dict) -> dict:
+    """Relocation order of a complete TU across function boundaries.
+
+    Per-claim checks see only the relocations inside one function.  RTLink groups relocations
+    by target and keeps the object's FIXUPP order inside each group, so for a complete module
+    the order inside every group must equal the object order over the whole segment (record
+    breaks between functions, e.g. /Zd vs /Zi, show up only here)."""
+    x = exemod.load()
+    exp = [s * 16 + o for s, o in x.unit_relocs(unit) if start <= s * 16 + o < end]
+    cand = sorted(site_index, key=lambda a: (site_index[a], a))
+    if sorted(exp) != sorted(cand):
+        return {"order": "SET_MISMATCH", "reasons": [f"extent relocation set differs ({len(cand)} vs {len(exp)})"]}
+    if exp == cand:
+        return {"order": "EXACT", "reasons": []}
+    bad = [g for g in sorted(set(site_key.values()))
+           if [a for a in exp if site_key.get(a) == g] != [a for a in cand if site_key.get(a) == g]]
+    if bad:
+        return {"order": "WITHIN_GROUP_MISMATCH",
+                "reasons": [f"cross-function relocation order inside target group {g} differs" for g in bad[:4]]}
+    return {"order": "GROUPED", "reasons": []}
 
 
 def verify_bss_placement(sdef: dict, p: dict) -> dict:

@@ -11,6 +11,11 @@ You recover original C (or genuine assembly) for the modules assigned to you in
   call. `/Oe` = autos enregistered while their unused BP homes stay; `/Og` = CSE/hoisting
   (see codegen-rules observations). Options are per *file*: one module = one flag set.
   Some modules use `_fastcall` (AX/DX args, `retf N`, `@name`). `_asm` exists in C modules.
+* **Use `/Zi` in every module's flags** (rule ZI-1; e.g. `/AL /Os /Oe /Og /Zi`). It does not
+  change code bytes, but it reproduces the original's record breaks between functions. A complete TU
+  (`--extent`) is reported with its cross-function relocation order: `EXACT`/`GROUPED` is proven;
+  `CROSS_FUNCTION_PENDING` means record breaks still differ (usually source line layout: the
+  ~52 line-entry flush counts statement lines, so joining or splitting lines moves it).
 * Large functions: check the compiler log for **C4203** ("too large for global
   optimizations"). Under real-mode 6.00A the function then loses its /Oe/Og shape. The
   original was most likely compiled with **MSC 6.00AX** (profile `msc600ax`, DOS-extended

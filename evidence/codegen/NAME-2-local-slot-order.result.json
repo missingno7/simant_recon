@@ -1,0 +1,49 @@
+{
+ "id": "NAME-2",
+ "question": "Does the spelling of local identifiers change the stack-slot order of non-register autos (MSC 6.00A /Oe /Og, function with inline _asm)? Positive control f_277E_01FA: exact only with names whose hash order puts i, then the port int, then the BIOS pointer at [bp-2],[bp-4],[bp-8] (e.g. i/base/bios), not with i/port/model.",
+ "results": [
+  {
+   "variant": "names_m_p_i",
+   "profile_index": 0,
+   "profile": "msc600a",
+   "flags": [
+    "/AL",
+    "/Os",
+    "/Oe",
+    "/Og",
+    "/Gs"
+   ],
+   "source_sha256": "e41d42f8a9a9bb85f647e0e802f30a59857afe17f0ceeb2c01d70571a15f9a64",
+   "bytes": "558bec83ec08c746fc0000eb0cff76fc9a000000005bff46fc9a000000003b46fc7feac746f8feffc746fa00f0c746fec400b800818946fec45ef8268a07983dfc00750ab80100509a000000005bff76fe9a000000005bb801008be55dcb",
+   "disasm": "push bp; mov bp, sp; sub sp, 8; mov word ptr [bp - 4], 0; jmp 0x19; push word ptr [bp - 4]; lcall 0, 0; pop bx; inc word ptr [bp - 4]; lcall 0, 0; cmp ax, word ptr [bp - 4]; jg 0xd; mov word ptr [bp - 8], 0xfffe; mov word ptr [bp - 6], 0xf000; mov word ptr [bp - 2], 0xc4; mov ax, 0x8100; mov word ptr [bp - 2], ax; les bx, ptr [bp - 8]; mov al, byte ptr es:[bx]; cwde; cmp ax, 0xfc; jne 0x4e; mov ax, 1; push ax; lcall 0, 0; pop bx; push word ptr [bp - 2]; lcall 0, 0; pop bx; mov ax, 1; mov sp, bp; pop bp; retf"
+  },
+  {
+   "variant": "names_model_port_i",
+   "profile_index": 0,
+   "profile": "msc600a",
+   "flags": [
+    "/AL",
+    "/Os",
+    "/Oe",
+    "/Og",
+    "/Gs"
+   ],
+   "source_sha256": "b40d91a1657a8254927dec488aabab9b41d86ab60708791cf2452fd7df09abb5",
+   "bytes": "558bec83ec08c746f80000eb0cff76f89a000000005bff46f89a000000003b46f87feac746fcfeffc746fe00f0c746fac400b800818946fac45efc268a07983dfc00750ab80100509a000000005bff76fa9a000000005bb801008be55dcb",
+   "disasm": "push bp; mov bp, sp; sub sp, 8; mov word ptr [bp - 8], 0; jmp 0x19; push word ptr [bp - 8]; lcall 0, 0; pop bx; inc word ptr [bp - 8]; lcall 0, 0; cmp ax, word ptr [bp - 8]; jg 0xd; mov word ptr [bp - 4], 0xfffe; mov word ptr [bp - 2], 0xf000; mov word ptr [bp - 6], 0xc4; mov ax, 0x8100; mov word ptr [bp - 6], ax; les bx, ptr [bp - 4]; mov al, byte ptr es:[bx]; cwde; cmp ax, 0xfc; jne 0x4e; mov ax, 1; push ax; lcall 0, 0; pop bx; push word ptr [bp - 6]; lcall 0, 0; pop bx; mov ax, 1; mov sp, bp; pop bp; retf"
+  }
+ ],
+ "checks": [
+  {
+   "check": "names_m_p_i@0",
+   "needle": "mov word ptr [bp - 2], 0xc4",
+   "ok": true
+  },
+  {
+   "check": "names_model_port_i@0",
+   "needle": "!mov word ptr [bp - 2], 0xc4",
+   "ok": true
+  }
+ ],
+ "all_checks_pass": true
+}
