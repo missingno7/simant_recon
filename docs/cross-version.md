@@ -54,3 +54,35 @@ names (reviewed decisions plus the `apply-names` policy); the rest keep address 
 `dos_findings.json` lists DOS functions that are byte-exact *and* CONFIRMED/HIGH paired,
 with the natural MSC 6 source. Example: DOS `SRand2..SRand256` are inline-asm bodies that
 leave the result in AX with no result local; SimAntW's accepted form introduced one.
+
+## Rule DOS-1: DOS-only names (adopted 2026-09-30, user decision)
+
+A DOS function without a Win16 pair may take a name derived from a DOS string only when
+all of the following hold:
+
+1. **Self-reference.** The string is referenced by an immediate inside the function's own
+   extent, not by a caller or callee. It names this function in one of these forms:
+   * a diagnostic: `"... in NAME"`, `"NAME: ..."` or `"NAME punt"`;
+   * an allocation tag passed to the allocator in its own body, spelled exactly as an
+     identifier. This convention is calibrated on functions that Win16 also confirms:
+     `GPutPacked` uses the tag `"GPutPacked"` and `clip_Push` uses the tag `"clip_Push"`.
+2. **Identifier shape.** The token is spelled the way SimAnt spells identifiers: case and
+   prefix exactly as in the string (`win_`, `clip_`, `G...`). Prose such as `"music
+   failure"` and lowercase tags such as `"animbufs"` or `"subinclude"` do not qualify
+   on their own, although they can support a Win16 pair.
+3. **Uniqueness.** No other DOS function carries the same self-reference. If two do, the
+   name stays off both until one is excluded by a second string. For example,
+   `1E57:0773` and `1E57:08F5` both say "SubInclude".
+4. **No conflict.** No Win16 name, CONFIRMED or HIGH, claims the same identifier for a
+   different DOS function.
+5. **Recording.** In the `decisions.json` style, the entry has confidence `DOS-STRING`,
+   `win16: null`, the quoted string and its offset. The rename history reads
+   `DOS-1: own string '...'`. A later Win16 pair always supersedes a DOS-1 name.
+
+Names by analogy, role or specification (`NextListLine` because `PrevListLine` exists,
+`ReadVarLen` from the MIDI SMF sample code) remain forbidden. Those functions keep their
+address names. A `role` comment in the source is the place for that information.
+
+Scope: DOS-1 names describe the DOS build only. They never claim a Win16 identity; `decisions.json`
+records them with `"win16": null`, `"confidence": "DOS-STRING"`, `"scope": "DOS build"`.
+

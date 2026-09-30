@@ -18,7 +18,7 @@ static char g_8CEC;
 extern void _fastcall win_LockWin(int win);
 extern char far * _fastcall win_ObjAddr(int obj);
 extern void _fastcall f_23E6_0A53(struct Event far *ev);
-extern void _fastcall f_23E6_0B11(struct Event far *ev);
+extern void _fastcall win_ProcSliderEvent(struct Event far *ev);
 extern char far * _fastcall win_WinAddr(int win);
 extern void _fastcall o26_39C7_040F(struct Event far *ev);
 extern void far clip_Push(void);
@@ -43,7 +43,7 @@ void _fastcall f_218D_000C(struct Event far *ev)
         goto check;
     case 7:
     case 8:
-        f_23E6_0B11(ev);
+        win_ProcSliderEvent(ev);
         goto check;
     case 12:
     case 18:

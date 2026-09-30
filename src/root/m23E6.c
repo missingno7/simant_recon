@@ -230,7 +230,7 @@ extern int far fd_50F6_47DC;
 extern int far WinPrintf(char far *format, ...);
 extern int near g_3DE0;
 
-void _fastcall f_23E6_0518(char far *o)
+void _fastcall win_DrawElevator(char far *o)
 {
     struct Rect r;
     int link;
@@ -280,7 +280,7 @@ void _fastcall f_23E6_066C(char far *o)
         win_DrawBitMap(r.left, r.top, 0x6d);
         win_DrawBitMap(r.left, r.bottom - fd_50F6_47DC, 0x6f);
         g_9134(r.left, fd_50F6_47DC + r.top, r.right, r.bottom - fd_50F6_47DC, g_3DE2);
-        f_23E6_0518(o);
+        win_DrawElevator(o);
     }
 }
 
@@ -347,7 +347,7 @@ int _fastcall f_23E6_07A2(char far *o)
 
 extern char far * far f_24FA_0004(char far *p, char c, unsigned int n);
 
-int _fastcall f_23E6_08D6(char far *o)
+int _fastcall PrevListLine(char far *o)
 {
     struct List far *list;
     struct Rect r;
@@ -421,7 +421,7 @@ void _fastcall f_23E6_0A53(struct Event far *ev)
 extern void far f_1F80_0081(int ticks);
 extern int far f_1FD2_0542(void);
 
-void _fastcall f_23E6_0B11(struct Event far *ev)
+void _fastcall win_ProcSliderEvent(struct Event far *ev)
 {
     char far *o;
     int link;
@@ -443,22 +443,22 @@ void _fastcall f_23E6_0B11(struct Event far *ev)
     if (fd_50F6_47DC + r.top > ev->v) {
         if (ev->modifiers & 0x6800) {
             f_23E6_06F1(0, lo);
-            f_23E6_0518(o);
+            win_DrawElevator(o);
         } else {
             do {
-                f_23E6_08D6(lo);
-                f_23E6_0518(o);
+                PrevListLine(lo);
+                win_DrawElevator(o);
                 f_1F80_0081(1);
             } while (f_1FD2_0542());
         }
     } else if (r.bottom - fd_50F6_47DC < ev->v) {
         if (ev->modifiers & 0x6800) {
             f_23E6_06F1(list->count - list->visible, lo);
-            f_23E6_0518(o);
+            win_DrawElevator(o);
         } else {
             do {
                 f_23E6_07A2(lo);
-                f_23E6_0518(o);
+                win_DrawElevator(o);
                 f_1F80_0081(1);
             } while (f_1FD2_0542());
         }

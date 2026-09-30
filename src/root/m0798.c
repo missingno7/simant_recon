@@ -83,14 +83,14 @@ void far win_CasteControlChanged(void)
 }
 
 extern struct TriPoints far fd_50F6_3816;
-extern struct TriLevel far fd_50F6_049E;
+extern struct TriLevel far modeLevels;
 extern struct Pt far fd_50F6_0358;
 void far win_ModeControlClosed(void);
 
 void far win_ModeControlChanged(void)
 {
     InitTriVars(0x120d, &fd_50F6_3816);
-    SetTriLatPoint(&fd_50F6_049E, &fd_50F6_3816, &fd_50F6_0358);
+    SetTriLatPoint(&modeLevels, &fd_50F6_3816, &fd_50F6_0358);
     win_ModeControlClosed();
 }
 
@@ -215,9 +215,9 @@ void far ProcModeEvent(struct CtlMsg far *msg)
     case 4:
     case 5:
         win_MakeObjSelected(0x1205);
-        _fmemcpy(&fd_3D57_0810[g_1B50], &fd_50F6_049E, 6);
+        _fmemcpy(&fd_3D57_0810[g_1B50], &modeLevels, 6);
         g_1B50 = msg->code - 0x1206;
-        _fmemcpy(&fd_50F6_049E, &fd_3D57_0810[g_1B50], 6);
+        _fmemcpy(&modeLevels, &fd_3D57_0810[g_1B50], 6);
         clip_SetWin(0x1200);
         win_DrawModeWindow(3);
     case 2:
@@ -241,12 +241,12 @@ void far ProcModeEvent(struct CtlMsg far *msg)
             if (_fmemcmp(&last, &msg->pt, 4)) {
                 last = msg->pt;
                 BoundPointToTri(&msg->pt, &rect);
-                GetTriLatDist(&fd_50F6_049E, &fd_50F6_3816, &msg->pt);
+                GetTriLatDist(&modeLevels, &fd_50F6_3816, &msg->pt);
                 win_DrawModeWindow(3);
             }
             f_1FD2_04D0(&msg->pt);
         } while (StillDown());
-        _fmemcpy(&fd_3D57_0810[g_1B50], &fd_50F6_049E, 6);
+        _fmemcpy(&fd_3D57_0810[g_1B50], &modeLevels, 6);
         break;
     case 12:
     case 13:
@@ -336,7 +336,7 @@ void far win_DrawModeWindow(int flags)
     if (!(flags & 2))
         return;
     DrawControlLevels(0x1200, 0, g_1B62);
-    SetTriLatPoint(&fd_50F6_049E, &fd_50F6_3816, &fd_50F6_0358);
+    SetTriLatPoint(&modeLevels, &fd_50F6_3816, &fd_50F6_0358);
     if (!fd_50F6_37F6) {
         fd_50F6_37F6 = hanim_MakeAnimSet();
         fd_50F6_37FC = hanim_AddAnimObject(fd_50F6_37F6, fd_50F6_0358.x - knobSize.x / 2,
@@ -421,7 +421,7 @@ void far DrawControlLevels(int win, int unused, int percent)
     w = (rect.right - rect.left) / 5;
     h = rect.bottom - rect.top;
     if (win == 0x1200) {
-        levels = (unsigned far *)&fd_50F6_049E;
+        levels = (unsigned far *)&modeLevels;
         colors = g_1B4A;
         total = (long)fd_50F6_0B12[2] + fd_50F6_0B12[1] + fd_50F6_0B12[0];
     } else {
@@ -529,7 +529,7 @@ void far initControls(void)
     fd_50F6_0370 = -1;
     fd_50F6_024E = -1;
     for (i = 0; i < 3; i++) {
-        (&fd_50F6_049E.frac)[i] = fd_3D57_080A[i];
+        (&modeLevels.frac)[i] = fd_3D57_080A[i];
         (&fd_3D57_0810[0].frac)[i] = fd_3D57_080A[i];
         (&casteLevels.frac)[i] = fd_3D57_07EC[i];
         (&fd_3D57_07F2[0].frac)[i] = fd_3D57_07EC[i];

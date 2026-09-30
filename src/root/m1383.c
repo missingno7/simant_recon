@@ -22,7 +22,7 @@ extern int far IdealCaste[4];
 extern int far CasteTabB[4];
 extern int far fd_3D57_0C0E;
 extern int far fd_50F6_0B12[6];
-extern unsigned int far fd_50F6_049E[3];
+extern unsigned int far modeLevels[3];
 extern int far ModeTabB[3];
 extern int far ModeMe;
 extern int far fd_50F6_08E8;
@@ -189,7 +189,7 @@ void far SetModeProd(void)
     for (i = 0; i < 3; i++)
         total += fd_50F6_0B12[i];
     for (i = 0; i < 3; i++)
-        scaled[i] = (unsigned long)fd_50F6_049E[i] * (long)total / 65535UL;
+        scaled[i] = (unsigned long)modeLevels[i] * (long)total / 65535UL;
     for (i = 0; i < 3; i++)
         diff[i] = scaled[i] - fd_50F6_0B12[i];
     max = 0;

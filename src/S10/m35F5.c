@@ -153,7 +153,7 @@ extern void far f_1B73_0A40(void);
 extern void far f_1FD2_04D0(struct Pt far *pt);
 extern int far fd_50F6_46BC[];
 extern int far fd_55B3_5AA0[2];
-extern char far * far f_1CE2_04C9(struct Rect far *r);
+extern char far * far GSaveRect(struct Rect far *r);
 extern void far f_1FD2_02B1(int a);
 extern void far Punt(char far *fmt, ...);
 extern void far f_1FD2_02FF(void);
@@ -239,7 +239,7 @@ int far o10_35F5_0384(char far *sel, char far * far *items)
         r.top -= d;
         r.bottom -= d;
     }
-    saveBuf = f_1CE2_04C9(&r);
+    saveBuf = GSaveRect(&r);
     saveR = r;
     r.left += g_3DDE;
     r.right -= g_3DDE;

@@ -15,7 +15,9 @@ Read README.md, docs/codegen-rules.md and docs/tu-evidence.md first.
   naming the experiments that exclude compiler output (rule ASM-1 style).
 * Names: use Win16 names only when `xver.py` has the pair CONFIRMED/HIGH under the naming
   policy, or record a reviewed decision in `evidence/cross_version/decisions.json` with
-  at least two independent anchors. Platform entry points keep DOS names (`main`).
+  at least two independent anchors. Platform entry points keep DOS names (`main`). A DOS function without a Win16 pair may take
+  the name its *own* identifier-shaped diagnostic or allocation tag spells (rule DOS-1 in
+  docs/cross-version.md; scoped to the DOS build, recorded as DOS-STRING).
 * Never: copy original bytes into sources (`db` capsules, byte arrays, absolute-address
   casts to force code), patch objects or the final image, trim extents, mask fixups,
   edit `layout/oracle.lock.json`, hand-edit `layout/manifest.json` or the promotions

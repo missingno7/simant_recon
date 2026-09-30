@@ -2713,6 +2713,18 @@
     }
    ]
   },
+  "GSaveRect": {
+   "unit": "root",
+   "seg": 7394,
+   "off": 1225,
+   "grounding": "inventory:far_call",
+   "history": [
+    {
+     "was": "f_1CE2_04C9",
+     "why": "DOS-1: own allocation tag 'GSaveRect' (tag = name convention calibrated on GPutPacked, clip_Push)"
+    }
+   ]
+  },
   "GenerateTutorial": {
    "unit": "S08",
    "seg": 13813,
@@ -4729,6 +4741,18 @@
     }
    ]
   },
+  "PrevListLine": {
+   "unit": "root",
+   "seg": 9190,
+   "off": 2262,
+   "grounding": "inventory:push_cs_call",
+   "history": [
+    {
+     "was": "f_23E6_08D6",
+     "why": "DOS-1: own Punt diagnostic 'PrevListLine punt'"
+    }
+   ]
+  },
   "ProcCasteEvent": {
    "unit": "root",
    "seg": 1944,
@@ -6343,6 +6367,18 @@
     }
    ]
   },
+  "_ffree": {
+   "unit": "root",
+   "seg": 5916,
+   "off": 8726,
+   "grounding": "inventory:push_cs_call",
+   "history": [
+    {
+     "was": "f_171C_2216",
+     "why": "DOS-1: own Punt diagnostic '_ffree: Could not find memory ptr'"
+    }
+   ]
+  },
   "_font_CharWidth": {
    "unit": "root",
    "seg": 9703,
@@ -6388,6 +6424,18 @@
     {
      "was": "f_25E7_02FE",
      "why": "MAPSYM SIMTWO_MODULE unit font_ReadFont, font_DumpFont, _font_StringWidth, _font_CharWidth, _font_FontHeight, _font_LineHeight, font_MakeImage aligns 1:1 with DOS module 25E7 functions 007A..04BE; anchor font_ReadFont (xver CONFIRMED); body sums owTable widths over a string (strlen*widMax for fixed fonts)"
+    }
+   ]
+  },
+  "_frealloc": {
+   "unit": "root",
+   "seg": 5916,
+   "off": 8840,
+   "grounding": "reviewed: prologue scan in unreached gap; descent ends in a return; no references found (unreferenced or indirect)",
+   "history": [
+    {
+     "was": "f_171C_2288",
+     "why": "DOS-1: own Punt diagnostic '_frealloc: Could not find memory ptr'"
     }
    ]
   },
@@ -9982,7 +10030,7 @@
    "unit": "root",
    "seg": 5916,
    "off": 8726,
-   "grounding": "inventory:push_cs_call"
+   "alias_of": "_ffree"
   },
   "f_171C_2276": {
    "unit": "root",
@@ -9994,7 +10042,7 @@
    "unit": "root",
    "seg": 5916,
    "off": 8840,
-   "grounding": "reviewed: prologue scan in unreached gap; descent ends in a return; no references found (unreferenced or indirect)"
+   "alias_of": "_frealloc"
   },
   "f_171C_2302": {
    "unit": "root",
@@ -11182,7 +11230,7 @@
    "unit": "root",
    "seg": 7394,
    "off": 1225,
-   "grounding": "inventory:far_call"
+   "alias_of": "GSaveRect"
   },
   "f_1CE2_0552": {
    "unit": "root",
@@ -12656,7 +12704,7 @@
    "unit": "root",
    "seg": 9190,
    "off": 1304,
-   "grounding": "inventory:push_cs_call"
+   "alias_of": "win_DrawElevator"
   },
   "f_23E6_066C": {
    "unit": "root",
@@ -12680,7 +12728,7 @@
    "unit": "root",
    "seg": 9190,
    "off": 2262,
-   "grounding": "inventory:push_cs_call"
+   "alias_of": "PrevListLine"
   },
   "f_23E6_0A53": {
    "unit": "root",
@@ -12692,7 +12740,7 @@
    "unit": "root",
    "seg": 9190,
    "off": 2833,
-   "grounding": "inventory:far_call"
+   "alias_of": "win_ProcSliderEvent"
   },
   "f_24AB_0002": {
    "unit": "root",
@@ -17462,6 +17510,18 @@
     }
    ]
   },
+  "win_DrawElevator": {
+   "unit": "root",
+   "seg": 9190,
+   "off": 1304,
+   "grounding": "inventory:push_cs_call",
+   "history": [
+    {
+     "was": "f_23E6_0518",
+     "why": "DOS-1: own Punt diagnostic 'Bad object type in win_DrawElevator'"
+    }
+   ]
+  },
   "win_DrawHBar": {
    "unit": "root",
    "seg": 8895,
@@ -18069,6 +18129,18 @@
     {
      "was": "f_22BF_0D53",
      "why": "vsprintf(buf[100]) + centred print at object"
+    }
+   ]
+  },
+  "win_ProcSliderEvent": {
+   "unit": "root",
+   "seg": 9190,
+   "off": 2833,
+   "grounding": "inventory:far_call",
+   "history": [
+    {
+     "was": "f_23E6_0B11",
+     "why": "DOS-1: own Punt diagnostic 'Bad object type in win_ProcSliderEvent'"
     }
    ]
   },
@@ -19418,13 +19490,7 @@
   "err_3D57_049E": {
    "seg": 15703,
    "off": 1182,
-   "grounding": "SetModeProd (root:1383:0337): (unsigned long)[049E+2i]*total/65535; Win16 SetModeProd modeLevels[i]",
-   "history": [
-    {
-     "was": "modeLevels",
-     "why": "registration error by simB: SetModeProd's CONST word 831E holds 50F6, so the table is 50F6:049E, not 3D57:049E; this row has no valid grounding and should be deleted by the supervisor"
-    }
-   ]
+   "alias_of": "fd_3D57_049E"
   },
   "errno": {
    "seg": 21939,
@@ -19560,6 +19626,21 @@
    "seg": 15703,
    "off": 1134,
    "grounding": "S12:384C:0432 map image generation: mov es,[8690]; mov al,es:[bx+046E] byte colour table (own CONST word)"
+  },
+  "fd_3D57_049E": {
+   "seg": 15703,
+   "off": 1182,
+   "grounding": "SetModeProd (root:1383:0337): (unsigned long)[049E+2i]*total/65535; Win16 SetModeProd modeLevels[i]",
+   "history": [
+    {
+     "was": "modeLevels",
+     "why": "registration error by simB: SetModeProd's CONST word 831E holds 50F6, so the table is 50F6:049E, not 3D57:049E; this row has no valid grounding and should be deleted by the supervisor"
+    },
+    {
+     "was": "err_3D57_049E",
+     "why": "3D57:049E is a genuine separate variable of the data-only file d3D57.c (bytes 01 01 01 06 ...); the err_ placeholder came from the mistaken modeLevels registration; neutral address name until identified"
+    }
+   ]
   },
   "fd_3D57_04A6": {
    "seg": 15703,
@@ -20774,7 +20855,7 @@
   "fd_50F6_049E": {
    "seg": 20726,
    "off": 1182,
-   "grounding": "SetModeProd (root:1383:032F): mov es,[831E] (CONST word = 50F6); unsigned table es:[049E+2i], Win16 modeLevels (the name modeLevels is misregistered at 3D57:049E, see err_3D57_049E)"
+   "alias_of": "modeLevels"
   },
   "fd_50F6_04A2": {
    "seg": 20726,
@@ -24088,9 +24169,15 @@
    ]
   },
   "modeLevels": {
-   "seg": 15703,
+   "seg": 20726,
    "off": 1182,
-   "alias_of": "err_3D57_049E"
+   "grounding": "SetModeProd (root:1383:032F): mov es,[831E] (CONST word = 50F6); unsigned table es:[049E+2i], Win16 modeLevels (the name modeLevels is misregistered at 3D57:049E, see err_3D57_049E)",
+   "history": [
+    {
+     "was": "fd_50F6_049E",
+     "why": "decision root:50F6:049E CONFIRMED (names3): initControls copies modeLevelDefaults into it; SetModeProd and DrawControlLevels index it [0..2] as Win16 modeLevels"
+    }
+   ]
   },
   "sys_errlist": {
    "seg": 21939,

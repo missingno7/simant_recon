@@ -3207,7 +3207,7 @@
    },
    "lang": "c",
    "source": "src/S10/m35F5.c",
-   "source_sha256": "51e9bba120113480f2b3ef6140d035b35bc1e1b1f2152870eb276388bdcb56d8",
+   "source_sha256": "69be1d6a9649e99102131c702e1920b6e84acc0c1b4cd737d2a047552f917ed5",
    "claims": [
     {
      "name": "o10_35F5_0000",
@@ -5565,7 +5565,7 @@
    },
    "lang": "c",
    "source": "src/S23/m39C7.c",
-   "source_sha256": "453091275d023fef42908009069cc4577a5b2f4d1f35be5cc844b910596a5bc4",
+   "source_sha256": "33561b9fe79d690027351ffd78df2501e2f7183129ffbf8f4a1272214fe20844",
    "claims": [
     {
      "name": "XFlipLong",
@@ -6052,7 +6052,8 @@
      "target_sha256": "c9939fb0fd9f7ed7c6a09a4fbe5dd600e346e2e8eee8b4829c9ef0fb905068b1",
      "kind": "C",
      "provenance": "EXACT_NATURAL",
-     "reloc_order": "GROUPED"
+     "reloc_order": "GROUPED",
+     "layout_inferred": "seven 'map = list = value' chained stores written as two statements (byte-identical, file's own style); the extra /Zi line entries move the fourth 52-entry LINNUM flush from 0CF5 to 0CCD, out of GetBestDir's forbidden interval (0CDC,0D54] (worker resH)"
     }
    ],
    "scaffold": [
@@ -6343,7 +6344,7 @@
    "link_after": "",
    "kind": "data",
    "source": "src/data/d3D57.c",
-   "source_sha256": "d73c90a86a7f8ec6b0cde0173639055f05509f2fe8e235647eb9548fb88808af",
+   "source_sha256": "7927c8c5fa73085949b5b46128334a7ac1ef96167962045c46f19f5eccfade31",
    "claims": [],
    "scaffold": [],
    "object_sha256": "4382660c0054a296a8b078cd18e6baa61649b97b7e8515ddf4e124089ec67a15"
@@ -8710,7 +8711,7 @@
     "end": 35149
    },
    "source": "src/root/m0798.c",
-   "source_sha256": "a26f2fb0c174e54a05488b1185942bb1a6aac10752a9c87ed9a132dc1e316374",
+   "source_sha256": "e2848b0c7f8e4ecb249659692d4f74139f9889953fa6a14b0476ecee5b9bd8b3",
    "claims": [
     {
      "name": "InitTriVars",
@@ -11294,7 +11295,7 @@
     "end": 84326
    },
    "source": "src/root/m1383.c",
-   "source_sha256": "35e8a31394aa0219ae9914075ba7d2e1ede6c3bcf82afec9bbbf393b7feab676",
+   "source_sha256": "489ee7d47f0ee27942bf6bea11fff7a8bbb90acd2c75fe4653d18a3e9efa5389",
    "claims": [
     {
      "name": "GetStrategy",
@@ -12356,7 +12357,7 @@
    },
    "lang": "c",
    "source": "src/root/m171C.c",
-   "source_sha256": "9715c3c16e169a312e5a927b5eb4ee99ea671c19fe43fcf6b234fbbe5a14c8af",
+   "source_sha256": "a2ee785f00d3aad10a8c393f3955a293f92c6e00ac83fbe8b98effefdd70d638",
    "claims": [
     {
      "name": "f_171C_068C",
@@ -12799,7 +12800,7 @@
      "reloc_order": "EXACT"
     },
     {
-     "name": "f_171C_2216",
+     "name": "_ffree",
      "unit": "root",
      "seg": 5916,
      "off": 8726,
@@ -12821,7 +12822,7 @@
      "reloc_order": "EXACT"
     },
     {
-     "name": "f_171C_2288",
+     "name": "_frealloc",
      "unit": "root",
      "seg": 5916,
      "off": 8840,
@@ -15258,7 +15259,7 @@
    },
    "lang": "c",
    "source": "src/root/m1C62.c",
-   "source_sha256": "8e0ab9ef4565a8d61f71c1bcae2754988cad544c6b938a2ed4cc9e167f50cc86",
+   "source_sha256": "927309d2bf5019e17e58962c7da6a0d45298a2f3bf18fef0b0347cc4498ada6c",
    "claims": [
     {
      "name": "Punt",
@@ -15433,7 +15434,7 @@
     "end": 121057
    },
    "source": "src/root/m1CE2.c",
-   "source_sha256": "5ced9940150ea9cb8954d0d7ff05afcb7fe9c5c54a32cb91547870e76de252d6",
+   "source_sha256": "e5c2cb4b8dbe7af6d263072002a49e012b290c1082f0fc877b479728b75bacd3",
    "claims": [
     {
      "name": "f_1CE2_000C",
@@ -15645,7 +15646,7 @@
      "reloc_order": "EXACT"
     },
     {
-     "name": "f_1CE2_04C9",
+     "name": "GSaveRect",
      "unit": "root",
      "seg": 7394,
      "off": 1225,
@@ -17639,7 +17640,7 @@
     "end": 139170
    },
    "source": "src/root/m218D.c",
-   "source_sha256": "b292153d8e9d3f2cf665550c368365ee130a4fc6eabd2d03e5381e85b9742b2f",
+   "source_sha256": "3ccc2dedf58831dc2f853beb3133847e7f1f8c1883c445379fd5584b3255112e",
    "claims": [
     {
      "name": "f_218D_000C",
@@ -18726,7 +18727,7 @@
    },
    "lang": "c",
    "source": "src/root/m23E6.c",
-   "source_sha256": "e27b1c19f9491c81484c4b24d5818325516ec9765682b4ed61f6d4126828bd61",
+   "source_sha256": "abec86887faaf6bf57fe93191b5d3d8e89f054fb2456f9a50c6c37c5a25ab979",
    "claims": [
     {
      "name": "f_23E6_009F",
@@ -18806,7 +18807,7 @@
      "reloc_order": "GROUPED"
     },
     {
-     "name": "f_23E6_0518",
+     "name": "win_DrawElevator",
      "unit": "root",
      "seg": 9190,
      "off": 1304,
@@ -18850,7 +18851,7 @@
      "reloc_order": "GROUPED"
     },
     {
-     "name": "f_23E6_08D6",
+     "name": "PrevListLine",
      "unit": "root",
      "seg": 9190,
      "off": 2262,
@@ -18872,7 +18873,7 @@
      "reloc_order": "GROUPED"
     },
     {
-     "name": "f_23E6_0B11",
+     "name": "win_ProcSliderEvent",
      "unit": "root",
      "seg": 9190,
      "off": 2833,

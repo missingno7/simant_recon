@@ -6,15 +6,15 @@ Validation: **PASS** (2026-09-30)
 |---|---:|
 | known_functions | 1,730 |
 | known_game_functions | 1,640 |
-| exact_c_functions | 1,214 |
-| exact_c_bytes | 216,147 |
+| exact_c_functions | 1,215 |
+| exact_c_bytes | 216,389 |
 | exact_asm_bytes | 50,441 |
 | exact_code_segment_data_bytes | 1,481 |
 | historical_runtime_bytes_accepted | 12,339 |
 | historical_runtime_members_accepted | 90 |
 | runtime_functions_known | 90 |
 | runtime_functions_owned | 90 |
-| owned_functions | 1,671 |
+| owned_functions | 1,672 |
 | historical_runtime_bytes_located_unaccepted | 0 |
 | rtlink_manager_bytes_unaccepted | 17,001 |
 | data_bytes_accepted | 105,212 |
@@ -26,25 +26,25 @@ Validation: **PASS** (2026-09-30)
 | far_bss_sizes_consistent_bytes | 3,966 |
 | far_bss_sizes_unverified_bytes | 15,442 |
 | game_code_span_bytes | 304,798 |
-| unresolved_code_bytes | 36,729 |
+| unresolved_code_bytes | 36,487 |
 | unresolved_data_bytes | 9,811 |
-| scaffold_functions | 40 |
+| scaffold_functions | 39 |
 | exact_translation_units | 85 |
 | complete_tus_relocation_order_proven | 84 |
 | claims_within_group_order_pending | 6 |
 | inplace_draft_functions | 18 |
 | claims_exact_steered | 18 |
 | exact_c_bytes_in_complete_tus | 114,834 |
-| exact_c_bytes_in_partial_modules | 101,313 |
+| exact_c_bytes_in_partial_modules | 101,555 |
 | exact_c_bytes_steered | 8,119 |
-| exact_c_bytes_layout_inferred | 13,850 |
+| exact_c_bytes_layout_inferred | 14,092 |
 | exact_c_bytes_within_group_pending | 1,696 |
-| claims_layout_inferred | 11 |
+| claims_layout_inferred | 12 |
 | asm_transcribed_bytes | 51,922 |
 | data_bytes_opaque_unmarked | 4,383 |
 | runtime_oracle_derived_words | 244 |
 
-Manifest: `bff34ea6e424ce424ce62794188df77282a69ba7c11acc895a5cac8ccd20ac63`
+Manifest: `4ce52c95f62e61ceb3590680d333873a58f3a8409043e529453d18672b29828d`
 
 Complete TUs with cross-function relocation order pending (record breaks between functions differ; see docs/codegen-rules.md ZI-1): S00:31AD
 
@@ -52,4 +52,4 @@ Modules with data placements only (never counted as recovered code): data:3D57, 
 
 Whole executable: NOT_BUILT (no historical link yet; see docs/next-steps.md)
 
-Overlay coverage (claimed/bytes): S00 19679/19696, S01 7051/7056, S02 2409/2416, S03 10963/10976, S04 2282/2464, S05 1764/2512, S06 6333/9584, S07 1174/1184, S08 3698/5056, S09 2820/5232, S10 972/2736, S11 870/880, S12 4773/4992, S13 5300/6064, S14 3484/4656, S15 1025/1360, S16 1763/1776, S17 177/448, S18 4359/4368, S19 1120/1120, S20 2086/2096, S21 472/480, S22 12710/12720, S23 1411/4368, S24 1071/1808, S25 9789/14592, S26 2236/2240
+Overlay coverage (claimed/bytes): S00 19679/19696, S01 7051/7056, S02 2409/2416, S03 10963/10976, S04 2282/2464, S05 1764/2512, S06 6333/9584, S07 1174/1184, S08 3698/5056, S09 2820/5232, S10 972/2736, S11 870/880, S12 4773/4992, S13 5300/6064, S14 3484/4656, S15 1025/1360, S16 1763/1776, S17 177/448, S18 4359/4368, S19 1120/1120, S20 2086/2096, S21 472/480, S22 12710/12720, S23 1411/4368, S24 1071/1808, S25 10031/14592, S26 2236/2240

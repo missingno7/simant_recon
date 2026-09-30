@@ -1740,47 +1740,55 @@
   },
   "root:23E6:0518": {
    "win16": null,
+   "dos_name": "win_DrawElevator",
    "confidence": "DOS-STRING",
+   "scope": "DOS build",
+   "rule": "DOS-1",
    "reviewed": "2026-09-30",
    "evidence": [
-    "own Punt diagnostic 'Bad object type in win_DrawElevator' plus debug strings 'SliderHeight=%d, eleHeight=%d', ' eleTop= %d'; callers 066C (slider draw) and 0B11",
-    "no Win16 counterpart"
+    "own Punt diagnostic 'Bad object type in win_DrawElevator'",
+    "unique self-reference; no CONFIRMED/HIGH Win16 name conflicts"
    ],
-   "reviewer": "worker names3, supervisor spot-checked 2026-09-30",
-   "note": "admissible only under proposed rule DOS-1 (policy_note.md); not a Win16-policy name"
+   "reviewer": "names3/names4/names5, adopted by supervisor"
   },
   "root:23E6:0B11": {
    "win16": null,
+   "dos_name": "win_ProcSliderEvent",
    "confidence": "DOS-STRING",
+   "scope": "DOS build",
+   "rule": "DOS-1",
    "reviewed": "2026-09-30",
    "evidence": [
-    "own Punt diagnostic 'Bad object type in win_ProcSliderEvent'; sole caller f_218D_000C (event dispatch); calls win_DrawElevator and the list-line scrollers",
-    "no Win16 counterpart"
+    "own Punt diagnostic 'Bad object type in win_ProcSliderEvent'",
+    "unique self-reference; no CONFIRMED/HIGH Win16 name conflicts"
    ],
-   "reviewer": "worker names3, supervisor spot-checked 2026-09-30",
-   "note": "admissible only under proposed rule DOS-1 (policy_note.md); not a Win16-policy name"
+   "reviewer": "names3/names4/names5, adopted by supervisor"
   },
   "root:23E6:08D6": {
    "win16": null,
+   "dos_name": "PrevListLine",
    "confidence": "DOS-STRING",
+   "scope": "DOS build",
+   "rule": "DOS-1",
    "reviewed": "2026-09-30",
    "evidence": [
-    "own Punt diagnostic 'PrevListLine punt'; sole caller win_ProcSliderEvent",
-    "no Win16 counterpart"
+    "own Punt diagnostic 'PrevListLine punt'",
+    "unique self-reference; no CONFIRMED/HIGH Win16 name conflicts"
    ],
-   "reviewer": "worker names3, supervisor spot-checked 2026-09-30",
-   "note": "admissible only under proposed rule DOS-1 (policy_note.md); not a Win16-policy name"
+   "reviewer": "names3/names4/names5, adopted by supervisor"
   },
   "root:1CE2:04C9": {
    "win16": null,
+   "dos_name": "GSaveRect",
    "confidence": "DOS-STRING",
+   "scope": "DOS build",
+   "rule": "DOS-1",
    "reviewed": "2026-09-30",
    "evidence": [
-    "allocation tag 'GSaveRect' passed to the allocator in its own body (tag == function name convention calibrated on GPutPacked 'GPutPacked' and clip_Push 'clip_Push', both confirmed by Win16); returns the saved-bits buffer",
-    "no Win16 counterpart"
+    "own allocation tag 'GSaveRect' (tag = name convention calibrated on GPutPacked, clip_Push)",
+    "unique self-reference; no CONFIRMED/HIGH Win16 name conflicts"
    ],
-   "reviewer": "worker names3, supervisor spot-checked 2026-09-30",
-   "note": "admissible only under proposed rule DOS-1 (policy_note.md); not a Win16-policy name"
+   "reviewer": "names3/names4/names5, adopted by supervisor"
   },
   "root:22BF:0A22": {
    "win16": "_win_IsWinInFront",
@@ -3604,25 +3612,29 @@
   },
   "root:171C:2216": {
    "win16": null,
+   "dos_name": "_ffree",
    "confidence": "DOS-STRING",
+   "scope": "DOS build",
+   "rule": "DOS-1",
    "reviewed": "2026-09-30",
    "evidence": [
-    "own Punt diagnostic '_ffree: Could not find memory ptr' (form 'NAME: ...') inside its extent",
-    "free (171C:2276, named from link evidence) is a thin wrapper to it: the MSC large-model free -> _ffree mapping"
+    "own Punt diagnostic '_ffree: Could not find memory ptr'",
+    "unique self-reference; no CONFIRMED/HIGH Win16 name conflicts"
    ],
-   "reviewer": "worker names4, supervisor spot-checked 2026-09-30",
-   "note": "proposed name _ffree; admissible only if DOS-1 is adopted; no LLIBCR _ffree is linked (no clash)"
+   "reviewer": "names3/names4/names5, adopted by supervisor"
   },
   "root:171C:2288": {
    "win16": null,
+   "dos_name": "_frealloc",
    "confidence": "DOS-STRING",
+   "scope": "DOS build",
+   "rule": "DOS-1",
    "reviewed": "2026-09-30",
    "evidence": [
-    "own Punt diagnostic '_frealloc: Could not find memory ptr' inside its extent",
-    "calls 21CC for p==NULL as MSC _frealloc does with _fmalloc"
+    "own Punt diagnostic '_frealloc: Could not find memory ptr'",
+    "unique self-reference; no CONFIRMED/HIGH Win16 name conflicts"
    ],
-   "reviewer": "worker names4, supervisor spot-checked 2026-09-30",
-   "note": "proposed name _frealloc; admissible only if DOS-1 is adopted"
+   "reviewer": "names3/names4/names5, adopted by supervisor"
   },
   "root:171C:21CC": {
    "win16": null,
@@ -7835,14 +7847,16 @@
   },
   "root:2505:025F": {
    "win16": null,
+   "dos_name": "win_WinRectAddr",
    "confidence": "DOS-STRING",
+   "scope": "DOS build",
+   "rule": "DOS-1",
    "reviewed": "2026-09-30",
    "evidence": [
-    "No Win16 source: no *RectAddr* symbol in simantw evidence/symbols (symbols.json/csv); the only similar Win16 symbol, _win_WinObjAddr, takes (window,object) and has the 'Attempt to get obj address outsize window' range check, which this function lacks, so no rename",
-    "The name actually comes from the DOS binary's own diagnostic \"\\nWINDOW %x NOT LOCKED DURING CALL TO win_WinRectAddr!!\" (DS:65F1); body = IsWinLocked check / Punt, return GetWinPtr(win) (the window struct starts with its Rect)"
+    "own DOS string at DS:65F1 naming win_WinRectAddr; no Win16 *RectAddr* symbol (names5)",
+    "unique self-reference; no CONFIRMED/HIGH Win16 name conflicts"
    ],
-   "reviewer": "worker names5, supervisor spot-checked 2026-09-30",
-   "note": "no Win16 symbol win_WinRectAddr: rejected as a Win16-policy name; own Punt/WinPrintf string at DS:65F1 names it, admissible only under proposed rule DOS-1 (build/workers/names3/policy_note.md); reverted until DOS-1 is adopted | Rejected as a Win16-derived name. The DOS self-naming string is strong evidence; if the name is kept it must be re-recorded with DOS-string provenance, not Win16."
+   "reviewer": "names3/names4/names5, adopted by supervisor"
   },
   "root:2505:02D7": {
    "win16": "_win_ObjAddr",

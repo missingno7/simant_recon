@@ -163,7 +163,7 @@ extern int (far * near g_9140)(int left, int top, int right, int bottom);
 extern char far * far f_171C_2190(int size, char far *name);
 extern void (far * near g_9148)(int left, int top, int right, int bottom, char far *buffer);
 
-char far * far f_1CE2_04C9(struct Rect far *r)
+char far * far GSaveRect(struct Rect far *r)
 {
     int x;
     long size;

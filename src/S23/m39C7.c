@@ -558,7 +558,7 @@ void far OpenInfoWindow(void)
 }
 
 extern void far clip_Push(void);
-extern char far * far f_1CE2_04C9(struct Rect far *r);
+extern char far * far GSaveRect(struct Rect far *r);
 extern unsigned char near g_5A97;
 extern int near g_3DE0;
 extern void far f_1CE2_0013(int left, int top, int right, int bottom, int width);
@@ -631,7 +631,7 @@ void far PopUpInfoWindow(int x, int top, int bottom, int rez)
             frame.bottom = wr.bottom;
             frame.top = wr.bottom - k - 8;
         }
-        bits = f_1CE2_04C9(&frame);
+        bits = GSaveRect(&frame);
         win_SetColorFromObjNum(0x502);
         if (g_5A97 & 1)
             g_3DE0 = 0x80;

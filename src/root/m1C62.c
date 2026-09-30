@@ -103,7 +103,7 @@ extern struct Rect far * near g_5AAC;
 extern struct Pt far f_1F80_000C(char far *text);
 extern void far f_1F80_01A8(struct Rect far *r, int width, int height);
 extern struct Rect far * far f_1CE2_039B(struct Rect far *r);
-extern char far * far f_1CE2_04C9(struct Rect far *r);
+extern char far * far GSaveRect(struct Rect far *r);
 extern void far f_1CE2_046D(struct Rect far *r, int color);
 extern void far f_1CE2_044D(struct Rect far *r, int width);
 void far f_1C62_0306(struct Rect far *r, int line, char far *text);
@@ -146,7 +146,7 @@ void far f_1C62_00D5(char far *msg, int timed)
     size = f_1F80_000C(msg);
     f_1F80_01A8(&r, size.x + 2, size.y + 4);
     pr = *f_1CE2_039B(&r);
-    save = f_1CE2_04C9(&pr);
+    save = GSaveRect(&pr);
     f_1CE2_046D(&pr, g_8CBE->fill);
     g_9128(g_8CBE->frame, g_8CBE->frame, 0x20);
     f_1CE2_044D(&pr, 4);
@@ -281,7 +281,7 @@ int far f_1C62_0415(char far *msg, int set)
         width = c;
     f_1F80_01A8(&g_557C, width + 2, size.y + 4);
     pr = *f_1CE2_039B(&g_557C);
-    save = f_1CE2_04C9(&pr);
+    save = GSaveRect(&pr);
     f_1CE2_046D(&pr, 0xf2f);
     g_9128(0x404, 0x404, 0x40);
     f_1CE2_044D(&pr, 4);
@@ -379,7 +379,7 @@ char far * far f_1C62_074E(struct Rect far *r, int width, int height, int timed)
 
     f_1F80_01A8(r, width, height);
     *r = *f_1CE2_039B(r);
-    save = f_1CE2_04C9(r);
+    save = GSaveRect(r);
     g_8CBE = &g_550C[timed];
     g_5AAC = 0;
     f_1CE2_046D(r, g_8CBE->fill);

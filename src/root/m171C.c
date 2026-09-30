@@ -1066,7 +1066,7 @@ void far * far malloc(unsigned size)
     return f_171C_21CC(size);
 }
 
-void far f_171C_2216(char far *p)
+void far _ffree(char far *p)
 {
     Handle h;
 
@@ -1082,10 +1082,10 @@ void far f_171C_2216(char far *p)
 
 void far free(void far *p)
 {
-    f_171C_2216(p);
+    _ffree(p);
 }
 
-char far * far f_171C_2288(char far *p, unsigned size)
+char far * far _frealloc(char far *p, unsigned size)
 {
     Handle h;
 
@@ -1103,5 +1103,5 @@ char far * far f_171C_2288(char far *p, unsigned size)
 
 void far * far f_171C_2302(void far *p, unsigned size)
 {
-    return f_171C_2288(p, size);
+    return _frealloc(p, size);
 }
