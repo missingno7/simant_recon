@@ -1,6 +1,6 @@
 /* Data-only translation unit (hypothesis): far tables of frame 3D57.
  * No code references its variables through its own segment: every referencing module
- * uses per-symbol relocation groups (see build/workers/data/s27_map.md). */
+ * uses per-symbol relocation groups (see work/data/s27_map.md). */
 
 extern unsigned char far fd_50F6_0516[];
 extern unsigned char far fd_50F6_05A0[];

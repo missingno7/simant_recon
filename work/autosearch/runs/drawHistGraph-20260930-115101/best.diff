@@ -1,0 +1,59 @@
+--- base.c
++++ best.c
+@@ -207,8 +207,6 @@
+     int height;
+     int far *data;
+     int far *data2;
+-    int start;
+-    int count;
+     int j;
+     int max;
+     int n;
+@@ -222,6 +220,7 @@
+     char buf[30];
+     int ty;
+     int th;
++    int tmp2;
+ 
+     color = graphColors[histColor[graph]];
+     win_GetObjRect(0x150e, &r);
+@@ -232,11 +231,9 @@
+     graph = (graph & 1) * 5 + (graph >> 1);
+     data = fd_3D57_082A[graph];
+     data2 = fd_3D57_0852[graph];
+-    start = fd_50F6_04F4;
+-    count = fd_3D57_0828;
+-    j = (start - count) & 0x3f;
++    j = (fd_50F6_04F4 - fd_3D57_0828) & 0x3f;
+     max = 0;
+-    for (n = 0; n < count; n++) {
++    for (n = 0; n < fd_3D57_0828; n++) {
+         if (data[j] > max)
+             max = data[j];
+         if (data2[j] > max)
+@@ -254,12 +251,12 @@
+             while (max / div > height)
+                 div++;
+     }
+-    j = start & 0x3f;
++    j = fd_50F6_04F4 & 0x3f;
+     x = r.left;
+     if (div == 1)
+-        y = r.bottom - data[start] * mul;
++        y = r.bottom - data[fd_50F6_04F4] * mul;
+     else
+-        y = r.bottom - data[start] / div;
++        y = r.bottom - data[fd_50F6_04F4] / div;
+     px = x;
+     py = y;
+     for (n = 1; n < 64; n++) {
+@@ -282,7 +279,8 @@
+     (*g_9128)(color, 0, color);
+     f_24AB_02AD(3);
+     f_24AB_038D(x, ty = y - (th = f_24AB_030B()) / 2, s);
+-    f_1CE2_01F8(x - 1, ty - 1, f_24AB_0329(s) + x + 1, ty + th + 1, 1);
++    tmp2 = f_24AB_0329(s);
++    f_1CE2_01F8(x - 1, ty - 1, tmp2 + x + 1, ty + th + 1, 1);
+     f_24AB_02AD(0);
+ }
+ 

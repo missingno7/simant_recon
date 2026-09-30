@@ -1,0 +1,14 @@
+{
+ "exp1": "first 6.10 test: grouping by target, order not by name",
+ "exp2-exp5": "6.10: runtime names; B shuffled; calls reversed; EXTDEF vs call order (MASM-built)",
+ "sweep": "6.10 permutation for N=1..300 (prefix-consistent)",
+ "e2": "6.10: padding/site-address independence, duplicate references",
+ "e3, e4": "6.10 permutation N=1500/4000 (RTL-SWAP)",
+ "e5": "6.10: fixups per target do not matter",
+ "e6, e7, e8": "6.10 creation-order rules with the Python OMF writer omfw.py",
+ "c50, c50b, c50r, c50h, c50big": "Clipper RTLink 3.11: names irrelevant, permutation N=4000",
+ "c501x": "Clipper RTLink 3.13 (Apr 1991): identical permutation to 3.11",
+ "v1/a-e": "6.10 overlays: on-demand vector order, ALWAYS order, PRELOAD flag 05, RELOAD FAR 400 -> rstk 0x1800, CACHE pulls rcache/cacheenv",
+ "build/rtlink/t1..t5": "trial links of the project objects (t3 reference result, t4 = t3 + CACHE, t5 proposal smoke test)",
+ "exp_perm.py, exp_k0.py, exp_k0b.py, exp_local.py, exp_block.py, exp_runs.py": "tests of the measured permutations against SimAnt's program-wide order (chance level)"
+}

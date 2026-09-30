@@ -1,0 +1,13 @@
+{"id": "ASMROLE-SHAPE", "question": "MSC frame/idiom shapes used to classify ASM claims (worker asmrole)",
+ "header": "extern int near g; extern int near h; extern char far * near rp; extern int far close(int); extern int far gg(int, int, char far *, int); extern int far open(char far *, int);\n",
+ "variants": {
+   "gs_noloc": "void far f(int a) { g = a; }",
+   "gs_loc": "int far f(int a) { int n; n = a; g = n; return n; }",
+   "call1_void": "void far f(void) { close(h); }",
+   "call1_ret": "int far f(void) { return close(h); }",
+   "test_neg": "void far f(int a) { if (a < 0) a = 0x7fff; g = a; }",
+   "ret0": "int far f(char far *p) { h = open(p, 0x8000); if (h <= 0) return 0; return 1; }",
+   "wrap": "int far f(int a, int b, int c, char far *p, int d) { return gg(b, c, p, d); }"
+ },
+ "profiles": [{"profile": "msc600ax", "flags": ["/AL", "/Os", "/Gs"]}, {"profile": "msc600ax", "flags": ["/AL", "/Os"]}, {"profile": "msc510", "flags": ["/AL", "/Os", "/Gs"]}]
+}

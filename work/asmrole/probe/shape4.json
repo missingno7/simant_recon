@@ -1,0 +1,11 @@
+{"id": "ASMROLE-SHAPE4", "question": "C shapes of the procs left without proc-level exclusion (worker asmrole)",
+ "header": "extern char near cb; extern char near cb2; extern char far * near fpg; extern int near w1; extern unsigned char near arr[128]; extern char near flag2;\n#include <string.h>\n",
+ "variants": {
+   "maskstore": "void far f(int a, int b) { cb = a & 15; cb2 = b & 15; }",
+   "fpparam": "void far f(char far *p, int n) { fpg = p; w1 = n; }",
+   "memset80": "void far f(void) { memset(arr, 0x80, 128); flag2 = 1; }",
+   "based": "long _based(_segname(\"_CODE\")) ticks; long far f(void) { return ticks; }",
+   "basedstore": "char _based(_segname(\"_CODE\")) cflag; void far f(void) { cflag = 0; }"
+ },
+ "profiles": [{"profile": "msc600ax", "flags": ["/AL", "/Os", "/Gs", "/Oi"]}]
+}

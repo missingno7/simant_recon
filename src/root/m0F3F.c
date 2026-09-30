@@ -121,7 +121,7 @@ void far DoAntSimR(void)
    the mode and the fight winner).  The grouping of the DoDigOutR case labels is only partly
    decided by the bytes: 5/6/7 and 11/12 merged with 15 and 16 separate is one of several forms
    that give `mov bx,si` for the mode index; the fully merged 15/16 form gives `mov bx,ax`
-   (worker resG, build/workers/resG/v8.py: 108 of 406 groupings are exact). */
+   (worker resG, work/resG/v8.py: 108 of 406 groupings are exact). */
 void far DoNestAntR(int x, int y, int attr)
 {
     int caste;

@@ -1,0 +1,31 @@
+--- a/tests/test_data_gates.py
++++ b/tests/test_data_gates.py
+@@ -176,15 +176,20 @@
+         wrong = asm_obj(OVERLAY_ASM.format(target="_o00_31AD_166A"))
+         self.assertFalse(modules.verify_data_segment(wrong, "_DATA", pl, unit="S00")["exact"])
+ 
+-    def test_vector_only_across_sections(self):
++    def test_vector_for_every_data_pointer(self):
++        # rule VEC-1: a data pointer is never a call, so a vectored procedure (overlay or root)
++        # is addressed through its vector from any unit; unvectored procedures directly
+         x = exe.load()
+-        v = next(v for v in x.vectors if v.section != 0xFFFF)
+-        name = next(n for n, s in match.symbols().items() if s["kind"] == "code" and s.get("unit") == v.unit
+-                    and s["seg"] == v.target_seg and s["off"] == v.target_off)
+-        f = {"target_kind": "external", "target": name}
+-        self.assertEqual(modules._data_target(f, {}, unit=v.unit), (v.target_seg, v.target_off))
+-        other = "S26" if v.unit != "S26" else "S25"
+-        self.assertEqual(modules._data_target(f, {}, unit=other), (exe.MANAGER_SEG, v.offset))
++        for v in (next(v for v in x.vectors if v.section != 0xFFFF),
++                  next(v for v in x.vectors if v.section == 0xFFFF)):
++            name = next(n for n, s in match.symbols().items() if s["kind"] == "code"
++                        and s.get("unit", "root") == v.unit and s["seg"] == v.target_seg
++                        and s["off"] == v.target_off)
++            f = {"target_kind": "external", "target": name}
++            for unit in (v.unit, "S26" if v.unit != "S26" else "S25"):
++                self.assertEqual(modules._data_target(f, {}, unit=unit), (exe.MANAGER_SEG, v.offset))
++        f = {"target_kind": "external", "target": "_f_0250_0114"}    # atexit hook, no vector
++        self.assertEqual(modules._data_target(f, {}, unit="root"), (0x0250, 0x0114))
+ 
+ 
+ class NearOwnCodeOffsets(unittest.TestCase):

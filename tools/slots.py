@@ -24,8 +24,8 @@ under build/cc (removed afterwards); ``--json`` writes under build/ only.
 
 Examples (Git Bash: ``export MSYS_NO_PATHCONV=1`` first):
 
-    python tools/slots.py DoAntMoveY build/workers/big/e4.c
-    python tools/slots.py DoAntMoveY build/workers/big/e4.c --flags /AL /Os /Oe /Og /Zd --sbs
+    python tools/slots.py DoAntMoveY work/big/e4.c
+    python tools/slots.py DoAntMoveY work/big/e4.c --flags /AL /Os /Oe /Og /Zd --sbs
     python tools/slots.py S25:3BA4:0008 draft.c --module "S25;3BA4" --placement CONST=55B3:8942
 
 Analysis only: a slot map explains a mismatch; acceptance is still promote.py.

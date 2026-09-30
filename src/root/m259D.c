@@ -60,7 +60,7 @@ void _fastcall win_DrawBitMapAtObjNum(int obj, int id)
     win_UnlockWin(obj);
 }
 
-/* SCAFFOLD BEGIN: best draft, not exact (see build/workers/win notes).
+/* SCAFFOLD BEGIN: best draft, not exact (see work/win notes).
  * win_DrawBitMap: register/slot allocation residue; its three direct root->overlay far calls
  * (3258:040D, 32B5:000F, 35A6:0007) cannot be bound by the matcher (no RTLink vector).
  */

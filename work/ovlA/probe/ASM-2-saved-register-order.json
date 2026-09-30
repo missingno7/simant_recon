@@ -1,0 +1,8 @@
+{"id": "ASM-2", "question": "Does MSC 6.00(A/AX) ever save SI before DI ('push si; push di' ... 'pop di; pop si'), as the display-driver overlays S00-S03 do?",
+ "header": "",
+ "variants": {"c_si_di": "int far f(int far *p, int n) { register int i; register int far *q = p; int s = 0; for (i = 0; i < n; i++) s += q[i]; return s; }",
+              "inline_asm_si_di": "void far f(char far *src, char far *dst) { int w; _asm { push ds } _asm { lds si, src } _asm { les di, dst } _asm { lodsw } _asm { mov w, ax } _asm { pop ds } }",
+              "inline_asm_di_first": "void far f(char far *src, char far *dst) { int w; _asm { les di, dst } _asm { lds si, src } _asm { lodsw } _asm { mov w, ax } }"},
+ "profiles": [{"profile": "msc600ax", "flags": ["/AL", "/Os", "/Gs"]}, {"profile": "msc600ax", "flags": ["/AL", "/Os", "/Oe", "/Og"]}, {"profile": "msc600a", "flags": ["/AL", "/Ox"]}],
+ "expect": {"c_si_di@0": "push di; push si", "inline_asm_si_di@0": "push di; push si", "inline_asm_di_first@0": "push di; push si",
+            "c_si_di@1": "push di; push si", "inline_asm_si_di@1": "push di; push si", "c_si_di@2": "push di; push si", "inline_asm_si_di@2": "push di; push si"}}

@@ -134,4 +134,4 @@ the candidate's own resolved fixup target (the vector table is layout of the RTL
 like segment frames); it never reads the bytes at the reference site. Vector allocation order:
 vectors 1-10 follow the alphabetical order of the Win16 hook names, 11-18 are the display-driver
 entry points, and from 26AA vectors follow first reference in object-processing order, so 18 were
-declared up front and 118 were created on demand. Scripts and tables: build/workers/vec/.
+declared up front and 118 were created on demand. Scripts and tables: work/vec/.

@@ -1,0 +1,419 @@
+136 vectors
+25F6 root 00BA:01C3 f_00BA_01C3                  refs=1 {'mov ax,off;mov dx,seg': 1} from={'root': 1}
+2600 root 0798:08D5 win_DrawCasteWindow          refs=1 {'mov ax,off;mov dx,seg': 1} from={'root': 1}
+260A root 0250:0EDA f_0250_0EDA                  refs=1 {'mov ax,off;mov dx,seg': 1} from={'root': 1}
+2614 S24  39C7:02DA win_DrawHistoryWindow        refs=1 {'mov ax,off;mov dx,seg': 1} from={'root': 1}
+261E S23  39C7:0075 win_DrawInfoWindow           refs=1 {'mov ax,off;mov dx,seg': 1} from={'root': 1}
+2628 S12  384C:1035 o12_384C_1035                refs=1 {'mov ax,off;mov dx,seg': 1} from={'root': 1}
+2632 root 0798:0751 win_DrawModeWindow           refs=1 {'mov ax,off;mov dx,seg': 1} from={'root': 1}
+263C S13  384C:02D7 win_DrawYardWindow           refs=1 {'mov ax,off;mov dx,seg': 1} from={'root': 1}
+2646 root 00BA:0228 f_00BA_0228                  refs=1 {'mov ax,off;mov dx,seg': 1} from={'root': 1}
+2650 root 00BA:0211 f_00BA_0211                  refs=1 {'mov ax,off;mov dx,seg': 1} from={'root': 1}
+265A S02  3126:0000 o02_3126_0000                refs=1 {'callfar': 1} from={'root': 1}
+2664 S01  3126:0068 o01_3126_0068                refs=1 {'callfar': 1} from={'root': 1}
+266E S01  3126:007D o01_3126_007D                refs=1 {'callfar': 1} from={'root': 1}
+2678 S00  31AD:1AE7 o00_31AD_1AE7                refs=1 {'callfar': 1} from={'root': 1}
+2682 S00  31AD:2AE5 o00_31AD_2AE5                refs=1 {'callfar': 1} from={'root': 1}
+268C S00  31AD:2AB4 o00_31AD_2AB4                refs=1 {'callfar': 1} from={'root': 1}
+2696 S03  3126:0140 o03_3126_0140                refs=1 {'callfar': 1} from={'root': 1}
+26A0 S01  3126:010A o01_3126_010A                refs=1 {'callfar': 1} from={'root': 1}
+26AA S12  384C:0008 InitMapFunctions             refs=1 {'callfar': 1} from={'root': 1}
+26B4 S13  384C:01BC EraseYardCursor              refs=1 {'callfar': 1} from={'root': 1}
+26BE S12  384C:036F EraseMapCursor               refs=3 {'callfar': 3} from={'root': 1, 'S04': 2}
+26C8 S19  384C:0000 o19_384C_0000                refs=1 {'callfar': 1} from={'root': 1}
+26D2 S08  35F5:1136 AddRedAnts                   refs=1 {'callfar': 1} from={'root': 1}
+26DC S08  35F5:1080 AddBlackAnts                 refs=3 {'callfar': 3} from={'root': 3}
+26E6 S13  384C:0446 DrawYard                     refs=2 {'callfar': 2} from={'root': 1, 'S16': 1}
+26F0 S12  384C:100A o12_384C_100A                refs=6 {'callfar': 6} from={'root': 4, 'S22': 2}
+26FA S14  384C:0B6A PictStrnDialog               refs=34 {'callfar': 34} from={'root': 20, 'S06': 6, 'S07': 2, 'S22': 5, 'S25': 1}
+2704 S08  35F5:0050 RandWorld                    refs=1 {'callfar': 1} from={'root': 1}
+270E S13  384C:0472 UpdateYard                   refs=2 {'callfar': 2} from={'root': 2}
+2718 S13  384C:128D InvertPatch                  refs=3 {'callfar': 3} from={'root': 3}
+2722 S08  35F5:0ED5 AddFood                      refs=3 {'callfar': 3} from={'root': 2, 'S12': 1}
+272C S05  35F5:0642 DoWarnSetB                   refs=1 {'callfar': 1} from={'root': 1}
+2736 S05  35F5:0684 DoHealthSetY                 refs=1 {'callfar': 1} from={'root': 1}
+2740 S05  35F5:0000 EditScentMenu                refs=1 {'callfar': 1} from={'root': 1}
+274A S11  35F5:009E SetPause                     refs=1 {'callfar': 1} from={'root': 1}
+2754 S05  35F5:0064 EditToolsMenu                refs=1 {'callfar': 1} from={'root': 1}
+275E S14  384C:04FB DoWinHelp                    refs=6 {'callfar': 6} from={'root': 3, 'S12': 1, 'S13': 1, 'S24': 1}
+2768 S04  35F5:075F OpenMiniMapWin               refs=1 {'callfar': 1} from={'root': 1}
+2772 S22  39C7:0000 processEdit                  refs=2 {'callfar': 2} from={'root': 1, 'S04': 1}
+277C S08  35F5:0000 InitSimVars                  refs=1 {'callfar': 1} from={'root': 1}
+2786 S15  384C:0152 o15_384C_0152                refs=3 {'callfar': 3} from={'root': 3}
+2790 S14  384C:0DE5 EndGameDialog                refs=1 {'callfar': 1} from={'root': 1}
+279A S25  3BA4:0008 DoAntMoveY                   refs=1 {'callfar': 1} from={'root': 1}
+27A4 S25  3BA4:07CE DoAntSimY                    refs=1 {'callfar': 1} from={'root': 1}
+27AE S25  39C7:0000 o25_39C7_0000                refs=1 {'callfar': 1} from={'root': 1}
+27B8 S06  35F5:0173 o06_35F5_0173                refs=1 {'callfar': 1} from={'root': 1}
+27C2 S24  39C7:0608 HistUpdate                   refs=1 {'callfar': 1} from={'root': 1}
+27CC S22  39C7:19E5 DoTroph                      refs=5 {'callfar': 5} from={'root': 4, 'S25': 1}
+27D6 S25  3BA4:0DFB o25_3BA4_0DFB                refs=9 {'callfar': 9} from={'root': 9}
+27E0 S22  39C7:0D21 YellowDeath                  refs=11 {'callfar': 11} from={'root': 4, 'S06': 4, 'S25': 3}
+27EA S25  39C7:0CBD o25_39C7_0CBD                refs=2 {'callfar': 2} from={'root': 2}
+27F4 S22  39C7:0405 DoLaserFire                  refs=1 {'callfar': 1} from={'root': 1}
+27FE S08  35F5:0E67 fracSIN                      refs=1 {'callfar': 1} from={'root': 1}
+2808 S08  35F5:0EBB fracCOS                      refs=1 {'callfar': 1} from={'root': 1}
+2812 S14  384C:0ACD SetDefaultWindPrompt         refs=5 {'callfar': 5} from={'root': 2, 'S09': 1, 'S15': 1, 'S22': 1}
+281C S22  39C7:1A57 SetAlarmDropState            refs=2 {'callfar': 2} from={'root': 1, 'S25': 1}
+2826 S11  35F5:0088 PauseGame                    refs=5 {'callfar': 5} from={'root': 4, 'S09': 1}
+2830 S22  39C7:07FD ResetYellowVars              refs=4 {'callfar': 4} from={'root': 1, 'S08': 1, 'S25': 2}
+283A S22  39C7:188D YellowDialog                 refs=1 {'callfar': 1} from={'root': 1}
+2844 S25  3BA4:1035 o25_3BA4_1035                refs=1 {'callfar': 1} from={'root': 1}
+284E S13  384C:03F8 o13_384C_03F8                refs=1 {'callfar': 1} from={'root': 1}
+2858 S15  384C:03C6 NewGame                      refs=4 {'callfar': 4} from={'root': 1, 'S11': 1, 'S14': 1, 'S19': 1}
+2862 S14  384C:10E5 CustomerIDDialog             refs=1 {'callfar': 1} from={'root': 1}
+286C S16  384C:0472 ShowIntro                    refs=1 {'callfar': 1} from={'root': 1}
+2876 S15  384C:0017 LoadMonoPats                 refs=1 {'callfar': 1} from={'root': 1}
+2880 S20  39F1:000A IBMInitStuff                 refs=1 {'callfar': 1} from={'root': 1}
+288A S15  384C:0125 o15_384C_0125                refs=1 {'callfar': 1} from={'root': 1}
+2894 S15  384C:0000 o15_384C_0000                refs=1 {'jmpfar': 1} from={'S00': 1}
+289E S04  35F5:0000 MapToolsMenu                 refs=1 {'callfar': 1} from={'S12': 1}
+28A8 S04  35F5:025A MapAreaEvent                 refs=1 {'callfar': 1} from={'S12': 1}
+28B2 S05  35F5:0629 SetExpTool                   refs=2 {'callfar': 2} from={'S04': 2}
+28BC S08  35F5:0A00 InitYelloAnt                 refs=2 {'callfar': 2} from={'S04': 1, 'S05': 1}
+28C6 S05  3663:0004 DoExpMenu                    refs=1 {'callfar': 1} from={'S04': 1}
+28D0 S12  384C:02A2 DrawMapCursor                refs=2 {'callfar': 2} from={'S04': 2}
+28DA S12  384C:0706 o12_384C_0706                refs=1 {'callfar': 1} from={'S04': 1}
+28E4 S12  384C:080E o12_384C_080E                refs=1 {'callfar': 1} from={'S04': 1}
+28EE S12  384C:0432 o12_384C_0432                refs=1 {'callfar': 1} from={'S04': 1}
+28F8 S05  35F5:04D3 AntMenu                      refs=1 {'callfar': 1} from={'S22': 1}
+2902 S05  35F5:06C6 DoTab                        refs=1 {'callfar': 1} from={'S19': 1}
+290C S05  35F5:025C MagnifyMenu                  refs=2 {'callfar': 2} from={'S22': 2}
+2916 S22  39C7:1CD9 YellowCommand                refs=2 {'callfar': 2} from={'S05': 1, 'S19': 1}
+2920 S06  35F5:0000 o06_35F5_0000                refs=1 {'callfar': 1} from={'S08': 1}
+292A S16  384C:0000 DrawSimPayoff                refs=2 {'callfar': 2} from={'S06': 1, 'S07': 1}
+2934 S07  35F5:0000 CheatKeys                    refs=1 {'callfar': 1} from={'S19': 1}
+293E S08  35F5:0DA0 MakeRedQueen                 refs=2 {'callfar': 2} from={'S07': 1, 'S22': 1}
+2948 S08  35F5:0C4C MakeBlkQueen                 refs=2 {'callfar': 2} from={'S07': 1, 'S22': 1}
+2952 S08  35F5:059B RandYard                     refs=2 {'callfar': 2} from={'S09': 1, 'S15': 1}
+295C S18  384C:0000 MakeMap                      refs=1 {'callfar': 1} from={'S08': 1}
+2966 S24  39C7:01B8 ClearHistory                 refs=2 {'callfar': 2} from={'S08': 2}
+2970 S09  35F5:0000 LoadGame                     refs=2 {'callfar': 2} from={'S15': 1, 'S19': 1}
+297A S09  35F5:0188 o09_35F5_0188                refs=2 {'callfar': 2} from={'S15': 1, 'S19': 1}
+2984 S15  384C:0239 o15_384C_0239                refs=1 {'callfar': 1} from={'S09': 1}
+298E S11  35F5:0000 SetMenuEntries               refs=3 {'callfar': 3} from={'S09': 1, 'S20': 2}
+2998 S15  384C:037F SetDefaultWindows            refs=1 {'callfar': 1} from={'S09': 1}
+29A2 S11  35F5:018D ProcMenu                     refs=1 {'callfar': 1} from={'S19': 1}
+29AC S16  384C:01E1 AboutDialog                  refs=1 {'callfar': 1} from={'S11': 1}
+29B6 S14  384C:05C6 ScoreDialog                  refs=2 {'callfar': 2} from={'S11': 1, 'S12': 1}
+29C0 S23  39C7:0C19 OpenInfoWindow               refs=2 {'callfar': 2} from={'S11': 1, 'S12': 1}
+29CA S24  39C7:0000 OpenHistoryWindow            refs=2 {'callfar': 2} from={'S11': 1, 'S12': 1}
+29D4 S12  384C:0160 ProcMapEvent                 refs=1 {'callfar': 1} from={'S19': 1}
+29DE S14  384C:07ED DrawCastePopUp               refs=1 {'callfar': 1} from={'S12': 1}
+29E8 S13  384C:0000 ProcYardEvent                refs=1 {'callfar': 1} from={'S19': 1}
+29F2 S14  384C:0FA2 SpiderDialog                 refs=1 {'callfar': 1} from={'S22': 1}
+29FC S14  384C:0491 DoScenario                   refs=1 {'callfar': 1} from={'S15': 1}
+2A06 S15  384C:01EE MenuQuit                     refs=2 {'callfar': 2} from={'S14': 1, 'S19': 1}
+2A10 S26  39C7:0000 o26_39C7_0000                refs=2 {'callfar': 2} from={'root': 1, 'S15': 1}
+2A1A S10  35F5:01C3 o10_35F5_01C3                refs=2 {'callfar': 2} from={'root': 1, 'S19': 1}
+2A24 S24  39C7:0012 ProcHistoryEvent             refs=1 {'callfar': 1} from={'S19': 1}
+2A2E S23  39C7:0F50 ProcInfoEvent                refs=1 {'callfar': 1} from={'S19': 1}
+2A38 S22  39C7:1B0B YellowCommandKey             refs=2 {'callfar': 2} from={'S19': 2}
+2A42 S25  3BA4:0999 o25_3BA4_0999                refs=2 {'callfar': 2} from={'S22': 2}
+2A4C S25  3BA4:0C01 o25_3BA4_0C01                refs=1 {'callfar': 1} from={'S22': 1}
+2A56 S21  39C7:0000 o21_39C7_0000                refs=2 {'callfar': 2} from={'root': 2}
+2A60 S21  39C7:016D o21_39C7_016D                refs=2 {'callfar': 2} from={'root': 2}
+2A6A S10  35F5:0000 o10_35F5_0000                refs=2 {'callfar': 2} from={'root': 2}
+2A74 S10  35F5:0A63 o10_35F5_0A63                refs=1 {'callfar': 1} from={'root': 1}
+2A7E S20  39C7:0000 o20_39C7_0000                refs=1 {'callfar': 1} from={'root': 1}
+2A88 S20  39C7:0001 o20_39C7_0001                refs=1 {'callfar': 1} from={'root': 1}
+2A92 S20  39C7:0002 o20_39C7_0002                refs=1 {'callfar': 1} from={'root': 1}
+2A9C S20  39C7:0003 o20_39C7_0003                refs=1 {'callfar': 1} from={'root': 1}
+2AA6 S20  39C7:0004 o20_39C7_0004                refs=1 {'callfar': 1} from={'root': 1}
+2AB0 S20  39C7:0005 o20_39C7_0005                refs=1 {'callfar': 1} from={'root': 1}
+2ABA S20  39C7:0006 o20_39C7_0006                refs=1 {'callfar': 1} from={'root': 1}
+2AC4 S20  39C7:0008 o20_39C7_0008                refs=1 {'callfar': 1} from={'root': 1}
+2ACE S20  39C7:0069 o20_39C7_0069                refs=1 {'callfar': 1} from={'root': 1}
+2AD8 S20  39C7:00FF o20_39C7_00FF                refs=1 {'callfar': 1} from={'root': 1}
+2AE2 S20  39C7:0160 o20_39C7_0160                refs=1 {'callfar': 1} from={'root': 1}
+2AEC S20  39C7:01C1 o20_39C7_01C1                refs=1 {'callfar': 1} from={'root': 1}
+2AF6 S20  39C7:0211 o20_39C7_0211                refs=1 {'callfar': 1} from={'root': 1}
+2B00 S20  39C7:0212 o20_39C7_0212                refs=1 {'callfar': 1} from={'root': 1}
+2B0A S17  384C:0000 o17_384C_0000                refs=1 {'callfar': 1} from={'S20': 1}
+2B14 S17  384C:0143 o17_384C_0143                refs=2 {'callfar': 2} from={'S20': 2}
+2B1E S17  384C:0039 o17_384C_0039                refs=2 {'callfar': 2} from={'S20': 2}
+2B28 S17  384C:0169 o17_384C_0169                refs=1 {'callfar': 1} from={'S20': 1}
+2B32 S26  39C7:040F o26_39C7_040F                refs=2 {'callfar': 2} from={'root': 2}
+2B3C S26  39C7:0671 o26_39C7_0671                refs=1 {'callfar': 1} from={'root': 1}
+
+== far code pointers that are not call/jmp far ==
+root 00BA:0067 mov ax,off;mov dx,seg  seg=2CFF off=263C VECTOR 263C -> S13 win_DrawYardWindow
+root 00BA:0094 mov ax,off;mov dx,seg  seg=2CFF off=25F6 VECTOR 25F6 -> root f_00BA_01C3
+root 00BA:0037 mov ax,off;mov dx,seg  seg=2CFF off=2614 VECTOR 2614 -> S24 win_DrawHistoryWindow
+root 00BA:0047 mov ax,off;mov dx,seg  seg=2CFF off=2632 VECTOR 2632 -> root win_DrawModeWindow
+root 00BA:00A1 mov ax,off;mov dx,seg  seg=2CFF off=2650 VECTOR 2650 -> root f_00BA_0211
+root 00BA:0018 mov ax,off;mov dx,seg  seg=2CFF off=260A VECTOR 260A -> root f_0250_0EDA
+root 00BA:0027 mov ax,off;mov dx,seg  seg=2CFF off=2628 VECTOR 2628 -> S12 o12_384C_1035
+root 00BA:0087 mov ax,off;mov dx,seg  seg=2CFF off=2646 VECTOR 2646 -> root f_00BA_0228
+root 00BA:0057 mov ax,off;mov dx,seg  seg=2CFF off=2600 VECTOR 2600 -> root win_DrawCasteWindow
+root 00BA:0077 mov ax,off;mov dx,seg  seg=2CFF off=261E VECTOR 261E -> S23 win_DrawInfoWindow
+root 00F8:0590 mov ax,off;mov dx,seg  seg=00F8 off=0543 f_00F8_0543
+root 0250:01D3 mov ax,off;mov dx,seg  seg=0250 off=0114 f_0250_0114
+root 171C:00E6 mov ax,off;mov dx,seg  seg=171C off=0020 f_171C_0020
+root 171C:09BD mov ax,off;mov dx,seg  seg=171C off=0678 f_171C_0678
+root 19DC:0132 mov ax,off;mov dx,seg  seg=19DC off=0008 f_19DC_0008
+root 1B73:0037 other                  seg=1B73 off= 
+root 1B73:007A mov r0,seg             seg=1B73 off= 
+root 1FD2:0307 mov ax,off;mov dx,seg  seg=1B73 off=0D4B f_1B73_0D4B
+root 205F:02DB other                  seg=35A6 off= 
+root 205F:0235 other                  seg=32B5 off= 
+root 205F:02B0 other                  seg=3258 off= 
+root 205F:027A other                  seg=3258 off= 
+root 205F:02ED other                  seg=35A6 off= 
+root 205F:0247 other                  seg=32B5 off= 
+root 205F:028C other                  seg=3258 off= 
+root 205F:02FF other                  seg=35A6 off= 
+root 205F:0259 other                  seg=32B5 off= 
+root 205F:02C9 other                  seg=35A6 off= 
+root 205F:0223 other                  seg=32B5 off= 
+root 205F:029E other                  seg=3258 off= 
+root 208F:0534 mov r0,seg             seg=1B73 off= 
+root 277E:009D mov ax,off;mov dx,seg  seg=0000 off=0000 f_0000_0000
+root 28BC:0441 mov r0,seg             seg=28BC off= 
+root 28BC:047E other                  seg=28BC off= 
+root 28BC:049B other                  seg=28BC off= 
+root 2CFF:0B71 other                  seg=3126 off= 
+root 2CFF:0B83 other                  seg=3126 off= 
+root 2CFF:0B95 other                  seg=3126 off= 
+root 2CFF:0BA7 other                  seg=3126 off= 
+root 2CFF:0BB9 other                  seg=35F5 off= 
+root 2CFF:0BCB other                  seg=35F5 off= 
+root 2CFF:0BDD other                  seg=35F5 off= 
+root 2CFF:0BEF other                  seg=35F5 off= 
+root 2CFF:0C01 other                  seg=35F5 off= 
+root 2CFF:0C13 other                  seg=35F5 off= 
+root 2CFF:0C25 other                  seg=35F5 off= 
+root 2CFF:0C37 other                  seg=35F5 off= 
+root 2CFF:0C49 other                  seg=384C off= 
+root 2CFF:0C5B other                  seg=384C off= 
+root 2CFF:0C6D other                  seg=384C off= 
+root 2CFF:0C7F other                  seg=384C off= 
+root 2CFF:0C91 other                  seg=384C off= 
+root 2CFF:0CA3 other                  seg=384C off= 
+root 2CFF:0CB5 other                  seg=384C off= 
+root 2CFF:0CC7 other                  seg=384C off= 
+root 2CFF:0CD9 other                  seg=39C7 off= 
+root 2CFF:0CEB other                  seg=39C7 off= 
+root 2CFF:0CFD other                  seg=39C7 off= 
+root 2CFF:0D0F other                  seg=39C7 off= 
+root 2CFF:0D21 other                  seg=39C7 off= 
+root 2CFF:0D33 other                  seg=39C7 off= 
+root 2CFF:0D45 other                  seg=39C7 off= 
+root 2CFF:0230 mov r1,seg             seg=2CFF off= 
+root 2CFF:04BB mov r0,seg             seg=2CFF off= 
+root 2CFF:04CB mov r0,seg             seg=2CFF off= 
+root 2CFF:0508 mov r3,seg             seg=2CFF off= 
+root 2CFF:0535 mov r2,seg             seg=2CFF off= 
+root 2CFF:0579 mov r0,seg             seg=2CFF off= 
+root 2CFF:0583 other                  seg=2CFF off= 
+root 2CFF:06B1 mov r0,seg             seg=2CFF off= 
+root 2CFF:06FE mov r3,seg             seg=2CFF off= 
+root 2CFF:0876 mov r0,seg             seg=2CFF off= 
+root 2CFF:08B3 mov r0,seg             seg=2CFF off= 
+root 2CFF:08F9 mov r0,seg             seg=2CFF off= 
+root 2CFF:0958 mov r0,seg             seg=2CFF off= 
+root 2CFF:09C9 other                  seg=2FB3 off= 
+root 2FB3:0BA1 other                  seg=2FB3 off= 
+root 2FB3:11C6 other                  seg=2FB3 off= 
+root 2FB3:0295 other                  seg=2FB3 off= 
+root 2FB3:02B6 other                  seg=2FB3 off= 
+root 2FB3:053F other                  seg=2FB3 off= 
+root 2FB3:1288 other                  seg=2FB3 off= 
+S00  31AD:000C mov r0,seg             seg=31AD off= 
+S00  31AD:012A mov r0,seg             seg=31AD off= 
+S00  31AD:0384 mov r0,seg             seg=31AD off= 
+S00  31AD:16B1 mov r0,seg             seg=31AD off= 
+S00  31AD:16EC mov r0,seg             seg=31AD off= 
+S01  3126:0254 mov r0,seg             seg=3126 off= 
+S02  3126:009E mov r0,seg             seg=3126 off= 
+S02  3126:018D mov r0,seg             seg=3126 off= 
+S02  3126:0284 mov r0,seg             seg=3126 off= 
+S03  3126:0200 mov r0,seg             seg=3126 off= 
+S03  3126:03CA mov r0,seg             seg=3126 off= 
+S03  3126:05A4 mov r0,seg             seg=3126 off= 
+S12  384C:010F other                  seg=328E off= 
+S12  384C:0149 other                  seg=3126 off= 
+S12  384C:00CD mov ax,off;mov dx,seg  seg=3253 off=0008 ovl 3253:0008
+S12  384C:00B1 other                  seg=3126 off= 
+S12  384C:0121 other                  seg=328E off= 
+S12  384C:015B other                  seg=3126 off= 
+S12  384C:009F other                  seg=3126 off= 
+S20  39F1:02B2 mov ax,off;mov dx,seg  seg=208F off=058B f_208F_058B
+S21  39C7:016B other                  seg=39C7 off= 
+S27  55B7:6898 data                   seg=277E off=07FF f_277E_07FF
+S27  55B7:2168 data                   seg=3126 off=0040 ovl 3126:0040
+S27  55B7:216C data                   seg=3126 off=005C ovl 3126:005C
+S27  55B7:2170 data                   seg=3126 off=0079 ovl 3126:0079
+S27  55B7:2174 data                   seg=3126 off=027C ovl 3126:027C
+S27  55B7:2178 data                   seg=3126 off=0185 ovl 3126:0185
+S27  55B7:217C data                   seg=3126 off=03B1 ovl 3126:03B1
+S27  55B7:2180 data                   seg=3126 off=03D4 ovl 3126:03D4
+S27  55B7:2184 data                   seg=3126 off=03D4 ovl 3126:03D4
+S27  55B7:2188 data                   seg=3126 off=03EF ovl 3126:03EF
+S27  55B7:218C data                   seg=3126 off=0505 ovl 3126:0505
+S27  55B7:2190 data                   seg=3126 off=0512 ovl 3126:0512
+S27  55B7:2194 data                   seg=3126 off=0636 ovl 3126:0636
+S27  55B7:2198 data                   seg=3126 off=0643 ovl 3126:0643
+S27  55B7:219C data                   seg=3126 off=04C6 ovl 3126:04C6
+S27  55B7:21A0 data                   seg=3126 off=0490 ovl 3126:0490
+S27  55B7:21A4 data                   seg=3126 off=04B4 ovl 3126:04B4
+S27  55B7:21A8 data                   seg=3126 off=04A2 ovl 3126:04A2
+S27  55B7:21AC data                   seg=3126 off=073A ovl 3126:073A
+S27  55B7:21B0 data                   seg=3126 off=0747 ovl 3126:0747
+S27  55B7:21B4 data                   seg=3126 off=0096 ovl 3126:0096
+S27  55B7:21B8 data                   seg=3126 off=0051 ovl 3126:0051
+S27  55B7:21BC data                   seg=3126 off=084E ovl 3126:084E
+S27  55B7:21C0 data                   seg=3126 off=0857 ovl 3126:0857
+S27  55B7:21C4 data                   seg=3126 off=04D8 ovl 3126:04D8
+S27  55B7:21C8 data                   seg=3126 off=0860 ovl 3126:0860
+S27  55B7:74D6 data                   seg=29D6 off=0082 f_29D6_0082
+S27  55B7:20A6 data                   seg=31AD off=0004 ovl 31AD:0004
+S27  55B7:2072 data                   seg=31AD off=0522 ovl 31AD:0522
+S27  55B7:74EA data                   seg=290D off=026C f_290D_026C
+S27  55B7:62B6 data                   seg=20E8 off=0000 f_20E8_0000
+S27  55B7:62B2 data                   seg=20E8 off=0000 f_20E8_0000
+S27  55B7:62AE data                   seg=20E8 off=0000 f_20E8_0000
+S27  55B7:62AA data                   seg=20E8 off=0000 f_20E8_0000
+S27  55B7:62A6 data                   seg=20E8 off=0000 f_20E8_0000
+S27  55B7:62A2 data                   seg=20E8 off=0000 f_20E8_0000
+S27  55B7:74A8 data                   seg=293A off=0059 f_293A_0059
+S27  55B7:687C data                   seg=277E off=017D f_277E_017D
+S27  55B7:7502 data                   seg=295C off=053D f_295C_053D
+S27  55B7:209A data                   seg=31AD off=0636 ovl 31AD:0636
+S27  55B7:206A data                   seg=31AD off=0122 ovl 31AD:0122
+S27  55B7:17F8 data                   seg=004A off=010A f_004A_010A
+S27  55B7:2086 data                   seg=31AD off=1206 ovl 31AD:1206
+S27  55B7:68B0 data                   seg=277E off=0965 f_277E_0965
+S27  55B7:6888 data                   seg=277E off=040E f_277E_040E
+S27  55B7:3DB6 data                   seg=1B4E off=000C f_1B4E_000C
+S27  55B7:20DC data                   seg=3126 off=0167 ovl 3126:0167
+S27  55B7:20E0 data                   seg=3126 off=019A ovl 3126:019A
+S27  55B7:20E4 data                   seg=3126 off=01B2 ovl 3126:01B2
+S27  55B7:20E8 data                   seg=3126 off=024C ovl 3126:024C
+S27  55B7:20EC data                   seg=3126 off=024C ovl 3126:024C
+S27  55B7:20F0 data                   seg=3126 off=0414 ovl 3126:0414
+S27  55B7:20F4 data                   seg=3126 off=0437 ovl 3126:0437
+S27  55B7:20F8 data                   seg=3126 off=0437 ovl 3126:0437
+S27  55B7:20FC data                   seg=3126 off=045D ovl 3126:045D
+S27  55B7:2100 data                   seg=3126 off=073C ovl 3126:073C
+S27  55B7:2104 data                   seg=3126 off=0749 ovl 3126:0749
+S27  55B7:2108 data                   seg=3126 off=0516 ovl 3126:0516
+S27  55B7:210C data                   seg=3126 off=0523 ovl 3126:0523
+S27  55B7:2110 data                   seg=3126 off=0B26 ovl 3126:0B26
+S27  55B7:2114 data                   seg=3126 off=0A20 ovl 3126:0A20
+S27  55B7:2118 data                   seg=3126 off=0ACC ovl 3126:0ACC
+S27  55B7:211C data                   seg=3126 off=0A7A ovl 3126:0A7A
+S27  55B7:2120 data                   seg=3126 off=0C7A ovl 3126:0C7A
+S27  55B7:2124 data                   seg=3126 off=0C87 ovl 3126:0C87
+S27  55B7:2128 data                   seg=3126 off=01CA ovl 3126:01CA
+S27  55B7:212C data                   seg=3126 off=0F78 ovl 3126:0F78
+S27  55B7:2130 data                   seg=3126 off=0F66 ovl 3126:0F66
+S27  55B7:2134 data                   seg=3126 off=0F6F ovl 3126:0F6F
+S27  55B7:2138 data                   seg=3126 off=0C53 ovl 3126:0C53
+S27  55B7:213C data                   seg=3126 off=109D ovl 3126:109D
+S27  55B7:74FA data                   seg=29D6 off=0197 f_29D6_0197
+S27  55B7:208A data                   seg=31AD off=1213 ovl 31AD:1213
+S27  55B7:1800 data                   seg=004A off=0172 f_004A_0172
+S27  55B7:6894 data                   seg=277E off=0760 f_277E_0760
+S27  55B7:74DA data                   seg=29D6 off=00D9 f_29D6_00D9
+S27  55B7:2092 data                   seg=31AD off=062E ovl 31AD:062E
+S27  55B7:74CA data                   seg=290D off=0193 f_290D_0193
+S27  55B7:74CE data                   seg=2815 off=0165 f_2815_0165
+S27  55B7:74FE data                   seg=295C off=04FB f_295C_04FB
+S27  55B7:2238 data                   seg=3126 off=019E ovl 3126:019E
+S27  55B7:223C data                   seg=3126 off=01BE ovl 3126:01BE
+S27  55B7:2240 data                   seg=3126 off=01DB ovl 3126:01DB
+S27  55B7:2244 data                   seg=3126 off=059C ovl 3126:059C
+S27  55B7:2248 data                   seg=3126 off=03C2 ovl 3126:03C2
+S27  55B7:224C data                   seg=3126 off=070A ovl 3126:070A
+S27  55B7:2250 data                   seg=3126 off=072D ovl 3126:072D
+S27  55B7:2254 data                   seg=3126 off=072D ovl 3126:072D
+S27  55B7:2258 data                   seg=3126 off=074E ovl 3126:074E
+S27  55B7:225C data                   seg=3126 off=091F ovl 3126:091F
+S27  55B7:2260 data                   seg=3126 off=092C ovl 3126:092C
+S27  55B7:2264 data                   seg=3126 off=0C11 ovl 3126:0C11
+S27  55B7:2268 data                   seg=3126 off=0C1E ovl 3126:0C1E
+S27  55B7:226C data                   seg=3126 off=08B8 ovl 3126:08B8
+S27  55B7:2270 data                   seg=3126 off=080A ovl 3126:080A
+S27  55B7:2274 data                   seg=3126 off=087E ovl 3126:087E
+S27  55B7:2278 data                   seg=3126 off=0844 ovl 3126:0844
+S27  55B7:227C data                   seg=3126 off=104D ovl 3126:104D
+S27  55B7:2280 data                   seg=3126 off=105A ovl 3126:105A
+S27  55B7:2284 data                   seg=3126 off=01F8 ovl 3126:01F8
+S27  55B7:2288 data                   seg=3126 off=01B3 ovl 3126:01B3
+S27  55B7:228C data                   seg=3126 off=1180 ovl 3126:1180
+S27  55B7:2290 data                   seg=3126 off=1189 ovl 3126:1189
+S27  55B7:2294 data                   seg=3126 off=08F2 ovl 3126:08F2
+S27  55B7:2298 data                   seg=3126 off=1192 ovl 3126:1192
+S27  55B7:5FF2 data                   seg=1B73 off=0D4B f_1B73_0D4B
+S27  55B7:5FE0 data                   seg=1B73 off=0D4B f_1B73_0D4B
+S27  55B7:206E data                   seg=31AD off=037C ovl 31AD:037C
+S27  55B7:74A4 data                   seg=293A off=002D f_293A_002D
+S27  55B7:6878 data                   seg=277E off=0179 f_277E_0179
+S27  55B7:180C data                   seg=004A off=0052 f_004A_0052
+S27  55B7:79C2 data                   seg=29F4 off=02C6 __fptrap
+S27  55B7:79C6 data                   seg=29F4 off=02C6 __fptrap
+S27  55B7:79CA data                   seg=29F4 off=02C6 __fptrap
+S27  55B7:79CE data                   seg=29F4 off=02C6 __fptrap
+S27  55B7:79D2 data                   seg=29F4 off=02C6 __fptrap
+S27  55B7:79D6 data                   seg=29F4 off=02C6 __fptrap
+S27  55B7:207E data                   seg=31AD off=0CF9 ovl 31AD:0CF9
+S27  55B7:74BC data                   seg=293A off=017F f_293A_017F
+S27  55B7:68A0 data                   seg=277E off=0958 f_277E_0958
+S27  55B7:6884 data                   seg=277E off=034F f_277E_034F
+S27  55B7:36B4 data                   seg=19A9 off=0008 f_19A9_0008
+S27  55B7:751E data                   seg=295C off=0578 f_295C_0578
+S27  55B7:2082 data                   seg=31AD off=0D06 ovl 31AD:0D06
+S27  55B7:17FC data                   seg=004A off=000A f_004A_000A
+S27  55B7:68B8 data                   seg=277E off=0952 f_277E_0952
+S27  55B7:688C data                   seg=277E off=0606 f_277E_0606
+S27  55B7:20B6 data                   seg=31AD off=063C ovl 31AD:063C
+S27  55B7:1804 data                   seg=004A off=008A f_004A_008A
+S27  55B7:74F2 data                   seg=29D6 off=0148 f_29D6_0148
+S27  55B7:20AE data                   seg=31AD off=0647 ovl 31AD:0647
+S27  55B7:17F4 data                   seg=004A off=00D2 f_004A_00D2
+S27  55B7:74E2 data                   seg=295C off=04A2 f_295C_04A2
+S27  55B7:74EE data                   seg=2815 off=024D f_2815_024D
+S27  55B7:74B0 data                   seg=293A off=015E f_293A_015E
+S27  55B7:74D2 data                   seg=29D6 off=000A f_29D6_000A
+S27  55B7:2076 data                   seg=31AD off=11FB ovl 31AD:11FB
+S27  55B7:74A0 data                   seg=293A off=0029 f_293A_0029
+S27  55B7:749C data                   seg=293A off=0029 f_293A_0029
+S27  55B7:74B8 data                   seg=293A off=017C f_293A_017C
+S27  55B7:6004 data                   seg=1B73 off=030F f_1B73_030F
+S27  55B7:5FCE data                   seg=1B73 off=030F f_1B73_030F
+S27  55B7:607A data                   seg=1B73 off=030F f_1B73_030F
+S27  55B7:68BC data                   seg=277E off=0938 f_277E_0938
+S27  55B7:68AC data                   seg=277E off=0938 f_277E_0938
+S27  55B7:68A8 data                   seg=277E off=0938 f_277E_0938
+S27  55B7:68A4 data                   seg=277E off=0938 f_277E_0938
+S27  55B7:689C data                   seg=277E off=0938 f_277E_0938
+S27  55B7:6880 data                   seg=277E off=01FA f_277E_01FA
+S27  55B7:7522 data                   seg=295C off=0577 f_295C_0577
+S27  55B7:751A data                   seg=295C off=0577 f_295C_0577
+S27  55B7:7516 data                   seg=295C off=0577 f_295C_0577
+S27  55B7:7512 data                   seg=295C off=0577 f_295C_0577
+S27  55B7:750A data                   seg=295C off=0577 f_295C_0577
+S27  55B7:208E data                   seg=31AD off=062A ovl 31AD:062A
+S27  55B7:1810 data                   seg=004A off=0253 f_004A_0253
+S27  55B7:74B4 data                   seg=293A off=0121 f_293A_0121
+S27  55B7:68B4 data                   seg=277E off=0939 f_277E_0939
+S27  55B7:6890 data                   seg=277E off=04E8 f_277E_04E8
+S27  55B7:207A data                   seg=31AD off=0550 ovl 31AD:0550
+S27  55B7:74F6 data                   seg=29D6 off=015D f_29D6_015D
+S27  55B7:2096 data                   seg=31AD off=0632 ovl 31AD:0632
+S27  55B7:1808 data                   seg=004A off=01E9 f_004A_01E9
+S27  55B7:74DE data                   seg=295C off=043E f_295C_043E
+S27  55B7:750E data                   seg=2815 off=0275 f_2815_0275
+S27  55B7:205A data                   seg=31AD off=1659 ovl 31AD:1659
+S27  55B7:205E data                   seg=31AD off=166A ovl 31AD:166A
+S27  55B7:2062 data                   seg=31AD off=168C ovl 31AD:168C
+S27  55B7:2066 data                   seg=31AD off=16A9 ovl 31AD:16A9
+S27  55B7:209E data                   seg=31AD off=148C ovl 31AD:148C
+S27  55B7:20A2 data                   seg=31AD off=1499 ovl 31AD:1499
+S27  55B7:20AA data                   seg=31AD off=1481 ovl 31AD:1481
+S27  55B7:20B2 data                   seg=31AD off=18BA ovl 31AD:18BA
+S27  55B7:20BA data                   seg=31AD off=1950 ovl 31AD:1950
+S27  55B7:74AC data                   seg=293A off=0087 f_293A_0087
+S27  5D90:0002 data                   seg=29F4 off=0EF2 _flushall
+S27  5D90:0C46 data                   seg=1B73 off=50F6 ?1B73:50F6

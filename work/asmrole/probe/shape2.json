@@ -1,0 +1,13 @@
+{"id": "ASMROLE-SHAPE2", "question": "inline-asm frames, _loadds/_saveregs, MSC 5.10 save order, intrinsics",
+ "header": "extern int near g; extern int near h;\n#include <conio.h>\n#include <string.h>\n",
+ "variants": {
+   "asm_noframe": "void far f(void) { _asm int 10h }",
+   "asm_arg": "void far f(int a) { _asm mov ax, a _asm int 10h }",
+   "loadds": "void far _loadds f(int a) { g = a; }",
+   "saveregs": "void far _saveregs f(int a) { g = a; }",
+   "regs": "int far f(int far *p, int n) { register int i; register int far *q = p; int s = 0; for (i = 0; i < n; i++) s += q[i]; return s; }",
+   "outp": "void far f(int v) { outp(0x3ce, 5); outp(0x3cf, v); }",
+   "memset": "extern char far * near rb; void far f(void) { _fmemset(rb, ' ', 0xfee); }"
+ },
+ "profiles": [{"profile": "msc600ax", "flags": ["/AL", "/Os", "/Gs", "/Oi"]}, {"profile": "msc510", "flags": ["/AL", "/Os", "/Gs", "/Oi"]}]
+}

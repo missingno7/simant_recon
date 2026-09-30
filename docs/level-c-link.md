@@ -57,13 +57,13 @@ Nothing RTLink-related is in `C:\tools` (catalog checked).
 * Constraints from own entries only: 115 frame units, 285,399 ordered pairs of global
   groups, only **24 contradictory pairs** (2 units with non-contiguous groups). One
   program-wide order explains almost everything.
-* Rejected in this session (`exp_symbol_order.py`, `logs/exp_symbol_order.log`), using our
+* Rejected in this session (worker link, symbol-order experiment), using our
   123 freshly compiled objects plus the runtime members:
   * symbol-table insertion order, reading objects in link order (root by address, overlays
     by section, then libraries, or libraries first);
   * the same with names in OMF record order, EXTDEFs first, or PUBDEFs first.
   * Every variant satisfies **48.6 %**, i.e. chance level; alphabetical scores 49.9 %.
-* Earlier (build/workers/relorder), on runtime members with true names: definition address,
+* Earlier (work/relorder), on runtime members with true names: definition address,
   first reference, per-object EXTDEF order and simple name hashes were all rejected.
 * Near-random agreement with every structural order, plus near-perfect consistency, points
   to **iteration over a hash table keyed by symbol name**. That has a hard consequence:
@@ -143,4 +143,4 @@ linked SIMANT.EXE was not found; the clean route is Pocket Soft (today RTPatch).
   flags, ids and memory sizes match; the 13 overlay sections built only from real objects have
   identical relocation sets, frames and within-group order and all 63,102 non-fixup bytes
   identical. Script inputs read from the original (ALWAYS/NEVER lists, areas, PRELOAD/RELOAD)
-  are labelled as such in build/workers/rtlink/linkscripts/SIMANT_derived.lnk.
+  are labelled as such in work/rtlink/linkscripts/SIMANT_derived.lnk.

@@ -3,7 +3,7 @@
 ; Genuine assembly (MASM 5.10 reproduces it byte for byte).  Evidence against compiler
 ; output: every framed proc saves "push si; push di; push ds" and restores in reverse order,
 ; while MSC 6.00/6.00A/6.00AX always saves DI before SI, also around inline _asm (probe
-; ASM-2, build/workers/ovlA/probe); the ror/rol twin loops after the first retf of
+; ASM-2, work/ovlA/probe); the ror/rol twin loops after the first retf of
 ; o00_35A6_0007 and o00_35A6_0177 are unreachable code, which MSC never emits.
 
 _DATA	segment word public 'DATA'

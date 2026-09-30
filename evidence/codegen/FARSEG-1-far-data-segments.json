@@ -7,11 +7,11 @@
   "Static uninitialised far arrays are laid out first (zeros), initialised definitions after them.",
   "A public far variable without initialiser is a COMDEF far communal (no bytes in the object); the linker allocates it (FAR_BSS).",
   "When the next item does not fit into 64K (exactly 0x10000 still fits: the SEGDEF then has the big bit and length 0), MSC closes the segment and opens <BASENAME><n+1>_DATA: with the real sizes this reproduces the 3E1D (0xF89F) / 4DA7 (0x900) frames of SIMANT.EXE.",
-  "Code of the defining file references its own far variables with fixup target = the SEGMENT, other files with target = the EXTERNAL symbol; RTLink groups relocations by target, so the defining file's references form one group (the ownership test of build/workers/data/exclude.py)."
+  "Code of the defining file references its own far variables with fixup target = the SEGMENT, other files with target = the EXTERNAL symbol; RTLink groups relocations by target, so the defining file's references form one group (the ownership test of work/data/exclude.py)."
  ],
  "positive_control": "S23:39C7 UNIT7_DATA at 4EE5:0000 (placed, exact): its code relocations 97-102 to 4EE5 interleave fd_4EE5_0280/0000/0500 in one run in FIXUPP order; data:3E1D reproduces the 3E1D/4DA7 split byte for byte.",
  "negative_contrast": "root:1FD2 references 5071:03C4, 0728 and 0060 as externs: three separate relocation groups with a 50F6 group between them. In this probe: a tentative definition gives a communal and no segment bytes; without /Zi the segment is UNIT5_DATA; one byte more than 64K moves the next array into UNIT8_DATA.",
- "reproducers": "build/workers/data/exp1.py, build/workers/data/exp2.py (worker data)",
+ "reproducers": "work/data/exp1.py, work/data/exp2.py (worker data)",
  "header": "",
  "variants": {
   "own_and_extern": "int far ga[4];\nint far gb[3] = {1,2,3};\nstatic int far sa[5];\nstatic int far sb[2] = {7,8};\nextern int far ex;\nint far f1(void) { return ga[1] + gb[1] + sa[1] + sb[1] + ex; }",

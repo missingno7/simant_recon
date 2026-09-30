@@ -2,7 +2,7 @@
 
     python tools_link.py --root REPO [--jobs 8] [--reuse] [--no-hybrid-file]
 
-Proof levels are kept distinct (build/workers/link/DESIGN.md):
+Proof levels are kept distinct (work/link/DESIGN.md):
 
 (a) exact contributions: every byte written from a freshly compiled/assembled object (or an
     accepted historical runtime member) bound by the existing gate code
@@ -456,7 +456,7 @@ def collect(root: Path, jobs: int) -> dict:
     import modules as modmod
     import runtime as rtmod
     if "collect" not in modmod.verify_module.__code__.co_varnames:
-        raise SystemExit("tools/modules.py lacks the collect hook (apply build/workers/link/collect_hook.patch)")
+        raise SystemExit("tools/modules.py lacks the collect hook (apply work/link/collect_hook.patch)")
     man = modmod.load_manifest()
 
     def one(key):

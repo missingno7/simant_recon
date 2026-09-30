@@ -1,0 +1,30 @@
+resJ residues (root:0250), 2026-09-30
+
+PROMOTED: f_0250_1E80 (typo fix: 2nd range test compares fd_50F6_047A+0x1b with MapPnt.x; unused local t
+  keeps the frame word [bp-12h], without it /Og spills the fd_3D57_0C28 compare temp). S06 SimKidInside,
+  o06_35F5_14CC, o06_35F5_1803 (sub-worker resJ/s06, draft s06/final.c; complete TU still blocked by /Zi
+  flush positions, see s06 notes feas.py).
+
+DrawSpider: best_DrawSpider_m0250.c (1441 vs 1433 bytes, frame 40 = 40). Fixed vs canonical:
+  - DrawLegs/DrawPalps args written as plain expressions twice (CSE into SI/DI, DrawPalps tail
+    cross-jumped): DrawLegs((modx+0x24)*4/3, (mody+0x24)*4/3, ...); DrawPalps(same...), same for +0x30.
+  - inner loop: for (idx = ty * 40 + (tx = fd_50F6_37D2), n = 0; ...).
+  - first block: source order modx-statements before mody-statements (compiler emits mody first,
+    as the original; slot -14h = mody).
+  Residue: left/top slot swap ([bp-4]/[bp-6]); else-branch reassociation of SpidX - modx + rect.left
+  (ours (modx - rect.left) neg); skip = g_19C0/skip * fd_1F26.x operand order; 16B5_0033 ternary CX vs AX;
+  mody+ly operand order; TickCount()/fd_3D57_098E compare operand order.
+  idscan (analysis only, dummies before f_0250_1018 in this draft): N=7..10 leaves only 10 differing bytes
+  and 0 non-BP differences (slot swaps only) -> ~7..10 natural identifiers missing before DrawSpider's
+  referenced declarations. DrawCurBalloons needs +5..11 (AddMsgBalloon tolerates 0..6, 14..16 in the p-draft).
+  Find natural declarations (named prototype params, missing externs, locals of 1018/129E) that supply them.
+
+f_0250_129E: with a far-pointer local p (= &fd_50F6_15C4[0][i], used in compare and final store) the frame
+  is 8 as the original; residue then: ay in BX (orig AX) and i/y SI/DI swapped. Without p but with an unused
+  local, SI/DI are right but the frame/AX differ. Not solved.
+f_0250_1018: residue: original mx SI, my DI, v always in memory [bp-2]; ours v wins SI in plane 2/3.
+  Tried: param reuse (x = MapPnt.x + x: x->SI but y stays in memory), register keyword, unused locals,
+  per-case cross-jumped scent tails - none.
+DrawCurBalloons: 5 timer compare operand orders, identifier-count window only (see above).
+root:171C f_171C_0160: 2 bytes (mov dx,es vs mov cx,es in second NEXTBLK(b)); spelling, casts, order and
+  id counts 0..16 at top tried, none (sub-worker resJ/mem continued).

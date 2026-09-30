@@ -1,0 +1,27 @@
+--- base.c
++++ best.c
+@@ -473,7 +473,6 @@
+     int nx;
+     int ny;
+     int best;
+-    int value;
+ 
+     if (y < 2) {
+         if (MapR[x][y] == 0x18)
+@@ -484,13 +483,12 @@
+     }
+     best = 0;
+     for (i = 0; i < 8; i++) {
++        nx = Dx8[i] + x;
+         ny = Dy8[i] + y;
+-        nx = Dx8[i] + x;
+         if (nx < 0 || nx > 63 || ny < 0 || ny > 63)
+             continue;
+-        value = ExitMapR[nx][ny];
+-        if (value > best)
+-            best = value;
++        if (ExitMapR[nx][ny] > best)
++            best = ExitMapR[nx][ny];
+     }
+     if (best)
+         ExitMapR[x][y] = best - 1;

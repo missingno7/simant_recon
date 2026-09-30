@@ -2,7 +2,7 @@
 ; Overlay section S02, code frame 3126, linear 31260-31BC9.
 ; Genuine assembly, reproduced byte for byte by MASM 5.10.  Evidence against compiler output:
 ; framed procs save "push si; push di" (MSC always saves DI first, probe ASM-2 in
-; build/workers/ovlA/probe), raster operations are selected by self-modifying code
+; work/ovlA/probe), raster operations are selected by self-modifying code
 ; (instruction templates such as "xor al,ah" are copied over loop instructions with
 ; "mov cs:[...],ax"), and short near subroutines return with retn inside far procs.
 ; The far pointers to the 25 entries live in the DGROUP dispatch table at 21A6 (not reconstructed here).

@@ -2,7 +2,7 @@
 ; Overlay section S00, code frame 31AD, linear 34584-35A65.
 ; Genuine assembly, reproduced byte for byte by MASM 5.10.  Evidence against compiler output:
 ; framed procs save "push si; push di" (MSC always saves DI first, probe ASM-2 in
-; build/workers/ovlA/probe), the EGA/VGA sequencer and graphics controller are programmed
+; work/ovlA/probe), the EGA/VGA sequencer and graphics controller are programmed
 ; with out dx loops, raster operations are selected by self-modifying code (instruction
 ; templates copied over loop instructions with "mov cs:[...],ax"), and near subroutines
 ; return with retn inside far procs.  The segment ends at an odd offset (31AD:2AB3); LINK

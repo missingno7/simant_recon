@@ -2,7 +2,7 @@
 ; Overlay section S03, code frame 3126, linear 31260-32538.
 ; Genuine assembly, reproduced byte for byte by MASM 5.10.  Evidence against compiler output:
 ; framed procs save "push si; push di" (MSC always saves DI first, probe ASM-2 in
-; build/workers/ovlA/probe), raster operations are selected by self-modifying code
+; work/ovlA/probe), raster operations are selected by self-modifying code
 ; (instruction templates copied over loop instructions with "mov cs:[...],ax"), a 320-byte
 ; line buffer lives at offset 0 of the code segment (addressed as cs:[di]), and near
 ; subroutines return with retn inside far procs.

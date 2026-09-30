@@ -1,0 +1,3492 @@
+--- /dev/null
++++ b/tools/csrc.py
+@@ -0,0 +1,1126 @@
++"""csrc.py - an MSC-6.00-dialect-aware C tokenizer and function-body parser for source rewriting.
++
++Not a compiler front end: it parses enough of one function body (statements, declarations and
++expressions with C precedence) to enumerate *targeted* rewrites.  Every node keeps the character
++span of the source it came from, so a rewrite replaces one span and everything else stays byte
++for byte (comments, line layout, macros).  Dialect features that are kept opaque:
++
++  * preprocessor lines (``#...`` with continuations) are single trivia tokens;
++  * ``_asm { ... }`` blocks and ``_asm ...`` single lines are one raw token (asm comments use
++    ``;`` and quotes that a C tokenizer must not see);
++  * ``far near huge _far _near _huge _based(...) pascal cdecl _pascal _cdecl _fastcall
++    _loadds _export _interrupt _saveregs`` are type qualifiers in declarations and casts;
++  * macro invocations look like calls, which is what they are for rewriting purposes.
++
++API:
++    src = Source(text)                  # tokenizes the whole file
++    fn = src.function("Name")           # Function: header span, body Block, params
++    body = fn.body                      # Block(items=[Decl | stmt ...])
++    for node in walk(body): ...         # every Stmt/Expr/Decl node, pre-order
++    node.s, node.e                      # char span in ``text``
++    src.text[node.s:node.e]             # original source of a node
++"""
++from __future__ import annotations
++
++import re
++from dataclasses import dataclass, field
++
++KEYWORDS = {
++    "auto", "break", "case", "char", "const", "continue", "default", "do", "double", "else", "enum",
++    "extern", "float", "for", "goto", "if", "int", "long", "register", "return", "short", "signed",
++    "sizeof", "static", "struct", "switch", "typedef", "union", "unsigned", "void", "volatile", "while",
++}
++QUALIFIERS = {"far", "near", "huge", "_far", "_near", "_huge", "__far", "__near", "__huge", "pascal", "cdecl",
++              "_pascal", "_cdecl", "__pascal", "__cdecl", "_fastcall", "__fastcall", "_loadds", "_export",
++              "_interrupt", "interrupt", "_saveregs", "_based", "__based", "_segment", "const", "volatile"}
++TYPE_WORDS = {"int", "char", "short", "long", "unsigned", "signed", "void", "float", "double", "struct",
++              "union", "enum"} | QUALIFIERS
++STORAGE = {"static", "register", "auto", "extern", "typedef"}
++ASM_WORDS = {"_asm", "__asm"}
++
++OPS = sorted(""">>= <<= ... -> ++ -- << >> <= >= == != && || += -= *= /= %= &= ^= |=
++    + - * / % & | ^ ! ~ < > = ? : ; , . ( ) [ ] { }""".split(), key=len, reverse=True)
++_OP_RE = "|".join(re.escape(o) for o in OPS)
++TOKEN_RE = re.compile(r"""
++    (?P<nl>\n)
++  | (?P<ws>[ \t\r\f\v]+)
++  | (?P<cmt>/\*.*?\*/|//[^\n]*)
++  | (?P<id>[A-Za-z_$][A-Za-z0-9_$]*)
++  | (?P<num>(?:0[xX][0-9A-Fa-f]+|\d+\.\d*(?:[eE][+-]?\d+)?|\.\d+(?:[eE][+-]?\d+)?|\d+(?:[eE][+-]?\d+)?)[uUlLfF]*)
++  | (?P<str>"(?:[^"\\\n]|\\.)*")
++  | (?P<chr>'(?:[^'\\\n]|\\.)*')
++  | (?P<op>""" + _OP_RE + r""")
++  | (?P<bad>.)
++""", re.S | re.X)
++
++
++@dataclass
++class Tok:
++    kind: str       # id num str chr op pp cmt ws nl asm
++    text: str
++    s: int
++    e: int
++
++    def __repr__(self):
++        return f"{self.kind}:{self.text!r}"
++
++
++class ParseError(Exception):
++    pass
++
++
++def tokenize(text: str) -> list[Tok]:
++    """All tokens including trivia.  Preprocessor lines and _asm blocks/lines are single tokens."""
++    out: list[Tok] = []
++    i, n = 0, len(text)
++    line_start = True
++    while i < n:
++        if line_start:
++            m = re.compile(r"[ \t]*#").match(text, i)
++            if m:
++                j = i
++                while True:
++                    k = text.find("\n", j)
++                    if k < 0:
++                        k = n
++                        break
++                    if text[k - 1] == "\\" or (text[k - 1] == "\r" and text[k - 2] == "\\"):
++                        j = k + 1
++                        continue
++                    break
++                out.append(Tok("pp", text[i:k], i, k))
++                i = k
++                line_start = False
++                continue
++        m = TOKEN_RE.match(text, i)
++        kind = m.lastgroup
++        t = m.group()
++        if kind == "id" and t in ASM_WORDS:
++            # _asm { ... } or _asm <rest of line>
++            j = i + len(t)
++            while j < n and text[j] in " \t":
++                j += 1
++            if j < n and text[j] == "{":
++                depth, k = 0, j
++                while k < n:
++                    if text[k] == "{":
++                        depth += 1
++                    elif text[k] == "}":
++                        depth -= 1
++                        if depth == 0:
++                            break
++                    k += 1
++                if k >= n:
++                    raise ParseError("unterminated _asm block")
++                out.append(Tok("asm", text[i:k + 1], i, k + 1))
++                i = k + 1
++            else:
++                k = text.find("\n", j)
++                k = n if k < 0 else k
++                # a following _asm on the same line starts a new asm token
++                m2 = re.compile(r"\b_?_asm\b").search(text, j, k)
++                if m2:
++                    k = m2.start()
++                out.append(Tok("asm", text[i:k].rstrip(), i, i + len(text[i:k].rstrip())))
++                i = i + len(text[i:k].rstrip())
++            line_start = False
++            continue
++        if kind == "bad":
++            raise ParseError(f"unexpected character {t!r} at {i}")
++        out.append(Tok(kind, t, i, i + len(t)))
++        i += len(t)
++        if kind == "nl":
++            line_start = True
++        elif kind not in ("ws", "cmt"):
++            line_start = False
++        elif kind == "cmt" and "\n" in t:
++            line_start = False
++    return out
++
++
++# ---------------------------------------------------------------- AST
++
++
++@dataclass(eq=False)
++class Node:
++    s: int = 0
++    e: int = 0
++
++    def children(self):
++        return []
++
++
++@dataclass(eq=False)
++class Expr(Node):
++    pass
++
++
++@dataclass(eq=False)
++class Id(Expr):
++    name: str = ""
++
++
++@dataclass(eq=False)
++class Num(Expr):
++    text: str = ""
++
++    @property
++    def value(self) -> int | None:
++        t = self.text.rstrip("uUlL")
++        try:
++            if t.lower().startswith("0x"):
++                return int(t, 16)
++            if len(t) > 1 and t.startswith("0") and t.isdigit():
++                return int(t, 8)
++            return int(t)
++        except ValueError:
++            return None
++
++
++@dataclass(eq=False)
++class Str(Expr):
++    text: str = ""
++
++
++@dataclass(eq=False)
++class Paren(Expr):
++    x: Expr = None
++
++    def children(self):
++        return [self.x]
++
++
++@dataclass(eq=False)
++class Unary(Expr):          # prefix: - + ! ~ * & ++ --  sizeof
++    op: str = ""
++    x: Expr = None
++
++    def children(self):
++        return [self.x]
++
++
++@dataclass(eq=False)
++class Post(Expr):           # postfix ++ --
++    op: str = ""
++    x: Expr = None
++
++    def children(self):
++        return [self.x]
++
++
++@dataclass(eq=False)
++class Cast(Expr):
++    type_s: int = 0
++    type_e: int = 0
++    x: Expr = None
++
++    def children(self):
++        return [self.x]
++
++
++@dataclass(eq=False)
++class SizeofType(Expr):
++    pass
++
++
++@dataclass(eq=False)
++class Bin(Expr):
++    op: str = ""
++    l: Expr = None
++    r: Expr = None
++    op_s: int = 0
++
++    def children(self):
++        return [self.l, self.r]
++
++
++@dataclass(eq=False)
++class Assign(Expr):
++    op: str = ""
++    l: Expr = None
++    r: Expr = None
++
++    def children(self):
++        return [self.l, self.r]
++
++
++@dataclass(eq=False)
++class Cond(Expr):
++    c: Expr = None
++    a: Expr = None
++    b: Expr = None
++
++    def children(self):
++        return [self.c, self.a, self.b]
++
++
++@dataclass(eq=False)
++class Comma(Expr):
++    items: list = field(default_factory=list)
++
++    def children(self):
++        return list(self.items)
++
++
++@dataclass(eq=False)
++class Call(Expr):
++    f: Expr = None
++    args: list = field(default_factory=list)
++
++    def children(self):
++        return [self.f] + list(self.args)
++
++
++@dataclass(eq=False)
++class Index(Expr):
++    a: Expr = None
++    i: Expr = None
++
++    def children(self):
++        return [self.a, self.i]
++
++
++@dataclass(eq=False)
++class Member(Expr):
++    x: Expr = None
++    op: str = "."
++    name: str = ""
++
++    def children(self):
++        return [self.x]
++
++
++@dataclass(eq=False)
++class InitList(Expr):
++    pass
++
++
++# statements
++
++@dataclass(eq=False)
++class Stmt(Node):
++    pass
++
++
++@dataclass(eq=False)
++class Declarator(Node):
++    name: str = ""
++    name_s: int = 0
++    init: Expr | None = None
++    is_array: bool = False
++    is_func: bool = False
++    is_pointer: bool = False
++
++
++@dataclass(eq=False)
++class Decl(Stmt):
++    spec_s: int = 0
++    spec_e: int = 0
++    storage: str = ""
++    decls: list = field(default_factory=list)
++
++    def children(self):
++        return [d.init for d in self.decls if d.init is not None]
++
++
++@dataclass(eq=False)
++class Block(Stmt):
++    items: list = field(default_factory=list)
++
++    def children(self):
++        return list(self.items)
++
++
++@dataclass(eq=False)
++class ExprStmt(Stmt):
++    x: Expr = None
++
++    def children(self):
++        return [self.x]
++
++
++@dataclass(eq=False)
++class Empty(Stmt):
++    pass
++
++
++@dataclass(eq=False)
++class If(Stmt):
++    c: Expr = None
++    then: Stmt = None
++    els: Stmt | None = None
++    else_s: int = 0          # start of the 'else' keyword
++
++    def children(self):
++        return [self.c, self.then] + ([self.els] if self.els is not None else [])
++
++
++@dataclass(eq=False)
++class While(Stmt):
++    c: Expr = None
++    body: Stmt = None
++
++    def children(self):
++        return [self.c, self.body]
++
++
++@dataclass(eq=False)
++class DoWhile(Stmt):
++    body: Stmt = None
++    c: Expr = None
++
++    def children(self):
++        return [self.body, self.c]
++
++
++@dataclass(eq=False)
++class For(Stmt):
++    init: Expr | None = None
++    c: Expr | None = None
++    step: Expr | None = None
++    body: Stmt = None
++    hdr_s: int = 0           # '(' of the header
++    hdr_e: int = 0           # after ')'
++
++    def children(self):
++        return [x for x in (self.init, self.c, self.step) if x is not None] + [self.body]
++
++
++@dataclass(eq=False)
++class Switch(Stmt):
++    c: Expr = None
++    body: Stmt = None
++
++    def children(self):
++        return [self.c, self.body]
++
++
++@dataclass(eq=False)
++class Case(Stmt):
++    x: Expr | None = None      # None = default
++    stmt: Stmt | None = None
++
++    def children(self):
++        return ([self.x] if self.x is not None else []) + ([self.stmt] if self.stmt is not None else [])
++
++
++@dataclass(eq=False)
++class Label(Stmt):
++    name: str = ""
++    stmt: Stmt | None = None
++
++    def children(self):
++        return [self.stmt] if self.stmt is not None else []
++
++
++@dataclass(eq=False)
++class Return(Stmt):
++    x: Expr | None = None
++
++    def children(self):
++        return [self.x] if self.x is not None else []
++
++
++@dataclass(eq=False)
++class Jump(Stmt):          # goto / break / continue
++    kind: str = ""
++    label: str = ""
++
++
++@dataclass(eq=False)
++class Asm(Stmt):
++    pass
++
++
++@dataclass(eq=False)
++class Function(Node):
++    name: str = ""
++    head_s: int = 0            # start of the declaration (after the previous top-level item)
++    params_s: int = 0          # '(' of the parameter list
++    params_e: int = 0          # after ')'
++    params: list = field(default_factory=list)   # [(type_text, name)]
++    body: Block = None
++
++
++def walk(node):
++    """Pre-order walk over statements, declarations and expressions."""
++    if node is None:
++        return
++    yield node
++    for c in node.children():
++        yield from walk(c)
++
++
++def walk_parents(node, parent=None):
++    """Pre-order (node, parent) pairs."""
++    if node is None:
++        return
++    yield node, parent
++    for c in node.children():
++        yield from walk_parents(c, node)
++
++
++# ---------------------------------------------------------------- parser
++
++PREC = {"||": 4, "&&": 5, "|": 6, "^": 7, "&": 8, "==": 9, "!=": 9, "<": 10, ">": 10, "<=": 10, ">=": 10,
++        "<<": 11, ">>": 11, "+": 12, "-": 12, "*": 13, "/": 13, "%": 13}
++ASSIGN_OPS = {"=", "+=", "-=", "*=", "/=", "%=", "&=", "^=", "|=", "<<=", ">>="}
++# precedence levels of whole nodes (for parenthesisation of moved text)
++P_COMMA, P_ASSIGN, P_COND, P_UNARY, P_POSTFIX, P_PRIMARY = 1, 2, 3, 14, 15, 16
++
++
++def prec_of(x: Expr) -> int:
++    if isinstance(x, Comma):
++        return P_COMMA
++    if isinstance(x, Assign):
++        return P_ASSIGN
++    if isinstance(x, Cond):
++        return P_COND
++    if isinstance(x, Bin):
++        return PREC[x.op]
++    if isinstance(x, (Unary, Cast, SizeofType)):
++        return P_UNARY
++    if isinstance(x, (Post, Call, Index, Member)):
++        return P_POSTFIX
++    return P_PRIMARY
++
++
++class Parser:
++    def __init__(self, src: "Source", toks: list[Tok]):
++        self.src = src
++        self.t = toks          # significant tokens only
++        self.i = 0
++
++    # token helpers
++    def peek(self, k=0) -> Tok | None:
++        j = self.i + k
++        return self.t[j] if j < len(self.t) else None
++
++    def at(self, text: str, k=0) -> bool:
++        t = self.peek(k)
++        return t is not None and t.text == text and t.kind in ("op", "id")
++
++    def next(self) -> Tok:
++        t = self.peek()
++        if t is None:
++            raise ParseError("unexpected end of input")
++        self.i += 1
++        return t
++
++    def expect(self, text: str) -> Tok:
++        t = self.next()
++        if t.text != text:
++            raise ParseError(f"expected {text!r}, got {t.text!r} at {t.s}")
++        return t
++
++    @property
++    def last_e(self) -> int:
++        return self.t[self.i - 1].e
++
++    # types
++    def is_type_start(self, k=0) -> bool:
++        t = self.peek(k)
++        if t is None or t.kind != "id":
++            return False
++        if t.text in TYPE_WORDS or t.text in STORAGE:
++            return True
++        if t.text in self.src.typedefs:
++            n = self.peek(k + 1)
++            # a typedef name followed by an operator that cannot follow a type is a variable
++            return n is not None and (n.kind == "id" or n.text in ("*", ")", "("))
++        return False
++
++    def skip_balanced(self, open_: str, close: str) -> None:
++        depth = 0
++        while True:
++            t = self.next()
++            if t.text == open_ and t.kind == "op":
++                depth += 1
++            elif t.text == close and t.kind == "op":
++                depth -= 1
++                if depth == 0:
++                    return
++
++    def type_name_end(self, k=0) -> int | None:
++        """If a type name (as in a cast or sizeof) starts at peek(k) and ends at a ')' return the
++        index offset of that ')' else None."""
++        j = k
++        if not self.is_type_start(j):
++            return None
++        depth = 0
++        while True:
++            t = self.peek(j)
++            if t is None:
++                return None
++            if t.text == "(":
++                depth += 1
++            elif t.text == ")":
++                if depth == 0:
++                    return j
++                depth -= 1
++            elif t.text in (";", "{", "}", "=", ",") and depth == 0:
++                return None
++            elif t.kind in ("num", "str", "chr"):
++                if depth == 0:
++                    return None
++            j += 1
++
++    # expressions
++    def expr(self) -> Expr:
++        x = self.assign()
++        if self.at(","):
++            items = [x]
++            while self.at(","):
++                self.next()
++                items.append(self.assign())
++            return Comma(s=items[0].s, e=items[-1].e, items=items)
++        return x
++
++    def assign(self) -> Expr:
++        x = self.cond()
++        t = self.peek()
++        if t is not None and t.kind == "op" and t.text in ASSIGN_OPS:
++            self.next()
++            r = self.assign()
++            return Assign(s=x.s, e=r.e, op=t.text, l=x, r=r)
++        return x
++
++    def cond(self) -> Expr:
++        c = self.binary(4)
++        if self.at("?"):
++            self.next()
++            a = self.expr()
++            self.expect(":")
++            b = self.cond()
++            return Cond(s=c.s, e=b.e, c=c, a=a, b=b)
++        return c
++
++    def binary(self, minp: int) -> Expr:
++        x = self.unary()
++        while True:
++            t = self.peek()
++            if t is None or t.kind != "op" or t.text not in PREC or PREC[t.text] < minp:
++                return x
++            self.next()
++            r = self.binary(PREC[t.text] + 1)
++            x = Bin(s=x.s, e=r.e, op=t.text, l=x, r=r, op_s=t.s)
++
++    def unary(self) -> Expr:
++        t = self.peek()
++        if t is None:
++            raise ParseError("unexpected end in expression")
++        if t.kind == "op" and t.text in ("-", "+", "!", "~", "*", "&", "++", "--"):
++            self.next()
++            x = self.unary()
++            return Unary(s=t.s, e=x.e, op=t.text, x=x)
++        if t.kind == "id" and t.text == "sizeof":
++            self.next()
++            if self.at("(") and self.type_name_end(1) is not None:
++                j = self.type_name_end(1)
++                self.i += j + 1
++                return SizeofType(s=t.s, e=self.last_e)
++            x = self.unary()
++            return Unary(s=t.s, e=x.e, op="sizeof", x=x)
++        if t.text == "(" and t.kind == "op":
++            j = self.type_name_end(1)
++            if j is not None:
++                ts, te = self.peek(1).s, self.peek(j - 1).e
++                self.i += j + 1
++                x = self.unary()
++                return Cast(s=t.s, e=x.e, type_s=ts, type_e=te, x=x)
++        return self.postfix(self.primary())
++
++    def primary(self) -> Expr:
++        t = self.next()
++        if t.kind == "id":
++            if t.text in KEYWORDS and t.text not in ("sizeof",):
++                raise ParseError(f"keyword {t.text!r} in expression at {t.s}")
++            return Id(s=t.s, e=t.e, name=t.text)
++        if t.kind == "num" or t.kind == "chr":
++            return Num(s=t.s, e=t.e, text=t.text)
++        if t.kind == "str":
++            e = t.e
++            while self.peek() is not None and self.peek().kind == "str":
++                e = self.next().e
++            return Str(s=t.s, e=e, text=self.src.text[t.s:e])
++        if t.text == "(":
++            x = self.expr()
++            self.expect(")")
++            return Paren(s=t.s, e=self.last_e, x=x)
++        raise ParseError(f"unexpected {t.text!r} at {t.s}")
++
++    def postfix(self, x: Expr) -> Expr:
++        while True:
++            t = self.peek()
++            if t is None or t.kind != "op":
++                return x
++            if t.text == "(":
++                self.next()
++                args = []
++                if not self.at(")"):
++                    args.append(self.assign())
++                    while self.at(","):
++                        self.next()
++                        args.append(self.assign())
++                self.expect(")")
++                x = Call(s=x.s, e=self.last_e, f=x, args=args)
++            elif t.text == "[":
++                self.next()
++                i = self.expr()
++                self.expect("]")
++                x = Index(s=x.s, e=self.last_e, a=x, i=i)
++            elif t.text in (".", "->"):
++                self.next()
++                n = self.next()
++                x = Member(s=x.s, e=n.e, x=x, op=t.text, name=n.text)
++            elif t.text in ("++", "--"):
++                self.next()
++                x = Post(s=x.s, e=t.e, op=t.text, x=x)
++            else:
++                return x
++
++    # declarations
++    def declaration(self) -> Decl:
++        start = self.peek().s
++        storage = ""
++        spec_e = start
++        # specifiers: type words, qualifiers, storage, struct/union/enum tags (+ bodies), typedef names
++        seen_type = False
++        while True:
++            t = self.peek()
++            if t is None:
++                raise ParseError("eof in declaration")
++            if t.kind == "id" and t.text in STORAGE:
++                storage = t.text
++                self.next()
++            elif t.kind == "id" and t.text in ("struct", "union", "enum"):
++                self.next()
++                if self.peek().kind == "id":
++                    self.next()
++                if self.at("{"):
++                    self.skip_balanced("{", "}")
++                seen_type = True
++            elif t.kind == "id" and t.text in ("_based", "__based"):
++                self.next()
++                self.skip_balanced("(", ")")
++            elif t.kind == "id" and (t.text in TYPE_WORDS) and t.text not in QUALIFIERS - {"const", "volatile"}:
++                self.next()
++                seen_type = True
++            elif t.kind == "id" and t.text in ("const", "volatile"):
++                self.next()
++            elif t.kind == "id" and t.text in self.src.typedefs and not seen_type:
++                self.next()
++                seen_type = True
++            else:
++                break
++            spec_e = self.last_e
++        d = Decl(s=start, spec_s=start, spec_e=spec_e, storage=storage)
++        if self.at(";"):
++            self.next()
++            d.e = self.last_e
++            return d
++        while True:
++            d.decls.append(self.declarator())
++            if self.at(","):
++                self.next()
++                continue
++            self.expect(";")
++            break
++        d.e = self.last_e
++        return d
++
++    def declarator(self) -> Declarator:
++        s = self.peek().s
++        dd = Declarator(s=s)
++        depth = 0
++        while True:
++            t = self.peek()
++            if t is None:
++                raise ParseError("eof in declarator")
++            if t.kind == "id" and t.text in QUALIFIERS:
++                self.next()
++                if t.text in ("_based", "__based"):
++                    self.skip_balanced("(", ")")
++            elif t.text == "*":
++                dd.is_pointer = True
++                self.next()
++            elif t.text == "(":
++                depth += 1
++                self.next()
++            elif t.kind == "id" and not dd.name:
++                dd.name, dd.name_s = t.text, t.s
++                self.next()
++            elif t.text == "[":
++                dd.is_array = True
++                self.skip_balanced("[", "]")
++            elif t.text == ")" and depth > 0:
++                depth -= 1
++                self.next()
++                if self.at("("):
++                    dd.is_func = True
++                    self.skip_balanced("(", ")")
++            elif t.text == "(" and dd.name:
++                dd.is_func = True
++                self.skip_balanced("(", ")")
++            else:
++                break
++            if dd.name and self.at("(") and depth == 0:
++                dd.is_func = True
++                self.skip_balanced("(", ")")
++        dd.e = self.last_e
++        if self.at("="):
++            self.next()
++            if self.at("{"):
++                b = self.peek().s
++                self.skip_balanced("{", "}")
++                dd.init = InitList(s=b, e=self.last_e)
++            else:
++                dd.init = self.assign()
++            dd.e = self.last_e
++        return dd
++
++    # statements
++    def block(self) -> Block:
++        b = self.expect("{")
++        items = []
++        while not self.at("}"):
++            items.append(self.statement())
++        self.next()
++        return Block(s=b.s, e=self.last_e, items=items)
++
++    def statement(self) -> Stmt:
++        t = self.peek()
++        if t is None:
++            raise ParseError("eof in statement")
++        if t.kind == "asm":
++            self.next()
++            return Asm(s=t.s, e=t.e)
++        if t.text == "{" and t.kind == "op":
++            return self.block()
++        if t.text == ";" and t.kind == "op":
++            self.next()
++            return Empty(s=t.s, e=t.e)
++        if t.kind == "id":
++            w = t.text
++            if w == "if":
++                self.next()
++                self.expect("(")
++                c = self.expr()
++                self.expect(")")
++                th = self.statement()
++                st = If(s=t.s, c=c, then=th)
++                if self.at("else"):
++                    st.else_s = self.next().s
++                    st.els = self.statement()
++                st.e = self.last_e
++                return st
++            if w == "while":
++                self.next()
++                self.expect("(")
++                c = self.expr()
++                self.expect(")")
++                body = self.statement()
++                return While(s=t.s, e=self.last_e, c=c, body=body)
++            if w == "do":
++                self.next()
++                body = self.statement()
++                self.expect("while")
++                self.expect("(")
++                c = self.expr()
++                self.expect(")")
++                self.expect(";")
++                return DoWhile(s=t.s, e=self.last_e, body=body, c=c)
++            if w == "for":
++                self.next()
++                h = self.expect("(")
++                init = None if self.at(";") else self.expr()
++                self.expect(";")
++                c = None if self.at(";") else self.expr()
++                self.expect(";")
++                step = None if self.at(")") else self.expr()
++                self.expect(")")
++                he = self.last_e
++                body = self.statement()
++                return For(s=t.s, e=self.last_e, init=init, c=c, step=step, body=body, hdr_s=h.s, hdr_e=he)
++            if w == "switch":
++                self.next()
++                self.expect("(")
++                c = self.expr()
++                self.expect(")")
++                body = self.statement()
++                return Switch(s=t.s, e=self.last_e, c=c, body=body)
++            if w in ("case", "default"):
++                self.next()
++                x = None
++                if w == "case":
++                    x = self.cond()
++                self.expect(":")
++                st = None if self.at("}") else self.statement()
++                return Case(s=t.s, e=self.last_e, x=x, stmt=st)
++            if w == "return":
++                self.next()
++                x = None if self.at(";") else self.expr()
++                self.expect(";")
++                return Return(s=t.s, e=self.last_e, x=x)
++            if w in ("break", "continue"):
++                self.next()
++                self.expect(";")
++                return Jump(s=t.s, e=self.last_e, kind=w)
++            if w == "goto":
++                self.next()
++                lab = self.next().text
++                self.expect(";")
++                return Jump(s=t.s, e=self.last_e, kind="goto", label=lab)
++            if w not in KEYWORDS and self.at(":", 1) and not self.at("::", 1):
++                self.next()
++                self.next()
++                st = None if self.at("}") else self.statement()
++                return Label(s=t.s, e=self.last_e, name=w, stmt=st)
++            if self.is_type_start():
++                return self.declaration()
++        x = self.expr()
++        self.expect(";")
++        return ExprStmt(s=x.s, e=self.last_e, x=x)
++
++
++class Source:
++    """A whole C file: tokens, typedef names, top-level function definitions."""
++
++    def __init__(self, text: str):
++        self.text = text
++        self.toks = tokenize(text)
++        self.sig = [t for t in self.toks if t.kind not in ("ws", "nl", "cmt", "pp")]
++        self.typedefs = self._typedefs()
++        self._funcs = None
++
++    def _typedefs(self) -> set:
++        names = set()
++        sig = self.sig
++        i = 0
++        while i < len(sig):
++            if sig[i].kind == "id" and sig[i].text == "typedef":
++                depth_b = depth_p = 0
++                j = i + 1
++                after_paren_group = False
++                while j < len(sig) and not (sig[j].text == ";" and depth_b == 0 and depth_p == 0):
++                    t = sig[j]
++                    if t.text == "{":
++                        depth_b += 1
++                    elif t.text == "}":
++                        depth_b -= 1
++                    elif t.text == "(":
++                        if depth_p == 0 and after_paren_group:
++                            # parameter list of a function (pointer) typedef: skip
++                            d = 0
++                            while j < len(sig):
++                                if sig[j].text == "(":
++                                    d += 1
++                                elif sig[j].text == ")":
++                                    d -= 1
++                                    if d == 0:
++                                        break
++                                j += 1
++                            j += 1
++                            continue
++                        depth_p += 1
++                    elif t.text == ")":
++                        depth_p -= 1
++                        if depth_p == 0:
++                            after_paren_group = True
++                    elif (t.kind == "id" and depth_b == 0 and t.text not in KEYWORDS and t.text not in QUALIFIERS
++                          and j + 1 < len(sig) and sig[j + 1].text in (";", ",", "[", ")")):
++                        names.add(t.text)
++                        if sig[j + 1].text == "(" or depth_p == 0:
++                            after_paren_group = True
++                    j += 1
++                i = j
++            i += 1
++        return names
++
++    def functions(self, only: str | None = None) -> list[Function]:
++        """Top-level function definitions (name, spans, parsed body).  With ``only``, just that
++        function's body is parsed (the others are skipped by brace matching)."""
++        if self._funcs is not None and only is None:
++            return self._funcs
++        sig = self.sig
++        out = []
++        depth = 0
++        prev_end = 0         # end of the previous top-level item (char offset)
++        i = 0
++        while i < len(sig):
++            t = sig[i]
++            if t.text == "{" and t.kind == "op" and depth == 0:
++                # function definition iff the previous token is ')' of a parameter list
++                fn_body = i > 0 and sig[i - 1].text == ")"
++                if i > 0 and sig[i - 1].text == ")":
++                    j, d = i - 1, 0
++                    while j >= 0:
++                        if sig[j].text == ")":
++                            d += 1
++                        elif sig[j].text == "(":
++                            d -= 1
++                            if d == 0:
++                                break
++                        j -= 1
++                    name_tok = sig[j - 1] if j > 0 else None
++                    # old-style '(far *f(...))' not supported; name must be an identifier
++                    if name_tok is not None and name_tok.kind == "id" and only in (None, name_tok.text):
++                        p = Parser(self, sig)
++                        p.i = i
++                        body = p.block()
++                        fn = Function(s=self._head_start(prev_end, name_tok.s), e=body.e, name=name_tok.text,
++                                      head_s=self._head_start(prev_end, name_tok.s), params_s=sig[j].s,
++                                      params_e=sig[i - 1].e, params=self._params(j, i - 1), body=body)
++                        out.append(fn)
++                        i = p.i
++                        prev_end = body.e
++                        continue
++                # struct/initialiser body at top level
++                d = 0
++                while i < len(sig):
++                    if sig[i].text == "{":
++                        d += 1
++                    elif sig[i].text == "}":
++                        d -= 1
++                        if d == 0:
++                            break
++                    i += 1
++                if fn_body and i < len(sig):
++                    prev_end = sig[i].e
++            elif t.text == ";" and t.kind == "op":
++                prev_end = t.e
++            i += 1
++        if only is None:
++            self._funcs = out
++        return out
++
++    def _head_start(self, prev_end: int, name_s: int) -> int:
++        """Start of the definition's first token after prev_end (skipping trivia and pp lines)."""
++        for t in self.toks:
++            if t.s >= prev_end and t.kind not in ("ws", "nl", "cmt", "pp") and t.s <= name_s:
++                return t.s
++        return name_s
++
++    def _params(self, lp: int, rp: int) -> list:
++        """[(type_text, name)] of a prototype-style parameter list sig[lp]..sig[rp]."""
++        sig = self.sig
++        out, cur = [], []
++        d = 0
++        for t in sig[lp + 1:rp]:
++            if t.text == "(":
++                d += 1
++            elif t.text == ")":
++                d -= 1
++            if t.text == "," and d == 0:
++                out.append(cur)
++                cur = []
++            else:
++                cur.append(t)
++        if cur:
++            out.append(cur)
++        res = []
++        for toks in out:
++            if len(toks) == 1 and toks[0].text in ("void", "..."):
++                continue
++            ids = [t for t in toks if t.kind == "id" and t.text not in TYPE_WORDS and t.text not in STORAGE]
++            name = ids[-1].text if ids and not (len(ids) == 1 and ids[0].text in self.typedefs) else ""
++            ttext = self.text[toks[0].s:toks[-1].e]
++            if name:
++                k = ttext.rfind(name)
++                ttext = (ttext[:k] + ttext[k + len(name):]).strip()
++            res.append((ttext, name))
++        return res
++
++    def function(self, name: str) -> Function:
++        for f in (self._funcs if self._funcs is not None else self.functions(only=name)):
++            if f.name == name:
++                return f
++        raise KeyError(f"no definition of {name}")
++
++    def span(self, node: Node) -> str:
++        return self.text[node.s:node.e]
++
++
++def parse_function(text: str, name: str) -> tuple[Source, Function]:
++    src = Source(text)
++    return src, src.function(name)
++
++
++# ---------------------------------------------------------------- analysis helpers
++
++
++def idents(x) -> list[str]:
++    return [n.name for n in walk(x) if isinstance(n, Id)]
++
++
++def has_side_effects(x) -> bool:
++    for n in walk(x):
++        if isinstance(n, (Assign, Call, Post)) or (isinstance(n, Unary) and n.op in ("++", "--")):
++            return True
++    return False
++
++
++def writes(x) -> set[str]:
++    """Identifiers assigned (=, op=, ++, --) inside x (plain Id lvalues only)."""
++    out = set()
++    for n in walk(x):
++        if isinstance(n, Assign) and isinstance(strip_paren(n.l), Id):
++            out.add(strip_paren(n.l).name)
++        elif isinstance(n, (Post,)) and isinstance(strip_paren(n.x), Id):
++            out.add(strip_paren(n.x).name)
++        elif isinstance(n, Unary) and n.op in ("++", "--") and isinstance(strip_paren(n.x), Id):
++            out.add(strip_paren(n.x).name)
++    return out
++
++
++def address_taken(x) -> set[str]:
++    return {strip_paren(n.x).name for n in walk(x)
++            if isinstance(n, Unary) and n.op == "&" and isinstance(strip_paren(n.x), Id)}
++
++
++def strip_paren(x):
++    while isinstance(x, Paren):
++        x = x.x
++    return x
++
++
++def stmt_lists(node):
++    """Every statement list (Block.items) in a function body, outermost first."""
++    for n in walk(node):
++        if isinstance(n, Block):
++            yield n
++
++
++def ends_in_jump(st) -> bool:
++    """True if control never falls through the end of statement st."""
++    if isinstance(st, (Return, Jump)):
++        return True
++    if isinstance(st, Block):
++        return bool(st.items) and ends_in_jump(st.items[-1])
++    if isinstance(st, If):
++        return st.els is not None and ends_in_jump(st.then) and ends_in_jump(st.els)
++    return False
++
++
++def contains_jump_kind(st, kinds=("break", "continue")) -> bool:
++    """break/continue that would bind to an enclosing loop (not nested loops/switches)."""
++    def rec(n, in_loop, in_switch):
++        if isinstance(n, Jump) and n.kind in kinds:
++            if n.kind == "continue" and not in_loop:
++                return True
++            if n.kind == "break" and not in_loop and not in_switch:
++                return True
++        for c in n.children():
++            if isinstance(c, Stmt) or isinstance(c, Block):
++                if rec(c, in_loop or isinstance(n, (While, DoWhile, For)),
++                       in_switch or isinstance(n, Switch)):
++                    return True
++        return False
++    return rec(st, False, False)
++
++
++def line_indent(text: str, pos: int) -> str:
++    """The leading whitespace of the line containing pos."""
++    b = text.rfind("\n", 0, pos) + 1
++    m = re.match(r"[ \t]*", text[b:])
++    return m.group()
+--- /dev/null
++++ b/tools/srcrules.py
+@@ -0,0 +1,1467 @@
++"""srcrules.py - catalogue of semantically equivalent C rewrites, each named after its evidence.
++
++Every rule enumerates *moves* for one function of a module source: a move is a list of text
++edits (char spans of the whole file) plus a stable site key.  Rules never touch other
++functions' bodies; file-level rules (prototypes, extern order) edit top-level declarations
++that the target function references, and the whole-module check of the driver catches any
++effect on other claims.
++
++Categories:
++  code    equivalent C that can change code generation (register/slot choice, block layout,
++          operand order, CSE) -- promotable as ordinary hand-written C;
++  decl    declaration order / identifier count / prototype spelling (natural forms of the
++          symbol-table effects, SYM-1, PROTO-1/2) -- promotable, reported with
++          --layout-inferred when nothing else changed;
++  steer   constructs with no plausible original purpose (dummy autos, identifier padding):
++          analysis only, never promoted automatically.
++
++Evidence references (docs/codegen-rules.md, evidence/codegen/*.json) are given per rule.
++"""
++from __future__ import annotations
++
++import re
++from dataclasses import dataclass, field
++
++import csrc as C  # noqa: E402
++
++REL_FLIP = {"<": ">", ">": "<", "<=": ">=", ">=": "<=", "==": "==", "!=": "!="}
++REL_NEG = {"<": ">=", ">=": "<", ">": "<=", "<=": ">", "==": "!=", "!=": "=="}
++COMMUTATIVE = {"+", "*", "&", "|", "^"}
++COMPOUNDABLE = {"+", "-", "*", "/", "%", "&", "|", "^", "<<", ">>"}
++
++
++@dataclass
++class Move:
++    rule: str
++    site: str                      # short human-readable site description
++    edits: list                    # [(s, e, text)] on the whole file
++    key: str = ""                  # rule + normalised site text (stable across other edits)
++
++    def __post_init__(self):
++        if not self.key:
++            self.key = self.rule + "|" + re.sub(r"\s+", " ", self.site)[:120]
++
++
++@dataclass
++class Rule:
++    id: str
++    evidence: str
++    category: str
++    doc: str
++    fn: object = None
++
++
++RULES: dict[str, Rule] = {}
++
++
++def rule(id_, evidence, category, doc):
++    def deco(f):
++        RULES[id_] = Rule(id_, evidence, category, doc, f)
++        return f
++    return deco
++
++
++def apply_edits(text: str, edits) -> str:
++    """Apply non-overlapping edits (s, e, new) to text."""
++    es = sorted(edits, key=lambda x: (x[0], x[1]))
++    for a, b in zip(es, es[1:]):
++        if b[0] < a[1]:
++            raise ValueError("overlapping edits")
++    for s, e, new in reversed(es):
++        text = text[:s] + new + text[e:]
++    return text
++
++
++# ------------------------------------------------------------------ context
++
++
++class Ctx:
++    """Parsed view of one function in a file."""
++
++    def __init__(self, text: str, fname: str):
++        self.text = text
++        self.src = C.Source(text)
++        self.fn = self.src.function(fname)
++        self.parent = {}
++        for n, p in C.walk_parents(self.fn.body):
++            self.parent[id(n)] = p
++        self.nodes = list(C.walk(self.fn.body))
++        self.locals = {}           # name -> (Decl, Declarator)
++        for n in self.nodes:
++            if isinstance(n, C.Decl) and n.storage not in ("extern", "typedef"):
++                for d in n.decls:
++                    if d.name and not d.is_func:
++                        self.locals.setdefault(d.name, (n, d))
++        self.params = [p for _, p in self.fn.params if p]
++        self.has_goto = any(isinstance(n, (C.Label,)) or (isinstance(n, C.Jump) and n.kind == "goto")
++                            for n in self.nodes)
++        self.has_asm = any(isinstance(n, C.Asm) for n in self.nodes)
++        self.addr_taken = C.address_taken(self.fn.body)
++
++    def T(self, n) -> str:
++        return self.text[n.s:n.e]
++
++    def par(self, n):
++        return self.parent.get(id(n))
++
++    def wrap(self, n, minprec: int) -> str:
++        t = self.T(n)
++        return t if C.prec_of(n) >= minprec else f"({t})"
++
++    def slot_prec(self, n) -> int:
++        """Minimum precedence an expression needs in the slot where n sits."""
++        p = self.par(n)
++        if isinstance(p, C.Decl):
++            return C.P_ASSIGN
++        if p is None or isinstance(p, C.Stmt):
++            return C.P_COMMA
++        if isinstance(p, C.Paren):
++            return C.P_COMMA
++        if isinstance(p, C.Bin):
++            return C.PREC[p.op] if n is p.l else C.PREC[p.op] + 1
++        if isinstance(p, C.Assign):
++            return C.P_UNARY if n is p.l else C.P_ASSIGN
++        if isinstance(p, C.Cond):
++            if n is p.c:
++                return 4
++            return C.P_COMMA if n is p.a else C.P_COND
++        if isinstance(p, (C.Unary, C.Cast)):
++            return C.P_UNARY
++        if isinstance(p, (C.Post, C.Member)):
++            return C.P_POSTFIX
++        if isinstance(p, C.Call):
++            return C.P_POSTFIX if n is p.f else C.P_ASSIGN
++        if isinstance(p, C.Index):
++            return C.P_POSTFIX if n is p.a else C.P_COMMA
++        if isinstance(p, C.Comma):
++            return C.P_ASSIGN
++        if isinstance(p, C.Decl):
++            return C.P_ASSIGN
++        return C.P_COMMA
++
++    def replace_expr(self, n, new: str, new_prec: int):
++        if new_prec < self.slot_prec(n):
++            new = f"({new})"
++        return (n.s, n.e, new)
++
++    def indent(self, pos: int) -> str:
++        return C.line_indent(self.text, pos)
++
++    def lists(self):
++        """(Block, index, stmt) for every statement that sits directly in a block."""
++        for b in C.stmt_lists(self.fn.body):
++            for i, st in enumerate(b.items):
++                yield b, i, st
++
++    def neg(self, c) -> tuple[str, int]:
++        """Text and precedence of the logical negation of condition c."""
++        c0 = C.strip_paren(c)
++        if isinstance(c0, C.Bin) and c0.op in REL_NEG:
++            return f"{self.wrap(c0.l, C.PREC[c0.op])} {REL_NEG[c0.op]} {self.wrap(c0.r, C.PREC[c0.op] + 1)}", C.PREC[c0.op]
++        if isinstance(c0, C.Unary) and c0.op == "!":
++            return self.T(c0.x), C.prec_of(c0.x)
++        return f"!{self.wrap(c, C.P_UNARY)}", C.P_UNARY
++
++    def neg_dm(self, c) -> tuple[str, int] | None:
++        """De Morgan negation of an && / || condition (None if c is neither)."""
++        c0 = C.strip_paren(c)
++        if isinstance(c0, C.Bin) and c0.op in ("&&", "||"):
++            op = "||" if c0.op == "&&" else "&&"
++            p = C.PREC[op]
++            parts = []
++            for side, need in ((c0.l, p), (c0.r, p + 1)):
++                t, tp = self.neg_dm(side) or self.neg(side)
++                parts.append(t if tp >= need else f"({t})")
++            return f"{parts[0]} {op} {parts[1]}", p
++        return None
++
++    def cond_rparen(self, st) -> int:
++        """End offset of the ')' closing an if/while condition."""
++        j = self.text.index(")", st.c.e)
++        return j + 1
++
++    def line_span(self, st) -> tuple[int, int]:
++        """Span of statement st extended to whole lines when it is alone on its line(s)."""
++        b = self.text.rfind("\n", 0, st.s) + 1
++        e = self.text.find("\n", st.e)
++        e = len(self.text) if e < 0 else e
++        if self.text[b:st.s].strip() == "" and self.text[st.e:e].strip() == "":
++            return b, e + 1
++        return st.s, st.e
++
++    def local_type(self, name: str) -> str | None:
++        if name in self.locals:
++            d, _ = self.locals[name]
++            return self.text[d.spec_s:d.spec_e]
++        return None
++
++
++def reindent(text: str, delta: int) -> str:
++    """Shift every line after the first by delta spaces (negative: remove up to -delta)."""
++    lines = text.split("\n")
++    out = [lines[0]]
++    for ln in lines[1:]:
++        if delta >= 0:
++            out.append((" " * delta + ln) if ln.strip() else ln)
++        else:
++            k = 0
++            while k < -delta and k < len(ln) and ln[k] == " ":
++                k += 1
++            out.append(ln[k:])
++    return "\n".join(out)
++
++
++def pure(x) -> bool:
++    return x is not None and not C.has_side_effects(x)
++
++
++def norm(s: str) -> str:
++    return re.sub(r"\s+", "", s)
++
++
++def occurrences(node, name):
++    return [n for n in C.walk(node) if isinstance(n, C.Id) and n.name == name]
++
++
++def body_items_text(cx: Ctx, st, ind: str) -> str:
++    """Statements of st (a Block's items, or st itself) as lines at indentation ind."""
++    if isinstance(st, C.Block):
++        if not st.items:
++            return ""
++        first = st.items[0]
++        old = cx.indent(first.s)
++        seg = cx.text[first.s:st.items[-1].e]
++        return ind + reindent(seg, len(ind) - len(old))
++    old = cx.indent(st.s)
++    return ind + reindent(cx.T(st), len(ind) - len(old)) if old != ind else ind + cx.T(st)
++
++
++def as_block_body(cx: Ctx, st, ind: str) -> str:
++    """Text for st as the sub-statement of a statement whose line has indentation ind: a block
++    follows on the same line, anything else on the next line at ind + 4.  The statement's own
++    first-line indentation is the reference for reindenting its continuation lines."""
++    old = stmt_indent(cx, st)
++    if isinstance(st, C.Block):
++        return " " + reindent(cx.T(st), len(ind) - len(old))
++    return "\n" + ind + "    " + reindent(cx.T(st), len(ind) + 4 - len(old))
++
++
++def stmt_indent(cx: Ctx, st) -> str:
++    """Indentation that st's continuation lines are relative to: its line's indentation if st
++    starts its line, else (a block after 'if (..) {' or 'else') that of the owning line."""
++    return cx.indent(st.s)
++
++
++def sub_end(st, ind: str) -> str:
++    """Separator after a sub-statement before 'else': ' ' after a block, newline + ind otherwise."""
++    return " " if isinstance(st, C.Block) else "\n" + ind
++
++
++# ------------------------------------------------------------------ expression rules
++
++
++@rule("REL-SWAP", "TERN-1 (relational operand order decides arm order); commutative/relational operand order "
++      "observations", "code", "a < b -> b > a, a == b -> b == a")
++def r_rel_swap(cx: Ctx):
++    for n in cx.nodes:
++        if isinstance(n, C.Bin) and n.op in REL_FLIP:
++            p = C.PREC[n.op]
++            new = f"{cx.wrap(n.r, p)} {REL_FLIP[n.op]} {cx.wrap(n.l, p + 1)}"
++            yield Move("REL-SWAP", cx.T(n), [(n.s, n.e, new)])
++
++
++@rule("COMM-SWAP", "commutative operand order observation (symbol-table state), SYM-1", "code",
++      "a + b -> b + a for + * & | ^")
++def r_comm_swap(cx: Ctx):
++    for n in cx.nodes:
++        if isinstance(n, C.Bin) and n.op in COMMUTATIVE:
++            if isinstance(n.l, C.Num) and isinstance(n.r, C.Num):
++                continue
++            if n.op in ("*", "&") and isinstance(cx.par(n), C.Unary):
++                pass
++            p = C.PREC[n.op]
++            new = f"{cx.wrap(n.r, p)} {n.op} {cx.wrap(n.l, p + 1)}"
++            yield Move("COMM-SWAP", cx.T(n), [(n.s, n.e, new)])
++
++
++@rule("TERN-SWAP", "TERN-1", "code", "c ? a : b -> !c ? b : a (relational conditions negated)")
++def r_tern_swap(cx: Ctx):
++    for n in cx.nodes:
++        if isinstance(n, C.Cond):
++            nc, _ = cx.neg(n.c)
++            if C.prec_of(C.strip_paren(n.c)) < 4:
++                nc = f"!({cx.T(n.c)})"
++            new = f"{nc} ? {cx.T(n.b)} : {cx.wrap(n.a, C.P_COND)}"
++            yield Move("TERN-SWAP", cx.T(n), [(n.s, n.e, new)])
++
++
++@rule("NOT-CMP", "materialised boolean observation (if ((a==K) == 0))", "code",
++      "!x <-> x == 0; x != 0 <-> x in conditions")
++def r_not_cmp(cx: Ctx):
++    for n in cx.nodes:
++        if isinstance(n, C.Unary) and n.op == "!":
++            yield Move("NOT-CMP", cx.T(n), [cx.replace_expr(n, f"{cx.wrap(n.x, 10)} == 0", 9)])
++        elif isinstance(n, C.Bin) and n.op in ("==", "!=") and isinstance(n.r, C.Num) and n.r.value == 0:
++            if n.op == "==":
++                yield Move("NOT-CMP", cx.T(n), [cx.replace_expr(n, f"!{cx.wrap(n.l, C.P_UNARY)}", C.P_UNARY)])
++            elif is_cond_context(cx, n):
++                yield Move("NOT-CMP", cx.T(n), [cx.replace_expr(n, cx.T(n.l), C.prec_of(n.l))])
++    for st in cx.nodes:
++        c = getattr(st, "c", None)
++        if isinstance(st, (C.If, C.While, C.DoWhile, C.For)) and c is not None:
++            c0 = C.strip_paren(c)
++            if not (isinstance(c0, C.Bin) and c0.op in REL_FLIP or isinstance(c0, C.Unary) and c0.op == "!"
++                    or isinstance(c0, C.Bin) and c0.op in ("&&", "||")):
++                yield Move("NOT-CMP", "cond " + cx.T(c), [(c.s, c.e, f"{cx.wrap(c, 10)} != 0")])
++
++
++def is_cond_context(cx: Ctx, n) -> bool:
++    p = cx.par(n)
++    while isinstance(p, C.Paren):
++        n, p = p, cx.par(p)
++    if isinstance(p, (C.If, C.While, C.DoWhile)) and n is p.c:
++        return True
++    if isinstance(p, C.For) and n is p.c:
++        return True
++    if isinstance(p, C.Bin) and p.op in ("&&", "||"):
++        return True
++    if isinstance(p, C.Cond) and n is p.c:
++        return True
++    return False
++
++
++@rule("CONST-U", "unsigned vs int constants (PROTO-1/2: constant type decides register reuse)", "code",
++      "integer literal K -> Ku")
++def r_const_u(cx: Ctx):
++    for n in cx.nodes:
++        if isinstance(n, C.Num) and not n.text.startswith("'") and re.fullmatch(r"(0[xX][0-9A-Fa-f]+|\d+)[lL]?", n.text):
++            p = cx.par(n)
++            if isinstance(p, C.Case):
++                continue
++            ctx_txt = cx.T(p) if isinstance(p, C.Expr) else n.text
++            yield Move("CONST-U", f"{n.text} in {ctx_txt}", [(n.e, n.e, "u")])
++
++
++@rule("COMPOUND", "statement-form observations (x = x op y vs x op= y, x++ vs x += 1)", "code",
++      "x = x op y <-> x op= y; x += 1 <-> x++ <-> ++x (statements)")
++def r_compound(cx: Ctx):
++    for n in cx.nodes:
++        if isinstance(n, C.Assign):
++            if n.op == "=" and isinstance(n.r, C.Bin) and n.r.op in COMPOUNDABLE and pure(n.l) \
++                    and norm(cx.T(n.r.l)) == norm(cx.T(n.l)):
++                yield Move("COMPOUND", cx.T(n), [(n.s, n.e, f"{cx.T(n.l)} {n.r.op}= {cx.T(n.r.r)}")])
++            elif n.op != "=" and n.op[:-1] in COMPOUNDABLE and pure(n.l):
++                op = n.op[:-1]
++                new = f"{cx.T(n.l)} = {cx.wrap(n.l, C.PREC[op])} {op} {cx.wrap(n.r, C.PREC[op] + 1)}"
++                yield Move("COMPOUND", cx.T(n), [cx.replace_expr(n, new, C.P_ASSIGN)])
++                if n.op in ("+=", "-=") and isinstance(n.r, C.Num) and n.r.value == 1 and \
++                        isinstance(cx.par(n), (C.ExprStmt, C.For)):
++                    yield Move("COMPOUND", cx.T(n) + " ++", [(n.s, n.e, f"{cx.T(n.l)}{n.op[0] * 2}")])
++        elif isinstance(n, (C.Post, C.Unary)) and n.op in ("++", "--") and isinstance(cx.par(n), (C.ExprStmt, C.For)):
++            other = f"{n.op}{cx.T(n.x)}" if isinstance(n, C.Post) else f"{cx.T(n.x)}{n.op}"
++            yield Move("COMPOUND", cx.T(n), [(n.s, n.e, other)])
++            yield Move("COMPOUND", cx.T(n) + " +=", [(n.s, n.e, f"{cx.T(n.x)} {n.op[0]}= 1")])
++
++
++# ------------------------------------------------------------------ assignment rules
++
++
++@rule("CHAIN-ORDER", "chained-assignment order (218D:0656), DEAD-2 (rightmost stored first)", "code",
++      "a = b = E -> b = a = E")
++def r_chain_order(cx: Ctx):
++    for n in cx.nodes:
++        if isinstance(n, C.Assign) and n.op == "=" and isinstance(n.r, C.Assign) and n.r.op == "=":
++            a, b, e = n.l, n.r.l, n.r.r
++            if not (pure(a) and pure(b)):
++                continue
++            ta, tb = type_of(cx, a), type_of(cx, b)
++            if ta and tb and norm(ta) != norm(tb):
++                continue
++            yield Move("CHAIN-ORDER", cx.T(n), [(n.s, n.e, f"{cx.T(b)} = {cx.T(a)} = {cx.T(e)}")])
++
++
++def type_of(cx: Ctx, x) -> str | None:
++    x = C.strip_paren(x)
++    if isinstance(x, C.Id):
++        t = cx.local_type(x.name)
++        if t is None:
++            for pt, pn in cx.fn.params:
++                if pn == x.name:
++                    return pt
++        return t
++    return None
++
++
++@rule("CHAIN-SPLIT", "chained-assignment order; DEAD-2", "code",
++      "a = b = E; <-> b = E; a = b;")
++def r_chain_split(cx: Ctx):
++    for blk, i, st in cx.lists():
++        if isinstance(st, C.ExprStmt) and isinstance(st.x, C.Assign) and st.x.op == "=" \
++                and isinstance(st.x.r, C.Assign) and st.x.r.op == "=":
++            a, b, e = st.x.l, st.x.r.l, st.x.r.r
++            if pure(a) and pure(b):
++                ind = cx.indent(st.s)
++                new = f"{cx.T(b)} = {cx.T(e)};\n{ind}{cx.T(a)} = {cx.T(b)};"
++                yield Move("CHAIN-SPLIT", cx.T(st), [(st.s, st.e, new)])
++        # join: b = E; a = b;
++        if i + 1 < len(blk.items):
++            nx = blk.items[i + 1]
++            if (isinstance(st, C.ExprStmt) and isinstance(st.x, C.Assign) and st.x.op == "="
++                    and isinstance(nx, C.ExprStmt) and isinstance(nx.x, C.Assign) and nx.x.op == "="
++                    and isinstance(C.strip_paren(st.x.l), C.Id) and isinstance(C.strip_paren(nx.x.r), C.Id)
++                    and C.strip_paren(nx.x.r).name == C.strip_paren(st.x.l).name and pure(nx.x.l)
++                    and not isinstance(st.x.r, C.Assign)):
++                a = nx.x.l
++                if norm(cx.T(a)) in [norm(v) for v in (cx.T(st.x.l),)]:
++                    continue
++                if any(isinstance(z, C.Id) and z.name in C.idents(a) for z in C.walk(st.x.r)):
++                    continue
++                ta, tb = type_of(cx, a), type_of(cx, st.x.l)
++                if ta and tb and norm(ta) != norm(tb):
++                    continue
++                s, _ = cx.line_span(st)
++                new = f"{cx.T(a)} = {cx.T(st.x.l)} = {cx.T(st.x.r)};"
++                yield Move("CHAIN-SPLIT", cx.T(st) + " " + cx.T(nx), [(st.s, nx.e, new)])
++
++
++def conditional_position(cx: Ctx, n, root) -> bool:
++    """True if evaluating root does not always evaluate n first-class (n under the right operand of
++    && / ||, or an arm of ?:)."""
++    child = n
++    p = cx.par(n)
++    while p is not None and child is not root:
++        if isinstance(p, C.Bin) and p.op in ("&&", "||") and child is p.r:
++            return True
++        if isinstance(p, C.Cond) and child is not p.c:
++            return True
++        if isinstance(p, C.Stmt):
++            break
++        child, p = p, cx.par(p)
++    return False
++
++
++def stmt_expr_roots(st):
++    """Expressions evaluated unconditionally first when statement st runs."""
++    if isinstance(st, C.ExprStmt):
++        return [st.x]
++    if isinstance(st, (C.If, C.While, C.Switch)):
++        return [st.c]
++    if isinstance(st, C.Return) and st.x is not None:
++        return [st.x]
++    if isinstance(st, C.For) and st.init is not None:
++        return [st.init]
++    return []
++
++
++@rule("EMBED", "embedded assignments in arguments/conditions (ExitHole, DoSow, AddAntLion, GetNestDir; "
++      "resI if ((d = f()) < 0))", "code", "v = E; S(v) <-> S(v = E)")
++def r_embed(cx: Ctx):
++    for blk, i, st in cx.lists():
++        # embed: v = E; followed by a statement that reads v once, unconditionally
++        if i + 1 < len(blk.items) and isinstance(st, C.ExprStmt) and isinstance(st.x, C.Assign) \
++                and st.x.op == "=" and isinstance(C.strip_paren(st.x.l), C.Id):
++            v = C.strip_paren(st.x.l).name
++            nx = blk.items[i + 1]
++            roots = stmt_expr_roots(nx)
++            if roots and not isinstance(nx, C.Label):
++                root = roots[0]
++                occ = occurrences(nx, v)
++                occ_root = occurrences(root, v)
++                if len(occ_root) == 1 and not conditional_position(cx, occ_root[0], root):
++                    o = occ_root[0]
++                    p = cx.par(o)
++                    if not (isinstance(p, C.Assign) and o is p.l) and not (isinstance(p, (C.Post, C.Unary)) and p.op in ("++", "--", "&")):
++                        rest_se = any(C.has_side_effects(k) for k in root.children()) if o is not root else False
++                        if not (C.has_side_effects(st.x.r) and rest_se) and len(occ) >= 1:
++                            new = f"{v} = {cx.T(st.x.r)}"
++                            e1 = cx.replace_expr(o, new, C.P_ASSIGN)
++                            s0, e0 = cx.line_span(st)
++                            yield Move("EMBED", cx.T(st) + " -> " + cx.T(root), [(s0, e0, ""), e1])
++        # unembed: an assignment inside a statement's first-evaluated expression
++        for root in stmt_expr_roots(st):
++            if isinstance(st, C.ExprStmt) and isinstance(root, C.Assign):
++                cands = [n for n in C.walk(root.r) if isinstance(n, C.Assign)]
++            else:
++                cands = [n for n in C.walk(root) if isinstance(n, C.Assign)]
++            for a in cands:
++                if a.op != "=" or not isinstance(C.strip_paren(a.l), C.Id) or conditional_position(cx, a, root):
++                    continue
++                if isinstance(st, C.For):
++                    continue
++                v = C.strip_paren(a.l).name
++                ind = cx.indent(st.s)
++                p = cx.par(a)
++                repl = (p.s, p.e, v) if isinstance(p, C.Paren) and cx.par(p) is not None and not isinstance(cx.par(p), C.Stmt) else (a.s, a.e, v)
++                if isinstance(st, C.Label):
++                    continue
++                yield Move("EMBED", "un " + cx.T(a), [(st.s, st.s, f"{cx.T(a)};\n{ind}"), repl])
++
++
++# ------------------------------------------------------------------ control-flow rules
++
++
++@rule("OR-DUP", "REG-3 (duplicated else-if tails count as references), || vs if/else-if", "code",
++      "if (a || b) S <-> if (a) S else if (b) S")
++def r_or_dup(cx: Ctx):
++    for n in cx.nodes:
++        if not isinstance(n, C.If):
++            continue
++        c = C.strip_paren(n.c)
++        if isinstance(c, C.Bin) and c.op == "||":
++            if any(isinstance(z, (C.Label, C.Case)) for z in C.walk(n.then)):
++                continue
++            ind = cx.indent(n.s)
++            th = as_block_body(cx, n.then, ind)
++            new = f"if ({cx.T(c.l)}){th}{sub_end(n.then, ind)}else if ({cx.T(c.r)}){th}"
++            if n.els is not None:
++                new += sub_end(n.then, ind) + cx.text[n.else_s:n.e]
++            yield Move("OR-DUP", cx.T(n.c), [(n.s, n.e, new)])
++        if isinstance(n.els, C.If) and n.els.els is None and norm(cx.T(n.then)) == norm(cx.T(n.els.then)):
++            new_c = f"{cx.wrap(n.c, 4)} || {cx.wrap(n.els.c, 5)}"
++            yield Move("OR-DUP", "join " + cx.T(n.c), [(n.c.s, n.c.e, new_c), (n.then.e, n.els.e, "")])
++
++
++@rule("AND-NEST", "block layout observations (if (c) goto L), REG-6 region allocation", "code",
++      "if (a && b) S <-> if (a) { if (b) S }")
++def r_and_nest(cx: Ctx):
++    for n in cx.nodes:
++        if not isinstance(n, C.If):
++            continue
++        c = C.strip_paren(n.c)
++        ind = cx.indent(n.s)
++        if n.els is not None:
++            # if (a && b) S else E  ->  if (a) { if (b) S else E } else E
++            if isinstance(c, C.Bin) and c.op == "&&" and not isinstance(n.els, C.If) \
++                    and not any(isinstance(z, (C.Label, C.Case)) for z in C.walk(n.els)):
++                i4 = ind + "    "
++                new = (f"if ({cx.T(c.l)}) {{\n{i4}if ({cx.T(c.r)}){as_block_body(cx, n.then, i4)}"
++                       f"{sub_end(n.then, i4)}else{as_block_body(cx, n.els, i4)}\n{ind}}} else"
++                       f"{as_block_body(cx, n.els, ind)}")
++                yield Move("AND-NEST", "else " + cx.T(n.c), [(n.s, n.e, new)])
++            continue
++        if isinstance(c, C.Bin) and c.op == "&&":
++            body = as_block_body(cx, n.then, ind + "    ")
++            new = f"if ({cx.T(c.l)}) {{\n{ind}    if ({cx.T(c.r)}){body}\n{ind}}}"
++            yield Move("AND-NEST", cx.T(n.c), [(n.s, n.e, new)])
++        inner = n.then
++        if isinstance(inner, C.Block) and len(inner.items) == 1:
++            inner = inner.items[0]
++        if isinstance(inner, C.If) and inner.els is None:
++            new_c = f"{cx.wrap(n.c, 6)} && {cx.wrap(inner.c, 6)}"
++            body = as_block_body(cx, inner.then, ind)
++            yield Move("AND-NEST", "join " + cx.T(n.c), [(n.s, n.e, f"if ({new_c}){body}")])
++
++
++@rule("IF-NEG", "REG-6 (if/else vs negated early exit), early returns observation", "code",
++      "if (c) A else B -> if (!c) B else A")
++def r_if_neg(cx: Ctx):
++    for n in cx.nodes:
++        if isinstance(n, C.If) and n.els is not None:
++            ind = cx.indent(n.s)
++            if isinstance(n.els, C.If):
++                # an else-if chain becomes the then-branch: braces keep the else bound
++                els = " {" + as_block_body(cx, n.els, ind) + "\n" + ind + "}"
++                end = " "
++            else:
++                els = as_block_body(cx, n.els, ind)
++                end = sub_end(n.els, ind)
++            negs = [cx.neg(n.c)[0]] + ([cx.neg_dm(n.c)[0]] if cx.neg_dm(n.c) else [])
++            for k, nc in enumerate(dict.fromkeys(negs)):
++                new = f"if ({nc}){els}{end}else{as_block_body(cx, n.then, ind)}"
++                yield Move("IF-NEG", ("demorgan " if k else "") + cx.T(n.c), [(n.s, n.e, new)])
++
++
++@rule("ELSE-WRAP", "early return vs if/else (REG-6, early returns observation)", "code",
++      "if (c) {..jump} else {B} <-> if (c) {..jump} B")
++def r_else_wrap(cx: Ctx):
++    for blk, i, st in cx.lists():
++        if not isinstance(st, C.If):
++            continue
++        ind = cx.indent(st.s)
++        if st.els is not None and C.ends_in_jump(st.then) and not isinstance(st.els, C.If):
++            body = body_items_text(cx, st.els, ind)
++            if body:
++                yield Move("ELSE-WRAP", "unwrap " + cx.T(st.c), [(st.then.e, st.e, "\n" + body)])
++        if st.els is None and C.ends_in_jump(st.then) and i + 1 < len(blk.items):
++            rest = blk.items[i + 1:]
++            if any(isinstance(r, C.Decl) for r in rest):
++                continue
++            seg = cx.text[rest[0].s:rest[-1].e]
++            old = cx.indent(rest[0].s)
++            inner = ind + "    " + reindent(seg, len(ind) + 4 - len(old))
++            sep = " " if isinstance(st.then, C.Block) else "\n" + ind
++            yield Move("ELSE-WRAP", "wrap " + cx.T(st.c), [(st.then.e, rest[-1].e, f"{sep}else {{\n{inner}\n{ind}}}")])
++
++
++@rule("RET-MERGE", "early returns observation (separate returns place the return block first, || last)",
++      "code", "if (a) J; if (b) J; <-> if (a || b) J;  (J = identical return/goto/break/continue)")
++def r_ret_merge(cx: Ctx):
++    for blk, i, st in cx.lists():
++        if not (isinstance(st, C.If) and st.els is None):
++            continue
++        j1 = single_jump(st.then)
++        if j1 is None:
++            continue
++        if i + 1 < len(blk.items):
++            nx = blk.items[i + 1]
++            if isinstance(nx, C.If) and nx.els is None and single_jump(nx.then) is not None \
++                    and norm(cx.T(single_jump(nx.then))) == norm(cx.T(j1)):
++                new_c = f"{cx.wrap(st.c, 4)} || {cx.wrap(nx.c, 5)}"
++                yield Move("RET-MERGE", "merge " + cx.T(st.c), [(st.c.s, st.c.e, new_c), (st.e, nx.e, "")])
++        c = C.strip_paren(st.c)
++        if isinstance(c, C.Bin) and c.op == "||":
++            ind = cx.indent(st.s)
++            gap = cx.text[cx.cond_rparen(st):st.then.s]
++            th = cx.T(st.then)
++            new = f"if ({cx.T(c.l)}){gap}{th}\n{ind}if ({cx.T(c.r)}){gap}{th}"
++            yield Move("RET-MERGE", "split " + cx.T(st.c), [(st.s, st.e, new)])
++
++
++def single_jump(st):
++    if isinstance(st, C.Block) and len(st.items) == 1:
++        st = st.items[0]
++    if isinstance(st, (C.Return, C.Jump)):
++        return st
++    return None
++
++
++@rule("TERN-IF", "ZI-3 (f(c ? a : b) vs if/else calls: same bytes, more line entries), TERN-1", "code",
++      "x = c ? a : b; <-> if (c) x = a; else x = b;  (also returns and call arguments)")
++def r_tern_if(cx: Ctx):
++    for blk, i, st in cx.lists():
++        ind = cx.indent(st.s)
++        if isinstance(st, C.ExprStmt):
++            x = st.x
++            if isinstance(x, C.Assign) and isinstance(C.strip_paren(x.r), C.Cond) and pure(x.l):
++                cnd = C.strip_paren(x.r)
++                lhs = f"{cx.T(x.l)} {x.op}"
++                new = (f"if ({cx.T(cnd.c)})\n{ind}    {lhs} {cx.T(cnd.a)};\n{ind}else\n{ind}    {lhs} {cx.T(cnd.b)};")
++                yield Move("TERN-IF", cx.T(st), [(st.s, st.e, new)])
++            if isinstance(x, C.Call):
++                conds = [k for k, a in enumerate(x.args) if isinstance(C.strip_paren(a), C.Cond)]
++                if len(conds) == 1 and all(pure(a) for k, a in enumerate(x.args) if k != conds[0]):
++                    k = conds[0]
++                    cnd = C.strip_paren(x.args[k])
++                    arg = x.args[k]
++
++                    def call_with(t):
++                        return cx.text[x.s:arg.s] + t + cx.text[arg.e:x.e]
++                    new = (f"if ({cx.T(cnd.c)})\n{ind}    {call_with(cx.T(cnd.a))};\n{ind}else\n{ind}    "
++                           f"{call_with(cx.T(cnd.b))};")
++                    yield Move("TERN-IF", cx.T(st), [(st.s, st.e, new)])
++        if isinstance(st, C.Return) and st.x is not None and isinstance(C.strip_paren(st.x), C.Cond):
++            cnd = C.strip_paren(st.x)
++            new = f"if ({cx.T(cnd.c)})\n{ind}    return {cx.T(cnd.a)};\n{ind}return {cx.T(cnd.b)};"
++            yield Move("TERN-IF", cx.T(st), [(st.s, st.e, new)])
++        # reverse forms
++        if isinstance(st, C.If) and st.els is not None:
++            a, b = one_stmt(st.then), one_stmt(st.els)
++            if isinstance(a, C.ExprStmt) and isinstance(b, C.ExprStmt):
++                xa, xb = a.x, b.x
++                if isinstance(xa, C.Assign) and isinstance(xb, C.Assign) and xa.op == xb.op \
++                        and norm(cx.T(xa.l)) == norm(cx.T(xb.l)):
++                    new = f"{cx.T(xa.l)} {xa.op} {cx.wrap(st.c, 4)} ? {cx.T(xa.r)} : {cx.wrap(xb.r, C.P_COND)};"
++                    yield Move("TERN-IF", "join " + cx.T(st.c), [(st.s, st.e, new)])
++                if isinstance(xa, C.Call) and isinstance(xb, C.Call) and len(xa.args) == len(xb.args) \
++                        and norm(cx.T(xa.f)) == norm(cx.T(xb.f)):
++                    diff = [k for k in range(len(xa.args)) if norm(cx.T(xa.args[k])) != norm(cx.T(xb.args[k]))]
++                    if len(diff) == 1:
++                        k = diff[0]
++                        t = f"{cx.wrap(st.c, 4)} ? {cx.T(xa.args[k])} : {cx.wrap(xb.args[k], C.P_COND)}"
++                        new = cx.text[xa.s:xa.args[k].s] + t + cx.text[xa.args[k].e:xa.e] + ";"
++                        yield Move("TERN-IF", "join " + cx.T(st.c), [(st.s, st.e, new)])
++            if isinstance(a, C.Return) and isinstance(b, C.Return) and a.x is not None and b.x is not None:
++                new = f"return {cx.wrap(st.c, 4)} ? {cx.T(a.x)} : {cx.wrap(b.x, C.P_COND)};"
++                yield Move("TERN-IF", "join " + cx.T(st.c), [(st.s, st.e, new)])
++        if isinstance(st, C.If) and st.els is None and i + 1 < len(blk.items):
++            a, nx = one_stmt(st.then), blk.items[i + 1]
++            if isinstance(a, C.Return) and isinstance(nx, C.Return) and a.x is not None and nx.x is not None:
++                new = f"return {cx.wrap(st.c, 4)} ? {cx.T(a.x)} : {cx.wrap(nx.x, C.P_COND)};"
++                yield Move("TERN-IF", "join ret " + cx.T(st.c), [(st.s, nx.e, new)])
++
++
++def one_stmt(st):
++    if isinstance(st, C.Block) and len(st.items) == 1:
++        return st.items[0]
++    return st
++
++
++@rule("FOR-WHILE", "LOOP-1 (loop entry test), /Zi line entries of for headers", "code",
++      "for (i; c; s) S <-> i; while (c) { S s; }")
++def r_for_while(cx: Ctx):
++    for blk, i, st in cx.lists():
++        ind = cx.indent(st.s)
++        if isinstance(st, C.For) and st.init is not None and st.c is not None and st.step is not None \
++                and not C.contains_jump_kind(st.body, ("continue",)):
++            inner = body_items_text(cx, st.body, ind + "    ")
++            new = (f"{cx.T(st.init)};\n{ind}while ({cx.T(st.c)}) {{\n" + (inner + "\n" if inner else "")
++                   + f"{ind}    {cx.T(st.step)};\n{ind}}}")
++            yield Move("FOR-WHILE", cx.T(st)[:60], [(st.s, st.e, new)])
++        if isinstance(st, C.While) and i > 0 and isinstance(st.body, C.Block) and len(st.body.items) >= 2:
++            prev = blk.items[i - 1]
++            last = st.body.items[-1]
++            if isinstance(prev, C.ExprStmt) and isinstance(last, C.ExprStmt) and pure(st.c) \
++                    and not C.contains_jump_kind(st.body, ("continue",)) and not isinstance(prev, C.Label):
++                rest = st.body.items[:-1]
++                seg = cx.text[rest[0].s:rest[-1].e]
++                body = "{\n" + cx.indent(rest[0].s) + seg + "\n" + ind + "}"
++                if len(rest) == 1:
++                    body = "\n" + cx.indent(rest[0].s) + seg
++                    new = f"for ({cx.T(prev.x)}; {cx.T(st.c)}; {cx.T(last.x)}){body}"
++                else:
++                    new = f"for ({cx.T(prev.x)}; {cx.T(st.c)}; {cx.T(last.x)}) {body}"
++                yield Move("FOR-WHILE", "for " + cx.T(st.c), [(prev.s, st.e, new)])
++
++
++# ------------------------------------------------------------------ locals
++
++
++def top_index_of(cx: Ctx, node) -> int | None:
++    """Index of the top-level body statement containing node."""
++    for k, st in enumerate(cx.fn.body.items):
++        if st.s <= node.s and node.e <= st.e:
++            return k
++    return None
++
++
++def uses(cx: Ctx, name):
++    return [n for n in cx.nodes if isinstance(n, C.Id) and n.name == name]
++
++
++def remove_declarator(cx: Ctx, name: str):
++    """Edits that delete local `name`'s declarator (whole line if it is the only one)."""
++    d, dd = cx.locals[name]
++    if len(d.decls) == 1:
++        s, e = cx.line_span(d)
++        return [(s, e, "")]
++    k = d.decls.index(dd)
++    if k + 1 < len(d.decls):
++        return [(dd.s, d.decls[k + 1].s, "")]
++    return [(d.decls[k - 1].e, dd.e, "")]
++
++
++def rename_edits(cx: Ctx, old: str, new: str, lo: int = 0, hi: int | None = None):
++    hi = len(cx.text) if hi is None else hi
++    return [(n.s, n.e, new) for n in uses(cx, old) if lo <= n.s and n.e <= hi]
++
++
++def fresh_name(cx: Ctx, base: str) -> str:
++    used = set(re.findall(r"[A-Za-z_]\w*", cx.text))
++    for k in range(2, 100):
++        n = f"{base}{k}"
++        if n not in used:
++            return n
++    raise ValueError("no fresh name")
++
++
++def decl_insert_point(cx: Ctx) -> tuple[int, str]:
++    """(offset, indent) after the last top-level declaration of the body (or at the body start)."""
++    items = cx.fn.body.items
++    decls = [st for st in items if isinstance(st, C.Decl)]
++    if decls:
++        last = decls[-1]
++        return cx.line_span(last)[1], cx.indent(last.s)
++    b = cx.fn.body.s + 1
++    first = items[0] if items else None
++    ind = cx.indent(first.s) if first is not None else "    "
++    nl = cx.text.find("\n", b)
++    return nl + 1, ind
++
++
++def first_stmt_point(cx: Ctx) -> tuple[int, str]:
++    items = [st for st in cx.fn.body.items if not isinstance(st, C.Decl)]
++    if not items:
++        return decl_insert_point(cx)
++    st = items[0]
++    s, _ = cx.line_span(st)
++    return s, cx.indent(st.s)
++
++
++@rule("CSE-INLINE", "BP-slot values while SI/DI are free are /Og CSE temporaries (218D:02D5/000C); "
++      "repeated far char expression gets a byte CSE temp (simB)", "code",
++      "t = E; ...t...t  ->  ...E...E  (single-assignment local, pure E)")
++def r_cse_inline(cx: Ctx):
++    for name, (d, dd) in cx.locals.items():
++        if name in cx.addr_taken or dd.is_array or dd.init is not None or d.storage == "static":
++            continue
++        occ = uses(cx, name)
++        writes = [o for o in occ if is_write(cx, o)]
++        if len(writes) != 1:
++            continue
++        w = writes[0]
++        a = cx.par(w)
++        st = cx.par(a)
++        if not (isinstance(a, C.Assign) and a.op == "=" and isinstance(st, C.ExprStmt)):
++            continue
++        e = a.r
++        if not pure(e) or name in C.idents(e):
++            continue
++        # every read after the statement, within the same block
++        blk = cx.par(st)
++        if not isinstance(blk, C.Block):
++            continue
++        k = blk.items.index(st)
++        reads = [o for o in occ if o is not w]
++        if not reads or any(o.s < st.e or o.e > blk.items[-1].e for o in reads):
++            continue
++        last = max(o.e for o in reads)
++        between = [x for x in blk.items[k + 1:] if x.s < last]
++        vars_e = set(C.idents(e))
++        nonlocal_read = any(v not in cx.locals and v not in cx.params for v in vars_e)
++        bad = False
++        for x in between:
++            if C.writes(x) & vars_e:
++                bad = True
++            if nonlocal_read and any(isinstance(z, (C.Call, C.Assign)) for z in C.walk(x)):
++                # a call or store may change the global E reads (stores only when E reads memory)
++                if any(isinstance(z, C.Call) for z in C.walk(x)) or any(
++                        isinstance(z, C.Assign) and not isinstance(C.strip_paren(z.l), C.Id) for z in C.walk(x)):
++                    bad = True
++            if any(isinstance(z, (C.Label,)) for z in C.walk(x)):
++                bad = True
++        if bad:
++            continue
++        ed = [cx.replace_expr(o, cx.T(e), C.prec_of(e)) for o in reads]
++        ed.append(cx.line_span(st) + ("",))
++        ed += remove_declarator(cx, name)
++        try:
++            ed = dedupe(ed)
++        except ValueError:
++            continue
++        yield Move("CSE-INLINE", f"{name} = {cx.T(e)}", ed)
++
++
++def dedupe(ed):
++    out = sorted(set(ed), key=lambda x: (x[0], x[1]))
++    for a, b in zip(out, out[1:]):
++        if b[0] < a[1]:
++            raise ValueError("overlap")
++    return out
++
++
++def is_write(cx: Ctx, o) -> bool:
++    p = cx.par(o)
++    while isinstance(p, C.Paren):
++        o, p = p, cx.par(p)
++    if isinstance(p, C.Assign) and o is p.l:
++        return True
++    if isinstance(p, (C.Post,)) or (isinstance(p, C.Unary) and p.op in ("++", "--")):
++        return True
++    return False
++
++
++@rule("CSE-REUSE", "CSE temporary observations (repeat expression vs cached local), STORE-1", "code",
++      "v = E; ... E ...  ->  v = E; ... v ...")
++def r_cse_reuse(cx: Ctx):
++    for blk, i, st in cx.lists():
++        if not (isinstance(st, C.ExprStmt) and isinstance(st.x, C.Assign) and st.x.op == "="
++                and isinstance(C.strip_paren(st.x.l), C.Id)):
++            continue
++        v = C.strip_paren(st.x.l).name
++        e = st.x.r
++        if not pure(e) or isinstance(C.strip_paren(e), (C.Id, C.Num)) or v in C.idents(e):
++            continue
++        ne = norm(cx.T(e))
++        vars_e = set(C.idents(e)) | {v}
++        nonlocal_read = any(x not in cx.locals and x not in cx.params for x in vars_e)
++        ed = []
++        for x in blk.items[i + 1:]:
++            hits = [n for n in C.walk(x) if isinstance(n, C.Expr) and norm(cx.T(n)) == ne
++                    and not (isinstance(cx.par(n), C.Assign) and cx.par(n).l is n)]
++            # keep only outermost hits
++            hits = [h for h in hits if not any(o is not h and o.s <= h.s and h.e <= o.e for o in hits)]
++            ed += [cx.replace_expr(h, v, C.P_PRIMARY) for h in hits]
++            if C.writes(x) & vars_e or (nonlocal_read and any(isinstance(z, C.Call) for z in C.walk(x))) \
++                    or any(isinstance(z, C.Label) for z in C.walk(x)):
++                if hits:
++                    ed = ed[:len(ed) - len(hits)]
++                break
++        if ed:
++            yield Move("CSE-REUSE", f"{v} = {cx.T(e)}", ed)
++
++
++@rule("LOCAL-MERGE", "reuse vs separate locals (REG-5; /Og overlays disjoint locals)", "code",
++      "two same-type locals with disjoint top-level live ranges -> one local")
++def r_local_merge(cx: Ctx):
++    if cx.has_goto:
++        return
++    names = [n for n, (d, dd) in cx.locals.items()
++             if n not in cx.addr_taken and not dd.is_array and dd.init is None and d.storage != "static"
++             and cx.par(d) is cx.fn.body]
++    ranges = {}
++    for n in names:
++        occ = uses(cx, n)
++        if not occ:
++            continue
++        idx = [top_index_of(cx, o) for o in occ]
++        if None in idx:
++            continue
++        ranges[n] = (min(idx), max(idx), occ)
++    for a in names:
++        for b in names:
++            if a == b or a not in ranges or b not in ranges:
++                continue
++            if norm(cx.local_type(a)) != norm(cx.local_type(b)):
++                continue
++            da, db = cx.locals[a][1], cx.locals[b][1]
++            if da.is_pointer != db.is_pointer:
++                continue
++            ea, eb = ranges[a], ranges[b]
++            if not ea[1] < eb[0]:
++                continue
++            first = min(eb[2], key=lambda o: o.s)
++            st = cx.fn.body.items[eb[0]]
++            if not (isinstance(st, C.ExprStmt) and isinstance(st.x, C.Assign) and st.x.op == "="
++                    and C.strip_paren(st.x.l) is first and b not in C.idents(st.x.r)):
++                continue
++            ed = rename_edits(cx, b, a) + remove_declarator(cx, b)
++            yield Move("LOCAL-MERGE", f"{b} -> {a}", ed)
++
++
++@rule("LOCAL-SPLIT", "REG-5 (new locals for recomputed positions), reuse vs separate locals", "code",
++      "a local re-assigned at top level gets a new local for its second live range")
++def r_local_split(cx: Ctx):
++    if cx.has_goto:
++        return
++    items = cx.fn.body.items
++    for name in list(cx.locals) + list(cx.params):
++        if name in cx.addr_taken:
++            continue
++        if name in cx.locals:
++            d, dd = cx.locals[name]
++            if dd.is_array or d.storage == "static" or cx.par(d) is not cx.fn.body:
++                continue
++            typ = cx.text[d.spec_s:d.spec_e] + (" *" * 0)
++            if dd.is_pointer:
++                typ = cx.text[d.spec_s:dd.name_s].strip() if len(d.decls) == 1 else None
++        else:
++            typ = next(t for t, p in cx.fn.params if p == name)
++        if not typ:
++            continue
++        occ = uses(cx, name)
++        for k, st in enumerate(items):
++            if not (isinstance(st, C.ExprStmt) and isinstance(st.x, C.Assign)
++                    and isinstance(C.strip_paren(st.x.l), C.Id) and C.strip_paren(st.x.l).name == name):
++                continue
++            before = [o for o in occ if o.e <= st.s]
++            after = [o for o in occ if o.s >= st.e]
++            if not before or not after:
++                continue
++            nn = fresh_name(cx, name)
++            at, ind = decl_insert_point(cx)
++            ed = [(at, at, f"{ind}{typ} {nn};\n")]
++            if st.x.op == "=":
++                if name in C.idents(st.x.r):
++                    continue
++                ed.append((st.x.l.s, st.x.l.e, nn))
++            else:
++                op = st.x.op[:-1]
++                ed.append((st.x.s, st.x.e, f"{nn} = {name} {op} {cx.wrap(st.x.r, C.PREC[op] + 1)}"))
++            ed += [(o.s, o.e, nn) for o in after]
++            yield Move("LOCAL-SPLIT", f"{name} @ {cx.T(st)}", ed)
++
++
++@rule("PARAM-COPY", "SPLIT-1 (local copy of a far pointer parameter), local copies of parameters", "code",
++      "param p -> local q = p; uses of p become q")
++def r_param_copy(cx: Ctx):
++    for typ, p in cx.fn.params:
++        if not p or p in cx.addr_taken:
++            continue
++        occ = uses(cx, p)
++        if not occ:
++            continue
++        nn = fresh_name(cx, p)
++        at, ind = decl_insert_point(cx)
++        fs, find = first_stmt_point(cx)
++        ed = [(at, at, f"{ind}{typ} {nn};\n")]
++        if fs == at:
++            ed = [(at, at, f"{ind}{typ} {nn};\n\n{find}{nn} = {p};\n")]
++        else:
++            ed.append((fs, fs, f"{find}{nn} = {p};\n"))
++        ed += [(o.s, o.e, nn) for o in occ]
++        try:
++            ed = dedupe(ed)
++        except ValueError:
++            continue
++        yield Move("PARAM-COPY", p, ed)
++
++
++@rule("RESULT-LOCAL", "REG-2 (a local that only carries the return value still takes SI)", "code",
++      "return E; -> r = E; return r;  (new local of the return type)")
++def r_result_local(cx: Ctx):
++    rt = return_type(cx)
++    if not rt or rt == "void":
++        return
++    rets = [n for n in cx.nodes if isinstance(n, C.Return) and n.x is not None
++            and not isinstance(C.strip_paren(n.x), (C.Id, C.Num))]
++    if not rets:
++        return
++    nn = fresh_name(cx, "result")
++    at, ind = decl_insert_point(cx)
++    for r in rets:
++        blk = cx.par(r)
++        if not isinstance(blk, C.Block):
++            continue
++        i2 = cx.indent(r.s)
++        ed = [(at, at, f"{ind}{rt} {nn};\n"), (r.s, r.e, f"{nn} = {cx.T(r.x)};\n{i2}return {nn};")]
++        yield Move("RESULT-LOCAL", cx.T(r), ed)
++
++
++def return_type(cx: Ctx) -> str | None:
++    head = cx.text[cx.fn.head_s:cx.fn.params_s]
++    head = head[:head.rfind(cx.fn.name)]
++    head = re.split(r"[;}]|\*/", head)[-1]
++    toks = head.split()
++    while toks and toks[-1] in ("far", "near", "pascal", "cdecl", "_fastcall", "_loadds", "_pascal", "_cdecl",
++                                "_far", "_near", "_export", "_saveregs", "_interrupt", "interrupt"):
++        toks.pop()
++    toks = [t for t in toks if t not in ("static", "extern")]
++    return " ".join(toks) or None
++
++
++@rule("DECL-SWAP", "declaration order (identifier windows, slot order of address-taken locals)", "decl",
++      "swap two adjacent local declarations")
++def r_decl_swap(cx: Ctx):
++    for blk, i, st in cx.lists():
++        if isinstance(st, C.Decl) and st.storage != "typedef":
++            if i + 1 < len(blk.items) and isinstance(blk.items[i + 1], C.Decl):
++                nx = blk.items[i + 1]
++                if any(d.init is not None and not isinstance(d.init, C.Num) for d in st.decls + nx.decls):
++                    continue
++                yield Move("DECL-SWAP", f"{cx.T(st)} / {cx.T(nx)}",
++                           [(st.s, st.e, cx.T(nx)), (nx.s, nx.e, cx.T(st))])
++            if len(st.decls) >= 2 and all(d.init is None for d in st.decls):
++                for k in range(len(st.decls) - 1):
++                    a, b = st.decls[k], st.decls[k + 1]
++                    yield Move("DECL-SWAP", f"{cx.T(a)} , {cx.T(b)}", [(a.s, a.e, cx.T(b)), (b.s, b.e, cx.T(a))])
++
++
++@rule("DECL-INIT", "declaration form (int x = E vs int x; x = E)", "code",
++      "int x = E;  <->  int x; ... x = E;")
++def r_decl_init(cx: Ctx):
++    items = cx.fn.body.items
++    decls = [st for st in items if isinstance(st, C.Decl)]
++    for st in decls:
++        if st.storage == "static" or len(st.decls) != 1:
++            continue
++        dd = st.decls[0]
++        if dd.init is None or isinstance(dd.init, C.InitList) or dd.is_array:
++            continue
++        later = decls[decls.index(st) + 1:]
++        if any(d.init is not None and not pure(d.init) for x in later for d in x.decls):
++            continue
++        at, ind = first_stmt_point(cx)
++        yield Move("DECL-INIT", cx.T(st), [(dd.name_s + len(dd.name), dd.e, ""), (at, at, f"{ind}{dd.name} = {cx.T(dd.init)};\n")])
++    # join: first statement 'x = E;' for x declared without initialiser
++    stmts = [st for st in items if not isinstance(st, C.Decl)]
++    if stmts and isinstance(stmts[0], C.ExprStmt) and isinstance(stmts[0].x, C.Assign) and stmts[0].x.op == "=":
++        v = C.strip_paren(stmts[0].x.l)
++        if isinstance(v, C.Id) and v.name in cx.locals:
++            d, dd = cx.locals[v.name]
++            e = stmts[0].x.r
++            if cx.par(d) is cx.fn.body and dd.init is None and not dd.is_array and \
++                    not any(x in cx.locals for x in C.idents(e)):
++                s0, e0 = cx.line_span(stmts[0])
++                yield Move("DECL-INIT", "join " + cx.T(stmts[0]), [(dd.e, dd.e, f" = {cx.T(e)}"), (s0, e0, "")])
++
++
++@rule("DEAD-AUTO", "one plain auto removes dead far-address spills (JamScent*, AlarmHere2), DEAD-1/2", "steer",
++      "add an unused int local (steering: analysis only)")
++def r_dead_auto(cx: Ctx):
++    nn = fresh_name(cx, "unused")
++    at, ind = decl_insert_point(cx)
++    yield Move("DEAD-AUTO", "int unused", [(at, at, f"{ind}int {nn};\n")])
++
++
++# ------------------------------------------------------------------ file level
++
++
++def top_decls(cx: Ctx):
++    """Top-level declarations before the function: [(s, e, text, names)] (statement spans)."""
++    src = cx.src
++    out = []
++    depth = 0
++    start = None
++    names = []
++    fbody = False
++    prev = None
++    for t in src.sig:
++        if t.s >= cx.fn.head_s:
++            break
++        if start is None:
++            start = t.s
++            names = []
++        if t.text == "{":
++            if depth == 0 and prev is not None and prev.text == ")":
++                fbody = True
++            depth += 1
++        elif t.text == "}":
++            depth -= 1
++            if depth == 0 and fbody:
++                fbody = False
++                start = None
++                prev = t
++                continue
++        elif t.kind == "id" and depth == 0:
++            names.append(t.text)
++        if t.text == ";" and depth == 0:
++            out.append((start, t.e, src.text[start:t.e], names))
++            start = None
++        prev = t
++    # drop function definitions (they contain '{' ... '}' followed by no ';' handled by span start)
++    return [d for d in out if "{" not in d[2] or d[2].lstrip().startswith(("struct", "typedef", "union", "enum"))]
++
++
++def callees(cx: Ctx) -> set:
++    return {C.strip_paren(n.f).name for n in cx.nodes if isinstance(n, C.Call) and isinstance(C.strip_paren(n.f), C.Id)}
++
++
++def prototypes(cx: Ctx):
++    """[(decl_s, lp, rp, name, params)] for top-level prototypes of functions the target calls."""
++    want = callees(cx)
++    out = []
++    for s, e, text, names in top_decls(cx):
++        m = None
++        for mm in re.finditer(r"\b([A-Za-z_]\w*)\s*\(", text):
++            if mm.group(1) in want:
++                m = mm
++                break
++        if m is None or "{" in text:
++            continue
++        lp = s + m.end() - 1
++        depth, j = 0, lp
++        while j < e:
++            if cx.text[j] == "(":
++                depth += 1
++            elif cx.text[j] == ")":
++                depth -= 1
++                if depth == 0:
++                    break
++            j += 1
++        params = [p.strip() for p in split_params(cx.text[lp + 1:j])]
++        out.append((s, lp, j, m.group(1), params))
++    return out
++
++
++def split_params(t: str) -> list[str]:
++    out, cur, d = [], "", 0
++    for ch in t:
++        if ch == "(":
++            d += 1
++        elif ch == ")":
++            d -= 1
++        if ch == "," and d == 0:
++            out.append(cur)
++            cur = ""
++        else:
++            cur += ch
++    if cur.strip():
++        out.append(cur)
++    return out
++
++
++def param_name(p: str) -> str | None:
++    toks = re.findall(r"[A-Za-z_]\w*", p)
++    toks = [t for t in toks if t not in C.TYPE_WORDS and t not in C.STORAGE]
++    if not toks or p.strip().endswith("*") or p.strip() in ("void", "..."):
++        return None
++    # a lone typedef name is a type, not a parameter name
++    words = re.findall(r"[A-Za-z_]\w*", p)
++    if len(words) == 1:
++        return None
++    return toks[-1] if re.search(r"\b" + re.escape(toks[-1]) + r"\s*(\[[^\]]*\])?\s*$", p) else None
++
++
++@rule("PROTO-NAMES", "symbol-table count (named prototype parameters are identifiers), SYM-1", "decl",
++      "named <-> unnamed parameters in the prototype of a callee")
++def r_proto_names(cx: Ctx):
++    for s, lp, rp, name, params in prototypes(cx):
++        if not params or params == ["void"]:
++            continue
++        named = [param_name(p) for p in params]
++        if any(named):
++            new = []
++            for p, n in zip(params, named):
++                new.append(re.sub(r"\s*\b" + re.escape(n) + r"\s*(\[[^\]]*\])?\s*$", r"\1", p) if n else p)
++            yield Move("PROTO-NAMES", f"{name} unnamed", [(lp + 1, rp, ", ".join(new))])
++        else:
++            new = [p if p == "..." else f"{p}{'' if p.endswith('*') else ' '}{'p%d' % k}" for k, p in enumerate(params)]
++            yield Move("PROTO-NAMES", f"{name} named", [(lp + 1, rp, ", ".join(new))])
++
++
++@rule("PROTO-TYPE", "PROTO-1/PROTO-2 (declared parameter type of constant arguments), REG-4 (variadic)", "decl",
++      "callee prototype: int <-> unsigned parameter, (x, ...) variadic, () unprototyped")
++def r_proto_type(cx: Ctx):
++    for s, lp, rp, name, params in prototypes(cx):
++        if not params or params == ["void"]:
++            continue
++        for k, p in enumerate(params):
++            if re.match(r"^(int|long)\b", p):
++                q = "unsigned " + p
++            elif re.match(r"^unsigned\s+(int|long)\b", p):
++                q = re.sub(r"^unsigned\s+", "", p)
++            elif re.match(r"^unsigned\b", p):
++                q = re.sub(r"^unsigned\b", "int", p)
++            else:
++                continue
++            new = params[:k] + [q] + params[k + 1:]
++            yield Move("PROTO-TYPE", f"{name} arg{k} {q}", [(lp + 1, rp, ", ".join(new))])
++        if "..." not in params and len(params) >= 2:
++            yield Move("PROTO-TYPE", f"{name} variadic", [(lp + 1, rp, params[0] + ", ...")])
++        yield Move("PROTO-TYPE", f"{name} unprototyped", [(lp + 1, rp, "")])
++
++
++@rule("EXTERN-SWAP", "declaration order of externs (symbol-table state, SYM-1, first-use order)", "decl",
++      "swap two adjacent top-level declarations, one of them referenced by the function")
++def r_extern_swap(cx: Ctx):
++    refs = set(C.idents(cx.fn.body))
++    ds = top_decls(cx)
++    for a, b in zip(ds, ds[1:]):
++        if "{" in a[2] or "{" in b[2] or a[2].lstrip().startswith("typedef") or b[2].lstrip().startswith("typedef"):
++            continue
++        if not (set(a[3]) & refs or set(b[3]) & refs):
++            continue
++        between = cx.text[a[1]:b[0]]
++        if "#" in between or "/*" in between:
++            continue
++        yield Move("EXTERN-SWAP", f"{a[2].strip()[:50]} <> {b[2].strip()[:50]}",
++                   [(a[0], a[1], b[2]), (b[0], b[1], a[2])])
++
++
++# ------------------------------------------------------------------ enumeration
++
++DEFAULT_RULES = [r for r in RULES if RULES[r].category != "steer"]
++
++
++def enumerate_moves(text: str, fname: str, rules=None) -> list[Move]:
++    cx = Ctx(text, fname)
++    out = []
++    for rid in (rules or DEFAULT_RULES):
++        r = RULES[rid]
++        seen = {}
++        try:
++            for mv in r.fn(cx):
++                k = mv.key
++                seen[k] = seen.get(k, 0) + 1
++                if seen[k] > 1:
++                    mv.key = f"{k}#{seen[k]}"
++                out.append(mv)
++        except (C.ParseError, ValueError, KeyError, IndexError, StopIteration):
++            continue
++    return out
++
++
++def apply_move(text: str, mv: Move) -> str:
++    return apply_edits(text, mv.edits)
++
++
++def valid_variant(text: str, fname: str) -> bool:
++    """A variant must still parse and still define the function."""
++    try:
++        C.Source(text).function(fname)
++        return True
++    except (C.ParseError, KeyError, IndexError):
++        return False
++
++
++# ------------------------------------------------------------------ later additions
++
++
++@rule("TEMP-INTRO", "CSE temporaries vs named locals (reverse of CSE-INLINE), STORE-1, REG-5", "code",
++      "S(... e ...)  ->  t = e; S(... t ...)  (new int local for an operand subexpression)")
++def r_temp_intro(cx: Ctx):
++    at, ind0 = decl_insert_point(cx)
++    for blk, i, st in cx.lists():
++        if isinstance(st, (C.Label, C.Case, C.Decl)):
++            continue
++        for root in stmt_expr_roots(st):
++            for e in C.walk(root):
++                if e is root or not isinstance(e, (C.Call, C.Index, C.Member, C.Bin)):
++                    continue
++                p = cx.par(e)
++                if not ((isinstance(p, C.Bin) and p.op not in ("&&", "||"))
++                        or (isinstance(p, C.Call) and e is not p.f)
++                        or (isinstance(p, C.Index) and e is p.i)):
++                    continue
++                if isinstance(e, C.Bin) and e.op in ("&&", "||"):
++                    continue
++                if any(isinstance(z, C.Assign) or isinstance(z, C.Post) for z in C.walk(e)):
++                    continue
++                if conditional_position(cx, e, root):
++                    continue
++                if isinstance(st, C.ExprStmt) and isinstance(root, C.Assign) and (e is root.l or
++                                                                                   (root.l.s <= e.s and e.e <= root.l.e)):
++                    continue
++                nn = fresh_name(cx, "tmp")
++                ind = cx.indent(st.s)
++                ed = [(at, at, f"{ind0}int {nn};\n"), (st.s, st.s, f"{nn} = {cx.T(e)};\n{ind}"), (e.s, e.e, nn)]
++                try:
++                    ed = dedupe(ed)
++                except ValueError:
++                    continue
++                yield Move("TEMP-INTRO", cx.T(e), ed)
++
++
++def case_groups(sw):
++    """[(start, end, [items])] of a switch body: each group runs from a case label to the next."""
++    if not isinstance(sw.body, C.Block):
++        return []
++    groups = []
++    for it in sw.body.items:
++        if isinstance(it, C.Case):
++            groups.append([it])
++        elif groups:
++            groups[-1].append(it)
++    return groups
++
++
++def case_tail_jump(cx, g) -> bool:
++    last = g[-1]
++    while isinstance(last, (C.Case, C.Label)) and last.stmt is not None:
++        last = last.stmt
++    return isinstance(last, (C.Return, C.Jump)) or C.ends_in_jump(last)
++
++
++@rule("CASE-SWAP", "switch observations (case blocks laid out by value; merged identical cases, LessonDone)",
++      "code", "swap two adjacent case groups that both end in a jump")
++def r_case_swap(cx: Ctx):
++    for sw in cx.nodes:
++        if not isinstance(sw, C.Switch):
++            continue
++        gs = case_groups(sw)
++        for a, b in zip(gs, gs[1:]):
++            if not (case_tail_jump(cx, a) and case_tail_jump(cx, b)):
++                continue
++            sa, ea = a[0].s, a[-1].e
++            sb, eb = b[0].s, b[-1].e
++            ta, tb = cx.text[sa:ea], cx.text[sb:eb]
++            yield Move("CASE-SWAP", f"{ta[:30]} <> {tb[:30]}", [(sa, ea, tb), (sb, eb, ta)])
++
++
++DEFAULT_RULES = [r for r in RULES if RULES[r].category != "steer"]
++
++
++def reads_writes(cx: Ctx, st):
++    """(read texts, written texts, has_call) of a statement; lvalues compared by normalised text."""
++    w, r = set(), set()
++    call = False
++    for n in C.walk(st):
++        if isinstance(n, C.Call):
++            call = True
++        if isinstance(n, C.Assign):
++            w.add(norm(cx.T(n.l)))
++            if isinstance(C.strip_paren(n.l), C.Id):
++                w.add(C.strip_paren(n.l).name)
++        elif isinstance(n, (C.Post, C.Unary)) and n.op in ("++", "--"):
++            w.add(norm(cx.T(n.x)))
++        if isinstance(n, (C.Id, C.Member, C.Index)):
++            p = cx.par(n)
++            if isinstance(p, C.Member) or (isinstance(p, C.Index) and n is p.a):
++                continue           # only whole access paths
++            r.add(norm(cx.T(n)) if not isinstance(n, C.Id) else n.name)
++    return r, w, call
++
++
++@rule("STMT-SWAP", "statement order vs /Og store sinking (STORE-1), block layout observations", "code",
++      "swap two adjacent independent expression statements")
++def r_stmt_swap(cx: Ctx):
++    for blk, i, st in cx.lists():
++        if i + 1 >= len(blk.items):
++            continue
++        nx = blk.items[i + 1]
++        if not (isinstance(st, C.ExprStmt) and isinstance(nx, C.ExprStmt)):
++            continue
++        ra, wa, ca = reads_writes(cx, st)
++        rb, wb, cb = reads_writes(cx, nx)
++        if ca and cb:
++            continue
++        if (ca and wb) or (cb and wa):
++            continue
++
++        def overlap(x, y):
++            if x == y:
++                return True
++            a, b = (x, y) if len(x) < len(y) else (y, x)
++            if b.startswith(a) and b[len(a)] in ".[-":
++                return True
++            # element accesses of one array may alias whatever their indices
++            return ("[" in a or "[" in b) and a.split("[")[0] == b.split("[")[0]
++
++        def clash(ws, rs):
++            return any(overlap(x, y) for x in ws for y in rs)
++        if clash(wa, rb | wb) or clash(wb, ra):
++            continue
++        yield Move("STMT-SWAP", f"{cx.T(st)} <> {cx.T(nx)}", [(st.s, st.e, cx.T(nx)), (nx.s, nx.e, cx.T(st))])
++
++
++@rule("STORE-LOCAL", "STORE-1 (compute a stored member value into a local first), REG-5", "code",
++      "M = E; ... M ...  ->  t = E; M = t; ... t ...  (M a member/element, t a new int local)")
++def r_store_local(cx: Ctx):
++    at, ind0 = decl_insert_point(cx)
++    for blk, i, st in cx.lists():
++        if not (isinstance(st, C.ExprStmt) and isinstance(st.x, C.Assign) and st.x.op == "="
++                and isinstance(C.strip_paren(st.x.l), (C.Member, C.Index, C.Unary))):
++            continue
++        m = norm(cx.T(st.x.l))
++        nn = fresh_name(cx, "val")
++        ind = cx.indent(st.s)
++        ed = [(at, at, f"{ind0}int {nn};\n"), (st.s, st.e, f"{nn} = {cx.T(st.x.r)};\n{ind}{cx.T(st.x.l)} = {nn};")]
++        for x in blk.items[i + 1:]:
++            hits = [n for n in C.walk(x) if isinstance(n, C.Expr) and norm(cx.T(n)) == m and not is_write(cx, n)]
++            ed += [(h.s, h.e, nn) for h in hits]
++            _, w, call = reads_writes(cx, x)
++            if m in w or call or any(isinstance(z, C.Label) for z in C.walk(x)):
++                break
++        try:
++            ed = dedupe(ed)
++        except ValueError:
++            continue
++        yield Move("STORE-LOCAL", cx.T(st), ed)
++
++
++DEFAULT_RULES = [r for r in RULES if RULES[r].category != "steer"]
++
++
++def all_prototypes(cx: Ctx):
++    """[(decl_s, lp, rp, name, params)] for every top-level function prototype before the function."""
++    out = []
++    for s, e, text, names in top_decls(cx):
++        if "{" in text or text.lstrip().startswith("typedef"):
++            continue
++        m = re.search(r"\b([A-Za-z_]\w*)\s*\(", text)
++        if m is None or m.group(1) in C.TYPE_WORDS:
++            continue
++        lp = s + m.end() - 1
++        depth, j = 0, lp
++        while j < e:
++            if cx.text[j] == "(":
++                depth += 1
++            elif cx.text[j] == ")":
++                depth -= 1
++                if depth == 0:
++                    break
++            j += 1
++        params = [p.strip() for p in split_params(cx.text[lp + 1:j])]
++        out.append((s, lp, j, m.group(1), params))
++    return out
++
++
++@rule("SYM-NAMES", "SYM-1 / symbol-table count: named prototype parameters of *any* earlier prototype are "
++      "identifiers (S14 CalcScore needed +6 named parameters)", "decl",
++      "named <-> unnamed parameters in any prototype before the function")
++def r_sym_names(cx: Ctx):
++    want = callees(cx)
++    for s, lp, rp, name, params in all_prototypes(cx):
++        if name in want or not params or params == ["void"] or params == [""]:
++            continue
++        named = [param_name(p) for p in params]
++        if any(named):
++            new = [re.sub(r"\s*\b" + re.escape(n) + r"\s*(\[[^\]]*\])?\s*$", r"\1", p) if n else p
++                   for p, n in zip(params, named)]
++            yield Move("SYM-NAMES", f"{name} unnamed (-{sum(1 for n in named if n)})", [(lp + 1, rp, ", ".join(new))])
++        else:
++            new = [p if p == "..." else f"{p}{'' if p.endswith('*') else ' '}{'p%d' % k}" for k, p in enumerate(params)]
++            yield Move("SYM-NAMES", f"{name} named (+{len(params)})", [(lp + 1, rp, ", ".join(new))])
++
++
++DEFAULT_RULES = [r for r in RULES if RULES[r].category != "steer"]
+--- /dev/null
++++ b/tools/autosearch.py
+@@ -0,0 +1,598 @@
++"""autosearch.py - rule-driven source-variant search for one open function (prototype tool).
++
++    python tools/autosearch.py FUNC [--module KEY] [--base FILE] [--rules R,R] [--steer]
++                         [--beam 6] [--depth 4] [--budget 1200] [--level-cap 400] [--jobs 16]
++                         [--out DIR] [--promote] [--quiet]
++    python tools/autosearch.py --list-rules
++
++FUNC is an open function of a module (normally a SCAFFOLD draft in the canonical source).  The
++base is the canonical module source with FUNC's SCAFFOLD block unwrapped in place (or --base,
++a whole module file).  Moves are enumerated by the rule catalogue (rules.py; every rule is named
++after its evidence in docs/codegen-rules.md / evidence/codegen), applied one at a time to the
++whole module text, compiled in parallel and checked with modules.verify_module -- the check
++promote.py runs -- against *every* claim of the module plus FUNC.
++
++Score (lower is better): (not exact, differing instructions after alignment with branch targets
++masked, differing bytes, |length difference|).  A variant that breaks another claim or a data
++placement that the base keeps exact is rejected (never enters the beam).
++
++Search: level 1 evaluates every single move of the base; later levels expand the beam (best
++distinct-code states) with the moves that changed code at level 1 or are new at that state,
++ranked by their level-1 score, until --depth, --budget or an exact result.
++
++Nothing outside build/ is written unless --promote is given and the best variant is exact with
++every module claim exact; then tools/promote.py runs (--verify-only first), the applied rules are
++recorded as a source comment above the function, and --layout-inferred is added when only
++declaration-category rules were applied.  Steering rules (--steer) are never promoted.
++"""
++from __future__ import annotations
++
++import argparse
++import concurrent.futures as cf
++import datetime as dt
++import difflib
++import hashlib
++import json
++import os
++import re
++import subprocess
++import sys
++import threading
++from pathlib import Path
++
++HERE = Path(__file__).resolve().parent
++ROOT = HERE.parent
++sys.path.insert(0, str(HERE))
++SCRATCH = ROOT / "build" / "helpers" / "autosearch"
++
++try:
++    import capstone  # noqa: F401
++except ImportError:
++    sys.path.insert(0, "C:/tools/capstone-5.0.3")
++from capstone import CS_ARCH_X86, CS_MODE_16, Cs  # noqa: E402
++
++import compiler  # noqa: E402
++import exe as exemod  # noqa: E402
++import match  # noqa: E402
++import modctx  # noqa: E402
++import modules as modmod  # noqa: E402
++import variants  # noqa: E402
++from omf import OmfReader  # noqa: E402
++
++import csrc as C  # noqa: E402
++import srcrules as R  # noqa: E402
++
++MD = Cs(CS_ARCH_X86, CS_MODE_16)
++BRANCH_RE = re.compile(r"^(j\w+|loop\w*|jcxz|call)$")
++_lock = threading.Lock()
++
++
++# ------------------------------------------------------------------ base text
++
++
++NL = chr(10)
++SCAFF_BLOCK_RE = re.compile(r"/\*\s*SCAFFOLD BEGIN.*?\*/[ \t]*\n?(.*?)/\*\s*SCAFFOLD END\s*\*/[ \t]*\n?", re.S)
++
++
++def unscaffold(text: str, fname: str) -> str:
++    """Unwrap the SCAFFOLD block that defines fname (its body stays in place).  Other functions of
++    the same block stay scaffolded, each in its own block, so a promotion never carries an
++    unverified in-place draft."""
++    for m in SCAFF_BLOCK_RE.finditer(text):
++        inner = m.group(1)
++        if fname not in modmod.FUNC_DEF_RE.findall(inner):
++            continue
++        try:
++            fns = C.Source(inner).functions()
++        except C.ParseError:
++            fns = []
++        out, pos = [], 0
++        for fn in fns:
++            if fn.name == fname:
++                continue
++            out.append(inner[pos:fn.head_s])
++            out.append("/* SCAFFOLD BEGIN: (split from a shared block by autosearch) */" + NL)
++            out.append(inner[fn.head_s:fn.e] + NL + "/* SCAFFOLD END */")
++            pos = fn.e
++        out.append(inner[pos:])
++        return text[:m.start()] + "".join(out) + text[m.end():]
++    return text
++
++
++# ------------------------------------------------------------------ scoring
++
++
++def insns(b: bytes):
++    out = []
++    for i in MD.disasm(b, 0):
++        m = i.mnemonic
++        out.append(m if BRANCH_RE.match(m) and not i.op_str.startswith(("word", "dword", "far")) else
++                   f"{m} {i.op_str}")
++    return out
++
++
++def insn_distance(a: bytes, b: bytes) -> int:
++    x, y = insns(a), insns(b)
++    sm = difflib.SequenceMatcher(a=x, b=y, autojunk=False)
++    return sum(max(i2 - i1, j2 - j1) for tag, i1, i2, j1, j2 in sm.get_opcodes() if tag != "equal")
++
++
++def candidate_bytes(obj_bytes: bytes, row: dict, placements: dict) -> bytes | None:
++    """The candidate function's full bytes (fixups bound as in match.Binder)."""
++    obj = OmfReader(communals=True).read(obj_bytes)
++    pub, prec = match.public_in(obj, row["name"])
++    if prec is None:
++        return None
++    seg = prec["segment"]
++    offs = sorted(p["offset"] for p in obj.publics + getattr(obj, "local_publics", []) if p["segment"] == seg)
++    nxt = min((o for o in offs if o > prec["offset"]), default=len(obj.segments.get(seg, b"")))
++    size = nxt - prec["offset"]
++    t = match.Target(row["unit"], row["seg"], row["off"], size)
++    try:
++        res = match.Binder(t, obj, seg, pub, {k: {"seg": v["seg"], "off": v["off"]} for k, v in placements.items()}).bind()
++    except Exception:  # noqa: BLE001 - reading past the unit end for a long candidate
++        return bytes(obj.segments[seg][prec["offset"]:nxt])
++    return res.candidate
++
++
++class Evaluator:
++    def __init__(self, ctx, fname: str, jobs: int, cache_dir: Path):
++        self.ctx = ctx
++        self.fname = fname
++        self.jobs = jobs
++        self.row = ctx.function(fname)
++        x = exemod.load()
++        self.orig = x.read(self.row["unit"], self.row["seg"] * 16 + self.row["off"], self.row["size"])
++        self.claims = variants.check_set(ctx, [fname], claims_only=True)
++        self.base_ok = None            # claim names exact in the base
++        self.base_data = None
++        cache_dir.mkdir(parents=True, exist_ok=True)
++        self.cache_file = cache_dir / f"{ctx.key.replace(':', '_').replace('@', '_')}_{fname}.json"
++        self.cache = {}
++        if self.cache_file.exists():
++            try:
++                self.cache = json.loads(self.cache_file.read_text())
++            except ValueError:
++                self.cache = {}
++        self.compiles = 0
++        compiler.verify_profile(ctx.profile)
++        exemod.load()
++        match.symbols()
++
++    def key(self, text: str) -> str:
++        h = hashlib.sha256()
++        h.update(text.encode("latin1", "replace"))
++        h.update(json.dumps([self.ctx.profile, self.ctx.flags, sorted(self.ctx.placements)]).encode())
++        h.update(json.dumps([c["name"] for c in self.claims]).encode())
++        return h.hexdigest()
++
++    def one(self, text: str) -> dict:
++        k = self.key(text)
++        with _lock:
++            if k in self.cache:
++                return self.cache[k]
++        col = {}
++        try:
++            res = modmod.verify_module(text, self.ctx.module_dict(extent=True), self.claims, collect=col)
++        except (Exception, SystemExit) as e:  # noqa: BLE001
++            res = {"compile_ok": False, "log": f"{type(e).__name__}: {e}", "claims": {}}
++        out = {"compile_ok": res.get("compile_ok", False), "claims": {}, "data": {}}
++        if out["compile_ok"]:
++            out["claims"] = {n: bool(r.get("exact")) for n, r in res["claims"].items()}
++            out["order"] = {n: r.get("reloc_order") for n, r in res["claims"].items()}
++            out["data"] = {n: bool(r.get("exact")) for n, r in res.get("data", {}).items()}
++            out["module_reasons"] = res.get("module_reasons", [])
++            t = res["claims"].get(self.fname, {})
++            out["reasons"] = t.get("reasons", [])
++            out["exact"] = bool(t.get("exact"))
++            out["all_exact"] = bool(res.get("exact"))
++            cb = candidate_bytes(col["object"], self.row, self.ctx.placements) if "object" in col else None
++            if cb is None:
++                out["score"] = [1, 10 ** 6, 10 ** 6, 10 ** 6]
++                out["fhash"] = None
++            else:
++                n = min(len(cb), len(self.orig))
++                bd = sum(1 for i in range(n) if cb[i] != self.orig[i]) + abs(len(cb) - len(self.orig))
++                out["score"] = [0 if out["exact"] else 1, insn_distance(cb, self.orig), bd,
++                                abs(len(cb) - len(self.orig))]
++                out["fhash"] = hashlib.sha256(cb).hexdigest()[:16]
++                out["length"] = len(cb)
++        else:
++            out["log"] = res.get("log", "")[-300:]
++        with _lock:
++            self.cache[k] = out
++            self.compiles += 1
++        return out
++
++    def many(self, texts: list[str]) -> list[dict]:
++        with cf.ThreadPoolExecutor(max(1, self.jobs)) as ex:
++            return list(ex.map(self.one, texts))
++
++    def save(self):
++        with _lock:
++            self.cache_file.write_text(json.dumps(self.cache))
++
++    def set_base(self, r: dict):
++        self.base_ok = {n for n, ok in r["claims"].items() if ok and n != self.fname}
++        self.base_data = {n for n, ok in r["data"].items() if ok}
++
++    def regressions(self, r: dict) -> list[str]:
++        if not r.get("compile_ok"):
++            return ["compile failed"]
++        out = [n for n in self.base_ok if not r["claims"].get(n)]
++        out += ["data " + n for n in self.base_data if not r["data"].get(n)]
++        return out
++
++
++# ------------------------------------------------------------------ search
++
++
++class State:
++    def __init__(self, text: str, path: list, res: dict):
++        self.text = text
++        self.path = path          # [(rule, site, key)]
++        self.res = res
++
++    @property
++    def score(self):
++        return tuple(self.res.get("score", [1, 10 ** 6, 10 ** 6, 10 ** 6]))
++
++
++def fmt_score(s) -> str:
++    if s is None:
++        return "-"
++    return ("EXACT" if s[0] == 0 else f"insn {s[1]} bytes {s[2]} len {'+' if s[3] else ''}{s[3]}")
++
++
++def search(ev: Evaluator, base_text: str, rule_ids, beam: int, depth: int, budget: int, level_cap: int,
++           log=print, neutral_beam: int = 4) -> dict:
++    fname = ev.fname
++    base_res = ev.one(base_text)
++    if not base_res.get("compile_ok"):
++        return {"function": fname, "error": "base does not compile: " + base_res.get("log", "")}
++    ev.set_base(base_res)
++    base = State(base_text, [], base_res)
++    log(f"base: {fmt_score(base.score)}  {'; '.join(base_res.get('reasons', []))[:140]}")
++    seen_text = {ev.key(base_text)}
++    seen_code = {base_res.get("fhash")}
++    best = base
++    tried = []                 # (level, rule, site, score or None, regress)
++    rule_stats = {}
++    move_rank = {}             # key -> level-1 score (rank order for later levels)
++    effective = set()
++    frontier = [base]
++    evals = 0
++    for level in range(1, depth + 1):
++        pool = []
++        for si, st in enumerate(frontier):
++            try:
++                moves = R.enumerate_moves(st.text, fname, rule_ids)
++            except (C.ParseError, KeyError) as e:
++                log(f"  enumerate failed: {e}")
++                continue
++            per_rule = {}
++            for mv in moves:
++                if any(mv.key == p[2] for p in st.path):
++                    continue
++                if level == 1:
++                    n = per_rule.get(mv.rule, 0)
++                    per_rule[mv.rule] = n + 1
++                    pool.append(((n, 0, 0), st, mv))          # round robin over rules
++                else:
++                    if mv.key in effective:
++                        cls, rank = 0, move_rank.get(mv.key, (1, 0, 0, 0))
++                    elif mv.key not in move_rank:
++                        cls, rank = 1, (0, 0, 0, 0)
++                    else:
++                        cls, rank = 2, move_rank[mv.key]
++                    pool.append(((cls, si, rank), st, mv))
++        pool.sort(key=lambda c: c[0])
++        cand = []
++        cap = min(level_cap, budget - evals)
++        for _, st, mv in pool:
++            if len(cand) >= cap:
++                break
++            try:
++                t = R.apply_move(st.text, mv)
++            except ValueError:
++                continue
++            k = ev.key(t)
++            if k in seen_text:
++                continue
++            seen_text.add(k)
++            if not R.valid_variant(t, fname):
++                continue
++            cand.append((st, mv, t))
++        if not cand:
++            break
++        log(f"level {level}: {len(cand)} variants from {len(frontier)} state(s)")
++        results = ev.many([c[2] for c in cand])
++        evals += len(cand)
++        ev.save()
++        nxt, neutral = [], []
++        for (st, mv, t), r in zip(cand, results):
++            reg = ev.regressions(r)
++            sc = tuple(r["score"]) if r.get("compile_ok") and "score" in r else None
++            tried.append((level, mv.rule, mv.site, sc, reg[:3]))
++            rs = rule_stats.setdefault(mv.rule, {"tried": 0, "changed": 0, "better": 0, "regress": 0, "fail": 0})
++            rs["tried"] += 1
++            if sc is None:
++                rs["fail"] += 1
++                continue
++            if reg:
++                rs["regress"] += 1
++                continue
++            if r.get("fhash") != st.res.get("fhash"):
++                rs["changed"] += 1
++                if sc < st.score:
++                    rs["better"] += 1
++            if level == 1:
++                move_rank[mv.key] = sc
++                if r.get("fhash") != base_res.get("fhash"):
++                    effective.add(mv.key)
++            else:
++                if r.get("fhash") != st.res.get("fhash"):
++                    effective.add(mv.key)
++                move_rank.setdefault(mv.key, sc)
++            ns = State(t, st.path + [(mv.rule, mv.site, mv.key)], r)
++            if sc < best.score:
++                best = ns
++                log(f"  better: {fmt_score(sc)}  via {' + '.join(p[0] + '[' + p[1][:40] + ']' for p in ns.path)}")
++            if r.get("fhash") not in seen_code:
++                seen_code.add(r.get("fhash"))
++                nxt.append(ns)
++            elif r.get("fhash") == st.res.get("fhash"):
++                neutral.append(ns)
++        if best.score[0] == 0:
++            break
++        # beam: best distinct-code states (ties broken by shorter paths)
++        pool = sorted(nxt + frontier, key=lambda s: (s.score, len(s.path)))
++        frontier, fh = [], set()
++        for s in pool:
++            if s.res.get("fhash") in fh:
++                continue
++            fh.add(s.res.get("fhash"))
++            frontier.append(s)
++            if len(frontier) >= beam:
++                break
++        # plus a few code-neutral states (declaration order, prototype spelling, statement forms):
++        # their effect can appear only in combination with a later move
++        if neutral_beam:
++            neutral.sort(key=lambda s: (R.RULES[s.path[-1][0]].category != "decl", s.path[-1][0], len(s.path)))
++            picked, per = [], {}
++            for s in neutral:
++                r0 = s.path[-1][0]
++                if per.get(r0, 0) < max(1, neutral_beam // 3):
++                    picked.append(s)
++                    per[r0] = per.get(r0, 0) + 1
++                if len(picked) >= neutral_beam:
++                    break
++            frontier += picked
++        if evals >= budget:
++            break
++    return {"function": fname, "module": ev.ctx.key, "base_score": list(base.score), "best_score": list(best.score),
++            "best_path": best.path, "best_text": best.text, "best_res": best.res, "base_res": base_res,
++            "evals": evals, "compiles": ev.compiles, "rule_stats": rule_stats, "tried": tried}
++
++
++# ------------------------------------------------------------------ promotion
++
++
++def annotate(text: str, fname: str, path) -> str:
++    """Record the applied rules in a comment directly above the function definition."""
++    src = C.Source(text)
++    fn = src.function(fname)
++    rules_txt = ", ".join(dict.fromkeys(p[0] for p in path))
++    note = f"/* autosearch: exact after rules {rules_txt} */\n"
++    b = text.rfind("\n", 0, fn.head_s) + 1
++    return text[:b] + note + text[b:]
++
++
++def promote(result: dict, out_dir: Path, log=print, dry_run: bool = False) -> bool:
++    fname, key = result["function"], result["module"]
++    cats = {R.RULES[p[0]].category for p in result["best_path"]}
++    if "steer" in cats:
++        log("not promoted: a steering rule was applied")
++        return False
++    text = annotate(result["best_text"], fname, result["best_path"])
++    f = out_dir / f"promote_{fname}.c"
++    f.write_text(text, encoding="latin1", newline="\n")
++    env = dict(os.environ, MSYS_NO_PATHCONV="1", MSYS2_ARG_CONV_EXCL="*")
++    cmd = [sys.executable, str(ROOT / "tools" / "promote.py"), str(f), "--module", key, "--claim", fname]
++    if cats == {"decl"}:
++        steps = " + ".join(f"{p[0]}[{p[1][:50]}]" for p in result["best_path"])
++        cmd += ["--layout-inferred", f"{fname}=autosearch: declaration-only rules {steps}"]
++    # a promotion that leaves no scaffold completes the module: claim it as one TU when the
++    # extent (the object's function-table span) verifies
++    if not modmod.scaffold_names(text):
++        ctx = modctx.resolve(module=key)
++        if not ctx.extent:
++            lo, hi = ctx.span
++            ext = f"{ctx.seg * 16 + lo:05X}:{ctx.seg * 16 + hi:05X}"
++            r = subprocess.run(cmd + ["--extent", ext, "--verify-only"], cwd=ROOT, capture_output=True, text=True,
++                               env=env)
++            if r.returncode == 0:
++                cmd += ["--extent", ext]
++                log(f"complete TU: --extent {ext}")
++    r = subprocess.run(cmd + ["--verify-only"], cwd=ROOT, capture_output=True, text=True, env=env)
++    log(r.stdout[-1500:] + r.stderr[-500:])
++    if r.returncode != 0:
++        return False
++    if dry_run:
++        return True
++    r = subprocess.run(cmd, cwd=ROOT, capture_output=True, text=True, env=env)
++    log(r.stdout[-800:] + r.stderr[-500:])
++    return r.returncode == 0
++
++
++# ------------------------------------------------------------------ CLI
++
++
++def run_one(fname: str, module: str | None = None, base: Path | None = None, rule_ids=None, beam=6, depth=4,
++            budget=1200, level_cap=400, jobs=16, out: Path | None = None, do_promote=False, quiet=False) -> dict:
++    ctx = modctx.resolve(module=module, func=fname if module is None else None)
++    text = base.read_text(encoding="latin1") if base else unscaffold(ctx.text, fname)
++    stamp = dt.datetime.now().strftime("%Y%m%d-%H%M%S")
++    out = out or (SCRATCH / "runs" / f"{fname}-{stamp}")
++    out.mkdir(parents=True, exist_ok=True)
++    logf = (out / "log.txt").open("w")
++
++    def log(msg):
++        logf.write(msg + "\n")
++        logf.flush()
++        if not quiet:
++            print(msg, flush=True)
++
++    log(f"{fname} in {ctx.key} ({ctx.profile} {' '.join(ctx.flags)}), rules: {','.join(rule_ids or R.DEFAULT_RULES)}")
++    ev = Evaluator(ctx, fname, jobs, SCRATCH / "cache")
++    res = search(ev, text, rule_ids or R.DEFAULT_RULES, beam, depth, budget, level_cap, log)
++    if "error" in res:
++        log(res["error"])
++        return res
++    (out / "best.c").write_text(res["best_text"], encoding="latin1", newline="\n")
++    (out / "base.c").write_text(text, encoding="latin1", newline="\n")
++    diff = "".join(difflib.unified_diff(text.splitlines(True), res["best_text"].splitlines(True), "base.c", "best.c"))
++    (out / "best.diff").write_text(diff)
++    summary = {k: v for k, v in res.items() if k not in ("best_text", "tried")}
++    summary["tried_count"] = len(res["tried"])
++    (out / "result.json").write_text(json.dumps(summary, indent=1, default=str))
++    (out / "tried.json").write_text(json.dumps(res["tried"], default=str))
++    log(f"best: {fmt_score(res['best_score'])} (base {fmt_score(res['base_score'])}) after {res['evals']} variants: "
++        + (" + ".join(f"{p[0]}[{p[1][:50]}]" for p in res["best_path"]) or "(base)"))
++    res["promoted"] = False
++    if do_promote and res["best_score"][0] == 0:
++        if res["best_res"].get("all_exact"):
++            res["promoted"] = promote(res, out, log)
++        else:
++            log("exact but not every module check is exact: not promoted")
++    res["out"] = str(out)
++    logf.close()
++    return res
++
++
++def main(argv=None) -> int:
++    ap = argparse.ArgumentParser(description=__doc__.split("\n\n")[0])
++    ap.add_argument("func", nargs="?")
++    ap.add_argument("--module")
++    ap.add_argument("--base", type=Path)
++    ap.add_argument("--rules", help="comma-separated rule ids (default: all non-steering rules)")
++    ap.add_argument("--steer", action="store_true", help="also use steering rules (never promoted)")
++    ap.add_argument("--beam", type=int, default=6)
++    ap.add_argument("--depth", type=int, default=4)
++    ap.add_argument("--budget", type=int, default=1200)
++    ap.add_argument("--level-cap", type=int, default=400)
++    ap.add_argument("--jobs", type=int, default=16)
++    ap.add_argument("--out", type=Path)
++    ap.add_argument("--promote", action="store_true")
++    ap.add_argument("--quiet", action="store_true")
++    ap.add_argument("--list-rules", action="store_true")
++    a = ap.parse_args(argv)
++    if a.list_rules:
++        for r in R.RULES.values():
++            print(f"{r.id:12s} {r.category:5s} {r.doc}\n{'':18s} evidence: {r.evidence}")
++        return 0
++    if not a.func:
++        ap.error("FUNC required")
++    ids = a.rules.split(",") if a.rules else list(R.DEFAULT_RULES)
++    if a.steer:
++        ids += [r for r in R.RULES if R.RULES[r].category == "steer" and r not in ids]
++    res = run_one(a.func, a.module, a.base, ids, a.beam, a.depth, a.budget, a.level_cap, a.jobs, a.out,
++                  a.promote, a.quiet)
++    return 0 if res.get("best_score", [1])[0] == 0 else 1
++
++
++# ------------------------------------------------------------------ --all (every open function)
++
++OWNED_ELSEWHERE = ["root:0250", "root:10F7", "S06:35F5", "S10:35F5", "S09:35F5", "S23:39C7", "root:1E57", "root:171C"]
++# per-function base overrides (a draft that is not a plain SCAFFOLD block of the canonical source)
++BASES = {"DoAntMoveY": SCRATCH / "bases" / "S25_3BA4_DoAntMoveY.c"}
++
++
++def targets(skip, only):
++    man = json.loads((ROOT / "layout" / "manifest.json").read_text())["modules"]
++    out = []
++    for k, m in sorted(man.items()):
++        if k in skip:
++            continue
++        for f in m.get("scaffold", []):
++            if only and f not in only:
++                continue
++            out.append((k, f))
++    return out
++
++
++def run_all_main(argv=None):
++    ap = argparse.ArgumentParser()
++    ap.add_argument("--skip-module", action="append", default=list(OWNED_ELSEWHERE))
++    ap.add_argument("--only", nargs="*")
++    ap.add_argument("--budget", type=int, default=800)
++    ap.add_argument("--depth", type=int, default=4)
++    ap.add_argument("--beam", type=int, default=6)
++    ap.add_argument("--level-cap", type=int, default=300)
++    ap.add_argument("--jobs", type=int, default=16)
++    ap.add_argument("--promote", action="store_true")
++    ap.add_argument("--steer", action="store_true")
++    ap.add_argument("--table", type=Path, default=SCRATCH / "results.md")
++    ap.add_argument("--continue-from", type=Path,
++                    help="results .json of an earlier pass: start each function from its best.c there")
++    a = ap.parse_args(argv)
++    ids = list(R.DEFAULT_RULES)
++    if a.steer:
++        ids += [r for r in R.RULES if R.RULES[r].category == "steer"]
++    rows = []
++    jfile = a.table.with_suffix(".json")
++    prev = json.loads(jfile.read_text()) if jfile.exists() else {}
++    earlier = json.loads(a.continue_from.read_text()) if a.continue_from else {}
++    for key, f in targets(a.skip_module, a.only):
++        print(f"=== {key} {f}", flush=True)
++        base = BASES.get(f) if BASES.get(f, Path("-")).exists() else None
++        e = earlier.get(f, {})
++        if e.get("out") and e.get("best") and e.get("base") and e["best"] < e["base"]:
++            base = Path(e["out"]) / "best.c"
++            print(f"  continuing from {base}")
++        try:
++            res = run_one(f, key, base, ids, a.beam,
++                            a.depth, a.budget, a.level_cap, a.jobs, None, a.promote, quiet=True)
++        except (Exception, SystemExit) as e:  # noqa: BLE001
++            print(f"  FAILED: {type(e).__name__}: {e}")
++            prev[f] = {"module": key, "error": f"{type(e).__name__}: {e}"}
++            continue
++        if "error" in res:
++            print("  " + res["error"][:200])
++            prev[f] = {"module": key, "error": res["error"][:300]}
++            continue
++        row = {"module": key, "base": res["base_score"], "best": res["best_score"],
++               "path": [p[:2] for p in res["best_path"]], "evals": res["evals"],
++               "reasons": res["best_res"].get("reasons", []), "base_reasons": res["base_res"].get("reasons", []),
++               "rule_stats": res["rule_stats"], "promoted": res.get("promoted"), "out": res.get("out"),
++               "time": dt.datetime.now().isoformat(timespec="seconds")}
++        prev[f] = row
++        print(f"  base {fmt_score(res['base_score'])} -> best {fmt_score(res['best_score'])} "
++              f"({res['evals']} variants) {' + '.join(p[0] for p in res['best_path'])}", flush=True)
++        jfile.write_text(json.dumps(prev, indent=1))
++        write_table(prev, a.table)
++    jfile.write_text(json.dumps(prev, indent=1))
++    write_table(prev, a.table)
++
++
++def write_table(rows: dict, path: Path):
++    L = ["# autosearch results", "",
++         "Score = differing instructions (branch targets masked) / differing bytes / length difference.", "",
++         "| module | function | base | best | variants | rules applied (best path) | rules that changed code (changed/tried) |",
++         "|---|---|---|---|---|---|---|"]
++    for f, r in sorted(rows.items(), key=lambda kv: (kv[1].get("module", ""), kv[0])):
++        if "error" in r:
++            L.append(f"| {r['module']} | {f} | error | {r['error'][:80]} | | | |")
++            continue
++        path_txt = "<br>".join(f"{p[0]} `{p[1][:60]}`" for p in r["path"]) or "(none better)"
++        stats = ", ".join(f"{k} {v['changed']}/{v['tried']}" for k, v in sorted(r["rule_stats"].items())
++                          if v["changed"] or v["better"])
++        L.append(f"| {r['module']} | {f} | {fmt_score(r['base'])} | {fmt_score(r['best'])}"
++                 f"{' PROMOTED' if r.get('promoted') else ''} | {r['evals']} | {path_txt} | {stats} |")
++    path.write_text("\n".join(L) + "\n")
++
++
++if __name__ == "__main__":
++    if len(sys.argv) > 1 and sys.argv[1] == "--all":
++        raise SystemExit(run_all_main(sys.argv[2:]))
++    raise SystemExit(main())
+--- /dev/null
++++ b/tests/test_autosearch.py
+@@ -0,0 +1,257 @@
++"""Tests for the autosearch prototype (no compiler needed).
++
++    python -m unittest tests.test_autosearch -v
++
++The compile-level check is test_live.py (opt-in: AUTOSEARCH_LIVE=1), which runs the driver on
++one small open function with a tiny budget.
++"""
++import glob
++import os
++import sys
++import unittest
++from pathlib import Path
++
++HERE = Path(__file__).resolve().parent
++ROOT = HERE.parent
++sys.path.insert(0, str(ROOT / "tools"))
++
++import csrc as C  # noqa: E402
++import srcrules as R  # noqa: E402
++
++SAMPLE = (HERE / "autosearch_sample.c").read_text()
++
++
++def moves(text, rule, fname="target"):
++    return R.enumerate_moves(text, fname, [rule])
++
++
++def variant(text, rule, site_prefix, fname="target"):
++    ms = moves(text, rule, fname)
++    for mv in [m for m in ms if m.site == site_prefix] + [m for m in ms if m.site.startswith(site_prefix)]:
++        return R.apply_move(text, mv)
++    raise AssertionError(f"no {rule} move at {site_prefix!r}: {[m.site for m in moves(text, rule, fname)]}")
++
++
++def body(text, fname="target"):
++    src = C.Source(text)
++    fn = src.function(fname)
++    return text[fn.body.s:fn.body.e]
++
++
++class Tokenizer(unittest.TestCase):
++    def test_asm_block_is_one_token(self):
++        t = "void f(void)\n{\n    _asm {\n        mov ax, 1 ; it's a comment\n    }\n}\n"
++        toks = [x for x in C.tokenize(t) if x.kind == "asm"]
++        self.assertEqual(len(toks), 1)
++        self.assertIn("it's", toks[0].text)
++        fn = C.Source(t).function("f")
++        self.assertIsInstance(fn.body.items[0], C.Asm)
++
++    def test_asm_line(self):
++        t = "void f(void)\n{\n    _asm mov ax,'x'\n    g();\n}\n"
++        fn = C.Source(t).function("f")
++        self.assertIsInstance(fn.body.items[0], C.Asm)
++        self.assertIsInstance(fn.body.items[1], C.ExprStmt)
++
++    def test_preprocessor_line_and_continuation(self):
++        t = "#define X(a) \\\n    ((a) + 1)\nint f(int a)\n{\n    return X(a);\n}\n"
++        pp = [x for x in C.tokenize(t) if x.kind == "pp"]
++        self.assertEqual(len(pp), 1)
++        self.assertIn("((a) + 1)", pp[0].text)
++
++    def test_msc_qualifiers_in_casts_and_decls(self):
++        t = ("typedef struct { int a; } S;\nint far f(S far *p)\n{\n    char far * far q;\n"
++             "    q = (char far *)p;\n    return ((S far *)q)->a;\n}\n")
++        fn = C.Source(t).function("f")
++        self.assertIsInstance(fn.body.items[0], C.Decl)
++        casts = [n for n in C.walk(fn.body) if isinstance(n, C.Cast)]
++        self.assertEqual(len(casts), 2)
++
++    def test_typedef_name_variable_not_a_cast(self):
++        t = "typedef int T;\nint f(int a)\n{\n    return (a) - 1;\n}\n"
++        fn = C.Source(t).function("f")
++        r = fn.body.items[0].x
++        self.assertIsInstance(r, C.Bin)
++
++
++class ParseCanonical(unittest.TestCase):
++    def test_every_canonical_function_parses(self):
++        n = 0
++        for f in sorted(glob.glob(str(ROOT / "src" / "*" / "*.c"))):
++            t = Path(f).read_text(encoding="latin1")
++            fs = C.Source(t).functions()
++            for fn in fs:
++                self.assertEqual(t[fn.body.s], "{")
++                self.assertEqual(t[fn.body.e - 1], "}")
++            n += len(fs)
++        self.assertGreater(n, 1000)
++
++
++class Rules(unittest.TestCase):
++    def test_every_move_parses(self):
++        for mv in R.enumerate_moves(SAMPLE, "target", list(R.RULES)):
++            v = R.apply_move(SAMPLE, mv)
++            self.assertTrue(R.valid_variant(v, "target"), f"{mv.rule} {mv.site}")
++            self.assertNotEqual(v, SAMPLE, f"{mv.rule} {mv.site} is a no-op")
++
++    def test_rel_swap(self):
++        self.assertIn("if (3 > a || b == 0)", variant(SAMPLE, "REL-SWAP", "a < 3"))
++
++    def test_rel_swap_parenthesises(self):
++        t = "int target(int a, int b, int c)\n{\n    return a < b < c;\n}\n"
++        v = variant(t, "REL-SWAP", "a < b < c")
++        self.assertIn("c > (a < b)", v)
++
++    def test_tern_swap_negates_relational(self):
++        t = "int target(int a)\n{\n    return a < 3 ? 1 : 2;\n}\n"
++        self.assertIn("a >= 3 ? 2 : 1", variant(t, "TERN-SWAP", "a < 3"))
++
++    def test_chain_order(self):
++        self.assertIn("t = u = f(a, b);", variant(SAMPLE, "CHAIN-ORDER", "u = t"))
++
++    def test_chain_split_and_embed(self):
++        v = variant(SAMPLE, "CHAIN-SPLIT", "u = t = f(a, b);")
++        self.assertIn("t = f(a, b);\n    u = t;", v)
++        self.assertIn("h(u = t = f(a, b));", variant(SAMPLE, "EMBED", "u = t = f(a, b); -> h(u)"))
++
++    def test_unembed_condition(self):
++        t = "int target(int a)\n{\n    int d;\n\n    if ((d = f(a)) < 0)\n        return d;\n    return 0;\n}\n"
++        v = variant(t, "EMBED", "un d = f(a)")
++        self.assertIn("d = f(a);\n    if (d < 0)", v)
++
++    def test_or_dup_roundtrip(self):
++        v = variant(SAMPLE, "OR-DUP", "a < 3 || b == 0")
++        self.assertIn("if (a < 3)\n        return 0;\n    else if (b == 0)\n        return 0;", v)
++        back = variant(v, "OR-DUP", "join a < 3")
++        self.assertEqual(C.Source(back).function("target").body.items[4].c.op, "||")
++
++    def test_or_dup_keeps_else(self):
++        t = "void target(int a, int b)\n{\n    if (a || b)\n        f(1);\n    else\n        f(2);\n}\n"
++        v = variant(t, "OR-DUP", "a || b")
++        self.assertIn("if (a)\n        f(1);\n    else if (b)\n        f(1);\n    else\n        f(2);", v)
++
++    def test_and_nest(self):
++        t = "void target(int a, int b)\n{\n    if (a && b)\n        f(1);\n}\n"
++        v = variant(t, "AND-NEST", "a && b")
++        self.assertIn("if (a) {\n        if (b)\n            f(1);\n    }", v)
++
++    def test_if_neg_braces_else_if(self):
++        t = ("void target(int a, int b)\n{\n    if (a < 1)\n        f(1);\n    else if (b)\n        f(2);\n"
++             "    else\n        f(3);\n}\n")
++        v = variant(t, "IF-NEG", "a < 1")
++        self.assertIn("if (a >= 1) {", v)
++        fn = C.Source(v).function("target")
++        st = fn.body.items[0]
++        self.assertIsInstance(st.then, C.Block)
++        self.assertIsInstance(st.then.items[0], C.If)
++        self.assertIsNotNone(st.then.items[0].els)
++
++    def test_if_neg_demorgan(self):
++        v = variant(SAMPLE, "IF-NEG", "demorgan")
++        self.assertIn("if (a <= 5 || b == 2)", v)
++
++    def test_else_wrap_unwrap(self):
++        t = "int target(int a)\n{\n    if (a)\n        return 1;\n    f(a);\n    return 0;\n}\n"
++        v = variant(t, "ELSE-WRAP", "wrap a")
++        self.assertIn("else {\n        f(a);\n        return 0;\n    }", v)
++        back = variant(v, "ELSE-WRAP", "unwrap a")
++        self.assertEqual(body(back).split(), body(t).split())
++
++    def test_tern_if_roundtrip(self):
++        v = variant(SAMPLE, "TERN-IF", "i = a ? 1 : 2;")
++        self.assertIn("if (a)\n        i = 1;\n    else\n        i = 2;", v)
++        back = variant(v, "TERN-IF", "join a")
++        self.assertIn("i = a ? 1 : 2;", back)
++
++    def test_for_while(self):
++        v = variant(SAMPLE, "FOR-WHILE", "for (i = 0")
++        self.assertIn("i = 0;\n    while (i < b) {\n        h(i);\n        i++;\n    }", v)
++
++    def test_cse_inline(self):
++        t = "int target(int a)\n{\n    int t;\n\n    t = a * 6;\n    f(t);\n    return t + 1;\n}\n"
++        v = variant(t, "CSE-INLINE", "t = a * 6")
++        self.assertNotIn("int t;", v)
++        self.assertIn("f(a * 6);", v)
++        self.assertIn("return a * 6 + 1;", v)
++
++    def test_cse_inline_refuses_across_call_for_globals(self):
++        t = "extern int g;\nint target(int a)\n{\n    int t;\n\n    t = g;\n    f(a);\n    return t;\n}\n"
++        self.assertFalse([m for m in moves(t, "CSE-INLINE")])
++
++    def test_local_merge_and_split(self):
++        t = ("int target(int a)\n{\n    int i;\n    int j;\n\n    i = a;\n    f(i);\n    j = a + 1;\n"
++             "    f(j);\n    return 0;\n}\n")
++        v = variant(t, "LOCAL-MERGE", "j -> i")
++        self.assertNotIn("int j;", v)
++        self.assertIn("i = a + 1;\n    f(i);", v)
++        s = variant(v, "LOCAL-SPLIT", "i @ i = a + 1;")
++        self.assertIn("i2 = a + 1;\n    f(i2);", s)
++
++    def test_param_copy(self):
++        v = variant(SAMPLE, "PARAM-COPY", "b")
++        self.assertIn("int b2;", v)
++        self.assertIn("b2 = b;", v)
++        self.assertIn("for (i = 0; i < b2; i++)", v)
++
++    def test_proto_rules(self):
++        self.assertIn("extern int far f(int, int);", variant(SAMPLE, "PROTO-NAMES", "f unnamed"))
++        self.assertIn("extern int far f(int a, ...);", variant(SAMPLE, "PROTO-TYPE", "f variadic"))
++        self.assertIn("extern int far f(unsigned int a, int b);", variant(SAMPLE, "PROTO-TYPE", "f arg0"))
++
++    def test_decl_init(self):
++        v = variant(SAMPLE, "DECL-INIT", "join t = a + b;")
++        self.assertIn("int t = a + b;", v)
++        back = variant(v, "DECL-INIT", "int t = a + b;")
++        self.assertEqual(back.split(), SAMPLE.split())
++
++    def test_case_swap(self):
++        t = ("int target(int a)\n{\n    switch (a) {\n    case 1:\n        return 3;\n    case 2:\n"
++             "        f(a);\n        break;\n    }\n    return 0;\n}\n")
++        v = variant(t, "CASE-SWAP", "case 1")
++        self.assertLess(v.index("case 2:"), v.index("case 1:"))
++
++    def test_edits_overlap_refused(self):
++        with self.assertRaises(ValueError):
++            R.apply_edits("abcdef", [(0, 3, "x"), (2, 4, "y")])
++
++    def test_rule_catalogue_documents_evidence(self):
++        for r in R.RULES.values():
++            self.assertTrue(r.evidence and r.doc)
++            self.assertIn(r.category, ("code", "decl", "steer"))
++        self.assertNotIn("DEAD-AUTO", R.DEFAULT_RULES)
++
++
++class Driver(unittest.TestCase):
++    def test_unscaffold_only_the_target_block(self):
++        import autosearch as A
++        t = ("int a(void)\n{\n    return 1;\n}\n/* SCAFFOLD BEGIN: note */\nint b(void)\n{\n    return 2;\n}\n"
++             "/* SCAFFOLD END */\n/* SCAFFOLD BEGIN: x */\nint c(void)\n{\n    return 3;\n}\n/* SCAFFOLD END */\n")
++        u = A.unscaffold(t, "b")
++        self.assertNotIn("SCAFFOLD BEGIN: note", u)
++        self.assertIn("SCAFFOLD BEGIN: x", u)
++        self.assertIn("int b(void)", u)
++
++    def test_unscaffold_splits_shared_block(self):
++        import autosearch as A
++        import modules
++        t = ("/* SCAFFOLD BEGIN: note */\nint b(void)\n{\n    return 2;\n}\n\nint c(void)\n{\n    return 3;\n}\n"
++             "/* SCAFFOLD END */\n")
++        self.assertEqual(modules.scaffold_names(A.unscaffold(t, "b")), {"c"})
++        self.assertEqual(modules.scaffold_names(A.unscaffold(t, "c")), {"b"})
++
++    def test_insn_distance(self):
++        import autosearch as A
++        a = bytes.fromhex("558bec8b460650e80000")   # push bp; mov bp,sp; mov ax,[bp+6]; push ax; call
++        b = bytes.fromhex("558bec8b460850e80000")
++        self.assertEqual(A.insn_distance(a, a), 0)
++        self.assertEqual(A.insn_distance(a, b), 1)
++
++    def test_annotate(self):
++        import autosearch as A
++        t = "int x;\nint far target(int a)\n{\n    return a;\n}\n"
++        v = A.annotate(t, "target", [("REL-SWAP", "a < b", "k")])
++        self.assertIn("/* autosearch: exact after rules REL-SWAP */\nint far target", v)
++
++
++if __name__ == "__main__":
++    unittest.main()
+--- /dev/null
++++ b/tests/autosearch_sample.c
+@@ -0,0 +1,29 @@
++typedef struct { int kind; int id; } Entry;
++extern int far g_count;
++extern Entry far * far g_ptr;
++extern int far f(int a, int b);
++extern void far h(int x);
++
++int far target(int a, int b)
++{
++    int i;
++    int t;
++    int u;
++
++    t = a + b;
++    if (a < 3 || b == 0)
++        return 0;
++    if (a > 5 && b != 2) {
++        h(t);
++    } else
++        h(b);
++    u = t = f(a, b);
++    h(u);
++    for (i = 0; i < b; i++)
++        h(i);
++    i = a ? 1 : 2;
++    g_count = g_count + 1;
++    if (!a)
++        return b;
++    return t;
++}

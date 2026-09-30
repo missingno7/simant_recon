@@ -2,7 +2,7 @@
 ; Overlay section S01, code frame 3126, linear 31260-328EA.
 ; Genuine assembly, reproduced byte for byte by MASM 5.10.  Evidence against compiler output:
 ; framed procs save "push si; push di" (MSC always saves DI first, probe ASM-2 in
-; build/workers/ovlA/probe), raster operations are selected by self-modifying code
+; work/ovlA/probe), raster operations are selected by self-modifying code
 ; (instruction templates copied over loop instructions with "mov cs:[...],ax"), and near
 ; subroutines return with retn inside far procs.  o01_3126_1637 reprograms the 6845 CRTC
 ; from the DGROUP table g_2190 and sets BIOS video mode 7 (Hercules/MDA text) directly.

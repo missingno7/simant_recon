@@ -1,0 +1,796 @@
+{
+ "worker": "align",
+ "date": "2026-09-30",
+ "question": "root:19A9 accepted at odd 0x19A95 although MSC code segments are WORD aligned; root:2CFB MEMHOOK_TEXT placed after the runtime _TEXT/EMULATOR_TEXT.",
+ "task1_alignment_survey": {
+  "complete_TU_code_modules": 87,
+  "code_SEGDEF_alignments_seen": [
+   "word"
+  ],
+  "misaligned_extent_starts": [
+   {
+    "module": "root:19A9",
+    "extent_start": "19A95",
+    "segdef": "word"
+   }
+  ],
+  "all_compilers_and_options_give_WORD_code_segments": true,
+  "segalign_cases": [
+   [
+    "msc600ax",
+    [
+     "/AL",
+     "/Os"
+    ],
+    [
+     [
+      "UNIT_TEXT",
+      "CODE",
+      "word"
+     ],
+     [
+      "_DATA",
+      "DATA",
+      "word"
+     ],
+     [
+      "CONST",
+      "CONST",
+      "word"
+     ],
+     [
+      "_BSS",
+      "BSS",
+      "word"
+     ]
+    ]
+   ],
+   [
+    "msc600ax",
+    [
+     "/AL",
+     "/Os",
+     "/Oeg",
+     "/Gs",
+     "/Zi"
+    ],
+    [
+     [
+      "UNIT_TEXT",
+      "CODE",
+      "word"
+     ],
+     [
+      "_DATA",
+      "DATA",
+      "word"
+     ],
+     [
+      "CONST",
+      "CONST",
+      "word"
+     ],
+     [
+      "_BSS",
+      "BSS",
+      "word"
+     ],
+     [
+      "$$SYMBOLS",
+      "DEBSYM",
+      "byte"
+     ],
+     [
+      "$$TYPES",
+      "DEBTYP",
+      "byte"
+     ]
+    ]
+   ],
+   [
+    "msc600ax",
+    [
+     "/AL",
+     "/Os",
+     "/NT",
+     "DB_TEXT"
+    ],
+    "ERR suspicious compiler option 'DB_TEXT' (MSYS path conversion? set MSYS_NO_PATHCONV=1)"
+   ],
+   [
+    "msc600ax",
+    [
+     "/AL",
+     "/Ox"
+    ],
+    [
+     [
+      "UNIT_TEXT",
+      "CODE",
+      "word"
+     ],
+     [
+      "_DATA",
+      "DATA",
+      "word"
+     ],
+     [
+      "CONST",
+      "CONST",
+      "word"
+     ],
+     [
+      "_BSS",
+      "BSS",
+      "word"
+     ]
+    ]
+   ],
+   [
+    "msc600ax",
+    [
+     "/AL",
+     "/Od",
+     "/Zi"
+    ],
+    [
+     [
+      "UNIT_TEXT",
+      "CODE",
+      "word"
+     ],
+     [
+      "_DATA",
+      "DATA",
+      "word"
+     ],
+     [
+      "CONST",
+      "CONST",
+      "word"
+     ],
+     [
+      "_BSS",
+      "BSS",
+      "word"
+     ],
+     [
+      "$$SYMBOLS",
+      "DEBSYM",
+      "byte"
+     ],
+     [
+      "$$TYPES",
+      "DEBTYP",
+      "byte"
+     ]
+    ]
+   ],
+   [
+    "msc600ax",
+    [
+     "/AL",
+     "/Os",
+     "/Gw"
+    ],
+    [
+     [
+      "UNIT_TEXT",
+      "CODE",
+      "word"
+     ],
+     [
+      "_DATA",
+      "DATA",
+      "word"
+     ],
+     [
+      "CONST",
+      "CONST",
+      "word"
+     ],
+     [
+      "_BSS",
+      "BSS",
+      "word"
+     ]
+    ]
+   ],
+   [
+    "msc600ax",
+    [
+     "/AL",
+     "/Os",
+     "/G2"
+    ],
+    [
+     [
+      "UNIT_TEXT",
+      "CODE",
+      "word"
+     ],
+     [
+      "_DATA",
+      "DATA",
+      "word"
+     ],
+     [
+      "CONST",
+      "CONST",
+      "word"
+     ],
+     [
+      "_BSS",
+      "BSS",
+      "word"
+     ]
+    ]
+   ],
+   [
+    "msc600ax",
+    [
+     "/AL",
+     "/Os",
+     "/Gc"
+    ],
+    [
+     [
+      "UNIT_TEXT",
+      "CODE",
+      "word"
+     ],
+     [
+      "_DATA",
+      "DATA",
+      "word"
+     ],
+     [
+      "CONST",
+      "CONST",
+      "word"
+     ],
+     [
+      "_BSS",
+      "BSS",
+      "word"
+     ]
+    ]
+   ],
+   [
+    "msc600ax",
+    [
+     "/AL",
+     "/Os",
+     "/Za"
+    ],
+    [
+     [
+      "UNIT_TEXT",
+      "CODE",
+      "word"
+     ],
+     [
+      "_DATA",
+      "DATA",
+      "word"
+     ],
+     [
+      "CONST",
+      "CONST",
+      "word"
+     ],
+     [
+      "_BSS",
+      "BSS",
+      "word"
+     ]
+    ]
+   ],
+   [
+    "msc600ax",
+    [
+     "/AL",
+     "/Os",
+     "/Zp1"
+    ],
+    [
+     [
+      "UNIT_TEXT",
+      "CODE",
+      "word"
+     ],
+     [
+      "_DATA",
+      "DATA",
+      "word"
+     ],
+     [
+      "CONST",
+      "CONST",
+      "word"
+     ],
+     [
+      "_BSS",
+      "BSS",
+      "word"
+     ]
+    ]
+   ],
+   [
+    "msc600ax",
+    [
+     "/AL",
+     "/f-"
+    ],
+    [
+     [
+      "UNIT_TEXT",
+      "CODE",
+      "word"
+     ],
+     [
+      "_DATA",
+      "DATA",
+      "word"
+     ],
+     [
+      "CONST",
+      "CONST",
+      "word"
+     ],
+     [
+      "_BSS",
+      "BSS",
+      "word"
+     ]
+    ]
+   ],
+   [
+    "msc600",
+    [
+     "/AL",
+     "/Os"
+    ],
+    [
+     [
+      "UNIT_TEXT",
+      "CODE",
+      "word"
+     ],
+     [
+      "_DATA",
+      "DATA",
+      "word"
+     ],
+     [
+      "CONST",
+      "CONST",
+      "word"
+     ],
+     [
+      "_BSS",
+      "BSS",
+      "word"
+     ]
+    ]
+   ],
+   [
+    "msc600a",
+    [
+     "/AL",
+     "/Os"
+    ],
+    [
+     [
+      "UNIT_TEXT",
+      "CODE",
+      "word"
+     ],
+     [
+      "_DATA",
+      "DATA",
+      "word"
+     ],
+     [
+      "CONST",
+      "CONST",
+      "word"
+     ],
+     [
+      "_BSS",
+      "BSS",
+      "word"
+     ]
+    ]
+   ],
+   [
+    "msc510",
+    [
+     "/AL"
+    ],
+    [
+     [
+      "UNIT_TEXT",
+      "CODE",
+      "word"
+     ],
+     [
+      "_DATA",
+      "DATA",
+      "word"
+     ],
+     [
+      "CONST",
+      "CONST",
+      "word"
+     ],
+     [
+      "_BSS",
+      "BSS",
+      "word"
+     ]
+    ]
+   ],
+   [
+    "msc510",
+    [
+     "/AL",
+     "/Os"
+    ],
+    [
+     [
+      "UNIT_TEXT",
+      "CODE",
+      "word"
+     ],
+     [
+      "_DATA",
+      "DATA",
+      "word"
+     ],
+     [
+      "CONST",
+      "CONST",
+      "word"
+     ],
+     [
+      "_BSS",
+      "BSS",
+      "word"
+     ]
+    ]
+   ],
+   [
+    "qc250",
+    [
+     "/AL"
+    ],
+    [
+     [
+      "UNIT_TEXT",
+      "CODE",
+      "word"
+     ],
+     [
+      "_DATA",
+      "DATA",
+      "word"
+     ],
+     [
+      "CONST",
+      "CONST",
+      "word"
+     ],
+     [
+      "_BSS",
+      "BSS",
+      "word"
+     ],
+     [
+      "$$SYMBOLS",
+      "DEBSYM",
+      "byte"
+     ],
+     [
+      "$$TYPES",
+      "DEBTYP",
+      "byte"
+     ]
+    ]
+   ],
+   [
+    "qc251",
+    [
+     "/AL"
+    ],
+    [
+     [
+      "UNIT_TEXT",
+      "CODE",
+      "word"
+     ],
+     [
+      "_DATA",
+      "DATA",
+      "word"
+     ],
+     [
+      "CONST",
+      "CONST",
+      "word"
+     ],
+     [
+      "_BSS",
+      "BSS",
+      "word"
+     ],
+     [
+      "$$SYMBOLS",
+      "DEBSYM",
+      "byte"
+     ],
+     [
+      "$$TYPES",
+      "DEBTYP",
+      "byte"
+     ]
+    ]
+   ],
+   [
+    "qc251",
+    [
+     "/AL",
+     "/Ox"
+    ],
+    [
+     [
+      "UNIT_TEXT",
+      "CODE",
+      "word"
+     ],
+     [
+      "_DATA",
+      "DATA",
+      "word"
+     ],
+     [
+      "CONST",
+      "CONST",
+      "word"
+     ],
+     [
+      "_BSS",
+      "BSS",
+      "word"
+     ],
+     [
+      "$$SYMBOLS",
+      "DEBSYM",
+      "byte"
+     ],
+     [
+      "$$TYPES",
+      "DEBTYP",
+      "byte"
+     ]
+    ]
+   ]
+  ],
+  "oracle_frame_transitions": {
+   "total": 94,
+   "odd_end_then_00_fill": 44,
+   "even_end_contiguous": 42,
+   "odd_start_contiguous_violations": [
+    "root:19A9 at 19A95"
+   ],
+   "others_note": "remaining transitions have data (tables, copyright string) or an unlisted stub byte between the frames"
+  },
+  "data_side": "DGROUP shows the same rule at the same boundary: 1986 _DATA ends odd at 55B3:3661, a 00 fill byte follows, 19A9 _DATA starts word aligned at 3662",
+  "scripts": [
+   "work/align/survey.py",
+   "work/align/frames.py",
+   "work/align/segalign.py"
+  ]
+ },
+ "task2_19A9": {
+  "verdict": "MIS-FRAMED BOUNDARY, not an alignment exception. The three unreferenced retf at 19A95, 19A96, 19A97 are the last three (empty) functions of the index module root:1986; that object ends at the even 19A98 and root:19A9 starts at 19A9:0008 = 19A98, word aligned, no fill needed.",
+  "why_the_frame_was_wrong": "the three bytes have no reference (no relocation, no call); their rows were reviewed as 19A9:0005-0007 by frame arithmetic only (functions.json note \"after FindIndex's end at 19A9:0004\"). Frame 19A9 is attested only from 19A9:0008 on (S27 far pointer 59224 -> 19A9:0008, far calls to 000B, 001D, 0310, 031D).",
+  "evidence": [
+   "CODEALIGN: every MSC/QC profile and option set pinned here emits WORD code SEGDEFs (/Os, /Ox, /Od, /Zi, /Gs, /Oeg, /G2, /Gw, /Gc, /Za, /Zp1, /NT...); 84/85 accepted complete TUs and 93/94 code-frame transitions obey it; the one exception is this boundary",
+   "Win16 index TU (MAPSYM order, simantw symbols.csv seg 7 39558-41078): OpenIndex, CreateIndex, CloseIndex, FindIndex, DeleteCurrentIndex, AddIndex, DeleteIndex. DOS 1986: OpenIndex, CreateIndex (1-byte retf: write side stubbed empty in the read-only DOS build), CloseIndex, FindIndex, then exactly three 1-byte retf",
+   "style: 19A9 stubs its write side with Punt(\"... READ-ONLY run\") (DBAdd/DBDelete/DBPack), the index module with empty bodies (CreateIndex); three empty functions at the head of 19A9 would have no Win16 counterpart",
+   "gate: the corrected root:19A9 source (without the stubs) compiles to 815 bytes and binds exactly at 19A98 (promote --verify-only: every claim, _DATA, CONST and the whole segment exact; the only refusal is the function-table rows 19A9:0005-0007, which the reframe moves to 1986:0235-0237)"
+  ],
+  "hypotheses_tested_with_real_linkers": {
+   "instrument": "work/align/exp.py: synthetic objects of the same shape (odd-length function, then retf,retf,retf,sub ax,ax;retf), MSC 6.00AX /AL /Os /Oeg /Gs /Zi, linked with MS LINK 5.10 and RTLink/Plus 6.10 (pinned hashes); both linkers agree in every variant",
+   "results": {
+    "V1ACC": {
+     "linker_output_after_IDX": "00cbcbcb2bc0cb56",
+     "rtlink610_same": true,
+     "reproduces_original": false,
+     "segments": [
+      "00000H 0000AH 0000BH IDX_TEXT               CODE",
+      "0000CH 00011H 00006H DB_TEXT                CODE",
+      "00012H 0003BH 0002AH MAIN_TEXT              CODE",
+      "0003CH 0003CH 00000H _DATA                  DATA",
+      "0003CH 0003CH 00000H CONST                  CONST",
+      "0003CH 0003CH 00000H _BSS                   BSS"
+     ]
+    },
+    "V2HYPB": {
+     "linker_output_after_IDX": "cbcbcb2bc0cb0056",
+     "rtlink610_same": true,
+     "reproduces_original": true,
+     "segments": [
+      "00000H 0000DH 0000EH IDX_TEXT               CODE",
+      "0000EH 00010H 00003H DB_TEXT                CODE",
+      "00012H 0003BH 0002AH MAIN_TEXT              CODE",
+      "0003CH 0003CH 00000H _DATA                  DATA",
+      "0003CH 0003CH 00000H CONST                  CONST",
+      "0003CH 0003CH 00000H _BSS                   BSS"
+     ]
+    },
+    "V2HYPA": {
+     "linker_output_after_IDX": "cbcbcb2bc0cb0056",
+     "rtlink610_same": true,
+     "reproduces_original": true,
+     "segments": [
+      "00000H 0000BH 0000CH IDX_TEXT               CODE",
+      "0000CH 00010H 00005H DB_TEXT                CODE",
+      "00012H 0003BH 0002AH MAIN_TEXT              CODE",
+      "0003CH 0003CH 00000H _DATA                  DATA",
+      "0003CH 0003CH 00000H CONST                  CONST",
+      "0003CH 0003CH 00000H _BSS                   BSS"
+     ]
+    },
+    "V3NT": {
+     "linker_output_after_IDX": "00cbcbcb2bc0cb56",
+     "rtlink610_same": true,
+     "reproduces_original": false,
+     "segments": [
+      "00000H 00011H 00012H DB_TEXT                CODE",
+      "00012H 0003BH 0002AH MAIN_TEXT              CODE",
+      "0003CH 0003CH 00000H _DATA                  DATA",
+      "0003CH 0003CH 00000H CONST                  CONST",
+      "0003CH 0003CH 00000H _BSS                   BSS"
+     ]
+    },
+    "V4ALLOC": {
+     "linker_output_after_IDX": "00cbcbcb2bc0cb56",
+     "rtlink610_same": true,
+     "reproduces_original": false,
+     "segments": [
+      "00000H 0000AH 0000BH ONE_TEXT               CODE",
+      "0000CH 00011H 00006H DB2_TEXT               CODE",
+      "00012H 0003BH 0002AH MAIN_TEXT              CODE",
+      "0003CH 0003CH 00000H _DATA                  DATA",
+      "0003CH 0003CH 00000H CONST                  CONST",
+      "0003CH 0003CH 00000H _BSS                   BSS"
+     ]
+    },
+    "V5MBYTE": {
+     "linker_output_after_IDX": "cbcbcb2bc0cb0056",
+     "rtlink610_same": true,
+     "reproduces_original": true,
+     "segments": [
+      "00000H 0000AH 0000BH IDX_TEXT               CODE",
+      "0000BH 00010H 00006H DB_TEXT                CODE",
+      "00012H 0003BH 0002AH MAIN_TEXT              CODE",
+      "0003CH 0003CH 00000H _DATA                  DATA",
+      "0003CH 0003CH 00000H CONST                  CONST",
+      "0003CH 0003CH 00000H _BSS                   BSS"
+     ]
+    },
+    "V6MWORD": {
+     "linker_output_after_IDX": "00cbcbcb2bc0cb56",
+     "rtlink610_same": true,
+     "reproduces_original": false,
+     "segments": [
+      "00000H 0000AH 0000BH IDX_TEXT               CODE",
+      "0000CH 00011H 00006H DB_TEXT                CODE",
+      "00012H 0003BH 0002AH MAIN_TEXT              CODE",
+      "0003CH 0003CH 00000H _DATA                  DATA",
+      "0003CH 0003CH 00000H CONST                  CONST",
+      "0003CH 0003CH 00000H _BSS                   BSS"
+     ]
+    }
+   },
+   "reading": {
+    "V1ACC (accepted split)": "fill 00 inserted: the accepted layout is not linker output",
+    "V2HYPB (3 stubs in 1986)": "reproduces the original, no fill, 19A9 frame offset 8",
+    "V2HYPA (1 stub in 1986)": "also reproduces the bytes; rejected on the Win16 member count and stub style",
+    "V3NT (/NT DB_TEXT shared)": "one combined segment = one frame (contradicts frames 1986/19A9 and the relocated far call 19AC1 -> 1986:012A, TU-1) and the contribution is still word aligned (fill)",
+    "V4ALLOC (#pragma alloc_text)": "second segment of one object is WORD aligned too: fill",
+    "V5MBYTE (MASM segment byte)": "the only variant that places code at an odd address; excluded because 19A9 is MSC 6.00AX output (755-byte DBRecall, _DATA/CONST contributions, /Zi record breaks) and the jump from DBRecall into 1986 is an ordinary compiled far call",
+    "V6MWORD": "control: MASM word segment gets the fill"
+   }
+  }
+ },
+ "task2_2CFB": {
+  "verdict": "MEMHOOK_TEXT (class CODE) was read after the runtime library search: the hook object came from a library (or an object named in the LIBRARY list) searched after LLIBCR/LIBH. A different segment class is excluded.",
+  "evidence": [
+   "MS LINK 5.10 and RTLink 6.10 (exp2): an object listed as FILE puts MEMHOOK_TEXT before _TEXT (the t3 result); MH.LIB searched after LLIBCR puts it after EMULATOR_TEXT (original); MH.LIB searched before LLIBCR: before _TEXT; RTLink FILE after LIBRARY in the script: still before _TEXT",
+   "class hypothesis: a non-CODE class (MEMHOOK) or a class ending in CODE (HOOKCODE) follows ENDCODE in DOSSEG order; in an overlaid RTLink link (exp3) both land behind the overlay areas in the resident data section (with C_ETEXT), not in the root. The original has C_ETEXT at 3D57:0000 (crt0 DBDATA base16 word at S27 5D8F0 = 3D57, relocated) while MEMHOOK_TEXT is at 2CFB2 in the root: excluded",
+   "exp4: RTLink 6.10 accepts \"LIBRARY LLIBCR, LIBH, R2CFB.OBJ\" and then places MEMHOOK_TEXT exactly like the original (after EMULATOR_TEXT, before $$OVLMGR); tools/rtlink.py patch uses this",
+   "MS LIB.EXE used only for exp2/exp3 (C:/tools/msc-6.00/BIN/lib.exe sha256 418aec4161ef09084aaf2bed66e4de9e007eb6f2bedd1990b73707f624336ff3, not pinned)"
+  ],
+  "results_exp2": {
+   "M1CODE": {
+    "mslink510": "BEFORE_TEXT",
+    "rtlink610": "BEFORE_TEXT"
+   },
+   "M2CLASS": {
+    "mslink510": "AFTER_RUNTIME (original)",
+    "rtlink610": "AFTER_RUNTIME (original)"
+   },
+   "M3LIBAFT": {
+    "mslink510": "AFTER_RUNTIME (original)",
+    "rtlink610": "AFTER_RUNTIME (original)"
+   },
+   "M3LIBFST": {
+    "mslink510": "BEFORE_TEXT",
+    "rtlink610": "BEFORE_TEXT"
+   },
+   "M4FILEAF": {
+    "mslink510": null,
+    "rtlink610": "BEFORE_TEXT"
+   }
+  },
+  "results_exp3_overlaid_rtlink610": {
+   "X1CODE": "BEFORE _TEXT",
+   "X2CLASS": "AFTER OVERLAY AREAS",
+   "X2END": "AFTER OVERLAY AREAS",
+   "X3LIB": "ORIGINAL (root, after EMULATOR_TEXT, before manager)"
+  },
+  "results_exp4": {
+   "L1OBJ": [
+    "00000 0001A A_TEXT CODE",
+    "0001A 00000 D_TEXT CODE",
+    "0001A 0087A _TEXT CODE",
+    "008A0 00002 EMULATOR_TEXT CODE",
+    "008A2 00005 MEMHOOK_TEXT CODE",
+    "008B0 00BC1 $$OVLMGR $$OVLMGR",
+    "01471 0000A $$OVLVEC $$OVLMGR",
+    "0147B 00604 $$OVLMGR_UTILS $$OVLMGR_UTILS",
+    "01A80 00004 B_TEXT CODE",
+    "01A90 00000 C_ETEXT ENDCODE"
+   ]
+  }
+ },
+ "task3_deliverables": {
+  "gate_patch": {
+   "files": {
+    "work/align/patch/tools_modules.py": "tools/modules.py: code_alignment_reasons (rule CODEALIGN-1) in verify_extent (extent start) and verify_module (origin of a later object without extent)",
+    "work/align/patch/tools_promote.py": "tools/promote.py: --drop-extent WHY (journaled), the sanctioned way to un-complete a mis-framed TU so its rows can be re-framed (functions.py reframe refuses claimed rows; extent_row_reasons refuses the corrected extent while the old rows exist)",
+    "work/align/patch/tools_rtlink.py": "tools/rtlink.py: late root objects in the LIBRARY list after LLIBCR, LIBH; run_link reads the pin from toolchain.json 'linkers' (compiler.verify_profile raised KeyError 'rtlink610': run_link was broken)",
+    "work/align/patch/tests_test_codealign.py": "tests/test_codealign.py",
+    "work/align/patch/T13_m19A9_odd_start.c": "tests/negatives/T13_m19A9_odd_start.c (the pre-correction canonical 19A9 source)"
+   },
+   "base_md5": [
+    "746a6f56a87f23a3be29bc89d3c96fb1 *tools/modules.py",
+    "9ce39064443908b920a377410a64ab1c *tools/promote.py",
+    "a86b92becbacd783f238b58731324e6c *tools/rtlink.py",
+    "805b63425bc501d61dc952a7c6f1be11 *tools/validate.py"
+   ],
+   "install_order": [
+    "copy the patched tools/tests",
+    "bash work/align/migrate.sh (4 steps: promote --drop-extent + release; functions.py reframe x3; promote 1986 claims; promote 19A9 --extent 19A98:19DC7)",
+    "python tools/validate.py"
+   ],
+   "note": "with the patch installed and the migration NOT run, validate refuses root:19A9 for CODEALIGN-1 alone (negative control on real data); the migration is required before or with the patch"
+  },
+  "drafts": {
+   "work/align/m19A9.c": "root:19A9 without the three stubs (extent 19A98:19DC7)",
+   "work/align/m1986.c": "root:1986 + f_1986_0235/0236/0237 (empty) after the FindIndex scaffold"
+  },
+  "names": "the three stubs keep placeholder names f_1986_0235..0237; Win16 candidates DeleteCurrentIndex, AddIndex, DeleteIndex by position only (content-free bodies: xver cannot confirm; a decisions.json entry needs a second independent anchor)",
+  "sandbox_logs": [
+   "D:\\Prog\\simant_recon\\build\\workers\\align\\sb_20260930_115130.logs"
+  ],
+  "sandbox_status": "INCOMPLETE: run of 11:51 stopped at session end; its baseline failed only because asm_evidence paths under build/workers/ were not copied (sandbox_run.sh fixed). Patched/migrated validate not yet run: rerun bash work/align/sandbox_run.sh"
+ },
+ "not_done": [
+  "no canonical file changed: the migration needs functions.py reframe (layout/) and the new --drop-extent option, both outside this worker's write scope; the sandbox shows the full sequence",
+  "the Dec 1991 RTLink/Plus is not available: all linker results are from MS LINK 5.10 and RTLink 6.10"
+ ]
+}

@@ -1,0 +1,480 @@
+root 00BA:0067 [game] val=2CFF in f_00BA_0002
+      005B b80013             mov ax, 0x1300
+      005E 9a6208e820         lcall 0x20e8, 0x862
+      0063 b83c26             mov ax, 0x263c
+   >> 0066 baff2c             mov dx, 0x2cff
+      0069 52                 push dx
+      006A 50                 push ax
+root 00BA:0094 [game] val=2CFF in f_00BA_0002
+      008A 50                 push ax
+      008B 9a8b08e820         lcall 0x20e8, 0x88b
+      0090 b8f625             mov ax, 0x25f6
+   >> 0093 baff2c             mov dx, 0x2cff
+      0096 52                 push dx
+      0097 50                 push ax
+root 00BA:0037 [game] val=2CFF in f_00BA_0002
+      002B b80001             mov ax, 0x100
+      002E 9a6208e820         lcall 0x20e8, 0x862
+      0033 b81426             mov ax, 0x2614
+   >> 0036 baff2c             mov dx, 0x2cff
+      0039 52                 push dx
+      003A 50                 push ax
+root 00BA:0047 [game] val=2CFF in f_00BA_0002
+      003B b80015             mov ax, 0x1500
+      003E 9a6208e820         lcall 0x20e8, 0x862
+      0043 b83226             mov ax, 0x2632
+   >> 0046 baff2c             mov dx, 0x2cff
+      0049 52                 push dx
+      004A 50                 push ax
+root 00BA:00A1 [game] val=2CFF in f_00BA_0002
+      0097 50                 push ax
+      0098 9adb08e820         lcall 0x20e8, 0x8db
+      009D b85026             mov ax, 0x2650
+   >> 00A0 baff2c             mov dx, 0x2cff
+      00A3 52                 push dx
+      00A4 50                 push ax
+root 00BA:0018 [game] val=2CFF in f_00BA_0002
+      000E 56                 push si
+      000F 9a4101e820         lcall 0x20e8, 0x141
+      0014 b80a26             mov ax, 0x260a
+   >> 0017 baff2c             mov dx, 0x2cff
+      001A 52                 push dx
+      001B 50                 push ax
+root 00BA:0027 [game] val=2CFF in f_00BA_0002
+      001C 2bc0               sub ax, ax
+      001E 9a6208e820         lcall 0x20e8, 0x862
+      0023 b82826             mov ax, 0x2628
+   >> 0026 baff2c             mov dx, 0x2cff
+      0029 52                 push dx
+      002A 50                 push ax
+root 00BA:0087 [game] val=2CFF in f_00BA_0002
+      007B b80005             mov ax, 0x500
+      007E 9a6208e820         lcall 0x20e8, 0x862
+      0083 b84626             mov ax, 0x2646
+   >> 0086 baff2c             mov dx, 0x2cff
+      0089 52                 push dx
+      008A 50                 push ax
+root 00BA:0057 [game] val=2CFF in f_00BA_0002
+      004B b80012             mov ax, 0x1200
+      004E 9a6208e820         lcall 0x20e8, 0x862
+      0053 b80026             mov ax, 0x2600
+   >> 0056 baff2c             mov dx, 0x2cff
+      0059 52                 push dx
+      005A 50                 push ax
+root 00BA:0077 [game] val=2CFF in f_00BA_0002
+      006B b80019             mov ax, 0x1900
+      006E 9a6208e820         lcall 0x20e8, 0x862
+      0073 b81e26             mov ax, 0x261e
+   >> 0076 baff2c             mov dx, 0x2cff
+      0079 52                 push dx
+      007A 50                 push ax
+root 00F8:0590 [game] val=00F8 in f_00F8_0585
+      0585 33c0               xor ax, ax
+      0587 9acc02f429         lcall 0x29f4, 0x2cc
+      058C b84305             mov ax, 0x543
+   >> 058F baf800             mov dx, 0xf8
+      0592 52                 push dx
+      0593 50                 push ax
+root 0250:01D3 [game] val=0250 in f_0250_012D
+      01C7 9acb015a19         lcall 0x195a, 0x1cb
+      01CC 83c406             add sp, 6
+      01CF b81401             mov ax, 0x114
+   >> 01D2 ba5002             mov dx, 0x250
+      01D5 52                 push dx
+      01D6 50                 push ax
+root 171C:00E6 [game] val=171C in f_171C_0034
+      00DA 9a62005a19         lcall 0x195a, 0x62
+      00DF 83c406             add sp, 6
+      00E2 b82000             mov ax, 0x20
+   >> 00E5 ba1c17             mov dx, 0x171c
+      00E8 52                 push dx
+      00E9 50                 push ax
+root 171C:09BD [game] val=171C in f_171C_07BE
+      09B1 9a1a28f429         lcall 0x29f4, 0x281a
+      09B6 83c40a             add sp, 0xa
+      09B9 b87806             mov ax, 0x678
+   >> 09BC ba1c17             mov dx, 0x171c
+      09BF 52                 push dx
+      09C0 50                 push ax
+root 19DC:0132 [game] val=19DC in f_19DC_001A
+      0126 9a62005a19         lcall 0x195a, 0x62
+      012B 83c406             add sp, 6
+      012E b80800             mov ax, 8
+   >> 0131 badc19             mov dx, 0x19dc
+      0134 52                 push dx
+      0135 50                 push ax
+root 1B73:0037 [game] val=1B73 in f_1B73_0025
+      0027 8ec0               mov es, ax
+      0029 26813ecc002400     cmp word ptr es:[0xcc], 0x24
+      0030 7513               jne 0x45
+   >> 0032 26813ece00731b     cmp word ptr es:[0xce], 0x1b73
+      0039 750a               jne 0x45
+      003B 33c0               xor ax, ax
+root 1B73:007A [game] val=1B73 in f_1B73_0046
+      006E 26a1cc00           mov ax, word ptr es:[0xcc]
+      0072 260b06ce00         or ax, word ptr es:[0xce]
+      0077 750e               jne 0x87
+   >> 0079 b8731b             mov ax, 0x1b73
+      007C 26a3ce00           mov word ptr es:[0xce], ax
+      0080 b82400             mov ax, 0x24
+root 1FD2:0307 [game] val=1B73 in f_1FD2_02FF
+      02FF b86400             mov ax, 0x64
+      0302 50                 push ax
+      0303 b84b0d             mov ax, 0xd4b
+   >> 0306 ba731b             mov dx, 0x1b73
+      0309 52                 push dx
+      030A 50                 push ax
+root 205F:02DB [game] val=35A6 in f_205F_0004
+      02C4 26c706f037a635     mov word ptr es:[0x37f0], 0x35a6
+      02CB 8e060a8a           mov es, word ptr [0x8a0a]
+      02CF 26c706ea370700     mov word ptr es:[0x37ea], 7
+   >> 02D6 26c706ec37a635     mov word ptr es:[0x37ec], 0x35a6
+      02DD 8e060c8a           mov es, word ptr [0x8a0c]
+      02E1 26c706583b7701     mov word ptr es:[0x3b58], 0x177
+root 205F:0235 [game] val=32B5 in f_205F_0004
+      021E 26c706f037b532     mov word ptr es:[0x37f0], 0x32b5
+      0225 8e060a8a           mov es, word ptr [0x8a0a]
+      0229 26c706ea370f00     mov word ptr es:[0x37ea], 0xf
+   >> 0230 26c706ec37b532     mov word ptr es:[0x37ec], 0x32b5
+      0237 8e060c8a           mov es, word ptr [0x8a0c]
+      023B 26c706583baa00     mov word ptr es:[0x3b58], 0xaa
+root 205F:02B0 [game] val=3258 in f_205F_0004
+      0299 26c7065a3b5832     mov word ptr es:[0x3b5a], 0x3258
+      02A0 8e060e8a           mov es, word ptr [0x8a0e]
+      02A4 26c706e6375f17     mov word ptr es:[0x37e6], 0x175f
+   >> 02AB 26c706e8375832     mov word ptr es:[0x37e8], 0x3258
+      02B2 eb4d               jmp 0x301
+      02B4 9a0600a635         lcall 0x35a6, 6
+root 205F:027A [game] val=3258 in f_205F_0004
+      0265 9a0c045832         lcall 0x3258, 0x40c
+      026A 8e06088a           mov es, word ptr [0x8a08]
+      026E 26c706ee37a705     mov word ptr es:[0x37ee], 0x5a7
+   >> 0275 26c706f0375832     mov word ptr es:[0x37f0], 0x3258
+      027C 8e060a8a           mov es, word ptr [0x8a0a]
+      0280 26c706ea370d04     mov word ptr es:[0x37ea], 0x40d
+root 205F:02ED [game] val=35A6 in f_205F_0004
+      02D6 26c706ec37a635     mov word ptr es:[0x37ec], 0x35a6
+      02DD 8e060c8a           mov es, word ptr [0x8a0c]
+      02E1 26c706583b7701     mov word ptr es:[0x3b58], 0x177
+   >> 02E8 26c7065a3ba635     mov word ptr es:[0x3b5a], 0x35a6
+      02EF 8e060e8a           mov es, word ptr [0x8a0e]
+      02F3 26c706e6370604     mov word ptr es:[0x37e6], 0x406
+root 205F:0247 [game] val=32B5 in f_205F_0004
+      0230 26c706ec37b532     mov word ptr es:[0x37ec], 0x32b5
+      0237 8e060c8a           mov es, word ptr [0x8a0c]
+      023B 26c706583baa00     mov word ptr es:[0x3b58], 0xaa
+   >> 0242 26c7065a3bb532     mov word ptr es:[0x3b5a], 0x32b5
+      0249 8e060e8a           mov es, word ptr [0x8a0e]
+      024D 26c706e6374f02     mov word ptr es:[0x37e6], 0x24f
+root 205F:028C [game] val=3258 in f_205F_0004
+      0275 26c706f0375832     mov word ptr es:[0x37f0], 0x3258
+      027C 8e060a8a           mov es, word ptr [0x8a0a]
+      0280 26c706ea370d04     mov word ptr es:[0x37ea], 0x40d
+   >> 0287 26c706ec375832     mov word ptr es:[0x37ec], 0x3258
+      028E 8e060c8a           mov es, word ptr [0x8a0c]
+      0292 26c706583bce04     mov word ptr es:[0x3b58], 0x4ce
+root 205F:02FF [game] val=35A6 in f_205F_0004
+      02E8 26c7065a3ba635     mov word ptr es:[0x3b5a], 0x35a6
+      02EF 8e060e8a           mov es, word ptr [0x8a0e]
+      02F3 26c706e6370604     mov word ptr es:[0x37e6], 0x406
+   >> 02FA 26c706e837a635     mov word ptr es:[0x37e8], 0x35a6
+      0301 5e                 pop si
+      0302 5f                 pop di
+root 205F:0259 [game] val=32B5 in f_205F_0004
+      0242 26c7065a3bb532     mov word ptr es:[0x3b5a], 0x32b5
+      0249 8e060e8a           mov es, word ptr [0x8a0e]
+      024D 26c706e6374f02     mov word ptr es:[0x37e6], 0x24f
+   >> 0254 26c706e837b532     mov word ptr es:[0x37e8], 0x32b5
+      025B e9a300             jmp 0x301
+      025E 803e975a02         cmp byte ptr [0x5a97], 2
+root 205F:02C9 [game] val=35A6 in f_205F_0004
+      02B4 9a0600a635         lcall 0x35a6, 6
+      02B9 8e06088a           mov es, word ptr [0x8a08]
+      02BD 26c706ee37fd02     mov word ptr es:[0x37ee], 0x2fd
+   >> 02C4 26c706f037a635     mov word ptr es:[0x37f0], 0x35a6
+      02CB 8e060a8a           mov es, word ptr [0x8a0a]
+      02CF 26c706ea370700     mov word ptr es:[0x37ea], 7
+root 205F:0223 [game] val=32B5 in f_205F_0004
+      020E 9a0e00b532         lcall 0x32b5, 0xe
+      0213 8e06088a           mov es, word ptr [0x8a08]
+      0217 26c706ee375201     mov word ptr es:[0x37ee], 0x152
+   >> 021E 26c706f037b532     mov word ptr es:[0x37f0], 0x32b5
+      0225 8e060a8a           mov es, word ptr [0x8a0a]
+      0229 26c706ea370f00     mov word ptr es:[0x37ea], 0xf
+root 205F:029E [game] val=3258 in f_205F_0004
+      0287 26c706ec375832     mov word ptr es:[0x37ec], 0x3258
+      028E 8e060c8a           mov es, word ptr [0x8a0c]
+      0292 26c706583bce04     mov word ptr es:[0x3b58], 0x4ce
+   >> 0299 26c7065a3b5832     mov word ptr es:[0x3b5a], 0x3258
+      02A0 8e060e8a           mov es, word ptr [0x8a0e]
+      02A4 26c706e6375f17     mov word ptr es:[0x37e6], 0x175f
+root 208F:0534 [game] val=1B73 in f_208F_0530
+      0530 55                 push bp
+      0531 8bec               mov bp, sp
+   >> 0533 b8731b             mov ax, 0x1b73
+      0536 8ec0               mov es, ax
+      0538 8b4606             mov ax, word ptr [bp + 6]
+root 277E:009D [game] val=0000 in f_277E_0000
+      0090 8e06668a           mov es, word ptr [0x8a66]
+      0094 268936f001         mov word ptr es:[0x1f0], si
+      0099 b80000             mov ax, 0
+   >> 009C ba0000             mov dx, 0
+      009F 52                 push dx
+      00A0 50                 push ax
+root 28BC:0441 [game] val=28BC in f_28BC_0422
+      043B 51                 push cx
+      043C 33c0               xor ax, ax
+      043E 8ec0               mov es, ax
+   >> 0440 b8bc28             mov ax, 0x28bc
+      0443 26a32200           mov word ptr es:[0x22], ax
+      0447 ba5403             mov dx, 0x354
+root 28BC:047E [game] val=28BC in f_28BC_046B
+      0474 57                 push di
+      0475 b8b355             mov ax, 0x55b3
+      0478 8ed8               mov ds, ax
+   >> 047A c706be74bc28       mov word ptr [0x74be], 0x28bc
+      0480 c706bc740e02       mov word ptr [0x74bc], 0x20e
+      0486 eb1b               jmp 0x4a3
+root 28BC:049B [game] val=28BC in f_28BC_0488
+      0491 57                 push di
+      0492 b8b355             mov ax, 0x55b3
+      0495 8ed8               mov ds, ax
+   >> 0497 c706be74bc28       mov word ptr [0x74be], 0x28bc
+      049D c706bc741500       mov word ptr [0x74bc], 0x15
+      04A3 b80835             mov ax, 0x3508
+root 2CFF:0B71 [mgr] val=3126  (no inventoried function)
+     1c000000001826317625
+root 2CFF:0B83 [mgr] val=3126  (no inventoried function)
+     ffff0200cf0426317625
+root 2CFF:0B95 [mgr] val=3126  (no inventoried function)
+     ffff0300b90126317625
+root 2CFF:0BA7 [mgr] val=3126  (no inventoried function)
+     ffff0400970026317625
+root 2CFF:0BB9 [mgr] val=35F5  (no inventoried function)
+     ffff0500ae02f5357625
+root 2CFF:0BCB [mgr] val=35F5  (no inventoried function)
+     ffff06009a00f5357625
+root 2CFF:0BDD [mgr] val=35F5  (no inventoried function)
+     ffff07009d00f5357625
+root 2CFF:0BEF [mgr] val=35F5  (no inventoried function)
+     ffff08005702f5357625
+root 2CFF:0C01 [mgr] val=35F5  (no inventoried function)
+     ffff09004a00f5357625
+root 2CFF:0C13 [mgr] val=35F5  (no inventoried function)
+     ffff0a003c01f5357625
+root 2CFF:0C25 [mgr] val=35F5  (no inventoried function)
+     ffff0b004701f5357625
+root 2CFF:0C37 [mgr] val=35F5  (no inventoried function)
+     ffff0c00ab00f5357625
+root 2CFF:0C49 [mgr] val=384C  (no inventoried function)
+     ffff0d0037004c387625
+root 2CFF:0C5B [mgr] val=384C  (no inventoried function)
+     ffff0e0038014c387625
+root 2CFF:0C6D [mgr] val=384C  (no inventoried function)
+     ffff0f007b014c387625
+root 2CFF:0C7F [mgr] val=384C  (no inventoried function)
+     ffff100023014c387625
+root 2CFF:0C91 [mgr] val=384C  (no inventoried function)
+     ffff110055004c387625
+root 2CFF:0CA3 [mgr] val=384C  (no inventoried function)
+     ffff12006f004c387625
+root 2CFF:0CB5 [mgr] val=384C  (no inventoried function)
+     ffff13001c004c387625
+root 2CFF:0CC7 [mgr] val=384C  (no inventoried function)
+     ffff140011014c387625
+root 2CFF:0CD9 [mgr] val=39C7  (no inventoried function)
+     ffff15004600c7397625
+root 2CFF:0CEB [mgr] val=39C7  (no inventoried function)
+     ffff16008300c7397625
+root 2CFF:0CFD [mgr] val=39C7  (no inventoried function)
+     ffff17001e00c7397625
+root 2CFF:0D0F [mgr] val=39C7  (no inventoried function)
+     ffff18001b03c7397625
+root 2CFF:0D21 [mgr] val=39C7  (no inventoried function)
+     ffff19001101c7397625
+root 2CFF:0D33 [mgr] val=39C7  (no inventoried function)
+     ffff1a007100c7397625
+root 2CFF:0D45 [mgr] val=39C7  (no inventoried function)
+     ffff1b009003c7397625
+root 2CFF:0230 [mgr] val=2CFF  (no inventoried function)
+     1e068becfcb9ff2c8ed9
+root 2CFF:04BB [mgr] val=2CFF  (no inventoried function)
+     4feb128bf2b8ff2c8ec0
+root 2CFF:04CB [mgr] val=2CFF  (no inventoried function)
+     aa0ac075fab8ff2c8ed8
+root 2CFF:0508 [mgr] val=2CFF  (no inventoried function)
+     d933d28bf2bbff2c8ec3
+root 2CFF:0535 [mgr] val=2CFF  (no inventoried function)
+     5257561e9cbaff2c8eda
+root 2CFF:0579 [mgr] val=2CFF  (no inventoried function)
+     0b01007505b8ff2ceb08
+root 2CFF:0583 [mgr] val=2CFF  (no inventoried function)
+     8b4606c74606ff2c8944
+root 2CFF:06B1 [mgr] val=2CFF  (no inventoried function)
+     4608894604b8ff2c8ed8
+root 2CFF:06FE [mgr] val=2CFF  (no inventoried function)
+     2e8c1ede09bbff2c8edb
+root 2CFF:0876 [mgr] val=2CFF  (no inventoried function)
+     9dc353511eb8ff2c8ed8
+root 2CFF:08B3 [mgr] val=2CFF  (no inventoried function)
+     d88ec08bfab8ff2c8ed8
+root 2CFF:08F9 [mgr] val=2CFF  (no inventoried function)
+     fc8bf28bc8b8ff2c8ec0
+root 2CFF:0958 [mgr] val=2CFF  (no inventoried function)
+     9aba13b32fb8ff2c8ec0
+root 2CFF:09C9 [mgr] val=2FB3  (no inventoried function)
+     36c709c38612b32f0000
+root 2FB3:0BA1 [mgr] val=2FB3  (no inventoried function)
+     0b26ff2c8612b32f0000
+root 2FB3:11C6 [mgr] val=2FB3  (no inventoried function)
+     1126ff2c8612b32f0000
+root 2FB3:0295 [mgr] val=2FB3  (no inventoried function)
+     002e813e5400b32f7410
+root 2FB3:02B6 [mgr] val=2FB3  (no inventoried function)
+     0426c7060c00b32f2ec6
+root 2FB3:053F [mgr] val=2FB3  (no inventoried function)
+     00f9ebe05913b32f5053
+root 2FB3:1288 [mgr] val=2FB3  (no inventoried function)
+     8ed858cb9012b32f0000
+S00 31AD:000C [ovl] val=31AD in f_31AD_0004
+      0004 a1ae5a             mov ax, word ptr [0x5aae]
+      0007 23c0               and ax, ax
+      0009 7411               je 0x1c
+   >> 000B b8ad31             mov ax, 0x31ad
+      000E 50                 push ax
+      000F b81c00             mov ax, 0x1c
+S00 31AD:012A [ovl] val=31AD in f_31AD_0122
+      0122 a1ae5a             mov ax, word ptr [0x5aae]
+      0125 23c0               and ax, ax
+      0127 7411               je 0x13a
+   >> 0129 b8ad31             mov ax, 0x31ad
+      012C 50                 push ax
+      012D b83a01             mov ax, 0x13a
+S00 31AD:0384 [ovl] val=31AD in f_31AD_037C
+      037C a1ae5a             mov ax, word ptr [0x5aae]
+      037F 23c0               and ax, ax
+      0381 7411               je 0x394
+   >> 0383 b8ad31             mov ax, 0x31ad
+      0386 50                 push ax
+      0387 b89403             mov ax, 0x394
+S00 31AD:16B1 [ovl] val=31AD in f_31AD_16A9
+      16A9 a1ae5a             mov ax, word ptr [0x5aae]
+      16AC 23c0               and ax, ax
+      16AE 7411               je 0x16c1
+   >> 16B0 b8ad31             mov ax, 0x31ad
+      16B3 50                 push ax
+      16B4 b8c116             mov ax, 0x16c1
+S00 31AD:16EC [ovl] val=31AD in f_31AD_16E4
+      16E4 a1ae5a             mov ax, word ptr [0x5aae]
+      16E7 23c0               and ax, ax
+      16E9 7411               je 0x16fc
+   >> 16EB b8ad31             mov ax, 0x31ad
+      16EE 50                 push ax
+      16EF b8fc16             mov ax, 0x16fc
+S01 3126:0254 [ovl] val=3126 in f_3126_024C
+      024C a1ae5a             mov ax, word ptr [0x5aae]
+      024F 23c0               and ax, ax
+      0251 7411               je 0x264
+   >> 0253 b82631             mov ax, 0x3126
+      0256 50                 push ax
+      0257 b86402             mov ax, 0x264
+S02 3126:009E [ovl] val=3126 in f_3126_0096
+      0096 a1ae5a             mov ax, word ptr [0x5aae]
+      0099 23c0               and ax, ax
+      009B 7411               je 0xae
+   >> 009D b82631             mov ax, 0x3126
+      00A0 50                 push ax
+      00A1 b8ae00             mov ax, 0xae
+S02 3126:018D [ovl] val=3126 in f_3126_0185
+      0185 a1ae5a             mov ax, word ptr [0x5aae]
+      0188 23c0               and ax, ax
+      018A 7411               je 0x19d
+   >> 018C b82631             mov ax, 0x3126
+      018F 50                 push ax
+      0190 b89d01             mov ax, 0x19d
+S02 3126:0284 [ovl] val=3126 in f_3126_027C
+      027C a1ae5a             mov ax, word ptr [0x5aae]
+      027F 23c0               and ax, ax
+      0281 7411               je 0x294
+   >> 0283 b82631             mov ax, 0x3126
+      0286 50                 push ax
+      0287 b89402             mov ax, 0x294
+S03 3126:0200 [ovl] val=3126 in f_3126_01F8
+      01F8 a1ae5a             mov ax, word ptr [0x5aae]
+      01FB 23c0               and ax, ax
+      01FD 7411               je 0x210
+   >> 01FF b82631             mov ax, 0x3126
+      0202 50                 push ax
+      0203 b81002             mov ax, 0x210
+S03 3126:03CA [ovl] val=3126 in f_3126_03C2
+      03C2 a1ae5a             mov ax, word ptr [0x5aae]
+      03C5 23c0               and ax, ax
+      03C7 7411               je 0x3da
+   >> 03C9 b82631             mov ax, 0x3126
+      03CC 50                 push ax
+      03CD b8da03             mov ax, 0x3da
+S03 3126:05A4 [ovl] val=3126 in f_3126_059C
+      059C a1ae5a             mov ax, word ptr [0x5aae]
+      059F 23c0               and ax, ax
+      05A1 7411               je 0x5b4
+   >> 05A3 b82631             mov ax, 0x3126
+      05A6 50                 push ax
+      05A7 b8b405             mov ax, 0x5b4
+S12 384C:010F [ovl] val=328E in f_384C_0008
+      00FB 26a35838           mov word ptr es:[0x3858], ax
+      00FF 8e067686           mov es, word ptr [0x8676]
+      0103 26c706b8380a00     mov word ptr es:[0x38b8], 0xa
+   >> 010A 26c706ba388e32     mov word ptr es:[0x38ba], 0x328e
+      0111 8e067886           mov es, word ptr [0x8678]
+      0115 26c706bc389d00     mov word ptr es:[0x38bc], 0x9d
+S12 384C:0149 [ovl] val=3126 in f_384C_0008
+      0135 26a35838           mov word ptr es:[0x3858], ax
+      0139 8e067686           mov es, word ptr [0x8676]
+      013D 26c706b8386a02     mov word ptr es:[0x38b8], 0x26a
+   >> 0144 26c706ba382631     mov word ptr es:[0x38ba], 0x3126
+      014B 8e067886           mov es, word ptr [0x8678]
+      014F 26c706bc38a903     mov word ptr es:[0x38bc], 0x3a9
+S12 384C:00CD [ovl] val=3253 in f_384C_0008
+      00C1 8e067486           mov es, word ptr [0x8674]
+      00C5 26a35838           mov word ptr es:[0x3858], ax
+      00C9 b80800             mov ax, 8
+   >> 00CC ba5332             mov dx, 0x3253
+      00CF 8e067686           mov es, word ptr [0x8676]
+      00D3 26a3b838           mov word ptr es:[0x38b8], ax
+S12 384C:00B1 [ovl] val=3126 in f_384C_0008
+      009A 26c706ba382631     mov word ptr es:[0x38ba], 0x3126
+      00A1 8e067886           mov es, word ptr [0x8678]
+      00A5 26c706bc383701     mov word ptr es:[0x38bc], 0x137
+   >> 00AC 26c706be382631     mov word ptr es:[0x38be], 0x3126
+      00B3 5e                 pop si
+      00B4 5f                 pop di
+S12 384C:0121 [ovl] val=328E in f_384C_0008
+      010A 26c706ba388e32     mov word ptr es:[0x38ba], 0x328e
+      0111 8e067886           mov es, word ptr [0x8678]
+      0115 26c706bc389d00     mov word ptr es:[0x38bc], 0x9d
+   >> 011C 26c706be388e32     mov word ptr es:[0x38be], 0x328e
+      0123 5e                 pop si
+      0124 5f                 pop di
+S12 384C:015B [ovl] val=3126 in f_384C_0008
+      0144 26c706ba382631     mov word ptr es:[0x38ba], 0x3126
+      014B 8e067886           mov es, word ptr [0x8678]
+      014F 26c706bc38a903     mov word ptr es:[0x38bc], 0x3a9
+   >> 0156 26c706be382631     mov word ptr es:[0x38be], 0x3126
+      015D 5e                 pop si
+      015E 5f                 pop di
+S12 384C:009F [ovl] val=3126 in f_384C_0008
+      008B 26a35838           mov word ptr es:[0x3858], ax
+      008F 8e067686           mov es, word ptr [0x8676]
+      0093 26c706b8380000     mov word ptr es:[0x38b8], 0
+   >> 009A 26c706ba382631     mov word ptr es:[0x38ba], 0x3126
+      00A1 8e067886           mov es, word ptr [0x8678]
+      00A5 26c706bc383701     mov word ptr es:[0x38bc], 0x137
+S20 39F1:02B2 [ovl] val=208F in f_39F1_000A
+      02A8 5b                 pop bx
+      02A9 9a0a2bff2c         lcall 0x2cff, 0x2b0a
+      02AE b88b05             mov ax, 0x58b
+   >> 02B1 ba8f20             mov dx, 0x208f
+      02B4 52                 push dx
+      02B5 50                 push ax
+S21 39C7:016B [ovl] val=39C7  (no inventoried function)
+     4e4459006301c7391e56

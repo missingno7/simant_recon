@@ -1,0 +1,14 @@
+{"id": "ASMROLE-SHAPE3", "question": "zero idioms, byte stores, far pointer copy, 16x16 multiply (worker asmrole)",
+ "header": "extern unsigned char near tb[]; extern char near cb; extern char near cb2; extern int near w1; extern int near w2; extern char far * near fp1; extern char far * near fp2; extern int near k1; extern char near k2; extern char near k3;\n",
+ "variants": {
+   "zext": "int far f(int i) { return tb[i] ^ 0x80; }",
+   "bios": "long far f(void) { return *(long far *)0x0000046CL; }",
+   "ret0": "int far f(void) { return 0; }",
+   "bytestore": "void far f(int a, int b) { cb = a; cb2 = b; }",
+   "wordstore": "void far f(int a, int b) { w1 = a; w2 = b; }",
+   "fpcopy": "void far f(void) { fp1 = fp2; k2 = 6; k3 = 4; k1 = 0x18; }",
+   "mul": "unsigned long far f(int x1, int y1, int x2, int y2) { return (unsigned long)(unsigned)(x2 - x1) * (unsigned)(y2 - y1) + 4; }",
+   "retg": "int far f(void) { return w1; }"
+ },
+ "profiles": [{"profile": "msc600ax", "flags": ["/AL", "/Os", "/Gs"]}, {"profile": "msc600ax", "flags": ["/AL", "/Ox", "/Gs"]}]
+}

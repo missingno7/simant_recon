@@ -485,7 +485,7 @@ void far o06_35F5_0A5F(void)
  * fd_50F6_023E = (BoyY - 38) / 10 comes before the column division in the source; /Og schedules
  * the column store first, and only in this order is (BoyY - 38) kept as a global CSE temp
  * [bp-24h] across the early returns (in column-first order the local CSE of BoyY into CX blocks
- * it; micro contrast build/workers/resJ/s06/m/m1.c vs m2.c).  Local names are byte-equivalent
+ * it; micro contrast work/resJ/s06/m/m1.c vs m2.c).  Local names are byte-equivalent
  * hypotheses: the final loop counts with x (the kidX home [bp-2]) and draws the row into i (SI)
  * and the column into frame (DI); the else-if index (c48 - 30) is i. */
 extern int far fd_3D57_07C8;

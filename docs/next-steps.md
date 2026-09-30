@@ -45,9 +45,9 @@ counted as reconstruction. (c) independent historical link: see §4.
 
 ## 3. Remaining game code (~28.6 KB, ~40 functions) — all hard residues
 
-Current residue per function: `build/workers/resI/survey.txt` plus the later reports
-(resJ: `build/workers/resJ/residue.txt`, sub-dirs dle/s06/ovl/s23/mem; autosearch:
-`build/workers/autosearch/results.md`). Best drafts sit in SCAFFOLD blocks of the canonical
+Current residue per function: `work/resI/survey.txt` plus the later reports
+(resJ: `work/resJ/residue.txt`, sub-dirs dle/s06/ovl/s23/mem; autosearch:
+`work/autosearch/results.md`). Best drafts sit in SCAFFOLD blocks of the canonical
 sources or in those directories. Largest items:
 
 | Module | Open | Notes |
@@ -57,28 +57,31 @@ sources or in those directories. Largest items:
 | S10:35F5 | 0384 | 1746 vs 1759 |
 | S09:35F5 | FileSelect | 30 B, 4 causes; Win16 drafts exist in D:\Prog\simantw_recon\build\lift\open\FileSelect.c (unread) |
 | S23:39C7 | GetStyleTextHeight, PrintStyleTextInRect, DisplayCard | lineH kept in memory |
-| root:171C | 0CF4, 0160 (2 B `mov dx,es` vs `cx`: 32-bit arithmetic lead), 09CC, 0ADC, 0FBC | draft build/workers/resJ/mem/best_m171C.c |
+| root:171C | 0CF4, 0160 (2 B `mov dx,es` vs `cx`: 32-bit arithmetic lead), 09CC, 0ADC, 0FBC | draft work/resJ/mem/best_m171C.c |
 | others | S13 InvertPatch/DrawColonyBars, S14 CalcScore, S17 0039, S24 drawHistGraph, S04/S12 cursor, 1E57 038E, 259D DrawBitMap, 0CDB SpiderScan, 2815 0165/0275, 290D 000E, 284A 0138, 23E6 0000, 1C62 0415, 0E2E LessonDone, S08 RandWorld, 1A96, 1986, 20E8 0903, 23AE, 2505 0453, 29D6, 295C 0391, S15 0239, 293A 017F, S05:3663 DoExpMenu | see survey |
 
 Recommended next pass: run the rule-driven search first —
 `python tools/autosearch.py --all` (or per function), continuing from
-`build/workers/autosearch/results.json` — then hand-work what it cannot solve. Twins
+`work/autosearch/results.json` — then hand-work what it cannot solve. Twins
 (A/B/R functions, Win16 sources D:\Prog\simantw_recon\src\recovered) are the best evidence
 for statement form (REG-6).
 
 ## 4. Ready-to-install proposals (reviewed, not yet installed)
 
-1. **CODEALIGN-1 + 19A9 boundary fix** — `build/workers/align/` (FINDINGS.txt, patch/,
+1. **CODEALIGN-1 + 19A9 boundary fix** — `work/align/` (FINDINGS.txt, patch/,
    migrate.sh). The accepted 19A9 extent starts at an odd address that no linker produces;
    its three unreferenced `retf` stubs (19A95–97) belong to 1986 (MS LINK 5.10 and RTLink
    6.10 both reproduce the original only that way). Install order: run
-   `bash build/workers/align/sandbox_run.sh` (~25 min) to confirm, then apply the patch and
+   `bash work/align/sandbox_run.sh` (~25 min) to confirm, then apply the patch and
    `migrate.sh` together (validate refuses 19A9 between the two). Also fixes
    tools/rtlink.py's linker-profile lookup and puts late root objects (2CFB MEMHOOK) in the
    LIBRARY list, as the original link did.
-2. **promote.py `--note`** — `build/workers/autosearch/patch/promote-note.patch` (journal
+   Caveat: `work/align/patch/tools_*.py` are whole-file copies of tools/ from before the last
+   tool changes of 2026-09-30 (autosearch, idscan, DOS-1, data gate 2); rebase them onto the
+   current tools/ (apply the diff, not the copies) before running the sandbox proof.
+2. **promote.py `--note`** — `work/autosearch/patch/promote-note.patch` (journal
    free-text, e.g. rules applied by autosearch).
-3. Worth adding to shared tools: `build/workers/resJ/mem/multi.py` (20–30 variants of one
+3. Worth adding to shared tools: `work/resJ/mem/multi.py` (20–30 variants of one
    function per compile, analysis only).
 
 ## 5. Level (c): independent historical link
@@ -92,7 +95,7 @@ for statement form (REG-6).
   sets and all non-fixup bytes of the fully reconstructed overlay sections match; manager bytes
   and relocation group order need the 1991 linker plus the complete object set in original
   command-line order. Link-script inputs read from the original (ALWAYS/NEVER, areas,
-  PRELOAD/RELOAD) are labelled in build/workers/rtlink/linkscripts/SIMANT_derived.lnk.
+  PRELOAD/RELOAD) are labelled in work/rtlink/linkscripts/SIMANT_derived.lnk.
 
 ## 6. Data (3,181 B unresolved)
 
@@ -101,6 +104,14 @@ Owner-undecidable small ranges (~72 B: DGROUP 2100–2117, 2328–2337, 5A96–5
 open functions). FAR_BSS 50F6 (19,408 zero bytes) sizes: 180 B pinned, 4,300 consistent,
 14,928 unverified (`tools/farbss.py`). Opaque-data count (5,161 B) also includes structured
 numeric tables; refine the lint to skip typed struct initialisers.
+
+## 6b. Repository layout after the handoff cleanup
+
+* `work/` (tracked): the kept worker artifacts: best drafts and residue notes of the open
+  functions, ready-to-install patches, reproducers cited by docs/codegen-rules.md and
+  asm_evidence, findings of the RTLink / VEC-1 / audit / alignment work. Index: work/README.md.
+* `build/` (ignored): disposable scratch and tool output (build/cc, build/link, build/helpers,
+  build/workers/NAME/ for new workers); every tool recreates what it needs.
 
 ## 7. Operating rules that matter (details in AGENTS.md / docs/worker-brief.md)
 

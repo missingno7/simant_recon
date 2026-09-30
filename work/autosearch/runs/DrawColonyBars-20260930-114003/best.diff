@@ -1,0 +1,20 @@
+--- base.c
++++ best.c
+@@ -798,6 +798,7 @@
+ {
+     struct Rect r;
+     int x, y, h, l, t;
++    int tmp2;
+ 
+     for (x = 0; x < 12; x++)
+         for (y = 0; y < 16; y++) {
+@@ -829,7 +830,8 @@
+                     r.top = r.bottom - h / 2;
+                     r.right = l + 4;
+                 } else {
+-                    l = x * 28 + (fd_50F6_10D2.left - y * 10) + 0xb4;
++                    tmp2 = x * 28 + (fd_50F6_10D2.left - y * 10);
++                    l = tmp2 + 0xb4;
+                     r.left = l;
+                     r.bottom = y * 10 + fd_50F6_10D2.top + 0x47;
+                     r.top = r.bottom - h;

@@ -1,0 +1,16 @@
+--- base.c
++++ best.c
+@@ -718,10 +718,12 @@
+     struct Pt pts[4];
+     struct Pt org;
+     int i, h, v;
++    int tmp2;
+ 
+     clip_Push();
+     clip_SetWin(0x1900);
+-    org.h = x * 28 - y * 10 + fd_50F6_10D2.left;
++    tmp2 = x * 28 - y * 10;
++    org.h = tmp2 + fd_50F6_10D2.left;
+     org.v = y * 10 + fd_50F6_10D2.top;
+     h = x * 28 - y * 10;
+     v = y * 10;

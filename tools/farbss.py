@@ -53,7 +53,7 @@ import exe as exemod  # noqa: E402
 import match  # noqa: E402
 
 ROOT = exemod.ROOT
-# Evidence (build/workers/data/s27_map.md): 50F6:0000-4BCF is all zero, the last far frame
+# Evidence (work/data/s27_map.md): 50F6:0000-4BCF is all zero, the last far frame
 # before DGROUP, referenced only through external symbols by every module (58 modules use
 # per-symbol relocation groups), i.e. no object defines it: the linker's FAR_BSS.
 FAR_BSS_SEG = 0x50F6

@@ -505,7 +505,7 @@ int far f_171C_0BE2(int emsOnly)
     return 0;
 }
 
-/* SCAFFOLD BEGIN: draft; needs runtime __disable/__enable (29F4:2D76/2D78) registered; a 490-byte near-exact draft is in build/workers/mem (unsigned seg loop, comma-hoisted type test) but it shifts the object layout and breaks 125C relocation order */
+/* SCAFFOLD BEGIN: draft; needs runtime __disable/__enable (29F4:2D76/2D78) registered; a 490-byte near-exact draft is in work/mem (unsigned seg loop, comma-hoisted type test) but it shifts the object layout and breaks 125C relocation order */
 int far f_171C_0CF4(int emsOnly)
 {
     int moved;

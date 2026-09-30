@@ -1,6 +1,6 @@
 """Unit tests of the whole-build harness core on a synthetic file geometry (no compiler, no oracle).
 
-    python -m unittest discover -s build/workers/link/tests -q
+    python -m unittest discover -s work/link/tests -q
 """
 import struct
 import sys

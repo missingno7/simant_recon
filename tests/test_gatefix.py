@@ -1,4 +1,4 @@
-"""Gate hardening (worker gatefix, audit build/workers/audit/REPORT.md F-1..F-12).
+"""Gate hardening (worker gatefix, audit work/audit/REPORT.md F-1..F-12).
 
 Unit tests of the new rules, and every audit negative (tests/negatives/T*.c|.asm, plus the
 gatefix additions G*) as a regression test: each must be REFUSED by promote.py --verify-only

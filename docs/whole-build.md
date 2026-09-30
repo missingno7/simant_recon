@@ -1,14 +1,12 @@
 # Whole-build harness — design (worker `link`, prototype)
 
-Status: prototype `tools_link.py` runs against a sandbox copy of the repository
-(`build/workers/link/sb`, tools patched with `collect_hook.patch`). Result: **PASS** — the
-hybrid EXE's SHA-256 equals the original (`aa0596c6…4f11`), with every byte's provenance
-recorded. Logs are in `logs/`, numbers below come from `logs/run_final.log`.
+Status: installed as `tools/link.py` (run `python tools/link.py`; outputs in `build/link/`:
+`provenance.json`, `report.txt`, the hybrid EXE). Result: **PASS** — the hybrid EXE's SHA-256
+equals the original (`aa0596c6…4f11`), with every byte's provenance recorded.
 
-`validate.py` with the patched tools passes in the sandbox (`logs/sandbox_validate.log`, 8 min, including unit tests and codegen probes).
-Nothing in `tools/`, `layout/`, `evidence/`, `src/` or `docs/` was edited. The proposed
-tool change is `collect_hook.patch`, an optional hook with no effect on any verdict. The
-proposed doc text is in `DOCS_DRAFT.md`.
+`validate.py` passes with the harness hooks installed; the numbers below are from the original design run and are superseded by `python tools/link.py`.
+The gate hooks it uses (`collect=` in tools/modules.py and tools/runtime.py) only record
+bound bytes and relocation sites; they never change a verdict.
 
 ## 1. Three proof levels, kept apart
 
@@ -16,13 +14,13 @@ proposed doc text is in `DOCS_DRAFT.md`.
 |---|---|---|---|
 | (a) exact contributions | Every own byte is the bound output of a freshly compiled or assembled accepted object, or of an accepted MSC runtime member, placed at its accepted address. | none (the original is only compared) | yes (C, ASM, data, runtime counted separately) |
 | (b) oracle-assisted hybrid | Own bytes + rule-generated fill + categorised debt = the original, byte for byte (SHA-256). | only bytes in a `debt:*` category, plus the file geometry (§7) | **never** |
-| (c) independent historical link | A linker model builds the whole file from objects, libraries and a link script. | none | yes (future; see LEVEL_C.md) |
+| (c) independent historical link | A linker model builds the whole file from objects, libraries and a link script. | none | yes (future; see docs/level-c-link.md) |
 
 Level (b) proves that our contributions **link**. Every own byte and every own relocation
 entry is at the right file offset, and our accounting has no gaps or overlaps. Because debt
 is copied verbatim, a hybrid mismatch can only come from an own byte, an own relocation
 entry or our placement arithmetic. The run then prints the file range and the owner (see
-`logs/demo_tamper.log`).
+(design run).
 
 ## 2. Data model
 
@@ -123,7 +121,7 @@ segment targets, 3,179 of the 3,252 own entries in complete frames lie in frames
 every group follows this model. The other 73 are all entries of two frames: the known
 S00:31AD cross-function case (ZI-1) and module 295C, which has no extent. In 5 multi-object
 frames (2,040 entries) the objects' entries interleave, as the model predicts
-(`logs/exp_frame_groups.log`). The docs' current wording "Within a module RTLink groups…" is right for game
+(design run). The docs' current wording "Within a module RTLink groups…" is right for game
 modules only because each game module has its own frame.
 
 Order status per frame unit (`order_status`):
@@ -163,10 +161,10 @@ Diagnostics:
 * The count word is 28.
 * Vector order is not sorted by (section, address). It is not first-reference order (in
   table or address order). It is not the relocation-group order either: 301 consistent vs
-  297 inconsistent pairs (`logs/exp_vector_order.log`).
+  297 inconsistent pairs (design run).
 
 The manager is third-party code (Pocket Soft), like the MSC runtime. It can become
-reconstruction only by binding a pinned RTLink/Plus manager object (LEVEL_C.md).
+reconstruction only by binding a pinned RTLink/Plus manager object (docs/level-c-link.md).
 
 ## 6. MZ header
 
@@ -208,7 +206,7 @@ grounded in the original by analysis, not copied bytes:
 
 Level (c) must produce all of these from a link script and objects.
 
-## 8. Results (sandbox, fresh compile, `logs/run_final.log`)
+## 8. Results (design run: sandbox, fresh compile)
 
 * Own (level a): C 212,554; ASM 50,441; DATA_IN_CODE 1,481; DATA 91,233; RUNTIME 12,339;
   RUNTIME_DATA 1,057; **total 369,105 bytes** in 1,876 contributions.
@@ -225,7 +223,7 @@ Level (c) must produce all of these from a link script and objects.
 
 1. **Relocation grouping is per frame, not per module** (§4). This matters for the runtime
    frame and for DGROUP. It should be written into `docs/exe-format.md`
-   (`DOCS_DRAFT.md`).
+   (applied in docs/exe-format.md and docs/level-c-link.md).
 2. **`validate.py` residuals are slightly wrong.**
    * `rtlink_manager_bytes_unaccepted` = 17,063 counts frame 2CFB (root:2CFB's 50 ASM
      bytes + 12 fill bytes) as manager. The manager starts at 2CFF0 (17,001 bytes).
@@ -241,7 +239,7 @@ Level (c) must produce all of these from a link script and objects.
    consistency check. Single-anchor ones are circular, and deserve a listed review (the
    hybrid is unaffected).
 5. **Symbol order looks hash-like**: all insertion-order hypotheses score 48.6 %, below
-   alphabetical at 49.9 % (`logs/exp_symbol_order.log`). See LEVEL_C.md.
+   alphabetical at 49.9 % (design run). See docs/level-c-link.md.
 
 ## 10. Integration proposal
 
