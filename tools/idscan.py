@@ -59,7 +59,11 @@ def position(text: str, top: bool = False, at: str | None = None, before: str | 
             raise modctx.HelperError(f"--at text not found: {at[:60]!r}")
         return i
     if before is not None:
-        m = re.search(r"^[^\n;{}#]*\b%s\s*\([^;{}]*\)\s*\{" % re.escape(before), text, re.M)
+        # a definition line: not a statement (if/while/...), no '=' or '(' before the name, and the
+        # parameter list closes directly before the body (a call such as `if (f(...) != 0) {` must
+        # not match; workers resJ/ovl, resJ)
+        m = re.search(r"^(?![ \t]*(?:if|while|for|switch|return|else|do)\b)[^\n;{}#=(]*\b%s\s*\([^;{}()]*"
+                      r"(?:\([^;{}()]*\)[^;{}()]*)*\)\s*\{" % re.escape(before), text, re.M)
         if not m:
             raise modctx.HelperError(f"no definition of {before} found")
         return m.start()
