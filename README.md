@@ -1,5 +1,8 @@
 # SimAnt (DOS) historical reconstruction
 
+**Start here:** [docs/next-steps.md](docs/next-steps.md) is the current handoff (state, open work, ready patches, operating rules); `python tools/validate.py` regenerates docs/progress.md.
+
+
 Byte-matching reconstruction of the DOS `SIMANT.EXE` (Maxis, Dec 1991): readable C and
 genuine assembly that the period Microsoft toolchain compiles to exactly the original
 bytes, fixups and relocations. This is not a port. The reconstruction will be frozen as an
