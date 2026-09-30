@@ -225,9 +225,14 @@ def _compile_dosbox(prof: dict, runner: dict, work: Path, basename: str, flags: 
     env = os.environ.copy()
     env.update(SDL_VIDEODRIVER="dummy", SDL_AUDIODRIVER="dummy")
     argv = [runner["path"], "-conf", str(work / "dosbox.conf"), "-fastlaunch", "-exit", "-nomenu"]
-    r = subprocess.run(argv, cwd=work, env=env, stdout=subprocess.PIPE, stderr=subprocess.STDOUT,
-                       timeout=max(timeout, 180), creationflags=getattr(subprocess, "CREATE_NO_WINDOW", 0))
     logp = work / "CL.LOG"
+    for attempt in range(3):
+        r = subprocess.run(argv, cwd=work, env=env, stdout=subprocess.PIPE, stderr=subprocess.STDOUT,
+                           timeout=max(timeout, 180), creationflags=getattr(subprocess, "CREATE_NO_WINDOW", 0))
+        # DOSBox-X occasionally fails to run the batch under heavy parallel load: no CL.LOG at all.
+        # Retry only then; a compiler diagnostic (CL.LOG present) is a real result.
+        if logp.exists():
+            break
     log = logp.read_text(encoding="latin1", errors="replace") if logp.exists() else r.stdout.decode("latin1", "replace")
     objp = work / f"{basename}.OBJ"
     obj = objp.read_bytes() if objp.exists() else None
