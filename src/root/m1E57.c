@@ -184,7 +184,7 @@ void far f_1E57_0351(void)
     g_5AAC = &g_5A9C;
 }
 
-void far f_1E57_0362(void)
+void far clip_Off(void)
 {
     f_1E57_0009();
     g_5AAC = 0;
@@ -499,7 +499,7 @@ void far f_1E57_0F8E(struct Rect far *r)
 {
     if (r->top >= g_5A9C.top && r->bottom <= g_5A9C.bottom &&
         r->left >= g_5A9C.left && r->right <= g_5A9C.right)
-        f_1E57_0362();
+        clip_Off();
     else
         f_1E57_0351();
 }

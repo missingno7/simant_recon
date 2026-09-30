@@ -85,7 +85,7 @@ void far SubtractFood(void)
 
 extern int far fd_50F6_0D70;
 
-void far f_015B_01B8(int value)
+void far SetEditMode(int value)
 {
     fd_50F6_0D70 = value;
 }
@@ -93,11 +93,11 @@ void far f_015B_01B8(int value)
 static int g_1960[5] = { 0x109, 0x10a, 0x10c, 0x10d, 0x10b };
 
 extern int far fd_3D57_07C8;
-extern int far fd_50F6_035C;
+extern int far YardMode;
 void far SetYardMode(int newMode);
-extern int far fd_50F6_032E;
+extern int far MapPlane;
 void far SetMapPlane(int plane);
-extern void far f_00F8_00D8(void);
+extern void far SetMapTitle(void);
 extern void _fastcall win_MakeObjSelected(int obj);
 extern void _fastcall win_MakeGroupUnselected(int win, int group);
 
@@ -108,20 +108,20 @@ void far SetMapModeAnt(int mode)
     switch (mode) {
     case 0:
         fd_3D57_07C8 = mode;
-        SetYardMode(fd_50F6_035C);
+        SetYardMode(YardMode);
         break;
     case 4:
     case 5:
     case 6:
     case 7:
     case 8:
-        if (fd_50F6_032E != 1)
+        if (MapPlane != 1)
             SetMapPlane(1);
     case 1:
     case 2:
     case 3:
         fd_3D57_07C8 = mode;
-        f_00F8_00D8();
+        SetMapTitle();
         if (mode >= 4 && mode <= 8)
             win_MakeObjSelected(g_1960[mode - 4]);
         else
@@ -138,7 +138,7 @@ extern void _fastcall win_LockWin(int win);
 extern void _fastcall win_MakeObjInvisible(int obj);
 extern int near g_3DB2;
 extern void _fastcall win_UnlockWin(int win);
-extern void far f_00F8_0002(void);
+extern void far win_YardClosed(void);
 extern void _fastcall win_MakeObjVisible(int obj);
 extern void _fastcall win_SetObjBitmap(int obj, int bitmap);
 extern int _fastcall win_IsWinOpen(int win);
@@ -154,23 +154,23 @@ void far SetYardMode(int newMode)
     if (newMode == 4) {
         SetMapPlane(fd_50F6_0332);
     } else {
-        WinPrintf("\nYardmode=%d, newMode=%d", fd_50F6_035C, newMode);
+        WinPrintf("\nYardmode=%d, newMode=%d", YardMode, newMode);
         if (newMode != 0 && newMode != 1) {
-            fd_50F6_035C = newMode;
+            YardMode = newMode;
             win_LockWin(0x1900);
             win_MakeObjInvisible(0x1903);
             if (g_3DB2 != 0x140)
                 win_MakeObjInvisible(0x190f);
             win_UnlockWin(0x1900);
-            f_00F8_0002();
+            win_YardClosed();
         } else {
-            fd_50F6_035C = newMode;
+            YardMode = newMode;
             win_LockWin(0x1900);
             win_MakeObjVisible(0x1903);
             if (g_3DB2 != 0x140)
                 win_MakeObjVisible(0x190f);
             win_UnlockWin(0x1900);
-            f_00F8_0002();
+            win_YardClosed();
             win_SetObjBitmap(0x1903, newMode + 7000);
             if (win_IsWinOpen(0x1900)) {
                 clip_Push();
@@ -185,11 +185,11 @@ void far SetYardMode(int newMode)
             win_Swap(0x100, 0x1900);
         clip_Push();
         clip_SetWin(0x1900);
-        win_MakeObjSelected(g_1984[fd_50F6_035C]);
+        win_MakeObjSelected(g_1984[YardMode]);
         clip_Pop();
         DrawYard();
     }
-    f_00F8_00D8();
+    SetMapTitle();
 }
 
 typedef struct {
@@ -201,12 +201,12 @@ extern int far fd_50F6_0FFA;
 extern int far fd_50F6_0FB6;
 extern void far InvalEuMap(int left, int top, int right, int bottom);
 extern int far fd_50F6_0F36;
-extern void far f_0250_0FC4(int x, int y);
-extern void far f_0250_0E9D(void);
+extern void far CenterEdit(int x, int y);
+extern void far UpdateEdit(void);
 extern void far f_0250_0ED2(void);
 extern Point far fd_50F6_07CA;
 extern Point far fd_50F6_07BC;
-extern void far f_1E57_0362(void);
+extern void far clip_Off(void);
 
 void far SetMapPlaneLocation(int plane, int x, int y)
 {
@@ -215,22 +215,22 @@ void far SetMapPlaneLocation(int plane, int x, int y)
     if (plane != 0)
         InvalEuMap(0, 0, fd_50F6_0FB6, fd_50F6_0FFA);
     else
-        fd_50F6_0332 = fd_50F6_032E;
-    fd_50F6_032E = plane;
+        fd_50F6_0332 = MapPlane;
+    MapPlane = plane;
     if (plane == 1)
         fd_50F6_0F36 = 0x80 - fd_50F6_0FB6;
     else
         fd_50F6_0F36 = 0x40 - fd_50F6_0FB6;
-    if (fd_50F6_032E != 0) {
-        f_0250_0FC4(x, y);
-        f_0250_0E9D();
+    if (MapPlane != 0) {
+        CenterEdit(x, y);
+        UpdateEdit();
         f_0250_0ED2();
     } else {
         fd_50F6_07BC = fd_50F6_07CA;
     }
-    SetMapModeAnt(fd_50F6_032E);
+    SetMapModeAnt(MapPlane);
     win = obj = 0;
-    switch (fd_50F6_032E) {
+    switch (MapPlane) {
     case 0:
         obj = 0x105;
         break;
@@ -250,13 +250,13 @@ void far SetMapPlaneLocation(int plane, int x, int y)
     if (win) {
         clip_SetWin(0);
         win_MakeObjSelected(win);
-        f_1E57_0362();
+        clip_Off();
     }
     if (obj) {
         clip_SetWin(0x100);
         win_MakeObjSelected(obj);
         win_MakeGroupUnselected(0x100, 2);
-        f_1E57_0362();
+        clip_Off();
     }
 }
 
@@ -264,8 +264,8 @@ extern int far fd_50F6_0AA6;
 
 void far GotoMapPoint(int plane, int x, int y)
 {
-    if (fd_50F6_032E == plane && plane > 0) {
-        f_0250_0FC4(x, y);
+    if (MapPlane == plane && plane > 0) {
+        CenterEdit(x, y);
         fd_50F6_0AA6 = 0;
     } else {
         SetMapPlaneLocation(plane, x, y);
@@ -284,14 +284,14 @@ void far SetMapPlane(int plane)
     if (plane != 0)
         InvalEuMap(0, 0, fd_50F6_0FB6, fd_50F6_0FFA);
     else
-        fd_50F6_0332 = fd_50F6_032E;
-    fd_50F6_032E = plane;
+        fd_50F6_0332 = MapPlane;
+    MapPlane = plane;
     if (plane == 1)
         fd_50F6_0F36 = 0x80 - fd_50F6_0FB6;
     else
         fd_50F6_0F36 = 0x40 - fd_50F6_0FB6;
-    f_015B_01B8(fd_3D57_07C0[fd_50F6_032E]);
-    switch (fd_50F6_032E) {
+    SetEditMode(fd_3D57_07C0[MapPlane]);
+    switch (MapPlane) {
     case 0:
         pt = fd_50F6_07BC;
         break;
@@ -306,10 +306,10 @@ void far SetMapPlane(int plane)
         break;
     }
     SetMapPlaneLocation(plane, pt.x, pt.y);
-    if (fd_50F6_032E != 0)
-        f_0250_0FC4(pt.x, pt.y);
-    SetMapModeAnt(fd_50F6_032E);
-    f_0250_0E9D();
+    if (MapPlane != 0)
+        CenterEdit(pt.x, pt.y);
+    SetMapModeAnt(MapPlane);
+    UpdateEdit();
 }
 
 extern int far fd_50F6_1074;
@@ -320,9 +320,9 @@ extern int far MeLocX;
 void far CenterAnt(void)
 {
     fd_50F6_1074 = 1;
-    if (MePlane != fd_50F6_032E)
+    if (MePlane != MapPlane)
         SetMapPlane(MePlane);
-    f_0250_0FC4(MeLocX, MeLocY);
+    CenterEdit(MeLocX, MeLocY);
 }
 
 extern int far fd_50F6_0EAC;
@@ -351,14 +351,14 @@ void far GotoSpider(void)
 
 extern Point far fd_3D57_02B4;
 
-void far f_015B_073E(void)
+void far GotoBQueen(void)
 {
     GotoMapPoint(2, fd_3D57_02B4.x, fd_3D57_02B4.y);
 }
 
 extern Point far fd_3D57_02B8;
 
-void far f_015B_075F(void)
+void far GotoRQueen(void)
 {
     GotoMapPoint(3, fd_3D57_02B8.x, fd_3D57_02B8.y);
 }
@@ -381,20 +381,20 @@ extern void far PictStrnDialog(int a, int b, int c);
 extern unsigned char far fd_3D57_00A4[][16];
 extern int far fd_50F6_04C2;
 extern int far fd_3D57_0C24;
-extern void far f_00DF_00B1(int id, int arg);
+extern void far myBeginSong(int id, int arg);
 extern void far o12_384C_100A(void);
 extern int far fd_50F6_0354;
 extern int far fd_50F6_07C8;
 extern int far fd_50F6_0850;
 extern int far fd_50F6_06AA;
 extern int far fd_50F6_073A;
-extern void far f_00F8_0395(void);
+extern void far InvalQueenStorageDisp(void);
 extern int far fd_3E1D_0000[][12];
 extern unsigned char far fd_3D57_0164[][16];
 extern void far RandWorld(unsigned seed, int blackSize, int redSize, int x, int y);
 extern int far HealthR;
 
-void far f_015B_0798(void)
+void far XferPatch(void)
 {
     int x, y;
 
@@ -412,7 +412,7 @@ void far f_015B_0798(void)
         myBeginSound(1, 0, 0x7e);
         PictStrnDialog(0, 0x2714, 1);
     } else {
-        f_00DF_00B1(0x2afa, 0x7e);
+        myBeginSong(0x2afa, 0x7e);
         fd_50F6_07CA.x = x;
         fd_50F6_07CA.y = y;
         o12_384C_100A();
@@ -421,7 +421,7 @@ void far f_015B_0798(void)
         fd_50F6_0850 = 0;
         fd_50F6_06AA = 0;
         fd_50F6_073A = 0;
-        f_00F8_0395();
+        InvalQueenStorageDisp();
         fd_3D57_0C24 = 1;
         RandWorld(fd_3E1D_0000[y][x], fd_3D57_00A4[x][y], fd_3D57_0164[x][y], x, y);
         if (fd_3D57_0164[x][y] == 0)
@@ -451,7 +451,7 @@ struct Event {
 };
 
 extern void far * far * far fd_50F6_034C;
-extern void far f_15D9_009C(void far *, long, int);
+extern void far EditMessage(void far *, long, int);
 extern int far fd_3D57_02C0;
 extern int _fastcall win_GetEvent(struct Event far *);
 extern void far f_1FD2_04D0(Point far *);
@@ -461,9 +461,9 @@ extern Point far fd_55B3_2A42;
 extern void far InvertPatch(int, int);
 extern int far fd_50F6_0A90;
 extern int far fd_3D57_0C20;
-extern void far f_00F8_03A5(int);
+extern void far MakeDMap(int);
 extern void far UpdateYard(void);
-extern void far f_00F8_0265(long);
+extern void far myDelay(long);
 
 void far PlaceQueenInYard(void)
 {
@@ -479,9 +479,9 @@ void far PlaceQueenInYard(void)
     if (fd_50F6_07C8 < 1) {
         myBeginSound(1, 0, 0x7e);
         if (fd_50F6_0EAC != 2)
-            f_15D9_009C(fd_50F6_034C[16], 180L, 1);
+            EditMessage(fd_50F6_034C[16], 180L, 1);
         else
-            f_15D9_009C(fd_50F6_034C[7], 180L, 1);
+            EditMessage(fd_50F6_034C[7], 180L, 1);
         return;
     }
     if (fd_3D57_02C0 == 1)
@@ -507,7 +507,7 @@ void far PlaceQueenInYard(void)
     else if (r.bottom > 15)
         r.bottom = 15;
     do {
-        f_15D9_009C(fd_50F6_034C[8], -2L, 1);
+        EditMessage(fd_50F6_034C[8], -2L, 1);
         lastY = lastX = -1;
         done = 0;
         while (!done) {
@@ -551,31 +551,31 @@ void far PlaceQueenInYard(void)
             patchX = -1;
         }
         if (r.left <= x && r.right >= x && y >= r.top && y <= r.bottom) {
-            f_00DF_00B1(0x2afb, 0x7e);
+            myBeginSong(0x2afb, 0x7e);
             fd_50F6_07C8--;
             fd_3D57_00A4[x][y]++;
             fd_50F6_0A90++;
-            f_00F8_03A5(fd_3D57_0C20 = 1);
+            MakeDMap(fd_3D57_0C20 = 1);
             o12_384C_100A();
-            f_15D9_009C(fd_50F6_034C[9], 120L, 1);
+            EditMessage(fd_50F6_034C[9], 120L, 1);
             if (fd_50F6_07C8 <= 0)
                 return;
             UpdateYard();
         } else {
-            f_15D9_009C(fd_50F6_034C[10], 120L, 1);
+            EditMessage(fd_50F6_034C[10], 120L, 1);
             myBeginSound(1, 0, 0x7e);
             if (*(char far *)0x00000417L & 3)
-                f_00F8_0265(30L);
+                myDelay(30L);
         }
     } while (*(char far *)0x00000417L & 3);
     return;
 out:
-    f_15D9_009C(0L, -2L, 1);
+    EditMessage(0L, -2L, 1);
 }
 
 extern int far RRand(int limit);
 extern void far AddFood(int count, int sound);
-extern void far f_00DF_0112(int a, int b, int c);
+extern void far myBeginSoundReverse(int a, int b, int c);
 extern void far f_00DF_00E0(int a);
 extern void far MakeNewHoleR(int x);
 extern void far MakeNewHoleB(int x);
@@ -611,7 +611,7 @@ void far MysteryButton(void)
         AddFood(0x96, 1);
         break;
     case 6:
-        f_00DF_0112(0x20, 0, 0x7e);
+        myBeginSoundReverse(0x20, 0, 0x7e);
         SubtractFood();
         break;
     case 7:

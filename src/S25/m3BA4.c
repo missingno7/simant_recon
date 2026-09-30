@@ -16,12 +16,12 @@ extern int far f_10F7_005D(int list, int index, int far *x, int far *y,
 extern int far fd_50F6_084E;
 extern int far fd_50F6_048C;
 extern int far fd_50F6_047C;
-extern int far f_00F8_0459(int value);
+extern int far ABS(int value);
 extern int far fd_50F6_0AD6;
 extern int far fd_50F6_048A;
 extern int far f_0BE8_0B21(int x1, int y1, int x2, int y2);
 extern int far fd_50F6_0496;
-extern void far f_0250_0E91(void);
+extern void far DoEditUpdateDraw(void);
 extern int far fd_50F6_08E2;
 extern int far fd_50F6_09F0;
 extern int far fd_50F6_0AB6;
@@ -53,7 +53,7 @@ extern void far f_10F7_1DD3(int health);
 extern int far f_0894_23BB(int, int);
 extern void far f_10F7_0B40(void);
 void far o25_3BA4_1035(void);
-extern int far fd_50F6_032E;
+extern int far MapPlane;
 extern int far fd_3D57_07A8[];
 extern void far f_015B_06A2(void);
 void far ExitNest(void);
@@ -62,7 +62,7 @@ extern void far f_10F7_09A8(int plane, int x, int y, int type, int dir);
 extern void far f_10F7_0A44(int plane, int x, int y, int type, int dir, int code);
 extern void far f_00DF_00E8(int sound, int a, int b);
 extern void far * far * far fd_50F6_034C;
-extern void far f_15D9_009C(void far *, long, int);
+extern void far EditMessage(void far *, long, int);
 extern int far fd_50F6_1058;
 void far o25_3BA4_0DFB(int list, int index);
 extern void far f_10F7_01B1(int list, int index, int x, int y,
@@ -114,7 +114,7 @@ void far DoAntMoveY(void)
     t = fd_50F6_10BE;
     t = fd_3D57_0C18;
     t = fd_50F6_0F78;
-    t = fd_50F6_032E;
+    t = MapPlane;
     t = fd_3D57_07A8[0];
     p = fd_50F6_034C[0];
     t = fd_50F6_1058;
@@ -181,13 +181,13 @@ void far DoAntMoveY(void)
             goto done;
         }
         if (fd_50F6_048C == fd_50F6_08DA) {
-            dx = f_00F8_0459(fd_50F6_047C - tx);
-            dy = f_00F8_0459(fd_50F6_048A - ty);
+            dx = ABS(fd_50F6_047C - tx);
+            dy = ABS(fd_50F6_048A - ty);
             if (dx <= 1 && dy <= 1) {
                 d = f_0BE8_0B21(fd_50F6_047C, fd_50F6_048A, tx, ty) - 1;
                 if (d >= 0)
                     fd_50F6_0496 = d;
-                f_0250_0E91();
+                DoEditUpdateDraw();
                 goto moved;
             }
         }
@@ -250,7 +250,7 @@ void far DoAntMoveY(void)
             d = fd_50F6_048C;
             o25_3BA4_1035();
             if (fd_50F6_0AF8 != d || fd_50F6_0AD6 != x || fd_50F6_0AE8 != y
-                || fd_50F6_048C == fd_50F6_032E)
+                || fd_50F6_048C == MapPlane)
                 goto done;
             if (fd_3D57_07A8[0] == 0)
                 f_015B_06A2();
@@ -263,7 +263,7 @@ void far DoAntMoveY(void)
         d = fd_50F6_048C;
         ExitNest();
         if (fd_50F6_0AF8 != d || fd_50F6_0AD6 != x || fd_50F6_0AE8 != y
-            || fd_50F6_048C == fd_50F6_032E)
+            || fd_50F6_048C == MapPlane)
             goto done;
         if (fd_3D57_07A8[0] == 0)
             f_015B_06A2();
@@ -282,7 +282,7 @@ void far DoAntMoveY(void)
     f_00DF_00E8(1, 0, 0x7e);
     f_015B_06A2();
     if (fd_50F6_048C == 3)
-        f_15D9_009C(fd_50F6_034C[4], 360L, 0);
+        EditMessage(fd_50F6_034C[4], 360L, 0);
 moved:
     result = -1;
 done:
@@ -306,7 +306,7 @@ done:
             tattr = (tattr & 0xf8) | d;
             f_10F7_01B1(fd_50F6_048C, fd_50F6_07C0, tx, ty, tattr, tstate, tdir);
             f_10F7_05FE(fd_50F6_048C, tx, ty, tattr);
-            f_0250_0E91();
+            DoEditUpdateDraw();
         }
         f_10F7_1E71(1);
     }
@@ -379,11 +379,11 @@ void far DoAntSimY(void)
 }
 
 extern int _fastcall win_IsWinInFront(int v);
-extern long far f_00F8_02BE(void);
-extern void far f_00F8_0265(long);
+extern long far MacTickCount(void);
+extern void far myDelay(long);
 extern void far f_00DF_015C(void);
 extern int far SRand2(void);
-extern int far f_00DF_0138(void);
+extern int far mySongIsDone(void);
 extern void far f_10F7_08CE(int plane, int x, int y, int value);
 extern int far SRand8(void);
 
@@ -401,7 +401,7 @@ void far o25_3BA4_0999(int plane, int x, int y, int dir, int type, int kind)
     int svX;
 
     f_10F7_0A44(fd_50F6_048C, fd_50F6_047C, fd_50F6_048A, fd_50F6_04C2, fd_50F6_0496, 0xff);
-    f_0250_0E91();
+    DoEditUpdateDraw();
     svPlane = plane;
     svX = x;
     svY = y;
@@ -419,11 +419,11 @@ void far o25_3BA4_0999(int plane, int x, int y, int dir, int type, int kind)
     }
     if (kind == 2)
         n = 3;
-    t = f_00F8_02BE();
+    t = MacTickCount();
     for (i = 0; i < count; i++) {
-        while (f_00F8_02BE() <= t)
-            f_00F8_0265(1L);
-        t = f_00F8_02BE() + 6;
+        while (MacTickCount() <= t)
+            myDelay(1L);
+        t = MacTickCount() + 6;
         f_00DF_015C();
         if (kind == 0 && SRand2())
             f_00DF_00E8(0x25, 0x32c8, 0x7e);
@@ -431,7 +431,7 @@ void far o25_3BA4_0999(int plane, int x, int y, int dir, int type, int kind)
             f_00DF_00E8(0x31, 0x55f0, 0x7f);
             fd_3E1D_0180[x][y] = SRand2() ? tile - 3 : tile;
         }
-        if (kind != 0 && kind < 10 && fd_3D57_07A8[1] != 0 && f_00DF_0138())
+        if (kind != 0 && kind < 10 && fd_3D57_07A8[1] != 0 && mySongIsDone())
             break;
         if (kind == 2) {
             f_10F7_08CE(plane, x, y, n + 0x38);
@@ -441,7 +441,7 @@ void far o25_3BA4_0999(int plane, int x, int y, int dir, int type, int kind)
                 n--;
         }
         f_10F7_0ACE(plane, x, y, type, SRand8());
-        f_0250_0E91();
+        DoEditUpdateDraw();
     }
     if (kind == 10)
         fd_3E1D_0180[x][y] = tile;
@@ -472,18 +472,18 @@ void far o25_3BA4_0C01(int plane, int x, int y, int dir, int type)
 
     WinPrintf("AnimYellowInsane");
     f_10F7_0A44(fd_50F6_048C, fd_50F6_047C, fd_50F6_048A, fd_50F6_04C2, fd_50F6_0496, 0xff);
-    f_0250_0E91();
+    DoEditUpdateDraw();
     svPlane = plane;
     svX = x;
     svY = y;
     svType = fd_50F6_04C2;
     svDir = dir;
     count = win_IsWinInFront(0) ? 0x20 : 8;
-    t = f_00F8_02BE();
+    t = MacTickCount();
     for (i = 0; i < count; i++) {
-        while (f_00F8_02BE() <= t)
-            f_00F8_0265(1L);
-        t = f_00F8_02BE() + 3;
+        while (MacTickCount() <= t)
+            myDelay(1L);
+        t = MacTickCount() + 3;
         f_00DF_015C();
         if ((int)f_0BE8_0B83(x, y, svX, svY) == 0 && count - i - 1 != 0)
             d = o25_39C7_0CBD(plane, x, y, RRand(7) + x - 3, RRand(7) + y - 3);
@@ -496,7 +496,7 @@ void far o25_3BA4_0C01(int plane, int x, int y, int dir, int type)
             d = SRand8();
         f_10F7_0ACE(plane, x, y, type, d);
         WinPrintf("2");
-        f_0250_0E91();
+        DoEditUpdateDraw();
     }
     f_10F7_09A8(plane, x, y, type, fd_50F6_0496);
     fd_50F6_048C = svPlane;

@@ -19,7 +19,7 @@ extern unsigned char far RlistY[];
 extern unsigned char far RlistM[];
 extern unsigned char far RlistS[];
 extern unsigned char far LifeA[128][64];
-extern void far f_0244_0000(unsigned char far *src, unsigned char far *dst, long count);
+extern void far BlockMove(unsigned char far *src, unsigned char far *dst, long count);
 extern char far Dy8[8];
 extern char far Dx8[8];
 extern int far f_10F7_2867(int x, int y);
@@ -107,11 +107,11 @@ void far RemoveFromAList(int index)
         ListIndexA--;
     count = ListIndexA - index;
     next = index + 1;
-    f_0244_0000(&AlistX[next], &AlistX[index], count);
-    f_0244_0000(&AlistY[next], &AlistY[index], count);
-    f_0244_0000(&AlistM[next], &AlistM[index], count);
-    f_0244_0000(&AlistT[next], &AlistT[index], count);
-    f_0244_0000(&AlistS[next], &AlistS[index], count);
+    BlockMove(&AlistX[next], &AlistX[index], count);
+    BlockMove(&AlistY[next], &AlistY[index], count);
+    BlockMove(&AlistM[next], &AlistM[index], count);
+    BlockMove(&AlistT[next], &AlistT[index], count);
+    BlockMove(&AlistS[next], &AlistS[index], count);
 }
 
 int far FindInAList(int x, int y)

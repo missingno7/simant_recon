@@ -3,7 +3,7 @@
 extern int far fd_3D57_07CC;
 extern int far fd_50F6_0FBA;
 extern int far fd_50F6_0FFE;
-extern int far fd_50F6_104C;
+extern int far CurExpTool;
 extern int far fd_50F6_073A;
 extern int far fd_50F6_06AA;
 extern int far fd_50F6_0850;
@@ -92,9 +92,9 @@ extern int far fd_3D57_0C18;
 extern int far fd_3D57_0C16;
 extern int far fd_3D57_0C14;
 extern unsigned long far fd_50F6_0C26;
-extern int far fd_50F6_032E;
+extern int far MapPlane;
 extern int far fd_3D57_07C8;
-extern int far fd_50F6_035C;
+extern int far YardMode;
 extern int far fd_3E1D_0000[16][12];
 extern int far fd_3D57_0C24;
 extern int far MePlane;
@@ -179,7 +179,7 @@ void far InitSimVars(void)
     fd_3D57_07CC = 1;
     fd_50F6_0FBA = 30;
     fd_50F6_0FFE = 30;
-    fd_50F6_104C = 0;
+    CurExpTool = 0;
     fd_50F6_073A = 0;
     fd_50F6_06AA = 0;
     fd_50F6_0850 = 0;
@@ -405,11 +405,11 @@ void far RandYard(void)
     fd_50F6_0C26 = 0L;
 
     if (fd_50F6_0EAC <= 1)
-        fd_50F6_032E = 2;
+        MapPlane = 2;
     else
-        fd_50F6_032E = 1;
-    fd_3D57_07C8 = fd_50F6_032E;
-    fd_50F6_035C = 0;
+        MapPlane = 1;
+    fd_3D57_07C8 = MapPlane;
+    YardMode = 0;
 
     for (i = 0; i < 192; i++)
         fd_3E1D_0000[0][i] = (RRand(0x7fff) - 0xc000) & 0x7fff;

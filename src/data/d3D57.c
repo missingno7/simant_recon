@@ -179,7 +179,7 @@ unsigned char far fd_3D57_07B0[2] = {
     0x01, 0x00
 };
 unsigned char far fd_3D57_07B2[4] = { 0 };
-unsigned char far fd_3D57_07B6[8] = {
+unsigned char far ExpSubStates[8] = {
     0xFF, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0xFF
 };
 unsigned char far fd_3D57_07BE[2] = {

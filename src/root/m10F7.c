@@ -84,7 +84,7 @@ void far f_14EE_0151(int, int, int);
 void far myBeginSound(int, int, int);
 void far ZapEuMapAt(int, int, int);
 int far IsItFood(int);
-void far f_0250_0E91(void);
+void far DoEditUpdateDraw(void);
 void far o22_39C7_07FD(int, int, int);
 int far f_10F7_2548(int, int, int);
 void far SetMyHealth(int);
@@ -100,20 +100,20 @@ int far f_10F7_2894(int, int);
 void far f_1496_043C(int, int, int);
 void far o14_384C_0ACD(int);
 void far o22_39C7_188D(int, int);
-void far f_15D9_009C(void far *, long, int);
+void far EditMessage(void far *, long, int);
 int far SRand1(int);
 int far SRand8(void);
 int far SRand16(void);
 int far f_10F7_2821(int, int, int);
 int far GetDir(int, int, int, int);
 void far f_0BE8_0812(int, int);
-void far o11_35F5_0088(int);
+void far PauseGame(int);
 void far EndTargetMode(void);
 void far EndLifeTransferMode(void);
 int far DoLifeExchange(int, int, int);
-int far f_00DF_012D(void);
-void far f_00F8_0265(long);
-void far f_00DF_00B1(unsigned int, unsigned int);
+int far mySoundIsDone(void);
+void far myDelay(long);
+void far myBeginSong(unsigned int, unsigned int);
 int far IsItNFood(int);
 int far f_10F7_2894(int, int);
 
@@ -518,7 +518,7 @@ void far DoMapUpdateDraw(void)
 void far DoEditAndMapUpdateDraw(void)
 {
     DoMapUpdateDraw();
-    f_0250_0E91();
+    DoEditUpdateDraw();
 }
 
 void far f_10F7_0B51(void)
@@ -529,13 +529,13 @@ void far f_10F7_0B51(void)
     }
     fd_50F6_048E = fd_50F6_047E;
     fd_50F6_105E = 0xb;
-    o11_35F5_0088(1);
+    PauseGame(1);
 }
 
 void far EndTargetMode(void)
 {
     fd_50F6_105E = -1;
-    o11_35F5_0088(fd_50F6_048E);
+    PauseGame(fd_50F6_048E);
 }
 
 void far f_10F7_0BB1(void)
@@ -546,13 +546,13 @@ void far f_10F7_0BB1(void)
     }
     fd_50F6_048E = fd_50F6_047E;
     fd_50F6_105E = 0xa;
-    o11_35F5_0088(1);
+    PauseGame(1);
 }
 
 void far EndLifeTransferMode(void)
 {
     fd_50F6_105E = -1;
-    o11_35F5_0088(fd_50F6_048E);
+    PauseGame(fd_50F6_048E);
 }
 
 void far ExchangeLives(int a, int b, int c)
@@ -562,10 +562,10 @@ void far ExchangeLives(int a, int b, int c)
         EndLifeTransferMode();
         if (fd_50F6_04C2 == 0x60) {
             myBeginSound(0xf, 0, 0x7e);
-            f_0250_0E91();
-            while (!f_00DF_012D())
-                f_00F8_0265(5L);
-            f_00DF_00B1(0x2afe, 0x7e);
+            DoEditUpdateDraw();
+            while (!mySoundIsDone())
+                myDelay(5L);
+            myBeginSong(0x2afe, 0x7e);
         } else
             myBeginSound(0xf, 0, 0x7e);
     } else
@@ -1080,18 +1080,18 @@ void far EatMyFood(int kind)
     case 1:
         o22_39C7_188D(0x2396, -1);
         fd_50F6_0472 = 0L;
-        f_15D9_009C(fd_50F6_034C[11], 120L, 0);
+        EditMessage(fd_50F6_034C[11], 120L, 0);
         break;
     case 2:
-        f_15D9_009C(fd_50F6_034C[12], 120L, 0);
+        EditMessage(fd_50F6_034C[12], 120L, 0);
         break;
     case 3:
         myBeginSound(0x2c, 0, 0x7e);
-        while (!f_00DF_012D())
-            f_00F8_0265(5L);
+        while (!mySoundIsDone())
+            myDelay(5L);
         myBeginSound(10, 0, 0x7e);
         fd_50F6_0472 = 0L;
-        f_15D9_009C(fd_50F6_034C[13], 180L, 0);
+        EditMessage(fd_50F6_034C[13], 180L, 0);
         break;
     }
     if (kind != 2) {
@@ -1372,7 +1372,7 @@ int far f_10F7_26D4(int plane, int x, int y)
         dir = GetDir(MeLocX, MeLocY, x, y);
         if (dir > 0)
             MoveMyLife(MePlane, MeLocX, MeLocY, fd_50F6_04C2, dir - 1);
-        f_0250_0E91();
+        DoEditUpdateDraw();
         if (fd_3D57_0C26 >= 0) {
             EatMyFood(fd_3D57_0C26);
             fd_3D57_0C26 = -1;

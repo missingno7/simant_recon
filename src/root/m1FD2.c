@@ -294,7 +294,7 @@ void far f_1FD2_052B(int ticks)
 extern unsigned char near g_9120;
 extern int far f_1B73_0A30(int key);
 
-int far f_1FD2_0542(void)
+int far StillDown(void)
 {
     int mods;
 
@@ -311,14 +311,14 @@ static int shiftHeld;
 static int countdown;
 extern unsigned long far TickCount(void);
 
-void far f_1FD2_057F(void)
+void far ButtonHeldInit(void)
 {
     lastTick = TickCount();
     countdown = 2;
     shiftHeld = 0;
 }
 
-int far f_1FD2_0598(void)
+int far ButtonHeld(void)
 {
     if (countdown) {
         if (TickCount() != lastTick) {
@@ -326,11 +326,11 @@ int far f_1FD2_0598(void)
             lastTick = TickCount();
         }
     } else {
-        if (shiftHeld || f_1FD2_0542())
+        if (shiftHeld || StillDown())
             shiftHeld = 1;
         else
             shiftHeld = 0;
-        if (shiftHeld && !f_1FD2_0542())
+        if (shiftHeld && !StillDown())
             return 0;
     }
     return 1;
@@ -338,9 +338,9 @@ int far f_1FD2_0598(void)
 
 extern void far win_FlushEvents(void);
 
-void far f_1FD2_05EF(void)
+void far ButtonHeldEnd(void)
 {
-    while (f_1FD2_0542())
+    while (StillDown())
         ;
     win_FlushEvents();
 }
@@ -356,7 +356,7 @@ void far f_1FD2_05FD(void)
 
 extern void far Punt(char far *format, ...);
 
-void far f_1FD2_061E(int id, char state)
+void far SetMenuItemState(int id, char state)
 {
     if (!g_6054)
         Punt("Attempt to SetMenuItemState with no menu loaded!");
@@ -458,7 +458,7 @@ int far f_1FD2_084F(struct Event far *ev)
     while (!win_GetEvent(ev))
         if (f_1F58_0038() && f_1F58_0090() == 0x1b)
             return 0;
-    f_1FD2_05EF();
+    ButtonHeldEnd();
     return 1;
 }
 

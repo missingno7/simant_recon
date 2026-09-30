@@ -48,7 +48,7 @@ extern int far sprintf(char far *buffer, char far *format, ...);
 extern void far f_1E57_0296(void);
 extern void far f_1E57_0A9C(char far *p);
 extern void far clip_SetWin(int win);
-extern void far f_1E57_0362(void);
+extern void far clip_Off(void);
 extern void far clip_SubExclude(struct Rect far *rect);
 extern void far f_1FD2_05FD(void);
 extern void far f_171C_1BBA(char far * far *handle);
@@ -445,7 +445,7 @@ void _fastcall f_21FA_0AD2(char far *p)
         f_1E57_0A9C(p);
         win_DrawWindow(g_5702[i]);
     }
-    f_1E57_0362();
+    clip_Off();
 }
 
 void _fastcall f_21FA_0B4B(char far *p)
@@ -476,5 +476,5 @@ void _fastcall f_21FA_0B4B(char far *p)
         clip_SetWin(g_5702[0]);
         win_DrawWindow(g_5702[0]);
     }
-    f_1E57_0362();
+    clip_Off();
 }

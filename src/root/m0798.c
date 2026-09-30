@@ -122,10 +122,10 @@ extern int far _fmemcmp(void far *a, void far *b, unsigned n);
 void far BoundPointToTri(struct Pt far *pt, struct Rect far *r);
 void far GetTriLatDist(struct TriLevel far *level, struct TriPoints far *tri, struct Pt far *pt);
 extern void far f_1FD2_04D0(struct Pt far *pt);
-extern int far f_1FD2_0542(void);
+extern int far StillDown(void);
 void far cvtLevels2IdealCaste(int far *ideal);
 extern int far IdealCaste[4];
-extern void far f_1E57_0362(void);
+extern void far clip_Off(void);
 
 void far ProcCasteEvent(struct CtlMsg far *msg)
 {
@@ -177,7 +177,7 @@ void far ProcCasteEvent(struct CtlMsg far *msg)
                 win_DrawCasteWindow(3);
             }
             f_1FD2_04D0(&msg->pt);
-        } while (f_1FD2_0542());
+        } while (StillDown());
         _fmemcpy(&fd_3D57_07F2[g_1B4E], &casteLevels, 6);
         cvtLevels2IdealCaste(IdealCaste);
         break;
@@ -188,7 +188,7 @@ void far ProcCasteEvent(struct CtlMsg far *msg)
         win_DrawCasteWindow(3);
         break;
     }
-    f_1E57_0362();
+    clip_Off();
 }
 
 extern int far ModeAuto;
@@ -245,7 +245,7 @@ void far ProcModeEvent(struct CtlMsg far *msg)
                 win_DrawModeWindow(3);
             }
             f_1FD2_04D0(&msg->pt);
-        } while (f_1FD2_0542());
+        } while (StillDown());
         _fmemcpy(&fd_3D57_0810[g_1B50], &fd_50F6_049E, 6);
         break;
     case 12:
@@ -255,7 +255,7 @@ void far ProcModeEvent(struct CtlMsg far *msg)
         win_DrawModeWindow(3);
         break;
     }
-    f_1E57_0362();
+    clip_Off();
 }
 
 int far IsPointInIsoTri(struct Pt far *pt, struct Rect far *r)

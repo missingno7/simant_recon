@@ -83,8 +83,8 @@ void far f_00BA_01B6(void)
 extern void far win_CasteControlChanged(void);
 extern void far win_ModeControlChanged(void);
 extern void far f_0250_0E15(void);
-extern void far f_00F8_00A4(void);
-extern void far f_00F8_0002(void);
+extern void far win_MapChanged(void);
+extern void far win_YardClosed(void);
 
 void far f_00BA_01C3(int item)
 {
@@ -99,8 +99,8 @@ void far f_00BA_01C3(int item)
     win_CasteControlChanged();
     win_ModeControlChanged();
     f_0250_0E15();
-    f_00F8_00A4();
-    f_00F8_0002();
+    win_MapChanged();
+    win_YardClosed();
 }
 
 extern void far win_ModeControlClosed(void);
@@ -108,7 +108,7 @@ extern void far win_CasteControlClosed(void);
 
 void far f_00BA_0211(void)
 {
-    f_00F8_0002();
+    win_YardClosed();
     win_ModeControlClosed();
     win_CasteControlClosed();
 }
@@ -118,6 +118,6 @@ void far f_00BA_0228(void)
     win_CasteControlClosed();
     win_ModeControlClosed();
     f_0250_0E15();
-    f_00F8_00A4();
-    f_00F8_0002();
+    win_MapChanged();
+    win_YardClosed();
 }

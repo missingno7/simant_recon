@@ -26,7 +26,7 @@ extern void _fastcall win_GetObjRect(int obj, struct Rect far *rect);
 extern struct Rect far fd_50F6_10D2;
 extern void far EraseYardCursor(void);
 
-void far f_00F8_0002(void)
+void far win_YardClosed(void)
 {
     if (fd_50F6_10DA) {
         clip_Push();
@@ -47,7 +47,7 @@ void far f_00F8_0002(void)
 extern void far EraseMapCursor(void);
 extern int far fd_55B3_29A2;
 
-void far f_00F8_00A4(void)
+void far win_MapChanged(void)
 {
     if (win_IsWinOpen(0x100)) {
         EraseMapCursor();
@@ -59,13 +59,13 @@ void far f_00F8_00A4(void)
 extern int far fd_3D57_07C8;
 extern char far * far * far fd_50F6_046C;
 extern void far win_SetObjFormatStr(int obj, ...);
-extern int far fd_50F6_035C;
+extern int far YardMode;
 extern void _fastcall win_DrawTitle(int win);
 
-void far f_00F8_00D8(void)
+void far SetMapTitle(void)
 {
     win_SetObjFormatStr(0x101, fd_50F6_046C[fd_3D57_07C8]);
-    win_SetObjFormatStr(0x1901, fd_50F6_046C[fd_50F6_035C + 9]);
+    win_SetObjFormatStr(0x1901, fd_50F6_046C[YardMode + 9]);
     if (win_IsWinOpen(0x100)) {
         clip_Push();
         clip_SetWin(0x100);
@@ -130,33 +130,33 @@ void far f_00F8_01BE(void)
 
 extern void _fastcall win_MakeGroupUnselected(int win, int group);
 
-void far f_00F8_0252(void)
+void far ClearMapScentButtons(void)
 {
     win_MakeGroupUnselected(0x100, 2);
 }
 
 extern unsigned long far TickCount(void);
-int far f_00F8_05F2(void);
+int far DialogAbortOrCont(void);
 
-void far f_00F8_0265(unsigned ticks)
+void far myDelay(unsigned ticks)
 {
     long t;
 
     t = TickCount();
-    while (!WaitedEnough(&t, ticks / 3) && !win_Events() && !f_00F8_05F2())
+    while (!WaitedEnough(&t, ticks / 3) && !win_Events() && !DialogAbortOrCont())
         ;
 }
 
 extern void far f_0000_046F(void);
-extern int far f_1FD2_0542(void);
+extern int far StillDown(void);
 
-void far f_00F8_02AC(void)
+void far myButton(void)
 {
     f_0000_046F();
-    f_1FD2_0542();
+    StillDown();
 }
 
-long far f_00F8_02BE(void)
+long far MacTickCount(void)
 {
     return TickCount() * 3;
 }
@@ -165,7 +165,7 @@ void far f_00F8_02D7(void)
 {
 }
 
-void far f_00F8_02DF(void)
+void far SetSimCursor(void)
 {
 }
 
@@ -181,21 +181,21 @@ static long g_8BA8;
 static int g_8BAC;
 extern void far win_FlushEvents(void);
 
-void far f_00F8_02F7(int secs)
+void far DialogWaitInit(int secs)
 {
-    while (f_1FD2_0542())
+    while (StillDown())
         win_FlushEvents();
     g_8BA8 = TickCount();
     g_8BAC = secs * 18;
 }
 
-void far f_00F8_032A(void)
+void far DialogClearWait(void)
 {
     g_8BA8 = TickCount();
     g_8BAC = 5400;
 }
 
-int far f_00F8_0344(void)
+int far DialogWait(void)
 {
     return WaitedEnough(&g_8BA8, g_8BAC);
 }
@@ -228,7 +228,7 @@ void far f_00F8_038D(void)
 {
 }
 
-void far f_00F8_0395(void)
+void far InvalQueenStorageDisp(void)
 {
 }
 
@@ -236,20 +236,20 @@ void far f_00F8_039D(void)
 {
 }
 
-void far f_00F8_03A5(void)
+void far MakeDMap(void)
 {
 }
 
-extern int far fd_50F6_032E;
+extern int far MapPlane;
 extern Point far fd_50F6_0508;
 extern int far fd_50F6_10E0;
 extern int far fd_50F6_10DE;
 
-int far f_00F8_03AD(int plane, int x, int y)
+int far TileIsVisible(int plane, int x, int y)
 {
     int r;
 
-    r = fd_50F6_032E == plane && fd_50F6_0508.x <= x && fd_50F6_0508.x + fd_50F6_10E0 > x
+    r = MapPlane == plane && fd_50F6_0508.x <= x && fd_50F6_0508.x + fd_50F6_10E0 > x
         && fd_50F6_0508.y <= y && fd_50F6_0508.y + fd_50F6_10DE > y;
     return r;
 }
@@ -270,7 +270,7 @@ void far f_00F8_044C(void)
     win_FlushEvents();
 }
 
-int far f_00F8_0459(int value)
+int far ABS(int value)
 {
     if (value < 0)
         return -value;
@@ -285,9 +285,9 @@ extern void far SetMapPlane(int plane);
 extern void far win_Swap(int from, int to);
 extern void far win_Open(int win);
 
-void far f_00F8_047F(void)
+void far YardToMap(void)
 {
-    f_00F8_0252();
+    ClearMapScentButtons();
     if (!win_IsWinOpen(0x100)) {
         if (win_IsWinOpen(0x1900)) {
             SetMapPlane(1);
@@ -298,7 +298,7 @@ void far f_00F8_047F(void)
     }
 }
 
-void far f_00F8_04C7(void)
+void far MapToYard(void)
 {
     if (!win_IsWinOpen(0x1900)) {
         if (win_IsWinOpen(0x100)) {
@@ -319,7 +319,7 @@ void far OpenMapYard(int unused)
     else if (win_IsWinOpen(0x1900))
         f_20E8_0725(0x1900);
     else
-        f_00F8_047F();
+        YardToMap();
 }
 
 extern char far *far fd_55B3_2A36;
@@ -348,7 +348,7 @@ void far f_00F8_0585(void)
 extern int far WinPrintf(char far *format, ...);
 void far f_00F8_05B4(void);
 
-void far f_00F8_059C(void)
+void far UpdateEverything(void)
 {
     WinPrintf("\nUPDATEEVERYTHING!");
     f_00F8_05B4();
@@ -362,20 +362,20 @@ void far f_00F8_05B4(void)
     f_21FA_0AD2(&g_5A9C);
 }
 
-int far f_00F8_05C9(void)
+int far DialogAbort(void)
 {
-    if (f_00F8_0344())
+    if (DialogWait())
         return 1;
     if (f_1F58_0038() && f_1F58_0090() == 0x1b)
         return 1;
     return 0;
 }
 
-int far f_00F8_05F2(void)
+int far DialogAbortOrCont(void)
 {
     int r;
 
-    if (f_00F8_0344()) {
+    if (DialogWait()) {
         WinPrintf("WAIT YES");
         r = 1;
     } else if (f_1F58_0038()) {

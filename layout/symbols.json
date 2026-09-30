@@ -1,6 +1,30 @@
 {
  "schema": "simant-symbols-v1",
  "code": {
+  "ABS": {
+   "unit": "root",
+   "seg": 248,
+   "off": 1113,
+   "grounding": "inventory:far_call",
+   "history": [
+    {
+     "was": "f_00F8_0459",
+     "why": "names4 review (CONFIRMED): body abs(int); sole caller DoAntMoveY on both sides"
+    }
+   ]
+  },
+  "AboutDialog": {
+   "unit": "S16",
+   "seg": 14412,
+   "off": 481,
+   "grounding": "inventory:vector",
+   "history": [
+    {
+     "was": "o16_384C_01E1",
+     "why": "names4 review (CONFIRMED): constant 0x1F02 (and objects 0x1F00/0x1F01) shared; call order win_Open, LoadStringAnt, TickCount, DialogClearWait, WaitedEnough, DialogAbortOrCont, win_Events, win_FlushEvents, ..., font_SetFont, font_FontHeight, gr_JustifyStrInRect, clip_Off, win_DrawObjectNum, free, db_PurgeObject, win_FlushEvents, win_Close identical (DOS lacks SetPause/DialogDone)"
+    }
+   ]
+  },
   "AddAntLion": {
    "unit": "root",
    "seg": 2777,
@@ -229,6 +253,18 @@
     }
    ]
   },
+  "BlockMove": {
+   "unit": "root",
+   "seg": 580,
+   "off": 0,
+   "grounding": "inventory:far_call",
+   "history": [
+    {
+     "was": "f_0244_0000",
+     "why": "names4 review (CONFIRMED): Mac-style BlockMove(src, dst, count) -> _fmemcpy(dst, src, count): identical argument swap; sole caller RemoveFromAList on both sides"
+    }
+   ]
+  },
   "Bounce": {
    "unit": "root",
    "seg": 4995,
@@ -262,6 +298,42 @@
     {
      "was": "f_0EC1_0719",
      "why": "Win16 unit SIMONE_MODULE 2A16..3046 (CompactListA..ClearListR, 17 members) aligns 1:1 with DOS module 0EC1 (17 functions); anchored by registered AddAntToAList/BList/RList at positions 11-13 and xver ExitHole/BuildAntListA MEDIUM; bodies match (list arrays, sizes)"
+    }
+   ]
+  },
+  "ButtonHeld": {
+   "unit": "root",
+   "seg": 8146,
+   "off": 1432,
+   "grounding": "inventory:far_call",
+   "history": [
+    {
+     "was": "f_1FD2_0598",
+     "why": "names4 review (HIGH): shared callers MagnifyMenu, DrawCastePopUp, win_DoProxMenu (loop condition); TickCount x2 + StillDown on both sides"
+    }
+   ]
+  },
+  "ButtonHeldEnd": {
+   "unit": "root",
+   "seg": 8146,
+   "off": 1519,
+   "grounding": "inventory:far_call",
+   "history": [
+    {
+     "was": "f_1FD2_05EF",
+     "why": "names4 review (HIGH): shared callers MagnifyMenu, DoExpMenu after the loop; ends with win_FlushEvents on both sides"
+    }
+   ]
+  },
+  "ButtonHeldInit": {
+   "unit": "root",
+   "seg": 8146,
+   "off": 1407,
+   "grounding": "inventory:far_call",
+   "history": [
+    {
+     "was": "f_1FD2_057F",
+     "why": "names4 review (CONFIRMED): shared callers MagnifyMenu, DoExpMenu, DrawCastePopUp, win_DoProxMenu; body TickCount stamp on both sides"
     }
    ]
   },
@@ -322,6 +394,18 @@
     {
      "was": "f_015B_0653",
      "why": "MAPSYM SIMANT_MODULE unit 9D04.. (AddSomeAnts..MysteryButton) aligns 1:1 in member order with DOS module 015B functions 1-12; anchored by MysteryButton (xver HIGH, f_015B_0D0C, same unit end), KillSomeAnts (MEDIUM), GotoMyAnt (MEDIUM, 5 anchors); body matches Win16 source tu_simant_9D04; body: LessonTemp=1, MePlane!=MapPlane -> SetMapPlane(MePlane), CenterEdit(MeLocX,MeLocY)"
+    }
+   ]
+  },
+  "CenterEdit": {
+   "unit": "root",
+   "seg": 592,
+   "off": 4036,
+   "grounding": "inventory:far_call",
+   "history": [
+    {
+     "was": "f_0250_0FC4",
+     "why": "names4 review (CONFIRMED): shared callers SetMapPlaneLocation, GotoMapPoint, SetMapPlane, CenterAnt, MapAreaEvent, OpenMiniMapWin; position before UpdateEdit in SetMapPlane/NewGame/DoLoadInitializations"
     }
    ]
   },
@@ -406,6 +490,18 @@
     {
      "was": "f_0EC1_07D4",
      "why": "Win16 unit SIMONE_MODULE 2A16..3046 (CompactListA..ClearListR, 17 members) aligns 1:1 with DOS module 0EC1 (17 functions); anchored by registered AddAntToAList/BList/RList at positions 11-13 and xver ExitHole/BuildAntListA MEDIUM; bodies match (list arrays, sizes)"
+    }
+   ]
+  },
+  "ClearMapScentButtons": {
+   "unit": "root",
+   "seg": 248,
+   "off": 594,
+   "grounding": "inventory:far_call,push_cs_call",
+   "history": [
+    {
+     "was": "f_00F8_0252",
+     "why": "names4 review (CONFIRMED): body win_MakeGroupUnselected(0x100, 2); caller ProcMapEvent on both sides; inlined in Win16 YardToMap where DOS YardToMap calls it"
     }
    ]
   },
@@ -745,6 +841,66 @@
     }
    ]
   },
+  "DialogAbort": {
+   "unit": "root",
+   "seg": 248,
+   "off": 1481,
+   "grounding": "inventory:far_call",
+   "history": [
+    {
+     "was": "f_00F8_05C9",
+     "why": "names4 review (CONFIRMED): body: DialogWait() || (key pending && key == 0x1B): ESC abort (Win16 GetAsyncKeyState(0x1B)); caller DoScenario, call position after DialogClearWait in its loop as Win16"
+    }
+   ]
+  },
+  "DialogAbortOrCont": {
+   "unit": "root",
+   "seg": 248,
+   "off": 1522,
+   "grounding": "inventory:far_call,push_cs_call",
+   "history": [
+    {
+     "was": "f_00F8_05F2",
+     "why": "names4 review (CONFIRMED): body: DialogWait() || any key (Win16: || space); DOS keeps WinPrintf 'WAIT YES'/'result=%d' debug output; caller set = Win16 set PictureDialog, SpiderDialog, YellowDialog, DrawSimPayoff, AboutDialog, ShowIntro (+ EndGameDialog, YellowHelp)"
+    }
+   ]
+  },
+  "DialogClearWait": {
+   "unit": "root",
+   "seg": 248,
+   "off": 810,
+   "grounding": "inventory:far_call",
+   "history": [
+    {
+     "was": "f_00F8_032A",
+     "why": "names4 review (CONFIRMED): body: stamp=TickCount(); wait=0x1518 (constant shared only by Win16 DialogClearWait/DialogClearWaitInit); call position selects ClearWait, not ClearWaitInit: AboutDialog (twice) TickCount, [ClearWait], WaitedEnough, DialogAbortOrCont and DoScenario win_GetEvent, [ClearWait], DialogAbort; DOS calls nothing at the Win16 ClearWaitInit positions before the loops"
+    }
+   ]
+  },
+  "DialogWait": {
+   "unit": "root",
+   "seg": 248,
+   "off": 836,
+   "grounding": "inventory:push_cs_call",
+   "history": [
+    {
+     "was": "f_00F8_0344",
+     "why": "names4 review (HIGH): body = Win16 DialogWait body: WaitedEnough(&dialog stamp, dialog wait) on the state written by DialogWaitInit/DialogClearWait; DOS callers are DialogAbort and DialogAbortOrCont exactly where the Win16 versions contain the same WaitedEnough expression inline"
+    }
+   ]
+  },
+  "DialogWaitInit": {
+   "unit": "root",
+   "seg": 248,
+   "off": 759,
+   "grounding": "inventory:far_call",
+   "history": [
+    {
+     "was": "f_00F8_02F7",
+     "why": "names4 review (CONFIRMED): body: while StillDown() win_FlushEvents(); stamp=TickCount(); wait = n*0x12 (Win16 identical plus an 8-level stack); shared callers PictureDialog, SpiderDialog, YellowDialog, DrawSimPayoff, ShowIntro"
+    }
+   ]
+  },
   "DigMyNewHole": {
    "unit": "root",
    "seg": 5358,
@@ -1018,6 +1174,18 @@
     {
      "was": "f_10F7_0B40",
      "why": "worker sim10F7: Win16 counterpart body matched while recovering the byte-exact DOS function"
+    }
+   ]
+  },
+  "DoEditUpdateDraw": {
+   "unit": "root",
+   "seg": 592,
+   "off": 3729,
+   "grounding": "inventory:far_call",
+   "history": [
+    {
+     "was": "f_0250_0E91",
+     "why": "names4 review (CONFIRMED): 5 shared callers DoAntMoveY, DoEditAndMapUpdateDraw, DoTroph, ExchangeLives, YellowBirth (+ AnimYellowFight/Insane); small forwarder on both sides"
     }
    ]
   },
@@ -1681,6 +1849,18 @@
     }
    ]
   },
+  "DrawSimPayoff": {
+   "unit": "S16",
+   "seg": 14412,
+   "off": 0,
+   "grounding": "inventory:vector",
+   "history": [
+    {
+     "was": "o16_384C_0000",
+     "why": "names4 review (CONFIRMED): unique constant 0x3F48 (win_SetObjBitmap for window 0x1A00); call order MapToYard, SetYardMode, SetMapPlane, DrawYard, myDelay, win_LockWin, win_SetObjBitmap, win_Open, win_GetObjRect, win_UnlockWin, MacTickCount x2, DialogWaitInit, MacTickCount, mySongIsDone, myBeginSong, MacTickCount x2, win_DrawBitMap, DialogAbortOrCont, myDelay, win_Close identical"
+    }
+   ]
+  },
   "DrawSpider": {
    "unit": "root",
    "seg": 592,
@@ -1870,6 +2050,18 @@
     {
      "was": "f_10F7_1E71",
      "why": "worker sim10F7: Win16 counterpart body matched while recovering the byte-exact DOS function"
+    }
+   ]
+  },
+  "EditMessage": {
+   "unit": "root",
+   "seg": 5593,
+   "off": 156,
+   "grounding": "inventory:far_call",
+   "history": [
+    {
+     "was": "f_15D9_009C",
+     "why": "names4 review (CONFIRMED): same signature (long message, long duration, int mode) and body: mode==0 && (OptionStates[4]==0 || editMessage) guard; duration>=0 ? TickCount()+duration*3/2 : 0x7FFFFFFF for two message/remove-time slots; 10 shared named callers: DoAntMoveY, EatMyFood, ExpDig, Feedback, LoadGame, PlaceQueenInYard, ProcYardEvent, SetDefaultWindPrompt, SpecialXfer, StartAttack"
     }
    ]
   },
@@ -2125,6 +2317,18 @@
     }
    ]
   },
+  "FileSelect": {
+   "unit": "S09",
+   "seg": 13813,
+   "off": 966,
+   "grounding": "inventory:push_cs_call",
+   "history": [
+    {
+     "was": "o09_35F5_03C6",
+     "why": "names4 review (CONFIRMED): a Win16 counterpart exists: caller set {LoadGame, SaveGame} identical, called right after SaveGame in LoadGame and first in SaveGame on both sides; shared file patterns '*.ant'/'*.ANT' and '.ant'/'.ANT'"
+    }
+   ]
+  },
   "FillDirtB": {
    "unit": "S22",
    "seg": 15293,
@@ -2353,6 +2557,18 @@
     }
    ]
   },
+  "ForceUpdateEdit": {
+   "unit": "root",
+   "seg": 592,
+   "off": 3713,
+   "grounding": "inventory:far_call,push_cs_call",
+   "history": [
+    {
+     "was": "f_0250_0E81",
+     "why": "names4 review (HIGH): last call of EditScentMenu on both sides; forwards to UpdateEdit (DOS first calls f_0250_05CB)"
+    }
+   ]
+  },
   "FullCount": {
    "unit": "root",
    "seg": 3048,
@@ -2374,6 +2590,18 @@
     {
      "was": "f_1CE2_05FB",
      "why": "xver HIGH features-v1: string \"gputpacked\"; string \"putpackedbuf\""
+    }
+   ]
+  },
+  "GRectInvOutline": {
+   "unit": "root",
+   "seg": 7394,
+   "off": 1040,
+   "grounding": "inventory:far_call",
+   "history": [
+    {
+     "was": "f_1CE2_0410",
+     "why": "names4 review (CONFIRMED): 4 shared callers DrawMapCursor, DrawMiniMapCursor, EraseMapCursor, EraseMiniMapCursor; (rect, 1) argument shape as Win16"
     }
    ]
   },
@@ -2701,6 +2929,18 @@
     }
    ]
   },
+  "GotoBQueen": {
+   "unit": "root",
+   "seg": 347,
+   "off": 1854,
+   "grounding": "inventory:far_call",
+   "history": [
+    {
+     "was": "f_015B_073E",
+     "why": "names4 review (HIGH): ProcEditEvent call order SetMapPlane, GotoMyAnt, GotoSpider, GotoBQueen, GotoRQueen, SetPause, EditScentMenu; DOS: ..., GotoSpider, 073E, 075F, SetPause(009E), EditScentMenu; unit order after GotoSpider and before XferPatch/PlaceQueenInYard on both sides"
+    }
+   ]
+  },
   "GotoMapPoint": {
    "unit": "root",
    "seg": 347,
@@ -2722,6 +2962,18 @@
     {
      "was": "f_015B_06A2",
      "why": "MAPSYM SIMANT_MODULE unit 9D04.. (AddSomeAnts..MysteryButton) aligns 1:1 in member order with DOS module 015B functions 1-12; anchored by MysteryButton (xver HIGH, f_015B_0D0C, same unit end), KillSomeAnts (MEDIUM), GotoMyAnt (MEDIUM, 5 anchors); body matches Win16 source tu_simant_9D04"
+    }
+   ]
+  },
+  "GotoRQueen": {
+   "unit": "root",
+   "seg": 347,
+   "off": 1887,
+   "grounding": "inventory:far_call",
+   "history": [
+    {
+     "was": "f_015B_075F",
+     "why": "names4 review (HIGH): second of the pair in ProcEditEvent (just before SetPause) as Win16 GotoRQueen; unit order as GotoBQueen; GotoMapPoint(plane 3 = red nest)"
     }
    ]
   },
@@ -2926,6 +3178,18 @@
     {
      "was": "f_0250_006E",
      "why": "names3 review: callers SetMapPlaneLocation, SetMapPlane, RandWorld, SetAlarmDropState are all Win16 InvalEuMap callers; body clamps a tile rectangle to 128x64 and marks the edit-update cells -1 (rect variant of ZapEuMapAt); unit position 2, size 166 vs 168"
+    }
+   ]
+  },
+  "InvalQueenStorageDisp": {
+   "unit": "root",
+   "seg": 248,
+   "off": 917,
+   "grounding": "inventory:far_call",
+   "history": [
+    {
+     "was": "f_00F8_0395",
+     "why": "names4 review (CONFIRMED): empty stub on both sides; callers CheatKeys, DoRepoFly and XferPatch (same call position after clearing queen storage) on both sides"
     }
    ]
   },
@@ -3301,6 +3565,30 @@
     }
    ]
   },
+  "LoadStringAnt": {
+   "unit": "root",
+   "seg": 1883,
+   "off": 578,
+   "grounding": "inventory:far_call,push_cs_call",
+   "history": [
+    {
+     "was": "f_075B_0242",
+     "why": "names4 review (CONFIRMED): callee order db_LoadObject, WinPrintf, lock, alloc, memmove as Win16; callers PictStrnDialog and AboutDialog (call position after win_Open) on both sides; called 18 times by 075B:00AE exactly as Win16 PrepareStrings calls LoadStringAnt 18 times"
+    }
+   ]
+  },
+  "LoadTiles": {
+   "unit": "root",
+   "seg": 592,
+   "off": 950,
+   "grounding": "inventory:far_call",
+   "history": [
+    {
+     "was": "f_0250_03B6",
+     "why": "names4 review (HIGH): sole caller IBMInitStuff on both sides; unit position after OverlayTileSet; db_LoadObject/db_PurgeObject tile loading"
+    }
+   ]
+  },
   "LostHeadA": {
    "unit": "root",
    "seg": 2196,
@@ -3334,6 +3622,18 @@
     {
      "was": "f_0F3F_0F55",
      "why": "Win16 MAPSYM member list of the matching unit aligns 1:1 in order and count with the DOS module (already-named members fall at their positions); bodies near-identical (worker simA)"
+    }
+   ]
+  },
+  "MacTickCount": {
+   "unit": "root",
+   "seg": 248,
+   "off": 702,
+   "grounding": "inventory:far_call",
+   "history": [
+    {
+     "was": "f_00F8_02BE",
+     "why": "names4 review (CONFIRMED): body identical: TickCount()*3 as long (same shl/rcl/add/adc sequence); shared callers SpiderDialog, YellowBirth, LionDialog, DrawSimKid, RunTutor, GiveLesson, DrawSimPayoff"
     }
    ]
   },
@@ -3394,6 +3694,18 @@
     {
      "was": "o18_384C_0AAB",
      "why": "Win16 SIMONE_MODULE run 3100..45AC (MakeMap..AddRock3, 23 members, between ClearListR and InitSpider) aligns 1:1 in order and count with DOS section S18 frame 384C (23 functions); anchored member MakeYardPatch (0C13): body identical to Win16 MakeYardPatch (TERRAINset/0x3e8 tile set, 128x64 SRand16 fill, AddRocks, InitAntLions(SRand4()+1), InitPillar = registered DOS names, 20/30/100/128 SRand1(0x7d)/SRand1(0x3d) placement passes with tiles 0x20-0x23, (SRand1(2)+0x12)<<1, 0x28, 0x51); call graph agrees (MakeMap->MakeYardPatch/MakeHousePatch(x*16+y>0x25), MakeKitchenWall->MakeOutletV(0x24,2),(0x54,2)+DROPdir=2, FloorTiles DROPdir=0, MakeOutletV/H->TileFrame1+MakePlugV/H, AddRocks->AddRock5 x6/AddRock3 x6 with SRand1(122/58),(124/60)); equal-size pairs TileFrame1/2, MakeOutletV/H, CarpetFloorL/R match on both sides"
+    }
+   ]
+  },
+  "MakeDMap": {
+   "unit": "root",
+   "seg": 248,
+   "off": 933,
+   "grounding": "inventory:far_call",
+   "history": [
+    {
+     "was": "f_00F8_03A5",
+     "why": "names4 review (HIGH): empty stub on both sides; callers ReDrawMapEdit and PlaceQueenInYard on both sides"
     }
    ]
   },
@@ -3613,6 +3925,18 @@
     }
    ]
   },
+  "MapToYard": {
+   "unit": "root",
+   "seg": 248,
+   "off": 1223,
+   "grounding": "inventory:far_call",
+   "history": [
+    {
+     "was": "f_00F8_04C7",
+     "why": "names4 review (CONFIRMED): core body: if yard not open: map open ? (SetMapPlane(0); win_Swap(0x100,0x1900)) : win_Open(0x1900) (Win16 adds the title/queen-mode refresh); mirror of 047F (YardToMap); unit order YardToMap, MapToYard, OpenMapYard on both sides"
+    }
+   ]
+  },
   "MapToolsMenu": {
    "unit": "S04",
    "seg": 13813,
@@ -3622,6 +3946,18 @@
     {
      "was": "o04_35F5_0000",
      "why": "Win16 ANTEDIT_MODULE map-window members (Mini_DrawMapI xver HIGH anchor in the same DOS frame S04:35F5); body identical to Win16 MapToolsMenu: win_GetObjRect(0x117), switch *(50F6:0EAC) 1/2/3, GetObjSize(0xa00/0xb00/0x900) + DoProxMenu(id,-1,(top+bottom-h)/2,right-w-4), SetExpTool(CurExpTool), state=3, ClearMyLife(Me...), MeMode=2, InitSpider, SetEditWinTitle, myBeginSound(2,0,0x7e); DoExpMenu case 7 -> SetMyLife ... 0x117 bitmap redraw"
+    }
+   ]
+  },
+  "MenuQuit": {
+   "unit": "S15",
+   "seg": 14412,
+   "off": 494,
+   "grounding": "inventory:vector",
+   "history": [
+    {
+     "was": "o15_384C_01EE",
+     "why": "names4 review (HIGH): body: if game dirty: r = save prompt (o15_384C_0239; 2 = cancel -> return 0; 1 = yes -> SaveGame(0) retried until it succeeds), as Win16 MessageBox(YESNOCANCEL): IDCANCEL -> 0, IDYES -> SaveGame(0); unit order LoadMonoPats, Quit, MenuQuit, SetDefaultWindows, NewGame; DOS 01EE sits before 0239 (prompt helper) and SetDefaultWindows (037F)"
     }
    ]
   },
@@ -3682,6 +4018,18 @@
     {
      "was": "f_015B_0D0C",
      "why": "xver HIGH (3 anchored callees AddFood, MakeNewHoleB, RRand); last member of MAPSYM unit AddSomeAnts..MysteryButton aligned with module 015B"
+    }
+   ]
+  },
+  "NewGame": {
+   "unit": "S15",
+   "seg": 14412,
+   "off": 966,
+   "grounding": "inventory:vector",
+   "history": [
+    {
+     "was": "o15_384C_03C6",
+     "why": "names4 review (CONFIRMED): call order DoScenario, LoadGame, EndLifeTransferMode, EndTargetMode, SetDefaultWindPrompt, SetEditWinTitle, RandYard, win_Open, SetDefaultWindows, SetMapPlane, ..., CenterEdit, UpdateEdit as Win16; shared callers ProcMenu, EndGameDialog (+ main = WINMAIN)"
     }
    ]
   },
@@ -3814,6 +4162,18 @@
     {
      "was": "f_0250_036A",
      "why": "names3 review: constants 1000/1001 (0x3E8/0x3E9) selecting two tile sets, loaded through the same helper twice as Win16 OverlayTileSet (db_LoadObject/db_UnhookObject twice); callers MakeHousePatch and MakeYardPatch (+ load-init o09_35F5_0DBB <-> DoLoadInitializations) on both sides"
+    }
+   ]
+  },
+  "PauseGame": {
+   "unit": "S11",
+   "seg": 13813,
+   "off": 136,
+   "grounding": "inventory:vector",
+   "history": [
+    {
+     "was": "o11_35F5_0088",
+     "why": "names4 review (CONFIRMED): decidable although the two Win16 bodies are identical: DOS 0088 is a wrapper PauseGame(x){SetPause(x);}, Win16 PauseGame is the SetPause body inlined; caller set LoadGame, EndTargetMode, EndLifeTransferMode (+ f_10F7_0B51/0BB1) = Win16 PauseGame callers LoadGame, EndTargetMode, EndLifeTransferMode (+ TargetAnt, StartLifeTransfer, ExchangeLives); none of these call Win16 SetPause"
     }
    ]
   },
@@ -4030,6 +4390,18 @@
     {
      "was": "f_0250_179F",
      "why": "Win16 MAPSYM PreDrawSpider immediately precedes DrawSpider (xver HIGH); DOS 179F precedes DrawSpider and its body matches Win16 PreDrawSpider: spiderRect.top=0x8000, spiderTileLeft=spiderTileTop=500, SpidOn test, displayType==2 3/4 scaling, MapPlane==1 visibility, spiderBuf=7 tiles"
+    }
+   ]
+  },
+  "PrepareStrings": {
+   "unit": "root",
+   "seg": 1883,
+   "off": 174,
+   "grounding": "inventory:push_cs_call",
+   "history": [
+    {
+     "was": "f_075B_00AE",
+     "why": "names4 review (HIGH): sole caller initStuff on both sides; body is 18 consecutive LoadStringAnt calls on both sides (xver LOW guessed LoadStringAnt for this address; rejected)"
     }
    ]
   },
@@ -4633,6 +5005,30 @@
     }
    ]
   },
+  "SetDefaultWindows": {
+   "unit": "S15",
+   "seg": 14412,
+   "off": 895,
+   "grounding": "inventory:push_cs_call,vector",
+   "history": [
+    {
+     "was": "o15_384C_037F",
+     "why": "names4 review (CONFIRMED): call order OpenCasteWindow, OpenModeWindow, SetMapPlane, win_IsWinOpen, YardToMap, SetMapTitle, OpenEditWindow as Win16 (DOS adds SetEditWinTitle, lacks MapToYard); callers DoLoadInitializations (o09_35F5_0DBB) and NewGame; Win16 NewGame inlines the same body"
+    }
+   ]
+  },
+  "SetEditMode": {
+   "unit": "root",
+   "seg": 347,
+   "off": 440,
+   "grounding": "inventory:push_cs_call",
+   "history": [
+    {
+     "was": "f_015B_01B8",
+     "why": "names4 review (CONFIRMED): body: store the int argument into one global (Win16 CurEditMode, PACK 0x9FE0); call position: DOS SetMapPlane calls 01B8(table[MapPlane]) between InvalEuMap and SetMapPlaneLocation; Win16 SetMapPlane stores table[MapPlane] into CurEditMode at the same position (inlined SetEditMode; Win16 SetEditMode has no callers)"
+    }
+   ]
+  },
   "SetEditWinTitle": {
    "unit": "root",
    "seg": 592,
@@ -4729,6 +5125,42 @@
     }
    ]
   },
+  "SetMapTitle": {
+   "unit": "root",
+   "seg": 248,
+   "off": 216,
+   "grounding": "inventory:far_call",
+   "history": [
+    {
+     "was": "f_00F8_00D8",
+     "why": "names4 review (CONFIRMED): body identical: win_SetObjFormatStr(0x101, MwinTitle[MapMode]); (0x1901, MwinTitle[YardMode+9]); draw the title in the open window; callers SetMapModeAnt, SetYardMode, SetDefaultWindows on both sides"
+    }
+   ]
+  },
+  "SetMenuEntries": {
+   "unit": "S11",
+   "seg": 13813,
+   "off": 0,
+   "grounding": "inventory:push_cs_call,vector",
+   "history": [
+    {
+     "was": "o11_35F5_0000",
+     "why": "names4 review (CONFIRMED): same body: loop items 0x43..0x46 -> SetMenuItemState(item, 0x10/0x20) keyed on a tool word, then the pause item 0x41 gets Pause/Unpause text (DOS ' Pause'/' Unpause', Win16 resources 0x900/0x911) keyed on GamePaused, then loop 0x31..0x36 over an int array (==1 ? 0x10 : 0x20); call order SetMenuItemState, SetMenuOptionText, SetMenuItemState identical (Win16 adds UpdateUserButtons)"
+    }
+   ]
+  },
+  "SetMenuItemState": {
+   "unit": "root",
+   "seg": 8146,
+   "off": 1566,
+   "grounding": "inventory:far_call",
+   "history": [
+    {
+     "was": "f_1FD2_061E",
+     "why": "names4 review (CONFIRMED): this is a Win16 pair, not a DOS-only name: SetMenuEntries (CONFIRMED) calls it twice with (item, 0x10/0x20) exactly where Win16 SetMenuEntries calls SetMenuItemState(item, state); own diagnostic 'Attempt to SetMenuItemState with no menu loaded!' names the function (independent string anchor)"
+    }
+   ]
+  },
   "SetModeProd": {
    "unit": "root",
    "seg": 4995,
@@ -4765,6 +5197,18 @@
     }
    ]
   },
+  "SetPause": {
+   "unit": "S11",
+   "seg": 13813,
+   "off": 158,
+   "grounding": "inventory:push_cs_call,vector",
+   "history": [
+    {
+     "was": "o11_35F5_009E",
+     "why": "names4 review (CONFIRMED): body = Win16 SetPause: if !p {mode 10 -> EndLifeTransferMode; mode 11 -> EndTargetMode}; GamePaused=p; EditMessage(AdviceStrs[..], -2L, 1) by mode; clip_SetWin(0); win_SetObjSelectedState(0xF, p); clip_Off; SetMenuEntries; ProcEditEvent call order GotoSpider, GotoBQueen, GotoRQueen, SetPause, EditScentMenu on both sides: DOS calls 009E at the SetPause position"
+    }
+   ]
+  },
   "SetRRandSeed": {
    "unit": "root",
    "seg": 147,
@@ -4798,6 +5242,18 @@
     {
      "was": "f_0093_008F",
      "why": "xver CONFIRMED (evidence/cross_version/decisions.json: RNG translation unit)"
+    }
+   ]
+  },
+  "SetSimCursor": {
+   "unit": "root",
+   "seg": 248,
+   "off": 735,
+   "grounding": "inventory:far_call",
+   "history": [
+    {
+     "was": "f_00F8_02DF",
+     "why": "names4 review (CONFIRMED): caller set identical 5/5: CheatKeys, YellowBirth, YellowDeath, YellowCommand, initStuff; empty stub on both sides (upgrades xver callseq LOW)"
     }
    ]
   },
@@ -5029,6 +5485,18 @@
     }
    ]
   },
+  "StillDown": {
+   "unit": "root",
+   "seg": 8146,
+   "off": 1346,
+   "grounding": "inventory:far_call,push_cs_call",
+   "history": [
+    {
+     "was": "f_1FD2_0542",
+     "why": "names4 review (CONFIRMED): all six Win16 callers correspond: PopUpInfoWindow, ProcCasteEvent, ProcHistoryEvent, ProcModeEvent by name, myButton (02AC) and DialogWaitInit (02F7) by the pairs above; myButton returns it as Win16 myButton tail-calls StillDown"
+    }
+   ]
+  },
   "StopSong": {
    "unit": "root",
    "seg": 10314,
@@ -5110,6 +5578,18 @@
     {
      "was": "o18_384C_07F7",
      "why": "Win16 SIMONE_MODULE run 3100..45AC (MakeMap..AddRock3, 23 members, between ClearListR and InitSpider) aligns 1:1 in order and count with DOS section S18 frame 384C (23 functions); anchored member MakeYardPatch (0C13): body identical to Win16 MakeYardPatch (TERRAINset/0x3e8 tile set, 128x64 SRand16 fill, AddRocks, InitAntLions(SRand4()+1), InitPillar = registered DOS names, 20/30/100/128 SRand1(0x7d)/SRand1(0x3d) placement passes with tiles 0x20-0x23, (SRand1(2)+0x12)<<1, 0x28, 0x51); call graph agrees (MakeMap->MakeYardPatch/MakeHousePatch(x*16+y>0x25), MakeKitchenWall->MakeOutletV(0x24,2),(0x54,2)+DROPdir=2, FloorTiles DROPdir=0, MakeOutletV/H->TileFrame1+MakePlugV/H, AddRocks->AddRock5 x6/AddRock3 x6 with SRand1(122/58),(124/60)); equal-size pairs TileFrame1/2, MakeOutletV/H, CarpetFloorL/R match on both sides"
+    }
+   ]
+  },
+  "TileIsVisible": {
+   "unit": "root",
+   "seg": 248,
+   "off": 941,
+   "grounding": "inventory:far_call",
+   "history": [
+    {
+     "was": "f_00F8_03AD",
+     "why": "names4 review (CONFIRMED): body identical: plane == MapPlane && MapPnt.x <= x < MapPnt.x+editWidth && MapPnt.y <= y < MapPnt.y+editHeight; sole caller ZapEuMapAt on both sides"
     }
    ]
   },
@@ -5215,6 +5695,30 @@
    "off": 153,
    "alias_of": "win_CasteControlChanged"
   },
+  "UpdateEdit": {
+   "unit": "root",
+   "seg": 592,
+   "off": 3741,
+   "grounding": "inventory:far_call,push_cs_call",
+   "history": [
+    {
+     "was": "f_0250_0E9D",
+     "why": "names4 review (CONFIRMED): SetMapPlane order SetMapPlaneLocation, CenterEdit, ..., UpdateEdit and NewGame tail CenterEdit, UpdateEdit as Win16; shared callers SetMapPlaneLocation, SetMapPlane, MapAreaEvent, OpenMiniMapWin, ReDrawMapEdit, processEdit"
+    }
+   ]
+  },
+  "UpdateEverything": {
+   "unit": "root",
+   "seg": 248,
+   "off": 1436,
+   "grounding": "inventory:far_call",
+   "history": [
+    {
+     "was": "f_00F8_059C",
+     "why": "names4 review (CONFIRMED): own string '\\nUPDATEEVERYTHING!'; caller set identical: CheatKeys, YellowDeath"
+    }
+   ]
+  },
   "UpdateModeWindow": {
    "unit": "root",
    "seg": 1944,
@@ -5287,6 +5791,18 @@
     }
    ]
   },
+  "XferPatch": {
+   "unit": "root",
+   "seg": 347,
+   "off": 1944,
+   "grounding": "inventory:far_call",
+   "history": [
+    {
+     "was": "f_015B_0798",
+     "why": "names4 review (CONFIRMED): error constants 0x2710, 0x2712, 0x2714 in the same order, each after myBeginSound(1,0,0x7E); success path myBeginSong(0x2AFA,0x7E); same body order: store patch x/y, DrawMap, clear queen storage, InvalQueenStorageDisp, RandWorld(tile, a4 byte, 164 byte, x, y)"
+    }
+   ]
+  },
   "YardArea": {
    "unit": "S13",
    "seg": 14412,
@@ -5296,6 +5812,18 @@
     {
      "was": "o13_384C_16EF",
      "why": "Win16 ANTEDIT MAPSYM yard unit ProcYardEvent..YardArea aligns with DOS S13:384C (24 functions, ribbon handler absent); last member, literal 'YARD AREA @ %d, %d : %d, %d', called for yard click event 0x1902"
+    }
+   ]
+  },
+  "YardToMap": {
+   "unit": "root",
+   "seg": 248,
+   "off": 1151,
+   "grounding": "inventory:far_call,push_cs_call",
+   "history": [
+    {
+     "was": "f_00F8_047F",
+     "why": "names4 review (CONFIRMED): body: ClearMapScentButtons; if map not open: yard open ? (SetMapPlane(1); win_Swap(0x1900,0x100)) : win_Open(0x100), as Win16 (which inlines ClearMapScentButtons); callers OpenMapYard, ProcYardEvent, SetDefaultWindows on both sides; unit order YardToMap, MapToYard, OpenMapYard"
     }
    ]
   },
@@ -5596,6 +6124,18 @@
     {
      "was": "f_1E57_0115",
      "why": "names3 review: DOS diagnostic 'WARNING: i>=MAXWINDOWS-1 in KillWin(%d)'; member of the DOS clip module (4 CONFIRMED clip_ members) and of the Win16 clip API (stub 8E48); DOS callers win_Close and win_Swap (window teardown)"
+    }
+   ]
+  },
+  "clip_Off": {
+   "unit": "root",
+   "seg": 7767,
+   "off": 866,
+   "grounding": "inventory:far_call",
+   "history": [
+    {
+     "was": "f_1E57_0362",
+     "why": "names4 review (CONFIRMED): 5 shared callers HistUpdate, ProcEditEvent, ProcHistoryEvent, SetMapPlaneLocation, ToggleHistButton; positions after win_SetObjSelectedState in SetPause and at the end of AboutDialog/DrawMap as Win16"
     }
    ]
   },
@@ -6129,7 +6669,7 @@
    "unit": "root",
    "seg": 223,
    "off": 177,
-   "grounding": "inventory:far_call"
+   "alias_of": "myBeginSong"
   },
   "f_00DF_00E0": {
    "unit": "root",
@@ -6147,19 +6687,19 @@
    "unit": "root",
    "seg": 223,
    "off": 274,
-   "grounding": "inventory:far_call"
+   "alias_of": "myBeginSoundReverse"
   },
   "f_00DF_012D": {
    "unit": "root",
    "seg": 223,
    "off": 301,
-   "grounding": "inventory:far_call"
+   "alias_of": "mySoundIsDone"
   },
   "f_00DF_0138": {
    "unit": "root",
    "seg": 223,
    "off": 312,
-   "grounding": "inventory:far_call"
+   "alias_of": "mySongIsDone"
   },
   "f_00DF_015C": {
    "unit": "root",
@@ -6183,19 +6723,19 @@
    "unit": "root",
    "seg": 248,
    "off": 2,
-   "grounding": "inventory:far_call"
+   "alias_of": "win_YardClosed"
   },
   "f_00F8_00A4": {
    "unit": "root",
    "seg": 248,
    "off": 164,
-   "grounding": "inventory:far_call"
+   "alias_of": "win_MapChanged"
   },
   "f_00F8_00D8": {
    "unit": "root",
    "seg": 248,
    "off": 216,
-   "grounding": "inventory:far_call"
+   "alias_of": "SetMapTitle"
   },
   "f_00F8_017D": {
    "unit": "root",
@@ -6213,25 +6753,25 @@
    "unit": "root",
    "seg": 248,
    "off": 594,
-   "grounding": "inventory:far_call,push_cs_call"
+   "alias_of": "ClearMapScentButtons"
   },
   "f_00F8_0265": {
    "unit": "root",
    "seg": 248,
    "off": 613,
-   "grounding": "inventory:far_call"
+   "alias_of": "myDelay"
   },
   "f_00F8_02AC": {
    "unit": "root",
    "seg": 248,
    "off": 684,
-   "grounding": "inventory:far_call"
+   "alias_of": "myButton"
   },
   "f_00F8_02BE": {
    "unit": "root",
    "seg": 248,
    "off": 702,
-   "grounding": "inventory:far_call"
+   "alias_of": "MacTickCount"
   },
   "f_00F8_02D7": {
    "unit": "root",
@@ -6243,7 +6783,7 @@
    "unit": "root",
    "seg": 248,
    "off": 735,
-   "grounding": "inventory:far_call"
+   "alias_of": "SetSimCursor"
   },
   "f_00F8_02E7": {
    "unit": "root",
@@ -6261,19 +6801,19 @@
    "unit": "root",
    "seg": 248,
    "off": 759,
-   "grounding": "inventory:far_call"
+   "alias_of": "DialogWaitInit"
   },
   "f_00F8_032A": {
    "unit": "root",
    "seg": 248,
    "off": 810,
-   "grounding": "inventory:far_call"
+   "alias_of": "DialogClearWait"
   },
   "f_00F8_0344": {
    "unit": "root",
    "seg": 248,
    "off": 836,
-   "grounding": "inventory:push_cs_call"
+   "alias_of": "DialogWait"
   },
   "f_00F8_035D": {
    "unit": "root",
@@ -6321,7 +6861,7 @@
    "unit": "root",
    "seg": 248,
    "off": 917,
-   "grounding": "inventory:far_call"
+   "alias_of": "InvalQueenStorageDisp"
   },
   "f_00F8_039D": {
    "unit": "root",
@@ -6333,13 +6873,13 @@
    "unit": "root",
    "seg": 248,
    "off": 933,
-   "grounding": "inventory:far_call"
+   "alias_of": "MakeDMap"
   },
   "f_00F8_03AD": {
    "unit": "root",
    "seg": 248,
    "off": 941,
-   "grounding": "inventory:far_call"
+   "alias_of": "TileIsVisible"
   },
   "f_00F8_040F": {
    "unit": "root",
@@ -6357,7 +6897,7 @@
    "unit": "root",
    "seg": 248,
    "off": 1113,
-   "grounding": "inventory:far_call"
+   "alias_of": "ABS"
   },
   "f_00F8_0477": {
    "unit": "root",
@@ -6369,13 +6909,13 @@
    "unit": "root",
    "seg": 248,
    "off": 1151,
-   "grounding": "inventory:far_call,push_cs_call"
+   "alias_of": "YardToMap"
   },
   "f_00F8_04C7": {
    "unit": "root",
    "seg": 248,
    "off": 1223,
-   "grounding": "inventory:far_call"
+   "alias_of": "MapToYard"
   },
   "f_00F8_050A": {
    "unit": "root",
@@ -6399,7 +6939,7 @@
    "unit": "root",
    "seg": 248,
    "off": 1436,
-   "grounding": "inventory:far_call"
+   "alias_of": "UpdateEverything"
   },
   "f_00F8_05B4": {
    "unit": "root",
@@ -6411,13 +6951,13 @@
    "unit": "root",
    "seg": 248,
    "off": 1481,
-   "grounding": "inventory:far_call"
+   "alias_of": "DialogAbort"
   },
   "f_00F8_05F2": {
    "unit": "root",
    "seg": 248,
    "off": 1522,
-   "grounding": "inventory:far_call,push_cs_call"
+   "alias_of": "DialogAbortOrCont"
   },
   "f_015B_000E": {
    "unit": "root",
@@ -6441,7 +6981,7 @@
    "unit": "root",
    "seg": 347,
    "off": 440,
-   "grounding": "inventory:push_cs_call"
+   "alias_of": "SetEditMode"
   },
   "f_015B_01D1": {
    "unit": "root",
@@ -6495,13 +7035,13 @@
    "unit": "root",
    "seg": 347,
    "off": 1854,
-   "grounding": "inventory:far_call"
+   "alias_of": "GotoBQueen"
   },
   "f_015B_075F": {
    "unit": "root",
    "seg": 347,
    "off": 1887,
-   "grounding": "inventory:far_call"
+   "alias_of": "GotoRQueen"
   },
   "f_015B_0780": {
    "unit": "root",
@@ -6525,7 +7065,7 @@
    "unit": "root",
    "seg": 347,
    "off": 1944,
-   "grounding": "inventory:far_call"
+   "alias_of": "XferPatch"
   },
   "f_015B_094A": {
    "unit": "root",
@@ -6543,7 +7083,7 @@
    "unit": "root",
    "seg": 580,
    "off": 0,
-   "grounding": "inventory:far_call"
+   "alias_of": "BlockMove"
   },
   "f_0244_0022": {
    "unit": "root",
@@ -6609,7 +7149,7 @@
    "unit": "root",
    "seg": 592,
    "off": 950,
-   "grounding": "inventory:far_call"
+   "alias_of": "LoadTiles"
   },
   "f_0250_05CB": {
    "unit": "root",
@@ -6693,19 +7233,19 @@
    "unit": "root",
    "seg": 592,
    "off": 3713,
-   "grounding": "inventory:far_call,push_cs_call"
+   "alias_of": "ForceUpdateEdit"
   },
   "f_0250_0E91": {
    "unit": "root",
    "seg": 592,
    "off": 3729,
-   "grounding": "inventory:far_call"
+   "alias_of": "DoEditUpdateDraw"
   },
   "f_0250_0E9D": {
    "unit": "root",
    "seg": 592,
    "off": 3741,
-   "grounding": "inventory:far_call,push_cs_call"
+   "alias_of": "UpdateEdit"
   },
   "f_0250_0EC6": {
    "unit": "root",
@@ -6735,7 +7275,7 @@
    "unit": "root",
    "seg": 592,
    "off": 4036,
-   "grounding": "inventory:far_call"
+   "alias_of": "CenterEdit"
   },
   "f_0250_1018": {
    "unit": "root",
@@ -6897,13 +7437,13 @@
    "unit": "root",
    "seg": 1883,
    "off": 174,
-   "grounding": "inventory:push_cs_call"
+   "alias_of": "PrepareStrings"
   },
   "f_075B_0242": {
    "unit": "root",
    "seg": 1883,
    "off": 578,
-   "grounding": "inventory:far_call,push_cs_call"
+   "alias_of": "LoadStringAnt"
   },
   "f_075B_0334": {
    "unit": "root",
@@ -8535,7 +9075,7 @@
    "unit": "root",
    "seg": 5593,
    "off": 156,
-   "grounding": "inventory:far_call"
+   "alias_of": "EditMessage"
   },
   "f_15F8_0004": {
    "unit": "root",
@@ -10173,7 +10713,7 @@
    "unit": "root",
    "seg": 7394,
    "off": 1040,
-   "grounding": "inventory:far_call"
+   "alias_of": "GRectInvOutline"
   },
   "f_1CE2_0430": {
    "unit": "root",
@@ -10389,7 +10929,7 @@
    "unit": "root",
    "seg": 7767,
    "off": 866,
-   "grounding": "inventory:far_call"
+   "alias_of": "clip_Off"
   },
   "f_1E57_036F": {
    "unit": "root",
@@ -10755,25 +11295,25 @@
    "unit": "root",
    "seg": 8146,
    "off": 1346,
-   "grounding": "inventory:far_call,push_cs_call"
+   "alias_of": "StillDown"
   },
   "f_1FD2_057F": {
    "unit": "root",
    "seg": 8146,
    "off": 1407,
-   "grounding": "inventory:far_call"
+   "alias_of": "ButtonHeldInit"
   },
   "f_1FD2_0598": {
    "unit": "root",
    "seg": 8146,
    "off": 1432,
-   "grounding": "inventory:far_call"
+   "alias_of": "ButtonHeld"
   },
   "f_1FD2_05EF": {
    "unit": "root",
    "seg": 8146,
    "off": 1519,
-   "grounding": "inventory:far_call"
+   "alias_of": "ButtonHeldEnd"
   },
   "f_1FD2_05FD": {
    "unit": "root",
@@ -10785,7 +11325,7 @@
    "unit": "root",
    "seg": 8146,
    "off": 1566,
-   "grounding": "inventory:far_call"
+   "alias_of": "SetMenuItemState"
   },
   "f_1FD2_0663": {
    "unit": "root",
@@ -11319,13 +11859,13 @@
    "unit": "root",
    "seg": 8895,
    "off": 410,
-   "grounding": "reviewed: unreferenced fastcall wrapper between win_SetObjSelectableState and win_SetGroupSelectableState: mov dx,1; push cs; call 011F; retf (gap 019A-01A9 in the module layout)"
+   "alias_of": "win_MakeObjSelectable"
   },
   "f_22BF_01A2": {
    "unit": "root",
    "seg": 8895,
    "off": 418,
-   "grounding": "reviewed: unreferenced fastcall wrapper: sub dx,dx; push cs; call 011F; retf (gap 019A-01A9)"
+   "alias_of": "win_MakeObjUnselectable"
   },
   "f_22BF_01A9": {
    "unit": "root",
@@ -11385,7 +11925,7 @@
    "unit": "root",
    "seg": 8895,
    "off": 1080,
-   "grounding": "reviewed: unreferenced fastcall wrapper between win_SetGroupSelectedState and win_MakeGroupUnselected: mov bx,1; push cs; call 03CD; retf (gap 0438-0440)"
+   "alias_of": "win_MakeGroupSelected"
   },
   "f_22BF_0440": {
    "unit": "root",
@@ -13165,6 +13705,18 @@
     }
    ]
   },
+  "myBeginSong": {
+   "unit": "root",
+   "seg": 223,
+   "off": 177,
+   "grounding": "inventory:far_call",
+   "history": [
+    {
+     "was": "f_00DF_00B1",
+     "why": "names4 review (CONFIRMED): gated by driver-present && OptionStates[1] (Win16 songsOnFlag = OptionStates[1], copied in SetMenuEntries); myBeginSound uses OptionStates[2] like Win16 soundsOnFlag; call positions: XferPatch myBeginSong(0x2AFA,0x7E) and EditToolsMenu/MapToolsMenu as Win16; 12 shared named callers incl. ProcMenu, EndGameDialog, YellowBirth, YellowDeath, SpecialXfer, ShowIntro"
+    }
+   ]
+  },
   "myBeginSound": {
    "unit": "root",
    "seg": 223,
@@ -13174,6 +13726,66 @@
     {
      "was": "f_00DF_00E8",
      "why": "worker ovl08: Win16 RandWorld unit member / call-site evidence (report 2026-09-30)"
+    }
+   ]
+  },
+  "myBeginSoundReverse": {
+   "unit": "root",
+   "seg": 223,
+   "off": 274,
+   "grounding": "inventory:far_call",
+   "history": [
+    {
+     "was": "f_00DF_0112",
+     "why": "names4 review (CONFIRMED): body forwards to myBeginSound on both sides; sole caller MysteryButton on both sides"
+    }
+   ]
+  },
+  "myButton": {
+   "unit": "root",
+   "seg": 248,
+   "off": 684,
+   "grounding": "inventory:far_call",
+   "history": [
+    {
+     "was": "f_00F8_02AC",
+     "why": "names4 review (CONFIRMED): caller set identical 4/4: MapAreaEvent, OpenMiniMapWin, processEdit, processExp; body returns StillDown() (Win16 myButton is a StillDown tail call; DOS polls the mouse first)"
+    }
+   ]
+  },
+  "myDelay": {
+   "unit": "root",
+   "seg": 248,
+   "off": 613,
+   "grounding": "inventory:far_call",
+   "history": [
+    {
+     "was": "f_00F8_0265",
+     "why": "names4 review (CONFIRMED): body: stamp=TickCount(); loop until WaitedEnough(&stamp, ticks/3) || win_Events() || DialogAbortOrCont() (Win16 inlines the DialogAbortOrCont body); shared callers YellowBirth, YellowDialog, PlaceQueenInYard, DrawSimPayoff, ExchangeLives, EatMyFood (+ AnimYellowFight/Insane = o25_3BA4_0999/0C01)"
+    }
+   ]
+  },
+  "mySongIsDone": {
+   "unit": "root",
+   "seg": 223,
+   "off": 312,
+   "grounding": "inventory:far_call",
+   "history": [
+    {
+     "was": "f_00DF_0138",
+     "why": "names4 review (CONFIRMED): body: return 1 unless driver present and OptionStates[1] (songsOnFlag), else driver status (Win16 same gate, returns 1 when off); caller set identical: EndGameDialog, YellowBirth, DrawSimPayoff, AnimYellowFight (= o25_3BA4_0999)"
+    }
+   ]
+  },
+  "mySoundIsDone": {
+   "unit": "root",
+   "seg": 223,
+   "off": 301,
+   "grounding": "inventory:far_call",
+   "history": [
+    {
+     "was": "f_00DF_012D",
+     "why": "names4 review (CONFIRMED): body return 1 on both sides; caller set identical 4/4: YellowBirth, LionDialog, ExchangeLives, EatMyFood"
     }
    ]
   },
@@ -14753,7 +15365,7 @@
    "unit": "S09",
    "seg": 13813,
    "off": 966,
-   "grounding": "inventory:push_cs_call"
+   "alias_of": "FileSelect"
   },
   "o09_35F5_0D2B": {
    "unit": "S09",
@@ -14825,19 +15437,19 @@
    "unit": "S11",
    "seg": 13813,
    "off": 0,
-   "grounding": "inventory:push_cs_call,vector"
+   "alias_of": "SetMenuEntries"
   },
   "o11_35F5_0088": {
    "unit": "S11",
    "seg": 13813,
    "off": 136,
-   "grounding": "inventory:vector"
+   "alias_of": "PauseGame"
   },
   "o11_35F5_009E": {
    "unit": "S11",
    "seg": 13813,
    "off": 158,
-   "grounding": "inventory:push_cs_call,vector"
+   "alias_of": "SetPause"
   },
   "o11_35F5_018D": {
    "unit": "S11",
@@ -15197,7 +15809,7 @@
    "unit": "S15",
    "seg": 14412,
    "off": 494,
-   "grounding": "inventory:vector"
+   "alias_of": "MenuQuit"
   },
   "o15_384C_0239": {
    "unit": "S15",
@@ -15209,25 +15821,25 @@
    "unit": "S15",
    "seg": 14412,
    "off": 895,
-   "grounding": "inventory:push_cs_call,vector"
+   "alias_of": "SetDefaultWindows"
   },
   "o15_384C_03C6": {
    "unit": "S15",
    "seg": 14412,
    "off": 966,
-   "grounding": "inventory:vector"
+   "alias_of": "NewGame"
   },
   "o16_384C_0000": {
    "unit": "S16",
    "seg": 14412,
    "off": 0,
-   "grounding": "inventory:vector"
+   "alias_of": "DrawSimPayoff"
   },
   "o16_384C_01E1": {
    "unit": "S16",
    "seg": 14412,
    "off": 481,
-   "grounding": "inventory:vector"
+   "alias_of": "AboutDialog"
   },
   "o16_384C_0472": {
    "unit": "S16",
@@ -16751,6 +17363,18 @@
     }
    ]
   },
+  "win_MakeGroupSelected": {
+   "unit": "root",
+   "seg": 8895,
+   "off": 1080,
+   "grounding": "reviewed: unreferenced fastcall wrapper between win_SetGroupSelectedState and win_MakeGroupUnselected: mov bx,1; push cs; call 03CD; retf (gap 0438-0440)",
+   "history": [
+    {
+     "was": "f_22BF_0438",
+     "why": "names4 review (HIGH): body win_SetGroupSelectedState(win, group, 1); Win16 has the setter body inlined with the same constant; member order in the win_ object layer matches: SetObjSelectableState, MakeObjSelectable, MakeObjUnselectable, SetGroupSelectableState, MakeGroupSelectable, MakeGroupUnselectable, ..., SetGroupSelectedState, [SetGroupSelectedObj], MakeGroupSelected, MakeGroupUnselected, SetObjVisibleState (DOS lacks the AutoToggle/SelFlash families)"
+    }
+   ]
+  },
   "win_MakeGroupUnselectable": {
    "unit": "root",
    "seg": 8895,
@@ -16799,6 +17423,18 @@
     }
    ]
   },
+  "win_MakeObjSelectable": {
+   "unit": "root",
+   "seg": 8895,
+   "off": 410,
+   "grounding": "reviewed: unreferenced fastcall wrapper between win_SetObjSelectableState and win_SetGroupSelectableState: mov dx,1; push cs; call 011F; retf (gap 019A-01A9 in the module layout)",
+   "history": [
+    {
+     "was": "f_22BF_019A",
+     "why": "names4 review (HIGH): body win_SetObjSelectableState(obj, 1); Win16 has the setter body inlined with the same constant; member order in the win_ object layer matches: SetObjSelectableState, MakeObjSelectable, MakeObjUnselectable, SetGroupSelectableState, MakeGroupSelectable, MakeGroupUnselectable, ..., SetGroupSelectedState, [SetGroupSelectedObj], MakeGroupSelected, MakeGroupUnselected, SetObjVisibleState (DOS lacks the AutoToggle/SelFlash families)"
+    }
+   ]
+  },
   "win_MakeObjSelected": {
    "unit": "root",
    "seg": 8895,
@@ -16808,6 +17444,18 @@
     {
      "was": "f_22BF_03BE",
      "why": "SetObjSelectedState(obj,1) wrapper; cluster position 7"
+    }
+   ]
+  },
+  "win_MakeObjUnselectable": {
+   "unit": "root",
+   "seg": 8895,
+   "off": 418,
+   "grounding": "reviewed: unreferenced fastcall wrapper: sub dx,dx; push cs; call 011F; retf (gap 019A-01A9)",
+   "history": [
+    {
+     "was": "f_22BF_01A2",
+     "why": "names4 review (HIGH): body win_SetObjSelectableState(obj, 0); Win16 has the setter body inlined with the same constant; member order in the win_ object layer matches: SetObjSelectableState, MakeObjSelectable, MakeObjUnselectable, SetGroupSelectableState, MakeGroupSelectable, MakeGroupUnselectable, ..., SetGroupSelectedState, [SetGroupSelectedObj], MakeGroupSelected, MakeGroupUnselected, SetObjVisibleState (DOS lacks the AutoToggle/SelFlash families)"
     }
    ]
   },
@@ -16832,6 +17480,18 @@
     {
      "was": "f_22BF_0498",
      "why": "SetObjVisibleState(obj,1) wrapper in Win16 order"
+    }
+   ]
+  },
+  "win_MapChanged": {
+   "unit": "root",
+   "seg": 248,
+   "off": 164,
+   "grounding": "inventory:far_call",
+   "history": [
+    {
+     "was": "f_00F8_00A4",
+     "why": "names4 review (HIGH): body: if win_IsWinOpen(0x100): [EraseMapCursor]; win_GetObjRect(0x102, &mapTileRect); mapForce=1 as Win16; unit position right after win_YardClosed (Win16 UpdateLayQueenModeDisplay has no DOS copy); Win16 copy has no callers"
     }
    ]
   },
@@ -17274,6 +17934,18 @@
      "why": "window worker: Win16 win_* function with the same structure/strings (report 2026-09-30)"
     }
    ]
+  },
+  "win_YardClosed": {
+   "unit": "root",
+   "seg": 248,
+   "off": 2,
+   "grounding": "inventory:far_call",
+   "history": [
+    {
+     "was": "f_00F8_0002",
+     "why": "names4 review (CONFIRMED): body: if yard anim set: clip_Push, clip_SetWin(0x1900), hanim_RemoveAllAnimObjects, hanim_RenderAnimSet, hanim_RemoveAnimSet, clip_Pop, handle=0 (Win16 identical call order); caller SetYardMode on both sides; first member of the unit in both builds"
+    }
+   ]
   }
  },
  "data": {
@@ -17450,6 +18122,17 @@
    "off": 584,
    "grounding": "GetStrategy (root:1383:0011): mov es:[0248],0 / =1 when spider near; Win16 GetStrategy writes ChaseSpid at the same sites (unit SIMTWO aligned 1:1)"
   },
+  "CurExpTool": {
+   "seg": 20726,
+   "off": 4172,
+   "grounding": "o08_35F5_0000 (InitSimVars): mov es,[CONST word 50F6] ; mov es:[104C],...",
+   "history": [
+    {
+     "was": "fd_50F6_104C",
+     "why": "names4 review (CONFIRMED): written only by SetExpTool(tool) and zeroed by InitSimVars as Win16; MapToolsMenu/EditScentMenu draw win_DrawBitMapAtObjNum(0x117/7, CurExpTool+0x13EC) as Win16 MapToolsMenu"
+    }
+   ]
+  },
   "CurGndTileID": {
    "seg": 15703,
    "off": 1952,
@@ -17562,6 +18245,17 @@
     {
      "was": "fd_3E1D_5180",
      "why": "worker data identification: Win16 variable of the same role at the same use sites (reports dig/ovl08/simA/sim10F7)"
+    }
+   ]
+  },
+  "ExpSubStates": {
+   "seg": 15703,
+   "off": 1974,
+   "grounding": "S22:3BBD ExpSubStates-like char array (CONST word 8866 = seg 3D57): DropWall es:[07B7], ExpDig [07B8], ExpAddAnt [07B9], ExpAddFood [07BA], GetSM [07BB], ExpKillAnts [07BC] (Win16 ExpSubStates[1..6])",
+   "history": [
+    {
+     "was": "fd_3D57_07B6",
+     "why": "names4 review (CONFIRMED): byte array indexed by explore sub-tool: ExpAddAnt tests [3]==1 and ExpAddFood uses [4] as the Win16 ExpAddAnt/ExpAddFood; switch on [5] in the smoothing-tool code as in Win16; Win16 array is signed char[8]"
     }
    ]
   },
@@ -17766,6 +18460,17 @@
     {
      "was": "fd_3E1D_2180",
      "why": "worker data identification: Win16 variable of the same role at the same use sites (reports dig/ovl08/simA/sim10F7)"
+    }
+   ]
+  },
+  "MapPlane": {
+   "seg": 20726,
+   "off": 814,
+   "grounding": "o08_35F5_059B (RandYard): mov es,[S08 CONST word] ; es:[off]",
+   "history": [
+    {
+     "was": "fd_50F6_032E",
+     "why": "names4 review (CONFIRMED): SetMapPlane: if plane==0 OldMapPlane(0332)=MapPlane; MapPlane=plane; (plane==1 ? 0x80 : 0x40) - x: identical to Win16; TileIsVisible compares its plane argument with it as Win16 does with MapPlane"
     }
    ]
   },
@@ -18220,6 +18925,17 @@
     }
    ]
   },
+  "YardMode": {
+   "seg": 20726,
+   "off": 860,
+   "grounding": "o08_35F5_059B (RandYard): mov es,[S08 CONST word] ; es:[off]",
+   "history": [
+    {
+     "was": "fd_50F6_035C",
+     "why": "names4 review (CONFIRMED): DOS SetYardMode's own debug string '\\nYardmode=%d, newMode=%d' prints this word; SetMapTitle uses MwinTitle[YardMode + 9] for object 0x1901 exactly as Win16"
+    }
+   ]
+  },
   "_ctype": {
    "seg": 21939,
    "off": 31262,
@@ -18481,7 +19197,7 @@
   "fd_3D57_07B6": {
    "seg": 15703,
    "off": 1974,
-   "grounding": "S22:3BBD ExpSubStates-like char array (CONST word 8866 = seg 3D57): DropWall es:[07B7], ExpDig [07B8], ExpAddAnt [07B9], ExpAddFood [07BA], GetSM [07BB], ExpKillAnts [07BC] (Win16 ExpSubStates[1..6])"
+   "alias_of": "ExpSubStates"
   },
   "fd_3D57_07BE": {
    "seg": 15703,
@@ -19376,7 +20092,7 @@
   "fd_50F6_032E": {
    "seg": 20726,
    "off": 814,
-   "grounding": "o08_35F5_059B (RandYard): mov es,[S08 CONST word] ; es:[off]"
+   "alias_of": "MapPlane"
   },
   "fd_50F6_0330": {
    "seg": 20726,
@@ -19431,7 +20147,7 @@
   "fd_50F6_035C": {
    "seg": 20726,
    "off": 860,
-   "grounding": "o08_35F5_059B (RandYard): mov es,[S08 CONST word] ; es:[off]"
+   "alias_of": "YardMode"
   },
   "fd_50F6_035E": {
    "seg": 20726,
@@ -20441,7 +21157,7 @@
   "fd_50F6_104C": {
    "seg": 20726,
    "off": 4172,
-   "grounding": "o08_35F5_0000 (InitSimVars): mov es,[CONST word 50F6] ; mov es:[104C],..."
+   "alias_of": "CurExpTool"
   },
   "fd_50F6_104E": {
    "seg": 20726,

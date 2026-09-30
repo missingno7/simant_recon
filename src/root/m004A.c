@@ -198,18 +198,18 @@ int far f_004A_0253(int step)
     return moved;
 }
 
-extern int far fd_50F6_032E;
+extern int far MapPlane;
 extern int far fd_50F6_0FB6;
 extern Point far fd_50F6_0596;
 extern int far fd_50F6_0FFA;
 extern Point far fd_50F6_06A6;
 extern Point far fd_50F6_072E;
-extern void far f_0250_0E9D(void);
+extern void far UpdateEdit(void);
 extern void far f_0250_0ED2(void);
 
 void far f_004A_02AD(void)
 {
-    switch (fd_50F6_032E) {
+    switch (MapPlane) {
     case 1:
         fd_50F6_0596.x = fd_50F6_0FB6 / 2 + fd_50F6_0508.x;
         fd_50F6_0596.y = fd_50F6_0FFA / 2 + fd_50F6_0508.y;
@@ -223,13 +223,13 @@ void far f_004A_02AD(void)
         fd_50F6_072E.y = fd_50F6_0FFA / 2 + fd_50F6_0508.y;
         break;
     }
-    f_0250_0E9D();
+    UpdateEdit();
     f_0250_0ED2();
 }
 
 void far f_004A_038B(void)
 {
-    switch (fd_50F6_032E) {
+    switch (MapPlane) {
     case 1:
         fd_50F6_0596.x = fd_50F6_0FB6 / 2 + fd_50F6_0508.x;
         break;
@@ -240,13 +240,13 @@ void far f_004A_038B(void)
         fd_50F6_072E.x = fd_50F6_0FB6 / 2 + fd_50F6_0508.x;
         break;
     }
-    f_0250_0E9D();
+    UpdateEdit();
     f_0250_0ED2();
 }
 
 void far f_004A_040E(void)
 {
-    switch (fd_50F6_032E) {
+    switch (MapPlane) {
     case 1:
         fd_50F6_0596.y = fd_50F6_0FFA / 2 + fd_50F6_0508.y;
         break;
@@ -257,7 +257,7 @@ void far f_004A_040E(void)
         fd_50F6_072E.y = fd_50F6_0FFA / 2 + fd_50F6_0508.y;
         break;
     }
-    f_0250_0E9D();
+    UpdateEdit();
     f_0250_0ED2();
 }
 

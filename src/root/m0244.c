@@ -2,7 +2,7 @@
 
 extern void far * far _fmemcpy(void far *dest, void far *src, unsigned n);
 
-void far f_0244_0000(void far *src, void far *dst, unsigned n)
+void far BlockMove(void far *src, void far *dst, unsigned n)
 {
     _fmemcpy(dst, src, n);
 }

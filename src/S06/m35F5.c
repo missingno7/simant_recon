@@ -78,7 +78,7 @@ static unsigned char PatchX[6] = { 0, 1, 0, 255, 0, 0 };  /* 26BA */
 static unsigned char PatchY[6] = { 255, 0, 1, 0, 0, 0 };  /* 26C0 */
 
 
-extern long far f_00F8_02BE(void);
+extern long far MacTickCount(void);
 extern int far RRand(int range);
 extern int far SRand1(int range);
 extern void far f_0BE8_063A(void);
@@ -225,7 +225,7 @@ void far o06_35F5_0173(void)
 void far o06_35F5_01CA(int message)
 {
     if (message <= 22) {
-        fd_50F6_109C = f_00F8_02BE() + 300L;
+        fd_50F6_109C = MacTickCount() + 300L;
         fd_50F6_10B0 = 1;
         fd_50F6_10BC = message;
     }
@@ -490,7 +490,7 @@ void far o06_35F5_0A5F(void)
  * Variable roles follow the original's frame and registers: the else-if index (c48 - 30) is i
  * (DI); the final loop counts with y and draws i (SI) and x (DI). */
 extern int far fd_3D57_07C8;
-extern int far fd_50F6_035C;
+extern int far YardMode;
 extern int far RpopT;
 extern int far BpopT;
 extern unsigned char far fd_3E1D_6180[128][64];
@@ -661,7 +661,7 @@ void far SimKidInside(void)
     fd_3D57_0C2C = x;
     fd_3D57_0C2E = y;
     fd_3D57_0C32 = frame;
-    if (fd_3D57_07C8 == 0 && fd_50F6_035C < 2) {
+    if (fd_3D57_07C8 == 0 && YardMode < 2) {
         if ((fd_3D57_0C46 == 3 && fd_3D57_0C48 == 20 && fd_3D57_0C32 == 900) ||
             (fd_3D57_0C46 == 1 && fd_3D57_0C48 == 21 && fd_3D57_0C32 == 903) ||
             (fd_3D57_0C46 == 6 && fd_3D57_0C48 == 20 && fd_3D57_0C32 == 6) ||
@@ -725,7 +725,7 @@ extern int far fd_50F6_06AA;
 extern int far fd_50F6_07C8;
 extern int far fd_50F6_073A;
 extern int far fd_50F6_0850;
-extern void far f_00F8_0395(void);
+extern void far InvalQueenStorageDisp(void);
 extern int far SRand2(void);
 extern long far fd_50F6_383A;
 
@@ -768,13 +768,13 @@ void far o06_35F5_11FF(void)
             fd_50F6_06AA -= (fd_50F6_06AA + 7) >> 3;
         if (fd_50F6_07C8 > 0) {
             fd_50F6_07C8 -= (fd_50F6_07C8 + 7) >> 3;
-            f_00F8_0395();
+            InvalQueenStorageDisp();
         }
         if (fd_50F6_073A > 0)
             fd_50F6_073A -= (fd_50F6_073A + 7) >> 3;
         if (fd_50F6_0850 > 0)
             fd_50F6_0850 -= (fd_50F6_0850 + 7) >> 3;
-        if (fd_3D57_07C8 == 0 && fd_50F6_035C < 2) {
+        if (fd_3D57_07C8 == 0 && YardMode < 2) {
             if (SRand2() == 0)
                 f_00DF_00E8(7, 0, 6);
         }
@@ -831,7 +831,7 @@ void far o06_35F5_14CC(void)
                 fd_50F6_0240 = 2;
                 fd_50F6_0244 = 1;
             }
-            if (fd_3D57_07C8 == 0 && fd_50F6_035C < 2 && SRand64() == 0) {
+            if (fd_3D57_07C8 == 0 && YardMode < 2 && SRand64() == 0) {
                 f_00DF_00E8(0xd, 0, 5);
                 return;
             }
@@ -845,7 +845,7 @@ void far o06_35F5_14CC(void)
                 if (f_0BE8_0B83(fd_50F6_02BE, fd_50F6_032C, fd_50F6_04BE, fd_50F6_04C6) <= 0x960) {
                     fd_50F6_0254 = 3;
                     fd_50F6_0244 = 20;
-                    if (fd_3D57_07C8 == 0 && fd_50F6_035C < 2)
+                    if (fd_3D57_07C8 == 0 && YardMode < 2)
                         f_00DF_00E8(0xe, 0, 5);
                 }
             }
@@ -861,11 +861,11 @@ void far o06_35F5_14CC(void)
             if (++fd_50F6_0244 >= 30) {
                 fd_50F6_0244 = 0;
                 fd_50F6_0254 = 0;
-                fd_50F6_0220 = f_00F8_02BE() + 600L;
+                fd_50F6_0220 = MacTickCount() + 600L;
             }
         }
-    } else if (f_00F8_02BE() > fd_50F6_0220) {
-        fd_50F6_0220 = f_00F8_02BE() + 200L;
+    } else if (MacTickCount() > fd_50F6_0220) {
+        fd_50F6_0220 = MacTickCount() + 200L;
         if (SRand16() == 0 || fd_50F6_0B20 == 0x8d) {
             fd_50F6_0254 = 1;
             fd_50F6_02BE = 0xfc;
@@ -976,7 +976,7 @@ int far o06_35F5_1ABF(void)
 /* MakeBark (Win16 unit order) */
 void far o06_35F5_1B08(int kind, int level)
 {
-    if (fd_3D57_07C8 == 0 && fd_50F6_035C < 2 && f_00F8_02BE() > fd_50F6_0736) {
+    if (fd_3D57_07C8 == 0 && YardMode < 2 && MacTickCount() > fd_50F6_0736) {
         switch (kind) {
         case 0:
         case 2:
@@ -989,7 +989,7 @@ void far o06_35F5_1B08(int kind, int level)
             f_00DF_00E8(0x16, 0, level);
             break;
         }
-        fd_50F6_0736 = f_00F8_02BE() + SRand1(30) + 60;
+        fd_50F6_0736 = MacTickCount() + SRand1(30) + 60;
     }
 }
 
@@ -1100,9 +1100,9 @@ extern int far fd_50F6_0376;
 extern int far fd_50F6_0366;
 extern int far fd_50F6_0AEC[6];
 extern int far SRand8(void);
-extern void far f_00DF_00B1(int id, int arg);
+extern void far myBeginSong(int id, int arg);
 extern void far o14_384C_0B6A(int a, int b, int c);
-extern void far o16_384C_0000(void);
+extern void far DrawSimPayoff(void);
 int far o06_35F5_2314(int x, int y);
 void far o06_35F5_2381(int x, int y, int colony);
 
@@ -1207,7 +1207,7 @@ void far o06_35F5_1E54(void)
     if (fd_50F6_0EAC != 2)
         return;
     if (fd_50F6_0400 == 0 && fd_50F6_036E != 0) {
-        f_00DF_00B1(0x4e22, 0x7e);
+        myBeginSong(0x4e22, 0x7e);
         o14_384C_0B6A(0, 0x2744, 1);
         if (fd_3D57_0C44 == 0)
             o14_384C_0B6A(0, 0x2747, 1);
@@ -1219,17 +1219,17 @@ void far o06_35F5_1E54(void)
         fd_3D57_0C48 = 0;
         fd_3D57_0C28 = 0;
         fd_3D57_0C32 = -1;
-        f_00DF_00B1(0x4e23, 0x7e);
+        myBeginSong(0x4e23, 0x7e);
         o14_384C_0B6A(0, 0x2746, 1);
         if (fd_50F6_0400 != 0)
             o14_384C_0B6A(0, 0x2745, 1);
     }
     if (fd_3D57_0C44 != 0 && fd_50F6_0400 == 0) {
-        f_00DF_00B1(0x4e25, 0x7e);
+        myBeginSong(0x4e25, 0x7e);
         o14_384C_0B6A(0, 0x2749, 1);
         fd_50F6_0376 = 1;
         fd_50F6_0366 = 1;
-        o16_384C_0000();
+        DrawSimPayoff();
         return;
     }
     if (fd_50F6_03E2 < 2 && fd_50F6_0AEC[5] == 0 && fd_50F6_0AEC[0] == 0 &&

@@ -149,7 +149,7 @@ extern void far f_1E57_00B1(int win);
 extern void _fastcall f_2505_0831(int win);
 extern void far clip_SetWin(int win);
 extern void _fastcall win_DrawWindow(int win);
-extern void far f_1E57_0362(void);
+extern void far clip_Off(void);
 
 void far win_Swap(int from, int to, int unused, int p0, int p1, int p2, int p3)
 {
@@ -194,7 +194,7 @@ void far win_Swap(int from, int to, int unused, int p0, int p1, int p2, int p3)
     win_DrawWindow(to);
     (*g_62E8)();
     win_UnlockWin(to);
-    f_1E57_0362();
+    clip_Off();
 }
 
 extern void _fastcall win_LockWinHigh(int win);
@@ -248,7 +248,7 @@ void far win_Open(int win, ...)
         clip_SetWin(win);
         win_DrawWindow(win);
         (*g_62E8)();
-        f_1E57_0362();
+        clip_Off();
         win_UnlockWin(win);
     }
     win_FlushEvents();
@@ -282,7 +282,7 @@ void _fastcall win_Close(int win)
         win_UnlockWin(win);
         f_21FA_0B4B(&r);
         (*g_62E8)();
-        f_1E57_0362();
+        clip_Off();
     } else {
         win_UnlockWin(win);
     }
@@ -345,7 +345,7 @@ void _fastcall f_20E8_0776(int win)
     (*g_62E0)(win);
     f_21FA_0AD2(&r);
     (*g_62E8)();
-    f_1E57_0362();
+    clip_Off();
 }
 
 void _fastcall win_SetWinDrawHook(int win, void (far *hook)(int phase))

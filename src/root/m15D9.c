@@ -43,7 +43,7 @@ extern long far fd_55B3_299E;
 extern char far * far fd_55B3_299A;
 extern int far fd_55B3_29A2;
 
-void far f_15D9_009C(char far *message, long duration, int mode)
+void far EditMessage(char far *message, long duration, int mode)
 {
     if (mode == 0 && (fd_3D57_07A8[4] == 0 || fd_55B3_19C6 != 0L)) {
         if (message != 0L || fd_55B3_19CA != 0x7fffffffL)

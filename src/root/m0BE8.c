@@ -10,7 +10,7 @@ extern void far ZapEuMapAt(int plane, int x, int y);
 
 extern void far myBeginSound(int a, int b, int c);
 
-extern void far f_00DF_00B1(int id, int arg);
+extern void far myBeginSong(int id, int arg);
 extern void far o14_384C_0B6A(int a, int b, int c);
 
 extern char far Dx8[8];
@@ -119,7 +119,7 @@ void far f_0BE8_0002(void)
     fd_50F6_0AEC[3] = fd_50F6_0EB6[4];
     fd_50F6_0AEC[4] = fd_50F6_0EB6[8];
     if (fd_50F6_0AEC[5] && fd_50F6_0EB6[12] == 0 && fd_50F6_0354 == 0) {
-        f_00DF_00B1(0x2b0c, 0x7e);
+        myBeginSong(0x2b0c, 0x7e);
         o14_384C_0B6A(0, 0x271a, 1);
         if (fd_50F6_0EAC <= 1) {
             o14_384C_0B6A(0, 0x271b, 1);
@@ -134,7 +134,7 @@ void far f_0BE8_0002(void)
     fd_50F6_0AFA[3] = fd_50F6_0EB6[20];
     fd_50F6_0AFA[4] = fd_50F6_0EB6[24];
     if (fd_50F6_0AFA[5] && fd_50F6_0EB6[28] == 0 && fd_50F6_0354 == 0) {
-        f_00DF_00B1(0x2b0d, 0x7e);
+        myBeginSong(0x2b0d, 0x7e);
         o14_384C_0B6A(0, 0x271c, 1);
         if (fd_50F6_0EAC <= 1) {
             o14_384C_0B6A(0, 0x271d, 1);
@@ -624,7 +624,7 @@ void far TryAntTheme(void)
         fd_50F6_0214 = TickCount();
         if (++fd_50F6_0228 > 2)
             fd_50F6_0228 = 0;
-        f_00DF_00B1(fd_50F6_0228 + 0x2713, 0x7e);
+        myBeginSong(fd_50F6_0228 + 0x2713, 0x7e);
     }
 }
 

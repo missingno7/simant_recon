@@ -20,8 +20,8 @@ struct Event {
     int xE;
 };
 
-void far o16_384C_0000(void);
-void far o16_384C_01E1(void);
+void far DrawSimPayoff(void);
+void far AboutDialog(void);
 void far ShowIntro(void);
 void far LoadMonoPats(void);
 void far o15_384C_0152(char far *msg, int flag);
@@ -31,13 +31,13 @@ static int g_2C2C[6][2] = {
     { 0x42, 0xbf }, { 0x7a, 0x9f }, { 0x7c, 0xb3 }
 };
 
-extern void far f_00F8_04C7(void);
-extern int far fd_50F6_035C;
+extern void far MapToYard(void);
+extern int far YardMode;
 extern void far f_015B_0273(int mode);
-extern int far fd_50F6_032E;
+extern int far MapPlane;
 extern void far f_015B_053C(int plane);
 extern void far DrawYard(void);
-extern void far f_00F8_0265(long ticks);
+extern void far myDelay(long ticks);
 extern void _fastcall win_LockWin(int win);
 extern void _fastcall win_SetObjBitmap(int obj, int bitmap);
 extern int near g_3DB2;
@@ -47,15 +47,15 @@ extern void _fastcall f_22BF_00DD(int obj, struct Rect far *r);
 extern void far win_Open(int win);
 extern void _fastcall win_GetObjRect(int obj, struct Rect far *rect);
 extern void _fastcall win_UnlockWin(int win);
-extern long far f_00F8_02BE(void);
-extern void far f_00F8_02F7(int ticks);
-extern int far f_00DF_0138(void);
-extern void far f_00DF_00B1(int id, int arg);
+extern long far MacTickCount(void);
+extern void far DialogWaitInit(int ticks);
+extern int far mySongIsDone(void);
+extern void far myBeginSong(int id, int arg);
 extern int _fastcall win_DrawBitMap(int x, int y, int id);
-extern int far f_00F8_05F2(void);
+extern int far DialogAbortOrCont(void);
 extern void _fastcall win_Close(int win);
 
-void far o16_384C_0000(void)
+void far DrawSimPayoff(void)
 {
     struct Rect rect;
     struct Rect saved;
@@ -68,13 +68,13 @@ void far o16_384C_0000(void)
     int x;
     int y;
 
-    f_00F8_04C7();
-    if (fd_50F6_035C)
+    MapToYard();
+    if (YardMode)
         f_015B_0273(0);
-    if (fd_50F6_032E)
+    if (MapPlane)
         f_015B_053C(0);
     DrawYard();
-    f_00F8_0265(0x96L);
+    myDelay(0x96L);
     win_LockWin(0x1a00);
     win_SetObjBitmap(0x1a01, 0x3f48);
     if (g_3DB2 == 0x140) {
@@ -89,18 +89,18 @@ void far o16_384C_0000(void)
     win_UnlockWin(0x1a00);
     song = 0x4e23;
     row = 1;
-    nextFrame = f_00F8_02BE() + 0x1eL;
-    deadline = f_00F8_02BE() + 0x258L;
-    f_00F8_02F7(10);
-    while (!f_00F8_05F2()) {
-        if (f_00F8_02BE() >= deadline)
+    nextFrame = MacTickCount() + 0x1eL;
+    deadline = MacTickCount() + 0x258L;
+    DialogWaitInit(10);
+    while (!DialogAbortOrCont()) {
+        if (MacTickCount() >= deadline)
             break;
-        if (f_00DF_0138() && song < 0x4e25) {
-            f_00DF_00B1(song, 0x7e);
+        if (mySongIsDone() && song < 0x4e25) {
+            myBeginSong(song, 0x7e);
             song++;
         }
-        if (f_00F8_02BE() >= nextFrame) {
-            nextFrame = f_00F8_02BE() + 8L;
+        if (MacTickCount() >= nextFrame) {
+            nextFrame = MacTickCount() + 8L;
             for (i = 0; i < 6; i++) {
                 x = g_2C2C[i][1] + rect.left;
                 y = g_2C2C[i][0] + rect.top;
@@ -114,15 +114,15 @@ void far o16_384C_0000(void)
                 row = 0;
         }
     }
-    f_00F8_0265(0x12cL);
+    myDelay(0x12cL);
     win_Close(0x1a00);
     if (g_3DB2 == 0x140)
         f_22BF_00DD(0x1a01, &saved);
 }
 
-extern char far * far * far f_075B_0242(int object);
+extern char far * far * far LoadStringAnt(int object);
 extern unsigned long far TickCount(void);
-extern void far f_00F8_032A(void);
+extern void far DialogClearWait(void);
 extern int far WaitedEnough(long far *timer, int delay);
 extern int far win_Events(void);
 extern void far win_FlushEvents(void);
@@ -136,11 +136,11 @@ extern void _fastcall gr_JustifyStrInRect(int mode, struct Rect far *rect, char 
 extern int near g_3DE2;
 extern int far g_3DA0;
 extern void (far * near g_9134)(int x0, int y0, int x1, int y1, int color);
-extern void far f_1E57_0362(void);
+extern void far clip_Off(void);
 extern void far free(char far *p);
 extern void far db_PurgeObject(int object, int kind);
 
-void far o16_384C_01E1(void)
+void far AboutDialog(void)
 {
     long count;
     char far * far *list;
@@ -157,14 +157,14 @@ void far o16_384C_01E1(void)
 
     count = 0;
     win_Open(0x1f00);
-    list = f_075B_0242(0x6a4);
+    list = LoadStringAnt(0x6a4);
     for (n = 0; list[n] != 0; n++)
         ;
     for (;;) {
         timer = TickCount();
-        f_00F8_032A();
+        DialogClearWait();
         while (!WaitedEnough(&timer, 0x5a)) {
-            if (f_00F8_05F2() || win_Events()) {
+            if (DialogAbortOrCont() || win_Events()) {
                 if (count > 1)
                     goto out;
                 win_FlushEvents();
@@ -181,9 +181,9 @@ void far o16_384C_01E1(void)
         drawn = 0;
         while (line < n) {
             timer = TickCount();
-            f_00F8_032A();
+            DialogClearWait();
             while (!WaitedEnough(&timer, (line == 0 && pix == 1) ? 0x36 : 1)) {
-                if (f_00F8_05F2() || win_Events()) {
+                if (DialogAbortOrCont() || win_Events()) {
                     if (count > 3)
                         goto out;
                     win_FlushEvents();
@@ -218,7 +218,7 @@ void far o16_384C_01E1(void)
             f_24AB_02AD(0);
             drawn = 1;
         }
-        f_1E57_0362();
+        clip_Off();
         win_DrawObjectNum(0x1f02);
     }
 out:
@@ -247,8 +247,8 @@ void far ShowIntro(void)
     int i;
 
     win_Open(0x300);
-    f_00DF_00B1(0x2711, 0x7e);
-    f_00F8_02F7(0x28);
+    myBeginSong(0x2711, 0x7e);
+    DialogWaitInit(0x28);
     if (fd_50F6_10CC[0] != 0) {
         fd_50F6_3836 = f_171C_1A9E(0x28L, 1, "Malloc");
         fd_50F6_3938 = f_171C_1A9E(0x32L, 1, "Malloc");
@@ -273,7 +273,7 @@ void far ShowIntro(void)
         f_171C_1BBA(fd_50F6_3836);
     }
     while (win_IsWinOpen(0x300)) {
-        if (win_Events() || f_00F8_05F2())
+        if (win_Events() || DialogAbortOrCont())
             win_Close(0x300);
     }
     win_FlushEvents();

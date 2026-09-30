@@ -28,11 +28,11 @@ extern char near g_5A97;
 extern void far LoadMonoPats(void);
 extern void far ShowIntro(void);
 extern void far CustomerIDDialog(void);
-extern int far o15_384C_03C6(int a);
+extern int far NewGame(int a);
 extern void far o15_384C_0152(char far *message, int code);
 extern int far fd_50F6_0A9C;
 extern int far fd_50F6_0AA6;
-extern long far f_00F8_02BE(void);
+extern long far MacTickCount(void);
 extern int far fd_3D57_07CC;
 extern void far win_NoWindowsShouldBeLocked(void);
 extern void far f_0000_046F(void);
@@ -47,12 +47,12 @@ extern int _fastcall win_IsWinOpen(int win);
 extern int _fastcall win_IsWinInFront(int win);
 extern int far fd_50F6_04C0;
 extern void far o12_384C_100A(void);
-extern void far f_00F8_03A5(int a);
+extern void far MakeDMap(int a);
 extern int far WaitedEnough(long *stamp, int delay);
-extern int far fd_50F6_035C;
+extern int far YardMode;
 extern void far o13_384C_03F8(void);
 extern void far UpdateYard(void);
-extern void far f_0250_0E9D(void);
+extern void far UpdateEdit(void);
 extern void far f_0250_0ED2(void);
 extern void far f_00F8_01BE(void);
 
@@ -91,12 +91,12 @@ void main(int argc, char far * far *argv)
         LoadMonoPats();
     ShowIntro();
     CustomerIDDialog();
-    if (o15_384C_03C6(1) < 0)
+    if (NewGame(1) < 0)
         o15_384C_0152("SimAnt cancelled.", 0);
     fd_50F6_0A9C = 0;
     fd_50F6_0AA6 = 0;
     frames = 0;
-    f_00F8_02BE();
+    MacTickCount();
     fd_3D57_07CC = 1;
     for (;;) {
         win_NoWindowsShouldBeLocked();
@@ -104,7 +104,7 @@ void main(int argc, char far * far *argv)
         f_0000_046F();
         fd_50F6_383A++;
         f_15F8_0313();
-        i = f_00F8_02BE();
+        i = MacTickCount();
         if (fd_50F6_047E == 0 || (fd_50F6_0AA0 != 0 && fd_50F6_105E < 10)) {
             i += fd_3D57_07CE[fd_3D57_07CC];
             DoAntSim();
@@ -118,25 +118,25 @@ void main(int argc, char far * far *argv)
                         fd_50F6_0AA6 ^= 1;
                     }
                 } else {
-                    f_00F8_03A5(0);
+                    MakeDMap(0);
                     o12_384C_100A();
                     fd_50F6_0AA6 = 0;
                 }
             }
             if (win_IsWinOpen(0x1900)) {
-                if (WaitedEnough(&stamp, 0x48) || fd_50F6_035C <= 2)
+                if (WaitedEnough(&stamp, 0x48) || YardMode <= 2)
                     UpdateYard();
-                else if (fd_50F6_035C > 1)
+                else if (YardMode > 1)
                     o13_384C_03F8();
             }
             if (win_IsWinOpen(0)) {
-                f_0250_0E9D();
+                UpdateEdit();
                 f_0250_0ED2();
             }
             last = frames;
             do
                 f_00F8_01BE();
-            while (f_00F8_02BE() < i);
+            while (MacTickCount() < i);
         }
         f_00F8_01BE();
         fd_50F6_0A9C = (fd_50F6_0A9C + 1) & 0x3f;

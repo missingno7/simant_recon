@@ -15,13 +15,13 @@ struct Pt {
     int y;
 };
 
-extern int far fd_50F6_032E;
+extern int far MapPlane;
 extern int far fd_50F6_09FC[2];
 extern int far f_10F7_000E(int plane, int x, int y);
 void far DoTool(int x, int y);
 void far ExpAddAnt(int x, int y);
 void far ReDrawMapEdit(int flags);
-extern int far f_00F8_02AC(void);
+extern int far myButton(void);
 extern void far f_1FD2_04D0(struct Pt far *pt);
 extern int far fd_50F6_0A9C;
 extern int _fastcall win_IsWinInFront(int win);
@@ -32,7 +32,7 @@ extern int far fd_50F6_110C[2];
 extern int far fd_55B3_19BE;
 extern int far fd_50F6_0508[2];
 extern int far fd_55B3_19C0;
-extern int far fd_50F6_104C;
+extern int far CurExpTool;
 extern unsigned char far fd_50F6_106C;
 
 void far processExp(int x, int y, int shift)
@@ -42,20 +42,20 @@ void far processExp(int x, int y, int shift)
     int count;
     struct Pt pt;
 
-    if (fd_50F6_032E) {
+    if (MapPlane) {
         count = 0;
         fd_50F6_09FC[0] = x;
         fd_50F6_09FC[1] = y;
-        if (f_10F7_000E(fd_50F6_032E, x, y))
+        if (f_10F7_000E(MapPlane, x, y))
             DoTool(x, y);
         ReDrawMapEdit(count);
-        while (f_00F8_02AC() == 1) {
+        while (myButton() == 1) {
             f_1FD2_04D0(&pt);
             fd_50F6_0A9C++;
             if (win_IsWinInFront(0x100)) {
                 nx = (pt.x - fd_50F6_10D2[0]) / fd_50F6_3856;
                 ny = (pt.y - fd_50F6_10D2[1]) / fd_50F6_3858;
-                if (fd_50F6_032E > 1)
+                if (MapPlane > 1)
                     nx -= 32;
             } else {
                 nx = (pt.x - fd_50F6_110C[0]) / fd_55B3_19BE + fd_50F6_0508[0];
@@ -66,10 +66,10 @@ void far processExp(int x, int y, int shift)
                 fd_50F6_09FC[1] = y;
                 x = nx;
                 y = ny;
-                if (f_10F7_000E(fd_50F6_032E, x, y))
+                if (f_10F7_000E(MapPlane, x, y))
                     DoTool(x, y);
             }
-            if (fd_50F6_104C >= 5 && f_10F7_000E(fd_50F6_032E, nx, ny)) {
+            if (CurExpTool >= 5 && f_10F7_000E(MapPlane, nx, ny)) {
                 DoTool(nx, ny);
                 fd_50F6_106C ^= 1;
             }
@@ -89,13 +89,13 @@ void far ExpKillAnts(int x, int y);
 
 void far DoTool(int x, int y)
 {
-    switch (fd_50F6_104C) {
+    switch (CurExpTool) {
     case 0:
-        if (GetLife(fd_50F6_032E, x, y))
-            MagnifyMenu(x, y, fd_50F6_032E);
+        if (GetLife(MapPlane, x, y))
+            MagnifyMenu(x, y, MapPlane);
         break;
     case 1:
-        if (fd_50F6_032E == 1)
+        if (MapPlane == 1)
             DropWall(fd_50F6_09FC[0], fd_50F6_09FC[1], x, y);
         break;
     case 2:
@@ -116,33 +116,33 @@ void far DoTool(int x, int y)
     }
 }
 
-extern void far f_0250_0E9D(void);
+extern void far UpdateEdit(void);
 extern void far f_0250_0ED2(void);
 extern int _fastcall f_22BF_09B0(int win);
-extern void far f_00F8_03A5(int mode);
+extern void far MakeDMap(int mode);
 extern void far o12_384C_100A(void);
 
 void far ReDrawMapEdit(int flags)
 {
     if (win_IsWinInFront(0)) {
-        f_0250_0E9D();
+        UpdateEdit();
         f_0250_0ED2();
         if (!f_22BF_09B0(0x100))
             return;
         if (flags & 3)
             return;
-        f_00F8_03A5(1);
+        MakeDMap(1);
         o12_384C_100A();
         return;
     }
 
-    f_00F8_03A5(1);
+    MakeDMap(1);
     o12_384C_100A();
     if (!f_22BF_09B0(0))
         return;
     if (flags & 3)
         return;
-    f_0250_0E9D();
+    UpdateEdit();
     f_0250_0ED2();
 }
 
@@ -150,7 +150,7 @@ extern int far f_10F7_2867(int x, int y);
 extern unsigned char far MapA[128][64];
 extern int far SRand1(int range);
 void far ConnectAll(int x, int y);
-extern char far fd_3D57_07B6[];
+extern char far ExpSubStates[];
 extern unsigned char far LifeA[128][64];
 extern void far myBeginSound(int sound, int a, int b);
 extern int far GetDir(int x1, int y1, int x2, int y2);
@@ -171,7 +171,7 @@ void far DropWall(int fromX, int fromY, int tx, int ty)
             if (MapA[x][y] > 0x50 && MapA[x][y] < 0x68)
                 MapA[x][y] = SRand1(16);
             ConnectAll(x, y);
-        } else if (fd_3D57_07B6[1] == 0) {
+        } else if (ExpSubStates[1] == 0) {
             if (MapA[x][y] < 0x50 && LifeA[x][y] == 0)
                 MapA[x][y] = 0x60;
             ConnectAll(x, y);
@@ -193,7 +193,7 @@ void far DropWall(int fromX, int fromY, int tx, int ty)
 
 extern int far DigMyNewHole(int x, int y);
 extern void far * far * far fd_50F6_034C;
-extern void far f_15D9_009C(void far *msg, long ticks, int mode);
+extern void far EditMessage(void far *msg, long ticks, int mode);
 extern int far IsItDigable(int plane, int x, int y);
 extern void far DigTileB(int x, int y);
 extern void far MakeNewHoleB(int x);
@@ -214,20 +214,20 @@ void far ExpDig(int fromX, int fromY, int tx, int ty)
     int dir;
 
 
-    fill = fd_3D57_07B6[2];
+    fill = ExpSubStates[2];
     if (*(unsigned char far *)0x417L & 8)
         fill ^= 1;
     x = fromX;
     y = fromY;
     do {
         if (fill == 0) {
-            switch (fd_50F6_032E) {
+            switch (MapPlane) {
             case 1:
                 if (DigMyNewHole(x, y)) {
                     myBeginSound(0x13, 0, 0x7e);
                 } else {
                     myBeginSound(1, 0, 0x7e);
-                    f_15D9_009C(fd_50F6_034C[22], 120L, 1);
+                    EditMessage(fd_50F6_034C[22], 120L, 1);
                 }
                 break;
             case 2:
@@ -248,10 +248,10 @@ void far ExpDig(int fromX, int fromY, int tx, int ty)
                 break;
             }
         } else {
-            switch (fd_50F6_032E) {
+            switch (MapPlane) {
             case 1:
                 myBeginSound(1, 0, 0x7e);
-                f_15D9_009C(fd_50F6_034C[21], 180L, 1);
+                EditMessage(fd_50F6_034C[21], 180L, 1);
                 break;
             case 2:
                 if (IsItDigable(2, x, y) || y == 0)
@@ -325,10 +325,10 @@ void far ExpAddAnt(int x, int y)
     int amt;
 
     amt = SRand1(8) + 16;
-    if (fd_3D57_07B6[3] == 1)
+    if (ExpSubStates[3] == 1)
         amt += 0x80;
 
-    switch (fd_50F6_032E) {
+    switch (MapPlane) {
     case 1:
         if (IsClearTile(1, x, y))
             AddAntToAList(x, y, amt, 2, 0);
@@ -368,7 +368,7 @@ void far ExpAddFood(int x, int y)
     int fx;
     int fy;
 
-    if (fd_3D57_07B6[4] == 0) {
+    if (ExpSubStates[4] == 0) {
         if (IncFoodHere(x, y))
             myBeginSound(0x1d, 0, 0x7e);
     } else {
@@ -376,7 +376,7 @@ void far ExpAddFood(int x, int y)
         for (i = 0; i < 20; i++) {
             fx = SRand1(9) + x - 4;
             fy = SRand1(9) + y - 4;
-            if (f_10F7_000E(fd_50F6_032E, fx, fy))
+            if (f_10F7_000E(MapPlane, fx, fy))
                 IncFoodHere(fx, fy);
         }
     }
@@ -392,7 +392,7 @@ void far ExpIncSmell(int x, int y)
     int sy;
     int v;
 
-    if (fd_50F6_032E == 1) {
+    if (MapPlane == 1) {
         sx = x >> 1;
         sy = y >> 1;
         v = GetSM(sx, sy);
@@ -430,7 +430,7 @@ void far ExpKillAnts(int x, int y)
     int ky;
     int v;
 
-    n = fd_3D57_07B6[6] == 0 ? 8 : 1;
+    n = ExpSubStates[6] == 0 ? 8 : 1;
     for (i = 0; i < 8; i++) {
         if (n == 1) {
             kx = x;
@@ -441,8 +441,8 @@ void far ExpKillAnts(int x, int y)
             ky = SRand1(9) + y - 4;
             myBeginSound(9, SRand1(1000) + 0x278f, 0x7e);
         }
-        if (f_10F7_000E(fd_50F6_032E, kx, ky)) {
-            switch (fd_50F6_032E) {
+        if (f_10F7_000E(MapPlane, kx, ky)) {
+            switch (MapPlane) {
             case 1:
                 if (LifeA[kx][ky]) {
                     Tindex = FindInAList(kx, ky);
@@ -497,21 +497,21 @@ int far IncFoodHere(int x, int y)
     int base;
     int v;
 
-    if (fd_50F6_032E == 1)
+    if (MapPlane == 1)
         base = 0x48;
     else
         base = 0x10;
-    v = GetMap(fd_50F6_032E, x, y);
+    v = GetMap(MapPlane, x, y);
     if (*(unsigned char far *)0x417L & 8) {
         if (base > v)
             return 0;
         if (base + 3 < v)
             return 0;
         v = SRand1(8);
-        if (fd_50F6_032E == 1)
+        if (MapPlane == 1)
             if (fd_50F6_1040 > 0)
                 fd_50F6_1040--;
-        else if (fd_50F6_032E == 2)
+        else if (MapPlane == 2)
             if (FoodB > 0)
                 FoodB--;
         else
@@ -524,14 +524,14 @@ int far IncFoodHere(int x, int y)
             if (v < 0x18)
                 v = base;
         } else v++;
-        if (fd_50F6_032E == 1)
+        if (MapPlane == 1)
             fd_50F6_1040++;
-        else if (fd_50F6_032E == 2)
+        else if (MapPlane == 2)
             FoodB++;
         else
             FoodR++;
     }
-    SetMap(fd_50F6_032E, x, y, v);
+    SetMap(MapPlane, x, y, v);
     return 1;
 }
 
@@ -687,7 +687,7 @@ int far GetSM(int x, int y)
 
     if (!IsValidSLoc(x, y))
         return -1;
-    switch (fd_3D57_07B6[5]) {
+    switch (ExpSubStates[5]) {
     case 0:
         v = PherMapBN[x][y];
         break;
@@ -712,7 +712,7 @@ void far SetSM(int x, int y, int val)
     if (IsValidSLoc(x, y)) {
         if (val > 255)
             val = 255;
-        switch (fd_3D57_07B6[5]) {
+        switch (ExpSubStates[5]) {
         case 0:
             PherMapBN[x][y] = val;
             break;

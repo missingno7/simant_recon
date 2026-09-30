@@ -122,7 +122,7 @@ extern int far fd_3D57_02C2;
 int far o15_384C_0239(int which);
 extern int far o09_35F5_0188(int flag);
 
-int far o15_384C_01EE(void)
+int far MenuQuit(void)
 {
     int r;
 
@@ -220,22 +220,22 @@ done:
 extern void far OpenCasteWindow(void);
 extern void far OpenModeWindow(void);
 extern void far SetEditWinTitle(char far *title);
-extern int far fd_50F6_032E;
+extern int far MapPlane;
 extern void far f_015B_053C(int plane);
 extern int _fastcall win_IsWinOpen(int win);
-extern void far f_00F8_047F(void);
-extern void far f_00F8_00D8(void);
+extern void far YardToMap(void);
+extern void far SetMapTitle(void);
 extern void far OpenEditWindow(void);
 
-void far o15_384C_037F(void)
+void far SetDefaultWindows(void)
 {
     OpenCasteWindow();
     OpenModeWindow();
     SetEditWinTitle(0L);
-    f_015B_053C(fd_50F6_032E);
+    f_015B_053C(MapPlane);
     if (!win_IsWinOpen(0x100))
-        f_00F8_047F();
-    f_00F8_00D8();
+        YardToMap();
+    SetMapTitle();
     OpenEditWindow();
 }
 
@@ -257,10 +257,10 @@ extern int far f_22BF_0A65(void);
 extern void far o26_39C7_0000(void);
 extern int far MeLocY;
 extern int far MeLocX;
-extern void far f_0250_0FC4(int x, int y);
-extern void far f_0250_0E9D(void);
+extern void far CenterEdit(int x, int y);
+extern void far UpdateEdit(void);
 
-int far o15_384C_03C6(int flag)
+int far NewGame(int flag)
 {
     int r;
 
@@ -311,12 +311,12 @@ int far o15_384C_03C6(int flag)
         }
         break;
     }
-    o15_384C_037F();
+    SetDefaultWindows();
     f_015B_053C(MePlane);
     if (r == 0 && !f_22BF_0A65())
         o26_39C7_0000();
-    f_0250_0FC4(MeLocX, MeLocY);
-    f_0250_0E9D();
+    CenterEdit(MeLocX, MeLocY);
+    UpdateEdit();
     fd_3D57_02C2 = 0;
     return r;
 }

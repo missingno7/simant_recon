@@ -34,8 +34,8 @@ int g_2D3A = 0;
 extern void far win_NoWindowsShouldBeLocked(void);
 extern int far LoadGame(char far *name);
 extern int far fd_50F6_0EAC;
-extern int far o15_384C_03C6(int a);
-extern void far o15_384C_01EE(void);
+extern int far NewGame(int a);
+extern void far MenuQuit(void);
 extern int far o09_35F5_0188(int useLast);
 extern int far win_Events(void);
 extern int _fastcall win_GetEvent(struct Event far *ev);
@@ -70,8 +70,8 @@ int far o19_384C_0000(void)
     if (fd_55B3_2CBC) {
         switch (fd_55B3_2CBC) {
         case 4:
-            if (LoadGame(0L) == 0 && fd_50F6_0EAC == -1 && o15_384C_03C6(1) < 0)
-                o15_384C_01EE();
+            if (LoadGame(0L) == 0 && fd_50F6_0EAC == -1 && NewGame(1) < 0)
+                MenuQuit();
             break;
         case 5:
             o09_35F5_0188(1);
@@ -80,7 +80,7 @@ int far o19_384C_0000(void)
             o09_35F5_0188(0);
             break;
         case 8:
-            o15_384C_01EE();
+            MenuQuit();
             break;
         }
         fd_55B3_2CBC = 0;
@@ -218,7 +218,7 @@ void far o19_384C_0320(void)
     f_1C62_00C0(buf);
 }
 
-extern void far f_00F8_047F(void);
+extern void far YardToMap(void);
 extern void far YellowCommand(int cmd);
 extern void far DoTab(void);
 
@@ -230,7 +230,7 @@ void far o19_384C_0383(struct Event far *ev)
     if (ev->message & 4) {
         switch (ev->code) {
         case 0xfa05:
-            f_00F8_047F();
+            YardToMap();
             return;
         case 0xfa06:
             cmd = 0xfd22;

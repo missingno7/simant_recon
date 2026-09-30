@@ -26,9 +26,9 @@ extern void far myBeginSound(int sound, int a, int b);
 extern void far f_00DF_00E0(int a);
 extern void far SetMyHealth(int health);
 extern void far o14_384C_0B6A(int a, int b, int c);
-extern void far f_00F8_059C(void);
-extern void far f_00F8_02DF(int a);
-extern void far f_00F8_0395(void);
+extern void far UpdateEverything(void);
+extern void far SetSimCursor(int a);
+extern void far InvalQueenStorageDisp(void);
 extern void far MakeNewHoleB(int x);
 extern void far MakeNewHoleR(int x);
 extern void far MakeBlkQueen(int x, int y, int dir);
@@ -38,7 +38,7 @@ extern int far SRand2(void);
 extern int far SRand8(void);
 extern void far PlaceEggB(int x, int y, int type);
 extern void far PlaceEggR(int x, int y, int type);
-extern void far o16_384C_0000(void);
+extern void far DrawSimPayoff(void);
 
 void far CheatKeys(int key)
 {
@@ -83,10 +83,10 @@ void far CheatKeys(int key)
         break;
     case 4:
         o14_384C_0B6A(0, 0x2726, 0);
-        f_00F8_059C();
-        f_00F8_02DF(6);
+        UpdateEverything();
+        SetSimCursor(6);
         f_00DF_00E0(0);
-        f_00F8_02DF(0);
+        SetSimCursor(0);
         o14_384C_0B6A(0, 0x2728, 0);
         break;
     case 5:
@@ -126,7 +126,7 @@ void far CheatKeys(int key)
         break;
     case 15:
         fd_50F6_07C8 += 10;
-        f_00F8_0395();
+        InvalQueenStorageDisp();
         myBeginSound(0x29, 0, 0x7e);
         break;
     case 16:
@@ -165,7 +165,7 @@ void far CheatKeys(int key)
             }
         break;
     case 20:
-        o16_384C_0000();
+        DrawSimPayoff();
         break;
     case 21:
         fd_3D57_0C16 = !fd_3D57_0C16;

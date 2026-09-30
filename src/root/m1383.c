@@ -34,9 +34,9 @@ extern int far TilesDugR;
 extern int far RpopT;
 extern int far SRand32(void);
 extern int far SRand128(void);
-extern void far f_00DF_00B1(int id, int arg);
+extern void far myBeginSong(int id, int arg);
 extern void far * far * far AdviceStrs;
-extern void far f_15D9_009C(void far *, long, int);
+extern void far EditMessage(void far *, long, int);
 extern unsigned char far AlistT[];
 extern unsigned char far AlistM[];
 extern unsigned char far AlistS[];
@@ -237,8 +237,8 @@ int far GstrR(void)
 void far StartAttack(void)
 {
     fd_50F6_0504 = SRand1(100) + 30;
-    f_00DF_00B1(0x2b0a, 0x3f);
-    f_15D9_009C(AdviceStrs[5], 120L, 0);
+    myBeginSong(0x2b0a, 0x3f);
+    EditMessage(AdviceStrs[5], 120L, 0);
 }
 
 void far ForceModeA(int index, int caste, int mode)

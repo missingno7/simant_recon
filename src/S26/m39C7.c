@@ -208,15 +208,15 @@ void _fastcall o26_39C7_022F(int win, int mode, struct Rect far *r)
 extern void far f_1E57_0351(void);
 extern void _fastcall f_2505_0382(struct Pt far *center, struct Rect far *rect);
 extern void far f_1B73_09E9(int x, int y);
-extern void far f_1CE2_0410(struct Rect far *r, int width);
-extern void far f_1FD2_057F(void);
-extern int far f_1FD2_0598(void);
+extern void far GRectInvOutline(struct Rect far *r, int width);
+extern void far ButtonHeldInit(void);
+extern int far ButtonHeld(void);
 extern int near g_9122;
 extern int near g_9124;
 extern void far f_1FD2_04D0(struct Pt far *pt);
 extern struct Rect far win_offsets[];
 extern void _fastcall f_21FA_0B4B(struct Rect far *rect);
-extern int far f_1FD2_0542(void);
+extern int far StillDown(void);
 extern void far win_FlushEvents(void);
 
 void _fastcall o26_39C7_040F(struct Event far *ev)
@@ -256,18 +256,18 @@ void _fastcall o26_39C7_040F(struct Event far *ev)
         start.y = ev->v;
     }
     r = *wr;
-    f_1CE2_0410(&r, 2);
+    GRectInvOutline(&r, 2);
     pt = start;
-    f_1FD2_057F();
-    while (f_1FD2_0598()) {
+    ButtonHeldInit();
+    while (ButtonHeld()) {
         if (pt.x != g_9122 || pt.y != g_9124) {
-            f_1CE2_0410(&r, 2);
+            GRectInvOutline(&r, 2);
             f_1FD2_04D0(&pt);
             f_22BF_0B5B(&r, wr, pt.x - start.x, pt.y - start.y, pt.x - start.x, pt.y - start.y);
-            f_1CE2_0410(&r, 2);
+            GRectInvOutline(&r, 2);
         }
     }
-    f_1CE2_0410(&r, 2);
+    GRectInvOutline(&r, 2);
     o26_39C7_022F(win, 0, &r);
     o = w->objs[0];
     o->x += r.left - orig.left;
@@ -282,7 +282,7 @@ void _fastcall o26_39C7_040F(struct Event far *ev)
     f_21FA_0B4B(&orig);
     f_2505_08EA(win);
     f_2505_0831(win);
-    while (f_1FD2_0542())
+    while (StillDown())
         ;
     win_FlushEvents();
 }
@@ -328,22 +328,22 @@ void _fastcall o26_39C7_0671(struct Event far *ev)
         start.y = ev->v;
     }
     r = orig;
-    f_1CE2_0410(&r, 2);
+    GRectInvOutline(&r, 2);
     pt = start;
-    f_1FD2_057F();
-    while (f_1FD2_0598()) {
+    ButtonHeldInit();
+    while (ButtonHeld()) {
         if (pt.x != g_9122 || pt.y != g_9124) {
-            f_1CE2_0410(&r, 2);
+            GRectInvOutline(&r, 2);
             f_1FD2_04D0(&pt);
             f_22BF_0B5B(&r, &orig, 0, 0, pt.x - start.x, pt.y - start.y);
             if (r.right - r.left < min.x)
                 r.right = min.x + r.left;
             if (r.bottom - r.top < min.y)
                 r.bottom = min.y + r.top;
-            f_1CE2_0410(&r, 2);
+            GRectInvOutline(&r, 2);
         }
     }
-    f_1CE2_0410(&r, 2);
+    GRectInvOutline(&r, 2);
     o26_39C7_022F(win, 1, &r);
     o = w->objs[0];
     o->width += r.right - orig.right;

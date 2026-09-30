@@ -39,7 +39,7 @@ extern int far fd_3D57_07A8[];
 extern void far f_0250_01E7(void);
 extern void far f_284A_0013(int song);
 
-void far f_00DF_00B1(int song)
+void far myBeginSong(int song)
 {
     if (g_1926 && fd_3D57_07A8[1]) {
         f_0250_01E7();
@@ -59,19 +59,19 @@ void far myBeginSound(int a, int b, int c)
         f_295C_0367(a);
 }
 
-void far f_00DF_0112(int a, int b, int c)
+void far myBeginSoundReverse(int a, int b, int c)
 {
     myBeginSound(a, b, c);
 }
 
-int far f_00DF_012D(void)
+int far mySoundIsDone(void)
 {
     return 1;
 }
 
 extern int far f_284A_0004(void);
 
-int far f_00DF_0138(void)
+int far mySongIsDone(void)
 {
     if (g_1926 && fd_3D57_07A8[1])
         return f_284A_0004();

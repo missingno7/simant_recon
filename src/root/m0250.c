@@ -13,7 +13,7 @@ struct Event {
 
 typedef char far * far *Handle;
 
-extern int far f_00F8_03AD(int plane, int x, int y);
+extern int far TileIsVisible(int plane, int x, int y);
 extern int far fd_50F6_10E0;
 extern int far fd_50F6_10DE;
 extern int far fd_50F6_15C4[30][40];
@@ -34,7 +34,7 @@ void far ZapEuMapAt(int plane, int x, int y)
     int h;
     int v;
 
-    if (f_00F8_03AD(plane, x, y) == 1) {
+    if (TileIsVisible(plane, x, y) == 1) {
         h = x;
         if (h >= 0 && h < fd_50F6_10E0) {
             v = y;
@@ -189,7 +189,7 @@ extern char far * far fd_55B3_360E;
 extern void far f_195A_010D(int handle);
 extern Handle far f_171C_1BBA(Handle h);
 
-void far f_0250_03B6(void)
+void far LoadTiles(void)
 {
     int i;
     unsigned n;
@@ -251,13 +251,13 @@ void far f_0250_05CB(void)
     _fmemset(fd_50F6_15C4, -1, 0x960);
 }
 
-extern int far fd_50F6_032E;
+extern int far MapPlane;
 
 void far f_0250_05EB(void)
 {
     if (g_19D0) {
         f_195A_00F8(g_19D0);
-        if (fd_50F6_032E < 2)
+        if (MapPlane < 2)
             f_195A_0122(g_19D0, 4, g_19D2);
         else
             f_195A_0122(g_19D0, 4, g_19E2);
@@ -445,14 +445,14 @@ extern void far EditToolsMenu(void);
 extern void far f_015B_053C(int plane);
 extern void far f_015B_06A2(void);
 extern void far f_015B_06F5(void);
-extern void far f_015B_073E(void);
-extern void far f_015B_075F(void);
+extern void far GotoBQueen(void);
+extern void far GotoRQueen(void);
 extern int far fd_50F6_047E;
-extern void far o11_35F5_009E(int pause);
+extern void far SetPause(int pause);
 extern void far o05_35F5_0000(void);
 extern void far o05_35F5_0684(struct Event far *event);
 extern void far o05_35F5_0642(struct Event far *event);
-extern void far f_1E57_0362(void);
+extern void far clip_Off(void);
 
 void far ProcEditEvent(struct Event far *event)
 {
@@ -487,13 +487,13 @@ void far ProcEditEvent(struct Event far *event)
         f_015B_06F5();
         break;
     case 13:
-        f_015B_073E();
+        GotoBQueen();
         break;
     case 14:
-        f_015B_075F();
+        GotoRQueen();
         break;
     case 15:
-        o11_35F5_009E(fd_50F6_047E == 0);
+        SetPause(fd_50F6_047E == 0);
         break;
     case 16:
         o05_35F5_0000();
@@ -505,7 +505,7 @@ void far ProcEditEvent(struct Event far *event)
         o05_35F5_0642(event);
         break;
     }
-    f_1E57_0362();
+    clip_Off();
 }
 
 int far f_0250_0D10(int a, int b);
@@ -522,9 +522,9 @@ typedef struct {
 
 extern Pnt far fd_50F6_0508;
 void far f_0250_0F2C(void);
-void far f_0250_0E9D(void);
+void far UpdateEdit(void);
 void far f_0250_0F2C(void);
-void far f_0250_0E9D(void);
+void far UpdateEdit(void);
 
 struct Rect {
     int left;
@@ -575,7 +575,7 @@ int far f_0250_0D10(int dx, int dy)
             }
         }
         f_0250_0F2C();
-        f_0250_0E9D();
+        UpdateEdit();
         return 1;
     } else {
         fraction = ((unsigned long)yDistance << 16) / xDistance;
@@ -588,7 +588,7 @@ int far f_0250_0D10(int dx, int dy)
             }
         }
         f_0250_0F2C();
-        f_0250_0E9D();
+        UpdateEdit();
         return 1;
     }
 }
@@ -610,15 +610,15 @@ void far OpenEditWindow(void)
     f_20E8_04B6(0);
 }
 
-void far f_0250_0E81(void)
+void far ForceUpdateEdit(void)
 {
     f_0250_05CB();
-    f_0250_0E9D();
+    UpdateEdit();
 }
 
-void far f_0250_0E91(void)
+void far DoEditUpdateDraw(void)
 {
-    f_0250_0E81();
+    ForceUpdateEdit();
 }
 
 extern int _fastcall f_22BF_09B0(int win);
@@ -627,19 +627,19 @@ void far DrawEditGraphs(void);
 void far f_0250_13A6(void);
 void far DrawEditGraphs(void);
 
-void far f_0250_0E9D(void)
+void far UpdateEdit(void)
 {
     if (f_22BF_09B0(0)) {
         clip_SetWin(0);
         f_0250_13A6();
         DrawEditGraphs();
-        f_1E57_0362();
+        clip_Off();
     }
 }
 
 void far f_0250_0EC6(void)
 {
-    f_0250_0E9D();
+    UpdateEdit();
 }
 
 void far f_0250_0ED2(void)
@@ -647,7 +647,7 @@ void far f_0250_0ED2(void)
 }
 
 extern int far fd_50F6_0EAC;
-extern int far fd_50F6_104C;
+extern int far CurExpTool;
 extern void _fastcall win_SetColorFromObjNum(int obj);
 extern void _fastcall win_DrawBitMapAtObjNum(int obj, int id);
 
@@ -660,7 +660,7 @@ void far f_0250_0EDA(int flags)
         f_0250_13A6();
         f_0250_0E15();
         if (fd_50F6_0EAC == 3)
-            id = fd_50F6_104C + 0x13ec;
+            id = CurExpTool + 0x13ec;
         else
             id = 0x13f3;
         win_SetColorFromObjNum(7);
@@ -674,7 +674,7 @@ void far f_0250_0F2C(void)
     int ylimit;
 
     ylimit = 0x40;
-    switch (fd_50F6_032E) {
+    switch (MapPlane) {
     case 0:
     case 1:
         limit = 0x80;
@@ -692,11 +692,11 @@ void far f_0250_0F2C(void)
         fd_50F6_0508.y = ylimit - fd_50F6_10DE;
 }
 
-void far f_0250_0FC4(int x, int y)
+void far CenterEdit(int x, int y)
 {
     int width;
 
-    switch (fd_50F6_032E) {
+    switch (MapPlane) {
     case 0:
     case 1:
         width = 0x80;
@@ -744,7 +744,7 @@ void far f_0250_1018(int x, int y)
     }
     g_94E4 = 0;
     g_9126 = 0;
-    switch (fd_50F6_032E) {
+    switch (MapPlane) {
     case 0:
     case 1:
         mx &= 0x7f;
@@ -915,7 +915,7 @@ void far f_0250_13A6(void)
     if (fd_50F6_37D2 != 500)
         DrawSpider();
     DrawBalloons();
-    f_0250_0643(fd_50F6_032E / 2);
+    f_0250_0643(MapPlane / 2);
     py = fd_50F6_110C.top;
     for (y = 0; y < fd_50F6_10DE; y++, py += g_19C0) {
         px = fd_50F6_110C.left;
@@ -1058,7 +1058,7 @@ void far PreDrawSpider(void)
         sx = sx * 3 / 4;
         sy = sy * 3 / 4;
     }
-    if (fd_50F6_032E != 1)
+    if (MapPlane != 1)
         return;
     if (px > sx)
         return;
@@ -1140,7 +1140,7 @@ void far DrawSpider(void)
     fd_50F6_37D6.bottom = top + fd_50F6_1F26.y;
     fd_50F6_37D6.left = left;
     fd_50F6_37D6.right = left + fd_50F6_1F26.x;
-    f_0250_0643(fd_50F6_032E / 2);
+    f_0250_0643(MapPlane / 2);
     w = 2;
     switch (fd_50F6_1102) {
     case 2:
@@ -1641,7 +1641,7 @@ void far f_0250_41CA(void)
  * EditColumns; this compiles to load EditColumns then add the [bp-2] CSE temp. */
 int far BalloonIsVisible(int plane, int x, int y)
 {
-    if (plane != fd_50F6_032E)
+    if (plane != MapPlane)
         return 0;
     if (x < fd_50F6_0508.x || x >= fd_50F6_0508.x + fd_50F6_10E0)
         return 0;
@@ -1988,7 +1988,7 @@ void far DrawBalloons(void)
         balloonRect.top = g_19C0 * balTileRect.top + fd_50F6_110C.top;
         balloonRect.bottom = balloonRect.top + ((int far *)bufp)[1];
         balloonRect.right = balloonRect.left + ((int far *)bufp)[0];
-        f_0250_0643(fd_50F6_032E / 2);
+        f_0250_0643(MapPlane / 2);
         saved = i;
         for (row = 0, ty = balTileRect.top; row < ht; row++, ty++, dst += skip) {
             idx = ty * 40 + balTileRect.left;

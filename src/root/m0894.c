@@ -109,7 +109,7 @@ extern void far AddFood(int count, int sound);
 extern void far f_0DEF_006B(int index);
 extern int far f_0EC1_0291(int x, int y);
 extern void far f_0250_43F2(int x, int y, int a);
-extern void far f_00F8_0395(void);
+extern void far InvalQueenStorageDisp(void);
 extern int far f_1383_0E89(int x, int y, int dir);
 extern void far f_0BE8_0798(int x, int y);
 extern void far f_1496_0404(int x, int y, int level);
@@ -486,7 +486,7 @@ void far DoRepoFly(int index)
                 if (SRand16() == 0) {
                     if (red == 0) {
                         fd_50F6_07C8++;
-                        f_00F8_0395();
+                        InvalQueenStorageDisp();
                     } else
                         fd_50F6_0850++;
                 }

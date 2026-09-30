@@ -132,7 +132,7 @@ struct Rect far * far f_1CE2_039B(struct Rect far *r)
     return &g_8CCC;
 }
 
-void far f_1CE2_0410(struct Rect far *r, int width)
+void far GRectInvOutline(struct Rect far *r, int width)
 {
     f_1CE2_032B(r->left, r->top, r->right, r->bottom, width);
 }

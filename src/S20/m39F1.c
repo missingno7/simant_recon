@@ -51,8 +51,8 @@ extern long far TickCount(void);
 extern void far f_1B28_0129(int a);
 extern int far o17_384C_0039(int a);
 extern void far Punt(char far *fmt, ...);
-extern void far o11_35F5_0000(void);
-extern void far f_0250_03B6(void);
+extern void far SetMenuEntries(void);
+extern void far LoadTiles(void);
 extern void far f_00BA_01B6(void);
 extern void far f_00BA_0002(void);
 extern int far WaitedEnough(long far *timer, int delay);
@@ -170,11 +170,11 @@ void far IBMInitStuff(int argc, char far * far *argv)
     if (g_3DB2 != 320 || !o17_384C_0039(1))
         if (!o17_384C_0039(0))
             Punt("Cannot load menu");
-    o11_35F5_0000();
-    f_0250_03B6();
+    SetMenuEntries();
+    LoadTiles();
     f_00BA_01B6();
     f_00BA_0002();
-    o11_35F5_0000();
+    SetMenuEntries();
     while (!WaitedEnough(&t, 0x48))
         ;
     f_1FD2_05FD();

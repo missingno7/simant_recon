@@ -3187,6 +3187,896 @@
     "DecEatR: DOS 0226=0350>>5 / Win16 DecEatR EatCountR=RpopT>>5"
    ],
    "reviewer": "worker names3, supervisor spot-checked 2026-09-30"
+  },
+  "S11:35F5:0000": {
+   "win16": "_SetMenuEntries",
+   "confidence": "CONFIRMED",
+   "reviewed": "2026-09-30",
+   "evidence": [
+    "same body: loop items 0x43..0x46 -> SetMenuItemState(item, 0x10/0x20) keyed on a tool word, then the pause item 0x41 gets Pause/Unpause text (DOS ' Pause'/' Unpause', Win16 resources 0x900/0x911) keyed on GamePaused, then loop 0x31..0x36 over an int array (==1 ? 0x10 : 0x20)",
+    "call order SetMenuItemState, SetMenuOptionText, SetMenuItemState identical (Win16 adds UpdateUserButtons)",
+    "callers LoadGame and IBMInitStuff on both sides; tail-called by SetPause in DOS where Win16 SetPause/PauseGame carry the inlined SetMenuEntries body",
+    "first member of S11 frame 35F5 as SetMenuEntries is first of Win16 unit 4C24 (SetMenuEntries, PauseGame, SetPause)"
+   ],
+   "reviewer": "worker names4, supervisor spot-checked 2026-09-30"
+  },
+  "S11:35F5:0088": {
+   "win16": "_PauseGame",
+   "confidence": "CONFIRMED",
+   "reviewed": "2026-09-30",
+   "evidence": [
+    "decidable although the two Win16 bodies are identical: DOS 0088 is a wrapper PauseGame(x){SetPause(x);}, Win16 PauseGame is the SetPause body inlined",
+    "caller set LoadGame, EndTargetMode, EndLifeTransferMode (+ f_10F7_0B51/0BB1) = Win16 PauseGame callers LoadGame, EndTargetMode, EndLifeTransferMode (+ TargetAnt, StartLifeTransfer, ExchangeLives); none of these call Win16 SetPause",
+    "LoadGame call order ... EditMessage, SetMenuEntries, PauseGame, DoLoadInitializations, StopSong: DOS calls 0088 at the Win16 PauseGame position",
+    "unit order SetMenuEntries, PauseGame, SetPause = DOS 0000, 0088, 009E"
+   ],
+   "reviewer": "worker names4, supervisor spot-checked 2026-09-30"
+  },
+  "S11:35F5:009E": {
+   "win16": "_SetPause",
+   "confidence": "CONFIRMED",
+   "reviewed": "2026-09-30",
+   "evidence": [
+    "body = Win16 SetPause: if !p {mode 10 -> EndLifeTransferMode; mode 11 -> EndTargetMode}; GamePaused=p; EditMessage(AdviceStrs[..], -2L, 1) by mode; clip_SetWin(0); win_SetObjSelectedState(0xF, p); clip_Off; SetMenuEntries",
+    "ProcEditEvent call order GotoSpider, GotoBQueen, GotoRQueen, SetPause, EditScentMenu on both sides: DOS calls 009E at the SetPause position",
+    "ProcMenu: DOS calls 009E after StopSong where Win16 ProcMenu has the inlined SetPause body"
+   ],
+   "reviewer": "worker names4, supervisor spot-checked 2026-09-30"
+  },
+  "root:15D9:009C": {
+   "win16": "_EditMessage",
+   "confidence": "CONFIRMED",
+   "reviewed": "2026-09-30",
+   "evidence": [
+    "same signature (long message, long duration, int mode) and body: mode==0 && (OptionStates[4]==0 || editMessage) guard; duration>=0 ? TickCount()+duration*3/2 : 0x7FFFFFFF for two message/remove-time slots",
+    "10 shared named callers: DoAntMoveY, EatMyFood, ExpDig, Feedback, LoadGame, PlaceQueenInYard, ProcYardEvent, SetDefaultWindPrompt, SpecialXfer, StartAttack",
+    "DOS sets redraw flags where Win16 calls DrawRibbonMessage/DrawAnimYardMessage directly (platform difference)"
+   ],
+   "reviewer": "worker names4, supervisor spot-checked 2026-09-30"
+  },
+  "root:0244:0000": {
+   "win16": "_BlockMove",
+   "confidence": "CONFIRMED",
+   "reviewed": "2026-09-30",
+   "evidence": [
+    "Mac-style BlockMove(src, dst, count) -> _fmemcpy(dst, src, count): identical argument swap",
+    "sole caller RemoveFromAList on both sides"
+   ],
+   "reviewer": "worker names4, supervisor spot-checked 2026-09-30"
+  },
+  "root:015B:01B8": {
+   "win16": "_SetEditMode",
+   "confidence": "CONFIRMED",
+   "reviewed": "2026-09-30",
+   "evidence": [
+    "body: store the int argument into one global (Win16 CurEditMode, PACK 0x9FE0)",
+    "call position: DOS SetMapPlane calls 01B8(table[MapPlane]) between InvalEuMap and SetMapPlaneLocation; Win16 SetMapPlane stores table[MapPlane] into CurEditMode at the same position (inlined SetEditMode; Win16 SetEditMode has no callers)",
+    "unit order AddSomeAnts, KillSomeAnts, SubtractFood, SetEditMode, SetMapModeAnt = DOS 000E, 006F, 0157, 01B8, 01D1"
+   ],
+   "reviewer": "worker names4, supervisor spot-checked 2026-09-30"
+  },
+  "root:015B:073E": {
+   "win16": "_GotoBQueen",
+   "confidence": "HIGH",
+   "reviewed": "2026-09-30",
+   "evidence": [
+    "ProcEditEvent call order SetMapPlane, GotoMyAnt, GotoSpider, GotoBQueen, GotoRQueen, SetPause, EditScentMenu; DOS: ..., GotoSpider, 073E, 075F, SetPause(009E), EditScentMenu",
+    "unit order after GotoSpider and before XferPatch/PlaceQueenInYard on both sides",
+    "B/R assignment: 073E -> GotoMapPoint(plane 2 = black nest), 075F -> plane 3 = red nest; B precedes R in both builds",
+    "not CONFIRMED: bodies differ (DOS jumps to a fixed nest point, Win16 GotoBQueen follows the black queen via GotoQueen(0x60)); DOS has no GotoQueen"
+   ],
+   "reviewer": "worker names4, supervisor spot-checked 2026-09-30"
+  },
+  "root:015B:075F": {
+   "win16": "_GotoRQueen",
+   "confidence": "HIGH",
+   "reviewed": "2026-09-30",
+   "evidence": [
+    "second of the pair in ProcEditEvent (just before SetPause) as Win16 GotoRQueen",
+    "unit order as GotoBQueen; GotoMapPoint(plane 3 = red nest)",
+    "not CONFIRMED for the same reason as 073E (Win16 GotoRQueen = GotoQueen(0xE0))"
+   ],
+   "reviewer": "worker names4, supervisor spot-checked 2026-09-30"
+  },
+  "root:015B:0798": {
+   "win16": "_XferPatch",
+   "confidence": "CONFIRMED",
+   "reviewed": "2026-09-30",
+   "evidence": [
+    "error constants 0x2710, 0x2712, 0x2714 in the same order, each after myBeginSound(1,0,0x7E); success path myBeginSong(0x2AFA,0x7E)",
+    "same body order: store patch x/y, DrawMap, clear queen storage, InvalQueenStorageDisp, RandWorld(tile, a4 byte, 164 byte, x, y)",
+    "callers SpecialXfer and YardArea on both sides (upgrades xver LOW)"
+   ],
+   "reviewer": "worker names4, supervisor spot-checked 2026-09-30"
+  },
+  "root:1FD2:061E": {
+   "win16": "_SetMenuItemState",
+   "confidence": "CONFIRMED",
+   "reviewed": "2026-09-30",
+   "evidence": [
+    "this is a Win16 pair, not a DOS-only name: SetMenuEntries (CONFIRMED) calls it twice with (item, 0x10/0x20) exactly where Win16 SetMenuEntries calls SetMenuItemState(item, state)",
+    "own diagnostic 'Attempt to SetMenuItemState with no menu loaded!' names the function (independent string anchor)",
+    "implementations are platform-specific (DOS writes the state byte into the loaded menu; Win16 calls EnableMenuItem, 0x10 -> MF_GRAYED)"
+   ],
+   "reviewer": "worker names4, supervisor spot-checked 2026-09-30",
+   "note": "supersedes the DOS-only classification in the request"
+  },
+  "root:00F8:0002": {
+   "win16": "_win_YardClosed",
+   "confidence": "CONFIRMED",
+   "reviewed": "2026-09-30",
+   "evidence": [
+    "body: if yard anim set: clip_Push, clip_SetWin(0x1900), hanim_RemoveAllAnimObjects, hanim_RenderAnimSet, hanim_RemoveAnimSet, clip_Pop, handle=0 (Win16 identical call order)",
+    "caller SetYardMode on both sides; first member of the unit in both builds"
+   ],
+   "reviewer": "worker names4, supervisor spot-checked 2026-09-30",
+   "note": "re-verified names3 bonus"
+  },
+  "root:00F8:0265": {
+   "win16": "_myDelay",
+   "confidence": "CONFIRMED",
+   "reviewed": "2026-09-30",
+   "evidence": [
+    "body: stamp=TickCount(); loop until WaitedEnough(&stamp, ticks/3) || win_Events() || DialogAbortOrCont() (Win16 inlines the DialogAbortOrCont body)",
+    "shared callers YellowBirth, YellowDialog, PlaceQueenInYard, DrawSimPayoff, ExchangeLives, EatMyFood (+ AnimYellowFight/Insane = o25_3BA4_0999/0C01)"
+   ],
+   "reviewer": "worker names4, supervisor spot-checked 2026-09-30"
+  },
+  "root:00F8:02AC": {
+   "win16": "_myButton",
+   "confidence": "CONFIRMED",
+   "reviewed": "2026-09-30",
+   "evidence": [
+    "caller set identical 4/4: MapAreaEvent, OpenMiniMapWin, processEdit, processExp",
+    "body returns StillDown() (Win16 myButton is a StillDown tail call; DOS polls the mouse first)"
+   ],
+   "reviewer": "worker names4, supervisor spot-checked 2026-09-30",
+   "note": "re-verified names3 bonus"
+  },
+  "root:00F8:02BE": {
+   "win16": "_MacTickCount",
+   "confidence": "CONFIRMED",
+   "reviewed": "2026-09-30",
+   "evidence": [
+    "body identical: TickCount()*3 as long (same shl/rcl/add/adc sequence)",
+    "shared callers SpiderDialog, YellowBirth, LionDialog, DrawSimKid, RunTutor, GiveLesson, DrawSimPayoff"
+   ],
+   "reviewer": "worker names4, supervisor spot-checked 2026-09-30"
+  },
+  "root:00F8:02F7": {
+   "win16": "_DialogWaitInit",
+   "confidence": "CONFIRMED",
+   "reviewed": "2026-09-30",
+   "evidence": [
+    "body: while StillDown() win_FlushEvents(); stamp=TickCount(); wait = n*0x12 (Win16 identical plus an 8-level stack)",
+    "shared callers PictureDialog, SpiderDialog, YellowDialog, DrawSimPayoff, ShowIntro",
+    "upgrades xver neighbourhood MEDIUM"
+   ],
+   "reviewer": "worker names4, supervisor spot-checked 2026-09-30"
+  },
+  "root:00F8:032A": {
+   "win16": "_DialogClearWait",
+   "confidence": "CONFIRMED",
+   "reviewed": "2026-09-30",
+   "evidence": [
+    "body: stamp=TickCount(); wait=0x1518 (constant shared only by Win16 DialogClearWait/DialogClearWaitInit)",
+    "call position selects ClearWait, not ClearWaitInit: AboutDialog (twice) TickCount, [ClearWait], WaitedEnough, DialogAbortOrCont and DoScenario win_GetEvent, [ClearWait], DialogAbort; DOS calls nothing at the Win16 ClearWaitInit positions before the loops"
+   ],
+   "reviewer": "worker names4, supervisor spot-checked 2026-09-30",
+   "note": "DialogClearWaitInit rejected for this address"
+  },
+  "root:00F8:0344": {
+   "win16": "_DialogWait",
+   "confidence": "HIGH",
+   "reviewed": "2026-09-30",
+   "evidence": [
+    "body = Win16 DialogWait body: WaitedEnough(&dialog stamp, dialog wait) on the state written by DialogWaitInit/DialogClearWait",
+    "DOS callers are DialogAbort and DialogAbortOrCont exactly where the Win16 versions contain the same WaitedEnough expression inline",
+    "not CONFIRMED: Win16 DialogWait has no callers, so there is no Win16-side call anchor"
+   ],
+   "reviewer": "worker names4, supervisor spot-checked 2026-09-30"
+  },
+  "root:00F8:03AD": {
+   "win16": "_TileIsVisible",
+   "confidence": "CONFIRMED",
+   "reviewed": "2026-09-30",
+   "evidence": [
+    "body identical: plane == MapPlane && MapPnt.x <= x < MapPnt.x+editWidth && MapPnt.y <= y < MapPnt.y+editHeight",
+    "sole caller ZapEuMapAt on both sides"
+   ],
+   "reviewer": "worker names4, supervisor spot-checked 2026-09-30",
+   "note": "re-verified names3 bonus"
+  },
+  "root:00F8:04C7": {
+   "win16": "_MapToYard",
+   "confidence": "CONFIRMED",
+   "reviewed": "2026-09-30",
+   "evidence": [
+    "core body: if yard not open: map open ? (SetMapPlane(0); win_Swap(0x100,0x1900)) : win_Open(0x1900) (Win16 adds the title/queen-mode refresh)",
+    "mirror of 047F (YardToMap); unit order YardToMap, MapToYard, OpenMapYard on both sides",
+    "shared callers ProcMenu, ProcMapEvent, SpecialXfer, DrawSimPayoff"
+   ],
+   "reviewer": "worker names4, supervisor spot-checked 2026-09-30"
+  },
+  "root:00F8:05C9": {
+   "win16": "_DialogAbort",
+   "confidence": "CONFIRMED",
+   "reviewed": "2026-09-30",
+   "evidence": [
+    "body: DialogWait() || (key pending && key == 0x1B): ESC abort (Win16 GetAsyncKeyState(0x1B))",
+    "caller DoScenario, call position after DialogClearWait in its loop as Win16"
+   ],
+   "reviewer": "worker names4, supervisor spot-checked 2026-09-30"
+  },
+  "root:00F8:05F2": {
+   "win16": "_DialogAbortOrCont",
+   "confidence": "CONFIRMED",
+   "reviewed": "2026-09-30",
+   "evidence": [
+    "body: DialogWait() || any key (Win16: || space); DOS keeps WinPrintf 'WAIT YES'/'result=%d' debug output",
+    "caller set = Win16 set PictureDialog, SpiderDialog, YellowDialog, DrawSimPayoff, AboutDialog, ShowIntro (+ EndGameDialog, YellowHelp)",
+    "myDelay calls it where Win16 myDelay inlines its body"
+   ],
+   "reviewer": "worker names4, supervisor spot-checked 2026-09-30"
+  },
+  "root:00DF:00B1": {
+   "win16": "_myBeginSong",
+   "confidence": "CONFIRMED",
+   "reviewed": "2026-09-30",
+   "evidence": [
+    "gated by driver-present && OptionStates[1] (Win16 songsOnFlag = OptionStates[1], copied in SetMenuEntries); myBeginSound uses OptionStates[2] like Win16 soundsOnFlag",
+    "call positions: XferPatch myBeginSong(0x2AFA,0x7E) and EditToolsMenu/MapToolsMenu as Win16; 12 shared named callers incl. ProcMenu, EndGameDialog, YellowBirth, YellowDeath, SpecialXfer, ShowIntro"
+   ],
+   "reviewer": "worker names4, supervisor spot-checked 2026-09-30",
+   "note": "upgrades names3 HIGH"
+  },
+  "root:00DF:0138": {
+   "win16": "_mySongIsDone",
+   "confidence": "CONFIRMED",
+   "reviewed": "2026-09-30",
+   "evidence": [
+    "body: return 1 unless driver present and OptionStates[1] (songsOnFlag), else driver status (Win16 same gate, returns 1 when off)",
+    "caller set identical: EndGameDialog, YellowBirth, DrawSimPayoff, AnimYellowFight (= o25_3BA4_0999)"
+   ],
+   "reviewer": "worker names4, supervisor spot-checked 2026-09-30"
+  },
+  "root:50F6:035C": {
+   "win16": "_YardMode",
+   "confidence": "CONFIRMED",
+   "reviewed": "2026-09-30",
+   "evidence": [
+    "DOS SetYardMode's own debug string '\\nYardmode=%d, newMode=%d' prints this word",
+    "SetMapTitle uses MwinTitle[YardMode + 9] for object 0x1901 exactly as Win16"
+   ],
+   "reviewer": "worker names4, supervisor spot-checked 2026-09-30"
+  },
+  "root:50F6:032E": {
+   "win16": "_MapPlane",
+   "confidence": "CONFIRMED",
+   "reviewed": "2026-09-30",
+   "evidence": [
+    "SetMapPlane: if plane==0 OldMapPlane(0332)=MapPlane; MapPlane=plane; (plane==1 ? 0x80 : 0x40) - x: identical to Win16",
+    "TileIsVisible compares its plane argument with it as Win16 does with MapPlane"
+   ],
+   "reviewer": "worker names4, supervisor spot-checked 2026-09-30"
+  },
+  "root:3D57:07B6": {
+   "win16": "_ExpSubStates",
+   "confidence": "CONFIRMED",
+   "reviewed": "2026-09-30",
+   "evidence": [
+    "byte array indexed by explore sub-tool: ExpAddAnt tests [3]==1 and ExpAddFood uses [4] as the Win16 ExpAddAnt/ExpAddFood",
+    "switch on [5] in the smoothing-tool code as in Win16; Win16 array is signed char[8]"
+   ],
+   "reviewer": "worker names4, supervisor spot-checked 2026-09-30"
+  },
+  "root:50F6:104C": {
+   "win16": "_CurExpTool",
+   "confidence": "CONFIRMED",
+   "reviewed": "2026-09-30",
+   "evidence": [
+    "written only by SetExpTool(tool) and zeroed by InitSimVars as Win16",
+    "MapToolsMenu/EditScentMenu draw win_DrawBitMapAtObjNum(0x117/7, CurExpTool+0x13EC) as Win16 MapToolsMenu"
+   ],
+   "reviewer": "worker names4, supervisor spot-checked 2026-09-30"
+  },
+  "S16:384C:0000": {
+   "win16": "_DrawSimPayoff",
+   "confidence": "CONFIRMED",
+   "reviewed": "2026-09-30",
+   "evidence": [
+    "unique constant 0x3F48 (win_SetObjBitmap for window 0x1A00)",
+    "call order MapToYard, SetYardMode, SetMapPlane, DrawYard, myDelay, win_LockWin, win_SetObjBitmap, win_Open, win_GetObjRect, win_UnlockWin, MacTickCount x2, DialogWaitInit, MacTickCount, mySongIsDone, myBeginSong, MacTickCount x2, win_DrawBitMap, DialogAbortOrCont, myDelay, win_Close identical",
+    "caller CheatKeys on both sides (upgrades xver LOW)"
+   ],
+   "reviewer": "worker names4, supervisor spot-checked 2026-09-30"
+  },
+  "S16:384C:01E1": {
+   "win16": "_AboutDialog",
+   "confidence": "CONFIRMED",
+   "reviewed": "2026-09-30",
+   "evidence": [
+    "constant 0x1F02 (and objects 0x1F00/0x1F01) shared",
+    "call order win_Open, LoadStringAnt, TickCount, DialogClearWait, WaitedEnough, DialogAbortOrCont, win_Events, win_FlushEvents, ..., font_SetFont, font_FontHeight, gr_JustifyStrInRect, clip_Off, win_DrawObjectNum, free, db_PurgeObject, win_FlushEvents, win_Close identical (DOS lacks SetPause/DialogDone)",
+    "sole caller ProcMenu on both sides (upgrades xver LOW)"
+   ],
+   "reviewer": "worker names4, supervisor spot-checked 2026-09-30"
+  },
+  "S15:384C:01EE": {
+   "win16": "_MenuQuit",
+   "confidence": "HIGH",
+   "reviewed": "2026-09-30",
+   "evidence": [
+    "body: if game dirty: r = save prompt (o15_384C_0239; 2 = cancel -> return 0; 1 = yes -> SaveGame(0) retried until it succeeds), as Win16 MessageBox(YESNOCANCEL): IDCANCEL -> 0, IDYES -> SaveGame(0)",
+    "unit order LoadMonoPats, Quit, MenuQuit, SetDefaultWindows, NewGame; DOS 01EE sits before 0239 (prompt helper) and SetDefaultWindows (037F)",
+    "not CONFIRMED: DOS also exits (goodbye text + o15_384C_0152) and is called from EndGameDialog where Win16 calls CleanUp"
+   ],
+   "reviewer": "worker names4, supervisor spot-checked 2026-09-30"
+  },
+  "S15:384C:037F": {
+   "win16": "_SetDefaultWindows",
+   "confidence": "CONFIRMED",
+   "reviewed": "2026-09-30",
+   "evidence": [
+    "call order OpenCasteWindow, OpenModeWindow, SetMapPlane, win_IsWinOpen, YardToMap, SetMapTitle, OpenEditWindow as Win16 (DOS adds SetEditWinTitle, lacks MapToYard)",
+    "callers DoLoadInitializations (o09_35F5_0DBB) and NewGame; Win16 NewGame inlines the same body"
+   ],
+   "reviewer": "worker names4, supervisor spot-checked 2026-09-30"
+  },
+  "S15:384C:03C6": {
+   "win16": "_NewGame",
+   "confidence": "CONFIRMED",
+   "reviewed": "2026-09-30",
+   "evidence": [
+    "call order DoScenario, LoadGame, EndLifeTransferMode, EndTargetMode, SetDefaultWindPrompt, SetEditWinTitle, RandYard, win_Open, SetDefaultWindows, SetMapPlane, ..., CenterEdit, UpdateEdit as Win16",
+    "shared callers ProcMenu, EndGameDialog (+ main = WINMAIN)"
+   ],
+   "reviewer": "worker names4, supervisor spot-checked 2026-09-30"
+  },
+  "S09:35F5:0188": {
+   "win16": "_SaveGame",
+   "confidence": "CONFIRMED",
+   "reviewed": "2026-09-30",
+   "evidence": [
+    "unique shared string '%s\\nSaved correctly'",
+    "calls FileSelect first; callers LoadGame and MenuQuit on both sides; sprintf/unlink runtime signature"
+   ],
+   "reviewer": "worker names4, supervisor spot-checked 2026-09-30"
+  },
+  "S09:35F5:03C6": {
+   "win16": "_FileSelect",
+   "confidence": "CONFIRMED",
+   "reviewed": "2026-09-30",
+   "evidence": [
+    "a Win16 counterpart exists: caller set {LoadGame, SaveGame} identical, called right after SaveGame in LoadGame and first in SaveGame on both sides",
+    "shared file patterns '*.ant'/'*.ANT' and '.ant'/'.ANT'",
+    "implementations differ (DOS own directory browser; Win16 common dialog)"
+   ],
+   "reviewer": "worker names4, supervisor spot-checked 2026-09-30",
+   "note": "contradicts the expectation that no Win16 counterpart exists"
+  },
+  "root:22BF:019A": {
+   "win16": "_win_MakeObjSelectable",
+   "confidence": "HIGH",
+   "reviewed": "2026-09-30",
+   "evidence": [
+    "body win_SetObjSelectableState(obj, 1); Win16 has the setter body inlined with the same constant",
+    "member order in the win_ object layer matches: SetObjSelectableState, MakeObjSelectable, MakeObjUnselectable, SetGroupSelectableState, MakeGroupSelectable, MakeGroupUnselectable, ..., SetGroupSelectedState, [SetGroupSelectedObj], MakeGroupSelected, MakeGroupUnselected, SetObjVisibleState (DOS lacks the AutoToggle/SelFlash families)",
+    "no DOS callers (dead library code); not CONFIRMED because there is no call-graph anchor"
+   ],
+   "reviewer": "worker names4, supervisor spot-checked 2026-09-30"
+  },
+  "root:22BF:01A2": {
+   "win16": "_win_MakeObjUnselectable",
+   "confidence": "HIGH",
+   "reviewed": "2026-09-30",
+   "evidence": [
+    "body win_SetObjSelectableState(obj, 0); Win16 has the setter body inlined with the same constant",
+    "member order in the win_ object layer matches: SetObjSelectableState, MakeObjSelectable, MakeObjUnselectable, SetGroupSelectableState, MakeGroupSelectable, MakeGroupUnselectable, ..., SetGroupSelectedState, [SetGroupSelectedObj], MakeGroupSelected, MakeGroupUnselected, SetObjVisibleState (DOS lacks the AutoToggle/SelFlash families)",
+    "no DOS callers (dead library code); not CONFIRMED because there is no call-graph anchor"
+   ],
+   "reviewer": "worker names4, supervisor spot-checked 2026-09-30"
+  },
+  "root:22BF:0438": {
+   "win16": "_win_MakeGroupSelected",
+   "confidence": "HIGH",
+   "reviewed": "2026-09-30",
+   "evidence": [
+    "body win_SetGroupSelectedState(win, group, 1); Win16 has the setter body inlined with the same constant",
+    "member order in the win_ object layer matches: SetObjSelectableState, MakeObjSelectable, MakeObjUnselectable, SetGroupSelectableState, MakeGroupSelectable, MakeGroupUnselectable, ..., SetGroupSelectedState, [SetGroupSelectedObj], MakeGroupSelected, MakeGroupUnselected, SetObjVisibleState (DOS lacks the AutoToggle/SelFlash families)",
+    "no DOS callers (dead library code); not CONFIRMED because there is no call-graph anchor"
+   ],
+   "reviewer": "worker names4, supervisor spot-checked 2026-09-30"
+  },
+  "S13:384C:01E5": {
+   "win16": "_UpdateYardMessage",
+   "confidence": "MEDIUM",
+   "reviewed": "2026-09-30",
+   "evidence": [
+    "body: if mapMessage: TickCount() > mapMessageRemoveTime ? (redraw flag, mapMessage=0) : draw mapMessage in the yard rect when YardMode>1; this timeout/clear/draw body is shared by Win16 UpdateYardMessage and DrawAnimYardMessage (identical Win16 bodies)",
+    "role: DOS callers are the periodic yard refresh (o13_384C_03F8 from main, win_DrawYardWindow, o13_384C_027C), like Win16 UpdateYardMessage (UpdateWindows, MYTIMERFUNC); Win16 DrawAnimYardMessage is called only by EditMessage, which in DOS only sets a flag",
+    "not renamed: the body cannot separate the two Win16 names and the role anchor is weak"
+   ],
+   "reviewer": "worker names4, supervisor spot-checked 2026-09-30",
+   "note": "names3 suspicion stands: S13:384C:0D3B (DrawAnimYardMessage, HIGH) has no body identity either; review 0D3B and 01E5 together and downgrade 0D3B to MEDIUM unless a second anchor is found"
+  },
+  "root:171C:2216": {
+   "win16": null,
+   "confidence": "DOS-STRING",
+   "reviewed": "2026-09-30",
+   "evidence": [
+    "own Punt diagnostic '_ffree: Could not find memory ptr' (form 'NAME: ...') inside its extent",
+    "free (171C:2276, named from link evidence) is a thin wrapper to it: the MSC large-model free -> _ffree mapping"
+   ],
+   "reviewer": "worker names4, supervisor spot-checked 2026-09-30",
+   "note": "proposed name _ffree; admissible only if DOS-1 is adopted; no LLIBCR _ffree is linked (no clash)"
+  },
+  "root:171C:2288": {
+   "win16": null,
+   "confidence": "DOS-STRING",
+   "reviewed": "2026-09-30",
+   "evidence": [
+    "own Punt diagnostic '_frealloc: Could not find memory ptr' inside its extent",
+    "calls 21CC for p==NULL as MSC _frealloc does with _fmalloc"
+   ],
+   "reviewer": "worker names4, supervisor spot-checked 2026-09-30",
+   "note": "proposed name _frealloc; admissible only if DOS-1 is adopted"
+  },
+  "root:171C:21CC": {
+   "win16": null,
+   "confidence": "REJECTED",
+   "reviewed": "2026-09-30",
+   "evidence": [
+    "its own string is the allocation tag 'malloc', which names malloc; malloc is already registered at 171C:2208 from link evidence (DOS-1 clauses 3/4 fail)",
+    "'_fmalloc' is an analogy from _ffree/_frealloc, which DOS-1 forbids"
+   ],
+   "reviewer": "worker names4, supervisor spot-checked 2026-09-30",
+   "note": "keep the address name; only a future link-level rule for the MSC malloc.h model names could admit _fmalloc"
+  },
+  "root:171C:2302": {
+   "win16": null,
+   "confidence": "REJECTED",
+   "reviewed": "2026-09-30",
+   "evidence": [
+    "no string and no callers: 'realloc' is an analogy (free->_ffree, realloc->_frealloc); unlike malloc/free no CRT reference proves it is the linked realloc"
+   ],
+   "reviewer": "worker names4, supervisor spot-checked 2026-09-30",
+   "note": "keep the address name"
+  },
+  "root:1FD2:0542": {
+   "win16": "_StillDown",
+   "confidence": "CONFIRMED",
+   "reviewed": "2026-09-30",
+   "evidence": [
+    "all six Win16 callers correspond: PopUpInfoWindow, ProcCasteEvent, ProcHistoryEvent, ProcModeEvent by name, myButton (02AC) and DialogWaitInit (02F7) by the pairs above",
+    "myButton returns it as Win16 myButton tail-calls StillDown"
+   ],
+   "reviewer": "worker names4, supervisor spot-checked 2026-09-30",
+   "note": "found in passing"
+  },
+  "root:00F8:047F": {
+   "win16": "_YardToMap",
+   "confidence": "CONFIRMED",
+   "reviewed": "2026-09-30",
+   "evidence": [
+    "body: ClearMapScentButtons; if map not open: yard open ? (SetMapPlane(1); win_Swap(0x1900,0x100)) : win_Open(0x100), as Win16 (which inlines ClearMapScentButtons)",
+    "callers OpenMapYard, ProcYardEvent, SetDefaultWindows on both sides; unit order YardToMap, MapToYard, OpenMapYard"
+   ],
+   "reviewer": "worker names4, supervisor spot-checked 2026-09-30",
+   "note": "found in passing"
+  },
+  "root:00F8:00D8": {
+   "win16": "_SetMapTitle",
+   "confidence": "CONFIRMED",
+   "reviewed": "2026-09-30",
+   "evidence": [
+    "body identical: win_SetObjFormatStr(0x101, MwinTitle[MapMode]); (0x1901, MwinTitle[YardMode+9]); draw the title in the open window",
+    "callers SetMapModeAnt, SetYardMode, SetDefaultWindows on both sides"
+   ],
+   "reviewer": "worker names4, supervisor spot-checked 2026-09-30",
+   "note": "found in passing"
+  },
+  "root:00F8:0252": {
+   "win16": "_ClearMapScentButtons",
+   "confidence": "CONFIRMED",
+   "reviewed": "2026-09-30",
+   "evidence": [
+    "body win_MakeGroupUnselected(0x100, 2)",
+    "caller ProcMapEvent on both sides; inlined in Win16 YardToMap where DOS YardToMap calls it"
+   ],
+   "reviewer": "worker names4, supervisor spot-checked 2026-09-30",
+   "note": "found in passing"
+  },
+  "root:00F8:00A4": {
+   "win16": "_win_MapChanged",
+   "confidence": "HIGH",
+   "reviewed": "2026-09-30",
+   "evidence": [
+    "body: if win_IsWinOpen(0x100): [EraseMapCursor]; win_GetObjRect(0x102, &mapTileRect); mapForce=1 as Win16",
+    "unit position right after win_YardClosed (Win16 UpdateLayQueenModeDisplay has no DOS copy); Win16 copy has no callers"
+   ],
+   "reviewer": "worker names4, supervisor spot-checked 2026-09-30",
+   "note": "found in passing"
+  },
+  "root:00F8:0395": {
+   "win16": "_InvalQueenStorageDisp",
+   "confidence": "CONFIRMED",
+   "reviewed": "2026-09-30",
+   "evidence": [
+    "empty stub on both sides",
+    "callers CheatKeys, DoRepoFly and XferPatch (same call position after clearing queen storage) on both sides"
+   ],
+   "reviewer": "worker names4, supervisor spot-checked 2026-09-30",
+   "note": "found in passing"
+  },
+  "root:00F8:03A5": {
+   "win16": "_MakeDMap",
+   "confidence": "HIGH",
+   "reviewed": "2026-09-30",
+   "evidence": [
+    "empty stub on both sides",
+    "callers ReDrawMapEdit and PlaceQueenInYard on both sides"
+   ],
+   "reviewer": "worker names4, supervisor spot-checked 2026-09-30",
+   "note": "found in passing"
+  },
+  "root:00F8:02DF": {
+   "win16": "_SetSimCursor",
+   "confidence": "CONFIRMED",
+   "reviewed": "2026-09-30",
+   "evidence": [
+    "caller set identical 5/5: CheatKeys, YellowBirth, YellowDeath, YellowCommand, initStuff",
+    "empty stub on both sides (upgrades xver callseq LOW)"
+   ],
+   "reviewer": "worker names4, supervisor spot-checked 2026-09-30",
+   "note": "found in passing"
+  },
+  "root:00F8:0459": {
+   "win16": "_ABS",
+   "confidence": "CONFIRMED",
+   "reviewed": "2026-09-30",
+   "evidence": [
+    "body abs(int)",
+    "sole caller DoAntMoveY on both sides"
+   ],
+   "reviewer": "worker names4, supervisor spot-checked 2026-09-30",
+   "note": "found in passing"
+  },
+  "root:00F8:059C": {
+   "win16": "_UpdateEverything",
+   "confidence": "CONFIRMED",
+   "reviewed": "2026-09-30",
+   "evidence": [
+    "own string '\\nUPDATEEVERYTHING!'",
+    "caller set identical: CheatKeys, YellowDeath"
+   ],
+   "reviewer": "worker names4, supervisor spot-checked 2026-09-30",
+   "note": "found in passing"
+  },
+  "root:00DF:012D": {
+   "win16": "_mySoundIsDone",
+   "confidence": "CONFIRMED",
+   "reviewed": "2026-09-30",
+   "evidence": [
+    "body return 1 on both sides",
+    "caller set identical 4/4: YellowBirth, LionDialog, ExchangeLives, EatMyFood"
+   ],
+   "reviewer": "worker names4, supervisor spot-checked 2026-09-30",
+   "note": "found in passing"
+  },
+  "root:00DF:0112": {
+   "win16": "_myBeginSoundReverse",
+   "confidence": "CONFIRMED",
+   "reviewed": "2026-09-30",
+   "evidence": [
+    "body forwards to myBeginSound on both sides",
+    "sole caller MysteryButton on both sides"
+   ],
+   "reviewer": "worker names4, supervisor spot-checked 2026-09-30",
+   "note": "found in passing"
+  },
+  "S12:384C:100A": {
+   "win16": "_DrawMap",
+   "confidence": "CONFIRMED",
+   "reviewed": "2026-09-30",
+   "evidence": [
+    "body win_IsWinOpen, clip_SetWin, DrawMapData, clip_Off as Win16",
+    "callers ReDrawMapEdit, PlaceQueenInYard, and XferPatch at the same call position"
+   ],
+   "reviewer": "worker names4, supervisor spot-checked 2026-09-30",
+   "note": "found in passing"
+  },
+  "S09:35F5:0DBB": {
+   "win16": "_DoLoadInitializations",
+   "confidence": "CONFIRMED",
+   "reviewed": "2026-09-30",
+   "evidence": [
+    "sole caller LoadGame on both sides",
+    "call order OverlayTileSet, SetMyLife, FullCount, SetDefaultWindows, CenterEdit, SetDefaultWindPrompt as Win16"
+   ],
+   "reviewer": "worker names4, supervisor spot-checked 2026-09-30",
+   "note": "found in passing"
+  },
+  "root:075B:0242": {
+   "win16": "_LoadStringAnt",
+   "confidence": "CONFIRMED",
+   "reviewed": "2026-09-30",
+   "evidence": [
+    "callee order db_LoadObject, WinPrintf, lock, alloc, memmove as Win16",
+    "callers PictStrnDialog and AboutDialog (call position after win_Open) on both sides; called 18 times by 075B:00AE exactly as Win16 PrepareStrings calls LoadStringAnt 18 times",
+    "xver MEDIUM alternative _ms_LoadPopUpResource (shared allocation tag 'strptrs') rejected: its Win16 callers InitMenu/ms_PopUpMenuResource have no DOS counterpart here"
+   ],
+   "reviewer": "worker names4, supervisor spot-checked 2026-09-30",
+   "note": "found in passing"
+  },
+  "root:075B:00AE": {
+   "win16": "_PrepareStrings",
+   "confidence": "HIGH",
+   "reviewed": "2026-09-30",
+   "evidence": [
+    "sole caller initStuff on both sides",
+    "body is 18 consecutive LoadStringAnt calls on both sides (xver LOW guessed LoadStringAnt for this address; rejected)"
+   ],
+   "reviewer": "worker names4, supervisor spot-checked 2026-09-30",
+   "note": "found in passing"
+  },
+  "root:1FD2:0135": {
+   "win16": "_SetMenuOptionText",
+   "confidence": "MEDIUM",
+   "reviewed": "2026-09-30",
+   "evidence": [
+    "single anchor: SetMenuEntries calls it with (0x41, Pause/Unpause text) where Win16 calls SetMenuOptionText(0x41, text)",
+    "no second DOS caller"
+   ],
+   "reviewer": "worker names4, supervisor spot-checked 2026-09-30",
+   "note": "found in passing"
+  },
+  "root:208F:0419": {
+   "win16": "_gr_BitMapSize",
+   "confidence": "CONFIRMED",
+   "reviewed": "2026-09-30",
+   "evidence": [
+    "7 shared named callers (IBMInitStuff, PictureDialog, hanim_AddAnimObject, hanim_SetObjectPos, initControls, win_AutoSize, win_DrawYardWindow)",
+    "callee order db_LoadObject, lock, unpack-init, unpack, unlock, db_ReleaseObject as Win16"
+   ],
+   "reviewer": "worker names4, supervisor spot-checked 2026-09-30",
+   "note": "re-verified names3 bonus"
+  },
+  "root:0250:0E9D": {
+   "win16": "_UpdateEdit",
+   "confidence": "CONFIRMED",
+   "reviewed": "2026-09-30",
+   "evidence": [
+    "SetMapPlane order SetMapPlaneLocation, CenterEdit, ..., UpdateEdit and NewGame tail CenterEdit, UpdateEdit as Win16",
+    "shared callers SetMapPlaneLocation, SetMapPlane, MapAreaEvent, OpenMiniMapWin, ReDrawMapEdit, processEdit"
+   ],
+   "reviewer": "worker names4, supervisor spot-checked 2026-09-30",
+   "note": "re-verified names3 bonus"
+  },
+  "root:0250:0FC4": {
+   "win16": "_CenterEdit",
+   "confidence": "CONFIRMED",
+   "reviewed": "2026-09-30",
+   "evidence": [
+    "shared callers SetMapPlaneLocation, GotoMapPoint, SetMapPlane, CenterAnt, MapAreaEvent, OpenMiniMapWin",
+    "position before UpdateEdit in SetMapPlane/NewGame/DoLoadInitializations"
+   ],
+   "reviewer": "worker names4, supervisor spot-checked 2026-09-30",
+   "note": "re-verified names3 bonus"
+  },
+  "root:0250:0E81": {
+   "win16": "_ForceUpdateEdit",
+   "confidence": "HIGH",
+   "reviewed": "2026-09-30",
+   "evidence": [
+    "last call of EditScentMenu on both sides",
+    "forwards to UpdateEdit (DOS first calls f_0250_05CB)"
+   ],
+   "reviewer": "worker names4, supervisor spot-checked 2026-09-30",
+   "note": "re-verified names3 bonus"
+  },
+  "root:0250:0E91": {
+   "win16": "_DoEditUpdateDraw",
+   "confidence": "CONFIRMED",
+   "reviewed": "2026-09-30",
+   "evidence": [
+    "5 shared callers DoAntMoveY, DoEditAndMapUpdateDraw, DoTroph, ExchangeLives, YellowBirth (+ AnimYellowFight/Insane)",
+    "small forwarder on both sides"
+   ],
+   "reviewer": "worker names4, supervisor spot-checked 2026-09-30",
+   "note": "re-verified names3 bonus"
+  },
+  "root:0250:03B6": {
+   "win16": "_LoadTiles",
+   "confidence": "HIGH",
+   "reviewed": "2026-09-30",
+   "evidence": [
+    "sole caller IBMInitStuff on both sides",
+    "unit position after OverlayTileSet; db_LoadObject/db_PurgeObject tile loading"
+   ],
+   "reviewer": "worker names4, supervisor spot-checked 2026-09-30",
+   "note": "re-verified names3 bonus"
+  },
+  "root:1FD2:057F": {
+   "win16": "_ButtonHeldInit",
+   "confidence": "CONFIRMED",
+   "reviewed": "2026-09-30",
+   "evidence": [
+    "shared callers MagnifyMenu, DoExpMenu, DrawCastePopUp, win_DoProxMenu",
+    "body TickCount stamp on both sides"
+   ],
+   "reviewer": "worker names4, supervisor spot-checked 2026-09-30",
+   "note": "re-verified names3 bonus"
+  },
+  "root:1FD2:0598": {
+   "win16": "_ButtonHeld",
+   "confidence": "HIGH",
+   "reviewed": "2026-09-30",
+   "evidence": [
+    "shared callers MagnifyMenu, DrawCastePopUp, win_DoProxMenu (loop condition)",
+    "TickCount x2 + StillDown on both sides"
+   ],
+   "reviewer": "worker names4, supervisor spot-checked 2026-09-30",
+   "note": "re-verified names3 bonus"
+  },
+  "root:1FD2:05EF": {
+   "win16": "_ButtonHeldEnd",
+   "confidence": "HIGH",
+   "reviewed": "2026-09-30",
+   "evidence": [
+    "shared callers MagnifyMenu, DoExpMenu after the loop",
+    "ends with win_FlushEvents on both sides"
+   ],
+   "reviewer": "worker names4, supervisor spot-checked 2026-09-30",
+   "note": "re-verified names3 bonus"
+  },
+  "root:1CE2:0410": {
+   "win16": "_GRectInvOutline",
+   "confidence": "CONFIRMED",
+   "reviewed": "2026-09-30",
+   "evidence": [
+    "4 shared callers DrawMapCursor, DrawMiniMapCursor, EraseMapCursor, EraseMiniMapCursor",
+    "(rect, 1) argument shape as Win16"
+   ],
+   "reviewer": "worker names4, supervisor spot-checked 2026-09-30",
+   "note": "re-verified names3 bonus"
+  },
+  "root:1E57:0362": {
+   "win16": "_clip_Off",
+   "confidence": "CONFIRMED",
+   "reviewed": "2026-09-30",
+   "evidence": [
+    "5 shared callers HistUpdate, ProcEditEvent, ProcHistoryEvent, SetMapPlaneLocation, ToggleHistButton",
+    "positions after win_SetObjSelectedState in SetPause and at the end of AboutDialog/DrawMap as Win16"
+   ],
+   "reviewer": "worker names4, supervisor spot-checked 2026-09-30",
+   "note": "re-verified names3 bonus"
+  },
+  "S11:35F5:018D": {
+   "win16": "_ProcMenu",
+   "confidence": "CONFIRMED",
+   "reviewed": "2026-09-30",
+   "evidence": [
+    "call order AboutDialog, myBeginSong, NewGame, OpenEditWindow, OpenMapYard, OpenModeWindow, OpenCasteWindow, OpenHistoryWindow, OpenInfoWindow, ScoreDialog, SetYardMode, SetMapPlane, win_IsWinOpen, MapToYard, SetMapPlane, StopSong, SetPause (inlined in Win16), SetMenuEntries",
+    "already registered; decision record only"
+   ],
+   "reviewer": "worker names4, supervisor spot-checked 2026-09-30",
+   "note": "re-verified names3 bonus"
+  },
+  "S09:35F5:0000": {
+   "win16": "_LoadGame",
+   "confidence": "CONFIRMED",
+   "reviewed": "2026-09-30",
+   "evidence": [
+    "unique string 'Read error / game not loaded'",
+    "call order prompt, SaveGame, FileSelect, ..., EditMessage, SetMenuEntries, PauseGame, DoLoadInitializations, StopSong; already registered"
+   ],
+   "reviewer": "worker names4, supervisor spot-checked 2026-09-30",
+   "note": "re-verified names3 bonus"
+  },
+  "S21:39C7:0000": {
+   "win16": null,
+   "confidence": "THIRD-PARTY",
+   "reviewed": "2026-09-30",
+   "reviewer": "worker names4, supervisor spot-checked 2026-09-30",
+   "evidence": [
+    "published lineage: R. Wilton, 'Programmer's Guide to PC & PS/2 Video Systems' (1987), VIDEO_ID; an independent published derivative is id Software's VL_VideoID (ID_VL_A.ASM)",
+    "not an exact match to the checked derivative: far proc without BP frame returning Device0 in AX (published: near, BP frame, results copied to a caller struct); first TestSequence flag re-armed in code; FindEGA sets Monoflag TRUE where the listing sets FALSE; FindMono masks with 'mov ah,al; and ah,80h' instead of 'and al,80h; mov ah,al'; Find6845 delay 300h instead of 100h",
+    "no identifier survives in the binary (no symbols, no name strings); the primary Wilton listing was not available for an instruction-level comparison",
+    "the routine's role matches published VideoID"
+   ],
+   "note": "proposed name VideoID; held: fails the proposed TP-1 rule (derivative, not an exact listing match)"
+  },
+  "S21:39C7:003C": {
+   "win16": null,
+   "confidence": "THIRD-PARTY",
+   "reviewed": "2026-09-30",
+   "reviewer": "worker names4, supervisor spot-checked 2026-09-30",
+   "evidence": [
+    "published lineage: R. Wilton, 'Programmer's Guide to PC & PS/2 Video Systems' (1987), VIDEO_ID; an independent published derivative is id Software's VL_VideoID (ID_VL_A.ASM)",
+    "not an exact match to the checked derivative: far proc without BP frame returning Device0 in AX (published: near, BP frame, results copied to a caller struct); first TestSequence flag re-armed in code; FindEGA sets Monoflag TRUE where the listing sets FALSE; FindMono masks with 'mov ah,al; and ah,80h' instead of 'and al,80h; mov ah,al'; Find6845 delay 300h instead of 100h",
+    "no identifier survives in the binary (no symbols, no name strings); the primary Wilton listing was not available for an instruction-level comparison",
+    "the routine's role matches published FindPS2"
+   ],
+   "note": "proposed name FindPS2; held: fails the proposed TP-1 rule (derivative, not an exact listing match)"
+  },
+  "S21:39C7:008C": {
+   "win16": null,
+   "confidence": "THIRD-PARTY",
+   "reviewed": "2026-09-30",
+   "reviewer": "worker names4, supervisor spot-checked 2026-09-30",
+   "evidence": [
+    "published lineage: R. Wilton, 'Programmer's Guide to PC & PS/2 Video Systems' (1987), VIDEO_ID; an independent published derivative is id Software's VL_VideoID (ID_VL_A.ASM)",
+    "not an exact match to the checked derivative: far proc without BP frame returning Device0 in AX (published: near, BP frame, results copied to a caller struct); first TestSequence flag re-armed in code; FindEGA sets Monoflag TRUE where the listing sets FALSE; FindMono masks with 'mov ah,al; and ah,80h' instead of 'and al,80h; mov ah,al'; Find6845 delay 300h instead of 100h",
+    "no identifier survives in the binary (no symbols, no name strings); the primary Wilton listing was not available for an instruction-level comparison",
+    "the routine's role matches published FindEGA"
+   ],
+   "note": "proposed name FindEGA; held: fails the proposed TP-1 rule (derivative, not an exact listing match)"
+  },
+  "S21:39C7:00B8": {
+   "win16": null,
+   "confidence": "THIRD-PARTY",
+   "reviewed": "2026-09-30",
+   "reviewer": "worker names4, supervisor spot-checked 2026-09-30",
+   "evidence": [
+    "published lineage: R. Wilton, 'Programmer's Guide to PC & PS/2 Video Systems' (1987), VIDEO_ID; an independent published derivative is id Software's VL_VideoID (ID_VL_A.ASM)",
+    "not an exact match to the checked derivative: far proc without BP frame returning Device0 in AX (published: near, BP frame, results copied to a caller struct); first TestSequence flag re-armed in code; FindEGA sets Monoflag TRUE where the listing sets FALSE; FindMono masks with 'mov ah,al; and ah,80h' instead of 'and al,80h; mov ah,al'; Find6845 delay 300h instead of 100h",
+    "no identifier survives in the binary (no symbols, no name strings); the primary Wilton listing was not available for an instruction-level comparison",
+    "the routine's role matches published FindCGA"
+   ],
+   "note": "proposed name FindCGA; held: fails the proposed TP-1 rule (derivative, not an exact listing match)"
+  },
+  "S21:39C7:00C8": {
+   "win16": null,
+   "confidence": "THIRD-PARTY",
+   "reviewed": "2026-09-30",
+   "reviewer": "worker names4, supervisor spot-checked 2026-09-30",
+   "evidence": [
+    "published lineage: R. Wilton, 'Programmer's Guide to PC & PS/2 Video Systems' (1987), VIDEO_ID; an independent published derivative is id Software's VL_VideoID (ID_VL_A.ASM)",
+    "not an exact match to the checked derivative: far proc without BP frame returning Device0 in AX (published: near, BP frame, results copied to a caller struct); first TestSequence flag re-armed in code; FindEGA sets Monoflag TRUE where the listing sets FALSE; FindMono masks with 'mov ah,al; and ah,80h' instead of 'and al,80h; mov ah,al'; Find6845 delay 300h instead of 100h",
+    "no identifier survives in the binary (no symbols, no name strings); the primary Wilton listing was not available for an instruction-level comparison",
+    "the routine's role matches published FindMono"
+   ],
+   "note": "proposed name FindMono; held: fails the proposed TP-1 rule (derivative, not an exact listing match)"
+  },
+  "S21:39C7:010B": {
+   "win16": null,
+   "confidence": "THIRD-PARTY",
+   "reviewed": "2026-09-30",
+   "reviewer": "worker names4, supervisor spot-checked 2026-09-30",
+   "evidence": [
+    "published lineage: R. Wilton, 'Programmer's Guide to PC & PS/2 Video Systems' (1987), VIDEO_ID; an independent published derivative is id Software's VL_VideoID (ID_VL_A.ASM)",
+    "not an exact match to the checked derivative: far proc without BP frame returning Device0 in AX (published: near, BP frame, results copied to a caller struct); first TestSequence flag re-armed in code; FindEGA sets Monoflag TRUE where the listing sets FALSE; FindMono masks with 'mov ah,al; and ah,80h' instead of 'and al,80h; mov ah,al'; Find6845 delay 300h instead of 100h",
+    "no identifier survives in the binary (no symbols, no name strings); the primary Wilton listing was not available for an instruction-level comparison",
+    "the routine's role matches published Find6845"
+   ],
+   "note": "proposed name Find6845; held: fails the proposed TP-1 rule (derivative, not an exact listing match)"
+  },
+  "S21:39C7:0125": {
+   "win16": null,
+   "confidence": "THIRD-PARTY",
+   "reviewed": "2026-09-30",
+   "reviewer": "worker names4, supervisor spot-checked 2026-09-30",
+   "evidence": [
+    "published lineage: R. Wilton, 'Programmer's Guide to PC & PS/2 Video Systems' (1987), VIDEO_ID; an independent published derivative is id Software's VL_VideoID (ID_VL_A.ASM)",
+    "not an exact match to the checked derivative: far proc without BP frame returning Device0 in AX (published: near, BP frame, results copied to a caller struct); first TestSequence flag re-armed in code; FindEGA sets Monoflag TRUE where the listing sets FALSE; FindMono masks with 'mov ah,al; and ah,80h' instead of 'and al,80h; mov ah,al'; Find6845 delay 300h instead of 100h",
+    "no identifier survives in the binary (no symbols, no name strings); the primary Wilton listing was not available for an instruction-level comparison",
+    "the routine's role matches published FindActive"
+   ],
+   "note": "proposed name FindActive; held: fails the proposed TP-1 rule (derivative, not an exact listing match)"
+  },
+  "S21:39C7:0156": {
+   "win16": null,
+   "confidence": "THIRD-PARTY",
+   "reviewed": "2026-09-30",
+   "reviewer": "worker names4, supervisor spot-checked 2026-09-30",
+   "evidence": [
+    "published lineage: R. Wilton, 'Programmer's Guide to PC & PS/2 Video Systems' (1987), VIDEO_ID; an independent published derivative is id Software's VL_VideoID (ID_VL_A.ASM)",
+    "not an exact match to the checked derivative: far proc without BP frame returning Device0 in AX (published: near, BP frame, results copied to a caller struct); first TestSequence flag re-armed in code; FindEGA sets Monoflag TRUE where the listing sets FALSE; FindMono masks with 'mov ah,al; and ah,80h' instead of 'and al,80h; mov ah,al'; Find6845 delay 300h instead of 100h",
+    "no identifier survives in the binary (no symbols, no name strings); the primary Wilton listing was not available for an instruction-level comparison",
+    "the routine's role matches published FoundDevice"
+   ],
+   "note": "proposed name FoundDevice; held: fails the proposed TP-1 rule (derivative, not an exact listing match)"
   }
  }
 }

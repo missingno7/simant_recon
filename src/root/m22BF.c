@@ -62,8 +62,8 @@ extern void far Punt(char far *format, ...);
 extern char far * far * near win_handles[];
 extern void far win_Open(int win, int p0, int p1);
 extern void _fastcall _win_SetProxItem(int obj);
-extern void far f_1FD2_057F(void);
-extern int far f_1FD2_0598(void);
+extern void far ButtonHeldInit(void);
+extern int far ButtonHeld(void);
 extern int far win_GetProxEvent(void);
 extern int _fastcall win_GetEvent(struct Event far *ev);
 extern void _fastcall win_Close(int win);
@@ -80,8 +80,8 @@ void _fastcall win_GetObjSize(int, struct Pt far *);
 void _fastcall f_22BF_00AA(int, struct Rect far *);
 void _fastcall f_22BF_00DD(int, struct Rect far *);
 void _fastcall win_SetObjSelectableState(int, int);
-void _fastcall f_22BF_019A(int);
-void _fastcall f_22BF_01A2(int);
+void _fastcall win_MakeObjSelectable(int);
+void _fastcall win_MakeObjUnselectable(int);
 void _fastcall win_SetGroupSelectableState(int, int, int);
 void _fastcall win_MakeGroupSelectable(int, int);
 void _fastcall win_MakeGroupUnselectable(int, int);
@@ -91,7 +91,7 @@ void _fastcall win_SetObjSelectedState(int, int);
 void _fastcall win_MakeObjSelected(int);
 void _fastcall win_MakeObjUnselected(int);
 void _fastcall win_SetGroupSelectedState(int, int, int);
-void _fastcall f_22BF_0438(int, int);
+void _fastcall win_MakeGroupSelected(int, int);
 void _fastcall win_MakeGroupUnselected(int, int);
 void _fastcall win_SetObjVisibleState(int, int);
 void _fastcall win_MakeObjVisible(int);
@@ -177,12 +177,12 @@ void _fastcall win_SetObjSelectableState(int obj, int state)
     win_UnlockWin(obj);
 }
 
-void _fastcall f_22BF_019A(int obj)
+void _fastcall win_MakeObjSelectable(int obj)
 {
     win_SetObjSelectableState(obj, 1);
 }
 
-void _fastcall f_22BF_01A2(int obj)
+void _fastcall win_MakeObjUnselectable(int obj)
 {
     win_SetObjSelectableState(obj, 0);
 }
@@ -293,7 +293,7 @@ void _fastcall win_SetGroupSelectedState(int win, int group, int selected)
     win_UnlockWin(win);
 }
 
-void _fastcall f_22BF_0438(int win, int group)
+void _fastcall win_MakeGroupSelected(int win, int group)
 {
     win_SetGroupSelectedState(win, group, 1);
 }
@@ -589,12 +589,12 @@ int far win_DoProxMenu(int win, int item, ...)
     win_Open(win, (&item)[1], (&item)[2]);
     if (item != -1)
         _win_SetProxItem(win + item + 2);
-    f_1FD2_057F();
+    ButtonHeldInit();
     last = -1;
     for (;;) {
         if (!win_IsWinOpen(win))
             break;
-        if (!f_1FD2_0598())
+        if (!ButtonHeld())
             ev.code = win_GetProxEvent();
         else if (!win_GetEvent(&ev))
             continue;
