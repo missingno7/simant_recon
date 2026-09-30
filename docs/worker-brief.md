@@ -46,6 +46,9 @@ profiles run through MS-DOS Player from `C:\tools`. No installation is needed; d
   arguments such as `root:1383` can become Windows path lists (`root;1383`); tools that take
   module keys normalise or refuse them, but when in doubt also set `MSYS2_ARG_CONV_EXCL="*"`.
 * In PowerShell pass flags literally (`--flags /AL /Os /Oe`).
+* **Never kill processes you did not start** (no `taskkill /IM dosbox-x.exe` or similar): many workers, and
+  other projects on this machine, run DOSBox-X/MS-DOS Player compiles in parallel. Stop only your own
+  child processes (keep their PIDs).
 * Only `promote.py` writes to `src/`. Compile and keep drafts, listings and objects in
   `build/workers/NAME/`; `validate.py` fails on any other file under `src/`.
 
