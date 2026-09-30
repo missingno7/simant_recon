@@ -110,6 +110,7 @@ def compile_c(source: str, profile: str, flags: list[str] | None = None,
     src = work / f"{basename}.C"
     src.write_bytes(staged)
     flags = [*(flags if flags is not None else prof["flags"]), *prof.get("required_flags", [])]
+    check_flags(flags)
     if prof.get("runner") == "dosbox-x":
         return _compile_dosbox(prof, tc["runners"]["dosbox-x"], work, basename, flags, keep, timeout)
     bindir = Path(prof["directory"]) / prof.get("bin", ".")
@@ -127,6 +128,17 @@ def compile_c(source: str, profile: str, flags: list[str] | None = None,
     if not keep and res.ok:
         shutil.rmtree(work, ignore_errors=True)
     return res
+
+
+def check_flags(flags: list[str]) -> None:
+    """Refuse host-mangled options: Git Bash turns '/AL' into 'C:/Program Files/Git/AL', and CL
+    then silently compiles near-model code (worker ovlB).  Every option must be a DOS switch;
+    the only non-switch operands allowed are pass names after /B1 /B2 /B3."""
+    prev = ""
+    for f in flags:
+        if ":" in f or any(c.isspace() for c in f) or "\\" in f or (not f.startswith("/") and prev not in ("/B1", "/B2", "/B3")):
+            raise CompileError(f"suspicious compiler option {f!r} (MSYS path conversion? set MSYS_NO_PATHCONV=1)")
+        prev = f
 
 
 def _compile_dosbox(prof: dict, runner: dict, work: Path, basename: str, flags: list[str],

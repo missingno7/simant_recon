@@ -173,6 +173,7 @@ def verify_extent(obj, ext: dict, claims: list[dict], scaff: set, site_key: dict
     # Cross-function relocation order is a separate proof level: bytes and per-function order are
     # already gated per claim; a complete TU whose record breaks between functions differ from the
     # original (e.g. a wrong /Zd-/Zi choice or source line layout) is reported, not hidden.
+    reasons += extent_tail_reasons(claims[0]["unit"], end)
     order = extent_reloc_order(claims[0]["unit"], start, end, site_key or {}, site_index or {})
     if order["order"] == "SET_MISMATCH":
         reasons += order["reasons"]
@@ -180,6 +181,22 @@ def verify_extent(obj, ext: dict, claims: list[dict], scaff: set, site_key: dict
         order["order"] = "CROSS_FUNCTION_PENDING"
     return {"exact": not reasons, "reasons": reasons, "reloc_order": order["order"],
             "order_reasons": order["reasons"]}
+
+
+def extent_tail_reasons(unit: str, end: int) -> list[str]:
+    """The bytes between the extent end and the next known function must be link fill (00),
+    so an extent cannot silently stop before a trailing function (worker ovlB, S20)."""
+    import functions as fnmod
+    starts = sorted(r["seg"] * 16 + r["off"] for r in fnmod.table()["functions"] if r["unit"] == unit)
+    nxt = next((a for a in starts if a >= end), None)
+    if nxt is None or nxt == end:
+        return []
+    if nxt - end >= 16:
+        return []          # a data/unknown gap, not module padding; the extent must be reviewed separately
+    gap = exemod.load().read(unit, end, nxt - end)
+    if any(gap):
+        return [f"bytes after extent end {end:05X} up to next function {nxt:05X} are not fill: {gap.hex()}"]
+    return []
 
 
 def extent_reloc_order(unit: str, start: int, end: int, site_key: dict, site_index: dict) -> dict:

@@ -157,6 +157,18 @@
     }
    ]
   },
+  "AddSomeAnts": {
+   "unit": "root",
+   "seg": 347,
+   "off": 14,
+   "grounding": "inventory:far_call,push_cs_call",
+   "history": [
+    {
+     "was": "f_015B_000E",
+     "why": "MAPSYM SIMANT_MODULE unit 9D04.. (AddSomeAnts..MysteryButton) aligns 1:1 in member order with DOS module 015B functions 1-12; anchored by MysteryButton (xver HIGH, f_015B_0D0C, same unit end), KillSomeAnts (MEDIUM), GotoMyAnt (MEDIUM, 5 anchors); body matches Win16 source tu_simant_9D04; body: ListIndexA<1000, CommandKey==1 -> AddBlackAnts/AddRedAnts(1000-count) else 0x20, FullCount"
+    }
+   ]
+  },
   "AddWater": {
    "unit": "root",
    "seg": 3048,
@@ -298,6 +310,18 @@
     {
      "was": "o18_384C_041D",
      "why": "Win16 SIMONE_MODULE run 3100..45AC (MakeMap..AddRock3, 23 members, between ClearListR and InitSpider) aligns 1:1 in order and count with DOS section S18 frame 384C (23 functions); anchored member MakeYardPatch (0C13): body identical to Win16 MakeYardPatch (TERRAINset/0x3e8 tile set, 128x64 SRand16 fill, AddRocks, InitAntLions(SRand4()+1), InitPillar = registered DOS names, 20/30/100/128 SRand1(0x7d)/SRand1(0x3d) placement passes with tiles 0x20-0x23, (SRand1(2)+0x12)<<1, 0x28, 0x51); call graph agrees (MakeMap->MakeYardPatch/MakeHousePatch(x*16+y>0x25), MakeKitchenWall->MakeOutletV(0x24,2),(0x54,2)+DROPdir=2, FloorTiles DROPdir=0, MakeOutletV/H->TileFrame1+MakePlugV/H, AddRocks->AddRock5 x6/AddRock3 x6 with SRand1(122/58),(124/60)); equal-size pairs TileFrame1/2, MakeOutletV/H, CarpetFloorL/R match on both sides"
+    }
+   ]
+  },
+  "CenterAnt": {
+   "unit": "root",
+   "seg": 347,
+   "off": 1619,
+   "grounding": "inventory:far_call",
+   "history": [
+    {
+     "was": "f_015B_0653",
+     "why": "MAPSYM SIMANT_MODULE unit 9D04.. (AddSomeAnts..MysteryButton) aligns 1:1 in member order with DOS module 015B functions 1-12; anchored by MysteryButton (xver HIGH, f_015B_0D0C, same unit end), KillSomeAnts (MEDIUM), GotoMyAnt (MEDIUM, 5 anchors); body matches Win16 source tu_simant_9D04; body: LessonTemp=1, MePlane!=MapPlane -> SetMapPlane(MePlane), CenterEdit(MeLocX,MeLocY)"
     }
    ]
   },
@@ -2641,6 +2665,42 @@
     }
    ]
   },
+  "GotoMapPoint": {
+   "unit": "root",
+   "seg": 347,
+   "off": 1271,
+   "grounding": "inventory:push_cs_call",
+   "history": [
+    {
+     "was": "f_015B_04F7",
+     "why": "MAPSYM SIMANT_MODULE unit 9D04.. (AddSomeAnts..MysteryButton) aligns 1:1 in member order with DOS module 015B functions 1-12; anchored by MysteryButton (xver HIGH, f_015B_0D0C, same unit end), KillSomeAnts (MEDIUM), GotoMyAnt (MEDIUM, 5 anchors); body matches Win16 source tu_simant_9D04; body: plane==MapPlane&&plane>0 -> CenterEdit(x,y), UDMapFlip=0 else SetMapPlaneLocation"
+    }
+   ]
+  },
+  "GotoMyAnt": {
+   "unit": "root",
+   "seg": 347,
+   "off": 1698,
+   "grounding": "inventory:far_call",
+   "history": [
+    {
+     "was": "f_015B_06A2",
+     "why": "MAPSYM SIMANT_MODULE unit 9D04.. (AddSomeAnts..MysteryButton) aligns 1:1 in member order with DOS module 015B functions 1-12; anchored by MysteryButton (xver HIGH, f_015B_0D0C, same unit end), KillSomeAnts (MEDIUM), GotoMyAnt (MEDIUM, 5 anchors); body matches Win16 source tu_simant_9D04"
+    }
+   ]
+  },
+  "GotoSpider": {
+   "unit": "root",
+   "seg": 347,
+   "off": 1781,
+   "grounding": "inventory:far_call",
+   "history": [
+    {
+     "was": "f_015B_06F5",
+     "why": "MAPSYM SIMANT_MODULE unit 9D04.. (AddSomeAnts..MysteryButton) aligns 1:1 in member order with DOS module 015B functions 1-12; anchored by MysteryButton (xver HIGH, f_015B_0D0C, same unit end), KillSomeAnts (MEDIUM), GotoMyAnt (MEDIUM, 5 anchors); body matches Win16 source tu_simant_9D04; body: !SpidOn -> myBeginSound(1,0,0x7e) else GotoMapPoint(1,SpidX>>4,SpidY>>4)"
+    }
+   ]
+  },
   "GstrB": {
    "unit": "root",
    "seg": 4995,
@@ -3109,6 +3169,18 @@
     }
    ]
   },
+  "KillSomeAnts": {
+   "unit": "root",
+   "seg": 347,
+   "off": 111,
+   "grounding": "inventory:far_call,push_cs_call",
+   "history": [
+    {
+     "was": "f_015B_006F",
+     "why": "MAPSYM SIMANT_MODULE unit 9D04.. (AddSomeAnts..MysteryButton) aligns 1:1 in member order with DOS module 015B functions 1-12; anchored by MysteryButton (xver HIGH, f_015B_0D0C, same unit end), KillSomeAnts (MEDIUM), GotoMyAnt (MEDIUM, 5 anchors); body matches Win16 source tu_simant_9D04; body: CompactListA/FullCount, DeadAntHere loop with ++n>50 break"
+    }
+   ]
+  },
   "KillSpider": {
    "unit": "root",
    "seg": 3291,
@@ -3490,6 +3562,18 @@
     {
      "was": "f_0CDB_00B3",
      "why": "Win16 SIMONE_MODULE MAPSYM run _InitSpider,_MoveSpider,_ScanForAnts,_KillSpider,_SFoundAnt,_SpiderScan,_SGetDis aligns 1:1 in order with the 7 functions of DOS module root:0CDB; SpiderScan xver HIGH; KillSpider body identical to Win16 recovered KillSpider (SMode=5, DeathCnt=500, Scycle=0); SGetDis body identical to Win16 recovered SGetDis (|x2-x1|+|y2-y1|); position 2"
+    }
+   ]
+  },
+  "MysteryButton": {
+   "unit": "root",
+   "seg": 347,
+   "off": 3340,
+   "grounding": "inventory:far_call",
+   "history": [
+    {
+     "was": "f_015B_0D0C",
+     "why": "xver HIGH (3 anchored callees AddFood, MakeNewHoleB, RRand); last member of MAPSYM unit AddSomeAnts..MysteryButton aligned with module 015B"
     }
    ]
   },
@@ -4417,6 +4501,42 @@
     }
    ]
   },
+  "SetMapModeAnt": {
+   "unit": "root",
+   "seg": 347,
+   "off": 465,
+   "grounding": "inventory:far_call,push_cs_call",
+   "history": [
+    {
+     "was": "f_015B_01D1",
+     "why": "MAPSYM SIMANT_MODULE unit 9D04.. (AddSomeAnts..MysteryButton) aligns 1:1 in member order with DOS module 015B functions 1-12; anchored by MysteryButton (xver HIGH, f_015B_0D0C, same unit end), KillSomeAnts (MEDIUM), GotoMyAnt (MEDIUM, 5 anchors); body matches Win16 source tu_simant_9D04; body: MapMode==mode&&4..8 -> 1, switch, table 0x109,0x10a,0x10c,0x10d,0x10b = Win16 antModeObjIds[5..9]"
+    }
+   ]
+  },
+  "SetMapPlane": {
+   "unit": "root",
+   "seg": 347,
+   "off": 1340,
+   "grounding": "inventory:far_call,push_cs_call",
+   "history": [
+    {
+     "was": "f_015B_053C",
+     "why": "MAPSYM SIMANT_MODULE unit 9D04.. (AddSomeAnts..MysteryButton) aligns 1:1 in member order with DOS module 015B functions 1-12; anchored by MysteryButton (xver HIGH, f_015B_0D0C, same unit end), KillSomeAnts (MEDIUM), GotoMyAnt (MEDIUM, 5 anchors); body matches Win16 source tu_simant_9D04"
+    }
+   ]
+  },
+  "SetMapPlaneLocation": {
+   "unit": "root",
+   "seg": 347,
+   "off": 966,
+   "grounding": "inventory:push_cs_call",
+   "history": [
+    {
+     "was": "f_015B_03C6",
+     "why": "MAPSYM SIMANT_MODULE unit 9D04.. (AddSomeAnts..MysteryButton) aligns 1:1 in member order with DOS module 015B functions 1-12; anchored by MysteryButton (xver HIGH, f_015B_0D0C, same unit end), KillSomeAnts (MEDIUM), GotoMyAnt (MEDIUM, 5 anchors); body matches Win16 source tu_simant_9D04; (plane,x,y) sets plane then CenterEdit-like f_0250_0FC4(x,y)"
+    }
+   ]
+  },
   "SetModeProd": {
    "unit": "root",
    "seg": 4995,
@@ -4498,6 +4618,18 @@
     {
      "was": "f_0798_0E47",
      "why": "Win16 SIMANT_MODULE unit InitTriVars..initControls (MAPSYM B324..CC84, 20 members) aligns in order with the 18 functions of DOS root:0798 once the two Windows-only callbacks win_CasteControlChanged/win_ModeControlChanged are removed; InitTriVars body identical to Win16 recovered InitTriVars (win_GetObjRect, width/2, height, (half<<8)/height, 6 tri points); call graph agrees (OpenCaste->UpdateCaste+win_Open, ProcCaste->DrawCaste, ProcMode->DrawMode, Draw*->SetTriLatPoint, ProcCaste/initControls->cvtLevels2IdealCaste); ProcCasteEvent/ProcModeEvent xver unique constants 0x1303/0x1203; DrawControlLevels xver MEDIUM (%-ld%%)"
+    }
+   ]
+  },
+  "SetYardMode": {
+   "unit": "root",
+   "seg": 347,
+   "off": 627,
+   "grounding": "inventory:far_call,push_cs_call",
+   "history": [
+    {
+     "was": "f_015B_0273",
+     "why": "MAPSYM SIMANT_MODULE unit 9D04.. (AddSomeAnts..MysteryButton) aligns 1:1 in member order with DOS module 015B functions 1-12; anchored by MysteryButton (xver HIGH, f_015B_0D0C, same unit end), KillSomeAnts (MEDIUM), GotoMyAnt (MEDIUM, 5 anchors); body matches Win16 source tu_simant_9D04; DOS string 'Yardmode=%d, newMode=%d'"
     }
    ]
   },
@@ -4714,6 +4846,18 @@
     {
      "was": "f_0AD9_0D2B",
      "why": "Win16 SIMTWO_MODULE run 3EF8..5A02 (InitSow..PillFoodTile, 19 members, between EndMigrate and InitSimVars) aligns 1:1 with DOS module 0AD9 (19 functions); xver DoAntLions (pos 6, LOW) agrees; call graph agrees (InitPillar->InitSow, DoPillar->DoSow, AddRandAntLion->AddAntLion, DoAntLions->SetAntLion/KillAntLion/FindInAList, DoPillar->pillar helpers)"
+    }
+   ]
+  },
+  "SubtractFood": {
+   "unit": "root",
+   "seg": 347,
+   "off": 343,
+   "grounding": "inventory:far_call,push_cs_call",
+   "history": [
+    {
+     "was": "f_015B_0157",
+     "why": "MAPSYM SIMANT_MODULE unit 9D04.. (AddSomeAnts..MysteryButton) aligns 1:1 in member order with DOS module 015B functions 1-12; anchored by MysteryButton (xver HIGH, f_015B_0D0C, same unit end), KillSomeAnts (MEDIUM), GotoMyAnt (MEDIUM, 5 anchors); body matches Win16 source tu_simant_9D04; body: IsItFood(MapA[r][c])==1 -> SRand16(), FoodA=0"
     }
    ]
   },
@@ -5883,19 +6027,19 @@
    "unit": "root",
    "seg": 347,
    "off": 14,
-   "grounding": "inventory:far_call,push_cs_call"
+   "alias_of": "AddSomeAnts"
   },
   "f_015B_006F": {
    "unit": "root",
    "seg": 347,
    "off": 111,
-   "grounding": "inventory:far_call,push_cs_call"
+   "alias_of": "KillSomeAnts"
   },
   "f_015B_0157": {
    "unit": "root",
    "seg": 347,
    "off": 343,
-   "grounding": "inventory:far_call,push_cs_call"
+   "alias_of": "SubtractFood"
   },
   "f_015B_01B8": {
    "unit": "root",
@@ -5907,49 +6051,49 @@
    "unit": "root",
    "seg": 347,
    "off": 465,
-   "grounding": "inventory:far_call,push_cs_call"
+   "alias_of": "SetMapModeAnt"
   },
   "f_015B_0273": {
    "unit": "root",
    "seg": 347,
    "off": 627,
-   "grounding": "inventory:far_call,push_cs_call"
+   "alias_of": "SetYardMode"
   },
   "f_015B_03C6": {
    "unit": "root",
    "seg": 347,
    "off": 966,
-   "grounding": "inventory:push_cs_call"
+   "alias_of": "SetMapPlaneLocation"
   },
   "f_015B_04F7": {
    "unit": "root",
    "seg": 347,
    "off": 1271,
-   "grounding": "inventory:push_cs_call"
+   "alias_of": "GotoMapPoint"
   },
   "f_015B_053C": {
    "unit": "root",
    "seg": 347,
    "off": 1340,
-   "grounding": "inventory:far_call,push_cs_call"
+   "alias_of": "SetMapPlane"
   },
   "f_015B_0653": {
    "unit": "root",
    "seg": 347,
    "off": 1619,
-   "grounding": "inventory:far_call"
+   "alias_of": "CenterAnt"
   },
   "f_015B_06A2": {
    "unit": "root",
    "seg": 347,
    "off": 1698,
-   "grounding": "inventory:far_call"
+   "alias_of": "GotoMyAnt"
   },
   "f_015B_06F5": {
    "unit": "root",
    "seg": 347,
    "off": 1781,
-   "grounding": "inventory:far_call"
+   "alias_of": "GotoSpider"
   },
   "f_015B_073E": {
    "unit": "root",
@@ -5997,7 +6141,7 @@
    "unit": "root",
    "seg": 347,
    "off": 3340,
-   "grounding": "inventory:far_call"
+   "alias_of": "MysteryButton"
   },
   "f_0244_0000": {
    "unit": "root",
