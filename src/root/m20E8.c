@@ -198,11 +198,6 @@ void far win_Swap(int from, int to, int unused, int p0, int p1, int p2, int p3)
     f_1E57_0362();
 }
 
-/* SCAFFOLD BEGIN: win_Open best draft.
-   Residue: (1) the first w = f_2505_0006(win) is kept in BX (dead-store
-   eliminated) where the original assigns SI/[bp-0Eh]; (2) near globals
-   g_3DB4/g_3DB2 are compared as cmp [g],reg while the original loads the
-   global into AX first (mov ax,[3DB4]; cmp [bp-12h],ax; jle) - 388 vs 383. */
 extern void _fastcall win_LockWinHigh(int win);
 extern void _fastcall f_2505_0288(int obj, struct Rect far *rect);
 extern int near g_3DB4;
@@ -210,7 +205,7 @@ extern int far fd_50F6_3942;
 extern int near g_3DB2;
 extern void far win_FlushEvents(void);
 
-void far win_Open(int win, int p0, int p1, int p2, int p3)
+void far win_Open(int win, ...)
 {
     char far *w;
     int dx;
@@ -222,22 +217,22 @@ void far win_Open(int win, int p0, int p1, int p2, int p3)
         win_LockWinHigh(win);
         (*g_62E4)();
         w = f_2505_0006(win);
-        ((int far *)(w + 0x10))[0] = p0;
-        ((int far *)(w + 0x10))[1] = p1;
-        ((int far *)(w + 0x10))[2] = p2;
-        ((int far *)(w + 0x10))[3] = p3;
+        ((int far *)(w + 0x10))[0] = (&win)[1];
+        ((int far *)(w + 0x10))[1] = (&win)[2];
+        ((int far *)(w + 0x10))[2] = (&win)[3];
+        ((int far *)(w + 0x10))[3] = (&win)[4];
         win_Recalc(win);
         w = f_2505_0006(win);
         if (*(int far *)(w + 0x1c) & 0x1000) {
             dx = dy = 0;
             f_2505_0288(win, &r);
-            if (g_3DB4 < r.bottom)
+            if (r.bottom > g_3DB4)
                 dy = g_3DB4 - r.bottom;
             else if (r.top <= fd_50F6_3942)
                 dy = fd_50F6_3942 - r.top;
             if (r.left < 0)
                 dx = -r.left;
-            else if (g_3DB2 <= r.right)
+            else if (r.right >= g_3DB2)
                 dx = g_3DB2 - r.right;
             origin = (int far *)(((char far * far *)(w + 0x2c))[0] + 8);
             win_offsets[win >> 8] = *(struct Rect far *)origin;
@@ -259,8 +254,6 @@ void far win_Open(int win, int p0, int p1, int p2, int p3)
     }
     win_FlushEvents();
 }
-
-/* SCAFFOLD END */
 
 extern void _fastcall f_21FA_0B4B(struct Rect far *rect);
 

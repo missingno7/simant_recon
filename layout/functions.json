@@ -1421,6 +1421,20 @@
 },
 {
 "unit": "root",
+"seg": 580,
+"off": 186,
+"size": 19,
+"region": "game_or_library",
+"extent": "REVIEWED",
+"evidence": [
+"reviewed"
+],
+"notes": [
+"unreferenced twin of f_0244_00A7 right after it (xor ax,ax; call __aFchkstk; Barrier = 90h; retf), module 0244 ends at 024CD (LINK fill 00, module 0250 at 0250E)"
+]
+},
+{
+"unit": "root",
 "seg": 592,
 "off": 14,
 "size": 96,
@@ -12410,8 +12424,8 @@
 },
 {
 "unit": "root",
-"seg": 10110,
-"off": 2426,
+"seg": 10261,
+"off": 10,
 "size": 270,
 "region": "game_or_library",
 "extent": "REVIEWED",
@@ -12419,7 +12433,8 @@
 "reviewed"
 ],
 "notes": [
-"prologue scan in unreached gap; descent ends in a return; no references found (unreferenced or indirect)"
+"prologue scan in unreached gap; descent ends in a return; no references found (unreferenced or indirect)",
+"re-framed 277E:097A -> 2815:000A: first function of module 2815: relocation-table frames 2815 and near call from 2815:0275 (worker snd)"
 ]
 },
 {

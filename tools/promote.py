@@ -62,6 +62,8 @@ def main() -> int:
     ap.add_argument("--placement", action="append", default=[], help="SEGNAME=SEG:OFF:SIZE")
     ap.add_argument("--drop-placement", action="append", default=[], help="SEGNAME to remove (e.g. renamed segment)")
     ap.add_argument("--steered", default=None)
+    ap.add_argument("--release", action="append", default=[],
+                    help="NAME=WHY: drop a claim that belongs to another module (journaled)")
     ap.add_argument("--unsteer", action="append", default=[],
                     help="NAME=WHY: the steering construct of an existing claim was removed (kept as history)")
     ap.add_argument("--extent", help="START:END linear (hex): claim the complete module segment (exact TU)")
@@ -140,6 +142,18 @@ def main() -> int:
                                "target_sha256": sha(x.read(unit, d0, d1 - d0)), "kind": modmod.DATA_KIND,
                                "provenance": "EXACT_STEERED" if a.steered else "EXACT_NATURAL",
                                **({"steered": a.steered} if a.steered else {})})
+        # release claims that belong to another translation unit (e.g. a function mis-attributed
+        # across a module boundary); the rest of the module is re-verified as usual and the release
+        # is journaled.  The released function must then be claimed by its true module.
+        released = []
+        for spec in a.release:
+            name, _, why = spec.partition("=")
+            if not why:
+                raise SystemExit("--release NAME=WHY: give the evidence")
+            if not any(c["name"] == name for c in old_claims):
+                raise SystemExit(f"--release {name}: not a claim of {key}")
+            old_claims = [c for c in old_claims if c["name"] != name]
+            released.append({"name": name, "why": why})
         claims = old_claims + new_claims
         # steering removed from the source: the claim becomes natural once this source re-verifies;
         # the old note is kept as history (the author asserts the steering construct is gone)
@@ -212,6 +226,7 @@ def main() -> int:
         with JOURNAL.open("a") as fh:
             fh.write(json.dumps({"time": dt.datetime.now().isoformat(timespec="seconds"), "module": key,
                                  "new_claims": [c["name"] for c in new_claims], "profile": profile,
+                                 **({"released": released} if released else {}),
                                  "flags": flags, "source_sha256": sha(data),
                                  "object_sha256": res.get("object_sha256")}) + "\n")
         print(f"PROMOTED {len(new_claims)} new claim(s) into {path.relative_to(ROOT)}")

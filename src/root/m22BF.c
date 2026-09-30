@@ -115,7 +115,7 @@ int _fastcall f_22BF_0AC5(int);
 int _fastcall f_22BF_0AEF(int);
 int _fastcall f_22BF_0B25(int);
 void _fastcall f_22BF_0B5B(struct Rect far *, struct Rect far *, int, int, int, int);
-int far win_DoProxMenu(int, int, int, int);
+int far win_DoProxMenu(int, int, ...);
 void far f_22BF_0C38(int);
 void far f_22BF_0CDD(int);
 void far win_PrintfAtObj(int, char far *, ...);
@@ -579,18 +579,14 @@ void _fastcall f_22BF_0B5B(struct Rect far *dst, struct Rect far *src, int l, in
     dst->bottom = src->bottom + b;
 }
 
-/* SCAFFOLD BEGIN: win_DoProxMenu draft (modal dialog loop).
-   Residue: symbol-table count; with +12 identifiers before 0271, +5 before 04A7
-   and +14 before this function the whole module is exact (result = -1 lives in DI,
-   copied to [bp-2] before the loop). 144 vs 141 bytes as is. */
-int far win_DoProxMenu(int win, int item, int p0, int p1)
+int far win_DoProxMenu(int win, int item, ...)
 {
     int result;
     int last;
     struct Event ev;
 
     result = -1;
-    win_Open(win, p0, p1);
+    win_Open(win, (&item)[1], (&item)[2]);
     if (item != -1)
         _win_SetProxItem(win + item + 2);
     f_1FD2_057F();
@@ -611,7 +607,6 @@ int far win_DoProxMenu(int win, int item, int p0, int p1)
     win_Close(win);
     return result;
 }
-/* SCAFFOLD END */
 
 void far f_22BF_0C38(int obj)
 {
@@ -658,6 +653,8 @@ void far win_PrintfAtObj(int obj, char far *format, ...)
     win_CenterStrAtObj(obj, buf);
 }
 
+/* The label below is inferred from the relocation order (ZI-2): the original has a
+   record break at 0DDD.  More counted line entries before it would explain it too. */
 void far win_DrawHBar(int obj, long fraction)
 {
     struct Rect r;
@@ -671,8 +668,10 @@ void far win_DrawHBar(int obj, long fraction)
         right = end;
         r.right = r.left + (int)((extent * fraction) / 65536L);
     }
-    if (r.right > r.left)
-        f_1CE2_046D(&r, g_3DE0);
+    if (r.right <= r.left)
+        goto rest;
+    f_1CE2_046D(&r, g_3DE0);
+rest:
     if (r.right < right) {
         r.left = r.right;
         r.right = right;

@@ -289,6 +289,14 @@ class Binder:
             res.fixups.append(rec)
         # oracle relocations inside the extent, in table order
         exp = [s * 16 + o for s, o in self.x.unit_relocs(t.unit) if t.linear <= s * 16 + o < t.linear + t.size]
+        # the relocation table stores each site as frame:offset of the segment it was linked in,
+        # so every site inside a claim must carry the claim's own code frame (module boundary proof;
+        # worker snd found 277E:097A = 2815:000A this way)
+        foreign = sorted({s for s, o in self.x.unit_relocs(t.unit)
+                          if t.linear <= s * 16 + o < t.linear + t.size and s != t.seg})
+        if foreign:
+            res.reasons.append("relocation sites belong to frame(s) " + ", ".join(f"{s:04X}" for s in foreign)
+                               + f", not the claim's frame {t.seg:04X}")
         res.relocs_expected = exp
         res.relocs_candidate = cand_relocs
         res.reloc_key = reloc_key

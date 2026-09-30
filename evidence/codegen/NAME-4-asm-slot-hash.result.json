@@ -1,6 +1,6 @@
 {
- "id": "NAME-3",
- "question": "In a function containing inline _asm (MSC 6.00AX /AL /Os /Oe /Og /Gs), locals are not enregistered and get BP slots in ascending order of (sum of the name's character codes) mod 16, ties going to the later declaration; declaration order and first use do not matter. Positive controls: f_29D6_00D9 exact only with names tmp/val/port/reg/freq (sums mod 16 = 1, 3, 5, 14, 14; reg declared after freq) giving [bp-2],[bp-4],[bp-6],[bp-8],[bp-10] as in the original; f_293A_002D exact with base/p (p=0 before base=11). Worker snd, build/workers/snd/hashprobe.py.",
+ "id": "NAME-4",
+ "question": "Same bucket rule as NAME-3 (worker rootE, /Od), here for optimised builds: in a function containing inline _asm (MSC 6.00AX /AL /Os /Oe /Og /Gs), locals are not enregistered and get BP slots in ascending order of (sum of the name's character codes) mod 16, ties going to the later declaration; declaration order and first use do not matter. Positive controls: f_29D6_00D9 exact only with names tmp/val/port/reg/freq (sums mod 16 = 1, 3, 5, 14, 14; reg declared after freq) giving [bp-2],[bp-4],[bp-6],[bp-8],[bp-10] as in the original; f_293A_002D exact with base/p (p=0 before base=11). Worker snd, build/workers/snd/hashprobe.py.",
  "results": [
   {
    "variant": "names_c_b_a",

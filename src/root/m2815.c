@@ -5,20 +5,14 @@ struct Instr {
     unsigned char far *p;
 };
 
-/* These tables are this module's _DATA (55B3:68FE-693C; used only by 2815:000A and
-   f_2815_0165) but are currently defined in src/root/m277E.c; see the note below. */
-extern char g_68FE[];
-extern char g_6908[];
-extern char g_6912[];
-extern int g_6924[];
+char g_68FE[] = { 0, 1, 2, 6, 7, 8, 12, 13, 14 };
+char g_6908[] = { 3, 4, 5, 9, 10, 11, 15, 16, 17 };
+char g_6912[] = { 0, 1, 2, 3, 4, 5, 8, 9, 10, 11, 12, 13, 16, 17, 18, 19, 20, 21 };
+int g_6924[] = { 0x157, 0x16b, 0x181, 0x198, 0x1b0, 0x1ca, 0x1e5, 0x202, 0x220, 0x241, 0x263, 0x287 };
 
 extern void far f_283E_000A(char reg, char value);
 
-/* SCAFFOLD BEGIN: 2815:000A is the first function of this segment (the MZ relocation
-   entries of its far calls carry frame 2815, and f_2815_0275 calls it with push cs /
-   call near), but it is currently claimed by module 277E as f_277E_097A.  Kept here
-   unclaimed, with its exact body, until the function row is re-framed. */
-void far f_277E_097A(char far *p, int voice)
+void far f_2815_000A(char far *p, int voice)
 {
     char op1;
     char op2;
@@ -37,7 +31,6 @@ void far f_277E_097A(char far *p, int voice)
     f_283E_000A(op2 + 0xe0, p[9]);
     f_283E_000A(voice + 0xc0, p[8]);
 }
-/* SCAFFOLD END */
 
 void far f_2815_0118(void)
 {
@@ -81,5 +74,5 @@ void far f_2815_024D(int a, int voice)
 
 void far f_2815_0275(int instr, int voice)
 {
-    f_277E_097A(fd_50F6_0000[instr].p, voice);
+    f_2815_000A(fd_50F6_0000[instr].p, voice);
 }

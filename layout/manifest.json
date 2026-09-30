@@ -6587,6 +6587,81 @@
    "scaffold": [],
    "object_sha256": "a26be1614bca353e1f9dbcebdded1d9bd6970218c07186f74d5cd53955d0ff2a"
   },
+  "root:00BA": {
+   "unit": "root",
+   "seg": 186,
+   "profile": "msc600ax",
+   "flags": [
+    "/AL",
+    "/Os",
+    "/Oe",
+    "/Og",
+    "/Zi"
+   ],
+   "placements": {
+    "_DATA": {
+     "seg": 21939,
+     "off": 6226,
+     "size": 11
+    },
+    "CONST": {
+     "seg": 21939,
+     "off": 32246,
+     "size": 4
+    }
+   },
+   "lang": "c",
+   "source": "src/root/m00BA.c",
+   "source_sha256": "ac6e72203155de041b09d49076f86ccd65f8cc470cbdae5f9b9e24cfd5f93a50",
+   "claims": [
+    {
+     "name": "f_00BA_01B6",
+     "unit": "root",
+     "seg": 186,
+     "off": 438,
+     "size": 13,
+     "target_sha256": "4bdb90c5c7556a6de7762823a9fc5cd01138650ebbaf5a9bcba67fd1c3739d94",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL",
+     "reloc_order": "GROUPED"
+    },
+    {
+     "name": "f_00BA_01C3",
+     "unit": "root",
+     "seg": 186,
+     "off": 451,
+     "size": 78,
+     "target_sha256": "568520186db6efc010f131ac3cc6511ef46b5f945865105dd0ef54ac50326780",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL",
+     "reloc_order": "GROUPED"
+    },
+    {
+     "name": "f_00BA_0211",
+     "unit": "root",
+     "seg": 186,
+     "off": 529,
+     "size": 23,
+     "target_sha256": "90f7f82143654990753b20efe40777c852915914b840633892809d0f71de2d7b",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL",
+     "reloc_order": "GROUPED"
+    },
+    {
+     "name": "f_00BA_0228",
+     "unit": "root",
+     "seg": 186,
+     "off": 552,
+     "size": 33,
+     "target_sha256": "62e869bb4413ed0f271d1cc198125fc08e3155f3f61257297f97b3a020d805c3",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL",
+     "reloc_order": "GROUPED"
+    }
+   ],
+   "scaffold": [],
+   "object_sha256": "a2468538afda73e378e5e4408440877d001b6b844cb157647548bb6d3a0413b6"
+  },
   "root:00DF": {
    "unit": "root",
    "seg": 223,
@@ -7488,6 +7563,84 @@
    ],
    "scaffold": [],
    "object_sha256": "fb0aa2cc19e17b66bf88280081fbfa6902aad1a1dc1da90b734b5b845072f0ce"
+  },
+  "root:0244": {
+   "unit": "root",
+   "seg": 580,
+   "profile": "msc600ax",
+   "flags": [
+    "/AL",
+    "/Os",
+    "/Oe",
+    "/Zi"
+   ],
+   "placements": {
+    "_DATA": {
+     "seg": 21939,
+     "off": 6570,
+     "size": 19
+    },
+    "CONST": {
+     "seg": 21939,
+     "off": 32394,
+     "size": 2
+    }
+   },
+   "lang": "c",
+   "extent": {
+    "start": 9280,
+    "end": 9485
+   },
+   "source": "src/root/m0244.c",
+   "source_sha256": "dd61b7070f03802d1c6b5f2ea40f4f1a66660f92503f9dc78964c31ed680a80d",
+   "claims": [
+    {
+     "name": "f_0244_0000",
+     "unit": "root",
+     "seg": 580,
+     "off": 0,
+     "size": 34,
+     "target_sha256": "e7df668b283d8466e412511c56fd2afaf48a1be11246781cd220c9172c3e2bb7",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL",
+     "reloc_order": "EXACT"
+    },
+    {
+     "name": "f_0244_0022",
+     "unit": "root",
+     "seg": 580,
+     "off": 34,
+     "size": 133,
+     "target_sha256": "9f69a1c81b7ce9f4e96e70f36570a35138f8e286b32ba6d5392096d3bfa3ae93",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL",
+     "reloc_order": "GROUPED"
+    },
+    {
+     "name": "f_0244_00A7",
+     "unit": "root",
+     "seg": 580,
+     "off": 167,
+     "size": 19,
+     "target_sha256": "eef4cb88d2856af03de18d535bb1d12538a03f87c0317fb10d63214d2cce1a21",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL",
+     "reloc_order": "EXACT"
+    },
+    {
+     "name": "f_0244_00BA",
+     "unit": "root",
+     "seg": 580,
+     "off": 186,
+     "size": 19,
+     "target_sha256": "1ca2aa92b0a324248e2326748c089f0b21f80b9f34e7e094ed452a955ae8c214",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL",
+     "reloc_order": "EXACT"
+    }
+   ],
+   "scaffold": [],
+   "object_sha256": "ac38049c39784dc1773d17423264acedad3e523ba84b5288cf46cc6c5b6ac131"
   },
   "root:0250": {
    "unit": "root",
@@ -11080,6 +11233,58 @@
    ],
    "object_sha256": "fbcaf7b3bdf1c62a571cb9d8b483564ee485cf7a1faa8cc33897935090c25725"
   },
+  "root:15D9": {
+   "unit": "root",
+   "seg": 5593,
+   "profile": "msc600ax",
+   "flags": [
+    "/AL",
+    "/Os",
+    "/Oe",
+    "/Og",
+    "/Zi"
+   ],
+   "placements": {
+    "CONST": {
+     "seg": 21939,
+     "off": 33722,
+     "size": 14
+    }
+   },
+   "lang": "c",
+   "extent": {
+    "start": 89494,
+    "end": 89988
+   },
+   "source": "src/root/m15D9.c",
+   "source_sha256": "37ff0aebf4fb1a662fd2328015a16be37cc803178031068d6207f15320766ba7",
+   "claims": [
+    {
+     "name": "f_15D9_0006",
+     "unit": "root",
+     "seg": 5593,
+     "off": 6,
+     "size": 150,
+     "target_sha256": "f490be0cbe09f5eeadc839d73d0cdec82e6daf71835cbd5b38975185c67a2f5c",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL",
+     "reloc_order": "GROUPED"
+    },
+    {
+     "name": "f_15D9_009C",
+     "unit": "root",
+     "seg": 5593,
+     "off": 156,
+     "size": 344,
+     "target_sha256": "f8ed95091e3a0e875cc44738a6492a8e0c715ff2293bd0b35e7a4c23ce73a96e",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL",
+     "reloc_order": "GROUPED"
+    }
+   ],
+   "scaffold": [],
+   "object_sha256": "33a114566f224b10cd08e74f0623604139f4381170a05d63f180087027905f16"
+  },
   "root:1629": {
    "unit": "root",
    "seg": 5673,
@@ -12918,6 +13123,107 @@
     "ch_LookUpId"
    ],
    "object_sha256": "189fd819ecf1d94f42ce49503f56bd043411725f5d96f5b031fd94e429d4d3b4"
+  },
+  "root:1B28": {
+   "unit": "root",
+   "seg": 6952,
+   "profile": "msc600ax",
+   "flags": [
+    "/AL",
+    "/Os",
+    "/Oe",
+    "/Og",
+    "/Gs"
+   ],
+   "placements": {
+    "_DATA": {
+     "seg": 21939,
+     "off": 15618,
+     "size": 30
+    },
+    "CONST": {
+     "seg": 21939,
+     "off": 35270,
+     "size": 2
+    }
+   },
+   "lang": "c",
+   "extent": {
+    "start": 111238,
+    "end": 111851
+   },
+   "source": "src/root/m1B28.c",
+   "source_sha256": "9e1c31226eae71d8ab1cc1e2de68bfd7840ba678b02dd72a4ba7757e25543343",
+   "claims": [
+    {
+     "name": "f_1B28_0006",
+     "unit": "root",
+     "seg": 6952,
+     "off": 6,
+     "size": 98,
+     "target_sha256": "056f07f9aee4e77c83c15c2a5181140adc4ec95dbec57a7e105862aef76a6c44",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL",
+     "reloc_order": "EXACT"
+    },
+    {
+     "name": "f_1B28_0068",
+     "unit": "root",
+     "seg": 6952,
+     "off": 104,
+     "size": 1,
+     "target_sha256": "383e5d7d58caa41ce723cf16af471b38f6ee9065c032d07fa6bef1678cb72f1d",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL",
+     "reloc_order": "EXACT"
+    },
+    {
+     "name": "f_1B28_0069",
+     "unit": "root",
+     "seg": 6952,
+     "off": 105,
+     "size": 1,
+     "target_sha256": "383e5d7d58caa41ce723cf16af471b38f6ee9065c032d07fa6bef1678cb72f1d",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL",
+     "reloc_order": "EXACT"
+    },
+    {
+     "name": "f_1B28_006A",
+     "unit": "root",
+     "seg": 6952,
+     "off": 106,
+     "size": 191,
+     "target_sha256": "8c5dd9024739ad8f4d3672c57611a42981398ff509b2ffcd07eeb1561a3670ca",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL",
+     "reloc_order": "GROUPED"
+    },
+    {
+     "name": "f_1B28_0129",
+     "unit": "root",
+     "seg": 6952,
+     "off": 297,
+     "size": 162,
+     "target_sha256": "2d55e3d899557602994fc4ed79607af69b8b691853154bebb093fc7b9c89b1e7",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL",
+     "reloc_order": "GROUPED"
+    },
+    {
+     "name": "f_1B28_01CB",
+     "unit": "root",
+     "seg": 6952,
+     "off": 459,
+     "size": 160,
+     "target_sha256": "5d98622260c350c746458980494cb43ffb78dce59e5484b35034b34ca26828bd",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL",
+     "reloc_order": "GROUPED"
+    }
+   ],
+   "scaffold": [],
+   "object_sha256": "284cd2c3c86b44f01797f4f5326aa468a1fecdbcc971ce84d48163c189ba576c"
   },
   "root:1B73": {
    "unit": "root",
@@ -15369,7 +15675,7 @@
    },
    "lang": "c",
    "source": "src/root/m20E8.c",
-   "source_sha256": "5cd3ac2997dd0d9277b929059f60ed415c7efe6bc217cd866a6a6871b0ebb470",
+   "source_sha256": "a57f277ece3c4a83b4acab98c4821cc74564a2571ad1d3c8a9d809ae57795f59",
    "claims": [
     {
      "name": "f_20E8_0000",
@@ -15535,13 +15841,23 @@
      "kind": "C",
      "provenance": "EXACT_NATURAL",
      "reloc_order": "GROUPED"
+    },
+    {
+     "name": "win_Open",
+     "unit": "root",
+     "seg": 8424,
+     "off": 1206,
+     "size": 383,
+     "target_sha256": "9efef582b81508207f64cd1fb086e5ce37a31a71d779963309532deaa634d0b8",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL",
+     "reloc_order": "WITHIN_GROUP_PENDING"
     }
    ],
    "scaffold": [
-    "f_20E8_0903",
-    "win_Open"
+    "f_20E8_0903"
    ],
-   "object_sha256": "a9dc42d46218db81702fc870ccbe91bf5d8dadc1351f83b45cecaceddf17efb8"
+   "object_sha256": "6c33bdd11b17ab6431dbcd30e47bfd55234c21e233c8dec03be978b12c372915"
   },
   "root:218D": {
    "unit": "root",
@@ -15991,8 +16307,12 @@
     }
    },
    "lang": "c",
+   "extent": {
+    "start": 142330,
+    "end": 146148
+   },
    "source": "src/root/m22BF.c",
-   "source_sha256": "3408926c91fc3ae6d5dba7947d8bf4ef778c0829805fbc9b05207910ad6d795e",
+   "source_sha256": "3ca7427a562ceea76cc20452da887d45e612515010f539fbaa6c14a9bb81aa94",
    "claims": [
     {
      "name": "win_StringSize",
@@ -16432,7 +16752,7 @@
      "target_sha256": "3dfe1b901eb7d3b83bb71c6949c5be51374578fc479f8a7e8ee50b7abcab901d",
      "kind": "C",
      "provenance": "EXACT_NATURAL",
-     "reloc_order": "WITHIN_GROUP_PENDING"
+     "reloc_order": "GROUPED"
     },
     {
      "name": "win_DrawVBar",
@@ -16499,12 +16819,21 @@
      "kind": "C",
      "provenance": "EXACT_NATURAL",
      "reloc_order": "GROUPED"
+    },
+    {
+     "name": "win_DoProxMenu",
+     "unit": "root",
+     "seg": 8895,
+     "off": 2987,
+     "size": 141,
+     "target_sha256": "1932aee6ccad4e4fb6079c9197a3bcabee606b74d9c2ce6d205f10f3df2afe18",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL",
+     "reloc_order": "GROUPED"
     }
    ],
-   "scaffold": [
-    "win_DoProxMenu"
-   ],
-   "object_sha256": "dcf8bce87d61318df800b1b93d1c2b94b2baf1d77f2798c1612a661795740626"
+   "scaffold": [],
+   "object_sha256": "8bb72c085b49500031d529fcb21d5ab557f9bee3d39b18c2f7aa59b67b21c8ac"
   },
   "root:23AE": {
    "unit": "root",
@@ -17557,7 +17886,7 @@
     "_DATA": {
      "seg": 21939,
      "off": 26806,
-     "size": 136
+     "size": 72
     },
     "CONST": {
      "seg": 21939,
@@ -17568,10 +17897,10 @@
    "lang": "c",
    "extent": {
     "start": 161760,
-    "end": 164456
+    "end": 164186
    },
    "source": "src/root/m277E.c",
-   "source_sha256": "eca97a0af7c1322f20600809824de4950f9b40cd42dbb50edb6f761b4fd3cbb0",
+   "source_sha256": "4e928689c743f473c5a007bbbbb5287cdf8728d12e9cae5652b1cb55debf09ee",
    "claims": [
     {
      "name": "f_277E_0000",
@@ -17770,21 +18099,10 @@
      "kind": "C",
      "provenance": "EXACT_NATURAL",
      "reloc_order": "EXACT"
-    },
-    {
-     "name": "f_277E_097A",
-     "unit": "root",
-     "seg": 10110,
-     "off": 2426,
-     "size": 270,
-     "target_sha256": "47943f62f8a9f74035a568556ddeb3e387c64c198b581713246946a767e58303",
-     "kind": "C",
-     "provenance": "EXACT_NATURAL",
-     "reloc_order": "EXACT"
     }
    ],
    "scaffold": [],
-   "object_sha256": "7d89def9ce8af33c7a0307a147147662c74ab437b799ae2140a7a7db09eeae79"
+   "object_sha256": "592e24698e616450543b26519a92fe7ac1b57650fb492cd9eb0eb7af980ab31f"
   },
   "root:2815": {
    "unit": "root",
@@ -17798,10 +18116,16 @@
     "/Gs",
     "/Zi"
    ],
-   "placements": {},
+   "placements": {
+    "_DATA": {
+     "seg": 21939,
+     "off": 26878,
+     "size": 62
+    }
+   },
    "lang": "c",
    "source": "src/root/m2815.c",
-   "source_sha256": "aa9651ef304fe36b72dfb7171fb5c43a3dff48b5f2a80304b341b96bf5d46fc4",
+   "source_sha256": "f98b3f039b39f00f45f563fdbd31b7fdc4500c37d950e5b176809ba5abfbce8c",
    "claims": [
     {
      "name": "f_2815_0118",
@@ -17824,12 +18148,21 @@
      "kind": "C",
      "provenance": "EXACT_NATURAL",
      "reloc_order": "EXACT"
+    },
+    {
+     "name": "f_2815_000A",
+     "unit": "root",
+     "seg": 10261,
+     "off": 10,
+     "size": 270,
+     "target_sha256": "47943f62f8a9f74035a568556ddeb3e387c64c198b581713246946a767e58303",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL",
+     "reloc_order": "EXACT"
     }
    ],
-   "scaffold": [
-    "f_277E_097A"
-   ],
-   "object_sha256": "08b8777c8dd9c9ea10acf4c4dd4ec11de1bad5eae3de14ff365104ad27ddd59d"
+   "scaffold": [],
+   "object_sha256": "30b227aac488ddd7333d0f1b1b58ae482e45847cedf798ecc1aa826b13faffdd"
   },
   "root:283E": {
    "unit": "root",

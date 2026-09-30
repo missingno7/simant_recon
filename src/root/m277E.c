@@ -39,11 +39,11 @@ void (far *g_68DA[])(void) = {
     f_277E_0965, f_277E_0939, f_277E_0952, f_277E_0938
 };
 
-char g_68FE[] = { 0, 1, 2, 6, 7, 8, 12, 13, 14 };
-char g_6908[] = { 3, 4, 5, 9, 10, 11, 15, 16, 17 };
-char g_6912[] = { 0, 1, 2, 3, 4, 5, 8, 9, 10, 11, 12, 13, 16, 17, 18, 19, 20, 21 };
-int g_6924[] = { 0x157, 0x16b, 0x181, 0x198, 0x1b0, 0x1ca, 0x1e5, 0x202, 0x220, 0x241, 0x263, 0x287 };
-int g_693C = 0x3bc;
+extern char g_68FE[];
+extern char g_6908[];
+extern char g_6912[];
+extern int g_6924[];
+extern int g_693C;
 
 extern int (far * far fd_55B3_74DA[])(void);
 void far f_277E_00AF(void);
@@ -445,26 +445,4 @@ void far f_277E_0965(void)
         inc dx
         out dx, al
     }
-}
-
-extern void far f_283E_000A(char reg, char value);
-
-void far f_277E_097A(char far *p, int voice)
-{
-    char op1;
-    char op2;
-
-    op1 = g_6912[g_68FE[voice]];
-    op2 = g_6912[g_6908[voice]];
-    f_283E_000A(op1 + 0x20, p[1]);
-    f_283E_000A(op2 + 0x20, p[0]);
-    f_283E_000A(op1 + 0x40, p[3]);
-    f_283E_000A(op2 + 0x40, p[2]);
-    f_283E_000A(op1 + 0x60, p[5]);
-    f_283E_000A(op2 + 0x60, p[4]);
-    f_283E_000A(op1 + 0x80, p[7]);
-    f_283E_000A(op2 + 0x80, p[6]);
-    f_283E_000A(op1 + 0xe0, p[10]);
-    f_283E_000A(op2 + 0xe0, p[9]);
-    f_283E_000A(voice + 0xc0, p[8]);
 }

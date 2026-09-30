@@ -6557,6 +6557,12 @@
    "off": 167,
    "grounding": "inventory:far_call"
   },
+  "f_0244_00BA": {
+   "unit": "root",
+   "seg": 580,
+   "off": 186,
+   "grounding": "reviewed: unreferenced twin of f_0244_00A7 right after it (xor ax,ax; call __aFchkstk; Barrier = 90h; retf), module 0244 ends at 024CD (LINK fill 00, module 0250 at 0250E)"
+  },
   "f_0250_000E": {
    "unit": "root",
    "seg": 592,
@@ -12121,9 +12127,21 @@
   },
   "f_277E_097A": {
    "unit": "root",
-   "seg": 10110,
-   "off": 2426,
-   "grounding": "reviewed: prologue scan in unreached gap; descent ends in a return; no references found (unreferenced or indirect)"
+   "seg": 10261,
+   "off": 10,
+   "alias_of": "f_2815_000A"
+  },
+  "f_2815_000A": {
+   "unit": "root",
+   "seg": 10261,
+   "off": 10,
+   "grounding": "reviewed: prologue scan in unreached gap; descent ends in a return; no references found (unreferenced or indirect)",
+   "history": [
+    {
+     "was": "f_277E_097A",
+     "why": "re-framed: first function of module 2815: relocation-table frames 2815 and near call from 2815:0275 (worker snd)"
+    }
+   ]
   },
   "f_2815_0118": {
    "unit": "root",
@@ -19063,6 +19081,11 @@
    "off": 0,
    "grounding": "f_277E_010A: mov es,[8A68]; mov es:[di],cx; di=6*i, 0x38 six-byte entries (far struct array)"
   },
+  "fd_50F6_0150": {
+   "seg": 20726,
+   "off": 336,
+   "grounding": "f_0000_0149: mov es,[7DD4] (CONST 50F6); mov es:[bx+150h],ax / es:[bx+152h],dx with bx = 4*[181C] -> far array of far pointers (sample free list, limit 38) (worker rootF)"
+  },
   "fd_50F6_01F0": {
    "seg": 20726,
    "off": 496,
@@ -20518,6 +20541,11 @@
    "off": 4300,
    "grounding": "ShowIntro (S16:384C:0472): mov bx,10CC; mov es,[CONST 8798 = 50F6]; es:[bx],[bx+2] far Handle variable"
   },
+  "fd_50F6_10D0": {
+   "seg": 20726,
+   "off": 4304,
+   "grounding": "f_00BA_0002: mov bx,10D0h; mov es,[7DF6] (CONST 50F6): far int = open window-file handle, used as lseek/read handle (worker rootF)"
+  },
   "fd_50F6_10D2": {
    "seg": 20726,
    "off": 4306,
@@ -21097,6 +21125,21 @@
    "seg": 21939,
    "off": 6592,
    "grounding": "processExp (S22:3BBD:000A): far variable in DGROUP via CONST word 885E (=DGROUP), idiv es:[19C0]"
+  },
+  "fd_55B3_19C6": {
+   "seg": 21939,
+   "off": 6598,
+   "grounding": "f_15D9_009C (Win16 EditMessage twin): DGROUP declared far through CONST words 83BC..83C0 (=55B3); editMessage / editMessageRemoveTime / redraw flag"
+  },
+  "fd_55B3_19CA": {
+   "seg": 21939,
+   "off": 6602,
+   "grounding": "f_15D9_009C (Win16 EditMessage twin): DGROUP declared far through CONST words 83BC..83C0 (=55B3); editMessage / editMessageRemoveTime / redraw flag"
+  },
+  "fd_55B3_19CE": {
+   "seg": 21939,
+   "off": 6606,
+   "grounding": "f_15D9_009C (Win16 EditMessage twin): DGROUP declared far through CONST words 83BC..83C0 (=55B3); editMessage / editMessageRemoveTime / redraw flag"
   },
   "fd_55B3_1CD4": {
    "seg": 21939,
@@ -22122,6 +22165,26 @@
    "seg": 21939,
    "off": 22604,
    "grounding": "root:1E57 clip unit _DATA: word/far pointer at DGROUP 584C referenced by module 1E57 (dataref)"
+  },
+  "g_5A2A": {
+   "seg": 21939,
+   "off": 23082,
+   "grounding": "f_1F58_0038/005A/007F: pending key word (mov ax,[5A2A]; xchg [5A2A],ax)"
+  },
+  "g_5A2C": {
+   "seg": 21939,
+   "off": 23084,
+   "grounding": "f_1F58_005A/007F: second pending key word (xchg [5A2C],cx; mov [5A2C],ax)"
+  },
+  "g_5A2E": {
+   "seg": 21939,
+   "off": 23086,
+   "grounding": "f_1F58_00A1/00B8: saved INT 23h vector offset (xchg es:[8C],bx; mov [5A2E],bx)"
+  },
+  "g_5A30": {
+   "seg": 21939,
+   "off": 23088,
+   "grounding": "f_1F58_00A1/00B8: saved INT 23h vector segment (xchg es:[8E],dx; mov [5A30],dx)"
   },
   "g_5A97": {
    "seg": 21939,
