@@ -24,9 +24,9 @@ Validation: **PASS** (2026-09-30)
 | data_link_fill_dgroup_bytes | 32 |
 | far_bss_zero_fill_bytes | 19,408 |
 | far_bss_sizes_verified_bytes | 0 |
-| far_bss_sizes_pinned_bytes | 0 |
-| far_bss_sizes_consistent_bytes | 4,414 |
-| far_bss_sizes_unverified_bytes | 14,994 |
+| far_bss_sizes_pinned_bytes | 180 |
+| far_bss_sizes_consistent_bytes | 4,258 |
+| far_bss_sizes_unverified_bytes | 14,970 |
 | game_code_span_bytes | 304,798 |
 | unresolved_code_bytes | 36,487 |
 | unresolved_data_bytes | 9,243 |

@@ -1,0 +1,409 @@
+{
+ "id": "IDIOM-1",
+ "question": "Which instruction spellings does MSC 6.00AX (/AL /Os /Gs /Oi) use for zero tests, zeroing, argument cleanup, frame teardown after a call, far-pointer copies, byte stores from int parameters and absolute far reads, and does an _asm body always get a BP frame with 'mov sp,bp'? Used to classify ASM claims (worker asmrole, build/workers/asmrole/classify.py). Positive controls: every accepted C module (e.g. 'pop bx' cleanup and 'or ax,ax' tests throughout root:0AD9); the probe reproduces the MSC spellings. Negative contrast: ASM claims that spell the same operations 'and ax,ax', 'mov ax,0', 'pop ax' after a call, 'add sp,N; pop bp', 'les bx,[x]; mov [y],bx; mov [y+2],es', 'mov ax,[bp+6]; mov [x],al', 'mov es,ax; mov ax,es:[46Ch]' (f_1B05_018E, f_1B05_022A, f_1B4E_003B, o02_3126_005C, o00_31AD_1659, f_1F58_0006) and procs using int/xlat/lods without a BP frame (f_195A_0018, o00_31AD_1468). Caveat: the string intrinsics do emit 'xor ax,ax', 'xchg si,di' and 'mov ax,ds; mov es,ax' (variants strlen/memcpy_ox), so those spellings alone exclude nothing.",
+ "results": [
+  {
+   "variant": "ret0",
+   "profile_index": 0,
+   "profile": "msc600ax",
+   "flags": [
+    "/AL",
+    "/Os",
+    "/Gs",
+    "/Oi"
+   ],
+   "source_sha256": "14c92030b56b9321852c0e9735c32d71ee418a3b4eb16b99df119c9425afc766",
+   "bytes": "558becb8008050ff7608ff76069a000000008be5a300000bc07f042bc05dcbb801005dcb",
+   "disasm": "push bp; mov bp, sp; mov ax, 0x8000; push ax; push word ptr [bp + 8]; push word ptr [bp + 6]; lcall 0, 0; mov sp, bp; mov word ptr [0], ax; or ax, ax; jg 0x1f; sub ax, ax; pop bp; retf; mov ax, 1; pop bp; retf",
+   "segments": {
+    "UNIT_TEXT": {
+     "class": "CODE",
+     "align": "word",
+     "combine": "public",
+     "length": 36,
+     "big": false
+    },
+    "_DATA": {
+     "class": "DATA",
+     "align": "word",
+     "combine": "public",
+     "length": 0,
+     "big": false
+    },
+    "CONST": {
+     "class": "CONST",
+     "align": "word",
+     "combine": "public",
+     "length": 0,
+     "big": false
+    },
+    "_BSS": {
+     "class": "BSS",
+     "align": "word",
+     "combine": "public",
+     "length": 0,
+     "big": false
+    }
+   },
+   "communals": {}
+  },
+  {
+   "variant": "call1_void",
+   "profile_index": 0,
+   "profile": "msc600ax",
+   "flags": [
+    "/AL",
+    "/Os",
+    "/Gs",
+    "/Oi"
+   ],
+   "source_sha256": "9222409def1445912a32ec84de02fc4e8fd460bc57223198a496bc1a42f93c7a",
+   "bytes": "ff3600009a000000005bcb",
+   "disasm": "push word ptr [0]; lcall 0, 0; pop bx; retf",
+   "segments": {
+    "UNIT_TEXT": {
+     "class": "CODE",
+     "align": "word",
+     "combine": "public",
+     "length": 11,
+     "big": false
+    },
+    "_DATA": {
+     "class": "DATA",
+     "align": "word",
+     "combine": "public",
+     "length": 0,
+     "big": false
+    },
+    "CONST": {
+     "class": "CONST",
+     "align": "word",
+     "combine": "public",
+     "length": 0,
+     "big": false
+    },
+    "_BSS": {
+     "class": "BSS",
+     "align": "word",
+     "combine": "public",
+     "length": 0,
+     "big": false
+    }
+   },
+   "communals": {}
+  },
+  {
+   "variant": "fpcopy",
+   "profile_index": 0,
+   "profile": "msc600ax",
+   "flags": [
+    "/AL",
+    "/Os",
+    "/Gs",
+    "/Oi"
+   ],
+   "source_sha256": "38b2c09b8eb0e172fcc135de2dc00d4944bea4e71ccb990f8c8352d7a2955dd8",
+   "bytes": "a100008b160200a3000089160200cb",
+   "disasm": "mov ax, word ptr [0]; mov dx, word ptr [2]; mov word ptr [0], ax; mov word ptr [2], dx; retf",
+   "segments": {
+    "UNIT_TEXT": {
+     "class": "CODE",
+     "align": "word",
+     "combine": "public",
+     "length": 15,
+     "big": false
+    },
+    "_DATA": {
+     "class": "DATA",
+     "align": "word",
+     "combine": "public",
+     "length": 0,
+     "big": false
+    },
+    "CONST": {
+     "class": "CONST",
+     "align": "word",
+     "combine": "public",
+     "length": 0,
+     "big": false
+    },
+    "_BSS": {
+     "class": "BSS",
+     "align": "word",
+     "combine": "public",
+     "length": 0,
+     "big": false
+    }
+   },
+   "communals": {}
+  },
+  {
+   "variant": "bytestore",
+   "profile_index": 0,
+   "profile": "msc600ax",
+   "flags": [
+    "/AL",
+    "/Os",
+    "/Gs",
+    "/Oi"
+   ],
+   "source_sha256": "d3424d1aa5aee130640ab74bffb01502aa59d4c780ab034077ca9b1265369ace",
+   "bytes": "558bec8a4606a200005dcb",
+   "disasm": "push bp; mov bp, sp; mov al, byte ptr [bp + 6]; mov byte ptr [0], al; pop bp; retf",
+   "segments": {
+    "UNIT_TEXT": {
+     "class": "CODE",
+     "align": "word",
+     "combine": "public",
+     "length": 11,
+     "big": false
+    },
+    "_DATA": {
+     "class": "DATA",
+     "align": "word",
+     "combine": "public",
+     "length": 0,
+     "big": false
+    },
+    "CONST": {
+     "class": "CONST",
+     "align": "word",
+     "combine": "public",
+     "length": 0,
+     "big": false
+    },
+    "_BSS": {
+     "class": "BSS",
+     "align": "word",
+     "combine": "public",
+     "length": 0,
+     "big": false
+    }
+   },
+   "communals": {}
+  },
+  {
+   "variant": "bios",
+   "profile_index": 0,
+   "profile": "msc600ax",
+   "flags": [
+    "/AL",
+    "/Os",
+    "/Gs",
+    "/Oi"
+   ],
+   "source_sha256": "dc70a029155ece3274f2d860bd2c2f29e79185a384ecaab280438d82c72b1844",
+   "bytes": "2bdb8ec3bb6c04268b07268b5702cb",
+   "disasm": "sub bx, bx; mov es, bx; mov bx, 0x46c; mov ax, word ptr es:[bx]; mov dx, word ptr es:[bx + 2]; retf",
+   "segments": {
+    "UNIT_TEXT": {
+     "class": "CODE",
+     "align": "word",
+     "combine": "public",
+     "length": 15,
+     "big": false
+    },
+    "_DATA": {
+     "class": "DATA",
+     "align": "word",
+     "combine": "public",
+     "length": 0,
+     "big": false
+    },
+    "CONST": {
+     "class": "CONST",
+     "align": "word",
+     "combine": "public",
+     "length": 0,
+     "big": false
+    },
+    "_BSS": {
+     "class": "BSS",
+     "align": "word",
+     "combine": "public",
+     "length": 0,
+     "big": false
+    }
+   },
+   "communals": {}
+  },
+  {
+   "variant": "asm_noframe",
+   "profile_index": 0,
+   "profile": "msc600ax",
+   "flags": [
+    "/AL",
+    "/Os",
+    "/Gs",
+    "/Oi"
+   ],
+   "source_sha256": "fbdd59a43d86e330624f0186bc2dbef8ed3e72ce03fbf6908ff058d18485ff42",
+   "bytes": "558beccd108be55dcb",
+   "disasm": "push bp; mov bp, sp; int 0x10; mov sp, bp; pop bp; retf",
+   "segments": {
+    "UNIT_TEXT": {
+     "class": "CODE",
+     "align": "word",
+     "combine": "public",
+     "length": 9,
+     "big": false
+    },
+    "_DATA": {
+     "class": "DATA",
+     "align": "word",
+     "combine": "public",
+     "length": 0,
+     "big": false
+    },
+    "CONST": {
+     "class": "CONST",
+     "align": "word",
+     "combine": "public",
+     "length": 0,
+     "big": false
+    },
+    "_BSS": {
+     "class": "BSS",
+     "align": "word",
+     "combine": "public",
+     "length": 0,
+     "big": false
+    }
+   },
+   "communals": {}
+  },
+  {
+   "variant": "gs_noloc",
+   "profile_index": 0,
+   "profile": "msc600ax",
+   "flags": [
+    "/AL",
+    "/Os",
+    "/Gs",
+    "/Oi"
+   ],
+   "source_sha256": "754fc1c9afddb756c96b8b904d7bb9f84d77f6631c7878919b54fbb73561ed73",
+   "bytes": "558bec8b4606a300005dcb",
+   "disasm": "push bp; mov bp, sp; mov ax, word ptr [bp + 6]; mov word ptr [0], ax; pop bp; retf",
+   "segments": {
+    "UNIT_TEXT": {
+     "class": "CODE",
+     "align": "word",
+     "combine": "public",
+     "length": 11,
+     "big": false
+    },
+    "_DATA": {
+     "class": "DATA",
+     "align": "word",
+     "combine": "public",
+     "length": 0,
+     "big": false
+    },
+    "CONST": {
+     "class": "CONST",
+     "align": "word",
+     "combine": "public",
+     "length": 0,
+     "big": false
+    },
+    "_BSS": {
+     "class": "BSS",
+     "align": "word",
+     "combine": "public",
+     "length": 0,
+     "big": false
+    }
+   },
+   "communals": {}
+  },
+  {
+   "variant": "strlen",
+   "profile_index": 0,
+   "profile": "msc600ax",
+   "flags": [
+    "/AL",
+    "/Os",
+    "/Gs",
+    "/Oi"
+   ],
+   "source_sha256": "7b6b35195d116ed795ad3c06047601772b44a0fd34d4f62179d6e7e1e5b61a87",
+   "bytes": "57bf00001e07b9ffff33c0f2aef7d149890e00005fcb",
+   "disasm": "push di; mov di, 0; push ds; pop es; mov cx, 0xffff; xor ax, ax; repne scasb al, byte ptr es:[di]; not cx; dec cx; mov word ptr [0], cx; pop di; retf",
+   "segments": {
+    "UNIT_TEXT": {
+     "class": "CODE",
+     "align": "word",
+     "combine": "public",
+     "length": 22,
+     "big": false
+    },
+    "_DATA": {
+     "class": "DATA",
+     "align": "word",
+     "combine": "public",
+     "length": 0,
+     "big": false
+    },
+    "CONST": {
+     "class": "CONST",
+     "align": "word",
+     "combine": "public",
+     "length": 0,
+     "big": false
+    },
+    "_BSS": {
+     "class": "BSS",
+     "align": "word",
+     "combine": "public",
+     "length": 0,
+     "big": false
+    }
+   },
+   "communals": {}
+  }
+ ],
+ "checks": [
+  {
+   "check": "ret0@0",
+   "needle": "lcall 0, 0; mov sp, bp; mov word ptr [0], ax; or ax, ax; jg 0x1f; sub ax, ax; pop bp; retf",
+   "ok": true
+  },
+  {
+   "check": "call1_void@0",
+   "needle": "push word ptr [0]; lcall 0, 0; pop bx; retf",
+   "ok": true
+  },
+  {
+   "check": "fpcopy@0",
+   "needle": "mov ax, word ptr [0]; mov dx, word ptr [2]; mov word ptr [0], ax; mov word ptr [2], dx; retf",
+   "ok": true
+  },
+  {
+   "check": "bytestore@0",
+   "needle": "mov al, byte ptr [bp + 6]; mov byte ptr [0], al",
+   "ok": true
+  },
+  {
+   "check": "bios@0",
+   "needle": "sub bx, bx; mov es, bx; mov bx, 0x46c; mov ax, word ptr es:[bx]",
+   "ok": true
+  },
+  {
+   "check": "asm_noframe@0",
+   "needle": "push bp; mov bp, sp; int 0x10; mov sp, bp; pop bp; retf",
+   "ok": true
+  },
+  {
+   "check": "gs_noloc@0",
+   "needle": "!mov sp, bp",
+   "ok": true
+  },
+  {
+   "check": "strlen@0",
+   "needle": "xor ax, ax; repne scasb",
+   "ok": true
+  }
+ ],
+ "all_checks_pass": true
+}
