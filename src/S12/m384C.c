@@ -88,7 +88,7 @@ void far InitMapFunctions(void)
     }
 }
 
-extern void far o04_35F5_025A(struct Event far *ev);
+extern void far MapAreaEvent(struct Event far *ev);
 extern void far f_00F8_04C7(void);
 extern void far f_00F8_0252(void);
 extern void far f_015B_053C(int plane);
@@ -109,7 +109,7 @@ extern void far DrawCastePopUp(void);
 void far ProcMapEvent(struct Event far *ev)
 {
     switch (ev->code) {
-    case 0x102: o04_35F5_025A(ev); break;
+    case 0x102: MapAreaEvent(ev); break;
     case 0x105: f_00F8_04C7(); break;
     case 0x106: f_00F8_0252(); f_015B_053C(1); break;
     case 0x107: f_00F8_0252(); f_015B_053C(2); break;
@@ -141,8 +141,8 @@ void far OpenMapWindow(void)
 }
 
 extern int _fastcall f_22BF_09B0(int win);
-extern void far f_1E57_0DAA(void);
-extern void far f_1E57_0174(int win);
+extern void far clip_Push(void);
+extern void far clip_SetWin(int win);
 extern int far fd_50F6_0508[2];
 extern struct Rect far fd_50F6_10D2;
 extern struct Rect far fd_50F6_38C2;
@@ -150,22 +150,22 @@ extern int far fd_50F6_10DE;
 extern int far fd_50F6_38C0;
 extern int far fd_50F6_10E0;
 extern void far f_1CE2_0410(struct Rect far *rect, int width);
-extern void far f_1E57_0EB9(void);
+extern void far clip_Pop(void);
 
 /* SCAFFOLD BEGIN: DrawMapCursor draft: MSC 6.00AX register/operand choice for the right edge differs */
 void far DrawMapCursor(void)
 {
     if (!f_22BF_09B0(0x100) || g_298E != 0)
         return;
-    f_1E57_0DAA();
-    f_1E57_0174(0x100);
+    clip_Push();
+    clip_SetWin(0x100);
     fd_50F6_38C2.top = fd_50F6_3858 * fd_50F6_0508[1] + fd_50F6_10D2.top;
     fd_50F6_38C2.bottom = fd_50F6_38C2.top + fd_50F6_3858 * fd_50F6_10DE;
     fd_50F6_38C2.left = fd_50F6_3856 * fd_50F6_0508[0] + fd_50F6_10D2.left + fd_50F6_38C0;
     fd_50F6_38C2.right = fd_50F6_38C2.left + fd_50F6_3856 * fd_50F6_10E0;
     f_1CE2_0410(&fd_50F6_38C2, 2);
     g_298E = 1;
-    f_1E57_0EB9();
+    clip_Pop();
 }
 
 /* SCAFFOLD END */
@@ -174,11 +174,11 @@ void far EraseMapCursor(void)
 {
     if (!f_22BF_09B0(0x100) || g_298E != 1)
         return;
-    f_1E57_0DAA();
-    f_1E57_0174(0x100);
+    clip_Push();
+    clip_SetWin(0x100);
     f_1CE2_0410(&fd_50F6_38C2, 2);
     g_298E = 0;
-    f_1E57_0EB9();
+    clip_Pop();
 }
 
 void far ToggleMapCursor(void)
@@ -377,8 +377,8 @@ void far o12_384C_080E(void)
     f_171C_1BBA(fd_50F6_385A);
 }
 
-extern int far fd_50F6_0330;
-extern int far fd_50F6_0350;
+extern int far BpopT;
+extern int far RpopT;
 extern int far HealthR;
 extern int near g_3DB2;
 extern void far f_24AB_02AD(int font);
@@ -392,36 +392,36 @@ void far DrawMapData(void)
     long maxPop;
 
     popMax = 1;
-    if (fd_50F6_0330 > popMax)
-        popMax = fd_50F6_0330;
-    if (fd_50F6_0350 > popMax)
-        popMax = fd_50F6_0350;
-    redHealth = fd_50F6_0350 == 0 ? 0 : HealthR;
+    if (BpopT > popMax)
+        popMax = BpopT;
+    if (RpopT > popMax)
+        popMax = RpopT;
+    redHealth = RpopT == 0 ? 0 : HealthR;
     f_24AB_02AD(g_3DB2 == 320 ? 0 : 3);
-    f_22BF_0D53(0x119, "%-d", fd_50F6_0330);
-    f_22BF_0D53(0x11a, "%-d", fd_50F6_0350);
+    f_22BF_0D53(0x119, "%-d", BpopT);
+    f_22BF_0D53(0x11a, "%-d", RpopT);
     f_24AB_02AD(0);
     f_22BF_0D81(0x11b, ((long)HealthB << 16) / 100);
     maxPop = popMax;
-    f_22BF_0D81(0x11d, ((long)fd_50F6_0330 << 16) / maxPop);
+    f_22BF_0D81(0x11d, ((long)BpopT << 16) / maxPop);
     f_22BF_0D81(0x11c, ((long)redHealth << 16) / 100);
-    f_22BF_0D81(0x11e, ((long)fd_50F6_0350 << 16) / maxPop);
+    f_22BF_0D81(0x11e, ((long)RpopT << 16) / maxPop);
 }
 
 extern void far f_00F8_04C7(void);
 extern char far * far * far fd_50F6_385E;
 extern void far Punt(char far *msg);
-extern unsigned char far fd_3E1D_E09F[];
-extern unsigned char far fd_3E1D_E89F[];
-extern unsigned char far fd_3E1D_F09F[];
-extern unsigned char far fd_4DA7_0000[];
-extern unsigned char far fd_3E1D_D09F[];
+extern unsigned char far PherMapBN[];
+extern unsigned char far PherMapBT[];
+extern unsigned char far PherMapRN[];
+extern unsigned char far PherMapRT[];
+extern unsigned char far PherMapA[];
 extern int far f_1B4E_000D(int color);
 extern void (far * near g_9134)(int left, int top, int right, int bottom, int color);
 extern long far TickCount(void);
 extern void _fastcall f_21FA_00EE(int color);
 extern void far f_15D9_0006(long msg, struct Rect far *rect, int y);
-extern void far f_1E57_0773(struct Rect far *rect);
+extern void far clip_SubInclude(struct Rect far *rect);
 extern int far fd_50F6_0F0C;
 extern int far fd_50F6_032E;
 extern int far fd_50F6_0F12;
@@ -463,19 +463,19 @@ void far o12_384C_0B76(void)
         fd_50F6_38C0 = fd_50F6_3856 << 5;
         break;
     case 4:
-        o12_384C_0706(fd_3E1D_E09F);
+        o12_384C_0706(PherMapBN);
         break;
     case 5:
-        o12_384C_0706(fd_3E1D_E89F);
+        o12_384C_0706(PherMapBT);
         break;
     case 6:
-        o12_384C_0706(fd_3E1D_F09F);
+        o12_384C_0706(PherMapRN);
         break;
     case 7:
-        o12_384C_0706(fd_4DA7_0000);
+        o12_384C_0706(PherMapRT);
         break;
     case 8:
-        o12_384C_0706(fd_3E1D_D09F);
+        o12_384C_0706(PherMapA);
         break;
     }
     n = (fd_50F6_10D2.bottom - fd_50F6_10D2.top) / fd_50F6_3858;
@@ -497,8 +497,8 @@ void far o12_384C_0B76(void)
             f_15D9_0006(fd_55B3_299A, &fd_50F6_10D2, fd_50F6_10D2.top + 4);
         }
     }
-    f_1E57_0DAA();
-    f_1E57_0773(&fd_50F6_10D2);
+    clip_Push();
+    clip_SubInclude(&fd_50F6_10D2);
     img = f_171C_1B84(fd_50F6_385A);
     gen = f_171C_1B84(fd_50F6_385E);
     if (fd_50F6_0F0C && !g_2994 && fd_50F6_032E == 1) {
@@ -530,7 +530,7 @@ void far o12_384C_0B76(void)
     if (fd_50F6_032E == 1 && !g_2994)
         o12_384C_1181();
     DrawMapCursor();
-    f_1E57_0EB9();
+    clip_Pop();
     fd_55B3_29A2 = fd_55B3_2990;
     g_29A4 = 0;
 }
@@ -541,7 +541,7 @@ extern void far f_1E57_0362(void);
 void far o12_384C_100A(void)
 {
     if (f_22BF_09B0(0x100)) {
-        f_1E57_0174(0x100);
+        clip_SetWin(0x100);
         o12_384C_0B76();
         DrawMapData();
         f_1E57_0362();
@@ -562,7 +562,7 @@ void far o12_384C_1035(int flags)
             f_00F8_04C7();
         else {
             f_00F8_00A4();
-            f_1E57_0174(0x100);
+            clip_SetWin(0x100);
             DrawMapData();
             o12_384C_0B76();
             id = fd_50F6_0EAC == 3 ? fd_50F6_104C + 0x13ec : 0x13f3;

@@ -27,7 +27,7 @@ int far f_284A_0004(void)
     return g_756E == 0;
 }
 
-void far f_284A_010A(void);
+void far StopSong(void);
 extern struct Song far * far fd_55B3_00B4;
 extern int far f_0000_0193(struct Song far *song, int number);
 extern int far WinPrintf(char far *format, ...);
@@ -48,7 +48,7 @@ void far f_284A_0013(int number)
 {
     int i;
 
-    f_284A_010A();
+    StopSong();
     if (f_0000_0193(fd_55B3_00B4, number) == -1) {
         WinPrintf("music failure\n");
         return;
@@ -73,7 +73,7 @@ void far f_284A_0013(int number)
 extern void far f_0000_039B(struct Song far *song, int number);
 extern void far f_295C_0391(void);
 
-void far f_284A_010A(void)
+void far StopSong(void)
 {
     if (g_756E) {
         g_756E = 0;

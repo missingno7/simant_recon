@@ -62,10 +62,10 @@ extern Handle far f_1A53_00F0(int, int, int);
 extern void (far * far fd_50F6_3B58)(char far *, char far *, int, int);
 extern void (far * far fd_50F6_37EA)(char far *, char far *, int, int);
 extern void far f_171C_1C82(Handle);
-extern void far f_1E57_0DAA(void);
-extern void far f_1E57_0AAF(struct Rect far *);
+extern void far clip_Push(void);
+extern void far clip_SubExclude(struct Rect far *);
 extern void far f_1B4E_003B(int, int, char far *);
-extern void far f_1E57_0EB9(void);
+extern void far clip_Pop(void);
 extern int far _fmemcmp(void far *, void far *, unsigned);
 extern void far * far _fmemcpy(void far *, void far *, unsigned);
 
@@ -74,7 +74,7 @@ static int g_67DA = ~7;
 static int g_67DC = 7;
 static int g_67DE = 8;
 
-void far f_2662_0008(Handle h, char far *name)
+void far hanim_PrintSet(Handle h, char far *name)
 {
     struct AnimSet far *set;
     struct AnimObj far *obj;
@@ -165,7 +165,7 @@ void far f_2662_0262(struct AnimObj far *obj, int from, int to, int which, struc
     }
 }
 
-struct AnimObj far * far f_2662_030C(struct AnimObj far *obj, int far *count, int id, int far *index)
+struct AnimObj far * far _hanim_FindObject(struct AnimObj far *obj, int far *count, int id, int far *index)
 {
     int i;
 
@@ -179,7 +179,7 @@ struct AnimObj far * far f_2662_030C(struct AnimObj far *obj, int far *count, in
 }
 
 
-int far f_2662_0348(Handle h, int x, int y, int pic, int pri)
+int far hanim_AddAnimObject(Handle h, int x, int y, int pic, int pri)
 {
     struct AnimSet far *set;
     Handle objsH;
@@ -205,7 +205,7 @@ int far f_2662_0348(Handle h, int x, int y, int pic, int pri)
     do {
         id = set->nextId & 0x7fff;
         set->nextId++;
-    } while (f_2662_030C(objs, &set->count, id, &i));
+    } while (_hanim_FindObject(objs, &set->count, id, &i));
     f_208F_0419(&size, pic);
     if (pri == -1)
         pri = y + size.h;
@@ -244,7 +244,7 @@ int far f_2662_0348(Handle h, int x, int y, int pic, int pri)
     return id;
 }
 
-void far f_2662_059C(Handle h, int id)
+void far hanim_RemoveAnimObject(Handle h, int id)
 {
     struct AnimSet far *set;
     struct AnimObj far *obj;
@@ -252,7 +252,7 @@ void far f_2662_059C(Handle h, int id)
 
     set = (struct AnimSet far *)f_171C_1B84(h);
     obj = (struct AnimObj far *)f_171C_1B84(set->objs);
-    obj = f_2662_030C(obj, &set->count, id, &i);
+    obj = _hanim_FindObject(obj, &set->count, id, &i);
     if (!obj)
         Punt("anim_Remove objects not found");
     obj->remove = 1;
@@ -263,7 +263,7 @@ void far f_2662_059C(Handle h, int id)
     f_171C_1BBA(h);
 }
 
-void far f_2662_064E(Handle h)
+void far hanim_RemoveAllAnimObjects(Handle h)
 {
     struct AnimSet far *set;
     struct AnimObj far *obj;
@@ -280,7 +280,7 @@ void far f_2662_064E(Handle h)
 }
 
 
-void far f_2662_06CB(Handle h)
+void far hanim_ActuallyRemoveAnimObjects(Handle h)
 {
     struct AnimSet far *set;
     struct AnimObj far *objs;
@@ -311,7 +311,7 @@ void far f_2662_06CB(Handle h)
     f_171C_1BBA(h);
 }
 
-void far f_2662_07E9(Handle h, int id)
+void far hanim_HideObject(Handle h, int id)
 {
     struct AnimSet far *set;
     struct AnimObj far *obj;
@@ -319,7 +319,7 @@ void far f_2662_07E9(Handle h, int id)
 
     set = (struct AnimSet far *)f_171C_1B84(h);
     obj = (struct AnimObj far *)f_171C_1B84(set->objs);
-    obj = f_2662_030C(obj, &set->count, id, &i);
+    obj = _hanim_FindObject(obj, &set->count, id, &i);
     if (!obj)
         Punt("anim_hide object not found");
     obj->show = 0;
@@ -327,7 +327,7 @@ void far f_2662_07E9(Handle h, int id)
     f_171C_1BBA(h);
 }
 
-void far f_2662_087B(Handle h, int id)
+void far hanim_ShowObject(Handle h, int id)
 {
     struct AnimSet far *set;
     struct AnimObj far *obj;
@@ -335,7 +335,7 @@ void far f_2662_087B(Handle h, int id)
 
     set = (struct AnimSet far *)f_171C_1B84(h);
     obj = (struct AnimObj far *)f_171C_1B84(set->objs);
-    obj = f_2662_030C(obj, &set->count, id, &i);
+    obj = _hanim_FindObject(obj, &set->count, id, &i);
     if (!obj)
         Punt("anim_hide object not found");
     obj->show = 1;
@@ -343,13 +343,13 @@ void far f_2662_087B(Handle h, int id)
     f_171C_1BBA(h);
 }
 
-/* The two prototypes below (named parameters) precede f_2662_090D, which calls both functions.
- * They add seven identifiers before it: f_2662_090D's operand order (width-mask comparison,
+/* The two prototypes below (named parameters) precede hanim_SetObjectPos, which calls both functions.
+ * They add seven identifiers before it: hanim_SetObjectPos's operand order (width-mask comparison,
  * pri = y + size.h) is exact only at this identifier count (see promotion --steered). */
-int far f_2662_0348(Handle h, int x, int y, int pic, int pri);
-void far f_2662_059C(Handle h, int id);
+int far hanim_AddAnimObject(Handle h, int x, int y, int pic, int pri);
+void far hanim_RemoveAnimObject(Handle h, int id);
 
-void far f_2662_090D(int x, int y, int pic, Handle h, int id, int pri)
+void far hanim_SetObjectPos(int x, int y, int pic, Handle h, int id, int pri)
 {
     int reinsert;
     struct AnimSet far *set;
@@ -363,7 +363,7 @@ void far f_2662_090D(int x, int y, int pic, Handle h, int id, int pri)
     set = (struct AnimSet far *)f_171C_1B84(h);
     n = set->count;
     objs = (struct AnimObj far *)f_171C_1B84(set->objs);
-    obj = f_2662_030C(objs, &set->count, id, &i);
+    obj = _hanim_FindObject(objs, &set->count, id, &i);
     if (!obj)
         Punt("anim_Remove objects not found");
     if (x != (int)0x8000)
@@ -404,11 +404,11 @@ void far f_2662_090D(int x, int y, int pic, Handle h, int id, int pri)
 again:
     f_171C_1BBA(set->objs);
     f_171C_1BBA(h);
-    f_2662_059C(h, id);
-    n = f_2662_0348(h, x, y, pic, pri);
+    hanim_RemoveAnimObject(h, id);
+    n = hanim_AddAnimObject(h, x, y, pic, pri);
     set = (struct AnimSet far *)f_171C_1B84(h);
     objs = (struct AnimObj far *)f_171C_1B84(set->objs);
-    f_2662_030C(objs, &set->count, id, &i)->id = n;
+    _hanim_FindObject(objs, &set->count, id, &i)->id = n;
     fd_50F6_4A42->id = id;
     f_171C_1BBA(set->objs);
     f_171C_1BBA(h);
@@ -439,7 +439,7 @@ Handle far hanim_MakeAnimSet(void)
     return h;
 }
 
-void far f_2662_0C06(Handle h)
+void far hanim_RemoveAnimSet(Handle h)
 {
     struct AnimSet far *set;
     struct AnimObj far *obj;
@@ -456,7 +456,7 @@ void far f_2662_0C06(Handle h)
 }
 
 
-void far f_2662_0CA2(Handle h)
+void far hanim_RenderAnimSet(Handle h)
 {
     struct AnimSet far *set;
     struct AnimObj far *objs;
@@ -507,38 +507,38 @@ void far f_2662_0CA2(Handle h)
         } else
             obj->drawn = 0;
     }
-    f_1E57_0DAA();
-    f_1E57_0DAA();
+    clip_Push();
+    clip_Push();
     obj = objs + n - 1;
     for (i = n - 1; i >= 0; i--, obj--) {
         r = &obj->rect;
         if (obj->show)
-            f_1E57_0AAF(r);
+            clip_SubExclude(r);
     }
     obj = objs + n - 1;
     for (i = n - 1; i >= 0; i--, obj--) {
         r = &obj->rect;
         if ((!obj->show || _fmemcmp(r, &obj->old, 8)) && obj->wasDrawn) {
             f_1B4E_003B(obj->old.left, obj->old.top, obj->bufp);
-            f_1E57_0AAF(r);
+            clip_SubExclude(r);
         }
         obj->old = *r;
         _fmemcpy(obj->bufp, obj->bufp + obj->size * 2, obj->size);
     }
-    f_1E57_0EB9();
+    clip_Pop();
     obj = objs + n - 1;
     for (i = n - 1; i >= 0; i--, obj--) {
         r = &obj->rect;
         if (obj->show) {
             if (obj->dirty)
                 f_1B4E_003B(r->left, r->top, obj->bufp + obj->size);
-            f_1E57_0AAF(r);
+            clip_SubExclude(r);
         }
     }
     f_171C_1BBA(set->objs);
     f_2662_01B5(h);
-    f_2662_06CB(h);
-    f_1E57_0EB9();
+    hanim_ActuallyRemoveAnimObjects(h);
+    clip_Pop();
 }
 
 void far f_2662_1120(int shift, int flag, char far *dest, int pic)

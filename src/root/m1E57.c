@@ -92,7 +92,7 @@ void far f_1E57_00B1(int win)
 
 extern int far WinPrintf(char far *format, ...);
 
-void far f_1E57_0115(int win)
+void far clip_KillWin(int win)
 {
     int i;
     int j;
@@ -117,7 +117,7 @@ extern char far * far f_171C_1B84(Handle h);
 extern struct Rect far fd_50F6_3C14[];
 extern Handle far f_171C_1BBA(Handle h);
 
-void far f_1E57_0174(int win)
+void far clip_SetWin(int win)
 {
     struct Rect far *p;
     int size;
@@ -293,7 +293,7 @@ void far f_1E57_038E(void)
 extern struct Rect far * far f_1D8E_003F(struct Rect far *r, struct Rect far *c,
                                          struct Rect far *in, struct Rect far *out);
 
-void far f_1E57_0773(struct Rect far *r)
+void far clip_SubInclude(struct Rect far *r)
 {
     Handle h;
     struct Rect far *buf;
@@ -367,10 +367,10 @@ done:
 
 void far f_1E57_0A9C(struct Rect far *r)
 {
-    f_1E57_0773(r);
+    clip_SubInclude(r);
 }
 
-void far f_1E57_0AAF(struct Rect far *r)
+void far clip_SubExclude(struct Rect far *r)
 {
     Handle h;
     struct Rect far *buf;
@@ -402,7 +402,7 @@ void far f_1E57_0AAF(struct Rect far *r)
 
 void far f_1E57_0C1A(struct Rect far *r)
 {
-    f_1E57_0AAF(r);
+    clip_SubExclude(r);
 }
 
 void far f_1E57_0C2D(struct Rect far *r)
@@ -445,7 +445,7 @@ void far f_1E57_0D97(struct Rect far *r)
 
 extern Handle far fd_50F6_3B5C;
 
-void far f_1E57_0DAA(void)
+void far clip_Push(void)
 {
     struct Rect far *p;
     int size;
@@ -472,7 +472,7 @@ void far f_1E57_0DAA(void)
     f_171C_1BBA(h);
 }
 
-void far f_1E57_0EB9(void)
+void far clip_Pop(void)
 {
     Handle far *node;
     struct Rect far *p;

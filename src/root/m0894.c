@@ -43,30 +43,30 @@ extern int far fd_3D57_0C1A;
 extern int far fd_50F6_1040;
 extern int far ListIndexA;
 extern int far Tindex;
-extern unsigned char far fd_3E1D_AD3B[];
-extern unsigned char far fd_3E1D_A569[];
-extern unsigned char far fd_3E1D_A180[];
+extern unsigned char far AlistT[];
+extern unsigned char far AlistY[];
+extern unsigned char far AlistX[];
 extern long far fd_50F6_0F30;
-extern unsigned char far fd_3E1D_A952[];
+extern unsigned char far AlistM[];
 extern unsigned char far LifeA[128][64];
 extern char far Dy8[8];
 extern char far Dx8[8];
-extern unsigned char far fd_3E1D_F09F[64][32];
-extern unsigned char far fd_3E1D_E09F[64][32];
+extern unsigned char far PherMapRN[64][32];
+extern unsigned char far PherMapBN[64][32];
 extern int far fd_50F6_06AA;
 extern int far fd_50F6_073A;
 extern int far fd_50F6_07C8;
 extern int far fd_50F6_0850;
 extern unsigned char far MapA[128][64];
 extern int far Barrier;
-extern unsigned char far fd_3E1D_B124[];
+extern unsigned char far AlistS[];
 extern int far fd_50F6_04E2;
 extern int far fd_50F6_1044;
 extern signed char far TurnTab[8][8];
-extern unsigned char far fd_3E1D_D09F[64][32];
-extern int far fd_50F6_0DA8;
+extern unsigned char far PherMapA[64][32];
+extern int far ListIndexB;
 extern unsigned char far HoleMapB[];
-extern int far fd_50F6_0EAA;
+extern int far ListIndexR;
 extern unsigned char far HoleMapR[];
 extern int far fd_3D57_0C14;
 extern long far fd_50F6_0F3E;
@@ -291,24 +291,24 @@ void far DoAntSimA(void)
     while (Tindex > 0) {
         Tindex--;
         if (SRand256() == 0) {
-            t = fd_3E1D_AD3B[Tindex];
+            t = AlistT[Tindex];
             if (t) {
                 if (t & 0x80)
                     t = HealthR;
                 else
                     t = HealthB;
                 if (SRand32() > t) {
-                    DeadAntHere(fd_3E1D_A180[Tindex], fd_3E1D_A569[Tindex],
-                                fd_3E1D_AD3B[Tindex] & 0x80);
-                    fd_3E1D_AD3B[Tindex] = 0;
+                    DeadAntHere(AlistX[Tindex], AlistY[Tindex],
+                                AlistT[Tindex] & 0x80);
+                    AlistT[Tindex] = 0;
                     fd_50F6_0F30++;
                 }
             }
         }
-        t = fd_3E1D_AD3B[Tindex];
+        t = AlistT[Tindex];
         if (t == 0)
             continue;
-        mode = fd_3E1D_A952[Tindex];
+        mode = AlistM[Tindex];
         if (t & 0x80)
             fd_50F6_0D72[mode]++;
         else
@@ -376,12 +376,12 @@ void far SimEggA(int index)
     int y;
     unsigned char type;
 
-    x = fd_3E1D_A180[index];
-    y = fd_3E1D_A569[index];
-    type = fd_3E1D_AD3B[index];
+    x = AlistX[index];
+    y = AlistY[index];
+    type = AlistT[index];
     LifeA[x][y] = type;
     if (SRand1(200) == 0) {
-        fd_3E1D_AD3B[index] = 0;
+        AlistT[index] = 0;
         LifeA[x][y] = 0;
     }
 }
@@ -392,14 +392,14 @@ void far SimQueenA(int index)
     int y;
     int type;
 
-    x = fd_3E1D_A180[index];
-    y = fd_3E1D_A569[index];
-    type = fd_3E1D_AD3B[index];
+    x = AlistX[index];
+    y = AlistY[index];
+    type = AlistT[index];
     LifeA[x][y] = type;
     if ((type & 0x7f) > 0x67) {
         if (LostHeadA(x, y, type)) {
             LifeA[x][y] = 0;
-            fd_3E1D_AD3B[index] = 0;
+            AlistT[index] = 0;
         }
     }
 }
@@ -423,12 +423,12 @@ void far DoRestAnt(int index)
     int x;
     int y;
 
-    x = fd_3E1D_A180[index];
-    y = fd_3E1D_A569[index];
+    x = AlistX[index];
+    y = AlistY[index];
     if (IsItHole(x, y) == 1)
         GoInNest(x, y, index);
     else if (SRand4() == 0)
-        fd_3E1D_A952[index] = 2;
+        AlistM[index] = 2;
     else if (fd_3D57_07B2 == 1)
         f_0250_43F2(x, y, 1);
 }
@@ -439,12 +439,12 @@ void far DoRepoLoit(int index)
         DoRandAntAA(index);
     else
         DoToNestAnt(index);
-    if (fd_3E1D_AD3B[index] & 0x80) {
+    if (AlistT[index] & 0x80) {
         if (fd_50F6_08E8 > 100)
-            fd_3E1D_A952[Tindex] = 0xf;
+            AlistM[Tindex] = 0xf;
     } else {
         if (fd_50F6_08DC > 100)
-            fd_3E1D_A952[Tindex] = 0xf;
+            AlistM[Tindex] = 0xf;
     }
 }
 
@@ -452,20 +452,20 @@ void far DoRepoExit(int index)
 {
     int scent;
 
-    if (fd_3E1D_AD3B[index] & 0x80)
-        scent = fd_3E1D_F09F[fd_3E1D_A180[index] >> 1][fd_3E1D_A569[index] >> 1];
+    if (AlistT[index] & 0x80)
+        scent = PherMapRN[AlistX[index] >> 1][AlistY[index] >> 1];
     else
-        scent = fd_3E1D_E09F[fd_3E1D_A180[index] >> 1][fd_3E1D_A569[index] >> 1];
+        scent = PherMapBN[AlistX[index] >> 1][AlistY[index] >> 1];
     if (scent < 100)
         DoToNestAnt(index);
     else
         DoRandAntAA(index);
-    if (fd_3E1D_AD3B[index] & 0x80) {
+    if (AlistT[index] & 0x80) {
         if (fd_50F6_08E8 != 0 && (fd_50F6_08E8 == 1 || SRand1(fd_50F6_08E8) == 0))
-            fd_3E1D_A952[Tindex] = 0x10;
+            AlistM[Tindex] = 0x10;
     } else {
         if (fd_50F6_08DC != 0 && (fd_50F6_08DC == 1 || SRand1(fd_50F6_08DC) == 0))
-            fd_3E1D_A952[Tindex] = 0x10;
+            AlistM[Tindex] = 0x10;
     }
 }
 
@@ -473,11 +473,11 @@ void far DoRepoFly(int index)
 {
     int red;
 
-    red = fd_3E1D_AD3B[index] & 0x80;
+    red = AlistT[index] & 0x80;
     if (SRand32() == 0) {
         if ((red == 0 && fd_50F6_06AA < 50) || (red != 0 && fd_50F6_073A < 50)) {
-            fd_3E1D_AD3B[index] = 0;
-            LifeA[fd_3E1D_A180[index]][fd_3E1D_A569[index]] = 0;
+            AlistT[index] = 0;
+            LifeA[AlistX[index]][AlistY[index]] = 0;
             if (fd_50F6_0EAC == 2) {
                 if (red == 0)
                     fd_50F6_06AA++;
@@ -499,10 +499,10 @@ void far DoDefendNest(int index)
 {
     int scent;
 
-    if (fd_3E1D_AD3B[index] & 0x80)
-        scent = fd_3E1D_F09F[fd_3E1D_A180[index] >> 1][fd_3E1D_A569[index] >> 1];
+    if (AlistT[index] & 0x80)
+        scent = PherMapRN[AlistX[index] >> 1][AlistY[index] >> 1];
     else
-        scent = fd_3E1D_E09F[fd_3E1D_A180[index] >> 1][fd_3E1D_A569[index] >> 1];
+        scent = PherMapBN[AlistX[index] >> 1][AlistY[index] >> 1];
     if (scent < 0x6e)
         DoToNestAnt(index);
     else
@@ -522,9 +522,9 @@ void far DoRandAntA(int index)
     int nx;
     int ny;
 
-    x = fd_3E1D_A180[index];
-    y = fd_3E1D_A569[index];
-    attribute = fd_3E1D_AD3B[index];
+    x = AlistX[index];
+    y = AlistY[index];
+    attribute = AlistT[index];
     if (IsItHole(x, y)) {
         GoInNest(x, y, index);
         return;
@@ -537,34 +537,34 @@ void far DoRandAntA(int index)
     tile = MapA[nx][ny];
     if (IsItFood(tile) == 1) {
         if (caste == 6 || caste == 2) {
-            fd_3E1D_AD3B[index] = dir | flags | 8;
-            LifeA[x][y] = fd_3E1D_AD3B[index];
-            fd_3E1D_A952[index] = 3;
+            AlistT[index] = dir | flags | 8;
+            LifeA[x][y] = AlistT[index];
+            AlistM[index] = 3;
             f_0BE8_0798(nx, ny);
-            fd_3E1D_B124[index] = 200;
+            AlistS[index] = 200;
             return;
         }
     } else if (tile > Barrier) {
-        fd_3E1D_AD3B[index] = RandTurn(attribute & 7) | flags;
-        LifeA[x][y] = fd_3E1D_AD3B[index];
+        AlistT[index] = RandTurn(attribute & 7) | flags;
+        LifeA[x][y] = AlistT[index];
         return;
     }
     tile = LifeA[nx][ny];
     if (tile == 0) {
-        fd_3E1D_AD3B[index] = LifeA[nx][ny] = dir | flags;
+        AlistT[index] = LifeA[nx][ny] = dir | flags;
         LifeA[x][y] = 0;
-        fd_3E1D_A180[index] = nx;
-        fd_3E1D_A569[index] = ny;
-        if (fd_3E1D_B124[index] != 0) {
-            fd_3E1D_B124[index]--;
+        AlistX[index] = nx;
+        AlistY[index] = ny;
+        if (AlistS[index] != 0) {
+            AlistS[index]--;
             if (attribute & 0x80)
-                f_1496_0404(nx, ny, fd_3E1D_B124[index]);
+                f_1496_0404(nx, ny, AlistS[index]);
             else
-                f_1496_03CC(nx, ny, fd_3E1D_B124[index]);
+                f_1496_03CC(nx, ny, AlistS[index]);
         }
         f_1496_04AC(nx, ny, attribute & 0x80);
         if (SRand8() == 0 && (caste == 6 || caste == 2))
-            fd_3E1D_A952[index] = 2;
+            AlistM[index] = 2;
         return;
     }
     if (IsYellowAnt(tile) == 1) {
@@ -573,18 +573,18 @@ void far DoRandAntA(int index)
             return;
         }
         if (fd_50F6_1044 == 1) {
-            fd_3E1D_AD3B[index] = dir | flags;
-            LifeA[x][y] = fd_3E1D_AD3B[index];
+            AlistT[index] = dir | flags;
+            LifeA[x][y] = AlistT[index];
             o22_39C7_19E5(x, y, dir);
         }
-        fd_3E1D_AD3B[index] = RandTurn(attribute & 7) | flags;
-        LifeA[x][y] = fd_3E1D_AD3B[index];
+        AlistT[index] = RandTurn(attribute & 7) | flags;
+        LifeA[x][y] = AlistT[index];
         return;
     }
     if (((tile ^ attribute) & 0x80) == 0) {
-        fd_3E1D_AD3B[index] = RandTurn(attribute & 7) | flags;
-        LifeA[x][y] = fd_3E1D_AD3B[index];
-        fd_3E1D_A952[index] = f_1383_0976(caste, attribute);
+        AlistT[index] = RandTurn(attribute & 7) | flags;
+        LifeA[x][y] = AlistT[index];
+        AlistM[index] = f_1383_0976(caste, attribute);
         return;
     }
     StartFightA(index, x, y, nx, ny);
@@ -603,9 +603,9 @@ void far DoRandAntAA(int index)
     int ny;
 
 
-    x = fd_3E1D_A180[index];
-    y = fd_3E1D_A569[index];
-    attribute = fd_3E1D_AD3B[index];
+    x = AlistX[index];
+    y = AlistY[index];
+    attribute = AlistT[index];
     if (IsItHole(x, y)) {
         GoInNest(x, y, index);
         return;
@@ -615,16 +615,16 @@ void far DoRandAntAA(int index)
     nx = x + Dx8[dir];
     ny = y + Dy8[dir];
     if (MapA[nx][ny] > Barrier) {
-        fd_3E1D_AD3B[index] = RandTurn(attribute & 7) | flags;
-        LifeA[x][y] = fd_3E1D_AD3B[index];
+        AlistT[index] = RandTurn(attribute & 7) | flags;
+        LifeA[x][y] = AlistT[index];
         return;
     }
     tile = LifeA[nx][ny];
     if (tile == 0) {
-        fd_3E1D_AD3B[index] = LifeA[nx][ny] = dir | flags;
+        AlistT[index] = LifeA[nx][ny] = dir | flags;
         LifeA[x][y] = 0;
-        fd_3E1D_A180[index] = nx;
-        fd_3E1D_A569[index] = ny;
+        AlistX[index] = nx;
+        AlistY[index] = ny;
         return;
     }
     if (IsYellowAnt(tile) == 1) {
@@ -632,13 +632,13 @@ void far DoRandAntAA(int index)
             o25_3BA4_0DFB(1, index);
             return;
         }
-        fd_3E1D_AD3B[index] = RandTurn(attribute & 7) | flags;
-        LifeA[x][y] = fd_3E1D_AD3B[index];
+        AlistT[index] = RandTurn(attribute & 7) | flags;
+        LifeA[x][y] = AlistT[index];
         return;
     }
     if (((attribute ^ tile) & 0x80) == 0) {
-        fd_3E1D_AD3B[index] = RandTurn(attribute & 7) | flags;
-        LifeA[x][y] = fd_3E1D_AD3B[index];
+        AlistT[index] = RandTurn(attribute & 7) | flags;
+        LifeA[x][y] = AlistT[index];
         return;
     }
     StartFightA(index, x, y, nx, ny);
@@ -657,9 +657,9 @@ void far DoDigOutAntA(int index)
     int nx;
     int ny;
 
-    x = fd_3E1D_A180[index];
-    y = fd_3E1D_A569[index];
-    attribute = fd_3E1D_AD3B[index];
+    x = AlistX[index];
+    y = AlistY[index];
+    attribute = AlistT[index];
     flags = attribute & 0xf8;
     digmode = (attribute & 0x78) >> 3;
     dirindex = TurnTab[attribute & 7][SRand8()];
@@ -669,38 +669,38 @@ void far DoDigOutAntA(int index)
     nx = x + Dx8[dirindex];
     ny = y + Dy8[dirindex];
     if (digmode != 5 && digmode != 9) {
-        fd_3E1D_A952[index] = f_1383_0976(digmode, attribute);
-        fd_3E1D_B124[index] = 0;
+        AlistM[index] = f_1383_0976(digmode, attribute);
+        AlistS[index] = 0;
         return;
     }
     if (SRand8() == 0) {
-        fd_3E1D_AD3B[index] -= 0x18;
-        fd_3E1D_A952[index] = f_1383_0976(digmode, attribute);
-        fd_3E1D_B124[index] = 0;
-        LifeA[x][y] = fd_3E1D_AD3B[index];
+        AlistT[index] -= 0x18;
+        AlistM[index] = f_1383_0976(digmode, attribute);
+        AlistS[index] = 0;
+        LifeA[x][y] = AlistT[index];
         return;
     }
     if (MapA[nx][ny] > Barrier) {
-        fd_3E1D_AD3B[index] = RandTurn(attribute & 7) | flags;
-        LifeA[x][y] = fd_3E1D_AD3B[index];
+        AlistT[index] = RandTurn(attribute & 7) | flags;
+        LifeA[x][y] = AlistT[index];
         return;
     }
     if (LifeA[nx][ny] == 0) {
-        fd_3E1D_AD3B[index] = LifeA[nx][ny] = dirindex | flags;
+        AlistT[index] = LifeA[nx][ny] = dirindex | flags;
         LifeA[x][y] = 0;
-        fd_3E1D_A180[index] = nx;
-        fd_3E1D_A569[index] = ny;
+        AlistX[index] = nx;
+        AlistY[index] = ny;
     } else {
-        fd_3E1D_AD3B[index] = RandTurn(attribute & 7) | flags;
-        LifeA[x][y] = fd_3E1D_AD3B[index];
+        AlistT[index] = RandTurn(attribute & 7) | flags;
+        LifeA[x][y] = AlistT[index];
         return;
     }
-    if (fd_3E1D_B124[index] != 0) {
-        fd_3E1D_B124[index]--;
+    if (AlistS[index] != 0) {
+        AlistS[index]--;
         if (attribute & 0x80)
-            f_1496_0404(nx, ny, fd_3E1D_B124[index]);
+            f_1496_0404(nx, ny, AlistS[index]);
         else
-            f_1496_03CC(nx, ny, fd_3E1D_B124[index]);
+            f_1496_03CC(nx, ny, AlistS[index]);
     }
 }
 
@@ -717,9 +717,9 @@ void far DoToNestAnt(int index)
     int nx;
     int ny;
 
-    x = fd_3E1D_A180[index];
-    y = fd_3E1D_A569[index];
-    attribute = fd_3E1D_AD3B[index];
+    x = AlistX[index];
+    y = AlistY[index];
+    attribute = AlistT[index];
     if (IsItHole(x, y)) {
         GoInNest(x, y, index);
         return;
@@ -732,30 +732,30 @@ void far DoToNestAnt(int index)
     tile = MapA[nx][ny];
     if (IsItFood(tile) == 1) {
         if (caste == 6 || caste == 2) {
-            fd_3E1D_AD3B[index] = dir | flags | 8;
-            LifeA[x][y] = fd_3E1D_AD3B[index];
-            fd_3E1D_A952[index] = 3;
+            AlistT[index] = dir | flags | 8;
+            LifeA[x][y] = AlistT[index];
+            AlistM[index] = 3;
             f_0BE8_0798(nx, ny);
-            fd_3E1D_B124[index] = 200;
+            AlistS[index] = 200;
             return;
         }
     } else if (tile > Barrier) {
-        fd_3E1D_AD3B[index] = RandTurn(attribute & 7) | flags;
-        LifeA[x][y] = fd_3E1D_AD3B[index];
+        AlistT[index] = RandTurn(attribute & 7) | flags;
+        LifeA[x][y] = AlistT[index];
         return;
     }
     tile = LifeA[nx][ny];
     if (tile == 0) {
-        fd_3E1D_AD3B[index] = LifeA[nx][ny] = dir | flags;
+        AlistT[index] = LifeA[nx][ny] = dir | flags;
         LifeA[x][y] = 0;
-        fd_3E1D_A180[index] = nx;
-        fd_3E1D_A569[index] = ny;
-        if (fd_3E1D_B124[index] != 0) {
-            fd_3E1D_B124[index]--;
+        AlistX[index] = nx;
+        AlistY[index] = ny;
+        if (AlistS[index] != 0) {
+            AlistS[index]--;
             if (attribute & 0x80)
-                f_1496_0404(nx, ny, fd_3E1D_B124[index]);
+                f_1496_0404(nx, ny, AlistS[index]);
             else
-                f_1496_03CC(nx, ny, fd_3E1D_B124[index]);
+                f_1496_03CC(nx, ny, AlistS[index]);
         }
         return;
     }
@@ -765,17 +765,17 @@ void far DoToNestAnt(int index)
             return;
         }
         if (fd_50F6_1044 == 1) {
-            fd_3E1D_AD3B[index] = dir | flags;
-            LifeA[x][y] = fd_3E1D_AD3B[index];
+            AlistT[index] = dir | flags;
+            LifeA[x][y] = AlistT[index];
             o22_39C7_19E5(x, y, dir);
         }
-        fd_3E1D_AD3B[index] = RandTurn(attribute & 7) | flags;
-        LifeA[x][y] = fd_3E1D_AD3B[index];
+        AlistT[index] = RandTurn(attribute & 7) | flags;
+        LifeA[x][y] = AlistT[index];
         return;
     }
     if (((tile ^ attribute) & 0x80) == 0) {
-        fd_3E1D_AD3B[index] = RandTurn(attribute & 7) | flags;
-        LifeA[x][y] = fd_3E1D_AD3B[index];
+        AlistT[index] = RandTurn(attribute & 7) | flags;
+        LifeA[x][y] = AlistT[index];
         return;
     }
     StartFightA(index, x, y, nx, ny);
@@ -793,33 +793,33 @@ void far DoToAlarm(int index)
     int nx;
     int ny;
 
-    x = fd_3E1D_A180[index];
-    y = fd_3E1D_A569[index];
-    attribute = fd_3E1D_AD3B[index];
+    x = AlistX[index];
+    y = AlistY[index];
+    attribute = AlistT[index];
     if (IsItHole(x, y)) {
         GoInNest(x, y, index);
         return;
     }
     flags = attribute & 0xf8;
-    if (fd_3E1D_D09F[x >> 1][y >> 1] == 0 && SRand4() == 0) {
-        LifeA[x][y] = fd_3E1D_AD3B[index];
-        fd_3E1D_A952[index] = f_1383_0976((attribute & 0x78) >> 3, attribute);
+    if (PherMapA[x >> 1][y >> 1] == 0 && SRand4() == 0) {
+        LifeA[x][y] = AlistT[index];
+        AlistM[index] = f_1383_0976((attribute & 0x78) >> 3, attribute);
         return;
     }
     dir = f_1383_0DCC(x, y, attribute & 7);
     nx = x + Dx8[dir];
     ny = y + Dy8[dir];
     if (MapA[nx][ny] > Barrier) {
-        fd_3E1D_AD3B[index] = RandTurn(attribute & 7) | flags;
-        LifeA[x][y] = fd_3E1D_AD3B[index];
+        AlistT[index] = RandTurn(attribute & 7) | flags;
+        LifeA[x][y] = AlistT[index];
         return;
     }
     tile = LifeA[nx][ny];
     if (tile == 0) {
-        fd_3E1D_AD3B[index] = LifeA[nx][ny] = dir | flags;
+        AlistT[index] = LifeA[nx][ny] = dir | flags;
         LifeA[x][y] = 0;
-        fd_3E1D_A180[index] = nx;
-        fd_3E1D_A569[index] = ny;
+        AlistX[index] = nx;
+        AlistY[index] = ny;
         return;
     }
     if (IsYellowAnt(tile) == 1) {
@@ -827,13 +827,13 @@ void far DoToAlarm(int index)
             o25_3BA4_0DFB(1, index);
             return;
         }
-        fd_3E1D_AD3B[index] = RandTurn(attribute & 7) | flags;
-        LifeA[x][y] = fd_3E1D_AD3B[index];
+        AlistT[index] = RandTurn(attribute & 7) | flags;
+        LifeA[x][y] = AlistT[index];
         return;
     }
     if (((tile ^ attribute) & 0x80) == 0) {
-        fd_3E1D_AD3B[index] = RandTurn(attribute & 7) | flags;
-        LifeA[x][y] = fd_3E1D_AD3B[index];
+        AlistT[index] = RandTurn(attribute & 7) | flags;
+        LifeA[x][y] = AlistT[index];
         return;
     }
     StartFightA(index, x, y, nx, ny);
@@ -853,9 +853,9 @@ void far DoReturnFoodAnt(int index)
     int nx;
     int ny;
 
-    x = fd_3E1D_A180[index];
-    y = fd_3E1D_A569[index];
-    attribute = fd_3E1D_AD3B[index];
+    x = AlistX[index];
+    y = AlistY[index];
+    attribute = AlistT[index];
     if (IsItHole(x, y)) {
         GoInNest(x, y, index);
         return;
@@ -865,20 +865,20 @@ void far DoReturnFoodAnt(int index)
     nx = x + Dx8[ndir];
     ny = y + Dy8[ndir];
     if (MapA[nx][ny] > Barrier) {
-        fd_3E1D_AD3B[index] = RandTurn(attribute & 7) | flags;
-        LifeA[x][y] = fd_3E1D_AD3B[index];
+        AlistT[index] = RandTurn(attribute & 7) | flags;
+        LifeA[x][y] = AlistT[index];
         return;
     }
-    fd_3E1D_AD3B[index] = LifeA[nx][ny] = ndir | flags;
+    AlistT[index] = LifeA[nx][ny] = ndir | flags;
     LifeA[x][y] = 0;
-    fd_3E1D_A180[index] = nx;
-    fd_3E1D_A569[index] = ny;
-    if (fd_3E1D_B124[index] != 0) {
-        fd_3E1D_B124[index]--;
+    AlistX[index] = nx;
+    AlistY[index] = ny;
+    if (AlistS[index] != 0) {
+        AlistS[index]--;
         if (attribute & 0x80)
-            f_1496_0474(nx, ny, fd_3E1D_B124[index]);
+            f_1496_0474(nx, ny, AlistS[index]);
         else
-            f_1496_043C(nx, ny, fd_3E1D_B124[index]);
+            f_1496_043C(nx, ny, AlistS[index]);
     }
 }
 
@@ -894,35 +894,35 @@ void far DoForageAnt(int index)
     int nx;
     int ny;
 
-    x = fd_3E1D_A180[index];
-    y = fd_3E1D_A569[index];
-    attribute = fd_3E1D_AD3B[index];
+    x = AlistX[index];
+    y = AlistY[index];
+    attribute = AlistT[index];
     if (IsItHole(x, y)) {
         GoInNest(x, y, index);
         return;
     }
     if (SRand32() == 0) {
-        fd_3E1D_A952[index] = 0xd;
+        AlistM[index] = 0xd;
         return;
     }
     flags = attribute & 0xf8;
     caste = (attribute & 0x78) >> 3;
-    if (fd_3E1D_D09F[x >> 1][y >> 1] != 0) {
-        fd_3E1D_A952[index] = 0xb;
+    if (PherMapA[x >> 1][y >> 1] != 0) {
+        AlistM[index] = 0xb;
         return;
     }
     if (caste != 6 && caste != 2) {
-        fd_3E1D_A952[index] = f_1383_0976(caste, attribute);
-        fd_3E1D_B124[index] = 0;
+        AlistM[index] = f_1383_0976(caste, attribute);
+        AlistS[index] = 0;
         return;
     }
     dir = f_1383_0A95(x, y, attribute & 7, attribute);
     if (dir < 0) {
         if (SRand8())
-            fd_3E1D_A952[index] = 0;
+            AlistM[index] = 0;
         else
-            fd_3E1D_A952[index] = f_1383_0976(caste, attribute);
-        fd_3E1D_B124[index] = 0;
+            AlistM[index] = f_1383_0976(caste, attribute);
+        AlistS[index] = 0;
         f_1496_04AC(x >> 1, y >> 1, attribute & 0x80);
         return;
     }
@@ -930,34 +930,34 @@ void far DoForageAnt(int index)
     ny = y + Dy8[dir];
     tile = MapA[nx][ny];
     if (IsItFood(tile) == 1) {
-        fd_3E1D_AD3B[index] = dir | flags | 8;
-        LifeA[x][y] = fd_3E1D_AD3B[index];
-        fd_3E1D_A952[index] = 3;
+        AlistT[index] = dir | flags | 8;
+        LifeA[x][y] = AlistT[index];
+        AlistM[index] = 3;
         f_0BE8_0798(nx, ny);
-        fd_3E1D_B124[index] = 200;
+        AlistS[index] = 200;
         return;
     }
     if (tile > Barrier) {
-        fd_3E1D_AD3B[index] = RandTurn(attribute & 7) | flags;
-        LifeA[x][y] = fd_3E1D_AD3B[index];
+        AlistT[index] = RandTurn(attribute & 7) | flags;
+        LifeA[x][y] = AlistT[index];
         if (SRand16() == 0) {
-            fd_3E1D_A952[index] = f_1383_0976(caste, attribute);
-            fd_3E1D_B124[index] = 0;
+            AlistM[index] = f_1383_0976(caste, attribute);
+            AlistS[index] = 0;
         }
         return;
     }
     tile = LifeA[nx][ny];
     if (tile == 0) {
-        fd_3E1D_AD3B[index] = LifeA[nx][ny] = dir | flags;
+        AlistT[index] = LifeA[nx][ny] = dir | flags;
         LifeA[x][y] = 0;
-        fd_3E1D_A180[index] = nx;
-        fd_3E1D_A569[index] = ny;
-        if (fd_3E1D_B124[index] != 0) {
-            fd_3E1D_B124[index]--;
+        AlistX[index] = nx;
+        AlistY[index] = ny;
+        if (AlistS[index] != 0) {
+            AlistS[index]--;
             if (attribute & 0x80)
-                f_1496_0404(nx, ny, fd_3E1D_B124[index]);
+                f_1496_0404(nx, ny, AlistS[index]);
             else
-                f_1496_03CC(nx, ny, fd_3E1D_B124[index]);
+                f_1496_03CC(nx, ny, AlistS[index]);
         }
         f_1496_04AC(nx, ny, attribute & 0x80);
         return;
@@ -968,17 +968,17 @@ void far DoForageAnt(int index)
             return;
         }
         if (fd_50F6_1044 == 1) {
-            fd_3E1D_AD3B[index] = dir | flags;
-            LifeA[x][y] = fd_3E1D_AD3B[index];
+            AlistT[index] = dir | flags;
+            LifeA[x][y] = AlistT[index];
             o22_39C7_19E5(x, y, dir);
         }
-        fd_3E1D_AD3B[index] = RandTurn(attribute & 7) | flags;
-        LifeA[x][y] = fd_3E1D_AD3B[index];
+        AlistT[index] = RandTurn(attribute & 7) | flags;
+        LifeA[x][y] = AlistT[index];
         return;
     }
     if (((tile ^ attribute) & 0x80) == 0) {
-        fd_3E1D_AD3B[index] = RandTurn(attribute & 7) | flags;
-        LifeA[x][y] = fd_3E1D_AD3B[index];
+        AlistT[index] = RandTurn(attribute & 7) | flags;
+        LifeA[x][y] = AlistT[index];
         return;
     }
     StartFightA(index, x, y, nx, ny);
@@ -995,15 +995,15 @@ void far DoRecruitAnt(int index)
     int nx;
     int ny;
 
-    x = fd_3E1D_A180[index];
-    y = fd_3E1D_A569[index];
-    attribute = fd_3E1D_AD3B[index];
+    x = AlistX[index];
+    y = AlistY[index];
+    attribute = AlistT[index];
     if (IsItHole(x, y)) {
         GoInNest(x, y, index);
         return;
     }
     flags = attribute & 0xf8;
-    if (fd_3E1D_D09F[x >> 1][y >> 1] != 0)
+    if (PherMapA[x >> 1][y >> 1] != 0)
         dir = f_1383_0DCC(x, y, attribute & 7);
     else if (attribute > 0x7f)
         dir = f_1383_0FCE(x, y, attribute & 7);
@@ -1012,16 +1012,16 @@ void far DoRecruitAnt(int index)
     nx = x + Dx8[dir];
     ny = y + Dy8[dir];
     if (MapA[nx][ny] > Barrier) {
-        fd_3E1D_AD3B[index] = SRand8() | flags;
-        LifeA[x][y] = fd_3E1D_AD3B[index];
+        AlistT[index] = SRand8() | flags;
+        LifeA[x][y] = AlistT[index];
         return;
     }
     tile = LifeA[nx][ny];
     if (tile == 0) {
-        fd_3E1D_AD3B[index] = LifeA[nx][ny] = dir | flags;
+        AlistT[index] = LifeA[nx][ny] = dir | flags;
         LifeA[x][y] = 0;
-        fd_3E1D_A180[index] = nx;
-        fd_3E1D_A569[index] = ny;
+        AlistX[index] = nx;
+        AlistY[index] = ny;
         return;
     }
     if (IsYellowAnt(tile)) {
@@ -1030,17 +1030,17 @@ void far DoRecruitAnt(int index)
             return;
         }
         if (fd_50F6_1044) {
-            fd_3E1D_AD3B[index] = dir | flags;
-            LifeA[x][y] = fd_3E1D_AD3B[index];
+            AlistT[index] = dir | flags;
+            LifeA[x][y] = AlistT[index];
             o22_39C7_19E5(x, y, dir);
         }
-        fd_3E1D_AD3B[index] = RandTurn(attribute & 7) | flags;
-        LifeA[x][y] = fd_3E1D_AD3B[index];
+        AlistT[index] = RandTurn(attribute & 7) | flags;
+        LifeA[x][y] = AlistT[index];
         return;
     }
     if (((tile ^ attribute) & 0x80) == 0) {
-        fd_3E1D_AD3B[index] = RandTurn(attribute & 7) | flags;
-        LifeA[x][y] = fd_3E1D_AD3B[index];
+        AlistT[index] = RandTurn(attribute & 7) | flags;
+        LifeA[x][y] = AlistT[index];
         return;
     }
     StartFightA(index, x, y, nx, ny);
@@ -1049,23 +1049,23 @@ void far DoRecruitAnt(int index)
 void far GoInNest(int x, int y, int index)
 {
     if (x < 0x40) {
-        if (fd_50F6_0DA8 >= 500)
+        if (ListIndexB >= 500)
             f_0EC1_0081();
-        if (fd_50F6_0DA8 >= 500)
+        if (ListIndexB >= 500)
             return;
-        AddAntToBList(y, 1, (fd_3E1D_AD3B[index] & 0xf8) + 4, fd_3E1D_A952[index], fd_3E1D_B124[index]);
+        AddAntToBList(y, 1, (AlistT[index] & 0xf8) + 4, AlistM[index], AlistS[index]);
         if (HoleMapB[y] != 0)
             DigTileB(y, 1);
     } else {
-        if (fd_50F6_0EAA >= 500)
+        if (ListIndexR >= 500)
             f_0EC1_0100();
-        if (fd_50F6_0EAA >= 500)
+        if (ListIndexR >= 500)
             return;
-        AddAntToRList(y, 1, (fd_3E1D_AD3B[index] & 0xf8) + 4, fd_3E1D_A952[index], fd_3E1D_B124[index]);
+        AddAntToRList(y, 1, (AlistT[index] & 0xf8) + 4, AlistM[index], AlistS[index]);
         if (HoleMapR[y] != 0)
             DigTileR(y, 1);
     }
-    fd_3E1D_AD3B[index] = 0;
+    AlistT[index] = 0;
     LifeA[x][y] = 0;
 }
 
@@ -1075,16 +1075,16 @@ void far StartFightA(int ant, int x, int y, int nx, int ny)
     int type;
     int winner;
 
-    type = fd_3E1D_AD3B[ant];
-    fd_3E1D_AD3B[ant] = 0;
+    type = AlistT[ant];
+    AlistT[ant] = 0;
     LifeA[x][y] = 0;
     loser = f_0EC1_0291(nx, ny);
     if (loser >= 0) {
-        winner = GetWinner(fd_3E1D_AD3B[loser], type);
-        fd_3E1D_AD3B[loser] = (winner & 0x80) + 0x70;
+        winner = GetWinner(AlistT[loser], type);
+        AlistT[loser] = (winner & 0x80) + 0x70;
         LifeA[nx][ny] = (winner & 0x80) + 0x70;
-        fd_3E1D_A952[loser] = 0xa;
-        fd_3E1D_B124[loser] = winner;
+        AlistM[loser] = 0xa;
+        AlistS[loser] = winner;
         f_1496_0395(nx, ny, 0x28);
     }
 }
@@ -1136,16 +1136,16 @@ void far DoFightA(int index)
     int x;
     int y;
 
-    x = fd_3E1D_A180[index];
-    y = fd_3E1D_A569[index];
-    fd_3E1D_AD3B[index] = (fd_3E1D_AD3B[index] & 0xf8) + SRand1(7);
-    LifeA[x][y] = fd_3E1D_AD3B[index];
+    x = AlistX[index];
+    y = AlistY[index];
+    AlistT[index] = (AlistT[index] & 0xf8) + SRand1(7);
+    LifeA[x][y] = AlistT[index];
     if (SRand16() == 0) {
-        LifeA[x][y] = fd_3E1D_B124[index];
-        fd_3E1D_AD3B[index] = LifeA[x][y];
-        fd_3E1D_A952[Tindex] = f_1383_0976((fd_3E1D_AD3B[index] & 0x78) >> 3, fd_3E1D_AD3B[index]);
-        fd_3E1D_B124[index] = 0;
-        DeadAntHere(x, y, fd_3E1D_AD3B[index] & 0x80);
+        LifeA[x][y] = AlistS[index];
+        AlistT[index] = LifeA[x][y];
+        AlistM[Tindex] = f_1383_0976((AlistT[index] & 0x78) >> 3, AlistT[index]);
+        AlistS[index] = 0;
+        DeadAntHere(x, y, AlistT[index] & 0x80);
     } else if (fd_3D57_07B2 == 1)
         f_0250_4302(x, y, 1);
 }
@@ -1205,9 +1205,9 @@ void far DoAttackAnt(int index)
     int nx;
     int ny;
 
-    x = fd_3E1D_A180[index];
-    y = fd_3E1D_A569[index];
-    attribute = fd_3E1D_AD3B[index];
+    x = AlistX[index];
+    y = AlistY[index];
+    attribute = AlistT[index];
     if (IsItHole(x, y)) {
         GoInNest(x, y, index);
         return;
@@ -1220,16 +1220,16 @@ void far DoAttackAnt(int index)
     nx = x + Dx8[dir];
     ny = y + Dy8[dir];
     if (MapA[nx][ny] > Barrier) {
-        fd_3E1D_AD3B[index] = RandTurn(attribute & 7) | flags;
-        LifeA[x][y] = fd_3E1D_AD3B[index];
+        AlistT[index] = RandTurn(attribute & 7) | flags;
+        LifeA[x][y] = AlistT[index];
         return;
     }
     tile = LifeA[nx][ny];
     if (tile == 0) {
-        fd_3E1D_AD3B[index] = LifeA[nx][ny] = dir | flags;
+        AlistT[index] = LifeA[nx][ny] = dir | flags;
         LifeA[x][y] = 0;
-        fd_3E1D_A180[index] = nx;
-        fd_3E1D_A569[index] = ny;
+        AlistX[index] = nx;
+        AlistY[index] = ny;
         return;
     }
     if (IsYellowAnt(tile) == 1) {
@@ -1237,13 +1237,13 @@ void far DoAttackAnt(int index)
             o25_3BA4_0DFB(1, index);
             return;
         }
-        fd_3E1D_AD3B[index] = RandTurn(attribute & 7) | flags;
-        LifeA[x][y] = fd_3E1D_AD3B[index];
+        AlistT[index] = RandTurn(attribute & 7) | flags;
+        LifeA[x][y] = AlistT[index];
         return;
     }
     if (((tile ^ attribute) & 0x80) == 0) {
-        fd_3E1D_AD3B[index] = RandTurn(attribute & 7) | flags;
-        LifeA[x][y] = fd_3E1D_AD3B[index];
+        AlistT[index] = RandTurn(attribute & 7) | flags;
+        LifeA[x][y] = AlistT[index];
         return;
     }
     StartFightA(index, x, y, nx, ny);

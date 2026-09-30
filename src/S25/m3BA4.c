@@ -28,8 +28,8 @@ extern int far fd_50F6_0AB6;
 extern int far fd_50F6_0AC6;
 extern int far fd_50F6_0AE8;
 extern int far fd_50F6_0AF8;
-extern signed char far fd_3D57_0010[];
-extern signed char far fd_3D57_001A[];
+extern signed char far Dx9[];
+extern signed char far Dy9[];
 extern int far f_10F7_26D4(int plane, int x, int y);
 int far o25_3BA4_1A9F(int plane, int x, int y, int gplane, int gx, int gy);
 extern signed char far fd_3D57_0008[];
@@ -99,8 +99,8 @@ void far DoAntMoveY(void)
     t = fd_50F6_09F0;
     t = fd_50F6_0AE8;
     t = fd_50F6_0AF8;
-    t = fd_3D57_0010[0];
-    t = fd_3D57_001A[0];
+    t = Dx9[0];
+    t = Dy9[0];
     t = fd_3D57_0008[0];
     t = fd_50F6_0AB6;
     t = fd_50F6_0AC6;
@@ -196,8 +196,8 @@ void far DoAntMoveY(void)
     }
     if (fd_50F6_0A8E == 1 && fd_50F6_0AF8 == fd_50F6_048C) {
         dir = f_0BE8_0B21(fd_50F6_047C, fd_50F6_048A, fd_50F6_0AD6, fd_50F6_0AE8);
-        x = fd_3D57_0010[dir] + fd_50F6_047C;
-        y = fd_3D57_001A[dir] + fd_50F6_048A;
+        x = Dx9[dir] + fd_50F6_047C;
+        y = Dy9[dir] + fd_50F6_048A;
         if (x < 0 || x > 0x7f)
             x = fd_50F6_047C;
         if (y < 0 || y > 0x3f)
@@ -378,7 +378,7 @@ void far DoAntSimY(void)
     }
 }
 
-extern int _fastcall f_22BF_0A22(int v);
+extern int _fastcall win_IsWinInFront(int v);
 extern long far f_00F8_02BE(void);
 extern void far f_00F8_0265(long);
 extern void far f_00DF_015C(void);
@@ -409,7 +409,7 @@ void far o25_3BA4_0999(int plane, int x, int y, int dir, int type, int kind)
     svDir = dir;
     if (kind == 0)
         count = 6;
-    else if (f_22BF_0A22(0))
+    else if (win_IsWinInFront(0))
         count = fd_3D57_07A8[1] ? 0x40 : 0x20;
     else
         count = 8;
@@ -478,7 +478,7 @@ void far o25_3BA4_0C01(int plane, int x, int y, int dir, int type)
     svY = y;
     svType = fd_50F6_04C2;
     svDir = dir;
-    count = f_22BF_0A22(0) ? 0x20 : 8;
+    count = win_IsWinInFront(0) ? 0x20 : 8;
     t = f_00F8_02BE();
     for (i = 0; i < count; i++) {
         while (f_00F8_02BE() <= t)
@@ -507,15 +507,15 @@ void far o25_3BA4_0C01(int plane, int x, int y, int dir, int type)
     WinPrintf("3");
 }
 
-extern unsigned char far fd_3E1D_A180[];
-extern unsigned char far fd_3E1D_A569[];
-extern unsigned char far fd_3E1D_AD3B[];
-extern unsigned char far fd_3E1D_B50D[];
-extern unsigned char far fd_3E1D_B702[];
-extern unsigned char far fd_3E1D_BAEC[];
-extern unsigned char far fd_3E1D_BED6[];
-extern unsigned char far fd_3E1D_C0CB[];
-extern unsigned char far fd_3E1D_C4B5[];
+extern unsigned char far AlistX[];
+extern unsigned char far AlistY[];
+extern unsigned char far AlistT[];
+extern unsigned char far BlistX[];
+extern unsigned char far BlistY[];
+extern unsigned char far BlistT[];
+extern unsigned char far RlistX[];
+extern unsigned char far RlistY[];
+extern unsigned char far RlistT[];
 extern void far f_10F7_0954(int plane, int x, int y, int value);
 extern int far f_0894_1E34(int a, int b);
 extern void far DeadAntHere(int x, int y, int type);
@@ -528,17 +528,17 @@ void far o25_3BA4_0DFB(int list, int index)
     unsigned char far *py;
 
     if (list <= 1) {
-        px = fd_3E1D_A180;
-        py = fd_3E1D_A569;
-        pl = fd_3E1D_AD3B;
+        px = AlistX;
+        py = AlistY;
+        pl = AlistT;
     } else if (list == 2) {
-        px = fd_3E1D_B50D;
-        py = fd_3E1D_B702;
-        pl = fd_3E1D_BAEC;
+        px = BlistX;
+        py = BlistY;
+        pl = BlistT;
     } else {
-        px = fd_3E1D_BED6;
-        py = fd_3E1D_C0CB;
-        pl = fd_3E1D_C4B5;
+        px = RlistX;
+        py = RlistY;
+        pl = RlistT;
     }
     f_10F7_0954(list, px[index], py[index], pl[index]);
     type = f_0894_1E34(fd_50F6_04C2, pl[index]);

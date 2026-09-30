@@ -6,7 +6,7 @@ extern int far RRand(int range);
 extern void far f_0E2E_000A(void);
 extern void far f_0EC1_037B(int y);
 extern void far f_0EC1_03D9(int y);
-extern void far f_0250_000E(int plane, int x, int y);
+extern void far ZapEuMapAt(int plane, int x, int y);
 
 extern void far myBeginSound(int a, int b, int c);
 
@@ -17,11 +17,11 @@ extern int far fd_50F6_0AFA[6];
 extern int far fd_50F6_0AEC[6];
 extern int far fd_50F6_0EB6[32];
 extern int far ListIndexA;
-extern unsigned char far fd_3E1D_AD3B[];
-extern int far fd_50F6_0DA8;
-extern unsigned char far fd_3E1D_BAEC[];
-extern int far fd_50F6_0EAA;
-extern unsigned char far fd_3E1D_C4B5[];
+extern unsigned char far AlistT[];
+extern int far ListIndexB;
+extern unsigned char far BlistT[];
+extern int far ListIndexR;
+extern unsigned char far RlistT[];
 extern int far fd_50F6_0A06;
 extern int far fd_50F6_04E2;
 extern int far fd_50F6_04C2;
@@ -32,8 +32,8 @@ extern int far fd_50F6_0366;
 extern int far fd_50F6_0400;
 extern int far fd_50F6_07CA[2];
 extern unsigned char far fd_3D57_0184[][16];
-extern int far fd_50F6_0330;
-extern int far fd_50F6_0350;
+extern int far BpopT;
+extern int far RpopT;
 extern int far fd_50F6_0352;
 extern int far TERRAINset;
 extern int far fd_3D57_0C1E;
@@ -41,12 +41,12 @@ extern int far fd_50F6_0242;
 extern unsigned char far fd_50F6_02C0[];
 extern unsigned char far fd_50F6_0256[];
 extern unsigned char far MapA[128][64];
-extern unsigned char far fd_3E1D_D09F[64][32];
+extern unsigned char far PherMapA[64][32];
 extern unsigned char far fd_3E1D_D89F[64][32];
-extern unsigned char far fd_3E1D_E09F[64][32];
-extern unsigned char far fd_3E1D_E89F[64][32];
-extern unsigned char far fd_3E1D_F09F[64][32];
-extern unsigned char far fd_4DA7_0000[64][32];
+extern unsigned char far PherMapBN[64][32];
+extern unsigned char far PherMapBT[64][32];
+extern unsigned char far PherMapRN[64][32];
+extern unsigned char far PherMapRT[64][32];
 extern unsigned char far MapB[64][64];
 extern int far SRand16(void);
 extern int far SRand8(void);
@@ -95,17 +95,17 @@ void far f_0BE8_0002(void)
     for (i = 0; i < 32; i++)
         fd_50F6_0EB6[i] = 0;
     for (n = ListIndexA; n > 0; ) {
-        v = fd_3E1D_AD3B[--n];
+        v = AlistT[--n];
         if (v)
             fd_50F6_0EB6[v >> 3]++;
     }
-    for (n = fd_50F6_0DA8; n > 0; ) {
-        v = fd_3E1D_BAEC[--n];
+    for (n = ListIndexB; n > 0; ) {
+        v = BlistT[--n];
         if (v)
             fd_50F6_0EB6[v >> 3]++;
     }
-    for (n = fd_50F6_0EAA; n > 0; ) {
-        v = fd_3E1D_C4B5[--n];
+    for (n = ListIndexR; n > 0; ) {
+        v = RlistT[--n];
         if (v)
             fd_50F6_0EB6[v >> 3]++;
     }
@@ -146,9 +146,9 @@ void far f_0BE8_0002(void)
         if (fd_50F6_0EAC == 2 && fd_50F6_0400 == 1 && fd_50F6_07CA[0] == 0xb && fd_50F6_07CA[1] == 8)
             fd_3D57_0184[SRand1(6)][0] = 0x14;
     }
-    fd_50F6_0330 = fd_50F6_0AEC[3] + fd_50F6_0AEC[1] + fd_50F6_0AEC[2] + fd_50F6_0AEC[4] + fd_50F6_0AEC[5];
+    BpopT = fd_50F6_0AEC[3] + fd_50F6_0AEC[1] + fd_50F6_0AEC[2] + fd_50F6_0AEC[4] + fd_50F6_0AEC[5];
     fd_50F6_0AFA[5] = fd_50F6_0EB6[28];
-    fd_50F6_0350 = fd_50F6_0AFA[5] + fd_50F6_0AFA[4] + fd_50F6_0AFA[1] + fd_50F6_0AFA[3] + fd_50F6_0AFA[2];
+    RpopT = fd_50F6_0AFA[5] + fd_50F6_0AFA[4] + fd_50F6_0AFA[1] + fd_50F6_0AFA[3] + fd_50F6_0AFA[2];
     fd_50F6_0354 = 0;
 }
 
@@ -223,17 +223,17 @@ void far PlaceDrop(int i)
         MapA[x][y] = 0x74;
         x >>= 1;
         y >>= 1;
-        fd_3E1D_D89F[x][y] = fd_3E1D_D09F[x][y] = 0;
-        if (fd_3E1D_E09F[x][y] >= 0x14)
-            fd_3E1D_E09F[x][y] -= 0x14;
+        fd_3E1D_D89F[x][y] = PherMapA[x][y] = 0;
+        if (PherMapBN[x][y] >= 0x14)
+            PherMapBN[x][y] -= 0x14;
         else
-            fd_3E1D_E09F[x][y] = 0;
-        fd_3E1D_E89F[x][y] = 0;
-        if (fd_3E1D_F09F[x][y] >= 0x14)
-            fd_3E1D_F09F[x][y] -= 0x14;
+            PherMapBN[x][y] = 0;
+        PherMapBT[x][y] = 0;
+        if (PherMapRN[x][y] >= 0x14)
+            PherMapRN[x][y] -= 0x14;
         else
-            fd_3E1D_F09F[x][y] = 0;
-        fd_4DA7_0000[x][y] = 0;
+            PherMapRN[x][y] = 0;
+        PherMapRT[x][y] = 0;
     }
 }
 
@@ -266,8 +266,8 @@ void far AddWater(int y)
         else
             t = v + 0x2f;
         MapR[x][y] = t;
-        f_0250_000E(2, x, y);
-        f_0250_000E(3, x, y);
+        ZapEuMapAt(2, x, y);
+        ZapEuMapAt(3, x, y);
     }
 }
 
@@ -290,8 +290,8 @@ void far DropWater(int y)
         else
             t = v - 0x2f;
         MapR[x][y] = t;
-        f_0250_000E(2, x, y);
-        f_0250_000E(3, x, y);
+        ZapEuMapAt(2, x, y);
+        ZapEuMapAt(3, x, y);
     }
 }
 
@@ -428,7 +428,7 @@ void far f_0BE8_09D3(int x, int y)
 
 void far PlaceEggB(int x, int y, int life)
 {
-    if (fd_50F6_0DA8 < 500 && InNestBounds(x, y)) {
+    if (ListIndexB < 500 && InNestBounds(x, y)) {
         DigTileB(x, y);
         AddAntToBList(x, y, life, 8, 0);
         LifeB[x][y] = life;
@@ -437,7 +437,7 @@ void far PlaceEggB(int x, int y, int life)
 
 void far PlaceEggR(int x, int y, int life)
 {
-    if (fd_50F6_0EAA < 500 && InNestBounds(x, y)) {
+    if (ListIndexR < 500 && InNestBounds(x, y)) {
         DigTileR(x, y);
         AddAntToRList(x, y, life, 8, 0);
         LifeR[x][y] = life;

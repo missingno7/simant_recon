@@ -14,7 +14,7 @@ extern int far fd_50F6_0F34;
 extern int far StrategicModeB;
 extern int far fd_50F6_10A6;
 extern int far HealthB;
-extern int far fd_50F6_0330;
+extern int far BpopT;
 extern int far fd_50F6_036C;
 extern int far fd_50F6_0224;
 extern int far fd_50F6_0AEC[6];
@@ -30,46 +30,46 @@ extern int far fd_50F6_0AFA[6];
 extern int far fd_50F6_0504;
 extern int far HealthR;
 extern int far fd_50F6_035E;
-extern int far fd_50F6_0232;
-extern int far fd_50F6_0350;
+extern int far TilesDugR;
+extern int far RpopT;
 extern int far SRand32(void);
 extern int far SRand128(void);
 extern void far f_00DF_00B1(int id, int arg);
 extern void far * far * far AdviceStrs;
 extern void far f_15D9_009C(void far *, long, int);
-extern unsigned char far fd_3E1D_AD3B[];
-extern unsigned char far fd_3E1D_A952[];
-extern unsigned char far fd_3E1D_B124[];
-extern unsigned char far fd_3E1D_A180[];
-extern unsigned char far fd_3E1D_A569[];
+extern unsigned char far AlistT[];
+extern unsigned char far AlistM[];
+extern unsigned char far AlistS[];
+extern unsigned char far AlistX[];
+extern unsigned char far AlistY[];
 extern unsigned char far MapA[128][64];
-extern unsigned char far fd_3E1D_BAEC[];
-extern unsigned char far fd_3E1D_B8F7[];
-extern unsigned char far fd_3E1D_BCE1[];
+extern unsigned char far BlistT[];
+extern unsigned char far BlistM[];
+extern unsigned char far BlistS[];
 extern int far ListIndexA;
-extern int far fd_50F6_0DA8;
+extern int far ListIndexB;
 extern int far fd_50F6_0D40[20];
-extern int far fd_50F6_0EAA;
-extern unsigned char far fd_3E1D_C4B5[];
-extern unsigned char far fd_3E1D_C2C0[];
-extern int far fd_50F6_0378;
+extern int far ListIndexR;
+extern unsigned char far RlistT[];
+extern unsigned char far RlistM[];
+extern int far ModeAuto;
 extern int far SRand8(void);
 extern char far ModeTabWB[][8];
 extern char far ModeTabSB[][8];
 extern char far CasteModeTabB[];
-extern unsigned char far fd_4DA7_0000[64][32];
-extern unsigned char far fd_3E1D_E89F[64][32];
+extern unsigned char far PherMapRT[64][32];
+extern unsigned char far PherMapBT[64][32];
 extern char far Dx8[8];
 extern char far Dy8[8];
 extern char far TurnTab[][8];
-extern unsigned char far fd_3E1D_F09F[64][32];
-extern unsigned char far fd_3E1D_E09F[64][32];
+extern unsigned char far PherMapRN[64][32];
+extern unsigned char far PherMapBN[64][32];
 extern int far SRand2(void);
 extern int far GetDir(int x1, int y1, int x2, int y2);
 extern int far fd_3D57_02B0[2];
 extern int far SRand4(void);
 extern int far fd_3D57_02AC[2];
-extern unsigned char far fd_3E1D_D09F[64][32];
+extern unsigned char far PherMapA[64][32];
 extern int far RedPlane;
 extern int far RedLocY;
 extern int far RedLocX;
@@ -116,17 +116,17 @@ void far GetStrategy(void)
 
 int far GstrB(void)
 {
-    if (HealthB < 10 && (fd_50F6_0330 >> 1) > fd_50F6_0350 && fd_50F6_0350 > 0 && fd_50F6_036C > 0)
+    if (HealthB < 10 && (BpopT >> 1) > RpopT && RpopT > 0 && fd_50F6_036C > 0)
         return 0;
     if (HealthB < 30)
         return 5;
     if (HealthB < 50)
         return 4;
-    if (fd_50F6_0224 < fd_50F6_0330)
+    if (fd_50F6_0224 < BpopT)
         return 3;
-    if (fd_50F6_0224 < fd_50F6_0330 * 2)
+    if (fd_50F6_0224 < BpopT * 2)
         return 2;
-    if (fd_50F6_0330 > 100 && fd_50F6_0350 > 0 && fd_50F6_036C > 0 && fd_50F6_0330 / 3 > fd_50F6_0350)
+    if (BpopT > 100 && RpopT > 0 && fd_50F6_036C > 0 && BpopT / 3 > RpopT)
         return 0;
     return 1;
 }
@@ -211,7 +211,7 @@ int far GstrR(void)
         fd_50F6_0504--;
         return 0;
     }
-    if (HealthR < 10 && (fd_50F6_0350 >> 1) > fd_50F6_0330 && fd_50F6_0330 > 0 && fd_50F6_035E > 0) {
+    if (HealthR < 10 && (RpopT >> 1) > BpopT && BpopT > 0 && fd_50F6_035E > 0) {
         StartAttack();
         return 0;
     }
@@ -219,15 +219,15 @@ int far GstrR(void)
         return 5;
     if (HealthR < 50)
         return 4;
-    if (fd_50F6_0232 < fd_50F6_0350)
+    if (TilesDugR < RpopT)
         return 3;
-    if (fd_50F6_0232 < fd_50F6_0350 * 2)
+    if (TilesDugR < RpopT * 2)
         return 2;
-    if (fd_50F6_0350 > 100 && fd_50F6_0330 > 0 && fd_50F6_035E > 0 && fd_50F6_0350 / 3 > fd_50F6_0330) {
+    if (RpopT > 100 && BpopT > 0 && fd_50F6_035E > 0 && RpopT / 3 > BpopT) {
         StartAttack();
         return 0;
     }
-    if (SRand32() == 0 && fd_50F6_0350 > 20 && fd_50F6_0350 > fd_50F6_0330 && SRand128() == 0) {
+    if (SRand32() == 0 && RpopT > 20 && RpopT > BpopT && SRand128() == 0) {
         StartAttack();
         return 0;
     }
@@ -245,56 +245,56 @@ void far ForceModeA(int index, int caste, int mode)
 {
     switch (caste) {
     case 1:
-        fd_3E1D_AD3B[index] += 8;
-        fd_3E1D_A952[index] = mode;
-        fd_3E1D_B124[index] = 0;
+        AlistT[index] += 8;
+        AlistM[index] = mode;
+        AlistS[index] = 0;
         break;
     case 3:
     case 7:
-        fd_3E1D_AD3B[index] -= 8;
-        if (MapA[fd_3E1D_A180[index]][fd_3E1D_A569[index]] < 0x48)
-            MapA[fd_3E1D_A180[index]][fd_3E1D_A569[index]] = 0x48;
+        AlistT[index] -= 8;
+        if (MapA[AlistX[index]][AlistY[index]] < 0x48)
+            MapA[AlistX[index]][AlistY[index]] = 0x48;
     case 2:
     case 6:
-        fd_3E1D_A952[index] = mode;
-        fd_3E1D_B124[index] = 0;
+        AlistM[index] = mode;
+        AlistS[index] = 0;
         break;
     case 5:
     case 9:
-        fd_3E1D_AD3B[index] -= 0x18;
-        fd_3E1D_A952[index] = mode;
-        fd_3E1D_B124[index] = 0;
+        AlistT[index] -= 0x18;
+        AlistM[index] = mode;
+        AlistS[index] = 0;
         break;
     }
     if (mode == 6 && MePlane == 1)
-        fd_3E1D_B124[index] = ((MeLocY & 0x3c) << 2) | (MeLocX >> 3);
+        AlistS[index] = ((MeLocY & 0x3c) << 2) | (MeLocX >> 3);
 }
 
 void far ForceModeB(int index, int caste, int mode)
 {
     switch (caste) {
     case 1:
-        fd_3E1D_BAEC[index] += 8;
-        fd_3E1D_B8F7[index] = mode;
-        fd_3E1D_BCE1[index] = 0;
+        BlistT[index] += 8;
+        BlistM[index] = mode;
+        BlistS[index] = 0;
         break;
     case 3:
     case 7:
-        fd_3E1D_BAEC[index] -= 8;
+        BlistT[index] -= 8;
     case 2:
     case 6:
-        fd_3E1D_B8F7[index] = mode;
-        fd_3E1D_BCE1[index] = 0;
+        BlistM[index] = mode;
+        BlistS[index] = 0;
         break;
     case 5:
     case 9:
-        fd_3E1D_BAEC[index] -= 0x18;
-        fd_3E1D_B8F7[index] = mode;
-        fd_3E1D_BCE1[index] = 0;
+        BlistT[index] -= 0x18;
+        BlistM[index] = mode;
+        BlistS[index] = 0;
         break;
     }
     if (mode == 6 && MePlane == 1)
-        fd_3E1D_BCE1[index] = ((MeLocY & 0x3c) << 2) | (MeLocX >> 3);
+        BlistS[index] = ((MeLocY & 0x3c) << 2) | (MeLocX >> 3);
 }
 
 void far Recruit(int count)
@@ -310,30 +310,30 @@ void far Recruit(int count)
         if (n <= 0)
             break;
         i--;
-        type = fd_3E1D_AD3B[i];
+        type = AlistT[i];
         if (type != 0 && !(type & 0x80)) {
             caste = (type & 0x78) >> 3;
             if (caste == 2 || caste == 6) {
-                if (fd_3E1D_A952[i] != 6) {
-                    fd_3E1D_A952[i] = 6;
-                    fd_3E1D_B124[i] = 0;
+                if (AlistM[i] != 6) {
+                    AlistM[i] = 6;
+                    AlistS[i] = 0;
                     n--;
                 }
             }
         }
     }
-    i = fd_50F6_0DA8;
+    i = ListIndexB;
     while (i > 0) {
         if (n <= 0)
             break;
         i--;
-        type = fd_3E1D_BAEC[i];
+        type = BlistT[i];
         if (type != 0 && !(type & 0x80)) {
             caste = (type & 0x78) >> 3;
             if (caste == 2 || caste == 6) {
-                if (fd_3E1D_B8F7[i] != 6) {
-                    fd_3E1D_B8F7[i] = 6;
-                    fd_3E1D_BCE1[i] = 0;
+                if (BlistM[i] != 6) {
+                    BlistM[i] = 6;
+                    BlistS[i] = 0;
                     n--;
                 }
             }
@@ -357,31 +357,31 @@ void far UnRecruit(int all)
         if (n <= 0)
             break;
         i--;
-        type = fd_3E1D_AD3B[i];
-        if (type != 0 && !(type & 0x80) && fd_3E1D_A952[i] == 6) {
-            fd_3E1D_A952[i] = 0;
+        type = AlistT[i];
+        if (type != 0 && !(type & 0x80) && AlistM[i] == 6) {
+            AlistM[i] = 0;
             n--;
         }
     }
-    i = fd_50F6_0DA8;
+    i = ListIndexB;
     while (i > 0) {
         if (n <= 0)
             break;
         i--;
-        type = fd_3E1D_BAEC[i];
-        if (type != 0 && !(type & 0x80) && fd_3E1D_B8F7[i] == 6) {
-            fd_3E1D_B8F7[i] = 0;
+        type = BlistT[i];
+        if (type != 0 && !(type & 0x80) && BlistM[i] == 6) {
+            BlistM[i] = 0;
             n--;
         }
     }
-    i = fd_50F6_0EAA;
+    i = ListIndexR;
     while (i > 0) {
         if (n <= 0)
             break;
         i--;
-        type = fd_3E1D_C4B5[i];
-        if (type != 0 && !(type & 0x80) && fd_3E1D_C2C0[i] == 6) {
-            fd_3E1D_C2C0[i] = 7;
+        type = RlistT[i];
+        if (type != 0 && !(type & 0x80) && RlistM[i] == 6) {
+            RlistM[i] = 7;
             n--;
         }
     }
@@ -401,14 +401,14 @@ void far RecruitRed(int count)
         if (need <= 0)
             break;
         i--;
-        type = fd_3E1D_AD3B[i];
+        type = AlistT[i];
         if (type != 0 && type > 0x7f) {
-            cur = fd_3E1D_A952[i];
+            cur = AlistM[i];
             mode = (type & 0x78) >> 3;
             if (mode == 2 || mode == 6) {
                 if (cur != 0x13 && cur != 6) {
-                    fd_3E1D_A952[i] = 6;
-                    fd_3E1D_B124[i] = 0;
+                    AlistM[i] = 6;
+                    AlistS[i] = 0;
                     need--;
                 }
             }
@@ -424,9 +424,9 @@ void far UnRecruitRed(void)
     i = ListIndexA;
     while (i > 0) {
         i--;
-        type = fd_3E1D_AD3B[i];
-        if (type != 0 && type > 0x7f && fd_3E1D_A952[i] == 6)
-            fd_3E1D_A952[i] = 0;
+        type = AlistT[i];
+        if (type != 0 && type > 0x7f && AlistM[i] == 6)
+            AlistM[i] = 0;
     }
 }
 
@@ -439,7 +439,7 @@ int far GetNewMode(int caste, int type)
 
 int far GetNewModeB(int caste)
 {
-    if (fd_50F6_0378 == 1) {
+    if (ModeAuto == 1) {
         if (caste == 2)
             return ModeTabWB[StrategicModeB][SRand8()];
         if (caste == 6)
@@ -492,9 +492,9 @@ int far GetForageDir(int x, int y, int dir, int attribute)
     yCell = y >> 1;
     plane = attribute & 0x80;
     if (plane)
-        current = fd_4DA7_0000[xCell][yCell];
+        current = PherMapRT[xCell][yCell];
     else
-        current = fd_3E1D_E89F[xCell][yCell];
+        current = PherMapBT[xCell][yCell];
 
     best = 0;
     bestDir = SRand8();
@@ -504,9 +504,9 @@ int far GetForageDir(int x, int y, int dir, int attribute)
         ny = yCell + Dy8[i];
         ny &= 0x1f;
         if (plane)
-            value = fd_4DA7_0000[nx][ny];
+            value = PherMapRT[nx][ny];
         else
-            value = fd_3E1D_E89F[nx][ny];
+            value = PherMapBT[nx][ny];
         if (value > best) {
             best = value;
             bestDir = i;
@@ -538,9 +538,9 @@ int far GetNestDir(int x, int y, int dir, int type)
     nx = Bounce(x, y);
     if (nx) return (nx - 1) & 7;
     if (plane)
-        current = fd_3E1D_F09F[xCell][yCell];
+        current = PherMapRN[xCell][yCell];
     else
-        current = fd_3E1D_E09F[xCell][yCell];
+        current = PherMapBN[xCell][yCell];
     if (current) {
         best = 0;
         bestDir = 0;
@@ -550,9 +550,9 @@ int far GetNestDir(int x, int y, int dir, int type)
             ny = yCell + Dy8[i];
             ny &= 0x1f;
             if (plane)
-                value = fd_3E1D_F09F[nx][ny];
+                value = PherMapRN[nx][ny];
             else
-                value = fd_3E1D_E09F[nx][ny];
+                value = PherMapBN[nx][ny];
             if (value > best) {
                 best = value;
                 bestDir = i;
@@ -592,7 +592,7 @@ int far GetAlarmDir(int x, int y, int dir)
     best = 0;
     bestDir = 0;
     for (i = 0; i < 8; i++) {
-        value = fd_3E1D_D09F[(xc + Dx8[i]) & 0x3f][(yc + Dy8[i]) & 0x1f];
+        value = PherMapA[(xc + Dx8[i]) & 0x3f][(yc + Dy8[i]) & 0x1f];
         if (value > best) {
             best = value;
             bestDir = i;

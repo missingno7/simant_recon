@@ -21,7 +21,7 @@ struct Event {
 };
 
 extern int far WinPrintf(char far *format, ...);
-extern int _fastcall f_22BF_0A22(int win);
+extern int _fastcall win_IsWinInFront(int win);
 extern long far TickCount(void);
 extern int _fastcall win_GetEvent(struct Event far *ev);
 struct Rect {
@@ -50,7 +50,7 @@ extern void far AntMenu(struct Event far *ev);
 extern int far GetLife(int plane, int x, int y);
 extern void far f_015B_0653(void);
 extern int far fd_50F6_032E;
-extern int far o05_35F5_025C(int x, int y, int plane);
+extern int far MagnifyMenu(int x, int y, int plane);
 extern int far fd_50F6_0A06;
 extern int far IsYellowAnt(int life);
 extern int far FindAntIndex(int plane, int x, int y, int life);
@@ -85,7 +85,7 @@ void far processEdit(struct Event far *ePtr)
     else
         shift = (ePtr->modifiers & 0x6000) != 0;
     WinPrintf("ePtr->mouse_flags=%x", ePtr->modifiers);
-    if (!shift && f_22BF_0A22(0)) {
+    if (!shift && win_IsWinInFront(0)) {
         t = TickCount() + 6;
         while (TickCount() < t) {
             if (win_GetEvent(&ev) == 1 && (ev.modifiers & 0x6000) && ev.code == ePtr->code) {
@@ -113,7 +113,7 @@ void far processEdit(struct Event far *ePtr)
                 if (GetLife(fd_50F6_048C, x, y) != 0xfe) f_015B_0653();
                 return;
             }
-            if (f_00F8_02AC() == 1 && o05_35F5_025C(x, y, fd_50F6_032E) >= 0)
+            if (f_00F8_02AC() == 1 && MagnifyMenu(x, y, fd_50F6_032E) >= 0)
                 return;
         } else if (fd_50F6_0A06 == 0 && (life = GetLife(fd_50F6_032E, x, y)) >= 0
                    && (life & 0x7f) >= 8 && !IsYellowAnt(life)) {
@@ -168,21 +168,21 @@ void far processEdit(struct Event far *ePtr)
 
 extern void far myBeginSound(int a, int b, int c);
 extern char near g_5A97;
-extern void far f_1E57_0DAA(void);
+extern void far clip_Push(void);
 extern int _fastcall win_IsWinOpen(int win);
-extern void far f_1E57_0174(int win);
+extern void far clip_SetWin(int win);
 extern int far * near g_5AAC;
 extern void far f_0250_5058(void);
 extern int far f_1B4E_000D(int color);
 extern void (far * near g_916C)(int x0, int y0, int x1, int y1, int color);
 extern void (far * near g_9134)(int x0, int y0, int x1, int y1, int color);
 extern void far f_0250_0E15(void);
-extern void far f_1E57_0773(struct Rect far *rect);
+extern void far clip_SubInclude(struct Rect far *rect);
 extern int far fd_50F6_3856;
 extern struct Rect far fd_50F6_10D2;
 extern int far fd_50F6_3858;
 extern int far fd_55B3_29A2;
-extern void far f_1E57_0EB9(void);
+extern void far clip_Pop(void);
 
 void far DoLaserFire(int x1, int y1, int x2, int y2)
 {
@@ -201,9 +201,9 @@ void far DoLaserFire(int x1, int y1, int x2, int y2)
             x1 = (3 * x1) / 4;
             y1 = (3 * y1) / 4;
         }
-        f_1E57_0DAA();
+        clip_Push();
         if (win_IsWinOpen(0)) {
-            f_1E57_0174(0);
+            clip_SetWin(0);
             if (g_5AAC[1] != 0x8000) {
                 f_0250_5058();
                 originX = fd_50F6_0508.x * fd_55B3_19BE - fd_50F6_110C.left;
@@ -221,8 +221,8 @@ void far DoLaserFire(int x1, int y1, int x2, int y2)
             }
         }
         if (win_IsWinOpen(0x100)) {
-            f_1E57_0174(0x100);
-            f_1E57_0773(&fd_50F6_10D2);
+            clip_SetWin(0x100);
+            clip_SubInclude(&fd_50F6_10D2);
             sx = (x2 / fd_55B3_19BE) * fd_50F6_3856 + fd_50F6_10D2.left;
             sy = (y2 / fd_55B3_19C0) * fd_50F6_3858 + fd_50F6_10D2.top;
             ex = (x1 / fd_55B3_19BE) * fd_50F6_3856 + fd_50F6_10D2.left;
@@ -232,15 +232,15 @@ void far DoLaserFire(int x1, int y1, int x2, int y2)
             g_9134(sx, sy, sx + 2, sy + 2, f_1B4E_000D(1) | 0x20);
             fd_55B3_29A2 = 1;
         }
-        f_1E57_0EB9();
+        clip_Pop();
     }
 }
 
-extern int far fd_50F6_0FFC;
-extern int far fd_50F6_10AE;
-extern int far fd_50F6_0FB8;
-extern int far fd_50F6_0F42;
-extern int far fd_50F6_0F7E;
+extern int far Starg;
+extern int far StargLife;
+extern int far SMode;
+extern int far SuserX;
+extern int far SuserY;
 extern unsigned char far LifeA[64][64];
 extern int far fd_50F6_06AC;
 extern void far EndTargetMode(void);
@@ -251,11 +251,11 @@ void far processSpider(int x, int y, int mode)
     int idx;
 
     if (mode < 1 && fd_50F6_105E != 11) {
-        fd_50F6_0FFC = -2;
-        fd_50F6_10AE = -1;
-        fd_50F6_0FB8 = 0;
-        fd_50F6_0F42 = x;
-        fd_50F6_0F7E = y;
+        Starg = -2;
+        StargLife = -1;
+        SMode = 0;
+        SuserX = x;
+        SuserY = y;
         fd_50F6_0A8E = mode;
         return;
     }
@@ -263,9 +263,9 @@ void far processSpider(int x, int y, int mode)
     if (life != 0) {
         idx = FindAntIndex(1, x, y, life);
         if (idx >= 0) {
-            fd_50F6_10AE = life;
-            fd_50F6_0FFC = idx;
-            fd_50F6_0FB8 = 2;
+            StargLife = life;
+            Starg = idx;
+            SMode = 2;
             if (fd_50F6_105E == 11) {
                 myBeginSound(0xf, 0, 0x7e);
                 fd_50F6_06AC = 6;
@@ -278,11 +278,11 @@ void far processSpider(int x, int y, int mode)
         myBeginSound(1, 0, 0x7e);
         return;
     }
-    fd_50F6_0FFC = -2;
-    fd_50F6_10AE = -1;
-    fd_50F6_0FB8 = 0;
-    fd_50F6_0F42 = x;
-    fd_50F6_0F7E = y;
+    Starg = -2;
+    StargLife = -1;
+    SMode = 0;
+    SuserX = x;
+    SuserY = y;
     fd_50F6_0A8E = mode;
 }
 
@@ -355,8 +355,8 @@ extern void far MakeBlkQueen(int x, int y, int dir);
 extern int far fd_50F6_0AEC[6];
 extern void far MakeRedQueen(int x, int y, int dir);
 extern int far fd_50F6_0AFA[6];
-extern int far fd_50F6_0330;
-extern int far fd_50F6_0350;
+extern int far BpopT;
+extern int far RpopT;
 extern int far f_00DF_012D(void);
 extern void far f_00F8_02DF(int a);
 void far YellowDialog(int bitmap, int promptIndex);
@@ -433,11 +433,11 @@ void far YellowBirth(int plane, int x, int y, int type, int mode)
         if (fd_50F6_04E2 == 0) {
             fd_50F6_0AEC[1]++;
             fd_50F6_0AEC[4]--;
-            fd_50F6_0330++;
+            BpopT++;
         } else {
             fd_50F6_0AFA[1]++;
             fd_50F6_0AFA[4]--;
-            fd_50F6_0350++;
+            RpopT++;
         }
     }
     f_0250_0E91();
@@ -468,21 +468,21 @@ extern void far f_00F8_059C(void);
 extern void far UnRecruit(int all);
 extern int far fd_50F6_104E;
 void far SetAlarmDropState(int state, int quiet);
-extern int far fd_50F6_0DA8;
-extern unsigned char far fd_3E1D_BAEC[];
-extern unsigned char far fd_3E1D_B702[];
+extern int far ListIndexB;
+extern unsigned char far BlistT[];
+extern unsigned char far BlistY[];
 extern int far fd_50F6_0F26;
-extern unsigned char far fd_3E1D_B50D[];
+extern unsigned char far BlistX[];
 extern int far fd_50F6_0F0E;
 extern unsigned char far LifeB[64][64];
 extern int far ListIndexA;
-extern unsigned char far fd_3E1D_AD3B[];
-extern unsigned char far fd_3E1D_A569[];
-extern unsigned char far fd_3E1D_A180[];
-extern int far fd_50F6_0EAA;
-extern unsigned char far fd_3E1D_C4B5[];
-extern unsigned char far fd_3E1D_C0CB[];
-extern unsigned char far fd_3E1D_BED6[];
+extern unsigned char far AlistT[];
+extern unsigned char far AlistY[];
+extern unsigned char far AlistX[];
+extern int far ListIndexR;
+extern unsigned char far RlistT[];
+extern unsigned char far RlistY[];
+extern unsigned char far RlistX[];
 extern unsigned char far LifeR[64][64];
 extern int far fd_50F6_0376;
 extern int far fd_50F6_0366;
@@ -589,11 +589,11 @@ void far YellowDeath(int cause)
     if (fd_50F6_104E)
         SetAlarmDropState(0, 1);
     found = 0;
-    i = fd_50F6_0DA8;
+    i = ListIndexB;
     while (i >= 0) {
-        t = fd_3E1D_BAEC[i];
+        t = BlistT[i];
         if (t != 0 && t < 8) {
-            LifeB[fd_50F6_0F0E = fd_3E1D_B50D[i]][fd_50F6_0F26 = fd_3E1D_B702[i]] = fd_3E1D_BAEC[i] = 0;
+            LifeB[fd_50F6_0F0E = BlistX[i]][fd_50F6_0F26 = BlistY[i]] = BlistT[i] = 0;
             found = 1;
             fd_50F6_048C = 2;
             break;
@@ -601,12 +601,12 @@ void far YellowDeath(int cause)
         i--;
     }
     if (!found) {
-        i = fd_50F6_0DA8;
+        i = ListIndexB;
         while (i >= 0) {
-            t = fd_3E1D_BAEC[i];
+            t = BlistT[i];
             if (t != 0 && t > 7 && t < 0x68) {
-                LifeB[fd_50F6_0F0E = fd_3E1D_B50D[i]][fd_50F6_0F26 = fd_3E1D_B702[i]] =
-                    (life = fd_3E1D_BAEC[i], fd_3E1D_BAEC[i] = 0);
+                LifeB[fd_50F6_0F0E = BlistX[i]][fd_50F6_0F26 = BlistY[i]] =
+                    (life = BlistT[i], BlistT[i] = 0);
                 found = 2;
                 fd_50F6_048C = found;
                 break;
@@ -617,10 +617,10 @@ void far YellowDeath(int cause)
     if (!found) {
         i = ListIndexA;
         while (i >= 0) {
-            t = fd_3E1D_AD3B[i];
+            t = AlistT[i];
             if (t != 0 && t > 7 && t < 0x68) {
-                LifeA[fd_50F6_0F0E = fd_3E1D_A180[i]][fd_50F6_0F26 = fd_3E1D_A569[i]] =
-                    (life = fd_3E1D_AD3B[i], fd_3E1D_AD3B[i] = 0);
+                LifeA[fd_50F6_0F0E = AlistX[i]][fd_50F6_0F26 = AlistY[i]] =
+                    (life = AlistT[i], AlistT[i] = 0);
                 found = 2;
                 fd_50F6_048C = 1;
                 break;
@@ -629,12 +629,12 @@ void far YellowDeath(int cause)
         }
     }
     if (!found) {
-        i = fd_50F6_0EAA;
+        i = ListIndexR;
         while (i >= 0) {
-            t = fd_3E1D_C4B5[i];
+            t = RlistT[i];
             if (t != 0 && t > 7 && t < 0x68) {
-                LifeR[fd_50F6_0F0E = fd_3E1D_BED6[i]][fd_50F6_0F26 = fd_3E1D_C0CB[i]] =
-                    (life = fd_3E1D_C4B5[i], fd_3E1D_C4B5[i] = 0);
+                LifeR[fd_50F6_0F0E = RlistX[i]][fd_50F6_0F26 = RlistY[i]] =
+                    (life = RlistT[i], RlistT[i] = 0);
                 found = 2;
                 fd_50F6_048C = 3;
                 break;
@@ -697,7 +697,7 @@ void far SpecialXfer(void)
     int y;
 
     fd_3D57_00A4[fd_50F6_07CA[0]][fd_50F6_07CA[1]] = 0;
-    if (!f_22BF_0A22(0x1900)) {
+    if (!win_IsWinInFront(0x1900)) {
         if (!win_IsWinOpen(0x1900))
             f_00F8_04C7();
         else
@@ -711,7 +711,7 @@ void far SpecialXfer(void)
     while (!done) {
         if (!win_GetEvent(&ev))
             continue;
-        if (!f_22BF_0A22(0x1900)) {
+        if (!win_IsWinInFront(0x1900)) {
             if (!win_IsWinOpen(0x1900))
                 f_00F8_04C7();
             else
@@ -871,7 +871,7 @@ extern int far fd_3D57_07BE;
 extern void _fastcall win_SetObjSelectedState(int obj, int state);
 extern int far fd_50F6_0FFA;
 extern int far fd_50F6_0FB6;
-extern void far f_0250_006E(int left, int top, int right, int bottom);
+extern void far InvalEuMap(int left, int top, int right, int bottom);
 
 void far SetAlarmDropState(int state, int quiet)
 {
@@ -891,7 +891,7 @@ void far SetAlarmDropState(int state, int quiet)
         if (quiet == 0)
             myBeginSound(0xf, 0, 0x7e);
     }
-    f_0250_006E(0, 0, fd_50F6_0FB6, fd_50F6_0FFA);
+    InvalEuMap(0, 0, fd_50F6_0FB6, fd_50F6_0FFA);
 }
 
 void far YellowCommand(int cmd);
@@ -944,10 +944,10 @@ int far YellowCommandKey(int key)
             else
                 f_015B_0653();
         } else if (fd_50F6_0A06 == 1) {
-            if (fd_50F6_0F42 != fd_50F6_047C || fd_50F6_0F7E != fd_50F6_048A) {
-                fd_50F6_0F42 = fd_50F6_047C;
-                fd_50F6_0F7E = fd_50F6_048A;
-                fd_50F6_0FB8 = 0;
+            if (SuserX != fd_50F6_047C || SuserY != fd_50F6_048A) {
+                SuserX = fd_50F6_047C;
+                SuserY = fd_50F6_048A;
+                SMode = 0;
             } else
                 f_015B_0653();
         }

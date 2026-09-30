@@ -25,10 +25,6 @@ void far f_20E8_0000(void)
 {
 }
 
-/* SCAFFOLD BEGIN: win_LoadWindow (win_LoadWindow) best draft.
-   Residue: case 4 of the object loop computes the _fmemset pointer with
-   mov ax,bx; mov dx,es; add ax,2Ah - the original reuses DX (obj segment
-   from the objs[i] load): mov ax,bx; add ax,2Ah; push dx. 322 vs 320 bytes. */
 extern char far * far * far f_1A53_00F0(int object, int kind, int type);
 extern void far Punt(char far *format, ...);
 extern char far * far * near win_handles[];
@@ -74,7 +70,6 @@ void far win_LoadWindow(int win)
     win_UnlockWin(win);
 }
 
-/* SCAFFOLD END */
 
 struct Rect g_635C = { (int)0x8000, (int)0x8000, (int)0x8000, (int)0x8000 };
 
@@ -149,11 +144,11 @@ int far win_LoadAllWindows(void)
 extern char far * far f_2505_0006(int win);
 extern int g_5702[];
 extern void _fastcall f_2505_08EA(int win);
-extern void far f_1E57_0115(int win);
+extern void far clip_KillWin(int win);
 extern void _fastcall win_Recalc(int win);
 extern void far f_1E57_00B1(int win);
 extern void _fastcall f_2505_0831(int win);
-extern void far f_1E57_0174(int win);
+extern void far clip_SetWin(int win);
 extern void _fastcall win_DrawWindow(int win);
 extern void far f_1E57_0362(void);
 
@@ -173,7 +168,7 @@ void far win_Swap(int from, int to, int unused, int p0, int p1, int p2, int p3)
     if (*(int far *)(w + 0x1c) & 0x200) {
         (*g_62E4)();
         (*g_62F4)(from);
-        f_1E57_0115(from);
+        clip_KillWin(from);
         *(int far *)(w + 0x1c) &= ~0x200;
         (*g_62E0)(from);
     }
@@ -196,7 +191,7 @@ void far win_Swap(int from, int to, int unused, int p0, int p1, int p2, int p3)
         f_2505_08EA(g_5702[0]);
     f_1E57_00B1(to);
     f_2505_0831(to);
-    f_1E57_0174(to);
+    clip_SetWin(to);
     win_DrawWindow(to);
     (*g_62E8)();
     win_UnlockWin(to);
@@ -256,7 +251,7 @@ void far win_Open(int win, int p0, int p1, int p2, int p3)
             f_2505_08EA(g_5702[0]);
         f_1E57_00B1(win);
         f_2505_0831(win);
-        f_1E57_0174(win);
+        clip_SetWin(win);
         win_DrawWindow(win);
         (*g_62E8)();
         f_1E57_0362();
@@ -281,11 +276,11 @@ void _fastcall win_Close(int win)
         (*g_62F4)(win);
         if (g_5702[0] == win) {
             f_2505_08EA(win);
-            f_1E57_0115(win);
+            clip_KillWin(win);
             if (g_5702[0] != (int)0x8000)
                 f_2505_0831(g_5702[0]);
         } else {
-            f_1E57_0115(win);
+            clip_KillWin(win);
         }
         *(int far *)(w + 0x1c) &= ~0x200;
         if (*(int far *)(w + 0x1c) & 0x1000)

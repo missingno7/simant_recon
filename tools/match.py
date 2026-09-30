@@ -66,6 +66,14 @@ def public_in(obj, cname: str):
     for p in obj.publics + getattr(obj, "local_publics", []):
         if p["name"] in ("_" + cname, "@" + cname):
             return p["name"], p
+    # a draft may still spell the function by an older registered name (alias of the same
+    # address) after a supervisor rename; accept exactly those spellings
+    import symbols as symmod
+    code = symmod.load()["code"]
+    olds = {n for n, r in code.items() if r.get("alias_of") == cname}
+    for p in obj.publics + getattr(obj, "local_publics", []):
+        if p["name"][1:] in olds and p["name"][0] in "_@":
+            return p["name"], p
     return None, None
 
 

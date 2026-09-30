@@ -28,10 +28,10 @@ void far AddSomeAnts(int kind)
 }
 
 extern void far CompactListA(void);
-extern unsigned char far fd_3E1D_AD3B[];
+extern unsigned char far AlistT[];
 extern void far DeadAntHere(int x, int y, int type);
-extern unsigned char far fd_3E1D_A569[];
-extern unsigned char far fd_3E1D_A180[];
+extern unsigned char far AlistY[];
+extern unsigned char far AlistX[];
 extern int far f_10F7_2548(int level, int x, int y);
 
 void far KillSomeAnts(int mode)
@@ -44,19 +44,19 @@ void far KillSomeAnts(int mode)
     FullCount();
     n = 0;
     for (i = ListIndexA - 1; i >= 0; i--) {
-        type = fd_3E1D_AD3B[i];
+        type = AlistT[i];
         if (mode == 1) {
             if (!(type & 0x80)) {
-                DeadAntHere(fd_3E1D_A180[i], fd_3E1D_A569[i], 0);
-                fd_3E1D_AD3B[i] = 0;
+                DeadAntHere(AlistX[i], AlistY[i], 0);
+                AlistT[i] = 0;
                 if (++n > 50)
                     break;
             }
         } else {
             if (type & 0x80) {
-                if (!f_10F7_2548(1, fd_3E1D_A180[i], fd_3E1D_A569[i])) {
-                    DeadAntHere(fd_3E1D_A180[i], fd_3E1D_A569[i], 1);
-                    fd_3E1D_AD3B[i] = 0;
+                if (!f_10F7_2548(1, AlistX[i], AlistY[i])) {
+                    DeadAntHere(AlistX[i], AlistY[i], 1);
+                    AlistT[i] = 0;
                     if (++n > 50)
                         break;
                 }
@@ -142,10 +142,10 @@ extern void far f_00F8_0002(void);
 extern void _fastcall win_MakeObjVisible(int obj);
 extern void _fastcall win_SetObjBitmap(int obj, int bitmap);
 extern int _fastcall win_IsWinOpen(int win);
-extern void far f_1E57_0DAA(void);
-extern void far f_1E57_0174(int win);
+extern void far clip_Push(void);
+extern void far clip_SetWin(int win);
 extern void _fastcall win_DrawObjectNum(int objNum);
-extern void far f_1E57_0EB9(void);
+extern void far clip_Pop(void);
 extern void far win_Swap(int from, int to);
 extern void far DrawYard(void);
 
@@ -173,20 +173,20 @@ void far SetYardMode(int newMode)
             f_00F8_0002();
             win_SetObjBitmap(0x1903, newMode + 7000);
             if (win_IsWinOpen(0x1900)) {
-                f_1E57_0DAA();
-                f_1E57_0174(0x1900);
+                clip_Push();
+                clip_SetWin(0x1900);
                 win_DrawObjectNum(0x1903);
                 if (g_3DB2 != 0x140)
                     win_DrawObjectNum(0x190f);
-                f_1E57_0EB9();
+                clip_Pop();
             }
         }
         if (!win_IsWinOpen(0x1900) && win_IsWinOpen(0x100))
             win_Swap(0x100, 0x1900);
-        f_1E57_0DAA();
-        f_1E57_0174(0x1900);
+        clip_Push();
+        clip_SetWin(0x1900);
         win_MakeObjSelected(g_1984[fd_50F6_035C]);
-        f_1E57_0EB9();
+        clip_Pop();
         DrawYard();
     }
     f_00F8_00D8();
@@ -199,7 +199,7 @@ typedef struct {
 
 extern int far fd_50F6_0FFA;
 extern int far fd_50F6_0FB6;
-extern void far f_0250_006E(int left, int top, int right, int bottom);
+extern void far InvalEuMap(int left, int top, int right, int bottom);
 extern int far fd_50F6_0F36;
 extern void far f_0250_0FC4(int x, int y);
 extern void far f_0250_0E9D(void);
@@ -213,7 +213,7 @@ void far SetMapPlaneLocation(int plane, int x, int y)
     int win, obj;
 
     if (plane != 0)
-        f_0250_006E(0, 0, fd_50F6_0FB6, fd_50F6_0FFA);
+        InvalEuMap(0, 0, fd_50F6_0FB6, fd_50F6_0FFA);
     else
         fd_50F6_0332 = fd_50F6_032E;
     fd_50F6_032E = plane;
@@ -248,12 +248,12 @@ void far SetMapPlaneLocation(int plane, int x, int y)
         break;
     }
     if (win) {
-        f_1E57_0174(0);
+        clip_SetWin(0);
         win_MakeObjSelected(win);
         f_1E57_0362();
     }
     if (obj) {
-        f_1E57_0174(0x100);
+        clip_SetWin(0x100);
         win_MakeObjSelected(obj);
         win_MakeGroupUnselected(0x100, 2);
         f_1E57_0362();
@@ -282,7 +282,7 @@ void far SetMapPlane(int plane)
     Point pt;
 
     if (plane != 0)
-        f_0250_006E(0, 0, fd_50F6_0FB6, fd_50F6_0FFA);
+        InvalEuMap(0, 0, fd_50F6_0FB6, fd_50F6_0FFA);
     else
         fd_50F6_0332 = fd_50F6_032E;
     fd_50F6_032E = plane;
@@ -376,7 +376,7 @@ void far f_015B_0790(void)
 }
 
 extern int far fd_50F6_03E2;
-extern int far fd_50F6_0330;
+extern int far BpopT;
 extern void far PictStrnDialog(int a, int b, int c);
 extern unsigned char far fd_3D57_00A4[][16];
 extern int far fd_50F6_04C2;
@@ -405,7 +405,7 @@ void far f_015B_0798(void)
     if (fd_50F6_0EAC != 2) {
         myBeginSound(1, 0, 0x7e);
         PictStrnDialog(0, 0x2710, 1);
-    } else if (fd_50F6_03E2 <= 1 && fd_50F6_0330 <= 1) {
+    } else if (fd_50F6_03E2 <= 1 && BpopT <= 1) {
         myBeginSound(1, 0, 0x7e);
         PictStrnDialog(0, 0x2712, 1);
     } else if (fd_3D57_00A4[x][y] < 1 && (fd_50F6_04C2 != 0x40 || fd_3D57_0C24 != 0)) {
@@ -430,5 +430,223 @@ void far f_015B_0798(void)
             PictStrnDialog(0, 0x2716, 0);
         else
             PictStrnDialog(0, 0x2717, 0);
+    }
+}
+
+struct Rect {
+    int left;
+    int top;
+    int right;
+    int bottom;
+};
+
+struct Event {
+    int what;
+    int message;
+    int x4;
+    int modifiers;
+    Point where;
+    int code;
+    int xE;
+};
+
+extern void far * far * far fd_50F6_034C;
+extern void far f_15D9_009C(void far *, long, int);
+extern int far fd_3D57_02C0;
+extern int _fastcall win_GetEvent(struct Event far *);
+extern void far f_1FD2_04D0(Point far *);
+extern int _fastcall win_IsWinInFront(int);
+extern Point far fd_50F6_10D2;
+extern Point far fd_55B3_2A42;
+extern void far InvertPatch(int, int);
+extern int far fd_50F6_0A90;
+extern int far fd_3D57_0C20;
+extern void far f_00F8_03A5(int);
+extern void far UpdateYard(void);
+extern void far f_00F8_0265(long);
+
+void far PlaceQueenInYard(void)
+{
+    int x, y;
+    int lastX, lastY;
+    int patchX, patchY;
+    int done;
+    Point pt;
+    struct Rect r;
+    struct Event ev;
+
+    patchX = -1;
+    if (fd_50F6_07C8 < 1) {
+        myBeginSound(1, 0, 0x7e);
+        if (fd_50F6_0EAC != 2)
+            f_15D9_009C(fd_50F6_034C[16], 180L, 1);
+        else
+            f_15D9_009C(fd_50F6_034C[7], 180L, 1);
+        return;
+    }
+    if (fd_3D57_02C0 == 1)
+        fd_3D57_02C0 = 0;
+    r.left = fd_50F6_07CA.x - 3;
+    r.right = fd_50F6_07CA.x + 3;
+    r.top = fd_50F6_07CA.y - 3;
+    r.bottom = fd_50F6_07CA.y + 3;
+    if (r.left < 0)
+        r.left = 0;
+    else if (r.left > 11)
+        r.left = 11;
+    if (r.right < 0)
+        r.right = 0;
+    else if (r.right > 11)
+        r.right = 11;
+    if (r.top < 0)
+        r.top = 0;
+    else if (r.top > 15)
+        r.top = 15;
+    if (r.bottom < 0)
+        r.bottom = 0;
+    else if (r.bottom > 15)
+        r.bottom = 15;
+    do {
+        f_15D9_009C(fd_50F6_034C[8], -2L, 1);
+        lastY = lastX = -1;
+        done = 0;
+        while (!done) {
+            if (win_GetEvent(&ev) && ev.code == 0x1902) {
+                pt = ev.where;
+                done = 1;
+            } else {
+                f_1FD2_04D0(&pt);
+            }
+            if (!win_IsWinInFront(0x1900))
+                goto out;
+            y = pt.y - fd_50F6_10D2.y;
+            x = pt.x - fd_50F6_10D2.x;
+            if (g_3DB2 == 0x140) {
+                x = (x + 2) * 2;
+                y = (y - 8) * 2;
+            }
+            y = (y - fd_55B3_2A42.y) / 10;
+            x = (y * 10 - fd_55B3_2A42.x + x) / 28;
+            WinPrintf("\nYARD AREA @ %d, %d  : %d, %d", x, y, 12, 16);
+            if (lastX != x || lastY != y) {
+                lastX = x;
+                lastY = y;
+                if (patchX != -1) {
+                    InvertPatch(patchX, patchY);
+                    patchX = -1;
+                }
+                if (r.left <= x && r.right >= x && y >= r.top && y <= r.bottom) {
+                    if (fd_50F6_07CA.x != x || fd_50F6_07CA.y != y) {
+                        InvertPatch(x, y);
+                        patchX = x;
+                        patchY = y;
+                    }
+                    fd_50F6_07BC.x = x;
+                    fd_50F6_07BC.y = y;
+                }
+            }
+        }
+        if (patchX != -1) {
+            InvertPatch(patchX, patchY);
+            patchX = -1;
+        }
+        if (r.left <= x && r.right >= x && y >= r.top && y <= r.bottom) {
+            f_00DF_00B1(0x2afb, 0x7e);
+            fd_50F6_07C8--;
+            fd_3D57_00A4[x][y]++;
+            fd_50F6_0A90++;
+            f_00F8_03A5(fd_3D57_0C20 = 1);
+            o12_384C_100A();
+            f_15D9_009C(fd_50F6_034C[9], 120L, 1);
+            if (fd_50F6_07C8 <= 0)
+                return;
+            UpdateYard();
+        } else {
+            f_15D9_009C(fd_50F6_034C[10], 120L, 1);
+            myBeginSound(1, 0, 0x7e);
+            if (*(char far *)0x00000417L & 3)
+                f_00F8_0265(30L);
+        }
+    } while (*(char far *)0x00000417L & 3);
+    return;
+out:
+    f_15D9_009C(0L, -2L, 1);
+}
+
+extern int far RRand(int limit);
+extern void far AddFood(int count, int sound);
+extern void far f_00DF_0112(int a, int b, int c);
+extern void far f_00DF_00E0(int a);
+extern void far MakeNewHoleR(int x);
+extern void far MakeNewHoleB(int x);
+extern int far fd_3D57_0C18;
+extern int far HealthB;
+extern int far fd_3D57_0C14;
+extern int far fd_3D57_0C12;
+extern int far fd_50F6_06AC;
+
+void far MysteryButton(void)
+{
+    int i;
+
+    switch (RRand(15)) {
+    case 0:
+    case 1:
+        AddSomeAnts(0);
+        AddSomeAnts(0);
+        break;
+    case 2:
+        AddSomeAnts(1);
+        AddSomeAnts(1);
+        break;
+    case 3:
+        KillSomeAnts(0);
+        KillSomeAnts(0);
+        break;
+    case 4:
+        KillSomeAnts(1);
+        KillSomeAnts(1);
+        break;
+    case 5:
+        AddFood(0x96, 1);
+        break;
+    case 6:
+        f_00DF_0112(0x20, 0, 0x7e);
+        SubtractFood();
+        break;
+    case 7:
+        f_00DF_00E0(0);
+        break;
+    case 8:
+        for (i = 0; i < 0x20; i++)
+            MakeNewHoleR(i * 2);
+        break;
+    case 9:
+        for (i = 0; i < 0x20; i++)
+            MakeNewHoleB(i * 2);
+        break;
+    case 10:
+        fd_3D57_0C18 = 0;
+        HealthB = 0;
+        HealthR = 0;
+        break;
+    case 11:
+        if (fd_3D57_0C14 = !fd_3D57_0C14)
+            myBeginSound(2, 0, 0x7e);
+        else
+            myBeginSound(1, 0, 0x7e);
+        break;
+    case 12:
+        fd_3D57_0C12 = !fd_3D57_0C12;
+        break;
+    case 13:
+        PictStrnDialog(0, 0x2726, 0);
+        f_00DF_00E0(1);
+        PictStrnDialog(0, 0x2728, 0);
+        break;
+    case 14:
+        fd_50F6_06AC = 8;
+        myBeginSound(2, 0x2b77, 0x7e);
+        break;
     }
 }

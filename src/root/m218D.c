@@ -21,11 +21,11 @@ extern void _fastcall f_23E6_0A53(struct Event far *ev);
 extern void _fastcall f_23E6_0B11(struct Event far *ev);
 extern char far * _fastcall win_WinAddr(int win);
 extern void _fastcall o26_39C7_040F(struct Event far *ev);
-extern void far f_1E57_0DAA(void);
+extern void far clip_Push(void);
 extern void far f_1E57_0351(void);
 extern void _fastcall win_SetObjSelectedState(int obj, int state);
 extern void far f_208F_0530(int ticks);
-extern void far f_1E57_0EB9(void);
+extern void far clip_Pop(void);
 extern struct Event far fd_50F6_49FA;
 extern struct Event far fd_50F6_4A0A;
 extern long far TickCount(void);
@@ -52,7 +52,7 @@ void _fastcall f_218D_000C(struct Event far *ev)
         break;
     }
     if (*(int far *)(obj + 0x24) & 0x800) {
-        f_1E57_0DAA();
+        clip_Push();
         f_1E57_0351();
         if (*(int far *)(obj + 0x24) & 8) {
             if (!(*(int far *)(obj + 0x24) & 0x20) || !(*(int far *)(obj + 0x24) & 0x400) || !(*(int far *)(obj + 0x24) & 4))
@@ -62,7 +62,7 @@ void _fastcall f_218D_000C(struct Event far *ev)
             f_208F_0530(5);
             win_SetObjSelectedState(ev->code, !(*(int far *)(obj + 0x24) & 4));
         }
-        f_1E57_0EB9();
+        clip_Pop();
     }
 check:
     if (fd_50F6_4A0A.code == fd_50F6_49FA.code && TickCount() - 10 < g_6364) {
@@ -98,14 +98,14 @@ extern void _fastcall win_ObjInv(int obj);
 
 void _fastcall _win_SetProxItem(int obj)
 {
-    f_1E57_0DAA();
+    clip_Push();
     f_1E57_0A9C(g_5A9C);
     if (g_6368 != -1)
         win_ObjInv(g_6368);
     if (obj != -1)
         win_ObjInv(obj);
     g_6368 = obj;
-    f_1E57_0EB9();
+    clip_Pop();
 }
 
 extern int g_5702[];

@@ -1025,6 +1025,2168 @@
     "Win16 entries are locked pointers rather than handles"
    ],
    "reviewer": "worker names2, supervisor spot-checked 2026-09-30"
+  },
+  "root:0798:0000": {
+   "win16": "_InitTriVars",
+   "confidence": "CONFIRMED",
+   "reviewed": "2026-09-30",
+   "evidence": [
+    "body statement-for-statement identical to Win16 recovered InitTriVars (win_GetObjRect; triWidth=r-l; half=>>1 stored twice; triHeight; ((long)half<<8)/triHeight; 6 tri points)",
+    "position 1 of the unit on both sides"
+   ],
+   "reviewer": "worker names3, supervisor spot-checked 2026-09-30"
+  },
+  "root:0798:0115": {
+   "win16": "_OpenCasteWindow",
+   "confidence": "CONFIRMED",
+   "reviewed": "2026-09-30",
+   "evidence": [
+    "win_Open(0x1300) preceded by the caste control-changed call, as Win16 OpenCasteWindow (win_CasteControlChanged(); ...; win_Open(0x1300))",
+    "caller ProcMapEvent on both sides; position after the two control-changed functions"
+   ],
+   "reviewer": "worker names3, supervisor spot-checked 2026-09-30"
+  },
+  "root:0798:012B": {
+   "win16": "_OpenModeWindow",
+   "confidence": "CONFIRMED",
+   "reviewed": "2026-09-30",
+   "evidence": [
+    "win_Open(0x1200) preceded by the mode control-changed call, as Win16 OpenModeWindow",
+    "caller ProcMapEvent on both sides; position after OpenCasteWindow"
+   ],
+   "reviewer": "worker names3, supervisor spot-checked 2026-09-30"
+  },
+  "root:0798:0141": {
+   "win16": "_ProcCasteEvent",
+   "confidence": "CONFIRMED",
+   "reviewed": "2026-09-30",
+   "evidence": [
+    "switch on msg->code-0x1303 (15 cases) with the same constants 0x1300/0x1303/0x1305/0x1306/0x130D; DoWinHelp(0x130E) in case 0 on both sides",
+    "call order clip_SetWin, DoWinHelp, win_MakeGroupInvisible(0x1300,4), ..., BoundPointToTri, GetTriLatDist, ..., clip_Off identical; casteSet = code-0x1306 as in Win16"
+   ],
+   "reviewer": "worker names3, supervisor spot-checked 2026-09-30"
+  },
+  "root:0798:0387": {
+   "win16": "_ProcModeEvent",
+   "confidence": "CONFIRMED",
+   "reviewed": "2026-09-30",
+   "evidence": [
+    "switch on msg->code-0x1203 (15 cases), constants 0x1200/0x1203/0x1205/0x1206/0x120D/0x120E shared",
+    "call order clip_SetWin, DoWinHelp, MakeGroupInvisible, ..., BoundPointToTri, GetTriLatDist, ..., clip_Off identical to Win16 ProcModeEvent"
+   ],
+   "reviewer": "worker names3, supervisor spot-checked 2026-09-30"
+  },
+  "root:0798:05BF": {
+   "win16": "_IsPointInIsoTri",
+   "confidence": "CONFIRMED",
+   "reviewed": "2026-09-30",
+   "evidence": [
+    "body identical to Win16 recovered IsPointInIsoTri (y>=bottom||y<top; two LDIV edge tests; return 1)",
+    "callers ProcCasteEvent/ProcModeEvent at the same call position (after win_GetObjRect(0x130D/0x120D))"
+   ],
+   "reviewer": "worker names3, supervisor spot-checked 2026-09-30"
+  },
+  "root:0798:0691": {
+   "win16": "_BoundPointToTri",
+   "confidence": "CONFIRMED",
+   "reviewed": "2026-09-30",
+   "evidence": [
+    "body identical to Win16 recovered BoundPointToTri (bottom=r->bottom-1 clamp, two LDIV edges)",
+    "callers ProcCasteEvent/ProcModeEvent on both sides, same call position before GetTriLatDist"
+   ],
+   "reviewer": "worker names3, supervisor spot-checked 2026-09-30"
+  },
+  "root:0798:0751": {
+   "win16": "_win_DrawModeWindow",
+   "confidence": "CONFIRMED",
+   "reviewed": "2026-09-30",
+   "evidence": [
+    "prologue identical to Win16 win_DrawModeWindow: if (flags&1 && modeAnimHandle==0) clip_SetWin(0x1200); if (flags&2) DrawControlLevels(0x1200,0,modeSet[9]) (DOS 1B62 = modeSet+18)",
+    "DOS entry is a window-table vector (paint callback) like the Win16 callback; DOS keeps the anim-set update here that Win16 moved to UpdateModeWindow"
+   ],
+   "reviewer": "worker names3, supervisor spot-checked 2026-09-30"
+  },
+  "root:0798:0896": {
+   "win16": "_win_ModeControlClosed",
+   "confidence": "CONFIRMED",
+   "reviewed": "2026-09-30",
+   "evidence": [
+    "body: if (modeAnimHandle) hanim_RemoveAnimSet(modeAnimHandle), handle=0 -- Win16 win_ModeControlClosed starts with hanim_RemoveAnimSet (then redraws its Windows buffer)",
+    "position right after win_DrawModeWindow on both sides; uses the same anim handle (50F6:37F6) that win_DrawModeWindow tests"
+   ],
+   "reviewer": "worker names3, supervisor spot-checked 2026-09-30"
+  },
+  "root:0798:08D5": {
+   "win16": "_win_DrawCasteWindow",
+   "confidence": "CONFIRMED",
+   "reviewed": "2026-09-30",
+   "evidence": [
+    "prologue identical to Win16 win_DrawCasteWindow: if (flags&1 && casteAnimHandle==0) clip_SetWin(0x1300); if (flags&2) DrawControlLevels(0x1300,0,modeSet[10]) (DOS 1B64 = modeSet+20)",
+    "vector (paint callback); position after win_ModeControlClosed on both sides"
+   ],
+   "reviewer": "worker names3, supervisor spot-checked 2026-09-30"
+  },
+  "root:0798:0A1A": {
+   "win16": "_win_CasteControlClosed",
+   "confidence": "CONFIRMED",
+   "reviewed": "2026-09-30",
+   "evidence": [
+    "body: if (casteAnimHandle) hanim_RemoveAnimSet(...); handle=0, Win16 win_CasteControlClosed starts with hanim_RemoveAnimSet",
+    "position after win_DrawCasteWindow; handle 50F6:37F2 is the one win_DrawCasteWindow tests"
+   ],
+   "reviewer": "worker names3, supervisor spot-checked 2026-09-30"
+  },
+  "root:0798:0A59": {
+   "win16": "_DrawControlLevels",
+   "confidence": "CONFIRMED",
+   "reviewed": "2026-09-30",
+   "evidence": [
+    "shared strings '%-ld' and '%-ld%%' (xver MEDIUM) and 0x3FFF/0xFFFF percent rounding",
+    "call order font_SetFont, win_GetObjRect, aFldiv, aFulmul, aFuldiv, win_PrintfAtObj, win_ClearObjToEOL, ..., font_SetFont identical; callers win_DrawModeWindow/win_DrawCasteWindow on both sides"
+   ],
+   "reviewer": "worker names3, supervisor spot-checked 2026-09-30"
+  },
+  "root:0798:0C78": {
+   "win16": "_cvtLevels2IdealCaste",
+   "confidence": "CONFIRMED",
+   "reviewed": "2026-09-30",
+   "evidence": [
+    "body identical to Win16 cvtLevels2IdealCaste ((100*casteLevels[1]+0x3fff)/0xffff, ..., 50*casteLevels[0])",
+    "callers ProcCasteEvent and initControls (Win16 initControls inlines the same four statements after win_CasteControlChanged)"
+   ],
+   "reviewer": "worker names3, supervisor spot-checked 2026-09-30"
+  },
+  "root:0798:0D21": {
+   "win16": "_GetTriLatDist",
+   "confidence": "CONFIRMED",
+   "reviewed": "2026-09-30",
+   "evidence": [
+    "runtime sequence aFldiv,aFuldiv,aFulmul,aFldiv identical, 0xFFFF level scale",
+    "callers ProcCasteEvent/ProcModeEvent immediately after BoundPointToTri on both sides; position before SetTriLatPoint"
+   ],
+   "reviewer": "worker names3, supervisor spot-checked 2026-09-30"
+  },
+  "root:0798:0E47": {
+   "win16": "_SetTriLatPoint",
+   "confidence": "CONFIRMED",
+   "reviewed": "2026-09-30",
+   "evidence": [
+    "body identical to Win16 recovered SetTriLatPoint (out->y=(triHeight-2)*(0xffff-frac)/0xffff+apexY; w=triWidthL*frac/0xffff; row=triWidth-2w; apex+2 or LDIV)",
+    "position between GetTriLatDist and initControls on both sides"
+   ],
+   "reviewer": "worker names3, supervisor spot-checked 2026-09-30"
+  },
+  "root:0798:0F0D": {
+   "win16": "_initControls",
+   "confidence": "CONFIRMED",
+   "reviewed": "2026-09-30",
+   "evidence": [
+    "body identical to Win16 initControls: gr_BitMapSize(&knobSize,0x578); win_GetObjRect(0x120d); ModeAuto=CasteAuto=ShowPercentMode=ShowPercentCaste=1; button states -1; 3-level copy loop; mode then caste control-changed; IdealCaste",
+    "sole caller RandYard on both sides; last member of the unit"
+   ],
+   "reviewer": "worker names3, supervisor spot-checked 2026-09-30"
+  },
+  "root:0798:0099": {
+   "win16": "_win_CasteControlChanged",
+   "confidence": "CONFIRMED",
+   "reviewed": "2026-09-30",
+   "evidence": [
+    "currently registered as UpdateCasteWindow by positional alignment; that alignment removed the wrong pair: Win16 UpdateCasteWindow (547 bytes: mem_Lock, hanim_MakeAnimSet/AddAnimObject/SetObjectPos/RenderAnimSet, 4x win_InvalidateObject, callers OpenCasteWindow+ProcCasteEvent) has no DOS counterpart -- its anim code lives in DOS win_DrawCasteWindow",
+    "body = InitTriVars(0x130D,&casteVerts); SetTriLatPoint(&casteLevels,...); win_CasteControlClosed(): Win16 win_CasteControlChanged call_seq is win_GetObjRect+aFldiv (InitTriVars inline), aFulmul,aFuldiv,aFulmul,aFuldiv,aFulmul,aFldiv (SetTriLatPoint), hanim_RemoveAnimSet (ControlClosed) then Windows buffer redraw; shared constant 0x130D (4877) which Win16 UpdateCasteWindow lacks",
+    "call position: Win16 OpenCasteWindow calls win_CasteControlChanged before win_Open(0x1300) (UpdateCasteWindow after it); DOS OpenCasteWindow calls 0799:0099 before win_Open(0x1300) and nothing after",
+    "call position: Win16 initControls calls win_ModeControlChanged(); win_CasteControlChanged(); DOS initControls calls 00D7 then 0099 at the same place; Win16 callers {OpenCasteWindow, initControls} = DOS callers minus the DOS-only layout callback f_00BA_01C3",
+    "unit position 2 (Win16 B3BC) on both sides; Win16 UpdateCasteWindow/UpdateModeWindow are the Windows-only insertions"
+   ],
+   "reviewer": "worker names3, supervisor spot-checked 2026-09-30",
+   "note": "replaces the applied name UpdateCasteWindow"
+  },
+  "root:0798:00D7": {
+   "win16": "_win_ModeControlChanged",
+   "confidence": "CONFIRMED",
+   "reviewed": "2026-09-30",
+   "evidence": [
+    "currently registered as UpdateModeWindow by positional alignment (same shift error as 0099)",
+    "body = InitTriVars(0x120D,&modeVerts); SetTriLatPoint(&modeLevels,...); win_ModeControlClosed(); Win16 win_ModeControlChanged call_seq = InitTriVars inline + SetTriLatPoint runtime sequence + hanim_RemoveAnimSet; shared constant 0x120D (4621) which Win16 UpdateModeWindow lacks",
+    "call position: before win_Open(0x1200) in OpenModeWindow (Win16: win_ModeControlChanged before win_Open, UpdateModeWindow after)",
+    "call position: first of the two control-changed calls in initControls on both sides",
+    "unit position 3 (Win16 B5B0)"
+   ],
+   "reviewer": "worker names3, supervisor spot-checked 2026-09-30",
+   "note": "replaces the applied name UpdateModeWindow"
+  },
+  "S05:35F5:0000": {
+   "win16": "_EditScentMenu",
+   "confidence": "CONFIRMED",
+   "reviewed": "2026-09-30",
+   "evidence": [
+    "body identical to Win16 wf_EditScentMenu: win_DoProxMenu(0x600, ELayerMode+1, r.right+2, r.top), -1 test, ELayerMode=r-1, clip_SetWin(0), win_SetObjSelectedState(0x10, ELayerMode!=-1), ForceUpdateEdit (DOS f_0250_0E81)",
+    "caller ProcEditEvent (DOS f_0250_0C0F, itself CONFIRMED below) on both sides; unit position 1"
+   ],
+   "reviewer": "worker names3, supervisor spot-checked 2026-09-30"
+  },
+  "S05:35F5:0629": {
+   "win16": "_SetExpTool",
+   "confidence": "CONFIRMED",
+   "reviewed": "2026-09-30",
+   "evidence": [
+    "body CurExpTool = value (DOS 50F6:104C), the variable EditToolsMenu/MapToolsMenu add to 0x13EC (5100) for win_DrawBitMapAtObjNum on both sides",
+    "called from MapToolsMenu (CONFIRMED) on both sides; unit position between AntMenu and DoWarnSetB on both sides"
+   ],
+   "reviewer": "worker names3, supervisor spot-checked 2026-09-30",
+   "note": "tiny setter: identity rests on the variable role + order, not on the body shape"
+  },
+  "S05:35F5:0642": {
+   "win16": "_DoWarnSetB",
+   "confidence": "CONFIRMED",
+   "reviewed": "2026-09-30",
+   "evidence": [
+    "body = Win16 recovered DoWarnSetB vertical branch: win_GetObjRect(0x12); warn = (r.bottom - ev->v)*100/(r.bottom-r.top) (DOS keeps only the object-0x12 branch)",
+    "caller ProcEditEvent on both sides; position after SetExpTool"
+   ],
+   "reviewer": "worker names3, supervisor spot-checked 2026-09-30"
+  },
+  "S05:35F5:0684": {
+   "win16": "_DoHealthSetY",
+   "confidence": "HIGH",
+   "reviewed": "2026-09-30",
+   "evidence": [
+    "twin of DoWarnSetB for object 0x11 writing the yellow-health variable 50F6:0FBA; Win16 DoHealthSetY is DoWarnSetB-sized (86 bytes) with the same win_GetObjRect call",
+    "caller ProcEditEvent on both sides at the neighbouring case; position between DoWarnSetB and DoTab"
+   ],
+   "reviewer": "worker names3, supervisor spot-checked 2026-09-30",
+   "note": "Win16 body not recovered; B/Y split rests on DoWarnSetB owning object 0x12"
+  },
+  "S05:35F5:06C6": {
+   "win16": "_DoTab",
+   "confidence": "CONFIRMED",
+   "reviewed": "2026-09-30",
+   "evidence": [
+    "body identical to Win16 DoTab.c: if (win_IsWinInFront(0)) OpenMapYard(); else OpenEditWindow();",
+    "position after DoHealthSetY, before DoExpMenu (S05:3663:0004)"
+   ],
+   "reviewer": "worker names3, supervisor spot-checked 2026-09-30"
+  },
+  "S05:3663:0004": {
+   "win16": "_DoExpMenu",
+   "confidence": "CONFIRMED",
+   "reviewed": "2026-09-30",
+   "evidence": [
+    "constant 0x902 (2306) and win_Open/_win_SetProxItem/win_GetEvent/win_GetProxEvent/win_Close modal loop shared",
+    "callers EditToolsMenu and MapToolsMenu on both sides; last member of the unit"
+   ],
+   "reviewer": "worker names3, supervisor spot-checked 2026-09-30"
+  },
+  "S05:35F5:025C": {
+   "win16": "_MagnifyMenu",
+   "confidence": "CONFIRMED",
+   "reviewed": "2026-09-30",
+   "evidence": [
+    "proposed as win_DrawExamineWindow -- REJECTED for that name: DOS 025C is the modal menu, not the paint callback",
+    "signature and prologue identical to Win16 recovered MagnifyMenu(x,y,plane): plane<=1 LifeA / ==2 LifeB / else LifeR; return -1 if empty; window position from MapPnt/tileWidth/tileHeight/editTileRect; win_Open(0x1D00,...)",
+    "modal loop ButtonHeldInit / while (win_IsWinOpen(0x1D00) && ButtonHeld()) / ButtonHeldEnd / win_Close(0x1D00) / return life, as Win16",
+    "callers DoTool and processEdit on both sides (Win16 win_DrawExamineWindow has no callers: it is a Windows paint callback that received the text drawing, constants 0x1D02..0x1D04, FindInA/B/RList)",
+    "unit position 3 in DOS where Win16 has win_DrawExamineWindow+MagnifyMenu (the Windows port split the paint code out)"
+   ],
+   "reviewer": "worker names3, supervisor spot-checked 2026-09-30",
+   "note": "new name; not the proposed win_DrawExamineWindow"
+  },
+  "S24:39C7:0000": {
+   "win16": "_OpenHistoryWindow",
+   "confidence": "CONFIRMED",
+   "reviewed": "2026-09-30",
+   "evidence": [
+    "body win_Open(0x1500) (constant 5376) as Win16",
+    "caller ProcMapEvent on both sides; 7 DOS members = 7 Win16 members (8A6A..9182) in the same order"
+   ],
+   "reviewer": "worker names3, supervisor spot-checked 2026-09-30"
+  },
+  "S24:39C7:0012": {
+   "win16": "_ProcHistoryEvent",
+   "confidence": "CONFIRMED",
+   "reviewed": "2026-09-30",
+   "evidence": [
+    "constants 0x1500,0x150D,0x150E,0x150F,0x8000 shared",
+    "call order ToggleHistButton, DoWinHelp, clip_SetWin, ConvColor, win_FillObjRect, drawHistGraph, StillDown, ..., clip_Off identical"
+   ],
+   "reviewer": "worker names3, supervisor spot-checked 2026-09-30"
+  },
+  "S24:39C7:00B3": {
+   "win16": "_ToggleHistButton",
+   "confidence": "CONFIRMED",
+   "reviewed": "2026-09-30",
+   "evidence": [
+    "constants 0x1500, 0x1503; memmove, win_MakeObjUnselected, memmove sequence identical",
+    "sole caller ProcHistoryEvent on both sides"
+   ],
+   "reviewer": "worker names3, supervisor spot-checked 2026-09-30"
+  },
+  "S24:39C7:01B8": {
+   "win16": "_ClearHistory",
+   "confidence": "CONFIRMED",
+   "reviewed": "2026-09-30",
+   "evidence": [
+    "callers RandWorld and RandYard (both CONFIRMED/applied) on both sides, no callees on both sides",
+    "position 4 of 7 in the aligned unit"
+   ],
+   "reviewer": "worker names3, supervisor spot-checked 2026-09-30"
+  },
+  "S24:39C7:02DA": {
+   "win16": "_win_DrawHistoryWindow",
+   "confidence": "CONFIRMED",
+   "reviewed": "2026-09-30",
+   "evidence": [
+    "body ConvColor + win_FillObjRect(0x150E) + drawHistGraph, same size (82 vs 80)",
+    "position 5 of 7; DOS callers ProcHistoryEvent/ToggleHistButton/HistUpdate call it where Win16 inlines the same three calls"
+   ],
+   "reviewer": "worker names3, supervisor spot-checked 2026-09-30"
+  },
+  "S24:39C7:032C": {
+   "win16": "_drawHistGraph",
+   "confidence": "CONFIRMED",
+   "reviewed": "2026-09-30",
+   "evidence": [
+    "sprintf + font_SetFont/font_FontHeight/font_PrintStr/font_StringWidth sequence, constant 0x150E",
+    "callers ProcHistoryEvent and win_DrawHistoryWindow on both sides"
+   ],
+   "reviewer": "worker names3, supervisor spot-checked 2026-09-30"
+  },
+  "S24:39C7:0608": {
+   "win16": "_HistUpdate",
+   "confidence": "CONFIRMED",
+   "reviewed": "2026-09-30",
+   "evidence": [
+    "win_IsWinOpen(0x1500), clip_SetWin, draw, clip_Off",
+    "caller DoSmells on both sides; last member"
+   ],
+   "reviewer": "worker names3, supervisor spot-checked 2026-09-30"
+  },
+  "S04:35F5:0000": {
+   "win16": "_MapToolsMenu",
+   "confidence": "CONFIRMED",
+   "reviewed": "2026-09-30",
+   "evidence": [
+    "constants 0x100,0x117,0xA00,0xB00,0x13EC,0x2AFB shared; body identical to Win16 recovered MapToolsMenu (incl. win_SetColorFromObjNum which RibbonToolsMenu lacks)",
+    "caller ProcMapEvent on both sides (RibbonToolsMenu is Windows-only, caller ProcMapRibbonEvent)"
+   ],
+   "reviewer": "worker names3, supervisor spot-checked 2026-09-30"
+  },
+  "S04:35F5:0424": {
+   "win16": "_Mini_MakeTable",
+   "confidence": "CONFIRMED",
+   "reviewed": "2026-09-30",
+   "evidence": [
+    "switch on display type dispatching to per-display table builders (DOS overlay drivers, Win16 WindowsMono_MakeTable2x2a/b, Windows_MakeTable1x1)",
+    "sole caller Mini_DrawMapI (xver HIGH) on both sides, called between the image allocation and the blit"
+   ],
+   "reviewer": "worker names3, supervisor spot-checked 2026-09-30"
+  },
+  "S04:35F5:075F": {
+   "win16": "_OpenMiniMapWin",
+   "confidence": "CONFIRMED",
+   "reviewed": "2026-09-30",
+   "evidence": [
+    "win_Open(0x1400) (constant 5120) then Mini_DrawMapI, cursor draw/erase, EraseMapCursor/CenterEdit/UpdateEdit/DrawMapCursor, win_Close, OpenMapYard, win_GetEvent loop, win_FlushEvents -- same order as Win16",
+    "sole caller of Mini_DrawMapI on both sides"
+   ],
+   "reviewer": "worker names3, supervisor spot-checked 2026-09-30"
+  },
+  "S04:35F5:08C8": {
+   "win16": "_DrawMiniMapCursor",
+   "confidence": "HIGH",
+   "reviewed": "2026-09-30",
+   "evidence": [
+    "GRectInvOutline (DOS f_1CE2_0410) of the mini-map cursor rect 50F6:384A, size 150 vs Win16 155",
+    "caller OpenMiniMapWin; order DrawMiniMapCursor, EraseMiniMapCursor on both sides (Win16 adds ToggleMiniMapCursor after)"
+   ],
+   "reviewer": "worker names3, supervisor spot-checked 2026-09-30"
+  },
+  "S04:35F5:095E": {
+   "win16": "_EraseMiniMapCursor",
+   "confidence": "CONFIRMED",
+   "reviewed": "2026-09-30",
+   "evidence": [
+    "body identical to Win16 EraseMiniMapCursor.c: GRectInvOutline(&miniMapCursorRect,1); cursor state=0 (Win16 adds MSClip bracketing)",
+    "follows DrawMiniMapCursor in both; caller OpenMiniMapWin"
+   ],
+   "reviewer": "worker names3, supervisor spot-checked 2026-09-30"
+  },
+  "S04:35F5:025A": {
+   "win16": "_MapAreaEvent",
+   "confidence": "CONFIRMED",
+   "reviewed": "2026-09-30",
+   "evidence": [
+    "call order processEdit, EraseMapCursor, CenterEdit (f_0250_0FC4), UpdateEdit (f_0250_0E9D), DrawMapCursor, GetMousePos (f_1FD2_04D0), myButton (f_00F8_02AC), OpenEditWindow (f_0250_0E70) identical to Win16 MapAreaEvent (minus MSClip brackets)",
+    "caller ProcMapEvent on both sides; Win16 unit position right after MapToolsMenu/RibbonToolsMenu, DOS position right after MapToolsMenu"
+   ],
+   "reviewer": "worker names3, supervisor spot-checked 2026-09-30"
+  },
+  "root:0250:000E": {
+   "win16": "_ZapEuMapAt",
+   "confidence": "CONFIRMED",
+   "reviewed": "2026-09-30",
+   "evidence": [
+    "callers AddWater, DropWater, SetLife, SetMap, DoLifeExchange are all Win16 ZapEuMapAt callers (5 named caller pairs)",
+    "body: if TileIsVisible(plane,x,y) mark the edit-update cell -1 (Win16 sole callee TileIsVisible); unit position 1 on both sides"
+   ],
+   "reviewer": "worker names3, supervisor spot-checked 2026-09-30"
+  },
+  "root:0250:006E": {
+   "win16": "_InvalEuMap",
+   "confidence": "CONFIRMED",
+   "reviewed": "2026-09-30",
+   "evidence": [
+    "callers SetMapPlaneLocation, SetMapPlane, RandWorld, SetAlarmDropState are all Win16 InvalEuMap callers",
+    "body clamps a tile rectangle to 128x64 and marks the edit-update cells -1 (rect variant of ZapEuMapAt); unit position 2, size 166 vs 168"
+   ],
+   "reviewer": "worker names3, supervisor spot-checked 2026-09-30"
+  },
+  "root:0250:036A": {
+   "win16": "_OverlayTileSet",
+   "confidence": "CONFIRMED",
+   "reviewed": "2026-09-30",
+   "evidence": [
+    "constants 1000/1001 (0x3E8/0x3E9) selecting two tile sets, loaded through the same helper twice as Win16 OverlayTileSet (db_LoadObject/db_UnhookObject twice)",
+    "callers MakeHousePatch and MakeYardPatch (+ load-init o09_35F5_0DBB <-> DoLoadInitializations) on both sides"
+   ],
+   "reviewer": "worker names3, supervisor spot-checked 2026-09-30"
+  },
+  "root:0250:0C0F": {
+   "win16": "_ProcEditEvent",
+   "confidence": "CONFIRMED",
+   "reviewed": "2026-09-30",
+   "evidence": [
+    "18-case switch; call order clip_SetWin, processEdit, DoWinHelp, EditToolsMenu, SetMapPlane, GotoMyAnt, GotoSpider, ..., EditScentMenu, DoHealthSetY, DoWarnSetB, clip_Off identical to Win16 ProcEditEvent",
+    "sole caller of EditScentMenu/DoWarnSetB/DoHealthSetY on both sides"
+   ],
+   "reviewer": "worker names3, supervisor spot-checked 2026-09-30"
+  },
+  "root:0250:0E70": {
+   "win16": "_OpenEditWindow",
+   "confidence": "CONFIRMED",
+   "reviewed": "2026-09-30",
+   "evidence": [
+    "body win_Open(0) (17 vs 11 bytes)",
+    "call positions: else-branch of DoTab (CONFIRMED), last call of MapAreaEvent, and in ProcMenu (o11_35F5_018D) right after NewGame, as Win16"
+   ],
+   "reviewer": "worker names3, supervisor spot-checked 2026-09-30"
+  },
+  "root:2662:0008": {
+   "win16": "_hanim_PrintSet",
+   "confidence": "CONFIRMED",
+   "reviewed": "2026-09-30",
+   "evidence": [
+    "DOS body prints 'Printset @ %s  %d objects' and the object list; the Win16 stub's only content is the string 'JunkRoutine: hanim_PrintSet' naming the routine",
+    "unit position 1 (Win16 GR 63BC, before _hanim_FindObject); no callers on both sides (debug routine)"
+   ],
+   "reviewer": "worker names3, supervisor spot-checked 2026-09-30",
+   "note": "Win16 spelling kept verbatim (MAPSYM _hanim_PrintSet -> C name hanim_PrintSet), consistent with the applied hanim_MakeAnimSet; DOS diagnostics suggest the DOS-era prefix was anim_ (ANIM.C), but no DOS function name is attested"
+  },
+  "root:2662:030C": {
+   "win16": "__hanim_FindObject",
+   "confidence": "CONFIRMED",
+   "reviewed": "2026-09-30",
+   "evidence": [
+    "body identical to Win16 wf_hanim_FindObject: scan 0x2C-byte records while index < *count, match word at +0x20, store index through far pointer, return record or NULL",
+    "callers Add/Remove/Hide/Show/SetObjectPos; position right before AddAnimObject on both sides"
+   ],
+   "reviewer": "worker names3, supervisor spot-checked 2026-09-30",
+   "note": "Win16 spelling kept verbatim (MAPSYM __hanim_FindObject -> C name _hanim_FindObject), consistent with the applied hanim_MakeAnimSet; DOS diagnostics suggest the DOS-era prefix was anim_ (ANIM.C), but no DOS function name is attested"
+  },
+  "root:2662:0348": {
+   "win16": "_hanim_AddAnimObject",
+   "confidence": "CONFIRMED",
+   "reviewed": "2026-09-30",
+   "evidence": [
+    "shared allocation tag 'animbufs'; gr_BitMapSize + memmove insertion by priority",
+    "callers DrawSimKid/DrawDog/DrawSimBird/DrawSimCat/DrawForSale/DrawMower/DrawRain/DrawSwarm + control-window draw + SetObjectPos on both sides"
+   ],
+   "reviewer": "worker names3, supervisor spot-checked 2026-09-30",
+   "note": "Win16 spelling kept verbatim (MAPSYM _hanim_AddAnimObject -> C name hanim_AddAnimObject), consistent with the applied hanim_MakeAnimSet; DOS diagnostics suggest the DOS-era prefix was anim_ (ANIM.C), but no DOS function name is attested"
+  },
+  "root:2662:059C": {
+   "win16": "_hanim_RemoveAnimObject",
+   "confidence": "CONFIRMED",
+   "reviewed": "2026-09-30",
+   "evidence": [
+    "diagnostic 'anim_Remove objects not found' (Win16 'hanim_RemoveAnimObject object not found(%s)(%u)')",
+    "callers DrawSimKid, DrawMower, Draw_SimYard, DrawSwarm = Win16 caller set"
+   ],
+   "reviewer": "worker names3, supervisor spot-checked 2026-09-30",
+   "note": "Win16 spelling kept verbatim (MAPSYM _hanim_RemoveAnimObject -> C name hanim_RemoveAnimObject), consistent with the applied hanim_MakeAnimSet; DOS diagnostics suggest the DOS-era prefix was anim_ (ANIM.C), but no DOS function name is attested"
+  },
+  "root:2662:064E": {
+   "win16": "_hanim_RemoveAllAnimObjects",
+   "confidence": "CONFIRMED",
+   "reviewed": "2026-09-30",
+   "evidence": [
+    "body marks every object remove/dirty, show=0 (size 125 vs 109)",
+    "sole caller f_00F8_0002 = Win16 win_YardClosed (call order clip_Push, clip_SetWin, RemoveAllAnimObjects, RenderAnimSet, RemoveAnimSet, clip_Pop identical, constant 0x1900); position after RemoveAnimObject"
+   ],
+   "reviewer": "worker names3, supervisor spot-checked 2026-09-30",
+   "note": "Win16 spelling kept verbatim (MAPSYM _hanim_RemoveAllAnimObjects -> C name hanim_RemoveAllAnimObjects), consistent with the applied hanim_MakeAnimSet; DOS diagnostics suggest the DOS-era prefix was anim_ (ANIM.C), but no DOS function name is attested"
+  },
+  "root:2662:06CB": {
+   "win16": "_hanim_ActuallyRemoveAnimObjects",
+   "confidence": "CONFIRMED",
+   "reviewed": "2026-09-30",
+   "evidence": [
+    "free + memmove compaction of removed objects",
+    "sole caller RenderAnimSet, called last in it on both sides; position after RemoveAllAnimObjects"
+   ],
+   "reviewer": "worker names3, supervisor spot-checked 2026-09-30",
+   "note": "Win16 spelling kept verbatim (MAPSYM _hanim_ActuallyRemoveAnimObjects -> C name hanim_ActuallyRemoveAnimObjects), consistent with the applied hanim_MakeAnimSet; DOS diagnostics suggest the DOS-era prefix was anim_ (ANIM.C), but no DOS function name is attested"
+  },
+  "root:2662:07E9": {
+   "win16": "_hanim_HideObject",
+   "confidence": "CONFIRMED",
+   "reviewed": "2026-09-30",
+   "evidence": [
+    "shared diagnostic 'anim_hide object not found' (verbatim in Win16 HideObject and ShowObject)",
+    "body sets show=0 (the ShowObject twin at 087B sets show=1); first of the twin pair on both sides"
+   ],
+   "reviewer": "worker names3, supervisor spot-checked 2026-09-30",
+   "note": "Win16 spelling kept verbatim (MAPSYM _hanim_HideObject -> C name hanim_HideObject), consistent with the applied hanim_MakeAnimSet; DOS diagnostics suggest the DOS-era prefix was anim_ (ANIM.C), but no DOS function name is attested"
+  },
+  "root:2662:087B": {
+   "win16": "_hanim_ShowObject",
+   "confidence": "CONFIRMED",
+   "reviewed": "2026-09-30",
+   "evidence": [
+    "shared diagnostic 'anim_hide object not found'",
+    "body sets show=1; second of the twin pair, before SetObjectPos on both sides"
+   ],
+   "reviewer": "worker names3, supervisor spot-checked 2026-09-30",
+   "note": "Win16 spelling kept verbatim (MAPSYM _hanim_ShowObject -> C name hanim_ShowObject), consistent with the applied hanim_MakeAnimSet; DOS diagnostics suggest the DOS-era prefix was anim_ (ANIM.C), but no DOS function name is attested"
+  },
+  "root:2662:090D": {
+   "win16": "_hanim_SetObjectPos",
+   "confidence": "CONFIRMED",
+   "reviewed": "2026-09-30",
+   "evidence": [
+    "0x8000 'keep' sentinels for x/y/pic/pri; re-insert via RemoveAnimObject+AddAnimObject (Win16 has the inlined RemoveAnimObject diagnostic plus AddAnimObject call)",
+    "caller set = Win16 set (Draw* yard animations and the control-window update)"
+   ],
+   "reviewer": "worker names3, supervisor spot-checked 2026-09-30",
+   "note": "Win16 spelling kept verbatim (MAPSYM _hanim_SetObjectPos -> C name hanim_SetObjectPos), consistent with the applied hanim_MakeAnimSet; DOS diagnostics suggest the DOS-era prefix was anim_ (ANIM.C), but no DOS function name is attested"
+  },
+  "root:2662:0C06": {
+   "win16": "_hanim_RemoveAnimSet",
+   "confidence": "CONFIRMED",
+   "reviewed": "2026-09-30",
+   "evidence": [
+    "body identical to Win16 wf_hanim_RemoveAnimSet (free each frame buffer, unlock/free table, unlock/free set)",
+    "callers win_ModeControlClosed, win_CasteControlClosed, win_YardClosed(f_00F8_0002) on both sides"
+   ],
+   "reviewer": "worker names3, supervisor spot-checked 2026-09-30",
+   "note": "Win16 spelling kept verbatim (MAPSYM _hanim_RemoveAnimSet -> C name hanim_RemoveAnimSet), consistent with the applied hanim_MakeAnimSet; DOS diagnostics suggest the DOS-era prefix was anim_ (ANIM.C), but no DOS function name is attested"
+  },
+  "root:2662:0CA2": {
+   "win16": "_hanim_RenderAnimSet",
+   "confidence": "CONFIRMED",
+   "reviewed": "2026-09-30",
+   "evidence": [
+    "strings 'to flush' and 'Buffer in set too small!!' (DOS via static helper 0100), constant 6000, DOS 'Bad pic type in ANIM.C'",
+    "ends with ActuallyRemoveAnimObjects; callers win_YardClosed, Draw_SimYard, control-window draw on both sides"
+   ],
+   "reviewer": "worker names3, supervisor spot-checked 2026-09-30",
+   "note": "Win16 spelling kept verbatim (MAPSYM _hanim_RenderAnimSet -> C name hanim_RenderAnimSet), consistent with the applied hanim_MakeAnimSet; DOS diagnostics suggest the DOS-era prefix was anim_ (ANIM.C), but no DOS function name is attested"
+  },
+  "root:1E57:0174": {
+   "win16": "_clip_SetWin",
+   "confidence": "CONFIRMED",
+   "reviewed": "2026-09-30",
+   "evidence": [
+    "DOS diagnostic 'SetWin: Window open but clip is NULL'",
+    "call position: first call of ProcCasteEvent/ProcModeEvent/ProcEditEvent/ProcHistoryEvent and between clip_Push and the draw in MapToolsMenu/EditToolsMenu, exactly where Win16 calls clip_SetWin"
+   ],
+   "reviewer": "worker names3, supervisor spot-checked 2026-09-30"
+  },
+  "root:1E57:0DAA": {
+   "win16": "_clip_Push",
+   "confidence": "CONFIRMED",
+   "reviewed": "2026-09-30",
+   "evidence": [
+    "DOS diagnostics 'Cannot allocate memory in clip_Push' / 'Pushed it too far' and allocation tag 'clip_Push'",
+    "call position before clip_SetWin in MapToolsMenu, EditToolsMenu, win_YardClosed (f_00F8_0002), as Win16"
+   ],
+   "reviewer": "worker names3, supervisor spot-checked 2026-09-30"
+  },
+  "root:1E57:0EB9": {
+   "win16": "_clip_Pop",
+   "confidence": "CONFIRMED",
+   "reviewed": "2026-09-30",
+   "evidence": [
+    "DOS diagnostic 'Clip_Pop w/ nothing on the stack: E9073'",
+    "call position closing the clip_Push brackets in MapToolsMenu/EditToolsMenu/win_YardClosed, as Win16"
+   ],
+   "reviewer": "worker names3, supervisor spot-checked 2026-09-30"
+  },
+  "root:1E57:0773": {
+   "win16": "_clip_SubInclude",
+   "confidence": "CONFIRMED",
+   "reviewed": "2026-09-30",
+   "evidence": [
+    "DOS diagnostics 'CL074:Temp clip overflow in SubInclude', 'Sub include NULL rect!!' and tag 'subinclude'",
+    "Win16 callers DisplayCard, PopUpInfoWindow, win_DrawObjectI are all DOS callers of 0773"
+   ],
+   "reviewer": "worker names3, supervisor spot-checked 2026-09-30"
+  },
+  "root:1E57:0115": {
+   "win16": "_clip_KillWin",
+   "confidence": "HIGH",
+   "reviewed": "2026-09-30",
+   "evidence": [
+    "DOS diagnostic 'WARNING: i>=MAXWINDOWS-1 in KillWin(%d)'",
+    "member of the DOS clip module (4 CONFIRMED clip_ members) and of the Win16 clip API (stub 8E48); DOS callers win_Close and win_Swap (window teardown)"
+   ],
+   "reviewer": "worker names3, supervisor spot-checked 2026-09-30",
+   "note": "Win16 clip_* are 2-byte stubs with no callers for KillWin: no Win16 body/caller anchor exists"
+  },
+  "root:1E57:0AAF": {
+   "win16": "_clip_SubExclude",
+   "confidence": "HIGH",
+   "reviewed": "2026-09-30",
+   "evidence": [
+    "DOS diagnostics 'CL074:Temp clip overflow in SubExclude', 'Sub exclude NULL rect!!' and allocation tag 'subexclude'",
+    "member of the DOS clip module and of the Win16 clip API (stub 8E4C); structural twin of clip_SubInclude"
+   ],
+   "reviewer": "worker names3, supervisor spot-checked 2026-09-30",
+   "note": "1E57:0C2D also says 'CL174:...SubExclude' but tags 'include'/'include NULL rect!!' (a third variant): 0AAF is the one whose tag and NULL-rect message both say subexclude"
+  },
+  "root:284A:010A": {
+   "win16": "_StopSong",
+   "confidence": "CONFIRMED",
+   "reviewed": "2026-09-30",
+   "evidence": [
+    "DOS-only proposal turned out to have a Win16 pair: Win16 GR_MODULE _StopSong",
+    "call position: last call of LoadGame (DOS o09_35F5_0000 shares the unique string '  Read error  \\ngame not loaded' with Win16 LoadGame, whose last call is StopSong)",
+    "call position: ProcMenu (DOS o11_35F5_018D: 70-case switch, constants 6400/10001, call order myBeginSong, NewGame, OpenEditWindow, OpenMapYard, OpenModeWindow, OpenCasteWindow, OpenHistoryWindow, OpenInfoWindow, ScoreDialog, SetYardMode, SetMapPlane, ..., SetMapPlane, StopSong) = Win16 ProcMenu order",
+    "body: if playing, clear flag and stop the driver (Win16: stop MCI/SBPro music)"
+   ],
+   "reviewer": "worker names3, supervisor spot-checked 2026-09-30"
+  },
+  "root:284A:0138": {
+   "win16": "_ExtractWord",
+   "confidence": "MEDIUM",
+   "reviewed": "2026-09-30",
+   "evidence": [
+    "role analogue only: DOS returns a big-endian word at a song offset; Win16 ExtractWord(cursor,out) advances a far cursor and byte-swaps via FlipWord; different signature and player architecture",
+    "no shared strings/constants, no call-graph anchor (DOS callers are DOS-only player statics)"
+   ],
+   "reviewer": "worker names3, supervisor spot-checked 2026-09-30",
+   "note": "proposed name ReadBE16 REJECTED (invented descriptive name); keep the address name"
+  },
+  "root:284A:0151": {
+   "win16": "_ExtractDWord",
+   "confidence": "MEDIUM",
+   "reviewed": "2026-09-30",
+   "evidence": [
+    "role analogue only: DOS loop of 4 (v<<8)+byte at an offset; Win16 ExtractDWord(cursor,out) cursor-based",
+    "no shared strings/constants, no call-graph anchor (DOS callers are DOS-only player statics)"
+   ],
+   "reviewer": "worker names3, supervisor spot-checked 2026-09-30",
+   "note": "proposed name ReadBE32 REJECTED (invented descriptive name); keep the address name"
+  },
+  "root:284A:01D5": {
+   "win16": "_ExtractVariableLen",
+   "confidence": "MEDIUM",
+   "reviewed": "2026-09-30",
+   "evidence": [
+    "role analogue only: DOS is the SMF-spec ReadVarLen algorithm on a global cursor returning long; Win16 ExtractVariableLen(cursor,output,remaining) packs the bitstream into a 4-byte buffer and decrements remaining -- a different implementation; 'ReadVarLen' is the MIDI spec's sample-code name, not a SimAnt name",
+    "no shared strings/constants, no call-graph anchor (DOS callers are DOS-only player statics)"
+   ],
+   "reviewer": "worker names3, supervisor spot-checked 2026-09-30",
+   "note": "proposed name ReadVarLen REJECTED (invented descriptive name); keep the address name"
+  },
+  "root:284A:0013": {
+   "win16": null,
+   "confidence": "REJECTED",
+   "reviewed": "2026-09-30",
+   "evidence": [
+    "no Win16 counterpart (Win16 myBeginSong is a 4 KB monolith); strings 'music failure', 'Seg=%x, buf=%p, handle=%p' do not name the function; invented"
+   ],
+   "reviewer": "worker names3, supervisor spot-checked 2026-09-30",
+   "note": "proposed name PlaySong rejected; keep the address name"
+  },
+  "root:284A:067F": {
+   "win16": null,
+   "confidence": "REJECTED",
+   "reviewed": "2026-09-30",
+   "evidence": [
+    "no string; Win16 analogue by role would be myServiceSong (timer-driven) but sizes/structure differ; invented"
+   ],
+   "reviewer": "worker names3, supervisor spot-checked 2026-09-30",
+   "note": "proposed name MusicTask rejected; keep the address name"
+  },
+  "root:23E6:07A2": {
+   "win16": null,
+   "confidence": "REJECTED",
+   "reviewed": "2026-09-30",
+   "evidence": [
+    "no string of its own: named by analogy with 08D6 ('PrevListLine punt'); no Win16 counterpart (Win16 uses native list boxes)"
+   ],
+   "reviewer": "worker names3, supervisor spot-checked 2026-09-30",
+   "note": "proposed name NextListLine rejected; keep the address name"
+  },
+  "root:1CE2:0587": {
+   "win16": null,
+   "confidence": "REJECTED",
+   "reviewed": "2026-09-30",
+   "evidence": [
+    "no string; it is the worker behind the two public wrappers 0552/056C (restore / restore+free), so even the role name would sit on the wrong function"
+   ],
+   "reviewer": "worker names3, supervisor spot-checked 2026-09-30",
+   "note": "proposed name GRestoreRect rejected; keep the address name"
+  },
+  "root:23E6:0518": {
+   "win16": null,
+   "confidence": "DOS-STRING",
+   "reviewed": "2026-09-30",
+   "evidence": [
+    "own Punt diagnostic 'Bad object type in win_DrawElevator' plus debug strings 'SliderHeight=%d, eleHeight=%d', ' eleTop= %d'; callers 066C (slider draw) and 0B11",
+    "no Win16 counterpart"
+   ],
+   "reviewer": "worker names3, supervisor spot-checked 2026-09-30",
+   "note": "admissible only under proposed rule DOS-1 (policy_note.md); not a Win16-policy name"
+  },
+  "root:23E6:0B11": {
+   "win16": null,
+   "confidence": "DOS-STRING",
+   "reviewed": "2026-09-30",
+   "evidence": [
+    "own Punt diagnostic 'Bad object type in win_ProcSliderEvent'; sole caller f_218D_000C (event dispatch); calls win_DrawElevator and the list-line scrollers",
+    "no Win16 counterpart"
+   ],
+   "reviewer": "worker names3, supervisor spot-checked 2026-09-30",
+   "note": "admissible only under proposed rule DOS-1 (policy_note.md); not a Win16-policy name"
+  },
+  "root:23E6:08D6": {
+   "win16": null,
+   "confidence": "DOS-STRING",
+   "reviewed": "2026-09-30",
+   "evidence": [
+    "own Punt diagnostic 'PrevListLine punt'; sole caller win_ProcSliderEvent",
+    "no Win16 counterpart"
+   ],
+   "reviewer": "worker names3, supervisor spot-checked 2026-09-30",
+   "note": "admissible only under proposed rule DOS-1 (policy_note.md); not a Win16-policy name"
+  },
+  "root:1CE2:04C9": {
+   "win16": null,
+   "confidence": "DOS-STRING",
+   "reviewed": "2026-09-30",
+   "evidence": [
+    "allocation tag 'GSaveRect' passed to the allocator in its own body (tag == function name convention calibrated on GPutPacked 'GPutPacked' and clip_Push 'clip_Push', both confirmed by Win16); returns the saved-bits buffer",
+    "no Win16 counterpart"
+   ],
+   "reviewer": "worker names3, supervisor spot-checked 2026-09-30",
+   "note": "admissible only under proposed rule DOS-1 (policy_note.md); not a Win16-policy name"
+  },
+  "root:22BF:0A22": {
+   "win16": "_win_IsWinInFront",
+   "confidence": "CONFIRMED",
+   "reviewed": "2026-09-30",
+   "evidence": [
+    "body: return top-of-z-order window == win (g_5702[0]); Win16 walks GetTopWindow and compares the INDEX property with win -- same predicate",
+    "call positions: DoTab (CONFIRMED) first call win_IsWinInFront(0); DOS callers processEdit, processExp, SpecialXfer, PlaceQueenInYard are Win16 win_IsWinInFront callers"
+   ],
+   "reviewer": "worker names3, supervisor spot-checked 2026-09-30"
+  },
+  "root:00F8:050A": {
+   "win16": "_OpenMapYard",
+   "confidence": "CONFIRMED",
+   "reviewed": "2026-09-30",
+   "evidence": [
+    "caller set {DoTab, OpenMiniMapWin, ProcMenu} identical to Win16 OpenMapYard callers (3/3), DoTab then-branch and OpenMiniMapWin after win_Close as in Win16",
+    "body: win_IsWinOpen(0x100) -> bring to top, win_IsWinOpen(0x1900), else YardToMap (f_00F8_047F); constants 0x100/0x1900 as Win16"
+   ],
+   "reviewer": "worker names3, supervisor spot-checked 2026-09-30"
+  },
+  "root:50F6:3832": {
+   "win16": "_knobSize",
+   "confidence": "CONFIRMED",
+   "reviewed": "2026-09-30",
+   "evidence": [
+    "initControls: DOS f_208F_0419(&50F6:3832, 0x578) = Win16 gr_BitMapSize(&knobSize, 0x578) (first statement)",
+    "win_DrawMode/CasteWindow: knob centred with 3832.x/2, 3832.y/2 for picture 0x578 (Win16 UpdateXWindow AddAnimObject/SetObjectPos of the same knob)"
+   ],
+   "reviewer": "worker names3, supervisor spot-checked 2026-09-30"
+  },
+  "root:50F6:0378": {
+   "win16": "_ModeAuto",
+   "confidence": "CONFIRMED",
+   "reviewed": "2026-09-30",
+   "evidence": [
+    "initControls: first of the four =1 stores (Win16 ModeAuto = 1)",
+    "ProcModeEvent case 1/2 toggle with win_MakeGroupInvisible/Visible(0x1200,4); sim code tests it as Win16 \"ModeAuto != 0 || modeLevels[2]>>7 >= SGRand(255)\" (registry grounding S25 o25_39C7_0980 <-> Win16 SimEggB)"
+   ],
+   "reviewer": "worker names3, supervisor spot-checked 2026-09-30"
+  },
+  "root:3D57:07E8": {
+   "win16": "_CasteAuto",
+   "confidence": "CONFIRMED",
+   "reviewed": "2026-09-30",
+   "evidence": [
+    "initControls: second =1 store (Win16 CasteAuto = 1)",
+    "ProcCasteEvent case 1/2 toggle with MakeGroupInvisible/Visible(0x1300,4), the caste twin of ModeAuto; Win16 ProcCasteEvent pool references CasteAuto"
+   ],
+   "reviewer": "worker names3, supervisor spot-checked 2026-09-30"
+  },
+  "root:50F6:049E": {
+   "win16": "_modeLevels",
+   "confidence": "CONFIRMED",
+   "reviewed": "2026-09-30",
+   "evidence": [
+    "initControls loop: modeLevels[i] = modeLevelDefaults[i] (DOS 50F6:049E[i] = 3D57:080A[i])",
+    "DrawControlLevels mode branch (win==0x1200) and SetModeProd (root:1383) index it [0..2] as Win16 modeLevels"
+   ],
+   "reviewer": "worker names3, supervisor spot-checked 2026-09-30",
+   "note": "registry defect: the name modeLevels currently sits on err_3D57_049E (alias modeLevels) at the wrong address 3D57:049E; it must end up on 50F6:049E (registered as fd_50F6_049E)"
+  },
+  "root:50F6:0482": {
+   "win16": "_casteLevels",
+   "confidence": "CONFIRMED",
+   "reviewed": "2026-09-30",
+   "evidence": [
+    "cvtLevels2IdealCaste body identical: IdealCaste[k] from 0482[1], [2], [0] exactly as Win16 casteLevels[1], [2], [0]",
+    "initControls: casteLevels[i] = casteLevelDefaults[i]; DrawControlLevels caste branch"
+   ],
+   "reviewer": "worker names3, supervisor spot-checked 2026-09-30"
+  },
+  "root:50F6:3814": {
+   "win16": "_triWidth",
+   "confidence": "CONFIRMED",
+   "reviewed": "2026-09-30",
+   "evidence": [
+    "InitTriVars (identical body): triWidth = rect.right - rect.left",
+    "SetTriLatPoint/GetTriLatDist: row = triWidth - 2*w"
+   ],
+   "reviewer": "worker names3, supervisor spot-checked 2026-09-30"
+  },
+  "root:50F6:3812": {
+   "win16": "_triWidthR",
+   "confidence": "CONFIRMED",
+   "reviewed": "2026-09-30",
+   "evidence": [
+    "InitTriVars: first store of width>>1 (Win16 triWidthR = halfWidth, before triWidthL)",
+    "statement order of the identical InitTriVars body fixes R vs L; 3812 has no other DOS use, as triWidthR has none in the recovered Win16 math"
+   ],
+   "reviewer": "worker names3, supervisor spot-checked 2026-09-30"
+  },
+  "root:50F6:3810": {
+   "win16": "_triWidthL",
+   "confidence": "CONFIRMED",
+   "reviewed": "2026-09-30",
+   "evidence": [
+    "InitTriVars: second store of width>>1 (Win16 triWidthL)",
+    "SetTriLatPoint: w = triWidthL*frac/0xffff (DOS 3810*frac) and GetTriLatDist same"
+   ],
+   "reviewer": "worker names3, supervisor spot-checked 2026-09-30"
+  },
+  "root:50F6:380E": {
+   "win16": "_triHeight",
+   "confidence": "CONFIRMED",
+   "reviewed": "2026-09-30",
+   "evidence": [
+    "InitTriVars: triHeight = rect.bottom - rect.top, divisor of leftYSlope",
+    "SetTriLatPoint: (triHeight-2)*(0xffff-frac)/0xffff; GetTriLatDist (380E-2) terms"
+   ],
+   "reviewer": "worker names3, supervisor spot-checked 2026-09-30"
+  },
+  "root:55B3:1B46": {
+   "win16": "_casteColors",
+   "confidence": "HIGH",
+   "reviewed": "2026-09-30",
+   "evidence": [
+    "DGROUP initialised _DATA run in the unit: DOS char[4] 1B46, char[4] 1B4A, int 1B4E, int 1B50 + int[8] 0x8000 + int 1 + int 1 = Win16 casteColors[4], modeColors[4], casteSet, modeSet[11]={0,-32768 x8,1,1} (same sizes and order; initialised data keeps declaration order)",
+    "DOS DrawControlLevels uses 1B46 as the bar-colour table in the non-mode (caste) branch"
+   ],
+   "reviewer": "worker names3, supervisor spot-checked 2026-09-30",
+   "note": "colour values differ (DOS palette 36,38,34 vs Win16 45,44,41) and Win16 DrawControlLevels is not recovered, so no Win16 use site"
+  },
+  "root:55B3:1B4A": {
+   "win16": "_modeColors",
+   "confidence": "HIGH",
+   "reviewed": "2026-09-30",
+   "evidence": [
+    "same DGROUP run as casteColors (second char[4])",
+    "DOS DrawControlLevels uses 1B4A for win==0x1200 (mode)"
+   ],
+   "reviewer": "worker names3, supervisor spot-checked 2026-09-30",
+   "note": "no recovered Win16 use site"
+  },
+  "root:55B3:1B4E": {
+   "win16": "_casteSet",
+   "confidence": "CONFIRMED",
+   "reviewed": "2026-09-30",
+   "evidence": [
+    "ProcCasteEvent: 1B4E = msg->code - 0x1306 and casteSetLevels[1B4E] memcpy, as Win16 \"casteSet = msg->code - 0x1306\" / MODE_DEFAULT(casteSet)",
+    "DGROUP run position and size (int after the two colour tables)"
+   ],
+   "reviewer": "worker names3, supervisor spot-checked 2026-09-30"
+  },
+  "root:55B3:1B50": {
+   "win16": "_modeSet",
+   "confidence": "CONFIRMED",
+   "reviewed": "2026-09-30",
+   "evidence": [
+    "Win16 win_DrawModeWindow/win_DrawCasteWindow pass modeSet[9]/modeSet[10] to DrawControlLevels; DOS passes 1B62/1B64 = 1B50+18/+20, so the modeSet array base is 1B50",
+    "Win16 initializer {0, -32768 x8, 1, 1} = DOS 1B50=0, 1B52[8]=0x8000, 1B62=1, 1B64=1; ProcModeEvent: 1B50 = code-0x1206 (mode set index)"
+   ],
+   "reviewer": "worker names3, supervisor spot-checked 2026-09-30",
+   "note": "DOS source declares the 11 words as separate objects (g_1B50, g_1B52[8], g_1B62, g_1B64); only 1B50 takes the name"
+  },
+  "S12:384C:0000": {
+   "win16": "_DeinitMapFunctions",
+   "confidence": "HIGH",
+   "reviewed": "2026-09-30",
+   "evidence": [
+    "empty body in both builds (Win16 1 byte, DOS empty far proc)",
+    "immediately precedes InitMapFunctions (string 'Generated buffer window' anchor) in both unit orders"
+   ],
+   "reviewer": "worker names3, supervisor spot-checked 2026-09-30"
+  },
+  "S12:384C:0290": {
+   "win16": "_OpenMapWindow",
+   "confidence": "CONFIRMED",
+   "reviewed": "2026-09-30",
+   "evidence": [
+    "body = win_Open(0x100) in both builds (Win16 12 bytes, constant 256)",
+    "0x100 is the map window id used by DrawMapCursor/EraseMapCursor/DrawMap",
+    "follows ProcMapEvent; Win16 ProcMapRibbonEvent (switch 38, RibbonToolsMenu/OpenMiniMapWin) has no DOS counterpart, so the count gap is explained and does not shift names"
+   ],
+   "reviewer": "worker names3, supervisor spot-checked 2026-09-30"
+  },
+  "S12:384C:0160": {
+   "win16": "_ProcMapEvent",
+   "confidence": "CONFIRMED",
+   "reviewed": "2026-09-30",
+   "evidence": [
+    "switch 23 in both builds (the ribbon handler has switch 38)",
+    "callee order OpenModeWindow, OpenCasteWindow, MysteryButton, OpenHistoryWindow, ScoreDialog, OpenInfoWindow, DoWinHelp, MapToolsMenu, DrawCastePopUp identical",
+    "constants 256/258/259 in both"
+   ],
+   "reviewer": "worker names3, supervisor spot-checked 2026-09-30"
+  },
+  "S12:384C:03B8": {
+   "win16": "_ToggleMapCursor",
+   "confidence": "CONFIRMED",
+   "reviewed": "2026-09-30",
+   "evidence": [
+    "DOS body: flag ? EraseMapCursor() : DrawMapCursor()",
+    "Win16 261-byte body = both cursor paths inlined (IsWinOpen/clip/GRectInvOutline twice), same logic",
+    "sits right after EraseMapCursor in both builds"
+   ],
+   "reviewer": "worker names3, supervisor spot-checked 2026-09-30"
+  },
+  "S12:384C:036F": {
+   "win16": "_EraseMapCursor",
+   "confidence": "CONFIRMED",
+   "reviewed": "2026-09-30",
+   "evidence": [
+    "state==1 test, GRectInvOutline(rect,2), state=0; window 0x100",
+    "callers include OpenMiniMapWin in both builds",
+    "Draw twin tests state==0 and sets 1, so Draw and Erase are not swapped"
+   ],
+   "reviewer": "worker names3, supervisor spot-checked 2026-09-30"
+  },
+  "S12:384C:0A45": {
+   "win16": "_DrawMapData",
+   "confidence": "HIGH",
+   "reviewed": "2026-09-30",
+   "evidence": [
+    "called by DOS 100A, which is Win16 DrawMap (if win 0x100 open: draw map + DrawMapData; callers ReDrawMapEdit/PlaceQueenInYard match Win16 DrawMap callers)",
+    "2x win_PrintfAtObj then aFldiv+win_DrawHBar bar sequence (4 bars DOS / 5 Win16)",
+    "object ids differ (DOS 0x119-0x11E vs Win16 0x2220-0x2226), so the body is analogous, not identical; DOS string 'sinwave.adp' is a mis-resolved reference"
+   ],
+   "reviewer": "worker names3, supervisor spot-checked 2026-09-30"
+  },
+  "S13:384C:0193": {
+   "win16": "_DrawYardCursor",
+   "confidence": "CONFIRMED",
+   "reviewed": "2026-09-30",
+   "evidence": [
+    "body if(!flag){InvertPatch(CurYardPnt.x,y);flag=1} identical to Win16 recovered source",
+    "Erase twin has the inverted test, so Draw and Erase are not swapped",
+    "InvertPatch callers (DrawYardCursor, EraseYardCursor, PlaceQueenInYard) are the same in both builds"
+   ],
+   "reviewer": "worker names3, supervisor spot-checked 2026-09-30"
+  },
+  "S13:384C:02D7": {
+   "win16": "_win_DrawYardWindow",
+   "confidence": "CONFIRMED",
+   "reviewed": "2026-09-30",
+   "evidence": [
+    "paint callback shape with flag bits 1/2/4",
+    "bitmaps 0x1b6c..0x1b6e (7020-7022), object 0x1914 (6420) and 7002 are all Win16 win_DrawYardWindow constants",
+    "EraseYardCursor at start and DrawYardCursor at end = Win16 InvertPatch at start and end"
+   ],
+   "reviewer": "worker names3, supervisor spot-checked 2026-09-30"
+  },
+  "S13:384C:0446": {
+   "win16": "_DrawYard",
+   "confidence": "CONFIRMED",
+   "reviewed": "2026-09-30",
+   "evidence": [
+    "guard win_IsWinOpen(0x1900) (constant 6400) like Win16 DrawYard",
+    "caller SetYardMode common to both builds",
+    "immediately followed by UpdateYard, whose body calls it"
+   ],
+   "reviewer": "worker names3, supervisor spot-checked 2026-09-30"
+  },
+  "S13:384C:0472": {
+   "win16": "_UpdateYard",
+   "confidence": "CONFIRMED",
+   "reviewed": "2026-09-30",
+   "evidence": [
+    "body = DrawYard() (the Win16 UpdateYard body duplicates the DrawYard body)",
+    "caller PlaceQueenInYard common to both builds",
+    "comes after DrawYard in both builds"
+   ],
+   "reviewer": "worker names3, supervisor spot-checked 2026-09-30"
+  },
+  "S13:384C:1260": {
+   "win16": "_TooFar",
+   "confidence": "CONFIRMED",
+   "reviewed": "2026-09-30",
+   "evidence": [
+    "body |x|>15 || |y|>15 identical to Win16 recovered TooFar",
+    "only caller DrawSwarm (xver constant 0x1b5e anchor)",
+    "comes before InvertPatch in both builds"
+   ],
+   "reviewer": "worker names3, supervisor spot-checked 2026-09-30"
+  },
+  "S13:384C:0936": {
+   "win16": "_DrawForSale",
+   "confidence": "CONFIRMED",
+   "reviewed": "2026-09-30",
+   "evidence": [
+    "hanim object at (0xaa,0xba) with picture 0x4ec (1260), identical to Win16 recovered DrawForSale",
+    "called from Draw_SimYard"
+   ],
+   "reviewer": "worker names3, supervisor spot-checked 2026-09-30"
+  },
+  "S13:384C:07A3": {
+   "win16": "_DrawSimBird",
+   "confidence": "CONFIRMED",
+   "reviewed": "2026-09-30",
+   "evidence": [
+    "picture base 0x4e2 (1250) = Win16 constant",
+    "Bird/Cat/ForSale constants 1250/1300/1260 tell the three same-shape bodies apart; all called from Draw_SimYard"
+   ],
+   "reviewer": "worker names3, supervisor spot-checked 2026-09-30"
+  },
+  "S13:384C:0D3B": {
+   "win16": "_DrawAnimYardMessage",
+   "confidence": "HIGH",
+   "reviewed": "2026-09-30",
+   "evidence": [
+    "renders the yard map message (55B3:299A) as an hanim object, so 'Anim' fits",
+    "called in Draw_SimYard right after DrawRain/DrawSwarm, where the Win16 Draw_SimYard has the inlined message redraw (IsWinOpen, TickCount, FillObjRect)",
+    "unit order is swapped vs Win16 (DOS: Draw_SimYard, 0D3B; Win16: DrawAnimYardMessage, Draw_SimYard), so position is not an anchor",
+    "the Win16 DrawAnimYardMessage body is the Windows rewrite (direct PrintfAtObj 0x1916 with a TickCount timeout) and looks more like unnamed DOS 01E5 / Win16 UpdateYardMessage than like 0D3B; no body identity"
+   ],
+   "reviewer": "worker names3, supervisor spot-checked 2026-09-30"
+  },
+  "S13:384C:1392": {
+   "win16": "_DrawSimColonies",
+   "confidence": "HIGH",
+   "reviewed": "2026-09-30",
+   "evidence": [
+    "only external callee f_1FAA_0006 = TrapFill (InvertPatch has the same callee; Win16 DrawSimColonies calls TrapFill)",
+    "comes after InvertPatch and before DrawColonyBars in both builds",
+    "callers differ (DOS Draw_SimYard vs Win16 win_DrawYardWindow) because the Windows port moved the call"
+   ],
+   "reviewer": "worker names3, supervisor spot-checked 2026-09-30"
+  },
+  "S14:384C:04FB": {
+   "win16": "_DoWinHelp",
+   "confidence": "CONFIRMED",
+   "reviewed": "2026-09-30",
+   "evidence": [
+    "callers ProcCasteEvent, ProcModeEvent, ProcMapEvent, ProcYardEvent, ProcHistoryEvent in both builds",
+    "comes after DoScenario; the body differs by platform (Win16 30-byte WinHelp API stub, DOS draws a help object)"
+   ],
+   "reviewer": "worker names3, supervisor spot-checked 2026-09-30"
+  },
+  "S14:384C:0ACD": {
+   "win16": "_SetDefaultWindPrompt",
+   "confidence": "CONFIRMED",
+   "reviewed": "2026-09-30",
+   "evidence": [
+    "callers EatMyFood and YellowDeath common to both builds",
+    "single callee EditMessage (DOS f_15D9_009C, also the EditMessage called by SpecialXfer)",
+    "size 157 vs 141"
+   ],
+   "reviewer": "worker names3, supervisor spot-checked 2026-09-30"
+  },
+  "S14:384C:0491": {
+   "win16": "_DoScenario",
+   "confidence": "CONFIRMED",
+   "reviewed": "2026-09-30",
+   "evidence": [
+    "constants 512 and 517 in both builds",
+    "win_Open/FlushEvents/GetEvent/Close dialog loop; caller is the NewGame slot (o15_384C_03C6)"
+   ],
+   "reviewer": "worker names3, supervisor spot-checked 2026-09-30"
+  },
+  "S14:384C:0C06": {
+   "win16": "_PictureDialog",
+   "confidence": "CONFIRMED",
+   "reviewed": "2026-09-30",
+   "evidence": [
+    "picture window objects 7680/7681 in both builds (the DOS function absorbs Win16 win_DrawPictureWindow)",
+    "callers PictStrnDialog and CustomerIDDialog common to both builds",
+    "the Windows paint callbacks [win_DrawScoreWindow/PictureWindow/EndGameWindow] are absorbed into the dialogs, so the count 14-3=11 holds"
+   ],
+   "reviewer": "worker names3, supervisor spot-checked 2026-09-30"
+  },
+  "S14:384C:0DE5": {
+   "win16": "_EndGameDialog",
+   "confidence": "CONFIRMED",
+   "reviewed": "2026-09-30",
+   "evidence": [
+    "constants 10003, 10008, 10010, 1024 (dialog) plus 1026-1028, 4912, 17612, 35224, 52836 (from Win16 win_DrawEndGameWindow), so the callback is merged",
+    "caller DoAntSim in both builds; calls CalcScore and SRand2"
+   ],
+   "reviewer": "worker names3, supervisor spot-checked 2026-09-30"
+  },
+  "S22:39C7:07FD": {
+   "win16": "_ResetYellowVars",
+   "confidence": "CONFIRMED",
+   "reviewed": "2026-09-30",
+   "evidence": [
+    "body identical to Win16 recovered ResetYellowVars (plane/goal/loc/last assignment, 5 zeroed vars, crazy=-2)",
+    "callers DoAntMoveY, DoLifeExchange, InitYelloAnt common to both builds"
+   ],
+   "reviewer": "worker names3, supervisor spot-checked 2026-09-30"
+  },
+  "S22:39C7:0889": {
+   "win16": "_SetGoalsY",
+   "confidence": "CONFIRMED",
+   "reviewed": "2026-09-30",
+   "evidence": [
+    "body identical to Win16 recovered SetGoalsY (plane==0 -> 1, crazy=-2, x clamped to 1..62 when plane>=2 && y<2)",
+    "writes the same Me* globals as ResetYellowVars"
+   ],
+   "reviewer": "worker names3, supervisor spot-checked 2026-09-30"
+  },
+  "S22:39C7:19E5": {
+   "win16": "_DoTroph",
+   "confidence": "CONFIRMED",
+   "reviewed": "2026-09-30",
+   "evidence": [
+    "callee order GetDir, MoveMyLife, edit draw, EatMyFood identical",
+    "callers DoForageAnt, DoRandAntA, DoRecruitAnt, DoToNestAnt common to both builds"
+   ],
+   "reviewer": "worker names3, supervisor spot-checked 2026-09-30"
+  },
+  "S22:39C7:1A57": {
+   "win16": "_SetAlarmDropState",
+   "confidence": "CONFIRMED",
+   "reviewed": "2026-09-30",
+   "evidence": [
+    "callee order win_SetObjSelectedState x2, myBeginSound, InvalEuMap (f_0250_006E)",
+    "size 180 vs 149; body matches Win16 recovered source (state/quiet)"
+   ],
+   "reviewer": "worker names3, supervisor spot-checked 2026-09-30"
+  },
+  "S22:39C7:1ED5": {
+   "win16": "_YellowHelp",
+   "confidence": "HIGH",
+   "reviewed": "2026-09-30",
+   "evidence": [
+    "last member of a 15/15 run; DOS caller YellowCommand (switch 13 in both builds)",
+    "help-window body (win_Open/GetEvent) vs Win16 WinHelp stub (62 bytes), a platform-specific body"
+   ],
+   "reviewer": "worker names3, supervisor spot-checked 2026-09-30"
+  },
+  "S22:3BBD:0E14": {
+   "win16": "_IsItWall",
+   "confidence": "CONFIRMED",
+   "reviewed": "2026-09-30",
+   "evidence": [
+    "body value>=0x60 && value<=0x67 identical",
+    "callers ConnectWall/WallNeighbors (Win16 inlines the same test)"
+   ],
+   "reviewer": "worker names3, supervisor spot-checked 2026-09-30"
+  },
+  "S22:3BBD:0662": {
+   "win16": "_ClearLifeB",
+   "confidence": "CONFIRMED",
+   "reviewed": "2026-09-30",
+   "evidence": [
+    "body identical to Win16 recovered ClearLifeB (walk the ListIndexB list, clear the matching entry, LifeB[x][y]=0)",
+    "ListIndexB = fd_50F6_0DA8 (also used by ClearListB/CompactListB); the R twin uses the R list"
+   ],
+   "reviewer": "worker names3, supervisor spot-checked 2026-09-30"
+  },
+  "S22:3BBD:10B8": {
+   "win16": "_IsValidSLoc",
+   "confidence": "CONFIRMED",
+   "reviewed": "2026-09-30",
+   "evidence": [
+    "only callers GetSM/SetSM in both builds",
+    "size 45 vs 36; comes before GetSM/SetSM"
+   ],
+   "reviewer": "worker names3, supervisor spot-checked 2026-09-30"
+  },
+  "S22:3BBD:0CAC": {
+   "win16": "_ConnectAll",
+   "confidence": "CONFIRMED",
+   "reviewed": "2026-09-30",
+   "evidence": [
+    "only caller DropWall in both builds; DropWall calls it twice in both",
+    "Win16 inlines ConnectWall/WallNeighbors (1267 bytes) where DOS calls ConnectWall 5x: same logic; wallShape table shared"
+   ],
+   "reviewer": "worker names3, supervisor spot-checked 2026-09-30"
+  },
+  "S22:3BBD:0FD3": {
+   "win16": "_SmoothMany",
+   "confidence": "CONFIRMED",
+   "reviewed": "2026-09-30",
+   "evidence": [
+    "calls SmoothACell exactly 6 times in both builds",
+    "caller ExpIncSmell in both builds"
+   ],
+   "reviewer": "worker names3, supervisor spot-checked 2026-09-30"
+  },
+  "S23:39C7:0000": {
+   "win16": "_XFlipLong",
+   "confidence": "CONFIRMED",
+   "reviewed": "2026-09-30",
+   "evidence": [
+    "body identical to Win16 recovered XFlipLong (swap words)",
+    "callers DisplayCard (xver HIGH) and PopUpInfoWindow; call order FlipWords, XFlipLong in both builds"
+   ],
+   "reviewer": "worker names3, supervisor spot-checked 2026-09-30"
+  },
+  "S23:39C7:0024": {
+   "win16": "_FlipWords",
+   "confidence": "CONFIRMED",
+   "reviewed": "2026-09-30",
+   "evidence": [
+    "body identical to Win16 recovered FlipWords (long loop, step 2, byte swap)",
+    "callers DisplayCard/PopUpInfoWindow"
+   ],
+   "reviewer": "worker names3, supervisor spot-checked 2026-09-30"
+  },
+  "S23:39C7:0075": {
+   "win16": "_win_DrawInfoWindow",
+   "confidence": "CONFIRMED",
+   "reviewed": "2026-09-30",
+   "evidence": [
+    "body = DisplayCard(...) only (29 vs 25 bytes)",
+    "the only caller of DisplayCard (xver HIGH) in both builds"
+   ],
+   "reviewer": "worker names3, supervisor spot-checked 2026-09-30"
+  },
+  "S23:39C7:04A1": {
+   "win16": "_win_GetStyleTextHeight",
+   "confidence": "CONFIRMED",
+   "reviewed": "2026-09-30",
+   "evidence": [
+    "only caller PopUpInfoWindow in both builds",
+    "font height/char width loop, size 455 vs 491; comes after win_PrintStyleTextInRect (shared string 'Cannot file text rez')"
+   ],
+   "reviewer": "worker names3, supervisor spot-checked 2026-09-30"
+  },
+  "S23:39C7:0C19": {
+   "win16": "_OpenInfoWindow",
+   "confidence": "CONFIRMED",
+   "reviewed": "2026-09-30",
+   "evidence": [
+    "constant 1280 (0x500 info window), IsWinOpen + win_Open",
+    "caller ProcMapEvent in both builds"
+   ],
+   "reviewer": "worker names3, supervisor spot-checked 2026-09-30"
+  },
+  "S18:384C:0000": {
+   "win16": "_MakeMap",
+   "confidence": "CONFIRMED",
+   "reviewed": "2026-09-30",
+   "evidence": [
+    "body n=x*16+y; n>0x25 ? MakeYardPatch() : MakeHousePatch(n) matches the Win16 call_seq",
+    "caller RandWorld in both builds"
+   ],
+   "reviewer": "worker names3, supervisor spot-checked 2026-09-30"
+  },
+  "S18:384C:0A1A": {
+   "win16": "_MakeKnob",
+   "confidence": "CONFIRMED",
+   "reviewed": "2026-09-30",
+   "evidence": [
+    "5x5 template 40 41 41 41 42 / 43 4e 4e 4e 44 / ... identical to Win16 KnobTemplate",
+    "caller MakeSink (Win16 MakeSink carries the knob constant 9020)"
+   ],
+   "reviewer": "worker names3, supervisor spot-checked 2026-09-30"
+  },
+  "S18:384C:0A63": {
+   "win16": "_MakePenny",
+   "confidence": "CONFIRMED",
+   "reviewed": "2026-09-30",
+   "evidence": [
+    "3x3 template 0x28..0x30 identical to Win16 PennyTemplate",
+    "comes after MakeKnob"
+   ],
+   "reviewer": "worker names3, supervisor spot-checked 2026-09-30"
+  },
+  "S18:384C:0AAB": {
+   "win16": "_MakeClip",
+   "confidence": "CONFIRMED",
+   "reviewed": "2026-09-30",
+   "evidence": [
+    "3x3 masked template 0,31..37,0 identical to Win16 ClipMask",
+    "comes after MakePenny"
+   ],
+   "reviewer": "worker names3, supervisor spot-checked 2026-09-30"
+  },
+  "S18:384C:03C9": {
+   "win16": "_MakeLint2",
+   "confidence": "HIGH",
+   "reviewed": "2026-09-30",
+   "evidence": [
+    "SRand1(200)==0 -> SRand1(2)+0x3e; Win16 MakeLint2 has exactly 2 SRand1 calls, 84 vs 105 bytes",
+    "sits between CarpetFloorL and CarpetFloorR in both builds; DOS callers CarpetFloorL/R"
+   ],
+   "reviewer": "worker names3, supervisor spot-checked 2026-09-30"
+  },
+  "S18:384C:041D": {
+   "win16": "_CarpetFloorR",
+   "confidence": "CONFIRMED",
+   "reviewed": "2026-09-30",
+   "evidence": [
+    "FillMap(0,0x69,...): Win16 CarpetFloorR constant 6720 = 0x69*64; the L twin uses 0x7f (Win16 8128 = 0x7f*64)",
+    "calls MakeOutletH in both builds; caller MakeHousePatch"
+   ],
+   "reviewer": "worker names3, supervisor spot-checked 2026-09-30"
+  },
+  "root:0EC1:07C1": {
+   "win16": "_ClearListB",
+   "confidence": "CONFIRMED",
+   "reviewed": "2026-09-30",
+   "evidence": [
+    "body ListIndexB (fd_50F6_0DA8) = 0; 19 vs 12 bytes",
+    "caller RandWorld in both builds; the R twin clears fd_50F6_0EAA"
+   ],
+   "reviewer": "worker names3, supervisor spot-checked 2026-09-30"
+  },
+  "root:0EC1:0081": {
+   "win16": "_CompactListB",
+   "confidence": "CONFIRMED",
+   "reviewed": "2026-09-30",
+   "evidence": [
+    "callers DoSmells and GoInNest common to both builds (the A twin has KillSomeAnts)",
+    "uses ListIndexB and the B arrays"
+   ],
+   "reviewer": "worker names3, supervisor spot-checked 2026-09-30"
+  },
+  "root:0EC1:037B": {
+   "win16": "_DrownBList",
+   "confidence": "CONFIRMED",
+   "reviewed": "2026-09-30",
+   "evidence": [
+    "caller AddWater in both builds",
+    "iterates the ListIndexB list (the R twin uses the R list)"
+   ],
+   "reviewer": "worker names3, supervisor spot-checked 2026-09-30"
+  },
+  "root:0EC1:06CE": {
+   "win16": "_GetFromAlist",
+   "confidence": "CONFIRMED",
+   "reviewed": "2026-09-30",
+   "evidence": [
+    "calls RemoveFromAList in both builds (RemoveFromAList callers are DoAntLions + GetFromAlist in both)",
+    "75 vs 72 bytes; comes after AddAntToRList (registered)"
+   ],
+   "reviewer": "worker names3, supervisor spot-checked 2026-09-30"
+  },
+  "root:0EC1:0719": {
+   "win16": "_BuildAntListA",
+   "confidence": "CONFIRMED",
+   "reviewed": "2026-09-30",
+   "evidence": [
+    "constant 997 in both builds",
+    "caller RandWorld in both builds"
+   ],
+   "reviewer": "worker names3, supervisor spot-checked 2026-09-30"
+  },
+  "root:1383:012B": {
+   "win16": "_GstrB",
+   "confidence": "CONFIRMED",
+   "reviewed": "2026-09-30",
+   "evidence": [
+    "body identical to Win16 recovered GstrB (Health <10/30/50, dug vs pop, return 0..5)",
+    "Win16 GetStrategy inlines the same decision tree; position 2 between GetStrategy and SetCasteProd"
+   ],
+   "reviewer": "worker names3, supervisor spot-checked 2026-09-30"
+  },
+  "root:1383:0553": {
+   "win16": "_ForceModeA",
+   "confidence": "CONFIRMED",
+   "reviewed": "2026-09-30",
+   "evidence": [
+    "switch 9 in both builds; the A variant touches MapA (Win16 constant 10472 = MapA) and the B twin does not",
+    "no callers in either build"
+   ],
+   "reviewer": "worker names3, supervisor spot-checked 2026-09-30"
+  },
+  "root:1383:0976": {
+   "win16": "_GetNewMode",
+   "confidence": "CONFIRMED",
+   "reviewed": "2026-09-30",
+   "evidence": [
+    "DOS dispatches to GetNewModeR/GetNewModeB; Win16 inlines both (SRand8 x4)",
+    "callers DoRandAntA, DoToAlarm, DoForageAnt, DoFightA, DoRestR, DoDigOutAntA common to both builds"
+   ],
+   "reviewer": "worker names3, supervisor spot-checked 2026-09-30"
+  },
+  "root:1383:0E89": {
+   "win16": "_GetRandDir",
+   "confidence": "CONFIRMED",
+   "reviewed": "2026-09-30",
+   "evidence": [
+    "callers are exactly DoRandAntA and DoRandAntAA in both builds",
+    "body Bounce() + TurnTab[dir][SRand8()]; Win16 inlines Bounce (SRand1 x4 + SRand8)"
+   ],
+   "reviewer": "worker names3, supervisor spot-checked 2026-09-30"
+  },
+  "root:1383:0505": {
+   "win16": "_StartAttack",
+   "confidence": "CONFIRMED",
+   "reviewed": "2026-09-30",
+   "evidence": [
+    "rare constant 11018 in both builds (also in GstrR)",
+    "caller GstrR; size 78 vs 66"
+   ],
+   "reviewer": "worker names3, supervisor spot-checked 2026-09-30"
+  },
+  "root:1383:0937": {
+   "win16": "_UnRecruitRed",
+   "confidence": "HIGH",
+   "reviewed": "2026-09-30",
+   "evidence": [
+    "shares its only caller with RecruitRed in both builds (DOS f_0DEF_0233 / Win16 DoRedInitiator, GetNewRedTask)",
+    "63 vs 54 bytes; comes after RecruitRed"
+   ],
+   "reviewer": "worker names3, supervisor spot-checked 2026-09-30"
+  },
+  "root:1496:03CC": {
+   "win16": "_JamScentBN",
+   "confidence": "CONFIRMED",
+   "reviewed": "2026-09-30",
+   "evidence": [
+    "map E09F = alarm (D09F) + 0x1000, the same layout as Win16 BN 0x62d2 = alarm 0x52d2 + 0x1000",
+    "callers DoRandAntA, DoDigOutAntA, DoToNestAnt, DoForageAnt identical"
+   ],
+   "reviewer": "worker names3, supervisor spot-checked 2026-09-30"
+  },
+  "root:1496:0474": {
+   "win16": "_JamScentRT",
+   "confidence": "CONFIRMED",
+   "reviewed": "2026-09-30",
+   "evidence": [
+    "map 4DA7:0000 = RT (also the DecTSmell red branch) = Win16 0x7ad2",
+    "callers DoAntMoveY and DoReturnFoodAnt identical (BT adds PickupMyFood in both builds)"
+   ],
+   "reviewer": "worker names3, supervisor spot-checked 2026-09-30"
+  },
+  "root:1496:0395": {
+   "win16": "_AlarmHere2",
+   "confidence": "CONFIRMED",
+   "reviewed": "2026-09-30",
+   "evidence": [
+    "body identical to Win16 recovered AlarmHere2 (keep max) vs AlarmHere (add, cap 200)",
+    "caller StartFightA in both builds; AlarmHere caller DoAntMoveY in both builds"
+   ],
+   "reviewer": "worker names3, supervisor spot-checked 2026-09-30"
+  },
+  "root:1496:04AC": {
+   "win16": "_DecTSmell",
+   "confidence": "CONFIRMED",
+   "reviewed": "2026-09-30",
+   "evidence": [
+    "body identical (red ? RT-- : BT--)",
+    "callers DoRandAntA and DoForageAnt identical"
+   ],
+   "reviewer": "worker names3, supervisor spot-checked 2026-09-30"
+  },
+  "root:1496:0511": {
+   "win16": "_GetSmellT",
+   "confidence": "HIGH",
+   "reviewed": "2026-09-30",
+   "evidence": [
+    "last member of a 15/15 run bounded by MakeRedInitiator; no callers in either build",
+    "113 vs 106 bytes"
+   ],
+   "reviewer": "worker names3, supervisor spot-checked 2026-09-30"
+  },
+  "root:0AD9:023E": {
+   "win16": "_InitAntLions",
+   "confidence": "CONFIRMED",
+   "reviewed": "2026-09-30",
+   "evidence": [
+    "callers MakeHousePatch and MakeYardPatch in both builds",
+    "DOS calls AddRandAntLion (Win16 inlines it: IsClear3x3/IsClearTile/SetMap)"
+   ],
+   "reviewer": "worker names3, supervisor spot-checked 2026-09-30"
+  },
+  "root:0AD9:07BD": {
+   "win16": "_SetAntLion",
+   "confidence": "CONFIRMED",
+   "reviewed": "2026-09-30",
+   "evidence": [
+    "body SetMap(1, LionListX[i], LionListY[i], LionListT[i]+0x38) identical to Win16 recovered source"
+   ],
+   "reviewer": "worker names3, supervisor spot-checked 2026-09-30"
+  },
+  "root:0AD9:0F1A": {
+   "win16": "_PlacePillTile",
+   "confidence": "CONFIRMED",
+   "reviewed": "2026-09-30",
+   "evidence": [
+    "body if(IsValidA(x,y)==1) MapA[x][y]=value identical",
+    "not swapped with PillGetLife (which returns LifeA[x][y]; caller IsPillDead)"
+   ],
+   "reviewer": "worker names3, supervisor spot-checked 2026-09-30"
+  },
+  "root:0AD9:0F4E": {
+   "win16": "_PillGetLife",
+   "confidence": "CONFIRMED",
+   "reviewed": "2026-09-30",
+   "evidence": [
+    "body IsValidA ? LifeA[x][y] : 0 identical to Win16 recovered source",
+    "used by IsPillDead"
+   ],
+   "reviewer": "worker names3, supervisor spot-checked 2026-09-30"
+  },
+  "root:0AD9:0DB7": {
+   "win16": "_ReplacePillarMap",
+   "confidence": "CONFIRMED",
+   "reviewed": "2026-09-30",
+   "evidence": [
+    "body PillDir&1 ? MapA=PillarMap[x%6] : [y%6] identical; the Store twin copies in the other direction"
+   ],
+   "reviewer": "worker names3, supervisor spot-checked 2026-09-30"
+  },
+  "root:0CDB:0000": {
+   "win16": "_InitSpider",
+   "confidence": "CONFIRMED",
+   "reviewed": "2026-09-30",
+   "evidence": [
+    "callers EditToolsMenu, MapToolsMenu, RandWorld common to both builds (Win16 adds RibbonToolsMenu)",
+    "first member of a 7/7 run"
+   ],
+   "reviewer": "worker names3, supervisor spot-checked 2026-09-30"
+  },
+  "root:0CDB:0D60": {
+   "win16": "_ScanForAnts",
+   "confidence": "HIGH",
+   "reviewed": "2026-09-30",
+   "evidence": [
+    "constant 65535 in both builds, 128 vs 113 bytes, position 3 between MoveSpider and KillSpider",
+    "DOS caller MoveSpider; Win16 MoveSpider no longer calls it (the Windows port dropped the call)"
+   ],
+   "reviewer": "worker names3, supervisor spot-checked 2026-09-30"
+  },
+  "root:0CDB:0DE0": {
+   "win16": "_KillSpider",
+   "confidence": "CONFIRMED",
+   "reviewed": "2026-09-30",
+   "evidence": [
+    "body SMode=5, DeathCnt=500, Scycle=0 identical",
+    "callers FootFall, SimKidInside, ExpKillAnts common to both builds"
+   ],
+   "reviewer": "worker names3, supervisor spot-checked 2026-09-30"
+  },
+  "root:0CDB:1118": {
+   "win16": "_SGetDis",
+   "confidence": "HIGH",
+   "reviewed": "2026-09-30",
+   "evidence": [
+    "body |x2-x1|+|y2-y1| (generic, weak)",
+    "last member of a 7/7 run after SpiderScan (xver HIGH); DOS caller MoveSpider"
+   ],
+   "reviewer": "worker names3, supervisor spot-checked 2026-09-30"
+  },
+  "root:0250:1583": {
+   "win16": "_DrawEditGraphs",
+   "confidence": "CONFIRMED",
+   "reviewed": "2026-09-30",
+   "evidence": [
+    "size 378 vs 379",
+    "call order aFldiv, SetColorFromObjNum, GetObjRect, aFulmul, aFldiv, rect fill, set attrib, outline, SetColorFromObjNum, fill, color, fill, inv is identical"
+   ],
+   "reviewer": "worker names3, supervisor spot-checked 2026-09-30"
+  },
+  "root:0250:16FD": {
+   "win16": "_SetEditWinTitle",
+   "confidence": "CONFIRMED",
+   "reviewed": "2026-09-30",
+   "evidence": [
+    "string 'SimAnt' + strcpy/strcat/strcat, SetObjFormatStr, DrawTitle",
+    "callers EditToolsMenu and MapToolsMenu common to both builds"
+   ],
+   "reviewer": "worker names3, supervisor spot-checked 2026-09-30"
+  },
+  "root:0250:179F": {
+   "win16": "_PreDrawSpider",
+   "confidence": "CONFIRMED",
+   "reviewed": "2026-09-30",
+   "evidence": [
+    "constant 500 (spiderTileLeft/Top), size 328 vs 337",
+    "precedes DrawSpider (xver HIGH); Win16 InvalidUpdateEdit (41 bytes, between SetEditWinTitle and PreDrawSpider) has no DOS counterpart, so the gap does not shift names"
+   ],
+   "reviewer": "worker names3, supervisor spot-checked 2026-09-30"
+  },
+  "root:0250:20A5": {
+   "win16": "_ed_MoveTo",
+   "confidence": "CONFIRMED",
+   "reviewed": "2026-09-30",
+   "evidence": [
+    "body stores the pen position (3/4 scaled on display 2); Win16 22-byte store of x,y",
+    "the pen is consumed by ed_LineTo; sits directly before ed_LineTo. An extra DOS function (1E80) sits between DrawSpider and ed_MoveTo with no Win16 counterpart; it is not absorbed into any name"
+   ],
+   "reviewer": "worker names3, supervisor spot-checked 2026-09-30"
+  },
+  "root:0250:20FA": {
+   "win16": "_ed_LineTo",
+   "confidence": "CONFIRMED",
+   "reviewed": "2026-09-30",
+   "evidence": [
+    "draws a line from the pen to (x,y) and updates the pen",
+    "callers DrawPalps and DrawLegs in both builds"
+   ],
+   "reviewer": "worker names3, supervisor spot-checked 2026-09-30"
+  },
+  "root:0250:2166": {
+   "win16": "_DrawPalps",
+   "confidence": "CONFIRMED",
+   "reviewed": "2026-09-30",
+   "evidence": [
+    "switch 8 in both builds, SRand1 is the first callee in both",
+    "DrawSpider calls DrawLegs then DrawPalps in both builds"
+   ],
+   "reviewer": "worker names3, supervisor spot-checked 2026-09-30"
+  },
+  "root:0250:2744": {
+   "win16": "_DrawLegs",
+   "confidence": "CONFIRMED",
+   "reviewed": "2026-09-30",
+   "evidence": [
+    "switch 8 in both builds, 6790 vs 7368 bytes",
+    "caller DrawSpider; calls ed_MoveTo/ed_LineTo"
+   ],
+   "reviewer": "worker names3, supervisor spot-checked 2026-09-30"
+  },
+  "root:0250:4225": {
+   "win16": "_BalloonIsVisible",
+   "confidence": "CONFIRMED",
+   "reviewed": "2026-09-30",
+   "evidence": [
+    "body identical to Win16 recovered source (plane==MapPlane, x and y-3 inside MapPnt + edit size)",
+    "called by all *Balloons members"
+   ],
+   "reviewer": "worker names3, supervisor spot-checked 2026-09-30"
+  },
+  "root:0250:428A": {
+   "win16": "_EggBalloons",
+   "confidence": "CONFIRMED",
+   "reviewed": "2026-09-30",
+   "evidence": [
+    "caller SimEggR in both builds; the 4 equal-size siblings are told apart by their callers"
+   ],
+   "reviewer": "worker names3, supervisor spot-checked 2026-09-30"
+  },
+  "root:0250:4302": {
+   "win16": "_FightBalloons",
+   "confidence": "CONFIRMED",
+   "reviewed": "2026-09-30",
+   "evidence": [
+    "callers DoFightA and DoNestFightR in both builds"
+   ],
+   "reviewer": "worker names3, supervisor spot-checked 2026-09-30"
+  },
+  "root:0250:437A": {
+   "win16": "_QueenBalloons",
+   "confidence": "CONFIRMED",
+   "reviewed": "2026-09-30",
+   "evidence": [
+    "caller SimQueenR in both builds"
+   ],
+   "reviewer": "worker names3, supervisor spot-checked 2026-09-30"
+  },
+  "root:0250:43F2": {
+   "win16": "_RestBalloons",
+   "confidence": "CONFIRMED",
+   "reviewed": "2026-09-30",
+   "evidence": [
+    "callers DoRestAnt and DoRestR in both builds"
+   ],
+   "reviewer": "worker names3, supervisor spot-checked 2026-09-30"
+  },
+  "root:0250:446A": {
+   "win16": "_AddMsgBalloon",
+   "confidence": "CONFIRMED",
+   "reviewed": "2026-09-30",
+   "evidence": [
+    "style==10 pixel/tile branch, 6-balloon cap and visibility test match the Win16 recovered AddMsgBalloon",
+    "called by DrawCurBalloons and DrawSpider"
+   ],
+   "reviewer": "worker names3, supervisor spot-checked 2026-09-30"
+  },
+  "root:0250:454D": {
+   "win16": "_DrawCurBalloons",
+   "confidence": "CONFIRMED",
+   "reviewed": "2026-09-30",
+   "evidence": [
+    "TickCount/SRand32/SRand2/SRand4/SRand64 sequence identical",
+    "only caller PreDrawBalloons in both builds"
+   ],
+   "reviewer": "worker names3, supervisor spot-checked 2026-09-30"
+  },
+  "root:0250:4BDD": {
+   "win16": "_EditMsgBalloon",
+   "confidence": "CONFIRMED",
+   "reviewed": "2026-09-30",
+   "evidence": [
+    "constant 512 in both builds, BalloonIsVisible((x>>4)+MapPnt.x, ...) guard",
+    "75 vs 114 bytes; sits between DrawCurBalloons and PreDrawBalloons"
+   ],
+   "reviewer": "worker names3, supervisor spot-checked 2026-09-30"
+  },
+  "root:0250:4C28": {
+   "win16": "_PreDrawBalloons",
+   "confidence": "CONFIRMED",
+   "reviewed": "2026-09-30",
+   "evidence": [
+    "body = DrawCurBalloons() in both builds (12 vs 6 bytes)"
+   ],
+   "reviewer": "worker names3, supervisor spot-checked 2026-09-30"
+  },
+  "root:0250:4C34": {
+   "win16": "_DrawBalloons",
+   "confidence": "CONFIRMED",
+   "reviewed": "2026-09-30",
+   "evidence": [
+    "string 'balbuf', mask-bitmap copy sequence like Win16 (ConvertMaskBitmap2/CopyMaskBitmap2)",
+    "called by the edit draw 13A6 right after DrawSpider, mirroring the PreDrawSpider/PreDrawBalloons pairing"
+   ],
+   "reviewer": "worker names3, supervisor spot-checked 2026-09-30"
+  },
+  "root:50F6:1076": {
+   "win16": "_SpidBurpCnt",
+   "confidence": "CONFIRMED",
+   "reviewed": "2026-09-30",
+   "evidence": [
+    "InitSpider (Win16 5:4668 card, same store sequence: 10,0,0,0,0,0, SpidDir=0, RevSpider=0, SpidOn=CurGameType?1:0, SpidX=0x400, SpidY=0x200, SMode=MeSMode=0, Starg=-2, StargLife=-1, SuserX=SuserY=0x40): DOS 1st store 1076=10 / Win16 1st store PACK:8072=_SpidBurpCnt=0xA",
+    "MoveSpider: DOS if(--1076==0){1076=10; if(..&&!SRand2()) myBeginSound(10,0,10)} / Win16 5278: dec es:[8072]; jne; mov es:[8072],0xA; SRand2; myBeginSound(10,0,10)"
+   ],
+   "reviewer": "worker names3, supervisor spot-checked 2026-09-30"
+  },
+  "root:50F6:1054": {
+   "win16": "_EatCnt",
+   "confidence": "CONFIRMED",
+   "reviewed": "2026-09-30",
+   "evidence": [
+    "InitSpider (Win16 5:4668 card, same store sequence: 10,0,0,0,0,0, SpidDir=0, RevSpider=0, SpidOn=CurGameType?1:0, SpidX=0x400, SpidY=0x200, SMode=MeSMode=0, Starg=-2, StargLife=-1, SuserX=SuserY=0x40): DOS 2nd store 1054=0 / Win16 2nd store PACK:77AE=_EatCnt=0",
+    "MoveSpider eat: DOS 1054 = 06AC>=7 ? 11 : 50; if(1054>0){1054--; if(1054%10==0&&SRand2()) myBeginSound(0x2c,(SRand256()<<3)+0x2777,-5)} / Win16 51B3..526C: MeSMode>=7?0xB:0x32 -> es:[77AE]; cmp [77AE],0; dec; idiv 10; SRand2; myBeginSound(0x2c,..+0x2777,-5)"
+   ],
+   "reviewer": "worker names3, supervisor spot-checked 2026-09-30"
+  },
+  "root:50F6:105A": {
+   "win16": "_SCorpseBase",
+   "confidence": "CONFIRMED",
+   "reviewed": "2026-09-30",
+   "evidence": [
+    "InitSpider (Win16 5:4668 card, same store sequence: 10,0,0,0,0,0, SpidDir=0, RevSpider=0, SpidOn=CurGameType?1:0, SpidX=0x400, SpidY=0x200, SMode=MeSMode=0, Starg=-2, StargLife=-1, SuserX=SuserY=0x40): DOS 3rd store 105A=0 / Win16 3rd store PACK:78DA=_SCorpseBase=0",
+    "MoveSpider: DOS 105A=4 (red ant eaten) else 0; MapA=SRand4()+105A+0x10; DeadAntHere(d,r,105A) / Win16 4E81 es:[78DA]=4; 511C/51A4 =0; 521F add al,es:[78DA]; add al,0x10; 52B0 push es:[78DA] -> DeadAntHere"
+   ],
+   "reviewer": "worker names3, supervisor spot-checked 2026-09-30"
+  },
+  "root:50F6:1042": {
+   "win16": "_Scycle",
+   "confidence": "CONFIRMED",
+   "reviewed": "2026-09-30",
+   "evidence": [
+    "InitSpider (Win16 5:4668 card, same store sequence: 10,0,0,0,0,0, SpidDir=0, RevSpider=0, SpidOn=CurGameType?1:0, SpidX=0x400, SpidY=0x200, SMode=MeSMode=0, Starg=-2, StargLife=-1, SuserX=SuserY=0x40): DOS 4th store 1042=0 / Win16 4th store PACK:7290=_Scycle=0",
+    "KillSpider: DOS 0FB8=5, 109A=500, 1042=0 / Win16 recovered KillSpider: SMode=5, DeathCnt=500, Scycle=0",
+    "MoveSpider: DOS if(d<1){1042=2;return}; 1042=(1042+1|2)&0x3ff / Win16 4806 es:[7290]=2 after GetDis<1; inc/and 0x3ff on [7290]"
+   ],
+   "reviewer": "worker names3, supervisor spot-checked 2026-09-30"
+  },
+  "root:50F6:1072": {
+   "win16": "_Scycle2",
+   "confidence": "CONFIRMED",
+   "reviewed": "2026-09-30",
+   "evidence": [
+    "InitSpider (Win16 5:4668 card, same store sequence: 10,0,0,0,0,0, SpidDir=0, RevSpider=0, SpidOn=CurGameType?1:0, SpidX=0x400, SpidY=0x200, SMode=MeSMode=0, Starg=-2, StargLife=-1, SuserX=SuserY=0x40): DOS 5th store 1072=0 / Win16 5th store PACK:77AC=_Scycle2=0",
+    "MoveSpider entry: DOS 1072=(1072+1)&0x3ff / Win16 470A: mov ax,es:[77AC]; inc ax; and ah,3; mov es:[77AC],ax"
+   ],
+   "reviewer": "worker names3, supervisor spot-checked 2026-09-30"
+  },
+  "root:50F6:108A": {
+   "win16": "_SpidRevenge",
+   "confidence": "CONFIRMED",
+   "reviewed": "2026-09-30",
+   "evidence": [
+    "InitSpider (Win16 5:4668 card, same store sequence: 10,0,0,0,0,0, SpidDir=0, RevSpider=0, SpidOn=CurGameType?1:0, SpidX=0x400, SpidY=0x200, SMode=MeSMode=0, Starg=-2, StargLife=-1, SuserX=SuserY=0x40): DOS 6th store 108A=0 / Win16 6th store PACK:72C2=_SpidRevenge=0",
+    "MoveSpider after PictStrnDialog(0,0x273e,0): DOS if(108A<5)108A++; if(108A<3)return; 06AC=108A>=5?8:7; if(108A>=6&&!SRand2()) / Win16 4A96..4ADA: cmp [72C2],5; inc; cmp 3; cmp 5 -> MeSMode 8/7; cmp 6"
+   ],
+   "reviewer": "worker names3, supervisor spot-checked 2026-09-30"
+  },
+  "root:50F6:0FB8": {
+   "win16": "_SMode",
+   "confidence": "CONFIRMED",
+   "reviewed": "2026-09-30",
+   "evidence": [
+    "InitSpider (Win16 5:4668 card, same store sequence: 10,0,0,0,0,0, SpidDir=0, RevSpider=0, SpidOn=CurGameType?1:0, SpidX=0x400, SpidY=0x200, SMode=MeSMode=0, Starg=-2, StargLife=-1, SuserX=SuserY=0x40): DOS '06AC = 0FB8 = 0' stores 0FB8 first / Win16 stores PACK:729E=_SMode then 7D60=_MeSMode",
+    "KillSpider: DOS 0FB8=5 / Win16 recovered KillSpider SMode=5",
+    "MoveSpider: DOS if((0FFC=SFoundAnt())!=-2){0FB8=2;..} / Win16 4740..4788: bx=729E; SFoundAnt; es:[7A5E]=ax; cmp 0xfffe; [SMode]=2"
+   ],
+   "reviewer": "worker names3, supervisor spot-checked 2026-09-30"
+  },
+  "root:50F6:109A": {
+   "win16": "_DeathCnt",
+   "confidence": "CONFIRMED",
+   "reviewed": "2026-09-30",
+   "evidence": [
+    "KillSpider: DOS 109A=500 / Win16 recovered KillSpider DeathCnt=500 (also inlined in Win16 MoveSpider 4A6C: es:[72E0=_DeathCnt]=0x1F4)",
+    "MoveSpider case 5: DOS if(--109A==0){0FB8=0F0C=0; f_0BE8_0812(x,y) x3} / Win16 507E..50A8: dec es:[72E0]; jne; SMode=SpidOn=0; DropFoodA(x,y) x3"
+   ],
+   "reviewer": "worker names3, supervisor spot-checked 2026-09-30"
+  },
+  "root:50F6:0FFC": {
+   "win16": "_Starg",
+   "confidence": "CONFIRMED",
+   "reviewed": "2026-09-30",
+   "evidence": [
+    "InitSpider (Win16 5:4668 card, same store sequence: 10,0,0,0,0,0, SpidDir=0, RevSpider=0, SpidOn=CurGameType?1:0, SpidX=0x400, SpidY=0x200, SMode=MeSMode=0, Starg=-2, StargLife=-1, SuserX=SuserY=0x40): DOS 0FFC=-2 / Win16 PACK:7A5E=_Starg=0xFFFE",
+    "MoveSpider: DOS 0FFC=SFoundAnt(); !=-2; 10AE=AlistT[0FFC] / Win16 4770: es:[7A5E]=ax after SFoundAnt; cmp 0xfffe; AlistT[Starg] via es:[bx+2F62]"
+   ],
+   "reviewer": "worker names3, supervisor spot-checked 2026-09-30"
+  },
+  "root:50F6:10AE": {
+   "win16": "_StargLife",
+   "confidence": "CONFIRMED",
+   "reviewed": "2026-09-30",
+   "evidence": [
+    "InitSpider (Win16 5:4668 card, same store sequence: 10,0,0,0,0,0, SpidDir=0, RevSpider=0, SpidOn=CurGameType?1:0, SpidX=0x400, SpidY=0x200, SMode=MeSMode=0, Starg=-2, StargLife=-1, SuserX=SuserY=0x40): DOS 10AE=-1 / Win16 PACK:80A8=_StargLife=0xFFFF",
+    "MoveSpider: DOS 10AE = Starg>=0 ? AD3B[Starg] : 0xff; case 2 (AD3B[Starg]^10AE)&0xf0 / Win16 4799..47B4: al=es:[bx+2F62 (_AlistT)] -> es:[80A8]; else es:[80A8]=0xFF; 4CD1 xor al,es:[80A8]"
+   ],
+   "reviewer": "worker names3, supervisor spot-checked 2026-09-30"
+  },
+  "root:50F6:0F42": {
+   "win16": "_SuserX",
+   "confidence": "CONFIRMED",
+   "reviewed": "2026-09-30",
+   "evidence": [
+    "InitSpider (Win16 5:4668 card, same store sequence: 10,0,0,0,0,0, SpidDir=0, RevSpider=0, SpidOn=CurGameType?1:0, SpidX=0x400, SpidY=0x200, SMode=MeSMode=0, Starg=-2, StargLife=-1, SuserX=SuserY=0x40): DOS '0F7E = 0F42 = 64' stores 0F42 first / Win16 stores PACK:78B8=_SuserX then 78EA=_SuserY (0x40)",
+    "MoveSpider: DOS GetDis(MeLocX,MeLocY,0F42,0F7E) / Win16 47CB..47F5 pushes SuserY(78EA), SuserX(78B8), MeLocY, MeLocX -> GetDis(MeLocX,MeLocY,SuserX,SuserY); done path DOS 0F42=x / Win16 52EC SuserX=[bp-0E] (x)"
+   ],
+   "reviewer": "worker names3, supervisor spot-checked 2026-09-30"
+  },
+  "root:50F6:0F7E": {
+   "win16": "_SuserY",
+   "confidence": "CONFIRMED",
+   "reviewed": "2026-09-30",
+   "evidence": [
+    "InitSpider (Win16 5:4668 card, same store sequence: 10,0,0,0,0,0, SpidDir=0, RevSpider=0, SpidOn=CurGameType?1:0, SpidX=0x400, SpidY=0x200, SMode=MeSMode=0, Starg=-2, StargLife=-1, SuserX=SuserY=0x40): second of the chained 0x40 stores / Win16 PACK:78EA=_SuserY",
+    "MoveSpider: 4th GetDis arg (y) in both; done path DOS 0F7E=y / Win16 52F7 SuserY=[bp-0C] (y)"
+   ],
+   "reviewer": "worker names3, supervisor spot-checked 2026-09-30"
+  },
+  "root:3E1D:A180": {
+   "win16": "_AlistX",
+   "confidence": "CONFIRMED",
+   "reviewed": "2026-09-30",
+   "evidence": [
+    "CompactListA: DOS tests/copies AD3B,A180,A569,A952,B124 (T,X,Y,M,S) / Win16 tests/copies Dx8+0x2F62,0x23A4,0x278E,0x2B78,0x334C (=_AlistT,X,Y,M,S; SIMANT_DATA_GROUP, Dx8 at 0); A180 <-> Dx8+0x23A4 = _AlistX",
+    "BuildAntListA: DOS A180[ListIndexA]=x (outer 0..127) / Win16 Dx8[ListIndexA+0x23A4]=x (outer 0..127) (identical body)",
+    "FindInAList: DOS A180[i]==x / Win16 Dx8[i+0x23A4]==firstKey"
+   ],
+   "reviewer": "worker names3, supervisor spot-checked 2026-09-30"
+  },
+  "root:3E1D:A569": {
+   "win16": "_AlistY",
+   "confidence": "CONFIRMED",
+   "reviewed": "2026-09-30",
+   "evidence": [
+    "CompactListA: DOS tests/copies AD3B,A180,A569,A952,B124 (T,X,Y,M,S) / Win16 tests/copies Dx8+0x2F62,0x23A4,0x278E,0x2B78,0x334C (=_AlistT,X,Y,M,S; SIMANT_DATA_GROUP, Dx8 at 0); A569 <-> Dx8+0x278E = _AlistY",
+    "BuildAntListA: DOS A569[ListIndexA]=y (inner 0..63) / Win16 Dx8[ListIndexA+0x278E]=y (inner 0..63) (identical body)",
+    "FindInAList: DOS A569[i]==y / Win16 Dx8[i+0x278E]==secondKey"
+   ],
+   "reviewer": "worker names3, supervisor spot-checked 2026-09-30"
+  },
+  "root:3E1D:A952": {
+   "win16": "_AlistM",
+   "confidence": "CONFIRMED",
+   "reviewed": "2026-09-30",
+   "evidence": [
+    "CompactListA: DOS tests/copies AD3B,A180,A569,A952,B124 (T,X,Y,M,S) / Win16 tests/copies Dx8+0x2F62,0x23A4,0x278E,0x2B78,0x334C (=_AlistT,X,Y,M,S; SIMANT_DATA_GROUP, Dx8 at 0); A952 <-> Dx8+0x2B78 = _AlistM",
+    "BuildAntListA: DOS A952[ListIndexA]=2 / Win16 Dx8[ListIndexA+0x2B78]=2 (identical body)"
+   ],
+   "reviewer": "worker names3, supervisor spot-checked 2026-09-30"
+  },
+  "root:3E1D:AD3B": {
+   "win16": "_AlistT",
+   "confidence": "CONFIRMED",
+   "reviewed": "2026-09-30",
+   "evidence": [
+    "CompactListA: DOS tests/copies AD3B,A180,A569,A952,B124 (T,X,Y,M,S) / Win16 tests/copies Dx8+0x2F62,0x23A4,0x278E,0x2B78,0x334C (=_AlistT,X,Y,M,S; SIMANT_DATA_GROUP, Dx8 at 0); AD3B <-> Dx8+0x2F62 = _AlistT",
+    "BuildAntListA: DOS AD3B[ListIndexA]=ant / Win16 Dx8[ListIndexA+0x2F62]=ant (identical body)",
+    "FindInAList: DOS AD3B[i]!=0 / Win16 Dx8[i+0x2F62]!=0",
+    "MoveSpider: DOS StargLife=AD3B[Starg] / Win16 4799 al=es:[bx+2F62]"
+   ],
+   "reviewer": "worker names3, supervisor spot-checked 2026-09-30"
+  },
+  "root:3E1D:B124": {
+   "win16": "_AlistS",
+   "confidence": "CONFIRMED",
+   "reviewed": "2026-09-30",
+   "evidence": [
+    "CompactListA: DOS tests/copies AD3B,A180,A569,A952,B124 (T,X,Y,M,S) / Win16 tests/copies Dx8+0x2F62,0x23A4,0x278E,0x2B78,0x334C (=_AlistT,X,Y,M,S; SIMANT_DATA_GROUP, Dx8 at 0); B124 <-> Dx8+0x334C = _AlistS",
+    "BuildAntListA: DOS B124[ListIndexA]=0 / Win16 Dx8[ListIndexA+0x334C]=0 (identical body)"
+   ],
+   "reviewer": "worker names3, supervisor spot-checked 2026-09-30"
+  },
+  "root:3E1D:B50D": {
+   "win16": "_BlistX",
+   "confidence": "CONFIRMED",
+   "reviewed": "2026-09-30",
+   "evidence": [
+    "CompactListB: DOS tests/copies BAEC,B50D,B702,B8F7,BCE1 (T,X,Y,M,S) / Win16 tests/copies Dx8+0x3D18,0x3736,0x392C,0x3B22,0x3F0E (=_BlistT,X,Y,M,S; SIMANT_DATA_GROUP, Dx8 at 0); B50D <-> Dx8+0x3736 = _BlistX",
+    "AddAntToBList: DOS B50D[n]=x (arg1) / Win16 list[count+0x3736]=x (arg1) (identical body, cap 500)",
+    "FindInBList: DOS B50D[i]==x / Win16 Dx8[i+0x3736]==firstKey"
+   ],
+   "reviewer": "worker names3, supervisor spot-checked 2026-09-30"
+  },
+  "root:3E1D:B702": {
+   "win16": "_BlistY",
+   "confidence": "CONFIRMED",
+   "reviewed": "2026-09-30",
+   "evidence": [
+    "CompactListB: DOS tests/copies BAEC,B50D,B702,B8F7,BCE1 (T,X,Y,M,S) / Win16 tests/copies Dx8+0x3D18,0x3736,0x392C,0x3B22,0x3F0E (=_BlistT,X,Y,M,S; SIMANT_DATA_GROUP, Dx8 at 0); B702 <-> Dx8+0x392C = _BlistY",
+    "AddAntToBList: DOS B702[n]=y (arg2) / Win16 list[count+0x392C]=y (arg2) (identical body, cap 500)",
+    "FindInBList: DOS B702[i]==y / Win16 Dx8[i+0x392C]==secondKey"
+   ],
+   "reviewer": "worker names3, supervisor spot-checked 2026-09-30"
+  },
+  "root:3E1D:B8F7": {
+   "win16": "_BlistM",
+   "confidence": "CONFIRMED",
+   "reviewed": "2026-09-30",
+   "evidence": [
+    "CompactListB: DOS tests/copies BAEC,B50D,B702,B8F7,BCE1 (T,X,Y,M,S) / Win16 tests/copies Dx8+0x3D18,0x3736,0x392C,0x3B22,0x3F0E (=_BlistT,X,Y,M,S; SIMANT_DATA_GROUP, Dx8 at 0); B8F7 <-> Dx8+0x3B22 = _BlistM",
+    "AddAntToBList: DOS B8F7[n]=mode (arg4) / Win16 list[count+0x3B22]=mode (arg4) (identical body, cap 500)"
+   ],
+   "reviewer": "worker names3, supervisor spot-checked 2026-09-30"
+  },
+  "root:3E1D:BAEC": {
+   "win16": "_BlistT",
+   "confidence": "CONFIRMED",
+   "reviewed": "2026-09-30",
+   "evidence": [
+    "CompactListB: DOS tests/copies BAEC,B50D,B702,B8F7,BCE1 (T,X,Y,M,S) / Win16 tests/copies Dx8+0x3D18,0x3736,0x392C,0x3B22,0x3F0E (=_BlistT,X,Y,M,S; SIMANT_DATA_GROUP, Dx8 at 0); BAEC <-> Dx8+0x3D18 = _BlistT",
+    "AddAntToBList: DOS BAEC[n]=type (arg3, LifeB[x][y]=type) / Win16 list[count+0x3D18]=type (arg3, LifeB[x][y]=type) (identical body, cap 500)",
+    "FindInBList: DOS BAEC[i]==t / Win16 Dx8[i+0x3D18]==thirdKey"
+   ],
+   "reviewer": "worker names3, supervisor spot-checked 2026-09-30"
+  },
+  "root:3E1D:BCE1": {
+   "win16": "_BlistS",
+   "confidence": "CONFIRMED",
+   "reviewed": "2026-09-30",
+   "evidence": [
+    "CompactListB: DOS tests/copies BAEC,B50D,B702,B8F7,BCE1 (T,X,Y,M,S) / Win16 tests/copies Dx8+0x3D18,0x3736,0x392C,0x3B22,0x3F0E (=_BlistT,X,Y,M,S; SIMANT_DATA_GROUP, Dx8 at 0); BCE1 <-> Dx8+0x3F0E = _BlistS",
+    "AddAntToBList: DOS BCE1[n]=stat (arg5) / Win16 list[count+0x3F0E]=stat (arg5) (identical body, cap 500)"
+   ],
+   "reviewer": "worker names3, supervisor spot-checked 2026-09-30"
+  },
+  "root:3E1D:BED6": {
+   "win16": "_RlistX",
+   "confidence": "CONFIRMED",
+   "reviewed": "2026-09-30",
+   "evidence": [
+    "CompactListR: DOS tests/copies C4B5,BED6,C0CB,C2C0,C6AA (T,X,Y,M,S) / Win16 tests/copies Dx8+0x46E6,0x4104,0x42FA,0x44F0,0x48DC (=_RlistT,X,Y,M,S; SIMANT_DATA_GROUP, Dx8 at 0); BED6 <-> Dx8+0x4104 = _RlistX",
+    "AddAntToRList: DOS BED6[n]=x (arg1) / Win16 list[count+0x4104]=x (arg1) (identical body, cap 500)",
+    "FindInRList: DOS BED6[i]==x / Win16 Dx8[i+0x4104]==firstKey"
+   ],
+   "reviewer": "worker names3, supervisor spot-checked 2026-09-30"
+  },
+  "root:3E1D:C0CB": {
+   "win16": "_RlistY",
+   "confidence": "CONFIRMED",
+   "reviewed": "2026-09-30",
+   "evidence": [
+    "CompactListR: DOS tests/copies C4B5,BED6,C0CB,C2C0,C6AA (T,X,Y,M,S) / Win16 tests/copies Dx8+0x46E6,0x4104,0x42FA,0x44F0,0x48DC (=_RlistT,X,Y,M,S; SIMANT_DATA_GROUP, Dx8 at 0); C0CB <-> Dx8+0x42FA = _RlistY",
+    "AddAntToRList: DOS C0CB[n]=y (arg2) / Win16 list[count+0x42FA]=y (arg2) (identical body, cap 500)",
+    "FindInRList: DOS C0CB[i]==y / Win16 Dx8[i+0x42FA]==secondKey"
+   ],
+   "reviewer": "worker names3, supervisor spot-checked 2026-09-30"
+  },
+  "root:3E1D:C2C0": {
+   "win16": "_RlistM",
+   "confidence": "CONFIRMED",
+   "reviewed": "2026-09-30",
+   "evidence": [
+    "CompactListR: DOS tests/copies C4B5,BED6,C0CB,C2C0,C6AA (T,X,Y,M,S) / Win16 tests/copies Dx8+0x46E6,0x4104,0x42FA,0x44F0,0x48DC (=_RlistT,X,Y,M,S; SIMANT_DATA_GROUP, Dx8 at 0); C2C0 <-> Dx8+0x44F0 = _RlistM",
+    "AddAntToRList: DOS C2C0[n]=mode (arg4) / Win16 list[count+0x44F0]=mode (arg4) (identical body, cap 500)"
+   ],
+   "reviewer": "worker names3, supervisor spot-checked 2026-09-30"
+  },
+  "root:3E1D:C4B5": {
+   "win16": "_RlistT",
+   "confidence": "CONFIRMED",
+   "reviewed": "2026-09-30",
+   "evidence": [
+    "CompactListR: DOS tests/copies C4B5,BED6,C0CB,C2C0,C6AA (T,X,Y,M,S) / Win16 tests/copies Dx8+0x46E6,0x4104,0x42FA,0x44F0,0x48DC (=_RlistT,X,Y,M,S; SIMANT_DATA_GROUP, Dx8 at 0); C4B5 <-> Dx8+0x46E6 = _RlistT",
+    "AddAntToRList: DOS C4B5[n]=type (arg3, LifeR[x][y]=type) / Win16 list[count+0x46E6]=type (arg3, LifeR[x][y]=type) (identical body, cap 500)",
+    "FindInRList: DOS C4B5[i]==t / Win16 Dx8[i+0x46E6]==thirdKey"
+   ],
+   "reviewer": "worker names3, supervisor spot-checked 2026-09-30"
+  },
+  "root:3E1D:C6AA": {
+   "win16": "_RlistS",
+   "confidence": "CONFIRMED",
+   "reviewed": "2026-09-30",
+   "evidence": [
+    "CompactListR: DOS tests/copies C4B5,BED6,C0CB,C2C0,C6AA (T,X,Y,M,S) / Win16 tests/copies Dx8+0x46E6,0x4104,0x42FA,0x44F0,0x48DC (=_RlistT,X,Y,M,S; SIMANT_DATA_GROUP, Dx8 at 0); C6AA <-> Dx8+0x48DC = _RlistS",
+    "AddAntToRList: DOS C6AA[n]=stat (arg5) / Win16 list[count+0x48DC]=stat (arg5) (identical body, cap 500)"
+   ],
+   "reviewer": "worker names3, supervisor spot-checked 2026-09-30"
+  },
+  "root:50F6:0DA8": {
+   "win16": "_ListIndexB",
+   "confidence": "CONFIRMED",
+   "reviewed": "2026-09-30",
+   "evidence": [
+    "CompactListB: DOS for(i<0DA8)..; 0DA8+=shift / Win16 CompactListB bound ListIndexB (PACK:99D4 = match_position[0x4CEA]); ListIndexB+=displacement",
+    "AddAntToBList: DOS if(0DA8>=500)return; n=0DA8; ..; 0DA8++ / Win16 identical with ListIndexB",
+    "FindInBList i=0DA8 / Win16 index=ListIndexB; ClearListB: DOS 0DA8=0 / Win16 ListIndexB=0"
+   ],
+   "reviewer": "worker names3, supervisor spot-checked 2026-09-30"
+  },
+  "root:50F6:0EAA": {
+   "win16": "_ListIndexR",
+   "confidence": "CONFIRMED",
+   "reviewed": "2026-09-30",
+   "evidence": [
+    "CompactListR: DOS bound/adjust 0EAA / Win16 ListIndexR (PACK:72CC = match_position[0x3966])",
+    "AddAntToRList: DOS if(0EAA>=500)return; ..; 0EAA++ / Win16 identical with ListIndexR",
+    "FindInRList i=0EAA / Win16 ListIndexR; ClearListR: DOS 0EAA=0 / Win16 ListIndexR=0"
+   ],
+   "reviewer": "worker names3, supervisor spot-checked 2026-09-30"
+  },
+  "root:3E1D:D09F": {
+   "win16": "_PherMapA",
+   "confidence": "CONFIRMED",
+   "reviewed": "2026-09-30",
+   "evidence": [
+    "AlarmHere: DOS v=D09F[x>>1][y>>1]+level, cap 200 / Win16 Dx8[0x52D2+(row<<5)+col]+level, cap 0xC8 (0x52D2=_PherMapA)",
+    "AlarmHere2: DOS if(D09F[..]>level)return; =level / Win16 same on Dx8+0x52D2",
+    "SmoothAlarm (DOS) copies D09F into C89F scratch; Win16 _TemDensity (4AD2) is the 0x800 block right before PherMapA - consistent, not counted"
+   ],
+   "reviewer": "worker names3, supervisor spot-checked 2026-09-30"
+  },
+  "root:3E1D:E09F": {
+   "win16": "_PherMapBN",
+   "confidence": "CONFIRMED",
+   "reviewed": "2026-09-30",
+   "evidence": [
+    "ColonySmellBN: DOS if(E09F[x][y])E09F[x][y]-- / Win16 recovered ColonySmellBN: --PherMapBN[row][cell]",
+    "JamScentBN: DOS max-jam E09F[x>>1][y>>1] / Win16 Dx8[..+0x62D2] (=_PherMapBN)",
+    "Colour cross-check: DOS FillHolesBN writes HoleMapB holes into E09F; GetNestDir plane==0 (black) reads E09F"
+   ],
+   "reviewer": "worker names3, supervisor spot-checked 2026-09-30"
+  },
+  "root:3E1D:E89F": {
+   "win16": "_PherMapBT",
+   "confidence": "CONFIRMED",
+   "reviewed": "2026-09-30",
+   "evidence": [
+    "ColonySmellBT: DOS <8 ->0 else smell-(smell>>1) on E89F / Win16 same on Dx8+0x6AD2 (=_PherMapBT)",
+    "JamScentBT: DOS E89F / Win16 Dx8+0x6AD2",
+    "DecTSmell red==0: DOS E89F / Win16 Dx8+0x6AD2; GetSmellT !red: DOS E89F / Win16 PherMapBT[(x<<5)+y]"
+   ],
+   "reviewer": "worker names3, supervisor spot-checked 2026-09-30"
+  },
+  "root:3E1D:F09F": {
+   "win16": "_PherMapRN",
+   "confidence": "CONFIRMED",
+   "reviewed": "2026-09-30",
+   "evidence": [
+    "ColonySmellRN: DOS decrement nonzero F09F / Win16 decrement Dx8[0x72D2+..] (=_PherMapRN)",
+    "JamScentRN: DOS F09F / Win16 Dx8+0x72D2",
+    "Colour cross-check: DOS FillHolesRN writes HoleMapR holes into F09F; GetNestDir plane!=0 (red) reads F09F"
+   ],
+   "reviewer": "worker names3, supervisor spot-checked 2026-09-30"
+  },
+  "root:4DA7:0000": {
+   "win16": "_PherMapRT",
+   "confidence": "CONFIRMED",
+   "reviewed": "2026-09-30",
+   "evidence": [
+    "ColonySmellRT: DOS if(smell<=0)continue; <8 ->0 else -= smell>>1 on 4DA7:0000 / Win16 same on Dx8+0x7AD2 (=_PherMapRT)",
+    "JamScentRT: DOS 4DA7:0000 / Win16 Dx8+0x7AD2",
+    "DecTSmell red / GetSmellT red: DOS 4DA7:0000 / Win16 Dx8+0x7AD2 and PherMapBT+0x1000 (=_PherMapRT)"
+   ],
+   "reviewer": "worker names3, supervisor spot-checked 2026-09-30"
+  },
+  "root:3D57:0010": {
+   "win16": "_Dx9",
+   "confidence": "CONFIRMED",
+   "reviewed": "2026-09-30",
+   "evidence": [
+    "DoAntLions case 0: DOS nx=0010[dir]+x; LifeA[nx][ny=001A[dir]+y] / Win16 4610: es:[si+0x10] (_Dx9) + x, shl 6 = LifeA row; 4601 es:[si+0x1A] (_Dy9) + y",
+    "DropWall (S22:3BBD): DOS dir=GetDir(x,y,tx,ty); if(0010[dir]) x+=0010[dir] else y+=001A[dir] / Win16 7542..7560 same: es:[bx+0x10] tested, add si (x); else es:[bx+0x1A] add di (y)",
+    "ExpDig (S22:3BBD): DOS x+=0010[dir]; y+=001A[dir] / Win16 792E..7946 es:[bx+0x10]->si (x), es:[bx+0x1A]->di (y); si is GetDir arg1"
+   ],
+   "reviewer": "worker names3, supervisor spot-checked 2026-09-30"
+  },
+  "root:3D57:001A": {
+   "win16": "_Dy9",
+   "confidence": "CONFIRMED",
+   "reviewed": "2026-09-30",
+   "evidence": [
+    "DoAntLions: DOS ny=001A[dir]+y / Win16 es:[si+0x1A] (_Dy9) + y (column, unshifted)",
+    "DropWall: DOS else y+=001A[dir] / Win16 es:[bx+0x1A] add di (y)",
+    "ExpDig: DOS y+=001A[dir] / Win16 es:[bx+0x1A] add di (y)"
+   ],
+   "reviewer": "worker names3, supervisor spot-checked 2026-09-30"
+  },
+  "root:50F6:0232": {
+   "win16": "_TilesDugR",
+   "confidence": "CONFIRMED",
+   "reviewed": "2026-09-30",
+   "evidence": [
+    "GstrR: DOS if(0232<0350)return 3; if(0232<0350*2)return 2 / Win16 048E..04AA: cmp es:[7A56 (_TilesDugR)] vs RpopT -> 3; vs RpopT<<1 -> 2",
+    "FillDirtR (S22:3BBD): DOS if(0232>1){108E-=x;..;--0232} / Win16 FillDirtR: if(TilesDugR>1){TileTotXR-=x;..;--TilesDugR}",
+    "DOS DigTileR/DigTileThemR (m14EE) 0232++; 0200=108E/0232 - consistent with TilesDugR/TileTotXR (not counted)"
+   ],
+   "reviewer": "worker names3, supervisor spot-checked 2026-09-30"
+  },
+  "root:50F6:0330": {
+   "win16": "_BpopT",
+   "confidence": "CONFIRMED",
+   "reviewed": "2026-09-30",
+   "evidence": [
+    "GstrB: DOS HealthB<10 && (0330>>1)>0350 && 0350>0; 0224<0330 ->3; 0330>100 && 0330/3>0350 / Win16 recovered GstrB identical with BpopT/RpopT/TilesDugB",
+    "GstrR: DOS (0350>>1)>0330 && 0330>0 / Win16 03D3..0421: RpopT(ss:AC84)>>1 cmp BpopT(ss:AC82); BpopT>0",
+    "DOS S25 o25_39C7_15B4 0212=0330>>5 / Win16 DecEatB EatCountB=BpopT>>5"
+   ],
+   "reviewer": "worker names3, supervisor spot-checked 2026-09-30"
+  },
+  "root:50F6:0350": {
+   "win16": "_RpopT",
+   "confidence": "CONFIRMED",
+   "reviewed": "2026-09-30",
+   "evidence": [
+    "GstrB: DOS (0330>>1)>0350 && 0350>0 / Win16 recovered GstrB (BpopT>>1)>RpopT && RpopT>0",
+    "GstrR: DOS 0232<0350 ->3; (0350>>1)>0330 / Win16 ss:[AC84]=_RpopT vs TilesDugR and >>1 vs BpopT",
+    "DecEatR: DOS 0226=0350>>5 / Win16 DecEatR EatCountR=RpopT>>5"
+   ],
+   "reviewer": "worker names3, supervisor spot-checked 2026-09-30"
   }
  }
 }

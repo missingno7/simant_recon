@@ -231,13 +231,13 @@ void far win_DrawYardWindow(int flags)
 }
 
 extern int _fastcall f_22BF_09B0(int win);
-extern void far f_1E57_0174(int win);
+extern void far clip_SetWin(int win);
 extern void far f_1E57_0362(void);
 
 void far o13_384C_03F8(void)
 {
     if (f_22BF_09B0(0x1900) && fd_55B3_29A2) {
-        f_1E57_0174(0x1900);
+        clip_SetWin(0x1900);
         EraseYardCursor();
         o13_384C_01E5();
         win_DrawObjectNum(0x1914);
@@ -250,7 +250,7 @@ void far o13_384C_03F8(void)
 void far DrawYard(void)
 {
     if (f_22BF_09B0(0x1900)) {
-        f_1E57_0174(0x1900);
+        clip_SetWin(0x1900);
         win_DrawYardWindow(7);
         f_1E57_0362();
     }
@@ -266,13 +266,13 @@ extern int far fd_3D57_0C2C;
 extern int far fd_3D57_0C2E;
 extern int far fd_3D57_0C32;
 extern Handle far fd_50F6_10DA;
-extern void far f_2662_090D(int x, int y, int pic, Handle h, int id, int pri);
-extern int far f_2662_0348(Handle h, int x, int y, int pic, int pri);
+extern void far hanim_SetObjectPos(int x, int y, int pic, Handle h, int id, int pri);
+extern int far hanim_AddAnimObject(Handle h, int x, int y, int pic, int pri);
 extern int far fd_50F6_047E;
 extern long far f_00F8_02BE(void);
 extern long far fd_50F6_109C;
 extern int far fd_50F6_10B0;
-extern void far f_2662_059C(Handle h, int id);
+extern void far hanim_RemoveAnimObject(Handle h, int id);
 extern void far f_171C_1C0A(long h);
 extern void far f_24AB_02AD(int font);
 extern long far f_1629_000C(char far *msg, int flags);
@@ -303,13 +303,13 @@ void far DrawSimKid(void)
     x += fd_50F6_10D2.left;
     y += fd_50F6_10D2.top;
     if (g_2A2A != -1)
-        f_2662_090D(x, y, fd_3D57_0C32 + 0x1f40, fd_50F6_10DA, g_2A2A, -1);
+        hanim_SetObjectPos(x, y, fd_3D57_0C32 + 0x1f40, fd_50F6_10DA, g_2A2A, -1);
     else
-        g_2A2A = f_2662_0348(fd_50F6_10DA, x, y, fd_3D57_0C32 + 0x1f40, -1);
+        g_2A2A = hanim_AddAnimObject(fd_50F6_10DA, x, y, fd_3D57_0C32 + 0x1f40, -1);
     if (fd_50F6_047E == 0 && f_00F8_02BE() > fd_50F6_109C)
         fd_50F6_10B0 = 0;
     if (g_2A3E != -1) {
-        f_2662_059C(fd_50F6_10DA, g_2A3E);
+        hanim_RemoveAnimObject(fd_50F6_10DA, g_2A3E);
         g_2A3E = -1;
     }
     if (g_2A36) {
@@ -328,9 +328,9 @@ void far DrawSimKid(void)
             x += 4;
         y += fd_50F6_10D2.top - sz.v;
         if (g_2A3E != -1)
-            f_2662_090D(x, y, 30000, fd_50F6_10DA, g_2A3E, 999);
+            hanim_SetObjectPos(x, y, 30000, fd_50F6_10DA, g_2A3E, 999);
         else
-            g_2A3E = f_2662_0348(fd_50F6_10DA, x, y, 30000, 999);
+            g_2A3E = hanim_AddAnimObject(fd_50F6_10DA, x, y, 30000, 999);
     }
 }
 
@@ -360,9 +360,9 @@ void far DrawDog(void)
         x += fd_50F6_10D2.left;
         y += fd_50F6_10D2.top;
         if (g_2A30 != -1)
-            f_2662_090D(x, y, fd_50F6_04E4 + 0x2134, fd_50F6_10DA, g_2A30, -1);
+            hanim_SetObjectPos(x, y, fd_50F6_04E4 + 0x2134, fd_50F6_10DA, g_2A30, -1);
         else
-            g_2A30 = f_2662_0348(fd_50F6_10DA, x, y, fd_50F6_04E4 + 0x2134, -1);
+            g_2A30 = hanim_AddAnimObject(fd_50F6_10DA, x, y, fd_50F6_04E4 + 0x2134, -1);
     }
 }
 
@@ -387,9 +387,9 @@ void far DrawSimBird(void)
     x += fd_50F6_10D2.left;
     y += fd_50F6_10D2.top;
     if (g_2A2E != -1)
-        f_2662_090D(x, y, fd_50F6_108C + 0x4e2, fd_50F6_10DA, g_2A2E, -1);
+        hanim_SetObjectPos(x, y, fd_50F6_108C + 0x4e2, fd_50F6_10DA, g_2A2E, -1);
     else
-        g_2A2E = f_2662_0348(fd_50F6_10DA, x, y, fd_50F6_108C + 0x4e2, -1);
+        g_2A2E = hanim_AddAnimObject(fd_50F6_10DA, x, y, fd_50F6_108C + 0x4e2, -1);
 }
 
 extern int far fd_50F6_02BE;
@@ -418,9 +418,9 @@ void far DrawSimCat(void)
     x += fd_50F6_10D2.left;
     y += fd_50F6_10D2.top;
     if (g_2A2C != -1)
-        f_2662_090D(x, y, fd_50F6_0244 + 0x514, fd_50F6_10DA, g_2A2C, -1);
+        hanim_SetObjectPos(x, y, fd_50F6_0244 + 0x514, fd_50F6_10DA, g_2A2C, -1);
     else
-        g_2A2C = f_2662_0348(fd_50F6_10DA, x, y, fd_50F6_0244 + 0x514, -1);
+        g_2A2C = hanim_AddAnimObject(fd_50F6_10DA, x, y, fd_50F6_0244 + 0x514, -1);
 }
 
 void far DrawForSale(void)
@@ -436,9 +436,9 @@ void far DrawForSale(void)
     x += fd_50F6_10D2.left;
     y += fd_50F6_10D2.top;
     if (g_2A34 != -1)
-        f_2662_090D(x, y, 0x4ec, fd_50F6_10DA, g_2A34, -1);
+        hanim_SetObjectPos(x, y, 0x4ec, fd_50F6_10DA, g_2A34, -1);
     else
-        g_2A34 = f_2662_0348(fd_50F6_10DA, x, y, 0x4ec, -1);
+        g_2A34 = hanim_AddAnimObject(fd_50F6_10DA, x, y, 0x4ec, -1);
 }
 
 extern int far fd_3D57_0C28;
@@ -465,7 +465,7 @@ void far DrawMower(void)
             break;
         default:
             if (g_2A32 != -1) {
-                f_2662_059C(fd_50F6_10DA, g_2A32);
+                hanim_RemoveAnimObject(fd_50F6_10DA, g_2A32);
                 g_2A32 = -1;
             }
             return;
@@ -488,9 +488,9 @@ void far DrawMower(void)
     x += fd_50F6_10D2.left;
     y += fd_50F6_10D2.top;
     if (g_2A32 != -1)
-        f_2662_090D(x, y, frame + 0x2260, fd_50F6_10DA, g_2A32, -1);
+        hanim_SetObjectPos(x, y, frame + 0x2260, fd_50F6_10DA, g_2A32, -1);
     else
-        g_2A32 = f_2662_0348(fd_50F6_10DA, x, y, frame + 0x2260, -1);
+        g_2A32 = hanim_AddAnimObject(fd_50F6_10DA, x, y, frame + 0x2260, -1);
 }
 
 /* SCAFFOLD END */
@@ -503,7 +503,7 @@ extern int far fd_50F6_390A[17];
 extern int far fd_50F6_0254;
 extern int far fd_50F6_10A0;
 extern int far fd_50F6_0352;
-extern void far f_2662_0CA2(Handle h);
+extern void far hanim_RenderAnimSet(Handle h);
 extern int far fd_3D57_0C20;
 void far DrawAnimYardMessage(void);
 void far DrawRain(void);
@@ -534,7 +534,7 @@ void far Draw_SimYard(int mode, int force)
         if (fd_50F6_0254)
             DrawSimCat();
         else if (g_2A2C != -1) {
-            f_2662_059C(fd_50F6_10DA, g_2A2C);
+            hanim_RemoveAnimObject(fd_50F6_10DA, g_2A2C);
             g_2A2C = -1;
         }
         DrawDog();
@@ -542,11 +542,11 @@ void far Draw_SimYard(int mode, int force)
             DrawSimKid();
         else {
             if (g_2A2A != -1) {
-                f_2662_059C(fd_50F6_10DA, g_2A2A);
+                hanim_RemoveAnimObject(fd_50F6_10DA, g_2A2A);
                 g_2A2A = -1;
             }
             if (g_2A3E != -1) {
-                f_2662_059C(fd_50F6_10DA, g_2A3E);
+                hanim_RemoveAnimObject(fd_50F6_10DA, g_2A3E);
                 g_2A3E = -1;
                 f_171C_1C0A(g_2A36);
                 g_2A36 = 0;
@@ -556,7 +556,7 @@ void far Draw_SimYard(int mode, int force)
         if (fd_50F6_10A0)
             DrawSimBird();
         else if (g_2A2E != -1) {
-            f_2662_059C(fd_50F6_10DA, g_2A2E);
+            hanim_RemoveAnimObject(fd_50F6_10DA, g_2A2E);
             g_2A2E = -1;
         }
         if (fd_3D57_0C44)
@@ -566,12 +566,12 @@ void far Draw_SimYard(int mode, int force)
         else
             for (i = 0; i <= 14; i++)
                 if (fd_50F6_38CA[i] != -1) {
-                    f_2662_059C(fd_50F6_10DA, fd_50F6_38CA[i]);
+                    hanim_RemoveAnimObject(fd_50F6_10DA, fd_50F6_38CA[i]);
                     fd_50F6_38CA[i] = -1;
                 }
         DrawSwarm();
         DrawAnimYardMessage();
-        f_2662_0CA2(fd_50F6_10DA);
+        hanim_RenderAnimSet(fd_50F6_10DA);
     } else {
         fd_3D57_0C20 = 0;
         if (mode == 2)
@@ -588,7 +588,7 @@ extern int far fd_50F6_392C;
 void far DrawAnimYardMessage(void)
 {
     if (g_2A40 != -1) {
-        f_2662_059C(fd_50F6_10DA, g_2A40);
+        hanim_RemoveAnimObject(fd_50F6_10DA, g_2A40);
         g_2A40 = -1;
     }
     if (g_2A3A) {
@@ -599,7 +599,7 @@ void far DrawAnimYardMessage(void)
         f_24AB_02AD(2);
         g_2A3A = f_24AB_0002(fd_55B3_299A);
         f_24AB_02AD(0);
-        g_2A40 = f_2662_0348(fd_50F6_10DA,
+        g_2A40 = hanim_AddAnimObject(fd_50F6_10DA,
                              (fd_50F6_10D2.right - fd_50F6_392C + fd_50F6_10D2.left) / 2,
                              fd_50F6_10D2.top + 4, 0x7531, 999);
     }
@@ -622,9 +622,9 @@ void far DrawRain(void)
         x += fd_50F6_10D2.left;
         y += fd_50F6_10D2.top;
         if (fd_50F6_38CA[i] != -1)
-            f_2662_090D(x, y, 0x1b5d, fd_50F6_10DA, fd_50F6_38CA[i], 0x8000);
+            hanim_SetObjectPos(x, y, 0x1b5d, fd_50F6_10DA, fd_50F6_38CA[i], 0x8000);
         else
-            fd_50F6_38CA[i] = f_2662_0348(fd_50F6_10DA, x, y, 0x1b5d, 1000);
+            fd_50F6_38CA[i] = hanim_AddAnimObject(fd_50F6_10DA, x, y, 0x1b5d, 1000);
     }
 }
 
@@ -666,13 +666,13 @@ void far DrawSwarm(void)
             x += fd_50F6_10D2.left;
             y += fd_50F6_10D2.top;
             if (fd_50F6_38E8[i] != -1)
-                f_2662_090D(x, y, 0x1b5e, fd_50F6_10DA, fd_50F6_38E8[i], -1);
+                hanim_SetObjectPos(x, y, 0x1b5e, fd_50F6_10DA, fd_50F6_38E8[i], -1);
             else
-                fd_50F6_38E8[i] = f_2662_0348(fd_50F6_10DA, x, y, 0x1b5e, -1);
+                fd_50F6_38E8[i] = hanim_AddAnimObject(fd_50F6_10DA, x, y, 0x1b5e, -1);
         }
         for (; i < 16; i++)
             if (fd_50F6_38E8[i] != -1) {
-                f_2662_059C(fd_50F6_10DA, fd_50F6_38E8[i]);
+                hanim_RemoveAnimObject(fd_50F6_10DA, fd_50F6_38E8[i]);
                 fd_50F6_38E8[i] = -1;
             }
         for (i = 0; i < fd_50F6_073A; i++) {
@@ -691,13 +691,13 @@ void far DrawSwarm(void)
             x += fd_50F6_10D2.left;
             y += fd_50F6_10D2.top;
             if (fd_50F6_390A[i] != -1)
-                f_2662_090D(x, y, 0x1b5f, fd_50F6_10DA, fd_50F6_390A[i], -1);
+                hanim_SetObjectPos(x, y, 0x1b5f, fd_50F6_10DA, fd_50F6_390A[i], -1);
             else
-                fd_50F6_390A[i] = f_2662_0348(fd_50F6_10DA, x, y, 0x1b5f, -1);
+                fd_50F6_390A[i] = hanim_AddAnimObject(fd_50F6_10DA, x, y, 0x1b5f, -1);
         }
         for (; i < 16; i++)
             if (fd_50F6_390A[i] != -1) {
-                f_2662_059C(fd_50F6_10DA, fd_50F6_390A[i]);
+                hanim_RemoveAnimObject(fd_50F6_10DA, fd_50F6_390A[i]);
                 fd_50F6_390A[i] = -1;
             }
     }
@@ -710,9 +710,9 @@ int far TooFar(int x, int y)
     return 0;
 }
 
-extern void far f_1E57_0DAA(void);
+extern void far clip_Push(void);
 extern void far f_1FAA_0006(struct Pt far *pts, int a, int b);
-extern void far f_1E57_0EB9(void);
+extern void far clip_Pop(void);
 
 /* SCAFFOLD BEGIN: InvertPatch draft: one byte short, point arithmetic order */
 void far InvertPatch(int x, int y)
@@ -721,8 +721,8 @@ void far InvertPatch(int x, int y)
     struct Pt org;
     int i, h, v;
 
-    f_1E57_0DAA();
-    f_1E57_0174(0x1900);
+    clip_Push();
+    clip_SetWin(0x1900);
     org.h = x * 28 - y * 10 + fd_50F6_10D2.left;
     org.v = y * 10 + fd_50F6_10D2.top;
     h = x * 28 - y * 10;
@@ -747,7 +747,7 @@ void far InvertPatch(int x, int y)
         }
     }
     f_1FAA_0006(pts, -1, -1);
-    f_1E57_0EB9();
+    clip_Pop();
 }
 
 /* SCAFFOLD END */

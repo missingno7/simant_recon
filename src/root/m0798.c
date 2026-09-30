@@ -44,10 +44,10 @@ int g_1B62 = 1;
 int g_1B64 = 1;
 
 extern void _fastcall win_GetObjRect(int obj, struct Rect far *rect);
-extern unsigned far fd_50F6_3814;
-extern unsigned far fd_50F6_3812;
-extern unsigned far fd_50F6_3810;
-extern unsigned far fd_50F6_380E;
+extern unsigned far triWidth;
+extern unsigned far triWidthR;
+extern unsigned far triWidthL;
+extern unsigned far triHeight;
 extern long far fd_50F6_382E;
 
 void far InitTriVars(int obj, struct TriPoints far *tri)
@@ -56,12 +56,12 @@ void far InitTriVars(int obj, struct TriPoints far *tri)
     unsigned half;
 
     win_GetObjRect(obj, &rect);
-    fd_50F6_3814 = rect.right - rect.left;
-    half = fd_50F6_3814 >> 1;
-    fd_50F6_3812 = half;
-    fd_50F6_3810 = half;
-    fd_50F6_380E = rect.bottom - rect.top;
-    fd_50F6_382E = ((long)half << 8) / (long)fd_50F6_380E;
+    triWidth = rect.right - rect.left;
+    half = triWidth >> 1;
+    triWidthR = half;
+    triWidthL = half;
+    triHeight = rect.bottom - rect.top;
+    fd_50F6_382E = ((long)half << 8) / (long)triHeight;
     tri->apexX = half + rect.left;
     tri->apexY = rect.top;
     tri->leftY = tri->rightY = rect.bottom;
@@ -71,14 +71,14 @@ void far InitTriVars(int obj, struct TriPoints far *tri)
 
 extern struct TriPoints far fd_50F6_3822;
 void far SetTriLatPoint(struct TriLevel far *level, struct TriPoints far *tri, struct Pt far *out);
-extern struct TriLevel far fd_50F6_0482;
+extern struct TriLevel far casteLevels;
 extern struct Pt far fd_50F6_022E;
 void far win_CasteControlClosed(void);
 
-void far UpdateCasteWindow(void)
+void far win_CasteControlChanged(void)
 {
     InitTriVars(0x130d, &fd_50F6_3822);
-    SetTriLatPoint(&fd_50F6_0482, &fd_50F6_3822, &fd_50F6_022E);
+    SetTriLatPoint(&casteLevels, &fd_50F6_3822, &fd_50F6_022E);
     win_CasteControlClosed();
 }
 
@@ -87,7 +87,7 @@ extern struct TriLevel far fd_50F6_049E;
 extern struct Pt far fd_50F6_0358;
 void far win_ModeControlClosed(void);
 
-void far UpdateModeWindow(void)
+void far win_ModeControlChanged(void)
 {
     InitTriVars(0x120d, &fd_50F6_3816);
     SetTriLatPoint(&fd_50F6_049E, &fd_50F6_3816, &fd_50F6_0358);
@@ -98,19 +98,19 @@ extern void far win_Open(int win);
 
 void far OpenCasteWindow(void)
 {
-    UpdateCasteWindow();
+    win_CasteControlChanged();
     win_Open(0x1300);
 }
 
 void far OpenModeWindow(void)
 {
-    UpdateModeWindow();
+    win_ModeControlChanged();
     win_Open(0x1200);
 }
 
-extern void far f_1E57_0174(int win);
+extern void far clip_SetWin(int win);
 extern void far DoWinHelp(int context);
-extern int far fd_3D57_07E8;
+extern int far CasteAuto;
 extern void _fastcall win_MakeGroupInvisible(int win, int group);
 extern void _fastcall win_MakeObjSelected(int obj);
 extern void far * far _fmemcpy(void far *dst, void far *src, unsigned n);
@@ -132,14 +132,14 @@ void far ProcCasteEvent(struct CtlMsg far *msg)
     struct Rect rect;
     struct Pt last;
 
-    f_1E57_0174(0x1300);
+    clip_SetWin(0x1300);
     switch (msg->code - 0x1303) {
     case 0:
         DoWinHelp(0x130e);
         break;
     case 1:
-        if (fd_3D57_07E8 == 0) {
-            fd_3D57_07E8 = 1;
+        if (CasteAuto == 0) {
+            CasteAuto = 1;
             win_MakeGroupInvisible(0x1300, 4);
         }
         break;
@@ -147,14 +147,14 @@ void far ProcCasteEvent(struct CtlMsg far *msg)
     case 4:
     case 5:
         win_MakeObjSelected(0x1305);
-        _fmemcpy(&fd_3D57_07F2[g_1B4E], &fd_50F6_0482, 6);
+        _fmemcpy(&fd_3D57_07F2[g_1B4E], &casteLevels, 6);
         g_1B4E = msg->code - 0x1306;
-        _fmemcpy(&fd_50F6_0482, &fd_3D57_07F2[g_1B4E], 6);
-        f_1E57_0174(0x1300);
+        _fmemcpy(&casteLevels, &fd_3D57_07F2[g_1B4E], 6);
+        clip_SetWin(0x1300);
         win_DrawCasteWindow(3);
     case 2:
-        if (fd_3D57_07E8) {
-            fd_3D57_07E8 = 0;
+        if (CasteAuto) {
+            CasteAuto = 0;
             win_MakeGroupVisible(0x1300, 4);
         }
         break;
@@ -162,23 +162,23 @@ void far ProcCasteEvent(struct CtlMsg far *msg)
         win_GetObjRect(0x130d, &rect);
         if (!IsPointInIsoTri(&msg->pt, &rect))
             break;
-        if (fd_3D57_07E8) {
-            fd_3D57_07E8 = 0;
+        if (CasteAuto) {
+            CasteAuto = 0;
             win_MakeObjSelected(0x1305);
             win_MakeGroupVisible(0x1300, 4);
         }
         last.x = -1;
-        f_1E57_0174(0x1300);
+        clip_SetWin(0x1300);
         do {
             if (_fmemcmp(&last, &msg->pt, 4)) {
                 last = msg->pt;
                 BoundPointToTri(&msg->pt, &rect);
-                GetTriLatDist(&fd_50F6_0482, &fd_50F6_3822, &msg->pt);
+                GetTriLatDist(&casteLevels, &fd_50F6_3822, &msg->pt);
                 win_DrawCasteWindow(3);
             }
             f_1FD2_04D0(&msg->pt);
         } while (f_1FD2_0542());
-        _fmemcpy(&fd_3D57_07F2[g_1B4E], &fd_50F6_0482, 6);
+        _fmemcpy(&fd_3D57_07F2[g_1B4E], &casteLevels, 6);
         cvtLevels2IdealCaste(IdealCaste);
         break;
     case 12:
@@ -191,7 +191,7 @@ void far ProcCasteEvent(struct CtlMsg far *msg)
     f_1E57_0362();
 }
 
-extern int far fd_50F6_0378;
+extern int far ModeAuto;
 extern struct TriLevel far fd_3D57_0810[];
 void far win_DrawModeWindow(int flags);
 
@@ -200,14 +200,14 @@ void far ProcModeEvent(struct CtlMsg far *msg)
     struct Rect rect;
     struct Pt last;
 
-    f_1E57_0174(0x1200);
+    clip_SetWin(0x1200);
     switch (msg->code - 0x1203) {
     case 0:
         DoWinHelp(0x120e);
         break;
     case 1:
-        if (fd_50F6_0378 == 0) {
-            fd_50F6_0378 = 1;
+        if (ModeAuto == 0) {
+            ModeAuto = 1;
             win_MakeGroupInvisible(0x1200, 4);
         }
         break;
@@ -218,11 +218,11 @@ void far ProcModeEvent(struct CtlMsg far *msg)
         _fmemcpy(&fd_3D57_0810[g_1B50], &fd_50F6_049E, 6);
         g_1B50 = msg->code - 0x1206;
         _fmemcpy(&fd_50F6_049E, &fd_3D57_0810[g_1B50], 6);
-        f_1E57_0174(0x1200);
+        clip_SetWin(0x1200);
         win_DrawModeWindow(3);
     case 2:
-        if (fd_50F6_0378) {
-            fd_50F6_0378 = 0;
+        if (ModeAuto) {
+            ModeAuto = 0;
             win_MakeGroupVisible(0x1200, 4);
         }
         break;
@@ -230,13 +230,13 @@ void far ProcModeEvent(struct CtlMsg far *msg)
         win_GetObjRect(0x120d, &rect);
         if (!IsPointInIsoTri(&msg->pt, &rect))
             break;
-        if (fd_50F6_0378) {
-            fd_50F6_0378 = 0;
+        if (ModeAuto) {
+            ModeAuto = 0;
             win_MakeObjSelected(0x1205);
             win_MakeGroupVisible(0x1200, 4);
         }
         last.x = -1;
-        f_1E57_0174(0x1200);
+        clip_SetWin(0x1200);
         do {
             if (_fmemcmp(&last, &msg->pt, 4)) {
                 last = msg->pt;
@@ -321,17 +321,17 @@ void far BoundPointToTri(struct Pt far *pt, struct Rect far *r)
 extern Handle far fd_50F6_37F6;
 void far DrawControlLevels(int win, int unused, int percent);
 extern Handle far hanim_MakeAnimSet(void);
-extern struct Pt far fd_50F6_3832;
-extern int far f_2662_0348(Handle h, int x, int y, int pic, int pri);
+extern struct Pt far knobSize;
+extern int far hanim_AddAnimObject(Handle h, int x, int y, int pic, int pri);
 extern int far fd_50F6_37FC;
-extern void far f_2662_090D(int x, int y, int pic, Handle h, int id, int pri);
-extern void far f_2662_0CA2(Handle h);
+extern void far hanim_SetObjectPos(int x, int y, int pic, Handle h, int id, int pri);
+extern void far hanim_RenderAnimSet(Handle h);
 
 void far win_DrawModeWindow(int flags)
 {
     if (flags & 1) {
         if (!fd_50F6_37F6)
-            f_1E57_0174(0x1200);
+            clip_SetWin(0x1200);
     }
     if (!(flags & 2))
         return;
@@ -339,20 +339,20 @@ void far win_DrawModeWindow(int flags)
     SetTriLatPoint(&fd_50F6_049E, &fd_50F6_3816, &fd_50F6_0358);
     if (!fd_50F6_37F6) {
         fd_50F6_37F6 = hanim_MakeAnimSet();
-        fd_50F6_37FC = f_2662_0348(fd_50F6_37F6, fd_50F6_0358.x - fd_50F6_3832.x / 2,
-                                   fd_50F6_0358.y - fd_50F6_3832.y / 2, 0x578, 0);
+        fd_50F6_37FC = hanim_AddAnimObject(fd_50F6_37F6, fd_50F6_0358.x - knobSize.x / 2,
+                                   fd_50F6_0358.y - knobSize.y / 2, 0x578, 0);
     } else
-        f_2662_090D(fd_50F6_0358.x - fd_50F6_3832.x / 2, fd_50F6_0358.y - fd_50F6_3832.y / 2,
+        hanim_SetObjectPos(fd_50F6_0358.x - knobSize.x / 2, fd_50F6_0358.y - knobSize.y / 2,
                     0x8000, fd_50F6_37F6, fd_50F6_37FC, 0x8000);
-    f_2662_0CA2(fd_50F6_37F6);
+    hanim_RenderAnimSet(fd_50F6_37F6);
 }
 
-extern void far f_2662_0C06(Handle h);
+extern void far hanim_RemoveAnimSet(Handle h);
 
 void far win_ModeControlClosed(void)
 {
     if (fd_50F6_37F6) {
-        f_2662_0C06(fd_50F6_37F6);
+        hanim_RemoveAnimSet(fd_50F6_37F6);
         fd_50F6_37F6 = 0;
     }
 }
@@ -364,26 +364,26 @@ void far win_DrawCasteWindow(int flags)
 {
     if (flags & 1) {
         if (!fd_50F6_37F2)
-            f_1E57_0174(0x1300);
+            clip_SetWin(0x1300);
     }
     if (!(flags & 2))
         return;
     DrawControlLevels(0x1300, 0, g_1B64);
-    SetTriLatPoint(&fd_50F6_0482, &fd_50F6_3822, &fd_50F6_022E);
+    SetTriLatPoint(&casteLevels, &fd_50F6_3822, &fd_50F6_022E);
     if (!fd_50F6_37F2) {
         fd_50F6_37F2 = hanim_MakeAnimSet();
-        fd_50F6_37FA = f_2662_0348(fd_50F6_37F2, fd_50F6_022E.x - fd_50F6_3832.x / 2,
-                                   fd_50F6_022E.y - fd_50F6_3832.y / 2, 0x578, 0);
+        fd_50F6_37FA = hanim_AddAnimObject(fd_50F6_37F2, fd_50F6_022E.x - knobSize.x / 2,
+                                   fd_50F6_022E.y - knobSize.y / 2, 0x578, 0);
     } else
-        f_2662_090D(fd_50F6_022E.x - fd_50F6_3832.x / 2, fd_50F6_022E.y - fd_50F6_3832.y / 2,
+        hanim_SetObjectPos(fd_50F6_022E.x - knobSize.x / 2, fd_50F6_022E.y - knobSize.y / 2,
                     0x8000, fd_50F6_37F2, fd_50F6_37FA, 0x8000);
-    f_2662_0CA2(fd_50F6_37F2);
+    hanim_RenderAnimSet(fd_50F6_37F2);
 }
 
 void far win_CasteControlClosed(void)
 {
     if (fd_50F6_37F2) {
-        f_2662_0C06(fd_50F6_37F2);
+        hanim_RemoveAnimSet(fd_50F6_37F2);
         fd_50F6_37F2 = 0;
     }
 }
@@ -425,7 +425,7 @@ void far DrawControlLevels(int win, int unused, int percent)
         colors = g_1B4A;
         total = (long)fd_50F6_0B12[2] + fd_50F6_0B12[1] + fd_50F6_0B12[0];
     } else {
-        levels = (unsigned far *)&fd_50F6_0482;
+        levels = (unsigned far *)&casteLevels;
         colors = g_1B46;
         total = fd_50F6_0AEC;
     }
@@ -459,10 +459,10 @@ void far DrawControlLevels(int win, int unused, int percent)
 
 void far cvtLevels2IdealCaste(int far *ideal)
 {
-    ideal[0] = (100UL * (&fd_50F6_0482.frac)[1] + 0x3fff) / 0xffff;
-    ideal[1] = (100UL * (&fd_50F6_0482.frac)[2] + 0x3fff) / 0xffff;
-    ideal[2] = (50UL * (&fd_50F6_0482.frac)[0] + 0x3fff) / 0xffff;
-    ideal[3] = (50UL * (&fd_50F6_0482.frac)[0] + 0x3fff) / 0xffff;
+    ideal[0] = (100UL * (&casteLevels.frac)[1] + 0x3fff) / 0xffff;
+    ideal[1] = (100UL * (&casteLevels.frac)[2] + 0x3fff) / 0xffff;
+    ideal[2] = (50UL * (&casteLevels.frac)[0] + 0x3fff) / 0xffff;
+    ideal[3] = (50UL * (&casteLevels.frac)[0] + 0x3fff) / 0xffff;
 }
 
 void far GetTriLatDist(struct TriLevel far *level, struct TriPoints far *tri, struct Pt far *pt)
@@ -474,12 +474,12 @@ void far GetTriLatDist(struct TriLevel far *level, struct TriPoints far *tri, st
 
     dx = pt->x - tri->leftX;
     dy = pt->y - tri->apexY;
-    if ((unsigned)dy > fd_50F6_380E - 2)
+    if ((unsigned)dy > triHeight - 2)
         level->frac = 0;
     else
-        level->frac = (long)(fd_50F6_380E - dy - 2) * 0xffffL / (long)(fd_50F6_380E - 2);
-    w = (unsigned long)level->frac * fd_50F6_3810 / 0xffffUL;
-    row = fd_50F6_3814 - w * 2;
+        level->frac = (long)(triHeight - dy - 2) * 0xffffL / (long)(triHeight - 2);
+    w = (unsigned long)level->frac * triWidthL / 0xffffUL;
+    row = triWidth - w * 2;
     if (row <= 2) {
         level->weight = level->mid = 0;
         return;
@@ -498,9 +498,9 @@ void far SetTriLatPoint(struct TriLevel far *level, struct TriPoints far *tri, s
     unsigned w;
     int row;
 
-    out->y = (fd_50F6_380E - 2) * (0xffffUL - level->frac) / 0xffffUL + tri->apexY;
-    w = (unsigned long)fd_50F6_3810 * level->frac / 0xffffUL;
-    row = fd_50F6_3814 - w * 2;
+    out->y = (triHeight - 2) * (0xffffUL - level->frac) / 0xffffUL + tri->apexY;
+    w = (unsigned long)triWidthL * level->frac / 0xffffUL;
+    row = triWidth - w * 2;
     if (level->frac == 0xffff || row < 3)
         out->x = tri->apexX + 2;
     else
@@ -520,10 +520,10 @@ void far initControls(void)
     struct Rect rect;
     int i;
 
-    f_208F_0419(&fd_50F6_3832, 0x578);
+    f_208F_0419(&knobSize, 0x578);
     win_GetObjRect(0x120d, &rect);
-    fd_50F6_0378 = 1;
-    fd_3D57_07E8 = 1;
+    ModeAuto = 1;
+    CasteAuto = 1;
     fd_50F6_0468 = 1;
     fd_3D57_07EA = 1;
     fd_50F6_0370 = -1;
@@ -531,10 +531,10 @@ void far initControls(void)
     for (i = 0; i < 3; i++) {
         (&fd_50F6_049E.frac)[i] = fd_3D57_080A[i];
         (&fd_3D57_0810[0].frac)[i] = fd_3D57_080A[i];
-        (&fd_50F6_0482.frac)[i] = fd_3D57_07EC[i];
+        (&casteLevels.frac)[i] = fd_3D57_07EC[i];
         (&fd_3D57_07F2[0].frac)[i] = fd_3D57_07EC[i];
     }
-    UpdateModeWindow();
-    UpdateCasteWindow();
+    win_ModeControlChanged();
+    win_CasteControlChanged();
     cvtLevels2IdealCaste(IdealCaste);
 }

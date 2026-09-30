@@ -49,11 +49,11 @@ extern int far fd_50F6_032E;
 extern void far SetMyLife(int plane, int x, int y, int type, int dir, int code);
 extern void far f_00DF_00B1(int id, int arg);
 extern int _fastcall win_IsWinOpen(int win);
-extern void far f_1E57_0DAA(void);
-extern void far f_1E57_0174(int win);
+extern void far clip_Push(void);
+extern void far clip_SetWin(int win);
 extern void _fastcall win_SetColorFromObjNum(int obj);
 extern void _fastcall win_DrawBitMapAtObjNum(int obj, int id);
-extern void far f_1E57_0EB9(void);
+extern void far clip_Pop(void);
 extern struct Rect far fd_50F6_10D2;
 extern int far f_1FD2_04E5(struct Pt far *pt, struct Rect far *r);
 extern void far WinPrintf(char far *fmt, ...);
@@ -71,7 +71,7 @@ extern void far f_0250_0E9D(void);
 extern void far DrawMapCursor(void);
 extern void far f_1FD2_04D0(struct Pt far *pt);
 extern int far f_00F8_02AC(void);
-extern void far f_0250_0E70(void);
+extern void far OpenEditWindow(void);
 extern char near g_5A97;
 extern void far o00_3126_06A3(char far *src, char far *dst);
 extern void far o00_3126_04D8(char far *src, char far *dst);
@@ -89,11 +89,11 @@ extern void far o12_384C_080E(void);
 extern int near g_8BD2;
 extern int far fd_3D57_07C8;
 extern void far o12_384C_0706(unsigned char far *map);
-extern unsigned char far fd_3E1D_E09F[];
-extern unsigned char far fd_3E1D_E89F[];
-extern unsigned char far fd_3E1D_F09F[];
-extern unsigned char far fd_4DA7_0000[];
-extern unsigned char far fd_3E1D_D09F[];
+extern unsigned char far PherMapBN[];
+extern unsigned char far PherMapBT[];
+extern unsigned char far PherMapRN[];
+extern unsigned char far PherMapRT[];
+extern unsigned char far PherMapA[];
 extern int far f_1B4E_000D(int color);
 extern void (far * near g_9134)(int left, int top, int right, int bottom, int color);
 extern char far * far f_171C_1B84(char far *handle);
@@ -103,8 +103,8 @@ extern void far f_171C_1BBA(char far *handle);
 extern void far f_171C_1C0A(char far *handle);
 extern void far win_Open();
 extern void _fastcall win_Close(int win);
-extern void far f_00F8_050A(void);
-extern int _fastcall win_GetEvent(struct Event far *ev);
+extern void far OpenMapYard(void);
+extern int _fastcall win_GetEvent(struct Event far *);
 extern void far win_FlushEvents(void);
 extern struct Rect far fd_50F6_384A;
 extern int far fd_50F6_10DE;
@@ -112,7 +112,7 @@ extern int far fd_50F6_10E0;
 extern void far f_1CE2_0410(struct Rect far *r, int width);
 
 void far MapToolsMenu(void);
-void far o04_35F5_025A(struct Event far *);
+void far MapAreaEvent(struct Event far *);
 void far Mini_MakeTable(char far *, char far *, int);
 void far Mini_DrawMapI(void);
 void far OpenMiniMapWin(void);
@@ -158,25 +158,25 @@ void far MapToolsMenu(void)
         }
         SetExpTool(item);
         if (win_IsWinOpen(0x100)) {
-            f_1E57_0DAA();
-            f_1E57_0174(0x100);
+            clip_Push();
+            clip_SetWin(0x100);
             win_SetColorFromObjNum(0x117);
             win_DrawBitMapAtObjNum(0x117, fd_50F6_104C + 0x13ec);
-            f_1E57_0EB9();
+            clip_Pop();
         }
         if (win_IsWinOpen(0)) {
-            f_1E57_0DAA();
-            f_1E57_0174(0);
+            clip_Push();
+            clip_SetWin(0);
             win_SetColorFromObjNum(7);
             win_DrawBitMapAtObjNum(7, fd_50F6_104C + 0x13ec);
-            f_1E57_0EB9();
+            clip_Pop();
         }
         break;
     }
 }
 
 
-void far o04_35F5_025A(struct Event far *ev)
+void far MapAreaEvent(struct Event far *ev)
 {
     struct Pt last;
     int x;
@@ -212,7 +212,7 @@ void far o04_35F5_025A(struct Event far *ev)
             }
         }
         if (ev->modifiers & 0x6000) {
-            f_0250_0E70();
+            OpenEditWindow();
             return;
         }
         f_1FD2_04D0((struct Pt far *)&ev->h);
@@ -246,13 +246,13 @@ void far Mini_MakeTable(char far *src, char far *dst, int y)
 }
 
 
-/* SCAFFOLD BEGIN: Mini_DrawMapI best draft: code identical except the frame (0x28 here, 0x2A in the original: the original has one more unused register-variable home) and hence every BP offset */
 void far Mini_DrawMapI(void)
 {
     char far *table;
     char far *line;
     int i;
     int y;
+    int n;
 
     win_GetObjRect(0x1401, &fd_50F6_3842);
     fd_50F6_3854 = 0x80;
@@ -270,19 +270,19 @@ void far Mini_DrawMapI(void)
     }
     switch (fd_3D57_07C8) {
     case 4:
-        o12_384C_0706(fd_3E1D_E09F);
+        o12_384C_0706(PherMapBN);
         break;
     case 5:
-        o12_384C_0706(fd_3E1D_E89F);
+        o12_384C_0706(PherMapBT);
         break;
     case 6:
-        o12_384C_0706(fd_3E1D_F09F);
+        o12_384C_0706(PherMapRN);
         break;
     case 7:
-        o12_384C_0706(fd_4DA7_0000);
+        o12_384C_0706(PherMapRT);
         break;
     case 8:
-        o12_384C_0706(fd_3E1D_D09F);
+        o12_384C_0706(PherMapA);
         break;
     }
     (*g_9134)(fd_50F6_3842.left, fd_50F6_3842.top, fd_50F6_3842.left + fd_50F6_3852,
@@ -291,11 +291,11 @@ void far Mini_DrawMapI(void)
               fd_50F6_3842.bottom, f_1B4E_000D(15));
     table = f_171C_1B84(fd_50F6_385A);
     line = f_171C_1B84(fd_50F6_385E);
+    n = 64;
     y = fd_50F6_3842.top;
-    for (i = 0; i < 64; i++) {
+    for (i = 0; i < n; i++, y += g_8BD4) {
         Mini_MakeTable(table + fd_50F6_3854 * i, line, y);
         (*g_914C)(fd_50F6_3842.left + fd_50F6_3852, y, line, fd_50F6_3854 * g_8BD2, g_8BD4);
-        y += g_8BD4;
     }
     f_171C_1BBA(fd_50F6_385E);
     f_171C_1BBA(fd_50F6_385A);
@@ -304,7 +304,6 @@ void far Mini_DrawMapI(void)
         f_171C_1C0A(fd_50F6_385A);
     }
 }
-/* SCAFFOLD END */
 
 
 void far OpenMiniMapWin(void)
@@ -327,7 +326,7 @@ void far OpenMiniMapWin(void)
         f_1FD2_04D0(&pt);
         if (f_1FD2_04E5(&pt, &fd_50F6_3842)) {
             win_Close(0x1400);
-            f_00F8_050A();
+            OpenMapYard();
             return;
         }
     }

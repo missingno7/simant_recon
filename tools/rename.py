@@ -42,6 +42,13 @@ def main() -> int:
     ap.add_argument("--skip-module", action="append", default=[],
                     help="UNIT:SEG modules to leave on the old names (e.g. being edited by a worker)")
     a = ap.parse_args()
+    # Git Bash turns "root:1383" into a Windows path list ("root;1383"); undo it and refuse
+    # anything that does not name a manifest module (a silent non-match rewrites worker modules)
+    a.skip_module = [s.replace(";", ":") for s in a.skip_module]
+    known = set(json.loads((ROOT / "layout" / "manifest.json").read_text())["modules"])
+    unknown = [s for s in a.skip_module if s not in known]
+    if unknown:
+        raise SystemExit(f"--skip-module: unknown modules {unknown}")
     ren = []
     if a.batch:
         ren = [(r["old"], r["new"], r["why"]) for r in json.loads(a.batch.read_text())]

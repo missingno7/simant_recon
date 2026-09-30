@@ -21,11 +21,11 @@ extern int far fd_50F6_0F12;
 extern int far fd_3D57_0C22;
 extern signed char far fd_3D57_0094[];
 extern int far fd_50F6_04E2;
-extern int far fd_50F6_0FFC;
-extern int far fd_50F6_0F42;
-extern int far fd_50F6_0F7E;
+extern int far Starg;
+extern int far SuserX;
+extern int far SuserY;
 extern int far fd_50F6_0A06;
-extern int far fd_50F6_0FB8;
+extern int far SMode;
 extern int far fd_50F6_06AC;
 extern int far fd_3D57_0798;
 extern int far fd_50F6_049A;
@@ -43,7 +43,7 @@ extern int far fd_50F6_1006;
 extern int far fd_50F6_1044;
 extern long far fd_50F6_0472;
 extern void far * far * far fd_50F6_034C;
-extern int far fd_50F6_0330;
+extern int far BpopT;
 extern int far HealthB;
 extern int far fd_3D57_0C26;
 extern int far fd_50F6_1044;
@@ -53,23 +53,23 @@ extern int far fd_50F6_0B1E;
 extern int far fd_50F6_0C38;
 extern int far fd_3D57_0C24;
 extern int far ListIndexA;
-extern unsigned char far fd_3E1D_A180[];
-extern unsigned char far fd_3E1D_A569[];
-extern unsigned char far fd_3E1D_AD3B[];
-extern unsigned char far fd_3E1D_A952[];
-extern unsigned char far fd_3E1D_B124[];
-extern int far fd_50F6_0DA8;
-extern unsigned char far fd_3E1D_B50D[];
-extern unsigned char far fd_3E1D_B702[];
-extern unsigned char far fd_3E1D_BAEC[];
-extern unsigned char far fd_3E1D_B8F7[];
-extern unsigned char far fd_3E1D_BCE1[];
-extern int far fd_50F6_0EAA;
-extern unsigned char far fd_3E1D_BED6[];
-extern unsigned char far fd_3E1D_C0CB[];
-extern unsigned char far fd_3E1D_C4B5[];
-extern unsigned char far fd_3E1D_C2C0[];
-extern unsigned char far fd_3E1D_C6AA[];
+extern unsigned char far AlistX[];
+extern unsigned char far AlistY[];
+extern unsigned char far AlistT[];
+extern unsigned char far AlistM[];
+extern unsigned char far AlistS[];
+extern int far ListIndexB;
+extern unsigned char far BlistX[];
+extern unsigned char far BlistY[];
+extern unsigned char far BlistT[];
+extern unsigned char far BlistM[];
+extern unsigned char far BlistS[];
+extern int far ListIndexR;
+extern unsigned char far RlistX[];
+extern unsigned char far RlistY[];
+extern unsigned char far RlistT[];
+extern unsigned char far RlistM[];
+extern unsigned char far RlistS[];
 
 int far f_10F7_2867(int, int);
 int far IsClearTile(int, int, int);
@@ -82,7 +82,7 @@ void far AddAntToBList(int, int, int, int, int);
 void far AddAntToRList(int, int, int, int, int);
 void far f_14EE_0151(int, int, int);
 void far myBeginSound(int, int, int);
-void far f_0250_000E(int, int, int);
+void far ZapEuMapAt(int, int, int);
 int far IsItFood(int);
 void far f_0250_0E91(void);
 void far o22_39C7_07FD(int, int, int);
@@ -137,27 +137,27 @@ int far GetAntIndex(int list, int index, int far *life, int far *column,
     if (list <= 1) {
         if (index < 0 || index >= ListIndexA)
             return 0;
-        *life = fd_3E1D_A180[index];
-        *column = fd_3E1D_A569[index];
-        *attribute = fd_3E1D_AD3B[index];
-        *state = fd_3E1D_A952[index];
-        *direction = fd_3E1D_B124[index];
+        *life = AlistX[index];
+        *column = AlistY[index];
+        *attribute = AlistT[index];
+        *state = AlistM[index];
+        *direction = AlistS[index];
     } else if (list == 2) {
-        if (index < 0 || index >= fd_50F6_0DA8)
+        if (index < 0 || index >= ListIndexB)
             return 0;
-        *life = fd_3E1D_B50D[index];
-        *column = fd_3E1D_B702[index];
-        *attribute = fd_3E1D_BAEC[index];
-        *state = fd_3E1D_B8F7[index];
-        *direction = fd_3E1D_BCE1[index];
+        *life = BlistX[index];
+        *column = BlistY[index];
+        *attribute = BlistT[index];
+        *state = BlistM[index];
+        *direction = BlistS[index];
     } else {
-        if (index < 0 || index >= fd_50F6_0EAA)
+        if (index < 0 || index >= ListIndexR)
             return 0;
-        *life = fd_3E1D_BED6[index];
-        *column = fd_3E1D_C0CB[index];
-        *attribute = fd_3E1D_C4B5[index];
-        *state = fd_3E1D_C2C0[index];
-        *direction = fd_3E1D_C6AA[index];
+        *life = RlistX[index];
+        *column = RlistY[index];
+        *attribute = RlistT[index];
+        *state = RlistM[index];
+        *direction = RlistS[index];
     }
     return 1;
 }
@@ -168,27 +168,27 @@ void far SetAntIndex(int list, int index, int life, int column,
     if (list <= 1) {
         if (index < 0 || index >= ListIndexA)
             return;
-        fd_3E1D_A180[index] = (unsigned char)life;
-        fd_3E1D_A569[index] = (unsigned char)column;
-        fd_3E1D_AD3B[index] = (unsigned char)attribute;
-        fd_3E1D_A952[index] = (unsigned char)state;
-        fd_3E1D_B124[index] = (unsigned char)direction;
+        AlistX[index] = (unsigned char)life;
+        AlistY[index] = (unsigned char)column;
+        AlistT[index] = (unsigned char)attribute;
+        AlistM[index] = (unsigned char)state;
+        AlistS[index] = (unsigned char)direction;
     } else if (list == 2) {
-        if (index < 0 || index >= fd_50F6_0DA8)
+        if (index < 0 || index >= ListIndexB)
             return;
-        fd_3E1D_B50D[index] = (unsigned char)life;
-        fd_3E1D_B702[index] = (unsigned char)column;
-        fd_3E1D_BAEC[index] = (unsigned char)attribute;
-        fd_3E1D_B8F7[index] = (unsigned char)state;
-        fd_3E1D_BCE1[index] = (unsigned char)direction;
+        BlistX[index] = (unsigned char)life;
+        BlistY[index] = (unsigned char)column;
+        BlistT[index] = (unsigned char)attribute;
+        BlistM[index] = (unsigned char)state;
+        BlistS[index] = (unsigned char)direction;
     } else {
-        if (index < 0 || index >= fd_50F6_0EAA)
+        if (index < 0 || index >= ListIndexR)
             return;
-        fd_3E1D_BED6[index] = (unsigned char)life;
-        fd_3E1D_C0CB[index] = (unsigned char)column;
-        fd_3E1D_C4B5[index] = (unsigned char)attribute;
-        fd_3E1D_C2C0[index] = (unsigned char)state;
-        fd_3E1D_C6AA[index] = (unsigned char)direction;
+        RlistX[index] = (unsigned char)life;
+        RlistY[index] = (unsigned char)column;
+        RlistT[index] = (unsigned char)attribute;
+        RlistM[index] = (unsigned char)state;
+        RlistS[index] = (unsigned char)direction;
     }
 }
 
@@ -203,19 +203,19 @@ int far FindLifeIndex(int list, int matchLife, int matchColumn, int low, int hig
 
     if (list <= 1) {
         count = ListIndexA;
-        lifeArr = fd_3E1D_A180;
-        columnArr = fd_3E1D_A569;
-        attrArr = fd_3E1D_AD3B;
+        lifeArr = AlistX;
+        columnArr = AlistY;
+        attrArr = AlistT;
     } else if (list == 2) {
-        count = fd_50F6_0DA8;
-        lifeArr = fd_3E1D_B50D;
-        columnArr = fd_3E1D_B702;
-        attrArr = fd_3E1D_BAEC;
+        count = ListIndexB;
+        lifeArr = BlistX;
+        columnArr = BlistY;
+        attrArr = BlistT;
     } else {
-        count = fd_50F6_0EAA;
-        lifeArr = fd_3E1D_BED6;
-        columnArr = fd_3E1D_C0CB;
-        attrArr = fd_3E1D_C4B5;
+        count = ListIndexR;
+        lifeArr = RlistX;
+        columnArr = RlistY;
+        attrArr = RlistT;
     }
     for (i = count - 1; i >= 0; i--) {
         masked = attrArr[i] & mask;
@@ -236,19 +236,19 @@ int far FindAntIndex(int list, int matchLife, int matchColumn, int attribute)
 
     if (list <= 1) {
         count = ListIndexA;
-        lifeArr = fd_3E1D_A180;
-        columnArr = fd_3E1D_A569;
-        attrArr = fd_3E1D_AD3B;
+        lifeArr = AlistX;
+        columnArr = AlistY;
+        attrArr = AlistT;
     } else if (list == 2) {
-        count = fd_50F6_0DA8;
-        lifeArr = fd_3E1D_B50D;
-        columnArr = fd_3E1D_B702;
-        attrArr = fd_3E1D_BAEC;
+        count = ListIndexB;
+        lifeArr = BlistX;
+        columnArr = BlistY;
+        attrArr = BlistT;
     } else {
-        count = fd_50F6_0EAA;
-        lifeArr = fd_3E1D_BED6;
-        columnArr = fd_3E1D_C0CB;
-        attrArr = fd_3E1D_C4B5;
+        count = ListIndexR;
+        lifeArr = RlistX;
+        columnArr = RlistY;
+        attrArr = RlistT;
     }
     for (i = count - 1; i >= 0; i--) {
         if (lifeArr[i] == matchLife && columnArr[i] == matchColumn &&
@@ -306,11 +306,11 @@ int far AddAntToList(int plane, int x, int y, int type, int a, int b)
             added = 1;
         }
     } else if (plane == 2) {
-        if (fd_50F6_0DA8 < 500) {
+        if (ListIndexB < 500) {
             AddAntToBList(x, y, type, a, b);
             added = 1;
         }
-    } else if (fd_50F6_0EAA < 500) {
+    } else if (ListIndexR < 500) {
         AddAntToRList(x, y, type, a, b);
         added = 1;
     }
@@ -342,7 +342,7 @@ void far SetLife(int plane, int x, int y, int value)
             }
             break;
         }
-        f_0250_000E(plane, x, y);
+        ZapEuMapAt(plane, x, y);
     }
 }
 
@@ -463,7 +463,7 @@ void far SetMap(int plane, int x, int y, int value)
             MapR[x][y] = value;
             break;
         }
-        f_0250_000E(plane, x, y);
+        ZapEuMapAt(plane, x, y);
     }
 }
 
@@ -472,7 +472,7 @@ void far f_10F7_0954(int plane, int x, int y, int value)
     if (f_10F7_000E(plane, x, y) == 1) {
         if (GetLife(plane, x, y) == value)
             SetLife(plane, x, y, 0);
-        f_0250_000E(plane, x, y);
+        ZapEuMapAt(plane, x, y);
     }
 }
 
@@ -619,14 +619,14 @@ int far DoLifeExchange(int plane, int x, int y)
                 goto fail;
         }
         SetMyLife(MePlane, MeLocX, MeLocY, fd_50F6_04C2, fd_50F6_0496, 0);
-        fd_50F6_0FFC = -2;
-        fd_50F6_0F42 = fd_50F6_0F12 >> 4;
-        fd_50F6_0F7E = fd_50F6_0F34 >> 4;
+        Starg = -2;
+        SuserX = fd_50F6_0F12 >> 4;
+        SuserY = fd_50F6_0F34 >> 4;
         fd_50F6_0A06 = 1;
-        fd_50F6_0FB8 = 0;
+        SMode = 0;
         fd_50F6_06AC = 0;
         fd_50F6_04E2 = 0;
-        o22_39C7_07FD(plane, fd_50F6_0F42, fd_50F6_0F7E);
+        o22_39C7_07FD(plane, SuserX, SuserY);
         SetMyHealth(100);
         goto done;
     }
@@ -683,13 +683,13 @@ int far DoLifeExchange(int plane, int x, int y)
             break;
         }
         t = (fd_50F6_04C2 == 0x60) ? 9 : 0;
-        f_0250_000E(MePlane, MeLocX, MeLocY);
+        ZapEuMapAt(MePlane, MeLocX, MeLocY);
         if (t)
-            f_0250_000E(MePlane, MeLocX + Dx8[fd_50F6_0496 ^ 4],
+            ZapEuMapAt(MePlane, MeLocX + Dx8[fd_50F6_0496 ^ 4],
                         MeLocY + Dy8[fd_50F6_0496 ^ 4]);
-        f_0250_000E(plane, x, y);
+        ZapEuMapAt(plane, x, y);
         if (caste == 0xc)
-            f_0250_000E(plane, x2, y2);
+            ZapEuMapAt(plane, x2, y2);
         SetAntIndex(plane, index, 0, 0, 0, 0, 0);
         if (caste == 0xc)
             SetAntIndex(plane, index2, 0, 0, 0, 0, 0);
@@ -1095,8 +1095,8 @@ void far EatMyFood(int kind)
         break;
     }
     if (kind != 2) {
-        if (MeHealth + 100 > 100 && kind != 1 && fd_50F6_0330 - 1 > 0) {
-            HealthB += MeHealth / (fd_50F6_0330 - 1);
+        if (MeHealth + 100 > 100 && kind != 1 && BpopT - 1 > 0) {
+            HealthB += MeHealth / (BpopT - 1);
             if (HealthB > 100)
                 HealthB = 100;
         }

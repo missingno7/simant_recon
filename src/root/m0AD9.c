@@ -26,8 +26,8 @@ extern unsigned char far LionListT[];
 extern int far GetMap(int plane, int x, int y);
 extern int far f_10F7_0731(int plane, int tile);
 extern int far IsThisFood(int category, int tile);
-extern char far fd_3D57_001A[9];
-extern char far fd_3D57_0010[9];
+extern char far Dy9[9];
+extern char far Dx9[9];
 extern int far IsYellowAnt(int value);
 extern int far fd_50F6_0496;
 extern int far fd_50F6_04C2;
@@ -215,8 +215,8 @@ void far DoAntLions(void)
                 continue;
             }
             for (count = 0, dir = 0; count < 2; ) {
-                nx = fd_3D57_0010[dir] + x;
-                tile = LifeA[nx][ny = fd_3D57_001A[dir] + y];
+                nx = Dx9[dir] + x;
+                tile = LifeA[nx][ny = Dy9[dir] + y];
                 if (tile == 0) {
                     count++;
                     dir = SRand1(8) + 1;

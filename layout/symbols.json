@@ -589,6 +589,18 @@
     }
    ]
   },
+  "ConvertMonoMaskToTandy": {
+   "unit": "root",
+   "seg": 5673,
+   "off": 1123,
+   "grounding": "inventory:push_cs_call",
+   "history": [
+    {
+     "was": "f_1629_0463",
+     "why": "MAPSYM GR_MODULE order MakeBalloon, ConvertMonoMaskToTandy, ConvertMonoMaskToColor = DOS 1629:000C, 0463, 0531 (0531 xver HIGH); called only by MakeBalloon next to ConvertMonoMaskToColor"
+    }
+   ]
+  },
   "CountUpdate": {
    "unit": "root",
    "seg": 3048,
@@ -2089,6 +2101,18 @@
     }
    ]
   },
+  "Feedback": {
+   "unit": "root",
+   "seg": 3630,
+   "off": 10,
+   "grounding": "inventory:far_call",
+   "history": [
+    {
+     "was": "f_0E2E_000A",
+     "why": "MAPSYM SIMTWO_MODULE unit Feedback, RunTutor, GiveLesson, LessonDone aligns 1:1 with the 4 functions of DOS module 0E2E; anchor GiveLesson (xver LOW unique constant 0x4268; the 56-case PictStrnDialog id/picture table 0x2AF8..0x2B68 / 0x4268..0x4276, SetMyHealth(8), AddBlackAnts(10/0x50) matches Win16 GiveLesson case by case); body: AdviceStrs[] via f_15D9_009C(...,120L,...), SetDefaultWindPrompt"
+    }
+   ]
+  },
   "FightBalloons": {
    "unit": "root",
    "seg": 592,
@@ -2653,6 +2677,18 @@
     }
    ]
   },
+  "GiveLesson": {
+   "unit": "root",
+   "seg": 3630,
+   "off": 516,
+   "grounding": "inventory:push_cs_call",
+   "history": [
+    {
+     "was": "f_0E2E_0204",
+     "why": "MAPSYM SIMTWO_MODULE unit Feedback, RunTutor, GiveLesson, LessonDone aligns 1:1 with the 4 functions of DOS module 0E2E; anchor GiveLesson (xver LOW unique constant 0x4268; the 56-case PictStrnDialog id/picture table 0x2AF8..0x2B68 / 0x4268..0x4276, SetMyHealth(8), AddBlackAnts(10/0x50) matches Win16 GiveLesson case by case)"
+    }
+   ]
+  },
   "GoInNest": {
    "unit": "root",
    "seg": 2196,
@@ -2878,6 +2914,18 @@
     {
      "was": "o08_35F5_0A00",
      "why": "worker ovl08: Win16 RandWorld unit member / call-site evidence (report 2026-09-30)"
+    }
+   ]
+  },
+  "InvalEuMap": {
+   "unit": "root",
+   "seg": 592,
+   "off": 110,
+   "grounding": "inventory:far_call",
+   "history": [
+    {
+     "was": "f_0250_006E",
+     "why": "names3 review: callers SetMapPlaneLocation, SetMapPlane, RandWorld, SetAlarmDropState are all Win16 InvalEuMap callers; body clamps a tile rectangle to 128x64 and marks the edit-update cells -1 (rect variant of ZapEuMapAt); unit position 2, size 166 vs 168"
     }
    ]
   },
@@ -3205,6 +3253,18 @@
     }
    ]
   },
+  "LessonDone": {
+   "unit": "root",
+   "seg": 3630,
+   "off": 1630,
+   "grounding": "inventory:push_cs_call",
+   "history": [
+    {
+     "was": "f_0E2E_065E",
+     "why": "MAPSYM SIMTWO_MODULE unit Feedback, RunTutor, GiveLesson, LessonDone aligns 1:1 with the 4 functions of DOS module 0E2E; anchor GiveLesson (xver LOW unique constant 0x4268; the 56-case PictStrnDialog id/picture table 0x2AF8..0x2B68 / 0x4268..0x4276, SetMyHealth(8), AddBlackAnts(10/0x50) matches Win16 GiveLesson case by case); 56-case boolean switch on the lesson number"
+    }
+   ]
+  },
   "LionDialog": {
    "unit": "S22",
    "seg": 14791,
@@ -3265,6 +3325,18 @@
     }
    ]
   },
+  "MagnifyMenu": {
+   "unit": "S05",
+   "seg": 13813,
+   "off": 604,
+   "grounding": "inventory:vector",
+   "history": [
+    {
+     "was": "o05_35F5_025C",
+     "why": "names3 review: Win16 MagnifyMenu(x,y,plane) body (LifeA/B/R pick, -1 if empty, win_Open(0x1D00), ButtonHeld modal loop, win_Close, return life) and callers DoTool/processEdit; the proposed win_DrawExamineWindow is the Win16-only paint callback that received the text drawing"
+    }
+   ]
+  },
   "MakeAPill": {
    "unit": "root",
    "seg": 2777,
@@ -3274,6 +3346,18 @@
     {
      "was": "f_0AD9_0E0F",
      "why": "Win16 SIMTWO_MODULE run 3EF8..5A02 (InitSow..PillFoodTile, 19 members, between EndMigrate and InitSimVars) aligns 1:1 with DOS module 0AD9 (19 functions); xver DoAntLions (pos 6, LOW) agrees; call graph agrees (InitPillar->InitSow, DoPillar->DoSow, AddRandAntLion->AddAntLion, DoAntLions->SetAntLion/KillAntLion/FindInAList, DoPillar->pillar helpers)"
+    }
+   ]
+  },
+  "MakeBalloon": {
+   "unit": "root",
+   "seg": 5673,
+   "off": 12,
+   "grounding": "inventory:far_call",
+   "history": [
+    {
+     "was": "f_1629_000C",
+     "why": "MAPSYM GR_MODULE unit MakeBalloon, ConvertMonoMaskToTandy, ConvertMonoMaskToColor aligns 1:1 with the 3 functions of DOS module 1629; anchor ConvertMonoMaskToColor (xver HIGH, strings 'Balloon Size=%d, %d', 'clrbln'); MakeBalloon: xver MEDIUM string 'balloon', DOS string 'BAD font in MakeBaloon'"
     }
    ]
   },
@@ -3505,6 +3589,18 @@
     }
    ]
   },
+  "MapAreaEvent": {
+   "unit": "S04",
+   "seg": 13813,
+   "off": 602,
+   "grounding": "inventory:vector",
+   "history": [
+    {
+     "was": "o04_35F5_025A",
+     "why": "names3 review: Win16 MapAreaEvent call order processEdit/EraseMapCursor/CenterEdit/UpdateEdit/DrawMapCursor/GetMousePos/myButton/OpenEditWindow and caller ProcMapEvent"
+    }
+   ]
+  },
   "MapToolsMenu": {
    "unit": "S04",
    "seg": 13813,
@@ -3601,6 +3697,18 @@
     }
    ]
   },
+  "OpenEditWindow": {
+   "unit": "root",
+   "seg": 592,
+   "off": 3696,
+   "grounding": "inventory:far_call",
+   "history": [
+    {
+     "was": "f_0250_0E70",
+     "why": "names3 review: body win_Open(0) (17 vs 11 bytes); call positions: else-branch of DoTab (CONFIRMED), last call of MapAreaEvent, and in ProcMenu (o11_35F5_018D) right after NewGame, as Win16"
+    }
+   ]
+  },
   "OpenHistoryWindow": {
    "unit": "S24",
    "seg": 14791,
@@ -3649,6 +3757,18 @@
     }
    ]
   },
+  "OpenMapYard": {
+   "unit": "root",
+   "seg": 248,
+   "off": 1290,
+   "grounding": "inventory:far_call",
+   "history": [
+    {
+     "was": "f_00F8_050A",
+     "why": "names3 review: caller set {DoTab, OpenMiniMapWin, ProcMenu} identical to Win16 OpenMapYard callers (3/3), DoTab then-branch and OpenMiniMapWin after win_Close as in Win16; body: win_IsWinOpen(0x100) -> bring to top, win_IsWinOpen(0x1900), else YardToMap (f_00F8_047F); constants 0x100/0x1900 as Win16"
+    }
+   ]
+  },
   "OpenMiniMapWin": {
    "unit": "S04",
    "seg": 13813,
@@ -3670,6 +3790,18 @@
     {
      "was": "f_0798_012B",
      "why": "Win16 SIMANT_MODULE unit InitTriVars..initControls (MAPSYM B324..CC84, 20 members) aligns in order with the 18 functions of DOS root:0798 once the two Windows-only callbacks win_CasteControlChanged/win_ModeControlChanged are removed; InitTriVars body identical to Win16 recovered InitTriVars (win_GetObjRect, width/2, height, (half<<8)/height, 6 tri points); call graph agrees (OpenCaste->UpdateCaste+win_Open, ProcCaste->DrawCaste, ProcMode->DrawMode, Draw*->SetTriLatPoint, ProcCaste/initControls->cvtLevels2IdealCaste); ProcCasteEvent/ProcModeEvent xver unique constants 0x1303/0x1203; DrawControlLevels xver MEDIUM (%-ld%%)"
+    }
+   ]
+  },
+  "OverlayTileSet": {
+   "unit": "root",
+   "seg": 592,
+   "off": 874,
+   "grounding": "inventory:far_call",
+   "history": [
+    {
+     "was": "f_0250_036A",
+     "why": "names3 review: constants 1000/1001 (0x3E8/0x3E9) selecting two tile sets, loaded through the same helper twice as Win16 OverlayTileSet (db_LoadObject/db_UnhookObject twice); callers MakeHousePatch and MakeYardPatch (+ load-init o09_35F5_0DBB <-> DoLoadInitializations) on both sides"
     }
    ]
   },
@@ -3829,6 +3961,18 @@
     }
    ]
   },
+  "PlaceQueenInYard": {
+   "unit": "root",
+   "seg": 347,
+   "off": 2378,
+   "grounding": "inventory:far_call",
+   "history": [
+    {
+     "was": "f_015B_094A",
+     "why": "MAPSYM SIMANT_MODULE: PlaceQueenInYard immediately precedes MysteryButton (xver HIGH = f_015B_0D0C), DOS 094A immediately precedes 0D0C in module 015B; body: DOS string 'YARD AREA @ %d, %d', decrements the queen count 50F6:07C8, increments the yard patch count 3D57:00A4[x][y] inside +-3 of the current patch"
+    }
+   ]
+  },
   "PlaceRedQueen": {
    "unit": "S08",
    "seg": 13813,
@@ -3886,6 +4030,18 @@
     {
      "was": "f_0798_0141",
      "why": "Win16 SIMANT_MODULE unit InitTriVars..initControls (MAPSYM B324..CC84, 20 members) aligns in order with the 18 functions of DOS root:0798 once the two Windows-only callbacks win_CasteControlChanged/win_ModeControlChanged are removed; InitTriVars body identical to Win16 recovered InitTriVars (win_GetObjRect, width/2, height, (half<<8)/height, 6 tri points); call graph agrees (OpenCaste->UpdateCaste+win_Open, ProcCaste->DrawCaste, ProcMode->DrawMode, Draw*->SetTriLatPoint, ProcCaste/initControls->cvtLevels2IdealCaste); ProcCasteEvent/ProcModeEvent xver unique constants 0x1303/0x1203; DrawControlLevels xver MEDIUM (%-ld%%)"
+    }
+   ]
+  },
+  "ProcEditEvent": {
+   "unit": "root",
+   "seg": 592,
+   "off": 3087,
+   "grounding": "inventory:far_call",
+   "history": [
+    {
+     "was": "f_0250_0C0F",
+     "why": "names3 review: 18-case switch; call order clip_SetWin, processEdit, DoWinHelp, EditToolsMenu, SetMapPlane, GotoMyAnt, GotoSpider, ..., EditScentMenu, DoHealthSetY, DoWarnSetB, clip_Off identical to Win16 ProcEditEvent; sole caller of EditScentMenu/DoWarnSetB/DoHealthSetY on both sides"
     }
    ]
   },
@@ -4186,6 +4342,18 @@
     {
      "was": "f_0250_43F2",
      "why": "Win16 ANTEDIT_MODULE MAPSYM run BalloonIsVisible,EggBalloons,FightBalloons,QueenBalloons,RestBalloons,AddMsgBalloon,DrawCurBalloons,EditMsgBalloon,PreDrawBalloons,DrawBalloons aligns 1:1 with DOS 0250:4225,428A,4302,437A,43F2,446A,454D,4BDD,4C28,4C34 (DrawCurBalloons xver HIGH anchor); bodies match Win16 recovered sources: fourth balloon setter (counter 0F2E)"
+    }
+   ]
+  },
+  "RunTutor": {
+   "unit": "root",
+   "seg": 3630,
+   "off": 325,
+   "grounding": "inventory:push_cs_call",
+   "history": [
+    {
+     "was": "f_0E2E_0145",
+     "why": "MAPSYM SIMTWO_MODULE unit Feedback, RunTutor, GiveLesson, LessonDone aligns 1:1 with the 4 functions of DOS module 0E2E; anchor GiveLesson (xver LOW unique constant 0x4268; the 56-case PictStrnDialog id/picture table 0x2AF8..0x2B68 / 0x4268..0x4276, SetMyHealth(8), AddBlackAnts(10/0x50) matches Win16 GiveLesson case by case); calls GiveLesson(TutLesson) / LessonDone(TutLesson)"
     }
    ]
   },
@@ -4837,6 +5005,18 @@
     }
    ]
   },
+  "StopSong": {
+   "unit": "root",
+   "seg": 10314,
+   "off": 266,
+   "grounding": "inventory:far_call,push_cs_call",
+   "history": [
+    {
+     "was": "f_284A_010A",
+     "why": "names3 review: Win16 StopSong at the same call positions in LoadGame (last call; unique shared string) and ProcMenu (70-case switch, same call order)"
+    }
+   ]
+  },
   "StorePillarMap": {
    "unit": "root",
    "seg": 2777,
@@ -5009,25 +5189,13 @@
    "unit": "root",
    "seg": 1944,
    "off": 153,
-   "grounding": "inventory:far_call,push_cs_call",
-   "history": [
-    {
-     "was": "f_0798_0099",
-     "why": "Win16 SIMANT_MODULE unit InitTriVars..initControls (MAPSYM B324..CC84, 20 members) aligns in order with the 18 functions of DOS root:0798 once the two Windows-only callbacks win_CasteControlChanged/win_ModeControlChanged are removed; InitTriVars body identical to Win16 recovered InitTriVars (win_GetObjRect, width/2, height, (half<<8)/height, 6 tri points); call graph agrees (OpenCaste->UpdateCaste+win_Open, ProcCaste->DrawCaste, ProcMode->DrawMode, Draw*->SetTriLatPoint, ProcCaste/initControls->cvtLevels2IdealCaste); ProcCasteEvent/ProcModeEvent xver unique constants 0x1303/0x1203; DrawControlLevels xver MEDIUM (%-ld%%)"
-    }
-   ]
+   "alias_of": "win_CasteControlChanged"
   },
   "UpdateModeWindow": {
    "unit": "root",
    "seg": 1944,
    "off": 215,
-   "grounding": "inventory:far_call,push_cs_call",
-   "history": [
-    {
-     "was": "f_0798_00D7",
-     "why": "Win16 SIMANT_MODULE unit InitTriVars..initControls (MAPSYM B324..CC84, 20 members) aligns in order with the 18 functions of DOS root:0798 once the two Windows-only callbacks win_CasteControlChanged/win_ModeControlChanged are removed; InitTriVars body identical to Win16 recovered InitTriVars (win_GetObjRect, width/2, height, (half<<8)/height, 6 tri points); call graph agrees (OpenCaste->UpdateCaste+win_Open, ProcCaste->DrawCaste, ProcMode->DrawMode, Draw*->SetTriLatPoint, ProcCaste/initControls->cvtLevels2IdealCaste); ProcCasteEvent/ProcModeEvent xver unique constants 0x1303/0x1203; DrawControlLevels xver MEDIUM (%-ld%%)"
-    }
-   ]
+   "alias_of": "win_ModeControlChanged"
   },
   "UpdateYard": {
    "unit": "S13",
@@ -5179,6 +5347,30 @@
     }
    ]
   },
+  "ZapEuMapAt": {
+   "unit": "root",
+   "seg": 592,
+   "off": 14,
+   "grounding": "inventory:far_call",
+   "history": [
+    {
+     "was": "f_0250_000E",
+     "why": "names3 review: callers AddWater, DropWater, SetLife, SetMap, DoLifeExchange are all Win16 ZapEuMapAt callers (5 named caller pairs); body: if TileIsVisible(plane,x,y) mark the edit-update cell -1 (Win16 sole callee TileIsVisible); unit position 1 on both sides"
+    }
+   ]
+  },
+  "_hanim_FindObject": {
+   "unit": "root",
+   "seg": 9826,
+   "off": 780,
+   "grounding": "inventory:push_cs_call",
+   "history": [
+    {
+     "was": "f_2662_030C",
+     "why": "names3 review: body identical to Win16 wf_hanim_FindObject: scan 0x2C-byte records while index < *count, match word at +0x20, store index through far pointer, return record or NULL; callers Add/Remove/Hide/Show/SetObjectPos; position right before AddAnimObject on both sides"
+    }
+   ]
+  },
   "_win_SetProxItem": {
    "unit": "root",
    "seg": 8589,
@@ -5320,6 +5512,78 @@
     {
      "was": "f_1A96_06D9",
      "why": "db worker: Win16 db/ch/DB unit member with matching diagnostics and body (report 2026-09-30)"
+    }
+   ]
+  },
+  "clip_KillWin": {
+   "unit": "root",
+   "seg": 7767,
+   "off": 277,
+   "grounding": "inventory:far_call",
+   "history": [
+    {
+     "was": "f_1E57_0115",
+     "why": "names3 review: DOS diagnostic 'WARNING: i>=MAXWINDOWS-1 in KillWin(%d)'; member of the DOS clip module (4 CONFIRMED clip_ members) and of the Win16 clip API (stub 8E48); DOS callers win_Close and win_Swap (window teardown)"
+    }
+   ]
+  },
+  "clip_Pop": {
+   "unit": "root",
+   "seg": 7767,
+   "off": 3769,
+   "grounding": "inventory:far_call",
+   "history": [
+    {
+     "was": "f_1E57_0EB9",
+     "why": "names3 review: DOS diagnostic 'Clip_Pop w/ nothing on the stack: E9073'; call position closing the clip_Push brackets in MapToolsMenu/EditToolsMenu/win_YardClosed, as Win16"
+    }
+   ]
+  },
+  "clip_Push": {
+   "unit": "root",
+   "seg": 7767,
+   "off": 3498,
+   "grounding": "inventory:far_call",
+   "history": [
+    {
+     "was": "f_1E57_0DAA",
+     "why": "names3 review: DOS diagnostics 'Cannot allocate memory in clip_Push' / 'Pushed it too far' and allocation tag 'clip_Push'; call position before clip_SetWin in MapToolsMenu, EditToolsMenu, win_YardClosed (f_00F8_0002), as Win16"
+    }
+   ]
+  },
+  "clip_SetWin": {
+   "unit": "root",
+   "seg": 7767,
+   "off": 372,
+   "grounding": "inventory:far_call",
+   "history": [
+    {
+     "was": "f_1E57_0174",
+     "why": "names3 review: DOS diagnostic 'SetWin: Window open but clip is NULL'; call position: first call of ProcCasteEvent/ProcModeEvent/ProcEditEvent/ProcHistoryEvent and between clip_Push and the draw in MapToolsMenu/EditToolsMenu, exactly where Win16 calls clip_SetWin"
+    }
+   ]
+  },
+  "clip_SubExclude": {
+   "unit": "root",
+   "seg": 7767,
+   "off": 2735,
+   "grounding": "inventory:far_call",
+   "history": [
+    {
+     "was": "f_1E57_0AAF",
+     "why": "names3 review: DOS diagnostics 'CL074:Temp clip overflow in SubExclude', 'Sub exclude NULL rect!!' and allocation tag 'subexclude'; member of the DOS clip module and of the Win16 clip API (stub 8E4C); structural twin of clip_SubInclude"
+    }
+   ]
+  },
+  "clip_SubInclude": {
+   "unit": "root",
+   "seg": 7767,
+   "off": 1907,
+   "grounding": "inventory:far_call,push_cs_call",
+   "history": [
+    {
+     "was": "f_1E57_0773",
+     "why": "names3 review: DOS diagnostics 'CL074:Temp clip overflow in SubInclude', 'Sub include NULL rect!!' and tag 'subinclude'; Win16 callers DisplayCard, PopUpInfoWindow, win_DrawObjectI are all DOS callers of 0773"
     }
    ]
   },
@@ -5985,7 +6249,7 @@
    "unit": "root",
    "seg": 248,
    "off": 1290,
-   "grounding": "inventory:far_call"
+   "alias_of": "OpenMapYard"
   },
   "f_00F8_0543": {
    "unit": "root",
@@ -6135,7 +6399,7 @@
    "unit": "root",
    "seg": 347,
    "off": 2378,
-   "grounding": "inventory:far_call"
+   "alias_of": "PlaceQueenInYard"
   },
   "f_015B_0D0C": {
    "unit": "root",
@@ -6165,13 +6429,13 @@
    "unit": "root",
    "seg": 592,
    "off": 14,
-   "grounding": "inventory:far_call"
+   "alias_of": "ZapEuMapAt"
   },
   "f_0250_006E": {
    "unit": "root",
    "seg": 592,
    "off": 110,
-   "grounding": "inventory:far_call"
+   "alias_of": "InvalEuMap"
   },
   "f_0250_0114": {
    "unit": "root",
@@ -6201,7 +6465,7 @@
    "unit": "root",
    "seg": 592,
    "off": 874,
-   "grounding": "inventory:far_call"
+   "alias_of": "OverlayTileSet"
   },
   "f_0250_03B6": {
    "unit": "root",
@@ -6261,7 +6525,7 @@
    "unit": "root",
    "seg": 592,
    "off": 3087,
-   "grounding": "inventory:far_call"
+   "alias_of": "ProcEditEvent"
   },
   "f_0250_0CF6": {
    "unit": "root",
@@ -6285,7 +6549,7 @@
    "unit": "root",
    "seg": 592,
    "off": 3696,
-   "grounding": "inventory:far_call"
+   "alias_of": "OpenEditWindow"
   },
   "f_0250_0E81": {
    "unit": "root",
@@ -6525,13 +6789,13 @@
    "unit": "root",
    "seg": 1944,
    "off": 153,
-   "alias_of": "UpdateCasteWindow"
+   "alias_of": "win_CasteControlChanged"
   },
   "f_0798_00D7": {
    "unit": "root",
    "seg": 1944,
    "off": 215,
-   "alias_of": "UpdateModeWindow"
+   "alias_of": "win_ModeControlChanged"
   },
   "f_0798_0115": {
    "unit": "root",
@@ -7137,25 +7401,25 @@
    "unit": "root",
    "seg": 3630,
    "off": 10,
-   "grounding": "inventory:far_call"
+   "alias_of": "Feedback"
   },
   "f_0E2E_0145": {
    "unit": "root",
    "seg": 3630,
    "off": 325,
-   "grounding": "inventory:push_cs_call"
+   "alias_of": "RunTutor"
   },
   "f_0E2E_0204": {
    "unit": "root",
    "seg": 3630,
    "off": 516,
-   "grounding": "inventory:push_cs_call"
+   "alias_of": "GiveLesson"
   },
   "f_0E2E_065E": {
    "unit": "root",
    "seg": 3630,
    "off": 1630,
-   "grounding": "inventory:push_cs_call"
+   "alias_of": "LessonDone"
   },
   "f_0EC1_0002": {
    "unit": "root",
@@ -8121,13 +8385,13 @@
    "unit": "root",
    "seg": 5673,
    "off": 12,
-   "grounding": "inventory:far_call"
+   "alias_of": "MakeBalloon"
   },
   "f_1629_0463": {
    "unit": "root",
    "seg": 5673,
    "off": 1123,
-   "grounding": "inventory:push_cs_call"
+   "alias_of": "ConvertMonoMaskToTandy"
   },
   "f_1629_0531": {
    "unit": "root",
@@ -9759,13 +10023,13 @@
    "unit": "root",
    "seg": 7767,
    "off": 277,
-   "grounding": "inventory:far_call"
+   "alias_of": "clip_KillWin"
   },
   "f_1E57_0174": {
    "unit": "root",
    "seg": 7767,
    "off": 372,
-   "grounding": "inventory:far_call"
+   "alias_of": "clip_SetWin"
   },
   "f_1E57_0239": {
    "unit": "root",
@@ -9807,7 +10071,7 @@
    "unit": "root",
    "seg": 7767,
    "off": 1907,
-   "grounding": "inventory:far_call,push_cs_call"
+   "alias_of": "clip_SubInclude"
   },
   "f_1E57_08F5": {
    "unit": "root",
@@ -9825,7 +10089,7 @@
    "unit": "root",
    "seg": 7767,
    "off": 2735,
-   "grounding": "inventory:far_call"
+   "alias_of": "clip_SubExclude"
   },
   "f_1E57_0C1A": {
    "unit": "root",
@@ -9849,13 +10113,13 @@
    "unit": "root",
    "seg": 7767,
    "off": 3498,
-   "grounding": "inventory:far_call"
+   "alias_of": "clip_Push"
   },
   "f_1E57_0EB9": {
    "unit": "root",
    "seg": 7767,
    "off": 3769,
-   "grounding": "inventory:far_call"
+   "alias_of": "clip_Pop"
   },
   "f_1E57_0F8E": {
    "unit": "root",
@@ -10661,6 +10925,18 @@
    "off": 287,
    "alias_of": "win_SetObjSelectableState"
   },
+  "f_22BF_019A": {
+   "unit": "root",
+   "seg": 8895,
+   "off": 410,
+   "grounding": "reviewed: unreferenced fastcall wrapper between win_SetObjSelectableState and win_SetGroupSelectableState: mov dx,1; push cs; call 011F; retf (gap 019A-01A9 in the module layout)"
+  },
+  "f_22BF_01A2": {
+   "unit": "root",
+   "seg": 8895,
+   "off": 418,
+   "grounding": "reviewed: unreferenced fastcall wrapper: sub dx,dx; push cs; call 011F; retf (gap 019A-01A9)"
+  },
   "f_22BF_01A9": {
    "unit": "root",
    "seg": 8895,
@@ -10714,6 +10990,12 @@
    "seg": 8895,
    "off": 973,
    "alias_of": "win_SetGroupSelectedState"
+  },
+  "f_22BF_0438": {
+   "unit": "root",
+   "seg": 8895,
+   "off": 1080,
+   "grounding": "reviewed: unreferenced fastcall wrapper between win_SetGroupSelectedState and win_MakeGroupUnselected: mov bx,1; push cs; call 03CD; retf (gap 0438-0440)"
   },
   "f_22BF_0440": {
    "unit": "root",
@@ -10809,7 +11091,7 @@
    "unit": "root",
    "seg": 8895,
    "off": 2594,
-   "grounding": "inventory:far_call"
+   "alias_of": "win_IsWinInFront"
   },
   "f_22BF_0A34": {
    "unit": "root",
@@ -11123,6 +11405,12 @@
    "off": 72,
    "alias_of": "RepointObjects"
   },
+  "f_2505_00AA": {
+   "unit": "root",
+   "seg": 9477,
+   "off": 170,
+   "grounding": "reviewed: unreferenced fastcall predicate between RepointObjects and f_2505_00DD: sub ax,5; cmp ax,0Dh; jump table (object types 5,8,11,15-18 -> 1, else 0)"
+  },
   "f_2505_00DD": {
    "unit": "root",
    "seg": 9477,
@@ -11152,6 +11440,12 @@
    "seg": 9477,
    "off": 727,
    "alias_of": "win_ObjAddr"
+  },
+  "f_2505_033C": {
+   "unit": "root",
+   "seg": 9477,
+   "off": 828,
+   "grounding": "reviewed: unreferenced fastcall wrapper between win_ObjAddr and win_WinAddr: sub al,al; add ax,dx; push cs; call 02D7 (win_ObjAddr); retf"
   },
   "f_2505_0345": {
    "unit": "root",
@@ -11307,19 +11601,13 @@
    "unit": "root",
    "seg": 9826,
    "off": 8,
-   "alias_of": "f_2662_0008"
+   "alias_of": "hanim_PrintSet"
   },
   "f_2662_0008": {
    "unit": "root",
    "seg": 9826,
    "off": 8,
-   "grounding": "reviewed: prologue scan in unreached gap; descent ends in a return; no references found (unreferenced or indirect)",
-   "history": [
-    {
-     "was": "f_2650_0128",
-     "why": "module boundary after LINK 00 fill"
-    }
-   ]
+   "alias_of": "hanim_PrintSet"
   },
   "f_2662_0100": {
    "unit": "root",
@@ -11349,49 +11637,49 @@
    "unit": "root",
    "seg": 9826,
    "off": 780,
-   "grounding": "inventory:push_cs_call"
+   "alias_of": "_hanim_FindObject"
   },
   "f_2662_0348": {
    "unit": "root",
    "seg": 9826,
    "off": 840,
-   "grounding": "inventory:far_call,push_cs_call"
+   "alias_of": "hanim_AddAnimObject"
   },
   "f_2662_059C": {
    "unit": "root",
    "seg": 9826,
    "off": 1436,
-   "grounding": "inventory:far_call,push_cs_call"
+   "alias_of": "hanim_RemoveAnimObject"
   },
   "f_2662_064E": {
    "unit": "root",
    "seg": 9826,
    "off": 1614,
-   "grounding": "inventory:far_call"
+   "alias_of": "hanim_RemoveAllAnimObjects"
   },
   "f_2662_06CB": {
    "unit": "root",
    "seg": 9826,
    "off": 1739,
-   "grounding": "inventory:push_cs_call"
+   "alias_of": "hanim_ActuallyRemoveAnimObjects"
   },
   "f_2662_07E9": {
    "unit": "root",
    "seg": 9826,
    "off": 2025,
-   "grounding": "reviewed: prologue scan in unreached gap; descent ends in a return; no references found (unreferenced or indirect)"
+   "alias_of": "hanim_HideObject"
   },
   "f_2662_087B": {
    "unit": "root",
    "seg": 9826,
    "off": 2171,
-   "grounding": "reviewed: prologue scan in unreached gap; descent ends in a return; no references found (unreferenced or indirect)"
+   "alias_of": "hanim_ShowObject"
   },
   "f_2662_090D": {
    "unit": "root",
    "seg": 9826,
    "off": 2317,
-   "grounding": "inventory:far_call"
+   "alias_of": "hanim_SetObjectPos"
   },
   "f_2662_0B63": {
    "unit": "root",
@@ -11403,13 +11691,13 @@
    "unit": "root",
    "seg": 9826,
    "off": 3078,
-   "grounding": "inventory:far_call"
+   "alias_of": "hanim_RemoveAnimSet"
   },
   "f_2662_0CA2": {
    "unit": "root",
    "seg": 9826,
    "off": 3234,
-   "grounding": "inventory:far_call"
+   "alias_of": "hanim_RenderAnimSet"
   },
   "f_2662_1120": {
    "unit": "root",
@@ -11625,7 +11913,7 @@
    "unit": "root",
    "seg": 10314,
    "off": 266,
-   "grounding": "inventory:far_call,push_cs_call"
+   "alias_of": "StopSong"
   },
   "f_284A_0138": {
    "unit": "root",
@@ -12113,6 +12401,42 @@
     }
    ]
   },
+  "hanim_ActuallyRemoveAnimObjects": {
+   "unit": "root",
+   "seg": 9826,
+   "off": 1739,
+   "grounding": "inventory:push_cs_call",
+   "history": [
+    {
+     "was": "f_2662_06CB",
+     "why": "names3 review: free + memmove compaction of removed objects; sole caller RenderAnimSet, called last in it on both sides; position after RemoveAllAnimObjects"
+    }
+   ]
+  },
+  "hanim_AddAnimObject": {
+   "unit": "root",
+   "seg": 9826,
+   "off": 840,
+   "grounding": "inventory:far_call,push_cs_call",
+   "history": [
+    {
+     "was": "f_2662_0348",
+     "why": "names3 review: shared allocation tag 'animbufs'; gr_BitMapSize + memmove insertion by priority; callers DrawSimKid/DrawDog/DrawSimBird/DrawSimCat/DrawForSale/DrawMower/DrawRain/DrawSwarm + control-window draw + SetObjectPos on both sides"
+    }
+   ]
+  },
+  "hanim_HideObject": {
+   "unit": "root",
+   "seg": 9826,
+   "off": 2025,
+   "grounding": "reviewed: prologue scan in unreached gap; descent ends in a return; no references found (unreferenced or indirect)",
+   "history": [
+    {
+     "was": "f_2662_07E9",
+     "why": "names3 review: shared diagnostic 'anim_hide object not found' (verbatim in Win16 HideObject and ShowObject); body sets show=0 (the ShowObject twin at 087B sets show=1); first of the twin pair on both sides"
+    }
+   ]
+  },
   "hanim_MakeAnimSet": {
    "unit": "root",
    "seg": 9826,
@@ -12122,6 +12446,94 @@
     {
      "was": "f_2662_0B63",
      "why": "xver HIGH features-v1: string \"animhandle\"; string \"animobjs\""
+    }
+   ]
+  },
+  "hanim_PrintSet": {
+   "unit": "root",
+   "seg": 9826,
+   "off": 8,
+   "grounding": "reviewed: prologue scan in unreached gap; descent ends in a return; no references found (unreferenced or indirect)",
+   "history": [
+    {
+     "was": "f_2650_0128",
+     "why": "module boundary after LINK 00 fill"
+    },
+    {
+     "was": "f_2662_0008",
+     "why": "names3 review: DOS body prints 'Printset @ %s  %d objects' and the object list; the Win16 stub's only content is the string 'JunkRoutine: hanim_PrintSet' naming the routine; unit position 1 (Win16 GR 63BC, before _hanim_FindObject); no callers on both sides (debug routine)"
+    }
+   ]
+  },
+  "hanim_RemoveAllAnimObjects": {
+   "unit": "root",
+   "seg": 9826,
+   "off": 1614,
+   "grounding": "inventory:far_call",
+   "history": [
+    {
+     "was": "f_2662_064E",
+     "why": "names3 review: body marks every object remove/dirty, show=0 (size 125 vs 109); sole caller f_00F8_0002 = Win16 win_YardClosed (call order clip_Push, clip_SetWin, RemoveAllAnimObjects, RenderAnimSet, RemoveAnimSet, clip_Pop identical, constant 0x1900); position after RemoveAnimObject"
+    }
+   ]
+  },
+  "hanim_RemoveAnimObject": {
+   "unit": "root",
+   "seg": 9826,
+   "off": 1436,
+   "grounding": "inventory:far_call,push_cs_call",
+   "history": [
+    {
+     "was": "f_2662_059C",
+     "why": "names3 review: diagnostic 'anim_Remove objects not found' (Win16 'hanim_RemoveAnimObject object not found(%s)(%u)'); callers DrawSimKid, DrawMower, Draw_SimYard, DrawSwarm = Win16 caller set"
+    }
+   ]
+  },
+  "hanim_RemoveAnimSet": {
+   "unit": "root",
+   "seg": 9826,
+   "off": 3078,
+   "grounding": "inventory:far_call",
+   "history": [
+    {
+     "was": "f_2662_0C06",
+     "why": "names3 review: body identical to Win16 wf_hanim_RemoveAnimSet (free each frame buffer, unlock/free table, unlock/free set); callers win_ModeControlClosed, win_CasteControlClosed, win_YardClosed(f_00F8_0002) on both sides"
+    }
+   ]
+  },
+  "hanim_RenderAnimSet": {
+   "unit": "root",
+   "seg": 9826,
+   "off": 3234,
+   "grounding": "inventory:far_call",
+   "history": [
+    {
+     "was": "f_2662_0CA2",
+     "why": "names3 review: strings 'to flush' and 'Buffer in set too small!!' (DOS via static helper 0100), constant 6000, DOS 'Bad pic type in ANIM.C'; ends with ActuallyRemoveAnimObjects; callers win_YardClosed, Draw_SimYard, control-window draw on both sides"
+    }
+   ]
+  },
+  "hanim_SetObjectPos": {
+   "unit": "root",
+   "seg": 9826,
+   "off": 2317,
+   "grounding": "inventory:far_call",
+   "history": [
+    {
+     "was": "f_2662_090D",
+     "why": "names3 review: 0x8000 'keep' sentinels for x/y/pic/pri; re-insert via RemoveAnimObject+AddAnimObject (Win16 has the inlined RemoveAnimObject diagnostic plus AddAnimObject call); caller set = Win16 set (Draw* yard animations and the control-window update)"
+    }
+   ]
+  },
+  "hanim_ShowObject": {
+   "unit": "root",
+   "seg": 9826,
+   "off": 2171,
+   "grounding": "reviewed: prologue scan in unreached gap; descent ends in a return; no references found (unreferenced or indirect)",
+   "history": [
+    {
+     "was": "f_2662_087B",
+     "why": "names3 review: shared diagnostic 'anim_hide object not found'; body sets show=1; second of the twin pair, before SetObjectPos on both sides"
     }
    ]
   },
@@ -12272,6 +12684,12 @@
    "seg": 12582,
    "off": 1699,
    "grounding": "inventory:far_call"
+  },
+  "o00_3126_086E": {
+   "unit": "S00",
+   "seg": 12582,
+   "off": 2158,
+   "grounding": "reviewed: unreferenced far jump thunk (jmp far via vector 2894 to o15_384C_0000, demo-expired exit) at the end of S00 module 3126; genuine-assembly driver module (worker ovlA)"
   },
   "o00_3126_088C": {
    "unit": "S00",
@@ -12464,6 +12882,12 @@
    "seg": 12717,
    "off": 12351,
    "grounding": "inventory:far_call"
+  },
+  "o00_35A6_0006": {
+   "unit": "S00",
+   "seg": 13734,
+   "off": 6,
+   "grounding": "reviewed: lone retf at the start of S00 module 35A6 (module starts word-aligned at 35A66 after the 00 fill at 35A65); proc of the genuine-assembly driver module (worker ovlA)"
   },
   "o00_35A6_0007": {
    "unit": "S00",
@@ -12693,6 +13117,12 @@
    "off": 469,
    "grounding": "inventory:far_call"
   },
+  "o01_32B5_000E": {
+   "unit": "S01",
+   "seg": 12981,
+   "off": 14,
+   "grounding": "reviewed: lone retf at the start of S01 module 32B5 (starts word-aligned at 32B5E); proc of the genuine-assembly driver module (worker ovlA)"
+  },
   "o01_32B5_000F": {
    "unit": "S01",
    "seg": 12981,
@@ -12729,11 +13159,41 @@
    "off": 64,
    "grounding": "reviewed: prologue scan in unreached gap; descent ends in a return; no references found (unreferenced or indirect)"
   },
+  "o02_3126_0051": {
+   "unit": "S02",
+   "seg": 12582,
+   "off": 81,
+   "grounding": "reviewed: entry of the display-driver dispatch table / far-called proc; genuine-assembly module S02A.asm: proc extent up to the next public (worker ovlA)"
+  },
+  "o02_3126_005C": {
+   "unit": "S02",
+   "seg": 12582,
+   "off": 92,
+   "grounding": "reviewed: entry of the display-driver dispatch table / far-called proc; genuine-assembly module S02A.asm: proc extent up to the next public (worker ovlA)"
+  },
+  "o02_3126_0079": {
+   "unit": "S02",
+   "seg": 12582,
+   "off": 121,
+   "grounding": "reviewed: entry of the display-driver dispatch table / far-called proc; genuine-assembly module S02A.asm: proc extent up to the next public (worker ovlA)"
+  },
+  "o02_3126_0096": {
+   "unit": "S02",
+   "seg": 12582,
+   "off": 150,
+   "grounding": "reviewed: entry of the display-driver dispatch table / far-called proc; genuine-assembly module S02A.asm: proc extent up to the next public (worker ovlA)"
+  },
   "o02_3126_00AE": {
    "unit": "S02",
    "seg": 12582,
    "off": 174,
    "grounding": "reviewed: prologue scan in unreached gap; descent ends in a return; no references found (unreferenced or indirect)"
+  },
+  "o02_3126_0185": {
+   "unit": "S02",
+   "seg": 12582,
+   "off": 389,
+   "grounding": "reviewed: entry of the display-driver dispatch table / far-called proc; genuine-assembly module S02A.asm: proc extent up to the next public (worker ovlA)"
   },
   "o02_3126_019D": {
    "unit": "S02",
@@ -12765,11 +13225,41 @@
    "off": 1007,
    "grounding": "reviewed: prologue scan in unreached gap; descent ends in a return; no references found (unreferenced or indirect)"
   },
+  "o02_3126_0490": {
+   "unit": "S02",
+   "seg": 12582,
+   "off": 1168,
+   "grounding": "reviewed: entry of the display-driver dispatch table / far-called proc; genuine-assembly module S02A.asm: proc extent up to the next public (worker ovlA)"
+  },
+  "o02_3126_04A2": {
+   "unit": "S02",
+   "seg": 12582,
+   "off": 1186,
+   "grounding": "reviewed: entry of the display-driver dispatch table / far-called proc; genuine-assembly module S02A.asm: proc extent up to the next public (worker ovlA)"
+  },
+  "o02_3126_04B4": {
+   "unit": "S02",
+   "seg": 12582,
+   "off": 1204,
+   "grounding": "reviewed: entry of the display-driver dispatch table / far-called proc; genuine-assembly module S02A.asm: proc extent up to the next public (worker ovlA)"
+  },
+  "o02_3126_04C6": {
+   "unit": "S02",
+   "seg": 12582,
+   "off": 1222,
+   "grounding": "reviewed: entry of the display-driver dispatch table / far-called proc; genuine-assembly module S02A.asm: proc extent up to the next public (worker ovlA)"
+  },
   "o02_3126_04D8": {
    "unit": "S02",
    "seg": 12582,
    "off": 1240,
    "grounding": "reviewed: prologue scan in unreached gap; descent ends in a return; no references found (unreferenced or indirect)"
+  },
+  "o02_3126_0505": {
+   "unit": "S02",
+   "seg": 12582,
+   "off": 1285,
+   "grounding": "reviewed: entry of the display-driver dispatch table / far-called proc; genuine-assembly module S02A.asm: proc extent up to the next public (worker ovlA)"
   },
   "o02_3126_0512": {
    "unit": "S02",
@@ -12777,11 +13267,23 @@
    "off": 1298,
    "grounding": "reviewed: prologue scan in unreached gap; descent ends in a return; no references found (unreferenced or indirect)"
   },
+  "o02_3126_0636": {
+   "unit": "S02",
+   "seg": 12582,
+   "off": 1590,
+   "grounding": "reviewed: entry of the display-driver dispatch table / far-called proc; genuine-assembly module S02A.asm: proc extent up to the next public (worker ovlA)"
+  },
   "o02_3126_0643": {
    "unit": "S02",
    "seg": 12582,
    "off": 1603,
    "grounding": "reviewed: prologue scan in unreached gap; descent ends in a return; no references found (unreferenced or indirect)"
+  },
+  "o02_3126_073A": {
+   "unit": "S02",
+   "seg": 12582,
+   "off": 1850,
+   "grounding": "reviewed: entry of the display-driver dispatch table / far-called proc; genuine-assembly module S02A.asm: proc extent up to the next public (worker ovlA)"
   },
   "o02_3126_0747": {
    "unit": "S02",
@@ -12819,11 +13321,41 @@
    "off": 414,
    "grounding": "reviewed: prologue scan in unreached gap; descent ends in a return; no references found (unreferenced or indirect)"
   },
+  "o03_3126_01B3": {
+   "unit": "S03",
+   "seg": 12582,
+   "off": 435,
+   "grounding": "reviewed: entry of the display-driver dispatch table / far-called proc; genuine-assembly module S03A.asm: proc extent up to the next public (worker ovlA)"
+  },
+  "o03_3126_01BE": {
+   "unit": "S03",
+   "seg": 12582,
+   "off": 446,
+   "grounding": "reviewed: entry of the display-driver dispatch table / far-called proc; genuine-assembly module S03A.asm: proc extent up to the next public (worker ovlA)"
+  },
+  "o03_3126_01DB": {
+   "unit": "S03",
+   "seg": 12582,
+   "off": 475,
+   "grounding": "reviewed: entry of the display-driver dispatch table / far-called proc; genuine-assembly module S03A.asm: proc extent up to the next public (worker ovlA)"
+  },
+  "o03_3126_01F8": {
+   "unit": "S03",
+   "seg": 12582,
+   "off": 504,
+   "grounding": "reviewed: entry of the display-driver dispatch table / far-called proc; genuine-assembly module S03A.asm: proc extent up to the next public (worker ovlA)"
+  },
   "o03_3126_0210": {
    "unit": "S03",
    "seg": 12582,
    "off": 528,
    "grounding": "reviewed: prologue scan in unreached gap; descent ends in a return; no references found (unreferenced or indirect)"
+  },
+  "o03_3126_03C2": {
+   "unit": "S03",
+   "seg": 12582,
+   "off": 962,
+   "grounding": "reviewed: entry of the display-driver dispatch table / far-called proc; genuine-assembly module S03A.asm: proc extent up to the next public (worker ovlA)"
   },
   "o03_3126_03DA": {
    "unit": "S03",
@@ -12855,6 +13387,30 @@
    "off": 1870,
    "grounding": "reviewed: prologue scan in unreached gap; descent ends in a return; no references found (unreferenced or indirect)"
   },
+  "o03_3126_080A": {
+   "unit": "S03",
+   "seg": 12582,
+   "off": 2058,
+   "grounding": "reviewed: entry of the display-driver dispatch table / far-called proc; genuine-assembly module S03A.asm: proc extent up to the next public (worker ovlA)"
+  },
+  "o03_3126_0844": {
+   "unit": "S03",
+   "seg": 12582,
+   "off": 2116,
+   "grounding": "reviewed: entry of the display-driver dispatch table / far-called proc; genuine-assembly module S03A.asm: proc extent up to the next public (worker ovlA)"
+  },
+  "o03_3126_087E": {
+   "unit": "S03",
+   "seg": 12582,
+   "off": 2174,
+   "grounding": "reviewed: entry of the display-driver dispatch table / far-called proc; genuine-assembly module S03A.asm: proc extent up to the next public (worker ovlA)"
+  },
+  "o03_3126_08B8": {
+   "unit": "S03",
+   "seg": 12582,
+   "off": 2232,
+   "grounding": "reviewed: entry of the display-driver dispatch table / far-called proc; genuine-assembly module S03A.asm: proc extent up to the next public (worker ovlA)"
+  },
   "o03_3126_08F2": {
    "unit": "S03",
    "seg": 12582,
@@ -12866,6 +13422,12 @@
    "seg": 12582,
    "off": 2335,
    "grounding": "inventory:far_call"
+  },
+  "o03_3126_092C": {
+   "unit": "S03",
+   "seg": 12582,
+   "off": 2348,
+   "grounding": "reviewed: entry of the display-driver dispatch table / far-called proc; genuine-assembly module S03A.asm: proc extent up to the next public (worker ovlA)"
   },
   "o03_3126_0A4D": {
    "unit": "S03",
@@ -12891,11 +13453,29 @@
    "off": 2952,
    "grounding": "inventory:near_call"
   },
+  "o03_3126_0C11": {
+   "unit": "S03",
+   "seg": 12582,
+   "off": 3089,
+   "grounding": "reviewed: entry of the display-driver dispatch table / far-called proc; genuine-assembly module S03A.asm: proc extent up to the next public (worker ovlA)"
+  },
+  "o03_3126_0C1E": {
+   "unit": "S03",
+   "seg": 12582,
+   "off": 3102,
+   "grounding": "reviewed: entry of the display-driver dispatch table / far-called proc; genuine-assembly module S03A.asm: proc extent up to the next public (worker ovlA)"
+  },
   "o03_3126_0F5D": {
    "unit": "S03",
    "seg": 12582,
    "off": 3933,
    "grounding": "reviewed: prologue scan in unreached gap; descent ends in a return; no references found (unreferenced or indirect)"
+  },
+  "o03_3126_104D": {
+   "unit": "S03",
+   "seg": 12582,
+   "off": 4173,
+   "grounding": "reviewed: entry of the display-driver dispatch table / far-called proc; genuine-assembly module S03A.asm: proc extent up to the next public (worker ovlA)"
   },
   "o03_3126_105A": {
    "unit": "S03",
@@ -12914,6 +13494,12 @@
    "seg": 12582,
    "off": 4489,
    "grounding": "reviewed: prologue scan in unreached gap; descent ends in a return; no references found (unreferenced or indirect)"
+  },
+  "o03_3126_1192": {
+   "unit": "S03",
+   "seg": 12582,
+   "off": 4498,
+   "grounding": "reviewed: entry of the display-driver dispatch table / far-called proc; genuine-assembly module S03A.asm: proc extent up to the next public (worker ovlA)"
   },
   "o03_3126_12D8": {
    "unit": "S03",
@@ -12985,7 +13571,7 @@
    "unit": "S04",
    "seg": 13813,
    "off": 602,
-   "grounding": "inventory:vector"
+   "alias_of": "MapAreaEvent"
   },
   "o04_35F5_0424": {
    "unit": "S04",
@@ -13033,7 +13619,7 @@
    "unit": "S05",
    "seg": 13813,
    "off": 604,
-   "grounding": "inventory:vector"
+   "alias_of": "MagnifyMenu"
   },
   "o05_35F5_04D3": {
    "unit": "S05",
@@ -14823,6 +15409,22 @@
     }
    ]
   },
+  "win_CasteControlChanged": {
+   "unit": "root",
+   "seg": 1944,
+   "off": 153,
+   "grounding": "inventory:far_call,push_cs_call",
+   "history": [
+    {
+     "was": "f_0798_0099",
+     "why": "Win16 SIMANT_MODULE unit InitTriVars..initControls (MAPSYM B324..CC84, 20 members) aligns in order with the 18 functions of DOS root:0798 once the two Windows-only callbacks win_CasteControlChanged/win_ModeControlChanged are removed; InitTriVars body identical to Win16 recovered InitTriVars (win_GetObjRect, width/2, height, (half<<8)/height, 6 tri points); call graph agrees (OpenCaste->UpdateCaste+win_Open, ProcCaste->DrawCaste, ProcMode->DrawMode, Draw*->SetTriLatPoint, ProcCaste/initControls->cvtLevels2IdealCaste); ProcCasteEvent/ProcModeEvent xver unique constants 0x1303/0x1203; DrawControlLevels xver MEDIUM (%-ld%%)"
+    },
+    {
+     "was": "UpdateCasteWindow",
+     "why": "names3 review: 0099 is Win16 win_CasteControlChanged, not UpdateCasteWindow (constant 0x130D, InitTriVars+SetTriLatPoint+ControlClosed body, called before win_Open in OpenCasteWindow and 2nd in initControls exactly where Win16 calls win_CasteControlChanged); the positional alignment removed the wrong two Win16 members"
+    }
+   ]
+  },
   "win_CasteControlClosed": {
    "unit": "root",
    "seg": 1944,
@@ -15171,6 +15773,18 @@
     }
    ]
   },
+  "win_IsWinInFront": {
+   "unit": "root",
+   "seg": 8895,
+   "off": 2594,
+   "grounding": "inventory:far_call",
+   "history": [
+    {
+     "was": "f_22BF_0A22",
+     "why": "names3 review: body: return top-of-z-order window == win (g_5702[0]); Win16 walks GetTopWindow and compares the INDEX property with win -- same predicate; call positions: DoTab (CONFIRMED) first call win_IsWinInFront(0); DOS callers processEdit, processExp, SpecialXfer, PlaceQueenInYard are Win16 win_IsWinInFront callers"
+    }
+   ]
+  },
   "win_IsWinLocked": {
    "unit": "root",
    "seg": 9134,
@@ -15360,6 +15974,22 @@
     {
      "was": "f_22BF_0498",
      "why": "SetObjVisibleState(obj,1) wrapper in Win16 order"
+    }
+   ]
+  },
+  "win_ModeControlChanged": {
+   "unit": "root",
+   "seg": 1944,
+   "off": 215,
+   "grounding": "inventory:far_call,push_cs_call",
+   "history": [
+    {
+     "was": "f_0798_00D7",
+     "why": "Win16 SIMANT_MODULE unit InitTriVars..initControls (MAPSYM B324..CC84, 20 members) aligns in order with the 18 functions of DOS root:0798 once the two Windows-only callbacks win_CasteControlChanged/win_ModeControlChanged are removed; InitTriVars body identical to Win16 recovered InitTriVars (win_GetObjRect, width/2, height, (half<<8)/height, 6 tri points); call graph agrees (OpenCaste->UpdateCaste+win_Open, ProcCaste->DrawCaste, ProcMode->DrawMode, Draw*->SetTriLatPoint, ProcCaste/initControls->cvtLevels2IdealCaste); ProcCasteEvent/ProcModeEvent xver unique constants 0x1303/0x1203; DrawControlLevels xver MEDIUM (%-ld%%)"
+    },
+    {
+     "was": "UpdateModeWindow",
+     "why": "names3 review: 00D7 is Win16 win_ModeControlChanged, not UpdateModeWindow (constant 0x120D, InitTriVars+SetTriLatPoint+ControlClosed body, called before win_Open in OpenModeWindow and 1st in initControls exactly where Win16 calls win_ModeControlChanged)"
     }
    ]
   },
@@ -15794,6 +16424,61 @@
    "off": 864,
    "grounding": "StartAttack (root:1383:053D): les bx,es:[0360]; pushes entry 5 (far string) to f_15D9_009C(...,120L,0); Win16 StartAttack EditMessage(AdviceStrs[10],AdviceStrs[11],0x78,...)"
   },
+  "AlistM": {
+   "seg": 15901,
+   "off": 43346,
+   "grounding": "f_10F7_005D (GetAntIndex-like): mov es,[CONST word = 3E1D]; es:[..A952] list count/field array",
+   "history": [
+    {
+     "was": "fd_3E1D_A952",
+     "why": "names3 review (data): CompactListA: DOS tests/copies AD3B,A180,A569,A952,B124 (T,X,Y,M,S) / Win16 tests/copies Dx8+0x2F62,0x23A4,0x278E,0x2B78,0x334C (=_AlistT,X,Y,M,S; SIMANT_DATA_GROUP, Dx8 at 0); A952 <-> Dx8+0x2B78 = _AlistM; BuildAntListA: DOS A952[ListIndexA]=2 / Win16 Dx8[ListIndexA+0x2B78]=2 (identical body)"
+    }
+   ]
+  },
+  "AlistS": {
+   "seg": 15901,
+   "off": 45348,
+   "grounding": "f_10F7_005D (GetAntIndex-like): mov es,[CONST word = 3E1D]; es:[..B124] list count/field array",
+   "history": [
+    {
+     "was": "fd_3E1D_B124",
+     "why": "names3 review (data): CompactListA: DOS tests/copies AD3B,A180,A569,A952,B124 (T,X,Y,M,S) / Win16 tests/copies Dx8+0x2F62,0x23A4,0x278E,0x2B78,0x334C (=_AlistT,X,Y,M,S; SIMANT_DATA_GROUP, Dx8 at 0); B124 <-> Dx8+0x334C = _AlistS; BuildAntListA: DOS B124[ListIndexA]=0 / Win16 Dx8[ListIndexA+0x334C]=0 (identical body)"
+    }
+   ]
+  },
+  "AlistT": {
+   "seg": 15901,
+   "off": 44347,
+   "grounding": "f_10F7_005D (GetAntIndex-like): mov es,[CONST word = 3E1D]; es:[..AD3B] list count/field array",
+   "history": [
+    {
+     "was": "fd_3E1D_AD3B",
+     "why": "names3 review (data): CompactListA: DOS tests/copies AD3B,A180,A569,A952,B124 (T,X,Y,M,S) / Win16 tests/copies Dx8+0x2F62,0x23A4,0x278E,0x2B78,0x334C (=_AlistT,X,Y,M,S; SIMANT_DATA_GROUP, Dx8 at 0); AD3B <-> Dx8+0x2F62 = _AlistT; BuildAntListA: DOS AD3B[ListIndexA]=ant / Win16 Dx8[ListIndexA+0x2F62]=ant (identical body); FindInAList: DOS AD3B[i]!=0 / Win16 Dx8[i+0x2F62]!=0; MoveSpider: DOS StargLife=AD3B[Starg] / Win16 4799 al=es:[bx+2F62]"
+    }
+   ]
+  },
+  "AlistX": {
+   "seg": 15901,
+   "off": 41344,
+   "grounding": "f_10F7_005D (GetAntIndex-like): mov es,[CONST word = 3E1D]; es:[..A180] list count/field array",
+   "history": [
+    {
+     "was": "fd_3E1D_A180",
+     "why": "names3 review (data): CompactListA: DOS tests/copies AD3B,A180,A569,A952,B124 (T,X,Y,M,S) / Win16 tests/copies Dx8+0x2F62,0x23A4,0x278E,0x2B78,0x334C (=_AlistT,X,Y,M,S; SIMANT_DATA_GROUP, Dx8 at 0); A180 <-> Dx8+0x23A4 = _AlistX; BuildAntListA: DOS A180[ListIndexA]=x (outer 0..127) / Win16 Dx8[ListIndexA+0x23A4]=x (outer 0..127) (identical body); FindInAList: DOS A180[i]==x / Win16 Dx8[i+0x23A4]==firstKey"
+    }
+   ]
+  },
+  "AlistY": {
+   "seg": 15901,
+   "off": 42345,
+   "grounding": "f_10F7_005D (GetAntIndex-like): mov es,[CONST word = 3E1D]; es:[..A569] list count/field array",
+   "history": [
+    {
+     "was": "fd_3E1D_A569",
+     "why": "names3 review (data): CompactListA: DOS tests/copies AD3B,A180,A569,A952,B124 (T,X,Y,M,S) / Win16 tests/copies Dx8+0x2F62,0x23A4,0x278E,0x2B78,0x334C (=_AlistT,X,Y,M,S; SIMANT_DATA_GROUP, Dx8 at 0); A569 <-> Dx8+0x278E = _AlistY; BuildAntListA: DOS A569[ListIndexA]=y (inner 0..63) / Win16 Dx8[ListIndexA+0x278E]=y (inner 0..63) (identical body); FindInAList: DOS A569[i]==y / Win16 Dx8[i+0x278E]==secondKey"
+    }
+   ]
+  },
   "AntsEatenByLions": {
    "seg": 20726,
    "off": 2568,
@@ -15812,6 +16497,83 @@
     {
      "was": "fd_50F6_0480",
      "why": "worker data identification: Win16 variable of the same role at the same use sites (reports dig/ovl08/simA/sim10F7)"
+    }
+   ]
+  },
+  "BlistM": {
+   "seg": 15901,
+   "off": 47351,
+   "grounding": "f_10F7_005D (GetAntIndex-like): mov es,[CONST word = 3E1D]; es:[..B8F7] list count/field array",
+   "history": [
+    {
+     "was": "fd_3E1D_B8F7",
+     "why": "names3 review (data): CompactListB: DOS tests/copies BAEC,B50D,B702,B8F7,BCE1 (T,X,Y,M,S) / Win16 tests/copies Dx8+0x3D18,0x3736,0x392C,0x3B22,0x3F0E (=_BlistT,X,Y,M,S; SIMANT_DATA_GROUP, Dx8 at 0); B8F7 <-> Dx8+0x3B22 = _BlistM; AddAntToBList: DOS B8F7[n]=mode (arg4) / Win16 list[count+0x3B22]=mode (arg4) (identical body, cap 500)"
+    }
+   ]
+  },
+  "BlistS": {
+   "seg": 15901,
+   "off": 48353,
+   "grounding": "f_10F7_005D (GetAntIndex-like): mov es,[CONST word = 3E1D]; es:[..BCE1] list count/field array",
+   "history": [
+    {
+     "was": "fd_3E1D_BCE1",
+     "why": "names3 review (data): CompactListB: DOS tests/copies BAEC,B50D,B702,B8F7,BCE1 (T,X,Y,M,S) / Win16 tests/copies Dx8+0x3D18,0x3736,0x392C,0x3B22,0x3F0E (=_BlistT,X,Y,M,S; SIMANT_DATA_GROUP, Dx8 at 0); BCE1 <-> Dx8+0x3F0E = _BlistS; AddAntToBList: DOS BCE1[n]=stat (arg5) / Win16 list[count+0x3F0E]=stat (arg5) (identical body, cap 500)"
+    }
+   ]
+  },
+  "BlistT": {
+   "seg": 15901,
+   "off": 47852,
+   "grounding": "f_10F7_005D (GetAntIndex-like): mov es,[CONST word = 3E1D]; es:[..BAEC] list count/field array",
+   "history": [
+    {
+     "was": "fd_3E1D_BAEC",
+     "why": "names3 review (data): CompactListB: DOS tests/copies BAEC,B50D,B702,B8F7,BCE1 (T,X,Y,M,S) / Win16 tests/copies Dx8+0x3D18,0x3736,0x392C,0x3B22,0x3F0E (=_BlistT,X,Y,M,S; SIMANT_DATA_GROUP, Dx8 at 0); BAEC <-> Dx8+0x3D18 = _BlistT; AddAntToBList: DOS BAEC[n]=type (arg3, LifeB[x][y]=type) / Win16 list[count+0x3D18]=type (arg3, LifeB[x][y]=type) (identical body, cap 500); FindInBList: DOS BAEC[i]==t / Win16 Dx8[i+0x3D18]==thirdKey"
+    }
+   ]
+  },
+  "BlistX": {
+   "seg": 15901,
+   "off": 46349,
+   "grounding": "f_10F7_005D (GetAntIndex-like): mov es,[CONST word = 3E1D]; es:[..B50D] list count/field array",
+   "history": [
+    {
+     "was": "fd_3E1D_B50D",
+     "why": "names3 review (data): CompactListB: DOS tests/copies BAEC,B50D,B702,B8F7,BCE1 (T,X,Y,M,S) / Win16 tests/copies Dx8+0x3D18,0x3736,0x392C,0x3B22,0x3F0E (=_BlistT,X,Y,M,S; SIMANT_DATA_GROUP, Dx8 at 0); B50D <-> Dx8+0x3736 = _BlistX; AddAntToBList: DOS B50D[n]=x (arg1) / Win16 list[count+0x3736]=x (arg1) (identical body, cap 500); FindInBList: DOS B50D[i]==x / Win16 Dx8[i+0x3736]==firstKey"
+    }
+   ]
+  },
+  "BlistY": {
+   "seg": 15901,
+   "off": 46850,
+   "grounding": "f_10F7_005D (GetAntIndex-like): mov es,[CONST word = 3E1D]; es:[..B702] list count/field array",
+   "history": [
+    {
+     "was": "fd_3E1D_B702",
+     "why": "names3 review (data): CompactListB: DOS tests/copies BAEC,B50D,B702,B8F7,BCE1 (T,X,Y,M,S) / Win16 tests/copies Dx8+0x3D18,0x3736,0x392C,0x3B22,0x3F0E (=_BlistT,X,Y,M,S; SIMANT_DATA_GROUP, Dx8 at 0); B702 <-> Dx8+0x392C = _BlistY; AddAntToBList: DOS B702[n]=y (arg2) / Win16 list[count+0x392C]=y (arg2) (identical body, cap 500); FindInBList: DOS B702[i]==y / Win16 Dx8[i+0x392C]==secondKey"
+    }
+   ]
+  },
+  "BpopT": {
+   "seg": 20726,
+   "off": 816,
+   "grounding": "f_0BE8_0002: mov es,[DS:810C] (CONST 50F6); mov es:[0330],ax",
+   "history": [
+    {
+     "was": "fd_50F6_0330",
+     "why": "names3 review (data): GstrB: DOS HealthB<10 && (0330>>1)>0350 && 0350>0; 0224<0330 ->3; 0330>100 && 0330/3>0350 / Win16 recovered GstrB identical with BpopT/RpopT/TilesDugB; GstrR: DOS (0350>>1)>0330 && 0330>0 / Win16 03D3..0421: RpopT(ss:AC84)>>1 cmp BpopT(ss:AC82); BpopT>0; DOS S25 o25_39C7_15B4 0212=0330>>5 / Win16 DecEatB EatCountB=BpopT>>5"
+    }
+   ]
+  },
+  "CasteAuto": {
+   "seg": 15703,
+   "off": 2024,
+   "grounding": "ProcCasteEvent (root:0798): mov es,[CONST 8002 = 3D57]; es:[07E8] caste auto flag (0/1); initControls stores 1",
+   "history": [
+    {
+     "was": "fd_3D57_07E8",
+     "why": "names3 review: initControls: second =1 store (Win16 CasteAuto = 1); ProcCasteEvent case 1/2 toggle with MakeGroupInvisible/Visible(0x1300,4), the caste twin of ModeAuto; Win16 ProcCasteEvent pool references CasteAuto"
     }
    ]
   },
@@ -15857,6 +16619,17 @@
     }
    ]
   },
+  "DeathCnt": {
+   "seg": 20726,
+   "off": 4250,
+   "grounding": "InitSpider/MoveSpider (root:0CDB): mov es,[CONST 81xx = 50F6]; word es:[109A] spider state variable",
+   "history": [
+    {
+     "was": "fd_50F6_109A",
+     "why": "names3 review (data): KillSpider: DOS 109A=500 / Win16 recovered KillSpider DeathCnt=500 (also inlined in Win16 MoveSpider 4A6C: es:[72E0=_DeathCnt]=0x1F4); MoveSpider case 5: DOS if(--109A==0){0FB8=0F0C=0; f_0BE8_0812(x,y) x3} / Win16 507E..50A8: dec es:[72E0]; jne; SMode=SpidOn=0; DropFoodA(x,y) x3"
+    }
+   ]
+  },
   "Dx8": {
    "seg": 15703,
    "off": 0,
@@ -15868,6 +16641,17 @@
     }
    ]
   },
+  "Dx9": {
+   "seg": 15703,
+   "off": 16,
+   "grounding": "S25:3BA4 DoAntMoveY:01A7 signed char es:[bx+0010] dir table (CONST seg word 895E = 3D57)",
+   "history": [
+    {
+     "was": "fd_3D57_0010",
+     "why": "names3 review (data): DoAntLions case 0: DOS nx=0010[dir]+x; LifeA[nx][ny=001A[dir]+y] / Win16 4610: es:[si+0x10] (_Dx9) + x, shl 6 = LifeA row; 4601 es:[si+0x1A] (_Dy9) + y; DropWall (S22:3BBD): DOS dir=GetDir(x,y,tx,ty); if(0010[dir]) x+=0010[dir] else y+=001A[dir] / Win16 7542..7560 same: es:[bx+0x10] tested, add si (x); else es:[bx+0x1A] add di (y); ExpDig (S22:3BBD): DOS x+=0010[dir]; y+=001A[dir] / Win16 792E..7946 es:[bx+0x10]->si (x), es:[bx+0x1A]->di (y); si is GetDir arg1"
+    }
+   ]
+  },
   "Dy8": {
    "seg": 15703,
    "off": 8,
@@ -15876,6 +16660,28 @@
     {
      "was": "fd_3D57_0008",
      "why": "worker data identification: Win16 variable of the same role at the same use sites (reports dig/ovl08/simA/sim10F7)"
+    }
+   ]
+  },
+  "Dy9": {
+   "seg": 15703,
+   "off": 26,
+   "grounding": "S25:3BA4 DoAntMoveY:01C1 signed char es:[bx+001A] dir table (CONST seg word 8960 = 3D57)",
+   "history": [
+    {
+     "was": "fd_3D57_001A",
+     "why": "names3 review (data): DoAntLions: DOS ny=001A[dir]+y / Win16 es:[si+0x1A] (_Dy9) + y (column, unshifted); DropWall: DOS else y+=001A[dir] / Win16 es:[bx+0x1A] add di (y); ExpDig: DOS y+=001A[dir] / Win16 es:[bx+0x1A] add di (y)"
+    }
+   ]
+  },
+  "EatCnt": {
+   "seg": 20726,
+   "off": 4180,
+   "grounding": "InitSpider/MoveSpider (root:0CDB): mov es,[CONST 81xx = 50F6]; word es:[1054] spider state variable",
+   "history": [
+    {
+     "was": "fd_50F6_1054",
+     "why": "names3 review (data): InitSpider (Win16 5:4668 card, same store sequence: 10,0,0,0,0,0, SpidDir=0, RevSpider=0, SpidOn=CurGameType?1:0, SpidX=0x400, SpidY=0x200, SMode=MeSMode=0, Starg=-2, StargLife=-1, SuserX=SuserY=0x40): DOS 2nd store 1054=0 / Win16 2nd store PACK:77AE=_EatCnt=0; MoveSpider eat: DOS 1054 = 06AC>=7 ? 11 : 50; if(1054>0){1054--; if(1054%10==0&&SRand2()) myBeginSound(0x2c,(SRand256()<<3)+0x2777,-5)} / Win16 51B3..526C: MeSMode>=7?0xB:0x32 -> es:[77AE]; cmp [77AE],0; dec; idiv 10; SRand2; myBeginSound(0x2c,..+0x2777,-5)"
     }
    ]
   },
@@ -16061,6 +16867,28 @@
     }
    ]
   },
+  "ListIndexB": {
+   "seg": 20726,
+   "off": 3496,
+   "grounding": "f_10F7_005D (GetAntIndex-like): mov es,[CONST word = 50F6]; es:[..0DA8] list count/field array",
+   "history": [
+    {
+     "was": "fd_50F6_0DA8",
+     "why": "names3 review (data): CompactListB: DOS for(i<0DA8)..; 0DA8+=shift / Win16 CompactListB bound ListIndexB (PACK:99D4 = match_position[0x4CEA]); ListIndexB+=displacement; AddAntToBList: DOS if(0DA8>=500)return; n=0DA8; ..; 0DA8++ / Win16 identical with ListIndexB; FindInBList i=0DA8 / Win16 index=ListIndexB; ClearListB: DOS 0DA8=0 / Win16 ListIndexB=0"
+    }
+   ]
+  },
+  "ListIndexR": {
+   "seg": 20726,
+   "off": 3754,
+   "grounding": "f_10F7_005D (GetAntIndex-like): mov es,[CONST word = 50F6]; es:[..0EAA] list count/field array",
+   "history": [
+    {
+     "was": "fd_50F6_0EAA",
+     "why": "names3 review (data): CompactListR: DOS bound/adjust 0EAA / Win16 ListIndexR (PACK:72CC = match_position[0x3966]); AddAntToRList: DOS if(0EAA>=500)return; ..; 0EAA++ / Win16 identical with ListIndexR; FindInRList i=0EAA / Win16 ListIndexR; ClearListR: DOS 0EAA=0 / Win16 ListIndexR=0"
+    }
+   ]
+  },
   "MapA": {
    "seg": 15901,
    "off": 384,
@@ -16138,6 +16966,17 @@
     }
    ]
   },
+  "ModeAuto": {
+   "seg": 20726,
+   "off": 888,
+   "grounding": "S25:39C7 o25_39C7_0980:09DF cmp word es:[0378],0 (CONST 8924=50F6); Win16 SimEggB ModeAuto",
+   "history": [
+    {
+     "was": "fd_50F6_0378",
+     "why": "names3 review: initControls: first of the four =1 stores (Win16 ModeAuto = 1); ProcModeEvent case 1/2 toggle with win_MakeGroupInvisible/Visible(0x1200,4); sim code tests it as Win16 \"ModeAuto != 0 || modeLevels[2]>>7 >= SGRand(255)\" (registry grounding S25 o25_39C7_0980 <-> Win16 SimEggB)"
+    }
+   ]
+  },
   "ModeMe": {
    "seg": 15703,
    "off": 3088,
@@ -16157,6 +16996,61 @@
    "seg": 15703,
    "off": 2974,
    "grounding": "GetNewModeB (root:1383:09D2): byte [0B9E + StrategicModeB*8 + SRand8()] for caste 2; Win16 ModeTabWB[StrategicModeB][SRand8()]"
+  },
+  "PherMapA": {
+   "seg": 15901,
+   "off": 53407,
+   "grounding": "o08_35F5_0050 (RandWorld): mov es,[S08 CONST word] ; es:[bx+disp] array base",
+   "history": [
+    {
+     "was": "fd_3E1D_D09F",
+     "why": "names3 review (data): AlarmHere: DOS v=D09F[x>>1][y>>1]+level, cap 200 / Win16 Dx8[0x52D2+(row<<5)+col]+level, cap 0xC8 (0x52D2=_PherMapA); AlarmHere2: DOS if(D09F[..]>level)return; =level / Win16 same on Dx8+0x52D2; SmoothAlarm (DOS) copies D09F into C89F scratch; Win16 _TemDensity (4AD2) is the 0x800 block right before PherMapA - consistent, not counted"
+    }
+   ]
+  },
+  "PherMapBN": {
+   "seg": 15901,
+   "off": 57503,
+   "grounding": "o08_35F5_0050 (RandWorld): mov es,[S08 CONST word] ; es:[bx+disp] array base",
+   "history": [
+    {
+     "was": "fd_3E1D_E09F",
+     "why": "names3 review (data): ColonySmellBN: DOS if(E09F[x][y])E09F[x][y]-- / Win16 recovered ColonySmellBN: --PherMapBN[row][cell]; JamScentBN: DOS max-jam E09F[x>>1][y>>1] / Win16 Dx8[..+0x62D2] (=_PherMapBN); Colour cross-check: DOS FillHolesBN writes HoleMapB holes into E09F; GetNestDir plane==0 (black) reads E09F"
+    }
+   ]
+  },
+  "PherMapBT": {
+   "seg": 15901,
+   "off": 59551,
+   "grounding": "o08_35F5_0050 (RandWorld): mov es,[S08 CONST word] ; es:[bx+disp] array base",
+   "history": [
+    {
+     "was": "fd_3E1D_E89F",
+     "why": "names3 review (data): ColonySmellBT: DOS <8 ->0 else smell-(smell>>1) on E89F / Win16 same on Dx8+0x6AD2 (=_PherMapBT); JamScentBT: DOS E89F / Win16 Dx8+0x6AD2; DecTSmell red==0: DOS E89F / Win16 Dx8+0x6AD2; GetSmellT !red: DOS E89F / Win16 PherMapBT[(x<<5)+y]"
+    }
+   ]
+  },
+  "PherMapRN": {
+   "seg": 15901,
+   "off": 61599,
+   "grounding": "o08_35F5_0050 (RandWorld): mov es,[S08 CONST word] ; es:[bx+disp] array base",
+   "history": [
+    {
+     "was": "fd_3E1D_F09F",
+     "why": "names3 review (data): ColonySmellRN: DOS decrement nonzero F09F / Win16 decrement Dx8[0x72D2+..] (=_PherMapRN); JamScentRN: DOS F09F / Win16 Dx8+0x72D2; Colour cross-check: DOS FillHolesRN writes HoleMapR holes into F09F; GetNestDir plane!=0 (red) reads F09F"
+    }
+   ]
+  },
+  "PherMapRT": {
+   "seg": 19879,
+   "off": 0,
+   "grounding": "o08_35F5_0050 (RandWorld): mov es,[S08 CONST word] ; es:[bx+disp] array base",
+   "history": [
+    {
+     "was": "fd_4DA7_0000",
+     "why": "names3 review (data): ColonySmellRT: DOS if(smell<=0)continue; <8 ->0 else -= smell>>1 on 4DA7:0000 / Win16 same on Dx8+0x7AD2 (=_PherMapRT); JamScentRT: DOS 4DA7:0000 / Win16 Dx8+0x7AD2; DecTSmell red / GetSmellT red: DOS 4DA7:0000 / Win16 Dx8+0x7AD2 and PherMapBT+0x1000 (=_PherMapRT)"
+    }
+   ]
   },
   "PillDir": {
    "seg": 20726,
@@ -16218,6 +17112,116 @@
    "off": 1176,
    "grounding": "GetRedDefendDir (root:1383:0FF9): switch on es:[0498] 1/2/3 like GetDefendDir on MePlane; Win16 GetRedDefendDir switch (RedPlane)"
   },
+  "RlistM": {
+   "seg": 15901,
+   "off": 49856,
+   "grounding": "f_10F7_005D (GetAntIndex-like): mov es,[CONST word = 3E1D]; es:[..C2C0] list count/field array",
+   "history": [
+    {
+     "was": "fd_3E1D_C2C0",
+     "why": "names3 review (data): CompactListR: DOS tests/copies C4B5,BED6,C0CB,C2C0,C6AA (T,X,Y,M,S) / Win16 tests/copies Dx8+0x46E6,0x4104,0x42FA,0x44F0,0x48DC (=_RlistT,X,Y,M,S; SIMANT_DATA_GROUP, Dx8 at 0); C2C0 <-> Dx8+0x44F0 = _RlistM; AddAntToRList: DOS C2C0[n]=mode (arg4) / Win16 list[count+0x44F0]=mode (arg4) (identical body, cap 500)"
+    }
+   ]
+  },
+  "RlistS": {
+   "seg": 15901,
+   "off": 50858,
+   "grounding": "f_10F7_005D (GetAntIndex-like): mov es,[CONST word = 3E1D]; es:[..C6AA] list count/field array",
+   "history": [
+    {
+     "was": "fd_3E1D_C6AA",
+     "why": "names3 review (data): CompactListR: DOS tests/copies C4B5,BED6,C0CB,C2C0,C6AA (T,X,Y,M,S) / Win16 tests/copies Dx8+0x46E6,0x4104,0x42FA,0x44F0,0x48DC (=_RlistT,X,Y,M,S; SIMANT_DATA_GROUP, Dx8 at 0); C6AA <-> Dx8+0x48DC = _RlistS; AddAntToRList: DOS C6AA[n]=stat (arg5) / Win16 list[count+0x48DC]=stat (arg5) (identical body, cap 500)"
+    }
+   ]
+  },
+  "RlistT": {
+   "seg": 15901,
+   "off": 50357,
+   "grounding": "f_10F7_005D (GetAntIndex-like): mov es,[CONST word = 3E1D]; es:[..C4B5] list count/field array",
+   "history": [
+    {
+     "was": "fd_3E1D_C4B5",
+     "why": "names3 review (data): CompactListR: DOS tests/copies C4B5,BED6,C0CB,C2C0,C6AA (T,X,Y,M,S) / Win16 tests/copies Dx8+0x46E6,0x4104,0x42FA,0x44F0,0x48DC (=_RlistT,X,Y,M,S; SIMANT_DATA_GROUP, Dx8 at 0); C4B5 <-> Dx8+0x46E6 = _RlistT; AddAntToRList: DOS C4B5[n]=type (arg3, LifeR[x][y]=type) / Win16 list[count+0x46E6]=type (arg3, LifeR[x][y]=type) (identical body, cap 500); FindInRList: DOS C4B5[i]==t / Win16 Dx8[i+0x46E6]==thirdKey"
+    }
+   ]
+  },
+  "RlistX": {
+   "seg": 15901,
+   "off": 48854,
+   "grounding": "f_10F7_005D (GetAntIndex-like): mov es,[CONST word = 3E1D]; es:[..BED6] list count/field array",
+   "history": [
+    {
+     "was": "fd_3E1D_BED6",
+     "why": "names3 review (data): CompactListR: DOS tests/copies C4B5,BED6,C0CB,C2C0,C6AA (T,X,Y,M,S) / Win16 tests/copies Dx8+0x46E6,0x4104,0x42FA,0x44F0,0x48DC (=_RlistT,X,Y,M,S; SIMANT_DATA_GROUP, Dx8 at 0); BED6 <-> Dx8+0x4104 = _RlistX; AddAntToRList: DOS BED6[n]=x (arg1) / Win16 list[count+0x4104]=x (arg1) (identical body, cap 500); FindInRList: DOS BED6[i]==x / Win16 Dx8[i+0x4104]==firstKey"
+    }
+   ]
+  },
+  "RlistY": {
+   "seg": 15901,
+   "off": 49355,
+   "grounding": "f_10F7_005D (GetAntIndex-like): mov es,[CONST word = 3E1D]; es:[..C0CB] list count/field array",
+   "history": [
+    {
+     "was": "fd_3E1D_C0CB",
+     "why": "names3 review (data): CompactListR: DOS tests/copies C4B5,BED6,C0CB,C2C0,C6AA (T,X,Y,M,S) / Win16 tests/copies Dx8+0x46E6,0x4104,0x42FA,0x44F0,0x48DC (=_RlistT,X,Y,M,S; SIMANT_DATA_GROUP, Dx8 at 0); C0CB <-> Dx8+0x42FA = _RlistY; AddAntToRList: DOS C0CB[n]=y (arg2) / Win16 list[count+0x42FA]=y (arg2) (identical body, cap 500); FindInRList: DOS C0CB[i]==y / Win16 Dx8[i+0x42FA]==secondKey"
+    }
+   ]
+  },
+  "RpopT": {
+   "seg": 20726,
+   "off": 848,
+   "grounding": "f_0BE8_0002: mov es,[DS:810E] (CONST 50F6); mov es:[0350],ax",
+   "history": [
+    {
+     "was": "fd_50F6_0350",
+     "why": "names3 review (data): GstrB: DOS (0330>>1)>0350 && 0350>0 / Win16 recovered GstrB (BpopT>>1)>RpopT && RpopT>0; GstrR: DOS 0232<0350 ->3; (0350>>1)>0330 / Win16 ss:[AC84]=_RpopT vs TilesDugR and >>1 vs BpopT; DecEatR: DOS 0226=0350>>5 / Win16 DecEatR EatCountR=RpopT>>5"
+    }
+   ]
+  },
+  "SCorpseBase": {
+   "seg": 20726,
+   "off": 4186,
+   "grounding": "InitSpider/MoveSpider (root:0CDB): mov es,[CONST 81xx = 50F6]; word es:[105A] spider state variable",
+   "history": [
+    {
+     "was": "fd_50F6_105A",
+     "why": "names3 review (data): InitSpider (Win16 5:4668 card, same store sequence: 10,0,0,0,0,0, SpidDir=0, RevSpider=0, SpidOn=CurGameType?1:0, SpidX=0x400, SpidY=0x200, SMode=MeSMode=0, Starg=-2, StargLife=-1, SuserX=SuserY=0x40): DOS 3rd store 105A=0 / Win16 3rd store PACK:78DA=_SCorpseBase=0; MoveSpider: DOS 105A=4 (red ant eaten) else 0; MapA=SRand4()+105A+0x10; DeadAntHere(d,r,105A) / Win16 4E81 es:[78DA]=4; 511C/51A4 =0; 521F add al,es:[78DA]; add al,0x10; 52B0 push es:[78DA] -> DeadAntHere"
+    }
+   ]
+  },
+  "SMode": {
+   "seg": 20726,
+   "off": 4024,
+   "grounding": "f_10F7_0CA8 (root:10F7): mov es,[CONST word = 50F6]; es:[..0FB8] far data reference",
+   "history": [
+    {
+     "was": "fd_50F6_0FB8",
+     "why": "names3 review (data): InitSpider (Win16 5:4668 card, same store sequence: 10,0,0,0,0,0, SpidDir=0, RevSpider=0, SpidOn=CurGameType?1:0, SpidX=0x400, SpidY=0x200, SMode=MeSMode=0, Starg=-2, StargLife=-1, SuserX=SuserY=0x40): DOS '06AC = 0FB8 = 0' stores 0FB8 first / Win16 stores PACK:729E=_SMode then 7D60=_MeSMode; KillSpider: DOS 0FB8=5 / Win16 recovered KillSpider SMode=5; MoveSpider: DOS if((0FFC=SFoundAnt())!=-2){0FB8=2;..} / Win16 4740..4788: bx=729E; SFoundAnt; es:[7A5E]=ax; cmp 0xfffe; [SMode]=2"
+    }
+   ]
+  },
+  "Scycle": {
+   "seg": 20726,
+   "off": 4162,
+   "grounding": "InitSpider/MoveSpider (root:0CDB): mov es,[CONST 81xx = 50F6]; word es:[1042] spider state variable",
+   "history": [
+    {
+     "was": "fd_50F6_1042",
+     "why": "names3 review (data): InitSpider (Win16 5:4668 card, same store sequence: 10,0,0,0,0,0, SpidDir=0, RevSpider=0, SpidOn=CurGameType?1:0, SpidX=0x400, SpidY=0x200, SMode=MeSMode=0, Starg=-2, StargLife=-1, SuserX=SuserY=0x40): DOS 4th store 1042=0 / Win16 4th store PACK:7290=_Scycle=0; KillSpider: DOS 0FB8=5, 109A=500, 1042=0 / Win16 recovered KillSpider: SMode=5, DeathCnt=500, Scycle=0; MoveSpider: DOS if(d<1){1042=2;return}; 1042=(1042+1|2)&0x3ff / Win16 4806 es:[7290]=2 after GetDis<1; inc/and 0x3ff on [7290]"
+    }
+   ]
+  },
+  "Scycle2": {
+   "seg": 20726,
+   "off": 4210,
+   "grounding": "InitSpider/MoveSpider (root:0CDB): mov es,[CONST 81xx = 50F6]; word es:[1072] spider state variable",
+   "history": [
+    {
+     "was": "fd_50F6_1072",
+     "why": "names3 review (data): InitSpider (Win16 5:4668 card, same store sequence: 10,0,0,0,0,0, SpidDir=0, RevSpider=0, SpidOn=CurGameType?1:0, SpidX=0x400, SpidY=0x200, SMode=MeSMode=0, Starg=-2, StargLife=-1, SuserX=SuserY=0x40): DOS 5th store 1072=0 / Win16 5th store PACK:77AC=_Scycle2=0; MoveSpider entry: DOS 1072=(1072+1)&0x3ff / Win16 470A: mov ax,es:[77AC]; inc ax; and ah,3; mov es:[77AC],ax"
+    }
+   ]
+  },
   "SowDir": {
    "seg": 20726,
    "off": 3866,
@@ -16243,10 +17247,76 @@
    "off": 3840,
    "grounding": "InitSow (root:0AD9:0067): es:[0F00+2i]=y (SRand1(64)); Win16 InitSow SowY[i]=y"
   },
+  "SpidBurpCnt": {
+   "seg": 20726,
+   "off": 4214,
+   "grounding": "InitSpider/MoveSpider (root:0CDB): mov es,[CONST 81xx = 50F6]; word es:[1076] spider state variable",
+   "history": [
+    {
+     "was": "fd_50F6_1076",
+     "why": "names3 review (data): InitSpider (Win16 5:4668 card, same store sequence: 10,0,0,0,0,0, SpidDir=0, RevSpider=0, SpidOn=CurGameType?1:0, SpidX=0x400, SpidY=0x200, SMode=MeSMode=0, Starg=-2, StargLife=-1, SuserX=SuserY=0x40): DOS 1st store 1076=10 / Win16 1st store PACK:8072=_SpidBurpCnt=0xA; MoveSpider: DOS if(--1076==0){1076=10; if(..&&!SRand2()) myBeginSound(10,0,10)} / Win16 5278: dec es:[8072]; jne; mov es:[8072],0xA; SRand2; myBeginSound(10,0,10)"
+    }
+   ]
+  },
+  "SpidRevenge": {
+   "seg": 20726,
+   "off": 4234,
+   "grounding": "InitSpider/MoveSpider (root:0CDB): mov es,[CONST 81xx = 50F6]; word es:[108A] spider state variable",
+   "history": [
+    {
+     "was": "fd_50F6_108A",
+     "why": "names3 review (data): InitSpider (Win16 5:4668 card, same store sequence: 10,0,0,0,0,0, SpidDir=0, RevSpider=0, SpidOn=CurGameType?1:0, SpidX=0x400, SpidY=0x200, SMode=MeSMode=0, Starg=-2, StargLife=-1, SuserX=SuserY=0x40): DOS 6th store 108A=0 / Win16 6th store PACK:72C2=_SpidRevenge=0; MoveSpider after PictStrnDialog(0,0x273e,0): DOS if(108A<5)108A++; if(108A<3)return; 06AC=108A>=5?8:7; if(108A>=6&&!SRand2()) / Win16 4A96..4ADA: cmp [72C2],5; inc; cmp 3; cmp 5 -> MeSMode 8/7; cmp 6"
+    }
+   ]
+  },
+  "Starg": {
+   "seg": 20726,
+   "off": 4092,
+   "grounding": "f_10F7_0CA8 (root:10F7): mov es,[CONST word = 50F6]; es:[..0FFC] far data reference",
+   "history": [
+    {
+     "was": "fd_50F6_0FFC",
+     "why": "names3 review (data): InitSpider (Win16 5:4668 card, same store sequence: 10,0,0,0,0,0, SpidDir=0, RevSpider=0, SpidOn=CurGameType?1:0, SpidX=0x400, SpidY=0x200, SMode=MeSMode=0, Starg=-2, StargLife=-1, SuserX=SuserY=0x40): DOS 0FFC=-2 / Win16 PACK:7A5E=_Starg=0xFFFE; MoveSpider: DOS 0FFC=SFoundAnt(); !=-2; 10AE=AlistT[0FFC] / Win16 4770: es:[7A5E]=ax after SFoundAnt; cmp 0xfffe; AlistT[Starg] via es:[bx+2F62]"
+    }
+   ]
+  },
+  "StargLife": {
+   "seg": 20726,
+   "off": 4270,
+   "grounding": "processSpider (S22:39C7:06F4/074A): mov es,[CONST 87E2]; mov es:[10AE],-1 / =life (Win16 StargLife)",
+   "history": [
+    {
+     "was": "fd_50F6_10AE",
+     "why": "names3 review (data): InitSpider (Win16 5:4668 card, same store sequence: 10,0,0,0,0,0, SpidDir=0, RevSpider=0, SpidOn=CurGameType?1:0, SpidX=0x400, SpidY=0x200, SMode=MeSMode=0, Starg=-2, StargLife=-1, SuserX=SuserY=0x40): DOS 10AE=-1 / Win16 PACK:80A8=_StargLife=0xFFFF; MoveSpider: DOS 10AE = Starg>=0 ? AD3B[Starg] : 0xff; case 2 (AD3B[Starg]^10AE)&0xf0 / Win16 4799..47B4: al=es:[bx+2F62 (_AlistT)] -> es:[80A8]; else es:[80A8]=0xFF; 4CD1 xor al,es:[80A8]"
+    }
+   ]
+  },
   "StrategicModeB": {
    "seg": 20726,
    "off": 4244,
    "grounding": "GetStrategy (root:1383:010F): result of GstrB stored; GetNewModeB indexes ModeTabWB[StrategicModeB]; Win16 GetStrategy/GetNewModeB"
+  },
+  "SuserX": {
+   "seg": 20726,
+   "off": 3906,
+   "grounding": "f_10F7_0CA8 (root:10F7): mov es,[CONST word = 50F6]; es:[..0F42] far data reference",
+   "history": [
+    {
+     "was": "fd_50F6_0F42",
+     "why": "names3 review (data): InitSpider (Win16 5:4668 card, same store sequence: 10,0,0,0,0,0, SpidDir=0, RevSpider=0, SpidOn=CurGameType?1:0, SpidX=0x400, SpidY=0x200, SMode=MeSMode=0, Starg=-2, StargLife=-1, SuserX=SuserY=0x40): DOS '0F7E = 0F42 = 64' stores 0F42 first / Win16 stores PACK:78B8=_SuserX then 78EA=_SuserY (0x40); MoveSpider: DOS GetDis(MeLocX,MeLocY,0F42,0F7E) / Win16 47CB..47F5 pushes SuserY(78EA), SuserX(78B8), MeLocY, MeLocX -> GetDis(MeLocX,MeLocY,SuserX,SuserY); done path DOS 0F42=x / Win16 52EC SuserX=[bp-0E] (x)"
+    }
+   ]
+  },
+  "SuserY": {
+   "seg": 20726,
+   "off": 3966,
+   "grounding": "f_10F7_0CA8 (root:10F7): mov es,[CONST word = 50F6]; es:[..0F7E] far data reference",
+   "history": [
+    {
+     "was": "fd_50F6_0F7E",
+     "why": "names3 review (data): InitSpider (Win16 5:4668 card, same store sequence: 10,0,0,0,0,0, SpidDir=0, RevSpider=0, SpidOn=CurGameType?1:0, SpidX=0x400, SpidY=0x200, SMode=MeSMode=0, Starg=-2, StargLife=-1, SuserX=SuserY=0x40): second of the chained 0x40 stores / Win16 PACK:78EA=_SuserY; MoveSpider: 4th GetDis arg (y) in both; done path DOS 0F7E=y / Win16 52F7 SuserY=[bp-0C] (y)"
+    }
+   ]
   },
   "TERRAINset": {
    "seg": 20726,
@@ -16256,6 +17326,17 @@
     {
      "was": "fd_50F6_0F24",
      "why": "worker data identification: Win16 variable of the same role at the same use sites (reports dig/ovl08/simA/sim10F7)"
+    }
+   ]
+  },
+  "TilesDugR": {
+   "seg": 20726,
+   "off": 562,
+   "grounding": "o08_35F5_0050 (RandWorld): mov es,[S08 CONST word] ; mov es:[off]",
+   "history": [
+    {
+     "was": "fd_50F6_0232",
+     "why": "names3 review (data): GstrR: DOS if(0232<0350)return 3; if(0232<0350*2)return 2 / Win16 048E..04AA: cmp es:[7A56 (_TilesDugR)] vs RpopT -> 3; vs RpopT<<1 -> 2; FillDirtR (S22:3BBD): DOS if(0232>1){108E-=x;..;--0232} / Win16 FillDirtR: if(TilesDugR>1){TileTotXR-=x;..;--TilesDugR}; DOS DigTileR/DigTileThemR (m14EE) 0232++; 0200=108E/0232 - consistent with TilesDugR/TileTotXR (not counted)"
     }
    ]
   },
@@ -16285,6 +17366,17 @@
    "seg": 21939,
    "off": 31262,
    "grounding": "MSC runtime ctype table (_ctype.asm data): 55B3:7A1E holds 00 then 20h x9 (control), 'a'+1 -> 82h (_LOWER|_HEX); S23 win_PrintStyleTextInRect: test byte ptr [bx+7A1F],2 = islower via (_ctype+1)[c]"
+  },
+  "casteLevels": {
+   "seg": 20726,
+   "off": 1154,
+   "grounding": "UpdateCasteWindow/cvtLevels2IdealCaste (root:0798 (control-triangle unit)): caste level triple (unsigned words 0482/0484/0486)",
+   "history": [
+    {
+     "was": "fd_50F6_0482",
+     "why": "names3 review: cvtLevels2IdealCaste body identical: IdealCaste[k] from 0482[1], [2], [0] exactly as Win16 casteLevels[1], [2], [0]; initControls: casteLevels[i] = casteLevelDefaults[i]; DrawControlLevels caste branch"
+    }
+   ]
   },
   "db_handles": {
    "seg": 20726,
@@ -16326,12 +17418,12 @@
   "fd_3D57_0010": {
    "seg": 15703,
    "off": 16,
-   "grounding": "S25:3BA4 DoAntMoveY:01A7 signed char es:[bx+0010] dir table (CONST seg word 895E = 3D57)"
+   "alias_of": "Dx9"
   },
   "fd_3D57_001A": {
    "seg": 15703,
    "off": 26,
-   "grounding": "S25:3BA4 DoAntMoveY:01C1 signed char es:[bx+001A] dir table (CONST seg word 8960 = 3D57)"
+   "alias_of": "Dy9"
   },
   "fd_3D57_0024": {
    "seg": 15703,
@@ -16478,6 +17570,11 @@
    "off": 1944,
    "grounding": "f_10F7_0CA8 (root:10F7): mov es,[CONST word = 3D57]; es:[..0798] far data reference"
   },
+  "fd_3D57_07A2": {
+   "seg": 15703,
+   "off": 1954,
+   "grounding": "f_0E2E_0145: mov bx,07A2; mov es,[81DE] (CONST 3D57); inc es:[bx]; cmp 0x400; test 7"
+  },
   "fd_3D57_07A4": {
    "seg": 15703,
    "off": 1956,
@@ -16502,6 +17599,11 @@
    "seg": 15703,
    "off": 1966,
    "grounding": "PictStrnDialog (S14:384C:0B6A): mov es,[876A]; cmp word es:[07AE],0 option flag"
+  },
+  "fd_3D57_07B0": {
+   "seg": 15703,
+   "off": 1968,
+   "grounding": "f_0E2E_000A: mov es,[81CA] (CONST 3D57); cmp es:[07B0],0 (feedback enabled flag)"
   },
   "fd_3D57_07B2": {
    "seg": 15703,
@@ -16536,7 +17638,7 @@
   "fd_3D57_07E8": {
    "seg": 15703,
    "off": 2024,
-   "grounding": "ProcCasteEvent (root:0798): mov es,[CONST 8002 = 3D57]; es:[07E8] caste auto flag (0/1); initControls stores 1"
+   "alias_of": "CasteAuto"
   },
   "fd_3D57_07EA": {
    "seg": 15703,
@@ -17046,77 +18148,77 @@
   "fd_3E1D_A180": {
    "seg": 15901,
    "off": 41344,
-   "grounding": "f_10F7_005D (GetAntIndex-like): mov es,[CONST word = 3E1D]; es:[..A180] list count/field array"
+   "alias_of": "AlistX"
   },
   "fd_3E1D_A569": {
    "seg": 15901,
    "off": 42345,
-   "grounding": "f_10F7_005D (GetAntIndex-like): mov es,[CONST word = 3E1D]; es:[..A569] list count/field array"
+   "alias_of": "AlistY"
   },
   "fd_3E1D_A952": {
    "seg": 15901,
    "off": 43346,
-   "grounding": "f_10F7_005D (GetAntIndex-like): mov es,[CONST word = 3E1D]; es:[..A952] list count/field array"
+   "alias_of": "AlistM"
   },
   "fd_3E1D_AD3B": {
    "seg": 15901,
    "off": 44347,
-   "grounding": "f_10F7_005D (GetAntIndex-like): mov es,[CONST word = 3E1D]; es:[..AD3B] list count/field array"
+   "alias_of": "AlistT"
   },
   "fd_3E1D_B124": {
    "seg": 15901,
    "off": 45348,
-   "grounding": "f_10F7_005D (GetAntIndex-like): mov es,[CONST word = 3E1D]; es:[..B124] list count/field array"
+   "alias_of": "AlistS"
   },
   "fd_3E1D_B50D": {
    "seg": 15901,
    "off": 46349,
-   "grounding": "f_10F7_005D (GetAntIndex-like): mov es,[CONST word = 3E1D]; es:[..B50D] list count/field array"
+   "alias_of": "BlistX"
   },
   "fd_3E1D_B702": {
    "seg": 15901,
    "off": 46850,
-   "grounding": "f_10F7_005D (GetAntIndex-like): mov es,[CONST word = 3E1D]; es:[..B702] list count/field array"
+   "alias_of": "BlistY"
   },
   "fd_3E1D_B8F7": {
    "seg": 15901,
    "off": 47351,
-   "grounding": "f_10F7_005D (GetAntIndex-like): mov es,[CONST word = 3E1D]; es:[..B8F7] list count/field array"
+   "alias_of": "BlistM"
   },
   "fd_3E1D_BAEC": {
    "seg": 15901,
    "off": 47852,
-   "grounding": "f_10F7_005D (GetAntIndex-like): mov es,[CONST word = 3E1D]; es:[..BAEC] list count/field array"
+   "alias_of": "BlistT"
   },
   "fd_3E1D_BCE1": {
    "seg": 15901,
    "off": 48353,
-   "grounding": "f_10F7_005D (GetAntIndex-like): mov es,[CONST word = 3E1D]; es:[..BCE1] list count/field array"
+   "alias_of": "BlistS"
   },
   "fd_3E1D_BED6": {
    "seg": 15901,
    "off": 48854,
-   "grounding": "f_10F7_005D (GetAntIndex-like): mov es,[CONST word = 3E1D]; es:[..BED6] list count/field array"
+   "alias_of": "RlistX"
   },
   "fd_3E1D_C0CB": {
    "seg": 15901,
    "off": 49355,
-   "grounding": "f_10F7_005D (GetAntIndex-like): mov es,[CONST word = 3E1D]; es:[..C0CB] list count/field array"
+   "alias_of": "RlistY"
   },
   "fd_3E1D_C2C0": {
    "seg": 15901,
    "off": 49856,
-   "grounding": "f_10F7_005D (GetAntIndex-like): mov es,[CONST word = 3E1D]; es:[..C2C0] list count/field array"
+   "alias_of": "RlistM"
   },
   "fd_3E1D_C4B5": {
    "seg": 15901,
    "off": 50357,
-   "grounding": "f_10F7_005D (GetAntIndex-like): mov es,[CONST word = 3E1D]; es:[..C4B5] list count/field array"
+   "alias_of": "RlistT"
   },
   "fd_3E1D_C6AA": {
    "seg": 15901,
    "off": 50858,
-   "grounding": "f_10F7_005D (GetAntIndex-like): mov es,[CONST word = 3E1D]; es:[..C6AA] list count/field array"
+   "alias_of": "RlistS"
   },
   "fd_3E1D_C89F": {
    "seg": 15901,
@@ -17126,7 +18228,7 @@
   "fd_3E1D_D09F": {
    "seg": 15901,
    "off": 53407,
-   "grounding": "o08_35F5_0050 (RandWorld): mov es,[S08 CONST word] ; es:[bx+disp] array base"
+   "alias_of": "PherMapA"
   },
   "fd_3E1D_D89F": {
    "seg": 15901,
@@ -17136,22 +18238,22 @@
   "fd_3E1D_E09F": {
    "seg": 15901,
    "off": 57503,
-   "grounding": "o08_35F5_0050 (RandWorld): mov es,[S08 CONST word] ; es:[bx+disp] array base"
+   "alias_of": "PherMapBN"
   },
   "fd_3E1D_E89F": {
    "seg": 15901,
    "off": 59551,
-   "grounding": "o08_35F5_0050 (RandWorld): mov es,[S08 CONST word] ; es:[bx+disp] array base"
+   "alias_of": "PherMapBT"
   },
   "fd_3E1D_F09F": {
    "seg": 15901,
    "off": 61599,
-   "grounding": "o08_35F5_0050 (RandWorld): mov es,[S08 CONST word] ; es:[bx+disp] array base"
+   "alias_of": "PherMapRN"
   },
   "fd_4DA7_0000": {
    "seg": 19879,
    "off": 0,
-   "grounding": "o08_35F5_0050 (RandWorld): mov es,[S08 CONST word] ; es:[bx+disp] array base"
+   "alias_of": "PherMapRT"
   },
   "fd_4E4B_0000": {
    "seg": 20043,
@@ -17266,7 +18368,7 @@
   "fd_50F6_0232": {
    "seg": 20726,
    "off": 562,
-   "grounding": "o08_35F5_0050 (RandWorld): mov es,[S08 CONST word] ; mov es:[off]"
+   "alias_of": "TilesDugR"
   },
   "fd_50F6_0234": {
    "seg": 20726,
@@ -17356,7 +18458,7 @@
   "fd_50F6_0330": {
    "seg": 20726,
    "off": 816,
-   "grounding": "f_0BE8_0002: mov es,[DS:810C] (CONST 50F6); mov es:[0330],ax"
+   "alias_of": "BpopT"
   },
   "fd_50F6_0332": {
    "seg": 20726,
@@ -17376,7 +18478,7 @@
   "fd_50F6_0350": {
    "seg": 20726,
    "off": 848,
-   "grounding": "f_0BE8_0002: mov es,[DS:810E] (CONST 50F6); mov es:[0350],ax"
+   "alias_of": "RpopT"
   },
   "fd_50F6_0352": {
    "seg": 20726,
@@ -17451,7 +18553,7 @@
   "fd_50F6_0378": {
    "seg": 20726,
    "off": 888,
-   "grounding": "S25:39C7 o25_39C7_0980:09DF cmp word es:[0378],0 (CONST 8924=50F6); Win16 SimEggB ModeAuto"
+   "alias_of": "ModeAuto"
   },
   "fd_50F6_037A": {
    "seg": 20726,
@@ -17541,7 +18643,7 @@
   "fd_50F6_0482": {
    "seg": 20726,
    "off": 1154,
-   "grounding": "UpdateCasteWindow/cvtLevels2IdealCaste (root:0798 (control-triangle unit)): caste level triple (unsigned words 0482/0484/0486)"
+   "alias_of": "casteLevels"
   },
   "fd_50F6_0488": {
    "seg": 20726,
@@ -18023,6 +19125,11 @@
    "off": 2834,
    "grounding": "f_0894_01E5: mov es,[804E] (50F6); int[6] stores es:[0B12..0B1C]"
   },
+  "fd_50F6_0B1C": {
+   "seg": 20726,
+   "off": 2844,
+   "grounding": "f_0E2E_065E: mov es,[81FE] (CONST 50F6); cmp es:[0B1C],1 / 0x28 (lesson done tests)"
+  },
   "fd_50F6_0B1E": {
    "seg": 20726,
    "off": 2846,
@@ -18106,12 +19213,12 @@
   "fd_50F6_0DA8": {
    "seg": 20726,
    "off": 3496,
-   "grounding": "f_10F7_005D (GetAntIndex-like): mov es,[CONST word = 50F6]; es:[..0DA8] list count/field array"
+   "alias_of": "ListIndexB"
   },
   "fd_50F6_0EAA": {
    "seg": 20726,
    "off": 3754,
-   "grounding": "f_10F7_005D (GetAntIndex-like): mov es,[CONST word = 50F6]; es:[..0EAA] list count/field array"
+   "alias_of": "ListIndexR"
   },
   "fd_50F6_0EAC": {
    "seg": 20726,
@@ -18231,7 +19338,7 @@
   "fd_50F6_0F42": {
    "seg": 20726,
    "off": 3906,
-   "grounding": "f_10F7_0CA8 (root:10F7): mov es,[CONST word = 50F6]; es:[..0F42] far data reference"
+   "alias_of": "SuserX"
   },
   "fd_50F6_0F44": {
    "seg": 20726,
@@ -18256,7 +19363,7 @@
   "fd_50F6_0F7E": {
    "seg": 20726,
    "off": 3966,
-   "grounding": "f_10F7_0CA8 (root:10F7): mov es,[CONST word = 50F6]; es:[..0F7E] far data reference"
+   "alias_of": "SuserY"
   },
   "fd_50F6_0F84": {
    "seg": 20726,
@@ -18271,7 +19378,7 @@
   "fd_50F6_0FB8": {
    "seg": 20726,
    "off": 4024,
-   "grounding": "f_10F7_0CA8 (root:10F7): mov es,[CONST word = 50F6]; es:[..0FB8] far data reference"
+   "alias_of": "SMode"
   },
   "fd_50F6_0FBA": {
    "seg": 20726,
@@ -18311,7 +19418,7 @@
   "fd_50F6_0FFC": {
    "seg": 20726,
    "off": 4092,
-   "grounding": "f_10F7_0CA8 (root:10F7): mov es,[CONST word = 50F6]; es:[..0FFC] far data reference"
+   "alias_of": "Starg"
   },
   "fd_50F6_0FFE": {
    "seg": 20726,
@@ -18356,7 +19463,7 @@
   "fd_50F6_1042": {
    "seg": 20726,
    "off": 4162,
-   "grounding": "InitSpider/MoveSpider (root:0CDB): mov es,[CONST 81xx = 50F6]; word es:[1042] spider state variable"
+   "alias_of": "Scycle"
   },
   "fd_50F6_1044": {
    "seg": 20726,
@@ -18396,7 +19503,7 @@
   "fd_50F6_1054": {
    "seg": 20726,
    "off": 4180,
-   "grounding": "InitSpider/MoveSpider (root:0CDB): mov es,[CONST 81xx = 50F6]; word es:[1054] spider state variable"
+   "alias_of": "EatCnt"
   },
   "fd_50F6_1058": {
    "seg": 20726,
@@ -18406,7 +19513,7 @@
   "fd_50F6_105A": {
    "seg": 20726,
    "off": 4186,
-   "grounding": "InitSpider/MoveSpider (root:0CDB): mov es,[CONST 81xx = 50F6]; word es:[105A] spider state variable"
+   "alias_of": "SCorpseBase"
   },
   "fd_50F6_105C": {
    "seg": 20726,
@@ -18456,7 +19563,7 @@
   "fd_50F6_1072": {
    "seg": 20726,
    "off": 4210,
-   "grounding": "InitSpider/MoveSpider (root:0CDB): mov es,[CONST 81xx = 50F6]; word es:[1072] spider state variable"
+   "alias_of": "Scycle2"
   },
   "fd_50F6_1074": {
    "seg": 20726,
@@ -18466,7 +19573,7 @@
   "fd_50F6_1076": {
    "seg": 20726,
    "off": 4214,
-   "grounding": "InitSpider/MoveSpider (root:0CDB): mov es,[CONST 81xx = 50F6]; word es:[1076] spider state variable"
+   "alias_of": "SpidBurpCnt"
   },
   "fd_50F6_1078": {
    "seg": 20726,
@@ -18496,7 +19603,7 @@
   "fd_50F6_108A": {
    "seg": 20726,
    "off": 4234,
-   "grounding": "InitSpider/MoveSpider (root:0CDB): mov es,[CONST 81xx = 50F6]; word es:[108A] spider state variable"
+   "alias_of": "SpidRevenge"
   },
   "fd_50F6_108C": {
    "seg": 20726,
@@ -18521,7 +19628,7 @@
   "fd_50F6_109A": {
    "seg": 20726,
    "off": 4250,
-   "grounding": "InitSpider/MoveSpider (root:0CDB): mov es,[CONST 81xx = 50F6]; word es:[109A] spider state variable"
+   "alias_of": "DeathCnt"
   },
   "fd_50F6_109C": {
    "seg": 20726,
@@ -18556,7 +19663,7 @@
   "fd_50F6_10AE": {
    "seg": 20726,
    "off": 4270,
-   "grounding": "processSpider (S22:39C7:06F4/074A): mov es,[CONST 87E2]; mov es:[10AE],-1 / =life (Win16 StargLife)"
+   "alias_of": "StargLife"
   },
   "fd_50F6_10B0": {
    "seg": 20726,
@@ -18572,6 +19679,11 @@
    "seg": 20726,
    "off": 4276,
    "grounding": "DrawSpider: mov es,[7F06]; les si,es:[10B4]; push es:[bx+si+2],es:[bx+si] (far pointer to far string table) passed to AddMsgBalloon"
+  },
+  "fd_50F6_10B8": {
+   "seg": 20726,
+   "off": 4280,
+   "grounding": "f_0E2E_0145: mov bx,10B8; mov es,[81E0] (CONST 50F6); inc es:[bx] (tutor tick counter, >0xF test, reset 0)"
   },
   "fd_50F6_10BA": {
    "seg": 20726,
@@ -18592,6 +19704,11 @@
    "seg": 20726,
    "off": 4288,
    "grounding": "o08_35F5_0050 (RandWorld): mov es,[S08 CONST word] ; mov es:[off]"
+  },
+  "fd_50F6_10CC": {
+   "seg": 20726,
+   "off": 4300,
+   "grounding": "ShowIntro (S16:384C:0472): mov bx,10CC; mov es,[CONST 8798 = 50F6]; es:[bx],[bx+2] far Handle variable"
   },
   "fd_50F6_10D2": {
    "seg": 20726,
@@ -18721,22 +19838,22 @@
   "fd_50F6_380E": {
    "seg": 20726,
    "off": 14350,
-   "grounding": "InitTriVars (root:0798 (control-triangle unit)): es:[380E] = rect height"
+   "alias_of": "triHeight"
   },
   "fd_50F6_3810": {
    "seg": 20726,
    "off": 14352,
-   "grounding": "InitTriVars (root:0798 (control-triangle unit)): es:[3810] = width/2 (left half); SetTriLatPoint/GetTriLatDist multiplier"
+   "alias_of": "triWidthL"
   },
   "fd_50F6_3812": {
    "seg": 20726,
    "off": 14354,
-   "grounding": "InitTriVars (root:0798 (control-triangle unit)): es:[3812] = width/2"
+   "alias_of": "triWidthR"
   },
   "fd_50F6_3814": {
    "seg": 20726,
    "off": 14356,
-   "grounding": "InitTriVars (root:0798 (control-triangle unit)): es:[3814] = rect width (triangle width)"
+   "alias_of": "triWidth"
   },
   "fd_50F6_3816": {
    "seg": 20726,
@@ -18756,7 +19873,7 @@
   "fd_50F6_3832": {
    "seg": 20726,
    "off": 14386,
-   "grounding": "initControls (root:0798 (control-triangle unit)): far address 50F6:3832 size struct filled by f_208F_0419(,0x578) (knob size w)"
+   "alias_of": "knobSize"
   },
   "fd_50F6_3836": {
    "seg": 20726,
@@ -19348,10 +20465,175 @@
    "off": 7090,
    "grounding": "f_14EE_04B5: mov al,[si+1BB2] (DS=DGROUP) byte tile per direction"
   },
+  "g_1F9E": {
+   "seg": 21939,
+   "off": 8094,
+   "grounding": "o00_3126_0000/0137/04D8/06A3: lea bx,[1F9Eh]; xlat (100-byte pattern table of display driver S00)"
+  },
+  "g_2002": {
+   "seg": 21939,
+   "off": 8194,
+   "grounding": "o00_3126_026A/03A9/04D8/06A3: lea bx,[2002h]; xlat (100-byte pattern table of display driver S00, used when g_3DB2 != 140h)"
+  },
+  "g_20FC": {
+   "seg": 21939,
+   "off": 8444,
+   "grounding": "S00 driver (31AD) : extrn\t_g_20FC:byte (DGROUP operand of genuine-assembly display driver; worker ovlA)"
+  },
+  "g_2100": {
+   "seg": 21939,
+   "off": 8448,
+   "grounding": "S01 driver (3126) : extrn\t_g_2100:byte (DGROUP operand of genuine-assembly display driver; worker ovlA)"
+  },
+  "g_2108": {
+   "seg": 21939,
+   "off": 8456,
+   "grounding": "S00 driver (31AD) : extrn\t_g_2108:byte (DGROUP operand of genuine-assembly display driver; worker ovlA)"
+  },
+  "g_2118": {
+   "seg": 21939,
+   "off": 8472,
+   "grounding": "S01 driver (3126) : extrn\t_g_2118:byte (DGROUP operand of genuine-assembly display driver; worker ovlA)"
+  },
+  "g_217E": {
+   "seg": 21939,
+   "off": 8574,
+   "grounding": "S01 driver (3126) : extrn\t_g_217E:byte (DGROUP operand of genuine-assembly display driver; worker ovlA)"
+  },
+  "g_2182": {
+   "seg": 21939,
+   "off": 8578,
+   "grounding": "S01 driver (3126) : extrn\t_g_2182:byte (DGROUP operand of genuine-assembly display driver; worker ovlA)"
+  },
+  "g_2184": {
+   "seg": 21939,
+   "off": 8580,
+   "grounding": "S01 driver (3126) : extrn\t_g_2184:byte (DGROUP operand of genuine-assembly display driver; worker ovlA)"
+  },
+  "g_219C": {
+   "seg": 21939,
+   "off": 8604,
+   "grounding": "S02 driver (3126) : extrn\t_g_219C:byte (DGROUP operand of genuine-assembly display driver; worker ovlA)"
+  },
+  "g_219E": {
+   "seg": 21939,
+   "off": 8606,
+   "grounding": "S02 driver (3126) : extrn\t_g_219E:byte (DGROUP operand of genuine-assembly display driver; worker ovlA)"
+  },
+  "g_21A0": {
+   "seg": 21939,
+   "off": 8608,
+   "grounding": "S02 driver (3126) : extrn\t_g_21A0:byte (DGROUP operand of genuine-assembly display driver; worker ovlA)"
+  },
+  "g_21A2": {
+   "seg": 21939,
+   "off": 8610,
+   "grounding": "S02 driver (3126) : extrn\t_g_21A2:byte (DGROUP operand of genuine-assembly display driver; worker ovlA)"
+  },
   "g_21A4": {
    "seg": 21939,
    "off": 8612,
    "grounding": "f_1CE2_04C9: mov byte ptr [21A4],1 ... mov byte ptr [21A4],0 around GSaveRect (char flag)"
+  },
+  "g_220A": {
+   "seg": 21939,
+   "off": 8714,
+   "grounding": "S02 driver (3126) : extrn\t_g_220A:byte (DGROUP operand of genuine-assembly display driver; worker ovlA)"
+  },
+  "g_220E": {
+   "seg": 21939,
+   "off": 8718,
+   "grounding": "S03 driver (3126) : extrn\t_g_220E:byte (DGROUP operand of genuine-assembly display driver; worker ovlA)"
+  },
+  "g_2210": {
+   "seg": 21939,
+   "off": 8720,
+   "grounding": "S03 driver (3126) : extrn\t_g_2210:byte (DGROUP operand of genuine-assembly display driver; worker ovlA)"
+  },
+  "g_2212": {
+   "seg": 21939,
+   "off": 8722,
+   "grounding": "S03 driver (3126) : extrn\t_g_2212:byte (DGROUP operand of genuine-assembly display driver; worker ovlA)"
+  },
+  "g_2214": {
+   "seg": 21939,
+   "off": 8724,
+   "grounding": "S03 driver (3126) : extrn\t_g_2214:byte (DGROUP operand of genuine-assembly display driver; worker ovlA)"
+  },
+  "g_2216": {
+   "seg": 21939,
+   "off": 8726,
+   "grounding": "S03 driver (3126) : extrn\t_g_2216:byte (DGROUP operand of genuine-assembly display driver; worker ovlA)"
+  },
+  "g_2226": {
+   "seg": 21939,
+   "off": 8742,
+   "grounding": "S03 driver (3126) : extrn\t_g_2226:byte (DGROUP operand of genuine-assembly display driver; worker ovlA)"
+  },
+  "g_2227": {
+   "seg": 21939,
+   "off": 8743,
+   "grounding": "S03 driver (3126) : extrn\t_g_2227:byte (DGROUP operand of genuine-assembly display driver; worker ovlA)"
+  },
+  "g_2228": {
+   "seg": 21939,
+   "off": 8744,
+   "grounding": "S03 driver (3126) : extrn\t_g_2228:byte (DGROUP operand of genuine-assembly display driver; worker ovlA)"
+  },
+  "g_2229": {
+   "seg": 21939,
+   "off": 8745,
+   "grounding": "S03 driver (3126) : extrn\t_g_2229:byte (DGROUP operand of genuine-assembly display driver; worker ovlA)"
+  },
+  "g_222A": {
+   "seg": 21939,
+   "off": 8746,
+   "grounding": "S03 driver (3126) : extrn\t_g_222A:byte (DGROUP operand of genuine-assembly display driver; worker ovlA)"
+  },
+  "g_222C": {
+   "seg": 21939,
+   "off": 8748,
+   "grounding": "S03 driver (3126) : extrn\t_g_222C:byte (DGROUP operand of genuine-assembly display driver; worker ovlA)"
+  },
+  "g_2236": {
+   "seg": 21939,
+   "off": 8758,
+   "grounding": "S03 driver (3126) : extrn\t_g_2236:byte (DGROUP operand of genuine-assembly display driver; worker ovlA)"
+  },
+  "g_22DA": {
+   "seg": 21939,
+   "off": 8922,
+   "grounding": "S03 driver (3126) : extrn\t_g_22DA:byte (DGROUP operand of genuine-assembly display driver; worker ovlA)"
+  },
+  "g_22DF": {
+   "seg": 21939,
+   "off": 8927,
+   "grounding": "S03 driver (3126) : extrn\t_g_22DF:byte (DGROUP operand of genuine-assembly display driver; worker ovlA)"
+  },
+  "g_22E2": {
+   "seg": 21939,
+   "off": 8930,
+   "grounding": "S03 driver (3126) : extrn\t_g_22E2:byte (DGROUP operand of genuine-assembly display driver; worker ovlA)"
+  },
+  "g_22E4": {
+   "seg": 21939,
+   "off": 8932,
+   "grounding": "S03 driver (3126): DGROUP operand of genuine-assembly display driver (worker ovlA)"
+  },
+  "g_22E8": {
+   "seg": 21939,
+   "off": 8936,
+   "grounding": "S03 driver (3126) : extrn\t_g_22E8:byte (DGROUP operand of genuine-assembly display driver; worker ovlA)"
+  },
+  "g_2308": {
+   "seg": 21939,
+   "off": 8968,
+   "grounding": "o03_3253_0008: lea bx,[2308h]; ss: xlat (16-byte translation table in DGROUP, display driver S03)"
+  },
+  "g_2318": {
+   "seg": 21939,
+   "off": 8984,
+   "grounding": "o03_3253_002F: lea bx,[2318h]; ss: xlat (translation table in DGROUP, display driver S03)"
   },
   "g_3D20": {
    "seg": 21939,
@@ -19373,6 +20655,21 @@
    "off": 15784,
    "grounding": "S20 o20_39C7_0008/0069/01C1: mov [3DA8],ax / [3DAA],dx = first far pointer of font object db_LoadObject(0x14|0x13, 9)"
   },
+  "g_3DAC": {
+   "seg": 21939,
+   "off": 15788,
+   "grounding": "S01 driver (3126) : extrn\t_g_3DAC:byte (DGROUP operand of genuine-assembly display driver; worker ovlA)"
+  },
+  "g_3DAE": {
+   "seg": 21939,
+   "off": 15790,
+   "grounding": "S02 driver (3126) : extrn\t_g_3DAE:byte (DGROUP operand of genuine-assembly display driver; worker ovlA)"
+  },
+  "g_3DB0": {
+   "seg": 21939,
+   "off": 15792,
+   "grounding": "S02 driver (3126) : extrn\t_g_3DB0:byte (DGROUP operand of genuine-assembly display driver; worker ovlA)"
+  },
   "g_3DB2": {
    "seg": 21939,
    "off": 15794,
@@ -19382,6 +20679,46 @@
    "seg": 21939,
    "off": 15796,
    "grounding": "f_20E8_04B6: mov ax,[3DB4]; cmp with rect bottom (screen height?)"
+  },
+  "g_3DB6": {
+   "seg": 21939,
+   "off": 15798,
+   "grounding": "S01 driver (3126) : extrn\t_g_3DB6:byte (DGROUP operand of genuine-assembly display driver; worker ovlA)"
+  },
+  "g_3DC1": {
+   "seg": 21939,
+   "off": 15809,
+   "grounding": "S01 driver (3126) : extrn\t_g_3DC1:byte (DGROUP operand of genuine-assembly display driver; worker ovlA)"
+  },
+  "g_3DCA": {
+   "seg": 21939,
+   "off": 15818,
+   "grounding": "S01 driver (3126) : extrn\t_g_3DCA:byte (DGROUP operand of genuine-assembly display driver; worker ovlA)"
+  },
+  "g_3DD2": {
+   "seg": 21939,
+   "off": 15826,
+   "grounding": "S02 driver (3126) : extrn\t_g_3DD2:byte (DGROUP operand of genuine-assembly display driver; worker ovlA)"
+  },
+  "g_3DD4": {
+   "seg": 21939,
+   "off": 15828,
+   "grounding": "S02 driver (3126) : extrn\t_g_3DD4:byte (DGROUP operand of genuine-assembly display driver; worker ovlA)"
+  },
+  "g_3DD6": {
+   "seg": 21939,
+   "off": 15830,
+   "grounding": "S02 driver (3126) : extrn\t_g_3DD6:byte (DGROUP operand of genuine-assembly display driver; worker ovlA)"
+  },
+  "g_3DD8": {
+   "seg": 21939,
+   "off": 15832,
+   "grounding": "S02 driver (3126) : extrn\t_g_3DD8:byte (DGROUP operand of genuine-assembly display driver; worker ovlA)"
+  },
+  "g_3DDA": {
+   "seg": 21939,
+   "off": 15834,
+   "grounding": "S02 driver (3126) : extrn\t_g_3DDA:byte (DGROUP operand of genuine-assembly display driver; worker ovlA)"
   },
   "g_3DDC": {
    "seg": 21939,
@@ -19398,20 +20735,125 @@
    "off": 15840,
    "grounding": "f_259D_02A5/02D8: or ax,[3DE0] with (char)[3DE4] -> GRectFill colour (Win16 win_DrawBitMapAtObjNum: monoPat | _foreColor)"
   },
+  "g_3DE1": {
+   "seg": 21939,
+   "off": 15841,
+   "grounding": "S02 driver (3126) : extrn\t_g_3DE1:byte (DGROUP operand of genuine-assembly display driver; worker ovlA)"
+  },
   "g_3DE2": {
    "seg": 21939,
    "off": 15842,
    "grounding": "f_21FA_0002: push word ptr [3DE2] as colour argument of (*[9134])"
+  },
+  "g_3DE3": {
+   "seg": 21939,
+   "off": 15843,
+   "grounding": "S02 driver (3126) : extrn\t_g_3DE3:byte (DGROUP operand of genuine-assembly display driver; worker ovlA)"
   },
   "g_3DE4": {
    "seg": 21939,
    "off": 15844,
    "grounding": "f_259D_02A5/02D8: mov al,[3DE4]; cbw; or ax,[3DE0] (fill pattern byte)"
   },
+  "g_3DE5": {
+   "seg": 21939,
+   "off": 15845,
+   "grounding": "S01 driver (3126) : extrn\t_g_3DE5:byte (DGROUP operand of genuine-assembly display driver; worker ovlA)"
+  },
+  "g_3DEA": {
+   "seg": 21939,
+   "off": 15850,
+   "grounding": "S02 driver (3126) : extrn\t_g_3DEA:byte (DGROUP operand of genuine-assembly display driver; worker ovlA)"
+  },
+  "g_3DEC": {
+   "seg": 21939,
+   "off": 15852,
+   "grounding": "S03 driver (3126) : extrn\t_g_3DEC:byte (DGROUP operand of genuine-assembly display driver; worker ovlA)"
+  },
+  "g_3DED": {
+   "seg": 21939,
+   "off": 15853,
+   "grounding": "S03 driver (3126) : extrn\t_g_3DED:byte (DGROUP operand of genuine-assembly display driver; worker ovlA)"
+  },
+  "g_3DEE": {
+   "seg": 21939,
+   "off": 15854,
+   "grounding": "S03 driver (3126) : extrn\t_g_3DEE:byte (DGROUP operand of genuine-assembly display driver; worker ovlA)"
+  },
+  "g_3DEF": {
+   "seg": 21939,
+   "off": 15855,
+   "grounding": "S03 driver (3126) : extrn\t_g_3DEF:byte (DGROUP operand of genuine-assembly display driver; worker ovlA)"
+  },
+  "g_3DF1": {
+   "seg": 21939,
+   "off": 15857,
+   "grounding": "S01 driver (3126) : extrn\t_g_3DF1:byte (DGROUP operand of genuine-assembly display driver; worker ovlA)"
+  },
+  "g_3DF2": {
+   "seg": 21939,
+   "off": 15858,
+   "grounding": "S03 driver (3126) : extrn\t_g_3DF2:byte (DGROUP operand of genuine-assembly display driver; worker ovlA)"
+  },
+  "g_3DFC": {
+   "seg": 21939,
+   "off": 15868,
+   "grounding": "S02 driver (3126) : extrn\t_g_3DFC:byte (DGROUP operand of genuine-assembly display driver; worker ovlA)"
+  },
+  "g_41C0": {
+   "seg": 21939,
+   "off": 16832,
+   "grounding": "S03 driver (3126) : extrn\t_g_41C0:byte (DGROUP operand of genuine-assembly display driver; worker ovlA)"
+  },
+  "g_4220": {
+   "seg": 21939,
+   "off": 16928,
+   "grounding": "S01 driver (3126) : extrn\t_g_4220:byte (DGROUP operand of genuine-assembly display driver; worker ovlA)"
+  },
   "g_432A": {
    "seg": 21939,
    "off": 17194,
    "grounding": "IBMInitStuff (S20:39F1:0088/016D): mov byte ptr [432A],1 for option /b or getenv(BUG) MSMOUSE match (DGROUP byte flag)"
+  },
+  "g_4331": {
+   "seg": 21939,
+   "off": 17201,
+   "grounding": "S02 driver (3126) : extrn\t_g_4331:byte (DGROUP operand of genuine-assembly display driver; worker ovlA)"
+  },
+  "g_4333": {
+   "seg": 21939,
+   "off": 17203,
+   "grounding": "S02 driver (3126) : extrn\t_g_4333:byte (DGROUP operand of genuine-assembly display driver; worker ovlA)"
+  },
+  "g_4340": {
+   "seg": 21939,
+   "off": 17216,
+   "grounding": "S02 driver (3126) : extrn\t_g_4340:byte (DGROUP operand of genuine-assembly display driver; worker ovlA)"
+  },
+  "g_4342": {
+   "seg": 21939,
+   "off": 17218,
+   "grounding": "S02 driver (3126) : extrn\t_g_4342:byte (DGROUP operand of genuine-assembly display driver; worker ovlA)"
+  },
+  "g_4344": {
+   "seg": 21939,
+   "off": 17220,
+   "grounding": "S02 driver (3126) : extrn\t_g_4344:byte (DGROUP operand of genuine-assembly display driver; worker ovlA)"
+  },
+  "g_4346": {
+   "seg": 21939,
+   "off": 17222,
+   "grounding": "S02 driver (3126) : extrn\t_g_4346:byte (DGROUP operand of genuine-assembly display driver; worker ovlA)"
+  },
+  "g_4365": {
+   "seg": 21939,
+   "off": 17253,
+   "grounding": "S02 driver (3126) : extrn\t_g_4365:byte (DGROUP operand of genuine-assembly display driver; worker ovlA)"
+  },
+  "g_4366": {
+   "seg": 21939,
+   "off": 17254,
+   "grounding": "S02 driver (3126) : extrn\t_g_4366:byte (DGROUP operand of genuine-assembly display driver; worker ovlA)"
   },
   "g_5702": {
    "seg": 21939,
@@ -19477,6 +20919,11 @@
    "seg": 21939,
    "off": 23212,
    "grounding": "f_21FA_08E2: les bx,[5AAC]; cmp es:[bx+2],8000h (far pointer)"
+  },
+  "g_5AAE": {
+   "seg": 21939,
+   "off": 23214,
+   "grounding": "S02 driver (3126) : extrn\t_g_5AAE:byte (DGROUP operand of genuine-assembly display driver; worker ovlA)"
   },
   "g_62E0": {
    "seg": 21939,
@@ -19648,6 +21095,11 @@
    "off": 37160,
    "grounding": "f_21FA_00EE/0144/01D0: lcall [9128](fore*0x101, back*0x101, pat*0x101) attribute setter (far function pointer)"
   },
+  "g_912C": {
+   "seg": 21939,
+   "off": 37164,
+   "grounding": "S00 driver (31AD) : extrn\t_g_912C:byte (DGROUP operand of genuine-assembly display driver; worker ovlA)"
+  },
   "g_9130": {
    "seg": 21939,
    "off": 37168,
@@ -19768,6 +21220,17 @@
    "off": 38116,
    "grounding": "f_0250_0721: mov al,[94E4] (DS) byte tile number; shr 6 / and 3F; Punt 'Tile >= 256'"
   },
+  "knobSize": {
+   "seg": 20726,
+   "off": 14386,
+   "grounding": "initControls (root:0798 (control-triangle unit)): far address 50F6:3832 size struct filled by f_208F_0419(,0x578) (knob size w)",
+   "history": [
+    {
+     "was": "fd_50F6_3832",
+     "why": "names3 review: initControls: DOS f_208F_0419(&50F6:3832, 0x578) = Win16 gr_BitMapSize(&knobSize, 0x578) (first statement); win_DrawMode/CasteWindow: knob centred with 3832.x/2, 3832.y/2 for picture 0x578 (Win16 UpdateXWindow AddAnimObject/SetObjectPos of the same knob)"
+    }
+   ]
+  },
   "modeLevels": {
    "seg": 15703,
    "off": 1182,
@@ -19782,6 +21245,50 @@
    "seg": 21939,
    "off": 32170,
    "grounding": "f_1C62_06A6: cmp [bp+6],[7DAA]; jg / jl 0 then index sys_errlist[7D12]; word directly after the 38-entry far-pointer sys_errlist, value 37 (MSC runtime sys_nerr)"
+  },
+  "triHeight": {
+   "seg": 20726,
+   "off": 14350,
+   "grounding": "InitTriVars (root:0798 (control-triangle unit)): es:[380E] = rect height",
+   "history": [
+    {
+     "was": "fd_50F6_380E",
+     "why": "names3 review: InitTriVars: triHeight = rect.bottom - rect.top, divisor of leftYSlope; SetTriLatPoint: (triHeight-2)*(0xffff-frac)/0xffff; GetTriLatDist (380E-2) terms"
+    }
+   ]
+  },
+  "triWidth": {
+   "seg": 20726,
+   "off": 14356,
+   "grounding": "InitTriVars (root:0798 (control-triangle unit)): es:[3814] = rect width (triangle width)",
+   "history": [
+    {
+     "was": "fd_50F6_3814",
+     "why": "names3 review: InitTriVars (identical body): triWidth = rect.right - rect.left; SetTriLatPoint/GetTriLatDist: row = triWidth - 2*w"
+    }
+   ]
+  },
+  "triWidthL": {
+   "seg": 20726,
+   "off": 14352,
+   "grounding": "InitTriVars (root:0798 (control-triangle unit)): es:[3810] = width/2 (left half); SetTriLatPoint/GetTriLatDist multiplier",
+   "history": [
+    {
+     "was": "fd_50F6_3810",
+     "why": "names3 review: InitTriVars: second store of width>>1 (Win16 triWidthL); SetTriLatPoint: w = triWidthL*frac/0xffff (DOS 3810*frac) and GetTriLatDist same"
+    }
+   ]
+  },
+  "triWidthR": {
+   "seg": 20726,
+   "off": 14354,
+   "grounding": "InitTriVars (root:0798 (control-triangle unit)): es:[3812] = width/2",
+   "history": [
+    {
+     "was": "fd_50F6_3812",
+     "why": "names3 review: InitTriVars: first store of width>>1 (Win16 triWidthR = halfWidth, before triWidthL); statement order of the identical InitTriVars body fixes R vs L; 3812 has no other DOS use, as triWidthR has none in the recovered Win16 math"
+    }
+   ]
   },
   "win_colors": {
    "seg": 20726,

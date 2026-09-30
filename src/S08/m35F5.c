@@ -17,12 +17,12 @@ extern unsigned char far ExitMapR[64][64];
 extern unsigned char far LifeA[128][64];
 extern unsigned char far LifeB[64][64];
 extern unsigned char far LifeR[64][64];
-extern unsigned char far fd_3E1D_D09F[64][32];
+extern unsigned char far PherMapA[64][32];
 extern unsigned char far fd_3E1D_D89F[64][32];
-extern unsigned char far fd_3E1D_E09F[64][32];
-extern unsigned char far fd_3E1D_E89F[64][32];
-extern unsigned char far fd_3E1D_F09F[64][32];
-extern unsigned char far fd_4DA7_0000[64][32];
+extern unsigned char far PherMapBN[64][32];
+extern unsigned char far PherMapBT[64][32];
+extern unsigned char far PherMapRN[64][32];
+extern unsigned char far PherMapRT[64][32];
 extern unsigned char far HoleMapB[64];
 extern unsigned char far HoleMapR[64];
 extern int far TERRAINset;
@@ -32,7 +32,7 @@ extern long far fd_50F6_108E;
 extern long far fd_50F6_1082;
 extern long far fd_50F6_1068;
 extern int far fd_50F6_0224;
-extern int far fd_50F6_0232;
+extern int far TilesDugR;
 extern int far fd_50F6_020E;
 extern int far fd_50F6_0200;
 extern int far fd_50F6_10C0;
@@ -75,7 +75,7 @@ extern void far f_0EC1_07C1(void);
 extern void far f_0EC1_07D4(void);
 extern void far o24_39C7_01B8(int a);
 extern void far f_0BE8_0002(void);
-extern void far f_0250_006E(int a, int b, int columns, int rows);
+extern void far InvalEuMap(int a, int b, int columns, int rows);
 
 extern int far fd_50F6_07CA[2];
 extern int far fd_50F6_07BC[2];
@@ -145,15 +145,15 @@ extern void far SetMyHealth(int health);
 extern int far * far fd_50F6_0B22;
 extern int far fd_3D57_02BC[2];
 extern int far ListIndexA;
-extern unsigned char far fd_3E1D_AD3B[1000];
-extern unsigned char far fd_3E1D_A952[1000];
-extern unsigned char far fd_3E1D_B124[1000];
-extern unsigned char far fd_3E1D_BAEC[500];
-extern unsigned char far fd_3E1D_B8F7[500];
-extern unsigned char far fd_3E1D_BCE1[500];
-extern unsigned char far fd_3E1D_C4B5[500];
-extern unsigned char far fd_3E1D_C2C0[500];
-extern unsigned char far fd_3E1D_C6AA[500];
+extern unsigned char far AlistT[1000];
+extern unsigned char far AlistM[1000];
+extern unsigned char far AlistS[1000];
+extern unsigned char far BlistT[500];
+extern unsigned char far BlistM[500];
+extern unsigned char far BlistS[500];
+extern unsigned char far RlistT[500];
+extern unsigned char far RlistM[500];
+extern unsigned char far RlistS[500];
 extern void far AddAntToAList(int x, int y, int type, int kind, int a);
 extern int far SRand128(void);
 extern int far SRand256(void);
@@ -241,11 +241,11 @@ void far RandWorld(unsigned seed, int blackSize, int redSize, int mapWidth, int 
     for (count = 0; count < 64; count++) {
         for (x = 0; x < 32; x++) {
             fd_3E1D_D89F[count][x] = 0;
-            fd_3E1D_D09F[count][x] = 0;
-            fd_3E1D_E09F[count][x] = 0;
-            fd_3E1D_E89F[count][x] = 0;
-            fd_3E1D_F09F[count][x] = 0;
-            fd_4DA7_0000[count][x] = 0;
+            PherMapA[count][x] = 0;
+            PherMapBN[count][x] = 0;
+            PherMapBT[count][x] = 0;
+            PherMapRN[count][x] = 0;
+            PherMapRT[count][x] = 0;
         }
     }
 
@@ -318,7 +318,7 @@ void far RandWorld(unsigned seed, int blackSize, int redSize, int mapWidth, int 
     fd_50F6_1082 = 0;
     fd_50F6_1068 = 0;
     fd_50F6_0224 = 0;
-    fd_50F6_0232 = 0;
+    TilesDugR = 0;
     fd_50F6_020E = 0;
     fd_50F6_0200 = 0;
     fd_50F6_10C0 = 0;
@@ -363,7 +363,7 @@ void far RandWorld(unsigned seed, int blackSize, int redSize, int mapWidth, int 
 
     o24_39C7_01B8(0);
     f_0BE8_0002();
-    f_0250_006E(0, 0, fd_50F6_0FB6, fd_50F6_0FFA);
+    InvalEuMap(0, 0, fd_50F6_0FB6, fd_50F6_0FFA);
 
     fd_50F6_0508[0] = 0x40;
     fd_50F6_0596[0] = 0x40;
@@ -832,25 +832,25 @@ void far ClrArrays(void)
     for (x = 0; x < 64; x++) {
         for (y = 0; y < 32; y++) {
             fd_3E1D_D89F[x][y] = 0;
-            fd_3E1D_D09F[x][y] = 0;
-            fd_3E1D_E09F[x][y] = 0;
-            fd_3E1D_E89F[x][y] = 0;
-            fd_3E1D_F09F[x][y] = 0;
-            fd_4DA7_0000[x][y] = 0;
+            PherMapA[x][y] = 0;
+            PherMapBN[x][y] = 0;
+            PherMapBT[x][y] = 0;
+            PherMapRN[x][y] = 0;
+            PherMapRT[x][y] = 0;
         }
     }
     for (y = 0; y < 1000; y++) {
-        fd_3E1D_AD3B[y] = 0;
-        fd_3E1D_A952[y] = 0;
-        fd_3E1D_B124[y] = 0;
+        AlistT[y] = 0;
+        AlistM[y] = 0;
+        AlistS[y] = 0;
     }
     for (y = 0; y < 500; y++) {
-        fd_3E1D_BAEC[y] = 0;
-        fd_3E1D_B8F7[y] = 0;
-        fd_3E1D_BCE1[y] = 0;
-        fd_3E1D_C4B5[y] = 0;
-        fd_3E1D_C2C0[y] = 0;
-        fd_3E1D_C6AA[y] = 0;
+        BlistT[y] = 0;
+        BlistM[y] = 0;
+        BlistS[y] = 0;
+        RlistT[y] = 0;
+        RlistM[y] = 0;
+        RlistS[y] = 0;
     }
     for (y = 0; y < 12; y++) {
         for (x = 0; x < 16; x++) {

@@ -1,23 +1,23 @@
 /* Root module, code frame 0EC1: ant lists (A = surface, B = black nest, R = red nest). */
 
 extern int far ListIndexA;
-extern unsigned char far fd_3E1D_AD3B[];
-extern unsigned char far fd_3E1D_A180[];
-extern unsigned char far fd_3E1D_A569[];
-extern unsigned char far fd_3E1D_A952[];
-extern unsigned char far fd_3E1D_B124[];
-extern int far fd_50F6_0DA8;
-extern unsigned char far fd_3E1D_BAEC[];
-extern unsigned char far fd_3E1D_B50D[];
-extern unsigned char far fd_3E1D_B702[];
-extern unsigned char far fd_3E1D_B8F7[];
-extern unsigned char far fd_3E1D_BCE1[];
-extern int far fd_50F6_0EAA;
-extern unsigned char far fd_3E1D_C4B5[];
-extern unsigned char far fd_3E1D_BED6[];
-extern unsigned char far fd_3E1D_C0CB[];
-extern unsigned char far fd_3E1D_C2C0[];
-extern unsigned char far fd_3E1D_C6AA[];
+extern unsigned char far AlistT[];
+extern unsigned char far AlistX[];
+extern unsigned char far AlistY[];
+extern unsigned char far AlistM[];
+extern unsigned char far AlistS[];
+extern int far ListIndexB;
+extern unsigned char far BlistT[];
+extern unsigned char far BlistX[];
+extern unsigned char far BlistY[];
+extern unsigned char far BlistM[];
+extern unsigned char far BlistS[];
+extern int far ListIndexR;
+extern unsigned char far RlistT[];
+extern unsigned char far RlistX[];
+extern unsigned char far RlistY[];
+extern unsigned char far RlistM[];
+extern unsigned char far RlistS[];
 extern unsigned char far LifeA[128][64];
 extern void far f_0244_0000(unsigned char far *src, unsigned char far *dst, long count);
 extern char far Dy8[8];
@@ -36,14 +36,14 @@ void far CompactListA(void)
 
     shift = 0;
     for (i = 0; i < ListIndexA; i++) {
-        if (fd_3E1D_AD3B[i]) {
+        if (AlistT[i]) {
             if (shift) {
                 j = shift + i;
-                fd_3E1D_AD3B[j] = fd_3E1D_AD3B[i];
-                fd_3E1D_A180[j] = fd_3E1D_A180[i];
-                fd_3E1D_A569[j] = fd_3E1D_A569[i];
-                fd_3E1D_A952[j] = fd_3E1D_A952[i];
-                fd_3E1D_B124[j] = fd_3E1D_B124[i];
+                AlistT[j] = AlistT[i];
+                AlistX[j] = AlistX[i];
+                AlistY[j] = AlistY[i];
+                AlistM[j] = AlistM[i];
+                AlistS[j] = AlistS[i];
             }
         } else
             shift--;
@@ -58,20 +58,20 @@ void far CompactListB(void)
     int j;
 
     shift = 0;
-    for (i = 0; i < fd_50F6_0DA8; i++) {
-        if (fd_3E1D_BAEC[i]) {
+    for (i = 0; i < ListIndexB; i++) {
+        if (BlistT[i]) {
             if (shift) {
                 j = shift + i;
-                fd_3E1D_BAEC[j] = fd_3E1D_BAEC[i];
-                fd_3E1D_B50D[j] = fd_3E1D_B50D[i];
-                fd_3E1D_B702[j] = fd_3E1D_B702[i];
-                fd_3E1D_B8F7[j] = fd_3E1D_B8F7[i];
-                fd_3E1D_BCE1[j] = fd_3E1D_BCE1[i];
+                BlistT[j] = BlistT[i];
+                BlistX[j] = BlistX[i];
+                BlistY[j] = BlistY[i];
+                BlistM[j] = BlistM[i];
+                BlistS[j] = BlistS[i];
             }
         } else
             shift--;
     }
-    fd_50F6_0DA8 += shift;
+    ListIndexB += shift;
 }
 
 void far CompactListR(void)
@@ -81,20 +81,20 @@ void far CompactListR(void)
     int j;
 
     shift = 0;
-    for (i = 0; i < fd_50F6_0EAA; i++) {
-        if (fd_3E1D_C4B5[i]) {
+    for (i = 0; i < ListIndexR; i++) {
+        if (RlistT[i]) {
             if (shift) {
                 j = shift + i;
-                fd_3E1D_C4B5[j] = fd_3E1D_C4B5[i];
-                fd_3E1D_BED6[j] = fd_3E1D_BED6[i];
-                fd_3E1D_C0CB[j] = fd_3E1D_C0CB[i];
-                fd_3E1D_C2C0[j] = fd_3E1D_C2C0[i];
-                fd_3E1D_C6AA[j] = fd_3E1D_C6AA[i];
+                RlistT[j] = RlistT[i];
+                RlistX[j] = RlistX[i];
+                RlistY[j] = RlistY[i];
+                RlistM[j] = RlistM[i];
+                RlistS[j] = RlistS[i];
             }
         } else
             shift--;
     }
-    fd_50F6_0EAA += shift;
+    ListIndexR += shift;
 }
 
 void far RemoveFromAList(int index)
@@ -102,16 +102,16 @@ void far RemoveFromAList(int index)
     long count;
     int next;
 
-    LifeA[fd_3E1D_A180[index]][fd_3E1D_A569[index]] = 0;
+    LifeA[AlistX[index]][AlistY[index]] = 0;
     if (ListIndexA > 0)
         ListIndexA--;
     count = ListIndexA - index;
     next = index + 1;
-    f_0244_0000(&fd_3E1D_A180[next], &fd_3E1D_A180[index], count);
-    f_0244_0000(&fd_3E1D_A569[next], &fd_3E1D_A569[index], count);
-    f_0244_0000(&fd_3E1D_A952[next], &fd_3E1D_A952[index], count);
-    f_0244_0000(&fd_3E1D_AD3B[next], &fd_3E1D_AD3B[index], count);
-    f_0244_0000(&fd_3E1D_B124[next], &fd_3E1D_B124[index], count);
+    f_0244_0000(&AlistX[next], &AlistX[index], count);
+    f_0244_0000(&AlistY[next], &AlistY[index], count);
+    f_0244_0000(&AlistM[next], &AlistM[index], count);
+    f_0244_0000(&AlistT[next], &AlistT[index], count);
+    f_0244_0000(&AlistS[next], &AlistS[index], count);
 }
 
 int far FindInAList(int x, int y)
@@ -121,7 +121,7 @@ int far FindInAList(int x, int y)
     i = ListIndexA;
     while (i > 0) {
         i--;
-        if (fd_3E1D_A180[i] == x && fd_3E1D_A569[i] == y && fd_3E1D_AD3B[i] != 0)
+        if (AlistX[i] == x && AlistY[i] == y && AlistT[i] != 0)
             return i;
     }
     return -1;
@@ -131,10 +131,10 @@ int far FindInBList(int x, int y, int t)
 {
     int i;
 
-    i = fd_50F6_0DA8;
+    i = ListIndexB;
     while (i > 0) {
         i--;
-        if (fd_3E1D_B50D[i] == x && fd_3E1D_B702[i] == y && fd_3E1D_BAEC[i] == t)
+        if (BlistX[i] == x && BlistY[i] == y && BlistT[i] == t)
             return i;
     }
     return -1;
@@ -144,10 +144,10 @@ int far FindInRList(int x, int y, int t)
 {
     int i;
 
-    i = fd_50F6_0EAA;
+    i = ListIndexR;
     while (i > 0) {
         i--;
-        if (fd_3E1D_BED6[i] == x && fd_3E1D_C0CB[i] == y && fd_3E1D_C4B5[i] == t)
+        if (RlistX[i] == x && RlistY[i] == y && RlistT[i] == t)
             return i;
     }
     return -1;
@@ -158,17 +158,17 @@ void far DrownBList(int y)
     int i;
     int caste;
 
-    i = fd_50F6_0DA8;
+    i = ListIndexB;
     while (i > 0) {
         i--;
-        if (fd_3E1D_B702[i] != y)
+        if (BlistY[i] != y)
             continue;
-        if (fd_3E1D_BAEC[i] == 0)
+        if (BlistT[i] == 0)
             continue;
-        caste = (fd_3E1D_BAEC[i] & 0x78) >> 3;
+        caste = (BlistT[i] & 0x78) >> 3;
         if (caste <= 0 || caste >= 12)
             continue;
-        fd_3E1D_B8F7[i] = 0x11;
+        BlistM[i] = 0x11;
     }
 }
 
@@ -177,17 +177,17 @@ void far DrownRList(int y)
     int i;
     int caste;
 
-    i = fd_50F6_0EAA;
+    i = ListIndexR;
     while (i > 0) {
         i--;
-        if (fd_3E1D_C0CB[i] != y)
+        if (RlistY[i] != y)
             continue;
-        if (fd_3E1D_C4B5[i] == 0)
+        if (RlistT[i] == 0)
             continue;
-        caste = (fd_3E1D_C4B5[i] & 0x78) >> 3;
+        caste = (RlistT[i] & 0x78) >> 3;
         if (caste <= 0 || caste >= 12)
             continue;
-        fd_3E1D_C2C0[i] = 0x11;
+        RlistM[i] = 0x11;
     }
 }
 
@@ -204,21 +204,21 @@ int far ExitHole(int x, int y, int type, int mode, int stat)
     }
     if (i == 8)
         return 0;
-    fd_3E1D_A180[ListIndexA] = nx;
-    fd_3E1D_A569[ListIndexA] = ny;
-    fd_3E1D_AD3B[ListIndexA] = type;
-    fd_3E1D_A952[ListIndexA] = mode;
+    AlistX[ListIndexA] = nx;
+    AlistY[ListIndexA] = ny;
+    AlistT[ListIndexA] = type;
+    AlistM[ListIndexA] = mode;
     if (mode == 6)
-        fd_3E1D_B124[ListIndexA] = stat;
+        AlistS[ListIndexA] = stat;
     else {
-        fd_3E1D_B124[ListIndexA] = 0;
+        AlistS[ListIndexA] = 0;
         if (mode != 3 && mode != 7) {
             if (type & 0x80) {
                 if (x > 0x40)
-                    fd_3E1D_B124[ListIndexA] = 0x78;
+                    AlistS[ListIndexA] = 0x78;
             } else {
                 if (x < 0x40)
-                    fd_3E1D_B124[ListIndexA] = 0x78;
+                    AlistS[ListIndexA] = 0x78;
             }
         }
     }
@@ -238,11 +238,11 @@ void far AddAntToAList(int x, int y, int type, int mode, int stat)
     if (ListIndexA >= 1000)
         return;
     n = ListIndexA;
-    fd_3E1D_A180[n] = x;
-    fd_3E1D_A569[n] = y;
-    fd_3E1D_A952[n] = mode;
-    fd_3E1D_AD3B[n] = type;
-    fd_3E1D_B124[n] = stat;
+    AlistX[n] = x;
+    AlistY[n] = y;
+    AlistM[n] = mode;
+    AlistT[n] = type;
+    AlistS[n] = stat;
     LifeA[x][y] = type;
     ListIndexA++;
 }
@@ -251,32 +251,32 @@ void far AddAntToBList(int x, int y, int type, int mode, int stat)
 {
     int n;
 
-    if (fd_50F6_0DA8 >= 500)
+    if (ListIndexB >= 500)
         return;
-    n = fd_50F6_0DA8;
-    fd_3E1D_B50D[n] = x;
-    fd_3E1D_B702[n] = y;
-    fd_3E1D_B8F7[n] = mode;
-    fd_3E1D_BAEC[n] = type;
-    fd_3E1D_BCE1[n] = stat;
+    n = ListIndexB;
+    BlistX[n] = x;
+    BlistY[n] = y;
+    BlistM[n] = mode;
+    BlistT[n] = type;
+    BlistS[n] = stat;
     LifeB[x][y] = type;
-    fd_50F6_0DA8++;
+    ListIndexB++;
 }
 
 void far AddAntToRList(int x, int y, int type, int mode, int stat)
 {
     int n;
 
-    if (fd_50F6_0EAA >= 500)
+    if (ListIndexR >= 500)
         return;
-    n = fd_50F6_0EAA;
-    fd_3E1D_BED6[n] = x;
-    fd_3E1D_C0CB[n] = y;
-    fd_3E1D_C2C0[n] = mode;
-    fd_3E1D_C4B5[n] = type;
-    fd_3E1D_C6AA[n] = stat;
+    n = ListIndexR;
+    RlistX[n] = x;
+    RlistY[n] = y;
+    RlistM[n] = mode;
+    RlistT[n] = type;
+    RlistS[n] = stat;
     LifeR[x][y] = type;
-    fd_50F6_0EAA++;
+    ListIndexR++;
 }
 
 int far GetFromAlist(int colony)
@@ -287,7 +287,7 @@ int far GetFromAlist(int colony)
     i = ListIndexA;
     while (i > 0) {
         i--;
-        t = fd_3E1D_AD3B[i];
+        t = AlistT[i];
         if (t == 0)
             continue;
         if ((t >> 7) == colony)
@@ -311,11 +311,11 @@ void far BuildAntListA(void)
         for (y = 0; y < 64; y++) {
             ant = LifeA[x][y];
             if (ant && IsYellowAnt(ant) != 1) {
-                fd_3E1D_A180[ListIndexA] = x;
-                fd_3E1D_A569[ListIndexA] = y;
-                fd_3E1D_A952[ListIndexA] = 2;
-                fd_3E1D_AD3B[ListIndexA] = ant;
-                fd_3E1D_B124[ListIndexA] = 0;
+                AlistX[ListIndexA] = x;
+                AlistY[ListIndexA] = y;
+                AlistM[ListIndexA] = 2;
+                AlistT[ListIndexA] = ant;
+                AlistS[ListIndexA] = 0;
                 if (ListIndexA < 997)
                     ListIndexA++;
             }
@@ -325,10 +325,10 @@ void far BuildAntListA(void)
 
 void far ClearListB(void)
 {
-    fd_50F6_0DA8 = 0;
+    ListIndexB = 0;
 }
 
 void far ClearListR(void)
 {
-    fd_50F6_0EAA = 0;
+    ListIndexR = 0;
 }

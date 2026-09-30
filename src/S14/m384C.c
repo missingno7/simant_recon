@@ -189,7 +189,7 @@ int far DoScenario(void)
 
 extern void _fastcall f_23AE_0377(int win);
 extern int _fastcall f_22BF_0AEF(int win);
-extern void far f_1E57_0174(int win);
+extern void far clip_SetWin(int win);
 extern void _fastcall f_22BF_0498(int obj);
 extern void _fastcall win_GetObjRect(int obj, struct Rect far *rect);
 extern void _fastcall win_DrawObjectNum(int objNum);
@@ -200,7 +200,7 @@ extern int _fastcall f_22BF_09B0(int win);
 extern int far f_1FD2_0598(void);
 extern void _fastcall f_22BF_04A0(int obj);
 extern void _fastcall f_2505_0831(int win);
-extern void far f_1E57_0773(struct Rect far *rect);
+extern void far clip_SubInclude(struct Rect far *rect);
 extern void (far * far g_62E0)(int win);
 extern void _fastcall f_21FA_08E2(int win);
 extern int _fastcall f_22BF_0B25(int win);
@@ -214,7 +214,7 @@ void far DoWinHelp(int win)
 
     f_23AE_0377(win);
     shown = f_22BF_0AEF(win);
-    f_1E57_0174(win);
+    clip_SetWin(win);
     f_22BF_0498(win);
     win_GetObjRect(win, &r);
     win_DrawObjectNum(win);
@@ -229,7 +229,7 @@ void far DoWinHelp(int win)
     f_22BF_04A0(win);
     if (f_22BF_09B0(win)) {
         f_2505_0831(win);
-        f_1E57_0773(&r);
+        clip_SubInclude(&r);
         (*g_62E0)(win);
         f_21FA_08E2(win);
     }
@@ -317,7 +317,7 @@ void far DrawCastePopUp(void)
     f_20E8_04B6(0x1700);
     f_1FD2_057F();
     win_GetObjRect(0x1702, &r);
-    f_1E57_0773(&r);
+    clip_SubInclude(&r);
     f_24AB_02AD(g_3DB2 == 320 ? 0 : 2);
     maxw = 0;
     for (i = '0'; i <= '9'; i++) {

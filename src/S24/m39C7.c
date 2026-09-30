@@ -33,7 +33,7 @@ static char histShown[10];
 
 extern void far DoWinHelp(int topic);
 void far ToggleHistButton(int item);
-extern void far f_1E57_0174(int win);
+extern void far clip_SetWin(int win);
 extern int far f_1B4E_000D(int color);
 extern void _fastcall win_FillObjRect(int obj, int color);
 void far drawHistGraph(int graph, int hilite, int slot);
@@ -50,7 +50,7 @@ void far ProcHistoryEvent(struct Event far *ev)
         DoWinHelp(0x150f);
         break;
     case 0x150e:
-        f_1E57_0174(0x1500);
+        clip_SetWin(0x1500);
         win_FillObjRect(0x150e, f_1B4E_000D(0));
         for (i = 0; i < 4; i++)
             if (shownGraphs[i] != (int)0x8000)
@@ -77,7 +77,7 @@ void far ToggleHistButton(int item)
     int c;
     int bit;
 
-    f_1E57_0174(0x1500);
+    clip_SetWin(0x1500);
     g = item - 0x1503;
     if (histShown[g]) {
         for (i = 0; i < 4; i++)
@@ -288,8 +288,8 @@ void far drawHistGraph(int graph, int hilite, int slot)
 }
 /* SCAFFOLD END */
 
-extern int far fd_50F6_0330;
-extern int far fd_50F6_0350;
+extern int far BpopT;
+extern int far RpopT;
 extern int far FoodB;
 extern int far FoodR;
 extern int far HealthB;
@@ -299,8 +299,8 @@ extern int _fastcall win_IsWinOpen(int win);
 
 void far HistUpdate(void)
 {
-    fd_50F6_0516[fd_50F6_04F4] = fd_50F6_0330;
-    fd_50F6_05A0[fd_50F6_04F4] = fd_50F6_0350;
+    fd_50F6_0516[fd_50F6_04F4] = BpopT;
+    fd_50F6_05A0[fd_50F6_04F4] = RpopT;
     fd_50F6_0626[fd_50F6_04F4] = FoodB;
     fd_50F6_06AE[fd_50F6_04F4] = FoodR;
     fd_50F6_073C[fd_50F6_04F4] = HealthB;
@@ -313,7 +313,7 @@ void far HistUpdate(void)
         fd_3D57_0828++;
     fd_50F6_04F4 = (fd_50F6_04F4 + 1) & 0x3f;
     if (win_IsWinOpen(0x1500)) {
-        f_1E57_0174(0x1500);
+        clip_SetWin(0x1500);
         win_DrawHistoryWindow(3);
         f_1E57_0362();
     }

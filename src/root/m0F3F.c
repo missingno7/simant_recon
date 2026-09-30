@@ -2,11 +2,11 @@
  * MSC 6.00A /AL /Os /Oe /Og. */
 
 extern int far Tindex;
-extern int far fd_50F6_0EAA;
-extern unsigned char far fd_3E1D_BED6[];
-extern unsigned char far fd_3E1D_C0CB[];
-extern unsigned char far fd_3E1D_C4B5[];
-extern unsigned char far fd_3E1D_C2C0[];
+extern int far ListIndexR;
+extern unsigned char far RlistX[];
+extern unsigned char far RlistY[];
+extern unsigned char far RlistT[];
+extern unsigned char far RlistM[];
 extern int far fd_50F6_0D72[20];
 extern int far SRand256(void);
 extern int far SRand32(void);
@@ -17,7 +17,7 @@ extern int far fd_50F6_08E8;
 extern int far fd_50F6_0D40[20];
 extern int far f_0EC1_032C(int x, int y, int ant);
 extern int far GetWinner(int a, int b);
-extern unsigned char far fd_3E1D_C6AA[];
+extern unsigned char far RlistS[];
 extern int far MePlane;
 extern unsigned char far MapR[64][64];
 extern int far SRand1(int range);
@@ -35,7 +35,7 @@ extern int far IsYellowAnt(int value);
 extern int far fd_50F6_04E2;
 extern void far o25_3BA4_0DFB(int a, int index);
 extern int far FoodR;
-extern int far fd_50F6_0350;
+extern int far RpopT;
 extern int far Cycle;
 extern signed char far fd_3D57_0B36[];
 extern int far fd_50F6_10A6;
@@ -106,12 +106,12 @@ void far DoAntSimR(void)
     int y;
     int attr;
 
-    Tindex = fd_50F6_0EAA;
+    Tindex = ListIndexR;
     while (Tindex > 0) {
         --Tindex;
-        x = fd_3E1D_BED6[Tindex];
-        y = fd_3E1D_C0CB[Tindex];
-        attr = fd_3E1D_C4B5[Tindex];
+        x = RlistX[Tindex];
+        y = RlistY[Tindex];
+        attr = RlistT[Tindex];
         if (attr != 0)
             DoNestAntR(x, y, attr);
     }
@@ -131,10 +131,10 @@ void far DoNestAntR(int x, int y, int attr)
 
     caste = (attr & 0x78) >> 3;
     if (attr & 0x80) {
-        mode = fd_3E1D_C2C0[Tindex];
+        mode = RlistM[Tindex];
         fd_50F6_0D72[mode]++;
         if (SRand256() == 0 && mode != 9 && SRand32() > HealthR) {
-            fd_3E1D_C4B5[Tindex] = 0;
+            RlistT[Tindex] = 0;
             LifeR[x][y] = 0;
             fd_50F6_0FBC++;
             return;
@@ -179,7 +179,7 @@ void far DoNestAntR(int x, int y, int attr)
         case 14:
             DoRandR(x, y, attr, caste);
             if (fd_50F6_08E8 > 100)
-                fd_3E1D_C2C0[Tindex] = 0xf;
+                RlistM[Tindex] = 0xf;
             break;
         case 15:
         case 16:
@@ -194,11 +194,11 @@ void far DoNestAntR(int x, int y, int attr)
         }
         return;
     }
-    mode = fd_3E1D_C2C0[Tindex];
+    mode = RlistM[Tindex];
     fd_50F6_0D40[mode]++;
     if (attr < 8) {
-        fd_3E1D_C4B5[Tindex] = 0;
-        LifeR[fd_3E1D_BED6[Tindex]][fd_3E1D_C0CB[Tindex]] = 0;
+        RlistT[Tindex] = 0;
+        LifeR[RlistX[Tindex]][RlistY[Tindex]] = 0;
         return;
     }
     if (attr > 0x6f) {
@@ -210,17 +210,17 @@ void far DoNestAntR(int x, int y, int attr)
         if (ant > 0xdf)
             KillTailR(index);
         if (ant < 0x88) {
-            fd_3E1D_C2C0[Tindex] = 3;
-            fd_3E1D_C4B5[Tindex] |= 8;
-            LifeR[x][y] = fd_3E1D_C4B5[Tindex];
-            fd_3E1D_C4B5[index] = 0;
+            RlistM[Tindex] = 3;
+            RlistT[Tindex] |= 8;
+            LifeR[x][y] = RlistT[Tindex];
+            RlistT[index] = 0;
             return;
         }
-        winner = GetWinner(fd_3E1D_C4B5[index], attr);
-        fd_3E1D_C4B5[Tindex] = 0;
-        fd_3E1D_C6AA[index] = winner;
-        LifeR[x][y] = fd_3E1D_C4B5[index] = (winner & 0x80) + 0x70;
-        fd_3E1D_C2C0[index] = 0xa;
+        winner = GetWinner(RlistT[index], attr);
+        RlistT[Tindex] = 0;
+        RlistS[index] = winner;
+        LifeR[x][y] = RlistT[index] = (winner & 0x80) + 0x70;
+        RlistM[index] = 0xa;
         return;
     }
     switch (mode) {
@@ -246,9 +246,9 @@ void far RaidInR(int x, int y, int dirHint)
 
     if (MapR[x][y] >= 0x10 && MapR[x][y] <= 0x13) {
         StealFoodR(x, y);
-        fd_3E1D_C2C0[Tindex] = 3;
-        fd_3E1D_C4B5[Tindex] |= 8;
-        LifeR[x][y] = fd_3E1D_C4B5[Tindex];
+        RlistM[Tindex] = 3;
+        RlistT[Tindex] |= 8;
+        LifeR[x][y] = RlistT[Tindex];
         return;
     }
     if (TryMoveDirR(x, y, (SRand1(3) + dirHint - 2) & 7))
@@ -258,8 +258,8 @@ void far RaidInR(int x, int y, int dirHint)
         dir = SRand1(8);
     if (TryMoveDirR(x, y, dir))
         return;
-    fd_3E1D_C2C0[Tindex] = 1;
-    LifeR[x][y] = fd_3E1D_C4B5[Tindex];
+    RlistM[Tindex] = 1;
+    LifeR[x][y] = RlistT[Tindex];
 }
 
 void far StayInR(int x, int y, int dirHint)
@@ -268,13 +268,13 @@ void far StayInR(int x, int y, int dirHint)
 
     if (MapR[x][y] >= 0x10 && MapR[x][y] <= 0x13) {
         StealFoodR(x, y);
-        fd_3E1D_C2C0[Tindex] = 3;
-        fd_3E1D_C4B5[Tindex] |= 8;
-        LifeR[x][y] = fd_3E1D_C4B5[Tindex];
+        RlistM[Tindex] = 3;
+        RlistT[Tindex] |= 8;
+        LifeR[x][y] = RlistT[Tindex];
         return;
     }
     dir = (SRand1(3) + dirHint - 2) & 7;
-    fd_3E1D_C4B5[Tindex] = (fd_3E1D_C4B5[Tindex] & 0xf8) | dir;
+    RlistT[Tindex] = (RlistT[Tindex] & 0xf8) | dir;
     if (TryMoveDirR(x, y, dir))
         return;
     dir = f_0BE8_0E0F(x, y, dirHint & 7);
@@ -282,7 +282,7 @@ void far StayInR(int x, int y, int dirHint)
         dir = SRand1(8);
     if (TryMoveDirR(x, y, dir))
         return;
-    LifeR[x][y] = fd_3E1D_C4B5[Tindex];
+    LifeR[x][y] = RlistT[Tindex];
 }
 
 void far RaidOutR(int x, int y, int attr)
@@ -296,7 +296,7 @@ void far RaidOutR(int x, int y, int attr)
         dir--;
     if (TryMoveDirR(x, y, dir) == 0) {
         if (TryMoveDirR(x, y, SRand8()) == 0)
-            LifeR[x][y] = fd_3E1D_C4B5[Tindex];
+            LifeR[x][y] = RlistT[Tindex];
     }
 }
 
@@ -306,10 +306,10 @@ void far DoRestR(int x, int y, int attacker)
 
     if (CheckNestFightR(x, y, attacker))
         return;
-    LifeR[x][y] = fd_3E1D_C4B5[Tindex];
+    LifeR[x][y] = RlistT[Tindex];
     if (SRand1(20) == 0) {
-        type = fd_3E1D_C4B5[Tindex];
-        fd_3E1D_C2C0[Tindex] = f_1383_0976((type & 0x78) >> 3, type);
+        type = RlistT[Tindex];
+        RlistM[Tindex] = f_1383_0976((type & 0x78) >> 3, type);
         return;
     }
     if (fd_3D57_07B2 != 0)
@@ -319,14 +319,14 @@ void far DoRestR(int x, int y, int attacker)
 void far DoDrownR(int x, int y, int attr)
 {
     if (MapR[x][y] < 0x14) {
-        fd_3E1D_C2C0[Tindex] = f_1383_0A30((attr & 0x78) >> 3);
+        RlistM[Tindex] = f_1383_0A30((attr & 0x78) >> 3);
         return;
     }
     attr = ((SRand1(3) + attr - 1) & 7) | (attr & 0xf8);
-    fd_3E1D_C4B5[Tindex] = attr;
+    RlistT[Tindex] = attr;
     LifeR[x][y] = attr;
     if (SRand1(100) == 0) {
-        fd_3E1D_C4B5[Tindex] = LifeR[x][y] = 0;
+        RlistT[Tindex] = LifeR[x][y] = 0;
         if (attr & 0x80)
             fd_50F6_0FBC++;
         else
@@ -337,7 +337,7 @@ void far DoDrownR(int x, int y, int attr)
 void far DoRandR(int x, int y, int attr, int modeArg)
 {
     if (SRand32() == 0)
-        fd_3E1D_C2C0[Tindex] = f_1383_0A30(modeArg);
+        RlistM[Tindex] = f_1383_0A30(modeArg);
     if (CheckNestFightR(x, y, attr))
         return;
     if (TryMoveDirR(x, y, attr & 7))
@@ -351,16 +351,16 @@ static unsigned char near nestFightMode[16] = {
 
 void far DoNestFightR(int x, int y)
 {
-    fd_3E1D_C4B5[Tindex] = (fd_3E1D_C4B5[Tindex] & 0xf8) + SRand1(7);
-    LifeR[x][y] = fd_3E1D_C4B5[Tindex];
+    RlistT[Tindex] = (RlistT[Tindex] & 0xf8) + SRand1(7);
+    LifeR[x][y] = RlistT[Tindex];
     if (SRand16() == 0) {
-        fd_3E1D_C4B5[Tindex] = LifeR[x][y] = fd_3E1D_C6AA[Tindex];
-        if ((fd_3E1D_C4B5[Tindex] & 0x78) == 0x60)
+        RlistT[Tindex] = LifeR[x][y] = RlistS[Tindex];
+        if ((RlistT[Tindex] & 0x78) == 0x60)
             MakeNewTailR(Tindex);
-        if (!(fd_3E1D_C4B5[Tindex] & 0x80))
-            fd_3E1D_C2C0[Tindex] = 7;
+        if (!(RlistT[Tindex] & 0x80))
+            RlistM[Tindex] = 7;
         else
-            fd_3E1D_C2C0[Tindex] = nestFightMode[(fd_3E1D_C4B5[Tindex] & 0x78) >> 3];
+            RlistM[Tindex] = nestFightMode[(RlistT[Tindex] & 0x78) >> 3];
     } else if (fd_3D57_07B2 != 0)
         f_0250_4302(x, y, 3);
 }
@@ -376,10 +376,10 @@ int far CheckNestFightR(int x, int y, int attacker)
         index = f_0EC1_032C(x, y, ant);
         if (index >= 0) {
             winner = GetWinner(ant, attacker);
-            fd_3E1D_C6AA[index] = winner;
-            fd_3E1D_C4B5[index] = (winner & 0x80) + 0x70;
+            RlistS[index] = winner;
+            RlistT[index] = (winner & 0x80) + 0x70;
             LifeR[x][y] = (winner & 0x80) + 0x70;
-            fd_3E1D_C2C0[index] = 0xa;
+            RlistM[index] = 0xa;
             return 1;
         }
     } else if (IsYellowAnt(ant) && fd_50F6_04E2 == 0) {
@@ -404,8 +404,8 @@ int far DropFoodR(int x, int y)
         result = 1;
     }
     ++FoodR;
-    if (fd_3E1D_C4B5[Tindex] & 8)
-        fd_3E1D_C4B5[Tindex] -= 8;
+    if (RlistT[Tindex] & 8)
+        RlistT[Tindex] -= 8;
     return result;
 }
 
@@ -415,9 +415,9 @@ void far SimEggR(int x, int y)
     int mode;
     int mask;
 
-    attr = fd_3E1D_C4B5[Tindex];
+    attr = RlistT[Tindex];
     mode = -1;
-    if (fd_50F6_0350 == 1)
+    if (RpopT == 1)
         mask = 0x1f;
     else
         mask = 0x7f;
@@ -426,14 +426,14 @@ void far SimEggR(int x, int y)
         if ((attr & 0xf) == 8) {
             mode = fd_3D57_0B36[((fd_50F6_10A6 % 7) << 3) + SRand8()];
             attr = (mode << 3) + 0x82;
-            fd_3E1D_C2C0[Tindex] = f_1383_0A30(mode);
+            RlistM[Tindex] = f_1383_0A30(mode);
         }
     }
     if (fd_3D57_07B2 != 0 && mode < 0)
         f_0250_428A(x, y, 3);
     LifeR[x][y] = attr;
-    fd_3E1D_C4B5[Tindex] = attr;
-    fd_3E1D_C6AA[Tindex] = 0;
+    RlistT[Tindex] = attr;
+    RlistS[Tindex] = 0;
 }
 
 void far SimQueenR(int x, int y, int caste, int attr)
@@ -445,28 +445,28 @@ void far SimQueenR(int x, int y, int caste, int attr)
     if (caste == 12) {
         if (SRand64() == 0) {
             if (HealthR == 0) {
-                LifeR[x][y] = fd_3E1D_C4B5[Tindex] = 0;
+                LifeR[x][y] = RlistT[Tindex] = 0;
                 o14_384C_0B6A(0, 0x2720, 1);
                 return;
             }
             if (QueenMoveR(x, y, attr))
                 return;
         }
-        type = fd_3E1D_C4B5[Tindex];
+        type = RlistT[Tindex];
         if (LostTailR(x, y, type)) {
             type = 0;
-            fd_3E1D_C4B5[Tindex] = 0;
+            RlistT[Tindex] = 0;
             fd_50F6_036C--;
         }
         LifeR[x][y] = type;
         if (fd_3D57_07B2 != 0)
             f_0250_437A(x, y, 3);
     } else if (caste == 13) {
-        type = fd_3E1D_C4B5[Tindex];
+        type = RlistT[Tindex];
         LifeR[x][y] = type;
         if (fd_50F6_036C > 0 && LostHeadR(x, y, type)) {
             fd_50F6_036C--;
-            LifeR[x][y] = fd_3E1D_C4B5[Tindex] = 0;
+            LifeR[x][y] = RlistT[Tindex] = 0;
             return;
         }
         nx = x + Dx8[(attr ^ 0xfc) & 7];
@@ -504,10 +504,10 @@ int far QueenMoveR(int x, int y, int dirHint)
         newRow = y + Dy8[opp];
         LifeR[newCol][newRow] = 0;
         index = f_0EC1_032C(newCol, newRow, (dirHint & 7) + 0xe8);
-        if (index >= 0 && fd_3E1D_C4B5[index] != 0) {
-            fd_3E1D_BED6[index] = x;
-            fd_3E1D_C0CB[index] = y;
-            fd_3E1D_C4B5[index] = dir - 0x18;
+        if (index >= 0 && RlistT[index] != 0) {
+            RlistX[index] = x;
+            RlistY[index] = y;
+            RlistT[index] = dir - 0x18;
             LifeR[x][y] = dir - 0x18;
         }
         return 1;
@@ -522,18 +522,18 @@ void far MakeNewTailR(int index)
     int life;
     int column;
 
-    type = fd_3E1D_C4B5[index];
+    type = RlistT[index];
     direction = type & 7;
     direction ^= 4;
-    life = fd_3E1D_BED6[index] + Dx8[direction];
-    column = fd_3E1D_C0CB[index] + Dy8[direction];
+    life = RlistX[index] + Dx8[direction];
+    column = RlistY[index] + Dy8[direction];
     AddAntToRList(life, column, type + 8, 9, 0);
 }
 
 void far KillTailR(int index)
 {
-    fd_3E1D_C4B5[index] = 0;
-    LifeR[fd_3E1D_BED6[index]][fd_3E1D_C0CB[index]] = 0;
+    RlistT[index] = 0;
+    LifeR[RlistX[index]][RlistY[index]] = 0;
 }
 
 int far LostHeadR(int x, int y, int attr)
@@ -597,11 +597,11 @@ int far TryMoveDirR(int x, int y, int dir)
         return GetOutR(x);
     if (MapR[dx][dy] >= 0x1c)
         return 0;
-    LifeR[dx][dy] = fd_3E1D_C4B5[Tindex] & 0xf8 | dir;
+    LifeR[dx][dy] = RlistT[Tindex] & 0xf8 | dir;
     LifeR[x][y] = 0;
-    fd_3E1D_BED6[Tindex] = dx;
-    fd_3E1D_C0CB[Tindex] = dy;
-    fd_3E1D_C4B5[Tindex] = LifeR[dx][dy];
+    RlistX[Tindex] = dx;
+    RlistY[Tindex] = dy;
+    RlistT[Tindex] = LifeR[dx][dy];
     return 1;
 }
 
@@ -618,11 +618,11 @@ void far DoNestingR(int x, int y, int attr, int caste)
     dir = attr & 7;
     if (caste == 1) {
         if (SRand4() == 0 && MapR[x][y] < 0x10) {
-            fd_3E1D_C4B5[Tindex] += 8;
-            LifeR[x][y] = fd_3E1D_C4B5[Tindex];
+            RlistT[Tindex] += 8;
+            LifeR[x][y] = RlistT[Tindex];
             PlaceEggR(x, y, 0x82);
-            fd_3E1D_C6AA[Tindex] = 0;
-            fd_3E1D_C2C0[Tindex] = f_1383_0A30(caste);
+            RlistS[Tindex] = 0;
+            RlistM[Tindex] = f_1383_0A30(caste);
             return;
         }
         if (SRand4() == 0 || (dir = f_0BE8_0E0F(x, y, attr & 7)) < 0)
@@ -632,21 +632,21 @@ void far DoNestingR(int x, int y, int attr, int caste)
             ant = LifeR[x][y];
             if (ant != 0 && (ant & 0x7f) < 8) {
                 if ((index = f_0EC1_032C(x, y, ant)) >= 0) {
-                    fd_3E1D_C4B5[index] = 0;
-                    fd_3E1D_C4B5[Tindex] -= 8;
+                    RlistT[index] = 0;
+                    RlistT[Tindex] -= 8;
                     return;
                 }
             } else if (SRand1(100) > HealthR)
                 TryEatFoodR(x, y);
             else
-                fd_3E1D_C2C0[Tindex] = f_1383_0A30(caste);
+                RlistM[Tindex] = f_1383_0A30(caste);
         }
         if (SRand4() == 0)
             dir = SRand8();
         else
             dir = attr & 7;
     } else
-        fd_3E1D_C2C0[Tindex] = f_1383_0A30(caste);
+        RlistM[Tindex] = f_1383_0A30(caste);
     if (TryMoveDirR(x, y, dir) == 0)
         TryMoveDirR(x, y, SRand8());
 }
@@ -666,7 +666,7 @@ void far TryEatFoodR(int y, int x)
         MapR[y][x]--;
     if (FoodR > 0)
         FoodR--;
-    threshold = (fd_50F6_0350 + fd_50F6_0AFA[2]) >> 4;
+    threshold = (RpopT + fd_50F6_0AFA[2]) >> 4;
     fd_50F6_0226 += 5;
     if (threshold < fd_50F6_0226) {
         fd_50F6_0226 = 0;
@@ -684,7 +684,7 @@ void far EatFoodR(int x, int y)
     if (FoodR > 0)
         FoodR--;
     fd_50F6_0226 += 5;
-    if ((fd_50F6_0350 + fd_50F6_0AFA[2]) >> 4 < fd_50F6_0226) {
+    if ((RpopT + fd_50F6_0AFA[2]) >> 4 < fd_50F6_0226) {
         fd_50F6_0226 = 0;
         if (HealthR < 100)
             HealthR++;
@@ -705,7 +705,7 @@ void far DecEatR(void)
 {
     --fd_50F6_0226;
     if (fd_50F6_0226 < 0) {
-        fd_50F6_0226 = fd_50F6_0350 >> 5;
+        fd_50F6_0226 = RpopT >> 5;
         if (HealthR > 0)
             --HealthR;
     }
@@ -723,12 +723,12 @@ void far DoFoodInR(int x, int y, int attr)
         DropFoodR(x, y);
         if (SRand1(100) > HealthR)
             EatFoodR(x, y);
-        fd_3E1D_C2C0[Tindex] = f_1383_0A30((attr & 0x78) >> 3);
+        RlistM[Tindex] = f_1383_0A30((attr & 0x78) >> 3);
         return;
     }
     newattr = (attr & 0xf8) | dir;
     LifeR[x][y] = newattr;
-    fd_3E1D_C4B5[Tindex] = newattr;
+    RlistT[Tindex] = newattr;
     nx = x + Dx8[dir];
     ny = y + Dy8[dir];
     if (nx > 0x3f || nx < 0 || ny > 0x3f)
@@ -742,11 +742,11 @@ void far DoFoodInR(int x, int y, int attr)
     LifeR[x][y] = 0;
     if (CheckNestFightR(nx, ny, newattr))
         return;
-    newattr = (fd_3E1D_C4B5[Tindex] & 0xf8) | dir;
-    fd_3E1D_C4B5[Tindex] = newattr;
+    newattr = (RlistT[Tindex] & 0xf8) | dir;
+    RlistT[Tindex] = newattr;
     LifeR[nx][ny] = newattr;
-    fd_3E1D_BED6[Tindex] = nx;
-    fd_3E1D_C0CB[Tindex] = ny;
+    RlistX[Tindex] = nx;
+    RlistY[Tindex] = ny;
 }
 
 /* SCAFFOLD BEGIN: DoDigInR best draft, 3 bytes differ: the two arms of
@@ -762,7 +762,7 @@ void far DoDigInR(int x, int y, int attr, int caste)
     int ny;
 
     if (caste != 2 && caste != 6) {
-        fd_3E1D_C2C0[Tindex] = f_1383_0A30(caste);
+        RlistM[Tindex] = f_1383_0A30(caste);
         return;
     }
     dir = f_0BE8_0E0F(x, y, attr & 7);
@@ -770,9 +770,9 @@ void far DoDigInR(int x, int y, int attr, int caste)
         dir = SRand8();
     newattr = (attr & 0xf8) | dir;
     LifeR[x][y] = newattr;
-    fd_3E1D_C4B5[Tindex] = newattr;
+    RlistT[Tindex] = newattr;
     if (y == 0x3f) {
-        fd_3E1D_C2C0[Tindex] = f_1383_0A30(caste);
+        RlistM[Tindex] = f_1383_0A30(caste);
         return;
     }
     ny = y + Dy8[dir];
@@ -787,28 +787,28 @@ void far DoDigInR(int x, int y, int attr, int caste)
         return;
     if (IsItDirt(MapR[nx][ny])) {
         if (DigTileThemR(nx, ny)) {
-            fd_3E1D_C4B5[Tindex] += 0x18;
-            fd_3E1D_C2C0[Tindex] = 5;
+            RlistT[Tindex] += 0x18;
+            RlistM[Tindex] = 5;
             myBeginSound(0x12, 0, 0);
         } else {
-            fd_3E1D_C2C0[Tindex] = 0;
+            RlistM[Tindex] = 0;
             return;
         }
     }
     LifeR[x][y] = 0;
     if (CheckNestFightR(nx, ny, newattr))
         return;
-    newattr = (fd_3E1D_C4B5[Tindex] & 0xf8) | dir;
-    fd_3E1D_C4B5[Tindex] = newattr;
+    newattr = (RlistT[Tindex] & 0xf8) | dir;
+    RlistT[Tindex] = newattr;
     LifeR[nx][ny] = newattr;
-    fd_3E1D_BED6[Tindex] = nx;
-    fd_3E1D_C0CB[Tindex] = ny;
+    RlistX[Tindex] = nx;
+    RlistY[Tindex] = ny;
     if (SRand64() > HealthR)
         TryEatFoodR(x, y);
     if (SRand4() == 0)
         f_14EE_0D71(nx, ny);
     if (MapR[nx][ny] == 0x14) {
-        LifeR[nx][ny] = fd_3E1D_C4B5[Tindex] = 0;
+        LifeR[nx][ny] = RlistT[Tindex] = 0;
         AddAntToBList(nx, ny, newattr = (newattr & 0x7f) < 0x30 ? SRand8() + 0x90 : SRand8() + 0xb0, 3, 0);
         LifeB[nx][ny] = newattr;
     }
@@ -830,7 +830,7 @@ void far DoDigOutR(int x, int y, int attr)
         dir = RandTurn(attr & 7);
     newattr = (attr & 0xf8) | dir;
     LifeR[x][y] = newattr;
-    fd_3E1D_C4B5[Tindex] = newattr;
+    RlistT[Tindex] = newattr;
     nx = x + Dx8[dir];
     ny = y + Dy8[dir];
     if (nx < 0 || nx > 0x3f || ny > 0x3f)
@@ -844,11 +844,11 @@ void far DoDigOutR(int x, int y, int attr)
             ExitMapR[x][y]--;
         caste = (attr & 0x78) >> 3;
         if (caste == 5 || caste == 9) {
-            fd_3E1D_C4B5[Tindex] -= 0x18;
-            fd_3E1D_C2C0[Tindex] = 4;
+            RlistT[Tindex] -= 0x18;
+            RlistM[Tindex] = 4;
         }
         if (caste == 2 || caste == 6)
-            fd_3E1D_C2C0[Tindex] = 4;
+            RlistM[Tindex] = 4;
         return;
     }
     if (IsItDirt(MapR[nx][ny]))
@@ -856,9 +856,9 @@ void far DoDigOutR(int x, int y, int attr)
     LifeR[x][y] = 0;
     if (CheckNestFightR(nx, ny, newattr))
         return;
-    fd_3E1D_C4B5[Tindex] = LifeR[nx][ny] = (fd_3E1D_C4B5[Tindex] & 0xf8) | dir;
-    fd_3E1D_BED6[Tindex] = nx;
-    fd_3E1D_C0CB[Tindex] = ny;
+    RlistT[Tindex] = LifeR[nx][ny] = (RlistT[Tindex] & 0xf8) | dir;
+    RlistX[Tindex] = nx;
+    RlistY[Tindex] = ny;
     if (SRand64() > HealthR)
         TryEatFoodR(x, y);
 }
@@ -868,17 +868,17 @@ int far GetOutR(int x)
     int raw;
 
     if (MapR[x][0] == 0x18) {
-        raw = fd_3E1D_C4B5[Tindex];
-        fd_3E1D_C4B5[Tindex] = 0;
+        raw = RlistT[Tindex];
+        RlistT[Tindex] = 0;
         if (HoleMapR[x] == 0)
             MakeNewHoleR(x);
         if (f_0EC1_0437(HoleMapR[x], x, SRand8() + (raw & 0xf8),
-                        fd_3E1D_C2C0[Tindex], fd_3E1D_C6AA[Tindex]) != 0) {
+                        RlistM[Tindex], RlistS[Tindex]) != 0) {
             LifeR[x][1] = 0;
             return 1;
         }
-        fd_3E1D_C4B5[Tindex] = raw;
-        fd_3E1D_C2C0[Tindex] = 0;
+        RlistT[Tindex] = raw;
+        RlistM[Tindex] = 0;
         return 0;
     }
     if (ExitMapR[x][0] != 0)

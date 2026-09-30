@@ -24,7 +24,7 @@ void far ReDrawMapEdit(int flags);
 extern int far f_00F8_02AC(void);
 extern void far f_1FD2_04D0(struct Pt far *pt);
 extern int far fd_50F6_0A9C;
-extern int _fastcall f_22BF_0A22(int win);
+extern int _fastcall win_IsWinInFront(int win);
 extern int far fd_50F6_10D2[2];
 extern int far fd_50F6_3856;
 extern int far fd_50F6_3858;
@@ -52,7 +52,7 @@ void far processExp(int x, int y, int shift)
         while (f_00F8_02AC() == 1) {
             f_1FD2_04D0(&pt);
             fd_50F6_0A9C++;
-            if (f_22BF_0A22(0x100)) {
+            if (win_IsWinInFront(0x100)) {
                 nx = (pt.x - fd_50F6_10D2[0]) / fd_50F6_3856;
                 ny = (pt.y - fd_50F6_10D2[1]) / fd_50F6_3858;
                 if (fd_50F6_032E > 1)
@@ -80,7 +80,7 @@ void far processExp(int x, int y, int shift)
 }
 
 extern int far GetLife(int plane, int x, int y);
-extern void far o05_35F5_025C(int x, int y, int plane);
+extern void far MagnifyMenu(int x, int y, int plane);
 void far DropWall(int x, int y, int tx, int ty);
 void far ExpDig(int x, int y, int tx, int ty);
 void far ExpAddFood(int x, int y);
@@ -92,7 +92,7 @@ void far DoTool(int x, int y)
     switch (fd_50F6_104C) {
     case 0:
         if (GetLife(fd_50F6_032E, x, y))
-            o05_35F5_025C(x, y, fd_50F6_032E);
+            MagnifyMenu(x, y, fd_50F6_032E);
         break;
     case 1:
         if (fd_50F6_032E == 1)
@@ -124,7 +124,7 @@ extern void far o12_384C_100A(void);
 
 void far ReDrawMapEdit(int flags)
 {
-    if (f_22BF_0A22(0)) {
+    if (win_IsWinInFront(0)) {
         f_0250_0E9D();
         f_0250_0ED2();
         if (!f_22BF_09B0(0x100))
@@ -154,8 +154,8 @@ extern char far fd_3D57_07B6[];
 extern unsigned char far LifeA[128][64];
 extern void far myBeginSound(int sound, int a, int b);
 extern int far GetDir(int x1, int y1, int x2, int y2);
-extern signed char far fd_3D57_0010[];
-extern signed char far fd_3D57_001A[];
+extern signed char far Dx9[];
+extern signed char far Dy9[];
 
 void far DropWall(int fromX, int fromY, int tx, int ty)
 {
@@ -182,10 +182,10 @@ void far DropWall(int fromX, int fromY, int tx, int ty)
             myBeginSound(10, SRand1(10000) + 2000, 0x7e);
         }
         dir = GetDir(x, y, tx, ty);
-        if (fd_3D57_0010[dir])
-            x += fd_3D57_0010[dir];
+        if (Dx9[dir])
+            x += Dx9[dir];
         else
-            y += fd_3D57_001A[dir];
+            y += Dy9[dir];
         if (dir == 0)
             break;
     }
@@ -272,43 +272,43 @@ void far ExpDig(int fromX, int fromY, int tx, int ty)
             }
         }
         dir = GetDir(x, y, tx, ty);
-        x += fd_3D57_0010[dir];
-        y += fd_3D57_001A[dir];
+        x += Dx9[dir];
+        y += Dy9[dir];
     } while (dir != 0);
 }
 
-extern int far fd_50F6_0DA8;
-extern unsigned char far fd_3E1D_BAEC[];
-extern unsigned char far fd_3E1D_B50D[];
-extern unsigned char far fd_3E1D_B702[];
+extern int far ListIndexB;
+extern unsigned char far BlistT[];
+extern unsigned char far BlistX[];
+extern unsigned char far BlistY[];
 
 void far ClearLifeB(int x, int y)
 {
     int i;
 
-    i = fd_50F6_0DA8;
+    i = ListIndexB;
     while (i) {
         --i;
-        if (fd_3E1D_BAEC[i] != 0 && fd_3E1D_B50D[i] == x && fd_3E1D_B702[i] == y)
-            fd_3E1D_BAEC[i] = 0;
+        if (BlistT[i] != 0 && BlistX[i] == x && BlistY[i] == y)
+            BlistT[i] = 0;
     }
     LifeB[x][y] = 0;
 }
 
-extern int far fd_50F6_0EAA;
-extern unsigned char far fd_3E1D_C4B5[];
-extern unsigned char far fd_3E1D_BED6[];
-extern unsigned char far fd_3E1D_C0CB[];
+extern int far ListIndexR;
+extern unsigned char far RlistT[];
+extern unsigned char far RlistX[];
+extern unsigned char far RlistY[];
 
 void far ClearLifeR(int x, int y)
 {
     int i;
 
-    i = fd_50F6_0EAA;
+    i = ListIndexR;
     while (i) {
         --i;
-        if (fd_3E1D_C4B5[i] != 0 && fd_3E1D_BED6[i] == x && fd_3E1D_C0CB[i] == y)
-            fd_3E1D_C4B5[i] = 0;
+        if (RlistT[i] != 0 && RlistX[i] == x && RlistY[i] == y)
+            RlistT[i] = 0;
     }
     LifeR[x][y] = 0;
 }
@@ -412,7 +412,7 @@ void far ExpIncSmell(int x, int y)
 
 extern int far FindInAList(int x, int y);
 extern int far Tindex;
-extern unsigned char far fd_3E1D_AD3B[];
+extern unsigned char far AlistT[];
 extern void far DeadAntHere(int x, int y, int type);
 extern int far fd_50F6_0F12;
 extern int far fd_50F6_0F34;
@@ -447,8 +447,8 @@ void far ExpKillAnts(int x, int y)
                 if (LifeA[kx][ky]) {
                     Tindex = FindInAList(kx, ky);
                     if (Tindex >= 0) {
-                        DeadAntHere(kx, ky, fd_3E1D_AD3B[Tindex] & 0x80);
-                        fd_3E1D_AD3B[Tindex] = 0;
+                        DeadAntHere(kx, ky, AlistT[Tindex] & 0x80);
+                        AlistT[Tindex] = 0;
                         LifeA[kx][ky] = 0;
                     }
                 }
@@ -463,7 +463,7 @@ void far ExpKillAnts(int x, int y)
                 if (v) {
                     Tindex = FindInBList(kx, ky, v);
                     if (Tindex >= 0) {
-                        fd_3E1D_BAEC[Tindex] = 0;
+                        BlistT[Tindex] = 0;
                         LifeB[kx][ky] = 0;
                     }
                 }
@@ -473,7 +473,7 @@ void far ExpKillAnts(int x, int y)
                 if (v) {
                     Tindex = FindInRList(kx, ky, v);
                     if (Tindex >= 0) {
-                        fd_3E1D_C4B5[Tindex] = 0;
+                        RlistT[Tindex] = 0;
                         LifeR[kx][ky] = 0;
                     }
                 }
@@ -615,7 +615,7 @@ void far FillDirtB(int x, int y)
     ExitMapB[x][y] = 0;
 }
 
-extern int far fd_50F6_0232;
+extern int far TilesDugR;
 extern long far fd_50F6_108E;
 extern long far fd_50F6_10A2;
 extern void far f_14EE_0B5A(int x, int y);
@@ -626,14 +626,14 @@ void far FillDirtR(int x, int y)
     MapR[x][y] = '.';
     LifeR[x][y] = 0;
 
-    if (fd_50F6_0232 > 1) {
+    if (TilesDugR > 1) {
         fd_50F6_108E -= x;
         if (fd_50F6_108E < 0)
             fd_50F6_108E = 0;
         fd_50F6_10A2 -= y;
         if (fd_50F6_10A2 < 0)
             fd_50F6_10A2 = 0;
-        --fd_50F6_0232;
+        --TilesDugR;
     }
 
     f_14EE_0B5A(x, y - 1);
@@ -675,11 +675,11 @@ int far IsValidSLoc(int x, int y)
     return 0;
 }
 
-extern unsigned char far fd_3E1D_E09F[64][32];
-extern unsigned char far fd_3E1D_E89F[64][32];
-extern unsigned char far fd_3E1D_F09F[64][32];
-extern unsigned char far fd_4DA7_0000[64][32];
-extern unsigned char far fd_3E1D_D09F[64][32];
+extern unsigned char far PherMapBN[64][32];
+extern unsigned char far PherMapBT[64][32];
+extern unsigned char far PherMapRN[64][32];
+extern unsigned char far PherMapRT[64][32];
+extern unsigned char far PherMapA[64][32];
 
 int far GetSM(int x, int y)
 {
@@ -689,19 +689,19 @@ int far GetSM(int x, int y)
         return -1;
     switch (fd_3D57_07B6[5]) {
     case 0:
-        v = fd_3E1D_E09F[x][y];
+        v = PherMapBN[x][y];
         break;
     case 1:
-        v = fd_3E1D_E89F[x][y];
+        v = PherMapBT[x][y];
         break;
     case 2:
-        v = fd_3E1D_F09F[x][y];
+        v = PherMapRN[x][y];
         break;
     case 3:
-        v = fd_4DA7_0000[x][y];
+        v = PherMapRT[x][y];
         break;
     case 4:
-        v = fd_3E1D_D09F[x][y];
+        v = PherMapA[x][y];
         break;
     }
     return v;
@@ -714,19 +714,19 @@ void far SetSM(int x, int y, int val)
             val = 255;
         switch (fd_3D57_07B6[5]) {
         case 0:
-            fd_3E1D_E09F[x][y] = val;
+            PherMapBN[x][y] = val;
             break;
         case 1:
-            fd_3E1D_E89F[x][y] = val;
+            PherMapBT[x][y] = val;
             break;
         case 2:
-            fd_3E1D_F09F[x][y] = val;
+            PherMapRN[x][y] = val;
             break;
         case 3:
-            fd_4DA7_0000[x][y] = val;
+            PherMapRT[x][y] = val;
             break;
         case 4:
-            fd_3E1D_D09F[x][y] = val;
+            PherMapA[x][y] = val;
             break;
         }
     }

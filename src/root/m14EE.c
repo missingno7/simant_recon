@@ -26,7 +26,7 @@ extern int far fd_50F6_10B2;
 extern int far fd_50F6_10C0;
 extern long far fd_50F6_108E;
 extern long far fd_50F6_10A2;
-extern int far fd_50F6_0232;
+extern int far TilesDugR;
 extern int far fd_50F6_0200;
 extern int far fd_50F6_020E;
 extern unsigned char far ExitMapB[64][64];
@@ -264,10 +264,10 @@ void far DigTileR(int x, int y)
         MapR[x][y] = SRand8();
         fd_50F6_108E += x;
         fd_50F6_10A2 += y;
-        fd_50F6_0232++;
-        if (fd_50F6_0232 > 0) {
-            fd_50F6_0200 = fd_50F6_108E / fd_50F6_0232;
-            fd_50F6_020E = fd_50F6_10A2 / fd_50F6_0232;
+        TilesDugR++;
+        if (TilesDugR > 0) {
+            fd_50F6_0200 = fd_50F6_108E / TilesDugR;
+            fd_50F6_020E = fd_50F6_10A2 / TilesDugR;
         }
     }
     f_14EE_0B5A(x, y - 1);
@@ -326,10 +326,10 @@ int far DigTileThemR(int x, int y)
         MapR[x][y] = SRand8();
     fd_50F6_108E += x;
     fd_50F6_10A2 += y;
-    fd_50F6_0232++;
-    if (fd_50F6_0232 > 0) {
-        fd_50F6_0200 = fd_50F6_108E / fd_50F6_0232;
-        fd_50F6_020E = fd_50F6_10A2 / fd_50F6_0232;
+    TilesDugR++;
+    if (TilesDugR > 0) {
+        fd_50F6_0200 = fd_50F6_108E / TilesDugR;
+        fd_50F6_020E = fd_50F6_10A2 / TilesDugR;
     }
     f_14EE_0B5A(x, y - 1);
     f_14EE_0B5A(x + 1, y);

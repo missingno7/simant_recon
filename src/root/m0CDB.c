@@ -1,32 +1,32 @@
 /* Root module 0CDB: the spider (InitSpider .. SGetDis, Win16 SIMONE_MODULE order). */
 
-extern int far fd_50F6_1076;
-extern int far fd_50F6_1054;
-extern int far fd_50F6_105A;
-extern int far fd_50F6_1042;
-extern int far fd_50F6_1072;
-extern int far fd_50F6_108A;
+extern int far SpidBurpCnt;
+extern int far EatCnt;
+extern int far SCorpseBase;
+extern int far Scycle;
+extern int far Scycle2;
+extern int far SpidRevenge;
 extern int far fd_50F6_1004;
 extern int far fd_3D57_0C12;
 extern int far fd_50F6_0EAC;
 extern int far fd_50F6_0F0C;
 extern int far fd_50F6_0F12;
 extern int far fd_50F6_0F34;
-extern int far fd_50F6_0FB8;
+extern int far SMode;
 extern int far fd_50F6_06AC;
-extern int far fd_50F6_0FFC;
-extern int far fd_50F6_10AE;
-extern int far fd_50F6_0F42;
-extern int far fd_50F6_0F7E;
+extern int far Starg;
+extern int far StargLife;
+extern int far SuserX;
+extern int far SuserY;
 
 void far InitSpider(void)
 {
-    fd_50F6_1076 = 10;
-    fd_50F6_1054 = 0;
-    fd_50F6_105A = 0;
-    fd_50F6_1042 = 0;
-    fd_50F6_1072 = 0;
-    fd_50F6_108A = 0;
+    SpidBurpCnt = 10;
+    EatCnt = 0;
+    SCorpseBase = 0;
+    Scycle = 0;
+    Scycle2 = 0;
+    SpidRevenge = 0;
     fd_50F6_1004 = 0;
     fd_3D57_0C12 = 0;
     if (fd_50F6_0EAC)
@@ -35,15 +35,15 @@ void far InitSpider(void)
         fd_50F6_0F0C = 0;
     fd_50F6_0F12 = 0x400;
     fd_50F6_0F34 = 0x200;
-    fd_50F6_06AC = fd_50F6_0FB8 = 0;
-    fd_50F6_0FFC = -2;
-    fd_50F6_10AE = -1;
-    fd_50F6_0F7E = fd_50F6_0F42 = 64;
+    fd_50F6_06AC = SMode = 0;
+    Starg = -2;
+    StargLife = -1;
+    SuserY = SuserX = 64;
 }
 
 extern int far fd_50F6_0A06;
 int far SFoundAnt(void);
-extern unsigned char far fd_3E1D_AD3B[];
+extern unsigned char far AlistT[];
 int far SpiderScan(void);
 extern int far MeLocY;
 extern int far MeLocX;
@@ -63,11 +63,11 @@ extern void far YellowDeath(int cause);
 extern void far PictStrnDialog(int pict, int strn, int flag);
 extern int far SRand2(void);
 extern int far MePlane;
-extern unsigned char far fd_3E1D_A569[];
-extern unsigned char far fd_3E1D_A180[];
+extern unsigned char far AlistY[];
+extern unsigned char far AlistX[];
 int far SGetDis(int x1, int y1, int x2, int y2);
 extern void far myBeginSound(int sound, int a, int b);
-extern int far fd_50F6_109A;
+extern int far DeathCnt;
 extern void far f_0BE8_0812(int x, int y);
 extern long far RAntsEaten;
 extern long far BAntsEaten;
@@ -91,31 +91,31 @@ void far MoveSpider(void)
     int d;
     int r;
 
-    fd_50F6_1072 = (fd_50F6_1072 + 1) & 0x3ff;
+    Scycle2 = (Scycle2 + 1) & 0x3ff;
     x = fd_50F6_0F12 >> 4;
     y = fd_50F6_0F34 >> 4;
-    if (fd_50F6_0A06 == 1 && fd_50F6_0FB8 != 2 && fd_50F6_0FB8 != 3) {
+    if (fd_50F6_0A06 == 1 && SMode != 2 && SMode != 3) {
         if (fd_50F6_06AC == 7) {
-            if ((fd_50F6_0FFC = SFoundAnt()) != -2) {
-                fd_50F6_0FB8 = 2;
-                if (fd_50F6_0FFC >= 0)
-                    fd_50F6_10AE = fd_3E1D_AD3B[fd_50F6_0FFC];
+            if ((Starg = SFoundAnt()) != -2) {
+                SMode = 2;
+                if (Starg >= 0)
+                    StargLife = AlistT[Starg];
                 else
-                    fd_50F6_10AE = 0xff;
+                    StargLife = 0xff;
                 return;
             }
         } else if (fd_50F6_06AC == 8)
             SpiderScan();
-        d = (int)GetDis(MeLocX, MeLocY, fd_50F6_0F42, fd_50F6_0F7E);
+        d = (int)GetDis(MeLocX, MeLocY, SuserX, SuserY);
         if (d < 1) {
-            fd_50F6_1042 = 2;
+            Scycle = 2;
             return;
         }
-        r = o25_39C7_0CBD(1, MeLocX, MeLocY, fd_50F6_0F42, fd_50F6_0F7E);
+        r = o25_39C7_0CBD(1, MeLocX, MeLocY, SuserX, SuserY);
         if (r == -1)
             return;
         if (r == -2) {
-            r = GetDir(MeLocX, MeLocY, fd_50F6_0F42, fd_50F6_0F7E) - 1;
+            r = GetDir(MeLocX, MeLocY, SuserX, SuserY) - 1;
             if (r < 0)
                 return;
         }
@@ -123,11 +123,11 @@ void far MoveSpider(void)
         if (fd_50F6_0A8E && d > 2) {
             fd_50F6_0F12 += 5 * fd_3D57_0994[fd_50F6_1004];
             fd_50F6_0F34 += 5 * fd_3D57_099C[fd_50F6_1004];
-            fd_50F6_1042 = (fd_50F6_1042 + 2) & 0x3ff;
+            Scycle = (Scycle + 2) & 0x3ff;
         } else {
             fd_50F6_0F12 += fd_3D57_0994[fd_50F6_1004];
             fd_50F6_0F34 += fd_3D57_099C[fd_50F6_1004];
-            fd_50F6_1042 = (fd_50F6_1042 + 1) & 0x3ff;
+            Scycle = (Scycle + 1) & 0x3ff;
         }
         MeLocX = fd_50F6_0F12 >> 4;
         MeLocY = fd_50F6_0F34 >> 4;
@@ -141,7 +141,7 @@ void far MoveSpider(void)
         if (SRand1(300))
             return;
         fd_50F6_0F12 = SRand1(0x400) + 0x200;
-        fd_50F6_0FB8 = fd_50F6_0F0C = 1;
+        SMode = fd_50F6_0F0C = 1;
         fd_3D57_0C12 = 0;
         if (SRand1(2)) {
             fd_50F6_0F34 = 1;
@@ -152,22 +152,22 @@ void far MoveSpider(void)
         }
         return;
     }
-    if (!(fd_50F6_1072 & 3) && fd_50F6_0FB8 < 5) {
+    if (!(Scycle2 & 3) && SMode < 5) {
         r = ScanForAnts();
         if (r > 8) {
             KillSpider();
             if (fd_50F6_0A06 != 1) {
                 PictStrnDialog(0, 0x273e, 0);
-                if (fd_50F6_108A < 5)
-                    fd_50F6_108A++;
-                if (fd_50F6_108A < 3)
+                if (SpidRevenge < 5)
+                    SpidRevenge++;
+                if (SpidRevenge < 3)
                     return;
-                if (fd_50F6_108A >= 5)
+                if (SpidRevenge >= 5)
                     fd_50F6_06AC = 8;
                 else
                     fd_50F6_06AC = 7;
-                if (fd_50F6_108A >= 6 && !SRand2()) {
-                    fd_50F6_108A = 0;
+                if (SpidRevenge >= 6 && !SRand2()) {
+                    SpidRevenge = 0;
                     fd_50F6_06AC = 0;
                 }
                 return;
@@ -177,21 +177,21 @@ void far MoveSpider(void)
             return;
         }
         if (r > 4)
-            fd_50F6_0FB8 = 4;
+            SMode = 4;
     }
-    if (fd_50F6_0FB8 < 4 && fd_50F6_06AC == 8)
+    if (SMode < 4 && fd_50F6_06AC == 8)
         SpiderScan();
-    switch (fd_50F6_0FB8) {
+    switch (SMode) {
     case 0:
-        fd_50F6_1042 = 2;
+        Scycle = 2;
         if (!SRand1(150))
-            fd_50F6_0FB8 = 1;
-        if ((fd_50F6_0FFC = SFoundAnt()) != -2) {
-            fd_50F6_0FB8 = 2;
-            if (fd_50F6_0FFC >= 0)
-                fd_50F6_10AE = fd_3E1D_AD3B[fd_50F6_0FFC];
+            SMode = 1;
+        if ((Starg = SFoundAnt()) != -2) {
+            SMode = 2;
+            if (Starg >= 0)
+                StargLife = AlistT[Starg];
             else
-                fd_50F6_10AE = 0xff;
+                StargLife = 0xff;
             return;
         }
         if (!SRand1(30))
@@ -203,38 +203,38 @@ void far MoveSpider(void)
         if (fd_3D57_0C12) {
             fd_50F6_0F12 -= fd_3D57_0994[fd_50F6_1004];
             fd_50F6_0F34 -= fd_3D57_099C[fd_50F6_1004];
-            fd_50F6_1042 = (fd_50F6_1042 - 1) & 0x3ff;
+            Scycle = (Scycle - 1) & 0x3ff;
         } else {
             fd_50F6_0F12 += fd_3D57_0994[fd_50F6_1004];
             fd_50F6_0F34 += fd_3D57_099C[fd_50F6_1004];
-            fd_50F6_1042 = (fd_50F6_1042 + 1) & 0x3ff;
+            Scycle = (Scycle + 1) & 0x3ff;
         }
         if (!SRand1(20))
             fd_50F6_1004 = TurnTab[fd_50F6_1004][SRand1(8)];
-        if ((fd_50F6_0FFC = SFoundAnt()) != -2) {
-            fd_50F6_0FB8 = 2;
-            if (fd_50F6_0FFC >= 0)
-                fd_50F6_10AE = fd_3E1D_AD3B[fd_50F6_0FFC];
+        if ((Starg = SFoundAnt()) != -2) {
+            SMode = 2;
+            if (Starg >= 0)
+                StargLife = AlistT[Starg];
             else
-                fd_50F6_10AE = 0xff;
+                StargLife = 0xff;
             return;
         }
         if (!SRand1(50)) {
-            fd_50F6_0FB8 = 0;
-            fd_50F6_1042 = 2;
+            SMode = 0;
+            Scycle = 2;
         }
         break;
     case 2:
-        if (fd_50F6_0FFC >= 0) {
-            if ((fd_3E1D_AD3B[fd_50F6_0FFC] ^ fd_50F6_10AE) & 0xf0) {
-                fd_50F6_0FB8 = 0;
-                fd_50F6_0FFC = -2;
+        if (Starg >= 0) {
+            if ((AlistT[Starg] ^ StargLife) & 0xf0) {
+                SMode = 0;
+                Starg = -2;
                 if (fd_50F6_0A06 != 1)
                     return;
                 y = fd_50F6_0F34 >> 4;
                 x = fd_50F6_0F12 >> 4;
-                fd_50F6_0F7E = y;
-                fd_50F6_0F42 = x;
+                SuserY = y;
+                SuserX = x;
                 MeLocX = x;
                 MeLocY = y;
                 if (fd_50F6_06AC == 6)
@@ -244,42 +244,42 @@ void far MoveSpider(void)
                 return;
             }
         } else if (MePlane > 1) {
-            fd_50F6_0FB8 = 0;
-            fd_50F6_0FFC = -2;
+            SMode = 0;
+            Starg = -2;
             return;
         }
-        if (fd_50F6_0FFC < 0)
+        if (Starg < 0)
             d = SGetDis(x, y, MeLocX, MeLocY);
         else
-            d = SGetDis(x, y, fd_3E1D_A180[fd_50F6_0FFC], fd_3E1D_A569[fd_50F6_0FFC]);
+            d = SGetDis(x, y, AlistX[Starg], AlistY[Starg]);
         if (d > 64 && fd_50F6_0A06 != 1) {
-            fd_50F6_0FB8 = 0;
-            fd_50F6_0FFC = -2;
+            SMode = 0;
+            Starg = -2;
             return;
         }
         if (d < 2) {
-            fd_50F6_0FB8 = 3;
+            SMode = 3;
             fd_50F6_0F12 = (fd_50F6_0F12 & 0xfff0) + 8;
             fd_50F6_0F34 = (fd_50F6_0F34 & 0xfff0) + 8;
             goto eat;
         }
-        if (fd_50F6_0FFC < 0)
+        if (Starg < 0)
             d = GetDir(x, y, MeLocX, MeLocY);
         else
-            d = GetDir(x, y, fd_3E1D_A180[fd_50F6_0FFC], fd_3E1D_A569[fd_50F6_0FFC]);
+            d = GetDir(x, y, AlistX[Starg], AlistY[Starg]);
         fd_50F6_1004 = TurnTab[fd_50F6_1004][d - 1];
-        if (fd_50F6_0FFC < 0)
+        if (Starg < 0)
             myBeginSound(0x2f, 0, 0x7e);
         else
             myBeginSound(0x2f, 0, -5);
         if (fd_3D57_0C12) {
             fd_50F6_0F12 -= 5 * fd_3D57_0994[fd_50F6_1004];
             fd_50F6_0F34 -= 5 * fd_3D57_099C[fd_50F6_1004];
-            fd_50F6_1042 = (fd_50F6_1042 - 2) & 0x3ff;
+            Scycle = (Scycle - 2) & 0x3ff;
         } else {
             fd_50F6_0F12 += 5 * fd_3D57_0994[fd_50F6_1004];
             fd_50F6_0F34 += 5 * fd_3D57_099C[fd_50F6_1004];
-            fd_50F6_1042 = (fd_50F6_1042 + 2) & 0x3ff;
+            Scycle = (Scycle + 2) & 0x3ff;
         }
         if (fd_50F6_0A06 == 1) {
             MeLocX = fd_50F6_0F12 >> 4;
@@ -298,54 +298,54 @@ void far MoveSpider(void)
             if (fd_3D57_07A8[0])
                 f_015B_06A2();
         }
-        if (fd_50F6_0FFC != -2) {
-            if (fd_50F6_0FFC >= 0) {
-                if (!(((unsigned char)fd_50F6_10AE ^ fd_3E1D_AD3B[fd_50F6_0FFC]) & 0xf0)) {
-                    if (fd_50F6_10AE & 0x80) {
+        if (Starg != -2) {
+            if (Starg >= 0) {
+                if (!(((unsigned char)StargLife ^ AlistT[Starg]) & 0xf0)) {
+                    if (StargLife & 0x80) {
                         RAntsEaten++;
-                        fd_50F6_105A = 4;
+                        SCorpseBase = 4;
                     } else {
                         BAntsEaten++;
-                        fd_50F6_105A = 0;
+                        SCorpseBase = 0;
                     }
-                    LifeA[fd_3E1D_A180[fd_50F6_0FFC]][fd_3E1D_A569[fd_50F6_0FFC]] = 0;
-                    fd_3E1D_AD3B[fd_50F6_0FFC] = 0;
+                    LifeA[AlistX[Starg]][AlistY[Starg]] = 0;
+                    AlistT[Starg] = 0;
                 } else {
-                    fd_50F6_0FFC = -2;
+                    Starg = -2;
                     goto done;
                 }
             } else {
                 MoveMyLife(MePlane, (fd_3D57_09A4[fd_50F6_1004] + x) & 0x7f,
                            (fd_3D57_09AC[fd_50F6_1004] + y) & 0x3f, fd_50F6_04C2, fd_50F6_0496);
                 YellowDeath(1);
-                fd_50F6_105A = 0;
+                SCorpseBase = 0;
             }
-            fd_50F6_0FFC = -2;
-            fd_50F6_1054 = fd_50F6_06AC >= 7 ? 11 : 50;
+            Starg = -2;
+            EatCnt = fd_50F6_06AC >= 7 ? 11 : 50;
         }
         d = (fd_3D57_09A4[fd_50F6_1004] + x) & 0x7f;
         r = (fd_3D57_09AC[fd_50F6_1004] + y) & 0x3f;
         if (!TERRAINset && MapA[d][r] < 0x18)
-            MapA[d][r] = SRand4() + fd_50F6_105A + 0x10;
-        if (fd_50F6_1054 > 0) {
-            fd_50F6_1054--;
-            if (fd_50F6_1054 % 10 == 0 && SRand2())
+            MapA[d][r] = SRand4() + SCorpseBase + 0x10;
+        if (EatCnt > 0) {
+            EatCnt--;
+            if (EatCnt % 10 == 0 && SRand2())
                 myBeginSound(0x2c, (SRand256() << 3) + 0x2777, -5);
             break;
         }
-        if (--fd_50F6_1076 == 0) {
-            fd_50F6_1076 = 10;
+        if (--SpidBurpCnt == 0) {
+            SpidBurpCnt = 10;
             if (fd_3D57_07A8[5] && !SRand2())
                 myBeginSound(10, 0, 10);
         }
-        DeadAntHere(d, r, fd_50F6_105A);
+        DeadAntHere(d, r, SCorpseBase);
     done:
-        fd_50F6_0FB8 = 0;
+        SMode = 0;
         if (fd_50F6_0A06 == 1) {
             if (fd_50F6_06AC == 6)
                 fd_50F6_06AC = 0;
-            fd_50F6_0F42 = x;
-            fd_50F6_0F7E = y;
+            SuserX = x;
+            SuserY = y;
         }
         break;
     case 4:
@@ -353,30 +353,30 @@ void far MoveSpider(void)
         if (fd_3D57_0C12) {
             fd_50F6_0F12 -= 5 * fd_3D57_0994[fd_50F6_1004];
             fd_50F6_0F34 -= 5 * fd_3D57_099C[fd_50F6_1004];
-            fd_50F6_1042 = (fd_50F6_1042 - 2) & 0x3ff;
+            Scycle = (Scycle - 2) & 0x3ff;
         } else {
             fd_50F6_0F12 += 5 * fd_3D57_0994[fd_50F6_1004];
             fd_50F6_0F34 += 5 * fd_3D57_099C[fd_50F6_1004];
-            fd_50F6_1042 = (fd_50F6_1042 + 2) & 0x3ff;
+            Scycle = (Scycle + 2) & 0x3ff;
         }
         if (!SRand1(50)) {
-            fd_50F6_0FB8 = 0;
-            fd_50F6_1042 = 2;
+            SMode = 0;
+            Scycle = 2;
         }
         break;
     case 5:
-        if (--fd_50F6_109A == 0) {
-            fd_50F6_0FB8 = fd_50F6_0F0C = 0;
+        if (--DeathCnt == 0) {
+            SMode = fd_50F6_0F0C = 0;
             f_0BE8_0812(x, y);
             f_0BE8_0812(x, y);
             f_0BE8_0812(x, y);
             return;
         }
-        if (SRand1(1000) < fd_50F6_109A) {
-            if (fd_50F6_109A > 400)
-                fd_50F6_1042 = SRand1(3) + 1;
+        if (SRand1(1000) < DeathCnt) {
+            if (DeathCnt > 400)
+                Scycle = SRand1(3) + 1;
             else
-                fd_50F6_1042 = SRand1(2) + 2;
+                Scycle = SRand1(2) + 2;
         }
         break;
     }
@@ -416,9 +416,9 @@ int far ScanForAnts(void)
 
 void far KillSpider(void)
 {
-    fd_50F6_0FB8 = 5;
-    fd_50F6_109A = 500;
-    fd_50F6_1042 = 0;
+    SMode = 5;
+    DeathCnt = 500;
+    Scycle = 0;
 }
 
 extern int far ListIndexA;
@@ -445,7 +445,7 @@ int far SFoundAnt(void)
     y = sy;
     if (fd_50F6_06AC == 7) {
         for (x = ListIndexA - 1; x >= 0; x--)
-            if (fd_3E1D_AD3B[x] && GetDis(sx, sy, fd_3E1D_A180[x], fd_3E1D_A569[x]) <= 800)
+            if (AlistT[x] && GetDis(sx, sy, AlistX[x], AlistY[x]) <= 800)
                 return x;
         if (fd_50F6_0A06 == 0 && MePlane == 1 && GetDis(sx, sy, MeLocX, MeLocY) <= 800)
             return -1;
@@ -500,7 +500,7 @@ int far SpiderScan(void)
                 DoLaserFire(fd_50F6_0F12, fd_50F6_0F34, (x << 4) + 7, (y << 4) + 7);
                 if (SRand4()) {
                     LifeA[x][y] = 0;
-                    fd_3E1D_AD3B[found] = 0;
+                    AlistT[found] = 0;
                     DeadAntHere(x, y, life & 0x80);
                 }
                 return found;

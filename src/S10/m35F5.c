@@ -408,7 +408,6 @@ none:
 
 extern void far f_1B73_0C80(int item);
 
-/* SCAFFOLD BEGIN: o10_35F5_0A63 (menu +/- stepping): exact except compare operand order (cmp si,[bp+0C] vs original cmp [bp+0C],si); symbol-count sensitive, depends on the final o10_35F5_0384 */
 int far o10_35F5_0A63(int key, int far *sel, int count, int base)
 {
     int i;
@@ -426,4 +425,3 @@ int far o10_35F5_0A63(int key, int far *sel, int count, int base)
     *sel = i;
     return 1;
 }
-/* SCAFFOLD END */

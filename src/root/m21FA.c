@@ -32,9 +32,9 @@ extern void _fastcall win_LockWin(int win);
 extern void _fastcall win_UnlockWin(int win);
 extern char far * _fastcall win_ObjAddr(int obj);
 extern void _fastcall win_GetObjRect(int obj, struct Rect far *rect);
-extern void far f_1E57_0DAA(void);
-extern void far f_1E57_0773(char far *obj);
-extern void far f_1E57_0EB9(void);
+extern void far clip_Push(void);
+extern void far clip_SubInclude(char far *obj);
+extern void far clip_Pop(void);
 extern void _fastcall f_23E6_0392(char far *obj);
 extern void _fastcall f_23E6_066C(char far *obj);
 extern void _fastcall win_DrawBitMapAtObj(int id, struct Rect far *rect);
@@ -47,9 +47,9 @@ extern char far * far f_2505_0006(int win);
 extern int far sprintf(char far *buffer, char far *format, ...);
 extern void far f_1E57_0296(void);
 extern void far f_1E57_0A9C(char far *p);
-extern void far f_1E57_0174(int win);
+extern void far clip_SetWin(int win);
 extern void far f_1E57_0362(void);
-extern void far f_1E57_0AAF(struct Rect far *rect);
+extern void far clip_SubExclude(struct Rect far *rect);
 extern void far f_1FD2_05FD(void);
 extern void far f_171C_1BBA(char far * far *handle);
 
@@ -234,8 +234,8 @@ void _fastcall win_DrawObjectI(struct WinObj far *obj)
     rect = (struct Rect far *)obj;
     win_SetColorFromObj((char far *)obj);
     if (obj->flags & 0x200) {
-        f_1E57_0DAA();
-        f_1E57_0773((char far *)obj);
+        clip_Push();
+        clip_SubInclude((char far *)obj);
     }
     switch (obj->type) {
     case 0:
@@ -323,7 +323,7 @@ void _fastcall win_DrawObjectI(struct WinObj far *obj)
         }
     }
     if (obj->flags & 0x200)
-        f_1E57_0EB9();
+        clip_Pop();
 }
 
 void _fastcall win_DrawObject(struct WinObj far *obj)
@@ -440,7 +440,7 @@ void _fastcall f_21FA_0AD2(char far *p)
     for (i = 0; g_5702[i] != (int)0x8000; i++)
         ;
     while (--i >= 0) {
-        f_1E57_0174(g_5702[i]);
+        clip_SetWin(g_5702[i]);
         f_1E57_0A9C(p);
         win_DrawWindow(g_5702[i]);
     }
@@ -457,22 +457,22 @@ void _fastcall f_21FA_0B4B(char far *p)
     f_1E57_0A9C(p);
     if (g_5702[0] != (int)0x8000) {
         win_GetObjRect(g_5702[0], &r);
-        f_1E57_0AAF(&r);
+        clip_SubExclude(&r);
     }
     f_1FD2_05FD();
     for (i = 0; g_5702[i] != (int)0x8000; i++)
         ;
     while (--i >= 1) {
-        f_1E57_0174(g_5702[i]);
+        clip_SetWin(g_5702[i]);
         sprintf(buf, "i:%x", i);
         f_1E57_0A9C(p);
         sprintf(buf, "!!i:%x", i);
-        f_1E57_0AAF(&r);
+        clip_SubExclude(&r);
         sprintf(buf, "@@i:%x", i);
         win_DrawWindow(g_5702[i]);
     }
     if (g_5702[0] != (int)0x8000) {
-        f_1E57_0174(g_5702[0]);
+        clip_SetWin(g_5702[0]);
         win_DrawWindow(g_5702[0]);
     }
     f_1E57_0362();

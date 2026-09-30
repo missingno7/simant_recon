@@ -2,12 +2,12 @@
 
 extern unsigned char far HoleMapB[];
 extern unsigned char far MapA[128][64];
-extern unsigned char far fd_3E1D_E09F[64][32];
+extern unsigned char far PherMapBN[64][32];
 extern unsigned char far HoleMapR[];
-extern unsigned char far fd_3E1D_F09F[64][32];
-extern unsigned char far fd_3E1D_E89F[64][32];
-extern unsigned char far fd_4DA7_0000[64][32];
-extern unsigned char far fd_3E1D_D09F[64][32];
+extern unsigned char far PherMapRN[64][32];
+extern unsigned char far PherMapBT[64][32];
+extern unsigned char far PherMapRT[64][32];
+extern unsigned char far PherMapA[64][32];
 extern unsigned char far fd_3E1D_C89F[64][32];
 extern char far Dy8[8];
 extern char far Dx8[8];
@@ -19,9 +19,9 @@ void far FillHolesBN(void)
     for (y = 0; y < 64; y++) {
         if (HoleMapB[y]) {
             if ((MapA[HoleMapB[y]][y] == 0x51) == 0)
-                fd_3E1D_E09F[HoleMapB[y] >> 1][y >> 1] = 0xff;
+                PherMapBN[HoleMapB[y] >> 1][y >> 1] = 0xff;
             else
-                fd_3E1D_E09F[HoleMapB[y] >> 1][y >> 1] = 0;
+                PherMapBN[HoleMapB[y] >> 1][y >> 1] = 0;
         }
     }
 }
@@ -33,9 +33,9 @@ void far FillHolesRN(void)
     for (y = 0; y < 64; y++) {
         if (HoleMapR[y]) {
             if ((MapA[HoleMapR[y]][y] == 0x51) == 0)
-                fd_3E1D_F09F[HoleMapR[y] >> 1][y >> 1] = 0xff;
+                PherMapRN[HoleMapR[y] >> 1][y >> 1] = 0xff;
             else
-                fd_3E1D_F09F[HoleMapR[y] >> 1][y >> 1] = 0;
+                PherMapRN[HoleMapR[y] >> 1][y >> 1] = 0;
         }
     }
 }
@@ -47,8 +47,8 @@ void far ColonySmellBN(void)
 
     for (x = 0; x < 64; x++) {
         for (y = 0; y < 32; y++) {
-            if (fd_3E1D_E09F[x][y] != 0)
-                fd_3E1D_E09F[x][y]--;
+            if (PherMapBN[x][y] != 0)
+                PherMapBN[x][y]--;
         }
     }
 }
@@ -60,8 +60,8 @@ void far ColonySmellRN(void)
 
     for (x = 0; x < 64; x++) {
         for (y = 0; y < 32; y++) {
-            if (fd_3E1D_F09F[x][y] != 0)
-                fd_3E1D_F09F[x][y]--;
+            if (PherMapRN[x][y] != 0)
+                PherMapRN[x][y]--;
         }
     }
 }
@@ -74,11 +74,11 @@ void far ColonySmellBT(void)
 
     for (x = 0; x < 64; x++) {
         for (y = 0; y < 32; y++) {
-            smell = fd_3E1D_E89F[x][y];
+            smell = PherMapBT[x][y];
             if (smell < 8)
-                fd_3E1D_E89F[x][y] = 0;
+                PherMapBT[x][y] = 0;
             else
-                fd_3E1D_E89F[x][y] = smell - (smell >> 1);
+                PherMapBT[x][y] = smell - (smell >> 1);
         }
     }
 }
@@ -91,13 +91,13 @@ void far ColonySmellRT(void)
 
     for (x = 0; x < 64; x++) {
         for (y = 0; y < 32; y++) {
-            smell = fd_4DA7_0000[x][y];
+            smell = PherMapRT[x][y];
             if (smell <= 0)
                 continue;
             if (smell < 8)
-                fd_4DA7_0000[x][y] = 0;
+                PherMapRT[x][y] = 0;
             else
-                fd_4DA7_0000[x][y] -= smell >> 1;
+                PherMapRT[x][y] -= smell >> 1;
         }
     }
 }
@@ -111,7 +111,7 @@ void far SmoothAlarm(void)
 
     for (x = 0; x < 64; x++)
         for (y = 0; y < 32; y++)
-            fd_3E1D_C89F[x][y] = fd_3E1D_D09F[x][y];
+            fd_3E1D_C89F[x][y] = PherMapA[x][y];
     for (x = 0; x < 64; x++) {
         for (y = 0; y < 32; y++) {
             sum = 0;
@@ -125,9 +125,9 @@ void far SmoothAlarm(void)
                 sum += fd_3E1D_C89F[x][y + 1];
             v = (fd_3E1D_C89F[x][y] + (sum >> 2)) >> 1;
             if (v > 8)
-                fd_3E1D_D09F[x][y] = v;
+                PherMapA[x][y] = v;
             else
-                fd_3E1D_D09F[x][y] = 0;
+                PherMapA[x][y] = 0;
         }
     }
 }
@@ -138,10 +138,10 @@ void far AlarmHere(int x, int y, int level)
 
     x >>= 1;
     y >>= 1;
-    v = fd_3E1D_D09F[x][y] + level;
+    v = PherMapA[x][y] + level;
     if (v > 200)
         v = 200;
-    fd_3E1D_D09F[x][y] = v;
+    PherMapA[x][y] = v;
 }
 
 void far AlarmHere2(int x, int y, int level)
@@ -150,46 +150,46 @@ void far AlarmHere2(int x, int y, int level)
 
     x >>= 1;
     y >>= 1;
-    v = fd_3E1D_D09F[x][y];
+    v = PherMapA[x][y];
     if (v > level)
         return;
-    fd_3E1D_D09F[x][y] = level;
+    PherMapA[x][y] = level;
 }
 
 void far JamScentBN(int x, int y, int scent)
 {
     int v;
 
-    v = fd_3E1D_E09F[x >> 1][y >> 1];
+    v = PherMapBN[x >> 1][y >> 1];
     if (v < scent)
-        fd_3E1D_E09F[x >> 1][y >> 1] = scent;
+        PherMapBN[x >> 1][y >> 1] = scent;
 }
 
 void far JamScentRN(int x, int y, int scent)
 {
     int v;
 
-    v = fd_3E1D_F09F[x >> 1][y >> 1];
+    v = PherMapRN[x >> 1][y >> 1];
     if (v < scent)
-        fd_3E1D_F09F[x >> 1][y >> 1] = scent;
+        PherMapRN[x >> 1][y >> 1] = scent;
 }
 
 void far JamScentBT(int x, int y, int scent)
 {
     int v;
 
-    v = fd_3E1D_E89F[x >> 1][y >> 1];
+    v = PherMapBT[x >> 1][y >> 1];
     if (v < scent)
-        fd_3E1D_E89F[x >> 1][y >> 1] = scent;
+        PherMapBT[x >> 1][y >> 1] = scent;
 }
 
 void far JamScentRT(int x, int y, int scent)
 {
     int v;
 
-    v = fd_4DA7_0000[x >> 1][y >> 1];
+    v = PherMapRT[x >> 1][y >> 1];
     if (v < scent)
-        fd_4DA7_0000[x >> 1][y >> 1] = scent;
+        PherMapRT[x >> 1][y >> 1] = scent;
 }
 
 void far DecTSmell(int x, int y, int red)
@@ -200,11 +200,11 @@ void far DecTSmell(int x, int y, int red)
     xh = x >> 1;
     yh = y >> 1;
     if (red) {
-        if (fd_4DA7_0000[xh][yh] != 0)
-            fd_4DA7_0000[xh][yh]--;
+        if (PherMapRT[xh][yh] != 0)
+            PherMapRT[xh][yh]--;
     } else {
-        if (fd_3E1D_E89F[xh][yh] != 0)
-            fd_3E1D_E89F[xh][yh]--;
+        if (PherMapBT[xh][yh] != 0)
+            PherMapBT[xh][yh]--;
     }
 }
 
@@ -224,6 +224,6 @@ int far GetSmellT(int x, int y, int dir, int red)
     if (ny > 31)
         return 0;
     if (red)
-        return fd_4DA7_0000[nx][ny];
-    return fd_3E1D_E89F[nx][ny];
+        return PherMapRT[nx][ny];
+    return PherMapBT[nx][ny];
 }

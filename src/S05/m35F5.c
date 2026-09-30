@@ -25,7 +25,7 @@ struct Event {
 
 extern int far fd_3D57_07BE;
 extern int far win_DoProxMenu();
-extern void far f_1E57_0174(int win);
+extern void far clip_SetWin(int win);
 extern void _fastcall win_SetObjSelectedState(int obj, int state);
 extern void far f_0250_0E81(void);
 
@@ -37,7 +37,7 @@ void far EditScentMenu(void)
     if (r == -1)
         return;
     fd_3D57_07BE = r - 1;
-    f_1E57_0174(0);
+    clip_SetWin(0);
     win_SetObjSelectedState(0x10, fd_3D57_07BE != -1);
     f_0250_0E81();
 }
@@ -64,9 +64,9 @@ extern void far InitYelloAnt(void);
 extern int far fd_50F6_032E;
 extern void far SetMyLife(int plane, int x, int y, int type, int dir, int code);
 extern void far f_00DF_00B1(int id, int arg);
-extern void far f_1E57_0DAA(void);
+extern void far clip_Push(void);
 extern void _fastcall win_DrawBitMapAtObjNum(int obj, int id);
-extern void far f_1E57_0EB9(void);
+extern void far clip_Pop(void);
 extern int _fastcall win_IsWinOpen(int win);
 
 void far EditToolsMenu(void)
@@ -103,15 +103,15 @@ void far EditToolsMenu(void)
             f_00DF_00B1(0x2afb, 0x7e);
         }
         SetExpTool(item);
-        f_1E57_0DAA();
-        f_1E57_0174(0);
+        clip_Push();
+        clip_SetWin(0);
         win_DrawBitMapAtObjNum(7, fd_50F6_104C + 0x13ec);
-        f_1E57_0EB9();
+        clip_Pop();
         if (win_IsWinOpen(0x100)) {
-            f_1E57_0DAA();
-            f_1E57_0174(0x100);
+            clip_Push();
+            clip_SetWin(0x100);
             win_DrawBitMapAtObjNum(0x117, fd_50F6_104C + 0x13ec);
-            f_1E57_0EB9();
+            clip_Pop();
         }
         break;
     }
@@ -133,11 +133,11 @@ extern char far * far * far fd_50F6_1078;
 extern void far f_24AB_02AD(int font);
 extern void far win_PrintfAtObj(int obj, char far *format, ...);
 extern int far FindInAList(int x, int y);
-extern unsigned char far fd_3E1D_A952[];
+extern unsigned char far AlistM[];
 extern int far FindInBList(int x, int y, int t);
-extern unsigned char far fd_3E1D_B8F7[];
+extern unsigned char far BlistM[];
 extern int far FindInRList(int x, int y, int t);
-extern unsigned char far fd_3E1D_C2C0[];
+extern unsigned char far RlistM[];
 extern char far * far * far fd_50F6_1086;
 extern char far * far * far fd_50F6_1096;
 extern void far f_1FD2_057F(void);
@@ -145,8 +145,8 @@ extern int far f_1FD2_0598(void);
 extern void far f_1FD2_05EF(void);
 extern void _fastcall win_Close(int win);
 
-/* SCAFFOLD BEGIN: o05_35F5_025C (examine window, Win16 win_DrawExamineWindow LOW) best draft: 2 bytes short; the original indexes fd_50F6_1086[k] via mov bx,di;shl bx,1;shl bx,1;les si (k kept in DI), MSC here shifts DI in place and uses les bx */
-int far o05_35F5_025C(int x, int y, int plane)
+/* SCAFFOLD BEGIN: MagnifyMenu (examine window, Win16 win_DrawExamineWindow LOW) best draft: 2 bytes short; the original indexes fd_50F6_1086[k] via mov bx,di;shl bx,1;shl bx,1;les si (k kept in DI), MSC here shifts DI in place and uses les bx */
+int far MagnifyMenu(int x, int y, int plane)
 {
     int k;
     int caste;
@@ -183,19 +183,19 @@ int far o05_35F5_025C(int x, int y, int plane)
     switch (plane) {
     case 1:
         if ((i = FindInAList(x, y)) >= 0)
-            k = fd_3E1D_A952[i];
+            k = AlistM[i];
         else
             k = 0;
         break;
     case 2:
         if ((i = FindInBList(x, y, LifeB[x][y])) >= 0)
-            k = fd_3E1D_B8F7[i];
+            k = BlistM[i];
         else
             k = 0;
         break;
     case 3:
         if ((i = FindInRList(x, y, LifeR[x][y])) >= 0)
-            k = fd_3E1D_C2C0[i];
+            k = RlistM[i];
         else
             k = 0;
         break;
@@ -290,14 +290,14 @@ void far DoHealthSetY(struct Event far *ev)
 }
 /* SCAFFOLD END */
 
-extern int _fastcall f_22BF_0A22(int win);
-extern void far f_00F8_050A(void);
-extern void far f_0250_0E70(void);
+extern int _fastcall win_IsWinInFront(int win);
+extern void far OpenMapYard(void);
+extern void far OpenEditWindow(void);
 
 void far DoTab(void)
 {
-    if (f_22BF_0A22(0))
-        f_00F8_050A();
+    if (win_IsWinInFront(0))
+        OpenMapYard();
     else
-        f_0250_0E70();
+        OpenEditWindow();
 }

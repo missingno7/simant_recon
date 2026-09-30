@@ -10127,6 +10127,34 @@
 {
 "unit": "root",
 "seg": 8895,
+"off": 410,
+"size": 8,
+"region": "game_or_library",
+"extent": "REVIEWED",
+"evidence": [
+"reviewed"
+],
+"notes": [
+"unreferenced fastcall wrapper between win_SetObjSelectableState and win_SetGroupSelectableState: mov dx,1; push cs; call 011F; retf (gap 019A-01A9 in the module layout)"
+]
+},
+{
+"unit": "root",
+"seg": 8895,
+"off": 418,
+"size": 7,
+"region": "game_or_library",
+"extent": "REVIEWED",
+"evidence": [
+"reviewed"
+],
+"notes": [
+"unreferenced fastcall wrapper: sub dx,dx; push cs; call 011F; retf (gap 019A-01A9)"
+]
+},
+{
+"unit": "root",
+"seg": 8895,
 "off": 425,
 "size": 185,
 "region": "game_or_library",
@@ -10222,6 +10250,20 @@
 "extent": "DESCENT",
 "evidence": [
 "push_cs_call"
+]
+},
+{
+"unit": "root",
+"seg": 8895,
+"off": 1080,
+"size": 8,
+"region": "game_or_library",
+"extent": "REVIEWED",
+"evidence": [
+"reviewed"
+],
+"notes": [
+"unreferenced fastcall wrapper between win_SetGroupSelectedState and win_MakeGroupUnselected: mov bx,1; push cs; call 03CD; retf (gap 0438-0440)"
 ]
 },
 {
@@ -11000,6 +11042,20 @@
 {
 "unit": "root",
 "seg": 9477,
+"off": 170,
+"size": 51,
+"region": "game_or_library",
+"extent": "REVIEWED",
+"evidence": [
+"reviewed"
+],
+"notes": [
+"unreferenced fastcall predicate between RepointObjects and f_2505_00DD: sub ax,5; cmp ax,0Dh; jump table (object types 5,8,11,15-18 -> 1, else 0)"
+]
+},
+{
+"unit": "root",
+"seg": 9477,
 "off": 221,
 "size": 148,
 "region": "game_or_library",
@@ -11060,6 +11116,20 @@
 "extent": "DESCENT",
 "evidence": [
 "far_call"
+]
+},
+{
+"unit": "root",
+"seg": 9477,
+"off": 828,
+"size": 9,
+"region": "game_or_library",
+"extent": "REVIEWED",
+"evidence": [
+"reviewed"
+],
+"notes": [
+"unreferenced fastcall wrapper between win_ObjAddr and win_WinAddr: sub al,al; add ax,dx; push cs; call 02D7 (win_ObjAddr); retf"
 ]
 },
 {
@@ -14140,6 +14210,20 @@
 {
 "unit": "S00",
 "seg": 12582,
+"off": 2158,
+"size": 5,
+"region": "game_or_library",
+"extent": "REVIEWED",
+"evidence": [
+"reviewed"
+],
+"notes": [
+"unreferenced far jump thunk (jmp far via vector 2894 to o15_384C_0000, demo-expired exit) at the end of S00 module 3126; genuine-assembly driver module (worker ovlA)"
+]
+},
+{
+"unit": "S00",
+"seg": 12582,
 "off": 2188,
 "size": 262,
 "region": "game_or_library",
@@ -14534,26 +14618,44 @@
 {
 "unit": "S00",
 "seg": 13734,
-"off": 7,
-"size": 248,
-"region": "game_or_library",
-"extent": "DESCENT",
-"evidence": [
-"far_call"
-]
-},
-{
-"unit": "S00",
-"seg": 13734,
-"off": 375,
-"size": 264,
+"off": 6,
+"size": 1,
 "region": "game_or_library",
 "extent": "REVIEWED",
 "evidence": [
 "reviewed"
 ],
 "notes": [
-"prologue scan in unreached gap; descent ends in a return; no references found (unreferenced or indirect)"
+"lone retf at the start of S00 module 35A6 (module starts word-aligned at 35A66 after the 00 fill at 35A65); proc of the genuine-assembly driver module (worker ovlA)"
+]
+},
+{
+"unit": "S00",
+"seg": 13734,
+"off": 7,
+"size": 368,
+"region": "game_or_library",
+"extent": "REVIEWED",
+"evidence": [
+"far_call"
+],
+"notes": [
+"resized 248 -> 368: extent includes the unreachable ror/rol twin loop 00FF-0176 up to the next proc 0177 (assembly module; worker ovlA)"
+]
+},
+{
+"unit": "S00",
+"seg": 13734,
+"off": 375,
+"size": 390,
+"region": "game_or_library",
+"extent": "REVIEWED",
+"evidence": [
+"reviewed"
+],
+"notes": [
+"prologue scan in unreached gap; descent ends in a return; no references found (unreferenced or indirect)",
+"resized 264 -> 390: extent includes the unreachable twin loop 027F-02FC up to the next proc 02FD (assembly module; worker ovlA)"
 ]
 },
 {
@@ -14964,6 +15066,20 @@
 {
 "unit": "S01",
 "seg": 12981,
+"off": 14,
+"size": 1,
+"region": "game_or_library",
+"extent": "REVIEWED",
+"evidence": [
+"reviewed"
+],
+"notes": [
+"lone retf at the start of S01 module 32B5 (starts word-aligned at 32B5E); proc of the genuine-assembly driver module (worker ovlA)"
+]
+},
+{
+"unit": "S01",
+"seg": 12981,
 "off": 15,
 "size": 155,
 "region": "game_or_library",
@@ -15042,6 +15158,62 @@
 {
 "unit": "S02",
 "seg": 12582,
+"off": 81,
+"size": 11,
+"region": "game_or_library",
+"extent": "REVIEWED",
+"evidence": [
+"reviewed"
+],
+"notes": [
+"entry of the display-driver dispatch table / far-called proc; genuine-assembly module S02A.asm: proc extent up to the next public (worker ovlA)"
+]
+},
+{
+"unit": "S02",
+"seg": 12582,
+"off": 92,
+"size": 29,
+"region": "game_or_library",
+"extent": "REVIEWED",
+"evidence": [
+"reviewed"
+],
+"notes": [
+"entry of the display-driver dispatch table / far-called proc; genuine-assembly module S02A.asm: proc extent up to the next public (worker ovlA)"
+]
+},
+{
+"unit": "S02",
+"seg": 12582,
+"off": 121,
+"size": 29,
+"region": "game_or_library",
+"extent": "REVIEWED",
+"evidence": [
+"reviewed"
+],
+"notes": [
+"entry of the display-driver dispatch table / far-called proc; genuine-assembly module S02A.asm: proc extent up to the next public (worker ovlA)"
+]
+},
+{
+"unit": "S02",
+"seg": 12582,
+"off": 150,
+"size": 24,
+"region": "game_or_library",
+"extent": "REVIEWED",
+"evidence": [
+"reviewed"
+],
+"notes": [
+"entry of the display-driver dispatch table / far-called proc; genuine-assembly module S02A.asm: proc extent up to the next public (worker ovlA)"
+]
+},
+{
+"unit": "S02",
+"seg": 12582,
 "off": 174,
 "size": 215,
 "region": "game_or_library",
@@ -15051,6 +15223,20 @@
 ],
 "notes": [
 "prologue scan in unreached gap; descent ends in a return; no references found (unreferenced or indirect)"
+]
+},
+{
+"unit": "S02",
+"seg": 12582,
+"off": 389,
+"size": 24,
+"region": "game_or_library",
+"extent": "REVIEWED",
+"evidence": [
+"reviewed"
+],
+"notes": [
+"entry of the display-driver dispatch table / far-called proc; genuine-assembly module S02A.asm: proc extent up to the next public (worker ovlA)"
 ]
 },
 {
@@ -15123,15 +15309,86 @@
 {
 "unit": "S02",
 "seg": 12582,
-"off": 1240,
-"size": 39,
+"off": 1168,
+"size": 18,
 "region": "game_or_library",
 "extent": "REVIEWED",
 "evidence": [
 "reviewed"
 ],
 "notes": [
-"prologue scan in unreached gap; descent ends in a return; no references found (unreferenced or indirect)"
+"entry of the display-driver dispatch table / far-called proc; genuine-assembly module S02A.asm: proc extent up to the next public (worker ovlA)"
+]
+},
+{
+"unit": "S02",
+"seg": 12582,
+"off": 1186,
+"size": 18,
+"region": "game_or_library",
+"extent": "REVIEWED",
+"evidence": [
+"reviewed"
+],
+"notes": [
+"entry of the display-driver dispatch table / far-called proc; genuine-assembly module S02A.asm: proc extent up to the next public (worker ovlA)"
+]
+},
+{
+"unit": "S02",
+"seg": 12582,
+"off": 1204,
+"size": 18,
+"region": "game_or_library",
+"extent": "REVIEWED",
+"evidence": [
+"reviewed"
+],
+"notes": [
+"entry of the display-driver dispatch table / far-called proc; genuine-assembly module S02A.asm: proc extent up to the next public (worker ovlA)"
+]
+},
+{
+"unit": "S02",
+"seg": 12582,
+"off": 1222,
+"size": 18,
+"region": "game_or_library",
+"extent": "REVIEWED",
+"evidence": [
+"reviewed"
+],
+"notes": [
+"entry of the display-driver dispatch table / far-called proc; genuine-assembly module S02A.asm: proc extent up to the next public (worker ovlA)"
+]
+},
+{
+"unit": "S02",
+"seg": 12582,
+"off": 1240,
+"size": 45,
+"region": "game_or_library",
+"extent": "REVIEWED",
+"evidence": [
+"reviewed"
+],
+"notes": [
+"prologue scan in unreached gap; descent ends in a return; no references found (unreferenced or indirect)",
+"resized 39 -> 45: genuine-assembly module S02A.asm: proc extent up to the next public (worker ovlA)"
+]
+},
+{
+"unit": "S02",
+"seg": 12582,
+"off": 1285,
+"size": 13,
+"region": "game_or_library",
+"extent": "REVIEWED",
+"evidence": [
+"reviewed"
+],
+"notes": [
+"entry of the display-driver dispatch table / far-called proc; genuine-assembly module S02A.asm: proc extent up to the next public (worker ovlA)"
 ]
 },
 {
@@ -15151,15 +15408,44 @@
 {
 "unit": "S02",
 "seg": 12582,
-"off": 1603,
-"size": 216,
+"off": 1590,
+"size": 13,
 "region": "game_or_library",
 "extent": "REVIEWED",
 "evidence": [
 "reviewed"
 ],
 "notes": [
-"prologue scan in unreached gap; descent ends in a return; no references found (unreferenced or indirect)"
+"entry of the display-driver dispatch table / far-called proc; genuine-assembly module S02A.asm: proc extent up to the next public (worker ovlA)"
+]
+},
+{
+"unit": "S02",
+"seg": 12582,
+"off": 1603,
+"size": 247,
+"region": "game_or_library",
+"extent": "REVIEWED",
+"evidence": [
+"reviewed"
+],
+"notes": [
+"prologue scan in unreached gap; descent ends in a return; no references found (unreferenced or indirect)",
+"resized 216 -> 247: genuine-assembly module S02A.asm: proc extent up to the next public (worker ovlA)"
+]
+},
+{
+"unit": "S02",
+"seg": 12582,
+"off": 1850,
+"size": 13,
+"region": "game_or_library",
+"extent": "REVIEWED",
+"evidence": [
+"reviewed"
+],
+"notes": [
+"entry of the display-driver dispatch table / far-called proc; genuine-assembly module S02A.asm: proc extent up to the next public (worker ovlA)"
 ]
 },
 {
@@ -15246,6 +15532,62 @@
 {
 "unit": "S03",
 "seg": 12582,
+"off": 435,
+"size": 11,
+"region": "game_or_library",
+"extent": "REVIEWED",
+"evidence": [
+"reviewed"
+],
+"notes": [
+"entry of the display-driver dispatch table / far-called proc; genuine-assembly module S03A.asm: proc extent up to the next public (worker ovlA)"
+]
+},
+{
+"unit": "S03",
+"seg": 12582,
+"off": 446,
+"size": 29,
+"region": "game_or_library",
+"extent": "REVIEWED",
+"evidence": [
+"reviewed"
+],
+"notes": [
+"entry of the display-driver dispatch table / far-called proc; genuine-assembly module S03A.asm: proc extent up to the next public (worker ovlA)"
+]
+},
+{
+"unit": "S03",
+"seg": 12582,
+"off": 475,
+"size": 29,
+"region": "game_or_library",
+"extent": "REVIEWED",
+"evidence": [
+"reviewed"
+],
+"notes": [
+"entry of the display-driver dispatch table / far-called proc; genuine-assembly module S03A.asm: proc extent up to the next public (worker ovlA)"
+]
+},
+{
+"unit": "S03",
+"seg": 12582,
+"off": 504,
+"size": 24,
+"region": "game_or_library",
+"extent": "REVIEWED",
+"evidence": [
+"reviewed"
+],
+"notes": [
+"entry of the display-driver dispatch table / far-called proc; genuine-assembly module S03A.asm: proc extent up to the next public (worker ovlA)"
+]
+},
+{
+"unit": "S03",
+"seg": 12582,
 "off": 528,
 "size": 434,
 "region": "game_or_library",
@@ -15255,6 +15597,20 @@
 ],
 "notes": [
 "prologue scan in unreached gap; descent ends in a return; no references found (unreferenced or indirect)"
+]
+},
+{
+"unit": "S03",
+"seg": 12582,
+"off": 962,
+"size": 24,
+"region": "game_or_library",
+"extent": "REVIEWED",
+"evidence": [
+"reviewed"
+],
+"notes": [
+"entry of the display-driver dispatch table / far-called proc; genuine-assembly module S03A.asm: proc extent up to the next public (worker ovlA)"
 ]
 },
 {
@@ -15327,26 +15683,100 @@
 {
 "unit": "S03",
 "seg": 12582,
-"off": 2290,
-"size": 39,
+"off": 2058,
+"size": 58,
 "region": "game_or_library",
 "extent": "REVIEWED",
 "evidence": [
 "reviewed"
 ],
 "notes": [
-"prologue scan in unreached gap; descent ends in a return; no references found (unreferenced or indirect)"
+"entry of the display-driver dispatch table / far-called proc; genuine-assembly module S03A.asm: proc extent up to the next public (worker ovlA)"
+]
+},
+{
+"unit": "S03",
+"seg": 12582,
+"off": 2116,
+"size": 58,
+"region": "game_or_library",
+"extent": "REVIEWED",
+"evidence": [
+"reviewed"
+],
+"notes": [
+"entry of the display-driver dispatch table / far-called proc; genuine-assembly module S03A.asm: proc extent up to the next public (worker ovlA)"
+]
+},
+{
+"unit": "S03",
+"seg": 12582,
+"off": 2174,
+"size": 58,
+"region": "game_or_library",
+"extent": "REVIEWED",
+"evidence": [
+"reviewed"
+],
+"notes": [
+"entry of the display-driver dispatch table / far-called proc; genuine-assembly module S03A.asm: proc extent up to the next public (worker ovlA)"
+]
+},
+{
+"unit": "S03",
+"seg": 12582,
+"off": 2232,
+"size": 58,
+"region": "game_or_library",
+"extent": "REVIEWED",
+"evidence": [
+"reviewed"
+],
+"notes": [
+"entry of the display-driver dispatch table / far-called proc; genuine-assembly module S03A.asm: proc extent up to the next public (worker ovlA)"
+]
+},
+{
+"unit": "S03",
+"seg": 12582,
+"off": 2290,
+"size": 45,
+"region": "game_or_library",
+"extent": "REVIEWED",
+"evidence": [
+"reviewed"
+],
+"notes": [
+"prologue scan in unreached gap; descent ends in a return; no references found (unreferenced or indirect)",
+"resized 39 -> 45: genuine-assembly module S03A.asm: proc extent up to the next public (worker ovlA)"
 ]
 },
 {
 "unit": "S03",
 "seg": 12582,
 "off": 2335,
-"size": 302,
+"size": 13,
 "region": "game_or_library",
-"extent": "DESCENT",
+"extent": "REVIEWED",
 "evidence": [
 "far_call"
+],
+"notes": [
+"resized 302 -> 13: genuine-assembly module S03A.asm: proc extent up to the next public (worker ovlA)"
+]
+},
+{
+"unit": "S03",
+"seg": 12582,
+"off": 2348,
+"size": 289,
+"region": "game_or_library",
+"extent": "REVIEWED",
+"evidence": [
+"reviewed"
+],
+"notes": [
+"entry of the display-driver dispatch table / far-called proc; genuine-assembly module S03A.asm: proc extent up to the next public (worker ovlA)"
 ]
 },
 {
@@ -15396,15 +15826,58 @@
 {
 "unit": "S03",
 "seg": 12582,
-"off": 3933,
-"size": 143,
+"off": 3089,
+"size": 13,
 "region": "game_or_library",
 "extent": "REVIEWED",
 "evidence": [
 "reviewed"
 ],
 "notes": [
-"prologue scan in unreached gap; descent ends in a return; no references found (unreferenced or indirect)"
+"entry of the display-driver dispatch table / far-called proc; genuine-assembly module S03A.asm: proc extent up to the next public (worker ovlA)"
+]
+},
+{
+"unit": "S03",
+"seg": 12582,
+"off": 3102,
+"size": 831,
+"region": "game_or_library",
+"extent": "REVIEWED",
+"evidence": [
+"reviewed"
+],
+"notes": [
+"entry of the display-driver dispatch table / far-called proc; genuine-assembly module S03A.asm: proc extent up to the next public (worker ovlA)"
+]
+},
+{
+"unit": "S03",
+"seg": 12582,
+"off": 3933,
+"size": 240,
+"region": "game_or_library",
+"extent": "REVIEWED",
+"evidence": [
+"reviewed"
+],
+"notes": [
+"prologue scan in unreached gap; descent ends in a return; no references found (unreferenced or indirect)",
+"resized 143 -> 240: genuine-assembly module S03A.asm: proc extent up to the next public (worker ovlA)"
+]
+},
+{
+"unit": "S03",
+"seg": 12582,
+"off": 4173,
+"size": 13,
+"region": "game_or_library",
+"extent": "REVIEWED",
+"evidence": [
+"reviewed"
+],
+"notes": [
+"entry of the display-driver dispatch table / far-called proc; genuine-assembly module S03A.asm: proc extent up to the next public (worker ovlA)"
 ]
 },
 {
@@ -15447,6 +15920,20 @@
 ],
 "notes": [
 "prologue scan in unreached gap; descent ends in a return; no references found (unreferenced or indirect)"
+]
+},
+{
+"unit": "S03",
+"seg": 12582,
+"off": 4498,
+"size": 326,
+"region": "game_or_library",
+"extent": "REVIEWED",
+"evidence": [
+"reviewed"
+],
+"notes": [
+"entry of the display-driver dispatch table / far-called proc; genuine-assembly module S03A.asm: proc extent up to the next public (worker ovlA)"
 ]
 },
 {

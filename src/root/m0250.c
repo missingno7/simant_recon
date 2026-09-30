@@ -29,7 +29,7 @@ int g_19D0 = 0;
 int g_19D2[8] = { 0, 0, 1, 1, 2, 2, 3, 3 };
 int g_19E2[8] = { 4, 0, 5, 1, 6, 2, 7, 3 };
 
-void far f_0250_000E(int plane, int x, int y)
+void far ZapEuMapAt(int plane, int x, int y)
 {
     int h;
     int v;
@@ -44,7 +44,7 @@ void far f_0250_000E(int plane, int x, int y)
     }
 }
 
-void far f_0250_006E(int left, int top, int right, int bottom)
+void far InvalEuMap(int left, int top, int right, int bottom)
 {
     int x;
     int i;
@@ -163,7 +163,7 @@ void far f_0250_0256(int set)
 
 extern int far fd_50F6_0480;
 
-void far f_0250_036A(int type, int id)
+void far OverlayTileSet(int type, int id)
 {
     if (type == 0) {
         if (id == 0x3e9) {
@@ -437,7 +437,7 @@ void far f_0250_0B86(void)
     }
 }
 
-extern void far f_1E57_0174(int win);
+extern void far clip_SetWin(int win);
 extern void far processEdit(struct Event far *event);
 extern void far o04_35F5_075F(void);
 extern void far DoWinHelp(int mode);
@@ -454,9 +454,9 @@ extern void far o05_35F5_0684(struct Event far *event);
 extern void far o05_35F5_0642(struct Event far *event);
 extern void far f_1E57_0362(void);
 
-void far f_0250_0C0F(struct Event far *event)
+void far ProcEditEvent(struct Event far *event)
 {
-    f_1E57_0174(0);
+    clip_SetWin(0);
     switch (event->code) {
     case 4:
     case 21:
@@ -605,7 +605,7 @@ void far f_0250_0E15(void)
 
 extern void far f_20E8_04B6(int win, ...);
 
-void far f_0250_0E70(void)
+void far OpenEditWindow(void)
 {
     f_20E8_04B6(0);
 }
@@ -630,7 +630,7 @@ void far DrawEditGraphs(void);
 void far f_0250_0E9D(void)
 {
     if (f_22BF_09B0(0)) {
-        f_1E57_0174(0);
+        clip_SetWin(0);
         f_0250_13A6();
         DrawEditGraphs();
         f_1E57_0362();
@@ -709,11 +709,11 @@ void far f_0250_0FC4(int x, int y)
 }
 
 extern int far fd_3D57_07BE;
-extern unsigned char far fd_3E1D_D09F[64][32];
-extern unsigned char far fd_3E1D_E09F[64][32];
-extern unsigned char far fd_3E1D_E89F[64][32];
-extern unsigned char far fd_3E1D_F09F[64][32];
-extern unsigned char far fd_4DA7_0000[64][32];
+extern unsigned char far PherMapA[64][32];
+extern unsigned char far PherMapBN[64][32];
+extern unsigned char far PherMapBT[64][32];
+extern unsigned char far PherMapRN[64][32];
+extern unsigned char far PherMapRT[64][32];
 extern unsigned char far MapA[128][64];
 extern unsigned char far LifeA[128][64];
 extern int far fd_50F6_049A;
@@ -750,19 +750,19 @@ void far f_0250_1018(int x, int y)
         mx &= 0x7f;
         switch (fd_3D57_07BE) {
         case 0:
-            v = fd_3E1D_D09F[mx >> 1][my >> 1];
+            v = PherMapA[mx >> 1][my >> 1];
             break;
         case 1:
-            v = fd_3E1D_E09F[mx >> 1][my >> 1];
+            v = PherMapBN[mx >> 1][my >> 1];
             break;
         case 2:
-            v = fd_3E1D_E89F[mx >> 1][my >> 1];
+            v = PherMapBT[mx >> 1][my >> 1];
             break;
         case 3:
-            v = fd_3E1D_F09F[mx >> 1][my >> 1];
+            v = PherMapRN[mx >> 1][my >> 1];
             break;
         case 4:
-            v = fd_4DA7_0000[mx >> 1][my >> 1];
+            v = PherMapRT[mx >> 1][my >> 1];
             break;
         default:
             goto noscent;
@@ -863,7 +863,7 @@ void far f_0250_129E(int x, int y)
     }
 }
 
-extern void far f_1E57_0DAA(void);
+extern void far clip_Push(void);
 void far f_0250_5058(void);
 extern long far TickCount(void);
 extern void _fastcall f_21FA_00EE(int color);
@@ -884,7 +884,7 @@ static Handle balBufHandle;
 static Pnt edPenPos;
 static char far *balBufPtr;
 
-extern void far f_1E57_0EB9(void);
+extern void far clip_Pop(void);
 
 /* OPEN: residue frame slot assignment (flags at [bp-8]/[bp-6], 18-byte frame) and the dead
  * loads of editRect.top/left + g_19C0 in the tile loops; logic and BSS layout are exact. */
@@ -898,7 +898,7 @@ void far f_0250_13A6(void)
     int py;
 
     spider = balloon = 0;
-    f_1E57_0DAA();
+    clip_Push();
     f_0250_5058();
     if (g_19C6) {
         if (TickCount() > g_19CA) {
@@ -945,7 +945,7 @@ void far f_0250_13A6(void)
         f_171C_1BBA(balBufHandle);
         f_171C_1C0A(balBufHandle);
     }
-    f_1E57_0EB9();
+    clip_Pop();
     g_19CE = 0;
 }
 
@@ -1027,10 +1027,10 @@ void far SetEditWinTitle(void)
     _fstrcat(buf, fd_50F6_0324[fd_50F6_0EAC]);
     f_22BF_059A(1, buf);
     if (f_22BF_09B0(0)) {
-        f_1E57_0DAA();
-        f_1E57_0174(0);
+        clip_Push();
+        clip_SetWin(0);
         f_21FA_0AA7(1);
-        f_1E57_0EB9();
+        clip_Pop();
     }
 }
 
@@ -1080,8 +1080,8 @@ void far DrawLegs(int x, int y, int dir, int frame);
 void far DrawPalps(int x, int y, int dir);
 extern void (far * far fd_50F6_37E6)(char far *p, int stride);
 extern void far f_16B5_0033(Pnt far *buf, int mode);
-extern int far fd_50F6_0FB8;
-extern int far fd_50F6_1042;
+extern int far SMode;
+extern int far Scycle;
 extern char far fd_3D57_09CC[];
 extern char far fd_3D57_09D0[];
 extern int far fd_50F6_1004;
@@ -1173,9 +1173,9 @@ void far DrawSpider(void)
     }
     f_0250_062A();
     f_16B5_0033(&fd_50F6_1F26, (g_5A97 & 1) ? 0 : (g_5A97 == 2 ? 1 : 2));
-    if (fd_50F6_0FB8 == 5) {
-        lx = fd_3D57_09CC[fd_50F6_1042] + 0x30;
-        ly = fd_3D57_09D0[fd_50F6_1042] + 0x30;
+    if (SMode == 5) {
+        lx = fd_3D57_09CC[Scycle] + 0x30;
+        ly = fd_3D57_09D0[Scycle] + 0x30;
         if (g_5A97 == 2) {
             lx = lx * 3 / 4 + modx;
             ly = ly * 3 / 4 + mody;
@@ -1183,7 +1183,7 @@ void far DrawSpider(void)
             lx += modx;
             ly += mody;
         }
-        f_2662_1120(lx, ly, &fd_50F6_1F26, fd_50F6_1042 + 0x41a);
+        f_2662_1120(lx, ly, &fd_50F6_1F26, Scycle + 0x41a);
     } else {
         lx = fd_3D57_09BC[fd_50F6_1004] + 0x30;
         ly = fd_3D57_09C4[fd_50F6_1004] + 0x30;
@@ -1196,7 +1196,7 @@ void far DrawSpider(void)
             i = modx + 0x30;
             j = mody + 0x30;
         }
-        DrawLegs(i, j, fd_50F6_1004, fd_50F6_1042 & 7);
+        DrawLegs(i, j, fd_50F6_1004, Scycle & 7);
         DrawPalps(i, j, fd_50F6_1004);
     }
     if (fd_3D57_07B2) {
@@ -1209,14 +1209,14 @@ void far DrawSpider(void)
             } else
                 fd_50F6_0D6E = 0;
         }
-        if (fd_50F6_0FB8 == fd_50F6_0EB4 && fd_50F6_0FB8 <= 4) {
+        if (SMode == fd_50F6_0EB4 && SMode <= 4) {
             if (fd_50F6_0D6E)
                 AddMsgBalloon((Dx8[fd_50F6_1004] << 3) + fd_50F6_0F12, (Dy8[fd_50F6_1004] << 3) + fd_50F6_0F34, 1, 10,
-                              fd_50F6_10B4[fd_50F6_0FB8 * 5 + fd_3D57_0992]);
+                              fd_50F6_10B4[SMode * 5 + fd_3D57_0992]);
         } else {
             fd_3D57_098E = TickCount() + SRand32() + 30;
             fd_50F6_0D6E = 0;
-            fd_50F6_0EB4 = fd_50F6_0FB8;
+            fd_50F6_0EB4 = SMode;
         }
     }
 }
@@ -1244,9 +1244,9 @@ void far f_0250_1E80(void)
         x = fd_50F6_03E0 - fd_50F6_0508.x;
         y = fd_50F6_046A - fd_50F6_0508.y;
         if (fd_3D57_0C30 & 1)
-            f_0250_006E(x, y, x + 16, y + 6);
+            InvalEuMap(x, y, x + 16, y + 6);
         else
-            f_0250_006E(x, y, x + 6, y + 16);
+            InvalEuMap(x, y, x + 6, y + 16);
         if (fd_3D57_0C28 == 3 || fd_3D57_0C28 == 4) {
             if (fd_50F6_0508.x + fd_50F6_10E0 >= fd_50F6_0470 && fd_50F6_0470 + 0x1b >= fd_50F6_0508.x
                 && fd_50F6_0508.y + fd_50F6_10DE >= fd_50F6_047A && fd_50F6_047A + 0x1b >= fd_50F6_0508.y) {
@@ -1255,7 +1255,7 @@ void far f_0250_1E80(void)
                 (*g_9134)(x, y, 15 * g_19BE + x, 15 * g_19C0 + y, g_19C4 | 0x20);
                 x = fd_50F6_0470 - fd_50F6_0508.x;
                 y = fd_50F6_047A - fd_50F6_0508.y;
-                f_0250_006E(x, y, x + 0x1b, y + 0x1b);
+                InvalEuMap(x, y, x + 0x1b, y + 0x1b);
             }
         }
     }
@@ -1299,7 +1299,7 @@ void far DrawPalps(int x, int y, int dir)
 {
     int r;
 
-    if (fd_50F6_0FB8 <= 1 && fd_50F6_06AC < 6)
+    if (SMode <= 1 && fd_50F6_06AC < 6)
         r = 0;
     else
         r = SRand1(4);
@@ -1631,7 +1631,7 @@ void far DrawLegs(int x, int y, int dir, int frame)
 
 void far f_0250_41CA(void)
 {
-    f_0250_006E((fd_50F6_0F12 - fd_50F6_0508.x * g_19BE) / g_19BE - 3,
+    InvalEuMap((fd_50F6_0F12 - fd_50F6_0508.x * g_19BE) / g_19BE - 3,
                 (fd_50F6_0F34 - fd_50F6_0508.y * g_19C0) / g_19C0 - 3,
                 (fd_50F6_0F12 - fd_50F6_0508.x * g_19BE) / g_19BE + 3,
                 (fd_50F6_0F34 - fd_50F6_0508.y * g_19C0) / g_19C0 + 3);

@@ -339,8 +339,8 @@ extern void far f_171C_1BBA(char far *handle);
 extern void far db_PurgeObject(int object, int kind);
 extern void _fastcall f_21FA_0AA7(int obj);
 extern void _fastcall win_GetObjRect(int obj, struct Rect far *rect);
-extern void far f_1E57_0174(int win);
-extern void far f_1E57_0773(struct Rect far *rect);
+extern void far clip_SetWin(int win);
+extern void far clip_SubInclude(struct Rect far *rect);
 extern long far f_171C_1C1C(char far *handle);
 extern void _fastcall win_SetColorFromObjNum(int obj);
 extern void far * far _fmemcpy(void far *dst, void far *src, unsigned int n);
@@ -414,8 +414,8 @@ void far DisplayCard(int card)
         f_21FA_0AA7(0x501);
     }
     win_GetObjRect(0x502, &r);
-    f_1E57_0174(0x500);
-    f_1E57_0773(&r);
+    clip_SetWin(0x500);
+    clip_SubInclude(&r);
     size = f_171C_1C1C(h1);
     base = f_171C_1B84(h1);
     win_SetColorFromObjNum(0x502);
@@ -557,7 +557,7 @@ void far OpenInfoWindow(void)
     }
 }
 
-extern void far f_1E57_0DAA(void);
+extern void far clip_Push(void);
 extern char far * far f_1CE2_04C9(struct Rect far *r);
 extern unsigned char near g_5A97;
 extern int near g_3DE0;
@@ -565,7 +565,7 @@ extern void far f_1CE2_0013(int left, int top, int right, int bottom, int width)
 extern int far f_1FD2_0542(void);
 extern void far f_218D_03E8(void);
 extern void far f_1CE2_056C(struct Rect far *r, char far *buf);
-extern void far f_1E57_0EB9(void);
+extern void far clip_Pop(void);
 
 void far PopUpInfoWindow(int x, int top, int bottom, int rez)
 {
@@ -585,8 +585,8 @@ void far PopUpInfoWindow(int x, int top, int bottom, int rez)
     top -= 4;
     bottom += 4;
     win_GetObjRect(0x502, &wr);
-    f_1E57_0DAA();
-    f_1E57_0773(&wr);
+    clip_Push();
+    clip_SubInclude(&wr);
     halfW = (wr.right - wr.left) / 2;
     winH = wr.bottom - wr.top;
     box.left = wr.left - halfW / 2 + x;
@@ -647,7 +647,7 @@ void far PopUpInfoWindow(int x, int top, int bottom, int rez)
     while (f_1FD2_0542())
         f_218D_03E8();
     f_1CE2_056C(&frame, bits);
-    f_1E57_0EB9();
+    clip_Pop();
 }
 
 extern int far f_1FD2_04E5(struct Point far *pt, struct Rect far *rect);

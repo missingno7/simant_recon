@@ -165,14 +165,14 @@ void _fastcall f_23E6_0266(int obj, char far *text)
     f_23AE_01DB(obj);
 }
 
-extern void far f_1E57_0DAA(void);
-extern void far f_1E57_0773(struct Rect far *rect);
+extern void far clip_Push(void);
+extern void far clip_SubInclude(struct Rect far *rect);
 extern int far f_24AB_030B(void);
 extern void _fastcall f_21FA_00EE(int color);
 extern void far f_24AB_042B(struct Rect far *rect, int y, char far *text);
 extern int near g_3DE2;
 extern void (far * near g_9134)(int left, int top, int right, int bottom, int color);
-extern void far f_1E57_0EB9(void);
+extern void far clip_Pop(void);
 
 void _fastcall f_23E6_0392(char far *o)
 {
@@ -192,9 +192,9 @@ void _fastcall f_23E6_0392(char far *o)
     if (list->text == 0)
         return;
     f_24AB_02AD(o[0x28]);
-    f_1E57_0DAA();
+    clip_Push();
     r = (struct Rect far *)o;
-    f_1E57_0773(r);
+    clip_SubInclude(r);
     base = f_171C_1B84(list->text);
     s = base + list->topOff;
     color0 = o[0x26];
@@ -221,7 +221,7 @@ void _fastcall f_23E6_0392(char far *o)
     }
     list->endOff = s - base;
     f_24AB_02AD(0);
-    f_1E57_0EB9();
+    clip_Pop();
     f_171C_1BBA(list->text);
 }
 
@@ -332,8 +332,8 @@ int _fastcall f_23E6_07A2(char far *o)
     base = f_171C_1B84(list->text);
     f_24AB_02AD(o[0x28]);
     h = f_24AB_030B();
-    f_1E57_0DAA();
-    f_1E57_0773(&r);
+    clip_Push();
+    clip_SubInclude(&r);
     g_9188(r.left, r.top + h, r.right, r.bottom, r.left, r.top);
     list->top++;
     list->topOff += _fstrlen(base + list->topOff) + 1;
@@ -341,7 +341,7 @@ int _fastcall f_23E6_07A2(char far *o)
     f_21FA_00EE((*base & 1) ? o[0x27] : o[0x26]);
     f_24AB_042B(&r, r.bottom - h, base + 1);
     list->endOff += _fstrlen(base) + 1;
-    f_1E57_0EB9();
+    clip_Pop();
     f_171C_1BBA(list->text);
 }
 
@@ -362,8 +362,8 @@ int _fastcall f_23E6_08D6(char far *o)
     base = f_171C_1B84(list->text);
     f_24AB_02AD(o[0x28]);
     h = f_24AB_030B();
-    f_1E57_0DAA();
-    f_1E57_0773(&r);
+    clip_Push();
+    clip_SubInclude(&r);
     g_9188(r.left, r.top - 1, r.right, r.bottom - h - 1, r.left, h + r.top - 1);
     if (--list->top) {
         s = f_24FA_0004(base + list->topOff - 2, 0, 0xffff);
@@ -378,7 +378,7 @@ found:
     f_21FA_00EE((*s & 1) ? o[0x27] : o[0x26]);
     f_24AB_042B(&r, r.top, s + 1);
     list->endOff = f_24FA_0004(base + list->endOff - 2, 0, 0xffff) - base + 1;
-    f_1E57_0EB9();
+    clip_Pop();
     f_171C_1BBA(list->text);
 }
 

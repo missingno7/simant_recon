@@ -491,11 +491,11 @@ void far o06_35F5_0A5F(void)
  * (DI); the final loop counts with y and draws i (SI) and x (DI). */
 extern int far fd_3D57_07C8;
 extern int far fd_50F6_035C;
-extern int far fd_50F6_0350;
-extern int far fd_50F6_0330;
+extern int far RpopT;
+extern int far BpopT;
 extern unsigned char far fd_3E1D_6180[128][64];
 extern int far fd_50F6_0F18;
-extern unsigned char far fd_3E1D_AD3B[];
+extern unsigned char far AlistT[];
 extern int far fd_50F6_0F12;
 extern int far fd_50F6_0F34;
 extern int far fd_50F6_048C;
@@ -699,14 +699,14 @@ void far SimKidInside(void)
     }
     FootFall(fd_50F6_03E0, fd_50F6_046A);
     f_00DF_00E8(9, 0, 0x7e);
-    for (y = 0; y < (fd_50F6_0330 + fd_50F6_0350) << 3; y++) {
+    for (y = 0; y < (BpopT + RpopT) << 3; y++) {
         i = SRand128();
         x = SRand64();
         if (fd_3E1D_6180[i][x] != 0) {
             fd_50F6_0F18 = f_0EC1_0291(i, x);
             if (fd_50F6_0F18 >= 0) {
-                DeadAntHere(i, x, fd_3E1D_AD3B[fd_50F6_0F18] & 0x80);
-                fd_3E1D_6180[i][x] = fd_3E1D_AD3B[fd_50F6_0F18] = 0;
+                DeadAntHere(i, x, AlistT[fd_50F6_0F18] & 0x80);
+                fd_3E1D_6180[i][x] = AlistT[fd_50F6_0F18] = 0;
             }
         }
         if ((fd_50F6_0F12 >> 4) == i && (fd_50F6_0F34 >> 4) == x)
@@ -994,8 +994,8 @@ void far o06_35F5_1B08(int kind, int level)
 }
 
 extern int far f_10F7_003A(int a);
-extern int far fd_50F6_0F42;
-extern int far fd_50F6_0F7E;
+extern int far SuserX;
+extern int far SuserY;
 extern int far fd_50F6_0A06;
 
 /* FootFall: the boy's foot squashes ants under it */
@@ -1018,8 +1018,8 @@ void far FootFall(int x, int y)
                     if (f_10F7_003A(a) == 0) {
                         a = f_0EC1_0291(i, j);
                         if (a >= 0) {
-                            DeadAntHere(i, j, fd_3E1D_AD3B[a] & 0x80);
-                            fd_3E1D_AD3B[a] = 0;
+                            DeadAntHere(i, j, AlistT[a] & 0x80);
+                            AlistT[a] = 0;
                         }
                     } else
                         o22_39C7_0D21(5);
@@ -1027,7 +1027,7 @@ void far FootFall(int x, int y)
             }
         }
     }
-    if (fd_50F6_0F42 >= x && fd_50F6_0F42 < x2 && fd_50F6_0F7E >= y && fd_50F6_0F7E < y2) {
+    if (SuserX >= x && SuserX < x2 && SuserY >= y && SuserY < y2) {
         f_0CDB_0DE0();
         if (fd_50F6_0A06 == 1)
             o22_39C7_0D21(5);
@@ -1035,8 +1035,8 @@ void far FootFall(int x, int y)
 }
 
 extern int far fd_50F6_0D6A;
-extern unsigned char far fd_3E1D_A180[];
-extern unsigned char far fd_3E1D_A569[];
+extern unsigned char far AlistX[];
+extern unsigned char far AlistY[];
 extern int far fd_50F6_0F0C;
 
 /* MowerFall (Win16 unit order): the mower kills ants in the yard */
@@ -1049,8 +1049,8 @@ void far o06_35F5_1CEA(int x, int y)
     i = fd_50F6_0D6A;
     while (i > 0) {
         i--;
-        if (fd_3E1D_AD3B[i] != 0 && SRand4() != 0) {
-            fd_3E1D_AD3B[i] = fd_3E1D_6180[fd_3E1D_A180[i]][fd_3E1D_A569[i]] = 0;
+        if (AlistT[i] != 0 && SRand4() != 0) {
+            AlistT[i] = fd_3E1D_6180[AlistX[i]][AlistY[i]] = 0;
         }
     }
     if (fd_50F6_0F0C != 0 && SRand4() != 0)
@@ -1120,15 +1120,15 @@ void far o06_35F5_1E54(void)
     fd_50F6_03E2 = 0;
     fd_50F6_0400 = 0;
     fd_50F6_0478 = 0;
-    if (fd_50F6_0330 > 0)
+    if (BpopT > 0)
         fd_50F6_03E2 = 1;
-    if (fd_50F6_0350 > 0)
+    if (RpopT > 0)
         fd_50F6_0400 = 1;
-    n = fd_50F6_0330 & 0x3ff;
+    n = BpopT & 0x3ff;
     if (n > 250)
         n = 250;
     fd_3D57_00A4[fd_50F6_07CA[0]][fd_50F6_07CA[1]] = n;
-    n = fd_50F6_0350 & 0x3ff;
+    n = RpopT & 0x3ff;
     if (n > 250)
         n = 250;
     fd_3D57_0164[fd_50F6_07CA[0]][fd_50F6_07CA[1]] = n;

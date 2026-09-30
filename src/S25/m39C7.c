@@ -1,10 +1,10 @@
 /* Overlay section S25, code frame 39C7: black colony nest simulation (DoAntSimB unit). */
 
-extern int far fd_50F6_0DA8;
+extern int far ListIndexB;
 extern int far fd_50F6_0F18;
-extern unsigned char far fd_3E1D_B50D[];
-extern unsigned char far fd_3E1D_B702[];
-extern unsigned char far fd_3E1D_BAEC[];
+extern unsigned char far BlistX[];
+extern unsigned char far BlistY[];
+extern unsigned char far BlistT[];
 void far o25_39C7_006D(int x, int y, int attr);
 
 void far o25_39C7_0000(void)
@@ -13,18 +13,18 @@ void far o25_39C7_0000(void)
     int y;
     int attr;
 
-    fd_50F6_0F18 = fd_50F6_0DA8;
+    fd_50F6_0F18 = ListIndexB;
     while (fd_50F6_0F18 > 0) {
         --fd_50F6_0F18;
-        x = fd_3E1D_B50D[fd_50F6_0F18];
-        y = fd_3E1D_B702[fd_50F6_0F18] & 0xff;
-        attr = fd_3E1D_BAEC[fd_50F6_0F18];
+        x = BlistX[fd_50F6_0F18];
+        y = BlistY[fd_50F6_0F18] & 0xff;
+        attr = BlistT[fd_50F6_0F18];
         if (attr != 0)
             o25_39C7_006D(x, y, attr);
     }
 }
 
-extern unsigned char far fd_3E1D_B8F7[];
+extern unsigned char far BlistM[];
 extern int far fd_50F6_0D40[];
 extern int far SRand256(void);
 extern int far SRand32(void);
@@ -51,7 +51,7 @@ extern int far FindInBList(int x, int y, int life);
 void far o25_39C7_0F30(int index);
 extern long far fd_50F6_1000;
 extern int far f_0894_1E34(int a, int b);
-extern unsigned char far fd_3E1D_BCE1[];
+extern unsigned char far BlistS[];
 void far o25_39C7_038F(int x, int y, int attr);
 void far o25_39C7_0460(int x, int y, int attr);
 
@@ -64,10 +64,10 @@ void far o25_39C7_006D(int x, int y, int attr)
 
     caste = (attr & 0x78) >> 3;
     if (!(attr & 0x80)) {
-        t = fd_3E1D_B8F7[fd_50F6_0F18];
+        t = BlistM[fd_50F6_0F18];
         fd_50F6_0D40[t]++;
         if (SRand256() == 0 && t != 9 && SRand32() > fd_50F6_10BE) {
-            fd_3E1D_BAEC[fd_50F6_0F18] = 0;
+            BlistT[fd_50F6_0F18] = 0;
             fd_3E1D_8180[x][y] = 0;
             fd_50F6_0F30++;
             return;
@@ -116,7 +116,7 @@ void far o25_39C7_006D(int x, int y, int attr)
         case 14:
             o25_39C7_0677(x, y, attr, caste);
             if (fd_50F6_08DC > 100)
-                fd_3E1D_B8F7[fd_50F6_0F18] = 0xf;
+                BlistM[fd_50F6_0F18] = 0xf;
             break;
         case 15:
         case 16:
@@ -130,7 +130,7 @@ void far o25_39C7_006D(int x, int y, int attr)
             break;
         }
     } else {
-        task = fd_3E1D_B8F7[fd_50F6_0F18];
+        task = BlistM[fd_50F6_0F18];
         fd_50F6_0D72[task]++;
         if (attr > 0xef) {
             o25_39C7_0746(x, y);
@@ -145,17 +145,17 @@ void far o25_39C7_006D(int x, int y, int attr)
             if (caste > 0x5f)
                 o25_39C7_0F30(i);
             if (caste < 8) {
-                fd_3E1D_B8F7[fd_50F6_0F18] = 3;
-                fd_3E1D_BAEC[fd_50F6_0F18] |= 8;
-                fd_3E1D_8180[x][y] = fd_3E1D_BAEC[fd_50F6_0F18];
-                fd_3E1D_BAEC[i] = 0;
+                BlistM[fd_50F6_0F18] = 3;
+                BlistT[fd_50F6_0F18] |= 8;
+                fd_3E1D_8180[x][y] = BlistT[fd_50F6_0F18];
+                BlistT[i] = 0;
                 fd_50F6_1000++;
             } else {
-                t = f_0894_1E34(fd_3E1D_BAEC[i], attr);
-                fd_3E1D_BAEC[fd_50F6_0F18] = 0;
-                fd_3E1D_BCE1[i] = t;
-                fd_3E1D_8180[x][y] = fd_3E1D_BAEC[i] = (t & 0x80) + 0x70;
-                fd_3E1D_B8F7[i] = 0xa;
+                t = f_0894_1E34(BlistT[i], attr);
+                BlistT[fd_50F6_0F18] = 0;
+                BlistS[i] = t;
+                fd_3E1D_8180[x][y] = BlistT[i] = (t & 0x80) + 0x70;
+                BlistM[i] = 0xa;
             }
             return;
         }
@@ -188,9 +188,9 @@ void far o25_39C7_038F(int x, int y, int dirHint)
 
     if (fd_3E1D_2180[x][y] >= 0x10 && fd_3E1D_2180[x][y] <= 0x13) {
         o25_39C7_154F(x, y);
-        fd_3E1D_B8F7[fd_50F6_0F18] = 3;
-        fd_3E1D_BAEC[fd_50F6_0F18] |= 8;
-        fd_3E1D_8180[x][y] = fd_3E1D_BAEC[fd_50F6_0F18];
+        BlistM[fd_50F6_0F18] = 3;
+        BlistT[fd_50F6_0F18] |= 8;
+        fd_3E1D_8180[x][y] = BlistT[fd_50F6_0F18];
         return;
     }
     dir = (SRand1(3) + dirHint - 2) & 7;
@@ -201,8 +201,8 @@ void far o25_39C7_038F(int x, int y, int dirHint)
         dir = SRand1(8);
     if (o25_39C7_105B(x, y, dir) != 0)
         return;
-    fd_3E1D_B8F7[fd_50F6_0F18] = 1;
-    fd_3E1D_8180[x][y] = fd_3E1D_BAEC[fd_50F6_0F18];
+    BlistM[fd_50F6_0F18] = 1;
+    fd_3E1D_8180[x][y] = BlistT[fd_50F6_0F18];
 }
 
 void far o25_39C7_0460(int x, int y, int attr)
@@ -216,7 +216,7 @@ void far o25_39C7_0460(int x, int y, int attr)
         dir--;
     if (o25_39C7_105B(x, y, dir) == 0) {
         if (o25_39C7_105B(x, y, SRand8()) == 0)
-            fd_3E1D_8180[x][y] = fd_3E1D_BAEC[fd_50F6_0F18];
+            fd_3E1D_8180[x][y] = BlistT[fd_50F6_0F18];
     }
 }
 
@@ -226,10 +226,10 @@ void far o25_39C7_04E5(int x, int y, int attacker)
 
     if (o25_39C7_0853(x, y, attacker) == 1)
         return;
-    fd_3E1D_8180[x][y] = fd_3E1D_BAEC[fd_50F6_0F18];
+    fd_3E1D_8180[x][y] = BlistT[fd_50F6_0F18];
     if (SRand1(20) == 0) {
-        type = fd_3E1D_BAEC[fd_50F6_0F18];
-        fd_3E1D_B8F7[fd_50F6_0F18] = f_1383_0976((type & 0x78) >> 3, type);
+        type = BlistT[fd_50F6_0F18];
+        BlistM[fd_50F6_0F18] = f_1383_0976((type & 0x78) >> 3, type);
         return;
     }
     if (fd_3D57_07A8[5] == 1)
@@ -243,13 +243,13 @@ extern int far fd_50F6_048C;
 void far o25_39C7_0590(int x, int y, int attr)
 {
     if (fd_3E1D_2180[x][y] < 0x14) {
-        fd_3E1D_B8F7[fd_50F6_0F18] = f_1383_099B((attr & 0x78) >> 3);
+        BlistM[fd_50F6_0F18] = f_1383_099B((attr & 0x78) >> 3);
         return;
     }
     attr = ((SRand1(3) + attr - 1) & 7) | (attr & 0xf8);
-    fd_3E1D_8180[x][y] = fd_3E1D_BAEC[fd_50F6_0F18] = attr;
+    fd_3E1D_8180[x][y] = BlistT[fd_50F6_0F18] = attr;
     if (SRand1(100) == 0) {
-        fd_3E1D_BAEC[fd_50F6_0F18] = fd_3E1D_8180[x][y] = 0;
+        BlistT[fd_50F6_0F18] = fd_3E1D_8180[x][y] = 0;
         if (attr & 0x80)
             fd_50F6_0FBC++;
         else
@@ -260,7 +260,7 @@ void far o25_39C7_0590(int x, int y, int attr)
 void far o25_39C7_0677(int x, int y, int attr, int caste)
 {
     if (SRand32() == 0)
-        fd_3E1D_B8F7[fd_50F6_0F18] = f_1383_099B(caste);
+        BlistM[fd_50F6_0F18] = f_1383_099B(caste);
     if (o25_39C7_0853(x, y, attr) == 1)
         return;
     if (o25_39C7_105B(x, y, attr & 7) != 0)
@@ -288,16 +288,16 @@ extern int far fd_50F6_1050;
 
 void far o25_39C7_0746(int x, int y)
 {
-    fd_3E1D_BAEC[fd_50F6_0F18] = (fd_3E1D_BAEC[fd_50F6_0F18] & 0xf8) + SRand1(7);
-    fd_3E1D_8180[x][y] = fd_3E1D_BAEC[fd_50F6_0F18];
+    BlistT[fd_50F6_0F18] = (BlistT[fd_50F6_0F18] & 0xf8) + SRand1(7);
+    fd_3E1D_8180[x][y] = BlistT[fd_50F6_0F18];
     if (SRand16() == 0) {
-        fd_3E1D_BAEC[fd_50F6_0F18] = fd_3E1D_8180[x][y] = fd_3E1D_BCE1[fd_50F6_0F18];
-        if ((fd_3E1D_BAEC[fd_50F6_0F18] & 0x78) == 0x60)
+        BlistT[fd_50F6_0F18] = fd_3E1D_8180[x][y] = BlistS[fd_50F6_0F18];
+        if ((BlistT[fd_50F6_0F18] & 0x78) == 0x60)
             o25_39C7_0EC2(fd_50F6_0F18);
-        if (fd_3E1D_BAEC[fd_50F6_0F18] & 0x80)
-            fd_3E1D_B8F7[fd_50F6_0F18] = 7;
+        if (BlistT[fd_50F6_0F18] & 0x80)
+            BlistM[fd_50F6_0F18] = 7;
         else
-            fd_3E1D_B8F7[fd_50F6_0F18] = f_1383_0976((fd_3E1D_BAEC[fd_50F6_0F18] & 0x78) >> 3, fd_3E1D_BAEC[fd_50F6_0F18]);
+            BlistM[fd_50F6_0F18] = f_1383_0976((BlistT[fd_50F6_0F18] & 0x78) >> 3, BlistT[fd_50F6_0F18]);
     } else if (fd_3D57_07A8[5] == 1)
         f_0250_4302(x, y, 2);
 }
@@ -315,9 +315,9 @@ int far o25_39C7_0853(int x, int y, int attacker)
     }
     if (ant > 0x87 && ant < 0xe8 && (index = FindInBList(x, y, ant)) >= 0) {
         winner = f_0894_1E34(ant, attacker);
-        fd_3E1D_BCE1[index] = winner;
-        fd_3E1D_8180[x][y] = fd_3E1D_BAEC[index] = (winner & 0x80) + 0x70;
-        fd_3E1D_B8F7[index] = 0xa;
+        BlistS[index] = winner;
+        fd_3E1D_8180[x][y] = BlistT[index] = (winner & 0x80) + 0x70;
+        BlistM[index] = 0xa;
         return 1;
     }
     return 0;
@@ -338,14 +338,14 @@ int far o25_39C7_090A(int x, int y)
         result = 1;
     }
     fd_50F6_1050++;
-    if (fd_3E1D_BAEC[fd_50F6_0F18] & 8)
-        fd_3E1D_BAEC[fd_50F6_0F18] -= 8;
+    if (BlistT[fd_50F6_0F18] & 8)
+        BlistT[fd_50F6_0F18] -= 8;
     return result;
 }
 
-extern int far fd_50F6_0330;
+extern int far BpopT;
 extern int far fd_50F6_0F08;
-extern int far fd_50F6_0378;
+extern int far ModeAuto;
 extern int far f_0093_002B(int range);
 extern unsigned int far fd_50F6_04A2;
 extern int far fd_3D57_0C0E;
@@ -357,22 +357,22 @@ void far o25_39C7_0980(int x, int y)
     int mode;
     int mask;
 
-    attr = fd_3E1D_BAEC[fd_50F6_0F18];
+    attr = BlistT[fd_50F6_0F18];
     mode = -1;
-    if (fd_50F6_0330 <= 2)
+    if (BpopT <= 2)
         mask = 0x1f;
     else
         mask = 0x7f;
     if (!(fd_50F6_0F08 & mask)) {
         attr++;
         if ((attr & 0xf) == 8) {
-            if (fd_50F6_0378 != 0 || (int)(fd_50F6_04A2 >> 7) >= f_0093_002B(255)) {
+            if (ModeAuto != 0 || (int)(fd_50F6_04A2 >> 7) >= f_0093_002B(255)) {
                 mode = fd_3D57_0C0E;
                 attr = (mode << 3) + 2;
                 if (mode == 2)
-                    fd_3E1D_B8F7[fd_50F6_0F18] = 1;
+                    BlistM[fd_50F6_0F18] = 1;
                 else
-                    fd_3E1D_B8F7[fd_50F6_0F18] = f_1383_099B(mode);
+                    BlistM[fd_50F6_0F18] = f_1383_099B(mode);
             } else {
                 attr = 0;
                 fd_50F6_1000++;
@@ -382,8 +382,8 @@ void far o25_39C7_0980(int x, int y)
     if (fd_3D57_07A8[5] != 0 && mode < 0)
         f_0250_428A(x, y, 2);
     fd_3E1D_8180[x][y] = attr;
-    fd_3E1D_BAEC[fd_50F6_0F18] = attr;
-    fd_3E1D_BCE1[fd_50F6_0F18] = 0;
+    BlistT[fd_50F6_0F18] = attr;
+    BlistS[fd_50F6_0F18] = 0;
 }
 
 extern int far SRand64(void);
@@ -411,28 +411,28 @@ void far o25_39C7_0AB0(int x, int y, int caste, int attr)
     if (caste == 12) {
         if (SRand64() == 0) {
             if (fd_50F6_10BE == 0) {
-                fd_3E1D_8180[x][y] = fd_3E1D_BAEC[fd_50F6_0F18] = 0;
+                fd_3E1D_8180[x][y] = BlistT[fd_50F6_0F18] = 0;
                 o14_384C_0B6A(0, 0x271f, 1);
                 return;
             }
             if (o25_39C7_0DAF(x, y, attr) != 0)
                 return;
         }
-        t = fd_3E1D_BAEC[fd_50F6_0F18];
+        t = BlistT[fd_50F6_0F18];
         if (o25_39C7_0FE7(x, y, t) != 0) {
             t = 0;
-            fd_3E1D_BAEC[fd_50F6_0F18] = 0;
+            BlistT[fd_50F6_0F18] = 0;
             fd_50F6_035E--;
         }
         fd_3E1D_8180[x][y] = t;
         if (fd_3D57_07A8[5] != 0)
             f_0250_437A(x, y, 2);
     } else if (caste == 13) {
-        t = fd_3E1D_BAEC[fd_50F6_0F18];
+        t = BlistT[fd_50F6_0F18];
         fd_3E1D_8180[x][y] = t;
         if (fd_50F6_035E > 0 && o25_39C7_0F76(x, y, t) != 0) {
             fd_50F6_035E--;
-            fd_3E1D_8180[x][y] = fd_3E1D_BAEC[fd_50F6_0F18] = 0;
+            fd_3E1D_8180[x][y] = BlistT[fd_50F6_0F18] = 0;
             return;
         }
         nx = fd_3D57_0000[(attr ^ 4) & 7] + x;
@@ -526,10 +526,10 @@ int far o25_39C7_0DAF(int x, int y, int dirHint)
         newRow = y + fd_3D57_0008[opp];
         fd_3E1D_8180[newCol][newRow] = 0;
         index = FindInBList(newCol, newRow, (dirHint & 7) + 0x68);
-        if (index >= 0 && fd_3E1D_BAEC[index] != 0) {
-            fd_3E1D_B50D[index] = x;
-            fd_3E1D_B702[index] = y;
-            fd_3E1D_8180[x][y] = fd_3E1D_BAEC[index] = dir + 0x68;
+        if (index >= 0 && BlistT[index] != 0) {
+            BlistX[index] = x;
+            BlistY[index] = y;
+            fd_3E1D_8180[x][y] = BlistT[index] = dir + 0x68;
         }
         return 1;
     }
@@ -546,17 +546,17 @@ void far o25_39C7_0EC2(int index)
     int life;
     int column;
 
-    type = fd_3E1D_BAEC[index];
+    type = BlistT[index];
     direction = type & 7;
     direction ^= 4;
-    life = fd_3E1D_B50D[index] + fd_3D57_0000[direction];
-    column = fd_3E1D_B702[index] + fd_3D57_0008[direction];
+    life = BlistX[index] + fd_3D57_0000[direction];
+    column = BlistY[index] + fd_3D57_0008[direction];
     f_0EC1_05D4(life, column, type + 8, 9, 0);
 }
 
 void far o25_39C7_0F30(int index)
 {
-    fd_3E1D_8180[fd_3E1D_B50D[index]][fd_3E1D_B702[index]] = fd_3E1D_BAEC[index] = 0;
+    fd_3E1D_8180[BlistX[index]][BlistY[index]] = BlistT[index] = 0;
 }
 
 int far o25_39C7_0F76(int x, int y, int attr)
@@ -624,15 +624,15 @@ int far o25_39C7_105B(int x, int y, int dir)
         return o25_39C7_1C81(x);
     if (fd_3E1D_2180[dx][dy] >= 0x1c)
         return 0;
-    if (fd_3E1D_8180[dx][dy] == 0xff && fd_50F6_1044 && fd_3E1D_B50D[fd_50F6_0F18] < 0x80) {
-        fd_3E1D_8180[x][y] = fd_3E1D_BAEC[fd_50F6_0F18] & 0xf8 | (unsigned char)dir;
+    if (fd_3E1D_8180[dx][dy] == 0xff && fd_50F6_1044 && BlistX[fd_50F6_0F18] < 0x80) {
+        fd_3E1D_8180[x][y] = BlistT[fd_50F6_0F18] & 0xf8 | (unsigned char)dir;
         o22_39C7_19E5(x, y, dir);
     }
-    fd_3E1D_8180[dx][dy] = fd_3E1D_BAEC[fd_50F6_0F18] & 0xf8 | (unsigned char)dir;
+    fd_3E1D_8180[dx][dy] = BlistT[fd_50F6_0F18] & 0xf8 | (unsigned char)dir;
     fd_3E1D_8180[x][y] = 0;
-    fd_3E1D_B50D[fd_50F6_0F18] = (unsigned char)dx;
-    fd_3E1D_B702[fd_50F6_0F18] = (unsigned char)dy;
-    fd_3E1D_BAEC[fd_50F6_0F18] = fd_3E1D_8180[dx][dy];
+    BlistX[fd_50F6_0F18] = (unsigned char)dx;
+    BlistY[fd_50F6_0F18] = (unsigned char)dy;
+    BlistT[fd_50F6_0F18] = fd_3E1D_8180[dx][dy];
     return 1;
 }
 
@@ -648,22 +648,22 @@ void far DoNestingB(int x, int y, int attr, int caste)
     int index;
 
     dir = attr & 7;
-    load = fd_3E1D_BCE1[fd_50F6_0F18] & 7;
+    load = BlistS[fd_50F6_0F18] & 7;
     cell = fd_3E1D_8180[x][y];
-    food = fd_3E1D_BCE1[fd_50F6_0F18] >> 3;
+    food = BlistS[fd_50F6_0F18] >> 3;
     switch (caste) {
     case 1:
         if (food == 0) {
             if ((dir = f_0BE8_0D67(x, y, attr & 7)) < 0)
-                fd_3E1D_BCE1[fd_50F6_0F18] = load | 8;
+                BlistS[fd_50F6_0F18] = load | 8;
             break;
         }
         if (cell == 0 || cell > 8) {
-            fd_3E1D_BAEC[fd_50F6_0F18] += 8;
+            BlistT[fd_50F6_0F18] += 8;
             f_0BE8_0A5B(x, y, load);
-            fd_3E1D_8180[x][y] = fd_3E1D_BAEC[fd_50F6_0F18];
-            fd_3E1D_BCE1[fd_50F6_0F18] = 8;
-            fd_3E1D_B8F7[fd_50F6_0F18] = f_1383_099B(caste);
+            fd_3E1D_8180[x][y] = BlistT[fd_50F6_0F18];
+            BlistS[fd_50F6_0F18] = 8;
+            BlistM[fd_50F6_0F18] = f_1383_099B(caste);
         }
         if ((dir = f_0BE8_0C0F(x, y, attr & 7)) != 0)
             dir--;
@@ -673,7 +673,7 @@ void far DoNestingB(int x, int y, int attr, int caste)
     case 2:
         if (food != 0) {
             if (SRand8() == 0)
-                fd_3E1D_BCE1[fd_50F6_0F18] = 0;
+                BlistS[fd_50F6_0F18] = 0;
             if ((dir = f_0BE8_0C0F(x, y, attr & 7)) != 0)
                 dir--;
             else
@@ -682,22 +682,22 @@ void far DoNestingB(int x, int y, int attr, int caste)
         }
         if (cell != 0 && cell < 8) {
             if ((index = FindInBList(x, y, cell)) >= 0) {
-                fd_3E1D_BAEC[index] = 0;
-                fd_3E1D_BAEC[fd_50F6_0F18] -= 8;
-                fd_3E1D_BCE1[fd_50F6_0F18] = cell;
+                BlistT[index] = 0;
+                BlistT[fd_50F6_0F18] -= 8;
+                BlistS[fd_50F6_0F18] = cell;
                 return;
             }
         } else if (SRand1(100) > fd_50F6_10BE)
             o25_39C7_13EF(x, y);
         else if (SRand16() == 0)
-            fd_3E1D_B8F7[fd_50F6_0F18] = f_1383_099B(caste);
+            BlistM[fd_50F6_0F18] = f_1383_099B(caste);
         dir = attr & 7;
         break;
     default:
         if (SRand1(100) > fd_50F6_10BE)
             o25_39C7_13EF(x, y);
         if (SRand8() == 0)
-            fd_3E1D_B8F7[fd_50F6_0F18] = f_1383_099B(caste);
+            BlistM[fd_50F6_0F18] = f_1383_099B(caste);
         break;
     }
     if (o25_39C7_105B(x, y, dir) == 0)
@@ -723,7 +723,7 @@ void far o25_39C7_13EF(int x, int y)
         fd_3E1D_2180[x][y]--;
     if (fd_50F6_1050 > 0)
         fd_50F6_1050--;
-    threshold = (fd_50F6_0330 + fd_50F6_0AEC[2]) >> 4;
+    threshold = (BpopT + fd_50F6_0AEC[2]) >> 4;
     fd_50F6_0212 += 5;
     if (threshold < fd_50F6_0212) {
         fd_50F6_0212 = 0;
@@ -741,7 +741,7 @@ void far o25_39C7_14A8(int x, int y)
     if (fd_50F6_1050 > 0)
         fd_50F6_1050--;
     fd_50F6_0212 += 5;
-    if ((fd_50F6_0330 + fd_50F6_0AEC[2]) >> 4 < fd_50F6_0212) {
+    if ((BpopT + fd_50F6_0AEC[2]) >> 4 < fd_50F6_0212) {
         fd_50F6_0212 = 0;
         if (fd_50F6_10BE < 100)
             fd_50F6_10BE++;
@@ -762,7 +762,7 @@ void far o25_39C7_15B4(void)
 {
     --fd_50F6_0212;
     if (fd_50F6_0212 < 0) {
-        fd_50F6_0212 = fd_50F6_0330 >> 5;
+        fd_50F6_0212 = BpopT >> 5;
         if (fd_50F6_10BE > 0 && !fd_3D57_0C18)
             --fd_50F6_10BE;
     }
@@ -778,7 +778,7 @@ void far DoFoodInB(int x, int y, int attr)
 
     if ((dir = f_0BE8_0D67(x, y, attr & 7)) >= 0 && SRand16() != 0) {
         newattr = (attr & 0xf8) | dir;
-        fd_3E1D_BAEC[fd_50F6_0F18] = fd_3E1D_8180[x][y] = newattr;
+        BlistT[fd_50F6_0F18] = fd_3E1D_8180[x][y] = newattr;
         nx = fd_3D57_0000[dir] + x;
         ny = fd_3D57_0008[dir] + y;
         if (nx > 0x3f || nx < 0 || ny > 0x3f)
@@ -794,17 +794,17 @@ void far DoFoodInB(int x, int y, int attr)
             && (!f_10F7_003A(fd_3E1D_8180[nx][ny]) || fd_50F6_04E2 != 0)
             && o25_39C7_0853(nx, ny, newattr))
             return;
-        newattr = (fd_3E1D_BAEC[fd_50F6_0F18] & 0xf8) | dir;
-        fd_3E1D_BAEC[fd_50F6_0F18] = newattr;
+        newattr = (BlistT[fd_50F6_0F18] & 0xf8) | dir;
+        BlistT[fd_50F6_0F18] = newattr;
         fd_3E1D_8180[nx][ny] = newattr;
-        fd_3E1D_B50D[fd_50F6_0F18] = nx;
-        fd_3E1D_B702[fd_50F6_0F18] = ny;
+        BlistX[fd_50F6_0F18] = nx;
+        BlistY[fd_50F6_0F18] = ny;
         return;
     }
     o25_39C7_090A(x, y);
     if (SRand1(100) > fd_50F6_10BE)
         o25_39C7_14A8(x, y);
-    fd_3E1D_B8F7[fd_50F6_0F18] = f_1383_099B((attr & 0x78) >> 3);
+    BlistM[fd_50F6_0F18] = f_1383_099B((attr & 0x78) >> 3);
 }
 
 extern int far IsItDirt(int value);
@@ -823,15 +823,15 @@ void far DoDigInB(int x, int y, int attr, int caste)
     int tile;
 
     if (caste != 2 && caste != 6) {
-        fd_3E1D_B8F7[fd_50F6_0F18] = f_1383_099B(caste);
+        BlistM[fd_50F6_0F18] = f_1383_099B(caste);
         return;
     }
     if ((dir = f_0BE8_0D67(x, y, attr & 7)) < 0)
         dir = SRand8();
     newattr = (attr & 0xf8) | dir;
-    fd_3E1D_BAEC[fd_50F6_0F18] = fd_3E1D_8180[x][y] = newattr;
+    BlistT[fd_50F6_0F18] = fd_3E1D_8180[x][y] = newattr;
     if (y == 0x3f) {
-        fd_3E1D_B8F7[fd_50F6_0F18] = f_1383_099B(caste);
+        BlistM[fd_50F6_0F18] = f_1383_099B(caste);
         return;
     }
     nx = fd_3D57_0000[dir] + x;
@@ -847,11 +847,11 @@ void far DoDigInB(int x, int y, int attr, int caste)
         return;
     if (IsItDirt(tile)) {
         if (!DigTileThemB(nx, ny)) {
-            fd_3E1D_B8F7[fd_50F6_0F18] = f_1383_099B(caste);
+            BlistM[fd_50F6_0F18] = f_1383_099B(caste);
             return;
         }
-        fd_3E1D_BAEC[fd_50F6_0F18] += 0x18;
-        fd_3E1D_B8F7[fd_50F6_0F18] = 5;
+        BlistT[fd_50F6_0F18] += 0x18;
+        BlistM[fd_50F6_0F18] = 5;
         f_00DF_00E8(0x11, 0, 0);
     }
     fd_3E1D_8180[x][y] = 0;
@@ -859,11 +859,11 @@ void far DoDigInB(int x, int y, int attr, int caste)
         && (!f_10F7_003A(fd_3E1D_8180[nx][ny]) || fd_50F6_04E2 != 0)
         && o25_39C7_0853(nx, ny, newattr))
         return;
-    newattr = (fd_3E1D_BAEC[fd_50F6_0F18] & 0xf8) | dir;
-    fd_3E1D_BAEC[fd_50F6_0F18] = newattr;
+    newattr = (BlistT[fd_50F6_0F18] & 0xf8) | dir;
+    BlistT[fd_50F6_0F18] = newattr;
     fd_3E1D_8180[nx][ny] = newattr;
-    fd_3E1D_B50D[fd_50F6_0F18] = nx;
-    fd_3E1D_B702[fd_50F6_0F18] = ny;
+    BlistX[fd_50F6_0F18] = nx;
+    BlistY[fd_50F6_0F18] = ny;
     if (SRand64() > fd_50F6_10BE)
         o25_39C7_13EF(nx, ny);
     if (SRand4() == 0)
@@ -887,7 +887,7 @@ void far DoDigOutB(int x, int y, int attr)
     else
         dir = f_0894_21C5(attr & 7);
     newattr = (attr & 0xf8) | dir;
-    fd_3E1D_BAEC[fd_50F6_0F18] = fd_3E1D_8180[x][y] = newattr;
+    BlistT[fd_50F6_0F18] = fd_3E1D_8180[x][y] = newattr;
     nx = fd_3D57_0000[dir] + x;
     ny = fd_3D57_0008[dir] + y;
     if (nx < 0 || nx > 0x3f || ny > 0x3f)
@@ -900,11 +900,11 @@ void far DoDigOutB(int x, int y, int attr)
         fd_3E1D_4180[x][y]--;
         caste = (attr & 0x78) >> 3;
         if (caste == 5 || caste == 9) {
-            fd_3E1D_BAEC[fd_50F6_0F18] -= 0x18;
-            fd_3E1D_B8F7[fd_50F6_0F18] = 4;
+            BlistT[fd_50F6_0F18] -= 0x18;
+            BlistM[fd_50F6_0F18] = 4;
         }
         if (caste == 2 || caste == 6)
-            fd_3E1D_B8F7[fd_50F6_0F18] = 4;
+            BlistM[fd_50F6_0F18] = 4;
         return;
     }
     if (IsItDirt(fd_3E1D_2180[nx][ny]))
@@ -914,9 +914,9 @@ void far DoDigOutB(int x, int y, int attr)
         && (!f_10F7_003A(fd_3E1D_8180[nx][ny]) || fd_50F6_04E2 != 0)
         && o25_39C7_0853(nx, ny, newattr))
         return;
-    fd_3E1D_BAEC[fd_50F6_0F18] = fd_3E1D_8180[nx][ny] = (fd_3E1D_BAEC[fd_50F6_0F18] & 0xf8) | dir;
-    fd_3E1D_B50D[fd_50F6_0F18] = nx;
-    fd_3E1D_B702[fd_50F6_0F18] = ny;
+    BlistT[fd_50F6_0F18] = fd_3E1D_8180[nx][ny] = (BlistT[fd_50F6_0F18] & 0xf8) | dir;
+    BlistX[fd_50F6_0F18] = nx;
+    BlistY[fd_50F6_0F18] = ny;
     if (SRand64() > fd_50F6_10BE)
         o25_39C7_13EF(nx, ny);
 }
@@ -930,17 +930,17 @@ int far o25_39C7_1BBB(int x, int y)
 {
     int dir;
 
-    dir = fd_3E1D_BAEC[fd_50F6_0F18];
-    fd_3E1D_BAEC[fd_50F6_0F18] = 0;
+    dir = BlistT[fd_50F6_0F18];
+    BlistT[fd_50F6_0F18] = 0;
     if (fd_3D57_0224[x] == 0)
         MakeNewHoleB(x);
     if (ExitHole(fd_3D57_0224[x], x, SRand8() + (dir & 0xf8),
-                    fd_3E1D_B8F7[fd_50F6_0F18], fd_3E1D_BCE1[fd_50F6_0F18])) {
+                    BlistM[fd_50F6_0F18], BlistS[fd_50F6_0F18])) {
         fd_3E1D_8180[x][y] = 0;
         return 1;
     }
-    fd_3E1D_BAEC[fd_50F6_0F18] = dir;
-    fd_3E1D_B8F7[fd_50F6_0F18] = 0;
+    BlistT[fd_50F6_0F18] = dir;
+    BlistM[fd_50F6_0F18] = 0;
     return 0;
 }
 
@@ -950,17 +950,17 @@ int far o25_39C7_1C81(int x)
     int raw;
 
     if (fd_3E1D_2180[x][0] == 0x18) {
-        raw = fd_3E1D_BAEC[fd_50F6_0F18];
-        fd_3E1D_BAEC[fd_50F6_0F18] = 0;
+        raw = BlistT[fd_50F6_0F18];
+        BlistT[fd_50F6_0F18] = 0;
         if (fd_3D57_0224[x] == 0)
             MakeNewHoleB(x);
         if (ExitHole(fd_3D57_0224[x], x, SRand8() + (raw & 0xf8),
-                        fd_3E1D_B8F7[fd_50F6_0F18], fd_3E1D_BCE1[fd_50F6_0F18]) != 0) {
+                        BlistM[fd_50F6_0F18], BlistS[fd_50F6_0F18]) != 0) {
             fd_3E1D_8180[x][1] = 0;
             return 1;
         }
-        fd_3E1D_BAEC[fd_50F6_0F18] = raw;
-        fd_3E1D_B8F7[fd_50F6_0F18] = 0;
+        BlistT[fd_50F6_0F18] = raw;
+        BlistM[fd_50F6_0F18] = 0;
         return 0;
     }
     if (fd_3E1D_4180[x][0] != 0)

@@ -7,7 +7,7 @@
 
 extern int far TERRAINset;
 extern int far CurGndTileID;
-extern void far f_0250_036A(int a, int b);
+extern void far OverlayTileSet(int a, int b);
 extern void far InitAntLions(int count);
 extern void far InitPillar(void);
 extern int far DROPdir;
@@ -60,7 +60,7 @@ void far MakeHousePatch(int n)
 {
     if (TERRAINset != 1) {
         CurGndTileID = 0x3e9;
-        f_0250_036A(0, 0x3e9);
+        OverlayTileSet(0, 0x3e9);
     }
     InitAntLions(0);
     InitPillar();
@@ -398,7 +398,7 @@ void far MakeYardPatch(void)
 
     if (TERRAINset != 0) {
         CurGndTileID = 0x3e8;
-        f_0250_036A(0, 0x3e8);
+        OverlayTileSet(0, 0x3e8);
     }
     for (row = 0; row < 128; row++)
         for (col = 0; col < 64; col++)

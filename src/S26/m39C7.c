@@ -63,15 +63,15 @@ extern struct Rect far * _fastcall win_WinRectAddr(int win);
 extern void _fastcall win_Recalc(int win);
 extern void far f_1E57_038E(void);
 extern void (far * far g_62EC)(int win);
-extern void far f_1E57_0174(int win);
+extern void far clip_SetWin(int win);
 extern void far f_1E57_0D97(struct Rect far *r);
 extern void far f_1E57_0FDC(struct Rect far *r);
 extern void _fastcall win_GetObjRect(int obj, struct Rect far *rect);
-extern void far f_1E57_0DAA(void);
+extern void far clip_Push(void);
 extern void far f_1E57_0296(void);
 extern void far f_1FD2_05FD(void);
-extern void far f_1E57_0EB9(void);
-extern void far f_1E57_0AAF(struct Rect far *r);
+extern void far clip_Pop(void);
+extern void far clip_SubExclude(struct Rect far *r);
 extern int far g_5702[];
 extern void far f_1E57_0A9C(struct Rect far *r);
 extern void _fastcall win_DrawWindow(int win);
@@ -119,28 +119,28 @@ void _fastcall o26_39C7_0000(int win)
     f_1E57_038E();
     (*g_62EC)(win);
     if (w->flags & 0x80) {
-        f_1E57_0174(win);
+        clip_SetWin(win);
         f_1E57_0D97(&saved);
     } else {
         f_1E57_0FDC(&saved);
         win_GetObjRect(win, &r);
     }
     win_UnlockWin(win);
-    f_1E57_0DAA();
+    clip_Push();
     f_1E57_0296();
     f_1FD2_05FD();
-    f_1E57_0EB9();
-    f_1E57_0AAF(&r);
+    clip_Pop();
+    clip_SubExclude(&r);
     for (i = 1; g_5702[i] != (int)0x8000; i++)
         ;
     while (--i >= 1) {
-        f_1E57_0DAA();
+        clip_Push();
         win_GetObjRect(g_5702[i], &r);
         f_1E57_0A9C(&r);
         win_DrawWindow(g_5702[i]);
-        f_1E57_0EB9();
+        clip_Pop();
     }
-    f_1E57_0174(win);
+    clip_SetWin(win);
     win_DrawWindow(g_5702[0]);
     f_2505_08EA(win);
     f_2505_0831(win);
