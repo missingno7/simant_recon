@@ -7430,6 +7430,20 @@
 {
 "unit": "root",
 "seg": 6990,
+"off": 565,
+"size": 11,
+"region": "game_or_library",
+"extent": "REVIEWED",
+"evidence": [
+"reviewed"
+],
+"notes": [
+"genuine-assembly module 1B4E: current video mode proc (xor ax,ax; mov es,ax; mov al,es:[449h]; xor ah,ah; retf) between 0228 and 0240"
+]
+},
+{
+"unit": "root",
+"seg": 6990,
 "off": 576,
 "size": 22,
 "region": "game_or_library",
@@ -8982,6 +8996,34 @@
 {
 "unit": "root",
 "seg": 8024,
+"off": 6,
+"size": 14,
+"region": "game_or_library",
+"extent": "REVIEWED",
+"evidence": [
+"reviewed"
+],
+"notes": [
+"genuine-assembly module 1F58 (starts 1F586 after LINK fill): BIOS tick count proc (xor ax,ax; mov es,ax; es:[46C]/[46E]; retf), first proc of the object"
+]
+},
+{
+"unit": "root",
+"seg": 8024,
+"off": 20,
+"size": 3,
+"region": "game_or_library",
+"extent": "REVIEWED",
+"evidence": [
+"reviewed"
+],
+"notes": [
+"genuine-assembly module 1F58: 'xor ax,ax; retf' stub between 0006 and 0017"
+]
+},
+{
+"unit": "root",
+"seg": 8024,
 "off": 23,
 "size": 33,
 "region": "game_or_library",
@@ -9037,6 +9079,20 @@
 {
 "unit": "root",
 "seg": 8024,
+"off": 161,
+"size": 23,
+"region": "game_or_library",
+"extent": "REVIEWED",
+"evidence": [
+"reviewed"
+],
+"notes": [
+"genuine-assembly module 1F58: INT 23h vector restore proc (cli; es=0; es:[8C]/[8E] = saved; sti; retf), registered with atexit by f_1F58_00B8 (push cs; lea bx,[00A1])"
+]
+},
+{
+"unit": "root",
+"seg": 8024,
 "off": 184,
 "size": 48,
 "region": "game_or_library",
@@ -9046,6 +9102,20 @@
 ],
 "notes": [
 "prologue scan in unreached gap; descent ends in a return; no references found (unreferenced or indirect)"
+]
+},
+{
+"unit": "root",
+"seg": 8038,
+"off": 41,
+"size": 4,
+"region": "game_or_library",
+"extent": "REVIEWED",
+"evidence": [
+"reviewed"
+],
+"notes": [
+"genuine-assembly module 1F66 (object starts 1F668 with the 33-byte string 'Copyright (C)1990, Daniel Goldman'): entry stub 'mov dl,1; jmp 0031' into the wildcard-match body shared with f_1F66_002D (mov dl,0)"
 ]
 },
 {
@@ -9082,6 +9152,20 @@
 ],
 "notes": [
 "prologue scan in unreached gap; descent ends in a return; no references found (unreferenced or indirect)"
+]
+},
+{
+"unit": "root",
+"seg": 8038,
+"off": 246,
+"size": 17,
+"region": "game_or_library",
+"extent": "REVIEWED",
+"evidence": [
+"reviewed"
+],
+"notes": [
+"genuine-assembly module 1F66: 'mov ah,52h; int 21h; mov al,es:[bx+20h]' drive-count proc (default 8) between 00DA and 0107, ends retf at 0106"
 ]
 },
 {

@@ -9605,6 +9605,12 @@
    "off": 552,
    "grounding": "inventory:far_call"
   },
+  "f_1B4E_0235": {
+   "unit": "root",
+   "seg": 6990,
+   "off": 565,
+   "grounding": "reviewed: genuine-assembly module 1B4E: current video mode proc (xor ax,ax; mov es,ax; mov al,es:[449h]; xor ah,ah; retf) between 0228 and 0240"
+  },
   "f_1B4E_0240": {
    "unit": "root",
    "seg": 6990,
@@ -10385,6 +10391,18 @@
    "off": 4060,
    "grounding": "inventory:far_call"
   },
+  "f_1F58_0006": {
+   "unit": "root",
+   "seg": 8024,
+   "off": 6,
+   "grounding": "reviewed: genuine-assembly module 1F58 (starts 1F586 after LINK fill): BIOS tick count proc (xor ax,ax; mov es,ax; es:[46C]/[46E]; retf), first proc of the object"
+  },
+  "f_1F58_0014": {
+   "unit": "root",
+   "seg": 8024,
+   "off": 20,
+   "grounding": "reviewed: genuine-assembly module 1F58: 'xor ax,ax; retf' stub between 0006 and 0017"
+  },
   "f_1F58_0017": {
    "unit": "root",
    "seg": 8024,
@@ -10415,11 +10433,23 @@
    "off": 144,
    "grounding": "inventory:far_call"
   },
+  "f_1F58_00A1": {
+   "unit": "root",
+   "seg": 8024,
+   "off": 161,
+   "grounding": "reviewed: genuine-assembly module 1F58: INT 23h vector restore proc (cli; es=0; es:[8C]/[8E] = saved; sti; retf), registered with atexit by f_1F58_00B8 (push cs; lea bx,[00A1])"
+  },
   "f_1F58_00B8": {
    "unit": "root",
    "seg": 8024,
    "off": 184,
    "grounding": "reviewed: prologue scan in unreached gap; descent ends in a return; no references found (unreferenced or indirect)"
+  },
+  "f_1F66_0029": {
+   "unit": "root",
+   "seg": 8038,
+   "off": 41,
+   "grounding": "reviewed: genuine-assembly module 1F66 (object starts 1F668 with the 33-byte string 'Copyright (C)1990, Daniel Goldman'): entry stub 'mov dl,1; jmp 0031' into the wildcard-match body shared with f_1F66_002D (mov dl,0)"
   },
   "f_1F66_002D": {
    "unit": "root",
@@ -10438,6 +10468,12 @@
    "seg": 8038,
    "off": 218,
    "grounding": "reviewed: prologue scan in unreached gap; descent ends in a return; no references found (unreferenced or indirect)"
+  },
+  "f_1F66_00F6": {
+   "unit": "root",
+   "seg": 8038,
+   "off": 246,
+   "grounding": "reviewed: genuine-assembly module 1F66: 'mov ah,52h; int 21h; mov al,es:[bx+20h]' drive-count proc (default 8) between 00DA and 0107, ends retf at 0106"
   },
   "f_1F66_0107": {
    "unit": "root",
@@ -12700,48 +12736,6 @@
    "seg": 11515,
    "off": 7,
    "grounding": "reviewed: memory-hook thunk: EA far jump to 171C:13E4 (relocated, frame 2CFB); ten 5-byte entries tile 2CFB:0002-0033 after crt0dat EMULATOR_TEXT (2CFB:0000-0001); 2CFB:0002/0007/002F are called far by 19A9/19DC; registered as jt_171C_13E4"
-  },
-  "f_2CFB_000C": {
-   "unit": "root",
-   "seg": 11515,
-   "off": 12,
-   "grounding": "reviewed: memory-hook thunk: EA far jump to 171C:152C (relocated, frame 2CFB); ten 5-byte entries tile 2CFB:0002-0033 after crt0dat EMULATOR_TEXT (2CFB:0000-0001); 2CFB:0002/0007/002F are called far by 19A9/19DC; registered as jt_171C_152C"
-  },
-  "f_2CFB_0011": {
-   "unit": "root",
-   "seg": 11515,
-   "off": 17,
-   "grounding": "reviewed: memory-hook thunk: EA far jump to 171C:14BE (relocated, frame 2CFB); ten 5-byte entries tile 2CFB:0002-0033 after crt0dat EMULATOR_TEXT (2CFB:0000-0001); 2CFB:0002/0007/002F are called far by 19A9/19DC; registered as jt_171C_14BE"
-  },
-  "f_2CFB_0016": {
-   "unit": "root",
-   "seg": 11515,
-   "off": 22,
-   "grounding": "reviewed: memory-hook thunk: EA far jump to 171C:16EA (relocated, frame 2CFB); ten 5-byte entries tile 2CFB:0002-0033 after crt0dat EMULATOR_TEXT (2CFB:0000-0001); 2CFB:0002/0007/002F are called far by 19A9/19DC; registered as jt_171C_16EA"
-  },
-  "f_2CFB_001B": {
-   "unit": "root",
-   "seg": 11515,
-   "off": 27,
-   "grounding": "reviewed: memory-hook thunk: EA far jump to 171C:1794 (relocated, frame 2CFB); ten 5-byte entries tile 2CFB:0002-0033 after crt0dat EMULATOR_TEXT (2CFB:0000-0001); 2CFB:0002/0007/002F are called far by 19A9/19DC; registered as jt_171C_1794"
-  },
-  "f_2CFB_0020": {
-   "unit": "root",
-   "seg": 11515,
-   "off": 32,
-   "grounding": "reviewed: memory-hook thunk: EA far jump to 171C:1750 (relocated, frame 2CFB); ten 5-byte entries tile 2CFB:0002-0033 after crt0dat EMULATOR_TEXT (2CFB:0000-0001); 2CFB:0002/0007/002F are called far by 19A9/19DC; registered as jt_171C_1750"
-  },
-  "f_2CFB_0025": {
-   "unit": "root",
-   "seg": 11515,
-   "off": 37,
-   "grounding": "reviewed: memory-hook thunk: EA far jump to 171C:18A6 (relocated, frame 2CFB); ten 5-byte entries tile 2CFB:0002-0033 after crt0dat EMULATOR_TEXT (2CFB:0000-0001); 2CFB:0002/0007/002F are called far by 19A9/19DC; registered as jt_171C_18A6"
-  },
-  "f_2CFB_002A": {
-   "unit": "root",
-   "seg": 11515,
-   "off": 42,
-   "grounding": "reviewed: memory-hook thunk: EA far jump to 171C:1686 (relocated, frame 2CFB); ten 5-byte entries tile 2CFB:0002-0033 after crt0dat EMULATOR_TEXT (2CFB:0000-0001); 2CFB:0002/0007/002F are called far by 19A9/19DC; registered as jt_171C_1686"
   },
   "f_2CFB_002F": {
    "unit": "root",
@@ -21061,6 +21055,11 @@
    "off": 19370,
    "grounding": "f_284A_0013: mov es,[8AB0]; mov es:[di+4BAA],ax (far int array[14])"
   },
+  "fd_50F6_5AA0": {
+   "seg": 20726,
+   "off": 23200,
+   "grounding": "f_205F_0004: mov es,[8A06] (CONST 50F6); es:[5AA0]=g_3DB2, es:[5AA2]=g_3DB4 (screen width/height copy) (worker rootF)"
+  },
   "fd_55B3_0064": {
    "seg": 21939,
    "off": 100,
@@ -21406,6 +21405,21 @@
    "off": 7090,
    "grounding": "f_14EE_04B5: mov al,[si+1BB2] (DS=DGROUP) byte tile per direction"
   },
+  "g_1DE2": {
+   "seg": 21939,
+   "off": 7650,
+   "grounding": "f_1699_0000/0050/00A6 (balloon helpers, genuine assembly): bitmap row-bytes work word (mov [1DE2],ax; mov dx,[1DE2]; mul dl)"
+  },
+  "g_1DE6": {
+   "seg": 21939,
+   "off": 7654,
+   "grounding": "f_1699_0110: mask width byte (mov [1DE6],al; mov bl,[1DE6])"
+  },
+  "g_1DE7": {
+   "seg": 21939,
+   "off": 7655,
+   "grounding": "f_1699_0110: mask height byte (mov [1DE7],al)"
+  },
   "g_1F9E": {
    "seg": 21939,
    "off": 8094,
@@ -21656,6 +21670,11 @@
    "off": 15776,
    "grounding": "f_21FA_0002: mov es,[8A2C]; push es:[3DA0] (far-declared DGROUP word, first arg of (*[9134]))"
   },
+  "g_3DA2": {
+   "seg": 21939,
+   "off": 15778,
+   "grounding": "f_1FBD_0000: mov [3DA2],y after drawing text (pen y; pen x at 3DA0)"
+  },
   "g_3DA4": {
    "seg": 21939,
    "off": 15780,
@@ -21810,6 +21829,16 @@
    "seg": 21939,
    "off": 15858,
    "grounding": "S03 driver (3126) : extrn\t_g_3DF2:byte (DGROUP operand of genuine-assembly display driver; worker ovlA)"
+  },
+  "g_3DF4": {
+   "seg": 21939,
+   "off": 15860,
+   "grounding": "f_1B4E_0025: les bx,[3DF4] far pointer (source colour pair) copied 19h times into [3DF8]"
+  },
+  "g_3DF8": {
+   "seg": 21939,
+   "off": 15864,
+   "grounding": "f_1B4E_0025/0165: les di,[3DF8] far pointer to the 50-word colour/pattern table (rep movsw 32h words)"
   },
   "g_3DFC": {
    "seg": 21939,
@@ -22206,6 +22235,36 @@
    "off": 23214,
    "grounding": "S02 driver (3126) : extrn\t_g_5AAE:byte (DGROUP operand of genuine-assembly display driver; worker ovlA)"
   },
+  "g_5ABA": {
+   "seg": 21939,
+   "off": 23226,
+   "grounding": "f_1FBD_0000: text bitmap header width (mov [5ABA],ax; push ds; mov ax,5ABAh -> f_1B4E_005E(x,y,bitmap))"
+  },
+  "g_5ABC": {
+   "seg": 21939,
+   "off": 23228,
+   "grounding": "f_1FBD_0000: text bitmap header height (mov [5ABC],bx = font height)"
+  },
+  "g_5ABE": {
+   "seg": 21939,
+   "off": 23230,
+   "grounding": "f_1FBD_0000: text bitmap pixel bytes (mov di,5ABEh; stores glyph rows)"
+  },
+  "g_5ECE": {
+   "seg": 21939,
+   "off": 24270,
+   "grounding": "f_1FBD_0000: 80-byte copy of the text string (mov di,5ECEh; lodsb/stosb up to 50h chars)"
+  },
+  "g_5F1D": {
+   "seg": 21939,
+   "off": 24349,
+   "grounding": "f_1FBD_0000: byte cleared before rendering (mov byte [5F1D],0)"
+  },
+  "g_5FBE": {
+   "seg": 21939,
+   "off": 24510,
+   "grounding": "f_1FBD_0000: 128-byte accented-character fold table for chars >= 80h (mov al,[bx+5FBE]; 'cueaaaaceeeiii...')"
+  },
   "g_5FE6": {
    "seg": 21939,
    "off": 24550,
@@ -22271,6 +22330,16 @@
    "off": 24574,
    "grounding": "module 1B73 at 1B73:0353: mov si, word ptr [0x5ffe] (worker rootF)"
   },
+  "g_6298": {
+   "seg": 21939,
+   "off": 25240,
+   "grounding": "f_205F_0004: cmp word ptr [6298],0 - flag that remaps graphics modes 0/1/6/8 and forces the S01 3126:0000 mode set (worker rootF)"
+  },
+  "g_629A": {
+   "seg": 21939,
+   "off": 25242,
+   "grounding": "f_205F_0004: push [bx+629Ch]/[bx+629Ah] with bx = 4*g_5A97 -> table of far string pointers (database file prefixes 'hcega', 'mono', ...) used in sprintf(path,\"%s%s\",...) (worker rootF)"
+  },
   "g_62E0": {
    "seg": 21939,
    "off": 25312,
@@ -22285,6 +22354,21 @@
    "seg": 21939,
    "off": 25344,
    "grounding": "f_2505_0006: mov es,[8A44]; cmp word ptr es:[6300],0 (far-declared DGROUP flag checked before lock test)"
+  },
+  "g_676C": {
+   "seg": 21939,
+   "off": 26476,
+   "grounding": "f_2650_000F (glyph blit, genuine assembly): DGROUP work word (676C: source seg / dest seg / byte count), mov [676C],..."
+  },
+  "g_676E": {
+   "seg": 21939,
+   "off": 26478,
+   "grounding": "f_2650_000F (glyph blit, genuine assembly): DGROUP work word (676E: source seg / dest seg / byte count), mov [676E],..."
+  },
+  "g_6776": {
+   "seg": 21939,
+   "off": 26486,
+   "grounding": "f_2650_000F (glyph blit, genuine assembly): DGROUP work word (6776: source seg / dest seg / byte count), mov [6776],..."
   },
   "g_68B6": {
    "seg": 21939,

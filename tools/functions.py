@@ -235,8 +235,14 @@ def _add(addr: str, size: int, why: str) -> int:
     t["functions"].sort(key=lambda r: (r["unit"] != "root", r["unit"], r["seg"] * 16 + r["off"]))
     TABLE.write_text(json.dumps(t, indent=0) + "\n")
     s = symmod.load()
-    s["code"][symmod.default_name(unit, seg, off)] = {"unit": unit, "seg": seg, "off": off, "grounding": "reviewed: " + why}
-    symmod.save(s)
+    lin = seg * 16 + off
+    named = [n for n, r in s["code"].items() if r.get("unit") == unit and r["seg"] * 16 + r["off"] == lin]
+    if named:
+        print(f"address already named {named}; no default name registered")
+    else:
+        s["code"][symmod.default_name(unit, seg, off)] = {"unit": unit, "seg": seg, "off": off,
+                                                          "grounding": "reviewed: " + why}
+        symmod.save(s)
     print("added", addr)
     return 0
 
