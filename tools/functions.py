@@ -19,7 +19,7 @@ import symbols as symmod  # noqa: E402
 
 ROOT = exemod.ROOT
 TABLE = ROOT / "layout" / "functions.json"
-DEFAULT_PROFILE = "msc600a"
+DEFAULT_PROFILE = "msc600ax"  # VER-3
 
 
 @lru_cache(maxsize=1)

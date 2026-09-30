@@ -15,8 +15,10 @@ You recover original C (or genuine assembly) for the modules assigned to you in
   optimizations"). Under real-mode 6.00A the function then loses its /Oe/Og shape. The
   original was most likely compiled with **MSC 6.00AX** (profile `msc600ax`, DOS-extended
   `/EM`, run in headless DOSBox-X, 2–4 s per compile), which has no such limit and gives
-  byte-identical objects for every accepted module. When C4203 appears, use
-  `--profile msc600ax` for search and promotion. Do not shape C around the 6.00A budget.
+  byte-identical objects for every accepted module, and it is CONFIRMED (VER-3: module
+  0AD9 is exact only under AX). It is the default profile for new modules. An existing
+  module keeps its pinned profile; switching one to `--profile msc600ax` is fine, because
+  promotion re-verifies all its claims. Do not shape C around the 6.00A budget.
 * The set and order of earlier `extern` declarations can change register tie-breaks and
   commutative operand order: keep a module's declarations in first-use order.
 * Names: identifier spelling does not change code (only the number of identifiers declared

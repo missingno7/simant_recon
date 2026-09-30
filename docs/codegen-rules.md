@@ -17,6 +17,7 @@ REG-1 below is a case where the MSC 5.10 rule is false for 6.00.
 | ASM-1 | VERIFIED | An MSC function whose body is inline `_asm` always gets `mov sp,bp; pop bp`; C spellings of a byte swap never produce `xchg`. `mov ax,[bp+6]; xchg al,ah; pop bp; retf` is therefore not MSC output. | module 1959 reproduced with MASM 5.10 | inline-asm variant +2 bytes; C variants use two byte loads |
 | DATA-1 | VERIFIED | `_DATA` order: a function's string literals are emitted when it is compiled; initialised data definitions are queued and flushed after the *next* function's literals. Globals at the top of a file therefore follow the first function's literals. | module 1A53: `"%s.dat"` (db_Exists) at 39EC, statics at 39F4, then later literals | globals defined after f1 land after f2's literals |
 | VER-2 | VERIFIED | MSC 6.00 and 6.00A also differ under `/Oeg`: module 1A53 `db_LoadObject` is 218 bytes (original) only under 6.00A; 6.00 cross-jumps the `mov dx,[bp-8]` tail (210 bytes). Every accepted module is exact under 6.00A. | db_LoadObject, f_1A28_0224 | msc600: 210 bytes |
+| VER-3 | VERIFIED | The build compiler is the DOS-extended **MSC 6.00AX** (`CL /EM`: C1L, C2L, C3L in protected mode). With the same source, module 0AD9 is a complete exact TU only under `msc600ax`. Real-mode 6.00A and the bound C2L both emit `DoAntLions` at 1001 bytes instead of 1002 (the global allocator is not applied); the other 18 functions are exact under all three. Every accepted C module is also exact under 6.00AX. | DoAntLions (root:0AD9) | msc600a / msc600a-c2l: 1001 bytes |
 | VER-1 | VERIFIED | MSC 6.00 and 6.00A differ in `/Ol` strength reduction of an array walk: 6.00 computes `shl ax,1; add ax,offset arr` from a zero counter, 6.00A stores `offset arr` directly. | — (no accepted `/Ol` function yet) | all other probed flags byte-identical |
 
 ## Observations not yet promoted to rules
@@ -99,5 +100,21 @@ REG-1 below is a case where the MSC 5.10 rule is false for 6.00.
   `int` local it gives `cbw; mov cx,6; imul cx` (22BF:0C38, 0CDD).
 * **The window library (218D, 22BF, and 20E8/23AE compatibly) needs `/Zd`**: some within-group
   relocation orders require its record breaks (22BF:0D81, 218D:052F).
+* **A repeated far-memory char expression gets a byte CSE temporary** (worker simB):
+  `if (BlistT[i]==0) continue; caste=(BlistT[i]&0x78)>>3;` stores `mov [bp-2],al`;
+  an explicit `t = BlistT[i];` does not.
+* **One plain auto removes dead far-address temporary spills**: `if (map[x>>1][y>>1] < s)
+  map[x>>1][y>>1] = s;` alone spills `[bp-4]/[bp-2]`; with `v = map[..][..]` (or any unused
+  `int`) the frame is 4 with no spills (JamScent*, AlarmHere2).
+* **An assignment inside a call argument is evaluated first**: `f(nx, ny = y+Dy8[i])` computes
+  and pushes `ny` first and allocates the Dy8 CONST word first; separate statements
+  compute `nx` first regardless of order (ExitHole, DoSow, AddAntLion, GetNestDir).
+* **Early returns**: separate `if (a) return 0; if (b) return 0;` place the return block first,
+  `||` places it last; `if (f()==0) return 0; return X;` reuses AX from the call.
+* **Materialised boolean**: `if ((a==0x51) == 0)` gives `mov ax,1 / sub ax,ax / or ax,ax`.
+* **Switch**: case blocks are laid out by value, not source order; per-case calls with
+  different constants are cross-jumped into `mov ax,K; jmp` tails.
+* **Frameless /Og functions**: no parameters and no stack locals means no BP frame, only
+  `__aFchkstk` and `push si/di`.
 * **Relocation order** inside a module is target-grouped by RTLink (open, see
   `docs/exe-format.md`).

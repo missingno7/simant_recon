@@ -6,18 +6,18 @@ Validation: **PASS** (2026-09-30)
 |---|---:|
 | known_functions | 1,593 |
 | known_game_functions | 1,490 |
-| exact_c_functions | 552 |
-| exact_c_bytes | 85,729 |
+| exact_c_functions | 563 |
+| exact_c_bytes | 88,948 |
 | exact_asm_bytes | 25 |
 | historical_runtime_bytes_accepted | 12,334 |
 | historical_runtime_bytes_located_unaccepted | 1,044 |
 | rtlink_manager_bytes_unaccepted | 17,065 |
-| data_bytes_accepted | 6,602 |
+| data_bytes_accepted | 6,606 |
 | game_code_span_bytes | 304,748 |
-| unresolved_code_bytes | 218,994 |
-| unresolved_data_bytes | 128,918 |
+| unresolved_code_bytes | 215,775 |
+| unresolved_data_bytes | 128,914 |
 | scaffold_functions | 47 |
-| exact_translation_units | 13 |
+| exact_translation_units | 14 |
 
 Whole executable: NOT_BUILT (no historical link yet; see docs/next-steps.md)
 
