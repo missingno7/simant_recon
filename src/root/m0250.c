@@ -520,9 +520,6 @@ typedef struct {
     int y;
 } Pnt;
 
-extern Pnt far fd_50F6_0508;
-void far f_0250_0F2C(void);
-void far UpdateEdit(void);
 void far f_0250_0F2C(void);
 void far UpdateEdit(void);
 
@@ -535,6 +532,7 @@ struct Rect {
 
 extern struct Rect far fd_50F6_110C;
 extern void _fastcall win_GetObjRect(int obj, struct Rect far *rect);
+extern Pnt far fd_50F6_0508;
 
 int far f_0250_0D10(int dx, int dy)
 {

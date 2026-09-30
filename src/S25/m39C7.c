@@ -4,7 +4,13 @@
  * "map = list = value" stores are written as two statements (the file's own style, e.g.
  * "BlistT[..] = ..; fd_3E1D_8180[x][y] = BlistT[..];"); byte-identical either way, but the
  * extra /Zi line entries put the fourth 52-entry flush before GetBestDir's first GetDis
- * call, as its within-group relocation order requires (FORBID (0CDC,0D54]). */
+ * call, as its within-group relocation order requires (FORBID (0CDC,0D54]).
+ * Worker resI: QueenMoveB (0DAF) writes its y<3 test as one condition (the nested form adds
+ * references to dir, REG-3, and puts dir in SI); its final store is two statements like the
+ * others, and TryMoveDirB (105B) tests its three trophallaxis conditions as nested ifs.  Both
+ * are byte-identical to the one-line forms; their three extra /Zi line entries put the sixth
+ * flush at 12FB (DoNestingB NEED (12E3,131E], FORBID (12FE,132D]) and the ninth outside
+ * GetOutB's FORBID (1CFC,1DC0]. */
 
 extern int far ListIndexB;
 extern int far fd_50F6_0F18;
@@ -510,7 +516,6 @@ done:
     return best;
 }
 
-/* SCAFFOLD BEGIN: o25_39C7_0DAF (QueenMoveB) best draft: the original keeps dir in memory [bp-2] (no SI use); MSC puts it in SI here */
 int far o25_39C7_0DAF(int x, int y, int dirHint)
 {
     int newRow;
@@ -525,12 +530,8 @@ int far o25_39C7_0DAF(int x, int y, int dirHint)
             return 0;
         dir = SRand8();
     }
-    if (y < 3) {
-        if (dir > 5)
-            return 0;
-        if (dir < 3)
-            return 0;
-    }
+    if (y < 3 && (dir > 5 || dir < 3))
+        return 0;
     if (o25_39C7_105B(x, y, dir) != 0) {
         opp = (dirHint ^ 0xfc) & 7;
         newCol = x + fd_3D57_0000[opp];
@@ -540,13 +541,13 @@ int far o25_39C7_0DAF(int x, int y, int dirHint)
         if (index >= 0 && BlistT[index] != 0) {
             BlistX[index] = x;
             BlistY[index] = y;
-            fd_3E1D_8180[x][y] = BlistT[index] = dir + 0x68;
+            BlistT[index] = dir + 0x68;
+            fd_3E1D_8180[x][y] = BlistT[index];
         }
         return 1;
     }
     return 0;
 }
-/* SCAFFOLD END */
 
 extern void far f_0EC1_05D4(int x, int y, int type, int mode, int flag);
 
@@ -635,10 +636,12 @@ int far o25_39C7_105B(int x, int y, int dir)
         return o25_39C7_1C81(x);
     if (fd_3E1D_2180[dx][dy] >= 0x1c)
         return 0;
-    if (fd_3E1D_8180[dx][dy] == 0xff && fd_50F6_1044 && BlistX[fd_50F6_0F18] < 0x80) {
-        fd_3E1D_8180[x][y] = BlistT[fd_50F6_0F18] & 0xf8 | (unsigned char)dir;
-        o22_39C7_19E5(x, y, dir);
-    }
+    if (fd_3E1D_8180[dx][dy] == 0xff)
+        if (fd_50F6_1044)
+            if (BlistX[fd_50F6_0F18] < 0x80) {
+                fd_3E1D_8180[x][y] = BlistT[fd_50F6_0F18] & 0xf8 | (unsigned char)dir;
+                o22_39C7_19E5(x, y, dir);
+            }
     fd_3E1D_8180[dx][dy] = BlistT[fd_50F6_0F18] & 0xf8 | (unsigned char)dir;
     fd_3E1D_8180[x][y] = 0;
     BlistX[fd_50F6_0F18] = (unsigned char)dx;
@@ -649,7 +652,7 @@ int far o25_39C7_105B(int x, int y, int dir)
 
 void far o25_39C7_13EF(int x, int y);
 
-/* SCAFFOLD BEGIN: DoNestingB best draft: 1 byte differs, "mov si,cx" (original) vs "mov si,bx" when loading the Tindex copy before f_1383_099B (register tie-break; no identifier count 0..16 at the top fixes it).  /Zi records: the sixth flush must fall in (12E3,12FE]; it is at 132A here */
+/* SCAFFOLD BEGIN: DoNestingB best draft: 1 byte differs, mov si,cx (original) vs mov si,bx when loading the Tindex copy before f_1383_099B (register tie-break); record order is right with this layout */
 void far DoNestingB(int x, int y, int attr, int caste)
 {
     int dir;
@@ -955,7 +958,7 @@ int far o25_39C7_1BBB(int x, int y)
     return 0;
 }
 
-/* SCAFFOLD BEGIN: o25_39C7_1C81 (GetOutB): bytes exact; within-group relocation order not: the original has no LEDATA boundary in (1CFC,1DC0], this layout puts the ninth /Zi LINNUM flush at 1D33.  records.py --sim DoNestingB: 3..6 more line entries before DoNestingB's "dir = SRand8()" fix both this and DoNestingB's NEED (12E3,131E]/FORBID (12FE,132D] */
+
 int far o25_39C7_1C81(int x)
 {
     int raw;
@@ -986,5 +989,5 @@ int far o25_39C7_1C81(int x)
     o25_39C7_105B(x, 1, SRand8());
     return 0;
 }
-/* SCAFFOLD END */
+
 

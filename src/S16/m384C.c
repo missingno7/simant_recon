@@ -42,7 +42,7 @@ extern void _fastcall win_LockWin(int win);
 extern void _fastcall win_SetObjBitmap(int obj, int bitmap);
 extern int near g_3DB2;
 extern void _fastcall f_22BF_00AA(int obj, struct Rect far *r);
-extern int far fd_50F6_3942;
+extern struct Rect far fd_50F6_393C;
 extern void _fastcall f_22BF_00DD(int obj, struct Rect far *r);
 extern void far win_Open(int win);
 extern void _fastcall win_GetObjRect(int obj, struct Rect far *rect);
@@ -81,7 +81,7 @@ void far DrawSimPayoff(void)
         f_22BF_00AA(0x1a01, &saved);
         bounds = saved;
         bounds.left = 4;
-        bounds.top = fd_50F6_3942 + 3;
+        bounds.top = fd_50F6_393C.bottom + 3;
         f_22BF_00DD(0x1a01, &bounds);
     }
     win_Open(0x1a00);

@@ -4126,12 +4126,13 @@
     }
    },
    "lang": "c",
+   "source_origin": "hand-written C",
    "extent": {
     "start": 230592,
     "end": 232355
    },
    "source": "src/S16/m384C.c",
-   "source_sha256": "b88c68ab12c6fa130e2e64e78ac637cf527c488f7a4f17a64b91dd5b18a1ab5c",
+   "source_sha256": "9e3f4c34c560ca4d93346a43bf383f4e6cc3549ec6878b6194c974164d49a540",
    "claims": [
     {
      "name": "DrawSimPayoff",
@@ -4171,7 +4172,7 @@
     }
    ],
    "scaffold": [],
-   "object_sha256": "1d3f946cb023b0d5606847ba237b62cbee805da933f761764822075e72a16519"
+   "object_sha256": "4483171e4ace00d4a4edbe2af749c5a910af3ee6e9b51be5156f8a9b5097eee1"
   },
   "S17:384C": {
    "unit": "S17",
@@ -5766,7 +5767,7 @@
    "lang": "c",
    "source_origin": "hand-written C",
    "source": "src/S25/m39C7.c",
-   "source_sha256": "96853b2f3463877b7a660109afb8fe72a0f8494889d5b3d6bb3f827092d7675c",
+   "source_sha256": "4ba75691c9457c7ed71f3428fc1894d8f737b923089a17142f09fd1a5ddb2e60",
    "claims": [
     {
      "name": "o25_39C7_0000",
@@ -5964,7 +5965,8 @@
      "target_sha256": "68c57be27dc32d892a0885d750c09f118b892033278db1277ad62c28f9ca206b",
      "kind": "C",
      "provenance": "EXACT_NATURAL",
-     "reloc_order": "EXACT"
+     "reloc_order": "EXACT",
+     "layout_inferred": "three nested ifs instead of one && condition (byte-identical); +2 /Zi line entries put the sixth flush at 12FB and the ninth outside GetOutB FORBID (1CFC,1DC0]"
     },
     {
      "name": "o25_39C7_13EF",
@@ -6054,15 +6056,36 @@
      "provenance": "EXACT_NATURAL",
      "reloc_order": "GROUPED",
      "layout_inferred": "seven 'map = list = value' chained stores written as two statements (byte-identical, file's own style); the extra /Zi line entries move the fourth 52-entry LINNUM flush from 0CF5 to 0CCD, out of GetBestDir's forbidden interval (0CDC,0D54] (worker resH)"
+    },
+    {
+     "name": "o25_39C7_0DAF",
+     "unit": "S25",
+     "seg": 14791,
+     "off": 3503,
+     "size": 275,
+     "target_sha256": "3b7e1f31d72fc416f4cffceb547cb2d39353b386aef32ae8a0946d1bcc0dbbbd",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL",
+     "layout_inferred": "final store written as two statements (file style); gives one /Zi line entry needed for DoNestingB/GetOutB record breaks",
+     "reloc_order": "GROUPED"
+    },
+    {
+     "name": "o25_39C7_1C81",
+     "unit": "S25",
+     "seg": 14791,
+     "off": 7297,
+     "size": 342,
+     "target_sha256": "05804e59cdf939762ba32d490ed06ac33ab0f44a2659f181f1f6f9b3df5f6b60",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL",
+     "reloc_order": "GROUPED"
     }
    ],
    "scaffold": [
     "DoDigInB",
-    "DoNestingB",
-    "o25_39C7_0DAF",
-    "o25_39C7_1C81"
+    "DoNestingB"
    ],
-   "object_sha256": "39c3840f56c4a754ede6240cbf18224cab8d5dab77ac1f4a42b88fdf2130d42a"
+   "object_sha256": "f63b07380055de0e21c9f4e7c56dce4bbf6ff86501d6431a21dc2391abab3661"
   },
   "S25:3BA4": {
    "unit": "S25",
@@ -6267,12 +6290,13 @@
     }
    },
    "lang": "c",
+   "source_origin": "hand-written C",
    "extent": {
     "start": 236656,
     "end": 238892
    },
    "source": "src/S26/m39C7.c",
-   "source_sha256": "29ee817b118bf174524f91b0b15b44a2badd467bd28491b7a97d838443ab75d1",
+   "source_sha256": "fb4938daa334a8e9f929b44a542392f47fc7c1a654ca87f303ee80528b34c4c4",
    "claims": [
     {
      "name": "o26_39C7_0000",
@@ -6320,7 +6344,7 @@
     }
    ],
    "scaffold": [],
-   "object_sha256": "008d5f994dbfb0d002127b726c8185b4473fcd0a01c2dd090e2a717b243c6f20"
+   "object_sha256": "1d3ef1a273eb9196c8f806432f7c92a11a003e66ab598fde261e236c5afc850e"
   },
   "data:3D57": {
    "unit": "data",
@@ -6410,6 +6434,66 @@
    "claims": [],
    "scaffold": [],
    "object_sha256": "e4ebada196867a877340cdeb80bc9ec0becb6ccfb4ac06b4ae10b0b1b20058f2"
+  },
+  "data:55B3@0064": {
+   "unit": "data",
+   "seg": 21939,
+   "profile": "msc600ax",
+   "flags": [
+    "/AL",
+    "/Os",
+    "/Oe",
+    "/Og",
+    "/Zi"
+   ],
+   "placements": {
+    "_DATA": {
+     "seg": 21939,
+     "off": 100,
+     "size": 84
+    }
+   },
+   "lang": "c",
+   "origin": 100,
+   "origin_evidence": "DGROUP 0064 starts a new object: its far pointer to the version stamp 0042 is an external-symbol relocation (S27 #365, a target group of its own), so 0042-0063 is another file. It ends at 00B8: the _DATA-segment fixup of fd_55B3_00B4 (S27 #1049) follows every entry of the 00B8-1811 object (#570-#1048) inside the program's _DATA group, where objects appear in descending address order (7DA8.., 205F, 1C62, 19A9, 15F8, 00B8-object, 00B4), so it is an earlier object than 00B8-1811. No code module references 0064-00B7 through its own segment; no code module links before root:0000. Whether 0064 (pointer) and 0068-00B7 (song record) are one file or two is not decidable from the image (no fixup or fill between them); taken as one.",
+   "source_origin": "hand-written C",
+   "link_after": "data:55B3@0042",
+   "kind": "data",
+   "source": "src/data/d55B3_0064.c",
+   "source_sha256": "1f66577e566a3b7b1507e47f27892279f17057a6db449f591223a465d5184cc3",
+   "claims": [],
+   "scaffold": [],
+   "object_sha256": "18670fc99ccafa9be1192e129c9ea2168716d44edeae7254bc8c5ce6e36db88c"
+  },
+  "data:55B3@00B8": {
+   "unit": "data",
+   "seg": 21939,
+   "profile": "msc600ax",
+   "flags": [
+    "/AL",
+    "/Os",
+    "/Oe",
+    "/Og",
+    "/Zi"
+   ],
+   "placements": {
+    "_DATA": {
+     "seg": 21939,
+     "off": 184,
+     "size": 5978
+    }
+   },
+   "lang": "c",
+   "origin": 184,
+   "origin_evidence": "DGROUP 00B8-1811 is one object: the nine instrument tables (0C42+k*150h) point to the MIDI maps (00B8-0201), FM patches (0202-0341) and samples (0342-0A81) through _DATA segment fixups (S27 #570-#1048, one run inside the program's _DATA group), so targets and tables are defined in one file; 00B8 itself is such a target. It follows the 0064 object (fd_55B3_00B4's fixup #1049 comes after this run; objects appear in descending address order in that group) and ends where root:0000's _DATA starts (1812). The compiled object reproduces the bytes and the within-group relocation order EXACTLY (LEDATA record breaks at 0E34-0E38, 11E2-11E6, 1584-158E). No code module references it through its own segment (277E, 295C use external symbols and have _DATA elsewhere); no code module links before root:0000.",
+   "source_origin": "hand-written C",
+   "link_after": "data:55B3@0064",
+   "kind": "data",
+   "source": "src/data/d55B3_00B8.c",
+   "source_sha256": "d04646a28691ff05ad93a50c5e7142405ab64932f875f2d2a4d10d04a4566f3d",
+   "claims": [],
+   "scaffold": [],
+   "object_sha256": "d3402e98622841a43f498c755d46c7151f6ff0da7c91b869ae2bb783816e2774"
   },
   "root:0000": {
    "unit": "root",
@@ -8059,7 +8143,7 @@
    "lang": "c",
    "source_origin": "hand-written C",
    "source": "src/root/m0250.c",
-   "source_sha256": "cdfaec1e0a00a039911e7028bb65e890fa1daa1e31732b36d70c4cf24a32261e",
+   "source_sha256": "30ef5d233d709b7af5267b291409e079cc7bd753839393de713b99d79a5e3604",
    "claims": [
     {
      "name": "f_0250_0CF6",
@@ -8566,10 +8650,22 @@
      "kind": "C",
      "provenance": "EXACT_NATURAL",
      "reloc_order": "GROUPED"
+    },
+    {
+     "name": "BalloonIsVisible",
+     "unit": "root",
+     "seg": 592,
+     "off": 16933,
+     "size": 101,
+     "target_sha256": "1f21a1300251dcd9f2024c1c7e314e8422bc40fbe8d4f3819618b054eb268495",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL",
+     "layout_inferred": "extern Pnt far fd_50F6_0508 declared after the Rect/win_GetObjRect declarations (still before its first use in f_0250_0D10): six identifiers before it make BalloonIsVisible exact (idscan: +3..15 at the old position)",
+     "reloc_order": "EXACT"
     }
    ],
    "scaffold": [],
-   "object_sha256": "aaa1f5e3ef08106cc28c3adf22467b855ddae4b03ba85bc12a35f5b55eaef461"
+   "object_sha256": "f96de3fdcfbfb9f3ab4bbcd05dcfa40de6acbbea99d2e2a1ec0ff3bbdccb9b1c"
   },
   "root:075B": {
    "unit": "root",
@@ -8736,12 +8832,13 @@
     }
    },
    "lang": "c",
+   "source_origin": "hand-written C",
    "extent": {
     "start": 31104,
     "end": 35149
    },
    "source": "src/root/m0798.c",
-   "source_sha256": "e2848b0c7f8e4ecb249659692d4f74139f9889953fa6a14b0476ecee5b9bd8b3",
+   "source_sha256": "ecf807dc3159f583f6ee3ea8a9f5422650a64bb557d4551e9c97b5dcc7b6a1b8",
    "claims": [
     {
      "name": "InitTriVars",
@@ -8944,7 +9041,7 @@
     }
    ],
    "scaffold": [],
-   "object_sha256": "95a80f73865644f1afdcb8cb7beba58d0304838358f29c599b3693b1dcff85a3"
+   "object_sha256": "e20b694a0d5cc57afc9144aa2ecaecb01b8a91cc269eaa213ca1f53c96d40405"
   },
   "root:0894": {
    "unit": "root",
@@ -18944,12 +19041,13 @@
     }
    },
    "lang": "c",
+   "source_origin": "hand-written C",
    "extent": {
     "start": 150194,
     "end": 151460
    },
    "source": "src/root/m24AB.c",
-   "source_sha256": "48f0cee401a972dc50a7e576a9897536cb1c1156c522263aa37af97542940c1f",
+   "source_sha256": "1d263c6e1f242981d7c3e37d839dc481dc75deed45d7d1bcaaa075cad124de7f",
    "claims": [
     {
      "name": "f_24AB_0002",
@@ -19052,7 +19150,7 @@
     }
    ],
    "scaffold": [],
-   "object_sha256": "d2e2a4f7975fee3abfedef2c999a04cab6ea31e4f28595dc6e8f04048cbb2c08"
+   "object_sha256": "321c164858dc9aa15bfa80f274b08f4fe375d3848b2d08fcebe505858a305cd1"
   },
   "root:24FA": {
    "unit": "root",

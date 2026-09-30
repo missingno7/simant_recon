@@ -390,7 +390,7 @@ void far win_CasteControlClosed(void)
 
 extern int near g_3DB2;
 extern void far f_24AB_02AD(int font);
-extern int far fd_50F6_0B12[3];
+extern int far fd_50F6_0B12[6];
 extern int far fd_50F6_0AEC;
 extern void far win_PrintfAtObj(int obj, char far *format, ...);
 extern void far f_22BF_0C38(int obj);

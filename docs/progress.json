@@ -4,8 +4,8 @@
  "oracle_sha256": "aa0596c6766322a8229ee3c36e57048c92adc82d50fbe2ef37afb8b85fcf4f11",
  "known_functions": 1730,
  "known_game_functions": 1640,
- "exact_c_functions": 1215,
- "exact_c_bytes": 216389,
+ "exact_c_functions": 1217,
+ "exact_c_bytes": 217006,
  "exact_asm_functions": 367,
  "exact_asm_bytes": 50441,
  "exact_code_segment_data_bytes": 1481,
@@ -14,14 +14,16 @@
  "historical_runtime_bytes_located_unaccepted": 0,
  "runtime_functions_known": 90,
  "runtime_functions_owned": 90,
- "owned_functions": 1672,
+ "owned_functions": 1674,
  "rtlink_manager_bytes_unaccepted": 17001,
- "data_bytes_accepted": 105246,
+ "data_bytes_accepted": 111308,
  "far_data_bytes_accepted": 77846,
  "modules_data_only": [
   "data:3D57",
   "data:3E1D",
-  "data:55B3@0042"
+  "data:55B3@0042",
+  "data:55B3@0064",
+  "data:55B3@00B8"
  ],
  "historical_runtime_data_bytes_accepted": 1559,
  "data_link_fill_bytes": 64,
@@ -29,12 +31,12 @@
  "far_bss_zero_fill_bytes": 19408,
  "far_bss_sizes_verified_bytes": 0,
  "far_bss_sizes_pinned_bytes": 180,
- "far_bss_sizes_consistent_bytes": 4258,
- "far_bss_sizes_unverified_bytes": 14970,
+ "far_bss_sizes_consistent_bytes": 4282,
+ "far_bss_sizes_unverified_bytes": 14946,
  "bss_bytes_placed": 496,
  "game_code_span_bytes": 304798,
- "unresolved_code_bytes": 36487,
- "unresolved_data_bytes": 9243,
+ "unresolved_code_bytes": 35870,
+ "unresolved_data_bytes": 3181,
  "overlay_coverage": {
   "S00": {
    "bytes": 19696,
@@ -138,7 +140,7 @@
   },
   "S25": {
    "bytes": 14592,
-   "claimed": 10031
+   "claimed": 10648
   },
   "S26": {
    "bytes": 2240,
@@ -146,17 +148,17 @@
   }
  },
  "root_claimed_bytes": 156278,
- "scaffold_functions": 39,
+ "scaffold_functions": 37,
  "exact_translation_units": 85,
  "claims_within_group_order_pending": 6,
  "inplace_draft_functions": 18,
  "claims_exact_steered": 18,
  "exact_c_bytes_in_complete_tus": 114834,
- "exact_c_bytes_in_partial_modules": 101555,
+ "exact_c_bytes_in_partial_modules": 102172,
  "exact_c_bytes_steered": 8119,
- "exact_c_bytes_layout_inferred": 14092,
+ "exact_c_bytes_layout_inferred": 14674,
  "exact_c_bytes_within_group_pending": 1696,
- "claims_layout_inferred": 12,
+ "claims_layout_inferred": 14,
  "modules_layout_inferred": [
   "S14:384C",
   "root:1383",
@@ -165,11 +167,11 @@
  "asm_transcribed_bytes": 51922,
  "exact_asm_bytes_genuine": 50441,
  "exact_asm_bytes_workaround": 0,
- "data_bytes_opaque_unmarked": 4383,
+ "data_bytes_opaque_unmarked": 5161,
  "runtime_oracle_derived_words": 244,
  "released_claims_unowned": [],
  "modules_origin_unevidenced": [],
- "manifest_sha256": "230a352c82c2364cc9f73a49f00c8055f362017b70d5d005ec7821a7f0362fbd",
+ "manifest_sha256": "c5903d7c2f282f394680e47b317d75ceb659dd2609ebf8968cad94aaf7c747dc",
  "complete_tus_relocation_order_proven": 84,
  "complete_tus_cross_function_order_pending": [
   "S00:31AD"

@@ -58,7 +58,7 @@ extern void _fastcall win_LockWin(int win);
 extern struct Win far * _fastcall win_WinAddr(int win);
 extern void _fastcall win_UnlockWin(int win);
 extern struct Obj far * _fastcall win_ObjAddr(int obj);
-extern int far fd_50F6_3942;
+extern struct Rect far fd_50F6_393C;
 extern int near g_3DB4;
 extern int near g_3DB2;
 extern struct Rect far * _fastcall win_WinRectAddr(int win);
@@ -104,7 +104,7 @@ void _fastcall o26_39C7_0000(int win)
     } else {
         w->zoomRect = *(struct Rect far *)&o->x;
         r.left = 0;
-        r.top = fd_50F6_3942;
+        r.top = fd_50F6_393C.bottom;
         o26_39C7_022F(win, 0, &r);
         w->rect = r;
         r.bottom = g_3DB4;
@@ -179,7 +179,7 @@ void _fastcall o26_39C7_022F(int win, int mode, struct Rect far *r)
             r->right - r->left < g_3DB2) {
             if (r->right >= 0 && r->right - r->left >= w->minWidth && !((w->flags & 0x1000) && r->left < 0)) {
                 if (r->top <= g_3DB4 && !((w->flags & 0x1000) && r->bottom > g_3DB4)) {
-                    if (r->top > fd_50F6_3942 && r->bottom - r->top >= w->minHeight)
+                    if (r->top > fd_50F6_393C.bottom && r->bottom - r->top >= w->minHeight)
                         done = 1;
                     else
                         dy++;

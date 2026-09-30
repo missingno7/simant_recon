@@ -20527,11 +20527,6 @@
    "off": 558,
    "grounding": "UpdateCasteWindow (root:0798 (control-triangle unit)): far address 50F6:022E output point of SetTriLatPoint"
   },
-  "fd_50F6_0230": {
-   "seg": 20726,
-   "off": 560,
-   "grounding": "win_DrawCasteWindow (root:0798 (control-triangle unit)): es:[0230] y of the caste knob point (022E+2)"
-  },
   "fd_50F6_0232": {
    "seg": 20726,
    "off": 562,
@@ -20666,11 +20661,6 @@
    "seg": 20726,
    "off": 856,
    "grounding": "UpdateModeWindow (root:0798 (control-triangle unit)): far address 50F6:0358 output point of SetTriLatPoint"
-  },
-  "fd_50F6_035A": {
-   "seg": 20726,
-   "off": 858,
-   "grounding": "win_DrawModeWindow (root:0798 (control-triangle unit)): es:[035A] y of the mode knob point (0358+2)"
   },
   "fd_50F6_035C": {
    "seg": 20726,
@@ -22347,10 +22337,10 @@
    "off": 18954,
    "grounding": "f_218D_000C: rep movsw 8 words 50F6:49FA -> 4A0A (previous click event for double-click detection; +0Ch=4A16, +6=4A10)"
   },
-  "fd_50F6_4A12": {
+  "fd_50F6_4A1A": {
    "seg": 20726,
-   "off": 18962,
-   "grounding": "f_24AB_02AD: mov es,[8A40] (CONST 50F6); mov ax,es:[si+4A12h]/dx,es:[si+4A14h] with si=4*font -> far array of font pointers (Win16 font_SetFont fonts[]); font_InitFonts stores [2..5] (worker rootF)"
+   "off": 18970,
+   "grounding": "font pointer table (Win16 fonts[10], 40 bytes 4A1A-4A41, tiles exactly to fd_50F6_4A42): font_InitFonts (root:24AB) stores font1..font4 at es:[4A1A..4A29]; f_24AB_02AD reads es:[si+4A12h] with si=4*font for font 2..5 (fonts[font-2]); 4A12-4A19 is the tail of the 16-byte event record fd_50F6_4A0A (f_218D_000C rep movsw cx=8 from 49FA to 4A0A), so no variable starts at 4A12"
   },
   "fd_50F6_4A42": {
    "seg": 20726,
@@ -22486,6 +22476,11 @@
    "seg": 21939,
    "off": 5490,
    "grounding": "f_277E_*: mov ax,1572h; mov cx,SEG (relocated) pushed to f_277E_010A; 56 x 6-byte voice table; separate symbol because f_277E_01FA/07FF do not cross-jump the two segment fixups (distinct targets)"
+  },
+  "fd_55B3_16C2": {
+   "seg": 21939,
+   "off": 5826,
+   "grounding": "DGROUP _DATA 16C2-1811: ninth 56-entry instrument table {int kind; void far *p} (kinds 1 DAC samples, 3 PSG), stride 150h after fd_55B3_0C42..1572; its 55 far pointers are _DATA-segment fixups of the 00B8-1811 object (S27 relocations #950-#1000 region); no code reference found"
   },
   "fd_55B3_19BE": {
    "seg": 21939,

@@ -88,7 +88,7 @@ Handle far f_24AB_0002(char far *text)
 
 extern void (far * near g_9130)(void);
 extern void (far * near g_912C)(void);
-extern void far *fd_50F6_4A12[];
+extern void far *fd_50F6_4A1A[];
 
 void far f_24AB_02AD(int font)
 {
@@ -110,7 +110,7 @@ void far f_24AB_02AD(int font)
     default:
         if (font > 5 || font < 0)
             font = 2;
-        fd_55B3_65A4 = fd_50F6_4A12[font];
+        fd_55B3_65A4 = fd_50F6_4A1A[font - 2];
         break;
     }
 }
@@ -191,8 +191,8 @@ extern void far * far font_ReadFont(char far *name);
 void far font_InitFonts(void)
 {
     fd_50F6_392C.bits = g_5ABE;
-    fd_50F6_4A12[2] = font_ReadFont("font1");
-    fd_50F6_4A12[3] = font_ReadFont("font2");
-    fd_50F6_4A12[4] = font_ReadFont("font3");
-    fd_50F6_4A12[5] = font_ReadFont("font4");
+    fd_50F6_4A1A[0] = font_ReadFont("font1");
+    fd_50F6_4A1A[1] = font_ReadFont("font2");
+    fd_50F6_4A1A[2] = font_ReadFont("font3");
+    fd_50F6_4A1A[3] = font_ReadFont("font4");
 }
