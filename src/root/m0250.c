@@ -510,13 +510,355 @@ void far f_0250_0C0F(struct Event far *event)
     f_1E57_0362();
 }
 
-void far f_0250_0D10(int a, int b);
+int far f_0250_0D10(int a, int b);
 
 void far f_0250_0CF6(int a, int b)
 {
     f_0250_0D10(a, b);
 }
 
+typedef struct {
+    int x;
+    int y;
+} Pnt;
+
+extern Pnt far fd_50F6_0508;
+void far f_0250_0F2C(void);
+void far f_0250_0E9D(void);
+void far f_0250_0F2C(void);
+void far f_0250_0E9D(void);
+
+struct Rect {
+    int left;
+    int top;
+    int right;
+    int bottom;
+};
+
+extern struct Rect far fd_50F6_110C;
+extern void _fastcall win_GetObjRect(int obj, struct Rect far *rect);
+
+int far f_0250_0D10(int dx, int dy)
+{
+    unsigned long error;
+    int i;
+    unsigned long fraction;
+    int unused;
+    int yStep;
+    int xStep;
+    int xDistance;
+    int yDistance;
+
+    if (dx == 0) {
+        if (dy == 0)
+            return 0;
+    }
+    xDistance = dx;
+    xStep = 1;
+    yStep = 1;
+    yDistance = dy;
+    error = 0;
+    if (xDistance < 0) {
+        xDistance = -xDistance;
+        xStep = -1;
+    }
+    if (yDistance < 0) {
+        yDistance = -yDistance;
+        yStep = -1;
+    }
+    if (yDistance >= xDistance) {
+        fraction = ((unsigned long)xDistance << 16) / yDistance;
+        for (i = 0; i < yDistance; i++) {
+            fd_50F6_0508.y += yStep;
+            error += fraction;
+            if ((error >> 16) & 1) {
+                fd_50F6_0508.x += xStep;
+                error ^= 0x10000L;
+            }
+        }
+        f_0250_0F2C();
+        f_0250_0E9D();
+        return 1;
+    } else {
+        fraction = ((unsigned long)yDistance << 16) / xDistance;
+        for (i = 0; i < xDistance; i++) {
+            fd_50F6_0508.x += xStep;
+            error += fraction;
+            if ((error >> 16) & 1) {
+                fd_50F6_0508.y += yStep;
+                error ^= 0x10000L;
+            }
+        }
+        f_0250_0F2C();
+        f_0250_0E9D();
+        return 1;
+    }
+}
+
+void far f_0250_0E15(void)
+{
+    win_GetObjRect(4, &fd_50F6_110C);
+    fd_50F6_10E0 = (fd_50F6_110C.right - fd_50F6_110C.left) / g_19BE;
+    fd_50F6_10DE = (fd_50F6_110C.bottom - fd_50F6_110C.top) / g_19C0 + 1;
+    f_0250_05CB();
+    g_19CE = 1;
+    f_0250_0F2C();
+}
+
+extern void far f_20E8_04B6(int win, ...);
+
+void far f_0250_0E70(void)
+{
+    f_20E8_04B6(0);
+}
+
+void far f_0250_0E81(void)
+{
+    f_0250_05CB();
+    f_0250_0E9D();
+}
+
+void far f_0250_0E91(void)
+{
+    f_0250_0E81();
+}
+
+extern int _fastcall f_22BF_09B0(int win);
+void far f_0250_13A6(void);
+void far f_0250_1583(void);
+void far f_0250_13A6(void);
+void far f_0250_1583(void);
+
+void far f_0250_0E9D(void)
+{
+    if (f_22BF_09B0(0)) {
+        f_1E57_0174(0);
+        f_0250_13A6();
+        f_0250_1583();
+        f_1E57_0362();
+    }
+}
+
+void far f_0250_0EC6(void)
+{
+    f_0250_0E9D();
+}
+
+void far f_0250_0ED2(void)
+{
+}
+
+extern int far fd_50F6_0EAC;
+extern int far fd_50F6_104C;
+extern void _fastcall win_SetColorFromObjNum(int obj);
+extern void _fastcall win_DrawBitMapAtObjNum(int obj, int id);
+
+void far f_0250_0EDA(int flags)
+{
+    int id;
+
+    if (flags & 2) {
+        f_0250_0E15();
+        f_0250_13A6();
+        f_0250_0E15();
+        if (fd_50F6_0EAC == 3)
+            id = fd_50F6_104C + 0x13ec;
+        else
+            id = 0x13f3;
+        win_SetColorFromObjNum(7);
+        win_DrawBitMapAtObjNum(7, id);
+    }
+}
+
+void far f_0250_0F2C(void)
+{
+    int limit;
+    int ylimit;
+
+    ylimit = 0x40;
+    switch (fd_50F6_032E) {
+    case 0:
+    case 1:
+        limit = 0x80;
+        break;
+    default:
+        limit = 0x40;
+    }
+    if (fd_50F6_0508.x < 0)
+        fd_50F6_0508.x = 0;
+    else if (fd_50F6_0508.x + fd_50F6_10E0 > limit)
+        fd_50F6_0508.x = limit - fd_50F6_10E0;
+    if (fd_50F6_0508.y < 0)
+        fd_50F6_0508.y = 0;
+    else if (fd_50F6_0508.y + fd_50F6_10DE > ylimit)
+        fd_50F6_0508.y = ylimit - fd_50F6_10DE;
+}
+
+void far f_0250_0FC4(int x, int y)
+{
+    int width;
+
+    switch (fd_50F6_032E) {
+    case 0:
+    case 1:
+        width = 0x80;
+        break;
+    default:
+        width = 0x40;
+    }
+    f_0250_0CF6(x - fd_50F6_10E0 / 2 - fd_50F6_0508.x, y - fd_50F6_10DE / 2 - fd_50F6_0508.y);
+    f_0250_0F2C();
+}
+
+extern int far fd_3D57_07BE;
+extern unsigned char far fd_3E1D_D09F[64][32];
+extern unsigned char far fd_3E1D_E09F[64][32];
+extern unsigned char far fd_3E1D_E89F[64][32];
+extern unsigned char far fd_3E1D_F09F[64][32];
+extern unsigned char far fd_4DA7_0000[64][32];
+extern unsigned char far MapA[128][64];
+extern unsigned char far LifeA[128][64];
+extern int far fd_50F6_049A;
+extern int far fd_50F6_04C2;
+extern int far fd_50F6_0502;
+extern int far fd_50F6_0496;
+extern unsigned char far MapB[64][64];
+extern unsigned char far LifeB[64][64];
+extern unsigned char far MapR[64][64];
+extern unsigned char far LifeR[64][64];
+
+void far f_0250_1018(int x, int y)
+{
+    int v;
+    int mx;
+    int my;
+
+    mx = fd_50F6_0508.x + x;
+    my = fd_50F6_0508.y + y;
+    if (my > 0x3f) {
+        mx += 0x40;
+        my &= 0x3f;
+    }
+    g_94E4 = 0;
+    g_9126 = 0;
+    switch (fd_50F6_032E) {
+    case 0:
+    case 1:
+        mx &= 0x7f;
+        switch (fd_3D57_07BE) {
+        case 0:
+            v = fd_3E1D_D09F[mx >> 1][my >> 1];
+            break;
+        case 1:
+            v = fd_3E1D_E09F[mx >> 1][my >> 1];
+            break;
+        case 2:
+            v = fd_3E1D_E89F[mx >> 1][my >> 1];
+            break;
+        case 3:
+            v = fd_3E1D_F09F[mx >> 1][my >> 1];
+            break;
+        case 4:
+            v = fd_4DA7_0000[mx >> 1][my >> 1];
+            break;
+        default:
+            goto noscent;
+        }
+        if (v > 0x10)
+            g_94E4 = ((v >> 4) & 0x1f) - 0x10;
+        else
+            g_94E4 = 0;
+noscent:
+        if (g_94E4 == 0)
+            g_94E4 = MapA[mx][my];
+        v = LifeA[mx][my];
+        if (v == 0)
+            return;
+        if (v == 0xff) {
+            g_9126 = fd_50F6_049A + fd_50F6_04C2 + 0x380;
+            if (fd_50F6_04C2 < 8)
+                g_9126 += fd_50F6_0502;
+            else
+                g_9126 += fd_50F6_0496;
+        } else if (v == 0xfe)
+            g_9126 = fd_50F6_049A + fd_50F6_0496 + fd_50F6_04C2 + 0x388;
+        else
+            g_9126 = v + 0x100;
+        break;
+    case 2:
+        mx &= 0x3f;
+        g_94E4 = MapB[mx][my] - 0x70;
+        v = LifeB[mx][my];
+        if (v == 0)
+            return;
+        switch (v) {
+        case 0xfe:
+            g_9126 = fd_50F6_049A + fd_50F6_0496 + fd_50F6_04C2 + 0x308;
+            break;
+        case 0xff:
+            g_9126 = fd_50F6_049A + fd_50F6_04C2 + 0x300;
+            if (fd_50F6_04C2 < 8)
+                g_9126 += fd_50F6_0502;
+            else
+                g_9126 += fd_50F6_0496;
+            break;
+        default:
+            g_9126 = v + 0x200;
+        }
+        break;
+    case 3:
+        mx &= 0x3f;
+        g_94E4 = MapR[mx][my] - 0x70;
+        v = LifeR[mx][my];
+        if (v == 0)
+            return;
+        switch (v) {
+        case 0xfe:
+            g_9126 = fd_50F6_049A + fd_50F6_0496 + fd_50F6_04C2 + 0x308;
+            break;
+        case 0xff:
+            g_9126 = fd_50F6_049A + fd_50F6_04C2 + 0x300;
+            if (fd_50F6_04C2 < 8)
+                g_9126 += fd_50F6_0502;
+            else
+                g_9126 += fd_50F6_0496;
+            break;
+        default:
+            g_9126 = v + 0x200;
+        }
+        break;
+    }
+}
+
+extern unsigned char far fd_50F6_1114[30 * 40];
+
+void far f_0250_129E(int x, int y)
+{
+    int ay;
+    int i;
+
+    ay = fd_50F6_0508.y + y;
+    if (x < 0 || y < 0 || x >= 40 || y >= 30)
+        return;
+    if (ay > 0x3f)
+        Punt("Y>MAXAY");
+    f_0250_1018(x, y);
+    i = y * 40 + x;
+    if (fd_50F6_15C4[0][i] == -2) {
+        fd_50F6_15C4[0][i]++;
+        return;
+    }
+    if (fd_50F6_15C4[0][i] != g_9126 || fd_50F6_1114[i] != g_94E4 || (y == 0 && g_19CE != 0)) {
+        if (g_9126)
+            f_0250_0721(g_19BE * x + fd_50F6_110C.left, g_19C0 * y + fd_50F6_110C.top);
+        else
+            f_0250_0ADB(g_19BE * x + fd_50F6_110C.left, y * g_19C0 + fd_50F6_110C.top);
+        fd_50F6_15C4[0][i] = g_9126;
+        fd_50F6_1114[i] = g_94E4;
+    }
+}
+
 /* SCAFFOLD BEGIN: context only, not reconstruction */
-void far f_0250_0D10(int a, int b) { }
+void far f_0250_13A6(void) { }
+void far f_0250_1583(void) { }
 /* SCAFFOLD END */

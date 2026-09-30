@@ -582,6 +582,174 @@
    ],
    "object_sha256": "ce1b5a0047fb9ebdd26a2511386c95d51c626e9b89b4c16a39c640232002d464"
   },
+  "S22:39C7": {
+   "unit": "S22",
+   "seg": 14791,
+   "profile": "msc600ax",
+   "flags": [
+    "/AL",
+    "/Os",
+    "/Oe",
+    "/Og",
+    "/Zd"
+   ],
+   "placements": {
+    "CONST": {
+     "seg": 21939,
+     "off": 34738,
+     "size": 98
+    },
+    "_DATA": {
+     "seg": 21939,
+     "off": 11730,
+     "size": 34
+    }
+   },
+   "lang": "c",
+   "source": "src/S22/m39C7.c",
+   "source_sha256": "0fe24126f2f2169311375d3a1ec62c515fe6cb486cb3140c8205626774653778",
+   "claims": [
+    {
+     "name": "processEdit",
+     "unit": "S22",
+     "seg": 14791,
+     "off": 0,
+     "size": 1029,
+     "target_sha256": "c5fc0fd6fc82ada0286974afdf8b1a364c217f10eb65fe769ca817285526fa2a",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL",
+     "reloc_order": "GROUPED"
+    },
+    {
+     "name": "DoLaserFire",
+     "unit": "S22",
+     "seg": 14791,
+     "off": 1029,
+     "size": 705,
+     "target_sha256": "a3a243bfc3e2593e9315e236ebe7a215324a3600a9e8bb2ee7b9aef8e5118e2e",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL",
+     "reloc_order": "GROUPED"
+    },
+    {
+     "name": "processSpider",
+     "unit": "S22",
+     "seg": 14791,
+     "off": 1734,
+     "size": 311,
+     "target_sha256": "7aa177f4e8585a66af93fd5429214b094cefa34b169683ca267006993022d0bb",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL",
+     "reloc_order": "GROUPED"
+    },
+    {
+     "name": "ResetYellowVars",
+     "unit": "S22",
+     "seg": 14791,
+     "off": 2045,
+     "size": 140,
+     "target_sha256": "3ee79a15497d33c8f5e8050926b9b82b24f6e03e61659a9bfeb392e9459ce974",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL",
+     "reloc_order": "EXACT"
+    },
+    {
+     "name": "SetGoalsY",
+     "unit": "S22",
+     "seg": 14791,
+     "off": 2185,
+     "size": 119,
+     "target_sha256": "548e9951c45ddb30f8bc8537346740a01cc059e4ae0221c3434e6e95f7fc36cd",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL",
+     "reloc_order": "EXACT"
+    },
+    {
+     "name": "YellowBirth",
+     "unit": "S22",
+     "seg": 14791,
+     "off": 2304,
+     "size": 1057,
+     "target_sha256": "909be7b3a0343ad2a27a54b295a37241b15e2e0a06f0c53a84e178e37865d630",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL",
+     "reloc_order": "WITHIN_GROUP_PENDING"
+    }
+   ],
+   "scaffold": [
+    "DoTroph",
+    "LionDialog",
+    "SetAlarmDropState",
+    "SpecialXfer",
+    "YellowCommand",
+    "YellowCommandKey",
+    "YellowDeath",
+    "YellowDialog",
+    "YellowHelp"
+   ],
+   "object_sha256": "ace67bf929802819ec5573ef1dbf126d25548ce4948ae7cafb2bd32558cfac93"
+  },
+  "S23:39C7": {
+   "unit": "S23",
+   "seg": 14791,
+   "profile": "msc600ax",
+   "flags": [
+    "/AL",
+    "/Os",
+    "/Oe",
+    "/Og",
+    "/Zd"
+   ],
+   "placements": {
+    "_DATA": {
+     "seg": 21939,
+     "off": 11780,
+     "size": 36
+    }
+   },
+   "lang": "c",
+   "source": "src/S23/m39C7.c",
+   "source_sha256": "1370469a744ec79526c50cfacd8d05822110170d9cf52c674c550b7845c97bf3",
+   "claims": [
+    {
+     "name": "XFlipLong",
+     "unit": "S23",
+     "seg": 14791,
+     "off": 0,
+     "size": 36,
+     "target_sha256": "5f66357fbba31d534c99e67a17f93712e68e49002011511a5739f22dd3c89983",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL",
+     "reloc_order": "EXACT"
+    },
+    {
+     "name": "FlipWords",
+     "unit": "S23",
+     "seg": 14791,
+     "off": 36,
+     "size": 81,
+     "target_sha256": "63ab6d50b477eef6c236683cb1ae1f7753d571d27a5cd41c877cef061181d0cd",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL",
+     "reloc_order": "EXACT"
+    },
+    {
+     "name": "win_DrawInfoWindow",
+     "unit": "S23",
+     "seg": 14791,
+     "off": 117,
+     "size": 29,
+     "target_sha256": "235359aa26d9f423306ab35352f9ea9ab1b57aa66b569c21a59df6149a2e488f",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL",
+     "reloc_order": "EXACT"
+    }
+   ],
+   "scaffold": [
+    "DisplayCard"
+   ],
+   "object_sha256": "30555cc27542985e5b8ed3c3b7852785e464d25eb747be42b1d99c6cba671fe1"
+  },
   "S25:39C7": {
    "unit": "S25",
    "seg": 14791,
@@ -1402,17 +1570,22 @@
     "CONST": {
      "seg": 21939,
      "off": 32396,
-     "size": 32
+     "size": 74
     },
     "_DATA": {
      "seg": 21939,
      "off": 6590,
-     "size": 221
+     "size": 229
+    },
+    "_BSS": {
+     "seg": 21939,
+     "off": 35758,
+     "size": 0
     }
    },
    "lang": "c",
    "source": "src/root/m0250.c",
-   "source_sha256": "5ec9b5a865e75970d2a719c2a5dba154eacc7918109c1554202d1be9e1c50b12",
+   "source_sha256": "83350f2b22e0f37060d4a995e96a6dbc839c02d0b3333f855ba60199e477c561",
    "claims": [
     {
      "name": "f_0250_0CF6",
@@ -1611,12 +1784,134 @@
      "kind": "C",
      "provenance": "EXACT_NATURAL",
      "reloc_order": "GROUPED"
+    },
+    {
+     "name": "f_0250_0D10",
+     "unit": "root",
+     "seg": 592,
+     "off": 3344,
+     "size": 261,
+     "target_sha256": "c2d837b1e026bea9b9f9841f14d11bf4403b71e212024bae6bc3466dd98a9d40",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL",
+     "reloc_order": "EXACT"
+    },
+    {
+     "name": "f_0250_0E15",
+     "unit": "root",
+     "seg": 592,
+     "off": 3605,
+     "size": 91,
+     "target_sha256": "ca76cea2c4e65a508ddb5c3efccc1ca599efe5ee715948edd050605a34ee8e3c",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL",
+     "reloc_order": "GROUPED"
+    },
+    {
+     "name": "f_0250_0E70",
+     "unit": "root",
+     "seg": 592,
+     "off": 3696,
+     "size": 17,
+     "target_sha256": "e72551fb2ec8ef13e8311d4d0a58cb0f97a2b2204c2b8a2401b23db16eb198a8",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL",
+     "reloc_order": "GROUPED"
+    },
+    {
+     "name": "f_0250_0E81",
+     "unit": "root",
+     "seg": 592,
+     "off": 3713,
+     "size": 16,
+     "target_sha256": "0507235178718fb7e04bacbf03a542a362434eaf4f946058454a3ecd517662c3",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL",
+     "reloc_order": "EXACT"
+    },
+    {
+     "name": "f_0250_0E91",
+     "unit": "root",
+     "seg": 592,
+     "off": 3729,
+     "size": 12,
+     "target_sha256": "b9a25e5bf68650d6052e0a1644b0417845d8100e36bde96c771678044413d7c6",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL",
+     "reloc_order": "EXACT"
+    },
+    {
+     "name": "f_0250_0E9D",
+     "unit": "root",
+     "seg": 592,
+     "off": 3741,
+     "size": 41,
+     "target_sha256": "1528a1beafd8c7d0e580e44bc91ebcf5774559122a0ba22c47bc4baddc5156e7",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL",
+     "reloc_order": "GROUPED"
+    },
+    {
+     "name": "f_0250_0EC6",
+     "unit": "root",
+     "seg": 592,
+     "off": 3782,
+     "size": 12,
+     "target_sha256": "26d1ec13fe62628a3aa49b99b0a4f6f152287e27d86af0fe3e106b4d4df749fa",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL",
+     "reloc_order": "EXACT"
+    },
+    {
+     "name": "f_0250_0ED2",
+     "unit": "root",
+     "seg": 592,
+     "off": 3794,
+     "size": 8,
+     "target_sha256": "424dadfcf7b504a3a2053a972f7c12740b8fd864fbbf3e4585bdfd8180c3e6c5",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL",
+     "reloc_order": "EXACT"
+    },
+    {
+     "name": "f_0250_0EDA",
+     "unit": "root",
+     "seg": 592,
+     "off": 3802,
+     "size": 82,
+     "target_sha256": "8ca59106c20ef8bb2d4fd48b77bfdd8775e0e9e88972e21c218873a7bd317d03",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL",
+     "reloc_order": "GROUPED"
+    },
+    {
+     "name": "f_0250_0F2C",
+     "unit": "root",
+     "seg": 592,
+     "off": 3884,
+     "size": 152,
+     "target_sha256": "0dc1422260fa0e143b0400ed17b29a707aa81bc1c6c46e510b2df80a54188feb",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL",
+     "reloc_order": "EXACT"
+    },
+    {
+     "name": "f_0250_0FC4",
+     "unit": "root",
+     "seg": 592,
+     "off": 4036,
+     "size": 84,
+     "target_sha256": "4cdf1e6ae8c039f59d9c5c960d0d32a75feecb6fb85e02c0e3c362b56681f1bc",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL",
+     "reloc_order": "EXACT"
     }
    ],
    "scaffold": [
-    "f_0250_0D10"
+    "f_0250_13A6",
+    "f_0250_1583"
    ],
-   "object_sha256": "b9bb73cf466b89d5dfd298334c8b397b6fafaf9eaec1e8479e6bbba7699e6cf6"
+   "object_sha256": "a88bdce8eceb7d1439a61630aa2d70157cac85004d3dd9ed15f4c4c9fc36898e"
   },
   "root:0894": {
    "unit": "root",
@@ -6996,6 +7291,194 @@
     "win_UnlockWin"
    ],
    "object_sha256": "74ffba3050aebffe092298d897b53552b0b331d95b16aa92a3f9d1bd10d80d94"
+  },
+  "root:23E6": {
+   "unit": "root",
+   "seg": 9190,
+   "profile": "msc600ax",
+   "flags": [
+    "/AL",
+    "/Os",
+    "/Oe",
+    "/Og",
+    "/Gs",
+    "/Zi"
+   ],
+   "placements": {
+    "_DATA": {
+     "seg": 21939,
+     "off": 25840,
+     "size": 156
+    },
+    "CONST": {
+     "seg": 21939,
+     "off": 35388,
+     "size": 2
+    }
+   },
+   "lang": "c",
+   "source": "src/root/m23E6.c",
+   "source_sha256": "a81069ab0d9e4aa22c503cd6569553dede24babb8a63da98854e8e702b1bd907",
+   "claims": [
+    {
+     "name": "f_23E6_009F",
+     "unit": "root",
+     "seg": 9190,
+     "off": 159,
+     "size": 106,
+     "target_sha256": "94612806457e6332044914195969055a84526d233e80b01ceb17e5f766353964",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL",
+     "reloc_order": "GROUPED"
+    },
+    {
+     "name": "f_23E6_0109",
+     "unit": "root",
+     "seg": 9190,
+     "off": 265,
+     "size": 41,
+     "target_sha256": "fa680ee8a28dab735a02733fc04ec31e15175b90e0b875231c6be33eed42a02f",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL",
+     "reloc_order": "EXACT"
+    },
+    {
+     "name": "f_23E6_0132",
+     "unit": "root",
+     "seg": 9190,
+     "off": 306,
+     "size": 57,
+     "target_sha256": "199111980a4c80cd4a8d60d4fadd3026e2b80be684d4a14471e1f60919abe766",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL",
+     "reloc_order": "EXACT"
+    },
+    {
+     "name": "f_23E6_016B",
+     "unit": "root",
+     "seg": 9190,
+     "off": 363,
+     "size": 113,
+     "target_sha256": "ec1a3b3640a6db3a9c1659e499c691117adf0851c0fe62c970d90fb9286bce25",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL",
+     "reloc_order": "GROUPED"
+    },
+    {
+     "name": "f_23E6_01DC",
+     "unit": "root",
+     "seg": 9190,
+     "off": 476,
+     "size": 138,
+     "target_sha256": "7cf41b56485545b32781e5d5c2864aaa1c97de60fe57a10227de7d043a7bf548",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL",
+     "reloc_order": "GROUPED"
+    },
+    {
+     "name": "f_23E6_0266",
+     "unit": "root",
+     "seg": 9190,
+     "off": 614,
+     "size": 300,
+     "target_sha256": "57f3cb7a1dce3f258dcc695390e28212a70358bb7f61d84f440f378dedada1c2",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL",
+     "reloc_order": "GROUPED"
+    },
+    {
+     "name": "f_23E6_0392",
+     "unit": "root",
+     "seg": 9190,
+     "off": 914,
+     "size": 390,
+     "target_sha256": "a1e1b2a57b22558f81445951e5ab2e2ac7a5e74fb986a0ce46b6cb029ffadb97",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL",
+     "reloc_order": "GROUPED"
+    },
+    {
+     "name": "f_23E6_0518",
+     "unit": "root",
+     "seg": 9190,
+     "off": 1304,
+     "size": 340,
+     "target_sha256": "960a63abc473168ab1a640258a8f48ba65772abfb896ad5a67fe6784cbee4c49",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL",
+     "reloc_order": "GROUPED"
+    },
+    {
+     "name": "f_23E6_066C",
+     "unit": "root",
+     "seg": 9190,
+     "off": 1644,
+     "size": 133,
+     "target_sha256": "16108077d794695bcfcf2d0e60e7fdd97e01235c4c55536cae2eebf606d75901",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL",
+     "reloc_order": "EXACT"
+    },
+    {
+     "name": "f_23E6_06F1",
+     "unit": "root",
+     "seg": 9190,
+     "off": 1777,
+     "size": 177,
+     "target_sha256": "192b3d0732f08fb36f2f9b14ff7a895cd921c0cf652d84c5d36d86805f533e38",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL",
+     "reloc_order": "GROUPED"
+    },
+    {
+     "name": "f_23E6_07A2",
+     "unit": "root",
+     "seg": 9190,
+     "off": 1954,
+     "size": 308,
+     "target_sha256": "cc779367ef6e4eca4dd3c8d148991a85fba1d5398c3b19295d7dc9540bb7a5ce",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL",
+     "reloc_order": "GROUPED"
+    },
+    {
+     "name": "f_23E6_08D6",
+     "unit": "root",
+     "seg": 9190,
+     "off": 2262,
+     "size": 381,
+     "target_sha256": "0879bd53d95ebaf5349da75538d3b7d848b61cd960c107bf4db14b084f8a7e76",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL",
+     "reloc_order": "WITHIN_GROUP_PENDING"
+    },
+    {
+     "name": "f_23E6_0A53",
+     "unit": "root",
+     "seg": 9190,
+     "off": 2643,
+     "size": 190,
+     "target_sha256": "7fc32011f637b7337c7eea8045bba160d1494ce96772066134c62050631a84e6",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL",
+     "reloc_order": "GROUPED"
+    },
+    {
+     "name": "f_23E6_0B11",
+     "unit": "root",
+     "seg": 9190,
+     "off": 2833,
+     "size": 320,
+     "target_sha256": "be528d46840e77e2d7d614333edc2c2faf84e78e393d849d1262f602b889e24f",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL",
+     "reloc_order": "GROUPED"
+    }
+   ],
+   "scaffold": [
+    "f_23E6_0000"
+   ],
+   "object_sha256": "53941465ff5bec433f92781208c8782ad1d70113071e11f75504d5fe5dbfaebd"
   },
   "root:2505": {
    "unit": "root",

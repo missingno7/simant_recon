@@ -85,6 +85,18 @@
     }
    ]
   },
+  "AddMsgBalloon": {
+   "unit": "root",
+   "seg": 592,
+   "off": 17514,
+   "grounding": "inventory:push_cs_call",
+   "history": [
+    {
+     "was": "f_0250_446A",
+     "why": "Win16 ANTEDIT_MODULE MAPSYM run BalloonIsVisible,EggBalloons,FightBalloons,QueenBalloons,RestBalloons,AddMsgBalloon,DrawCurBalloons,EditMsgBalloon,PreDrawBalloons,DrawBalloons aligns 1:1 with DOS 0250:4225,428A,4302,437A,43F2,446A,454D,4BDD,4C28,4C34 (DrawCurBalloons xver HIGH anchor); bodies match Win16 recovered sources: style==10 pixel/tile conversion, count<6, stores pnt/plane/flags/msg exactly as Win16 AddMsgBalloon"
+    }
+   ]
+  },
   "AddRandAntLion": {
    "unit": "root",
    "seg": 2777,
@@ -106,6 +118,42 @@
     {
      "was": "o08_35F5_1136",
      "why": "worker ovl08: Win16 RandWorld unit member / call-site evidence (report 2026-09-30)"
+    }
+   ]
+  },
+  "AddRock3": {
+   "unit": "S18",
+   "seg": 14412,
+   "off": 4182,
+   "grounding": "inventory:push_cs_call",
+   "history": [
+    {
+     "was": "o18_384C_1056",
+     "why": "Win16 SIMONE_MODULE run 3100..45AC (MakeMap..AddRock3, 23 members, between ClearListR and InitSpider) aligns 1:1 in order and count with DOS section S18 frame 384C (23 functions); anchored member MakeYardPatch (0C13): body identical to Win16 MakeYardPatch (TERRAINset/0x3e8 tile set, 128x64 SRand16 fill, AddRocks, InitAntLions(SRand4()+1), InitPillar = registered DOS names, 20/30/100/128 SRand1(0x7d)/SRand1(0x3d) placement passes with tiles 0x20-0x23, (SRand1(2)+0x12)<<1, 0x28, 0x51); call graph agrees (MakeMap->MakeYardPatch/MakeHousePatch(x*16+y>0x25), MakeKitchenWall->MakeOutletV(0x24,2),(0x54,2)+DROPdir=2, FloorTiles DROPdir=0, MakeOutletV/H->TileFrame1+MakePlugV/H, AddRocks->AddRock5 x6/AddRock3 x6 with SRand1(122/58),(124/60)); equal-size pairs TileFrame1/2, MakeOutletV/H, CarpetFloorL/R match on both sides"
+    }
+   ]
+  },
+  "AddRock5": {
+   "unit": "S18",
+   "seg": 14412,
+   "off": 4006,
+   "grounding": "inventory:push_cs_call",
+   "history": [
+    {
+     "was": "o18_384C_0FA6",
+     "why": "Win16 SIMONE_MODULE run 3100..45AC (MakeMap..AddRock3, 23 members, between ClearListR and InitSpider) aligns 1:1 in order and count with DOS section S18 frame 384C (23 functions); anchored member MakeYardPatch (0C13): body identical to Win16 MakeYardPatch (TERRAINset/0x3e8 tile set, 128x64 SRand16 fill, AddRocks, InitAntLions(SRand4()+1), InitPillar = registered DOS names, 20/30/100/128 SRand1(0x7d)/SRand1(0x3d) placement passes with tiles 0x20-0x23, (SRand1(2)+0x12)<<1, 0x28, 0x51); call graph agrees (MakeMap->MakeYardPatch/MakeHousePatch(x*16+y>0x25), MakeKitchenWall->MakeOutletV(0x24,2),(0x54,2)+DROPdir=2, FloorTiles DROPdir=0, MakeOutletV/H->TileFrame1+MakePlugV/H, AddRocks->AddRock5 x6/AddRock3 x6 with SRand1(122/58),(124/60)); equal-size pairs TileFrame1/2, MakeOutletV/H, CarpetFloorL/R match on both sides"
+    }
+   ]
+  },
+  "AddRocks": {
+   "unit": "S18",
+   "seg": 14412,
+   "off": 3549,
+   "grounding": "inventory:push_cs_call",
+   "history": [
+    {
+     "was": "o18_384C_0DDD",
+     "why": "Win16 SIMONE_MODULE run 3100..45AC (MakeMap..AddRock3, 23 members, between ClearListR and InitSpider) aligns 1:1 in order and count with DOS section S18 frame 384C (23 functions); anchored member MakeYardPatch (0C13): body identical to Win16 MakeYardPatch (TERRAINset/0x3e8 tile set, 128x64 SRand16 fill, AddRocks, InitAntLions(SRand4()+1), InitPillar = registered DOS names, 20/30/100/128 SRand1(0x7d)/SRand1(0x3d) placement passes with tiles 0x20-0x23, (SRand1(2)+0x12)<<1, 0x28, 0x51); call graph agrees (MakeMap->MakeYardPatch/MakeHousePatch(x*16+y>0x25), MakeKitchenWall->MakeOutletV(0x24,2),(0x54,2)+DROPdir=2, FloorTiles DROPdir=0, MakeOutletV/H->TileFrame1+MakePlugV/H, AddRocks->AddRock5 x6/AddRock3 x6 with SRand1(122/58),(124/60)); equal-size pairs TileFrame1/2, MakeOutletV/H, CarpetFloorL/R match on both sides"
     }
    ]
   },
@@ -157,6 +205,18 @@
     }
    ]
   },
+  "BalloonIsVisible": {
+   "unit": "root",
+   "seg": 592,
+   "off": 16933,
+   "grounding": "inventory:push_cs_call",
+   "history": [
+    {
+     "was": "f_0250_4225",
+     "why": "Win16 ANTEDIT_MODULE MAPSYM run BalloonIsVisible,EggBalloons,FightBalloons,QueenBalloons,RestBalloons,AddMsgBalloon,DrawCurBalloons,EditMsgBalloon,PreDrawBalloons,DrawBalloons aligns 1:1 with DOS 0250:4225,428A,4302,437A,43F2,446A,454D,4BDD,4C28,4C34 (DrawCurBalloons xver HIGH anchor); bodies match Win16 recovered sources: plane==MapPlane and x/y-3 inside MapPnt+edit size"
+    }
+   ]
+  },
   "Bounce": {
    "unit": "root",
    "seg": 4995,
@@ -202,6 +262,30 @@
     {
      "was": "f_14EE_0317",
      "why": "dig worker: DOS body byte-exact and structurally identical to the Win16 function of this name (same statements, same data), plus module neighbourhood"
+    }
+   ]
+  },
+  "CarpetFloorL": {
+   "unit": "S18",
+   "seg": 14412,
+   "off": 816,
+   "grounding": "inventory:push_cs_call",
+   "history": [
+    {
+     "was": "o18_384C_0330",
+     "why": "Win16 SIMONE_MODULE run 3100..45AC (MakeMap..AddRock3, 23 members, between ClearListR and InitSpider) aligns 1:1 in order and count with DOS section S18 frame 384C (23 functions); anchored member MakeYardPatch (0C13): body identical to Win16 MakeYardPatch (TERRAINset/0x3e8 tile set, 128x64 SRand16 fill, AddRocks, InitAntLions(SRand4()+1), InitPillar = registered DOS names, 20/30/100/128 SRand1(0x7d)/SRand1(0x3d) placement passes with tiles 0x20-0x23, (SRand1(2)+0x12)<<1, 0x28, 0x51); call graph agrees (MakeMap->MakeYardPatch/MakeHousePatch(x*16+y>0x25), MakeKitchenWall->MakeOutletV(0x24,2),(0x54,2)+DROPdir=2, FloorTiles DROPdir=0, MakeOutletV/H->TileFrame1+MakePlugV/H, AddRocks->AddRock5 x6/AddRock3 x6 with SRand1(122/58),(124/60)); equal-size pairs TileFrame1/2, MakeOutletV/H, CarpetFloorL/R match on both sides"
+    }
+   ]
+  },
+  "CarpetFloorR": {
+   "unit": "S18",
+   "seg": 14412,
+   "off": 1053,
+   "grounding": "inventory:push_cs_call",
+   "history": [
+    {
+     "was": "o18_384C_041D",
+     "why": "Win16 SIMONE_MODULE run 3100..45AC (MakeMap..AddRock3, 23 members, between ClearListR and InitSpider) aligns 1:1 in order and count with DOS section S18 frame 384C (23 functions); anchored member MakeYardPatch (0C13): body identical to Win16 MakeYardPatch (TERRAINset/0x3e8 tile set, 128x64 SRand16 fill, AddRocks, InitAntLions(SRand4()+1), InitPillar = registered DOS names, 20/30/100/128 SRand1(0x7d)/SRand1(0x3d) placement passes with tiles 0x20-0x23, (SRand1(2)+0x12)<<1, 0x28, 0x51); call graph agrees (MakeMap->MakeYardPatch/MakeHousePatch(x*16+y>0x25), MakeKitchenWall->MakeOutletV(0x24,2),(0x54,2)+DROPdir=2, FloorTiles DROPdir=0, MakeOutletV/H->TileFrame1+MakePlugV/H, AddRocks->AddRock5 x6/AddRock3 x6 with SRand1(122/58),(124/60)); equal-size pairs TileFrame1/2, MakeOutletV/H, CarpetFloorL/R match on both sides"
     }
    ]
   },
@@ -1237,6 +1321,18 @@
     }
    ]
   },
+  "DrawBalloons": {
+   "unit": "root",
+   "seg": 592,
+   "off": 19508,
+   "grounding": "inventory:push_cs_call",
+   "history": [
+    {
+     "was": "f_0250_4C34",
+     "why": "Win16 ANTEDIT_MODULE MAPSYM run BalloonIsVisible,EggBalloons,FightBalloons,QueenBalloons,RestBalloons,AddMsgBalloon,DrawCurBalloons,EditMsgBalloon,PreDrawBalloons,DrawBalloons aligns 1:1 with DOS 0250:4225,428A,4302,437A,43F2,446A,454D,4BDD,4C28,4C34 (DrawCurBalloons xver HIGH anchor); bodies match Win16 recovered sources: draws queued balloons ('balbuf', 'Vis message %s at %d,%d')"
+    }
+   ]
+  },
   "DrawCastePopUp": {
    "unit": "S14",
    "seg": 14412,
@@ -1258,6 +1354,42 @@
     {
      "was": "f_0250_454D",
      "why": "xver HIGH neighbourhood-v1: 5 anchored neighbours agree: callee:SRand2, callee:SRand32, callee:SRand4, callee:SRand64, callee:TickCount; size ratio 0.62"
+    }
+   ]
+  },
+  "DrawEditGraphs": {
+   "unit": "root",
+   "seg": 592,
+   "off": 5507,
+   "grounding": "inventory:push_cs_call",
+   "history": [
+    {
+     "was": "f_0250_1583",
+     "why": "Win16 MAPSYM ...BoundEditPosition,CenterEdit,DrawEditGraphs,SetEditWinTitle,...,PreDrawSpider; DOS 0F2C/0FC4 (bound/center bodies match Win16) ... 1583, 16FD(SetEditWinTitle), 179F(PreDrawSpider); 1583 draws the three edit-window bar graphs"
+    }
+   ]
+  },
+  "DrawLegs": {
+   "unit": "root",
+   "seg": 592,
+   "off": 10052,
+   "grounding": "inventory:push_cs_call",
+   "history": [
+    {
+     "was": "f_0250_2744",
+     "why": "Win16 MAPSYM ed_LineTo,DrawPalps,DrawLegs,BalloonIsVisible: DOS 2744 sits between DrawPalps and BalloonIsVisible (all anchored) and is the large leg drawer (6790 bytes vs Win16 7368)"
+    }
+   ]
+  },
+  "DrawPalps": {
+   "unit": "root",
+   "seg": 592,
+   "off": 8550,
+   "grounding": "inventory:push_cs_call",
+   "history": [
+    {
+     "was": "f_0250_2166",
+     "why": "xver MEDIUM (_DrawPalps: callee SRand1, caller DrawSpider); follows ed_LineTo as in Win16 MAPSYM DrawSpider,ed_MoveTo,ed_LineTo,DrawPalps,DrawLegs"
     }
    ]
   },
@@ -1405,6 +1537,18 @@
     }
    ]
   },
+  "EditMsgBalloon": {
+   "unit": "root",
+   "seg": 592,
+   "off": 19421,
+   "grounding": "reviewed: prologue scan in unreached gap; descent ends in a return; no references found (unreferenced or indirect)",
+   "history": [
+    {
+     "was": "f_0250_4BDD",
+     "why": "Win16 ANTEDIT_MODULE MAPSYM run BalloonIsVisible,EggBalloons,FightBalloons,QueenBalloons,RestBalloons,AddMsgBalloon,DrawCurBalloons,EditMsgBalloon,PreDrawBalloons,DrawBalloons aligns 1:1 with DOS 0250:4225,428A,4302,437A,43F2,446A,454D,4BDD,4C28,4C34 (DrawCurBalloons xver HIGH anchor); bodies match Win16 recovered sources: two 256-byte line buffers, (x>>4)+MapPnt.x, BalloonIsVisible, msg!=0 clears lines as Win16 EditMsgBalloon"
+    }
+   ]
+  },
   "EditToolsMenu": {
    "unit": "S05",
    "seg": 13813,
@@ -1414,6 +1558,18 @@
     {
      "was": "o05_35F5_0064",
      "why": "xver HIGH features-v1: constant 0x117; constant 0xa00; constant 0xb00"
+    }
+   ]
+  },
+  "EggBalloons": {
+   "unit": "root",
+   "seg": 592,
+   "off": 17034,
+   "grounding": "inventory:far_call",
+   "history": [
+    {
+     "was": "f_0250_428A",
+     "why": "Win16 ANTEDIT_MODULE MAPSYM run BalloonIsVisible,EggBalloons,FightBalloons,QueenBalloons,RestBalloons,AddMsgBalloon,DrawCurBalloons,EditMsgBalloon,PreDrawBalloons,DrawBalloons aligns 1:1 with DOS 0250:4225,428A,4302,437A,43F2,446A,454D,4BDD,4C28,4C34 (DrawCurBalloons xver HIGH anchor); bodies match Win16 recovered sources: first of four identical balloon setters (counter 0EF6, cur/last points)"
     }
    ]
   },
@@ -1561,6 +1717,18 @@
     }
    ]
   },
+  "FightBalloons": {
+   "unit": "root",
+   "seg": 592,
+   "off": 17154,
+   "grounding": "inventory:far_call",
+   "history": [
+    {
+     "was": "f_0250_4302",
+     "why": "Win16 ANTEDIT_MODULE MAPSYM run BalloonIsVisible,EggBalloons,FightBalloons,QueenBalloons,RestBalloons,AddMsgBalloon,DrawCurBalloons,EditMsgBalloon,PreDrawBalloons,DrawBalloons aligns 1:1 with DOS 0250:4225,428A,4302,437A,43F2,446A,454D,4BDD,4C28,4C34 (DrawCurBalloons xver HIGH anchor); bodies match Win16 recovered sources: second balloon setter (counter 0F06)"
+    }
+   ]
+  },
   "FillDirtB": {
    "unit": "S22",
    "seg": 15293,
@@ -1606,6 +1774,30 @@
     {
      "was": "f_1496_0089",
      "why": "Win16 SIMANT1_MODULE run 91DE..9612 (FillHolesBN..GetSmellT, 15 members, between GetMyDir and MakeRedInitiator) aligns 1:1 with DOS module 1496 (15 functions); DoSmells calls members 1-7 in both builds (FillHoles/ColonySmell/SmoothAlarm), the AlarmHere/JamScent/DecTSmell members have the same ant-movement callers; bodies match (pheromone maps)"
+    }
+   ]
+  },
+  "FillMap": {
+   "unit": "S18",
+   "seg": 14412,
+   "off": 2807,
+   "grounding": "inventory:push_cs_call",
+   "history": [
+    {
+     "was": "o18_384C_0AF7",
+     "why": "Win16 SIMONE_MODULE run 3100..45AC (MakeMap..AddRock3, 23 members, between ClearListR and InitSpider) aligns 1:1 in order and count with DOS section S18 frame 384C (23 functions); anchored member MakeYardPatch (0C13): body identical to Win16 MakeYardPatch (TERRAINset/0x3e8 tile set, 128x64 SRand16 fill, AddRocks, InitAntLions(SRand4()+1), InitPillar = registered DOS names, 20/30/100/128 SRand1(0x7d)/SRand1(0x3d) placement passes with tiles 0x20-0x23, (SRand1(2)+0x12)<<1, 0x28, 0x51); call graph agrees (MakeMap->MakeYardPatch/MakeHousePatch(x*16+y>0x25), MakeKitchenWall->MakeOutletV(0x24,2),(0x54,2)+DROPdir=2, FloorTiles DROPdir=0, MakeOutletV/H->TileFrame1+MakePlugV/H, AddRocks->AddRock5 x6/AddRock3 x6 with SRand1(122/58),(124/60)); equal-size pairs TileFrame1/2, MakeOutletV/H, CarpetFloorL/R match on both sides"
+    }
+   ]
+  },
+  "FillMapLegs": {
+   "unit": "S18",
+   "seg": 14412,
+   "off": 2868,
+   "grounding": "inventory:push_cs_call",
+   "history": [
+    {
+     "was": "o18_384C_0B34",
+     "why": "Win16 SIMONE_MODULE run 3100..45AC (MakeMap..AddRock3, 23 members, between ClearListR and InitSpider) aligns 1:1 in order and count with DOS section S18 frame 384C (23 functions); anchored member MakeYardPatch (0C13): body identical to Win16 MakeYardPatch (TERRAINset/0x3e8 tile set, 128x64 SRand16 fill, AddRocks, InitAntLions(SRand4()+1), InitPillar = registered DOS names, 20/30/100/128 SRand1(0x7d)/SRand1(0x3d) placement passes with tiles 0x20-0x23, (SRand1(2)+0x12)<<1, 0x28, 0x51); call graph agrees (MakeMap->MakeYardPatch/MakeHousePatch(x*16+y>0x25), MakeKitchenWall->MakeOutletV(0x24,2),(0x54,2)+DROPdir=2, FloorTiles DROPdir=0, MakeOutletV/H->TileFrame1+MakePlugV/H, AddRocks->AddRock5 x6/AddRock3 x6 with SRand1(122/58),(124/60)); equal-size pairs TileFrame1/2, MakeOutletV/H, CarpetFloorL/R match on both sides"
     }
    ]
   },
@@ -1714,6 +1906,18 @@
     {
      "was": "o23_39C7_0024",
      "why": "Win16 MAPSYM _TEXT run _XFlipLong.._ProcInfoEvent (9 members) aligns 1:1 with DOS S23:39C7 (9 functions, same order); DisplayCard is xver HIGH at position 6; xver win_DrawInfoWindow/win_PrintStyleTextInRect/PopUpInfoWindow (MEDIUM) agree positionally; XFlipLong/FlipWords/win_DrawInfoWindow/OpenInfoWindow Win16 exact bodies match"
+    }
+   ]
+  },
+  "FloorTiles": {
+   "unit": "S18",
+   "seg": 14412,
+   "off": 534,
+   "grounding": "inventory:push_cs_call",
+   "history": [
+    {
+     "was": "o18_384C_0216",
+     "why": "Win16 SIMONE_MODULE run 3100..45AC (MakeMap..AddRock3, 23 members, between ClearListR and InitSpider) aligns 1:1 in order and count with DOS section S18 frame 384C (23 functions); anchored member MakeYardPatch (0C13): body identical to Win16 MakeYardPatch (TERRAINset/0x3e8 tile set, 128x64 SRand16 fill, AddRocks, InitAntLions(SRand4()+1), InitPillar = registered DOS names, 20/30/100/128 SRand1(0x7d)/SRand1(0x3d) placement passes with tiles 0x20-0x23, (SRand1(2)+0x12)<<1, 0x28, 0x51); call graph agrees (MakeMap->MakeYardPatch/MakeHousePatch(x*16+y>0x25), MakeKitchenWall->MakeOutletV(0x24,2),(0x54,2)+DROPdir=2, FloorTiles DROPdir=0, MakeOutletV/H->TileFrame1+MakePlugV/H, AddRocks->AddRock5 x6/AddRock3 x6 with SRand1(122/58),(124/60)); equal-size pairs TileFrame1/2, MakeOutletV/H, CarpetFloorL/R match on both sides"
     }
    ]
   },
@@ -2569,6 +2773,78 @@
     }
    ]
   },
+  "MakeClip": {
+   "unit": "S18",
+   "seg": 14412,
+   "off": 2731,
+   "grounding": "inventory:push_cs_call",
+   "history": [
+    {
+     "was": "o18_384C_0AAB",
+     "why": "Win16 SIMONE_MODULE run 3100..45AC (MakeMap..AddRock3, 23 members, between ClearListR and InitSpider) aligns 1:1 in order and count with DOS section S18 frame 384C (23 functions); anchored member MakeYardPatch (0C13): body identical to Win16 MakeYardPatch (TERRAINset/0x3e8 tile set, 128x64 SRand16 fill, AddRocks, InitAntLions(SRand4()+1), InitPillar = registered DOS names, 20/30/100/128 SRand1(0x7d)/SRand1(0x3d) placement passes with tiles 0x20-0x23, (SRand1(2)+0x12)<<1, 0x28, 0x51); call graph agrees (MakeMap->MakeYardPatch/MakeHousePatch(x*16+y>0x25), MakeKitchenWall->MakeOutletV(0x24,2),(0x54,2)+DROPdir=2, FloorTiles DROPdir=0, MakeOutletV/H->TileFrame1+MakePlugV/H, AddRocks->AddRock5 x6/AddRock3 x6 with SRand1(122/58),(124/60)); equal-size pairs TileFrame1/2, MakeOutletV/H, CarpetFloorL/R match on both sides"
+    }
+   ]
+  },
+  "MakeHousePatch": {
+   "unit": "S18",
+   "seg": 14412,
+   "off": 43,
+   "grounding": "inventory:push_cs_call",
+   "history": [
+    {
+     "was": "o18_384C_002B",
+     "why": "Win16 SIMONE_MODULE run 3100..45AC (MakeMap..AddRock3, 23 members, between ClearListR and InitSpider) aligns 1:1 in order and count with DOS section S18 frame 384C (23 functions); anchored member MakeYardPatch (0C13): body identical to Win16 MakeYardPatch (TERRAINset/0x3e8 tile set, 128x64 SRand16 fill, AddRocks, InitAntLions(SRand4()+1), InitPillar = registered DOS names, 20/30/100/128 SRand1(0x7d)/SRand1(0x3d) placement passes with tiles 0x20-0x23, (SRand1(2)+0x12)<<1, 0x28, 0x51); call graph agrees (MakeMap->MakeYardPatch/MakeHousePatch(x*16+y>0x25), MakeKitchenWall->MakeOutletV(0x24,2),(0x54,2)+DROPdir=2, FloorTiles DROPdir=0, MakeOutletV/H->TileFrame1+MakePlugV/H, AddRocks->AddRock5 x6/AddRock3 x6 with SRand1(122/58),(124/60)); equal-size pairs TileFrame1/2, MakeOutletV/H, CarpetFloorL/R match on both sides"
+    }
+   ]
+  },
+  "MakeKitchenWall": {
+   "unit": "S18",
+   "seg": 14412,
+   "off": 1203,
+   "grounding": "inventory:push_cs_call",
+   "history": [
+    {
+     "was": "o18_384C_04B3",
+     "why": "Win16 SIMONE_MODULE run 3100..45AC (MakeMap..AddRock3, 23 members, between ClearListR and InitSpider) aligns 1:1 in order and count with DOS section S18 frame 384C (23 functions); anchored member MakeYardPatch (0C13): body identical to Win16 MakeYardPatch (TERRAINset/0x3e8 tile set, 128x64 SRand16 fill, AddRocks, InitAntLions(SRand4()+1), InitPillar = registered DOS names, 20/30/100/128 SRand1(0x7d)/SRand1(0x3d) placement passes with tiles 0x20-0x23, (SRand1(2)+0x12)<<1, 0x28, 0x51); call graph agrees (MakeMap->MakeYardPatch/MakeHousePatch(x*16+y>0x25), MakeKitchenWall->MakeOutletV(0x24,2),(0x54,2)+DROPdir=2, FloorTiles DROPdir=0, MakeOutletV/H->TileFrame1+MakePlugV/H, AddRocks->AddRock5 x6/AddRock3 x6 with SRand1(122/58),(124/60)); equal-size pairs TileFrame1/2, MakeOutletV/H, CarpetFloorL/R match on both sides"
+    }
+   ]
+  },
+  "MakeKnob": {
+   "unit": "S18",
+   "seg": 14412,
+   "off": 2586,
+   "grounding": "inventory:push_cs_call",
+   "history": [
+    {
+     "was": "o18_384C_0A1A",
+     "why": "Win16 SIMONE_MODULE run 3100..45AC (MakeMap..AddRock3, 23 members, between ClearListR and InitSpider) aligns 1:1 in order and count with DOS section S18 frame 384C (23 functions); anchored member MakeYardPatch (0C13): body identical to Win16 MakeYardPatch (TERRAINset/0x3e8 tile set, 128x64 SRand16 fill, AddRocks, InitAntLions(SRand4()+1), InitPillar = registered DOS names, 20/30/100/128 SRand1(0x7d)/SRand1(0x3d) placement passes with tiles 0x20-0x23, (SRand1(2)+0x12)<<1, 0x28, 0x51); call graph agrees (MakeMap->MakeYardPatch/MakeHousePatch(x*16+y>0x25), MakeKitchenWall->MakeOutletV(0x24,2),(0x54,2)+DROPdir=2, FloorTiles DROPdir=0, MakeOutletV/H->TileFrame1+MakePlugV/H, AddRocks->AddRock5 x6/AddRock3 x6 with SRand1(122/58),(124/60)); equal-size pairs TileFrame1/2, MakeOutletV/H, CarpetFloorL/R match on both sides"
+    }
+   ]
+  },
+  "MakeLint2": {
+   "unit": "S18",
+   "seg": 14412,
+   "off": 969,
+   "grounding": "inventory:push_cs_call",
+   "history": [
+    {
+     "was": "o18_384C_03C9",
+     "why": "Win16 SIMONE_MODULE run 3100..45AC (MakeMap..AddRock3, 23 members, between ClearListR and InitSpider) aligns 1:1 in order and count with DOS section S18 frame 384C (23 functions); anchored member MakeYardPatch (0C13): body identical to Win16 MakeYardPatch (TERRAINset/0x3e8 tile set, 128x64 SRand16 fill, AddRocks, InitAntLions(SRand4()+1), InitPillar = registered DOS names, 20/30/100/128 SRand1(0x7d)/SRand1(0x3d) placement passes with tiles 0x20-0x23, (SRand1(2)+0x12)<<1, 0x28, 0x51); call graph agrees (MakeMap->MakeYardPatch/MakeHousePatch(x*16+y>0x25), MakeKitchenWall->MakeOutletV(0x24,2),(0x54,2)+DROPdir=2, FloorTiles DROPdir=0, MakeOutletV/H->TileFrame1+MakePlugV/H, AddRocks->AddRock5 x6/AddRock3 x6 with SRand1(122/58),(124/60)); equal-size pairs TileFrame1/2, MakeOutletV/H, CarpetFloorL/R match on both sides"
+    }
+   ]
+  },
+  "MakeMap": {
+   "unit": "S18",
+   "seg": 14412,
+   "off": 0,
+   "grounding": "inventory:vector",
+   "history": [
+    {
+     "was": "o18_384C_0000",
+     "why": "Win16 SIMONE_MODULE run 3100..45AC (MakeMap..AddRock3, 23 members, between ClearListR and InitSpider) aligns 1:1 in order and count with DOS section S18 frame 384C (23 functions); anchored member MakeYardPatch (0C13): body identical to Win16 MakeYardPatch (TERRAINset/0x3e8 tile set, 128x64 SRand16 fill, AddRocks, InitAntLions(SRand4()+1), InitPillar = registered DOS names, 20/30/100/128 SRand1(0x7d)/SRand1(0x3d) placement passes with tiles 0x20-0x23, (SRand1(2)+0x12)<<1, 0x28, 0x51); call graph agrees (MakeMap->MakeYardPatch/MakeHousePatch(x*16+y>0x25), MakeKitchenWall->MakeOutletV(0x24,2),(0x54,2)+DROPdir=2, FloorTiles DROPdir=0, MakeOutletV/H->TileFrame1+MakePlugV/H, AddRocks->AddRock5 x6/AddRock3 x6 with SRand1(122/58),(124/60)); equal-size pairs TileFrame1/2, MakeOutletV/H, CarpetFloorL/R match on both sides"
+    }
+   ]
+  },
   "MakeNewHoleB": {
    "unit": "root",
    "seg": 5358,
@@ -2605,6 +2881,42 @@
     }
    ]
   },
+  "MakeOutletH": {
+   "unit": "S18",
+   "seg": 14412,
+   "off": 2394,
+   "grounding": "inventory:push_cs_call",
+   "history": [
+    {
+     "was": "o18_384C_095A",
+     "why": "Win16 SIMONE_MODULE run 3100..45AC (MakeMap..AddRock3, 23 members, between ClearListR and InitSpider) aligns 1:1 in order and count with DOS section S18 frame 384C (23 functions); anchored member MakeYardPatch (0C13): body identical to Win16 MakeYardPatch (TERRAINset/0x3e8 tile set, 128x64 SRand16 fill, AddRocks, InitAntLions(SRand4()+1), InitPillar = registered DOS names, 20/30/100/128 SRand1(0x7d)/SRand1(0x3d) placement passes with tiles 0x20-0x23, (SRand1(2)+0x12)<<1, 0x28, 0x51); call graph agrees (MakeMap->MakeYardPatch/MakeHousePatch(x*16+y>0x25), MakeKitchenWall->MakeOutletV(0x24,2),(0x54,2)+DROPdir=2, FloorTiles DROPdir=0, MakeOutletV/H->TileFrame1+MakePlugV/H, AddRocks->AddRock5 x6/AddRock3 x6 with SRand1(122/58),(124/60)); equal-size pairs TileFrame1/2, MakeOutletV/H, CarpetFloorL/R match on both sides"
+    }
+   ]
+  },
+  "MakeOutletV": {
+   "unit": "S18",
+   "seg": 14412,
+   "off": 2199,
+   "grounding": "inventory:push_cs_call",
+   "history": [
+    {
+     "was": "o18_384C_0897",
+     "why": "Win16 SIMONE_MODULE run 3100..45AC (MakeMap..AddRock3, 23 members, between ClearListR and InitSpider) aligns 1:1 in order and count with DOS section S18 frame 384C (23 functions); anchored member MakeYardPatch (0C13): body identical to Win16 MakeYardPatch (TERRAINset/0x3e8 tile set, 128x64 SRand16 fill, AddRocks, InitAntLions(SRand4()+1), InitPillar = registered DOS names, 20/30/100/128 SRand1(0x7d)/SRand1(0x3d) placement passes with tiles 0x20-0x23, (SRand1(2)+0x12)<<1, 0x28, 0x51); call graph agrees (MakeMap->MakeYardPatch/MakeHousePatch(x*16+y>0x25), MakeKitchenWall->MakeOutletV(0x24,2),(0x54,2)+DROPdir=2, FloorTiles DROPdir=0, MakeOutletV/H->TileFrame1+MakePlugV/H, AddRocks->AddRock5 x6/AddRock3 x6 with SRand1(122/58),(124/60)); equal-size pairs TileFrame1/2, MakeOutletV/H, CarpetFloorL/R match on both sides"
+    }
+   ]
+  },
+  "MakePenny": {
+   "unit": "S18",
+   "seg": 14412,
+   "off": 2659,
+   "grounding": "inventory:push_cs_call",
+   "history": [
+    {
+     "was": "o18_384C_0A63",
+     "why": "Win16 SIMONE_MODULE run 3100..45AC (MakeMap..AddRock3, 23 members, between ClearListR and InitSpider) aligns 1:1 in order and count with DOS section S18 frame 384C (23 functions); anchored member MakeYardPatch (0C13): body identical to Win16 MakeYardPatch (TERRAINset/0x3e8 tile set, 128x64 SRand16 fill, AddRocks, InitAntLions(SRand4()+1), InitPillar = registered DOS names, 20/30/100/128 SRand1(0x7d)/SRand1(0x3d) placement passes with tiles 0x20-0x23, (SRand1(2)+0x12)<<1, 0x28, 0x51); call graph agrees (MakeMap->MakeYardPatch/MakeHousePatch(x*16+y>0x25), MakeKitchenWall->MakeOutletV(0x24,2),(0x54,2)+DROPdir=2, FloorTiles DROPdir=0, MakeOutletV/H->TileFrame1+MakePlugV/H, AddRocks->AddRock5 x6/AddRock3 x6 with SRand1(122/58),(124/60)); equal-size pairs TileFrame1/2, MakeOutletV/H, CarpetFloorL/R match on both sides"
+    }
+   ]
+  },
   "MakePillFood": {
    "unit": "root",
    "seg": 2777,
@@ -2617,6 +2929,30 @@
     }
    ]
   },
+  "MakePlugH": {
+   "unit": "S18",
+   "seg": 14412,
+   "off": 2516,
+   "grounding": "inventory:push_cs_call",
+   "history": [
+    {
+     "was": "o18_384C_09D4",
+     "why": "Win16 SIMONE_MODULE run 3100..45AC (MakeMap..AddRock3, 23 members, between ClearListR and InitSpider) aligns 1:1 in order and count with DOS section S18 frame 384C (23 functions); anchored member MakeYardPatch (0C13): body identical to Win16 MakeYardPatch (TERRAINset/0x3e8 tile set, 128x64 SRand16 fill, AddRocks, InitAntLions(SRand4()+1), InitPillar = registered DOS names, 20/30/100/128 SRand1(0x7d)/SRand1(0x3d) placement passes with tiles 0x20-0x23, (SRand1(2)+0x12)<<1, 0x28, 0x51); call graph agrees (MakeMap->MakeYardPatch/MakeHousePatch(x*16+y>0x25), MakeKitchenWall->MakeOutletV(0x24,2),(0x54,2)+DROPdir=2, FloorTiles DROPdir=0, MakeOutletV/H->TileFrame1+MakePlugV/H, AddRocks->AddRock5 x6/AddRock3 x6 with SRand1(122/58),(124/60)); equal-size pairs TileFrame1/2, MakeOutletV/H, CarpetFloorL/R match on both sides"
+    }
+   ]
+  },
+  "MakePlugV": {
+   "unit": "S18",
+   "seg": 14412,
+   "off": 2321,
+   "grounding": "inventory:push_cs_call",
+   "history": [
+    {
+     "was": "o18_384C_0911",
+     "why": "Win16 SIMONE_MODULE run 3100..45AC (MakeMap..AddRock3, 23 members, between ClearListR and InitSpider) aligns 1:1 in order and count with DOS section S18 frame 384C (23 functions); anchored member MakeYardPatch (0C13): body identical to Win16 MakeYardPatch (TERRAINset/0x3e8 tile set, 128x64 SRand16 fill, AddRocks, InitAntLions(SRand4()+1), InitPillar = registered DOS names, 20/30/100/128 SRand1(0x7d)/SRand1(0x3d) placement passes with tiles 0x20-0x23, (SRand1(2)+0x12)<<1, 0x28, 0x51); call graph agrees (MakeMap->MakeYardPatch/MakeHousePatch(x*16+y>0x25), MakeKitchenWall->MakeOutletV(0x24,2),(0x54,2)+DROPdir=2, FloorTiles DROPdir=0, MakeOutletV/H->TileFrame1+MakePlugV/H, AddRocks->AddRock5 x6/AddRock3 x6 with SRand1(122/58),(124/60)); equal-size pairs TileFrame1/2, MakeOutletV/H, CarpetFloorL/R match on both sides"
+    }
+   ]
+  },
   "MakeRedQueen": {
    "unit": "S08",
    "seg": 13813,
@@ -2626,6 +2962,30 @@
     {
      "was": "o08_35F5_0DA0",
      "why": "worker ovl08: Win16 RandWorld unit member / call-site evidence (report 2026-09-30)"
+    }
+   ]
+  },
+  "MakeSink": {
+   "unit": "S18",
+   "seg": 14412,
+   "off": 1461,
+   "grounding": "inventory:push_cs_call",
+   "history": [
+    {
+     "was": "o18_384C_05B5",
+     "why": "Win16 SIMONE_MODULE run 3100..45AC (MakeMap..AddRock3, 23 members, between ClearListR and InitSpider) aligns 1:1 in order and count with DOS section S18 frame 384C (23 functions); anchored member MakeYardPatch (0C13): body identical to Win16 MakeYardPatch (TERRAINset/0x3e8 tile set, 128x64 SRand16 fill, AddRocks, InitAntLions(SRand4()+1), InitPillar = registered DOS names, 20/30/100/128 SRand1(0x7d)/SRand1(0x3d) placement passes with tiles 0x20-0x23, (SRand1(2)+0x12)<<1, 0x28, 0x51); call graph agrees (MakeMap->MakeYardPatch/MakeHousePatch(x*16+y>0x25), MakeKitchenWall->MakeOutletV(0x24,2),(0x54,2)+DROPdir=2, FloorTiles DROPdir=0, MakeOutletV/H->TileFrame1+MakePlugV/H, AddRocks->AddRock5 x6/AddRock3 x6 with SRand1(122/58),(124/60)); equal-size pairs TileFrame1/2, MakeOutletV/H, CarpetFloorL/R match on both sides"
+    }
+   ]
+  },
+  "MakeYardPatch": {
+   "unit": "S18",
+   "seg": 14412,
+   "off": 3091,
+   "grounding": "inventory:push_cs_call",
+   "history": [
+    {
+     "was": "o18_384C_0C13",
+     "why": "Win16 SIMONE_MODULE run 3100..45AC (MakeMap..AddRock3, 23 members, between ClearListR and InitSpider) aligns 1:1 in order and count with DOS section S18 frame 384C (23 functions); anchored member MakeYardPatch (0C13): body identical to Win16 MakeYardPatch (TERRAINset/0x3e8 tile set, 128x64 SRand16 fill, AddRocks, InitAntLions(SRand4()+1), InitPillar = registered DOS names, 20/30/100/128 SRand1(0x7d)/SRand1(0x3d) placement passes with tiles 0x20-0x23, (SRand1(2)+0x12)<<1, 0x28, 0x51); call graph agrees (MakeMap->MakeYardPatch/MakeHousePatch(x*16+y>0x25), MakeKitchenWall->MakeOutletV(0x24,2),(0x54,2)+DROPdir=2, FloorTiles DROPdir=0, MakeOutletV/H->TileFrame1+MakePlugV/H, AddRocks->AddRock5 x6/AddRock3 x6 with SRand1(122/58),(124/60)); equal-size pairs TileFrame1/2, MakeOutletV/H, CarpetFloorL/R match on both sides"
     }
    ]
   },
@@ -2869,6 +3229,30 @@
     }
    ]
   },
+  "PreDrawBalloons": {
+   "unit": "root",
+   "seg": 592,
+   "off": 19496,
+   "grounding": "inventory:push_cs_call",
+   "history": [
+    {
+     "was": "f_0250_4C28",
+     "why": "Win16 ANTEDIT_MODULE MAPSYM run BalloonIsVisible,EggBalloons,FightBalloons,QueenBalloons,RestBalloons,AddMsgBalloon,DrawCurBalloons,EditMsgBalloon,PreDrawBalloons,DrawBalloons aligns 1:1 with DOS 0250:4225,428A,4302,437A,43F2,446A,454D,4BDD,4C28,4C34 (DrawCurBalloons xver HIGH anchor); bodies match Win16 recovered sources: body is a single call of DrawCurBalloons"
+    }
+   ]
+  },
+  "PreDrawSpider": {
+   "unit": "root",
+   "seg": 592,
+   "off": 6047,
+   "grounding": "inventory:push_cs_call",
+   "history": [
+    {
+     "was": "f_0250_179F",
+     "why": "Win16 MAPSYM PreDrawSpider immediately precedes DrawSpider (xver HIGH); DOS 179F precedes DrawSpider and its body matches Win16 PreDrawSpider: spiderRect.top=0x8000, spiderTileLeft=spiderTileTop=500, SpidOn test, displayType==2 3/4 scaling, MapPlane==1 visibility, spiderBuf=7 tiles"
+    }
+   ]
+  },
   "ProcInfoEvent": {
    "unit": "S23",
    "seg": 14791,
@@ -2890,6 +3274,18 @@
     {
      "was": "f_1C62_000C",
      "why": "xver CONFIRMED with Win16 _Punt (evidence/cross_version/decisions.json)"
+    }
+   ]
+  },
+  "QueenBalloons": {
+   "unit": "root",
+   "seg": 592,
+   "off": 17274,
+   "grounding": "inventory:far_call",
+   "history": [
+    {
+     "was": "f_0250_437A",
+     "why": "Win16 ANTEDIT_MODULE MAPSYM run BalloonIsVisible,EggBalloons,FightBalloons,QueenBalloons,RestBalloons,AddMsgBalloon,DrawCurBalloons,EditMsgBalloon,PreDrawBalloons,DrawBalloons aligns 1:1 with DOS 0250:4225,428A,4302,437A,43F2,446A,454D,4BDD,4C28,4C34 (DrawCurBalloons xver HIGH anchor); bodies match Win16 recovered sources: third balloon setter (counter 0F10)"
     }
    ]
   },
@@ -3070,6 +3466,18 @@
     {
      "was": "o22_39C7_07FD",
      "why": "Win16 MAPSYM SIMANT_MODULE run _processEdit.._YellowHelp (15 members) aligns 1:1 with DOS S22:39C7 (15 functions, same order, similar sizes); processEdit is xver HIGH at position 1; xver DoLaserFire/YellowBirth/YellowDeath/YellowDialog/YellowCommand (LOW, unique constants) agree positionally"
+    }
+   ]
+  },
+  "RestBalloons": {
+   "unit": "root",
+   "seg": 592,
+   "off": 17394,
+   "grounding": "inventory:far_call",
+   "history": [
+    {
+     "was": "f_0250_43F2",
+     "why": "Win16 ANTEDIT_MODULE MAPSYM run BalloonIsVisible,EggBalloons,FightBalloons,QueenBalloons,RestBalloons,AddMsgBalloon,DrawCurBalloons,EditMsgBalloon,PreDrawBalloons,DrawBalloons aligns 1:1 with DOS 0250:4225,428A,4302,437A,43F2,446A,454D,4BDD,4C28,4C34 (DrawCurBalloons xver HIGH anchor); bodies match Win16 recovered sources: fourth balloon setter (counter 0F2E)"
     }
    ]
   },
@@ -3286,6 +3694,18 @@
     {
      "was": "o14_384C_0ACD",
      "why": "Win16 SIMANT_MODULE MAPSYM run CalcScore,DoScenario,DoWinHelp,[win_DrawScoreWindow],ScoreDialog,DrawCastePopUp,SetDefaultWindPrompt,PictStrnDialog,[win_DrawPictureWindow],PictureDialog,[win_DrawEndGameWindow],EndGameDialog,SpiderDialog,CustomerIDDialog aligns 1:1 with the 11 DOS S14:384C functions (Windows paint callbacks absent in DOS); body identical to Win16 (GamePaused, CurGameTool -1/10/11, EditMessage)"
+    }
+   ]
+  },
+  "SetEditWinTitle": {
+   "unit": "root",
+   "seg": 592,
+   "off": 5885,
+   "grounding": "inventory:far_call",
+   "history": [
+    {
+     "was": "f_0250_16FD",
+     "why": "Win16 SetEditWinTitle body: strcpy(buf,\"SimAnt\"); strcat MiscStrs[15]; strcat ScenarioNameStrs[CurGameType]; set title obj 1; redraw if window open - DOS 16FD identical sequence (80-byte buffer)"
     }
    ]
   },
@@ -3622,6 +4042,30 @@
     {
      "was": "f_1B73_0504",
      "why": "xver CONFIRMED (evidence/cross_version/decisions.json: RNG translation unit)"
+    }
+   ]
+  },
+  "TileFrame1": {
+   "unit": "S18",
+   "seg": 14412,
+   "off": 1879,
+   "grounding": "inventory:push_cs_call",
+   "history": [
+    {
+     "was": "o18_384C_0757",
+     "why": "Win16 SIMONE_MODULE run 3100..45AC (MakeMap..AddRock3, 23 members, between ClearListR and InitSpider) aligns 1:1 in order and count with DOS section S18 frame 384C (23 functions); anchored member MakeYardPatch (0C13): body identical to Win16 MakeYardPatch (TERRAINset/0x3e8 tile set, 128x64 SRand16 fill, AddRocks, InitAntLions(SRand4()+1), InitPillar = registered DOS names, 20/30/100/128 SRand1(0x7d)/SRand1(0x3d) placement passes with tiles 0x20-0x23, (SRand1(2)+0x12)<<1, 0x28, 0x51); call graph agrees (MakeMap->MakeYardPatch/MakeHousePatch(x*16+y>0x25), MakeKitchenWall->MakeOutletV(0x24,2),(0x54,2)+DROPdir=2, FloorTiles DROPdir=0, MakeOutletV/H->TileFrame1+MakePlugV/H, AddRocks->AddRock5 x6/AddRock3 x6 with SRand1(122/58),(124/60)); equal-size pairs TileFrame1/2, MakeOutletV/H, CarpetFloorL/R match on both sides"
+    }
+   ]
+  },
+  "TileFrame2": {
+   "unit": "S18",
+   "seg": 14412,
+   "off": 2039,
+   "grounding": "inventory:push_cs_call",
+   "history": [
+    {
+     "was": "o18_384C_07F7",
+     "why": "Win16 SIMONE_MODULE run 3100..45AC (MakeMap..AddRock3, 23 members, between ClearListR and InitSpider) aligns 1:1 in order and count with DOS section S18 frame 384C (23 functions); anchored member MakeYardPatch (0C13): body identical to Win16 MakeYardPatch (TERRAINset/0x3e8 tile set, 128x64 SRand16 fill, AddRocks, InitAntLions(SRand4()+1), InitPillar = registered DOS names, 20/30/100/128 SRand1(0x7d)/SRand1(0x3d) placement passes with tiles 0x20-0x23, (SRand1(2)+0x12)<<1, 0x28, 0x51); call graph agrees (MakeMap->MakeYardPatch/MakeHousePatch(x*16+y>0x25), MakeKitchenWall->MakeOutletV(0x24,2),(0x54,2)+DROPdir=2, FloorTiles DROPdir=0, MakeOutletV/H->TileFrame1+MakePlugV/H, AddRocks->AddRock5 x6/AddRock3 x6 with SRand1(122/58),(124/60)); equal-size pairs TileFrame1/2, MakeOutletV/H, CarpetFloorL/R match on both sides"
     }
    ]
   },
@@ -4076,6 +4520,30 @@
     {
      "was": "f_1A53_034F",
      "why": "db worker: Win16 db/ch/DB unit member with matching diagnostics and body (report 2026-09-30)"
+    }
+   ]
+  },
+  "ed_LineTo": {
+   "unit": "root",
+   "seg": 592,
+   "off": 8442,
+   "grounding": "inventory:push_cs_call",
+   "history": [
+    {
+     "was": "f_0250_20FA",
+     "why": "Win16 MAPSYM ed_MoveTo,ed_LineTo; DOS 20FA draws a line from the 20A5 pen position to (x,y) in colour 3DE0 and moves the pen"
+    }
+   ]
+  },
+  "ed_MoveTo": {
+   "unit": "root",
+   "seg": 592,
+   "off": 8357,
+   "grounding": "inventory:push_cs_call",
+   "history": [
+    {
+     "was": "f_0250_20A5",
+     "why": "Win16 MAPSYM DrawSpider,ed_MoveTo,ed_LineTo,DrawPalps,DrawLegs; DOS 20A5 stores (x,y) (3/4 scaled on display 2) into the pen position used by 20FA, like Win16 ed_MoveTo"
     }
    ]
   },
@@ -4905,19 +5373,19 @@
    "unit": "root",
    "seg": 592,
    "off": 5507,
-   "grounding": "inventory:push_cs_call"
+   "alias_of": "DrawEditGraphs"
   },
   "f_0250_16FD": {
    "unit": "root",
    "seg": 592,
    "off": 5885,
-   "grounding": "inventory:far_call"
+   "alias_of": "SetEditWinTitle"
   },
   "f_0250_179F": {
    "unit": "root",
    "seg": 592,
    "off": 6047,
-   "grounding": "inventory:push_cs_call"
+   "alias_of": "PreDrawSpider"
   },
   "f_0250_18E7": {
    "unit": "root",
@@ -4935,25 +5403,25 @@
    "unit": "root",
    "seg": 592,
    "off": 8357,
-   "grounding": "inventory:push_cs_call"
+   "alias_of": "ed_MoveTo"
   },
   "f_0250_20FA": {
    "unit": "root",
    "seg": 592,
    "off": 8442,
-   "grounding": "inventory:push_cs_call"
+   "alias_of": "ed_LineTo"
   },
   "f_0250_2166": {
    "unit": "root",
    "seg": 592,
    "off": 8550,
-   "grounding": "inventory:push_cs_call"
+   "alias_of": "DrawPalps"
   },
   "f_0250_2744": {
    "unit": "root",
    "seg": 592,
    "off": 10052,
-   "grounding": "inventory:push_cs_call"
+   "alias_of": "DrawLegs"
   },
   "f_0250_41CA": {
    "unit": "root",
@@ -4965,37 +5433,37 @@
    "unit": "root",
    "seg": 592,
    "off": 16933,
-   "grounding": "inventory:push_cs_call"
+   "alias_of": "BalloonIsVisible"
   },
   "f_0250_428A": {
    "unit": "root",
    "seg": 592,
    "off": 17034,
-   "grounding": "inventory:far_call"
+   "alias_of": "EggBalloons"
   },
   "f_0250_4302": {
    "unit": "root",
    "seg": 592,
    "off": 17154,
-   "grounding": "inventory:far_call"
+   "alias_of": "FightBalloons"
   },
   "f_0250_437A": {
    "unit": "root",
    "seg": 592,
    "off": 17274,
-   "grounding": "inventory:far_call"
+   "alias_of": "QueenBalloons"
   },
   "f_0250_43F2": {
    "unit": "root",
    "seg": 592,
    "off": 17394,
-   "grounding": "inventory:far_call"
+   "alias_of": "RestBalloons"
   },
   "f_0250_446A": {
    "unit": "root",
    "seg": 592,
    "off": 17514,
-   "grounding": "inventory:push_cs_call"
+   "alias_of": "AddMsgBalloon"
   },
   "f_0250_454D": {
    "unit": "root",
@@ -5007,19 +5475,19 @@
    "unit": "root",
    "seg": 592,
    "off": 19421,
-   "grounding": "reviewed: prologue scan in unreached gap; descent ends in a return; no references found (unreferenced or indirect)"
+   "alias_of": "EditMsgBalloon"
   },
   "f_0250_4C28": {
    "unit": "root",
    "seg": 592,
    "off": 19496,
-   "grounding": "inventory:push_cs_call"
+   "alias_of": "PreDrawBalloons"
   },
   "f_0250_4C34": {
    "unit": "root",
    "seg": 592,
    "off": 19508,
-   "grounding": "inventory:push_cs_call"
+   "alias_of": "DrawBalloons"
   },
   "f_0250_5058": {
    "unit": "root",
@@ -12337,139 +12805,139 @@
    "unit": "S18",
    "seg": 14412,
    "off": 0,
-   "grounding": "inventory:vector"
+   "alias_of": "MakeMap"
   },
   "o18_384C_002B": {
    "unit": "S18",
    "seg": 14412,
    "off": 43,
-   "grounding": "inventory:push_cs_call"
+   "alias_of": "MakeHousePatch"
   },
   "o18_384C_0216": {
    "unit": "S18",
    "seg": 14412,
    "off": 534,
-   "grounding": "inventory:push_cs_call"
+   "alias_of": "FloorTiles"
   },
   "o18_384C_0330": {
    "unit": "S18",
    "seg": 14412,
    "off": 816,
-   "grounding": "inventory:push_cs_call"
+   "alias_of": "CarpetFloorL"
   },
   "o18_384C_03C9": {
    "unit": "S18",
    "seg": 14412,
    "off": 969,
-   "grounding": "inventory:push_cs_call"
+   "alias_of": "MakeLint2"
   },
   "o18_384C_041D": {
    "unit": "S18",
    "seg": 14412,
    "off": 1053,
-   "grounding": "inventory:push_cs_call"
+   "alias_of": "CarpetFloorR"
   },
   "o18_384C_04B3": {
    "unit": "S18",
    "seg": 14412,
    "off": 1203,
-   "grounding": "inventory:push_cs_call"
+   "alias_of": "MakeKitchenWall"
   },
   "o18_384C_05B5": {
    "unit": "S18",
    "seg": 14412,
    "off": 1461,
-   "grounding": "inventory:push_cs_call"
+   "alias_of": "MakeSink"
   },
   "o18_384C_0757": {
    "unit": "S18",
    "seg": 14412,
    "off": 1879,
-   "grounding": "inventory:push_cs_call"
+   "alias_of": "TileFrame1"
   },
   "o18_384C_07F7": {
    "unit": "S18",
    "seg": 14412,
    "off": 2039,
-   "grounding": "inventory:push_cs_call"
+   "alias_of": "TileFrame2"
   },
   "o18_384C_0897": {
    "unit": "S18",
    "seg": 14412,
    "off": 2199,
-   "grounding": "inventory:push_cs_call"
+   "alias_of": "MakeOutletV"
   },
   "o18_384C_0911": {
    "unit": "S18",
    "seg": 14412,
    "off": 2321,
-   "grounding": "inventory:push_cs_call"
+   "alias_of": "MakePlugV"
   },
   "o18_384C_095A": {
    "unit": "S18",
    "seg": 14412,
    "off": 2394,
-   "grounding": "inventory:push_cs_call"
+   "alias_of": "MakeOutletH"
   },
   "o18_384C_09D4": {
    "unit": "S18",
    "seg": 14412,
    "off": 2516,
-   "grounding": "inventory:push_cs_call"
+   "alias_of": "MakePlugH"
   },
   "o18_384C_0A1A": {
    "unit": "S18",
    "seg": 14412,
    "off": 2586,
-   "grounding": "inventory:push_cs_call"
+   "alias_of": "MakeKnob"
   },
   "o18_384C_0A63": {
    "unit": "S18",
    "seg": 14412,
    "off": 2659,
-   "grounding": "inventory:push_cs_call"
+   "alias_of": "MakePenny"
   },
   "o18_384C_0AAB": {
    "unit": "S18",
    "seg": 14412,
    "off": 2731,
-   "grounding": "inventory:push_cs_call"
+   "alias_of": "MakeClip"
   },
   "o18_384C_0AF7": {
    "unit": "S18",
    "seg": 14412,
    "off": 2807,
-   "grounding": "inventory:push_cs_call"
+   "alias_of": "FillMap"
   },
   "o18_384C_0B34": {
    "unit": "S18",
    "seg": 14412,
    "off": 2868,
-   "grounding": "inventory:push_cs_call"
+   "alias_of": "FillMapLegs"
   },
   "o18_384C_0C13": {
    "unit": "S18",
    "seg": 14412,
    "off": 3091,
-   "grounding": "inventory:push_cs_call"
+   "alias_of": "MakeYardPatch"
   },
   "o18_384C_0DDD": {
    "unit": "S18",
    "seg": 14412,
    "off": 3549,
-   "grounding": "inventory:push_cs_call"
+   "alias_of": "AddRocks"
   },
   "o18_384C_0FA6": {
    "unit": "S18",
    "seg": 14412,
    "off": 4006,
-   "grounding": "inventory:push_cs_call"
+   "alias_of": "AddRock5"
   },
   "o18_384C_1056": {
    "unit": "S18",
    "seg": 14412,
    "off": 4182,
-   "grounding": "inventory:push_cs_call"
+   "alias_of": "AddRock3"
   },
   "o19_384C_0000": {
    "unit": "S19",
@@ -14222,6 +14690,11 @@
    "off": 584,
    "grounding": "GetStrategy (root:1383:0011): mov es:[0248],0 / =1 when spider near; Win16 GetStrategy writes ChaseSpid at the same sites (unit SIMTWO aligned 1:1)"
   },
+  "CurGndTileID": {
+   "seg": 15703,
+   "off": 1952,
+   "grounding": "MakeYardPatch (S18:384C:0C13) and MakeHousePatch (002B): mov es,[CONST 87A2]; mov es:[07A0],0x3e8/0x3e9 then f_0250_036A(0,v); Win16 MakeYardPatch body: CurGndTileID = 0x3e8; OverlayTileSet(0, 0x3e8) (MAPSYM SIMANT_DATA_GROUP _CurGndTileID)"
+  },
   "Cycle": {
    "seg": 20726,
    "off": 3848,
@@ -14230,6 +14703,17 @@
     {
      "was": "fd_50F6_0F08",
      "why": "worker data identification: Win16 variable of the same role at the same use sites (reports dig/ovl08/simA/sim10F7)"
+    }
+   ]
+  },
+  "DROPdir": {
+   "seg": 20726,
+   "off": 3898,
+   "grounding": "f_0BE8_08BD: mov es,[DS:8130] (CONST 50F6); mov bx,es:[0F3A] direction index",
+   "history": [
+    {
+     "was": "fd_50F6_0F3A",
+     "why": "FloorTiles (S18:384C:0216) stores 0, MakeKitchenWall (04B3) stores 2, CarpetFloorL 1, CarpetFloorR 3 via mov es,[CONST 87A4]; es:[0F3A]; Win16 FloorTiles DROPdir=0 and MakeKitchenWall DROPdir=2 (MAPSYM PACK _DROPdir); root f_0BE8_08BD indexes a direction table with it"
     }
    ]
   },
@@ -14569,6 +15053,16 @@
    "off": 3968,
    "grounding": "DoAntLions (root:0AD9:05A3): long ++ for red (0x80) ants; Win16 RAntsEaten"
   },
+  "RT3": {
+   "seg": 15703,
+   "off": 2392,
+   "grounding": "AddRock3 (S18:384C:1056): mov es,[CONST 87AA]; es:[si+0958] 6x3x3 rock stencils; Win16 MAPSYM _RT3 at SIMANT_DATA_GROUP 87A0 (delta 0x7E48 as RT5/IdealCaste); RT5+150 = RT3 on both sides"
+  },
+  "RT5": {
+   "seg": 15703,
+   "off": 2242,
+   "grounding": "AddRock5 (S18:384C:0FA6): mov es,[CONST 87A8]; es:[si+08C2] 6x5x5 rock stencils (shape*25+row*5+col); Win16 MAPSYM _RT5 at SIMANT_DATA_GROUP 870A, same delta 0x7E48 as IdealCaste (3D57:07DA <-> 8622), size 0x96 = 6*25 to _RT3"
+  },
   "RedLocX": {
    "seg": 20726,
    "off": 1168,
@@ -14646,6 +15140,11 @@
      "why": "worker data identification: Win16 variable of the same role at the same use sites (reports dig/ovl08/simA/sim10F7)"
     }
    ]
+  },
+  "_ctype": {
+   "seg": 21939,
+   "off": 31262,
+   "grounding": "MSC runtime ctype table (_ctype.asm data): 55B3:7A1E holds 00 then 20h x9 (control), 'a'+1 -> 82h (_LOWER|_HEX); S23 win_PrintStyleTextInRect: test byte ptr [bx+7A1F],2 = islower via (_ctype+1)[c]"
   },
   "db_handles": {
    "seg": 20726,
@@ -14808,6 +15307,11 @@
    "seg": 15703,
    "off": 1962,
    "grounding": "EndGameDialog (S14:384C:0DE5): mov es,[876A]; cmp word es:[07AA],0 sound option"
+  },
+  "fd_3D57_07AC": {
+   "seg": 15703,
+   "off": 1964,
+   "grounding": "YellowBirth (S22:39C7:090D): mov es,[CONST 8804 = 3D57]; saved from es:[07AC], cleared, restored after the birth animation (option flag, next to fd_3D57_07AA)"
   },
   "fd_3D57_07AE": {
    "seg": 15703,
@@ -15957,7 +16461,7 @@
   "fd_50F6_0F3A": {
    "seg": 20726,
    "off": 3898,
-   "grounding": "f_0BE8_08BD: mov es,[DS:8130] (CONST 50F6); mov bx,es:[0F3A] direction index"
+   "alias_of": "DROPdir"
   },
   "fd_50F6_0F3E": {
    "seg": 20726,
@@ -15968,6 +16472,11 @@
    "seg": 20726,
    "off": 3906,
    "grounding": "f_10F7_0CA8 (root:10F7): mov es,[CONST word = 50F6]; es:[..0F42] far data reference"
+  },
+  "fd_50F6_0F44": {
+   "seg": 20726,
+   "off": 3908,
+   "grounding": "processEdit (S22:39C7:011A): mov es,[CONST 87BC]; cmp es:[0F44],0 / mov es:[0F44],0 (Win16 YellowDied clear)"
   },
   "fd_50F6_0F78": {
    "seg": 20726,
@@ -16138,6 +16647,11 @@
    "seg": 20726,
    "off": 4268,
    "grounding": "o06_35F5_11FF: mov es,[CONST 84D8 = 50F6]; es:[10AC] (S06:35F5 InitSimYard/yard sim unit)"
+  },
+  "fd_50F6_10AE": {
+   "seg": 20726,
+   "off": 4270,
+   "grounding": "processSpider (S22:39C7:06F4/074A): mov es,[CONST 87E2]; mov es:[10AE],-1 / =life (Win16 StargLife)"
   },
   "fd_50F6_10B0": {
    "seg": 20726,
@@ -16394,6 +16908,11 @@
    "off": 6592,
    "grounding": "processExp (S22:3BBD:000A): far variable in DGROUP via CONST word 885E (=DGROUP), idiv es:[19C0]"
   },
+  "fd_55B3_29A2": {
+   "seg": 21939,
+   "off": 10658,
+   "grounding": "DoLaserFire (S22:39C7:06B4): mov es,[CONST 87DE = 55B3]; mov word es:[29A2],1 after map-window laser draw (far variable in DGROUP)"
+  },
   "fd_55B3_360C": {
    "seg": 21939,
    "off": 13836,
@@ -16563,6 +17082,11 @@
    "seg": 21939,
    "off": 37208,
    "grounding": "f_1D8E_070E: lcall [9158] (far code pointer, BSS)"
+  },
+  "g_916C": {
+   "seg": 21939,
+   "off": 37228,
+   "grounding": "DoLaserFire (S22:39C7:0540): lcall [916C](x0,y0,x1,y1,color) line drawer far function pointer (companion of g_9134)"
   },
   "g_9170": {
    "seg": 21939,
