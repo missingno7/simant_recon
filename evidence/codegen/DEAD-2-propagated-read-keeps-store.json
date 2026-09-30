@@ -1,0 +1,26 @@
+{
+ "id": "DEAD-2",
+ "question": "Which dead stores of a chained zero initialisation survive MSC 6.00AX /Og (fastcall, /Oe)? Positive control root:259D win_PrintTextInRect (worker resG): the original stores 0 into two slots that are never read ([bp-4], [bp-0Ch]). They are reproduced by (1) a local 'start' whose only read, 'if (brk == start)', is replaced by the propagated constant 0 -- its store is kept although the compare reads the constant; and (2) the stack home of the enregistered counter i (in DI), which receives its own store at i's position in the chain 'done = start = i = brk = pixw = 0' (rightmost stored first, then 'mov di,ax'). Negative contrast: comparing with the literal 0 and a chain without 'start' drops both stores (frame 0xB4 instead of 0xB6, 379 instead of 382 bytes).",
+ "header": "struct Rect {\n    int left;\n    int top;\n    int right;\n    int bottom;\n};\nextern int far f_24AB_030B(void);\nextern int far f_24AB_0367(int c);\nextern void far f_24AB_038D(int x, int y, char far *text);\nextern char far * far _fstrncpy(char far *dst, char far *src, unsigned int n);\n",
+ "variants": {
+  "start_read": "void _fastcall win_PrintTextInRect(int first, char far *text, struct Rect far *rect)\n{\n    int c;\n    int start;\n    int pixw;\n    int brk;\n    int line;\n    int done;\n    char far *p;\n    int y;\n    int w;\n    int lh;\n    int nlines;\n    int len;\n    char buf[150];\n    int i;\n\n    w = rect->right - rect->left;\n    y = rect->top;\n    lh = f_24AB_030B();\n    nlines = (rect->bottom - rect->top) / lh;\n    line = 0;\n    while (*text) {\n        if (first + nlines <= line)\n            break;\n        p = text;\n        done = start = i = brk = pixw = 0;\n        while (pixw < w && !done) {\n            c = *p++;\n            pixw += f_24AB_0367(c);\n            if (pixw < w) {\n                switch (c) {\n                case 0:\n                case 10:\n                case 13:\n                    done = 1;\n                case ' ':\n                case '(':\n                case '[':\n                case '{':\n                    brk = i - 1;\n                    break;\n                case '!':\n                case ')':\n                case ',':\n                case '-':\n                case '.':\n                case '?':\n                case ']':\n                case '}':\n                    brk = i;\n                    break;\n                }\n            }\n            i++;\n        }\n        if (brk == start)\n            brk = i - 1;\n        if (first <= line) {\n            len = brk + 1;\n            _fstrncpy(buf, text, len);\n            buf[len] = 0;\n            f_24AB_038D(rect->left, y, buf);\n        }\n        text += len;\n        while (*text == ' ')\n            text++;\n        if (*text == 10 || *text == 13)\n            text++;\n        y += lh;\n        line++;\n    }\n}\n",
+  "literal": "void _fastcall win_PrintTextInRect(int first, char far *text, struct Rect far *rect)\n{\n    int c;\n    int start;\n    int pixw;\n    int brk;\n    int line;\n    int done;\n    char far *p;\n    int y;\n    int w;\n    int lh;\n    int nlines;\n    int len;\n    char buf[150];\n    int i;\n\n    w = rect->right - rect->left;\n    y = rect->top;\n    lh = f_24AB_030B();\n    nlines = (rect->bottom - rect->top) / lh;\n    line = 0;\n    while (*text) {\n        if (first + nlines <= line)\n            break;\n        p = text;\n        pixw = brk = start = done = i = 0;\n        while (pixw < w && !done) {\n            c = *p++;\n            pixw += f_24AB_0367(c);\n            if (pixw < w) {\n                switch (c) {\n                case 0:\n                case 10:\n                case 13:\n                    done = 1;\n                case ' ':\n                case '(':\n                case '[':\n                case '{':\n                    brk = i - 1;\n                    break;\n                case '!':\n                case ')':\n                case ',':\n                case '-':\n                case '.':\n                case '?':\n                case ']':\n                case '}':\n                    brk = i;\n                    break;\n                }\n            }\n            i++;\n        }\n        if (brk == 0)\n            brk = i - 1;\n        if (first <= line) {\n            len = brk + 1;\n            _fstrncpy(buf, text, len);\n            buf[len] = 0;\n            f_24AB_038D(rect->left, y, buf);\n        }\n        text += len;\n        while (*text == ' ')\n            text++;\n        if (*text == 10 || *text == 13)\n            text++;\n        y += lh;\n        line++;\n    }\n}\n"
+ },
+ "profiles": [
+  {
+   "profile": "msc600ax",
+   "flags": [
+    "/AL",
+    "/Os",
+    "/Oe",
+    "/Og",
+    "/Gs",
+    "/Zi"
+   ]
+  }
+ ],
+ "expect": {
+  "start_read@0": "sub ax, ax; mov word ptr [bp - 6], ax; mov word ptr [bp - 0xe], ax; mov word ptr [bp - 4], ax; mov word ptr [bp - 0xc], ax; mov word ptr [bp - 0x12], ax; mov di, ax",
+  "literal@0": "sub ax, ax; mov word ptr [bp - 6], ax; mov word ptr [bp - 0x10], ax; mov word ptr [bp - 0xc], ax; mov word ptr [bp - 4], ax; mov di, ax"
+ }
+}

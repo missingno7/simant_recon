@@ -60,10 +60,10 @@ void _fastcall win_DrawBitMapAtObjNum(int obj, int id)
     win_UnlockWin(obj);
 }
 
-/* SCAFFOLD BEGIN: best drafts, not exact (see build/workers/win notes).
+/* SCAFFOLD BEGIN: best draft, not exact (see build/workers/win notes).
  * win_DrawBitMap: register/slot allocation residue; its three direct root->overlay far calls
  * (3258:040D, 32B5:000F, 35A6:0007) cannot be bound by the matcher (no RTLink vector).
- * win_PrintTextInRect: two dead zero-stores ([bp-4], [bp-0xc]) that /Og removes here survive in the original. */
+ */
 int _fastcall win_DrawBitMap(int x, int y, int id)
 {
     char far *h;
@@ -126,13 +126,16 @@ int _fastcall win_DrawBitMap(int x, int y, int id)
     return 0;
 }
 
+/* SCAFFOLD END */
+/* `start` (always 0, read only in `brk == start`) and the order of the chained zero
+   assignment reproduce the original's two dead stores: MSC keeps the store of a local whose
+   only read is later replaced by the propagated constant, and the home of the enregistered i
+   receives its own store in chain position (worker resG).  The name is a hypothesis. */
 void _fastcall win_PrintTextInRect(int first, char far *text, struct Rect far *rect)
 {
     int c;
-    int v4;
+    int start;
     int pixw;
-    int va;
-    int vc;
     int brk;
     int line;
     int done;
@@ -154,7 +157,7 @@ void _fastcall win_PrintTextInRect(int first, char far *text, struct Rect far *r
         if (first + nlines <= line)
             break;
         p = text;
-        pixw = brk = v4 = vc = done = i = 0;
+        done = start = i = brk = pixw = 0;
         while (pixw < w && !done) {
             c = *p++;
             pixw += f_24AB_0367(c);
@@ -184,7 +187,7 @@ void _fastcall win_PrintTextInRect(int first, char far *text, struct Rect far *r
             }
             i++;
         }
-        if (brk == 0)
+        if (brk == start)
             brk = i - 1;
         if (first <= line) {
             len = brk + 1;
@@ -201,4 +204,3 @@ void _fastcall win_PrintTextInRect(int first, char far *text, struct Rect far *r
         line++;
     }
 }
-/* SCAFFOLD END */

@@ -462,11 +462,10 @@ def _data_target(f: dict, placements: dict, unit: str | None = None):
     """(frame, offset-in-frame) of a data fixup target, or None.
 
     Segment targets: the module's placed segments and its own code segments (``placements``
-    carries both).  Code externals (rule DATAPTR-1): root and same-section procedures are
-    addressed directly (the S00-S03 dispatch tables in DGROUP point into their own overlay
-    frames; no S27 pointer addresses the vector table); a procedure of *another* overlay
-    section goes through its RTLink vector when RTLink built one, else it is addressed
-    directly, exactly like a far call in code (match.Binder)."""
+    carries both).  Code externals (rules DATAPTR-1, VEC-1): a procedure with an RTLink
+    vector is addressed through it, exactly like a far address in code (match.Binder); every
+    other procedure is addressed directly (the S00-S03 dispatch tables in DGROUP point into
+    their own overlay frames; no S27 pointer addresses the vector table)."""
     tk, tn = f["target_kind"], f["target"]
     if tk == "group" and tn == "DGROUP":
         return match.DGROUP_SEG, 0
@@ -478,8 +477,10 @@ def _data_target(f: dict, placements: dict, unit: str | None = None):
     s = match.obj_name_lookup(tn) if tk == "external" else None
     if s is None:
         return None
-    if s["kind"] == "code" and s.get("unit", "root") not in ("root", unit):
-        v = match.vector_for(s["unit"], s["seg"], s["off"])
+    if s["kind"] == "code":
+        # rule VEC-1: a data pointer is never a call, so a vectored procedure is always
+        # addressed through its vector (no instance among S27's 177 code pointers)
+        v = match.vector_for(s.get("unit", "root"), s["seg"], s["off"])
         if v is not None:
             return exemod.MANAGER_SEG, v.offset
     return s["seg"], s["off"]

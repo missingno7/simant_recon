@@ -115,3 +115,23 @@ reads 3 bytes into it; those bytes lie inside BSS at run time.
 MSC code segments are `word` aligned. `/Os` emits no end-of-segment `90` pad, so an odd
 segment end is followed by one LINK fill byte `00` (e.g. `0x931`, `0x195AB`) before the
 next word-aligned module. A trailing `90` inside a segment indicates a non-`/Os` module.
+
+## VEC-1: which references go through RTLink vectors (worker vec, 2026-09-30)
+
+Vectors belong to *symbols*: 136 vectors, 130 for overlay procedures and 6 for root procedures
+(the window hooks whose addresses f_00BA_0002 takes). Which procedures get a vector is a
+link-script decision; the objects do not record it (vectored and direct references are the
+identical MSC fixup pair). Rule: a far reference to procedure P goes through P's vector whenever
+P has one, except a far call/jmp from P's own unit (root to root, Snn to Snn), which stays direct.
+A far *address* of P (code offset16/base16 or non-call pointer32, or a data pointer) uses the
+vector if one exists. A procedure without a vector is always referenced directly.
+Evidence: calls from another unit through the vector 248/248; same-unit calls direct 4/4; far
+addresses in code through the vector 10/10; without a vector: 20 direct cross-section root far
+calls into S00-S03, 32 procedures + 13 labels addressed directly, 177 data pointers direct.
+References through vectors: 258 in total (247 far calls, 1 far jmp, 10 `mov ax,VEC; mov dx,2CFF`
+address loads in 00BA); the earlier count of 248 missed the split loads. The gate keys the lookup on
+the candidate's own resolved fixup target (the vector table is layout of the RTLink manager region,
+like segment frames); it never reads the bytes at the reference site. Vector allocation order:
+vectors 1-10 follow the alphabetical order of the Win16 hook names, 11-18 are the display-driver
+entry points, and from 26AA vectors follow first reference in object-processing order, so 18 were
+declared up front and 118 were created on demand. Scripts and tables: build/workers/vec/.
