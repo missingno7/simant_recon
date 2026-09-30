@@ -6,10 +6,21 @@ typedef struct {
     int y;
 } Point;
 
+int far f_004A_000A(int n);
+int far f_004A_0052(int n);
+int far f_004A_008A(int n);
+int far f_004A_00D2(int n);
+int far f_004A_010A(int step);
+int far f_004A_0172(int step);
+int far f_004A_01E9(int step);
+int far f_004A_0253(int step);
+void far f_004A_02AD(void);
+void far f_004A_038B(void);
+void far f_004A_040E(void);
+
 extern int far fd_50F6_0F36;
 extern Point far fd_50F6_0508;
 extern void far f_00F8_0385(void);
-void far f_004A_038B(void);
 
 int far f_004A_000A(int n)
 {
@@ -49,7 +60,6 @@ int far f_004A_0052(int n)
 
 extern int far fd_50F6_0F38;
 extern void far f_00F8_037D(void);
-void far f_004A_040E(void);
 
 int far f_004A_008A(int n)
 {
@@ -89,7 +99,6 @@ int far f_004A_00D2(int n)
 
 extern void far f_00F8_036D(void);
 extern void far f_00F8_038D(void);
-void far f_004A_02AD(void);
 
 int far f_004A_010A(int step)
 {

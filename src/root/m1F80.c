@@ -12,6 +12,16 @@ struct Pt {
     int y;
 };
 
+struct Pt far f_1F80_000C(char far *);
+void far f_1F80_0081(int);
+char far * far f_1F80_00B8(char far *, int);
+int far f_1F80_0109(int);
+void far f_1F80_0122(struct Rect far *, int, char far *);
+int far f_1F80_0177(struct Rect far *, char far *);
+void far f_1F80_01A8(struct Rect far *, int, int);
+void far f_1F80_01F3(struct Rect far *, int, int, int, int);
+void far f_1F80_0280(char far *);
+
 extern char far * far _fstrchr(char far *s, int c);
 extern unsigned int far _fstrlen(char far *s);
 

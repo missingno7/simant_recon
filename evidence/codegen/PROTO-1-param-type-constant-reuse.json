@@ -1,0 +1,25 @@
+{
+ "id": "PROTO-1",
+ "question": "Does the declared type of a prototype parameter change register choice for a neighbouring argument although the pushed bytes are identical? Positive control DBRecall (root:19A9): `f_19DC_02D9(file, &unpacked, 2L)` loads &unpacked with `lea cx` only when the callee's third parameter is declared `unsigned long` (with `long`: `lea ax`). Same family: f_19DC_02FB is exact only when the _fmemcpy prototype's size parameter is `int` (or unprototyped), not `unsigned int` (size_t). Mechanism (consistent with both controls): the constant argument is converted to the parameter type; when a constant of the same value *and type* is used later (here (unsigned long)length + 2 / - 2; in 02FB `left -= 0x4000` on an unsigned), MSC keeps it in AX and the neighbouring address computation takes CX.",
+ "header": "",
+ "variants": {
+  "signed_long": "extern void far g(int f, void far *b, long n);\nextern char far * far a(unsigned long size, int flags, char far *name);\nextern char far * far lk(char far *h);\nchar far * far h(int f, unsigned int length)\n{\n    unsigned int u;\n    char far *d;\n    char far *p;\n    char name[16];\n\n    g(f, &u, 2L);\n    d = a((unsigned long)u, 1, name);\n    p = a((unsigned long)length + 2, 0, name);\n    g(f, lk(p), (unsigned long)length - 2);\n    return d;\n}\n",
+  "unsigned_long": "extern void far g(int f, void far *b, unsigned long n);\nextern char far * far a(unsigned long size, int flags, char far *name);\nextern char far * far lk(char far *h);\nchar far * far h(int f, unsigned int length)\n{\n    unsigned int u;\n    char far *d;\n    char far *p;\n    char name[16];\n\n    g(f, &u, 2L);\n    d = a((unsigned long)u, 1, name);\n    p = a((unsigned long)length + 2, 0, name);\n    g(f, lk(p), (unsigned long)length - 2);\n    return d;\n}\n"
+ },
+ "profiles": [
+  {
+   "profile": "msc600ax",
+   "flags": [
+    "/AL",
+    "/Os",
+    "/Oeg",
+    "/Gs",
+    "/Zi"
+   ]
+  }
+ ],
+ "expect": {
+  "signed_long@0": "push ax; lea ax, [bp - 6]",
+  "unsigned_long@0": "push ax; lea cx, [bp - 6]"
+ }
+}

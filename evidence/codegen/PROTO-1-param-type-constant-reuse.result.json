@@ -1,0 +1,49 @@
+{
+ "id": "PROTO-1",
+ "question": "Does the declared type of a prototype parameter change register choice for a neighbouring argument although the pushed bytes are identical? Positive control DBRecall (root:19A9): `f_19DC_02D9(file, &unpacked, 2L)` loads &unpacked with `lea cx` only when the callee's third parameter is declared `unsigned long` (with `long`: `lea ax`). Same family: f_19DC_02FB is exact only when the _fmemcpy prototype's size parameter is `int` (or unprototyped), not `unsigned int` (size_t). Mechanism (consistent with both controls): the constant argument is converted to the parameter type; when a constant of the same value *and type* is used later (here (unsigned long)length + 2 / - 2; in 02FB `left -= 0x4000` on an unsigned), MSC keeps it in AX and the neighbouring address computation takes CX.",
+ "results": [
+  {
+   "variant": "signed_long",
+   "profile_index": 0,
+   "profile": "msc600ax",
+   "flags": [
+    "/AL",
+    "/Os",
+    "/Oeg",
+    "/Gs",
+    "/Zi"
+   ],
+   "source_sha256": "bffd783d879ba5998aaa34778745235292615922dda71a59f29e86daf697eed1",
+   "bytes": "558bec83ec1656b802009952508d46fa1650ff76069a0000000083c40a8d46ea1650b80100508b46fa2bd252509a0000000083c40a8bf08956fe8b46082bd28bc88bda2d02001bd252508d46ea16502bc05083c10213d853519a0000000083c40a52509a000000005b5b5250ff76069a0000000083c40a8bc68b56fe5e8be55dcb",
+   "disasm": "push bp; mov bp, sp; sub sp, 0x16; push si; mov ax, 2; cdq; push dx; push ax; lea ax, [bp - 6]; push ss; push ax; push word ptr [bp + 6]; lcall 0, 0; add sp, 0xa; lea ax, [bp - 0x16]; push ss; push ax; mov ax, 1; push ax; mov ax, word ptr [bp - 6]; sub dx, dx; push dx; push ax; lcall 0, 0; add sp, 0xa; mov si, ax; mov word ptr [bp - 2], dx; mov ax, word ptr [bp + 8]; sub dx, dx; mov cx, ax; mov bx, dx; sub ax, 2; sbb dx, dx; push dx; push ax; lea ax, [bp - 0x16]; push ss; push ax; sub ax, ax; push ax; add cx, 2; adc bx, ax; push bx; push cx; lcall 0, 0; add sp, 0xa; push dx; push ax; lcall 0, 0; pop bx; pop bx; push dx; push ax; push word ptr [bp + 6]; lcall 0, 0; add sp, 0xa; mov ax, si; mov dx, word ptr [bp - 2]; pop si; mov sp, bp; pop bp; retf"
+  },
+  {
+   "variant": "unsigned_long",
+   "profile_index": 0,
+   "profile": "msc600ax",
+   "flags": [
+    "/AL",
+    "/Os",
+    "/Oeg",
+    "/Gs",
+    "/Zi"
+   ],
+   "source_sha256": "ab7b9f5c9eff34c645c6988eec69d6bf6fe2e9f79671762a1f0e589afa5dd110",
+   "bytes": "558bec83ec1656b802009952508d4efa1651ff76069a0000000083c40a8d46ea1650b80100508b46fa2bd252509a0000000083c40a8bf08956fe8b46082bd28bc88bda2d02001bd252508d46ea16502bc05083c10213d853519a0000000083c40a52509a000000005b5b5250ff76069a0000000083c40a8bc68b56fe5e8be55dcb",
+   "disasm": "push bp; mov bp, sp; sub sp, 0x16; push si; mov ax, 2; cdq; push dx; push ax; lea cx, [bp - 6]; push ss; push cx; push word ptr [bp + 6]; lcall 0, 0; add sp, 0xa; lea ax, [bp - 0x16]; push ss; push ax; mov ax, 1; push ax; mov ax, word ptr [bp - 6]; sub dx, dx; push dx; push ax; lcall 0, 0; add sp, 0xa; mov si, ax; mov word ptr [bp - 2], dx; mov ax, word ptr [bp + 8]; sub dx, dx; mov cx, ax; mov bx, dx; sub ax, 2; sbb dx, dx; push dx; push ax; lea ax, [bp - 0x16]; push ss; push ax; sub ax, ax; push ax; add cx, 2; adc bx, ax; push bx; push cx; lcall 0, 0; add sp, 0xa; push dx; push ax; lcall 0, 0; pop bx; pop bx; push dx; push ax; push word ptr [bp + 6]; lcall 0, 0; add sp, 0xa; mov ax, si; mov dx, word ptr [bp - 2]; pop si; mov sp, bp; pop bp; retf"
+  }
+ ],
+ "checks": [
+  {
+   "check": "signed_long@0",
+   "needle": "push ax; lea ax, [bp - 6]",
+   "ok": true
+  },
+  {
+   "check": "unsigned_long@0",
+   "needle": "push ax; lea cx, [bp - 6]",
+   "ok": true
+  }
+ ],
+ "all_checks_pass": true
+}

@@ -40,7 +40,6 @@ extern Handle far fd_50F6_10CC;
 
 void far f_00BA_0002(void)
 {
-    int far *fh;
     struct WinFileHeader hdr;
     Handle h;
     int n;
@@ -58,15 +57,14 @@ void far f_00BA_0002(void)
     f_20E8_089F(f_00BA_0211);
     f_22BF_0E83(0x1900, 0x100);
     InitMapFunctions();
-    fh = &fd_50F6_10D0;
-    if (*fh == 0)
+    if (fd_50F6_10D0 == 0)
         return;
-    lseek(*fh, 0L, 0);
-    read(*fh, &hdr, sizeof hdr);
-    lseek(*fh, hdr.headers + sizeof hdr, 0);
+    lseek(fd_50F6_10D0, 0L, 0);
+    read(fd_50F6_10D0, &hdr, sizeof hdr);
+    lseek(fd_50F6_10D0, hdr.headers + sizeof hdr, 0);
     h = f_171C_1A9E(0x100L, 1, "winheaders");
-    n = read(*fh, f_171C_1B84(h), 0x100);
-    read(*fh, f_171C_1B84(h), 1);
+    n = read(fd_50F6_10D0, f_171C_1B84(h), 0x100);
+    read(fd_50F6_10D0, f_171C_1B84(h), 1);
     f_171C_1BBA(h);
     f_171C_1BBA(h);
     if (n != 0x100)
