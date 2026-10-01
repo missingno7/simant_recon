@@ -422,6 +422,9 @@ def run_link(out: Path, profile: str = 'rtlink610', timeout: int = 900) -> int:
     for lib in ('llibcr.lib', 'libh.lib'):
         shutil.copyfile(libs[lib]['path'], out / lib.upper())
     (out / 'NUL.TXT').write_bytes(b'')
+    # 4.00 defaults to POSITIONAL input. This documented setting also works
+    # with 6.10 and avoids relying on a machine's pre-existing configuration.
+    (out / 'RTLINK.CFG').write_bytes(b'SYNTAX = FREEFORMAT\r\n')
     bat = ['@echo off', f"D:{BS}{prof['executable']} @T.LNK < NUL.TXT > LINK.LOG"]
     (out / 'RUN.BAT').write_bytes(('\r\n'.join(bat) + '\r\n').encode('ascii'))
     conf = []
@@ -443,35 +446,94 @@ def run_link(out: Path, profile: str = 'rtlink610', timeout: int = 900) -> int:
 
 
 # ---------------------------------------------------------------- comparison summary
+def read_trial_sections(raw: bytes, map_text: str) -> tuple[int, list[dict]]:
+    """Read the format described by the linked manager's $$OVLPBLOCK.
+
+    4.00 has 16-byte records without a file-size word; 6.10 has 18-byte
+    records. Both publish the count/table offsets and record size in this
+    parameter block. This is trial inspection, never an acceptance gate.
+    """
+    import re
+    if len(raw) < 28 or raw[:2] != b'MZ':
+        raise ValueError('trial has no complete MZ header')
+    hdr = struct.unpack_from('<H', raw, 8)[0] * 16
+    m = re.search(r'([0-9A-Fa-f]{4}):([0-9A-Fa-f]{4})\s+Res\s+\$\$OVLPBLOCK\b', map_text)
+    if not m:
+        raise ValueError('trial map has no resident $$OVLPBLOCK')
+    frame = int(m.group(1), 16) * 16
+    block = hdr + frame + int(m.group(2), 16)
+    if block + 5 > len(raw):
+        raise ValueError('trial parameter block is outside the image')
+    count_off, table_off, entry_size = struct.unpack_from('<HHB', raw, block)
+    if entry_size not in (16, 18):
+        raise ValueError(f'unsupported RTLink section entry size {entry_size}')
+    count_at, table_at = hdr + frame + count_off, hdr + frame + table_off
+    if count_at + 2 > len(raw):
+        raise ValueError('trial section count is outside the image')
+    count = struct.unpack_from('<H', raw, count_at)[0]
+    if not 1 <= count <= 256 or table_at + count * entry_size > len(raw):
+        raise ValueError('trial section table is invalid or truncated')
+    rows = []
+    for i in range(count):
+        at = table_at + i * entry_size
+        ld, fn, fp0, fp1, flags, mem, nrel, father, sn = struct.unpack_from('<HHHBBHHHH', raw, at)
+        fs = struct.unpack_from('<H', raw, at + 16)[0] if entry_size == 18 else None
+        rows.append({'load_seg': ld, 'flags': flags, 'mem_paras': mem, 'reloc_count': nrel,
+                     'section_id': sn, 'file_paras': fs, 'file_pos': (fp0 | fp1 << 16) * 16,
+                     'entry_size': entry_size})
+    for i, row in enumerate(rows):
+        fpos = row['file_pos']
+        image_start = fpos + ((row['reloc_count'] * 4 + 15) // 16) * 16
+        if row['file_paras'] is not None:
+            image_end = image_start + row['file_paras'] * 16
+        else:
+            # The old format supplies no file length. Bound it by the next
+            # section's file position, or EOF for the final resident section.
+            image_end = rows[i + 1]['file_pos'] if i + 1 < count else len(raw)
+        missing = max(0, image_end - len(raw))
+        # File sizes are paragraph counts. RTLink may omit the final partial
+        # paragraph's padding at EOF (6.10's real trial omits three bytes).
+        # Record that shortage explicitly; never manufacture bytes to compare.
+        if i + 1 == count and missing < 16:
+            image_end = min(image_end, len(raw))
+        if not hdr <= fpos <= image_start <= image_end <= len(raw):
+            raise ValueError(f'trial section {i} has invalid file bounds')
+        row.update(image_start=image_start, image_end=image_end,
+                   unwritten_final_paragraph_bytes=missing)
+    return hdr, rows
+
+
 def summarize(out: Path) -> dict:
     """Section table, relocation sets/order and raw image differences for unstubbed sections.
     Raw differences include fixup fields. This trial report is diagnostic, never acceptance;
     it reads the original only to compare. Vector analysis is not implemented here."""
-    import re
     x = exe.load()
     text = (out / 'SIMANT.MAP').read_text(errors='replace')
     raw = (out / 'SIMANT.EXE').read_bytes()
-    hdr = struct.unpack_from('<H', raw, 8)[0] * 16
-    m = re.search(r'([0-9A-F]{4}):([0-9A-F]{4})\s+Res\s+\$\$OVLINFO', text)
-    info = int(m.group(1), 16) * 16 + int(m.group(2), 16)
-    nsect = struct.unpack_from('<H', raw, hdr + info + 12)[0]
+    _, section_rows = read_trial_sections(raw, text)
+    if len(section_rows) != len(x.sections):
+        raise ValueError(f'trial section count {len(section_rows)} != oracle {len(x.sections)}')
     trial = json.loads((out / 'trial.json').read_text())
     stubbed = {s['unit'] for s in trial['stubs'] if s.get('bytes')}
-    rep = {'sections': [], 'vectors': {}}
-    for i in range(nsect):
-        r = raw[hdr + info + 18 + 18 * i: hdr + info + 36 + 18 * i]
-        ld, fn, fp0, fp1, fl, mem, nrel, fa, sn, fs = struct.unpack('<HHHBBHHHHH', r)
+    rep = {'sections': [], 'vectors': {}, 'section_entry_size': section_rows[0]['entry_size']}
+    for i, r in enumerate(section_rows):
+        ld, fl, mem, nrel, sn, fs = (r[k] for k in ('load_seg', 'flags', 'mem_paras',
+                                                   'reloc_count', 'section_id', 'file_paras'))
         s = x.sections[i]
         row = {'section': s.name, 'flags': [s.flags >> 8, fl], 'mem_paras': [s.mem_paras, mem],
                'relocs': [s.reloc_count, nrel], 'id': [s.section_id, sn], 'file_paras': [s.file_paras, fs],
                'load_rel': [s.load_seg - x.sections[0].load_seg, None]}
+        if r['unwritten_final_paragraph_bytes']:
+            row['unwritten_final_paragraph_bytes'] = r['unwritten_final_paragraph_bytes']
         if i < 27 and s.name not in stubbed:
-            fpos = (fp0 | fp1 << 16) * 16
+            fpos = r['file_pos']
             tr = [(sg * 16 + of) - ld * 16 for of, sg in (struct.unpack_from('<HH', raw, fpos + 4 * k) for k in range(nrel))]
             orr = [(sg * 16 + of) - s.load_seg * 16 for sg, of in s.relocs]
-            img = raw[fpos + ((nrel * 4 + 15) // 16) * 16:][:fs * 16]
+            img = raw[r['image_start']:r['image_end']]
             diff = [k for k in range(min(len(img), len(s.data))) if img[k] != s.data[k]]
-            row.update(reloc_set_equal=sorted(tr) == sorted(orr), reloc_order_equal=tr == orr, bytes_differing=len(diff))
+            row.update(reloc_set_equal=sorted(tr) == sorted(orr), reloc_order_equal=tr == orr,
+                       image_bytes=[len(s.data), len(img)],
+                       bytes_differing=len(diff) + abs(len(img) - len(s.data)))
         rep['sections'].append(row)
     return rep
 

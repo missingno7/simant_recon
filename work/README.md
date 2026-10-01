@@ -27,8 +27,9 @@ registries are published only through the tools (promote.py, rename.py, symbols.
   the earlier volume-function body remains unclaimed.
 * `takeover/delta/`: accepted complete sample decoder TU, natural-C and inline-assembly
   controls, latest validation and whole-build check.
-* `takeover/full-search/`: whole-module snapshots, with later acceptances marked; 33 functions remain open;
-  merge hypotheses into current sources and recheck all claims before acceptance.
+* `takeover/full-search/`: whole-module snapshots, with later acceptances marked;
+  its 33-function snapshot predates later recovery (32 now remain; see docs/next-steps.md).
+  Merge hypotheses into current sources and recheck all claims before acceptance.
 * `takeover/antmove/`: accepted DoAntMoveY, STEERED USE-1 controls and full validation.
 * `takeover/mpu/`: complete MPU TU, STEERED LIFE-1 controls, relocation-record
   label trials, acceptance validation and current hybrid check.
@@ -38,3 +39,7 @@ registries are published only through the tools (promote.py, rename.py, symbols.
   paragraph-address controls, all-module verification, full 45-probe/test validation.
 * `takeover/residue-controls/`: later compiler-residue searches, compact verdicts,
   unclaimed near sources and semantic cautions for historical search snapshots.
+* `takeover/blockers/`: 909 additional failed whole-module variants, retained drafts,
+  semantic cautions, full validation and identical-hybrid checkpoint evidence.
+* `takeover/rtlink400/`: checksum-verifying toolkit extraction, pinned payload hashes,
+  library inventory and paired 4.00/6.10 trial summaries; stock 4.00 manager excluded.

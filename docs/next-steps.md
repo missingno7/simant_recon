@@ -2,10 +2,11 @@
 
 Read README.md, AGENTS.md, docs/codegen-rules.md and docs/tu-evidence.md before work.
 `python tools/validate.py` is the source of truth for totals (docs/progress.md/json).
-The latest DrawColonyBars acceptance checkpoint passed full validation, including all tests
-and all 45 compiler probes. The selector checkpoint previously passed all modules and
-44 probes. Hybrid checks are retained alongside their acceptance transcripts.
-The changes below are in the working tree; publication status must be checked with Git.
+The latest blocker/tooling checkpoint passed full validation, including all tests
+and all 45 compiler probes, and the byte-identical hybrid check. No new game functions
+were accepted. Transcripts are in work/takeover/blockers/. DrawColonyBars remains the
+latest game-code acceptance; its validation and hybrid evidence are retained separately.
+Check Git for the current checkpoint and publication status.
 
 ## 1. Reconstruction state
 
@@ -131,7 +132,8 @@ User priority: finish and verify the remaining game code first. Close the 129 da
 alongside relevant modules when convenient. Linker debt is a separate side task and must
 not interrupt reconstruction. The authorized Luna xhigh archival search completed,
 including the 2,804-archive PC-SIG 1991 ZIP-catalog inventory. Retained findings are
-under `work/linker_hunt/`; the RTLink 4.00 candidate remains untested.
+under `work/linker_hunt/`; the RTLink 4.00 candidate is now extracted and tested
+(see section 4). It does not match the original stock manager format.
 
 There are 32 known unowned functions, all represented by whole-module drafts,
 including hard register, stack-slot, CSE, declaration and control-flow residues.
@@ -155,6 +157,18 @@ remains 1,035 vs 1,039 bytes. See the retained README for sources and failed con
 Avoid the older generic text-cache draft: it never updates the cached character
 inside its loop. Avoid padding a segment union with an unused member to explain
 the compaction frame; the near result does not justify that layout.
+
+The blocker follow-up retains another 13 series / 909 whole-module variants in
+`work/takeover/blockers/`. All fail acceptance. They cover full S15 declaration
+contexts (including previously missed SYM-NAMES moves), S15 storage/initializer/live
+key locals, FindIndex decision trees, window-allocation intermediates, Tandy channel
+CSE/addition/subtraction/argument forms, fresh memory-compaction views and split list
+pointer updates. The 120-byte Tandy OR/XOR control still differs at the ADD opcode;
+its value equivalence requires a channel-range assumption. Read the README's semantic
+cautions before reusing its near draft. These failures do not establish assembly.
+A final 133-variant S15 control of the existing USE-1/USE-2 folded-use idea also
+fails; standalone and combined conditional reads of initialized locals do not
+reproduce the missing stack-home placement.
 
 FindIndex's retained negated lower-bound predicate (`findindex-conditional-forms-v16.c`)
 is 267 bytes and differs only at the first conditional jump and its destination
@@ -192,20 +206,28 @@ RTLink/Plus 6.10 and Clipper editions 3.11/3.13, all with provenance and pinned 
 The independent Luna search also found a six-part RTLink/Plus 4.00 distribution:
 `C:\tools\RTLink-Plus-4.00-DiscMaster\RTLINK40.ZIP` (SHA-256
 `065cc748274addd3ac6f4aca314e67305e5f9a05758dee9b9cf76a19de5c69d5`).
-Its DAT payload format has not been decoded; static strings suggest linker, utility
-library and manager-source files. No installer or linker trials have been run. This is
-an unproven candidate, dated October 1990; no standalone 4.01 or 5.0 copy was found.
+Its DAT payloads were extracted by the checksum-verifying vendor installer under
+headless DOSBox-X, with only scratch mounted. The clean DOS/source/docs/examples
+installation contains 181 files. The pinned rtlink400 profile is installed under
+`C:/tools/RTLink-Plus-4.00-DiscMaster/installed/dest`. Its library contains the RELOAD
+manager and its source, but the stock manager uses 16-byte section records rather
+than SimAnt's 18-byte records; its intercept offset also differs. No standalone
+4.01 or 5.0 copy was found. Extraction, inventories, hashes and trial reports are
+retained in `work/takeover/rtlink400/`.
 Archive coverage and retained download identities are in `work/linker_hunt/inventory-search.md`.
 The manager bytes and global relocation group ordering differ from the original.
 Search evidence and contemporary version references: work/takeover/rtlink-search.md.
 The 4.x/5.0 family is a search hypothesis, not a confirmed exact version number.
 
-Latest trial (`build/workers/takeover/rtlink-current`, profile rtlink610) links successfully:
-95 real objects, 71 explicitly labelled stubs (112,079 code bytes), and unresolved
-`__acrtused`. Twelve overlay images have no trial code stubs; eleven relocation sets
-match, while raw image bytes and most relocation orders still differ. This is diagnostic
-output, never acceptance. MEMHOOK is now read in the library list; its address can still
-shift because incomplete objects pull a different runtime set.
+Latest trials (`build/workers/blockers/rtlink400-trial` and `rtlink610-control`) both
+link successfully: 99 real objects, 67 explicitly labelled stubs (106,081 code bytes),
+and unresolved `__acrtused`. Fourteen overlay images have no trial code stubs;
+thirteen relocation sets match, only S21's order matches, and all raw images differ.
+The trial parser now follows $$OVLPBLOCK's pointers and 16/18-byte record size, with
+explicit image lengths and final partial-paragraph reporting. RTLINK.CFG sets the
+documented freeformat syntax for both profiles. This is diagnostic output, never
+acceptance. MEMHOOK is read in the library list; its address can still shift because
+incomplete objects pull a different runtime set.
 
 The linker does not block exact module recovery. It blocks the final independent
 whole-EXE proof. SDL3 has no technical dependency on RTLink; remaining game semantics,

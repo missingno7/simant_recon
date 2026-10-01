@@ -23,16 +23,20 @@ it should not be confused with only the 15,131-byte manager code/data region.
 
 ## Installed tools and reproducible trial
 
-C:\tools contains RTLink/Plus 6.10 (1993 BBS distribution) and RTLink for Clipper
-3.11/3.13 (Clipper 5.0/5.01 disk archives). Each has provenance and pinned identities;
+C:\tools contains RTLink/Plus 4.00 (1990 DiscMaster distribution), 6.10 (1993 BBS
+distribution) and RTLink for Clipper 3.11/3.13 (Clipper 5.0/5.01 disk archives).
+Each has provenance and pinned identities;
 none produces the original manager exactly. They are experimental instruments.
 No tool binaries are committed. Search results: work/takeover/rtlink-search.md.
-The suspected 4.x/5.0 family needs a full distribution, including its manager library;
-the exact original version is not yet confirmed.
+The 4.00 installer now completes with all checksums OK. Its stock RELOAD manager
+uses 16-byte section records; SimAnt uses 18-byte records. Extraction, inventory
+and paired trial reports are in work/takeover/rtlink400/. The exact original version
+and matching manager distribution are still missing.
 
 ```
 python tools/rtlink.py build/workers/NAME/rtlink --profile rtlink610 --jobs 6
 python tools/rtlink.py build/workers/NAME/rtlink --profile rtlink610 --jobs 6 --reuse
+python tools/rtlink.py build/workers/NAME/rtlink400 --profile rtlink400 --jobs 6
 ```
 
 Trials use real complete-TU/data objects and clearly labelled synthetic stub objects
@@ -43,11 +47,14 @@ AREA/SECTION, PRELOAD/RELOAD) are labelled in work/rtlink/linkscripts/SIMANT_der
 Stale collections are refreshed, and reuse requires source, gate-object and cached-object
 hashes to agree. A gate failure is not written as a reusable object.
 
-The latest takeover trial links with 95 real objects, 71 stubs (112,079 code bytes) and
-one unresolved symbol, __acrtused. Of twelve overlay images without trial code stubs,
-eleven relocation sets agree; most relocation orders and raw image bytes still differ.
+The latest paired 4.00/6.10 trials link with 99 real objects, 67 stubs (106,081 code bytes)
+and one unresolved symbol, __acrtused. Of fourteen overlay images without trial code
+stubs, thirteen relocation sets agree; only S21's order agrees and all raw images differ.
 Raw byte differences include rebased fixup fields. This report is a diagnostic, not
 an acceptance comparison or a claim that those complete images match independently.
+The parser reads the linked manager's $$OVLPBLOCK pointers and record size, supporting
+16/18-byte tables. It counts length differences and reports final unwritten paragraph
+padding explicitly. RTLINK.CFG selects documented freeformat input for both profiles.
 
 ## Findings established by real-linker experiments
 

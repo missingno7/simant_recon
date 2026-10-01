@@ -141,3 +141,23 @@ Extracted DAT inspection-copy hashes (the outer archive and provenance remain un
 | `C:\tools\RTLink-Plus-4.00-DiscMaster\disks\DISK4.DAT` | `1D5BCE0482E7D8A1A8A393477A0AE36134D94B58DE90D89AE8725BB04BECB293` |
 | `C:\tools\RTLink-Plus-4.00-DiscMaster\disks\DISK5.DAT` | `8CC6366B13E9121730DDA452F2AAAA195BE95BF66CA44AF4786A28DFC3AA5A1C` |
 | `C:\tools\RTLink-Plus-4.00-DiscMaster\disks\DISK6.DAT` | `750B1B79489404D163F0B2762F0C2822521D42A7A2DD7EB14947556D2D845843` |
+
+## Installer and linker follow-up (2026-10-01)
+
+The previous untested-payload blocker is resolved. The vendor installer extracted
+all six disks under headless DOSBox-X with only a fresh scratch directory mounted;
+all installer file checksums passed and installation completed. The clean DOS,
+source, documentation and examples payload contains 181 files. The installed,
+hash-pinned rtlink400 profile successfully links the current diagnostic collection.
+
+The stock 4.00 RELOAD manager uses 16-byte section records, whereas SimAnt uses
+18-byte records. Its intercept offset is 033A rather than 0529. It is an experimental
+instrument, not the matching original manager. Both 4.00 and the 6.10 control link
+99 real objects plus 67 code stubs; 13 of 14 unstubbed-overlay relocation sets match,
+but only S21's order matches and all raw images differ. No exact-version conclusion
+follows beyond excluding this stock 4.00 manager format.
+
+Reproducers, installer transcript, payload hashes, library-public inventory and
+paired trial summaries: [work/takeover/rtlink400/README.md](../takeover/rtlink400/README.md).
+No tool binaries or vendor sources are committed. The exact historical linker and
+independent whole executable remain open.
