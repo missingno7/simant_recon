@@ -1,0 +1,536 @@
+{
+ "profile": "msc600ax",
+ "flags": [
+  "/AL",
+  "/Os",
+  "/Og",
+  "/Oe",
+  "/Zi"
+ ],
+ "variants": [
+  {
+   "name": "base",
+   "source_sha256": "01b51eecedcd28e2213819572c846a9754039f4a527e6da5e56e57783398bdd5",
+   "compile_ok": true,
+   "module_exact": false,
+   "target": {
+    "exact": false,
+    "reasons": [
+     "bytes differ (first at +0x42, 2 differing)"
+    ],
+    "fixups": 20,
+    "relocations": 17,
+    "reloc_order": "GROUPED"
+   },
+   "peer_losses": {},
+   "data": {
+    "_DATA": {
+     "exact": true,
+     "reasons": [],
+     "size": 213,
+     "reloc_order": "EXACT",
+     "start": 362118,
+     "class": "DATA",
+     "align": "word",
+     "far": false
+    },
+    "CONST": {
+     "exact": true,
+     "reasons": [],
+     "size": 24,
+     "reloc_order": "GROUPED",
+     "start": 385704,
+     "class": "CONST",
+     "align": "word",
+     "far": false
+    }
+   }
+  },
+  {
+   "name": "far-entry-all",
+   "source_sha256": "4649509a844821d38ec2f421e608e0c6908d8fcd940cec3d28cfb33052720098",
+   "compile_ok": true,
+   "module_exact": false,
+   "target": {
+    "exact": false,
+    "reasons": [
+     "length 335 != target 326",
+     "fixup at +0x143 crosses the extent end",
+     "bytes differ (first at +0x4, 306 differing)",
+     "relocation set differs (16 vs 17)"
+    ],
+    "fixups": 19,
+    "relocations": 17,
+    "reloc_order": "EXACT"
+   },
+   "peer_losses": {},
+   "data": {
+    "_DATA": {
+     "exact": true,
+     "reasons": [],
+     "size": 213,
+     "reloc_order": "EXACT",
+     "start": 362118,
+     "class": "DATA",
+     "align": "word",
+     "far": false
+    },
+    "CONST": {
+     "exact": true,
+     "reasons": [],
+     "size": 24,
+     "reloc_order": "GROUPED",
+     "start": 385704,
+     "class": "CONST",
+     "align": "word",
+     "far": false
+    }
+   }
+  },
+  {
+   "name": "far-entry-draw",
+   "source_sha256": "2a81a628c858a13933d815cc27553b3ba6a8cfd10b4812587a7e29c5f7d0ae86",
+   "compile_ok": true,
+   "module_exact": false,
+   "target": {
+    "exact": false,
+    "reasons": [
+     "length 335 != target 326",
+     "fixup at +0x143 crosses the extent end",
+     "bytes differ (first at +0x4, 306 differing)",
+     "relocation set differs (16 vs 17)"
+    ],
+    "fixups": 19,
+    "relocations": 17,
+    "reloc_order": "EXACT"
+   },
+   "peer_losses": {},
+   "data": {
+    "_DATA": {
+     "exact": true,
+     "reasons": [],
+     "size": 213,
+     "reloc_order": "EXACT",
+     "start": 362118,
+     "class": "DATA",
+     "align": "word",
+     "far": false
+    },
+    "CONST": {
+     "exact": true,
+     "reasons": [],
+     "size": 24,
+     "reloc_order": "GROUPED",
+     "start": 385704,
+     "class": "CONST",
+     "align": "word",
+     "far": false
+    }
+   }
+  },
+  {
+   "name": "far-after_handle-all",
+   "source_sha256": "f7144b33e3982ec1f04c9514b0e7a8e8da636d4b9bd336429999a7de92329881",
+   "compile_ok": true,
+   "module_exact": false,
+   "target": {
+    "exact": false,
+    "reasons": [
+     "length 335 != target 326",
+     "fixup at +0x143 crosses the extent end",
+     "bytes differ (first at +0x4, 296 differing)",
+     "relocation set differs (16 vs 17)"
+    ],
+    "fixups": 19,
+    "relocations": 17,
+    "reloc_order": "EXACT"
+   },
+   "peer_losses": {},
+   "data": {
+    "_DATA": {
+     "exact": true,
+     "reasons": [],
+     "size": 213,
+     "reloc_order": "EXACT",
+     "start": 362118,
+     "class": "DATA",
+     "align": "word",
+     "far": false
+    },
+    "CONST": {
+     "exact": true,
+     "reasons": [],
+     "size": 24,
+     "reloc_order": "GROUPED",
+     "start": 385704,
+     "class": "CONST",
+     "align": "word",
+     "far": false
+    }
+   }
+  },
+  {
+   "name": "far-after_handle-draw",
+   "source_sha256": "8796e46ca704799c6e5ddeb6fa2690ab1ae1e33801c9e1b7829e514d803632fd",
+   "compile_ok": true,
+   "module_exact": false,
+   "target": {
+    "exact": false,
+    "reasons": [
+     "length 335 != target 326",
+     "fixup at +0x143 crosses the extent end",
+     "bytes differ (first at +0x4, 296 differing)",
+     "relocation set differs (16 vs 17)"
+    ],
+    "fixups": 19,
+    "relocations": 17,
+    "reloc_order": "EXACT"
+   },
+   "peer_losses": {},
+   "data": {
+    "_DATA": {
+     "exact": true,
+     "reasons": [],
+     "size": 213,
+     "reloc_order": "EXACT",
+     "start": 362118,
+     "class": "DATA",
+     "align": "word",
+     "far": false
+    },
+    "CONST": {
+     "exact": true,
+     "reasons": [],
+     "size": 24,
+     "reloc_order": "GROUPED",
+     "start": 385704,
+     "class": "CONST",
+     "align": "word",
+     "far": false
+    }
+   }
+  },
+  {
+   "name": "far-after_text-all",
+   "source_sha256": "391783b20d90c85c56f15e25130ba528379c84dfa42c2fa7aad995215fd3e59e",
+   "compile_ok": true,
+   "module_exact": false,
+   "target": {
+    "exact": false,
+    "reasons": [
+     "length 335 != target 326",
+     "fixup at +0x143 crosses the extent end",
+     "bytes differ (first at +0x4, 256 differing)",
+     "relocation set differs (16 vs 17)"
+    ],
+    "fixups": 19,
+    "relocations": 17,
+    "reloc_order": "EXACT"
+   },
+   "peer_losses": {},
+   "data": {
+    "_DATA": {
+     "exact": true,
+     "reasons": [],
+     "size": 213,
+     "reloc_order": "EXACT",
+     "start": 362118,
+     "class": "DATA",
+     "align": "word",
+     "far": false
+    },
+    "CONST": {
+     "exact": true,
+     "reasons": [],
+     "size": 24,
+     "reloc_order": "GROUPED",
+     "start": 385704,
+     "class": "CONST",
+     "align": "word",
+     "far": false
+    }
+   }
+  },
+  {
+   "name": "far-after_text-draw",
+   "source_sha256": "b500d2b7b3cda3976cd931b7b5211846b3b879ac2fc4fab86761abfaa6c4644b",
+   "compile_ok": true,
+   "module_exact": false,
+   "target": {
+    "exact": false,
+    "reasons": [
+     "length 335 != target 326",
+     "fixup at +0x143 crosses the extent end",
+     "bytes differ (first at +0x4, 256 differing)",
+     "relocation set differs (16 vs 17)"
+    ],
+    "fixups": 19,
+    "relocations": 17,
+    "reloc_order": "EXACT"
+   },
+   "peer_losses": {},
+   "data": {
+    "_DATA": {
+     "exact": true,
+     "reasons": [],
+     "size": 213,
+     "reloc_order": "EXACT",
+     "start": 362118,
+     "class": "DATA",
+     "align": "word",
+     "far": false
+    },
+    "CONST": {
+     "exact": true,
+     "reasons": [],
+     "size": 24,
+     "reloc_order": "GROUPED",
+     "start": 385704,
+     "class": "CONST",
+     "align": "word",
+     "far": false
+    }
+   }
+  },
+  {
+   "name": "near-entry-all",
+   "source_sha256": "d7118bd2fccf3da70cf1f306a7995e9b9c73113b36878ccd34f259e083669bf9",
+   "compile_ok": true,
+   "module_exact": false,
+   "target": {
+    "exact": false,
+    "reasons": [
+     "length 332 != target 326",
+     "bytes differ (first at +0x4, 312 differing)",
+     "relocation set differs (17 vs 17)"
+    ],
+    "fixups": 20,
+    "relocations": 17,
+    "reloc_order": "EXACT"
+   },
+   "peer_losses": {},
+   "data": {
+    "_DATA": {
+     "exact": true,
+     "reasons": [],
+     "size": 213,
+     "reloc_order": "EXACT",
+     "start": 362118,
+     "class": "DATA",
+     "align": "word",
+     "far": false
+    },
+    "CONST": {
+     "exact": true,
+     "reasons": [],
+     "size": 24,
+     "reloc_order": "GROUPED",
+     "start": 385704,
+     "class": "CONST",
+     "align": "word",
+     "far": false
+    }
+   }
+  },
+  {
+   "name": "near-entry-draw",
+   "source_sha256": "b32882483a5f427df3c44c17b9554abf460e358aa2f75fa15d18da4ea8928c78",
+   "compile_ok": true,
+   "module_exact": false,
+   "target": {
+    "exact": false,
+    "reasons": [
+     "length 332 != target 326",
+     "bytes differ (first at +0x4, 312 differing)",
+     "relocation set differs (17 vs 17)"
+    ],
+    "fixups": 20,
+    "relocations": 17,
+    "reloc_order": "EXACT"
+   },
+   "peer_losses": {},
+   "data": {
+    "_DATA": {
+     "exact": true,
+     "reasons": [],
+     "size": 213,
+     "reloc_order": "EXACT",
+     "start": 362118,
+     "class": "DATA",
+     "align": "word",
+     "far": false
+    },
+    "CONST": {
+     "exact": true,
+     "reasons": [],
+     "size": 24,
+     "reloc_order": "GROUPED",
+     "start": 385704,
+     "class": "CONST",
+     "align": "word",
+     "far": false
+    }
+   }
+  },
+  {
+   "name": "near-after_handle-all",
+   "source_sha256": "336f183719a6aa1550828e41e66b75f8d3c40dc59e2fb0fa94e06f197cc3b328",
+   "compile_ok": true,
+   "module_exact": false,
+   "target": {
+    "exact": false,
+    "reasons": [
+     "length 332 != target 326",
+     "bytes differ (first at +0x4, 302 differing)",
+     "relocation set differs (17 vs 17)"
+    ],
+    "fixups": 20,
+    "relocations": 17,
+    "reloc_order": "EXACT"
+   },
+   "peer_losses": {},
+   "data": {
+    "_DATA": {
+     "exact": true,
+     "reasons": [],
+     "size": 213,
+     "reloc_order": "EXACT",
+     "start": 362118,
+     "class": "DATA",
+     "align": "word",
+     "far": false
+    },
+    "CONST": {
+     "exact": true,
+     "reasons": [],
+     "size": 24,
+     "reloc_order": "GROUPED",
+     "start": 385704,
+     "class": "CONST",
+     "align": "word",
+     "far": false
+    }
+   }
+  },
+  {
+   "name": "near-after_handle-draw",
+   "source_sha256": "3fd7114db83ef6853957c8b3c0c96ce58fbe28f8bd05ae955a5b86939f9eec8a",
+   "compile_ok": true,
+   "module_exact": false,
+   "target": {
+    "exact": false,
+    "reasons": [
+     "length 332 != target 326",
+     "bytes differ (first at +0x4, 302 differing)",
+     "relocation set differs (17 vs 17)"
+    ],
+    "fixups": 20,
+    "relocations": 17,
+    "reloc_order": "EXACT"
+   },
+   "peer_losses": {},
+   "data": {
+    "_DATA": {
+     "exact": true,
+     "reasons": [],
+     "size": 213,
+     "reloc_order": "EXACT",
+     "start": 362118,
+     "class": "DATA",
+     "align": "word",
+     "far": false
+    },
+    "CONST": {
+     "exact": true,
+     "reasons": [],
+     "size": 24,
+     "reloc_order": "GROUPED",
+     "start": 385704,
+     "class": "CONST",
+     "align": "word",
+     "far": false
+    }
+   }
+  },
+  {
+   "name": "near-after_text-all",
+   "source_sha256": "5eae23951f1ffae147afc3c703e60aa08907a88dc990208e33aac36fc143cccb",
+   "compile_ok": true,
+   "module_exact": false,
+   "target": {
+    "exact": false,
+    "reasons": [
+     "length 332 != target 326",
+     "bytes differ (first at +0x4, 260 differing)",
+     "relocation set differs (17 vs 17)"
+    ],
+    "fixups": 20,
+    "relocations": 17,
+    "reloc_order": "EXACT"
+   },
+   "peer_losses": {},
+   "data": {
+    "_DATA": {
+     "exact": true,
+     "reasons": [],
+     "size": 213,
+     "reloc_order": "EXACT",
+     "start": 362118,
+     "class": "DATA",
+     "align": "word",
+     "far": false
+    },
+    "CONST": {
+     "exact": true,
+     "reasons": [],
+     "size": 24,
+     "reloc_order": "GROUPED",
+     "start": 385704,
+     "class": "CONST",
+     "align": "word",
+     "far": false
+    }
+   }
+  },
+  {
+   "name": "near-after_text-draw",
+   "source_sha256": "b90c1d1d4966914d78464af5be0597cdbfe733aab23718790ba54b2ff2d324c6",
+   "compile_ok": true,
+   "module_exact": false,
+   "target": {
+    "exact": false,
+    "reasons": [
+     "length 332 != target 326",
+     "bytes differ (first at +0x4, 260 differing)",
+     "relocation set differs (17 vs 17)"
+    ],
+    "fixups": 20,
+    "relocations": 17,
+    "reloc_order": "EXACT"
+   },
+   "peer_losses": {},
+   "data": {
+    "_DATA": {
+     "exact": true,
+     "reasons": [],
+     "size": 213,
+     "reloc_order": "EXACT",
+     "start": 362118,
+     "class": "DATA",
+     "align": "word",
+     "far": false
+    },
+    "CONST": {
+     "exact": true,
+     "reasons": [],
+     "size": 24,
+     "reloc_order": "GROUPED",
+     "start": 385704,
+     "class": "CONST",
+     "align": "word",
+     "far": false
+    }
+   }
+  }
+ ]
+}

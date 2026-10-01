@@ -4011,8 +4011,12 @@
    "layout_inferred": [
     "font choices written as six if/else statements instead of ?: arguments (same bytes, two /Zi line entries each) so the 52-entry LINNUM flushes give the record breaks the relocation order needs (DrawCastePopUp, PictureDialog, SpiderDialog; source header, worker resF)"
    ],
+   "extent": {
+    "start": 230592,
+    "end": 235245
+   },
    "source": "src/S14/m384C.c",
-   "source_sha256": "78d36165e991c594cb0583426f9d0564bfdd4672e3aeae74c54361834902e15a",
+   "source_sha256": "245f8c01d5a330c571048b8cd1b134cf544394af84f7b502a153c73adbd91020",
    "claims": [
     {
      "name": "DoScenario",
@@ -4125,12 +4129,22 @@
      "kind": "C",
      "provenance": "EXACT_NATURAL",
      "reloc_order": "GROUPED"
+    },
+    {
+     "name": "CalcScore",
+     "unit": "S14",
+     "seg": 14412,
+     "off": 0,
+     "size": 1169,
+     "target_sha256": "91425dbb3f97cea1d590fdd4e4e4c6207498a43d9acdb1df56a8eae476796e20",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL",
+     "layout_inferred": "Separate history-index lifetime and module prototype parameter count inferred from exact code; alternative scopes and name removals also match.",
+     "reloc_order": "GROUPED"
     }
    ],
-   "scaffold": [
-    "CalcScore"
-   ],
-   "object_sha256": "f9e74615fb81c332dbe81a0241b905dca136b19cc2f0a8706147f1cf75edf7be"
+   "scaffold": [],
+   "object_sha256": "e9c9d27ae37302e4428915a562f7a7b052aaae9debcc17e08868f9d599224541"
   },
   "S15:384C": {
    "unit": "S15",

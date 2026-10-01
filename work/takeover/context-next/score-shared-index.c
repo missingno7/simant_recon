@@ -6,12 +6,11 @@
  *    each if/else adds two /Zi line entries; with all six the 52-entry LINNUM flushes land where
  *    the oracle's relocation order needs record breaks (DrawCastePopUp, PictureDialog,
  *    SpiderDialog: 0 violations of 115 order constraints).
- *  - Identifier counts (symbol-table state, periodic mod 17) include local and prototype
- *    parameters. The forward prototypes of CalcScore/DoWinHelp/SetDefaultWindPrompt/
+ *  - Identifier counts (symbol-table state, periodic mod 17) are set only by named prototype
+ *    parameters: the forward prototypes of CalcScore/DoWinHelp/SetDefaultWindPrompt/
  *    PictStrnDialog are named (+6, CalcScore operand order), g_9134's and PictureDialog's forward
- *    declaration are unnamed (-5 before DrawCastePopUp, -4 before PictureDialog).
- *    CalcScore scopes its history index separately from the later matrix index; f_00F8_02F7 has an unnamed real prototype parameter.
- *    Alternative scopes and prototype-name removals also match; these forms are inferred.
+ *    declaration are unnamed (-5 before DrawCastePopUp, -4 before PictureDialog).  Which
+ *    prototypes carry names is a byte-equivalent unknown; only the counts are fixed by the bytes.
  */
 
 #include <stdio.h>
@@ -68,21 +67,18 @@ long far CalcScore(int far *scores)
     else
         scores[0] = 0;
 
-    {
-        int historyIndex;
-        historyIndex = (fd_50F6_04F4 - fd_3D57_0828) & 0x3f;
-        sum = sum2 = 0;
-        for (k = 0; k < fd_3D57_0828; k++) {
-            sum += fd_50F6_0626[historyIndex];
-            sum2 += fd_50F6_06AE[historyIndex];
-            historyIndex = (historyIndex + 1) & 0x3f;
-        }
-        historyIndex = sum2 + sum;
-        if (historyIndex > 0)
-            scores[1] = (long)sum * 100 / historyIndex;
-        else
-            scores[1] = 0;
+    j = (fd_50F6_04F4 - fd_3D57_0828) & 0x3f;
+    sum = sum2 = 0;
+    for (k = 0; k < fd_3D57_0828; k++) {
+        sum += fd_50F6_0626[j];
+        sum2 += fd_50F6_06AE[j];
+        j = (j + 1) & 0x3f;
     }
+    j = sum2 + sum;
+    if (j > 0)
+        scores[1] = (long)sum * 100 / j;
+    else
+        scores[1] = 0;
 
     if (fd_50F6_0FC2 > 0)
         scores[2] = (fd_50F6_0FC2 - fd_50F6_1000) * 100 / fd_50F6_0FC2;
@@ -445,7 +441,7 @@ extern int far f_24AB_0329(char far *text);
 extern int near g_3DB4;
 extern int _fastcall win_DrawBitMap(int x, int y, int id);
 extern void far f_208F_0093(struct Rect far *rect, char far *text);
-extern void far f_00F8_02F7(int);
+extern void far f_00F8_02F7(int ticks);
 extern int far f_00F8_05F2(void);
 
 void far PictureDialog(char far * far *strings, int count, int picture, int force)

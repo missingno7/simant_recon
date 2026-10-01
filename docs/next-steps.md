@@ -2,27 +2,31 @@
 
 Read README.md, AGENTS.md, docs/codegen-rules.md and docs/tu-evidence.md before work.
 `python tools/validate.py` is the source of truth for totals (docs/progress.md/json).
-The latest sibling-tool checkpoint passed 203 tests (two skips), all 45 compiler
-probes, full module/FAR_BSS validation and the byte-identical hybrid check. No new game functions
-were accepted. Findings and transcripts are in work/takeover/siblings/. DrawColonyBars remains the
-latest game-code acceptance; its validation and hybrid evidence are retained separately.
+The latest phase-index checkpoint accepts CalcScore and completes S14:384C as a
+4,653-byte TU. It also repairs the memory-compaction starting draft's accepted-peer
+regression. Findings, compiler controls and verification transcripts are in
+work/takeover/context-next/. The earlier sibling-tool comparison remains in
+work/takeover/siblings/; its 203-test checkpoint preceded this acceptance.
+The fresh full validation passes the unit tests (two skips), all 46 compiler
+probes and module/FAR_BSS checks. The final-source recheck and byte-identical
+hybrid transcripts are retained with this checkpoint.
 Check Git for the current checkpoint and publication status.
 
 ## 1. Reconstruction state
 
 | Measure | Validated value |
 |---|---:|
-| exact C functions / bytes | 1,241 / 235,732 |
+| exact C functions / bytes | 1,242 / 236,901 |
 | genuine symbolic assembly / code-segment data | 50,441 / 1,481 bytes |
 | ASM used as a workaround for C | 0 |
-| complete TUs / with proven cross-function relocation order | 94 / 93 |
+| complete TUs / with proven cross-function relocation order | 95 / 94 |
 | accepted MSC runtime | 90 members; 12,339 code + 2,021 data bytes |
 | accepted game data / far data | 113,884 / 80,310 bytes |
-| unresolved game code / data | 17,144 / 129 bytes |
+| unresolved game code / data | 15,975 / 129 bytes |
 | RTLink manager and associated metadata debt | 17,001 bytes |
-| owned functions / known functions | 1,698 / 1,730 |
+| owned functions / known functions | 1,699 / 1,730 |
 
-Proof quality is separate from coverage: 14,115 C bytes are STEERED, 19,432 are
+Proof quality is separate from coverage: 14,115 C bytes are STEERED, 20,601 are
 layout-inferred, and 11,742 have within-group order pending. S00:31AD is the only
 complete TU whose cross-function relocation order remains pending. FAR_BSS contains
 19,408 zero bytes, but 14,928 bytes still have unverified declaration sizes. The opaque
@@ -36,6 +40,12 @@ That proves placement and integration, not a fully independent reconstruction.
 
 ## 2. Accepted changes in the takeover checkpoint
 
+* S14:384C is now a complete 4,653-byte TU, with grouped cross-function relocation
+  order. CalcScore's distinct used history index resolves its 12-byte stack-home
+  residue; an unnamed real later prototype parameter restores PictureDialog's
+  compiler context. SCOPE-1 records the whole-module positive and negative controls.
+  CalcScore is layout-inferred: alternative scope placements and parameter-name
+  removals also match, so the original source spelling is not claimed.
 * root:295C is now a complete, original-order TU with `/Zi`. The final 75-byte MIDI
   function matches through a folded unsigned-byte range expression; it is explicitly
   STEERED because its eliminated expression is unknown. CSE-1 records the controls.
@@ -129,9 +139,12 @@ Do not apply their archived whole-file patches to the current tools.
 Sibling-inspired diagnostics (`tools/diag.py`, `tools/mismatch.py`) now group fully
 bound BP/register/branch differences without affecting acceptance. Autosearch exposes
 `--neutral-beam` and protects every existing manifest claim, rejecting broken starting
-drafts. The current memory near draft also breaks accepted f_171C_2086 (88 vs 92 bytes);
-earlier claims that it preserved all current peers are not fresh gate evidence.
-See work/takeover/siblings/README.md for the four-project comparison and new controls.
+drafts. The older memory near draft breaks accepted f_171C_2086 (88 vs 92 bytes).
+The new work/takeover/context-next/memory-near-repaired.c restores a real used nb
+alias and preserves every accepted peer/data contribution; its compaction target
+still has six stack-home differences and is unclaimed. Prefer that baseline.
+See work/takeover/siblings/README.md for the four-project comparison and
+work/takeover/context-next/README.md for the declaration-history bisection and repair.
 
 ## 3. Remaining game code
 
@@ -142,7 +155,7 @@ including the 2,804-archive PC-SIG 1991 ZIP-catalog inventory. Retained findings
 under `work/linker_hunt/`; the RTLink 4.00 candidate is now extracted and tested
 (see section 4). It does not match the original stock manager format.
 
-There are 32 known unowned functions, all represented by whole-module drafts,
+There are 31 known unowned functions, all represented by whole-module drafts,
 including hard register, stack-slot, CSE, declaration and control-flow residues.
 Preserved earlier surveys: work/resI/survey.txt, work/resJ/residue.txt,
 work/autosearch/results.md/json. Current takeover scratch and search state:
@@ -199,7 +212,7 @@ conflict with its earlier void prototype; those failed rows are not compiler exc
 | S10:35F5 | 0384; expression and parameter-copy structure still open |
 | S23:39C7 | PrintStyleTextInRect, DisplayCard; register/storage and declaration evidence |
 | root:171C | 09CC, 0ADC, 0CF4, 0FBC |
-| others | S12 cursor, S13 InvertPatch, S14 CalcScore and small root/S15/S17/S24 residues |
+| others | S12 cursor, S13 InvertPatch and small root/S15/S17/S24 residues |
 
 Run rule-driven searches from whole-module best drafts, then inspect aligned disassembly
 for the remaining differences. Win16 is semantic evidence only; use verified naming

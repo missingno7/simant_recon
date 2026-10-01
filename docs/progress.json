@@ -4,8 +4,8 @@
  "oracle_sha256": "aa0596c6766322a8229ee3c36e57048c92adc82d50fbe2ef37afb8b85fcf4f11",
  "known_functions": 1730,
  "known_game_functions": 1640,
- "exact_c_functions": 1241,
- "exact_c_bytes": 235732,
+ "exact_c_functions": 1242,
+ "exact_c_bytes": 236901,
  "exact_asm_functions": 367,
  "exact_asm_bytes": 50441,
  "exact_code_segment_data_bytes": 1481,
@@ -14,7 +14,7 @@
  "historical_runtime_bytes_located_unaccepted": 0,
  "runtime_functions_known": 90,
  "runtime_functions_owned": 90,
- "owned_functions": 1698,
+ "owned_functions": 1699,
  "rtlink_manager_bytes_unaccepted": 17001,
  "data_bytes_accepted": 113884,
  "far_data_bytes_accepted": 80310,
@@ -35,7 +35,7 @@
  "far_bss_sizes_unverified_bytes": 14928,
  "bss_bytes_placed": 496,
  "game_code_span_bytes": 304798,
- "unresolved_code_bytes": 17144,
+ "unresolved_code_bytes": 15975,
  "unresolved_data_bytes": 129,
  "overlay_coverage": {
   "S00": {
@@ -96,7 +96,7 @@
   },
   "S14": {
    "bytes": 4656,
-   "claimed": 3484
+   "claimed": 4653
   },
   "S15": {
    "bytes": 1360,
@@ -148,17 +148,17 @@
   }
  },
  "root_claimed_bytes": 163023,
- "scaffold_functions": 28,
- "exact_translation_units": 94,
+ "scaffold_functions": 27,
+ "exact_translation_units": 95,
  "claims_within_group_order_pending": 18,
  "inplace_draft_functions": 4,
  "claims_exact_steered": 23,
- "exact_c_bytes_in_complete_tus": 146545,
- "exact_c_bytes_in_partial_modules": 89187,
+ "exact_c_bytes_in_complete_tus": 151198,
+ "exact_c_bytes_in_partial_modules": 85703,
  "exact_c_bytes_steered": 14115,
- "exact_c_bytes_layout_inferred": 19432,
+ "exact_c_bytes_layout_inferred": 20601,
  "exact_c_bytes_within_group_pending": 11742,
- "claims_layout_inferred": 22,
+ "claims_layout_inferred": 23,
  "modules_layout_inferred": [
   "S14:384C",
   "root:1383",
@@ -171,12 +171,12 @@
  "runtime_oracle_derived_words": 244,
  "released_claims_unowned": [],
  "modules_origin_unevidenced": [],
- "manifest_sha256": "3235d9b8161d865ceb0954ef0ef90fc69731c13255a75a20091747d112dac1b9",
- "complete_tus_relocation_order_proven": 93,
+ "manifest_sha256": "a454a845c9cbc03870ab4d352bed97eeb6823da3b6b4c5790eba901c9430bab7",
+ "complete_tus_relocation_order_proven": 94,
  "complete_tus_cross_function_order_pending": [
   "S00:31AD"
  ],
- "codegen_rules_reproduced": 45,
+ "codegen_rules_reproduced": 46,
  "whole_executable": "NOT_BUILT (no historical link yet; see docs/next-steps.md)",
  "validation": "PASS",
  "failures": []

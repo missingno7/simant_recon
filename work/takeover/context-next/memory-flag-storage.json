@@ -1,0 +1,885 @@
+{
+ "profile": "msc600ax",
+ "flags": [
+  "/AL",
+  "/Oeg",
+  "/Gs",
+  "/Zi"
+ ],
+ "variants": [
+  {
+   "name": "base",
+   "source_sha256": "7decbec511e93ca79a5b4238561aa24e3fb1c794506f337af6d3aa11506bbfac",
+   "compile_ok": true,
+   "module_exact": false,
+   "target": {
+    "exact": false,
+    "reasons": [
+     "bytes differ (first at +0xc, 6 differing)"
+    ],
+    "fixups": 13,
+    "relocations": 4,
+    "reloc_order": "GROUPED"
+   },
+   "peer_losses": {},
+   "data": {
+    "_DATA": {
+     "exact": true,
+     "reasons": [],
+     "size": 1726,
+     "reloc_order": "EXACT",
+     "start": 363076,
+     "class": "DATA",
+     "align": "word",
+     "far": false
+    },
+    "CONST": {
+     "exact": true,
+     "reasons": [],
+     "size": 14,
+     "reloc_order": "GROUPED",
+     "start": 386258,
+     "class": "CONST",
+     "align": "word",
+     "far": false
+    },
+    "_BSS": {
+     "exact": true,
+     "reasons": [],
+     "size": 18,
+     "kind": "BSS",
+     "start": 386962,
+     "align": "word"
+    }
+   }
+  },
+  {
+   "name": "int-direct",
+   "source_sha256": "754866f6cee1b5fc58e0e0cde5dea54dcb4779654de3cadedcb7c72b4be21cc3",
+   "compile_ok": true,
+   "module_exact": false,
+   "target": {
+    "exact": false,
+    "reasons": [
+     "bytes differ (first at +0x5, 33 differing)"
+    ],
+    "fixups": 13,
+    "relocations": 4,
+    "reloc_order": "GROUPED"
+   },
+   "peer_losses": {},
+   "data": {
+    "_DATA": {
+     "exact": true,
+     "reasons": [],
+     "size": 1726,
+     "reloc_order": "EXACT",
+     "start": 363076,
+     "class": "DATA",
+     "align": "word",
+     "far": false
+    },
+    "CONST": {
+     "exact": true,
+     "reasons": [],
+     "size": 14,
+     "reloc_order": "GROUPED",
+     "start": 386258,
+     "class": "CONST",
+     "align": "word",
+     "far": false
+    },
+    "_BSS": {
+     "exact": true,
+     "reasons": [],
+     "size": 18,
+     "kind": "BSS",
+     "start": 386962,
+     "align": "word"
+    }
+   }
+  },
+  {
+   "name": "int-word",
+   "source_sha256": "66d83ba536f04c317293b1779a594f97458064330e9150334c5f799847885c01",
+   "compile_ok": true,
+   "module_exact": false,
+   "target": {
+    "exact": false,
+    "reasons": [
+     "bytes differ (first at +0x5, 33 differing)"
+    ],
+    "fixups": 13,
+    "relocations": 4,
+    "reloc_order": "GROUPED"
+   },
+   "peer_losses": {},
+   "data": {
+    "_DATA": {
+     "exact": true,
+     "reasons": [],
+     "size": 1726,
+     "reloc_order": "EXACT",
+     "start": 363076,
+     "class": "DATA",
+     "align": "word",
+     "far": false
+    },
+    "CONST": {
+     "exact": true,
+     "reasons": [],
+     "size": 14,
+     "reloc_order": "GROUPED",
+     "start": 386258,
+     "class": "CONST",
+     "align": "word",
+     "far": false
+    },
+    "_BSS": {
+     "exact": true,
+     "reasons": [],
+     "size": 18,
+     "kind": "BSS",
+     "start": 386962,
+     "align": "word"
+    }
+   }
+  },
+  {
+   "name": "int-volatile-word",
+   "source_sha256": "9d1b0a166bfe5af54c37a3b19163955d76a4d2e4c17e005d83a6901343beb603",
+   "compile_ok": true,
+   "module_exact": false,
+   "target": {
+    "exact": false,
+    "reasons": [
+     "bytes differ (first at +0x5, 33 differing)"
+    ],
+    "fixups": 13,
+    "relocations": 4,
+    "reloc_order": "GROUPED"
+   },
+   "peer_losses": {},
+   "data": {
+    "_DATA": {
+     "exact": true,
+     "reasons": [],
+     "size": 1726,
+     "reloc_order": "EXACT",
+     "start": 363076,
+     "class": "DATA",
+     "align": "word",
+     "far": false
+    },
+    "CONST": {
+     "exact": true,
+     "reasons": [],
+     "size": 14,
+     "reloc_order": "GROUPED",
+     "start": 386258,
+     "class": "CONST",
+     "align": "word",
+     "far": false
+    },
+    "_BSS": {
+     "exact": true,
+     "reasons": [],
+     "size": 18,
+     "kind": "BSS",
+     "start": 386962,
+     "align": "word"
+    }
+   }
+  },
+  {
+   "name": "unsigned-direct",
+   "source_sha256": "bd3ff7e370b091c3473ecd53ca59912433095750c42e5f5daf895e8e5e1128a1",
+   "compile_ok": true,
+   "module_exact": false,
+   "target": {
+    "exact": false,
+    "reasons": [
+     "bytes differ (first at +0x5, 33 differing)"
+    ],
+    "fixups": 13,
+    "relocations": 4,
+    "reloc_order": "GROUPED"
+   },
+   "peer_losses": {},
+   "data": {
+    "_DATA": {
+     "exact": true,
+     "reasons": [],
+     "size": 1726,
+     "reloc_order": "EXACT",
+     "start": 363076,
+     "class": "DATA",
+     "align": "word",
+     "far": false
+    },
+    "CONST": {
+     "exact": true,
+     "reasons": [],
+     "size": 14,
+     "reloc_order": "GROUPED",
+     "start": 386258,
+     "class": "CONST",
+     "align": "word",
+     "far": false
+    },
+    "_BSS": {
+     "exact": true,
+     "reasons": [],
+     "size": 18,
+     "kind": "BSS",
+     "start": 386962,
+     "align": "word"
+    }
+   }
+  },
+  {
+   "name": "unsigned-word",
+   "source_sha256": "971389b77edb224bb70f90e882180eb20a68a53d8610c04a56cce378b74e5f9a",
+   "compile_ok": true,
+   "module_exact": false,
+   "target": {
+    "exact": false,
+    "reasons": [
+     "bytes differ (first at +0x5, 33 differing)"
+    ],
+    "fixups": 13,
+    "relocations": 4,
+    "reloc_order": "GROUPED"
+   },
+   "peer_losses": {},
+   "data": {
+    "_DATA": {
+     "exact": true,
+     "reasons": [],
+     "size": 1726,
+     "reloc_order": "EXACT",
+     "start": 363076,
+     "class": "DATA",
+     "align": "word",
+     "far": false
+    },
+    "CONST": {
+     "exact": true,
+     "reasons": [],
+     "size": 14,
+     "reloc_order": "GROUPED",
+     "start": 386258,
+     "class": "CONST",
+     "align": "word",
+     "far": false
+    },
+    "_BSS": {
+     "exact": true,
+     "reasons": [],
+     "size": 18,
+     "kind": "BSS",
+     "start": 386962,
+     "align": "word"
+    }
+   }
+  },
+  {
+   "name": "unsigned-volatile-word",
+   "source_sha256": "8f29ec0e5436adcc68eb98095653f47e6ca4cf122d05550c46d2d04a08672d1a",
+   "compile_ok": true,
+   "module_exact": false,
+   "target": {
+    "exact": false,
+    "reasons": [
+     "bytes differ (first at +0x5, 33 differing)"
+    ],
+    "fixups": 13,
+    "relocations": 4,
+    "reloc_order": "GROUPED"
+   },
+   "peer_losses": {},
+   "data": {
+    "_DATA": {
+     "exact": true,
+     "reasons": [],
+     "size": 1726,
+     "reloc_order": "EXACT",
+     "start": 363076,
+     "class": "DATA",
+     "align": "word",
+     "far": false
+    },
+    "CONST": {
+     "exact": true,
+     "reasons": [],
+     "size": 14,
+     "reloc_order": "GROUPED",
+     "start": 386258,
+     "class": "CONST",
+     "align": "word",
+     "far": false
+    },
+    "_BSS": {
+     "exact": true,
+     "reasons": [],
+     "size": 18,
+     "kind": "BSS",
+     "start": 386962,
+     "align": "word"
+    }
+   }
+  },
+  {
+   "name": "volatile-int-direct",
+   "source_sha256": "c14615461bae88e47a98e9428c2dfb4d08d826da0545c7afc2bf9e88b5af6f63",
+   "compile_ok": true,
+   "module_exact": false,
+   "target": {
+    "exact": false,
+    "reasons": [
+     "bytes differ (first at +0x5, 51 differing)"
+    ],
+    "fixups": 13,
+    "relocations": 4,
+    "reloc_order": "GROUPED"
+   },
+   "peer_losses": {},
+   "data": {
+    "_DATA": {
+     "exact": true,
+     "reasons": [],
+     "size": 1726,
+     "reloc_order": "EXACT",
+     "start": 363076,
+     "class": "DATA",
+     "align": "word",
+     "far": false
+    },
+    "CONST": {
+     "exact": true,
+     "reasons": [],
+     "size": 14,
+     "reloc_order": "GROUPED",
+     "start": 386258,
+     "class": "CONST",
+     "align": "word",
+     "far": false
+    },
+    "_BSS": {
+     "exact": true,
+     "reasons": [],
+     "size": 18,
+     "kind": "BSS",
+     "start": 386962,
+     "align": "word"
+    }
+   }
+  },
+  {
+   "name": "volatile-int-word",
+   "source_sha256": "687b5ce015d5303565a08109bf8d79697a06152909539f3c33304fe0c7da5d34",
+   "compile_ok": true,
+   "module_exact": false,
+   "target": {
+    "exact": false,
+    "reasons": [
+     "bytes differ (first at +0x5, 33 differing)"
+    ],
+    "fixups": 13,
+    "relocations": 4,
+    "reloc_order": "GROUPED"
+   },
+   "peer_losses": {},
+   "data": {
+    "_DATA": {
+     "exact": true,
+     "reasons": [],
+     "size": 1726,
+     "reloc_order": "EXACT",
+     "start": 363076,
+     "class": "DATA",
+     "align": "word",
+     "far": false
+    },
+    "CONST": {
+     "exact": true,
+     "reasons": [],
+     "size": 14,
+     "reloc_order": "GROUPED",
+     "start": 386258,
+     "class": "CONST",
+     "align": "word",
+     "far": false
+    },
+    "_BSS": {
+     "exact": true,
+     "reasons": [],
+     "size": 18,
+     "kind": "BSS",
+     "start": 386962,
+     "align": "word"
+    }
+   }
+  },
+  {
+   "name": "volatile-int-volatile-word",
+   "source_sha256": "3bf6c37a3f5429ed86e50c59cd9059f8bf06c60ce14bad4ca3dc9769017e33fe",
+   "compile_ok": true,
+   "module_exact": false,
+   "target": {
+    "exact": false,
+    "reasons": [
+     "bytes differ (first at +0x5, 33 differing)"
+    ],
+    "fixups": 13,
+    "relocations": 4,
+    "reloc_order": "GROUPED"
+   },
+   "peer_losses": {},
+   "data": {
+    "_DATA": {
+     "exact": true,
+     "reasons": [],
+     "size": 1726,
+     "reloc_order": "EXACT",
+     "start": 363076,
+     "class": "DATA",
+     "align": "word",
+     "far": false
+    },
+    "CONST": {
+     "exact": true,
+     "reasons": [],
+     "size": 14,
+     "reloc_order": "GROUPED",
+     "start": 386258,
+     "class": "CONST",
+     "align": "word",
+     "far": false
+    },
+    "_BSS": {
+     "exact": true,
+     "reasons": [],
+     "size": 18,
+     "kind": "BSS",
+     "start": 386962,
+     "align": "word"
+    }
+   }
+  },
+  {
+   "name": "volatile-unsigned-direct",
+   "source_sha256": "5d692c9de5276e242e96b20329deb5b8a787ee68bbc739b76ecfe1e03763eee6",
+   "compile_ok": true,
+   "module_exact": false,
+   "target": {
+    "exact": false,
+    "reasons": [
+     "bytes differ (first at +0x5, 51 differing)"
+    ],
+    "fixups": 13,
+    "relocations": 4,
+    "reloc_order": "GROUPED"
+   },
+   "peer_losses": {},
+   "data": {
+    "_DATA": {
+     "exact": true,
+     "reasons": [],
+     "size": 1726,
+     "reloc_order": "EXACT",
+     "start": 363076,
+     "class": "DATA",
+     "align": "word",
+     "far": false
+    },
+    "CONST": {
+     "exact": true,
+     "reasons": [],
+     "size": 14,
+     "reloc_order": "GROUPED",
+     "start": 386258,
+     "class": "CONST",
+     "align": "word",
+     "far": false
+    },
+    "_BSS": {
+     "exact": true,
+     "reasons": [],
+     "size": 18,
+     "kind": "BSS",
+     "start": 386962,
+     "align": "word"
+    }
+   }
+  },
+  {
+   "name": "volatile-unsigned-word",
+   "source_sha256": "955b4d6346f8b8f7c8ab603b89df0ec6f95d9908c0759f4b3c18d6a8890127b3",
+   "compile_ok": true,
+   "module_exact": false,
+   "target": {
+    "exact": false,
+    "reasons": [
+     "bytes differ (first at +0x5, 33 differing)"
+    ],
+    "fixups": 13,
+    "relocations": 4,
+    "reloc_order": "GROUPED"
+   },
+   "peer_losses": {},
+   "data": {
+    "_DATA": {
+     "exact": true,
+     "reasons": [],
+     "size": 1726,
+     "reloc_order": "EXACT",
+     "start": 363076,
+     "class": "DATA",
+     "align": "word",
+     "far": false
+    },
+    "CONST": {
+     "exact": true,
+     "reasons": [],
+     "size": 14,
+     "reloc_order": "GROUPED",
+     "start": 386258,
+     "class": "CONST",
+     "align": "word",
+     "far": false
+    },
+    "_BSS": {
+     "exact": true,
+     "reasons": [],
+     "size": 18,
+     "kind": "BSS",
+     "start": 386962,
+     "align": "word"
+    }
+   }
+  },
+  {
+   "name": "volatile-unsigned-volatile-word",
+   "source_sha256": "0fd38a1dbb352598b03e976ca3a5c7820f5072a91fc0e5faf2ba0262af14c70b",
+   "compile_ok": true,
+   "module_exact": false,
+   "target": {
+    "exact": false,
+    "reasons": [
+     "bytes differ (first at +0x5, 33 differing)"
+    ],
+    "fixups": 13,
+    "relocations": 4,
+    "reloc_order": "GROUPED"
+   },
+   "peer_losses": {},
+   "data": {
+    "_DATA": {
+     "exact": true,
+     "reasons": [],
+     "size": 1726,
+     "reloc_order": "EXACT",
+     "start": 363076,
+     "class": "DATA",
+     "align": "word",
+     "far": false
+    },
+    "CONST": {
+     "exact": true,
+     "reasons": [],
+     "size": 14,
+     "reloc_order": "GROUPED",
+     "start": 386258,
+     "class": "CONST",
+     "align": "word",
+     "far": false
+    },
+    "_BSS": {
+     "exact": true,
+     "reasons": [],
+     "size": 18,
+     "kind": "BSS",
+     "start": 386962,
+     "align": "word"
+    }
+   }
+  },
+  {
+   "name": "long-direct",
+   "source_sha256": "01659d981a3cb09eeec70e618748c87d24db2c718b198ebe2c8be31bfee5f075",
+   "compile_ok": true,
+   "module_exact": false,
+   "target": {
+    "exact": false,
+    "reasons": [
+     "bytes differ (first at +0xc, 21 differing)"
+    ],
+    "fixups": 13,
+    "relocations": 4,
+    "reloc_order": "GROUPED"
+   },
+   "peer_losses": {},
+   "data": {
+    "_DATA": {
+     "exact": true,
+     "reasons": [],
+     "size": 1726,
+     "reloc_order": "EXACT",
+     "start": 363076,
+     "class": "DATA",
+     "align": "word",
+     "far": false
+    },
+    "CONST": {
+     "exact": true,
+     "reasons": [],
+     "size": 14,
+     "reloc_order": "GROUPED",
+     "start": 386258,
+     "class": "CONST",
+     "align": "word",
+     "far": false
+    },
+    "_BSS": {
+     "exact": true,
+     "reasons": [],
+     "size": 18,
+     "kind": "BSS",
+     "start": 386962,
+     "align": "word"
+    }
+   }
+  },
+  {
+   "name": "long-word",
+   "source_sha256": "09e8f8564c261953253be90dbe59d2934a443bba103d6e50ba0b651d7187309b",
+   "compile_ok": true,
+   "module_exact": false,
+   "target": {
+    "exact": false,
+    "reasons": [
+     "bytes differ (first at +0x8, 10 differing)"
+    ],
+    "fixups": 13,
+    "relocations": 4,
+    "reloc_order": "GROUPED"
+   },
+   "peer_losses": {},
+   "data": {
+    "_DATA": {
+     "exact": true,
+     "reasons": [],
+     "size": 1726,
+     "reloc_order": "EXACT",
+     "start": 363076,
+     "class": "DATA",
+     "align": "word",
+     "far": false
+    },
+    "CONST": {
+     "exact": true,
+     "reasons": [],
+     "size": 14,
+     "reloc_order": "GROUPED",
+     "start": 386258,
+     "class": "CONST",
+     "align": "word",
+     "far": false
+    },
+    "_BSS": {
+     "exact": true,
+     "reasons": [],
+     "size": 18,
+     "kind": "BSS",
+     "start": 386962,
+     "align": "word"
+    }
+   }
+  },
+  {
+   "name": "long-volatile-word",
+   "source_sha256": "337fb4c1ad5dbd5c3985c58daea15970bb2b1afb4b9fe1fff90b4b3965e81e9f",
+   "compile_ok": true,
+   "module_exact": false,
+   "target": {
+    "exact": false,
+    "reasons": [
+     "bytes differ (first at +0x8, 10 differing)"
+    ],
+    "fixups": 13,
+    "relocations": 4,
+    "reloc_order": "GROUPED"
+   },
+   "peer_losses": {},
+   "data": {
+    "_DATA": {
+     "exact": true,
+     "reasons": [],
+     "size": 1726,
+     "reloc_order": "EXACT",
+     "start": 363076,
+     "class": "DATA",
+     "align": "word",
+     "far": false
+    },
+    "CONST": {
+     "exact": true,
+     "reasons": [],
+     "size": 14,
+     "reloc_order": "GROUPED",
+     "start": 386258,
+     "class": "CONST",
+     "align": "word",
+     "far": false
+    },
+    "_BSS": {
+     "exact": true,
+     "reasons": [],
+     "size": 18,
+     "kind": "BSS",
+     "start": 386962,
+     "align": "word"
+    }
+   }
+  },
+  {
+   "name": "unsigned-long-direct",
+   "source_sha256": "3d24904696b29c36b118479ecc50dd80b8d173f58a632a339df9391d08ea085b",
+   "compile_ok": true,
+   "module_exact": false,
+   "target": {
+    "exact": false,
+    "reasons": [
+     "bytes differ (first at +0xc, 21 differing)"
+    ],
+    "fixups": 13,
+    "relocations": 4,
+    "reloc_order": "GROUPED"
+   },
+   "peer_losses": {},
+   "data": {
+    "_DATA": {
+     "exact": true,
+     "reasons": [],
+     "size": 1726,
+     "reloc_order": "EXACT",
+     "start": 363076,
+     "class": "DATA",
+     "align": "word",
+     "far": false
+    },
+    "CONST": {
+     "exact": true,
+     "reasons": [],
+     "size": 14,
+     "reloc_order": "GROUPED",
+     "start": 386258,
+     "class": "CONST",
+     "align": "word",
+     "far": false
+    },
+    "_BSS": {
+     "exact": true,
+     "reasons": [],
+     "size": 18,
+     "kind": "BSS",
+     "start": 386962,
+     "align": "word"
+    }
+   }
+  },
+  {
+   "name": "unsigned-long-word",
+   "source_sha256": "42417a6b08331e56b6489b2bc1a288116a7541b2787abf6eb1d90ccd0f84d4c3",
+   "compile_ok": true,
+   "module_exact": false,
+   "target": {
+    "exact": false,
+    "reasons": [
+     "bytes differ (first at +0x8, 10 differing)"
+    ],
+    "fixups": 13,
+    "relocations": 4,
+    "reloc_order": "GROUPED"
+   },
+   "peer_losses": {},
+   "data": {
+    "_DATA": {
+     "exact": true,
+     "reasons": [],
+     "size": 1726,
+     "reloc_order": "EXACT",
+     "start": 363076,
+     "class": "DATA",
+     "align": "word",
+     "far": false
+    },
+    "CONST": {
+     "exact": true,
+     "reasons": [],
+     "size": 14,
+     "reloc_order": "GROUPED",
+     "start": 386258,
+     "class": "CONST",
+     "align": "word",
+     "far": false
+    },
+    "_BSS": {
+     "exact": true,
+     "reasons": [],
+     "size": 18,
+     "kind": "BSS",
+     "start": 386962,
+     "align": "word"
+    }
+   }
+  },
+  {
+   "name": "unsigned-long-volatile-word",
+   "source_sha256": "1b0f2e0dd52cb1a1c8938387a2c1cd7ad53c2b080fa08821a32b46db2bfb439b",
+   "compile_ok": true,
+   "module_exact": false,
+   "target": {
+    "exact": false,
+    "reasons": [
+     "bytes differ (first at +0x8, 10 differing)"
+    ],
+    "fixups": 13,
+    "relocations": 4,
+    "reloc_order": "GROUPED"
+   },
+   "peer_losses": {},
+   "data": {
+    "_DATA": {
+     "exact": true,
+     "reasons": [],
+     "size": 1726,
+     "reloc_order": "EXACT",
+     "start": 363076,
+     "class": "DATA",
+     "align": "word",
+     "far": false
+    },
+    "CONST": {
+     "exact": true,
+     "reasons": [],
+     "size": 14,
+     "reloc_order": "GROUPED",
+     "start": 386258,
+     "class": "CONST",
+     "align": "word",
+     "far": false
+    },
+    "_BSS": {
+     "exact": true,
+     "reasons": [],
+     "size": 18,
+     "kind": "BSS",
+     "start": 386962,
+     "align": "word"
+    }
+   }
+  }
+ ]
+}

@@ -1,0 +1,1360 @@
+{
+ "function": "CalcScore",
+ "profile": "msc600ax",
+ "flags": [
+  "/AL",
+  "/Os",
+  "/Og",
+  "/Oe",
+  "/Zi"
+ ],
+ "variants": [
+  {
+   "name": "base",
+   "source_sha256": "db59749ba99bfaf95f87a593a2d0e6772485a81c6dbdfd4aec3933ab4934aac1",
+   "compile_ok": true,
+   "module_exact": false,
+   "target": {
+    "exact": true,
+    "reasons": [],
+    "fixups": 61,
+    "relocations": 18,
+    "reloc_order": "GROUPED"
+   },
+   "peer_losses": {
+    "PictureDialog": {
+     "exact": false,
+     "reasons": [
+      "length 480 != target 479",
+      "bytes differ (first at +0x55, 370 differing)",
+      "relocation set differs (19 vs 19)"
+     ],
+     "fixups": 26,
+     "relocations": 19,
+     "reloc_order": "EXACT"
+    }
+   },
+   "data": {
+    "CONST": {
+     "exact": true,
+     "reasons": [],
+     "size": 64,
+     "reloc_order": "GROUPED",
+     "start": 385640,
+     "class": "CONST",
+     "align": "word",
+     "far": false
+    },
+    "_DATA": {
+     "exact": true,
+     "reasons": [],
+     "size": 94,
+     "reloc_order": "EXACT",
+     "start": 362024,
+     "class": "DATA",
+     "align": "word",
+     "far": false
+    }
+   }
+  },
+  {
+   "name": "f_20E8_04B6-win",
+   "source_sha256": "ff424ae0e721a899a7546f1f4c9d4c4c5bfdaa8acad489f6dfd04ce77e62f35a",
+   "compile_ok": true,
+   "module_exact": true,
+   "target": {
+    "exact": true,
+    "reasons": [],
+    "fixups": 61,
+    "relocations": 18,
+    "reloc_order": "GROUPED"
+   },
+   "peer_losses": {},
+   "data": {
+    "CONST": {
+     "exact": true,
+     "reasons": [],
+     "size": 64,
+     "reloc_order": "GROUPED",
+     "start": 385640,
+     "class": "CONST",
+     "align": "word",
+     "far": false
+    },
+    "_DATA": {
+     "exact": true,
+     "reasons": [],
+     "size": 94,
+     "reloc_order": "EXACT",
+     "start": 362024,
+     "class": "DATA",
+     "align": "word",
+     "far": false
+    }
+   }
+  },
+  {
+   "name": "f_218D_03F1-ev",
+   "source_sha256": "25196e9155a32afdcf914aca97212d08f2cb8b538dcb02ba44f37126df1ead16",
+   "compile_ok": true,
+   "module_exact": true,
+   "target": {
+    "exact": true,
+    "reasons": [],
+    "fixups": 61,
+    "relocations": 18,
+    "reloc_order": "GROUPED"
+   },
+   "peer_losses": {},
+   "data": {
+    "CONST": {
+     "exact": true,
+     "reasons": [],
+     "size": 64,
+     "reloc_order": "GROUPED",
+     "start": 385640,
+     "class": "CONST",
+     "align": "word",
+     "far": false
+    },
+    "_DATA": {
+     "exact": true,
+     "reasons": [],
+     "size": 94,
+     "reloc_order": "EXACT",
+     "start": 362024,
+     "class": "DATA",
+     "align": "word",
+     "far": false
+    }
+   }
+  },
+  {
+   "name": "f_20E8_0635-win",
+   "source_sha256": "94b317eebeaec8850cd135afb6d7cd295990728db7ea97434c4ed26a2539a426",
+   "compile_ok": true,
+   "module_exact": true,
+   "target": {
+    "exact": true,
+    "reasons": [],
+    "fixups": 61,
+    "relocations": 18,
+    "reloc_order": "GROUPED"
+   },
+   "peer_losses": {},
+   "data": {
+    "CONST": {
+     "exact": true,
+     "reasons": [],
+     "size": 64,
+     "reloc_order": "GROUPED",
+     "start": 385640,
+     "class": "CONST",
+     "align": "word",
+     "far": false
+    },
+    "_DATA": {
+     "exact": true,
+     "reasons": [],
+     "size": 94,
+     "reloc_order": "EXACT",
+     "start": 362024,
+     "class": "DATA",
+     "align": "word",
+     "far": false
+    }
+   }
+  },
+  {
+   "name": "WinPrintf-format",
+   "source_sha256": "fcb3bdac0cb5a3925756c21fe56fc7ba8f7069d6b10bb91acdad3df7beb966d7",
+   "compile_ok": true,
+   "module_exact": true,
+   "target": {
+    "exact": true,
+    "reasons": [],
+    "fixups": 61,
+    "relocations": 18,
+    "reloc_order": "GROUPED"
+   },
+   "peer_losses": {},
+   "data": {
+    "CONST": {
+     "exact": true,
+     "reasons": [],
+     "size": 64,
+     "reloc_order": "GROUPED",
+     "start": 385640,
+     "class": "CONST",
+     "align": "word",
+     "far": false
+    },
+    "_DATA": {
+     "exact": true,
+     "reasons": [],
+     "size": 94,
+     "reloc_order": "EXACT",
+     "start": 362024,
+     "class": "DATA",
+     "align": "word",
+     "far": false
+    }
+   }
+  },
+  {
+   "name": "f_23AE_0377-win",
+   "source_sha256": "64ccc56834cf44d6d5a86e707db81a1f953ff4b1a69f6e0998405e4ee2b838f9",
+   "compile_ok": true,
+   "module_exact": true,
+   "target": {
+    "exact": true,
+    "reasons": [],
+    "fixups": 61,
+    "relocations": 18,
+    "reloc_order": "GROUPED"
+   },
+   "peer_losses": {},
+   "data": {
+    "CONST": {
+     "exact": true,
+     "reasons": [],
+     "size": 64,
+     "reloc_order": "GROUPED",
+     "start": 385640,
+     "class": "CONST",
+     "align": "word",
+     "far": false
+    },
+    "_DATA": {
+     "exact": true,
+     "reasons": [],
+     "size": 94,
+     "reloc_order": "EXACT",
+     "start": 362024,
+     "class": "DATA",
+     "align": "word",
+     "far": false
+    }
+   }
+  },
+  {
+   "name": "f_22BF_0AEF-win",
+   "source_sha256": "29f4802d9b858820a30c9b5a88440275b5be02a458624f9edb59830f64d49658",
+   "compile_ok": true,
+   "module_exact": true,
+   "target": {
+    "exact": true,
+    "reasons": [],
+    "fixups": 61,
+    "relocations": 18,
+    "reloc_order": "GROUPED"
+   },
+   "peer_losses": {},
+   "data": {
+    "CONST": {
+     "exact": true,
+     "reasons": [],
+     "size": 64,
+     "reloc_order": "GROUPED",
+     "start": 385640,
+     "class": "CONST",
+     "align": "word",
+     "far": false
+    },
+    "_DATA": {
+     "exact": true,
+     "reasons": [],
+     "size": 94,
+     "reloc_order": "EXACT",
+     "start": 362024,
+     "class": "DATA",
+     "align": "word",
+     "far": false
+    }
+   }
+  },
+  {
+   "name": "clip_SetWin-win",
+   "source_sha256": "9af1504df8219a3220ed2f0a323d1ecc0931523ccaffb6563d97d7abdf912a4e",
+   "compile_ok": true,
+   "module_exact": true,
+   "target": {
+    "exact": true,
+    "reasons": [],
+    "fixups": 61,
+    "relocations": 18,
+    "reloc_order": "GROUPED"
+   },
+   "peer_losses": {},
+   "data": {
+    "CONST": {
+     "exact": true,
+     "reasons": [],
+     "size": 64,
+     "reloc_order": "GROUPED",
+     "start": 385640,
+     "class": "CONST",
+     "align": "word",
+     "far": false
+    },
+    "_DATA": {
+     "exact": true,
+     "reasons": [],
+     "size": 94,
+     "reloc_order": "EXACT",
+     "start": 362024,
+     "class": "DATA",
+     "align": "word",
+     "far": false
+    }
+   }
+  },
+  {
+   "name": "f_22BF_0498-obj",
+   "source_sha256": "2c405ad68ef606aeb257c45fecaf089532e82796df4db6127c3cd43bf54ef8b8",
+   "compile_ok": true,
+   "module_exact": true,
+   "target": {
+    "exact": true,
+    "reasons": [],
+    "fixups": 61,
+    "relocations": 18,
+    "reloc_order": "GROUPED"
+   },
+   "peer_losses": {},
+   "data": {
+    "CONST": {
+     "exact": true,
+     "reasons": [],
+     "size": 64,
+     "reloc_order": "GROUPED",
+     "start": 385640,
+     "class": "CONST",
+     "align": "word",
+     "far": false
+    },
+    "_DATA": {
+     "exact": true,
+     "reasons": [],
+     "size": 94,
+     "reloc_order": "EXACT",
+     "start": 362024,
+     "class": "DATA",
+     "align": "word",
+     "far": false
+    }
+   }
+  },
+  {
+   "name": "win_GetObjRect-obj",
+   "source_sha256": "07671cc2fef21b8d495d8bdc731c40308bd33222bbc0449b2e6be4ec8501b20f",
+   "compile_ok": false,
+   "module_exact": false,
+   "target": null,
+   "peer_losses": {
+    "DoScenario": null,
+    "DoWinHelp": null,
+    "ScoreDialog": null,
+    "SetDefaultWindPrompt": null,
+    "PictStrnDialog": null,
+    "EndGameDialog": null,
+    "CustomerIDDialog": null,
+    "DrawCastePopUp": null,
+    "PictureDialog": null,
+    "SpiderDialog": null
+   },
+   "data": null,
+   "log": "UNIT.C\nUNIT.C(553) : error C2061: syntax error : identifier 'rect'\n"
+  },
+  {
+   "name": "win_GetObjRect-rect",
+   "source_sha256": "b57a537121656131568973d2bd0fedc309c833cf3c3bf448da96a1a3dfad7c57",
+   "compile_ok": false,
+   "module_exact": false,
+   "target": null,
+   "peer_losses": {
+    "DoScenario": null,
+    "DoWinHelp": null,
+    "ScoreDialog": null,
+    "SetDefaultWindPrompt": null,
+    "PictStrnDialog": null,
+    "EndGameDialog": null,
+    "CustomerIDDialog": null,
+    "DrawCastePopUp": null,
+    "PictureDialog": null,
+    "SpiderDialog": null
+   },
+   "data": null,
+   "log": "UNIT.C\nUNIT.C(553) : error C2059: syntax error : ')'\n"
+  },
+  {
+   "name": "win_DrawObjectNum-objNum",
+   "source_sha256": "80ff3a2b31b8c16b0c3b8179ae7f68779a4041bff8cbc9bf343dc01e7ba17f7d",
+   "compile_ok": true,
+   "module_exact": true,
+   "target": {
+    "exact": true,
+    "reasons": [],
+    "fixups": 61,
+    "relocations": 18,
+    "reloc_order": "GROUPED"
+   },
+   "peer_losses": {},
+   "data": {
+    "CONST": {
+     "exact": true,
+     "reasons": [],
+     "size": 64,
+     "reloc_order": "GROUPED",
+     "start": 385640,
+     "class": "CONST",
+     "align": "word",
+     "far": false
+    },
+    "_DATA": {
+     "exact": true,
+     "reasons": [],
+     "size": 94,
+     "reloc_order": "EXACT",
+     "start": 362024,
+     "class": "DATA",
+     "align": "word",
+     "far": false
+    }
+   }
+  },
+  {
+   "name": "f_2505_08EA-win",
+   "source_sha256": "88394a887c51544ea1f323ab6b98a894db4381762d825d395b66679b37f92612",
+   "compile_ok": true,
+   "module_exact": true,
+   "target": {
+    "exact": true,
+    "reasons": [],
+    "fixups": 61,
+    "relocations": 18,
+    "reloc_order": "GROUPED"
+   },
+   "peer_losses": {},
+   "data": {
+    "CONST": {
+     "exact": true,
+     "reasons": [],
+     "size": 64,
+     "reloc_order": "GROUPED",
+     "start": 385640,
+     "class": "CONST",
+     "align": "word",
+     "far": false
+    },
+    "_DATA": {
+     "exact": true,
+     "reasons": [],
+     "size": 94,
+     "reloc_order": "EXACT",
+     "start": 362024,
+     "class": "DATA",
+     "align": "word",
+     "far": false
+    }
+   }
+  },
+  {
+   "name": "f_22BF_09B0-win",
+   "source_sha256": "232c9846d9f907420971085cafbce38025984a4184dfe8025f7a4846ebaa967f",
+   "compile_ok": true,
+   "module_exact": true,
+   "target": {
+    "exact": true,
+    "reasons": [],
+    "fixups": 61,
+    "relocations": 18,
+    "reloc_order": "GROUPED"
+   },
+   "peer_losses": {},
+   "data": {
+    "CONST": {
+     "exact": true,
+     "reasons": [],
+     "size": 64,
+     "reloc_order": "GROUPED",
+     "start": 385640,
+     "class": "CONST",
+     "align": "word",
+     "far": false
+    },
+    "_DATA": {
+     "exact": true,
+     "reasons": [],
+     "size": 94,
+     "reloc_order": "EXACT",
+     "start": 362024,
+     "class": "DATA",
+     "align": "word",
+     "far": false
+    }
+   }
+  },
+  {
+   "name": "f_22BF_04A0-obj",
+   "source_sha256": "1931db4f5c9a5df9b87a2b50b2f0bd4a190a8efd4cbd8d65aebabcefc56ed4c8",
+   "compile_ok": true,
+   "module_exact": true,
+   "target": {
+    "exact": true,
+    "reasons": [],
+    "fixups": 61,
+    "relocations": 18,
+    "reloc_order": "GROUPED"
+   },
+   "peer_losses": {},
+   "data": {
+    "CONST": {
+     "exact": true,
+     "reasons": [],
+     "size": 64,
+     "reloc_order": "GROUPED",
+     "start": 385640,
+     "class": "CONST",
+     "align": "word",
+     "far": false
+    },
+    "_DATA": {
+     "exact": true,
+     "reasons": [],
+     "size": 94,
+     "reloc_order": "EXACT",
+     "start": 362024,
+     "class": "DATA",
+     "align": "word",
+     "far": false
+    }
+   }
+  },
+  {
+   "name": "f_2505_0831-win",
+   "source_sha256": "7a02e22bfae14a31fd4403bbac115ffb7d1f0a0eb03e5713887b155ae00d594e",
+   "compile_ok": true,
+   "module_exact": true,
+   "target": {
+    "exact": true,
+    "reasons": [],
+    "fixups": 61,
+    "relocations": 18,
+    "reloc_order": "GROUPED"
+   },
+   "peer_losses": {},
+   "data": {
+    "CONST": {
+     "exact": true,
+     "reasons": [],
+     "size": 64,
+     "reloc_order": "GROUPED",
+     "start": 385640,
+     "class": "CONST",
+     "align": "word",
+     "far": false
+    },
+    "_DATA": {
+     "exact": true,
+     "reasons": [],
+     "size": 94,
+     "reloc_order": "EXACT",
+     "start": 362024,
+     "class": "DATA",
+     "align": "word",
+     "far": false
+    }
+   }
+  },
+  {
+   "name": "clip_SubInclude-rect",
+   "source_sha256": "5cbcd4453aaf2067309773ca16776ea30889edad6ec99208b617a9cb13200dad",
+   "compile_ok": true,
+   "module_exact": true,
+   "target": {
+    "exact": true,
+    "reasons": [],
+    "fixups": 61,
+    "relocations": 18,
+    "reloc_order": "GROUPED"
+   },
+   "peer_losses": {},
+   "data": {
+    "CONST": {
+     "exact": true,
+     "reasons": [],
+     "size": 64,
+     "reloc_order": "GROUPED",
+     "start": 385640,
+     "class": "CONST",
+     "align": "word",
+     "far": false
+    },
+    "_DATA": {
+     "exact": true,
+     "reasons": [],
+     "size": 94,
+     "reloc_order": "EXACT",
+     "start": 362024,
+     "class": "DATA",
+     "align": "word",
+     "far": false
+    }
+   }
+  },
+  {
+   "name": "f_21FA_08E2-win",
+   "source_sha256": "a93f76ad50475bfe1d738977056d7f5a5ac34acc3416e645dec8733de81320aa",
+   "compile_ok": true,
+   "module_exact": true,
+   "target": {
+    "exact": true,
+    "reasons": [],
+    "fixups": 61,
+    "relocations": 18,
+    "reloc_order": "GROUPED"
+   },
+   "peer_losses": {},
+   "data": {
+    "CONST": {
+     "exact": true,
+     "reasons": [],
+     "size": 64,
+     "reloc_order": "GROUPED",
+     "start": 385640,
+     "class": "CONST",
+     "align": "word",
+     "far": false
+    },
+    "_DATA": {
+     "exact": true,
+     "reasons": [],
+     "size": 94,
+     "reloc_order": "EXACT",
+     "start": 362024,
+     "class": "DATA",
+     "align": "word",
+     "far": false
+    }
+   }
+  },
+  {
+   "name": "f_22BF_0B25-win",
+   "source_sha256": "bef4142aacf9dcd26fdbb9cb305a4d1100d2e669032aa05ff71662c9cab40152",
+   "compile_ok": true,
+   "module_exact": true,
+   "target": {
+    "exact": true,
+    "reasons": [],
+    "fixups": 61,
+    "relocations": 18,
+    "reloc_order": "GROUPED"
+   },
+   "peer_losses": {},
+   "data": {
+    "CONST": {
+     "exact": true,
+     "reasons": [],
+     "size": 64,
+     "reloc_order": "GROUPED",
+     "start": 385640,
+     "class": "CONST",
+     "align": "word",
+     "far": false
+    },
+    "_DATA": {
+     "exact": true,
+     "reasons": [],
+     "size": 94,
+     "reloc_order": "EXACT",
+     "start": 362024,
+     "class": "DATA",
+     "align": "word",
+     "far": false
+    }
+   }
+  },
+  {
+   "name": "f_23AE_01DB-win",
+   "source_sha256": "489c405669a3684f40daf9c0eddc8f33d77b7dbcb01ed652379dce69b6bd9692",
+   "compile_ok": true,
+   "module_exact": true,
+   "target": {
+    "exact": true,
+    "reasons": [],
+    "fixups": 61,
+    "relocations": 18,
+    "reloc_order": "GROUPED"
+   },
+   "peer_losses": {},
+   "data": {
+    "CONST": {
+     "exact": true,
+     "reasons": [],
+     "size": 64,
+     "reloc_order": "GROUPED",
+     "start": 385640,
+     "class": "CONST",
+     "align": "word",
+     "far": false
+    },
+    "_DATA": {
+     "exact": true,
+     "reasons": [],
+     "size": 94,
+     "reloc_order": "EXACT",
+     "start": 362024,
+     "class": "DATA",
+     "align": "word",
+     "far": false
+    }
+   }
+  },
+  {
+   "name": "f_22BF_059A-obj",
+   "source_sha256": "6fc2ecbcf35169a4f7fffec7fb051454b80cea854b09b67c28e07ddeb676a437",
+   "compile_ok": true,
+   "module_exact": true,
+   "target": {
+    "exact": true,
+    "reasons": [],
+    "fixups": 61,
+    "relocations": 18,
+    "reloc_order": "GROUPED"
+   },
+   "peer_losses": {},
+   "data": {
+    "CONST": {
+     "exact": true,
+     "reasons": [],
+     "size": 64,
+     "reloc_order": "GROUPED",
+     "start": 385640,
+     "class": "CONST",
+     "align": "word",
+     "far": false
+    },
+    "_DATA": {
+     "exact": true,
+     "reasons": [],
+     "size": 94,
+     "reloc_order": "EXACT",
+     "start": 362024,
+     "class": "DATA",
+     "align": "word",
+     "far": false
+    }
+   }
+  },
+  {
+   "name": "f_24AB_02AD-font",
+   "source_sha256": "c21a19192bdb80afbf6afb4ca5e0978d2ff5a055d7cae844357dd49b0302dac4",
+   "compile_ok": true,
+   "module_exact": true,
+   "target": {
+    "exact": true,
+    "reasons": [],
+    "fixups": 61,
+    "relocations": 18,
+    "reloc_order": "GROUPED"
+   },
+   "peer_losses": {},
+   "data": {
+    "CONST": {
+     "exact": true,
+     "reasons": [],
+     "size": 64,
+     "reloc_order": "GROUPED",
+     "start": 385640,
+     "class": "CONST",
+     "align": "word",
+     "far": false
+    },
+    "_DATA": {
+     "exact": true,
+     "reasons": [],
+     "size": 94,
+     "reloc_order": "EXACT",
+     "start": 362024,
+     "class": "DATA",
+     "align": "word",
+     "far": false
+    }
+   }
+  },
+  {
+   "name": "f_22BF_0D53-obj",
+   "source_sha256": "90d9eb3fdfd1dbe85b30897bd81a2b2d068fcb20ad8e2b1589f9ad953308e583",
+   "compile_ok": false,
+   "module_exact": false,
+   "target": null,
+   "peer_losses": {
+    "DoScenario": null,
+    "DoWinHelp": null,
+    "ScoreDialog": null,
+    "SetDefaultWindPrompt": null,
+    "PictStrnDialog": null,
+    "EndGameDialog": null,
+    "CustomerIDDialog": null,
+    "DrawCastePopUp": null,
+    "PictureDialog": null,
+    "SpiderDialog": null
+   },
+   "data": null,
+   "log": "UNIT.C\nUNIT.C(606) : error C2061: syntax error : identifier 'format'\n"
+  },
+  {
+   "name": "f_22BF_0D53-format",
+   "source_sha256": "174dca8404d8a6d1e378bcc581252af9b05dad18ff728958eac32ba80cc30f17",
+   "compile_ok": false,
+   "module_exact": false,
+   "target": null,
+   "peer_losses": {
+    "DoScenario": null,
+    "DoWinHelp": null,
+    "ScoreDialog": null,
+    "SetDefaultWindPrompt": null,
+    "PictStrnDialog": null,
+    "EndGameDialog": null,
+    "CustomerIDDialog": null,
+    "DrawCastePopUp": null,
+    "PictureDialog": null,
+    "SpiderDialog": null
+   },
+   "data": null,
+   "log": "UNIT.C\nUNIT.C(606) : error C2059: syntax error : ','\n"
+  },
+  {
+   "name": "f_24AB_0367-c",
+   "source_sha256": "c4e784cff3133052432481b1614e9ae047a9c6ad6ced83d41ff8ad47be0fd333",
+   "compile_ok": true,
+   "module_exact": true,
+   "target": {
+    "exact": true,
+    "reasons": [],
+    "fixups": 61,
+    "relocations": 18,
+    "reloc_order": "GROUPED"
+   },
+   "peer_losses": {},
+   "data": {
+    "CONST": {
+     "exact": true,
+     "reasons": [],
+     "size": 64,
+     "reloc_order": "GROUPED",
+     "start": 385640,
+     "class": "CONST",
+     "align": "word",
+     "far": false
+    },
+    "_DATA": {
+     "exact": true,
+     "reasons": [],
+     "size": 94,
+     "reloc_order": "EXACT",
+     "start": 362024,
+     "class": "DATA",
+     "align": "word",
+     "far": false
+    }
+   }
+  },
+  {
+   "name": "win_SetColorFromObjNum-obj",
+   "source_sha256": "862bee71ca1bd954bd8e73717739db9a24f89f98e0245ea8672fd764fd7c23a0",
+   "compile_ok": true,
+   "module_exact": true,
+   "target": {
+    "exact": true,
+    "reasons": [],
+    "fixups": 61,
+    "relocations": 18,
+    "reloc_order": "GROUPED"
+   },
+   "peer_losses": {},
+   "data": {
+    "CONST": {
+     "exact": true,
+     "reasons": [],
+     "size": 64,
+     "reloc_order": "GROUPED",
+     "start": 385640,
+     "class": "CONST",
+     "align": "word",
+     "far": false
+    },
+    "_DATA": {
+     "exact": true,
+     "reasons": [],
+     "size": 94,
+     "reloc_order": "EXACT",
+     "start": 362024,
+     "class": "DATA",
+     "align": "word",
+     "far": false
+    }
+   }
+  },
+  {
+   "name": "f_24AB_038D-x",
+   "source_sha256": "b26b7c199325cf7a0bf10e788b138cf106621cf0b3c062d26a529695476227c9",
+   "compile_ok": false,
+   "module_exact": false,
+   "target": null,
+   "peer_losses": {
+    "DoScenario": null,
+    "DoWinHelp": null,
+    "ScoreDialog": null,
+    "SetDefaultWindPrompt": null,
+    "PictStrnDialog": null,
+    "EndGameDialog": null,
+    "CustomerIDDialog": null,
+    "DrawCastePopUp": null,
+    "PictureDialog": null,
+    "SpiderDialog": null
+   },
+   "data": null,
+   "log": "UNIT.C\nUNIT.C(668) : error C2061: syntax error : identifier 'y'\n"
+  },
+  {
+   "name": "f_24AB_038D-y",
+   "source_sha256": "fa2f5099c8255411416e16b75012e8e7bb65d407db15840e0b2821e136f4d40d",
+   "compile_ok": false,
+   "module_exact": false,
+   "target": null,
+   "peer_losses": {
+    "DoScenario": null,
+    "DoWinHelp": null,
+    "ScoreDialog": null,
+    "SetDefaultWindPrompt": null,
+    "PictStrnDialog": null,
+    "EndGameDialog": null,
+    "CustomerIDDialog": null,
+    "DrawCastePopUp": null,
+    "PictureDialog": null,
+    "SpiderDialog": null
+   },
+   "data": null,
+   "log": "UNIT.C\nUNIT.C(668) : error C2059: syntax error : ','\n"
+  },
+  {
+   "name": "f_24AB_038D-text",
+   "source_sha256": "a243180a087d2420d6e4c0d82b712357909bdb702e6e05188166a3c3fe965ef7",
+   "compile_ok": false,
+   "module_exact": false,
+   "target": null,
+   "peer_losses": {
+    "DoScenario": null,
+    "DoWinHelp": null,
+    "ScoreDialog": null,
+    "SetDefaultWindPrompt": null,
+    "PictStrnDialog": null,
+    "EndGameDialog": null,
+    "CustomerIDDialog": null,
+    "DrawCastePopUp": null,
+    "PictureDialog": null,
+    "SpiderDialog": null
+   },
+   "data": null,
+   "log": "UNIT.C\nUNIT.C(668) : error C2059: syntax error : ')'\n"
+  },
+  {
+   "name": "f_15D9_009C-text",
+   "source_sha256": "c8f252675811278e6976109e9e2d6f3e37190663e98c41608b0ad1ad8c1843b1",
+   "compile_ok": false,
+   "module_exact": false,
+   "target": null,
+   "peer_losses": {
+    "DoScenario": null,
+    "DoWinHelp": null,
+    "ScoreDialog": null,
+    "SetDefaultWindPrompt": null,
+    "PictStrnDialog": null,
+    "EndGameDialog": null,
+    "CustomerIDDialog": null,
+    "DrawCastePopUp": null,
+    "PictureDialog": null,
+    "SpiderDialog": null
+   },
+   "data": null,
+   "log": "UNIT.C\nUNIT.C(747) : error C2061: syntax error : identifier 'pos'\n"
+  },
+  {
+   "name": "f_15D9_009C-pos",
+   "source_sha256": "3002fadcbf8568e027013d61abfa629ceb083ecfc80baeed101676755d24f7b8",
+   "compile_ok": false,
+   "module_exact": false,
+   "target": null,
+   "peer_losses": {
+    "DoScenario": null,
+    "DoWinHelp": null,
+    "ScoreDialog": null,
+    "SetDefaultWindPrompt": null,
+    "PictStrnDialog": null,
+    "EndGameDialog": null,
+    "CustomerIDDialog": null,
+    "DrawCastePopUp": null,
+    "PictureDialog": null,
+    "SpiderDialog": null
+   },
+   "data": null,
+   "log": "UNIT.C\nUNIT.C(747) : error C2059: syntax error : ','\n"
+  },
+  {
+   "name": "f_15D9_009C-mode",
+   "source_sha256": "a1daaf3d5b1ba609c694dda21f36f80b4a95bb1e8001e08631b8436b0b1a3aff",
+   "compile_ok": false,
+   "module_exact": false,
+   "target": null,
+   "peer_losses": {
+    "DoScenario": null,
+    "DoWinHelp": null,
+    "ScoreDialog": null,
+    "SetDefaultWindPrompt": null,
+    "PictStrnDialog": null,
+    "EndGameDialog": null,
+    "CustomerIDDialog": null,
+    "DrawCastePopUp": null,
+    "PictureDialog": null,
+    "SpiderDialog": null
+   },
+   "data": null,
+   "log": "UNIT.C\nUNIT.C(747) : error C2059: syntax error : ')'\n"
+  },
+  {
+   "name": "f_075B_0242-object",
+   "source_sha256": "6591058c42a4db875862419e677b7b73ceb37265fff044e6b453692afb7b3ba8",
+   "compile_ok": true,
+   "module_exact": true,
+   "target": {
+    "exact": true,
+    "reasons": [],
+    "fixups": 61,
+    "relocations": 18,
+    "reloc_order": "GROUPED"
+   },
+   "peer_losses": {},
+   "data": {
+    "CONST": {
+     "exact": true,
+     "reasons": [],
+     "size": 64,
+     "reloc_order": "GROUPED",
+     "start": 385640,
+     "class": "CONST",
+     "align": "word",
+     "far": false
+    },
+    "_DATA": {
+     "exact": true,
+     "reasons": [],
+     "size": 94,
+     "reloc_order": "EXACT",
+     "start": 362024,
+     "class": "DATA",
+     "align": "word",
+     "far": false
+    }
+   }
+  },
+  {
+   "name": "free-block",
+   "source_sha256": "6c40cc6f83ab1e6068c51df3cfb01ec6a61f17c8e397a5ce5a6840a53b442a9a",
+   "compile_ok": true,
+   "module_exact": true,
+   "target": {
+    "exact": true,
+    "reasons": [],
+    "fixups": 61,
+    "relocations": 18,
+    "reloc_order": "GROUPED"
+   },
+   "peer_losses": {},
+   "data": {
+    "CONST": {
+     "exact": true,
+     "reasons": [],
+     "size": 64,
+     "reloc_order": "GROUPED",
+     "start": 385640,
+     "class": "CONST",
+     "align": "word",
+     "far": false
+    },
+    "_DATA": {
+     "exact": true,
+     "reasons": [],
+     "size": 94,
+     "reloc_order": "EXACT",
+     "start": 362024,
+     "class": "DATA",
+     "align": "word",
+     "far": false
+    }
+   }
+  },
+  {
+   "name": "db_PurgeObject-object",
+   "source_sha256": "070da4dca86327e45ce3f062114f2f75a5e3c84c7a47763bdb2053d5dd465d99",
+   "compile_ok": false,
+   "module_exact": false,
+   "target": null,
+   "peer_losses": {
+    "DoScenario": null,
+    "DoWinHelp": null,
+    "ScoreDialog": null,
+    "SetDefaultWindPrompt": null,
+    "PictStrnDialog": null,
+    "EndGameDialog": null,
+    "CustomerIDDialog": null,
+    "DrawCastePopUp": null,
+    "PictureDialog": null,
+    "SpiderDialog": null
+   },
+   "data": null,
+   "log": "UNIT.C\nUNIT.C(765) : error C2061: syntax error : identifier 'kind'\n"
+  },
+  {
+   "name": "db_PurgeObject-kind",
+   "source_sha256": "9aa5afebf961596ad70ace0cc253b479003833adb04c5fcc379826731b4ebcf4",
+   "compile_ok": false,
+   "module_exact": false,
+   "target": null,
+   "peer_losses": {
+    "DoScenario": null,
+    "DoWinHelp": null,
+    "ScoreDialog": null,
+    "SetDefaultWindPrompt": null,
+    "PictStrnDialog": null,
+    "EndGameDialog": null,
+    "CustomerIDDialog": null,
+    "DrawCastePopUp": null,
+    "PictureDialog": null,
+    "SpiderDialog": null
+   },
+   "data": null,
+   "log": "UNIT.C\nUNIT.C(765) : error C2059: syntax error : ')'\n"
+  },
+  {
+   "name": "f_208F_0419-size",
+   "source_sha256": "2a6fe8ebe7ed73b11f7e7f2128ad9a43be03a8848749dd4379916228dccac4d0",
+   "compile_ok": false,
+   "module_exact": false,
+   "target": null,
+   "peer_losses": {
+    "DoScenario": null,
+    "DoWinHelp": null,
+    "ScoreDialog": null,
+    "SetDefaultWindPrompt": null,
+    "PictStrnDialog": null,
+    "EndGameDialog": null,
+    "CustomerIDDialog": null,
+    "DrawCastePopUp": null,
+    "PictureDialog": null,
+    "SpiderDialog": null
+   },
+   "data": null,
+   "log": "UNIT.C\nUNIT.C(787) : error C2061: syntax error : identifier 'id'\n"
+  },
+  {
+   "name": "f_208F_0419-id",
+   "source_sha256": "fde6d3549b14a884f8823744b74a18045bac4f7df7953a453d5ebe1878b5f0db",
+   "compile_ok": false,
+   "module_exact": false,
+   "target": null,
+   "peer_losses": {
+    "DoScenario": null,
+    "DoWinHelp": null,
+    "ScoreDialog": null,
+    "SetDefaultWindPrompt": null,
+    "PictStrnDialog": null,
+    "EndGameDialog": null,
+    "CustomerIDDialog": null,
+    "DrawCastePopUp": null,
+    "PictureDialog": null,
+    "SpiderDialog": null
+   },
+   "data": null,
+   "log": "UNIT.C\nUNIT.C(787) : error C2059: syntax error : ')'\n"
+  },
+  {
+   "name": "f_24AB_0329-text",
+   "source_sha256": "01adbba5aee1398160d997544fff86f00ef305c38379e596f66e4501fcb715ec",
+   "compile_ok": true,
+   "module_exact": true,
+   "target": {
+    "exact": true,
+    "reasons": [],
+    "fixups": 61,
+    "relocations": 18,
+    "reloc_order": "GROUPED"
+   },
+   "peer_losses": {},
+   "data": {
+    "CONST": {
+     "exact": true,
+     "reasons": [],
+     "size": 64,
+     "reloc_order": "GROUPED",
+     "start": 385640,
+     "class": "CONST",
+     "align": "word",
+     "far": false
+    },
+    "_DATA": {
+     "exact": true,
+     "reasons": [],
+     "size": 94,
+     "reloc_order": "EXACT",
+     "start": 362024,
+     "class": "DATA",
+     "align": "word",
+     "far": false
+    }
+   }
+  },
+  {
+   "name": "win_DrawBitMap-x",
+   "source_sha256": "618ab6b2f1a5535c4b4d5d9fc76c79e3e245c9c57fd013db82ca61fb5df9dcfb",
+   "compile_ok": false,
+   "module_exact": false,
+   "target": null,
+   "peer_losses": {
+    "DoScenario": null,
+    "DoWinHelp": null,
+    "ScoreDialog": null,
+    "SetDefaultWindPrompt": null,
+    "PictStrnDialog": null,
+    "EndGameDialog": null,
+    "CustomerIDDialog": null,
+    "DrawCastePopUp": null,
+    "PictureDialog": null,
+    "SpiderDialog": null
+   },
+   "data": null,
+   "log": "UNIT.C\nUNIT.C(790) : error C2061: syntax error : identifier 'y'\n"
+  },
+  {
+   "name": "win_DrawBitMap-y",
+   "source_sha256": "ba51f7154c2435bab8e3d5edcb3f4db15a67d2c180006ab8e139d978c9d10bb7",
+   "compile_ok": false,
+   "module_exact": false,
+   "target": null,
+   "peer_losses": {
+    "DoScenario": null,
+    "DoWinHelp": null,
+    "ScoreDialog": null,
+    "SetDefaultWindPrompt": null,
+    "PictStrnDialog": null,
+    "EndGameDialog": null,
+    "CustomerIDDialog": null,
+    "DrawCastePopUp": null,
+    "PictureDialog": null,
+    "SpiderDialog": null
+   },
+   "data": null,
+   "log": "UNIT.C\nUNIT.C(790) : error C2059: syntax error : ','\n"
+  },
+  {
+   "name": "win_DrawBitMap-id",
+   "source_sha256": "86ffc1319a4c6360e0c63efc0cc30330da7dec4bbe24fd52f72d5f08cd63d9de",
+   "compile_ok": false,
+   "module_exact": false,
+   "target": null,
+   "peer_losses": {
+    "DoScenario": null,
+    "DoWinHelp": null,
+    "ScoreDialog": null,
+    "SetDefaultWindPrompt": null,
+    "PictStrnDialog": null,
+    "EndGameDialog": null,
+    "CustomerIDDialog": null,
+    "DrawCastePopUp": null,
+    "PictureDialog": null,
+    "SpiderDialog": null
+   },
+   "data": null,
+   "log": "UNIT.C\nUNIT.C(790) : error C2059: syntax error : ')'\n"
+  },
+  {
+   "name": "f_208F_0093-rect",
+   "source_sha256": "3bfb89244e50754d6d728bdc106e901e88a3b58bb8a944615890acbd3590704a",
+   "compile_ok": false,
+   "module_exact": false,
+   "target": null,
+   "peer_losses": {
+    "DoScenario": null,
+    "DoWinHelp": null,
+    "ScoreDialog": null,
+    "SetDefaultWindPrompt": null,
+    "PictStrnDialog": null,
+    "EndGameDialog": null,
+    "CustomerIDDialog": null,
+    "DrawCastePopUp": null,
+    "PictureDialog": null,
+    "SpiderDialog": null
+   },
+   "data": null,
+   "log": "UNIT.C\nUNIT.C(791) : error C2061: syntax error : identifier 'text'\n"
+  },
+  {
+   "name": "f_208F_0093-text",
+   "source_sha256": "3a695d5bbf203d8bacc76210cd6d4d08d96d9909468789a3199c8b074c6f8cb2",
+   "compile_ok": false,
+   "module_exact": false,
+   "target": null,
+   "peer_losses": {
+    "DoScenario": null,
+    "DoWinHelp": null,
+    "ScoreDialog": null,
+    "SetDefaultWindPrompt": null,
+    "PictStrnDialog": null,
+    "EndGameDialog": null,
+    "CustomerIDDialog": null,
+    "DrawCastePopUp": null,
+    "PictureDialog": null,
+    "SpiderDialog": null
+   },
+   "data": null,
+   "log": "UNIT.C\nUNIT.C(791) : error C2059: syntax error : ')'\n"
+  },
+  {
+   "name": "f_00F8_02F7-ticks",
+   "source_sha256": "6e51c10d578853b6c3768edf2c16edcf89044ac8cce4c20061cfdd72f582e131",
+   "compile_ok": true,
+   "module_exact": true,
+   "target": {
+    "exact": true,
+    "reasons": [],
+    "fixups": 61,
+    "relocations": 18,
+    "reloc_order": "GROUPED"
+   },
+   "peer_losses": {},
+   "data": {
+    "CONST": {
+     "exact": true,
+     "reasons": [],
+     "size": 64,
+     "reloc_order": "GROUPED",
+     "start": 385640,
+     "class": "CONST",
+     "align": "word",
+     "far": false
+    },
+    "_DATA": {
+     "exact": true,
+     "reasons": [],
+     "size": 94,
+     "reloc_order": "EXACT",
+     "start": 362024,
+     "class": "DATA",
+     "align": "word",
+     "far": false
+    }
+   }
+  }
+ ]
+}

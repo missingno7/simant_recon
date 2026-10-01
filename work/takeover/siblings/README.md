@@ -1,5 +1,9 @@
 # Sibling tools and blocker controls (2026-10-01)
 
+Later follow-up: `../context-next/README.md` records CalcScore acceptance and a
+repaired memory near draft. The failures and totals below describe this earlier
+checkpoint; use `../context-next/memory-near-repaired.c` for new memory searches.
+
 No game function was accepted. Coverage remains 32 open functions / 17,144 code
 bytes and 129 data bytes. Canonical sources, manifest, oracle lock and promotion
 journal are unchanged. This checkpoint fixes diagnostic and search blockers.
