@@ -2,7 +2,13 @@
 
 Read README.md, AGENTS.md, docs/codegen-rules.md and docs/tu-evidence.md before work.
 `python tools/validate.py` is the source of truth for totals (docs/progress.md/json).
-The latest search-context checkpoint fixes bare search.py commands to inherit the
+The latest menu-loader checkpoint accepts o17_384C_0039's 266 bytes and completes
+S17:384C as a 443-byte TU with grouped cross-function relocation order. LIFE-2
+records the used draw argument's initialization lifetime and its negative controls.
+The accepted declaration is layout-inferred; several draw-local widths match.
+Sources, controls and verification transcripts are in work/takeover/menu-loader/.
+Its separate 44-control list-helper follow-up remains negative.
+The preceding search-context checkpoint fixes bare search.py commands to inherit the
 target object's manifest compiler flags and private-data placements. It retains
 11 negative series / 176 controls (175 compiles) in work/takeover/phase-next/.
 None accepts S15, memory compaction or S25:1035; their residues remain explicit debt.
@@ -11,26 +17,26 @@ The preceding phase-index checkpoint accepts CalcScore and completes S14:384C as
 regression. Findings, compiler controls and verification transcripts are in
 work/takeover/context-next/. The earlier sibling-tool comparison remains in
 work/takeover/siblings/; its 203-test checkpoint preceded this acceptance.
-The latest checkpoint pairs a fresh 210-test suite (two skips) with validation
-of all 46 compiler probes and module/FAR_BSS checks. The validation and
-byte-identical hybrid transcripts are retained in work/takeover/phase-next/.
+The latest checkpoint passes the full test suite (two skips), all 47 compiler
+probes and module/FAR_BSS checks. Full validation and a fresh byte-identical hybrid
+rebuild are retained in work/takeover/menu-loader/.
 Check Git for the current checkpoint and publication status.
 
 ## 1. Reconstruction state
 
 | Measure | Validated value |
 |---|---:|
-| exact C functions / bytes | 1,242 / 236,901 |
+| exact C functions / bytes | 1,243 / 237,167 |
 | genuine symbolic assembly / code-segment data | 50,441 / 1,481 bytes |
 | ASM used as a workaround for C | 0 |
-| complete TUs / with proven cross-function relocation order | 95 / 94 |
+| complete TUs / with proven cross-function relocation order | 96 / 95 |
 | accepted MSC runtime | 90 members; 12,339 code + 2,021 data bytes |
 | accepted game data / far data | 113,884 / 80,310 bytes |
-| unresolved game code / data | 15,975 / 129 bytes |
+| unresolved game code / data | 15,709 / 129 bytes |
 | RTLink manager and associated metadata debt | 17,001 bytes |
-| owned functions / known functions | 1,699 / 1,730 |
+| owned functions / known functions | 1,700 / 1,730 |
 
-Proof quality is separate from coverage: 14,115 C bytes are STEERED, 20,601 are
+Proof quality is separate from coverage: 14,115 C bytes are STEERED, 20,867 are
 layout-inferred, and 11,742 have within-group order pending. S00:31AD is the only
 complete TU whose cross-function relocation order remains pending. FAR_BSS contains
 19,408 zero bytes, but 14,928 bytes still have unverified declaration sizes. The opaque
@@ -44,6 +50,14 @@ That proves placement and integration, not a fully independent reconstruction.
 
 ## 2. Accepted changes in the takeover checkpoint
 
+* S17:384C is now a complete 443-byte TU. The 266-byte menu loader uses a distinct
+  final-phase pointer and initializes its real zero draw argument before the pointer
+  fixup loops. MSC retains the extra frame word and reproduces the spill homes without
+  added instructions. Late initialization and a literal-zero call both lose that word
+  and differ at twelve bytes. LIFE-2 pins those controls; all five functions, private
+  CONST and complete-module relocation order pass. The loader is layout-inferred:
+  int, unsigned and unsigned-char draw declarations match, leaving the original
+  type, spelling and source placement unknown. Evidence: work/takeover/menu-loader/.
 * S14:384C is now a complete 4,653-byte TU, with grouped cross-function relocation
   order. CalcScore's distinct used history index resolves its 12-byte stack-home
   residue; an unnamed real later prototype parameter restores PictureDialog's
@@ -159,7 +173,7 @@ including the 2,804-archive PC-SIG 1991 ZIP-catalog inventory. Retained findings
 under `work/linker_hunt/`; the RTLink 4.00 candidate is now extracted and tested
 (see section 4). It does not match the original stock manager format.
 
-There are 31 known unowned functions, all represented by whole-module drafts,
+There are 30 known unowned functions, all represented by whole-module drafts,
 including hard register, stack-slot, CSE, declaration and control-flow residues.
 Preserved earlier surveys: work/resI/survey.txt, work/resJ/residue.txt,
 work/autosearch/results.md/json. Current takeover scratch and search state:
@@ -216,7 +230,7 @@ conflict with its earlier void prototype; those failed rows are not compiler exc
 | S10:35F5 | 0384; expression and parameter-copy structure still open |
 | S23:39C7 | PrintStyleTextInRect, DisplayCard; register/storage and declaration evidence |
 | root:171C | 09CC, 0ADC, 0CF4, 0FBC |
-| others | S12 cursor, S13 InvertPatch and small root/S15/S17/S24 residues |
+| others | S12 cursor, S13 InvertPatch and small root/S15/S24 residues |
 
 Run rule-driven searches from whole-module best drafts, then inspect aligned disassembly
 for the remaining differences. Win16 is semantic evidence only; use verified naming
@@ -239,6 +253,18 @@ text-segment spill lifetime, compaction moved/segment homes and S25 far-field CS
 allocation remain unexplained. Do not repeat the phase-next storage/header/profile
 series or infer assembly from their failure. Rotate to another open body when
 there is no new hypothesis grounded in its listing or cross-version semantics.
+
+The menu-loader follow-up shows that a real later constant argument's lifetime can
+explain stack homes without additional instructions. S17 is accepted; its older
+negative controls remain historical evidence. The separate root:23E6 list helper
+still has an unexplained segment reload: its 156-byte baseline lacks the original
+three-byte MOV CX. Forty-four new value-flow/assignment controls all compile and
+preserve private data, but none accepts; 24 also regress accepted peers. The 159-byte
+folded assignment control emits MOV AX/ADD instead of MOV CX/INC and still differs
+at four bytes. It is not evidence of the original source or compiler exclusion.
+Do not repeat these controls. Prefer new listing/semantic evidence for an untouched
+open body, or investigate the list helper's real far-pointer value flow before
+introducing more folded expressions. Preserve every accepted peer during that work.
 
 ## 4. Independent historical link
 

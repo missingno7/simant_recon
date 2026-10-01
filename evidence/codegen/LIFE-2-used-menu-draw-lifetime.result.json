@@ -1,0 +1,195 @@
+{
+ "id": "LIFE-2",
+ "question": "In the preserved S17 whole-module context, does a used zero draw argument initialized before pointer-fixup loops retain the extra frame word and reproduce the original spill homes?",
+ "results": [
+  {
+   "variant": "early_draw",
+   "profile_index": 0,
+   "profile": "msc600ax",
+   "flags": [
+    "/AL",
+    "/Os",
+    "/Oe",
+    "/Og",
+    "/Gs",
+    "/Zi"
+   ],
+   "source_sha256": "ca9c7c74b60f0dcc4337c6a7381ad40d46711f0a65580ac7f67095406dceefff",
+   "bytes": "2bc0509a000000005b9a000000009a000000009a00000000b8100050509a000000005b5bb800ff50b80000b9000051509a0000000083c406cb558bec83ec1257568b7e06b8060050579a000000005b5b8bf08956fe0bd075052bc0e9df008e46fe268b04268b5402bb00008e060000895eee8c46f026890726895702b8060050579a000000005b5bc45eee268b07268b57028956f48bf88e46f4268b4502260b05743ec45eee268b07268b57028e46f4260105261155028e5ef4c41d268b4702260b077414c576ee8b048b54022601072611570283c304ebe383c7048b46f4ebb6b800008ed82bc0509a000000005b2bf6c45eee26c41f268b07268b57028bf88956fe8e46fe268b4502260b05742b8d8400fe508e0602008bded1e326ffb700008e06040026ffb700000ee8000083c4064683c7048b46feebc9b801005e5f8be55dcb558bec8b46068e06060026a300008b46088e06080026a300008b460a8e060a0026a300005dcb558bec8b46068e060c0026a300008b46088e060e0026a300005dcb558bec83ec08c746fa0100a0000098408946fe8b46068946f8a0000098f76e080346068946fcff760a8d46f816509a000000008be55dcb",
+   "disasm": "sub ax, ax; push ax; lcall 0, 0; pop bx; lcall 0, 0; lcall 0, 0; lcall 0, 0; mov ax, 0x10; push ax; push ax; lcall 0, 0; pop bx; pop bx; mov ax, 0xff00; push ax; mov ax, 0; mov cx, 0; push cx; push ax; lcall 0, 0; add sp, 6; retf; push bp; mov bp, sp; sub sp, 0x12; push di; push si; mov di, word ptr [bp + 6]; mov ax, 6; push ax; push di; lcall 0, 0; pop bx; pop bx; mov si, ax; mov word ptr [bp - 2], dx; or dx, ax; jne 0x5e; sub ax, ax; jmp 0x13d; mov es, word ptr [bp - 2]; mov ax, word ptr es:[si]; mov dx, word ptr es:[si + 2]; mov bx, 0; mov es, word ptr [0]; mov word ptr [bp - 0x12], bx; mov word ptr [bp - 0x10], es; mov word ptr es:[bx], ax; mov word ptr es:[bx + 2], dx; mov ax, 6; push ax; push di; lcall 0, 0; pop bx; pop bx; les bx, ptr [bp - 0x12]; mov ax, word ptr es:[bx]; mov dx, word ptr es:[bx + 2]; mov word ptr [bp - 0xc], dx; mov di, ax; mov es, word ptr [bp - 0xc]; mov ax, word ptr es:[di + 2]; or ax, word ptr es:[di]; je 0xe1; les bx, ptr [bp - 0x12]; mov ax, word ptr es:[bx]; mov dx, word ptr es:[bx + 2]; mov es, word ptr [bp - 0xc]; add word ptr es:[di], ax; adc word ptr es:[di + 2], dx; mov ds, word ptr [bp - 0xc]; les bx, ptr [di]; mov ax, word ptr es:[bx + 2]; or ax, word ptr es:[bx]; je 0xd9; lds si, ptr [bp - 0x12]; mov ax, word ptr [si]; mov dx, word ptr [si + 2]; add word ptr es:[bx], ax; adc word ptr es:[bx + 2], dx; add bx, 4; jmp 0xbc; add di, 4; mov ax, word ptr [bp - 0xc]; jmp 0x97; mov ax, 0; mov ds, ax; sub ax, ax; push ax; lcall 0, 0; pop bx; sub si, si; les bx, ptr [bp - 0x12]; les bx, ptr es:[bx]; mov ax, word ptr es:[bx]; mov dx, word ptr es:[bx + 2]; mov di, ax; mov word ptr [bp - 2], dx; mov es, word ptr [bp - 2]; mov ax, word ptr es:[di + 2]; or ax, word ptr es:[di]; je 0x13a; lea ax, [si - 0x200]; push ax; mov es, word ptr [2]; mov bx, si; shl bx, 1; push word ptr es:[bx]; mov es, word ptr [4]; push word ptr es:[bx]; push cs; call 0x12e; add sp, 6; inc si; add di, 4; mov ax, word ptr [bp - 2]; jmp 0x103; mov ax, 1; pop si; pop di; mov sp, bp; pop bp; retf; push bp; mov bp, sp; mov ax, word ptr [bp + 6]; mov es, word ptr [6]; mov word ptr es:[0], ax; mov ax, word ptr [bp + 8]; mov es, word ptr [8]; mov word ptr es:[0], ax; mov ax, word ptr [bp + 0xa]; mov es, word ptr [0xa]; mov word ptr es:[0], ax; pop bp; retf; push bp; mov bp, sp; mov ax, word ptr [bp + 6]; mov es, word ptr [0xc]; mov word ptr es:[0], ax; mov ax, word ptr [bp + 8]; mov es, word ptr [0xe]; mov word ptr es:[0], ax; pop bp; retf; push bp; mov bp, sp; sub sp, 8; mov word ptr [bp - 6], 1; mov al, byte ptr [0]; cwde; inc ax; mov word ptr [bp - 2], ax; mov ax, word ptr [bp + 6]; mov word ptr [bp - 8], ax; mov al, byte ptr [0]; cwde; imul word ptr [bp + 8]; add ax, word ptr [bp + 6]; mov word ptr [bp - 4], ax; push word ptr [bp + 0xa]; lea ax, [bp - 8]; push ss; push ax; lcall 0, 0; mov sp, bp; pop bp; retf",
+   "segments": {
+    "UNIT_TEXT": {
+     "class": "CODE",
+     "align": "word",
+     "combine": "public",
+     "length": 443,
+     "big": false
+    },
+    "_DATA": {
+     "class": "DATA",
+     "align": "word",
+     "combine": "public",
+     "length": 0,
+     "big": false
+    },
+    "CONST": {
+     "class": "CONST",
+     "align": "word",
+     "combine": "public",
+     "length": 16,
+     "big": false
+    },
+    "_BSS": {
+     "class": "BSS",
+     "align": "word",
+     "combine": "public",
+     "length": 0,
+     "big": false
+    }
+   },
+   "communals": {}
+  },
+  {
+   "variant": "late_draw",
+   "profile_index": 0,
+   "profile": "msc600ax",
+   "flags": [
+    "/AL",
+    "/Os",
+    "/Oe",
+    "/Og",
+    "/Gs",
+    "/Zi"
+   ],
+   "source_sha256": "c38c6bed7e1b14629da1f716806e17bf75d9a4fda68b80f1aee63227ed434da9",
+   "bytes": "2bc0509a000000005b9a000000009a000000009a00000000b8100050509a000000005b5bb800ff50b80000b9000051509a0000000083c406cb558bec83ec1057568b7e06b8060050579a000000005b5b8bf08956fe0bd075052bc0e9df008e46fe268b04268b5402bb00008e060000895ef08c46f226890726895702b8060050579a000000005b5bc45ef0268b07268b57028956f68bf88e46f6268b4502260b05743ec45ef0268b07268b57028e46f6260105261155028e5ef6c41d268b4702260b077414c576f08b048b54022601072611570283c304ebe383c7048b46f6ebb6b800008ed82bc0509a000000005b2bf6c45ef026c41f268b07268b57028bf88956fe8e46fe268b4502260b05742b8d8400fe508e0602008bded1e326ffb700008e06040026ffb700000ee8000083c4064683c7048b46feebc9b801005e5f8be55dcb558bec8b46068e06060026a300008b46088e06080026a300008b460a8e060a0026a300005dcb558bec8b46068e060c0026a300008b46088e060e0026a300005dcb558bec83ec08c746fa0100a0000098408946fe8b46068946f8a0000098f76e080346068946fcff760a8d46f816509a000000008be55dcb",
+   "disasm": "sub ax, ax; push ax; lcall 0, 0; pop bx; lcall 0, 0; lcall 0, 0; lcall 0, 0; mov ax, 0x10; push ax; push ax; lcall 0, 0; pop bx; pop bx; mov ax, 0xff00; push ax; mov ax, 0; mov cx, 0; push cx; push ax; lcall 0, 0; add sp, 6; retf; push bp; mov bp, sp; sub sp, 0x10; push di; push si; mov di, word ptr [bp + 6]; mov ax, 6; push ax; push di; lcall 0, 0; pop bx; pop bx; mov si, ax; mov word ptr [bp - 2], dx; or dx, ax; jne 0x5e; sub ax, ax; jmp 0x13d; mov es, word ptr [bp - 2]; mov ax, word ptr es:[si]; mov dx, word ptr es:[si + 2]; mov bx, 0; mov es, word ptr [0]; mov word ptr [bp - 0x10], bx; mov word ptr [bp - 0xe], es; mov word ptr es:[bx], ax; mov word ptr es:[bx + 2], dx; mov ax, 6; push ax; push di; lcall 0, 0; pop bx; pop bx; les bx, ptr [bp - 0x10]; mov ax, word ptr es:[bx]; mov dx, word ptr es:[bx + 2]; mov word ptr [bp - 0xa], dx; mov di, ax; mov es, word ptr [bp - 0xa]; mov ax, word ptr es:[di + 2]; or ax, word ptr es:[di]; je 0xe1; les bx, ptr [bp - 0x10]; mov ax, word ptr es:[bx]; mov dx, word ptr es:[bx + 2]; mov es, word ptr [bp - 0xa]; add word ptr es:[di], ax; adc word ptr es:[di + 2], dx; mov ds, word ptr [bp - 0xa]; les bx, ptr [di]; mov ax, word ptr es:[bx + 2]; or ax, word ptr es:[bx]; je 0xd9; lds si, ptr [bp - 0x10]; mov ax, word ptr [si]; mov dx, word ptr [si + 2]; add word ptr es:[bx], ax; adc word ptr es:[bx + 2], dx; add bx, 4; jmp 0xbc; add di, 4; mov ax, word ptr [bp - 0xa]; jmp 0x97; mov ax, 0; mov ds, ax; sub ax, ax; push ax; lcall 0, 0; pop bx; sub si, si; les bx, ptr [bp - 0x10]; les bx, ptr es:[bx]; mov ax, word ptr es:[bx]; mov dx, word ptr es:[bx + 2]; mov di, ax; mov word ptr [bp - 2], dx; mov es, word ptr [bp - 2]; mov ax, word ptr es:[di + 2]; or ax, word ptr es:[di]; je 0x13a; lea ax, [si - 0x200]; push ax; mov es, word ptr [2]; mov bx, si; shl bx, 1; push word ptr es:[bx]; mov es, word ptr [4]; push word ptr es:[bx]; push cs; call 0x12e; add sp, 6; inc si; add di, 4; mov ax, word ptr [bp - 2]; jmp 0x103; mov ax, 1; pop si; pop di; mov sp, bp; pop bp; retf; push bp; mov bp, sp; mov ax, word ptr [bp + 6]; mov es, word ptr [6]; mov word ptr es:[0], ax; mov ax, word ptr [bp + 8]; mov es, word ptr [8]; mov word ptr es:[0], ax; mov ax, word ptr [bp + 0xa]; mov es, word ptr [0xa]; mov word ptr es:[0], ax; pop bp; retf; push bp; mov bp, sp; mov ax, word ptr [bp + 6]; mov es, word ptr [0xc]; mov word ptr es:[0], ax; mov ax, word ptr [bp + 8]; mov es, word ptr [0xe]; mov word ptr es:[0], ax; pop bp; retf; push bp; mov bp, sp; sub sp, 8; mov word ptr [bp - 6], 1; mov al, byte ptr [0]; cwde; inc ax; mov word ptr [bp - 2], ax; mov ax, word ptr [bp + 6]; mov word ptr [bp - 8], ax; mov al, byte ptr [0]; cwde; imul word ptr [bp + 8]; add ax, word ptr [bp + 6]; mov word ptr [bp - 4], ax; push word ptr [bp + 0xa]; lea ax, [bp - 8]; push ss; push ax; lcall 0, 0; mov sp, bp; pop bp; retf",
+   "segments": {
+    "UNIT_TEXT": {
+     "class": "CODE",
+     "align": "word",
+     "combine": "public",
+     "length": 443,
+     "big": false
+    },
+    "_DATA": {
+     "class": "DATA",
+     "align": "word",
+     "combine": "public",
+     "length": 0,
+     "big": false
+    },
+    "CONST": {
+     "class": "CONST",
+     "align": "word",
+     "combine": "public",
+     "length": 16,
+     "big": false
+    },
+    "_BSS": {
+     "class": "BSS",
+     "align": "word",
+     "combine": "public",
+     "length": 0,
+     "big": false
+    }
+   },
+   "communals": {}
+  },
+  {
+   "variant": "literal_draw",
+   "profile_index": 0,
+   "profile": "msc600ax",
+   "flags": [
+    "/AL",
+    "/Os",
+    "/Oe",
+    "/Og",
+    "/Gs",
+    "/Zi"
+   ],
+   "source_sha256": "49e172070dcc74ae5fbc14f1e806faa5ba5db60829dfc7484d4b07a47547c4f7",
+   "bytes": "2bc0509a000000005b9a000000009a000000009a00000000b8100050509a000000005b5bb800ff50b80000b9000051509a0000000083c406cb558bec83ec1057568b7e06b8060050579a000000005b5b8bf08956fe0bd075052bc0e9df008e46fe268b04268b5402bb00008e060000895ef08c46f226890726895702b8060050579a000000005b5bc45ef0268b07268b57028956f68bf88e46f6268b4502260b05743ec45ef0268b07268b57028e46f6260105261155028e5ef6c41d268b4702260b077414c576f08b048b54022601072611570283c304ebe383c7048b46f6ebb6b800008ed82bc0509a000000005b2bf6c45ef026c41f268b07268b57028bf88956fe8e46fe268b4502260b05742b8d8400fe508e0602008bded1e326ffb700008e06040026ffb700000ee8000083c4064683c7048b46feebc9b801005e5f8be55dcb558bec8b46068e06060026a300008b46088e06080026a300008b460a8e060a0026a300005dcb558bec8b46068e060c0026a300008b46088e060e0026a300005dcb558bec83ec08c746fa0100a0000098408946fe8b46068946f8a0000098f76e080346068946fcff760a8d46f816509a000000008be55dcb",
+   "disasm": "sub ax, ax; push ax; lcall 0, 0; pop bx; lcall 0, 0; lcall 0, 0; lcall 0, 0; mov ax, 0x10; push ax; push ax; lcall 0, 0; pop bx; pop bx; mov ax, 0xff00; push ax; mov ax, 0; mov cx, 0; push cx; push ax; lcall 0, 0; add sp, 6; retf; push bp; mov bp, sp; sub sp, 0x10; push di; push si; mov di, word ptr [bp + 6]; mov ax, 6; push ax; push di; lcall 0, 0; pop bx; pop bx; mov si, ax; mov word ptr [bp - 2], dx; or dx, ax; jne 0x5e; sub ax, ax; jmp 0x13d; mov es, word ptr [bp - 2]; mov ax, word ptr es:[si]; mov dx, word ptr es:[si + 2]; mov bx, 0; mov es, word ptr [0]; mov word ptr [bp - 0x10], bx; mov word ptr [bp - 0xe], es; mov word ptr es:[bx], ax; mov word ptr es:[bx + 2], dx; mov ax, 6; push ax; push di; lcall 0, 0; pop bx; pop bx; les bx, ptr [bp - 0x10]; mov ax, word ptr es:[bx]; mov dx, word ptr es:[bx + 2]; mov word ptr [bp - 0xa], dx; mov di, ax; mov es, word ptr [bp - 0xa]; mov ax, word ptr es:[di + 2]; or ax, word ptr es:[di]; je 0xe1; les bx, ptr [bp - 0x10]; mov ax, word ptr es:[bx]; mov dx, word ptr es:[bx + 2]; mov es, word ptr [bp - 0xa]; add word ptr es:[di], ax; adc word ptr es:[di + 2], dx; mov ds, word ptr [bp - 0xa]; les bx, ptr [di]; mov ax, word ptr es:[bx + 2]; or ax, word ptr es:[bx]; je 0xd9; lds si, ptr [bp - 0x10]; mov ax, word ptr [si]; mov dx, word ptr [si + 2]; add word ptr es:[bx], ax; adc word ptr es:[bx + 2], dx; add bx, 4; jmp 0xbc; add di, 4; mov ax, word ptr [bp - 0xa]; jmp 0x97; mov ax, 0; mov ds, ax; sub ax, ax; push ax; lcall 0, 0; pop bx; sub si, si; les bx, ptr [bp - 0x10]; les bx, ptr es:[bx]; mov ax, word ptr es:[bx]; mov dx, word ptr es:[bx + 2]; mov di, ax; mov word ptr [bp - 2], dx; mov es, word ptr [bp - 2]; mov ax, word ptr es:[di + 2]; or ax, word ptr es:[di]; je 0x13a; lea ax, [si - 0x200]; push ax; mov es, word ptr [2]; mov bx, si; shl bx, 1; push word ptr es:[bx]; mov es, word ptr [4]; push word ptr es:[bx]; push cs; call 0x12e; add sp, 6; inc si; add di, 4; mov ax, word ptr [bp - 2]; jmp 0x103; mov ax, 1; pop si; pop di; mov sp, bp; pop bp; retf; push bp; mov bp, sp; mov ax, word ptr [bp + 6]; mov es, word ptr [6]; mov word ptr es:[0], ax; mov ax, word ptr [bp + 8]; mov es, word ptr [8]; mov word ptr es:[0], ax; mov ax, word ptr [bp + 0xa]; mov es, word ptr [0xa]; mov word ptr es:[0], ax; pop bp; retf; push bp; mov bp, sp; mov ax, word ptr [bp + 6]; mov es, word ptr [0xc]; mov word ptr es:[0], ax; mov ax, word ptr [bp + 8]; mov es, word ptr [0xe]; mov word ptr es:[0], ax; pop bp; retf; push bp; mov bp, sp; sub sp, 8; mov word ptr [bp - 6], 1; mov al, byte ptr [0]; cwde; inc ax; mov word ptr [bp - 2], ax; mov ax, word ptr [bp + 6]; mov word ptr [bp - 8], ax; mov al, byte ptr [0]; cwde; imul word ptr [bp + 8]; add ax, word ptr [bp + 6]; mov word ptr [bp - 4], ax; push word ptr [bp + 0xa]; lea ax, [bp - 8]; push ss; push ax; lcall 0, 0; mov sp, bp; pop bp; retf",
+   "segments": {
+    "UNIT_TEXT": {
+     "class": "CODE",
+     "align": "word",
+     "combine": "public",
+     "length": 443,
+     "big": false
+    },
+    "_DATA": {
+     "class": "DATA",
+     "align": "word",
+     "combine": "public",
+     "length": 0,
+     "big": false
+    },
+    "CONST": {
+     "class": "CONST",
+     "align": "word",
+     "combine": "public",
+     "length": 16,
+     "big": false
+    },
+    "_BSS": {
+     "class": "BSS",
+     "align": "word",
+     "combine": "public",
+     "length": 0,
+     "big": false
+    }
+   },
+   "communals": {}
+  }
+ ],
+ "checks": [
+  {
+   "check": "early_draw@0",
+   "needle": "push bp; mov bp, sp; sub sp, 0x12; push di; push si; mov di, word ptr [bp + 6]",
+   "ok": true
+  },
+  {
+   "check": "late_draw@0",
+   "needle": "push bp; mov bp, sp; sub sp, 0x10; push di; push si; mov di, word ptr [bp + 6]",
+   "ok": true
+  },
+  {
+   "check": "literal_draw@0",
+   "needle": "push bp; mov bp, sp; sub sp, 0x10; push di; push si; mov di, word ptr [bp + 6]",
+   "ok": true
+  },
+  {
+   "check": "early_draw@0",
+   "needle": "UNIT_TEXT.length=443",
+   "ok": true
+  },
+  {
+   "check": "early_draw@0",
+   "needle": "CONST.length=16",
+   "ok": true
+  },
+  {
+   "check": "late_draw@0",
+   "needle": "UNIT_TEXT.length=443",
+   "ok": true
+  },
+  {
+   "check": "late_draw@0",
+   "needle": "CONST.length=16",
+   "ok": true
+  },
+  {
+   "check": "literal_draw@0",
+   "needle": "UNIT_TEXT.length=443",
+   "ok": true
+  },
+  {
+   "check": "literal_draw@0",
+   "needle": "CONST.length=16",
+   "ok": true
+  }
+ ],
+ "all_checks_pass": true
+}

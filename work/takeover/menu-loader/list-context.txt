@@ -1,0 +1,67 @@
+f_23E6_0000  root:23E6:0000  linear 23E60  size 159  extent DESCENT  region game_or_library
+  entry evidence: push_cs_call
+  module frame 23E6: function 1/15; neighbours: f_23E6_009F, f_23E6_0109
+  frame: {'frame': 'bp', 'locals': 12, 'stack_check': False}
+  best draft: build/search/f_23E6_0000/best.c  MISMATCH ratio 0.9919
+  0000  push bp
+  0001  mov bp, sp
+  0003  sub sp, 0xc
+  0006  push ax
+  0007  push si
+  0008  mov si, word ptr [bp + 6]
+  000B  mov es, word ptr [bp + 8]
+  000E  mov ax, word ptr es:[si + 4]
+  0012  mov word ptr [bp - 6], ax
+  0015  cmp ax, word ptr [bp - 0xe]
+  0018  jg 0x3d
+  001A  mov ax, word ptr es:[si]
+  001D  add ax, word ptr [bp - 6]
+  0020  cmp ax, word ptr [bp - 0xe]
+  0023  jg 0x37
+  0025  mov ax, word ptr es:[si + 8]
+  0029  mov word ptr [bp - 8], ax
+  002C  mov ax, word ptr es:[si]
+  002F  add ax, word ptr [bp - 6]
+  0032  mov word ptr [bp - 6], ax
+  0035  jmp 0x45
+  0037  mov ax, word ptr es:[si + 6]
+  003B  jmp 0x42
+  003D  sub ax, ax
+  003F  mov word ptr [bp - 6], ax
+  0042  mov word ptr [bp - 8], ax
+  0045  push word ptr es:[si + 0xc]
+  0049  push word ptr es:[si + 0xa]
+  004D  lcall 0x171c, 0x1b84               -> f_171C_1B84
+  0052  pop bx
+  0053  pop bx
+  0054  add ax, word ptr [bp - 8]
+  0057  mov word ptr [bp - 0xa], dx
+  005A  mov si, ax
+  005C  jmp 0x79
+  005E  mov es, word ptr [bp - 0xa]
+  0061  cmp byte ptr es:[si], 0
+  0065  je 0x81
+  0067  push es
+  0068  push si
+  0069  lcall 0x29f4, 0x1c36               -> __fstrlen
+  006E  pop bx
+  006F  pop bx
+  0070  inc ax
+  0071  add si, ax
+  0073  mov cx, word ptr [bp - 0xa]
+  0076  inc word ptr [bp - 6]
+  0079  mov ax, word ptr [bp - 0xe]
+  007C  cmp word ptr [bp - 6], ax
+  007F  jl 0x5e
+  0081  les bx, ptr [bp + 6]
+  0084  push word ptr es:[bx + 0xc]
+  0088  push word ptr es:[bx + 0xa]
+  008C  lcall 0x171c, 0x1bba               -> f_171C_1BBA
+  0091  pop bx
+  0092  pop bx
+  0093  mov ax, si
+  0095  mov dx, word ptr [bp - 0xa]
+  0098  pop si
+  0099  mov sp, bp
+  009B  pop bp
+  009C  retf 4

@@ -29,14 +29,11 @@ void far o17_384C_0000(void)
 extern long far * far * far db_LoadObject(int object, int kind);
 extern long far * far fd_55B3_6054;
 extern void far db_UnhookObject(int object, int kind);
-extern int far f_1FD2_0663(int draw);
+extern void far f_1FD2_0663(int a);
 extern int far fd_50F6_46BC[];
 extern int far fd_50F6_46A8[];
 void far o17_384C_0184(int x, int len, int id);
 
-/* LIFE-2: draw is a real later call argument. Initializing it before the
- * pointer-fixup loops reproduces the frame and spill homes. Its spelling and
- * original width are unknown; int, unsigned and unsigned char controls match. */
 int far o17_384C_0039(int id)
 {
     long far * far *h;
@@ -44,20 +41,19 @@ int far o17_384C_0039(int id)
     long far *q;
     long far *r;
     int i;
-    int draw;
 
     h = db_LoadObject(id, 6);
     if (h == 0L)
         return 0;
     fd_55B3_6054 = *h;
     db_UnhookObject(id, 6);
-    draw = 0;
-    for (p = fd_55B3_6054; *p; p++) {
+    i = 0;
+    for (p = fd_55B3_6054; ((unsigned)i >= 0) && *p; p++) {
         *p += (long)fd_55B3_6054;
         for (q = *(long far * far *)p; *q; q++)
             *q += (long)fd_55B3_6054;
     }
-    f_1FD2_0663(draw);
+    f_1FD2_0663(0);
     for (i = 0, r = (long far *)*fd_55B3_6054; *r; i++, r++)
         o17_384C_0184(fd_50F6_46A8[i], fd_50F6_46BC[i], i - 0x200);
     return 1;

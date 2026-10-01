@@ -44,20 +44,18 @@ int far o17_384C_0039(int id)
     long far *q;
     long far *r;
     int i;
-    int draw;
 
     h = db_LoadObject(id, 6);
     if (h == 0L)
         return 0;
     fd_55B3_6054 = *h;
     db_UnhookObject(id, 6);
-    draw = 0;
     for (p = fd_55B3_6054; *p; p++) {
         *p += (long)fd_55B3_6054;
         for (q = *(long far * far *)p; *q; q++)
             *q += (long)fd_55B3_6054;
     }
-    f_1FD2_0663(draw);
+    f_1FD2_0663(0);
     for (i = 0, r = (long far *)*fd_55B3_6054; *r; i++, r++)
         o17_384C_0184(fd_50F6_46A8[i], fd_50F6_46BC[i], i - 0x200);
     return 1;

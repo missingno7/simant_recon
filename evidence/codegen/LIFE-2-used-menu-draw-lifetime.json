@@ -1,0 +1,58 @@
+{
+ "id": "LIFE-2",
+ "question": "In the preserved S17 whole-module context, does a used zero draw argument initialized before pointer-fixup loops retain the extra frame word and reproduce the original spill homes?",
+ "notes": [
+  "Context-specific. The draw local is used by the existing menu setup call; no folded artificial read or padding declaration is added.",
+  "int, unsigned and unsigned-char draw types match; original type, spelling and exact source placement are not recovered. The accepted target is layout-inferred.",
+  "Early draw is exact across five functions, CONST and the complete 443-byte module. Moving the same assignment just before its call, or using literal zero, leaves a 16-byte frame and twelve operand differences. Whole-module binding evidence is in work/takeover/menu-loader/."
+ ],
+ "variants": {
+  "early_draw": "/* Overlay section S17, code frame 384C: menu bar start-up (menu data fix-up, item\n * rectangles, menu colours). */\n\nstruct Rect {\n    int left;\n    int top;\n    int right;\n    int bottom;\n};\n\nextern void far f_1B28_006A(int a);\nextern void far f_1B73_0046(void);\nextern void far f_1B73_0235(void);\nextern void far f_1B73_0AA3(void);\nextern void far f_1B73_0218(int a, int b);\nextern struct Rect far g_5A9C;\nextern void far f_1FD2_03EB(struct Rect far *r, int ticks);\n\nvoid far o17_384C_0000(void)\n{\n    f_1B28_006A(0);\n    f_1B73_0046();\n    f_1B73_0235();\n    f_1B73_0AA3();\n    f_1B73_0218(0x10, 0x10);\n    f_1FD2_03EB(&g_5A9C, 0xff00);\n}\n\nextern long far * far * far db_LoadObject(int object, int kind);\nextern long far * far fd_55B3_6054;\nextern void far db_UnhookObject(int object, int kind);\nextern int far f_1FD2_0663(int draw);\nextern int far fd_50F6_46BC[];\nextern int far fd_50F6_46A8[];\nvoid far o17_384C_0184(int x, int len, int id);\n\n/* LIFE-2: draw is a real later call argument. Initializing it before the\n * pointer-fixup loops reproduces the frame and spill homes. Its spelling and\n * original width are unknown; int, unsigned and unsigned char controls match. */\nint far o17_384C_0039(int id)\n{\n    long far * far *h;\n    long far *p;\n    long far *q;\n    long far *r;\n    int i;\n    int draw;\n\n    h = db_LoadObject(id, 6);\n    if (h == 0L)\n        return 0;\n    fd_55B3_6054 = *h;\n    db_UnhookObject(id, 6);\n    draw = 0;\n    for (p = fd_55B3_6054; *p; p++) {\n        *p += (long)fd_55B3_6054;\n        for (q = *(long far * far *)p; *q; q++)\n            *q += (long)fd_55B3_6054;\n    }\n    f_1FD2_0663(draw);\n    for (i = 0, r = (long far *)*fd_55B3_6054; *r; i++, r++)\n        o17_384C_0184(fd_50F6_46A8[i], fd_50F6_46BC[i], i - 0x200);\n    return 1;\n}\n\nextern int far g_5FEA;\nextern int far g_5FEC;\nextern int far g_5FEE;\n\nvoid far o17_384C_0143(int a, int b, int c)\n{\n    g_5FEA = a;\n    g_5FEC = b;\n    g_5FEE = c;\n}\n\nextern int far g_5FE6;\nextern int far g_5FE8;\n\nvoid far o17_384C_0169(int a, int b)\n{\n    g_5FE6 = a;\n    g_5FE8 = b;\n}\n\nextern char near g_3DDC;\nextern char near g_3DDE;\n\nvoid far o17_384C_0184(int x, int len, int id)\n{\n    struct Rect r;\n\n    r.top = 1;\n    r.bottom = g_3DDC + 1;\n    r.left = x;\n    r.right = g_3DDE * len + x;\n    f_1FD2_03EB(&r, id);\n}\n",
+  "late_draw": "/* Overlay section S17, code frame 384C: menu bar start-up (menu data fix-up, item\n * rectangles, menu colours). */\n\nstruct Rect {\n    int left;\n    int top;\n    int right;\n    int bottom;\n};\n\nextern void far f_1B28_006A(int a);\nextern void far f_1B73_0046(void);\nextern void far f_1B73_0235(void);\nextern void far f_1B73_0AA3(void);\nextern void far f_1B73_0218(int a, int b);\nextern struct Rect far g_5A9C;\nextern void far f_1FD2_03EB(struct Rect far *r, int ticks);\n\nvoid far o17_384C_0000(void)\n{\n    f_1B28_006A(0);\n    f_1B73_0046();\n    f_1B73_0235();\n    f_1B73_0AA3();\n    f_1B73_0218(0x10, 0x10);\n    f_1FD2_03EB(&g_5A9C, 0xff00);\n}\n\nextern long far * far * far db_LoadObject(int object, int kind);\nextern long far * far fd_55B3_6054;\nextern void far db_UnhookObject(int object, int kind);\nextern int far f_1FD2_0663(int draw);\nextern int far fd_50F6_46BC[];\nextern int far fd_50F6_46A8[];\nvoid far o17_384C_0184(int x, int len, int id);\n\n/* LIFE-2: draw is a real later call argument. Initializing it before the\n * pointer-fixup loops reproduces the frame and spill homes. Its spelling and\n * original width are unknown; int, unsigned and unsigned char controls match. */\nint far o17_384C_0039(int id)\n{\n    long far * far *h;\n    long far *p;\n    long far *q;\n    long far *r;\n    int i;\n    int draw;\n\n    h = db_LoadObject(id, 6);\n    if (h == 0L)\n        return 0;\n    fd_55B3_6054 = *h;\n    db_UnhookObject(id, 6);\n    for (p = fd_55B3_6054; *p; p++) {\n        *p += (long)fd_55B3_6054;\n        for (q = *(long far * far *)p; *q; q++)\n            *q += (long)fd_55B3_6054;\n    }\n    draw = 0;\n    f_1FD2_0663(draw);\n    for (i = 0, r = (long far *)*fd_55B3_6054; *r; i++, r++)\n        o17_384C_0184(fd_50F6_46A8[i], fd_50F6_46BC[i], i - 0x200);\n    return 1;\n}\n\nextern int far g_5FEA;\nextern int far g_5FEC;\nextern int far g_5FEE;\n\nvoid far o17_384C_0143(int a, int b, int c)\n{\n    g_5FEA = a;\n    g_5FEC = b;\n    g_5FEE = c;\n}\n\nextern int far g_5FE6;\nextern int far g_5FE8;\n\nvoid far o17_384C_0169(int a, int b)\n{\n    g_5FE6 = a;\n    g_5FE8 = b;\n}\n\nextern char near g_3DDC;\nextern char near g_3DDE;\n\nvoid far o17_384C_0184(int x, int len, int id)\n{\n    struct Rect r;\n\n    r.top = 1;\n    r.bottom = g_3DDC + 1;\n    r.left = x;\n    r.right = g_3DDE * len + x;\n    f_1FD2_03EB(&r, id);\n}\n",
+  "literal_draw": "/* Overlay section S17, code frame 384C: menu bar start-up (menu data fix-up, item\n * rectangles, menu colours). */\n\nstruct Rect {\n    int left;\n    int top;\n    int right;\n    int bottom;\n};\n\nextern void far f_1B28_006A(int a);\nextern void far f_1B73_0046(void);\nextern void far f_1B73_0235(void);\nextern void far f_1B73_0AA3(void);\nextern void far f_1B73_0218(int a, int b);\nextern struct Rect far g_5A9C;\nextern void far f_1FD2_03EB(struct Rect far *r, int ticks);\n\nvoid far o17_384C_0000(void)\n{\n    f_1B28_006A(0);\n    f_1B73_0046();\n    f_1B73_0235();\n    f_1B73_0AA3();\n    f_1B73_0218(0x10, 0x10);\n    f_1FD2_03EB(&g_5A9C, 0xff00);\n}\n\nextern long far * far * far db_LoadObject(int object, int kind);\nextern long far * far fd_55B3_6054;\nextern void far db_UnhookObject(int object, int kind);\nextern int far f_1FD2_0663(int draw);\nextern int far fd_50F6_46BC[];\nextern int far fd_50F6_46A8[];\nvoid far o17_384C_0184(int x, int len, int id);\n\n/* LIFE-2: draw is a real later call argument. Initializing it before the\n * pointer-fixup loops reproduces the frame and spill homes. Its spelling and\n * original width are unknown; int, unsigned and unsigned char controls match. */\nint far o17_384C_0039(int id)\n{\n    long far * far *h;\n    long far *p;\n    long far *q;\n    long far *r;\n    int i;\n\n    h = db_LoadObject(id, 6);\n    if (h == 0L)\n        return 0;\n    fd_55B3_6054 = *h;\n    db_UnhookObject(id, 6);\n    for (p = fd_55B3_6054; *p; p++) {\n        *p += (long)fd_55B3_6054;\n        for (q = *(long far * far *)p; *q; q++)\n            *q += (long)fd_55B3_6054;\n    }\n    f_1FD2_0663(0);\n    for (i = 0, r = (long far *)*fd_55B3_6054; *r; i++, r++)\n        o17_384C_0184(fd_50F6_46A8[i], fd_50F6_46BC[i], i - 0x200);\n    return 1;\n}\n\nextern int far g_5FEA;\nextern int far g_5FEC;\nextern int far g_5FEE;\n\nvoid far o17_384C_0143(int a, int b, int c)\n{\n    g_5FEA = a;\n    g_5FEC = b;\n    g_5FEE = c;\n}\n\nextern int far g_5FE6;\nextern int far g_5FE8;\n\nvoid far o17_384C_0169(int a, int b)\n{\n    g_5FE6 = a;\n    g_5FE8 = b;\n}\n\nextern char near g_3DDC;\nextern char near g_3DDE;\n\nvoid far o17_384C_0184(int x, int len, int id)\n{\n    struct Rect r;\n\n    r.top = 1;\n    r.bottom = g_3DDC + 1;\n    r.left = x;\n    r.right = g_3DDE * len + x;\n    f_1FD2_03EB(&r, id);\n}\n"
+ },
+ "profiles": [
+  {
+   "profile": "msc600ax",
+   "flags": [
+    "/AL",
+    "/Os",
+    "/Oe",
+    "/Og",
+    "/Gs",
+    "/Zi"
+   ]
+  }
+ ],
+ "expect": {
+  "early_draw@0": "push bp; mov bp, sp; sub sp, 0x12; push di; push si; mov di, word ptr [bp + 6]",
+  "late_draw@0": "push bp; mov bp, sp; sub sp, 0x10; push di; push si; mov di, word ptr [bp + 6]",
+  "literal_draw@0": "push bp; mov bp, sp; sub sp, 0x10; push di; push si; mov di, word ptr [bp + 6]"
+ },
+ "expect_segments": {
+  "early_draw@0": {
+   "UNIT_TEXT": {
+    "length": 443
+   },
+   "CONST": {
+    "length": 16
+   }
+  },
+  "late_draw@0": {
+   "UNIT_TEXT": {
+    "length": 443
+   },
+   "CONST": {
+    "length": 16
+   }
+  },
+  "literal_draw@0": {
+   "UNIT_TEXT": {
+    "length": 443
+   },
+   "CONST": {
+    "length": 16
+   }
+  }
+ }
+}

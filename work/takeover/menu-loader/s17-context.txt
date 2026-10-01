@@ -1,0 +1,106 @@
+o17_384C_0039  S17:384C:0039  linear 384F9  size 266  extent DESCENT  region game_or_library
+  entry evidence: vector
+  module frame 384C: function 2/5; neighbours: o17_384C_0000, o17_384C_0143, o17_384C_0169
+  frame: {'frame': 'bp', 'locals': 18, 'stack_check': False}
+  best draft: build/search/o17_384C_0039/best.c  MISMATCH ratio 1.0
+  0039  push bp
+  003A  mov bp, sp
+  003C  sub sp, 0x12
+  003F  push di
+  0040  push si
+  0041  mov di, word ptr [bp + 6]
+  0044  mov ax, 6
+  0047  push ax
+  0048  push di
+  0049  lcall 0x1a53, 0x125                -> db_LoadObject
+  004E  pop bx
+  004F  pop bx
+  0050  mov si, ax
+  0052  mov word ptr [bp - 2], dx
+  0055  or dx, ax
+  0057  jne 0x5e
+  0059  sub ax, ax
+  005B  jmp 0x13d
+  005E  mov es, word ptr [bp - 2]
+  0061  mov ax, word ptr es:[si]
+  0064  mov dx, word ptr es:[si + 2]
+  0068  mov bx, 0x6054
+  006B  mov es, word ptr [0x89e6]          DS:89E6
+  006F  mov word ptr [bp - 0x12], bx
+  0072  mov word ptr [bp - 0x10], es
+  0075  mov word ptr es:[bx], ax
+  0078  mov word ptr es:[bx + 2], dx
+  007C  mov ax, 6
+  007F  push ax
+  0080  push di
+  0081  lcall 0x1a53, 0x34f                -> db_UnhookObject
+  0086  pop bx
+  0087  pop bx
+  0088  les bx, ptr [bp - 0x12]
+  008B  mov ax, word ptr es:[bx]
+  008E  mov dx, word ptr es:[bx + 2]
+  0092  mov word ptr [bp - 0xc], dx
+  0095  mov di, ax
+  0097  mov es, word ptr [bp - 0xc]
+  009A  mov ax, word ptr es:[di + 2]
+  009E  or ax, word ptr es:[di]
+  00A1  je 0xe1
+  00A3  les bx, ptr [bp - 0x12]
+  00A6  mov ax, word ptr es:[bx]
+  00A9  mov dx, word ptr es:[bx + 2]
+  00AD  mov es, word ptr [bp - 0xc]
+  00B0  add word ptr es:[di], ax
+  00B3  adc word ptr es:[di + 2], dx
+  00B7  mov ds, word ptr [bp - 0xc]
+  00BA  les bx, ptr [di]
+  00BC  mov ax, word ptr es:[bx + 2]
+  00C0  or ax, word ptr es:[bx]
+  00C3  je 0xd9
+  00C5  lds si, ptr [bp - 0x12]
+  00C8  mov ax, word ptr [si]
+  00CA  mov dx, word ptr [si + 2]
+  00CD  add word ptr es:[bx], ax
+  00D0  adc word ptr es:[bx + 2], dx
+  00D4  add bx, 4
+  00D7  jmp 0xbc
+  00D9  add di, 4
+  00DC  mov ax, word ptr [bp - 0xc]
+  00DF  jmp 0x97
+  00E1  mov ax, 0x55b3                     [seg 55B3 DGROUP]
+  00E4  mov ds, ax
+  00E6  sub ax, ax
+  00E8  push ax
+  00E9  lcall 0x1fd2, 0x663                -> f_1FD2_0663
+  00EE  pop bx
+  00EF  sub si, si
+  00F1  les bx, ptr [bp - 0x12]
+  00F4  les bx, ptr es:[bx]
+  00F7  mov ax, word ptr es:[bx]
+  00FA  mov dx, word ptr es:[bx + 2]
+  00FE  mov di, ax
+  0100  mov word ptr [bp - 2], dx
+  0103  mov es, word ptr [bp - 2]
+  0106  mov ax, word ptr es:[di + 2]
+  010A  or ax, word ptr es:[di]
+  010D  je 0x13a
+  010F  lea ax, [si - 0x200]
+  0113  push ax
+  0114  mov es, word ptr [0x89e8]          DS:89E8
+  0118  mov bx, si
+  011A  shl bx, 1
+  011C  push word ptr es:[bx + 0x46bc]
+  0121  mov es, word ptr [0x89ea]          DS:89EA
+  0125  push word ptr es:[bx + 0x46a8]
+  012A  push cs
+  012B  call 0x184                         -> o17_384C_0184
+  012E  add sp, 6
+  0131  inc si
+  0132  add di, 4
+  0135  mov ax, word ptr [bp - 2]
+  0138  jmp 0x103
+  013A  mov ax, 1
+  013D  pop si
+  013E  pop di
+  013F  mov sp, bp
+  0141  pop bp
+  0142  retf

@@ -1,0 +1,933 @@
+{
+ "function": "f_23E6_0000",
+ "profile": "msc600ax",
+ "flags": [
+  "/AL",
+  "/Os",
+  "/Oe",
+  "/Og",
+  "/Gs",
+  "/Zi"
+ ],
+ "variants": [
+  {
+   "name": "base",
+   "why": "",
+   "source_sha256_lf": "70f8f1db471e4444914136c1dbdd35148e026a2ea18c7ea2aed6c39bc3dfc211",
+   "compile_ok": true,
+   "target": {
+    "exact": false,
+    "reasons": [
+     "length 156 != target 159",
+     "bytes differ (first at +0x5d, 41 differing)",
+     "relocation set differs (3 vs 3)"
+    ],
+    "fixups": 3,
+    "relocations": 3,
+    "reloc_order": "EXACT"
+   },
+   "peer_losses": {},
+   "data": {
+    "_DATA": {
+     "exact": true,
+     "reasons": [],
+     "size": 156,
+     "reloc_order": "EXACT",
+     "start": 376864,
+     "class": "DATA",
+     "align": "word",
+     "far": false
+    },
+    "CONST": {
+     "exact": true,
+     "reasons": [],
+     "size": 2,
+     "reloc_order": "EXACT",
+     "start": 386412,
+     "class": "CONST",
+     "align": "word",
+     "far": false
+    }
+   },
+   "module_exact": false,
+   "log": ""
+  },
+  {
+   "name": "unsigned-if-True",
+   "why": "assignment-value control; folded predicates require STEERED if exact",
+   "source_sha256_lf": "607638eb692359e7b5d362218a2091705ffa609b545fbb63f347c0be8de51497",
+   "compile_ok": true,
+   "target": {
+    "exact": false,
+    "reasons": [
+     "length 156 != target 159",
+     "bytes differ (first at +0x5d, 41 differing)",
+     "relocation set differs (3 vs 3)"
+    ],
+    "fixups": 3,
+    "relocations": 3,
+    "reloc_order": "EXACT"
+   },
+   "peer_losses": {
+    "f_23E6_0392": {
+     "exact": false,
+     "reasons": [
+      "bytes differ (first at +0x124, 2 differing)"
+     ],
+     "fixups": 15,
+     "relocations": 13,
+     "reloc_order": "GROUPED"
+    },
+    "win_DrawElevator": {
+     "exact": false,
+     "reasons": [
+      "length 341 != target 340",
+      "bytes differ (first at +0x43, 70 differing)"
+     ],
+     "fixups": 16,
+     "relocations": 5,
+     "reloc_order": "GROUPED"
+    }
+   },
+   "data": {
+    "_DATA": {
+     "exact": true,
+     "reasons": [],
+     "size": 156,
+     "reloc_order": "EXACT",
+     "start": 376864,
+     "class": "DATA",
+     "align": "word",
+     "far": false
+    },
+    "CONST": {
+     "exact": true,
+     "reasons": [],
+     "size": 2,
+     "reloc_order": "EXACT",
+     "start": 386412,
+     "class": "CONST",
+     "align": "word",
+     "far": false
+    }
+   },
+   "module_exact": false,
+   "log": ""
+  },
+  {
+   "name": "unsigned-if-False",
+   "why": "assignment-value control; folded predicates require STEERED if exact",
+   "source_sha256_lf": "c1e62b82ca905cd3937e94f0b534a06ec892ab8203c4f7b8852e0cfd0f854645",
+   "compile_ok": true,
+   "target": {
+    "exact": false,
+    "reasons": [
+     "length 156 != target 159",
+     "bytes differ (first at +0x5d, 41 differing)",
+     "relocation set differs (3 vs 3)"
+    ],
+    "fixups": 3,
+    "relocations": 3,
+    "reloc_order": "EXACT"
+   },
+   "peer_losses": {
+    "f_23E6_0392": {
+     "exact": false,
+     "reasons": [
+      "bytes differ (first at +0x124, 2 differing)"
+     ],
+     "fixups": 15,
+     "relocations": 13,
+     "reloc_order": "GROUPED"
+    },
+    "win_DrawElevator": {
+     "exact": false,
+     "reasons": [
+      "length 341 != target 340",
+      "bytes differ (first at +0x43, 70 differing)"
+     ],
+     "fixups": 16,
+     "relocations": 5,
+     "reloc_order": "GROUPED"
+    }
+   },
+   "data": {
+    "_DATA": {
+     "exact": true,
+     "reasons": [],
+     "size": 156,
+     "reloc_order": "EXACT",
+     "start": 376864,
+     "class": "DATA",
+     "align": "word",
+     "far": false
+    },
+    "CONST": {
+     "exact": true,
+     "reasons": [],
+     "size": 2,
+     "reloc_order": "EXACT",
+     "start": 386412,
+     "class": "CONST",
+     "align": "word",
+     "far": false
+    }
+   },
+   "module_exact": false,
+   "log": ""
+  },
+  {
+   "name": "unsigned-ternary-True",
+   "why": "assignment-value control; folded predicates require STEERED if exact",
+   "source_sha256_lf": "98bbbca3b2905a4b07421b9dab25797dc800a7c7c2af9d70ebab80b185852b65",
+   "compile_ok": true,
+   "target": {
+    "exact": false,
+    "reasons": [
+     "bytes differ (first at +0x73, 4 differing)"
+    ],
+    "fixups": 3,
+    "relocations": 3,
+    "reloc_order": "GROUPED"
+   },
+   "peer_losses": {},
+   "data": {
+    "_DATA": {
+     "exact": true,
+     "reasons": [],
+     "size": 156,
+     "reloc_order": "EXACT",
+     "start": 376864,
+     "class": "DATA",
+     "align": "word",
+     "far": false
+    },
+    "CONST": {
+     "exact": true,
+     "reasons": [],
+     "size": 2,
+     "reloc_order": "EXACT",
+     "start": 386412,
+     "class": "CONST",
+     "align": "word",
+     "far": false
+    }
+   },
+   "module_exact": false,
+   "log": ""
+  },
+  {
+   "name": "unsigned-ternary-False",
+   "why": "assignment-value control; folded predicates require STEERED if exact",
+   "source_sha256_lf": "6765db4580c1d11e7b35b275c396e7478e84c3a027863bbec54ffdd80d914e67",
+   "compile_ok": true,
+   "target": {
+    "exact": false,
+    "reasons": [
+     "bytes differ (first at +0x73, 4 differing)"
+    ],
+    "fixups": 3,
+    "relocations": 3,
+    "reloc_order": "GROUPED"
+   },
+   "peer_losses": {},
+   "data": {
+    "_DATA": {
+     "exact": true,
+     "reasons": [],
+     "size": 156,
+     "reloc_order": "EXACT",
+     "start": 376864,
+     "class": "DATA",
+     "align": "word",
+     "far": false
+    },
+    "CONST": {
+     "exact": true,
+     "reasons": [],
+     "size": 2,
+     "reloc_order": "EXACT",
+     "start": 386412,
+     "class": "CONST",
+     "align": "word",
+     "far": false
+    }
+   },
+   "module_exact": false,
+   "log": ""
+  },
+  {
+   "name": "unsigned-and-True",
+   "why": "assignment-value control; folded predicates require STEERED if exact",
+   "source_sha256_lf": "afb0889557ce76744cf0ba43e7eb8b9349b17ed292ba9b7acb4db3a280a8a679",
+   "compile_ok": true,
+   "target": {
+    "exact": false,
+    "reasons": [
+     "bytes differ (first at +0x14, 9 differing)"
+    ],
+    "fixups": 3,
+    "relocations": 3,
+    "reloc_order": "GROUPED"
+   },
+   "peer_losses": {},
+   "data": {
+    "_DATA": {
+     "exact": true,
+     "reasons": [],
+     "size": 156,
+     "reloc_order": "EXACT",
+     "start": 376864,
+     "class": "DATA",
+     "align": "word",
+     "far": false
+    },
+    "CONST": {
+     "exact": true,
+     "reasons": [],
+     "size": 2,
+     "reloc_order": "EXACT",
+     "start": 386412,
+     "class": "CONST",
+     "align": "word",
+     "far": false
+    }
+   },
+   "module_exact": false,
+   "log": ""
+  },
+  {
+   "name": "unsigned-and-False",
+   "why": "assignment-value control; folded predicates require STEERED if exact",
+   "source_sha256_lf": "7e3c346eb7cf13ae59a4a27cb5d8b265a77692e389631543644841cf2e58ecce",
+   "compile_ok": true,
+   "target": {
+    "exact": false,
+    "reasons": [
+     "bytes differ (first at +0x14, 9 differing)"
+    ],
+    "fixups": 3,
+    "relocations": 3,
+    "reloc_order": "GROUPED"
+   },
+   "peer_losses": {},
+   "data": {
+    "_DATA": {
+     "exact": true,
+     "reasons": [],
+     "size": 156,
+     "reloc_order": "EXACT",
+     "start": 376864,
+     "class": "DATA",
+     "align": "word",
+     "far": false
+    },
+    "CONST": {
+     "exact": true,
+     "reasons": [],
+     "size": 2,
+     "reloc_order": "EXACT",
+     "start": 386412,
+     "class": "CONST",
+     "align": "word",
+     "far": false
+    }
+   },
+   "module_exact": false,
+   "log": ""
+  },
+  {
+   "name": "unsigned-comma-True",
+   "why": "assignment-value control; folded predicates require STEERED if exact",
+   "source_sha256_lf": "86f821944ef597ea01790abea9f62f1adca11123f27882500e62856fa44db2a0",
+   "compile_ok": true,
+   "target": {
+    "exact": false,
+    "reasons": [
+     "length 156 != target 159",
+     "bytes differ (first at +0x5d, 41 differing)",
+     "relocation set differs (3 vs 3)"
+    ],
+    "fixups": 3,
+    "relocations": 3,
+    "reloc_order": "EXACT"
+   },
+   "peer_losses": {},
+   "data": {
+    "_DATA": {
+     "exact": true,
+     "reasons": [],
+     "size": 156,
+     "reloc_order": "EXACT",
+     "start": 376864,
+     "class": "DATA",
+     "align": "word",
+     "far": false
+    },
+    "CONST": {
+     "exact": true,
+     "reasons": [],
+     "size": 2,
+     "reloc_order": "EXACT",
+     "start": 386412,
+     "class": "CONST",
+     "align": "word",
+     "far": false
+    }
+   },
+   "module_exact": false,
+   "log": ""
+  },
+  {
+   "name": "unsigned-comma-False",
+   "why": "assignment-value control; folded predicates require STEERED if exact",
+   "source_sha256_lf": "a1b5c313b4e1a626bdc5d2f3cf84289b507a93ef8017f677e6696237167e7d23",
+   "compile_ok": true,
+   "target": {
+    "exact": false,
+    "reasons": [
+     "length 156 != target 159",
+     "bytes differ (first at +0x5d, 41 differing)",
+     "relocation set differs (3 vs 3)"
+    ],
+    "fixups": 3,
+    "relocations": 3,
+    "reloc_order": "EXACT"
+   },
+   "peer_losses": {},
+   "data": {
+    "_DATA": {
+     "exact": true,
+     "reasons": [],
+     "size": 156,
+     "reloc_order": "EXACT",
+     "start": 376864,
+     "class": "DATA",
+     "align": "word",
+     "far": false
+    },
+    "CONST": {
+     "exact": true,
+     "reasons": [],
+     "size": 2,
+     "reloc_order": "EXACT",
+     "start": 386412,
+     "class": "CONST",
+     "align": "word",
+     "far": false
+    }
+   },
+   "module_exact": false,
+   "log": ""
+  },
+  {
+   "name": "unsigned long-if-True",
+   "why": "assignment-value control; folded predicates require STEERED if exact",
+   "source_sha256_lf": "5da26717a7b412431c46aa2cd705bd91af740c37cdc5ec2c03d45d5b71ee12b6",
+   "compile_ok": true,
+   "target": {
+    "exact": false,
+    "reasons": [
+     "length 156 != target 159",
+     "bytes differ (first at +0x5d, 41 differing)",
+     "relocation set differs (3 vs 3)"
+    ],
+    "fixups": 3,
+    "relocations": 3,
+    "reloc_order": "EXACT"
+   },
+   "peer_losses": {
+    "f_23E6_0392": {
+     "exact": false,
+     "reasons": [
+      "bytes differ (first at +0x124, 2 differing)"
+     ],
+     "fixups": 15,
+     "relocations": 13,
+     "reloc_order": "GROUPED"
+    },
+    "win_DrawElevator": {
+     "exact": false,
+     "reasons": [
+      "length 341 != target 340",
+      "bytes differ (first at +0x43, 70 differing)"
+     ],
+     "fixups": 16,
+     "relocations": 5,
+     "reloc_order": "GROUPED"
+    }
+   },
+   "data": {
+    "_DATA": {
+     "exact": true,
+     "reasons": [],
+     "size": 156,
+     "reloc_order": "EXACT",
+     "start": 376864,
+     "class": "DATA",
+     "align": "word",
+     "far": false
+    },
+    "CONST": {
+     "exact": true,
+     "reasons": [],
+     "size": 2,
+     "reloc_order": "EXACT",
+     "start": 386412,
+     "class": "CONST",
+     "align": "word",
+     "far": false
+    }
+   },
+   "module_exact": false,
+   "log": ""
+  },
+  {
+   "name": "unsigned long-if-False",
+   "why": "assignment-value control; folded predicates require STEERED if exact",
+   "source_sha256_lf": "fc671f9efafb0156f39b7b8accb407db92b2e0c0c9bab533b447c65dee91344e",
+   "compile_ok": true,
+   "target": {
+    "exact": false,
+    "reasons": [
+     "length 156 != target 159",
+     "bytes differ (first at +0x5d, 41 differing)",
+     "relocation set differs (3 vs 3)"
+    ],
+    "fixups": 3,
+    "relocations": 3,
+    "reloc_order": "EXACT"
+   },
+   "peer_losses": {
+    "f_23E6_0392": {
+     "exact": false,
+     "reasons": [
+      "bytes differ (first at +0x124, 2 differing)"
+     ],
+     "fixups": 15,
+     "relocations": 13,
+     "reloc_order": "GROUPED"
+    },
+    "win_DrawElevator": {
+     "exact": false,
+     "reasons": [
+      "length 341 != target 340",
+      "bytes differ (first at +0x43, 70 differing)"
+     ],
+     "fixups": 16,
+     "relocations": 5,
+     "reloc_order": "GROUPED"
+    }
+   },
+   "data": {
+    "_DATA": {
+     "exact": true,
+     "reasons": [],
+     "size": 156,
+     "reloc_order": "EXACT",
+     "start": 376864,
+     "class": "DATA",
+     "align": "word",
+     "far": false
+    },
+    "CONST": {
+     "exact": true,
+     "reasons": [],
+     "size": 2,
+     "reloc_order": "EXACT",
+     "start": 386412,
+     "class": "CONST",
+     "align": "word",
+     "far": false
+    }
+   },
+   "module_exact": false,
+   "log": ""
+  },
+  {
+   "name": "unsigned long-ternary-True",
+   "why": "assignment-value control; folded predicates require STEERED if exact",
+   "source_sha256_lf": "92756fc3d0df8224ee5865872fe6c0eedb4c064fe84c8befd08e92fb37e67855",
+   "compile_ok": true,
+   "target": {
+    "exact": false,
+    "reasons": [
+     "bytes differ (first at +0x73, 4 differing)"
+    ],
+    "fixups": 3,
+    "relocations": 3,
+    "reloc_order": "GROUPED"
+   },
+   "peer_losses": {},
+   "data": {
+    "_DATA": {
+     "exact": true,
+     "reasons": [],
+     "size": 156,
+     "reloc_order": "EXACT",
+     "start": 376864,
+     "class": "DATA",
+     "align": "word",
+     "far": false
+    },
+    "CONST": {
+     "exact": true,
+     "reasons": [],
+     "size": 2,
+     "reloc_order": "EXACT",
+     "start": 386412,
+     "class": "CONST",
+     "align": "word",
+     "far": false
+    }
+   },
+   "module_exact": false,
+   "log": ""
+  },
+  {
+   "name": "unsigned long-ternary-False",
+   "why": "assignment-value control; folded predicates require STEERED if exact",
+   "source_sha256_lf": "c861c7edc99121b57477633ad875b5dfcf73fda282075b5b31695acbea6df979",
+   "compile_ok": true,
+   "target": {
+    "exact": false,
+    "reasons": [
+     "bytes differ (first at +0x73, 4 differing)"
+    ],
+    "fixups": 3,
+    "relocations": 3,
+    "reloc_order": "GROUPED"
+   },
+   "peer_losses": {},
+   "data": {
+    "_DATA": {
+     "exact": true,
+     "reasons": [],
+     "size": 156,
+     "reloc_order": "EXACT",
+     "start": 376864,
+     "class": "DATA",
+     "align": "word",
+     "far": false
+    },
+    "CONST": {
+     "exact": true,
+     "reasons": [],
+     "size": 2,
+     "reloc_order": "EXACT",
+     "start": 386412,
+     "class": "CONST",
+     "align": "word",
+     "far": false
+    }
+   },
+   "module_exact": false,
+   "log": ""
+  },
+  {
+   "name": "unsigned long-and-True",
+   "why": "assignment-value control; folded predicates require STEERED if exact",
+   "source_sha256_lf": "74c84d3ef81cbc79a6a5d4b653316a51426811eaf86b13e464d3595579d64b07",
+   "compile_ok": true,
+   "target": {
+    "exact": false,
+    "reasons": [
+     "bytes differ (first at +0x14, 9 differing)"
+    ],
+    "fixups": 3,
+    "relocations": 3,
+    "reloc_order": "GROUPED"
+   },
+   "peer_losses": {},
+   "data": {
+    "_DATA": {
+     "exact": true,
+     "reasons": [],
+     "size": 156,
+     "reloc_order": "EXACT",
+     "start": 376864,
+     "class": "DATA",
+     "align": "word",
+     "far": false
+    },
+    "CONST": {
+     "exact": true,
+     "reasons": [],
+     "size": 2,
+     "reloc_order": "EXACT",
+     "start": 386412,
+     "class": "CONST",
+     "align": "word",
+     "far": false
+    }
+   },
+   "module_exact": false,
+   "log": ""
+  },
+  {
+   "name": "unsigned long-and-False",
+   "why": "assignment-value control; folded predicates require STEERED if exact",
+   "source_sha256_lf": "912dfb8a549024b2548b229d21822e4afad6be7cef96284bbbe915db60212f0c",
+   "compile_ok": true,
+   "target": {
+    "exact": false,
+    "reasons": [
+     "bytes differ (first at +0x14, 9 differing)"
+    ],
+    "fixups": 3,
+    "relocations": 3,
+    "reloc_order": "GROUPED"
+   },
+   "peer_losses": {},
+   "data": {
+    "_DATA": {
+     "exact": true,
+     "reasons": [],
+     "size": 156,
+     "reloc_order": "EXACT",
+     "start": 376864,
+     "class": "DATA",
+     "align": "word",
+     "far": false
+    },
+    "CONST": {
+     "exact": true,
+     "reasons": [],
+     "size": 2,
+     "reloc_order": "EXACT",
+     "start": 386412,
+     "class": "CONST",
+     "align": "word",
+     "far": false
+    }
+   },
+   "module_exact": false,
+   "log": ""
+  },
+  {
+   "name": "unsigned long-comma-True",
+   "why": "assignment-value control; folded predicates require STEERED if exact",
+   "source_sha256_lf": "99b5682a624cb392e2a2db46597c8f5dd79a6d570dad3bcb398b9f8c681dbda3",
+   "compile_ok": true,
+   "target": {
+    "exact": false,
+    "reasons": [
+     "length 156 != target 159",
+     "bytes differ (first at +0x5d, 41 differing)",
+     "relocation set differs (3 vs 3)"
+    ],
+    "fixups": 3,
+    "relocations": 3,
+    "reloc_order": "EXACT"
+   },
+   "peer_losses": {},
+   "data": {
+    "_DATA": {
+     "exact": true,
+     "reasons": [],
+     "size": 156,
+     "reloc_order": "EXACT",
+     "start": 376864,
+     "class": "DATA",
+     "align": "word",
+     "far": false
+    },
+    "CONST": {
+     "exact": true,
+     "reasons": [],
+     "size": 2,
+     "reloc_order": "EXACT",
+     "start": 386412,
+     "class": "CONST",
+     "align": "word",
+     "far": false
+    }
+   },
+   "module_exact": false,
+   "log": ""
+  },
+  {
+   "name": "unsigned long-comma-False",
+   "why": "assignment-value control; folded predicates require STEERED if exact",
+   "source_sha256_lf": "01fb9287676783ece2da2fb3cc557f43cf10d7acc3962cf7746c03fb6943a937",
+   "compile_ok": true,
+   "target": {
+    "exact": false,
+    "reasons": [
+     "length 156 != target 159",
+     "bytes differ (first at +0x5d, 41 differing)",
+     "relocation set differs (3 vs 3)"
+    ],
+    "fixups": 3,
+    "relocations": 3,
+    "reloc_order": "EXACT"
+   },
+   "peer_losses": {},
+   "data": {
+    "_DATA": {
+     "exact": true,
+     "reasons": [],
+     "size": 156,
+     "reloc_order": "EXACT",
+     "start": 376864,
+     "class": "DATA",
+     "align": "word",
+     "far": false
+    },
+    "CONST": {
+     "exact": true,
+     "reasons": [],
+     "size": 2,
+     "reloc_order": "EXACT",
+     "start": 386412,
+     "class": "CONST",
+     "align": "word",
+     "far": false
+    }
+   },
+   "module_exact": false,
+   "log": ""
+  },
+  {
+   "name": "next-False",
+   "why": "",
+   "source_sha256_lf": "1a508d9b0ef11db537125fe3d9d8a2d01c3bb564bf86da311f4ea7fc18e8f350",
+   "compile_ok": true,
+   "target": {
+    "exact": false,
+    "reasons": [
+     "length 163 != target 159",
+     "bytes differ (first at +0x5d, 45 differing)",
+     "relocation set differs (3 vs 3)"
+    ],
+    "fixups": 3,
+    "relocations": 3,
+    "reloc_order": "EXACT"
+   },
+   "peer_losses": {
+    "f_23E6_0392": {
+     "exact": false,
+     "reasons": [
+      "bytes differ (first at +0x124, 2 differing)"
+     ],
+     "fixups": 15,
+     "relocations": 13,
+     "reloc_order": "GROUPED"
+    },
+    "win_DrawElevator": {
+     "exact": false,
+     "reasons": [
+      "length 341 != target 340",
+      "bytes differ (first at +0x43, 70 differing)"
+     ],
+     "fixups": 16,
+     "relocations": 5,
+     "reloc_order": "GROUPED"
+    }
+   },
+   "data": {
+    "_DATA": {
+     "exact": true,
+     "reasons": [],
+     "size": 156,
+     "reloc_order": "EXACT",
+     "start": 376864,
+     "class": "DATA",
+     "align": "word",
+     "far": false
+    },
+    "CONST": {
+     "exact": true,
+     "reasons": [],
+     "size": 2,
+     "reloc_order": "EXACT",
+     "start": 386412,
+     "class": "CONST",
+     "align": "word",
+     "far": false
+    }
+   },
+   "module_exact": false,
+   "log": ""
+  },
+  {
+   "name": "next-True",
+   "why": "",
+   "source_sha256_lf": "562e0b72104be76c9d1a0763fe8ca60f0d977238b4643a2e0933d537f2192224",
+   "compile_ok": true,
+   "target": {
+    "exact": false,
+    "reasons": [
+     "length 163 != target 159",
+     "bytes differ (first at +0x5d, 45 differing)",
+     "relocation set differs (3 vs 3)"
+    ],
+    "fixups": 3,
+    "relocations": 3,
+    "reloc_order": "EXACT"
+   },
+   "peer_losses": {
+    "f_23E6_0392": {
+     "exact": false,
+     "reasons": [
+      "bytes differ (first at +0x124, 2 differing)"
+     ],
+     "fixups": 15,
+     "relocations": 13,
+     "reloc_order": "GROUPED"
+    },
+    "win_DrawElevator": {
+     "exact": false,
+     "reasons": [
+      "length 341 != target 340",
+      "bytes differ (first at +0x43, 70 differing)"
+     ],
+     "fixups": 16,
+     "relocations": 5,
+     "reloc_order": "GROUPED"
+    }
+   },
+   "data": {
+    "_DATA": {
+     "exact": true,
+     "reasons": [],
+     "size": 156,
+     "reloc_order": "EXACT",
+     "start": 376864,
+     "class": "DATA",
+     "align": "word",
+     "far": false
+    },
+    "CONST": {
+     "exact": true,
+     "reasons": [],
+     "size": 2,
+     "reloc_order": "EXACT",
+     "start": 386412,
+     "class": "CONST",
+     "align": "word",
+     "far": false
+    }
+   },
+   "module_exact": false,
+   "log": ""
+  }
+ ],
+ "accepted_peers": [
+  "f_23E6_009F",
+  "f_23E6_0109",
+  "f_23E6_0132",
+  "f_23E6_016B",
+  "f_23E6_01DC",
+  "f_23E6_0266",
+  "f_23E6_0392",
+  "win_DrawElevator",
+  "f_23E6_066C",
+  "f_23E6_06F1",
+  "f_23E6_07A2",
+  "PrevListLine",
+  "f_23E6_0A53",
+  "win_ProcSliderEvent"
+ ],
+ "claims_snapshot": "Fourteen accepted peers; f_23E6_0000 remains unclaimed."
+}

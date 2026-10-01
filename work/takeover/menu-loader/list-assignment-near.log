@@ -1,0 +1,7 @@
+[023_comma-22.c] MISMATCH: bytes differ (first at +0x73, 4 differing)  (opcode similarity 0.984, 62 vs 62 insns)
+      ... 45 equal instructions ...
+  ! 0073 mov ax, 1                           | 0073 mov cx, word ptr [bp - 0xa]
+  ! 0076 add word ptr [bp - 6], ax           | 0076 inc word ptr [bp - 6]
+      ... 15 equal instructions ...
+  relocations expected ['0x23ecc', '0x23eef', '0x23eb0']
+  relocations candidate ['0x23eef', '0x23ecc', '0x23eb0']

@@ -1,0 +1,904 @@
+{
+ "function": "o17_384C_0039",
+ "profile": "msc600ax",
+ "flags": [
+  "/AL",
+  "/Os",
+  "/Oe",
+  "/Og",
+  "/Gs",
+  "/Zi"
+ ],
+ "variants": [
+  {
+   "name": "base",
+   "why": "",
+   "source_sha256_lf": "dc223e2a24848e76d7d72106a1d67bf55f67df190da10e6f38d3121a33eb3b90",
+   "compile_ok": true,
+   "target": {
+    "exact": false,
+    "reasons": [
+     "bytes differ (first at +0x1b, 5 differing)"
+    ],
+    "fixups": 11,
+    "relocations": 4,
+    "reloc_order": "GROUPED"
+   },
+   "peer_losses": {},
+   "data": {
+    "CONST": {
+     "exact": true,
+     "reasons": [],
+     "size": 16,
+     "reloc_order": "GROUPED",
+     "start": 386326,
+     "class": "CONST",
+     "align": "word",
+     "far": false
+    }
+   },
+   "module_exact": false,
+   "log": ""
+  },
+  {
+   "name": "unsignedh-before",
+   "why": "folded pointer-use ranking; original eliminated expression unknown",
+   "source_sha256_lf": "d82524a95eaf726d992ac040136573e1bc603e26d720794ba52bafbd5d15072e",
+   "compile_ok": true,
+   "target": {
+    "exact": false,
+    "reasons": [
+     "length 264 != target 266",
+     "bytes differ (first at +0x19, 238 differing)",
+     "relocation set differs (4 vs 4)"
+    ],
+    "fixups": 11,
+    "relocations": 4,
+    "reloc_order": "EXACT"
+   },
+   "peer_losses": {},
+   "data": {
+    "CONST": {
+     "exact": true,
+     "reasons": [],
+     "size": 16,
+     "reloc_order": "GROUPED",
+     "start": 386326,
+     "class": "CONST",
+     "align": "word",
+     "far": false
+    }
+   },
+   "module_exact": false,
+   "log": ""
+  },
+  {
+   "name": "unsignedh-after",
+   "why": "folded pointer-use ranking; original eliminated expression unknown",
+   "source_sha256_lf": "8021726176bdaa4df3733369f348e508d14264b055088989ab1c3a1d9f9c9f1a",
+   "compile_ok": true,
+   "target": {
+    "exact": false,
+    "reasons": [
+     "bytes differ (first at +0x1b, 5 differing)"
+    ],
+    "fixups": 11,
+    "relocations": 4,
+    "reloc_order": "GROUPED"
+   },
+   "peer_losses": {},
+   "data": {
+    "CONST": {
+     "exact": true,
+     "reasons": [],
+     "size": 16,
+     "reloc_order": "GROUPED",
+     "start": 386326,
+     "class": "CONST",
+     "align": "word",
+     "far": false
+    }
+   },
+   "module_exact": false,
+   "log": ""
+  },
+  {
+   "name": "unsigned-longh-before",
+   "why": "folded pointer-use ranking; original eliminated expression unknown",
+   "source_sha256_lf": "8a37dad5a9d6b5aecf411e885d5adde0e7c807243a3107443c0c4504205be78d",
+   "compile_ok": true,
+   "target": {
+    "exact": false,
+    "reasons": [
+     "length 264 != target 266",
+     "bytes differ (first at +0x19, 238 differing)",
+     "relocation set differs (4 vs 4)"
+    ],
+    "fixups": 11,
+    "relocations": 4,
+    "reloc_order": "EXACT"
+   },
+   "peer_losses": {},
+   "data": {
+    "CONST": {
+     "exact": true,
+     "reasons": [],
+     "size": 16,
+     "reloc_order": "GROUPED",
+     "start": 386326,
+     "class": "CONST",
+     "align": "word",
+     "far": false
+    }
+   },
+   "module_exact": false,
+   "log": ""
+  },
+  {
+   "name": "unsigned-longh-after",
+   "why": "folded pointer-use ranking; original eliminated expression unknown",
+   "source_sha256_lf": "9c622814b15cc941a7e31d585f3b5fdc02f855e1aed19e437b8abfa88b9cd4ee",
+   "compile_ok": true,
+   "target": {
+    "exact": false,
+    "reasons": [
+     "bytes differ (first at +0x1b, 5 differing)"
+    ],
+    "fixups": 11,
+    "relocations": 4,
+    "reloc_order": "GROUPED"
+   },
+   "peer_losses": {},
+   "data": {
+    "CONST": {
+     "exact": true,
+     "reasons": [],
+     "size": 16,
+     "reloc_order": "GROUPED",
+     "start": 386326,
+     "class": "CONST",
+     "align": "word",
+     "far": false
+    }
+   },
+   "module_exact": false,
+   "log": ""
+  },
+  {
+   "name": "unsigned-charunsignedh-before",
+   "why": "folded pointer-use ranking; original eliminated expression unknown",
+   "source_sha256_lf": "9e3fee8f37cb071a7e637a3d2ad7257a6cc1236c1c81f3e9783c034e3b0b469b",
+   "compile_ok": true,
+   "target": {
+    "exact": false,
+    "reasons": [
+     "length 264 != target 266",
+     "bytes differ (first at +0x19, 238 differing)",
+     "relocation set differs (4 vs 4)"
+    ],
+    "fixups": 11,
+    "relocations": 4,
+    "reloc_order": "EXACT"
+   },
+   "peer_losses": {},
+   "data": {
+    "CONST": {
+     "exact": true,
+     "reasons": [],
+     "size": 16,
+     "reloc_order": "GROUPED",
+     "start": 386326,
+     "class": "CONST",
+     "align": "word",
+     "far": false
+    }
+   },
+   "module_exact": false,
+   "log": ""
+  },
+  {
+   "name": "unsigned-charunsignedh-after",
+   "why": "folded pointer-use ranking; original eliminated expression unknown",
+   "source_sha256_lf": "81ac2076afaa082d7737c874ca821a72ee6db7ee87f8179fcfb043c66d567b3b",
+   "compile_ok": true,
+   "target": {
+    "exact": false,
+    "reasons": [
+     "bytes differ (first at +0x1b, 5 differing)"
+    ],
+    "fixups": 11,
+    "relocations": 4,
+    "reloc_order": "GROUPED"
+   },
+   "peer_losses": {},
+   "data": {
+    "CONST": {
+     "exact": true,
+     "reasons": [],
+     "size": 16,
+     "reloc_order": "GROUPED",
+     "start": 386326,
+     "class": "CONST",
+     "align": "word",
+     "far": false
+    }
+   },
+   "module_exact": false,
+   "log": ""
+  },
+  {
+   "name": "unsignedr-before",
+   "why": "folded pointer-use ranking; original eliminated expression unknown",
+   "source_sha256_lf": "50119a5996f7e402e020c02fc351d3aad9648e8bdc6f760e874059decaaf8594",
+   "compile_ok": true,
+   "target": {
+    "exact": false,
+    "reasons": [
+     "length 267 != target 266",
+     "bytes differ (first at +0x1b, 70 differing)"
+    ],
+    "fixups": 11,
+    "relocations": 4,
+    "reloc_order": "GROUPED"
+   },
+   "peer_losses": {},
+   "data": {
+    "CONST": {
+     "exact": true,
+     "reasons": [],
+     "size": 16,
+     "reloc_order": "GROUPED",
+     "start": 386326,
+     "class": "CONST",
+     "align": "word",
+     "far": false
+    }
+   },
+   "module_exact": false,
+   "log": ""
+  },
+  {
+   "name": "unsignedr-after",
+   "why": "folded pointer-use ranking; original eliminated expression unknown",
+   "source_sha256_lf": "2d254742249c3098ea760029ba1038e424fa6e6c71ce07635b23e0184757312e",
+   "compile_ok": true,
+   "target": {
+    "exact": false,
+    "reasons": [
+     "bytes differ (first at +0x1b, 13 differing)"
+    ],
+    "fixups": 11,
+    "relocations": 4,
+    "reloc_order": "GROUPED"
+   },
+   "peer_losses": {},
+   "data": {
+    "CONST": {
+     "exact": true,
+     "reasons": [],
+     "size": 16,
+     "reloc_order": "GROUPED",
+     "start": 386326,
+     "class": "CONST",
+     "align": "word",
+     "far": false
+    }
+   },
+   "module_exact": false,
+   "log": ""
+  },
+  {
+   "name": "unsigned-longr-before",
+   "why": "folded pointer-use ranking; original eliminated expression unknown",
+   "source_sha256_lf": "ee9645d6d575847e4c07db6a05c0339773bf329aec60421e9cbf2cc43e3aaedd",
+   "compile_ok": true,
+   "target": {
+    "exact": false,
+    "reasons": [
+     "length 268 != target 266",
+     "bytes differ (first at +0x1b, 69 differing)"
+    ],
+    "fixups": 11,
+    "relocations": 4,
+    "reloc_order": "GROUPED"
+   },
+   "peer_losses": {},
+   "data": {
+    "CONST": {
+     "exact": true,
+     "reasons": [],
+     "size": 16,
+     "reloc_order": "GROUPED",
+     "start": 386326,
+     "class": "CONST",
+     "align": "word",
+     "far": false
+    }
+   },
+   "module_exact": false,
+   "log": ""
+  },
+  {
+   "name": "unsigned-longr-after",
+   "why": "folded pointer-use ranking; original eliminated expression unknown",
+   "source_sha256_lf": "04b4b5f129c761a1cefb9e4608114a6f49350ad028248311b766b88f46e35175",
+   "compile_ok": true,
+   "target": {
+    "exact": false,
+    "reasons": [
+     "bytes differ (first at +0x1b, 13 differing)"
+    ],
+    "fixups": 11,
+    "relocations": 4,
+    "reloc_order": "GROUPED"
+   },
+   "peer_losses": {},
+   "data": {
+    "CONST": {
+     "exact": true,
+     "reasons": [],
+     "size": 16,
+     "reloc_order": "GROUPED",
+     "start": 386326,
+     "class": "CONST",
+     "align": "word",
+     "far": false
+    }
+   },
+   "module_exact": false,
+   "log": ""
+  },
+  {
+   "name": "unsigned-charunsignedr-before",
+   "why": "folded pointer-use ranking; original eliminated expression unknown",
+   "source_sha256_lf": "19768d68a104f923f2270b7bb4bc06d410d079da390ecb2509a398f5ac585dfd",
+   "compile_ok": true,
+   "target": {
+    "exact": false,
+    "reasons": [
+     "length 267 != target 266",
+     "bytes differ (first at +0x1b, 70 differing)"
+    ],
+    "fixups": 11,
+    "relocations": 4,
+    "reloc_order": "GROUPED"
+   },
+   "peer_losses": {},
+   "data": {
+    "CONST": {
+     "exact": true,
+     "reasons": [],
+     "size": 16,
+     "reloc_order": "GROUPED",
+     "start": 386326,
+     "class": "CONST",
+     "align": "word",
+     "far": false
+    }
+   },
+   "module_exact": false,
+   "log": ""
+  },
+  {
+   "name": "unsigned-charunsignedr-after",
+   "why": "folded pointer-use ranking; original eliminated expression unknown",
+   "source_sha256_lf": "79bfaa7c758a95a202e5cc1e90644e512a4186210cfadac75acccb50fc3adc88",
+   "compile_ok": true,
+   "target": {
+    "exact": false,
+    "reasons": [
+     "bytes differ (first at +0x1b, 13 differing)"
+    ],
+    "fixups": 11,
+    "relocations": 4,
+    "reloc_order": "GROUPED"
+   },
+   "peer_losses": {},
+   "data": {
+    "CONST": {
+     "exact": true,
+     "reasons": [],
+     "size": 16,
+     "reloc_order": "GROUPED",
+     "start": 386326,
+     "class": "CONST",
+     "align": "word",
+     "far": false
+    }
+   },
+   "module_exact": false,
+   "log": ""
+  },
+  {
+   "name": "index-view-12",
+   "why": "folded index view; original eliminated expression unknown",
+   "source_sha256_lf": "00270415d6387baebf127024f8ea5f116c5c0b9ddaad1090fc16d9ce4116d393",
+   "compile_ok": true,
+   "target": {
+    "exact": false,
+    "reasons": [
+     "bytes differ (first at +0x1b, 5 differing)"
+    ],
+    "fixups": 11,
+    "relocations": 4,
+    "reloc_order": "GROUPED"
+   },
+   "peer_losses": {},
+   "data": {
+    "CONST": {
+     "exact": true,
+     "reasons": [],
+     "size": 16,
+     "reloc_order": "GROUPED",
+     "start": 386326,
+     "class": "CONST",
+     "align": "word",
+     "far": false
+    }
+   },
+   "module_exact": false,
+   "log": ""
+  },
+  {
+   "name": "index-view-13",
+   "why": "folded index view; original eliminated expression unknown",
+   "source_sha256_lf": "94099b6e25f698d8b129af5b2567f8562e153292ef31a1bf079d0f8a3c0efb09",
+   "compile_ok": true,
+   "target": {
+    "exact": false,
+    "reasons": [
+     "bytes differ (first at +0x1b, 5 differing)"
+    ],
+    "fixups": 11,
+    "relocations": 4,
+    "reloc_order": "GROUPED"
+   },
+   "peer_losses": {},
+   "data": {
+    "CONST": {
+     "exact": true,
+     "reasons": [],
+     "size": 16,
+     "reloc_order": "GROUPED",
+     "start": 386326,
+     "class": "CONST",
+     "align": "word",
+     "far": false
+    }
+   },
+   "module_exact": false,
+   "log": ""
+  },
+  {
+   "name": "index-view-14",
+   "why": "folded index view; original eliminated expression unknown",
+   "source_sha256_lf": "4883669315308baebb0b57102358966ddac5123a40e5717af65fd24be89294d6",
+   "compile_ok": true,
+   "target": {
+    "exact": false,
+    "reasons": [
+     "length 276 != target 266",
+     "bytes differ (first at +0x23, 180 differing)",
+     "relocation set differs (4 vs 4)"
+    ],
+    "fixups": 11,
+    "relocations": 4,
+    "reloc_order": "EXACT"
+   },
+   "peer_losses": {},
+   "data": {
+    "CONST": {
+     "exact": true,
+     "reasons": [],
+     "size": 16,
+     "reloc_order": "GROUPED",
+     "start": 386326,
+     "class": "CONST",
+     "align": "word",
+     "far": false
+    }
+   },
+   "module_exact": false,
+   "log": ""
+  },
+  {
+   "name": "index-view-15",
+   "why": "folded index view; original eliminated expression unknown",
+   "source_sha256_lf": "658b36e02746827301de864c556a93d6d029e512a2230c5938aa7d23d9d71c99",
+   "compile_ok": true,
+   "target": {
+    "exact": false,
+    "reasons": [
+     "length 276 != target 266",
+     "bytes differ (first at +0x23, 180 differing)",
+     "relocation set differs (4 vs 4)"
+    ],
+    "fixups": 11,
+    "relocations": 4,
+    "reloc_order": "EXACT"
+   },
+   "peer_losses": {},
+   "data": {
+    "CONST": {
+     "exact": true,
+     "reasons": [],
+     "size": 16,
+     "reloc_order": "GROUPED",
+     "start": 386326,
+     "class": "CONST",
+     "align": "word",
+     "far": false
+    }
+   },
+   "module_exact": false,
+   "log": ""
+  },
+  {
+   "name": "scope-False-order-False",
+   "why": "",
+   "source_sha256_lf": "dc223e2a24848e76d7d72106a1d67bf55f67df190da10e6f38d3121a33eb3b90",
+   "compile_ok": true,
+   "target": {
+    "exact": false,
+    "reasons": [
+     "bytes differ (first at +0x1b, 5 differing)"
+    ],
+    "fixups": 11,
+    "relocations": 4,
+    "reloc_order": "GROUPED"
+   },
+   "peer_losses": {},
+   "data": {
+    "CONST": {
+     "exact": true,
+     "reasons": [],
+     "size": 16,
+     "reloc_order": "GROUPED",
+     "start": 386326,
+     "class": "CONST",
+     "align": "word",
+     "far": false
+    }
+   },
+   "module_exact": false,
+   "log": ""
+  },
+  {
+   "name": "scope-False-order-True",
+   "why": "",
+   "source_sha256_lf": "5f18fa4d4a5fbc632ca0b8c2c8386c49c1e6069d87040f7b451d7af1b353617a",
+   "compile_ok": true,
+   "target": {
+    "exact": false,
+    "reasons": [
+     "bytes differ (first at +0x1b, 5 differing)"
+    ],
+    "fixups": 11,
+    "relocations": 4,
+    "reloc_order": "GROUPED"
+   },
+   "peer_losses": {},
+   "data": {
+    "CONST": {
+     "exact": true,
+     "reasons": [],
+     "size": 16,
+     "reloc_order": "GROUPED",
+     "start": 386326,
+     "class": "CONST",
+     "align": "word",
+     "far": false
+    }
+   },
+   "module_exact": false,
+   "log": ""
+  },
+  {
+   "name": "scope-True-order-False",
+   "why": "",
+   "source_sha256_lf": "168be9447fdd63fd4da42c37df9892ffd9e3e7f2fd7094715b059d8748ba5d59",
+   "compile_ok": true,
+   "target": {
+    "exact": false,
+    "reasons": [
+     "bytes differ (first at +0x1b, 5 differing)"
+    ],
+    "fixups": 11,
+    "relocations": 4,
+    "reloc_order": "GROUPED"
+   },
+   "peer_losses": {},
+   "data": {
+    "CONST": {
+     "exact": true,
+     "reasons": [],
+     "size": 16,
+     "reloc_order": "GROUPED",
+     "start": 386326,
+     "class": "CONST",
+     "align": "word",
+     "far": false
+    }
+   },
+   "module_exact": false,
+   "log": ""
+  },
+  {
+   "name": "reset-int-entry",
+   "why": "",
+   "source_sha256_lf": "2f902a2ef19b118d4822573a280f977a9312e890e88f4bfdea7938831c7b97e1",
+   "compile_ok": true,
+   "target": {
+    "exact": false,
+    "reasons": [
+     "length 272 != target 266",
+     "bytes differ (first at +0x8, 255 differing)",
+     "relocation set differs (4 vs 4)"
+    ],
+    "fixups": 11,
+    "relocations": 4,
+    "reloc_order": "EXACT"
+   },
+   "peer_losses": {},
+   "data": {
+    "CONST": {
+     "exact": true,
+     "reasons": [],
+     "size": 16,
+     "reloc_order": "GROUPED",
+     "start": 386326,
+     "class": "CONST",
+     "align": "word",
+     "far": false
+    }
+   },
+   "module_exact": false,
+   "log": ""
+  },
+  {
+   "name": "reset-int-before_fixup",
+   "why": "",
+   "source_sha256_lf": "f190898c43ac99875c3cb4f06b4d6953782782163a29ae802817ab0e3d3716bd",
+   "compile_ok": true,
+   "target": {
+    "exact": true,
+    "reasons": [],
+    "fixups": 11,
+    "relocations": 4,
+    "reloc_order": "GROUPED"
+   },
+   "peer_losses": {},
+   "data": {
+    "CONST": {
+     "exact": true,
+     "reasons": [],
+     "size": 16,
+     "reloc_order": "GROUPED",
+     "start": 386326,
+     "class": "CONST",
+     "align": "word",
+     "far": false
+    }
+   },
+   "module_exact": true,
+   "log": ""
+  },
+  {
+   "name": "reset-int-before_clear",
+   "why": "",
+   "source_sha256_lf": "1bdfee8bfb1d0154188239c4023e3fe9ee72db90ecdd899a470f094ee570f50c",
+   "compile_ok": true,
+   "target": {
+    "exact": false,
+    "reasons": [
+     "bytes differ (first at +0x5, 12 differing)"
+    ],
+    "fixups": 11,
+    "relocations": 4,
+    "reloc_order": "GROUPED"
+   },
+   "peer_losses": {},
+   "data": {
+    "CONST": {
+     "exact": true,
+     "reasons": [],
+     "size": 16,
+     "reloc_order": "GROUPED",
+     "start": 386326,
+     "class": "CONST",
+     "align": "word",
+     "far": false
+    }
+   },
+   "module_exact": false,
+   "log": ""
+  },
+  {
+   "name": "reset-unsigned-entry",
+   "why": "",
+   "source_sha256_lf": "42d457a1c02c4e9b7a32750085b1ce4352fd016d18ba2f45a9c4b857ec46e0a8",
+   "compile_ok": true,
+   "target": {
+    "exact": false,
+    "reasons": [
+     "length 272 != target 266",
+     "bytes differ (first at +0x8, 255 differing)",
+     "relocation set differs (4 vs 4)"
+    ],
+    "fixups": 11,
+    "relocations": 4,
+    "reloc_order": "EXACT"
+   },
+   "peer_losses": {},
+   "data": {
+    "CONST": {
+     "exact": true,
+     "reasons": [],
+     "size": 16,
+     "reloc_order": "GROUPED",
+     "start": 386326,
+     "class": "CONST",
+     "align": "word",
+     "far": false
+    }
+   },
+   "module_exact": false,
+   "log": ""
+  },
+  {
+   "name": "reset-unsigned-before_fixup",
+   "why": "",
+   "source_sha256_lf": "1d0f86e03ce820b5ca6610460e2a10e39501ee573f5621634896c0c2e84ee228",
+   "compile_ok": true,
+   "target": {
+    "exact": true,
+    "reasons": [],
+    "fixups": 11,
+    "relocations": 4,
+    "reloc_order": "GROUPED"
+   },
+   "peer_losses": {},
+   "data": {
+    "CONST": {
+     "exact": true,
+     "reasons": [],
+     "size": 16,
+     "reloc_order": "GROUPED",
+     "start": 386326,
+     "class": "CONST",
+     "align": "word",
+     "far": false
+    }
+   },
+   "module_exact": true,
+   "log": ""
+  },
+  {
+   "name": "reset-unsigned-before_clear",
+   "why": "",
+   "source_sha256_lf": "d8788b5a0266723b1f863a184b62e3be38e4af4c70df23e6e09f85d674656b52",
+   "compile_ok": true,
+   "target": {
+    "exact": false,
+    "reasons": [
+     "bytes differ (first at +0x5, 12 differing)"
+    ],
+    "fixups": 11,
+    "relocations": 4,
+    "reloc_order": "GROUPED"
+   },
+   "peer_losses": {},
+   "data": {
+    "CONST": {
+     "exact": true,
+     "reasons": [],
+     "size": 16,
+     "reloc_order": "GROUPED",
+     "start": 386326,
+     "class": "CONST",
+     "align": "word",
+     "far": false
+    }
+   },
+   "module_exact": false,
+   "log": ""
+  },
+  {
+   "name": "reset-unsigned char-entry",
+   "why": "",
+   "source_sha256_lf": "427d98bef0cc421997bb8504a327bcd021756b10f726916bca6eb7ae204ab27e",
+   "compile_ok": true,
+   "target": {
+    "exact": false,
+    "reasons": [
+     "length 270 != target 266",
+     "bytes differ (first at +0xb, 250 differing)",
+     "relocation set differs (4 vs 4)"
+    ],
+    "fixups": 11,
+    "relocations": 4,
+    "reloc_order": "EXACT"
+   },
+   "peer_losses": {},
+   "data": {
+    "CONST": {
+     "exact": true,
+     "reasons": [],
+     "size": 16,
+     "reloc_order": "GROUPED",
+     "start": 386326,
+     "class": "CONST",
+     "align": "word",
+     "far": false
+    }
+   },
+   "module_exact": false,
+   "log": ""
+  },
+  {
+   "name": "reset-unsigned char-before_fixup",
+   "why": "",
+   "source_sha256_lf": "58599027637a446fd33435a4a3fa34ed5e7a9554771c5f4bfde0293c738b0285",
+   "compile_ok": true,
+   "target": {
+    "exact": true,
+    "reasons": [],
+    "fixups": 11,
+    "relocations": 4,
+    "reloc_order": "GROUPED"
+   },
+   "peer_losses": {},
+   "data": {
+    "CONST": {
+     "exact": true,
+     "reasons": [],
+     "size": 16,
+     "reloc_order": "GROUPED",
+     "start": 386326,
+     "class": "CONST",
+     "align": "word",
+     "far": false
+    }
+   },
+   "module_exact": true,
+   "log": ""
+  },
+  {
+   "name": "reset-unsigned char-before_clear",
+   "why": "",
+   "source_sha256_lf": "2f6d3323c18736c59c40fc65ebae1e69a848ba9e23cfd4fc1de2b285501eb1c2",
+   "compile_ok": true,
+   "target": {
+    "exact": false,
+    "reasons": [
+     "bytes differ (first at +0x5, 12 differing)"
+    ],
+    "fixups": 11,
+    "relocations": 4,
+    "reloc_order": "GROUPED"
+   },
+   "peer_losses": {},
+   "data": {
+    "CONST": {
+     "exact": true,
+     "reasons": [],
+     "size": 16,
+     "reloc_order": "GROUPED",
+     "start": 386326,
+     "class": "CONST",
+     "align": "word",
+     "far": false
+    }
+   },
+   "module_exact": false,
+   "log": ""
+  }
+ ],
+ "accepted_peers": [
+  "o17_384C_0000",
+  "o17_384C_0143",
+  "o17_384C_0169",
+  "o17_384C_0184"
+ ],
+ "claims_snapshot": "Pre-promotion: four accepted peers plus the tested target; the original module had no extent."
+}

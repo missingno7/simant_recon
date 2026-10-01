@@ -4346,8 +4346,13 @@
     }
    },
    "lang": "c",
+   "source_origin": "hand-written C",
+   "extent": {
+    "start": 230592,
+    "end": 231035
+   },
    "source": "src/S17/m384C.c",
-   "source_sha256": "50c800ef65d52f05f1926d2f597b0bb464db647178729366e7d3edea2865858f",
+   "source_sha256": "028adfd17423f115a800315be32a2aaee0f7049e0b8c3211eebd9d65ab7a1351",
    "claims": [
     {
      "name": "o17_384C_0000",
@@ -4392,10 +4397,22 @@
      "kind": "C",
      "provenance": "EXACT_NATURAL",
      "reloc_order": "EXACT"
+    },
+    {
+     "name": "o17_384C_0039",
+     "unit": "S17",
+     "seg": 14412,
+     "off": 57,
+     "size": 266,
+     "target_sha256": "4927a814091dff4c8b7f01ae1c9143508996971a60842426de9ea51ed5a578ce",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL",
+     "layout_inferred": "A distinct final-phase pointer and a real draw argument initialized before pointer-fixup loops reproduce the frame and spill homes; original variable width, spelling and source placement remain unknown (LIFE-2).",
+     "reloc_order": "GROUPED"
     }
    ],
    "scaffold": [],
-   "object_sha256": "57b9db1146487795a229de775862d130c86dfc193f69c43551e1fb34e87320cb"
+   "object_sha256": "a8d3a2d1de9683d1a12e70ccc8024c11bd725b9b4d47e1bd098bb3cf7a7a2bfa"
   },
   "S18:384C": {
    "unit": "S18",
