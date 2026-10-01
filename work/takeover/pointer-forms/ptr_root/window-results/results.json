@@ -1,0 +1,2827 @@
+{
+ "function": "f_2505_0453",
+ "module": "root:2505",
+ "profile": "msc600ax",
+ "flags": [
+  "/AL",
+  "/Os",
+  "/Oe",
+  "/Og",
+  "/Gs",
+  "/Zi"
+ ],
+ "placements": {
+  "CONST": {
+   "seg": 21939,
+   "off": 35396,
+   "size": 6
+  },
+  "_DATA": {
+   "seg": 21939,
+   "off": 26048,
+   "size": 248
+  },
+  "_BSS": {
+   "seg": 21939,
+   "off": 36308,
+   "size": 4
+  }
+ },
+ "variants": [
+  {
+   "name": "base",
+   "file": "build\\workers\\ptr_root\\window-results\\000_base.c",
+   "why": "Frozen original target and accepted peers",
+   "result": {
+    "compile_ok": true,
+    "claims": {
+     "f_2505_0006": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 6,
+      "relocations": 2,
+      "reloc_order": "GROUPED"
+     },
+     "RepointObjects": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 1,
+      "relocations": 0,
+      "reloc_order": "EXACT"
+     },
+     "f_2505_00AA": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 15,
+      "relocations": 0,
+      "reloc_order": "EXACT"
+     },
+     "f_2505_00DD": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 26,
+      "relocations": 2,
+      "reloc_order": "EXACT"
+     },
+     "win_AutoSize": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 29,
+      "relocations": 3,
+      "reloc_order": "GROUPED"
+     },
+     "win_WinRectAddr": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 4,
+      "relocations": 2,
+      "reloc_order": "EXACT"
+     },
+     "win_GetObjRect": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 3,
+      "relocations": 2,
+      "reloc_order": "EXACT"
+     },
+     "win_ObjAddr": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 7,
+      "relocations": 3,
+      "reloc_order": "GROUPED"
+     },
+     "f_2505_033C": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 1,
+      "relocations": 0,
+      "reloc_order": "EXACT"
+     },
+     "win_WinAddr": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 4,
+      "relocations": 2,
+      "reloc_order": "EXACT"
+     },
+     "f_2505_036E": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 2,
+      "relocations": 0,
+      "reloc_order": "EXACT"
+     },
+     "f_2505_0382": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 0,
+      "relocations": 0,
+      "reloc_order": "EXACT"
+     },
+     "f_2505_03B9": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 10,
+      "relocations": 1,
+      "reloc_order": "EXACT"
+     },
+     "f_2505_0453": {
+      "exact": false,
+      "reasons": [
+       "length 124 != target 132",
+       "bytes differ (first at +0x5, 80 differing)",
+       "relocation set differs (3 vs 3)"
+      ],
+      "fixups": 6,
+      "relocations": 3,
+      "reloc_order": "EXACT"
+     },
+     "f_2505_04D7": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 3,
+      "relocations": 0,
+      "reloc_order": "EXACT"
+     },
+     "f_2505_0511": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 0,
+      "relocations": 0,
+      "reloc_order": "EXACT"
+     },
+     "win_Recalc": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 8,
+      "relocations": 3,
+      "reloc_order": "GROUPED"
+     },
+     "f_2505_06B9": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 10,
+      "relocations": 10,
+      "reloc_order": "GROUPED"
+     },
+     "f_2505_0831": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 7,
+      "relocations": 5,
+      "reloc_order": "GROUPED"
+     },
+     "f_2505_08EA": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 6,
+      "relocations": 4,
+      "reloc_order": "GROUPED"
+     }
+    },
+    "exact": false,
+    "opaque_data": [],
+    "opaque_unmarked_bytes": 0,
+    "object_sha256": "21fce82ff3af12cd8fa9d95eb567ded80836c801967d1fe20bc24ef7bd1a3651",
+    "data": {
+     "CONST": {
+      "exact": true,
+      "reasons": [],
+      "size": 6,
+      "reloc_order": "GROUPED",
+      "start": 386420,
+      "class": "CONST",
+      "align": "word",
+      "far": false
+     },
+     "_DATA": {
+      "exact": true,
+      "reasons": [],
+      "size": 248,
+      "reloc_order": "EXACT",
+      "start": 377072,
+      "class": "DATA",
+      "align": "word",
+      "far": false
+     },
+     "_BSS": {
+      "exact": true,
+      "reasons": [],
+      "size": 4,
+      "kind": "BSS",
+      "start": 387332,
+      "align": "word"
+     }
+    },
+    "data_only": false,
+    "communals": [],
+    "scaffold": [],
+    "inplace_drafts": []
+   },
+   "claims": [
+    "f_2505_0006",
+    "RepointObjects",
+    "f_2505_00AA",
+    "f_2505_00DD",
+    "win_AutoSize",
+    "win_WinRectAddr",
+    "win_GetObjRect",
+    "win_ObjAddr",
+    "f_2505_033C",
+    "win_WinAddr",
+    "f_2505_036E",
+    "f_2505_0382",
+    "f_2505_03B9",
+    "f_2505_0453",
+    "f_2505_04D7",
+    "f_2505_0511",
+    "win_Recalc",
+    "f_2505_06B9",
+    "f_2505_0831",
+    "f_2505_08EA"
+   ],
+   "source_sha256_lf": "22a03f15e95fff376d27211426c4f9e3395e16e5decd92ef501fbfe3c1aba623"
+  },
+  {
+   "name": "byte-byte-index",
+   "file": "build\\workers\\ptr_root\\window-results\\001_byte-byte-index.c",
+   "why": "Object table is a char/rectangle/four-int coordinate view; layout retains same bytes and genuine selected coordinate",
+   "result": {
+    "compile_ok": true,
+    "claims": {
+     "f_2505_0006": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 6,
+      "relocations": 2,
+      "reloc_order": "GROUPED"
+     },
+     "RepointObjects": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 1,
+      "relocations": 0,
+      "reloc_order": "EXACT"
+     },
+     "f_2505_00AA": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 15,
+      "relocations": 0,
+      "reloc_order": "EXACT"
+     },
+     "f_2505_00DD": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 26,
+      "relocations": 2,
+      "reloc_order": "EXACT"
+     },
+     "win_AutoSize": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 29,
+      "relocations": 3,
+      "reloc_order": "GROUPED"
+     },
+     "win_WinRectAddr": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 4,
+      "relocations": 2,
+      "reloc_order": "EXACT"
+     },
+     "win_GetObjRect": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 3,
+      "relocations": 2,
+      "reloc_order": "EXACT"
+     },
+     "win_ObjAddr": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 7,
+      "relocations": 3,
+      "reloc_order": "GROUPED"
+     },
+     "f_2505_033C": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 1,
+      "relocations": 0,
+      "reloc_order": "EXACT"
+     },
+     "win_WinAddr": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 4,
+      "relocations": 2,
+      "reloc_order": "EXACT"
+     },
+     "f_2505_036E": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 2,
+      "relocations": 0,
+      "reloc_order": "EXACT"
+     },
+     "f_2505_0382": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 0,
+      "relocations": 0,
+      "reloc_order": "EXACT"
+     },
+     "f_2505_03B9": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 10,
+      "relocations": 1,
+      "reloc_order": "EXACT"
+     },
+     "f_2505_0453": {
+      "exact": false,
+      "reasons": [
+       "length 124 != target 132",
+       "bytes differ (first at +0x5, 80 differing)",
+       "relocation set differs (3 vs 3)"
+      ],
+      "fixups": 6,
+      "relocations": 3,
+      "reloc_order": "EXACT"
+     },
+     "f_2505_04D7": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 3,
+      "relocations": 0,
+      "reloc_order": "EXACT"
+     },
+     "f_2505_0511": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 0,
+      "relocations": 0,
+      "reloc_order": "EXACT"
+     },
+     "win_Recalc": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 8,
+      "relocations": 3,
+      "reloc_order": "GROUPED"
+     },
+     "f_2505_06B9": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 10,
+      "relocations": 10,
+      "reloc_order": "GROUPED"
+     },
+     "f_2505_0831": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 7,
+      "relocations": 5,
+      "reloc_order": "GROUPED"
+     },
+     "f_2505_08EA": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 6,
+      "relocations": 4,
+      "reloc_order": "GROUPED"
+     }
+    },
+    "exact": false,
+    "opaque_data": [],
+    "opaque_unmarked_bytes": 0,
+    "object_sha256": "6ecb6620a8306b3dab54d0de19ad69e2573bf7696fcb5c3fa41eeb5be35bccd1",
+    "data": {
+     "CONST": {
+      "exact": true,
+      "reasons": [],
+      "size": 6,
+      "reloc_order": "GROUPED",
+      "start": 386420,
+      "class": "CONST",
+      "align": "word",
+      "far": false
+     },
+     "_DATA": {
+      "exact": true,
+      "reasons": [],
+      "size": 248,
+      "reloc_order": "EXACT",
+      "start": 377072,
+      "class": "DATA",
+      "align": "word",
+      "far": false
+     },
+     "_BSS": {
+      "exact": true,
+      "reasons": [],
+      "size": 4,
+      "kind": "BSS",
+      "start": 387332,
+      "align": "word"
+     }
+    },
+    "data_only": false,
+    "communals": [],
+    "scaffold": [],
+    "inplace_drafts": []
+   },
+   "claims": [
+    "f_2505_0006",
+    "RepointObjects",
+    "f_2505_00AA",
+    "f_2505_00DD",
+    "win_AutoSize",
+    "win_WinRectAddr",
+    "win_GetObjRect",
+    "win_ObjAddr",
+    "f_2505_033C",
+    "win_WinAddr",
+    "f_2505_036E",
+    "f_2505_0382",
+    "f_2505_03B9",
+    "f_2505_0453",
+    "f_2505_04D7",
+    "f_2505_0511",
+    "win_Recalc",
+    "f_2505_06B9",
+    "f_2505_0831",
+    "f_2505_08EA"
+   ],
+   "source_sha256_lf": "9af87c469c94f707d37d4c8dcd2e43b177ab57b6cbe55bdfbba20a48dce8ace9"
+  },
+  {
+   "name": "byte-byte-address",
+   "file": "build\\workers\\ptr_root\\window-results\\002_byte-byte-address.c",
+   "why": "Object table is a char/rectangle/four-int coordinate view; layout retains same bytes and genuine selected coordinate",
+   "result": {
+    "compile_ok": true,
+    "claims": {
+     "f_2505_0006": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 6,
+      "relocations": 2,
+      "reloc_order": "GROUPED"
+     },
+     "RepointObjects": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 1,
+      "relocations": 0,
+      "reloc_order": "EXACT"
+     },
+     "f_2505_00AA": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 15,
+      "relocations": 0,
+      "reloc_order": "EXACT"
+     },
+     "f_2505_00DD": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 26,
+      "relocations": 2,
+      "reloc_order": "EXACT"
+     },
+     "win_AutoSize": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 29,
+      "relocations": 3,
+      "reloc_order": "GROUPED"
+     },
+     "win_WinRectAddr": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 4,
+      "relocations": 2,
+      "reloc_order": "EXACT"
+     },
+     "win_GetObjRect": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 3,
+      "relocations": 2,
+      "reloc_order": "EXACT"
+     },
+     "win_ObjAddr": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 7,
+      "relocations": 3,
+      "reloc_order": "GROUPED"
+     },
+     "f_2505_033C": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 1,
+      "relocations": 0,
+      "reloc_order": "EXACT"
+     },
+     "win_WinAddr": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 4,
+      "relocations": 2,
+      "reloc_order": "EXACT"
+     },
+     "f_2505_036E": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 2,
+      "relocations": 0,
+      "reloc_order": "EXACT"
+     },
+     "f_2505_0382": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 0,
+      "relocations": 0,
+      "reloc_order": "EXACT"
+     },
+     "f_2505_03B9": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 10,
+      "relocations": 1,
+      "reloc_order": "EXACT"
+     },
+     "f_2505_0453": {
+      "exact": false,
+      "reasons": [
+       "length 124 != target 132",
+       "bytes differ (first at +0x5, 80 differing)",
+       "relocation set differs (3 vs 3)"
+      ],
+      "fixups": 6,
+      "relocations": 3,
+      "reloc_order": "EXACT"
+     },
+     "f_2505_04D7": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 3,
+      "relocations": 0,
+      "reloc_order": "EXACT"
+     },
+     "f_2505_0511": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 0,
+      "relocations": 0,
+      "reloc_order": "EXACT"
+     },
+     "win_Recalc": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 8,
+      "relocations": 3,
+      "reloc_order": "GROUPED"
+     },
+     "f_2505_06B9": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 10,
+      "relocations": 10,
+      "reloc_order": "GROUPED"
+     },
+     "f_2505_0831": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 7,
+      "relocations": 5,
+      "reloc_order": "GROUPED"
+     },
+     "f_2505_08EA": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 6,
+      "relocations": 4,
+      "reloc_order": "GROUPED"
+     }
+    },
+    "exact": false,
+    "opaque_data": [],
+    "opaque_unmarked_bytes": 0,
+    "object_sha256": "6ecb6620a8306b3dab54d0de19ad69e2573bf7696fcb5c3fa41eeb5be35bccd1",
+    "data": {
+     "CONST": {
+      "exact": true,
+      "reasons": [],
+      "size": 6,
+      "reloc_order": "GROUPED",
+      "start": 386420,
+      "class": "CONST",
+      "align": "word",
+      "far": false
+     },
+     "_DATA": {
+      "exact": true,
+      "reasons": [],
+      "size": 248,
+      "reloc_order": "EXACT",
+      "start": 377072,
+      "class": "DATA",
+      "align": "word",
+      "far": false
+     },
+     "_BSS": {
+      "exact": true,
+      "reasons": [],
+      "size": 4,
+      "kind": "BSS",
+      "start": 387332,
+      "align": "word"
+     }
+    },
+    "data_only": false,
+    "communals": [],
+    "scaffold": [],
+    "inplace_drafts": []
+   },
+   "claims": [
+    "f_2505_0006",
+    "RepointObjects",
+    "f_2505_00AA",
+    "f_2505_00DD",
+    "win_AutoSize",
+    "win_WinRectAddr",
+    "win_GetObjRect",
+    "win_ObjAddr",
+    "f_2505_033C",
+    "win_WinAddr",
+    "f_2505_036E",
+    "f_2505_0382",
+    "f_2505_03B9",
+    "f_2505_0453",
+    "f_2505_04D7",
+    "f_2505_0511",
+    "win_Recalc",
+    "f_2505_06B9",
+    "f_2505_0831",
+    "f_2505_08EA"
+   ],
+   "source_sha256_lf": "7257807cc4c98571a3559b03634fa633819a07e6c9cb1e621503fb6a1ce3d58f"
+  },
+  {
+   "name": "byte-rect-index",
+   "file": "build\\workers\\ptr_root\\window-results\\003_byte-rect-index.c",
+   "why": "Object table is a char/rectangle/four-int coordinate view; layout retains same bytes and genuine selected coordinate",
+   "result": {
+    "compile_ok": true,
+    "claims": {
+     "f_2505_0006": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 6,
+      "relocations": 2,
+      "reloc_order": "GROUPED"
+     },
+     "RepointObjects": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 1,
+      "relocations": 0,
+      "reloc_order": "EXACT"
+     },
+     "f_2505_00AA": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 15,
+      "relocations": 0,
+      "reloc_order": "EXACT"
+     },
+     "f_2505_00DD": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 26,
+      "relocations": 2,
+      "reloc_order": "EXACT"
+     },
+     "win_AutoSize": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 29,
+      "relocations": 3,
+      "reloc_order": "GROUPED"
+     },
+     "win_WinRectAddr": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 4,
+      "relocations": 2,
+      "reloc_order": "EXACT"
+     },
+     "win_GetObjRect": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 3,
+      "relocations": 2,
+      "reloc_order": "EXACT"
+     },
+     "win_ObjAddr": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 7,
+      "relocations": 3,
+      "reloc_order": "GROUPED"
+     },
+     "f_2505_033C": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 1,
+      "relocations": 0,
+      "reloc_order": "EXACT"
+     },
+     "win_WinAddr": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 4,
+      "relocations": 2,
+      "reloc_order": "EXACT"
+     },
+     "f_2505_036E": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 2,
+      "relocations": 0,
+      "reloc_order": "EXACT"
+     },
+     "f_2505_0382": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 0,
+      "relocations": 0,
+      "reloc_order": "EXACT"
+     },
+     "f_2505_03B9": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 10,
+      "relocations": 1,
+      "reloc_order": "EXACT"
+     },
+     "f_2505_0453": {
+      "exact": false,
+      "reasons": [
+       "length 124 != target 132",
+       "bytes differ (first at +0x5, 80 differing)",
+       "relocation set differs (3 vs 3)"
+      ],
+      "fixups": 6,
+      "relocations": 3,
+      "reloc_order": "EXACT"
+     },
+     "f_2505_04D7": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 3,
+      "relocations": 0,
+      "reloc_order": "EXACT"
+     },
+     "f_2505_0511": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 0,
+      "relocations": 0,
+      "reloc_order": "EXACT"
+     },
+     "win_Recalc": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 8,
+      "relocations": 3,
+      "reloc_order": "GROUPED"
+     },
+     "f_2505_06B9": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 10,
+      "relocations": 10,
+      "reloc_order": "GROUPED"
+     },
+     "f_2505_0831": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 7,
+      "relocations": 5,
+      "reloc_order": "GROUPED"
+     },
+     "f_2505_08EA": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 6,
+      "relocations": 4,
+      "reloc_order": "GROUPED"
+     }
+    },
+    "exact": false,
+    "opaque_data": [],
+    "opaque_unmarked_bytes": 0,
+    "object_sha256": "20c2a51dc141aa5c917c1f59817eb4cdf6797e15e99739efcdec9a272bbf5e9a",
+    "data": {
+     "CONST": {
+      "exact": true,
+      "reasons": [],
+      "size": 6,
+      "reloc_order": "GROUPED",
+      "start": 386420,
+      "class": "CONST",
+      "align": "word",
+      "far": false
+     },
+     "_DATA": {
+      "exact": true,
+      "reasons": [],
+      "size": 248,
+      "reloc_order": "EXACT",
+      "start": 377072,
+      "class": "DATA",
+      "align": "word",
+      "far": false
+     },
+     "_BSS": {
+      "exact": true,
+      "reasons": [],
+      "size": 4,
+      "kind": "BSS",
+      "start": 387332,
+      "align": "word"
+     }
+    },
+    "data_only": false,
+    "communals": [],
+    "scaffold": [],
+    "inplace_drafts": []
+   },
+   "claims": [
+    "f_2505_0006",
+    "RepointObjects",
+    "f_2505_00AA",
+    "f_2505_00DD",
+    "win_AutoSize",
+    "win_WinRectAddr",
+    "win_GetObjRect",
+    "win_ObjAddr",
+    "f_2505_033C",
+    "win_WinAddr",
+    "f_2505_036E",
+    "f_2505_0382",
+    "f_2505_03B9",
+    "f_2505_0453",
+    "f_2505_04D7",
+    "f_2505_0511",
+    "win_Recalc",
+    "f_2505_06B9",
+    "f_2505_0831",
+    "f_2505_08EA"
+   ],
+   "source_sha256_lf": "697e7e198316096e7a4412fd3e7cd857b20969e4f6b5a022374f2f607b184931"
+  },
+  {
+   "name": "byte-rect-address",
+   "file": "build\\workers\\ptr_root\\window-results\\004_byte-rect-address.c",
+   "why": "Object table is a char/rectangle/four-int coordinate view; layout retains same bytes and genuine selected coordinate",
+   "result": {
+    "compile_ok": true,
+    "claims": {
+     "f_2505_0006": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 6,
+      "relocations": 2,
+      "reloc_order": "GROUPED"
+     },
+     "RepointObjects": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 1,
+      "relocations": 0,
+      "reloc_order": "EXACT"
+     },
+     "f_2505_00AA": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 15,
+      "relocations": 0,
+      "reloc_order": "EXACT"
+     },
+     "f_2505_00DD": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 26,
+      "relocations": 2,
+      "reloc_order": "EXACT"
+     },
+     "win_AutoSize": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 29,
+      "relocations": 3,
+      "reloc_order": "GROUPED"
+     },
+     "win_WinRectAddr": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 4,
+      "relocations": 2,
+      "reloc_order": "EXACT"
+     },
+     "win_GetObjRect": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 3,
+      "relocations": 2,
+      "reloc_order": "EXACT"
+     },
+     "win_ObjAddr": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 7,
+      "relocations": 3,
+      "reloc_order": "GROUPED"
+     },
+     "f_2505_033C": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 1,
+      "relocations": 0,
+      "reloc_order": "EXACT"
+     },
+     "win_WinAddr": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 4,
+      "relocations": 2,
+      "reloc_order": "EXACT"
+     },
+     "f_2505_036E": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 2,
+      "relocations": 0,
+      "reloc_order": "EXACT"
+     },
+     "f_2505_0382": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 0,
+      "relocations": 0,
+      "reloc_order": "EXACT"
+     },
+     "f_2505_03B9": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 10,
+      "relocations": 1,
+      "reloc_order": "EXACT"
+     },
+     "f_2505_0453": {
+      "exact": false,
+      "reasons": [
+       "length 124 != target 132",
+       "bytes differ (first at +0x5, 80 differing)",
+       "relocation set differs (3 vs 3)"
+      ],
+      "fixups": 6,
+      "relocations": 3,
+      "reloc_order": "EXACT"
+     },
+     "f_2505_04D7": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 3,
+      "relocations": 0,
+      "reloc_order": "EXACT"
+     },
+     "f_2505_0511": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 0,
+      "relocations": 0,
+      "reloc_order": "EXACT"
+     },
+     "win_Recalc": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 8,
+      "relocations": 3,
+      "reloc_order": "GROUPED"
+     },
+     "f_2505_06B9": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 10,
+      "relocations": 10,
+      "reloc_order": "GROUPED"
+     },
+     "f_2505_0831": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 7,
+      "relocations": 5,
+      "reloc_order": "GROUPED"
+     },
+     "f_2505_08EA": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 6,
+      "relocations": 4,
+      "reloc_order": "GROUPED"
+     }
+    },
+    "exact": false,
+    "opaque_data": [],
+    "opaque_unmarked_bytes": 0,
+    "object_sha256": "20c2a51dc141aa5c917c1f59817eb4cdf6797e15e99739efcdec9a272bbf5e9a",
+    "data": {
+     "CONST": {
+      "exact": true,
+      "reasons": [],
+      "size": 6,
+      "reloc_order": "GROUPED",
+      "start": 386420,
+      "class": "CONST",
+      "align": "word",
+      "far": false
+     },
+     "_DATA": {
+      "exact": true,
+      "reasons": [],
+      "size": 248,
+      "reloc_order": "EXACT",
+      "start": 377072,
+      "class": "DATA",
+      "align": "word",
+      "far": false
+     },
+     "_BSS": {
+      "exact": true,
+      "reasons": [],
+      "size": 4,
+      "kind": "BSS",
+      "start": 387332,
+      "align": "word"
+     }
+    },
+    "data_only": false,
+    "communals": [],
+    "scaffold": [],
+    "inplace_drafts": []
+   },
+   "claims": [
+    "f_2505_0006",
+    "RepointObjects",
+    "f_2505_00AA",
+    "f_2505_00DD",
+    "win_AutoSize",
+    "win_WinRectAddr",
+    "win_GetObjRect",
+    "win_ObjAddr",
+    "f_2505_033C",
+    "win_WinAddr",
+    "f_2505_036E",
+    "f_2505_0382",
+    "f_2505_03B9",
+    "f_2505_0453",
+    "f_2505_04D7",
+    "f_2505_0511",
+    "win_Recalc",
+    "f_2505_06B9",
+    "f_2505_0831",
+    "f_2505_08EA"
+   ],
+   "source_sha256_lf": "0bf1e4dbcc74a3f641e1eb3c371ed59e464acef112853518dfdef0cd650dccfa"
+  },
+  {
+   "name": "byte-array4-index",
+   "file": "build\\workers\\ptr_root\\window-results\\005_byte-array4-index.c",
+   "why": "Object table is a char/rectangle/four-int coordinate view; layout retains same bytes and genuine selected coordinate",
+   "result": {
+    "compile_ok": true,
+    "claims": {
+     "f_2505_0006": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 6,
+      "relocations": 2,
+      "reloc_order": "GROUPED"
+     },
+     "RepointObjects": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 1,
+      "relocations": 0,
+      "reloc_order": "EXACT"
+     },
+     "f_2505_00AA": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 15,
+      "relocations": 0,
+      "reloc_order": "EXACT"
+     },
+     "f_2505_00DD": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 26,
+      "relocations": 2,
+      "reloc_order": "EXACT"
+     },
+     "win_AutoSize": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 29,
+      "relocations": 3,
+      "reloc_order": "GROUPED"
+     },
+     "win_WinRectAddr": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 4,
+      "relocations": 2,
+      "reloc_order": "EXACT"
+     },
+     "win_GetObjRect": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 3,
+      "relocations": 2,
+      "reloc_order": "EXACT"
+     },
+     "win_ObjAddr": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 7,
+      "relocations": 3,
+      "reloc_order": "GROUPED"
+     },
+     "f_2505_033C": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 1,
+      "relocations": 0,
+      "reloc_order": "EXACT"
+     },
+     "win_WinAddr": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 4,
+      "relocations": 2,
+      "reloc_order": "EXACT"
+     },
+     "f_2505_036E": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 2,
+      "relocations": 0,
+      "reloc_order": "EXACT"
+     },
+     "f_2505_0382": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 0,
+      "relocations": 0,
+      "reloc_order": "EXACT"
+     },
+     "f_2505_03B9": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 10,
+      "relocations": 1,
+      "reloc_order": "EXACT"
+     },
+     "f_2505_0453": {
+      "exact": false,
+      "reasons": [
+       "length 124 != target 132",
+       "bytes differ (first at +0x5, 80 differing)",
+       "relocation set differs (3 vs 3)"
+      ],
+      "fixups": 6,
+      "relocations": 3,
+      "reloc_order": "EXACT"
+     },
+     "f_2505_04D7": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 3,
+      "relocations": 0,
+      "reloc_order": "EXACT"
+     },
+     "f_2505_0511": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 0,
+      "relocations": 0,
+      "reloc_order": "EXACT"
+     },
+     "win_Recalc": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 8,
+      "relocations": 3,
+      "reloc_order": "GROUPED"
+     },
+     "f_2505_06B9": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 10,
+      "relocations": 10,
+      "reloc_order": "GROUPED"
+     },
+     "f_2505_0831": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 7,
+      "relocations": 5,
+      "reloc_order": "GROUPED"
+     },
+     "f_2505_08EA": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 6,
+      "relocations": 4,
+      "reloc_order": "GROUPED"
+     }
+    },
+    "exact": false,
+    "opaque_data": [],
+    "opaque_unmarked_bytes": 0,
+    "object_sha256": "99c35fa8ec82a706de255b0b76d882826cbcbdc4a56e15903a4d7a77ffdb87e9",
+    "data": {
+     "CONST": {
+      "exact": true,
+      "reasons": [],
+      "size": 6,
+      "reloc_order": "GROUPED",
+      "start": 386420,
+      "class": "CONST",
+      "align": "word",
+      "far": false
+     },
+     "_DATA": {
+      "exact": true,
+      "reasons": [],
+      "size": 248,
+      "reloc_order": "EXACT",
+      "start": 377072,
+      "class": "DATA",
+      "align": "word",
+      "far": false
+     },
+     "_BSS": {
+      "exact": true,
+      "reasons": [],
+      "size": 4,
+      "kind": "BSS",
+      "start": 387332,
+      "align": "word"
+     }
+    },
+    "data_only": false,
+    "communals": [],
+    "scaffold": [],
+    "inplace_drafts": []
+   },
+   "claims": [
+    "f_2505_0006",
+    "RepointObjects",
+    "f_2505_00AA",
+    "f_2505_00DD",
+    "win_AutoSize",
+    "win_WinRectAddr",
+    "win_GetObjRect",
+    "win_ObjAddr",
+    "f_2505_033C",
+    "win_WinAddr",
+    "f_2505_036E",
+    "f_2505_0382",
+    "f_2505_03B9",
+    "f_2505_0453",
+    "f_2505_04D7",
+    "f_2505_0511",
+    "win_Recalc",
+    "f_2505_06B9",
+    "f_2505_0831",
+    "f_2505_08EA"
+   ],
+   "source_sha256_lf": "8657531c87fdf6b874d0da66ce5fb8fff961437df01f59251b44ca6c5b77d522"
+  },
+  {
+   "name": "byte-array4-address",
+   "file": "build\\workers\\ptr_root\\window-results\\006_byte-array4-address.c",
+   "why": "Object table is a char/rectangle/four-int coordinate view; layout retains same bytes and genuine selected coordinate",
+   "result": {
+    "compile_ok": true,
+    "claims": {
+     "f_2505_0006": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 6,
+      "relocations": 2,
+      "reloc_order": "GROUPED"
+     },
+     "RepointObjects": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 1,
+      "relocations": 0,
+      "reloc_order": "EXACT"
+     },
+     "f_2505_00AA": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 15,
+      "relocations": 0,
+      "reloc_order": "EXACT"
+     },
+     "f_2505_00DD": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 26,
+      "relocations": 2,
+      "reloc_order": "EXACT"
+     },
+     "win_AutoSize": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 29,
+      "relocations": 3,
+      "reloc_order": "GROUPED"
+     },
+     "win_WinRectAddr": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 4,
+      "relocations": 2,
+      "reloc_order": "EXACT"
+     },
+     "win_GetObjRect": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 3,
+      "relocations": 2,
+      "reloc_order": "EXACT"
+     },
+     "win_ObjAddr": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 7,
+      "relocations": 3,
+      "reloc_order": "GROUPED"
+     },
+     "f_2505_033C": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 1,
+      "relocations": 0,
+      "reloc_order": "EXACT"
+     },
+     "win_WinAddr": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 4,
+      "relocations": 2,
+      "reloc_order": "EXACT"
+     },
+     "f_2505_036E": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 2,
+      "relocations": 0,
+      "reloc_order": "EXACT"
+     },
+     "f_2505_0382": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 0,
+      "relocations": 0,
+      "reloc_order": "EXACT"
+     },
+     "f_2505_03B9": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 10,
+      "relocations": 1,
+      "reloc_order": "EXACT"
+     },
+     "f_2505_0453": {
+      "exact": false,
+      "reasons": [
+       "length 124 != target 132",
+       "bytes differ (first at +0x5, 80 differing)",
+       "relocation set differs (3 vs 3)"
+      ],
+      "fixups": 6,
+      "relocations": 3,
+      "reloc_order": "EXACT"
+     },
+     "f_2505_04D7": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 3,
+      "relocations": 0,
+      "reloc_order": "EXACT"
+     },
+     "f_2505_0511": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 0,
+      "relocations": 0,
+      "reloc_order": "EXACT"
+     },
+     "win_Recalc": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 8,
+      "relocations": 3,
+      "reloc_order": "GROUPED"
+     },
+     "f_2505_06B9": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 10,
+      "relocations": 10,
+      "reloc_order": "GROUPED"
+     },
+     "f_2505_0831": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 7,
+      "relocations": 5,
+      "reloc_order": "GROUPED"
+     },
+     "f_2505_08EA": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 6,
+      "relocations": 4,
+      "reloc_order": "GROUPED"
+     }
+    },
+    "exact": false,
+    "opaque_data": [],
+    "opaque_unmarked_bytes": 0,
+    "object_sha256": "99c35fa8ec82a706de255b0b76d882826cbcbdc4a56e15903a4d7a77ffdb87e9",
+    "data": {
+     "CONST": {
+      "exact": true,
+      "reasons": [],
+      "size": 6,
+      "reloc_order": "GROUPED",
+      "start": 386420,
+      "class": "CONST",
+      "align": "word",
+      "far": false
+     },
+     "_DATA": {
+      "exact": true,
+      "reasons": [],
+      "size": 248,
+      "reloc_order": "EXACT",
+      "start": 377072,
+      "class": "DATA",
+      "align": "word",
+      "far": false
+     },
+     "_BSS": {
+      "exact": true,
+      "reasons": [],
+      "size": 4,
+      "kind": "BSS",
+      "start": 387332,
+      "align": "word"
+     }
+    },
+    "data_only": false,
+    "communals": [],
+    "scaffold": [],
+    "inplace_drafts": []
+   },
+   "claims": [
+    "f_2505_0006",
+    "RepointObjects",
+    "f_2505_00AA",
+    "f_2505_00DD",
+    "win_AutoSize",
+    "win_WinRectAddr",
+    "win_GetObjRect",
+    "win_ObjAddr",
+    "f_2505_033C",
+    "win_WinAddr",
+    "f_2505_036E",
+    "f_2505_0382",
+    "f_2505_03B9",
+    "f_2505_0453",
+    "f_2505_04D7",
+    "f_2505_0511",
+    "win_Recalc",
+    "f_2505_06B9",
+    "f_2505_0831",
+    "f_2505_08EA"
+   ],
+   "source_sha256_lf": "089642bbf9de8fb96b8fe51669e1e75c9926f23ac5e8506e4b1b931aab381492"
+  },
+  {
+   "name": "window-byte-index",
+   "file": "build\\workers\\ptr_root\\window-results\\007_window-byte-index.c",
+   "why": "Object table is a char/rectangle/four-int coordinate view; layout retains same bytes and genuine selected coordinate",
+   "result": {
+    "compile_ok": true,
+    "claims": {
+     "f_2505_0006": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 6,
+      "relocations": 2,
+      "reloc_order": "GROUPED"
+     },
+     "RepointObjects": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 1,
+      "relocations": 0,
+      "reloc_order": "EXACT"
+     },
+     "f_2505_00AA": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 15,
+      "relocations": 0,
+      "reloc_order": "EXACT"
+     },
+     "f_2505_00DD": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 26,
+      "relocations": 2,
+      "reloc_order": "EXACT"
+     },
+     "win_AutoSize": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 29,
+      "relocations": 3,
+      "reloc_order": "GROUPED"
+     },
+     "win_WinRectAddr": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 4,
+      "relocations": 2,
+      "reloc_order": "EXACT"
+     },
+     "win_GetObjRect": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 3,
+      "relocations": 2,
+      "reloc_order": "EXACT"
+     },
+     "win_ObjAddr": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 7,
+      "relocations": 3,
+      "reloc_order": "GROUPED"
+     },
+     "f_2505_033C": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 1,
+      "relocations": 0,
+      "reloc_order": "EXACT"
+     },
+     "win_WinAddr": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 4,
+      "relocations": 2,
+      "reloc_order": "EXACT"
+     },
+     "f_2505_036E": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 2,
+      "relocations": 0,
+      "reloc_order": "EXACT"
+     },
+     "f_2505_0382": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 0,
+      "relocations": 0,
+      "reloc_order": "EXACT"
+     },
+     "f_2505_03B9": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 10,
+      "relocations": 1,
+      "reloc_order": "EXACT"
+     },
+     "f_2505_0453": {
+      "exact": false,
+      "reasons": [
+       "length 124 != target 132",
+       "bytes differ (first at +0x5, 80 differing)",
+       "relocation set differs (3 vs 3)"
+      ],
+      "fixups": 6,
+      "relocations": 3,
+      "reloc_order": "EXACT"
+     },
+     "f_2505_04D7": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 3,
+      "relocations": 0,
+      "reloc_order": "EXACT"
+     },
+     "f_2505_0511": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 0,
+      "relocations": 0,
+      "reloc_order": "EXACT"
+     },
+     "win_Recalc": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 8,
+      "relocations": 3,
+      "reloc_order": "GROUPED"
+     },
+     "f_2505_06B9": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 10,
+      "relocations": 10,
+      "reloc_order": "GROUPED"
+     },
+     "f_2505_0831": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 7,
+      "relocations": 5,
+      "reloc_order": "GROUPED"
+     },
+     "f_2505_08EA": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 6,
+      "relocations": 4,
+      "reloc_order": "GROUPED"
+     }
+    },
+    "exact": false,
+    "opaque_data": [],
+    "opaque_unmarked_bytes": 0,
+    "object_sha256": "2bbc1bd266bea4c2706349fcfca30652a7cc79d4d527dfc831847e0bb58c4970",
+    "data": {
+     "CONST": {
+      "exact": true,
+      "reasons": [],
+      "size": 6,
+      "reloc_order": "GROUPED",
+      "start": 386420,
+      "class": "CONST",
+      "align": "word",
+      "far": false
+     },
+     "_DATA": {
+      "exact": true,
+      "reasons": [],
+      "size": 248,
+      "reloc_order": "EXACT",
+      "start": 377072,
+      "class": "DATA",
+      "align": "word",
+      "far": false
+     },
+     "_BSS": {
+      "exact": true,
+      "reasons": [],
+      "size": 4,
+      "kind": "BSS",
+      "start": 387332,
+      "align": "word"
+     }
+    },
+    "data_only": false,
+    "communals": [],
+    "scaffold": [],
+    "inplace_drafts": []
+   },
+   "claims": [
+    "f_2505_0006",
+    "RepointObjects",
+    "f_2505_00AA",
+    "f_2505_00DD",
+    "win_AutoSize",
+    "win_WinRectAddr",
+    "win_GetObjRect",
+    "win_ObjAddr",
+    "f_2505_033C",
+    "win_WinAddr",
+    "f_2505_036E",
+    "f_2505_0382",
+    "f_2505_03B9",
+    "f_2505_0453",
+    "f_2505_04D7",
+    "f_2505_0511",
+    "win_Recalc",
+    "f_2505_06B9",
+    "f_2505_0831",
+    "f_2505_08EA"
+   ],
+   "source_sha256_lf": "5081a1d8b5efc0b065eafae34a1202b3a9ce5caa3ac9dca14d3e4b034e865f47"
+  },
+  {
+   "name": "window-byte-address",
+   "file": "build\\workers\\ptr_root\\window-results\\008_window-byte-address.c",
+   "why": "Object table is a char/rectangle/four-int coordinate view; layout retains same bytes and genuine selected coordinate",
+   "result": {
+    "compile_ok": true,
+    "claims": {
+     "f_2505_0006": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 6,
+      "relocations": 2,
+      "reloc_order": "GROUPED"
+     },
+     "RepointObjects": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 1,
+      "relocations": 0,
+      "reloc_order": "EXACT"
+     },
+     "f_2505_00AA": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 15,
+      "relocations": 0,
+      "reloc_order": "EXACT"
+     },
+     "f_2505_00DD": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 26,
+      "relocations": 2,
+      "reloc_order": "EXACT"
+     },
+     "win_AutoSize": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 29,
+      "relocations": 3,
+      "reloc_order": "GROUPED"
+     },
+     "win_WinRectAddr": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 4,
+      "relocations": 2,
+      "reloc_order": "EXACT"
+     },
+     "win_GetObjRect": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 3,
+      "relocations": 2,
+      "reloc_order": "EXACT"
+     },
+     "win_ObjAddr": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 7,
+      "relocations": 3,
+      "reloc_order": "GROUPED"
+     },
+     "f_2505_033C": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 1,
+      "relocations": 0,
+      "reloc_order": "EXACT"
+     },
+     "win_WinAddr": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 4,
+      "relocations": 2,
+      "reloc_order": "EXACT"
+     },
+     "f_2505_036E": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 2,
+      "relocations": 0,
+      "reloc_order": "EXACT"
+     },
+     "f_2505_0382": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 0,
+      "relocations": 0,
+      "reloc_order": "EXACT"
+     },
+     "f_2505_03B9": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 10,
+      "relocations": 1,
+      "reloc_order": "EXACT"
+     },
+     "f_2505_0453": {
+      "exact": false,
+      "reasons": [
+       "length 124 != target 132",
+       "bytes differ (first at +0x5, 80 differing)",
+       "relocation set differs (3 vs 3)"
+      ],
+      "fixups": 6,
+      "relocations": 3,
+      "reloc_order": "EXACT"
+     },
+     "f_2505_04D7": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 3,
+      "relocations": 0,
+      "reloc_order": "EXACT"
+     },
+     "f_2505_0511": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 0,
+      "relocations": 0,
+      "reloc_order": "EXACT"
+     },
+     "win_Recalc": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 8,
+      "relocations": 3,
+      "reloc_order": "GROUPED"
+     },
+     "f_2505_06B9": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 10,
+      "relocations": 10,
+      "reloc_order": "GROUPED"
+     },
+     "f_2505_0831": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 7,
+      "relocations": 5,
+      "reloc_order": "GROUPED"
+     },
+     "f_2505_08EA": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 6,
+      "relocations": 4,
+      "reloc_order": "GROUPED"
+     }
+    },
+    "exact": false,
+    "opaque_data": [],
+    "opaque_unmarked_bytes": 0,
+    "object_sha256": "2bbc1bd266bea4c2706349fcfca30652a7cc79d4d527dfc831847e0bb58c4970",
+    "data": {
+     "CONST": {
+      "exact": true,
+      "reasons": [],
+      "size": 6,
+      "reloc_order": "GROUPED",
+      "start": 386420,
+      "class": "CONST",
+      "align": "word",
+      "far": false
+     },
+     "_DATA": {
+      "exact": true,
+      "reasons": [],
+      "size": 248,
+      "reloc_order": "EXACT",
+      "start": 377072,
+      "class": "DATA",
+      "align": "word",
+      "far": false
+     },
+     "_BSS": {
+      "exact": true,
+      "reasons": [],
+      "size": 4,
+      "kind": "BSS",
+      "start": 387332,
+      "align": "word"
+     }
+    },
+    "data_only": false,
+    "communals": [],
+    "scaffold": [],
+    "inplace_drafts": []
+   },
+   "claims": [
+    "f_2505_0006",
+    "RepointObjects",
+    "f_2505_00AA",
+    "f_2505_00DD",
+    "win_AutoSize",
+    "win_WinRectAddr",
+    "win_GetObjRect",
+    "win_ObjAddr",
+    "f_2505_033C",
+    "win_WinAddr",
+    "f_2505_036E",
+    "f_2505_0382",
+    "f_2505_03B9",
+    "f_2505_0453",
+    "f_2505_04D7",
+    "f_2505_0511",
+    "win_Recalc",
+    "f_2505_06B9",
+    "f_2505_0831",
+    "f_2505_08EA"
+   ],
+   "source_sha256_lf": "112936144153350a91f88f99b1fd4a7f7a0b36128d22afdca06cee7fe9ac3b7e"
+  },
+  {
+   "name": "window-rect-index",
+   "file": "build\\workers\\ptr_root\\window-results\\009_window-rect-index.c",
+   "why": "Object table is a char/rectangle/four-int coordinate view; layout retains same bytes and genuine selected coordinate",
+   "result": {
+    "compile_ok": true,
+    "claims": {
+     "f_2505_0006": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 6,
+      "relocations": 2,
+      "reloc_order": "GROUPED"
+     },
+     "RepointObjects": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 1,
+      "relocations": 0,
+      "reloc_order": "EXACT"
+     },
+     "f_2505_00AA": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 15,
+      "relocations": 0,
+      "reloc_order": "EXACT"
+     },
+     "f_2505_00DD": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 26,
+      "relocations": 2,
+      "reloc_order": "EXACT"
+     },
+     "win_AutoSize": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 29,
+      "relocations": 3,
+      "reloc_order": "GROUPED"
+     },
+     "win_WinRectAddr": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 4,
+      "relocations": 2,
+      "reloc_order": "EXACT"
+     },
+     "win_GetObjRect": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 3,
+      "relocations": 2,
+      "reloc_order": "EXACT"
+     },
+     "win_ObjAddr": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 7,
+      "relocations": 3,
+      "reloc_order": "GROUPED"
+     },
+     "f_2505_033C": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 1,
+      "relocations": 0,
+      "reloc_order": "EXACT"
+     },
+     "win_WinAddr": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 4,
+      "relocations": 2,
+      "reloc_order": "EXACT"
+     },
+     "f_2505_036E": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 2,
+      "relocations": 0,
+      "reloc_order": "EXACT"
+     },
+     "f_2505_0382": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 0,
+      "relocations": 0,
+      "reloc_order": "EXACT"
+     },
+     "f_2505_03B9": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 10,
+      "relocations": 1,
+      "reloc_order": "EXACT"
+     },
+     "f_2505_0453": {
+      "exact": false,
+      "reasons": [
+       "length 124 != target 132",
+       "bytes differ (first at +0x5, 80 differing)",
+       "relocation set differs (3 vs 3)"
+      ],
+      "fixups": 6,
+      "relocations": 3,
+      "reloc_order": "EXACT"
+     },
+     "f_2505_04D7": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 3,
+      "relocations": 0,
+      "reloc_order": "EXACT"
+     },
+     "f_2505_0511": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 0,
+      "relocations": 0,
+      "reloc_order": "EXACT"
+     },
+     "win_Recalc": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 8,
+      "relocations": 3,
+      "reloc_order": "GROUPED"
+     },
+     "f_2505_06B9": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 10,
+      "relocations": 10,
+      "reloc_order": "GROUPED"
+     },
+     "f_2505_0831": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 7,
+      "relocations": 5,
+      "reloc_order": "GROUPED"
+     },
+     "f_2505_08EA": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 6,
+      "relocations": 4,
+      "reloc_order": "GROUPED"
+     }
+    },
+    "exact": false,
+    "opaque_data": [],
+    "opaque_unmarked_bytes": 0,
+    "object_sha256": "41a22849de1a6f7a42fbc5a163173e6e629c16ac0dde005fbc98e717bba5d1ed",
+    "data": {
+     "CONST": {
+      "exact": true,
+      "reasons": [],
+      "size": 6,
+      "reloc_order": "GROUPED",
+      "start": 386420,
+      "class": "CONST",
+      "align": "word",
+      "far": false
+     },
+     "_DATA": {
+      "exact": true,
+      "reasons": [],
+      "size": 248,
+      "reloc_order": "EXACT",
+      "start": 377072,
+      "class": "DATA",
+      "align": "word",
+      "far": false
+     },
+     "_BSS": {
+      "exact": true,
+      "reasons": [],
+      "size": 4,
+      "kind": "BSS",
+      "start": 387332,
+      "align": "word"
+     }
+    },
+    "data_only": false,
+    "communals": [],
+    "scaffold": [],
+    "inplace_drafts": []
+   },
+   "claims": [
+    "f_2505_0006",
+    "RepointObjects",
+    "f_2505_00AA",
+    "f_2505_00DD",
+    "win_AutoSize",
+    "win_WinRectAddr",
+    "win_GetObjRect",
+    "win_ObjAddr",
+    "f_2505_033C",
+    "win_WinAddr",
+    "f_2505_036E",
+    "f_2505_0382",
+    "f_2505_03B9",
+    "f_2505_0453",
+    "f_2505_04D7",
+    "f_2505_0511",
+    "win_Recalc",
+    "f_2505_06B9",
+    "f_2505_0831",
+    "f_2505_08EA"
+   ],
+   "source_sha256_lf": "5e9ba52f75121cd807ad16826d62a86ea1a2263cf15d7d789a88be8797eddc98"
+  },
+  {
+   "name": "window-rect-address",
+   "file": "build\\workers\\ptr_root\\window-results\\010_window-rect-address.c",
+   "why": "Object table is a char/rectangle/four-int coordinate view; layout retains same bytes and genuine selected coordinate",
+   "result": {
+    "compile_ok": true,
+    "claims": {
+     "f_2505_0006": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 6,
+      "relocations": 2,
+      "reloc_order": "GROUPED"
+     },
+     "RepointObjects": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 1,
+      "relocations": 0,
+      "reloc_order": "EXACT"
+     },
+     "f_2505_00AA": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 15,
+      "relocations": 0,
+      "reloc_order": "EXACT"
+     },
+     "f_2505_00DD": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 26,
+      "relocations": 2,
+      "reloc_order": "EXACT"
+     },
+     "win_AutoSize": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 29,
+      "relocations": 3,
+      "reloc_order": "GROUPED"
+     },
+     "win_WinRectAddr": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 4,
+      "relocations": 2,
+      "reloc_order": "EXACT"
+     },
+     "win_GetObjRect": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 3,
+      "relocations": 2,
+      "reloc_order": "EXACT"
+     },
+     "win_ObjAddr": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 7,
+      "relocations": 3,
+      "reloc_order": "GROUPED"
+     },
+     "f_2505_033C": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 1,
+      "relocations": 0,
+      "reloc_order": "EXACT"
+     },
+     "win_WinAddr": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 4,
+      "relocations": 2,
+      "reloc_order": "EXACT"
+     },
+     "f_2505_036E": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 2,
+      "relocations": 0,
+      "reloc_order": "EXACT"
+     },
+     "f_2505_0382": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 0,
+      "relocations": 0,
+      "reloc_order": "EXACT"
+     },
+     "f_2505_03B9": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 10,
+      "relocations": 1,
+      "reloc_order": "EXACT"
+     },
+     "f_2505_0453": {
+      "exact": false,
+      "reasons": [
+       "length 124 != target 132",
+       "bytes differ (first at +0x5, 80 differing)",
+       "relocation set differs (3 vs 3)"
+      ],
+      "fixups": 6,
+      "relocations": 3,
+      "reloc_order": "EXACT"
+     },
+     "f_2505_04D7": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 3,
+      "relocations": 0,
+      "reloc_order": "EXACT"
+     },
+     "f_2505_0511": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 0,
+      "relocations": 0,
+      "reloc_order": "EXACT"
+     },
+     "win_Recalc": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 8,
+      "relocations": 3,
+      "reloc_order": "GROUPED"
+     },
+     "f_2505_06B9": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 10,
+      "relocations": 10,
+      "reloc_order": "GROUPED"
+     },
+     "f_2505_0831": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 7,
+      "relocations": 5,
+      "reloc_order": "GROUPED"
+     },
+     "f_2505_08EA": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 6,
+      "relocations": 4,
+      "reloc_order": "GROUPED"
+     }
+    },
+    "exact": false,
+    "opaque_data": [],
+    "opaque_unmarked_bytes": 0,
+    "object_sha256": "41a22849de1a6f7a42fbc5a163173e6e629c16ac0dde005fbc98e717bba5d1ed",
+    "data": {
+     "CONST": {
+      "exact": true,
+      "reasons": [],
+      "size": 6,
+      "reloc_order": "GROUPED",
+      "start": 386420,
+      "class": "CONST",
+      "align": "word",
+      "far": false
+     },
+     "_DATA": {
+      "exact": true,
+      "reasons": [],
+      "size": 248,
+      "reloc_order": "EXACT",
+      "start": 377072,
+      "class": "DATA",
+      "align": "word",
+      "far": false
+     },
+     "_BSS": {
+      "exact": true,
+      "reasons": [],
+      "size": 4,
+      "kind": "BSS",
+      "start": 387332,
+      "align": "word"
+     }
+    },
+    "data_only": false,
+    "communals": [],
+    "scaffold": [],
+    "inplace_drafts": []
+   },
+   "claims": [
+    "f_2505_0006",
+    "RepointObjects",
+    "f_2505_00AA",
+    "f_2505_00DD",
+    "win_AutoSize",
+    "win_WinRectAddr",
+    "win_GetObjRect",
+    "win_ObjAddr",
+    "f_2505_033C",
+    "win_WinAddr",
+    "f_2505_036E",
+    "f_2505_0382",
+    "f_2505_03B9",
+    "f_2505_0453",
+    "f_2505_04D7",
+    "f_2505_0511",
+    "win_Recalc",
+    "f_2505_06B9",
+    "f_2505_0831",
+    "f_2505_08EA"
+   ],
+   "source_sha256_lf": "6f0ca59e1e2c4bc837e33bbf23a3916fbc34b68d565bd3134a8e68988a1cf3ce"
+  },
+  {
+   "name": "window-array4-index",
+   "file": "build\\workers\\ptr_root\\window-results\\011_window-array4-index.c",
+   "why": "Object table is a char/rectangle/four-int coordinate view; layout retains same bytes and genuine selected coordinate",
+   "result": {
+    "compile_ok": true,
+    "claims": {
+     "f_2505_0006": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 6,
+      "relocations": 2,
+      "reloc_order": "GROUPED"
+     },
+     "RepointObjects": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 1,
+      "relocations": 0,
+      "reloc_order": "EXACT"
+     },
+     "f_2505_00AA": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 15,
+      "relocations": 0,
+      "reloc_order": "EXACT"
+     },
+     "f_2505_00DD": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 26,
+      "relocations": 2,
+      "reloc_order": "EXACT"
+     },
+     "win_AutoSize": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 29,
+      "relocations": 3,
+      "reloc_order": "GROUPED"
+     },
+     "win_WinRectAddr": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 4,
+      "relocations": 2,
+      "reloc_order": "EXACT"
+     },
+     "win_GetObjRect": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 3,
+      "relocations": 2,
+      "reloc_order": "EXACT"
+     },
+     "win_ObjAddr": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 7,
+      "relocations": 3,
+      "reloc_order": "GROUPED"
+     },
+     "f_2505_033C": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 1,
+      "relocations": 0,
+      "reloc_order": "EXACT"
+     },
+     "win_WinAddr": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 4,
+      "relocations": 2,
+      "reloc_order": "EXACT"
+     },
+     "f_2505_036E": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 2,
+      "relocations": 0,
+      "reloc_order": "EXACT"
+     },
+     "f_2505_0382": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 0,
+      "relocations": 0,
+      "reloc_order": "EXACT"
+     },
+     "f_2505_03B9": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 10,
+      "relocations": 1,
+      "reloc_order": "EXACT"
+     },
+     "f_2505_0453": {
+      "exact": false,
+      "reasons": [
+       "length 124 != target 132",
+       "bytes differ (first at +0x5, 80 differing)",
+       "relocation set differs (3 vs 3)"
+      ],
+      "fixups": 6,
+      "relocations": 3,
+      "reloc_order": "EXACT"
+     },
+     "f_2505_04D7": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 3,
+      "relocations": 0,
+      "reloc_order": "EXACT"
+     },
+     "f_2505_0511": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 0,
+      "relocations": 0,
+      "reloc_order": "EXACT"
+     },
+     "win_Recalc": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 8,
+      "relocations": 3,
+      "reloc_order": "GROUPED"
+     },
+     "f_2505_06B9": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 10,
+      "relocations": 10,
+      "reloc_order": "GROUPED"
+     },
+     "f_2505_0831": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 7,
+      "relocations": 5,
+      "reloc_order": "GROUPED"
+     },
+     "f_2505_08EA": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 6,
+      "relocations": 4,
+      "reloc_order": "GROUPED"
+     }
+    },
+    "exact": false,
+    "opaque_data": [],
+    "opaque_unmarked_bytes": 0,
+    "object_sha256": "0a7df9b47e0570cf23f45ffe38480b3e65dbb7707221dbe3cedec9bfd65b5202",
+    "data": {
+     "CONST": {
+      "exact": true,
+      "reasons": [],
+      "size": 6,
+      "reloc_order": "GROUPED",
+      "start": 386420,
+      "class": "CONST",
+      "align": "word",
+      "far": false
+     },
+     "_DATA": {
+      "exact": true,
+      "reasons": [],
+      "size": 248,
+      "reloc_order": "EXACT",
+      "start": 377072,
+      "class": "DATA",
+      "align": "word",
+      "far": false
+     },
+     "_BSS": {
+      "exact": true,
+      "reasons": [],
+      "size": 4,
+      "kind": "BSS",
+      "start": 387332,
+      "align": "word"
+     }
+    },
+    "data_only": false,
+    "communals": [],
+    "scaffold": [],
+    "inplace_drafts": []
+   },
+   "claims": [
+    "f_2505_0006",
+    "RepointObjects",
+    "f_2505_00AA",
+    "f_2505_00DD",
+    "win_AutoSize",
+    "win_WinRectAddr",
+    "win_GetObjRect",
+    "win_ObjAddr",
+    "f_2505_033C",
+    "win_WinAddr",
+    "f_2505_036E",
+    "f_2505_0382",
+    "f_2505_03B9",
+    "f_2505_0453",
+    "f_2505_04D7",
+    "f_2505_0511",
+    "win_Recalc",
+    "f_2505_06B9",
+    "f_2505_0831",
+    "f_2505_08EA"
+   ],
+   "source_sha256_lf": "303c3a015f292c2c6993325851beeae5ed08f7878edfaba50b0edd2bedec06bb"
+  },
+  {
+   "name": "window-array4-address",
+   "file": "build\\workers\\ptr_root\\window-results\\012_window-array4-address.c",
+   "why": "Object table is a char/rectangle/four-int coordinate view; layout retains same bytes and genuine selected coordinate",
+   "result": {
+    "compile_ok": true,
+    "claims": {
+     "f_2505_0006": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 6,
+      "relocations": 2,
+      "reloc_order": "GROUPED"
+     },
+     "RepointObjects": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 1,
+      "relocations": 0,
+      "reloc_order": "EXACT"
+     },
+     "f_2505_00AA": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 15,
+      "relocations": 0,
+      "reloc_order": "EXACT"
+     },
+     "f_2505_00DD": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 26,
+      "relocations": 2,
+      "reloc_order": "EXACT"
+     },
+     "win_AutoSize": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 29,
+      "relocations": 3,
+      "reloc_order": "GROUPED"
+     },
+     "win_WinRectAddr": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 4,
+      "relocations": 2,
+      "reloc_order": "EXACT"
+     },
+     "win_GetObjRect": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 3,
+      "relocations": 2,
+      "reloc_order": "EXACT"
+     },
+     "win_ObjAddr": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 7,
+      "relocations": 3,
+      "reloc_order": "GROUPED"
+     },
+     "f_2505_033C": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 1,
+      "relocations": 0,
+      "reloc_order": "EXACT"
+     },
+     "win_WinAddr": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 4,
+      "relocations": 2,
+      "reloc_order": "EXACT"
+     },
+     "f_2505_036E": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 2,
+      "relocations": 0,
+      "reloc_order": "EXACT"
+     },
+     "f_2505_0382": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 0,
+      "relocations": 0,
+      "reloc_order": "EXACT"
+     },
+     "f_2505_03B9": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 10,
+      "relocations": 1,
+      "reloc_order": "EXACT"
+     },
+     "f_2505_0453": {
+      "exact": false,
+      "reasons": [
+       "length 124 != target 132",
+       "bytes differ (first at +0x5, 80 differing)",
+       "relocation set differs (3 vs 3)"
+      ],
+      "fixups": 6,
+      "relocations": 3,
+      "reloc_order": "EXACT"
+     },
+     "f_2505_04D7": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 3,
+      "relocations": 0,
+      "reloc_order": "EXACT"
+     },
+     "f_2505_0511": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 0,
+      "relocations": 0,
+      "reloc_order": "EXACT"
+     },
+     "win_Recalc": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 8,
+      "relocations": 3,
+      "reloc_order": "GROUPED"
+     },
+     "f_2505_06B9": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 10,
+      "relocations": 10,
+      "reloc_order": "GROUPED"
+     },
+     "f_2505_0831": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 7,
+      "relocations": 5,
+      "reloc_order": "GROUPED"
+     },
+     "f_2505_08EA": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 6,
+      "relocations": 4,
+      "reloc_order": "GROUPED"
+     }
+    },
+    "exact": false,
+    "opaque_data": [],
+    "opaque_unmarked_bytes": 0,
+    "object_sha256": "0a7df9b47e0570cf23f45ffe38480b3e65dbb7707221dbe3cedec9bfd65b5202",
+    "data": {
+     "CONST": {
+      "exact": true,
+      "reasons": [],
+      "size": 6,
+      "reloc_order": "GROUPED",
+      "start": 386420,
+      "class": "CONST",
+      "align": "word",
+      "far": false
+     },
+     "_DATA": {
+      "exact": true,
+      "reasons": [],
+      "size": 248,
+      "reloc_order": "EXACT",
+      "start": 377072,
+      "class": "DATA",
+      "align": "word",
+      "far": false
+     },
+     "_BSS": {
+      "exact": true,
+      "reasons": [],
+      "size": 4,
+      "kind": "BSS",
+      "start": 387332,
+      "align": "word"
+     }
+    },
+    "data_only": false,
+    "communals": [],
+    "scaffold": [],
+    "inplace_drafts": []
+   },
+   "claims": [
+    "f_2505_0006",
+    "RepointObjects",
+    "f_2505_00AA",
+    "f_2505_00DD",
+    "win_AutoSize",
+    "win_WinRectAddr",
+    "win_GetObjRect",
+    "win_ObjAddr",
+    "f_2505_033C",
+    "win_WinAddr",
+    "f_2505_036E",
+    "f_2505_0382",
+    "f_2505_03B9",
+    "f_2505_0453",
+    "f_2505_04D7",
+    "f_2505_0511",
+    "win_Recalc",
+    "f_2505_06B9",
+    "f_2505_0831",
+    "f_2505_08EA"
+   ],
+   "source_sha256_lf": "d349a5fd6f73b61282a30636395efda02d34587a5eac3fb74a3e06e8da97c6fd"
+  }
+ ]
+}

@@ -2,7 +2,18 @@
 
 Read README.md, AGENTS.md, docs/codegen-rules.md and docs/tu-evidence.md before work.
 `python tools/validate.py` is the source of truth for totals (docs/progress.md/json).
-The latest fleet checkpoint accepts ch_LookUpId's 354 bytes and completes
+The latest pointer-form follow-up retains 183 whole-module source-gate rows, all
+compiled and none exact, in work/takeover/pointer-forms/. It tests the window
+coordinate helper, AdLib volume, unlock, map/cursor and small clip helper. Twenty-two
+rows regress accepted peers; private data passes throughout. Ten early nested-write
+forms were discarded during C89 semantic review and replaced by explicitly sequenced
+controls; the discarded forms are not compiler evidence. Canonical code and coverage
+are unchanged. Pointer spelling alone emits identical code in several of these
+contexts. The near AdLib merged expression also breaks the accepted instrument
+setter's segment-word binding even though private-data bytes pass. Read the index
+and reports before repeating these searches. Prefer a fresh listing-grounded live-value
+or control-flow hypothesis next, with every accepted peer and binding checked.
+The preceding fleet checkpoint accepts ch_LookUpId's 354 bytes and completes
 root:1A96 as a 1,772-byte TU with grouped cross-function relocation order. PTR-1
 records the interacting base-plus-index pointer initializers and hash-index store
 order, isolated by eight parent controls. It adds no STEERED or layout-inferred bytes.
@@ -29,6 +40,7 @@ in work/takeover/siblings/; its 203-test checkpoint is historical.
 The latest checkpoint passes 214 test cases (two skips), all 48 compiler probes,
 accepted-module and FAR_BSS checks. Full validation, a fresh byte-identical hybrid
 rebuild and reconciliation with current totals are in work/takeover/fleet-lifetimes/.
+The pointer-form follow-up rechecks validation and the hybrid with the same manifest.
 Check Git for the current checkpoint and publication status.
 
 ## 1. Reconstruction state

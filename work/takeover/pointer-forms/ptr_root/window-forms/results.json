@@ -1,0 +1,4364 @@
+{
+ "function": "f_2505_0453",
+ "module": "root:2505",
+ "profile": "msc600ax",
+ "flags": [
+  "/AL",
+  "/Os",
+  "/Oe",
+  "/Og",
+  "/Gs",
+  "/Zi"
+ ],
+ "placements": {
+  "CONST": {
+   "seg": 21939,
+   "off": 35396,
+   "size": 6
+  },
+  "_DATA": {
+   "seg": 21939,
+   "off": 26048,
+   "size": 248
+  },
+  "_BSS": {
+   "seg": 21939,
+   "off": 36308,
+   "size": 4
+  }
+ },
+ "variants": [
+  {
+   "name": "count0-table0-result0",
+   "file": "build\\workers\\ptr_root\\window-forms\\000_count0-table0-result0.c",
+   "why": "Equivalent typed word, far-pointer table and result address forms; original real values retained",
+   "result": {
+    "compile_ok": true,
+    "claims": {
+     "f_2505_0006": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 6,
+      "relocations": 2,
+      "reloc_order": "GROUPED"
+     },
+     "RepointObjects": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 1,
+      "relocations": 0,
+      "reloc_order": "EXACT"
+     },
+     "f_2505_00AA": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 15,
+      "relocations": 0,
+      "reloc_order": "EXACT"
+     },
+     "f_2505_00DD": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 26,
+      "relocations": 2,
+      "reloc_order": "EXACT"
+     },
+     "win_AutoSize": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 29,
+      "relocations": 3,
+      "reloc_order": "GROUPED"
+     },
+     "win_WinRectAddr": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 4,
+      "relocations": 2,
+      "reloc_order": "EXACT"
+     },
+     "win_GetObjRect": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 3,
+      "relocations": 2,
+      "reloc_order": "EXACT"
+     },
+     "win_ObjAddr": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 7,
+      "relocations": 3,
+      "reloc_order": "GROUPED"
+     },
+     "f_2505_033C": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 1,
+      "relocations": 0,
+      "reloc_order": "EXACT"
+     },
+     "win_WinAddr": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 4,
+      "relocations": 2,
+      "reloc_order": "EXACT"
+     },
+     "f_2505_036E": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 2,
+      "relocations": 0,
+      "reloc_order": "EXACT"
+     },
+     "f_2505_0382": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 0,
+      "relocations": 0,
+      "reloc_order": "EXACT"
+     },
+     "f_2505_03B9": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 10,
+      "relocations": 1,
+      "reloc_order": "EXACT"
+     },
+     "f_2505_0453": {
+      "exact": false,
+      "reasons": [
+       "length 124 != target 132",
+       "bytes differ (first at +0x5, 80 differing)",
+       "relocation set differs (3 vs 3)"
+      ],
+      "fixups": 6,
+      "relocations": 3,
+      "reloc_order": "EXACT"
+     },
+     "f_2505_04D7": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 3,
+      "relocations": 0,
+      "reloc_order": "EXACT"
+     },
+     "f_2505_0511": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 0,
+      "relocations": 0,
+      "reloc_order": "EXACT"
+     },
+     "win_Recalc": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 8,
+      "relocations": 3,
+      "reloc_order": "GROUPED"
+     },
+     "f_2505_06B9": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 10,
+      "relocations": 10,
+      "reloc_order": "GROUPED"
+     },
+     "f_2505_0831": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 7,
+      "relocations": 5,
+      "reloc_order": "GROUPED"
+     },
+     "f_2505_08EA": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 6,
+      "relocations": 4,
+      "reloc_order": "GROUPED"
+     }
+    },
+    "exact": false,
+    "opaque_data": [],
+    "opaque_unmarked_bytes": 0,
+    "object_sha256": "21fce82ff3af12cd8fa9d95eb567ded80836c801967d1fe20bc24ef7bd1a3651",
+    "data": {
+     "CONST": {
+      "exact": true,
+      "reasons": [],
+      "size": 6,
+      "reloc_order": "GROUPED",
+      "start": 386420,
+      "class": "CONST",
+      "align": "word",
+      "far": false
+     },
+     "_DATA": {
+      "exact": true,
+      "reasons": [],
+      "size": 248,
+      "reloc_order": "EXACT",
+      "start": 377072,
+      "class": "DATA",
+      "align": "word",
+      "far": false
+     },
+     "_BSS": {
+      "exact": true,
+      "reasons": [],
+      "size": 4,
+      "kind": "BSS",
+      "start": 387332,
+      "align": "word"
+     }
+    },
+    "data_only": false,
+    "communals": [],
+    "scaffold": [],
+    "inplace_drafts": []
+   },
+   "claims": [
+    "f_2505_0006",
+    "RepointObjects",
+    "f_2505_00AA",
+    "f_2505_00DD",
+    "win_AutoSize",
+    "win_WinRectAddr",
+    "win_GetObjRect",
+    "win_ObjAddr",
+    "f_2505_033C",
+    "win_WinAddr",
+    "f_2505_036E",
+    "f_2505_0382",
+    "f_2505_03B9",
+    "f_2505_0453",
+    "f_2505_04D7",
+    "f_2505_0511",
+    "win_Recalc",
+    "f_2505_06B9",
+    "f_2505_0831",
+    "f_2505_08EA"
+   ],
+   "source_sha256_lf": "22a03f15e95fff376d27211426c4f9e3395e16e5decd92ef501fbfe3c1aba623"
+  },
+  {
+   "name": "count0-table0-result1",
+   "file": "build\\workers\\ptr_root\\window-forms\\001_count0-table0-result1.c",
+   "why": "Equivalent typed word, far-pointer table and result address forms; original real values retained",
+   "result": {
+    "compile_ok": true,
+    "claims": {
+     "f_2505_0006": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 6,
+      "relocations": 2,
+      "reloc_order": "GROUPED"
+     },
+     "RepointObjects": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 1,
+      "relocations": 0,
+      "reloc_order": "EXACT"
+     },
+     "f_2505_00AA": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 15,
+      "relocations": 0,
+      "reloc_order": "EXACT"
+     },
+     "f_2505_00DD": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 26,
+      "relocations": 2,
+      "reloc_order": "EXACT"
+     },
+     "win_AutoSize": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 29,
+      "relocations": 3,
+      "reloc_order": "GROUPED"
+     },
+     "win_WinRectAddr": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 4,
+      "relocations": 2,
+      "reloc_order": "EXACT"
+     },
+     "win_GetObjRect": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 3,
+      "relocations": 2,
+      "reloc_order": "EXACT"
+     },
+     "win_ObjAddr": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 7,
+      "relocations": 3,
+      "reloc_order": "GROUPED"
+     },
+     "f_2505_033C": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 1,
+      "relocations": 0,
+      "reloc_order": "EXACT"
+     },
+     "win_WinAddr": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 4,
+      "relocations": 2,
+      "reloc_order": "EXACT"
+     },
+     "f_2505_036E": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 2,
+      "relocations": 0,
+      "reloc_order": "EXACT"
+     },
+     "f_2505_0382": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 0,
+      "relocations": 0,
+      "reloc_order": "EXACT"
+     },
+     "f_2505_03B9": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 10,
+      "relocations": 1,
+      "reloc_order": "EXACT"
+     },
+     "f_2505_0453": {
+      "exact": false,
+      "reasons": [
+       "length 124 != target 132",
+       "bytes differ (first at +0x5, 80 differing)",
+       "relocation set differs (3 vs 3)"
+      ],
+      "fixups": 6,
+      "relocations": 3,
+      "reloc_order": "EXACT"
+     },
+     "f_2505_04D7": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 3,
+      "relocations": 0,
+      "reloc_order": "EXACT"
+     },
+     "f_2505_0511": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 0,
+      "relocations": 0,
+      "reloc_order": "EXACT"
+     },
+     "win_Recalc": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 8,
+      "relocations": 3,
+      "reloc_order": "GROUPED"
+     },
+     "f_2505_06B9": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 10,
+      "relocations": 10,
+      "reloc_order": "GROUPED"
+     },
+     "f_2505_0831": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 7,
+      "relocations": 5,
+      "reloc_order": "GROUPED"
+     },
+     "f_2505_08EA": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 6,
+      "relocations": 4,
+      "reloc_order": "GROUPED"
+     }
+    },
+    "exact": false,
+    "opaque_data": [],
+    "opaque_unmarked_bytes": 0,
+    "object_sha256": "21fce82ff3af12cd8fa9d95eb567ded80836c801967d1fe20bc24ef7bd1a3651",
+    "data": {
+     "CONST": {
+      "exact": true,
+      "reasons": [],
+      "size": 6,
+      "reloc_order": "GROUPED",
+      "start": 386420,
+      "class": "CONST",
+      "align": "word",
+      "far": false
+     },
+     "_DATA": {
+      "exact": true,
+      "reasons": [],
+      "size": 248,
+      "reloc_order": "EXACT",
+      "start": 377072,
+      "class": "DATA",
+      "align": "word",
+      "far": false
+     },
+     "_BSS": {
+      "exact": true,
+      "reasons": [],
+      "size": 4,
+      "kind": "BSS",
+      "start": 387332,
+      "align": "word"
+     }
+    },
+    "data_only": false,
+    "communals": [],
+    "scaffold": [],
+    "inplace_drafts": []
+   },
+   "claims": [
+    "f_2505_0006",
+    "RepointObjects",
+    "f_2505_00AA",
+    "f_2505_00DD",
+    "win_AutoSize",
+    "win_WinRectAddr",
+    "win_GetObjRect",
+    "win_ObjAddr",
+    "f_2505_033C",
+    "win_WinAddr",
+    "f_2505_036E",
+    "f_2505_0382",
+    "f_2505_03B9",
+    "f_2505_0453",
+    "f_2505_04D7",
+    "f_2505_0511",
+    "win_Recalc",
+    "f_2505_06B9",
+    "f_2505_0831",
+    "f_2505_08EA"
+   ],
+   "source_sha256_lf": "55a4d9f71d09be6e62437e3faccebf0867f85babb48b3dd5ee251948bd07cf55"
+  },
+  {
+   "name": "count0-table1-result0",
+   "file": "build\\workers\\ptr_root\\window-forms\\002_count0-table1-result0.c",
+   "why": "Equivalent typed word, far-pointer table and result address forms; original real values retained",
+   "result": {
+    "compile_ok": true,
+    "claims": {
+     "f_2505_0006": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 6,
+      "relocations": 2,
+      "reloc_order": "GROUPED"
+     },
+     "RepointObjects": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 1,
+      "relocations": 0,
+      "reloc_order": "EXACT"
+     },
+     "f_2505_00AA": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 15,
+      "relocations": 0,
+      "reloc_order": "EXACT"
+     },
+     "f_2505_00DD": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 26,
+      "relocations": 2,
+      "reloc_order": "EXACT"
+     },
+     "win_AutoSize": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 29,
+      "relocations": 3,
+      "reloc_order": "GROUPED"
+     },
+     "win_WinRectAddr": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 4,
+      "relocations": 2,
+      "reloc_order": "EXACT"
+     },
+     "win_GetObjRect": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 3,
+      "relocations": 2,
+      "reloc_order": "EXACT"
+     },
+     "win_ObjAddr": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 7,
+      "relocations": 3,
+      "reloc_order": "GROUPED"
+     },
+     "f_2505_033C": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 1,
+      "relocations": 0,
+      "reloc_order": "EXACT"
+     },
+     "win_WinAddr": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 4,
+      "relocations": 2,
+      "reloc_order": "EXACT"
+     },
+     "f_2505_036E": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 2,
+      "relocations": 0,
+      "reloc_order": "EXACT"
+     },
+     "f_2505_0382": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 0,
+      "relocations": 0,
+      "reloc_order": "EXACT"
+     },
+     "f_2505_03B9": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 10,
+      "relocations": 1,
+      "reloc_order": "EXACT"
+     },
+     "f_2505_0453": {
+      "exact": false,
+      "reasons": [
+       "length 124 != target 132",
+       "bytes differ (first at +0x5, 80 differing)",
+       "relocation set differs (3 vs 3)"
+      ],
+      "fixups": 6,
+      "relocations": 3,
+      "reloc_order": "EXACT"
+     },
+     "f_2505_04D7": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 3,
+      "relocations": 0,
+      "reloc_order": "EXACT"
+     },
+     "f_2505_0511": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 0,
+      "relocations": 0,
+      "reloc_order": "EXACT"
+     },
+     "win_Recalc": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 8,
+      "relocations": 3,
+      "reloc_order": "GROUPED"
+     },
+     "f_2505_06B9": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 10,
+      "relocations": 10,
+      "reloc_order": "GROUPED"
+     },
+     "f_2505_0831": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 7,
+      "relocations": 5,
+      "reloc_order": "GROUPED"
+     },
+     "f_2505_08EA": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 6,
+      "relocations": 4,
+      "reloc_order": "GROUPED"
+     }
+    },
+    "exact": false,
+    "opaque_data": [],
+    "opaque_unmarked_bytes": 0,
+    "object_sha256": "21fce82ff3af12cd8fa9d95eb567ded80836c801967d1fe20bc24ef7bd1a3651",
+    "data": {
+     "CONST": {
+      "exact": true,
+      "reasons": [],
+      "size": 6,
+      "reloc_order": "GROUPED",
+      "start": 386420,
+      "class": "CONST",
+      "align": "word",
+      "far": false
+     },
+     "_DATA": {
+      "exact": true,
+      "reasons": [],
+      "size": 248,
+      "reloc_order": "EXACT",
+      "start": 377072,
+      "class": "DATA",
+      "align": "word",
+      "far": false
+     },
+     "_BSS": {
+      "exact": true,
+      "reasons": [],
+      "size": 4,
+      "kind": "BSS",
+      "start": 387332,
+      "align": "word"
+     }
+    },
+    "data_only": false,
+    "communals": [],
+    "scaffold": [],
+    "inplace_drafts": []
+   },
+   "claims": [
+    "f_2505_0006",
+    "RepointObjects",
+    "f_2505_00AA",
+    "f_2505_00DD",
+    "win_AutoSize",
+    "win_WinRectAddr",
+    "win_GetObjRect",
+    "win_ObjAddr",
+    "f_2505_033C",
+    "win_WinAddr",
+    "f_2505_036E",
+    "f_2505_0382",
+    "f_2505_03B9",
+    "f_2505_0453",
+    "f_2505_04D7",
+    "f_2505_0511",
+    "win_Recalc",
+    "f_2505_06B9",
+    "f_2505_0831",
+    "f_2505_08EA"
+   ],
+   "source_sha256_lf": "57ac4be4750b0f0e3eddf30a2f438311bd32e8d58de70fe033e430ef6b1edee9"
+  },
+  {
+   "name": "count0-table1-result1",
+   "file": "build\\workers\\ptr_root\\window-forms\\003_count0-table1-result1.c",
+   "why": "Equivalent typed word, far-pointer table and result address forms; original real values retained",
+   "result": {
+    "compile_ok": true,
+    "claims": {
+     "f_2505_0006": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 6,
+      "relocations": 2,
+      "reloc_order": "GROUPED"
+     },
+     "RepointObjects": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 1,
+      "relocations": 0,
+      "reloc_order": "EXACT"
+     },
+     "f_2505_00AA": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 15,
+      "relocations": 0,
+      "reloc_order": "EXACT"
+     },
+     "f_2505_00DD": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 26,
+      "relocations": 2,
+      "reloc_order": "EXACT"
+     },
+     "win_AutoSize": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 29,
+      "relocations": 3,
+      "reloc_order": "GROUPED"
+     },
+     "win_WinRectAddr": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 4,
+      "relocations": 2,
+      "reloc_order": "EXACT"
+     },
+     "win_GetObjRect": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 3,
+      "relocations": 2,
+      "reloc_order": "EXACT"
+     },
+     "win_ObjAddr": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 7,
+      "relocations": 3,
+      "reloc_order": "GROUPED"
+     },
+     "f_2505_033C": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 1,
+      "relocations": 0,
+      "reloc_order": "EXACT"
+     },
+     "win_WinAddr": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 4,
+      "relocations": 2,
+      "reloc_order": "EXACT"
+     },
+     "f_2505_036E": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 2,
+      "relocations": 0,
+      "reloc_order": "EXACT"
+     },
+     "f_2505_0382": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 0,
+      "relocations": 0,
+      "reloc_order": "EXACT"
+     },
+     "f_2505_03B9": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 10,
+      "relocations": 1,
+      "reloc_order": "EXACT"
+     },
+     "f_2505_0453": {
+      "exact": false,
+      "reasons": [
+       "length 124 != target 132",
+       "bytes differ (first at +0x5, 80 differing)",
+       "relocation set differs (3 vs 3)"
+      ],
+      "fixups": 6,
+      "relocations": 3,
+      "reloc_order": "EXACT"
+     },
+     "f_2505_04D7": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 3,
+      "relocations": 0,
+      "reloc_order": "EXACT"
+     },
+     "f_2505_0511": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 0,
+      "relocations": 0,
+      "reloc_order": "EXACT"
+     },
+     "win_Recalc": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 8,
+      "relocations": 3,
+      "reloc_order": "GROUPED"
+     },
+     "f_2505_06B9": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 10,
+      "relocations": 10,
+      "reloc_order": "GROUPED"
+     },
+     "f_2505_0831": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 7,
+      "relocations": 5,
+      "reloc_order": "GROUPED"
+     },
+     "f_2505_08EA": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 6,
+      "relocations": 4,
+      "reloc_order": "GROUPED"
+     }
+    },
+    "exact": false,
+    "opaque_data": [],
+    "opaque_unmarked_bytes": 0,
+    "object_sha256": "21fce82ff3af12cd8fa9d95eb567ded80836c801967d1fe20bc24ef7bd1a3651",
+    "data": {
+     "CONST": {
+      "exact": true,
+      "reasons": [],
+      "size": 6,
+      "reloc_order": "GROUPED",
+      "start": 386420,
+      "class": "CONST",
+      "align": "word",
+      "far": false
+     },
+     "_DATA": {
+      "exact": true,
+      "reasons": [],
+      "size": 248,
+      "reloc_order": "EXACT",
+      "start": 377072,
+      "class": "DATA",
+      "align": "word",
+      "far": false
+     },
+     "_BSS": {
+      "exact": true,
+      "reasons": [],
+      "size": 4,
+      "kind": "BSS",
+      "start": 387332,
+      "align": "word"
+     }
+    },
+    "data_only": false,
+    "communals": [],
+    "scaffold": [],
+    "inplace_drafts": []
+   },
+   "claims": [
+    "f_2505_0006",
+    "RepointObjects",
+    "f_2505_00AA",
+    "f_2505_00DD",
+    "win_AutoSize",
+    "win_WinRectAddr",
+    "win_GetObjRect",
+    "win_ObjAddr",
+    "f_2505_033C",
+    "win_WinAddr",
+    "f_2505_036E",
+    "f_2505_0382",
+    "f_2505_03B9",
+    "f_2505_0453",
+    "f_2505_04D7",
+    "f_2505_0511",
+    "win_Recalc",
+    "f_2505_06B9",
+    "f_2505_0831",
+    "f_2505_08EA"
+   ],
+   "source_sha256_lf": "83c399b131ddcb47ee1881651dff0ed2e845f132b56a2487d588a84569a1e91b"
+  },
+  {
+   "name": "count0-table2-result0",
+   "file": "build\\workers\\ptr_root\\window-forms\\004_count0-table2-result0.c",
+   "why": "Equivalent typed word, far-pointer table and result address forms; original real values retained",
+   "result": {
+    "compile_ok": true,
+    "claims": {
+     "f_2505_0006": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 6,
+      "relocations": 2,
+      "reloc_order": "GROUPED"
+     },
+     "RepointObjects": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 1,
+      "relocations": 0,
+      "reloc_order": "EXACT"
+     },
+     "f_2505_00AA": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 15,
+      "relocations": 0,
+      "reloc_order": "EXACT"
+     },
+     "f_2505_00DD": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 26,
+      "relocations": 2,
+      "reloc_order": "EXACT"
+     },
+     "win_AutoSize": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 29,
+      "relocations": 3,
+      "reloc_order": "GROUPED"
+     },
+     "win_WinRectAddr": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 4,
+      "relocations": 2,
+      "reloc_order": "EXACT"
+     },
+     "win_GetObjRect": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 3,
+      "relocations": 2,
+      "reloc_order": "EXACT"
+     },
+     "win_ObjAddr": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 7,
+      "relocations": 3,
+      "reloc_order": "GROUPED"
+     },
+     "f_2505_033C": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 1,
+      "relocations": 0,
+      "reloc_order": "EXACT"
+     },
+     "win_WinAddr": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 4,
+      "relocations": 2,
+      "reloc_order": "EXACT"
+     },
+     "f_2505_036E": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 2,
+      "relocations": 0,
+      "reloc_order": "EXACT"
+     },
+     "f_2505_0382": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 0,
+      "relocations": 0,
+      "reloc_order": "EXACT"
+     },
+     "f_2505_03B9": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 10,
+      "relocations": 1,
+      "reloc_order": "EXACT"
+     },
+     "f_2505_0453": {
+      "exact": false,
+      "reasons": [
+       "length 124 != target 132",
+       "bytes differ (first at +0x5, 80 differing)",
+       "relocation set differs (3 vs 3)"
+      ],
+      "fixups": 6,
+      "relocations": 3,
+      "reloc_order": "EXACT"
+     },
+     "f_2505_04D7": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 3,
+      "relocations": 0,
+      "reloc_order": "EXACT"
+     },
+     "f_2505_0511": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 0,
+      "relocations": 0,
+      "reloc_order": "EXACT"
+     },
+     "win_Recalc": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 8,
+      "relocations": 3,
+      "reloc_order": "GROUPED"
+     },
+     "f_2505_06B9": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 10,
+      "relocations": 10,
+      "reloc_order": "GROUPED"
+     },
+     "f_2505_0831": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 7,
+      "relocations": 5,
+      "reloc_order": "GROUPED"
+     },
+     "f_2505_08EA": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 6,
+      "relocations": 4,
+      "reloc_order": "GROUPED"
+     }
+    },
+    "exact": false,
+    "opaque_data": [],
+    "opaque_unmarked_bytes": 0,
+    "object_sha256": "21fce82ff3af12cd8fa9d95eb567ded80836c801967d1fe20bc24ef7bd1a3651",
+    "data": {
+     "CONST": {
+      "exact": true,
+      "reasons": [],
+      "size": 6,
+      "reloc_order": "GROUPED",
+      "start": 386420,
+      "class": "CONST",
+      "align": "word",
+      "far": false
+     },
+     "_DATA": {
+      "exact": true,
+      "reasons": [],
+      "size": 248,
+      "reloc_order": "EXACT",
+      "start": 377072,
+      "class": "DATA",
+      "align": "word",
+      "far": false
+     },
+     "_BSS": {
+      "exact": true,
+      "reasons": [],
+      "size": 4,
+      "kind": "BSS",
+      "start": 387332,
+      "align": "word"
+     }
+    },
+    "data_only": false,
+    "communals": [],
+    "scaffold": [],
+    "inplace_drafts": []
+   },
+   "claims": [
+    "f_2505_0006",
+    "RepointObjects",
+    "f_2505_00AA",
+    "f_2505_00DD",
+    "win_AutoSize",
+    "win_WinRectAddr",
+    "win_GetObjRect",
+    "win_ObjAddr",
+    "f_2505_033C",
+    "win_WinAddr",
+    "f_2505_036E",
+    "f_2505_0382",
+    "f_2505_03B9",
+    "f_2505_0453",
+    "f_2505_04D7",
+    "f_2505_0511",
+    "win_Recalc",
+    "f_2505_06B9",
+    "f_2505_0831",
+    "f_2505_08EA"
+   ],
+   "source_sha256_lf": "b3901dac681cc38878ac9554e98adb875f89a0b3f39707674e8e282301d70e76"
+  },
+  {
+   "name": "count0-table2-result1",
+   "file": "build\\workers\\ptr_root\\window-forms\\005_count0-table2-result1.c",
+   "why": "Equivalent typed word, far-pointer table and result address forms; original real values retained",
+   "result": {
+    "compile_ok": true,
+    "claims": {
+     "f_2505_0006": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 6,
+      "relocations": 2,
+      "reloc_order": "GROUPED"
+     },
+     "RepointObjects": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 1,
+      "relocations": 0,
+      "reloc_order": "EXACT"
+     },
+     "f_2505_00AA": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 15,
+      "relocations": 0,
+      "reloc_order": "EXACT"
+     },
+     "f_2505_00DD": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 26,
+      "relocations": 2,
+      "reloc_order": "EXACT"
+     },
+     "win_AutoSize": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 29,
+      "relocations": 3,
+      "reloc_order": "GROUPED"
+     },
+     "win_WinRectAddr": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 4,
+      "relocations": 2,
+      "reloc_order": "EXACT"
+     },
+     "win_GetObjRect": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 3,
+      "relocations": 2,
+      "reloc_order": "EXACT"
+     },
+     "win_ObjAddr": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 7,
+      "relocations": 3,
+      "reloc_order": "GROUPED"
+     },
+     "f_2505_033C": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 1,
+      "relocations": 0,
+      "reloc_order": "EXACT"
+     },
+     "win_WinAddr": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 4,
+      "relocations": 2,
+      "reloc_order": "EXACT"
+     },
+     "f_2505_036E": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 2,
+      "relocations": 0,
+      "reloc_order": "EXACT"
+     },
+     "f_2505_0382": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 0,
+      "relocations": 0,
+      "reloc_order": "EXACT"
+     },
+     "f_2505_03B9": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 10,
+      "relocations": 1,
+      "reloc_order": "EXACT"
+     },
+     "f_2505_0453": {
+      "exact": false,
+      "reasons": [
+       "length 124 != target 132",
+       "bytes differ (first at +0x5, 80 differing)",
+       "relocation set differs (3 vs 3)"
+      ],
+      "fixups": 6,
+      "relocations": 3,
+      "reloc_order": "EXACT"
+     },
+     "f_2505_04D7": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 3,
+      "relocations": 0,
+      "reloc_order": "EXACT"
+     },
+     "f_2505_0511": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 0,
+      "relocations": 0,
+      "reloc_order": "EXACT"
+     },
+     "win_Recalc": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 8,
+      "relocations": 3,
+      "reloc_order": "GROUPED"
+     },
+     "f_2505_06B9": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 10,
+      "relocations": 10,
+      "reloc_order": "GROUPED"
+     },
+     "f_2505_0831": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 7,
+      "relocations": 5,
+      "reloc_order": "GROUPED"
+     },
+     "f_2505_08EA": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 6,
+      "relocations": 4,
+      "reloc_order": "GROUPED"
+     }
+    },
+    "exact": false,
+    "opaque_data": [],
+    "opaque_unmarked_bytes": 0,
+    "object_sha256": "21fce82ff3af12cd8fa9d95eb567ded80836c801967d1fe20bc24ef7bd1a3651",
+    "data": {
+     "CONST": {
+      "exact": true,
+      "reasons": [],
+      "size": 6,
+      "reloc_order": "GROUPED",
+      "start": 386420,
+      "class": "CONST",
+      "align": "word",
+      "far": false
+     },
+     "_DATA": {
+      "exact": true,
+      "reasons": [],
+      "size": 248,
+      "reloc_order": "EXACT",
+      "start": 377072,
+      "class": "DATA",
+      "align": "word",
+      "far": false
+     },
+     "_BSS": {
+      "exact": true,
+      "reasons": [],
+      "size": 4,
+      "kind": "BSS",
+      "start": 387332,
+      "align": "word"
+     }
+    },
+    "data_only": false,
+    "communals": [],
+    "scaffold": [],
+    "inplace_drafts": []
+   },
+   "claims": [
+    "f_2505_0006",
+    "RepointObjects",
+    "f_2505_00AA",
+    "f_2505_00DD",
+    "win_AutoSize",
+    "win_WinRectAddr",
+    "win_GetObjRect",
+    "win_ObjAddr",
+    "f_2505_033C",
+    "win_WinAddr",
+    "f_2505_036E",
+    "f_2505_0382",
+    "f_2505_03B9",
+    "f_2505_0453",
+    "f_2505_04D7",
+    "f_2505_0511",
+    "win_Recalc",
+    "f_2505_06B9",
+    "f_2505_0831",
+    "f_2505_08EA"
+   ],
+   "source_sha256_lf": "435989be286bdb0676a94e422e59162bc8b33fb0641cc4cd4dd20495449c22c3"
+  },
+  {
+   "name": "count1-table0-result0",
+   "file": "build\\workers\\ptr_root\\window-forms\\006_count1-table0-result0.c",
+   "why": "Equivalent typed word, far-pointer table and result address forms; original real values retained",
+   "result": {
+    "compile_ok": true,
+    "claims": {
+     "f_2505_0006": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 6,
+      "relocations": 2,
+      "reloc_order": "GROUPED"
+     },
+     "RepointObjects": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 1,
+      "relocations": 0,
+      "reloc_order": "EXACT"
+     },
+     "f_2505_00AA": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 15,
+      "relocations": 0,
+      "reloc_order": "EXACT"
+     },
+     "f_2505_00DD": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 26,
+      "relocations": 2,
+      "reloc_order": "EXACT"
+     },
+     "win_AutoSize": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 29,
+      "relocations": 3,
+      "reloc_order": "GROUPED"
+     },
+     "win_WinRectAddr": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 4,
+      "relocations": 2,
+      "reloc_order": "EXACT"
+     },
+     "win_GetObjRect": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 3,
+      "relocations": 2,
+      "reloc_order": "EXACT"
+     },
+     "win_ObjAddr": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 7,
+      "relocations": 3,
+      "reloc_order": "GROUPED"
+     },
+     "f_2505_033C": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 1,
+      "relocations": 0,
+      "reloc_order": "EXACT"
+     },
+     "win_WinAddr": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 4,
+      "relocations": 2,
+      "reloc_order": "EXACT"
+     },
+     "f_2505_036E": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 2,
+      "relocations": 0,
+      "reloc_order": "EXACT"
+     },
+     "f_2505_0382": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 0,
+      "relocations": 0,
+      "reloc_order": "EXACT"
+     },
+     "f_2505_03B9": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 10,
+      "relocations": 1,
+      "reloc_order": "EXACT"
+     },
+     "f_2505_0453": {
+      "exact": false,
+      "reasons": [
+       "length 124 != target 132",
+       "bytes differ (first at +0x5, 80 differing)",
+       "relocation set differs (3 vs 3)"
+      ],
+      "fixups": 6,
+      "relocations": 3,
+      "reloc_order": "EXACT"
+     },
+     "f_2505_04D7": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 3,
+      "relocations": 0,
+      "reloc_order": "EXACT"
+     },
+     "f_2505_0511": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 0,
+      "relocations": 0,
+      "reloc_order": "EXACT"
+     },
+     "win_Recalc": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 8,
+      "relocations": 3,
+      "reloc_order": "GROUPED"
+     },
+     "f_2505_06B9": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 10,
+      "relocations": 10,
+      "reloc_order": "GROUPED"
+     },
+     "f_2505_0831": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 7,
+      "relocations": 5,
+      "reloc_order": "GROUPED"
+     },
+     "f_2505_08EA": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 6,
+      "relocations": 4,
+      "reloc_order": "GROUPED"
+     }
+    },
+    "exact": false,
+    "opaque_data": [],
+    "opaque_unmarked_bytes": 0,
+    "object_sha256": "21fce82ff3af12cd8fa9d95eb567ded80836c801967d1fe20bc24ef7bd1a3651",
+    "data": {
+     "CONST": {
+      "exact": true,
+      "reasons": [],
+      "size": 6,
+      "reloc_order": "GROUPED",
+      "start": 386420,
+      "class": "CONST",
+      "align": "word",
+      "far": false
+     },
+     "_DATA": {
+      "exact": true,
+      "reasons": [],
+      "size": 248,
+      "reloc_order": "EXACT",
+      "start": 377072,
+      "class": "DATA",
+      "align": "word",
+      "far": false
+     },
+     "_BSS": {
+      "exact": true,
+      "reasons": [],
+      "size": 4,
+      "kind": "BSS",
+      "start": 387332,
+      "align": "word"
+     }
+    },
+    "data_only": false,
+    "communals": [],
+    "scaffold": [],
+    "inplace_drafts": []
+   },
+   "claims": [
+    "f_2505_0006",
+    "RepointObjects",
+    "f_2505_00AA",
+    "f_2505_00DD",
+    "win_AutoSize",
+    "win_WinRectAddr",
+    "win_GetObjRect",
+    "win_ObjAddr",
+    "f_2505_033C",
+    "win_WinAddr",
+    "f_2505_036E",
+    "f_2505_0382",
+    "f_2505_03B9",
+    "f_2505_0453",
+    "f_2505_04D7",
+    "f_2505_0511",
+    "win_Recalc",
+    "f_2505_06B9",
+    "f_2505_0831",
+    "f_2505_08EA"
+   ],
+   "source_sha256_lf": "7cae9ab7320591d9cbd71edb1bc73d8c5f12d48e24880731976d0de0e300986c"
+  },
+  {
+   "name": "count1-table0-result1",
+   "file": "build\\workers\\ptr_root\\window-forms\\007_count1-table0-result1.c",
+   "why": "Equivalent typed word, far-pointer table and result address forms; original real values retained",
+   "result": {
+    "compile_ok": true,
+    "claims": {
+     "f_2505_0006": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 6,
+      "relocations": 2,
+      "reloc_order": "GROUPED"
+     },
+     "RepointObjects": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 1,
+      "relocations": 0,
+      "reloc_order": "EXACT"
+     },
+     "f_2505_00AA": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 15,
+      "relocations": 0,
+      "reloc_order": "EXACT"
+     },
+     "f_2505_00DD": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 26,
+      "relocations": 2,
+      "reloc_order": "EXACT"
+     },
+     "win_AutoSize": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 29,
+      "relocations": 3,
+      "reloc_order": "GROUPED"
+     },
+     "win_WinRectAddr": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 4,
+      "relocations": 2,
+      "reloc_order": "EXACT"
+     },
+     "win_GetObjRect": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 3,
+      "relocations": 2,
+      "reloc_order": "EXACT"
+     },
+     "win_ObjAddr": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 7,
+      "relocations": 3,
+      "reloc_order": "GROUPED"
+     },
+     "f_2505_033C": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 1,
+      "relocations": 0,
+      "reloc_order": "EXACT"
+     },
+     "win_WinAddr": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 4,
+      "relocations": 2,
+      "reloc_order": "EXACT"
+     },
+     "f_2505_036E": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 2,
+      "relocations": 0,
+      "reloc_order": "EXACT"
+     },
+     "f_2505_0382": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 0,
+      "relocations": 0,
+      "reloc_order": "EXACT"
+     },
+     "f_2505_03B9": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 10,
+      "relocations": 1,
+      "reloc_order": "EXACT"
+     },
+     "f_2505_0453": {
+      "exact": false,
+      "reasons": [
+       "length 124 != target 132",
+       "bytes differ (first at +0x5, 80 differing)",
+       "relocation set differs (3 vs 3)"
+      ],
+      "fixups": 6,
+      "relocations": 3,
+      "reloc_order": "EXACT"
+     },
+     "f_2505_04D7": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 3,
+      "relocations": 0,
+      "reloc_order": "EXACT"
+     },
+     "f_2505_0511": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 0,
+      "relocations": 0,
+      "reloc_order": "EXACT"
+     },
+     "win_Recalc": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 8,
+      "relocations": 3,
+      "reloc_order": "GROUPED"
+     },
+     "f_2505_06B9": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 10,
+      "relocations": 10,
+      "reloc_order": "GROUPED"
+     },
+     "f_2505_0831": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 7,
+      "relocations": 5,
+      "reloc_order": "GROUPED"
+     },
+     "f_2505_08EA": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 6,
+      "relocations": 4,
+      "reloc_order": "GROUPED"
+     }
+    },
+    "exact": false,
+    "opaque_data": [],
+    "opaque_unmarked_bytes": 0,
+    "object_sha256": "21fce82ff3af12cd8fa9d95eb567ded80836c801967d1fe20bc24ef7bd1a3651",
+    "data": {
+     "CONST": {
+      "exact": true,
+      "reasons": [],
+      "size": 6,
+      "reloc_order": "GROUPED",
+      "start": 386420,
+      "class": "CONST",
+      "align": "word",
+      "far": false
+     },
+     "_DATA": {
+      "exact": true,
+      "reasons": [],
+      "size": 248,
+      "reloc_order": "EXACT",
+      "start": 377072,
+      "class": "DATA",
+      "align": "word",
+      "far": false
+     },
+     "_BSS": {
+      "exact": true,
+      "reasons": [],
+      "size": 4,
+      "kind": "BSS",
+      "start": 387332,
+      "align": "word"
+     }
+    },
+    "data_only": false,
+    "communals": [],
+    "scaffold": [],
+    "inplace_drafts": []
+   },
+   "claims": [
+    "f_2505_0006",
+    "RepointObjects",
+    "f_2505_00AA",
+    "f_2505_00DD",
+    "win_AutoSize",
+    "win_WinRectAddr",
+    "win_GetObjRect",
+    "win_ObjAddr",
+    "f_2505_033C",
+    "win_WinAddr",
+    "f_2505_036E",
+    "f_2505_0382",
+    "f_2505_03B9",
+    "f_2505_0453",
+    "f_2505_04D7",
+    "f_2505_0511",
+    "win_Recalc",
+    "f_2505_06B9",
+    "f_2505_0831",
+    "f_2505_08EA"
+   ],
+   "source_sha256_lf": "802f181e58d82ca28da142ab6dc5ef7e532a072c9a3c0ddf64dc6c4f895cc7c5"
+  },
+  {
+   "name": "count1-table1-result0",
+   "file": "build\\workers\\ptr_root\\window-forms\\008_count1-table1-result0.c",
+   "why": "Equivalent typed word, far-pointer table and result address forms; original real values retained",
+   "result": {
+    "compile_ok": true,
+    "claims": {
+     "f_2505_0006": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 6,
+      "relocations": 2,
+      "reloc_order": "GROUPED"
+     },
+     "RepointObjects": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 1,
+      "relocations": 0,
+      "reloc_order": "EXACT"
+     },
+     "f_2505_00AA": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 15,
+      "relocations": 0,
+      "reloc_order": "EXACT"
+     },
+     "f_2505_00DD": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 26,
+      "relocations": 2,
+      "reloc_order": "EXACT"
+     },
+     "win_AutoSize": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 29,
+      "relocations": 3,
+      "reloc_order": "GROUPED"
+     },
+     "win_WinRectAddr": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 4,
+      "relocations": 2,
+      "reloc_order": "EXACT"
+     },
+     "win_GetObjRect": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 3,
+      "relocations": 2,
+      "reloc_order": "EXACT"
+     },
+     "win_ObjAddr": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 7,
+      "relocations": 3,
+      "reloc_order": "GROUPED"
+     },
+     "f_2505_033C": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 1,
+      "relocations": 0,
+      "reloc_order": "EXACT"
+     },
+     "win_WinAddr": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 4,
+      "relocations": 2,
+      "reloc_order": "EXACT"
+     },
+     "f_2505_036E": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 2,
+      "relocations": 0,
+      "reloc_order": "EXACT"
+     },
+     "f_2505_0382": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 0,
+      "relocations": 0,
+      "reloc_order": "EXACT"
+     },
+     "f_2505_03B9": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 10,
+      "relocations": 1,
+      "reloc_order": "EXACT"
+     },
+     "f_2505_0453": {
+      "exact": false,
+      "reasons": [
+       "length 124 != target 132",
+       "bytes differ (first at +0x5, 80 differing)",
+       "relocation set differs (3 vs 3)"
+      ],
+      "fixups": 6,
+      "relocations": 3,
+      "reloc_order": "EXACT"
+     },
+     "f_2505_04D7": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 3,
+      "relocations": 0,
+      "reloc_order": "EXACT"
+     },
+     "f_2505_0511": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 0,
+      "relocations": 0,
+      "reloc_order": "EXACT"
+     },
+     "win_Recalc": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 8,
+      "relocations": 3,
+      "reloc_order": "GROUPED"
+     },
+     "f_2505_06B9": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 10,
+      "relocations": 10,
+      "reloc_order": "GROUPED"
+     },
+     "f_2505_0831": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 7,
+      "relocations": 5,
+      "reloc_order": "GROUPED"
+     },
+     "f_2505_08EA": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 6,
+      "relocations": 4,
+      "reloc_order": "GROUPED"
+     }
+    },
+    "exact": false,
+    "opaque_data": [],
+    "opaque_unmarked_bytes": 0,
+    "object_sha256": "21fce82ff3af12cd8fa9d95eb567ded80836c801967d1fe20bc24ef7bd1a3651",
+    "data": {
+     "CONST": {
+      "exact": true,
+      "reasons": [],
+      "size": 6,
+      "reloc_order": "GROUPED",
+      "start": 386420,
+      "class": "CONST",
+      "align": "word",
+      "far": false
+     },
+     "_DATA": {
+      "exact": true,
+      "reasons": [],
+      "size": 248,
+      "reloc_order": "EXACT",
+      "start": 377072,
+      "class": "DATA",
+      "align": "word",
+      "far": false
+     },
+     "_BSS": {
+      "exact": true,
+      "reasons": [],
+      "size": 4,
+      "kind": "BSS",
+      "start": 387332,
+      "align": "word"
+     }
+    },
+    "data_only": false,
+    "communals": [],
+    "scaffold": [],
+    "inplace_drafts": []
+   },
+   "claims": [
+    "f_2505_0006",
+    "RepointObjects",
+    "f_2505_00AA",
+    "f_2505_00DD",
+    "win_AutoSize",
+    "win_WinRectAddr",
+    "win_GetObjRect",
+    "win_ObjAddr",
+    "f_2505_033C",
+    "win_WinAddr",
+    "f_2505_036E",
+    "f_2505_0382",
+    "f_2505_03B9",
+    "f_2505_0453",
+    "f_2505_04D7",
+    "f_2505_0511",
+    "win_Recalc",
+    "f_2505_06B9",
+    "f_2505_0831",
+    "f_2505_08EA"
+   ],
+   "source_sha256_lf": "73976c918b2a4f1cb91a59434c2eba2eeb702bbfa490ca60ba243ddb94ceca9f"
+  },
+  {
+   "name": "count1-table1-result1",
+   "file": "build\\workers\\ptr_root\\window-forms\\009_count1-table1-result1.c",
+   "why": "Equivalent typed word, far-pointer table and result address forms; original real values retained",
+   "result": {
+    "compile_ok": true,
+    "claims": {
+     "f_2505_0006": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 6,
+      "relocations": 2,
+      "reloc_order": "GROUPED"
+     },
+     "RepointObjects": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 1,
+      "relocations": 0,
+      "reloc_order": "EXACT"
+     },
+     "f_2505_00AA": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 15,
+      "relocations": 0,
+      "reloc_order": "EXACT"
+     },
+     "f_2505_00DD": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 26,
+      "relocations": 2,
+      "reloc_order": "EXACT"
+     },
+     "win_AutoSize": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 29,
+      "relocations": 3,
+      "reloc_order": "GROUPED"
+     },
+     "win_WinRectAddr": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 4,
+      "relocations": 2,
+      "reloc_order": "EXACT"
+     },
+     "win_GetObjRect": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 3,
+      "relocations": 2,
+      "reloc_order": "EXACT"
+     },
+     "win_ObjAddr": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 7,
+      "relocations": 3,
+      "reloc_order": "GROUPED"
+     },
+     "f_2505_033C": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 1,
+      "relocations": 0,
+      "reloc_order": "EXACT"
+     },
+     "win_WinAddr": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 4,
+      "relocations": 2,
+      "reloc_order": "EXACT"
+     },
+     "f_2505_036E": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 2,
+      "relocations": 0,
+      "reloc_order": "EXACT"
+     },
+     "f_2505_0382": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 0,
+      "relocations": 0,
+      "reloc_order": "EXACT"
+     },
+     "f_2505_03B9": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 10,
+      "relocations": 1,
+      "reloc_order": "EXACT"
+     },
+     "f_2505_0453": {
+      "exact": false,
+      "reasons": [
+       "length 124 != target 132",
+       "bytes differ (first at +0x5, 80 differing)",
+       "relocation set differs (3 vs 3)"
+      ],
+      "fixups": 6,
+      "relocations": 3,
+      "reloc_order": "EXACT"
+     },
+     "f_2505_04D7": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 3,
+      "relocations": 0,
+      "reloc_order": "EXACT"
+     },
+     "f_2505_0511": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 0,
+      "relocations": 0,
+      "reloc_order": "EXACT"
+     },
+     "win_Recalc": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 8,
+      "relocations": 3,
+      "reloc_order": "GROUPED"
+     },
+     "f_2505_06B9": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 10,
+      "relocations": 10,
+      "reloc_order": "GROUPED"
+     },
+     "f_2505_0831": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 7,
+      "relocations": 5,
+      "reloc_order": "GROUPED"
+     },
+     "f_2505_08EA": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 6,
+      "relocations": 4,
+      "reloc_order": "GROUPED"
+     }
+    },
+    "exact": false,
+    "opaque_data": [],
+    "opaque_unmarked_bytes": 0,
+    "object_sha256": "21fce82ff3af12cd8fa9d95eb567ded80836c801967d1fe20bc24ef7bd1a3651",
+    "data": {
+     "CONST": {
+      "exact": true,
+      "reasons": [],
+      "size": 6,
+      "reloc_order": "GROUPED",
+      "start": 386420,
+      "class": "CONST",
+      "align": "word",
+      "far": false
+     },
+     "_DATA": {
+      "exact": true,
+      "reasons": [],
+      "size": 248,
+      "reloc_order": "EXACT",
+      "start": 377072,
+      "class": "DATA",
+      "align": "word",
+      "far": false
+     },
+     "_BSS": {
+      "exact": true,
+      "reasons": [],
+      "size": 4,
+      "kind": "BSS",
+      "start": 387332,
+      "align": "word"
+     }
+    },
+    "data_only": false,
+    "communals": [],
+    "scaffold": [],
+    "inplace_drafts": []
+   },
+   "claims": [
+    "f_2505_0006",
+    "RepointObjects",
+    "f_2505_00AA",
+    "f_2505_00DD",
+    "win_AutoSize",
+    "win_WinRectAddr",
+    "win_GetObjRect",
+    "win_ObjAddr",
+    "f_2505_033C",
+    "win_WinAddr",
+    "f_2505_036E",
+    "f_2505_0382",
+    "f_2505_03B9",
+    "f_2505_0453",
+    "f_2505_04D7",
+    "f_2505_0511",
+    "win_Recalc",
+    "f_2505_06B9",
+    "f_2505_0831",
+    "f_2505_08EA"
+   ],
+   "source_sha256_lf": "07f2f37b56110652e9bae18d30f3be567db49959de95c994a9987cfc33b9df90"
+  },
+  {
+   "name": "count1-table2-result0",
+   "file": "build\\workers\\ptr_root\\window-forms\\010_count1-table2-result0.c",
+   "why": "Equivalent typed word, far-pointer table and result address forms; original real values retained",
+   "result": {
+    "compile_ok": true,
+    "claims": {
+     "f_2505_0006": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 6,
+      "relocations": 2,
+      "reloc_order": "GROUPED"
+     },
+     "RepointObjects": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 1,
+      "relocations": 0,
+      "reloc_order": "EXACT"
+     },
+     "f_2505_00AA": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 15,
+      "relocations": 0,
+      "reloc_order": "EXACT"
+     },
+     "f_2505_00DD": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 26,
+      "relocations": 2,
+      "reloc_order": "EXACT"
+     },
+     "win_AutoSize": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 29,
+      "relocations": 3,
+      "reloc_order": "GROUPED"
+     },
+     "win_WinRectAddr": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 4,
+      "relocations": 2,
+      "reloc_order": "EXACT"
+     },
+     "win_GetObjRect": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 3,
+      "relocations": 2,
+      "reloc_order": "EXACT"
+     },
+     "win_ObjAddr": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 7,
+      "relocations": 3,
+      "reloc_order": "GROUPED"
+     },
+     "f_2505_033C": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 1,
+      "relocations": 0,
+      "reloc_order": "EXACT"
+     },
+     "win_WinAddr": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 4,
+      "relocations": 2,
+      "reloc_order": "EXACT"
+     },
+     "f_2505_036E": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 2,
+      "relocations": 0,
+      "reloc_order": "EXACT"
+     },
+     "f_2505_0382": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 0,
+      "relocations": 0,
+      "reloc_order": "EXACT"
+     },
+     "f_2505_03B9": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 10,
+      "relocations": 1,
+      "reloc_order": "EXACT"
+     },
+     "f_2505_0453": {
+      "exact": false,
+      "reasons": [
+       "length 124 != target 132",
+       "bytes differ (first at +0x5, 80 differing)",
+       "relocation set differs (3 vs 3)"
+      ],
+      "fixups": 6,
+      "relocations": 3,
+      "reloc_order": "EXACT"
+     },
+     "f_2505_04D7": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 3,
+      "relocations": 0,
+      "reloc_order": "EXACT"
+     },
+     "f_2505_0511": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 0,
+      "relocations": 0,
+      "reloc_order": "EXACT"
+     },
+     "win_Recalc": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 8,
+      "relocations": 3,
+      "reloc_order": "GROUPED"
+     },
+     "f_2505_06B9": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 10,
+      "relocations": 10,
+      "reloc_order": "GROUPED"
+     },
+     "f_2505_0831": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 7,
+      "relocations": 5,
+      "reloc_order": "GROUPED"
+     },
+     "f_2505_08EA": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 6,
+      "relocations": 4,
+      "reloc_order": "GROUPED"
+     }
+    },
+    "exact": false,
+    "opaque_data": [],
+    "opaque_unmarked_bytes": 0,
+    "object_sha256": "21fce82ff3af12cd8fa9d95eb567ded80836c801967d1fe20bc24ef7bd1a3651",
+    "data": {
+     "CONST": {
+      "exact": true,
+      "reasons": [],
+      "size": 6,
+      "reloc_order": "GROUPED",
+      "start": 386420,
+      "class": "CONST",
+      "align": "word",
+      "far": false
+     },
+     "_DATA": {
+      "exact": true,
+      "reasons": [],
+      "size": 248,
+      "reloc_order": "EXACT",
+      "start": 377072,
+      "class": "DATA",
+      "align": "word",
+      "far": false
+     },
+     "_BSS": {
+      "exact": true,
+      "reasons": [],
+      "size": 4,
+      "kind": "BSS",
+      "start": 387332,
+      "align": "word"
+     }
+    },
+    "data_only": false,
+    "communals": [],
+    "scaffold": [],
+    "inplace_drafts": []
+   },
+   "claims": [
+    "f_2505_0006",
+    "RepointObjects",
+    "f_2505_00AA",
+    "f_2505_00DD",
+    "win_AutoSize",
+    "win_WinRectAddr",
+    "win_GetObjRect",
+    "win_ObjAddr",
+    "f_2505_033C",
+    "win_WinAddr",
+    "f_2505_036E",
+    "f_2505_0382",
+    "f_2505_03B9",
+    "f_2505_0453",
+    "f_2505_04D7",
+    "f_2505_0511",
+    "win_Recalc",
+    "f_2505_06B9",
+    "f_2505_0831",
+    "f_2505_08EA"
+   ],
+   "source_sha256_lf": "80ae4b1feb2fb26d2d8bef35dadf8d8aaa7aa531e4814de3ddb8c9703f2f6350"
+  },
+  {
+   "name": "count1-table2-result1",
+   "file": "build\\workers\\ptr_root\\window-forms\\011_count1-table2-result1.c",
+   "why": "Equivalent typed word, far-pointer table and result address forms; original real values retained",
+   "result": {
+    "compile_ok": true,
+    "claims": {
+     "f_2505_0006": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 6,
+      "relocations": 2,
+      "reloc_order": "GROUPED"
+     },
+     "RepointObjects": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 1,
+      "relocations": 0,
+      "reloc_order": "EXACT"
+     },
+     "f_2505_00AA": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 15,
+      "relocations": 0,
+      "reloc_order": "EXACT"
+     },
+     "f_2505_00DD": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 26,
+      "relocations": 2,
+      "reloc_order": "EXACT"
+     },
+     "win_AutoSize": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 29,
+      "relocations": 3,
+      "reloc_order": "GROUPED"
+     },
+     "win_WinRectAddr": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 4,
+      "relocations": 2,
+      "reloc_order": "EXACT"
+     },
+     "win_GetObjRect": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 3,
+      "relocations": 2,
+      "reloc_order": "EXACT"
+     },
+     "win_ObjAddr": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 7,
+      "relocations": 3,
+      "reloc_order": "GROUPED"
+     },
+     "f_2505_033C": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 1,
+      "relocations": 0,
+      "reloc_order": "EXACT"
+     },
+     "win_WinAddr": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 4,
+      "relocations": 2,
+      "reloc_order": "EXACT"
+     },
+     "f_2505_036E": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 2,
+      "relocations": 0,
+      "reloc_order": "EXACT"
+     },
+     "f_2505_0382": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 0,
+      "relocations": 0,
+      "reloc_order": "EXACT"
+     },
+     "f_2505_03B9": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 10,
+      "relocations": 1,
+      "reloc_order": "EXACT"
+     },
+     "f_2505_0453": {
+      "exact": false,
+      "reasons": [
+       "length 124 != target 132",
+       "bytes differ (first at +0x5, 80 differing)",
+       "relocation set differs (3 vs 3)"
+      ],
+      "fixups": 6,
+      "relocations": 3,
+      "reloc_order": "EXACT"
+     },
+     "f_2505_04D7": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 3,
+      "relocations": 0,
+      "reloc_order": "EXACT"
+     },
+     "f_2505_0511": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 0,
+      "relocations": 0,
+      "reloc_order": "EXACT"
+     },
+     "win_Recalc": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 8,
+      "relocations": 3,
+      "reloc_order": "GROUPED"
+     },
+     "f_2505_06B9": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 10,
+      "relocations": 10,
+      "reloc_order": "GROUPED"
+     },
+     "f_2505_0831": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 7,
+      "relocations": 5,
+      "reloc_order": "GROUPED"
+     },
+     "f_2505_08EA": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 6,
+      "relocations": 4,
+      "reloc_order": "GROUPED"
+     }
+    },
+    "exact": false,
+    "opaque_data": [],
+    "opaque_unmarked_bytes": 0,
+    "object_sha256": "21fce82ff3af12cd8fa9d95eb567ded80836c801967d1fe20bc24ef7bd1a3651",
+    "data": {
+     "CONST": {
+      "exact": true,
+      "reasons": [],
+      "size": 6,
+      "reloc_order": "GROUPED",
+      "start": 386420,
+      "class": "CONST",
+      "align": "word",
+      "far": false
+     },
+     "_DATA": {
+      "exact": true,
+      "reasons": [],
+      "size": 248,
+      "reloc_order": "EXACT",
+      "start": 377072,
+      "class": "DATA",
+      "align": "word",
+      "far": false
+     },
+     "_BSS": {
+      "exact": true,
+      "reasons": [],
+      "size": 4,
+      "kind": "BSS",
+      "start": 387332,
+      "align": "word"
+     }
+    },
+    "data_only": false,
+    "communals": [],
+    "scaffold": [],
+    "inplace_drafts": []
+   },
+   "claims": [
+    "f_2505_0006",
+    "RepointObjects",
+    "f_2505_00AA",
+    "f_2505_00DD",
+    "win_AutoSize",
+    "win_WinRectAddr",
+    "win_GetObjRect",
+    "win_ObjAddr",
+    "f_2505_033C",
+    "win_WinAddr",
+    "f_2505_036E",
+    "f_2505_0382",
+    "f_2505_03B9",
+    "f_2505_0453",
+    "f_2505_04D7",
+    "f_2505_0511",
+    "win_Recalc",
+    "f_2505_06B9",
+    "f_2505_0831",
+    "f_2505_08EA"
+   ],
+   "source_sha256_lf": "d22e1628d467f814803922775b959e1e0e61924590dadbf1877a0fd7b548677f"
+  },
+  {
+   "name": "table_local-before_w-before_guard-result0",
+   "file": "build\\workers\\ptr_root\\window-forms\\012_table_local-before_w-before_guard-result0.c",
+   "why": "Used object-table pointer represents the table base visible in target address arithmetic",
+   "result": {
+    "compile_ok": true,
+    "claims": {
+     "f_2505_0006": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 6,
+      "relocations": 2,
+      "reloc_order": "GROUPED"
+     },
+     "RepointObjects": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 1,
+      "relocations": 0,
+      "reloc_order": "EXACT"
+     },
+     "f_2505_00AA": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 15,
+      "relocations": 0,
+      "reloc_order": "EXACT"
+     },
+     "f_2505_00DD": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 26,
+      "relocations": 2,
+      "reloc_order": "EXACT"
+     },
+     "win_AutoSize": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 29,
+      "relocations": 3,
+      "reloc_order": "GROUPED"
+     },
+     "win_WinRectAddr": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 4,
+      "relocations": 2,
+      "reloc_order": "EXACT"
+     },
+     "win_GetObjRect": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 3,
+      "relocations": 2,
+      "reloc_order": "EXACT"
+     },
+     "win_ObjAddr": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 7,
+      "relocations": 3,
+      "reloc_order": "GROUPED"
+     },
+     "f_2505_033C": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 1,
+      "relocations": 0,
+      "reloc_order": "EXACT"
+     },
+     "win_WinAddr": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 4,
+      "relocations": 2,
+      "reloc_order": "EXACT"
+     },
+     "f_2505_036E": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 2,
+      "relocations": 0,
+      "reloc_order": "EXACT"
+     },
+     "f_2505_0382": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 0,
+      "relocations": 0,
+      "reloc_order": "EXACT"
+     },
+     "f_2505_03B9": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 10,
+      "relocations": 1,
+      "reloc_order": "EXACT"
+     },
+     "f_2505_0453": {
+      "exact": false,
+      "reasons": [
+       "length 133 != target 132",
+       "bytes differ (first at +0x5, 83 differing)",
+       "relocation set differs (3 vs 3)"
+      ],
+      "fixups": 6,
+      "relocations": 3,
+      "reloc_order": "EXACT"
+     },
+     "f_2505_04D7": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 3,
+      "relocations": 0,
+      "reloc_order": "EXACT"
+     },
+     "f_2505_0511": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 0,
+      "relocations": 0,
+      "reloc_order": "EXACT"
+     },
+     "win_Recalc": {
+      "exact": false,
+      "reasons": [
+       "length 375 != target 372",
+       "bytes differ (first at +0x41, 280 differing)",
+       "relocation set differs (3 vs 3)"
+      ],
+      "fixups": 8,
+      "relocations": 3,
+      "reloc_order": "EXACT"
+     },
+     "f_2505_06B9": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 10,
+      "relocations": 10,
+      "reloc_order": "GROUPED"
+     },
+     "f_2505_0831": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 7,
+      "relocations": 5,
+      "reloc_order": "GROUPED"
+     },
+     "f_2505_08EA": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 6,
+      "relocations": 4,
+      "reloc_order": "GROUPED"
+     }
+    },
+    "exact": false,
+    "opaque_data": [],
+    "opaque_unmarked_bytes": 0,
+    "object_sha256": "13c348725e1e5feb0107e2aa462f940241b63e6146cfc24bf7d26dcac6da9452",
+    "data": {
+     "CONST": {
+      "exact": true,
+      "reasons": [],
+      "size": 6,
+      "reloc_order": "GROUPED",
+      "start": 386420,
+      "class": "CONST",
+      "align": "word",
+      "far": false
+     },
+     "_DATA": {
+      "exact": true,
+      "reasons": [],
+      "size": 248,
+      "reloc_order": "EXACT",
+      "start": 377072,
+      "class": "DATA",
+      "align": "word",
+      "far": false
+     },
+     "_BSS": {
+      "exact": true,
+      "reasons": [],
+      "size": 4,
+      "kind": "BSS",
+      "start": 387332,
+      "align": "word"
+     }
+    },
+    "data_only": false,
+    "communals": [],
+    "scaffold": [],
+    "inplace_drafts": []
+   },
+   "claims": [
+    "f_2505_0006",
+    "RepointObjects",
+    "f_2505_00AA",
+    "f_2505_00DD",
+    "win_AutoSize",
+    "win_WinRectAddr",
+    "win_GetObjRect",
+    "win_ObjAddr",
+    "f_2505_033C",
+    "win_WinAddr",
+    "f_2505_036E",
+    "f_2505_0382",
+    "f_2505_03B9",
+    "f_2505_0453",
+    "f_2505_04D7",
+    "f_2505_0511",
+    "win_Recalc",
+    "f_2505_06B9",
+    "f_2505_0831",
+    "f_2505_08EA"
+   ],
+   "source_sha256_lf": "3561654ebc8f0b118fc476922d906ba704f9c0e979b8a817bba93249f9f2c4aa"
+  },
+  {
+   "name": "table_local-before_w-before_guard-result1",
+   "file": "build\\workers\\ptr_root\\window-forms\\013_table_local-before_w-before_guard-result1.c",
+   "why": "Used object-table pointer represents the table base visible in target address arithmetic",
+   "result": {
+    "compile_ok": true,
+    "claims": {
+     "f_2505_0006": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 6,
+      "relocations": 2,
+      "reloc_order": "GROUPED"
+     },
+     "RepointObjects": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 1,
+      "relocations": 0,
+      "reloc_order": "EXACT"
+     },
+     "f_2505_00AA": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 15,
+      "relocations": 0,
+      "reloc_order": "EXACT"
+     },
+     "f_2505_00DD": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 26,
+      "relocations": 2,
+      "reloc_order": "EXACT"
+     },
+     "win_AutoSize": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 29,
+      "relocations": 3,
+      "reloc_order": "GROUPED"
+     },
+     "win_WinRectAddr": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 4,
+      "relocations": 2,
+      "reloc_order": "EXACT"
+     },
+     "win_GetObjRect": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 3,
+      "relocations": 2,
+      "reloc_order": "EXACT"
+     },
+     "win_ObjAddr": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 7,
+      "relocations": 3,
+      "reloc_order": "GROUPED"
+     },
+     "f_2505_033C": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 1,
+      "relocations": 0,
+      "reloc_order": "EXACT"
+     },
+     "win_WinAddr": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 4,
+      "relocations": 2,
+      "reloc_order": "EXACT"
+     },
+     "f_2505_036E": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 2,
+      "relocations": 0,
+      "reloc_order": "EXACT"
+     },
+     "f_2505_0382": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 0,
+      "relocations": 0,
+      "reloc_order": "EXACT"
+     },
+     "f_2505_03B9": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 10,
+      "relocations": 1,
+      "reloc_order": "EXACT"
+     },
+     "f_2505_0453": {
+      "exact": false,
+      "reasons": [
+       "length 133 != target 132",
+       "bytes differ (first at +0x5, 83 differing)",
+       "relocation set differs (3 vs 3)"
+      ],
+      "fixups": 6,
+      "relocations": 3,
+      "reloc_order": "EXACT"
+     },
+     "f_2505_04D7": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 3,
+      "relocations": 0,
+      "reloc_order": "EXACT"
+     },
+     "f_2505_0511": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 0,
+      "relocations": 0,
+      "reloc_order": "EXACT"
+     },
+     "win_Recalc": {
+      "exact": false,
+      "reasons": [
+       "length 375 != target 372",
+       "bytes differ (first at +0x41, 280 differing)",
+       "relocation set differs (3 vs 3)"
+      ],
+      "fixups": 8,
+      "relocations": 3,
+      "reloc_order": "EXACT"
+     },
+     "f_2505_06B9": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 10,
+      "relocations": 10,
+      "reloc_order": "GROUPED"
+     },
+     "f_2505_0831": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 7,
+      "relocations": 5,
+      "reloc_order": "GROUPED"
+     },
+     "f_2505_08EA": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 6,
+      "relocations": 4,
+      "reloc_order": "GROUPED"
+     }
+    },
+    "exact": false,
+    "opaque_data": [],
+    "opaque_unmarked_bytes": 0,
+    "object_sha256": "13c348725e1e5feb0107e2aa462f940241b63e6146cfc24bf7d26dcac6da9452",
+    "data": {
+     "CONST": {
+      "exact": true,
+      "reasons": [],
+      "size": 6,
+      "reloc_order": "GROUPED",
+      "start": 386420,
+      "class": "CONST",
+      "align": "word",
+      "far": false
+     },
+     "_DATA": {
+      "exact": true,
+      "reasons": [],
+      "size": 248,
+      "reloc_order": "EXACT",
+      "start": 377072,
+      "class": "DATA",
+      "align": "word",
+      "far": false
+     },
+     "_BSS": {
+      "exact": true,
+      "reasons": [],
+      "size": 4,
+      "kind": "BSS",
+      "start": 387332,
+      "align": "word"
+     }
+    },
+    "data_only": false,
+    "communals": [],
+    "scaffold": [],
+    "inplace_drafts": []
+   },
+   "claims": [
+    "f_2505_0006",
+    "RepointObjects",
+    "f_2505_00AA",
+    "f_2505_00DD",
+    "win_AutoSize",
+    "win_WinRectAddr",
+    "win_GetObjRect",
+    "win_ObjAddr",
+    "f_2505_033C",
+    "win_WinAddr",
+    "f_2505_036E",
+    "f_2505_0382",
+    "f_2505_03B9",
+    "f_2505_0453",
+    "f_2505_04D7",
+    "f_2505_0511",
+    "win_Recalc",
+    "f_2505_06B9",
+    "f_2505_0831",
+    "f_2505_08EA"
+   ],
+   "source_sha256_lf": "966fc0be104fc7d8e3b75d0d921db6b124ad4baeaf80148678780fc7bd3804f3"
+  },
+  {
+   "name": "table_local-before_w-inside_guard-result0",
+   "file": "build\\workers\\ptr_root\\window-forms\\014_table_local-before_w-inside_guard-result0.c",
+   "why": "Used object-table pointer represents the table base visible in target address arithmetic",
+   "result": {
+    "compile_ok": true,
+    "claims": {
+     "f_2505_0006": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 6,
+      "relocations": 2,
+      "reloc_order": "GROUPED"
+     },
+     "RepointObjects": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 1,
+      "relocations": 0,
+      "reloc_order": "EXACT"
+     },
+     "f_2505_00AA": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 15,
+      "relocations": 0,
+      "reloc_order": "EXACT"
+     },
+     "f_2505_00DD": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 26,
+      "relocations": 2,
+      "reloc_order": "EXACT"
+     },
+     "win_AutoSize": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 29,
+      "relocations": 3,
+      "reloc_order": "GROUPED"
+     },
+     "win_WinRectAddr": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 4,
+      "relocations": 2,
+      "reloc_order": "EXACT"
+     },
+     "win_GetObjRect": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 3,
+      "relocations": 2,
+      "reloc_order": "EXACT"
+     },
+     "win_ObjAddr": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 7,
+      "relocations": 3,
+      "reloc_order": "GROUPED"
+     },
+     "f_2505_033C": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 1,
+      "relocations": 0,
+      "reloc_order": "EXACT"
+     },
+     "win_WinAddr": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 4,
+      "relocations": 2,
+      "reloc_order": "EXACT"
+     },
+     "f_2505_036E": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 2,
+      "relocations": 0,
+      "reloc_order": "EXACT"
+     },
+     "f_2505_0382": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 0,
+      "relocations": 0,
+      "reloc_order": "EXACT"
+     },
+     "f_2505_03B9": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 10,
+      "relocations": 1,
+      "reloc_order": "EXACT"
+     },
+     "f_2505_0453": {
+      "exact": false,
+      "reasons": [
+       "length 124 != target 132",
+       "bytes differ (first at +0x5, 80 differing)",
+       "relocation set differs (3 vs 3)"
+      ],
+      "fixups": 6,
+      "relocations": 3,
+      "reloc_order": "EXACT"
+     },
+     "f_2505_04D7": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 3,
+      "relocations": 0,
+      "reloc_order": "EXACT"
+     },
+     "f_2505_0511": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 0,
+      "relocations": 0,
+      "reloc_order": "EXACT"
+     },
+     "win_Recalc": {
+      "exact": false,
+      "reasons": [
+       "length 375 != target 372",
+       "bytes differ (first at +0x41, 280 differing)",
+       "relocation set differs (3 vs 3)"
+      ],
+      "fixups": 8,
+      "relocations": 3,
+      "reloc_order": "EXACT"
+     },
+     "f_2505_06B9": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 10,
+      "relocations": 10,
+      "reloc_order": "GROUPED"
+     },
+     "f_2505_0831": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 7,
+      "relocations": 5,
+      "reloc_order": "GROUPED"
+     },
+     "f_2505_08EA": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 6,
+      "relocations": 4,
+      "reloc_order": "GROUPED"
+     }
+    },
+    "exact": false,
+    "opaque_data": [],
+    "opaque_unmarked_bytes": 0,
+    "object_sha256": "bfa6dabc736b2cefc76b6c2a08e991590df6860e8e9bea31b6656b73de977793",
+    "data": {
+     "CONST": {
+      "exact": true,
+      "reasons": [],
+      "size": 6,
+      "reloc_order": "GROUPED",
+      "start": 386420,
+      "class": "CONST",
+      "align": "word",
+      "far": false
+     },
+     "_DATA": {
+      "exact": true,
+      "reasons": [],
+      "size": 248,
+      "reloc_order": "EXACT",
+      "start": 377072,
+      "class": "DATA",
+      "align": "word",
+      "far": false
+     },
+     "_BSS": {
+      "exact": true,
+      "reasons": [],
+      "size": 4,
+      "kind": "BSS",
+      "start": 387332,
+      "align": "word"
+     }
+    },
+    "data_only": false,
+    "communals": [],
+    "scaffold": [],
+    "inplace_drafts": []
+   },
+   "claims": [
+    "f_2505_0006",
+    "RepointObjects",
+    "f_2505_00AA",
+    "f_2505_00DD",
+    "win_AutoSize",
+    "win_WinRectAddr",
+    "win_GetObjRect",
+    "win_ObjAddr",
+    "f_2505_033C",
+    "win_WinAddr",
+    "f_2505_036E",
+    "f_2505_0382",
+    "f_2505_03B9",
+    "f_2505_0453",
+    "f_2505_04D7",
+    "f_2505_0511",
+    "win_Recalc",
+    "f_2505_06B9",
+    "f_2505_0831",
+    "f_2505_08EA"
+   ],
+   "source_sha256_lf": "ba2236d90999671b9eea329e299a7a8f36e556a4ac3240c45bf0bb11223f9537"
+  },
+  {
+   "name": "table_local-before_w-inside_guard-result1",
+   "file": "build\\workers\\ptr_root\\window-forms\\015_table_local-before_w-inside_guard-result1.c",
+   "why": "Used object-table pointer represents the table base visible in target address arithmetic",
+   "result": {
+    "compile_ok": true,
+    "claims": {
+     "f_2505_0006": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 6,
+      "relocations": 2,
+      "reloc_order": "GROUPED"
+     },
+     "RepointObjects": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 1,
+      "relocations": 0,
+      "reloc_order": "EXACT"
+     },
+     "f_2505_00AA": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 15,
+      "relocations": 0,
+      "reloc_order": "EXACT"
+     },
+     "f_2505_00DD": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 26,
+      "relocations": 2,
+      "reloc_order": "EXACT"
+     },
+     "win_AutoSize": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 29,
+      "relocations": 3,
+      "reloc_order": "GROUPED"
+     },
+     "win_WinRectAddr": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 4,
+      "relocations": 2,
+      "reloc_order": "EXACT"
+     },
+     "win_GetObjRect": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 3,
+      "relocations": 2,
+      "reloc_order": "EXACT"
+     },
+     "win_ObjAddr": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 7,
+      "relocations": 3,
+      "reloc_order": "GROUPED"
+     },
+     "f_2505_033C": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 1,
+      "relocations": 0,
+      "reloc_order": "EXACT"
+     },
+     "win_WinAddr": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 4,
+      "relocations": 2,
+      "reloc_order": "EXACT"
+     },
+     "f_2505_036E": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 2,
+      "relocations": 0,
+      "reloc_order": "EXACT"
+     },
+     "f_2505_0382": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 0,
+      "relocations": 0,
+      "reloc_order": "EXACT"
+     },
+     "f_2505_03B9": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 10,
+      "relocations": 1,
+      "reloc_order": "EXACT"
+     },
+     "f_2505_0453": {
+      "exact": false,
+      "reasons": [
+       "length 124 != target 132",
+       "bytes differ (first at +0x5, 80 differing)",
+       "relocation set differs (3 vs 3)"
+      ],
+      "fixups": 6,
+      "relocations": 3,
+      "reloc_order": "EXACT"
+     },
+     "f_2505_04D7": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 3,
+      "relocations": 0,
+      "reloc_order": "EXACT"
+     },
+     "f_2505_0511": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 0,
+      "relocations": 0,
+      "reloc_order": "EXACT"
+     },
+     "win_Recalc": {
+      "exact": false,
+      "reasons": [
+       "length 375 != target 372",
+       "bytes differ (first at +0x41, 280 differing)",
+       "relocation set differs (3 vs 3)"
+      ],
+      "fixups": 8,
+      "relocations": 3,
+      "reloc_order": "EXACT"
+     },
+     "f_2505_06B9": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 10,
+      "relocations": 10,
+      "reloc_order": "GROUPED"
+     },
+     "f_2505_0831": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 7,
+      "relocations": 5,
+      "reloc_order": "GROUPED"
+     },
+     "f_2505_08EA": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 6,
+      "relocations": 4,
+      "reloc_order": "GROUPED"
+     }
+    },
+    "exact": false,
+    "opaque_data": [],
+    "opaque_unmarked_bytes": 0,
+    "object_sha256": "bfa6dabc736b2cefc76b6c2a08e991590df6860e8e9bea31b6656b73de977793",
+    "data": {
+     "CONST": {
+      "exact": true,
+      "reasons": [],
+      "size": 6,
+      "reloc_order": "GROUPED",
+      "start": 386420,
+      "class": "CONST",
+      "align": "word",
+      "far": false
+     },
+     "_DATA": {
+      "exact": true,
+      "reasons": [],
+      "size": 248,
+      "reloc_order": "EXACT",
+      "start": 377072,
+      "class": "DATA",
+      "align": "word",
+      "far": false
+     },
+     "_BSS": {
+      "exact": true,
+      "reasons": [],
+      "size": 4,
+      "kind": "BSS",
+      "start": 387332,
+      "align": "word"
+     }
+    },
+    "data_only": false,
+    "communals": [],
+    "scaffold": [],
+    "inplace_drafts": []
+   },
+   "claims": [
+    "f_2505_0006",
+    "RepointObjects",
+    "f_2505_00AA",
+    "f_2505_00DD",
+    "win_AutoSize",
+    "win_WinRectAddr",
+    "win_GetObjRect",
+    "win_ObjAddr",
+    "f_2505_033C",
+    "win_WinAddr",
+    "f_2505_036E",
+    "f_2505_0382",
+    "f_2505_03B9",
+    "f_2505_0453",
+    "f_2505_04D7",
+    "f_2505_0511",
+    "win_Recalc",
+    "f_2505_06B9",
+    "f_2505_0831",
+    "f_2505_08EA"
+   ],
+   "source_sha256_lf": "df24ef46bad07a3ca60dca2abf9a09e0bdb9dde9b9ab890d1ebfc16b36962124"
+  },
+  {
+   "name": "table_local-after_r-before_guard-result0",
+   "file": "build\\workers\\ptr_root\\window-forms\\016_table_local-after_r-before_guard-result0.c",
+   "why": "Used object-table pointer represents the table base visible in target address arithmetic",
+   "result": {
+    "compile_ok": true,
+    "claims": {
+     "f_2505_0006": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 6,
+      "relocations": 2,
+      "reloc_order": "GROUPED"
+     },
+     "RepointObjects": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 1,
+      "relocations": 0,
+      "reloc_order": "EXACT"
+     },
+     "f_2505_00AA": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 15,
+      "relocations": 0,
+      "reloc_order": "EXACT"
+     },
+     "f_2505_00DD": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 26,
+      "relocations": 2,
+      "reloc_order": "EXACT"
+     },
+     "win_AutoSize": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 29,
+      "relocations": 3,
+      "reloc_order": "GROUPED"
+     },
+     "win_WinRectAddr": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 4,
+      "relocations": 2,
+      "reloc_order": "EXACT"
+     },
+     "win_GetObjRect": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 3,
+      "relocations": 2,
+      "reloc_order": "EXACT"
+     },
+     "win_ObjAddr": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 7,
+      "relocations": 3,
+      "reloc_order": "GROUPED"
+     },
+     "f_2505_033C": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 1,
+      "relocations": 0,
+      "reloc_order": "EXACT"
+     },
+     "win_WinAddr": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 4,
+      "relocations": 2,
+      "reloc_order": "EXACT"
+     },
+     "f_2505_036E": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 2,
+      "relocations": 0,
+      "reloc_order": "EXACT"
+     },
+     "f_2505_0382": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 0,
+      "relocations": 0,
+      "reloc_order": "EXACT"
+     },
+     "f_2505_03B9": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 10,
+      "relocations": 1,
+      "reloc_order": "EXACT"
+     },
+     "f_2505_0453": {
+      "exact": false,
+      "reasons": [
+       "length 133 != target 132",
+       "bytes differ (first at +0x5, 83 differing)",
+       "relocation set differs (3 vs 3)"
+      ],
+      "fixups": 6,
+      "relocations": 3,
+      "reloc_order": "EXACT"
+     },
+     "f_2505_04D7": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 3,
+      "relocations": 0,
+      "reloc_order": "EXACT"
+     },
+     "f_2505_0511": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 0,
+      "relocations": 0,
+      "reloc_order": "EXACT"
+     },
+     "win_Recalc": {
+      "exact": false,
+      "reasons": [
+       "length 375 != target 372",
+       "bytes differ (first at +0x41, 280 differing)",
+       "relocation set differs (3 vs 3)"
+      ],
+      "fixups": 8,
+      "relocations": 3,
+      "reloc_order": "EXACT"
+     },
+     "f_2505_06B9": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 10,
+      "relocations": 10,
+      "reloc_order": "GROUPED"
+     },
+     "f_2505_0831": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 7,
+      "relocations": 5,
+      "reloc_order": "GROUPED"
+     },
+     "f_2505_08EA": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 6,
+      "relocations": 4,
+      "reloc_order": "GROUPED"
+     }
+    },
+    "exact": false,
+    "opaque_data": [],
+    "opaque_unmarked_bytes": 0,
+    "object_sha256": "44ffc387ffd9ce64d009f3850bb87ebf1adbaeac65eb0c22326ca854b81c4e87",
+    "data": {
+     "CONST": {
+      "exact": true,
+      "reasons": [],
+      "size": 6,
+      "reloc_order": "GROUPED",
+      "start": 386420,
+      "class": "CONST",
+      "align": "word",
+      "far": false
+     },
+     "_DATA": {
+      "exact": true,
+      "reasons": [],
+      "size": 248,
+      "reloc_order": "EXACT",
+      "start": 377072,
+      "class": "DATA",
+      "align": "word",
+      "far": false
+     },
+     "_BSS": {
+      "exact": true,
+      "reasons": [],
+      "size": 4,
+      "kind": "BSS",
+      "start": 387332,
+      "align": "word"
+     }
+    },
+    "data_only": false,
+    "communals": [],
+    "scaffold": [],
+    "inplace_drafts": []
+   },
+   "claims": [
+    "f_2505_0006",
+    "RepointObjects",
+    "f_2505_00AA",
+    "f_2505_00DD",
+    "win_AutoSize",
+    "win_WinRectAddr",
+    "win_GetObjRect",
+    "win_ObjAddr",
+    "f_2505_033C",
+    "win_WinAddr",
+    "f_2505_036E",
+    "f_2505_0382",
+    "f_2505_03B9",
+    "f_2505_0453",
+    "f_2505_04D7",
+    "f_2505_0511",
+    "win_Recalc",
+    "f_2505_06B9",
+    "f_2505_0831",
+    "f_2505_08EA"
+   ],
+   "source_sha256_lf": "03ebfffa6b9f3de8fc0d56ffc6f9374e7741c170bfd99f587c0d404be1c38d72"
+  },
+  {
+   "name": "table_local-after_r-before_guard-result1",
+   "file": "build\\workers\\ptr_root\\window-forms\\017_table_local-after_r-before_guard-result1.c",
+   "why": "Used object-table pointer represents the table base visible in target address arithmetic",
+   "result": {
+    "compile_ok": true,
+    "claims": {
+     "f_2505_0006": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 6,
+      "relocations": 2,
+      "reloc_order": "GROUPED"
+     },
+     "RepointObjects": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 1,
+      "relocations": 0,
+      "reloc_order": "EXACT"
+     },
+     "f_2505_00AA": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 15,
+      "relocations": 0,
+      "reloc_order": "EXACT"
+     },
+     "f_2505_00DD": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 26,
+      "relocations": 2,
+      "reloc_order": "EXACT"
+     },
+     "win_AutoSize": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 29,
+      "relocations": 3,
+      "reloc_order": "GROUPED"
+     },
+     "win_WinRectAddr": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 4,
+      "relocations": 2,
+      "reloc_order": "EXACT"
+     },
+     "win_GetObjRect": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 3,
+      "relocations": 2,
+      "reloc_order": "EXACT"
+     },
+     "win_ObjAddr": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 7,
+      "relocations": 3,
+      "reloc_order": "GROUPED"
+     },
+     "f_2505_033C": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 1,
+      "relocations": 0,
+      "reloc_order": "EXACT"
+     },
+     "win_WinAddr": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 4,
+      "relocations": 2,
+      "reloc_order": "EXACT"
+     },
+     "f_2505_036E": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 2,
+      "relocations": 0,
+      "reloc_order": "EXACT"
+     },
+     "f_2505_0382": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 0,
+      "relocations": 0,
+      "reloc_order": "EXACT"
+     },
+     "f_2505_03B9": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 10,
+      "relocations": 1,
+      "reloc_order": "EXACT"
+     },
+     "f_2505_0453": {
+      "exact": false,
+      "reasons": [
+       "length 133 != target 132",
+       "bytes differ (first at +0x5, 83 differing)",
+       "relocation set differs (3 vs 3)"
+      ],
+      "fixups": 6,
+      "relocations": 3,
+      "reloc_order": "EXACT"
+     },
+     "f_2505_04D7": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 3,
+      "relocations": 0,
+      "reloc_order": "EXACT"
+     },
+     "f_2505_0511": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 0,
+      "relocations": 0,
+      "reloc_order": "EXACT"
+     },
+     "win_Recalc": {
+      "exact": false,
+      "reasons": [
+       "length 375 != target 372",
+       "bytes differ (first at +0x41, 280 differing)",
+       "relocation set differs (3 vs 3)"
+      ],
+      "fixups": 8,
+      "relocations": 3,
+      "reloc_order": "EXACT"
+     },
+     "f_2505_06B9": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 10,
+      "relocations": 10,
+      "reloc_order": "GROUPED"
+     },
+     "f_2505_0831": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 7,
+      "relocations": 5,
+      "reloc_order": "GROUPED"
+     },
+     "f_2505_08EA": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 6,
+      "relocations": 4,
+      "reloc_order": "GROUPED"
+     }
+    },
+    "exact": false,
+    "opaque_data": [],
+    "opaque_unmarked_bytes": 0,
+    "object_sha256": "44ffc387ffd9ce64d009f3850bb87ebf1adbaeac65eb0c22326ca854b81c4e87",
+    "data": {
+     "CONST": {
+      "exact": true,
+      "reasons": [],
+      "size": 6,
+      "reloc_order": "GROUPED",
+      "start": 386420,
+      "class": "CONST",
+      "align": "word",
+      "far": false
+     },
+     "_DATA": {
+      "exact": true,
+      "reasons": [],
+      "size": 248,
+      "reloc_order": "EXACT",
+      "start": 377072,
+      "class": "DATA",
+      "align": "word",
+      "far": false
+     },
+     "_BSS": {
+      "exact": true,
+      "reasons": [],
+      "size": 4,
+      "kind": "BSS",
+      "start": 387332,
+      "align": "word"
+     }
+    },
+    "data_only": false,
+    "communals": [],
+    "scaffold": [],
+    "inplace_drafts": []
+   },
+   "claims": [
+    "f_2505_0006",
+    "RepointObjects",
+    "f_2505_00AA",
+    "f_2505_00DD",
+    "win_AutoSize",
+    "win_WinRectAddr",
+    "win_GetObjRect",
+    "win_ObjAddr",
+    "f_2505_033C",
+    "win_WinAddr",
+    "f_2505_036E",
+    "f_2505_0382",
+    "f_2505_03B9",
+    "f_2505_0453",
+    "f_2505_04D7",
+    "f_2505_0511",
+    "win_Recalc",
+    "f_2505_06B9",
+    "f_2505_0831",
+    "f_2505_08EA"
+   ],
+   "source_sha256_lf": "e52a10beba1b58ca3618b67e56f2b9c6fd62ec3b3ecabaca21ed3ebd982d209f"
+  },
+  {
+   "name": "table_local-after_r-inside_guard-result0",
+   "file": "build\\workers\\ptr_root\\window-forms\\018_table_local-after_r-inside_guard-result0.c",
+   "why": "Used object-table pointer represents the table base visible in target address arithmetic",
+   "result": {
+    "compile_ok": true,
+    "claims": {
+     "f_2505_0006": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 6,
+      "relocations": 2,
+      "reloc_order": "GROUPED"
+     },
+     "RepointObjects": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 1,
+      "relocations": 0,
+      "reloc_order": "EXACT"
+     },
+     "f_2505_00AA": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 15,
+      "relocations": 0,
+      "reloc_order": "EXACT"
+     },
+     "f_2505_00DD": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 26,
+      "relocations": 2,
+      "reloc_order": "EXACT"
+     },
+     "win_AutoSize": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 29,
+      "relocations": 3,
+      "reloc_order": "GROUPED"
+     },
+     "win_WinRectAddr": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 4,
+      "relocations": 2,
+      "reloc_order": "EXACT"
+     },
+     "win_GetObjRect": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 3,
+      "relocations": 2,
+      "reloc_order": "EXACT"
+     },
+     "win_ObjAddr": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 7,
+      "relocations": 3,
+      "reloc_order": "GROUPED"
+     },
+     "f_2505_033C": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 1,
+      "relocations": 0,
+      "reloc_order": "EXACT"
+     },
+     "win_WinAddr": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 4,
+      "relocations": 2,
+      "reloc_order": "EXACT"
+     },
+     "f_2505_036E": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 2,
+      "relocations": 0,
+      "reloc_order": "EXACT"
+     },
+     "f_2505_0382": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 0,
+      "relocations": 0,
+      "reloc_order": "EXACT"
+     },
+     "f_2505_03B9": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 10,
+      "relocations": 1,
+      "reloc_order": "EXACT"
+     },
+     "f_2505_0453": {
+      "exact": false,
+      "reasons": [
+       "length 124 != target 132",
+       "bytes differ (first at +0x5, 80 differing)",
+       "relocation set differs (3 vs 3)"
+      ],
+      "fixups": 6,
+      "relocations": 3,
+      "reloc_order": "EXACT"
+     },
+     "f_2505_04D7": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 3,
+      "relocations": 0,
+      "reloc_order": "EXACT"
+     },
+     "f_2505_0511": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 0,
+      "relocations": 0,
+      "reloc_order": "EXACT"
+     },
+     "win_Recalc": {
+      "exact": false,
+      "reasons": [
+       "length 375 != target 372",
+       "bytes differ (first at +0x41, 280 differing)",
+       "relocation set differs (3 vs 3)"
+      ],
+      "fixups": 8,
+      "relocations": 3,
+      "reloc_order": "EXACT"
+     },
+     "f_2505_06B9": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 10,
+      "relocations": 10,
+      "reloc_order": "GROUPED"
+     },
+     "f_2505_0831": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 7,
+      "relocations": 5,
+      "reloc_order": "GROUPED"
+     },
+     "f_2505_08EA": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 6,
+      "relocations": 4,
+      "reloc_order": "GROUPED"
+     }
+    },
+    "exact": false,
+    "opaque_data": [],
+    "opaque_unmarked_bytes": 0,
+    "object_sha256": "b2c7e78b5f6ff47b5b0812a2dfa6510efc8231c0f1e4a63223e12a8ff1b30beb",
+    "data": {
+     "CONST": {
+      "exact": true,
+      "reasons": [],
+      "size": 6,
+      "reloc_order": "GROUPED",
+      "start": 386420,
+      "class": "CONST",
+      "align": "word",
+      "far": false
+     },
+     "_DATA": {
+      "exact": true,
+      "reasons": [],
+      "size": 248,
+      "reloc_order": "EXACT",
+      "start": 377072,
+      "class": "DATA",
+      "align": "word",
+      "far": false
+     },
+     "_BSS": {
+      "exact": true,
+      "reasons": [],
+      "size": 4,
+      "kind": "BSS",
+      "start": 387332,
+      "align": "word"
+     }
+    },
+    "data_only": false,
+    "communals": [],
+    "scaffold": [],
+    "inplace_drafts": []
+   },
+   "claims": [
+    "f_2505_0006",
+    "RepointObjects",
+    "f_2505_00AA",
+    "f_2505_00DD",
+    "win_AutoSize",
+    "win_WinRectAddr",
+    "win_GetObjRect",
+    "win_ObjAddr",
+    "f_2505_033C",
+    "win_WinAddr",
+    "f_2505_036E",
+    "f_2505_0382",
+    "f_2505_03B9",
+    "f_2505_0453",
+    "f_2505_04D7",
+    "f_2505_0511",
+    "win_Recalc",
+    "f_2505_06B9",
+    "f_2505_0831",
+    "f_2505_08EA"
+   ],
+   "source_sha256_lf": "ed519702e15a05e83edad9091bd03e742bf0bd6c9e1d5444c02cc6a6f738f76f"
+  },
+  {
+   "name": "table_local-after_r-inside_guard-result1",
+   "file": "build\\workers\\ptr_root\\window-forms\\019_table_local-after_r-inside_guard-result1.c",
+   "why": "Used object-table pointer represents the table base visible in target address arithmetic",
+   "result": {
+    "compile_ok": true,
+    "claims": {
+     "f_2505_0006": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 6,
+      "relocations": 2,
+      "reloc_order": "GROUPED"
+     },
+     "RepointObjects": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 1,
+      "relocations": 0,
+      "reloc_order": "EXACT"
+     },
+     "f_2505_00AA": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 15,
+      "relocations": 0,
+      "reloc_order": "EXACT"
+     },
+     "f_2505_00DD": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 26,
+      "relocations": 2,
+      "reloc_order": "EXACT"
+     },
+     "win_AutoSize": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 29,
+      "relocations": 3,
+      "reloc_order": "GROUPED"
+     },
+     "win_WinRectAddr": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 4,
+      "relocations": 2,
+      "reloc_order": "EXACT"
+     },
+     "win_GetObjRect": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 3,
+      "relocations": 2,
+      "reloc_order": "EXACT"
+     },
+     "win_ObjAddr": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 7,
+      "relocations": 3,
+      "reloc_order": "GROUPED"
+     },
+     "f_2505_033C": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 1,
+      "relocations": 0,
+      "reloc_order": "EXACT"
+     },
+     "win_WinAddr": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 4,
+      "relocations": 2,
+      "reloc_order": "EXACT"
+     },
+     "f_2505_036E": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 2,
+      "relocations": 0,
+      "reloc_order": "EXACT"
+     },
+     "f_2505_0382": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 0,
+      "relocations": 0,
+      "reloc_order": "EXACT"
+     },
+     "f_2505_03B9": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 10,
+      "relocations": 1,
+      "reloc_order": "EXACT"
+     },
+     "f_2505_0453": {
+      "exact": false,
+      "reasons": [
+       "length 124 != target 132",
+       "bytes differ (first at +0x5, 80 differing)",
+       "relocation set differs (3 vs 3)"
+      ],
+      "fixups": 6,
+      "relocations": 3,
+      "reloc_order": "EXACT"
+     },
+     "f_2505_04D7": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 3,
+      "relocations": 0,
+      "reloc_order": "EXACT"
+     },
+     "f_2505_0511": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 0,
+      "relocations": 0,
+      "reloc_order": "EXACT"
+     },
+     "win_Recalc": {
+      "exact": false,
+      "reasons": [
+       "length 375 != target 372",
+       "bytes differ (first at +0x41, 280 differing)",
+       "relocation set differs (3 vs 3)"
+      ],
+      "fixups": 8,
+      "relocations": 3,
+      "reloc_order": "EXACT"
+     },
+     "f_2505_06B9": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 10,
+      "relocations": 10,
+      "reloc_order": "GROUPED"
+     },
+     "f_2505_0831": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 7,
+      "relocations": 5,
+      "reloc_order": "GROUPED"
+     },
+     "f_2505_08EA": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 6,
+      "relocations": 4,
+      "reloc_order": "GROUPED"
+     }
+    },
+    "exact": false,
+    "opaque_data": [],
+    "opaque_unmarked_bytes": 0,
+    "object_sha256": "b2c7e78b5f6ff47b5b0812a2dfa6510efc8231c0f1e4a63223e12a8ff1b30beb",
+    "data": {
+     "CONST": {
+      "exact": true,
+      "reasons": [],
+      "size": 6,
+      "reloc_order": "GROUPED",
+      "start": 386420,
+      "class": "CONST",
+      "align": "word",
+      "far": false
+     },
+     "_DATA": {
+      "exact": true,
+      "reasons": [],
+      "size": 248,
+      "reloc_order": "EXACT",
+      "start": 377072,
+      "class": "DATA",
+      "align": "word",
+      "far": false
+     },
+     "_BSS": {
+      "exact": true,
+      "reasons": [],
+      "size": 4,
+      "kind": "BSS",
+      "start": 387332,
+      "align": "word"
+     }
+    },
+    "data_only": false,
+    "communals": [],
+    "scaffold": [],
+    "inplace_drafts": []
+   },
+   "claims": [
+    "f_2505_0006",
+    "RepointObjects",
+    "f_2505_00AA",
+    "f_2505_00DD",
+    "win_AutoSize",
+    "win_WinRectAddr",
+    "win_GetObjRect",
+    "win_ObjAddr",
+    "f_2505_033C",
+    "win_WinAddr",
+    "f_2505_036E",
+    "f_2505_0382",
+    "f_2505_03B9",
+    "f_2505_0453",
+    "f_2505_04D7",
+    "f_2505_0511",
+    "win_Recalc",
+    "f_2505_06B9",
+    "f_2505_0831",
+    "f_2505_08EA"
+   ],
+   "source_sha256_lf": "615dcf7aa718002d5988a17ecfff1c57d0a75ae13f3fb1051f7b0d788247ad0a"
+  }
+ ]
+}

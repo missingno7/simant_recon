@@ -1,0 +1,22 @@
+[010_stage1-factor0-pointer0.c] MISMATCH: length 233 != target 232; bytes differ (first at +0xb, 214 differing); relocation set differs (3 vs 3)  (opcode similarity 0.958, 95 vs 95 insns)
+      ... 6 equal instructions ...
+  !                                          | 0170 mov es, word ptr [0x8a8c]
+  !                                          | 0174 add di, word ptr es:[0x4b16]
+    0170 mov ax, 6                           | 0179 mov ax, 6
+    0173 imul word ptr [bp + 6]              | 017C imul word ptr [bp + 6]
+    0176 mov bx, ax                          | 017F mov bx, ax
+  ! 0178 mov es, word ptr [0x8a8c]           | 0181 mov es, word ptr [0x8a8e]
+    017C les bx, ptr es:[bx + 2]             | 0185 les bx, ptr es:[bx + 2]
+    0181 mov word ptr [bp - 8], bx           | 018A mov word ptr [bp - 8], bx
+    0184 mov word ptr [bp - 6], es           | 018D mov word ptr [bp - 6], es
+  ! 0187 mov ax, word ptr es:[bx + 0xd]      | 0190 add di, word ptr es:[bx + 0xd]
+  ! 018B mov es, word ptr [0x8a8e]           |
+  ! 018F add ax, word ptr es:[0x4b16]        |
+  ! 0194 add di, ax                          |
+      ... 14 equal instructions ...
+  ! 01BD not cx                              | 01BB and cl, 0x3f
+  ! 01BF and cx, 0x3f                        | 01BE xor cl, 0x3f
+      ... 62 equal instructions ...
+  !                                          | 024C retf
+  relocations expected ['0x28393', '0x28370', '0x28335']
+  relocations candidate ['0x28394', '0x28371', '0x28336']

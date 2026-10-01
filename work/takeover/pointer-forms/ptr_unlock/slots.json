@@ -1,0 +1,144 @@
+{
+ "func": "win_UnlockWin",
+ "summary": "MISMATCH: length 390 != target 386; bytes differ (first at +0x5, 207 differing); relocation set differs (7 vs 7)",
+ "map": {
+  "-0x22": {
+   "names": [],
+   "to": {
+    "-0x1e": 1
+   },
+   "verdict": "MOVED"
+  },
+  "-0x20": {
+   "names": [
+    "h"
+   ],
+   "to": {
+    "-0x1c": 3
+   },
+   "verdict": "MOVED"
+  },
+  "-0x1e": {
+   "names": [],
+   "to": {
+    "-0x1a": 8
+   },
+   "verdict": "MOVED"
+  },
+  "-0x1c": {
+   "names": [
+    "w"
+   ],
+   "to": {
+    "-0x18": 3
+   },
+   "verdict": "MOVED"
+  },
+  "-0x1a": {
+   "names": [],
+   "to": {
+    "-0x16": 1
+   },
+   "verdict": "MOVED"
+  },
+  "-0x14": {
+   "names": [
+    "n"
+   ],
+   "to": {
+    "-0x10": 5
+   },
+   "verdict": "MOVED"
+  },
+  "-0x0a": {
+   "names": [
+    "i"
+   ],
+   "to": {
+    "-0x0a": 3
+   },
+   "verdict": "same"
+  },
+  "-0x06": {
+   "names": [],
+   "to": {
+    "-0x02": 1
+   },
+   "verdict": "MOVED"
+  }
+ },
+ "swaps": [],
+ "exchanges": [],
+ "unmatched_orig": [],
+ "regs": {},
+ "other": [
+  [
+   "01DE sub sp, 0x20",
+   "01DE sub sp, 0x1c"
+  ],
+  [
+   "028E les bx, ptr es:[bx + si + 0x2c]",
+   "028E add bx, 0x2c"
+  ],
+  [
+   "",
+   "0291 les bx, ptr es:[bx + si]"
+  ],
+  [
+   "",
+   "0294 mov di, bx"
+  ],
+  [
+   "02AC mov ax, bx",
+   "02B0 lea bx, [di + 0x34]"
+  ],
+  [
+   "02AE mov dx, es",
+   ""
+  ],
+  [
+   "02B0 add ax, 0x34",
+   ""
+  ],
+  [
+   "02B5 mov ax, bx",
+   "02B5 lea bx, [di + 0x2a]"
+  ],
+  [
+   "02B7 mov dx, es",
+   "02B8 mov si, bx"
+  ],
+  [
+   "02B9 add ax, 0x2a",
+   "02BA mov word ptr [bp - 2], es"
+  ],
+  [
+   "02BC mov si, ax",
+   "02BD mov ax, word ptr es:[bx + 2]"
+  ],
+  [
+   "02BE mov word ptr [bp - 6], dx",
+   "02C1 or ax, word ptr es:[bx]"
+  ],
+  [
+   "02C1 mov ax, word ptr es:[si + 2]",
+   ""
+  ],
+  [
+   "02C5 or ax, word ptr es:[si]",
+   ""
+  ],
+  [
+   "",
+   "0359 mov sp, bp"
+  ],
+  [
+   "",
+   "035B pop bp"
+  ],
+  [
+   "",
+   "035C retf"
+  ]
+ ]
+}

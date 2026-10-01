@@ -1,0 +1,51 @@
+[m2815.c] MISMATCH: length 246 != target 232; bytes differ (first at +0x6, 226 differing); relocation set differs (2 vs 3)  (opcode similarity 0.880, 89 vs 95 insns)
+    0165 push bp                             | 0165 push bp
+    0166 mov bp, sp                          | 0166 mov bp, sp
+    0168 sub sp, 0xa                         | 0168 sub sp, 0xa
+  !                                          | 016B push di
+    016B push si                             | 016C push si
+  ! 016C mov bx, word ptr [bp + 0xa]         | 016D mov di, word ptr [bp + 0xa]
+    016F mov es, word ptr [0x8a8c]           | 0170 mov es, word ptr [0x8a8c]
+  ! 0173 add bx, word ptr es:[0x4b16]        | 0174 add di, word ptr es:[0x4b16]
+    0178 mov ax, 6                           | 0179 mov ax, 6
+    017B imul word ptr [bp + 6]              | 017C imul word ptr [bp + 6]
+  ! 017E mov si, ax                          | 017F mov bx, ax
+    0180 mov es, word ptr [0x8a8e]           | 0181 mov es, word ptr [0x8a8e]
+  ! 0184 mov ax, word ptr es:[si + 2]        | 0185 les bx, ptr es:[bx + 2]
+  ! 0189 mov dx, word ptr es:[si + 4]        | 018A mov word ptr [bp - 8], bx
+  ! 018E mov word ptr [bp - 8], ax           | 018D mov word ptr [bp - 6], es
+  ! 0191 mov word ptr [bp - 6], dx           | 0190 add di, word ptr es:[bx + 0xd]
+  ! 0194 mov es, dx                          |
+  ! 0196 mov si, ax                          |
+  ! 0198 add bx, word ptr es:[si + 0xd]      |
+    019C jns 0x1a0                           | 0194 jns 0x198
+  ! 019E sub bx, bx                          | 0196 sub di, di
+  ! 01A0 mov word ptr [bp + 0xa], bx         | 0198 cmp di, 0x7f
+  ! 01A3 cmp bx, 0x7f                        | 019B jle 0x1a0
+  ! 01A6 jle 0x1ad                           | 019D mov di, 0x7f
+  ! 01A8 mov word ptr [bp + 0xa], 0x7f       |
+    01AD mov ax, 0x3f                        | 01A0 mov ax, 0x3f
+    01B0 mov es, word ptr [0x8a90]           | 01A3 mov es, word ptr [0x8a90]
+  ! 01B4 mov bx, word ptr [bp + 0xa]         | 01A7 shl di, 1
+  ! 01B7 shl bx, 1                           | 01A9 mov cl, byte ptr es:[di + 0x6ba4]
+  ! 01B9 mov cl, byte ptr es:[bx + 0x6ba4]   |
+    01BE sub ch, ch                          | 01AE sub ch, ch
+    01C0 sub ax, cx                          | 01B0 sub ax, cx
+  ! 01C2 les bx, ptr [bp - 8]                | 01B2 mov es, word ptr [bp - 6]
+    01C5 mov cl, byte ptr es:[bx + 2]        | 01B5 mov cl, byte ptr es:[bx + 2]
+    01C9 mov dx, cx                          | 01B9 mov dx, cx
+  ! 01CB not cx                              | 01BB and cl, 0x3f
+  ! 01CD and cx, 0x3f                        | 01BE xor cl, 0x3f
+      ... 53 equal instructions ...
+  !                                          | 023D sub al, 0x50
+  !                                          | 023F push ax
+  !                                          | 0240 lcall 0x283e, 0xa
+  !                                          | 0245 pop bx
+  !                                          | 0246 pop bx
+  !                                          | 0247 pop si
+  !                                          | 0248 pop di
+  !                                          | 0249 mov sp, bp
+  !                                          | 024B pop bp
+  !                                          | 024C retf
+  relocations expected ['0x28393', '0x28370', '0x28335']
+  relocations candidate ['0x2837f', '0x28344']

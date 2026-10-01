@@ -1,0 +1,5263 @@
+{
+ "target": "f_20E8_0903",
+ "module": "root:20E8",
+ "seed_sha256_search_text": "e9f7805d6d353e1d3d432cd146073bae6bb8ec0be13b20e3543a3895e2a1ef49",
+ "generated_count": 40,
+ "search_rows_found": 40,
+ "verify_only_command": "python tools/promote.py CANDIDATE --module root:20E8 --claim f_20E8_0903 --verify-only",
+ "limits": {
+  "generated_max": 40,
+  "parallel_jobs": 1
+ },
+ "results": [
+  {
+   "name": "base_addr_origin",
+   "source": "build/workers/ptr_small/variants/base_addr_origin.c",
+   "source_sha256_file_bytes": "26eaf4d3e3130ace638a7fe3c5c3430da44865aa696639d3c62b87fefb96162e",
+   "source_sha256_search_text": "26eaf4d3e3130ace638a7fe3c5c3430da44865aa696639d3c62b87fefb96162e",
+   "search": {
+    "status": "MISMATCH",
+    "reasons": [
+     "length 280 != target 286",
+     "bytes differ (first at +0x5, 158 differing)",
+     "relocation set differs (6 vs 6)"
+    ],
+    "opcode_ratio": 0.9856,
+    "first_diff_insn": 2,
+    "profile": "msc600ax",
+    "flags": [
+     "/AL",
+     "/Os",
+     "/Oe",
+     "/Og",
+     "/Gs",
+     "/Zi"
+    ]
+   },
+   "verify_only_exit_code": 1,
+   "accepted_peers_exact": true,
+   "accepted_peer_rows": [
+    {
+     "name": "f_20E8_0000",
+     "status": "EXACT",
+     "detail": "(reloc order EXACT)"
+    },
+    {
+     "name": "win_LoadAllWindows",
+     "status": "EXACT",
+     "detail": "(reloc order GROUPED)"
+    },
+    {
+     "name": "win_Swap",
+     "status": "EXACT",
+     "detail": "(reloc order GROUPED)"
+    },
+    {
+     "name": "win_Close",
+     "status": "EXACT",
+     "detail": "(reloc order GROUPED)"
+    },
+    {
+     "name": "f_20E8_0725",
+     "status": "EXACT",
+     "detail": "(reloc order GROUPED)"
+    },
+    {
+     "name": "f_20E8_0776",
+     "status": "EXACT",
+     "detail": "(reloc order GROUPED)"
+    },
+    {
+     "name": "win_SetWinDrawHook",
+     "status": "EXACT",
+     "detail": "(reloc order EXACT)"
+    },
+    {
+     "name": "f_20E8_088B",
+     "status": "EXACT",
+     "detail": "(reloc order EXACT)"
+    },
+    {
+     "name": "f_20E8_089F",
+     "status": "EXACT",
+     "detail": "(reloc order EXACT)"
+    },
+    {
+     "name": "f_20E8_08B3",
+     "status": "EXACT",
+     "detail": "(reloc order EXACT)"
+    },
+    {
+     "name": "f_20E8_08C7",
+     "status": "EXACT",
+     "detail": "(reloc order EXACT)"
+    },
+    {
+     "name": "f_20E8_08DB",
+     "status": "EXACT",
+     "detail": "(reloc order EXACT)"
+    },
+    {
+     "name": "f_20E8_08EF",
+     "status": "EXACT",
+     "detail": "(reloc order EXACT)"
+    },
+    {
+     "name": "f_20E8_0A21",
+     "status": "EXACT",
+     "detail": "(reloc order GROUPED)"
+    },
+    {
+     "name": "win_LoadWindow",
+     "status": "EXACT",
+     "detail": "(reloc order GROUPED)"
+    },
+    {
+     "name": "win_Open",
+     "status": "EXACT",
+     "detail": "(reloc order GROUPED)"
+    }
+   ],
+   "private_data_exact": true,
+   "private_data_rows": [
+    {
+     "name": "_DATA",
+     "status": "EXACT",
+     "detail": "(132 bytes, relocation order EXACT)"
+    },
+    {
+     "name": "CONST",
+     "status": "EXACT",
+     "detail": "(14 bytes, relocation order GROUPED)"
+    }
+   ],
+   "candidate_exact": false,
+   "target_rows": [
+    {
+     "name": "f_20E8_0903",
+     "status": "FAIL",
+     "detail": "length 280 != target 286; bytes differ (first at +0x5, 158 differing); relocation set differs (6 vs 6)"
+    }
+   ],
+   "refused": true
+  },
+  {
+   "name": "base_addr_mode",
+   "source": "build/workers/ptr_small/variants/base_addr_mode.c",
+   "source_sha256_file_bytes": "3a3cd613ebbbe468158d10eda11281368317919a357e4a64d08e03192f5dc3a9",
+   "source_sha256_search_text": "3a3cd613ebbbe468158d10eda11281368317919a357e4a64d08e03192f5dc3a9",
+   "search": {
+    "status": "MISMATCH",
+    "reasons": [
+     "length 280 != target 286",
+     "bytes differ (first at +0x5, 158 differing)",
+     "relocation set differs (6 vs 6)"
+    ],
+    "opcode_ratio": 0.9856,
+    "first_diff_insn": 2,
+    "profile": "msc600ax",
+    "flags": [
+     "/AL",
+     "/Os",
+     "/Oe",
+     "/Og",
+     "/Gs",
+     "/Zi"
+    ]
+   },
+   "verify_only_exit_code": 1,
+   "accepted_peers_exact": true,
+   "accepted_peer_rows": [
+    {
+     "name": "f_20E8_0000",
+     "status": "EXACT",
+     "detail": "(reloc order EXACT)"
+    },
+    {
+     "name": "win_LoadAllWindows",
+     "status": "EXACT",
+     "detail": "(reloc order GROUPED)"
+    },
+    {
+     "name": "win_Swap",
+     "status": "EXACT",
+     "detail": "(reloc order GROUPED)"
+    },
+    {
+     "name": "win_Close",
+     "status": "EXACT",
+     "detail": "(reloc order GROUPED)"
+    },
+    {
+     "name": "f_20E8_0725",
+     "status": "EXACT",
+     "detail": "(reloc order GROUPED)"
+    },
+    {
+     "name": "f_20E8_0776",
+     "status": "EXACT",
+     "detail": "(reloc order GROUPED)"
+    },
+    {
+     "name": "win_SetWinDrawHook",
+     "status": "EXACT",
+     "detail": "(reloc order EXACT)"
+    },
+    {
+     "name": "f_20E8_088B",
+     "status": "EXACT",
+     "detail": "(reloc order EXACT)"
+    },
+    {
+     "name": "f_20E8_089F",
+     "status": "EXACT",
+     "detail": "(reloc order EXACT)"
+    },
+    {
+     "name": "f_20E8_08B3",
+     "status": "EXACT",
+     "detail": "(reloc order EXACT)"
+    },
+    {
+     "name": "f_20E8_08C7",
+     "status": "EXACT",
+     "detail": "(reloc order EXACT)"
+    },
+    {
+     "name": "f_20E8_08DB",
+     "status": "EXACT",
+     "detail": "(reloc order EXACT)"
+    },
+    {
+     "name": "f_20E8_08EF",
+     "status": "EXACT",
+     "detail": "(reloc order EXACT)"
+    },
+    {
+     "name": "f_20E8_0A21",
+     "status": "EXACT",
+     "detail": "(reloc order GROUPED)"
+    },
+    {
+     "name": "win_LoadWindow",
+     "status": "EXACT",
+     "detail": "(reloc order GROUPED)"
+    },
+    {
+     "name": "win_Open",
+     "status": "EXACT",
+     "detail": "(reloc order GROUPED)"
+    }
+   ],
+   "private_data_exact": true,
+   "private_data_rows": [
+    {
+     "name": "_DATA",
+     "status": "EXACT",
+     "detail": "(132 bytes, relocation order EXACT)"
+    },
+    {
+     "name": "CONST",
+     "status": "EXACT",
+     "detail": "(14 bytes, relocation order GROUPED)"
+    }
+   ],
+   "candidate_exact": false,
+   "target_rows": [
+    {
+     "name": "f_20E8_0903",
+     "status": "FAIL",
+     "detail": "length 280 != target 286; bytes differ (first at +0x5, 158 differing); relocation set differs (6 vs 6)"
+    }
+   ],
+   "refused": true
+  },
+  {
+   "name": "base_addr_origin_mode",
+   "source": "build/workers/ptr_small/variants/base_addr_origin_mode.c",
+   "source_sha256_file_bytes": "f3ad2dcf77bc29a0bde4f23989a6a623b679428c1ca18239b18dc6ec067f3075",
+   "source_sha256_search_text": "f3ad2dcf77bc29a0bde4f23989a6a623b679428c1ca18239b18dc6ec067f3075",
+   "search": {
+    "status": "MISMATCH",
+    "reasons": [
+     "length 280 != target 286",
+     "bytes differ (first at +0x5, 158 differing)",
+     "relocation set differs (6 vs 6)"
+    ],
+    "opcode_ratio": 0.9856,
+    "first_diff_insn": 2,
+    "profile": "msc600ax",
+    "flags": [
+     "/AL",
+     "/Os",
+     "/Oe",
+     "/Og",
+     "/Gs",
+     "/Zi"
+    ]
+   },
+   "verify_only_exit_code": 1,
+   "accepted_peers_exact": true,
+   "accepted_peer_rows": [
+    {
+     "name": "f_20E8_0000",
+     "status": "EXACT",
+     "detail": "(reloc order EXACT)"
+    },
+    {
+     "name": "win_LoadAllWindows",
+     "status": "EXACT",
+     "detail": "(reloc order GROUPED)"
+    },
+    {
+     "name": "win_Swap",
+     "status": "EXACT",
+     "detail": "(reloc order GROUPED)"
+    },
+    {
+     "name": "win_Close",
+     "status": "EXACT",
+     "detail": "(reloc order GROUPED)"
+    },
+    {
+     "name": "f_20E8_0725",
+     "status": "EXACT",
+     "detail": "(reloc order GROUPED)"
+    },
+    {
+     "name": "f_20E8_0776",
+     "status": "EXACT",
+     "detail": "(reloc order GROUPED)"
+    },
+    {
+     "name": "win_SetWinDrawHook",
+     "status": "EXACT",
+     "detail": "(reloc order EXACT)"
+    },
+    {
+     "name": "f_20E8_088B",
+     "status": "EXACT",
+     "detail": "(reloc order EXACT)"
+    },
+    {
+     "name": "f_20E8_089F",
+     "status": "EXACT",
+     "detail": "(reloc order EXACT)"
+    },
+    {
+     "name": "f_20E8_08B3",
+     "status": "EXACT",
+     "detail": "(reloc order EXACT)"
+    },
+    {
+     "name": "f_20E8_08C7",
+     "status": "EXACT",
+     "detail": "(reloc order EXACT)"
+    },
+    {
+     "name": "f_20E8_08DB",
+     "status": "EXACT",
+     "detail": "(reloc order EXACT)"
+    },
+    {
+     "name": "f_20E8_08EF",
+     "status": "EXACT",
+     "detail": "(reloc order EXACT)"
+    },
+    {
+     "name": "f_20E8_0A21",
+     "status": "EXACT",
+     "detail": "(reloc order GROUPED)"
+    },
+    {
+     "name": "win_LoadWindow",
+     "status": "EXACT",
+     "detail": "(reloc order GROUPED)"
+    },
+    {
+     "name": "win_Open",
+     "status": "EXACT",
+     "detail": "(reloc order GROUPED)"
+    }
+   ],
+   "private_data_exact": true,
+   "private_data_rows": [
+    {
+     "name": "_DATA",
+     "status": "EXACT",
+     "detail": "(132 bytes, relocation order EXACT)"
+    },
+    {
+     "name": "CONST",
+     "status": "EXACT",
+     "detail": "(14 bytes, relocation order GROUPED)"
+    }
+   ],
+   "candidate_exact": false,
+   "target_rows": [
+    {
+     "name": "f_20E8_0903",
+     "status": "FAIL",
+     "detail": "length 280 != target 286; bytes differ (first at +0x5, 158 differing); relocation set differs (6 vs 6)"
+    }
+   ],
+   "refused": true
+  },
+  {
+   "name": "base_addr_ref",
+   "source": "build/workers/ptr_small/variants/base_addr_ref.c",
+   "source_sha256_file_bytes": "9cc7f360fd347e914fef6a0a2881f2e7ae53fac9dccd8b369caffaa0ad480098",
+   "source_sha256_search_text": "9cc7f360fd347e914fef6a0a2881f2e7ae53fac9dccd8b369caffaa0ad480098",
+   "search": {
+    "status": "MISMATCH",
+    "reasons": [
+     "length 280 != target 286",
+     "bytes differ (first at +0x5, 158 differing)",
+     "relocation set differs (6 vs 6)"
+    ],
+    "opcode_ratio": 0.9856,
+    "first_diff_insn": 2,
+    "profile": "msc600ax",
+    "flags": [
+     "/AL",
+     "/Os",
+     "/Oe",
+     "/Og",
+     "/Gs",
+     "/Zi"
+    ]
+   },
+   "verify_only_exit_code": 1,
+   "accepted_peers_exact": true,
+   "accepted_peer_rows": [
+    {
+     "name": "f_20E8_0000",
+     "status": "EXACT",
+     "detail": "(reloc order EXACT)"
+    },
+    {
+     "name": "win_LoadAllWindows",
+     "status": "EXACT",
+     "detail": "(reloc order GROUPED)"
+    },
+    {
+     "name": "win_Swap",
+     "status": "EXACT",
+     "detail": "(reloc order GROUPED)"
+    },
+    {
+     "name": "win_Close",
+     "status": "EXACT",
+     "detail": "(reloc order GROUPED)"
+    },
+    {
+     "name": "f_20E8_0725",
+     "status": "EXACT",
+     "detail": "(reloc order GROUPED)"
+    },
+    {
+     "name": "f_20E8_0776",
+     "status": "EXACT",
+     "detail": "(reloc order GROUPED)"
+    },
+    {
+     "name": "win_SetWinDrawHook",
+     "status": "EXACT",
+     "detail": "(reloc order EXACT)"
+    },
+    {
+     "name": "f_20E8_088B",
+     "status": "EXACT",
+     "detail": "(reloc order EXACT)"
+    },
+    {
+     "name": "f_20E8_089F",
+     "status": "EXACT",
+     "detail": "(reloc order EXACT)"
+    },
+    {
+     "name": "f_20E8_08B3",
+     "status": "EXACT",
+     "detail": "(reloc order EXACT)"
+    },
+    {
+     "name": "f_20E8_08C7",
+     "status": "EXACT",
+     "detail": "(reloc order EXACT)"
+    },
+    {
+     "name": "f_20E8_08DB",
+     "status": "EXACT",
+     "detail": "(reloc order EXACT)"
+    },
+    {
+     "name": "f_20E8_08EF",
+     "status": "EXACT",
+     "detail": "(reloc order EXACT)"
+    },
+    {
+     "name": "f_20E8_0A21",
+     "status": "EXACT",
+     "detail": "(reloc order GROUPED)"
+    },
+    {
+     "name": "win_LoadWindow",
+     "status": "EXACT",
+     "detail": "(reloc order GROUPED)"
+    },
+    {
+     "name": "win_Open",
+     "status": "EXACT",
+     "detail": "(reloc order GROUPED)"
+    }
+   ],
+   "private_data_exact": true,
+   "private_data_rows": [
+    {
+     "name": "_DATA",
+     "status": "EXACT",
+     "detail": "(132 bytes, relocation order EXACT)"
+    },
+    {
+     "name": "CONST",
+     "status": "EXACT",
+     "detail": "(14 bytes, relocation order GROUPED)"
+    }
+   ],
+   "candidate_exact": false,
+   "target_rows": [
+    {
+     "name": "f_20E8_0903",
+     "status": "FAIL",
+     "detail": "length 280 != target 286; bytes differ (first at +0x5, 158 differing); relocation set differs (6 vs 6)"
+    }
+   ],
+   "refused": true
+  },
+  {
+   "name": "base_addr_origin_ref",
+   "source": "build/workers/ptr_small/variants/base_addr_origin_ref.c",
+   "source_sha256_file_bytes": "edd5dc551c7e142d8f860727dbf92de7efeaed038ed424a63190f940ecb535cc",
+   "source_sha256_search_text": "edd5dc551c7e142d8f860727dbf92de7efeaed038ed424a63190f940ecb535cc",
+   "search": {
+    "status": "MISMATCH",
+    "reasons": [
+     "length 280 != target 286",
+     "bytes differ (first at +0x5, 158 differing)",
+     "relocation set differs (6 vs 6)"
+    ],
+    "opcode_ratio": 0.9856,
+    "first_diff_insn": 2,
+    "profile": "msc600ax",
+    "flags": [
+     "/AL",
+     "/Os",
+     "/Oe",
+     "/Og",
+     "/Gs",
+     "/Zi"
+    ]
+   },
+   "verify_only_exit_code": 1,
+   "accepted_peers_exact": true,
+   "accepted_peer_rows": [
+    {
+     "name": "f_20E8_0000",
+     "status": "EXACT",
+     "detail": "(reloc order EXACT)"
+    },
+    {
+     "name": "win_LoadAllWindows",
+     "status": "EXACT",
+     "detail": "(reloc order GROUPED)"
+    },
+    {
+     "name": "win_Swap",
+     "status": "EXACT",
+     "detail": "(reloc order GROUPED)"
+    },
+    {
+     "name": "win_Close",
+     "status": "EXACT",
+     "detail": "(reloc order GROUPED)"
+    },
+    {
+     "name": "f_20E8_0725",
+     "status": "EXACT",
+     "detail": "(reloc order GROUPED)"
+    },
+    {
+     "name": "f_20E8_0776",
+     "status": "EXACT",
+     "detail": "(reloc order GROUPED)"
+    },
+    {
+     "name": "win_SetWinDrawHook",
+     "status": "EXACT",
+     "detail": "(reloc order EXACT)"
+    },
+    {
+     "name": "f_20E8_088B",
+     "status": "EXACT",
+     "detail": "(reloc order EXACT)"
+    },
+    {
+     "name": "f_20E8_089F",
+     "status": "EXACT",
+     "detail": "(reloc order EXACT)"
+    },
+    {
+     "name": "f_20E8_08B3",
+     "status": "EXACT",
+     "detail": "(reloc order EXACT)"
+    },
+    {
+     "name": "f_20E8_08C7",
+     "status": "EXACT",
+     "detail": "(reloc order EXACT)"
+    },
+    {
+     "name": "f_20E8_08DB",
+     "status": "EXACT",
+     "detail": "(reloc order EXACT)"
+    },
+    {
+     "name": "f_20E8_08EF",
+     "status": "EXACT",
+     "detail": "(reloc order EXACT)"
+    },
+    {
+     "name": "f_20E8_0A21",
+     "status": "EXACT",
+     "detail": "(reloc order GROUPED)"
+    },
+    {
+     "name": "win_LoadWindow",
+     "status": "EXACT",
+     "detail": "(reloc order GROUPED)"
+    },
+    {
+     "name": "win_Open",
+     "status": "EXACT",
+     "detail": "(reloc order GROUPED)"
+    }
+   ],
+   "private_data_exact": true,
+   "private_data_rows": [
+    {
+     "name": "_DATA",
+     "status": "EXACT",
+     "detail": "(132 bytes, relocation order EXACT)"
+    },
+    {
+     "name": "CONST",
+     "status": "EXACT",
+     "detail": "(14 bytes, relocation order GROUPED)"
+    }
+   ],
+   "candidate_exact": false,
+   "target_rows": [
+    {
+     "name": "f_20E8_0903",
+     "status": "FAIL",
+     "detail": "length 280 != target 286; bytes differ (first at +0x5, 158 differing); relocation set differs (6 vs 6)"
+    }
+   ],
+   "refused": true
+  },
+  {
+   "name": "base_addr_mode_ref",
+   "source": "build/workers/ptr_small/variants/base_addr_mode_ref.c",
+   "source_sha256_file_bytes": "175ffcceecee68907503aa04d5e8fb7550f9ba776114a7bfd07d7c9abc7ea830",
+   "source_sha256_search_text": "175ffcceecee68907503aa04d5e8fb7550f9ba776114a7bfd07d7c9abc7ea830",
+   "search": {
+    "status": "MISMATCH",
+    "reasons": [
+     "length 280 != target 286",
+     "bytes differ (first at +0x5, 158 differing)",
+     "relocation set differs (6 vs 6)"
+    ],
+    "opcode_ratio": 0.9856,
+    "first_diff_insn": 2,
+    "profile": "msc600ax",
+    "flags": [
+     "/AL",
+     "/Os",
+     "/Oe",
+     "/Og",
+     "/Gs",
+     "/Zi"
+    ]
+   },
+   "verify_only_exit_code": 1,
+   "accepted_peers_exact": true,
+   "accepted_peer_rows": [
+    {
+     "name": "f_20E8_0000",
+     "status": "EXACT",
+     "detail": "(reloc order EXACT)"
+    },
+    {
+     "name": "win_LoadAllWindows",
+     "status": "EXACT",
+     "detail": "(reloc order GROUPED)"
+    },
+    {
+     "name": "win_Swap",
+     "status": "EXACT",
+     "detail": "(reloc order GROUPED)"
+    },
+    {
+     "name": "win_Close",
+     "status": "EXACT",
+     "detail": "(reloc order GROUPED)"
+    },
+    {
+     "name": "f_20E8_0725",
+     "status": "EXACT",
+     "detail": "(reloc order GROUPED)"
+    },
+    {
+     "name": "f_20E8_0776",
+     "status": "EXACT",
+     "detail": "(reloc order GROUPED)"
+    },
+    {
+     "name": "win_SetWinDrawHook",
+     "status": "EXACT",
+     "detail": "(reloc order EXACT)"
+    },
+    {
+     "name": "f_20E8_088B",
+     "status": "EXACT",
+     "detail": "(reloc order EXACT)"
+    },
+    {
+     "name": "f_20E8_089F",
+     "status": "EXACT",
+     "detail": "(reloc order EXACT)"
+    },
+    {
+     "name": "f_20E8_08B3",
+     "status": "EXACT",
+     "detail": "(reloc order EXACT)"
+    },
+    {
+     "name": "f_20E8_08C7",
+     "status": "EXACT",
+     "detail": "(reloc order EXACT)"
+    },
+    {
+     "name": "f_20E8_08DB",
+     "status": "EXACT",
+     "detail": "(reloc order EXACT)"
+    },
+    {
+     "name": "f_20E8_08EF",
+     "status": "EXACT",
+     "detail": "(reloc order EXACT)"
+    },
+    {
+     "name": "f_20E8_0A21",
+     "status": "EXACT",
+     "detail": "(reloc order GROUPED)"
+    },
+    {
+     "name": "win_LoadWindow",
+     "status": "EXACT",
+     "detail": "(reloc order GROUPED)"
+    },
+    {
+     "name": "win_Open",
+     "status": "EXACT",
+     "detail": "(reloc order GROUPED)"
+    }
+   ],
+   "private_data_exact": true,
+   "private_data_rows": [
+    {
+     "name": "_DATA",
+     "status": "EXACT",
+     "detail": "(132 bytes, relocation order EXACT)"
+    },
+    {
+     "name": "CONST",
+     "status": "EXACT",
+     "detail": "(14 bytes, relocation order GROUPED)"
+    }
+   ],
+   "candidate_exact": false,
+   "target_rows": [
+    {
+     "name": "f_20E8_0903",
+     "status": "FAIL",
+     "detail": "length 280 != target 286; bytes differ (first at +0x5, 158 differing); relocation set differs (6 vs 6)"
+    }
+   ],
+   "refused": true
+  },
+  {
+   "name": "base_addr_origin_mode_ref",
+   "source": "build/workers/ptr_small/variants/base_addr_origin_mode_ref.c",
+   "source_sha256_file_bytes": "ceed1d635bc32011e11d8b573b07f328ab85695ce5914ec67a6dea2c4ff47290",
+   "source_sha256_search_text": "ceed1d635bc32011e11d8b573b07f328ab85695ce5914ec67a6dea2c4ff47290",
+   "search": {
+    "status": "MISMATCH",
+    "reasons": [
+     "length 280 != target 286",
+     "bytes differ (first at +0x5, 158 differing)",
+     "relocation set differs (6 vs 6)"
+    ],
+    "opcode_ratio": 0.9856,
+    "first_diff_insn": 2,
+    "profile": "msc600ax",
+    "flags": [
+     "/AL",
+     "/Os",
+     "/Oe",
+     "/Og",
+     "/Gs",
+     "/Zi"
+    ]
+   },
+   "verify_only_exit_code": 1,
+   "accepted_peers_exact": true,
+   "accepted_peer_rows": [
+    {
+     "name": "f_20E8_0000",
+     "status": "EXACT",
+     "detail": "(reloc order EXACT)"
+    },
+    {
+     "name": "win_LoadAllWindows",
+     "status": "EXACT",
+     "detail": "(reloc order GROUPED)"
+    },
+    {
+     "name": "win_Swap",
+     "status": "EXACT",
+     "detail": "(reloc order GROUPED)"
+    },
+    {
+     "name": "win_Close",
+     "status": "EXACT",
+     "detail": "(reloc order GROUPED)"
+    },
+    {
+     "name": "f_20E8_0725",
+     "status": "EXACT",
+     "detail": "(reloc order GROUPED)"
+    },
+    {
+     "name": "f_20E8_0776",
+     "status": "EXACT",
+     "detail": "(reloc order GROUPED)"
+    },
+    {
+     "name": "win_SetWinDrawHook",
+     "status": "EXACT",
+     "detail": "(reloc order EXACT)"
+    },
+    {
+     "name": "f_20E8_088B",
+     "status": "EXACT",
+     "detail": "(reloc order EXACT)"
+    },
+    {
+     "name": "f_20E8_089F",
+     "status": "EXACT",
+     "detail": "(reloc order EXACT)"
+    },
+    {
+     "name": "f_20E8_08B3",
+     "status": "EXACT",
+     "detail": "(reloc order EXACT)"
+    },
+    {
+     "name": "f_20E8_08C7",
+     "status": "EXACT",
+     "detail": "(reloc order EXACT)"
+    },
+    {
+     "name": "f_20E8_08DB",
+     "status": "EXACT",
+     "detail": "(reloc order EXACT)"
+    },
+    {
+     "name": "f_20E8_08EF",
+     "status": "EXACT",
+     "detail": "(reloc order EXACT)"
+    },
+    {
+     "name": "f_20E8_0A21",
+     "status": "EXACT",
+     "detail": "(reloc order GROUPED)"
+    },
+    {
+     "name": "win_LoadWindow",
+     "status": "EXACT",
+     "detail": "(reloc order GROUPED)"
+    },
+    {
+     "name": "win_Open",
+     "status": "EXACT",
+     "detail": "(reloc order GROUPED)"
+    }
+   ],
+   "private_data_exact": true,
+   "private_data_rows": [
+    {
+     "name": "_DATA",
+     "status": "EXACT",
+     "detail": "(132 bytes, relocation order EXACT)"
+    },
+    {
+     "name": "CONST",
+     "status": "EXACT",
+     "detail": "(14 bytes, relocation order GROUPED)"
+    }
+   ],
+   "candidate_exact": false,
+   "target_rows": [
+    {
+     "name": "f_20E8_0903",
+     "status": "FAIL",
+     "detail": "length 280 != target 286; bytes differ (first at +0x5, 158 differing); relocation set differs (6 vs 6)"
+    }
+   ],
+   "refused": true
+  },
+  {
+   "name": "index_ptradd_origin",
+   "source": "build/workers/ptr_small/variants/index_ptradd_origin.c",
+   "source_sha256_file_bytes": "d09e80ccb195c18dbe30e0b4008cbae8aed8c22b3e048e20f68cb8b327434267",
+   "source_sha256_search_text": "d09e80ccb195c18dbe30e0b4008cbae8aed8c22b3e048e20f68cb8b327434267",
+   "search": {
+    "status": "MISMATCH",
+    "reasons": [
+     "length 280 != target 286",
+     "bytes differ (first at +0x77, 145 differing)",
+     "relocation set differs (6 vs 6)"
+    ],
+    "opcode_ratio": 0.9856,
+    "first_diff_insn": 41,
+    "profile": "msc600ax",
+    "flags": [
+     "/AL",
+     "/Os",
+     "/Oe",
+     "/Og",
+     "/Gs",
+     "/Zi"
+    ]
+   },
+   "verify_only_exit_code": 1,
+   "accepted_peers_exact": true,
+   "accepted_peer_rows": [
+    {
+     "name": "f_20E8_0000",
+     "status": "EXACT",
+     "detail": "(reloc order EXACT)"
+    },
+    {
+     "name": "win_LoadAllWindows",
+     "status": "EXACT",
+     "detail": "(reloc order GROUPED)"
+    },
+    {
+     "name": "win_Swap",
+     "status": "EXACT",
+     "detail": "(reloc order GROUPED)"
+    },
+    {
+     "name": "win_Close",
+     "status": "EXACT",
+     "detail": "(reloc order GROUPED)"
+    },
+    {
+     "name": "f_20E8_0725",
+     "status": "EXACT",
+     "detail": "(reloc order GROUPED)"
+    },
+    {
+     "name": "f_20E8_0776",
+     "status": "EXACT",
+     "detail": "(reloc order GROUPED)"
+    },
+    {
+     "name": "win_SetWinDrawHook",
+     "status": "EXACT",
+     "detail": "(reloc order EXACT)"
+    },
+    {
+     "name": "f_20E8_088B",
+     "status": "EXACT",
+     "detail": "(reloc order EXACT)"
+    },
+    {
+     "name": "f_20E8_089F",
+     "status": "EXACT",
+     "detail": "(reloc order EXACT)"
+    },
+    {
+     "name": "f_20E8_08B3",
+     "status": "EXACT",
+     "detail": "(reloc order EXACT)"
+    },
+    {
+     "name": "f_20E8_08C7",
+     "status": "EXACT",
+     "detail": "(reloc order EXACT)"
+    },
+    {
+     "name": "f_20E8_08DB",
+     "status": "EXACT",
+     "detail": "(reloc order EXACT)"
+    },
+    {
+     "name": "f_20E8_08EF",
+     "status": "EXACT",
+     "detail": "(reloc order EXACT)"
+    },
+    {
+     "name": "f_20E8_0A21",
+     "status": "EXACT",
+     "detail": "(reloc order GROUPED)"
+    },
+    {
+     "name": "win_LoadWindow",
+     "status": "EXACT",
+     "detail": "(reloc order GROUPED)"
+    },
+    {
+     "name": "win_Open",
+     "status": "EXACT",
+     "detail": "(reloc order GROUPED)"
+    }
+   ],
+   "private_data_exact": true,
+   "private_data_rows": [
+    {
+     "name": "_DATA",
+     "status": "EXACT",
+     "detail": "(132 bytes, relocation order EXACT)"
+    },
+    {
+     "name": "CONST",
+     "status": "EXACT",
+     "detail": "(14 bytes, relocation order GROUPED)"
+    }
+   ],
+   "candidate_exact": false,
+   "target_rows": [
+    {
+     "name": "f_20E8_0903",
+     "status": "FAIL",
+     "detail": "length 280 != target 286; bytes differ (first at +0x77, 145 differing); relocation set differs (6 vs 6)"
+    }
+   ],
+   "refused": true
+  },
+  {
+   "name": "index_ptradd_mode",
+   "source": "build/workers/ptr_small/variants/index_ptradd_mode.c",
+   "source_sha256_file_bytes": "c8afbb564f8c093646c8a67bd98e00fa43c6bd915a5b5fa35cef3859b53a7757",
+   "source_sha256_search_text": "c8afbb564f8c093646c8a67bd98e00fa43c6bd915a5b5fa35cef3859b53a7757",
+   "search": {
+    "status": "MISMATCH",
+    "reasons": [
+     "length 280 != target 286",
+     "bytes differ (first at +0x77, 145 differing)",
+     "relocation set differs (6 vs 6)"
+    ],
+    "opcode_ratio": 0.9856,
+    "first_diff_insn": 41,
+    "profile": "msc600ax",
+    "flags": [
+     "/AL",
+     "/Os",
+     "/Oe",
+     "/Og",
+     "/Gs",
+     "/Zi"
+    ]
+   },
+   "verify_only_exit_code": 1,
+   "accepted_peers_exact": true,
+   "accepted_peer_rows": [
+    {
+     "name": "f_20E8_0000",
+     "status": "EXACT",
+     "detail": "(reloc order EXACT)"
+    },
+    {
+     "name": "win_LoadAllWindows",
+     "status": "EXACT",
+     "detail": "(reloc order GROUPED)"
+    },
+    {
+     "name": "win_Swap",
+     "status": "EXACT",
+     "detail": "(reloc order GROUPED)"
+    },
+    {
+     "name": "win_Close",
+     "status": "EXACT",
+     "detail": "(reloc order GROUPED)"
+    },
+    {
+     "name": "f_20E8_0725",
+     "status": "EXACT",
+     "detail": "(reloc order GROUPED)"
+    },
+    {
+     "name": "f_20E8_0776",
+     "status": "EXACT",
+     "detail": "(reloc order GROUPED)"
+    },
+    {
+     "name": "win_SetWinDrawHook",
+     "status": "EXACT",
+     "detail": "(reloc order EXACT)"
+    },
+    {
+     "name": "f_20E8_088B",
+     "status": "EXACT",
+     "detail": "(reloc order EXACT)"
+    },
+    {
+     "name": "f_20E8_089F",
+     "status": "EXACT",
+     "detail": "(reloc order EXACT)"
+    },
+    {
+     "name": "f_20E8_08B3",
+     "status": "EXACT",
+     "detail": "(reloc order EXACT)"
+    },
+    {
+     "name": "f_20E8_08C7",
+     "status": "EXACT",
+     "detail": "(reloc order EXACT)"
+    },
+    {
+     "name": "f_20E8_08DB",
+     "status": "EXACT",
+     "detail": "(reloc order EXACT)"
+    },
+    {
+     "name": "f_20E8_08EF",
+     "status": "EXACT",
+     "detail": "(reloc order EXACT)"
+    },
+    {
+     "name": "f_20E8_0A21",
+     "status": "EXACT",
+     "detail": "(reloc order GROUPED)"
+    },
+    {
+     "name": "win_LoadWindow",
+     "status": "EXACT",
+     "detail": "(reloc order GROUPED)"
+    },
+    {
+     "name": "win_Open",
+     "status": "EXACT",
+     "detail": "(reloc order GROUPED)"
+    }
+   ],
+   "private_data_exact": true,
+   "private_data_rows": [
+    {
+     "name": "_DATA",
+     "status": "EXACT",
+     "detail": "(132 bytes, relocation order EXACT)"
+    },
+    {
+     "name": "CONST",
+     "status": "EXACT",
+     "detail": "(14 bytes, relocation order GROUPED)"
+    }
+   ],
+   "candidate_exact": false,
+   "target_rows": [
+    {
+     "name": "f_20E8_0903",
+     "status": "FAIL",
+     "detail": "length 280 != target 286; bytes differ (first at +0x77, 145 differing); relocation set differs (6 vs 6)"
+    }
+   ],
+   "refused": true
+  },
+  {
+   "name": "index_ptradd_origin_mode",
+   "source": "build/workers/ptr_small/variants/index_ptradd_origin_mode.c",
+   "source_sha256_file_bytes": "7a6cf65291f24dfba1d94e9c26aa92f16028f42ccd65317654ecbe43cea6fa78",
+   "source_sha256_search_text": "7a6cf65291f24dfba1d94e9c26aa92f16028f42ccd65317654ecbe43cea6fa78",
+   "search": {
+    "status": "MISMATCH",
+    "reasons": [
+     "length 280 != target 286",
+     "bytes differ (first at +0x77, 145 differing)",
+     "relocation set differs (6 vs 6)"
+    ],
+    "opcode_ratio": 0.9856,
+    "first_diff_insn": 41,
+    "profile": "msc600ax",
+    "flags": [
+     "/AL",
+     "/Os",
+     "/Oe",
+     "/Og",
+     "/Gs",
+     "/Zi"
+    ]
+   },
+   "verify_only_exit_code": 1,
+   "accepted_peers_exact": true,
+   "accepted_peer_rows": [
+    {
+     "name": "f_20E8_0000",
+     "status": "EXACT",
+     "detail": "(reloc order EXACT)"
+    },
+    {
+     "name": "win_LoadAllWindows",
+     "status": "EXACT",
+     "detail": "(reloc order GROUPED)"
+    },
+    {
+     "name": "win_Swap",
+     "status": "EXACT",
+     "detail": "(reloc order GROUPED)"
+    },
+    {
+     "name": "win_Close",
+     "status": "EXACT",
+     "detail": "(reloc order GROUPED)"
+    },
+    {
+     "name": "f_20E8_0725",
+     "status": "EXACT",
+     "detail": "(reloc order GROUPED)"
+    },
+    {
+     "name": "f_20E8_0776",
+     "status": "EXACT",
+     "detail": "(reloc order GROUPED)"
+    },
+    {
+     "name": "win_SetWinDrawHook",
+     "status": "EXACT",
+     "detail": "(reloc order EXACT)"
+    },
+    {
+     "name": "f_20E8_088B",
+     "status": "EXACT",
+     "detail": "(reloc order EXACT)"
+    },
+    {
+     "name": "f_20E8_089F",
+     "status": "EXACT",
+     "detail": "(reloc order EXACT)"
+    },
+    {
+     "name": "f_20E8_08B3",
+     "status": "EXACT",
+     "detail": "(reloc order EXACT)"
+    },
+    {
+     "name": "f_20E8_08C7",
+     "status": "EXACT",
+     "detail": "(reloc order EXACT)"
+    },
+    {
+     "name": "f_20E8_08DB",
+     "status": "EXACT",
+     "detail": "(reloc order EXACT)"
+    },
+    {
+     "name": "f_20E8_08EF",
+     "status": "EXACT",
+     "detail": "(reloc order EXACT)"
+    },
+    {
+     "name": "f_20E8_0A21",
+     "status": "EXACT",
+     "detail": "(reloc order GROUPED)"
+    },
+    {
+     "name": "win_LoadWindow",
+     "status": "EXACT",
+     "detail": "(reloc order GROUPED)"
+    },
+    {
+     "name": "win_Open",
+     "status": "EXACT",
+     "detail": "(reloc order GROUPED)"
+    }
+   ],
+   "private_data_exact": true,
+   "private_data_rows": [
+    {
+     "name": "_DATA",
+     "status": "EXACT",
+     "detail": "(132 bytes, relocation order EXACT)"
+    },
+    {
+     "name": "CONST",
+     "status": "EXACT",
+     "detail": "(14 bytes, relocation order GROUPED)"
+    }
+   ],
+   "candidate_exact": false,
+   "target_rows": [
+    {
+     "name": "f_20E8_0903",
+     "status": "FAIL",
+     "detail": "length 280 != target 286; bytes differ (first at +0x77, 145 differing); relocation set differs (6 vs 6)"
+    }
+   ],
+   "refused": true
+  },
+  {
+   "name": "index_ptradd_ref",
+   "source": "build/workers/ptr_small/variants/index_ptradd_ref.c",
+   "source_sha256_file_bytes": "0dfde293ab93ae382de3405fdcbae6ed4a34a2f3b0b10f6bb2a238a2a212758f",
+   "source_sha256_search_text": "0dfde293ab93ae382de3405fdcbae6ed4a34a2f3b0b10f6bb2a238a2a212758f",
+   "search": {
+    "status": "MISMATCH",
+    "reasons": [
+     "length 280 != target 286",
+     "bytes differ (first at +0x77, 145 differing)",
+     "relocation set differs (6 vs 6)"
+    ],
+    "opcode_ratio": 0.9856,
+    "first_diff_insn": 41,
+    "profile": "msc600ax",
+    "flags": [
+     "/AL",
+     "/Os",
+     "/Oe",
+     "/Og",
+     "/Gs",
+     "/Zi"
+    ]
+   },
+   "verify_only_exit_code": 1,
+   "accepted_peers_exact": true,
+   "accepted_peer_rows": [
+    {
+     "name": "f_20E8_0000",
+     "status": "EXACT",
+     "detail": "(reloc order EXACT)"
+    },
+    {
+     "name": "win_LoadAllWindows",
+     "status": "EXACT",
+     "detail": "(reloc order GROUPED)"
+    },
+    {
+     "name": "win_Swap",
+     "status": "EXACT",
+     "detail": "(reloc order GROUPED)"
+    },
+    {
+     "name": "win_Close",
+     "status": "EXACT",
+     "detail": "(reloc order GROUPED)"
+    },
+    {
+     "name": "f_20E8_0725",
+     "status": "EXACT",
+     "detail": "(reloc order GROUPED)"
+    },
+    {
+     "name": "f_20E8_0776",
+     "status": "EXACT",
+     "detail": "(reloc order GROUPED)"
+    },
+    {
+     "name": "win_SetWinDrawHook",
+     "status": "EXACT",
+     "detail": "(reloc order EXACT)"
+    },
+    {
+     "name": "f_20E8_088B",
+     "status": "EXACT",
+     "detail": "(reloc order EXACT)"
+    },
+    {
+     "name": "f_20E8_089F",
+     "status": "EXACT",
+     "detail": "(reloc order EXACT)"
+    },
+    {
+     "name": "f_20E8_08B3",
+     "status": "EXACT",
+     "detail": "(reloc order EXACT)"
+    },
+    {
+     "name": "f_20E8_08C7",
+     "status": "EXACT",
+     "detail": "(reloc order EXACT)"
+    },
+    {
+     "name": "f_20E8_08DB",
+     "status": "EXACT",
+     "detail": "(reloc order EXACT)"
+    },
+    {
+     "name": "f_20E8_08EF",
+     "status": "EXACT",
+     "detail": "(reloc order EXACT)"
+    },
+    {
+     "name": "f_20E8_0A21",
+     "status": "EXACT",
+     "detail": "(reloc order GROUPED)"
+    },
+    {
+     "name": "win_LoadWindow",
+     "status": "EXACT",
+     "detail": "(reloc order GROUPED)"
+    },
+    {
+     "name": "win_Open",
+     "status": "EXACT",
+     "detail": "(reloc order GROUPED)"
+    }
+   ],
+   "private_data_exact": true,
+   "private_data_rows": [
+    {
+     "name": "_DATA",
+     "status": "EXACT",
+     "detail": "(132 bytes, relocation order EXACT)"
+    },
+    {
+     "name": "CONST",
+     "status": "EXACT",
+     "detail": "(14 bytes, relocation order GROUPED)"
+    }
+   ],
+   "candidate_exact": false,
+   "target_rows": [
+    {
+     "name": "f_20E8_0903",
+     "status": "FAIL",
+     "detail": "length 280 != target 286; bytes differ (first at +0x77, 145 differing); relocation set differs (6 vs 6)"
+    }
+   ],
+   "refused": true
+  },
+  {
+   "name": "index_ptradd_origin_ref",
+   "source": "build/workers/ptr_small/variants/index_ptradd_origin_ref.c",
+   "source_sha256_file_bytes": "58ed30c186f0eded33eb13889e9892299a72cca8e2b580613efc68134f5fb5fd",
+   "source_sha256_search_text": "58ed30c186f0eded33eb13889e9892299a72cca8e2b580613efc68134f5fb5fd",
+   "search": {
+    "status": "MISMATCH",
+    "reasons": [
+     "length 280 != target 286",
+     "bytes differ (first at +0x77, 145 differing)",
+     "relocation set differs (6 vs 6)"
+    ],
+    "opcode_ratio": 0.9856,
+    "first_diff_insn": 41,
+    "profile": "msc600ax",
+    "flags": [
+     "/AL",
+     "/Os",
+     "/Oe",
+     "/Og",
+     "/Gs",
+     "/Zi"
+    ]
+   },
+   "verify_only_exit_code": 1,
+   "accepted_peers_exact": true,
+   "accepted_peer_rows": [
+    {
+     "name": "f_20E8_0000",
+     "status": "EXACT",
+     "detail": "(reloc order EXACT)"
+    },
+    {
+     "name": "win_LoadAllWindows",
+     "status": "EXACT",
+     "detail": "(reloc order GROUPED)"
+    },
+    {
+     "name": "win_Swap",
+     "status": "EXACT",
+     "detail": "(reloc order GROUPED)"
+    },
+    {
+     "name": "win_Close",
+     "status": "EXACT",
+     "detail": "(reloc order GROUPED)"
+    },
+    {
+     "name": "f_20E8_0725",
+     "status": "EXACT",
+     "detail": "(reloc order GROUPED)"
+    },
+    {
+     "name": "f_20E8_0776",
+     "status": "EXACT",
+     "detail": "(reloc order GROUPED)"
+    },
+    {
+     "name": "win_SetWinDrawHook",
+     "status": "EXACT",
+     "detail": "(reloc order EXACT)"
+    },
+    {
+     "name": "f_20E8_088B",
+     "status": "EXACT",
+     "detail": "(reloc order EXACT)"
+    },
+    {
+     "name": "f_20E8_089F",
+     "status": "EXACT",
+     "detail": "(reloc order EXACT)"
+    },
+    {
+     "name": "f_20E8_08B3",
+     "status": "EXACT",
+     "detail": "(reloc order EXACT)"
+    },
+    {
+     "name": "f_20E8_08C7",
+     "status": "EXACT",
+     "detail": "(reloc order EXACT)"
+    },
+    {
+     "name": "f_20E8_08DB",
+     "status": "EXACT",
+     "detail": "(reloc order EXACT)"
+    },
+    {
+     "name": "f_20E8_08EF",
+     "status": "EXACT",
+     "detail": "(reloc order EXACT)"
+    },
+    {
+     "name": "f_20E8_0A21",
+     "status": "EXACT",
+     "detail": "(reloc order GROUPED)"
+    },
+    {
+     "name": "win_LoadWindow",
+     "status": "EXACT",
+     "detail": "(reloc order GROUPED)"
+    },
+    {
+     "name": "win_Open",
+     "status": "EXACT",
+     "detail": "(reloc order GROUPED)"
+    }
+   ],
+   "private_data_exact": true,
+   "private_data_rows": [
+    {
+     "name": "_DATA",
+     "status": "EXACT",
+     "detail": "(132 bytes, relocation order EXACT)"
+    },
+    {
+     "name": "CONST",
+     "status": "EXACT",
+     "detail": "(14 bytes, relocation order GROUPED)"
+    }
+   ],
+   "candidate_exact": false,
+   "target_rows": [
+    {
+     "name": "f_20E8_0903",
+     "status": "FAIL",
+     "detail": "length 280 != target 286; bytes differ (first at +0x77, 145 differing); relocation set differs (6 vs 6)"
+    }
+   ],
+   "refused": true
+  },
+  {
+   "name": "index_ptradd_mode_ref",
+   "source": "build/workers/ptr_small/variants/index_ptradd_mode_ref.c",
+   "source_sha256_file_bytes": "829d1ae9db4653c007c639f45125270c6b9aab0a13cbcae8ab1337780b5a1fa9",
+   "source_sha256_search_text": "829d1ae9db4653c007c639f45125270c6b9aab0a13cbcae8ab1337780b5a1fa9",
+   "search": {
+    "status": "MISMATCH",
+    "reasons": [
+     "length 280 != target 286",
+     "bytes differ (first at +0x77, 145 differing)",
+     "relocation set differs (6 vs 6)"
+    ],
+    "opcode_ratio": 0.9856,
+    "first_diff_insn": 41,
+    "profile": "msc600ax",
+    "flags": [
+     "/AL",
+     "/Os",
+     "/Oe",
+     "/Og",
+     "/Gs",
+     "/Zi"
+    ]
+   },
+   "verify_only_exit_code": 1,
+   "accepted_peers_exact": true,
+   "accepted_peer_rows": [
+    {
+     "name": "f_20E8_0000",
+     "status": "EXACT",
+     "detail": "(reloc order EXACT)"
+    },
+    {
+     "name": "win_LoadAllWindows",
+     "status": "EXACT",
+     "detail": "(reloc order GROUPED)"
+    },
+    {
+     "name": "win_Swap",
+     "status": "EXACT",
+     "detail": "(reloc order GROUPED)"
+    },
+    {
+     "name": "win_Close",
+     "status": "EXACT",
+     "detail": "(reloc order GROUPED)"
+    },
+    {
+     "name": "f_20E8_0725",
+     "status": "EXACT",
+     "detail": "(reloc order GROUPED)"
+    },
+    {
+     "name": "f_20E8_0776",
+     "status": "EXACT",
+     "detail": "(reloc order GROUPED)"
+    },
+    {
+     "name": "win_SetWinDrawHook",
+     "status": "EXACT",
+     "detail": "(reloc order EXACT)"
+    },
+    {
+     "name": "f_20E8_088B",
+     "status": "EXACT",
+     "detail": "(reloc order EXACT)"
+    },
+    {
+     "name": "f_20E8_089F",
+     "status": "EXACT",
+     "detail": "(reloc order EXACT)"
+    },
+    {
+     "name": "f_20E8_08B3",
+     "status": "EXACT",
+     "detail": "(reloc order EXACT)"
+    },
+    {
+     "name": "f_20E8_08C7",
+     "status": "EXACT",
+     "detail": "(reloc order EXACT)"
+    },
+    {
+     "name": "f_20E8_08DB",
+     "status": "EXACT",
+     "detail": "(reloc order EXACT)"
+    },
+    {
+     "name": "f_20E8_08EF",
+     "status": "EXACT",
+     "detail": "(reloc order EXACT)"
+    },
+    {
+     "name": "f_20E8_0A21",
+     "status": "EXACT",
+     "detail": "(reloc order GROUPED)"
+    },
+    {
+     "name": "win_LoadWindow",
+     "status": "EXACT",
+     "detail": "(reloc order GROUPED)"
+    },
+    {
+     "name": "win_Open",
+     "status": "EXACT",
+     "detail": "(reloc order GROUPED)"
+    }
+   ],
+   "private_data_exact": true,
+   "private_data_rows": [
+    {
+     "name": "_DATA",
+     "status": "EXACT",
+     "detail": "(132 bytes, relocation order EXACT)"
+    },
+    {
+     "name": "CONST",
+     "status": "EXACT",
+     "detail": "(14 bytes, relocation order GROUPED)"
+    }
+   ],
+   "candidate_exact": false,
+   "target_rows": [
+    {
+     "name": "f_20E8_0903",
+     "status": "FAIL",
+     "detail": "length 280 != target 286; bytes differ (first at +0x77, 145 differing); relocation set differs (6 vs 6)"
+    }
+   ],
+   "refused": true
+  },
+  {
+   "name": "index_ptradd_origin_mode_ref",
+   "source": "build/workers/ptr_small/variants/index_ptradd_origin_mode_ref.c",
+   "source_sha256_file_bytes": "c28b4c67d9e1875bfc0620f33bbfcbb7ccfbdc015a5091181d92328d4b572704",
+   "source_sha256_search_text": "c28b4c67d9e1875bfc0620f33bbfcbb7ccfbdc015a5091181d92328d4b572704",
+   "search": {
+    "status": "MISMATCH",
+    "reasons": [
+     "length 280 != target 286",
+     "bytes differ (first at +0x77, 145 differing)",
+     "relocation set differs (6 vs 6)"
+    ],
+    "opcode_ratio": 0.9856,
+    "first_diff_insn": 41,
+    "profile": "msc600ax",
+    "flags": [
+     "/AL",
+     "/Os",
+     "/Oe",
+     "/Og",
+     "/Gs",
+     "/Zi"
+    ]
+   },
+   "verify_only_exit_code": 1,
+   "accepted_peers_exact": true,
+   "accepted_peer_rows": [
+    {
+     "name": "f_20E8_0000",
+     "status": "EXACT",
+     "detail": "(reloc order EXACT)"
+    },
+    {
+     "name": "win_LoadAllWindows",
+     "status": "EXACT",
+     "detail": "(reloc order GROUPED)"
+    },
+    {
+     "name": "win_Swap",
+     "status": "EXACT",
+     "detail": "(reloc order GROUPED)"
+    },
+    {
+     "name": "win_Close",
+     "status": "EXACT",
+     "detail": "(reloc order GROUPED)"
+    },
+    {
+     "name": "f_20E8_0725",
+     "status": "EXACT",
+     "detail": "(reloc order GROUPED)"
+    },
+    {
+     "name": "f_20E8_0776",
+     "status": "EXACT",
+     "detail": "(reloc order GROUPED)"
+    },
+    {
+     "name": "win_SetWinDrawHook",
+     "status": "EXACT",
+     "detail": "(reloc order EXACT)"
+    },
+    {
+     "name": "f_20E8_088B",
+     "status": "EXACT",
+     "detail": "(reloc order EXACT)"
+    },
+    {
+     "name": "f_20E8_089F",
+     "status": "EXACT",
+     "detail": "(reloc order EXACT)"
+    },
+    {
+     "name": "f_20E8_08B3",
+     "status": "EXACT",
+     "detail": "(reloc order EXACT)"
+    },
+    {
+     "name": "f_20E8_08C7",
+     "status": "EXACT",
+     "detail": "(reloc order EXACT)"
+    },
+    {
+     "name": "f_20E8_08DB",
+     "status": "EXACT",
+     "detail": "(reloc order EXACT)"
+    },
+    {
+     "name": "f_20E8_08EF",
+     "status": "EXACT",
+     "detail": "(reloc order EXACT)"
+    },
+    {
+     "name": "f_20E8_0A21",
+     "status": "EXACT",
+     "detail": "(reloc order GROUPED)"
+    },
+    {
+     "name": "win_LoadWindow",
+     "status": "EXACT",
+     "detail": "(reloc order GROUPED)"
+    },
+    {
+     "name": "win_Open",
+     "status": "EXACT",
+     "detail": "(reloc order GROUPED)"
+    }
+   ],
+   "private_data_exact": true,
+   "private_data_rows": [
+    {
+     "name": "_DATA",
+     "status": "EXACT",
+     "detail": "(132 bytes, relocation order EXACT)"
+    },
+    {
+     "name": "CONST",
+     "status": "EXACT",
+     "detail": "(14 bytes, relocation order GROUPED)"
+    }
+   ],
+   "candidate_exact": false,
+   "target_rows": [
+    {
+     "name": "f_20E8_0903",
+     "status": "FAIL",
+     "detail": "length 280 != target 286; bytes differ (first at +0x77, 145 differing); relocation set differs (6 vs 6)"
+    }
+   ],
+   "refused": true
+  },
+  {
+   "name": "index_ptradd_o",
+   "source": "build/workers/ptr_small/variants/index_ptradd_o.c",
+   "source_sha256_file_bytes": "77f5bd3d2678c883a15b5a734c1ad2431e117797a48e362a95c98a95ce3334ce",
+   "source_sha256_search_text": "77f5bd3d2678c883a15b5a734c1ad2431e117797a48e362a95c98a95ce3334ce",
+   "search": {
+    "status": "MISMATCH",
+    "reasons": [
+     "length 280 != target 286",
+     "bytes differ (first at +0x77, 145 differing)",
+     "relocation set differs (6 vs 6)"
+    ],
+    "opcode_ratio": 0.9856,
+    "first_diff_insn": 41,
+    "profile": "msc600ax",
+    "flags": [
+     "/AL",
+     "/Os",
+     "/Oe",
+     "/Og",
+     "/Gs",
+     "/Zi"
+    ]
+   },
+   "verify_only_exit_code": 1,
+   "accepted_peers_exact": true,
+   "accepted_peer_rows": [
+    {
+     "name": "f_20E8_0000",
+     "status": "EXACT",
+     "detail": "(reloc order EXACT)"
+    },
+    {
+     "name": "win_LoadAllWindows",
+     "status": "EXACT",
+     "detail": "(reloc order GROUPED)"
+    },
+    {
+     "name": "win_Swap",
+     "status": "EXACT",
+     "detail": "(reloc order GROUPED)"
+    },
+    {
+     "name": "win_Close",
+     "status": "EXACT",
+     "detail": "(reloc order GROUPED)"
+    },
+    {
+     "name": "f_20E8_0725",
+     "status": "EXACT",
+     "detail": "(reloc order GROUPED)"
+    },
+    {
+     "name": "f_20E8_0776",
+     "status": "EXACT",
+     "detail": "(reloc order GROUPED)"
+    },
+    {
+     "name": "win_SetWinDrawHook",
+     "status": "EXACT",
+     "detail": "(reloc order EXACT)"
+    },
+    {
+     "name": "f_20E8_088B",
+     "status": "EXACT",
+     "detail": "(reloc order EXACT)"
+    },
+    {
+     "name": "f_20E8_089F",
+     "status": "EXACT",
+     "detail": "(reloc order EXACT)"
+    },
+    {
+     "name": "f_20E8_08B3",
+     "status": "EXACT",
+     "detail": "(reloc order EXACT)"
+    },
+    {
+     "name": "f_20E8_08C7",
+     "status": "EXACT",
+     "detail": "(reloc order EXACT)"
+    },
+    {
+     "name": "f_20E8_08DB",
+     "status": "EXACT",
+     "detail": "(reloc order EXACT)"
+    },
+    {
+     "name": "f_20E8_08EF",
+     "status": "EXACT",
+     "detail": "(reloc order EXACT)"
+    },
+    {
+     "name": "f_20E8_0A21",
+     "status": "EXACT",
+     "detail": "(reloc order GROUPED)"
+    },
+    {
+     "name": "win_LoadWindow",
+     "status": "EXACT",
+     "detail": "(reloc order GROUPED)"
+    },
+    {
+     "name": "win_Open",
+     "status": "EXACT",
+     "detail": "(reloc order GROUPED)"
+    }
+   ],
+   "private_data_exact": true,
+   "private_data_rows": [
+    {
+     "name": "_DATA",
+     "status": "EXACT",
+     "detail": "(132 bytes, relocation order EXACT)"
+    },
+    {
+     "name": "CONST",
+     "status": "EXACT",
+     "detail": "(14 bytes, relocation order GROUPED)"
+    }
+   ],
+   "candidate_exact": false,
+   "target_rows": [
+    {
+     "name": "f_20E8_0903",
+     "status": "FAIL",
+     "detail": "length 280 != target 286; bytes differ (first at +0x77, 145 differing); relocation set differs (6 vs 6)"
+    }
+   ],
+   "refused": true
+  },
+  {
+   "name": "index_ptradd_origin_o",
+   "source": "build/workers/ptr_small/variants/index_ptradd_origin_o.c",
+   "source_sha256_file_bytes": "c7648ea66eef70fc0cb4acbb36fc011a5d29a46e7b589f4c9ab52be995c9c505",
+   "source_sha256_search_text": "c7648ea66eef70fc0cb4acbb36fc011a5d29a46e7b589f4c9ab52be995c9c505",
+   "search": {
+    "status": "MISMATCH",
+    "reasons": [
+     "length 280 != target 286",
+     "bytes differ (first at +0x77, 145 differing)",
+     "relocation set differs (6 vs 6)"
+    ],
+    "opcode_ratio": 0.9856,
+    "first_diff_insn": 41,
+    "profile": "msc600ax",
+    "flags": [
+     "/AL",
+     "/Os",
+     "/Oe",
+     "/Og",
+     "/Gs",
+     "/Zi"
+    ]
+   },
+   "verify_only_exit_code": 1,
+   "accepted_peers_exact": true,
+   "accepted_peer_rows": [
+    {
+     "name": "f_20E8_0000",
+     "status": "EXACT",
+     "detail": "(reloc order EXACT)"
+    },
+    {
+     "name": "win_LoadAllWindows",
+     "status": "EXACT",
+     "detail": "(reloc order GROUPED)"
+    },
+    {
+     "name": "win_Swap",
+     "status": "EXACT",
+     "detail": "(reloc order GROUPED)"
+    },
+    {
+     "name": "win_Close",
+     "status": "EXACT",
+     "detail": "(reloc order GROUPED)"
+    },
+    {
+     "name": "f_20E8_0725",
+     "status": "EXACT",
+     "detail": "(reloc order GROUPED)"
+    },
+    {
+     "name": "f_20E8_0776",
+     "status": "EXACT",
+     "detail": "(reloc order GROUPED)"
+    },
+    {
+     "name": "win_SetWinDrawHook",
+     "status": "EXACT",
+     "detail": "(reloc order EXACT)"
+    },
+    {
+     "name": "f_20E8_088B",
+     "status": "EXACT",
+     "detail": "(reloc order EXACT)"
+    },
+    {
+     "name": "f_20E8_089F",
+     "status": "EXACT",
+     "detail": "(reloc order EXACT)"
+    },
+    {
+     "name": "f_20E8_08B3",
+     "status": "EXACT",
+     "detail": "(reloc order EXACT)"
+    },
+    {
+     "name": "f_20E8_08C7",
+     "status": "EXACT",
+     "detail": "(reloc order EXACT)"
+    },
+    {
+     "name": "f_20E8_08DB",
+     "status": "EXACT",
+     "detail": "(reloc order EXACT)"
+    },
+    {
+     "name": "f_20E8_08EF",
+     "status": "EXACT",
+     "detail": "(reloc order EXACT)"
+    },
+    {
+     "name": "f_20E8_0A21",
+     "status": "EXACT",
+     "detail": "(reloc order GROUPED)"
+    },
+    {
+     "name": "win_LoadWindow",
+     "status": "EXACT",
+     "detail": "(reloc order GROUPED)"
+    },
+    {
+     "name": "win_Open",
+     "status": "EXACT",
+     "detail": "(reloc order GROUPED)"
+    }
+   ],
+   "private_data_exact": true,
+   "private_data_rows": [
+    {
+     "name": "_DATA",
+     "status": "EXACT",
+     "detail": "(132 bytes, relocation order EXACT)"
+    },
+    {
+     "name": "CONST",
+     "status": "EXACT",
+     "detail": "(14 bytes, relocation order GROUPED)"
+    }
+   ],
+   "candidate_exact": false,
+   "target_rows": [
+    {
+     "name": "f_20E8_0903",
+     "status": "FAIL",
+     "detail": "length 280 != target 286; bytes differ (first at +0x77, 145 differing); relocation set differs (6 vs 6)"
+    }
+   ],
+   "refused": true
+  },
+  {
+   "name": "index_ptradd_mode_o",
+   "source": "build/workers/ptr_small/variants/index_ptradd_mode_o.c",
+   "source_sha256_file_bytes": "5be7a9c8b7e715cc6e0c0e8303936deca5dc1a4ab3237d154d66b0b7e66ecd99",
+   "source_sha256_search_text": "5be7a9c8b7e715cc6e0c0e8303936deca5dc1a4ab3237d154d66b0b7e66ecd99",
+   "search": {
+    "status": "MISMATCH",
+    "reasons": [
+     "length 280 != target 286",
+     "bytes differ (first at +0x77, 145 differing)",
+     "relocation set differs (6 vs 6)"
+    ],
+    "opcode_ratio": 0.9856,
+    "first_diff_insn": 41,
+    "profile": "msc600ax",
+    "flags": [
+     "/AL",
+     "/Os",
+     "/Oe",
+     "/Og",
+     "/Gs",
+     "/Zi"
+    ]
+   },
+   "verify_only_exit_code": 1,
+   "accepted_peers_exact": true,
+   "accepted_peer_rows": [
+    {
+     "name": "f_20E8_0000",
+     "status": "EXACT",
+     "detail": "(reloc order EXACT)"
+    },
+    {
+     "name": "win_LoadAllWindows",
+     "status": "EXACT",
+     "detail": "(reloc order GROUPED)"
+    },
+    {
+     "name": "win_Swap",
+     "status": "EXACT",
+     "detail": "(reloc order GROUPED)"
+    },
+    {
+     "name": "win_Close",
+     "status": "EXACT",
+     "detail": "(reloc order GROUPED)"
+    },
+    {
+     "name": "f_20E8_0725",
+     "status": "EXACT",
+     "detail": "(reloc order GROUPED)"
+    },
+    {
+     "name": "f_20E8_0776",
+     "status": "EXACT",
+     "detail": "(reloc order GROUPED)"
+    },
+    {
+     "name": "win_SetWinDrawHook",
+     "status": "EXACT",
+     "detail": "(reloc order EXACT)"
+    },
+    {
+     "name": "f_20E8_088B",
+     "status": "EXACT",
+     "detail": "(reloc order EXACT)"
+    },
+    {
+     "name": "f_20E8_089F",
+     "status": "EXACT",
+     "detail": "(reloc order EXACT)"
+    },
+    {
+     "name": "f_20E8_08B3",
+     "status": "EXACT",
+     "detail": "(reloc order EXACT)"
+    },
+    {
+     "name": "f_20E8_08C7",
+     "status": "EXACT",
+     "detail": "(reloc order EXACT)"
+    },
+    {
+     "name": "f_20E8_08DB",
+     "status": "EXACT",
+     "detail": "(reloc order EXACT)"
+    },
+    {
+     "name": "f_20E8_08EF",
+     "status": "EXACT",
+     "detail": "(reloc order EXACT)"
+    },
+    {
+     "name": "f_20E8_0A21",
+     "status": "EXACT",
+     "detail": "(reloc order GROUPED)"
+    },
+    {
+     "name": "win_LoadWindow",
+     "status": "EXACT",
+     "detail": "(reloc order GROUPED)"
+    },
+    {
+     "name": "win_Open",
+     "status": "EXACT",
+     "detail": "(reloc order GROUPED)"
+    }
+   ],
+   "private_data_exact": true,
+   "private_data_rows": [
+    {
+     "name": "_DATA",
+     "status": "EXACT",
+     "detail": "(132 bytes, relocation order EXACT)"
+    },
+    {
+     "name": "CONST",
+     "status": "EXACT",
+     "detail": "(14 bytes, relocation order GROUPED)"
+    }
+   ],
+   "candidate_exact": false,
+   "target_rows": [
+    {
+     "name": "f_20E8_0903",
+     "status": "FAIL",
+     "detail": "length 280 != target 286; bytes differ (first at +0x77, 145 differing); relocation set differs (6 vs 6)"
+    }
+   ],
+   "refused": true
+  },
+  {
+   "name": "index_ptradd_origin_mode_o",
+   "source": "build/workers/ptr_small/variants/index_ptradd_origin_mode_o.c",
+   "source_sha256_file_bytes": "44120eea2df0887a6d3fd7a366ce45401457bd838dfe478c049bc96fc889a24d",
+   "source_sha256_search_text": "44120eea2df0887a6d3fd7a366ce45401457bd838dfe478c049bc96fc889a24d",
+   "search": {
+    "status": "MISMATCH",
+    "reasons": [
+     "length 280 != target 286",
+     "bytes differ (first at +0x77, 145 differing)",
+     "relocation set differs (6 vs 6)"
+    ],
+    "opcode_ratio": 0.9856,
+    "first_diff_insn": 41,
+    "profile": "msc600ax",
+    "flags": [
+     "/AL",
+     "/Os",
+     "/Oe",
+     "/Og",
+     "/Gs",
+     "/Zi"
+    ]
+   },
+   "verify_only_exit_code": 1,
+   "accepted_peers_exact": true,
+   "accepted_peer_rows": [
+    {
+     "name": "f_20E8_0000",
+     "status": "EXACT",
+     "detail": "(reloc order EXACT)"
+    },
+    {
+     "name": "win_LoadAllWindows",
+     "status": "EXACT",
+     "detail": "(reloc order GROUPED)"
+    },
+    {
+     "name": "win_Swap",
+     "status": "EXACT",
+     "detail": "(reloc order GROUPED)"
+    },
+    {
+     "name": "win_Close",
+     "status": "EXACT",
+     "detail": "(reloc order GROUPED)"
+    },
+    {
+     "name": "f_20E8_0725",
+     "status": "EXACT",
+     "detail": "(reloc order GROUPED)"
+    },
+    {
+     "name": "f_20E8_0776",
+     "status": "EXACT",
+     "detail": "(reloc order GROUPED)"
+    },
+    {
+     "name": "win_SetWinDrawHook",
+     "status": "EXACT",
+     "detail": "(reloc order EXACT)"
+    },
+    {
+     "name": "f_20E8_088B",
+     "status": "EXACT",
+     "detail": "(reloc order EXACT)"
+    },
+    {
+     "name": "f_20E8_089F",
+     "status": "EXACT",
+     "detail": "(reloc order EXACT)"
+    },
+    {
+     "name": "f_20E8_08B3",
+     "status": "EXACT",
+     "detail": "(reloc order EXACT)"
+    },
+    {
+     "name": "f_20E8_08C7",
+     "status": "EXACT",
+     "detail": "(reloc order EXACT)"
+    },
+    {
+     "name": "f_20E8_08DB",
+     "status": "EXACT",
+     "detail": "(reloc order EXACT)"
+    },
+    {
+     "name": "f_20E8_08EF",
+     "status": "EXACT",
+     "detail": "(reloc order EXACT)"
+    },
+    {
+     "name": "f_20E8_0A21",
+     "status": "EXACT",
+     "detail": "(reloc order GROUPED)"
+    },
+    {
+     "name": "win_LoadWindow",
+     "status": "EXACT",
+     "detail": "(reloc order GROUPED)"
+    },
+    {
+     "name": "win_Open",
+     "status": "EXACT",
+     "detail": "(reloc order GROUPED)"
+    }
+   ],
+   "private_data_exact": true,
+   "private_data_rows": [
+    {
+     "name": "_DATA",
+     "status": "EXACT",
+     "detail": "(132 bytes, relocation order EXACT)"
+    },
+    {
+     "name": "CONST",
+     "status": "EXACT",
+     "detail": "(14 bytes, relocation order GROUPED)"
+    }
+   ],
+   "candidate_exact": false,
+   "target_rows": [
+    {
+     "name": "f_20E8_0903",
+     "status": "FAIL",
+     "detail": "length 280 != target 286; bytes differ (first at +0x77, 145 differing); relocation set differs (6 vs 6)"
+    }
+   ],
+   "refused": true
+  },
+  {
+   "name": "index_ptradd_ref_o",
+   "source": "build/workers/ptr_small/variants/index_ptradd_ref_o.c",
+   "source_sha256_file_bytes": "5bec6373603bc6c193124f09a51bde4b05d6bb63ba01b71f9e29bae3368d32f4",
+   "source_sha256_search_text": "5bec6373603bc6c193124f09a51bde4b05d6bb63ba01b71f9e29bae3368d32f4",
+   "search": {
+    "status": "MISMATCH",
+    "reasons": [
+     "length 280 != target 286",
+     "bytes differ (first at +0x77, 145 differing)",
+     "relocation set differs (6 vs 6)"
+    ],
+    "opcode_ratio": 0.9856,
+    "first_diff_insn": 41,
+    "profile": "msc600ax",
+    "flags": [
+     "/AL",
+     "/Os",
+     "/Oe",
+     "/Og",
+     "/Gs",
+     "/Zi"
+    ]
+   },
+   "verify_only_exit_code": 1,
+   "accepted_peers_exact": true,
+   "accepted_peer_rows": [
+    {
+     "name": "f_20E8_0000",
+     "status": "EXACT",
+     "detail": "(reloc order EXACT)"
+    },
+    {
+     "name": "win_LoadAllWindows",
+     "status": "EXACT",
+     "detail": "(reloc order GROUPED)"
+    },
+    {
+     "name": "win_Swap",
+     "status": "EXACT",
+     "detail": "(reloc order GROUPED)"
+    },
+    {
+     "name": "win_Close",
+     "status": "EXACT",
+     "detail": "(reloc order GROUPED)"
+    },
+    {
+     "name": "f_20E8_0725",
+     "status": "EXACT",
+     "detail": "(reloc order GROUPED)"
+    },
+    {
+     "name": "f_20E8_0776",
+     "status": "EXACT",
+     "detail": "(reloc order GROUPED)"
+    },
+    {
+     "name": "win_SetWinDrawHook",
+     "status": "EXACT",
+     "detail": "(reloc order EXACT)"
+    },
+    {
+     "name": "f_20E8_088B",
+     "status": "EXACT",
+     "detail": "(reloc order EXACT)"
+    },
+    {
+     "name": "f_20E8_089F",
+     "status": "EXACT",
+     "detail": "(reloc order EXACT)"
+    },
+    {
+     "name": "f_20E8_08B3",
+     "status": "EXACT",
+     "detail": "(reloc order EXACT)"
+    },
+    {
+     "name": "f_20E8_08C7",
+     "status": "EXACT",
+     "detail": "(reloc order EXACT)"
+    },
+    {
+     "name": "f_20E8_08DB",
+     "status": "EXACT",
+     "detail": "(reloc order EXACT)"
+    },
+    {
+     "name": "f_20E8_08EF",
+     "status": "EXACT",
+     "detail": "(reloc order EXACT)"
+    },
+    {
+     "name": "f_20E8_0A21",
+     "status": "EXACT",
+     "detail": "(reloc order GROUPED)"
+    },
+    {
+     "name": "win_LoadWindow",
+     "status": "EXACT",
+     "detail": "(reloc order GROUPED)"
+    },
+    {
+     "name": "win_Open",
+     "status": "EXACT",
+     "detail": "(reloc order GROUPED)"
+    }
+   ],
+   "private_data_exact": true,
+   "private_data_rows": [
+    {
+     "name": "_DATA",
+     "status": "EXACT",
+     "detail": "(132 bytes, relocation order EXACT)"
+    },
+    {
+     "name": "CONST",
+     "status": "EXACT",
+     "detail": "(14 bytes, relocation order GROUPED)"
+    }
+   ],
+   "candidate_exact": false,
+   "target_rows": [
+    {
+     "name": "f_20E8_0903",
+     "status": "FAIL",
+     "detail": "length 280 != target 286; bytes differ (first at +0x77, 145 differing); relocation set differs (6 vs 6)"
+    }
+   ],
+   "refused": true
+  },
+  {
+   "name": "index_ptradd_origin_ref_o",
+   "source": "build/workers/ptr_small/variants/index_ptradd_origin_ref_o.c",
+   "source_sha256_file_bytes": "15c2f443c584d0605d1bd5ca2a11b60acb5bc3926eca1acb58cf1ef8287569cc",
+   "source_sha256_search_text": "15c2f443c584d0605d1bd5ca2a11b60acb5bc3926eca1acb58cf1ef8287569cc",
+   "search": {
+    "status": "MISMATCH",
+    "reasons": [
+     "length 280 != target 286",
+     "bytes differ (first at +0x77, 145 differing)",
+     "relocation set differs (6 vs 6)"
+    ],
+    "opcode_ratio": 0.9856,
+    "first_diff_insn": 41,
+    "profile": "msc600ax",
+    "flags": [
+     "/AL",
+     "/Os",
+     "/Oe",
+     "/Og",
+     "/Gs",
+     "/Zi"
+    ]
+   },
+   "verify_only_exit_code": 1,
+   "accepted_peers_exact": true,
+   "accepted_peer_rows": [
+    {
+     "name": "f_20E8_0000",
+     "status": "EXACT",
+     "detail": "(reloc order EXACT)"
+    },
+    {
+     "name": "win_LoadAllWindows",
+     "status": "EXACT",
+     "detail": "(reloc order GROUPED)"
+    },
+    {
+     "name": "win_Swap",
+     "status": "EXACT",
+     "detail": "(reloc order GROUPED)"
+    },
+    {
+     "name": "win_Close",
+     "status": "EXACT",
+     "detail": "(reloc order GROUPED)"
+    },
+    {
+     "name": "f_20E8_0725",
+     "status": "EXACT",
+     "detail": "(reloc order GROUPED)"
+    },
+    {
+     "name": "f_20E8_0776",
+     "status": "EXACT",
+     "detail": "(reloc order GROUPED)"
+    },
+    {
+     "name": "win_SetWinDrawHook",
+     "status": "EXACT",
+     "detail": "(reloc order EXACT)"
+    },
+    {
+     "name": "f_20E8_088B",
+     "status": "EXACT",
+     "detail": "(reloc order EXACT)"
+    },
+    {
+     "name": "f_20E8_089F",
+     "status": "EXACT",
+     "detail": "(reloc order EXACT)"
+    },
+    {
+     "name": "f_20E8_08B3",
+     "status": "EXACT",
+     "detail": "(reloc order EXACT)"
+    },
+    {
+     "name": "f_20E8_08C7",
+     "status": "EXACT",
+     "detail": "(reloc order EXACT)"
+    },
+    {
+     "name": "f_20E8_08DB",
+     "status": "EXACT",
+     "detail": "(reloc order EXACT)"
+    },
+    {
+     "name": "f_20E8_08EF",
+     "status": "EXACT",
+     "detail": "(reloc order EXACT)"
+    },
+    {
+     "name": "f_20E8_0A21",
+     "status": "EXACT",
+     "detail": "(reloc order GROUPED)"
+    },
+    {
+     "name": "win_LoadWindow",
+     "status": "EXACT",
+     "detail": "(reloc order GROUPED)"
+    },
+    {
+     "name": "win_Open",
+     "status": "EXACT",
+     "detail": "(reloc order GROUPED)"
+    }
+   ],
+   "private_data_exact": true,
+   "private_data_rows": [
+    {
+     "name": "_DATA",
+     "status": "EXACT",
+     "detail": "(132 bytes, relocation order EXACT)"
+    },
+    {
+     "name": "CONST",
+     "status": "EXACT",
+     "detail": "(14 bytes, relocation order GROUPED)"
+    }
+   ],
+   "candidate_exact": false,
+   "target_rows": [
+    {
+     "name": "f_20E8_0903",
+     "status": "FAIL",
+     "detail": "length 280 != target 286; bytes differ (first at +0x77, 145 differing); relocation set differs (6 vs 6)"
+    }
+   ],
+   "refused": true
+  },
+  {
+   "name": "index_ptradd_mode_ref_o",
+   "source": "build/workers/ptr_small/variants/index_ptradd_mode_ref_o.c",
+   "source_sha256_file_bytes": "e530c1db7a2697ca5cde06a9a76f7a104ef292e592b115be9e2627491ef72738",
+   "source_sha256_search_text": "e530c1db7a2697ca5cde06a9a76f7a104ef292e592b115be9e2627491ef72738",
+   "search": {
+    "status": "MISMATCH",
+    "reasons": [
+     "length 280 != target 286",
+     "bytes differ (first at +0x77, 145 differing)",
+     "relocation set differs (6 vs 6)"
+    ],
+    "opcode_ratio": 0.9856,
+    "first_diff_insn": 41,
+    "profile": "msc600ax",
+    "flags": [
+     "/AL",
+     "/Os",
+     "/Oe",
+     "/Og",
+     "/Gs",
+     "/Zi"
+    ]
+   },
+   "verify_only_exit_code": 1,
+   "accepted_peers_exact": true,
+   "accepted_peer_rows": [
+    {
+     "name": "f_20E8_0000",
+     "status": "EXACT",
+     "detail": "(reloc order EXACT)"
+    },
+    {
+     "name": "win_LoadAllWindows",
+     "status": "EXACT",
+     "detail": "(reloc order GROUPED)"
+    },
+    {
+     "name": "win_Swap",
+     "status": "EXACT",
+     "detail": "(reloc order GROUPED)"
+    },
+    {
+     "name": "win_Close",
+     "status": "EXACT",
+     "detail": "(reloc order GROUPED)"
+    },
+    {
+     "name": "f_20E8_0725",
+     "status": "EXACT",
+     "detail": "(reloc order GROUPED)"
+    },
+    {
+     "name": "f_20E8_0776",
+     "status": "EXACT",
+     "detail": "(reloc order GROUPED)"
+    },
+    {
+     "name": "win_SetWinDrawHook",
+     "status": "EXACT",
+     "detail": "(reloc order EXACT)"
+    },
+    {
+     "name": "f_20E8_088B",
+     "status": "EXACT",
+     "detail": "(reloc order EXACT)"
+    },
+    {
+     "name": "f_20E8_089F",
+     "status": "EXACT",
+     "detail": "(reloc order EXACT)"
+    },
+    {
+     "name": "f_20E8_08B3",
+     "status": "EXACT",
+     "detail": "(reloc order EXACT)"
+    },
+    {
+     "name": "f_20E8_08C7",
+     "status": "EXACT",
+     "detail": "(reloc order EXACT)"
+    },
+    {
+     "name": "f_20E8_08DB",
+     "status": "EXACT",
+     "detail": "(reloc order EXACT)"
+    },
+    {
+     "name": "f_20E8_08EF",
+     "status": "EXACT",
+     "detail": "(reloc order EXACT)"
+    },
+    {
+     "name": "f_20E8_0A21",
+     "status": "EXACT",
+     "detail": "(reloc order GROUPED)"
+    },
+    {
+     "name": "win_LoadWindow",
+     "status": "EXACT",
+     "detail": "(reloc order GROUPED)"
+    },
+    {
+     "name": "win_Open",
+     "status": "EXACT",
+     "detail": "(reloc order GROUPED)"
+    }
+   ],
+   "private_data_exact": true,
+   "private_data_rows": [
+    {
+     "name": "_DATA",
+     "status": "EXACT",
+     "detail": "(132 bytes, relocation order EXACT)"
+    },
+    {
+     "name": "CONST",
+     "status": "EXACT",
+     "detail": "(14 bytes, relocation order GROUPED)"
+    }
+   ],
+   "candidate_exact": false,
+   "target_rows": [
+    {
+     "name": "f_20E8_0903",
+     "status": "FAIL",
+     "detail": "length 280 != target 286; bytes differ (first at +0x77, 145 differing); relocation set differs (6 vs 6)"
+    }
+   ],
+   "refused": true
+  },
+  {
+   "name": "index_ptradd_origin_mode_ref_o",
+   "source": "build/workers/ptr_small/variants/index_ptradd_origin_mode_ref_o.c",
+   "source_sha256_file_bytes": "5756a85a0b366a314dd6fb2ffbc6a760cea0a6a0753e33102c66810f32cd4b1e",
+   "source_sha256_search_text": "5756a85a0b366a314dd6fb2ffbc6a760cea0a6a0753e33102c66810f32cd4b1e",
+   "search": {
+    "status": "MISMATCH",
+    "reasons": [
+     "length 280 != target 286",
+     "bytes differ (first at +0x77, 145 differing)",
+     "relocation set differs (6 vs 6)"
+    ],
+    "opcode_ratio": 0.9856,
+    "first_diff_insn": 41,
+    "profile": "msc600ax",
+    "flags": [
+     "/AL",
+     "/Os",
+     "/Oe",
+     "/Og",
+     "/Gs",
+     "/Zi"
+    ]
+   },
+   "verify_only_exit_code": 1,
+   "accepted_peers_exact": true,
+   "accepted_peer_rows": [
+    {
+     "name": "f_20E8_0000",
+     "status": "EXACT",
+     "detail": "(reloc order EXACT)"
+    },
+    {
+     "name": "win_LoadAllWindows",
+     "status": "EXACT",
+     "detail": "(reloc order GROUPED)"
+    },
+    {
+     "name": "win_Swap",
+     "status": "EXACT",
+     "detail": "(reloc order GROUPED)"
+    },
+    {
+     "name": "win_Close",
+     "status": "EXACT",
+     "detail": "(reloc order GROUPED)"
+    },
+    {
+     "name": "f_20E8_0725",
+     "status": "EXACT",
+     "detail": "(reloc order GROUPED)"
+    },
+    {
+     "name": "f_20E8_0776",
+     "status": "EXACT",
+     "detail": "(reloc order GROUPED)"
+    },
+    {
+     "name": "win_SetWinDrawHook",
+     "status": "EXACT",
+     "detail": "(reloc order EXACT)"
+    },
+    {
+     "name": "f_20E8_088B",
+     "status": "EXACT",
+     "detail": "(reloc order EXACT)"
+    },
+    {
+     "name": "f_20E8_089F",
+     "status": "EXACT",
+     "detail": "(reloc order EXACT)"
+    },
+    {
+     "name": "f_20E8_08B3",
+     "status": "EXACT",
+     "detail": "(reloc order EXACT)"
+    },
+    {
+     "name": "f_20E8_08C7",
+     "status": "EXACT",
+     "detail": "(reloc order EXACT)"
+    },
+    {
+     "name": "f_20E8_08DB",
+     "status": "EXACT",
+     "detail": "(reloc order EXACT)"
+    },
+    {
+     "name": "f_20E8_08EF",
+     "status": "EXACT",
+     "detail": "(reloc order EXACT)"
+    },
+    {
+     "name": "f_20E8_0A21",
+     "status": "EXACT",
+     "detail": "(reloc order GROUPED)"
+    },
+    {
+     "name": "win_LoadWindow",
+     "status": "EXACT",
+     "detail": "(reloc order GROUPED)"
+    },
+    {
+     "name": "win_Open",
+     "status": "EXACT",
+     "detail": "(reloc order GROUPED)"
+    }
+   ],
+   "private_data_exact": true,
+   "private_data_rows": [
+    {
+     "name": "_DATA",
+     "status": "EXACT",
+     "detail": "(132 bytes, relocation order EXACT)"
+    },
+    {
+     "name": "CONST",
+     "status": "EXACT",
+     "detail": "(14 bytes, relocation order GROUPED)"
+    }
+   ],
+   "candidate_exact": false,
+   "target_rows": [
+    {
+     "name": "f_20E8_0903",
+     "status": "FAIL",
+     "detail": "length 280 != target 286; bytes differ (first at +0x77, 145 differing); relocation set differs (6 vs 6)"
+    }
+   ],
+   "refused": true
+  },
+  {
+   "name": "index_ptradd_rect",
+   "source": "build/workers/ptr_small/variants/index_ptradd_rect.c",
+   "source_sha256_file_bytes": "641e3b2721df56ac949f378395c2a8fa67e6aca63260d94beafdc77cf2fb51fa",
+   "source_sha256_search_text": "641e3b2721df56ac949f378395c2a8fa67e6aca63260d94beafdc77cf2fb51fa",
+   "search": {
+    "status": "MISMATCH",
+    "reasons": [
+     "length 280 != target 286",
+     "bytes differ (first at +0x77, 145 differing)",
+     "relocation set differs (6 vs 6)"
+    ],
+    "opcode_ratio": 0.9856,
+    "first_diff_insn": 41,
+    "profile": "msc600ax",
+    "flags": [
+     "/AL",
+     "/Os",
+     "/Oe",
+     "/Og",
+     "/Gs",
+     "/Zi"
+    ]
+   },
+   "verify_only_exit_code": 1,
+   "accepted_peers_exact": true,
+   "accepted_peer_rows": [
+    {
+     "name": "f_20E8_0000",
+     "status": "EXACT",
+     "detail": "(reloc order EXACT)"
+    },
+    {
+     "name": "win_LoadAllWindows",
+     "status": "EXACT",
+     "detail": "(reloc order GROUPED)"
+    },
+    {
+     "name": "win_Swap",
+     "status": "EXACT",
+     "detail": "(reloc order GROUPED)"
+    },
+    {
+     "name": "win_Close",
+     "status": "EXACT",
+     "detail": "(reloc order GROUPED)"
+    },
+    {
+     "name": "f_20E8_0725",
+     "status": "EXACT",
+     "detail": "(reloc order GROUPED)"
+    },
+    {
+     "name": "f_20E8_0776",
+     "status": "EXACT",
+     "detail": "(reloc order GROUPED)"
+    },
+    {
+     "name": "win_SetWinDrawHook",
+     "status": "EXACT",
+     "detail": "(reloc order EXACT)"
+    },
+    {
+     "name": "f_20E8_088B",
+     "status": "EXACT",
+     "detail": "(reloc order EXACT)"
+    },
+    {
+     "name": "f_20E8_089F",
+     "status": "EXACT",
+     "detail": "(reloc order EXACT)"
+    },
+    {
+     "name": "f_20E8_08B3",
+     "status": "EXACT",
+     "detail": "(reloc order EXACT)"
+    },
+    {
+     "name": "f_20E8_08C7",
+     "status": "EXACT",
+     "detail": "(reloc order EXACT)"
+    },
+    {
+     "name": "f_20E8_08DB",
+     "status": "EXACT",
+     "detail": "(reloc order EXACT)"
+    },
+    {
+     "name": "f_20E8_08EF",
+     "status": "EXACT",
+     "detail": "(reloc order EXACT)"
+    },
+    {
+     "name": "f_20E8_0A21",
+     "status": "EXACT",
+     "detail": "(reloc order GROUPED)"
+    },
+    {
+     "name": "win_LoadWindow",
+     "status": "EXACT",
+     "detail": "(reloc order GROUPED)"
+    },
+    {
+     "name": "win_Open",
+     "status": "EXACT",
+     "detail": "(reloc order GROUPED)"
+    }
+   ],
+   "private_data_exact": true,
+   "private_data_rows": [
+    {
+     "name": "_DATA",
+     "status": "EXACT",
+     "detail": "(132 bytes, relocation order EXACT)"
+    },
+    {
+     "name": "CONST",
+     "status": "EXACT",
+     "detail": "(14 bytes, relocation order GROUPED)"
+    }
+   ],
+   "candidate_exact": false,
+   "target_rows": [
+    {
+     "name": "f_20E8_0903",
+     "status": "FAIL",
+     "detail": "length 280 != target 286; bytes differ (first at +0x77, 145 differing); relocation set differs (6 vs 6)"
+    }
+   ],
+   "refused": true
+  },
+  {
+   "name": "index_ptradd_origin_rect",
+   "source": "build/workers/ptr_small/variants/index_ptradd_origin_rect.c",
+   "source_sha256_file_bytes": "f31d2fd5c8ee696f4d5d2c0fa322458c5777bcbf8289ae89440b32749fb11fe1",
+   "source_sha256_search_text": "f31d2fd5c8ee696f4d5d2c0fa322458c5777bcbf8289ae89440b32749fb11fe1",
+   "search": {
+    "status": "MISMATCH",
+    "reasons": [
+     "length 280 != target 286",
+     "bytes differ (first at +0x77, 145 differing)",
+     "relocation set differs (6 vs 6)"
+    ],
+    "opcode_ratio": 0.9856,
+    "first_diff_insn": 41,
+    "profile": "msc600ax",
+    "flags": [
+     "/AL",
+     "/Os",
+     "/Oe",
+     "/Og",
+     "/Gs",
+     "/Zi"
+    ]
+   },
+   "verify_only_exit_code": 1,
+   "accepted_peers_exact": true,
+   "accepted_peer_rows": [
+    {
+     "name": "f_20E8_0000",
+     "status": "EXACT",
+     "detail": "(reloc order EXACT)"
+    },
+    {
+     "name": "win_LoadAllWindows",
+     "status": "EXACT",
+     "detail": "(reloc order GROUPED)"
+    },
+    {
+     "name": "win_Swap",
+     "status": "EXACT",
+     "detail": "(reloc order GROUPED)"
+    },
+    {
+     "name": "win_Close",
+     "status": "EXACT",
+     "detail": "(reloc order GROUPED)"
+    },
+    {
+     "name": "f_20E8_0725",
+     "status": "EXACT",
+     "detail": "(reloc order GROUPED)"
+    },
+    {
+     "name": "f_20E8_0776",
+     "status": "EXACT",
+     "detail": "(reloc order GROUPED)"
+    },
+    {
+     "name": "win_SetWinDrawHook",
+     "status": "EXACT",
+     "detail": "(reloc order EXACT)"
+    },
+    {
+     "name": "f_20E8_088B",
+     "status": "EXACT",
+     "detail": "(reloc order EXACT)"
+    },
+    {
+     "name": "f_20E8_089F",
+     "status": "EXACT",
+     "detail": "(reloc order EXACT)"
+    },
+    {
+     "name": "f_20E8_08B3",
+     "status": "EXACT",
+     "detail": "(reloc order EXACT)"
+    },
+    {
+     "name": "f_20E8_08C7",
+     "status": "EXACT",
+     "detail": "(reloc order EXACT)"
+    },
+    {
+     "name": "f_20E8_08DB",
+     "status": "EXACT",
+     "detail": "(reloc order EXACT)"
+    },
+    {
+     "name": "f_20E8_08EF",
+     "status": "EXACT",
+     "detail": "(reloc order EXACT)"
+    },
+    {
+     "name": "f_20E8_0A21",
+     "status": "EXACT",
+     "detail": "(reloc order GROUPED)"
+    },
+    {
+     "name": "win_LoadWindow",
+     "status": "EXACT",
+     "detail": "(reloc order GROUPED)"
+    },
+    {
+     "name": "win_Open",
+     "status": "EXACT",
+     "detail": "(reloc order GROUPED)"
+    }
+   ],
+   "private_data_exact": true,
+   "private_data_rows": [
+    {
+     "name": "_DATA",
+     "status": "EXACT",
+     "detail": "(132 bytes, relocation order EXACT)"
+    },
+    {
+     "name": "CONST",
+     "status": "EXACT",
+     "detail": "(14 bytes, relocation order GROUPED)"
+    }
+   ],
+   "candidate_exact": false,
+   "target_rows": [
+    {
+     "name": "f_20E8_0903",
+     "status": "FAIL",
+     "detail": "length 280 != target 286; bytes differ (first at +0x77, 145 differing); relocation set differs (6 vs 6)"
+    }
+   ],
+   "refused": true
+  },
+  {
+   "name": "index_ptradd_mode_rect",
+   "source": "build/workers/ptr_small/variants/index_ptradd_mode_rect.c",
+   "source_sha256_file_bytes": "88f13876cf90676501ab7295ea0668ac20b08634bb32d64cc8187ce86cdd55ea",
+   "source_sha256_search_text": "88f13876cf90676501ab7295ea0668ac20b08634bb32d64cc8187ce86cdd55ea",
+   "search": {
+    "status": "MISMATCH",
+    "reasons": [
+     "length 280 != target 286",
+     "bytes differ (first at +0x77, 145 differing)",
+     "relocation set differs (6 vs 6)"
+    ],
+    "opcode_ratio": 0.9856,
+    "first_diff_insn": 41,
+    "profile": "msc600ax",
+    "flags": [
+     "/AL",
+     "/Os",
+     "/Oe",
+     "/Og",
+     "/Gs",
+     "/Zi"
+    ]
+   },
+   "verify_only_exit_code": 1,
+   "accepted_peers_exact": true,
+   "accepted_peer_rows": [
+    {
+     "name": "f_20E8_0000",
+     "status": "EXACT",
+     "detail": "(reloc order EXACT)"
+    },
+    {
+     "name": "win_LoadAllWindows",
+     "status": "EXACT",
+     "detail": "(reloc order GROUPED)"
+    },
+    {
+     "name": "win_Swap",
+     "status": "EXACT",
+     "detail": "(reloc order GROUPED)"
+    },
+    {
+     "name": "win_Close",
+     "status": "EXACT",
+     "detail": "(reloc order GROUPED)"
+    },
+    {
+     "name": "f_20E8_0725",
+     "status": "EXACT",
+     "detail": "(reloc order GROUPED)"
+    },
+    {
+     "name": "f_20E8_0776",
+     "status": "EXACT",
+     "detail": "(reloc order GROUPED)"
+    },
+    {
+     "name": "win_SetWinDrawHook",
+     "status": "EXACT",
+     "detail": "(reloc order EXACT)"
+    },
+    {
+     "name": "f_20E8_088B",
+     "status": "EXACT",
+     "detail": "(reloc order EXACT)"
+    },
+    {
+     "name": "f_20E8_089F",
+     "status": "EXACT",
+     "detail": "(reloc order EXACT)"
+    },
+    {
+     "name": "f_20E8_08B3",
+     "status": "EXACT",
+     "detail": "(reloc order EXACT)"
+    },
+    {
+     "name": "f_20E8_08C7",
+     "status": "EXACT",
+     "detail": "(reloc order EXACT)"
+    },
+    {
+     "name": "f_20E8_08DB",
+     "status": "EXACT",
+     "detail": "(reloc order EXACT)"
+    },
+    {
+     "name": "f_20E8_08EF",
+     "status": "EXACT",
+     "detail": "(reloc order EXACT)"
+    },
+    {
+     "name": "f_20E8_0A21",
+     "status": "EXACT",
+     "detail": "(reloc order GROUPED)"
+    },
+    {
+     "name": "win_LoadWindow",
+     "status": "EXACT",
+     "detail": "(reloc order GROUPED)"
+    },
+    {
+     "name": "win_Open",
+     "status": "EXACT",
+     "detail": "(reloc order GROUPED)"
+    }
+   ],
+   "private_data_exact": true,
+   "private_data_rows": [
+    {
+     "name": "_DATA",
+     "status": "EXACT",
+     "detail": "(132 bytes, relocation order EXACT)"
+    },
+    {
+     "name": "CONST",
+     "status": "EXACT",
+     "detail": "(14 bytes, relocation order GROUPED)"
+    }
+   ],
+   "candidate_exact": false,
+   "target_rows": [
+    {
+     "name": "f_20E8_0903",
+     "status": "FAIL",
+     "detail": "length 280 != target 286; bytes differ (first at +0x77, 145 differing); relocation set differs (6 vs 6)"
+    }
+   ],
+   "refused": true
+  },
+  {
+   "name": "index_ptradd_origin_mode_rect",
+   "source": "build/workers/ptr_small/variants/index_ptradd_origin_mode_rect.c",
+   "source_sha256_file_bytes": "1aa06e670da5ba83a3d911cc1a1f6df95c9c8575657c8cf3aa2c2cc68bfaf7ce",
+   "source_sha256_search_text": "1aa06e670da5ba83a3d911cc1a1f6df95c9c8575657c8cf3aa2c2cc68bfaf7ce",
+   "search": {
+    "status": "MISMATCH",
+    "reasons": [
+     "length 280 != target 286",
+     "bytes differ (first at +0x77, 145 differing)",
+     "relocation set differs (6 vs 6)"
+    ],
+    "opcode_ratio": 0.9856,
+    "first_diff_insn": 41,
+    "profile": "msc600ax",
+    "flags": [
+     "/AL",
+     "/Os",
+     "/Oe",
+     "/Og",
+     "/Gs",
+     "/Zi"
+    ]
+   },
+   "verify_only_exit_code": 1,
+   "accepted_peers_exact": true,
+   "accepted_peer_rows": [
+    {
+     "name": "f_20E8_0000",
+     "status": "EXACT",
+     "detail": "(reloc order EXACT)"
+    },
+    {
+     "name": "win_LoadAllWindows",
+     "status": "EXACT",
+     "detail": "(reloc order GROUPED)"
+    },
+    {
+     "name": "win_Swap",
+     "status": "EXACT",
+     "detail": "(reloc order GROUPED)"
+    },
+    {
+     "name": "win_Close",
+     "status": "EXACT",
+     "detail": "(reloc order GROUPED)"
+    },
+    {
+     "name": "f_20E8_0725",
+     "status": "EXACT",
+     "detail": "(reloc order GROUPED)"
+    },
+    {
+     "name": "f_20E8_0776",
+     "status": "EXACT",
+     "detail": "(reloc order GROUPED)"
+    },
+    {
+     "name": "win_SetWinDrawHook",
+     "status": "EXACT",
+     "detail": "(reloc order EXACT)"
+    },
+    {
+     "name": "f_20E8_088B",
+     "status": "EXACT",
+     "detail": "(reloc order EXACT)"
+    },
+    {
+     "name": "f_20E8_089F",
+     "status": "EXACT",
+     "detail": "(reloc order EXACT)"
+    },
+    {
+     "name": "f_20E8_08B3",
+     "status": "EXACT",
+     "detail": "(reloc order EXACT)"
+    },
+    {
+     "name": "f_20E8_08C7",
+     "status": "EXACT",
+     "detail": "(reloc order EXACT)"
+    },
+    {
+     "name": "f_20E8_08DB",
+     "status": "EXACT",
+     "detail": "(reloc order EXACT)"
+    },
+    {
+     "name": "f_20E8_08EF",
+     "status": "EXACT",
+     "detail": "(reloc order EXACT)"
+    },
+    {
+     "name": "f_20E8_0A21",
+     "status": "EXACT",
+     "detail": "(reloc order GROUPED)"
+    },
+    {
+     "name": "win_LoadWindow",
+     "status": "EXACT",
+     "detail": "(reloc order GROUPED)"
+    },
+    {
+     "name": "win_Open",
+     "status": "EXACT",
+     "detail": "(reloc order GROUPED)"
+    }
+   ],
+   "private_data_exact": true,
+   "private_data_rows": [
+    {
+     "name": "_DATA",
+     "status": "EXACT",
+     "detail": "(132 bytes, relocation order EXACT)"
+    },
+    {
+     "name": "CONST",
+     "status": "EXACT",
+     "detail": "(14 bytes, relocation order GROUPED)"
+    }
+   ],
+   "candidate_exact": false,
+   "target_rows": [
+    {
+     "name": "f_20E8_0903",
+     "status": "FAIL",
+     "detail": "length 280 != target 286; bytes differ (first at +0x77, 145 differing); relocation set differs (6 vs 6)"
+    }
+   ],
+   "refused": true
+  },
+  {
+   "name": "index_ptradd_ref_rect",
+   "source": "build/workers/ptr_small/variants/index_ptradd_ref_rect.c",
+   "source_sha256_file_bytes": "7994bb5e1c43cada172f78e6d4ee53586aecee752fa3a618b0433a9144fbafa5",
+   "source_sha256_search_text": "7994bb5e1c43cada172f78e6d4ee53586aecee752fa3a618b0433a9144fbafa5",
+   "search": {
+    "status": "MISMATCH",
+    "reasons": [
+     "length 280 != target 286",
+     "bytes differ (first at +0x77, 145 differing)",
+     "relocation set differs (6 vs 6)"
+    ],
+    "opcode_ratio": 0.9856,
+    "first_diff_insn": 41,
+    "profile": "msc600ax",
+    "flags": [
+     "/AL",
+     "/Os",
+     "/Oe",
+     "/Og",
+     "/Gs",
+     "/Zi"
+    ]
+   },
+   "verify_only_exit_code": 1,
+   "accepted_peers_exact": true,
+   "accepted_peer_rows": [
+    {
+     "name": "f_20E8_0000",
+     "status": "EXACT",
+     "detail": "(reloc order EXACT)"
+    },
+    {
+     "name": "win_LoadAllWindows",
+     "status": "EXACT",
+     "detail": "(reloc order GROUPED)"
+    },
+    {
+     "name": "win_Swap",
+     "status": "EXACT",
+     "detail": "(reloc order GROUPED)"
+    },
+    {
+     "name": "win_Close",
+     "status": "EXACT",
+     "detail": "(reloc order GROUPED)"
+    },
+    {
+     "name": "f_20E8_0725",
+     "status": "EXACT",
+     "detail": "(reloc order GROUPED)"
+    },
+    {
+     "name": "f_20E8_0776",
+     "status": "EXACT",
+     "detail": "(reloc order GROUPED)"
+    },
+    {
+     "name": "win_SetWinDrawHook",
+     "status": "EXACT",
+     "detail": "(reloc order EXACT)"
+    },
+    {
+     "name": "f_20E8_088B",
+     "status": "EXACT",
+     "detail": "(reloc order EXACT)"
+    },
+    {
+     "name": "f_20E8_089F",
+     "status": "EXACT",
+     "detail": "(reloc order EXACT)"
+    },
+    {
+     "name": "f_20E8_08B3",
+     "status": "EXACT",
+     "detail": "(reloc order EXACT)"
+    },
+    {
+     "name": "f_20E8_08C7",
+     "status": "EXACT",
+     "detail": "(reloc order EXACT)"
+    },
+    {
+     "name": "f_20E8_08DB",
+     "status": "EXACT",
+     "detail": "(reloc order EXACT)"
+    },
+    {
+     "name": "f_20E8_08EF",
+     "status": "EXACT",
+     "detail": "(reloc order EXACT)"
+    },
+    {
+     "name": "f_20E8_0A21",
+     "status": "EXACT",
+     "detail": "(reloc order GROUPED)"
+    },
+    {
+     "name": "win_LoadWindow",
+     "status": "EXACT",
+     "detail": "(reloc order GROUPED)"
+    },
+    {
+     "name": "win_Open",
+     "status": "EXACT",
+     "detail": "(reloc order GROUPED)"
+    }
+   ],
+   "private_data_exact": true,
+   "private_data_rows": [
+    {
+     "name": "_DATA",
+     "status": "EXACT",
+     "detail": "(132 bytes, relocation order EXACT)"
+    },
+    {
+     "name": "CONST",
+     "status": "EXACT",
+     "detail": "(14 bytes, relocation order GROUPED)"
+    }
+   ],
+   "candidate_exact": false,
+   "target_rows": [
+    {
+     "name": "f_20E8_0903",
+     "status": "FAIL",
+     "detail": "length 280 != target 286; bytes differ (first at +0x77, 145 differing); relocation set differs (6 vs 6)"
+    }
+   ],
+   "refused": true
+  },
+  {
+   "name": "index_ptradd_origin_ref_rect",
+   "source": "build/workers/ptr_small/variants/index_ptradd_origin_ref_rect.c",
+   "source_sha256_file_bytes": "87f2ccaeba802109a558dc8a364d9235b66205ceebffbb44fa08a724afb6d713",
+   "source_sha256_search_text": "87f2ccaeba802109a558dc8a364d9235b66205ceebffbb44fa08a724afb6d713",
+   "search": {
+    "status": "MISMATCH",
+    "reasons": [
+     "length 280 != target 286",
+     "bytes differ (first at +0x77, 145 differing)",
+     "relocation set differs (6 vs 6)"
+    ],
+    "opcode_ratio": 0.9856,
+    "first_diff_insn": 41,
+    "profile": "msc600ax",
+    "flags": [
+     "/AL",
+     "/Os",
+     "/Oe",
+     "/Og",
+     "/Gs",
+     "/Zi"
+    ]
+   },
+   "verify_only_exit_code": 1,
+   "accepted_peers_exact": true,
+   "accepted_peer_rows": [
+    {
+     "name": "f_20E8_0000",
+     "status": "EXACT",
+     "detail": "(reloc order EXACT)"
+    },
+    {
+     "name": "win_LoadAllWindows",
+     "status": "EXACT",
+     "detail": "(reloc order GROUPED)"
+    },
+    {
+     "name": "win_Swap",
+     "status": "EXACT",
+     "detail": "(reloc order GROUPED)"
+    },
+    {
+     "name": "win_Close",
+     "status": "EXACT",
+     "detail": "(reloc order GROUPED)"
+    },
+    {
+     "name": "f_20E8_0725",
+     "status": "EXACT",
+     "detail": "(reloc order GROUPED)"
+    },
+    {
+     "name": "f_20E8_0776",
+     "status": "EXACT",
+     "detail": "(reloc order GROUPED)"
+    },
+    {
+     "name": "win_SetWinDrawHook",
+     "status": "EXACT",
+     "detail": "(reloc order EXACT)"
+    },
+    {
+     "name": "f_20E8_088B",
+     "status": "EXACT",
+     "detail": "(reloc order EXACT)"
+    },
+    {
+     "name": "f_20E8_089F",
+     "status": "EXACT",
+     "detail": "(reloc order EXACT)"
+    },
+    {
+     "name": "f_20E8_08B3",
+     "status": "EXACT",
+     "detail": "(reloc order EXACT)"
+    },
+    {
+     "name": "f_20E8_08C7",
+     "status": "EXACT",
+     "detail": "(reloc order EXACT)"
+    },
+    {
+     "name": "f_20E8_08DB",
+     "status": "EXACT",
+     "detail": "(reloc order EXACT)"
+    },
+    {
+     "name": "f_20E8_08EF",
+     "status": "EXACT",
+     "detail": "(reloc order EXACT)"
+    },
+    {
+     "name": "f_20E8_0A21",
+     "status": "EXACT",
+     "detail": "(reloc order GROUPED)"
+    },
+    {
+     "name": "win_LoadWindow",
+     "status": "EXACT",
+     "detail": "(reloc order GROUPED)"
+    },
+    {
+     "name": "win_Open",
+     "status": "EXACT",
+     "detail": "(reloc order GROUPED)"
+    }
+   ],
+   "private_data_exact": true,
+   "private_data_rows": [
+    {
+     "name": "_DATA",
+     "status": "EXACT",
+     "detail": "(132 bytes, relocation order EXACT)"
+    },
+    {
+     "name": "CONST",
+     "status": "EXACT",
+     "detail": "(14 bytes, relocation order GROUPED)"
+    }
+   ],
+   "candidate_exact": false,
+   "target_rows": [
+    {
+     "name": "f_20E8_0903",
+     "status": "FAIL",
+     "detail": "length 280 != target 286; bytes differ (first at +0x77, 145 differing); relocation set differs (6 vs 6)"
+    }
+   ],
+   "refused": true
+  },
+  {
+   "name": "index_ptradd_mode_ref_rect",
+   "source": "build/workers/ptr_small/variants/index_ptradd_mode_ref_rect.c",
+   "source_sha256_file_bytes": "eb02bce59287fd947b6d281ffa382f3345b300883094158ae2fc475f11181946",
+   "source_sha256_search_text": "eb02bce59287fd947b6d281ffa382f3345b300883094158ae2fc475f11181946",
+   "search": {
+    "status": "MISMATCH",
+    "reasons": [
+     "length 280 != target 286",
+     "bytes differ (first at +0x77, 145 differing)",
+     "relocation set differs (6 vs 6)"
+    ],
+    "opcode_ratio": 0.9856,
+    "first_diff_insn": 41,
+    "profile": "msc600ax",
+    "flags": [
+     "/AL",
+     "/Os",
+     "/Oe",
+     "/Og",
+     "/Gs",
+     "/Zi"
+    ]
+   },
+   "verify_only_exit_code": 1,
+   "accepted_peers_exact": true,
+   "accepted_peer_rows": [
+    {
+     "name": "f_20E8_0000",
+     "status": "EXACT",
+     "detail": "(reloc order EXACT)"
+    },
+    {
+     "name": "win_LoadAllWindows",
+     "status": "EXACT",
+     "detail": "(reloc order GROUPED)"
+    },
+    {
+     "name": "win_Swap",
+     "status": "EXACT",
+     "detail": "(reloc order GROUPED)"
+    },
+    {
+     "name": "win_Close",
+     "status": "EXACT",
+     "detail": "(reloc order GROUPED)"
+    },
+    {
+     "name": "f_20E8_0725",
+     "status": "EXACT",
+     "detail": "(reloc order GROUPED)"
+    },
+    {
+     "name": "f_20E8_0776",
+     "status": "EXACT",
+     "detail": "(reloc order GROUPED)"
+    },
+    {
+     "name": "win_SetWinDrawHook",
+     "status": "EXACT",
+     "detail": "(reloc order EXACT)"
+    },
+    {
+     "name": "f_20E8_088B",
+     "status": "EXACT",
+     "detail": "(reloc order EXACT)"
+    },
+    {
+     "name": "f_20E8_089F",
+     "status": "EXACT",
+     "detail": "(reloc order EXACT)"
+    },
+    {
+     "name": "f_20E8_08B3",
+     "status": "EXACT",
+     "detail": "(reloc order EXACT)"
+    },
+    {
+     "name": "f_20E8_08C7",
+     "status": "EXACT",
+     "detail": "(reloc order EXACT)"
+    },
+    {
+     "name": "f_20E8_08DB",
+     "status": "EXACT",
+     "detail": "(reloc order EXACT)"
+    },
+    {
+     "name": "f_20E8_08EF",
+     "status": "EXACT",
+     "detail": "(reloc order EXACT)"
+    },
+    {
+     "name": "f_20E8_0A21",
+     "status": "EXACT",
+     "detail": "(reloc order GROUPED)"
+    },
+    {
+     "name": "win_LoadWindow",
+     "status": "EXACT",
+     "detail": "(reloc order GROUPED)"
+    },
+    {
+     "name": "win_Open",
+     "status": "EXACT",
+     "detail": "(reloc order GROUPED)"
+    }
+   ],
+   "private_data_exact": true,
+   "private_data_rows": [
+    {
+     "name": "_DATA",
+     "status": "EXACT",
+     "detail": "(132 bytes, relocation order EXACT)"
+    },
+    {
+     "name": "CONST",
+     "status": "EXACT",
+     "detail": "(14 bytes, relocation order GROUPED)"
+    }
+   ],
+   "candidate_exact": false,
+   "target_rows": [
+    {
+     "name": "f_20E8_0903",
+     "status": "FAIL",
+     "detail": "length 280 != target 286; bytes differ (first at +0x77, 145 differing); relocation set differs (6 vs 6)"
+    }
+   ],
+   "refused": true
+  },
+  {
+   "name": "index_ptradd_origin_mode_ref_rect",
+   "source": "build/workers/ptr_small/variants/index_ptradd_origin_mode_ref_rect.c",
+   "source_sha256_file_bytes": "ca104cdb3025ee155d536a5b493c989f2a729c06e59395595c9284f422ef22f4",
+   "source_sha256_search_text": "ca104cdb3025ee155d536a5b493c989f2a729c06e59395595c9284f422ef22f4",
+   "search": {
+    "status": "MISMATCH",
+    "reasons": [
+     "length 280 != target 286",
+     "bytes differ (first at +0x77, 145 differing)",
+     "relocation set differs (6 vs 6)"
+    ],
+    "opcode_ratio": 0.9856,
+    "first_diff_insn": 41,
+    "profile": "msc600ax",
+    "flags": [
+     "/AL",
+     "/Os",
+     "/Oe",
+     "/Og",
+     "/Gs",
+     "/Zi"
+    ]
+   },
+   "verify_only_exit_code": 1,
+   "accepted_peers_exact": true,
+   "accepted_peer_rows": [
+    {
+     "name": "f_20E8_0000",
+     "status": "EXACT",
+     "detail": "(reloc order EXACT)"
+    },
+    {
+     "name": "win_LoadAllWindows",
+     "status": "EXACT",
+     "detail": "(reloc order GROUPED)"
+    },
+    {
+     "name": "win_Swap",
+     "status": "EXACT",
+     "detail": "(reloc order GROUPED)"
+    },
+    {
+     "name": "win_Close",
+     "status": "EXACT",
+     "detail": "(reloc order GROUPED)"
+    },
+    {
+     "name": "f_20E8_0725",
+     "status": "EXACT",
+     "detail": "(reloc order GROUPED)"
+    },
+    {
+     "name": "f_20E8_0776",
+     "status": "EXACT",
+     "detail": "(reloc order GROUPED)"
+    },
+    {
+     "name": "win_SetWinDrawHook",
+     "status": "EXACT",
+     "detail": "(reloc order EXACT)"
+    },
+    {
+     "name": "f_20E8_088B",
+     "status": "EXACT",
+     "detail": "(reloc order EXACT)"
+    },
+    {
+     "name": "f_20E8_089F",
+     "status": "EXACT",
+     "detail": "(reloc order EXACT)"
+    },
+    {
+     "name": "f_20E8_08B3",
+     "status": "EXACT",
+     "detail": "(reloc order EXACT)"
+    },
+    {
+     "name": "f_20E8_08C7",
+     "status": "EXACT",
+     "detail": "(reloc order EXACT)"
+    },
+    {
+     "name": "f_20E8_08DB",
+     "status": "EXACT",
+     "detail": "(reloc order EXACT)"
+    },
+    {
+     "name": "f_20E8_08EF",
+     "status": "EXACT",
+     "detail": "(reloc order EXACT)"
+    },
+    {
+     "name": "f_20E8_0A21",
+     "status": "EXACT",
+     "detail": "(reloc order GROUPED)"
+    },
+    {
+     "name": "win_LoadWindow",
+     "status": "EXACT",
+     "detail": "(reloc order GROUPED)"
+    },
+    {
+     "name": "win_Open",
+     "status": "EXACT",
+     "detail": "(reloc order GROUPED)"
+    }
+   ],
+   "private_data_exact": true,
+   "private_data_rows": [
+    {
+     "name": "_DATA",
+     "status": "EXACT",
+     "detail": "(132 bytes, relocation order EXACT)"
+    },
+    {
+     "name": "CONST",
+     "status": "EXACT",
+     "detail": "(14 bytes, relocation order GROUPED)"
+    }
+   ],
+   "candidate_exact": false,
+   "target_rows": [
+    {
+     "name": "f_20E8_0903",
+     "status": "FAIL",
+     "detail": "length 280 != target 286; bytes differ (first at +0x77, 145 differing); relocation set differs (6 vs 6)"
+    }
+   ],
+   "refused": true
+  },
+  {
+   "name": "index_ptradd_o_rect",
+   "source": "build/workers/ptr_small/variants/index_ptradd_o_rect.c",
+   "source_sha256_file_bytes": "f0d723728318159f69ac7c3c63ed973ee8f055bccb9d0c82ea9e1027af0c0b35",
+   "source_sha256_search_text": "f0d723728318159f69ac7c3c63ed973ee8f055bccb9d0c82ea9e1027af0c0b35",
+   "search": {
+    "status": "MISMATCH",
+    "reasons": [
+     "length 280 != target 286",
+     "bytes differ (first at +0x77, 145 differing)",
+     "relocation set differs (6 vs 6)"
+    ],
+    "opcode_ratio": 0.9856,
+    "first_diff_insn": 41,
+    "profile": "msc600ax",
+    "flags": [
+     "/AL",
+     "/Os",
+     "/Oe",
+     "/Og",
+     "/Gs",
+     "/Zi"
+    ]
+   },
+   "verify_only_exit_code": 1,
+   "accepted_peers_exact": true,
+   "accepted_peer_rows": [
+    {
+     "name": "f_20E8_0000",
+     "status": "EXACT",
+     "detail": "(reloc order EXACT)"
+    },
+    {
+     "name": "win_LoadAllWindows",
+     "status": "EXACT",
+     "detail": "(reloc order GROUPED)"
+    },
+    {
+     "name": "win_Swap",
+     "status": "EXACT",
+     "detail": "(reloc order GROUPED)"
+    },
+    {
+     "name": "win_Close",
+     "status": "EXACT",
+     "detail": "(reloc order GROUPED)"
+    },
+    {
+     "name": "f_20E8_0725",
+     "status": "EXACT",
+     "detail": "(reloc order GROUPED)"
+    },
+    {
+     "name": "f_20E8_0776",
+     "status": "EXACT",
+     "detail": "(reloc order GROUPED)"
+    },
+    {
+     "name": "win_SetWinDrawHook",
+     "status": "EXACT",
+     "detail": "(reloc order EXACT)"
+    },
+    {
+     "name": "f_20E8_088B",
+     "status": "EXACT",
+     "detail": "(reloc order EXACT)"
+    },
+    {
+     "name": "f_20E8_089F",
+     "status": "EXACT",
+     "detail": "(reloc order EXACT)"
+    },
+    {
+     "name": "f_20E8_08B3",
+     "status": "EXACT",
+     "detail": "(reloc order EXACT)"
+    },
+    {
+     "name": "f_20E8_08C7",
+     "status": "EXACT",
+     "detail": "(reloc order EXACT)"
+    },
+    {
+     "name": "f_20E8_08DB",
+     "status": "EXACT",
+     "detail": "(reloc order EXACT)"
+    },
+    {
+     "name": "f_20E8_08EF",
+     "status": "EXACT",
+     "detail": "(reloc order EXACT)"
+    },
+    {
+     "name": "f_20E8_0A21",
+     "status": "EXACT",
+     "detail": "(reloc order GROUPED)"
+    },
+    {
+     "name": "win_LoadWindow",
+     "status": "EXACT",
+     "detail": "(reloc order GROUPED)"
+    },
+    {
+     "name": "win_Open",
+     "status": "EXACT",
+     "detail": "(reloc order GROUPED)"
+    }
+   ],
+   "private_data_exact": true,
+   "private_data_rows": [
+    {
+     "name": "_DATA",
+     "status": "EXACT",
+     "detail": "(132 bytes, relocation order EXACT)"
+    },
+    {
+     "name": "CONST",
+     "status": "EXACT",
+     "detail": "(14 bytes, relocation order GROUPED)"
+    }
+   ],
+   "candidate_exact": false,
+   "target_rows": [
+    {
+     "name": "f_20E8_0903",
+     "status": "FAIL",
+     "detail": "length 280 != target 286; bytes differ (first at +0x77, 145 differing); relocation set differs (6 vs 6)"
+    }
+   ],
+   "refused": true
+  },
+  {
+   "name": "index_ptradd_origin_o_rect",
+   "source": "build/workers/ptr_small/variants/index_ptradd_origin_o_rect.c",
+   "source_sha256_file_bytes": "0b33d6da71a9bb0266824df495da12ace4390f50fc1a1223afda696c53955c80",
+   "source_sha256_search_text": "0b33d6da71a9bb0266824df495da12ace4390f50fc1a1223afda696c53955c80",
+   "search": {
+    "status": "MISMATCH",
+    "reasons": [
+     "length 280 != target 286",
+     "bytes differ (first at +0x77, 145 differing)",
+     "relocation set differs (6 vs 6)"
+    ],
+    "opcode_ratio": 0.9856,
+    "first_diff_insn": 41,
+    "profile": "msc600ax",
+    "flags": [
+     "/AL",
+     "/Os",
+     "/Oe",
+     "/Og",
+     "/Gs",
+     "/Zi"
+    ]
+   },
+   "verify_only_exit_code": 1,
+   "accepted_peers_exact": true,
+   "accepted_peer_rows": [
+    {
+     "name": "f_20E8_0000",
+     "status": "EXACT",
+     "detail": "(reloc order EXACT)"
+    },
+    {
+     "name": "win_LoadAllWindows",
+     "status": "EXACT",
+     "detail": "(reloc order GROUPED)"
+    },
+    {
+     "name": "win_Swap",
+     "status": "EXACT",
+     "detail": "(reloc order GROUPED)"
+    },
+    {
+     "name": "win_Close",
+     "status": "EXACT",
+     "detail": "(reloc order GROUPED)"
+    },
+    {
+     "name": "f_20E8_0725",
+     "status": "EXACT",
+     "detail": "(reloc order GROUPED)"
+    },
+    {
+     "name": "f_20E8_0776",
+     "status": "EXACT",
+     "detail": "(reloc order GROUPED)"
+    },
+    {
+     "name": "win_SetWinDrawHook",
+     "status": "EXACT",
+     "detail": "(reloc order EXACT)"
+    },
+    {
+     "name": "f_20E8_088B",
+     "status": "EXACT",
+     "detail": "(reloc order EXACT)"
+    },
+    {
+     "name": "f_20E8_089F",
+     "status": "EXACT",
+     "detail": "(reloc order EXACT)"
+    },
+    {
+     "name": "f_20E8_08B3",
+     "status": "EXACT",
+     "detail": "(reloc order EXACT)"
+    },
+    {
+     "name": "f_20E8_08C7",
+     "status": "EXACT",
+     "detail": "(reloc order EXACT)"
+    },
+    {
+     "name": "f_20E8_08DB",
+     "status": "EXACT",
+     "detail": "(reloc order EXACT)"
+    },
+    {
+     "name": "f_20E8_08EF",
+     "status": "EXACT",
+     "detail": "(reloc order EXACT)"
+    },
+    {
+     "name": "f_20E8_0A21",
+     "status": "EXACT",
+     "detail": "(reloc order GROUPED)"
+    },
+    {
+     "name": "win_LoadWindow",
+     "status": "EXACT",
+     "detail": "(reloc order GROUPED)"
+    },
+    {
+     "name": "win_Open",
+     "status": "EXACT",
+     "detail": "(reloc order GROUPED)"
+    }
+   ],
+   "private_data_exact": true,
+   "private_data_rows": [
+    {
+     "name": "_DATA",
+     "status": "EXACT",
+     "detail": "(132 bytes, relocation order EXACT)"
+    },
+    {
+     "name": "CONST",
+     "status": "EXACT",
+     "detail": "(14 bytes, relocation order GROUPED)"
+    }
+   ],
+   "candidate_exact": false,
+   "target_rows": [
+    {
+     "name": "f_20E8_0903",
+     "status": "FAIL",
+     "detail": "length 280 != target 286; bytes differ (first at +0x77, 145 differing); relocation set differs (6 vs 6)"
+    }
+   ],
+   "refused": true
+  },
+  {
+   "name": "index_ptradd_mode_o_rect",
+   "source": "build/workers/ptr_small/variants/index_ptradd_mode_o_rect.c",
+   "source_sha256_file_bytes": "de997cf0b5d93a89d8ead92b0ba214bc2f0afc94c67dcb18730bf1241f5049d2",
+   "source_sha256_search_text": "de997cf0b5d93a89d8ead92b0ba214bc2f0afc94c67dcb18730bf1241f5049d2",
+   "search": {
+    "status": "MISMATCH",
+    "reasons": [
+     "length 280 != target 286",
+     "bytes differ (first at +0x77, 145 differing)",
+     "relocation set differs (6 vs 6)"
+    ],
+    "opcode_ratio": 0.9856,
+    "first_diff_insn": 41,
+    "profile": "msc600ax",
+    "flags": [
+     "/AL",
+     "/Os",
+     "/Oe",
+     "/Og",
+     "/Gs",
+     "/Zi"
+    ]
+   },
+   "verify_only_exit_code": 1,
+   "accepted_peers_exact": true,
+   "accepted_peer_rows": [
+    {
+     "name": "f_20E8_0000",
+     "status": "EXACT",
+     "detail": "(reloc order EXACT)"
+    },
+    {
+     "name": "win_LoadAllWindows",
+     "status": "EXACT",
+     "detail": "(reloc order GROUPED)"
+    },
+    {
+     "name": "win_Swap",
+     "status": "EXACT",
+     "detail": "(reloc order GROUPED)"
+    },
+    {
+     "name": "win_Close",
+     "status": "EXACT",
+     "detail": "(reloc order GROUPED)"
+    },
+    {
+     "name": "f_20E8_0725",
+     "status": "EXACT",
+     "detail": "(reloc order GROUPED)"
+    },
+    {
+     "name": "f_20E8_0776",
+     "status": "EXACT",
+     "detail": "(reloc order GROUPED)"
+    },
+    {
+     "name": "win_SetWinDrawHook",
+     "status": "EXACT",
+     "detail": "(reloc order EXACT)"
+    },
+    {
+     "name": "f_20E8_088B",
+     "status": "EXACT",
+     "detail": "(reloc order EXACT)"
+    },
+    {
+     "name": "f_20E8_089F",
+     "status": "EXACT",
+     "detail": "(reloc order EXACT)"
+    },
+    {
+     "name": "f_20E8_08B3",
+     "status": "EXACT",
+     "detail": "(reloc order EXACT)"
+    },
+    {
+     "name": "f_20E8_08C7",
+     "status": "EXACT",
+     "detail": "(reloc order EXACT)"
+    },
+    {
+     "name": "f_20E8_08DB",
+     "status": "EXACT",
+     "detail": "(reloc order EXACT)"
+    },
+    {
+     "name": "f_20E8_08EF",
+     "status": "EXACT",
+     "detail": "(reloc order EXACT)"
+    },
+    {
+     "name": "f_20E8_0A21",
+     "status": "EXACT",
+     "detail": "(reloc order GROUPED)"
+    },
+    {
+     "name": "win_LoadWindow",
+     "status": "EXACT",
+     "detail": "(reloc order GROUPED)"
+    },
+    {
+     "name": "win_Open",
+     "status": "EXACT",
+     "detail": "(reloc order GROUPED)"
+    }
+   ],
+   "private_data_exact": true,
+   "private_data_rows": [
+    {
+     "name": "_DATA",
+     "status": "EXACT",
+     "detail": "(132 bytes, relocation order EXACT)"
+    },
+    {
+     "name": "CONST",
+     "status": "EXACT",
+     "detail": "(14 bytes, relocation order GROUPED)"
+    }
+   ],
+   "candidate_exact": false,
+   "target_rows": [
+    {
+     "name": "f_20E8_0903",
+     "status": "FAIL",
+     "detail": "length 280 != target 286; bytes differ (first at +0x77, 145 differing); relocation set differs (6 vs 6)"
+    }
+   ],
+   "refused": true
+  },
+  {
+   "name": "index_ptradd_origin_mode_o_rect",
+   "source": "build/workers/ptr_small/variants/index_ptradd_origin_mode_o_rect.c",
+   "source_sha256_file_bytes": "4a9baaddedfa7569cab63d4f6b902228025c4968d89029836fbb206671ed498d",
+   "source_sha256_search_text": "4a9baaddedfa7569cab63d4f6b902228025c4968d89029836fbb206671ed498d",
+   "search": {
+    "status": "MISMATCH",
+    "reasons": [
+     "length 280 != target 286",
+     "bytes differ (first at +0x77, 145 differing)",
+     "relocation set differs (6 vs 6)"
+    ],
+    "opcode_ratio": 0.9856,
+    "first_diff_insn": 41,
+    "profile": "msc600ax",
+    "flags": [
+     "/AL",
+     "/Os",
+     "/Oe",
+     "/Og",
+     "/Gs",
+     "/Zi"
+    ]
+   },
+   "verify_only_exit_code": 1,
+   "accepted_peers_exact": true,
+   "accepted_peer_rows": [
+    {
+     "name": "f_20E8_0000",
+     "status": "EXACT",
+     "detail": "(reloc order EXACT)"
+    },
+    {
+     "name": "win_LoadAllWindows",
+     "status": "EXACT",
+     "detail": "(reloc order GROUPED)"
+    },
+    {
+     "name": "win_Swap",
+     "status": "EXACT",
+     "detail": "(reloc order GROUPED)"
+    },
+    {
+     "name": "win_Close",
+     "status": "EXACT",
+     "detail": "(reloc order GROUPED)"
+    },
+    {
+     "name": "f_20E8_0725",
+     "status": "EXACT",
+     "detail": "(reloc order GROUPED)"
+    },
+    {
+     "name": "f_20E8_0776",
+     "status": "EXACT",
+     "detail": "(reloc order GROUPED)"
+    },
+    {
+     "name": "win_SetWinDrawHook",
+     "status": "EXACT",
+     "detail": "(reloc order EXACT)"
+    },
+    {
+     "name": "f_20E8_088B",
+     "status": "EXACT",
+     "detail": "(reloc order EXACT)"
+    },
+    {
+     "name": "f_20E8_089F",
+     "status": "EXACT",
+     "detail": "(reloc order EXACT)"
+    },
+    {
+     "name": "f_20E8_08B3",
+     "status": "EXACT",
+     "detail": "(reloc order EXACT)"
+    },
+    {
+     "name": "f_20E8_08C7",
+     "status": "EXACT",
+     "detail": "(reloc order EXACT)"
+    },
+    {
+     "name": "f_20E8_08DB",
+     "status": "EXACT",
+     "detail": "(reloc order EXACT)"
+    },
+    {
+     "name": "f_20E8_08EF",
+     "status": "EXACT",
+     "detail": "(reloc order EXACT)"
+    },
+    {
+     "name": "f_20E8_0A21",
+     "status": "EXACT",
+     "detail": "(reloc order GROUPED)"
+    },
+    {
+     "name": "win_LoadWindow",
+     "status": "EXACT",
+     "detail": "(reloc order GROUPED)"
+    },
+    {
+     "name": "win_Open",
+     "status": "EXACT",
+     "detail": "(reloc order GROUPED)"
+    }
+   ],
+   "private_data_exact": true,
+   "private_data_rows": [
+    {
+     "name": "_DATA",
+     "status": "EXACT",
+     "detail": "(132 bytes, relocation order EXACT)"
+    },
+    {
+     "name": "CONST",
+     "status": "EXACT",
+     "detail": "(14 bytes, relocation order GROUPED)"
+    }
+   ],
+   "candidate_exact": false,
+   "target_rows": [
+    {
+     "name": "f_20E8_0903",
+     "status": "FAIL",
+     "detail": "length 280 != target 286; bytes differ (first at +0x77, 145 differing); relocation set differs (6 vs 6)"
+    }
+   ],
+   "refused": true
+  },
+  {
+   "name": "index_ptradd_ref_o_rect",
+   "source": "build/workers/ptr_small/variants/index_ptradd_ref_o_rect.c",
+   "source_sha256_file_bytes": "a56d8f2c44d54095c8ba08f8b8d03bc662c1e7dc2f38cc52d8f4555de5532b15",
+   "source_sha256_search_text": "a56d8f2c44d54095c8ba08f8b8d03bc662c1e7dc2f38cc52d8f4555de5532b15",
+   "search": {
+    "status": "MISMATCH",
+    "reasons": [
+     "length 280 != target 286",
+     "bytes differ (first at +0x77, 145 differing)",
+     "relocation set differs (6 vs 6)"
+    ],
+    "opcode_ratio": 0.9856,
+    "first_diff_insn": 41,
+    "profile": "msc600ax",
+    "flags": [
+     "/AL",
+     "/Os",
+     "/Oe",
+     "/Og",
+     "/Gs",
+     "/Zi"
+    ]
+   },
+   "verify_only_exit_code": 1,
+   "accepted_peers_exact": true,
+   "accepted_peer_rows": [
+    {
+     "name": "f_20E8_0000",
+     "status": "EXACT",
+     "detail": "(reloc order EXACT)"
+    },
+    {
+     "name": "win_LoadAllWindows",
+     "status": "EXACT",
+     "detail": "(reloc order GROUPED)"
+    },
+    {
+     "name": "win_Swap",
+     "status": "EXACT",
+     "detail": "(reloc order GROUPED)"
+    },
+    {
+     "name": "win_Close",
+     "status": "EXACT",
+     "detail": "(reloc order GROUPED)"
+    },
+    {
+     "name": "f_20E8_0725",
+     "status": "EXACT",
+     "detail": "(reloc order GROUPED)"
+    },
+    {
+     "name": "f_20E8_0776",
+     "status": "EXACT",
+     "detail": "(reloc order GROUPED)"
+    },
+    {
+     "name": "win_SetWinDrawHook",
+     "status": "EXACT",
+     "detail": "(reloc order EXACT)"
+    },
+    {
+     "name": "f_20E8_088B",
+     "status": "EXACT",
+     "detail": "(reloc order EXACT)"
+    },
+    {
+     "name": "f_20E8_089F",
+     "status": "EXACT",
+     "detail": "(reloc order EXACT)"
+    },
+    {
+     "name": "f_20E8_08B3",
+     "status": "EXACT",
+     "detail": "(reloc order EXACT)"
+    },
+    {
+     "name": "f_20E8_08C7",
+     "status": "EXACT",
+     "detail": "(reloc order EXACT)"
+    },
+    {
+     "name": "f_20E8_08DB",
+     "status": "EXACT",
+     "detail": "(reloc order EXACT)"
+    },
+    {
+     "name": "f_20E8_08EF",
+     "status": "EXACT",
+     "detail": "(reloc order EXACT)"
+    },
+    {
+     "name": "f_20E8_0A21",
+     "status": "EXACT",
+     "detail": "(reloc order GROUPED)"
+    },
+    {
+     "name": "win_LoadWindow",
+     "status": "EXACT",
+     "detail": "(reloc order GROUPED)"
+    },
+    {
+     "name": "win_Open",
+     "status": "EXACT",
+     "detail": "(reloc order GROUPED)"
+    }
+   ],
+   "private_data_exact": true,
+   "private_data_rows": [
+    {
+     "name": "_DATA",
+     "status": "EXACT",
+     "detail": "(132 bytes, relocation order EXACT)"
+    },
+    {
+     "name": "CONST",
+     "status": "EXACT",
+     "detail": "(14 bytes, relocation order GROUPED)"
+    }
+   ],
+   "candidate_exact": false,
+   "target_rows": [
+    {
+     "name": "f_20E8_0903",
+     "status": "FAIL",
+     "detail": "length 280 != target 286; bytes differ (first at +0x77, 145 differing); relocation set differs (6 vs 6)"
+    }
+   ],
+   "refused": true
+  },
+  {
+   "name": "index_ptradd_origin_ref_o_rect",
+   "source": "build/workers/ptr_small/variants/index_ptradd_origin_ref_o_rect.c",
+   "source_sha256_file_bytes": "4147e78fce5efa8431887b74e2603c288b30cf2a39280be879c8e65126fabba9",
+   "source_sha256_search_text": "4147e78fce5efa8431887b74e2603c288b30cf2a39280be879c8e65126fabba9",
+   "search": {
+    "status": "MISMATCH",
+    "reasons": [
+     "length 280 != target 286",
+     "bytes differ (first at +0x77, 145 differing)",
+     "relocation set differs (6 vs 6)"
+    ],
+    "opcode_ratio": 0.9856,
+    "first_diff_insn": 41,
+    "profile": "msc600ax",
+    "flags": [
+     "/AL",
+     "/Os",
+     "/Oe",
+     "/Og",
+     "/Gs",
+     "/Zi"
+    ]
+   },
+   "verify_only_exit_code": 1,
+   "accepted_peers_exact": true,
+   "accepted_peer_rows": [
+    {
+     "name": "f_20E8_0000",
+     "status": "EXACT",
+     "detail": "(reloc order EXACT)"
+    },
+    {
+     "name": "win_LoadAllWindows",
+     "status": "EXACT",
+     "detail": "(reloc order GROUPED)"
+    },
+    {
+     "name": "win_Swap",
+     "status": "EXACT",
+     "detail": "(reloc order GROUPED)"
+    },
+    {
+     "name": "win_Close",
+     "status": "EXACT",
+     "detail": "(reloc order GROUPED)"
+    },
+    {
+     "name": "f_20E8_0725",
+     "status": "EXACT",
+     "detail": "(reloc order GROUPED)"
+    },
+    {
+     "name": "f_20E8_0776",
+     "status": "EXACT",
+     "detail": "(reloc order GROUPED)"
+    },
+    {
+     "name": "win_SetWinDrawHook",
+     "status": "EXACT",
+     "detail": "(reloc order EXACT)"
+    },
+    {
+     "name": "f_20E8_088B",
+     "status": "EXACT",
+     "detail": "(reloc order EXACT)"
+    },
+    {
+     "name": "f_20E8_089F",
+     "status": "EXACT",
+     "detail": "(reloc order EXACT)"
+    },
+    {
+     "name": "f_20E8_08B3",
+     "status": "EXACT",
+     "detail": "(reloc order EXACT)"
+    },
+    {
+     "name": "f_20E8_08C7",
+     "status": "EXACT",
+     "detail": "(reloc order EXACT)"
+    },
+    {
+     "name": "f_20E8_08DB",
+     "status": "EXACT",
+     "detail": "(reloc order EXACT)"
+    },
+    {
+     "name": "f_20E8_08EF",
+     "status": "EXACT",
+     "detail": "(reloc order EXACT)"
+    },
+    {
+     "name": "f_20E8_0A21",
+     "status": "EXACT",
+     "detail": "(reloc order GROUPED)"
+    },
+    {
+     "name": "win_LoadWindow",
+     "status": "EXACT",
+     "detail": "(reloc order GROUPED)"
+    },
+    {
+     "name": "win_Open",
+     "status": "EXACT",
+     "detail": "(reloc order GROUPED)"
+    }
+   ],
+   "private_data_exact": true,
+   "private_data_rows": [
+    {
+     "name": "_DATA",
+     "status": "EXACT",
+     "detail": "(132 bytes, relocation order EXACT)"
+    },
+    {
+     "name": "CONST",
+     "status": "EXACT",
+     "detail": "(14 bytes, relocation order GROUPED)"
+    }
+   ],
+   "candidate_exact": false,
+   "target_rows": [
+    {
+     "name": "f_20E8_0903",
+     "status": "FAIL",
+     "detail": "length 280 != target 286; bytes differ (first at +0x77, 145 differing); relocation set differs (6 vs 6)"
+    }
+   ],
+   "refused": true
+  },
+  {
+   "name": "index_ptradd_mode_ref_o_rect",
+   "source": "build/workers/ptr_small/variants/index_ptradd_mode_ref_o_rect.c",
+   "source_sha256_file_bytes": "9dad6a7c925fe264d5de15a65c2cb701dbddc206848b32775d0ff6c2dae84852",
+   "source_sha256_search_text": "9dad6a7c925fe264d5de15a65c2cb701dbddc206848b32775d0ff6c2dae84852",
+   "search": {
+    "status": "MISMATCH",
+    "reasons": [
+     "length 280 != target 286",
+     "bytes differ (first at +0x77, 145 differing)",
+     "relocation set differs (6 vs 6)"
+    ],
+    "opcode_ratio": 0.9856,
+    "first_diff_insn": 41,
+    "profile": "msc600ax",
+    "flags": [
+     "/AL",
+     "/Os",
+     "/Oe",
+     "/Og",
+     "/Gs",
+     "/Zi"
+    ]
+   },
+   "verify_only_exit_code": 1,
+   "accepted_peers_exact": true,
+   "accepted_peer_rows": [
+    {
+     "name": "f_20E8_0000",
+     "status": "EXACT",
+     "detail": "(reloc order EXACT)"
+    },
+    {
+     "name": "win_LoadAllWindows",
+     "status": "EXACT",
+     "detail": "(reloc order GROUPED)"
+    },
+    {
+     "name": "win_Swap",
+     "status": "EXACT",
+     "detail": "(reloc order GROUPED)"
+    },
+    {
+     "name": "win_Close",
+     "status": "EXACT",
+     "detail": "(reloc order GROUPED)"
+    },
+    {
+     "name": "f_20E8_0725",
+     "status": "EXACT",
+     "detail": "(reloc order GROUPED)"
+    },
+    {
+     "name": "f_20E8_0776",
+     "status": "EXACT",
+     "detail": "(reloc order GROUPED)"
+    },
+    {
+     "name": "win_SetWinDrawHook",
+     "status": "EXACT",
+     "detail": "(reloc order EXACT)"
+    },
+    {
+     "name": "f_20E8_088B",
+     "status": "EXACT",
+     "detail": "(reloc order EXACT)"
+    },
+    {
+     "name": "f_20E8_089F",
+     "status": "EXACT",
+     "detail": "(reloc order EXACT)"
+    },
+    {
+     "name": "f_20E8_08B3",
+     "status": "EXACT",
+     "detail": "(reloc order EXACT)"
+    },
+    {
+     "name": "f_20E8_08C7",
+     "status": "EXACT",
+     "detail": "(reloc order EXACT)"
+    },
+    {
+     "name": "f_20E8_08DB",
+     "status": "EXACT",
+     "detail": "(reloc order EXACT)"
+    },
+    {
+     "name": "f_20E8_08EF",
+     "status": "EXACT",
+     "detail": "(reloc order EXACT)"
+    },
+    {
+     "name": "f_20E8_0A21",
+     "status": "EXACT",
+     "detail": "(reloc order GROUPED)"
+    },
+    {
+     "name": "win_LoadWindow",
+     "status": "EXACT",
+     "detail": "(reloc order GROUPED)"
+    },
+    {
+     "name": "win_Open",
+     "status": "EXACT",
+     "detail": "(reloc order GROUPED)"
+    }
+   ],
+   "private_data_exact": true,
+   "private_data_rows": [
+    {
+     "name": "_DATA",
+     "status": "EXACT",
+     "detail": "(132 bytes, relocation order EXACT)"
+    },
+    {
+     "name": "CONST",
+     "status": "EXACT",
+     "detail": "(14 bytes, relocation order GROUPED)"
+    }
+   ],
+   "candidate_exact": false,
+   "target_rows": [
+    {
+     "name": "f_20E8_0903",
+     "status": "FAIL",
+     "detail": "length 280 != target 286; bytes differ (first at +0x77, 145 differing); relocation set differs (6 vs 6)"
+    }
+   ],
+   "refused": true
+  },
+  {
+   "name": "index_ptradd_origin_mode_ref_o_rect",
+   "source": "build/workers/ptr_small/variants/index_ptradd_origin_mode_ref_o_rect.c",
+   "source_sha256_file_bytes": "c9d7e71ce04fe70e8acbfc160a2d01c0e2829ea88042c2041b93c0572810077c",
+   "source_sha256_search_text": "c9d7e71ce04fe70e8acbfc160a2d01c0e2829ea88042c2041b93c0572810077c",
+   "search": {
+    "status": "MISMATCH",
+    "reasons": [
+     "length 280 != target 286",
+     "bytes differ (first at +0x77, 145 differing)",
+     "relocation set differs (6 vs 6)"
+    ],
+    "opcode_ratio": 0.9856,
+    "first_diff_insn": 41,
+    "profile": "msc600ax",
+    "flags": [
+     "/AL",
+     "/Os",
+     "/Oe",
+     "/Og",
+     "/Gs",
+     "/Zi"
+    ]
+   },
+   "verify_only_exit_code": 1,
+   "accepted_peers_exact": true,
+   "accepted_peer_rows": [
+    {
+     "name": "f_20E8_0000",
+     "status": "EXACT",
+     "detail": "(reloc order EXACT)"
+    },
+    {
+     "name": "win_LoadAllWindows",
+     "status": "EXACT",
+     "detail": "(reloc order GROUPED)"
+    },
+    {
+     "name": "win_Swap",
+     "status": "EXACT",
+     "detail": "(reloc order GROUPED)"
+    },
+    {
+     "name": "win_Close",
+     "status": "EXACT",
+     "detail": "(reloc order GROUPED)"
+    },
+    {
+     "name": "f_20E8_0725",
+     "status": "EXACT",
+     "detail": "(reloc order GROUPED)"
+    },
+    {
+     "name": "f_20E8_0776",
+     "status": "EXACT",
+     "detail": "(reloc order GROUPED)"
+    },
+    {
+     "name": "win_SetWinDrawHook",
+     "status": "EXACT",
+     "detail": "(reloc order EXACT)"
+    },
+    {
+     "name": "f_20E8_088B",
+     "status": "EXACT",
+     "detail": "(reloc order EXACT)"
+    },
+    {
+     "name": "f_20E8_089F",
+     "status": "EXACT",
+     "detail": "(reloc order EXACT)"
+    },
+    {
+     "name": "f_20E8_08B3",
+     "status": "EXACT",
+     "detail": "(reloc order EXACT)"
+    },
+    {
+     "name": "f_20E8_08C7",
+     "status": "EXACT",
+     "detail": "(reloc order EXACT)"
+    },
+    {
+     "name": "f_20E8_08DB",
+     "status": "EXACT",
+     "detail": "(reloc order EXACT)"
+    },
+    {
+     "name": "f_20E8_08EF",
+     "status": "EXACT",
+     "detail": "(reloc order EXACT)"
+    },
+    {
+     "name": "f_20E8_0A21",
+     "status": "EXACT",
+     "detail": "(reloc order GROUPED)"
+    },
+    {
+     "name": "win_LoadWindow",
+     "status": "EXACT",
+     "detail": "(reloc order GROUPED)"
+    },
+    {
+     "name": "win_Open",
+     "status": "EXACT",
+     "detail": "(reloc order GROUPED)"
+    }
+   ],
+   "private_data_exact": true,
+   "private_data_rows": [
+    {
+     "name": "_DATA",
+     "status": "EXACT",
+     "detail": "(132 bytes, relocation order EXACT)"
+    },
+    {
+     "name": "CONST",
+     "status": "EXACT",
+     "detail": "(14 bytes, relocation order GROUPED)"
+    }
+   ],
+   "candidate_exact": false,
+   "target_rows": [
+    {
+     "name": "f_20E8_0903",
+     "status": "FAIL",
+     "detail": "length 280 != target 286; bytes differ (first at +0x77, 145 differing); relocation set differs (6 vs 6)"
+    }
+   ],
+   "refused": true
+  },
+  {
+   "name": "rhs_rect_index_first",
+   "source": "build/workers/ptr_small/variants/rhs_rect_index_first.c",
+   "source_sha256_file_bytes": "3e7c3b394a549d437d58fcd172cdf83a8dab6118e64655cf73dadb3536ed8768",
+   "source_sha256_search_text": "3e7c3b394a549d437d58fcd172cdf83a8dab6118e64655cf73dadb3536ed8768",
+   "search": {
+    "status": "MISMATCH",
+    "reasons": [
+     "length 280 != target 286",
+     "bytes differ (first at +0x77, 145 differing)",
+     "relocation set differs (6 vs 6)"
+    ],
+    "opcode_ratio": 0.9856,
+    "first_diff_insn": 41,
+    "profile": "msc600ax",
+    "flags": [
+     "/AL",
+     "/Os",
+     "/Oe",
+     "/Og",
+     "/Gs",
+     "/Zi"
+    ]
+   },
+   "verify_only_exit_code": 1,
+   "accepted_peers_exact": true,
+   "accepted_peer_rows": [
+    {
+     "name": "f_20E8_0000",
+     "status": "EXACT",
+     "detail": "(reloc order EXACT)"
+    },
+    {
+     "name": "win_LoadAllWindows",
+     "status": "EXACT",
+     "detail": "(reloc order GROUPED)"
+    },
+    {
+     "name": "win_Swap",
+     "status": "EXACT",
+     "detail": "(reloc order GROUPED)"
+    },
+    {
+     "name": "win_Close",
+     "status": "EXACT",
+     "detail": "(reloc order GROUPED)"
+    },
+    {
+     "name": "f_20E8_0725",
+     "status": "EXACT",
+     "detail": "(reloc order GROUPED)"
+    },
+    {
+     "name": "f_20E8_0776",
+     "status": "EXACT",
+     "detail": "(reloc order GROUPED)"
+    },
+    {
+     "name": "win_SetWinDrawHook",
+     "status": "EXACT",
+     "detail": "(reloc order EXACT)"
+    },
+    {
+     "name": "f_20E8_088B",
+     "status": "EXACT",
+     "detail": "(reloc order EXACT)"
+    },
+    {
+     "name": "f_20E8_089F",
+     "status": "EXACT",
+     "detail": "(reloc order EXACT)"
+    },
+    {
+     "name": "f_20E8_08B3",
+     "status": "EXACT",
+     "detail": "(reloc order EXACT)"
+    },
+    {
+     "name": "f_20E8_08C7",
+     "status": "EXACT",
+     "detail": "(reloc order EXACT)"
+    },
+    {
+     "name": "f_20E8_08DB",
+     "status": "EXACT",
+     "detail": "(reloc order EXACT)"
+    },
+    {
+     "name": "f_20E8_08EF",
+     "status": "EXACT",
+     "detail": "(reloc order EXACT)"
+    },
+    {
+     "name": "f_20E8_0A21",
+     "status": "EXACT",
+     "detail": "(reloc order GROUPED)"
+    },
+    {
+     "name": "win_LoadWindow",
+     "status": "EXACT",
+     "detail": "(reloc order GROUPED)"
+    },
+    {
+     "name": "win_Open",
+     "status": "EXACT",
+     "detail": "(reloc order GROUPED)"
+    }
+   ],
+   "private_data_exact": true,
+   "private_data_rows": [
+    {
+     "name": "_DATA",
+     "status": "EXACT",
+     "detail": "(132 bytes, relocation order EXACT)"
+    },
+    {
+     "name": "CONST",
+     "status": "EXACT",
+     "detail": "(14 bytes, relocation order GROUPED)"
+    }
+   ],
+   "candidate_exact": false,
+   "target_rows": [
+    {
+     "name": "f_20E8_0903",
+     "status": "FAIL",
+     "detail": "length 280 != target 286; bytes differ (first at +0x77, 145 differing); relocation set differs (6 vs 6)"
+    }
+   ],
+   "refused": true
+  },
+  {
+   "name": "rhs_o_index_first",
+   "source": "build/workers/ptr_small/variants/rhs_o_index_first.c",
+   "source_sha256_file_bytes": "3ab023844006ccecaa4a6a9989eac29be20cfeacc8cfb15f54640a9963619341",
+   "source_sha256_search_text": "3ab023844006ccecaa4a6a9989eac29be20cfeacc8cfb15f54640a9963619341",
+   "search": {
+    "status": "MISMATCH",
+    "reasons": [
+     "length 280 != target 286",
+     "bytes differ (first at +0x77, 145 differing)",
+     "relocation set differs (6 vs 6)"
+    ],
+    "opcode_ratio": 0.9856,
+    "first_diff_insn": 41,
+    "profile": "msc600ax",
+    "flags": [
+     "/AL",
+     "/Os",
+     "/Oe",
+     "/Og",
+     "/Gs",
+     "/Zi"
+    ]
+   },
+   "verify_only_exit_code": 1,
+   "accepted_peers_exact": true,
+   "accepted_peer_rows": [
+    {
+     "name": "f_20E8_0000",
+     "status": "EXACT",
+     "detail": "(reloc order EXACT)"
+    },
+    {
+     "name": "win_LoadAllWindows",
+     "status": "EXACT",
+     "detail": "(reloc order GROUPED)"
+    },
+    {
+     "name": "win_Swap",
+     "status": "EXACT",
+     "detail": "(reloc order GROUPED)"
+    },
+    {
+     "name": "win_Close",
+     "status": "EXACT",
+     "detail": "(reloc order GROUPED)"
+    },
+    {
+     "name": "f_20E8_0725",
+     "status": "EXACT",
+     "detail": "(reloc order GROUPED)"
+    },
+    {
+     "name": "f_20E8_0776",
+     "status": "EXACT",
+     "detail": "(reloc order GROUPED)"
+    },
+    {
+     "name": "win_SetWinDrawHook",
+     "status": "EXACT",
+     "detail": "(reloc order EXACT)"
+    },
+    {
+     "name": "f_20E8_088B",
+     "status": "EXACT",
+     "detail": "(reloc order EXACT)"
+    },
+    {
+     "name": "f_20E8_089F",
+     "status": "EXACT",
+     "detail": "(reloc order EXACT)"
+    },
+    {
+     "name": "f_20E8_08B3",
+     "status": "EXACT",
+     "detail": "(reloc order EXACT)"
+    },
+    {
+     "name": "f_20E8_08C7",
+     "status": "EXACT",
+     "detail": "(reloc order EXACT)"
+    },
+    {
+     "name": "f_20E8_08DB",
+     "status": "EXACT",
+     "detail": "(reloc order EXACT)"
+    },
+    {
+     "name": "f_20E8_08EF",
+     "status": "EXACT",
+     "detail": "(reloc order EXACT)"
+    },
+    {
+     "name": "f_20E8_0A21",
+     "status": "EXACT",
+     "detail": "(reloc order GROUPED)"
+    },
+    {
+     "name": "win_LoadWindow",
+     "status": "EXACT",
+     "detail": "(reloc order GROUPED)"
+    },
+    {
+     "name": "win_Open",
+     "status": "EXACT",
+     "detail": "(reloc order GROUPED)"
+    }
+   ],
+   "private_data_exact": true,
+   "private_data_rows": [
+    {
+     "name": "_DATA",
+     "status": "EXACT",
+     "detail": "(132 bytes, relocation order EXACT)"
+    },
+    {
+     "name": "CONST",
+     "status": "EXACT",
+     "detail": "(14 bytes, relocation order GROUPED)"
+    }
+   ],
+   "candidate_exact": false,
+   "target_rows": [
+    {
+     "name": "f_20E8_0903",
+     "status": "FAIL",
+     "detail": "length 280 != target 286; bytes differ (first at +0x77, 145 differing); relocation set differs (6 vs 6)"
+    }
+   ],
+   "refused": true
+  }
+ ],
+ "summary": {
+  "search_statuses": {
+   "MISMATCH": 40
+  },
+  "all_accepted_peers_exact": true,
+  "all_private_data_exact": true,
+  "exact_candidates": [],
+  "missing_search_rows": []
+ }
+}
