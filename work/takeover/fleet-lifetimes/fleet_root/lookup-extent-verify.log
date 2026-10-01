@@ -1,0 +1,15 @@
+  ch_RemoveEntry: EXACT (reloc order EXACT)
+  ch_PurgeCache: EXACT (reloc order EXACT)
+  ch_LookUpHandle: EXACT (reloc order EXACT)
+  ch_AddEntry: EXACT (reloc order EXACT)
+  ch_DeleteEntry: EXACT (reloc order EXACT)
+  ch_CleanupTable: EXACT (reloc order GROUPED)
+  ch_DumpOldest: EXACT (reloc order GROUPED)
+  ch_SetCacheHooks: EXACT (reloc order EXACT)
+  ch_CreateTable: EXACT (reloc order EXACT)
+  ch_GetPrime: EXACT (reloc order GROUPED)
+  ch_LookUpId: EXACT (reloc order EXACT)
+  data _DATA: EXACT (112 bytes, relocation order EXACT)
+  data _BSS: EXACT (2 bytes, relocation order None)
+  extent: EXACT, cross-function relocation order GROUPED
+VERIFY-ONLY OK: 11 claims in root:1A96

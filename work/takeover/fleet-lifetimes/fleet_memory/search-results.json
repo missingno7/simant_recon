@@ -1,0 +1,177 @@
+[
+ {
+  "function": "f_171C_09CC",
+  "probe": "next_result_lifetime",
+  "hypothesis": "After the guard, overwrite the neighbor local with the far pointer returned by f_0160 and pass that value to f_068C.",
+  "variants": [
+   {
+    "variant": "negative",
+    "hypothesis": "After the guard, overwrite the neighbor local with the far pointer returned by f_0160 and pass that value to f_068C.",
+    "source": "build/workers/fleet_memory/f_171C_09CC-negative.c",
+    "source_sha256": "8a0ef3adbe1e9ead0193f6aaf512eaeddd9c6606bd54a528948fee59bb529fa8",
+    "compile_ok": true,
+    "length": 146,
+    "target_exact": false,
+    "module_exact": null,
+    "reasons": [
+     "length 146 != target 144",
+     "bytes differ (first at +0x9, 85 differing)"
+    ],
+    "peer_losses": [],
+    "data_losses": [],
+    "fixups": null,
+    "relocations": null,
+    "reloc_order": null,
+    "score": [
+     1,
+     14,
+     87,
+     2
+    ]
+   },
+   {
+    "variant": "positive",
+    "hypothesis": "After the guard, overwrite the neighbor local with the far pointer returned by f_0160 and pass that value to f_068C.",
+    "source": "build/workers/fleet_memory/f_171C_09CC-next_result_lifetime.c",
+    "source_sha256": "7adfd2e87a1153b70b63800eb3b28762938c14ec556268ab822f4c38803f15b2",
+    "compile_ok": true,
+    "length": 146,
+    "target_exact": false,
+    "module_exact": null,
+    "reasons": [
+     "length 146 != target 144",
+     "bytes differ (first at +0x9, 85 differing)"
+    ],
+    "peer_losses": [],
+    "data_losses": [],
+    "fixups": null,
+    "relocations": null,
+    "reloc_order": null,
+    "score": [
+     1,
+     14,
+     87,
+     2
+    ]
+   }
+  ]
+ },
+ {
+  "function": "f_171C_0ADC",
+  "probe": "next_argument_lifetime",
+  "hypothesis": "Compute the next block once, pass the same real far pointer and its paragraph count to the mover, then overwrite n in its later list-neighbor phase.",
+  "variants": [
+   {
+    "variant": "negative",
+    "hypothesis": "Compute the next block once, pass the same real far pointer and its paragraph count to the mover, then overwrite n in its later list-neighbor phase.",
+    "source": "build/workers/fleet_memory/f_171C_0ADC-negative.c",
+    "source_sha256": "fbd63577f149fdbdf30dbfb566431e2120cbe4bb8102d6f9db44ddbc26c54003",
+    "compile_ok": true,
+    "length": 260,
+    "target_exact": false,
+    "module_exact": null,
+    "reasons": [
+     "length 260 != target 262",
+     "bytes differ (first at +0x5, 212 differing)",
+     "relocation set differs (1 vs 1)"
+    ],
+    "peer_losses": [],
+    "data_losses": [],
+    "fixups": null,
+    "relocations": null,
+    "reloc_order": null,
+    "score": [
+     1,
+     17,
+     214,
+     2
+    ]
+   },
+   {
+    "variant": "positive",
+    "hypothesis": "Compute the next block once, pass the same real far pointer and its paragraph count to the mover, then overwrite n in its later list-neighbor phase.",
+    "source": "build/workers/fleet_memory/f_171C_0ADC-next_argument_lifetime.c",
+    "source_sha256": "d1e674e33b5709822100d6c30f2a6454bfa575eea27e6c9fdbd878bec2d6f2b2",
+    "compile_ok": true,
+    "length": 260,
+    "target_exact": false,
+    "module_exact": null,
+    "reasons": [
+     "length 260 != target 262",
+     "bytes differ (first at +0x5, 212 differing)",
+     "relocation set differs (1 vs 1)"
+    ],
+    "peer_losses": [],
+    "data_losses": [],
+    "fixups": null,
+    "relocations": null,
+    "reloc_order": null,
+    "score": [
+     1,
+     17,
+     214,
+     2
+    ]
+   }
+  ]
+ },
+ {
+  "function": "f_171C_0FBC",
+  "probe": "compaction_result_lifetime",
+  "hypothesis": "Store f_0CF4's real Boolean result in the existing compacted state before branching; the false value is reset by the existing fallback path and true continues with first=1.",
+  "variants": [
+   {
+    "variant": "negative",
+    "hypothesis": "Store f_0CF4's real Boolean result in the existing compacted state before branching; the false value is reset by the existing fallback path and true continues with first=1.",
+    "source": "build/workers/fleet_memory/f_171C_0FBC-negative.c",
+    "source_sha256": "0c2a06c60bd91da62ea3c23112f6592bfda34ef9a7e06e5b4dcb9e36b86e4078",
+    "compile_ok": true,
+    "length": 568,
+    "target_exact": false,
+    "module_exact": null,
+    "reasons": [
+     "length 568 != target 566",
+     "bytes differ (first at +0x5, 437 differing)",
+     "relocation set differs (10 vs 10)"
+    ],
+    "peer_losses": [],
+    "data_losses": [],
+    "fixups": null,
+    "relocations": null,
+    "reloc_order": null,
+    "score": [
+     1,
+     60,
+     439,
+     2
+    ]
+   },
+   {
+    "variant": "positive",
+    "hypothesis": "Store f_0CF4's real Boolean result in the existing compacted state before branching; the false value is reset by the existing fallback path and true continues with first=1.",
+    "source": "build/workers/fleet_memory/f_171C_0FBC-compaction_result_lifetime.c",
+    "source_sha256": "29f2338b4345b64f4065cf5a9ddbcea780a7314623c0f6ab854cd4dde6e770cd",
+    "compile_ok": true,
+    "length": 562,
+    "target_exact": false,
+    "module_exact": null,
+    "reasons": [
+     "length 562 != target 566",
+     "bytes differ (first at +0x5, 437 differing)",
+     "relocation set differs (10 vs 10)"
+    ],
+    "peer_losses": [],
+    "data_losses": [],
+    "fixups": null,
+    "relocations": null,
+    "reloc_order": null,
+    "score": [
+     1,
+     64,
+     441,
+     4
+    ]
+   }
+  ]
+ }
+]

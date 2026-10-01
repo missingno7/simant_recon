@@ -1,0 +1,22 @@
+win_DrawBitMap 675 / 663 BRANCH_TARGET_OR_LAYOUT,CALL_FRAME_OR_SEGMENT_REGISTER,CONTROL_FLOW_SHAPE,EPILOGUE_OR_RETURN_LOWERING,EXTRA_INSTRUCTIONS,IMMEDIATE_VALUE,LOCAL_CODEGEN_UNCLASSIFIED,MISSING_INSTRUCTIONS,REGISTER_ALLOCATION,STACK_SLOT_ALLOCATION,WIDTH_OR_EXTENSION peer losses 0
+Function extents target/candidate: 663/675 bytes.
+MATCH DIAGNOSIS: win_DrawBitMap (bound payload)
+Strict status: MISMATCH; diagnostics cannot discharge extent/byte/fixup obligations.
+Compared bound payload target/candidate: 663/663 bytes, 269/264 linear instructions.
+Byte preservation evidence: 131 target instructions, 26 anchors, 27 islands; not source-line boundaries.
+Corresponding anchored branch destinations: 3 sites (decimal offsets 154->150, 176->170, 541->559); encoding/layout changes remain byte differences.
+Ungrouped residual observations: 113 (not a count of independent fixes).
+  p2 islands [1]: 3 sub sp, 0x28 -> 3 sub sp, 0x2a; STRUCTURAL
+  p18 islands [2]: 33 jmp 0x28f -> 33 jmp 0x29b; UNRESOLVED_DESTINATION
+  p21 islands [2]: 42 mov word ptr [bp - 0x16], bx -> 42 mov di, bx; MISMATCH
+  p26 islands [3]: 55 push bx -> 54 push di; STRUCTURAL
+  p27 islands [3]: 56 push word ptr [bp - 0x2c] -> 55 push word ptr [bp - 0x2e]; STRUCTURAL
+  p28 islands [3]: 59 push word ptr [bp - 0x2e] -> 58 push word ptr [bp - 0x30]; STRUCTURAL
+  p33 islands [4]: 74 push word ptr [bp - 0x2a] -> 73 push word ptr [bp - 0x2c]; STRUCTURAL
+  p38 islands [5]: 87 jmp 0x291 -> 86 jmp 0x29d; UNRESOLVED_DESTINATION
+  p42 islands []: 101 jne 0x73 -> 100 jne 0x72; UNRESOLVED_DESTINATION
+  p46 islands []: 113 jmp 0x38 -> 112 jmp 0x37; ALIGNED_DESTINATION_UNCERTAIN
+  p47 islands [6]: 115 mov di, word ptr [bp - 0x16] -> None None; MISSING
+  p50 islands [7]: 125 jne 0xb2 -> 121 jne 0xac; UNRESOLVED_DESTINATION
+Observed patterns only; 101 omitted entries. Full artifact retains every site/island and contradictions; --islands expands localization. Exact stream resumes at the original anchor boundaries.
+Candidate tail is outside the bound comparison payload; the strict extent mismatch remains unresolved.

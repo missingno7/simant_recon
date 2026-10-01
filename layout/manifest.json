@@ -14492,8 +14492,13 @@
     }
    },
    "lang": "c",
+   "source_origin": "hand-written C",
+   "extent": {
+    "start": 108908,
+    "end": 110680
+   },
    "source": "src/root/m1A96.c",
-   "source_sha256": "0b96adc3b8cc8d4929a030896f944427de96d4bab73cb37e7fd412032ff36f45",
+   "source_sha256": "c57124b9d75ea77eb30158c09a71550862cf7081ceed625a2550a26a262bfdfa",
    "claims": [
     {
      "name": "ch_RemoveEntry",
@@ -14604,12 +14609,21 @@
      "kind": "C",
      "provenance": "EXACT_NATURAL",
      "reloc_order": "GROUPED"
+    },
+    {
+     "name": "ch_LookUpId",
+     "unit": "root",
+     "seg": 6806,
+     "off": 492,
+     "size": 354,
+     "target_sha256": "428f426a884b3dcd5e98a45bbca0df2f0943a2146037a0358151e4bcc7afc30d",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL",
+     "reloc_order": "EXACT"
     }
    ],
-   "scaffold": [
-    "ch_LookUpId"
-   ],
-   "object_sha256": "189fd819ecf1d94f42ce49503f56bd043411725f5d96f5b031fd94e429d4d3b4"
+   "scaffold": [],
+   "object_sha256": "3d49c4d0a351366f32fce9e75c5db1d19bfcdbc36e0e1e6aa8cf2647ef068b1c"
   },
   "root:1B05": {
    "unit": "root",
@@ -19807,7 +19821,7 @@
    "lang": "c",
    "source_origin": "hand-written C",
    "source": "src/root/m259D.c",
-   "source_sha256": "12df7d8f6f07a2d156ecc9fd50524a691886fb8a7940462459851bf3a2abb982",
+   "source_sha256": "c4329ddb75629a235043d9da1eb11c7dd6f2cb3826fe392bfc8a27c98eeb97e1",
    "claims": [
     {
      "name": "win_DrawBitMapAtObj",
@@ -19846,7 +19860,7 @@
    "scaffold": [
     "win_DrawBitMap"
    ],
-   "object_sha256": "29932dd96474ce418ca0c8bcb6980a401b92f9b8bf7c300d294b92762bd67c37"
+   "object_sha256": "5ff632efc4ad85c8dab199f4dd35ef132b4597a2843567aeb8b75ac36a8c3328"
   },
   "root:25E7": {
    "unit": "root",

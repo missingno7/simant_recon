@@ -1,0 +1,154 @@
+[f_171C_0FBC-negative.c] MISMATCH: length 568 != target 566; bytes differ (first at +0x5, 437 differing); relocation set differs (10 vs 10)  (opcode similarity 0.931, 233 vs 233 insns)
+    0FBC push bp                             | 0FBC push bp
+    0FBD mov bp, sp                          | 0FBD mov bp, sp
+  ! 0FBF sub sp, 0x7a                        | 0FBF sub sp, 0x76
+      ... 6 equal instructions ...
+  !                                          | 0FD5 mov bx, ax
+  !                                          | 0FD7 mov word ptr [bp - 2], dx
+    0FD5 mov word ptr [bp - 0x10], ax        | 0FDA mov word ptr [bp - 0x10], ax
+    0FD8 mov word ptr [bp - 0xe], dx         | 0FDD mov word ptr [bp - 0xe], dx
+  ! 0FDB mov bx, ax                          |
+  ! 0FDD mov word ptr [bp - 2], dx           |
+      ... 20 equal instructions ...
+  ! 1015 jmp 0x10fc                          | 1015 jmp 0x10f0
+    1018 mov ax, word ptr [bp + 6]           | 1018 mov ax, word ptr [bp + 6]
+    101B mov es, word ptr [bp - 0xe]         | 101B mov es, word ptr [bp - 0xe]
+    101E cmp word ptr es:[di + 6], ax        | 101E cmp word ptr es:[di + 6], ax
+    1022 jae 0x1027                          | 1022 jae 0x1027
+  ! 1024 jmp 0x10fc                          | 1024 jmp 0x10f0
+    1027 or bx, bx                           | 1027 or bx, bx
+  ! 1029 je 0x1076                           | 1029 je 0x1078
+    102B mov ax, word ptr es:[di + 6]        | 102B mov ax, word ptr es:[di + 6]
+    102F mov cx, es                          | 102F mov cx, es
+    1031 add ax, cx                          | 1031 add ax, cx
+    1033 sub cx, cx                          | 1033 sub cx, cx
+  ! 1035 mov bx, cx                          | 1035 mov si, cx
+    1037 mov ds, ax                          | 1037 mov ds, ax
+    1039 mov di, word ptr [bp + 6]           | 1039 mov di, word ptr [bp + 6]
+  ! 103C jmp 0x106a                          | 103C jmp 0x106c
+  ! 103E cmp byte ptr [bx + 9], 0            | 103E mov cl, byte ptr [si + 8]
+  ! 1042 jne 0x105f                          | 1041 sub ch, ch
+  ! 1044 cmp byte ptr [bx + 8], 1            | 1043 cmp byte ptr [si + 9], ch
+  !                                          | 1046 jne 0x1061
+  !                                          | 1048 cmp cx, 1
+    1048 jne 0x104d                          | 104B jne 0x1050
+  ! 104A jmp 0x10f4                          | 104D jmp 0x10e8
+  ! 104D cmp byte ptr [bx + 8], 3            | 1050 cmp cx, 3
+    1051 jne 0x1056                          | 1053 jne 0x1058
+  ! 1053 jmp 0x10f4                          | 1055 jmp 0x10e8
+  ! 1056 cmp byte ptr [bx + 8], 0x80         | 1058 cmp cx, 0x80
+    105A jne 0x105f                          | 105C jne 0x1061
+  ! 105C jmp 0x10f4                          | 105E jmp 0x10e8
+  ! 105F mov ax, word ptr [bx + 6]           | 1061 mov ax, word ptr [si + 6]
+  ! 1062 mov cx, ds                          | 1064 mov dx, ds
+  ! 1064 add ax, cx                          | 1066 add ax, dx
+    1066 sub cx, cx                          | 1068 sub cx, cx
+    1068 mov ds, ax                          | 106A mov ds, ax
+    106A mov ax, ds                          | 106C mov ax, ds
+  ! 106C cmp word ptr ss:[0x8c70], ax        | 106E cmp ax, word ptr ss:[0x8c70]
+  ! 1071 ja 0x103e                           | 1073 jb 0x103e
+    1073 mov di, word ptr [bp - 0x10]        | 1075 mov di, word ptr [bp - 0x10]
+    1076 mov ax, 0x55b3                      | 1078 mov ax, 0x55b3
+    1079 mov ds, ax                          | 107B mov ds, ax
+  ! 107B mov si, word ptr [bp + 6]           |
+  ! 107E lea ax, [si + 4]                    |
+    1081 mov es, word ptr [bp - 0xe]         | 107D mov es, word ptr [bp - 0xe]
+  ! 1084 cmp word ptr es:[di + 6], ax        | 1080 mov si, word ptr es:[di + 6]
+  !                                          | 1084 mov ax, word ptr [bp + 6]
+  !                                          | 1087 add ax, 4
+  !                                          | 108A cmp si, ax
+    1088 ja 0x108d                           | 108C ja 0x1091
+  ! 108A jmp 0x11ca                          | 108E jmp 0x11be
+      ... 7 equal instructions ...
+  !                                          | 10A1 sub si, word ptr [bp + 6]
+  !                                          | 10A4 push si
+  !                                          | 10A5 push word ptr [bp - 0xe]
+  !                                          | 10A8 push di
+  !                                          | 10A9 push cs
+  !                                          | 10AA call 0x68c
+  !                                          | 10AD add sp, 8
+  !                                          | 10B0 push word ptr [bp + 8]
+  !                                          | 10B3 push word ptr [bp + 6]
+    109D mov es, word ptr [bp - 0xe]         | 10B6 mov es, word ptr [bp - 0xe]
+    10A0 mov ax, word ptr es:[di + 6]        | 10B9 mov ax, word ptr es:[di + 6]
+  ! 10A4 sub ax, si                          |
+  ! 10A6 push ax                             |
+  ! 10A7 push es                             |
+  ! 10A8 push di                             |
+  ! 10A9 mov word ptr [bp - 0x7a], di        |
+  ! 10AC mov word ptr [bp - 0x78], es        |
+  ! 10AF push cs                             |
+  ! 10B0 call 0x68c                          |
+  ! 10B3 add sp, 8                           |
+  ! 10B6 push word ptr [bp + 8]              |
+  ! 10B9 push si                             |
+  ! 10BA les bx, ptr [bp - 0x7a]             |
+  ! 10BD mov ax, word ptr es:[bx + 6]        |
+    10C1 mov cx, es                          | 10BD mov cx, es
+    10C3 add ax, cx                          | 10BF add ax, cx
+  ! 10C5 sub dx, dx                          | 10C1 sub cx, cx
+  ! 10C7 mov word ptr [bp - 8], dx           | 10C3 mov word ptr [bp - 8], cx
+    10CA mov word ptr [bp - 6], ax           | 10C6 mov word ptr [bp - 6], ax
+    10CD push ax                             | 10C9 push ax
+  ! 10CE push dx                             | 10CA push cx
+  !                                          | 10CB mov si, es
+    10CF push cs                             | 10CD push cs
+  ! 10D0 call 0x68c                          | 10CE call 0x68c
+    10D3 add sp, 8                           | 10D1 add sp, 8
+    10D6 mov ax, 1                           | 10D4 mov ax, 1
+    10D9 push ax                             | 10D7 push ax
+  ! 10DA push word ptr [bp - 0x78]           | 10D8 push si
+  ! 10DD push word ptr [bp - 0x7a]           | 10D9 push di
+    10E0 push cs                             | 10DA push cs
+  ! 10E1 call 0x160                          | 10DB call 0x160
+    10E4 add sp, 6                           | 10DE add sp, 6
+  ! 10E7 mov ax, word ptr [bp - 8]           | 10E1 mov si, word ptr [bp - 8]
+  ! 10EA mov dx, word ptr [bp - 6]           | 10E4 jmp 0x11e6
+  ! 10ED pop si                              |
+  ! 10EE pop di                              |
+  ! 10EF mov sp, bp                          |
+  ! 10F1 pop bp                              |
+  ! 10F2 retf                                |
+      ... 47 equal instructions ...
+  ! 115A call 0xcf4                          | 114E call 0xcf4
+    115D add sp, 2                           | 1151 add sp, 2
+    1160 or ax, ax                           | 1154 or ax, ax
+    1162 je 0x1170                           | 1156 je 0x1164
+    1164 mov ax, 1                           | 1158 mov ax, 1
+  !                                          | 115B mov word ptr [bp - 6], ax
+    1167 mov word ptr [bp - 0x12], ax        | 115E mov word ptr [bp - 0x12], ax
+  ! 116A mov word ptr [bp - 6], ax           | 1161 jmp 0xfce
+  ! 116D jmp 0xfce                           |
+      ... 9 equal instructions ...
+  ! 1184 call 0xbe2                          | 1178 call 0xbe2
+      ... 15 equal instructions ...
+  ! 11AA call 0xbe2                          | 119E call 0xbe2
+      ... 6 equal instructions ...
+  ! 11BF jmp 0xfce                           | 11B3 jmp 0xfce
+    11C2 mov word ptr [bp - 6], 0            | 11B6 mov word ptr [bp - 6], 0
+  ! 11C7 jmp 0xfce                           | 11BB jmp 0xfce
+      ... 5 equal instructions ...
+  !                                          | 11CB mov ax, word ptr [bp - 0xe]
+  !                                          | 11CE mov dx, di
+  !                                          | 11D0 mov bx, ax
+  !                                          | 11D2 mov si, dx
+  !                                          | 11D4 mov word ptr [bp - 6], ax
+    11D7 push word ptr [bp + 8]              | 11D7 push word ptr [bp + 8]
+  ! 11DA push si                             | 11DA push word ptr [bp + 6]
+  ! 11DB mov ax, word ptr [bp - 0xe]         | 11DD push bx
+  ! 11DE push ax                             | 11DE push dx
+  ! 11DF push di                             |
+  ! 11E0 mov si, ax                          |
+    11E2 push cs                             | 11DF push cs
+  ! 11E3 call 0x68c                          | 11E0 call 0x68c
+    11E6 add sp, 8                           | 11E3 add sp, 8
+  ! 11E9 mov ax, di                          | 11E6 mov ax, si
+  ! 11EB mov dx, si                          | 11E8 mov dx, word ptr [bp - 6]
+    11ED pop si                              | 11EB pop si
+    11EE pop di                              | 11EC pop di
+    11EF mov sp, bp                          | 11ED mov sp, bp
+    11F1 pop bp                              | 11EF pop bp
+  !                                          | 11F0 retf
+  !                                          | 11F1 nop
+  relocations expected ['0x18259', '0x18386', '0x18355', '0x1832c', '0x182ff', '0x182df', '0x182b1', '0x182a9', '0x18239', '0x182ec']
+  relocations candidate ['0x182f8', '0x182eb', '0x182bd', '0x182b5', '0x18255', '0x18237', '0x1830b', '0x18392', '0x18361', '0x18338']

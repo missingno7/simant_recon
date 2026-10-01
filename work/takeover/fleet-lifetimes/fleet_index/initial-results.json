@@ -1,0 +1,249 @@
+{
+ "module": "root:1986",
+ "profile": "msc600ax",
+ "flags": [
+  "/AL",
+  "/Os",
+  "/Oeg",
+  "/Gs",
+  "/Zi"
+ ],
+ "placements": {
+  "_DATA": {
+   "seg": 21939,
+   "off": 13854,
+   "size": 67
+  },
+  "CONST": {
+   "seg": 21939,
+   "off": 35248,
+   "size": 6
+  }
+ },
+ "existing_claims": [
+  "OpenIndex",
+  "CreateIndex",
+  "CloseIndex",
+  "f_1986_0235",
+  "f_1986_0236",
+  "f_1986_0237"
+ ],
+ "data_results": {
+  "_DATA": {
+   "exact": true,
+   "reasons": [],
+   "size": 67,
+   "reloc_order": "EXACT",
+   "start": 364878,
+   "class": "DATA",
+   "align": "word",
+   "far": false
+  },
+  "CONST": {
+   "exact": true,
+   "reasons": [],
+   "size": 6,
+   "reloc_order": "GROUPED",
+   "start": 386272,
+   "class": "CONST",
+   "align": "word",
+   "far": false
+  }
+ },
+ "variants": [
+  {
+   "name": "count-check-before-bound",
+   "rationale": "Same inclusive interval and empty-table result; changes where the zero-count test occurs.",
+   "source_sha256": "adc0218b73c189033bc0bf484006ac65d6e61b8d2fd6e68559a079a478023c70",
+   "whole_module_exact": false,
+   "findindex": {
+    "exact": false,
+    "reasons": [
+     "length 294 != target 267",
+     "bytes differ (first at +0x8, 254 differing)",
+     "relocation set differs (4 vs 0)"
+    ],
+    "fixups": 16,
+    "relocations": 0,
+    "reloc_order": "EXACT"
+   },
+   "compile_ok": true
+  },
+  {
+   "name": "cached-count-check-before-bound",
+   "rationale": "Same inclusive interval and empty-table result; changes where the zero-count test occurs.",
+   "source_sha256": "f3149d562616dc2a046c9208dcbbe870b160b8e40a36650de5be89e1ba45f44b",
+   "whole_module_exact": false,
+   "findindex": {
+    "exact": false,
+    "reasons": [
+     "length 276 != target 267",
+     "bytes differ (first at +0x2b, 217 differing)"
+    ],
+    "fixups": 13,
+    "relocations": 0,
+    "reloc_order": "EXACT"
+   },
+   "compile_ok": true
+  },
+  {
+   "name": "bound-zero-check-before-decrement",
+   "rationale": "Same inclusive interval and empty-table result; changes where the zero-count test occurs.",
+   "source_sha256": "216a93c54f27e267c678a2fe9a1f6d9667eb3d134d21d8cb505df2c5049d2d01",
+   "whole_module_exact": false,
+   "findindex": {
+    "exact": false,
+    "reasons": [
+     "length 274 != target 267",
+     "bytes differ (first at +0x2e, 218 differing)"
+    ],
+    "fixups": 13,
+    "relocations": 0,
+    "reloc_order": "EXACT"
+   },
+   "compile_ok": true
+  },
+  {
+   "name": "cached-bound-zero-check-before-decrement",
+   "rationale": "Same inclusive interval and empty-table result; changes where the zero-count test occurs.",
+   "source_sha256": "f8068f3b2c47bb713a4f6608c6f3cdeb657279a938e8596620b71235e1fa21e4",
+   "whole_module_exact": false,
+   "findindex": {
+    "exact": false,
+    "reasons": [
+     "length 274 != target 267",
+     "bytes differ (first at +0x2e, 218 differing)"
+    ],
+    "fixups": 13,
+    "relocations": 0,
+    "reloc_order": "EXACT"
+   },
+   "compile_ok": true
+  },
+  {
+   "name": "local-current-pointer",
+   "rationale": "Acquires the current record in a real local, retaining the global pointer assignment and final global result.",
+   "source_sha256": "1d6bd714f990782648d391424fb80f06f9a715807da281453ff3e4bf95c57bd2",
+   "whole_module_exact": false,
+   "findindex": {
+    "exact": false,
+    "reasons": [
+     "length 270 != target 267",
+     "bytes differ (first at +0x5, 217 differing)",
+     "relocation set differs (3 vs 0)"
+    ],
+    "fixups": 15,
+    "relocations": 0,
+    "reloc_order": "EXACT"
+   },
+   "compile_ok": true
+  },
+  {
+   "name": "local-pointer-addition",
+   "rationale": "Uses equivalent far-array pointer addition and a live current-record local.",
+   "source_sha256": "73ed847acec6f76d2727459b3c825c4495ed112e928e4668e6b106c530f0a16e",
+   "whole_module_exact": false,
+   "findindex": {
+    "exact": false,
+    "reasons": [
+     "length 270 != target 267",
+     "bytes differ (first at +0x5, 217 differing)",
+     "relocation set differs (3 vs 0)"
+    ],
+    "fixups": 15,
+    "relocations": 0,
+    "reloc_order": "EXACT"
+   },
+   "compile_ok": true
+  },
+  {
+   "name": "cached-kind-local",
+   "rationale": "Keeps the record pointer and a byte-sized kind value live across the decision; record fields are unchanged.",
+   "source_sha256": "072a82cd43d966c88a6ad8d964af3cb7db1de600663d793a50478155169811b5",
+   "whole_module_exact": false,
+   "findindex": {
+    "exact": false,
+    "reasons": [
+     "length 272 != target 267",
+     "bytes differ (first at +0x5, 253 differing)",
+     "relocation set differs (3 vs 0)"
+    ],
+    "fixups": 15,
+    "relocations": 0,
+    "reloc_order": "EXACT"
+   },
+   "compile_ok": true
+  },
+  {
+   "name": "cached-fields-locals",
+   "rationale": "Caches the two compared fields from the just-acquired record before the decision.",
+   "source_sha256": "f057969bda57ac4e9a3ef7e7cbd76d0feee59843594b3e30860fda256d5093eb",
+   "whole_module_exact": false,
+   "findindex": {
+    "exact": false,
+    "reasons": [
+     "length 266 != target 267",
+     "bytes differ (first at +0x5, 250 differing)"
+    ],
+    "fixups": 14,
+    "relocations": 0,
+    "reloc_order": "EXACT"
+   },
+   "compile_ok": true
+  },
+  {
+   "name": "local-pointer-through-final-check",
+   "rationale": "Uses the acquired record local in-loop and for the final exact-key check; preserves the final global pointer value.",
+   "source_sha256": "69ff518502be92f5ae5a16b03602baa2b9e56583b15d6fb1890a3831cec873df",
+   "whole_module_exact": false,
+   "findindex": {
+    "exact": false,
+    "reasons": [
+     "length 268 != target 267",
+     "bytes differ (first at +0x5, 240 differing)",
+     "relocation set differs (4 vs 0)"
+    ],
+    "fixups": 18,
+    "relocations": 0,
+    "reloc_order": "EXACT"
+   },
+   "compile_ok": true
+  },
+  {
+   "name": "exclusive-upper-sum-midpoint",
+   "rationale": "Equivalent lower-bound search over [0,count); adds an explicit count guard before the final record read.",
+   "source_sha256": "93f20b3585073b1a7b4636f437fa008ceff7a476edbe626476b91a796927476e",
+   "whole_module_exact": false,
+   "findindex": {
+    "exact": false,
+    "reasons": [
+     "length 245 != target 267",
+     "bytes differ (first at +0x5, 233 differing)",
+     "relocation set differs (3 vs 0)"
+    ],
+    "fixups": 17,
+    "relocations": 0,
+    "reloc_order": "EXACT"
+   },
+   "compile_ok": true
+  },
+  {
+   "name": "exclusive-upper-difference-midpoint",
+   "rationale": "Equivalent lower-bound search over [0,count); adds an explicit count guard before the final record read.",
+   "source_sha256": "8ab52847408142b2ed83fd3d1548d4dac77c3012458caa75ce90d137fdab8516",
+   "whole_module_exact": false,
+   "findindex": {
+    "exact": false,
+    "reasons": [
+     "length 247 != target 267",
+     "bytes differ (first at +0x5, 234 differing)",
+     "relocation set differs (3 vs 0)"
+    ],
+    "fixups": 17,
+    "relocations": 0,
+    "reloc_order": "EXACT"
+   },
+   "compile_ok": true
+  }
+ ]
+}

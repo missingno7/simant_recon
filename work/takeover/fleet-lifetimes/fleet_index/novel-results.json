@@ -1,0 +1,95 @@
+{
+ "module": "root:1986",
+ "profile": "msc600ax",
+ "flags": [
+  "/AL",
+  "/Os",
+  "/Oeg",
+  "/Gs",
+  "/Zi"
+ ],
+ "placements": {
+  "_DATA": {
+   "seg": 21939,
+   "off": 13854,
+   "size": 67
+  },
+  "CONST": {
+   "seg": 21939,
+   "off": 35248,
+   "size": 6
+  }
+ },
+ "variants": [
+  {
+   "name": "reverse-kind-first",
+   "rationale": "Equivalent tuple ordering with the first comparison written as query-kind < record-kind; then preserves the original unequal-kind and ID tests.",
+   "source_sha256": "0311908b5ad38e5cd109d79c4215a2aa673024c345af6c4e4be083257972c09c",
+   "findindex": {
+    "exact": false,
+    "reasons": [
+     "length 287 != target 267",
+     "bytes differ (first at +0x8, 239 differing)",
+     "relocation set differs (4 vs 0)"
+    ],
+    "fixups": 15,
+    "relocations": 0,
+    "reloc_order": "EXACT"
+   },
+   "compile_ok": true,
+   "whole_module_exact": false
+  },
+  {
+   "name": "reverse-kind-and-id-first",
+   "rationale": "Equivalent tuple ordering with query/record operands reversed at both first-kind and lower-ID tests.",
+   "source_sha256": "dcf30ed9271ee85584ff71bf16e209ba19b988310da48cc21b30f5293f712729",
+   "findindex": {
+    "exact": false,
+    "reasons": [
+     "length 287 != target 267",
+     "bytes differ (first at +0x8, 239 differing)",
+     "relocation set differs (4 vs 0)"
+    ],
+    "fixups": 15,
+    "relocations": 0,
+    "reloc_order": "EXACT"
+   },
+   "compile_ok": true,
+   "whole_module_exact": false
+  },
+  {
+   "name": "ordered-two-way-kind",
+   "rationale": "Equivalent explicit less/equal/greater partition, with query-first kind comparisons.",
+   "source_sha256": "493f48386bc4c3da3ad8233e849fcbcb4677c8c83db0c1eb051e951edea1b6b9",
+   "findindex": {
+    "exact": false,
+    "reasons": [
+     "length 287 != target 267",
+     "bytes differ (first at +0x8, 239 differing)",
+     "relocation set differs (4 vs 0)"
+    ],
+    "fixups": 15,
+    "relocations": 0,
+    "reloc_order": "EXACT"
+   },
+   "compile_ok": true,
+   "whole_module_exact": false
+  },
+  {
+   "name": "reverse-compound-boundary",
+   "rationale": "Equivalent first-lower-bound test written in the reversed relational direction; equality retains the first matching record.",
+   "source_sha256": "c23204826e18fde091aad4fa85c54bf93b0fadef3d17a096f1d9409819a62e4b",
+   "findindex": {
+    "exact": false,
+    "reasons": [
+     "bytes differ (first at +0x7a, 17 differing)"
+    ],
+    "fixups": 13,
+    "relocations": 0,
+    "reloc_order": "EXACT"
+   },
+   "compile_ok": true,
+   "whole_module_exact": false
+  }
+ ]
+}

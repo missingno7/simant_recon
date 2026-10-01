@@ -135,6 +135,7 @@ class MatchResult:
     reloc_order: str = "EXACT"      # EXACT | GROUPED (object order exact per target; group order = link)
     reloc_key: dict = field(default_factory=dict)    # relocation site -> target key
     reloc_index: dict = field(default_factory=dict)  # relocation site -> position in the object's FIXUPP order
+    candidate_extent_size: int | None = None  # complete extent, before limiting the comparison payload
 
     def summary(self) -> str:
         if self.exact:
@@ -223,6 +224,7 @@ class Binder:
                 end = seglen - 1   # MSC word-alignment pad at segment end
         else:
             end = nxt
+        res.candidate_extent_size = end - pub_off
         if end - pub_off != t.size:
             res.reasons.append(f"length {end - pub_off} != target {t.size}")
         size = min(end - pub_off, t.size)

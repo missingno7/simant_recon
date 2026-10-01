@@ -1,0 +1,455 @@
+{
+ "task": "root:23E6 f_23E6_0000 bounded far-pointer follow-up",
+ "base_source": "work/takeover/menu-loader/list-base.c",
+ "base_sha256_lf": "70f8f1db471e4444914136c1dbdd35148e026a2ea18c7ea2aed6c39bc3dfc211",
+ "target_size": 159,
+ "base_candidate_size": 156,
+ "diagnostic": "One original MOV CX,[BP-0Ah] at +0x73 is absent after pointer offset advancement; the baseline comparison reports first byte difference +0x5D. Target ends 3 bytes later.",
+ "profile": "msc600ax",
+ "flags": [
+  "/AL",
+  "/Os",
+  "/Oe",
+  "/Og",
+  "/Gs",
+  "/Zi"
+ ],
+ "controls": {
+  "novel_hypotheses": 20,
+  "compiled_rows_including_each_series_base": 23,
+  "series": [
+   {
+    "series": "register-pointer",
+    "profile": "msc600ax",
+    "flags": [
+     "/AL",
+     "/Os",
+     "/Oe",
+     "/Og",
+     "/Gs",
+     "/Zi"
+    ],
+    "placements": {
+     "_DATA": {
+      "seg": 21939,
+      "off": 25840,
+      "size": 156
+     },
+     "CONST": {
+      "seg": 21939,
+      "off": 35388,
+      "size": 2
+     }
+    },
+    "rows": [
+     {
+      "name": "base",
+      "source": "000_base.c",
+      "source_sha256_lf": "70f8f1db471e4444914136c1dbdd35148e026a2ea18c7ea2aed6c39bc3dfc211",
+      "compile_ok": true,
+      "target_exact": false,
+      "target_reasons": [
+       "length 156 != target 159",
+       "bytes differ (first at +0x5d, 41 differing)",
+       "relocation set differs (3 vs 3)"
+      ],
+      "data_exact": true,
+      "peer_losses": []
+     },
+     {
+      "name": "register-s",
+      "source": "001_register-s.c",
+      "source_sha256_lf": "7f8cd3ec693845e25166626cb132e134991bb49bc204d1a348a4acfdf9831e32",
+      "compile_ok": true,
+      "target_exact": false,
+      "target_reasons": [
+       "length 156 != target 159",
+       "bytes differ (first at +0x5d, 41 differing)",
+       "relocation set differs (3 vs 3)"
+      ],
+      "data_exact": true,
+      "peer_losses": []
+     },
+     {
+      "name": "register-n",
+      "source": "002_register-n.c",
+      "source_sha256_lf": "2f0ca763b440566d1d0901ef5972f89c5d7a5c5810a7e30718ee08b1f51cfdb4",
+      "compile_ok": true,
+      "target_exact": false,
+      "target_reasons": [
+       "length 156 != target 159",
+       "bytes differ (first at +0x5d, 41 differing)",
+       "relocation set differs (3 vs 3)"
+      ],
+      "data_exact": true,
+      "peer_losses": []
+     },
+     {
+      "name": "register-off",
+      "source": "003_register-off.c",
+      "source_sha256_lf": "d66fb210fa42fa89b51355db880c3347cde775275e690c9ba5056d2d72e2c381",
+      "compile_ok": true,
+      "target_exact": false,
+      "target_reasons": [
+       "length 156 != target 159",
+       "bytes differ (first at +0x5d, 41 differing)",
+       "relocation set differs (3 vs 3)"
+      ],
+      "data_exact": true,
+      "peer_losses": []
+     },
+     {
+      "name": "register-s-n",
+      "source": "004_register-s-n.c",
+      "source_sha256_lf": "8c374068168bbdc8e32bd6a800fc26701744851390e9c61ed6e95cc1f1d8234b",
+      "compile_ok": true,
+      "target_exact": false,
+      "target_reasons": [
+       "length 156 != target 159",
+       "bytes differ (first at +0x5d, 41 differing)",
+       "relocation set differs (3 vs 3)"
+      ],
+      "data_exact": true,
+      "peer_losses": []
+     },
+     {
+      "name": "register-s-off",
+      "source": "005_register-s-off.c",
+      "source_sha256_lf": "270b2199e7cea4fad5d5374eb29be0cf968f05450ff32a0671db93d6a2c7f2cc",
+      "compile_ok": true,
+      "target_exact": false,
+      "target_reasons": [
+       "length 156 != target 159",
+       "bytes differ (first at +0x5d, 41 differing)",
+       "relocation set differs (3 vs 3)"
+      ],
+      "data_exact": true,
+      "peer_losses": []
+     },
+     {
+      "name": "register-n-off",
+      "source": "006_register-n-off.c",
+      "source_sha256_lf": "0a9e3ee5a054bb207a6989351e18c624ee500da75412e398ad8b7b8d30fe22c5",
+      "compile_ok": true,
+      "target_exact": false,
+      "target_reasons": [
+       "length 156 != target 159",
+       "bytes differ (first at +0x5d, 41 differing)",
+       "relocation set differs (3 vs 3)"
+      ],
+      "data_exact": true,
+      "peer_losses": []
+     },
+     {
+      "name": "register-s-n-off",
+      "source": "007_register-s-n-off.c",
+      "source_sha256_lf": "5e84da9bf0a9a6d4bc7fd80cf1e2a64a41dc3297f3cbe4828c9dfcdeada89d32",
+      "compile_ok": true,
+      "target_exact": false,
+      "target_reasons": [
+       "length 156 != target 159",
+       "bytes differ (first at +0x5d, 41 differing)",
+       "relocation set differs (3 vs 3)"
+      ],
+      "data_exact": true,
+      "peer_losses": []
+     },
+     {
+      "name": "register-s-unsigned-offset",
+      "source": "008_register-s-unsigned-offset.c",
+      "source_sha256_lf": "2037b6a43ab8370d745997058d8bdcf6498f935b0034e95ff5d4821e5982e208",
+      "compile_ok": true,
+      "target_exact": false,
+      "target_reasons": [
+       "length 161 != target 159",
+       "bytes differ (first at +0x19, 101 differing)",
+       "relocation set differs (3 vs 3)"
+      ],
+      "data_exact": true,
+      "peer_losses": []
+     },
+     {
+      "name": "register-s-signed-char",
+      "source": "009_register-s-signed-char.c",
+      "source_sha256_lf": "c3c147d1723ab617ad0b31cdb74b7d56775e0fe446d39c246384fa66c31cb1bf",
+      "compile_ok": true,
+      "target_exact": false,
+      "target_reasons": [
+       "length 156 != target 159",
+       "bytes differ (first at +0x5d, 41 differing)",
+       "relocation set differs (3 vs 3)"
+      ],
+      "data_exact": true,
+      "peer_losses": []
+     },
+     {
+      "name": "register-s-unsigned-char",
+      "source": "010_register-s-unsigned-char.c",
+      "source_sha256_lf": "92108b5959871442909413d60e05d5e732124d5d42a28689e0938b301b86e3b9",
+      "compile_ok": true,
+      "target_exact": false,
+      "target_reasons": [
+       "length 156 != target 159",
+       "bytes differ (first at +0x5d, 41 differing)",
+       "relocation set differs (3 vs 3)"
+      ],
+      "data_exact": true,
+      "peer_losses": []
+     },
+     {
+      "name": "const-string-pointer",
+      "source": "011_const-string-pointer.c",
+      "source_sha256_lf": "d6fd91fdf3de3a7fef8de0f8d9e8161c08809561b485b8cd513c51202cbebc01",
+      "compile_ok": true,
+      "target_exact": false,
+      "target_reasons": [
+       "length 156 != target 159",
+       "bytes differ (first at +0x5d, 41 differing)",
+       "relocation set differs (3 vs 3)"
+      ],
+      "data_exact": true,
+      "peer_losses": []
+     },
+     {
+      "name": "volatile-pointer-object",
+      "source": "012_volatile-pointer-object.c",
+      "source_sha256_lf": "bacc8b3cb6890c843588b9c872b6a5faaef25fd1295f7bb6d3a6e2e82b7ae4c6",
+      "compile_ok": true,
+      "target_exact": false,
+      "target_reasons": [
+       "length 156 != target 159",
+       "bytes differ (first at +0x5, 149 differing)",
+       "relocation set differs (3 vs 3)"
+      ],
+      "data_exact": true,
+      "peer_losses": []
+     },
+     {
+      "name": "base-pointer-alias",
+      "source": "013_base-pointer-alias.c",
+      "source_sha256_lf": "47d64a15316326b77832e41665399be2a01b0d367c99355a1ad2dc63de254c43",
+      "compile_ok": true,
+      "target_exact": false,
+      "target_reasons": [
+       "length 156 != target 159",
+       "bytes differ (first at +0x5d, 41 differing)",
+       "relocation set differs (3 vs 3)"
+      ],
+      "data_exact": true,
+      "peer_losses": [
+       "f_23E6_0392",
+       "win_DrawElevator"
+      ]
+     },
+     {
+      "name": "base-pointer-alias-through-pointer",
+      "source": "014_base-pointer-alias-through-pointer.c",
+      "source_sha256_lf": "222e10a9611e11c4801096545123dc228a5914ee39ae1f7ece2e081c5c8fbc40",
+      "compile_ok": true,
+      "target_exact": false,
+      "target_reasons": [
+       "length 178 != target 159",
+       "bytes differ (first at +0x5, 76 differing)",
+       "relocation set differs (2 vs 3)"
+      ],
+      "data_exact": true,
+      "peer_losses": [
+       "f_23E6_0392",
+       "win_DrawElevator"
+      ]
+     }
+    ]
+   },
+   {
+    "series": "huge-pointer",
+    "profile": "msc600ax",
+    "flags": [
+     "/AL",
+     "/Os",
+     "/Oe",
+     "/Og",
+     "/Gs",
+     "/Zi"
+    ],
+    "placements": {
+     "_DATA": {
+      "seg": 21939,
+      "off": 25840,
+      "size": 156
+     },
+     "CONST": {
+      "seg": 21939,
+      "off": 35388,
+      "size": 2
+     }
+    },
+    "rows": [
+     {
+      "name": "base",
+      "source": "000_base.c",
+      "source_sha256_lf": "70f8f1db471e4444914136c1dbdd35148e026a2ea18c7ea2aed6c39bc3dfc211",
+      "compile_ok": true,
+      "target_exact": false,
+      "target_reasons": [
+       "length 156 != target 159",
+       "bytes differ (first at +0x5d, 41 differing)",
+       "relocation set differs (3 vs 3)"
+      ],
+      "data_exact": true,
+      "peer_losses": []
+     },
+     {
+      "name": "local-huge",
+      "source": "001_local-huge.c",
+      "source_sha256_lf": "bf5d65dd1648c5e43757916e557c2892cdbc9f33c6a2fc3bf05f4e3fa692139d",
+      "compile_ok": true,
+      "target_exact": false,
+      "target_reasons": [
+       "length 175 != target 159",
+       "fixup at +0x9c crosses the extent end",
+       "1 unbound fixups: 'unregistered external __AHSHIFT'",
+       "bytes differ (first at +0x5, 85 differing)",
+       "relocation set differs (2 vs 3)"
+      ],
+      "data_exact": true,
+      "peer_losses": []
+     },
+     {
+      "name": "ret-and-local-huge",
+      "source": "002_ret-and-local-huge.c",
+      "source_sha256_lf": "e0efe081789d04efbe36bfc83771c9cc958aca9f9d37574099ae5e7ee0dd50a5",
+      "compile_ok": true,
+      "target_exact": false,
+      "target_reasons": [
+       "length 196 != target 159",
+       "2 unbound fixups: 'unregistered external __AHSHIFT'",
+       "bytes differ (first at +0x5, 151 differing)",
+       "relocation set differs (2 vs 3)"
+      ],
+      "data_exact": true,
+      "peer_losses": []
+     },
+     {
+      "name": "cast-huge-offset",
+      "source": "003_cast-huge-offset.c",
+      "source_sha256_lf": "762a9606353e8e8b596cad4ff324140acf22cb838003b71fdc4523afb7201a80",
+      "compile_ok": true,
+      "target_exact": false,
+      "target_reasons": [
+       "length 196 != target 159",
+       "2 unbound fixups: 'unregistered external __AHSHIFT'",
+       "bytes differ (first at +0x5, 151 differing)",
+       "relocation set differs (2 vs 3)"
+      ],
+      "data_exact": true,
+      "peer_losses": []
+     }
+    ]
+   },
+   {
+    "series": "far-assignment",
+    "profile": "msc600ax",
+    "flags": [
+     "/AL",
+     "/Os",
+     "/Oe",
+     "/Og",
+     "/Gs",
+     "/Zi"
+    ],
+    "placements": {
+     "_DATA": {
+      "seg": 21939,
+      "off": 25840,
+      "size": 156
+     },
+     "CONST": {
+      "seg": 21939,
+      "off": 35388,
+      "size": 2
+     }
+    },
+    "rows": [
+     {
+      "name": "base",
+      "source": "000_base.c",
+      "source_sha256_lf": "70f8f1db471e4444914136c1dbdd35148e026a2ea18c7ea2aed6c39bc3dfc211",
+      "compile_ok": true,
+      "target_exact": false,
+      "target_reasons": [
+       "length 156 != target 159",
+       "bytes differ (first at +0x5d, 41 differing)",
+       "relocation set differs (3 vs 3)"
+      ],
+      "data_exact": true,
+      "peer_losses": []
+     },
+     {
+      "name": "far-pointer-assignment",
+      "source": "001_far-pointer-assignment.c",
+      "source_sha256_lf": "82797ba7307d3001ddeba7db9a1cca82139f241b132e6807d65ebfcd9f07d2fa",
+      "compile_ok": true,
+      "target_exact": false,
+      "target_reasons": [
+       "length 156 != target 159",
+       "bytes differ (first at +0x5d, 41 differing)",
+       "relocation set differs (3 vs 3)"
+      ],
+      "data_exact": true,
+      "peer_losses": []
+     },
+     {
+      "name": "parenthesized-far-pointer-assignment",
+      "source": "002_parenthesized-far-pointer-assignment.c",
+      "source_sha256_lf": "a613e8e00e64d0fd280e9486642d62e88623f54971c61df23265e6a5340fc651",
+      "compile_ok": true,
+      "target_exact": false,
+      "target_reasons": [
+       "length 156 != target 159",
+       "bytes differ (first at +0x5d, 41 differing)",
+       "relocation set differs (3 vs 3)"
+      ],
+      "data_exact": true,
+      "peer_losses": []
+     },
+     {
+      "name": "right-associated-far-pointer-assignment",
+      "source": "003_right-associated-far-pointer-assignment.c",
+      "source_sha256_lf": "4db76f272f90f95318c041ec1395e455eefecf57128e8bc72c343a6767c44522",
+      "compile_ok": true,
+      "target_exact": false,
+      "target_reasons": [
+       "length 156 != target 159",
+       "bytes differ (first at +0x5d, 41 differing)",
+       "relocation set differs (3 vs 3)"
+      ],
+      "data_exact": true,
+      "peer_losses": []
+     }
+    ]
+   }
+  ]
+ },
+ "semantic_evidence": {
+  "existing_xver_pair": false,
+  "correspondence_file": "evidence/cross_version/simantw_correspondence.json",
+  "same_module_pointer_walks": [
+   "f_23E6_016B",
+   "f_23E6_06F1"
+  ],
+  "notes": "Existing correspondence has no pair for root:23E6:0000. Same-module accepted helpers support byte-string traversal and offset/segment-separated far-pointer handling; no source-level need for the CX reload is yet established."
+ },
+ "prior_controls": {
+  "readme": "work/takeover/menu-loader/README.md",
+  "value_flow": "work/takeover/menu-loader/list-value-flow.json",
+  "assignment_use": "work/takeover/menu-loader/list-assignment-use.json",
+  "near_comparison": "work/takeover/menu-loader/list-assignment-near.log",
+  "counts": {
+   "value_flow": 25,
+   "assignment_use": 19,
+   "total": 44,
+   "exact_target_rows": 0,
+   "accepted_peer_regressions": 24
+  }
+ }
+}

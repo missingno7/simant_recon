@@ -64,10 +64,16 @@ def analyze_module(names, out, source=None):
         else:
             try:
                 report = mismatch.compare_streams(bound.original, bound.candidate)
+                extent = {'target_bytes': f['size'], 'candidate_bytes': bound.candidate_extent_size,
+                          'compared_candidate_bytes': len(bound.candidate),
+                          'candidate_complete': bound.candidate_extent_size == len(bound.candidate)}
+                report['function_extent'] = extent
                 path = out / (name + '.json')
                 path.write_text(json.dumps(report, indent=1) + '\n')
                 compact = mismatch.compact(report)
-                row.update(candidate_bytes=len(bound.candidate), original_bytes=len(bound.original),
+                row.update(candidate_bytes=bound.candidate_extent_size, original_bytes=f['size'],
+                           compared_candidate_bytes=len(bound.candidate),
+                           candidate_payload_complete=extent['candidate_complete'],
                            decode_complete=report['decode_complete'],
                            classes=compact['classifications'],
                            families=compact['patterns']['families'],
@@ -75,7 +81,13 @@ def analyze_module(names, out, source=None):
                            full_diagnostic=str(path))
                 if len(names) == 1:
                     status = 'EXACT' if verdict['exact'] else 'MISMATCH'
-                    row['summary'] = mismatch.format_patterns(compact, name, status)
+                    row['summary'] = (
+                        f"Function extents target/candidate: {f['size']}/{bound.candidate_extent_size} bytes.\n"
+                        + mismatch.format_patterns(compact, name, status).replace(
+                            'Target/candidate:', 'Compared bound payload target/candidate:', 1))
+                    if not extent['candidate_complete']:
+                        row['summary'] += ('\nCandidate tail is outside the bound comparison payload; '
+                                           'the strict extent mismatch remains unresolved.')
             except Exception as exc:
                 row['diagnostic_error'] = f'{type(exc).__name__}: {exc}'
         rows.append(row)

@@ -1,0 +1,5733 @@
+{
+ "function": "o15_384C_0239",
+ "module": "S15:384C",
+ "profile": "msc600ax",
+ "flags": [
+  "/AL",
+  "/Os",
+  "/Og",
+  "/Oe",
+  "/Zi"
+ ],
+ "base_source_sha256": "01b51eecedcd28e2213819572c846a9754039f4a527e6da5e56e57783398bdd5",
+ "generator_sha256": "d79b2b9f192ed8d979b1c7db38c29fc1ac4e2986a7e08898b39397ff4bed2e44",
+ "control_count_including_baseline": 48,
+ "constraints": {
+  "jobs": 2,
+  "max_controls": 60,
+  "writes": "D:\\Prog\\simant_recon\\build\\workers\\fleet_s15"
+ },
+ "rows": [
+  {
+   "name": "base",
+   "file": "D:\\Prog\\simant_recon\\build\\workers\\fleet_s15\\variants\\00_base\\000_base.c",
+   "why": "",
+   "result": {
+    "compile_ok": true,
+    "claims": {
+     "o15_384C_0000": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 3,
+      "relocations": 1,
+      "reloc_order": "EXACT"
+     },
+     "LoadMonoPats": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 11,
+      "relocations": 7,
+      "reloc_order": "GROUPED"
+     },
+     "o15_384C_0125": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 1,
+      "relocations": 1,
+      "reloc_order": "EXACT"
+     },
+     "o15_384C_0152": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 17,
+      "relocations": 10,
+      "reloc_order": "GROUPED"
+     },
+     "MenuQuit": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 7,
+      "relocations": 2,
+      "reloc_order": "EXACT"
+     },
+     "o15_384C_0239": {
+      "exact": false,
+      "reasons": [
+       "bytes differ (first at +0x42, 2 differing)"
+      ],
+      "fixups": 20,
+      "relocations": 17,
+      "reloc_order": "GROUPED"
+     },
+     "SetDefaultWindows": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 11,
+      "relocations": 9,
+      "reloc_order": "GROUPED"
+     },
+     "NewGame": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 46,
+      "relocations": 16,
+      "reloc_order": "GROUPED"
+     }
+    },
+    "exact": false,
+    "opaque_data": [],
+    "opaque_unmarked_bytes": 0,
+    "object_sha256": "bf28a33144db9e5fa67228d8c64d0681b5d4626e3f901069b9870849ba1e4868",
+    "data": {
+     "_DATA": {
+      "exact": true,
+      "reasons": [],
+      "size": 213,
+      "reloc_order": "EXACT",
+      "start": 362118,
+      "class": "DATA",
+      "align": "word",
+      "far": false
+     },
+     "CONST": {
+      "exact": true,
+      "reasons": [],
+      "size": 24,
+      "reloc_order": "GROUPED",
+      "start": 385704,
+      "class": "CONST",
+      "align": "word",
+      "far": false
+     }
+    },
+    "data_only": false,
+    "communals": [],
+    "scaffold": [],
+    "inplace_drafts": []
+   },
+   "claims": [
+    "o15_384C_0000",
+    "LoadMonoPats",
+    "o15_384C_0125",
+    "o15_384C_0152",
+    "MenuQuit",
+    "o15_384C_0239",
+    "SetDefaultWindows",
+    "NewGame"
+   ],
+   "source_sha256": "01b51eecedcd28e2213819572c846a9754039f4a527e6da5e56e57783398bdd5"
+  },
+  {
+   "name": "draw-all-entry-int",
+   "file": "D:\\Prog\\simant_recon\\build\\workers\\fleet_s15\\variants\\01_controls\\000_draw-all-entry-int.c",
+   "why": "",
+   "result": {
+    "compile_ok": true,
+    "claims": {
+     "o15_384C_0000": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 3,
+      "relocations": 1,
+      "reloc_order": "EXACT"
+     },
+     "LoadMonoPats": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 11,
+      "relocations": 7,
+      "reloc_order": "GROUPED"
+     },
+     "o15_384C_0125": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 1,
+      "relocations": 1,
+      "reloc_order": "EXACT"
+     },
+     "o15_384C_0152": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 17,
+      "relocations": 10,
+      "reloc_order": "GROUPED"
+     },
+     "MenuQuit": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 7,
+      "relocations": 2,
+      "reloc_order": "EXACT"
+     },
+     "o15_384C_0239": {
+      "exact": false,
+      "reasons": [
+       "length 331 != target 326",
+       "bytes differ (first at +0x4, 306 differing)",
+       "relocation set differs (17 vs 17)"
+      ],
+      "fixups": 20,
+      "relocations": 17,
+      "reloc_order": "EXACT"
+     },
+     "SetDefaultWindows": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 11,
+      "relocations": 9,
+      "reloc_order": "GROUPED"
+     },
+     "NewGame": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 46,
+      "relocations": 16,
+      "reloc_order": "GROUPED"
+     }
+    },
+    "exact": false,
+    "opaque_data": [],
+    "opaque_unmarked_bytes": 0,
+    "object_sha256": "e2e43fba31270397a56b0dc156fbc34c8eefc0eb960ae270f35bc0f900dddda2",
+    "data": {
+     "_DATA": {
+      "exact": true,
+      "reasons": [],
+      "size": 213,
+      "reloc_order": "EXACT",
+      "start": 362118,
+      "class": "DATA",
+      "align": "word",
+      "far": false
+     },
+     "CONST": {
+      "exact": true,
+      "reasons": [],
+      "size": 24,
+      "reloc_order": "GROUPED",
+      "start": 385704,
+      "class": "CONST",
+      "align": "word",
+      "far": false
+     }
+    },
+    "data_only": false,
+    "communals": [],
+    "scaffold": [],
+    "inplace_drafts": []
+   },
+   "claims": [
+    "o15_384C_0000",
+    "LoadMonoPats",
+    "o15_384C_0125",
+    "o15_384C_0152",
+    "MenuQuit",
+    "o15_384C_0239",
+    "SetDefaultWindows",
+    "NewGame"
+   ],
+   "meta": {
+    "name": "draw-all-entry-int",
+    "local": "draw",
+    "type": "int",
+    "value": 0,
+    "uses": "all",
+    "initialization": "entry"
+   },
+   "source_sha256": "9e33c4c9ca3d66b7ad9465591810895b0dbf4bf5c64c1b8061b1ac20f9868d1d"
+  },
+  {
+   "name": "draw-all-entry-unsigned",
+   "file": "D:\\Prog\\simant_recon\\build\\workers\\fleet_s15\\variants\\01_controls\\001_draw-all-entry-unsigned.c",
+   "why": "",
+   "result": {
+    "compile_ok": true,
+    "claims": {
+     "o15_384C_0000": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 3,
+      "relocations": 1,
+      "reloc_order": "EXACT"
+     },
+     "LoadMonoPats": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 11,
+      "relocations": 7,
+      "reloc_order": "GROUPED"
+     },
+     "o15_384C_0125": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 1,
+      "relocations": 1,
+      "reloc_order": "EXACT"
+     },
+     "o15_384C_0152": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 17,
+      "relocations": 10,
+      "reloc_order": "GROUPED"
+     },
+     "MenuQuit": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 7,
+      "relocations": 2,
+      "reloc_order": "EXACT"
+     },
+     "o15_384C_0239": {
+      "exact": false,
+      "reasons": [
+       "length 331 != target 326",
+       "bytes differ (first at +0x4, 306 differing)",
+       "relocation set differs (17 vs 17)"
+      ],
+      "fixups": 20,
+      "relocations": 17,
+      "reloc_order": "EXACT"
+     },
+     "SetDefaultWindows": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 11,
+      "relocations": 9,
+      "reloc_order": "GROUPED"
+     },
+     "NewGame": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 46,
+      "relocations": 16,
+      "reloc_order": "GROUPED"
+     }
+    },
+    "exact": false,
+    "opaque_data": [],
+    "opaque_unmarked_bytes": 0,
+    "object_sha256": "8ad65b36b3f6099d29d658c66218225d4b640b8a4b5be8887f87bb8fcf1698d4",
+    "data": {
+     "_DATA": {
+      "exact": true,
+      "reasons": [],
+      "size": 213,
+      "reloc_order": "EXACT",
+      "start": 362118,
+      "class": "DATA",
+      "align": "word",
+      "far": false
+     },
+     "CONST": {
+      "exact": true,
+      "reasons": [],
+      "size": 24,
+      "reloc_order": "GROUPED",
+      "start": 385704,
+      "class": "CONST",
+      "align": "word",
+      "far": false
+     }
+    },
+    "data_only": false,
+    "communals": [],
+    "scaffold": [],
+    "inplace_drafts": []
+   },
+   "claims": [
+    "o15_384C_0000",
+    "LoadMonoPats",
+    "o15_384C_0125",
+    "o15_384C_0152",
+    "MenuQuit",
+    "o15_384C_0239",
+    "SetDefaultWindows",
+    "NewGame"
+   ],
+   "meta": {
+    "name": "draw-all-entry-unsigned",
+    "local": "draw",
+    "type": "unsigned",
+    "value": 0,
+    "uses": "all",
+    "initialization": "entry"
+   },
+   "source_sha256": "afd4f6700710e8154d1f9137f9b238f3e16f175d9de53d82c286ac1141e1dfd2"
+  },
+  {
+   "name": "draw-all-entry-unsigned_char",
+   "file": "D:\\Prog\\simant_recon\\build\\workers\\fleet_s15\\variants\\01_controls\\002_draw-all-entry-unsigned_char.c",
+   "why": "",
+   "result": {
+    "compile_ok": true,
+    "claims": {
+     "o15_384C_0000": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 3,
+      "relocations": 1,
+      "reloc_order": "EXACT"
+     },
+     "LoadMonoPats": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 11,
+      "relocations": 7,
+      "reloc_order": "GROUPED"
+     },
+     "o15_384C_0125": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 1,
+      "relocations": 1,
+      "reloc_order": "EXACT"
+     },
+     "o15_384C_0152": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 17,
+      "relocations": 10,
+      "reloc_order": "GROUPED"
+     },
+     "MenuQuit": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 7,
+      "relocations": 2,
+      "reloc_order": "EXACT"
+     },
+     "o15_384C_0239": {
+      "exact": false,
+      "reasons": [
+       "length 330 != target 326",
+       "bytes differ (first at +0x4, 295 differing)",
+       "relocation set differs (17 vs 17)"
+      ],
+      "fixups": 20,
+      "relocations": 17,
+      "reloc_order": "EXACT"
+     },
+     "SetDefaultWindows": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 11,
+      "relocations": 9,
+      "reloc_order": "GROUPED"
+     },
+     "NewGame": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 46,
+      "relocations": 16,
+      "reloc_order": "GROUPED"
+     }
+    },
+    "exact": false,
+    "opaque_data": [],
+    "opaque_unmarked_bytes": 0,
+    "object_sha256": "10c43b986139edde6b50e9a55821bdaf95a1cc723092e58609d95238268587c4",
+    "data": {
+     "_DATA": {
+      "exact": true,
+      "reasons": [],
+      "size": 213,
+      "reloc_order": "EXACT",
+      "start": 362118,
+      "class": "DATA",
+      "align": "word",
+      "far": false
+     },
+     "CONST": {
+      "exact": true,
+      "reasons": [],
+      "size": 24,
+      "reloc_order": "GROUPED",
+      "start": 385704,
+      "class": "CONST",
+      "align": "word",
+      "far": false
+     }
+    },
+    "data_only": false,
+    "communals": [],
+    "scaffold": [],
+    "inplace_drafts": []
+   },
+   "claims": [
+    "o15_384C_0000",
+    "LoadMonoPats",
+    "o15_384C_0125",
+    "o15_384C_0152",
+    "MenuQuit",
+    "o15_384C_0239",
+    "SetDefaultWindows",
+    "NewGame"
+   ],
+   "meta": {
+    "name": "draw-all-entry-unsigned_char",
+    "local": "draw",
+    "type": "unsigned char",
+    "value": 0,
+    "uses": "all",
+    "initialization": "entry"
+   },
+   "source_sha256": "7c0dd27e92ffe5af2b78e439d67b2a281586a97ec4d5c31c9169d8593f9e0095"
+  },
+  {
+   "name": "draw-all-after_open-int",
+   "file": "D:\\Prog\\simant_recon\\build\\workers\\fleet_s15\\variants\\01_controls\\003_draw-all-after_open-int.c",
+   "why": "",
+   "result": {
+    "compile_ok": true,
+    "claims": {
+     "o15_384C_0000": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 3,
+      "relocations": 1,
+      "reloc_order": "EXACT"
+     },
+     "LoadMonoPats": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 11,
+      "relocations": 7,
+      "reloc_order": "GROUPED"
+     },
+     "o15_384C_0125": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 1,
+      "relocations": 1,
+      "reloc_order": "EXACT"
+     },
+     "o15_384C_0152": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 17,
+      "relocations": 10,
+      "reloc_order": "GROUPED"
+     },
+     "MenuQuit": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 7,
+      "relocations": 2,
+      "reloc_order": "EXACT"
+     },
+     "o15_384C_0239": {
+      "exact": false,
+      "reasons": [
+       "length 331 != target 326",
+       "bytes differ (first at +0x4, 296 differing)",
+       "relocation set differs (17 vs 17)"
+      ],
+      "fixups": 20,
+      "relocations": 17,
+      "reloc_order": "EXACT"
+     },
+     "SetDefaultWindows": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 11,
+      "relocations": 9,
+      "reloc_order": "GROUPED"
+     },
+     "NewGame": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 46,
+      "relocations": 16,
+      "reloc_order": "GROUPED"
+     }
+    },
+    "exact": false,
+    "opaque_data": [],
+    "opaque_unmarked_bytes": 0,
+    "object_sha256": "cdcedb35d115f1adbaa7a9b25e717078897ba37a6616ca3eeead49b652d0f9fe",
+    "data": {
+     "_DATA": {
+      "exact": true,
+      "reasons": [],
+      "size": 213,
+      "reloc_order": "EXACT",
+      "start": 362118,
+      "class": "DATA",
+      "align": "word",
+      "far": false
+     },
+     "CONST": {
+      "exact": true,
+      "reasons": [],
+      "size": 24,
+      "reloc_order": "GROUPED",
+      "start": 385704,
+      "class": "CONST",
+      "align": "word",
+      "far": false
+     }
+    },
+    "data_only": false,
+    "communals": [],
+    "scaffold": [],
+    "inplace_drafts": []
+   },
+   "claims": [
+    "o15_384C_0000",
+    "LoadMonoPats",
+    "o15_384C_0125",
+    "o15_384C_0152",
+    "MenuQuit",
+    "o15_384C_0239",
+    "SetDefaultWindows",
+    "NewGame"
+   ],
+   "meta": {
+    "name": "draw-all-after_open-int",
+    "local": "draw",
+    "type": "int",
+    "value": 0,
+    "uses": "all",
+    "initialization": "after_open"
+   },
+   "source_sha256": "a2cb809beb745244f786779dc48f6061a19609c37ed9ede7fae989dd01895a32"
+  },
+  {
+   "name": "draw-all-after_open-unsigned",
+   "file": "D:\\Prog\\simant_recon\\build\\workers\\fleet_s15\\variants\\01_controls\\004_draw-all-after_open-unsigned.c",
+   "why": "",
+   "result": {
+    "compile_ok": true,
+    "claims": {
+     "o15_384C_0000": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 3,
+      "relocations": 1,
+      "reloc_order": "EXACT"
+     },
+     "LoadMonoPats": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 11,
+      "relocations": 7,
+      "reloc_order": "GROUPED"
+     },
+     "o15_384C_0125": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 1,
+      "relocations": 1,
+      "reloc_order": "EXACT"
+     },
+     "o15_384C_0152": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 17,
+      "relocations": 10,
+      "reloc_order": "GROUPED"
+     },
+     "MenuQuit": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 7,
+      "relocations": 2,
+      "reloc_order": "EXACT"
+     },
+     "o15_384C_0239": {
+      "exact": false,
+      "reasons": [
+       "length 331 != target 326",
+       "bytes differ (first at +0x4, 296 differing)",
+       "relocation set differs (17 vs 17)"
+      ],
+      "fixups": 20,
+      "relocations": 17,
+      "reloc_order": "EXACT"
+     },
+     "SetDefaultWindows": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 11,
+      "relocations": 9,
+      "reloc_order": "GROUPED"
+     },
+     "NewGame": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 46,
+      "relocations": 16,
+      "reloc_order": "GROUPED"
+     }
+    },
+    "exact": false,
+    "opaque_data": [],
+    "opaque_unmarked_bytes": 0,
+    "object_sha256": "9e8a6ec12915c647e204eaf2d0de549440ec5c8440adb04629e3ceeadb3d3e7a",
+    "data": {
+     "_DATA": {
+      "exact": true,
+      "reasons": [],
+      "size": 213,
+      "reloc_order": "EXACT",
+      "start": 362118,
+      "class": "DATA",
+      "align": "word",
+      "far": false
+     },
+     "CONST": {
+      "exact": true,
+      "reasons": [],
+      "size": 24,
+      "reloc_order": "GROUPED",
+      "start": 385704,
+      "class": "CONST",
+      "align": "word",
+      "far": false
+     }
+    },
+    "data_only": false,
+    "communals": [],
+    "scaffold": [],
+    "inplace_drafts": []
+   },
+   "claims": [
+    "o15_384C_0000",
+    "LoadMonoPats",
+    "o15_384C_0125",
+    "o15_384C_0152",
+    "MenuQuit",
+    "o15_384C_0239",
+    "SetDefaultWindows",
+    "NewGame"
+   ],
+   "meta": {
+    "name": "draw-all-after_open-unsigned",
+    "local": "draw",
+    "type": "unsigned",
+    "value": 0,
+    "uses": "all",
+    "initialization": "after_open"
+   },
+   "source_sha256": "75028b052edd0f77d4dbd5eb8d0c2f8968439ada665ff69410e0a9818c74b267"
+  },
+  {
+   "name": "draw-all-after_open-unsigned_char",
+   "file": "D:\\Prog\\simant_recon\\build\\workers\\fleet_s15\\variants\\01_controls\\005_draw-all-after_open-unsigned_char.c",
+   "why": "",
+   "result": {
+    "compile_ok": true,
+    "claims": {
+     "o15_384C_0000": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 3,
+      "relocations": 1,
+      "reloc_order": "EXACT"
+     },
+     "LoadMonoPats": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 11,
+      "relocations": 7,
+      "reloc_order": "GROUPED"
+     },
+     "o15_384C_0125": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 1,
+      "relocations": 1,
+      "reloc_order": "EXACT"
+     },
+     "o15_384C_0152": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 17,
+      "relocations": 10,
+      "reloc_order": "GROUPED"
+     },
+     "MenuQuit": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 7,
+      "relocations": 2,
+      "reloc_order": "EXACT"
+     },
+     "o15_384C_0239": {
+      "exact": false,
+      "reasons": [
+       "length 330 != target 326",
+       "bytes differ (first at +0x4, 285 differing)",
+       "relocation set differs (17 vs 17)"
+      ],
+      "fixups": 20,
+      "relocations": 17,
+      "reloc_order": "EXACT"
+     },
+     "SetDefaultWindows": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 11,
+      "relocations": 9,
+      "reloc_order": "GROUPED"
+     },
+     "NewGame": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 46,
+      "relocations": 16,
+      "reloc_order": "GROUPED"
+     }
+    },
+    "exact": false,
+    "opaque_data": [],
+    "opaque_unmarked_bytes": 0,
+    "object_sha256": "b5007f99fbaef7e77e85cfa902b535f1a9672f1d3595d4437b84dbae373f7878",
+    "data": {
+     "_DATA": {
+      "exact": true,
+      "reasons": [],
+      "size": 213,
+      "reloc_order": "EXACT",
+      "start": 362118,
+      "class": "DATA",
+      "align": "word",
+      "far": false
+     },
+     "CONST": {
+      "exact": true,
+      "reasons": [],
+      "size": 24,
+      "reloc_order": "GROUPED",
+      "start": 385704,
+      "class": "CONST",
+      "align": "word",
+      "far": false
+     }
+    },
+    "data_only": false,
+    "communals": [],
+    "scaffold": [],
+    "inplace_drafts": []
+   },
+   "claims": [
+    "o15_384C_0000",
+    "LoadMonoPats",
+    "o15_384C_0125",
+    "o15_384C_0152",
+    "MenuQuit",
+    "o15_384C_0239",
+    "SetDefaultWindows",
+    "NewGame"
+   ],
+   "meta": {
+    "name": "draw-all-after_open-unsigned_char",
+    "local": "draw",
+    "type": "unsigned char",
+    "value": 0,
+    "uses": "all",
+    "initialization": "after_open"
+   },
+   "source_sha256": "6c571ed8b3c3c726634f90bcf6fbe7ee646a9869d90d0997b18e7067601c7c10"
+  },
+  {
+   "name": "draw-all-after_handle-int",
+   "file": "D:\\Prog\\simant_recon\\build\\workers\\fleet_s15\\variants\\02_controls\\000_draw-all-after_handle-int.c",
+   "why": "",
+   "result": {
+    "compile_ok": true,
+    "claims": {
+     "o15_384C_0000": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 3,
+      "relocations": 1,
+      "reloc_order": "EXACT"
+     },
+     "LoadMonoPats": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 11,
+      "relocations": 7,
+      "reloc_order": "GROUPED"
+     },
+     "o15_384C_0125": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 1,
+      "relocations": 1,
+      "reloc_order": "EXACT"
+     },
+     "o15_384C_0152": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 17,
+      "relocations": 10,
+      "reloc_order": "GROUPED"
+     },
+     "MenuQuit": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 7,
+      "relocations": 2,
+      "reloc_order": "EXACT"
+     },
+     "o15_384C_0239": {
+      "exact": false,
+      "reasons": [
+       "length 331 != target 326",
+       "bytes differ (first at +0x4, 296 differing)",
+       "relocation set differs (17 vs 17)"
+      ],
+      "fixups": 20,
+      "relocations": 17,
+      "reloc_order": "EXACT"
+     },
+     "SetDefaultWindows": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 11,
+      "relocations": 9,
+      "reloc_order": "GROUPED"
+     },
+     "NewGame": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 46,
+      "relocations": 16,
+      "reloc_order": "GROUPED"
+     }
+    },
+    "exact": false,
+    "opaque_data": [],
+    "opaque_unmarked_bytes": 0,
+    "object_sha256": "70333123be6215ee585cedd87c43c9833e4ba6b2ef06509feb4558043f7386c4",
+    "data": {
+     "_DATA": {
+      "exact": true,
+      "reasons": [],
+      "size": 213,
+      "reloc_order": "EXACT",
+      "start": 362118,
+      "class": "DATA",
+      "align": "word",
+      "far": false
+     },
+     "CONST": {
+      "exact": true,
+      "reasons": [],
+      "size": 24,
+      "reloc_order": "GROUPED",
+      "start": 385704,
+      "class": "CONST",
+      "align": "word",
+      "far": false
+     }
+    },
+    "data_only": false,
+    "communals": [],
+    "scaffold": [],
+    "inplace_drafts": []
+   },
+   "claims": [
+    "o15_384C_0000",
+    "LoadMonoPats",
+    "o15_384C_0125",
+    "o15_384C_0152",
+    "MenuQuit",
+    "o15_384C_0239",
+    "SetDefaultWindows",
+    "NewGame"
+   ],
+   "meta": {
+    "name": "draw-all-after_handle-int",
+    "local": "draw",
+    "type": "int",
+    "value": 0,
+    "uses": "all",
+    "initialization": "after_handle"
+   },
+   "source_sha256": "da90e228f07fc75cbaaec2a0a9df734f2081b3295847c1b334a8f54e3cb921ac"
+  },
+  {
+   "name": "draw-all-after_handle-unsigned",
+   "file": "D:\\Prog\\simant_recon\\build\\workers\\fleet_s15\\variants\\02_controls\\001_draw-all-after_handle-unsigned.c",
+   "why": "",
+   "result": {
+    "compile_ok": true,
+    "claims": {
+     "o15_384C_0000": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 3,
+      "relocations": 1,
+      "reloc_order": "EXACT"
+     },
+     "LoadMonoPats": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 11,
+      "relocations": 7,
+      "reloc_order": "GROUPED"
+     },
+     "o15_384C_0125": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 1,
+      "relocations": 1,
+      "reloc_order": "EXACT"
+     },
+     "o15_384C_0152": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 17,
+      "relocations": 10,
+      "reloc_order": "GROUPED"
+     },
+     "MenuQuit": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 7,
+      "relocations": 2,
+      "reloc_order": "EXACT"
+     },
+     "o15_384C_0239": {
+      "exact": false,
+      "reasons": [
+       "length 331 != target 326",
+       "bytes differ (first at +0x4, 296 differing)",
+       "relocation set differs (17 vs 17)"
+      ],
+      "fixups": 20,
+      "relocations": 17,
+      "reloc_order": "EXACT"
+     },
+     "SetDefaultWindows": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 11,
+      "relocations": 9,
+      "reloc_order": "GROUPED"
+     },
+     "NewGame": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 46,
+      "relocations": 16,
+      "reloc_order": "GROUPED"
+     }
+    },
+    "exact": false,
+    "opaque_data": [],
+    "opaque_unmarked_bytes": 0,
+    "object_sha256": "85580655e44daaecc399bdb184a15e104b21a50af1da09108be3d40b425ecaf5",
+    "data": {
+     "_DATA": {
+      "exact": true,
+      "reasons": [],
+      "size": 213,
+      "reloc_order": "EXACT",
+      "start": 362118,
+      "class": "DATA",
+      "align": "word",
+      "far": false
+     },
+     "CONST": {
+      "exact": true,
+      "reasons": [],
+      "size": 24,
+      "reloc_order": "GROUPED",
+      "start": 385704,
+      "class": "CONST",
+      "align": "word",
+      "far": false
+     }
+    },
+    "data_only": false,
+    "communals": [],
+    "scaffold": [],
+    "inplace_drafts": []
+   },
+   "claims": [
+    "o15_384C_0000",
+    "LoadMonoPats",
+    "o15_384C_0125",
+    "o15_384C_0152",
+    "MenuQuit",
+    "o15_384C_0239",
+    "SetDefaultWindows",
+    "NewGame"
+   ],
+   "meta": {
+    "name": "draw-all-after_handle-unsigned",
+    "local": "draw",
+    "type": "unsigned",
+    "value": 0,
+    "uses": "all",
+    "initialization": "after_handle"
+   },
+   "source_sha256": "9fdf551633500dc5c02e92f9f2a8bfc1beaf596ebad7069226ccd483167195a9"
+  },
+  {
+   "name": "draw-all-after_handle-unsigned_char",
+   "file": "D:\\Prog\\simant_recon\\build\\workers\\fleet_s15\\variants\\02_controls\\002_draw-all-after_handle-unsigned_char.c",
+   "why": "",
+   "result": {
+    "compile_ok": true,
+    "claims": {
+     "o15_384C_0000": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 3,
+      "relocations": 1,
+      "reloc_order": "EXACT"
+     },
+     "LoadMonoPats": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 11,
+      "relocations": 7,
+      "reloc_order": "GROUPED"
+     },
+     "o15_384C_0125": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 1,
+      "relocations": 1,
+      "reloc_order": "EXACT"
+     },
+     "o15_384C_0152": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 17,
+      "relocations": 10,
+      "reloc_order": "GROUPED"
+     },
+     "MenuQuit": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 7,
+      "relocations": 2,
+      "reloc_order": "EXACT"
+     },
+     "o15_384C_0239": {
+      "exact": false,
+      "reasons": [
+       "length 330 != target 326",
+       "bytes differ (first at +0x4, 285 differing)",
+       "relocation set differs (17 vs 17)"
+      ],
+      "fixups": 20,
+      "relocations": 17,
+      "reloc_order": "EXACT"
+     },
+     "SetDefaultWindows": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 11,
+      "relocations": 9,
+      "reloc_order": "GROUPED"
+     },
+     "NewGame": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 46,
+      "relocations": 16,
+      "reloc_order": "GROUPED"
+     }
+    },
+    "exact": false,
+    "opaque_data": [],
+    "opaque_unmarked_bytes": 0,
+    "object_sha256": "09ccb0aa92780d759b9b84b750a44a7767a1f7390f94f0c74acfb1ca68d84e32",
+    "data": {
+     "_DATA": {
+      "exact": true,
+      "reasons": [],
+      "size": 213,
+      "reloc_order": "EXACT",
+      "start": 362118,
+      "class": "DATA",
+      "align": "word",
+      "far": false
+     },
+     "CONST": {
+      "exact": true,
+      "reasons": [],
+      "size": 24,
+      "reloc_order": "GROUPED",
+      "start": 385704,
+      "class": "CONST",
+      "align": "word",
+      "far": false
+     }
+    },
+    "data_only": false,
+    "communals": [],
+    "scaffold": [],
+    "inplace_drafts": []
+   },
+   "claims": [
+    "o15_384C_0000",
+    "LoadMonoPats",
+    "o15_384C_0125",
+    "o15_384C_0152",
+    "MenuQuit",
+    "o15_384C_0239",
+    "SetDefaultWindows",
+    "NewGame"
+   ],
+   "meta": {
+    "name": "draw-all-after_handle-unsigned_char",
+    "local": "draw",
+    "type": "unsigned char",
+    "value": 0,
+    "uses": "all",
+    "initialization": "after_handle"
+   },
+   "source_sha256": "cc2884c865dddc010124138b9f6b537b7b7139dedea1e949d7b4060d584e244d"
+  },
+  {
+   "name": "draw-all-after_text-int",
+   "file": "D:\\Prog\\simant_recon\\build\\workers\\fleet_s15\\variants\\02_controls\\003_draw-all-after_text-int.c",
+   "why": "",
+   "result": {
+    "compile_ok": true,
+    "claims": {
+     "o15_384C_0000": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 3,
+      "relocations": 1,
+      "reloc_order": "EXACT"
+     },
+     "LoadMonoPats": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 11,
+      "relocations": 7,
+      "reloc_order": "GROUPED"
+     },
+     "o15_384C_0125": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 1,
+      "relocations": 1,
+      "reloc_order": "EXACT"
+     },
+     "o15_384C_0152": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 17,
+      "relocations": 10,
+      "reloc_order": "GROUPED"
+     },
+     "MenuQuit": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 7,
+      "relocations": 2,
+      "reloc_order": "EXACT"
+     },
+     "o15_384C_0239": {
+      "exact": false,
+      "reasons": [
+       "length 331 != target 326",
+       "bytes differ (first at +0x4, 254 differing)",
+       "relocation set differs (17 vs 17)"
+      ],
+      "fixups": 20,
+      "relocations": 17,
+      "reloc_order": "EXACT"
+     },
+     "SetDefaultWindows": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 11,
+      "relocations": 9,
+      "reloc_order": "GROUPED"
+     },
+     "NewGame": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 46,
+      "relocations": 16,
+      "reloc_order": "GROUPED"
+     }
+    },
+    "exact": false,
+    "opaque_data": [],
+    "opaque_unmarked_bytes": 0,
+    "object_sha256": "4b5877dbc809d9f2f8dbf67f1b8822bd2729368092be761889dbba6cda2c3558",
+    "data": {
+     "_DATA": {
+      "exact": true,
+      "reasons": [],
+      "size": 213,
+      "reloc_order": "EXACT",
+      "start": 362118,
+      "class": "DATA",
+      "align": "word",
+      "far": false
+     },
+     "CONST": {
+      "exact": true,
+      "reasons": [],
+      "size": 24,
+      "reloc_order": "GROUPED",
+      "start": 385704,
+      "class": "CONST",
+      "align": "word",
+      "far": false
+     }
+    },
+    "data_only": false,
+    "communals": [],
+    "scaffold": [],
+    "inplace_drafts": []
+   },
+   "claims": [
+    "o15_384C_0000",
+    "LoadMonoPats",
+    "o15_384C_0125",
+    "o15_384C_0152",
+    "MenuQuit",
+    "o15_384C_0239",
+    "SetDefaultWindows",
+    "NewGame"
+   ],
+   "meta": {
+    "name": "draw-all-after_text-int",
+    "local": "draw",
+    "type": "int",
+    "value": 0,
+    "uses": "all",
+    "initialization": "after_text"
+   },
+   "source_sha256": "9e226976ba0ff7032fff770cecd341f3bc1f9c2670c473b5843ab3fe896a6ae3"
+  },
+  {
+   "name": "draw-all-after_text-unsigned",
+   "file": "D:\\Prog\\simant_recon\\build\\workers\\fleet_s15\\variants\\02_controls\\004_draw-all-after_text-unsigned.c",
+   "why": "",
+   "result": {
+    "compile_ok": true,
+    "claims": {
+     "o15_384C_0000": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 3,
+      "relocations": 1,
+      "reloc_order": "EXACT"
+     },
+     "LoadMonoPats": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 11,
+      "relocations": 7,
+      "reloc_order": "GROUPED"
+     },
+     "o15_384C_0125": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 1,
+      "relocations": 1,
+      "reloc_order": "EXACT"
+     },
+     "o15_384C_0152": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 17,
+      "relocations": 10,
+      "reloc_order": "GROUPED"
+     },
+     "MenuQuit": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 7,
+      "relocations": 2,
+      "reloc_order": "EXACT"
+     },
+     "o15_384C_0239": {
+      "exact": false,
+      "reasons": [
+       "length 331 != target 326",
+       "bytes differ (first at +0x4, 254 differing)",
+       "relocation set differs (17 vs 17)"
+      ],
+      "fixups": 20,
+      "relocations": 17,
+      "reloc_order": "EXACT"
+     },
+     "SetDefaultWindows": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 11,
+      "relocations": 9,
+      "reloc_order": "GROUPED"
+     },
+     "NewGame": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 46,
+      "relocations": 16,
+      "reloc_order": "GROUPED"
+     }
+    },
+    "exact": false,
+    "opaque_data": [],
+    "opaque_unmarked_bytes": 0,
+    "object_sha256": "c4a0e3ceec3c285c213ff187810b37e390375328d63c643f96dfe9d03dd3b1db",
+    "data": {
+     "_DATA": {
+      "exact": true,
+      "reasons": [],
+      "size": 213,
+      "reloc_order": "EXACT",
+      "start": 362118,
+      "class": "DATA",
+      "align": "word",
+      "far": false
+     },
+     "CONST": {
+      "exact": true,
+      "reasons": [],
+      "size": 24,
+      "reloc_order": "GROUPED",
+      "start": 385704,
+      "class": "CONST",
+      "align": "word",
+      "far": false
+     }
+    },
+    "data_only": false,
+    "communals": [],
+    "scaffold": [],
+    "inplace_drafts": []
+   },
+   "claims": [
+    "o15_384C_0000",
+    "LoadMonoPats",
+    "o15_384C_0125",
+    "o15_384C_0152",
+    "MenuQuit",
+    "o15_384C_0239",
+    "SetDefaultWindows",
+    "NewGame"
+   ],
+   "meta": {
+    "name": "draw-all-after_text-unsigned",
+    "local": "draw",
+    "type": "unsigned",
+    "value": 0,
+    "uses": "all",
+    "initialization": "after_text"
+   },
+   "source_sha256": "2c8146349185fb239c88c2905244211caa315a7f8e5485a85a03759e667c2d8a"
+  },
+  {
+   "name": "draw-all-after_text-unsigned_char",
+   "file": "D:\\Prog\\simant_recon\\build\\workers\\fleet_s15\\variants\\02_controls\\005_draw-all-after_text-unsigned_char.c",
+   "why": "",
+   "result": {
+    "compile_ok": true,
+    "claims": {
+     "o15_384C_0000": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 3,
+      "relocations": 1,
+      "reloc_order": "EXACT"
+     },
+     "LoadMonoPats": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 11,
+      "relocations": 7,
+      "reloc_order": "GROUPED"
+     },
+     "o15_384C_0125": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 1,
+      "relocations": 1,
+      "reloc_order": "EXACT"
+     },
+     "o15_384C_0152": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 17,
+      "relocations": 10,
+      "reloc_order": "GROUPED"
+     },
+     "MenuQuit": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 7,
+      "relocations": 2,
+      "reloc_order": "EXACT"
+     },
+     "o15_384C_0239": {
+      "exact": false,
+      "reasons": [
+       "length 330 != target 326",
+       "bytes differ (first at +0x4, 248 differing)",
+       "relocation set differs (17 vs 17)"
+      ],
+      "fixups": 20,
+      "relocations": 17,
+      "reloc_order": "EXACT"
+     },
+     "SetDefaultWindows": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 11,
+      "relocations": 9,
+      "reloc_order": "GROUPED"
+     },
+     "NewGame": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 46,
+      "relocations": 16,
+      "reloc_order": "GROUPED"
+     }
+    },
+    "exact": false,
+    "opaque_data": [],
+    "opaque_unmarked_bytes": 0,
+    "object_sha256": "c15583f9c20f38db2f0b1a5da0be6f949a4d5a128a6aae6f4597b544a5862458",
+    "data": {
+     "_DATA": {
+      "exact": true,
+      "reasons": [],
+      "size": 213,
+      "reloc_order": "EXACT",
+      "start": 362118,
+      "class": "DATA",
+      "align": "word",
+      "far": false
+     },
+     "CONST": {
+      "exact": true,
+      "reasons": [],
+      "size": 24,
+      "reloc_order": "GROUPED",
+      "start": 385704,
+      "class": "CONST",
+      "align": "word",
+      "far": false
+     }
+    },
+    "data_only": false,
+    "communals": [],
+    "scaffold": [],
+    "inplace_drafts": []
+   },
+   "claims": [
+    "o15_384C_0000",
+    "LoadMonoPats",
+    "o15_384C_0125",
+    "o15_384C_0152",
+    "MenuQuit",
+    "o15_384C_0239",
+    "SetDefaultWindows",
+    "NewGame"
+   ],
+   "meta": {
+    "name": "draw-all-after_text-unsigned_char",
+    "local": "draw",
+    "type": "unsigned char",
+    "value": 0,
+    "uses": "all",
+    "initialization": "after_text"
+   },
+   "source_sha256": "7d8c83aa36f16a275684c86ab21a82fbbfcd947983d603116a8c6a2739713c7e"
+  },
+  {
+   "name": "draw-all-after_font-int",
+   "file": "D:\\Prog\\simant_recon\\build\\workers\\fleet_s15\\variants\\03_controls\\000_draw-all-after_font-int.c",
+   "why": "",
+   "result": {
+    "compile_ok": true,
+    "claims": {
+     "o15_384C_0000": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 3,
+      "relocations": 1,
+      "reloc_order": "EXACT"
+     },
+     "LoadMonoPats": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 11,
+      "relocations": 7,
+      "reloc_order": "GROUPED"
+     },
+     "o15_384C_0125": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 1,
+      "relocations": 1,
+      "reloc_order": "EXACT"
+     },
+     "o15_384C_0152": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 17,
+      "relocations": 10,
+      "reloc_order": "GROUPED"
+     },
+     "MenuQuit": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 7,
+      "relocations": 2,
+      "reloc_order": "EXACT"
+     },
+     "o15_384C_0239": {
+      "exact": false,
+      "reasons": [
+       "length 331 != target 326",
+       "bytes differ (first at +0x4, 233 differing)",
+       "relocation set differs (17 vs 17)"
+      ],
+      "fixups": 20,
+      "relocations": 17,
+      "reloc_order": "EXACT"
+     },
+     "SetDefaultWindows": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 11,
+      "relocations": 9,
+      "reloc_order": "GROUPED"
+     },
+     "NewGame": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 46,
+      "relocations": 16,
+      "reloc_order": "GROUPED"
+     }
+    },
+    "exact": false,
+    "opaque_data": [],
+    "opaque_unmarked_bytes": 0,
+    "object_sha256": "d265b06de1b34aad565566e20b5625e5f94d227bf6157ae96f77f975158eb7d3",
+    "data": {
+     "_DATA": {
+      "exact": true,
+      "reasons": [],
+      "size": 213,
+      "reloc_order": "EXACT",
+      "start": 362118,
+      "class": "DATA",
+      "align": "word",
+      "far": false
+     },
+     "CONST": {
+      "exact": true,
+      "reasons": [],
+      "size": 24,
+      "reloc_order": "GROUPED",
+      "start": 385704,
+      "class": "CONST",
+      "align": "word",
+      "far": false
+     }
+    },
+    "data_only": false,
+    "communals": [],
+    "scaffold": [],
+    "inplace_drafts": []
+   },
+   "claims": [
+    "o15_384C_0000",
+    "LoadMonoPats",
+    "o15_384C_0125",
+    "o15_384C_0152",
+    "MenuQuit",
+    "o15_384C_0239",
+    "SetDefaultWindows",
+    "NewGame"
+   ],
+   "meta": {
+    "name": "draw-all-after_font-int",
+    "local": "draw",
+    "type": "int",
+    "value": 0,
+    "uses": "all",
+    "initialization": "after_font"
+   },
+   "source_sha256": "c489305b5110c68bd9b5b4aba65a951e5acdcfefa6d3808af08c63b94a35253d"
+  },
+  {
+   "name": "draw-all-after_font-unsigned",
+   "file": "D:\\Prog\\simant_recon\\build\\workers\\fleet_s15\\variants\\03_controls\\001_draw-all-after_font-unsigned.c",
+   "why": "",
+   "result": {
+    "compile_ok": true,
+    "claims": {
+     "o15_384C_0000": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 3,
+      "relocations": 1,
+      "reloc_order": "EXACT"
+     },
+     "LoadMonoPats": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 11,
+      "relocations": 7,
+      "reloc_order": "GROUPED"
+     },
+     "o15_384C_0125": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 1,
+      "relocations": 1,
+      "reloc_order": "EXACT"
+     },
+     "o15_384C_0152": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 17,
+      "relocations": 10,
+      "reloc_order": "GROUPED"
+     },
+     "MenuQuit": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 7,
+      "relocations": 2,
+      "reloc_order": "EXACT"
+     },
+     "o15_384C_0239": {
+      "exact": false,
+      "reasons": [
+       "length 331 != target 326",
+       "bytes differ (first at +0x4, 233 differing)",
+       "relocation set differs (17 vs 17)"
+      ],
+      "fixups": 20,
+      "relocations": 17,
+      "reloc_order": "EXACT"
+     },
+     "SetDefaultWindows": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 11,
+      "relocations": 9,
+      "reloc_order": "GROUPED"
+     },
+     "NewGame": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 46,
+      "relocations": 16,
+      "reloc_order": "GROUPED"
+     }
+    },
+    "exact": false,
+    "opaque_data": [],
+    "opaque_unmarked_bytes": 0,
+    "object_sha256": "88a6151d0604e93cdd04f002f4dd85f83839767fc302b52d3ee34824f07a4794",
+    "data": {
+     "_DATA": {
+      "exact": true,
+      "reasons": [],
+      "size": 213,
+      "reloc_order": "EXACT",
+      "start": 362118,
+      "class": "DATA",
+      "align": "word",
+      "far": false
+     },
+     "CONST": {
+      "exact": true,
+      "reasons": [],
+      "size": 24,
+      "reloc_order": "GROUPED",
+      "start": 385704,
+      "class": "CONST",
+      "align": "word",
+      "far": false
+     }
+    },
+    "data_only": false,
+    "communals": [],
+    "scaffold": [],
+    "inplace_drafts": []
+   },
+   "claims": [
+    "o15_384C_0000",
+    "LoadMonoPats",
+    "o15_384C_0125",
+    "o15_384C_0152",
+    "MenuQuit",
+    "o15_384C_0239",
+    "SetDefaultWindows",
+    "NewGame"
+   ],
+   "meta": {
+    "name": "draw-all-after_font-unsigned",
+    "local": "draw",
+    "type": "unsigned",
+    "value": 0,
+    "uses": "all",
+    "initialization": "after_font"
+   },
+   "source_sha256": "9d9996de7dbd8570bebb40d3adb498461ce7fdef39ceef3d5778af45d13dc896"
+  },
+  {
+   "name": "draw-all-after_font-unsigned_char",
+   "file": "D:\\Prog\\simant_recon\\build\\workers\\fleet_s15\\variants\\03_controls\\002_draw-all-after_font-unsigned_char.c",
+   "why": "",
+   "result": {
+    "compile_ok": true,
+    "claims": {
+     "o15_384C_0000": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 3,
+      "relocations": 1,
+      "reloc_order": "EXACT"
+     },
+     "LoadMonoPats": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 11,
+      "relocations": 7,
+      "reloc_order": "GROUPED"
+     },
+     "o15_384C_0125": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 1,
+      "relocations": 1,
+      "reloc_order": "EXACT"
+     },
+     "o15_384C_0152": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 17,
+      "relocations": 10,
+      "reloc_order": "GROUPED"
+     },
+     "MenuQuit": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 7,
+      "relocations": 2,
+      "reloc_order": "EXACT"
+     },
+     "o15_384C_0239": {
+      "exact": false,
+      "reasons": [
+       "length 330 != target 326",
+       "bytes differ (first at +0x4, 225 differing)",
+       "relocation set differs (17 vs 17)"
+      ],
+      "fixups": 20,
+      "relocations": 17,
+      "reloc_order": "EXACT"
+     },
+     "SetDefaultWindows": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 11,
+      "relocations": 9,
+      "reloc_order": "GROUPED"
+     },
+     "NewGame": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 46,
+      "relocations": 16,
+      "reloc_order": "GROUPED"
+     }
+    },
+    "exact": false,
+    "opaque_data": [],
+    "opaque_unmarked_bytes": 0,
+    "object_sha256": "a4c241734d9e7e0f35b0e8068d711d85c2b5be44ac7176c0b4c59b39d0042926",
+    "data": {
+     "_DATA": {
+      "exact": true,
+      "reasons": [],
+      "size": 213,
+      "reloc_order": "EXACT",
+      "start": 362118,
+      "class": "DATA",
+      "align": "word",
+      "far": false
+     },
+     "CONST": {
+      "exact": true,
+      "reasons": [],
+      "size": 24,
+      "reloc_order": "GROUPED",
+      "start": 385704,
+      "class": "CONST",
+      "align": "word",
+      "far": false
+     }
+    },
+    "data_only": false,
+    "communals": [],
+    "scaffold": [],
+    "inplace_drafts": []
+   },
+   "claims": [
+    "o15_384C_0000",
+    "LoadMonoPats",
+    "o15_384C_0125",
+    "o15_384C_0152",
+    "MenuQuit",
+    "o15_384C_0239",
+    "SetDefaultWindows",
+    "NewGame"
+   ],
+   "meta": {
+    "name": "draw-all-after_font-unsigned_char",
+    "local": "draw",
+    "type": "unsigned char",
+    "value": 0,
+    "uses": "all",
+    "initialization": "after_font"
+   },
+   "source_sha256": "8636deaba938c0a429d443f998988c7514fd88cf79a5292bb2553f59cedda81a"
+  },
+  {
+   "name": "draw-rect+print-entry-int",
+   "file": "D:\\Prog\\simant_recon\\build\\workers\\fleet_s15\\variants\\03_controls\\003_draw-rect_print-entry-int.c",
+   "why": "",
+   "result": {
+    "compile_ok": true,
+    "claims": {
+     "o15_384C_0000": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 3,
+      "relocations": 1,
+      "reloc_order": "EXACT"
+     },
+     "LoadMonoPats": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 11,
+      "relocations": 7,
+      "reloc_order": "GROUPED"
+     },
+     "o15_384C_0125": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 1,
+      "relocations": 1,
+      "reloc_order": "EXACT"
+     },
+     "o15_384C_0152": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 17,
+      "relocations": 10,
+      "reloc_order": "GROUPED"
+     },
+     "MenuQuit": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 7,
+      "relocations": 2,
+      "reloc_order": "EXACT"
+     },
+     "o15_384C_0239": {
+      "exact": false,
+      "reasons": [
+       "length 331 != target 326",
+       "bytes differ (first at +0x4, 306 differing)",
+       "relocation set differs (17 vs 17)"
+      ],
+      "fixups": 20,
+      "relocations": 17,
+      "reloc_order": "EXACT"
+     },
+     "SetDefaultWindows": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 11,
+      "relocations": 9,
+      "reloc_order": "GROUPED"
+     },
+     "NewGame": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 46,
+      "relocations": 16,
+      "reloc_order": "GROUPED"
+     }
+    },
+    "exact": false,
+    "opaque_data": [],
+    "opaque_unmarked_bytes": 0,
+    "object_sha256": "e2e43fba31270397a56b0dc156fbc34c8eefc0eb960ae270f35bc0f900dddda2",
+    "data": {
+     "_DATA": {
+      "exact": true,
+      "reasons": [],
+      "size": 213,
+      "reloc_order": "EXACT",
+      "start": 362118,
+      "class": "DATA",
+      "align": "word",
+      "far": false
+     },
+     "CONST": {
+      "exact": true,
+      "reasons": [],
+      "size": 24,
+      "reloc_order": "GROUPED",
+      "start": 385704,
+      "class": "CONST",
+      "align": "word",
+      "far": false
+     }
+    },
+    "data_only": false,
+    "communals": [],
+    "scaffold": [],
+    "inplace_drafts": []
+   },
+   "claims": [
+    "o15_384C_0000",
+    "LoadMonoPats",
+    "o15_384C_0125",
+    "o15_384C_0152",
+    "MenuQuit",
+    "o15_384C_0239",
+    "SetDefaultWindows",
+    "NewGame"
+   ],
+   "meta": {
+    "name": "draw-rect+print-entry-int",
+    "local": "draw",
+    "type": "int",
+    "value": 0,
+    "uses": "rect+print",
+    "initialization": "entry"
+   },
+   "source_sha256": "111d6b4a69f0a62e2e0d2957026ccb2c42f01ad6174993ab55bf7d85f177f575"
+  },
+  {
+   "name": "draw-rect+print-entry-unsigned",
+   "file": "D:\\Prog\\simant_recon\\build\\workers\\fleet_s15\\variants\\03_controls\\004_draw-rect_print-entry-unsigned.c",
+   "why": "",
+   "result": {
+    "compile_ok": true,
+    "claims": {
+     "o15_384C_0000": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 3,
+      "relocations": 1,
+      "reloc_order": "EXACT"
+     },
+     "LoadMonoPats": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 11,
+      "relocations": 7,
+      "reloc_order": "GROUPED"
+     },
+     "o15_384C_0125": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 1,
+      "relocations": 1,
+      "reloc_order": "EXACT"
+     },
+     "o15_384C_0152": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 17,
+      "relocations": 10,
+      "reloc_order": "GROUPED"
+     },
+     "MenuQuit": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 7,
+      "relocations": 2,
+      "reloc_order": "EXACT"
+     },
+     "o15_384C_0239": {
+      "exact": false,
+      "reasons": [
+       "length 331 != target 326",
+       "bytes differ (first at +0x4, 306 differing)",
+       "relocation set differs (17 vs 17)"
+      ],
+      "fixups": 20,
+      "relocations": 17,
+      "reloc_order": "EXACT"
+     },
+     "SetDefaultWindows": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 11,
+      "relocations": 9,
+      "reloc_order": "GROUPED"
+     },
+     "NewGame": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 46,
+      "relocations": 16,
+      "reloc_order": "GROUPED"
+     }
+    },
+    "exact": false,
+    "opaque_data": [],
+    "opaque_unmarked_bytes": 0,
+    "object_sha256": "8ad65b36b3f6099d29d658c66218225d4b640b8a4b5be8887f87bb8fcf1698d4",
+    "data": {
+     "_DATA": {
+      "exact": true,
+      "reasons": [],
+      "size": 213,
+      "reloc_order": "EXACT",
+      "start": 362118,
+      "class": "DATA",
+      "align": "word",
+      "far": false
+     },
+     "CONST": {
+      "exact": true,
+      "reasons": [],
+      "size": 24,
+      "reloc_order": "GROUPED",
+      "start": 385704,
+      "class": "CONST",
+      "align": "word",
+      "far": false
+     }
+    },
+    "data_only": false,
+    "communals": [],
+    "scaffold": [],
+    "inplace_drafts": []
+   },
+   "claims": [
+    "o15_384C_0000",
+    "LoadMonoPats",
+    "o15_384C_0125",
+    "o15_384C_0152",
+    "MenuQuit",
+    "o15_384C_0239",
+    "SetDefaultWindows",
+    "NewGame"
+   ],
+   "meta": {
+    "name": "draw-rect+print-entry-unsigned",
+    "local": "draw",
+    "type": "unsigned",
+    "value": 0,
+    "uses": "rect+print",
+    "initialization": "entry"
+   },
+   "source_sha256": "c5e749fedcc5dc5cf1245219df4d6a1bec4ee4f845f1e46919fd77c559c155f1"
+  },
+  {
+   "name": "draw-rect+print-entry-unsigned_char",
+   "file": "D:\\Prog\\simant_recon\\build\\workers\\fleet_s15\\variants\\03_controls\\005_draw-rect_print-entry-unsigned_char.c",
+   "why": "",
+   "result": {
+    "compile_ok": true,
+    "claims": {
+     "o15_384C_0000": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 3,
+      "relocations": 1,
+      "reloc_order": "EXACT"
+     },
+     "LoadMonoPats": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 11,
+      "relocations": 7,
+      "reloc_order": "GROUPED"
+     },
+     "o15_384C_0125": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 1,
+      "relocations": 1,
+      "reloc_order": "EXACT"
+     },
+     "o15_384C_0152": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 17,
+      "relocations": 10,
+      "reloc_order": "GROUPED"
+     },
+     "MenuQuit": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 7,
+      "relocations": 2,
+      "reloc_order": "EXACT"
+     },
+     "o15_384C_0239": {
+      "exact": false,
+      "reasons": [
+       "length 330 != target 326",
+       "bytes differ (first at +0x4, 295 differing)",
+       "relocation set differs (17 vs 17)"
+      ],
+      "fixups": 20,
+      "relocations": 17,
+      "reloc_order": "EXACT"
+     },
+     "SetDefaultWindows": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 11,
+      "relocations": 9,
+      "reloc_order": "GROUPED"
+     },
+     "NewGame": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 46,
+      "relocations": 16,
+      "reloc_order": "GROUPED"
+     }
+    },
+    "exact": false,
+    "opaque_data": [],
+    "opaque_unmarked_bytes": 0,
+    "object_sha256": "10c43b986139edde6b50e9a55821bdaf95a1cc723092e58609d95238268587c4",
+    "data": {
+     "_DATA": {
+      "exact": true,
+      "reasons": [],
+      "size": 213,
+      "reloc_order": "EXACT",
+      "start": 362118,
+      "class": "DATA",
+      "align": "word",
+      "far": false
+     },
+     "CONST": {
+      "exact": true,
+      "reasons": [],
+      "size": 24,
+      "reloc_order": "GROUPED",
+      "start": 385704,
+      "class": "CONST",
+      "align": "word",
+      "far": false
+     }
+    },
+    "data_only": false,
+    "communals": [],
+    "scaffold": [],
+    "inplace_drafts": []
+   },
+   "claims": [
+    "o15_384C_0000",
+    "LoadMonoPats",
+    "o15_384C_0125",
+    "o15_384C_0152",
+    "MenuQuit",
+    "o15_384C_0239",
+    "SetDefaultWindows",
+    "NewGame"
+   ],
+   "meta": {
+    "name": "draw-rect+print-entry-unsigned_char",
+    "local": "draw",
+    "type": "unsigned char",
+    "value": 0,
+    "uses": "rect+print",
+    "initialization": "entry"
+   },
+   "source_sha256": "9a03b3ca3436cc0fa18b4bf658470c7a190262513401e3311b15ed93ec2586de"
+  },
+  {
+   "name": "draw-rect+print-after_open-int",
+   "file": "D:\\Prog\\simant_recon\\build\\workers\\fleet_s15\\variants\\04_controls\\000_draw-rect_print-after_open-int.c",
+   "why": "",
+   "result": {
+    "compile_ok": true,
+    "claims": {
+     "o15_384C_0000": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 3,
+      "relocations": 1,
+      "reloc_order": "EXACT"
+     },
+     "LoadMonoPats": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 11,
+      "relocations": 7,
+      "reloc_order": "GROUPED"
+     },
+     "o15_384C_0125": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 1,
+      "relocations": 1,
+      "reloc_order": "EXACT"
+     },
+     "o15_384C_0152": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 17,
+      "relocations": 10,
+      "reloc_order": "GROUPED"
+     },
+     "MenuQuit": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 7,
+      "relocations": 2,
+      "reloc_order": "EXACT"
+     },
+     "o15_384C_0239": {
+      "exact": false,
+      "reasons": [
+       "length 331 != target 326",
+       "bytes differ (first at +0x4, 296 differing)",
+       "relocation set differs (17 vs 17)"
+      ],
+      "fixups": 20,
+      "relocations": 17,
+      "reloc_order": "EXACT"
+     },
+     "SetDefaultWindows": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 11,
+      "relocations": 9,
+      "reloc_order": "GROUPED"
+     },
+     "NewGame": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 46,
+      "relocations": 16,
+      "reloc_order": "GROUPED"
+     }
+    },
+    "exact": false,
+    "opaque_data": [],
+    "opaque_unmarked_bytes": 0,
+    "object_sha256": "cdcedb35d115f1adbaa7a9b25e717078897ba37a6616ca3eeead49b652d0f9fe",
+    "data": {
+     "_DATA": {
+      "exact": true,
+      "reasons": [],
+      "size": 213,
+      "reloc_order": "EXACT",
+      "start": 362118,
+      "class": "DATA",
+      "align": "word",
+      "far": false
+     },
+     "CONST": {
+      "exact": true,
+      "reasons": [],
+      "size": 24,
+      "reloc_order": "GROUPED",
+      "start": 385704,
+      "class": "CONST",
+      "align": "word",
+      "far": false
+     }
+    },
+    "data_only": false,
+    "communals": [],
+    "scaffold": [],
+    "inplace_drafts": []
+   },
+   "claims": [
+    "o15_384C_0000",
+    "LoadMonoPats",
+    "o15_384C_0125",
+    "o15_384C_0152",
+    "MenuQuit",
+    "o15_384C_0239",
+    "SetDefaultWindows",
+    "NewGame"
+   ],
+   "meta": {
+    "name": "draw-rect+print-after_open-int",
+    "local": "draw",
+    "type": "int",
+    "value": 0,
+    "uses": "rect+print",
+    "initialization": "after_open"
+   },
+   "source_sha256": "12fe8f8df3d1f864267631bd712eebc4cdc051aa0b21caee1362f9d1574315ec"
+  },
+  {
+   "name": "draw-rect+print-after_open-unsigned",
+   "file": "D:\\Prog\\simant_recon\\build\\workers\\fleet_s15\\variants\\04_controls\\001_draw-rect_print-after_open-unsigned.c",
+   "why": "",
+   "result": {
+    "compile_ok": true,
+    "claims": {
+     "o15_384C_0000": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 3,
+      "relocations": 1,
+      "reloc_order": "EXACT"
+     },
+     "LoadMonoPats": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 11,
+      "relocations": 7,
+      "reloc_order": "GROUPED"
+     },
+     "o15_384C_0125": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 1,
+      "relocations": 1,
+      "reloc_order": "EXACT"
+     },
+     "o15_384C_0152": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 17,
+      "relocations": 10,
+      "reloc_order": "GROUPED"
+     },
+     "MenuQuit": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 7,
+      "relocations": 2,
+      "reloc_order": "EXACT"
+     },
+     "o15_384C_0239": {
+      "exact": false,
+      "reasons": [
+       "length 331 != target 326",
+       "bytes differ (first at +0x4, 296 differing)",
+       "relocation set differs (17 vs 17)"
+      ],
+      "fixups": 20,
+      "relocations": 17,
+      "reloc_order": "EXACT"
+     },
+     "SetDefaultWindows": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 11,
+      "relocations": 9,
+      "reloc_order": "GROUPED"
+     },
+     "NewGame": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 46,
+      "relocations": 16,
+      "reloc_order": "GROUPED"
+     }
+    },
+    "exact": false,
+    "opaque_data": [],
+    "opaque_unmarked_bytes": 0,
+    "object_sha256": "9e8a6ec12915c647e204eaf2d0de549440ec5c8440adb04629e3ceeadb3d3e7a",
+    "data": {
+     "_DATA": {
+      "exact": true,
+      "reasons": [],
+      "size": 213,
+      "reloc_order": "EXACT",
+      "start": 362118,
+      "class": "DATA",
+      "align": "word",
+      "far": false
+     },
+     "CONST": {
+      "exact": true,
+      "reasons": [],
+      "size": 24,
+      "reloc_order": "GROUPED",
+      "start": 385704,
+      "class": "CONST",
+      "align": "word",
+      "far": false
+     }
+    },
+    "data_only": false,
+    "communals": [],
+    "scaffold": [],
+    "inplace_drafts": []
+   },
+   "claims": [
+    "o15_384C_0000",
+    "LoadMonoPats",
+    "o15_384C_0125",
+    "o15_384C_0152",
+    "MenuQuit",
+    "o15_384C_0239",
+    "SetDefaultWindows",
+    "NewGame"
+   ],
+   "meta": {
+    "name": "draw-rect+print-after_open-unsigned",
+    "local": "draw",
+    "type": "unsigned",
+    "value": 0,
+    "uses": "rect+print",
+    "initialization": "after_open"
+   },
+   "source_sha256": "ba3a629fac8ce2664538afad156c3af68bf8ce79d1dae4dfb9e75f952f7bc15a"
+  },
+  {
+   "name": "draw-rect+print-after_open-unsigned_char",
+   "file": "D:\\Prog\\simant_recon\\build\\workers\\fleet_s15\\variants\\04_controls\\002_draw-rect_print-after_open-unsigned_char.c",
+   "why": "",
+   "result": {
+    "compile_ok": true,
+    "claims": {
+     "o15_384C_0000": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 3,
+      "relocations": 1,
+      "reloc_order": "EXACT"
+     },
+     "LoadMonoPats": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 11,
+      "relocations": 7,
+      "reloc_order": "GROUPED"
+     },
+     "o15_384C_0125": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 1,
+      "relocations": 1,
+      "reloc_order": "EXACT"
+     },
+     "o15_384C_0152": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 17,
+      "relocations": 10,
+      "reloc_order": "GROUPED"
+     },
+     "MenuQuit": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 7,
+      "relocations": 2,
+      "reloc_order": "EXACT"
+     },
+     "o15_384C_0239": {
+      "exact": false,
+      "reasons": [
+       "length 330 != target 326",
+       "bytes differ (first at +0x4, 285 differing)",
+       "relocation set differs (17 vs 17)"
+      ],
+      "fixups": 20,
+      "relocations": 17,
+      "reloc_order": "EXACT"
+     },
+     "SetDefaultWindows": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 11,
+      "relocations": 9,
+      "reloc_order": "GROUPED"
+     },
+     "NewGame": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 46,
+      "relocations": 16,
+      "reloc_order": "GROUPED"
+     }
+    },
+    "exact": false,
+    "opaque_data": [],
+    "opaque_unmarked_bytes": 0,
+    "object_sha256": "b5007f99fbaef7e77e85cfa902b535f1a9672f1d3595d4437b84dbae373f7878",
+    "data": {
+     "_DATA": {
+      "exact": true,
+      "reasons": [],
+      "size": 213,
+      "reloc_order": "EXACT",
+      "start": 362118,
+      "class": "DATA",
+      "align": "word",
+      "far": false
+     },
+     "CONST": {
+      "exact": true,
+      "reasons": [],
+      "size": 24,
+      "reloc_order": "GROUPED",
+      "start": 385704,
+      "class": "CONST",
+      "align": "word",
+      "far": false
+     }
+    },
+    "data_only": false,
+    "communals": [],
+    "scaffold": [],
+    "inplace_drafts": []
+   },
+   "claims": [
+    "o15_384C_0000",
+    "LoadMonoPats",
+    "o15_384C_0125",
+    "o15_384C_0152",
+    "MenuQuit",
+    "o15_384C_0239",
+    "SetDefaultWindows",
+    "NewGame"
+   ],
+   "meta": {
+    "name": "draw-rect+print-after_open-unsigned_char",
+    "local": "draw",
+    "type": "unsigned char",
+    "value": 0,
+    "uses": "rect+print",
+    "initialization": "after_open"
+   },
+   "source_sha256": "e343678ad93cdd409e687d696df32a1ce63fcea4577037bc7e7b767724dd4561"
+  },
+  {
+   "name": "draw-rect+print-after_handle-int",
+   "file": "D:\\Prog\\simant_recon\\build\\workers\\fleet_s15\\variants\\04_controls\\003_draw-rect_print-after_handle-int.c",
+   "why": "",
+   "result": {
+    "compile_ok": true,
+    "claims": {
+     "o15_384C_0000": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 3,
+      "relocations": 1,
+      "reloc_order": "EXACT"
+     },
+     "LoadMonoPats": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 11,
+      "relocations": 7,
+      "reloc_order": "GROUPED"
+     },
+     "o15_384C_0125": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 1,
+      "relocations": 1,
+      "reloc_order": "EXACT"
+     },
+     "o15_384C_0152": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 17,
+      "relocations": 10,
+      "reloc_order": "GROUPED"
+     },
+     "MenuQuit": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 7,
+      "relocations": 2,
+      "reloc_order": "EXACT"
+     },
+     "o15_384C_0239": {
+      "exact": false,
+      "reasons": [
+       "length 331 != target 326",
+       "bytes differ (first at +0x4, 296 differing)",
+       "relocation set differs (17 vs 17)"
+      ],
+      "fixups": 20,
+      "relocations": 17,
+      "reloc_order": "EXACT"
+     },
+     "SetDefaultWindows": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 11,
+      "relocations": 9,
+      "reloc_order": "GROUPED"
+     },
+     "NewGame": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 46,
+      "relocations": 16,
+      "reloc_order": "GROUPED"
+     }
+    },
+    "exact": false,
+    "opaque_data": [],
+    "opaque_unmarked_bytes": 0,
+    "object_sha256": "70333123be6215ee585cedd87c43c9833e4ba6b2ef06509feb4558043f7386c4",
+    "data": {
+     "_DATA": {
+      "exact": true,
+      "reasons": [],
+      "size": 213,
+      "reloc_order": "EXACT",
+      "start": 362118,
+      "class": "DATA",
+      "align": "word",
+      "far": false
+     },
+     "CONST": {
+      "exact": true,
+      "reasons": [],
+      "size": 24,
+      "reloc_order": "GROUPED",
+      "start": 385704,
+      "class": "CONST",
+      "align": "word",
+      "far": false
+     }
+    },
+    "data_only": false,
+    "communals": [],
+    "scaffold": [],
+    "inplace_drafts": []
+   },
+   "claims": [
+    "o15_384C_0000",
+    "LoadMonoPats",
+    "o15_384C_0125",
+    "o15_384C_0152",
+    "MenuQuit",
+    "o15_384C_0239",
+    "SetDefaultWindows",
+    "NewGame"
+   ],
+   "meta": {
+    "name": "draw-rect+print-after_handle-int",
+    "local": "draw",
+    "type": "int",
+    "value": 0,
+    "uses": "rect+print",
+    "initialization": "after_handle"
+   },
+   "source_sha256": "063938dce457465d8aed48b89055ca158be6d2081c836c50b47d1cd36c067c14"
+  },
+  {
+   "name": "draw-rect+print-after_handle-unsigned",
+   "file": "D:\\Prog\\simant_recon\\build\\workers\\fleet_s15\\variants\\04_controls\\004_draw-rect_print-after_handle-unsigned.c",
+   "why": "",
+   "result": {
+    "compile_ok": true,
+    "claims": {
+     "o15_384C_0000": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 3,
+      "relocations": 1,
+      "reloc_order": "EXACT"
+     },
+     "LoadMonoPats": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 11,
+      "relocations": 7,
+      "reloc_order": "GROUPED"
+     },
+     "o15_384C_0125": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 1,
+      "relocations": 1,
+      "reloc_order": "EXACT"
+     },
+     "o15_384C_0152": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 17,
+      "relocations": 10,
+      "reloc_order": "GROUPED"
+     },
+     "MenuQuit": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 7,
+      "relocations": 2,
+      "reloc_order": "EXACT"
+     },
+     "o15_384C_0239": {
+      "exact": false,
+      "reasons": [
+       "length 331 != target 326",
+       "bytes differ (first at +0x4, 296 differing)",
+       "relocation set differs (17 vs 17)"
+      ],
+      "fixups": 20,
+      "relocations": 17,
+      "reloc_order": "EXACT"
+     },
+     "SetDefaultWindows": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 11,
+      "relocations": 9,
+      "reloc_order": "GROUPED"
+     },
+     "NewGame": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 46,
+      "relocations": 16,
+      "reloc_order": "GROUPED"
+     }
+    },
+    "exact": false,
+    "opaque_data": [],
+    "opaque_unmarked_bytes": 0,
+    "object_sha256": "85580655e44daaecc399bdb184a15e104b21a50af1da09108be3d40b425ecaf5",
+    "data": {
+     "_DATA": {
+      "exact": true,
+      "reasons": [],
+      "size": 213,
+      "reloc_order": "EXACT",
+      "start": 362118,
+      "class": "DATA",
+      "align": "word",
+      "far": false
+     },
+     "CONST": {
+      "exact": true,
+      "reasons": [],
+      "size": 24,
+      "reloc_order": "GROUPED",
+      "start": 385704,
+      "class": "CONST",
+      "align": "word",
+      "far": false
+     }
+    },
+    "data_only": false,
+    "communals": [],
+    "scaffold": [],
+    "inplace_drafts": []
+   },
+   "claims": [
+    "o15_384C_0000",
+    "LoadMonoPats",
+    "o15_384C_0125",
+    "o15_384C_0152",
+    "MenuQuit",
+    "o15_384C_0239",
+    "SetDefaultWindows",
+    "NewGame"
+   ],
+   "meta": {
+    "name": "draw-rect+print-after_handle-unsigned",
+    "local": "draw",
+    "type": "unsigned",
+    "value": 0,
+    "uses": "rect+print",
+    "initialization": "after_handle"
+   },
+   "source_sha256": "cda98befae8a0d77111782f11a6c148854626cc63344d664f8888652dc74ece1"
+  },
+  {
+   "name": "draw-rect+print-after_handle-unsigned_char",
+   "file": "D:\\Prog\\simant_recon\\build\\workers\\fleet_s15\\variants\\04_controls\\005_draw-rect_print-after_handle-unsigned_char.c",
+   "why": "",
+   "result": {
+    "compile_ok": true,
+    "claims": {
+     "o15_384C_0000": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 3,
+      "relocations": 1,
+      "reloc_order": "EXACT"
+     },
+     "LoadMonoPats": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 11,
+      "relocations": 7,
+      "reloc_order": "GROUPED"
+     },
+     "o15_384C_0125": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 1,
+      "relocations": 1,
+      "reloc_order": "EXACT"
+     },
+     "o15_384C_0152": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 17,
+      "relocations": 10,
+      "reloc_order": "GROUPED"
+     },
+     "MenuQuit": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 7,
+      "relocations": 2,
+      "reloc_order": "EXACT"
+     },
+     "o15_384C_0239": {
+      "exact": false,
+      "reasons": [
+       "length 330 != target 326",
+       "bytes differ (first at +0x4, 285 differing)",
+       "relocation set differs (17 vs 17)"
+      ],
+      "fixups": 20,
+      "relocations": 17,
+      "reloc_order": "EXACT"
+     },
+     "SetDefaultWindows": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 11,
+      "relocations": 9,
+      "reloc_order": "GROUPED"
+     },
+     "NewGame": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 46,
+      "relocations": 16,
+      "reloc_order": "GROUPED"
+     }
+    },
+    "exact": false,
+    "opaque_data": [],
+    "opaque_unmarked_bytes": 0,
+    "object_sha256": "09ccb0aa92780d759b9b84b750a44a7767a1f7390f94f0c74acfb1ca68d84e32",
+    "data": {
+     "_DATA": {
+      "exact": true,
+      "reasons": [],
+      "size": 213,
+      "reloc_order": "EXACT",
+      "start": 362118,
+      "class": "DATA",
+      "align": "word",
+      "far": false
+     },
+     "CONST": {
+      "exact": true,
+      "reasons": [],
+      "size": 24,
+      "reloc_order": "GROUPED",
+      "start": 385704,
+      "class": "CONST",
+      "align": "word",
+      "far": false
+     }
+    },
+    "data_only": false,
+    "communals": [],
+    "scaffold": [],
+    "inplace_drafts": []
+   },
+   "claims": [
+    "o15_384C_0000",
+    "LoadMonoPats",
+    "o15_384C_0125",
+    "o15_384C_0152",
+    "MenuQuit",
+    "o15_384C_0239",
+    "SetDefaultWindows",
+    "NewGame"
+   ],
+   "meta": {
+    "name": "draw-rect+print-after_handle-unsigned_char",
+    "local": "draw",
+    "type": "unsigned char",
+    "value": 0,
+    "uses": "rect+print",
+    "initialization": "after_handle"
+   },
+   "source_sha256": "422fd63a14cd370cedacd2617fa47336ed9f1f9994f6eb1810311b4bfca79c0e"
+  },
+  {
+   "name": "draw-rect+print-after_text-int",
+   "file": "D:\\Prog\\simant_recon\\build\\workers\\fleet_s15\\variants\\05_controls\\000_draw-rect_print-after_text-int.c",
+   "why": "",
+   "result": {
+    "compile_ok": true,
+    "claims": {
+     "o15_384C_0000": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 3,
+      "relocations": 1,
+      "reloc_order": "EXACT"
+     },
+     "LoadMonoPats": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 11,
+      "relocations": 7,
+      "reloc_order": "GROUPED"
+     },
+     "o15_384C_0125": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 1,
+      "relocations": 1,
+      "reloc_order": "EXACT"
+     },
+     "o15_384C_0152": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 17,
+      "relocations": 10,
+      "reloc_order": "GROUPED"
+     },
+     "MenuQuit": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 7,
+      "relocations": 2,
+      "reloc_order": "EXACT"
+     },
+     "o15_384C_0239": {
+      "exact": false,
+      "reasons": [
+       "length 331 != target 326",
+       "bytes differ (first at +0x4, 254 differing)",
+       "relocation set differs (17 vs 17)"
+      ],
+      "fixups": 20,
+      "relocations": 17,
+      "reloc_order": "EXACT"
+     },
+     "SetDefaultWindows": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 11,
+      "relocations": 9,
+      "reloc_order": "GROUPED"
+     },
+     "NewGame": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 46,
+      "relocations": 16,
+      "reloc_order": "GROUPED"
+     }
+    },
+    "exact": false,
+    "opaque_data": [],
+    "opaque_unmarked_bytes": 0,
+    "object_sha256": "4b5877dbc809d9f2f8dbf67f1b8822bd2729368092be761889dbba6cda2c3558",
+    "data": {
+     "_DATA": {
+      "exact": true,
+      "reasons": [],
+      "size": 213,
+      "reloc_order": "EXACT",
+      "start": 362118,
+      "class": "DATA",
+      "align": "word",
+      "far": false
+     },
+     "CONST": {
+      "exact": true,
+      "reasons": [],
+      "size": 24,
+      "reloc_order": "GROUPED",
+      "start": 385704,
+      "class": "CONST",
+      "align": "word",
+      "far": false
+     }
+    },
+    "data_only": false,
+    "communals": [],
+    "scaffold": [],
+    "inplace_drafts": []
+   },
+   "claims": [
+    "o15_384C_0000",
+    "LoadMonoPats",
+    "o15_384C_0125",
+    "o15_384C_0152",
+    "MenuQuit",
+    "o15_384C_0239",
+    "SetDefaultWindows",
+    "NewGame"
+   ],
+   "meta": {
+    "name": "draw-rect+print-after_text-int",
+    "local": "draw",
+    "type": "int",
+    "value": 0,
+    "uses": "rect+print",
+    "initialization": "after_text"
+   },
+   "source_sha256": "35694ea154b6761385e192d0dd776e6a4a6c29ec02e6c7b52502996962963c89"
+  },
+  {
+   "name": "draw-rect+print-after_text-unsigned",
+   "file": "D:\\Prog\\simant_recon\\build\\workers\\fleet_s15\\variants\\05_controls\\001_draw-rect_print-after_text-unsigned.c",
+   "why": "",
+   "result": {
+    "compile_ok": true,
+    "claims": {
+     "o15_384C_0000": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 3,
+      "relocations": 1,
+      "reloc_order": "EXACT"
+     },
+     "LoadMonoPats": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 11,
+      "relocations": 7,
+      "reloc_order": "GROUPED"
+     },
+     "o15_384C_0125": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 1,
+      "relocations": 1,
+      "reloc_order": "EXACT"
+     },
+     "o15_384C_0152": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 17,
+      "relocations": 10,
+      "reloc_order": "GROUPED"
+     },
+     "MenuQuit": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 7,
+      "relocations": 2,
+      "reloc_order": "EXACT"
+     },
+     "o15_384C_0239": {
+      "exact": false,
+      "reasons": [
+       "length 331 != target 326",
+       "bytes differ (first at +0x4, 254 differing)",
+       "relocation set differs (17 vs 17)"
+      ],
+      "fixups": 20,
+      "relocations": 17,
+      "reloc_order": "EXACT"
+     },
+     "SetDefaultWindows": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 11,
+      "relocations": 9,
+      "reloc_order": "GROUPED"
+     },
+     "NewGame": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 46,
+      "relocations": 16,
+      "reloc_order": "GROUPED"
+     }
+    },
+    "exact": false,
+    "opaque_data": [],
+    "opaque_unmarked_bytes": 0,
+    "object_sha256": "c4a0e3ceec3c285c213ff187810b37e390375328d63c643f96dfe9d03dd3b1db",
+    "data": {
+     "_DATA": {
+      "exact": true,
+      "reasons": [],
+      "size": 213,
+      "reloc_order": "EXACT",
+      "start": 362118,
+      "class": "DATA",
+      "align": "word",
+      "far": false
+     },
+     "CONST": {
+      "exact": true,
+      "reasons": [],
+      "size": 24,
+      "reloc_order": "GROUPED",
+      "start": 385704,
+      "class": "CONST",
+      "align": "word",
+      "far": false
+     }
+    },
+    "data_only": false,
+    "communals": [],
+    "scaffold": [],
+    "inplace_drafts": []
+   },
+   "claims": [
+    "o15_384C_0000",
+    "LoadMonoPats",
+    "o15_384C_0125",
+    "o15_384C_0152",
+    "MenuQuit",
+    "o15_384C_0239",
+    "SetDefaultWindows",
+    "NewGame"
+   ],
+   "meta": {
+    "name": "draw-rect+print-after_text-unsigned",
+    "local": "draw",
+    "type": "unsigned",
+    "value": 0,
+    "uses": "rect+print",
+    "initialization": "after_text"
+   },
+   "source_sha256": "63eec3c07ce9cac56e1a9b8e9bc1fea6ad795c2d64a719fb8c6d2f17929c4c47"
+  },
+  {
+   "name": "draw-rect+print-after_text-unsigned_char",
+   "file": "D:\\Prog\\simant_recon\\build\\workers\\fleet_s15\\variants\\05_controls\\002_draw-rect_print-after_text-unsigned_char.c",
+   "why": "",
+   "result": {
+    "compile_ok": true,
+    "claims": {
+     "o15_384C_0000": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 3,
+      "relocations": 1,
+      "reloc_order": "EXACT"
+     },
+     "LoadMonoPats": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 11,
+      "relocations": 7,
+      "reloc_order": "GROUPED"
+     },
+     "o15_384C_0125": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 1,
+      "relocations": 1,
+      "reloc_order": "EXACT"
+     },
+     "o15_384C_0152": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 17,
+      "relocations": 10,
+      "reloc_order": "GROUPED"
+     },
+     "MenuQuit": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 7,
+      "relocations": 2,
+      "reloc_order": "EXACT"
+     },
+     "o15_384C_0239": {
+      "exact": false,
+      "reasons": [
+       "length 330 != target 326",
+       "bytes differ (first at +0x4, 248 differing)",
+       "relocation set differs (17 vs 17)"
+      ],
+      "fixups": 20,
+      "relocations": 17,
+      "reloc_order": "EXACT"
+     },
+     "SetDefaultWindows": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 11,
+      "relocations": 9,
+      "reloc_order": "GROUPED"
+     },
+     "NewGame": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 46,
+      "relocations": 16,
+      "reloc_order": "GROUPED"
+     }
+    },
+    "exact": false,
+    "opaque_data": [],
+    "opaque_unmarked_bytes": 0,
+    "object_sha256": "c15583f9c20f38db2f0b1a5da0be6f949a4d5a128a6aae6f4597b544a5862458",
+    "data": {
+     "_DATA": {
+      "exact": true,
+      "reasons": [],
+      "size": 213,
+      "reloc_order": "EXACT",
+      "start": 362118,
+      "class": "DATA",
+      "align": "word",
+      "far": false
+     },
+     "CONST": {
+      "exact": true,
+      "reasons": [],
+      "size": 24,
+      "reloc_order": "GROUPED",
+      "start": 385704,
+      "class": "CONST",
+      "align": "word",
+      "far": false
+     }
+    },
+    "data_only": false,
+    "communals": [],
+    "scaffold": [],
+    "inplace_drafts": []
+   },
+   "claims": [
+    "o15_384C_0000",
+    "LoadMonoPats",
+    "o15_384C_0125",
+    "o15_384C_0152",
+    "MenuQuit",
+    "o15_384C_0239",
+    "SetDefaultWindows",
+    "NewGame"
+   ],
+   "meta": {
+    "name": "draw-rect+print-after_text-unsigned_char",
+    "local": "draw",
+    "type": "unsigned char",
+    "value": 0,
+    "uses": "rect+print",
+    "initialization": "after_text"
+   },
+   "source_sha256": "45c055f2726574e8cd6eb573fb05d8d82a5ff26cfacdbb0ea3563d8ff636bed2"
+  },
+  {
+   "name": "draw-rect+print-after_font-int",
+   "file": "D:\\Prog\\simant_recon\\build\\workers\\fleet_s15\\variants\\05_controls\\003_draw-rect_print-after_font-int.c",
+   "why": "",
+   "result": {
+    "compile_ok": true,
+    "claims": {
+     "o15_384C_0000": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 3,
+      "relocations": 1,
+      "reloc_order": "EXACT"
+     },
+     "LoadMonoPats": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 11,
+      "relocations": 7,
+      "reloc_order": "GROUPED"
+     },
+     "o15_384C_0125": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 1,
+      "relocations": 1,
+      "reloc_order": "EXACT"
+     },
+     "o15_384C_0152": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 17,
+      "relocations": 10,
+      "reloc_order": "GROUPED"
+     },
+     "MenuQuit": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 7,
+      "relocations": 2,
+      "reloc_order": "EXACT"
+     },
+     "o15_384C_0239": {
+      "exact": false,
+      "reasons": [
+       "length 331 != target 326",
+       "bytes differ (first at +0x4, 233 differing)",
+       "relocation set differs (17 vs 17)"
+      ],
+      "fixups": 20,
+      "relocations": 17,
+      "reloc_order": "EXACT"
+     },
+     "SetDefaultWindows": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 11,
+      "relocations": 9,
+      "reloc_order": "GROUPED"
+     },
+     "NewGame": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 46,
+      "relocations": 16,
+      "reloc_order": "GROUPED"
+     }
+    },
+    "exact": false,
+    "opaque_data": [],
+    "opaque_unmarked_bytes": 0,
+    "object_sha256": "d265b06de1b34aad565566e20b5625e5f94d227bf6157ae96f77f975158eb7d3",
+    "data": {
+     "_DATA": {
+      "exact": true,
+      "reasons": [],
+      "size": 213,
+      "reloc_order": "EXACT",
+      "start": 362118,
+      "class": "DATA",
+      "align": "word",
+      "far": false
+     },
+     "CONST": {
+      "exact": true,
+      "reasons": [],
+      "size": 24,
+      "reloc_order": "GROUPED",
+      "start": 385704,
+      "class": "CONST",
+      "align": "word",
+      "far": false
+     }
+    },
+    "data_only": false,
+    "communals": [],
+    "scaffold": [],
+    "inplace_drafts": []
+   },
+   "claims": [
+    "o15_384C_0000",
+    "LoadMonoPats",
+    "o15_384C_0125",
+    "o15_384C_0152",
+    "MenuQuit",
+    "o15_384C_0239",
+    "SetDefaultWindows",
+    "NewGame"
+   ],
+   "meta": {
+    "name": "draw-rect+print-after_font-int",
+    "local": "draw",
+    "type": "int",
+    "value": 0,
+    "uses": "rect+print",
+    "initialization": "after_font"
+   },
+   "source_sha256": "5f9014a5e4af4fd6d4717f3c30cb88dead2af1f41cc7309af79cc59dea164146"
+  },
+  {
+   "name": "draw-rect+print-after_font-unsigned",
+   "file": "D:\\Prog\\simant_recon\\build\\workers\\fleet_s15\\variants\\05_controls\\004_draw-rect_print-after_font-unsigned.c",
+   "why": "",
+   "result": {
+    "compile_ok": true,
+    "claims": {
+     "o15_384C_0000": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 3,
+      "relocations": 1,
+      "reloc_order": "EXACT"
+     },
+     "LoadMonoPats": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 11,
+      "relocations": 7,
+      "reloc_order": "GROUPED"
+     },
+     "o15_384C_0125": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 1,
+      "relocations": 1,
+      "reloc_order": "EXACT"
+     },
+     "o15_384C_0152": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 17,
+      "relocations": 10,
+      "reloc_order": "GROUPED"
+     },
+     "MenuQuit": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 7,
+      "relocations": 2,
+      "reloc_order": "EXACT"
+     },
+     "o15_384C_0239": {
+      "exact": false,
+      "reasons": [
+       "length 331 != target 326",
+       "bytes differ (first at +0x4, 233 differing)",
+       "relocation set differs (17 vs 17)"
+      ],
+      "fixups": 20,
+      "relocations": 17,
+      "reloc_order": "EXACT"
+     },
+     "SetDefaultWindows": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 11,
+      "relocations": 9,
+      "reloc_order": "GROUPED"
+     },
+     "NewGame": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 46,
+      "relocations": 16,
+      "reloc_order": "GROUPED"
+     }
+    },
+    "exact": false,
+    "opaque_data": [],
+    "opaque_unmarked_bytes": 0,
+    "object_sha256": "88a6151d0604e93cdd04f002f4dd85f83839767fc302b52d3ee34824f07a4794",
+    "data": {
+     "_DATA": {
+      "exact": true,
+      "reasons": [],
+      "size": 213,
+      "reloc_order": "EXACT",
+      "start": 362118,
+      "class": "DATA",
+      "align": "word",
+      "far": false
+     },
+     "CONST": {
+      "exact": true,
+      "reasons": [],
+      "size": 24,
+      "reloc_order": "GROUPED",
+      "start": 385704,
+      "class": "CONST",
+      "align": "word",
+      "far": false
+     }
+    },
+    "data_only": false,
+    "communals": [],
+    "scaffold": [],
+    "inplace_drafts": []
+   },
+   "claims": [
+    "o15_384C_0000",
+    "LoadMonoPats",
+    "o15_384C_0125",
+    "o15_384C_0152",
+    "MenuQuit",
+    "o15_384C_0239",
+    "SetDefaultWindows",
+    "NewGame"
+   ],
+   "meta": {
+    "name": "draw-rect+print-after_font-unsigned",
+    "local": "draw",
+    "type": "unsigned",
+    "value": 0,
+    "uses": "rect+print",
+    "initialization": "after_font"
+   },
+   "source_sha256": "6a07dc8e6307db87edb34aa6ff98f759556ec3a28efed5212113189f564a6399"
+  },
+  {
+   "name": "draw-rect+print-after_font-unsigned_char",
+   "file": "D:\\Prog\\simant_recon\\build\\workers\\fleet_s15\\variants\\05_controls\\005_draw-rect_print-after_font-unsigned_char.c",
+   "why": "",
+   "result": {
+    "compile_ok": true,
+    "claims": {
+     "o15_384C_0000": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 3,
+      "relocations": 1,
+      "reloc_order": "EXACT"
+     },
+     "LoadMonoPats": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 11,
+      "relocations": 7,
+      "reloc_order": "GROUPED"
+     },
+     "o15_384C_0125": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 1,
+      "relocations": 1,
+      "reloc_order": "EXACT"
+     },
+     "o15_384C_0152": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 17,
+      "relocations": 10,
+      "reloc_order": "GROUPED"
+     },
+     "MenuQuit": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 7,
+      "relocations": 2,
+      "reloc_order": "EXACT"
+     },
+     "o15_384C_0239": {
+      "exact": false,
+      "reasons": [
+       "length 330 != target 326",
+       "bytes differ (first at +0x4, 225 differing)",
+       "relocation set differs (17 vs 17)"
+      ],
+      "fixups": 20,
+      "relocations": 17,
+      "reloc_order": "EXACT"
+     },
+     "SetDefaultWindows": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 11,
+      "relocations": 9,
+      "reloc_order": "GROUPED"
+     },
+     "NewGame": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 46,
+      "relocations": 16,
+      "reloc_order": "GROUPED"
+     }
+    },
+    "exact": false,
+    "opaque_data": [],
+    "opaque_unmarked_bytes": 0,
+    "object_sha256": "a4c241734d9e7e0f35b0e8068d711d85c2b5be44ac7176c0b4c59b39d0042926",
+    "data": {
+     "_DATA": {
+      "exact": true,
+      "reasons": [],
+      "size": 213,
+      "reloc_order": "EXACT",
+      "start": 362118,
+      "class": "DATA",
+      "align": "word",
+      "far": false
+     },
+     "CONST": {
+      "exact": true,
+      "reasons": [],
+      "size": 24,
+      "reloc_order": "GROUPED",
+      "start": 385704,
+      "class": "CONST",
+      "align": "word",
+      "far": false
+     }
+    },
+    "data_only": false,
+    "communals": [],
+    "scaffold": [],
+    "inplace_drafts": []
+   },
+   "claims": [
+    "o15_384C_0000",
+    "LoadMonoPats",
+    "o15_384C_0125",
+    "o15_384C_0152",
+    "MenuQuit",
+    "o15_384C_0239",
+    "SetDefaultWindows",
+    "NewGame"
+   ],
+   "meta": {
+    "name": "draw-rect+print-after_font-unsigned_char",
+    "local": "draw",
+    "type": "unsigned char",
+    "value": 0,
+    "uses": "rect+print",
+    "initialization": "after_font"
+   },
+   "source_sha256": "5fa5d52bb98a9838ff5770fd1136d25cb6b5349da82ad248f046cb834d210ff2"
+  },
+  {
+   "name": "draw-print+clear-after_text-int",
+   "file": "D:\\Prog\\simant_recon\\build\\workers\\fleet_s15\\variants\\06_controls\\000_draw-print_clear-after_text-int.c",
+   "why": "",
+   "result": {
+    "compile_ok": true,
+    "claims": {
+     "o15_384C_0000": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 3,
+      "relocations": 1,
+      "reloc_order": "EXACT"
+     },
+     "LoadMonoPats": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 11,
+      "relocations": 7,
+      "reloc_order": "GROUPED"
+     },
+     "o15_384C_0125": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 1,
+      "relocations": 1,
+      "reloc_order": "EXACT"
+     },
+     "o15_384C_0152": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 17,
+      "relocations": 10,
+      "reloc_order": "GROUPED"
+     },
+     "MenuQuit": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 7,
+      "relocations": 2,
+      "reloc_order": "EXACT"
+     },
+     "o15_384C_0239": {
+      "exact": false,
+      "reasons": [
+       "length 331 != target 326",
+       "bytes differ (first at +0x4, 254 differing)",
+       "relocation set differs (17 vs 17)"
+      ],
+      "fixups": 20,
+      "relocations": 17,
+      "reloc_order": "EXACT"
+     },
+     "SetDefaultWindows": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 11,
+      "relocations": 9,
+      "reloc_order": "GROUPED"
+     },
+     "NewGame": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 46,
+      "relocations": 16,
+      "reloc_order": "GROUPED"
+     }
+    },
+    "exact": false,
+    "opaque_data": [],
+    "opaque_unmarked_bytes": 0,
+    "object_sha256": "4b5877dbc809d9f2f8dbf67f1b8822bd2729368092be761889dbba6cda2c3558",
+    "data": {
+     "_DATA": {
+      "exact": true,
+      "reasons": [],
+      "size": 213,
+      "reloc_order": "EXACT",
+      "start": 362118,
+      "class": "DATA",
+      "align": "word",
+      "far": false
+     },
+     "CONST": {
+      "exact": true,
+      "reasons": [],
+      "size": 24,
+      "reloc_order": "GROUPED",
+      "start": 385704,
+      "class": "CONST",
+      "align": "word",
+      "far": false
+     }
+    },
+    "data_only": false,
+    "communals": [],
+    "scaffold": [],
+    "inplace_drafts": []
+   },
+   "claims": [
+    "o15_384C_0000",
+    "LoadMonoPats",
+    "o15_384C_0125",
+    "o15_384C_0152",
+    "MenuQuit",
+    "o15_384C_0239",
+    "SetDefaultWindows",
+    "NewGame"
+   ],
+   "meta": {
+    "name": "draw-print+clear-after_text-int",
+    "local": "draw",
+    "type": "int",
+    "value": 0,
+    "uses": "print+clear",
+    "initialization": "after_text"
+   },
+   "source_sha256": "cfdcb58933284f4cfdba8bc6c07ca8b78439abd032f95b437a76d399db6e8db7"
+  },
+  {
+   "name": "draw-print+clear-after_text-unsigned",
+   "file": "D:\\Prog\\simant_recon\\build\\workers\\fleet_s15\\variants\\06_controls\\001_draw-print_clear-after_text-unsigned.c",
+   "why": "",
+   "result": {
+    "compile_ok": true,
+    "claims": {
+     "o15_384C_0000": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 3,
+      "relocations": 1,
+      "reloc_order": "EXACT"
+     },
+     "LoadMonoPats": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 11,
+      "relocations": 7,
+      "reloc_order": "GROUPED"
+     },
+     "o15_384C_0125": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 1,
+      "relocations": 1,
+      "reloc_order": "EXACT"
+     },
+     "o15_384C_0152": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 17,
+      "relocations": 10,
+      "reloc_order": "GROUPED"
+     },
+     "MenuQuit": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 7,
+      "relocations": 2,
+      "reloc_order": "EXACT"
+     },
+     "o15_384C_0239": {
+      "exact": false,
+      "reasons": [
+       "length 331 != target 326",
+       "bytes differ (first at +0x4, 254 differing)",
+       "relocation set differs (17 vs 17)"
+      ],
+      "fixups": 20,
+      "relocations": 17,
+      "reloc_order": "EXACT"
+     },
+     "SetDefaultWindows": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 11,
+      "relocations": 9,
+      "reloc_order": "GROUPED"
+     },
+     "NewGame": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 46,
+      "relocations": 16,
+      "reloc_order": "GROUPED"
+     }
+    },
+    "exact": false,
+    "opaque_data": [],
+    "opaque_unmarked_bytes": 0,
+    "object_sha256": "c4a0e3ceec3c285c213ff187810b37e390375328d63c643f96dfe9d03dd3b1db",
+    "data": {
+     "_DATA": {
+      "exact": true,
+      "reasons": [],
+      "size": 213,
+      "reloc_order": "EXACT",
+      "start": 362118,
+      "class": "DATA",
+      "align": "word",
+      "far": false
+     },
+     "CONST": {
+      "exact": true,
+      "reasons": [],
+      "size": 24,
+      "reloc_order": "GROUPED",
+      "start": 385704,
+      "class": "CONST",
+      "align": "word",
+      "far": false
+     }
+    },
+    "data_only": false,
+    "communals": [],
+    "scaffold": [],
+    "inplace_drafts": []
+   },
+   "claims": [
+    "o15_384C_0000",
+    "LoadMonoPats",
+    "o15_384C_0125",
+    "o15_384C_0152",
+    "MenuQuit",
+    "o15_384C_0239",
+    "SetDefaultWindows",
+    "NewGame"
+   ],
+   "meta": {
+    "name": "draw-print+clear-after_text-unsigned",
+    "local": "draw",
+    "type": "unsigned",
+    "value": 0,
+    "uses": "print+clear",
+    "initialization": "after_text"
+   },
+   "source_sha256": "bfac54dec76643b5c26d0788cd08d365a0076b4ef1d728de7bdc4976b9486128"
+  },
+  {
+   "name": "draw-print+clear-after_text-unsigned_char",
+   "file": "D:\\Prog\\simant_recon\\build\\workers\\fleet_s15\\variants\\06_controls\\002_draw-print_clear-after_text-unsigned_char.c",
+   "why": "",
+   "result": {
+    "compile_ok": true,
+    "claims": {
+     "o15_384C_0000": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 3,
+      "relocations": 1,
+      "reloc_order": "EXACT"
+     },
+     "LoadMonoPats": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 11,
+      "relocations": 7,
+      "reloc_order": "GROUPED"
+     },
+     "o15_384C_0125": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 1,
+      "relocations": 1,
+      "reloc_order": "EXACT"
+     },
+     "o15_384C_0152": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 17,
+      "relocations": 10,
+      "reloc_order": "GROUPED"
+     },
+     "MenuQuit": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 7,
+      "relocations": 2,
+      "reloc_order": "EXACT"
+     },
+     "o15_384C_0239": {
+      "exact": false,
+      "reasons": [
+       "length 330 != target 326",
+       "bytes differ (first at +0x4, 248 differing)",
+       "relocation set differs (17 vs 17)"
+      ],
+      "fixups": 20,
+      "relocations": 17,
+      "reloc_order": "EXACT"
+     },
+     "SetDefaultWindows": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 11,
+      "relocations": 9,
+      "reloc_order": "GROUPED"
+     },
+     "NewGame": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 46,
+      "relocations": 16,
+      "reloc_order": "GROUPED"
+     }
+    },
+    "exact": false,
+    "opaque_data": [],
+    "opaque_unmarked_bytes": 0,
+    "object_sha256": "c15583f9c20f38db2f0b1a5da0be6f949a4d5a128a6aae6f4597b544a5862458",
+    "data": {
+     "_DATA": {
+      "exact": true,
+      "reasons": [],
+      "size": 213,
+      "reloc_order": "EXACT",
+      "start": 362118,
+      "class": "DATA",
+      "align": "word",
+      "far": false
+     },
+     "CONST": {
+      "exact": true,
+      "reasons": [],
+      "size": 24,
+      "reloc_order": "GROUPED",
+      "start": 385704,
+      "class": "CONST",
+      "align": "word",
+      "far": false
+     }
+    },
+    "data_only": false,
+    "communals": [],
+    "scaffold": [],
+    "inplace_drafts": []
+   },
+   "claims": [
+    "o15_384C_0000",
+    "LoadMonoPats",
+    "o15_384C_0125",
+    "o15_384C_0152",
+    "MenuQuit",
+    "o15_384C_0239",
+    "SetDefaultWindows",
+    "NewGame"
+   ],
+   "meta": {
+    "name": "draw-print+clear-after_text-unsigned_char",
+    "local": "draw",
+    "type": "unsigned char",
+    "value": 0,
+    "uses": "print+clear",
+    "initialization": "after_text"
+   },
+   "source_sha256": "f8c3b66aa63d0eaecc54f1001f9f6b16388bba0853ef822aa3776590aa9bb0ed"
+  },
+  {
+   "name": "draw-print+clear-after_font-int",
+   "file": "D:\\Prog\\simant_recon\\build\\workers\\fleet_s15\\variants\\06_controls\\003_draw-print_clear-after_font-int.c",
+   "why": "",
+   "result": {
+    "compile_ok": true,
+    "claims": {
+     "o15_384C_0000": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 3,
+      "relocations": 1,
+      "reloc_order": "EXACT"
+     },
+     "LoadMonoPats": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 11,
+      "relocations": 7,
+      "reloc_order": "GROUPED"
+     },
+     "o15_384C_0125": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 1,
+      "relocations": 1,
+      "reloc_order": "EXACT"
+     },
+     "o15_384C_0152": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 17,
+      "relocations": 10,
+      "reloc_order": "GROUPED"
+     },
+     "MenuQuit": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 7,
+      "relocations": 2,
+      "reloc_order": "EXACT"
+     },
+     "o15_384C_0239": {
+      "exact": false,
+      "reasons": [
+       "length 331 != target 326",
+       "bytes differ (first at +0x4, 233 differing)",
+       "relocation set differs (17 vs 17)"
+      ],
+      "fixups": 20,
+      "relocations": 17,
+      "reloc_order": "EXACT"
+     },
+     "SetDefaultWindows": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 11,
+      "relocations": 9,
+      "reloc_order": "GROUPED"
+     },
+     "NewGame": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 46,
+      "relocations": 16,
+      "reloc_order": "GROUPED"
+     }
+    },
+    "exact": false,
+    "opaque_data": [],
+    "opaque_unmarked_bytes": 0,
+    "object_sha256": "d265b06de1b34aad565566e20b5625e5f94d227bf6157ae96f77f975158eb7d3",
+    "data": {
+     "_DATA": {
+      "exact": true,
+      "reasons": [],
+      "size": 213,
+      "reloc_order": "EXACT",
+      "start": 362118,
+      "class": "DATA",
+      "align": "word",
+      "far": false
+     },
+     "CONST": {
+      "exact": true,
+      "reasons": [],
+      "size": 24,
+      "reloc_order": "GROUPED",
+      "start": 385704,
+      "class": "CONST",
+      "align": "word",
+      "far": false
+     }
+    },
+    "data_only": false,
+    "communals": [],
+    "scaffold": [],
+    "inplace_drafts": []
+   },
+   "claims": [
+    "o15_384C_0000",
+    "LoadMonoPats",
+    "o15_384C_0125",
+    "o15_384C_0152",
+    "MenuQuit",
+    "o15_384C_0239",
+    "SetDefaultWindows",
+    "NewGame"
+   ],
+   "meta": {
+    "name": "draw-print+clear-after_font-int",
+    "local": "draw",
+    "type": "int",
+    "value": 0,
+    "uses": "print+clear",
+    "initialization": "after_font"
+   },
+   "source_sha256": "95f2ae4f01d2affcdb171ef9e9f7fda33397727631af39325c677ccdc678f517"
+  },
+  {
+   "name": "draw-print+clear-after_font-unsigned",
+   "file": "D:\\Prog\\simant_recon\\build\\workers\\fleet_s15\\variants\\06_controls\\004_draw-print_clear-after_font-unsigned.c",
+   "why": "",
+   "result": {
+    "compile_ok": true,
+    "claims": {
+     "o15_384C_0000": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 3,
+      "relocations": 1,
+      "reloc_order": "EXACT"
+     },
+     "LoadMonoPats": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 11,
+      "relocations": 7,
+      "reloc_order": "GROUPED"
+     },
+     "o15_384C_0125": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 1,
+      "relocations": 1,
+      "reloc_order": "EXACT"
+     },
+     "o15_384C_0152": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 17,
+      "relocations": 10,
+      "reloc_order": "GROUPED"
+     },
+     "MenuQuit": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 7,
+      "relocations": 2,
+      "reloc_order": "EXACT"
+     },
+     "o15_384C_0239": {
+      "exact": false,
+      "reasons": [
+       "length 331 != target 326",
+       "bytes differ (first at +0x4, 233 differing)",
+       "relocation set differs (17 vs 17)"
+      ],
+      "fixups": 20,
+      "relocations": 17,
+      "reloc_order": "EXACT"
+     },
+     "SetDefaultWindows": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 11,
+      "relocations": 9,
+      "reloc_order": "GROUPED"
+     },
+     "NewGame": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 46,
+      "relocations": 16,
+      "reloc_order": "GROUPED"
+     }
+    },
+    "exact": false,
+    "opaque_data": [],
+    "opaque_unmarked_bytes": 0,
+    "object_sha256": "88a6151d0604e93cdd04f002f4dd85f83839767fc302b52d3ee34824f07a4794",
+    "data": {
+     "_DATA": {
+      "exact": true,
+      "reasons": [],
+      "size": 213,
+      "reloc_order": "EXACT",
+      "start": 362118,
+      "class": "DATA",
+      "align": "word",
+      "far": false
+     },
+     "CONST": {
+      "exact": true,
+      "reasons": [],
+      "size": 24,
+      "reloc_order": "GROUPED",
+      "start": 385704,
+      "class": "CONST",
+      "align": "word",
+      "far": false
+     }
+    },
+    "data_only": false,
+    "communals": [],
+    "scaffold": [],
+    "inplace_drafts": []
+   },
+   "claims": [
+    "o15_384C_0000",
+    "LoadMonoPats",
+    "o15_384C_0125",
+    "o15_384C_0152",
+    "MenuQuit",
+    "o15_384C_0239",
+    "SetDefaultWindows",
+    "NewGame"
+   ],
+   "meta": {
+    "name": "draw-print+clear-after_font-unsigned",
+    "local": "draw",
+    "type": "unsigned",
+    "value": 0,
+    "uses": "print+clear",
+    "initialization": "after_font"
+   },
+   "source_sha256": "e7ed3cc3d92716fc8bc84faf127f909045bd66065665912cb646945d7ca20e74"
+  },
+  {
+   "name": "draw-print+clear-after_font-unsigned_char",
+   "file": "D:\\Prog\\simant_recon\\build\\workers\\fleet_s15\\variants\\06_controls\\005_draw-print_clear-after_font-unsigned_char.c",
+   "why": "",
+   "result": {
+    "compile_ok": true,
+    "claims": {
+     "o15_384C_0000": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 3,
+      "relocations": 1,
+      "reloc_order": "EXACT"
+     },
+     "LoadMonoPats": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 11,
+      "relocations": 7,
+      "reloc_order": "GROUPED"
+     },
+     "o15_384C_0125": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 1,
+      "relocations": 1,
+      "reloc_order": "EXACT"
+     },
+     "o15_384C_0152": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 17,
+      "relocations": 10,
+      "reloc_order": "GROUPED"
+     },
+     "MenuQuit": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 7,
+      "relocations": 2,
+      "reloc_order": "EXACT"
+     },
+     "o15_384C_0239": {
+      "exact": false,
+      "reasons": [
+       "length 330 != target 326",
+       "bytes differ (first at +0x4, 225 differing)",
+       "relocation set differs (17 vs 17)"
+      ],
+      "fixups": 20,
+      "relocations": 17,
+      "reloc_order": "EXACT"
+     },
+     "SetDefaultWindows": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 11,
+      "relocations": 9,
+      "reloc_order": "GROUPED"
+     },
+     "NewGame": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 46,
+      "relocations": 16,
+      "reloc_order": "GROUPED"
+     }
+    },
+    "exact": false,
+    "opaque_data": [],
+    "opaque_unmarked_bytes": 0,
+    "object_sha256": "a4c241734d9e7e0f35b0e8068d711d85c2b5be44ac7176c0b4c59b39d0042926",
+    "data": {
+     "_DATA": {
+      "exact": true,
+      "reasons": [],
+      "size": 213,
+      "reloc_order": "EXACT",
+      "start": 362118,
+      "class": "DATA",
+      "align": "word",
+      "far": false
+     },
+     "CONST": {
+      "exact": true,
+      "reasons": [],
+      "size": 24,
+      "reloc_order": "GROUPED",
+      "start": 385704,
+      "class": "CONST",
+      "align": "word",
+      "far": false
+     }
+    },
+    "data_only": false,
+    "communals": [],
+    "scaffold": [],
+    "inplace_drafts": []
+   },
+   "claims": [
+    "o15_384C_0000",
+    "LoadMonoPats",
+    "o15_384C_0125",
+    "o15_384C_0152",
+    "MenuQuit",
+    "o15_384C_0239",
+    "SetDefaultWindows",
+    "NewGame"
+   ],
+   "meta": {
+    "name": "draw-print+clear-after_font-unsigned_char",
+    "local": "draw",
+    "type": "unsigned char",
+    "value": 0,
+    "uses": "print+clear",
+    "initialization": "after_font"
+   },
+   "source_sha256": "805d5b4c454d5d54889fbd03f59fa62fd24e9c51b07678419bc07c08c1df7624"
+  },
+  {
+   "name": "draw-print+clear-before_print-int",
+   "file": "D:\\Prog\\simant_recon\\build\\workers\\fleet_s15\\variants\\07_controls\\000_draw-print_clear-before_print-int.c",
+   "why": "",
+   "result": {
+    "compile_ok": true,
+    "claims": {
+     "o15_384C_0000": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 3,
+      "relocations": 1,
+      "reloc_order": "EXACT"
+     },
+     "LoadMonoPats": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 11,
+      "relocations": 7,
+      "reloc_order": "GROUPED"
+     },
+     "o15_384C_0125": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 1,
+      "relocations": 1,
+      "reloc_order": "EXACT"
+     },
+     "o15_384C_0152": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 17,
+      "relocations": 10,
+      "reloc_order": "GROUPED"
+     },
+     "MenuQuit": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 7,
+      "relocations": 2,
+      "reloc_order": "EXACT"
+     },
+     "o15_384C_0239": {
+      "exact": false,
+      "reasons": [
+       "bytes differ (first at +0x42, 2 differing)"
+      ],
+      "fixups": 20,
+      "relocations": 17,
+      "reloc_order": "GROUPED"
+     },
+     "SetDefaultWindows": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 11,
+      "relocations": 9,
+      "reloc_order": "GROUPED"
+     },
+     "NewGame": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 46,
+      "relocations": 16,
+      "reloc_order": "GROUPED"
+     }
+    },
+    "exact": false,
+    "opaque_data": [],
+    "opaque_unmarked_bytes": 0,
+    "object_sha256": "151a95aaa5a88ba86667027a696ab324c5cee1bed75f13a09f0a14e4f0f7bf50",
+    "data": {
+     "_DATA": {
+      "exact": true,
+      "reasons": [],
+      "size": 213,
+      "reloc_order": "EXACT",
+      "start": 362118,
+      "class": "DATA",
+      "align": "word",
+      "far": false
+     },
+     "CONST": {
+      "exact": true,
+      "reasons": [],
+      "size": 24,
+      "reloc_order": "GROUPED",
+      "start": 385704,
+      "class": "CONST",
+      "align": "word",
+      "far": false
+     }
+    },
+    "data_only": false,
+    "communals": [],
+    "scaffold": [],
+    "inplace_drafts": []
+   },
+   "claims": [
+    "o15_384C_0000",
+    "LoadMonoPats",
+    "o15_384C_0125",
+    "o15_384C_0152",
+    "MenuQuit",
+    "o15_384C_0239",
+    "SetDefaultWindows",
+    "NewGame"
+   ],
+   "meta": {
+    "name": "draw-print+clear-before_print-int",
+    "local": "draw",
+    "type": "int",
+    "value": 0,
+    "uses": "print+clear",
+    "initialization": "before_print"
+   },
+   "source_sha256": "66e7402eb306f2c9f75b736da42f57a2d4de65992cad06e91d60a1ec804caea5"
+  },
+  {
+   "name": "draw-print+clear-before_print-unsigned",
+   "file": "D:\\Prog\\simant_recon\\build\\workers\\fleet_s15\\variants\\07_controls\\001_draw-print_clear-before_print-unsigned.c",
+   "why": "",
+   "result": {
+    "compile_ok": true,
+    "claims": {
+     "o15_384C_0000": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 3,
+      "relocations": 1,
+      "reloc_order": "EXACT"
+     },
+     "LoadMonoPats": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 11,
+      "relocations": 7,
+      "reloc_order": "GROUPED"
+     },
+     "o15_384C_0125": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 1,
+      "relocations": 1,
+      "reloc_order": "EXACT"
+     },
+     "o15_384C_0152": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 17,
+      "relocations": 10,
+      "reloc_order": "GROUPED"
+     },
+     "MenuQuit": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 7,
+      "relocations": 2,
+      "reloc_order": "EXACT"
+     },
+     "o15_384C_0239": {
+      "exact": false,
+      "reasons": [
+       "bytes differ (first at +0x42, 2 differing)"
+      ],
+      "fixups": 20,
+      "relocations": 17,
+      "reloc_order": "GROUPED"
+     },
+     "SetDefaultWindows": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 11,
+      "relocations": 9,
+      "reloc_order": "GROUPED"
+     },
+     "NewGame": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 46,
+      "relocations": 16,
+      "reloc_order": "GROUPED"
+     }
+    },
+    "exact": false,
+    "opaque_data": [],
+    "opaque_unmarked_bytes": 0,
+    "object_sha256": "d4cb4cc108ebdd9dd17e2b4e1dace75cbc7688441884888b1f7b27711266bcd9",
+    "data": {
+     "_DATA": {
+      "exact": true,
+      "reasons": [],
+      "size": 213,
+      "reloc_order": "EXACT",
+      "start": 362118,
+      "class": "DATA",
+      "align": "word",
+      "far": false
+     },
+     "CONST": {
+      "exact": true,
+      "reasons": [],
+      "size": 24,
+      "reloc_order": "GROUPED",
+      "start": 385704,
+      "class": "CONST",
+      "align": "word",
+      "far": false
+     }
+    },
+    "data_only": false,
+    "communals": [],
+    "scaffold": [],
+    "inplace_drafts": []
+   },
+   "claims": [
+    "o15_384C_0000",
+    "LoadMonoPats",
+    "o15_384C_0125",
+    "o15_384C_0152",
+    "MenuQuit",
+    "o15_384C_0239",
+    "SetDefaultWindows",
+    "NewGame"
+   ],
+   "meta": {
+    "name": "draw-print+clear-before_print-unsigned",
+    "local": "draw",
+    "type": "unsigned",
+    "value": 0,
+    "uses": "print+clear",
+    "initialization": "before_print"
+   },
+   "source_sha256": "83f824b43a5b00d85d21374020f63790095de7bdf0da66a72320e6dc34a1c241"
+  },
+  {
+   "name": "draw-print+clear-before_print-unsigned_char",
+   "file": "D:\\Prog\\simant_recon\\build\\workers\\fleet_s15\\variants\\07_controls\\002_draw-print_clear-before_print-unsigned_char.c",
+   "why": "",
+   "result": {
+    "compile_ok": true,
+    "claims": {
+     "o15_384C_0000": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 3,
+      "relocations": 1,
+      "reloc_order": "EXACT"
+     },
+     "LoadMonoPats": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 11,
+      "relocations": 7,
+      "reloc_order": "GROUPED"
+     },
+     "o15_384C_0125": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 1,
+      "relocations": 1,
+      "reloc_order": "EXACT"
+     },
+     "o15_384C_0152": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 17,
+      "relocations": 10,
+      "reloc_order": "GROUPED"
+     },
+     "MenuQuit": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 7,
+      "relocations": 2,
+      "reloc_order": "EXACT"
+     },
+     "o15_384C_0239": {
+      "exact": false,
+      "reasons": [
+       "bytes differ (first at +0x42, 2 differing)"
+      ],
+      "fixups": 20,
+      "relocations": 17,
+      "reloc_order": "GROUPED"
+     },
+     "SetDefaultWindows": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 11,
+      "relocations": 9,
+      "reloc_order": "GROUPED"
+     },
+     "NewGame": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 46,
+      "relocations": 16,
+      "reloc_order": "GROUPED"
+     }
+    },
+    "exact": false,
+    "opaque_data": [],
+    "opaque_unmarked_bytes": 0,
+    "object_sha256": "e684fc7d9fc49c8d995d4934d850af471f6c502fb49098acd4ced6b9de622abb",
+    "data": {
+     "_DATA": {
+      "exact": true,
+      "reasons": [],
+      "size": 213,
+      "reloc_order": "EXACT",
+      "start": 362118,
+      "class": "DATA",
+      "align": "word",
+      "far": false
+     },
+     "CONST": {
+      "exact": true,
+      "reasons": [],
+      "size": 24,
+      "reloc_order": "GROUPED",
+      "start": 385704,
+      "class": "CONST",
+      "align": "word",
+      "far": false
+     }
+    },
+    "data_only": false,
+    "communals": [],
+    "scaffold": [],
+    "inplace_drafts": []
+   },
+   "claims": [
+    "o15_384C_0000",
+    "LoadMonoPats",
+    "o15_384C_0125",
+    "o15_384C_0152",
+    "MenuQuit",
+    "o15_384C_0239",
+    "SetDefaultWindows",
+    "NewGame"
+   ],
+   "meta": {
+    "name": "draw-print+clear-before_print-unsigned_char",
+    "local": "draw",
+    "type": "unsigned char",
+    "value": 0,
+    "uses": "print+clear",
+    "initialization": "before_print"
+   },
+   "source_sha256": "cdfb4b6b8c3e4179c28e8f7ebdf79561d304ea6c1d9b28f28afcfa17bfc29b24"
+  },
+  {
+   "name": "window-2100-entry",
+   "file": "D:\\Prog\\simant_recon\\build\\workers\\fleet_s15\\variants\\07_controls\\003_window-2100-entry.c",
+   "why": "",
+   "result": {
+    "compile_ok": true,
+    "claims": {
+     "o15_384C_0000": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 3,
+      "relocations": 1,
+      "reloc_order": "EXACT"
+     },
+     "LoadMonoPats": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 11,
+      "relocations": 7,
+      "reloc_order": "GROUPED"
+     },
+     "o15_384C_0125": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 1,
+      "relocations": 1,
+      "reloc_order": "EXACT"
+     },
+     "o15_384C_0152": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 17,
+      "relocations": 10,
+      "reloc_order": "GROUPED"
+     },
+     "MenuQuit": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 7,
+      "relocations": 2,
+      "reloc_order": "EXACT"
+     },
+     "o15_384C_0239": {
+      "exact": false,
+      "reasons": [
+       "length 329 != target 326",
+       "bytes differ (first at +0x4, 304 differing)",
+       "relocation set differs (17 vs 17)"
+      ],
+      "fixups": 20,
+      "relocations": 17,
+      "reloc_order": "EXACT"
+     },
+     "SetDefaultWindows": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 11,
+      "relocations": 9,
+      "reloc_order": "GROUPED"
+     },
+     "NewGame": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 46,
+      "relocations": 16,
+      "reloc_order": "GROUPED"
+     }
+    },
+    "exact": false,
+    "opaque_data": [],
+    "opaque_unmarked_bytes": 0,
+    "object_sha256": "3dd7081f13ba5e8e5096e3fb81f98a988fba4d92fb13ea69e82a66ed179fdf96",
+    "data": {
+     "_DATA": {
+      "exact": true,
+      "reasons": [],
+      "size": 213,
+      "reloc_order": "EXACT",
+      "start": 362118,
+      "class": "DATA",
+      "align": "word",
+      "far": false
+     },
+     "CONST": {
+      "exact": true,
+      "reasons": [],
+      "size": 24,
+      "reloc_order": "GROUPED",
+      "start": 385704,
+      "class": "CONST",
+      "align": "word",
+      "far": false
+     }
+    },
+    "data_only": false,
+    "communals": [],
+    "scaffold": [],
+    "inplace_drafts": []
+   },
+   "claims": [
+    "o15_384C_0000",
+    "LoadMonoPats",
+    "o15_384C_0125",
+    "o15_384C_0152",
+    "MenuQuit",
+    "o15_384C_0239",
+    "SetDefaultWindows",
+    "NewGame"
+   ],
+   "meta": {
+    "name": "window-2100-entry",
+    "local": "winID",
+    "value": "0x2100",
+    "uses": [
+     "win_Open(0x2100);",
+     "win_GetObjRect(0x2100, &r);",
+     "win_Close(0x2100);"
+    ],
+    "initialization": "entry"
+   },
+   "source_sha256": "ada9b1fa2e724640311557c65532c156c789c6995bc7a8ddebc847c42faf0234"
+  },
+  {
+   "name": "window-2100-after_open",
+   "file": "D:\\Prog\\simant_recon\\build\\workers\\fleet_s15\\variants\\07_controls\\004_window-2100-after_open.c",
+   "why": "",
+   "result": {
+    "compile_ok": true,
+    "claims": {
+     "o15_384C_0000": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 3,
+      "relocations": 1,
+      "reloc_order": "EXACT"
+     },
+     "LoadMonoPats": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 11,
+      "relocations": 7,
+      "reloc_order": "GROUPED"
+     },
+     "o15_384C_0125": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 1,
+      "relocations": 1,
+      "reloc_order": "EXACT"
+     },
+     "o15_384C_0152": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 17,
+      "relocations": 10,
+      "reloc_order": "GROUPED"
+     },
+     "MenuQuit": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 7,
+      "relocations": 2,
+      "reloc_order": "EXACT"
+     },
+     "o15_384C_0239": {
+      "exact": false,
+      "reasons": [
+       "length 331 != target 326",
+       "bytes differ (first at +0x4, 296 differing)",
+       "relocation set differs (17 vs 17)"
+      ],
+      "fixups": 20,
+      "relocations": 17,
+      "reloc_order": "EXACT"
+     },
+     "SetDefaultWindows": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 11,
+      "relocations": 9,
+      "reloc_order": "GROUPED"
+     },
+     "NewGame": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 46,
+      "relocations": 16,
+      "reloc_order": "GROUPED"
+     }
+    },
+    "exact": false,
+    "opaque_data": [],
+    "opaque_unmarked_bytes": 0,
+    "object_sha256": "f3b582fb71f73ab71e6d7919693548ebc62df90aa9662798bad6efdcaeebb384",
+    "data": {
+     "_DATA": {
+      "exact": true,
+      "reasons": [],
+      "size": 213,
+      "reloc_order": "EXACT",
+      "start": 362118,
+      "class": "DATA",
+      "align": "word",
+      "far": false
+     },
+     "CONST": {
+      "exact": true,
+      "reasons": [],
+      "size": 24,
+      "reloc_order": "GROUPED",
+      "start": 385704,
+      "class": "CONST",
+      "align": "word",
+      "far": false
+     }
+    },
+    "data_only": false,
+    "communals": [],
+    "scaffold": [],
+    "inplace_drafts": []
+   },
+   "claims": [
+    "o15_384C_0000",
+    "LoadMonoPats",
+    "o15_384C_0125",
+    "o15_384C_0152",
+    "MenuQuit",
+    "o15_384C_0239",
+    "SetDefaultWindows",
+    "NewGame"
+   ],
+   "meta": {
+    "name": "window-2100-after_open",
+    "local": "winID",
+    "value": "0x2100",
+    "uses": [
+     "win_GetObjRect(0x2100, &r);",
+     "win_Close(0x2100);"
+    ],
+    "initialization": "after_open"
+   },
+   "source_sha256": "a5aaf3a6064263e6e273ce77ef97975b3938e2ef7377fa12ac5591cff8f043b9"
+  },
+  {
+   "name": "window-2100-after_handle",
+   "file": "D:\\Prog\\simant_recon\\build\\workers\\fleet_s15\\variants\\07_controls\\005_window-2100-after_handle.c",
+   "why": "",
+   "result": {
+    "compile_ok": true,
+    "claims": {
+     "o15_384C_0000": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 3,
+      "relocations": 1,
+      "reloc_order": "EXACT"
+     },
+     "LoadMonoPats": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 11,
+      "relocations": 7,
+      "reloc_order": "GROUPED"
+     },
+     "o15_384C_0125": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 1,
+      "relocations": 1,
+      "reloc_order": "EXACT"
+     },
+     "o15_384C_0152": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 17,
+      "relocations": 10,
+      "reloc_order": "GROUPED"
+     },
+     "MenuQuit": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 7,
+      "relocations": 2,
+      "reloc_order": "EXACT"
+     },
+     "o15_384C_0239": {
+      "exact": false,
+      "reasons": [
+       "length 331 != target 326",
+       "bytes differ (first at +0x4, 296 differing)",
+       "relocation set differs (17 vs 17)"
+      ],
+      "fixups": 20,
+      "relocations": 17,
+      "reloc_order": "EXACT"
+     },
+     "SetDefaultWindows": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 11,
+      "relocations": 9,
+      "reloc_order": "GROUPED"
+     },
+     "NewGame": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 46,
+      "relocations": 16,
+      "reloc_order": "GROUPED"
+     }
+    },
+    "exact": false,
+    "opaque_data": [],
+    "opaque_unmarked_bytes": 0,
+    "object_sha256": "682aa8a1661ca640c8fa9e2bf4e9341c870badd7b3b5539ef2a8d056b3153930",
+    "data": {
+     "_DATA": {
+      "exact": true,
+      "reasons": [],
+      "size": 213,
+      "reloc_order": "EXACT",
+      "start": 362118,
+      "class": "DATA",
+      "align": "word",
+      "far": false
+     },
+     "CONST": {
+      "exact": true,
+      "reasons": [],
+      "size": 24,
+      "reloc_order": "GROUPED",
+      "start": 385704,
+      "class": "CONST",
+      "align": "word",
+      "far": false
+     }
+    },
+    "data_only": false,
+    "communals": [],
+    "scaffold": [],
+    "inplace_drafts": []
+   },
+   "claims": [
+    "o15_384C_0000",
+    "LoadMonoPats",
+    "o15_384C_0125",
+    "o15_384C_0152",
+    "MenuQuit",
+    "o15_384C_0239",
+    "SetDefaultWindows",
+    "NewGame"
+   ],
+   "meta": {
+    "name": "window-2100-after_handle",
+    "local": "winID",
+    "value": "0x2100",
+    "uses": [
+     "win_GetObjRect(0x2100, &r);",
+     "win_Close(0x2100);"
+    ],
+    "initialization": "after_handle"
+   },
+   "source_sha256": "0b1c6239d7bc7da501dc7276dfdc8d3310c1e871cc267e4872a9fdf5bf52fc3b"
+  },
+  {
+   "name": "window-2100-after_text",
+   "file": "D:\\Prog\\simant_recon\\build\\workers\\fleet_s15\\variants\\08_controls\\000_window-2100-after_text.c",
+   "why": "",
+   "result": {
+    "compile_ok": true,
+    "claims": {
+     "o15_384C_0000": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 3,
+      "relocations": 1,
+      "reloc_order": "EXACT"
+     },
+     "LoadMonoPats": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 11,
+      "relocations": 7,
+      "reloc_order": "GROUPED"
+     },
+     "o15_384C_0125": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 1,
+      "relocations": 1,
+      "reloc_order": "EXACT"
+     },
+     "o15_384C_0152": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 17,
+      "relocations": 10,
+      "reloc_order": "GROUPED"
+     },
+     "MenuQuit": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 7,
+      "relocations": 2,
+      "reloc_order": "EXACT"
+     },
+     "o15_384C_0239": {
+      "exact": false,
+      "reasons": [
+       "length 331 != target 326",
+       "bytes differ (first at +0x4, 254 differing)",
+       "relocation set differs (17 vs 17)"
+      ],
+      "fixups": 20,
+      "relocations": 17,
+      "reloc_order": "EXACT"
+     },
+     "SetDefaultWindows": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 11,
+      "relocations": 9,
+      "reloc_order": "GROUPED"
+     },
+     "NewGame": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 46,
+      "relocations": 16,
+      "reloc_order": "GROUPED"
+     }
+    },
+    "exact": false,
+    "opaque_data": [],
+    "opaque_unmarked_bytes": 0,
+    "object_sha256": "178edec1a8248c8104b384d2d50b6671c2ad0876e811de7f5744883827acac01",
+    "data": {
+     "_DATA": {
+      "exact": true,
+      "reasons": [],
+      "size": 213,
+      "reloc_order": "EXACT",
+      "start": 362118,
+      "class": "DATA",
+      "align": "word",
+      "far": false
+     },
+     "CONST": {
+      "exact": true,
+      "reasons": [],
+      "size": 24,
+      "reloc_order": "GROUPED",
+      "start": 385704,
+      "class": "CONST",
+      "align": "word",
+      "far": false
+     }
+    },
+    "data_only": false,
+    "communals": [],
+    "scaffold": [],
+    "inplace_drafts": []
+   },
+   "claims": [
+    "o15_384C_0000",
+    "LoadMonoPats",
+    "o15_384C_0125",
+    "o15_384C_0152",
+    "MenuQuit",
+    "o15_384C_0239",
+    "SetDefaultWindows",
+    "NewGame"
+   ],
+   "meta": {
+    "name": "window-2100-after_text",
+    "local": "winID",
+    "value": "0x2100",
+    "uses": [
+     "win_GetObjRect(0x2100, &r);",
+     "win_Close(0x2100);"
+    ],
+    "initialization": "after_text"
+   },
+   "source_sha256": "44018be52af2bc284806dabbdc08f07bf3ba056e33f3d366256dbddac7273731"
+  },
+  {
+   "name": "window-2100-after_font",
+   "file": "D:\\Prog\\simant_recon\\build\\workers\\fleet_s15\\variants\\08_controls\\001_window-2100-after_font.c",
+   "why": "",
+   "result": {
+    "compile_ok": true,
+    "claims": {
+     "o15_384C_0000": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 3,
+      "relocations": 1,
+      "reloc_order": "EXACT"
+     },
+     "LoadMonoPats": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 11,
+      "relocations": 7,
+      "reloc_order": "GROUPED"
+     },
+     "o15_384C_0125": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 1,
+      "relocations": 1,
+      "reloc_order": "EXACT"
+     },
+     "o15_384C_0152": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 17,
+      "relocations": 10,
+      "reloc_order": "GROUPED"
+     },
+     "MenuQuit": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 7,
+      "relocations": 2,
+      "reloc_order": "EXACT"
+     },
+     "o15_384C_0239": {
+      "exact": false,
+      "reasons": [
+       "length 331 != target 326",
+       "bytes differ (first at +0x4, 233 differing)",
+       "relocation set differs (17 vs 17)"
+      ],
+      "fixups": 20,
+      "relocations": 17,
+      "reloc_order": "EXACT"
+     },
+     "SetDefaultWindows": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 11,
+      "relocations": 9,
+      "reloc_order": "GROUPED"
+     },
+     "NewGame": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 46,
+      "relocations": 16,
+      "reloc_order": "GROUPED"
+     }
+    },
+    "exact": false,
+    "opaque_data": [],
+    "opaque_unmarked_bytes": 0,
+    "object_sha256": "14a8cb6c7898f8f71205778d126d3fd96cac274cd0bfcc155d0f7142f910adba",
+    "data": {
+     "_DATA": {
+      "exact": true,
+      "reasons": [],
+      "size": 213,
+      "reloc_order": "EXACT",
+      "start": 362118,
+      "class": "DATA",
+      "align": "word",
+      "far": false
+     },
+     "CONST": {
+      "exact": true,
+      "reasons": [],
+      "size": 24,
+      "reloc_order": "GROUPED",
+      "start": 385704,
+      "class": "CONST",
+      "align": "word",
+      "far": false
+     }
+    },
+    "data_only": false,
+    "communals": [],
+    "scaffold": [],
+    "inplace_drafts": []
+   },
+   "claims": [
+    "o15_384C_0000",
+    "LoadMonoPats",
+    "o15_384C_0125",
+    "o15_384C_0152",
+    "MenuQuit",
+    "o15_384C_0239",
+    "SetDefaultWindows",
+    "NewGame"
+   ],
+   "meta": {
+    "name": "window-2100-after_font",
+    "local": "winID",
+    "value": "0x2100",
+    "uses": [
+     "win_GetObjRect(0x2100, &r);",
+     "win_Close(0x2100);"
+    ],
+    "initialization": "after_font"
+   },
+   "source_sha256": "c006a86d7c9b656d72c94d971b13f1c71f9a5938e35d10f689b8c64795d3876d"
+  },
+  {
+   "name": "window-2101-after_text",
+   "file": "D:\\Prog\\simant_recon\\build\\workers\\fleet_s15\\variants\\08_controls\\002_window-2101-after_text.c",
+   "why": "",
+   "result": {
+    "compile_ok": true,
+    "claims": {
+     "o15_384C_0000": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 3,
+      "relocations": 1,
+      "reloc_order": "EXACT"
+     },
+     "LoadMonoPats": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 11,
+      "relocations": 7,
+      "reloc_order": "GROUPED"
+     },
+     "o15_384C_0125": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 1,
+      "relocations": 1,
+      "reloc_order": "EXACT"
+     },
+     "o15_384C_0152": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 17,
+      "relocations": 10,
+      "reloc_order": "GROUPED"
+     },
+     "MenuQuit": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 7,
+      "relocations": 2,
+      "reloc_order": "EXACT"
+     },
+     "o15_384C_0239": {
+      "exact": false,
+      "reasons": [
+       "length 331 != target 326",
+       "bytes differ (first at +0x4, 254 differing)",
+       "relocation set differs (17 vs 17)"
+      ],
+      "fixups": 20,
+      "relocations": 17,
+      "reloc_order": "EXACT"
+     },
+     "SetDefaultWindows": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 11,
+      "relocations": 9,
+      "reloc_order": "GROUPED"
+     },
+     "NewGame": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 46,
+      "relocations": 16,
+      "reloc_order": "GROUPED"
+     }
+    },
+    "exact": false,
+    "opaque_data": [],
+    "opaque_unmarked_bytes": 0,
+    "object_sha256": "4510c72467ba5662e68d659029fc31fd897acf03de70cb2936dd136520751c5d",
+    "data": {
+     "_DATA": {
+      "exact": true,
+      "reasons": [],
+      "size": 213,
+      "reloc_order": "EXACT",
+      "start": 362118,
+      "class": "DATA",
+      "align": "word",
+      "far": false
+     },
+     "CONST": {
+      "exact": true,
+      "reasons": [],
+      "size": 24,
+      "reloc_order": "GROUPED",
+      "start": 385704,
+      "class": "CONST",
+      "align": "word",
+      "far": false
+     }
+    },
+    "data_only": false,
+    "communals": [],
+    "scaffold": [],
+    "inplace_drafts": []
+   },
+   "claims": [
+    "o15_384C_0000",
+    "LoadMonoPats",
+    "o15_384C_0125",
+    "o15_384C_0152",
+    "MenuQuit",
+    "o15_384C_0239",
+    "SetDefaultWindows",
+    "NewGame"
+   ],
+   "meta": {
+    "name": "window-2101-after_text",
+    "local": "itemID",
+    "value": "0x2101",
+    "uses": [
+     "win_GetObjRect(0x2101, &r);",
+     "win_SetColorFromObjNum(0x2101);"
+    ],
+    "initialization": "after_text"
+   },
+   "source_sha256": "f45b9758172ec1c1e691fe01fe5f35243c632ed2e819745bb38807044fea283d"
+  },
+  {
+   "name": "window-2101-after_font",
+   "file": "D:\\Prog\\simant_recon\\build\\workers\\fleet_s15\\variants\\08_controls\\003_window-2101-after_font.c",
+   "why": "",
+   "result": {
+    "compile_ok": true,
+    "claims": {
+     "o15_384C_0000": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 3,
+      "relocations": 1,
+      "reloc_order": "EXACT"
+     },
+     "LoadMonoPats": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 11,
+      "relocations": 7,
+      "reloc_order": "GROUPED"
+     },
+     "o15_384C_0125": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 1,
+      "relocations": 1,
+      "reloc_order": "EXACT"
+     },
+     "o15_384C_0152": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 17,
+      "relocations": 10,
+      "reloc_order": "GROUPED"
+     },
+     "MenuQuit": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 7,
+      "relocations": 2,
+      "reloc_order": "EXACT"
+     },
+     "o15_384C_0239": {
+      "exact": false,
+      "reasons": [
+       "length 331 != target 326",
+       "bytes differ (first at +0x4, 233 differing)",
+       "relocation set differs (17 vs 17)"
+      ],
+      "fixups": 20,
+      "relocations": 17,
+      "reloc_order": "EXACT"
+     },
+     "SetDefaultWindows": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 11,
+      "relocations": 9,
+      "reloc_order": "GROUPED"
+     },
+     "NewGame": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 46,
+      "relocations": 16,
+      "reloc_order": "GROUPED"
+     }
+    },
+    "exact": false,
+    "opaque_data": [],
+    "opaque_unmarked_bytes": 0,
+    "object_sha256": "df9c99ced230df2d6c9daeb7f169fd20b1f90273b3715d3e1da55984a5f69492",
+    "data": {
+     "_DATA": {
+      "exact": true,
+      "reasons": [],
+      "size": 213,
+      "reloc_order": "EXACT",
+      "start": 362118,
+      "class": "DATA",
+      "align": "word",
+      "far": false
+     },
+     "CONST": {
+      "exact": true,
+      "reasons": [],
+      "size": 24,
+      "reloc_order": "GROUPED",
+      "start": 385704,
+      "class": "CONST",
+      "align": "word",
+      "far": false
+     }
+    },
+    "data_only": false,
+    "communals": [],
+    "scaffold": [],
+    "inplace_drafts": []
+   },
+   "claims": [
+    "o15_384C_0000",
+    "LoadMonoPats",
+    "o15_384C_0125",
+    "o15_384C_0152",
+    "MenuQuit",
+    "o15_384C_0239",
+    "SetDefaultWindows",
+    "NewGame"
+   ],
+   "meta": {
+    "name": "window-2101-after_font",
+    "local": "itemID",
+    "value": "0x2101",
+    "uses": [
+     "win_GetObjRect(0x2101, &r);",
+     "win_SetColorFromObjNum(0x2101);"
+    ],
+    "initialization": "after_font"
+   },
+   "source_sha256": "52fd6c88f135f89266cb039f5de4a81f1bf5d84b72b583fb9993a315aea2ca97"
+  },
+  {
+   "name": "window-2101-before_item",
+   "file": "D:\\Prog\\simant_recon\\build\\workers\\fleet_s15\\variants\\08_controls\\004_window-2101-before_item.c",
+   "why": "",
+   "result": {
+    "compile_ok": true,
+    "claims": {
+     "o15_384C_0000": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 3,
+      "relocations": 1,
+      "reloc_order": "EXACT"
+     },
+     "LoadMonoPats": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 11,
+      "relocations": 7,
+      "reloc_order": "GROUPED"
+     },
+     "o15_384C_0125": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 1,
+      "relocations": 1,
+      "reloc_order": "EXACT"
+     },
+     "o15_384C_0152": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 17,
+      "relocations": 10,
+      "reloc_order": "GROUPED"
+     },
+     "MenuQuit": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 7,
+      "relocations": 2,
+      "reloc_order": "EXACT"
+     },
+     "o15_384C_0239": {
+      "exact": false,
+      "reasons": [
+       "bytes differ (first at +0x42, 2 differing)"
+      ],
+      "fixups": 20,
+      "relocations": 17,
+      "reloc_order": "GROUPED"
+     },
+     "SetDefaultWindows": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 11,
+      "relocations": 9,
+      "reloc_order": "GROUPED"
+     },
+     "NewGame": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 46,
+      "relocations": 16,
+      "reloc_order": "GROUPED"
+     }
+    },
+    "exact": false,
+    "opaque_data": [],
+    "opaque_unmarked_bytes": 0,
+    "object_sha256": "45a5e863db7327cc309c850128db6d691b6dd30114d6d08527d2e086349febc1",
+    "data": {
+     "_DATA": {
+      "exact": true,
+      "reasons": [],
+      "size": 213,
+      "reloc_order": "EXACT",
+      "start": 362118,
+      "class": "DATA",
+      "align": "word",
+      "far": false
+     },
+     "CONST": {
+      "exact": true,
+      "reasons": [],
+      "size": 24,
+      "reloc_order": "GROUPED",
+      "start": 385704,
+      "class": "CONST",
+      "align": "word",
+      "far": false
+     }
+    },
+    "data_only": false,
+    "communals": [],
+    "scaffold": [],
+    "inplace_drafts": []
+   },
+   "claims": [
+    "o15_384C_0000",
+    "LoadMonoPats",
+    "o15_384C_0125",
+    "o15_384C_0152",
+    "MenuQuit",
+    "o15_384C_0239",
+    "SetDefaultWindows",
+    "NewGame"
+   ],
+   "meta": {
+    "name": "window-2101-before_item",
+    "local": "itemID",
+    "value": "0x2101",
+    "uses": [
+     "win_GetObjRect(0x2101, &r);",
+     "win_SetColorFromObjNum(0x2101);"
+    ],
+    "initialization": "before_item"
+   },
+   "source_sha256": "6207cc513baf2328a9dc4742ebdb5ce3e656db768baab8e4848fc587faa4e127"
+  }
+ ]
+}

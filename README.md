@@ -55,6 +55,9 @@ Other tools: `probe.py SPEC.json` (controlled compiler experiments, rules in
 and groups bound instruction differences (stack homes, registers, branches, widths
 and residuals). `diag.py FUNCTION --source draft.c` inspects a selected whole module;
 `slots.py FUNCTION draft.c` connects BP/register observations to the compiler listing.
+Reports show the actual candidate function extent separately from the compared
+bound payload; a longer candidate's omitted tail is explicit and still fails the
+strict extent check.
 These reports cannot accept code. For interacting declaration edits, autosearch's
 `--neutral-beam N` retains more source contexts that initially emit identical code.
 Search refuses a starting draft that fails an existing manifest claim or data check.

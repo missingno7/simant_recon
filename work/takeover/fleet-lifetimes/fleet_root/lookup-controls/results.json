@@ -1,0 +1,1083 @@
+{
+ "function": "ch_LookUpId",
+ "profile": "msc600ax",
+ "flags": [
+  "/AL",
+  "/Os",
+  "/Oeg",
+  "/Gs",
+  "/Zi"
+ ],
+ "placements": {
+  "_DATA": {
+   "seg": 21939,
+   "off": 15218,
+   "size": 112
+  },
+  "_BSS": {
+   "seg": 21939,
+   "off": 35962,
+   "size": 2
+  }
+ },
+ "variants": [
+  {
+   "name": "chain0-first0-wrap0",
+   "file": "build\\workers\\fleet_root\\lookup-controls\\000_chain0-first0-wrap0.c",
+   "why": "Equivalent chained stores and pointer arithmetic; no artificial expression",
+   "result": {
+    "compile_ok": true,
+    "claims": {
+     "ch_CreateTable": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 4,
+      "relocations": 2,
+      "reloc_order": "EXACT"
+     },
+     "ch_RemoveEntry": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 3,
+      "relocations": 0,
+      "reloc_order": "EXACT"
+     },
+     "ch_PurgeCache": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 2,
+      "relocations": 2,
+      "reloc_order": "EXACT"
+     },
+     "ch_LookUpHandle": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 0,
+      "relocations": 0,
+      "reloc_order": "EXACT"
+     },
+     "ch_LookUpId": {
+      "exact": false,
+      "reasons": [
+       "length 359 != target 354",
+       "bytes differ (first at +0x5, 284 differing)",
+       "relocation set differs (2 vs 2)"
+      ],
+      "fixups": 16,
+      "relocations": 2,
+      "reloc_order": "EXACT"
+     },
+     "ch_AddEntry": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 11,
+      "relocations": 1,
+      "reloc_order": "EXACT"
+     },
+     "ch_DeleteEntry": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 3,
+      "relocations": 0,
+      "reloc_order": "EXACT"
+     },
+     "ch_CleanupTable": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 3,
+      "relocations": 3,
+      "reloc_order": "GROUPED"
+     },
+     "ch_DumpOldest": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 6,
+      "relocations": 5,
+      "reloc_order": "GROUPED"
+     },
+     "ch_GetPrime": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 2,
+      "relocations": 2,
+      "reloc_order": "GROUPED"
+     },
+     "ch_SetCacheHooks": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 4,
+      "relocations": 0,
+      "reloc_order": "EXACT"
+     }
+    },
+    "exact": false,
+    "opaque_data": [],
+    "opaque_unmarked_bytes": 0,
+    "object_sha256": "0ff53dd4b8410d3b149c1ebd0ceee45644ded21fee19a153381c579b4f6014d8",
+    "data": {
+     "_DATA": {
+      "exact": true,
+      "reasons": [],
+      "size": 112,
+      "reloc_order": "EXACT",
+      "start": 366242,
+      "class": "DATA",
+      "align": "word",
+      "far": false
+     },
+     "_BSS": {
+      "exact": true,
+      "reasons": [],
+      "size": 2,
+      "kind": "BSS",
+      "start": 386986,
+      "align": "word"
+     }
+    },
+    "data_only": false,
+    "communals": [],
+    "scaffold": [],
+    "inplace_drafts": []
+   },
+   "claims": [
+    "ch_CreateTable",
+    "ch_RemoveEntry",
+    "ch_PurgeCache",
+    "ch_LookUpHandle",
+    "ch_LookUpId",
+    "ch_AddEntry",
+    "ch_DeleteEntry",
+    "ch_CleanupTable",
+    "ch_DumpOldest",
+    "ch_GetPrime",
+    "ch_SetCacheHooks"
+   ],
+   "source_sha256_lf": "c758410025b87af9cbf02daea8b0470f72ac00a121c216538de61f6905a91898"
+  },
+  {
+   "name": "chain0-first0-wrap1",
+   "file": "build\\workers\\fleet_root\\lookup-controls\\001_chain0-first0-wrap1.c",
+   "why": "Equivalent chained stores and pointer arithmetic; no artificial expression",
+   "result": {
+    "compile_ok": true,
+    "claims": {
+     "ch_CreateTable": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 4,
+      "relocations": 2,
+      "reloc_order": "EXACT"
+     },
+     "ch_RemoveEntry": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 3,
+      "relocations": 0,
+      "reloc_order": "EXACT"
+     },
+     "ch_PurgeCache": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 2,
+      "relocations": 2,
+      "reloc_order": "EXACT"
+     },
+     "ch_LookUpHandle": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 0,
+      "relocations": 0,
+      "reloc_order": "EXACT"
+     },
+     "ch_LookUpId": {
+      "exact": false,
+      "reasons": [
+       "length 359 != target 354",
+       "bytes differ (first at +0x5, 284 differing)",
+       "relocation set differs (2 vs 2)"
+      ],
+      "fixups": 16,
+      "relocations": 2,
+      "reloc_order": "EXACT"
+     },
+     "ch_AddEntry": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 11,
+      "relocations": 1,
+      "reloc_order": "EXACT"
+     },
+     "ch_DeleteEntry": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 3,
+      "relocations": 0,
+      "reloc_order": "EXACT"
+     },
+     "ch_CleanupTable": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 3,
+      "relocations": 3,
+      "reloc_order": "GROUPED"
+     },
+     "ch_DumpOldest": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 6,
+      "relocations": 5,
+      "reloc_order": "GROUPED"
+     },
+     "ch_GetPrime": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 2,
+      "relocations": 2,
+      "reloc_order": "GROUPED"
+     },
+     "ch_SetCacheHooks": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 4,
+      "relocations": 0,
+      "reloc_order": "EXACT"
+     }
+    },
+    "exact": false,
+    "opaque_data": [],
+    "opaque_unmarked_bytes": 0,
+    "object_sha256": "0ff53dd4b8410d3b149c1ebd0ceee45644ded21fee19a153381c579b4f6014d8",
+    "data": {
+     "_DATA": {
+      "exact": true,
+      "reasons": [],
+      "size": 112,
+      "reloc_order": "EXACT",
+      "start": 366242,
+      "class": "DATA",
+      "align": "word",
+      "far": false
+     },
+     "_BSS": {
+      "exact": true,
+      "reasons": [],
+      "size": 2,
+      "kind": "BSS",
+      "start": 386986,
+      "align": "word"
+     }
+    },
+    "data_only": false,
+    "communals": [],
+    "scaffold": [],
+    "inplace_drafts": []
+   },
+   "claims": [
+    "ch_CreateTable",
+    "ch_RemoveEntry",
+    "ch_PurgeCache",
+    "ch_LookUpHandle",
+    "ch_LookUpId",
+    "ch_AddEntry",
+    "ch_DeleteEntry",
+    "ch_CleanupTable",
+    "ch_DumpOldest",
+    "ch_GetPrime",
+    "ch_SetCacheHooks"
+   ],
+   "source_sha256_lf": "7376ab0aaea1ef30d04b85b700621f23667de6cbd4b8084c11bb8268c10e8ba7"
+  },
+  {
+   "name": "chain0-first1-wrap0",
+   "file": "build\\workers\\fleet_root\\lookup-controls\\002_chain0-first1-wrap0.c",
+   "why": "Equivalent chained stores and pointer arithmetic; no artificial expression",
+   "result": {
+    "compile_ok": true,
+    "claims": {
+     "ch_CreateTable": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 4,
+      "relocations": 2,
+      "reloc_order": "EXACT"
+     },
+     "ch_RemoveEntry": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 3,
+      "relocations": 0,
+      "reloc_order": "EXACT"
+     },
+     "ch_PurgeCache": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 2,
+      "relocations": 2,
+      "reloc_order": "EXACT"
+     },
+     "ch_LookUpHandle": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 0,
+      "relocations": 0,
+      "reloc_order": "EXACT"
+     },
+     "ch_LookUpId": {
+      "exact": false,
+      "reasons": [
+       "length 359 != target 354",
+       "bytes differ (first at +0x5, 284 differing)",
+       "relocation set differs (2 vs 2)"
+      ],
+      "fixups": 16,
+      "relocations": 2,
+      "reloc_order": "EXACT"
+     },
+     "ch_AddEntry": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 11,
+      "relocations": 1,
+      "reloc_order": "EXACT"
+     },
+     "ch_DeleteEntry": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 3,
+      "relocations": 0,
+      "reloc_order": "EXACT"
+     },
+     "ch_CleanupTable": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 3,
+      "relocations": 3,
+      "reloc_order": "GROUPED"
+     },
+     "ch_DumpOldest": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 6,
+      "relocations": 5,
+      "reloc_order": "GROUPED"
+     },
+     "ch_GetPrime": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 2,
+      "relocations": 2,
+      "reloc_order": "GROUPED"
+     },
+     "ch_SetCacheHooks": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 4,
+      "relocations": 0,
+      "reloc_order": "EXACT"
+     }
+    },
+    "exact": false,
+    "opaque_data": [],
+    "opaque_unmarked_bytes": 0,
+    "object_sha256": "0ff53dd4b8410d3b149c1ebd0ceee45644ded21fee19a153381c579b4f6014d8",
+    "data": {
+     "_DATA": {
+      "exact": true,
+      "reasons": [],
+      "size": 112,
+      "reloc_order": "EXACT",
+      "start": 366242,
+      "class": "DATA",
+      "align": "word",
+      "far": false
+     },
+     "_BSS": {
+      "exact": true,
+      "reasons": [],
+      "size": 2,
+      "kind": "BSS",
+      "start": 386986,
+      "align": "word"
+     }
+    },
+    "data_only": false,
+    "communals": [],
+    "scaffold": [],
+    "inplace_drafts": []
+   },
+   "claims": [
+    "ch_CreateTable",
+    "ch_RemoveEntry",
+    "ch_PurgeCache",
+    "ch_LookUpHandle",
+    "ch_LookUpId",
+    "ch_AddEntry",
+    "ch_DeleteEntry",
+    "ch_CleanupTable",
+    "ch_DumpOldest",
+    "ch_GetPrime",
+    "ch_SetCacheHooks"
+   ],
+   "source_sha256_lf": "93539c3a4a0bb6ee117726d05c888292e8c22f88a2982136feb9ec96d620438a"
+  },
+  {
+   "name": "chain0-first1-wrap1",
+   "file": "build\\workers\\fleet_root\\lookup-controls\\003_chain0-first1-wrap1.c",
+   "why": "Equivalent chained stores and pointer arithmetic; no artificial expression",
+   "result": {
+    "compile_ok": true,
+    "claims": {
+     "ch_CreateTable": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 4,
+      "relocations": 2,
+      "reloc_order": "EXACT"
+     },
+     "ch_RemoveEntry": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 3,
+      "relocations": 0,
+      "reloc_order": "EXACT"
+     },
+     "ch_PurgeCache": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 2,
+      "relocations": 2,
+      "reloc_order": "EXACT"
+     },
+     "ch_LookUpHandle": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 0,
+      "relocations": 0,
+      "reloc_order": "EXACT"
+     },
+     "ch_LookUpId": {
+      "exact": false,
+      "reasons": [
+       "bytes differ (first at +0x60, 2 differing)"
+      ],
+      "fixups": 16,
+      "relocations": 2,
+      "reloc_order": "EXACT"
+     },
+     "ch_AddEntry": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 11,
+      "relocations": 1,
+      "reloc_order": "EXACT"
+     },
+     "ch_DeleteEntry": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 3,
+      "relocations": 0,
+      "reloc_order": "EXACT"
+     },
+     "ch_CleanupTable": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 3,
+      "relocations": 3,
+      "reloc_order": "GROUPED"
+     },
+     "ch_DumpOldest": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 6,
+      "relocations": 5,
+      "reloc_order": "GROUPED"
+     },
+     "ch_GetPrime": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 2,
+      "relocations": 2,
+      "reloc_order": "GROUPED"
+     },
+     "ch_SetCacheHooks": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 4,
+      "relocations": 0,
+      "reloc_order": "EXACT"
+     }
+    },
+    "exact": false,
+    "opaque_data": [],
+    "opaque_unmarked_bytes": 0,
+    "object_sha256": "322c4fce10803a716866e14168a1725e3d4dcac1de5903c0533f994228ca72c1",
+    "data": {
+     "_DATA": {
+      "exact": true,
+      "reasons": [],
+      "size": 112,
+      "reloc_order": "EXACT",
+      "start": 366242,
+      "class": "DATA",
+      "align": "word",
+      "far": false
+     },
+     "_BSS": {
+      "exact": true,
+      "reasons": [],
+      "size": 2,
+      "kind": "BSS",
+      "start": 386986,
+      "align": "word"
+     }
+    },
+    "data_only": false,
+    "communals": [],
+    "scaffold": [],
+    "inplace_drafts": []
+   },
+   "claims": [
+    "ch_CreateTable",
+    "ch_RemoveEntry",
+    "ch_PurgeCache",
+    "ch_LookUpHandle",
+    "ch_LookUpId",
+    "ch_AddEntry",
+    "ch_DeleteEntry",
+    "ch_CleanupTable",
+    "ch_DumpOldest",
+    "ch_GetPrime",
+    "ch_SetCacheHooks"
+   ],
+   "source_sha256_lf": "cddcd942b0b8a5d75090fb52e33e35cb3d617007d5820ce6dd6e055c09bcdeb7"
+  },
+  {
+   "name": "chain1-first0-wrap0",
+   "file": "build\\workers\\fleet_root\\lookup-controls\\004_chain1-first0-wrap0.c",
+   "why": "Equivalent chained stores and pointer arithmetic; no artificial expression",
+   "result": {
+    "compile_ok": true,
+    "claims": {
+     "ch_CreateTable": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 4,
+      "relocations": 2,
+      "reloc_order": "EXACT"
+     },
+     "ch_RemoveEntry": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 3,
+      "relocations": 0,
+      "reloc_order": "EXACT"
+     },
+     "ch_PurgeCache": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 2,
+      "relocations": 2,
+      "reloc_order": "EXACT"
+     },
+     "ch_LookUpHandle": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 0,
+      "relocations": 0,
+      "reloc_order": "EXACT"
+     },
+     "ch_LookUpId": {
+      "exact": false,
+      "reasons": [
+       "length 359 != target 354",
+       "bytes differ (first at +0x5, 284 differing)",
+       "relocation set differs (2 vs 2)"
+      ],
+      "fixups": 16,
+      "relocations": 2,
+      "reloc_order": "EXACT"
+     },
+     "ch_AddEntry": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 11,
+      "relocations": 1,
+      "reloc_order": "EXACT"
+     },
+     "ch_DeleteEntry": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 3,
+      "relocations": 0,
+      "reloc_order": "EXACT"
+     },
+     "ch_CleanupTable": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 3,
+      "relocations": 3,
+      "reloc_order": "GROUPED"
+     },
+     "ch_DumpOldest": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 6,
+      "relocations": 5,
+      "reloc_order": "GROUPED"
+     },
+     "ch_GetPrime": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 2,
+      "relocations": 2,
+      "reloc_order": "GROUPED"
+     },
+     "ch_SetCacheHooks": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 4,
+      "relocations": 0,
+      "reloc_order": "EXACT"
+     }
+    },
+    "exact": false,
+    "opaque_data": [],
+    "opaque_unmarked_bytes": 0,
+    "object_sha256": "5f582f2b54621e985acad7edd4bd2dd4ef221f71d3d637a494c5e72d5fce38d4",
+    "data": {
+     "_DATA": {
+      "exact": true,
+      "reasons": [],
+      "size": 112,
+      "reloc_order": "EXACT",
+      "start": 366242,
+      "class": "DATA",
+      "align": "word",
+      "far": false
+     },
+     "_BSS": {
+      "exact": true,
+      "reasons": [],
+      "size": 2,
+      "kind": "BSS",
+      "start": 386986,
+      "align": "word"
+     }
+    },
+    "data_only": false,
+    "communals": [],
+    "scaffold": [],
+    "inplace_drafts": []
+   },
+   "claims": [
+    "ch_CreateTable",
+    "ch_RemoveEntry",
+    "ch_PurgeCache",
+    "ch_LookUpHandle",
+    "ch_LookUpId",
+    "ch_AddEntry",
+    "ch_DeleteEntry",
+    "ch_CleanupTable",
+    "ch_DumpOldest",
+    "ch_GetPrime",
+    "ch_SetCacheHooks"
+   ],
+   "source_sha256_lf": "b2461d08e86e84491deb2e2fde82deab821d9650cd2c8ffc0650eb061035ac2c"
+  },
+  {
+   "name": "chain1-first0-wrap1",
+   "file": "build\\workers\\fleet_root\\lookup-controls\\005_chain1-first0-wrap1.c",
+   "why": "Equivalent chained stores and pointer arithmetic; no artificial expression",
+   "result": {
+    "compile_ok": true,
+    "claims": {
+     "ch_CreateTable": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 4,
+      "relocations": 2,
+      "reloc_order": "EXACT"
+     },
+     "ch_RemoveEntry": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 3,
+      "relocations": 0,
+      "reloc_order": "EXACT"
+     },
+     "ch_PurgeCache": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 2,
+      "relocations": 2,
+      "reloc_order": "EXACT"
+     },
+     "ch_LookUpHandle": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 0,
+      "relocations": 0,
+      "reloc_order": "EXACT"
+     },
+     "ch_LookUpId": {
+      "exact": false,
+      "reasons": [
+       "length 359 != target 354",
+       "bytes differ (first at +0x5, 284 differing)",
+       "relocation set differs (2 vs 2)"
+      ],
+      "fixups": 16,
+      "relocations": 2,
+      "reloc_order": "EXACT"
+     },
+     "ch_AddEntry": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 11,
+      "relocations": 1,
+      "reloc_order": "EXACT"
+     },
+     "ch_DeleteEntry": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 3,
+      "relocations": 0,
+      "reloc_order": "EXACT"
+     },
+     "ch_CleanupTable": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 3,
+      "relocations": 3,
+      "reloc_order": "GROUPED"
+     },
+     "ch_DumpOldest": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 6,
+      "relocations": 5,
+      "reloc_order": "GROUPED"
+     },
+     "ch_GetPrime": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 2,
+      "relocations": 2,
+      "reloc_order": "GROUPED"
+     },
+     "ch_SetCacheHooks": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 4,
+      "relocations": 0,
+      "reloc_order": "EXACT"
+     }
+    },
+    "exact": false,
+    "opaque_data": [],
+    "opaque_unmarked_bytes": 0,
+    "object_sha256": "5f582f2b54621e985acad7edd4bd2dd4ef221f71d3d637a494c5e72d5fce38d4",
+    "data": {
+     "_DATA": {
+      "exact": true,
+      "reasons": [],
+      "size": 112,
+      "reloc_order": "EXACT",
+      "start": 366242,
+      "class": "DATA",
+      "align": "word",
+      "far": false
+     },
+     "_BSS": {
+      "exact": true,
+      "reasons": [],
+      "size": 2,
+      "kind": "BSS",
+      "start": 386986,
+      "align": "word"
+     }
+    },
+    "data_only": false,
+    "communals": [],
+    "scaffold": [],
+    "inplace_drafts": []
+   },
+   "claims": [
+    "ch_CreateTable",
+    "ch_RemoveEntry",
+    "ch_PurgeCache",
+    "ch_LookUpHandle",
+    "ch_LookUpId",
+    "ch_AddEntry",
+    "ch_DeleteEntry",
+    "ch_CleanupTable",
+    "ch_DumpOldest",
+    "ch_GetPrime",
+    "ch_SetCacheHooks"
+   ],
+   "source_sha256_lf": "11736c54634f3e2bf3ea4167eb4a055ceba408d197bf6a93f6070f3805ab4075"
+  },
+  {
+   "name": "chain1-first1-wrap0",
+   "file": "build\\workers\\fleet_root\\lookup-controls\\006_chain1-first1-wrap0.c",
+   "why": "Equivalent chained stores and pointer arithmetic; no artificial expression",
+   "result": {
+    "compile_ok": true,
+    "claims": {
+     "ch_CreateTable": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 4,
+      "relocations": 2,
+      "reloc_order": "EXACT"
+     },
+     "ch_RemoveEntry": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 3,
+      "relocations": 0,
+      "reloc_order": "EXACT"
+     },
+     "ch_PurgeCache": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 2,
+      "relocations": 2,
+      "reloc_order": "EXACT"
+     },
+     "ch_LookUpHandle": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 0,
+      "relocations": 0,
+      "reloc_order": "EXACT"
+     },
+     "ch_LookUpId": {
+      "exact": false,
+      "reasons": [
+       "length 359 != target 354",
+       "bytes differ (first at +0x5, 284 differing)",
+       "relocation set differs (2 vs 2)"
+      ],
+      "fixups": 16,
+      "relocations": 2,
+      "reloc_order": "EXACT"
+     },
+     "ch_AddEntry": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 11,
+      "relocations": 1,
+      "reloc_order": "EXACT"
+     },
+     "ch_DeleteEntry": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 3,
+      "relocations": 0,
+      "reloc_order": "EXACT"
+     },
+     "ch_CleanupTable": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 3,
+      "relocations": 3,
+      "reloc_order": "GROUPED"
+     },
+     "ch_DumpOldest": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 6,
+      "relocations": 5,
+      "reloc_order": "GROUPED"
+     },
+     "ch_GetPrime": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 2,
+      "relocations": 2,
+      "reloc_order": "GROUPED"
+     },
+     "ch_SetCacheHooks": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 4,
+      "relocations": 0,
+      "reloc_order": "EXACT"
+     }
+    },
+    "exact": false,
+    "opaque_data": [],
+    "opaque_unmarked_bytes": 0,
+    "object_sha256": "5f582f2b54621e985acad7edd4bd2dd4ef221f71d3d637a494c5e72d5fce38d4",
+    "data": {
+     "_DATA": {
+      "exact": true,
+      "reasons": [],
+      "size": 112,
+      "reloc_order": "EXACT",
+      "start": 366242,
+      "class": "DATA",
+      "align": "word",
+      "far": false
+     },
+     "_BSS": {
+      "exact": true,
+      "reasons": [],
+      "size": 2,
+      "kind": "BSS",
+      "start": 386986,
+      "align": "word"
+     }
+    },
+    "data_only": false,
+    "communals": [],
+    "scaffold": [],
+    "inplace_drafts": []
+   },
+   "claims": [
+    "ch_CreateTable",
+    "ch_RemoveEntry",
+    "ch_PurgeCache",
+    "ch_LookUpHandle",
+    "ch_LookUpId",
+    "ch_AddEntry",
+    "ch_DeleteEntry",
+    "ch_CleanupTable",
+    "ch_DumpOldest",
+    "ch_GetPrime",
+    "ch_SetCacheHooks"
+   ],
+   "source_sha256_lf": "d1874daaf95ba8c0e03e46f4cfb142cf54b6e748fa2e958ed630745a38be9c41"
+  },
+  {
+   "name": "chain1-first1-wrap1",
+   "file": "build\\workers\\fleet_root\\lookup-controls\\007_chain1-first1-wrap1.c",
+   "why": "Equivalent chained stores and pointer arithmetic; no artificial expression",
+   "result": {
+    "compile_ok": true,
+    "claims": {
+     "ch_CreateTable": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 4,
+      "relocations": 2,
+      "reloc_order": "EXACT"
+     },
+     "ch_RemoveEntry": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 3,
+      "relocations": 0,
+      "reloc_order": "EXACT"
+     },
+     "ch_PurgeCache": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 2,
+      "relocations": 2,
+      "reloc_order": "EXACT"
+     },
+     "ch_LookUpHandle": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 0,
+      "relocations": 0,
+      "reloc_order": "EXACT"
+     },
+     "ch_LookUpId": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 16,
+      "relocations": 2,
+      "reloc_order": "EXACT"
+     },
+     "ch_AddEntry": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 11,
+      "relocations": 1,
+      "reloc_order": "EXACT"
+     },
+     "ch_DeleteEntry": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 3,
+      "relocations": 0,
+      "reloc_order": "EXACT"
+     },
+     "ch_CleanupTable": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 3,
+      "relocations": 3,
+      "reloc_order": "GROUPED"
+     },
+     "ch_DumpOldest": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 6,
+      "relocations": 5,
+      "reloc_order": "GROUPED"
+     },
+     "ch_GetPrime": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 2,
+      "relocations": 2,
+      "reloc_order": "GROUPED"
+     },
+     "ch_SetCacheHooks": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 4,
+      "relocations": 0,
+      "reloc_order": "EXACT"
+     }
+    },
+    "exact": true,
+    "opaque_data": [],
+    "opaque_unmarked_bytes": 0,
+    "object_sha256": "3d49c4d0a351366f32fce9e75c5db1d19bfcdbc36e0e1e6aa8cf2647ef068b1c",
+    "data": {
+     "_DATA": {
+      "exact": true,
+      "reasons": [],
+      "size": 112,
+      "reloc_order": "EXACT",
+      "start": 366242,
+      "class": "DATA",
+      "align": "word",
+      "far": false
+     },
+     "_BSS": {
+      "exact": true,
+      "reasons": [],
+      "size": 2,
+      "kind": "BSS",
+      "start": 386986,
+      "align": "word"
+     }
+    },
+    "data_only": false,
+    "communals": [],
+    "scaffold": [],
+    "inplace_drafts": []
+   },
+   "claims": [
+    "ch_CreateTable",
+    "ch_RemoveEntry",
+    "ch_PurgeCache",
+    "ch_LookUpHandle",
+    "ch_LookUpId",
+    "ch_AddEntry",
+    "ch_DeleteEntry",
+    "ch_CleanupTable",
+    "ch_DumpOldest",
+    "ch_GetPrime",
+    "ch_SetCacheHooks"
+   ],
+   "source_sha256_lf": "c57124b9d75ea77eb30158c09a71550862cf7081ceed625a2550a26a262bfdfa"
+  }
+ ]
+}

@@ -1,0 +1,62 @@
+[
+ {
+  "source": "D:\\Prog\\simant_recon\\build\\workers\\fleet_s15\\s15-base.c",
+  "module": "S15:384C",
+  "profile": "msc600ax",
+  "flags": [
+   "/AL",
+   "/Os",
+   "/Og",
+   "/Oe",
+   "/Zi"
+  ],
+  "placements": {
+   "_DATA": {
+    "seg": 21939,
+    "off": 11094
+   },
+   "CONST": {
+    "seg": 21939,
+    "off": 34680
+   }
+  },
+  "source_sha256": "01b51eecedcd28e2213819572c846a9754039f4a527e6da5e56e57783398bdd5",
+  "status": "MISMATCH",
+  "reasons": [
+   "bytes differ (first at +0x42, 2 differing)"
+  ],
+  "opcode_ratio": 1.0,
+  "first_diff_insn": 28,
+  "unbound": []
+ },
+ {
+  "source": "D:\\Prog\\simant_recon\\build\\workers\\fleet_s15\\variants\\07_controls\\000_draw-print_clear-before_print-int.c",
+  "module": "S15:384C",
+  "profile": "msc600ax",
+  "flags": [
+   "/AL",
+   "/Os",
+   "/Og",
+   "/Oe",
+   "/Zi"
+  ],
+  "placements": {
+   "_DATA": {
+    "seg": 21939,
+    "off": 11094
+   },
+   "CONST": {
+    "seg": 21939,
+    "off": 34680
+   }
+  },
+  "source_sha256": "66e7402eb306f2c9f75b736da42f57a2d4de65992cad06e91d60a1ec804caea5",
+  "status": "MISMATCH",
+  "reasons": [
+   "bytes differ (first at +0x42, 2 differing)"
+  ],
+  "opcode_ratio": 1.0,
+  "first_diff_insn": 28,
+  "unbound": []
+ }
+]

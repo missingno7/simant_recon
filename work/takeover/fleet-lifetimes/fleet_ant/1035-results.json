@@ -1,0 +1,982 @@
+{
+ "function": "o25_3BA4_1035",
+ "profile": "msc600ax",
+ "flags": [
+  "/AL",
+  "/Os",
+  "/Oe",
+  "/Og",
+  "/Zi"
+ ],
+ "placements": {
+  "CONST": {
+   "seg": 21939,
+   "off": 35138,
+   "size": 96
+  },
+  "_DATA": {
+   "seg": 21939,
+   "off": 12030,
+   "size": 21
+  }
+ },
+ "variants": [
+  {
+   "name": "base",
+   "file": "build\\workers\\fleet_ant\\compiled\\000_base.c",
+   "why": "",
+   "result": {
+    "compile_ok": true,
+    "claims": {
+     "DoAntMoveY": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 184,
+      "relocations": 36,
+      "reloc_order": "GROUPED"
+     },
+     "DoAntSimY": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 50,
+      "relocations": 13,
+      "reloc_order": "GROUPED"
+     },
+     "o25_3BA4_0999": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 49,
+      "relocations": 19,
+      "reloc_order": "WITHIN_GROUP_PENDING"
+     },
+     "o25_3BA4_0C01": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 47,
+      "relocations": 20,
+      "reloc_order": "WITHIN_GROUP_PENDING"
+     },
+     "o25_3BA4_0DFB": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 55,
+      "relocations": 19,
+      "reloc_order": "GROUPED"
+     },
+     "o25_3BA4_1035": {
+      "exact": false,
+      "reasons": [
+       "bytes differ (first at +0xd7, 2 differing)"
+      ],
+      "fixups": 18,
+      "relocations": 6,
+      "reloc_order": "GROUPED"
+     },
+     "ExitNest": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 50,
+      "relocations": 9,
+      "reloc_order": "WITHIN_GROUP_PENDING"
+     },
+     "o25_3BA4_13AB": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 57,
+      "relocations": 12,
+      "reloc_order": "WITHIN_GROUP_PENDING"
+     },
+     "o25_3BA4_1581": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 18,
+      "relocations": 6,
+      "reloc_order": "WITHIN_GROUP_PENDING"
+     },
+     "o25_3BA4_188A": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 11,
+      "relocations": 1,
+      "reloc_order": "EXACT"
+     },
+     "o25_3BA4_1935": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 10,
+      "relocations": 3,
+      "reloc_order": "EXACT"
+     },
+     "o25_3BA4_19AD": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 12,
+      "relocations": 3,
+      "reloc_order": "GROUPED"
+     },
+     "o25_3BA4_1A0D": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 10,
+      "relocations": 3,
+      "reloc_order": "EXACT"
+     },
+     "o25_3BA4_1A9F": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 14,
+      "relocations": 1,
+      "reloc_order": "EXACT"
+     }
+    },
+    "exact": false,
+    "opaque_data": [],
+    "opaque_unmarked_bytes": 0,
+    "object_sha256": "eeb6e4fb3d8a2b51d1794995e4671d05f4f88bae75797ef6a9205604f6af00db",
+    "data": {
+     "CONST": {
+      "exact": true,
+      "reasons": [],
+      "size": 96,
+      "reloc_order": "GROUPED",
+      "start": 386162,
+      "class": "CONST",
+      "align": "word",
+      "far": false
+     },
+     "_DATA": {
+      "exact": true,
+      "reasons": [],
+      "size": 21,
+      "reloc_order": "EXACT",
+      "start": 363054,
+      "class": "DATA",
+      "align": "word",
+      "far": false
+     }
+    },
+    "data_only": false,
+    "communals": [],
+    "scaffold": [
+     "o25_3BA4_1686"
+    ],
+    "inplace_drafts": []
+   },
+   "claims": [
+    "DoAntMoveY",
+    "DoAntSimY",
+    "o25_3BA4_0999",
+    "o25_3BA4_0C01",
+    "o25_3BA4_0DFB",
+    "o25_3BA4_1035",
+    "ExitNest",
+    "o25_3BA4_13AB",
+    "o25_3BA4_1581",
+    "o25_3BA4_188A",
+    "o25_3BA4_1935",
+    "o25_3BA4_19AD",
+    "o25_3BA4_1A0D",
+    "o25_3BA4_1A9F"
+   ]
+  },
+  {
+   "name": "early-call-pointer",
+   "file": "build\\workers\\fleet_ant\\compiled\\001_early-call-pointer.c",
+   "why": "",
+   "result": {
+    "compile_ok": true,
+    "claims": {
+     "DoAntMoveY": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 184,
+      "relocations": 36,
+      "reloc_order": "GROUPED"
+     },
+     "DoAntSimY": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 50,
+      "relocations": 13,
+      "reloc_order": "GROUPED"
+     },
+     "o25_3BA4_0999": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 49,
+      "relocations": 19,
+      "reloc_order": "WITHIN_GROUP_PENDING"
+     },
+     "o25_3BA4_0C01": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 47,
+      "relocations": 20,
+      "reloc_order": "WITHIN_GROUP_PENDING"
+     },
+     "o25_3BA4_0DFB": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 55,
+      "relocations": 19,
+      "reloc_order": "GROUPED"
+     },
+     "o25_3BA4_1035": {
+      "exact": false,
+      "reasons": [
+       "bytes differ (first at +0xd7, 2 differing)"
+      ],
+      "fixups": 18,
+      "relocations": 6,
+      "reloc_order": "GROUPED"
+     },
+     "ExitNest": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 50,
+      "relocations": 9,
+      "reloc_order": "WITHIN_GROUP_PENDING"
+     },
+     "o25_3BA4_13AB": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 57,
+      "relocations": 12,
+      "reloc_order": "WITHIN_GROUP_PENDING"
+     },
+     "o25_3BA4_1581": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 18,
+      "relocations": 6,
+      "reloc_order": "WITHIN_GROUP_PENDING"
+     },
+     "o25_3BA4_188A": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 11,
+      "relocations": 1,
+      "reloc_order": "EXACT"
+     },
+     "o25_3BA4_1935": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 10,
+      "relocations": 3,
+      "reloc_order": "EXACT"
+     },
+     "o25_3BA4_19AD": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 12,
+      "relocations": 3,
+      "reloc_order": "GROUPED"
+     },
+     "o25_3BA4_1A0D": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 10,
+      "relocations": 3,
+      "reloc_order": "EXACT"
+     },
+     "o25_3BA4_1A9F": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 14,
+      "relocations": 1,
+      "reloc_order": "EXACT"
+     }
+    },
+    "exact": false,
+    "opaque_data": [],
+    "opaque_unmarked_bytes": 0,
+    "object_sha256": "6d179fec8665e2d8ebafb817dbaf9b684ecd92c848e9b2c22a4120050d02e84e",
+    "data": {
+     "CONST": {
+      "exact": true,
+      "reasons": [],
+      "size": 96,
+      "reloc_order": "GROUPED",
+      "start": 386162,
+      "class": "CONST",
+      "align": "word",
+      "far": false
+     },
+     "_DATA": {
+      "exact": true,
+      "reasons": [],
+      "size": 21,
+      "reloc_order": "EXACT",
+      "start": 363054,
+      "class": "DATA",
+      "align": "word",
+      "far": false
+     }
+    },
+    "data_only": false,
+    "communals": [],
+    "scaffold": [
+     "o25_3BA4_1686"
+    ],
+    "inplace_drafts": []
+   },
+   "claims": [
+    "DoAntMoveY",
+    "DoAntSimY",
+    "o25_3BA4_0999",
+    "o25_3BA4_0C01",
+    "o25_3BA4_0DFB",
+    "o25_3BA4_1035",
+    "ExitNest",
+    "o25_3BA4_13AB",
+    "o25_3BA4_1581",
+    "o25_3BA4_188A",
+    "o25_3BA4_1935",
+    "o25_3BA4_19AD",
+    "o25_3BA4_1A0D",
+    "o25_3BA4_1A9F"
+   ]
+  },
+  {
+   "name": "dig-call-pointer",
+   "file": "build\\workers\\fleet_ant\\compiled\\002_dig-call-pointer.c",
+   "why": "",
+   "result": {
+    "compile_ok": true,
+    "claims": {
+     "DoAntMoveY": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 184,
+      "relocations": 36,
+      "reloc_order": "GROUPED"
+     },
+     "DoAntSimY": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 50,
+      "relocations": 13,
+      "reloc_order": "GROUPED"
+     },
+     "o25_3BA4_0999": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 49,
+      "relocations": 19,
+      "reloc_order": "WITHIN_GROUP_PENDING"
+     },
+     "o25_3BA4_0C01": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 47,
+      "relocations": 20,
+      "reloc_order": "WITHIN_GROUP_PENDING"
+     },
+     "o25_3BA4_0DFB": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 55,
+      "relocations": 19,
+      "reloc_order": "GROUPED"
+     },
+     "o25_3BA4_1035": {
+      "exact": false,
+      "reasons": [
+       "length 284 != target 281",
+       "bytes differ (first at +0x4, 89 differing)",
+       "relocation set differs (6 vs 6)"
+      ],
+      "fixups": 20,
+      "relocations": 6,
+      "reloc_order": "EXACT"
+     },
+     "ExitNest": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 50,
+      "relocations": 9,
+      "reloc_order": "WITHIN_GROUP_PENDING"
+     },
+     "o25_3BA4_13AB": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 57,
+      "relocations": 12,
+      "reloc_order": "WITHIN_GROUP_PENDING"
+     },
+     "o25_3BA4_1581": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 18,
+      "relocations": 6,
+      "reloc_order": "WITHIN_GROUP_PENDING"
+     },
+     "o25_3BA4_188A": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 11,
+      "relocations": 1,
+      "reloc_order": "EXACT"
+     },
+     "o25_3BA4_1935": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 10,
+      "relocations": 3,
+      "reloc_order": "EXACT"
+     },
+     "o25_3BA4_19AD": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 12,
+      "relocations": 3,
+      "reloc_order": "GROUPED"
+     },
+     "o25_3BA4_1A0D": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 10,
+      "relocations": 3,
+      "reloc_order": "EXACT"
+     },
+     "o25_3BA4_1A9F": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 14,
+      "relocations": 1,
+      "reloc_order": "EXACT"
+     }
+    },
+    "exact": false,
+    "opaque_data": [],
+    "opaque_unmarked_bytes": 0,
+    "object_sha256": "4d678c8d7df22876aa97ea8fa52e0c2e1cb912a865b320fae0acfd5f7ff5632e",
+    "data": {
+     "CONST": {
+      "exact": true,
+      "reasons": [],
+      "size": 96,
+      "reloc_order": "GROUPED",
+      "start": 386162,
+      "class": "CONST",
+      "align": "word",
+      "far": false
+     },
+     "_DATA": {
+      "exact": true,
+      "reasons": [],
+      "size": 21,
+      "reloc_order": "EXACT",
+      "start": 363054,
+      "class": "DATA",
+      "align": "word",
+      "far": false
+     }
+    },
+    "data_only": false,
+    "communals": [],
+    "scaffold": [
+     "o25_3BA4_1686"
+    ],
+    "inplace_drafts": []
+   },
+   "claims": [
+    "DoAntMoveY",
+    "DoAntSimY",
+    "o25_3BA4_0999",
+    "o25_3BA4_0C01",
+    "o25_3BA4_0DFB",
+    "o25_3BA4_1035",
+    "ExitNest",
+    "o25_3BA4_13AB",
+    "o25_3BA4_1581",
+    "o25_3BA4_188A",
+    "o25_3BA4_1935",
+    "o25_3BA4_19AD",
+    "o25_3BA4_1A0D",
+    "o25_3BA4_1A9F"
+   ]
+  },
+  {
+   "name": "dig-pointer-before-coordinate-write",
+   "file": "build\\workers\\fleet_ant\\compiled\\003_dig-pointer-before-coordinate-write.c",
+   "why": "",
+   "result": {
+    "compile_ok": true,
+    "claims": {
+     "DoAntMoveY": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 184,
+      "relocations": 36,
+      "reloc_order": "GROUPED"
+     },
+     "DoAntSimY": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 50,
+      "relocations": 13,
+      "reloc_order": "GROUPED"
+     },
+     "o25_3BA4_0999": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 49,
+      "relocations": 19,
+      "reloc_order": "WITHIN_GROUP_PENDING"
+     },
+     "o25_3BA4_0C01": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 47,
+      "relocations": 20,
+      "reloc_order": "WITHIN_GROUP_PENDING"
+     },
+     "o25_3BA4_0DFB": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 55,
+      "relocations": 19,
+      "reloc_order": "GROUPED"
+     },
+     "o25_3BA4_1035": {
+      "exact": false,
+      "reasons": [
+       "length 291 != target 281",
+       "fixup at +0x117 crosses the extent end",
+       "bytes differ (first at +0x4, 134 differing)",
+       "relocation set differs (5 vs 6)"
+      ],
+      "fixups": 19,
+      "relocations": 6,
+      "reloc_order": "EXACT"
+     },
+     "ExitNest": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 50,
+      "relocations": 9,
+      "reloc_order": "WITHIN_GROUP_PENDING"
+     },
+     "o25_3BA4_13AB": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 57,
+      "relocations": 12,
+      "reloc_order": "WITHIN_GROUP_PENDING"
+     },
+     "o25_3BA4_1581": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 18,
+      "relocations": 6,
+      "reloc_order": "WITHIN_GROUP_PENDING"
+     },
+     "o25_3BA4_188A": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 11,
+      "relocations": 1,
+      "reloc_order": "EXACT"
+     },
+     "o25_3BA4_1935": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 10,
+      "relocations": 3,
+      "reloc_order": "EXACT"
+     },
+     "o25_3BA4_19AD": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 12,
+      "relocations": 3,
+      "reloc_order": "GROUPED"
+     },
+     "o25_3BA4_1A0D": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 10,
+      "relocations": 3,
+      "reloc_order": "EXACT"
+     },
+     "o25_3BA4_1A9F": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 14,
+      "relocations": 1,
+      "reloc_order": "EXACT"
+     }
+    },
+    "exact": false,
+    "opaque_data": [],
+    "opaque_unmarked_bytes": 0,
+    "object_sha256": "bd8099553aa6856d1fe3effb81fb3de48edd6a7121ad87a297b82b3c658d543a",
+    "data": {
+     "CONST": {
+      "exact": true,
+      "reasons": [],
+      "size": 96,
+      "reloc_order": "GROUPED",
+      "start": 386162,
+      "class": "CONST",
+      "align": "word",
+      "far": false
+     },
+     "_DATA": {
+      "exact": true,
+      "reasons": [],
+      "size": 21,
+      "reloc_order": "EXACT",
+      "start": 363054,
+      "class": "DATA",
+      "align": "word",
+      "far": false
+     }
+    },
+    "data_only": false,
+    "communals": [],
+    "scaffold": [
+     "o25_3BA4_1686"
+    ],
+    "inplace_drafts": []
+   },
+   "claims": [
+    "DoAntMoveY",
+    "DoAntSimY",
+    "o25_3BA4_0999",
+    "o25_3BA4_0C01",
+    "o25_3BA4_0DFB",
+    "o25_3BA4_1035",
+    "ExitNest",
+    "o25_3BA4_13AB",
+    "o25_3BA4_1581",
+    "o25_3BA4_188A",
+    "o25_3BA4_1935",
+    "o25_3BA4_19AD",
+    "o25_3BA4_1A0D",
+    "o25_3BA4_1A9F"
+   ]
+  },
+  {
+   "name": "dig-call-value",
+   "file": "build\\workers\\fleet_ant\\compiled\\004_dig-call-value.c",
+   "why": "",
+   "result": {
+    "compile_ok": true,
+    "claims": {
+     "DoAntMoveY": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 184,
+      "relocations": 36,
+      "reloc_order": "GROUPED"
+     },
+     "DoAntSimY": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 50,
+      "relocations": 13,
+      "reloc_order": "GROUPED"
+     },
+     "o25_3BA4_0999": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 49,
+      "relocations": 19,
+      "reloc_order": "WITHIN_GROUP_PENDING"
+     },
+     "o25_3BA4_0C01": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 47,
+      "relocations": 20,
+      "reloc_order": "WITHIN_GROUP_PENDING"
+     },
+     "o25_3BA4_0DFB": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 55,
+      "relocations": 19,
+      "reloc_order": "GROUPED"
+     },
+     "o25_3BA4_1035": {
+      "exact": false,
+      "reasons": [
+       "length 282 != target 281",
+       "bytes differ (first at +0xcf, 71 differing)",
+       "relocation set differs (6 vs 6)"
+      ],
+      "fixups": 18,
+      "relocations": 6,
+      "reloc_order": "EXACT"
+     },
+     "ExitNest": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 50,
+      "relocations": 9,
+      "reloc_order": "WITHIN_GROUP_PENDING"
+     },
+     "o25_3BA4_13AB": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 57,
+      "relocations": 12,
+      "reloc_order": "WITHIN_GROUP_PENDING"
+     },
+     "o25_3BA4_1581": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 18,
+      "relocations": 6,
+      "reloc_order": "WITHIN_GROUP_PENDING"
+     },
+     "o25_3BA4_188A": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 11,
+      "relocations": 1,
+      "reloc_order": "EXACT"
+     },
+     "o25_3BA4_1935": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 10,
+      "relocations": 3,
+      "reloc_order": "EXACT"
+     },
+     "o25_3BA4_19AD": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 12,
+      "relocations": 3,
+      "reloc_order": "GROUPED"
+     },
+     "o25_3BA4_1A0D": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 10,
+      "relocations": 3,
+      "reloc_order": "EXACT"
+     },
+     "o25_3BA4_1A9F": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 14,
+      "relocations": 1,
+      "reloc_order": "EXACT"
+     }
+    },
+    "exact": false,
+    "opaque_data": [],
+    "opaque_unmarked_bytes": 0,
+    "object_sha256": "35bb4b15dfd5c83140d59747f0d5c83a72ff8abaac1829eb35a383337c7fd1e6",
+    "data": {
+     "CONST": {
+      "exact": true,
+      "reasons": [],
+      "size": 96,
+      "reloc_order": "GROUPED",
+      "start": 386162,
+      "class": "CONST",
+      "align": "word",
+      "far": false
+     },
+     "_DATA": {
+      "exact": true,
+      "reasons": [],
+      "size": 21,
+      "reloc_order": "EXACT",
+      "start": 363054,
+      "class": "DATA",
+      "align": "word",
+      "far": false
+     }
+    },
+    "data_only": false,
+    "communals": [],
+    "scaffold": [
+     "o25_3BA4_1686"
+    ],
+    "inplace_drafts": []
+   },
+   "claims": [
+    "DoAntMoveY",
+    "DoAntSimY",
+    "o25_3BA4_0999",
+    "o25_3BA4_0C01",
+    "o25_3BA4_0DFB",
+    "o25_3BA4_1035",
+    "ExitNest",
+    "o25_3BA4_13AB",
+    "o25_3BA4_1581",
+    "o25_3BA4_188A",
+    "o25_3BA4_1935",
+    "o25_3BA4_19AD",
+    "o25_3BA4_1A0D",
+    "o25_3BA4_1A9F"
+   ]
+  },
+  {
+   "name": "one-pointer-two-phases",
+   "file": "build\\workers\\fleet_ant\\compiled\\005_one-pointer-two-phases.c",
+   "why": "",
+   "result": {
+    "compile_ok": true,
+    "claims": {
+     "DoAntMoveY": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 184,
+      "relocations": 36,
+      "reloc_order": "GROUPED"
+     },
+     "DoAntSimY": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 50,
+      "relocations": 13,
+      "reloc_order": "GROUPED"
+     },
+     "o25_3BA4_0999": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 49,
+      "relocations": 19,
+      "reloc_order": "WITHIN_GROUP_PENDING"
+     },
+     "o25_3BA4_0C01": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 47,
+      "relocations": 20,
+      "reloc_order": "WITHIN_GROUP_PENDING"
+     },
+     "o25_3BA4_0DFB": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 55,
+      "relocations": 19,
+      "reloc_order": "GROUPED"
+     },
+     "o25_3BA4_1035": {
+      "exact": false,
+      "reasons": [
+       "length 284 != target 281",
+       "bytes differ (first at +0x4, 89 differing)",
+       "relocation set differs (6 vs 6)"
+      ],
+      "fixups": 20,
+      "relocations": 6,
+      "reloc_order": "EXACT"
+     },
+     "ExitNest": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 50,
+      "relocations": 9,
+      "reloc_order": "WITHIN_GROUP_PENDING"
+     },
+     "o25_3BA4_13AB": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 57,
+      "relocations": 12,
+      "reloc_order": "WITHIN_GROUP_PENDING"
+     },
+     "o25_3BA4_1581": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 18,
+      "relocations": 6,
+      "reloc_order": "WITHIN_GROUP_PENDING"
+     },
+     "o25_3BA4_188A": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 11,
+      "relocations": 1,
+      "reloc_order": "EXACT"
+     },
+     "o25_3BA4_1935": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 10,
+      "relocations": 3,
+      "reloc_order": "EXACT"
+     },
+     "o25_3BA4_19AD": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 12,
+      "relocations": 3,
+      "reloc_order": "GROUPED"
+     },
+     "o25_3BA4_1A0D": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 10,
+      "relocations": 3,
+      "reloc_order": "EXACT"
+     },
+     "o25_3BA4_1A9F": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 14,
+      "relocations": 1,
+      "reloc_order": "EXACT"
+     }
+    },
+    "exact": false,
+    "opaque_data": [],
+    "opaque_unmarked_bytes": 0,
+    "object_sha256": "f0f67e30f593794c2324c5b9ae28dbdbf310b38a8d596c79506ff7c21758ee1f",
+    "data": {
+     "CONST": {
+      "exact": true,
+      "reasons": [],
+      "size": 96,
+      "reloc_order": "GROUPED",
+      "start": 386162,
+      "class": "CONST",
+      "align": "word",
+      "far": false
+     },
+     "_DATA": {
+      "exact": true,
+      "reasons": [],
+      "size": 21,
+      "reloc_order": "EXACT",
+      "start": 363054,
+      "class": "DATA",
+      "align": "word",
+      "far": false
+     }
+    },
+    "data_only": false,
+    "communals": [],
+    "scaffold": [
+     "o25_3BA4_1686"
+    ],
+    "inplace_drafts": []
+   },
+   "claims": [
+    "DoAntMoveY",
+    "DoAntSimY",
+    "o25_3BA4_0999",
+    "o25_3BA4_0C01",
+    "o25_3BA4_0DFB",
+    "o25_3BA4_1035",
+    "ExitNest",
+    "o25_3BA4_13AB",
+    "o25_3BA4_1581",
+    "o25_3BA4_188A",
+    "o25_3BA4_1935",
+    "o25_3BA4_19AD",
+    "o25_3BA4_1A0D",
+    "o25_3BA4_1A9F"
+   ]
+  }
+ ]
+}

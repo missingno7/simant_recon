@@ -1,0 +1,556 @@
+{
+ "module": "root:0E2E",
+ "profile": "msc600ax",
+ "flags": [
+  "/AL",
+  "/Os",
+  "/Oe",
+  "/Og",
+  "/Zi"
+ ],
+ "variants": [
+  {
+   "name": "base",
+   "file": "D:\\Prog\\simant_recon\\build\\workers\\fleet_lesson\\round2-results\\000_base.c",
+   "why": "",
+   "result": {
+    "compile_ok": true,
+    "claims": {
+     "Feedback": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 34,
+      "relocations": 3,
+      "reloc_order": "GROUPED"
+     },
+     "RunTutor": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 19,
+      "relocations": 2,
+      "reloc_order": "GROUPED"
+     },
+     "GiveLesson": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 103,
+      "relocations": 15,
+      "reloc_order": "GROUPED"
+     },
+     "LessonDone": {
+      "exact": false,
+      "reasons": [
+       "length 739 != target 723",
+       "bytes differ (first at +0x26, 555 differing)",
+       "relocation set differs (9 vs 9)"
+      ],
+      "fixups": 143,
+      "relocations": 9,
+      "reloc_order": "EXACT"
+     }
+    },
+    "exact": false,
+    "opaque_data": [],
+    "opaque_unmarked_bytes": 0,
+    "object_sha256": "21ac0eb591ed67a78a909e1bb5ce14467fd9054782038dad34fe0cba6c427338",
+    "data": {
+     "CONST": {
+      "exact": true,
+      "reasons": [],
+      "size": 62,
+      "reloc_order": "GROUPED",
+      "start": 384248,
+      "class": "CONST",
+      "align": "word",
+      "far": false
+     }
+    },
+    "data_only": false,
+    "communals": [],
+    "scaffold": [],
+    "inplace_drafts": []
+   },
+   "claims": [
+    "Feedback",
+    "RunTutor",
+    "GiveLesson",
+    "LessonDone"
+   ]
+  },
+  {
+   "name": "case54_nested_switch_returns",
+   "file": "D:\\Prog\\simant_recon\\build\\workers\\fleet_lesson\\round2-results\\001_case54_nested_switch_returns.c",
+   "why": "",
+   "result": {
+    "compile_ok": true,
+    "claims": {
+     "Feedback": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 34,
+      "relocations": 3,
+      "reloc_order": "GROUPED"
+     },
+     "RunTutor": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 19,
+      "relocations": 2,
+      "reloc_order": "GROUPED"
+     },
+     "GiveLesson": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 103,
+      "relocations": 15,
+      "reloc_order": "GROUPED"
+     },
+     "LessonDone": {
+      "exact": false,
+      "reasons": [
+       "length 722 != target 723",
+       "bytes differ (first at +0x26, 553 differing)",
+       "relocation set differs (5 vs 9)"
+      ],
+      "fixups": 142,
+      "relocations": 9,
+      "reloc_order": "EXACT"
+     }
+    },
+    "exact": false,
+    "opaque_data": [],
+    "opaque_unmarked_bytes": 0,
+    "object_sha256": "9a8c8db2d42b7e592f65bee0654461d6a3cc1fb76d8e52bbd1d2e38d6a339953",
+    "data": {
+     "CONST": {
+      "exact": true,
+      "reasons": [],
+      "size": 62,
+      "reloc_order": "GROUPED",
+      "start": 384248,
+      "class": "CONST",
+      "align": "word",
+      "far": false
+     }
+    },
+    "data_only": false,
+    "communals": [],
+    "scaffold": [],
+    "inplace_drafts": []
+   },
+   "claims": [
+    "Feedback",
+    "RunTutor",
+    "GiveLesson",
+    "LessonDone"
+   ]
+  },
+  {
+   "name": "case54_nested_switch_shared_return",
+   "file": "D:\\Prog\\simant_recon\\build\\workers\\fleet_lesson\\round2-results\\002_case54_nested_switch_shared_return.c",
+   "why": "",
+   "result": {
+    "compile_ok": true,
+    "claims": {
+     "Feedback": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 34,
+      "relocations": 3,
+      "reloc_order": "GROUPED"
+     },
+     "RunTutor": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 19,
+      "relocations": 2,
+      "reloc_order": "GROUPED"
+     },
+     "GiveLesson": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 103,
+      "relocations": 15,
+      "reloc_order": "GROUPED"
+     },
+     "LessonDone": {
+      "exact": false,
+      "reasons": [
+       "bytes differ (first at +0x26, 546 differing)",
+       "relocation set differs (5 vs 9)"
+      ],
+      "fixups": 142,
+      "relocations": 9,
+      "reloc_order": "EXACT"
+     }
+    },
+    "exact": false,
+    "opaque_data": [],
+    "opaque_unmarked_bytes": 0,
+    "object_sha256": "a36ae6a2f9472b3c215b0b6398364f501e1b27ecafc63f3ce2219c1ccf59e715",
+    "data": {
+     "CONST": {
+      "exact": true,
+      "reasons": [],
+      "size": 62,
+      "reloc_order": "GROUPED",
+      "start": 384248,
+      "class": "CONST",
+      "align": "word",
+      "far": false
+     }
+    },
+    "data_only": false,
+    "communals": [],
+    "scaffold": [],
+    "inplace_drafts": []
+   },
+   "claims": [
+    "Feedback",
+    "RunTutor",
+    "GiveLesson",
+    "LessonDone"
+   ]
+  },
+  {
+   "name": "case54_result_local_lifetime",
+   "file": "D:\\Prog\\simant_recon\\build\\workers\\fleet_lesson\\round2-results\\003_case54_result_local_lifetime.c",
+   "why": "",
+   "result": {
+    "compile_ok": true,
+    "claims": {
+     "Feedback": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 34,
+      "relocations": 3,
+      "reloc_order": "GROUPED"
+     },
+     "RunTutor": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 19,
+      "relocations": 2,
+      "reloc_order": "GROUPED"
+     },
+     "GiveLesson": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 103,
+      "relocations": 15,
+      "reloc_order": "GROUPED"
+     },
+     "LessonDone": {
+      "exact": false,
+      "reasons": [
+       "length 742 != target 723",
+       "bytes differ (first at +0x26, 555 differing)",
+       "relocation set differs (8 vs 9)"
+      ],
+      "fixups": 143,
+      "relocations": 9,
+      "reloc_order": "EXACT"
+     }
+    },
+    "exact": false,
+    "opaque_data": [],
+    "opaque_unmarked_bytes": 0,
+    "object_sha256": "5c9ccc83e04cf7adc953b698a33b91fec9e588f0e0684db47c9f8280b27d4c73",
+    "data": {
+     "CONST": {
+      "exact": true,
+      "reasons": [],
+      "size": 62,
+      "reloc_order": "GROUPED",
+      "start": 384248,
+      "class": "CONST",
+      "align": "word",
+      "far": false
+     }
+    },
+    "data_only": false,
+    "communals": [],
+    "scaffold": [],
+    "inplace_drafts": []
+   },
+   "claims": [
+    "Feedback",
+    "RunTutor",
+    "GiveLesson",
+    "LessonDone"
+   ]
+  },
+  {
+   "name": "case54_shared_return",
+   "file": "D:\\Prog\\simant_recon\\build\\workers\\fleet_lesson\\round2-results\\004_case54_shared_return.c",
+   "why": "",
+   "result": {
+    "compile_ok": true,
+    "claims": {
+     "Feedback": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 34,
+      "relocations": 3,
+      "reloc_order": "GROUPED"
+     },
+     "RunTutor": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 19,
+      "relocations": 2,
+      "reloc_order": "GROUPED"
+     },
+     "GiveLesson": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 103,
+      "relocations": 15,
+      "reloc_order": "GROUPED"
+     },
+     "LessonDone": {
+      "exact": false,
+      "reasons": [
+       "length 739 != target 723",
+       "bytes differ (first at +0x26, 555 differing)",
+       "relocation set differs (8 vs 9)"
+      ],
+      "fixups": 143,
+      "relocations": 9,
+      "reloc_order": "EXACT"
+     }
+    },
+    "exact": false,
+    "opaque_data": [],
+    "opaque_unmarked_bytes": 0,
+    "object_sha256": "f285599402d6101fe922fd18dc030aae16e7b7f0d0eb4db884f9ac6039f021cf",
+    "data": {
+     "CONST": {
+      "exact": true,
+      "reasons": [],
+      "size": 62,
+      "reloc_order": "GROUPED",
+      "start": 384248,
+      "class": "CONST",
+      "align": "word",
+      "far": false
+     }
+    },
+    "data_only": false,
+    "communals": [],
+    "scaffold": [],
+    "inplace_drafts": []
+   },
+   "claims": [
+    "Feedback",
+    "RunTutor",
+    "GiveLesson",
+    "LessonDone"
+   ]
+  },
+  {
+   "name": "outer_default_break",
+   "file": "D:\\Prog\\simant_recon\\build\\workers\\fleet_lesson\\round2-results\\005_outer_default_break.c",
+   "why": "",
+   "result": {
+    "compile_ok": true,
+    "claims": {
+     "Feedback": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 34,
+      "relocations": 3,
+      "reloc_order": "GROUPED"
+     },
+     "RunTutor": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 19,
+      "relocations": 2,
+      "reloc_order": "GROUPED"
+     },
+     "GiveLesson": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 103,
+      "relocations": 15,
+      "reloc_order": "GROUPED"
+     },
+     "LessonDone": {
+      "exact": false,
+      "reasons": [
+       "length 739 != target 723",
+       "bytes differ (first at +0x26, 555 differing)",
+       "relocation set differs (9 vs 9)"
+      ],
+      "fixups": 143,
+      "relocations": 9,
+      "reloc_order": "EXACT"
+     }
+    },
+    "exact": false,
+    "opaque_data": [],
+    "opaque_unmarked_bytes": 0,
+    "object_sha256": "07524de02a68da74f3aa2876657ad521abca0733b8c49bf386f5b95b73a191f7",
+    "data": {
+     "CONST": {
+      "exact": true,
+      "reasons": [],
+      "size": 62,
+      "reloc_order": "GROUPED",
+      "start": 384248,
+      "class": "CONST",
+      "align": "word",
+      "far": false
+     }
+    },
+    "data_only": false,
+    "communals": [],
+    "scaffold": [],
+    "inplace_drafts": []
+   },
+   "claims": [
+    "Feedback",
+    "RunTutor",
+    "GiveLesson",
+    "LessonDone"
+   ]
+  },
+  {
+   "name": "outer_default_first",
+   "file": "D:\\Prog\\simant_recon\\build\\workers\\fleet_lesson\\round2-results\\006_outer_default_first.c",
+   "why": "",
+   "result": {
+    "compile_ok": true,
+    "claims": {
+     "Feedback": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 34,
+      "relocations": 3,
+      "reloc_order": "GROUPED"
+     },
+     "RunTutor": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 19,
+      "relocations": 2,
+      "reloc_order": "GROUPED"
+     },
+     "GiveLesson": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 103,
+      "relocations": 15,
+      "reloc_order": "GROUPED"
+     },
+     "LessonDone": {
+      "exact": false,
+      "reasons": [
+       "length 706 != target 723",
+       "bytes differ (first at +0x11, 680 differing)",
+       "relocation set differs (8 vs 9)"
+      ],
+      "fixups": 141,
+      "relocations": 9,
+      "reloc_order": "EXACT"
+     }
+    },
+    "exact": false,
+    "opaque_data": [],
+    "opaque_unmarked_bytes": 0,
+    "object_sha256": "4972b015d48f296b22cf01fdfbd47f9ad25578147d95d76613039d0c727ce352",
+    "data": {
+     "CONST": {
+      "exact": true,
+      "reasons": [],
+      "size": 62,
+      "reloc_order": "GROUPED",
+      "start": 384248,
+      "class": "CONST",
+      "align": "word",
+      "far": false
+     }
+    },
+    "data_only": false,
+    "communals": [],
+    "scaffold": [],
+    "inplace_drafts": []
+   },
+   "claims": [
+    "Feedback",
+    "RunTutor",
+    "GiveLesson",
+    "LessonDone"
+   ]
+  },
+  {
+   "name": "outer_default_last",
+   "file": "D:\\Prog\\simant_recon\\build\\workers\\fleet_lesson\\round2-results\\007_outer_default_last.c",
+   "why": "",
+   "result": {
+    "compile_ok": true,
+    "claims": {
+     "Feedback": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 34,
+      "relocations": 3,
+      "reloc_order": "GROUPED"
+     },
+     "RunTutor": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 19,
+      "relocations": 2,
+      "reloc_order": "GROUPED"
+     },
+     "GiveLesson": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 103,
+      "relocations": 15,
+      "reloc_order": "GROUPED"
+     },
+     "LessonDone": {
+      "exact": false,
+      "reasons": [
+       "length 706 != target 723",
+       "bytes differ (first at +0x11, 680 differing)",
+       "relocation set differs (8 vs 9)"
+      ],
+      "fixups": 141,
+      "relocations": 9,
+      "reloc_order": "EXACT"
+     }
+    },
+    "exact": false,
+    "opaque_data": [],
+    "opaque_unmarked_bytes": 0,
+    "object_sha256": "a3a099cdf77cd78adff68d4550643b3ea7d6fb2d01468e3aec3465be4e72618b",
+    "data": {
+     "CONST": {
+      "exact": true,
+      "reasons": [],
+      "size": 62,
+      "reloc_order": "GROUPED",
+      "start": 384248,
+      "class": "CONST",
+      "align": "word",
+      "far": false
+     }
+    },
+    "data_only": false,
+    "communals": [],
+    "scaffold": [],
+    "inplace_drafts": []
+   },
+   "claims": [
+    "Feedback",
+    "RunTutor",
+    "GiveLesson",
+    "LessonDone"
+   ]
+  }
+ ]
+}

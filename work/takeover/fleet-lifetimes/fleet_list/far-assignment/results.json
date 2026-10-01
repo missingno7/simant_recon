@@ -1,0 +1,691 @@
+{
+ "function": "f_23E6_0000",
+ "profile": "msc600ax",
+ "flags": [
+  "/AL",
+  "/Os",
+  "/Oe",
+  "/Og",
+  "/Gs",
+  "/Zi"
+ ],
+ "placements": {
+  "_DATA": {
+   "seg": 21939,
+   "off": 25840,
+   "size": 156
+  },
+  "CONST": {
+   "seg": 21939,
+   "off": 35388,
+   "size": 2
+  }
+ },
+ "base_sha256": "70f8f1db471e4444914136c1dbdd35148e026a2ea18c7ea2aed6c39bc3dfc211",
+ "variants": [
+  {
+   "name": "base",
+   "file": "build\\workers\\fleet_list\\far-assignment\\000_base.c",
+   "why": "",
+   "result": {
+    "compile_ok": true,
+    "claims": {
+     "f_23E6_0000": {
+      "exact": false,
+      "reasons": [
+       "length 156 != target 159",
+       "bytes differ (first at +0x5d, 41 differing)",
+       "relocation set differs (3 vs 3)"
+      ],
+      "fixups": 3,
+      "relocations": 3,
+      "reloc_order": "EXACT"
+     },
+     "f_23E6_009F": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 6,
+      "relocations": 5,
+      "reloc_order": "GROUPED"
+     },
+     "f_23E6_0109": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 3,
+      "relocations": 3,
+      "reloc_order": "EXACT"
+     },
+     "f_23E6_0132": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 4,
+      "relocations": 3,
+      "reloc_order": "EXACT"
+     },
+     "f_23E6_016B": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 6,
+      "relocations": 6,
+      "reloc_order": "GROUPED"
+     },
+     "f_23E6_01DC": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 6,
+      "relocations": 5,
+      "reloc_order": "GROUPED"
+     },
+     "f_23E6_0266": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 12,
+      "relocations": 11,
+      "reloc_order": "GROUPED"
+     },
+     "f_23E6_0392": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 15,
+      "relocations": 13,
+      "reloc_order": "GROUPED"
+     },
+     "win_DrawElevator": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 16,
+      "relocations": 5,
+      "reloc_order": "GROUPED"
+     },
+     "f_23E6_066C": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 10,
+      "relocations": 2,
+      "reloc_order": "EXACT"
+     },
+     "f_23E6_06F1": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 4,
+      "relocations": 3,
+      "reloc_order": "GROUPED"
+     },
+     "f_23E6_07A2": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 12,
+      "relocations": 11,
+      "reloc_order": "GROUPED"
+     },
+     "PrevListLine": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 14,
+      "relocations": 12,
+      "reloc_order": "GROUPED"
+     },
+     "f_23E6_0A53": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 9,
+      "relocations": 4,
+      "reloc_order": "GROUPED"
+     },
+     "win_ProcSliderEvent": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 17,
+      "relocations": 7,
+      "reloc_order": "GROUPED"
+     }
+    },
+    "exact": false,
+    "opaque_data": [],
+    "opaque_unmarked_bytes": 0,
+    "object_sha256": "55d98ca7bc791bed2678bed923bf11a539a58fb3fa66afe51eb0cc06a7b4e4c7",
+    "data": {
+     "_DATA": {
+      "exact": true,
+      "reasons": [],
+      "size": 156,
+      "reloc_order": "EXACT",
+      "start": 376864,
+      "class": "DATA",
+      "align": "word",
+      "far": false
+     },
+     "CONST": {
+      "exact": true,
+      "reasons": [],
+      "size": 2,
+      "reloc_order": "EXACT",
+      "start": 386412,
+      "class": "CONST",
+      "align": "word",
+      "far": false
+     }
+    },
+    "data_only": false,
+    "communals": [],
+    "scaffold": [],
+    "inplace_drafts": []
+   },
+   "claims": [
+    "f_23E6_0000",
+    "f_23E6_009F",
+    "f_23E6_0109",
+    "f_23E6_0132",
+    "f_23E6_016B",
+    "f_23E6_01DC",
+    "f_23E6_0266",
+    "f_23E6_0392",
+    "win_DrawElevator",
+    "f_23E6_066C",
+    "f_23E6_06F1",
+    "f_23E6_07A2",
+    "PrevListLine",
+    "f_23E6_0A53",
+    "win_ProcSliderEvent"
+   ]
+  },
+  {
+   "name": "far-pointer-assignment",
+   "file": "build\\workers\\fleet_list\\far-assignment\\001_far-pointer-assignment.c",
+   "why": "",
+   "result": {
+    "compile_ok": true,
+    "claims": {
+     "f_23E6_0000": {
+      "exact": false,
+      "reasons": [
+       "length 156 != target 159",
+       "bytes differ (first at +0x5d, 41 differing)",
+       "relocation set differs (3 vs 3)"
+      ],
+      "fixups": 3,
+      "relocations": 3,
+      "reloc_order": "EXACT"
+     },
+     "f_23E6_009F": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 6,
+      "relocations": 5,
+      "reloc_order": "GROUPED"
+     },
+     "f_23E6_0109": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 3,
+      "relocations": 3,
+      "reloc_order": "EXACT"
+     },
+     "f_23E6_0132": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 4,
+      "relocations": 3,
+      "reloc_order": "EXACT"
+     },
+     "f_23E6_016B": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 6,
+      "relocations": 6,
+      "reloc_order": "GROUPED"
+     },
+     "f_23E6_01DC": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 6,
+      "relocations": 5,
+      "reloc_order": "GROUPED"
+     },
+     "f_23E6_0266": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 12,
+      "relocations": 11,
+      "reloc_order": "GROUPED"
+     },
+     "f_23E6_0392": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 15,
+      "relocations": 13,
+      "reloc_order": "GROUPED"
+     },
+     "win_DrawElevator": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 16,
+      "relocations": 5,
+      "reloc_order": "GROUPED"
+     },
+     "f_23E6_066C": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 10,
+      "relocations": 2,
+      "reloc_order": "EXACT"
+     },
+     "f_23E6_06F1": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 4,
+      "relocations": 3,
+      "reloc_order": "GROUPED"
+     },
+     "f_23E6_07A2": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 12,
+      "relocations": 11,
+      "reloc_order": "GROUPED"
+     },
+     "PrevListLine": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 14,
+      "relocations": 12,
+      "reloc_order": "GROUPED"
+     },
+     "f_23E6_0A53": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 9,
+      "relocations": 4,
+      "reloc_order": "GROUPED"
+     },
+     "win_ProcSliderEvent": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 17,
+      "relocations": 7,
+      "reloc_order": "GROUPED"
+     }
+    },
+    "exact": false,
+    "opaque_data": [],
+    "opaque_unmarked_bytes": 0,
+    "object_sha256": "55d98ca7bc791bed2678bed923bf11a539a58fb3fa66afe51eb0cc06a7b4e4c7",
+    "data": {
+     "_DATA": {
+      "exact": true,
+      "reasons": [],
+      "size": 156,
+      "reloc_order": "EXACT",
+      "start": 376864,
+      "class": "DATA",
+      "align": "word",
+      "far": false
+     },
+     "CONST": {
+      "exact": true,
+      "reasons": [],
+      "size": 2,
+      "reloc_order": "EXACT",
+      "start": 386412,
+      "class": "CONST",
+      "align": "word",
+      "far": false
+     }
+    },
+    "data_only": false,
+    "communals": [],
+    "scaffold": [],
+    "inplace_drafts": []
+   },
+   "claims": [
+    "f_23E6_0000",
+    "f_23E6_009F",
+    "f_23E6_0109",
+    "f_23E6_0132",
+    "f_23E6_016B",
+    "f_23E6_01DC",
+    "f_23E6_0266",
+    "f_23E6_0392",
+    "win_DrawElevator",
+    "f_23E6_066C",
+    "f_23E6_06F1",
+    "f_23E6_07A2",
+    "PrevListLine",
+    "f_23E6_0A53",
+    "win_ProcSliderEvent"
+   ]
+  },
+  {
+   "name": "parenthesized-far-pointer-assignment",
+   "file": "build\\workers\\fleet_list\\far-assignment\\002_parenthesized-far-pointer-assignment.c",
+   "why": "",
+   "result": {
+    "compile_ok": true,
+    "claims": {
+     "f_23E6_0000": {
+      "exact": false,
+      "reasons": [
+       "length 156 != target 159",
+       "bytes differ (first at +0x5d, 41 differing)",
+       "relocation set differs (3 vs 3)"
+      ],
+      "fixups": 3,
+      "relocations": 3,
+      "reloc_order": "EXACT"
+     },
+     "f_23E6_009F": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 6,
+      "relocations": 5,
+      "reloc_order": "GROUPED"
+     },
+     "f_23E6_0109": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 3,
+      "relocations": 3,
+      "reloc_order": "EXACT"
+     },
+     "f_23E6_0132": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 4,
+      "relocations": 3,
+      "reloc_order": "EXACT"
+     },
+     "f_23E6_016B": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 6,
+      "relocations": 6,
+      "reloc_order": "GROUPED"
+     },
+     "f_23E6_01DC": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 6,
+      "relocations": 5,
+      "reloc_order": "GROUPED"
+     },
+     "f_23E6_0266": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 12,
+      "relocations": 11,
+      "reloc_order": "GROUPED"
+     },
+     "f_23E6_0392": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 15,
+      "relocations": 13,
+      "reloc_order": "GROUPED"
+     },
+     "win_DrawElevator": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 16,
+      "relocations": 5,
+      "reloc_order": "GROUPED"
+     },
+     "f_23E6_066C": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 10,
+      "relocations": 2,
+      "reloc_order": "EXACT"
+     },
+     "f_23E6_06F1": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 4,
+      "relocations": 3,
+      "reloc_order": "GROUPED"
+     },
+     "f_23E6_07A2": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 12,
+      "relocations": 11,
+      "reloc_order": "GROUPED"
+     },
+     "PrevListLine": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 14,
+      "relocations": 12,
+      "reloc_order": "GROUPED"
+     },
+     "f_23E6_0A53": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 9,
+      "relocations": 4,
+      "reloc_order": "GROUPED"
+     },
+     "win_ProcSliderEvent": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 17,
+      "relocations": 7,
+      "reloc_order": "GROUPED"
+     }
+    },
+    "exact": false,
+    "opaque_data": [],
+    "opaque_unmarked_bytes": 0,
+    "object_sha256": "55d98ca7bc791bed2678bed923bf11a539a58fb3fa66afe51eb0cc06a7b4e4c7",
+    "data": {
+     "_DATA": {
+      "exact": true,
+      "reasons": [],
+      "size": 156,
+      "reloc_order": "EXACT",
+      "start": 376864,
+      "class": "DATA",
+      "align": "word",
+      "far": false
+     },
+     "CONST": {
+      "exact": true,
+      "reasons": [],
+      "size": 2,
+      "reloc_order": "EXACT",
+      "start": 386412,
+      "class": "CONST",
+      "align": "word",
+      "far": false
+     }
+    },
+    "data_only": false,
+    "communals": [],
+    "scaffold": [],
+    "inplace_drafts": []
+   },
+   "claims": [
+    "f_23E6_0000",
+    "f_23E6_009F",
+    "f_23E6_0109",
+    "f_23E6_0132",
+    "f_23E6_016B",
+    "f_23E6_01DC",
+    "f_23E6_0266",
+    "f_23E6_0392",
+    "win_DrawElevator",
+    "f_23E6_066C",
+    "f_23E6_06F1",
+    "f_23E6_07A2",
+    "PrevListLine",
+    "f_23E6_0A53",
+    "win_ProcSliderEvent"
+   ]
+  },
+  {
+   "name": "right-associated-far-pointer-assignment",
+   "file": "build\\workers\\fleet_list\\far-assignment\\003_right-associated-far-pointer-assignment.c",
+   "why": "",
+   "result": {
+    "compile_ok": true,
+    "claims": {
+     "f_23E6_0000": {
+      "exact": false,
+      "reasons": [
+       "length 156 != target 159",
+       "bytes differ (first at +0x5d, 41 differing)",
+       "relocation set differs (3 vs 3)"
+      ],
+      "fixups": 3,
+      "relocations": 3,
+      "reloc_order": "EXACT"
+     },
+     "f_23E6_009F": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 6,
+      "relocations": 5,
+      "reloc_order": "GROUPED"
+     },
+     "f_23E6_0109": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 3,
+      "relocations": 3,
+      "reloc_order": "EXACT"
+     },
+     "f_23E6_0132": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 4,
+      "relocations": 3,
+      "reloc_order": "EXACT"
+     },
+     "f_23E6_016B": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 6,
+      "relocations": 6,
+      "reloc_order": "GROUPED"
+     },
+     "f_23E6_01DC": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 6,
+      "relocations": 5,
+      "reloc_order": "GROUPED"
+     },
+     "f_23E6_0266": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 12,
+      "relocations": 11,
+      "reloc_order": "GROUPED"
+     },
+     "f_23E6_0392": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 15,
+      "relocations": 13,
+      "reloc_order": "GROUPED"
+     },
+     "win_DrawElevator": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 16,
+      "relocations": 5,
+      "reloc_order": "GROUPED"
+     },
+     "f_23E6_066C": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 10,
+      "relocations": 2,
+      "reloc_order": "EXACT"
+     },
+     "f_23E6_06F1": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 4,
+      "relocations": 3,
+      "reloc_order": "GROUPED"
+     },
+     "f_23E6_07A2": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 12,
+      "relocations": 11,
+      "reloc_order": "GROUPED"
+     },
+     "PrevListLine": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 14,
+      "relocations": 12,
+      "reloc_order": "GROUPED"
+     },
+     "f_23E6_0A53": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 9,
+      "relocations": 4,
+      "reloc_order": "GROUPED"
+     },
+     "win_ProcSliderEvent": {
+      "exact": true,
+      "reasons": [],
+      "fixups": 17,
+      "relocations": 7,
+      "reloc_order": "GROUPED"
+     }
+    },
+    "exact": false,
+    "opaque_data": [],
+    "opaque_unmarked_bytes": 0,
+    "object_sha256": "55d98ca7bc791bed2678bed923bf11a539a58fb3fa66afe51eb0cc06a7b4e4c7",
+    "data": {
+     "_DATA": {
+      "exact": true,
+      "reasons": [],
+      "size": 156,
+      "reloc_order": "EXACT",
+      "start": 376864,
+      "class": "DATA",
+      "align": "word",
+      "far": false
+     },
+     "CONST": {
+      "exact": true,
+      "reasons": [],
+      "size": 2,
+      "reloc_order": "EXACT",
+      "start": 386412,
+      "class": "CONST",
+      "align": "word",
+      "far": false
+     }
+    },
+    "data_only": false,
+    "communals": [],
+    "scaffold": [],
+    "inplace_drafts": []
+   },
+   "claims": [
+    "f_23E6_0000",
+    "f_23E6_009F",
+    "f_23E6_0109",
+    "f_23E6_0132",
+    "f_23E6_016B",
+    "f_23E6_01DC",
+    "f_23E6_0266",
+    "f_23E6_0392",
+    "win_DrawElevator",
+    "f_23E6_066C",
+    "f_23E6_06F1",
+    "f_23E6_07A2",
+    "PrevListLine",
+    "f_23E6_0A53",
+    "win_ProcSliderEvent"
+   ]
+  }
+ ]
+}

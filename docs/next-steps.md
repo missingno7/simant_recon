@@ -2,39 +2,48 @@
 
 Read README.md, AGENTS.md, docs/codegen-rules.md and docs/tu-evidence.md before work.
 `python tools/validate.py` is the source of truth for totals (docs/progress.md/json).
-The latest menu-loader checkpoint accepts o17_384C_0039's 266 bytes and completes
-S17:384C as a 443-byte TU with grouped cross-function relocation order. LIFE-2
-records the used draw argument's initialization lifetime and its negative controls.
-The accepted declaration is layout-inferred; several draw-local widths match.
-Sources, controls and verification transcripts are in work/takeover/menu-loader/.
-Its separate 44-control list-helper follow-up remains negative.
-The preceding search-context checkpoint fixes bare search.py commands to inherit the
-target object's manifest compiler flags and private-data placements. It retains
-11 negative series / 176 controls (175 compiles) in work/takeover/phase-next/.
-None accepts S15, memory compaction or S25:1035; their residues remain explicit debt.
-The preceding phase-index checkpoint accepts CalcScore and completes S14:384C as a
-4,653-byte TU. It also repairs the memory-compaction starting draft's accepted-peer
-regression. Findings, compiler controls and verification transcripts are in
-work/takeover/context-next/. The earlier sibling-tool comparison remains in
-work/takeover/siblings/; its 203-test checkpoint preceded this acceptance.
-The latest checkpoint passes the full test suite (two skips), all 47 compiler
-probes and module/FAR_BSS checks. Full validation and a fresh byte-identical hybrid
-rebuild are retained in work/takeover/menu-loader/.
+The latest fleet checkpoint accepts ch_LookUpId's 354 bytes and completes
+root:1A96 as a 1,772-byte TU with grouped cross-function relocation order. PTR-1
+records the interacting base-plus-index pointer initializers and hash-index store
+order, isolated by eight parent controls. It adds no STEERED or layout-inferred bytes.
+The same checkpoint restores root:259D's original function order through promotion
+without adding coverage; win_DrawBitMap remains scaffolded. Diagnostic reports now
+distinguish actual candidate extents from target-limited comparison payloads.
+Seven Luna xhigh workers and parent controls retain 237 source-gate rows (236
+compiles, one exact target) in work/takeover/fleet-lifetimes/. Repeated baselines
+and historical reproductions are included; diagnostic rechecks and PTR-1 probes
+are separate. Fourteen rows regress accepted peers and nine regress private data.
+The one uncompiled SpiderScan row is a source-generation error. These failures
+do not establish assembly. Read the archive index before repeating a search.
+The preceding menu-loader checkpoint accepts o17_384C_0039's 266 bytes and
+completes S17:384C as a 443-byte TU. LIFE-2 records a real draw argument's
+initialization lifetime; the accepted declaration is layout-inferred. Sources,
+controls and verification are in work/takeover/menu-loader/.
+The preceding search-context checkpoint fixes bare search.py commands to inherit
+the target object's manifest flags and private-data placements. Its 11 negative
+series / 176 controls (175 compiles) remain in work/takeover/phase-next/.
+The earlier phase-index checkpoint accepts CalcScore and completes S14:384C as
+a 4,653-byte TU, and repairs the memory-compaction seed's accepted-peer regression.
+Evidence is in work/takeover/context-next/. The sibling-tool comparison remains
+in work/takeover/siblings/; its 203-test checkpoint is historical.
+The latest checkpoint passes 214 test cases (two skips), all 48 compiler probes,
+accepted-module and FAR_BSS checks. Full validation, a fresh byte-identical hybrid
+rebuild and reconciliation with current totals are in work/takeover/fleet-lifetimes/.
 Check Git for the current checkpoint and publication status.
 
 ## 1. Reconstruction state
 
 | Measure | Validated value |
 |---|---:|
-| exact C functions / bytes | 1,243 / 237,167 |
+| exact C functions / bytes | 1,244 / 237,521 |
 | genuine symbolic assembly / code-segment data | 50,441 / 1,481 bytes |
 | ASM used as a workaround for C | 0 |
-| complete TUs / with proven cross-function relocation order | 96 / 95 |
+| complete TUs / with proven cross-function relocation order | 97 / 96 |
 | accepted MSC runtime | 90 members; 12,339 code + 2,021 data bytes |
 | accepted game data / far data | 113,884 / 80,310 bytes |
-| unresolved game code / data | 15,709 / 129 bytes |
+| unresolved game code / data | 15,355 / 129 bytes |
 | RTLink manager and associated metadata debt | 17,001 bytes |
-| owned functions / known functions | 1,700 / 1,730 |
+| owned functions / known functions | 1,701 / 1,730 |
 
 Proof quality is separate from coverage: 14,115 C bytes are STEERED, 20,867 are
 layout-inferred, and 11,742 have within-group order pending. S00:31AD is the only
@@ -50,6 +59,18 @@ That proves placement and integration, not a fully independent reconstruction.
 
 ## 2. Accepted changes in the takeover checkpoint
 
+* root:1A96 is a complete 1,772-byte TU at 1A96C:1B058 after recovering
+  ch_LookUpId's 354 bytes. Both probing phases use explicit base-plus-index
+  pointer initializers; `i = start = hash` reproduces the observed store order.
+  Changing either initializer alone leaves a five-byte excess; reversing the
+  stores leaves two operand bytes wrong. PTR-1 pins the positive and negative
+  controls. All eleven functions, DATA (112 bytes), BSS (2 bytes), and complete-TU
+  grouped relocation order pass. Evidence: work/takeover/fleet-lifetimes/.
+* root:259D's canonical source now follows original function order. Promotion
+  rechecked its three accepted peers and DATA (106 bytes) without adding a claim
+  or extent. win_DrawBitMap remains scaffolded at 675 versus 663 bytes. Its
+  previous target-sized diagnostic display reflected a truncated comparison
+  payload, not its actual candidate extent; that reporting defect is repaired.
 * S17:384C is now a complete 443-byte TU. The 266-byte menu loader uses a distinct
   final-phase pointer and initializes its real zero draw argument before the pointer
   fixup loops. MSC retains the extra frame word and reproduces the spill homes without
@@ -155,7 +176,9 @@ gate-failing objects are not cached. Historical work/align scripts have correcte
 Do not apply their archived whole-file patches to the current tools.
 
 Sibling-inspired diagnostics (`tools/diag.py`, `tools/mismatch.py`) now group fully
-bound BP/register/branch differences without affecting acceptance. Autosearch exposes
+bound BP/register/branch differences without affecting acceptance. Candidate length
+reports include the full function extent and separately identify an incomplete
+comparison payload; longer prefixes cannot appear as equal-length candidates. Autosearch exposes
 `--neutral-beam` and protects every existing manifest claim, rejecting broken starting
 drafts. The older memory near draft breaks accepted f_171C_2086 (88 vs 92 bytes).
 The new work/takeover/context-next/memory-near-repaired.c restores a real used nb
@@ -173,7 +196,7 @@ including the 2,804-archive PC-SIG 1991 ZIP-catalog inventory. Retained findings
 under `work/linker_hunt/`; the RTLink 4.00 candidate is now extracted and tested
 (see section 4). It does not match the original stock manager format.
 
-There are 30 known unowned functions, all represented by whole-module drafts,
+There are 29 known unowned functions, all represented by whole-module drafts,
 including hard register, stack-slot, CSE, declaration and control-flow residues.
 Preserved earlier surveys: work/resI/survey.txt, work/resJ/residue.txt,
 work/autosearch/results.md/json. Current takeover scratch and search state:
@@ -265,6 +288,24 @@ at four bytes. It is not evidence of the original source or compiler exclusion.
 Do not repeat these controls. Prefer new listing/semantic evidence for an untouched
 open body, or investigate the list helper's real far-pointer value flow before
 introducing more folded expressions. Preserve every accepted peer during that work.
+
+The fleet checkpoint further tests S15 real argument lifetimes and separate phases,
+SpiderScan aggregate/argument lifetimes, FindIndex decision flow, list-helper
+register/huge-pointer forms, memory-helper result lifetimes, S25 field values,
+question-dialog locals, LessonDone switch/return structure and bitmap word views.
+None of those targets matches. The list helper's new 23 rows preserve data, but
+two regress peers. LessonDone's 715-byte case-9 split is a reproduction of an old
+failure, not a new lead; its entire 56-word switch table stays in the strict gate.
+The full per-series verdicts, frozen seeds and replay generators are in
+work/takeover/fleet-lifetimes/.
+
+Next, rotate to a remaining body with a fresh listing-grounded expression or
+address-form hypothesis. PTR-1 shows that semantically equivalent pointer forms
+can change register allocation, and store order must be tested independently.
+Retain whole-module peer/data gates. Do not repeat the lifetime searches above,
+assume all compilers normalize indexing/addition, or infer assembly from failure.
+The fresh canonical triage predates cache acceptance and does not supersede a
+better archived source; preserve the 490-byte memory-compaction seed, for example.
 
 ## 4. Independent historical link
 

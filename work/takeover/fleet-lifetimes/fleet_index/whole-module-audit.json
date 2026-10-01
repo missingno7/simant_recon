@@ -1,0 +1,2047 @@
+{
+ "module": "root:1986",
+ "profile": "msc600ax",
+ "flags": [
+  "/AL",
+  "/Os",
+  "/Oeg",
+  "/Gs",
+  "/Zi"
+ ],
+ "placements": {
+  "_DATA": {
+   "seg": 21939,
+   "off": 13854,
+   "size": 67
+  },
+  "CONST": {
+   "seg": 21939,
+   "off": 35248,
+   "size": 6
+  }
+ },
+ "variants": 23,
+ "positive_peer_claims": [
+  "OpenIndex",
+  "CreateIndex",
+  "CloseIndex",
+  "f_1986_0235",
+  "f_1986_0236",
+  "f_1986_0237"
+ ],
+ "rows": [
+  {
+   "name": "base",
+   "source_sha256": "1af5252fe8449eeca44b4099fe4a4bd1ff5ab24521c7a888253adfdd4554ac5a",
+   "compile_ok": true,
+   "FindIndex": {
+    "exact": false,
+    "reasons": [
+     "bytes differ (first at +0x79, 3 differing)"
+    ],
+    "fixups": 13,
+    "relocations": 0,
+    "reloc_order": "EXACT"
+   },
+   "existing_claims": {
+    "OpenIndex": {
+     "exact": true,
+     "reasons": [],
+     "fixups": 19,
+     "relocations": 9,
+     "reloc_order": "GROUPED"
+    },
+    "CreateIndex": {
+     "exact": true,
+     "reasons": [],
+     "fixups": 0,
+     "relocations": 0,
+     "reloc_order": "EXACT"
+    },
+    "CloseIndex": {
+     "exact": true,
+     "reasons": [],
+     "fixups": 4,
+     "relocations": 1,
+     "reloc_order": "EXACT"
+    },
+    "f_1986_0235": {
+     "exact": true,
+     "reasons": [],
+     "fixups": 0,
+     "relocations": 0,
+     "reloc_order": "EXACT"
+    },
+    "f_1986_0236": {
+     "exact": true,
+     "reasons": [],
+     "fixups": 0,
+     "relocations": 0,
+     "reloc_order": "EXACT"
+    },
+    "f_1986_0237": {
+     "exact": true,
+     "reasons": [],
+     "fixups": 0,
+     "relocations": 0,
+     "reloc_order": "EXACT"
+    }
+   },
+   "data": {
+    "_DATA": {
+     "exact": true,
+     "reasons": [],
+     "size": 67,
+     "reloc_order": "EXACT",
+     "start": 364878,
+     "class": "DATA",
+     "align": "word",
+     "far": false
+    },
+    "CONST": {
+     "exact": true,
+     "reasons": [],
+     "size": 6,
+     "reloc_order": "GROUPED",
+     "start": 386272,
+     "class": "CONST",
+     "align": "word",
+     "far": false
+    }
+   },
+   "module_exact": false
+  },
+  {
+   "name": "initial/001_count-check-before-bound",
+   "source_sha256": "adc0218b73c189033bc0bf484006ac65d6e61b8d2fd6e68559a079a478023c70",
+   "compile_ok": true,
+   "FindIndex": {
+    "exact": false,
+    "reasons": [
+     "length 294 != target 267",
+     "bytes differ (first at +0x8, 254 differing)",
+     "relocation set differs (4 vs 0)"
+    ],
+    "fixups": 16,
+    "relocations": 0,
+    "reloc_order": "EXACT"
+   },
+   "existing_claims": {
+    "OpenIndex": {
+     "exact": true,
+     "reasons": [],
+     "fixups": 19,
+     "relocations": 9,
+     "reloc_order": "GROUPED"
+    },
+    "CreateIndex": {
+     "exact": true,
+     "reasons": [],
+     "fixups": 0,
+     "relocations": 0,
+     "reloc_order": "EXACT"
+    },
+    "CloseIndex": {
+     "exact": true,
+     "reasons": [],
+     "fixups": 4,
+     "relocations": 1,
+     "reloc_order": "EXACT"
+    },
+    "f_1986_0235": {
+     "exact": true,
+     "reasons": [],
+     "fixups": 0,
+     "relocations": 0,
+     "reloc_order": "EXACT"
+    },
+    "f_1986_0236": {
+     "exact": true,
+     "reasons": [],
+     "fixups": 0,
+     "relocations": 0,
+     "reloc_order": "EXACT"
+    },
+    "f_1986_0237": {
+     "exact": true,
+     "reasons": [],
+     "fixups": 0,
+     "relocations": 0,
+     "reloc_order": "EXACT"
+    }
+   },
+   "data": {
+    "_DATA": {
+     "exact": true,
+     "reasons": [],
+     "size": 67,
+     "reloc_order": "EXACT",
+     "start": 364878,
+     "class": "DATA",
+     "align": "word",
+     "far": false
+    },
+    "CONST": {
+     "exact": false,
+     "reasons": [
+      "data bytes differ",
+      "data relocation set differs 2 vs 3",
+      "placement size 6 != segment length 4 (claimed code could use unverified data)"
+     ],
+     "size": 6,
+     "reloc_order": "EXACT",
+     "start": 386272,
+     "class": "CONST",
+     "align": "word",
+     "far": false
+    }
+   },
+   "module_exact": false
+  },
+  {
+   "name": "initial/002_cached-count-check-before-bound",
+   "source_sha256": "f3149d562616dc2a046c9208dcbbe870b160b8e40a36650de5be89e1ba45f44b",
+   "compile_ok": true,
+   "FindIndex": {
+    "exact": false,
+    "reasons": [
+     "length 276 != target 267",
+     "bytes differ (first at +0x2b, 217 differing)"
+    ],
+    "fixups": 13,
+    "relocations": 0,
+    "reloc_order": "EXACT"
+   },
+   "existing_claims": {
+    "OpenIndex": {
+     "exact": true,
+     "reasons": [],
+     "fixups": 19,
+     "relocations": 9,
+     "reloc_order": "GROUPED"
+    },
+    "CreateIndex": {
+     "exact": true,
+     "reasons": [],
+     "fixups": 0,
+     "relocations": 0,
+     "reloc_order": "EXACT"
+    },
+    "CloseIndex": {
+     "exact": true,
+     "reasons": [],
+     "fixups": 4,
+     "relocations": 1,
+     "reloc_order": "EXACT"
+    },
+    "f_1986_0235": {
+     "exact": true,
+     "reasons": [],
+     "fixups": 0,
+     "relocations": 0,
+     "reloc_order": "EXACT"
+    },
+    "f_1986_0236": {
+     "exact": true,
+     "reasons": [],
+     "fixups": 0,
+     "relocations": 0,
+     "reloc_order": "EXACT"
+    },
+    "f_1986_0237": {
+     "exact": true,
+     "reasons": [],
+     "fixups": 0,
+     "relocations": 0,
+     "reloc_order": "EXACT"
+    }
+   },
+   "data": {
+    "_DATA": {
+     "exact": true,
+     "reasons": [],
+     "size": 67,
+     "reloc_order": "EXACT",
+     "start": 364878,
+     "class": "DATA",
+     "align": "word",
+     "far": false
+    },
+    "CONST": {
+     "exact": true,
+     "reasons": [],
+     "size": 6,
+     "reloc_order": "GROUPED",
+     "start": 386272,
+     "class": "CONST",
+     "align": "word",
+     "far": false
+    }
+   },
+   "module_exact": false
+  },
+  {
+   "name": "initial/003_bound-zero-check-before-decrement",
+   "source_sha256": "216a93c54f27e267c678a2fe9a1f6d9667eb3d134d21d8cb505df2c5049d2d01",
+   "compile_ok": true,
+   "FindIndex": {
+    "exact": false,
+    "reasons": [
+     "length 274 != target 267",
+     "bytes differ (first at +0x2e, 218 differing)"
+    ],
+    "fixups": 13,
+    "relocations": 0,
+    "reloc_order": "EXACT"
+   },
+   "existing_claims": {
+    "OpenIndex": {
+     "exact": true,
+     "reasons": [],
+     "fixups": 19,
+     "relocations": 9,
+     "reloc_order": "GROUPED"
+    },
+    "CreateIndex": {
+     "exact": true,
+     "reasons": [],
+     "fixups": 0,
+     "relocations": 0,
+     "reloc_order": "EXACT"
+    },
+    "CloseIndex": {
+     "exact": true,
+     "reasons": [],
+     "fixups": 4,
+     "relocations": 1,
+     "reloc_order": "EXACT"
+    },
+    "f_1986_0235": {
+     "exact": true,
+     "reasons": [],
+     "fixups": 0,
+     "relocations": 0,
+     "reloc_order": "EXACT"
+    },
+    "f_1986_0236": {
+     "exact": true,
+     "reasons": [],
+     "fixups": 0,
+     "relocations": 0,
+     "reloc_order": "EXACT"
+    },
+    "f_1986_0237": {
+     "exact": true,
+     "reasons": [],
+     "fixups": 0,
+     "relocations": 0,
+     "reloc_order": "EXACT"
+    }
+   },
+   "data": {
+    "_DATA": {
+     "exact": true,
+     "reasons": [],
+     "size": 67,
+     "reloc_order": "EXACT",
+     "start": 364878,
+     "class": "DATA",
+     "align": "word",
+     "far": false
+    },
+    "CONST": {
+     "exact": true,
+     "reasons": [],
+     "size": 6,
+     "reloc_order": "GROUPED",
+     "start": 386272,
+     "class": "CONST",
+     "align": "word",
+     "far": false
+    }
+   },
+   "module_exact": false
+  },
+  {
+   "name": "initial/004_cached-bound-zero-check-before-decrement",
+   "source_sha256": "f8068f3b2c47bb713a4f6608c6f3cdeb657279a938e8596620b71235e1fa21e4",
+   "compile_ok": true,
+   "FindIndex": {
+    "exact": false,
+    "reasons": [
+     "length 274 != target 267",
+     "bytes differ (first at +0x2e, 218 differing)"
+    ],
+    "fixups": 13,
+    "relocations": 0,
+    "reloc_order": "EXACT"
+   },
+   "existing_claims": {
+    "OpenIndex": {
+     "exact": true,
+     "reasons": [],
+     "fixups": 19,
+     "relocations": 9,
+     "reloc_order": "GROUPED"
+    },
+    "CreateIndex": {
+     "exact": true,
+     "reasons": [],
+     "fixups": 0,
+     "relocations": 0,
+     "reloc_order": "EXACT"
+    },
+    "CloseIndex": {
+     "exact": true,
+     "reasons": [],
+     "fixups": 4,
+     "relocations": 1,
+     "reloc_order": "EXACT"
+    },
+    "f_1986_0235": {
+     "exact": true,
+     "reasons": [],
+     "fixups": 0,
+     "relocations": 0,
+     "reloc_order": "EXACT"
+    },
+    "f_1986_0236": {
+     "exact": true,
+     "reasons": [],
+     "fixups": 0,
+     "relocations": 0,
+     "reloc_order": "EXACT"
+    },
+    "f_1986_0237": {
+     "exact": true,
+     "reasons": [],
+     "fixups": 0,
+     "relocations": 0,
+     "reloc_order": "EXACT"
+    }
+   },
+   "data": {
+    "_DATA": {
+     "exact": true,
+     "reasons": [],
+     "size": 67,
+     "reloc_order": "EXACT",
+     "start": 364878,
+     "class": "DATA",
+     "align": "word",
+     "far": false
+    },
+    "CONST": {
+     "exact": true,
+     "reasons": [],
+     "size": 6,
+     "reloc_order": "GROUPED",
+     "start": 386272,
+     "class": "CONST",
+     "align": "word",
+     "far": false
+    }
+   },
+   "module_exact": false
+  },
+  {
+   "name": "initial/005_local-current-pointer",
+   "source_sha256": "1d6bd714f990782648d391424fb80f06f9a715807da281453ff3e4bf95c57bd2",
+   "compile_ok": true,
+   "FindIndex": {
+    "exact": false,
+    "reasons": [
+     "length 270 != target 267",
+     "bytes differ (first at +0x5, 217 differing)",
+     "relocation set differs (3 vs 0)"
+    ],
+    "fixups": 15,
+    "relocations": 0,
+    "reloc_order": "EXACT"
+   },
+   "existing_claims": {
+    "OpenIndex": {
+     "exact": true,
+     "reasons": [],
+     "fixups": 19,
+     "relocations": 9,
+     "reloc_order": "GROUPED"
+    },
+    "CreateIndex": {
+     "exact": true,
+     "reasons": [],
+     "fixups": 0,
+     "relocations": 0,
+     "reloc_order": "EXACT"
+    },
+    "CloseIndex": {
+     "exact": true,
+     "reasons": [],
+     "fixups": 4,
+     "relocations": 1,
+     "reloc_order": "EXACT"
+    },
+    "f_1986_0235": {
+     "exact": true,
+     "reasons": [],
+     "fixups": 0,
+     "relocations": 0,
+     "reloc_order": "EXACT"
+    },
+    "f_1986_0236": {
+     "exact": true,
+     "reasons": [],
+     "fixups": 0,
+     "relocations": 0,
+     "reloc_order": "EXACT"
+    },
+    "f_1986_0237": {
+     "exact": true,
+     "reasons": [],
+     "fixups": 0,
+     "relocations": 0,
+     "reloc_order": "EXACT"
+    }
+   },
+   "data": {
+    "_DATA": {
+     "exact": true,
+     "reasons": [],
+     "size": 67,
+     "reloc_order": "EXACT",
+     "start": 364878,
+     "class": "DATA",
+     "align": "word",
+     "far": false
+    },
+    "CONST": {
+     "exact": true,
+     "reasons": [],
+     "size": 6,
+     "reloc_order": "GROUPED",
+     "start": 386272,
+     "class": "CONST",
+     "align": "word",
+     "far": false
+    }
+   },
+   "module_exact": false
+  },
+  {
+   "name": "initial/006_local-pointer-addition",
+   "source_sha256": "73ed847acec6f76d2727459b3c825c4495ed112e928e4668e6b106c530f0a16e",
+   "compile_ok": true,
+   "FindIndex": {
+    "exact": false,
+    "reasons": [
+     "length 270 != target 267",
+     "bytes differ (first at +0x5, 217 differing)",
+     "relocation set differs (3 vs 0)"
+    ],
+    "fixups": 15,
+    "relocations": 0,
+    "reloc_order": "EXACT"
+   },
+   "existing_claims": {
+    "OpenIndex": {
+     "exact": true,
+     "reasons": [],
+     "fixups": 19,
+     "relocations": 9,
+     "reloc_order": "GROUPED"
+    },
+    "CreateIndex": {
+     "exact": true,
+     "reasons": [],
+     "fixups": 0,
+     "relocations": 0,
+     "reloc_order": "EXACT"
+    },
+    "CloseIndex": {
+     "exact": true,
+     "reasons": [],
+     "fixups": 4,
+     "relocations": 1,
+     "reloc_order": "EXACT"
+    },
+    "f_1986_0235": {
+     "exact": true,
+     "reasons": [],
+     "fixups": 0,
+     "relocations": 0,
+     "reloc_order": "EXACT"
+    },
+    "f_1986_0236": {
+     "exact": true,
+     "reasons": [],
+     "fixups": 0,
+     "relocations": 0,
+     "reloc_order": "EXACT"
+    },
+    "f_1986_0237": {
+     "exact": true,
+     "reasons": [],
+     "fixups": 0,
+     "relocations": 0,
+     "reloc_order": "EXACT"
+    }
+   },
+   "data": {
+    "_DATA": {
+     "exact": true,
+     "reasons": [],
+     "size": 67,
+     "reloc_order": "EXACT",
+     "start": 364878,
+     "class": "DATA",
+     "align": "word",
+     "far": false
+    },
+    "CONST": {
+     "exact": true,
+     "reasons": [],
+     "size": 6,
+     "reloc_order": "GROUPED",
+     "start": 386272,
+     "class": "CONST",
+     "align": "word",
+     "far": false
+    }
+   },
+   "module_exact": false
+  },
+  {
+   "name": "initial/007_cached-kind-local",
+   "source_sha256": "072a82cd43d966c88a6ad8d964af3cb7db1de600663d793a50478155169811b5",
+   "compile_ok": true,
+   "FindIndex": {
+    "exact": false,
+    "reasons": [
+     "length 272 != target 267",
+     "bytes differ (first at +0x5, 253 differing)",
+     "relocation set differs (3 vs 0)"
+    ],
+    "fixups": 15,
+    "relocations": 0,
+    "reloc_order": "EXACT"
+   },
+   "existing_claims": {
+    "OpenIndex": {
+     "exact": true,
+     "reasons": [],
+     "fixups": 19,
+     "relocations": 9,
+     "reloc_order": "GROUPED"
+    },
+    "CreateIndex": {
+     "exact": true,
+     "reasons": [],
+     "fixups": 0,
+     "relocations": 0,
+     "reloc_order": "EXACT"
+    },
+    "CloseIndex": {
+     "exact": true,
+     "reasons": [],
+     "fixups": 4,
+     "relocations": 1,
+     "reloc_order": "EXACT"
+    },
+    "f_1986_0235": {
+     "exact": true,
+     "reasons": [],
+     "fixups": 0,
+     "relocations": 0,
+     "reloc_order": "EXACT"
+    },
+    "f_1986_0236": {
+     "exact": true,
+     "reasons": [],
+     "fixups": 0,
+     "relocations": 0,
+     "reloc_order": "EXACT"
+    },
+    "f_1986_0237": {
+     "exact": true,
+     "reasons": [],
+     "fixups": 0,
+     "relocations": 0,
+     "reloc_order": "EXACT"
+    }
+   },
+   "data": {
+    "_DATA": {
+     "exact": true,
+     "reasons": [],
+     "size": 67,
+     "reloc_order": "EXACT",
+     "start": 364878,
+     "class": "DATA",
+     "align": "word",
+     "far": false
+    },
+    "CONST": {
+     "exact": true,
+     "reasons": [],
+     "size": 6,
+     "reloc_order": "GROUPED",
+     "start": 386272,
+     "class": "CONST",
+     "align": "word",
+     "far": false
+    }
+   },
+   "module_exact": false
+  },
+  {
+   "name": "initial/008_cached-fields-locals",
+   "source_sha256": "f057969bda57ac4e9a3ef7e7cbd76d0feee59843594b3e30860fda256d5093eb",
+   "compile_ok": true,
+   "FindIndex": {
+    "exact": false,
+    "reasons": [
+     "length 266 != target 267",
+     "bytes differ (first at +0x5, 250 differing)"
+    ],
+    "fixups": 14,
+    "relocations": 0,
+    "reloc_order": "EXACT"
+   },
+   "existing_claims": {
+    "OpenIndex": {
+     "exact": true,
+     "reasons": [],
+     "fixups": 19,
+     "relocations": 9,
+     "reloc_order": "GROUPED"
+    },
+    "CreateIndex": {
+     "exact": true,
+     "reasons": [],
+     "fixups": 0,
+     "relocations": 0,
+     "reloc_order": "EXACT"
+    },
+    "CloseIndex": {
+     "exact": true,
+     "reasons": [],
+     "fixups": 4,
+     "relocations": 1,
+     "reloc_order": "EXACT"
+    },
+    "f_1986_0235": {
+     "exact": true,
+     "reasons": [],
+     "fixups": 0,
+     "relocations": 0,
+     "reloc_order": "EXACT"
+    },
+    "f_1986_0236": {
+     "exact": true,
+     "reasons": [],
+     "fixups": 0,
+     "relocations": 0,
+     "reloc_order": "EXACT"
+    },
+    "f_1986_0237": {
+     "exact": true,
+     "reasons": [],
+     "fixups": 0,
+     "relocations": 0,
+     "reloc_order": "EXACT"
+    }
+   },
+   "data": {
+    "_DATA": {
+     "exact": true,
+     "reasons": [],
+     "size": 67,
+     "reloc_order": "EXACT",
+     "start": 364878,
+     "class": "DATA",
+     "align": "word",
+     "far": false
+    },
+    "CONST": {
+     "exact": true,
+     "reasons": [],
+     "size": 6,
+     "reloc_order": "GROUPED",
+     "start": 386272,
+     "class": "CONST",
+     "align": "word",
+     "far": false
+    }
+   },
+   "module_exact": false
+  },
+  {
+   "name": "initial/009_local-pointer-through-final-check",
+   "source_sha256": "69ff518502be92f5ae5a16b03602baa2b9e56583b15d6fb1890a3831cec873df",
+   "compile_ok": true,
+   "FindIndex": {
+    "exact": false,
+    "reasons": [
+     "length 268 != target 267",
+     "bytes differ (first at +0x5, 240 differing)",
+     "relocation set differs (4 vs 0)"
+    ],
+    "fixups": 18,
+    "relocations": 0,
+    "reloc_order": "EXACT"
+   },
+   "existing_claims": {
+    "OpenIndex": {
+     "exact": true,
+     "reasons": [],
+     "fixups": 19,
+     "relocations": 9,
+     "reloc_order": "GROUPED"
+    },
+    "CreateIndex": {
+     "exact": true,
+     "reasons": [],
+     "fixups": 0,
+     "relocations": 0,
+     "reloc_order": "EXACT"
+    },
+    "CloseIndex": {
+     "exact": true,
+     "reasons": [],
+     "fixups": 4,
+     "relocations": 1,
+     "reloc_order": "EXACT"
+    },
+    "f_1986_0235": {
+     "exact": true,
+     "reasons": [],
+     "fixups": 0,
+     "relocations": 0,
+     "reloc_order": "EXACT"
+    },
+    "f_1986_0236": {
+     "exact": true,
+     "reasons": [],
+     "fixups": 0,
+     "relocations": 0,
+     "reloc_order": "EXACT"
+    },
+    "f_1986_0237": {
+     "exact": true,
+     "reasons": [],
+     "fixups": 0,
+     "relocations": 0,
+     "reloc_order": "EXACT"
+    }
+   },
+   "data": {
+    "_DATA": {
+     "exact": true,
+     "reasons": [],
+     "size": 67,
+     "reloc_order": "EXACT",
+     "start": 364878,
+     "class": "DATA",
+     "align": "word",
+     "far": false
+    },
+    "CONST": {
+     "exact": false,
+     "reasons": [
+      "data bytes differ",
+      "data relocation set differs 2 vs 3",
+      "placement size 6 != segment length 4 (claimed code could use unverified data)"
+     ],
+     "size": 6,
+     "reloc_order": "EXACT",
+     "start": 386272,
+     "class": "CONST",
+     "align": "word",
+     "far": false
+    }
+   },
+   "module_exact": false
+  },
+  {
+   "name": "initial/010_exclusive-upper-sum-midpoint",
+   "source_sha256": "93f20b3585073b1a7b4636f437fa008ceff7a476edbe626476b91a796927476e",
+   "compile_ok": true,
+   "FindIndex": {
+    "exact": false,
+    "reasons": [
+     "length 245 != target 267",
+     "bytes differ (first at +0x5, 233 differing)",
+     "relocation set differs (3 vs 0)"
+    ],
+    "fixups": 17,
+    "relocations": 0,
+    "reloc_order": "EXACT"
+   },
+   "existing_claims": {
+    "OpenIndex": {
+     "exact": true,
+     "reasons": [],
+     "fixups": 19,
+     "relocations": 9,
+     "reloc_order": "GROUPED"
+    },
+    "CreateIndex": {
+     "exact": true,
+     "reasons": [],
+     "fixups": 0,
+     "relocations": 0,
+     "reloc_order": "EXACT"
+    },
+    "CloseIndex": {
+     "exact": true,
+     "reasons": [],
+     "fixups": 4,
+     "relocations": 1,
+     "reloc_order": "EXACT"
+    },
+    "f_1986_0235": {
+     "exact": true,
+     "reasons": [],
+     "fixups": 0,
+     "relocations": 0,
+     "reloc_order": "EXACT"
+    },
+    "f_1986_0236": {
+     "exact": true,
+     "reasons": [],
+     "fixups": 0,
+     "relocations": 0,
+     "reloc_order": "EXACT"
+    },
+    "f_1986_0237": {
+     "exact": true,
+     "reasons": [],
+     "fixups": 0,
+     "relocations": 0,
+     "reloc_order": "EXACT"
+    }
+   },
+   "data": {
+    "_DATA": {
+     "exact": true,
+     "reasons": [],
+     "size": 67,
+     "reloc_order": "EXACT",
+     "start": 364878,
+     "class": "DATA",
+     "align": "word",
+     "far": false
+    },
+    "CONST": {
+     "exact": true,
+     "reasons": [],
+     "size": 6,
+     "reloc_order": "GROUPED",
+     "start": 386272,
+     "class": "CONST",
+     "align": "word",
+     "far": false
+    }
+   },
+   "module_exact": false
+  },
+  {
+   "name": "initial/011_exclusive-upper-difference-midpoint",
+   "source_sha256": "8ab52847408142b2ed83fd3d1548d4dac77c3012458caa75ce90d137fdab8516",
+   "compile_ok": true,
+   "FindIndex": {
+    "exact": false,
+    "reasons": [
+     "length 247 != target 267",
+     "bytes differ (first at +0x5, 234 differing)",
+     "relocation set differs (3 vs 0)"
+    ],
+    "fixups": 17,
+    "relocations": 0,
+    "reloc_order": "EXACT"
+   },
+   "existing_claims": {
+    "OpenIndex": {
+     "exact": true,
+     "reasons": [],
+     "fixups": 19,
+     "relocations": 9,
+     "reloc_order": "GROUPED"
+    },
+    "CreateIndex": {
+     "exact": true,
+     "reasons": [],
+     "fixups": 0,
+     "relocations": 0,
+     "reloc_order": "EXACT"
+    },
+    "CloseIndex": {
+     "exact": true,
+     "reasons": [],
+     "fixups": 4,
+     "relocations": 1,
+     "reloc_order": "EXACT"
+    },
+    "f_1986_0235": {
+     "exact": true,
+     "reasons": [],
+     "fixups": 0,
+     "relocations": 0,
+     "reloc_order": "EXACT"
+    },
+    "f_1986_0236": {
+     "exact": true,
+     "reasons": [],
+     "fixups": 0,
+     "relocations": 0,
+     "reloc_order": "EXACT"
+    },
+    "f_1986_0237": {
+     "exact": true,
+     "reasons": [],
+     "fixups": 0,
+     "relocations": 0,
+     "reloc_order": "EXACT"
+    }
+   },
+   "data": {
+    "_DATA": {
+     "exact": true,
+     "reasons": [],
+     "size": 67,
+     "reloc_order": "EXACT",
+     "start": 364878,
+     "class": "DATA",
+     "align": "word",
+     "far": false
+    },
+    "CONST": {
+     "exact": true,
+     "reasons": [],
+     "size": 6,
+     "reloc_order": "GROUPED",
+     "start": 386272,
+     "class": "CONST",
+     "align": "word",
+     "far": false
+    }
+   },
+   "module_exact": false
+  },
+  {
+   "name": "novel/001_reverse-kind-first",
+   "source_sha256": "0311908b5ad38e5cd109d79c4215a2aa673024c345af6c4e4be083257972c09c",
+   "compile_ok": true,
+   "FindIndex": {
+    "exact": false,
+    "reasons": [
+     "length 287 != target 267",
+     "bytes differ (first at +0x8, 239 differing)",
+     "relocation set differs (4 vs 0)"
+    ],
+    "fixups": 15,
+    "relocations": 0,
+    "reloc_order": "EXACT"
+   },
+   "existing_claims": {
+    "OpenIndex": {
+     "exact": true,
+     "reasons": [],
+     "fixups": 19,
+     "relocations": 9,
+     "reloc_order": "GROUPED"
+    },
+    "CreateIndex": {
+     "exact": true,
+     "reasons": [],
+     "fixups": 0,
+     "relocations": 0,
+     "reloc_order": "EXACT"
+    },
+    "CloseIndex": {
+     "exact": true,
+     "reasons": [],
+     "fixups": 4,
+     "relocations": 1,
+     "reloc_order": "EXACT"
+    },
+    "f_1986_0235": {
+     "exact": true,
+     "reasons": [],
+     "fixups": 0,
+     "relocations": 0,
+     "reloc_order": "EXACT"
+    },
+    "f_1986_0236": {
+     "exact": true,
+     "reasons": [],
+     "fixups": 0,
+     "relocations": 0,
+     "reloc_order": "EXACT"
+    },
+    "f_1986_0237": {
+     "exact": true,
+     "reasons": [],
+     "fixups": 0,
+     "relocations": 0,
+     "reloc_order": "EXACT"
+    }
+   },
+   "data": {
+    "_DATA": {
+     "exact": true,
+     "reasons": [],
+     "size": 67,
+     "reloc_order": "EXACT",
+     "start": 364878,
+     "class": "DATA",
+     "align": "word",
+     "far": false
+    },
+    "CONST": {
+     "exact": false,
+     "reasons": [
+      "data bytes differ",
+      "data relocation set differs 2 vs 3",
+      "placement size 6 != segment length 4 (claimed code could use unverified data)"
+     ],
+     "size": 6,
+     "reloc_order": "EXACT",
+     "start": 386272,
+     "class": "CONST",
+     "align": "word",
+     "far": false
+    }
+   },
+   "module_exact": false
+  },
+  {
+   "name": "novel/002_reverse-kind-and-id-first",
+   "source_sha256": "dcf30ed9271ee85584ff71bf16e209ba19b988310da48cc21b30f5293f712729",
+   "compile_ok": true,
+   "FindIndex": {
+    "exact": false,
+    "reasons": [
+     "length 287 != target 267",
+     "bytes differ (first at +0x8, 239 differing)",
+     "relocation set differs (4 vs 0)"
+    ],
+    "fixups": 15,
+    "relocations": 0,
+    "reloc_order": "EXACT"
+   },
+   "existing_claims": {
+    "OpenIndex": {
+     "exact": true,
+     "reasons": [],
+     "fixups": 19,
+     "relocations": 9,
+     "reloc_order": "GROUPED"
+    },
+    "CreateIndex": {
+     "exact": true,
+     "reasons": [],
+     "fixups": 0,
+     "relocations": 0,
+     "reloc_order": "EXACT"
+    },
+    "CloseIndex": {
+     "exact": true,
+     "reasons": [],
+     "fixups": 4,
+     "relocations": 1,
+     "reloc_order": "EXACT"
+    },
+    "f_1986_0235": {
+     "exact": true,
+     "reasons": [],
+     "fixups": 0,
+     "relocations": 0,
+     "reloc_order": "EXACT"
+    },
+    "f_1986_0236": {
+     "exact": true,
+     "reasons": [],
+     "fixups": 0,
+     "relocations": 0,
+     "reloc_order": "EXACT"
+    },
+    "f_1986_0237": {
+     "exact": true,
+     "reasons": [],
+     "fixups": 0,
+     "relocations": 0,
+     "reloc_order": "EXACT"
+    }
+   },
+   "data": {
+    "_DATA": {
+     "exact": true,
+     "reasons": [],
+     "size": 67,
+     "reloc_order": "EXACT",
+     "start": 364878,
+     "class": "DATA",
+     "align": "word",
+     "far": false
+    },
+    "CONST": {
+     "exact": false,
+     "reasons": [
+      "data bytes differ",
+      "data relocation set differs 2 vs 3",
+      "placement size 6 != segment length 4 (claimed code could use unverified data)"
+     ],
+     "size": 6,
+     "reloc_order": "EXACT",
+     "start": 386272,
+     "class": "CONST",
+     "align": "word",
+     "far": false
+    }
+   },
+   "module_exact": false
+  },
+  {
+   "name": "novel/003_ordered-two-way-kind",
+   "source_sha256": "493f48386bc4c3da3ad8233e849fcbcb4677c8c83db0c1eb051e951edea1b6b9",
+   "compile_ok": true,
+   "FindIndex": {
+    "exact": false,
+    "reasons": [
+     "length 287 != target 267",
+     "bytes differ (first at +0x8, 239 differing)",
+     "relocation set differs (4 vs 0)"
+    ],
+    "fixups": 15,
+    "relocations": 0,
+    "reloc_order": "EXACT"
+   },
+   "existing_claims": {
+    "OpenIndex": {
+     "exact": true,
+     "reasons": [],
+     "fixups": 19,
+     "relocations": 9,
+     "reloc_order": "GROUPED"
+    },
+    "CreateIndex": {
+     "exact": true,
+     "reasons": [],
+     "fixups": 0,
+     "relocations": 0,
+     "reloc_order": "EXACT"
+    },
+    "CloseIndex": {
+     "exact": true,
+     "reasons": [],
+     "fixups": 4,
+     "relocations": 1,
+     "reloc_order": "EXACT"
+    },
+    "f_1986_0235": {
+     "exact": true,
+     "reasons": [],
+     "fixups": 0,
+     "relocations": 0,
+     "reloc_order": "EXACT"
+    },
+    "f_1986_0236": {
+     "exact": true,
+     "reasons": [],
+     "fixups": 0,
+     "relocations": 0,
+     "reloc_order": "EXACT"
+    },
+    "f_1986_0237": {
+     "exact": true,
+     "reasons": [],
+     "fixups": 0,
+     "relocations": 0,
+     "reloc_order": "EXACT"
+    }
+   },
+   "data": {
+    "_DATA": {
+     "exact": true,
+     "reasons": [],
+     "size": 67,
+     "reloc_order": "EXACT",
+     "start": 364878,
+     "class": "DATA",
+     "align": "word",
+     "far": false
+    },
+    "CONST": {
+     "exact": false,
+     "reasons": [
+      "data bytes differ",
+      "data relocation set differs 2 vs 3",
+      "placement size 6 != segment length 4 (claimed code could use unverified data)"
+     ],
+     "size": 6,
+     "reloc_order": "EXACT",
+     "start": 386272,
+     "class": "CONST",
+     "align": "word",
+     "far": false
+    }
+   },
+   "module_exact": false
+  },
+  {
+   "name": "novel/004_reverse-compound-boundary",
+   "source_sha256": "c23204826e18fde091aad4fa85c54bf93b0fadef3d17a096f1d9409819a62e4b",
+   "compile_ok": true,
+   "FindIndex": {
+    "exact": false,
+    "reasons": [
+     "bytes differ (first at +0x7a, 17 differing)"
+    ],
+    "fixups": 13,
+    "relocations": 0,
+    "reloc_order": "EXACT"
+   },
+   "existing_claims": {
+    "OpenIndex": {
+     "exact": true,
+     "reasons": [],
+     "fixups": 19,
+     "relocations": 9,
+     "reloc_order": "GROUPED"
+    },
+    "CreateIndex": {
+     "exact": true,
+     "reasons": [],
+     "fixups": 0,
+     "relocations": 0,
+     "reloc_order": "EXACT"
+    },
+    "CloseIndex": {
+     "exact": true,
+     "reasons": [],
+     "fixups": 4,
+     "relocations": 1,
+     "reloc_order": "EXACT"
+    },
+    "f_1986_0235": {
+     "exact": true,
+     "reasons": [],
+     "fixups": 0,
+     "relocations": 0,
+     "reloc_order": "EXACT"
+    },
+    "f_1986_0236": {
+     "exact": true,
+     "reasons": [],
+     "fixups": 0,
+     "relocations": 0,
+     "reloc_order": "EXACT"
+    },
+    "f_1986_0237": {
+     "exact": true,
+     "reasons": [],
+     "fixups": 0,
+     "relocations": 0,
+     "reloc_order": "EXACT"
+    }
+   },
+   "data": {
+    "_DATA": {
+     "exact": true,
+     "reasons": [],
+     "size": 67,
+     "reloc_order": "EXACT",
+     "start": 364878,
+     "class": "DATA",
+     "align": "word",
+     "far": false
+    },
+    "CONST": {
+     "exact": true,
+     "reasons": [],
+     "size": 6,
+     "reloc_order": "GROUPED",
+     "start": 386272,
+     "class": "CONST",
+     "align": "word",
+     "far": false
+    }
+   },
+   "module_exact": false
+  },
+  {
+   "name": "followup/001_reverse-sequential-continues",
+   "source_sha256": "728921a0f6f4823467b58aac8fd74f13e04f338e1cedf56b66b051c7cbe9f2d2",
+   "compile_ok": true,
+   "FindIndex": {
+    "exact": false,
+    "reasons": [
+     "length 287 != target 267",
+     "bytes differ (first at +0x8, 239 differing)",
+     "relocation set differs (4 vs 0)"
+    ],
+    "fixups": 15,
+    "relocations": 0,
+    "reloc_order": "EXACT"
+   },
+   "existing_claims": {
+    "OpenIndex": {
+     "exact": true,
+     "reasons": [],
+     "fixups": 19,
+     "relocations": 9,
+     "reloc_order": "GROUPED"
+    },
+    "CreateIndex": {
+     "exact": true,
+     "reasons": [],
+     "fixups": 0,
+     "relocations": 0,
+     "reloc_order": "EXACT"
+    },
+    "CloseIndex": {
+     "exact": true,
+     "reasons": [],
+     "fixups": 4,
+     "relocations": 1,
+     "reloc_order": "EXACT"
+    },
+    "f_1986_0235": {
+     "exact": true,
+     "reasons": [],
+     "fixups": 0,
+     "relocations": 0,
+     "reloc_order": "EXACT"
+    },
+    "f_1986_0236": {
+     "exact": true,
+     "reasons": [],
+     "fixups": 0,
+     "relocations": 0,
+     "reloc_order": "EXACT"
+    },
+    "f_1986_0237": {
+     "exact": true,
+     "reasons": [],
+     "fixups": 0,
+     "relocations": 0,
+     "reloc_order": "EXACT"
+    }
+   },
+   "data": {
+    "_DATA": {
+     "exact": true,
+     "reasons": [],
+     "size": 67,
+     "reloc_order": "EXACT",
+     "start": 364878,
+     "class": "DATA",
+     "align": "word",
+     "far": false
+    },
+    "CONST": {
+     "exact": false,
+     "reasons": [
+      "data bytes differ",
+      "data relocation set differs 2 vs 3",
+      "placement size 6 != segment length 4 (claimed code could use unverified data)"
+     ],
+     "size": 6,
+     "reloc_order": "EXACT",
+     "start": 386272,
+     "class": "CONST",
+     "align": "word",
+     "far": false
+    }
+   },
+   "module_exact": false
+  },
+  {
+   "name": "followup/002_reverse-sequential-gotos",
+   "source_sha256": "d45921cefdc9159fd7c26aec52032017c70651e10a80aa2d6566a07b8a1283ad",
+   "compile_ok": true,
+   "FindIndex": {
+    "exact": false,
+    "reasons": [
+     "bytes differ (first at +0x7a, 17 differing)"
+    ],
+    "fixups": 13,
+    "relocations": 0,
+    "reloc_order": "EXACT"
+   },
+   "existing_claims": {
+    "OpenIndex": {
+     "exact": true,
+     "reasons": [],
+     "fixups": 19,
+     "relocations": 9,
+     "reloc_order": "GROUPED"
+    },
+    "CreateIndex": {
+     "exact": true,
+     "reasons": [],
+     "fixups": 0,
+     "relocations": 0,
+     "reloc_order": "EXACT"
+    },
+    "CloseIndex": {
+     "exact": true,
+     "reasons": [],
+     "fixups": 4,
+     "relocations": 1,
+     "reloc_order": "EXACT"
+    },
+    "f_1986_0235": {
+     "exact": true,
+     "reasons": [],
+     "fixups": 0,
+     "relocations": 0,
+     "reloc_order": "EXACT"
+    },
+    "f_1986_0236": {
+     "exact": true,
+     "reasons": [],
+     "fixups": 0,
+     "relocations": 0,
+     "reloc_order": "EXACT"
+    },
+    "f_1986_0237": {
+     "exact": true,
+     "reasons": [],
+     "fixups": 0,
+     "relocations": 0,
+     "reloc_order": "EXACT"
+    }
+   },
+   "data": {
+    "_DATA": {
+     "exact": true,
+     "reasons": [],
+     "size": 67,
+     "reloc_order": "EXACT",
+     "start": 364878,
+     "class": "DATA",
+     "align": "word",
+     "far": false
+    },
+    "CONST": {
+     "exact": true,
+     "reasons": [],
+     "size": 6,
+     "reloc_order": "GROUPED",
+     "start": 386272,
+     "class": "CONST",
+     "align": "word",
+     "far": false
+    }
+   },
+   "module_exact": false
+  },
+  {
+   "name": "followup/003_reverse-nested-id-first",
+   "source_sha256": "ecc9a16221df078a466b650458486c9df396bef35ddf42b002772f1a019fc3ca",
+   "compile_ok": true,
+   "FindIndex": {
+    "exact": false,
+    "reasons": [
+     "length 287 != target 267",
+     "bytes differ (first at +0x8, 240 differing)",
+     "relocation set differs (4 vs 0)"
+    ],
+    "fixups": 15,
+    "relocations": 0,
+    "reloc_order": "EXACT"
+   },
+   "existing_claims": {
+    "OpenIndex": {
+     "exact": true,
+     "reasons": [],
+     "fixups": 19,
+     "relocations": 9,
+     "reloc_order": "GROUPED"
+    },
+    "CreateIndex": {
+     "exact": true,
+     "reasons": [],
+     "fixups": 0,
+     "relocations": 0,
+     "reloc_order": "EXACT"
+    },
+    "CloseIndex": {
+     "exact": true,
+     "reasons": [],
+     "fixups": 4,
+     "relocations": 1,
+     "reloc_order": "EXACT"
+    },
+    "f_1986_0235": {
+     "exact": true,
+     "reasons": [],
+     "fixups": 0,
+     "relocations": 0,
+     "reloc_order": "EXACT"
+    },
+    "f_1986_0236": {
+     "exact": true,
+     "reasons": [],
+     "fixups": 0,
+     "relocations": 0,
+     "reloc_order": "EXACT"
+    },
+    "f_1986_0237": {
+     "exact": true,
+     "reasons": [],
+     "fixups": 0,
+     "relocations": 0,
+     "reloc_order": "EXACT"
+    }
+   },
+   "data": {
+    "_DATA": {
+     "exact": true,
+     "reasons": [],
+     "size": 67,
+     "reloc_order": "EXACT",
+     "start": 364878,
+     "class": "DATA",
+     "align": "word",
+     "far": false
+    },
+    "CONST": {
+     "exact": false,
+     "reasons": [
+      "data bytes differ",
+      "data relocation set differs 2 vs 3",
+      "placement size 6 != segment length 4 (claimed code could use unverified data)"
+     ],
+     "size": 6,
+     "reloc_order": "EXACT",
+     "start": 386272,
+     "class": "CONST",
+     "align": "word",
+     "far": false
+    }
+   },
+   "module_exact": false
+  },
+  {
+   "name": "followup/004_reverse-nested-kind-first",
+   "source_sha256": "dcf30ed9271ee85584ff71bf16e209ba19b988310da48cc21b30f5293f712729",
+   "compile_ok": true,
+   "FindIndex": {
+    "exact": false,
+    "reasons": [
+     "length 287 != target 267",
+     "bytes differ (first at +0x8, 239 differing)",
+     "relocation set differs (4 vs 0)"
+    ],
+    "fixups": 15,
+    "relocations": 0,
+    "reloc_order": "EXACT"
+   },
+   "existing_claims": {
+    "OpenIndex": {
+     "exact": true,
+     "reasons": [],
+     "fixups": 19,
+     "relocations": 9,
+     "reloc_order": "GROUPED"
+    },
+    "CreateIndex": {
+     "exact": true,
+     "reasons": [],
+     "fixups": 0,
+     "relocations": 0,
+     "reloc_order": "EXACT"
+    },
+    "CloseIndex": {
+     "exact": true,
+     "reasons": [],
+     "fixups": 4,
+     "relocations": 1,
+     "reloc_order": "EXACT"
+    },
+    "f_1986_0235": {
+     "exact": true,
+     "reasons": [],
+     "fixups": 0,
+     "relocations": 0,
+     "reloc_order": "EXACT"
+    },
+    "f_1986_0236": {
+     "exact": true,
+     "reasons": [],
+     "fixups": 0,
+     "relocations": 0,
+     "reloc_order": "EXACT"
+    },
+    "f_1986_0237": {
+     "exact": true,
+     "reasons": [],
+     "fixups": 0,
+     "relocations": 0,
+     "reloc_order": "EXACT"
+    }
+   },
+   "data": {
+    "_DATA": {
+     "exact": true,
+     "reasons": [],
+     "size": 67,
+     "reloc_order": "EXACT",
+     "start": 364878,
+     "class": "DATA",
+     "align": "word",
+     "far": false
+    },
+    "CONST": {
+     "exact": false,
+     "reasons": [
+      "data bytes differ",
+      "data relocation set differs 2 vs 3",
+      "placement size 6 != segment length 4 (claimed code could use unverified data)"
+     ],
+     "size": 6,
+     "reloc_order": "EXACT",
+     "start": 386272,
+     "class": "CONST",
+     "align": "word",
+     "far": false
+    }
+   },
+   "module_exact": false
+  },
+  {
+   "name": "followup/005_reverse-upper-continue",
+   "source_sha256": "f55ceb618cc2e217d3d44e9814cd8a88bcac87790dc0c6172feede3ee605df0a",
+   "compile_ok": true,
+   "FindIndex": {
+    "exact": false,
+    "reasons": [
+     "bytes differ (first at +0x7a, 17 differing)"
+    ],
+    "fixups": 13,
+    "relocations": 0,
+    "reloc_order": "EXACT"
+   },
+   "existing_claims": {
+    "OpenIndex": {
+     "exact": true,
+     "reasons": [],
+     "fixups": 19,
+     "relocations": 9,
+     "reloc_order": "GROUPED"
+    },
+    "CreateIndex": {
+     "exact": true,
+     "reasons": [],
+     "fixups": 0,
+     "relocations": 0,
+     "reloc_order": "EXACT"
+    },
+    "CloseIndex": {
+     "exact": true,
+     "reasons": [],
+     "fixups": 4,
+     "relocations": 1,
+     "reloc_order": "EXACT"
+    },
+    "f_1986_0235": {
+     "exact": true,
+     "reasons": [],
+     "fixups": 0,
+     "relocations": 0,
+     "reloc_order": "EXACT"
+    },
+    "f_1986_0236": {
+     "exact": true,
+     "reasons": [],
+     "fixups": 0,
+     "relocations": 0,
+     "reloc_order": "EXACT"
+    },
+    "f_1986_0237": {
+     "exact": true,
+     "reasons": [],
+     "fixups": 0,
+     "relocations": 0,
+     "reloc_order": "EXACT"
+    }
+   },
+   "data": {
+    "_DATA": {
+     "exact": true,
+     "reasons": [],
+     "size": 67,
+     "reloc_order": "EXACT",
+     "start": 364878,
+     "class": "DATA",
+     "align": "word",
+     "far": false
+    },
+    "CONST": {
+     "exact": true,
+     "reasons": [],
+     "size": 6,
+     "reloc_order": "GROUPED",
+     "start": 386272,
+     "class": "CONST",
+     "align": "word",
+     "far": false
+    }
+   },
+   "module_exact": false
+  },
+  {
+   "name": "followup/006_reverse-lower-guard",
+   "source_sha256": "b5a383495017793f791a8fbd3b565aff3df539f13037b0dddb5ac4519209cf2c",
+   "compile_ok": true,
+   "FindIndex": {
+    "exact": false,
+    "reasons": [
+     "length 269 != target 267",
+     "bytes differ (first at +0x33, 214 differing)"
+    ],
+    "fixups": 13,
+    "relocations": 0,
+    "reloc_order": "EXACT"
+   },
+   "existing_claims": {
+    "OpenIndex": {
+     "exact": true,
+     "reasons": [],
+     "fixups": 19,
+     "relocations": 9,
+     "reloc_order": "GROUPED"
+    },
+    "CreateIndex": {
+     "exact": true,
+     "reasons": [],
+     "fixups": 0,
+     "relocations": 0,
+     "reloc_order": "EXACT"
+    },
+    "CloseIndex": {
+     "exact": true,
+     "reasons": [],
+     "fixups": 4,
+     "relocations": 1,
+     "reloc_order": "EXACT"
+    },
+    "f_1986_0235": {
+     "exact": true,
+     "reasons": [],
+     "fixups": 0,
+     "relocations": 0,
+     "reloc_order": "EXACT"
+    },
+    "f_1986_0236": {
+     "exact": true,
+     "reasons": [],
+     "fixups": 0,
+     "relocations": 0,
+     "reloc_order": "EXACT"
+    },
+    "f_1986_0237": {
+     "exact": true,
+     "reasons": [],
+     "fixups": 0,
+     "relocations": 0,
+     "reloc_order": "EXACT"
+    }
+   },
+   "data": {
+    "_DATA": {
+     "exact": true,
+     "reasons": [],
+     "size": 67,
+     "reloc_order": "EXACT",
+     "start": 364878,
+     "class": "DATA",
+     "align": "word",
+     "far": false
+    },
+    "CONST": {
+     "exact": true,
+     "reasons": [],
+     "size": 6,
+     "reloc_order": "GROUPED",
+     "start": 386272,
+     "class": "CONST",
+     "align": "word",
+     "far": false
+    }
+   },
+   "module_exact": false
+  },
+  {
+   "name": "followup/007_loop-scoped-mid",
+   "source_sha256": "f2f99d725381030f11ff0bca50bf3d318f36989b470cdb5c0c27b0b201e12788",
+   "compile_ok": true,
+   "FindIndex": {
+    "exact": false,
+    "reasons": [
+     "bytes differ (first at +0x79, 3 differing)"
+    ],
+    "fixups": 13,
+    "relocations": 0,
+    "reloc_order": "EXACT"
+   },
+   "existing_claims": {
+    "OpenIndex": {
+     "exact": true,
+     "reasons": [],
+     "fixups": 19,
+     "relocations": 9,
+     "reloc_order": "GROUPED"
+    },
+    "CreateIndex": {
+     "exact": true,
+     "reasons": [],
+     "fixups": 0,
+     "relocations": 0,
+     "reloc_order": "EXACT"
+    },
+    "CloseIndex": {
+     "exact": true,
+     "reasons": [],
+     "fixups": 4,
+     "relocations": 1,
+     "reloc_order": "EXACT"
+    },
+    "f_1986_0235": {
+     "exact": true,
+     "reasons": [],
+     "fixups": 0,
+     "relocations": 0,
+     "reloc_order": "EXACT"
+    },
+    "f_1986_0236": {
+     "exact": true,
+     "reasons": [],
+     "fixups": 0,
+     "relocations": 0,
+     "reloc_order": "EXACT"
+    },
+    "f_1986_0237": {
+     "exact": true,
+     "reasons": [],
+     "fixups": 0,
+     "relocations": 0,
+     "reloc_order": "EXACT"
+    }
+   },
+   "data": {
+    "_DATA": {
+     "exact": true,
+     "reasons": [],
+     "size": 67,
+     "reloc_order": "EXACT",
+     "start": 364878,
+     "class": "DATA",
+     "align": "word",
+     "far": false
+    },
+    "CONST": {
+     "exact": true,
+     "reasons": [],
+     "size": 6,
+     "reloc_order": "GROUPED",
+     "start": 386272,
+     "class": "CONST",
+     "align": "word",
+     "far": false
+    }
+   },
+   "module_exact": false
+  },
+  {
+   "name": "followup/008_loop-scoped-mid-reverse-nested",
+   "source_sha256": "67105bcde930578d58672935c81adade19766dc68691bb2adf9ec9b7fa47a94f",
+   "compile_ok": true,
+   "FindIndex": {
+    "exact": false,
+    "reasons": [
+     "length 287 != target 267",
+     "bytes differ (first at +0x8, 239 differing)",
+     "relocation set differs (4 vs 0)"
+    ],
+    "fixups": 15,
+    "relocations": 0,
+    "reloc_order": "EXACT"
+   },
+   "existing_claims": {
+    "OpenIndex": {
+     "exact": true,
+     "reasons": [],
+     "fixups": 19,
+     "relocations": 9,
+     "reloc_order": "GROUPED"
+    },
+    "CreateIndex": {
+     "exact": true,
+     "reasons": [],
+     "fixups": 0,
+     "relocations": 0,
+     "reloc_order": "EXACT"
+    },
+    "CloseIndex": {
+     "exact": true,
+     "reasons": [],
+     "fixups": 4,
+     "relocations": 1,
+     "reloc_order": "EXACT"
+    },
+    "f_1986_0235": {
+     "exact": true,
+     "reasons": [],
+     "fixups": 0,
+     "relocations": 0,
+     "reloc_order": "EXACT"
+    },
+    "f_1986_0236": {
+     "exact": true,
+     "reasons": [],
+     "fixups": 0,
+     "relocations": 0,
+     "reloc_order": "EXACT"
+    },
+    "f_1986_0237": {
+     "exact": true,
+     "reasons": [],
+     "fixups": 0,
+     "relocations": 0,
+     "reloc_order": "EXACT"
+    }
+   },
+   "data": {
+    "_DATA": {
+     "exact": true,
+     "reasons": [],
+     "size": 67,
+     "reloc_order": "EXACT",
+     "start": 364878,
+     "class": "DATA",
+     "align": "word",
+     "far": false
+    },
+    "CONST": {
+     "exact": false,
+     "reasons": [
+      "data bytes differ",
+      "data relocation set differs 2 vs 3",
+      "placement size 6 != segment length 4 (claimed code could use unverified data)"
+     ],
+     "size": 6,
+     "reloc_order": "EXACT",
+     "start": 386272,
+     "class": "CONST",
+     "align": "word",
+     "far": false
+    }
+   },
+   "module_exact": false
+  }
+ ]
+}

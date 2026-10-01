@@ -1,0 +1,196 @@
+LessonDone root:0E2E:065E size=723
+switch table bytes [001E,008E), words:
+  01:06EC, 02:06EC, 03:06F2, 04:06F2
+  05:07CC, 06:06EC, 07:07FF, 08:087C
+  09:0723, 10:075C, 11:06EC, 12:08D9
+  13:0769, 14:07A0, 15:06EC, 16:07B2
+  17:06EC, 18:07BF, 19:07E6, 20:07CC
+  21:07D9, 22:07E6, 23:06EC, 24:07F3
+  25:06EC, 26:07FF, 27:082A, 28:06EC
+  29:06EC, 30:0862, 31:06EC, 32:075C
+  33:088E, 34:06EC, 35:06EC, 36:089B
+  37:06EC, 38:08A8, 39:08B5, 40:06EC
+  41:08BB, 42:075C, 43:087C, 44:06EC
+  45:06EC, 46:087C, 47:08D3, 48:06EC
+  49:08D9, 50:087C, 51:06EC, 52:08DE
+  53:06EC, 54:08EB, 55:06EC, 56:06EC
+CODE before table:
+  065E 55                   push     bp
+  065F 8bec                 mov      bp, sp
+  0661 33c0                 xor      ax, ax
+  0663 9acc02f429           lcall    0x29f4, 0x2cc
+  0668 8b4606               mov      ax, word ptr [bp + 6]
+  066B 48                   dec      ax
+  066C 3d3700               cmp      ax, 0x37
+  066F 7603                 jbe      0x674
+  0671 e99200               jmp      0x706
+  0674 d1e0                 shl      ax, 1
+  0676 93                   xchg     bx, ax
+  0677 2effa77c06           jmp      word ptr cs:[bx + 0x67c]
+CODE after table:
+  06EC b80100               mov      ax, 1
+  06EF e93b02               jmp      0x92d
+  06F2 8e06d881             mov      es, word ptr [0x81d8]
+  06F6 26a12402             mov      ax, word ptr es:[0x224]
+  06FA 99                   cdq
+  06FB 8e06e681             mov      es, word ptr [0x81e6]
+  06FF 263b160602           cmp      dx, word ptr es:[0x206]
+  0704 7d03                 jge      0x709
+  0706 e92202               jmp      0x92b
+  0709 7f07                 jg       0x712
+  070B 263b060402           cmp      ax, word ptr es:[0x204]
+  0710 760c                 jbe      0x71e
+  0712 8e06f481             mov      es, word ptr [0x81f4]
+  0716 26833ea00a00         cmp      word ptr es:[0xaa0], 0
+  071C 7403                 je       0x721
+  071E e90a02               jmp      0x92b
+  0721 ebc9                 jmp      0x6ec
+  0723 8e06ee81             mov      es, word ptr [0x81ee]
+  0727 26a10a05             mov      ax, word ptr es:[0x50a]
+  072B 2603060805           add      ax, word ptr es:[0x508]
+  0730 8e06ec81             mov      es, word ptr [0x81ec]
+  0734 263b067410           cmp      ax, word ptr es:[0x1074]
+  0739 75b1                 jne      0x6ec
+  073B 9abe02f800           lcall    0xf8, 0x2be
+  0740 8e06e681             mov      es, word ptr [0x81e6]
+  0744 2639160602           cmp      word ptr es:[0x206], dx
+  0749 7e03                 jle      0x74e
+  074B e9dd01               jmp      0x92b
+  074E 7c9c                 jl       0x6ec
+  0750 2639060402           cmp      word ptr es:[0x204], ax
+  0755 7203                 jb       0x75a
+  0757 e9f800               jmp      0x852
+  075A eb90                 jmp      0x6ec
+  075C b80001               mov      ax, 0x100
+  075F 9a220abf22           lcall    0x22bf, 0xa22
+  0764 0bc0                 or       ax, ax
+  0766 e91d01               jmp      0x886
+  0769 8e06f681             mov      es, word ptr [0x81f6]
+  076D 26833e8c0401         cmp      word ptr es:[0x48c], 1
+  0773 7403                 je       0x778
+  0775 e9da00               jmp      0x852
+  0778 b106                 mov      cl, 6
+  077A 8e06ea81             mov      es, word ptr [0x81ea]
+  077E 268b1e7c04           mov      bx, word ptr es:[0x47c]
+  0783 d3e3                 shl      bx, cl
+  0785 8e06e881             mov      es, word ptr [0x81e8]
+  0789 26031e8a04           add      bx, word ptr es:[0x48a]
+  078E 8e06fa81             mov      es, word ptr [0x81fa]
+  0792 2680bf800147         cmp      byte ptr es:[bx + 0x180], 0x47
+  0798 7703                 ja       0x79d
+  079A e9b500               jmp      0x852
+  079D e94cff               jmp      0x6ec
+  07A0 8e06ce81             mov      es, word ptr [0x81ce]
+  07A4 26833e780f5a         cmp      word ptr es:[0xf78], 0x5a
+  07AA 7f03                 jg       0x7af
+  07AC e9a300               jmp      0x852
+  07AF e93aff               jmp      0x6ec
+  07B2 8e06fc81             mov      es, word ptr [0x81fc]
+  07B6 26833ec20418         cmp      word ptr es:[0x4c2], 0x18
+  07BC e95dff               jmp      0x71c
+  07BF 8e06f681             mov      es, word ptr [0x81f6]
+  07C3 26833e8c0402         cmp      word ptr es:[0x48c], 2
+  07C9 e950ff               jmp      0x71c
+  07CC 8e06f681             mov      es, word ptr [0x81f6]
+  07D0 26833e8c0401         cmp      word ptr es:[0x48c], 1
+  07D6 e943ff               jmp      0x71c
+  07D9 8e06fc81             mov      es, word ptr [0x81fc]
+  07DD 26833ec20428         cmp      word ptr es:[0x4c2], 0x28
+  07E3 e936ff               jmp      0x71c
+  07E6 8e06fc81             mov      es, word ptr [0x81fc]
+  07EA 26833ec20410         cmp      word ptr es:[0x4c2], 0x10
+  07F0 e929ff               jmp      0x71c
+  07F3 8e06fe81             mov      es, word ptr [0x81fe]
+  07F7 26833e1c0b01         cmp      word ptr es:[0xb1c], 1
+  07FD ebab                 jmp      0x7aa
+  07FF 8e06e881             mov      es, word ptr [0x81e8]
+  0803 26a18a04             mov      ax, word ptr es:[0x48a]
+  0807 8e06ea81             mov      es, word ptr [0x81ea]
+  080B 2603067c04           add      ax, word ptr es:[0x47c]
+  0810 8e06ec81             mov      es, word ptr [0x81ec]
+  0814 263b067410           cmp      ax, word ptr es:[0x1074]
+  0819 7437                 je       0x852
+  081B 8e06f881             mov      es, word ptr [0x81f8]
+  081F 26833e1e0b00         cmp      word ptr es:[0xb1e], 0
+  0825 752b                 jne      0x852
+  0827 e911ff               jmp      0x73b
+  082A 8e06e881             mov      es, word ptr [0x81e8]
+  082E 26a18a04             mov      ax, word ptr es:[0x48a]
+  0832 8e06ea81             mov      es, word ptr [0x81ea]
+  0836 2603067c04           add      ax, word ptr es:[0x47c]
+  083B 8e06ec81             mov      es, word ptr [0x81ec]
+  083F 263b067410           cmp      ax, word ptr es:[0x1074]
+  0844 740c                 je       0x852
+  0846 8e060082             mov      es, word ptr [0x8200]
+  084A 26833e4e1000         cmp      word ptr es:[0x104e], 0
+  0850 7503                 jne      0x855
+  0852 e9d600               jmp      0x92b
+  0855 8e06f881             mov      es, word ptr [0x81f8]
+  0859 26833e1e0b00         cmp      word ptr es:[0xb1e], 0
+  085F e9bafe               jmp      0x71c
+  0862 8e060082             mov      es, word ptr [0x8200]
+  0866 26833e4e1000         cmp      word ptr es:[0x104e], 0
+  086C 740e                 je       0x87c
+  086E b80100               mov      ax, 1
+  0871 50                   push     ax
+  0872 2bc0                 sub      ax, ax
+  0874 50                   push     ax
+  0875 9a1c28ff2c           lcall    0x2cff, 0x281c
+  087A 5b                   pop      bx
+  087B 5b                   pop      bx
+  087C 8e06ec81             mov      es, word ptr [0x81ec]
+  0880 26833e741000         cmp      word ptr es:[0x1074], 0
+  0886 7503                 jne      0x88b
+  0888 e9a000               jmp      0x92b
+  088B e95efe               jmp      0x6ec
+  088E 8e060282             mov      es, word ptr [0x8202]
+  0892 26833e2e0300         cmp      word ptr es:[0x32e], 0
+  0898 e981fe               jmp      0x71c
+  089B 8e060482             mov      es, word ptr [0x8204]
+  089F 26833e5c0301         cmp      word ptr es:[0x35c], 1
+  08A5 e974fe               jmp      0x71c
+  08A8 8e060282             mov      es, word ptr [0x8202]
+  08AC 26833e2e0301         cmp      word ptr es:[0x32e], 1
+  08B2 e967fe               jmp      0x71c
+  08B5 b80012               mov      ax, 0x1200
+  08B8 e9a4fe               jmp      0x75f
+  08BB 8e06f081             mov      es, word ptr [0x81f0]
+  08BF 26a1a004             mov      ax, word ptr es:[0x4a0]
+  08C3 2603069e04           add      ax, word ptr es:[0x49e]
+  08C8 8e06ec81             mov      es, word ptr [0x81ec]
+  08CC 263b067410           cmp      ax, word ptr es:[0x1074]
+  08D1 ebb3                 jmp      0x886
+  08D3 b80013               mov      ax, 0x1300
+  08D6 e986fe               jmp      0x75f
+  08D9 2bc0                 sub      ax, ax
+  08DB e981fe               jmp      0x75f
+  08DE 8e06fe81             mov      es, word ptr [0x81fe]
+  08E2 26833e1c0b28         cmp      word ptr es:[0xb1c], 0x28
+  08E8 e9bffe               jmp      0x7aa
+  08EB b8f650               mov      ax, 0x50f6
+  08EE 8ec0                 mov      es, ax
+  08F0 26833e8c0403         cmp      word ptr es:[0x48c], 3
+  08F6 7516                 jne      0x90e
+  08F8 b8f650               mov      ax, 0x50f6
+  08FB 8ec0                 mov      es, ax
+  08FD 26c70674100000       mov      word ptr es:[0x1074], 0
+  0904 b80100               mov      ax, 1
+  0907 b9b355               mov      cx, 0x55b3
+  090A 8ed9                 mov      ds, cx
+  090C eb1f                 jmp      0x92d
+  090E 26833e8c0402         cmp      word ptr es:[0x48c], 2
+  0914 7407                 je       0x91d
+  0916 b8b355               mov      ax, 0x55b3
+  0919 8ed8                 mov      ds, ax
+  091B eb0e                 jmp      0x92b
+  091D b80100               mov      ax, 1
+  0920 b9f650               mov      cx, 0x50f6
+  0923 8ec1                 mov      es, cx
+  0925 26a37410             mov      word ptr es:[0x1074], ax
+  0929 ebdc                 jmp      0x907
+  092B 2bc0                 sub      ax, ax
+  092D 8be5                 mov      sp, bp
+  092F 5d                   pop      bp
+  0930 cb                   retf
+FUNCTION TAIL bytes 8c04027407b8b3558ed8eb0eb80100b9f6508ec126a37410ebdc2bc08be55dcb
+fixups [8, 224, 260, 538, 654, 667, 682, 697, 707]
