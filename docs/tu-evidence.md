@@ -91,6 +91,17 @@ next segment's SEGDEF alignment explains it (paragraph fill before a far segment
 after an odd-length DGROUP segment before a word-aligned one); the bytes must be zero
 (`data_link_fill_bytes`, of it `data_link_fill_dgroup_bytes`).
 
+**Historical data-only library members.** A member of an already pinned historical runtime
+library may also be anchored by at least two independently grounded game-data publics:
+subtracting their library PUBDEF offsets must give one segment start (`REGISTERED_PUBLICS`).
+Every complete segment is then bound and compared for bytes, fixup targets and relocation
+set/order. A lone anchor, conflicting anchors or agreeing but wrongly shifted anchors fail.
+This recovered `syserr.c` (462 bytes) from the pinned LLIBCR library using `sys_errlist` in
+DosPunt and `sys_nerr` in f_1C62_06A6. See
+`evidence/runtime-data-registered-publics.json` and `tests/test_runtime_publics.py`.
+Accept through `promote.py --runtime-data MEMBER --verify-only`, then the same command
+without `--verify-only`; this preserves the canonical manifest's single writer.
+
 **FAR_BSS.** Frame 50F6 (19,408 zero bytes) holds the far communals the linker allocated
 (`tools/farbss.py`): the region must be zero and tiled by registered variables from offset 0;
 sizes are verified by COMDEFs of accepted objects, *pinned* when the byte-exact code of an accepted

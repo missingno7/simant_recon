@@ -1,0 +1,303 @@
+{
+ "function": "o10_35F5_0384",
+ "module": "S10:35F5",
+ "base_score": [
+  1,
+  321,
+  1587,
+  13
+ ],
+ "best_score": [
+  1,
+  235,
+  1692,
+  5
+ ],
+ "best_path": [
+  [
+   "PARAM-COPY",
+   "items",
+   "PARAM-COPY|items"
+  ],
+  [
+   "STMT-SWAP",
+   "j = 0; <> k = cur;",
+   "STMT-SWAP|j = 0; <> k = cur;"
+  ]
+ ],
+ "best_res": {
+  "compile_ok": true,
+  "claims": {
+   "o10_35F5_0000": true,
+   "o10_35F5_00D7": true,
+   "o10_35F5_01C3": true,
+   "o10_35F5_0384": false,
+   "o10_35F5_0A63": true
+  },
+  "data": {
+   "_DATA": true,
+   "CONST": true
+  },
+  "order": {
+   "o10_35F5_0000": "GROUPED",
+   "o10_35F5_00D7": "GROUPED",
+   "o10_35F5_01C3": "GROUPED",
+   "o10_35F5_0384": "EXACT",
+   "o10_35F5_0A63": "EXACT"
+  },
+  "module_reasons": [],
+  "reasons": [
+   "length 1754 != target 1759",
+   "bytes differ (first at +0x5, 1687 differing)",
+   "relocation set differs (42 vs 42)"
+  ],
+  "exact": false,
+  "all_exact": false,
+  "score": [
+   1,
+   235,
+   1692,
+   5
+  ],
+  "fhash": "f8d9cecb736c3fe4",
+  "length": 1754
+ },
+ "base_res": {
+  "compile_ok": true,
+  "claims": {
+   "o10_35F5_0000": true,
+   "o10_35F5_00D7": true,
+   "o10_35F5_01C3": true,
+   "o10_35F5_0384": false,
+   "o10_35F5_0A63": true
+  },
+  "data": {
+   "_DATA": true,
+   "CONST": true
+  },
+  "order": {
+   "o10_35F5_0000": "GROUPED",
+   "o10_35F5_00D7": "GROUPED",
+   "o10_35F5_01C3": "GROUPED",
+   "o10_35F5_0384": "EXACT",
+   "o10_35F5_0A63": "EXACT"
+  },
+  "module_reasons": [],
+  "reasons": [
+   "length 1746 != target 1759",
+   "bytes differ (first at +0x5, 1574 differing)",
+   "relocation set differs (42 vs 42)"
+  ],
+  "exact": false,
+  "all_exact": false,
+  "score": [
+   1,
+   321,
+   1587,
+   13
+  ],
+  "fhash": "be9257f31c0a6bb8",
+  "length": 1746
+ },
+ "evals": 600,
+ "compiles": 601,
+ "rule_stats": {
+  "REL-SWAP": {
+   "tried": 45,
+   "changed": 7,
+   "better": 5,
+   "regress": 0,
+   "fail": 0
+  },
+  "COMM-SWAP": {
+   "tried": 45,
+   "changed": 0,
+   "better": 0,
+   "regress": 0,
+   "fail": 0
+  },
+  "TERN-SWAP": {
+   "tried": 25,
+   "changed": 24,
+   "better": 0,
+   "regress": 0,
+   "fail": 0
+  },
+  "NOT-CMP": {
+   "tried": 25,
+   "changed": 0,
+   "better": 0,
+   "regress": 0,
+   "fail": 0
+  },
+  "CONST-U": {
+   "tried": 44,
+   "changed": 0,
+   "better": 0,
+   "regress": 0,
+   "fail": 0
+  },
+  "COMPOUND": {
+   "tried": 17,
+   "changed": 0,
+   "better": 0,
+   "regress": 0,
+   "fail": 0
+  },
+  "CHAIN-ORDER": {
+   "tried": 23,
+   "changed": 20,
+   "better": 1,
+   "regress": 0,
+   "fail": 0
+  },
+  "CHAIN-SPLIT": {
+   "tried": 3,
+   "changed": 0,
+   "better": 0,
+   "regress": 0,
+   "fail": 0
+  },
+  "OR-DUP": {
+   "tried": 1,
+   "changed": 0,
+   "better": 0,
+   "regress": 0,
+   "fail": 0
+  },
+  "AND-NEST": {
+   "tried": 7,
+   "changed": 0,
+   "better": 0,
+   "regress": 0,
+   "fail": 0
+  },
+  "IF-NEG": {
+   "tried": 42,
+   "changed": 41,
+   "better": 5,
+   "regress": 1,
+   "fail": 0
+  },
+  "ELSE-WRAP": {
+   "tried": 8,
+   "changed": 0,
+   "better": 0,
+   "regress": 0,
+   "fail": 0
+  },
+  "RET-MERGE": {
+   "tried": 1,
+   "changed": 0,
+   "better": 0,
+   "regress": 0,
+   "fail": 0
+  },
+  "TERN-IF": {
+   "tried": 1,
+   "changed": 0,
+   "better": 0,
+   "regress": 0,
+   "fail": 0
+  },
+  "FOR-WHILE": {
+   "tried": 1,
+   "changed": 0,
+   "better": 0,
+   "regress": 0,
+   "fail": 0
+  },
+  "CSE-REUSE": {
+   "tried": 1,
+   "changed": 0,
+   "better": 0,
+   "regress": 0,
+   "fail": 0
+  },
+  "PARAM-COPY": {
+   "tried": 17,
+   "changed": 17,
+   "better": 5,
+   "regress": 0,
+   "fail": 0
+  },
+  "DECL-SWAP": {
+   "tried": 24,
+   "changed": 0,
+   "better": 0,
+   "regress": 0,
+   "fail": 0
+  },
+  "DECL-INIT": {
+   "tried": 1,
+   "changed": 0,
+   "better": 0,
+   "regress": 0,
+   "fail": 0
+  },
+  "PROTO-NAMES": {
+   "tried": 14,
+   "changed": 0,
+   "better": 0,
+   "regress": 1,
+   "fail": 0
+  },
+  "PROTO-TYPE": {
+   "tried": 25,
+   "changed": 0,
+   "better": 0,
+   "regress": 4,
+   "fail": 0
+  },
+  "EXTERN-SWAP": {
+   "tried": 25,
+   "changed": 0,
+   "better": 0,
+   "regress": 0,
+   "fail": 3
+  },
+  "TEMP-INTRO": {
+   "tried": 35,
+   "changed": 11,
+   "better": 0,
+   "regress": 0,
+   "fail": 0
+  },
+  "CASE-SWAP": {
+   "tried": 3,
+   "changed": 0,
+   "better": 0,
+   "regress": 0,
+   "fail": 0
+  },
+  "STMT-SWAP": {
+   "tried": 124,
+   "changed": 123,
+   "better": 3,
+   "regress": 0,
+   "fail": 0
+  },
+  "STORE-LOCAL": {
+   "tried": 34,
+   "changed": 24,
+   "better": 0,
+   "regress": 0,
+   "fail": 0
+  },
+  "SYM-NAMES": {
+   "tried": 4,
+   "changed": 0,
+   "better": 0,
+   "regress": 3,
+   "fail": 0
+  },
+  "EMBED": {
+   "tried": 5,
+   "changed": 0,
+   "better": 0,
+   "regress": 0,
+   "fail": 0
+  }
+ },
+ "tried_count": 600
+}

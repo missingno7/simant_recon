@@ -222,6 +222,67 @@ class Rules(unittest.TestCase):
 
 
 class Driver(unittest.TestCase):
+    def test_cache_invalidates_placement_extent_claim_and_evidence_changes(self):
+        import autosearch as A
+        import modctx
+        ev = A.Evaluator.__new__(A.Evaluator)
+        ev.ctx = modctx.Ctx('root:295C', 'root', 0x295C, None, 'msc600ax', ['/AL'],
+                            {'CONST': {'seg': 0x55B3, 'off': 0x8A9E, 'size': 8}})
+        ev.claims = [{'name': 'f', 'size': 75}]
+        ev.cache_fingerprint = 'original registries'
+        initial = ev.key('void f(void) {}')
+        ev.ctx.placements['CONST']['off'] += 2
+        self.assertNotEqual(initial, ev.key('void f(void) {}'))
+        ev.ctx.placements['CONST']['off'] -= 2
+        ev.ctx.extent = {'start': 0x295CA, 'end': 0x29B80}
+        self.assertNotEqual(initial, ev.key('void f(void) {}'))
+        ev.ctx.extent = None
+        ev.claims[0]['size'] = 74
+        self.assertNotEqual(initial, ev.key('void f(void) {}'))
+        ev.claims[0]['size'] = 75
+        ev.cache_fingerprint = 'reframed registries'
+        self.assertNotEqual(initial, ev.key('void f(void) {}'))
+
+    def test_continuation_finds_preserved_draft_and_handles_missing_file(self):
+        import autosearch as A
+        import tempfile
+        from pathlib import Path
+        with tempfile.TemporaryDirectory() as d:
+            root = Path(d)
+            saved = root / 'work/autosearch/runs/old-run/best.c'
+            saved.parent.mkdir(parents=True)
+            saved.write_text('void f(void) {}')
+            entry = {'out': str(root / 'build/deleted/old-run'), 'base': [1, 9], 'best': [1, 3]}
+            self.assertEqual(A.continuation_base(entry, root / 'work/autosearch/results.json'), saved)
+            # A previous baseline can be a better whole-module draft than the canonical stub
+            # even when that search did not improve it (DoAntMoveY).
+            entry['best'] = entry['base']
+            self.assertEqual(A.continuation_base(entry, root / 'work/autosearch/results.json'), saved)
+            saved.unlink()
+            self.assertIsNone(A.continuation_base(entry, root / 'work/autosearch/results.json'))
+
+    def test_all_targets_includes_inplace_drafts_and_honors_explicit_skip(self):
+        import autosearch as A
+        import tempfile
+        import json
+        from pathlib import Path
+        from unittest.mock import patch
+        with tempfile.TemporaryDirectory() as d:
+            root = Path(d)
+            (root / 'layout').mkdir()
+            (root / 'm.c').write_text('void claimed(void) {}\nvoid scaffold(void) {}\nvoid inplace(void) {}')
+            (root / 'layout/manifest.json').write_text(json.dumps({'modules': {'root:295C': {
+                'unit': 'root', 'seg': 0x295C, 'source': 'm.c', 'claims': [{'name': 'claimed'}],
+                'scaffold': ['scaffold']}}}))
+            rows = [{'name': n, 'off': i, 'unit': 'root', 'seg': 0x295C}
+                    for i, n in enumerate(('claimed', 'scaffold', 'inplace', 'absent'))]
+            lookup = {r['name']: r for r in rows}
+            with patch.object(A, 'ROOT', root), patch.object(A.modctx, 'module_rows', return_value=rows), \
+                 patch.object(A.modctx.fnmod, 'get', side_effect=lambda n: lookup[n]):
+                self.assertEqual(A.targets([], []), [('root:295C', 'scaffold'), ('root:295C', 'inplace')])
+                self.assertEqual(A.targets(['root:295C'], []), [])
+                self.assertEqual(A.targets([], ['inplace']), [('root:295C', 'inplace')])
+
     def test_unscaffold_only_the_target_block(self):
         import autosearch as A
         t = ("int a(void)\n{\n    return 1;\n}\n/* SCAFFOLD BEGIN: note */\nint b(void)\n{\n    return 2;\n}\n"

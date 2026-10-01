@@ -1,0 +1,267 @@
+{
+ "function": "DrawMapCursor",
+ "module": "S12:384C",
+ "base_score": [
+  1,
+  21,
+  128,
+  5
+ ],
+ "best_score": [
+  1,
+  14,
+  103,
+  3
+ ],
+ "best_path": [
+  [
+   "EXTERN-SWAP",
+   "extern int far fd_50F6_3856; <> extern int far fd_50F6_3858;",
+   "EXTERN-SWAP|extern int far fd_50F6_3856; <> extern int far fd_50F6_3858;"
+  ],
+  [
+   "EXTERN-SWAP",
+   "extern int far fd_50F6_38C0; <> extern int far fd_50F6_10E0;",
+   "EXTERN-SWAP|extern int far fd_50F6_38C0; <> extern int far fd_50F6_10E0;"
+  ],
+  [
+   "SYM-NAMES",
+   "f_171C_1A9E unnamed (-3)",
+   "SYM-NAMES|f_171C_1A9E unnamed (-3)"
+  ]
+ ],
+ "best_res": {
+  "compile_ok": true,
+  "claims": {
+   "DeinitMapFunctions": true,
+   "InitMapFunctions": true,
+   "ProcMapEvent": true,
+   "OpenMapWindow": true,
+   "DrawMapCursor": false,
+   "EraseMapCursor": true,
+   "ToggleMapCursor": true,
+   "o12_384C_03D0": true,
+   "o12_384C_0425": true,
+   "o12_384C_0432": true,
+   "o12_384C_0706": true,
+   "o12_384C_080E": true,
+   "DrawMapData": true,
+   "o12_384C_0B76": true,
+   "o12_384C_100A": true,
+   "o12_384C_1035": true,
+   "o12_384C_10A5": true,
+   "o12_384C_1181": true,
+   "o12_384C_12D3": true
+  },
+  "data": {
+   "CONST": true,
+   "_DATA": true
+  },
+  "order": {
+   "DeinitMapFunctions": "EXACT",
+   "InitMapFunctions": "GROUPED",
+   "ProcMapEvent": "GROUPED",
+   "OpenMapWindow": "GROUPED",
+   "DrawMapCursor": "EXACT",
+   "EraseMapCursor": "GROUPED",
+   "ToggleMapCursor": "EXACT",
+   "o12_384C_03D0": "EXACT",
+   "o12_384C_0425": "GROUPED",
+   "o12_384C_0432": "GROUPED",
+   "o12_384C_0706": "EXACT",
+   "o12_384C_080E": "GROUPED",
+   "DrawMapData": "GROUPED",
+   "o12_384C_0B76": "GROUPED",
+   "o12_384C_100A": "GROUPED",
+   "o12_384C_1035": "GROUPED",
+   "o12_384C_10A5": "GROUPED",
+   "o12_384C_1181": "GROUPED",
+   "o12_384C_12D3": "GROUPED"
+  },
+  "module_reasons": [],
+  "reasons": [
+   "length 208 != target 205",
+   "fixup at +0xcb crosses the extent end",
+   "bytes differ (first at +0x1b, 100 differing)",
+   "relocation set differs (5 vs 6)"
+  ],
+  "exact": false,
+  "all_exact": false,
+  "score": [
+   1,
+   14,
+   103,
+   3
+  ],
+  "fhash": "1615f5b839d21030",
+  "length": 208
+ },
+ "base_res": {
+  "compile_ok": true,
+  "claims": {
+   "DeinitMapFunctions": true,
+   "InitMapFunctions": true,
+   "ProcMapEvent": true,
+   "OpenMapWindow": true,
+   "DrawMapCursor": false,
+   "EraseMapCursor": true,
+   "ToggleMapCursor": true,
+   "o12_384C_03D0": true,
+   "o12_384C_0425": true,
+   "o12_384C_0432": true,
+   "o12_384C_0706": true,
+   "o12_384C_080E": true,
+   "DrawMapData": true,
+   "o12_384C_0B76": true,
+   "o12_384C_100A": true,
+   "o12_384C_1035": true,
+   "o12_384C_10A5": true,
+   "o12_384C_1181": true,
+   "o12_384C_12D3": true
+  },
+  "data": {
+   "CONST": true,
+   "_DATA": true
+  },
+  "order": {
+   "DeinitMapFunctions": "EXACT",
+   "InitMapFunctions": "GROUPED",
+   "ProcMapEvent": "GROUPED",
+   "OpenMapWindow": "GROUPED",
+   "DrawMapCursor": "EXACT",
+   "EraseMapCursor": "GROUPED",
+   "ToggleMapCursor": "EXACT",
+   "o12_384C_03D0": "EXACT",
+   "o12_384C_0425": "GROUPED",
+   "o12_384C_0432": "GROUPED",
+   "o12_384C_0706": "EXACT",
+   "o12_384C_080E": "GROUPED",
+   "DrawMapData": "GROUPED",
+   "o12_384C_0B76": "GROUPED",
+   "o12_384C_100A": "GROUPED",
+   "o12_384C_1035": "GROUPED",
+   "o12_384C_10A5": "GROUPED",
+   "o12_384C_1181": "GROUPED",
+   "o12_384C_12D3": "GROUPED"
+  },
+  "module_reasons": [],
+  "reasons": [
+   "length 210 != target 205",
+   "bytes differ (first at +0x1b, 123 differing)",
+   "relocation set differs (5 vs 6)"
+  ],
+  "exact": false,
+  "all_exact": false,
+  "score": [
+   1,
+   21,
+   128,
+   5
+  ],
+  "fhash": "5d83e9c5e5e459f2",
+  "length": 210
+ },
+ "evals": 600,
+ "compiles": 601,
+ "rule_stats": {
+  "REL-SWAP": {
+   "tried": 8,
+   "changed": 0,
+   "better": 0,
+   "regress": 0,
+   "fail": 0
+  },
+  "COMM-SWAP": {
+   "tried": 72,
+   "changed": 3,
+   "better": 0,
+   "regress": 0,
+   "fail": 0
+  },
+  "NOT-CMP": {
+   "tried": 16,
+   "changed": 0,
+   "better": 0,
+   "regress": 0,
+   "fail": 0
+  },
+  "CONST-U": {
+   "tried": 53,
+   "changed": 0,
+   "better": 0,
+   "regress": 0,
+   "fail": 0
+  },
+  "OR-DUP": {
+   "tried": 7,
+   "changed": 0,
+   "better": 0,
+   "regress": 0,
+   "fail": 0
+  },
+  "ELSE-WRAP": {
+   "tried": 7,
+   "changed": 0,
+   "better": 0,
+   "regress": 0,
+   "fail": 0
+  },
+  "RET-MERGE": {
+   "tried": 7,
+   "changed": 0,
+   "better": 0,
+   "regress": 0,
+   "fail": 0
+  },
+  "PROTO-NAMES": {
+   "tried": 28,
+   "changed": 18,
+   "better": 2,
+   "regress": 6,
+   "fail": 0
+  },
+  "PROTO-TYPE": {
+   "tried": 55,
+   "changed": 13,
+   "better": 0,
+   "regress": 11,
+   "fail": 0
+  },
+  "EXTERN-SWAP": {
+   "tried": 132,
+   "changed": 24,
+   "better": 4,
+   "regress": 21,
+   "fail": 12
+  },
+  "TEMP-INTRO": {
+   "tried": 69,
+   "changed": 0,
+   "better": 0,
+   "regress": 0,
+   "fail": 0
+  },
+  "STMT-SWAP": {
+   "tried": 12,
+   "changed": 0,
+   "better": 0,
+   "regress": 12,
+   "fail": 0
+  },
+  "STORE-LOCAL": {
+   "tried": 26,
+   "changed": 0,
+   "better": 0,
+   "regress": 0,
+   "fail": 0
+  },
+  "SYM-NAMES": {
+   "tried": 108,
+   "changed": 61,
+   "better": 3,
+   "regress": 47,
+   "fail": 0
+  }
+ },
+ "tried_count": 600
+}

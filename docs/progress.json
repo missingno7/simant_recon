@@ -1,11 +1,11 @@
 {
  "schema": "simant-progress-v1",
- "generated": "2026-09-30",
+ "generated": "2026-10-01",
  "oracle_sha256": "aa0596c6766322a8229ee3c36e57048c92adc82d50fbe2ef37afb8b85fcf4f11",
  "known_functions": 1730,
  "known_game_functions": 1640,
- "exact_c_functions": 1227,
- "exact_c_bytes": 224248,
+ "exact_c_functions": 1241,
+ "exact_c_bytes": 235732,
  "exact_asm_functions": 367,
  "exact_asm_bytes": 50441,
  "exact_code_segment_data_bytes": 1481,
@@ -14,10 +14,10 @@
  "historical_runtime_bytes_located_unaccepted": 0,
  "runtime_functions_known": 90,
  "runtime_functions_owned": 90,
- "owned_functions": 1684,
+ "owned_functions": 1698,
  "rtlink_manager_bytes_unaccepted": 17001,
- "data_bytes_accepted": 111308,
- "far_data_bytes_accepted": 77846,
+ "data_bytes_accepted": 113884,
+ "far_data_bytes_accepted": 80310,
  "modules_data_only": [
   "data:3D57",
   "data:3E1D",
@@ -25,8 +25,8 @@
   "data:55B3@0064",
   "data:55B3@00B8"
  ],
- "historical_runtime_data_bytes_accepted": 1559,
- "data_link_fill_bytes": 64,
+ "historical_runtime_data_bytes_accepted": 2021,
+ "data_link_fill_bytes": 78,
  "data_link_fill_dgroup_bytes": 32,
  "far_bss_zero_fill_bytes": 19408,
  "far_bss_sizes_verified_bytes": 0,
@@ -35,8 +35,8 @@
  "far_bss_sizes_unverified_bytes": 14928,
  "bss_bytes_placed": 496,
  "game_code_span_bytes": 304798,
- "unresolved_code_bytes": 28628,
- "unresolved_data_bytes": 3181,
+ "unresolved_code_bytes": 17144,
+ "unresolved_data_bytes": 129,
  "overlay_coverage": {
   "S00": {
    "bytes": 19696,
@@ -56,11 +56,11 @@
   },
   "S04": {
    "bytes": 2464,
-   "claimed": 2282
+   "claimed": 2432
   },
   "S05": {
    "bytes": 2512,
-   "claimed": 1764
+   "claimed": 2508
   },
   "S06": {
    "bytes": 9584,
@@ -72,11 +72,11 @@
   },
   "S08": {
    "bytes": 5056,
-   "claimed": 3698
+   "claimed": 5053
   },
   "S09": {
    "bytes": 5232,
-   "claimed": 2820
+   "claimed": 5225
   },
   "S10": {
    "bytes": 2736,
@@ -92,7 +92,7 @@
   },
   "S13": {
    "bytes": 6064,
-   "claimed": 5300
+   "claimed": 5790
   },
   "S14": {
    "bytes": 4656,
@@ -132,7 +132,7 @@
   },
   "S23": {
    "bytes": 4368,
-   "claimed": 1411
+   "claimed": 1866
   },
   "S24": {
    "bytes": 1808,
@@ -140,25 +140,25 @@
   },
   "S25": {
    "bytes": 14592,
-   "claimed": 11790
+   "claimed": 13780
   },
   "S26": {
    "bytes": 2240,
    "claimed": 2236
   }
  },
- "root_claimed_bytes": 159128,
- "scaffold_functions": 31,
- "exact_translation_units": 88,
- "claims_within_group_order_pending": 10,
- "inplace_draft_functions": 14,
- "claims_exact_steered": 18,
- "exact_c_bytes_in_complete_tus": 136656,
- "exact_c_bytes_in_partial_modules": 87592,
- "exact_c_bytes_steered": 8119,
- "exact_c_bytes_layout_inferred": 14775,
- "exact_c_bytes_within_group_pending": 6162,
- "claims_layout_inferred": 15,
+ "root_claimed_bytes": 163023,
+ "scaffold_functions": 28,
+ "exact_translation_units": 94,
+ "claims_within_group_order_pending": 18,
+ "inplace_draft_functions": 4,
+ "claims_exact_steered": 23,
+ "exact_c_bytes_in_complete_tus": 146545,
+ "exact_c_bytes_in_partial_modules": 89187,
+ "exact_c_bytes_steered": 14115,
+ "exact_c_bytes_layout_inferred": 19432,
+ "exact_c_bytes_within_group_pending": 11742,
+ "claims_layout_inferred": 22,
  "modules_layout_inferred": [
   "S14:384C",
   "root:1383",
@@ -167,16 +167,16 @@
  "asm_transcribed_bytes": 51922,
  "exact_asm_bytes_genuine": 50441,
  "exact_asm_bytes_workaround": 0,
- "data_bytes_opaque_unmarked": 5161,
+ "data_bytes_opaque_unmarked": 6397,
  "runtime_oracle_derived_words": 244,
  "released_claims_unowned": [],
  "modules_origin_unevidenced": [],
- "manifest_sha256": "007c760e62f45aa7f0f4801e79fa7aee0f0321f2beb4a7b66857baa5db1c4fd5",
- "complete_tus_relocation_order_proven": 87,
+ "manifest_sha256": "3235d9b8161d865ceb0954ef0ef90fc69731c13255a75a20091747d112dac1b9",
+ "complete_tus_relocation_order_proven": 93,
  "complete_tus_cross_function_order_pending": [
   "S00:31AD"
  ],
- "codegen_rules_reproduced": 36,
+ "codegen_rules_reproduced": 45,
  "whole_executable": "NOT_BUILT (no historical link yet; see docs/next-steps.md)",
  "validation": "PASS",
  "failures": []

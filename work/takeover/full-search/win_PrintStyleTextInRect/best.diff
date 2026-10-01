@@ -1,0 +1,25 @@
+--- base.c
++++ best.c
+@@ -121,10 +121,11 @@
+     int lineH;
+     int y;
+     int width;
++    int pos;
+     int len;
+-    int pos;
+     int styleIdx;
+     struct StyleRun far *styles;
++    int tmp2;
+ 
+     styleIdx = 0;
+     pos = 0;
+@@ -228,7 +229,8 @@
+             buf[n] = 0;
+             f_24AB_038D(x, y, buf);
+         }
+-        while (text[end] == ' ')
++        tmp2 = text[end];
++        while (tmp2 == ' ')
+             end++;
+         if (text[end] == '\n' || text[end] == '\r')
+             end++;

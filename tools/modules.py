@@ -586,6 +586,11 @@ def verify_module(text: str, module: dict, claims: list[dict], collect: dict | N
         all_ok &= dres["exact"]
     # module-level data rules: far segment order/contiguity, public addresses, data-only TUs
     mreasons = list(lint["refused"])
+    if module.get("origin") is not None and not module.get("extent"):
+        # a later object of a frame (UNIT:SEG@OFF) starts its code segment at the origin
+        # (CODEALIGN-1; a complete TU is checked at its extent start in verify_extent)
+        for sname in sorted({s for _, s, _ in located.values()}):
+            mreasons += code_alignment_reasons(segment_def(obj, sname), module["seg"] * 16 + module["origin"])
     mreasons += placement_order_reasons(obj, module.get("placements", {}))
     mreasons += public_address_reasons(obj, module.get("placements", {}), strict=is_data_module(module))
     if is_data_module(module):
@@ -664,6 +669,7 @@ def verify_extent(obj, ext: dict, claims: list[dict], scaff: set, site_key: dict
         return {"exact": False, "reasons": reasons + [f"claims span segments {sorted(segs)}"]}
     seg = segs.pop()
     body = bytes(obj.segments.get(seg, b""))
+    reasons += code_alignment_reasons(segment_def(obj, seg), start)
     if len(body) != end - start:
         reasons.append(f"segment length {len(body)} != extent {end - start}")
     if {match.c_name(p["name"]) for p in obj.publics if p["segment"] == seg} != names:
@@ -821,6 +827,24 @@ def alignment_reasons(sdef: dict | None, start: int) -> list[str]:
     if start % a:
         return [f"placement {start:05X} violates the segment's {sdef.get('alignment')} alignment"]
     return []
+
+
+def code_alignment_reasons(sdef: dict | None, start: int) -> list[str]:
+    """Rule CODEALIGN-1: an object's code segment starts at a multiple of its SEGDEF alignment.
+
+    The linker places every code segment contribution at its own alignment: MSC 6.00 code
+    segments are WORD aligned (every pinned MSC/QC profile and option set), so an object that
+    follows an odd-length one starts after one ``00`` fill byte.  Evidence: all 94 code-frame
+    transitions of the original (44 odd ends followed by 00 fill, 42 even ends contiguous, one
+    exception that was a mis-framed boundary, root:1986/19A9), and MS LINK 5.10 and RTLink/Plus
+    6.10 both insert the fill before a WORD segment and only omit it for a BYTE (MASM) segment
+    (work/align/FINDINGS.json).  ``start`` is the object's first byte: a complete TU's
+    extent start, or a later object's origin."""
+    if sdef is None:
+        return ["code segment has no SEGDEF"]
+    return [f"CODEALIGN-1: code segment {sdef.get('name')} starts at {start:05X}, which violates its "
+            f"{sdef.get('alignment')} SEGDEF alignment (the linker would place it at the next "
+            f"{sdef.get('alignment')} boundary after link fill)" for _ in alignment_reasons(sdef, start)]
 
 
 def _data_target(f: dict, placements: dict, unit: str | None = None):

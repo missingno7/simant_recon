@@ -1,0 +1,10 @@
+DrawColonyBars in S13:384C (msc600ax /AL /Os /Og /Oe /Zi), rules: REL-SWAP,COMM-SWAP,TERN-SWAP,NOT-CMP,CONST-U,COMPOUND,CHAIN-ORDER,CHAIN-SPLIT,EMBED,OR-DUP,AND-NEST,IF-NEG,ELSE-WRAP,RET-MERGE,TERN-IF,FOR-WHILE,CSE-INLINE,CSE-REUSE,LOCAL-MERGE,LOCAL-SPLIT,PARAM-COPY,RESULT-LOCAL,DECL-SWAP,DECL-INIT,PROTO-NAMES,PROTO-TYPE,EXTERN-SWAP,TEMP-INTRO,CASE-SWAP,STMT-SWAP,STORE-LOCAL,SYM-NAMES
+base: insn 54 bytes 362 len +1  length 489 != target 490; bytes differ (first at +0x15, 361 differing); relocation set differs (5 vs 5)
+level 1: 239 variants from 1 state(s)
+  better: insn 38 bytes 328 len +2  via STMT-SWAP[r.left = l; <> r.bottom = (t + 0x47) / 2]
+  better: insn 37 bytes 360 len +2  via STMT-SWAP[r.left = l; <> r.bottom = (t + 0x47) / 2]
+level 2: 300 variants from 12 state(s)
+  better: insn 21 bytes 328 len +3  via STMT-SWAP[r.left = l; <> r.bottom = (t + 0x47) / 2] + STMT-SWAP[r.left = l; <> r.bottom = (t + 0x47) / 2]
+level 3: 61 variants from 12 state(s)
+  better: insn 20 bytes 42 len 0  via STMT-SWAP[r.left = l; <> r.bottom = (t + 0x47) / 2] + STMT-SWAP[r.left = l; <> r.bottom = (t + 0x47) / 2] + STMT-SWAP[r.top = r.bottom - h; <> r.right = l + 9]
+best: insn 20 bytes 42 len 0 (base insn 54 bytes 362 len +1) after 600 variants: STMT-SWAP[r.left = l; <> r.bottom = (t + 0x47) / 2 + fd_50F6] + STMT-SWAP[r.left = l; <> r.bottom = (t + 0x47) / 2 + fd_50F6] + STMT-SWAP[r.top = r.bottom - h; <> r.right = l + 9;]

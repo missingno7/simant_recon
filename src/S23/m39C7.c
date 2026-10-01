@@ -97,7 +97,7 @@ extern unsigned int far _fstrlen(char far *s);
 extern void far f_24AB_02AD(int font);
 extern int far f_24AB_030B(void);
 extern void far Punt(char far *format, ...);
-extern char far * far _fstrncpy(char far *dst, char far *src, unsigned int n);
+extern char far * far _fstrncpy(char far *, char far *, unsigned int);
 extern int far WinPrintf(char far *format, ...);
 extern void far f_24AB_038D(int x, int y, char far *text);
 extern char far * far _fstrcpy(char far *dst, char far *src);
@@ -105,23 +105,7 @@ extern unsigned char near _ctype[];
 extern int far _fstrcmp(char far *a, char far *b);
 extern int far f_24AB_0367(int c);
 
-/* SCAFFOLD BEGIN: win_PrintStyleTextInRect and win_GetStyleTextHeight best drafts.
- * Residue (msc600ax /AL /Os /Oe /Og /Zd):
- *  - both: the target keeps lineH in memory for the whole function; this draft puts the
- *    prologue part of lineH (lineH = f_24AB_030B(); if (f_24AB_030B() > lineH) ...) in SI/DI
- *    and spills it at the if-join.  Making lineH non-enregisterable (address taken, e.g.
- *    `*&lineH`) reproduces every instruction of win_GetStyleTextHeight; only the slot order
- *    of lineH/lines then differs (target: lines -0E, lineH -10, two unused homes -0A/-0C).
- *    Not a natural form, not promoted.  Declaration order/identifier count, register/auto,
- *    ternary/if forms, init order and profile (msc600, msc600a, -c2l) do not change it.
- *  - win_GetStyleTextHeight: commutative/compare operand order is right with +11 (mod 17)
- *    identifiers before it (dummy-extern scan); not yet realized naturally.
- *  - win_PrintStyleTextInRect: additionally the outer-loop counter `line` lives in BX at the
- *    loop latch in the target (sub bx,bx / mov [bp-14],bx / mov bx,[bp-14]; inc bx), and the
- *    trailing `while (text[end] == ' ') end++;` keeps end in DI with `les bx,text` inside the
- *    loop plus a byte CSE temp for the CR/LF test; this draft splits end into SI.  The value
- *    CSE of fd_4EE5_0500[start].id ([bp-A2]) needs the separate far arrays (done).
- */
+/* SCAFFOLD BEGIN: (split from a shared block by autosearch) */
 void far win_PrintStyleTextInRect(char far *text, int far *styl, struct Rect far *rect,
                                   int firstLine, int font1, int font2, int record)
 {
@@ -253,6 +237,10 @@ void far win_PrintStyleTextInRect(char far *text, int far *styl, struct Rect far
         y += lineH;
     }
 }
+/* SCAFFOLD END */
+
+extern char far * far f_1A53_00F0(int object, int kind, int type);
+extern char far * far f_171C_1B84(char far *handle);
 
 int far win_GetStyleTextHeight(char far *text, int far *styl, int width, int font1, int font2)
 {
@@ -260,8 +248,8 @@ int far win_GetStyleTextHeight(char far *text, int far *styl, int width, int fon
     int pos;
     int brk;
     int done;
-    int lines;
     int lineH;
+    int lines;
     int styleIdx;
     int len;
     struct StyleRun far *styles;
@@ -276,9 +264,12 @@ int far win_GetStyleTextHeight(char far *text, int far *styl, int width, int fon
     f_24AB_02AD(font2);
     if (f_24AB_030B() > lineH)
         lineH = f_24AB_030B();
-    if (styl && styles->face == 0x100)
-        f_24AB_02AD(font2);
-    else
+    if (styl) {
+        if (styles->face == 0x100)
+            f_24AB_02AD(font2);
+        else
+            f_24AB_02AD(font1);
+    } else
         f_24AB_02AD(font1);
     while (pos < len) {
         w = 0;
@@ -330,10 +321,7 @@ int far win_GetStyleTextHeight(char far *text, int far *styl, int width, int fon
     return lines * lineH;
 }
 
-/* SCAFFOLD END */
 
-extern char far * far f_1A53_00F0(int object, int kind, int type);
-extern char far * far f_171C_1B84(char far *handle);
 extern void far f_22BF_059A(int obj, char far *text);
 extern void far f_171C_1BBA(char far *handle);
 extern void far db_PurgeObject(int object, int kind);

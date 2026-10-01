@@ -158,12 +158,20 @@ class Evaluator:
         compiler.verify_profile(ctx.profile)
         exemod.load()
         match.symbols()
+        # A cached verdict depends on the registries and the gate as well as the C text.
+        # Invalidate it after a reframe, rename, toolchain change or acceptance-rule change.
+        h = hashlib.sha256(self.orig)
+        for rel in ("layout/functions.json", "layout/symbols.json", "layout/manifest.json",
+                    "layout/oracle.lock.json", "layout/toolchain.json", "tools/modules.py",
+                    "tools/match.py", "tools/compiler.py", "tools/omf.py", "tools/modctx.py"):
+            h.update((ROOT / rel).read_bytes())
+        self.cache_fingerprint = h.hexdigest()
 
     def key(self, text: str) -> str:
         h = hashlib.sha256()
         h.update(text.encode("latin1", "replace"))
-        h.update(json.dumps([self.ctx.profile, self.ctx.flags, sorted(self.ctx.placements)]).encode())
-        h.update(json.dumps([c["name"] for c in self.claims]).encode())
+        h.update(json.dumps([self.ctx.module_dict(extent=True), self.claims,
+                             self.cache_fingerprint], sort_keys=True).encode())
         return h.hexdigest()
 
     def one(self, text: str) -> dict:
@@ -503,27 +511,54 @@ def main(argv=None) -> int:
 
 # ------------------------------------------------------------------ --all (every open function)
 
-OWNED_ELSEWHERE = ["root:0250", "root:10F7", "S06:35F5", "S10:35F5", "S09:35F5", "S23:39C7", "root:1E57", "root:171C"]
 # per-function base overrides (a draft that is not a plain SCAFFOLD block of the canonical source)
 BASES = {"DoAntMoveY": SCRATCH / "bases" / "S25_3BA4_DoAntMoveY.c"}
 
 
 def targets(skip, only):
-    man = json.loads((ROOT / "layout" / "manifest.json").read_text())["modules"]
+    manifest = json.loads((ROOT / "layout" / "manifest.json").read_text())
+    man = manifest["modules"]
+    owned = {c["name"] for m in man.values() for c in m["claims"]}
     out = []
     for k, m in sorted(man.items()):
-        if k in skip:
+        if k in skip or m.get("lang", "c") != "c" or m["unit"] == modmod.DATA_UNIT:
             continue
-        for f in m.get("scaffold", []):
-            if only and f not in only:
+        definitions = set(modmod.FUNC_DEF_RE.findall((ROOT / m["source"]).read_text(encoding="latin1")))
+        rows = modctx.module_rows(m["unit"], m["seg"], m.get("origin"), manifest)
+        offsets = {r["off"] for r in rows}
+        candidates = []
+        for f in sorted(definitions - owned):
+            try:
+                row = modctx.fnmod.get(f)
+            except SystemExit:
                 continue
-            out.append((k, f))
+            if (row["unit"], row["seg"]) != (m["unit"], m["seg"]) or row["off"] not in offsets:
+                continue
+            # Source may still use a registered alias (S09's o09_35F5_03C6/FileSelect).
+            # Keep that spelling: a registry's preferred name need not define the public.
+            if only and f not in only and modctx.fnmod.name_of(row["unit"], row["seg"], row["off"]) not in only:
+                continue
+            candidates.append((row["off"], f))
+        out += [(k, f) for _, f in sorted(candidates)]
     return out
+
+
+def continuation_base(entry: dict, results_file: Path) -> Path | None:
+    """Locate a previous best draft, including artifacts moved from build/ into work/."""
+    if not (entry.get("out") and entry.get("best") and entry.get("base")
+            and entry["best"] <= entry["base"]):
+        return None
+    old = Path(entry["out"])
+    for p in (old / "best.c", results_file.parent / "runs" / old.name / "best.c"):
+        if p.is_file():
+            return p
+    return None
 
 
 def run_all_main(argv=None):
     ap = argparse.ArgumentParser()
-    ap.add_argument("--skip-module", action="append", default=list(OWNED_ELSEWHERE))
+    ap.add_argument("--skip-module", action="append", default=[],
+                    help="explicitly exclude a module; --all otherwise includes every open draft")
     ap.add_argument("--only", nargs="*")
     ap.add_argument("--budget", type=int, default=800)
     ap.add_argument("--depth", type=int, default=4)
@@ -541,15 +576,19 @@ def run_all_main(argv=None):
         ids += [r for r in R.RULES if R.RULES[r].category == "steer"]
     rows = []
     jfile = a.table.with_suffix(".json")
+    jfile.parent.mkdir(parents=True, exist_ok=True)
     prev = json.loads(jfile.read_text()) if jfile.exists() else {}
     earlier = json.loads(a.continue_from.read_text()) if a.continue_from else {}
     for key, f in targets(a.skip_module, a.only):
         print(f"=== {key} {f}", flush=True)
         base = BASES.get(f) if BASES.get(f, Path("-")).exists() else None
         e = earlier.get(f, {})
-        if e.get("out") and e.get("best") and e.get("base") and e["best"] < e["base"]:
-            base = Path(e["out"]) / "best.c"
+        continued = continuation_base(e, a.continue_from) if a.continue_from else None
+        if continued is not None:
+            base = continued
             print(f"  continuing from {base}")
+        elif e.get("out") and e.get("best", [1]) <= e.get("base", [0]):
+            print("  previous best draft missing; using the current module draft")
         try:
             res = run_one(f, key, base, ids, a.beam,
                             a.depth, a.budget, a.level_cap, a.jobs, None, a.promote, quiet=True)

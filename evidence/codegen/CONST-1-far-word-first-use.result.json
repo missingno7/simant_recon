@@ -1,0 +1,123 @@
+{
+ "id": "CONST-1",
+ "question": "Does separating the first far-word read from the instrument-pointer read in the earlier AdLib body order the private segment words for the later 36-byte setter? The earlier volume/pitch body remains unclaimed; this is a context-specific first-use observation.",
+ "results": [
+  {
+   "variant": "word_first",
+   "profile_index": 0,
+   "profile": "msc600ax",
+   "flags": [
+    "/AL",
+    "/Os",
+    "/Oe",
+    "/Og",
+    "/Gs",
+    "/Zi"
+   ],
+   "source_sha256": "710184f4f2474c83c7285898694650e84ed75d72975a2c993bfbc6aa7db55a92",
+   "bytes": "558bec83ec0257568b76068b5e0a8a870000988bf88a8514008846fe8bc88a870a00988bf88a8514008846ff8e4608268a44015080c120518cc79a000000005b5b8ec7268a04508a46ff0420509a000000005b5b8ec7268a4403508a46fe0440509a000000005b5b8ec7268a4402508a46ff0440509a000000005b5b8ec7268a4405508a46fe0460509a000000005b5b8ec7268a4404508a46ff0460509a000000005b5b8ec7268a4407508a46fe0480509a000000005b5b8ec7268a4406508a46ff0480509a000000005b5b8ec7268a440a508a46fe2c20509a000000005b5b8ec7268a4409508a46ff2c20509a000000005b5b8ec7268a4408508a460a2c40509a000000005b5b5e5f8be55dcb562ac050b101519a000000005b5bb08050b004509a000000005b5b2ac050b008509a000000005b5bb0c050b0bd509a000000005b5b2bf62ac0508d44b0509a000000005b5b4683fe087cec5ecb558bec83ec0a568b5e0a8e06000026031e0000b80600f76e068bf08e060200268b840200268b9404008946f88956fa8ec28bf026035c0d79022bdb895e0a83fb7f7e05c7460a7f00b83f008e0604008b5e0ad1e3268a8f00002aed2bc1c45ef8268a4f028bd1f7d183e13f8bdaf7e1b106d3e8343f80e3c00ac3508b5e0c8a870a00988bd88a8714000440509a000000005b5bb80c00c45ef826f76f0b014608784f837e087f7f498b4608b90c0099f7f98bdad1e38a872600508a460c8bd02c60508956f68bf39a000000005b5b8b4608b90c0099f7f90408d0e0d0e08a8c270002c8518a46f62c50509a000000005b5b5e8be55dcb558bec2ac0508a4e0880e960519a000000005b5b2ac0508a46082c50509a000000005b5b8be55dcb558becff7608b80600f76e068bd88e06020026ffb7040026ffb702000ee800008be55dcb",
+   "disasm": "push bp; mov bp, sp; sub sp, 2; push di; push si; mov si, word ptr [bp + 6]; mov bx, word ptr [bp + 0xa]; mov al, byte ptr [bx]; cwde; mov di, ax; mov al, byte ptr [di + 0x14]; mov byte ptr [bp - 2], al; mov cx, ax; mov al, byte ptr [bx + 0xa]; cwde; mov di, ax; mov al, byte ptr [di + 0x14]; mov byte ptr [bp - 1], al; mov es, word ptr [bp + 8]; mov al, byte ptr es:[si + 1]; push ax; add cl, 0x20; push cx; mov di, es; lcall 0, 0; pop bx; pop bx; mov es, di; mov al, byte ptr es:[si]; push ax; mov al, byte ptr [bp - 1]; add al, 0x20; push ax; lcall 0, 0; pop bx; pop bx; mov es, di; mov al, byte ptr es:[si + 3]; push ax; mov al, byte ptr [bp - 2]; add al, 0x40; push ax; lcall 0, 0; pop bx; pop bx; mov es, di; mov al, byte ptr es:[si + 2]; push ax; mov al, byte ptr [bp - 1]; add al, 0x40; push ax; lcall 0, 0; pop bx; pop bx; mov es, di; mov al, byte ptr es:[si + 5]; push ax; mov al, byte ptr [bp - 2]; add al, 0x60; push ax; lcall 0, 0; pop bx; pop bx; mov es, di; mov al, byte ptr es:[si + 4]; push ax; mov al, byte ptr [bp - 1]; add al, 0x60; push ax; lcall 0, 0; pop bx; pop bx; mov es, di; mov al, byte ptr es:[si + 7]; push ax; mov al, byte ptr [bp - 2]; add al, 0x80; push ax; lcall 0, 0; pop bx; pop bx; mov es, di; mov al, byte ptr es:[si + 6]; push ax; mov al, byte ptr [bp - 1]; add al, 0x80; push ax; lcall 0, 0; pop bx; pop bx; mov es, di; mov al, byte ptr es:[si + 0xa]; push ax; mov al, byte ptr [bp - 2]; sub al, 0x20; push ax; lcall 0, 0; pop bx; pop bx; mov es, di; mov al, byte ptr es:[si + 9]; push ax; mov al, byte ptr [bp - 1]; sub al, 0x20; push ax; lcall 0, 0; pop bx; pop bx; mov es, di; mov al, byte ptr es:[si + 8]; push ax; mov al, byte ptr [bp + 0xa]; sub al, 0x40; push ax; lcall 0, 0; pop bx; pop bx; pop si; pop di; mov sp, bp; pop bp; retf; push si; sub al, al; push ax; mov cl, 1; push cx; lcall 0, 0; pop bx; pop bx; mov al, 0x80; push ax; mov al, 4; push ax; lcall 0, 0; pop bx; pop bx; sub al, al; push ax; mov al, 8; push ax; lcall 0, 0; pop bx; pop bx; mov al, 0xc0; push ax; mov al, 0xbd; push ax; lcall 0, 0; pop bx; pop bx; sub si, si; sub al, al; push ax; lea ax, [si - 0x50]; push ax; lcall 0, 0; pop bx; pop bx; inc si; cmp si, 8; jl 0x145; pop si; retf; push bp; mov bp, sp; sub sp, 0xa; push si; mov bx, word ptr [bp + 0xa]; mov es, word ptr [0]; add bx, word ptr es:[0]; mov ax, 6; imul word ptr [bp + 6]; mov si, ax; mov es, word ptr [2]; mov ax, word ptr es:[si + 2]; mov dx, word ptr es:[si + 4]; mov word ptr [bp - 8], ax; mov word ptr [bp - 6], dx; mov es, dx; mov si, ax; add bx, word ptr es:[si + 0xd]; jns 0x196; sub bx, bx; mov word ptr [bp + 0xa], bx; cmp bx, 0x7f; jle 0x1a3; mov word ptr [bp + 0xa], 0x7f; mov ax, 0x3f; mov es, word ptr [4]; mov bx, word ptr [bp + 0xa]; shl bx, 1; mov cl, byte ptr es:[bx]; sub ch, ch; sub ax, cx; les bx, ptr [bp - 8]; mov cl, byte ptr es:[bx + 2]; mov dx, cx; not cx; and cx, 0x3f; mov bx, dx; mul cx; mov cl, 6; shr ax, cl; xor al, 0x3f; and bl, 0xc0; or al, bl; push ax; mov bx, word ptr [bp + 0xc]; mov al, byte ptr [bx + 0xa]; cwde; mov bx, ax; mov al, byte ptr [bx + 0x14]; add al, 0x40; push ax; lcall 0, 0; pop bx; pop bx; mov ax, 0xc; les bx, ptr [bp - 8]; imul word ptr es:[bx + 0xb]; add word ptr [bp + 8], ax; js 0x24c; cmp word ptr [bp + 8], 0x7f; jg 0x24c; mov ax, word ptr [bp + 8]; mov cx, 0xc; cdq; idiv cx; mov bx, dx; shl bx, 1; mov al, byte ptr [bx + 0x26]; push ax; mov al, byte ptr [bp + 0xc]; mov dx, ax; sub al, 0x60; push ax; mov word ptr [bp - 0xa], dx; mov si, bx; lcall 0, 0; pop bx; pop bx; mov ax, word ptr [bp + 8]; mov cx, 0xc; cdq; idiv cx; add al, 8; shl al, 1; shl al, 1; mov cl, byte ptr [si + 0x27]; add cl, al; push cx; mov al, byte ptr [bp - 0xa]; sub al, 0x50; push ax; lcall 0, 0; pop bx; pop bx; pop si; mov sp, bp; pop bp; retf; push bp; mov bp, sp; sub al, al; push ax; mov cl, byte ptr [bp + 8]; sub cl, 0x60; push cx; lcall 0, 0; pop bx; pop bx; sub al, al; push ax; mov al, byte ptr [bp + 8]; sub al, 0x50; push ax; lcall 0, 0; pop bx; pop bx; mov sp, bp; pop bp; retf; push bp; mov bp, sp; push word ptr [bp + 8]; mov ax, 6; imul word ptr [bp + 6]; mov bx, ax; mov es, word ptr [2]; push word ptr es:[bx + 4]; push word ptr es:[bx + 2]; push cs; call 0x299; mov sp, bp; pop bp; retf",
+   "segments": {
+    "UNIT_TEXT": {
+     "class": "CODE",
+     "align": "word",
+     "combine": "public",
+     "length": 669,
+     "big": false
+    },
+    "_DATA": {
+     "class": "DATA",
+     "align": "word",
+     "combine": "public",
+     "length": 62,
+     "big": false
+    },
+    "CONST": {
+     "class": "CONST",
+     "align": "word",
+     "combine": "public",
+     "length": 6,
+     "big": false
+    },
+    "_BSS": {
+     "class": "BSS",
+     "align": "word",
+     "combine": "public",
+     "length": 0,
+     "big": false
+    }
+   },
+   "communals": {}
+  },
+  {
+   "variant": "pointer_first",
+   "profile_index": 0,
+   "profile": "msc600ax",
+   "flags": [
+    "/AL",
+    "/Os",
+    "/Oe",
+    "/Og",
+    "/Gs",
+    "/Zi"
+   ],
+   "source_sha256": "f3fa620ab462b7ad5390eac25063ade4eadaa6c02ed972b1e0cf0dd51340001d",
+   "bytes": "558bec83ec0257568b76068b5e0a8a870000988bf88a8514008846fe8bc88a870a00988bf88a8514008846ff8e4608268a44015080c120518cc79a000000005b5b8ec7268a04508a46ff0420509a000000005b5b8ec7268a4403508a46fe0440509a000000005b5b8ec7268a4402508a46ff0440509a000000005b5b8ec7268a4405508a46fe0460509a000000005b5b8ec7268a4404508a46ff0460509a000000005b5b8ec7268a4407508a46fe0480509a000000005b5b8ec7268a4406508a46ff0480509a000000005b5b8ec7268a440a508a46fe2c20509a000000005b5b8ec7268a4409508a46ff2c20509a000000005b5b8ec7268a4408508a460a2c40509a000000005b5b5e5f8be55dcb562ac050b101519a000000005b5bb08050b004509a000000005b5b2ac050b008509a000000005b5bb0c050b0bd509a000000005b5b2bf62ac0508d44b0509a000000005b5b4683fe087cec5ecb558bec83ec0a57568b7e0ab80600f76e068bd88e06000026c49f0200895ef88c46fa268b470d8e060200260306000003f879022bff83ff7f7e03bf7f00b83f008e060400d1e7268a8d00002aed2bc18e46fa268a4f028bd1f7d183e13f8bdaf7e1b106d3e8343f80e3c00ac3508b5e0c8a870a00988bd88a8714000440509a000000005b5bb80c00c45ef826f76f0b014608784f837e087f7f498b4608b90c0099f7f98bdad1e38a872600508a460c8bd02c60508956f68bf39a000000005b5b8b4608b90c0099f7f90408d0e0d0e08a8c270002c8518a46f62c50509a000000005b5b5e5f8be55dcb558bec2ac0508a4e0880e960519a000000005b5b2ac0508a46082c50509a000000005b5b8be55dcb558becff7608b80600f76e068bd88e06000026ffb7040026ffb702000ee800008be55dcb",
+   "disasm": "push bp; mov bp, sp; sub sp, 2; push di; push si; mov si, word ptr [bp + 6]; mov bx, word ptr [bp + 0xa]; mov al, byte ptr [bx]; cwde; mov di, ax; mov al, byte ptr [di + 0x14]; mov byte ptr [bp - 2], al; mov cx, ax; mov al, byte ptr [bx + 0xa]; cwde; mov di, ax; mov al, byte ptr [di + 0x14]; mov byte ptr [bp - 1], al; mov es, word ptr [bp + 8]; mov al, byte ptr es:[si + 1]; push ax; add cl, 0x20; push cx; mov di, es; lcall 0, 0; pop bx; pop bx; mov es, di; mov al, byte ptr es:[si]; push ax; mov al, byte ptr [bp - 1]; add al, 0x20; push ax; lcall 0, 0; pop bx; pop bx; mov es, di; mov al, byte ptr es:[si + 3]; push ax; mov al, byte ptr [bp - 2]; add al, 0x40; push ax; lcall 0, 0; pop bx; pop bx; mov es, di; mov al, byte ptr es:[si + 2]; push ax; mov al, byte ptr [bp - 1]; add al, 0x40; push ax; lcall 0, 0; pop bx; pop bx; mov es, di; mov al, byte ptr es:[si + 5]; push ax; mov al, byte ptr [bp - 2]; add al, 0x60; push ax; lcall 0, 0; pop bx; pop bx; mov es, di; mov al, byte ptr es:[si + 4]; push ax; mov al, byte ptr [bp - 1]; add al, 0x60; push ax; lcall 0, 0; pop bx; pop bx; mov es, di; mov al, byte ptr es:[si + 7]; push ax; mov al, byte ptr [bp - 2]; add al, 0x80; push ax; lcall 0, 0; pop bx; pop bx; mov es, di; mov al, byte ptr es:[si + 6]; push ax; mov al, byte ptr [bp - 1]; add al, 0x80; push ax; lcall 0, 0; pop bx; pop bx; mov es, di; mov al, byte ptr es:[si + 0xa]; push ax; mov al, byte ptr [bp - 2]; sub al, 0x20; push ax; lcall 0, 0; pop bx; pop bx; mov es, di; mov al, byte ptr es:[si + 9]; push ax; mov al, byte ptr [bp - 1]; sub al, 0x20; push ax; lcall 0, 0; pop bx; pop bx; mov es, di; mov al, byte ptr es:[si + 8]; push ax; mov al, byte ptr [bp + 0xa]; sub al, 0x40; push ax; lcall 0, 0; pop bx; pop bx; pop si; pop di; mov sp, bp; pop bp; retf; push si; sub al, al; push ax; mov cl, 1; push cx; lcall 0, 0; pop bx; pop bx; mov al, 0x80; push ax; mov al, 4; push ax; lcall 0, 0; pop bx; pop bx; sub al, al; push ax; mov al, 8; push ax; lcall 0, 0; pop bx; pop bx; mov al, 0xc0; push ax; mov al, 0xbd; push ax; lcall 0, 0; pop bx; pop bx; sub si, si; sub al, al; push ax; lea ax, [si - 0x50]; push ax; lcall 0, 0; pop bx; pop bx; inc si; cmp si, 8; jl 0x145; pop si; retf; push bp; mov bp, sp; sub sp, 0xa; push di; push si; mov di, word ptr [bp + 0xa]; mov ax, 6; imul word ptr [bp + 6]; mov bx, ax; mov es, word ptr [0]; les bx, ptr es:[bx + 2]; mov word ptr [bp - 8], bx; mov word ptr [bp - 6], es; mov ax, word ptr es:[bx + 0xd]; mov es, word ptr [2]; add ax, word ptr es:[0]; add di, ax; jns 0x190; sub di, di; cmp di, 0x7f; jle 0x198; mov di, 0x7f; mov ax, 0x3f; mov es, word ptr [4]; shl di, 1; mov cl, byte ptr es:[di]; sub ch, ch; sub ax, cx; mov es, word ptr [bp - 6]; mov cl, byte ptr es:[bx + 2]; mov dx, cx; not cx; and cx, 0x3f; mov bx, dx; mul cx; mov cl, 6; shr ax, cl; xor al, 0x3f; and bl, 0xc0; or al, bl; push ax; mov bx, word ptr [bp + 0xc]; mov al, byte ptr [bx + 0xa]; cwde; mov bx, ax; mov al, byte ptr [bx + 0x14]; add al, 0x40; push ax; lcall 0, 0; pop bx; pop bx; mov ax, 0xc; les bx, ptr [bp - 8]; imul word ptr es:[bx + 0xb]; add word ptr [bp + 8], ax; js 0x23e; cmp word ptr [bp + 8], 0x7f; jg 0x23e; mov ax, word ptr [bp + 8]; mov cx, 0xc; cdq; idiv cx; mov bx, dx; shl bx, 1; mov al, byte ptr [bx + 0x26]; push ax; mov al, byte ptr [bp + 0xc]; mov dx, ax; sub al, 0x60; push ax; mov word ptr [bp - 0xa], dx; mov si, bx; lcall 0, 0; pop bx; pop bx; mov ax, word ptr [bp + 8]; mov cx, 0xc; cdq; idiv cx; add al, 8; shl al, 1; shl al, 1; mov cl, byte ptr [si + 0x27]; add cl, al; push cx; mov al, byte ptr [bp - 0xa]; sub al, 0x50; push ax; lcall 0, 0; pop bx; pop bx; pop si; pop di; mov sp, bp; pop bp; retf; push bp; mov bp, sp; sub al, al; push ax; mov cl, byte ptr [bp + 8]; sub cl, 0x60; push cx; lcall 0, 0; pop bx; pop bx; sub al, al; push ax; mov al, byte ptr [bp + 8]; sub al, 0x50; push ax; lcall 0, 0; pop bx; pop bx; mov sp, bp; pop bp; retf; push bp; mov bp, sp; push word ptr [bp + 8]; mov ax, 6; imul word ptr [bp + 6]; mov bx, ax; mov es, word ptr [0]; push word ptr es:[bx + 4]; push word ptr es:[bx + 2]; push cs; call 0x28c; mov sp, bp; pop bp; retf",
+   "segments": {
+    "UNIT_TEXT": {
+     "class": "CODE",
+     "align": "word",
+     "combine": "public",
+     "length": 656,
+     "big": false
+    },
+    "_DATA": {
+     "class": "DATA",
+     "align": "word",
+     "combine": "public",
+     "length": 62,
+     "big": false
+    },
+    "CONST": {
+     "class": "CONST",
+     "align": "word",
+     "combine": "public",
+     "length": 6,
+     "big": false
+    },
+    "_BSS": {
+     "class": "BSS",
+     "align": "word",
+     "combine": "public",
+     "length": 0,
+     "big": false
+    }
+   },
+   "communals": {}
+  }
+ ],
+ "checks": [
+  {
+   "check": "word_first@0",
+   "needle": "mov ax, 6; imul word ptr [bp + 6]; mov bx, ax; mov es, word ptr [2]; push word ptr es:[bx + 4]",
+   "ok": true
+  },
+  {
+   "check": "pointer_first@0",
+   "needle": "mov ax, 6; imul word ptr [bp + 6]; mov bx, ax; mov es, word ptr [0]; push word ptr es:[bx + 4]",
+   "ok": true
+  },
+  {
+   "check": "word_first@0",
+   "needle": "CONST.length=6",
+   "ok": true
+  },
+  {
+   "check": "pointer_first@0",
+   "needle": "CONST.length=6",
+   "ok": true
+  }
+ ],
+ "all_checks_pass": true
+}

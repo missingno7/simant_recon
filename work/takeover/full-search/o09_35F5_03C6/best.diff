@@ -1,0 +1,20 @@
+--- base.c
++++ best.c
+@@ -291,6 +291,7 @@
+     int j;
+     char ok;
+     int key;
++    int tmp2;
+ 
+     oldDrive = 0;
+     ok = 1;
+@@ -357,7 +358,8 @@
+     f_208F_005B(0x1606, path, 4, 0);
+     if (save == 1) {
+         win_GetObjRect(0x1603, &r3);
+-        y = (r3.bottom + r3.top - f_24AB_030B() + 1) / 2;
++        tmp2 = r3.top;
++        y = (r3.bottom + tmp2 - f_24AB_030B() + 1) / 2;
+         x = r3.left + 4;
+         win_SetColorFromObjNum(0x1604);
+         if (ok && *fd_50F6_3862 != 0) {

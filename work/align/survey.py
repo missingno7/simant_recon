@@ -9,7 +9,7 @@ Also records the bytes between the previous function-table row end and the origi
 import sys, json, argparse
 from pathlib import Path
 from concurrent.futures import ThreadPoolExecutor
-ROOT = Path(__file__).resolve().parents[3]
+ROOT = Path(__file__).resolve().parents[2]
 sys.path.insert(0, str(ROOT / 'tools'))
 import compiler, match, exe as exemod, modules as modmod  # noqa
 import functions as fnmod  # noqa

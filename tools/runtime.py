@@ -34,6 +34,10 @@ relocations are verified against section 27 exactly like a game data placement:
 * REFERENCED: the segment's derived link placement (references to the segment itself);
 * REFERENCED_PUBLIC: a public of the segment is referenced (derived placement of the
   public minus its offset; all referenced publics of the segment must agree);
+* REGISTERED_PUBLICS: at least two independently grounded data publics in the symbol
+  registry agree on the segment start after subtracting their library PUBDEF offsets.
+  This also admits a data-only library member referenced by game code, e.g. syserr.c;
+  a single public or conflicting public anchors cannot place the segment.
 * DOSSEG_BEGDATA: class BEGDATA (the NULL segment) is the first segment of DGROUP (offset 0);
 * CLASS_SEQUENCE: the MSG class is laid out by the linker rule: segments in order of first
   appearance in member link order (= code order in _TEXT), public contributions concatenated
@@ -399,6 +403,14 @@ def _data_members(results, derived):
             defs = [d for d in idx.get(name, []) if d[3] != "ABSOLUTE" and not d[3].upper().endswith("CODE")]
             if len(defs) == 1 and (defs[0][0], defs[0][1]) not in located:
                 wanted.add((defs[0][0], defs[0][1]))
+    # Game references are already grounded in the data registry.  Runtime-only code
+    # analysis cannot see them (syserr.c has no runtime caller in this game).
+    for name, defs in idx.items():
+        s = match.obj_name_lookup(name)
+        if s is not None and s.get("kind") == "data" and len(defs) == 1:
+            d = defs[0]
+            if d[3] != "ABSOLUTE" and not d[3].upper().endswith("CODE") and (d[0], d[1]) not in located:
+                wanted.add((d[0], d[1]))
     for lib, name in sorted(wanted):
         hits = [(i, b) for (k, n, i), b in blobs.items() if k == lib and n == name]
         if len(hits) != 1:
@@ -435,6 +447,15 @@ def _place_data(members, derived) -> dict:
                 place[(mem, sn)] = (got.pop(), "REFERENCED_PUBLIC")
             elif str(sd.get("class", "")).upper() == "BEGDATA":
                 place[(mem, sn)] = (dgbase, "DOSSEG_BEGDATA")
+            elif not got:
+                registered = []
+                for pb in obj.publics:
+                    s = match.obj_name_lookup(pb["name"])
+                    if pb["segment"] == sn and s is not None and s.get("kind") == "data" and s["seg"] == DGROUP:
+                        registered.append((pb["name"], dgbase + s["off"] - pb["offset"]))
+                starts = {a for _, a in registered}
+                if len({name for name, _ in registered}) >= 2 and len(starts) == 1:
+                    place[(mem, sn)] = (starts.pop(), "REGISTERED_PUBLICS")
     code_members = [m for m in members if m["code"]]
     # rule BRACKETED: SB <= S <= SE (crt0dat's XPB/XP/XPE, ...); the S contributions are
     # concatenated in member link order from SB and must end exactly at SE (two derived anchors)

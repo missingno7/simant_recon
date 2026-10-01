@@ -1,0 +1,18 @@
+{
+ "id": "CODEALIGN-1",
+ "question": "Does an MSC far-code SEGDEF require WORD alignment, while a symbolic MASM BYTE segment explicitly admits an odd origin? Positive/negative linker controls: work/align/exp.json (MS LINK 5.10 and RTLink/Plus 6.10); the full placement gate is tested by tests/test_codealign.py against the original 1986/19A9 boundary.",
+ "variants": {
+  "msc_word": "void far f(void) { }\n",
+  "masm_byte": {
+   "source": "UNIT_TEXT segment byte public 'CODE'\nassume cs:UNIT_TEXT\npublic _f\n_f proc far\nret\n_f endp\nUNIT_TEXT ends\nend\n",
+   "language": "asm",
+   "toolchain": {"profile": "masm510", "flags": ["/Mx"]}
+  }
+ },
+ "profiles": [{"profile": "msc600ax", "flags": ["/AL", "/Os", "/Gs"]}],
+ "expect": {"msc_word@0": "retf", "masm_byte@0": "retf"},
+ "expect_segments": {
+  "msc_word@0": {"UNIT_TEXT": {"align": "word", "class": "CODE", "length": 1}},
+  "masm_byte@0": {"UNIT_TEXT": {"align": "byte", "class": "CODE", "length": 1}}
+ }
+}

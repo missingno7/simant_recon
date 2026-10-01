@@ -1,0 +1,30 @@
+{
+ "id": "REGISTERED_PUBLICS",
+ "question": "Can a complete data-only historical library member be anchored by game references rather than runtime-only callers?",
+ "library": "C:/tools/msc-6.00/LIB/llibcr.lib",
+ "member": "syserr.c",
+ "segment": "_DATA",
+ "size": 462,
+ "placement": "55B3:7BDE",
+ "anchors": [
+  {
+   "public": "_sys_errlist",
+   "pubdef_offset": 308,
+   "registered_address": "55B3:7D12",
+   "grounding": "DosPunt root:1A28:0277 indexes far-pointer messages by errno (layout/symbols.json)."
+  },
+  {
+   "public": "_sys_nerr",
+   "pubdef_offset": 460,
+   "registered_address": "55B3:7DAA",
+   "grounding": "f_1C62_06A6 bounds-checks the message number (layout/symbols.json)."
+  }
+ ],
+ "positive_control": "tests/test_runtime_publics.py::test_exact_pinned_member: complete library bytes, 38 pointer relocations and within-group order exact",
+ "negative_contrasts": [
+  "tests/test_runtime_publics.py::test_missing_or_conflicting_anchor: one missing or inconsistent public cannot place the segment",
+  "tests/test_runtime_publics.py::test_agreeing_wrong_placement_still_fails_bytes: agreement of two shifted anchors does not bypass byte/relocation comparison"
+ ],
+ "acceptance": "python tools/promote.py --runtime-data syserr.c --verify-only; python tools/promote.py --runtime-data syserr.c",
+ "limitations": "Addresses remain source-grounded link-placement hypotheses; independent historical link and program-wide relocation group order are separate proof levels."
+}

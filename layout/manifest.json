@@ -2291,8 +2291,13 @@
     }
    },
    "lang": "c",
+   "source_origin": "hand-written C",
+   "extent": {
+    "start": 221008,
+    "end": 223440
+   },
    "source": "src/S04/m35F5.c",
-   "source_sha256": "6e226ee239158d9772ea6549b4f9dde051f050b9255135afc1c27fb5167c6db3",
+   "source_sha256": "65db48855f97c32600ff7527999a463019ba2884117f0c921b35e46d5d37d406",
    "claims": [
     {
      "name": "MapToolsMenu",
@@ -2359,12 +2364,21 @@
      "kind": "C",
      "provenance": "EXACT_NATURAL",
      "reloc_order": "GROUPED"
+    },
+    {
+     "name": "DrawMiniMapCursor",
+     "unit": "S04",
+     "seg": 13813,
+     "off": 2248,
+     "size": 150,
+     "target_sha256": "1bcaa5b00ac7c2ede96f40ce57f23c01159859d2b837866e18660e8c8cee6d15",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL",
+     "reloc_order": "EXACT"
     }
    ],
-   "scaffold": [
-    "DrawMiniMapCursor"
-   ],
-   "object_sha256": "45576213e7ee1e1a9789806730b0117670741a1a8b89739b20ead31efd7b5fdc"
+   "scaffold": [],
+   "object_sha256": "74005ed51b3a0bf6187089479bb7f7860eb0ae9076010da9ca48b3d6d9305bcf"
   },
   "S05:35F5": {
    "unit": "S05",
@@ -2490,6 +2504,54 @@
    ],
    "scaffold": [],
    "object_sha256": "ba51a5f88cf14fc21b6db141224ea49323dad70298cd3720ac87ba2ab9c3922c"
+  },
+  "S05:3663": {
+   "unit": "S05",
+   "seg": 13923,
+   "profile": "msc600ax",
+   "flags": [
+    "/AL",
+    "/Os",
+    "/Oe",
+    "/Og",
+    "/Zi"
+   ],
+   "placements": {
+    "_DATA": {
+     "seg": 21939,
+     "off": 9182,
+     "size": 106
+    },
+    "CONST": {
+     "seg": 21939,
+     "off": 33872,
+     "size": 6
+    }
+   },
+   "lang": "c",
+   "source_origin": "hand-written C",
+   "extent": {
+    "start": 222772,
+    "end": 223516
+   },
+   "source": "src/S05/m3663.c",
+   "source_sha256": "cbf0c66bfc857ecb0a592f6ba5760e47055230b6e33d6115254506a5f09f912c",
+   "claims": [
+    {
+     "name": "DoExpMenu",
+     "unit": "S05",
+     "seg": 13923,
+     "off": 4,
+     "size": 744,
+     "target_sha256": "83b0a24904b443f468af42d0db39ab0f9ed5d73f3561534ec8f0607fe9da65ea",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL",
+     "layout_inferred": "BYTE-1 plus original statement/declaration order: low event byte lvalue reproduces CMP CX,AX; unsigned-word masking generates CMP AX,CX",
+     "reloc_order": "GROUPED"
+    }
+   ],
+   "scaffold": [],
+   "object_sha256": "3bd8ae7aacb9589228a63ebec6cd186466e0798c6cd0ad9948f1e1fcc5642d99"
   },
   "S06:35F5": {
    "unit": "S06",
@@ -2858,8 +2920,9 @@
     }
    },
    "lang": "c",
+   "source_origin": "hand-written C",
    "source": "src/S08/m35F5.c",
-   "source_sha256": "9c1f4efa90b8b6cf23929dfababdd4a7305ea89b37573cfa714c11d8bf0f51b3",
+   "source_sha256": "ef6eea405f6497cb5a6648ef258cc1afeab308f995ded573794465d831e3501f",
    "claims": [
     {
      "name": "InitSimVars",
@@ -3047,10 +3110,22 @@
      "kind": "C",
      "provenance": "EXACT_NATURAL",
      "reloc_order": "EXACT"
+    },
+    {
+     "name": "RandWorld",
+     "unit": "S08",
+     "seg": 13813,
+     "off": 80,
+     "size": 1355,
+     "target_sha256": "e39f2848a79db0996ea9914b5b3e2f735dcc84ed7b69370de63696b359b3787d",
+     "kind": "C",
+     "provenance": "EXACT_STEERED",
+     "steered": "RandWorld=ZERO-1: folded unsigned seed < 0 supplies the original AX-to-DI zero initialization; its eliminated original expression is unknown",
+     "reloc_order": "WITHIN_GROUP_PENDING"
     }
    ],
    "scaffold": [],
-   "object_sha256": "2282a61ee78e07101cf7a61112de13778b0c74c76db64170b874142be6c060c2"
+   "object_sha256": "ade26aef0f6ff7bf9eb4a44dd6c6b5679b91653b770b006def82e3f0900dbeff"
   },
   "S09:35F5": {
    "unit": "S09",
@@ -3078,11 +3153,21 @@
      "seg": 21939,
      "off": 35800,
      "size": 68
+    },
+    "UNIT7_DATA": {
+     "seg": 20043,
+     "off": 0,
+     "size": 2464
     }
    },
    "lang": "c",
+   "source_origin": "hand-written C",
+   "extent": {
+    "start": 221008,
+    "end": 225002
+   },
    "source": "src/S09/m35F5.c",
-   "source_sha256": "96ba31aebd1d94cde671f1aaa1c19c5f686b6d55d62037b97601eaa493cb7d3d",
+   "source_sha256": "028e1575990d5d45233f9102a0d2a060810349bd2f1297182c4af435ecbe912a",
    "claims": [
     {
      "name": "LoadGame",
@@ -3138,12 +3223,22 @@
      "kind": "C",
      "provenance": "EXACT_NATURAL",
      "reloc_order": "GROUPED"
+    },
+    {
+     "name": "o09_35F5_03C6",
+     "unit": "S09",
+     "seg": 13813,
+     "off": 966,
+     "size": 2405,
+     "target_sha256": "91828157f6135998cc0eddc6814a40de746023429d2014d42968e446906f98fa",
+     "kind": "C",
+     "provenance": "EXACT_STEERED",
+     "steered": "USE-2: folded unsigned path/save/index reads; original eliminated expressions unknown.",
+     "reloc_order": "GROUPED"
     }
    ],
-   "scaffold": [
-    "o09_35F5_03C6"
-   ],
-   "object_sha256": "2a3ebf2ebf72c2da659abce16703a793ece306ded5a17bafd764c47de9269ca2"
+   "scaffold": [],
+   "object_sha256": "1b044d505b8367efe4389777211d41aa5f630d4a7dcfd6bfe763b12e83def236"
   },
   "S09:36EE": {
    "unit": "S09",
@@ -3625,8 +3720,9 @@
     }
    },
    "lang": "c",
+   "source_origin": "hand-written C",
    "source": "src/S13/m384C.c",
-   "source_sha256": "7af7d0f1e0de99a54efbaa7a8a0089676654ed0bceca0aa0ee6f3995bb3e6804",
+   "source_sha256": "fb6785e93f5c2ea1110f64b5eb200d7f4e346263c43ac521c0434629d9f5839a",
    "claims": [
     {
      "name": "ProcYardEvent",
@@ -3869,13 +3965,23 @@
      "kind": "C",
      "provenance": "EXACT_NATURAL",
      "reloc_order": "GROUPED"
+    },
+    {
+     "name": "DrawColonyBars",
+     "unit": "S13",
+     "seg": 14412,
+     "off": 5381,
+     "size": 490,
+     "target_sha256": "c0d79875124bd9d04ef4f940dab1d390597a71157c8019f0a4150e818aae10d5",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL",
+     "reloc_order": "GROUPED"
     }
    ],
    "scaffold": [
-    "DrawColonyBars",
     "InvertPatch"
    ],
-   "object_sha256": "df0671d754370002cac31de39c6f911aa74b18ef510d6a28bcae10d516b3bf78"
+   "object_sha256": "37716fe03562f2f9fd6c96cffddec140e765963b76e33cb86e3771485cc53aba"
   },
   "S14:384C": {
    "unit": "S14",
@@ -5597,8 +5703,9 @@
     }
    },
    "lang": "c",
+   "source_origin": "hand-written C",
    "source": "src/S23/m39C7.c",
-   "source_sha256": "33561b9fe79d690027351ffd78df2501e2f7183129ffbf8f4a1272214fe20844",
+   "source_sha256": "4e2ff0a4d57f3159b2fb58ff64c77bb7740e2a415292cc7f2fe2e9fad095daf4",
    "claims": [
     {
      "name": "XFlipLong",
@@ -5665,14 +5772,25 @@
      "kind": "C",
      "provenance": "EXACT_NATURAL",
      "reloc_order": "GROUPED"
+    },
+    {
+     "name": "win_GetStyleTextHeight",
+     "unit": "S23",
+     "seg": 14791,
+     "off": 1185,
+     "size": 455,
+     "target_sha256": "22ee1c4f28b33778ce02fd0891365025461271fd14ddd1de22aaea68e756c5fd",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL",
+     "layout_inferred": "SYM-1 and TU-1: bring real f_1A53_00F0/f_171C_1B84 loader/locker prototypes earlier; declaration position inferred with full-module gate, no padding symbols",
+     "reloc_order": "GROUPED"
     }
    ],
    "scaffold": [
     "DisplayCard",
-    "win_GetStyleTextHeight",
     "win_PrintStyleTextInRect"
    ],
-   "object_sha256": "70a4fe8653e798bd0fe6a414f7293e60034cd06a62bc654c544a9942ab043f5d"
+   "object_sha256": "2c133f6d4029fd520c652de23f8c3211204f9b22beb9ef91401ede366d073778"
   },
   "S24:39C7": {
    "unit": "S24",
@@ -6166,8 +6284,9 @@
     }
    },
    "lang": "c",
+   "source_origin": "hand-written C",
    "source": "src/S25/m3BA4.c",
-   "source_sha256": "abf41cf1b34ca2350454ad95ef869f2e49a344a3566506435f2290582cbb252a",
+   "source_sha256": "d2937c80fe0ef4f2bd30c4c3ebe344ce4f993870f08515e7436c60d30cacdec4",
    "claims": [
     {
      "name": "DoAntSimY",
@@ -6191,7 +6310,7 @@
      "kind": "C",
      "provenance": "EXACT_STEERED",
      "steered": "DoAntMoveY scaffold stand-in: CONST word order + 21 filler lines -> /Zd LINNUM (52/record) LEDATA boundary that fixes within-group reloc order of o25_3BA4_0999 (SRand2 sites 0AB8/0AEF in separate records)",
-     "reloc_order": "GROUPED"
+     "reloc_order": "WITHIN_GROUP_PENDING"
     },
     {
      "name": "o25_3BA4_0C01",
@@ -6203,7 +6322,7 @@
      "kind": "C",
      "provenance": "EXACT_STEERED",
      "steered": "DoAntMoveY scaffold stand-in: CONST word order + 21 filler lines -> /Zd LINNUM (52/record) LEDATA boundary that fixes within-group reloc order of o25_3BA4_0999",
-     "reloc_order": "GROUPED"
+     "reloc_order": "WITHIN_GROUP_PENDING"
     },
     {
      "name": "o25_3BA4_0DFB",
@@ -6227,7 +6346,7 @@
      "kind": "C",
      "provenance": "EXACT_STEERED",
      "steered": "DoAntMoveY scaffold stand-in: CONST word order + 21 filler lines -> /Zd LINNUM (52/record) LEDATA boundary that fixes within-group reloc order of o25_3BA4_0999",
-     "reloc_order": "GROUPED"
+     "reloc_order": "WITHIN_GROUP_PENDING"
     },
     {
      "name": "o25_3BA4_188A",
@@ -6287,7 +6406,7 @@
      "kind": "C",
      "provenance": "EXACT_STEERED",
      "steered": "DoAntMoveY scaffold stand-in: CONST word order + 21 filler lines -> /Zd LINNUM (52/record) LEDATA boundary that fixes within-group reloc order of o25_3BA4_0999",
-     "reloc_order": "GROUPED"
+     "reloc_order": "WITHIN_GROUP_PENDING"
     },
     {
      "name": "o25_3BA4_13AB",
@@ -6299,7 +6418,7 @@
      "kind": "C",
      "provenance": "EXACT_STEERED",
      "steered": "DoAntMoveY scaffold stand-in: CONST word order + 21 filler lines -> /Zd LINNUM (52/record) LEDATA boundary that fixes within-group reloc order of o25_3BA4_0999",
-     "reloc_order": "GROUPED"
+     "reloc_order": "WITHIN_GROUP_PENDING"
     },
     {
      "name": "o25_3BA4_1A9F",
@@ -6311,14 +6430,25 @@
      "kind": "C",
      "provenance": "EXACT_NATURAL",
      "reloc_order": "EXACT"
+    },
+    {
+     "name": "DoAntMoveY",
+     "unit": "S25",
+     "seg": 15268,
+     "off": 8,
+     "size": 1990,
+     "target_sha256": "972b0bdc52cf2602c3648410e00feae365406cbade83f255396fd90cae6e65f3",
+     "kind": "C",
+     "provenance": "EXACT_STEERED",
+     "steered": "USE-1: eliminated unsigned tattr >= 0 read reproduces address-taken local use ranking; original eliminated expression unknown",
+     "reloc_order": "GROUPED"
     }
    ],
    "scaffold": [
-    "DoAntMoveY",
     "o25_3BA4_1035",
     "o25_3BA4_1686"
    ],
-   "object_sha256": "6546bc93a06a71fa7427728f4b62c7f433eb1aa9aeb5c7e4de91041d5524f42b"
+   "object_sha256": "b2b95784e99357ea980023521a9911c4e03d5add164fb396b199baf16e562ab6"
   },
   "S26:39C7": {
    "unit": "S26",
@@ -8199,7 +8329,7 @@
    "lang": "c",
    "source_origin": "hand-written C",
    "source": "src/root/m0250.c",
-   "source_sha256": "a6b6f95dc6f310102abc4422bd8edb4f34199dc26e00831a77b7dc2dafe6867c",
+   "source_sha256": "bb8a325c543151e09cb173d2194844877805a9e1058d3b24362ff5a7cbd9f61b",
    "claims": [
     {
      "name": "f_0250_0CF6",
@@ -8683,7 +8813,7 @@
      "target_sha256": "3b4bbed0d771ff78c03b865f74d4634204014f3d0a3b6a4eb8324c7b8b30c35f",
      "kind": "C",
      "provenance": "EXACT_NATURAL",
-     "reloc_order": "GROUPED"
+     "reloc_order": "WITHIN_GROUP_PENDING"
     },
     {
      "name": "DrawEditGraphs",
@@ -8729,10 +8859,38 @@
      "kind": "C",
      "provenance": "EXACT_NATURAL",
      "reloc_order": "EXACT"
+    },
+    {
+     "name": "DrawCurBalloons",
+     "unit": "root",
+     "seg": 592,
+     "off": 17741,
+     "size": 1680,
+     "target_sha256": "8321fb9488615fc252bb7a43316fe4f39b699530296fff3b1f4a68013989799a",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL",
+     "layout_inferred": "SYM-1: move real fd_50F6_37EA callback prototype before f_0250_1018; inferred declaration placement, no dummy identifiers",
+     "reloc_order": "WITHIN_GROUP_PENDING"
+    },
+    {
+     "name": "DrawSpider",
+     "unit": "root",
+     "seg": 592,
+     "off": 6375,
+     "size": 1433,
+     "target_sha256": "8dd6e981d93377f763d6ede6e05e68569b6efe25afc2943cf4d0657250d72ae1",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL",
+     "layout_inferred": "SYM-1 and OE-1: move two real far-variable declarations earlier, emit rectangle left before top, and use conditional image-mode calls; whole-module gate verifies the resulting register and stack allocation",
+     "reloc_order": "GROUPED"
     }
    ],
-   "scaffold": [],
-   "object_sha256": "37be68870ce44803257925e0d42889fa7065690db200ac714d5169d978803577"
+   "scaffold": [
+    "DrawBalloons",
+    "f_0250_1018",
+    "f_0250_129E"
+   ],
+   "object_sha256": "02cd19cd44dca3ee9c9fafc478d225a8eb7efa19ccefe7699605e65fd32fb701"
   },
   "root:075B": {
    "unit": "root",
@@ -12592,7 +12750,7 @@
    "lang": "c",
    "source_origin": "hand-written C",
    "source": "src/root/m171C.c",
-   "source_sha256": "6c21378c5a7d83423f50912ab3dd3f678be80fee583a399178f714ccf6b06d63",
+   "source_sha256": "31bd9caa243220db2bd1ba940ac8fae7f5d189b2ec95f1662918e9ca2160b10e",
    "claims": [
     {
      "name": "f_171C_068C",
@@ -13210,16 +13368,26 @@
      "provenance": "EXACT_STEERED",
      "steered": "volatile int type in f_171C_15A2 -> old type kept in its [bp-6] home instead of CX; natural forms (int/unsigned/char/struct-free, inner scope, extra assignments) all keep it in CX",
      "reloc_order": "WITHIN_GROUP_PENDING"
+    },
+    {
+     "name": "f_171C_0160",
+     "unit": "root",
+     "seg": 5916,
+     "off": 352,
+     "size": 362,
+     "target_sha256": "52f36458fb66ca79d03d9152d99aee7d605475996677086af9c69398aaca9a3c",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL",
+     "reloc_order": "EXACT"
     }
    ],
    "scaffold": [
-    "f_171C_0160",
     "f_171C_09CC",
     "f_171C_0ADC",
     "f_171C_0CF4",
     "f_171C_0FBC"
    ],
-   "object_sha256": "db50398a20c72e1c7115a2a26272728c6231388d2cd07300a1063baee15dde65"
+   "object_sha256": "312fb7f17b4b321b08be6a101abc196cd9dc1d9fe8622361f8e6ef16587d7323"
   },
   "root:194D": {
    "unit": "root",
@@ -13702,8 +13870,9 @@
     }
    },
    "lang": "c",
+   "source_origin": "hand-written C",
    "source": "src/root/m1986.c",
-   "source_sha256": "7c1b3728d2b23dc83dac2d22cb6229f9593b1694b7644da5c600ac5284ddbcf4",
+   "source_sha256": "c6278f0729f2c7e8c1b36c423c7c4ab081573b8c26a8604ab1ee78036365fc96",
    "claims": [
     {
      "name": "OpenIndex",
@@ -13737,12 +13906,45 @@
      "kind": "C",
      "provenance": "EXACT_NATURAL",
      "reloc_order": "EXACT"
+    },
+    {
+     "name": "f_1986_0235",
+     "unit": "root",
+     "seg": 6534,
+     "off": 565,
+     "size": 1,
+     "target_sha256": "383e5d7d58caa41ce723cf16af471b38f6ee9065c032d07fa6bef1678cb72f1d",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL",
+     "reloc_order": "EXACT"
+    },
+    {
+     "name": "f_1986_0236",
+     "unit": "root",
+     "seg": 6534,
+     "off": 566,
+     "size": 1,
+     "target_sha256": "383e5d7d58caa41ce723cf16af471b38f6ee9065c032d07fa6bef1678cb72f1d",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL",
+     "reloc_order": "EXACT"
+    },
+    {
+     "name": "f_1986_0237",
+     "unit": "root",
+     "seg": 6534,
+     "off": 567,
+     "size": 1,
+     "target_sha256": "383e5d7d58caa41ce723cf16af471b38f6ee9065c032d07fa6bef1678cb72f1d",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL",
+     "reloc_order": "EXACT"
     }
    ],
    "scaffold": [
     "FindIndex"
    ],
-   "object_sha256": "08cb2087f2b585e1c44f68ede5775a280b31b91243d6300ac68286f567c7012c"
+   "object_sha256": "2660129d4670707579982735d6e9898a7ae58c2c423cf900a7573893eea4051b"
   },
   "root:19A9": {
    "unit": "root",
@@ -13768,46 +13970,14 @@
     }
    },
    "lang": "c",
+   "source_origin": "hand-written C",
    "extent": {
-    "start": 105109,
+    "start": 105112,
     "end": 105927
    },
    "source": "src/root/m19A9.c",
-   "source_sha256": "00ae17cf4ba40640c21eee28f26f8feef52035702981c6d3df7890229d9c45ae",
+   "source_sha256": "552ca373a3a3721885915acd0a95e2126b8405b0c555f02d1833381331cda523",
    "claims": [
-    {
-     "name": "f_19A9_0005",
-     "unit": "root",
-     "seg": 6569,
-     "off": 5,
-     "size": 1,
-     "target_sha256": "383e5d7d58caa41ce723cf16af471b38f6ee9065c032d07fa6bef1678cb72f1d",
-     "kind": "C",
-     "provenance": "EXACT_NATURAL",
-     "reloc_order": "EXACT"
-    },
-    {
-     "name": "f_19A9_0006",
-     "unit": "root",
-     "seg": 6569,
-     "off": 6,
-     "size": 1,
-     "target_sha256": "383e5d7d58caa41ce723cf16af471b38f6ee9065c032d07fa6bef1678cb72f1d",
-     "kind": "C",
-     "provenance": "EXACT_NATURAL",
-     "reloc_order": "EXACT"
-    },
-    {
-     "name": "f_19A9_0007",
-     "unit": "root",
-     "seg": 6569,
-     "off": 7,
-     "size": 1,
-     "target_sha256": "383e5d7d58caa41ce723cf16af471b38f6ee9065c032d07fa6bef1678cb72f1d",
-     "kind": "C",
-     "provenance": "EXACT_NATURAL",
-     "reloc_order": "EXACT"
-    },
     {
      "name": "f_19A9_0008",
      "unit": "root",
@@ -13876,7 +14046,7 @@
     }
    ],
    "scaffold": [],
-   "object_sha256": "1aa8ea75f5ef6755f183186b4b757357e4eb1c301d872a1ce69112ce3de86aac"
+   "object_sha256": "2e8b585c6a62c093957ac3dd5cc75669773b360105e6f139acacdf385a6b8477"
   },
   "root:19DC": {
    "unit": "root",
@@ -20400,8 +20570,9 @@
     }
    },
    "lang": "c",
+   "source_origin": "hand-written C",
    "source": "src/root/m2815.c",
-   "source_sha256": "f98b3f039b39f00f45f563fdbd31b7fdc4500c37d950e5b176809ba5abfbce8c",
+   "source_sha256": "7ab16f1356fd280057eb37d2cff8ec2cfbcd9dfbdf8ace444b7e300f49255a38",
    "claims": [
     {
      "name": "f_2815_0118",
@@ -20435,10 +20606,24 @@
      "kind": "C",
      "provenance": "EXACT_NATURAL",
      "reloc_order": "EXACT"
+    },
+    {
+     "name": "f_2815_0275",
+     "unit": "root",
+     "seg": 10261,
+     "off": 629,
+     "size": 36,
+     "target_sha256": "a1abb5bd708b9fbbf73348b01e6b475c47d284fc46484b5ed08c35744e95ab7c",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL",
+     "layout_inferred": "CONST-1: legitimate first-use sequencing in the earlier unclaimed AdLib body places its instrument-array segment word at the original private CONST offset",
+     "reloc_order": "EXACT"
     }
    ],
-   "scaffold": [],
-   "object_sha256": "30b227aac488ddd7333d0f1b1b58ae482e45847cedf798ecc1aa826b13faffdd"
+   "scaffold": [
+    "f_2815_0165"
+   ],
+   "object_sha256": "8eee22a8d5f97c0d68cf07aac90e62bfb8939ebf8b5297bbce411e3fc6f7e179"
   },
   "root:283E": {
    "unit": "root",
@@ -20906,8 +21091,13 @@
     }
    },
    "lang": "c",
+   "source_origin": "hand-written C",
+   "extent": {
+    "start": 168158,
+    "end": 168870
+   },
    "source": "src/root/m290D.c",
-   "source_sha256": "eaa7ea68aefe755b01322ce9f273e6e2e1a968b82f8fec2f8f71dda8eda00d7f",
+   "source_sha256": "eaec23e8d37bd606616dc44208c7bbcf82ced13e24abe0362ef767c5e4cc4fed",
    "claims": [
     {
      "name": "f_290D_0098",
@@ -20941,10 +21131,22 @@
      "kind": "C",
      "provenance": "EXACT_NATURAL",
      "reloc_order": "GROUPED"
+    },
+    {
+     "name": "f_290D_000E",
+     "unit": "root",
+     "seg": 10509,
+     "off": 14,
+     "size": 138,
+     "target_sha256": "cf670ff558e8e68f1ac20f9c7fa3044bd3911f19780543ccb442adf6389ef26f",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL",
+     "layout_inferred": "OE-1 and original assignment order: native unsigned n >>= 1 and j = i = 0 reproduce byte-local placement and retained auto homes, without the draft padding local or inline assembly",
+     "reloc_order": "EXACT"
     }
    ],
    "scaffold": [],
-   "object_sha256": "c22cf9957b4bf94734069858c0d4e81878dc6f4903b377c810fb0fcab87e38a1"
+   "object_sha256": "0ee43c869d6518db99d59029a5754db4ab04c3f89a126579397241eec90da655"
   },
   "root:293A": {
    "unit": "root",
@@ -20971,8 +21173,13 @@
     }
    },
    "lang": "c",
+   "source_origin": "hand-written C",
+   "extent": {
+    "start": 168870,
+    "end": 169418
+   },
    "source": "src/root/m293A.c",
-   "source_sha256": "03218dfe0830a8a7df6014777b3f2aba432597c4806d7b952927d8c59d598d1c",
+   "source_sha256": "601b4e4e9e8b9d128cc97cca3da7dcf0ad863dbb5c6df587c601530cbe4ec5e6",
    "claims": [
     {
      "name": "f_293A_0006",
@@ -21061,10 +21268,23 @@
      "kind": "C",
      "provenance": "EXACT_NATURAL",
      "reloc_order": "EXACT"
+    },
+    {
+     "name": "f_293A_017F",
+     "unit": "root",
+     "seg": 10554,
+     "off": 383,
+     "size": 171,
+     "target_sha256": "5ba673900bd81a24d6a2e1418a701fe50257dd9dd2918f53af2a646789c7c574",
+     "kind": "C",
+     "provenance": "EXACT_STEERED",
+     "steered": "LIFE-1: folded unsigned success-flag check retains lifetime through the retry loop; eliminated original expression unknown",
+     "layout_inferred": "ZI-2: polling continuation labels recover the two within-group record breaks; original label spelling unknown",
+     "reloc_order": "GROUPED"
     }
    ],
    "scaffold": [],
-   "object_sha256": "ab7c9b60ca3721ba0d1ceda87bd9a0402abb6d7b45769b37bc4f688989d4ca5d"
+   "object_sha256": "684595d316bdb6073a2229e5ab59f75ef4a506b66b6e0b20a766f3955da5641c"
   },
   "root:295C": {
    "unit": "root",
@@ -21075,7 +21295,8 @@
     "/Os",
     "/Oe",
     "/Og",
-    "/Gs"
+    "/Gs",
+    "/Zi"
    ],
    "placements": {
     "CONST": {
@@ -21090,8 +21311,13 @@
     }
    },
    "lang": "c",
+   "source_origin": "hand-written C",
+   "extent": {
+    "start": 169418,
+    "end": 170880
+   },
    "source": "src/root/m295C.c",
-   "source_sha256": "a2259416cb1b65669a16c8d64b08f534037023746e6e42763965f95564ff0a30",
+   "source_sha256": "d392b6ce886cfd664a192194b79569bb6a0d4dea8b0bc029ffa9e32ff44add89",
    "claims": [
     {
      "name": "f_295C_0015",
@@ -21246,12 +21472,22 @@
      "kind": "C",
      "provenance": "EXACT_NATURAL",
      "reloc_order": "GROUPED"
+    },
+    {
+     "name": "f_295C_0391",
+     "unit": "root",
+     "seg": 10588,
+     "off": 913,
+     "size": 75,
+     "target_sha256": "befc2d8998779764e4849afa043bd0b8a94a1b19f3a0b86aebbf7e79b0fb75ad",
+     "kind": "C",
+     "provenance": "EXACT_STEERED",
+     "steered": "CSE-1: folded unsigned-byte c3 >= 0 check retains the byte CSE temporary and index spill; the eliminated original expression is unknown",
+     "reloc_order": "EXACT"
     }
    ],
-   "scaffold": [
-    "f_295C_0391"
-   ],
-   "object_sha256": "a5e225be94dba21cb76bcc6f2c254730c06e7005602d92eabdf7862e162140ee"
+   "scaffold": [],
+   "object_sha256": "adab4cde1aac881324e868640bd6ee3efda6779761f883d8ac7fddc91b7ab7fa"
   },
   "root:29B8": {
    "unit": "root",
@@ -22897,6 +23133,20 @@
       "linear": 382238,
       "size": 2,
       "rule": "REFERENCED_PUBLIC"
+     }
+    ]
+   },
+   {
+    "library": "llibcr.lib",
+    "member": "syserr.c",
+    "module_index": 257,
+    "member_sha256": "e69df544dd5695d067f6701d3784a3f6643e47c1c2be0d8f3a8618916e6355a9",
+    "data_segments": [
+     {
+      "segment": "_DATA",
+      "linear": 382734,
+      "size": 462,
+      "rule": "REGISTERED_PUBLICS"
      }
     ]
    }

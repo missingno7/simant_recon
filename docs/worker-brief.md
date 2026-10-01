@@ -6,13 +6,14 @@ You recover original C (or genuine assembly) for the modules assigned to you in
 
 ## Facts you can rely on
 
-* Compiler: **MSC 6.00A** (`profile msc600a`, the default), large model. Typical module flags
+* Compiler: **MSC 6.00AX** (`profile msc600ax`, the default; VER-3), large model. Typical module flags
   `/AL /Os /Oe /Og` (simulation, database), plus `/Gs` when functions have no `__aFchkstk`
   call. `/Oe` = autos enregistered while their unused BP homes stay; `/Og` = CSE/hoisting
   (see codegen-rules observations). Options are per *file*: one module = one flag set.
   Some modules use `_fastcall` (AX/DX args, `retf N`, `@name`). `_asm` exists in C modules.
-* **Use `/Zi` in every module's flags** (rule ZI-1; e.g. `/AL /Os /Oe /Og /Zi`). It does not
-  change code bytes, but it reproduces the original's record breaks between functions. A complete TU
+* **Choose the debug option per module** (rule ZI-1; often `/AL /Os /Oe /Og /Zi`). `/Zi` does not
+  change code bytes, but it often reproduces the original's record breaks between functions. Some
+  modules require `/Zd` or neither; use relocation-order evidence. A complete TU
   (`--extent`) is reported with its cross-function relocation order: `EXACT`/`GROUPED` is proven;
   `CROSS_FUNCTION_PENDING` means record breaks still differ (usually source line layout: the
   ~52 line-entry flush counts statement lines, so joining or splitting lines moves it).
@@ -26,8 +27,9 @@ You recover original C (or genuine assembly) for the modules assigned to you in
   promotion re-verifies all its claims. Do not shape C around the 6.00A budget.
 * The set and order of earlier `extern` declarations can change register tie-breaks and
   commutative operand order: keep a module's declarations in first-use order.
-* Names: identifier spelling does not change code (only the number of identifiers declared
-  before a function does). Prefer the original names where the evidence is strong (xver
+* Names: ordinary `/Og` C usually depends on identifier count rather than spelling. `_asm`, `/Od`,
+  private `_BSS`, and the `_fastcall` module have documented spelling-sensitive exceptions.
+  Prefer the original names where the evidence is strong (xver
   CONFIRMED/HIGH, a Win16 unit whose member list aligns 1:1 with the module, identical
   bodies): register them with `python tools/symbols.py rename OLD NEW --why "evidence"`
   (unclaimed names only) before drafting.
@@ -91,7 +93,7 @@ block per segment, so the recovered prefix must reproduce a prefix of the origin
   `jt_171C_XXXX` (at 2CFB:0002.., far jumps into module 171C) are registered names.
 * Wrong extent in the function table? `python tools/functions.py resize UNIT:SEG:OFF SIZE why...`;
   missing unreferenced function: `python tools/functions.py add UNIT:SEG:OFF SIZE why...`.
-* Promote as soon as a function (or run of functions) is exact; promotion re-verifies all
+* Run `promote.py --verify-only` before promotion. Promote as soon as a function (or run of functions) is exact; promotion re-verifies all
   earlier claims of the module, so you cannot regress. When a whole module is exact and has
   no scaffold, promote with `--extent START:END` (linear hex, see `docs/tu-evidence.md`).
 * Genuine assembly: only if experiments show MSC cannot produce the code (see ASM-1). Write

@@ -1,0 +1,243 @@
+{
+ "function": "win_UnlockWin",
+ "module": "root:23AE",
+ "base_score": [
+  1,
+  34,
+  223,
+  6
+ ],
+ "best_score": [
+  1,
+  34,
+  223,
+  6
+ ],
+ "best_path": [],
+ "best_res": {
+  "compile_ok": true,
+  "claims": {
+   "win_NoWindowsShouldBeLocked": true,
+   "win_LockInit": true,
+   "win_IsWinLocked": true,
+   "f_23AE_0069": true,
+   "win_UnlockWin": false,
+   "f_23AE_035D": true,
+   "win_LockWinHigh": true,
+   "win_LockWin": true
+  },
+  "data": {
+   "_DATA": true,
+   "CONST": true,
+   "_BSS": true
+  },
+  "order": {
+   "win_NoWindowsShouldBeLocked": "EXACT",
+   "win_LockInit": "EXACT",
+   "win_IsWinLocked": "EXACT",
+   "f_23AE_0069": "GROUPED",
+   "win_UnlockWin": "EXACT",
+   "f_23AE_035D": "GROUPED",
+   "win_LockWinHigh": "EXACT",
+   "win_LockWin": "EXACT"
+  },
+  "module_reasons": [],
+  "reasons": [
+   "length 392 != target 386",
+   "bytes differ (first at +0x5, 217 differing)",
+   "relocation set differs (7 vs 7)"
+  ],
+  "exact": false,
+  "all_exact": false,
+  "score": [
+   1,
+   34,
+   223,
+   6
+  ],
+  "fhash": "96d5e280f896df52",
+  "length": 392
+ },
+ "base_res": {
+  "compile_ok": true,
+  "claims": {
+   "win_NoWindowsShouldBeLocked": true,
+   "win_LockInit": true,
+   "win_IsWinLocked": true,
+   "f_23AE_0069": true,
+   "win_UnlockWin": false,
+   "f_23AE_035D": true,
+   "win_LockWinHigh": true,
+   "win_LockWin": true
+  },
+  "data": {
+   "_DATA": true,
+   "CONST": true,
+   "_BSS": true
+  },
+  "order": {
+   "win_NoWindowsShouldBeLocked": "EXACT",
+   "win_LockInit": "EXACT",
+   "win_IsWinLocked": "EXACT",
+   "f_23AE_0069": "GROUPED",
+   "win_UnlockWin": "EXACT",
+   "f_23AE_035D": "GROUPED",
+   "win_LockWinHigh": "EXACT",
+   "win_LockWin": "EXACT"
+  },
+  "module_reasons": [],
+  "reasons": [
+   "length 392 != target 386",
+   "bytes differ (first at +0x5, 217 differing)",
+   "relocation set differs (7 vs 7)"
+  ],
+  "exact": false,
+  "all_exact": false,
+  "score": [
+   1,
+   34,
+   223,
+   6
+  ],
+  "fhash": "96d5e280f896df52",
+  "length": 392
+ },
+ "evals": 600,
+ "compiles": 601,
+ "rule_stats": {
+  "REL-SWAP": {
+   "tried": 7,
+   "changed": 0,
+   "better": 0,
+   "regress": 0,
+   "fail": 0
+  },
+  "COMM-SWAP": {
+   "tried": 3,
+   "changed": 0,
+   "better": 0,
+   "regress": 0,
+   "fail": 0
+  },
+  "NOT-CMP": {
+   "tried": 8,
+   "changed": 0,
+   "better": 0,
+   "regress": 0,
+   "fail": 0
+  },
+  "CONST-U": {
+   "tried": 22,
+   "changed": 0,
+   "better": 0,
+   "regress": 0,
+   "fail": 0
+  },
+  "COMPOUND": {
+   "tried": 2,
+   "changed": 0,
+   "better": 0,
+   "regress": 0,
+   "fail": 0
+  },
+  "EMBED": {
+   "tried": 2,
+   "changed": 0,
+   "better": 0,
+   "regress": 0,
+   "fail": 0
+  },
+  "AND-NEST": {
+   "tried": 11,
+   "changed": 9,
+   "better": 0,
+   "regress": 0,
+   "fail": 0
+  },
+  "IF-NEG": {
+   "tried": 7,
+   "changed": 3,
+   "better": 0,
+   "regress": 0,
+   "fail": 0
+  },
+  "CSE-INLINE": {
+   "tried": 46,
+   "changed": 46,
+   "better": 1,
+   "regress": 0,
+   "fail": 0
+  },
+  "PARAM-COPY": {
+   "tried": 19,
+   "changed": 19,
+   "better": 0,
+   "regress": 0,
+   "fail": 0
+  },
+  "DECL-SWAP": {
+   "tried": 37,
+   "changed": 18,
+   "better": 4,
+   "regress": 0,
+   "fail": 0
+  },
+  "PROTO-NAMES": {
+   "tried": 93,
+   "changed": 61,
+   "better": 21,
+   "regress": 0,
+   "fail": 0
+  },
+  "PROTO-TYPE": {
+   "tried": 94,
+   "changed": 63,
+   "better": 23,
+   "regress": 0,
+   "fail": 0
+  },
+  "EXTERN-SWAP": {
+   "tried": 49,
+   "changed": 0,
+   "better": 0,
+   "regress": 24,
+   "fail": 12
+  },
+  "TEMP-INTRO": {
+   "tried": 7,
+   "changed": 0,
+   "better": 0,
+   "regress": 0,
+   "fail": 0
+  },
+  "CASE-SWAP": {
+   "tried": 5,
+   "changed": 0,
+   "better": 0,
+   "regress": 0,
+   "fail": 0
+  },
+  "STMT-SWAP": {
+   "tried": 33,
+   "changed": 33,
+   "better": 0,
+   "regress": 0,
+   "fail": 0
+  },
+  "STORE-LOCAL": {
+   "tried": 15,
+   "changed": 0,
+   "better": 0,
+   "regress": 0,
+   "fail": 10
+  },
+  "SYM-NAMES": {
+   "tried": 140,
+   "changed": 91,
+   "better": 35,
+   "regress": 0,
+   "fail": 0
+  }
+ },
+ "tried_count": 600
+}

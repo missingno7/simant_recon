@@ -1,0 +1,84 @@
+--- base.c
++++ best.c
+@@ -194,10 +194,12 @@
+     char far *buf;
+     char far *saved;
+     int c;
+-
++    char far * far * items2;
++
++    items2 = items;
+     cur = -1;
+     result = down = 0;
+-    if (items == 0 || *items == 0)
++    if (items2 == 0 || *items2 == 0)
+         goto none;
+     buf = malloc(4000);
+     saved = g_5AAC;
+@@ -208,8 +210,8 @@
+     t = curMenu == -1 ? 0 : 1;
+     f_1FD2_04D0(&pt);
+     old = maxLen = i = 0;
+-    for (; items[i] != 0; i++) {
+-        len = _fstrlen(items[i]);
++    for (; items2[i] != 0; i++) {
++        len = _fstrlen(items2[i]);
+         if (len > maxLen)
+             maxLen = len;
+     }
+@@ -257,15 +259,15 @@
+         sprintf(fmt, "%%c%%-%ds", maxLen - 1);
+     p = buf;
+     for (i = 0; i < nItems; i++, j += g_3DDC) {
+-        if (items[i][1] == '-') {
++        if (items2[i][1] == '-') {
+             _fmemset(p + 1, '-', maxLen - 2);
+             p[maxLen] = 0;
+             p[maxLen - 1] = ' ';
+             p[0] = ' ';
+         } else if (t)
+-            sprintf(p, fmt, items[i]);
++            sprintf(p, fmt, items2[i]);
+         else
+-            sprintf(p, fmt, i == *sel - 1 ? 16 : ' ', items[i]);
++            sprintf(p, fmt, i == *sel - 1 ? 16 : ' ', items2[i]);
+         f_1FD2_0008(x, j, 1, p);
+         p[maxLen] = 0;
+         p += maxLen + 1;
+@@ -294,7 +296,7 @@
+             if (f_1FD2_04E5(&pt, &r)) {
+                 k = (pt.y - r.top) / g_3DDC;
+                 if (k >= 0 && k < nItems &&
+-                    items[k][1] != '-' && !(items[k][0] & 0x80))
++                    items2[k][1] != '-' && !(items2[k][0] & 0x80))
+                     goto moved;
+             }
+             k = -1;
+@@ -303,8 +305,8 @@
+             if (!(key & 0x800) && islower(key))
+                 key -= 0x20;
+             old = cur;
++            k = cur;
+             j = 0;
+-            k = cur;
+ retry:
+             switch (key) {
+             case 10:
+@@ -336,7 +338,7 @@
+             case 0x848:
+                 k = (k > 0 ? k : nItems) - 1;
+ check:
+-                if (items[k][1] != '-' && !(items[k][0] & 0x80))
++                if (items2[k][1] != '-' && !(items2[k][0] & 0x80))
+                     goto warp;
+                 if (j <= 16) {
+                     j++;
+@@ -345,7 +347,7 @@
+                 k = cur;
+                 break;
+ trych:
+-                c = items[k][1];
++                c = items2[k][1];
+                 if (islower(c))
+                     c -= 0x20;
+                 if (c == key)

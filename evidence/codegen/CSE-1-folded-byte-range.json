@@ -1,0 +1,32 @@
+{
+ "id": "CSE-1",
+ "question": "Under /Oe /Og, does a folded unsigned-byte >=0 check retain a byte CSE temporary and an index spill? Positive: f_295C_0391; the exact draft is marked steered because the eliminated original expression is unknown.",
+ "header": "struct Chan { unsigned char type, num, c2, c3, c4, c5; };\nextern struct Chan far chans[];\nvoid far noteoff(int dev, int note);\n",
+ "variants": {
+  "folded_range": "void far f(void)\n{\n    int i;\n    for (i = 0; chans[i].type; i++) {\n        if (chans[i].c3 >= 0 && chans[i].c2)\n            noteoff(chans[i].c3, chans[i].c4);\n    }\n}\nvoid far noteoff(int dev, int note) { }\n",
+  "no_range": "void far f(void)\n{\n    int i;\n    for (i = 0; chans[i].type; i++) {\n        if (chans[i].c2)\n            noteoff(chans[i].c3, chans[i].c4);\n    }\n}\nvoid far noteoff(int dev, int note) { }\n",
+  "explicit_local": "void far f(void)\n{\n    int i;\n    unsigned char dev;\n    for (i = 0; chans[i].type; i++) {\n        dev = chans[i].c3;\n        if (chans[i].c2)\n            noteoff(dev, chans[i].c4);\n    }\n}\nvoid far noteoff(int dev, int note) { }\n"
+ },
+ "profiles": [
+  {
+   "profile": "msc600ax",
+   "flags": [
+    "/AL",
+    "/Os",
+    "/Oe",
+    "/Og",
+    "/Gs"
+   ]
+  }
+ ],
+ "expect": {
+  "folded_range@0": "mov al, byte ptr es:[bx + 3]; mov byte ptr [bp - 4], al; cmp byte ptr es:[bx + 2], 0",
+  "no_range@0": "!mov byte ptr [bp - 4], al",
+  "explicit_local@0": "mov al, byte ptr es:[bx + 3]; mov byte ptr [bp - 1], al; cmp byte ptr es:[bx + 2], 0"
+ },
+ "expect_segments": {
+  "folded_range@0": {"UNIT_TEXT": {"length": 76}},
+  "no_range@0": {"UNIT_TEXT": {"length": 70}},
+  "explicit_local@0": {"UNIT_TEXT": {"length": 73}}
+ }
+}

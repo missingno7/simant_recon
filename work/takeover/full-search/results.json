@@ -1,0 +1,6117 @@
+{
+ "o09_35F5_03C6": {
+  "module": "S09:35F5",
+  "base": [
+   1,
+   30,
+   30,
+   0
+  ],
+  "best": [
+   1,
+   28,
+   28,
+   0
+  ],
+  "path": [
+   [
+    "TEMP-INTRO",
+    "r3.top"
+   ]
+  ],
+  "evals": 600,
+  "reasons": [
+   "bytes differ (first at +0x44, 28 differing)"
+  ],
+  "base_reasons": [
+   "bytes differ (first at +0x44, 30 differing)"
+  ],
+  "rule_stats": {
+   "REL-SWAP": {
+    "tried": 24,
+    "changed": 0,
+    "better": 0,
+    "regress": 0,
+    "fail": 0
+   },
+   "COMM-SWAP": {
+    "tried": 18,
+    "changed": 0,
+    "better": 0,
+    "regress": 0,
+    "fail": 0
+   },
+   "NOT-CMP": {
+    "tried": 24,
+    "changed": 0,
+    "better": 0,
+    "regress": 0,
+    "fail": 0
+   },
+   "CONST-U": {
+    "tried": 23,
+    "changed": 0,
+    "better": 0,
+    "regress": 0,
+    "fail": 0
+   },
+   "COMPOUND": {
+    "tried": 20,
+    "changed": 0,
+    "better": 0,
+    "regress": 0,
+    "fail": 0
+   },
+   "CHAIN-ORDER": {
+    "tried": 36,
+    "changed": 36,
+    "better": 0,
+    "regress": 0,
+    "fail": 0
+   },
+   "CHAIN-SPLIT": {
+    "tried": 5,
+    "changed": 0,
+    "better": 0,
+    "regress": 0,
+    "fail": 0
+   },
+   "EMBED": {
+    "tried": 3,
+    "changed": 0,
+    "better": 0,
+    "regress": 0,
+    "fail": 0
+   },
+   "OR-DUP": {
+    "tried": 1,
+    "changed": 0,
+    "better": 0,
+    "regress": 1,
+    "fail": 0
+   },
+   "AND-NEST": {
+    "tried": 5,
+    "changed": 0,
+    "better": 0,
+    "regress": 0,
+    "fail": 0
+   },
+   "IF-NEG": {
+    "tried": 16,
+    "changed": 14,
+    "better": 0,
+    "regress": 2,
+    "fail": 0
+   },
+   "ELSE-WRAP": {
+    "tried": 9,
+    "changed": 0,
+    "better": 0,
+    "regress": 0,
+    "fail": 0
+   },
+   "FOR-WHILE": {
+    "tried": 6,
+    "changed": 0,
+    "better": 0,
+    "regress": 0,
+    "fail": 0
+   },
+   "PARAM-COPY": {
+    "tried": 28,
+    "changed": 28,
+    "better": 0,
+    "regress": 0,
+    "fail": 0
+   },
+   "DECL-SWAP": {
+    "tried": 30,
+    "changed": 8,
+    "better": 0,
+    "regress": 0,
+    "fail": 0
+   },
+   "DECL-INIT": {
+    "tried": 1,
+    "changed": 0,
+    "better": 0,
+    "regress": 0,
+    "fail": 0
+   },
+   "PROTO-NAMES": {
+    "tried": 93,
+    "changed": 80,
+    "better": 0,
+    "regress": 0,
+    "fail": 0
+   },
+   "PROTO-TYPE": {
+    "tried": 64,
+    "changed": 47,
+    "better": 0,
+    "regress": 0,
+    "fail": 2
+   },
+   "EXTERN-SWAP": {
+    "tried": 23,
+    "changed": 0,
+    "better": 0,
+    "regress": 0,
+    "fail": 0
+   },
+   "TEMP-INTRO": {
+    "tried": 56,
+    "changed": 39,
+    "better": 1,
+    "regress": 0,
+    "fail": 0
+   },
+   "CASE-SWAP": {
+    "tried": 4,
+    "changed": 0,
+    "better": 0,
+    "regress": 0,
+    "fail": 0
+   },
+   "STMT-SWAP": {
+    "tried": 49,
+    "changed": 49,
+    "better": 0,
+    "regress": 0,
+    "fail": 0
+   },
+   "STORE-LOCAL": {
+    "tried": 9,
+    "changed": 0,
+    "better": 0,
+    "regress": 0,
+    "fail": 0
+   },
+   "SYM-NAMES": {
+    "tried": 53,
+    "changed": 48,
+    "better": 0,
+    "regress": 0,
+    "fail": 0
+   }
+  },
+  "promoted": false,
+  "out": "D:\\Prog\\simant_recon\\work\\takeover\\full-search\\o09_35F5_03C6",
+  "time": "2026-09-30T20:42:59",
+  "accepted_since_snapshot": true
+ },
+ "o10_35F5_0384": {
+  "module": "S10:35F5",
+  "base": [
+   1,
+   321,
+   1587,
+   13
+  ],
+  "best": [
+   1,
+   235,
+   1692,
+   5
+  ],
+  "path": [
+   [
+    "PARAM-COPY",
+    "items"
+   ],
+   [
+    "STMT-SWAP",
+    "j = 0; <> k = cur;"
+   ]
+  ],
+  "evals": 600,
+  "reasons": [
+   "length 1754 != target 1759",
+   "bytes differ (first at +0x5, 1687 differing)",
+   "relocation set differs (42 vs 42)"
+  ],
+  "base_reasons": [
+   "length 1746 != target 1759",
+   "bytes differ (first at +0x5, 1574 differing)",
+   "relocation set differs (42 vs 42)"
+  ],
+  "rule_stats": {
+   "REL-SWAP": {
+    "tried": 45,
+    "changed": 7,
+    "better": 5,
+    "regress": 0,
+    "fail": 0
+   },
+   "COMM-SWAP": {
+    "tried": 45,
+    "changed": 0,
+    "better": 0,
+    "regress": 0,
+    "fail": 0
+   },
+   "TERN-SWAP": {
+    "tried": 25,
+    "changed": 24,
+    "better": 0,
+    "regress": 0,
+    "fail": 0
+   },
+   "NOT-CMP": {
+    "tried": 25,
+    "changed": 0,
+    "better": 0,
+    "regress": 0,
+    "fail": 0
+   },
+   "CONST-U": {
+    "tried": 44,
+    "changed": 0,
+    "better": 0,
+    "regress": 0,
+    "fail": 0
+   },
+   "COMPOUND": {
+    "tried": 17,
+    "changed": 0,
+    "better": 0,
+    "regress": 0,
+    "fail": 0
+   },
+   "CHAIN-ORDER": {
+    "tried": 23,
+    "changed": 20,
+    "better": 1,
+    "regress": 0,
+    "fail": 0
+   },
+   "CHAIN-SPLIT": {
+    "tried": 3,
+    "changed": 0,
+    "better": 0,
+    "regress": 0,
+    "fail": 0
+   },
+   "OR-DUP": {
+    "tried": 1,
+    "changed": 0,
+    "better": 0,
+    "regress": 0,
+    "fail": 0
+   },
+   "AND-NEST": {
+    "tried": 7,
+    "changed": 0,
+    "better": 0,
+    "regress": 0,
+    "fail": 0
+   },
+   "IF-NEG": {
+    "tried": 42,
+    "changed": 41,
+    "better": 5,
+    "regress": 1,
+    "fail": 0
+   },
+   "ELSE-WRAP": {
+    "tried": 8,
+    "changed": 0,
+    "better": 0,
+    "regress": 0,
+    "fail": 0
+   },
+   "RET-MERGE": {
+    "tried": 1,
+    "changed": 0,
+    "better": 0,
+    "regress": 0,
+    "fail": 0
+   },
+   "TERN-IF": {
+    "tried": 1,
+    "changed": 0,
+    "better": 0,
+    "regress": 0,
+    "fail": 0
+   },
+   "FOR-WHILE": {
+    "tried": 1,
+    "changed": 0,
+    "better": 0,
+    "regress": 0,
+    "fail": 0
+   },
+   "CSE-REUSE": {
+    "tried": 1,
+    "changed": 0,
+    "better": 0,
+    "regress": 0,
+    "fail": 0
+   },
+   "PARAM-COPY": {
+    "tried": 17,
+    "changed": 17,
+    "better": 5,
+    "regress": 0,
+    "fail": 0
+   },
+   "DECL-SWAP": {
+    "tried": 24,
+    "changed": 0,
+    "better": 0,
+    "regress": 0,
+    "fail": 0
+   },
+   "DECL-INIT": {
+    "tried": 1,
+    "changed": 0,
+    "better": 0,
+    "regress": 0,
+    "fail": 0
+   },
+   "PROTO-NAMES": {
+    "tried": 14,
+    "changed": 0,
+    "better": 0,
+    "regress": 1,
+    "fail": 0
+   },
+   "PROTO-TYPE": {
+    "tried": 25,
+    "changed": 0,
+    "better": 0,
+    "regress": 4,
+    "fail": 0
+   },
+   "EXTERN-SWAP": {
+    "tried": 25,
+    "changed": 0,
+    "better": 0,
+    "regress": 0,
+    "fail": 3
+   },
+   "TEMP-INTRO": {
+    "tried": 35,
+    "changed": 11,
+    "better": 0,
+    "regress": 0,
+    "fail": 0
+   },
+   "CASE-SWAP": {
+    "tried": 3,
+    "changed": 0,
+    "better": 0,
+    "regress": 0,
+    "fail": 0
+   },
+   "STMT-SWAP": {
+    "tried": 124,
+    "changed": 123,
+    "better": 3,
+    "regress": 0,
+    "fail": 0
+   },
+   "STORE-LOCAL": {
+    "tried": 34,
+    "changed": 24,
+    "better": 0,
+    "regress": 0,
+    "fail": 0
+   },
+   "SYM-NAMES": {
+    "tried": 4,
+    "changed": 0,
+    "better": 0,
+    "regress": 3,
+    "fail": 0
+   },
+   "EMBED": {
+    "tried": 5,
+    "changed": 0,
+    "better": 0,
+    "regress": 0,
+    "fail": 0
+   }
+  },
+  "promoted": false,
+  "out": "D:\\Prog\\simant_recon\\work\\takeover\\full-search\\o10_35F5_0384",
+  "time": "2026-09-30T20:47:02",
+  "accepted_since_snapshot": false
+ },
+ "DrawMapCursor": {
+  "module": "S12:384C",
+  "base": [
+   1,
+   21,
+   128,
+   5
+  ],
+  "best": [
+   1,
+   14,
+   103,
+   3
+  ],
+  "path": [
+   [
+    "EXTERN-SWAP",
+    "extern int far fd_50F6_3856; <> extern int far fd_50F6_3858;"
+   ],
+   [
+    "EXTERN-SWAP",
+    "extern int far fd_50F6_38C0; <> extern int far fd_50F6_10E0;"
+   ],
+   [
+    "SYM-NAMES",
+    "f_171C_1A9E unnamed (-3)"
+   ]
+  ],
+  "evals": 600,
+  "reasons": [
+   "length 208 != target 205",
+   "fixup at +0xcb crosses the extent end",
+   "bytes differ (first at +0x1b, 100 differing)",
+   "relocation set differs (5 vs 6)"
+  ],
+  "base_reasons": [
+   "length 210 != target 205",
+   "bytes differ (first at +0x1b, 123 differing)",
+   "relocation set differs (5 vs 6)"
+  ],
+  "rule_stats": {
+   "REL-SWAP": {
+    "tried": 8,
+    "changed": 0,
+    "better": 0,
+    "regress": 0,
+    "fail": 0
+   },
+   "COMM-SWAP": {
+    "tried": 72,
+    "changed": 3,
+    "better": 0,
+    "regress": 0,
+    "fail": 0
+   },
+   "NOT-CMP": {
+    "tried": 16,
+    "changed": 0,
+    "better": 0,
+    "regress": 0,
+    "fail": 0
+   },
+   "CONST-U": {
+    "tried": 53,
+    "changed": 0,
+    "better": 0,
+    "regress": 0,
+    "fail": 0
+   },
+   "OR-DUP": {
+    "tried": 7,
+    "changed": 0,
+    "better": 0,
+    "regress": 0,
+    "fail": 0
+   },
+   "ELSE-WRAP": {
+    "tried": 7,
+    "changed": 0,
+    "better": 0,
+    "regress": 0,
+    "fail": 0
+   },
+   "RET-MERGE": {
+    "tried": 7,
+    "changed": 0,
+    "better": 0,
+    "regress": 0,
+    "fail": 0
+   },
+   "PROTO-NAMES": {
+    "tried": 28,
+    "changed": 18,
+    "better": 2,
+    "regress": 6,
+    "fail": 0
+   },
+   "PROTO-TYPE": {
+    "tried": 55,
+    "changed": 13,
+    "better": 0,
+    "regress": 11,
+    "fail": 0
+   },
+   "EXTERN-SWAP": {
+    "tried": 132,
+    "changed": 24,
+    "better": 4,
+    "regress": 21,
+    "fail": 12
+   },
+   "TEMP-INTRO": {
+    "tried": 69,
+    "changed": 0,
+    "better": 0,
+    "regress": 0,
+    "fail": 0
+   },
+   "STMT-SWAP": {
+    "tried": 12,
+    "changed": 0,
+    "better": 0,
+    "regress": 12,
+    "fail": 0
+   },
+   "STORE-LOCAL": {
+    "tried": 26,
+    "changed": 0,
+    "better": 0,
+    "regress": 0,
+    "fail": 0
+   },
+   "SYM-NAMES": {
+    "tried": 108,
+    "changed": 61,
+    "better": 3,
+    "regress": 47,
+    "fail": 0
+   }
+  },
+  "promoted": false,
+  "out": "D:\\Prog\\simant_recon\\work\\takeover\\full-search\\DrawMapCursor",
+  "time": "2026-09-30T20:51:32",
+  "accepted_since_snapshot": false
+ },
+ "InvertPatch": {
+  "module": "S13:384C",
+  "base": [
+   1,
+   53,
+   215,
+   2
+  ],
+  "best": [
+   1,
+   39,
+   178,
+   6
+  ],
+  "path": [
+   [
+    "STORE-LOCAL",
+    "org.h = h;"
+   ],
+   [
+    "CSE-INLINE",
+    "val2 = h"
+   ]
+  ],
+  "evals": 600,
+  "reasons": [
+   "length 267 != target 261",
+   "bytes differ (first at +0x1d, 172 differing)",
+   "relocation set differs (5 vs 5)"
+  ],
+  "base_reasons": [
+   "length 259 != target 261",
+   "bytes differ (first at +0x1d, 213 differing)",
+   "relocation set differs (5 vs 5)"
+  ],
+  "rule_stats": {
+   "REL-SWAP": {
+    "tried": 3,
+    "changed": 0,
+    "better": 0,
+    "regress": 0,
+    "fail": 0
+   },
+   "COMM-SWAP": {
+    "tried": 27,
+    "changed": 0,
+    "better": 0,
+    "regress": 0,
+    "fail": 0
+   },
+   "CONST-U": {
+    "tried": 27,
+    "changed": 0,
+    "better": 0,
+    "regress": 0,
+    "fail": 0
+   },
+   "COMPOUND": {
+    "tried": 6,
+    "changed": 0,
+    "better": 0,
+    "regress": 0,
+    "fail": 0
+   },
+   "EMBED": {
+    "tried": 4,
+    "changed": 0,
+    "better": 0,
+    "regress": 0,
+    "fail": 0
+   },
+   "IF-NEG": {
+    "tried": 21,
+    "changed": 21,
+    "better": 0,
+    "regress": 0,
+    "fail": 0
+   },
+   "FOR-WHILE": {
+    "tried": 3,
+    "changed": 0,
+    "better": 0,
+    "regress": 0,
+    "fail": 0
+   },
+   "CSE-INLINE": {
+    "tried": 20,
+    "changed": 20,
+    "better": 1,
+    "regress": 0,
+    "fail": 0
+   },
+   "CSE-REUSE": {
+    "tried": 3,
+    "changed": 1,
+    "better": 0,
+    "regress": 0,
+    "fail": 0
+   },
+   "LOCAL-MERGE": {
+    "tried": 2,
+    "changed": 0,
+    "better": 0,
+    "regress": 0,
+    "fail": 0
+   },
+   "PARAM-COPY": {
+    "tried": 2,
+    "changed": 0,
+    "better": 0,
+    "regress": 0,
+    "fail": 0
+   },
+   "DECL-SWAP": {
+    "tried": 10,
+    "changed": 0,
+    "better": 0,
+    "regress": 0,
+    "fail": 0
+   },
+   "PROTO-NAMES": {
+    "tried": 3,
+    "changed": 0,
+    "better": 0,
+    "regress": 0,
+    "fail": 0
+   },
+   "PROTO-TYPE": {
+    "tried": 7,
+    "changed": 0,
+    "better": 0,
+    "regress": 0,
+    "fail": 0
+   },
+   "EXTERN-SWAP": {
+    "tried": 72,
+    "changed": 0,
+    "better": 0,
+    "regress": 0,
+    "fail": 48
+   },
+   "TEMP-INTRO": {
+    "tried": 143,
+    "changed": 119,
+    "better": 0,
+    "regress": 0,
+    "fail": 0
+   },
+   "STMT-SWAP": {
+    "tried": 87,
+    "changed": 81,
+    "better": 7,
+    "regress": 0,
+    "fail": 0
+   },
+   "STORE-LOCAL": {
+    "tried": 65,
+    "changed": 49,
+    "better": 10,
+    "regress": 0,
+    "fail": 0
+   },
+   "SYM-NAMES": {
+    "tried": 93,
+    "changed": 0,
+    "better": 0,
+    "regress": 70,
+    "fail": 0
+   },
+   "CHAIN-SPLIT": {
+    "tried": 2,
+    "changed": 0,
+    "better": 0,
+    "regress": 0,
+    "fail": 0
+   }
+  },
+  "promoted": false,
+  "out": "D:\\Prog\\simant_recon\\work\\takeover\\full-search\\InvertPatch",
+  "time": "2026-09-30T20:56:20",
+  "accepted_since_snapshot": false
+ },
+ "DrawColonyBars": {
+  "module": "S13:384C",
+  "base": [
+   1,
+   54,
+   362,
+   1
+  ],
+  "best": [
+   1,
+   20,
+   42,
+   0
+  ],
+  "path": [
+   [
+    "STMT-SWAP",
+    "r.left = l; <> r.bottom = (t + 0x47) / 2 + fd_50F6_10D2.top + 4;"
+   ],
+   [
+    "STMT-SWAP",
+    "r.left = l; <> r.bottom = (t + 0x47) / 2 + fd_50F6_10D2.top + 4;"
+   ],
+   [
+    "STMT-SWAP",
+    "r.top = r.bottom - h; <> r.right = l + 9;"
+   ]
+  ],
+  "evals": 600,
+  "reasons": [
+   "bytes differ (first at +0xa6, 42 differing)"
+  ],
+  "base_reasons": [
+   "length 489 != target 490",
+   "bytes differ (first at +0x15, 361 differing)",
+   "relocation set differs (5 vs 5)"
+  ],
+  "rule_stats": {
+   "REL-SWAP": {
+    "tried": 12,
+    "changed": 0,
+    "better": 0,
+    "regress": 0,
+    "fail": 0
+   },
+   "COMM-SWAP": {
+    "tried": 79,
+    "changed": 0,
+    "better": 0,
+    "regress": 0,
+    "fail": 0
+   },
+   "CONST-U": {
+    "tried": 77,
+    "changed": 18,
+    "better": 0,
+    "regress": 0,
+    "fail": 0
+   },
+   "COMPOUND": {
+    "tried": 4,
+    "changed": 0,
+    "better": 0,
+    "regress": 0,
+    "fail": 0
+   },
+   "CHAIN-SPLIT": {
+    "tried": 5,
+    "changed": 0,
+    "better": 0,
+    "regress": 0,
+    "fail": 0
+   },
+   "EMBED": {
+    "tried": 47,
+    "changed": 0,
+    "better": 0,
+    "regress": 0,
+    "fail": 0
+   },
+   "IF-NEG": {
+    "tried": 38,
+    "changed": 38,
+    "better": 0,
+    "regress": 0,
+    "fail": 0
+   },
+   "FOR-WHILE": {
+    "tried": 1,
+    "changed": 0,
+    "better": 0,
+    "regress": 0,
+    "fail": 0
+   },
+   "CSE-INLINE": {
+    "tried": 18,
+    "changed": 18,
+    "better": 0,
+    "regress": 0,
+    "fail": 0
+   },
+   "DECL-SWAP": {
+    "tried": 7,
+    "changed": 0,
+    "better": 0,
+    "regress": 0,
+    "fail": 0
+   },
+   "PROTO-NAMES": {
+    "tried": 3,
+    "changed": 0,
+    "better": 0,
+    "regress": 0,
+    "fail": 0
+   },
+   "PROTO-TYPE": {
+    "tried": 6,
+    "changed": 0,
+    "better": 0,
+    "regress": 0,
+    "fail": 0
+   },
+   "EXTERN-SWAP": {
+    "tried": 59,
+    "changed": 0,
+    "better": 0,
+    "regress": 0,
+    "fail": 36
+   },
+   "TEMP-INTRO": {
+    "tried": 42,
+    "changed": 0,
+    "better": 0,
+    "regress": 0,
+    "fail": 0
+   },
+   "STMT-SWAP": {
+    "tried": 89,
+    "changed": 85,
+    "better": 38,
+    "regress": 0,
+    "fail": 0
+   },
+   "STORE-LOCAL": {
+    "tried": 16,
+    "changed": 0,
+    "better": 0,
+    "regress": 0,
+    "fail": 0
+   },
+   "SYM-NAMES": {
+    "tried": 97,
+    "changed": 0,
+    "better": 0,
+    "regress": 72,
+    "fail": 0
+   }
+  },
+  "promoted": false,
+  "out": "D:\\Prog\\simant_recon\\work\\takeover\\full-search\\DrawColonyBars",
+  "time": "2026-09-30T21:01:09",
+  "accepted_since_snapshot": true,
+  "acceptance_evidence": "work/takeover/colony-bars/"
+ },
+ "CalcScore": {
+  "module": "S14:384C",
+  "base": [
+   1,
+   12,
+   12,
+   0
+  ],
+  "best": [
+   1,
+   12,
+   12,
+   0
+  ],
+  "path": [],
+  "evals": 600,
+  "reasons": [
+   "bytes differ (first at +0x96, 12 differing)"
+  ],
+  "base_reasons": [
+   "bytes differ (first at +0x96, 12 differing)"
+  ],
+  "rule_stats": {
+   "REL-SWAP": {
+    "tried": 38,
+    "changed": 13,
+    "better": 0,
+    "regress": 0,
+    "fail": 0
+   },
+   "COMM-SWAP": {
+    "tried": 33,
+    "changed": 8,
+    "better": 0,
+    "regress": 0,
+    "fail": 0
+   },
+   "TERN-SWAP": {
+    "tried": 2,
+    "changed": 0,
+    "better": 0,
+    "regress": 0,
+    "fail": 0
+   },
+   "NOT-CMP": {
+    "tried": 2,
+    "changed": 0,
+    "better": 0,
+    "regress": 0,
+    "fail": 0
+   },
+   "CONST-U": {
+    "tried": 91,
+    "changed": 0,
+    "better": 0,
+    "regress": 0,
+    "fail": 0
+   },
+   "COMPOUND": {
+    "tried": 25,
+    "changed": 0,
+    "better": 0,
+    "regress": 0,
+    "fail": 0
+   },
+   "CHAIN-ORDER": {
+    "tried": 4,
+    "changed": 4,
+    "better": 0,
+    "regress": 0,
+    "fail": 0
+   },
+   "CHAIN-SPLIT": {
+    "tried": 2,
+    "changed": 0,
+    "better": 0,
+    "regress": 0,
+    "fail": 0
+   },
+   "OR-DUP": {
+    "tried": 8,
+    "changed": 0,
+    "better": 0,
+    "regress": 8,
+    "fail": 0
+   },
+   "IF-NEG": {
+    "tried": 128,
+    "changed": 128,
+    "better": 0,
+    "regress": 0,
+    "fail": 0
+   },
+   "TERN-IF": {
+    "tried": 8,
+    "changed": 0,
+    "better": 0,
+    "regress": 0,
+    "fail": 0
+   },
+   "FOR-WHILE": {
+    "tried": 8,
+    "changed": 0,
+    "better": 0,
+    "regress": 0,
+    "fail": 0
+   },
+   "LOCAL-MERGE": {
+    "tried": 44,
+    "changed": 37,
+    "better": 0,
+    "regress": 7,
+    "fail": 0
+   },
+   "LOCAL-SPLIT": {
+    "tried": 18,
+    "changed": 4,
+    "better": 0,
+    "regress": 14,
+    "fail": 0
+   },
+   "PARAM-COPY": {
+    "tried": 10,
+    "changed": 2,
+    "better": 0,
+    "regress": 8,
+    "fail": 0
+   },
+   "RESULT-LOCAL": {
+    "tried": 8,
+    "changed": 0,
+    "better": 0,
+    "regress": 7,
+    "fail": 0
+   },
+   "DECL-SWAP": {
+    "tried": 27,
+    "changed": 20,
+    "better": 0,
+    "regress": 0,
+    "fail": 0
+   },
+   "EXTERN-SWAP": {
+    "tried": 32,
+    "changed": 11,
+    "better": 0,
+    "regress": 0,
+    "fail": 0
+   },
+   "TEMP-INTRO": {
+    "tried": 30,
+    "changed": 6,
+    "better": 0,
+    "regress": 24,
+    "fail": 0
+   },
+   "STMT-SWAP": {
+    "tried": 15,
+    "changed": 12,
+    "better": 0,
+    "regress": 0,
+    "fail": 0
+   },
+   "SYM-NAMES": {
+    "tried": 60,
+    "changed": 47,
+    "better": 3,
+    "regress": 13,
+    "fail": 0
+   },
+   "EMBED": {
+    "tried": 7,
+    "changed": 0,
+    "better": 0,
+    "regress": 0,
+    "fail": 0
+   }
+  },
+  "promoted": false,
+  "out": "D:\\Prog\\simant_recon\\work\\takeover\\full-search\\CalcScore",
+  "time": "2026-09-30T21:05:17",
+  "accepted_since_snapshot": false
+ },
+ "o15_384C_0239": {
+  "module": "S15:384C",
+  "base": [
+   1,
+   2,
+   2,
+   0
+  ],
+  "best": [
+   1,
+   2,
+   2,
+   0
+  ],
+  "path": [],
+  "evals": 600,
+  "reasons": [
+   "bytes differ (first at +0x42, 2 differing)"
+  ],
+  "base_reasons": [
+   "bytes differ (first at +0x42, 2 differing)"
+  ],
+  "rule_stats": {
+   "REL-SWAP": {
+    "tried": 6,
+    "changed": 0,
+    "better": 0,
+    "regress": 0,
+    "fail": 0
+   },
+   "COMM-SWAP": {
+    "tried": 12,
+    "changed": 0,
+    "better": 0,
+    "regress": 0,
+    "fail": 0
+   },
+   "TERN-SWAP": {
+    "tried": 9,
+    "changed": 9,
+    "better": 0,
+    "regress": 0,
+    "fail": 0
+   },
+   "NOT-CMP": {
+    "tried": 18,
+    "changed": 0,
+    "better": 0,
+    "regress": 0,
+    "fail": 0
+   },
+   "CONST-U": {
+    "tried": 150,
+    "changed": 0,
+    "better": 0,
+    "regress": 0,
+    "fail": 0
+   },
+   "TERN-IF": {
+    "tried": 6,
+    "changed": 0,
+    "better": 0,
+    "regress": 0,
+    "fail": 0
+   },
+   "PARAM-COPY": {
+    "tried": 6,
+    "changed": 0,
+    "better": 0,
+    "regress": 0,
+    "fail": 0
+   },
+   "DECL-SWAP": {
+    "tried": 20,
+    "changed": 0,
+    "better": 0,
+    "regress": 0,
+    "fail": 0
+   },
+   "PROTO-NAMES": {
+    "tried": 71,
+    "changed": 0,
+    "better": 0,
+    "regress": 0,
+    "fail": 0
+   },
+   "PROTO-TYPE": {
+    "tried": 148,
+    "changed": 0,
+    "better": 0,
+    "regress": 0,
+    "fail": 20
+   },
+   "EXTERN-SWAP": {
+    "tried": 86,
+    "changed": 0,
+    "better": 0,
+    "regress": 0,
+    "fail": 1
+   },
+   "TEMP-INTRO": {
+    "tried": 4,
+    "changed": 0,
+    "better": 0,
+    "regress": 0,
+    "fail": 0
+   },
+   "CASE-SWAP": {
+    "tried": 16,
+    "changed": 0,
+    "better": 0,
+    "regress": 0,
+    "fail": 0
+   },
+   "SYM-NAMES": {
+    "tried": 48,
+    "changed": 0,
+    "better": 0,
+    "regress": 0,
+    "fail": 0
+   }
+  },
+  "promoted": false,
+  "out": "D:\\Prog\\simant_recon\\work\\takeover\\full-search\\o15_384C_0239",
+  "time": "2026-09-30T21:07:33",
+  "accepted_since_snapshot": false
+ },
+ "o17_384C_0039": {
+  "module": "S17:384C",
+  "base": [
+   1,
+   27,
+   161,
+   13
+  ],
+  "best": [
+   1,
+   27,
+   161,
+   13
+  ],
+  "path": [],
+  "evals": 600,
+  "reasons": [
+   "length 279 != target 266",
+   "bytes differ (first at +0x5, 148 differing)",
+   "relocation set differs (3 vs 4)"
+  ],
+  "base_reasons": [
+   "length 279 != target 266",
+   "bytes differ (first at +0x5, 148 differing)",
+   "relocation set differs (3 vs 4)"
+  ],
+  "rule_stats": {
+   "REL-SWAP": {
+    "tried": 11,
+    "changed": 0,
+    "better": 0,
+    "regress": 0,
+    "fail": 0
+   },
+   "NOT-CMP": {
+    "tried": 44,
+    "changed": 0,
+    "better": 0,
+    "regress": 0,
+    "fail": 0
+   },
+   "CONST-U": {
+    "tried": 86,
+    "changed": 0,
+    "better": 0,
+    "regress": 0,
+    "fail": 0
+   },
+   "COMPOUND": {
+    "tried": 66,
+    "changed": 0,
+    "better": 0,
+    "regress": 0,
+    "fail": 0
+   },
+   "EMBED": {
+    "tried": 12,
+    "changed": 0,
+    "better": 0,
+    "regress": 0,
+    "fail": 0
+   },
+   "ELSE-WRAP": {
+    "tried": 11,
+    "changed": 0,
+    "better": 0,
+    "regress": 0,
+    "fail": 0
+   },
+   "FOR-WHILE": {
+    "tried": 33,
+    "changed": 0,
+    "better": 0,
+    "regress": 0,
+    "fail": 0
+   },
+   "PARAM-COPY": {
+    "tried": 10,
+    "changed": 10,
+    "better": 0,
+    "regress": 0,
+    "fail": 0
+   },
+   "DECL-SWAP": {
+    "tried": 29,
+    "changed": 0,
+    "better": 0,
+    "regress": 0,
+    "fail": 0
+   },
+   "DECL-INIT": {
+    "tried": 10,
+    "changed": 0,
+    "better": 0,
+    "regress": 0,
+    "fail": 0
+   },
+   "PROTO-NAMES": {
+    "tried": 39,
+    "changed": 0,
+    "better": 0,
+    "regress": 0,
+    "fail": 0
+   },
+   "PROTO-TYPE": {
+    "tried": 147,
+    "changed": 0,
+    "better": 0,
+    "regress": 0,
+    "fail": 0
+   },
+   "EXTERN-SWAP": {
+    "tried": 72,
+    "changed": 0,
+    "better": 0,
+    "regress": 0,
+    "fail": 14
+   },
+   "SYM-NAMES": {
+    "tried": 30,
+    "changed": 0,
+    "better": 0,
+    "regress": 0,
+    "fail": 0
+   }
+  },
+  "promoted": false,
+  "out": "D:\\Prog\\simant_recon\\work\\takeover\\full-search\\o17_384C_0039",
+  "time": "2026-09-30T21:09:28",
+  "accepted_since_snapshot": false
+ },
+ "win_PrintStyleTextInRect": {
+  "module": "S23:39C7",
+  "base": [
+   1,
+   119,
+   268,
+   13
+  ],
+  "best": [
+   1,
+   38,
+   189,
+   7
+  ],
+  "path": [
+   [
+    "TEMP-INTRO",
+    "text[end]"
+   ],
+   [
+    "DECL-SWAP",
+    "int len; / int pos;"
+   ]
+  ],
+  "evals": 600,
+  "reasons": [
+   "length 1046 != target 1039",
+   "bytes differ (first at +0x4, 182 differing)",
+   "relocation set differs (20 vs 20)"
+  ],
+  "base_reasons": [
+   "length 1052 != target 1039",
+   "bytes differ (first at +0x11, 255 differing)",
+   "relocation set differs (20 vs 20)"
+  ],
+  "rule_stats": {
+   "REL-SWAP": {
+    "tried": 38,
+    "changed": 13,
+    "better": 0,
+    "regress": 0,
+    "fail": 0
+   },
+   "COMM-SWAP": {
+    "tried": 18,
+    "changed": 0,
+    "better": 0,
+    "regress": 0,
+    "fail": 0
+   },
+   "TERN-SWAP": {
+    "tried": 13,
+    "changed": 13,
+    "better": 0,
+    "regress": 0,
+    "fail": 0
+   },
+   "NOT-CMP": {
+    "tried": 8,
+    "changed": 0,
+    "better": 0,
+    "regress": 0,
+    "fail": 0
+   },
+   "CONST-U": {
+    "tried": 36,
+    "changed": 0,
+    "better": 0,
+    "regress": 0,
+    "fail": 0
+   },
+   "COMPOUND": {
+    "tried": 19,
+    "changed": 0,
+    "better": 0,
+    "regress": 0,
+    "fail": 0
+   },
+   "EMBED": {
+    "tried": 15,
+    "changed": 13,
+    "better": 0,
+    "regress": 0,
+    "fail": 0
+   },
+   "OR-DUP": {
+    "tried": 1,
+    "changed": 0,
+    "better": 0,
+    "regress": 0,
+    "fail": 0
+   },
+   "AND-NEST": {
+    "tried": 17,
+    "changed": 8,
+    "better": 8,
+    "regress": 5,
+    "fail": 0
+   },
+   "IF-NEG": {
+    "tried": 30,
+    "changed": 28,
+    "better": 0,
+    "regress": 0,
+    "fail": 0
+   },
+   "TERN-IF": {
+    "tried": 3,
+    "changed": 0,
+    "better": 0,
+    "regress": 2,
+    "fail": 0
+   },
+   "FOR-WHILE": {
+    "tried": 3,
+    "changed": 0,
+    "better": 0,
+    "regress": 0,
+    "fail": 0
+   },
+   "CSE-INLINE": {
+    "tried": 30,
+    "changed": 25,
+    "better": 6,
+    "regress": 5,
+    "fail": 0
+   },
+   "PARAM-COPY": {
+    "tried": 95,
+    "changed": 88,
+    "better": 0,
+    "regress": 7,
+    "fail": 0
+   },
+   "DECL-SWAP": {
+    "tried": 38,
+    "changed": 22,
+    "better": 9,
+    "regress": 0,
+    "fail": 0
+   },
+   "DECL-INIT": {
+    "tried": 1,
+    "changed": 0,
+    "better": 0,
+    "regress": 0,
+    "fail": 0
+   },
+   "PROTO-NAMES": {
+    "tried": 9,
+    "changed": 0,
+    "better": 0,
+    "regress": 4,
+    "fail": 0
+   },
+   "PROTO-TYPE": {
+    "tried": 18,
+    "changed": 0,
+    "better": 0,
+    "regress": 6,
+    "fail": 0
+   },
+   "EXTERN-SWAP": {
+    "tried": 13,
+    "changed": 0,
+    "better": 0,
+    "regress": 0,
+    "fail": 0
+   },
+   "TEMP-INTRO": {
+    "tried": 68,
+    "changed": 51,
+    "better": 11,
+    "regress": 3,
+    "fail": 0
+   },
+   "CASE-SWAP": {
+    "tried": 13,
+    "changed": 13,
+    "better": 0,
+    "regress": 0,
+    "fail": 0
+   },
+   "STMT-SWAP": {
+    "tried": 106,
+    "changed": 105,
+    "better": 14,
+    "regress": 0,
+    "fail": 0
+   },
+   "STORE-LOCAL": {
+    "tried": 7,
+    "changed": 0,
+    "better": 0,
+    "regress": 0,
+    "fail": 0
+   },
+   "SYM-NAMES": {
+    "tried": 1,
+    "changed": 0,
+    "better": 0,
+    "regress": 0,
+    "fail": 0
+   }
+  },
+  "promoted": false,
+  "out": "D:\\Prog\\simant_recon\\work\\takeover\\full-search\\win_PrintStyleTextInRect",
+  "time": "2026-09-30T21:14:16",
+  "accepted_since_snapshot": false
+ },
+ "DisplayCard": {
+  "module": "S23:39C7",
+  "base": [
+   1,
+   69,
+   89,
+   0
+  ],
+  "best": [
+   1,
+   69,
+   89,
+   0
+  ],
+  "path": [],
+  "evals": 600,
+  "reasons": [
+   "bytes differ (first at +0x4, 89 differing)",
+   "relocation order inside a target group differs from the object's FIXUPP order"
+  ],
+  "base_reasons": [
+   "bytes differ (first at +0x4, 89 differing)",
+   "relocation order inside a target group differs from the object's FIXUPP order"
+  ],
+  "rule_stats": {
+   "REL-SWAP": {
+    "tried": 15,
+    "changed": 0,
+    "better": 0,
+    "regress": 0,
+    "fail": 0
+   },
+   "COMM-SWAP": {
+    "tried": 8,
+    "changed": 0,
+    "better": 0,
+    "regress": 0,
+    "fail": 0
+   },
+   "TERN-SWAP": {
+    "tried": 13,
+    "changed": 13,
+    "better": 0,
+    "regress": 0,
+    "fail": 0
+   },
+   "NOT-CMP": {
+    "tried": 8,
+    "changed": 0,
+    "better": 0,
+    "regress": 0,
+    "fail": 0
+   },
+   "CONST-U": {
+    "tried": 60,
+    "changed": 0,
+    "better": 0,
+    "regress": 0,
+    "fail": 0
+   },
+   "COMPOUND": {
+    "tried": 27,
+    "changed": 0,
+    "better": 0,
+    "regress": 0,
+    "fail": 0
+   },
+   "EMBED": {
+    "tried": 33,
+    "changed": 25,
+    "better": 0,
+    "regress": 0,
+    "fail": 0
+   },
+   "IF-NEG": {
+    "tried": 12,
+    "changed": 12,
+    "better": 0,
+    "regress": 0,
+    "fail": 0
+   },
+   "ELSE-WRAP": {
+    "tried": 2,
+    "changed": 0,
+    "better": 0,
+    "regress": 0,
+    "fail": 0
+   },
+   "TERN-IF": {
+    "tried": 1,
+    "changed": 0,
+    "better": 0,
+    "regress": 0,
+    "fail": 0
+   },
+   "FOR-WHILE": {
+    "tried": 6,
+    "changed": 0,
+    "better": 0,
+    "regress": 0,
+    "fail": 0
+   },
+   "LOCAL-MERGE": {
+    "tried": 26,
+    "changed": 22,
+    "better": 0,
+    "regress": 4,
+    "fail": 0
+   },
+   "PARAM-COPY": {
+    "tried": 12,
+    "changed": 12,
+    "better": 0,
+    "regress": 0,
+    "fail": 0
+   },
+   "DECL-SWAP": {
+    "tried": 33,
+    "changed": 7,
+    "better": 0,
+    "regress": 0,
+    "fail": 0
+   },
+   "DECL-INIT": {
+    "tried": 1,
+    "changed": 0,
+    "better": 0,
+    "regress": 0,
+    "fail": 0
+   },
+   "PROTO-NAMES": {
+    "tried": 43,
+    "changed": 0,
+    "better": 0,
+    "regress": 24,
+    "fail": 0
+   },
+   "PROTO-TYPE": {
+    "tried": 107,
+    "changed": 24,
+    "better": 0,
+    "regress": 27,
+    "fail": 8
+   },
+   "EXTERN-SWAP": {
+    "tried": 27,
+    "changed": 0,
+    "better": 0,
+    "regress": 4,
+    "fail": 0
+   },
+   "TEMP-INTRO": {
+    "tried": 57,
+    "changed": 42,
+    "better": 1,
+    "regress": 2,
+    "fail": 0
+   },
+   "CASE-SWAP": {
+    "tried": 5,
+    "changed": 0,
+    "better": 0,
+    "regress": 4,
+    "fail": 0
+   },
+   "STMT-SWAP": {
+    "tried": 76,
+    "changed": 76,
+    "better": 0,
+    "regress": 0,
+    "fail": 0
+   },
+   "STORE-LOCAL": {
+    "tried": 8,
+    "changed": 0,
+    "better": 0,
+    "regress": 0,
+    "fail": 0
+   },
+   "SYM-NAMES": {
+    "tried": 20,
+    "changed": 0,
+    "better": 0,
+    "regress": 10,
+    "fail": 0
+   }
+  },
+  "promoted": false,
+  "out": "D:\\Prog\\simant_recon\\work\\takeover\\full-search\\DisplayCard",
+  "time": "2026-09-30T21:24:14",
+  "accepted_since_snapshot": false
+ },
+ "drawHistGraph": {
+  "module": "S24:39C7",
+  "base": [
+   1,
+   34,
+   576,
+   14
+  ],
+  "best": [
+   1,
+   32,
+   575,
+   14
+  ],
+  "path": [
+   [
+    "DECL-SWAP",
+    "int width; / int height;"
+   ],
+   [
+    "STMT-SWAP",
+    "div = 1; <> mul = 1;"
+   ]
+  ],
+  "evals": 600,
+  "reasons": [
+   "length 746 != target 732",
+   "bytes differ (first at +0x4, 561 differing)",
+   "relocation set differs (10 vs 9)"
+  ],
+  "base_reasons": [
+   "length 746 != target 732",
+   "bytes differ (first at +0x4, 562 differing)",
+   "relocation set differs (10 vs 9)"
+  ],
+  "rule_stats": {
+   "REL-SWAP": {
+    "tried": 11,
+    "changed": 0,
+    "better": 0,
+    "regress": 0,
+    "fail": 0
+   },
+   "COMM-SWAP": {
+    "tried": 19,
+    "changed": 0,
+    "better": 0,
+    "regress": 0,
+    "fail": 0
+   },
+   "NOT-CMP": {
+    "tried": 1,
+    "changed": 0,
+    "better": 0,
+    "regress": 0,
+    "fail": 0
+   },
+   "CONST-U": {
+    "tried": 35,
+    "changed": 0,
+    "better": 0,
+    "regress": 0,
+    "fail": 0
+   },
+   "COMPOUND": {
+    "tried": 12,
+    "changed": 0,
+    "better": 0,
+    "regress": 0,
+    "fail": 0
+   },
+   "EMBED": {
+    "tried": 4,
+    "changed": 0,
+    "better": 0,
+    "regress": 0,
+    "fail": 0
+   },
+   "IF-NEG": {
+    "tried": 33,
+    "changed": 32,
+    "better": 0,
+    "regress": 0,
+    "fail": 0
+   },
+   "TERN-IF": {
+    "tried": 2,
+    "changed": 0,
+    "better": 0,
+    "regress": 0,
+    "fail": 0
+   },
+   "FOR-WHILE": {
+    "tried": 3,
+    "changed": 0,
+    "better": 0,
+    "regress": 0,
+    "fail": 0
+   },
+   "CSE-INLINE": {
+    "tried": 24,
+    "changed": 24,
+    "better": 0,
+    "regress": 0,
+    "fail": 0
+   },
+   "LOCAL-MERGE": {
+    "tried": 122,
+    "changed": 118,
+    "better": 0,
+    "regress": 0,
+    "fail": 0
+   },
+   "LOCAL-SPLIT": {
+    "tried": 10,
+    "changed": 10,
+    "better": 0,
+    "regress": 0,
+    "fail": 0
+   },
+   "PARAM-COPY": {
+    "tried": 33,
+    "changed": 33,
+    "better": 0,
+    "regress": 0,
+    "fail": 0
+   },
+   "DECL-SWAP": {
+    "tried": 20,
+    "changed": 2,
+    "better": 2,
+    "regress": 0,
+    "fail": 0
+   },
+   "DECL-INIT": {
+    "tried": 1,
+    "changed": 0,
+    "better": 0,
+    "regress": 0,
+    "fail": 0
+   },
+   "PROTO-NAMES": {
+    "tried": 37,
+    "changed": 34,
+    "better": 9,
+    "regress": 0,
+    "fail": 0
+   },
+   "PROTO-TYPE": {
+    "tried": 77,
+    "changed": 63,
+    "better": 20,
+    "regress": 0,
+    "fail": 1
+   },
+   "EXTERN-SWAP": {
+    "tried": 23,
+    "changed": 0,
+    "better": 0,
+    "regress": 0,
+    "fail": 2
+   },
+   "TEMP-INTRO": {
+    "tried": 20,
+    "changed": 0,
+    "better": 0,
+    "regress": 0,
+    "fail": 0
+   },
+   "STMT-SWAP": {
+    "tried": 74,
+    "changed": 70,
+    "better": 4,
+    "regress": 0,
+    "fail": 0
+   },
+   "SYM-NAMES": {
+    "tried": 39,
+    "changed": 32,
+    "better": 8,
+    "regress": 0,
+    "fail": 0
+   }
+  },
+  "promoted": false,
+  "out": "D:\\Prog\\simant_recon\\work\\takeover\\full-search\\drawHistGraph",
+  "time": "2026-09-30T21:27:01",
+  "accepted_since_snapshot": false
+ },
+ "DoAntMoveY": {
+  "module": "S25:3BA4",
+  "base": [
+   1,
+   15,
+   13,
+   0
+  ],
+  "best": [
+   1,
+   15,
+   13,
+   0
+  ],
+  "path": [],
+  "evals": 600,
+  "reasons": [
+   "bytes differ (first at +0x3c, 13 differing)"
+  ],
+  "base_reasons": [
+   "bytes differ (first at +0x3c, 13 differing)"
+  ],
+  "rule_stats": {
+   "REL-SWAP": {
+    "tried": 101,
+    "changed": 0,
+    "better": 0,
+    "regress": 0,
+    "fail": 0
+   },
+   "COMM-SWAP": {
+    "tried": 10,
+    "changed": 0,
+    "better": 0,
+    "regress": 0,
+    "fail": 0
+   },
+   "TERN-SWAP": {
+    "tried": 6,
+    "changed": 6,
+    "better": 1,
+    "regress": 0,
+    "fail": 0
+   },
+   "NOT-CMP": {
+    "tried": 18,
+    "changed": 0,
+    "better": 0,
+    "regress": 0,
+    "fail": 0
+   },
+   "CONST-U": {
+    "tried": 88,
+    "changed": 0,
+    "better": 0,
+    "regress": 0,
+    "fail": 0
+   },
+   "COMPOUND": {
+    "tried": 6,
+    "changed": 0,
+    "better": 0,
+    "regress": 0,
+    "fail": 0
+   },
+   "CHAIN-ORDER": {
+    "tried": 2,
+    "changed": 0,
+    "better": 0,
+    "regress": 2,
+    "fail": 0
+   },
+   "CHAIN-SPLIT": {
+    "tried": 2,
+    "changed": 0,
+    "better": 0,
+    "regress": 0,
+    "fail": 0
+   },
+   "EMBED": {
+    "tried": 6,
+    "changed": 0,
+    "better": 0,
+    "regress": 0,
+    "fail": 0
+   },
+   "OR-DUP": {
+    "tried": 8,
+    "changed": 0,
+    "better": 0,
+    "regress": 8,
+    "fail": 0
+   },
+   "AND-NEST": {
+    "tried": 9,
+    "changed": 0,
+    "better": 0,
+    "regress": 9,
+    "fail": 0
+   },
+   "IF-NEG": {
+    "tried": 59,
+    "changed": 59,
+    "better": 0,
+    "regress": 0,
+    "fail": 0
+   },
+   "ELSE-WRAP": {
+    "tried": 12,
+    "changed": 0,
+    "better": 0,
+    "regress": 12,
+    "fail": 0
+   },
+   "RET-MERGE": {
+    "tried": 4,
+    "changed": 0,
+    "better": 0,
+    "regress": 3,
+    "fail": 0
+   },
+   "TERN-IF": {
+    "tried": 2,
+    "changed": 0,
+    "better": 0,
+    "regress": 2,
+    "fail": 0
+   },
+   "DECL-SWAP": {
+    "tried": 12,
+    "changed": 0,
+    "better": 0,
+    "regress": 0,
+    "fail": 0
+   },
+   "PROTO-NAMES": {
+    "tried": 24,
+    "changed": 0,
+    "better": 0,
+    "regress": 24,
+    "fail": 0
+   },
+   "PROTO-TYPE": {
+    "tried": 123,
+    "changed": 0,
+    "better": 0,
+    "regress": 35,
+    "fail": 0
+   },
+   "EXTERN-SWAP": {
+    "tried": 74,
+    "changed": 11,
+    "better": 0,
+    "regress": 2,
+    "fail": 0
+   },
+   "TEMP-INTRO": {
+    "tried": 14,
+    "changed": 0,
+    "better": 0,
+    "regress": 14,
+    "fail": 0
+   },
+   "STMT-SWAP": {
+    "tried": 20,
+    "changed": 17,
+    "better": 0,
+    "regress": 3,
+    "fail": 0
+   }
+  },
+  "promoted": false,
+  "out": "D:\\Prog\\simant_recon\\work\\takeover\\full-search\\DoAntMoveY",
+  "time": "2026-09-30T21:33:27",
+  "accepted_since_snapshot": true
+ },
+ "o25_3BA4_1035": {
+  "module": "S25:3BA4",
+  "base": [
+   1,
+   2,
+   2,
+   0
+  ],
+  "best": [
+   1,
+   2,
+   2,
+   0
+  ],
+  "path": [],
+  "evals": 600,
+  "reasons": [
+   "bytes differ (first at +0xd7, 2 differing)"
+  ],
+  "base_reasons": [
+   "bytes differ (first at +0xd7, 2 differing)"
+  ],
+  "rule_stats": {
+   "REL-SWAP": {
+    "tried": 7,
+    "changed": 0,
+    "better": 0,
+    "regress": 0,
+    "fail": 0
+   },
+   "NOT-CMP": {
+    "tried": 1,
+    "changed": 0,
+    "better": 0,
+    "regress": 0,
+    "fail": 0
+   },
+   "CONST-U": {
+    "tried": 18,
+    "changed": 0,
+    "better": 0,
+    "regress": 0,
+    "fail": 0
+   },
+   "IF-NEG": {
+    "tried": 22,
+    "changed": 21,
+    "better": 0,
+    "regress": 0,
+    "fail": 0
+   },
+   "TERN-IF": {
+    "tried": 25,
+    "changed": 2,
+    "better": 0,
+    "regress": 23,
+    "fail": 0
+   },
+   "PROTO-NAMES": {
+    "tried": 44,
+    "changed": 0,
+    "better": 0,
+    "regress": 42,
+    "fail": 0
+   },
+   "PROTO-TYPE": {
+    "tried": 106,
+    "changed": 0,
+    "better": 0,
+    "regress": 87,
+    "fail": 0
+   },
+   "EXTERN-SWAP": {
+    "tried": 39,
+    "changed": 0,
+    "better": 0,
+    "regress": 9,
+    "fail": 10
+   },
+   "SYM-NAMES": {
+    "tried": 335,
+    "changed": 0,
+    "better": 0,
+    "regress": 325,
+    "fail": 0
+   },
+   "TERN-SWAP": {
+    "tried": 2,
+    "changed": 1,
+    "better": 0,
+    "regress": 0,
+    "fail": 0
+   },
+   "STMT-SWAP": {
+    "tried": 1,
+    "changed": 1,
+    "better": 0,
+    "regress": 0,
+    "fail": 0
+   }
+  },
+  "promoted": false,
+  "out": "D:\\Prog\\simant_recon\\work\\takeover\\full-search\\o25_3BA4_1035",
+  "time": "2026-09-30T21:38:11",
+  "accepted_since_snapshot": false
+ },
+ "o25_3BA4_1686": {
+  "module": "S25:3BA4",
+  "base": [
+   1,
+   38,
+   491,
+   6
+  ],
+  "best": [
+   1,
+   38,
+   491,
+   6
+  ],
+  "path": [],
+  "evals": 600,
+  "reasons": [
+   "length 510 != target 516",
+   "bytes differ (first at +0x4, 485 differing)",
+   "relocation set differs (7 vs 7)"
+  ],
+  "base_reasons": [
+   "length 510 != target 516",
+   "bytes differ (first at +0x4, 485 differing)",
+   "relocation set differs (7 vs 7)"
+  ],
+  "rule_stats": {
+   "REL-SWAP": {
+    "tried": 11,
+    "changed": 0,
+    "better": 0,
+    "regress": 0,
+    "fail": 0
+   },
+   "COMM-SWAP": {
+    "tried": 10,
+    "changed": 0,
+    "better": 0,
+    "regress": 0,
+    "fail": 0
+   },
+   "TERN-SWAP": {
+    "tried": 13,
+    "changed": 13,
+    "better": 0,
+    "regress": 0,
+    "fail": 0
+   },
+   "NOT-CMP": {
+    "tried": 5,
+    "changed": 0,
+    "better": 0,
+    "regress": 0,
+    "fail": 0
+   },
+   "CONST-U": {
+    "tried": 32,
+    "changed": 0,
+    "better": 0,
+    "regress": 0,
+    "fail": 0
+   },
+   "COMPOUND": {
+    "tried": 6,
+    "changed": 0,
+    "better": 0,
+    "regress": 0,
+    "fail": 0
+   },
+   "CHAIN-ORDER": {
+    "tried": 16,
+    "changed": 16,
+    "better": 0,
+    "regress": 0,
+    "fail": 0
+   },
+   "CHAIN-SPLIT": {
+    "tried": 1,
+    "changed": 0,
+    "better": 0,
+    "regress": 0,
+    "fail": 0
+   },
+   "EMBED": {
+    "tried": 4,
+    "changed": 0,
+    "better": 0,
+    "regress": 0,
+    "fail": 0
+   },
+   "AND-NEST": {
+    "tried": 15,
+    "changed": 15,
+    "better": 0,
+    "regress": 0,
+    "fail": 0
+   },
+   "IF-NEG": {
+    "tried": 33,
+    "changed": 31,
+    "better": 0,
+    "regress": 0,
+    "fail": 0
+   },
+   "ELSE-WRAP": {
+    "tried": 3,
+    "changed": 0,
+    "better": 0,
+    "regress": 0,
+    "fail": 0
+   },
+   "TERN-IF": {
+    "tried": 1,
+    "changed": 0,
+    "better": 0,
+    "regress": 0,
+    "fail": 0
+   },
+   "FOR-WHILE": {
+    "tried": 3,
+    "changed": 0,
+    "better": 0,
+    "regress": 0,
+    "fail": 0
+   },
+   "PARAM-COPY": {
+    "tried": 105,
+    "changed": 105,
+    "better": 11,
+    "regress": 0,
+    "fail": 0
+   },
+   "DECL-SWAP": {
+    "tried": 10,
+    "changed": 0,
+    "better": 0,
+    "regress": 0,
+    "fail": 0
+   },
+   "DECL-INIT": {
+    "tried": 1,
+    "changed": 0,
+    "better": 0,
+    "regress": 0,
+    "fail": 0
+   },
+   "PROTO-NAMES": {
+    "tried": 9,
+    "changed": 0,
+    "better": 0,
+    "regress": 8,
+    "fail": 0
+   },
+   "PROTO-TYPE": {
+    "tried": 33,
+    "changed": 0,
+    "better": 0,
+    "regress": 16,
+    "fail": 0
+   },
+   "EXTERN-SWAP": {
+    "tried": 74,
+    "changed": 0,
+    "better": 0,
+    "regress": 12,
+    "fail": 8
+   },
+   "TEMP-INTRO": {
+    "tried": 5,
+    "changed": 0,
+    "better": 0,
+    "regress": 0,
+    "fail": 0
+   },
+   "STMT-SWAP": {
+    "tried": 56,
+    "changed": 55,
+    "better": 0,
+    "regress": 0,
+    "fail": 0
+   },
+   "STORE-LOCAL": {
+    "tried": 7,
+    "changed": 0,
+    "better": 0,
+    "regress": 0,
+    "fail": 0
+   },
+   "SYM-NAMES": {
+    "tried": 147,
+    "changed": 0,
+    "better": 0,
+    "regress": 144,
+    "fail": 0
+   }
+  },
+  "promoted": false,
+  "out": "D:\\Prog\\simant_recon\\work\\takeover\\full-search\\o25_3BA4_1686",
+  "time": "2026-09-30T21:42:58",
+  "accepted_since_snapshot": false
+ },
+ "f_0250_1018": {
+  "module": "root:0250",
+  "base": [
+   1,
+   63,
+   595,
+   2
+  ],
+  "best": [
+   1,
+   40,
+   605,
+   2
+  ],
+  "path": [
+   [
+    "EXTERN-SWAP",
+    "extern unsigned char far LifeA[128][64]; <> extern int far fd_50F6_049A;"
+   ],
+   [
+    "STMT-SWAP",
+    "mx += 0x40; <> my &= 0x3f;"
+   ]
+  ],
+  "evals": 600,
+  "reasons": [
+   "length 648 != target 646",
+   "bytes differ (first at +0x13, 603 differing)"
+  ],
+  "base_reasons": [
+   "length 648 != target 646",
+   "bytes differ (first at +0x13, 593 differing)"
+  ],
+  "rule_stats": {
+   "REL-SWAP": {
+    "tried": 11,
+    "changed": 0,
+    "better": 0,
+    "regress": 0,
+    "fail": 0
+   },
+   "COMM-SWAP": {
+    "tried": 21,
+    "changed": 0,
+    "better": 0,
+    "regress": 0,
+    "fail": 0
+   },
+   "NOT-CMP": {
+    "tried": 4,
+    "changed": 0,
+    "better": 0,
+    "regress": 0,
+    "fail": 0
+   },
+   "CONST-U": {
+    "tried": 43,
+    "changed": 0,
+    "better": 0,
+    "regress": 0,
+    "fail": 0
+   },
+   "COMPOUND": {
+    "tried": 11,
+    "changed": 0,
+    "better": 0,
+    "regress": 0,
+    "fail": 0
+   },
+   "EMBED": {
+    "tried": 4,
+    "changed": 0,
+    "better": 0,
+    "regress": 0,
+    "fail": 0
+   },
+   "IF-NEG": {
+    "tried": 99,
+    "changed": 99,
+    "better": 0,
+    "regress": 0,
+    "fail": 0
+   },
+   "ELSE-WRAP": {
+    "tried": 3,
+    "changed": 0,
+    "better": 0,
+    "regress": 0,
+    "fail": 0
+   },
+   "TERN-IF": {
+    "tried": 52,
+    "changed": 51,
+    "better": 0,
+    "regress": 0,
+    "fail": 0
+   },
+   "PARAM-COPY": {
+    "tried": 2,
+    "changed": 0,
+    "better": 0,
+    "regress": 0,
+    "fail": 0
+   },
+   "DECL-SWAP": {
+    "tried": 2,
+    "changed": 0,
+    "better": 0,
+    "regress": 0,
+    "fail": 0
+   },
+   "DECL-INIT": {
+    "tried": 1,
+    "changed": 0,
+    "better": 0,
+    "regress": 0,
+    "fail": 0
+   },
+   "EXTERN-SWAP": {
+    "tried": 87,
+    "changed": 33,
+    "better": 26,
+    "regress": 3,
+    "fail": 21
+   },
+   "TEMP-INTRO": {
+    "tried": 5,
+    "changed": 0,
+    "better": 0,
+    "regress": 0,
+    "fail": 0
+   },
+   "CASE-SWAP": {
+    "tried": 9,
+    "changed": 0,
+    "better": 0,
+    "regress": 0,
+    "fail": 0
+   },
+   "STMT-SWAP": {
+    "tried": 55,
+    "changed": 54,
+    "better": 9,
+    "regress": 0,
+    "fail": 0
+   },
+   "SYM-NAMES": {
+    "tried": 191,
+    "changed": 63,
+    "better": 32,
+    "regress": 124,
+    "fail": 3
+   }
+  },
+  "promoted": false,
+  "out": "D:\\Prog\\simant_recon\\work\\takeover\\full-search\\f_0250_1018",
+  "time": "2026-09-30T21:56:07",
+  "accepted_since_snapshot": false
+ },
+ "f_0250_129E": {
+  "module": "root:0250",
+  "base": [
+   1,
+   19,
+   242,
+   1
+  ],
+  "best": [
+   1,
+   19,
+   242,
+   1
+  ],
+  "path": [],
+  "evals": 600,
+  "reasons": [
+   "length 265 != target 264",
+   "bytes differ (first at +0xe, 241 differing)",
+   "relocation set differs (2 vs 2)"
+  ],
+  "base_reasons": [
+   "length 265 != target 264",
+   "bytes differ (first at +0xe, 241 differing)",
+   "relocation set differs (2 vs 2)"
+  ],
+  "rule_stats": {
+   "REL-SWAP": {
+    "tried": 10,
+    "changed": 0,
+    "better": 0,
+    "regress": 0,
+    "fail": 0
+   },
+   "COMM-SWAP": {
+    "tried": 11,
+    "changed": 0,
+    "better": 0,
+    "regress": 0,
+    "fail": 0
+   },
+   "NOT-CMP": {
+    "tried": 4,
+    "changed": 0,
+    "better": 0,
+    "regress": 0,
+    "fail": 0
+   },
+   "CONST-U": {
+    "tried": 12,
+    "changed": 0,
+    "better": 0,
+    "regress": 0,
+    "fail": 0
+   },
+   "COMPOUND": {
+    "tried": 2,
+    "changed": 0,
+    "better": 0,
+    "regress": 0,
+    "fail": 0
+   },
+   "EMBED": {
+    "tried": 2,
+    "changed": 0,
+    "better": 0,
+    "regress": 0,
+    "fail": 0
+   },
+   "OR-DUP": {
+    "tried": 16,
+    "changed": 0,
+    "better": 0,
+    "regress": 16,
+    "fail": 0
+   },
+   "IF-NEG": {
+    "tried": 7,
+    "changed": 7,
+    "better": 0,
+    "regress": 0,
+    "fail": 0
+   },
+   "ELSE-WRAP": {
+    "tried": 16,
+    "changed": 0,
+    "better": 0,
+    "regress": 16,
+    "fail": 0
+   },
+   "RET-MERGE": {
+    "tried": 8,
+    "changed": 0,
+    "better": 0,
+    "regress": 8,
+    "fail": 0
+   },
+   "CSE-INLINE": {
+    "tried": 7,
+    "changed": 0,
+    "better": 0,
+    "regress": 7,
+    "fail": 0
+   },
+   "LOCAL-MERGE": {
+    "tried": 7,
+    "changed": 0,
+    "better": 0,
+    "regress": 7,
+    "fail": 0
+   },
+   "PARAM-COPY": {
+    "tried": 15,
+    "changed": 0,
+    "better": 0,
+    "regress": 15,
+    "fail": 0
+   },
+   "DECL-SWAP": {
+    "tried": 3,
+    "changed": 0,
+    "better": 0,
+    "regress": 0,
+    "fail": 0
+   },
+   "DECL-INIT": {
+    "tried": 1,
+    "changed": 0,
+    "better": 0,
+    "regress": 0,
+    "fail": 0
+   },
+   "PROTO-NAMES": {
+    "tried": 7,
+    "changed": 0,
+    "better": 0,
+    "regress": 7,
+    "fail": 0
+   },
+   "PROTO-TYPE": {
+    "tried": 7,
+    "changed": 0,
+    "better": 0,
+    "regress": 7,
+    "fail": 0
+   },
+   "EXTERN-SWAP": {
+    "tried": 95,
+    "changed": 0,
+    "better": 0,
+    "regress": 42,
+    "fail": 35
+   },
+   "TEMP-INTRO": {
+    "tried": 21,
+    "changed": 0,
+    "better": 0,
+    "regress": 21,
+    "fail": 0
+   },
+   "STMT-SWAP": {
+    "tried": 9,
+    "changed": 9,
+    "better": 0,
+    "regress": 0,
+    "fail": 0
+   },
+   "STORE-LOCAL": {
+    "tried": 14,
+    "changed": 0,
+    "better": 0,
+    "regress": 14,
+    "fail": 0
+   },
+   "SYM-NAMES": {
+    "tried": 326,
+    "changed": 0,
+    "better": 0,
+    "regress": 319,
+    "fail": 7
+   }
+  },
+  "promoted": false,
+  "out": "D:\\Prog\\simant_recon\\work\\takeover\\full-search\\f_0250_129E",
+  "time": "2026-09-30T22:08:35",
+  "accepted_since_snapshot": false
+ },
+ "DrawBalloons": {
+  "module": "root:0250",
+  "base": [
+   1,
+   47,
+   733,
+   7
+  ],
+  "best": [
+   1,
+   46,
+   712,
+   8
+  ],
+  "path": [
+   [
+    "CSE-INLINE",
+    "n = ht * wt * rowbytes"
+   ]
+  ],
+  "evals": 600,
+  "reasons": [
+   "length 1052 != target 1060",
+   "bytes differ (first at +0x4, 704 differing)",
+   "relocation set differs (15 vs 15)"
+  ],
+  "base_reasons": [
+   "length 1053 != target 1060",
+   "bytes differ (first at +0x4, 726 differing)",
+   "relocation set differs (15 vs 15)"
+  ],
+  "rule_stats": {
+   "REL-SWAP": {
+    "tried": 10,
+    "changed": 0,
+    "better": 0,
+    "regress": 0,
+    "fail": 0
+   },
+   "COMM-SWAP": {
+    "tried": 39,
+    "changed": 9,
+    "better": 0,
+    "regress": 0,
+    "fail": 0
+   },
+   "NOT-CMP": {
+    "tried": 3,
+    "changed": 0,
+    "better": 0,
+    "regress": 0,
+    "fail": 0
+   },
+   "CONST-U": {
+    "tried": 53,
+    "changed": 7,
+    "better": 0,
+    "regress": 0,
+    "fail": 0
+   },
+   "COMPOUND": {
+    "tried": 6,
+    "changed": 0,
+    "better": 0,
+    "regress": 0,
+    "fail": 0
+   },
+   "CHAIN-ORDER": {
+    "tried": 12,
+    "changed": 12,
+    "better": 0,
+    "regress": 0,
+    "fail": 0
+   },
+   "CHAIN-SPLIT": {
+    "tried": 2,
+    "changed": 0,
+    "better": 0,
+    "regress": 0,
+    "fail": 0
+   },
+   "OR-DUP": {
+    "tried": 1,
+    "changed": 0,
+    "better": 0,
+    "regress": 0,
+    "fail": 0
+   },
+   "AND-NEST": {
+    "tried": 1,
+    "changed": 0,
+    "better": 0,
+    "regress": 0,
+    "fail": 0
+   },
+   "IF-NEG": {
+    "tried": 6,
+    "changed": 6,
+    "better": 0,
+    "regress": 0,
+    "fail": 0
+   },
+   "ELSE-WRAP": {
+    "tried": 2,
+    "changed": 0,
+    "better": 0,
+    "regress": 0,
+    "fail": 0
+   },
+   "RET-MERGE": {
+    "tried": 1,
+    "changed": 0,
+    "better": 0,
+    "regress": 0,
+    "fail": 0
+   },
+   "FOR-WHILE": {
+    "tried": 2,
+    "changed": 0,
+    "better": 0,
+    "regress": 0,
+    "fail": 0
+   },
+   "CSE-INLINE": {
+    "tried": 29,
+    "changed": 29,
+    "better": 5,
+    "regress": 0,
+    "fail": 0
+   },
+   "DECL-SWAP": {
+    "tried": 41,
+    "changed": 17,
+    "better": 0,
+    "regress": 0,
+    "fail": 0
+   },
+   "PROTO-NAMES": {
+    "tried": 16,
+    "changed": 9,
+    "better": 1,
+    "regress": 5,
+    "fail": 0
+   },
+   "PROTO-TYPE": {
+    "tried": 27,
+    "changed": 11,
+    "better": 1,
+    "regress": 6,
+    "fail": 0
+   },
+   "EXTERN-SWAP": {
+    "tried": 41,
+    "changed": 0,
+    "better": 0,
+    "regress": 3,
+    "fail": 7
+   },
+   "TEMP-INTRO": {
+    "tried": 61,
+    "changed": 22,
+    "better": 0,
+    "regress": 0,
+    "fail": 0
+   },
+   "CASE-SWAP": {
+    "tried": 12,
+    "changed": 12,
+    "better": 0,
+    "regress": 0,
+    "fail": 0
+   },
+   "STMT-SWAP": {
+    "tried": 131,
+    "changed": 130,
+    "better": 0,
+    "regress": 0,
+    "fail": 0
+   },
+   "STORE-LOCAL": {
+    "tried": 56,
+    "changed": 48,
+    "better": 0,
+    "regress": 0,
+    "fail": 0
+   },
+   "SYM-NAMES": {
+    "tried": 41,
+    "changed": 0,
+    "better": 0,
+    "regress": 40,
+    "fail": 1
+   },
+   "EMBED": {
+    "tried": 7,
+    "changed": 0,
+    "better": 0,
+    "regress": 0,
+    "fail": 0
+   }
+  },
+  "promoted": false,
+  "out": "D:\\Prog\\simant_recon\\work\\takeover\\full-search\\DrawBalloons",
+  "time": "2026-09-30T22:42:07",
+  "accepted_since_snapshot": false
+ },
+ "SpiderScan": {
+  "module": "root:0CDB",
+  "base": [
+   1,
+   3,
+   322,
+   3
+  ],
+  "best": [
+   1,
+   3,
+   322,
+   3
+  ],
+  "path": [],
+  "evals": 600,
+  "reasons": [
+   "length 389 != target 392",
+   "bytes differ (first at +0x42, 319 differing)",
+   "relocation set differs (12 vs 12)"
+  ],
+  "base_reasons": [
+   "length 389 != target 392",
+   "bytes differ (first at +0x42, 319 differing)",
+   "relocation set differs (12 vs 12)"
+  ],
+  "rule_stats": {
+   "REL-SWAP": {
+    "tried": 24,
+    "changed": 0,
+    "better": 0,
+    "regress": 0,
+    "fail": 0
+   },
+   "COMM-SWAP": {
+    "tried": 31,
+    "changed": 0,
+    "better": 0,
+    "regress": 0,
+    "fail": 0
+   },
+   "NOT-CMP": {
+    "tried": 6,
+    "changed": 0,
+    "better": 0,
+    "regress": 0,
+    "fail": 0
+   },
+   "CONST-U": {
+    "tried": 103,
+    "changed": 21,
+    "better": 0,
+    "regress": 0,
+    "fail": 0
+   },
+   "COMPOUND": {
+    "tried": 12,
+    "changed": 0,
+    "better": 0,
+    "regress": 0,
+    "fail": 0
+   },
+   "AND-NEST": {
+    "tried": 3,
+    "changed": 0,
+    "better": 0,
+    "regress": 0,
+    "fail": 0
+   },
+   "FOR-WHILE": {
+    "tried": 7,
+    "changed": 0,
+    "better": 0,
+    "regress": 0,
+    "fail": 0
+   },
+   "DECL-SWAP": {
+    "tried": 15,
+    "changed": 0,
+    "better": 0,
+    "regress": 0,
+    "fail": 0
+   },
+   "DECL-INIT": {
+    "tried": 55,
+    "changed": 51,
+    "better": 0,
+    "regress": 0,
+    "fail": 0
+   },
+   "PROTO-NAMES": {
+    "tried": 12,
+    "changed": 0,
+    "better": 0,
+    "regress": 0,
+    "fail": 0
+   },
+   "PROTO-TYPE": {
+    "tried": 47,
+    "changed": 0,
+    "better": 0,
+    "regress": 0,
+    "fail": 0
+   },
+   "EXTERN-SWAP": {
+    "tried": 78,
+    "changed": 0,
+    "better": 0,
+    "regress": 17,
+    "fail": 0
+   },
+   "TEMP-INTRO": {
+    "tried": 77,
+    "changed": 69,
+    "better": 0,
+    "regress": 0,
+    "fail": 0
+   },
+   "STMT-SWAP": {
+    "tried": 16,
+    "changed": 16,
+    "better": 0,
+    "regress": 0,
+    "fail": 0
+   },
+   "STORE-LOCAL": {
+    "tried": 4,
+    "changed": 0,
+    "better": 0,
+    "regress": 0,
+    "fail": 0
+   },
+   "SYM-NAMES": {
+    "tried": 107,
+    "changed": 0,
+    "better": 0,
+    "regress": 95,
+    "fail": 0
+   },
+   "EMBED": {
+    "tried": 3,
+    "changed": 0,
+    "better": 0,
+    "regress": 0,
+    "fail": 0
+   }
+  },
+  "promoted": false,
+  "out": "D:\\Prog\\simant_recon\\work\\takeover\\full-search\\SpiderScan",
+  "time": "2026-09-30T22:47:17",
+  "accepted_since_snapshot": false
+ },
+ "LessonDone": {
+  "module": "root:0E2E",
+  "base": [
+   1,
+   55,
+   543,
+   8
+  ],
+  "best": [
+   1,
+   55,
+   543,
+   8
+  ],
+  "path": [],
+  "evals": 600,
+  "reasons": [
+   "length 715 != target 723",
+   "bytes differ (first at +0x26, 535 differing)",
+   "relocation set differs (8 vs 9)"
+  ],
+  "base_reasons": [
+   "length 715 != target 723",
+   "bytes differ (first at +0x26, 535 differing)",
+   "relocation set differs (8 vs 9)"
+  ],
+  "rule_stats": {
+   "REL-SWAP": {
+    "tried": 92,
+    "changed": 0,
+    "better": 0,
+    "regress": 0,
+    "fail": 0
+   },
+   "COMM-SWAP": {
+    "tried": 10,
+    "changed": 0,
+    "better": 0,
+    "regress": 0,
+    "fail": 0
+   },
+   "NOT-CMP": {
+    "tried": 40,
+    "changed": 0,
+    "better": 0,
+    "regress": 0,
+    "fail": 0
+   },
+   "CONST-U": {
+    "tried": 221,
+    "changed": 0,
+    "better": 0,
+    "regress": 0,
+    "fail": 0
+   },
+   "OR-DUP": {
+    "tried": 7,
+    "changed": 7,
+    "better": 0,
+    "regress": 0,
+    "fail": 0
+   },
+   "AND-NEST": {
+    "tried": 12,
+    "changed": 0,
+    "better": 0,
+    "regress": 0,
+    "fail": 0
+   },
+   "IF-NEG": {
+    "tried": 1,
+    "changed": 0,
+    "better": 0,
+    "regress": 0,
+    "fail": 0
+   },
+   "ELSE-WRAP": {
+    "tried": 4,
+    "changed": 0,
+    "better": 0,
+    "regress": 0,
+    "fail": 0
+   },
+   "PARAM-COPY": {
+    "tried": 2,
+    "changed": 0,
+    "better": 0,
+    "regress": 0,
+    "fail": 0
+   },
+   "PROTO-NAMES": {
+    "tried": 3,
+    "changed": 0,
+    "better": 0,
+    "regress": 0,
+    "fail": 0
+   },
+   "PROTO-TYPE": {
+    "tried": 12,
+    "changed": 0,
+    "better": 0,
+    "regress": 0,
+    "fail": 0
+   },
+   "EXTERN-SWAP": {
+    "tried": 97,
+    "changed": 0,
+    "better": 0,
+    "regress": 33,
+    "fail": 12
+   },
+   "CASE-SWAP": {
+    "tried": 55,
+    "changed": 0,
+    "better": 0,
+    "regress": 0,
+    "fail": 0
+   },
+   "SYM-NAMES": {
+    "tried": 44,
+    "changed": 0,
+    "better": 0,
+    "regress": 42,
+    "fail": 0
+   }
+  },
+  "promoted": false,
+  "out": "D:\\Prog\\simant_recon\\work\\takeover\\full-search\\LessonDone",
+  "time": "2026-09-30T22:50:22",
+  "accepted_since_snapshot": false
+ },
+ "f_171C_0160": {
+  "module": "root:171C",
+  "base": [
+   1,
+   2,
+   2,
+   0
+  ],
+  "best": [
+   1,
+   2,
+   2,
+   0
+  ],
+  "path": [],
+  "evals": 600,
+  "reasons": [
+   "bytes differ (first at +0x107, 2 differing)"
+  ],
+  "base_reasons": [
+   "bytes differ (first at +0x107, 2 differing)"
+  ],
+  "rule_stats": {
+   "REL-SWAP": {
+    "tried": 17,
+    "changed": 0,
+    "better": 0,
+    "regress": 0,
+    "fail": 0
+   },
+   "NOT-CMP": {
+    "tried": 21,
+    "changed": 0,
+    "better": 0,
+    "regress": 0,
+    "fail": 0
+   },
+   "CONST-U": {
+    "tried": 16,
+    "changed": 0,
+    "better": 0,
+    "regress": 0,
+    "fail": 0
+   },
+   "COMPOUND": {
+    "tried": 33,
+    "changed": 0,
+    "better": 0,
+    "regress": 0,
+    "fail": 0
+   },
+   "CHAIN-ORDER": {
+    "tried": 8,
+    "changed": 8,
+    "better": 0,
+    "regress": 0,
+    "fail": 0
+   },
+   "CHAIN-SPLIT": {
+    "tried": 3,
+    "changed": 0,
+    "better": 0,
+    "regress": 0,
+    "fail": 0
+   },
+   "EMBED": {
+    "tried": 4,
+    "changed": 0,
+    "better": 0,
+    "regress": 0,
+    "fail": 0
+   },
+   "AND-NEST": {
+    "tried": 11,
+    "changed": 0,
+    "better": 0,
+    "regress": 8,
+    "fail": 0
+   },
+   "IF-NEG": {
+    "tried": 16,
+    "changed": 16,
+    "better": 0,
+    "regress": 0,
+    "fail": 0
+   },
+   "CSE-INLINE": {
+    "tried": 15,
+    "changed": 15,
+    "better": 0,
+    "regress": 0,
+    "fail": 0
+   },
+   "PARAM-COPY": {
+    "tried": 36,
+    "changed": 8,
+    "better": 0,
+    "regress": 28,
+    "fail": 0
+   },
+   "DECL-SWAP": {
+    "tried": 7,
+    "changed": 0,
+    "better": 0,
+    "regress": 0,
+    "fail": 0
+   },
+   "DECL-INIT": {
+    "tried": 4,
+    "changed": 0,
+    "better": 0,
+    "regress": 0,
+    "fail": 0
+   },
+   "PROTO-NAMES": {
+    "tried": 7,
+    "changed": 0,
+    "better": 0,
+    "regress": 0,
+    "fail": 0
+   },
+   "PROTO-TYPE": {
+    "tried": 5,
+    "changed": 0,
+    "better": 0,
+    "regress": 0,
+    "fail": 0
+   },
+   "EXTERN-SWAP": {
+    "tried": 161,
+    "changed": 0,
+    "better": 0,
+    "regress": 108,
+    "fail": 0
+   },
+   "TEMP-INTRO": {
+    "tried": 62,
+    "changed": 4,
+    "better": 0,
+    "regress": 46,
+    "fail": 0
+   },
+   "CASE-SWAP": {
+    "tried": 15,
+    "changed": 0,
+    "better": 0,
+    "regress": 0,
+    "fail": 0
+   },
+   "STMT-SWAP": {
+    "tried": 37,
+    "changed": 37,
+    "better": 0,
+    "regress": 0,
+    "fail": 0
+   },
+   "STORE-LOCAL": {
+    "tried": 47,
+    "changed": 0,
+    "better": 0,
+    "regress": 34,
+    "fail": 0
+   },
+   "SYM-NAMES": {
+    "tried": 75,
+    "changed": 0,
+    "better": 0,
+    "regress": 18,
+    "fail": 0
+   }
+  },
+  "promoted": false,
+  "out": "D:\\Prog\\simant_recon\\work\\takeover\\full-search\\f_171C_0160",
+  "time": "2026-09-30T22:57:50",
+  "accepted_since_snapshot": true
+ },
+ "f_171C_09CC": {
+  "module": "root:171C",
+  "base": [
+   1,
+   14,
+   87,
+   2
+  ],
+  "best": [
+   1,
+   14,
+   87,
+   2
+  ],
+  "path": [],
+  "evals": 600,
+  "reasons": [
+   "length 146 != target 144",
+   "bytes differ (first at +0x9, 85 differing)"
+  ],
+  "base_reasons": [
+   "length 146 != target 144",
+   "bytes differ (first at +0x9, 85 differing)"
+  ],
+  "rule_stats": {
+   "REL-SWAP": {
+    "tried": 39,
+    "changed": 0,
+    "better": 0,
+    "regress": 0,
+    "fail": 0
+   },
+   "COMM-SWAP": {
+    "tried": 22,
+    "changed": 0,
+    "better": 0,
+    "regress": 0,
+    "fail": 0
+   },
+   "CONST-U": {
+    "tried": 43,
+    "changed": 0,
+    "better": 0,
+    "regress": 0,
+    "fail": 0
+   },
+   "EMBED": {
+    "tried": 9,
+    "changed": 0,
+    "better": 0,
+    "regress": 0,
+    "fail": 0
+   },
+   "OR-DUP": {
+    "tried": 9,
+    "changed": 0,
+    "better": 0,
+    "regress": 4,
+    "fail": 0
+   },
+   "IF-NEG": {
+    "tried": 15,
+    "changed": 15,
+    "better": 0,
+    "regress": 0,
+    "fail": 0
+   },
+   "RET-MERGE": {
+    "tried": 10,
+    "changed": 1,
+    "better": 1,
+    "regress": 5,
+    "fail": 0
+   },
+   "PARAM-COPY": {
+    "tried": 38,
+    "changed": 14,
+    "better": 1,
+    "regress": 21,
+    "fail": 0
+   },
+   "DECL-SWAP": {
+    "tried": 9,
+    "changed": 0,
+    "better": 0,
+    "regress": 0,
+    "fail": 0
+   },
+   "DECL-INIT": {
+    "tried": 9,
+    "changed": 0,
+    "better": 0,
+    "regress": 0,
+    "fail": 0
+   },
+   "PROTO-NAMES": {
+    "tried": 11,
+    "changed": 0,
+    "better": 0,
+    "regress": 3,
+    "fail": 0
+   },
+   "PROTO-TYPE": {
+    "tried": 46,
+    "changed": 0,
+    "better": 0,
+    "regress": 4,
+    "fail": 0
+   },
+   "EXTERN-SWAP": {
+    "tried": 129,
+    "changed": 0,
+    "better": 0,
+    "regress": 0,
+    "fail": 0
+   },
+   "TEMP-INTRO": {
+    "tried": 109,
+    "changed": 35,
+    "better": 6,
+    "regress": 60,
+    "fail": 0
+   },
+   "SYM-NAMES": {
+    "tried": 102,
+    "changed": 0,
+    "better": 0,
+    "regress": 9,
+    "fail": 0
+   }
+  },
+  "promoted": false,
+  "out": "D:\\Prog\\simant_recon\\work\\takeover\\full-search\\f_171C_09CC",
+  "time": "2026-09-30T23:05:22",
+  "accepted_since_snapshot": false
+ },
+ "f_171C_0ADC": {
+  "module": "root:171C",
+  "base": [
+   1,
+   17,
+   214,
+   2
+  ],
+  "best": [
+   1,
+   15,
+   212,
+   2
+  ],
+  "path": [
+   [
+    "PROTO-NAMES",
+    "f_194D_0006 unnamed"
+   ],
+   [
+    "STORE-LOCAL",
+    "*(Handle)((char far *)s_2F46 + b->handle) = (char far *)((unsigned long)b + 0x20000L);"
+   ]
+  ],
+  "evals": 600,
+  "reasons": [
+   "length 260 != target 262",
+   "bytes differ (first at +0x5, 210 differing)",
+   "relocation set differs (1 vs 1)"
+  ],
+  "base_reasons": [
+   "length 260 != target 262",
+   "bytes differ (first at +0x5, 212 differing)",
+   "relocation set differs (1 vs 1)"
+  ],
+  "rule_stats": {
+   "REL-SWAP": {
+    "tried": 10,
+    "changed": 0,
+    "better": 0,
+    "regress": 0,
+    "fail": 0
+   },
+   "COMM-SWAP": {
+    "tried": 30,
+    "changed": 0,
+    "better": 0,
+    "regress": 0,
+    "fail": 0
+   },
+   "NOT-CMP": {
+    "tried": 27,
+    "changed": 0,
+    "better": 0,
+    "regress": 0,
+    "fail": 0
+   },
+   "CONST-U": {
+    "tried": 9,
+    "changed": 0,
+    "better": 0,
+    "regress": 0,
+    "fail": 0
+   },
+   "COMPOUND": {
+    "tried": 9,
+    "changed": 0,
+    "better": 0,
+    "regress": 0,
+    "fail": 0
+   },
+   "EMBED": {
+    "tried": 12,
+    "changed": 0,
+    "better": 0,
+    "regress": 0,
+    "fail": 0
+   },
+   "IF-NEG": {
+    "tried": 15,
+    "changed": 15,
+    "better": 0,
+    "regress": 0,
+    "fail": 0
+   },
+   "PARAM-COPY": {
+    "tried": 15,
+    "changed": 6,
+    "better": 0,
+    "regress": 9,
+    "fail": 0
+   },
+   "DECL-SWAP": {
+    "tried": 16,
+    "changed": 0,
+    "better": 0,
+    "regress": 0,
+    "fail": 0
+   },
+   "DECL-INIT": {
+    "tried": 9,
+    "changed": 0,
+    "better": 0,
+    "regress": 0,
+    "fail": 0
+   },
+   "PROTO-NAMES": {
+    "tried": 4,
+    "changed": 0,
+    "better": 0,
+    "regress": 0,
+    "fail": 0
+   },
+   "PROTO-TYPE": {
+    "tried": 22,
+    "changed": 0,
+    "better": 0,
+    "regress": 0,
+    "fail": 0
+   },
+   "EXTERN-SWAP": {
+    "tried": 101,
+    "changed": 0,
+    "better": 0,
+    "regress": 32,
+    "fail": 0
+   },
+   "TEMP-INTRO": {
+    "tried": 100,
+    "changed": 12,
+    "better": 0,
+    "regress": 60,
+    "fail": 0
+   },
+   "STMT-SWAP": {
+    "tried": 15,
+    "changed": 15,
+    "better": 0,
+    "regress": 0,
+    "fail": 0
+   },
+   "STORE-LOCAL": {
+    "tried": 48,
+    "changed": 12,
+    "better": 6,
+    "regress": 18,
+    "fail": 16
+   },
+   "SYM-NAMES": {
+    "tried": 156,
+    "changed": 0,
+    "better": 0,
+    "regress": 27,
+    "fail": 0
+   },
+   "LOCAL-SPLIT": {
+    "tried": 1,
+    "changed": 1,
+    "better": 0,
+    "regress": 0,
+    "fail": 0
+   },
+   "CHAIN-SPLIT": {
+    "tried": 1,
+    "changed": 0,
+    "better": 0,
+    "regress": 0,
+    "fail": 0
+   }
+  },
+  "promoted": false,
+  "out": "D:\\Prog\\simant_recon\\work\\takeover\\full-search\\f_171C_0ADC",
+  "time": "2026-09-30T23:12:38",
+  "accepted_since_snapshot": false
+ },
+ "f_171C_0CF4": {
+  "module": "root:171C",
+  "base": [
+   1,
+   108,
+   467,
+   30
+  ],
+  "best": [
+   1,
+   85,
+   459,
+   16
+  ],
+  "path": [
+   [
+    "PROTO-NAMES",
+    "f_171C_0160 unnamed"
+   ],
+   [
+    "TEMP-INTRO",
+    "SEG(n)"
+   ],
+   [
+    "STORE-LOCAL",
+    "*(char far * far *)((char far *)s_2F46 + nb->handle) = (char far *)nb + 0x20000L;"
+   ]
+  ],
+  "evals": 600,
+  "reasons": [
+   "length 506 != target 490",
+   "bytes differ (first at +0x5, 443 differing)",
+   "relocation set differs (4 vs 4)"
+  ],
+  "base_reasons": [
+   "length 520 != target 490",
+   "bytes differ (first at +0x5, 437 differing)",
+   "relocation set differs (4 vs 4)"
+  ],
+  "rule_stats": {
+   "REL-SWAP": {
+    "tried": 10,
+    "changed": 0,
+    "better": 0,
+    "regress": 0,
+    "fail": 0
+   },
+   "COMM-SWAP": {
+    "tried": 8,
+    "changed": 0,
+    "better": 0,
+    "regress": 0,
+    "fail": 0
+   },
+   "TERN-SWAP": {
+    "tried": 16,
+    "changed": 16,
+    "better": 1,
+    "regress": 0,
+    "fail": 0
+   },
+   "NOT-CMP": {
+    "tried": 4,
+    "changed": 0,
+    "better": 0,
+    "regress": 0,
+    "fail": 0
+   },
+   "CONST-U": {
+    "tried": 14,
+    "changed": 0,
+    "better": 0,
+    "regress": 0,
+    "fail": 0
+   },
+   "EMBED": {
+    "tried": 2,
+    "changed": 0,
+    "better": 0,
+    "regress": 0,
+    "fail": 0
+   },
+   "AND-NEST": {
+    "tried": 16,
+    "changed": 0,
+    "better": 0,
+    "regress": 14,
+    "fail": 0
+   },
+   "ELSE-WRAP": {
+    "tried": 21,
+    "changed": 0,
+    "better": 0,
+    "regress": 18,
+    "fail": 0
+   },
+   "TERN-IF": {
+    "tried": 2,
+    "changed": 0,
+    "better": 0,
+    "regress": 0,
+    "fail": 0
+   },
+   "CSE-INLINE": {
+    "tried": 35,
+    "changed": 32,
+    "better": 0,
+    "regress": 2,
+    "fail": 0
+   },
+   "PARAM-COPY": {
+    "tried": 7,
+    "changed": 0,
+    "better": 0,
+    "regress": 6,
+    "fail": 0
+   },
+   "DECL-SWAP": {
+    "tried": 6,
+    "changed": 0,
+    "better": 0,
+    "regress": 0,
+    "fail": 0
+   },
+   "DECL-INIT": {
+    "tried": 2,
+    "changed": 0,
+    "better": 0,
+    "regress": 0,
+    "fail": 0
+   },
+   "PROTO-NAMES": {
+    "tried": 15,
+    "changed": 6,
+    "better": 4,
+    "regress": 7,
+    "fail": 0
+   },
+   "PROTO-TYPE": {
+    "tried": 62,
+    "changed": 41,
+    "better": 29,
+    "regress": 6,
+    "fail": 0
+   },
+   "EXTERN-SWAP": {
+    "tried": 35,
+    "changed": 0,
+    "better": 0,
+    "regress": 14,
+    "fail": 0
+   },
+   "TEMP-INTRO": {
+    "tried": 131,
+    "changed": 55,
+    "better": 21,
+    "regress": 72,
+    "fail": 0
+   },
+   "STMT-SWAP": {
+    "tried": 76,
+    "changed": 76,
+    "better": 0,
+    "regress": 0,
+    "fail": 0
+   },
+   "STORE-LOCAL": {
+    "tried": 52,
+    "changed": 20,
+    "better": 15,
+    "regress": 30,
+    "fail": 0
+   },
+   "SYM-NAMES": {
+    "tried": 86,
+    "changed": 50,
+    "better": 30,
+    "regress": 21,
+    "fail": 0
+   }
+  },
+  "promoted": false,
+  "out": "D:\\Prog\\simant_recon\\work\\takeover\\full-search\\f_171C_0CF4",
+  "time": "2026-09-30T23:20:16",
+  "accepted_since_snapshot": false
+ },
+ "f_171C_0FBC": {
+  "module": "root:171C",
+  "base": [
+   1,
+   60,
+   439,
+   2
+  ],
+  "best": [
+   1,
+   57,
+   429,
+   0
+  ],
+  "path": [
+   [
+    "PROTO-NAMES",
+    "Punt unnamed"
+   ],
+   [
+    "TEMP-INTRO",
+    "SEG(best) + best->paras"
+   ],
+   [
+    "CHAIN-ORDER",
+    "first = compacted = 1"
+   ]
+  ],
+  "evals": 600,
+  "reasons": [
+   "bytes differ (first at +0x5, 429 differing)",
+   "relocation set differs (10 vs 10)"
+  ],
+  "base_reasons": [
+   "length 568 != target 566",
+   "bytes differ (first at +0x5, 437 differing)",
+   "relocation set differs (10 vs 10)"
+  ],
+  "rule_stats": {
+   "REL-SWAP": {
+    "tried": 46,
+    "changed": 0,
+    "better": 0,
+    "regress": 0,
+    "fail": 0
+   },
+   "COMM-SWAP": {
+    "tried": 21,
+    "changed": 0,
+    "better": 0,
+    "regress": 0,
+    "fail": 0
+   },
+   "NOT-CMP": {
+    "tried": 20,
+    "changed": 0,
+    "better": 0,
+    "regress": 0,
+    "fail": 0
+   },
+   "CONST-U": {
+    "tried": 56,
+    "changed": 0,
+    "better": 0,
+    "regress": 0,
+    "fail": 0
+   },
+   "CHAIN-ORDER": {
+    "tried": 12,
+    "changed": 12,
+    "better": 12,
+    "regress": 0,
+    "fail": 0
+   },
+   "CHAIN-SPLIT": {
+    "tried": 2,
+    "changed": 0,
+    "better": 0,
+    "regress": 0,
+    "fail": 0
+   },
+   "EMBED": {
+    "tried": 13,
+    "changed": 0,
+    "better": 0,
+    "regress": 0,
+    "fail": 0
+   },
+   "AND-NEST": {
+    "tried": 27,
+    "changed": 0,
+    "better": 0,
+    "regress": 17,
+    "fail": 0
+   },
+   "IF-NEG": {
+    "tried": 16,
+    "changed": 0,
+    "better": 0,
+    "regress": 12,
+    "fail": 0
+   },
+   "ELSE-WRAP": {
+    "tried": 16,
+    "changed": 0,
+    "better": 0,
+    "regress": 12,
+    "fail": 0
+   },
+   "FOR-WHILE": {
+    "tried": 7,
+    "changed": 0,
+    "better": 0,
+    "regress": 0,
+    "fail": 0
+   },
+   "PARAM-COPY": {
+    "tried": 30,
+    "changed": 6,
+    "better": 0,
+    "regress": 24,
+    "fail": 0
+   },
+   "DECL-SWAP": {
+    "tried": 15,
+    "changed": 0,
+    "better": 0,
+    "regress": 0,
+    "fail": 0
+   },
+   "DECL-INIT": {
+    "tried": 5,
+    "changed": 0,
+    "better": 0,
+    "regress": 0,
+    "fail": 0
+   },
+   "PROTO-NAMES": {
+    "tried": 8,
+    "changed": 0,
+    "better": 0,
+    "regress": 0,
+    "fail": 0
+   },
+   "PROTO-TYPE": {
+    "tried": 17,
+    "changed": 0,
+    "better": 0,
+    "regress": 0,
+    "fail": 0
+   },
+   "EXTERN-SWAP": {
+    "tried": 102,
+    "changed": 0,
+    "better": 0,
+    "regress": 64,
+    "fail": 0
+   },
+   "TEMP-INTRO": {
+    "tried": 121,
+    "changed": 15,
+    "better": 6,
+    "regress": 94,
+    "fail": 0
+   },
+   "STMT-SWAP": {
+    "tried": 16,
+    "changed": 16,
+    "better": 2,
+    "regress": 0,
+    "fail": 0
+   },
+   "SYM-NAMES": {
+    "tried": 50,
+    "changed": 0,
+    "better": 0,
+    "regress": 16,
+    "fail": 0
+   }
+  },
+  "promoted": false,
+  "out": "D:\\Prog\\simant_recon\\work\\takeover\\full-search\\f_171C_0FBC",
+  "time": "2026-09-30T23:27:49",
+  "accepted_since_snapshot": false
+ },
+ "FindIndex": {
+  "module": "root:1986",
+  "base": [
+   1,
+   1,
+   216,
+   2
+  ],
+  "best": [
+   1,
+   1,
+   216,
+   2
+  ],
+  "path": [],
+  "evals": 600,
+  "reasons": [
+   "length 269 != target 267",
+   "bytes differ (first at +0x33, 214 differing)"
+  ],
+  "base_reasons": [
+   "length 269 != target 267",
+   "bytes differ (first at +0x33, 214 differing)"
+  ],
+  "rule_stats": {
+   "REL-SWAP": {
+    "tried": 91,
+    "changed": 0,
+    "better": 0,
+    "regress": 0,
+    "fail": 0
+   },
+   "COMM-SWAP": {
+    "tried": 24,
+    "changed": 0,
+    "better": 0,
+    "regress": 0,
+    "fail": 0
+   },
+   "CONST-U": {
+    "tried": 108,
+    "changed": 0,
+    "better": 0,
+    "regress": 0,
+    "fail": 0
+   },
+   "EMBED": {
+    "tried": 35,
+    "changed": 0,
+    "better": 0,
+    "regress": 0,
+    "fail": 0
+   },
+   "AND-NEST": {
+    "tried": 24,
+    "changed": 0,
+    "better": 0,
+    "regress": 17,
+    "fail": 0
+   },
+   "IF-NEG": {
+    "tried": 36,
+    "changed": 12,
+    "better": 0,
+    "regress": 0,
+    "fail": 0
+   },
+   "ELSE-WRAP": {
+    "tried": 24,
+    "changed": 0,
+    "better": 0,
+    "regress": 0,
+    "fail": 0
+   },
+   "TERN-IF": {
+    "tried": 12,
+    "changed": 0,
+    "better": 0,
+    "regress": 0,
+    "fail": 0
+   },
+   "PARAM-COPY": {
+    "tried": 45,
+    "changed": 45,
+    "better": 0,
+    "regress": 0,
+    "fail": 0
+   },
+   "DECL-SWAP": {
+    "tried": 10,
+    "changed": 0,
+    "better": 0,
+    "regress": 0,
+    "fail": 0
+   },
+   "EXTERN-SWAP": {
+    "tried": 33,
+    "changed": 0,
+    "better": 0,
+    "regress": 0,
+    "fail": 0
+   },
+   "TEMP-INTRO": {
+    "tried": 49,
+    "changed": 0,
+    "better": 0,
+    "regress": 0,
+    "fail": 0
+   },
+   "STMT-SWAP": {
+    "tried": 15,
+    "changed": 14,
+    "better": 5,
+    "regress": 0,
+    "fail": 0
+   },
+   "SYM-NAMES": {
+    "tried": 88,
+    "changed": 0,
+    "better": 0,
+    "regress": 0,
+    "fail": 0
+   },
+   "DECL-INIT": {
+    "tried": 6,
+    "changed": 0,
+    "better": 0,
+    "regress": 0,
+    "fail": 0
+   }
+  },
+  "promoted": false,
+  "out": "D:\\Prog\\simant_recon\\work\\takeover\\full-search\\FindIndex",
+  "time": "2026-09-30T23:29:49",
+  "accepted_since_snapshot": false
+ },
+ "ch_LookUpId": {
+  "module": "root:1A96",
+  "base": [
+   1,
+   34,
+   289,
+   5
+  ],
+  "best": [
+   1,
+   34,
+   289,
+   5
+  ],
+  "path": [],
+  "evals": 600,
+  "reasons": [
+   "length 359 != target 354",
+   "bytes differ (first at +0x5, 284 differing)",
+   "relocation set differs (2 vs 2)"
+  ],
+  "base_reasons": [
+   "length 359 != target 354",
+   "bytes differ (first at +0x5, 284 differing)",
+   "relocation set differs (2 vs 2)"
+  ],
+  "rule_stats": {
+   "REL-SWAP": {
+    "tried": 8,
+    "changed": 0,
+    "better": 0,
+    "regress": 0,
+    "fail": 0
+   },
+   "COMM-SWAP": {
+    "tried": 4,
+    "changed": 0,
+    "better": 0,
+    "regress": 0,
+    "fail": 0
+   },
+   "NOT-CMP": {
+    "tried": 3,
+    "changed": 0,
+    "better": 0,
+    "regress": 0,
+    "fail": 0
+   },
+   "CONST-U": {
+    "tried": 8,
+    "changed": 0,
+    "better": 0,
+    "regress": 0,
+    "fail": 0
+   },
+   "COMPOUND": {
+    "tried": 8,
+    "changed": 0,
+    "better": 0,
+    "regress": 0,
+    "fail": 0
+   },
+   "CHAIN-ORDER": {
+    "tried": 8,
+    "changed": 8,
+    "better": 0,
+    "regress": 0,
+    "fail": 0
+   },
+   "CHAIN-SPLIT": {
+    "tried": 2,
+    "changed": 0,
+    "better": 0,
+    "regress": 0,
+    "fail": 0
+   },
+   "EMBED": {
+    "tried": 15,
+    "changed": 0,
+    "better": 0,
+    "regress": 0,
+    "fail": 0
+   },
+   "AND-NEST": {
+    "tried": 32,
+    "changed": 0,
+    "better": 0,
+    "regress": 32,
+    "fail": 0
+   },
+   "ELSE-WRAP": {
+    "tried": 64,
+    "changed": 0,
+    "better": 0,
+    "regress": 64,
+    "fail": 0
+   },
+   "FOR-WHILE": {
+    "tried": 1,
+    "changed": 0,
+    "better": 0,
+    "regress": 0,
+    "fail": 0
+   },
+   "CSE-INLINE": {
+    "tried": 13,
+    "changed": 0,
+    "better": 0,
+    "regress": 13,
+    "fail": 0
+   },
+   "PARAM-COPY": {
+    "tried": 46,
+    "changed": 0,
+    "better": 0,
+    "regress": 46,
+    "fail": 0
+   },
+   "DECL-SWAP": {
+    "tried": 8,
+    "changed": 0,
+    "better": 0,
+    "regress": 0,
+    "fail": 0
+   },
+   "DECL-INIT": {
+    "tried": 1,
+    "changed": 0,
+    "better": 0,
+    "regress": 0,
+    "fail": 0
+   },
+   "PROTO-NAMES": {
+    "tried": 17,
+    "changed": 0,
+    "better": 0,
+    "regress": 15,
+    "fail": 0
+   },
+   "PROTO-TYPE": {
+    "tried": 17,
+    "changed": 0,
+    "better": 0,
+    "regress": 15,
+    "fail": 0
+   },
+   "EXTERN-SWAP": {
+    "tried": 110,
+    "changed": 49,
+    "better": 0,
+    "regress": 45,
+    "fail": 0
+   },
+   "TEMP-INTRO": {
+    "tried": 101,
+    "changed": 0,
+    "better": 0,
+    "regress": 101,
+    "fail": 0
+   },
+   "STMT-SWAP": {
+    "tried": 71,
+    "changed": 71,
+    "better": 0,
+    "regress": 0,
+    "fail": 0
+   },
+   "SYM-NAMES": {
+    "tried": 63,
+    "changed": 0,
+    "better": 0,
+    "regress": 56,
+    "fail": 0
+   }
+  },
+  "promoted": false,
+  "out": "D:\\Prog\\simant_recon\\work\\takeover\\full-search\\ch_LookUpId",
+  "time": "2026-09-30T23:32:32",
+  "accepted_since_snapshot": false
+ },
+ "f_1C62_0415": {
+  "module": "root:1C62",
+  "base": [
+   1,
+   33,
+   551,
+   3
+  ],
+  "best": [
+   1,
+   33,
+   551,
+   3
+  ],
+  "path": [],
+  "evals": 600,
+  "reasons": [
+   "length 652 != target 649",
+   "bytes differ (first at +0xa, 548 differing)",
+   "relocation set differs (18 vs 18)"
+  ],
+  "base_reasons": [
+   "length 652 != target 649",
+   "bytes differ (first at +0xa, 548 differing)",
+   "relocation set differs (18 vs 18)"
+  ],
+  "rule_stats": {
+   "REL-SWAP": {
+    "tried": 18,
+    "changed": 0,
+    "better": 0,
+    "regress": 0,
+    "fail": 0
+   },
+   "COMM-SWAP": {
+    "tried": 20,
+    "changed": 0,
+    "better": 0,
+    "regress": 0,
+    "fail": 0
+   },
+   "NOT-CMP": {
+    "tried": 4,
+    "changed": 0,
+    "better": 0,
+    "regress": 0,
+    "fail": 0
+   },
+   "CONST-U": {
+    "tried": 81,
+    "changed": 0,
+    "better": 0,
+    "regress": 0,
+    "fail": 0
+   },
+   "COMPOUND": {
+    "tried": 24,
+    "changed": 0,
+    "better": 0,
+    "regress": 0,
+    "fail": 0
+   },
+   "CHAIN-ORDER": {
+    "tried": 32,
+    "changed": 32,
+    "better": 0,
+    "regress": 0,
+    "fail": 0
+   },
+   "CHAIN-SPLIT": {
+    "tried": 4,
+    "changed": 0,
+    "better": 0,
+    "regress": 0,
+    "fail": 0
+   },
+   "EMBED": {
+    "tried": 25,
+    "changed": 17,
+    "better": 0,
+    "regress": 0,
+    "fail": 0
+   },
+   "OR-DUP": {
+    "tried": 18,
+    "changed": 18,
+    "better": 0,
+    "regress": 0,
+    "fail": 0
+   },
+   "AND-NEST": {
+    "tried": 2,
+    "changed": 0,
+    "better": 0,
+    "regress": 0,
+    "fail": 0
+   },
+   "IF-NEG": {
+    "tried": 2,
+    "changed": 0,
+    "better": 0,
+    "regress": 0,
+    "fail": 0
+   },
+   "FOR-WHILE": {
+    "tried": 5,
+    "changed": 0,
+    "better": 0,
+    "regress": 0,
+    "fail": 0
+   },
+   "PARAM-COPY": {
+    "tried": 19,
+    "changed": 14,
+    "better": 0,
+    "regress": 3,
+    "fail": 0
+   },
+   "RESULT-LOCAL": {
+    "tried": 2,
+    "changed": 0,
+    "better": 0,
+    "regress": 0,
+    "fail": 0
+   },
+   "DECL-SWAP": {
+    "tried": 39,
+    "changed": 15,
+    "better": 0,
+    "regress": 0,
+    "fail": 0
+   },
+   "DECL-INIT": {
+    "tried": 2,
+    "changed": 0,
+    "better": 0,
+    "regress": 0,
+    "fail": 0
+   },
+   "PROTO-NAMES": {
+    "tried": 20,
+    "changed": 0,
+    "better": 0,
+    "regress": 0,
+    "fail": 0
+   },
+   "PROTO-TYPE": {
+    "tried": 44,
+    "changed": 0,
+    "better": 0,
+    "regress": 12,
+    "fail": 0
+   },
+   "EXTERN-SWAP": {
+    "tried": 57,
+    "changed": 0,
+    "better": 0,
+    "regress": 0,
+    "fail": 24
+   },
+   "TEMP-INTRO": {
+    "tried": 78,
+    "changed": 54,
+    "better": 0,
+    "regress": 7,
+    "fail": 0
+   },
+   "STMT-SWAP": {
+    "tried": 67,
+    "changed": 67,
+    "better": 1,
+    "regress": 0,
+    "fail": 0
+   },
+   "STORE-LOCAL": {
+    "tried": 25,
+    "changed": 15,
+    "better": 0,
+    "regress": 2,
+    "fail": 0
+   },
+   "SYM-NAMES": {
+    "tried": 12,
+    "changed": 0,
+    "better": 0,
+    "regress": 0,
+    "fail": 0
+   }
+  },
+  "promoted": false,
+  "out": "D:\\Prog\\simant_recon\\work\\takeover\\full-search\\f_1C62_0415",
+  "time": "2026-09-30T23:35:12",
+  "accepted_since_snapshot": false
+ },
+ "f_1E57_038E": {
+  "module": "root:1E57",
+  "base": [
+   1,
+   101,
+   557,
+   12
+  ],
+  "best": [
+   1,
+   91,
+   559,
+   9
+  ],
+  "path": [
+   [
+    "CHAIN-ORDER",
+    "n = count = end - tmp"
+   ]
+  ],
+  "evals": 600,
+  "reasons": [
+   "length 988 != target 997",
+   "bytes differ (first at +0x5, 550 differing)",
+   "relocation set differs (34 vs 34)"
+  ],
+  "base_reasons": [
+   "length 985 != target 997",
+   "bytes differ (first at +0x5, 545 differing)",
+   "relocation set differs (34 vs 34)"
+  ],
+  "rule_stats": {
+   "REL-SWAP": {
+    "tried": 11,
+    "changed": 0,
+    "better": 0,
+    "regress": 0,
+    "fail": 0
+   },
+   "COMM-SWAP": {
+    "tried": 10,
+    "changed": 0,
+    "better": 0,
+    "regress": 0,
+    "fail": 0
+   },
+   "NOT-CMP": {
+    "tried": 2,
+    "changed": 0,
+    "better": 0,
+    "regress": 0,
+    "fail": 0
+   },
+   "CONST-U": {
+    "tried": 83,
+    "changed": 48,
+    "better": 0,
+    "regress": 0,
+    "fail": 0
+   },
+   "COMPOUND": {
+    "tried": 4,
+    "changed": 0,
+    "better": 0,
+    "regress": 0,
+    "fail": 0
+   },
+   "CHAIN-ORDER": {
+    "tried": 8,
+    "changed": 8,
+    "better": 8,
+    "regress": 0,
+    "fail": 0
+   },
+   "CHAIN-SPLIT": {
+    "tried": 3,
+    "changed": 0,
+    "better": 0,
+    "regress": 0,
+    "fail": 0
+   },
+   "EMBED": {
+    "tried": 25,
+    "changed": 0,
+    "better": 0,
+    "regress": 0,
+    "fail": 0
+   },
+   "AND-NEST": {
+    "tried": 1,
+    "changed": 0,
+    "better": 0,
+    "regress": 0,
+    "fail": 0
+   },
+   "ELSE-WRAP": {
+    "tried": 2,
+    "changed": 0,
+    "better": 0,
+    "regress": 0,
+    "fail": 0
+   },
+   "FOR-WHILE": {
+    "tried": 2,
+    "changed": 0,
+    "better": 0,
+    "regress": 0,
+    "fail": 0
+   },
+   "LOCAL-SPLIT": {
+    "tried": 2,
+    "changed": 0,
+    "better": 0,
+    "regress": 0,
+    "fail": 0
+   },
+   "DECL-SWAP": {
+    "tried": 13,
+    "changed": 0,
+    "better": 0,
+    "regress": 0,
+    "fail": 0
+   },
+   "PROTO-NAMES": {
+    "tried": 11,
+    "changed": 0,
+    "better": 0,
+    "regress": 0,
+    "fail": 0
+   },
+   "PROTO-TYPE": {
+    "tried": 115,
+    "changed": 66,
+    "better": 0,
+    "regress": 21,
+    "fail": 10
+   },
+   "EXTERN-SWAP": {
+    "tried": 103,
+    "changed": 0,
+    "better": 0,
+    "regress": 30,
+    "fail": 59
+   },
+   "TEMP-INTRO": {
+    "tried": 155,
+    "changed": 99,
+    "better": 0,
+    "regress": 38,
+    "fail": 10
+   },
+   "STORE-LOCAL": {
+    "tried": 47,
+    "changed": 24,
+    "better": 7,
+    "regress": 11,
+    "fail": 10
+   },
+   "SYM-NAMES": {
+    "tried": 3,
+    "changed": 0,
+    "better": 0,
+    "regress": 0,
+    "fail": 0
+   }
+  },
+  "promoted": false,
+  "out": "D:\\Prog\\simant_recon\\work\\takeover\\full-search\\f_1E57_038E",
+  "time": "2026-09-30T23:38:51",
+  "accepted_since_snapshot": false
+ },
+ "f_20E8_0903": {
+  "module": "root:20E8",
+  "base": [
+   1,
+   6,
+   151,
+   6
+  ],
+  "best": [
+   1,
+   6,
+   151,
+   6
+  ],
+  "path": [],
+  "evals": 600,
+  "reasons": [
+   "length 280 != target 286",
+   "bytes differ (first at +0x77, 145 differing)",
+   "relocation set differs (6 vs 6)"
+  ],
+  "base_reasons": [
+   "length 280 != target 286",
+   "bytes differ (first at +0x77, 145 differing)",
+   "relocation set differs (6 vs 6)"
+  ],
+  "rule_stats": {
+   "REL-SWAP": {
+    "tried": 27,
+    "changed": 0,
+    "better": 0,
+    "regress": 0,
+    "fail": 0
+   },
+   "COMM-SWAP": {
+    "tried": 25,
+    "changed": 0,
+    "better": 0,
+    "regress": 0,
+    "fail": 0
+   },
+   "CONST-U": {
+    "tried": 57,
+    "changed": 0,
+    "better": 0,
+    "regress": 0,
+    "fail": 0
+   },
+   "COMPOUND": {
+    "tried": 15,
+    "changed": 0,
+    "better": 0,
+    "regress": 0,
+    "fail": 0
+   },
+   "EMBED": {
+    "tried": 10,
+    "changed": 0,
+    "better": 0,
+    "regress": 0,
+    "fail": 0
+   },
+   "AND-NEST": {
+    "tried": 19,
+    "changed": 13,
+    "better": 0,
+    "regress": 0,
+    "fail": 0
+   },
+   "IF-NEG": {
+    "tried": 11,
+    "changed": 1,
+    "better": 1,
+    "regress": 0,
+    "fail": 0
+   },
+   "TERN-IF": {
+    "tried": 5,
+    "changed": 0,
+    "better": 0,
+    "regress": 0,
+    "fail": 0
+   },
+   "FOR-WHILE": {
+    "tried": 8,
+    "changed": 0,
+    "better": 0,
+    "regress": 0,
+    "fail": 0
+   },
+   "CSE-INLINE": {
+    "tried": 59,
+    "changed": 43,
+    "better": 0,
+    "regress": 0,
+    "fail": 16
+   },
+   "PARAM-COPY": {
+    "tried": 37,
+    "changed": 37,
+    "better": 2,
+    "regress": 0,
+    "fail": 0
+   },
+   "DECL-SWAP": {
+    "tried": 17,
+    "changed": 0,
+    "better": 0,
+    "regress": 0,
+    "fail": 0
+   },
+   "DECL-INIT": {
+    "tried": 3,
+    "changed": 0,
+    "better": 0,
+    "regress": 0,
+    "fail": 0
+   },
+   "PROTO-NAMES": {
+    "tried": 8,
+    "changed": 0,
+    "better": 0,
+    "regress": 0,
+    "fail": 0
+   },
+   "PROTO-TYPE": {
+    "tried": 13,
+    "changed": 0,
+    "better": 0,
+    "regress": 0,
+    "fail": 0
+   },
+   "EXTERN-SWAP": {
+    "tried": 206,
+    "changed": 0,
+    "better": 0,
+    "regress": 51,
+    "fail": 128
+   },
+   "STMT-SWAP": {
+    "tried": 28,
+    "changed": 28,
+    "better": 2,
+    "regress": 0,
+    "fail": 0
+   },
+   "SYM-NAMES": {
+    "tried": 41,
+    "changed": 20,
+    "better": 1,
+    "regress": 0,
+    "fail": 0
+   },
+   "TEMP-INTRO": {
+    "tried": 11,
+    "changed": 0,
+    "better": 0,
+    "regress": 0,
+    "fail": 0
+   }
+  },
+  "promoted": false,
+  "out": "D:\\Prog\\simant_recon\\work\\takeover\\full-search\\f_20E8_0903",
+  "time": "2026-09-30T23:41:43",
+  "accepted_since_snapshot": false
+ },
+ "win_UnlockWin": {
+  "module": "root:23AE",
+  "base": [
+   1,
+   34,
+   223,
+   6
+  ],
+  "best": [
+   1,
+   34,
+   223,
+   6
+  ],
+  "path": [],
+  "evals": 600,
+  "reasons": [
+   "length 392 != target 386",
+   "bytes differ (first at +0x5, 217 differing)",
+   "relocation set differs (7 vs 7)"
+  ],
+  "base_reasons": [
+   "length 392 != target 386",
+   "bytes differ (first at +0x5, 217 differing)",
+   "relocation set differs (7 vs 7)"
+  ],
+  "rule_stats": {
+   "REL-SWAP": {
+    "tried": 7,
+    "changed": 0,
+    "better": 0,
+    "regress": 0,
+    "fail": 0
+   },
+   "COMM-SWAP": {
+    "tried": 3,
+    "changed": 0,
+    "better": 0,
+    "regress": 0,
+    "fail": 0
+   },
+   "NOT-CMP": {
+    "tried": 8,
+    "changed": 0,
+    "better": 0,
+    "regress": 0,
+    "fail": 0
+   },
+   "CONST-U": {
+    "tried": 22,
+    "changed": 0,
+    "better": 0,
+    "regress": 0,
+    "fail": 0
+   },
+   "COMPOUND": {
+    "tried": 2,
+    "changed": 0,
+    "better": 0,
+    "regress": 0,
+    "fail": 0
+   },
+   "EMBED": {
+    "tried": 2,
+    "changed": 0,
+    "better": 0,
+    "regress": 0,
+    "fail": 0
+   },
+   "AND-NEST": {
+    "tried": 11,
+    "changed": 9,
+    "better": 0,
+    "regress": 0,
+    "fail": 0
+   },
+   "IF-NEG": {
+    "tried": 7,
+    "changed": 3,
+    "better": 0,
+    "regress": 0,
+    "fail": 0
+   },
+   "CSE-INLINE": {
+    "tried": 46,
+    "changed": 46,
+    "better": 1,
+    "regress": 0,
+    "fail": 0
+   },
+   "PARAM-COPY": {
+    "tried": 19,
+    "changed": 19,
+    "better": 0,
+    "regress": 0,
+    "fail": 0
+   },
+   "DECL-SWAP": {
+    "tried": 37,
+    "changed": 18,
+    "better": 4,
+    "regress": 0,
+    "fail": 0
+   },
+   "PROTO-NAMES": {
+    "tried": 93,
+    "changed": 61,
+    "better": 21,
+    "regress": 0,
+    "fail": 0
+   },
+   "PROTO-TYPE": {
+    "tried": 94,
+    "changed": 63,
+    "better": 23,
+    "regress": 0,
+    "fail": 0
+   },
+   "EXTERN-SWAP": {
+    "tried": 49,
+    "changed": 0,
+    "better": 0,
+    "regress": 24,
+    "fail": 12
+   },
+   "TEMP-INTRO": {
+    "tried": 7,
+    "changed": 0,
+    "better": 0,
+    "regress": 0,
+    "fail": 0
+   },
+   "CASE-SWAP": {
+    "tried": 5,
+    "changed": 0,
+    "better": 0,
+    "regress": 0,
+    "fail": 0
+   },
+   "STMT-SWAP": {
+    "tried": 33,
+    "changed": 33,
+    "better": 0,
+    "regress": 0,
+    "fail": 0
+   },
+   "STORE-LOCAL": {
+    "tried": 15,
+    "changed": 0,
+    "better": 0,
+    "regress": 0,
+    "fail": 10
+   },
+   "SYM-NAMES": {
+    "tried": 140,
+    "changed": 91,
+    "better": 35,
+    "regress": 0,
+    "fail": 0
+   }
+  },
+  "promoted": false,
+  "out": "D:\\Prog\\simant_recon\\work\\takeover\\full-search\\win_UnlockWin",
+  "time": "2026-09-30T23:43:54",
+  "accepted_since_snapshot": false
+ },
+ "f_23E6_0000": {
+  "module": "root:23E6",
+  "base": [
+   1,
+   1,
+   44,
+   3
+  ],
+  "best": [
+   1,
+   1,
+   44,
+   3
+  ],
+  "path": [],
+  "evals": 600,
+  "reasons": [
+   "length 156 != target 159",
+   "bytes differ (first at +0x5d, 41 differing)",
+   "relocation set differs (3 vs 3)"
+  ],
+  "base_reasons": [
+   "length 156 != target 159",
+   "bytes differ (first at +0x5d, 41 differing)",
+   "relocation set differs (3 vs 3)"
+  ],
+  "rule_stats": {
+   "REL-SWAP": {
+    "tried": 60,
+    "changed": 0,
+    "better": 0,
+    "regress": 0,
+    "fail": 0
+   },
+   "COMM-SWAP": {
+    "tried": 54,
+    "changed": 0,
+    "better": 0,
+    "regress": 0,
+    "fail": 0
+   },
+   "NOT-CMP": {
+    "tried": 15,
+    "changed": 0,
+    "better": 0,
+    "regress": 0,
+    "fail": 0
+   },
+   "CONST-U": {
+    "tried": 45,
+    "changed": 0,
+    "better": 0,
+    "regress": 0,
+    "fail": 0
+   },
+   "COMPOUND": {
+    "tried": 40,
+    "changed": 0,
+    "better": 0,
+    "regress": 0,
+    "fail": 0
+   },
+   "CHAIN-ORDER": {
+    "tried": 11,
+    "changed": 11,
+    "better": 0,
+    "regress": 0,
+    "fail": 0
+   },
+   "EMBED": {
+    "tried": 15,
+    "changed": 0,
+    "better": 0,
+    "regress": 0,
+    "fail": 0
+   },
+   "IF-NEG": {
+    "tried": 26,
+    "changed": 26,
+    "better": 0,
+    "regress": 0,
+    "fail": 0
+   },
+   "ELSE-WRAP": {
+    "tried": 16,
+    "changed": 0,
+    "better": 0,
+    "regress": 16,
+    "fail": 0
+   },
+   "FOR-WHILE": {
+    "tried": 15,
+    "changed": 0,
+    "better": 0,
+    "regress": 0,
+    "fail": 0
+   },
+   "PARAM-COPY": {
+    "tried": 32,
+    "changed": 0,
+    "better": 0,
+    "regress": 32,
+    "fail": 0
+   },
+   "DECL-SWAP": {
+    "tried": 21,
+    "changed": 0,
+    "better": 0,
+    "regress": 0,
+    "fail": 0
+   },
+   "DECL-INIT": {
+    "tried": 14,
+    "changed": 0,
+    "better": 0,
+    "regress": 0,
+    "fail": 0
+   },
+   "PROTO-NAMES": {
+    "tried": 48,
+    "changed": 0,
+    "better": 0,
+    "regress": 48,
+    "fail": 0
+   },
+   "PROTO-TYPE": {
+    "tried": 48,
+    "changed": 0,
+    "better": 0,
+    "regress": 48,
+    "fail": 0
+   },
+   "EXTERN-SWAP": {
+    "tried": 19,
+    "changed": 0,
+    "better": 0,
+    "regress": 0,
+    "fail": 0
+   },
+   "TEMP-INTRO": {
+    "tried": 112,
+    "changed": 0,
+    "better": 0,
+    "regress": 112,
+    "fail": 0
+   },
+   "STMT-SWAP": {
+    "tried": 9,
+    "changed": 9,
+    "better": 0,
+    "regress": 0,
+    "fail": 0
+   }
+  },
+  "promoted": false,
+  "out": "D:\\Prog\\simant_recon\\work\\takeover\\full-search\\f_23E6_0000",
+  "time": "2026-09-30T23:47:26",
+  "accepted_since_snapshot": false
+ },
+ "f_2505_0453": {
+  "module": "root:2505",
+  "base": [
+   1,
+   16,
+   88,
+   8
+  ],
+  "best": [
+   1,
+   16,
+   87,
+   6
+  ],
+  "path": [
+   [
+    "DECL-SWAP",
+    "int win; / int idx;"
+   ]
+  ],
+  "evals": 600,
+  "reasons": [
+   "length 126 != target 132",
+   "bytes differ (first at +0x5, 81 differing)",
+   "relocation set differs (3 vs 3)"
+  ],
+  "base_reasons": [
+   "length 124 != target 132",
+   "bytes differ (first at +0x5, 80 differing)",
+   "relocation set differs (3 vs 3)"
+  ],
+  "rule_stats": {
+   "REL-SWAP": {
+    "tried": 36,
+    "changed": 0,
+    "better": 0,
+    "regress": 0,
+    "fail": 0
+   },
+   "COMM-SWAP": {
+    "tried": 43,
+    "changed": 0,
+    "better": 0,
+    "regress": 0,
+    "fail": 0
+   },
+   "CONST-U": {
+    "tried": 84,
+    "changed": 12,
+    "better": 0,
+    "regress": 0,
+    "fail": 0
+   },
+   "EMBED": {
+    "tried": 12,
+    "changed": 0,
+    "better": 0,
+    "regress": 0,
+    "fail": 0
+   },
+   "OR-DUP": {
+    "tried": 16,
+    "changed": 0,
+    "better": 0,
+    "regress": 16,
+    "fail": 0
+   },
+   "ELSE-WRAP": {
+    "tried": 16,
+    "changed": 0,
+    "better": 0,
+    "regress": 16,
+    "fail": 0
+   },
+   "CSE-INLINE": {
+    "tried": 40,
+    "changed": 0,
+    "better": 0,
+    "regress": 40,
+    "fail": 0
+   },
+   "PARAM-COPY": {
+    "tried": 32,
+    "changed": 0,
+    "better": 0,
+    "regress": 32,
+    "fail": 0
+   },
+   "RESULT-LOCAL": {
+    "tried": 16,
+    "changed": 0,
+    "better": 0,
+    "regress": 16,
+    "fail": 0
+   },
+   "DECL-SWAP": {
+    "tried": 25,
+    "changed": 8,
+    "better": 6,
+    "regress": 0,
+    "fail": 0
+   },
+   "DECL-INIT": {
+    "tried": 12,
+    "changed": 0,
+    "better": 0,
+    "regress": 0,
+    "fail": 0
+   },
+   "PROTO-NAMES": {
+    "tried": 32,
+    "changed": 0,
+    "better": 0,
+    "regress": 32,
+    "fail": 0
+   },
+   "PROTO-TYPE": {
+    "tried": 45,
+    "changed": 0,
+    "better": 0,
+    "regress": 30,
+    "fail": 0
+   },
+   "EXTERN-SWAP": {
+    "tried": 71,
+    "changed": 0,
+    "better": 0,
+    "regress": 0,
+    "fail": 15
+   },
+   "SYM-NAMES": {
+    "tried": 120,
+    "changed": 0,
+    "better": 0,
+    "regress": 120,
+    "fail": 0
+   }
+  },
+  "promoted": false,
+  "out": "D:\\Prog\\simant_recon\\work\\takeover\\full-search\\f_2505_0453",
+  "time": "2026-09-30T23:50:34",
+  "accepted_since_snapshot": false
+ },
+ "win_DrawBitMap": {
+  "module": "root:259D",
+  "base": [
+   1,
+   93,
+   620,
+   12
+  ],
+  "best": [
+   1,
+   93,
+   620,
+   12
+  ],
+  "path": [],
+  "evals": 600,
+  "reasons": [
+   "length 675 != target 663",
+   "bytes differ (first at +0x5, 608 differing)",
+   "relocation set differs (16 vs 16)"
+  ],
+  "base_reasons": [
+   "length 675 != target 663",
+   "bytes differ (first at +0x5, 608 differing)",
+   "relocation set differs (16 vs 16)"
+  ],
+  "rule_stats": {
+   "REL-SWAP": {
+    "tried": 8,
+    "changed": 0,
+    "better": 0,
+    "regress": 0,
+    "fail": 0
+   },
+   "COMM-SWAP": {
+    "tried": 30,
+    "changed": 0,
+    "better": 0,
+    "regress": 0,
+    "fail": 0
+   },
+   "NOT-CMP": {
+    "tried": 3,
+    "changed": 0,
+    "better": 0,
+    "regress": 0,
+    "fail": 0
+   },
+   "CONST-U": {
+    "tried": 66,
+    "changed": 14,
+    "better": 0,
+    "regress": 0,
+    "fail": 0
+   },
+   "EMBED": {
+    "tried": 13,
+    "changed": 0,
+    "better": 0,
+    "regress": 0,
+    "fail": 0
+   },
+   "IF-NEG": {
+    "tried": 55,
+    "changed": 55,
+    "better": 0,
+    "regress": 0,
+    "fail": 0
+   },
+   "ELSE-WRAP": {
+    "tried": 4,
+    "changed": 0,
+    "better": 0,
+    "regress": 0,
+    "fail": 0
+   },
+   "CSE-REUSE": {
+    "tried": 19,
+    "changed": 19,
+    "better": 0,
+    "regress": 0,
+    "fail": 0
+   },
+   "PARAM-COPY": {
+    "tried": 50,
+    "changed": 50,
+    "better": 0,
+    "regress": 0,
+    "fail": 0
+   },
+   "DECL-SWAP": {
+    "tried": 6,
+    "changed": 0,
+    "better": 0,
+    "regress": 0,
+    "fail": 0
+   },
+   "DECL-INIT": {
+    "tried": 2,
+    "changed": 0,
+    "better": 0,
+    "regress": 0,
+    "fail": 0
+   },
+   "PROTO-NAMES": {
+    "tried": 76,
+    "changed": 0,
+    "better": 0,
+    "regress": 66,
+    "fail": 0
+   },
+   "PROTO-TYPE": {
+    "tried": 146,
+    "changed": 9,
+    "better": 0,
+    "regress": 106,
+    "fail": 0
+   },
+   "EXTERN-SWAP": {
+    "tried": 20,
+    "changed": 0,
+    "better": 0,
+    "regress": 0,
+    "fail": 0
+   },
+   "TEMP-INTRO": {
+    "tried": 32,
+    "changed": 9,
+    "better": 2,
+    "regress": 0,
+    "fail": 0
+   },
+   "STMT-SWAP": {
+    "tried": 34,
+    "changed": 34,
+    "better": 0,
+    "regress": 0,
+    "fail": 0
+   },
+   "STORE-LOCAL": {
+    "tried": 1,
+    "changed": 0,
+    "better": 0,
+    "regress": 0,
+    "fail": 0
+   },
+   "SYM-NAMES": {
+    "tried": 35,
+    "changed": 0,
+    "better": 0,
+    "regress": 29,
+    "fail": 0
+   }
+  },
+  "promoted": false,
+  "out": "D:\\Prog\\simant_recon\\work\\takeover\\full-search\\win_DrawBitMap",
+  "time": "2026-09-30T23:53:03",
+  "accepted_since_snapshot": false
+ },
+ "f_2815_0165": {
+  "module": "root:2815",
+  "base": [
+   1,
+   9,
+   215,
+   1
+  ],
+  "best": [
+   1,
+   9,
+   215,
+   1
+  ],
+  "path": [],
+  "evals": 600,
+  "reasons": [
+   "length 233 != target 232",
+   "bytes differ (first at +0xb, 214 differing)",
+   "relocation set differs (3 vs 3)"
+  ],
+  "base_reasons": [
+   "length 233 != target 232",
+   "bytes differ (first at +0xb, 214 differing)",
+   "relocation set differs (3 vs 3)"
+  ],
+  "rule_stats": {
+   "REL-SWAP": {
+    "tried": 22,
+    "changed": 0,
+    "better": 0,
+    "regress": 0,
+    "fail": 0
+   },
+   "COMM-SWAP": {
+    "tried": 94,
+    "changed": 0,
+    "better": 0,
+    "regress": 0,
+    "fail": 0
+   },
+   "CONST-U": {
+    "tried": 180,
+    "changed": 71,
+    "better": 6,
+    "regress": 0,
+    "fail": 0
+   },
+   "COMPOUND": {
+    "tried": 4,
+    "changed": 0,
+    "better": 0,
+    "regress": 0,
+    "fail": 0
+   },
+   "EMBED": {
+    "tried": 16,
+    "changed": 0,
+    "better": 0,
+    "regress": 0,
+    "fail": 0
+   },
+   "AND-NEST": {
+    "tried": 1,
+    "changed": 0,
+    "better": 0,
+    "regress": 0,
+    "fail": 0
+   },
+   "PARAM-COPY": {
+    "tried": 60,
+    "changed": 56,
+    "better": 0,
+    "regress": 0,
+    "fail": 0
+   },
+   "PROTO-NAMES": {
+    "tried": 2,
+    "changed": 0,
+    "better": 0,
+    "regress": 0,
+    "fail": 0
+   },
+   "PROTO-TYPE": {
+    "tried": 38,
+    "changed": 0,
+    "better": 0,
+    "regress": 38,
+    "fail": 0
+   },
+   "EXTERN-SWAP": {
+    "tried": 26,
+    "changed": 0,
+    "better": 0,
+    "regress": 0,
+    "fail": 20
+   },
+   "TEMP-INTRO": {
+    "tried": 140,
+    "changed": 75,
+    "better": 4,
+    "regress": 0,
+    "fail": 0
+   },
+   "DECL-SWAP": {
+    "tried": 7,
+    "changed": 0,
+    "better": 0,
+    "regress": 0,
+    "fail": 0
+   },
+   "LOCAL-SPLIT": {
+    "tried": 3,
+    "changed": 3,
+    "better": 0,
+    "regress": 0,
+    "fail": 0
+   },
+   "DECL-INIT": {
+    "tried": 4,
+    "changed": 0,
+    "better": 0,
+    "regress": 0,
+    "fail": 0
+   },
+   "CSE-REUSE": {
+    "tried": 1,
+    "changed": 0,
+    "better": 0,
+    "regress": 0,
+    "fail": 0
+   },
+   "STMT-SWAP": {
+    "tried": 1,
+    "changed": 1,
+    "better": 1,
+    "regress": 0,
+    "fail": 0
+   },
+   "LOCAL-MERGE": {
+    "tried": 1,
+    "changed": 0,
+    "better": 0,
+    "regress": 0,
+    "fail": 0
+   }
+  },
+  "promoted": false,
+  "out": "D:\\Prog\\simant_recon\\work\\takeover\\full-search\\f_2815_0165",
+  "time": "2026-09-30T23:55:05",
+  "accepted_since_snapshot": false
+ },
+ "f_284A_0138": {
+  "module": "root:284A",
+  "base": [
+   1,
+   6,
+   9,
+   0
+  ],
+  "best": [
+   1,
+   6,
+   9,
+   0
+  ],
+  "path": [],
+  "evals": 151,
+  "reasons": [
+   "bytes differ (first at +0xc, 9 differing)"
+  ],
+  "base_reasons": [
+   "bytes differ (first at +0xc, 9 differing)"
+  ],
+  "rule_stats": {
+   "COMM-SWAP": {
+    "tried": 19,
+    "changed": 0,
+    "better": 0,
+    "regress": 0,
+    "fail": 0
+   },
+   "CONST-U": {
+    "tried": 17,
+    "changed": 0,
+    "better": 0,
+    "regress": 0,
+    "fail": 0
+   },
+   "PARAM-COPY": {
+    "tried": 7,
+    "changed": 0,
+    "better": 0,
+    "regress": 5,
+    "fail": 0
+   },
+   "RESULT-LOCAL": {
+    "tried": 12,
+    "changed": 0,
+    "better": 0,
+    "regress": 8,
+    "fail": 0
+   },
+   "TEMP-INTRO": {
+    "tried": 48,
+    "changed": 0,
+    "better": 0,
+    "regress": 32,
+    "fail": 0
+   },
+   "SYM-NAMES": {
+    "tried": 42,
+    "changed": 0,
+    "better": 0,
+    "regress": 29,
+    "fail": 0
+   },
+   "CSE-INLINE": {
+    "tried": 3,
+    "changed": 0,
+    "better": 0,
+    "regress": 0,
+    "fail": 0
+   },
+   "DECL-INIT": {
+    "tried": 3,
+    "changed": 0,
+    "better": 0,
+    "regress": 0,
+    "fail": 0
+   }
+  },
+  "promoted": false,
+  "out": "D:\\Prog\\simant_recon\\work\\takeover\\full-search\\f_284A_0138",
+  "time": "2026-09-30T23:56:07",
+  "accepted_since_snapshot": false
+ },
+ "f_293A_017F": {
+  "module": "root:293A",
+  "base": [
+   1,
+   7,
+   7,
+   0
+  ],
+  "best": [
+   1,
+   6,
+   6,
+   0
+  ],
+  "path": [
+   [
+    "STMT-SWAP",
+    "ok = 0; <> ready = 0;"
+   ]
+  ],
+  "evals": 600,
+  "reasons": [
+   "bytes differ (first at +0x5, 6 differing)",
+   "relocation order inside a target group differs from the object's FIXUPP order"
+  ],
+  "base_reasons": [
+   "bytes differ (first at +0x5, 7 differing)",
+   "relocation order inside a target group differs from the object's FIXUPP order"
+  ],
+  "rule_stats": {
+   "REL-SWAP": {
+    "tried": 40,
+    "changed": 0,
+    "better": 0,
+    "regress": 0,
+    "fail": 0
+   },
+   "COMM-SWAP": {
+    "tried": 30,
+    "changed": 0,
+    "better": 0,
+    "regress": 0,
+    "fail": 0
+   },
+   "NOT-CMP": {
+    "tried": 50,
+    "changed": 0,
+    "better": 0,
+    "regress": 0,
+    "fail": 0
+   },
+   "CONST-U": {
+    "tried": 218,
+    "changed": 22,
+    "better": 0,
+    "regress": 0,
+    "fail": 0
+   },
+   "COMPOUND": {
+    "tried": 48,
+    "changed": 0,
+    "better": 0,
+    "regress": 0,
+    "fail": 0
+   },
+   "ELSE-WRAP": {
+    "tried": 8,
+    "changed": 0,
+    "better": 0,
+    "regress": 0,
+    "fail": 0
+   },
+   "FOR-WHILE": {
+    "tried": 24,
+    "changed": 0,
+    "better": 0,
+    "regress": 0,
+    "fail": 0
+   },
+   "DECL-SWAP": {
+    "tried": 22,
+    "changed": 0,
+    "better": 0,
+    "regress": 0,
+    "fail": 0
+   },
+   "DECL-INIT": {
+    "tried": 8,
+    "changed": 0,
+    "better": 0,
+    "regress": 0,
+    "fail": 0
+   },
+   "PROTO-NAMES": {
+    "tried": 13,
+    "changed": 0,
+    "better": 0,
+    "regress": 0,
+    "fail": 0
+   },
+   "PROTO-TYPE": {
+    "tried": 50,
+    "changed": 28,
+    "better": 0,
+    "regress": 0,
+    "fail": 0
+   },
+   "EXTERN-SWAP": {
+    "tried": 40,
+    "changed": 0,
+    "better": 0,
+    "regress": 0,
+    "fail": 30
+   },
+   "TEMP-INTRO": {
+    "tried": 32,
+    "changed": 0,
+    "better": 0,
+    "regress": 0,
+    "fail": 0
+   },
+   "STMT-SWAP": {
+    "tried": 9,
+    "changed": 9,
+    "better": 9,
+    "regress": 0,
+    "fail": 0
+   },
+   "SYM-NAMES": {
+    "tried": 8,
+    "changed": 0,
+    "better": 0,
+    "regress": 0,
+    "fail": 0
+   }
+  },
+  "promoted": false,
+  "out": "D:\\Prog\\simant_recon\\work\\takeover\\full-search\\f_293A_017F",
+  "time": "2026-10-01T00:00:13",
+  "accepted_since_snapshot": true
+ },
+ "f_29D6_000A": {
+  "module": "root:29D6",
+  "base": [
+   1,
+   6,
+   72,
+   4
+  ],
+  "best": [
+   1,
+   6,
+   72,
+   4
+  ],
+  "path": [],
+  "evals": 600,
+  "reasons": [
+   "length 116 != target 120",
+   "bytes differ (first at +0x5, 68 differing)",
+   "relocation set differs (3 vs 3)"
+  ],
+  "base_reasons": [
+   "length 116 != target 120",
+   "bytes differ (first at +0x5, 68 differing)",
+   "relocation set differs (3 vs 3)"
+  ],
+  "rule_stats": {
+   "COMM-SWAP": {
+    "tried": 91,
+    "changed": 0,
+    "better": 0,
+    "regress": 0,
+    "fail": 0
+   },
+   "CONST-U": {
+    "tried": 199,
+    "changed": 0,
+    "better": 0,
+    "regress": 0,
+    "fail": 0
+   },
+   "COMPOUND": {
+    "tried": 9,
+    "changed": 0,
+    "better": 0,
+    "regress": 0,
+    "fail": 0
+   },
+   "EMBED": {
+    "tried": 43,
+    "changed": 0,
+    "better": 0,
+    "regress": 0,
+    "fail": 0
+   },
+   "PARAM-COPY": {
+    "tried": 55,
+    "changed": 55,
+    "better": 0,
+    "regress": 0,
+    "fail": 0
+   },
+   "PROTO-NAMES": {
+    "tried": 7,
+    "changed": 0,
+    "better": 0,
+    "regress": 0,
+    "fail": 0
+   },
+   "PROTO-TYPE": {
+    "tried": 44,
+    "changed": 36,
+    "better": 0,
+    "regress": 0,
+    "fail": 0
+   },
+   "TEMP-INTRO": {
+    "tried": 132,
+    "changed": 132,
+    "better": 0,
+    "regress": 0,
+    "fail": 0
+   },
+   "CSE-INLINE": {
+    "tried": 3,
+    "changed": 3,
+    "better": 1,
+    "regress": 0,
+    "fail": 0
+   },
+   "DECL-SWAP": {
+    "tried": 8,
+    "changed": 0,
+    "better": 0,
+    "regress": 0,
+    "fail": 0
+   },
+   "DECL-INIT": {
+    "tried": 4,
+    "changed": 0,
+    "better": 0,
+    "regress": 0,
+    "fail": 0
+   },
+   "LOCAL-SPLIT": {
+    "tried": 2,
+    "changed": 2,
+    "better": 1,
+    "regress": 0,
+    "fail": 0
+   },
+   "LOCAL-MERGE": {
+    "tried": 3,
+    "changed": 3,
+    "better": 3,
+    "regress": 0,
+    "fail": 0
+   }
+  },
+  "promoted": false,
+  "out": "D:\\Prog\\simant_recon\\work\\takeover\\full-search\\f_29D6_000A",
+  "time": "2026-10-01T00:02:07",
+  "accepted_since_snapshot": false
+ }
+}

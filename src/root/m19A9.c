@@ -1,5 +1,7 @@
 /*
- * Database record reader (root module, code frame 19A9).
+ * Database record reader (root module, code frame 19A9; the object starts at 19A9:0008).
+ * The three empty functions at 19A95-19A97 end the index module 1986 (CODEALIGN-1:
+ * an MSC code segment is WORD aligned, so this object cannot start at the odd 19A95).
  * Win16 counterpart: DBRecall.  The DOS game opens the database read-only:
  * add/delete/pack are stubs that Punt.
  */
@@ -55,18 +57,6 @@ char far *g_36F6[] = {
     "INST", "CARD", "SONG", "CARDTITLE", "MIDI", "STYLE", "PATS",
     "", "", "", "", "", ""
 };
-
-void far f_19A9_0005(void)
-{
-}
-
-void far f_19A9_0006(void)
-{
-}
-
-void far f_19A9_0007(void)
-{
-}
 
 int far f_19A9_0008(char far * far *handle, int far *size, int object, int type)
 {

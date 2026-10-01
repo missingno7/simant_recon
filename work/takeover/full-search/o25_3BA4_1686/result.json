@@ -1,0 +1,296 @@
+{
+ "function": "o25_3BA4_1686",
+ "module": "S25:3BA4",
+ "base_score": [
+  1,
+  38,
+  491,
+  6
+ ],
+ "best_score": [
+  1,
+  38,
+  491,
+  6
+ ],
+ "best_path": [],
+ "best_res": {
+  "compile_ok": true,
+  "claims": {
+   "DoAntSimY": true,
+   "o25_3BA4_0999": true,
+   "o25_3BA4_0C01": true,
+   "o25_3BA4_0DFB": true,
+   "ExitNest": true,
+   "o25_3BA4_13AB": true,
+   "o25_3BA4_1581": true,
+   "o25_3BA4_1686": false,
+   "o25_3BA4_188A": true,
+   "o25_3BA4_1935": true,
+   "o25_3BA4_19AD": true,
+   "o25_3BA4_1A0D": true,
+   "o25_3BA4_1A9F": true
+  },
+  "data": {
+   "CONST": true,
+   "_DATA": true
+  },
+  "order": {
+   "DoAntSimY": "GROUPED",
+   "o25_3BA4_0999": "GROUPED",
+   "o25_3BA4_0C01": "GROUPED",
+   "o25_3BA4_0DFB": "GROUPED",
+   "ExitNest": "GROUPED",
+   "o25_3BA4_13AB": "GROUPED",
+   "o25_3BA4_1581": "GROUPED",
+   "o25_3BA4_1686": "EXACT",
+   "o25_3BA4_188A": "EXACT",
+   "o25_3BA4_1935": "EXACT",
+   "o25_3BA4_19AD": "GROUPED",
+   "o25_3BA4_1A0D": "EXACT",
+   "o25_3BA4_1A9F": "EXACT"
+  },
+  "module_reasons": [],
+  "reasons": [
+   "length 510 != target 516",
+   "bytes differ (first at +0x4, 485 differing)",
+   "relocation set differs (7 vs 7)"
+  ],
+  "exact": false,
+  "all_exact": false,
+  "score": [
+   1,
+   38,
+   491,
+   6
+  ],
+  "fhash": "6bada35dd54a22bf",
+  "length": 510
+ },
+ "base_res": {
+  "compile_ok": true,
+  "claims": {
+   "DoAntSimY": true,
+   "o25_3BA4_0999": true,
+   "o25_3BA4_0C01": true,
+   "o25_3BA4_0DFB": true,
+   "ExitNest": true,
+   "o25_3BA4_13AB": true,
+   "o25_3BA4_1581": true,
+   "o25_3BA4_1686": false,
+   "o25_3BA4_188A": true,
+   "o25_3BA4_1935": true,
+   "o25_3BA4_19AD": true,
+   "o25_3BA4_1A0D": true,
+   "o25_3BA4_1A9F": true
+  },
+  "data": {
+   "CONST": true,
+   "_DATA": true
+  },
+  "order": {
+   "DoAntSimY": "GROUPED",
+   "o25_3BA4_0999": "GROUPED",
+   "o25_3BA4_0C01": "GROUPED",
+   "o25_3BA4_0DFB": "GROUPED",
+   "ExitNest": "GROUPED",
+   "o25_3BA4_13AB": "GROUPED",
+   "o25_3BA4_1581": "GROUPED",
+   "o25_3BA4_1686": "EXACT",
+   "o25_3BA4_188A": "EXACT",
+   "o25_3BA4_1935": "EXACT",
+   "o25_3BA4_19AD": "GROUPED",
+   "o25_3BA4_1A0D": "EXACT",
+   "o25_3BA4_1A9F": "EXACT"
+  },
+  "module_reasons": [],
+  "reasons": [
+   "length 510 != target 516",
+   "bytes differ (first at +0x4, 485 differing)",
+   "relocation set differs (7 vs 7)"
+  ],
+  "exact": false,
+  "all_exact": false,
+  "score": [
+   1,
+   38,
+   491,
+   6
+  ],
+  "fhash": "6bada35dd54a22bf",
+  "length": 510
+ },
+ "evals": 600,
+ "compiles": 601,
+ "rule_stats": {
+  "REL-SWAP": {
+   "tried": 11,
+   "changed": 0,
+   "better": 0,
+   "regress": 0,
+   "fail": 0
+  },
+  "COMM-SWAP": {
+   "tried": 10,
+   "changed": 0,
+   "better": 0,
+   "regress": 0,
+   "fail": 0
+  },
+  "TERN-SWAP": {
+   "tried": 13,
+   "changed": 13,
+   "better": 0,
+   "regress": 0,
+   "fail": 0
+  },
+  "NOT-CMP": {
+   "tried": 5,
+   "changed": 0,
+   "better": 0,
+   "regress": 0,
+   "fail": 0
+  },
+  "CONST-U": {
+   "tried": 32,
+   "changed": 0,
+   "better": 0,
+   "regress": 0,
+   "fail": 0
+  },
+  "COMPOUND": {
+   "tried": 6,
+   "changed": 0,
+   "better": 0,
+   "regress": 0,
+   "fail": 0
+  },
+  "CHAIN-ORDER": {
+   "tried": 16,
+   "changed": 16,
+   "better": 0,
+   "regress": 0,
+   "fail": 0
+  },
+  "CHAIN-SPLIT": {
+   "tried": 1,
+   "changed": 0,
+   "better": 0,
+   "regress": 0,
+   "fail": 0
+  },
+  "EMBED": {
+   "tried": 4,
+   "changed": 0,
+   "better": 0,
+   "regress": 0,
+   "fail": 0
+  },
+  "AND-NEST": {
+   "tried": 15,
+   "changed": 15,
+   "better": 0,
+   "regress": 0,
+   "fail": 0
+  },
+  "IF-NEG": {
+   "tried": 33,
+   "changed": 31,
+   "better": 0,
+   "regress": 0,
+   "fail": 0
+  },
+  "ELSE-WRAP": {
+   "tried": 3,
+   "changed": 0,
+   "better": 0,
+   "regress": 0,
+   "fail": 0
+  },
+  "TERN-IF": {
+   "tried": 1,
+   "changed": 0,
+   "better": 0,
+   "regress": 0,
+   "fail": 0
+  },
+  "FOR-WHILE": {
+   "tried": 3,
+   "changed": 0,
+   "better": 0,
+   "regress": 0,
+   "fail": 0
+  },
+  "PARAM-COPY": {
+   "tried": 105,
+   "changed": 105,
+   "better": 11,
+   "regress": 0,
+   "fail": 0
+  },
+  "DECL-SWAP": {
+   "tried": 10,
+   "changed": 0,
+   "better": 0,
+   "regress": 0,
+   "fail": 0
+  },
+  "DECL-INIT": {
+   "tried": 1,
+   "changed": 0,
+   "better": 0,
+   "regress": 0,
+   "fail": 0
+  },
+  "PROTO-NAMES": {
+   "tried": 9,
+   "changed": 0,
+   "better": 0,
+   "regress": 8,
+   "fail": 0
+  },
+  "PROTO-TYPE": {
+   "tried": 33,
+   "changed": 0,
+   "better": 0,
+   "regress": 16,
+   "fail": 0
+  },
+  "EXTERN-SWAP": {
+   "tried": 74,
+   "changed": 0,
+   "better": 0,
+   "regress": 12,
+   "fail": 8
+  },
+  "TEMP-INTRO": {
+   "tried": 5,
+   "changed": 0,
+   "better": 0,
+   "regress": 0,
+   "fail": 0
+  },
+  "STMT-SWAP": {
+   "tried": 56,
+   "changed": 55,
+   "better": 0,
+   "regress": 0,
+   "fail": 0
+  },
+  "STORE-LOCAL": {
+   "tried": 7,
+   "changed": 0,
+   "better": 0,
+   "regress": 0,
+   "fail": 0
+  },
+  "SYM-NAMES": {
+   "tried": 147,
+   "changed": 0,
+   "better": 0,
+   "regress": 144,
+   "fail": 0
+  }
+ },
+ "tried_count": 600
+}

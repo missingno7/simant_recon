@@ -1,0 +1,40 @@
+--- base.c
++++ best.c
+@@ -100,7 +100,7 @@
+ static int s_2F6E = 0;
+ 
+ void far f_171C_07BE(void);
+-Block far * far f_171C_0160(Block far *b, int merge);
++Block far * far f_171C_0160(Block far *, int);
+ void far f_171C_068C(Block far *b, unsigned paras, int type);
+ Block far * far f_171C_0EEA(unsigned paras, int type, char far *name, int noems);
+ Block far * far f_171C_0FBC(unsigned paras, int type);
+@@ -514,6 +514,8 @@
+     unsigned paras;
+     long size;
+     Block far *nb;
++    int tmp2;
++    int val2;
+ 
+     moved = 0;
+     b = g_91A4;
+@@ -530,7 +532,8 @@
+             if (!n->lock && (n->type == 1 || n->type == 3) && b->paras >= n->paras)
+                 break;
+         }
+-        if (SEG(n) >= end)
++        tmp2 = SEG(n);
++        if (tmp2 >= end)
+             continue;
+         paras = n->paras;
+         size = n->size;
+@@ -543,7 +546,8 @@
+         nb->age = n->age;
+         nb->attr = n->attr;
+         _disable();
+-        *(char far * far *)((char far *)s_2F46 + nb->handle) = (char far *)nb + 0x20000L;
++        val2 = (char far *)nb + 0x20000L;
++        *(char far * far *)((char far *)s_2F46 + nb->handle) = val2;
+         _enable();
+         f_171C_0160(n, 1);
+         moved = 1;

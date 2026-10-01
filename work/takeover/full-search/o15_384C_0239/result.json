@@ -1,0 +1,202 @@
+{
+ "function": "o15_384C_0239",
+ "module": "S15:384C",
+ "base_score": [
+  1,
+  2,
+  2,
+  0
+ ],
+ "best_score": [
+  1,
+  2,
+  2,
+  0
+ ],
+ "best_path": [],
+ "best_res": {
+  "compile_ok": true,
+  "claims": {
+   "o15_384C_0000": true,
+   "LoadMonoPats": true,
+   "o15_384C_0125": true,
+   "o15_384C_0152": true,
+   "MenuQuit": true,
+   "o15_384C_0239": false,
+   "SetDefaultWindows": true,
+   "NewGame": true
+  },
+  "data": {
+   "_DATA": true,
+   "CONST": true
+  },
+  "order": {
+   "o15_384C_0000": "EXACT",
+   "LoadMonoPats": "GROUPED",
+   "o15_384C_0125": "EXACT",
+   "o15_384C_0152": "GROUPED",
+   "MenuQuit": "EXACT",
+   "o15_384C_0239": "GROUPED",
+   "SetDefaultWindows": "GROUPED",
+   "NewGame": "GROUPED"
+  },
+  "module_reasons": [],
+  "reasons": [
+   "bytes differ (first at +0x42, 2 differing)"
+  ],
+  "exact": false,
+  "all_exact": false,
+  "score": [
+   1,
+   2,
+   2,
+   0
+  ],
+  "fhash": "aa067a1c86cfc5bd",
+  "length": 326
+ },
+ "base_res": {
+  "compile_ok": true,
+  "claims": {
+   "o15_384C_0000": true,
+   "LoadMonoPats": true,
+   "o15_384C_0125": true,
+   "o15_384C_0152": true,
+   "MenuQuit": true,
+   "o15_384C_0239": false,
+   "SetDefaultWindows": true,
+   "NewGame": true
+  },
+  "data": {
+   "_DATA": true,
+   "CONST": true
+  },
+  "order": {
+   "o15_384C_0000": "EXACT",
+   "LoadMonoPats": "GROUPED",
+   "o15_384C_0125": "EXACT",
+   "o15_384C_0152": "GROUPED",
+   "MenuQuit": "EXACT",
+   "o15_384C_0239": "GROUPED",
+   "SetDefaultWindows": "GROUPED",
+   "NewGame": "GROUPED"
+  },
+  "module_reasons": [],
+  "reasons": [
+   "bytes differ (first at +0x42, 2 differing)"
+  ],
+  "exact": false,
+  "all_exact": false,
+  "score": [
+   1,
+   2,
+   2,
+   0
+  ],
+  "fhash": "aa067a1c86cfc5bd",
+  "length": 326
+ },
+ "evals": 600,
+ "compiles": 601,
+ "rule_stats": {
+  "REL-SWAP": {
+   "tried": 6,
+   "changed": 0,
+   "better": 0,
+   "regress": 0,
+   "fail": 0
+  },
+  "COMM-SWAP": {
+   "tried": 12,
+   "changed": 0,
+   "better": 0,
+   "regress": 0,
+   "fail": 0
+  },
+  "TERN-SWAP": {
+   "tried": 9,
+   "changed": 9,
+   "better": 0,
+   "regress": 0,
+   "fail": 0
+  },
+  "NOT-CMP": {
+   "tried": 18,
+   "changed": 0,
+   "better": 0,
+   "regress": 0,
+   "fail": 0
+  },
+  "CONST-U": {
+   "tried": 150,
+   "changed": 0,
+   "better": 0,
+   "regress": 0,
+   "fail": 0
+  },
+  "TERN-IF": {
+   "tried": 6,
+   "changed": 0,
+   "better": 0,
+   "regress": 0,
+   "fail": 0
+  },
+  "PARAM-COPY": {
+   "tried": 6,
+   "changed": 0,
+   "better": 0,
+   "regress": 0,
+   "fail": 0
+  },
+  "DECL-SWAP": {
+   "tried": 20,
+   "changed": 0,
+   "better": 0,
+   "regress": 0,
+   "fail": 0
+  },
+  "PROTO-NAMES": {
+   "tried": 71,
+   "changed": 0,
+   "better": 0,
+   "regress": 0,
+   "fail": 0
+  },
+  "PROTO-TYPE": {
+   "tried": 148,
+   "changed": 0,
+   "better": 0,
+   "regress": 0,
+   "fail": 20
+  },
+  "EXTERN-SWAP": {
+   "tried": 86,
+   "changed": 0,
+   "better": 0,
+   "regress": 0,
+   "fail": 1
+  },
+  "TEMP-INTRO": {
+   "tried": 4,
+   "changed": 0,
+   "better": 0,
+   "regress": 0,
+   "fail": 0
+  },
+  "CASE-SWAP": {
+   "tried": 16,
+   "changed": 0,
+   "better": 0,
+   "regress": 0,
+   "fail": 0
+  },
+  "SYM-NAMES": {
+   "tried": 48,
+   "changed": 0,
+   "better": 0,
+   "regress": 0,
+   "fail": 0
+  }
+ },
+ "tried_count": 600
+}

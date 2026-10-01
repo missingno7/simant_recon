@@ -1,131 +1,247 @@
-# Handoff: state and next steps (2026-09-30)
+# Handoff: state and next steps (2026-10-01)
 
-Read this first, then README.md, AGENTS.md, docs/worker-brief.md, docs/codegen-rules.md.
-`python tools/validate.py` is the single source of truth (writes docs/progress.md); every
-number below is from the validated, pushed tree (origin/main).
+Read README.md, AGENTS.md, docs/codegen-rules.md and docs/tu-evidence.md before work.
+`python tools/validate.py` is the source of truth for totals (docs/progress.md/json).
+The latest DrawColonyBars acceptance checkpoint passed full validation, including all tests
+and all 45 compiler probes. The selector checkpoint previously passed all modules and
+44 probes. Hybrid checks are retained alongside their acceptance transcripts.
+The changes below are in the working tree; publication status must be checked with Git.
 
-## 1. Where the reconstruction stands
+## 1. Reconstruction state
 
-| Measure (docs/progress.md) | Value |
+| Measure | Validated value |
 |---|---:|
-| exact C functions / bytes | 1,227 / 224,248 |
-| exact genuine assembly (symbolic MASM, all 378 ASM claims classified genuine) | 50,441 (+1,481 code-segment data) |
-| ASM used as a workaround for original C | 0 |
-| complete translation units (TU) / with proven cross-function relocation order | 88 / 87 |
-| historical MSC runtime accepted | 90 members, 12,339 bytes code + 1,559 data |
-| data accepted (far 77,846) | 111,308 bytes |
-| unresolved game code | 28,628 bytes |
-| unresolved data | 3,181 bytes |
-| RTLink/Plus manager (third-party, no library available) | 17,001 bytes debt |
+| exact C functions / bytes | 1,241 / 235,732 |
+| genuine symbolic assembly / code-segment data | 50,441 / 1,481 bytes |
+| ASM used as a workaround for C | 0 |
+| complete TUs / with proven cross-function relocation order | 94 / 93 |
+| accepted MSC runtime | 90 members; 12,339 code + 2,021 data bytes |
+| accepted game data / far data | 113,884 / 80,310 bytes |
+| unresolved game code / data | 17,144 / 129 bytes |
+| RTLink manager and associated metadata debt | 17,001 bytes |
+| owned functions / known functions | 1,698 / 1,730 |
 
-Proof levels are reported separately: bytes in complete vs partial modules, steered
-(8,119 B, dummy constructs, disclosed), layout-inferred (source layout chosen from
-relocation-order / identifier-count evidence), within-group order pending, asm-transcribed,
-opaque data, runtime words derived from the original.
+Proof quality is separate from coverage: 14,115 C bytes are STEERED, 19,432 are
+layout-inferred, and 11,742 have within-group order pending. S00:31AD is the only
+complete TU whose cross-function relocation order remains pending. FAR_BSS contains
+19,408 zero bytes, but 14,928 bytes still have unverified declaration sizes. The opaque
+data lint reports 6,397 bytes and includes false positives from typed numeric tables.
+See the generated report for the full categories; these are not a historical freeze.
 
-**Whole-build harness** (`python tools/link.py`, docs/whole-build.md): (a) own bytes placed
-from freshly compiled objects; (b) the hybrid EXE (own bytes + explicitly labelled debt copied
-from the original) is **byte-identical to SIMANT.EXE** (SHA-256 aa0596c6…4f11) — this proves
-our contributions sit at the right addresses with no gaps/overlaps; hybrid bytes are never
-counted as reconstruction. (c) independent historical link: see §4.
+`python tools/link.py --reuse` produces a byte-identical **hybrid** SIMANT.EXE
+(SHA-256 `aa0596c6766322a8229ee3c36e57048c92adc82d50fbe2ef37afb8b85fcf4f11`).
+It places compiled contributions and copies explicitly labelled debt from the original.
+That proves placement and integration, not a fully independent reconstruction.
 
-## 2. Established facts (all with probes / evidence)
+## 2. Accepted changes in the takeover checkpoint
 
-* Compiler: **MSC 6.00AX** (`CL /EM`, DOS-extended; profile `msc600ax`, headless DOSBox-X),
-  CONFIRMED (VER-3). Headers from the verified 6.00A retail disks (55 files pinned).
-* Per-file debug option: `/Zi` in most modules (ZI-1/2/3), none in 277E, 0798, 0BE8, S05:35F5,
-  295C, 208F; `/Zd` in 1C62. Decide per module by relocation-order evidence.
-* Assembly: MASM 5.10 reproduction; ASM-1/ASM-2/IDIOM-1 classify genuine assembly.
-* Linker: Pocket Soft RTLink/Plus (late 1991). VEC-1 (vectors per symbol via ALWAYS list;
-  NEVER for direct references), DATAPTR-1, relocation groups per frame by target symbol,
-  group order = hash of the symbol-record creation index (not names; docs/level-c-link.md).
-* ~40 compiler codegen rules (docs/codegen-rules.md, evidence/codegen/*.json, reproduced by
-  validate): slot order, CSE temps, identifier-count sensitivity (period 17, SYM-1), NAME-3/4,
-  REG-2..6, ALIAS-1, STORE-1, DEAD-1/2, LOOP-1, PROTO-1/2, SPLIT-1, TERN-1, BSS-1/2, FARSEG-1, …
+* root:295C is now a complete, original-order TU with `/Zi`. The final 75-byte MIDI
+  function matches through a folded unsigned-byte range expression; it is explicitly
+  STEERED because its eliminated expression is unknown. CSE-1 records the controls.
+* CODEALIGN-1 is installed and reproduced. The three RETF stubs at 19A95-19A97 now
+  belong to root:1986; root:19A9 starts at the WORD-aligned 19A98. The old complete
+  extent was released and replaced through promote.py, with journal entries.
+* S04:35F5 is a complete TU: DrawMiniMapCursor's coordinate statement order now
+  reproduces all 150 bytes and relocation evidence naturally.
+* S09 owns the 2,464-byte saved-state descriptor table: typed size/count/symbolic-pointer
+  records, 307 pointer relocations, no absolute-address capsules. Target-only extern
+  declarations remain type hypotheses. Existing S09 code/data claims rechecked exactly.
+* S05:3663 is now a complete TU with 744 exact code bytes and 112 data bytes.
+  DoExpMenu reads the event low byte through an unsigned-char lvalue; BYTE-1 records
+  the one-CMP-byte word-mask contrast. Its WORD-aligned start is 36634, immediately
+  after the preceding proven contribution, rather than the paragraph frame base.
+* The pinned MSC `syserr.c` member contributes 462 data bytes, grounded by two registered
+  publics and all 38 pointer relocations. `promote.py --runtime-data syserr.c` is the
+  single-writer acceptance route; verification and negative anchor tests are installed.
+* root:0250 DrawCurBalloons now matches 1,680 code bytes, fixups and relocation sets.
+  Moving its real drawing-callback declaration earlier supplies the declaration context;
+  within-group relocation order remains explicit debt. The other four bodies stay scaffolded.
+* S23 win_GetStyleTextHeight now matches 455 bytes and relocation order. Natural nested
+  conditions and declaration placement reproduce the compiler result. Bringing the real
+  DisplayCard loader/locker prototypes earlier preserves the other six accepted claims
+  and all four data contributions; no dummy identifiers were accepted.
+* root:0250 DrawSpider now matches 1,433 bytes, 132 fixups and grouped relocation order.
+  Moving two real variable declarations before 1018, assigning rectangle left before top,
+  and using conditional image-mode calls reproduce the stack homes and AX selector.
+  The module's other 49 claims and all private data remain exact; no assembly or dummy
+  identifiers were introduced. Three other bodies remain scaffolded. Controls are in
+  `work/takeover/spider/`; the latest acceptance validation passes all 38 probes.
 
-## 3. Remaining game code (~28.6 KB, ~40 functions) — all hard residues
+* S08 RandWorld now owns 1,355 exact code bytes, bound fixups and relocation sets.
+  Literal boundary-column indexes remove the old dead y store; the first-loop zero
+  expression is explicitly STEERED because its eliminated original source is unknown.
+  ZERO-1 records the positive and four-byte-longer literal-zero negative control.
+  All prior 17 claims and both data contributions remain exact. Within-group relocation
+  order is pending; complete-TU trials under Zi and Zd were refused, so S08 remains
+  partial. Controls and refusal transcripts are retained in `work/takeover/randworld/`.
 
-Current residue per function: `work/resI/survey.txt` plus the later reports
-(resJ: `work/resJ/residue.txt`, sub-dirs dle/s06/ovl/s23/mem; autosearch:
-`work/autosearch/results.md`). Best drafts sit in SCAFFOLD blocks of the canonical
-sources or in those directories. Largest items:
+* root:2815 owns the 36-byte instrument setter. Splitting the earlier scaffolded
+  volume and instrument-pointer reads establishes the required private segment-word
+  order (CONST-1). The earlier volume function remains unclaimed. Positive and
+  negative whole-module controls are in `work/takeover/adlib-setter/`.
+* root:290D is a complete TU after recovering the 138-byte sample-delta decoder in
+  natural C. Native right shift, counter initialization order and removal of the
+  draft's unused padding variable reproduce the code without inline assembly.
+  The extent starts at 290DE after the preceding contribution ends at 290DD and
+  a one-byte WORD-alignment fill. Controls are in `work/takeover/delta/`.
 
-| Module | Open | Notes |
-|---|---|---|
-| root:0250 | 1018, 129E, DrawSpider, DrawCurBalloons, DrawBalloons | 7–10 missing natural identifiers before 1018 (idscan); DrawCurBalloons exact at +5..11 |
-| S25:3BA4 | DoAntMoveY (+1035, 1686) | 13 B slot swap tx/tattr; steered stand-in holds 10 claims' record order |
-| S10:35F5 | 0384 | 1746 vs 1759 |
-| S09:35F5 | FileSelect | 30 B, 4 causes; Win16 drafts exist in D:\Prog\simantw_recon\build\lift\open\FileSelect.c (unread) |
-| S23:39C7 | GetStyleTextHeight, PrintStyleTextInRect, DisplayCard | lineH kept in memory |
-| root:171C | 0CF4, 0160 (2 B `mov dx,es` vs `cx`: 32-bit arithmetic lead), 09CC, 0ADC, 0FBC | draft work/resJ/mem/best_m171C.c |
-| others | S13 InvertPatch/DrawColonyBars, S14 CalcScore, S17 0039, S24 drawHistGraph, S04/S12 cursor, 1E57 038E, 259D DrawBitMap, 0CDB SpiderScan, 2815 0165/0275, 290D 000E, 284A 0138, 23E6 0000, 1C62 0415, 0E2E LessonDone, S08 RandWorld, 1A96, 1986, 20E8 0903, 23AE, 2505 0453, 29D6, 295C 0391, S15 0239, 293A 017F, S05:3663 DoExpMenu | see survey |
+* S25 DoAntMoveY now owns 1,990 exact bytes. USE-1 records the folded unsigned
+  attribute read that reproduces address-taken local stack-slot ranking; it is
+  STEERED because the original eliminated expression is unknown. All 12 earlier
+  claims and private data remain exact. The changed object record boundaries leave
+  2,458 additional earlier S25 bytes with within-group order pending; that proof
+  debt is counted separately from byte coverage. Controls: work/takeover/antmove/.
+* root:293A is a complete TU at 293A6:295CA after the 171-byte MPU polling body.
+  LIFE-1 records its STEERED folded success-flag read. Two inferred continuation
+  labels reproduce the CodeView object record breaks; all nine functions, private
+  data and complete-module relocation order pass. Controls: work/takeover/mpu/.
 
-Recommended next pass: run the rule-driven search first —
-`python tools/autosearch.py --all` (or per function), continuing from
-`work/autosearch/results.json` — then hand-work what it cannot solve. Twins
-(A/B/R functions, Win16 sources D:\Prog\simantw_recon\src\recovered) are the best evidence
-for statement form (REG-6).
+* S09:35F5 is now a complete TU at 35F50:36EEA after recovering FileSelect's
+  2,405 bytes, 159 fixups and 94 grouped relocations. USE-2 records combined
+  STEERED folded path, save-mode and index reads; the eliminated original source
+  expressions remain unknown. All six functions, four data contributions and
+  complete-module relocation order pass. Whole-module controls and latest
+  validation/hybrid evidence are in work/takeover/fileselect/.
 
-## 4. Ready-to-install proposals (reviewed, not yet installed)
+* root:171C owns the 362-byte free-block function f_171C_0160. A word segment
+  plus an unsigned-long paragraph count reproduces DX in its second address sum;
+  the default long-segment control uses CX and differs at two operand bytes.
+  WIDTH-1 records both equivalent-value expressions and their whole-module controls.
+  All 57 claims and the DATA/CONST/BSS contributions pass. Four memory functions
+  remain scaffolded; the module is partial. The full 45-probe/test acceptance and
+  hybrid transcript are retained in `work/takeover/freeblock/`.
 
-1. **CODEALIGN-1 + 19A9 boundary fix** — `work/align/` (FINDINGS.txt, patch/,
-   migrate.sh). The accepted 19A9 extent starts at an odd address that no linker produces;
-   its three unreferenced `retf` stubs (19A95–97) belong to 1986 (MS LINK 5.10 and RTLink
-   6.10 both reproduce the original only that way). Install order: run
-   `bash work/align/sandbox_run.sh` (~25 min) to confirm, then apply the patch and
-   `migrate.sh` together (validate refuses 19A9 between the two). Also fixes
-   tools/rtlink.py's linker-profile lookup and puts late root objects (2CFB MEMHOOK) in the
-   LIBRARY list, as the original link did.
-   Caveat: `work/align/patch/tools_*.py` are whole-file copies of tools/ from before the last
-   tool changes of 2026-09-30 (autosearch, idscan, DOS-1, data gate 2); rebase them onto the
-   current tools/ (apply the diff, not the copies) before running the sandbox proof.
-2. **promote.py `--note`** — `work/autosearch/patch/promote-note.patch` (journal
-   free-text, e.g. rules applied by autosearch).
-3. Worth adding to shared tools: `work/resJ/mem/multi.py` (20–30 variants of one
-   function per compile, analysis only).
+* S13:384C owns DrawColonyBars's 490 bytes after natural rectangle-field staging
+  and a used coordinate intermediate. All 23 claims, CONST (114 bytes) and DATA
+  (206 bytes) pass, including grouped relocation order. InvertPatch is the only
+  remaining scaffold in this module. The full test/45-probe validation and fresh
+  hybrid pass are retained in `work/takeover/colony-bars/`.
 
-## 5. Level (c): independent historical link
+Tooling fixes are also installed: promote --note/--drop-extent, alignment diagnostics,
+ASM probe variants, complete autosearch enumeration (including aliases and in-place
+drafts), and continuation from preserved best files. Search verdict caches now include
+module metadata, registries, manifest, toolchain and acceptance-gate fingerprints.
+RTLink trials refresh stale collections and verify source/object hashes before reuse;
+gate-failing objects are not cached. Historical work/align scripts have corrected paths.
+Do not apply their archived whole-file patches to the current tools.
 
-* The Dec 1991 RTLink/Plus (4.x/5.0) was **not found** (archive.org, WinWorld, Vetusware).
-  Clean route: ask Pocket Soft (today RTPatch). Available research instruments (C:\tools,
-  provenance.json each; kept outside Git): RTLink/Plus 6.10 (1993; BBS dump, warez-scene copy —
-  research only), RTLink for Clipper 3.11/3.13 (WinWorld, SHA-512 verified).
-* `python tools/rtlink.py` / `tools/link.py --rtlink-trial` performs a trial link with 6.10:
-  83/85 complete modules placed at accepted addresses, section table fields match, relocation
-  sets and all non-fixup bytes of the fully reconstructed overlay sections match; manager bytes
-  and relocation group order need the 1991 linker plus the complete object set in original
-  command-line order. Link-script inputs read from the original (ALWAYS/NEVER, areas,
-  PRELOAD/RELOAD) are labelled in work/rtlink/linkscripts/SIMANT_derived.lnk.
+## 3. Remaining game code
 
-## 6. Data (3,181 B unresolved)
+User priority: finish and verify the remaining game code first. Close the 129 data bytes
+alongside relevant modules when convenient. Linker debt is a separate side task and must
+not interrupt reconstruction. The authorized Luna xhigh archival search completed,
+including the 2,804-archive PC-SIG 1991 ZIP-catalog inventory. Retained findings are
+under `work/linker_hunt/`; the RTLink 4.00 candidate remains untested.
 
-Owner-undecidable small ranges (~72 B: DGROUP 2100–2117, 2328–2337, 5A96–5AAF, 68AC–68B5,
-56FE, 5A28), S09 save table 4E4B (2,464 B, far) and S05:3663/S17 module data (with their
-open functions). FAR_BSS 50F6 (19,408 zero bytes) sizes: 180 B pinned, 4,300 consistent,
-14,928 unverified (`tools/farbss.py`). Opaque-data count (5,161 B) also includes structured
-numeric tables; refine the lint to skip typed struct initialisers.
+There are 32 known unowned functions, all represented by whole-module drafts,
+including hard register, stack-slot, CSE, declaration and control-flow residues.
+Preserved earlier surveys: work/resI/survey.txt, work/resJ/residue.txt,
+work/autosearch/results.md/json. Current takeover scratch and search state:
+`work/takeover/full-search/results.json` and preserved whole-module snapshots in that
+directory. Ignored incremental logs remain under `build/workers/takeover/`.
+`work/takeover/residue-controls/` retains later negative searches and the exact
+free-block and colony-bar results, including warnings about semantically unsound old temporaries.
+Read the timestamp and base path before continuing;
+reports of a newly accepted function are historical and must not be promoted again.
 
-## 6b. Repository layout after the handoff cleanup
+The later residue-control index now retains 181 series / 7,203 recorded variants,
+including four already accepted free-block alternatives and two exact colony-bar
+alternatives. Other later candidates remain unclaimed. Memory compaction's reviewed flow and typed next-block sum
+have a 490-byte draft with six stack-home bytes still wrong; its wide-result
+low-word view is a hypothesis, not acceptance. The question-dialog draft has
+scalar coordinates and separate loop counters, but remains 653 vs 649 bytes.
+The corrected text-rendering cache updates on every space-loop iteration and
+remains 1,035 vs 1,039 bytes. See the retained README for sources and failed controls.
+Avoid the older generic text-cache draft: it never updates the cached character
+inside its loop. Avoid padding a segment union with an unused member to explain
+the compaction frame; the near result does not justify that layout.
 
-* `work/` (tracked): the kept worker artifacts: best drafts and residue notes of the open
-  functions, ready-to-install patches, reproducers cited by docs/codegen-rules.md and
-  asm_evidence, findings of the RTLink / VEC-1 / audit / alignment work. Index: work/README.md.
-* `build/` (ignored): disposable scratch and tool output (build/cc, build/link, build/helpers,
-  build/workers/NAME/ for new workers); every tool recreates what it needs.
+FindIndex's retained negated lower-bound predicate (`findindex-conditional-forms-v16.c`)
+is 267 bytes and differs only at the first conditional jump and its destination
+(three bytes). It is still unclaimed: related Boolean forms, explicit predicates,
+bound updates, optimizer controls, real record tags and prototype parameter removals
+do not reproduce the original first `JG` while retaining its later `JNE`/`JL` branches.
+S10 key-variable reuse, further graph declarations, staged MIDI word assembly, separate
+clip-pass result pointers, memory-helper pointer lifetimes and EnterNest argument
+pointers also failed. These controls do not establish assembly or compiler exclusion.
+Later corrected prototype controls include every earlier real prototype, rather than
+only the target's callees. Wider map indices, combined card base/title lifetimes and
+handle types, compaction segment types, resize return flags, graph scale definitions
+and K&R function definitions also remain inexact. The original-style K&R controls
+compile to the same candidate bytes. InvertPatch's experimental int-return definitions
+conflict with its earlier void prototype; those failed rows are not compiler exclusion.
 
-## 7. Operating rules that matter (details in AGENTS.md / docs/worker-brief.md)
+| Module | Principal open work |
+|---|---|
+| root:0250 | 1018, 129E, DrawBalloons; natural identifier and statement evidence; DrawCurBalloons order debt |
+| S25:3BA4 | 1035, 1686; register/slot residues; continuation must retain the original ownership gate |
+| S10:35F5 | 0384; expression and parameter-copy structure still open |
+| S23:39C7 | PrintStyleTextInRect, DisplayCard; register/storage and declaration evidence |
+| root:171C | 09CC, 0ADC, 0CF4, 0FBC |
+| others | S12 cursor, S13 InvertPatch, S14 CalcScore and small root/S15/S17/S24 residues |
 
-* Canonical files have one writer: promote.py (sources/manifest), rename.py/symbols.py/
-  functions.py (registries), the supervisor for tools/ and docs/. Workers work in
-  build/workers/NAME/ and hand tool changes over as patches.
-* Git Bash: `MSYS_NO_PATHCONV=1`, one flag per argument; never write Python edits through
-  heredocs with backslash escapes; never kill processes you did not start (DOSBox-X runs are
-  shared with other projects on this machine).
-* Names: Win16 names need xver CONFIRMED/HIGH or a decision with ≥2 anchors; DOS-only names
-  follow rule DOS-1 (own identifier-shaped string, DOS build only); third-party names (e.g.
-  S21 VIDEO_ID lineage) are held until an exact primary listing is in hand.
-* User decisions (2026-09-30): original assembly reproduced exactly counts as finished; ASM
-  standing in for C is reported separately; prefer the historically correct toolchain and
-  acquire tools (with provenance) instead of emulating around them; pushing to origin is allowed.
-* Checkpoint pattern: `python tools/validate.py --no-tests` (full run with tests before
-  releases), commit only on PASS, then `git push`; `python tools/link.py` to re-check the hybrid.
+Run rule-driven searches from whole-module best drafts, then inspect aligned disassembly
+for the remaining differences. Win16 is semantic evidence only; use verified naming
+decisions. Its old build/lift/open paths no longer exist; maintained probe/source paths
+must be located again. Do not accept a smaller distance as an exact result.
+
+## 4. Independent historical link
+
+The exact circa-1991 RTLink/Plus distribution is still missing. C:\tools contains
+RTLink/Plus 6.10 and Clipper editions 3.11/3.13, all with provenance and pinned identities.
+The independent Luna search also found a six-part RTLink/Plus 4.00 distribution:
+`C:\tools\RTLink-Plus-4.00-DiscMaster\RTLINK40.ZIP` (SHA-256
+`065cc748274addd3ac6f4aca314e67305e5f9a05758dee9b9cf76a19de5c69d5`).
+Its DAT payload format has not been decoded; static strings suggest linker, utility
+library and manager-source files. No installer or linker trials have been run. This is
+an unproven candidate, dated October 1990; no standalone 4.01 or 5.0 copy was found.
+Archive coverage and retained download identities are in `work/linker_hunt/inventory-search.md`.
+The manager bytes and global relocation group ordering differ from the original.
+Search evidence and contemporary version references: work/takeover/rtlink-search.md.
+The 4.x/5.0 family is a search hypothesis, not a confirmed exact version number.
+
+Latest trial (`build/workers/takeover/rtlink-current`, profile rtlink610) links successfully:
+95 real objects, 71 explicitly labelled stubs (112,079 code bytes), and unresolved
+`__acrtused`. Twelve overlay images have no trial code stubs; eleven relocation sets
+match, while raw image bytes and most relocation orders still differ. This is diagnostic
+output, never acceptance. MEMHOOK is now read in the library list; its address can still
+shift because incomplete objects pull a different runtime set.
+
+The linker does not block exact module recovery. It blocks the final independent
+whole-EXE proof. SDL3 has no technical dependency on RTLink; remaining game semantics,
+DOS hardware replacement and behavior verification matter to the port. The project
+still requires a historical freeze before modern/port code enters this tree.
+See docs/level-c-link.md for the proof requirements and the current linker findings.
+
+## 5. Remaining data and declarations
+
+Only 129 data bytes remain unresolved. Small palettes, bitmasks and state words have
+ambiguous ownership or incomplete typed declarations (DGROUP 2100, 2328, 56FE, 5A28,
+5A96, 60B0, 68AC, 79F0); a 12-byte far paragraph gap and tail bytes are also explicit debt.
+Do not turn a plausible owner or apparent fill into acceptance without positive and
+negative evidence. The large save table and syserr.c range are already accepted.
+FAR_BSS sizes: 180 bytes pinned, 4,300 consistent, 14,928 unverified (tools/farbss.py).
+
+## 6. Repository layout
+
+`work/` keeps cited reproducers, earlier best drafts and research notes (work/README.md).
+Archived proposals there may already be installed or superseded. `build/` is ignored
+scratch and generated output; new workers use build/workers/NAME/. Preserve useful
+unclaimed best drafts deliberately before deleting scratch, with flags and gate results.
+
+## 7. Operating rules
+
+* Canonical sources/manifest have one writer: promote.py. Registries use rename.py,
+  symbols.py/functions.py. Draft whole modules in scratch, in original function order;
+  same-module unrecovered callees stay scaffolded. Complete TU requires --extent and no scaffold.
+* Loop: context.py -> whole-module draft -> search.py -> promote --verify-only -> promote.
+  Validate at acceptance/tooling boundaries, not per hypothesis. Never patch objects,
+  copy original code capsules, trim extents, mask fixups or hand-edit manifest/journal/oracle.lock.
+* Names: Win16 CONFIRMED/HIGH or reviewed two-anchor decisions; DOS-1 applies only to
+  identifier-shaped diagnostics from the DOS function itself. Assembly needs ASM-1 evidence.
+* Git Bash: MSYS_NO_PATHCONV=1 for /AL-style flags. Never kill unowned processes; DOSBox
+  and other Python work may belong to another project. Git requires the per-command
+  safe.directory=D:/Prog/simant_recon setting under this sandbox account.
+* User decisions (2026-09-30): genuine exact assembly counts as finished; C workarounds
+  stay separate; acquire historical tools with provenance in C:\tools; pushing is allowed.
+  Commit only on validation PASS and recheck the hybrid at the checkpoint.

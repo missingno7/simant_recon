@@ -1,0 +1,188 @@
+{
+ "function": "LessonDone",
+ "module": "root:0E2E",
+ "base_score": [
+  1,
+  55,
+  543,
+  8
+ ],
+ "best_score": [
+  1,
+  55,
+  543,
+  8
+ ],
+ "best_path": [],
+ "best_res": {
+  "compile_ok": true,
+  "claims": {
+   "Feedback": true,
+   "RunTutor": true,
+   "GiveLesson": true,
+   "LessonDone": false
+  },
+  "data": {
+   "CONST": true
+  },
+  "order": {
+   "Feedback": "GROUPED",
+   "RunTutor": "GROUPED",
+   "GiveLesson": "GROUPED",
+   "LessonDone": "EXACT"
+  },
+  "module_reasons": [],
+  "reasons": [
+   "length 715 != target 723",
+   "bytes differ (first at +0x26, 535 differing)",
+   "relocation set differs (8 vs 9)"
+  ],
+  "exact": false,
+  "all_exact": false,
+  "score": [
+   1,
+   55,
+   543,
+   8
+  ],
+  "fhash": "63422cb70806bff5",
+  "length": 715
+ },
+ "base_res": {
+  "compile_ok": true,
+  "claims": {
+   "Feedback": true,
+   "RunTutor": true,
+   "GiveLesson": true,
+   "LessonDone": false
+  },
+  "data": {
+   "CONST": true
+  },
+  "order": {
+   "Feedback": "GROUPED",
+   "RunTutor": "GROUPED",
+   "GiveLesson": "GROUPED",
+   "LessonDone": "EXACT"
+  },
+  "module_reasons": [],
+  "reasons": [
+   "length 715 != target 723",
+   "bytes differ (first at +0x26, 535 differing)",
+   "relocation set differs (8 vs 9)"
+  ],
+  "exact": false,
+  "all_exact": false,
+  "score": [
+   1,
+   55,
+   543,
+   8
+  ],
+  "fhash": "63422cb70806bff5",
+  "length": 715
+ },
+ "evals": 600,
+ "compiles": 601,
+ "rule_stats": {
+  "REL-SWAP": {
+   "tried": 92,
+   "changed": 0,
+   "better": 0,
+   "regress": 0,
+   "fail": 0
+  },
+  "COMM-SWAP": {
+   "tried": 10,
+   "changed": 0,
+   "better": 0,
+   "regress": 0,
+   "fail": 0
+  },
+  "NOT-CMP": {
+   "tried": 40,
+   "changed": 0,
+   "better": 0,
+   "regress": 0,
+   "fail": 0
+  },
+  "CONST-U": {
+   "tried": 221,
+   "changed": 0,
+   "better": 0,
+   "regress": 0,
+   "fail": 0
+  },
+  "OR-DUP": {
+   "tried": 7,
+   "changed": 7,
+   "better": 0,
+   "regress": 0,
+   "fail": 0
+  },
+  "AND-NEST": {
+   "tried": 12,
+   "changed": 0,
+   "better": 0,
+   "regress": 0,
+   "fail": 0
+  },
+  "IF-NEG": {
+   "tried": 1,
+   "changed": 0,
+   "better": 0,
+   "regress": 0,
+   "fail": 0
+  },
+  "ELSE-WRAP": {
+   "tried": 4,
+   "changed": 0,
+   "better": 0,
+   "regress": 0,
+   "fail": 0
+  },
+  "PARAM-COPY": {
+   "tried": 2,
+   "changed": 0,
+   "better": 0,
+   "regress": 0,
+   "fail": 0
+  },
+  "PROTO-NAMES": {
+   "tried": 3,
+   "changed": 0,
+   "better": 0,
+   "regress": 0,
+   "fail": 0
+  },
+  "PROTO-TYPE": {
+   "tried": 12,
+   "changed": 0,
+   "better": 0,
+   "regress": 0,
+   "fail": 0
+  },
+  "EXTERN-SWAP": {
+   "tried": 97,
+   "changed": 0,
+   "better": 0,
+   "regress": 33,
+   "fail": 12
+  },
+  "CASE-SWAP": {
+   "tried": 55,
+   "changed": 0,
+   "better": 0,
+   "regress": 0,
+   "fail": 0
+  },
+  "SYM-NAMES": {
+   "tried": 44,
+   "changed": 0,
+   "better": 0,
+   "regress": 42,
+   "fail": 0
+  }
+ },
+ "tried_count": 600
+}

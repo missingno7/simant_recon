@@ -102,3 +102,18 @@ IndexEntry far * far FindIndex(int db, int id, int kind)
     return 0L;
 }
 /* SCAFFOLD END */
+
+/* The index module's remaining write-side entry points (Win16 order after FindIndex:
+ * DeleteCurrentIndex, AddIndex, DeleteIndex) are empty in the read-only DOS build, like
+ * CreateIndex: three unreferenced retf at 1986:0235-0237 ending the object at 19A98. */
+void far f_1986_0235(void)
+{
+}
+
+void far f_1986_0236(void)
+{
+}
+
+void far f_1986_0237(void)
+{
+}

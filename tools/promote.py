@@ -8,6 +8,7 @@
         --link-after KEY|FIRST [--verify-only]
     python tools/promote.py CANDIDATE.c --module data:55B3@OFF --placement _DATA=55B3:OFF:SIZE
         --link-after KEY|FIRST [--verify-only]
+    python tools/promote.py --runtime-data MEMBER [--verify-only]
 
 CANDIDATE.c is the complete proposed content of the module file
 ``src/<unit>/m<SEG>.c`` (``m<SEG>_<OFF>.c|.asm`` for a later object ``UNIT:SEG@OFF``
@@ -37,7 +38,11 @@ module *and* every new claim to be strictly exact (see tools/match.py).  It refu
     `org`, asm `include`, numeric branch targets, `#include` traversal);
   * an extent that is not one object placement or does not reach the object's boundaries
     (modules.verify_extent), a new ``UNIT:SEG@OFF`` key without ``--origin-evidence``;
-  * ``--unsteer`` when the module source did not change.
+  * ``--unsteer`` when the module source did not change;
+  * ``--drop-extent`` on a module without an extent, without evidence, or together with ``--extent``.
+``--drop-extent WHY`` turns a complete TU back into a partial module (journaled with the old
+extent), e.g. when its boundary was mis-framed: its rows can then be re-framed
+(functions.py reframe) and released claims re-owned before the corrected ``--extent`` is promoted.
 Provenance recorded in the manifest: ``--source-origin`` ("hand-written C", "hand-written asm",
 "asm-transcribed: <generator path>@<sha256>"; required for .asm modules), ``--mark-steered
 NAME=WHY`` (an existing claim whose source holds a steering construct: a dummy construct
@@ -78,10 +83,62 @@ def module_path(unit: str, seg: int, origin: int | None, lang: str) -> Path:
     return ROOT / modmod.module_source(unit, seg, origin, lang)
 
 
+def promote_runtime_data(member: str, verify_only: bool, notes: list[str]) -> int:
+    """Accept a complete data-only member from the pinned historical libraries.
+
+    The runtime verifier supplies bytes, fixups and placement proof; this writer
+    preserves every existing canonical claim and records the new library identity.
+    """
+    import runtime
+    with Lock() if not verify_only else _NoLock():
+        man = modmod.load_manifest()
+        rt = man.get("runtime", {})
+        if set(rt.get("libraries", {})) != set(runtime.LIBS):
+            raise SystemExit("every historical runtime library must already have an accepted pin")
+        for lib, info in rt.get("libraries", {}).items():
+            if runtime.LIBS.get(lib) != info["path"] or sha(Path(info["path"]).read_bytes()) != info["sha256"]:
+                raise SystemExit(f"runtime library {lib} differs from its accepted pin")
+        results, derived, conflicts, _ = runtime.verify_all()
+        if conflicts or any(not r["exact"] for r in results):
+            raise SystemExit("runtime code or its placement anchors do not verify")
+        rows = [r for r in runtime.verify_data(results, derived) if r["member"] == member]
+        if not rows or any(r["code_member"] or not r["exact"] for r in rows):
+            raise SystemExit(f"{member}: every segment must be exact and the library member must have no code")
+        identities = {(r["library"], r["module_index"], r["member_sha256"]) for r in rows}
+        if len(identities) != 1:
+            raise SystemExit(f"{member}: ambiguous library identity")
+        if any(m["member"] == member for m in rt.get("members", []) + rt.get("data_members", [])):
+            raise SystemExit(f"{member}: already accepted")
+        occupied = [(p["seg"] * 16 + p["off"], p.get("size", 0), k)
+                    for k, m in man["modules"].items() for n, p in m.get("placements", {}).items()
+                    if n != "_BSS"]
+        occupied += [(d["linear"], d["size"], d["member"]) for d in runtime.accepted_data_segments(man)]
+        for r in rows:
+            lo, hi = r["linear"], r["linear"] + r["size"]
+            if any(lo < a + z and a < hi for a, z, _ in occupied):
+                raise SystemExit(f"{member}/{r['segment']}: overlaps accepted data")
+            print(f"  historical data {member}/{r['segment']}: EXACT ({r['size']} bytes, {r['rule']})")
+        if verify_only:
+            print("VERIFY-ONLY OK: complete pinned data-only runtime member")
+            return 0
+        library, index, member_hash = identities.pop()
+        record = {"library": library, "member": member, "module_index": index,
+                  "member_sha256": member_hash,
+                  "data_segments": [{k: r[k] for k in ("segment", "linear", "size", "rule")} for r in rows]}
+        rt.setdefault("data_members", []).append(record)
+        modmod.write_manifest(man)
+        with JOURNAL.open("a") as fh:
+            fh.write(json.dumps({"time": dt.datetime.now().isoformat(timespec="seconds"),
+                                 "runtime_data": record, "notes": notes}) + "\n")
+        print(f"PROMOTED historical data-only member {member}")
+        return 0
+
+
 def main() -> int:
     ap = argparse.ArgumentParser()
-    ap.add_argument("candidate", type=Path)
-    ap.add_argument("--module", required=True,
+    ap.add_argument("candidate", type=Path, nargs="?")
+    ap.add_argument("--runtime-data", help="complete data-only member of an accepted pinned runtime library")
+    ap.add_argument("--module",
                     help="UNIT:SEG, e.g. root:00F8 or S05:35F5; UNIT:SEG@OFF for a later object of a frame")
     ap.add_argument("--claim", action="append", default=[])
     ap.add_argument("--profile")
@@ -95,6 +152,9 @@ def main() -> int:
                     help="NAME=WHY: the steering construct of an existing claim was removed (kept as history)")
     ap.add_argument("--extent", help="START:END linear (hex), END exclusive (the first byte after the module): "
                                      "claim the complete module segment (exact TU)")
+    ap.add_argument("--drop-extent", default=None,
+                    help="WHY: remove the module's complete-TU extent (journaled with the old extent), e.g. a "
+                         "mis-framed boundary that must be re-framed before the corrected --extent")
     ap.add_argument("--code-data", action="append", default=[],
                     help="START:END linear (hex), END exclusive: code-segment data (buffer/table) claimed as DATA_IN_CODE")
     ap.add_argument("--link-after", default=None,
@@ -116,8 +176,18 @@ def main() -> int:
     ap.add_argument("--layout-inferred", action="append", default=[],
                     help="NAME=WHY (NAME = claim or the module key): formatting/label/declaration order "
                          "inferred from relocation-order or identifier-count evidence")
+    ap.add_argument("--note", action="append", default=[],
+                    help="free-text journal note (e.g. the source rewrites a search tool applied)")
     ap.add_argument("--verify-only", action="store_true")
     a = ap.parse_args()
+
+    if a.runtime_data:
+        allowed = {"runtime_data", "verify_only", "note"}
+        if any(v for k, v in vars(a).items() if k not in allowed):
+            ap.error("--runtime-data cannot be combined with source-module acceptance")
+        return promote_runtime_data(a.runtime_data, a.verify_only, a.note)
+    if a.candidate is None or a.module is None:
+        ap.error("source acceptance requires CANDIDATE and --module")
 
     unit, seg, origin = modmod.parse_key(a.module)   # also undoes MSYS path-list conversion
     key = modmod.module_key(unit, seg, origin)
@@ -300,12 +370,18 @@ def main() -> int:
             raise SystemExit(f"{key}: nothing to promote (no claims and no placements)")
         if lang == "asm":
             module["asm_evidence"] = a.asm_evidence or mod.get("asm_evidence")
+        dropped = None
+        if a.drop_extent is not None:
+            if a.extent or not (mod and mod.get("extent")) or not a.drop_extent.strip():
+                raise SystemExit("--drop-extent WHY: the module must have an extent, WHY must give the evidence, "
+                                 "and --extent cannot be given in the same promotion")
+            dropped = {"extent": mod["extent"], "why": a.drop_extent}
         if a.extent:
             s0, s1 = (int(v, 16) for v in a.extent.replace(";", ":").split(":"))
             if origin is not None and s0 != seg * 16 + origin:
                 raise SystemExit(f"--extent {a.extent}: an object keyed {key} starts at {seg * 16 + origin:05X}")
             module["extent"] = {"start": s0, "end": s1}
-        elif mod and mod.get("extent"):
+        elif mod and mod.get("extent") and dropped is None:
             module["extent"] = mod["extent"]
         res = modmod.verify_module(text, module, claims, man=man)
         # manifest-level data rules: link position, and no two modules place the same bytes
@@ -362,9 +438,11 @@ def main() -> int:
                                  "new_claims": [c["name"] for c in new_claims], "profile": profile,
                                  "placements": sorted(placements),
                                  **({"released": released} if released else {}),
+                                 **({"dropped_extent": dropped} if dropped else {}),
                                  **({"unsteered": a.unsteer} if a.unsteer else {}),
                                  **({"marked_steered": marked} if marked else {}),
                                  **({"layout_inferred": inferred} if inferred else {}),
+                                 **({"notes": a.note} if a.note else {}),
                                  **({"source_origin": origin_src} if origin_src != (mod or {}).get("source_origin") else {}),
                                  **({"origin_evidence": module["origin_evidence"]}
                                     if module.get("origin_evidence") and module.get("origin_evidence") != (mod or {}).get("origin_evidence") else {}),

@@ -1,0 +1,38 @@
+{
+ "id": "CONST-1",
+ "question": "Does separating the first far-word read from the instrument-pointer read in the earlier AdLib body order the private segment words for the later 36-byte setter? The earlier volume/pitch body remains unclaimed; this is a context-specific first-use observation.",
+ "header": "",
+ "variants": {
+  "word_first": "/* Root module 2815 (code segment 0x2815A-0x283EA): AdLib (OPL2) voice control. */\n\nstruct Instr {\n    int a;\n    unsigned char far *p;\n};\n\nchar g_68FE[] = { 0, 1, 2, 6, 7, 8, 12, 13, 14 };\nchar g_6908[] = { 3, 4, 5, 9, 10, 11, 15, 16, 17 };\nchar g_6912[] = { 0, 1, 2, 3, 4, 5, 8, 9, 10, 11, 12, 13, 16, 17, 18, 19, 20, 21 };\nint g_6924[] = { 0x157, 0x16b, 0x181, 0x198, 0x1b0, 0x1ca, 0x1e5, 0x202, 0x220, 0x241, 0x263, 0x287 };\n\nextern void far f_283E_000A(char reg, char value);\n\nvoid far f_2815_000A(char far *p, int voice)\n{\n    char op1;\n    char op2;\n\n    op1 = g_6912[g_68FE[voice]];\n    op2 = g_6912[g_6908[voice]];\n    f_283E_000A(op1 + 0x20, p[1]);\n    f_283E_000A(op2 + 0x20, p[0]);\n    f_283E_000A(op1 + 0x40, p[3]);\n    f_283E_000A(op2 + 0x40, p[2]);\n    f_283E_000A(op1 + 0x60, p[5]);\n    f_283E_000A(op2 + 0x60, p[4]);\n    f_283E_000A(op1 + 0x80, p[7]);\n    f_283E_000A(op2 + 0x80, p[6]);\n    f_283E_000A(op1 + 0xe0, p[10]);\n    f_283E_000A(op2 + 0xe0, p[9]);\n    f_283E_000A(voice + 0xc0, p[8]);\n}\n\nvoid far f_2815_0118(void)\n{\n    int i;\n\n    f_283E_000A(1, 0);\n    f_283E_000A(4, 0x80);\n    f_283E_000A(8, 0);\n    f_283E_000A(0xbd, 0xc0);\n    for (i = 0; i < 8; i++)\n        f_283E_000A(i + 0xb0, 0);\n}\n\nextern int far fd_50F6_4B16;\nextern struct Instr far fd_50F6_0000[];\nextern int far fd_55B3_6BA4[];\n\n/* SCAFFOLD BEGIN: unclaimed AdLib volume/pitch draft */\nvoid far f_2815_0165(int instr, int note, int vol, int voice)\n{\n    unsigned char far *p;\n\n    vol += fd_50F6_4B16;\n    p = fd_50F6_0000[instr].p;\n    vol += *(int far *)(p + 0xd);\n    if (vol < 0)\n        vol = 0;\n    if (vol > 0x7f)\n        vol = 0x7f;\n    f_283E_000A(g_6912[g_6908[voice]] + 0x40,\n                ((unsigned)(0x3f - (unsigned char)fd_55B3_6BA4[vol]) * ((p[2] & 0x3f) ^ 0x3f) >> 6 ^ 0x3f) | (p[2] & 0xc0));\n    note += *(int far *)(p + 0xb) * 12;\n    if (note >= 0 && note <= 0x7f) {\n        f_283E_000A(voice + 0xa0, g_6924[note % 12]);\n        f_283E_000A(voice + 0xb0, ((note / 12 + 8) << 2) + (g_6924[note % 12] >> 8));\n    }\n}\n/* SCAFFOLD END */\n\nvoid far f_2815_024D(int a, int voice)\n{\n    f_283E_000A(voice + 0xa0, 0);\n    f_283E_000A(voice + 0xb0, 0);\n}\n\nvoid far f_2815_0275(int instr, int voice)\n{\n    f_2815_000A(fd_50F6_0000[instr].p, voice);\n}\n",
+  "pointer_first": "/* Root module 2815 (code segment 0x2815A-0x283EA): AdLib (OPL2) voice control. */\n\nstruct Instr {\n    int a;\n    unsigned char far *p;\n};\n\nchar g_68FE[] = { 0, 1, 2, 6, 7, 8, 12, 13, 14 };\nchar g_6908[] = { 3, 4, 5, 9, 10, 11, 15, 16, 17 };\nchar g_6912[] = { 0, 1, 2, 3, 4, 5, 8, 9, 10, 11, 12, 13, 16, 17, 18, 19, 20, 21 };\nint g_6924[] = { 0x157, 0x16b, 0x181, 0x198, 0x1b0, 0x1ca, 0x1e5, 0x202, 0x220, 0x241, 0x263, 0x287 };\n\nextern void far f_283E_000A(char reg, char value);\n\nvoid far f_2815_000A(char far *p, int voice)\n{\n    char op1;\n    char op2;\n\n    op1 = g_6912[g_68FE[voice]];\n    op2 = g_6912[g_6908[voice]];\n    f_283E_000A(op1 + 0x20, p[1]);\n    f_283E_000A(op2 + 0x20, p[0]);\n    f_283E_000A(op1 + 0x40, p[3]);\n    f_283E_000A(op2 + 0x40, p[2]);\n    f_283E_000A(op1 + 0x60, p[5]);\n    f_283E_000A(op2 + 0x60, p[4]);\n    f_283E_000A(op1 + 0x80, p[7]);\n    f_283E_000A(op2 + 0x80, p[6]);\n    f_283E_000A(op1 + 0xe0, p[10]);\n    f_283E_000A(op2 + 0xe0, p[9]);\n    f_283E_000A(voice + 0xc0, p[8]);\n}\n\nvoid far f_2815_0118(void)\n{\n    int i;\n\n    f_283E_000A(1, 0);\n    f_283E_000A(4, 0x80);\n    f_283E_000A(8, 0);\n    f_283E_000A(0xbd, 0xc0);\n    for (i = 0; i < 8; i++)\n        f_283E_000A(i + 0xb0, 0);\n}\n\nextern int far fd_50F6_4B16;\nextern struct Instr far fd_50F6_0000[];\nextern int far fd_55B3_6BA4[];\n\n/* SCAFFOLD BEGIN: unclaimed AdLib volume/pitch draft */\nvoid far f_2815_0165(int instr, int note, int vol, int voice)\n{\n    unsigned char far *p;\n\n    p = fd_50F6_0000[instr].p;\n    vol = vol + fd_50F6_4B16 + *(int far *)(p + 0xd);\n    if (vol < 0)\n        vol = 0;\n    if (vol > 0x7f)\n        vol = 0x7f;\n    f_283E_000A(g_6912[g_6908[voice]] + 0x40,\n                ((unsigned)(0x3f - (unsigned char)fd_55B3_6BA4[vol]) * ((p[2] & 0x3f) ^ 0x3f) >> 6 ^ 0x3f) | (p[2] & 0xc0));\n    note += *(int far *)(p + 0xb) * 12;\n    if (note >= 0 && note <= 0x7f) {\n        f_283E_000A(voice + 0xa0, g_6924[note % 12]);\n        f_283E_000A(voice + 0xb0, ((note / 12 + 8) << 2) + (g_6924[note % 12] >> 8));\n    }\n}\n/* SCAFFOLD END */\n\nvoid far f_2815_024D(int a, int voice)\n{\n    f_283E_000A(voice + 0xa0, 0);\n    f_283E_000A(voice + 0xb0, 0);\n}\n\nvoid far f_2815_0275(int instr, int voice)\n{\n    f_2815_000A(fd_50F6_0000[instr].p, voice);\n}\n"
+ },
+ "profiles": [
+  {
+   "profile": "msc600ax",
+   "flags": [
+    "/AL",
+    "/Os",
+    "/Oe",
+    "/Og",
+    "/Gs",
+    "/Zi"
+   ]
+  }
+ ],
+ "expect": {
+  "word_first@0": "mov ax, 6; imul word ptr [bp + 6]; mov bx, ax; mov es, word ptr [2]; push word ptr es:[bx + 4]",
+  "pointer_first@0": "mov ax, 6; imul word ptr [bp + 6]; mov bx, ax; mov es, word ptr [0]; push word ptr es:[bx + 4]"
+ },
+ "expect_segments": {
+  "word_first@0": {
+   "CONST": {
+    "length": 6
+   }
+  },
+  "pointer_first@0": {
+   "CONST": {
+    "length": 6
+   }
+  }
+ }
+}

@@ -33,6 +33,17 @@ ROOT_CODE_END = 0x29F4C
 AREAS = [(0, 3), (4, 11), (12, 19), (20, 26)]
 
 
+def object_input_hash(module, source: bytes, gate_object: bytes) -> str:
+    """Bind trial reuse to accepted state, actual source and the gate's current object."""
+    return tl.sha(json.dumps({"module": module, "source_sha": tl.sha(source),
+                              "gate_object_sha": tl.sha(gate_object)}, sort_keys=True).encode())
+
+
+def reusable_object(path: Path, record: dict, input_hash: str) -> bool:
+    return (record.get('input_hash') == input_hash and path.is_file()
+            and record.get('object_sha') == tl.sha(path.read_bytes()))
+
+
 # ------------------------------------------------------------------ OMF writer for stubs
 def rec(t, body):
     body = bytes(body)
@@ -97,10 +108,24 @@ def main():
     ap.add_argument('out')
     ap.add_argument('--jobs', type=int, default=6)
     ap.add_argument('--reuse', action='store_true')
+    ap.add_argument('--profile', default='rtlink610', choices=sorted(compiler.toolchain()['linkers']))
+    ap.add_argument('--no-run', action='store_true')
     a = ap.parse_args()
     out = Path(a.out); out.mkdir(parents=True, exist_ok=True)
     man = json.loads((ROOT / 'layout/manifest.json').read_text())
-    col = tl._dec(json.loads((ROOT / 'build/link/collection.json').read_text())['collection'])
+    cache = ROOT / 'build/link/collection.json'
+    cached = json.loads(cache.read_text()) if cache.exists() else {}
+    man_hash = tl.sha(json.dumps(man, sort_keys=True).encode())
+    if cached.get('manifest_sha') == man_hash:
+        col = tl._dec(cached['collection'])
+    else:
+        print('refreshing accepted contribution collection', flush=True)
+        col = tl.collect(ROOT, a.jobs)
+        current = json.loads((ROOT / 'layout/manifest.json').read_text())
+        if current != man or col['manifest'] != man:
+            raise SystemExit('canonical state changed during collection; rerun the trial')
+        cache.parent.mkdir(parents=True, exist_ok=True)
+        cache.write_text(json.dumps({'manifest_sha': man_hash, 'collection': tl._enc(col)}))
     x = exe.load()
     rd = OmfReader(communals=True)
     mods = man['modules']
@@ -108,28 +133,39 @@ def main():
             and col['modules'].get(k, {}).get('res', {}).get('exact') and col['modules'][k]['source_ok']]
     names = {k: short(k) for k in real}
     assert len(set(names.values())) == len(names), 'short-name clash'
+    object_cache = out / 'objects.json'
+    records = json.loads(object_cache.read_text()) if object_cache.exists() else {}
 
     # ---- compile real objects with distinct basenames
     def build(k):
         p = out / (names[k] + '.OBJ')
-        if a.reuse and p.exists():
-            return k, 'reused'
         m = mods[k]
-        text = (ROOT / m['source']).read_text(encoding='latin1')
+        raw = (ROOT / m['source']).read_bytes()
+        if tl.sha(raw) != m['source_sha256']:
+            return k, 'SOURCE DIFFERS FROM ACCEPTED HASH'
+        gate_object = col['modules'][k]['col']['object']
+        input_hash = object_input_hash(m, raw, gate_object)
+        if a.reuse and reusable_object(p, records.get(k, {}), input_hash):
+            return k, 'reused'
+        text = raw.decode('latin1')
         if m.get('lang') == 'asm':
             r = compiler.assemble(text, m['profile'], m['flags'], basename=names[k])
         else:
             r = compiler.compile_c(text, m['profile'], m['flags'], basename=names[k])
         if not r.ok:
             return k, 'FAIL ' + r.log[-300:]
-        mine = rd.read(r.obj, k); gate = rd.read(col['modules'][k]['col']['object'], k)
+        mine = rd.read(r.obj, k); gate = rd.read(gate_object, k)
         code_m = [v for s, v in mine.segments.items() if s.endswith('_TEXT')]
         code_g = [v for s, v in gate.segments.items() if s.endswith('_TEXT')]
         same = sorted(code_m) == sorted(code_g)
+        if not same:
+            return k, 'CODE DIFFERS FROM GATE OBJECT'
         p.write_bytes(r.obj)
-        return k, 'ok' if same else 'CODE DIFFERS FROM GATE OBJECT'
+        records[k] = {'input_hash': input_hash, 'object_sha': tl.sha(r.obj)}
+        return k, 'ok'
     with ThreadPoolExecutor(max_workers=a.jobs) as ex:
         res = dict(ex.map(build, sorted(real)))
+    object_cache.write_text(json.dumps(records, indent=1))
     bad = {k: v for k, v in res.items() if v not in ('ok', 'reused')}
     if bad:
         print('build problems:', bad)
@@ -331,16 +367,19 @@ def main():
             if ua and ua[0].startswith('S') and ua[0] != src and ua not in vec_targets:
                 never.add(e)
     never = sorted(never)
+    # root code objects placed after the runtime _TEXT/EMULATOR_TEXT (root:2CFB MEMHOOK_TEXT, class
+    # CODE) were read after the runtime library search: named in the LIBRARY list after LLIBCR, LIBH
+    # (RTLink/Plus 6.10 accepts an .OBJ there; a FILE, even after LIBRARY, is read before the search,
+    # and a non-CODE class would move the segment behind the overlay areas; work/align exp2-4)
+    late_root = [names[k] for k in sorted(real) if mods[k]['unit'] == 'root' and mods[k].get('extent')
+                 and mods[k]['extent']['start'] >= ROOT_CODE_END]
     L = ['# trial RTLink/Plus freeformat script generated by work/rtlink/mklink.py',
-         'OUTPUT SIMANT', 'MAP = SIMANT S,N,A,L,V,X', 'NODEFLIB', 'LIBRARY LLIBCR, LIBH',
+         'OUTPUT SIMANT', 'MAP = SIMANT S,N,A,L,V,X', 'NODEFLIB',
+         'LIBRARY ' + ', '.join(['LLIBCR', 'LIBH'] + [n + '.OBJ' for n in late_root]),
          'RELOAD FAR 400', 'VERBOSE']
     rootf = files('root')
     for i in range(0, len(rootf), 8):
         L.append('FILE ' + ', '.join(rootf[i:i + 8]))
-    late_root = [names[k] for k in sorted(real) if mods[k]['unit'] == 'root' and mods[k].get('extent')
-                 and mods[k]['extent']['start'] >= ROOT_CODE_END]
-    if late_root:
-        L.append('FILE ' + ', '.join(late_root))
     L.append('FILE ' + ', '.join(['ZDATA'] + datafiles))
     for lo, hi in AREAS:
         L.append('BEGINAREA')
@@ -363,6 +402,7 @@ def main():
               open(out / 'trial.json', 'w'), indent=1)
     sb = sum(s.get('bytes', 0) for s in stubs_report)
     print(f'real objects {len(objs)}, stubs {nstub} ({sb} code bytes), unresolved {len(unresolved)}: {unresolved[:10]}')
+    return a
 
 
 
@@ -374,7 +414,9 @@ BS = chr(92)
 def run_link(out: Path, profile: str = 'rtlink610', timeout: int = 900) -> int:
     import os, shutil, subprocess
     tc = compiler.toolchain()
-    prof = compiler.verify_profile(profile)
+    # linker pins live in toolchain.json 'linkers' (compiler.verify_profile knows compiler profiles only);
+    # pinned_tree hash-checks every pinned file before DOSBox mounts it
+    prof = tc['linkers'][profile]
     runner = tc['runners']['dosbox-x']
     libs = json.loads((ROOT / 'layout/manifest.json').read_text())['runtime']['libraries']
     for lib in ('llibcr.lib', 'libh.lib'):
@@ -402,8 +444,9 @@ def run_link(out: Path, profile: str = 'rtlink610', timeout: int = 900) -> int:
 
 # ---------------------------------------------------------------- comparison summary
 def summarize(out: Path) -> dict:
-    """Section table, vector set/order, relocation sets per section and byte differences outside
-    fixup fields for sections built only from real objects.  Reads the original only to compare."""
+    """Section table, relocation sets/order and raw image differences for unstubbed sections.
+    Raw differences include fixup fields. This trial report is diagnostic, never acceptance;
+    it reads the original only to compare. Vector analysis is not implemented here."""
     import re
     x = exe.load()
     text = (out / 'SIMANT.MAP').read_text(errors='replace')
@@ -434,15 +477,11 @@ def summarize(out: Path) -> dict:
 
 
 def cli() -> int:
-    import sys as _sys
-    argv = _sys.argv[1:]
-    no_run = '--no-run' in argv
-    _sys.argv = [_sys.argv[0]] + [a for a in argv if a != '--no-run']
-    main()
-    out = Path(_sys.argv[1])
-    if no_run:
+    a = main()
+    out = Path(a.out)
+    if a.no_run:
         return 0
-    rc = run_link(out)
+    rc = run_link(out, a.profile)
     if not (out / 'SIMANT.EXE').exists():
         print('link failed, see', out / 'LINK.LOG'); return 1
     rep = summarize(out)

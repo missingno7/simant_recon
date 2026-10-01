@@ -10278,23 +10278,59 @@
    "off": 298,
    "alias_of": "FindIndex"
   },
+  "f_1986_0235": {
+   "unit": "root",
+   "seg": 6534,
+   "off": 565,
+   "grounding": "reviewed: unreferenced 1-byte retf at module start (after FindIndex's end at 19A9:0004): empty /Gs function (GS-1), needed to tile module 19A9",
+   "history": [
+    {
+     "was": "f_19A9_0005",
+     "why": "re-framed: CODEALIGN-1 (work/align/FINDINGS.json): an MSC 6.00 code segment is WORD aligned, so no object starts at the odd 19A95; the three unreferenced retf at 19A95-19A97 end the index module 1986 (Win16 index TU order OpenIndex, CreateIndex, CloseIndex, FindIndex, DeleteCurrentIndex, AddIndex, DeleteIndex; the DOS build stubs the write side empty like CreateIndex), and 19A9 starts at 19A9:0008"
+    }
+   ]
+  },
+  "f_1986_0236": {
+   "unit": "root",
+   "seg": 6534,
+   "off": 566,
+   "grounding": "reviewed: unreferenced 1-byte retf at module start (after FindIndex's end at 19A9:0004): empty /Gs function (GS-1), needed to tile module 19A9",
+   "history": [
+    {
+     "was": "f_19A9_0006",
+     "why": "re-framed: CODEALIGN-1 (work/align/FINDINGS.json): an MSC 6.00 code segment is WORD aligned, so no object starts at the odd 19A95; the three unreferenced retf at 19A95-19A97 end the index module 1986 (Win16 index TU order OpenIndex, CreateIndex, CloseIndex, FindIndex, DeleteCurrentIndex, AddIndex, DeleteIndex; the DOS build stubs the write side empty like CreateIndex), and 19A9 starts at 19A9:0008"
+    }
+   ]
+  },
+  "f_1986_0237": {
+   "unit": "root",
+   "seg": 6534,
+   "off": 567,
+   "grounding": "reviewed: unreferenced 1-byte retf at module start (after FindIndex's end at 19A9:0004): empty /Gs function (GS-1), needed to tile module 19A9",
+   "history": [
+    {
+     "was": "f_19A9_0007",
+     "why": "re-framed: CODEALIGN-1 (work/align/FINDINGS.json): an MSC 6.00 code segment is WORD aligned, so no object starts at the odd 19A95; the three unreferenced retf at 19A95-19A97 end the index module 1986 (Win16 index TU order OpenIndex, CreateIndex, CloseIndex, FindIndex, DeleteCurrentIndex, AddIndex, DeleteIndex; the DOS build stubs the write side empty like CreateIndex), and 19A9 starts at 19A9:0008"
+    }
+   ]
+  },
   "f_19A9_0005": {
    "unit": "root",
-   "seg": 6569,
-   "off": 5,
-   "grounding": "reviewed: unreferenced 1-byte retf at module start (after FindIndex's end at 19A9:0004): empty /Gs function (GS-1), needed to tile module 19A9"
+   "seg": 6534,
+   "off": 565,
+   "alias_of": "f_1986_0235"
   },
   "f_19A9_0006": {
    "unit": "root",
-   "seg": 6569,
-   "off": 6,
-   "grounding": "reviewed: unreferenced 1-byte retf at module start (after FindIndex's end at 19A9:0004): empty /Gs function (GS-1), needed to tile module 19A9"
+   "seg": 6534,
+   "off": 566,
+   "alias_of": "f_1986_0236"
   },
   "f_19A9_0007": {
    "unit": "root",
-   "seg": 6569,
-   "off": 7,
-   "grounding": "reviewed: unreferenced 1-byte retf at module start (after FindIndex's end at 19A9:0004): empty /Gs function (GS-1), needed to tile module 19A9"
+   "seg": 6534,
+   "off": 567,
+   "alias_of": "f_1986_0237"
   },
   "f_19A9_0008": {
    "unit": "root",

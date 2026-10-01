@@ -177,6 +177,17 @@ void far f_295C_0367(int n)
 extern unsigned char far f_29F0_0038(int port);
 extern void far f_29F0_002A(int port, int value);
 
+/* CSE-1: the folded unsigned-byte >= 0 check retains the original byte
+ * temporary and index spill. STEERED: original eliminated expression unknown. */
+void far f_295C_0391(void)
+{
+    int i;
+    for (i = 0; fd_50F6_4A4E[i].type; i++) {
+        if (fd_50F6_4A4E[i].c3 >= 0 && fd_50F6_4A4E[i].c2)
+            f_295C_02E8(fd_50F6_4A4E[i].c3, fd_50F6_4A4E[i].c4);
+    }
+}
+
 void far f_295C_03DC(int value)
 {
     while (f_29F0_0038(0x331) & 0x40)
@@ -251,17 +262,3 @@ void far f_295C_0578(int dev, int a)
         f_295C_03DC(*info);
     }
 }
-
-/* SCAFFOLD BEGIN: best draft of f_295C_0391, not exact (original spills the i*6 CSE to [bp-2] and keeps the char at [bp-4]; this draft puts the char at [bp-1] and drops the spill) */
-void far f_295C_0391(void)
-{
-    int i;
-    unsigned char dev;
-
-    for (i = 0; fd_50F6_4A4E[i].type; i++) {
-        dev = fd_50F6_4A4E[i].c3;
-        if (fd_50F6_4A4E[i].c2)
-            f_295C_02E8(dev, fd_50F6_4A4E[i].c4);
-    }
-}
-/* SCAFFOLD END */

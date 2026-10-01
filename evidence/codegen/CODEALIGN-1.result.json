@@ -1,0 +1,114 @@
+{
+ "id": "CODEALIGN-1",
+ "question": "Does an MSC far-code SEGDEF require WORD alignment, while a symbolic MASM BYTE segment explicitly admits an odd origin? Positive/negative linker controls: work/align/exp.json (MS LINK 5.10 and RTLink/Plus 6.10); the full placement gate is tested by tests/test_codealign.py against the original 1986/19A9 boundary.",
+ "results": [
+  {
+   "variant": "msc_word",
+   "profile_index": 0,
+   "profile": "msc600ax",
+   "flags": [
+    "/AL",
+    "/Os",
+    "/Gs"
+   ],
+   "source_sha256": "62c5745d96cee588d3720f1e47b96e7a0b9db71203c484ad746c6c593da7b51d",
+   "bytes": "cb",
+   "disasm": "retf",
+   "segments": {
+    "UNIT_TEXT": {
+     "class": "CODE",
+     "align": "word",
+     "combine": "public",
+     "length": 1,
+     "big": false
+    },
+    "_DATA": {
+     "class": "DATA",
+     "align": "word",
+     "combine": "public",
+     "length": 0,
+     "big": false
+    },
+    "CONST": {
+     "class": "CONST",
+     "align": "word",
+     "combine": "public",
+     "length": 0,
+     "big": false
+    },
+    "_BSS": {
+     "class": "BSS",
+     "align": "word",
+     "combine": "public",
+     "length": 0,
+     "big": false
+    }
+   },
+   "communals": {}
+  },
+  {
+   "variant": "masm_byte",
+   "profile_index": 0,
+   "profile": "masm510",
+   "flags": [
+    "/Mx"
+   ],
+   "source_sha256": "705177e884fde03f29909211bcd5c54526daabcb68a12bd41c748752eaf71ef7",
+   "bytes": "cb",
+   "disasm": "retf",
+   "segments": {
+    "UNIT_TEXT": {
+     "class": "CODE",
+     "align": "byte",
+     "combine": "public",
+     "length": 1,
+     "big": false
+    }
+   },
+   "communals": {}
+  }
+ ],
+ "checks": [
+  {
+   "check": "msc_word@0",
+   "needle": "retf",
+   "ok": true
+  },
+  {
+   "check": "masm_byte@0",
+   "needle": "retf",
+   "ok": true
+  },
+  {
+   "check": "msc_word@0",
+   "needle": "UNIT_TEXT.align=word",
+   "ok": true
+  },
+  {
+   "check": "msc_word@0",
+   "needle": "UNIT_TEXT.class=CODE",
+   "ok": true
+  },
+  {
+   "check": "msc_word@0",
+   "needle": "UNIT_TEXT.length=1",
+   "ok": true
+  },
+  {
+   "check": "masm_byte@0",
+   "needle": "UNIT_TEXT.align=byte",
+   "ok": true
+  },
+  {
+   "check": "masm_byte@0",
+   "needle": "UNIT_TEXT.class=CODE",
+   "ok": true
+  },
+  {
+   "check": "masm_byte@0",
+   "needle": "UNIT_TEXT.length=1",
+   "ok": true
+  }
+ ],
+ "all_checks_pass": true
+}

@@ -6,6 +6,8 @@
 SPEC:
   {"id": "RULE-ID", "question": "...", "header": "common C text",
    "variants": {"name": "C text", ...},
+   # A variant may instead be {"source": "...", "language": "asm",
+   # "toolchain": {"profile": "masm510", "flags": ["/Mx"]}} for a symbolic ASM contrast.
    "profiles": [{"profile": "msc600", "flags": ["/AL", "/Os"]}, ...],
    "expect": {"variant@profileindex": "exact disassembly substring", ...},   (optional)
    "expect_segments": {"variant@profileindex": {                              (optional)
@@ -46,9 +48,14 @@ def run(spec: dict) -> dict:
     out = {"id": spec["id"], "question": spec.get("question"), "results": []}
     for pi, p in enumerate(spec["profiles"]):
         for name, body in spec["variants"].items():
-            src = spec.get("header", "") + body + "\n"
-            r = compiler.compile_c(src, p["profile"], p["flags"])
-            row = {"variant": name, "profile_index": pi, "profile": p["profile"], "flags": p["flags"],
+            config = {**p, **(body.get("toolchain", {}) if isinstance(body, dict) else {})}
+            lang = body.get("language", "c") if isinstance(body, dict) else "c"
+            if lang not in ("c", "asm"):
+                raise ValueError(f"unsupported probe language {lang!r}")
+            src = spec.get("header", "") + (body["source"] if isinstance(body, dict) else body) + "\n"
+            compile_source = compiler.assemble if lang == "asm" else compiler.compile_c
+            r = compile_source(src, config["profile"], config["flags"])
+            row = {"variant": name, "profile_index": pi, "profile": config["profile"], "flags": config["flags"],
                    "source_sha256": hashlib.sha256(src.encode()).hexdigest()}
             if not r.ok:
                 row["error"] = r.log[-400:]

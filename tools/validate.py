@@ -122,6 +122,9 @@ def main() -> int:
         dbad = [n for n, d in res.get("data", {}).items() if not d["exact"]]
         mreasons = list(res.get("module_reasons", [])) + modmod.link_after_reasons(
             man, key, m, {n: d.get("align") for n, d in res.get("data", {}).items()})
+        # Extent failures can occur while every individual claim is exact. Preserve their
+        # diagnostics so a rejected TU does not appear as the unhelpful "FAIL [] []".
+        mreasons += (res.get("extent") or {}).get("reasons", [])
         # provenance (audit F-4): ASM modules record how their source was produced, and the probe
         # files their asm_evidence names exist
         mreasons += modmod.source_origin_reasons(m.get("source_origin"), m.get("lang", "c"))

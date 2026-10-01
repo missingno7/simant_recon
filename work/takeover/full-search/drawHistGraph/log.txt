@@ -1,0 +1,9 @@
+drawHistGraph in S24:39C7 (msc600ax /AL /Os /Og /Oe /Zi), rules: REL-SWAP,COMM-SWAP,TERN-SWAP,NOT-CMP,CONST-U,COMPOUND,CHAIN-ORDER,CHAIN-SPLIT,EMBED,OR-DUP,AND-NEST,IF-NEG,ELSE-WRAP,RET-MERGE,TERN-IF,FOR-WHILE,CSE-INLINE,CSE-REUSE,LOCAL-MERGE,LOCAL-SPLIT,PARAM-COPY,RESULT-LOCAL,DECL-SWAP,DECL-INIT,PROTO-NAMES,PROTO-TYPE,EXTERN-SWAP,TEMP-INTRO,CASE-SWAP,STMT-SWAP,STORE-LOCAL,SYM-NAMES
+base: insn 34 bytes 576 len +14  length 746 != target 732; bytes differ (first at +0x4, 562 differing); relocation set differs (10 vs 9)
+level 1: 222 variants from 1 state(s)
+  better: insn 33 bytes 577 len +14  via PROTO-NAMES[win_GetObjRect unnamed]
+  better: insn 32 bytes 576 len +14  via DECL-SWAP[int width; / int height;]
+level 2: 300 variants from 12 state(s)
+  better: insn 32 bytes 575 len +14  via DECL-SWAP[int width; / int height;] + STMT-SWAP[div = 1; <> mul = 1;]
+level 3: 78 variants from 11 state(s)
+best: insn 32 bytes 575 len +14 (base insn 34 bytes 576 len +14) after 600 variants: DECL-SWAP[int width; / int height;] + STMT-SWAP[div = 1; <> mul = 1;]

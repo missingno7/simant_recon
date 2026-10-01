@@ -1,0 +1,206 @@
+{
+ "function": "f_284A_0138",
+ "module": "root:284A",
+ "base_score": [
+  1,
+  6,
+  9,
+  0
+ ],
+ "best_score": [
+  1,
+  6,
+  9,
+  0
+ ],
+ "best_path": [],
+ "best_res": {
+  "compile_ok": true,
+  "claims": {
+   "f_284A_0004": true,
+   "f_284A_0013": true,
+   "StopSong": true,
+   "f_284A_0138": false,
+   "f_284A_0151": true,
+   "f_284A_0199": true,
+   "f_284A_01D5": true,
+   "f_284A_024B": true,
+   "f_284A_0256": true,
+   "f_284A_02E4": true,
+   "f_284A_0324": true,
+   "f_284A_0325": true,
+   "f_284A_038F": true,
+   "f_284A_04C9": true,
+   "f_284A_0521": true,
+   "f_284A_0537": true,
+   "f_284A_05C5": true,
+   "f_284A_0673": true,
+   "f_284A_067F": true
+  },
+  "data": {
+   "_DATA": true,
+   "CONST": true,
+   "_BSS": true
+  },
+  "order": {
+   "f_284A_0004": "EXACT",
+   "f_284A_0013": "GROUPED",
+   "StopSong": "EXACT",
+   "f_284A_0138": "EXACT",
+   "f_284A_0151": "EXACT",
+   "f_284A_0199": "EXACT",
+   "f_284A_01D5": "EXACT",
+   "f_284A_024B": "EXACT",
+   "f_284A_0256": "EXACT",
+   "f_284A_02E4": "EXACT",
+   "f_284A_0324": "EXACT",
+   "f_284A_0325": "GROUPED",
+   "f_284A_038F": "EXACT",
+   "f_284A_04C9": "GROUPED",
+   "f_284A_0521": "EXACT",
+   "f_284A_0537": "EXACT",
+   "f_284A_05C5": "EXACT",
+   "f_284A_0673": "EXACT",
+   "f_284A_067F": "EXACT"
+  },
+  "module_reasons": [],
+  "reasons": [
+   "bytes differ (first at +0xc, 9 differing)"
+  ],
+  "exact": false,
+  "all_exact": false,
+  "score": [
+   1,
+   6,
+   9,
+   0
+  ],
+  "fhash": "d7e40fcd8fc40546",
+  "length": 25
+ },
+ "base_res": {
+  "compile_ok": true,
+  "claims": {
+   "f_284A_0004": true,
+   "f_284A_0013": true,
+   "StopSong": true,
+   "f_284A_0138": false,
+   "f_284A_0151": true,
+   "f_284A_0199": true,
+   "f_284A_01D5": true,
+   "f_284A_024B": true,
+   "f_284A_0256": true,
+   "f_284A_02E4": true,
+   "f_284A_0324": true,
+   "f_284A_0325": true,
+   "f_284A_038F": true,
+   "f_284A_04C9": true,
+   "f_284A_0521": true,
+   "f_284A_0537": true,
+   "f_284A_05C5": true,
+   "f_284A_0673": true,
+   "f_284A_067F": true
+  },
+  "data": {
+   "_DATA": true,
+   "CONST": true,
+   "_BSS": true
+  },
+  "order": {
+   "f_284A_0004": "EXACT",
+   "f_284A_0013": "GROUPED",
+   "StopSong": "EXACT",
+   "f_284A_0138": "EXACT",
+   "f_284A_0151": "EXACT",
+   "f_284A_0199": "EXACT",
+   "f_284A_01D5": "EXACT",
+   "f_284A_024B": "EXACT",
+   "f_284A_0256": "EXACT",
+   "f_284A_02E4": "EXACT",
+   "f_284A_0324": "EXACT",
+   "f_284A_0325": "GROUPED",
+   "f_284A_038F": "EXACT",
+   "f_284A_04C9": "GROUPED",
+   "f_284A_0521": "EXACT",
+   "f_284A_0537": "EXACT",
+   "f_284A_05C5": "EXACT",
+   "f_284A_0673": "EXACT",
+   "f_284A_067F": "EXACT"
+  },
+  "module_reasons": [],
+  "reasons": [
+   "bytes differ (first at +0xc, 9 differing)"
+  ],
+  "exact": false,
+  "all_exact": false,
+  "score": [
+   1,
+   6,
+   9,
+   0
+  ],
+  "fhash": "d7e40fcd8fc40546",
+  "length": 25
+ },
+ "evals": 151,
+ "compiles": 152,
+ "rule_stats": {
+  "COMM-SWAP": {
+   "tried": 19,
+   "changed": 0,
+   "better": 0,
+   "regress": 0,
+   "fail": 0
+  },
+  "CONST-U": {
+   "tried": 17,
+   "changed": 0,
+   "better": 0,
+   "regress": 0,
+   "fail": 0
+  },
+  "PARAM-COPY": {
+   "tried": 7,
+   "changed": 0,
+   "better": 0,
+   "regress": 5,
+   "fail": 0
+  },
+  "RESULT-LOCAL": {
+   "tried": 12,
+   "changed": 0,
+   "better": 0,
+   "regress": 8,
+   "fail": 0
+  },
+  "TEMP-INTRO": {
+   "tried": 48,
+   "changed": 0,
+   "better": 0,
+   "regress": 32,
+   "fail": 0
+  },
+  "SYM-NAMES": {
+   "tried": 42,
+   "changed": 0,
+   "better": 0,
+   "regress": 29,
+   "fail": 0
+  },
+  "CSE-INLINE": {
+   "tried": 3,
+   "changed": 0,
+   "better": 0,
+   "regress": 0,
+   "fail": 0
+  },
+  "DECL-INIT": {
+   "tried": 3,
+   "changed": 0,
+   "better": 0,
+   "regress": 0,
+   "fail": 0
+  }
+ },
+ "tried_count": 151
+}

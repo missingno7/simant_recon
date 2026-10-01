@@ -1,0 +1,22 @@
+--- base.c
++++ best.c
+@@ -203,8 +203,8 @@
+ {
+     struct Rect r;
+     int color;
++    int height;
+     int width;
+-    int height;
+     int far *data;
+     int far *data2;
+     int j;
+@@ -240,8 +240,8 @@
+             max = data2[j];
+         j = (j + 1) & 0x3f;
+     }
++    mul = 1;
+     div = 1;
+-    mul = 1;
+     if (max > 0) {
+         for (mul = 1; max * mul < height; mul++)
+             ;

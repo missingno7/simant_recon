@@ -15,7 +15,7 @@ A.C stands for the game objects (its own A_TEXT, calls the hooks), MH.ASM is the
 """
 import sys, json, re, shutil, subprocess, os, hashlib
 from pathlib import Path
-ROOT = Path(__file__).resolve().parents[3]
+ROOT = Path(__file__).resolve().parents[2]
 sys.path.insert(0, str(ROOT / 'tools'))
 import compiler  # noqa
 

@@ -1,0 +1,8 @@
+f_171C_0FBC in root:171C (msc600ax /AL /Oeg /Gs /Zi), rules: REL-SWAP,COMM-SWAP,TERN-SWAP,NOT-CMP,CONST-U,COMPOUND,CHAIN-ORDER,CHAIN-SPLIT,EMBED,OR-DUP,AND-NEST,IF-NEG,ELSE-WRAP,RET-MERGE,TERN-IF,FOR-WHILE,CSE-INLINE,CSE-REUSE,LOCAL-MERGE,LOCAL-SPLIT,PARAM-COPY,RESULT-LOCAL,DECL-SWAP,DECL-INIT,PROTO-NAMES,PROTO-TYPE,EXTERN-SWAP,TEMP-INTRO,CASE-SWAP,STMT-SWAP,STORE-LOCAL,SYM-NAMES
+base: insn 60 bytes 439 len +2  length 568 != target 566; bytes differ (first at +0x5, 437 differing); relocation set differs (10 vs 10)
+level 1: 118 variants from 1 state(s)
+  better: insn 58 bytes 439 len +2  via CHAIN-ORDER[first = compacted = 1]
+level 2: 300 variants from 7 state(s)
+level 3: 182 variants from 12 state(s)
+  better: insn 57 bytes 429 len 0  via PROTO-NAMES[Punt unnamed] + TEMP-INTRO[SEG(best) + best->paras] + CHAIN-ORDER[first = compacted = 1]
+best: insn 57 bytes 429 len 0 (base insn 60 bytes 439 len +2) after 600 variants: PROTO-NAMES[Punt unnamed] + TEMP-INTRO[SEG(best) + best->paras] + CHAIN-ORDER[first = compacted = 1]

@@ -1,0 +1,11 @@
+--- base.c
++++ best.c
+@@ -261,7 +261,7 @@
+         _fmemcpy(list, tmp, (count + 1) * sizeof(struct Rect));
+         win_GetObjRect(next, &r);
+         end = f_1D8E_02BD(&r, list, tmp, 0L);
+-        n = count = end - tmp;
++        count = n = end - tmp;
+         if (count >= 256)
+             Punt("C098: Clip overflow %d", count);
+         f_1E57_0006(n, 0);

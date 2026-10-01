@@ -1,0 +1,177 @@
+{
+ "id": "CSE-1",
+ "question": "Under /Oe /Og, does a folded unsigned-byte >=0 check retain a byte CSE temporary and an index spill? Positive: f_295C_0391; the exact draft is marked steered because the eliminated original expression is unknown.",
+ "results": [
+  {
+   "variant": "folded_range",
+   "profile_index": 0,
+   "profile": "msc600ax",
+   "flags": [
+    "/AL",
+    "/Os",
+    "/Oe",
+    "/Og",
+    "/Gs"
+   ],
+   "source_sha256": "65d5123f405ba19b12b6a6710b6c82f640b505db2d029b0f0d70936c6c8d6afb",
+   "bytes": "558bec83ec04562bf6eb23268a8703008846fc2680bf0200007412268a8704002ae4508a46fc500ee800005b5b468bc6b90600f7e98bd8895efe8e0600002680bf00000075c55e8be55dcbcb",
+   "disasm": "push bp; mov bp, sp; sub sp, 4; push si; sub si, si; jmp 0x2e; mov al, byte ptr es:[bx + 3]; mov byte ptr [bp - 4], al; cmp byte ptr es:[bx + 2], 0; je 0x2d; mov al, byte ptr es:[bx + 4]; sub ah, ah; push ax; mov al, byte ptr [bp - 4]; push ax; push cs; call 0x2b; pop bx; pop bx; inc si; mov ax, si; mov cx, 6; imul cx; mov bx, ax; mov word ptr [bp - 2], bx; mov es, word ptr [0]; cmp byte ptr es:[bx], 0; jne 0xb; pop si; mov sp, bp; pop bp; retf; retf",
+   "segments": {
+    "UNIT_TEXT": {
+     "class": "CODE",
+     "align": "word",
+     "combine": "public",
+     "length": 76,
+     "big": false
+    },
+    "_DATA": {
+     "class": "DATA",
+     "align": "word",
+     "combine": "public",
+     "length": 0,
+     "big": false
+    },
+    "CONST": {
+     "class": "CONST",
+     "align": "word",
+     "combine": "public",
+     "length": 2,
+     "big": false
+    },
+    "_BSS": {
+     "class": "BSS",
+     "align": "word",
+     "combine": "public",
+     "length": 0,
+     "big": false
+    }
+   },
+   "communals": {}
+  },
+  {
+   "variant": "no_range",
+   "profile_index": 0,
+   "profile": "msc600ax",
+   "flags": [
+    "/AL",
+    "/Os",
+    "/Oe",
+    "/Og",
+    "/Gs"
+   ],
+   "source_sha256": "975db2bd41cea553803c157276d8781cc269c4526e96462338ac51a8543f2df5",
+   "bytes": "558bec83ec02562bf6eb1d2680bf0200007414268a8704002ae450268a870300500ee800005b5b468bc6b90600f7e98bd8895efe8e0600002680bf00000075cb5e8be55dcbcb",
+   "disasm": "push bp; mov bp, sp; sub sp, 2; push si; sub si, si; jmp 0x28; cmp byte ptr es:[bx + 2], 0; je 0x27; mov al, byte ptr es:[bx + 4]; sub ah, ah; push ax; mov al, byte ptr es:[bx + 3]; push ax; push cs; call 0x25; pop bx; pop bx; inc si; mov ax, si; mov cx, 6; imul cx; mov bx, ax; mov word ptr [bp - 2], bx; mov es, word ptr [0]; cmp byte ptr es:[bx], 0; jne 0xb; pop si; mov sp, bp; pop bp; retf; retf",
+   "segments": {
+    "UNIT_TEXT": {
+     "class": "CODE",
+     "align": "word",
+     "combine": "public",
+     "length": 70,
+     "big": false
+    },
+    "_DATA": {
+     "class": "DATA",
+     "align": "word",
+     "combine": "public",
+     "length": 0,
+     "big": false
+    },
+    "CONST": {
+     "class": "CONST",
+     "align": "word",
+     "combine": "public",
+     "length": 2,
+     "big": false
+    },
+    "_BSS": {
+     "class": "BSS",
+     "align": "word",
+     "combine": "public",
+     "length": 0,
+     "big": false
+    }
+   },
+   "communals": {}
+  },
+  {
+   "variant": "explicit_local",
+   "profile_index": 0,
+   "profile": "msc600ax",
+   "flags": [
+    "/AL",
+    "/Os",
+    "/Oe",
+    "/Og",
+    "/Gs"
+   ],
+   "source_sha256": "491da8b4ead86c6c2e438df1874977a9c9262644660f9aa9b2c00f442a12ef41",
+   "bytes": "558bec83ec04562bf6eb23268a8703008846ff2680bf0200007412268a8704002ae4508a46ff500ee800005b5b468bc6b90600f7e98bd88e0600002680bf00000075c85e8be55dcbcb",
+   "disasm": "push bp; mov bp, sp; sub sp, 4; push si; sub si, si; jmp 0x2e; mov al, byte ptr es:[bx + 3]; mov byte ptr [bp - 1], al; cmp byte ptr es:[bx + 2], 0; je 0x2d; mov al, byte ptr es:[bx + 4]; sub ah, ah; push ax; mov al, byte ptr [bp - 1]; push ax; push cs; call 0x2b; pop bx; pop bx; inc si; mov ax, si; mov cx, 6; imul cx; mov bx, ax; mov es, word ptr [0]; cmp byte ptr es:[bx], 0; jne 0xb; pop si; mov sp, bp; pop bp; retf; retf",
+   "segments": {
+    "UNIT_TEXT": {
+     "class": "CODE",
+     "align": "word",
+     "combine": "public",
+     "length": 73,
+     "big": false
+    },
+    "_DATA": {
+     "class": "DATA",
+     "align": "word",
+     "combine": "public",
+     "length": 0,
+     "big": false
+    },
+    "CONST": {
+     "class": "CONST",
+     "align": "word",
+     "combine": "public",
+     "length": 2,
+     "big": false
+    },
+    "_BSS": {
+     "class": "BSS",
+     "align": "word",
+     "combine": "public",
+     "length": 0,
+     "big": false
+    }
+   },
+   "communals": {}
+  }
+ ],
+ "checks": [
+  {
+   "check": "folded_range@0",
+   "needle": "mov al, byte ptr es:[bx + 3]; mov byte ptr [bp - 4], al; cmp byte ptr es:[bx + 2], 0",
+   "ok": true
+  },
+  {
+   "check": "no_range@0",
+   "needle": "!mov byte ptr [bp - 4], al",
+   "ok": true
+  },
+  {
+   "check": "explicit_local@0",
+   "needle": "mov al, byte ptr es:[bx + 3]; mov byte ptr [bp - 1], al; cmp byte ptr es:[bx + 2], 0",
+   "ok": true
+  },
+  {
+   "check": "folded_range@0",
+   "needle": "UNIT_TEXT.length=76",
+   "ok": true
+  },
+  {
+   "check": "no_range@0",
+   "needle": "UNIT_TEXT.length=70",
+   "ok": true
+  },
+  {
+   "check": "explicit_local@0",
+   "needle": "UNIT_TEXT.length=73",
+   "ok": true
+  }
+ ],
+ "all_checks_pass": true
+}

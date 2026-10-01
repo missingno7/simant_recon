@@ -1,7 +1,7 @@
 """Which SEGDEF alignment does each pinned compiler/option set give the code segment?"""
 import sys, json
 from pathlib import Path
-ROOT = Path(__file__).resolve().parents[3]
+ROOT = Path(__file__).resolve().parents[2]
 sys.path.insert(0, str(ROOT / 'tools'))
 import compiler
 from omf import OmfReader

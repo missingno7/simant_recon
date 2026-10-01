@@ -1,0 +1,8 @@
+f_2505_0453 in root:2505 (msc600ax /AL /Os /Oe /Og /Gs /Zi), rules: REL-SWAP,COMM-SWAP,TERN-SWAP,NOT-CMP,CONST-U,COMPOUND,CHAIN-ORDER,CHAIN-SPLIT,EMBED,OR-DUP,AND-NEST,IF-NEG,ELSE-WRAP,RET-MERGE,TERN-IF,FOR-WHILE,CSE-INLINE,CSE-REUSE,LOCAL-MERGE,LOCAL-SPLIT,PARAM-COPY,RESULT-LOCAL,DECL-SWAP,DECL-INIT,PROTO-NAMES,PROTO-TYPE,EXTERN-SWAP,TEMP-INTRO,CASE-SWAP,STMT-SWAP,STORE-LOCAL,SYM-NAMES
+base: insn 16 bytes 88 len +8  length 124 != target 132; bytes differ (first at +0x5, 80 differing); relocation set differs (3 vs 3)
+level 1: 47 variants from 1 state(s)
+  better: insn 16 bytes 87 len +6  via DECL-SWAP[int win; / int idx;]
+level 2: 259 variants from 7 state(s)
+level 3: 218 variants from 8 state(s)
+level 4: 76 variants from 8 state(s)
+best: insn 16 bytes 87 len +6 (base insn 16 bytes 88 len +8) after 600 variants: DECL-SWAP[int win; / int idx;]
