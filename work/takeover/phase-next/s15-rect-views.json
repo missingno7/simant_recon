@@ -1,0 +1,352 @@
+{
+ "manifest_sha256": "a454a845c9cbc03870ab4d352bed97eeb6823da3b6b4c5790eba901c9430bab7",
+ "module": "S15:384C",
+ "function": "o15_384C_0239",
+ "profile": "msc600ax",
+ "flags": [
+  "/AL",
+  "/Os",
+  "/Og",
+  "/Oe",
+  "/Zi"
+ ],
+ "accepted_peers": [
+  "o15_384C_0000",
+  "LoadMonoPats",
+  "o15_384C_0125",
+  "MenuQuit",
+  "SetDefaultWindows",
+  "NewGame",
+  "o15_384C_0152"
+ ],
+ "variants": [
+  {
+   "name": "base",
+   "source_sha256_lf": "01b51eecedcd28e2213819572c846a9754039f4a527e6da5e56e57783398bdd5",
+   "why": "",
+   "compile_ok": true,
+   "target": {
+    "exact": false,
+    "reasons": [
+     "bytes differ (first at +0x42, 2 differing)"
+    ],
+    "fixups": 20,
+    "relocations": 17,
+    "reloc_order": "GROUPED"
+   },
+   "peer_losses": {},
+   "data": {
+    "_DATA": {
+     "exact": true,
+     "reasons": [],
+     "size": 213,
+     "reloc_order": "EXACT",
+     "start": 362118,
+     "class": "DATA",
+     "align": "word",
+     "far": false
+    },
+    "CONST": {
+     "exact": true,
+     "reasons": [],
+     "size": 24,
+     "reloc_order": "GROUPED",
+     "start": 385704,
+     "class": "CONST",
+     "align": "word",
+     "far": false
+    }
+   },
+   "module_exact": false,
+   "object_sha256": "bf28a33144db9e5fa67228d8c64d0681b5d4626e3f901069b9870849ba1e4868",
+   "log": ""
+  },
+  {
+   "name": "first-union",
+   "source_sha256_lf": "81b3b8ae821bee2d951a4bbe16fde978e5359ab4fd4a41d4b16e4b42cca95a27",
+   "why": "",
+   "compile_ok": true,
+   "target": {
+    "exact": false,
+    "reasons": [
+     "bytes differ (first at +0x42, 2 differing)"
+    ],
+    "fixups": 20,
+    "relocations": 17,
+    "reloc_order": "GROUPED"
+   },
+   "peer_losses": {},
+   "data": {
+    "_DATA": {
+     "exact": true,
+     "reasons": [],
+     "size": 213,
+     "reloc_order": "EXACT",
+     "start": 362118,
+     "class": "DATA",
+     "align": "word",
+     "far": false
+    },
+    "CONST": {
+     "exact": true,
+     "reasons": [],
+     "size": 24,
+     "reloc_order": "GROUPED",
+     "start": 385704,
+     "class": "CONST",
+     "align": "word",
+     "far": false
+    }
+   },
+   "module_exact": false,
+   "object_sha256": "758153cbf0014ea33f1ec1f6dd3595c2294e48f3270c834be0da1f61ce834a23",
+   "log": ""
+  },
+  {
+   "name": "first-first-member",
+   "source_sha256_lf": "87235606db6572b3b089c061c0f32ef30e0f51961479f154824d64761d82b457",
+   "why": "",
+   "compile_ok": true,
+   "target": {
+    "exact": false,
+    "reasons": [
+     "bytes differ (first at +0x42, 2 differing)"
+    ],
+    "fixups": 20,
+    "relocations": 17,
+    "reloc_order": "GROUPED"
+   },
+   "peer_losses": {},
+   "data": {
+    "_DATA": {
+     "exact": true,
+     "reasons": [],
+     "size": 213,
+     "reloc_order": "EXACT",
+     "start": 362118,
+     "class": "DATA",
+     "align": "word",
+     "far": false
+    },
+    "CONST": {
+     "exact": true,
+     "reasons": [],
+     "size": 24,
+     "reloc_order": "GROUPED",
+     "start": 385704,
+     "class": "CONST",
+     "align": "word",
+     "far": false
+    }
+   },
+   "module_exact": false,
+   "object_sha256": "bf28a33144db9e5fa67228d8c64d0681b5d4626e3f901069b9870849ba1e4868",
+   "log": ""
+  },
+  {
+   "name": "first-void-cast",
+   "source_sha256_lf": "05ff435b6540e902eae932f1e38655f3742211834ed9bc247b71bcdbd4e833fd",
+   "why": "",
+   "compile_ok": true,
+   "target": {
+    "exact": false,
+    "reasons": [
+     "bytes differ (first at +0x42, 2 differing)"
+    ],
+    "fixups": 20,
+    "relocations": 17,
+    "reloc_order": "GROUPED"
+   },
+   "peer_losses": {},
+   "data": {
+    "_DATA": {
+     "exact": true,
+     "reasons": [],
+     "size": 213,
+     "reloc_order": "EXACT",
+     "start": 362118,
+     "class": "DATA",
+     "align": "word",
+     "far": false
+    },
+    "CONST": {
+     "exact": true,
+     "reasons": [],
+     "size": 24,
+     "reloc_order": "GROUPED",
+     "start": 385704,
+     "class": "CONST",
+     "align": "word",
+     "far": false
+    }
+   },
+   "module_exact": false,
+   "object_sha256": "bf28a33144db9e5fa67228d8c64d0681b5d4626e3f901069b9870849ba1e4868",
+   "log": ""
+  },
+  {
+   "name": "second-first-member",
+   "source_sha256_lf": "f37270235f22705c9de1f40a04b5f6a4e059721e477a6579303683487466f92c",
+   "why": "",
+   "compile_ok": true,
+   "target": {
+    "exact": false,
+    "reasons": [
+     "bytes differ (first at +0x42, 2 differing)"
+    ],
+    "fixups": 20,
+    "relocations": 17,
+    "reloc_order": "GROUPED"
+   },
+   "peer_losses": {},
+   "data": {
+    "_DATA": {
+     "exact": true,
+     "reasons": [],
+     "size": 213,
+     "reloc_order": "EXACT",
+     "start": 362118,
+     "class": "DATA",
+     "align": "word",
+     "far": false
+    },
+    "CONST": {
+     "exact": true,
+     "reasons": [],
+     "size": 24,
+     "reloc_order": "GROUPED",
+     "start": 385704,
+     "class": "CONST",
+     "align": "word",
+     "far": false
+    }
+   },
+   "module_exact": false,
+   "object_sha256": "bf28a33144db9e5fa67228d8c64d0681b5d4626e3f901069b9870849ba1e4868",
+   "log": ""
+  },
+  {
+   "name": "second-void-cast",
+   "source_sha256_lf": "cd0df90b97062e32b574090e5bbc0839b292f28a870a4149b39a3302971e31e9",
+   "why": "",
+   "compile_ok": true,
+   "target": {
+    "exact": false,
+    "reasons": [
+     "bytes differ (first at +0x42, 2 differing)"
+    ],
+    "fixups": 20,
+    "relocations": 17,
+    "reloc_order": "GROUPED"
+   },
+   "peer_losses": {},
+   "data": {
+    "_DATA": {
+     "exact": true,
+     "reasons": [],
+     "size": 213,
+     "reloc_order": "EXACT",
+     "start": 362118,
+     "class": "DATA",
+     "align": "word",
+     "far": false
+    },
+    "CONST": {
+     "exact": true,
+     "reasons": [],
+     "size": 24,
+     "reloc_order": "GROUPED",
+     "start": 385704,
+     "class": "CONST",
+     "align": "word",
+     "far": false
+    }
+   },
+   "module_exact": false,
+   "object_sha256": "bf28a33144db9e5fa67228d8c64d0681b5d4626e3f901069b9870849ba1e4868",
+   "log": ""
+  },
+  {
+   "name": "both-first-member",
+   "source_sha256_lf": "e8eca6529d51e21360373a4abe3be5a1cb119816dd616ca6532fe6db3b06bbee",
+   "why": "",
+   "compile_ok": true,
+   "target": {
+    "exact": false,
+    "reasons": [
+     "bytes differ (first at +0x42, 2 differing)"
+    ],
+    "fixups": 20,
+    "relocations": 17,
+    "reloc_order": "GROUPED"
+   },
+   "peer_losses": {},
+   "data": {
+    "_DATA": {
+     "exact": true,
+     "reasons": [],
+     "size": 213,
+     "reloc_order": "EXACT",
+     "start": 362118,
+     "class": "DATA",
+     "align": "word",
+     "far": false
+    },
+    "CONST": {
+     "exact": true,
+     "reasons": [],
+     "size": 24,
+     "reloc_order": "GROUPED",
+     "start": 385704,
+     "class": "CONST",
+     "align": "word",
+     "far": false
+    }
+   },
+   "module_exact": false,
+   "object_sha256": "bf28a33144db9e5fa67228d8c64d0681b5d4626e3f901069b9870849ba1e4868",
+   "log": ""
+  },
+  {
+   "name": "both-void-cast",
+   "source_sha256_lf": "1273f4c54d00cde56a6c0fe3ad48ff852f80b3c99575b6632037b723601a0616",
+   "why": "",
+   "compile_ok": true,
+   "target": {
+    "exact": false,
+    "reasons": [
+     "bytes differ (first at +0x42, 2 differing)"
+    ],
+    "fixups": 20,
+    "relocations": 17,
+    "reloc_order": "GROUPED"
+   },
+   "peer_losses": {},
+   "data": {
+    "_DATA": {
+     "exact": true,
+     "reasons": [],
+     "size": 213,
+     "reloc_order": "EXACT",
+     "start": 362118,
+     "class": "DATA",
+     "align": "word",
+     "far": false
+    },
+    "CONST": {
+     "exact": true,
+     "reasons": [],
+     "size": 24,
+     "reloc_order": "GROUPED",
+     "start": 385704,
+     "class": "CONST",
+     "align": "word",
+     "far": false
+    }
+   },
+   "module_exact": false,
+   "object_sha256": "bf28a33144db9e5fa67228d8c64d0681b5d4626e3f901069b9870849ba1e4868",
+   "log": ""
+  }
+ ]
+}

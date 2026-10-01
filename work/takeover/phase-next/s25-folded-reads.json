@@ -1,0 +1,1406 @@
+{
+ "manifest_sha256": "a454a845c9cbc03870ab4d352bed97eeb6823da3b6b4c5790eba901c9430bab7",
+ "module": "S25:3BA4",
+ "function": "o25_3BA4_1035",
+ "profile": "msc600ax",
+ "flags": [
+  "/AL",
+  "/Os",
+  "/Oe",
+  "/Og",
+  "/Zi"
+ ],
+ "accepted_peers": [
+  "DoAntSimY",
+  "o25_3BA4_0999",
+  "o25_3BA4_0C01",
+  "o25_3BA4_0DFB",
+  "o25_3BA4_1581",
+  "o25_3BA4_188A",
+  "o25_3BA4_1935",
+  "o25_3BA4_19AD",
+  "o25_3BA4_1A0D",
+  "ExitNest",
+  "o25_3BA4_13AB",
+  "o25_3BA4_1A9F",
+  "DoAntMoveY"
+ ],
+ "variants": [
+  {
+   "name": "base",
+   "source_sha256_lf": "b8edf99f8db14d7cd2d4a4ee611c6de7177e005fb794dcb48e83824302c3ac40",
+   "why": "",
+   "compile_ok": true,
+   "target": {
+    "exact": false,
+    "reasons": [
+     "bytes differ (first at +0xd7, 2 differing)"
+    ],
+    "fixups": 18,
+    "relocations": 6,
+    "reloc_order": "GROUPED"
+   },
+   "peer_losses": {},
+   "data": {
+    "CONST": {
+     "exact": true,
+     "reasons": [],
+     "size": 96,
+     "reloc_order": "GROUPED",
+     "start": 386162,
+     "class": "CONST",
+     "align": "word",
+     "far": false
+    },
+    "_DATA": {
+     "exact": true,
+     "reasons": [],
+     "size": 21,
+     "reloc_order": "EXACT",
+     "start": 363054,
+     "class": "DATA",
+     "align": "word",
+     "far": false
+    }
+   },
+   "module_exact": false,
+   "object_sha256": "eeb6e4fb3d8a2b51d1794995e4671d05f4f88bae75797ef6a9205604f6af00db",
+   "log": ""
+  },
+  {
+   "name": "m1-word-before",
+   "source_sha256_lf": "425b3ad52c085cb744b816e16df8ad4015e8ca05cdf7de54f2fb462e1b86f72a",
+   "why": "USE-1/USE-2 diagnostic: original eliminated expression unknown; any match requires STEERED",
+   "compile_ok": true,
+   "target": {
+    "exact": false,
+    "reasons": [
+     "bytes differ (first at +0xd7, 2 differing)"
+    ],
+    "fixups": 18,
+    "relocations": 6,
+    "reloc_order": "GROUPED"
+   },
+   "peer_losses": {},
+   "data": {
+    "CONST": {
+     "exact": true,
+     "reasons": [],
+     "size": 96,
+     "reloc_order": "GROUPED",
+     "start": 386162,
+     "class": "CONST",
+     "align": "word",
+     "far": false
+    },
+    "_DATA": {
+     "exact": true,
+     "reasons": [],
+     "size": 21,
+     "reloc_order": "EXACT",
+     "start": 363054,
+     "class": "DATA",
+     "align": "word",
+     "far": false
+    }
+   },
+   "module_exact": false,
+   "object_sha256": "eeb6e4fb3d8a2b51d1794995e4671d05f4f88bae75797ef6a9205604f6af00db",
+   "log": ""
+  },
+  {
+   "name": "m1-word-after",
+   "source_sha256_lf": "fd72a8b7d3f7b505c45a3aca876f19fabb94448fb1a0a6dab26153ca93335427",
+   "why": "USE-1/USE-2 diagnostic: original eliminated expression unknown; any match requires STEERED",
+   "compile_ok": true,
+   "target": {
+    "exact": false,
+    "reasons": [
+     "bytes differ (first at +0xd7, 2 differing)"
+    ],
+    "fixups": 18,
+    "relocations": 6,
+    "reloc_order": "GROUPED"
+   },
+   "peer_losses": {},
+   "data": {
+    "CONST": {
+     "exact": true,
+     "reasons": [],
+     "size": 96,
+     "reloc_order": "GROUPED",
+     "start": 386162,
+     "class": "CONST",
+     "align": "word",
+     "far": false
+    },
+    "_DATA": {
+     "exact": true,
+     "reasons": [],
+     "size": 21,
+     "reloc_order": "EXACT",
+     "start": 363054,
+     "class": "DATA",
+     "align": "word",
+     "far": false
+    }
+   },
+   "module_exact": false,
+   "object_sha256": "eeb6e4fb3d8a2b51d1794995e4671d05f4f88bae75797ef6a9205604f6af00db",
+   "log": ""
+  },
+  {
+   "name": "m1-byte-before",
+   "source_sha256_lf": "a9f0cc3920b904c0cdcc81b1eaa383c9a826f09f4aeae9bad572c066ff20cd91",
+   "why": "USE-1/USE-2 diagnostic: original eliminated expression unknown; any match requires STEERED",
+   "compile_ok": true,
+   "target": {
+    "exact": false,
+    "reasons": [
+     "bytes differ (first at +0xd7, 2 differing)"
+    ],
+    "fixups": 18,
+    "relocations": 6,
+    "reloc_order": "GROUPED"
+   },
+   "peer_losses": {},
+   "data": {
+    "CONST": {
+     "exact": true,
+     "reasons": [],
+     "size": 96,
+     "reloc_order": "GROUPED",
+     "start": 386162,
+     "class": "CONST",
+     "align": "word",
+     "far": false
+    },
+    "_DATA": {
+     "exact": true,
+     "reasons": [],
+     "size": 21,
+     "reloc_order": "EXACT",
+     "start": 363054,
+     "class": "DATA",
+     "align": "word",
+     "far": false
+    }
+   },
+   "module_exact": false,
+   "object_sha256": "eeb6e4fb3d8a2b51d1794995e4671d05f4f88bae75797ef6a9205604f6af00db",
+   "log": ""
+  },
+  {
+   "name": "m1-byte-after",
+   "source_sha256_lf": "10f0015c2b1df677a828a988592b74ddf622e20c7ee4285311949319e0c656d9",
+   "why": "USE-1/USE-2 diagnostic: original eliminated expression unknown; any match requires STEERED",
+   "compile_ok": true,
+   "target": {
+    "exact": false,
+    "reasons": [
+     "bytes differ (first at +0xd7, 2 differing)"
+    ],
+    "fixups": 18,
+    "relocations": 6,
+    "reloc_order": "GROUPED"
+   },
+   "peer_losses": {},
+   "data": {
+    "CONST": {
+     "exact": true,
+     "reasons": [],
+     "size": 96,
+     "reloc_order": "GROUPED",
+     "start": 386162,
+     "class": "CONST",
+     "align": "word",
+     "far": false
+    },
+    "_DATA": {
+     "exact": true,
+     "reasons": [],
+     "size": 21,
+     "reloc_order": "EXACT",
+     "start": 363054,
+     "class": "DATA",
+     "align": "word",
+     "far": false
+    }
+   },
+   "module_exact": false,
+   "object_sha256": "eeb6e4fb3d8a2b51d1794995e4671d05f4f88bae75797ef6a9205604f6af00db",
+   "log": ""
+  },
+  {
+   "name": "m2-word-before",
+   "source_sha256_lf": "8f9dc4fd76924d8ae81b6e012d66cbf379761aec0378051ffa74979a23b80c52",
+   "why": "USE-1/USE-2 diagnostic: original eliminated expression unknown; any match requires STEERED",
+   "compile_ok": true,
+   "target": {
+    "exact": false,
+    "reasons": [
+     "length 284 != target 281",
+     "bytes differ (first at +0xcf, 72 differing)",
+     "relocation set differs (6 vs 6)"
+    ],
+    "fixups": 18,
+    "relocations": 6,
+    "reloc_order": "EXACT"
+   },
+   "peer_losses": {},
+   "data": {
+    "CONST": {
+     "exact": true,
+     "reasons": [],
+     "size": 96,
+     "reloc_order": "GROUPED",
+     "start": 386162,
+     "class": "CONST",
+     "align": "word",
+     "far": false
+    },
+    "_DATA": {
+     "exact": true,
+     "reasons": [],
+     "size": 21,
+     "reloc_order": "EXACT",
+     "start": 363054,
+     "class": "DATA",
+     "align": "word",
+     "far": false
+    }
+   },
+   "module_exact": false,
+   "object_sha256": "34ec0de09170bbf4215bb021205be6b009e5cd2ce1ea5cfb06689a6fb8def193",
+   "log": ""
+  },
+  {
+   "name": "m2-word-after",
+   "source_sha256_lf": "8f9448e8ae8a1286675afce1f95276697608bca2379fc66a66b663a7e86dfd99",
+   "why": "USE-1/USE-2 diagnostic: original eliminated expression unknown; any match requires STEERED",
+   "compile_ok": true,
+   "target": {
+    "exact": false,
+    "reasons": [
+     "length 290 != target 281",
+     "fixup at +0x116 crosses the extent end",
+     "bytes differ (first at +0xd0, 71 differing)",
+     "relocation set differs (5 vs 6)"
+    ],
+    "fixups": 17,
+    "relocations": 6,
+    "reloc_order": "EXACT"
+   },
+   "peer_losses": {},
+   "data": {
+    "CONST": {
+     "exact": true,
+     "reasons": [],
+     "size": 96,
+     "reloc_order": "GROUPED",
+     "start": 386162,
+     "class": "CONST",
+     "align": "word",
+     "far": false
+    },
+    "_DATA": {
+     "exact": true,
+     "reasons": [],
+     "size": 21,
+     "reloc_order": "EXACT",
+     "start": 363054,
+     "class": "DATA",
+     "align": "word",
+     "far": false
+    }
+   },
+   "module_exact": false,
+   "object_sha256": "38af730b9bfd4730915a4ed49e9d1f85408f4c205de9ea0ec4ec48fc0eeaa0e4",
+   "log": ""
+  },
+  {
+   "name": "m2-byte-before",
+   "source_sha256_lf": "e74d71725298f00692e2a1a7ee9f6d6fdae24d3dc25883e5902b83d83eeea4b3",
+   "why": "USE-1/USE-2 diagnostic: original eliminated expression unknown; any match requires STEERED",
+   "compile_ok": true,
+   "target": {
+    "exact": false,
+    "reasons": [
+     "length 284 != target 281",
+     "bytes differ (first at +0xcf, 72 differing)",
+     "relocation set differs (6 vs 6)"
+    ],
+    "fixups": 18,
+    "relocations": 6,
+    "reloc_order": "EXACT"
+   },
+   "peer_losses": {},
+   "data": {
+    "CONST": {
+     "exact": true,
+     "reasons": [],
+     "size": 96,
+     "reloc_order": "GROUPED",
+     "start": 386162,
+     "class": "CONST",
+     "align": "word",
+     "far": false
+    },
+    "_DATA": {
+     "exact": true,
+     "reasons": [],
+     "size": 21,
+     "reloc_order": "EXACT",
+     "start": 363054,
+     "class": "DATA",
+     "align": "word",
+     "far": false
+    }
+   },
+   "module_exact": false,
+   "object_sha256": "34ec0de09170bbf4215bb021205be6b009e5cd2ce1ea5cfb06689a6fb8def193",
+   "log": ""
+  },
+  {
+   "name": "m2-byte-after",
+   "source_sha256_lf": "3bf0abad7320a01a5a3c8f92972a0b998e4613a7ad6a44860a18645ae557fea0",
+   "why": "USE-1/USE-2 diagnostic: original eliminated expression unknown; any match requires STEERED",
+   "compile_ok": true,
+   "target": {
+    "exact": false,
+    "reasons": [
+     "length 290 != target 281",
+     "fixup at +0x116 crosses the extent end",
+     "bytes differ (first at +0xd0, 71 differing)",
+     "relocation set differs (5 vs 6)"
+    ],
+    "fixups": 17,
+    "relocations": 6,
+    "reloc_order": "EXACT"
+   },
+   "peer_losses": {},
+   "data": {
+    "CONST": {
+     "exact": true,
+     "reasons": [],
+     "size": 96,
+     "reloc_order": "GROUPED",
+     "start": 386162,
+     "class": "CONST",
+     "align": "word",
+     "far": false
+    },
+    "_DATA": {
+     "exact": true,
+     "reasons": [],
+     "size": 21,
+     "reloc_order": "EXACT",
+     "start": 363054,
+     "class": "DATA",
+     "align": "word",
+     "far": false
+    }
+   },
+   "module_exact": false,
+   "object_sha256": "38af730b9bfd4730915a4ed49e9d1f85408f4c205de9ea0ec4ec48fc0eeaa0e4",
+   "log": ""
+  },
+  {
+   "name": "m3-word-before",
+   "source_sha256_lf": "e4bd4252f09e15986a84f0d46dd50fc20c0cc897e20ab5e886bff3e003fb6ebe",
+   "why": "USE-1/USE-2 diagnostic: original eliminated expression unknown; any match requires STEERED",
+   "compile_ok": true,
+   "target": {
+    "exact": false,
+    "reasons": [
+     "length 287 != target 281",
+     "bytes differ (first at +0xd2, 42 differing)",
+     "relocation set differs (6 vs 6)"
+    ],
+    "fixups": 18,
+    "relocations": 6,
+    "reloc_order": "EXACT"
+   },
+   "peer_losses": {},
+   "data": {
+    "CONST": {
+     "exact": true,
+     "reasons": [],
+     "size": 96,
+     "reloc_order": "GROUPED",
+     "start": 386162,
+     "class": "CONST",
+     "align": "word",
+     "far": false
+    },
+    "_DATA": {
+     "exact": true,
+     "reasons": [],
+     "size": 21,
+     "reloc_order": "EXACT",
+     "start": 363054,
+     "class": "DATA",
+     "align": "word",
+     "far": false
+    }
+   },
+   "module_exact": false,
+   "object_sha256": "4c9f2ec162c7c0989d7d3b2ca814a6ca5fde61ce87e62790918d07d37d4c4d39",
+   "log": ""
+  },
+  {
+   "name": "m3-word-after",
+   "source_sha256_lf": "f27ebd02f2c4b0be8deeb393229120614de39a903667c3bfae4d6fad47c5e0ee",
+   "why": "USE-1/USE-2 diagnostic: original eliminated expression unknown; any match requires STEERED",
+   "compile_ok": true,
+   "target": {
+    "exact": false,
+    "reasons": [
+     "length 290 != target 281",
+     "fixup at +0x116 crosses the extent end",
+     "bytes differ (first at +0xd0, 71 differing)",
+     "relocation set differs (5 vs 6)"
+    ],
+    "fixups": 17,
+    "relocations": 6,
+    "reloc_order": "EXACT"
+   },
+   "peer_losses": {},
+   "data": {
+    "CONST": {
+     "exact": true,
+     "reasons": [],
+     "size": 96,
+     "reloc_order": "GROUPED",
+     "start": 386162,
+     "class": "CONST",
+     "align": "word",
+     "far": false
+    },
+    "_DATA": {
+     "exact": true,
+     "reasons": [],
+     "size": 21,
+     "reloc_order": "EXACT",
+     "start": 363054,
+     "class": "DATA",
+     "align": "word",
+     "far": false
+    }
+   },
+   "module_exact": false,
+   "object_sha256": "38af730b9bfd4730915a4ed49e9d1f85408f4c205de9ea0ec4ec48fc0eeaa0e4",
+   "log": ""
+  },
+  {
+   "name": "m3-byte-before",
+   "source_sha256_lf": "37c3bb272887f116050b545bef84a70beaa6c686baaaf855d2b662baa0bf36e7",
+   "why": "USE-1/USE-2 diagnostic: original eliminated expression unknown; any match requires STEERED",
+   "compile_ok": true,
+   "target": {
+    "exact": false,
+    "reasons": [
+     "length 287 != target 281",
+     "bytes differ (first at +0xd2, 42 differing)",
+     "relocation set differs (6 vs 6)"
+    ],
+    "fixups": 18,
+    "relocations": 6,
+    "reloc_order": "EXACT"
+   },
+   "peer_losses": {},
+   "data": {
+    "CONST": {
+     "exact": true,
+     "reasons": [],
+     "size": 96,
+     "reloc_order": "GROUPED",
+     "start": 386162,
+     "class": "CONST",
+     "align": "word",
+     "far": false
+    },
+    "_DATA": {
+     "exact": true,
+     "reasons": [],
+     "size": 21,
+     "reloc_order": "EXACT",
+     "start": 363054,
+     "class": "DATA",
+     "align": "word",
+     "far": false
+    }
+   },
+   "module_exact": false,
+   "object_sha256": "4c9f2ec162c7c0989d7d3b2ca814a6ca5fde61ce87e62790918d07d37d4c4d39",
+   "log": ""
+  },
+  {
+   "name": "m3-byte-after",
+   "source_sha256_lf": "edbd8de812ec2816d4193089568426a296a6fc389b30c648d1205511bf6b531a",
+   "why": "USE-1/USE-2 diagnostic: original eliminated expression unknown; any match requires STEERED",
+   "compile_ok": true,
+   "target": {
+    "exact": false,
+    "reasons": [
+     "length 290 != target 281",
+     "fixup at +0x116 crosses the extent end",
+     "bytes differ (first at +0xd0, 71 differing)",
+     "relocation set differs (5 vs 6)"
+    ],
+    "fixups": 17,
+    "relocations": 6,
+    "reloc_order": "EXACT"
+   },
+   "peer_losses": {},
+   "data": {
+    "CONST": {
+     "exact": true,
+     "reasons": [],
+     "size": 96,
+     "reloc_order": "GROUPED",
+     "start": 386162,
+     "class": "CONST",
+     "align": "word",
+     "far": false
+    },
+    "_DATA": {
+     "exact": true,
+     "reasons": [],
+     "size": 21,
+     "reloc_order": "EXACT",
+     "start": 363054,
+     "class": "DATA",
+     "align": "word",
+     "far": false
+    }
+   },
+   "module_exact": false,
+   "object_sha256": "38af730b9bfd4730915a4ed49e9d1f85408f4c205de9ea0ec4ec48fc0eeaa0e4",
+   "log": ""
+  },
+  {
+   "name": "m4-word-before",
+   "source_sha256_lf": "ec560a49589305a3d60c737d2fafd0c7084ea3e3e87fab56e7876e57fca5ade3",
+   "why": "USE-1/USE-2 diagnostic: original eliminated expression unknown; any match requires STEERED",
+   "compile_ok": true,
+   "target": {
+    "exact": false,
+    "reasons": [
+     "length 284 != target 281",
+     "bytes differ (first at +0xcf, 72 differing)",
+     "relocation set differs (6 vs 6)"
+    ],
+    "fixups": 18,
+    "relocations": 6,
+    "reloc_order": "EXACT"
+   },
+   "peer_losses": {},
+   "data": {
+    "CONST": {
+     "exact": true,
+     "reasons": [],
+     "size": 96,
+     "reloc_order": "GROUPED",
+     "start": 386162,
+     "class": "CONST",
+     "align": "word",
+     "far": false
+    },
+    "_DATA": {
+     "exact": true,
+     "reasons": [],
+     "size": 21,
+     "reloc_order": "EXACT",
+     "start": 363054,
+     "class": "DATA",
+     "align": "word",
+     "far": false
+    }
+   },
+   "module_exact": false,
+   "object_sha256": "ba673c9546ff517a1792198d93fa1be61049772d6be9df994adf27fd2b27534a",
+   "log": ""
+  },
+  {
+   "name": "m4-word-after",
+   "source_sha256_lf": "0bd70e0da70eb75f26ea3e9502b220a5c11f61b7f5d64cfa8faf083d429b3fcd",
+   "why": "USE-1/USE-2 diagnostic: original eliminated expression unknown; any match requires STEERED",
+   "compile_ok": true,
+   "target": {
+    "exact": false,
+    "reasons": [
+     "length 290 != target 281",
+     "fixup at +0x116 crosses the extent end",
+     "bytes differ (first at +0xd0, 72 differing)",
+     "relocation set differs (5 vs 6)"
+    ],
+    "fixups": 17,
+    "relocations": 6,
+    "reloc_order": "EXACT"
+   },
+   "peer_losses": {},
+   "data": {
+    "CONST": {
+     "exact": true,
+     "reasons": [],
+     "size": 96,
+     "reloc_order": "GROUPED",
+     "start": 386162,
+     "class": "CONST",
+     "align": "word",
+     "far": false
+    },
+    "_DATA": {
+     "exact": true,
+     "reasons": [],
+     "size": 21,
+     "reloc_order": "EXACT",
+     "start": 363054,
+     "class": "DATA",
+     "align": "word",
+     "far": false
+    }
+   },
+   "module_exact": false,
+   "object_sha256": "7e98dead0298daeac5da2155520a99cfd022d75c5ee2f1e0a4707b1c06a242cd",
+   "log": ""
+  },
+  {
+   "name": "m4-byte-before",
+   "source_sha256_lf": "cda7af7f8a96ad630dc57b6d74284199258deea888b8646296852f36ae93c358",
+   "why": "USE-1/USE-2 diagnostic: original eliminated expression unknown; any match requires STEERED",
+   "compile_ok": true,
+   "target": {
+    "exact": false,
+    "reasons": [
+     "length 284 != target 281",
+     "bytes differ (first at +0xcf, 72 differing)",
+     "relocation set differs (6 vs 6)"
+    ],
+    "fixups": 18,
+    "relocations": 6,
+    "reloc_order": "EXACT"
+   },
+   "peer_losses": {},
+   "data": {
+    "CONST": {
+     "exact": true,
+     "reasons": [],
+     "size": 96,
+     "reloc_order": "GROUPED",
+     "start": 386162,
+     "class": "CONST",
+     "align": "word",
+     "far": false
+    },
+    "_DATA": {
+     "exact": true,
+     "reasons": [],
+     "size": 21,
+     "reloc_order": "EXACT",
+     "start": 363054,
+     "class": "DATA",
+     "align": "word",
+     "far": false
+    }
+   },
+   "module_exact": false,
+   "object_sha256": "ba673c9546ff517a1792198d93fa1be61049772d6be9df994adf27fd2b27534a",
+   "log": ""
+  },
+  {
+   "name": "m4-byte-after",
+   "source_sha256_lf": "16b1bed9d4bf68996911deeb6c5475f6bcb8c20c0be9752beebcc2abbe06abcb",
+   "why": "USE-1/USE-2 diagnostic: original eliminated expression unknown; any match requires STEERED",
+   "compile_ok": true,
+   "target": {
+    "exact": false,
+    "reasons": [
+     "length 290 != target 281",
+     "fixup at +0x116 crosses the extent end",
+     "bytes differ (first at +0xd0, 72 differing)",
+     "relocation set differs (5 vs 6)"
+    ],
+    "fixups": 17,
+    "relocations": 6,
+    "reloc_order": "EXACT"
+   },
+   "peer_losses": {},
+   "data": {
+    "CONST": {
+     "exact": true,
+     "reasons": [],
+     "size": 96,
+     "reloc_order": "GROUPED",
+     "start": 386162,
+     "class": "CONST",
+     "align": "word",
+     "far": false
+    },
+    "_DATA": {
+     "exact": true,
+     "reasons": [],
+     "size": 21,
+     "reloc_order": "EXACT",
+     "start": 363054,
+     "class": "DATA",
+     "align": "word",
+     "far": false
+    }
+   },
+   "module_exact": false,
+   "object_sha256": "7e98dead0298daeac5da2155520a99cfd022d75c5ee2f1e0a4707b1c06a242cd",
+   "log": ""
+  },
+  {
+   "name": "m5-word-before",
+   "source_sha256_lf": "3041be08caf404b95d032bfd14a06791c2a700b384c5c643fe6abdb85e5bd324",
+   "why": "USE-1/USE-2 diagnostic: original eliminated expression unknown; any match requires STEERED",
+   "compile_ok": true,
+   "target": {
+    "exact": false,
+    "reasons": [
+     "length 287 != target 281",
+     "bytes differ (first at +0xd3, 41 differing)",
+     "relocation set differs (6 vs 6)"
+    ],
+    "fixups": 18,
+    "relocations": 6,
+    "reloc_order": "EXACT"
+   },
+   "peer_losses": {},
+   "data": {
+    "CONST": {
+     "exact": true,
+     "reasons": [],
+     "size": 96,
+     "reloc_order": "GROUPED",
+     "start": 386162,
+     "class": "CONST",
+     "align": "word",
+     "far": false
+    },
+    "_DATA": {
+     "exact": true,
+     "reasons": [],
+     "size": 21,
+     "reloc_order": "EXACT",
+     "start": 363054,
+     "class": "DATA",
+     "align": "word",
+     "far": false
+    }
+   },
+   "module_exact": false,
+   "object_sha256": "9184186e75f5b92ffb49b00ad731f50b35a682e1cc27dc881507418dae9d8a92",
+   "log": ""
+  },
+  {
+   "name": "m5-word-after",
+   "source_sha256_lf": "9e572ee2a8b1afd92cd27414699dc9c5b68e7b243db552f315c916953932087b",
+   "why": "USE-1/USE-2 diagnostic: original eliminated expression unknown; any match requires STEERED",
+   "compile_ok": true,
+   "target": {
+    "exact": false,
+    "reasons": [
+     "length 290 != target 281",
+     "fixup at +0x116 crosses the extent end",
+     "bytes differ (first at +0xd0, 72 differing)",
+     "relocation set differs (5 vs 6)"
+    ],
+    "fixups": 17,
+    "relocations": 6,
+    "reloc_order": "EXACT"
+   },
+   "peer_losses": {},
+   "data": {
+    "CONST": {
+     "exact": true,
+     "reasons": [],
+     "size": 96,
+     "reloc_order": "GROUPED",
+     "start": 386162,
+     "class": "CONST",
+     "align": "word",
+     "far": false
+    },
+    "_DATA": {
+     "exact": true,
+     "reasons": [],
+     "size": 21,
+     "reloc_order": "EXACT",
+     "start": 363054,
+     "class": "DATA",
+     "align": "word",
+     "far": false
+    }
+   },
+   "module_exact": false,
+   "object_sha256": "7e98dead0298daeac5da2155520a99cfd022d75c5ee2f1e0a4707b1c06a242cd",
+   "log": ""
+  },
+  {
+   "name": "m5-byte-before",
+   "source_sha256_lf": "572520eab509d884af9f05789d93d526ec9668d2a99256845f7121a9e5e0e0d3",
+   "why": "USE-1/USE-2 diagnostic: original eliminated expression unknown; any match requires STEERED",
+   "compile_ok": true,
+   "target": {
+    "exact": false,
+    "reasons": [
+     "length 287 != target 281",
+     "bytes differ (first at +0xd3, 41 differing)",
+     "relocation set differs (6 vs 6)"
+    ],
+    "fixups": 18,
+    "relocations": 6,
+    "reloc_order": "EXACT"
+   },
+   "peer_losses": {},
+   "data": {
+    "CONST": {
+     "exact": true,
+     "reasons": [],
+     "size": 96,
+     "reloc_order": "GROUPED",
+     "start": 386162,
+     "class": "CONST",
+     "align": "word",
+     "far": false
+    },
+    "_DATA": {
+     "exact": true,
+     "reasons": [],
+     "size": 21,
+     "reloc_order": "EXACT",
+     "start": 363054,
+     "class": "DATA",
+     "align": "word",
+     "far": false
+    }
+   },
+   "module_exact": false,
+   "object_sha256": "9184186e75f5b92ffb49b00ad731f50b35a682e1cc27dc881507418dae9d8a92",
+   "log": ""
+  },
+  {
+   "name": "m5-byte-after",
+   "source_sha256_lf": "90e589e31e2163bf3998a9af7e144dc8f8f056be38c037a6a61e248978de3b14",
+   "why": "USE-1/USE-2 diagnostic: original eliminated expression unknown; any match requires STEERED",
+   "compile_ok": true,
+   "target": {
+    "exact": false,
+    "reasons": [
+     "length 290 != target 281",
+     "fixup at +0x116 crosses the extent end",
+     "bytes differ (first at +0xd0, 72 differing)",
+     "relocation set differs (5 vs 6)"
+    ],
+    "fixups": 17,
+    "relocations": 6,
+    "reloc_order": "EXACT"
+   },
+   "peer_losses": {},
+   "data": {
+    "CONST": {
+     "exact": true,
+     "reasons": [],
+     "size": 96,
+     "reloc_order": "GROUPED",
+     "start": 386162,
+     "class": "CONST",
+     "align": "word",
+     "far": false
+    },
+    "_DATA": {
+     "exact": true,
+     "reasons": [],
+     "size": 21,
+     "reloc_order": "EXACT",
+     "start": 363054,
+     "class": "DATA",
+     "align": "word",
+     "far": false
+    }
+   },
+   "module_exact": false,
+   "object_sha256": "7e98dead0298daeac5da2155520a99cfd022d75c5ee2f1e0a4707b1c06a242cd",
+   "log": ""
+  },
+  {
+   "name": "m6-word-before",
+   "source_sha256_lf": "abfa3992879dcb2dd33283c3a9a607e3ad1adca913c5bae800c058f444dd8402",
+   "why": "USE-1/USE-2 diagnostic: original eliminated expression unknown; any match requires STEERED",
+   "compile_ok": true,
+   "target": {
+    "exact": false,
+    "reasons": [
+     "length 287 != target 281",
+     "bytes differ (first at +0xcf, 42 differing)",
+     "relocation set differs (6 vs 6)"
+    ],
+    "fixups": 18,
+    "relocations": 6,
+    "reloc_order": "EXACT"
+   },
+   "peer_losses": {},
+   "data": {
+    "CONST": {
+     "exact": true,
+     "reasons": [],
+     "size": 96,
+     "reloc_order": "GROUPED",
+     "start": 386162,
+     "class": "CONST",
+     "align": "word",
+     "far": false
+    },
+    "_DATA": {
+     "exact": true,
+     "reasons": [],
+     "size": 21,
+     "reloc_order": "EXACT",
+     "start": 363054,
+     "class": "DATA",
+     "align": "word",
+     "far": false
+    }
+   },
+   "module_exact": false,
+   "object_sha256": "9a2a2a8d4fce9faa9a544edd32cf2cb316e23ad40b41458992cdab0a9b03f4b8",
+   "log": ""
+  },
+  {
+   "name": "m6-word-after",
+   "source_sha256_lf": "b81211adbea27f229bce077af3a7658288c876ea2e341f3fb907838dd0a5fcf4",
+   "why": "USE-1/USE-2 diagnostic: original eliminated expression unknown; any match requires STEERED",
+   "compile_ok": true,
+   "target": {
+    "exact": false,
+    "reasons": [
+     "length 293 != target 281",
+     "bytes differ (first at +0xd0, 48 differing)",
+     "relocation set differs (5 vs 6)"
+    ],
+    "fixups": 17,
+    "relocations": 6,
+    "reloc_order": "EXACT"
+   },
+   "peer_losses": {},
+   "data": {
+    "CONST": {
+     "exact": true,
+     "reasons": [],
+     "size": 96,
+     "reloc_order": "GROUPED",
+     "start": 386162,
+     "class": "CONST",
+     "align": "word",
+     "far": false
+    },
+    "_DATA": {
+     "exact": true,
+     "reasons": [],
+     "size": 21,
+     "reloc_order": "EXACT",
+     "start": 363054,
+     "class": "DATA",
+     "align": "word",
+     "far": false
+    }
+   },
+   "module_exact": false,
+   "object_sha256": "53fc35a441455e7c76364aab17b1ed87b19381777b016b7c5c7d30d486ccef06",
+   "log": ""
+  },
+  {
+   "name": "m6-byte-before",
+   "source_sha256_lf": "0e41b5f33f763c66fba7b18763b0ebea18339e5f323dfef4ad055ccd3dadc407",
+   "why": "USE-1/USE-2 diagnostic: original eliminated expression unknown; any match requires STEERED",
+   "compile_ok": true,
+   "target": {
+    "exact": false,
+    "reasons": [
+     "length 287 != target 281",
+     "bytes differ (first at +0xcf, 42 differing)",
+     "relocation set differs (6 vs 6)"
+    ],
+    "fixups": 18,
+    "relocations": 6,
+    "reloc_order": "EXACT"
+   },
+   "peer_losses": {},
+   "data": {
+    "CONST": {
+     "exact": true,
+     "reasons": [],
+     "size": 96,
+     "reloc_order": "GROUPED",
+     "start": 386162,
+     "class": "CONST",
+     "align": "word",
+     "far": false
+    },
+    "_DATA": {
+     "exact": true,
+     "reasons": [],
+     "size": 21,
+     "reloc_order": "EXACT",
+     "start": 363054,
+     "class": "DATA",
+     "align": "word",
+     "far": false
+    }
+   },
+   "module_exact": false,
+   "object_sha256": "9a2a2a8d4fce9faa9a544edd32cf2cb316e23ad40b41458992cdab0a9b03f4b8",
+   "log": ""
+  },
+  {
+   "name": "m6-byte-after",
+   "source_sha256_lf": "228e6eff6f2b752c92a84a5cd1320ab1f5131022bdab0c08c1d3751087f5fa4f",
+   "why": "USE-1/USE-2 diagnostic: original eliminated expression unknown; any match requires STEERED",
+   "compile_ok": true,
+   "target": {
+    "exact": false,
+    "reasons": [
+     "length 293 != target 281",
+     "bytes differ (first at +0xd0, 48 differing)",
+     "relocation set differs (5 vs 6)"
+    ],
+    "fixups": 17,
+    "relocations": 6,
+    "reloc_order": "EXACT"
+   },
+   "peer_losses": {},
+   "data": {
+    "CONST": {
+     "exact": true,
+     "reasons": [],
+     "size": 96,
+     "reloc_order": "GROUPED",
+     "start": 386162,
+     "class": "CONST",
+     "align": "word",
+     "far": false
+    },
+    "_DATA": {
+     "exact": true,
+     "reasons": [],
+     "size": 21,
+     "reloc_order": "EXACT",
+     "start": 363054,
+     "class": "DATA",
+     "align": "word",
+     "far": false
+    }
+   },
+   "module_exact": false,
+   "object_sha256": "53fc35a441455e7c76364aab17b1ed87b19381777b016b7c5c7d30d486ccef06",
+   "log": ""
+  },
+  {
+   "name": "m7-word-before",
+   "source_sha256_lf": "a38d0015855adb3928414f5333fff1cd42464ec9876e053259206a8029e60927",
+   "why": "USE-1/USE-2 diagnostic: original eliminated expression unknown; any match requires STEERED",
+   "compile_ok": true,
+   "target": {
+    "exact": false,
+    "reasons": [
+     "length 290 != target 281",
+     "fixup at +0x116 crosses the extent end",
+     "bytes differ (first at +0xd2, 70 differing)",
+     "relocation set differs (5 vs 6)"
+    ],
+    "fixups": 17,
+    "relocations": 6,
+    "reloc_order": "EXACT"
+   },
+   "peer_losses": {},
+   "data": {
+    "CONST": {
+     "exact": true,
+     "reasons": [],
+     "size": 96,
+     "reloc_order": "GROUPED",
+     "start": 386162,
+     "class": "CONST",
+     "align": "word",
+     "far": false
+    },
+    "_DATA": {
+     "exact": true,
+     "reasons": [],
+     "size": 21,
+     "reloc_order": "EXACT",
+     "start": 363054,
+     "class": "DATA",
+     "align": "word",
+     "far": false
+    }
+   },
+   "module_exact": false,
+   "object_sha256": "f66be8b99328eb2db3250ba6265572be3654450a317866865f99c890173cf876",
+   "log": ""
+  },
+  {
+   "name": "m7-word-after",
+   "source_sha256_lf": "4cde0b98930d035a5d16082a6cb363f87af743f10b21a6263b7d4d0489fd1319",
+   "why": "USE-1/USE-2 diagnostic: original eliminated expression unknown; any match requires STEERED",
+   "compile_ok": true,
+   "target": {
+    "exact": false,
+    "reasons": [
+     "length 293 != target 281",
+     "bytes differ (first at +0xd0, 48 differing)",
+     "relocation set differs (5 vs 6)"
+    ],
+    "fixups": 17,
+    "relocations": 6,
+    "reloc_order": "EXACT"
+   },
+   "peer_losses": {},
+   "data": {
+    "CONST": {
+     "exact": true,
+     "reasons": [],
+     "size": 96,
+     "reloc_order": "GROUPED",
+     "start": 386162,
+     "class": "CONST",
+     "align": "word",
+     "far": false
+    },
+    "_DATA": {
+     "exact": true,
+     "reasons": [],
+     "size": 21,
+     "reloc_order": "EXACT",
+     "start": 363054,
+     "class": "DATA",
+     "align": "word",
+     "far": false
+    }
+   },
+   "module_exact": false,
+   "object_sha256": "53fc35a441455e7c76364aab17b1ed87b19381777b016b7c5c7d30d486ccef06",
+   "log": ""
+  },
+  {
+   "name": "m7-byte-before",
+   "source_sha256_lf": "9d986dda8445a931797219a7e8fd8ea7e7f789837c94b1480bb4a973c0839382",
+   "why": "USE-1/USE-2 diagnostic: original eliminated expression unknown; any match requires STEERED",
+   "compile_ok": true,
+   "target": {
+    "exact": false,
+    "reasons": [
+     "length 290 != target 281",
+     "fixup at +0x116 crosses the extent end",
+     "bytes differ (first at +0xd2, 70 differing)",
+     "relocation set differs (5 vs 6)"
+    ],
+    "fixups": 17,
+    "relocations": 6,
+    "reloc_order": "EXACT"
+   },
+   "peer_losses": {},
+   "data": {
+    "CONST": {
+     "exact": true,
+     "reasons": [],
+     "size": 96,
+     "reloc_order": "GROUPED",
+     "start": 386162,
+     "class": "CONST",
+     "align": "word",
+     "far": false
+    },
+    "_DATA": {
+     "exact": true,
+     "reasons": [],
+     "size": 21,
+     "reloc_order": "EXACT",
+     "start": 363054,
+     "class": "DATA",
+     "align": "word",
+     "far": false
+    }
+   },
+   "module_exact": false,
+   "object_sha256": "f66be8b99328eb2db3250ba6265572be3654450a317866865f99c890173cf876",
+   "log": ""
+  },
+  {
+   "name": "m7-byte-after",
+   "source_sha256_lf": "30c0f3405201ba87dfedb8586a0f34d9463b225e790eefe3230a58ccd4f90319",
+   "why": "USE-1/USE-2 diagnostic: original eliminated expression unknown; any match requires STEERED",
+   "compile_ok": true,
+   "target": {
+    "exact": false,
+    "reasons": [
+     "length 293 != target 281",
+     "bytes differ (first at +0xd0, 48 differing)",
+     "relocation set differs (5 vs 6)"
+    ],
+    "fixups": 17,
+    "relocations": 6,
+    "reloc_order": "EXACT"
+   },
+   "peer_losses": {},
+   "data": {
+    "CONST": {
+     "exact": true,
+     "reasons": [],
+     "size": 96,
+     "reloc_order": "GROUPED",
+     "start": 386162,
+     "class": "CONST",
+     "align": "word",
+     "far": false
+    },
+    "_DATA": {
+     "exact": true,
+     "reasons": [],
+     "size": 21,
+     "reloc_order": "EXACT",
+     "start": 363054,
+     "class": "DATA",
+     "align": "word",
+     "far": false
+    }
+   },
+   "module_exact": false,
+   "object_sha256": "53fc35a441455e7c76364aab17b1ed87b19381777b016b7c5c7d30d486ccef06",
+   "log": ""
+  },
+  {
+   "name": "argument-fd_50F6_048C",
+   "source_sha256_lf": "f9c19915d51ce9a4af99a68233789a9b1c0cc1e9f0c4a6d5f4fb1ab60cf87c05",
+   "why": "folded argument control",
+   "compile_ok": true,
+   "target": {
+    "exact": false,
+    "reasons": [
+     "length 293 != target 281",
+     "bytes differ (first at +0x4, 264 differing)",
+     "relocation set differs (7 vs 6)"
+    ],
+    "fixups": 26,
+    "relocations": 6,
+    "reloc_order": "EXACT"
+   },
+   "peer_losses": {},
+   "data": {
+    "CONST": {
+     "exact": true,
+     "reasons": [],
+     "size": 96,
+     "reloc_order": "GROUPED",
+     "start": 386162,
+     "class": "CONST",
+     "align": "word",
+     "far": false
+    },
+    "_DATA": {
+     "exact": true,
+     "reasons": [],
+     "size": 21,
+     "reloc_order": "EXACT",
+     "start": 363054,
+     "class": "DATA",
+     "align": "word",
+     "far": false
+    }
+   },
+   "module_exact": false,
+   "object_sha256": "ebaec50e933e9e23e3fb72888a935a00c6a6c5a3b1899c8904c20215c05a048a",
+   "log": ""
+  },
+  {
+   "name": "argument-fd_50F6_047C",
+   "source_sha256_lf": "e8e526980ed4e5241014a4a9d5636b767fb666410e3dbb5961636e3f738a377c",
+   "why": "folded argument control",
+   "compile_ok": true,
+   "target": {
+    "exact": false,
+    "reasons": [
+     "length 282 != target 281",
+     "bytes differ (first at +0xd2, 67 differing)",
+     "relocation set differs (6 vs 6)"
+    ],
+    "fixups": 18,
+    "relocations": 6,
+    "reloc_order": "EXACT"
+   },
+   "peer_losses": {},
+   "data": {
+    "CONST": {
+     "exact": true,
+     "reasons": [],
+     "size": 96,
+     "reloc_order": "GROUPED",
+     "start": 386162,
+     "class": "CONST",
+     "align": "word",
+     "far": false
+    },
+    "_DATA": {
+     "exact": true,
+     "reasons": [],
+     "size": 21,
+     "reloc_order": "EXACT",
+     "start": 363054,
+     "class": "DATA",
+     "align": "word",
+     "far": false
+    }
+   },
+   "module_exact": false,
+   "object_sha256": "77160414752e32ae102768c764d024ae6c2a3731fddbacf55ec002c0e7b6442c",
+   "log": ""
+  },
+  {
+   "name": "argument-fd_50F6_048A",
+   "source_sha256_lf": "1ab4552e8bfb952930e69ad3084c232b1a7834524e598f2db8066a82e63d7386",
+   "why": "folded argument control",
+   "compile_ok": true,
+   "target": {
+    "exact": false,
+    "reasons": [
+     "length 302 != target 281",
+     "bytes differ (first at +0x4, 188 differing)",
+     "relocation set differs (6 vs 6)"
+    ],
+    "fixups": 28,
+    "relocations": 6,
+    "reloc_order": "EXACT"
+   },
+   "peer_losses": {},
+   "data": {
+    "CONST": {
+     "exact": true,
+     "reasons": [],
+     "size": 96,
+     "reloc_order": "GROUPED",
+     "start": 386162,
+     "class": "CONST",
+     "align": "word",
+     "far": false
+    },
+    "_DATA": {
+     "exact": true,
+     "reasons": [],
+     "size": 21,
+     "reloc_order": "EXACT",
+     "start": 363054,
+     "class": "DATA",
+     "align": "word",
+     "far": false
+    }
+   },
+   "module_exact": false,
+   "object_sha256": "b5a08bb640a1480ec20bd5552c759aafca3e62db7a207c7686afefe4a76b6eb2",
+   "log": ""
+  }
+ ]
+}

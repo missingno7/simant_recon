@@ -12,6 +12,8 @@ fixup/relocation differences).  The best draft per function (strict exact
 first, then aligned-opcode score) is kept under build/search/FUNCTION/.
 
 Search never publishes; use promote.py for canonical source.
+Defaults come from the target object's manifest profile, flags and private-data
+placements. Explicit options override them; an unrecorded object uses profile defaults.
 """
 from __future__ import annotations
 
@@ -35,6 +37,8 @@ import compiler  # noqa: E402
 import exe as exemod  # noqa: E402
 import match  # noqa: E402
 import functions as fnmod  # noqa: E402
+import modctx  # noqa: E402
+import modules as modmod  # noqa: E402
 
 ROOT = exemod.ROOT
 md = Cs(CS_ARCH_X86, CS_MODE_16)
@@ -85,6 +89,30 @@ def print_side_by_side(d: dict, limit: int = 400):
                 return
 
 
+def options(f: dict, asm: bool, profile: str | None, flags, placements: dict) -> dict:
+    """Use the same object context as whole-module verification, retaining CLI overrides."""
+    man = modmod.load_manifest()
+    key = modctx.key_for_function(f, man)
+    rec = man["modules"].get(key, {})
+    # A C experiment in an assembly-owned object must still go through a compiler.
+    compatible = rec.get("lang", "c") == ("asm" if asm else "c")
+    recorded = rec.get("profile") if compatible else None
+    if asm:
+        prof = profile if profile and profile.startswith("masm") else recorded or "masm510"
+    else:
+        prof = profile or recorded or f.get("profile") or fnmod.DEFAULT_PROFILE
+    if flags is not None:
+        fl = list(flags)
+    elif compatible and "flags" in rec:
+        fl = list(rec["flags"])
+    else:
+        fl = fnmod.profile_flags(prof)
+    pl = {name: {"seg": p["seg"], "off": p["off"]}
+          for name, p in rec.get("placements", {}).items()}
+    pl.update(placements)
+    return {"module": key, "profile": prof, "flags": fl, "placements": pl}
+
+
 def run(func: str, sources: list[Path], profile: str | None, flags, public: str | None,
         placements: dict, quiet: bool = False) -> list[dict]:
     f = fnmod.get(func)
@@ -96,10 +124,10 @@ def run(func: str, sources: list[Path], profile: str | None, flags, public: str 
     for src in sources:
         text = src.read_text(encoding="latin1")
         asm = src.suffix.lower() == ".asm"
-        prof = (profile if profile and profile.startswith("masm") else "masm510") if asm else             (profile or f.get("profile") or fnmod.DEFAULT_PROFILE)
-        fl = flags if flags is not None else fnmod.profile_flags(prof)
+        context = options(f, asm, profile, flags, placements)
+        prof, fl = context["profile"], context["flags"]
         r = compiler.assemble(text, prof, fl) if asm else compiler.compile_c(text, prof, fl)
-        row = {"source": str(src), "profile": prof, "flags": fl,
+        row = {"source": str(src), **context,
                "source_sha256": hashlib.sha256(text.encode("latin1")).hexdigest()}
         if not r.ok:
             row["status"] = "COMPILER_ERROR"
@@ -117,7 +145,7 @@ def run(func: str, sources: list[Path], profile: str | None, flags, public: str 
                 print(f"  note: pascal public {hint[0]}: bind it by registering the convention "
                       f"(python tools/symbols.py set-convention {pub[1:]} pascal --why ...)")
         res = match.Binder(target, obj, prec["segment"] if prec else fnmod.code_segment(r.obj, pub),
-                           pname or pub, placements).bind()
+                           pname or pub, context["placements"]).bind()
         d = diagnose(res, f["off"])
         row.update({"status": "EXACT" if res.exact else "MISMATCH", "reasons": res.reasons,
                     "opcode_ratio": d["opcode_ratio"], "first_diff_insn": d["first_diff_insn"],

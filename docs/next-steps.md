@@ -2,14 +2,18 @@
 
 Read README.md, AGENTS.md, docs/codegen-rules.md and docs/tu-evidence.md before work.
 `python tools/validate.py` is the source of truth for totals (docs/progress.md/json).
-The latest phase-index checkpoint accepts CalcScore and completes S14:384C as a
+The latest search-context checkpoint fixes bare search.py commands to inherit the
+target object's manifest compiler flags and private-data placements. It retains
+11 negative series / 176 controls (175 compiles) in work/takeover/phase-next/.
+None accepts S15, memory compaction or S25:1035; their residues remain explicit debt.
+The preceding phase-index checkpoint accepts CalcScore and completes S14:384C as a
 4,653-byte TU. It also repairs the memory-compaction starting draft's accepted-peer
 regression. Findings, compiler controls and verification transcripts are in
 work/takeover/context-next/. The earlier sibling-tool comparison remains in
 work/takeover/siblings/; its 203-test checkpoint preceded this acceptance.
-The fresh full validation passes the unit tests (two skips), all 46 compiler
-probes and module/FAR_BSS checks. The final-source recheck and byte-identical
-hybrid transcripts are retained with this checkpoint.
+The latest checkpoint pairs a fresh 210-test suite (two skips) with validation
+of all 46 compiler probes and module/FAR_BSS checks. The validation and
+byte-identical hybrid transcripts are retained in work/takeover/phase-next/.
 Check Git for the current checkpoint and publication status.
 
 ## 1. Reconstruction state
@@ -218,6 +222,23 @@ Run rule-driven searches from whole-module best drafts, then inspect aligned dis
 for the remaining differences. Win16 is semantic evidence only; use verified naming
 decisions. Its old build/lift/open paths no longer exist; maintained probe/source paths
 must be located again. Do not accept a smaller distance as an exact result.
+
+The phase-next controls exhaust separate S15 rectangle phases, aggregate/type
+views and the real puts/exit runtime headers, wide compaction segment/narrow flag
+forms and pointer phases, and S25 field-pointer/value lifetimes, typed field views
+and folded reads. Additional optimizer controls do not match and often regress
+accepted peers. MSC 6.00 fails internally on the whole memory draft; that one
+compiler failure does not establish assembly. All 175 compiled controls preserve
+private data; 17 regress accepted peers and remain rejected.
+
+The bare search default previously used generic flags and omitted the manifest
+placements, so it could describe a different compile from promotion. That tooling
+blocker is fixed, with accepted-peer, explicit wrong-placement and residue controls.
+Next, use the preserved whole-module seeds for targeted source evidence: S15
+text-segment spill lifetime, compaction moved/segment homes and S25 far-field CSE
+allocation remain unexplained. Do not repeat the phase-next storage/header/profile
+series or infer assembly from their failure. Rotate to another open body when
+there is no new hypothesis grounded in its listing or cross-version semantics.
 
 ## 4. Independent historical link
 

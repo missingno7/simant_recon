@@ -42,6 +42,10 @@ python tools/promote.py draft.c --module root:0093 --claim NAME ...
 python tools/validate.py                   # at acceptance/tooling boundaries
 ```
 
+`search.py` inherits the target object's manifest profile, flags and private-data
+placements; explicit options override them. Unrecorded objects use profile defaults.
+Search checks one function; promotion still verifies every claim and data contribution.
+
 Other tools: `probe.py SPEC.json` (controlled compiler experiments, rules in
 [docs/codegen-rules.md](docs/codegen-rules.md)), `xver.py build|show|strings|apply-names`
 (correspondence), `libmatch.py` (runtime location), `inventory.py` (function discovery),

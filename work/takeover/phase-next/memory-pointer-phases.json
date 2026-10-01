@@ -1,0 +1,424 @@
+{
+ "manifest_sha256": "a454a845c9cbc03870ab4d352bed97eeb6823da3b6b4c5790eba901c9430bab7",
+ "module": "root:171C",
+ "function": "f_171C_0CF4",
+ "profile": "msc600ax",
+ "flags": [
+  "/AL",
+  "/Oeg",
+  "/Gs",
+  "/Zi"
+ ],
+ "accepted_peers": [
+  "f_171C_068C",
+  "f_171C_1246",
+  "f_171C_13CA",
+  "f_171C_13E4",
+  "f_171C_1FC2",
+  "f_171C_2136",
+  "f_171C_21CC",
+  "f_171C_001E",
+  "f_171C_0020",
+  "f_171C_0034",
+  "f_171C_00FA",
+  "f_171C_02CA",
+  "f_171C_0674",
+  "f_171C_0676",
+  "f_171C_0678",
+  "f_171C_0EDE",
+  "f_171C_125C",
+  "f_171C_14BE",
+  "f_171C_152C",
+  "f_171C_1686",
+  "f_171C_16EA",
+  "f_171C_1750",
+  "f_171C_1772",
+  "f_171C_1794",
+  "f_171C_1A9E",
+  "f_171C_1AD4",
+  "f_171C_1B2C",
+  "f_171C_1B84",
+  "f_171C_1BBA",
+  "f_171C_1C0A",
+  "f_171C_1C1C",
+  "f_171C_1C82",
+  "f_171C_1CD6",
+  "f_171C_1E86",
+  "f_171C_1E9A",
+  "f_171C_1EFA",
+  "f_171C_1F52",
+  "f_171C_20E2",
+  "f_171C_2190",
+  "malloc",
+  "_ffree",
+  "free",
+  "_frealloc",
+  "f_171C_2302",
+  "f_171C_1804",
+  "f_171C_18A6",
+  "f_171C_07BE",
+  "f_171C_2086",
+  "f_171C_030C",
+  "f_171C_0BE2",
+  "f_171C_11F2",
+  "f_171C_0002",
+  "f_171C_1D40",
+  "f_171C_0A5C",
+  "f_171C_0EEA",
+  "f_171C_15A2",
+  "f_171C_0160"
+ ],
+ "variants": [
+  {
+   "name": "base",
+   "source_sha256_lf": "7decbec511e93ca79a5b4238561aa24e3fb1c794506f337af6d3aa11506bbfac",
+   "why": "",
+   "compile_ok": true,
+   "target": {
+    "exact": false,
+    "reasons": [
+     "bytes differ (first at +0xc, 6 differing)"
+    ],
+    "fixups": 13,
+    "relocations": 4,
+    "reloc_order": "GROUPED"
+   },
+   "peer_losses": {},
+   "data": {
+    "_DATA": {
+     "exact": true,
+     "reasons": [],
+     "size": 1726,
+     "reloc_order": "EXACT",
+     "start": 363076,
+     "class": "DATA",
+     "align": "word",
+     "far": false
+    },
+    "CONST": {
+     "exact": true,
+     "reasons": [],
+     "size": 14,
+     "reloc_order": "GROUPED",
+     "start": 386258,
+     "class": "CONST",
+     "align": "word",
+     "far": false
+    },
+    "_BSS": {
+     "exact": true,
+     "reasons": [],
+     "size": 18,
+     "kind": "BSS",
+     "start": 386962,
+     "align": "word"
+    }
+   },
+   "module_exact": false,
+   "object_sha256": "dd20465dd502347adff7949237ba4a482248d703925c020a71db3a2b72f1b713",
+   "log": ""
+  },
+  {
+   "name": "nb-neighbor",
+   "source_sha256_lf": "9816a6dbce9153de8219a6502b20507f7c0e60f14145e97055595cf2f72d7eaa",
+   "why": "",
+   "compile_ok": true,
+   "target": {
+    "exact": false,
+    "reasons": [
+     "length 494 != target 490",
+     "bytes differ (first at +0x5, 361 differing)",
+     "relocation set differs (6 vs 4)"
+    ],
+    "fixups": 15,
+    "relocations": 4,
+    "reloc_order": "EXACT"
+   },
+   "peer_losses": {},
+   "data": {
+    "_DATA": {
+     "exact": true,
+     "reasons": [],
+     "size": 1726,
+     "reloc_order": "EXACT",
+     "start": 363076,
+     "class": "DATA",
+     "align": "word",
+     "far": false
+    },
+    "CONST": {
+     "exact": true,
+     "reasons": [],
+     "size": 14,
+     "reloc_order": "GROUPED",
+     "start": 386258,
+     "class": "CONST",
+     "align": "word",
+     "far": false
+    },
+    "_BSS": {
+     "exact": true,
+     "reasons": [],
+     "size": 18,
+     "kind": "BSS",
+     "start": 386962,
+     "align": "word"
+    }
+   },
+   "module_exact": false,
+   "object_sha256": "6ae45f26e4ba344d3d75f0e37b009b183438e7b6d79e1ef76b1dd315d05b08ca",
+   "log": ""
+  },
+  {
+   "name": "nb-scan",
+   "source_sha256_lf": "3b9407a550ace91f38662cf02389f684f2ec41f2e60e64aac087909c5402ae47",
+   "why": "",
+   "compile_ok": true,
+   "target": {
+    "exact": false,
+    "reasons": [
+     "length 532 != target 490",
+     "bytes differ (first at +0x5, 371 differing)",
+     "relocation set differs (6 vs 4)"
+    ],
+    "fixups": 15,
+    "relocations": 4,
+    "reloc_order": "EXACT"
+   },
+   "peer_losses": {},
+   "data": {
+    "_DATA": {
+     "exact": true,
+     "reasons": [],
+     "size": 1726,
+     "reloc_order": "EXACT",
+     "start": 363076,
+     "class": "DATA",
+     "align": "word",
+     "far": false
+    },
+    "CONST": {
+     "exact": true,
+     "reasons": [],
+     "size": 14,
+     "reloc_order": "GROUPED",
+     "start": 386258,
+     "class": "CONST",
+     "align": "word",
+     "far": false
+    },
+    "_BSS": {
+     "exact": true,
+     "reasons": [],
+     "size": 18,
+     "kind": "BSS",
+     "start": 386962,
+     "align": "word"
+    }
+   },
+   "module_exact": false,
+   "object_sha256": "0397e352fe6a53f0eee4b2edaff0c7b685c1b64c7f2e877bed99a86888a31891",
+   "log": ""
+  },
+  {
+   "name": "nb-found",
+   "source_sha256_lf": "fe8df4cf11922ba26127e9dc536208191721af5391097d554352ef0f582f87e6",
+   "why": "",
+   "compile_ok": true,
+   "target": {
+    "exact": false,
+    "reasons": [
+     "bytes differ (first at +0xc, 6 differing)"
+    ],
+    "fixups": 13,
+    "relocations": 4,
+    "reloc_order": "GROUPED"
+   },
+   "peer_losses": {},
+   "data": {
+    "_DATA": {
+     "exact": true,
+     "reasons": [],
+     "size": 1726,
+     "reloc_order": "EXACT",
+     "start": 363076,
+     "class": "DATA",
+     "align": "word",
+     "far": false
+    },
+    "CONST": {
+     "exact": true,
+     "reasons": [],
+     "size": 14,
+     "reloc_order": "GROUPED",
+     "start": 386258,
+     "class": "CONST",
+     "align": "word",
+     "far": false
+    },
+    "_BSS": {
+     "exact": true,
+     "reasons": [],
+     "size": 18,
+     "kind": "BSS",
+     "start": 386962,
+     "align": "word"
+    }
+   },
+   "module_exact": false,
+   "object_sha256": "3b238b21aedf1d1851c92ec8868335d85ffd310022b7c6fda10b71607ab1aa91",
+   "log": ""
+  },
+  {
+   "name": "adjacent-neighbor",
+   "source_sha256_lf": "a55df6a165114db61684de499e1c890577b7fa84eef520d279d986b0ce7d7507",
+   "why": "",
+   "compile_ok": true,
+   "target": {
+    "exact": false,
+    "reasons": [
+     "length 494 != target 490",
+     "bytes differ (first at +0x5, 361 differing)",
+     "relocation set differs (6 vs 4)"
+    ],
+    "fixups": 15,
+    "relocations": 4,
+    "reloc_order": "EXACT"
+   },
+   "peer_losses": {},
+   "data": {
+    "_DATA": {
+     "exact": true,
+     "reasons": [],
+     "size": 1726,
+     "reloc_order": "EXACT",
+     "start": 363076,
+     "class": "DATA",
+     "align": "word",
+     "far": false
+    },
+    "CONST": {
+     "exact": true,
+     "reasons": [],
+     "size": 14,
+     "reloc_order": "GROUPED",
+     "start": 386258,
+     "class": "CONST",
+     "align": "word",
+     "far": false
+    },
+    "_BSS": {
+     "exact": true,
+     "reasons": [],
+     "size": 18,
+     "kind": "BSS",
+     "start": 386962,
+     "align": "word"
+    }
+   },
+   "module_exact": false,
+   "object_sha256": "21ec1ba58da5f5142edbeba63413f27f6da555c9c061c36a0ef18e30ca0ad5ad",
+   "log": ""
+  },
+  {
+   "name": "adjacent-scan",
+   "source_sha256_lf": "753c7e9f0fa23a6b9cbc8949329271e383fa91ecd579bd3045ff4929a7609e46",
+   "why": "",
+   "compile_ok": true,
+   "target": {
+    "exact": false,
+    "reasons": [
+     "length 494 != target 490",
+     "bytes differ (first at +0x5, 361 differing)",
+     "relocation set differs (6 vs 4)"
+    ],
+    "fixups": 15,
+    "relocations": 4,
+    "reloc_order": "EXACT"
+   },
+   "peer_losses": {},
+   "data": {
+    "_DATA": {
+     "exact": true,
+     "reasons": [],
+     "size": 1726,
+     "reloc_order": "EXACT",
+     "start": 363076,
+     "class": "DATA",
+     "align": "word",
+     "far": false
+    },
+    "CONST": {
+     "exact": true,
+     "reasons": [],
+     "size": 14,
+     "reloc_order": "GROUPED",
+     "start": 386258,
+     "class": "CONST",
+     "align": "word",
+     "far": false
+    },
+    "_BSS": {
+     "exact": true,
+     "reasons": [],
+     "size": 18,
+     "kind": "BSS",
+     "start": 386962,
+     "align": "word"
+    }
+   },
+   "module_exact": false,
+   "object_sha256": "79f84aeac411d07a8e7feba54d15573692763516f0a4f8d1e1bf5d138d92a98c",
+   "log": ""
+  },
+  {
+   "name": "adjacent-found",
+   "source_sha256_lf": "749e6ea09c3ea307673169fa5bbd71f1737fa76816a11cfc402ac38411472e99",
+   "why": "",
+   "compile_ok": true,
+   "target": {
+    "exact": false,
+    "reasons": [
+     "bytes differ (first at +0xc, 6 differing)"
+    ],
+    "fixups": 13,
+    "relocations": 4,
+    "reloc_order": "GROUPED"
+   },
+   "peer_losses": {},
+   "data": {
+    "_DATA": {
+     "exact": true,
+     "reasons": [],
+     "size": 1726,
+     "reloc_order": "EXACT",
+     "start": 363076,
+     "class": "DATA",
+     "align": "word",
+     "far": false
+    },
+    "CONST": {
+     "exact": true,
+     "reasons": [],
+     "size": 14,
+     "reloc_order": "GROUPED",
+     "start": 386258,
+     "class": "CONST",
+     "align": "word",
+     "far": false
+    },
+    "_BSS": {
+     "exact": true,
+     "reasons": [],
+     "size": 18,
+     "kind": "BSS",
+     "start": 386962,
+     "align": "word"
+    }
+   },
+   "module_exact": false,
+   "object_sha256": "79d89aa01efb619c37e30ba2f18706909e1608b7f269a811b07f485b7aa67278",
+   "log": ""
+  }
+ ]
+}

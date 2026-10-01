@@ -1,0 +1,1034 @@
+{
+ "manifest_sha256": "a454a845c9cbc03870ab4d352bed97eeb6823da3b6b4c5790eba901c9430bab7",
+ "module": "root:171C",
+ "function": "f_171C_0CF4",
+ "profile": "msc600ax",
+ "flags": [
+  "/AL",
+  "/Oeg",
+  "/Gs",
+  "/Zi"
+ ],
+ "accepted_peers": [
+  "f_171C_068C",
+  "f_171C_1246",
+  "f_171C_13CA",
+  "f_171C_13E4",
+  "f_171C_1FC2",
+  "f_171C_2136",
+  "f_171C_21CC",
+  "f_171C_001E",
+  "f_171C_0020",
+  "f_171C_0034",
+  "f_171C_00FA",
+  "f_171C_02CA",
+  "f_171C_0674",
+  "f_171C_0676",
+  "f_171C_0678",
+  "f_171C_0EDE",
+  "f_171C_125C",
+  "f_171C_14BE",
+  "f_171C_152C",
+  "f_171C_1686",
+  "f_171C_16EA",
+  "f_171C_1750",
+  "f_171C_1772",
+  "f_171C_1794",
+  "f_171C_1A9E",
+  "f_171C_1AD4",
+  "f_171C_1B2C",
+  "f_171C_1B84",
+  "f_171C_1BBA",
+  "f_171C_1C0A",
+  "f_171C_1C1C",
+  "f_171C_1C82",
+  "f_171C_1CD6",
+  "f_171C_1E86",
+  "f_171C_1E9A",
+  "f_171C_1EFA",
+  "f_171C_1F52",
+  "f_171C_20E2",
+  "f_171C_2190",
+  "malloc",
+  "_ffree",
+  "free",
+  "_frealloc",
+  "f_171C_2302",
+  "f_171C_1804",
+  "f_171C_18A6",
+  "f_171C_07BE",
+  "f_171C_2086",
+  "f_171C_030C",
+  "f_171C_0BE2",
+  "f_171C_11F2",
+  "f_171C_0002",
+  "f_171C_1D40",
+  "f_171C_0A5C",
+  "f_171C_0EEA",
+  "f_171C_15A2",
+  "f_171C_0160"
+ ],
+ "variants": [
+  {
+   "name": "base",
+   "source_sha256_lf": "7decbec511e93ca79a5b4238561aa24e3fb1c794506f337af6d3aa11506bbfac",
+   "why": "",
+   "compile_ok": true,
+   "target": {
+    "exact": false,
+    "reasons": [
+     "bytes differ (first at +0xc, 6 differing)"
+    ],
+    "fixups": 13,
+    "relocations": 4,
+    "reloc_order": "GROUPED"
+   },
+   "peer_losses": {},
+   "data": {
+    "_DATA": {
+     "exact": true,
+     "reasons": [],
+     "size": 1726,
+     "reloc_order": "EXACT",
+     "start": 363076,
+     "class": "DATA",
+     "align": "word",
+     "far": false
+    },
+    "CONST": {
+     "exact": true,
+     "reasons": [],
+     "size": 14,
+     "reloc_order": "GROUPED",
+     "start": 386258,
+     "class": "CONST",
+     "align": "word",
+     "far": false
+    },
+    "_BSS": {
+     "exact": true,
+     "reasons": [],
+     "size": 18,
+     "kind": "BSS",
+     "start": 386962,
+     "align": "word"
+    }
+   },
+   "module_exact": false,
+   "object_sha256": "dd20465dd502347adff7949237ba4a482248d703925c020a71db3a2b72f1b713",
+   "log": ""
+  },
+  {
+   "name": "int-unsigned-long-cast",
+   "source_sha256_lf": "494f0e52d05b41ee837d3dfbcb6e0c607b586b615f6c192ff04f45d0c7fce93b",
+   "why": "",
+   "compile_ok": true,
+   "target": {
+    "exact": false,
+    "reasons": [
+     "length 492 != target 490",
+     "bytes differ (first at +0x8, 45 differing)"
+    ],
+    "fixups": 13,
+    "relocations": 4,
+    "reloc_order": "GROUPED"
+   },
+   "peer_losses": {},
+   "data": {
+    "_DATA": {
+     "exact": true,
+     "reasons": [],
+     "size": 1726,
+     "reloc_order": "EXACT",
+     "start": 363076,
+     "class": "DATA",
+     "align": "word",
+     "far": false
+    },
+    "CONST": {
+     "exact": true,
+     "reasons": [],
+     "size": 14,
+     "reloc_order": "GROUPED",
+     "start": 386258,
+     "class": "CONST",
+     "align": "word",
+     "far": false
+    },
+    "_BSS": {
+     "exact": true,
+     "reasons": [],
+     "size": 18,
+     "kind": "BSS",
+     "start": 386962,
+     "align": "word"
+    }
+   },
+   "module_exact": false,
+   "object_sha256": "3d6c34b8d635047d514ef4e712429f110cf1b6896c086737caa9a2de281aacd2",
+   "log": ""
+  },
+  {
+   "name": "int-unsigned-long-word",
+   "source_sha256_lf": "3ba377353125e569377ee6527ccfa1b88f3a07ed7c80dc8e6a7c33ea171b1dba",
+   "why": "",
+   "compile_ok": true,
+   "target": {
+    "exact": false,
+    "reasons": [
+     "length 498 != target 490",
+     "bytes differ (first at +0x5, 416 differing)",
+     "relocation set differs (4 vs 4)"
+    ],
+    "fixups": 13,
+    "relocations": 4,
+    "reloc_order": "EXACT"
+   },
+   "peer_losses": {},
+   "data": {
+    "_DATA": {
+     "exact": true,
+     "reasons": [],
+     "size": 1726,
+     "reloc_order": "EXACT",
+     "start": 363076,
+     "class": "DATA",
+     "align": "word",
+     "far": false
+    },
+    "CONST": {
+     "exact": true,
+     "reasons": [],
+     "size": 14,
+     "reloc_order": "GROUPED",
+     "start": 386258,
+     "class": "CONST",
+     "align": "word",
+     "far": false
+    },
+    "_BSS": {
+     "exact": true,
+     "reasons": [],
+     "size": 18,
+     "kind": "BSS",
+     "start": 386962,
+     "align": "word"
+    }
+   },
+   "module_exact": false,
+   "object_sha256": "6fe79531301217a392112eb1c02b28fd3f1390d421f292a3eb8e1804ba6fc12e",
+   "log": ""
+  },
+  {
+   "name": "int-unsigned-long-volatile-word",
+   "source_sha256_lf": "7a0d8f47f650e3cfcd54984f839571335009757e31e1a57e9b7ffeaa76049385",
+   "why": "",
+   "compile_ok": true,
+   "target": {
+    "exact": false,
+    "reasons": [
+     "length 498 != target 490",
+     "bytes differ (first at +0x8, 416 differing)",
+     "relocation set differs (4 vs 4)"
+    ],
+    "fixups": 13,
+    "relocations": 4,
+    "reloc_order": "EXACT"
+   },
+   "peer_losses": {},
+   "data": {
+    "_DATA": {
+     "exact": true,
+     "reasons": [],
+     "size": 1726,
+     "reloc_order": "EXACT",
+     "start": 363076,
+     "class": "DATA",
+     "align": "word",
+     "far": false
+    },
+    "CONST": {
+     "exact": true,
+     "reasons": [],
+     "size": 14,
+     "reloc_order": "GROUPED",
+     "start": 386258,
+     "class": "CONST",
+     "align": "word",
+     "far": false
+    },
+    "_BSS": {
+     "exact": true,
+     "reasons": [],
+     "size": 18,
+     "kind": "BSS",
+     "start": 386962,
+     "align": "word"
+    }
+   },
+   "module_exact": false,
+   "object_sha256": "650c460c8bc4b60de9386a70a2eb03cbe96d81390fdcd62982a72257ccf10c3a",
+   "log": ""
+  },
+  {
+   "name": "int-long-cast",
+   "source_sha256_lf": "5c32d21e5ca5d7b0478c01666ab2ef945d992b9237f1c8a22613ddf5a5b26faa",
+   "why": "",
+   "compile_ok": true,
+   "target": {
+    "exact": false,
+    "reasons": [
+     "length 492 != target 490",
+     "bytes differ (first at +0x8, 45 differing)"
+    ],
+    "fixups": 13,
+    "relocations": 4,
+    "reloc_order": "GROUPED"
+   },
+   "peer_losses": {},
+   "data": {
+    "_DATA": {
+     "exact": true,
+     "reasons": [],
+     "size": 1726,
+     "reloc_order": "EXACT",
+     "start": 363076,
+     "class": "DATA",
+     "align": "word",
+     "far": false
+    },
+    "CONST": {
+     "exact": true,
+     "reasons": [],
+     "size": 14,
+     "reloc_order": "GROUPED",
+     "start": 386258,
+     "class": "CONST",
+     "align": "word",
+     "far": false
+    },
+    "_BSS": {
+     "exact": true,
+     "reasons": [],
+     "size": 18,
+     "kind": "BSS",
+     "start": 386962,
+     "align": "word"
+    }
+   },
+   "module_exact": false,
+   "object_sha256": "b90b934417b6e48979b786aa422c320eaba81d7293333e98ba6d2e0e700e44f2",
+   "log": ""
+  },
+  {
+   "name": "int-long-word",
+   "source_sha256_lf": "70b4aeb0f73e5d7fe608dc60781faf0e0d25d713bc712c5b823a322f20789877",
+   "why": "",
+   "compile_ok": true,
+   "target": {
+    "exact": false,
+    "reasons": [
+     "length 498 != target 490",
+     "bytes differ (first at +0x5, 416 differing)",
+     "relocation set differs (4 vs 4)"
+    ],
+    "fixups": 13,
+    "relocations": 4,
+    "reloc_order": "EXACT"
+   },
+   "peer_losses": {},
+   "data": {
+    "_DATA": {
+     "exact": true,
+     "reasons": [],
+     "size": 1726,
+     "reloc_order": "EXACT",
+     "start": 363076,
+     "class": "DATA",
+     "align": "word",
+     "far": false
+    },
+    "CONST": {
+     "exact": true,
+     "reasons": [],
+     "size": 14,
+     "reloc_order": "GROUPED",
+     "start": 386258,
+     "class": "CONST",
+     "align": "word",
+     "far": false
+    },
+    "_BSS": {
+     "exact": true,
+     "reasons": [],
+     "size": 18,
+     "kind": "BSS",
+     "start": 386962,
+     "align": "word"
+    }
+   },
+   "module_exact": false,
+   "object_sha256": "2b8e7571335ba8e55f0e9c02bbed3a1ab510cde5702be5894f044900ef6873c4",
+   "log": ""
+  },
+  {
+   "name": "int-long-volatile-word",
+   "source_sha256_lf": "0ac4189dc415fe31019ef60d89691ab71f07438d4d91419b34ed77b0a29c6ab0",
+   "why": "",
+   "compile_ok": true,
+   "target": {
+    "exact": false,
+    "reasons": [
+     "length 498 != target 490",
+     "bytes differ (first at +0x8, 416 differing)",
+     "relocation set differs (4 vs 4)"
+    ],
+    "fixups": 13,
+    "relocations": 4,
+    "reloc_order": "EXACT"
+   },
+   "peer_losses": {},
+   "data": {
+    "_DATA": {
+     "exact": true,
+     "reasons": [],
+     "size": 1726,
+     "reloc_order": "EXACT",
+     "start": 363076,
+     "class": "DATA",
+     "align": "word",
+     "far": false
+    },
+    "CONST": {
+     "exact": true,
+     "reasons": [],
+     "size": 14,
+     "reloc_order": "GROUPED",
+     "start": 386258,
+     "class": "CONST",
+     "align": "word",
+     "far": false
+    },
+    "_BSS": {
+     "exact": true,
+     "reasons": [],
+     "size": 18,
+     "kind": "BSS",
+     "start": 386962,
+     "align": "word"
+    }
+   },
+   "module_exact": false,
+   "object_sha256": "55455c0f3f224e507394c5d9580ec622edbb0d20c1486c4bdd82ac6f5f348cd9",
+   "log": ""
+  },
+  {
+   "name": "unsigned-unsigned-long-cast",
+   "source_sha256_lf": "1830eb73f47f23e3a46ecc8aca51081d1143e84369cc3998eb8ebdcd089d31ae",
+   "why": "",
+   "compile_ok": true,
+   "target": {
+    "exact": false,
+    "reasons": [
+     "length 492 != target 490",
+     "bytes differ (first at +0x8, 45 differing)"
+    ],
+    "fixups": 13,
+    "relocations": 4,
+    "reloc_order": "GROUPED"
+   },
+   "peer_losses": {},
+   "data": {
+    "_DATA": {
+     "exact": true,
+     "reasons": [],
+     "size": 1726,
+     "reloc_order": "EXACT",
+     "start": 363076,
+     "class": "DATA",
+     "align": "word",
+     "far": false
+    },
+    "CONST": {
+     "exact": true,
+     "reasons": [],
+     "size": 14,
+     "reloc_order": "GROUPED",
+     "start": 386258,
+     "class": "CONST",
+     "align": "word",
+     "far": false
+    },
+    "_BSS": {
+     "exact": true,
+     "reasons": [],
+     "size": 18,
+     "kind": "BSS",
+     "start": 386962,
+     "align": "word"
+    }
+   },
+   "module_exact": false,
+   "object_sha256": "8f121d769247730b6d4b389f1dbcee69e7e07f2b542269ac8182aef94464baaf",
+   "log": ""
+  },
+  {
+   "name": "unsigned-unsigned-long-word",
+   "source_sha256_lf": "5d04232649057732a980cb5132c53bd46ef0d6727c9b8e508ba847bdeec86424",
+   "why": "",
+   "compile_ok": true,
+   "target": {
+    "exact": false,
+    "reasons": [
+     "length 498 != target 490",
+     "bytes differ (first at +0x5, 416 differing)",
+     "relocation set differs (4 vs 4)"
+    ],
+    "fixups": 13,
+    "relocations": 4,
+    "reloc_order": "EXACT"
+   },
+   "peer_losses": {},
+   "data": {
+    "_DATA": {
+     "exact": true,
+     "reasons": [],
+     "size": 1726,
+     "reloc_order": "EXACT",
+     "start": 363076,
+     "class": "DATA",
+     "align": "word",
+     "far": false
+    },
+    "CONST": {
+     "exact": true,
+     "reasons": [],
+     "size": 14,
+     "reloc_order": "GROUPED",
+     "start": 386258,
+     "class": "CONST",
+     "align": "word",
+     "far": false
+    },
+    "_BSS": {
+     "exact": true,
+     "reasons": [],
+     "size": 18,
+     "kind": "BSS",
+     "start": 386962,
+     "align": "word"
+    }
+   },
+   "module_exact": false,
+   "object_sha256": "823233cf7a2b909b71873a308b3149870b31e81b2f48de3a387ca279637d63f4",
+   "log": ""
+  },
+  {
+   "name": "unsigned-unsigned-long-volatile-word",
+   "source_sha256_lf": "7d2b3c51b8bba61a8e0fe165ab522a2c91f6b5142f8551090933a6e7dc152e33",
+   "why": "",
+   "compile_ok": true,
+   "target": {
+    "exact": false,
+    "reasons": [
+     "length 498 != target 490",
+     "bytes differ (first at +0x8, 416 differing)",
+     "relocation set differs (4 vs 4)"
+    ],
+    "fixups": 13,
+    "relocations": 4,
+    "reloc_order": "EXACT"
+   },
+   "peer_losses": {},
+   "data": {
+    "_DATA": {
+     "exact": true,
+     "reasons": [],
+     "size": 1726,
+     "reloc_order": "EXACT",
+     "start": 363076,
+     "class": "DATA",
+     "align": "word",
+     "far": false
+    },
+    "CONST": {
+     "exact": true,
+     "reasons": [],
+     "size": 14,
+     "reloc_order": "GROUPED",
+     "start": 386258,
+     "class": "CONST",
+     "align": "word",
+     "far": false
+    },
+    "_BSS": {
+     "exact": true,
+     "reasons": [],
+     "size": 18,
+     "kind": "BSS",
+     "start": 386962,
+     "align": "word"
+    }
+   },
+   "module_exact": false,
+   "object_sha256": "346853fb091764f96a43024bf9e3ad82761c0a664d704446edced0a8bd665070",
+   "log": ""
+  },
+  {
+   "name": "unsigned-long-cast",
+   "source_sha256_lf": "907f02fd0e639eafc71902b69928e0fa7b85c67aa8824fd829a18769fd261f13",
+   "why": "",
+   "compile_ok": true,
+   "target": {
+    "exact": false,
+    "reasons": [
+     "length 492 != target 490",
+     "bytes differ (first at +0x8, 45 differing)"
+    ],
+    "fixups": 13,
+    "relocations": 4,
+    "reloc_order": "GROUPED"
+   },
+   "peer_losses": {},
+   "data": {
+    "_DATA": {
+     "exact": true,
+     "reasons": [],
+     "size": 1726,
+     "reloc_order": "EXACT",
+     "start": 363076,
+     "class": "DATA",
+     "align": "word",
+     "far": false
+    },
+    "CONST": {
+     "exact": true,
+     "reasons": [],
+     "size": 14,
+     "reloc_order": "GROUPED",
+     "start": 386258,
+     "class": "CONST",
+     "align": "word",
+     "far": false
+    },
+    "_BSS": {
+     "exact": true,
+     "reasons": [],
+     "size": 18,
+     "kind": "BSS",
+     "start": 386962,
+     "align": "word"
+    }
+   },
+   "module_exact": false,
+   "object_sha256": "8d4651500ff36c7c2d42c8164dfa723d09d13d8dd38835cec97213a441393698",
+   "log": ""
+  },
+  {
+   "name": "unsigned-long-word",
+   "source_sha256_lf": "8ef4aca7f70543bdae927bd9edfaa4b3ab65abe2482a539dbe3f5b8d2651edd1",
+   "why": "",
+   "compile_ok": true,
+   "target": {
+    "exact": false,
+    "reasons": [
+     "length 498 != target 490",
+     "bytes differ (first at +0x5, 416 differing)",
+     "relocation set differs (4 vs 4)"
+    ],
+    "fixups": 13,
+    "relocations": 4,
+    "reloc_order": "EXACT"
+   },
+   "peer_losses": {},
+   "data": {
+    "_DATA": {
+     "exact": true,
+     "reasons": [],
+     "size": 1726,
+     "reloc_order": "EXACT",
+     "start": 363076,
+     "class": "DATA",
+     "align": "word",
+     "far": false
+    },
+    "CONST": {
+     "exact": true,
+     "reasons": [],
+     "size": 14,
+     "reloc_order": "GROUPED",
+     "start": 386258,
+     "class": "CONST",
+     "align": "word",
+     "far": false
+    },
+    "_BSS": {
+     "exact": true,
+     "reasons": [],
+     "size": 18,
+     "kind": "BSS",
+     "start": 386962,
+     "align": "word"
+    }
+   },
+   "module_exact": false,
+   "object_sha256": "49e919941fce31201ab1db7560bab2e49adcedd58eb19ab7cc5b15c0a21503da",
+   "log": ""
+  },
+  {
+   "name": "unsigned-long-volatile-word",
+   "source_sha256_lf": "bf32854d97d6ef8b9dc628dcb534c471c2b6ebfe476afdd977fcfd712302751a",
+   "why": "",
+   "compile_ok": true,
+   "target": {
+    "exact": false,
+    "reasons": [
+     "length 498 != target 490",
+     "bytes differ (first at +0x8, 416 differing)",
+     "relocation set differs (4 vs 4)"
+    ],
+    "fixups": 13,
+    "relocations": 4,
+    "reloc_order": "EXACT"
+   },
+   "peer_losses": {},
+   "data": {
+    "_DATA": {
+     "exact": true,
+     "reasons": [],
+     "size": 1726,
+     "reloc_order": "EXACT",
+     "start": 363076,
+     "class": "DATA",
+     "align": "word",
+     "far": false
+    },
+    "CONST": {
+     "exact": true,
+     "reasons": [],
+     "size": 14,
+     "reloc_order": "GROUPED",
+     "start": 386258,
+     "class": "CONST",
+     "align": "word",
+     "far": false
+    },
+    "_BSS": {
+     "exact": true,
+     "reasons": [],
+     "size": 18,
+     "kind": "BSS",
+     "start": 386962,
+     "align": "word"
+    }
+   },
+   "module_exact": false,
+   "object_sha256": "8f65f57e1de55a66335fd7c0f609a4928125b688613162a7ec300be4ea572641",
+   "log": ""
+  },
+  {
+   "name": "unsigned-long-unsigned-long-cast",
+   "source_sha256_lf": "45f6000b1e02d050f835a6d215b603e9962cba0e22a8a1442f319c04fc291577",
+   "why": "",
+   "compile_ok": true,
+   "target": {
+    "exact": false,
+    "reasons": [
+     "length 492 != target 490",
+     "bytes differ (first at +0x5, 64 differing)"
+    ],
+    "fixups": 13,
+    "relocations": 4,
+    "reloc_order": "GROUPED"
+   },
+   "peer_losses": {},
+   "data": {
+    "_DATA": {
+     "exact": true,
+     "reasons": [],
+     "size": 1726,
+     "reloc_order": "EXACT",
+     "start": 363076,
+     "class": "DATA",
+     "align": "word",
+     "far": false
+    },
+    "CONST": {
+     "exact": true,
+     "reasons": [],
+     "size": 14,
+     "reloc_order": "GROUPED",
+     "start": 386258,
+     "class": "CONST",
+     "align": "word",
+     "far": false
+    },
+    "_BSS": {
+     "exact": true,
+     "reasons": [],
+     "size": 18,
+     "kind": "BSS",
+     "start": 386962,
+     "align": "word"
+    }
+   },
+   "module_exact": false,
+   "object_sha256": "9aa84ecca2a53e369585cfdb90c081eb5b07d9038f5fe67aca7ff4ac9a84db4f",
+   "log": ""
+  },
+  {
+   "name": "unsigned-long-unsigned-long-word",
+   "source_sha256_lf": "1405bbcd955da8102a7a8467a3652b924936311fd98fe2555836e20d48647cc3",
+   "why": "",
+   "compile_ok": true,
+   "target": {
+    "exact": false,
+    "reasons": [
+     "length 498 != target 490",
+     "bytes differ (first at +0x5, 413 differing)",
+     "relocation set differs (4 vs 4)"
+    ],
+    "fixups": 13,
+    "relocations": 4,
+    "reloc_order": "EXACT"
+   },
+   "peer_losses": {},
+   "data": {
+    "_DATA": {
+     "exact": true,
+     "reasons": [],
+     "size": 1726,
+     "reloc_order": "EXACT",
+     "start": 363076,
+     "class": "DATA",
+     "align": "word",
+     "far": false
+    },
+    "CONST": {
+     "exact": true,
+     "reasons": [],
+     "size": 14,
+     "reloc_order": "GROUPED",
+     "start": 386258,
+     "class": "CONST",
+     "align": "word",
+     "far": false
+    },
+    "_BSS": {
+     "exact": true,
+     "reasons": [],
+     "size": 18,
+     "kind": "BSS",
+     "start": 386962,
+     "align": "word"
+    }
+   },
+   "module_exact": false,
+   "object_sha256": "6a2b98e5a6b9405c34caed48d17413cc58ae3caf23686b1934269b83fceef06c",
+   "log": ""
+  },
+  {
+   "name": "unsigned-long-unsigned-long-volatile-word",
+   "source_sha256_lf": "0f4d81068fa115e635c22e1934c067da5ff467c2f4855f0762b22efd2e04c3e2",
+   "why": "",
+   "compile_ok": true,
+   "target": {
+    "exact": false,
+    "reasons": [
+     "length 498 != target 490",
+     "bytes differ (first at +0x5, 414 differing)",
+     "relocation set differs (4 vs 4)"
+    ],
+    "fixups": 13,
+    "relocations": 4,
+    "reloc_order": "EXACT"
+   },
+   "peer_losses": {},
+   "data": {
+    "_DATA": {
+     "exact": true,
+     "reasons": [],
+     "size": 1726,
+     "reloc_order": "EXACT",
+     "start": 363076,
+     "class": "DATA",
+     "align": "word",
+     "far": false
+    },
+    "CONST": {
+     "exact": true,
+     "reasons": [],
+     "size": 14,
+     "reloc_order": "GROUPED",
+     "start": 386258,
+     "class": "CONST",
+     "align": "word",
+     "far": false
+    },
+    "_BSS": {
+     "exact": true,
+     "reasons": [],
+     "size": 18,
+     "kind": "BSS",
+     "start": 386962,
+     "align": "word"
+    }
+   },
+   "module_exact": false,
+   "object_sha256": "b7109ae2f05f705d88787455de0101a1df6313d9688427f1da13fd8384e2abf0",
+   "log": ""
+  },
+  {
+   "name": "unsigned-long-long-cast",
+   "source_sha256_lf": "ea36af8276c8a58cf12ca422a5e44fc3bfebe037f689b5990bfe26b535b8894d",
+   "why": "",
+   "compile_ok": true,
+   "target": {
+    "exact": false,
+    "reasons": [
+     "length 492 != target 490",
+     "bytes differ (first at +0x5, 64 differing)"
+    ],
+    "fixups": 13,
+    "relocations": 4,
+    "reloc_order": "GROUPED"
+   },
+   "peer_losses": {},
+   "data": {
+    "_DATA": {
+     "exact": true,
+     "reasons": [],
+     "size": 1726,
+     "reloc_order": "EXACT",
+     "start": 363076,
+     "class": "DATA",
+     "align": "word",
+     "far": false
+    },
+    "CONST": {
+     "exact": true,
+     "reasons": [],
+     "size": 14,
+     "reloc_order": "GROUPED",
+     "start": 386258,
+     "class": "CONST",
+     "align": "word",
+     "far": false
+    },
+    "_BSS": {
+     "exact": true,
+     "reasons": [],
+     "size": 18,
+     "kind": "BSS",
+     "start": 386962,
+     "align": "word"
+    }
+   },
+   "module_exact": false,
+   "object_sha256": "81ff480e2c52a612fb1a31e098755c3ba1dcb9560f8c06326ec7a95f3944ff5b",
+   "log": ""
+  },
+  {
+   "name": "unsigned-long-long-word",
+   "source_sha256_lf": "e21b41b90051d40e3e6afae56cfa281d0ff12933f46071ba99f168a713461f69",
+   "why": "",
+   "compile_ok": true,
+   "target": {
+    "exact": false,
+    "reasons": [
+     "length 498 != target 490",
+     "bytes differ (first at +0x5, 413 differing)",
+     "relocation set differs (4 vs 4)"
+    ],
+    "fixups": 13,
+    "relocations": 4,
+    "reloc_order": "EXACT"
+   },
+   "peer_losses": {},
+   "data": {
+    "_DATA": {
+     "exact": true,
+     "reasons": [],
+     "size": 1726,
+     "reloc_order": "EXACT",
+     "start": 363076,
+     "class": "DATA",
+     "align": "word",
+     "far": false
+    },
+    "CONST": {
+     "exact": true,
+     "reasons": [],
+     "size": 14,
+     "reloc_order": "GROUPED",
+     "start": 386258,
+     "class": "CONST",
+     "align": "word",
+     "far": false
+    },
+    "_BSS": {
+     "exact": true,
+     "reasons": [],
+     "size": 18,
+     "kind": "BSS",
+     "start": 386962,
+     "align": "word"
+    }
+   },
+   "module_exact": false,
+   "object_sha256": "e727070f8cd4a3a1dd94de941a0c4ea7cefba76676cee40a154a3e552bddef70",
+   "log": ""
+  },
+  {
+   "name": "unsigned-long-long-volatile-word",
+   "source_sha256_lf": "e559923c0335751fa1509b59133c09f0949a6399c4fa36a67f95afaca12aa992",
+   "why": "",
+   "compile_ok": true,
+   "target": {
+    "exact": false,
+    "reasons": [
+     "length 498 != target 490",
+     "bytes differ (first at +0x5, 414 differing)",
+     "relocation set differs (4 vs 4)"
+    ],
+    "fixups": 13,
+    "relocations": 4,
+    "reloc_order": "EXACT"
+   },
+   "peer_losses": {},
+   "data": {
+    "_DATA": {
+     "exact": true,
+     "reasons": [],
+     "size": 1726,
+     "reloc_order": "EXACT",
+     "start": 363076,
+     "class": "DATA",
+     "align": "word",
+     "far": false
+    },
+    "CONST": {
+     "exact": true,
+     "reasons": [],
+     "size": 14,
+     "reloc_order": "GROUPED",
+     "start": 386258,
+     "class": "CONST",
+     "align": "word",
+     "far": false
+    },
+    "_BSS": {
+     "exact": true,
+     "reasons": [],
+     "size": 18,
+     "kind": "BSS",
+     "start": 386962,
+     "align": "word"
+    }
+   },
+   "module_exact": false,
+   "object_sha256": "e8d69aaeba05fbebc59077f71b6bf4af5142b378c775bd25cb203fdfa6ec2989",
+   "log": ""
+  }
+ ]
+}

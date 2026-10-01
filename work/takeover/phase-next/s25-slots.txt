@@ -1,0 +1,112 @@
+o25_3BA4_1035 [S25:3BA4] work/takeover/full-search/o25_3BA4_1035/best.c  msc600ax /AL /Os /Oe /Og /Zi
+  MISMATCH: bytes differ (first at +0xd7, 2 differing)
+  frame: candidate 20  original 20   instructions 92 vs 92
+candidate slots (listing):
+slot correspondence (our slot -> original slot xN):
+  [bp-0x14] (unnamed)              -> -0x14x6   same
+  [bp-0x12] (unnamed)              -> -0x12x1   same
+  [bp-0x10] (unnamed)              -> -0x10x5   same
+  [bp-0x0e] (unnamed)              -> -0x0ex1   same
+  [bp-0x0c] (unnamed)              -> -0x0cx6   same
+  [bp-0x0a] (unnamed)              -> -0x0ax1   same
+  [bp-0x08] (unnamed)              -> -0x08x3   same
+  [bp-0x06] (unnamed)              -> -0x06x1   same
+  [bp-0x04] (unnamed)              -> -0x04x3   same
+  [bp-0x02] (unnamed)              -> -0x02x1   same
+register substitutions (our -> original, otherwise identical instructions):
+  bx (-) -> six1
+non-BP differences: 1
+    110E push word ptr es:[bx]                   | 110E push word ptr es:[si]
+side by side (candidate | original):
+  1035 push bp                                         | 1035 push bp
+  1036 mov bp, sp                                      | 1036 mov bp, sp
+  1038 mov ax, 0x14                                    | 1038 mov ax, 0x14
+  103B lcall 0x29f4, 0x2cc                             | 103B lcall 0x29f4, 0x2cc
+  1040 push si                                         | 1040 push si
+  1041 lcall 0xbe8, 0xeb7                              | 1041 lcall 0xbe8, 0xeb7
+  1046 mov es, word ptr [0x8972]                       | 1046 mov es, word ptr [0x8972]
+  104A cmp word ptr es:[0x104e], 0                     | 104A cmp word ptr es:[0x104e], 0
+  1050 je 0x1060                                       | 1050 je 0x1060
+  1052 mov ax, 1                                       | 1052 mov ax, 1
+  1055 push ax                                         | 1055 push ax
+  1056 sub ax, ax                                      | 1056 sub ax, ax
+  1058 push ax                                         | 1058 push ax
+  1059 lcall 0x2cff, 0x281c                            | 1059 lcall 0x2cff, 0x281c
+  105E pop bx                                          | 105E pop bx
+  105F pop bx                                          | 105F pop bx
+  1060 mov bx, 0x496                                   | 1060 mov bx, 0x496
+  1063 mov es, word ptr [0x8952]                       | 1063 mov es, word ptr [0x8952]
+  1067 mov word ptr [bp - 4], bx                       | 1067 mov word ptr [bp - 4], bx
+  106A mov word ptr [bp - 2], es                       | 106A mov word ptr [bp - 2], es
+  106D push word ptr es:[bx]                           | 106D push word ptr es:[bx]
+  1070 mov bx, 0x4c2                                   | 1070 mov bx, 0x4c2
+  1073 mov es, word ptr [0x8968]                       | 1073 mov es, word ptr [0x8968]
+  1077 mov word ptr [bp - 8], bx                       | 1077 mov word ptr [bp - 8], bx
+  107A mov word ptr [bp - 6], es                       | 107A mov word ptr [bp - 6], es
+  107D push word ptr es:[bx]                           | 107D push word ptr es:[bx]
+  1080 mov bx, 0x48a                                   | 1080 mov bx, 0x48a
+  1083 mov es, word ptr [0x8950]                       | 1083 mov es, word ptr [0x8950]
+  1087 mov word ptr [bp - 0xc], bx                     | 1087 mov word ptr [bp - 0xc], bx
+  108A mov word ptr [bp - 0xa], es                     | 108A mov word ptr [bp - 0xa], es
+  108D push word ptr es:[bx]                           | 108D push word ptr es:[bx]
+  1090 mov bx, 0x47c                                   | 1090 mov bx, 0x47c
+  1093 mov es, word ptr [0x894e]                       | 1093 mov es, word ptr [0x894e]
+  1097 mov word ptr [bp - 0x10], bx                    | 1097 mov word ptr [bp - 0x10], bx
+  109A mov word ptr [bp - 0xe], es                     | 109A mov word ptr [bp - 0xe], es
+  109D push word ptr es:[bx]                           | 109D push word ptr es:[bx]
+  10A0 mov si, 0x48c                                   | 10A0 mov si, 0x48c
+  10A3 mov es, word ptr [0x894c]                       | 10A3 mov es, word ptr [0x894c]
+  10A7 mov word ptr [bp - 0x14], si                    | 10A7 mov word ptr [bp - 0x14], si
+  10AA mov word ptr [bp - 0x12], es                    | 10AA mov word ptr [bp - 0x12], es
+  10AD push word ptr es:[si]                           | 10AD push word ptr es:[si]
+  10B0 lcall 0x10f7, 0x9a8                             | 10B0 lcall 0x10f7, 0x9a8
+  10B5 add sp, 0xa                                     | 10B5 add sp, 0xa
+  10B8 les bx, ptr [bp - 0x10]                         | 10B8 les bx, ptr [bp - 0x10]
+  10BB cmp word ptr es:[bx], 0x40                      | 10BB cmp word ptr es:[bx], 0x40
+  10BF jle 0x10cb                                      | 10BF jle 0x10cb
+  10C1 les bx, ptr [bp - 0x14]                         | 10C1 les bx, ptr [bp - 0x14]
+  10C4 mov word ptr es:[bx], 3                         | 10C4 mov word ptr es:[bx], 3
+  10C9 jmp 0x10d3                                      | 10C9 jmp 0x10d3
+  10CB les bx, ptr [bp - 0x14]                         | 10CB les bx, ptr [bp - 0x14]
+  10CE mov word ptr es:[bx], 2                         | 10CE mov word ptr es:[bx], 2
+  10D3 les bx, ptr [bp - 0xc]                          | 10D3 les bx, ptr [bp - 0xc]
+  10D6 mov ax, word ptr es:[bx]                        | 10D6 mov ax, word ptr es:[bx]
+  10D9 les bx, ptr [bp - 0x10]                         | 10D9 les bx, ptr [bp - 0x10]
+  10DC mov word ptr es:[bx], ax                        | 10DC mov word ptr es:[bx], ax
+  10DF les bx, ptr [bp - 8]                            | 10DF les bx, ptr [bp - 8]
+  10E2 cmp word ptr es:[bx], 0x60                      | 10E2 cmp word ptr es:[bx], 0x60
+  10E6 jne 0x10f2                                      | 10E6 jne 0x10f2
+  10E8 les bx, ptr [bp - 0xc]                          | 10E8 les bx, ptr [bp - 0xc]
+  10EB mov word ptr es:[bx], 2                         | 10EB mov word ptr es:[bx], 2
+  10F0 jmp 0x10fa                                      | 10F0 jmp 0x10fa
+  10F2 les bx, ptr [bp - 0xc]                          | 10F2 les bx, ptr [bp - 0xc]
+  10F5 mov word ptr es:[bx], 1                         | 10F5 mov word ptr es:[bx], 1
+  10FA les bx, ptr [bp - 4]                            | 10FA les bx, ptr [bp - 4]
+  10FD mov word ptr es:[bx], 4                         | 10FD mov word ptr es:[bx], 4
+  1102 les bx, ptr [bp - 0x14]                         | 1102 les bx, ptr [bp - 0x14]
+  1105 les bx, ptr [bp - 0xc]                          | 1105 les bx, ptr [bp - 0xc]
+  1108 push word ptr es:[bx]                           | 1108 push word ptr es:[bx]
+! 110B les bx, ptr [bp - 0x10]                         | 110B les si, ptr [bp - 0x10]
+! 110E push word ptr es:[bx]                           | 110E push word ptr es:[si]
+  1111 les bx, ptr [bp - 0x14]                         | 1111 les bx, ptr [bp - 0x14]
+  1114 push word ptr es:[bx]                           | 1114 push word ptr es:[bx]
+  1117 lcall 0x14ee, 0x151                             | 1117 lcall 0x14ee, 0x151
+  111C add sp, 6                                       | 111C add sp, 6
+  111F mov ax, 0xff                                    | 111F mov ax, 0xff
+  1122 push ax                                         | 1122 push ax
+  1123 les bx, ptr [bp - 4]                            | 1123 les bx, ptr [bp - 4]
+  1126 push word ptr es:[bx]                           | 1126 push word ptr es:[bx]
+  1129 les bx, ptr [bp - 8]                            | 1129 les bx, ptr [bp - 8]
+  112C push word ptr es:[bx]                           | 112C push word ptr es:[bx]
+  112F les bx, ptr [bp - 0xc]                          | 112F les bx, ptr [bp - 0xc]
+  1132 push word ptr es:[bx]                           | 1132 push word ptr es:[bx]
+  1135 les bx, ptr [bp - 0x10]                         | 1135 les bx, ptr [bp - 0x10]
+  1138 push word ptr es:[bx]                           | 1138 push word ptr es:[bx]
+  113B les bx, ptr [bp - 0x14]                         | 113B les bx, ptr [bp - 0x14]
+  113E push word ptr es:[bx]                           | 113E push word ptr es:[bx]
+  1141 lcall 0x10f7, 0xa44                             | 1141 lcall 0x10f7, 0xa44
+  1146 add sp, 0xc                                     | 1146 add sp, 0xc
+  1149 pop si                                          | 1149 pop si
+  114A mov sp, bp                                      | 114A mov sp, bp
+  114C pop bp                                          | 114C pop bp
+  114D retf                                            | 114D retf
