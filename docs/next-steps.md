@@ -2,9 +2,9 @@
 
 Read README.md, AGENTS.md, docs/codegen-rules.md and docs/tu-evidence.md before work.
 `python tools/validate.py` is the source of truth for totals (docs/progress.md/json).
-The latest blocker/tooling checkpoint passed full validation, including all tests
-and all 45 compiler probes, and the byte-identical hybrid check. No new game functions
-were accepted. Transcripts are in work/takeover/blockers/. DrawColonyBars remains the
+The latest sibling-tool checkpoint passed 203 tests (two skips), all 45 compiler
+probes, full module/FAR_BSS validation and the byte-identical hybrid check. No new game functions
+were accepted. Findings and transcripts are in work/takeover/siblings/. DrawColonyBars remains the
 latest game-code acceptance; its validation and hybrid evidence are retained separately.
 Check Git for the current checkpoint and publication status.
 
@@ -125,6 +125,13 @@ module metadata, registries, manifest, toolchain and acceptance-gate fingerprint
 RTLink trials refresh stale collections and verify source/object hashes before reuse;
 gate-failing objects are not cached. Historical work/align scripts have corrected paths.
 Do not apply their archived whole-file patches to the current tools.
+
+Sibling-inspired diagnostics (`tools/diag.py`, `tools/mismatch.py`) now group fully
+bound BP/register/branch differences without affecting acceptance. Autosearch exposes
+`--neutral-beam` and protects every existing manifest claim, rejecting broken starting
+drafts. The current memory near draft also breaks accepted f_171C_2086 (88 vs 92 bytes);
+earlier claims that it preserved all current peers are not fresh gate evidence.
+See work/takeover/siblings/README.md for the four-project comparison and new controls.
 
 ## 3. Remaining game code
 

@@ -1,0 +1,14 @@
+o15_384C_0239 [S15:384C] work/takeover/blockers/s15-context-base.c  msc600ax /AL /Os /Og /Oe /Zi
+  MISMATCH: bytes differ (first at +0x42, 2 differing)
+  frame: candidate 40  original 40   instructions 137 vs 137
+candidate slots (listing):
+  [bp-0x04] text
+  [bp-0x10] r
+  [bp-0x14] h
+  [bp-0x24] ev
+  [bp+0x06] which
+  register si = result
+slot correspondence (our slot -> original slot xN):
+  [bp-0x02] (unnamed)              -> -0x06x2   MOVED
+  (8 slots map to themselves; --all lists them)
+non-BP differences: 0

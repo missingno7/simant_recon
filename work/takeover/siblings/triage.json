@@ -1,0 +1,5814 @@
+[
+ {
+  "function": "f_0250_1018",
+  "module": "root:0250",
+  "profile": "msc600ax",
+  "flags": [
+   "/AL",
+   "/Os",
+   "/Oe",
+   "/Og",
+   "/Zi"
+  ],
+  "draft": "D:\\Prog\\simant_recon\\build\\workers\\siblings\\triage\\root_0250.c",
+  "source_sha256": "e41a4ab8c56c0d4923ace8b02027f2471feee049aabe0577588e206e930b4db2",
+  "strict_target_exact": false,
+  "strict_module_exact": false,
+  "reasons": [
+   "length 648 != target 646",
+   "bytes differ (first at +0x13, 593 differing)"
+  ],
+  "reloc_order": "EXACT",
+  "peer_losses": [],
+  "data_losses": [],
+  "authority": "DIAGNOSTIC_ONLY; strict verdict comes from modules.verify_module",
+  "candidate_bytes": 646,
+  "original_bytes": 646,
+  "decode_complete": true,
+  "classes": [
+   "BRANCH_TARGET_OR_LAYOUT",
+   "CALL_FRAME_OR_SEGMENT_REGISTER",
+   "CONTROL_FLOW_SHAPE",
+   "EPILOGUE_OR_RETURN_LOWERING",
+   "EXTRA_INSTRUCTIONS",
+   "LOCAL_CODEGEN_UNCLASSIFIED",
+   "MISSING_INSTRUCTIONS",
+   "REGISTER_ALLOCATION"
+  ],
+  "families": [
+   {
+    "id": "f1",
+    "kind": "REGISTER_ROLE",
+    "state": "CONTRADICTED_PATTERN",
+    "scope": {
+     "target_instructions": [
+      0,
+      225
+     ],
+     "candidate_instructions": [
+      0,
+      224
+     ],
+     "frame_or_abi": "No source-object, local/parameter, or BP-stability proof is inferred."
+    },
+    "mapping": [
+     {
+      "target": "ax",
+      "candidate": "si",
+      "width": 2
+     },
+     {
+      "target": "di",
+      "candidate": "ax",
+      "width": 2
+     },
+     {
+      "target": "si",
+      "candidate": "di",
+      "width": 1
+     },
+     {
+      "target": "si",
+      "candidate": "di",
+      "width": 2
+     }
+    ],
+    "sites": [
+     "p7",
+     "p8",
+     "p9",
+     "p10",
+     "p12",
+     "p14",
+     "p32",
+     "p48",
+     "p58",
+     "p68",
+     "p78",
+     "p88"
+    ],
+    "islands": [
+     1,
+     4,
+     6,
+     8,
+     10,
+     12,
+     14,
+     17,
+     18,
+     22,
+     23,
+     25
+    ],
+    "contradictions": [
+     {
+      "site": "p2",
+      "operand": 0,
+      "target": "ax",
+      "candidate": "ax",
+      "width": 2,
+      "candidate_width": 2
+     },
+     {
+      "site": "p4",
+      "operand": 0,
+      "target": "di",
+      "candidate": "di",
+      "width": 2,
+      "candidate_width": 2
+     },
+     {
+      "site": "p5",
+      "operand": 0,
+      "target": "si",
+      "candidate": "si",
+      "width": 2,
+      "candidate_width": 2
+     },
+     {
+      "site": "p7",
+      "operand": 0,
+      "target": "si",
+      "candidate": "di",
+      "width": 2,
+      "candidate_width": 2
+     },
+     {
+      "site": "p8",
+      "operand": 0,
+      "target": "si",
+      "candidate": "di",
+      "width": 2,
+      "candidate_width": 2
+     },
+     {
+      "site": "p9",
+      "operand": 0,
+      "target": "di",
+      "candidate": "ax",
+      "width": 2,
+      "candidate_width": 2
+     },
+     {
+      "site": "p10",
+      "operand": 0,
+      "target": "di",
+      "candidate": "ax",
+      "width": 2,
+      "candidate_width": 2
+     },
+     {
+      "site": "p12",
+      "operand": 0,
+      "target": "di",
+      "candidate": "ax",
+      "width": 2,
+      "candidate_width": 2
+     },
+     {
+      "site": "p14",
+      "operand": 0,
+      "target": "si",
+      "candidate": "di",
+      "width": 2,
+      "candidate_width": 2
+     },
+     {
+      "site": "p19",
+      "operand": 0,
+      "target": "ax",
+      "candidate": "ax",
+      "width": 2,
+      "candidate_width": 2
+     },
+     {
+      "site": "p20",
+      "operand": 0,
+      "target": "ax",
+      "candidate": "ax",
+      "width": 2,
+      "candidate_width": 2
+     },
+     {
+      "site": "p20",
+      "operand": 1,
+      "target": "ax",
+      "candidate": "ax",
+      "width": 2,
+      "candidate_width": 2
+     }
+    ],
+    "confidence": "low",
+    "basis": "All aligned uses of affected operands checked for one-to-one correspondence and equal access widths; alignment remains heuristic.",
+    "limit": "Observed operand pattern, not a source explanation, liveness proof, ABI assignment, or repair. BP offsets are not labelled locals or parameters; register roles retain subregister widths and implicit effects.",
+    "sites_count": 19,
+    "omitted_sites": 7,
+    "islands_count": 13,
+    "omitted_islands": 1,
+    "mapping_count": 4,
+    "omitted_mapping": 0,
+    "contradictions_count": 88,
+    "omitted_contradictions": 76
+   }
+  ],
+  "residuals": 75,
+  "full_diagnostic": "D:\\Prog\\simant_recon\\build\\workers\\siblings\\triage\\f_0250_1018.json"
+ },
+ {
+  "function": "f_0250_129E",
+  "module": "root:0250",
+  "profile": "msc600ax",
+  "flags": [
+   "/AL",
+   "/Os",
+   "/Oe",
+   "/Og",
+   "/Zi"
+  ],
+  "draft": "D:\\Prog\\simant_recon\\build\\workers\\siblings\\triage\\root_0250.c",
+  "source_sha256": "e41a4ab8c56c0d4923ace8b02027f2471feee049aabe0577588e206e930b4db2",
+  "strict_target_exact": false,
+  "strict_module_exact": false,
+  "reasons": [
+   "length 265 != target 264",
+   "bytes differ (first at +0xe, 241 differing)",
+   "relocation set differs (2 vs 2)"
+  ],
+  "reloc_order": "EXACT",
+  "peer_losses": [],
+  "data_losses": [],
+  "authority": "DIAGNOSTIC_ONLY; strict verdict comes from modules.verify_module",
+  "candidate_bytes": 264,
+  "original_bytes": 264,
+  "decode_complete": true,
+  "classes": [
+   "BRANCH_TARGET_OR_LAYOUT",
+   "CONTROL_FLOW_SHAPE",
+   "EPILOGUE_OR_RETURN_LOWERING",
+   "MISSING_INSTRUCTIONS",
+   "REGISTER_ALLOCATION"
+  ],
+  "families": [
+   {
+    "id": "f1",
+    "kind": "REGISTER_ROLE",
+    "state": "CONTRADICTED_PATTERN",
+    "scope": {
+     "target_instructions": [
+      0,
+      101
+     ],
+     "candidate_instructions": [
+      0,
+      100
+     ],
+     "frame_or_abi": "No source-object, local/parameter, or BP-stability proof is inferred."
+    },
+    "mapping": [
+     {
+      "target": "ax",
+      "candidate": "bx",
+      "width": 2
+     },
+     {
+      "target": "di",
+      "candidate": "si",
+      "width": 2
+     },
+     {
+      "target": "si",
+      "candidate": "di",
+      "width": 1
+     },
+     {
+      "target": "si",
+      "candidate": "di",
+      "width": 2
+     }
+    ],
+    "sites": [
+     "p6",
+     "p8",
+     "p9",
+     "p12",
+     "p16",
+     "p19",
+     "p27",
+     "p33",
+     "p36",
+     "p37",
+     "p38",
+     "p43"
+    ],
+    "islands": [
+     1,
+     2,
+     3,
+     4,
+     5,
+     6,
+     7,
+     8,
+     9,
+     10,
+     11,
+     13
+    ],
+    "contradictions": [
+     {
+      "site": "p2",
+      "operand": 0,
+      "target": "ax",
+      "candidate": "ax",
+      "width": 2,
+      "candidate_width": 2
+     },
+     {
+      "site": "p4",
+      "operand": 0,
+      "target": "di",
+      "candidate": "di",
+      "width": 2,
+      "candidate_width": 2
+     },
+     {
+      "site": "p5",
+      "operand": 0,
+      "target": "si",
+      "candidate": "si",
+      "width": 2,
+      "candidate_width": 2
+     },
+     {
+      "site": "p6",
+      "operand": 0,
+      "target": "di",
+      "candidate": "si",
+      "width": 2,
+      "candidate_width": 2
+     },
+     {
+      "site": "p8",
+      "operand": 0,
+      "target": "ax",
+      "candidate": "bx",
+      "width": 2,
+      "candidate_width": 2
+     },
+     {
+      "site": "p9",
+      "operand": 0,
+      "target": "ax",
+      "candidate": "bx",
+      "width": 2,
+      "candidate_width": 2
+     },
+     {
+      "site": "p9",
+      "operand": 1,
+      "target": "di",
+      "candidate": "si",
+      "width": 2,
+      "candidate_width": 2
+     },
+     {
+      "site": "p12",
+      "operand": 0,
+      "target": "di",
+      "candidate": "si",
+      "width": 2,
+      "candidate_width": 2
+     },
+     {
+      "site": "p12",
+      "operand": 1,
+      "target": "di",
+      "candidate": "si",
+      "width": 2,
+      "candidate_width": 2
+     },
+     {
+      "site": "p16",
+      "operand": 0,
+      "target": "di",
+      "candidate": "si",
+      "width": 2,
+      "candidate_width": 2
+     },
+     {
+      "site": "p19",
+      "operand": 0,
+      "target": "ax",
+      "candidate": "bx",
+      "width": 2,
+      "candidate_width": 2
+     },
+     {
+      "site": "p21",
+      "operand": 0,
+      "target": "ax",
+      "candidate": "ax",
+      "width": 2,
+      "candidate_width": 2
+     }
+    ],
+    "confidence": "low",
+    "basis": "All aligned uses of affected operands checked for one-to-one correspondence and equal access widths; alignment remains heuristic.",
+    "limit": "Observed operand pattern, not a source explanation, liveness proof, ABI assignment, or repair. BP offsets are not labelled locals or parameters; register roles retain subregister widths and implicit effects.",
+    "sites_count": 19,
+    "omitted_sites": 7,
+    "islands_count": 12,
+    "omitted_islands": 0,
+    "mapping_count": 4,
+    "omitted_mapping": 0,
+    "contradictions_count": 71,
+    "omitted_contradictions": 59
+   }
+  ],
+  "residuals": 30,
+  "full_diagnostic": "D:\\Prog\\simant_recon\\build\\workers\\siblings\\triage\\f_0250_129E.json"
+ },
+ {
+  "function": "DrawBalloons",
+  "module": "root:0250",
+  "profile": "msc600ax",
+  "flags": [
+   "/AL",
+   "/Os",
+   "/Oe",
+   "/Og",
+   "/Zi"
+  ],
+  "draft": "D:\\Prog\\simant_recon\\build\\workers\\siblings\\triage\\root_0250.c",
+  "source_sha256": "e41a4ab8c56c0d4923ace8b02027f2471feee049aabe0577588e206e930b4db2",
+  "strict_target_exact": false,
+  "strict_module_exact": false,
+  "reasons": [
+   "length 1053 != target 1060",
+   "bytes differ (first at +0x4, 726 differing)",
+   "relocation set differs (15 vs 15)"
+  ],
+  "reloc_order": "EXACT",
+  "peer_losses": [],
+  "data_losses": [],
+  "authority": "DIAGNOSTIC_ONLY; strict verdict comes from modules.verify_module",
+  "candidate_bytes": 1053,
+  "original_bytes": 1060,
+  "decode_complete": true,
+  "classes": [
+   "BRANCH_TARGET_OR_LAYOUT",
+   "CALL_FRAME_OR_SEGMENT_REGISTER",
+   "EXTRA_INSTRUCTIONS",
+   "IMMEDIATE_VALUE",
+   "LOCAL_CODEGEN_UNCLASSIFIED",
+   "MISSING_INSTRUCTIONS",
+   "REGISTER_ALLOCATION",
+   "STACK_SLOT_ALLOCATION",
+   "WIDTH_OR_EXTENSION"
+  ],
+  "families": [
+   {
+    "id": "f1",
+    "kind": "BP_DISPLACEMENT",
+    "state": "CONTRADICTED_PATTERN",
+    "scope": {
+     "target_instructions": [
+      0,
+      383
+     ],
+     "candidate_instructions": [
+      0,
+      378
+     ],
+     "frame_or_abi": "No source-object, local/parameter, or BP-stability proof is inferred."
+    },
+    "mapping": [
+     {
+      "target": -88,
+      "candidate": -64,
+      "width": 2
+     },
+     {
+      "target": -84,
+      "candidate": -86,
+      "width": 2
+     },
+     {
+      "target": -40,
+      "candidate": -42,
+      "width": 2
+     },
+     {
+      "target": -38,
+      "candidate": -40,
+      "width": 2
+     },
+     {
+      "target": -26,
+      "candidate": -16,
+      "width": 2
+     },
+     {
+      "target": -24,
+      "candidate": -16,
+      "width": 2
+     },
+     {
+      "target": -22,
+      "candidate": -26,
+      "width": 2
+     },
+     {
+      "target": -16,
+      "candidate": -24,
+      "width": 2
+     },
+     {
+      "target": -16,
+      "candidate": -22,
+      "width": 2
+     }
+    ],
+    "sites": [
+     "p112",
+     "p115",
+     "p163",
+     "p164",
+     "p165",
+     "p199",
+     "p200",
+     "p212",
+     "p229",
+     "p322",
+     "p326"
+    ],
+    "islands": [
+     9,
+     10,
+     13,
+     17,
+     19,
+     21,
+     29,
+     30
+    ],
+    "contradictions": [
+     {
+      "site": "p10",
+      "operand": 0,
+      "target": -24,
+      "candidate": -24,
+      "width": 2,
+      "candidate_width": 2
+     },
+     {
+      "site": "p11",
+      "operand": 0,
+      "target": -26,
+      "candidate": -26,
+      "width": 2,
+      "candidate_width": 2
+     },
+     {
+      "site": "p21",
+      "operand": 0,
+      "target": -24,
+      "candidate": -24,
+      "width": 2,
+      "candidate_width": 2
+     },
+     {
+      "site": "p22",
+      "operand": 0,
+      "target": -26,
+      "candidate": -26,
+      "width": 2,
+      "candidate_width": 2
+     },
+     {
+      "site": "p37",
+      "operand": 0,
+      "target": -26,
+      "candidate": -26,
+      "width": 2,
+      "candidate_width": 2
+     },
+     {
+      "site": "p128",
+      "operand": 0,
+      "target": -16,
+      "candidate": -16,
+      "width": 2,
+      "candidate_width": 2
+     },
+     {
+      "site": "p138",
+      "operand": 0,
+      "target": -22,
+      "candidate": -22,
+      "width": 2,
+      "candidate_width": 2
+     },
+     {
+      "site": "p150",
+      "operand": 1,
+      "target": -22,
+      "candidate": -22,
+      "width": 2,
+      "candidate_width": 2
+     },
+     {
+      "site": "p153",
+      "operand": 1,
+      "target": -16,
+      "candidate": -16,
+      "width": 2,
+      "candidate_width": 2
+     },
+     {
+      "site": "p156",
+      "operand": 0,
+      "target": -16,
+      "candidate": -16,
+      "width": 2,
+      "candidate_width": 2
+     },
+     {
+      "site": "p163",
+      "operand": 1,
+      "target": -22,
+      "candidate": -26,
+      "width": 2,
+      "candidate_width": 2
+     },
+     {
+      "site": "p164",
+      "operand": 0,
+      "target": -16,
+      "candidate": -22,
+      "width": 2,
+      "candidate_width": 2
+     }
+    ],
+    "confidence": "low",
+    "basis": "All aligned uses of affected operands checked for one-to-one correspondence and equal access widths; alignment remains heuristic.",
+    "limit": "Observed operand pattern, not a source explanation, liveness proof, ABI assignment, or repair. BP offsets are not labelled locals or parameters; register roles retain subregister widths and implicit effects.",
+    "sites_count": 11,
+    "omitted_sites": 0,
+    "islands_count": 8,
+    "omitted_islands": 0,
+    "mapping_count": 9,
+    "omitted_mapping": 0,
+    "contradictions_count": 25,
+    "omitted_contradictions": 13
+   },
+   {
+    "id": "f2",
+    "kind": "REGISTER_ROLE",
+    "state": "CONTRADICTED_PATTERN",
+    "scope": {
+     "target_instructions": [
+      0,
+      383
+     ],
+     "candidate_instructions": [
+      0,
+      378
+     ],
+     "frame_or_abi": "No source-object, local/parameter, or BP-stability proof is inferred."
+    },
+    "mapping": [
+     {
+      "target": "di",
+      "candidate": "si",
+      "width": 2
+     },
+     {
+      "target": "si",
+      "candidate": "ax",
+      "width": 2
+     },
+     {
+      "target": "si",
+      "candidate": "di",
+      "width": 2
+     }
+    ],
+    "sites": [
+     "p33",
+     "p34",
+     "p41",
+     "p68",
+     "p97",
+     "p98",
+     "p99",
+     "p190",
+     "p370",
+     "p372"
+    ],
+    "islands": [
+     2,
+     3,
+     5,
+     7,
+     16,
+     31
+    ],
+    "contradictions": [
+     {
+      "site": "p2",
+      "operand": 0,
+      "target": "ax",
+      "candidate": "ax",
+      "width": 2,
+      "candidate_width": 2
+     },
+     {
+      "site": "p4",
+      "operand": 0,
+      "target": "di",
+      "candidate": "di",
+      "width": 2,
+      "candidate_width": 2
+     },
+     {
+      "site": "p5",
+      "operand": 0,
+      "target": "si",
+      "candidate": "si",
+      "width": 2,
+      "candidate_width": 2
+     },
+     {
+      "site": "p6",
+      "operand": 0,
+      "target": "ax",
+      "candidate": "ax",
+      "width": 2,
+      "candidate_width": 2
+     },
+     {
+      "site": "p7",
+      "operand": 0,
+      "target": "ax",
+      "candidate": "ax",
+      "width": 2,
+      "candidate_width": 2
+     },
+     {
+      "site": "p13",
+      "operand": 0,
+      "target": "ax",
+      "candidate": "ax",
+      "width": 2,
+      "candidate_width": 2
+     },
+     {
+      "site": "p14",
+      "operand": 0,
+      "target": "ax",
+      "candidate": "ax",
+      "width": 2,
+      "candidate_width": 2
+     },
+     {
+      "site": "p16",
+      "operand": 0,
+      "target": "ax",
+      "candidate": "ax",
+      "width": 2,
+      "candidate_width": 2
+     },
+     {
+      "site": "p18",
+      "operand": 0,
+      "target": "ax",
+      "candidate": "ax",
+      "width": 2,
+      "candidate_width": 2
+     },
+     {
+      "site": "p33",
+      "operand": 0,
+      "target": "di",
+      "candidate": "si",
+      "width": 2,
+      "candidate_width": 2
+     },
+     {
+      "site": "p33",
+      "operand": 1,
+      "target": "di",
+      "candidate": "si",
+      "width": 2,
+      "candidate_width": 2
+     },
+     {
+      "site": "p34",
+      "operand": 1,
+      "target": "di",
+      "candidate": "si",
+      "width": 2,
+      "candidate_width": 2
+     }
+    ],
+    "confidence": "low",
+    "basis": "All aligned uses of affected operands checked for one-to-one correspondence and equal access widths; alignment remains heuristic.",
+    "limit": "Observed operand pattern, not a source explanation, liveness proof, ABI assignment, or repair. BP offsets are not labelled locals or parameters; register roles retain subregister widths and implicit effects.",
+    "sites_count": 10,
+    "omitted_sites": 0,
+    "islands_count": 6,
+    "omitted_islands": 0,
+    "mapping_count": 3,
+    "omitted_mapping": 0,
+    "contradictions_count": 162,
+    "omitted_contradictions": 150
+   }
+  ],
+  "residuals": 58,
+  "full_diagnostic": "D:\\Prog\\simant_recon\\build\\workers\\siblings\\triage\\DrawBalloons.json"
+ },
+ {
+  "function": "SpiderScan",
+  "module": "root:0CDB",
+  "profile": "msc600ax",
+  "flags": [
+   "/AL",
+   "/Os",
+   "/Oe",
+   "/Og",
+   "/Zi"
+  ],
+  "draft": "D:\\Prog\\simant_recon\\build\\workers\\siblings\\triage\\root_0CDB.c",
+  "source_sha256": "2d2192f4ada76eb4676d174932847e3807c987f294b1fbbae9287ddcbbd81734",
+  "strict_target_exact": false,
+  "strict_module_exact": false,
+  "reasons": [
+   "length 389 != target 392",
+   "bytes differ (first at +0x42, 319 differing)",
+   "relocation set differs (12 vs 12)"
+  ],
+  "reloc_order": "EXACT",
+  "peer_losses": [],
+  "data_losses": [],
+  "authority": "DIAGNOSTIC_ONLY; strict verdict comes from modules.verify_module",
+  "candidate_bytes": 389,
+  "original_bytes": 392,
+  "decode_complete": true,
+  "classes": [
+   "LOCAL_CODEGEN_UNCLASSIFIED",
+   "MISSING_INSTRUCTIONS"
+  ],
+  "families": [],
+  "residuals": 3,
+  "full_diagnostic": "D:\\Prog\\simant_recon\\build\\workers\\siblings\\triage\\SpiderScan.json",
+  "summary": "MATCH DIAGNOSIS: SpiderScan (bound payload)\nStrict status: MISMATCH; diagnostics cannot discharge extent/byte/fixup obligations.\nTarget/candidate: 392/389 bytes, 157/155 linear instructions.\nByte preservation evidence: 154 target instructions, 2 anchors, 1 islands; not source-line boundaries.\nUngrouped residual observations: 3 (not a count of independent fixes).\n  p23 islands [1]: 66 sub ax, ax -> None None; MISSING\n  p24 islands [1]: 68 mov word ptr [bp - 2], ax -> None None; MISSING\n  p25 islands [1]: 71 mov word ptr [bp - 8], ax -> 66 mov word ptr [bp - 8], 0; MISMATCH\nObserved patterns only; 0 omitted entries. Full artifact retains every site/island and contradictions; --islands expands localization. Exact stream resumes at the original anchor boundaries."
+ },
+ {
+  "function": "LessonDone",
+  "module": "root:0E2E",
+  "profile": "msc600ax",
+  "flags": [
+   "/AL",
+   "/Os",
+   "/Oe",
+   "/Og",
+   "/Zi"
+  ],
+  "draft": "D:\\Prog\\simant_recon\\build\\workers\\siblings\\triage\\root_0E2E.c",
+  "source_sha256": "0d3662228a707f4ce98295da58b28f567e7837e9d254888efd30cd3b8ae67c01",
+  "strict_target_exact": false,
+  "strict_module_exact": false,
+  "reasons": [
+   "length 739 != target 723",
+   "bytes differ (first at +0x26, 555 differing)",
+   "relocation set differs (9 vs 9)"
+  ],
+  "reloc_order": "EXACT",
+  "peer_losses": [],
+  "data_losses": [],
+  "authority": "DIAGNOSTIC_ONLY; strict verdict comes from modules.verify_module",
+  "candidate_bytes": 723,
+  "original_bytes": 723,
+  "decode_complete": false,
+  "classes": [
+   "CALL_FRAME_OR_SEGMENT_REGISTER",
+   "CONTROL_FLOW_SHAPE",
+   "EXTRA_INSTRUCTIONS",
+   "LOCAL_CODEGEN_UNCLASSIFIED"
+  ],
+  "families": [],
+  "residuals": 225,
+  "full_diagnostic": "D:\\Prog\\simant_recon\\build\\workers\\siblings\\triage\\LessonDone.json",
+  "summary": "MATCH DIAGNOSIS: LessonDone (bound payload)\nStrict status: MISMATCH; diagnostics cannot discharge extent/byte/fixup obligations.\nTarget/candidate: 723/723 bytes, 29/248 linear instructions.\nByte preservation evidence: 18 target instructions, 1 anchors, 2 islands; not source-line boundaries.\nUngrouped residual observations: 225 (not a count of independent fixes).\n  p18 islands [1]: None None -> 38 and byte ptr [bx], al; EXTRA\n  p19 islands [1]: None None -> 40 in al, dx; EXTRA\n  p20 islands [1]: None None -> 41 push es; EXTRA\n  p21 islands [1]: None None -> 42 sub al, 7; EXTRA\n  p22 islands [1]: None None -> 44 jae 0x35; EXTRA\n  p23 islands [1]: None None -> 46 test word ptr [bx], ax; EXTRA\n  p24 islands [1]: None None -> 48 mov dx, 0xec07; EXTRA\n  p25 islands [1]: None None -> 51 push es; EXTRA\n  p26 islands [1]: None None -> 52 mov byte ptr [bx], 0xca; EXTRA\n  p27 islands [1]: None None -> 55 pop es; EXTRA\n  p28 islands [1]: None None -> 56 inc byte ptr [bx]; EXTRA\n  p29 islands [1]: None None -> 58 in al, dx; EXTRA\nObserved patterns only; 213 omitted entries. Full artifact retains every site/island and contradictions; --islands expands localization. Exact stream resumes at the original anchor boundaries."
+ },
+ {
+  "function": "f_171C_09CC",
+  "module": "root:171C",
+  "profile": "msc600ax",
+  "flags": [
+   "/AL",
+   "/Oeg",
+   "/Gs",
+   "/Zi"
+  ],
+  "draft": "D:\\Prog\\simant_recon\\build\\workers\\siblings\\triage\\root_171C.c",
+  "source_sha256": "0fee78bc34bc65ef6b9e3742cc5fd5f5ca5c749eb5844f71f42c66b52242c294",
+  "strict_target_exact": false,
+  "strict_module_exact": false,
+  "reasons": [
+   "length 146 != target 144",
+   "bytes differ (first at +0x9, 85 differing)"
+  ],
+  "reloc_order": "EXACT",
+  "peer_losses": [],
+  "data_losses": [],
+  "authority": "DIAGNOSTIC_ONLY; strict verdict comes from modules.verify_module",
+  "candidate_bytes": 144,
+  "original_bytes": 144,
+  "decode_complete": true,
+  "classes": [
+   "BRANCH_TARGET_OR_LAYOUT",
+   "CALL_FRAME_OR_SEGMENT_REGISTER",
+   "CONTROL_FLOW_SHAPE",
+   "EPILOGUE_OR_RETURN_LOWERING",
+   "EXTRA_INSTRUCTIONS",
+   "LOCAL_CODEGEN_UNCLASSIFIED",
+   "MISSING_INSTRUCTIONS",
+   "REGISTER_ALLOCATION"
+  ],
+  "families": [
+   {
+    "id": "f1",
+    "kind": "REGISTER_ROLE",
+    "state": "CONTRADICTED_PATTERN",
+    "scope": {
+     "target_instructions": [
+      0,
+      67
+     ],
+     "candidate_instructions": [
+      0,
+      65
+     ],
+     "frame_or_abi": "No source-object, local/parameter, or BP-stability proof is inferred."
+    },
+    "mapping": [
+     {
+      "target": "bx",
+      "candidate": "di",
+      "width": 2
+     },
+     {
+      "target": "di",
+      "candidate": "bx",
+      "width": 2
+     }
+    ],
+    "sites": [
+     "p5",
+     "p6",
+     "p7",
+     "p10",
+     "p12",
+     "p14",
+     "p16"
+    ],
+    "islands": [
+     1,
+     2
+    ],
+    "contradictions": [
+     {
+      "site": "p3",
+      "operand": 0,
+      "target": "di",
+      "candidate": "di",
+      "width": 2,
+      "candidate_width": 2
+     },
+     {
+      "site": "p5",
+      "operand": 0,
+      "target": "di",
+      "candidate": "bx",
+      "width": 2,
+      "candidate_width": 2
+     },
+     {
+      "site": "p6",
+      "operand": 0,
+      "target": "bx",
+      "candidate": "di",
+      "width": 2,
+      "candidate_width": 2
+     },
+     {
+      "site": "p7",
+      "operand": 1,
+      "target": "bx",
+      "candidate": "di",
+      "width": 2,
+      "candidate_width": 2
+     },
+     {
+      "site": "p10",
+      "operand": 0,
+      "target": "bx",
+      "candidate": "di",
+      "width": 2,
+      "candidate_width": 2
+     },
+     {
+      "site": "p10",
+      "operand": 1,
+      "target": "bx",
+      "candidate": "di",
+      "width": 2,
+      "candidate_width": 2
+     },
+     {
+      "site": "p12",
+      "operand": 1,
+      "target": "bx",
+      "candidate": "di",
+      "width": 2,
+      "candidate_width": 2
+     },
+     {
+      "site": "p14",
+      "operand": 0,
+      "target": "bx",
+      "candidate": "di",
+      "width": 2,
+      "candidate_width": 2
+     },
+     {
+      "site": "p14",
+      "operand": 1,
+      "target": "di",
+      "candidate": "bx",
+      "width": 2,
+      "candidate_width": 2
+     },
+     {
+      "site": "p16",
+      "operand": 1,
+      "target": "di",
+      "candidate": "bx",
+      "width": 2,
+      "candidate_width": 2
+     },
+     {
+      "site": "p21",
+      "operand": 0,
+      "target": "di",
+      "candidate": "di",
+      "width": 2,
+      "candidate_width": 2
+     },
+     {
+      "site": "p37",
+      "operand": 0,
+      "target": "bx",
+      "candidate": "bx",
+      "width": 1,
+      "candidate_width": 1
+     }
+    ],
+    "confidence": "low",
+    "basis": "All aligned uses of affected operands checked for one-to-one correspondence and equal access widths; alignment remains heuristic.",
+    "limit": "Observed operand pattern, not a source explanation, liveness proof, ABI assignment, or repair. BP offsets are not labelled locals or parameters; register roles retain subregister widths and implicit effects.",
+    "sites_count": 7,
+    "omitted_sites": 0,
+    "islands_count": 2,
+    "omitted_islands": 0,
+    "mapping_count": 2,
+    "omitted_mapping": 0,
+    "contradictions_count": 14,
+    "omitted_contradictions": 2
+   }
+  ],
+  "residuals": 19,
+  "full_diagnostic": "D:\\Prog\\simant_recon\\build\\workers\\siblings\\triage\\f_171C_09CC.json"
+ },
+ {
+  "function": "f_171C_0ADC",
+  "module": "root:171C",
+  "profile": "msc600ax",
+  "flags": [
+   "/AL",
+   "/Oeg",
+   "/Gs",
+   "/Zi"
+  ],
+  "draft": "D:\\Prog\\simant_recon\\build\\workers\\siblings\\triage\\root_171C.c",
+  "source_sha256": "0fee78bc34bc65ef6b9e3742cc5fd5f5ca5c749eb5844f71f42c66b52242c294",
+  "strict_target_exact": false,
+  "strict_module_exact": false,
+  "reasons": [
+   "length 260 != target 262",
+   "bytes differ (first at +0x5, 212 differing)",
+   "relocation set differs (1 vs 1)"
+  ],
+  "reloc_order": "EXACT",
+  "peer_losses": [],
+  "data_losses": [],
+  "authority": "DIAGNOSTIC_ONLY; strict verdict comes from modules.verify_module",
+  "candidate_bytes": 260,
+  "original_bytes": 262,
+  "decode_complete": true,
+  "classes": [
+   "BRANCH_TARGET_OR_LAYOUT",
+   "CALL_FRAME_OR_SEGMENT_REGISTER",
+   "EXTRA_INSTRUCTIONS",
+   "IMMEDIATE_VALUE",
+   "LOCAL_CODEGEN_UNCLASSIFIED",
+   "MISSING_INSTRUCTIONS",
+   "REGISTER_ALLOCATION"
+  ],
+  "families": [
+   {
+    "id": "f1",
+    "kind": "REGISTER_ROLE",
+    "state": "CONTRADICTED_PATTERN",
+    "scope": {
+     "target_instructions": [
+      0,
+      103
+     ],
+     "candidate_instructions": [
+      0,
+      103
+     ],
+     "frame_or_abi": "No source-object, local/parameter, or BP-stability proof is inferred."
+    },
+    "mapping": [
+     {
+      "target": "ax",
+      "candidate": "cx",
+      "width": 2
+     },
+     {
+      "target": "dx",
+      "candidate": "di",
+      "width": 2
+     }
+    ],
+    "sites": [
+     "p40",
+     "p45",
+     "p46"
+    ],
+    "islands": [
+     4,
+     5
+    ],
+    "contradictions": [
+     {
+      "site": "p3",
+      "operand": 0,
+      "target": "di",
+      "candidate": "di",
+      "width": 2,
+      "candidate_width": 2
+     },
+     {
+      "site": "p5",
+      "operand": 0,
+      "target": "ax",
+      "candidate": "ax",
+      "width": 2,
+      "candidate_width": 2
+     },
+     {
+      "site": "p6",
+      "operand": 0,
+      "target": "cx",
+      "candidate": "cx",
+      "width": 2,
+      "candidate_width": 2
+     },
+     {
+      "site": "p7",
+      "operand": 0,
+      "target": "dx",
+      "candidate": "dx",
+      "width": 2,
+      "candidate_width": 2
+     },
+     {
+      "site": "p8",
+      "operand": 0,
+      "target": "cx",
+      "candidate": "cx",
+      "width": 2,
+      "candidate_width": 2
+     },
+     {
+      "site": "p10",
+      "operand": 0,
+      "target": "di",
+      "candidate": "di",
+      "width": 2,
+      "candidate_width": 2
+     },
+     {
+      "site": "p10",
+      "operand": 1,
+      "target": "ax",
+      "candidate": "ax",
+      "width": 2,
+      "candidate_width": 2
+     },
+     {
+      "site": "p11",
+      "operand": 1,
+      "target": "cx",
+      "candidate": "cx",
+      "width": 2,
+      "candidate_width": 2
+     },
+     {
+      "site": "p14",
+      "operand": 1,
+      "target": "dx",
+      "candidate": "dx",
+      "width": 2,
+      "candidate_width": 2
+     },
+     {
+      "site": "p15",
+      "operand": 0,
+      "target": "cx",
+      "candidate": "cx",
+      "width": 2,
+      "candidate_width": 2
+     },
+     {
+      "site": "p16",
+      "operand": "implicit",
+      "target": "di",
+      "candidate": "di",
+      "width": null,
+      "candidate_width": null
+     },
+     {
+      "site": "p16",
+      "operand": "implicit",
+      "target": "cx",
+      "candidate": "cx",
+      "width": null,
+      "candidate_width": null
+     }
+    ],
+    "confidence": "low",
+    "basis": "All aligned uses of affected operands checked for one-to-one correspondence and equal access widths; alignment remains heuristic.",
+    "limit": "Observed operand pattern, not a source explanation, liveness proof, ABI assignment, or repair. BP offsets are not labelled locals or parameters; register roles retain subregister widths and implicit effects.",
+    "sites_count": 3,
+    "omitted_sites": 0,
+    "islands_count": 2,
+    "omitted_islands": 0,
+    "mapping_count": 2,
+    "omitted_mapping": 0,
+    "contradictions_count": 67,
+    "omitted_contradictions": 55
+   }
+  ],
+  "residuals": 18,
+  "full_diagnostic": "D:\\Prog\\simant_recon\\build\\workers\\siblings\\triage\\f_171C_0ADC.json"
+ },
+ {
+  "function": "f_171C_0CF4",
+  "module": "root:171C",
+  "profile": "msc600ax",
+  "flags": [
+   "/AL",
+   "/Oeg",
+   "/Gs",
+   "/Zi"
+  ],
+  "draft": "D:\\Prog\\simant_recon\\build\\workers\\siblings\\triage\\root_171C.c",
+  "source_sha256": "0fee78bc34bc65ef6b9e3742cc5fd5f5ca5c749eb5844f71f42c66b52242c294",
+  "strict_target_exact": false,
+  "strict_module_exact": false,
+  "reasons": [
+   "length 520 != target 490",
+   "bytes differ (first at +0x5, 437 differing)",
+   "relocation set differs (4 vs 4)"
+  ],
+  "reloc_order": "EXACT",
+  "peer_losses": [],
+  "data_losses": [],
+  "authority": "DIAGNOSTIC_ONLY; strict verdict comes from modules.verify_module",
+  "candidate_bytes": 490,
+  "original_bytes": 490,
+  "decode_complete": false,
+  "classes": [
+   "BRANCH_TARGET_OR_LAYOUT",
+   "CALL_FRAME_OR_SEGMENT_REGISTER",
+   "CONTROL_FLOW_SHAPE",
+   "EPILOGUE_OR_RETURN_LOWERING",
+   "EXTRA_INSTRUCTIONS",
+   "IMMEDIATE_VALUE",
+   "LOCAL_CODEGEN_UNCLASSIFIED",
+   "MISSING_INSTRUCTIONS",
+   "REGISTER_ALLOCATION",
+   "STACK_SLOT_ALLOCATION",
+   "TEMPORARY_OR_SPILL",
+   "WIDTH_OR_EXTENSION"
+  ],
+  "families": [],
+  "residuals": 123,
+  "full_diagnostic": "D:\\Prog\\simant_recon\\build\\workers\\siblings\\triage\\f_171C_0CF4.json"
+ },
+ {
+  "function": "f_171C_0FBC",
+  "module": "root:171C",
+  "profile": "msc600ax",
+  "flags": [
+   "/AL",
+   "/Oeg",
+   "/Gs",
+   "/Zi"
+  ],
+  "draft": "D:\\Prog\\simant_recon\\build\\workers\\siblings\\triage\\root_171C.c",
+  "source_sha256": "0fee78bc34bc65ef6b9e3742cc5fd5f5ca5c749eb5844f71f42c66b52242c294",
+  "strict_target_exact": false,
+  "strict_module_exact": false,
+  "reasons": [
+   "length 568 != target 566",
+   "bytes differ (first at +0x5, 437 differing)",
+   "relocation set differs (10 vs 10)"
+  ],
+  "reloc_order": "EXACT",
+  "peer_losses": [],
+  "data_losses": [],
+  "authority": "DIAGNOSTIC_ONLY; strict verdict comes from modules.verify_module",
+  "candidate_bytes": 566,
+  "original_bytes": 566,
+  "decode_complete": true,
+  "classes": [
+   "BRANCH_TARGET_OR_LAYOUT",
+   "CALL_FRAME_OR_SEGMENT_REGISTER",
+   "CONTROL_FLOW_SHAPE",
+   "EPILOGUE_OR_RETURN_LOWERING",
+   "EXTRA_INSTRUCTIONS",
+   "IMMEDIATE_VALUE",
+   "LOCAL_CODEGEN_UNCLASSIFIED",
+   "MISSING_INSTRUCTIONS",
+   "REGISTER_ALLOCATION",
+   "STACK_SLOT_ALLOCATION",
+   "WIDTH_OR_EXTENSION"
+  ],
+  "families": [
+   {
+    "id": "f1",
+    "kind": "BP_DISPLACEMENT",
+    "state": "CONTRADICTED_PATTERN",
+    "scope": {
+     "target_instructions": [
+      0,
+      233
+     ],
+     "candidate_instructions": [
+      0,
+      233
+     ],
+     "frame_or_abi": "No source-object, local/parameter, or BP-stability proof is inferred."
+    },
+    "mapping": [
+     {
+      "target": -18,
+      "candidate": -6,
+      "width": 2
+     },
+     {
+      "target": -14,
+      "candidate": -2,
+      "width": 2
+     },
+     {
+      "target": -6,
+      "candidate": -18,
+      "width": 2
+     }
+    ],
+    "sites": [
+     "p13",
+     "p180",
+     "p181"
+    ],
+    "islands": [
+     2,
+     12
+    ],
+    "contradictions": [
+     {
+      "site": "p5",
+      "operand": 0,
+      "target": -6,
+      "candidate": -6,
+      "width": 2,
+      "candidate_width": 2
+     },
+     {
+      "site": "p6",
+      "operand": 0,
+      "target": -18,
+      "candidate": -18,
+      "width": 2,
+      "candidate_width": 2
+     },
+     {
+      "site": "p10",
+      "operand": 0,
+      "target": -2,
+      "candidate": -16,
+      "width": 2,
+      "candidate_width": 2
+     },
+     {
+      "site": "p11",
+      "operand": 0,
+      "target": -16,
+      "candidate": -14,
+      "width": 2,
+      "candidate_width": 2
+     },
+     {
+      "site": "p13",
+      "operand": 0,
+      "target": -14,
+      "candidate": -2,
+      "width": 2,
+      "candidate_width": 2
+     },
+     {
+      "site": "p15",
+      "operand": 1,
+      "target": -2,
+      "candidate": -2,
+      "width": 2,
+      "candidate_width": 2
+     },
+     {
+      "site": "p18",
+      "operand": 1,
+      "target": -2,
+      "candidate": -2,
+      "width": 2,
+      "candidate_width": 2
+     },
+     {
+      "site": "p23",
+      "operand": 0,
+      "target": -14,
+      "candidate": -14,
+      "width": 2,
+      "candidate_width": 2
+     },
+     {
+      "site": "p27",
+      "operand": 0,
+      "target": -2,
+      "candidate": -2,
+      "width": 2,
+      "candidate_width": 2
+     },
+     {
+      "site": "p30",
+      "operand": 1,
+      "target": -6,
+      "candidate": -6,
+      "width": 2,
+      "candidate_width": 2
+     },
+     {
+      "site": "p31",
+      "operand": 1,
+      "target": -14,
+      "candidate": -14,
+      "width": 2,
+      "candidate_width": 2
+     },
+     {
+      "site": "p36",
+      "operand": 1,
+      "target": -14,
+      "candidate": -14,
+      "width": 2,
+      "candidate_width": 2
+     }
+    ],
+    "confidence": "low",
+    "basis": "All aligned uses of affected operands checked for one-to-one correspondence and equal access widths; alignment remains heuristic.",
+    "limit": "Observed operand pattern, not a source explanation, liveness proof, ABI assignment, or repair. BP offsets are not labelled locals or parameters; register roles retain subregister widths and implicit effects.",
+    "sites_count": 3,
+    "omitted_sites": 0,
+    "islands_count": 2,
+    "omitted_islands": 0,
+    "mapping_count": 3,
+    "omitted_mapping": 0,
+    "contradictions_count": 22,
+    "omitted_contradictions": 10
+   },
+   {
+    "id": "f2",
+    "kind": "REGISTER_ROLE",
+    "state": "CONTRADICTED_PATTERN",
+    "scope": {
+     "target_instructions": [
+      0,
+      233
+     ],
+     "candidate_instructions": [
+      0,
+      233
+     ],
+     "frame_or_abi": "No source-object, local/parameter, or BP-stability proof is inferred."
+    },
+    "mapping": [
+     {
+      "target": "bx",
+      "candidate": "ax",
+      "width": 2
+     },
+     {
+      "target": "cx",
+      "candidate": "dx",
+      "width": 2
+     },
+     {
+      "target": "di",
+      "candidate": "bx",
+      "width": 2
+     },
+     {
+      "target": "dx",
+      "candidate": "cx",
+      "width": 2
+     },
+     {
+      "target": "dx",
+      "candidate": "di",
+      "width": 2
+     },
+     {
+      "target": "si",
+      "candidate": "ax",
+      "width": 2
+     },
+     {
+      "target": "si",
+      "candidate": "bx",
+      "width": 2
+     },
+     {
+      "target": "si",
+      "candidate": "di",
+      "width": 2
+     }
+    ],
+    "sites": [
+     "p46",
+     "p63",
+     "p64",
+     "p65",
+     "p91",
+     "p102",
+     "p105",
+     "p106",
+     "p109",
+     "p231",
+     "p232",
+     "p237"
+    ],
+    "islands": [
+     4,
+     7,
+     8,
+     9,
+     16
+    ],
+    "contradictions": [
+     {
+      "site": "p3",
+      "operand": 0,
+      "target": "di",
+      "candidate": "di",
+      "width": 2,
+      "candidate_width": 2
+     },
+     {
+      "site": "p4",
+      "operand": 0,
+      "target": "si",
+      "candidate": "si",
+      "width": 2,
+      "candidate_width": 2
+     },
+     {
+      "site": "p7",
+      "operand": 0,
+      "target": "ax",
+      "candidate": "ax",
+      "width": 2,
+      "candidate_width": 2
+     },
+     {
+      "site": "p8",
+      "operand": 0,
+      "target": "dx",
+      "candidate": "dx",
+      "width": 2,
+      "candidate_width": 2
+     },
+     {
+      "site": "p10",
+      "operand": 1,
+      "target": "dx",
+      "candidate": "ax",
+      "width": 2,
+      "candidate_width": 2
+     },
+     {
+      "site": "p11",
+      "operand": 1,
+      "target": "ax",
+      "candidate": "dx",
+      "width": 2,
+      "candidate_width": 2
+     },
+     {
+      "site": "p13",
+      "operand": 1,
+      "target": "dx",
+      "candidate": "dx",
+      "width": 2,
+      "candidate_width": 2
+     },
+     {
+      "site": "p14",
+      "operand": 0,
+      "target": "di",
+      "candidate": "di",
+      "width": 2,
+      "candidate_width": 2
+     },
+     {
+      "site": "p15",
+      "operand": 0,
+      "target": "ax",
+      "candidate": "ax",
+      "width": 2,
+      "candidate_width": 2
+     },
+     {
+      "site": "p16",
+      "operand": 0,
+      "target": "ax",
+      "candidate": "ax",
+      "width": 2,
+      "candidate_width": 2
+     },
+     {
+      "site": "p16",
+      "operand": 1,
+      "target": "bx",
+      "candidate": "bx",
+      "width": 2,
+      "candidate_width": 2
+     },
+     {
+      "site": "p19",
+      "operand": 0,
+      "target": "bx",
+      "candidate": "bx",
+      "width": 2,
+      "candidate_width": 2
+     }
+    ],
+    "confidence": "low",
+    "basis": "All aligned uses of affected operands checked for one-to-one correspondence and equal access widths; alignment remains heuristic.",
+    "limit": "Observed operand pattern, not a source explanation, liveness proof, ABI assignment, or repair. BP offsets are not labelled locals or parameters; register roles retain subregister widths and implicit effects.",
+    "sites_count": 12,
+    "omitted_sites": 0,
+    "islands_count": 5,
+    "omitted_islands": 0,
+    "mapping_count": 8,
+    "omitted_mapping": 0,
+    "contradictions_count": 149,
+    "omitted_contradictions": 137
+   }
+  ],
+  "residuals": 75,
+  "full_diagnostic": "D:\\Prog\\simant_recon\\build\\workers\\siblings\\triage\\f_171C_0FBC.json"
+ },
+ {
+  "function": "FindIndex",
+  "module": "root:1986",
+  "profile": "msc600ax",
+  "flags": [
+   "/AL",
+   "/Os",
+   "/Oeg",
+   "/Gs",
+   "/Zi"
+  ],
+  "draft": "D:\\Prog\\simant_recon\\build\\workers\\siblings\\triage\\root_1986.c",
+  "source_sha256": "b3b9ebe5d7d2e99460eb17d386bf24aabd8bdd01648e400990c0fe5fed312d49",
+  "strict_target_exact": false,
+  "strict_module_exact": false,
+  "reasons": [
+   "bytes differ (first at +0x7a, 17 differing)"
+  ],
+  "reloc_order": "EXACT",
+  "peer_losses": [],
+  "data_losses": [],
+  "authority": "DIAGNOSTIC_ONLY; strict verdict comes from modules.verify_module",
+  "candidate_bytes": 267,
+  "original_bytes": 267,
+  "decode_complete": true,
+  "classes": [
+   "BRANCH_TARGET_OR_LAYOUT",
+   "CONTROL_FLOW_SHAPE",
+   "EXTRA_INSTRUCTIONS",
+   "LOCAL_CODEGEN_UNCLASSIFIED",
+   "MISSING_INSTRUCTIONS"
+  ],
+  "families": [],
+  "residuals": 6,
+  "full_diagnostic": "D:\\Prog\\simant_recon\\build\\workers\\siblings\\triage\\FindIndex.json",
+  "summary": "MATCH DIAGNOSIS: FindIndex (bound payload)\nStrict status: MISMATCH; diagnostics cannot discharge extent/byte/fixup obligations.\nTarget/candidate: 267/267 bytes, 98/98 linear instructions.\nByte preservation evidence: 93 target instructions, 5 anchors, 4 islands; not source-line boundaries.\nCorresponding anchored branch destinations: 1 sites (decimal offsets 136->136); encoding/layout changes remain byte differences.\nUngrouped residual observations: 6 (not a count of independent fixes).\n  p44 islands [1]: 121 jg 0x99 -> 121 jg 0xa4; UNRESOLVED_DESTINATION\n  p54 islands [3]: 151 jl 0x9e -> None None; MISSING\n  p55 islands [3]: 153 lea di, [si - 1] -> None None; MISSING\n  p56 islands [3]: 156 jmp 0xa7 -> 151 jge 0xa4; MISMATCH\n  p60 islands [4]: None None -> 162 jmp 0xa7; EXTRA\n  p61 islands [4]: None None -> 164 lea di, [si - 1]; EXTRA\nObserved patterns only; 0 omitted entries. Full artifact retains every site/island and contradictions; --islands expands localization. Exact stream resumes at the original anchor boundaries."
+ },
+ {
+  "function": "ch_LookUpId",
+  "module": "root:1A96",
+  "profile": "msc600ax",
+  "flags": [
+   "/AL",
+   "/Os",
+   "/Oeg",
+   "/Gs",
+   "/Zi"
+  ],
+  "draft": "D:\\Prog\\simant_recon\\build\\workers\\siblings\\triage\\root_1A96.c",
+  "source_sha256": "c758410025b87af9cbf02daea8b0470f72ac00a121c216538de61f6905a91898",
+  "strict_target_exact": false,
+  "strict_module_exact": false,
+  "reasons": [
+   "length 359 != target 354",
+   "bytes differ (first at +0x5, 284 differing)",
+   "relocation set differs (2 vs 2)"
+  ],
+  "reloc_order": "EXACT",
+  "peer_losses": [],
+  "data_losses": [],
+  "authority": "DIAGNOSTIC_ONLY; strict verdict comes from modules.verify_module",
+  "candidate_bytes": 354,
+  "original_bytes": 354,
+  "decode_complete": true,
+  "classes": [
+   "BRANCH_TARGET_OR_LAYOUT",
+   "CALL_FRAME_OR_SEGMENT_REGISTER",
+   "CONTROL_FLOW_SHAPE",
+   "EPILOGUE_OR_RETURN_LOWERING",
+   "EXTRA_INSTRUCTIONS",
+   "IMMEDIATE_VALUE",
+   "LOCAL_CODEGEN_UNCLASSIFIED",
+   "MISSING_INSTRUCTIONS",
+   "REGISTER_ALLOCATION",
+   "STACK_SLOT_ALLOCATION"
+  ],
+  "families": [
+   {
+    "id": "f1",
+    "kind": "BP_DISPLACEMENT",
+    "state": "CONTRADICTED_PATTERN",
+    "scope": {
+     "target_instructions": [
+      0,
+      138
+     ],
+     "candidate_instructions": [
+      0,
+      135
+     ],
+     "frame_or_abi": "No source-object, local/parameter, or BP-stability proof is inferred."
+    },
+    "mapping": [
+     {
+      "target": -24,
+      "candidate": -22,
+      "width": 2
+     },
+     {
+      "target": -22,
+      "candidate": -20,
+      "width": 2
+     },
+     {
+      "target": -22,
+      "candidate": -18,
+      "width": 2
+     },
+     {
+      "target": -20,
+      "candidate": -16,
+      "width": 2
+     },
+     {
+      "target": -20,
+      "candidate": -10,
+      "width": 2
+     },
+     {
+      "target": -18,
+      "candidate": -14,
+      "width": 2
+     },
+     {
+      "target": -10,
+      "candidate": -16,
+      "width": 2
+     }
+    ],
+    "sites": [
+     "p15",
+     "p18",
+     "p38",
+     "p39",
+     "p66",
+     "p71",
+     "p72",
+     "p75",
+     "p99",
+     "p107",
+     "p108",
+     "p123"
+    ],
+    "islands": [
+     2,
+     3,
+     6,
+     10,
+     11,
+     13,
+     14,
+     16,
+     17
+    ],
+    "contradictions": [
+     {
+      "site": "p15",
+      "operand": 0,
+      "target": -20,
+      "candidate": -16,
+      "width": 2,
+      "candidate_width": 2
+     },
+     {
+      "site": "p18",
+      "operand": 1,
+      "target": -20,
+      "candidate": -16,
+      "width": 2,
+      "candidate_width": 2
+     },
+     {
+      "site": "p26",
+      "operand": 0,
+      "target": -22,
+      "candidate": -14,
+      "width": 2,
+      "candidate_width": 2
+     },
+     {
+      "site": "p38",
+      "operand": 0,
+      "target": -20,
+      "candidate": -10,
+      "width": 2,
+      "candidate_width": 2
+     },
+     {
+      "site": "p39",
+      "operand": 0,
+      "target": -10,
+      "candidate": -16,
+      "width": 2,
+      "candidate_width": 2
+     },
+     {
+      "site": "p49",
+      "operand": 1,
+      "target": -10,
+      "candidate": -10,
+      "width": 2,
+      "candidate_width": 2
+     },
+     {
+      "site": "p66",
+      "operand": 1,
+      "target": -18,
+      "candidate": -14,
+      "width": 2,
+      "candidate_width": 2
+     },
+     {
+      "site": "p72",
+      "operand": 1,
+      "target": -22,
+      "candidate": -20,
+      "width": 2,
+      "candidate_width": 2
+     },
+     {
+      "site": "p75",
+      "operand": 0,
+      "target": -20,
+      "candidate": -16,
+      "width": 2,
+      "candidate_width": 2
+     },
+     {
+      "site": "p99",
+      "operand": 1,
+      "target": -18,
+      "candidate": -14,
+      "width": 2,
+      "candidate_width": 2
+     },
+     {
+      "site": "p107",
+      "operand": 0,
+      "target": -22,
+      "candidate": -18,
+      "width": 2,
+      "candidate_width": 2
+     },
+     {
+      "site": "p108",
+      "operand": 0,
+      "target": -20,
+      "candidate": -16,
+      "width": 2,
+      "candidate_width": 2
+     }
+    ],
+    "confidence": "low",
+    "basis": "All aligned uses of affected operands checked for one-to-one correspondence and equal access widths; alignment remains heuristic.",
+    "limit": "Observed operand pattern, not a source explanation, liveness proof, ABI assignment, or repair. BP offsets are not labelled locals or parameters; register roles retain subregister widths and implicit effects.",
+    "sites_count": 14,
+    "omitted_sites": 2,
+    "islands_count": 9,
+    "omitted_islands": 0,
+    "mapping_count": 7,
+    "omitted_mapping": 0,
+    "contradictions_count": 15,
+    "omitted_contradictions": 3
+   },
+   {
+    "id": "f2",
+    "kind": "REGISTER_ROLE",
+    "state": "CONTRADICTED_PATTERN",
+    "scope": {
+     "target_instructions": [
+      0,
+      138
+     ],
+     "candidate_instructions": [
+      0,
+      135
+     ],
+     "frame_or_abi": "No source-object, local/parameter, or BP-stability proof is inferred."
+    },
+    "mapping": [
+     {
+      "target": "bx",
+      "candidate": "cx",
+      "width": 2
+     },
+     {
+      "target": "cx",
+      "candidate": "dx",
+      "width": 2
+     },
+     {
+      "target": "dx",
+      "candidate": "ax",
+      "width": 2
+     },
+     {
+      "target": "si",
+      "candidate": "di",
+      "width": 2
+     }
+    ],
+    "sites": [
+     "p14",
+     "p30",
+     "p34",
+     "p45",
+     "p47"
+    ],
+    "islands": [
+     2,
+     5,
+     7
+    ],
+    "contradictions": [
+     {
+      "site": "p3",
+      "operand": 0,
+      "target": "di",
+      "candidate": "di",
+      "width": 2,
+      "candidate_width": 2
+     },
+     {
+      "site": "p4",
+      "operand": 0,
+      "target": "si",
+      "candidate": "si",
+      "width": 2,
+      "candidate_width": 2
+     },
+     {
+      "site": "p6",
+      "operand": 0,
+      "target": "ax",
+      "candidate": "ax",
+      "width": 2,
+      "candidate_width": 2
+     },
+     {
+      "site": "p7",
+      "operand": 0,
+      "target": "ax",
+      "candidate": "ax",
+      "width": 2,
+      "candidate_width": 2
+     },
+     {
+      "site": "p12",
+      "operand": 0,
+      "target": "bx",
+      "candidate": "bx",
+      "width": 2,
+      "candidate_width": 2
+     },
+     {
+      "site": "p13",
+      "operand": 0,
+      "target": "bx",
+      "candidate": "bx",
+      "width": 2,
+      "candidate_width": 2
+     },
+     {
+      "site": "p14",
+      "operand": 0,
+      "target": "si",
+      "candidate": "di",
+      "width": 2,
+      "candidate_width": 2
+     },
+     {
+      "site": "p14",
+      "operand": 1,
+      "target": "ax",
+      "candidate": "ax",
+      "width": 2,
+      "candidate_width": 2
+     },
+     {
+      "site": "p15",
+      "operand": 1,
+      "target": "dx",
+      "candidate": "dx",
+      "width": 2,
+      "candidate_width": 2
+     },
+     {
+      "site": "p16",
+      "operand": 0,
+      "target": "dx",
+      "candidate": "dx",
+      "width": 2,
+      "candidate_width": 2
+     },
+     {
+      "site": "p16",
+      "operand": 1,
+      "target": "ax",
+      "candidate": "ax",
+      "width": 2,
+      "candidate_width": 2
+     },
+     {
+      "site": "p18",
+      "operand": 0,
+      "target": "dx",
+      "candidate": "dx",
+      "width": 2,
+      "candidate_width": 2
+     }
+    ],
+    "confidence": "low",
+    "basis": "All aligned uses of affected operands checked for one-to-one correspondence and equal access widths; alignment remains heuristic.",
+    "limit": "Observed operand pattern, not a source explanation, liveness proof, ABI assignment, or repair. BP offsets are not labelled locals or parameters; register roles retain subregister widths and implicit effects.",
+    "sites_count": 5,
+    "omitted_sites": 0,
+    "islands_count": 3,
+    "omitted_islands": 0,
+    "mapping_count": 4,
+    "omitted_mapping": 0,
+    "contradictions_count": 108,
+    "omitted_contradictions": 96
+   }
+  ],
+  "residuals": 44,
+  "full_diagnostic": "D:\\Prog\\simant_recon\\build\\workers\\siblings\\triage\\ch_LookUpId.json",
+  "summary": "MATCH DIAGNOSIS: ch_LookUpId (bound payload)\nStrict status: MISMATCH; diagnostics cannot discharge extent/byte/fixup obligations.\nTarget/candidate: 354/354 bytes, 138/135 linear instructions.\nByte preservation evidence: 86 target instructions, 18 anchors, 18 islands; not source-line boundaries.\nf1 BP_DISPLACEMENT CONTRADICTED_PATTERN [low]: -24->-22 (2B), -22->-20 (2B), -22->-18 (2B), -20->-16 (2B), -20->-10 (2B), -18->-14 (2B), -10->-16 (2B); 14 sites, islands [2, 3, 6, 10, 11, 13, 14, 16, 17], 15 contradictions.\n  Contradictions: [{'site': 'p15', 'operand': 0, 'target': -20, 'candidate': -16, 'width': 2, 'candidate_width': 2}, {'site': 'p18', 'operand': 1, 'target': -20, 'candidate': -16, 'width': 2, 'candidate_width': 2}]\nf2 REGISTER_ROLE CONTRADICTED_PATTERN [low]: bx->cx (2B), cx->dx (2B), dx->ax (2B), si->di (2B); 5 sites, islands [2, 5, 7], 108 contradictions.\n  Contradictions: [{'site': 'p3', 'operand': 0, 'target': 'di', 'candidate': 'di', 'width': 2, 'candidate_width': 2}, {'site': 'p4', 'operand': 0, 'target': 'si', 'candidate': 'si', 'width': 2, 'candidate_width': 2}]\nCorresponding anchored branch destinations: 6 sites (decimal offsets 46->46, 135->134, 143->142, 183->183, 201->204, 207->210); encoding/layout changes remain byte differences.\nUngrouped residual observations: 44 (not a count of independent fixes).\n  p2 islands [1]: 3 sub sp, 0x18 -> 3 sub sp, 0x16; STRUCTURAL\n  p14 islands [2]: 34 mov si, ax -> 34 mov di, ax; STRUCTURAL\n  p15 islands [2]: 36 mov word ptr [bp - 0x14], dx -> 36 mov word ptr [bp - 0x10], dx; STRUCTURAL\n  p18 islands [3]: 43 mov dx, word ptr [bp - 0x14] -> 43 mov dx, word ptr [bp - 0x10]; STRUCTURAL\n  p23 islands [4]: 58 mov word ptr [bp - 0x12], ax -> None None; MISSING\n  p24 islands [4]: 61 lea cx, [bx + 4] -> None None; MISSING\n  p25 islands [4]: 64 mov word ptr [bp - 0x18], cx -> None None; MISSING\n  p26 islands [4]: 67 mov word ptr [bp - 0x16], es -> 58 mov word ptr [bp - 0xe], ax; STRUCTURAL\n  p27 islands [4]: 70 mov dx, ax -> None None; MISSING\n  p30 islands [5]: 76 mov bx, ax -> 65 mov cx, ax; STRUCTURAL\n  p32 islands [5]: 81 mov si, dx -> None None; MISSING\n  p34 islands [5]: 86 add ax, bx -> 73 add ax, cx; STRUCTURAL\nObserved patterns only; 133 omitted entries. Full artifact retains every site/island and contradictions; --islands expands localization. Exact stream resumes at the original anchor boundaries."
+ },
+ {
+  "function": "f_1C62_0415",
+  "module": "root:1C62",
+  "profile": "msc600ax",
+  "flags": [
+   "/AL",
+   "/Os",
+   "/Oe",
+   "/Og",
+   "/Gs",
+   "/Zd"
+  ],
+  "draft": "D:\\Prog\\simant_recon\\build\\workers\\siblings\\triage\\root_1C62.c",
+  "source_sha256": "87fd22f724009eafc08bc860d32d99a8cd07bc18c93d677e2de03cd927c567a2",
+  "strict_target_exact": false,
+  "strict_module_exact": false,
+  "reasons": [
+   "length 652 != target 649",
+   "bytes differ (first at +0xa, 549 differing)",
+   "relocation set differs (18 vs 18)"
+  ],
+  "reloc_order": "EXACT",
+  "peer_losses": [],
+  "data_losses": [],
+  "authority": "DIAGNOSTIC_ONLY; strict verdict comes from modules.verify_module",
+  "candidate_bytes": 649,
+  "original_bytes": 649,
+  "decode_complete": false,
+  "classes": [
+   "BRANCH_TARGET_OR_LAYOUT",
+   "CONTROL_FLOW_SHAPE",
+   "EPILOGUE_OR_RETURN_LOWERING",
+   "EXTRA_INSTRUCTIONS",
+   "LOCAL_CODEGEN_UNCLASSIFIED",
+   "MISSING_INSTRUCTIONS",
+   "STACK_SLOT_ALLOCATION"
+  ],
+  "families": [],
+  "residuals": 49,
+  "full_diagnostic": "D:\\Prog\\simant_recon\\build\\workers\\siblings\\triage\\f_1C62_0415.json",
+  "summary": "MATCH DIAGNOSIS: f_1C62_0415 (bound payload)\nStrict status: MISMATCH; diagnostics cannot discharge extent/byte/fixup obligations.\nTarget/candidate: 649/649 bytes, 274/272 linear instructions.\nByte preservation evidence: 221 target instructions, 22 anchors, 23 islands; not source-line boundaries.\nUngrouped residual observations: 49 (not a count of independent fixes).\n  p5 islands [1]: 8 mov word ptr [bp - 0x12], 0xffff -> 8 mov word ptr [bp - 0xe], 0xffff; STRUCTURAL\n  p13 islands [2]: 32 mov word ptr [bp - 0x16], ax -> 32 mov word ptr [bp - 0x12], ax; STRUCTURAL\n  p14 islands [2]: 35 mov word ptr [bp - 0x14], dx -> 35 mov word ptr [bp - 0x10], dx; STRUCTURAL\n  p22 islands [3]: 57 mov word ptr [bp - 0xa], ax -> 57 mov word ptr [bp - 6], ax; STRUCTURAL\n  p26 islands [4]: 69 mov word ptr [bp - 0xc], ax -> 69 mov word ptr [bp - 8], ax; STRUCTURAL\n  p28 islands [4]: None None -> 74 mov word ptr [bp - 2], ax; EXTRA\n  p29 islands [4]: 74 mov word ptr [bp - 4], ax -> 77 mov word ptr [bp - 0x14], ax; STRUCTURAL\n  p30 islands [4]: 77 mov word ptr [bp - 6], ax -> 80 mov word ptr [bp - 0x16], ax; STRUCTURAL\n  p31 islands [4]: 80 mov word ptr [bp - 8], ax -> 83 mov word ptr [bp - 4], ax; STRUCTURAL\n  p33 islands []: 85 jmp 0x81 -> 88 jmp 0x84; ALIGNED_DESTINATION_UNCERTAIN\n  p37 islands [5]: 93 les si, ptr [bp - 0x16] -> 96 les si, ptr [bp - 0x12]; STRUCTURAL\n  p46 islands [6]: 113 mov si, word ptr [bp - 4] -> 116 mov si, word ptr [bp - 2]; STRUCTURAL\nObserved patterns only; 37 omitted entries. Full artifact retains every site/island and contradictions; --islands expands localization. Exact stream resumes at the original anchor boundaries."
+ },
+ {
+  "function": "f_1E57_038E",
+  "module": "root:1E57",
+  "profile": "msc600ax",
+  "flags": [
+   "/AL",
+   "/Os",
+   "/Oe",
+   "/Og",
+   "/Gs",
+   "/Zi"
+  ],
+  "draft": "D:\\Prog\\simant_recon\\build\\workers\\siblings\\triage\\root_1E57.c",
+  "source_sha256": "edfb01cec348d79243d7cc1630248045fa7790a321192f83d185298d0e9b67f6",
+  "strict_target_exact": false,
+  "strict_module_exact": false,
+  "reasons": [
+   "length 985 != target 997",
+   "bytes differ (first at +0x5, 545 differing)",
+   "relocation set differs (34 vs 34)"
+  ],
+  "reloc_order": "EXACT",
+  "peer_losses": [],
+  "data_losses": [],
+  "authority": "DIAGNOSTIC_ONLY; strict verdict comes from modules.verify_module",
+  "candidate_bytes": 985,
+  "original_bytes": 997,
+  "decode_complete": true,
+  "classes": [
+   "BRANCH_TARGET_OR_LAYOUT",
+   "CALL_FRAME_OR_SEGMENT_REGISTER",
+   "CONTROL_FLOW_SHAPE",
+   "IMMEDIATE_VALUE",
+   "LOCAL_CODEGEN_UNCLASSIFIED",
+   "MISSING_INSTRUCTIONS",
+   "STACK_SLOT_ALLOCATION"
+  ],
+  "families": [
+   {
+    "id": "f1",
+    "kind": "BP_DISPLACEMENT",
+    "state": "CONTRADICTED_PATTERN",
+    "scope": {
+     "target_instructions": [
+      0,
+      398
+     ],
+     "candidate_instructions": [
+      0,
+      387
+     ],
+     "frame_or_abi": "No source-object, local/parameter, or BP-stability proof is inferred."
+    },
+    "mapping": [
+     {
+      "target": -48,
+      "candidate": -42,
+      "width": 2
+     },
+     {
+      "target": -46,
+      "candidate": -40,
+      "width": 2
+     },
+     {
+      "target": -44,
+      "candidate": -38,
+      "width": 2
+     },
+     {
+      "target": -42,
+      "candidate": -36,
+      "width": 2
+     },
+     {
+      "target": -40,
+      "candidate": -34,
+      "width": 2
+     },
+     {
+      "target": -38,
+      "candidate": -32,
+      "width": 2
+     },
+     {
+      "target": -36,
+      "candidate": -30,
+      "width": 2
+     },
+     {
+      "target": -28,
+      "candidate": -22,
+      "width": 2
+     },
+     {
+      "target": -26,
+      "candidate": -20,
+      "width": 2
+     },
+     {
+      "target": -20,
+      "candidate": -14,
+      "width": 2
+     },
+     {
+      "target": -6,
+      "candidate": -4,
+      "width": 2
+     }
+    ],
+    "sites": [
+     "p35",
+     "p52",
+     "p53",
+     "p59",
+     "p60",
+     "p80",
+     "p81",
+     "p90",
+     "p102",
+     "p103",
+     "p108",
+     "p114"
+    ],
+    "islands": [
+     2,
+     4,
+     5,
+     6,
+     7,
+     8,
+     9,
+     10,
+     11,
+     12,
+     13,
+     14
+    ],
+    "contradictions": [
+     {
+      "site": "p251",
+      "operand": 0,
+      "target": -50,
+      "candidate": -4,
+      "width": 2,
+      "candidate_width": 2
+     },
+     {
+      "site": "p262",
+      "operand": 0,
+      "target": -6,
+      "candidate": -4,
+      "width": 2,
+      "candidate_width": 2
+     },
+     {
+      "site": "p272",
+      "operand": 1,
+      "target": -6,
+      "candidate": -4,
+      "width": 2,
+      "candidate_width": 2
+     },
+     {
+      "site": "p275",
+      "operand": 0,
+      "target": -6,
+      "candidate": -4,
+      "width": 2,
+      "candidate_width": 2
+     },
+     {
+      "site": "p289",
+      "operand": 0,
+      "target": -6,
+      "candidate": -4,
+      "width": 2,
+      "candidate_width": 2
+     }
+    ],
+    "confidence": "low",
+    "basis": "All aligned uses of affected operands checked for one-to-one correspondence and equal access widths; alignment remains heuristic.",
+    "limit": "Observed operand pattern, not a source explanation, liveness proof, ABI assignment, or repair. BP offsets are not labelled locals or parameters; register roles retain subregister widths and implicit effects.",
+    "sites_count": 54,
+    "omitted_sites": 42,
+    "islands_count": 22,
+    "omitted_islands": 10,
+    "mapping_count": 11,
+    "omitted_mapping": 0,
+    "contradictions_count": 5,
+    "omitted_contradictions": 0
+   },
+   {
+    "id": "f2",
+    "kind": "REGISTER_ROLE",
+    "state": "CONTRADICTED_PATTERN",
+    "scope": {
+     "target_instructions": [
+      0,
+      398
+     ],
+     "candidate_instructions": [
+      0,
+      387
+     ],
+     "frame_or_abi": "No source-object, local/parameter, or BP-stability proof is inferred."
+    },
+    "mapping": [
+     {
+      "target": "ax",
+      "candidate": "di",
+      "width": 2
+     },
+     {
+      "target": "ax",
+      "candidate": "si",
+      "width": 2
+     },
+     {
+      "target": "bx",
+      "candidate": "di",
+      "width": 2
+     },
+     {
+      "target": "cx",
+      "candidate": "si",
+      "width": 2
+     },
+     {
+      "target": "di",
+      "candidate": "ax",
+      "width": 2
+     },
+     {
+      "target": "si",
+      "candidate": "di",
+      "width": 2
+     }
+    ],
+    "sites": [
+     "p179",
+     "p181",
+     "p203",
+     "p206",
+     "p208",
+     "p210",
+     "p246",
+     "p249",
+     "p252",
+     "p254",
+     "p284",
+     "p285"
+    ],
+    "islands": [
+     15,
+     18,
+     22
+    ],
+    "contradictions": [
+     {
+      "site": "p3",
+      "operand": 0,
+      "target": "di",
+      "candidate": "di",
+      "width": 2,
+      "candidate_width": 2
+     },
+     {
+      "site": "p4",
+      "operand": 0,
+      "target": "si",
+      "candidate": "si",
+      "width": 2,
+      "candidate_width": 2
+     },
+     {
+      "site": "p9",
+      "operand": 0,
+      "target": "ax",
+      "candidate": "ax",
+      "width": 2,
+      "candidate_width": 2
+     },
+     {
+      "site": "p10",
+      "operand": 0,
+      "target": "ax",
+      "candidate": "ax",
+      "width": 2,
+      "candidate_width": 2
+     },
+     {
+      "site": "p11",
+      "operand": 0,
+      "target": "ax",
+      "candidate": "ax",
+      "width": 2,
+      "candidate_width": 2
+     },
+     {
+      "site": "p11",
+      "operand": 1,
+      "target": "ax",
+      "candidate": "ax",
+      "width": 2,
+      "candidate_width": 2
+     },
+     {
+      "site": "p12",
+      "operand": 0,
+      "target": "ax",
+      "candidate": "ax",
+      "width": 2,
+      "candidate_width": 2
+     },
+     {
+      "site": "p13",
+      "operand": 0,
+      "target": "ax",
+      "candidate": "ax",
+      "width": 2,
+      "candidate_width": 2
+     },
+     {
+      "site": "p14",
+      "operand": 0,
+      "target": "cx",
+      "candidate": "cx",
+      "width": 2,
+      "candidate_width": 2
+     },
+     {
+      "site": "p15",
+      "operand": 0,
+      "target": "cx",
+      "candidate": "cx",
+      "width": 2,
+      "candidate_width": 2
+     },
+     {
+      "site": "p16",
+      "operand": 0,
+      "target": "ax",
+      "candidate": "ax",
+      "width": 2,
+      "candidate_width": 2
+     },
+     {
+      "site": "p20",
+      "operand": 0,
+      "target": "ax",
+      "candidate": "ax",
+      "width": 2,
+      "candidate_width": 2
+     }
+    ],
+    "confidence": "low",
+    "basis": "All aligned uses of affected operands checked for one-to-one correspondence and equal access widths; alignment remains heuristic.",
+    "limit": "Observed operand pattern, not a source explanation, liveness proof, ABI assignment, or repair. BP offsets are not labelled locals or parameters; register roles retain subregister widths and implicit effects.",
+    "sites_count": 18,
+    "omitted_sites": 6,
+    "islands_count": 3,
+    "omitted_islands": 0,
+    "mapping_count": 6,
+    "omitted_mapping": 0,
+    "contradictions_count": 243,
+    "omitted_contradictions": 231
+   }
+  ],
+  "residuals": 108,
+  "full_diagnostic": "D:\\Prog\\simant_recon\\build\\workers\\siblings\\triage\\f_1E57_038E.json",
+  "summary": "MATCH DIAGNOSIS: f_1E57_038E (bound payload)\nStrict status: MISMATCH; diagnostics cannot discharge extent/byte/fixup obligations.\nTarget/candidate: 997/985 bytes, 398/387 linear instructions.\nByte preservation evidence: 234 target instructions, 28 anchors, 27 islands; not source-line boundaries.\nf1 BP_DISPLACEMENT CONTRADICTED_PATTERN [low]: -48->-42 (2B), -46->-40 (2B), -44->-38 (2B), -42->-36 (2B), -40->-34 (2B), -38->-32 (2B), -36->-30 (2B), -28->-22 (2B), -26->-20 (2B), -20->-14 (2B), -6->-4 (2B); 54 sites, islands [2, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14], 5 contradictions.\n  Contradictions: [{'site': 'p251', 'operand': 0, 'target': -50, 'candidate': -4, 'width': 2, 'candidate_width': 2}, {'site': 'p262', 'operand': 0, 'target': -6, 'candidate': -4, 'width': 2, 'candidate_width': 2}]\nf2 REGISTER_ROLE CONTRADICTED_PATTERN [low]: ax->di (2B), ax->si (2B), bx->di (2B), cx->si (2B), di->ax (2B), si->di (2B); 18 sites, islands [15, 18, 22], 243 contradictions.\n  Contradictions: [{'site': 'p3', 'operand': 0, 'target': 'di', 'candidate': 'di', 'width': 2, 'candidate_width': 2}, {'site': 'p4', 'operand': 0, 'target': 'si', 'candidate': 'si', 'width': 2, 'candidate_width': 2}]\nCorresponding anchored branch destinations: 1 sites (decimal offsets 110->110); encoding/layout changes remain byte differences.\nUngrouped residual observations: 108 (not a count of independent fixes).\n  p2 islands [1]: 3 sub sp, 0x32 -> 3 sub sp, 0x2a; STRUCTURAL\n  p35 islands [2]: 92 mov word ptr [bp - 0x14], ax -> 92 mov word ptr [bp - 0xe], ax; STRUCTURAL\n  p52 islands [4]: 136 mov word ptr [bp - 0x28], ax -> 136 mov word ptr [bp - 0x22], ax; STRUCTURAL\n  p53 islands [4]: 139 mov word ptr [bp - 0x26], dx -> 139 mov word ptr [bp - 0x20], dx; STRUCTURAL\n  p59 islands [5]: 151 mov word ptr [bp - 0x2c], ax -> 151 mov word ptr [bp - 0x26], ax; STRUCTURAL\n  p60 islands [5]: 154 mov word ptr [bp - 0x2a], dx -> 154 mov word ptr [bp - 0x24], dx; STRUCTURAL\n  p80 islands [6]: 207 mov word ptr [bp - 0x30], bx -> 207 mov word ptr [bp - 0x2a], bx; STRUCTURAL\n  p81 islands [6]: 210 mov word ptr [bp - 0x2e], es -> 210 mov word ptr [bp - 0x28], es; STRUCTURAL\n  p90 islands [7]: 236 les bx, ptr [bp - 0x30] -> 236 les bx, ptr [bp - 0x2a]; STRUCTURAL\n  p102 islands [8]: 272 mov word ptr [bp - 0x1c], ax -> 272 mov word ptr [bp - 0x16], ax; STRUCTURAL\n  p103 islands [8]: 275 mov word ptr [bp - 0x1a], dx -> 275 mov word ptr [bp - 0x14], dx; STRUCTURAL\n  p108 islands [9]: 287 les di, ptr [bp - 0x1c] -> 287 les di, ptr [bp - 0x16]; STRUCTURAL\nObserved patterns only; 385 omitted entries. Full artifact retains every site/island and contradictions; --islands expands localization. Exact stream resumes at the original anchor boundaries."
+ },
+ {
+  "function": "f_20E8_0903",
+  "module": "root:20E8",
+  "profile": "msc600ax",
+  "flags": [
+   "/AL",
+   "/Os",
+   "/Oe",
+   "/Og",
+   "/Gs",
+   "/Zi"
+  ],
+  "draft": "D:\\Prog\\simant_recon\\build\\workers\\siblings\\triage\\root_20E8.c",
+  "source_sha256": "e9f7805d6d353e1d3d432cd146073bae6bb8ec0be13b20e3543a3895e2a1ef49",
+  "strict_target_exact": false,
+  "strict_module_exact": false,
+  "reasons": [
+   "length 280 != target 286",
+   "bytes differ (first at +0x77, 145 differing)",
+   "relocation set differs (6 vs 6)"
+  ],
+  "reloc_order": "EXACT",
+  "peer_losses": [],
+  "data_losses": [],
+  "authority": "DIAGNOSTIC_ONLY; strict verdict comes from modules.verify_module",
+  "candidate_bytes": 280,
+  "original_bytes": 286,
+  "decode_complete": true,
+  "classes": [
+   "BRANCH_TARGET_OR_LAYOUT",
+   "MISSING_INSTRUCTIONS",
+   "REGISTER_ALLOCATION"
+  ],
+  "families": [
+   {
+    "id": "f1",
+    "kind": "REGISTER_ROLE",
+    "state": "CONTRADICTED_PATTERN",
+    "scope": {
+     "target_instructions": [
+      0,
+      106
+     ],
+     "candidate_instructions": [
+      0,
+      103
+     ],
+     "frame_or_abi": "No source-object, local/parameter, or BP-stability proof is inferred."
+    },
+    "mapping": [
+     {
+      "target": "di",
+      "candidate": "bx",
+      "width": 2
+     }
+    ],
+    "sites": [
+     "p49",
+     "p62",
+     "p92"
+    ],
+    "islands": [
+     1,
+     2,
+     3
+    ],
+    "contradictions": [
+     {
+      "site": "p4",
+      "operand": 0,
+      "target": "di",
+      "candidate": "di",
+      "width": 2,
+      "candidate_width": 2
+     },
+     {
+      "site": "p26",
+      "operand": 0,
+      "target": "bx",
+      "candidate": "bx",
+      "width": 2,
+      "candidate_width": 2
+     },
+     {
+      "site": "p27",
+      "operand": 0,
+      "target": "bx",
+      "candidate": "bx",
+      "width": 2,
+      "candidate_width": 2
+     },
+     {
+      "site": "p29",
+      "operand": 0,
+      "target": "bx",
+      "candidate": "bx",
+      "width": 2,
+      "candidate_width": 2
+     },
+     {
+      "site": "p36",
+      "operand": 0,
+      "target": "di",
+      "candidate": "di",
+      "width": 2,
+      "candidate_width": 2
+     },
+     {
+      "site": "p37",
+      "operand": 0,
+      "target": "di",
+      "candidate": "di",
+      "width": 2,
+      "candidate_width": 2
+     },
+     {
+      "site": "p38",
+      "operand": 0,
+      "target": "bx",
+      "candidate": "bx",
+      "width": 2,
+      "candidate_width": 2
+     },
+     {
+      "site": "p39",
+      "operand": 1,
+      "target": "bx",
+      "candidate": "bx",
+      "width": 2,
+      "candidate_width": 2
+     },
+     {
+      "site": "p39",
+      "operand": 1,
+      "target": "di",
+      "candidate": "di",
+      "width": 2,
+      "candidate_width": 2
+     },
+     {
+      "site": "p45",
+      "operand": 0,
+      "target": "bx",
+      "candidate": "bx",
+      "width": 2,
+      "candidate_width": 2
+     },
+     {
+      "site": "p46",
+      "operand": 0,
+      "target": "bx",
+      "candidate": "bx",
+      "width": 2,
+      "candidate_width": 2
+     },
+     {
+      "site": "p46",
+      "operand": 0,
+      "target": "di",
+      "candidate": "di",
+      "width": 2,
+      "candidate_width": 2
+     }
+    ],
+    "confidence": "low",
+    "basis": "All aligned uses of affected operands checked for one-to-one correspondence and equal access widths; alignment remains heuristic.",
+    "limit": "Observed operand pattern, not a source explanation, liveness proof, ABI assignment, or repair. BP offsets are not labelled locals or parameters; register roles retain subregister widths and implicit effects.",
+    "sites_count": 3,
+    "omitted_sites": 0,
+    "islands_count": 3,
+    "omitted_islands": 0,
+    "mapping_count": 1,
+    "omitted_mapping": 0,
+    "contradictions_count": 53,
+    "omitted_contradictions": 41
+   }
+  ],
+  "residuals": 11,
+  "full_diagnostic": "D:\\Prog\\simant_recon\\build\\workers\\siblings\\triage\\f_20E8_0903.json",
+  "summary": "MATCH DIAGNOSIS: f_20E8_0903 (bound payload)\nStrict status: MISMATCH; diagnostics cannot discharge extent/byte/fixup obligations.\nTarget/candidate: 286/280 bytes, 106/103 linear instructions.\nByte preservation evidence: 68 target instructions, 4 anchors, 3 islands; not source-line boundaries.\nf1 REGISTER_ROLE CONTRADICTED_PATTERN [low]: di->bx (2B); 3 sites, islands [1, 2, 3], 53 contradictions.\n  Contradictions: [{'site': 'p4', 'operand': 0, 'target': 'di', 'candidate': 'di', 'width': 2, 'candidate_width': 2}, {'site': 'p26', 'operand': 0, 'target': 'bx', 'candidate': 'bx', 'width': 2, 'candidate_width': 2}]\nCorresponding anchored branch destinations: 4 sites (decimal offsets 118->118, 123->123, 134->134, 183->179); encoding/layout changes remain byte differences.\nUngrouped residual observations: 11 (not a count of independent fixes).\n  p48 islands [1]: 136 mov bx, di -> None None; MISSING\n  p49 islands [1]: 138 les di, ptr [bp - 0x18] -> 136 les bx, ptr [bp - 0x18]; STRUCTURAL\n  p51 islands [1]: 146 jmp 0xb3 -> 144 jmp 0xaf; ALIGNED_DESTINATION_UNCERTAIN\n  p61 islands [2]: 171 mov bx, di -> None None; MISSING\n  p62 islands [2]: 173 les di, ptr [bp - 0x18] -> 169 les bx, ptr [bp - 0x18]; STRUCTURAL\n  p75 islands [2]: 207 je 0x100 -> 203 je 0xfa; ALIGNED_DESTINATION_UNCERTAIN\n  p77 islands [2]: 212 je 0x100 -> 208 je 0xfa; ALIGNED_DESTINATION_UNCERTAIN\n  p81 islands [2]: 223 jne 0x100 -> 219 jne 0xfa; ALIGNED_DESTINATION_UNCERTAIN\n  p91 islands [3]: 248 mov bx, dx -> None None; MISSING\n  p92 islands [3]: 250 les di, ptr [bp - 0x18] -> 244 les bx, ptr [bp - 0x18]; STRUCTURAL\n  p96 islands [3]: 260 jl 0xc3 -> 254 jl 0xbf; ALIGNED_DESTINATION_UNCERTAIN\nObserved patterns only; 41 omitted entries. Full artifact retains every site/island and contradictions; --islands expands localization. Exact stream resumes at the original anchor boundaries."
+ },
+ {
+  "function": "win_UnlockWin",
+  "module": "root:23AE",
+  "profile": "msc600ax",
+  "flags": [
+   "/AL",
+   "/Os",
+   "/Oe",
+   "/Og",
+   "/Gs",
+   "/Zi"
+  ],
+  "draft": "D:\\Prog\\simant_recon\\build\\workers\\siblings\\triage\\root_23AE.c",
+  "source_sha256": "23aa124a97a2f213fcf99d0f3e9790e2a35813ee5e62d338f7ef205c5b03acc0",
+  "strict_target_exact": false,
+  "strict_module_exact": false,
+  "reasons": [
+   "length 390 != target 386",
+   "bytes differ (first at +0x5, 207 differing)",
+   "relocation set differs (7 vs 7)"
+  ],
+  "reloc_order": "EXACT",
+  "peer_losses": [],
+  "data_losses": [],
+  "authority": "DIAGNOSTIC_ONLY; strict verdict comes from modules.verify_module",
+  "candidate_bytes": 386,
+  "original_bytes": 386,
+  "decode_complete": true,
+  "classes": [
+   "BRANCH_TARGET_OR_LAYOUT",
+   "CALL_FRAME_OR_SEGMENT_REGISTER",
+   "CONTROL_FLOW_SHAPE",
+   "EPILOGUE_OR_RETURN_LOWERING",
+   "EXTRA_INSTRUCTIONS",
+   "IMMEDIATE_VALUE",
+   "LOCAL_CODEGEN_UNCLASSIFIED",
+   "MISSING_INSTRUCTIONS",
+   "STACK_SLOT_ALLOCATION"
+  ],
+  "families": [
+   {
+    "id": "f1",
+    "kind": "BP_DISPLACEMENT",
+    "state": "SUPPORTED_GROUPING",
+    "scope": {
+     "target_instructions": [
+      0,
+      151
+     ],
+     "candidate_instructions": [
+      0,
+      150
+     ],
+     "frame_or_abi": "No source-object, local/parameter, or BP-stability proof is inferred."
+    },
+    "mapping": [
+     {
+      "target": -30,
+      "candidate": -34,
+      "width": 2
+     },
+     {
+      "target": -28,
+      "candidate": -32,
+      "width": 2
+     },
+     {
+      "target": -26,
+      "candidate": -30,
+      "width": 2
+     },
+     {
+      "target": -24,
+      "candidate": -28,
+      "width": 2
+     },
+     {
+      "target": -22,
+      "candidate": -26,
+      "width": 2
+     },
+     {
+      "target": -16,
+      "candidate": -20,
+      "width": 2
+     },
+     {
+      "target": -2,
+      "candidate": -6,
+      "width": 2
+     }
+    ],
+    "sites": [
+     "p12",
+     "p18",
+     "p19",
+     "p28",
+     "p35",
+     "p41",
+     "p45",
+     "p49",
+     "p56",
+     "p59",
+     "p60",
+     "p62"
+    ],
+    "islands": [
+     3,
+     4,
+     5,
+     6,
+     7,
+     8,
+     9,
+     10,
+     11,
+     15,
+     16,
+     17
+    ],
+    "contradictions": [],
+    "confidence": "medium",
+    "basis": "All aligned uses of affected operands checked for one-to-one correspondence and equal access widths; alignment remains heuristic.",
+    "limit": "Observed operand pattern, not a source explanation, liveness proof, ABI assignment, or repair. BP offsets are not labelled locals or parameters; register roles retain subregister widths and implicit effects.",
+    "sites_count": 22,
+    "omitted_sites": 10,
+    "islands_count": 15,
+    "omitted_islands": 3,
+    "mapping_count": 7,
+    "omitted_mapping": 0,
+    "contradictions_count": 0,
+    "omitted_contradictions": 0
+   },
+   {
+    "id": "f2",
+    "kind": "REGISTER_ROLE",
+    "state": "CONTRADICTED_PATTERN",
+    "scope": {
+     "target_instructions": [
+      0,
+      151
+     ],
+     "candidate_instructions": [
+      0,
+      150
+     ],
+     "frame_or_abi": "No source-object, local/parameter, or BP-stability proof is inferred."
+    },
+    "mapping": [
+     {
+      "target": "bx",
+      "candidate": "ax",
+      "width": 2
+     },
+     {
+      "target": "bx",
+      "candidate": "si",
+      "width": 2
+     }
+    ],
+    "sites": [
+     "p89",
+     "p91",
+     "p92"
+    ],
+    "islands": [
+     14
+    ],
+    "contradictions": [
+     {
+      "site": "p3",
+      "operand": 0,
+      "target": "ax",
+      "candidate": "ax",
+      "width": 2,
+      "candidate_width": 2
+     },
+     {
+      "site": "p5",
+      "operand": 0,
+      "target": "si",
+      "candidate": "si",
+      "width": 2,
+      "candidate_width": 2
+     },
+     {
+      "site": "p10",
+      "operand": 0,
+      "target": "bx",
+      "candidate": "bx",
+      "width": 2,
+      "candidate_width": 2
+     },
+     {
+      "site": "p10",
+      "operand": 1,
+      "target": "ax",
+      "candidate": "ax",
+      "width": 2,
+      "candidate_width": 2
+     },
+     {
+      "site": "p11",
+      "operand": 0,
+      "target": "bx",
+      "candidate": "bx",
+      "width": 2,
+      "candidate_width": 2
+     },
+     {
+      "site": "p12",
+      "operand": 1,
+      "target": "bx",
+      "candidate": "bx",
+      "width": 2,
+      "candidate_width": 2
+     },
+     {
+      "site": "p13",
+      "operand": 0,
+      "target": "bx",
+      "candidate": "bx",
+      "width": 2,
+      "candidate_width": 2
+     },
+     {
+      "site": "p14",
+      "operand": 0,
+      "target": "bx",
+      "candidate": "bx",
+      "width": 2,
+      "candidate_width": 2
+     },
+     {
+      "site": "p15",
+      "operand": 0,
+      "target": "ax",
+      "candidate": "ax",
+      "width": 2,
+      "candidate_width": 2
+     },
+     {
+      "site": "p15",
+      "operand": 1,
+      "target": "bx",
+      "candidate": "bx",
+      "width": 2,
+      "candidate_width": 2
+     },
+     {
+      "site": "p16",
+      "operand": 1,
+      "target": "bx",
+      "candidate": "bx",
+      "width": 2,
+      "candidate_width": 2
+     },
+     {
+      "site": "p17",
+      "operand": 0,
+      "target": "si",
+      "candidate": "si",
+      "width": 2,
+      "candidate_width": 2
+     }
+    ],
+    "confidence": "low",
+    "basis": "All aligned uses of affected operands checked for one-to-one correspondence and equal access widths; alignment remains heuristic.",
+    "limit": "Observed operand pattern, not a source explanation, liveness proof, ABI assignment, or repair. BP offsets are not labelled locals or parameters; register roles retain subregister widths and implicit effects.",
+    "sites_count": 3,
+    "omitted_sites": 0,
+    "islands_count": 1,
+    "omitted_islands": 0,
+    "mapping_count": 2,
+    "omitted_mapping": 0,
+    "contradictions_count": 113,
+    "omitted_contradictions": 101
+   }
+  ],
+  "residuals": 22,
+  "full_diagnostic": "D:\\Prog\\simant_recon\\build\\workers\\siblings\\triage\\win_UnlockWin.json",
+  "summary": "MATCH DIAGNOSIS: win_UnlockWin (bound payload)\nStrict status: MISMATCH; diagnostics cannot discharge extent/byte/fixup obligations.\nTarget/candidate: 386/386 bytes, 151/150 linear instructions.\nByte preservation evidence: 102 target instructions, 21 anchors, 21 islands; not source-line boundaries.\nf1 BP_DISPLACEMENT SUPPORTED_GROUPING [medium]: -30->-34 (2B), -28->-32 (2B), -26->-30 (2B), -24->-28 (2B), -22->-26 (2B), -16->-20 (2B), -2->-6 (2B); 22 sites, islands [3, 4, 5, 6, 7, 8, 9, 10, 11, 15, 16, 17], 0 contradictions.\nf2 REGISTER_ROLE CONTRADICTED_PATTERN [low]: bx->ax (2B), bx->si (2B); 3 sites, islands [14], 113 contradictions.\n  Contradictions: [{'site': 'p3', 'operand': 0, 'target': 'ax', 'candidate': 'ax', 'width': 2, 'candidate_width': 2}, {'site': 'p5', 'operand': 0, 'target': 'si', 'candidate': 'si', 'width': 2, 'candidate_width': 2}]\nCorresponding anchored branch destinations: 6 sites (decimal offsets 16->16, 108->108, 171->171, 205->201, 211->207, 274->278); encoding/layout changes remain byte differences.\nUngrouped residual observations: 22 (not a count of independent fixes).\n  p2 islands [1]: 3 sub sp, 0x1c -> 3 sub sp, 0x20; STRUCTURAL\n  p55 islands [10]: 144 jmp 0x170 -> 144 jmp 0x174; ALIGNED_DESTINATION_UNCERTAIN\n  p67 islands [12]: 179 add bx, 0x2c -> None None; MISSING\n  p68 islands [12]: 182 les bx, ptr es:[bx + si] -> 179 les bx, ptr es:[bx + si + 0x2c]; STRUCTURAL\n  p69 islands [12]: 185 mov di, bx -> None None; MISSING\n  p73 islands []: 195 je 0xd5 -> 191 je 0xd1; UNRESOLVED_DESTINATION\n  p75 islands []: 200 je 0xd5 -> 196 je 0xd1; UNRESOLVED_DESTINATION\n  p80 islands [14]: 209 jle 0xda -> 205 jle 0xda; UNRESOLVED_DESTINATION\n  p82 islands [14]: None None -> 209 mov ax, bx; EXTRA\n  p83 islands [14]: None None -> 211 mov dx, es; EXTRA\n  p84 islands [14]: 213 lea bx, [di + 0x34] -> 213 add ax, 0x34; MISMATCH\n  p85 islands [14]: 216 jmp 0xdd -> 216 jmp 0xe1; ALIGNED_DESTINATION_UNCERTAIN\nObserved patterns only; 124 omitted entries. Full artifact retains every site/island and contradictions; --islands expands localization. Exact stream resumes at the original anchor boundaries."
+ },
+ {
+  "function": "f_23E6_0000",
+  "module": "root:23E6",
+  "profile": "msc600ax",
+  "flags": [
+   "/AL",
+   "/Os",
+   "/Oe",
+   "/Og",
+   "/Gs",
+   "/Zi"
+  ],
+  "draft": "D:\\Prog\\simant_recon\\build\\workers\\siblings\\triage\\root_23E6.c",
+  "source_sha256": "70f8f1db471e4444914136c1dbdd35148e026a2ea18c7ea2aed6c39bc3dfc211",
+  "strict_target_exact": false,
+  "strict_module_exact": false,
+  "reasons": [
+   "length 156 != target 159",
+   "bytes differ (first at +0x5d, 41 differing)",
+   "relocation set differs (3 vs 3)"
+  ],
+  "reloc_order": "EXACT",
+  "peer_losses": [],
+  "data_losses": [],
+  "authority": "DIAGNOSTIC_ONLY; strict verdict comes from modules.verify_module",
+  "candidate_bytes": 156,
+  "original_bytes": 159,
+  "decode_complete": true,
+  "classes": [
+   "BRANCH_TARGET_OR_LAYOUT",
+   "MISSING_INSTRUCTIONS"
+  ],
+  "families": [],
+  "residuals": 1,
+  "full_diagnostic": "D:\\Prog\\simant_recon\\build\\workers\\siblings\\triage\\f_23E6_0000.json",
+  "summary": "MATCH DIAGNOSIS: f_23E6_0000 (bound payload)\nStrict status: MISMATCH; diagnostics cannot discharge extent/byte/fixup obligations.\nTarget/candidate: 159/156 bytes, 62/61 linear instructions.\nByte preservation evidence: 58 target instructions, 5 anchors, 4 islands; not source-line boundaries.\nCorresponding anchored branch destinations: 3 sites (decimal offsets 92->92, 101->101, 127->124); encoding/layout changes remain byte differences.\nUngrouped residual observations: 1 (not a count of independent fixes).\n  p45 islands [3]: 115 mov cx, word ptr [bp - 0xa] -> None None; MISSING\nObserved patterns only; 0 omitted entries. Full artifact retains every site/island and contradictions; --islands expands localization. Exact stream resumes at the original anchor boundaries."
+ },
+ {
+  "function": "f_2505_0453",
+  "module": "root:2505",
+  "profile": "msc600ax",
+  "flags": [
+   "/AL",
+   "/Os",
+   "/Oe",
+   "/Og",
+   "/Gs",
+   "/Zi"
+  ],
+  "draft": "D:\\Prog\\simant_recon\\build\\workers\\siblings\\triage\\root_2505.c",
+  "source_sha256": "22a03f15e95fff376d27211426c4f9e3395e16e5decd92ef501fbfe3c1aba623",
+  "strict_target_exact": false,
+  "strict_module_exact": false,
+  "reasons": [
+   "length 124 != target 132",
+   "bytes differ (first at +0x5, 80 differing)",
+   "relocation set differs (3 vs 3)"
+  ],
+  "reloc_order": "EXACT",
+  "peer_losses": [],
+  "data_losses": [],
+  "authority": "DIAGNOSTIC_ONLY; strict verdict comes from modules.verify_module",
+  "candidate_bytes": 124,
+  "original_bytes": 132,
+  "decode_complete": true,
+  "classes": [
+   "BRANCH_TARGET_OR_LAYOUT",
+   "EXTRA_INSTRUCTIONS",
+   "IMMEDIATE_VALUE",
+   "LOCAL_CODEGEN_UNCLASSIFIED",
+   "MISSING_INSTRUCTIONS",
+   "REGISTER_ALLOCATION",
+   "STACK_SLOT_ALLOCATION"
+  ],
+  "families": [
+   {
+    "id": "f1",
+    "kind": "BP_DISPLACEMENT",
+    "state": "SUPPORTED_GROUPING",
+    "scope": {
+     "target_instructions": [
+      0,
+      54
+     ],
+     "candidate_instructions": [
+      0,
+      52
+     ],
+     "frame_or_abi": "No source-object, local/parameter, or BP-stability proof is inferred."
+    },
+    "mapping": [
+     {
+      "target": -18,
+      "candidate": -16,
+      "width": 2
+     },
+     {
+      "target": -16,
+      "candidate": -14,
+      "width": 2
+     },
+     {
+      "target": -14,
+      "candidate": -12,
+      "width": 2
+     }
+    ],
+    "sites": [
+     "p39",
+     "p40",
+     "p43",
+     "p45"
+    ],
+    "islands": [
+     6
+    ],
+    "contradictions": [],
+    "confidence": "medium",
+    "basis": "All aligned uses of affected operands checked for one-to-one correspondence and equal access widths; alignment remains heuristic.",
+    "limit": "Observed operand pattern, not a source explanation, liveness proof, ABI assignment, or repair. BP offsets are not labelled locals or parameters; register roles retain subregister widths and implicit effects.",
+    "sites_count": 4,
+    "omitted_sites": 0,
+    "islands_count": 1,
+    "omitted_islands": 0,
+    "mapping_count": 3,
+    "omitted_mapping": 0,
+    "contradictions_count": 0,
+    "omitted_contradictions": 0
+   },
+   {
+    "id": "f2",
+    "kind": "REGISTER_ROLE",
+    "state": "CONTRADICTED_PATTERN",
+    "scope": {
+     "target_instructions": [
+      0,
+      54
+     ],
+     "candidate_instructions": [
+      0,
+      52
+     ],
+     "frame_or_abi": "No source-object, local/parameter, or BP-stability proof is inferred."
+    },
+    "mapping": [
+     {
+      "target": "di",
+      "candidate": "ax",
+      "width": 2
+     }
+    ],
+    "sites": [
+     "p30",
+     "p32"
+    ],
+    "islands": [
+     5
+    ],
+    "contradictions": [
+     {
+      "site": "p4",
+      "operand": 0,
+      "target": "ax",
+      "candidate": "ax",
+      "width": 2,
+      "candidate_width": 2
+     },
+     {
+      "site": "p5",
+      "operand": 0,
+      "target": "di",
+      "candidate": "di",
+      "width": 2,
+      "candidate_width": 2
+     },
+     {
+      "site": "p7",
+      "operand": 1,
+      "target": "ax",
+      "candidate": "ax",
+      "width": 2,
+      "candidate_width": 2
+     },
+     {
+      "site": "p9",
+      "operand": 0,
+      "target": "ax",
+      "candidate": "ax",
+      "width": 2,
+      "candidate_width": 2
+     },
+     {
+      "site": "p11",
+      "operand": "implicit",
+      "target": "ax",
+      "candidate": "ax",
+      "width": null,
+      "candidate_width": null
+     },
+     {
+      "site": "p13",
+      "operand": 0,
+      "target": "ax",
+      "candidate": "ax",
+      "width": 2,
+      "candidate_width": 2
+     },
+     {
+      "site": "p17",
+      "operand": 0,
+      "target": "ax",
+      "candidate": "ax",
+      "width": 2,
+      "candidate_width": 2
+     },
+     {
+      "site": "p26",
+      "operand": 1,
+      "target": "ax",
+      "candidate": "ax",
+      "width": 2,
+      "candidate_width": 2
+     },
+     {
+      "site": "p30",
+      "operand": 1,
+      "target": "di",
+      "candidate": "ax",
+      "width": 2,
+      "candidate_width": 2
+     },
+     {
+      "site": "p32",
+      "operand": 1,
+      "target": "di",
+      "candidate": "ax",
+      "width": 2,
+      "candidate_width": 2
+     },
+     {
+      "site": "p37",
+      "operand": 0,
+      "target": "ax",
+      "candidate": "ax",
+      "width": 2,
+      "candidate_width": 2
+     },
+     {
+      "site": "p37",
+      "operand": 1,
+      "target": "di",
+      "candidate": "di",
+      "width": 2,
+      "candidate_width": 2
+     }
+    ],
+    "confidence": "low",
+    "basis": "All aligned uses of affected operands checked for one-to-one correspondence and equal access widths; alignment remains heuristic.",
+    "limit": "Observed operand pattern, not a source explanation, liveness proof, ABI assignment, or repair. BP offsets are not labelled locals or parameters; register roles retain subregister widths and implicit effects.",
+    "sites_count": 2,
+    "omitted_sites": 0,
+    "islands_count": 1,
+    "omitted_islands": 0,
+    "mapping_count": 1,
+    "omitted_mapping": 0,
+    "contradictions_count": 21,
+    "omitted_contradictions": 9
+   }
+  ],
+  "residuals": 13,
+  "full_diagnostic": "D:\\Prog\\simant_recon\\build\\workers\\siblings\\triage\\f_2505_0453.json",
+  "summary": "MATCH DIAGNOSIS: f_2505_0453 (bound payload)\nStrict status: MISMATCH; diagnostics cannot discharge extent/byte/fixup obligations.\nTarget/candidate: 132/124 bytes, 54/52 linear instructions.\nByte preservation evidence: 34 target instructions, 7 anchors, 6 islands; not source-line boundaries.\nf1 BP_DISPLACEMENT SUPPORTED_GROUPING [medium]: -18->-16 (2B), -16->-14 (2B), -14->-12 (2B); 4 sites, islands [6], 0 contradictions.\nf2 REGISTER_ROLE CONTRADICTED_PATTERN [low]: di->ax (2B); 2 sites, islands [5], 21 contradictions.\n  Contradictions: [{'site': 'p4', 'operand': 0, 'target': 'ax', 'candidate': 'ax', 'width': 2, 'candidate_width': 2}, {'site': 'p5', 'operand': 0, 'target': 'di', 'candidate': 'di', 'width': 2, 'candidate_width': 2}]\nCorresponding anchored branch destinations: 2 sites (decimal offsets 36->36, 69->66); encoding/layout changes remain byte differences.\nUngrouped residual observations: 13 (not a count of independent fixes).\n  p2 islands [1]: 3 sub sp, 0x10 -> 3 sub sp, 0xe; STRUCTURAL\n  p19 islands [3]: 45 mov di, word ptr [bp - 0x14] -> None None; MISSING\n  p20 islands [3]: 48 and di, 0xff -> None None; MISSING\n  p23 islands [4]: 54 call 0xfffffbb3 -> 47 call 0xfffffbb3; UNRESOLVED_DESTINATION\n  p27 islands [5]: None None -> 55 mov di, ax; EXTRA\n  p28 islands [5]: None None -> 57 mov al, byte ptr [bp - 0x12]; EXTRA\n  p29 islands [5]: 62 mov word ptr [bp - 0xc], bx -> 60 sub ah, ah; MISMATCH\n  p30 islands [5]: 65 cmp word ptr es:[bx + 0xc], di -> 62 cmp word ptr es:[bx + 0xc], ax; STRUCTURAL\n  p32 islands [5]: 71 mov bx, di -> 68 mov bx, ax; STRUCTURAL\n  p35 islands [6]: 77 mov di, word ptr [bp - 0xc] -> None None; MISSING\n  p36 islands [6]: 80 add di, 0x2c -> None None; MISSING\n  p37 islands [6]: 83 mov ax, word ptr es:[bx + di] -> 74 mov ax, word ptr es:[bx + di + 0x2c]; STRUCTURAL\nObserved patterns only; 10 omitted entries. Full artifact retains every site/island and contradictions; --islands expands localization. Exact stream resumes at the original anchor boundaries."
+ },
+ {
+  "function": "win_DrawBitMap",
+  "module": "root:259D",
+  "profile": "msc600ax",
+  "flags": [
+   "/AL",
+   "/Os",
+   "/Oe",
+   "/Og",
+   "/Gs",
+   "/Zi"
+  ],
+  "draft": "D:\\Prog\\simant_recon\\build\\workers\\siblings\\triage\\root_259D.c",
+  "source_sha256": "3e165af5bf7d60f665a332afbc7eb9c192d108d19f6486ac53930bc0dbecc2d9",
+  "strict_target_exact": false,
+  "strict_module_exact": false,
+  "reasons": [
+   "length 675 != target 663",
+   "bytes differ (first at +0x5, 608 differing)",
+   "relocation set differs (16 vs 16)"
+  ],
+  "reloc_order": "EXACT",
+  "peer_losses": [],
+  "data_losses": [],
+  "authority": "DIAGNOSTIC_ONLY; strict verdict comes from modules.verify_module",
+  "candidate_bytes": 663,
+  "original_bytes": 663,
+  "decode_complete": false,
+  "classes": [
+   "BRANCH_TARGET_OR_LAYOUT",
+   "CALL_FRAME_OR_SEGMENT_REGISTER",
+   "CONTROL_FLOW_SHAPE",
+   "EPILOGUE_OR_RETURN_LOWERING",
+   "EXTRA_INSTRUCTIONS",
+   "IMMEDIATE_VALUE",
+   "LOCAL_CODEGEN_UNCLASSIFIED",
+   "MISSING_INSTRUCTIONS",
+   "REGISTER_ALLOCATION",
+   "STACK_SLOT_ALLOCATION",
+   "WIDTH_OR_EXTENSION"
+  ],
+  "families": [],
+  "residuals": 113,
+  "full_diagnostic": "D:\\Prog\\simant_recon\\build\\workers\\siblings\\triage\\win_DrawBitMap.json",
+  "summary": "MATCH DIAGNOSIS: win_DrawBitMap (bound payload)\nStrict status: MISMATCH; diagnostics cannot discharge extent/byte/fixup obligations.\nTarget/candidate: 663/663 bytes, 269/264 linear instructions.\nByte preservation evidence: 131 target instructions, 26 anchors, 27 islands; not source-line boundaries.\nCorresponding anchored branch destinations: 3 sites (decimal offsets 154->150, 176->170, 541->559); encoding/layout changes remain byte differences.\nUngrouped residual observations: 113 (not a count of independent fixes).\n  p2 islands [1]: 3 sub sp, 0x28 -> 3 sub sp, 0x2a; STRUCTURAL\n  p18 islands [2]: 33 jmp 0x28f -> 33 jmp 0x29b; UNRESOLVED_DESTINATION\n  p21 islands [2]: 42 mov word ptr [bp - 0x16], bx -> 42 mov di, bx; MISMATCH\n  p26 islands [3]: 55 push bx -> 54 push di; STRUCTURAL\n  p27 islands [3]: 56 push word ptr [bp - 0x2c] -> 55 push word ptr [bp - 0x2e]; STRUCTURAL\n  p28 islands [3]: 59 push word ptr [bp - 0x2e] -> 58 push word ptr [bp - 0x30]; STRUCTURAL\n  p33 islands [4]: 74 push word ptr [bp - 0x2a] -> 73 push word ptr [bp - 0x2c]; STRUCTURAL\n  p38 islands [5]: 87 jmp 0x291 -> 86 jmp 0x29d; UNRESOLVED_DESTINATION\n  p42 islands []: 101 jne 0x73 -> 100 jne 0x72; UNRESOLVED_DESTINATION\n  p46 islands []: 113 jmp 0x38 -> 112 jmp 0x37; ALIGNED_DESTINATION_UNCERTAIN\n  p47 islands [6]: 115 mov di, word ptr [bp - 0x16] -> None None; MISSING\n  p50 islands [7]: 125 jne 0xb2 -> 121 jne 0xac; UNRESOLVED_DESTINATION\nObserved patterns only; 101 omitted entries. Full artifact retains every site/island and contradictions; --islands expands localization. Exact stream resumes at the original anchor boundaries."
+ },
+ {
+  "function": "f_2815_0165",
+  "module": "root:2815",
+  "profile": "msc600ax",
+  "flags": [
+   "/AL",
+   "/Os",
+   "/Oe",
+   "/Og",
+   "/Gs",
+   "/Zi"
+  ],
+  "draft": "D:\\Prog\\simant_recon\\build\\workers\\siblings\\triage\\root_2815.c",
+  "source_sha256": "8b6ca1b25908a00cdd6fea2212943f7345680945d25e1a59e0f1fb69352958bc",
+  "strict_target_exact": false,
+  "strict_module_exact": false,
+  "reasons": [
+   "length 246 != target 232",
+   "bytes differ (first at +0x6, 226 differing)",
+   "relocation set differs (2 vs 3)"
+  ],
+  "reloc_order": "EXACT",
+  "peer_losses": [],
+  "data_losses": [],
+  "authority": "DIAGNOSTIC_ONLY; strict verdict comes from modules.verify_module",
+  "candidate_bytes": 232,
+  "original_bytes": 232,
+  "decode_complete": false,
+  "classes": [
+   "BRANCH_TARGET_OR_LAYOUT",
+   "CALL_FRAME_OR_SEGMENT_REGISTER",
+   "CONTROL_FLOW_SHAPE",
+   "EPILOGUE_OR_RETURN_LOWERING",
+   "EXTRA_INSTRUCTIONS",
+   "LOCAL_CODEGEN_UNCLASSIFIED",
+   "MISSING_INSTRUCTIONS",
+   "REGISTER_ALLOCATION",
+   "WIDTH_OR_EXTENSION"
+  ],
+  "families": [],
+  "residuals": 36,
+  "full_diagnostic": "D:\\Prog\\simant_recon\\build\\workers\\siblings\\triage\\f_2815_0165.json",
+  "summary": "MATCH DIAGNOSIS: f_2815_0165 (bound payload)\nStrict status: MISMATCH; diagnostics cannot discharge extent/byte/fixup obligations.\nTarget/candidate: 232/232 bytes, 95/89 linear instructions.\nByte preservation evidence: 64 target instructions, 6 anchors, 7 islands; not source-line boundaries.\nCorresponding anchored branch destinations: 1 sites (decimal offsets 54->65); encoding/layout changes remain byte differences.\nUngrouped residual observations: 36 (not a count of independent fixes).\n  p3 islands [1]: 6 push di -> None None; MISSING\n  p5 islands [1]: 8 mov di, word ptr [bp + 0xa] -> 7 mov bx, word ptr [bp + 0xa]; STRUCTURAL\n  p7 islands [1]: 15 add di, word ptr es:[0x4b16] -> 14 add bx, word ptr es:[0x4b16]; STRUCTURAL\n  p10 islands [2]: 26 mov bx, ax -> 25 mov si, ax; STRUCTURAL\n  p12 islands [2]: None None -> 31 mov ax, word ptr es:[si + 2]; EXTRA\n  p13 islands [2]: 32 les bx, ptr es:[bx + 2] -> 36 mov dx, word ptr es:[si + 4]; MISMATCH\n  p14 islands [2]: 37 mov word ptr [bp - 8], bx -> 41 mov word ptr [bp - 8], ax; STRUCTURAL\n  p15 islands [2]: 40 mov word ptr [bp - 6], es -> 44 mov word ptr [bp - 6], dx; STRUCTURAL\n  p16 islands [2]: None None -> 47 mov es, dx; EXTRA\n  p17 islands [2]: None None -> 49 mov si, ax; EXTRA\n  p18 islands [2]: 43 add di, word ptr es:[bx + 0xd] -> 51 add bx, word ptr es:[si + 0xd]; STRUCTURAL\n  p19 islands [2]: 47 jns 0x33 -> 55 jns 0x3b; UNRESOLVED_DESTINATION\nObserved patterns only; 24 omitted entries. Full artifact retains every site/island and contradictions; --islands expands localization. Exact stream resumes at the original anchor boundaries."
+ },
+ {
+  "function": "f_284A_0138",
+  "module": "root:284A",
+  "profile": "msc600ax",
+  "flags": [
+   "/AL",
+   "/Os",
+   "/Oe",
+   "/Og",
+   "/Gs",
+   "/Zi"
+  ],
+  "draft": "D:\\Prog\\simant_recon\\build\\workers\\siblings\\triage\\root_284A.c",
+  "source_sha256": "5d328bf943dd3b1dd8dd797ba7d63885777facf9ea5c194b6b222244bd937a35",
+  "strict_target_exact": false,
+  "strict_module_exact": false,
+  "reasons": [
+   "bytes differ (first at +0xc, 9 differing)"
+  ],
+  "reloc_order": "EXACT",
+  "peer_losses": [],
+  "data_losses": [],
+  "authority": "DIAGNOSTIC_ONLY; strict verdict comes from modules.verify_module",
+  "candidate_bytes": 25,
+  "original_bytes": 25,
+  "decode_complete": true,
+  "classes": [
+   "EXTRA_INSTRUCTIONS",
+   "LOCAL_CODEGEN_UNCLASSIFIED",
+   "REGISTER_ALLOCATION"
+  ],
+  "families": [
+   {
+    "id": "f1",
+    "kind": "REGISTER_ROLE",
+    "state": "SUPPORTED_GROUPING",
+    "scope": {
+     "target_instructions": [
+      0,
+      11
+     ],
+     "candidate_instructions": [
+      0,
+      12
+     ],
+     "frame_or_abi": "No source-object, local/parameter, or BP-stability proof is inferred."
+    },
+    "mapping": [
+     {
+      "target": "ah",
+      "candidate": "al",
+      "width": 1
+     },
+     {
+      "target": "al",
+      "candidate": "ah",
+      "width": 1
+     }
+    ],
+    "sites": [
+     "p4",
+     "p5"
+    ],
+    "islands": [
+     1
+    ],
+    "contradictions": [],
+    "confidence": "medium",
+    "basis": "All aligned uses of affected operands checked for one-to-one correspondence and equal access widths; alignment remains heuristic.",
+    "limit": "Observed operand pattern, not a source explanation, liveness proof, ABI assignment, or repair. BP offsets are not labelled locals or parameters; register roles retain subregister widths and implicit effects.",
+    "sites_count": 2,
+    "omitted_sites": 0,
+    "islands_count": 1,
+    "omitted_islands": 0,
+    "mapping_count": 2,
+    "omitted_mapping": 0,
+    "contradictions_count": 0,
+    "omitted_contradictions": 0
+   }
+  ],
+  "residuals": 4,
+  "full_diagnostic": "D:\\Prog\\simant_recon\\build\\workers\\siblings\\triage\\f_284A_0138.json",
+  "summary": "MATCH DIAGNOSIS: f_284A_0138 (bound payload)\nStrict status: MISMATCH; diagnostics cannot discharge extent/byte/fixup obligations.\nTarget/candidate: 25/25 bytes, 11/12 linear instructions.\nByte preservation evidence: 6 target instructions, 2 anchors, 1 islands; not source-line boundaries.\nf1 REGISTER_ROLE SUPPORTED_GROUPING [medium]: ah->al (1B), al->ah (1B); 2 sites, islands [1], 0 contradictions.\nUngrouped residual observations: 4 (not a count of independent fixes).\n  p6 islands [1]: None None -> 15 inc bx; EXTRA\n  p7 islands [1]: 15 mov cl, byte ptr es:[bx + 1] -> 16 mov cl, byte ptr es:[bx]; STRUCTURAL\n  p8 islands [1]: 19 mov ch, al -> 19 sub ch, ch; MISMATCH\n  p9 islands [1]: 21 mov ax, cx -> 21 or ax, cx; MISMATCH\nObserved patterns only; 0 omitted entries. Full artifact retains every site/island and contradictions; --islands expands localization. Exact stream resumes at the original anchor boundaries."
+ },
+ {
+  "function": "f_29D6_000A",
+  "module": "root:29D6",
+  "profile": "msc600ax",
+  "flags": [
+   "/AL",
+   "/Os",
+   "/Oe",
+   "/Og",
+   "/Gs",
+   "/Zi"
+  ],
+  "draft": "D:\\Prog\\simant_recon\\build\\workers\\siblings\\triage\\root_29D6.c",
+  "source_sha256": "55476efe4ad6d0cd853cd794f731ff8f33df921577e092fc3e80e9b322b4c388",
+  "strict_target_exact": false,
+  "strict_module_exact": false,
+  "reasons": [
+   "length 116 != target 120",
+   "bytes differ (first at +0x5, 68 differing)",
+   "relocation set differs (3 vs 3)"
+  ],
+  "reloc_order": "EXACT",
+  "peer_losses": [],
+  "data_losses": [],
+  "authority": "DIAGNOSTIC_ONLY; strict verdict comes from modules.verify_module",
+  "candidate_bytes": 116,
+  "original_bytes": 120,
+  "decode_complete": true,
+  "classes": [
+   "EXTRA_INSTRUCTIONS",
+   "IMMEDIATE_VALUE",
+   "LOCAL_CODEGEN_UNCLASSIFIED",
+   "MISSING_INSTRUCTIONS",
+   "STACK_SLOT_ALLOCATION"
+  ],
+  "families": [],
+  "residuals": 6,
+  "full_diagnostic": "D:\\Prog\\simant_recon\\build\\workers\\siblings\\triage\\f_29D6_000A.json",
+  "summary": "MATCH DIAGNOSIS: f_29D6_000A (bound payload)\nStrict status: MISMATCH; diagnostics cannot discharge extent/byte/fixup obligations.\nTarget/candidate: 120/116 bytes, 54/53 linear instructions.\nByte preservation evidence: 45 target instructions, 4 anchors, 3 islands; not source-line boundaries.\nUngrouped residual observations: 6 (not a count of independent fixes).\n  p2 islands [1]: 3 sub sp, 4 -> 3 sub sp, 2; STRUCTURAL\n  p20 islands [2]: 46 add cl, 0x80 -> None None; MISSING\n  p22 islands [2]: None None -> 48 add al, 0x80; EXTRA\n  p26 islands [2]: 56 mov word ptr [bp - 4], cx -> None None; MISSING\n  p44 islands [3]: 99 add al, byte ptr [bp - 4] -> 95 add al, byte ptr [bp + 0xc]; STRUCTURAL\n  p45 islands [3]: 102 add al, 0x10 -> 98 sub al, 0x70; MISMATCH\nObserved patterns only; 0 omitted entries. Full artifact retains every site/island and contradictions; --islands expands localization. Exact stream resumes at the original anchor boundaries."
+ },
+ {
+  "function": "o10_35F5_0384",
+  "module": "S10:35F5",
+  "profile": "msc600ax",
+  "flags": [
+   "/AL",
+   "/Os",
+   "/Og",
+   "/Oe",
+   "/Gs",
+   "/Zi"
+  ],
+  "draft": "D:\\Prog\\simant_recon\\build\\workers\\siblings\\triage\\S10_35F5.c",
+  "source_sha256": "4b9dda15dbea1c8fd204ed95d4cb6a909751a59d0517909e90c4626cad3c7888",
+  "strict_target_exact": false,
+  "strict_module_exact": false,
+  "reasons": [
+   "length 1746 != target 1759",
+   "bytes differ (first at +0x5, 1574 differing)",
+   "relocation set differs (42 vs 42)"
+  ],
+  "reloc_order": "EXACT",
+  "peer_losses": [],
+  "data_losses": [],
+  "authority": "DIAGNOSTIC_ONLY; strict verdict comes from modules.verify_module",
+  "candidate_bytes": 1746,
+  "original_bytes": 1759,
+  "decode_complete": true,
+  "classes": [
+   "BRANCH_TARGET_OR_LAYOUT",
+   "CALL_FRAME_OR_SEGMENT_REGISTER",
+   "CONTROL_FLOW_SHAPE",
+   "EXTRA_INSTRUCTIONS",
+   "IMMEDIATE_VALUE",
+   "LOCAL_CODEGEN_UNCLASSIFIED",
+   "MISSING_INSTRUCTIONS",
+   "REGISTER_ALLOCATION",
+   "STACK_SLOT_ALLOCATION",
+   "TEMPORARY_OR_SPILL"
+  ],
+  "families": [
+   {
+    "id": "f1",
+    "kind": "BP_DISPLACEMENT",
+    "state": "CONTRADICTED_PATTERN",
+    "scope": {
+     "target_instructions": [
+      0,
+      688
+     ],
+     "candidate_instructions": [
+      0,
+      683
+     ],
+     "frame_or_abi": "No source-object, local/parameter, or BP-stability proof is inferred."
+    },
+    "mapping": [
+     {
+      "target": -112,
+      "candidate": -110,
+      "width": 2
+     },
+     {
+      "target": -110,
+      "candidate": -108,
+      "width": 2
+     },
+     {
+      "target": -108,
+      "candidate": -106,
+      "width": 2
+     },
+     {
+      "target": -106,
+      "candidate": -104,
+      "width": 2
+     },
+     {
+      "target": -104,
+      "candidate": -102,
+      "width": 2
+     },
+     {
+      "target": -102,
+      "candidate": -114,
+      "width": 2
+     },
+     {
+      "target": -102,
+      "candidate": -100,
+      "width": 2
+     },
+     {
+      "target": -100,
+      "candidate": -112,
+      "width": 2
+     },
+     {
+      "target": -100,
+      "candidate": -98,
+      "width": 2
+     },
+     {
+      "target": -98,
+      "candidate": -96,
+      "width": 2
+     },
+     {
+      "target": -96,
+      "candidate": -94,
+      "width": 2
+     },
+     {
+      "target": -94,
+      "candidate": -92,
+      "width": 2
+     }
+    ],
+    "sites": [
+     "p5",
+     "p7",
+     "p8",
+     "p21",
+     "p22",
+     "p25",
+     "p26",
+     "p43",
+     "p44",
+     "p60",
+     "p61",
+     "p64"
+    ],
+    "islands": [
+     2,
+     4,
+     5,
+     6,
+     7,
+     8,
+     9,
+     10,
+     11,
+     12,
+     13,
+     14
+    ],
+    "contradictions": [
+     {
+      "site": "p7",
+      "operand": 0,
+      "target": -60,
+      "candidate": -32,
+      "width": 2,
+      "candidate_width": 2
+     },
+     {
+      "site": "p8",
+      "operand": 0,
+      "target": -26,
+      "candidate": -58,
+      "width": 2,
+      "candidate_width": 2
+     },
+     {
+      "site": "p43",
+      "operand": 0,
+      "target": -4,
+      "candidate": -6,
+      "width": 2,
+      "candidate_width": 2
+     },
+     {
+      "site": "p60",
+      "operand": 0,
+      "target": -102,
+      "candidate": -100,
+      "width": 2,
+      "candidate_width": 2
+     },
+     {
+      "site": "p61",
+      "operand": 0,
+      "target": -100,
+      "candidate": -98,
+      "width": 2,
+      "candidate_width": 2
+     },
+     {
+      "site": "p64",
+      "operand": 0,
+      "target": -100,
+      "candidate": -98,
+      "width": 2,
+      "candidate_width": 2
+     },
+     {
+      "site": "p76",
+      "operand": 1,
+      "target": -4,
+      "candidate": -6,
+      "width": 2,
+      "candidate_width": 2
+     },
+     {
+      "site": "p203",
+      "operand": 0,
+      "target": -2,
+      "candidate": -2,
+      "width": 2,
+      "candidate_width": 2
+     },
+     {
+      "site": "p204",
+      "operand": 0,
+      "target": -4,
+      "candidate": -6,
+      "width": 2,
+      "candidate_width": 2
+     },
+     {
+      "site": "p223",
+      "operand": 0,
+      "target": -12,
+      "candidate": -8,
+      "width": 2,
+      "candidate_width": 2
+     },
+     {
+      "site": "p232",
+      "operand": 0,
+      "target": -102,
+      "candidate": -100,
+      "width": 2,
+      "candidate_width": 2
+     },
+     {
+      "site": "p233",
+      "operand": 0,
+      "target": -100,
+      "candidate": -98,
+      "width": 2,
+      "candidate_width": 2
+     }
+    ],
+    "confidence": "low",
+    "basis": "All aligned uses of affected operands checked for one-to-one correspondence and equal access widths; alignment remains heuristic.",
+    "limit": "Observed operand pattern, not a source explanation, liveness proof, ABI assignment, or repair. BP offsets are not labelled locals or parameters; register roles retain subregister widths and implicit effects.",
+    "sites_count": 131,
+    "omitted_sites": 119,
+    "islands_count": 67,
+    "omitted_islands": 55,
+    "mapping_count": 43,
+    "omitted_mapping": 31,
+    "contradictions_count": 33,
+    "omitted_contradictions": 21
+   },
+   {
+    "id": "f2",
+    "kind": "REGISTER_ROLE",
+    "state": "CONTRADICTED_PATTERN",
+    "scope": {
+     "target_instructions": [
+      0,
+      688
+     ],
+     "candidate_instructions": [
+      0,
+      683
+     ],
+     "frame_or_abi": "No source-object, local/parameter, or BP-stability proof is inferred."
+    },
+    "mapping": [
+     {
+      "target": "ax",
+      "candidate": "si",
+      "width": 2
+     },
+     {
+      "target": "si",
+      "candidate": "di",
+      "width": 1
+     },
+     {
+      "target": "si",
+      "candidate": "di",
+      "width": 2
+     }
+    ],
+    "sites": [
+     "p50",
+     "p469",
+     "p475",
+     "p689"
+    ],
+    "islands": [
+     6,
+     61,
+     66
+    ],
+    "contradictions": [
+     {
+      "site": "p3",
+      "operand": 0,
+      "target": "di",
+      "candidate": "di",
+      "width": 2,
+      "candidate_width": 2
+     },
+     {
+      "site": "p4",
+      "operand": 0,
+      "target": "si",
+      "candidate": "si",
+      "width": 2,
+      "candidate_width": 2
+     },
+     {
+      "site": "p6",
+      "operand": 0,
+      "target": "ax",
+      "candidate": "ax",
+      "width": 2,
+      "candidate_width": 2
+     },
+     {
+      "site": "p6",
+      "operand": 1,
+      "target": "ax",
+      "candidate": "ax",
+      "width": 2,
+      "candidate_width": 2
+     },
+     {
+      "site": "p7",
+      "operand": 1,
+      "target": "ax",
+      "candidate": "ax",
+      "width": 2,
+      "candidate_width": 2
+     },
+     {
+      "site": "p8",
+      "operand": 1,
+      "target": "ax",
+      "candidate": "ax",
+      "width": 2,
+      "candidate_width": 2
+     },
+     {
+      "site": "p9",
+      "operand": 0,
+      "target": "ax",
+      "candidate": "ax",
+      "width": 2,
+      "candidate_width": 2
+     },
+     {
+      "site": "p10",
+      "operand": 0,
+      "target": "ax",
+      "candidate": "ax",
+      "width": 2,
+      "candidate_width": 2
+     },
+     {
+      "site": "p13",
+      "operand": 0,
+      "target": "ax",
+      "candidate": "ax",
+      "width": 2,
+      "candidate_width": 2
+     },
+     {
+      "site": "p14",
+      "operand": 0,
+      "target": "ax",
+      "candidate": "ax",
+      "width": 2,
+      "candidate_width": 2
+     },
+     {
+      "site": "p17",
+      "operand": 0,
+      "target": "ax",
+      "candidate": "ax",
+      "width": 2,
+      "candidate_width": 2
+     },
+     {
+      "site": "p18",
+      "operand": 0,
+      "target": "ax",
+      "candidate": "ax",
+      "width": 2,
+      "candidate_width": 2
+     }
+    ],
+    "confidence": "low",
+    "basis": "All aligned uses of affected operands checked for one-to-one correspondence and equal access widths; alignment remains heuristic.",
+    "limit": "Observed operand pattern, not a source explanation, liveness proof, ABI assignment, or repair. BP offsets are not labelled locals or parameters; register roles retain subregister widths and implicit effects.",
+    "sites_count": 4,
+    "omitted_sites": 0,
+    "islands_count": 3,
+    "omitted_islands": 0,
+    "mapping_count": 3,
+    "omitted_mapping": 0,
+    "contradictions_count": 322,
+    "omitted_contradictions": 310
+   }
+  ],
+  "residuals": 362,
+  "full_diagnostic": "D:\\Prog\\simant_recon\\build\\workers\\siblings\\triage\\o10_35F5_0384.json",
+  "summary": "MATCH DIAGNOSIS: o10_35F5_0384 (bound payload)\nStrict status: MISMATCH; diagnostics cannot discharge extent/byte/fixup obligations.\nTarget/candidate: 1759/1746 bytes, 688/683 linear instructions.\nByte preservation evidence: 386 target instructions, 76 anchors, 75 islands; not source-line boundaries.\nf1 BP_DISPLACEMENT CONTRADICTED_PATTERN [low]: -112->-110 (2B), -110->-108 (2B), -108->-106 (2B), -106->-104 (2B), -104->-102 (2B), -102->-114 (2B), -102->-100 (2B), -100->-112 (2B), -100->-98 (2B), -98->-96 (2B), -96->-94 (2B), -94->-92 (2B); 131 sites, islands [2, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14], 33 contradictions.\n  Contradictions: [{'site': 'p7', 'operand': 0, 'target': -60, 'candidate': -32, 'width': 2, 'candidate_width': 2}, {'site': 'p8', 'operand': 0, 'target': -26, 'candidate': -58, 'width': 2, 'candidate_width': 2}]\nf2 REGISTER_ROLE CONTRADICTED_PATTERN [low]: ax->si (2B), si->di (1B), si->di (2B); 4 sites, islands [6, 61, 66], 322 contradictions.\n  Contradictions: [{'site': 'p3', 'operand': 0, 'target': 'di', 'candidate': 'di', 'width': 2, 'candidate_width': 2}, {'site': 'p4', 'operand': 0, 'target': 'si', 'candidate': 'si', 'width': 2, 'candidate_width': 2}]\nCorresponding anchored branch destinations: 7 sites (decimal offsets 41->41, 860->855, 921->916, 1130->1120, 1138->1128, 1154->1144, 1183->1182); encoding/layout changes remain byte differences.\nUngrouped residual observations: 362 (not a count of independent fixes).\n  p2 islands [1]: 3 sub sp, 0x70 -> 3 sub sp, 0x72; STRUCTURAL\n  p5 islands [2]: 8 mov word ptr [bp - 0xa], 0xffff -> 8 mov word ptr [bp - 0x10], 0xffff; STRUCTURAL\n  p7 islands [2]: 15 mov word ptr [bp - 0x3c], ax -> 15 mov word ptr [bp - 0x20], ax; STRUCTURAL\n  p8 islands [2]: 18 mov word ptr [bp - 0x1a], ax -> 18 mov word ptr [bp - 0x3a], ax; STRUCTURAL\n  p21 islands [4]: 54 mov word ptr [bp - 0x5e], ax -> 54 mov word ptr [bp - 0x5c], ax; STRUCTURAL\n  p22 islands [4]: 57 mov word ptr [bp - 0x5c], dx -> 57 mov word ptr [bp - 0x5a], dx; STRUCTURAL\n  p25 islands [5]: 67 mov word ptr [bp - 0x62], ax -> 67 mov word ptr [bp - 0x60], ax; STRUCTURAL\n  p26 islands [5]: 70 mov word ptr [bp - 0x60], dx -> 70 mov word ptr [bp - 0x5e], dx; STRUCTURAL\n  p43 islands [6]: 119 mov word ptr [bp - 4], ax -> 119 mov word ptr [bp - 6], ax; STRUCTURAL\n  p44 islands [6]: 122 lea ax, [bp - 0x22] -> 122 lea ax, [bp - 0x1a]; STRUCTURAL\n  p50 islands [6]: 134 sub ax, ax -> 134 sub si, si; STRUCTURAL\n  p51 islands [6]: 136 mov word ptr [bp - 8], ax -> None None; MISSING\nObserved patterns only; 886 omitted entries. Full artifact retains every site/island and contradictions; --islands expands localization. Exact stream resumes at the original anchor boundaries."
+ },
+ {
+  "function": "DrawMapCursor",
+  "module": "S12:384C",
+  "profile": "msc600ax",
+  "flags": [
+   "/AL",
+   "/Os",
+   "/Og",
+   "/Oe",
+   "/Zi"
+  ],
+  "draft": "D:\\Prog\\simant_recon\\build\\workers\\siblings\\triage\\S12_384C.c",
+  "source_sha256": "daa607847c4c0364358a7b57d3f790dd9981e284bf2cedd01fa1fb3ac4df918a",
+  "strict_target_exact": false,
+  "strict_module_exact": false,
+  "reasons": [
+   "length 210 != target 205",
+   "bytes differ (first at +0x1b, 123 differing)",
+   "relocation set differs (5 vs 6)"
+  ],
+  "reloc_order": "EXACT",
+  "peer_losses": [],
+  "data_losses": [],
+  "authority": "DIAGNOSTIC_ONLY; strict verdict comes from modules.verify_module",
+  "candidate_bytes": 205,
+  "original_bytes": 205,
+  "decode_complete": false,
+  "classes": [
+   "BRANCH_TARGET_OR_LAYOUT",
+   "CALL_FRAME_OR_SEGMENT_REGISTER",
+   "CONTROL_FLOW_SHAPE",
+   "EPILOGUE_OR_RETURN_LOWERING",
+   "EXTRA_INSTRUCTIONS",
+   "LOCAL_CODEGEN_UNCLASSIFIED",
+   "MISSING_INSTRUCTIONS",
+   "REGISTER_ALLOCATION"
+  ],
+  "families": [],
+  "residuals": 25,
+  "full_diagnostic": "D:\\Prog\\simant_recon\\build\\workers\\siblings\\triage\\DrawMapCursor.json",
+  "summary": "MATCH DIAGNOSIS: DrawMapCursor (bound payload)\nStrict status: MISMATCH; diagnostics cannot discharge extent/byte/fixup obligations.\nTarget/candidate: 205/205 bytes, 60/56 linear instructions.\nByte preservation evidence: 35 target instructions, 6 anchors, 7 islands; not source-line boundaries.\nUngrouped residual observations: 25 (not a count of independent fixes).\n  p8 islands [1]: 26 jmp 0xcc -> 26 jmp 0xd1; UNRESOLVED_DESTINATION\n  p14 islands [2]: 44 mov es, word ptr [0x8674] -> 44 mov es, word ptr [0x867c]; STRUCTURAL\n  p15 islands [2]: 48 mov ax, word ptr es:[0x3858] -> 48 mov ax, word ptr es:[0x50a]; STRUCTURAL\n  p16 islands [2]: 52 mov es, word ptr [0x867c] -> 52 mov es, word ptr [0x8674]; STRUCTURAL\n  p17 islands [2]: 56 mov cx, ax -> None None; MISSING\n  p18 islands [2]: 58 imul word ptr es:[0x50a] -> 56 imul word ptr es:[0x3858]; STRUCTURAL\n  p23 islands [3]: None None -> 78 mov es, word ptr [0x8674]; EXTRA\n  p24 islands [3]: 80 mov dx, ax -> 82 mov cx, ax; STRUCTURAL\n  p25 islands [3]: 82 mov ax, cx -> 84 mov ax, word ptr es:[0x3858]; MISMATCH\n  p27 islands [3]: 88 mov cx, dx -> None None; MISSING\n  p32 islands [4]: 106 mov es, word ptr [0x8672] -> 108 mov es, word ptr [0x867c]; STRUCTURAL\n  p33 islands [4]: 110 mov ax, word ptr es:[0x3856] -> 112 mov ax, word ptr es:[0x508]; STRUCTURAL\nObserved patterns only; 13 omitted entries. Full artifact retains every site/island and contradictions; --islands expands localization. Exact stream resumes at the original anchor boundaries."
+ },
+ {
+  "function": "InvertPatch",
+  "module": "S13:384C",
+  "profile": "msc600ax",
+  "flags": [
+   "/AL",
+   "/Os",
+   "/Og",
+   "/Oe",
+   "/Zi"
+  ],
+  "draft": "D:\\Prog\\simant_recon\\build\\workers\\siblings\\triage\\S13_384C.c",
+  "source_sha256": "1ace9a2985696a7c254c9cfcfafc504be9126f07c47672c6bf79e3e2a570e801",
+  "strict_target_exact": false,
+  "strict_module_exact": false,
+  "reasons": [
+   "length 260 != target 261",
+   "bytes differ (first at +0x1d, 220 differing)",
+   "relocation set differs (5 vs 5)"
+  ],
+  "reloc_order": "EXACT",
+  "peer_losses": [],
+  "data_losses": [],
+  "authority": "DIAGNOSTIC_ONLY; strict verdict comes from modules.verify_module",
+  "candidate_bytes": 260,
+  "original_bytes": 261,
+  "decode_complete": true,
+  "classes": [
+   "BRANCH_TARGET_OR_LAYOUT",
+   "CALL_FRAME_OR_SEGMENT_REGISTER",
+   "EXTRA_INSTRUCTIONS",
+   "LOCAL_CODEGEN_UNCLASSIFIED",
+   "MISSING_INSTRUCTIONS",
+   "REGISTER_ALLOCATION",
+   "STACK_SLOT_ALLOCATION"
+  ],
+  "families": [
+   {
+    "id": "f1",
+    "kind": "BP_DISPLACEMENT",
+    "state": "CONTRADICTED_PATTERN",
+    "scope": {
+     "target_instructions": [
+      0,
+      97
+     ],
+     "candidate_instructions": [
+      0,
+      100
+     ],
+     "frame_or_abi": "No source-object, local/parameter, or BP-stability proof is inferred."
+    },
+    "mapping": [
+     {
+      "target": -22,
+      "candidate": -26,
+      "width": 2
+     },
+     {
+      "target": -6,
+      "candidate": -10,
+      "width": 2
+     }
+    ],
+    "sites": [
+     "p27",
+     "p62",
+     "p87",
+     "p98"
+    ],
+    "islands": [
+     2,
+     4,
+     6,
+     7
+    ],
+    "contradictions": [
+     {
+      "site": "p27",
+      "operand": 0,
+      "target": -6,
+      "candidate": -10,
+      "width": 2,
+      "candidate_width": 2
+     },
+     {
+      "site": "p62",
+      "operand": 1,
+      "target": -6,
+      "candidate": -10,
+      "width": 2,
+      "candidate_width": 2
+     },
+     {
+      "site": "p78",
+      "operand": 0,
+      "target": -6,
+      "candidate": -8,
+      "width": 2,
+      "candidate_width": 2
+     },
+     {
+      "site": "p87",
+      "operand": 1,
+      "target": -6,
+      "candidate": -10,
+      "width": 2,
+      "candidate_width": 2
+     }
+    ],
+    "confidence": "low",
+    "basis": "All aligned uses of affected operands checked for one-to-one correspondence and equal access widths; alignment remains heuristic.",
+    "limit": "Observed operand pattern, not a source explanation, liveness proof, ABI assignment, or repair. BP offsets are not labelled locals or parameters; register roles retain subregister widths and implicit effects.",
+    "sites_count": 4,
+    "omitted_sites": 0,
+    "islands_count": 4,
+    "omitted_islands": 0,
+    "mapping_count": 2,
+    "omitted_mapping": 0,
+    "contradictions_count": 4,
+    "omitted_contradictions": 0
+   },
+   {
+    "id": "f2",
+    "kind": "REGISTER_ROLE",
+    "state": "CONTRADICTED_PATTERN",
+    "scope": {
+     "target_instructions": [
+      0,
+      97
+     ],
+     "candidate_instructions": [
+      0,
+      100
+     ],
+     "frame_or_abi": "No source-object, local/parameter, or BP-stability proof is inferred."
+    },
+    "mapping": [
+     {
+      "target": "ax",
+      "candidate": "bx",
+      "width": 2
+     },
+     {
+      "target": "bx",
+      "candidate": "si",
+      "width": 2
+     },
+     {
+      "target": "cx",
+      "candidate": "di",
+      "width": 2
+     },
+     {
+      "target": "di",
+      "candidate": "ax",
+      "width": 2
+     },
+     {
+      "target": "dx",
+      "candidate": "ax",
+      "width": 2
+     },
+     {
+      "target": "dx",
+      "candidate": "cx",
+      "width": 2
+     }
+    ],
+    "sites": [
+     "p19",
+     "p21",
+     "p26",
+     "p31",
+     "p39",
+     "p44",
+     "p84",
+     "p85",
+     "p86",
+     "p90"
+    ],
+    "islands": [
+     2,
+     3,
+     6
+    ],
+    "contradictions": [
+     {
+      "site": "p2",
+      "operand": 0,
+      "target": "ax",
+      "candidate": "ax",
+      "width": 2,
+      "candidate_width": 2
+     },
+     {
+      "site": "p4",
+      "operand": 0,
+      "target": "di",
+      "candidate": "di",
+      "width": 2,
+      "candidate_width": 2
+     },
+     {
+      "site": "p5",
+      "operand": 0,
+      "target": "si",
+      "candidate": "si",
+      "width": 2,
+      "candidate_width": 2
+     },
+     {
+      "site": "p7",
+      "operand": 0,
+      "target": "ax",
+      "candidate": "ax",
+      "width": 2,
+      "candidate_width": 2
+     },
+     {
+      "site": "p8",
+      "operand": 0,
+      "target": "ax",
+      "candidate": "ax",
+      "width": 2,
+      "candidate_width": 2
+     },
+     {
+      "site": "p10",
+      "operand": 0,
+      "target": "bx",
+      "candidate": "bx",
+      "width": 2,
+      "candidate_width": 2
+     },
+     {
+      "site": "p15",
+      "operand": 0,
+      "target": "ax",
+      "candidate": "ax",
+      "width": 2,
+      "candidate_width": 2
+     },
+     {
+      "site": "p16",
+      "operand": "implicit",
+      "target": "ax",
+      "candidate": "ax",
+      "width": null,
+      "candidate_width": null
+     },
+     {
+      "site": "p16",
+      "operand": "implicit",
+      "target": "dx",
+      "candidate": "dx",
+      "width": null,
+      "candidate_width": null
+     },
+     {
+      "site": "p19",
+      "operand": 0,
+      "target": "dx",
+      "candidate": "cx",
+      "width": 2,
+      "candidate_width": 2
+     },
+     {
+      "site": "p20",
+      "operand": 1,
+      "target": "dx",
+      "candidate": "cx",
+      "width": 2,
+      "candidate_width": 2
+     },
+     {
+      "site": "p21",
+      "operand": 0,
+      "target": "dx",
+      "candidate": "cx",
+      "width": 2,
+      "candidate_width": 2
+     }
+    ],
+    "confidence": "low",
+    "basis": "All aligned uses of affected operands checked for one-to-one correspondence and equal access widths; alignment remains heuristic.",
+    "limit": "Observed operand pattern, not a source explanation, liveness proof, ABI assignment, or repair. BP offsets are not labelled locals or parameters; register roles retain subregister widths and implicit effects.",
+    "sites_count": 10,
+    "omitted_sites": 0,
+    "islands_count": 3,
+    "omitted_islands": 0,
+    "mapping_count": 6,
+    "omitted_mapping": 0,
+    "contradictions_count": 75,
+    "omitted_contradictions": 63
+   }
+  ],
+  "residuals": 55,
+  "full_diagnostic": "D:\\Prog\\simant_recon\\build\\workers\\siblings\\triage\\InvertPatch.json",
+  "summary": "MATCH DIAGNOSIS: InvertPatch (bound payload)\nStrict status: MISMATCH; diagnostics cannot discharge extent/byte/fixup obligations.\nTarget/candidate: 261/260 bytes, 97/100 linear instructions.\nByte preservation evidence: 42 target instructions, 8 anchors, 7 islands; not source-line boundaries.\nf1 BP_DISPLACEMENT CONTRADICTED_PATTERN [low]: -22->-26 (2B), -6->-10 (2B); 4 sites, islands [2, 4, 6, 7], 4 contradictions.\n  Contradictions: [{'site': 'p27', 'operand': 0, 'target': -6, 'candidate': -10, 'width': 2, 'candidate_width': 2}, {'site': 'p62', 'operand': 1, 'target': -6, 'candidate': -10, 'width': 2, 'candidate_width': 2}]\nf2 REGISTER_ROLE CONTRADICTED_PATTERN [low]: ax->bx (2B), bx->si (2B), cx->di (2B), di->ax (2B), dx->ax (2B), dx->cx (2B); 10 sites, islands [2, 3, 6], 75 contradictions.\n  Contradictions: [{'site': 'p2', 'operand': 0, 'target': 'ax', 'candidate': 'ax', 'width': 2, 'candidate_width': 2}, {'site': 'p4', 'operand': 0, 'target': 'di', 'candidate': 'di', 'width': 2, 'candidate_width': 2}]\nCorresponding anchored branch destinations: 2 sites (decimal offsets 131->133, 197->201); encoding/layout changes remain byte differences.\nUngrouped residual observations: 55 (not a count of independent fixes).\n  p11 islands [1]: 28 mov ax, 0x1c -> None None; MISSING\n  p12 islands [1]: 31 imul word ptr [bp + 6] -> None None; MISSING\n  p13 islands [1]: 34 mov word ptr [bp - 0x1c], ax -> None None; MISSING\n  p14 islands [1]: 37 mov cx, ax -> None None; MISSING\n  p17 islands [2]: 45 mov word ptr [bp - 0x1a], ax -> None None; MISSING\n  p19 islands [2]: 52 mov dx, word ptr es:[0x10d2] -> 38 mov cx, word ptr es:[0x10d2]; STRUCTURAL\n  p20 islands [2]: 57 mov word ptr [bp - 0x18], dx -> 43 mov word ptr [bp - 0x1c], cx; STRUCTURAL\n  p21 islands [2]: 60 sub dx, ax -> 46 sub cx, ax; STRUCTURAL\n  p22 islands [2]: None None -> 48 mov dx, ax; EXTRA\n  p23 islands [2]: None None -> 50 mov ax, 0x1c; EXTRA\n  p24 islands [2]: None None -> 53 mov bx, dx; EXTRA\n  p25 islands [2]: None None -> 55 imul word ptr [bp + 6]; EXTRA\nObserved patterns only; 106 omitted entries. Full artifact retains every site/island and contradictions; --islands expands localization. Exact stream resumes at the original anchor boundaries."
+ },
+ {
+  "function": "CalcScore",
+  "module": "S14:384C",
+  "profile": "msc600ax",
+  "flags": [
+   "/AL",
+   "/Os",
+   "/Og",
+   "/Oe",
+   "/Zi"
+  ],
+  "draft": "D:\\Prog\\simant_recon\\build\\workers\\siblings\\triage\\S14_384C.c",
+  "source_sha256": "0ccd4144ac0684c0bfe658e7308e1dc0ffe393ed52802830986337a9a2297a5f",
+  "strict_target_exact": false,
+  "strict_module_exact": false,
+  "reasons": [
+   "bytes differ (first at +0x96, 12 differing)"
+  ],
+  "reloc_order": "GROUPED",
+  "peer_losses": [],
+  "data_losses": [],
+  "authority": "DIAGNOSTIC_ONLY; strict verdict comes from modules.verify_module",
+  "candidate_bytes": 1169,
+  "original_bytes": 1169,
+  "decode_complete": true,
+  "classes": [
+   "STACK_SLOT_ALLOCATION"
+  ],
+  "families": [
+   {
+    "id": "f1",
+    "kind": "BP_DISPLACEMENT",
+    "state": "CONTRADICTED_PATTERN",
+    "scope": {
+     "target_instructions": [
+      0,
+      436
+     ],
+     "candidate_instructions": [
+      0,
+      436
+     ],
+     "frame_or_abi": "No source-object, local/parameter, or BP-stability proof is inferred."
+    },
+    "mapping": [
+     {
+      "target": -6,
+      "candidate": -4,
+      "width": 2
+     },
+     {
+      "target": -4,
+      "candidate": -6,
+      "width": 1
+     },
+     {
+      "target": -4,
+      "candidate": -6,
+      "width": 2
+     }
+    ],
+    "sites": [
+     "p54",
+     "p56",
+     "p60",
+     "p66",
+     "p67",
+     "p70",
+     "p75",
+     "p77",
+     "p207",
+     "p215",
+     "p222",
+     "p251"
+    ],
+    "islands": [
+     1,
+     2,
+     3,
+     4,
+     5,
+     6,
+     7,
+     8
+    ],
+    "contradictions": [
+     {
+      "site": "p54",
+      "operand": 0,
+      "target": -4,
+      "candidate": -6,
+      "width": 2,
+      "candidate_width": 2
+     },
+     {
+      "site": "p56",
+      "operand": 0,
+      "target": -6,
+      "candidate": -4,
+      "width": 2,
+      "candidate_width": 2
+     },
+     {
+      "site": "p60",
+      "operand": 1,
+      "target": -4,
+      "candidate": -6,
+      "width": 2,
+      "candidate_width": 2
+     },
+     {
+      "site": "p66",
+      "operand": 0,
+      "target": -6,
+      "candidate": -4,
+      "width": 2,
+      "candidate_width": 2
+     },
+     {
+      "site": "p67",
+      "operand": 1,
+      "target": -4,
+      "candidate": -6,
+      "width": 1,
+      "candidate_width": 1
+     },
+     {
+      "site": "p70",
+      "operand": 0,
+      "target": -4,
+      "candidate": -6,
+      "width": 2,
+      "candidate_width": 2
+     },
+     {
+      "site": "p75",
+      "operand": 1,
+      "target": -6,
+      "candidate": -4,
+      "width": 2,
+      "candidate_width": 2
+     },
+     {
+      "site": "p77",
+      "operand": 0,
+      "target": -4,
+      "candidate": -6,
+      "width": 2,
+      "candidate_width": 2
+     },
+     {
+      "site": "p207",
+      "operand": 0,
+      "target": -4,
+      "candidate": -6,
+      "width": 2,
+      "candidate_width": 2
+     },
+     {
+      "site": "p215",
+      "operand": 1,
+      "target": -4,
+      "candidate": -6,
+      "width": 2,
+      "candidate_width": 2
+     },
+     {
+      "site": "p222",
+      "operand": 1,
+      "target": -4,
+      "candidate": -6,
+      "width": 2,
+      "candidate_width": 2
+     },
+     {
+      "site": "p251",
+      "operand": 0,
+      "target": -4,
+      "candidate": -6,
+      "width": 2,
+      "candidate_width": 2
+     }
+    ],
+    "confidence": "low",
+    "basis": "All aligned uses of affected operands checked for one-to-one correspondence and equal access widths; alignment remains heuristic.",
+    "limit": "Observed operand pattern, not a source explanation, liveness proof, ABI assignment, or repair. BP offsets are not labelled locals or parameters; register roles retain subregister widths and implicit effects.",
+    "sites_count": 12,
+    "omitted_sites": 0,
+    "islands_count": 8,
+    "omitted_islands": 0,
+    "mapping_count": 3,
+    "omitted_mapping": 0,
+    "contradictions_count": 31,
+    "omitted_contradictions": 19
+   }
+  ],
+  "residuals": 12,
+  "full_diagnostic": "D:\\Prog\\simant_recon\\build\\workers\\siblings\\triage\\CalcScore.json",
+  "summary": "MATCH DIAGNOSIS: CalcScore (bound payload)\nStrict status: MISMATCH; diagnostics cannot discharge extent/byte/fixup obligations.\nTarget/candidate: 1169/1169 bytes, 436/436 linear instructions.\nByte preservation evidence: 420 target instructions, 9 anchors, 8 islands; not source-line boundaries.\nf1 BP_DISPLACEMENT CONTRADICTED_PATTERN [low]: -6->-4 (2B), -4->-6 (1B), -4->-6 (2B); 12 sites, islands [1, 2, 3, 4, 5, 6, 7, 8], 31 contradictions.\n  Contradictions: [{'site': 'p54', 'operand': 0, 'target': -4, 'candidate': -6, 'width': 2, 'candidate_width': 2}, {'site': 'p56', 'operand': 0, 'target': -6, 'candidate': -4, 'width': 2, 'candidate_width': 2}]\nUngrouped residual observations: 12 (not a count of independent fixes).\n  p54 islands [1]: 148 mov word ptr [bp - 4], ax -> 148 mov word ptr [bp - 6], ax; STRUCTURAL\n  p56 islands [1]: 153 mov word ptr [bp - 6], bx -> 153 mov word ptr [bp - 4], bx; STRUCTURAL\n  p60 islands [2]: 165 mov si, word ptr [bp - 4] -> 165 mov si, word ptr [bp - 6]; STRUCTURAL\n  p66 islands [3]: 187 add word ptr [bp - 6], ax -> 187 add word ptr [bp - 4], ax; STRUCTURAL\n  p67 islands [3]: 190 mov al, byte ptr [bp - 4] -> 190 mov al, byte ptr [bp - 6]; STRUCTURAL\n  p70 islands [3]: 198 mov word ptr [bp - 4], ax -> 198 mov word ptr [bp - 6], ax; STRUCTURAL\n  p75 islands [4]: 210 mov ax, word ptr [bp - 6] -> 210 mov ax, word ptr [bp - 4]; STRUCTURAL\n  p77 islands [4]: 216 mov word ptr [bp - 4], ax -> 216 mov word ptr [bp - 6], ax; STRUCTURAL\n  p207 islands [5]: 586 mov word ptr [bp - 4], bx -> 586 mov word ptr [bp - 6], bx; STRUCTURAL\n  p215 islands [6]: 607 add bx, word ptr [bp - 4] -> 607 add bx, word ptr [bp - 6]; STRUCTURAL\n  p222 islands [7]: 628 mov bx, word ptr [bp - 4] -> 628 mov bx, word ptr [bp - 6]; STRUCTURAL\n  p251 islands [8]: 698 mov word ptr [bp - 4], di -> 698 mov word ptr [bp - 6], di; STRUCTURAL\nObserved patterns only; 19 omitted entries. Full artifact retains every site/island and contradictions; --islands expands localization. Exact stream resumes at the original anchor boundaries."
+ },
+ {
+  "function": "o15_384C_0239",
+  "module": "S15:384C",
+  "profile": "msc600ax",
+  "flags": [
+   "/AL",
+   "/Os",
+   "/Og",
+   "/Oe",
+   "/Zi"
+  ],
+  "draft": "D:\\Prog\\simant_recon\\build\\workers\\siblings\\triage\\S15_384C.c",
+  "source_sha256": "01b51eecedcd28e2213819572c846a9754039f4a527e6da5e56e57783398bdd5",
+  "strict_target_exact": false,
+  "strict_module_exact": false,
+  "reasons": [
+   "bytes differ (first at +0x42, 2 differing)"
+  ],
+  "reloc_order": "GROUPED",
+  "peer_losses": [],
+  "data_losses": [],
+  "authority": "DIAGNOSTIC_ONLY; strict verdict comes from modules.verify_module",
+  "candidate_bytes": 326,
+  "original_bytes": 326,
+  "decode_complete": true,
+  "classes": [
+   "STACK_SLOT_ALLOCATION"
+  ],
+  "families": [
+   {
+    "id": "f1",
+    "kind": "BP_DISPLACEMENT",
+    "state": "SUPPORTED_GROUPING",
+    "scope": {
+     "target_instructions": [
+      0,
+      137
+     ],
+     "candidate_instructions": [
+      0,
+      137
+     ],
+     "frame_or_abi": "No source-object, local/parameter, or BP-stability proof is inferred."
+    },
+    "mapping": [
+     {
+      "target": -6,
+      "candidate": -2,
+      "width": 2
+     }
+    ],
+    "sites": [
+     "p28",
+     "p64"
+    ],
+    "islands": [
+     1,
+     2
+    ],
+    "contradictions": [],
+    "confidence": "medium",
+    "basis": "All aligned uses of affected operands checked for one-to-one correspondence and equal access widths; alignment remains heuristic.",
+    "limit": "Observed operand pattern, not a source explanation, liveness proof, ABI assignment, or repair. BP offsets are not labelled locals or parameters; register roles retain subregister widths and implicit effects.",
+    "sites_count": 2,
+    "omitted_sites": 0,
+    "islands_count": 2,
+    "omitted_islands": 0,
+    "mapping_count": 1,
+    "omitted_mapping": 0,
+    "contradictions_count": 0,
+    "omitted_contradictions": 0
+   }
+  ],
+  "residuals": 0,
+  "full_diagnostic": "D:\\Prog\\simant_recon\\build\\workers\\siblings\\triage\\o15_384C_0239.json",
+  "summary": "MATCH DIAGNOSIS: o15_384C_0239 (bound payload)\nStrict status: MISMATCH; diagnostics cannot discharge extent/byte/fixup obligations.\nTarget/candidate: 326/326 bytes, 137/137 linear instructions.\nByte preservation evidence: 135 target instructions, 3 anchors, 2 islands; not source-line boundaries.\nf1 BP_DISPLACEMENT SUPPORTED_GROUPING [medium]: -6->-2 (2B); 2 sites, islands [1, 2], 0 contradictions.\nUngrouped residual observations: 0 (not a count of independent fixes).\nObserved patterns only; 0 omitted entries. Full artifact retains every site/island and contradictions; --islands expands localization. Exact stream resumes at the original anchor boundaries."
+ },
+ {
+  "function": "o17_384C_0039",
+  "module": "S17:384C",
+  "profile": "msc600ax",
+  "flags": [
+   "/AL",
+   "/Os",
+   "/Oe",
+   "/Og",
+   "/Gs",
+   "/Zi"
+  ],
+  "draft": "D:\\Prog\\simant_recon\\build\\workers\\siblings\\triage\\S17_384C.c",
+  "source_sha256": "50c800ef65d52f05f1926d2f597b0bb464db647178729366e7d3edea2865858f",
+  "strict_target_exact": false,
+  "strict_module_exact": false,
+  "reasons": [
+   "length 279 != target 266",
+   "bytes differ (first at +0x5, 148 differing)",
+   "relocation set differs (3 vs 4)"
+  ],
+  "reloc_order": "EXACT",
+  "peer_losses": [],
+  "data_losses": [],
+  "authority": "DIAGNOSTIC_ONLY; strict verdict comes from modules.verify_module",
+  "candidate_bytes": 266,
+  "original_bytes": 266,
+  "decode_complete": false,
+  "classes": [
+   "BRANCH_TARGET_OR_LAYOUT",
+   "CALL_FRAME_OR_SEGMENT_REGISTER",
+   "CONTROL_FLOW_SHAPE",
+   "EPILOGUE_OR_RETURN_LOWERING",
+   "EXTRA_INSTRUCTIONS",
+   "IMMEDIATE_VALUE",
+   "LOCAL_CODEGEN_UNCLASSIFIED",
+   "MISSING_INSTRUCTIONS",
+   "REGISTER_ALLOCATION",
+   "STACK_SLOT_ALLOCATION"
+  ],
+  "families": [],
+  "residuals": 42,
+  "full_diagnostic": "D:\\Prog\\simant_recon\\build\\workers\\siblings\\triage\\o17_384C_0039.json",
+  "summary": "MATCH DIAGNOSIS: o17_384C_0039 (bound payload)\nStrict status: MISMATCH; diagnostics cannot discharge extent/byte/fixup obligations.\nTarget/candidate: 266/266 bytes, 101/96 linear instructions.\nByte preservation evidence: 60 target instructions, 11 anchors, 12 islands; not source-line boundaries.\nUngrouped residual observations: 42 (not a count of independent fixes).\n  p2 islands [1]: 3 sub sp, 0x12 -> 3 sub sp, 0x10; STRUCTURAL\n  p17 islands [2]: 34 jmp 0x104 -> 34 jmp 0x111; UNRESOLVED_DESTINATION\n  p23 islands [3]: 54 mov word ptr [bp - 0x12], bx -> 54 mov word ptr [bp - 0x10], bx; STRUCTURAL\n  p24 islands [3]: 57 mov word ptr [bp - 0x10], es -> 57 mov word ptr [bp - 0xe], es; STRUCTURAL\n  p33 islands [4]: 79 les bx, ptr [bp - 0x12] -> 79 les bx, ptr [bp - 0x10]; STRUCTURAL\n  p36 islands [4]: 89 mov word ptr [bp - 0xc], dx -> 89 mov word ptr [bp - 0xa], dx; STRUCTURAL\n  p38 islands [4]: 94 mov es, word ptr [bp - 0xc] -> 94 mov es, word ptr [bp - 0xa]; STRUCTURAL\n  p41 islands [4]: 104 je 0xa8 -> 104 je 0xba; UNRESOLVED_DESTINATION\n  p42 islands [4]: 106 les bx, ptr [bp - 0x12] -> 106 les si, ptr [bp - 0x10]; STRUCTURAL\n  p43 islands [4]: 109 mov ax, word ptr es:[bx] -> 109 mov ax, word ptr es:[si]; STRUCTURAL\n  p44 islands [4]: 112 mov dx, word ptr es:[bx + 2] -> 112 mov dx, word ptr es:[si + 2]; STRUCTURAL\n  p45 islands [4]: 116 mov es, word ptr [bp - 0xc] -> 116 mov es, word ptr [bp - 0xa]; STRUCTURAL\nObserved patterns only; 30 omitted entries. Full artifact retains every site/island and contradictions; --islands expands localization. Exact stream resumes at the original anchor boundaries."
+ },
+ {
+  "function": "win_PrintStyleTextInRect",
+  "module": "S23:39C7",
+  "profile": "msc600ax",
+  "flags": [
+   "/AL",
+   "/Os",
+   "/Oe",
+   "/Og",
+   "/Zi"
+  ],
+  "draft": "D:\\Prog\\simant_recon\\build\\workers\\siblings\\triage\\S23_39C7.c",
+  "source_sha256": "5e8e5f39325914cc1a6f1b5de9e5c894818e47d68a7ce594b2a514c99b37a1ea",
+  "strict_target_exact": false,
+  "strict_module_exact": false,
+  "reasons": [
+   "length 1052 != target 1039",
+   "bytes differ (first at +0x11, 255 differing)",
+   "relocation set differs (20 vs 20)"
+  ],
+  "reloc_order": "EXACT",
+  "peer_losses": [],
+  "data_losses": [],
+  "authority": "DIAGNOSTIC_ONLY; strict verdict comes from modules.verify_module",
+  "candidate_bytes": 1039,
+  "original_bytes": 1039,
+  "decode_complete": false,
+  "classes": [
+   "BRANCH_TARGET_OR_LAYOUT",
+   "CALL_FRAME_OR_SEGMENT_REGISTER",
+   "CONTROL_FLOW_SHAPE",
+   "EPILOGUE_OR_RETURN_LOWERING",
+   "EXTRA_INSTRUCTIONS",
+   "LOCAL_CODEGEN_UNCLASSIFIED",
+   "MISSING_INSTRUCTIONS",
+   "STACK_SLOT_ALLOCATION",
+   "WIDTH_OR_EXTENSION"
+  ],
+  "families": [],
+  "residuals": 134,
+  "full_diagnostic": "D:\\Prog\\simant_recon\\build\\workers\\siblings\\triage\\win_PrintStyleTextInRect.json"
+ },
+ {
+  "function": "DisplayCard",
+  "module": "S23:39C7",
+  "profile": "msc600ax",
+  "flags": [
+   "/AL",
+   "/Os",
+   "/Oe",
+   "/Og",
+   "/Zi"
+  ],
+  "draft": "D:\\Prog\\simant_recon\\build\\workers\\siblings\\triage\\S23_39C7.c",
+  "source_sha256": "5e8e5f39325914cc1a6f1b5de9e5c894818e47d68a7ce594b2a514c99b37a1ea",
+  "strict_target_exact": false,
+  "strict_module_exact": false,
+  "reasons": [
+   "bytes differ (first at +0x4, 89 differing)",
+   "relocation order inside a target group differs from the object's FIXUPP order"
+  ],
+  "reloc_order": "WITHIN_GROUP_MISMATCH",
+  "peer_losses": [],
+  "data_losses": [],
+  "authority": "DIAGNOSTIC_ONLY; strict verdict comes from modules.verify_module",
+  "candidate_bytes": 1457,
+  "original_bytes": 1457,
+  "decode_complete": true,
+  "classes": [
+   "CONTROL_FLOW_SHAPE",
+   "EXTRA_INSTRUCTIONS",
+   "IMMEDIATE_VALUE",
+   "LOCAL_CODEGEN_UNCLASSIFIED",
+   "MISSING_INSTRUCTIONS",
+   "STACK_SLOT_ALLOCATION"
+  ],
+  "families": [
+   {
+    "id": "f1",
+    "kind": "BP_DISPLACEMENT",
+    "state": "CONTRADICTED_PATTERN",
+    "scope": {
+     "target_instructions": [
+      0,
+      558
+     ],
+     "candidate_instructions": [
+      0,
+      558
+     ],
+     "frame_or_abi": "No source-object, local/parameter, or BP-stability proof is inferred."
+    },
+    "mapping": [
+     {
+      "target": -118,
+      "candidate": -122,
+      "width": 2
+     },
+     {
+      "target": -116,
+      "candidate": -120,
+      "width": 2
+     },
+     {
+      "target": -114,
+      "candidate": -118,
+      "width": 2
+     },
+     {
+      "target": -112,
+      "candidate": -116,
+      "width": 2
+     },
+     {
+      "target": -78,
+      "candidate": -28,
+      "width": 2
+     },
+     {
+      "target": -48,
+      "candidate": -114,
+      "width": 2
+     },
+     {
+      "target": -48,
+      "candidate": -14,
+      "width": 2
+     },
+     {
+      "target": -46,
+      "candidate": -112,
+      "width": 2
+     },
+     {
+      "target": -44,
+      "candidate": -48,
+      "width": 1
+     },
+     {
+      "target": -44,
+      "candidate": -48,
+      "width": 2
+     },
+     {
+      "target": -40,
+      "candidate": -44,
+      "width": 2
+     },
+     {
+      "target": -38,
+      "candidate": -42,
+      "width": 2
+     }
+    ],
+    "sites": [
+     "p23",
+     "p24",
+     "p39",
+     "p40",
+     "p43",
+     "p50",
+     "p51",
+     "p56",
+     "p57",
+     "p66",
+     "p67",
+     "p94"
+    ],
+    "islands": [
+     2,
+     3,
+     4,
+     5,
+     6,
+     7,
+     8,
+     9,
+     10,
+     11,
+     12,
+     13
+    ],
+    "contradictions": [
+     {
+      "site": "p6",
+      "operand": 0,
+      "target": -14,
+      "candidate": -14,
+      "width": 2,
+      "candidate_width": 2
+     },
+     {
+      "site": "p39",
+      "operand": 0,
+      "target": -32,
+      "candidate": -22,
+      "width": 2,
+      "candidate_width": 2
+     },
+     {
+      "site": "p40",
+      "operand": 0,
+      "target": -30,
+      "candidate": -20,
+      "width": 2,
+      "candidate_width": 2
+     },
+     {
+      "site": "p43",
+      "operand": 0,
+      "target": -30,
+      "candidate": -20,
+      "width": 2,
+      "candidate_width": 2
+     },
+     {
+      "site": "p50",
+      "operand": 0,
+      "target": -8,
+      "candidate": -32,
+      "width": 2,
+      "candidate_width": 2
+     },
+     {
+      "site": "p51",
+      "operand": 0,
+      "target": -6,
+      "candidate": -30,
+      "width": 2,
+      "candidate_width": 2
+     },
+     {
+      "site": "p56",
+      "operand": 0,
+      "target": -8,
+      "candidate": -32,
+      "width": 2,
+      "candidate_width": 2
+     },
+     {
+      "site": "p57",
+      "operand": 1,
+      "target": -8,
+      "candidate": -32,
+      "width": 2,
+      "candidate_width": 2
+     },
+     {
+      "site": "p66",
+      "operand": 0,
+      "target": -30,
+      "candidate": -20,
+      "width": 2,
+      "candidate_width": 2
+     },
+     {
+      "site": "p67",
+      "operand": 0,
+      "target": -32,
+      "candidate": -22,
+      "width": 2,
+      "candidate_width": 2
+     },
+     {
+      "site": "p99",
+      "operand": 0,
+      "target": -8,
+      "candidate": -8,
+      "width": 2,
+      "candidate_width": 2
+     },
+     {
+      "site": "p100",
+      "operand": 0,
+      "target": -6,
+      "candidate": -6,
+      "width": 2,
+      "candidate_width": 2
+     }
+    ],
+    "confidence": "low",
+    "basis": "All aligned uses of affected operands checked for one-to-one correspondence and equal access widths; alignment remains heuristic.",
+    "limit": "Observed operand pattern, not a source explanation, liveness proof, ABI assignment, or repair. BP offsets are not labelled locals or parameters; register roles retain subregister widths and implicit effects.",
+    "sites_count": 62,
+    "omitted_sites": 50,
+    "islands_count": 34,
+    "omitted_islands": 22,
+    "mapping_count": 19,
+    "omitted_mapping": 7,
+    "contradictions_count": 50,
+    "omitted_contradictions": 38
+   }
+  ],
+  "residuals": 74,
+  "full_diagnostic": "D:\\Prog\\simant_recon\\build\\workers\\siblings\\triage\\DisplayCard.json"
+ },
+ {
+  "function": "drawHistGraph",
+  "module": "S24:39C7",
+  "profile": "msc600ax",
+  "flags": [
+   "/AL",
+   "/Os",
+   "/Og",
+   "/Oe",
+   "/Zi"
+  ],
+  "draft": "D:\\Prog\\simant_recon\\build\\workers\\siblings\\triage\\S24_39C7.c",
+  "source_sha256": "764bcd8f1272b6f9655a1fe305cea71d98e95b9ad9c285f69dc944fbfe21d34c",
+  "strict_target_exact": false,
+  "strict_module_exact": false,
+  "reasons": [
+   "length 714 != target 732",
+   "bytes differ (first at +0x4, 451 differing)",
+   "relocation set differs (9 vs 9)"
+  ],
+  "reloc_order": "EXACT",
+  "peer_losses": [],
+  "data_losses": [],
+  "authority": "DIAGNOSTIC_ONLY; strict verdict comes from modules.verify_module",
+  "candidate_bytes": 714,
+  "original_bytes": 732,
+  "decode_complete": true,
+  "classes": [
+   "BRANCH_TARGET_OR_LAYOUT",
+   "CALL_FRAME_OR_SEGMENT_REGISTER",
+   "CONTROL_FLOW_SHAPE",
+   "EXTRA_INSTRUCTIONS",
+   "IMMEDIATE_VALUE",
+   "LOCAL_CODEGEN_UNCLASSIFIED",
+   "MISSING_INSTRUCTIONS",
+   "REGISTER_ALLOCATION",
+   "STACK_SLOT_ALLOCATION"
+  ],
+  "families": [
+   {
+    "id": "f1",
+    "kind": "BP_DISPLACEMENT",
+    "state": "CONTRADICTED_PATTERN",
+    "scope": {
+     "target_instructions": [
+      0,
+      276
+     ],
+     "candidate_instructions": [
+      0,
+      271
+     ],
+     "frame_or_abi": "No source-object, local/parameter, or BP-stability proof is inferred."
+    },
+    "mapping": [
+     {
+      "target": -70,
+      "candidate": -78,
+      "width": 2
+     },
+     {
+      "target": -68,
+      "candidate": -76,
+      "width": 2
+     },
+     {
+      "target": -66,
+      "candidate": -74,
+      "width": 2
+     },
+     {
+      "target": -64,
+      "candidate": -72,
+      "width": 2
+     },
+     {
+      "target": -64,
+      "candidate": -26,
+      "width": 2
+     },
+     {
+      "target": -62,
+      "candidate": -8,
+      "width": 2
+     },
+     {
+      "target": -62,
+      "candidate": -2,
+      "width": 2
+     },
+     {
+      "target": -60,
+      "candidate": -30,
+      "width": 1
+     },
+     {
+      "target": -60,
+      "candidate": -30,
+      "width": 2
+     },
+     {
+      "target": -58,
+      "candidate": -70,
+      "width": 2
+     },
+     {
+      "target": -38,
+      "candidate": -40,
+      "width": 2
+     },
+     {
+      "target": -38,
+      "candidate": 10,
+      "width": 2
+     }
+    ],
+    "sites": [
+     "p12",
+     "p17",
+     "p18",
+     "p20",
+     "p21",
+     "p22",
+     "p23",
+     "p24",
+     "p49",
+     "p52",
+     "p64",
+     "p69"
+    ],
+    "islands": [
+     2,
+     3,
+     4,
+     5,
+     6,
+     7,
+     8,
+     9,
+     10,
+     11,
+     13,
+     14
+    ],
+    "contradictions": [
+     {
+      "site": "p12",
+      "operand": 1,
+      "target": -38,
+      "candidate": -40,
+      "width": 2,
+      "candidate_width": 2
+     },
+     {
+      "site": "p18",
+      "operand": 1,
+      "target": -38,
+      "candidate": -40,
+      "width": 2,
+      "candidate_width": 2
+     },
+     {
+      "site": "p20",
+      "operand": 0,
+      "target": -30,
+      "candidate": -32,
+      "width": 2,
+      "candidate_width": 2
+     },
+     {
+      "site": "p40",
+      "operand": 0,
+      "target": -26,
+      "candidate": -26,
+      "width": 2,
+      "candidate_width": 2
+     },
+     {
+      "site": "p46",
+      "operand": 0,
+      "target": -14,
+      "candidate": -14,
+      "width": 2,
+      "candidate_width": 2
+     },
+     {
+      "site": "p52",
+      "operand": 0,
+      "target": -62,
+      "candidate": -8,
+      "width": 2,
+      "candidate_width": 2
+     },
+     {
+      "site": "p57",
+      "operand": 0,
+      "target": -12,
+      "candidate": -12,
+      "width": 2,
+      "candidate_width": 2
+     },
+     {
+      "site": "p58",
+      "operand": 0,
+      "target": -2,
+      "candidate": -2,
+      "width": 2,
+      "candidate_width": 2
+     },
+     {
+      "site": "p61",
+      "operand": 1,
+      "target": -12,
+      "candidate": -12,
+      "width": 2,
+      "candidate_width": 2
+     },
+     {
+      "site": "p64",
+      "operand": 0,
+      "target": -64,
+      "candidate": -72,
+      "width": 2,
+      "candidate_width": 2
+     },
+     {
+      "site": "p65",
+      "operand": 1,
+      "target": -26,
+      "candidate": -26,
+      "width": 2,
+      "candidate_width": 2
+     },
+     {
+      "site": "p69",
+      "operand": 1,
+      "target": -26,
+      "candidate": -72,
+      "width": 2,
+      "candidate_width": 2
+     }
+    ],
+    "confidence": "low",
+    "basis": "All aligned uses of affected operands checked for one-to-one correspondence and equal access widths; alignment remains heuristic.",
+    "limit": "Observed operand pattern, not a source explanation, liveness proof, ABI assignment, or repair. BP offsets are not labelled locals or parameters; register roles retain subregister widths and implicit effects.",
+    "sites_count": 40,
+    "omitted_sites": 28,
+    "islands_count": 22,
+    "omitted_islands": 10,
+    "mapping_count": 22,
+    "omitted_mapping": 10,
+    "contradictions_count": 51,
+    "omitted_contradictions": 39
+   },
+   {
+    "id": "f2",
+    "kind": "REGISTER_ROLE",
+    "state": "CONTRADICTED_PATTERN",
+    "scope": {
+     "target_instructions": [
+      0,
+      276
+     ],
+     "candidate_instructions": [
+      0,
+      271
+     ],
+     "frame_or_abi": "No source-object, local/parameter, or BP-stability proof is inferred."
+    },
+    "mapping": [
+     {
+      "target": "bx",
+      "candidate": "ax",
+      "width": 2
+     },
+     {
+      "target": "di",
+      "candidate": "si",
+      "width": 2
+     },
+     {
+      "target": "si",
+      "candidate": "ax",
+      "width": 2
+     },
+     {
+      "target": "si",
+      "candidate": "bx",
+      "width": 2
+     },
+     {
+      "target": "si",
+      "candidate": "di",
+      "width": 2
+     }
+    ],
+    "sites": [
+     "p89",
+     "p90",
+     "p91",
+     "p114",
+     "p129",
+     "p164",
+     "p165",
+     "p170",
+     "p171",
+     "p193",
+     "p194",
+     "p195"
+    ],
+    "islands": [
+     10,
+     11,
+     13,
+     16,
+     17,
+     20,
+     21,
+     23,
+     24,
+     29
+    ],
+    "contradictions": [
+     {
+      "site": "p2",
+      "operand": 0,
+      "target": "ax",
+      "candidate": "ax",
+      "width": 2,
+      "candidate_width": 2
+     },
+     {
+      "site": "p4",
+      "operand": 0,
+      "target": "di",
+      "candidate": "di",
+      "width": 2,
+      "candidate_width": 2
+     },
+     {
+      "site": "p5",
+      "operand": 0,
+      "target": "si",
+      "candidate": "si",
+      "width": 2,
+      "candidate_width": 2
+     },
+     {
+      "site": "p6",
+      "operand": 0,
+      "target": "bx",
+      "candidate": "bx",
+      "width": 2,
+      "candidate_width": 2
+     },
+     {
+      "site": "p7",
+      "operand": 0,
+      "target": "bx",
+      "candidate": "bx",
+      "width": 2,
+      "candidate_width": 2
+     },
+     {
+      "site": "p8",
+      "operand": 0,
+      "target": "bx",
+      "candidate": "bx",
+      "width": 2,
+      "candidate_width": 2
+     },
+     {
+      "site": "p8",
+      "operand": 1,
+      "target": "bx",
+      "candidate": "bx",
+      "width": 2,
+      "candidate_width": 2
+     },
+     {
+      "site": "p9",
+      "operand": 0,
+      "target": "bx",
+      "candidate": "bx",
+      "width": 2,
+      "candidate_width": 2
+     },
+     {
+      "site": "p10",
+      "operand": 0,
+      "target": "ax",
+      "candidate": "ax",
+      "width": 2,
+      "candidate_width": 2
+     },
+     {
+      "site": "p10",
+      "operand": 1,
+      "target": "bx",
+      "candidate": "bx",
+      "width": 2,
+      "candidate_width": 2
+     },
+     {
+      "site": "p11",
+      "operand": 1,
+      "target": "ax",
+      "candidate": "ax",
+      "width": 2,
+      "candidate_width": 2
+     },
+     {
+      "site": "p12",
+      "operand": 0,
+      "target": "ax",
+      "candidate": "ax",
+      "width": 2,
+      "candidate_width": 2
+     }
+    ],
+    "confidence": "low",
+    "basis": "All aligned uses of affected operands checked for one-to-one correspondence and equal access widths; alignment remains heuristic.",
+    "limit": "Observed operand pattern, not a source explanation, liveness proof, ABI assignment, or repair. BP offsets are not labelled locals or parameters; register roles retain subregister widths and implicit effects.",
+    "sites_count": 20,
+    "omitted_sites": 8,
+    "islands_count": 10,
+    "omitted_islands": 0,
+    "mapping_count": 5,
+    "omitted_mapping": 0,
+    "contradictions_count": 199,
+    "omitted_contradictions": 187
+   }
+  ],
+  "residuals": 102,
+  "full_diagnostic": "D:\\Prog\\simant_recon\\build\\workers\\siblings\\triage\\drawHistGraph.json",
+  "summary": "MATCH DIAGNOSIS: drawHistGraph (bound payload)\nStrict status: MISMATCH; diagnostics cannot discharge extent/byte/fixup obligations.\nTarget/candidate: 732/714 bytes, 276/271 linear instructions.\nByte preservation evidence: 164 target instructions, 30 anchors, 29 islands; not source-line boundaries.\nf1 BP_DISPLACEMENT CONTRADICTED_PATTERN [low]: -70->-78 (2B), -68->-76 (2B), -66->-74 (2B), -64->-72 (2B), -64->-26 (2B), -62->-8 (2B), -62->-2 (2B), -60->-30 (1B), -60->-30 (2B), -58->-70 (2B), -38->-40 (2B), -38->10 (2B); 40 sites, islands [2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 13, 14], 51 contradictions.\n  Contradictions: [{'site': 'p12', 'operand': 1, 'target': -38, 'candidate': -40, 'width': 2, 'candidate_width': 2}, {'site': 'p18', 'operand': 1, 'target': -38, 'candidate': -40, 'width': 2, 'candidate_width': 2}]\nf2 REGISTER_ROLE CONTRADICTED_PATTERN [low]: bx->ax (2B), di->si (2B), si->ax (2B), si->bx (2B), si->di (2B); 20 sites, islands [10, 11, 13, 16, 17, 20, 21, 23, 24, 29], 199 contradictions.\n  Contradictions: [{'site': 'p2', 'operand': 0, 'target': 'ax', 'candidate': 'ax', 'width': 2, 'candidate_width': 2}, {'site': 'p4', 'operand': 0, 'target': 'di', 'candidate': 'di', 'width': 2, 'candidate_width': 2}]\nCorresponding anchored branch destinations: 2 sites (decimal offsets 292->294, 523->511); encoding/layout changes remain byte differences.\nUngrouped residual observations: 102 (not a count of independent fixes).\n  p2 islands [1]: 3 mov ax, 0x46 -> 3 mov ax, 0x4e; STRUCTURAL\n  p12 islands [2]: 31 lea ax, [bp - 0x26] -> 31 lea ax, [bp - 0x28]; STRUCTURAL\n  p17 islands [3]: 44 mov ax, word ptr [bp - 0x22] -> 44 mov ax, word ptr [bp - 0x24]; STRUCTURAL\n  p18 islands [3]: 47 sub ax, word ptr [bp - 0x26] -> 47 sub ax, word ptr [bp - 0x28]; STRUCTURAL\n  p20 islands [3]: 53 mov word ptr [bp - 0x1e], ax -> 53 mov word ptr [bp - 0x20], ax; STRUCTURAL\n  p21 islands [3]: 56 sub word ptr [bp - 0x20], 8 -> 56 sub word ptr [bp - 0x22], 8; STRUCTURAL\n  p22 islands [3]: 60 mov ax, word ptr [bp - 0x20] -> 60 mov ax, word ptr [bp - 0x22]; STRUCTURAL\n  p23 islands [3]: 63 add word ptr [bp - 0x24], 8 -> 63 add word ptr [bp - 0x26], 8; STRUCTURAL\n  p24 islands [3]: 67 sub ax, word ptr [bp - 0x24] -> 67 sub ax, word ptr [bp - 0x26]; STRUCTURAL\n  p49 islands [4]: 146 mov word ptr [bp - 0x3c], ax -> 146 mov word ptr [bp - 0x1e], ax; STRUCTURAL\n  p52 islands [5]: 158 mov word ptr [bp - 0x3e], cx -> 158 mov word ptr [bp - 8], cx; STRUCTURAL\n  p64 islands [6]: 189 mov word ptr [bp - 0x40], si -> 189 mov word ptr [bp - 0x48], si; STRUCTURAL\nObserved patterns only; 372 omitted entries. Full artifact retains every site/island and contradictions; --islands expands localization. Exact stream resumes at the original anchor boundaries."
+ },
+ {
+  "function": "o25_3BA4_1035",
+  "module": "S25:3BA4",
+  "profile": "msc600ax",
+  "flags": [
+   "/AL",
+   "/Os",
+   "/Oe",
+   "/Og",
+   "/Zi"
+  ],
+  "draft": "D:\\Prog\\simant_recon\\build\\workers\\siblings\\triage\\S25_3BA4.c",
+  "source_sha256": "5fc31bb8f45f9e7fa299efe9667af06b29d61ab82a6a2f38715f40d939bd3947",
+  "strict_target_exact": false,
+  "strict_module_exact": false,
+  "reasons": [
+   "bytes differ (first at +0xd7, 2 differing)"
+  ],
+  "reloc_order": "GROUPED",
+  "peer_losses": [],
+  "data_losses": [],
+  "authority": "DIAGNOSTIC_ONLY; strict verdict comes from modules.verify_module",
+  "candidate_bytes": 281,
+  "original_bytes": 281,
+  "decode_complete": true,
+  "classes": [
+   "REGISTER_ALLOCATION"
+  ],
+  "families": [
+   {
+    "id": "f1",
+    "kind": "REGISTER_ROLE",
+    "state": "CONTRADICTED_PATTERN",
+    "scope": {
+     "target_instructions": [
+      0,
+      92
+     ],
+     "candidate_instructions": [
+      0,
+      92
+     ],
+     "frame_or_abi": "No source-object, local/parameter, or BP-stability proof is inferred."
+    },
+    "mapping": [
+     {
+      "target": "si",
+      "candidate": "bx",
+      "width": 2
+     }
+    ],
+    "sites": [
+     "p68",
+     "p69"
+    ],
+    "islands": [
+     1
+    ],
+    "contradictions": [
+     {
+      "site": "p4",
+      "operand": 0,
+      "target": "si",
+      "candidate": "si",
+      "width": 2,
+      "candidate_width": 2
+     },
+     {
+      "site": "p14",
+      "operand": 0,
+      "target": "bx",
+      "candidate": "bx",
+      "width": 2,
+      "candidate_width": 2
+     },
+     {
+      "site": "p15",
+      "operand": 0,
+      "target": "bx",
+      "candidate": "bx",
+      "width": 2,
+      "candidate_width": 2
+     },
+     {
+      "site": "p16",
+      "operand": 0,
+      "target": "bx",
+      "candidate": "bx",
+      "width": 2,
+      "candidate_width": 2
+     },
+     {
+      "site": "p18",
+      "operand": 1,
+      "target": "bx",
+      "candidate": "bx",
+      "width": 2,
+      "candidate_width": 2
+     },
+     {
+      "site": "p20",
+      "operand": 0,
+      "target": "bx",
+      "candidate": "bx",
+      "width": 2,
+      "candidate_width": 2
+     },
+     {
+      "site": "p21",
+      "operand": 0,
+      "target": "bx",
+      "candidate": "bx",
+      "width": 2,
+      "candidate_width": 2
+     },
+     {
+      "site": "p23",
+      "operand": 1,
+      "target": "bx",
+      "candidate": "bx",
+      "width": 2,
+      "candidate_width": 2
+     },
+     {
+      "site": "p25",
+      "operand": 0,
+      "target": "bx",
+      "candidate": "bx",
+      "width": 2,
+      "candidate_width": 2
+     },
+     {
+      "site": "p26",
+      "operand": 0,
+      "target": "bx",
+      "candidate": "bx",
+      "width": 2,
+      "candidate_width": 2
+     },
+     {
+      "site": "p28",
+      "operand": 1,
+      "target": "bx",
+      "candidate": "bx",
+      "width": 2,
+      "candidate_width": 2
+     },
+     {
+      "site": "p30",
+      "operand": 0,
+      "target": "bx",
+      "candidate": "bx",
+      "width": 2,
+      "candidate_width": 2
+     }
+    ],
+    "confidence": "low",
+    "basis": "All aligned uses of affected operands checked for one-to-one correspondence and equal access widths; alignment remains heuristic.",
+    "limit": "Observed operand pattern, not a source explanation, liveness proof, ABI assignment, or repair. BP offsets are not labelled locals or parameters; register roles retain subregister widths and implicit effects.",
+    "sites_count": 2,
+    "omitted_sites": 0,
+    "islands_count": 1,
+    "omitted_islands": 0,
+    "mapping_count": 1,
+    "omitted_mapping": 0,
+    "contradictions_count": 54,
+    "omitted_contradictions": 42
+   }
+  ],
+  "residuals": 2,
+  "full_diagnostic": "D:\\Prog\\simant_recon\\build\\workers\\siblings\\triage\\o25_3BA4_1035.json"
+ },
+ {
+  "function": "o25_3BA4_1686",
+  "module": "S25:3BA4",
+  "profile": "msc600ax",
+  "flags": [
+   "/AL",
+   "/Os",
+   "/Oe",
+   "/Og",
+   "/Zi"
+  ],
+  "draft": "D:\\Prog\\simant_recon\\build\\workers\\siblings\\triage\\S25_3BA4.c",
+  "source_sha256": "5fc31bb8f45f9e7fa299efe9667af06b29d61ab82a6a2f38715f40d939bd3947",
+  "strict_target_exact": false,
+  "strict_module_exact": false,
+  "reasons": [
+   "length 520 != target 516",
+   "bytes differ (first at +0x4, 498 differing)",
+   "relocation set differs (7 vs 7)"
+  ],
+  "reloc_order": "EXACT",
+  "peer_losses": [],
+  "data_losses": [],
+  "authority": "DIAGNOSTIC_ONLY; strict verdict comes from modules.verify_module",
+  "candidate_bytes": 516,
+  "original_bytes": 516,
+  "decode_complete": true,
+  "classes": [
+   "BRANCH_TARGET_OR_LAYOUT",
+   "CALL_FRAME_OR_SEGMENT_REGISTER",
+   "CONTROL_FLOW_SHAPE",
+   "EPILOGUE_OR_RETURN_LOWERING",
+   "EXTRA_INSTRUCTIONS",
+   "IMMEDIATE_VALUE",
+   "LOCAL_CODEGEN_UNCLASSIFIED",
+   "MISSING_INSTRUCTIONS",
+   "REGISTER_ALLOCATION",
+   "STACK_SLOT_ALLOCATION"
+  ],
+  "families": [
+   {
+    "id": "f1",
+    "kind": "BP_DISPLACEMENT",
+    "state": "CONTRADICTED_PATTERN",
+    "scope": {
+     "target_instructions": [
+      0,
+      181
+     ],
+     "candidate_instructions": [
+      0,
+      178
+     ],
+     "frame_or_abi": "No source-object, local/parameter, or BP-stability proof is inferred."
+    },
+    "mapping": [
+     {
+      "target": -10,
+      "candidate": -8,
+      "width": 2
+     },
+     {
+      "target": -8,
+      "candidate": -6,
+      "width": 2
+     },
+     {
+      "target": -6,
+      "candidate": -4,
+      "width": 2
+     },
+     {
+      "target": -6,
+      "candidate": -2,
+      "width": 1
+     },
+     {
+      "target": -6,
+      "candidate": -2,
+      "width": 2
+     }
+    ],
+    "sites": [
+     "p13",
+     "p17",
+     "p56",
+     "p67",
+     "p71",
+     "p142",
+     "p145",
+     "p167"
+    ],
+    "islands": [
+     3,
+     4,
+     5,
+     6,
+     10,
+     13
+    ],
+    "contradictions": [
+     {
+      "site": "p24",
+      "operand": 0,
+      "target": -2,
+      "candidate": -2,
+      "width": 2,
+      "candidate_width": 2
+     },
+     {
+      "site": "p42",
+      "operand": 0,
+      "target": -2,
+      "candidate": -2,
+      "width": 2,
+      "candidate_width": 2
+     },
+     {
+      "site": "p71",
+      "operand": 0,
+      "target": -6,
+      "candidate": -4,
+      "width": 2,
+      "candidate_width": 2
+     },
+     {
+      "site": "p142",
+      "operand": 1,
+      "target": -6,
+      "candidate": -2,
+      "width": 1,
+      "candidate_width": 1
+     },
+     {
+      "site": "p145",
+      "operand": 0,
+      "target": -6,
+      "candidate": -2,
+      "width": 2,
+      "candidate_width": 2
+     }
+    ],
+    "confidence": "low",
+    "basis": "All aligned uses of affected operands checked for one-to-one correspondence and equal access widths; alignment remains heuristic.",
+    "limit": "Observed operand pattern, not a source explanation, liveness proof, ABI assignment, or repair. BP offsets are not labelled locals or parameters; register roles retain subregister widths and implicit effects.",
+    "sites_count": 8,
+    "omitted_sites": 0,
+    "islands_count": 6,
+    "omitted_islands": 0,
+    "mapping_count": 5,
+    "omitted_mapping": 0,
+    "contradictions_count": 5,
+    "omitted_contradictions": 0
+   },
+   {
+    "id": "f2",
+    "kind": "REGISTER_ROLE",
+    "state": "CONTRADICTED_PATTERN",
+    "scope": {
+     "target_instructions": [
+      0,
+      181
+     ],
+     "candidate_instructions": [
+      0,
+      178
+     ],
+     "frame_or_abi": "No source-object, local/parameter, or BP-stability proof is inferred."
+    },
+    "mapping": [
+     {
+      "target": "di",
+      "candidate": "ax",
+      "width": 2
+     },
+     {
+      "target": "di",
+      "candidate": "si",
+      "width": 1
+     },
+     {
+      "target": "di",
+      "candidate": "si",
+      "width": 2
+     },
+     {
+      "target": "si",
+      "candidate": "di",
+      "width": 2
+     }
+    ],
+    "sites": [
+     "p69",
+     "p86",
+     "p89",
+     "p90",
+     "p93",
+     "p128",
+     "p129",
+     "p135",
+     "p138",
+     "p141",
+     "p151",
+     "p156"
+    ],
+    "islands": [
+     6,
+     8,
+     10,
+     11,
+     12,
+     14
+    ],
+    "contradictions": [
+     {
+      "site": "p2",
+      "operand": 0,
+      "target": "ax",
+      "candidate": "ax",
+      "width": 2,
+      "candidate_width": 2
+     },
+     {
+      "site": "p4",
+      "operand": 0,
+      "target": "di",
+      "candidate": "di",
+      "width": 2,
+      "candidate_width": 2
+     },
+     {
+      "site": "p5",
+      "operand": 0,
+      "target": "si",
+      "candidate": "si",
+      "width": 2,
+      "candidate_width": 2
+     },
+     {
+      "site": "p13",
+      "operand": 1,
+      "target": "ax",
+      "candidate": "ax",
+      "width": 2,
+      "candidate_width": 2
+     },
+     {
+      "site": "p14",
+      "operand": 0,
+      "target": "ax",
+      "candidate": "ax",
+      "width": 2,
+      "candidate_width": 2
+     },
+     {
+      "site": "p14",
+      "operand": 1,
+      "target": "ax",
+      "candidate": "ax",
+      "width": 2,
+      "candidate_width": 2
+     },
+     {
+      "site": "p21",
+      "operand": 0,
+      "target": "ax",
+      "candidate": "ax",
+      "width": 2,
+      "candidate_width": 2
+     },
+     {
+      "site": "p23",
+      "operand": 0,
+      "target": "ax",
+      "candidate": "ax",
+      "width": 2,
+      "candidate_width": 2
+     },
+     {
+      "site": "p23",
+      "operand": 1,
+      "target": "ax",
+      "candidate": "ax",
+      "width": 2,
+      "candidate_width": 2
+     },
+     {
+      "site": "p24",
+      "operand": 1,
+      "target": "ax",
+      "candidate": "ax",
+      "width": 2,
+      "candidate_width": 2
+     },
+     {
+      "site": "p25",
+      "operand": 0,
+      "target": "si",
+      "candidate": "si",
+      "width": 2,
+      "candidate_width": 2
+     },
+     {
+      "site": "p25",
+      "operand": 1,
+      "target": "si",
+      "candidate": "si",
+      "width": 2,
+      "candidate_width": 2
+     }
+    ],
+    "confidence": "low",
+    "basis": "All aligned uses of affected operands checked for one-to-one correspondence and equal access widths; alignment remains heuristic.",
+    "limit": "Observed operand pattern, not a source explanation, liveness proof, ABI assignment, or repair. BP offsets are not labelled locals or parameters; register roles retain subregister widths and implicit effects.",
+    "sites_count": 14,
+    "omitted_sites": 2,
+    "islands_count": 6,
+    "omitted_islands": 0,
+    "mapping_count": 4,
+    "omitted_mapping": 0,
+    "contradictions_count": 82,
+    "omitted_contradictions": 70
+   }
+  ],
+  "residuals": 71,
+  "full_diagnostic": "D:\\Prog\\simant_recon\\build\\workers\\siblings\\triage\\o25_3BA4_1686.json"
+ }
+]

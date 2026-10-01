@@ -1,0 +1,10 @@
+o25_3BA4_1035 [S25:3BA4] build/workers/siblings/o25_3BA4_1035.c  msc600ax /AL /Os /Oe /Og /Zi
+  MISMATCH: bytes differ (first at +0xd7, 2 differing)
+  frame: candidate 20  original 20   instructions 92 vs 92
+candidate slots (listing):
+slot correspondence (our slot -> original slot xN):
+  (10 slots map to themselves; --all lists them)
+register substitutions (our -> original, otherwise identical instructions):
+  bx (-) -> six1
+non-BP differences: 1
+    110E push word ptr es:[bx]                   | 110E push word ptr es:[si]

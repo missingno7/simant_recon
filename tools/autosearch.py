@@ -221,8 +221,10 @@ class Evaluator:
             self.cache_file.write_text(json.dumps(self.cache))
 
     def set_base(self, r: dict):
-        self.base_ok = {n for n, ok in r["claims"].items() if ok and n != self.fname}
-        self.base_data = {n for n, ok in r["data"].items() if ok}
+        # Ownership comes from the manifest, never from a possibly stale draft's verdict.
+        self.base_ok = {c['name'] for c in self.ctx.claims if c['name'] != self.fname}
+        self.base_ok |= {n for n, ok in r["claims"].items() if ok and n != self.fname}
+        self.base_data = set(r["data"])
 
     def regressions(self, r: dict) -> list[str]:
         if not r.get("compile_ok"):
@@ -252,6 +254,22 @@ def fmt_score(s) -> str:
     return ("EXACT" if s[0] == 0 else f"insn {s[1]} bytes {s[2]} len {'+' if s[3] else ''}{s[3]}")
 
 
+def pick_neutral(states, limit):
+    """Round robin across rules: distinct source contexts can emit identical code."""
+    groups = {}
+    for state in sorted(states, key=lambda s: len(s.path)):
+        groups.setdefault(state.path[-1][0], []).append(state)
+    rules = sorted(groups, key=lambda r: (R.RULES[r].category != 'decl', r))
+    picked = []
+    for index in range(max((len(g) for g in groups.values()), default=0)):
+        for rule in rules:
+            if len(picked) >= limit:
+                return picked
+            if index < len(groups[rule]):
+                picked.append(groups[rule][index])
+    return picked
+
+
 def search(ev: Evaluator, base_text: str, rule_ids, beam: int, depth: int, budget: int, level_cap: int,
            log=print, neutral_beam: int = 4) -> dict:
     fname = ev.fname
@@ -259,6 +277,10 @@ def search(ev: Evaluator, base_text: str, rule_ids, beam: int, depth: int, budge
     if not base_res.get("compile_ok"):
         return {"function": fname, "error": "base does not compile: " + base_res.get("log", "")}
     ev.set_base(base_res)
+    base_losses = ev.regressions(base_res)
+    if base_losses:
+        return {"function": fname, "error": "base fails accepted ownership checks: " + ', '.join(base_losses),
+                "base_res": base_res, "base_losses": base_losses}
     base = State(base_text, [], base_res)
     log(f"base: {fmt_score(base.score)}  {'; '.join(base_res.get('reasons', []))[:140]}")
     seen_text = {ev.key(base_text)}
@@ -366,21 +388,13 @@ def search(ev: Evaluator, base_text: str, rule_ids, beam: int, depth: int, budge
         # plus a few code-neutral states (declaration order, prototype spelling, statement forms):
         # their effect can appear only in combination with a later move
         if neutral_beam:
-            neutral.sort(key=lambda s: (R.RULES[s.path[-1][0]].category != "decl", s.path[-1][0], len(s.path)))
-            picked, per = [], {}
-            for s in neutral:
-                r0 = s.path[-1][0]
-                if per.get(r0, 0) < max(1, neutral_beam // 3):
-                    picked.append(s)
-                    per[r0] = per.get(r0, 0) + 1
-                if len(picked) >= neutral_beam:
-                    break
-            frontier += picked
+            frontier += pick_neutral(neutral, neutral_beam)
         if evals >= budget:
             break
     return {"function": fname, "module": ev.ctx.key, "base_score": list(base.score), "best_score": list(best.score),
             "best_path": best.path, "best_text": best.text, "best_res": best.res, "base_res": base_res,
-            "evals": evals, "compiles": ev.compiles, "rule_stats": rule_stats, "tried": tried}
+            "evals": evals, "compiles": ev.compiles, "code_identities": len(seen_code),
+            "neutral_beam": neutral_beam, "rule_stats": rule_stats, "tried": tried}
 
 
 # ------------------------------------------------------------------ promotion
@@ -437,7 +451,8 @@ def promote(result: dict, out_dir: Path, log=print, dry_run: bool = False) -> bo
 
 
 def run_one(fname: str, module: str | None = None, base: Path | None = None, rule_ids=None, beam=6, depth=4,
-            budget=1200, level_cap=400, jobs=16, out: Path | None = None, do_promote=False, quiet=False) -> dict:
+            budget=1200, level_cap=400, jobs=16, out: Path | None = None, do_promote=False, quiet=False,
+            neutral_beam=4) -> dict:
     ctx = modctx.resolve(module=module, func=fname if module is None else None)
     text = base.read_text(encoding="latin1") if base else unscaffold(ctx.text, fname)
     stamp = dt.datetime.now().strftime("%Y%m%d-%H%M%S")
@@ -453,9 +468,11 @@ def run_one(fname: str, module: str | None = None, base: Path | None = None, rul
 
     log(f"{fname} in {ctx.key} ({ctx.profile} {' '.join(ctx.flags)}), rules: {','.join(rule_ids or R.DEFAULT_RULES)}")
     ev = Evaluator(ctx, fname, jobs, SCRATCH / "cache")
-    res = search(ev, text, rule_ids or R.DEFAULT_RULES, beam, depth, budget, level_cap, log)
+    res = search(ev, text, rule_ids or R.DEFAULT_RULES, beam, depth, budget, level_cap, log, neutral_beam)
     if "error" in res:
         log(res["error"])
+        (out / "result.json").write_text(json.dumps(res, indent=1, default=str))
+        logf.close()
         return res
     (out / "best.c").write_text(res["best_text"], encoding="latin1", newline="\n")
     (out / "base.c").write_text(text, encoding="latin1", newline="\n")
@@ -486,6 +503,8 @@ def main(argv=None) -> int:
     ap.add_argument("--rules", help="comma-separated rule ids (default: all non-steering rules)")
     ap.add_argument("--steer", action="store_true", help="also use steering rules (never promoted)")
     ap.add_argument("--beam", type=int, default=6)
+    ap.add_argument("--neutral-beam", type=int, default=4,
+                    help="source contexts retained despite identical emitted code (0 disables)")
     ap.add_argument("--depth", type=int, default=4)
     ap.add_argument("--budget", type=int, default=1200)
     ap.add_argument("--level-cap", type=int, default=400)
@@ -495,6 +514,8 @@ def main(argv=None) -> int:
     ap.add_argument("--quiet", action="store_true")
     ap.add_argument("--list-rules", action="store_true")
     a = ap.parse_args(argv)
+    if a.neutral_beam < 0:
+        ap.error('--neutral-beam must be nonnegative')
     if a.list_rules:
         for r in R.RULES.values():
             print(f"{r.id:12s} {r.category:5s} {r.doc}\n{'':18s} evidence: {r.evidence}")
@@ -505,7 +526,7 @@ def main(argv=None) -> int:
     if a.steer:
         ids += [r for r in R.RULES if R.RULES[r].category == "steer" and r not in ids]
     res = run_one(a.func, a.module, a.base, ids, a.beam, a.depth, a.budget, a.level_cap, a.jobs, a.out,
-                  a.promote, a.quiet)
+                  a.promote, a.quiet, a.neutral_beam)
     return 0 if res.get("best_score", [1])[0] == 0 else 1
 
 
@@ -563,6 +584,8 @@ def run_all_main(argv=None):
     ap.add_argument("--budget", type=int, default=800)
     ap.add_argument("--depth", type=int, default=4)
     ap.add_argument("--beam", type=int, default=6)
+    ap.add_argument("--neutral-beam", type=int, default=4,
+                    help="source contexts retained despite identical emitted code (0 disables)")
     ap.add_argument("--level-cap", type=int, default=300)
     ap.add_argument("--jobs", type=int, default=16)
     ap.add_argument("--promote", action="store_true")
@@ -571,6 +594,8 @@ def run_all_main(argv=None):
     ap.add_argument("--continue-from", type=Path,
                     help="results .json of an earlier pass: start each function from its best.c there")
     a = ap.parse_args(argv)
+    if a.neutral_beam < 0:
+        ap.error('--neutral-beam must be nonnegative')
     ids = list(R.DEFAULT_RULES)
     if a.steer:
         ids += [r for r in R.RULES if R.RULES[r].category == "steer"]
@@ -591,7 +616,8 @@ def run_all_main(argv=None):
             print("  previous best draft missing; using the current module draft")
         try:
             res = run_one(f, key, base, ids, a.beam,
-                            a.depth, a.budget, a.level_cap, a.jobs, None, a.promote, quiet=True)
+                            a.depth, a.budget, a.level_cap, a.jobs, None, a.promote, quiet=True,
+                            neutral_beam=a.neutral_beam)
         except (Exception, SystemExit) as e:  # noqa: BLE001
             print(f"  FAILED: {type(e).__name__}: {e}")
             prev[f] = {"module": key, "error": f"{type(e).__name__}: {e}"}

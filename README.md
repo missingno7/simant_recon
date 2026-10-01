@@ -47,6 +47,14 @@ Other tools: `probe.py SPEC.json` (controlled compiler experiments, rules in
 (correspondence), `libmatch.py` (runtime location), `inventory.py` (function discovery),
 `oracle.py` (lock), `symbols.py` / `functions.py` (registry maintenance).
 
+`python tools/diag.py --triage` compiles complete drafts for every open game function
+and groups bound instruction differences (stack homes, registers, branches, widths
+and residuals). `diag.py FUNCTION --source draft.c` inspects a selected whole module;
+`slots.py FUNCTION draft.c` connects BP/register observations to the compiler listing.
+These reports cannot accept code. For interacting declaration edits, autosearch's
+`--neutral-beam N` retains more source contexts that initially emit identical code.
+Search refuses a starting draft that fails an existing manifest claim or data check.
+
 ## State and proof
 
 * `layout/oracle.lock.json` â€” immutable description of every original input (never an
