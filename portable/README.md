@@ -6,6 +6,12 @@ Native work lives here. The DOS checkpoint preserves 1,611 EXACT functions and
 29 separately registered BEHAVIOR_EXACT contracts; it is not a 100% matching
 decompilation.
 
+The [source conversion policy](docs/source-porting-rules.md) keeps recovered
+game bodies and shared state as the authority. Mechanical type/pointer
+conversion and explicit platform services follow the Stunts/Empires port
+workflow. Independent contract models support tests; they do not replace
+recovered game logic in production.
+
 ## Current integration state
 
 The SDL3 executable renders the original scenario-selection resource inside a
