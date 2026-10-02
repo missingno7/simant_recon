@@ -56,3 +56,13 @@ They do not justify applying a blanket right-to-left rewrite. Each additional
 stateful expression needs its own instruction-stream evidence and differential
 test. The wrappers and their provenance records preserve the source hashes,
 parent profiles, targeted function, generated before/after hashes, and controls.
+
+## History event width
+
+Next8 corrects a separate ABI problem in S24. Its source `unsigned code` has
+MSC's 16-bit width, while the generated bare host `unsigned` read the following
+event word too. The original `MOV AX,ES:[BX+0x0C]` confirms the word boundary.
+The versioned profile uses `uint16_t`; 64 directed DOS/native callback traces
+match, and the old-width contrast misses branches with nonzero following words.
+This does not change RNG ordering or certify history rasterization. See the
+[next8 recipe](recovered-source-next8-recipe.md).

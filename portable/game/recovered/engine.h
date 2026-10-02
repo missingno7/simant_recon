@@ -144,7 +144,9 @@ typedef enum SimRecoveredAction {
     SIM_RECOVERED_ACTION_MAP_PLANE,
     /* Actual source RandYard, preserving the existing recovered state image.
      * a is the caller's scenario (0..3), b must be zero. Requires next4. */
-    SIM_RECOVERED_ACTION_RAND_YARD
+    SIM_RECOVERED_ACTION_RAND_YARD,
+    /* Actual S11 ProcMenu. a retains the command word, b must be zero. */
+    SIM_RECOVERED_ACTION_PROC_MENU
 #ifdef SIMANT_ENABLE_END_GAME_ACTION_DIAGNOSTIC
     /* Test executable only: invoke the source EndGame contract directly on
      * its dedicated session. This does not prove the natural trigger. */
@@ -220,6 +222,13 @@ SimRecoveredEngineStatus sim_recovered_engine_tick(
 SimRecoveredEngineStatus sim_recovered_engine_action(
     SimRecoveredEngine *engine, SimRecoveredAction action,
     int16_t a, int16_t b);
+
+/* Dispatches a DOS menu word through S11's distinct event ABI, under the
+ * engine's recovered state, RNG, nest and host bindings. Unknown low-byte
+ * commands retain the original no-action behavior. Unsupported services
+ * fault through the same terminal boundary as other source actions. */
+SimRecoveredEngineStatus sim_recovered_engine_proc_menu_command(
+    SimRecoveredEngine *engine, uint16_t command);
 
 /* Dispatches one already-translated native event through the original
  * processEdit(Event*) entry. A nonnull clock selects fixed headless samples;

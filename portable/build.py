@@ -24,9 +24,9 @@ SDK_URL = f"https://github.com/libsdl-org/SDL/releases/download/release-{VERSION
 # Link them into the SDL host after their contracts and callers are reviewed.
 UNINTEGRATED_MODELS = {
     "portable/ui_model/windows/zoom.c",
+    "portable/ui_model/windows/control_events.c",
+    "portable/ui_model/windows/history_render.c",
     "portable/ui_model/dialogs/menu_quit.c",
-    "portable/ui_model/menus/interaction.c",
-    "portable/ui_model/menus/dropdown_render.c",
 }
 
 
@@ -93,11 +93,41 @@ def build(main: Path, output: Path, sources: list[Path],
         next5 = provenance.get("versioned_profile_extension_next5")
         next6 = provenance.get("versioned_profile_extension_next6")
         next7 = provenance.get("versioned_profile_extension_next7")
+        next8 = provenance.get("versioned_profile_extension_next8")
         if any(key.startswith("versioned_profile_extension_") and
                key not in ("versioned_profile_extension_next5",
                            "versioned_profile_extension_next6",
-                           "versioned_profile_extension_next7") for key in provenance):
+                           "versioned_profile_extension_next7",
+                           "versioned_profile_extension_next8") for key in provenance):
             raise SystemExit("Unreviewed recovered profile generation")
+        if next8 is not None:
+            lowering8 = next8.get("lowering", {})
+            if (next7 is None or next5 is None or
+                    next8.get("schema") != "simant-recovered-source-profile-extension-v1" or
+                    next8.get("id") != "s24-event-code-width-next8-v1" or
+                    next8.get("status") != "DIAGNOSTIC_ONLY_NOT_PRODUCTION" or
+                    next8.get("selected_functions") != ["ProcHistoryEvent"] or
+                    next8.get("parent_wrapper") != next7.get("wrapper_path") or
+                    next8.get("parent_wrapper_sha256") != next7.get("wrapper_sha256") or
+                    lowering8.get("changed_function") != "ProcHistoryEvent" or
+                    lowering8.get("source_member_type") != "unsigned (16-bit under MSC large model)" or
+                    lowering8.get("host_member_type") != "uint16_t (fixed 16-bit)" or
+                    lowering8.get("before_generated_sha256") !=
+                        next5.get("parent_module_hashes", {}).get("S24_m39C7")):
+                raise SystemExit("Unreviewed history-event word ABI")
+            row8 = next((row for row in provenance["modules"]
+                         if row["name"] == "S24_m39C7"), {})
+            parent8 = next8.get("parent_profile", {})
+            if (row8.get("generated") != lowering8.get("path") or
+                    row8.get("generated_sha256") != lowering8.get("after_generated_sha256") or
+                    parent8.get("changed_modules") != ["S24_m39C7"] or
+                    parent8.get("module_count") != 25 or
+                    parent8.get("state_hashes", {}).get("recovered_state.h") != state["header_sha256"] or
+                    parent8.get("state_hashes", {}).get("recovered_state.c") != state["source_sha256"]):
+                raise SystemExit("History-event lowering changed its profile boundary")
+            expected[next8["wrapper_path"]] = next8["wrapper_sha256"]
+            for anchor in next8["selected_source"]["function_anchors"].values():
+                expected[anchor["source_path"]] = anchor["source_sha256"]
         if next7 is not None:
             lowering7 = next7.get("lowering", {})
             if (next6 is None or next5 is None or
@@ -146,7 +176,8 @@ def build(main: Path, output: Path, sources: list[Path],
                     any(modules.get(name, {}).get("generated_sha256") != digest
                         for name, digest in next5["parent_module_hashes"].items()
                         if name != "root_m0AD9" and
-                        not (next7 is not None and name == "S08_m35F5"))):
+                        not (next7 is not None and name == "S08_m35F5") and
+                        not (next8 is not None and name == "S24_m39C7"))):
                 raise SystemExit("RNG lowering changed an unrelated parent module")
             expected[next6["wrapper_path"]] = next6["wrapper_sha256"]
             for anchor in next6["selected_source"]["function_anchors"].values():
@@ -217,7 +248,7 @@ def build(main: Path, output: Path, sources: list[Path],
                  profile / "recovered_native_adapters.c",
                  *(ROOT / "portable/game/recovered" / name for name in
                    ("engine.c","session_bridge.c","audio_adapter.c","nest_adapter.c",
-                    "memory_adapter.c"))]
+                    "memory_adapter.c", "menu_adapter.c"))]
         extra_flags=["-DSIMANT_ENABLE_RECOVERED_CORE=1","-I",str(profile),"-I",str(ROOT)]
         if extension is not None:
             # This reviewed extension supplies all twelve omitted source cue
@@ -309,7 +340,6 @@ def main() -> None:
                      for p in (ROOT / "portable" / folder).rglob("*.c")
                      if not p.is_relative_to(ROOT / "portable/game/recovered") and
                      not p.is_relative_to(ROOT / "portable/game/save") and
-                     not p.is_relative_to(ROOT / "portable/ui_model/windows/control_render") and
                      p.relative_to(ROOT).as_posix() not in UNINTEGRATED_MODELS)
     build(main_file, ROOT / "build/portable/simant-sdl3.exe", sources,args.core_profile)
 

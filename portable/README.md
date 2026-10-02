@@ -59,8 +59,8 @@ python portable/tools/verify_evidence.py
 ```
 
 An explicit generated profile may be linked with
-`python portable/build.py --core-profile build/workers/recovered_source_next7/generated`.
-First follow the [profile recipe](docs/recovered-source-next7-recipe.md) to
+`python portable/build.py --core-profile build/workers/recovered_source_next8/generated`.
+First follow the [profile recipe](docs/recovered-source-next8-recipe.md) to
 recreate the reviewed generated inputs. The build checks the frozen historical
 checkpoint and recorded source/profile identities, and keeps the generated
 modules' warning policy separate from strict native host compilation. It does
@@ -82,14 +82,21 @@ source double-click command. Shift+0 (`)`) toggles pause; Shift+1 through
 Shift+4 (`!`, `@`, `#`, `$`) select speed. Ctrl+numeric-keypad directions move
 the camera one cell on each new key press; held-key repeat cadence is still
 unverified. Menu text/state and its BIOS-font bar are rendered from the actual
-SHARED resource. The nest overview uses the DOS selector-to-pixel conversion
+SHARED resource. Physical menu selection follows the source drag-and-release
+interaction and dispatches the original S11 `ProcMenu` through its own 14-byte
+event ABI. Source speed, pause, options and NewGame commands share the guarded
+engine boundary. Unimplemented command services still fail by name. The nest
+overview uses the DOS selector-to-pixel conversion
 and draws behind the front Edit window. The source yellow-ant key handler is
 connected; supported and unhandled keys retain its logical result. Other
 interactive UI routes remain unfinished. A bounded SDL test enters the source
 game-over flow, dismisses its window, selects scenario 0x0202, and returns
-through source NewGame to a simulation tick. The natural game-over trigger,
-tutorial/load/save/quit routes, and complete control-window composition still
-need integration checks. A separate natural-trigger host test reaches game
+through source NewGame to a simulation tick. Tutorial/load/save/quit routes
+still need integration. Mode and caste control
+contents now use source-derived rendering plans, current populations, active
+resource providers, and each window's position in the scene order. Their mouse
+handlers and a direct DOS framebuffer comparison remain separate work. A
+separate natural-trigger host test reaches game
 over at completed tick 2,879 after physical Shift+4 selects the source's fastest
 speed. It dismisses EndGame, restarts scenario 0x0202, and continues to tick
 3,798 before a test-only Quit event. This is a finite live-host check. The

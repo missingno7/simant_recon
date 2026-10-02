@@ -8,9 +8,10 @@ file(GLOB_RECURSE SIMANT_NATIVE_SOURCES CONFIGURE_DEPENDS
 list(FILTER SIMANT_NATIVE_SOURCES EXCLUDE REGEX "/game/recovered/")
 list(FILTER SIMANT_NATIVE_SOURCES EXCLUDE REGEX "/game/save/")
 # Standalone diagnostic models are integrated only after caller review.
-list(FILTER SIMANT_NATIVE_SOURCES EXCLUDE REGEX "/ui_model/windows/(zoom[.]c|control_render/)")
+list(FILTER SIMANT_NATIVE_SOURCES EXCLUDE REGEX "/ui_model/windows/zoom[.]c$")
+list(FILTER SIMANT_NATIVE_SOURCES EXCLUDE REGEX "/ui_model/windows/control_events[.]c$")
+list(FILTER SIMANT_NATIVE_SOURCES EXCLUDE REGEX "/ui_model/windows/history_render[.]c$")
 list(FILTER SIMANT_NATIVE_SOURCES EXCLUDE REGEX "/ui_model/dialogs/menu_quit[.]c$")
-list(FILTER SIMANT_NATIVE_SOURCES EXCLUDE REGEX "/ui_model/menus/(interaction|dropdown_render)[.]c$")
 add_executable(simant-sdl3 main.c ${SIMANT_NATIVE_SOURCES})
 target_compile_features(simant-sdl3 PRIVATE c_std_11)
 set_target_properties(simant-sdl3 PROPERTIES C_EXTENSIONS OFF)

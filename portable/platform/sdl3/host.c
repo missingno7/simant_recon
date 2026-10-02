@@ -1,5 +1,6 @@
 #include "../host.h"
 #include <SDL3/SDL.h>
+#include <limits.h>
 #include <stdlib.h>
 #include <string.h>
 
@@ -8,6 +9,7 @@ struct Host {
     SDL_Renderer *renderer;
     SDL_Texture *texture;
     uint8_t *rgba;
+    uint8_t dos_scan_down[256];
 };
 
 Host *host_create(const char *title, int integer_scaling)
@@ -127,6 +129,49 @@ static uint16_t dos_key(const SDL_KeyboardEvent *event)
     return (uint16_t)((scan << 8) | ascii);
 }
 
+static uint8_t dos_modifiers(SDL_Keymod modifiers)
+{
+    return (uint8_t)(((modifiers & SDL_KMOD_RSHIFT) ? 1 : 0) |
+                     ((modifiers & SDL_KMOD_LSHIFT) ? 2 : 0) |
+                     ((modifiers & SDL_KMOD_CTRL) ? 4 : 0) |
+                     ((modifiers & SDL_KMOD_ALT) ? 8 : 0));
+}
+
+int host_get_input_state(Host *host, HostInputState *state)
+{
+    float window_x, window_y, logical_x, logical_y;
+    SDL_MouseButtonFlags buttons;
+    if (host == NULL || state == NULL) return 0;
+    buttons = SDL_GetMouseState(&window_x, &window_y);
+    if (!SDL_RenderCoordinatesFromWindow(host->renderer, window_x, window_y,
+                                         &logical_x, &logical_y) ||
+        logical_x < (float)INT16_MIN || logical_x > (float)INT16_MAX ||
+        logical_y < (float)INT16_MIN || logical_y > (float)INT16_MAX)
+        return 0;
+    state->x = (int16_t)logical_x;
+    state->y = (int16_t)logical_y;
+    state->left_button_down = (uint8_t)((buttons & SDL_BUTTON_LMASK) != 0);
+    state->dos_modifiers = dos_modifiers(SDL_GetModState());
+    return 1;
+}
+
+int host_warp_pointer(Host *host, int16_t logical_x, int16_t logical_y)
+{
+    float window_x, window_y;
+    if (host == NULL || !SDL_RenderCoordinatesToWindow(host->renderer,
+            (float)logical_x, (float)logical_y, &window_x, &window_y))
+        return 0;
+    SDL_WarpMouseInWindow(host->window, window_x, window_y);
+    return 1;
+}
+
+int host_is_dos_scan_down(Host *host, uint8_t scan, int *down)
+{
+    if (host == NULL || down == NULL || scan == 0) return 0;
+    *down = host->dos_scan_down[scan] != 0;
+    return 1;
+}
+
 int host_poll_event(Host *host, HostEvent *event)
 {
     SDL_Event raw;
@@ -136,6 +181,9 @@ int host_poll_event(Host *host, HostEvent *event)
         if (!SDL_ConvertEventToRenderCoordinates(host->renderer, &raw)) return -1;
         switch (raw.type) {
             case SDL_EVENT_QUIT: event->kind=HOST_EVENT_QUIT; break;
+            case SDL_EVENT_WINDOW_FOCUS_LOST:
+                memset(host->dos_scan_down, 0, sizeof(host->dos_scan_down));
+                continue;
             case SDL_EVENT_MOUSE_MOTION:
                 event->kind=HOST_EVENT_MOUSE_MOVE;
                 event->x=(int16_t)raw.motion.x; event->y=(int16_t)raw.motion.y; break;
@@ -147,14 +195,14 @@ int host_poll_event(Host *host, HostEvent *event)
                 event->button=raw.button.button; break;
             case SDL_EVENT_KEY_DOWN:
             case SDL_EVENT_KEY_UP:
+                event->key=dos_key(&raw.key);
+                if ((event->key >> 8) != 0)
+                    host->dos_scan_down[event->key >> 8] =
+                        (uint8_t)(raw.type == SDL_EVENT_KEY_DOWN);
                 if (raw.key.repeat) continue;
                 event->kind=raw.type == SDL_EVENT_KEY_DOWN ?
                            HOST_EVENT_KEY_DOWN : HOST_EVENT_KEY_UP;
-                event->key=dos_key(&raw.key);
-                event->modifiers=(uint8_t)(((raw.key.mod & SDL_KMOD_RSHIFT) ? 1:0) |
-                         ((raw.key.mod & SDL_KMOD_LSHIFT) ? 2:0) |
-                         ((raw.key.mod & SDL_KMOD_CTRL) ? 4:0) |
-                         ((raw.key.mod & SDL_KMOD_ALT) ? 8:0));
+                event->modifiers=dos_modifiers(raw.key.mod);
                 if (!event->key) continue;
                 break;
             default: continue;

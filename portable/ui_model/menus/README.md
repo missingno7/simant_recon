@@ -25,9 +25,37 @@ rectangles, selects the first enabled row, tracks pointer/key/event inputs,
 and returns the source command ID. `portable_menu_interaction_init_from_bar`
 connects the interaction model to a parsed resource menu and draw-plan title
 rectangles; `portable_menu_title_hit` exposes the source title hit test.
-Popup/context menus (`menu_index == -1`), SDL event collection, and dropdown
-raster drawing remain host/unsupported boundaries. The finite differential
-does not establish full menu-system equivalence.
+Popup/context menus (`menu_index == -1`) and SDL event collection remain
+host/unsupported boundaries. The finite differential does not establish full
+menu-system equivalence.
+
+`dropdown_render.c` adds a source-command plan and an indexed BIOS-font raster
+executor for title-targeted dropdowns. The plan follows the S10 open order:
+save area at the caller, mode 1 and the two negative-width `f_1CE2_01F8`
+outline passes, then each padded row through `f_1FD2_0008`. It preserves the
+source mode attributes, exact ordered rectangle arguments/colors and row text
+including the high-bit state marker. Original S00 glyph code reads the
+g3DE0/g3DE2 foreground/background bytes and computes their low four-plane
+colors; the pattern attributes (including the disabled-row value 0x30) are
+not read by that glyph path. The source primitive driver is S00
+o00_31AD_16A9 (fourth g3DF8 entry); it unsigned-swaps reversed endpoints and
+fills the half-open rectangle with the low color nibble. The indexed raster
+executor uses those source rules and clips pixels to the saved dropdown
+rectangle while restoring the caller's prior framebuffer clip. It accepts a
+caller-supplied reference BIOS font: the current all-menu asset smoke uses
+DOSBox Staging v0.83.0 8x14 glyphs, not a claim about the original host BIOS.
+The caller still owns saving/restoring the saved pixels and applying returned
+command plans; popup menus remain unsupported.
+
+`python portable/tests/menus/run_dropdown_render_trace.py` records the direct
+original-DOS primitive/text trace comparison and resource smoke receipt. Five
+title-geometry profiles match the original for all mode tuples, eight outline
+primitive calls and four text rows. A separate asset check rasterizes all five
+enabled title menus from actual SHARED kind-6 id 0 using the pinned DOSBox
+Staging reference 8x14 glyph table, verifies highlighting and exact saved
+rectangle restoration. Source anchors establish the primitive coordinate and
+color rules, but the receipt does not compare DOS VRAM bytes against native
+pixels or claim SDL integration.
 
 The focused model test is source-derived and checks the actual asset parser,
 mutation addressing, safe string replacement, and draw-plan equations. The
@@ -52,6 +80,14 @@ python portable/tests/menus/run_menu_interaction_differential.py
 ```
 
 Its pinned receipt is `portable/tests/menus/evidence/menu-interaction-differential.json`.
+
+The dropdown command trace and real-resource raster check are run with:
+
+```powershell
+python portable/tests/menus/run_dropdown_render_trace.py
+```
+
+The receipt is `portable/tests/menus/evidence/dropdown-render-trace.json`.
 
 Pinned inputs used by the test:
 

@@ -1,0 +1,1943 @@
+{
+  "schema": "portable-menu-dropdown-render-trace-v1",
+  "status": "PASS",
+  "target": "original DOS S10:o10_35F5_0384 calling original f_1FD2_02B1/f_1CE2_044D/f_1CE2_01F8/f_1FD2_0008; graphics sinks are explicit deterministic trace providers",
+  "native_sources": {
+    "portable/ui_model/menus/dropdown_render.c": "3a2df5533d6938149c3826c82064cbeb273c97d1dac1297cddd001aec47a2fb8",
+    "portable/ui_model/menus/interaction.c": "40a97b56af39898d33f92c17a57098ec8c7baec425a2c8903b0a0ccdad198751",
+    "portable/ui_model/menus/menu.c": "8855a7cd0783393191e5c085253c522e6d67bc2af662f2eab9151277d09a03b5",
+    "portable/game/resources/database.c": "de237a7b134c1d938a334f504a5f9abb9f10f3da33ee931ef58d3dfca3c708aa",
+    "portable/render/primitives.c": "46f440ab374b1a83ba1f402c40cf9af73d88ca862ae747e786ee8b99b8e67df0",
+    "portable/tests/menus/dropdown_render_fixture.c": "e8ef0d6468c0cb26882d4cb5845e339d6c16c0ddc295d8051edbb2ae5c3a7f03",
+    "portable/tests/menus/test_dropdown_assets.c": "c352f280bd33907de1c8e2edf9a08f763cc2f0a4340bb4f8bf7c5696978e9c69"
+  },
+  "source_anchors": {
+    "src/root/m1FD2.c": "f4359bdaf4cfc0fe326a54cf8a1eacb9ba3098b710bf2a561b3d0f48569bf6d8",
+    "src/root/m1CE2.c": "e5c2cb4b8dbe7af6d263072002a49e012b290c1082f0fc877b479728b75bacd3",
+    "src/root/m1B4E.asm": "a32d75d2d4ea36980b659d26e9ddd86bcde65d9e250ebac4cdc29c0e847c67a2",
+    "src/S00/m31AD.asm": "5d2ad69ff4affb4be4242e82187065cc5e0b3502cc0cc3e00ad3802ccee2656e",
+    "src/S00/m3126.asm": "be7a4a3b0fd9c56c47be50d20c60b0c2835002b7721bd913d36f8183be47ce5a"
+  },
+  "original": {
+    "harness_sha256": "2c0799048057f59eae61a48be4d695278635594484adf0c70bf46c51b4e0c799",
+    "manifest_sha256": "025a0a9255d910cae4b122ab5a3f3fb40888bb456d7fe42158db7c9e622fcf50",
+    "oracle_sha256": "aa0596c6766322a8229ee3c36e57048c92adc82d50fbe2ef37afb8b85fcf4f11",
+    "target_source_sha256": "4b9dda15dbea1c8fd204ed95d4cb6a909751a59d0517909e90c4626cad3c7888",
+    "target_object_sha256": "898342fa8bf5a0fc880402e8800225acab55dbab2e6ec8cf45bcabecf381ba41"
+  },
+  "cases": [
+    {
+      "case": "dropdown-render/menu-0",
+      "menu_index": 0,
+      "title_x": 30,
+      "title_width_cells": 70,
+      "equal": true,
+      "saved_rect": {
+        "original": [
+          286,
+          17,
+          350,
+          71
+        ],
+        "native": [
+          286,
+          17,
+          350,
+          71
+        ]
+      },
+      "mode_count": {
+        "original": 7,
+        "native": 7
+      },
+      "primitive_count": {
+        "original": 8,
+        "native": 8
+      },
+      "text_count": {
+        "original": 4,
+        "native": 4
+      },
+      "trace_match": {
+        "attributes": true,
+        "primitives": true,
+        "text": true
+      },
+      "original_trace": [
+        [
+          "draw-attribute",
+          [
+            257,
+            2827,
+            192
+          ]
+        ],
+        [
+          "draw-primitive",
+          [
+            291,
+            17,
+            345,
+            20,
+            1
+          ]
+        ],
+        [
+          "draw-primitive",
+          [
+            291,
+            71,
+            345,
+            68,
+            1
+          ]
+        ],
+        [
+          "draw-primitive",
+          [
+            291,
+            20,
+            294,
+            68,
+            1
+          ]
+        ],
+        [
+          "draw-primitive",
+          [
+            342,
+            20,
+            345,
+            68,
+            1
+          ]
+        ],
+        [
+          "draw-attribute",
+          [
+            2827,
+            257,
+            0
+          ]
+        ],
+        [
+          "draw-primitive",
+          [
+            293,
+            19,
+            343,
+            20,
+            11
+          ]
+        ],
+        [
+          "draw-primitive",
+          [
+            293,
+            69,
+            343,
+            68,
+            11
+          ]
+        ],
+        [
+          "draw-primitive",
+          [
+            293,
+            20,
+            294,
+            68,
+            11
+          ]
+        ],
+        [
+          "draw-primitive",
+          [
+            342,
+            20,
+            343,
+            68,
+            11
+          ]
+        ],
+        [
+          "draw-attribute",
+          [
+            257,
+            2827,
+            192
+          ]
+        ],
+        [
+          "draw-attribute",
+          [
+            257,
+            2827,
+            192
+          ]
+        ],
+        [
+          "font-draw-text",
+          294,
+          20,
+          "20416c706861"
+        ],
+        [
+          "draw-attribute",
+          [
+            257,
+            2827,
+            192
+          ]
+        ],
+        [
+          "font-draw-text",
+          294,
+          32,
+          "202d2d2d2d20"
+        ],
+        [
+          "draw-attribute",
+          [
+            3855,
+            2827,
+            48
+          ]
+        ],
+        [
+          "font-draw-text",
+          294,
+          44,
+          "426574612020"
+        ],
+        [
+          "draw-attribute",
+          [
+            257,
+            2827,
+            192
+          ]
+        ],
+        [
+          "font-draw-text",
+          294,
+          56,
+          "2047616d6d61"
+        ]
+      ],
+      "native_commands": [
+        {
+          "kind": "mode",
+          "mode": 1,
+          "attrs": [
+            257,
+            2827,
+            192
+          ]
+        },
+        {
+          "kind": "rect",
+          "rect": [
+            291,
+            17,
+            345,
+            20
+          ],
+          "color": 1
+        },
+        {
+          "kind": "rect",
+          "rect": [
+            291,
+            71,
+            345,
+            68
+          ],
+          "color": 1
+        },
+        {
+          "kind": "rect",
+          "rect": [
+            291,
+            20,
+            294,
+            68
+          ],
+          "color": 1
+        },
+        {
+          "kind": "rect",
+          "rect": [
+            342,
+            20,
+            345,
+            68
+          ],
+          "color": 1
+        },
+        {
+          "kind": "mode",
+          "mode": 0,
+          "attrs": [
+            2827,
+            257,
+            0
+          ]
+        },
+        {
+          "kind": "rect",
+          "rect": [
+            293,
+            19,
+            343,
+            20
+          ],
+          "color": 11
+        },
+        {
+          "kind": "rect",
+          "rect": [
+            293,
+            69,
+            343,
+            68
+          ],
+          "color": 11
+        },
+        {
+          "kind": "rect",
+          "rect": [
+            293,
+            20,
+            294,
+            68
+          ],
+          "color": 11
+        },
+        {
+          "kind": "rect",
+          "rect": [
+            342,
+            20,
+            343,
+            68
+          ],
+          "color": 11
+        },
+        {
+          "kind": "mode",
+          "mode": 1,
+          "attrs": [
+            257,
+            2827,
+            192
+          ]
+        },
+        {
+          "kind": "mode",
+          "mode": 1,
+          "attrs": [
+            257,
+            2827,
+            192
+          ]
+        },
+        {
+          "kind": "text",
+          "x": 294,
+          "y": 20,
+          "text_hex": "20416c706861",
+          "mode": 1,
+          "clear": 0
+        },
+        {
+          "kind": "mode",
+          "mode": 1,
+          "attrs": [
+            257,
+            2827,
+            192
+          ]
+        },
+        {
+          "kind": "text",
+          "x": 294,
+          "y": 32,
+          "text_hex": "202d2d2d2d20",
+          "mode": 1,
+          "clear": 0
+        },
+        {
+          "kind": "mode",
+          "mode": 3,
+          "attrs": [
+            3855,
+            2827,
+            48
+          ]
+        },
+        {
+          "kind": "text",
+          "x": 294,
+          "y": 44,
+          "text_hex": "c26574612020",
+          "mode": 3,
+          "clear": 1
+        },
+        {
+          "kind": "mode",
+          "mode": 1,
+          "attrs": [
+            257,
+            2827,
+            192
+          ]
+        },
+        {
+          "kind": "text",
+          "x": 294,
+          "y": 56,
+          "text_hex": "2047616d6d61",
+          "mode": 1,
+          "clear": 0
+        }
+      ]
+    },
+    {
+      "case": "dropdown-render/menu-1",
+      "menu_index": 1,
+      "title_x": 34,
+      "title_width_cells": 74,
+      "equal": true,
+      "saved_rect": {
+        "original": [
+          306,
+          17,
+          370,
+          71
+        ],
+        "native": [
+          306,
+          17,
+          370,
+          71
+        ]
+      },
+      "mode_count": {
+        "original": 7,
+        "native": 7
+      },
+      "primitive_count": {
+        "original": 8,
+        "native": 8
+      },
+      "text_count": {
+        "original": 4,
+        "native": 4
+      },
+      "trace_match": {
+        "attributes": true,
+        "primitives": true,
+        "text": true
+      },
+      "original_trace": [
+        [
+          "draw-attribute",
+          [
+            257,
+            2827,
+            192
+          ]
+        ],
+        [
+          "draw-primitive",
+          [
+            311,
+            17,
+            365,
+            20,
+            1
+          ]
+        ],
+        [
+          "draw-primitive",
+          [
+            311,
+            71,
+            365,
+            68,
+            1
+          ]
+        ],
+        [
+          "draw-primitive",
+          [
+            311,
+            20,
+            314,
+            68,
+            1
+          ]
+        ],
+        [
+          "draw-primitive",
+          [
+            362,
+            20,
+            365,
+            68,
+            1
+          ]
+        ],
+        [
+          "draw-attribute",
+          [
+            2827,
+            257,
+            0
+          ]
+        ],
+        [
+          "draw-primitive",
+          [
+            313,
+            19,
+            363,
+            20,
+            11
+          ]
+        ],
+        [
+          "draw-primitive",
+          [
+            313,
+            69,
+            363,
+            68,
+            11
+          ]
+        ],
+        [
+          "draw-primitive",
+          [
+            313,
+            20,
+            314,
+            68,
+            11
+          ]
+        ],
+        [
+          "draw-primitive",
+          [
+            362,
+            20,
+            363,
+            68,
+            11
+          ]
+        ],
+        [
+          "draw-attribute",
+          [
+            257,
+            2827,
+            192
+          ]
+        ],
+        [
+          "draw-attribute",
+          [
+            257,
+            2827,
+            192
+          ]
+        ],
+        [
+          "font-draw-text",
+          314,
+          20,
+          "20416c706861"
+        ],
+        [
+          "draw-attribute",
+          [
+            257,
+            2827,
+            192
+          ]
+        ],
+        [
+          "font-draw-text",
+          314,
+          32,
+          "202d2d2d2d20"
+        ],
+        [
+          "draw-attribute",
+          [
+            3855,
+            2827,
+            48
+          ]
+        ],
+        [
+          "font-draw-text",
+          314,
+          44,
+          "426574612020"
+        ],
+        [
+          "draw-attribute",
+          [
+            257,
+            2827,
+            192
+          ]
+        ],
+        [
+          "font-draw-text",
+          314,
+          56,
+          "2047616d6d61"
+        ]
+      ],
+      "native_commands": [
+        {
+          "kind": "mode",
+          "mode": 1,
+          "attrs": [
+            257,
+            2827,
+            192
+          ]
+        },
+        {
+          "kind": "rect",
+          "rect": [
+            311,
+            17,
+            365,
+            20
+          ],
+          "color": 1
+        },
+        {
+          "kind": "rect",
+          "rect": [
+            311,
+            71,
+            365,
+            68
+          ],
+          "color": 1
+        },
+        {
+          "kind": "rect",
+          "rect": [
+            311,
+            20,
+            314,
+            68
+          ],
+          "color": 1
+        },
+        {
+          "kind": "rect",
+          "rect": [
+            362,
+            20,
+            365,
+            68
+          ],
+          "color": 1
+        },
+        {
+          "kind": "mode",
+          "mode": 0,
+          "attrs": [
+            2827,
+            257,
+            0
+          ]
+        },
+        {
+          "kind": "rect",
+          "rect": [
+            313,
+            19,
+            363,
+            20
+          ],
+          "color": 11
+        },
+        {
+          "kind": "rect",
+          "rect": [
+            313,
+            69,
+            363,
+            68
+          ],
+          "color": 11
+        },
+        {
+          "kind": "rect",
+          "rect": [
+            313,
+            20,
+            314,
+            68
+          ],
+          "color": 11
+        },
+        {
+          "kind": "rect",
+          "rect": [
+            362,
+            20,
+            363,
+            68
+          ],
+          "color": 11
+        },
+        {
+          "kind": "mode",
+          "mode": 1,
+          "attrs": [
+            257,
+            2827,
+            192
+          ]
+        },
+        {
+          "kind": "mode",
+          "mode": 1,
+          "attrs": [
+            257,
+            2827,
+            192
+          ]
+        },
+        {
+          "kind": "text",
+          "x": 314,
+          "y": 20,
+          "text_hex": "20416c706861",
+          "mode": 1,
+          "clear": 0
+        },
+        {
+          "kind": "mode",
+          "mode": 1,
+          "attrs": [
+            257,
+            2827,
+            192
+          ]
+        },
+        {
+          "kind": "text",
+          "x": 314,
+          "y": 32,
+          "text_hex": "202d2d2d2d20",
+          "mode": 1,
+          "clear": 0
+        },
+        {
+          "kind": "mode",
+          "mode": 3,
+          "attrs": [
+            3855,
+            2827,
+            48
+          ]
+        },
+        {
+          "kind": "text",
+          "x": 314,
+          "y": 44,
+          "text_hex": "c26574612020",
+          "mode": 3,
+          "clear": 1
+        },
+        {
+          "kind": "mode",
+          "mode": 1,
+          "attrs": [
+            257,
+            2827,
+            192
+          ]
+        },
+        {
+          "kind": "text",
+          "x": 314,
+          "y": 56,
+          "text_hex": "2047616d6d61",
+          "mode": 1,
+          "clear": 0
+        }
+      ]
+    },
+    {
+      "case": "dropdown-render/menu-2",
+      "menu_index": 2,
+      "title_x": 38,
+      "title_width_cells": 78,
+      "equal": true,
+      "saved_rect": {
+        "original": [
+          326,
+          17,
+          390,
+          71
+        ],
+        "native": [
+          326,
+          17,
+          390,
+          71
+        ]
+      },
+      "mode_count": {
+        "original": 7,
+        "native": 7
+      },
+      "primitive_count": {
+        "original": 8,
+        "native": 8
+      },
+      "text_count": {
+        "original": 4,
+        "native": 4
+      },
+      "trace_match": {
+        "attributes": true,
+        "primitives": true,
+        "text": true
+      },
+      "original_trace": [
+        [
+          "draw-attribute",
+          [
+            257,
+            2827,
+            192
+          ]
+        ],
+        [
+          "draw-primitive",
+          [
+            331,
+            17,
+            385,
+            20,
+            1
+          ]
+        ],
+        [
+          "draw-primitive",
+          [
+            331,
+            71,
+            385,
+            68,
+            1
+          ]
+        ],
+        [
+          "draw-primitive",
+          [
+            331,
+            20,
+            334,
+            68,
+            1
+          ]
+        ],
+        [
+          "draw-primitive",
+          [
+            382,
+            20,
+            385,
+            68,
+            1
+          ]
+        ],
+        [
+          "draw-attribute",
+          [
+            2827,
+            257,
+            0
+          ]
+        ],
+        [
+          "draw-primitive",
+          [
+            333,
+            19,
+            383,
+            20,
+            11
+          ]
+        ],
+        [
+          "draw-primitive",
+          [
+            333,
+            69,
+            383,
+            68,
+            11
+          ]
+        ],
+        [
+          "draw-primitive",
+          [
+            333,
+            20,
+            334,
+            68,
+            11
+          ]
+        ],
+        [
+          "draw-primitive",
+          [
+            382,
+            20,
+            383,
+            68,
+            11
+          ]
+        ],
+        [
+          "draw-attribute",
+          [
+            257,
+            2827,
+            192
+          ]
+        ],
+        [
+          "draw-attribute",
+          [
+            257,
+            2827,
+            192
+          ]
+        ],
+        [
+          "font-draw-text",
+          334,
+          20,
+          "20416c706861"
+        ],
+        [
+          "draw-attribute",
+          [
+            257,
+            2827,
+            192
+          ]
+        ],
+        [
+          "font-draw-text",
+          334,
+          32,
+          "202d2d2d2d20"
+        ],
+        [
+          "draw-attribute",
+          [
+            3855,
+            2827,
+            48
+          ]
+        ],
+        [
+          "font-draw-text",
+          334,
+          44,
+          "426574612020"
+        ],
+        [
+          "draw-attribute",
+          [
+            257,
+            2827,
+            192
+          ]
+        ],
+        [
+          "font-draw-text",
+          334,
+          56,
+          "2047616d6d61"
+        ]
+      ],
+      "native_commands": [
+        {
+          "kind": "mode",
+          "mode": 1,
+          "attrs": [
+            257,
+            2827,
+            192
+          ]
+        },
+        {
+          "kind": "rect",
+          "rect": [
+            331,
+            17,
+            385,
+            20
+          ],
+          "color": 1
+        },
+        {
+          "kind": "rect",
+          "rect": [
+            331,
+            71,
+            385,
+            68
+          ],
+          "color": 1
+        },
+        {
+          "kind": "rect",
+          "rect": [
+            331,
+            20,
+            334,
+            68
+          ],
+          "color": 1
+        },
+        {
+          "kind": "rect",
+          "rect": [
+            382,
+            20,
+            385,
+            68
+          ],
+          "color": 1
+        },
+        {
+          "kind": "mode",
+          "mode": 0,
+          "attrs": [
+            2827,
+            257,
+            0
+          ]
+        },
+        {
+          "kind": "rect",
+          "rect": [
+            333,
+            19,
+            383,
+            20
+          ],
+          "color": 11
+        },
+        {
+          "kind": "rect",
+          "rect": [
+            333,
+            69,
+            383,
+            68
+          ],
+          "color": 11
+        },
+        {
+          "kind": "rect",
+          "rect": [
+            333,
+            20,
+            334,
+            68
+          ],
+          "color": 11
+        },
+        {
+          "kind": "rect",
+          "rect": [
+            382,
+            20,
+            383,
+            68
+          ],
+          "color": 11
+        },
+        {
+          "kind": "mode",
+          "mode": 1,
+          "attrs": [
+            257,
+            2827,
+            192
+          ]
+        },
+        {
+          "kind": "mode",
+          "mode": 1,
+          "attrs": [
+            257,
+            2827,
+            192
+          ]
+        },
+        {
+          "kind": "text",
+          "x": 334,
+          "y": 20,
+          "text_hex": "20416c706861",
+          "mode": 1,
+          "clear": 0
+        },
+        {
+          "kind": "mode",
+          "mode": 1,
+          "attrs": [
+            257,
+            2827,
+            192
+          ]
+        },
+        {
+          "kind": "text",
+          "x": 334,
+          "y": 32,
+          "text_hex": "202d2d2d2d20",
+          "mode": 1,
+          "clear": 0
+        },
+        {
+          "kind": "mode",
+          "mode": 3,
+          "attrs": [
+            3855,
+            2827,
+            48
+          ]
+        },
+        {
+          "kind": "text",
+          "x": 334,
+          "y": 44,
+          "text_hex": "c26574612020",
+          "mode": 3,
+          "clear": 1
+        },
+        {
+          "kind": "mode",
+          "mode": 1,
+          "attrs": [
+            257,
+            2827,
+            192
+          ]
+        },
+        {
+          "kind": "text",
+          "x": 334,
+          "y": 56,
+          "text_hex": "2047616d6d61",
+          "mode": 1,
+          "clear": 0
+        }
+      ]
+    },
+    {
+      "case": "dropdown-render/menu-3",
+      "menu_index": 3,
+      "title_x": 42,
+      "title_width_cells": 82,
+      "equal": true,
+      "saved_rect": {
+        "original": [
+          346,
+          17,
+          410,
+          71
+        ],
+        "native": [
+          346,
+          17,
+          410,
+          71
+        ]
+      },
+      "mode_count": {
+        "original": 7,
+        "native": 7
+      },
+      "primitive_count": {
+        "original": 8,
+        "native": 8
+      },
+      "text_count": {
+        "original": 4,
+        "native": 4
+      },
+      "trace_match": {
+        "attributes": true,
+        "primitives": true,
+        "text": true
+      },
+      "original_trace": [
+        [
+          "draw-attribute",
+          [
+            257,
+            2827,
+            192
+          ]
+        ],
+        [
+          "draw-primitive",
+          [
+            351,
+            17,
+            405,
+            20,
+            1
+          ]
+        ],
+        [
+          "draw-primitive",
+          [
+            351,
+            71,
+            405,
+            68,
+            1
+          ]
+        ],
+        [
+          "draw-primitive",
+          [
+            351,
+            20,
+            354,
+            68,
+            1
+          ]
+        ],
+        [
+          "draw-primitive",
+          [
+            402,
+            20,
+            405,
+            68,
+            1
+          ]
+        ],
+        [
+          "draw-attribute",
+          [
+            2827,
+            257,
+            0
+          ]
+        ],
+        [
+          "draw-primitive",
+          [
+            353,
+            19,
+            403,
+            20,
+            11
+          ]
+        ],
+        [
+          "draw-primitive",
+          [
+            353,
+            69,
+            403,
+            68,
+            11
+          ]
+        ],
+        [
+          "draw-primitive",
+          [
+            353,
+            20,
+            354,
+            68,
+            11
+          ]
+        ],
+        [
+          "draw-primitive",
+          [
+            402,
+            20,
+            403,
+            68,
+            11
+          ]
+        ],
+        [
+          "draw-attribute",
+          [
+            257,
+            2827,
+            192
+          ]
+        ],
+        [
+          "draw-attribute",
+          [
+            257,
+            2827,
+            192
+          ]
+        ],
+        [
+          "font-draw-text",
+          354,
+          20,
+          "20416c706861"
+        ],
+        [
+          "draw-attribute",
+          [
+            257,
+            2827,
+            192
+          ]
+        ],
+        [
+          "font-draw-text",
+          354,
+          32,
+          "202d2d2d2d20"
+        ],
+        [
+          "draw-attribute",
+          [
+            3855,
+            2827,
+            48
+          ]
+        ],
+        [
+          "font-draw-text",
+          354,
+          44,
+          "426574612020"
+        ],
+        [
+          "draw-attribute",
+          [
+            257,
+            2827,
+            192
+          ]
+        ],
+        [
+          "font-draw-text",
+          354,
+          56,
+          "2047616d6d61"
+        ]
+      ],
+      "native_commands": [
+        {
+          "kind": "mode",
+          "mode": 1,
+          "attrs": [
+            257,
+            2827,
+            192
+          ]
+        },
+        {
+          "kind": "rect",
+          "rect": [
+            351,
+            17,
+            405,
+            20
+          ],
+          "color": 1
+        },
+        {
+          "kind": "rect",
+          "rect": [
+            351,
+            71,
+            405,
+            68
+          ],
+          "color": 1
+        },
+        {
+          "kind": "rect",
+          "rect": [
+            351,
+            20,
+            354,
+            68
+          ],
+          "color": 1
+        },
+        {
+          "kind": "rect",
+          "rect": [
+            402,
+            20,
+            405,
+            68
+          ],
+          "color": 1
+        },
+        {
+          "kind": "mode",
+          "mode": 0,
+          "attrs": [
+            2827,
+            257,
+            0
+          ]
+        },
+        {
+          "kind": "rect",
+          "rect": [
+            353,
+            19,
+            403,
+            20
+          ],
+          "color": 11
+        },
+        {
+          "kind": "rect",
+          "rect": [
+            353,
+            69,
+            403,
+            68
+          ],
+          "color": 11
+        },
+        {
+          "kind": "rect",
+          "rect": [
+            353,
+            20,
+            354,
+            68
+          ],
+          "color": 11
+        },
+        {
+          "kind": "rect",
+          "rect": [
+            402,
+            20,
+            403,
+            68
+          ],
+          "color": 11
+        },
+        {
+          "kind": "mode",
+          "mode": 1,
+          "attrs": [
+            257,
+            2827,
+            192
+          ]
+        },
+        {
+          "kind": "mode",
+          "mode": 1,
+          "attrs": [
+            257,
+            2827,
+            192
+          ]
+        },
+        {
+          "kind": "text",
+          "x": 354,
+          "y": 20,
+          "text_hex": "20416c706861",
+          "mode": 1,
+          "clear": 0
+        },
+        {
+          "kind": "mode",
+          "mode": 1,
+          "attrs": [
+            257,
+            2827,
+            192
+          ]
+        },
+        {
+          "kind": "text",
+          "x": 354,
+          "y": 32,
+          "text_hex": "202d2d2d2d20",
+          "mode": 1,
+          "clear": 0
+        },
+        {
+          "kind": "mode",
+          "mode": 3,
+          "attrs": [
+            3855,
+            2827,
+            48
+          ]
+        },
+        {
+          "kind": "text",
+          "x": 354,
+          "y": 44,
+          "text_hex": "c26574612020",
+          "mode": 3,
+          "clear": 1
+        },
+        {
+          "kind": "mode",
+          "mode": 1,
+          "attrs": [
+            257,
+            2827,
+            192
+          ]
+        },
+        {
+          "kind": "text",
+          "x": 354,
+          "y": 56,
+          "text_hex": "2047616d6d61",
+          "mode": 1,
+          "clear": 0
+        }
+      ]
+    },
+    {
+      "case": "dropdown-render/menu-4",
+      "menu_index": 4,
+      "title_x": 46,
+      "title_width_cells": 86,
+      "equal": true,
+      "saved_rect": {
+        "original": [
+          366,
+          17,
+          430,
+          71
+        ],
+        "native": [
+          366,
+          17,
+          430,
+          71
+        ]
+      },
+      "mode_count": {
+        "original": 7,
+        "native": 7
+      },
+      "primitive_count": {
+        "original": 8,
+        "native": 8
+      },
+      "text_count": {
+        "original": 4,
+        "native": 4
+      },
+      "trace_match": {
+        "attributes": true,
+        "primitives": true,
+        "text": true
+      },
+      "original_trace": [
+        [
+          "draw-attribute",
+          [
+            257,
+            2827,
+            192
+          ]
+        ],
+        [
+          "draw-primitive",
+          [
+            371,
+            17,
+            425,
+            20,
+            1
+          ]
+        ],
+        [
+          "draw-primitive",
+          [
+            371,
+            71,
+            425,
+            68,
+            1
+          ]
+        ],
+        [
+          "draw-primitive",
+          [
+            371,
+            20,
+            374,
+            68,
+            1
+          ]
+        ],
+        [
+          "draw-primitive",
+          [
+            422,
+            20,
+            425,
+            68,
+            1
+          ]
+        ],
+        [
+          "draw-attribute",
+          [
+            2827,
+            257,
+            0
+          ]
+        ],
+        [
+          "draw-primitive",
+          [
+            373,
+            19,
+            423,
+            20,
+            11
+          ]
+        ],
+        [
+          "draw-primitive",
+          [
+            373,
+            69,
+            423,
+            68,
+            11
+          ]
+        ],
+        [
+          "draw-primitive",
+          [
+            373,
+            20,
+            374,
+            68,
+            11
+          ]
+        ],
+        [
+          "draw-primitive",
+          [
+            422,
+            20,
+            423,
+            68,
+            11
+          ]
+        ],
+        [
+          "draw-attribute",
+          [
+            257,
+            2827,
+            192
+          ]
+        ],
+        [
+          "draw-attribute",
+          [
+            257,
+            2827,
+            192
+          ]
+        ],
+        [
+          "font-draw-text",
+          374,
+          20,
+          "20416c706861"
+        ],
+        [
+          "draw-attribute",
+          [
+            257,
+            2827,
+            192
+          ]
+        ],
+        [
+          "font-draw-text",
+          374,
+          32,
+          "202d2d2d2d20"
+        ],
+        [
+          "draw-attribute",
+          [
+            3855,
+            2827,
+            48
+          ]
+        ],
+        [
+          "font-draw-text",
+          374,
+          44,
+          "426574612020"
+        ],
+        [
+          "draw-attribute",
+          [
+            257,
+            2827,
+            192
+          ]
+        ],
+        [
+          "font-draw-text",
+          374,
+          56,
+          "2047616d6d61"
+        ]
+      ],
+      "native_commands": [
+        {
+          "kind": "mode",
+          "mode": 1,
+          "attrs": [
+            257,
+            2827,
+            192
+          ]
+        },
+        {
+          "kind": "rect",
+          "rect": [
+            371,
+            17,
+            425,
+            20
+          ],
+          "color": 1
+        },
+        {
+          "kind": "rect",
+          "rect": [
+            371,
+            71,
+            425,
+            68
+          ],
+          "color": 1
+        },
+        {
+          "kind": "rect",
+          "rect": [
+            371,
+            20,
+            374,
+            68
+          ],
+          "color": 1
+        },
+        {
+          "kind": "rect",
+          "rect": [
+            422,
+            20,
+            425,
+            68
+          ],
+          "color": 1
+        },
+        {
+          "kind": "mode",
+          "mode": 0,
+          "attrs": [
+            2827,
+            257,
+            0
+          ]
+        },
+        {
+          "kind": "rect",
+          "rect": [
+            373,
+            19,
+            423,
+            20
+          ],
+          "color": 11
+        },
+        {
+          "kind": "rect",
+          "rect": [
+            373,
+            69,
+            423,
+            68
+          ],
+          "color": 11
+        },
+        {
+          "kind": "rect",
+          "rect": [
+            373,
+            20,
+            374,
+            68
+          ],
+          "color": 11
+        },
+        {
+          "kind": "rect",
+          "rect": [
+            422,
+            20,
+            423,
+            68
+          ],
+          "color": 11
+        },
+        {
+          "kind": "mode",
+          "mode": 1,
+          "attrs": [
+            257,
+            2827,
+            192
+          ]
+        },
+        {
+          "kind": "mode",
+          "mode": 1,
+          "attrs": [
+            257,
+            2827,
+            192
+          ]
+        },
+        {
+          "kind": "text",
+          "x": 374,
+          "y": 20,
+          "text_hex": "20416c706861",
+          "mode": 1,
+          "clear": 0
+        },
+        {
+          "kind": "mode",
+          "mode": 1,
+          "attrs": [
+            257,
+            2827,
+            192
+          ]
+        },
+        {
+          "kind": "text",
+          "x": 374,
+          "y": 32,
+          "text_hex": "202d2d2d2d20",
+          "mode": 1,
+          "clear": 0
+        },
+        {
+          "kind": "mode",
+          "mode": 3,
+          "attrs": [
+            3855,
+            2827,
+            48
+          ]
+        },
+        {
+          "kind": "text",
+          "x": 374,
+          "y": 44,
+          "text_hex": "c26574612020",
+          "mode": 3,
+          "clear": 1
+        },
+        {
+          "kind": "mode",
+          "mode": 1,
+          "attrs": [
+            257,
+            2827,
+            192
+          ]
+        },
+        {
+          "kind": "text",
+          "x": 374,
+          "y": 56,
+          "text_hex": "2047616d6d61",
+          "mode": 1,
+          "clear": 0
+        }
+      ]
+    }
+  ],
+  "resource_smoke": {
+    "executable_sha256": "67b43094cfee69bede6f349b296c1ef8f0970ac3f46e7f7089e8a6f5c7bda3ff",
+    "reference_font_manifest_sha256": "ccfb943edb92e17108bb3a74fa326052ab940839f9199df743182ef6280a5aa9",
+    "reference_font_8x14_sha256": "657ca6588b6bf729f0ed71a3d3c781a465bd30cdfb11eb5fc7e27594c0717ea1",
+    "observation": "actual SHARED menu id 0: 5 enabled title menus rasterized with DOSBox Staging/v0.83.0/7b40053b7ac580843d0461eba8c36a47a990e66c; 5 highlight rows and exact saved-rect restoration passed"
+  },
+  "compared": [
+    "saved dropdown rect",
+    "exact ordered graphics attribute tuples",
+    "all eight negative-width primitive coordinate/color tuples",
+    "padded text sink bytes and coordinates"
+  ],
+  "primitive_driver_contract": {
+    "source": "S00 o00_31AD_16A9, selected by the fourth g_3DF8 driver entry; its entry swaps reversed endpoints using unsigned comparisons, then the shared body at 16FC/1702/1736 fills a half-open rect with color & 0x0f.",
+    "executor": "portable_fill_rect normalizes the coordinates and performs a clipped half-open indexed fill.",
+    "direct_DOS_framebuffer_comparison": false
+  },
+  "glyph_color_contract": {
+    "source": "S00 m31AD glyph path loads g_3DE0 and g_3DE2, uses their low four planes for foreground/background; the path does not reference g_3DE4.",
+    "pattern_attributes": "The source mode tuples retain pattern values 0, 0xc0 and 0x30. They are not applied to glyph rasterization because the DOS glyph path does not read the fill-pattern byte.",
+    "reference_font": "DOSBox Staging v0.83.0 reference 8x14 glyph table; host reference only, not evidence of the original machine BIOS contents.",
+    "direct_DOS_framebuffer_comparison": false
+  },
+  "boundaries": [
+    "Original DOS code is compared for the exact ordered mode tuples, primitive call tuples, and padded text sink bytes/coordinates; those trace checks are not pixel-equality proof.",
+    "The actual SHARED kind-6 id 0 asset smoke executes the native indexed rasterizer for five enabled dropdowns and checks highlight plus saved-rectangle restoration.",
+    "Popup/context menus and SDL integration remain outside this renderer."
+  ]
+}

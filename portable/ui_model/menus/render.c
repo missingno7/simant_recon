@@ -36,8 +36,25 @@ static void draw_text(PortableFramebuffer *framebuffer,
                       int mode)
 {
     size_t char_index;
-    uint8_t foreground = mode == 3 ? colors->highlighted_foreground
-                                   : colors->normal_foreground;
+    uint8_t foreground, background;
+    switch (mode) {
+    case 0:
+        foreground = colors->background;
+        background = colors->normal_foreground;
+        break;
+    case 1:
+        foreground = colors->normal_foreground;
+        background = colors->background;
+        break;
+    case 2:
+        foreground = colors->highlighted_foreground;
+        background = colors->normal_foreground;
+        break;
+    default: /* mode 3 */
+        foreground = colors->highlighted_foreground;
+        background = colors->background;
+        break;
+    }
     for (char_index = 0; char_index < command->text_length; ++char_index) {
         uint8_t code = command->text[char_index];
         int64_t glyph_x = (int64_t)command->x + (int64_t)char_index * 8;
@@ -50,7 +67,7 @@ static void draw_text(PortableFramebuffer *framebuffer,
             for (column = 0; column < 8; ++column) {
                 int64_t x = glyph_x + column;
                 uint8_t color = (bits & (uint8_t)(0x80u >> column))
-                    ? foreground : colors->background;
+                    ? foreground : background;
                 if (x >= INT32_MIN && x <= INT32_MAX &&
                     y >= INT32_MIN && y <= INT32_MAX)
                     portable_put_pixel(framebuffer, (int32_t)x, (int32_t)y, color);
@@ -75,7 +92,7 @@ PortableRenderStatus portable_menu_render_draw_plan(
         const PortableMenuDrawCommand *command = &commands[i];
         switch (command->kind) {
         case PORTABLE_MENU_DRAW_SET_COLOR_MODE:
-            if (command->source_color_mode != 1 && command->source_color_mode != 3)
+            if (command->source_color_mode < 0 || command->source_color_mode > 3)
                 return PORTABLE_RENDER_UNSUPPORTED_MODE;
             break;
         case PORTABLE_MENU_DRAW_FILL_RECT:
@@ -93,7 +110,7 @@ PortableRenderStatus portable_menu_render_draw_plan(
             break;
         case PORTABLE_MENU_DRAW_TEXT:
             mode = command->source_color_mode;
-            if (mode != 1 && mode != 3)
+            if (mode < 0 || mode > 3)
                 return PORTABLE_RENDER_UNSUPPORTED_MODE;
             if (command->text == NULL || command->text_length == 0 ||
                 (command->clear_first_high_bit &&
@@ -106,4 +123,34 @@ PortableRenderStatus portable_menu_render_draw_plan(
         }
     }
     return PORTABLE_RENDER_OK;
+}
+
+PortableRenderStatus portable_menu_render_active_title(
+    PortableFramebuffer *framebuffer,
+    const PortableBiosFontBitmap *font,
+    const PortableMenuRasterColors *colors,
+    const PortableMenuBar *menu,
+    const PortableMenuLayout *layout,
+    size_t title_index)
+{
+    const PortableMenuString *title;
+    const uint8_t *bytes;
+    PortableMenuDrawCommand command;
+    if (menu == NULL || layout == NULL || title_index >= menu->titles.count ||
+        title_index >= layout->title_count)
+        return PORTABLE_RENDER_INVALID_ARGUMENT;
+    title = portable_menu_title(menu, title_index);
+    bytes = portable_menu_string_bytes(menu, title);
+    if (title == NULL || bytes == NULL || title->length == 0)
+        return PORTABLE_RENDER_INVALID_ARGUMENT;
+    command = (PortableMenuDrawCommand){0};
+    command.kind = PORTABLE_MENU_DRAW_TEXT;
+    command.source_color_mode = (bytes[0] & 0x80u) != 0 ? 2 : 0;
+    command.x = layout->title_x[title_index];
+    command.y = 1;
+    command.text = bytes;
+    command.text_length = title->length;
+    command.clear_first_high_bit = (uint8_t)((bytes[0] & 0x80u) != 0);
+    return portable_menu_render_draw_plan(framebuffer, font, colors,
+                                           &command, 1);
 }

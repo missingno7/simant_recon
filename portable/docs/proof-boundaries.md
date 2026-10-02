@@ -213,3 +213,54 @@ modal/RNG snapshots are retained. This is a bounded host integration test,
 not a DOS state/pixel comparison or a save/quit implementation claim. The
 earlier 58-second default-speed timeout is preserved; source pacing makes
 that timeout insufficient to reach the game-over point.
+
+The [S11 menu adapter comparison](../tests/menus/evidence/procmenu-next7-dos-differential-adapter-20261002.json)
+passes 84 original-DOS/native cases. Its bridge constructs the seven-word S11
+event, with command at byte 12, rather than reusing the eight-word S22 edit
+event. Tests include FD-prefixed words and a wrong-layout negative control.
+SetPause and SetMenuEntries execute source bodies; other host operations are
+controlled leaves. This proves that finite source-dispatch boundary, not live
+menu, save, quit or NewGame lifecycle behavior. The new engine action places
+this bridge inside its normal state/RNG/host binding and terminal failure
+boundary; its integration checks are recorded separately.
+
+The [next8 profile](recovered-source-next8-recipe.md) corrects the S24 history
+event's host-width `unsigned` to the source ABI's 16-bit `uint16_t`. All 25 TUs
+compile and 64 directed original-DOS/native callback traces match. A prior-width
+control misses branches when the following event word is nonzero. State files
+and the other 24 modules retain their next7 identities. The 768-tick next7
+receipt is preserved as that profile's evidence, rather than renamed.
+
+The control-window renderer has a [45-command original-DOS trace](../tests/setup/render_controls/evidence/control-window-render-trace.json)
+and a [separate native raster receipt](../tests/setup/render_controls/evidence/control-window-raster.json).
+The latter uses active HCEGANT geometry, fonts, colors and knob resource,
+preserves caller clipping, and has no direct DOS framebuffer comparison.
+Those two fixtures use different initial window geometry and are not combined
+into a pixel-equivalence claim. Live composition now paints Edit contents and
+each ribbon with their owning window during the back-to-front pass, so a front
+window can cover them. Complete control interaction remains separate.
+
+The [legacy save codec](../tests/save/evidence/legacy-save-codec-v1/README.md)
+validates the source-derived 307-record, 48,386-byte payload mechanically with
+synthetic fields. It requires every binding and prevalidates decode destinations.
+Seven source-state bindings are still being added; it does not yet prove an
+original-DOS SaveGame write or provide live filesystem/save/load services.
+
+The [49-suite native integration gate](../tests/evidence/current/20261002/native-gate-49-menu-controls-final-20261002.json)
+passes with stable compiler inputs, including dropdown command plans, active
+menu title modes, and resource-backed control rasterization. Its SDL host test
+compares 224,000 exported presentation pixels against the host fixture and
+checks keyboard, quit, and monotonic-clock boundaries. These are native host
+checks; they add no original-DOS differential cases to the frozen certificate.
+
+The [fresh 84-case menu packet](../tests/menus/evidence/procmenu-next7-dos-differential-adapter-complete-closure-20261002.json)
+pins the compiler's non-system dependency closure and records stable inputs
+before and after execution. The previous receipts remain preserved. The
+[21-case engine packet](../tests/menus/evidence/engine-procmenu-next7-selected-closure-20261002.json)
+checks the public command boundary after one source simulation tick; menu
+actions preserve RNG and tick counts and clean up their state bindings.
+It explicitly retains the unsupported `StopSong` service reached by FD32.
+
+`portable/.gitattributes` preserves byte-pinned native source and evidence
+inputs during checkout. It applies only to the port tree and does not change
+historical reconstruction files or their frozen identities.

@@ -70,10 +70,34 @@ static void check_draw_plan(const char *assets)
     commands[2].source_color_mode = 0;
     assert(portable_menu_render_draw_plan(&framebuffer, &font, &colors,
                                           commands, command_count) ==
+           PORTABLE_RENDER_OK);
+    assert(pixels[1 * 640] == 14 && pixels[1 * 640 + 1] == 7);
+    commands[2].source_color_mode = 2;
+    assert(portable_menu_render_draw_plan(&framebuffer, &font, &colors,
+                                          commands, command_count) ==
+           PORTABLE_RENDER_OK);
+    assert(pixels[1 * 640] == 12 && pixels[1 * 640 + 1] == 7);
+    /* The active title consumes the state bit in a private glyph view. */
+    {
+        const PortableMenuString *title = portable_menu_title(&menu, 0);
+        const uint8_t *bytes = portable_menu_string_bytes(&menu, title);
+        assert(bytes != NULL && bytes[0] == 0xa0);
+        assert(portable_menu_render_active_title(&framebuffer, &font, &colors,
+                &menu, &layout, 0) == PORTABLE_RENDER_OK);
+        assert(pixels[1 * 640] == 12 && pixels[1 * 640 + 1] == 7);
+        assert(bytes[0] == 0xa0);
+        assert(portable_menu_render_active_title(&framebuffer, &font, &colors,
+                &menu, &layout, menu.titles.count) ==
+               PORTABLE_RENDER_INVALID_ARGUMENT);
+    }
+    commands[2].source_color_mode = 4;
+    assert(portable_menu_render_draw_plan(&framebuffer, &font, &colors,
+                                          commands, command_count) ==
            PORTABLE_RENDER_UNSUPPORTED_MODE);
     puts("actual_resource=fallback-id0 kind6 titles=5 drawplan=7 commands\n"
          "screen=640x20 fill=source-index-3 normal=7/14 highlight=12/14 "
-         "MSB-first=pass high-bit-private-clear=pass unsupported-mode=fail-closed");
+         "active=14/7 disabled-active=12/7 MSB-first=pass "
+         "high-bit-private-clear=pass unsupported-mode=fail-closed");
     portable_menu_release(&menu);
     portable_db_close(&shared);
 }

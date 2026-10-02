@@ -19,12 +19,24 @@ PortableRenderStatus portable_menu_raster_colors_for_width(
 
 /* Applies the already source-derived f_1FD2_0663 draw plan. BIOS font bytes
  * are caller-owned reference-host glyphs, never game resource data. Glyphs
- * use the source's normal/highlight foreground and shared text background. */
+ * use source modes 0..3: mode 0 active title (reverse normal colors), mode 1
+ * normal text, mode 2 disabled active title, and mode 3 disabled normal text. */
 PortableRenderStatus portable_menu_render_draw_plan(
     PortableFramebuffer *framebuffer,
     const PortableBiosFontBitmap *font,
     const PortableMenuRasterColors *colors,
     const PortableMenuDrawCommand *commands,
     size_t command_count);
+
+/* Draw one active title as S10's f_1FD2_0008(x, 1, 0, title). A leading source
+ * state bit selects mode 2 and is cleared only for glyph lookup; the menu
+ * record itself is never modified. */
+PortableRenderStatus portable_menu_render_active_title(
+    PortableFramebuffer *framebuffer,
+    const PortableBiosFontBitmap *font,
+    const PortableMenuRasterColors *colors,
+    const PortableMenuBar *menu,
+    const PortableMenuLayout *layout,
+    size_t title_index);
 
 #endif

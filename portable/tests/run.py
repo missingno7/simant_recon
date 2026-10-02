@@ -40,6 +40,9 @@ UNITS = {
     "menus": ("menus/test_menu.c", ["assets"]),
     "menu_render": ("menus/test_menu_render.c", ["assets"]),
     "menu_interaction": ("menus/test_menu_interaction.c", ["assets/SHARED"]),
+    "dropdown_render": ("menus/test_dropdown_render.c", []),
+    "control_render": ("setup/render_controls/test_control_render.c", []),
+    "control_raster": ("setup/render_controls/test_control_raster.c", ["assets"]),
     "menu_quit": ("dialogs/test_menu_quit.c", ["assets/SHARED"]),
     "window_zoom": ("windows_zoom/test_zoom.c", []),
     "ribbon": ("windows/test_ribbon.c", []),
@@ -100,8 +103,7 @@ def main() -> None:
                       *(p for folder in ("game/simulation", "game/state", "game/resources", "game/render",
                                          "render", "ui_model", "audio")
                         for p in (PORT / folder).rglob("*.c")
-                        if p.name != "dropdown_render.c" and
-                        not p.is_relative_to(PORT / "ui_model/windows/control_render"))])
+                        if p.name not in {"control_events.c", "history_render.c"})])
     selected_units=args.suite or sorted(name for name in UNITS if name != "session_bridge")
     generated_sources=[]
     profile_include=[]

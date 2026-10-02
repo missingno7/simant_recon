@@ -38,6 +38,7 @@ void portable_live_game_mark_presented(PortableLiveGame *game) { (void)game; }
 
 #include "picture_modal.h"
 #include "scenario_modal.h"
+#include "menu_modal.h"
 #include "../../game/recovered/engine.h"
 #include "../../game/timing.h"
 #include "../../ui_model/input/input.h"
@@ -47,6 +48,7 @@ void portable_live_game_mark_presented(PortableLiveGame *game) { (void)game; }
 #include "../../ui_model/windows/open.h"
 #include "../../ui_model/windows/operations.h"
 #include "../../ui_model/windows/ribbon.h"
+#include "../../ui_model/windows/control_render/control_input_from_session.h"
 #include "../../ui_model/menus/render.h"
 #include "../../ui_model/dialogs/end_game_view.h"
 
@@ -101,6 +103,10 @@ struct PortableLiveGame {
     uint8_t frame_pending;
     int quit_requested;
     uint8_t control_down;
+    /* TU-private g_1B62/g_1B64 begin at one. Their toggle handlers remain
+     * explicit unsupported input boundaries until they own these fields. */
+    int16_t mode_percent;
+    int16_t caste_percent;
     uint8_t faulted;
     int16_t source_clip_window;
     int16_t source_clip_stack[16];
@@ -864,15 +870,47 @@ static int draw_map_overview(PortableLiveGame *game,
     return 1;
 }
 
-static int redraw_scene(PortableLiveGame *game, const SimSession *scene_session)
+static int draw_control_window(PortableLiveGame *game, SimSession *scene_session,
+                                SimSetupControlKind kind)
+{
+    SimControlRenderBinding binding;
+    SimControlRecoveredVisualState visual;
+    RecoveredState *source;
+    unsigned index = (unsigned)kind;
+    if (scene_session->controls[index].animation_resource !=
+            game->session->controls[index].animation_resource ||
+        scene_session->controls[index].animation_resource != NULL) {
+        set_error(game, "control animation has no current host resource resolver");
+        return 0;
+    }
+    source = malloc(sizeof(*source));
+    if (source == NULL || !sim_recovered_engine_snapshot(&game->engine, source)) {
+        free(source);
+        set_error(game, "control render has no current source-state snapshot");
+        return 0;
+    }
+    visual.mode_percent = game->mode_percent;
+    visual.caste_percent = game->caste_percent;
+    memcpy(visual.mode_population, source->fd_50F6_0B12,
+           sizeof visual.mode_population);
+    free(source);
+    if (sim_control_render_binding_from_session(scene_session, game->renderer,
+            kind, 3, &visual, NULL, NULL, &binding) != SIM_CONTROL_SESSION_INPUT_OK ||
+        sim_control_render_raster(&binding.input, &binding.raster) !=
+            PORTABLE_RENDER_OK) {
+        set_error(game, "source control-window raster failed");
+        return 0;
+    }
+    return 1;
+}
+
+static int redraw_scene(PortableLiveGame *game, SimSession *scene_session)
 {
     PortableGameViewState state;
     PortableGameView view;
     PortableGameViewRenderResult result;
     PortableGameViewStatus status;
     PortableFramebuffer *fb;
-    PortableRect ribbon_exclusions[3];
-    size_t ribbon_exclusion_count = 0;
     int order_index;
     if (game == NULL || scene_session == NULL || game->renderer == NULL ||
         game->renderer->framebuffer == NULL)
@@ -884,53 +922,6 @@ static int redraw_scene(PortableLiveGame *game, const SimSession *scene_session)
         return 0;
     }
     if (!refresh_titles(game, &scene_session->world)) return 0;
-    memset(fb->pixels, 0, (size_t)fb->stride * fb->height);
-    portable_framebuffer_set_clip(fb, (PortableRect){0, 0, fb->width, fb->height});
-
-    /* The source order list is front-to-back. Paint it back-to-front so the
-     * actual front window remains visible; the map cells are the Edit
-     * viewport contents and are clipped over its base surface afterwards. */
-    for (order_index = (int)game->windows.open_count - 1;
-         order_index >= 0; --order_index) {
-        uint16_t index = (uint16_t)game->windows.order[order_index] >> 8;
-        if (!draw_open_window(game, index)) return 0;
-        if (index == 1 && !draw_map_overview(game, scene_session)) return 0;
-    }
-    {
-        static const PortableRibbonTarget targets[] = {
-            PORTABLE_RIBBON_EDIT_SURFACE, PORTABLE_RIBBON_MAP,
-            PORTABLE_RIBBON_YARD
-        };
-        static const uint16_t target_windows[] = { 0, 1, 0x19 };
-        size_t ribbon_index;
-        for (ribbon_index = 0;
-             ribbon_index < sizeof(targets) / sizeof(targets[0]);
-             ++ribbon_index) {
-            PortableRibbonRenderResult ribbon_result;
-            int visible =
-                (game->windows.windows[target_windows[ribbon_index]].flags &
-                 PORTABLE_WINDOW_OPEN) != 0;
-            if (targets[ribbon_index] == PORTABLE_RIBBON_YARD &&
-                scene_session->world.queens_black <= 1)
-                visible = 0;
-            PortableRibbonStatus ribbon_status = portable_ribbon_render_current(
-                &game->ribbons, &scene_session->advice, targets[ribbon_index],
-                game->registry, game->renderer, visible,
-                ribbon_tick_provider, game, &ribbon_result);
-            if (ribbon_status != PORTABLE_RIBBON_OK) {
-                set_error(game, portable_ribbon_status_string(ribbon_status));
-                return 0;
-            }
-            if (ribbon_result.has_clip_exclusion && ribbon_result.message_live) {
-                PortableRect *rect = &ribbon_exclusions[ribbon_exclusion_count++];
-                rect->left = ribbon_result.text_rect.left;
-                rect->top = ribbon_result.text_rect.top;
-                rect->right = ribbon_result.text_rect.right;
-                rect->bottom = ribbon_result.text_rect.bottom;
-            }
-            portable_ribbon_clear_dirty(&game->ribbons, targets[ribbon_index]);
-        }
-    }
     state.ega_profile = game->registry->profile_id;
     state.pheromone_mode = scene_session->world.source_state_07be;
     state.animation_base = scene_session->world.source_state_049a;
@@ -945,8 +936,45 @@ static int redraw_scene(PortableLiveGame *game, const SimSession *scene_session)
         set_error(game, portable_game_view_status_string(status));
         return 0;
     }
-    if (!render_game_view(game, scene_session, &view, &result,
-                          ribbon_exclusions, ribbon_exclusion_count)) return 0;
+    memset(fb->pixels, 0, (size_t)fb->stride * fb->height);
+    portable_framebuffer_set_clip(fb, (PortableRect){0, 0, fb->width, fb->height});
+
+    /* The source order list is front-to-back. Paint it back-to-front so the
+     * actual front window remains visible; the map cells are the Edit
+     * viewport contents and are clipped over its base surface afterwards. */
+    for (order_index = (int)game->windows.open_count - 1;
+         order_index >= 0; --order_index) {
+        uint16_t index = (uint16_t)game->windows.order[order_index] >> 8;
+        if (!draw_open_window(game, index)) return 0;
+        if (index == 1 && !draw_map_overview(game, scene_session)) return 0;
+        if (index == 0 && !render_game_view(game, scene_session, &view,
+                                           &result, NULL, 0)) return 0;
+        if (index == 0x12 && !draw_control_window(game, scene_session,
+                                                SIM_SETUP_MODE_CONTROL)) return 0;
+        if (index == 0x13 && !draw_control_window(game, scene_session,
+                                                SIM_SETUP_CASTE_CONTROL)) return 0;
+        /* Paint each ribbon with its owning window. Front windows then cover
+         * both the viewport and its ribbon during the same z-order pass. */
+        if (index == 0 || index == 1 || index == 0x19) {
+            PortableRibbonTarget target = index == 0
+                ? PORTABLE_RIBBON_EDIT_SURFACE
+                : index == 1 ? PORTABLE_RIBBON_MAP : PORTABLE_RIBBON_YARD;
+            PortableRibbonRenderResult ribbon_result;
+            int visible = 1;
+            if (target == PORTABLE_RIBBON_YARD &&
+                scene_session->world.queens_black <= 1)
+                visible = 0;
+            PortableRibbonStatus ribbon_status = portable_ribbon_render_current(
+                &game->ribbons, &scene_session->advice, target,
+                game->registry, game->renderer, visible,
+                ribbon_tick_provider, game, &ribbon_result);
+            if (ribbon_status != PORTABLE_RIBBON_OK) {
+                set_error(game, portable_ribbon_status_string(ribbon_status));
+                return 0;
+            }
+            portable_ribbon_clear_dirty(&game->ribbons, target);
+        }
+    }
     if (game->menu.loaded) {
         PortableMenuRasterColors colors;
         PortableMenuLayout layout;
@@ -990,6 +1018,127 @@ static int redraw_scene(PortableLiveGame *game, const SimSession *scene_session)
 static int redraw(PortableLiveGame *game)
 {
     return game != NULL ? redraw_scene(game, game->session) : 0;
+}
+
+/* A modal consumes release edges itself. Reconcile observed host input before
+ * returning to processEdit, without discarding keys that remain held. */
+static int reconcile_modal_input(PortableLiveGame *game)
+{
+    HostInputState state;
+    size_t i = 0;
+    if (!host_get_input_state(game->host, &state)) {
+        set_error(game, "could not reconcile input after source modal");
+        return 0;
+    }
+    game->cursor_x = state.x;
+    game->cursor_y = state.y;
+    game->left_down = state.left_button_down;
+    game->dos_keyboard_flags = state.dos_modifiers;
+    game->control_down = (state.dos_modifiers & 4u) != 0;
+    while (i < game->held_key_count) {
+        int down;
+        uint8_t scan = (uint8_t)(game->held_keys[i].key >> 8);
+        if (!host_is_dos_scan_down(game->host, scan, &down)) {
+            set_error(game, "could not reconcile held key after source modal");
+            return 0;
+        }
+        if (down) {
+            game->held_keys[i].modifiers = state.dos_modifiers;
+            ++i;
+        } else {
+            game->held_keys[i] = game->held_keys[--game->held_key_count];
+        }
+    }
+    return 1;
+}
+
+static int run_source_menu(PortableLiveGame *game, int16_t x, int16_t y)
+{
+    PortableMenuRasterColors colors;
+    PortableMenuLayout layout;
+    PortableMenuDrawCommand commands[64];
+    PortableMenuModalRequest request;
+    PortableMenuModalResult result;
+    PortableMenuModalStatus status;
+    PortableFramebuffer *fb = game->renderer->framebuffer;
+    size_t count = 0;
+    int title;
+    if (game->registry->profile_id != 0 || game->renderer->bios_fonts == NULL ||
+        portable_menu_raster_colors_for_width(LIVE_SCREEN_WIDTH, &colors) !=
+            PORTABLE_RENDER_OK ||
+        portable_menu_build_draw_plan(&game->menu, 1,
+            (PortableMenuRect){0, 0, LIVE_SCREEN_WIDTH, LIVE_SCREEN_HEIGHT},
+            LIVE_SCREEN_WIDTH, 8, 14, 14, &layout, commands,
+            sizeof(commands) / sizeof(commands[0]), &count) != PORTABLE_MENU_OK) {
+        set_error(game, "source menu layout is unavailable");
+        return 0;
+    }
+    title = portable_menu_title_hit(&game->menu, &layout, x, y);
+    if (title < 0) return 1;
+    memset(&request, 0, sizeof(request));
+    request.menu = &game->menu;
+    request.layout = &layout;
+    request.framebuffer = fb;
+    request.font = &game->renderer->bios_fonts->font_8x14;
+    request.host_palette = game->host_palette;
+    request.screen_width = LIVE_SCREEN_WIDTH;
+    request.screen_height = LIVE_SCREEN_HEIGHT;
+    request.line_height = 14;
+    request.char_width = 8;
+    request.source_g5fea = 7;
+    request.source_g5fec = 14;
+    request.source_g5fee = 12;
+    request.quit_flag = &game->quit_requested;
+    request.initial_x = x;
+    request.initial_y = y;
+    request.initial_left_button_down = 1;
+    for (;;) {
+        request.menu_index = (size_t)title;
+        if (!redraw(game) || portable_menu_render_active_title(fb,
+                request.font, &colors, &game->menu, &layout,
+                request.menu_index) != PORTABLE_RENDER_OK) {
+            set_error(game, "source active menu title could not be rendered");
+            return 0;
+        }
+        status = portable_menu_modal_run(game->host, &request, &result);
+        if (!reconcile_modal_input(game)) return 0;
+        if (status != PORTABLE_MENU_MODAL_PHYSICAL_TITLE_EVENT) break;
+        if (!result.physical_title_index_valid) {
+            set_error(game, "menu title replacement has no title identity");
+            return 0;
+        }
+        /* Host title replacement is an explicit host boundary; it does not
+         * synthesize the DOS window event's unknown xE value. */
+        title = result.physical_title_index;
+        request.initial_x = result.physical_title_x;
+        request.initial_y = result.physical_title_y;
+        request.initial_left_button_down = game->left_down;
+    }
+    game->scheduler.initialized = 0;
+    if (status == PORTABLE_MENU_MODAL_COMMAND) {
+        SimRecoveredEngineStatus action_status =
+            sim_recovered_engine_proc_menu_command(&game->engine,
+                                                  (uint16_t)result.command_id);
+        if (action_status != SIM_RECOVERED_ENGINE_OK) {
+            set_error(game, game->engine.failed_service != NULL ?
+                game->engine.failed_service :
+                sim_recovered_engine_status_string(action_status));
+            return 0;
+        }
+        if (!reconcile_modal_input(game)) return 0;
+        switch (game->engine.recovered.fd_55B3_2CBC) {
+        case 4: set_error(game, "source LoadGame host file service is unavailable"); return 0;
+        case 5: set_error(game, "source SaveGame host file service is unavailable"); return 0;
+        case 6: set_error(game, "source SaveAs host file service is unavailable"); return 0;
+        case 8: set_error(game, "source MenuQuit continuation is unavailable"); return 0;
+        default: break;
+        }
+    } else if (status != PORTABLE_MENU_MODAL_RETURNED &&
+               status != PORTABLE_MENU_MODAL_QUIT) {
+        set_error(game, portable_menu_modal_status_string(status));
+        return 0;
+    }
+    return redraw(game);
 }
 
 typedef struct LiveEndGameBinding {
@@ -1994,6 +2143,8 @@ PortableLiveGame *portable_live_game_create(
     game->host = host;
     game->host_palette = host_palette;
     game->palette = palette;
+    game->mode_percent = 1;
+    game->caste_percent = 1;
     game->started_ns = host_time_ns();
     game->snapshot_session = (SimSession *)malloc(sizeof(*game->snapshot_session));
     if (game->snapshot_session == NULL) {
@@ -2218,6 +2369,13 @@ int portable_live_game_event(PortableLiveGame *game, const HostEvent *event)
                 game->left_down = 1;
                 game->cursor_x = event->x;
                 game->cursor_y = event->y;
+                if (point_in_source_menu_bar(game, event->x, event->y)) {
+                    if (!run_source_menu(game, event->x, event->y)) {
+                        game->faulted = 1;
+                        return 0;
+                    }
+                    return 1;
+                }
                 if (!enqueue_edit_hotbox(game, event->x, event->y)) {
                     game->faulted = 1;
                     return 0;

@@ -1,4 +1,5 @@
 #include "engine.h"
+#include "menu_adapter.h"
 #include "../../ui_model/windows/game_view.h"
 #ifdef SIMANT_ENABLE_BALLOON_STATE_NEXT3
 #include "balloon_adapter.h"
@@ -750,7 +751,7 @@ void OpenEditWindow(void)
 }
 
 /* The original helper accepts one packed int16 result per modal call. The
- * source NewGame consumes the result codes itself, including tutorial 0x207. */
+ * source NewGame consumes the result codes itself, including LoadGame 0x207. */
 int16_t DoScenario(int16_t flag)
 {
     int16_t result;
@@ -1045,14 +1046,16 @@ SimRecoveredEngineStatus sim_recovered_engine_action(
     int jumped;
 #ifdef SIMANT_ENABLE_END_GAME_ACTION_DIAGNOSTIC
     const int needs_nest = action == SIM_RECOVERED_ACTION_RAND_YARD ||
+                          action == SIM_RECOVERED_ACTION_PROC_MENU ||
                           action == SIM_RECOVERED_ACTION_DIAGNOSTIC_END_GAME;
     const SimRecoveredAction last_action = SIM_RECOVERED_ACTION_DIAGNOSTIC_END_GAME;
     if (action == SIM_RECOVERED_ACTION_DIAGNOSTIC_END_GAME) {
         if (a != 0 || b != 0) return SIM_RECOVERED_ENGINE_INVALID_ARGUMENT;
     }
 #else
-    const int needs_nest = action == SIM_RECOVERED_ACTION_RAND_YARD;
-    const SimRecoveredAction last_action = SIM_RECOVERED_ACTION_RAND_YARD;
+    const int needs_nest = action == SIM_RECOVERED_ACTION_RAND_YARD ||
+                          action == SIM_RECOVERED_ACTION_PROC_MENU;
+    const SimRecoveredAction last_action = SIM_RECOVERED_ACTION_PROC_MENU;
 #endif
     if (engine == NULL || !engine->initialized || engine->session == NULL)
         return SIM_RECOVERED_ENGINE_INVALID_ARGUMENT;
@@ -1068,6 +1071,7 @@ SimRecoveredEngineStatus sim_recovered_engine_action(
         (action == SIM_RECOVERED_ACTION_MAP_PLANE && (a < 0 || a > 3)) ||
         (action == SIM_RECOVERED_ACTION_RAND_YARD &&
             (a < 0 || a > 3 || b != 0)) ||
+        (action == SIM_RECOVERED_ACTION_PROC_MENU && b != 0) ||
         action < SIM_RECOVERED_ACTION_PAUSE ||
         action > last_action)
         return SIM_RECOVERED_ENGINE_INVALID_ARGUMENT;
@@ -1124,6 +1128,12 @@ SimRecoveredEngineStatus sim_recovered_engine_action(
         unsupported_call("RandYard requires selected source initControls");
         break;
 #endif
+    case SIM_RECOVERED_ACTION_PROC_MENU: {
+        uint16_t command;
+        memcpy(&command, &a, sizeof(command));
+        sim_recovered_source_proc_menu_command(command);
+        break;
+    }
 #ifdef SIMANT_ENABLE_END_GAME_ACTION_DIAGNOSTIC
     case SIM_RECOVERED_ACTION_DIAGNOSTIC_END_GAME:
         EndGameDialog(0);
@@ -1172,6 +1182,15 @@ interrupted_action:
     active_abort_target = NULL;
     active_engine = NULL;
     return engine->status;
+}
+
+SimRecoveredEngineStatus sim_recovered_engine_proc_menu_command(
+    SimRecoveredEngine *engine, uint16_t command)
+{
+    int16_t source_word;
+    memcpy(&source_word, &command, sizeof(source_word));
+    return sim_recovered_engine_action(engine, SIM_RECOVERED_ACTION_PROC_MENU,
+                                        source_word, 0);
 }
 
 SimRecoveredEngineStatus sim_recovered_engine_process_edit_event(
