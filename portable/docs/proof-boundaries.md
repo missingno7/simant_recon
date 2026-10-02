@@ -292,7 +292,11 @@ V3 remains preserved with its incomplete dependency receipt. V4 still proves
 one controlled SaveGame invocation, rather than 307 independent function cases.
 Its compiler snapshots were taken after the DOS probe, so they do not cover
 that probe's compilation. This execution-identity gap remains explicit while
-a separate receipt refresh takes snapshots before the entire experiment.
+the separate [V5 receipt](../tests/save/evidence/legacy-save-codec-v5/README.md)
+closes that gap. It retains GCC, MSC, and Python identities captured before
+the DOS probe and confirms them after all five native runs. Both positive
+stream comparisons pass; all three negative controls fail as expected. V5
+remains a finite binding experiment, outside the production save lifecycle.
 
 The [history renderer comparison](../tests/history_render/transitive_closure_report.json)
 passes 448 original-DOS cases (48 directed and 400 seeded), comparing ordered

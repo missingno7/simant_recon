@@ -1,0 +1,11 @@
+# Next9 SaveRec binding validation (V5 toolchain-closure refresh)
+
+This packet refreshes V3's 307-row SaveRec source-address sentinel experiment and closes its transitive native-source pin gap. It is diagnostic evidence only; it does not register or claim production save behavior.
+
+The native build uses the unchanged `next9_bindings_v3.c`, `next9_bindings_v3.h`, and row include. The independently derived sentinel catalog contains 410 typed state members; original DOS `SaveGame` executed 307 writes and produced a 48386-byte stream. The two positive native runs (host little endian and forced big endian) matched that stream exactly. The three negative controls failed as intended: swapping rows 48/49, widening row 48, and treating raw row 99 as numeric.
+
+V5 is a receipt hardening refresh, not an acceptance claim. V3's manual pin list omitted the unconditional `legacy_codec.h` include; V4 closed that source gap using per-variant GCC `-MM` closures. Review later found V4's compiler "before" fields were recomputed after its DOS probe. V5 preserves both earlier packets unchanged, captures GCC/MSC binary hashes and GCC version/target plus Python executable/runtime identity before the DOS probe, retains those exact maps, and compares them after all runs. It also records GCC `-MM` local dependency closures for all five variants, pins the original executable and assets, and checks V3/V4 packets and scripts for immutability.
+
+Reproduce from the repository root with `python portable/tests/save/run_next9_bindings_v5.py`. It refuses to overwrite this packet and requires the reviewed Next9 provenance receipt pinned in `source-pins.json`. The profile is read-only input; no Next9 recovery or binding generator is executed. A V5-specific copy of the original DOS probe writes only under `build/workers/savegame_sentinel_v5`. The runner snapshots compiler/Python identities before that probe, obtains GCC `-MM` closures, compiles/runs the two positives and three negatives, checks all inputs remained stable, and writes a fresh V5 directory only after every assertion succeeds.
+
+The contract remains bounded to the recorded source-address sentinel state and exact 307 DOS writer calls. It is not a general save lifecycle, file-system, or arbitrary runtime-state proof.
