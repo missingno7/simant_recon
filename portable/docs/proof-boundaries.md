@@ -240,6 +240,17 @@ into a pixel-equivalence claim. Live composition now paints Edit contents and
 each ribbon with their owning window during the back-to-front pass, so a front
 window can cover them. Complete control interaction remains separate.
 
+The [control event model](../tests/setup/control_events/README.md) matches 34
+directed DOS cases for Auto, presets, percentage toggles, triangle drags,
+current/preset level triples, IdealCaste, and ordered provider arguments.
+Its providers retain explicit window, rendering, help and pointer boundaries.
+[Common type-1 button feedback](../tests/windows/control_preselect/evidence/control-preselect-dos-native-final-20261002.json)
+matches all 65,536 flag values against the original dispatch function, including
+the clip, selection and five-tick wait order. Frame and slider handlers remain
+outside that model. [Group visibility](../tests/windows/group_visible/evidence/group-visible-dos-native-final-20261002.json)
+matches 5,380 cases and 486 ordered inversion events. These finite contracts
+do not establish DOS framebuffer equality or the complete live input path.
+
 The [legacy save codec](../tests/save/evidence/legacy-save-codec-v1/README.md)
 validates the source-derived 307-record, 48,386-byte payload mechanically with
 synthetic fields. It requires every binding and prevalidates decode destinations.

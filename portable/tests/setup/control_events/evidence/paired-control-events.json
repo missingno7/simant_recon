@@ -1,0 +1,5266 @@
+{
+  "schema": "portable-setup-control-events-paired-differential-v1",
+  "status": "PASS",
+  "dos_report_sha256": "b1c31673307ec2b3612d1ced6cf37453dfd9d98e17b47b4b27d66bb26b3ee29e",
+  "native_adapter_sha256": "10e9ab5e558322a5b9e0ad5b8cb998deb06e331ea0e87e1caf847ff187345595",
+  "oracle_sha256": "aa0596c6766322a8229ee3c36e57048c92adc82d50fbe2ef37afb8b85fcf4f11",
+  "original_source_sha256": "ecf807dc3159f583f6ee3ea8a9f5422650a64bb557d4551e9c97b5dcc7b6a1b8",
+  "original_fixture_runner_sha256": "5e86861a344e3e8bd1accb51249f3e236c3776f7a9a2bd460c168839fe7db639",
+  "native_adapter_dll_sha256": "d32ea7d14dc9259566893ecebd4e03d85a9013227a947ff17f58668b0fcd1495",
+  "native_model_sha256": "e51acc262ea3beae4dc8e6c88eb5a55863ec979c60c8646cb3e8b6b24364c427",
+  "native_header_sha256": "3b550ccd3c420ee69fd8aac7cb7a70ae6d0310ef5c7d2058cb5d6b7197529df7",
+  "native_test_sha256": "4a95bdcd5852c8a063dcbab1ca0b58fc3bfb471518a2183e68045fae6d0d9af7",
+  "native_differential_runner_sha256": "b6022dc319bbf03c160d61353a8ff75f57f2456e783a10edebf1fb30c06bd741",
+  "case_count": 34,
+  "mismatch_count": 0,
+  "compiler": {
+    "version": "gcc.exe (Rev10, Built by MSYS2 project) 12.2.0",
+    "flags": [
+      "-std=c11",
+      "-Wall",
+      "-Wextra",
+      "-Werror",
+      "-shared"
+    ]
+  },
+  "transitive_source_pins_before": {
+    "portable/ui_model/windows/control_events.c": "e51acc262ea3beae4dc8e6c88eb5a55863ec979c60c8646cb3e8b6b24364c427",
+    "portable/ui_model/windows/control_events.h": "3b550ccd3c420ee69fd8aac7cb7a70ae6d0310ef5c7d2058cb5d6b7197529df7",
+    "portable/game/simulation/setup.c": "a3251423e769cde8f9b5eef9336cf1a29655b1f7253f78bb770a828a2482dfb7",
+    "portable/game/simulation/setup.h": "ed4d35dc8f58ff5a2225c9418c0387e8e3dba0d9c1a3a19493e190562fe3c3e5",
+    "portable/tests/setup/control_events/native_adapter.c": "10e9ab5e558322a5b9e0ad5b8cb998deb06e331ea0e87e1caf847ff187345595",
+    "portable/tests/setup/control_events/test_control_events.c": "4a95bdcd5852c8a063dcbab1ca0b58fc3bfb471518a2183e68045fae6d0d9af7",
+    "portable/tests/setup/control_events/run_dos_probe.py": "07990c72110c8020bc28794c0ade8ba876dd8bb89c27371c9ed82d7a629b55f8",
+    "portable/tests/setup/control_events/run_paired_differential.py": "b6022dc319bbf03c160d61353a8ff75f57f2456e783a10edebf1fb30c06bd741",
+    "portable/tests/setup/evidence/setup_differential.py": "5e86861a344e3e8bd1accb51249f3e236c3776f7a9a2bd460c168839fe7db639",
+    "portable/tests/windows/evidence/differential_window.py": "ba8172710b3b247e56ea45e6221af4c4f0bddaa905f0eec22e8b98872ecaf0de",
+    "portable/tests/setup/evidence/setup_native_adapter.c": "d8b4dbeb71f3b8fd3470422fc5c8b90e676c04a1df189ca695885f0e797067f4",
+    "tools/behavior.py": "2c0799048057f59eae61a48be4d695278635594484adf0c70bf46c51b4e0c799",
+    "tools/exe.py": "d560f69dcdf0d1c9e89278b50bebe225a9b86db2c259fa54ec9eace6ea05a8b5",
+    "tools/functions.py": "0f67c8d9eb01e319620c9342e79c35f76006091d860894aad6dcf8d61ee2b39e",
+    "tools/match.py": "44fdd8b939b2bbf135d8947d8f6ef6b1854dec133da4af86c55eb94f02869b56",
+    "tools/modctx.py": "33f3a4e3d77371e3095bfeb00358c13bc7838235c27bfe8898dba7e313f1cc25",
+    "tools/modules.py": "8a5c1e85db6970cce3c693c016b313b7ee1922fa6eaf146a00391bfea86edf1a",
+    "tools/compiler.py": "ef1d59a0fbe0e0780a6b8480e13d7d07859a14ae185c00a4420e1238a2ae35bb",
+    "tools/autosearch.py": "9c2727a875ee94c66ceac868d64c7070c316a5dbbef7cd6b21a670b44a2e1806",
+    "tools/symbols.py": "e3f25fb66717f743dea126e56b5b44538d452fb5a2d52695ef27cb5069bc1793",
+    "layout/manifest.json": "025a0a9255d910cae4b122ab5a3f3fb40888bb456d7fe42158db7c9e622fcf50",
+    "layout/functions.json": "6089a06e18fbe8f0960392cfe30357f7c19c886f38f10f7f115c72d127a756e7",
+    "layout/symbols.json": "0f5dd5b0a211945a97782cfccdb9bb31b0dfd07fcde5df4d4f9486b487eb0125",
+    "assets/SIMANT.EXE": "aa0596c6766322a8229ee3c36e57048c92adc82d50fbe2ef37afb8b85fcf4f11",
+    "assets/HCEGANT.NDX": "077d8aecdad5e816f0828204f7ca500a68b3a4a3288740ac75e73e44eaa8efc4",
+    "assets/HCEGANT.DAT": "9c98c0f110e901a2c2db65944e4ebdf6b26392181e9415a34eb7b29617eaa899",
+    "src/root/m0798.c": "ecf807dc3159f583f6ee3ea8a9f5422650a64bb557d4551e9c97b5dcc7b6a1b8"
+  },
+  "transitive_source_pins_after": {
+    "portable/ui_model/windows/control_events.c": "e51acc262ea3beae4dc8e6c88eb5a55863ec979c60c8646cb3e8b6b24364c427",
+    "portable/ui_model/windows/control_events.h": "3b550ccd3c420ee69fd8aac7cb7a70ae6d0310ef5c7d2058cb5d6b7197529df7",
+    "portable/game/simulation/setup.c": "a3251423e769cde8f9b5eef9336cf1a29655b1f7253f78bb770a828a2482dfb7",
+    "portable/game/simulation/setup.h": "ed4d35dc8f58ff5a2225c9418c0387e8e3dba0d9c1a3a19493e190562fe3c3e5",
+    "portable/tests/setup/control_events/native_adapter.c": "10e9ab5e558322a5b9e0ad5b8cb998deb06e331ea0e87e1caf847ff187345595",
+    "portable/tests/setup/control_events/test_control_events.c": "4a95bdcd5852c8a063dcbab1ca0b58fc3bfb471518a2183e68045fae6d0d9af7",
+    "portable/tests/setup/control_events/run_dos_probe.py": "07990c72110c8020bc28794c0ade8ba876dd8bb89c27371c9ed82d7a629b55f8",
+    "portable/tests/setup/control_events/run_paired_differential.py": "b6022dc319bbf03c160d61353a8ff75f57f2456e783a10edebf1fb30c06bd741",
+    "portable/tests/setup/evidence/setup_differential.py": "5e86861a344e3e8bd1accb51249f3e236c3776f7a9a2bd460c168839fe7db639",
+    "portable/tests/windows/evidence/differential_window.py": "ba8172710b3b247e56ea45e6221af4c4f0bddaa905f0eec22e8b98872ecaf0de",
+    "portable/tests/setup/evidence/setup_native_adapter.c": "d8b4dbeb71f3b8fd3470422fc5c8b90e676c04a1df189ca695885f0e797067f4",
+    "tools/behavior.py": "2c0799048057f59eae61a48be4d695278635594484adf0c70bf46c51b4e0c799",
+    "tools/exe.py": "d560f69dcdf0d1c9e89278b50bebe225a9b86db2c259fa54ec9eace6ea05a8b5",
+    "tools/functions.py": "0f67c8d9eb01e319620c9342e79c35f76006091d860894aad6dcf8d61ee2b39e",
+    "tools/match.py": "44fdd8b939b2bbf135d8947d8f6ef6b1854dec133da4af86c55eb94f02869b56",
+    "tools/modctx.py": "33f3a4e3d77371e3095bfeb00358c13bc7838235c27bfe8898dba7e313f1cc25",
+    "tools/modules.py": "8a5c1e85db6970cce3c693c016b313b7ee1922fa6eaf146a00391bfea86edf1a",
+    "tools/compiler.py": "ef1d59a0fbe0e0780a6b8480e13d7d07859a14ae185c00a4420e1238a2ae35bb",
+    "tools/autosearch.py": "9c2727a875ee94c66ceac868d64c7070c316a5dbbef7cd6b21a670b44a2e1806",
+    "tools/symbols.py": "e3f25fb66717f743dea126e56b5b44538d452fb5a2d52695ef27cb5069bc1793",
+    "layout/manifest.json": "025a0a9255d910cae4b122ab5a3f3fb40888bb456d7fe42158db7c9e622fcf50",
+    "layout/functions.json": "6089a06e18fbe8f0960392cfe30357f7c19c886f38f10f7f115c72d127a756e7",
+    "layout/symbols.json": "0f5dd5b0a211945a97782cfccdb9bb31b0dfd07fcde5df4d4f9486b487eb0125",
+    "assets/SIMANT.EXE": "aa0596c6766322a8229ee3c36e57048c92adc82d50fbe2ef37afb8b85fcf4f11",
+    "assets/HCEGANT.NDX": "077d8aecdad5e816f0828204f7ca500a68b3a4a3288740ac75e73e44eaa8efc4",
+    "assets/HCEGANT.DAT": "9c98c0f110e901a2c2db65944e4ebdf6b26392181e9415a34eb7b29617eaa899",
+    "src/root/m0798.c": "ecf807dc3159f583f6ee3ea8a9f5422650a64bb557d4551e9c97b5dcc7b6a1b8"
+  },
+  "transitive_source_pins_stable": true,
+  "compared_fields": [
+    "auto",
+    "selector",
+    "percent",
+    "current levels",
+    "all four preset rows",
+    "IdealCaste",
+    "source SetTriLatPoint result",
+    "ordered host provider boundary calls"
+  ],
+  "provider_boundary": [
+    "clip_SetWin",
+    "clip_Off",
+    "DoWinHelp",
+    "win_MakeGroupInvisible",
+    "win_MakeGroupVisible",
+    "win_MakeObjSelected",
+    "win_DrawModeWindow or win_DrawCasteWindow",
+    "f_1FD2_04D0 pointer sample",
+    "StillDown"
+  ],
+  "common_geometry_input": {
+    "mode_object_13": [
+      136,
+      344,
+      247,
+      440
+    ],
+    "caste_object_13": [
+      392,
+      344,
+      501,
+      440
+    ],
+    "shared_metrics_derived_from_startup_caste_object": [
+      109,
+      96,
+      54
+    ],
+    "derivation": "initControls invokes ModeControlChanged then CasteControlChanged; InitTriVars leaves its shared metrics from the last (caste) object; independently derived here from the same loaded window records"
+  },
+  "limitations": [
+    "DOS DrawModeWindow/DrawCasteWindow are represented by provider sinks; after those sinks the direct original SetTriLatPoint body is run to capture the exact source point projection",
+    "screen pixels and host window side effects are outside this event-state contract",
+    "admitted drag domain is the loaded HCEGANT profile-0 triangle geometry; arbitrary corrupt rectangles are not covered"
+  ],
+  "cases": [
+    {
+      "kind": "mode",
+      "code": 4611,
+      "native": {
+        "auto": 1,
+        "selector": 0,
+        "percent": 1,
+        "current": [
+          39321,
+          13107,
+          13107
+        ],
+        "presets": [
+          39321,
+          13107,
+          13107,
+          65535,
+          0,
+          0,
+          0,
+          65535,
+          0,
+          0,
+          0,
+          65535
+        ],
+        "ideal_caste": [
+          60,
+          40,
+          0,
+          0
+        ],
+        "point": [
+          192,
+          381
+        ],
+        "provider_events": [
+          {
+            "provider": "clip_set",
+            "args": [
+              4608
+            ]
+          },
+          {
+            "provider": "help",
+            "args": [
+              4622
+            ]
+          },
+          {
+            "provider": "clip_off",
+            "args": []
+          }
+        ]
+      },
+      "dos_provider_events": [
+        {
+          "provider": "clip_set",
+          "args": [
+            4608
+          ]
+        },
+        {
+          "provider": "help",
+          "args": [
+            4622
+          ]
+        },
+        {
+          "provider": "clip_off",
+          "args": []
+        }
+      ],
+      "dos_snapshot": {
+        "current": [
+          39321,
+          13107,
+          13107
+        ],
+        "presets": [
+          39321,
+          13107,
+          13107,
+          65535,
+          0,
+          0,
+          0,
+          65535,
+          0,
+          0,
+          0,
+          65535
+        ],
+        "auto": 1,
+        "selector": 0,
+        "percent": 1,
+        "ideal_caste": [
+          60,
+          40,
+          0,
+          0
+        ],
+        "level_point": [
+          192,
+          381
+        ],
+        "actual_triangle_rect": [
+          136,
+          344,
+          247,
+          440
+        ],
+        "shared_triangle_metrics": [
+          109,
+          96,
+          54
+        ]
+      },
+      "mismatches": []
+    },
+    {
+      "kind": "mode",
+      "code": 4610,
+      "native": {
+        "auto": 1,
+        "selector": 0,
+        "percent": 1,
+        "current": [
+          39321,
+          13107,
+          13107
+        ],
+        "presets": [
+          39321,
+          13107,
+          13107,
+          65535,
+          0,
+          0,
+          0,
+          65535,
+          0,
+          0,
+          0,
+          65535
+        ],
+        "ideal_caste": [
+          60,
+          40,
+          0,
+          0
+        ],
+        "point": [
+          192,
+          381
+        ],
+        "provider_events": [
+          {
+            "provider": "clip_set",
+            "args": [
+              4608
+            ]
+          },
+          {
+            "provider": "clip_off",
+            "args": []
+          }
+        ]
+      },
+      "dos_provider_events": [
+        {
+          "provider": "clip_set",
+          "args": [
+            4608
+          ]
+        },
+        {
+          "provider": "clip_off",
+          "args": []
+        }
+      ],
+      "dos_snapshot": {
+        "current": [
+          39321,
+          13107,
+          13107
+        ],
+        "presets": [
+          39321,
+          13107,
+          13107,
+          65535,
+          0,
+          0,
+          0,
+          65535,
+          0,
+          0,
+          0,
+          65535
+        ],
+        "auto": 1,
+        "selector": 0,
+        "percent": 1,
+        "ideal_caste": [
+          60,
+          40,
+          0,
+          0
+        ],
+        "level_point": [
+          192,
+          381
+        ],
+        "actual_triangle_rect": [
+          136,
+          344,
+          247,
+          440
+        ],
+        "shared_triangle_metrics": [
+          109,
+          96,
+          54
+        ]
+      },
+      "mismatches": []
+    },
+    {
+      "kind": "mode",
+      "code": 4626,
+      "native": {
+        "auto": 1,
+        "selector": 0,
+        "percent": 1,
+        "current": [
+          39321,
+          13107,
+          13107
+        ],
+        "presets": [
+          39321,
+          13107,
+          13107,
+          65535,
+          0,
+          0,
+          0,
+          65535,
+          0,
+          0,
+          0,
+          65535
+        ],
+        "ideal_caste": [
+          60,
+          40,
+          0,
+          0
+        ],
+        "point": [
+          192,
+          381
+        ],
+        "provider_events": [
+          {
+            "provider": "clip_set",
+            "args": [
+              4608
+            ]
+          },
+          {
+            "provider": "clip_off",
+            "args": []
+          }
+        ]
+      },
+      "dos_provider_events": [
+        {
+          "provider": "clip_set",
+          "args": [
+            4608
+          ]
+        },
+        {
+          "provider": "clip_off",
+          "args": []
+        }
+      ],
+      "dos_snapshot": {
+        "current": [
+          39321,
+          13107,
+          13107
+        ],
+        "presets": [
+          39321,
+          13107,
+          13107,
+          65535,
+          0,
+          0,
+          0,
+          65535,
+          0,
+          0,
+          0,
+          65535
+        ],
+        "auto": 1,
+        "selector": 0,
+        "percent": 1,
+        "ideal_caste": [
+          60,
+          40,
+          0,
+          0
+        ],
+        "level_point": [
+          192,
+          381
+        ],
+        "actual_triangle_rect": [
+          136,
+          344,
+          247,
+          440
+        ],
+        "shared_triangle_metrics": [
+          109,
+          96,
+          54
+        ]
+      },
+      "mismatches": []
+    },
+    {
+      "kind": "mode",
+      "code": 4612,
+      "native": {
+        "auto": 1,
+        "selector": 0,
+        "percent": 1,
+        "current": [
+          39321,
+          13107,
+          13107
+        ],
+        "presets": [
+          39321,
+          13107,
+          13107,
+          65535,
+          0,
+          0,
+          0,
+          65535,
+          0,
+          0,
+          0,
+          65535
+        ],
+        "ideal_caste": [
+          60,
+          40,
+          0,
+          0
+        ],
+        "point": [
+          192,
+          381
+        ],
+        "provider_events": [
+          {
+            "provider": "clip_set",
+            "args": [
+              4608
+            ]
+          },
+          {
+            "provider": "group_invisible",
+            "args": [
+              4608,
+              4
+            ],
+            "visible": false
+          },
+          {
+            "provider": "clip_off",
+            "args": []
+          }
+        ]
+      },
+      "dos_provider_events": [
+        {
+          "provider": "clip_set",
+          "args": [
+            4608
+          ]
+        },
+        {
+          "provider": "group_invisible",
+          "args": [
+            4608,
+            4
+          ],
+          "visible": false
+        },
+        {
+          "provider": "clip_off",
+          "args": []
+        }
+      ],
+      "dos_snapshot": {
+        "current": [
+          39321,
+          13107,
+          13107
+        ],
+        "presets": [
+          39321,
+          13107,
+          13107,
+          65535,
+          0,
+          0,
+          0,
+          65535,
+          0,
+          0,
+          0,
+          65535
+        ],
+        "auto": 1,
+        "selector": 0,
+        "percent": 1,
+        "ideal_caste": [
+          60,
+          40,
+          0,
+          0
+        ],
+        "level_point": [
+          192,
+          381
+        ],
+        "actual_triangle_rect": [
+          136,
+          344,
+          247,
+          440
+        ],
+        "shared_triangle_metrics": [
+          109,
+          96,
+          54
+        ]
+      },
+      "mismatches": []
+    },
+    {
+      "kind": "mode",
+      "code": 4612,
+      "native": {
+        "auto": 1,
+        "selector": 0,
+        "percent": 1,
+        "current": [
+          39321,
+          13107,
+          13107
+        ],
+        "presets": [
+          39321,
+          13107,
+          13107,
+          65535,
+          0,
+          0,
+          0,
+          65535,
+          0,
+          0,
+          0,
+          65535
+        ],
+        "ideal_caste": [
+          60,
+          40,
+          0,
+          0
+        ],
+        "point": [
+          192,
+          381
+        ],
+        "provider_events": [
+          {
+            "provider": "clip_set",
+            "args": [
+              4608
+            ]
+          },
+          {
+            "provider": "clip_off",
+            "args": []
+          }
+        ]
+      },
+      "dos_provider_events": [
+        {
+          "provider": "clip_set",
+          "args": [
+            4608
+          ]
+        },
+        {
+          "provider": "clip_off",
+          "args": []
+        }
+      ],
+      "dos_snapshot": {
+        "current": [
+          39321,
+          13107,
+          13107
+        ],
+        "presets": [
+          39321,
+          13107,
+          13107,
+          65535,
+          0,
+          0,
+          0,
+          65535,
+          0,
+          0,
+          0,
+          65535
+        ],
+        "auto": 1,
+        "selector": 0,
+        "percent": 1,
+        "ideal_caste": [
+          60,
+          40,
+          0,
+          0
+        ],
+        "level_point": [
+          192,
+          381
+        ],
+        "actual_triangle_rect": [
+          136,
+          344,
+          247,
+          440
+        ],
+        "shared_triangle_metrics": [
+          109,
+          96,
+          54
+        ]
+      },
+      "mismatches": []
+    },
+    {
+      "kind": "mode",
+      "code": 4613,
+      "native": {
+        "auto": 0,
+        "selector": 0,
+        "percent": 1,
+        "current": [
+          39321,
+          13107,
+          13107
+        ],
+        "presets": [
+          39321,
+          13107,
+          13107,
+          65535,
+          0,
+          0,
+          0,
+          65535,
+          0,
+          0,
+          0,
+          65535
+        ],
+        "ideal_caste": [
+          60,
+          40,
+          0,
+          0
+        ],
+        "point": [
+          192,
+          381
+        ],
+        "provider_events": [
+          {
+            "provider": "clip_set",
+            "args": [
+              4608
+            ]
+          },
+          {
+            "provider": "group_visible",
+            "args": [
+              4608,
+              4
+            ],
+            "visible": true
+          },
+          {
+            "provider": "clip_off",
+            "args": []
+          }
+        ]
+      },
+      "dos_provider_events": [
+        {
+          "provider": "clip_set",
+          "args": [
+            4608
+          ]
+        },
+        {
+          "provider": "group_visible",
+          "args": [
+            4608,
+            4
+          ],
+          "visible": true
+        },
+        {
+          "provider": "clip_off",
+          "args": []
+        }
+      ],
+      "dos_snapshot": {
+        "current": [
+          39321,
+          13107,
+          13107
+        ],
+        "presets": [
+          39321,
+          13107,
+          13107,
+          65535,
+          0,
+          0,
+          0,
+          65535,
+          0,
+          0,
+          0,
+          65535
+        ],
+        "auto": 0,
+        "selector": 0,
+        "percent": 1,
+        "ideal_caste": [
+          60,
+          40,
+          0,
+          0
+        ],
+        "level_point": [
+          192,
+          381
+        ],
+        "actual_triangle_rect": [
+          136,
+          344,
+          247,
+          440
+        ],
+        "shared_triangle_metrics": [
+          109,
+          96,
+          54
+        ]
+      },
+      "mismatches": []
+    },
+    {
+      "kind": "mode",
+      "code": 4613,
+      "native": {
+        "auto": 0,
+        "selector": 0,
+        "percent": 1,
+        "current": [
+          39321,
+          13107,
+          13107
+        ],
+        "presets": [
+          39321,
+          13107,
+          13107,
+          65535,
+          0,
+          0,
+          0,
+          65535,
+          0,
+          0,
+          0,
+          65535
+        ],
+        "ideal_caste": [
+          60,
+          40,
+          0,
+          0
+        ],
+        "point": [
+          192,
+          381
+        ],
+        "provider_events": [
+          {
+            "provider": "clip_set",
+            "args": [
+              4608
+            ]
+          },
+          {
+            "provider": "clip_off",
+            "args": []
+          }
+        ]
+      },
+      "dos_provider_events": [
+        {
+          "provider": "clip_set",
+          "args": [
+            4608
+          ]
+        },
+        {
+          "provider": "clip_off",
+          "args": []
+        }
+      ],
+      "dos_snapshot": {
+        "current": [
+          39321,
+          13107,
+          13107
+        ],
+        "presets": [
+          39321,
+          13107,
+          13107,
+          65535,
+          0,
+          0,
+          0,
+          65535,
+          0,
+          0,
+          0,
+          65535
+        ],
+        "auto": 0,
+        "selector": 0,
+        "percent": 1,
+        "ideal_caste": [
+          60,
+          40,
+          0,
+          0
+        ],
+        "level_point": [
+          192,
+          381
+        ],
+        "actual_triangle_rect": [
+          136,
+          344,
+          247,
+          440
+        ],
+        "shared_triangle_metrics": [
+          109,
+          96,
+          54
+        ]
+      },
+      "mismatches": []
+    },
+    {
+      "kind": "mode",
+      "code": 4614,
+      "native": {
+        "auto": 0,
+        "selector": 0,
+        "percent": 1,
+        "current": [
+          39321,
+          13107,
+          13107
+        ],
+        "presets": [
+          39321,
+          13107,
+          13107,
+          65535,
+          0,
+          0,
+          0,
+          65535,
+          0,
+          0,
+          0,
+          65535
+        ],
+        "ideal_caste": [
+          60,
+          40,
+          0,
+          0
+        ],
+        "point": [
+          191,
+          381
+        ],
+        "provider_events": [
+          {
+            "provider": "clip_set",
+            "args": [
+              4608
+            ]
+          },
+          {
+            "provider": "select",
+            "args": [
+              4613
+            ]
+          },
+          {
+            "provider": "clip_set",
+            "args": [
+              4608
+            ]
+          },
+          {
+            "provider": "draw",
+            "args": [
+              3
+            ],
+            "kind": "mode",
+            "flags": 3,
+            "percent": 1,
+            "current": [
+              39321,
+              13107,
+              13107
+            ],
+            "selector": 0,
+            "auto": 1
+          },
+          {
+            "provider": "group_visible",
+            "args": [
+              4608,
+              4
+            ],
+            "visible": true
+          },
+          {
+            "provider": "clip_off",
+            "args": []
+          }
+        ]
+      },
+      "dos_provider_events": [
+        {
+          "provider": "clip_set",
+          "args": [
+            4608
+          ]
+        },
+        {
+          "provider": "select",
+          "args": [
+            4613
+          ]
+        },
+        {
+          "provider": "clip_set",
+          "args": [
+            4608
+          ]
+        },
+        {
+          "provider": "draw",
+          "args": [
+            3
+          ],
+          "kind": "mode",
+          "flags": 3,
+          "current": [
+            39321,
+            13107,
+            13107
+          ],
+          "selector": 0,
+          "auto": 1,
+          "percent": 1
+        },
+        {
+          "provider": "group_visible",
+          "args": [
+            4608,
+            4
+          ],
+          "visible": true
+        },
+        {
+          "provider": "clip_off",
+          "args": []
+        }
+      ],
+      "dos_snapshot": {
+        "current": [
+          39321,
+          13107,
+          13107
+        ],
+        "presets": [
+          39321,
+          13107,
+          13107,
+          65535,
+          0,
+          0,
+          0,
+          65535,
+          0,
+          0,
+          0,
+          65535
+        ],
+        "auto": 0,
+        "selector": 0,
+        "percent": 1,
+        "ideal_caste": [
+          60,
+          40,
+          0,
+          0
+        ],
+        "level_point": [
+          191,
+          381
+        ],
+        "actual_triangle_rect": [
+          136,
+          344,
+          247,
+          440
+        ],
+        "shared_triangle_metrics": [
+          109,
+          96,
+          54
+        ]
+      },
+      "mismatches": []
+    },
+    {
+      "kind": "mode",
+      "code": 4615,
+      "native": {
+        "auto": 0,
+        "selector": 1,
+        "percent": 1,
+        "current": [
+          65535,
+          0,
+          0
+        ],
+        "presets": [
+          39321,
+          13107,
+          13107,
+          65535,
+          0,
+          0,
+          0,
+          65535,
+          0,
+          0,
+          0,
+          65535
+        ],
+        "ideal_caste": [
+          60,
+          40,
+          0,
+          0
+        ],
+        "point": [
+          193,
+          344
+        ],
+        "provider_events": [
+          {
+            "provider": "clip_set",
+            "args": [
+              4608
+            ]
+          },
+          {
+            "provider": "select",
+            "args": [
+              4613
+            ]
+          },
+          {
+            "provider": "clip_set",
+            "args": [
+              4608
+            ]
+          },
+          {
+            "provider": "draw",
+            "args": [
+              3
+            ],
+            "kind": "mode",
+            "flags": 3,
+            "percent": 1,
+            "current": [
+              65535,
+              0,
+              0
+            ],
+            "selector": 1,
+            "auto": 1
+          },
+          {
+            "provider": "group_visible",
+            "args": [
+              4608,
+              4
+            ],
+            "visible": true
+          },
+          {
+            "provider": "clip_off",
+            "args": []
+          }
+        ]
+      },
+      "dos_provider_events": [
+        {
+          "provider": "clip_set",
+          "args": [
+            4608
+          ]
+        },
+        {
+          "provider": "select",
+          "args": [
+            4613
+          ]
+        },
+        {
+          "provider": "clip_set",
+          "args": [
+            4608
+          ]
+        },
+        {
+          "provider": "draw",
+          "args": [
+            3
+          ],
+          "kind": "mode",
+          "flags": 3,
+          "current": [
+            65535,
+            0,
+            0
+          ],
+          "selector": 1,
+          "auto": 1,
+          "percent": 1
+        },
+        {
+          "provider": "group_visible",
+          "args": [
+            4608,
+            4
+          ],
+          "visible": true
+        },
+        {
+          "provider": "clip_off",
+          "args": []
+        }
+      ],
+      "dos_snapshot": {
+        "current": [
+          65535,
+          0,
+          0
+        ],
+        "presets": [
+          39321,
+          13107,
+          13107,
+          65535,
+          0,
+          0,
+          0,
+          65535,
+          0,
+          0,
+          0,
+          65535
+        ],
+        "auto": 0,
+        "selector": 1,
+        "percent": 1,
+        "ideal_caste": [
+          60,
+          40,
+          0,
+          0
+        ],
+        "level_point": [
+          193,
+          344
+        ],
+        "actual_triangle_rect": [
+          136,
+          344,
+          247,
+          440
+        ],
+        "shared_triangle_metrics": [
+          109,
+          96,
+          54
+        ]
+      },
+      "mismatches": []
+    },
+    {
+      "kind": "mode",
+      "code": 4616,
+      "native": {
+        "auto": 0,
+        "selector": 2,
+        "percent": 1,
+        "current": [
+          0,
+          65535,
+          0
+        ],
+        "presets": [
+          39321,
+          13107,
+          13107,
+          65535,
+          0,
+          0,
+          0,
+          65535,
+          0,
+          0,
+          0,
+          65535
+        ],
+        "ideal_caste": [
+          60,
+          40,
+          0,
+          0
+        ],
+        "point": [
+          138,
+          438
+        ],
+        "provider_events": [
+          {
+            "provider": "clip_set",
+            "args": [
+              4608
+            ]
+          },
+          {
+            "provider": "select",
+            "args": [
+              4613
+            ]
+          },
+          {
+            "provider": "clip_set",
+            "args": [
+              4608
+            ]
+          },
+          {
+            "provider": "draw",
+            "args": [
+              3
+            ],
+            "kind": "mode",
+            "flags": 3,
+            "percent": 1,
+            "current": [
+              0,
+              65535,
+              0
+            ],
+            "selector": 2,
+            "auto": 1
+          },
+          {
+            "provider": "group_visible",
+            "args": [
+              4608,
+              4
+            ],
+            "visible": true
+          },
+          {
+            "provider": "clip_off",
+            "args": []
+          }
+        ]
+      },
+      "dos_provider_events": [
+        {
+          "provider": "clip_set",
+          "args": [
+            4608
+          ]
+        },
+        {
+          "provider": "select",
+          "args": [
+            4613
+          ]
+        },
+        {
+          "provider": "clip_set",
+          "args": [
+            4608
+          ]
+        },
+        {
+          "provider": "draw",
+          "args": [
+            3
+          ],
+          "kind": "mode",
+          "flags": 3,
+          "current": [
+            0,
+            65535,
+            0
+          ],
+          "selector": 2,
+          "auto": 1,
+          "percent": 1
+        },
+        {
+          "provider": "group_visible",
+          "args": [
+            4608,
+            4
+          ],
+          "visible": true
+        },
+        {
+          "provider": "clip_off",
+          "args": []
+        }
+      ],
+      "dos_snapshot": {
+        "current": [
+          0,
+          65535,
+          0
+        ],
+        "presets": [
+          39321,
+          13107,
+          13107,
+          65535,
+          0,
+          0,
+          0,
+          65535,
+          0,
+          0,
+          0,
+          65535
+        ],
+        "auto": 0,
+        "selector": 2,
+        "percent": 1,
+        "ideal_caste": [
+          60,
+          40,
+          0,
+          0
+        ],
+        "level_point": [
+          138,
+          438
+        ],
+        "actual_triangle_rect": [
+          136,
+          344,
+          247,
+          440
+        ],
+        "shared_triangle_metrics": [
+          109,
+          96,
+          54
+        ]
+      },
+      "mismatches": []
+    },
+    {
+      "kind": "mode",
+      "code": 4623,
+      "native": {
+        "auto": 1,
+        "selector": 0,
+        "percent": 0,
+        "current": [
+          39321,
+          13107,
+          13107
+        ],
+        "presets": [
+          39321,
+          13107,
+          13107,
+          65535,
+          0,
+          0,
+          0,
+          65535,
+          0,
+          0,
+          0,
+          65535
+        ],
+        "ideal_caste": [
+          60,
+          40,
+          0,
+          0
+        ],
+        "point": [
+          191,
+          381
+        ],
+        "provider_events": [
+          {
+            "provider": "clip_set",
+            "args": [
+              4608
+            ]
+          },
+          {
+            "provider": "draw",
+            "args": [
+              3
+            ],
+            "kind": "mode",
+            "flags": 3,
+            "percent": 0,
+            "current": [
+              39321,
+              13107,
+              13107
+            ],
+            "selector": 0,
+            "auto": 1
+          },
+          {
+            "provider": "clip_off",
+            "args": []
+          }
+        ]
+      },
+      "dos_provider_events": [
+        {
+          "provider": "clip_set",
+          "args": [
+            4608
+          ]
+        },
+        {
+          "provider": "draw",
+          "args": [
+            3
+          ],
+          "kind": "mode",
+          "flags": 3,
+          "current": [
+            39321,
+            13107,
+            13107
+          ],
+          "selector": 0,
+          "auto": 1,
+          "percent": 0
+        },
+        {
+          "provider": "clip_off",
+          "args": []
+        }
+      ],
+      "dos_snapshot": {
+        "current": [
+          39321,
+          13107,
+          13107
+        ],
+        "presets": [
+          39321,
+          13107,
+          13107,
+          65535,
+          0,
+          0,
+          0,
+          65535,
+          0,
+          0,
+          0,
+          65535
+        ],
+        "auto": 1,
+        "selector": 0,
+        "percent": 0,
+        "ideal_caste": [
+          60,
+          40,
+          0,
+          0
+        ],
+        "level_point": [
+          191,
+          381
+        ],
+        "actual_triangle_rect": [
+          136,
+          344,
+          247,
+          440
+        ],
+        "shared_triangle_metrics": [
+          109,
+          96,
+          54
+        ]
+      },
+      "mismatches": []
+    },
+    {
+      "kind": "mode",
+      "code": 4624,
+      "native": {
+        "auto": 1,
+        "selector": 0,
+        "percent": 0,
+        "current": [
+          39321,
+          13107,
+          13107
+        ],
+        "presets": [
+          39321,
+          13107,
+          13107,
+          65535,
+          0,
+          0,
+          0,
+          65535,
+          0,
+          0,
+          0,
+          65535
+        ],
+        "ideal_caste": [
+          60,
+          40,
+          0,
+          0
+        ],
+        "point": [
+          191,
+          381
+        ],
+        "provider_events": [
+          {
+            "provider": "clip_set",
+            "args": [
+              4608
+            ]
+          },
+          {
+            "provider": "draw",
+            "args": [
+              3
+            ],
+            "kind": "mode",
+            "flags": 3,
+            "percent": 0,
+            "current": [
+              39321,
+              13107,
+              13107
+            ],
+            "selector": 0,
+            "auto": 1
+          },
+          {
+            "provider": "clip_off",
+            "args": []
+          }
+        ]
+      },
+      "dos_provider_events": [
+        {
+          "provider": "clip_set",
+          "args": [
+            4608
+          ]
+        },
+        {
+          "provider": "draw",
+          "args": [
+            3
+          ],
+          "kind": "mode",
+          "flags": 3,
+          "current": [
+            39321,
+            13107,
+            13107
+          ],
+          "selector": 0,
+          "auto": 1,
+          "percent": 0
+        },
+        {
+          "provider": "clip_off",
+          "args": []
+        }
+      ],
+      "dos_snapshot": {
+        "current": [
+          39321,
+          13107,
+          13107
+        ],
+        "presets": [
+          39321,
+          13107,
+          13107,
+          65535,
+          0,
+          0,
+          0,
+          65535,
+          0,
+          0,
+          0,
+          65535
+        ],
+        "auto": 1,
+        "selector": 0,
+        "percent": 0,
+        "ideal_caste": [
+          60,
+          40,
+          0,
+          0
+        ],
+        "level_point": [
+          191,
+          381
+        ],
+        "actual_triangle_rect": [
+          136,
+          344,
+          247,
+          440
+        ],
+        "shared_triangle_metrics": [
+          109,
+          96,
+          54
+        ]
+      },
+      "mismatches": []
+    },
+    {
+      "kind": "mode",
+      "code": 4625,
+      "native": {
+        "auto": 1,
+        "selector": 0,
+        "percent": 0,
+        "current": [
+          39321,
+          13107,
+          13107
+        ],
+        "presets": [
+          39321,
+          13107,
+          13107,
+          65535,
+          0,
+          0,
+          0,
+          65535,
+          0,
+          0,
+          0,
+          65535
+        ],
+        "ideal_caste": [
+          60,
+          40,
+          0,
+          0
+        ],
+        "point": [
+          191,
+          381
+        ],
+        "provider_events": [
+          {
+            "provider": "clip_set",
+            "args": [
+              4608
+            ]
+          },
+          {
+            "provider": "draw",
+            "args": [
+              3
+            ],
+            "kind": "mode",
+            "flags": 3,
+            "percent": 0,
+            "current": [
+              39321,
+              13107,
+              13107
+            ],
+            "selector": 0,
+            "auto": 1
+          },
+          {
+            "provider": "clip_off",
+            "args": []
+          }
+        ]
+      },
+      "dos_provider_events": [
+        {
+          "provider": "clip_set",
+          "args": [
+            4608
+          ]
+        },
+        {
+          "provider": "draw",
+          "args": [
+            3
+          ],
+          "kind": "mode",
+          "flags": 3,
+          "current": [
+            39321,
+            13107,
+            13107
+          ],
+          "selector": 0,
+          "auto": 1,
+          "percent": 0
+        },
+        {
+          "provider": "clip_off",
+          "args": []
+        }
+      ],
+      "dos_snapshot": {
+        "current": [
+          39321,
+          13107,
+          13107
+        ],
+        "presets": [
+          39321,
+          13107,
+          13107,
+          65535,
+          0,
+          0,
+          0,
+          65535,
+          0,
+          0,
+          0,
+          65535
+        ],
+        "auto": 1,
+        "selector": 0,
+        "percent": 0,
+        "ideal_caste": [
+          60,
+          40,
+          0,
+          0
+        ],
+        "level_point": [
+          191,
+          381
+        ],
+        "actual_triangle_rect": [
+          136,
+          344,
+          247,
+          440
+        ],
+        "shared_triangle_metrics": [
+          109,
+          96,
+          54
+        ]
+      },
+      "mismatches": []
+    },
+    {
+      "kind": "mode",
+      "code": 4615,
+      "native": {
+        "auto": 0,
+        "selector": 1,
+        "percent": 0,
+        "current": [
+          65535,
+          0,
+          0
+        ],
+        "presets": [
+          39321,
+          13107,
+          13107,
+          65535,
+          0,
+          0,
+          39321,
+          13107,
+          13107,
+          0,
+          0,
+          65535
+        ],
+        "ideal_caste": [
+          60,
+          40,
+          0,
+          0
+        ],
+        "point": [
+          193,
+          344
+        ],
+        "provider_events": [
+          {
+            "provider": "clip_set",
+            "args": [
+              4608
+            ]
+          },
+          {
+            "provider": "select",
+            "args": [
+              4613
+            ]
+          },
+          {
+            "provider": "clip_set",
+            "args": [
+              4608
+            ]
+          },
+          {
+            "provider": "draw",
+            "args": [
+              3
+            ],
+            "kind": "mode",
+            "flags": 3,
+            "percent": 0,
+            "current": [
+              65535,
+              0,
+              0
+            ],
+            "selector": 1,
+            "auto": 1
+          },
+          {
+            "provider": "group_visible",
+            "args": [
+              4608,
+              4
+            ],
+            "visible": true
+          },
+          {
+            "provider": "clip_off",
+            "args": []
+          }
+        ]
+      },
+      "dos_provider_events": [
+        {
+          "provider": "clip_set",
+          "args": [
+            4608
+          ]
+        },
+        {
+          "provider": "select",
+          "args": [
+            4613
+          ]
+        },
+        {
+          "provider": "clip_set",
+          "args": [
+            4608
+          ]
+        },
+        {
+          "provider": "draw",
+          "args": [
+            3
+          ],
+          "kind": "mode",
+          "flags": 3,
+          "current": [
+            65535,
+            0,
+            0
+          ],
+          "selector": 1,
+          "auto": 1,
+          "percent": 0
+        },
+        {
+          "provider": "group_visible",
+          "args": [
+            4608,
+            4
+          ],
+          "visible": true
+        },
+        {
+          "provider": "clip_off",
+          "args": []
+        }
+      ],
+      "dos_snapshot": {
+        "current": [
+          65535,
+          0,
+          0
+        ],
+        "presets": [
+          39321,
+          13107,
+          13107,
+          65535,
+          0,
+          0,
+          39321,
+          13107,
+          13107,
+          0,
+          0,
+          65535
+        ],
+        "auto": 0,
+        "selector": 1,
+        "percent": 0,
+        "ideal_caste": [
+          60,
+          40,
+          0,
+          0
+        ],
+        "level_point": [
+          193,
+          344
+        ],
+        "actual_triangle_rect": [
+          136,
+          344,
+          247,
+          440
+        ],
+        "shared_triangle_metrics": [
+          109,
+          96,
+          54
+        ]
+      },
+      "mismatches": []
+    },
+    {
+      "kind": "mode",
+      "code": 4621,
+      "native": {
+        "auto": 0,
+        "selector": 0,
+        "percent": 1,
+        "current": [
+          64837,
+          0,
+          698
+        ],
+        "presets": [
+          64837,
+          0,
+          698,
+          65535,
+          0,
+          0,
+          0,
+          65535,
+          0,
+          0,
+          0,
+          65535
+        ],
+        "ideal_caste": [
+          60,
+          40,
+          0,
+          0
+        ],
+        "point": [
+          191,
+          345
+        ],
+        "provider_events": [
+          {
+            "provider": "clip_set",
+            "args": [
+              4608
+            ]
+          },
+          {
+            "provider": "get_rect",
+            "object": 4621,
+            "rect": [
+              136,
+              344,
+              247,
+              440
+            ]
+          },
+          {
+            "provider": "select",
+            "args": [
+              4613
+            ]
+          },
+          {
+            "provider": "group_visible",
+            "args": [
+              4608,
+              4
+            ],
+            "visible": true
+          },
+          {
+            "provider": "clip_set",
+            "args": [
+              4608
+            ]
+          },
+          {
+            "provider": "draw",
+            "args": [
+              3
+            ],
+            "kind": "mode",
+            "flags": 3,
+            "percent": 1,
+            "current": [
+              64837,
+              0,
+              698
+            ],
+            "selector": 0,
+            "auto": 0
+          },
+          {
+            "provider": "pointer_poll",
+            "point": [
+              191,
+              345
+            ]
+          },
+          {
+            "provider": "still_down",
+            "down": 0
+          },
+          {
+            "provider": "clip_off",
+            "args": []
+          }
+        ]
+      },
+      "dos_provider_events": [
+        {
+          "provider": "clip_set",
+          "args": [
+            4608
+          ]
+        },
+        {
+          "provider": "get_rect",
+          "object": 4621,
+          "rect": [
+            136,
+            344,
+            247,
+            440
+          ]
+        },
+        {
+          "provider": "select",
+          "args": [
+            4613
+          ]
+        },
+        {
+          "provider": "group_visible",
+          "args": [
+            4608,
+            4
+          ],
+          "visible": true
+        },
+        {
+          "provider": "clip_set",
+          "args": [
+            4608
+          ]
+        },
+        {
+          "provider": "draw",
+          "args": [
+            3
+          ],
+          "kind": "mode",
+          "flags": 3,
+          "current": [
+            64837,
+            0,
+            698
+          ],
+          "selector": 0,
+          "auto": 0,
+          "percent": 1
+        },
+        {
+          "provider": "pointer_poll",
+          "point": [
+            191,
+            345
+          ]
+        },
+        {
+          "provider": "still_down",
+          "down": 0
+        },
+        {
+          "provider": "clip_off",
+          "args": []
+        }
+      ],
+      "dos_snapshot": {
+        "current": [
+          64837,
+          0,
+          698
+        ],
+        "presets": [
+          64837,
+          0,
+          698,
+          65535,
+          0,
+          0,
+          0,
+          65535,
+          0,
+          0,
+          0,
+          65535
+        ],
+        "auto": 0,
+        "selector": 0,
+        "percent": 1,
+        "ideal_caste": [
+          60,
+          40,
+          0,
+          0
+        ],
+        "level_point": [
+          191,
+          345
+        ],
+        "actual_triangle_rect": [
+          136,
+          344,
+          247,
+          440
+        ],
+        "shared_triangle_metrics": [
+          109,
+          96,
+          54
+        ]
+      },
+      "mismatches": []
+    },
+    {
+      "kind": "mode",
+      "code": 4621,
+      "native": {
+        "auto": 1,
+        "selector": 0,
+        "percent": 1,
+        "current": [
+          39321,
+          13107,
+          13107
+        ],
+        "presets": [
+          39321,
+          13107,
+          13107,
+          65535,
+          0,
+          0,
+          0,
+          65535,
+          0,
+          0,
+          0,
+          65535
+        ],
+        "ideal_caste": [
+          60,
+          40,
+          0,
+          0
+        ],
+        "point": [
+          192,
+          381
+        ],
+        "provider_events": [
+          {
+            "provider": "clip_set",
+            "args": [
+              4608
+            ]
+          },
+          {
+            "provider": "get_rect",
+            "object": 4621,
+            "rect": [
+              136,
+              344,
+              247,
+              440
+            ]
+          },
+          {
+            "provider": "clip_off",
+            "args": []
+          }
+        ]
+      },
+      "dos_provider_events": [
+        {
+          "provider": "clip_set",
+          "args": [
+            4608
+          ]
+        },
+        {
+          "provider": "get_rect",
+          "object": 4621,
+          "rect": [
+            136,
+            344,
+            247,
+            440
+          ]
+        },
+        {
+          "provider": "clip_off",
+          "args": []
+        }
+      ],
+      "dos_snapshot": {
+        "current": [
+          39321,
+          13107,
+          13107
+        ],
+        "presets": [
+          39321,
+          13107,
+          13107,
+          65535,
+          0,
+          0,
+          0,
+          65535,
+          0,
+          0,
+          0,
+          65535
+        ],
+        "auto": 1,
+        "selector": 0,
+        "percent": 1,
+        "ideal_caste": [
+          60,
+          40,
+          0,
+          0
+        ],
+        "level_point": [
+          192,
+          381
+        ],
+        "actual_triangle_rect": [
+          136,
+          344,
+          247,
+          440
+        ],
+        "shared_triangle_metrics": [
+          109,
+          96,
+          54
+        ]
+      },
+      "mismatches": []
+    },
+    {
+      "kind": "mode",
+      "code": 4621,
+      "native": {
+        "auto": 0,
+        "selector": 0,
+        "percent": 1,
+        "current": [
+          64140,
+          0,
+          1395
+        ],
+        "presets": [
+          64140,
+          0,
+          1395,
+          65535,
+          0,
+          0,
+          0,
+          65535,
+          0,
+          0,
+          0,
+          65535
+        ],
+        "ideal_caste": [
+          60,
+          40,
+          0,
+          0
+        ],
+        "point": [
+          192,
+          346
+        ],
+        "provider_events": [
+          {
+            "provider": "clip_set",
+            "args": [
+              4608
+            ]
+          },
+          {
+            "provider": "get_rect",
+            "object": 4621,
+            "rect": [
+              136,
+              344,
+              247,
+              440
+            ]
+          },
+          {
+            "provider": "select",
+            "args": [
+              4613
+            ]
+          },
+          {
+            "provider": "group_visible",
+            "args": [
+              4608,
+              4
+            ],
+            "visible": true
+          },
+          {
+            "provider": "clip_set",
+            "args": [
+              4608
+            ]
+          },
+          {
+            "provider": "draw",
+            "args": [
+              3
+            ],
+            "kind": "mode",
+            "flags": 3,
+            "percent": 1,
+            "current": [
+              64837,
+              0,
+              698
+            ],
+            "selector": 0,
+            "auto": 0
+          },
+          {
+            "provider": "pointer_poll",
+            "point": [
+              192,
+              346
+            ]
+          },
+          {
+            "provider": "still_down",
+            "down": 1
+          },
+          {
+            "provider": "draw",
+            "args": [
+              3
+            ],
+            "kind": "mode",
+            "flags": 3,
+            "percent": 1,
+            "current": [
+              64140,
+              0,
+              1395
+            ],
+            "selector": 0,
+            "auto": 0
+          },
+          {
+            "provider": "pointer_poll",
+            "point": [
+              192,
+              346
+            ]
+          },
+          {
+            "provider": "still_down",
+            "down": 0
+          },
+          {
+            "provider": "clip_off",
+            "args": []
+          }
+        ]
+      },
+      "dos_provider_events": [
+        {
+          "provider": "clip_set",
+          "args": [
+            4608
+          ]
+        },
+        {
+          "provider": "get_rect",
+          "object": 4621,
+          "rect": [
+            136,
+            344,
+            247,
+            440
+          ]
+        },
+        {
+          "provider": "select",
+          "args": [
+            4613
+          ]
+        },
+        {
+          "provider": "group_visible",
+          "args": [
+            4608,
+            4
+          ],
+          "visible": true
+        },
+        {
+          "provider": "clip_set",
+          "args": [
+            4608
+          ]
+        },
+        {
+          "provider": "draw",
+          "args": [
+            3
+          ],
+          "kind": "mode",
+          "flags": 3,
+          "current": [
+            64837,
+            0,
+            698
+          ],
+          "selector": 0,
+          "auto": 0,
+          "percent": 1
+        },
+        {
+          "provider": "pointer_poll",
+          "point": [
+            192,
+            346
+          ]
+        },
+        {
+          "provider": "still_down",
+          "down": 1
+        },
+        {
+          "provider": "draw",
+          "args": [
+            3
+          ],
+          "kind": "mode",
+          "flags": 3,
+          "current": [
+            64140,
+            0,
+            1395
+          ],
+          "selector": 0,
+          "auto": 0,
+          "percent": 1
+        },
+        {
+          "provider": "pointer_poll",
+          "point": [
+            192,
+            346
+          ]
+        },
+        {
+          "provider": "still_down",
+          "down": 0
+        },
+        {
+          "provider": "clip_off",
+          "args": []
+        }
+      ],
+      "dos_snapshot": {
+        "current": [
+          64140,
+          0,
+          1395
+        ],
+        "presets": [
+          64140,
+          0,
+          1395,
+          65535,
+          0,
+          0,
+          0,
+          65535,
+          0,
+          0,
+          0,
+          65535
+        ],
+        "auto": 0,
+        "selector": 0,
+        "percent": 1,
+        "ideal_caste": [
+          60,
+          40,
+          0,
+          0
+        ],
+        "level_point": [
+          192,
+          346
+        ],
+        "actual_triangle_rect": [
+          136,
+          344,
+          247,
+          440
+        ],
+        "shared_triangle_metrics": [
+          109,
+          96,
+          54
+        ]
+      },
+      "mismatches": []
+    },
+    {
+      "kind": "caste",
+      "code": 4867,
+      "native": {
+        "auto": 1,
+        "selector": 0,
+        "percent": 1,
+        "current": [
+          0,
+          39321,
+          26214
+        ],
+        "presets": [
+          0,
+          39321,
+          26214,
+          32767,
+          16383,
+          16383,
+          0,
+          65535,
+          0,
+          0,
+          0,
+          65535
+        ],
+        "ideal_caste": [
+          60,
+          40,
+          0,
+          0
+        ],
+        "point": [
+          436,
+          438
+        ],
+        "provider_events": [
+          {
+            "provider": "clip_set",
+            "args": [
+              4864
+            ]
+          },
+          {
+            "provider": "help",
+            "args": [
+              4878
+            ]
+          },
+          {
+            "provider": "clip_off",
+            "args": []
+          }
+        ]
+      },
+      "dos_provider_events": [
+        {
+          "provider": "clip_set",
+          "args": [
+            4864
+          ]
+        },
+        {
+          "provider": "help",
+          "args": [
+            4878
+          ]
+        },
+        {
+          "provider": "clip_off",
+          "args": []
+        }
+      ],
+      "dos_snapshot": {
+        "current": [
+          0,
+          39321,
+          26214
+        ],
+        "presets": [
+          0,
+          39321,
+          26214,
+          32767,
+          16383,
+          16383,
+          0,
+          65535,
+          0,
+          0,
+          0,
+          65535
+        ],
+        "auto": 1,
+        "selector": 0,
+        "percent": 1,
+        "ideal_caste": [
+          60,
+          40,
+          0,
+          0
+        ],
+        "level_point": [
+          436,
+          438
+        ],
+        "actual_triangle_rect": [
+          392,
+          344,
+          501,
+          440
+        ],
+        "shared_triangle_metrics": [
+          109,
+          96,
+          54
+        ]
+      },
+      "mismatches": []
+    },
+    {
+      "kind": "caste",
+      "code": 4866,
+      "native": {
+        "auto": 1,
+        "selector": 0,
+        "percent": 1,
+        "current": [
+          0,
+          39321,
+          26214
+        ],
+        "presets": [
+          0,
+          39321,
+          26214,
+          32767,
+          16383,
+          16383,
+          0,
+          65535,
+          0,
+          0,
+          0,
+          65535
+        ],
+        "ideal_caste": [
+          60,
+          40,
+          0,
+          0
+        ],
+        "point": [
+          436,
+          438
+        ],
+        "provider_events": [
+          {
+            "provider": "clip_set",
+            "args": [
+              4864
+            ]
+          },
+          {
+            "provider": "clip_off",
+            "args": []
+          }
+        ]
+      },
+      "dos_provider_events": [
+        {
+          "provider": "clip_set",
+          "args": [
+            4864
+          ]
+        },
+        {
+          "provider": "clip_off",
+          "args": []
+        }
+      ],
+      "dos_snapshot": {
+        "current": [
+          0,
+          39321,
+          26214
+        ],
+        "presets": [
+          0,
+          39321,
+          26214,
+          32767,
+          16383,
+          16383,
+          0,
+          65535,
+          0,
+          0,
+          0,
+          65535
+        ],
+        "auto": 1,
+        "selector": 0,
+        "percent": 1,
+        "ideal_caste": [
+          60,
+          40,
+          0,
+          0
+        ],
+        "level_point": [
+          436,
+          438
+        ],
+        "actual_triangle_rect": [
+          392,
+          344,
+          501,
+          440
+        ],
+        "shared_triangle_metrics": [
+          109,
+          96,
+          54
+        ]
+      },
+      "mismatches": []
+    },
+    {
+      "kind": "caste",
+      "code": 4882,
+      "native": {
+        "auto": 1,
+        "selector": 0,
+        "percent": 1,
+        "current": [
+          0,
+          39321,
+          26214
+        ],
+        "presets": [
+          0,
+          39321,
+          26214,
+          32767,
+          16383,
+          16383,
+          0,
+          65535,
+          0,
+          0,
+          0,
+          65535
+        ],
+        "ideal_caste": [
+          60,
+          40,
+          0,
+          0
+        ],
+        "point": [
+          436,
+          438
+        ],
+        "provider_events": [
+          {
+            "provider": "clip_set",
+            "args": [
+              4864
+            ]
+          },
+          {
+            "provider": "clip_off",
+            "args": []
+          }
+        ]
+      },
+      "dos_provider_events": [
+        {
+          "provider": "clip_set",
+          "args": [
+            4864
+          ]
+        },
+        {
+          "provider": "clip_off",
+          "args": []
+        }
+      ],
+      "dos_snapshot": {
+        "current": [
+          0,
+          39321,
+          26214
+        ],
+        "presets": [
+          0,
+          39321,
+          26214,
+          32767,
+          16383,
+          16383,
+          0,
+          65535,
+          0,
+          0,
+          0,
+          65535
+        ],
+        "auto": 1,
+        "selector": 0,
+        "percent": 1,
+        "ideal_caste": [
+          60,
+          40,
+          0,
+          0
+        ],
+        "level_point": [
+          436,
+          438
+        ],
+        "actual_triangle_rect": [
+          392,
+          344,
+          501,
+          440
+        ],
+        "shared_triangle_metrics": [
+          109,
+          96,
+          54
+        ]
+      },
+      "mismatches": []
+    },
+    {
+      "kind": "caste",
+      "code": 4868,
+      "native": {
+        "auto": 1,
+        "selector": 0,
+        "percent": 1,
+        "current": [
+          0,
+          39321,
+          26214
+        ],
+        "presets": [
+          0,
+          39321,
+          26214,
+          32767,
+          16383,
+          16383,
+          0,
+          65535,
+          0,
+          0,
+          0,
+          65535
+        ],
+        "ideal_caste": [
+          60,
+          40,
+          0,
+          0
+        ],
+        "point": [
+          436,
+          438
+        ],
+        "provider_events": [
+          {
+            "provider": "clip_set",
+            "args": [
+              4864
+            ]
+          },
+          {
+            "provider": "group_invisible",
+            "args": [
+              4864,
+              4
+            ],
+            "visible": false
+          },
+          {
+            "provider": "clip_off",
+            "args": []
+          }
+        ]
+      },
+      "dos_provider_events": [
+        {
+          "provider": "clip_set",
+          "args": [
+            4864
+          ]
+        },
+        {
+          "provider": "group_invisible",
+          "args": [
+            4864,
+            4
+          ],
+          "visible": false
+        },
+        {
+          "provider": "clip_off",
+          "args": []
+        }
+      ],
+      "dos_snapshot": {
+        "current": [
+          0,
+          39321,
+          26214
+        ],
+        "presets": [
+          0,
+          39321,
+          26214,
+          32767,
+          16383,
+          16383,
+          0,
+          65535,
+          0,
+          0,
+          0,
+          65535
+        ],
+        "auto": 1,
+        "selector": 0,
+        "percent": 1,
+        "ideal_caste": [
+          60,
+          40,
+          0,
+          0
+        ],
+        "level_point": [
+          436,
+          438
+        ],
+        "actual_triangle_rect": [
+          392,
+          344,
+          501,
+          440
+        ],
+        "shared_triangle_metrics": [
+          109,
+          96,
+          54
+        ]
+      },
+      "mismatches": []
+    },
+    {
+      "kind": "caste",
+      "code": 4868,
+      "native": {
+        "auto": 1,
+        "selector": 0,
+        "percent": 1,
+        "current": [
+          0,
+          39321,
+          26214
+        ],
+        "presets": [
+          0,
+          39321,
+          26214,
+          32767,
+          16383,
+          16383,
+          0,
+          65535,
+          0,
+          0,
+          0,
+          65535
+        ],
+        "ideal_caste": [
+          60,
+          40,
+          0,
+          0
+        ],
+        "point": [
+          436,
+          438
+        ],
+        "provider_events": [
+          {
+            "provider": "clip_set",
+            "args": [
+              4864
+            ]
+          },
+          {
+            "provider": "clip_off",
+            "args": []
+          }
+        ]
+      },
+      "dos_provider_events": [
+        {
+          "provider": "clip_set",
+          "args": [
+            4864
+          ]
+        },
+        {
+          "provider": "clip_off",
+          "args": []
+        }
+      ],
+      "dos_snapshot": {
+        "current": [
+          0,
+          39321,
+          26214
+        ],
+        "presets": [
+          0,
+          39321,
+          26214,
+          32767,
+          16383,
+          16383,
+          0,
+          65535,
+          0,
+          0,
+          0,
+          65535
+        ],
+        "auto": 1,
+        "selector": 0,
+        "percent": 1,
+        "ideal_caste": [
+          60,
+          40,
+          0,
+          0
+        ],
+        "level_point": [
+          436,
+          438
+        ],
+        "actual_triangle_rect": [
+          392,
+          344,
+          501,
+          440
+        ],
+        "shared_triangle_metrics": [
+          109,
+          96,
+          54
+        ]
+      },
+      "mismatches": []
+    },
+    {
+      "kind": "caste",
+      "code": 4869,
+      "native": {
+        "auto": 0,
+        "selector": 0,
+        "percent": 1,
+        "current": [
+          0,
+          39321,
+          26214
+        ],
+        "presets": [
+          0,
+          39321,
+          26214,
+          32767,
+          16383,
+          16383,
+          0,
+          65535,
+          0,
+          0,
+          0,
+          65535
+        ],
+        "ideal_caste": [
+          60,
+          40,
+          0,
+          0
+        ],
+        "point": [
+          436,
+          438
+        ],
+        "provider_events": [
+          {
+            "provider": "clip_set",
+            "args": [
+              4864
+            ]
+          },
+          {
+            "provider": "group_visible",
+            "args": [
+              4864,
+              4
+            ],
+            "visible": true
+          },
+          {
+            "provider": "clip_off",
+            "args": []
+          }
+        ]
+      },
+      "dos_provider_events": [
+        {
+          "provider": "clip_set",
+          "args": [
+            4864
+          ]
+        },
+        {
+          "provider": "group_visible",
+          "args": [
+            4864,
+            4
+          ],
+          "visible": true
+        },
+        {
+          "provider": "clip_off",
+          "args": []
+        }
+      ],
+      "dos_snapshot": {
+        "current": [
+          0,
+          39321,
+          26214
+        ],
+        "presets": [
+          0,
+          39321,
+          26214,
+          32767,
+          16383,
+          16383,
+          0,
+          65535,
+          0,
+          0,
+          0,
+          65535
+        ],
+        "auto": 0,
+        "selector": 0,
+        "percent": 1,
+        "ideal_caste": [
+          60,
+          40,
+          0,
+          0
+        ],
+        "level_point": [
+          436,
+          438
+        ],
+        "actual_triangle_rect": [
+          392,
+          344,
+          501,
+          440
+        ],
+        "shared_triangle_metrics": [
+          109,
+          96,
+          54
+        ]
+      },
+      "mismatches": []
+    },
+    {
+      "kind": "caste",
+      "code": 4869,
+      "native": {
+        "auto": 0,
+        "selector": 0,
+        "percent": 1,
+        "current": [
+          0,
+          39321,
+          26214
+        ],
+        "presets": [
+          0,
+          39321,
+          26214,
+          32767,
+          16383,
+          16383,
+          0,
+          65535,
+          0,
+          0,
+          0,
+          65535
+        ],
+        "ideal_caste": [
+          60,
+          40,
+          0,
+          0
+        ],
+        "point": [
+          436,
+          438
+        ],
+        "provider_events": [
+          {
+            "provider": "clip_set",
+            "args": [
+              4864
+            ]
+          },
+          {
+            "provider": "clip_off",
+            "args": []
+          }
+        ]
+      },
+      "dos_provider_events": [
+        {
+          "provider": "clip_set",
+          "args": [
+            4864
+          ]
+        },
+        {
+          "provider": "clip_off",
+          "args": []
+        }
+      ],
+      "dos_snapshot": {
+        "current": [
+          0,
+          39321,
+          26214
+        ],
+        "presets": [
+          0,
+          39321,
+          26214,
+          32767,
+          16383,
+          16383,
+          0,
+          65535,
+          0,
+          0,
+          0,
+          65535
+        ],
+        "auto": 0,
+        "selector": 0,
+        "percent": 1,
+        "ideal_caste": [
+          60,
+          40,
+          0,
+          0
+        ],
+        "level_point": [
+          436,
+          438
+        ],
+        "actual_triangle_rect": [
+          392,
+          344,
+          501,
+          440
+        ],
+        "shared_triangle_metrics": [
+          109,
+          96,
+          54
+        ]
+      },
+      "mismatches": []
+    },
+    {
+      "kind": "caste",
+      "code": 4870,
+      "native": {
+        "auto": 0,
+        "selector": 0,
+        "percent": 1,
+        "current": [
+          0,
+          39321,
+          26214
+        ],
+        "presets": [
+          0,
+          39321,
+          26214,
+          32767,
+          16383,
+          16383,
+          0,
+          65535,
+          0,
+          0,
+          0,
+          65535
+        ],
+        "ideal_caste": [
+          60,
+          40,
+          0,
+          0
+        ],
+        "point": [
+          436,
+          438
+        ],
+        "provider_events": [
+          {
+            "provider": "clip_set",
+            "args": [
+              4864
+            ]
+          },
+          {
+            "provider": "select",
+            "args": [
+              4869
+            ]
+          },
+          {
+            "provider": "clip_set",
+            "args": [
+              4864
+            ]
+          },
+          {
+            "provider": "draw",
+            "args": [
+              3
+            ],
+            "kind": "caste",
+            "flags": 3,
+            "percent": 1,
+            "current": [
+              0,
+              39321,
+              26214
+            ],
+            "selector": 0,
+            "auto": 1
+          },
+          {
+            "provider": "group_visible",
+            "args": [
+              4864,
+              4
+            ],
+            "visible": true
+          },
+          {
+            "provider": "clip_off",
+            "args": []
+          }
+        ]
+      },
+      "dos_provider_events": [
+        {
+          "provider": "clip_set",
+          "args": [
+            4864
+          ]
+        },
+        {
+          "provider": "select",
+          "args": [
+            4869
+          ]
+        },
+        {
+          "provider": "clip_set",
+          "args": [
+            4864
+          ]
+        },
+        {
+          "provider": "draw",
+          "args": [
+            3
+          ],
+          "kind": "caste",
+          "flags": 3,
+          "current": [
+            0,
+            39321,
+            26214
+          ],
+          "selector": 0,
+          "auto": 1,
+          "percent": 1
+        },
+        {
+          "provider": "group_visible",
+          "args": [
+            4864,
+            4
+          ],
+          "visible": true
+        },
+        {
+          "provider": "clip_off",
+          "args": []
+        }
+      ],
+      "dos_snapshot": {
+        "current": [
+          0,
+          39321,
+          26214
+        ],
+        "presets": [
+          0,
+          39321,
+          26214,
+          32767,
+          16383,
+          16383,
+          0,
+          65535,
+          0,
+          0,
+          0,
+          65535
+        ],
+        "auto": 0,
+        "selector": 0,
+        "percent": 1,
+        "ideal_caste": [
+          60,
+          40,
+          0,
+          0
+        ],
+        "level_point": [
+          436,
+          438
+        ],
+        "actual_triangle_rect": [
+          392,
+          344,
+          501,
+          440
+        ],
+        "shared_triangle_metrics": [
+          109,
+          96,
+          54
+        ]
+      },
+      "mismatches": []
+    },
+    {
+      "kind": "caste",
+      "code": 4871,
+      "native": {
+        "auto": 0,
+        "selector": 1,
+        "percent": 1,
+        "current": [
+          32767,
+          16383,
+          16383
+        ],
+        "presets": [
+          0,
+          39321,
+          26214,
+          32767,
+          16383,
+          16383,
+          0,
+          65535,
+          0,
+          0,
+          0,
+          65535
+        ],
+        "ideal_caste": [
+          60,
+          40,
+          0,
+          0
+        ],
+        "point": [
+          446,
+          391
+        ],
+        "provider_events": [
+          {
+            "provider": "clip_set",
+            "args": [
+              4864
+            ]
+          },
+          {
+            "provider": "select",
+            "args": [
+              4869
+            ]
+          },
+          {
+            "provider": "clip_set",
+            "args": [
+              4864
+            ]
+          },
+          {
+            "provider": "draw",
+            "args": [
+              3
+            ],
+            "kind": "caste",
+            "flags": 3,
+            "percent": 1,
+            "current": [
+              32767,
+              16383,
+              16383
+            ],
+            "selector": 1,
+            "auto": 1
+          },
+          {
+            "provider": "group_visible",
+            "args": [
+              4864,
+              4
+            ],
+            "visible": true
+          },
+          {
+            "provider": "clip_off",
+            "args": []
+          }
+        ]
+      },
+      "dos_provider_events": [
+        {
+          "provider": "clip_set",
+          "args": [
+            4864
+          ]
+        },
+        {
+          "provider": "select",
+          "args": [
+            4869
+          ]
+        },
+        {
+          "provider": "clip_set",
+          "args": [
+            4864
+          ]
+        },
+        {
+          "provider": "draw",
+          "args": [
+            3
+          ],
+          "kind": "caste",
+          "flags": 3,
+          "current": [
+            32767,
+            16383,
+            16383
+          ],
+          "selector": 1,
+          "auto": 1,
+          "percent": 1
+        },
+        {
+          "provider": "group_visible",
+          "args": [
+            4864,
+            4
+          ],
+          "visible": true
+        },
+        {
+          "provider": "clip_off",
+          "args": []
+        }
+      ],
+      "dos_snapshot": {
+        "current": [
+          32767,
+          16383,
+          16383
+        ],
+        "presets": [
+          0,
+          39321,
+          26214,
+          32767,
+          16383,
+          16383,
+          0,
+          65535,
+          0,
+          0,
+          0,
+          65535
+        ],
+        "auto": 0,
+        "selector": 1,
+        "percent": 1,
+        "ideal_caste": [
+          60,
+          40,
+          0,
+          0
+        ],
+        "level_point": [
+          446,
+          391
+        ],
+        "actual_triangle_rect": [
+          392,
+          344,
+          501,
+          440
+        ],
+        "shared_triangle_metrics": [
+          109,
+          96,
+          54
+        ]
+      },
+      "mismatches": []
+    },
+    {
+      "kind": "caste",
+      "code": 4872,
+      "native": {
+        "auto": 0,
+        "selector": 2,
+        "percent": 1,
+        "current": [
+          0,
+          65535,
+          0
+        ],
+        "presets": [
+          0,
+          39321,
+          26214,
+          32767,
+          16383,
+          16383,
+          0,
+          65535,
+          0,
+          0,
+          0,
+          65535
+        ],
+        "ideal_caste": [
+          60,
+          40,
+          0,
+          0
+        ],
+        "point": [
+          394,
+          438
+        ],
+        "provider_events": [
+          {
+            "provider": "clip_set",
+            "args": [
+              4864
+            ]
+          },
+          {
+            "provider": "select",
+            "args": [
+              4869
+            ]
+          },
+          {
+            "provider": "clip_set",
+            "args": [
+              4864
+            ]
+          },
+          {
+            "provider": "draw",
+            "args": [
+              3
+            ],
+            "kind": "caste",
+            "flags": 3,
+            "percent": 1,
+            "current": [
+              0,
+              65535,
+              0
+            ],
+            "selector": 2,
+            "auto": 1
+          },
+          {
+            "provider": "group_visible",
+            "args": [
+              4864,
+              4
+            ],
+            "visible": true
+          },
+          {
+            "provider": "clip_off",
+            "args": []
+          }
+        ]
+      },
+      "dos_provider_events": [
+        {
+          "provider": "clip_set",
+          "args": [
+            4864
+          ]
+        },
+        {
+          "provider": "select",
+          "args": [
+            4869
+          ]
+        },
+        {
+          "provider": "clip_set",
+          "args": [
+            4864
+          ]
+        },
+        {
+          "provider": "draw",
+          "args": [
+            3
+          ],
+          "kind": "caste",
+          "flags": 3,
+          "current": [
+            0,
+            65535,
+            0
+          ],
+          "selector": 2,
+          "auto": 1,
+          "percent": 1
+        },
+        {
+          "provider": "group_visible",
+          "args": [
+            4864,
+            4
+          ],
+          "visible": true
+        },
+        {
+          "provider": "clip_off",
+          "args": []
+        }
+      ],
+      "dos_snapshot": {
+        "current": [
+          0,
+          65535,
+          0
+        ],
+        "presets": [
+          0,
+          39321,
+          26214,
+          32767,
+          16383,
+          16383,
+          0,
+          65535,
+          0,
+          0,
+          0,
+          65535
+        ],
+        "auto": 0,
+        "selector": 2,
+        "percent": 1,
+        "ideal_caste": [
+          60,
+          40,
+          0,
+          0
+        ],
+        "level_point": [
+          394,
+          438
+        ],
+        "actual_triangle_rect": [
+          392,
+          344,
+          501,
+          440
+        ],
+        "shared_triangle_metrics": [
+          109,
+          96,
+          54
+        ]
+      },
+      "mismatches": []
+    },
+    {
+      "kind": "caste",
+      "code": 4879,
+      "native": {
+        "auto": 1,
+        "selector": 0,
+        "percent": 0,
+        "current": [
+          0,
+          39321,
+          26214
+        ],
+        "presets": [
+          0,
+          39321,
+          26214,
+          32767,
+          16383,
+          16383,
+          0,
+          65535,
+          0,
+          0,
+          0,
+          65535
+        ],
+        "ideal_caste": [
+          60,
+          40,
+          0,
+          0
+        ],
+        "point": [
+          436,
+          438
+        ],
+        "provider_events": [
+          {
+            "provider": "clip_set",
+            "args": [
+              4864
+            ]
+          },
+          {
+            "provider": "draw",
+            "args": [
+              3
+            ],
+            "kind": "caste",
+            "flags": 3,
+            "percent": 0,
+            "current": [
+              0,
+              39321,
+              26214
+            ],
+            "selector": 0,
+            "auto": 1
+          },
+          {
+            "provider": "clip_off",
+            "args": []
+          }
+        ]
+      },
+      "dos_provider_events": [
+        {
+          "provider": "clip_set",
+          "args": [
+            4864
+          ]
+        },
+        {
+          "provider": "draw",
+          "args": [
+            3
+          ],
+          "kind": "caste",
+          "flags": 3,
+          "current": [
+            0,
+            39321,
+            26214
+          ],
+          "selector": 0,
+          "auto": 1,
+          "percent": 0
+        },
+        {
+          "provider": "clip_off",
+          "args": []
+        }
+      ],
+      "dos_snapshot": {
+        "current": [
+          0,
+          39321,
+          26214
+        ],
+        "presets": [
+          0,
+          39321,
+          26214,
+          32767,
+          16383,
+          16383,
+          0,
+          65535,
+          0,
+          0,
+          0,
+          65535
+        ],
+        "auto": 1,
+        "selector": 0,
+        "percent": 0,
+        "ideal_caste": [
+          60,
+          40,
+          0,
+          0
+        ],
+        "level_point": [
+          436,
+          438
+        ],
+        "actual_triangle_rect": [
+          392,
+          344,
+          501,
+          440
+        ],
+        "shared_triangle_metrics": [
+          109,
+          96,
+          54
+        ]
+      },
+      "mismatches": []
+    },
+    {
+      "kind": "caste",
+      "code": 4880,
+      "native": {
+        "auto": 1,
+        "selector": 0,
+        "percent": 0,
+        "current": [
+          0,
+          39321,
+          26214
+        ],
+        "presets": [
+          0,
+          39321,
+          26214,
+          32767,
+          16383,
+          16383,
+          0,
+          65535,
+          0,
+          0,
+          0,
+          65535
+        ],
+        "ideal_caste": [
+          60,
+          40,
+          0,
+          0
+        ],
+        "point": [
+          436,
+          438
+        ],
+        "provider_events": [
+          {
+            "provider": "clip_set",
+            "args": [
+              4864
+            ]
+          },
+          {
+            "provider": "draw",
+            "args": [
+              3
+            ],
+            "kind": "caste",
+            "flags": 3,
+            "percent": 0,
+            "current": [
+              0,
+              39321,
+              26214
+            ],
+            "selector": 0,
+            "auto": 1
+          },
+          {
+            "provider": "clip_off",
+            "args": []
+          }
+        ]
+      },
+      "dos_provider_events": [
+        {
+          "provider": "clip_set",
+          "args": [
+            4864
+          ]
+        },
+        {
+          "provider": "draw",
+          "args": [
+            3
+          ],
+          "kind": "caste",
+          "flags": 3,
+          "current": [
+            0,
+            39321,
+            26214
+          ],
+          "selector": 0,
+          "auto": 1,
+          "percent": 0
+        },
+        {
+          "provider": "clip_off",
+          "args": []
+        }
+      ],
+      "dos_snapshot": {
+        "current": [
+          0,
+          39321,
+          26214
+        ],
+        "presets": [
+          0,
+          39321,
+          26214,
+          32767,
+          16383,
+          16383,
+          0,
+          65535,
+          0,
+          0,
+          0,
+          65535
+        ],
+        "auto": 1,
+        "selector": 0,
+        "percent": 0,
+        "ideal_caste": [
+          60,
+          40,
+          0,
+          0
+        ],
+        "level_point": [
+          436,
+          438
+        ],
+        "actual_triangle_rect": [
+          392,
+          344,
+          501,
+          440
+        ],
+        "shared_triangle_metrics": [
+          109,
+          96,
+          54
+        ]
+      },
+      "mismatches": []
+    },
+    {
+      "kind": "caste",
+      "code": 4881,
+      "native": {
+        "auto": 1,
+        "selector": 0,
+        "percent": 0,
+        "current": [
+          0,
+          39321,
+          26214
+        ],
+        "presets": [
+          0,
+          39321,
+          26214,
+          32767,
+          16383,
+          16383,
+          0,
+          65535,
+          0,
+          0,
+          0,
+          65535
+        ],
+        "ideal_caste": [
+          60,
+          40,
+          0,
+          0
+        ],
+        "point": [
+          436,
+          438
+        ],
+        "provider_events": [
+          {
+            "provider": "clip_set",
+            "args": [
+              4864
+            ]
+          },
+          {
+            "provider": "draw",
+            "args": [
+              3
+            ],
+            "kind": "caste",
+            "flags": 3,
+            "percent": 0,
+            "current": [
+              0,
+              39321,
+              26214
+            ],
+            "selector": 0,
+            "auto": 1
+          },
+          {
+            "provider": "clip_off",
+            "args": []
+          }
+        ]
+      },
+      "dos_provider_events": [
+        {
+          "provider": "clip_set",
+          "args": [
+            4864
+          ]
+        },
+        {
+          "provider": "draw",
+          "args": [
+            3
+          ],
+          "kind": "caste",
+          "flags": 3,
+          "current": [
+            0,
+            39321,
+            26214
+          ],
+          "selector": 0,
+          "auto": 1,
+          "percent": 0
+        },
+        {
+          "provider": "clip_off",
+          "args": []
+        }
+      ],
+      "dos_snapshot": {
+        "current": [
+          0,
+          39321,
+          26214
+        ],
+        "presets": [
+          0,
+          39321,
+          26214,
+          32767,
+          16383,
+          16383,
+          0,
+          65535,
+          0,
+          0,
+          0,
+          65535
+        ],
+        "auto": 1,
+        "selector": 0,
+        "percent": 0,
+        "ideal_caste": [
+          60,
+          40,
+          0,
+          0
+        ],
+        "level_point": [
+          436,
+          438
+        ],
+        "actual_triangle_rect": [
+          392,
+          344,
+          501,
+          440
+        ],
+        "shared_triangle_metrics": [
+          109,
+          96,
+          54
+        ]
+      },
+      "mismatches": []
+    },
+    {
+      "kind": "caste",
+      "code": 4871,
+      "native": {
+        "auto": 0,
+        "selector": 1,
+        "percent": 0,
+        "current": [
+          32767,
+          16383,
+          16383
+        ],
+        "presets": [
+          0,
+          39321,
+          26214,
+          32767,
+          16383,
+          16383,
+          0,
+          39321,
+          26214,
+          0,
+          0,
+          65535
+        ],
+        "ideal_caste": [
+          60,
+          40,
+          0,
+          0
+        ],
+        "point": [
+          446,
+          391
+        ],
+        "provider_events": [
+          {
+            "provider": "clip_set",
+            "args": [
+              4864
+            ]
+          },
+          {
+            "provider": "select",
+            "args": [
+              4869
+            ]
+          },
+          {
+            "provider": "clip_set",
+            "args": [
+              4864
+            ]
+          },
+          {
+            "provider": "draw",
+            "args": [
+              3
+            ],
+            "kind": "caste",
+            "flags": 3,
+            "percent": 0,
+            "current": [
+              32767,
+              16383,
+              16383
+            ],
+            "selector": 1,
+            "auto": 1
+          },
+          {
+            "provider": "group_visible",
+            "args": [
+              4864,
+              4
+            ],
+            "visible": true
+          },
+          {
+            "provider": "clip_off",
+            "args": []
+          }
+        ]
+      },
+      "dos_provider_events": [
+        {
+          "provider": "clip_set",
+          "args": [
+            4864
+          ]
+        },
+        {
+          "provider": "select",
+          "args": [
+            4869
+          ]
+        },
+        {
+          "provider": "clip_set",
+          "args": [
+            4864
+          ]
+        },
+        {
+          "provider": "draw",
+          "args": [
+            3
+          ],
+          "kind": "caste",
+          "flags": 3,
+          "current": [
+            32767,
+            16383,
+            16383
+          ],
+          "selector": 1,
+          "auto": 1,
+          "percent": 0
+        },
+        {
+          "provider": "group_visible",
+          "args": [
+            4864,
+            4
+          ],
+          "visible": true
+        },
+        {
+          "provider": "clip_off",
+          "args": []
+        }
+      ],
+      "dos_snapshot": {
+        "current": [
+          32767,
+          16383,
+          16383
+        ],
+        "presets": [
+          0,
+          39321,
+          26214,
+          32767,
+          16383,
+          16383,
+          0,
+          39321,
+          26214,
+          0,
+          0,
+          65535
+        ],
+        "auto": 0,
+        "selector": 1,
+        "percent": 0,
+        "ideal_caste": [
+          60,
+          40,
+          0,
+          0
+        ],
+        "level_point": [
+          446,
+          391
+        ],
+        "actual_triangle_rect": [
+          392,
+          344,
+          501,
+          440
+        ],
+        "shared_triangle_metrics": [
+          109,
+          96,
+          54
+        ]
+      },
+      "mismatches": []
+    },
+    {
+      "kind": "caste",
+      "code": 4877,
+      "native": {
+        "auto": 0,
+        "selector": 0,
+        "percent": 1,
+        "current": [
+          64837,
+          0,
+          698
+        ],
+        "presets": [
+          64837,
+          0,
+          698,
+          32767,
+          16383,
+          16383,
+          0,
+          65535,
+          0,
+          0,
+          0,
+          65535
+        ],
+        "ideal_caste": [
+          0,
+          1,
+          49,
+          49
+        ],
+        "point": [
+          447,
+          345
+        ],
+        "provider_events": [
+          {
+            "provider": "clip_set",
+            "args": [
+              4864
+            ]
+          },
+          {
+            "provider": "get_rect",
+            "object": 4877,
+            "rect": [
+              392,
+              344,
+              501,
+              440
+            ]
+          },
+          {
+            "provider": "select",
+            "args": [
+              4869
+            ]
+          },
+          {
+            "provider": "group_visible",
+            "args": [
+              4864,
+              4
+            ],
+            "visible": true
+          },
+          {
+            "provider": "clip_set",
+            "args": [
+              4864
+            ]
+          },
+          {
+            "provider": "draw",
+            "args": [
+              3
+            ],
+            "kind": "caste",
+            "flags": 3,
+            "percent": 1,
+            "current": [
+              64837,
+              0,
+              698
+            ],
+            "selector": 0,
+            "auto": 0
+          },
+          {
+            "provider": "pointer_poll",
+            "point": [
+              446,
+              345
+            ]
+          },
+          {
+            "provider": "still_down",
+            "down": 0
+          },
+          {
+            "provider": "clip_off",
+            "args": []
+          }
+        ]
+      },
+      "dos_provider_events": [
+        {
+          "provider": "clip_set",
+          "args": [
+            4864
+          ]
+        },
+        {
+          "provider": "get_rect",
+          "object": 4877,
+          "rect": [
+            392,
+            344,
+            501,
+            440
+          ]
+        },
+        {
+          "provider": "select",
+          "args": [
+            4869
+          ]
+        },
+        {
+          "provider": "group_visible",
+          "args": [
+            4864,
+            4
+          ],
+          "visible": true
+        },
+        {
+          "provider": "clip_set",
+          "args": [
+            4864
+          ]
+        },
+        {
+          "provider": "draw",
+          "args": [
+            3
+          ],
+          "kind": "caste",
+          "flags": 3,
+          "current": [
+            64837,
+            0,
+            698
+          ],
+          "selector": 0,
+          "auto": 0,
+          "percent": 1
+        },
+        {
+          "provider": "pointer_poll",
+          "point": [
+            446,
+            345
+          ]
+        },
+        {
+          "provider": "still_down",
+          "down": 0
+        },
+        {
+          "provider": "clip_off",
+          "args": []
+        }
+      ],
+      "dos_snapshot": {
+        "current": [
+          64837,
+          0,
+          698
+        ],
+        "presets": [
+          64837,
+          0,
+          698,
+          32767,
+          16383,
+          16383,
+          0,
+          65535,
+          0,
+          0,
+          0,
+          65535
+        ],
+        "auto": 0,
+        "selector": 0,
+        "percent": 1,
+        "ideal_caste": [
+          0,
+          1,
+          49,
+          49
+        ],
+        "level_point": [
+          447,
+          345
+        ],
+        "actual_triangle_rect": [
+          392,
+          344,
+          501,
+          440
+        ],
+        "shared_triangle_metrics": [
+          109,
+          96,
+          54
+        ]
+      },
+      "mismatches": []
+    },
+    {
+      "kind": "caste",
+      "code": 4877,
+      "native": {
+        "auto": 1,
+        "selector": 0,
+        "percent": 1,
+        "current": [
+          0,
+          39321,
+          26214
+        ],
+        "presets": [
+          0,
+          39321,
+          26214,
+          32767,
+          16383,
+          16383,
+          0,
+          65535,
+          0,
+          0,
+          0,
+          65535
+        ],
+        "ideal_caste": [
+          60,
+          40,
+          0,
+          0
+        ],
+        "point": [
+          436,
+          438
+        ],
+        "provider_events": [
+          {
+            "provider": "clip_set",
+            "args": [
+              4864
+            ]
+          },
+          {
+            "provider": "get_rect",
+            "object": 4877,
+            "rect": [
+              392,
+              344,
+              501,
+              440
+            ]
+          },
+          {
+            "provider": "clip_off",
+            "args": []
+          }
+        ]
+      },
+      "dos_provider_events": [
+        {
+          "provider": "clip_set",
+          "args": [
+            4864
+          ]
+        },
+        {
+          "provider": "get_rect",
+          "object": 4877,
+          "rect": [
+            392,
+            344,
+            501,
+            440
+          ]
+        },
+        {
+          "provider": "clip_off",
+          "args": []
+        }
+      ],
+      "dos_snapshot": {
+        "current": [
+          0,
+          39321,
+          26214
+        ],
+        "presets": [
+          0,
+          39321,
+          26214,
+          32767,
+          16383,
+          16383,
+          0,
+          65535,
+          0,
+          0,
+          0,
+          65535
+        ],
+        "auto": 1,
+        "selector": 0,
+        "percent": 1,
+        "ideal_caste": [
+          60,
+          40,
+          0,
+          0
+        ],
+        "level_point": [
+          436,
+          438
+        ],
+        "actual_triangle_rect": [
+          392,
+          344,
+          501,
+          440
+        ],
+        "shared_triangle_metrics": [
+          109,
+          96,
+          54
+        ]
+      },
+      "mismatches": []
+    },
+    {
+      "kind": "caste",
+      "code": 4877,
+      "native": {
+        "auto": 0,
+        "selector": 0,
+        "percent": 1,
+        "current": [
+          64140,
+          0,
+          1395
+        ],
+        "presets": [
+          64140,
+          0,
+          1395,
+          32767,
+          16383,
+          16383,
+          0,
+          65535,
+          0,
+          0,
+          0,
+          65535
+        ],
+        "ideal_caste": [
+          0,
+          2,
+          49,
+          49
+        ],
+        "point": [
+          448,
+          346
+        ],
+        "provider_events": [
+          {
+            "provider": "clip_set",
+            "args": [
+              4864
+            ]
+          },
+          {
+            "provider": "get_rect",
+            "object": 4877,
+            "rect": [
+              392,
+              344,
+              501,
+              440
+            ]
+          },
+          {
+            "provider": "select",
+            "args": [
+              4869
+            ]
+          },
+          {
+            "provider": "group_visible",
+            "args": [
+              4864,
+              4
+            ],
+            "visible": true
+          },
+          {
+            "provider": "clip_set",
+            "args": [
+              4864
+            ]
+          },
+          {
+            "provider": "draw",
+            "args": [
+              3
+            ],
+            "kind": "caste",
+            "flags": 3,
+            "percent": 1,
+            "current": [
+              64837,
+              0,
+              698
+            ],
+            "selector": 0,
+            "auto": 0
+          },
+          {
+            "provider": "pointer_poll",
+            "point": [
+              447,
+              346
+            ]
+          },
+          {
+            "provider": "still_down",
+            "down": 1
+          },
+          {
+            "provider": "draw",
+            "args": [
+              3
+            ],
+            "kind": "caste",
+            "flags": 3,
+            "percent": 1,
+            "current": [
+              64140,
+              0,
+              1395
+            ],
+            "selector": 0,
+            "auto": 0
+          },
+          {
+            "provider": "pointer_poll",
+            "point": [
+              447,
+              346
+            ]
+          },
+          {
+            "provider": "still_down",
+            "down": 0
+          },
+          {
+            "provider": "clip_off",
+            "args": []
+          }
+        ]
+      },
+      "dos_provider_events": [
+        {
+          "provider": "clip_set",
+          "args": [
+            4864
+          ]
+        },
+        {
+          "provider": "get_rect",
+          "object": 4877,
+          "rect": [
+            392,
+            344,
+            501,
+            440
+          ]
+        },
+        {
+          "provider": "select",
+          "args": [
+            4869
+          ]
+        },
+        {
+          "provider": "group_visible",
+          "args": [
+            4864,
+            4
+          ],
+          "visible": true
+        },
+        {
+          "provider": "clip_set",
+          "args": [
+            4864
+          ]
+        },
+        {
+          "provider": "draw",
+          "args": [
+            3
+          ],
+          "kind": "caste",
+          "flags": 3,
+          "current": [
+            64837,
+            0,
+            698
+          ],
+          "selector": 0,
+          "auto": 0,
+          "percent": 1
+        },
+        {
+          "provider": "pointer_poll",
+          "point": [
+            447,
+            346
+          ]
+        },
+        {
+          "provider": "still_down",
+          "down": 1
+        },
+        {
+          "provider": "draw",
+          "args": [
+            3
+          ],
+          "kind": "caste",
+          "flags": 3,
+          "current": [
+            64140,
+            0,
+            1395
+          ],
+          "selector": 0,
+          "auto": 0,
+          "percent": 1
+        },
+        {
+          "provider": "pointer_poll",
+          "point": [
+            447,
+            346
+          ]
+        },
+        {
+          "provider": "still_down",
+          "down": 0
+        },
+        {
+          "provider": "clip_off",
+          "args": []
+        }
+      ],
+      "dos_snapshot": {
+        "current": [
+          64140,
+          0,
+          1395
+        ],
+        "presets": [
+          64140,
+          0,
+          1395,
+          32767,
+          16383,
+          16383,
+          0,
+          65535,
+          0,
+          0,
+          0,
+          65535
+        ],
+        "auto": 0,
+        "selector": 0,
+        "percent": 1,
+        "ideal_caste": [
+          0,
+          2,
+          49,
+          49
+        ],
+        "level_point": [
+          448,
+          346
+        ],
+        "actual_triangle_rect": [
+          392,
+          344,
+          501,
+          440
+        ],
+        "shared_triangle_metrics": [
+          109,
+          96,
+          54
+        ]
+      },
+      "mismatches": []
+    }
+  ],
+  "mismatches": []
+}

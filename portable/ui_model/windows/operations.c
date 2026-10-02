@@ -111,6 +111,34 @@ PortableObjectStatus portable_object_set_visible(
     return PORTABLE_OBJECT_OK;
 }
 
+PortableObjectStatus portable_object_group_visible(
+    const PortableObjectContext *context, uint16_t window_id,
+    uint8_t group, int visible)
+{
+    PortableWindowObject *first;
+    PortableWindowResource *window;
+    PortableObjectStatus status;
+    uint16_t i;
+    if (context == NULL || (visible != 0 && visible != 1))
+        return PORTABLE_OBJECT_INVALID_ARGUMENT;
+    status = lookup(context->registry, window_id, &first);
+    if (status != PORTABLE_OBJECT_OK) return status;
+    window = &context->registry->slots[window_id >> 8].window;
+    for (i = 0; i < window->count; ++i) {
+        PortableWindowObject *object = &window->objects[i];
+        uint16_t object_id = (uint16_t)(window_id + i);
+        if (object->group != group || ((object->flags & 1u) != 0) == visible)
+            continue;
+        object->flags = (uint16_t)((object->flags & ~1u) |
+                                   (visible ? 1u : 0u));
+        if ((object->flags & 4u) && object->type != 13 && object->type != 5) {
+            status = emit(context, PORTABLE_OBJECT_INVERT, object_id, 0);
+            if (status != PORTABLE_OBJECT_OK) return status;
+        }
+    }
+    return PORTABLE_OBJECT_OK;
+}
+
 PortableObjectStatus portable_object_set_selectable(
     const PortableObjectContext *context, uint16_t id, int selectable)
 {

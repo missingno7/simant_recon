@@ -1,0 +1,3787 @@
+{
+  "schema": "portable-setup-control-events-dos-probe-v1",
+  "status": "DIRECT_ORIGINAL_HANDLER_EXECUTION",
+  "original_oracle_sha256": "aa0596c6766322a8229ee3c36e57048c92adc82d50fbe2ef37afb8b85fcf4f11",
+  "source_sha256": "ecf807dc3159f583f6ee3ea8a9f5422650a64bb557d4551e9c97b5dcc7b6a1b8",
+  "native_model_sha256": "4e71ebae1db653a7c0854861699da4ccc8c1b52f8be75d07868e603928a9b19a",
+  "native_header_sha256": "242a0b416252b7c66c2660bf53bedeef3a8083256b6a805b0097e3628434bd22",
+  "native_test_sha256": "3418837afb5939d064dc063a17ba32efdfeeb29bd13a36375e48b6257310adb1",
+  "fixture_runner_sha256": "5e86861a344e3e8bd1accb51249f3e236c3776f7a9a2bd460c168839fe7db639",
+  "runner_sha256": "4c5090d7f4f1003c4d84e37d203b661e095a7f676deece98ccbfdccb521fe6ad",
+  "window_database": {
+    "ndx_sha256": "077d8aecdad5e816f0828204f7ca500a68b3a4a3288740ac75e73e44eaa8efc4",
+    "dat_sha256": "9c98c0f110e901a2c2db65944e4ebdf6b26392181e9415a34eb7b29617eaa899"
+  },
+  "fixture": "setup_differential.original_run: real HCEGANT windows 0x12/0x13 and initControls; source handlers/helpers execute directly",
+  "provider_boundary": [
+    "clip_SetWin",
+    "clip_Off",
+    "DoWinHelp",
+    "win_MakeGroupInvisible",
+    "win_MakeGroupVisible",
+    "win_MakeObjSelected",
+    "win_DrawModeWindow or win_DrawCasteWindow",
+    "f_1FD2_04D0 pointer sample",
+    "StillDown"
+  ],
+  "cases": [
+    {
+      "kind": "mode",
+      "code": 4611,
+      "start_auto": null,
+      "initial_point": [
+        191,
+        345
+      ],
+      "initial_control_point": [
+        192,
+        381
+      ],
+      "cursor_samples": [],
+      "callback_order": [
+        {
+          "provider": "clip_set",
+          "args": [
+            4608
+          ]
+        },
+        {
+          "provider": "help",
+          "args": [
+            4622
+          ]
+        },
+        {
+          "provider": "clip_off",
+          "args": []
+        }
+      ],
+      "callback_raw_trace": [
+        {
+          "name": "clip_SetWin",
+          "args": [
+            4608
+          ]
+        },
+        {
+          "name": "DoWinHelp",
+          "args": [
+            4622
+          ]
+        },
+        {
+          "name": "clip_Off",
+          "args": []
+        }
+      ],
+      "source_draw_point_projection": null,
+      "snapshot": {
+        "current": [
+          39321,
+          13107,
+          13107
+        ],
+        "presets": [
+          39321,
+          13107,
+          13107,
+          65535,
+          0,
+          0,
+          0,
+          65535,
+          0,
+          0,
+          0,
+          65535
+        ],
+        "auto": 1,
+        "selector": 0,
+        "percent": 1,
+        "ideal_caste": [
+          60,
+          40,
+          0,
+          0
+        ],
+        "level_point": [
+          192,
+          381
+        ],
+        "actual_triangle_rect": [
+          136,
+          344,
+          247,
+          440
+        ],
+        "shared_triangle_metrics": [
+          109,
+          96,
+          54
+        ]
+      },
+      "oracle_function": {
+        "unit": "root",
+        "seg": 1944,
+        "off": 903,
+        "size": 568,
+        "region": "game_or_library",
+        "extent": "DESCENT",
+        "evidence": [
+          "far_call"
+        ],
+        "jump_tables": [
+          {
+            "site": 32054,
+            "table": 32059,
+            "count": 15
+          }
+        ],
+        "name": "ProcModeEvent"
+      }
+    },
+    {
+      "kind": "mode",
+      "code": 4612,
+      "start_auto": 0,
+      "initial_point": [
+        191,
+        345
+      ],
+      "initial_control_point": [
+        192,
+        381
+      ],
+      "cursor_samples": [],
+      "callback_order": [
+        {
+          "provider": "clip_set",
+          "args": [
+            4608
+          ]
+        },
+        {
+          "provider": "group_invisible",
+          "args": [
+            4608,
+            4
+          ]
+        },
+        {
+          "provider": "clip_off",
+          "args": []
+        }
+      ],
+      "callback_raw_trace": [
+        {
+          "name": "clip_SetWin",
+          "args": [
+            4608
+          ]
+        },
+        {
+          "name": "win_MakeGroupInvisible",
+          "args": [
+            4608,
+            4
+          ]
+        },
+        {
+          "name": "clip_Off",
+          "args": []
+        }
+      ],
+      "source_draw_point_projection": null,
+      "snapshot": {
+        "current": [
+          39321,
+          13107,
+          13107
+        ],
+        "presets": [
+          39321,
+          13107,
+          13107,
+          65535,
+          0,
+          0,
+          0,
+          65535,
+          0,
+          0,
+          0,
+          65535
+        ],
+        "auto": 1,
+        "selector": 0,
+        "percent": 1,
+        "ideal_caste": [
+          60,
+          40,
+          0,
+          0
+        ],
+        "level_point": [
+          192,
+          381
+        ],
+        "actual_triangle_rect": [
+          136,
+          344,
+          247,
+          440
+        ],
+        "shared_triangle_metrics": [
+          109,
+          96,
+          54
+        ]
+      },
+      "oracle_function": {
+        "unit": "root",
+        "seg": 1944,
+        "off": 903,
+        "size": 568,
+        "region": "game_or_library",
+        "extent": "DESCENT",
+        "evidence": [
+          "far_call"
+        ],
+        "jump_tables": [
+          {
+            "site": 32054,
+            "table": 32059,
+            "count": 15
+          }
+        ],
+        "name": "ProcModeEvent"
+      }
+    },
+    {
+      "kind": "mode",
+      "code": 4612,
+      "start_auto": null,
+      "initial_point": [
+        191,
+        345
+      ],
+      "initial_control_point": [
+        192,
+        381
+      ],
+      "cursor_samples": [],
+      "callback_order": [
+        {
+          "provider": "clip_set",
+          "args": [
+            4608
+          ]
+        },
+        {
+          "provider": "clip_off",
+          "args": []
+        }
+      ],
+      "callback_raw_trace": [
+        {
+          "name": "clip_SetWin",
+          "args": [
+            4608
+          ]
+        },
+        {
+          "name": "clip_Off",
+          "args": []
+        }
+      ],
+      "source_draw_point_projection": null,
+      "snapshot": {
+        "current": [
+          39321,
+          13107,
+          13107
+        ],
+        "presets": [
+          39321,
+          13107,
+          13107,
+          65535,
+          0,
+          0,
+          0,
+          65535,
+          0,
+          0,
+          0,
+          65535
+        ],
+        "auto": 1,
+        "selector": 0,
+        "percent": 1,
+        "ideal_caste": [
+          60,
+          40,
+          0,
+          0
+        ],
+        "level_point": [
+          192,
+          381
+        ],
+        "actual_triangle_rect": [
+          136,
+          344,
+          247,
+          440
+        ],
+        "shared_triangle_metrics": [
+          109,
+          96,
+          54
+        ]
+      },
+      "oracle_function": {
+        "unit": "root",
+        "seg": 1944,
+        "off": 903,
+        "size": 568,
+        "region": "game_or_library",
+        "extent": "DESCENT",
+        "evidence": [
+          "far_call"
+        ],
+        "jump_tables": [
+          {
+            "site": 32054,
+            "table": 32059,
+            "count": 15
+          }
+        ],
+        "name": "ProcModeEvent"
+      }
+    },
+    {
+      "kind": "mode",
+      "code": 4613,
+      "start_auto": null,
+      "initial_point": [
+        191,
+        345
+      ],
+      "initial_control_point": [
+        192,
+        381
+      ],
+      "cursor_samples": [],
+      "callback_order": [
+        {
+          "provider": "clip_set",
+          "args": [
+            4608
+          ]
+        },
+        {
+          "provider": "group_visible",
+          "args": [
+            4608,
+            4
+          ]
+        },
+        {
+          "provider": "clip_off",
+          "args": []
+        }
+      ],
+      "callback_raw_trace": [
+        {
+          "name": "clip_SetWin",
+          "args": [
+            4608
+          ]
+        },
+        {
+          "name": "win_MakeGroupVisible",
+          "args": [
+            4608,
+            4
+          ]
+        },
+        {
+          "name": "clip_Off",
+          "args": []
+        }
+      ],
+      "source_draw_point_projection": null,
+      "snapshot": {
+        "current": [
+          39321,
+          13107,
+          13107
+        ],
+        "presets": [
+          39321,
+          13107,
+          13107,
+          65535,
+          0,
+          0,
+          0,
+          65535,
+          0,
+          0,
+          0,
+          65535
+        ],
+        "auto": 0,
+        "selector": 0,
+        "percent": 1,
+        "ideal_caste": [
+          60,
+          40,
+          0,
+          0
+        ],
+        "level_point": [
+          192,
+          381
+        ],
+        "actual_triangle_rect": [
+          136,
+          344,
+          247,
+          440
+        ],
+        "shared_triangle_metrics": [
+          109,
+          96,
+          54
+        ]
+      },
+      "oracle_function": {
+        "unit": "root",
+        "seg": 1944,
+        "off": 903,
+        "size": 568,
+        "region": "game_or_library",
+        "extent": "DESCENT",
+        "evidence": [
+          "far_call"
+        ],
+        "jump_tables": [
+          {
+            "site": 32054,
+            "table": 32059,
+            "count": 15
+          }
+        ],
+        "name": "ProcModeEvent"
+      }
+    },
+    {
+      "kind": "mode",
+      "code": 4613,
+      "start_auto": 0,
+      "initial_point": [
+        191,
+        345
+      ],
+      "initial_control_point": [
+        192,
+        381
+      ],
+      "cursor_samples": [],
+      "callback_order": [
+        {
+          "provider": "clip_set",
+          "args": [
+            4608
+          ]
+        },
+        {
+          "provider": "clip_off",
+          "args": []
+        }
+      ],
+      "callback_raw_trace": [
+        {
+          "name": "clip_SetWin",
+          "args": [
+            4608
+          ]
+        },
+        {
+          "name": "clip_Off",
+          "args": []
+        }
+      ],
+      "source_draw_point_projection": null,
+      "snapshot": {
+        "current": [
+          39321,
+          13107,
+          13107
+        ],
+        "presets": [
+          39321,
+          13107,
+          13107,
+          65535,
+          0,
+          0,
+          0,
+          65535,
+          0,
+          0,
+          0,
+          65535
+        ],
+        "auto": 0,
+        "selector": 0,
+        "percent": 1,
+        "ideal_caste": [
+          60,
+          40,
+          0,
+          0
+        ],
+        "level_point": [
+          192,
+          381
+        ],
+        "actual_triangle_rect": [
+          136,
+          344,
+          247,
+          440
+        ],
+        "shared_triangle_metrics": [
+          109,
+          96,
+          54
+        ]
+      },
+      "oracle_function": {
+        "unit": "root",
+        "seg": 1944,
+        "off": 903,
+        "size": 568,
+        "region": "game_or_library",
+        "extent": "DESCENT",
+        "evidence": [
+          "far_call"
+        ],
+        "jump_tables": [
+          {
+            "site": 32054,
+            "table": 32059,
+            "count": 15
+          }
+        ],
+        "name": "ProcModeEvent"
+      }
+    },
+    {
+      "kind": "mode",
+      "code": 4614,
+      "start_auto": null,
+      "initial_point": [
+        191,
+        345
+      ],
+      "initial_control_point": [
+        192,
+        381
+      ],
+      "cursor_samples": [],
+      "callback_order": [
+        {
+          "provider": "clip_set",
+          "args": [
+            4608
+          ]
+        },
+        {
+          "provider": "select",
+          "args": [
+            4613
+          ]
+        },
+        {
+          "provider": "clip_set",
+          "args": [
+            4608
+          ]
+        },
+        {
+          "provider": "draw",
+          "args": [
+            3
+          ]
+        },
+        {
+          "provider": "group_visible",
+          "args": [
+            4608,
+            4
+          ]
+        },
+        {
+          "provider": "clip_off",
+          "args": []
+        }
+      ],
+      "callback_raw_trace": [
+        {
+          "name": "clip_SetWin",
+          "args": [
+            4608
+          ]
+        },
+        {
+          "name": "win_MakeObjSelected",
+          "args": [
+            4613
+          ]
+        },
+        {
+          "name": "clip_SetWin",
+          "args": [
+            4608
+          ]
+        },
+        {
+          "name": "win_DrawModeWindow",
+          "args": [
+            3
+          ]
+        },
+        {
+          "name": "win_MakeGroupVisible",
+          "args": [
+            4608,
+            4
+          ]
+        },
+        {
+          "name": "clip_Off",
+          "args": []
+        }
+      ],
+      "source_draw_point_projection": [
+        191,
+        381
+      ],
+      "snapshot": {
+        "current": [
+          39321,
+          13107,
+          13107
+        ],
+        "presets": [
+          39321,
+          13107,
+          13107,
+          65535,
+          0,
+          0,
+          0,
+          65535,
+          0,
+          0,
+          0,
+          65535
+        ],
+        "auto": 0,
+        "selector": 0,
+        "percent": 1,
+        "ideal_caste": [
+          60,
+          40,
+          0,
+          0
+        ],
+        "level_point": [
+          191,
+          381
+        ],
+        "actual_triangle_rect": [
+          136,
+          344,
+          247,
+          440
+        ],
+        "shared_triangle_metrics": [
+          109,
+          96,
+          54
+        ]
+      },
+      "oracle_function": {
+        "unit": "root",
+        "seg": 1944,
+        "off": 903,
+        "size": 568,
+        "region": "game_or_library",
+        "extent": "DESCENT",
+        "evidence": [
+          "far_call"
+        ],
+        "jump_tables": [
+          {
+            "site": 32054,
+            "table": 32059,
+            "count": 15
+          }
+        ],
+        "name": "ProcModeEvent"
+      }
+    },
+    {
+      "kind": "mode",
+      "code": 4615,
+      "start_auto": null,
+      "initial_point": [
+        191,
+        345
+      ],
+      "initial_control_point": [
+        192,
+        381
+      ],
+      "cursor_samples": [],
+      "callback_order": [
+        {
+          "provider": "clip_set",
+          "args": [
+            4608
+          ]
+        },
+        {
+          "provider": "select",
+          "args": [
+            4613
+          ]
+        },
+        {
+          "provider": "clip_set",
+          "args": [
+            4608
+          ]
+        },
+        {
+          "provider": "draw",
+          "args": [
+            3
+          ]
+        },
+        {
+          "provider": "group_visible",
+          "args": [
+            4608,
+            4
+          ]
+        },
+        {
+          "provider": "clip_off",
+          "args": []
+        }
+      ],
+      "callback_raw_trace": [
+        {
+          "name": "clip_SetWin",
+          "args": [
+            4608
+          ]
+        },
+        {
+          "name": "win_MakeObjSelected",
+          "args": [
+            4613
+          ]
+        },
+        {
+          "name": "clip_SetWin",
+          "args": [
+            4608
+          ]
+        },
+        {
+          "name": "win_DrawModeWindow",
+          "args": [
+            3
+          ]
+        },
+        {
+          "name": "win_MakeGroupVisible",
+          "args": [
+            4608,
+            4
+          ]
+        },
+        {
+          "name": "clip_Off",
+          "args": []
+        }
+      ],
+      "source_draw_point_projection": [
+        193,
+        344
+      ],
+      "snapshot": {
+        "current": [
+          65535,
+          0,
+          0
+        ],
+        "presets": [
+          39321,
+          13107,
+          13107,
+          65535,
+          0,
+          0,
+          0,
+          65535,
+          0,
+          0,
+          0,
+          65535
+        ],
+        "auto": 0,
+        "selector": 1,
+        "percent": 1,
+        "ideal_caste": [
+          60,
+          40,
+          0,
+          0
+        ],
+        "level_point": [
+          193,
+          344
+        ],
+        "actual_triangle_rect": [
+          136,
+          344,
+          247,
+          440
+        ],
+        "shared_triangle_metrics": [
+          109,
+          96,
+          54
+        ]
+      },
+      "oracle_function": {
+        "unit": "root",
+        "seg": 1944,
+        "off": 903,
+        "size": 568,
+        "region": "game_or_library",
+        "extent": "DESCENT",
+        "evidence": [
+          "far_call"
+        ],
+        "jump_tables": [
+          {
+            "site": 32054,
+            "table": 32059,
+            "count": 15
+          }
+        ],
+        "name": "ProcModeEvent"
+      }
+    },
+    {
+      "kind": "mode",
+      "code": 4616,
+      "start_auto": null,
+      "initial_point": [
+        191,
+        345
+      ],
+      "initial_control_point": [
+        192,
+        381
+      ],
+      "cursor_samples": [],
+      "callback_order": [
+        {
+          "provider": "clip_set",
+          "args": [
+            4608
+          ]
+        },
+        {
+          "provider": "select",
+          "args": [
+            4613
+          ]
+        },
+        {
+          "provider": "clip_set",
+          "args": [
+            4608
+          ]
+        },
+        {
+          "provider": "draw",
+          "args": [
+            3
+          ]
+        },
+        {
+          "provider": "group_visible",
+          "args": [
+            4608,
+            4
+          ]
+        },
+        {
+          "provider": "clip_off",
+          "args": []
+        }
+      ],
+      "callback_raw_trace": [
+        {
+          "name": "clip_SetWin",
+          "args": [
+            4608
+          ]
+        },
+        {
+          "name": "win_MakeObjSelected",
+          "args": [
+            4613
+          ]
+        },
+        {
+          "name": "clip_SetWin",
+          "args": [
+            4608
+          ]
+        },
+        {
+          "name": "win_DrawModeWindow",
+          "args": [
+            3
+          ]
+        },
+        {
+          "name": "win_MakeGroupVisible",
+          "args": [
+            4608,
+            4
+          ]
+        },
+        {
+          "name": "clip_Off",
+          "args": []
+        }
+      ],
+      "source_draw_point_projection": [
+        138,
+        438
+      ],
+      "snapshot": {
+        "current": [
+          0,
+          65535,
+          0
+        ],
+        "presets": [
+          39321,
+          13107,
+          13107,
+          65535,
+          0,
+          0,
+          0,
+          65535,
+          0,
+          0,
+          0,
+          65535
+        ],
+        "auto": 0,
+        "selector": 2,
+        "percent": 1,
+        "ideal_caste": [
+          60,
+          40,
+          0,
+          0
+        ],
+        "level_point": [
+          138,
+          438
+        ],
+        "actual_triangle_rect": [
+          136,
+          344,
+          247,
+          440
+        ],
+        "shared_triangle_metrics": [
+          109,
+          96,
+          54
+        ]
+      },
+      "oracle_function": {
+        "unit": "root",
+        "seg": 1944,
+        "off": 903,
+        "size": 568,
+        "region": "game_or_library",
+        "extent": "DESCENT",
+        "evidence": [
+          "far_call"
+        ],
+        "jump_tables": [
+          {
+            "site": 32054,
+            "table": 32059,
+            "count": 15
+          }
+        ],
+        "name": "ProcModeEvent"
+      }
+    },
+    {
+      "kind": "mode",
+      "code": 4623,
+      "start_auto": null,
+      "initial_point": [
+        191,
+        345
+      ],
+      "initial_control_point": [
+        192,
+        381
+      ],
+      "cursor_samples": [],
+      "callback_order": [
+        {
+          "provider": "clip_set",
+          "args": [
+            4608
+          ]
+        },
+        {
+          "provider": "draw",
+          "args": [
+            3
+          ]
+        },
+        {
+          "provider": "clip_off",
+          "args": []
+        }
+      ],
+      "callback_raw_trace": [
+        {
+          "name": "clip_SetWin",
+          "args": [
+            4608
+          ]
+        },
+        {
+          "name": "win_DrawModeWindow",
+          "args": [
+            3
+          ]
+        },
+        {
+          "name": "clip_Off",
+          "args": []
+        }
+      ],
+      "source_draw_point_projection": [
+        191,
+        381
+      ],
+      "snapshot": {
+        "current": [
+          39321,
+          13107,
+          13107
+        ],
+        "presets": [
+          39321,
+          13107,
+          13107,
+          65535,
+          0,
+          0,
+          0,
+          65535,
+          0,
+          0,
+          0,
+          65535
+        ],
+        "auto": 1,
+        "selector": 0,
+        "percent": 0,
+        "ideal_caste": [
+          60,
+          40,
+          0,
+          0
+        ],
+        "level_point": [
+          191,
+          381
+        ],
+        "actual_triangle_rect": [
+          136,
+          344,
+          247,
+          440
+        ],
+        "shared_triangle_metrics": [
+          109,
+          96,
+          54
+        ]
+      },
+      "oracle_function": {
+        "unit": "root",
+        "seg": 1944,
+        "off": 903,
+        "size": 568,
+        "region": "game_or_library",
+        "extent": "DESCENT",
+        "evidence": [
+          "far_call"
+        ],
+        "jump_tables": [
+          {
+            "site": 32054,
+            "table": 32059,
+            "count": 15
+          }
+        ],
+        "name": "ProcModeEvent"
+      }
+    },
+    {
+      "kind": "mode",
+      "code": 4624,
+      "start_auto": null,
+      "initial_point": [
+        191,
+        345
+      ],
+      "initial_control_point": [
+        192,
+        381
+      ],
+      "cursor_samples": [],
+      "callback_order": [
+        {
+          "provider": "clip_set",
+          "args": [
+            4608
+          ]
+        },
+        {
+          "provider": "draw",
+          "args": [
+            3
+          ]
+        },
+        {
+          "provider": "clip_off",
+          "args": []
+        }
+      ],
+      "callback_raw_trace": [
+        {
+          "name": "clip_SetWin",
+          "args": [
+            4608
+          ]
+        },
+        {
+          "name": "win_DrawModeWindow",
+          "args": [
+            3
+          ]
+        },
+        {
+          "name": "clip_Off",
+          "args": []
+        }
+      ],
+      "source_draw_point_projection": [
+        191,
+        381
+      ],
+      "snapshot": {
+        "current": [
+          39321,
+          13107,
+          13107
+        ],
+        "presets": [
+          39321,
+          13107,
+          13107,
+          65535,
+          0,
+          0,
+          0,
+          65535,
+          0,
+          0,
+          0,
+          65535
+        ],
+        "auto": 1,
+        "selector": 0,
+        "percent": 0,
+        "ideal_caste": [
+          60,
+          40,
+          0,
+          0
+        ],
+        "level_point": [
+          191,
+          381
+        ],
+        "actual_triangle_rect": [
+          136,
+          344,
+          247,
+          440
+        ],
+        "shared_triangle_metrics": [
+          109,
+          96,
+          54
+        ]
+      },
+      "oracle_function": {
+        "unit": "root",
+        "seg": 1944,
+        "off": 903,
+        "size": 568,
+        "region": "game_or_library",
+        "extent": "DESCENT",
+        "evidence": [
+          "far_call"
+        ],
+        "jump_tables": [
+          {
+            "site": 32054,
+            "table": 32059,
+            "count": 15
+          }
+        ],
+        "name": "ProcModeEvent"
+      }
+    },
+    {
+      "kind": "mode",
+      "code": 4625,
+      "start_auto": null,
+      "initial_point": [
+        191,
+        345
+      ],
+      "initial_control_point": [
+        192,
+        381
+      ],
+      "cursor_samples": [],
+      "callback_order": [
+        {
+          "provider": "clip_set",
+          "args": [
+            4608
+          ]
+        },
+        {
+          "provider": "draw",
+          "args": [
+            3
+          ]
+        },
+        {
+          "provider": "clip_off",
+          "args": []
+        }
+      ],
+      "callback_raw_trace": [
+        {
+          "name": "clip_SetWin",
+          "args": [
+            4608
+          ]
+        },
+        {
+          "name": "win_DrawModeWindow",
+          "args": [
+            3
+          ]
+        },
+        {
+          "name": "clip_Off",
+          "args": []
+        }
+      ],
+      "source_draw_point_projection": [
+        191,
+        381
+      ],
+      "snapshot": {
+        "current": [
+          39321,
+          13107,
+          13107
+        ],
+        "presets": [
+          39321,
+          13107,
+          13107,
+          65535,
+          0,
+          0,
+          0,
+          65535,
+          0,
+          0,
+          0,
+          65535
+        ],
+        "auto": 1,
+        "selector": 0,
+        "percent": 0,
+        "ideal_caste": [
+          60,
+          40,
+          0,
+          0
+        ],
+        "level_point": [
+          191,
+          381
+        ],
+        "actual_triangle_rect": [
+          136,
+          344,
+          247,
+          440
+        ],
+        "shared_triangle_metrics": [
+          109,
+          96,
+          54
+        ]
+      },
+      "oracle_function": {
+        "unit": "root",
+        "seg": 1944,
+        "off": 903,
+        "size": 568,
+        "region": "game_or_library",
+        "extent": "DESCENT",
+        "evidence": [
+          "far_call"
+        ],
+        "jump_tables": [
+          {
+            "site": 32054,
+            "table": 32059,
+            "count": 15
+          }
+        ],
+        "name": "ProcModeEvent"
+      }
+    },
+    {
+      "kind": "mode",
+      "code": 4621,
+      "start_auto": null,
+      "initial_point": [
+        191,
+        345
+      ],
+      "initial_control_point": [
+        192,
+        381
+      ],
+      "cursor_samples": [],
+      "callback_order": [
+        {
+          "provider": "clip_set",
+          "args": [
+            4608
+          ]
+        },
+        {
+          "provider": "select",
+          "args": [
+            4613
+          ]
+        },
+        {
+          "provider": "group_visible",
+          "args": [
+            4608,
+            4
+          ]
+        },
+        {
+          "provider": "clip_set",
+          "args": [
+            4608
+          ]
+        },
+        {
+          "provider": "draw",
+          "args": [
+            3
+          ]
+        },
+        {
+          "provider": "pointer_poll",
+          "point": "unchanged"
+        },
+        {
+          "provider": "still_down",
+          "down": 0
+        },
+        {
+          "provider": "clip_off",
+          "args": []
+        }
+      ],
+      "callback_raw_trace": [
+        {
+          "name": "clip_SetWin",
+          "args": [
+            4608
+          ]
+        },
+        {
+          "name": "win_MakeObjSelected",
+          "args": [
+            4613
+          ]
+        },
+        {
+          "name": "win_MakeGroupVisible",
+          "args": [
+            4608,
+            4
+          ]
+        },
+        {
+          "name": "clip_SetWin",
+          "args": [
+            4608
+          ]
+        },
+        {
+          "name": "win_DrawModeWindow",
+          "args": [
+            3
+          ]
+        },
+        {
+          "name": "f_1FD2_04D0",
+          "args": [
+            264,
+            28672
+          ]
+        },
+        {
+          "name": "StillDown",
+          "args": []
+        },
+        {
+          "name": "clip_Off",
+          "args": []
+        }
+      ],
+      "source_draw_point_projection": [
+        191,
+        345
+      ],
+      "snapshot": {
+        "current": [
+          64837,
+          0,
+          698
+        ],
+        "presets": [
+          64837,
+          0,
+          698,
+          65535,
+          0,
+          0,
+          0,
+          65535,
+          0,
+          0,
+          0,
+          65535
+        ],
+        "auto": 0,
+        "selector": 0,
+        "percent": 1,
+        "ideal_caste": [
+          60,
+          40,
+          0,
+          0
+        ],
+        "level_point": [
+          191,
+          345
+        ],
+        "actual_triangle_rect": [
+          136,
+          344,
+          247,
+          440
+        ],
+        "shared_triangle_metrics": [
+          109,
+          96,
+          54
+        ]
+      },
+      "oracle_function": {
+        "unit": "root",
+        "seg": 1944,
+        "off": 903,
+        "size": 568,
+        "region": "game_or_library",
+        "extent": "DESCENT",
+        "evidence": [
+          "far_call"
+        ],
+        "jump_tables": [
+          {
+            "site": 32054,
+            "table": 32059,
+            "count": 15
+          }
+        ],
+        "name": "ProcModeEvent"
+      }
+    },
+    {
+      "kind": "mode",
+      "code": 4621,
+      "start_auto": null,
+      "initial_point": [
+        135,
+        345
+      ],
+      "initial_control_point": [
+        192,
+        381
+      ],
+      "cursor_samples": [],
+      "callback_order": [
+        {
+          "provider": "clip_set",
+          "args": [
+            4608
+          ]
+        },
+        {
+          "provider": "clip_off",
+          "args": []
+        }
+      ],
+      "callback_raw_trace": [
+        {
+          "name": "clip_SetWin",
+          "args": [
+            4608
+          ]
+        },
+        {
+          "name": "clip_Off",
+          "args": []
+        }
+      ],
+      "source_draw_point_projection": null,
+      "snapshot": {
+        "current": [
+          39321,
+          13107,
+          13107
+        ],
+        "presets": [
+          39321,
+          13107,
+          13107,
+          65535,
+          0,
+          0,
+          0,
+          65535,
+          0,
+          0,
+          0,
+          65535
+        ],
+        "auto": 1,
+        "selector": 0,
+        "percent": 1,
+        "ideal_caste": [
+          60,
+          40,
+          0,
+          0
+        ],
+        "level_point": [
+          192,
+          381
+        ],
+        "actual_triangle_rect": [
+          136,
+          344,
+          247,
+          440
+        ],
+        "shared_triangle_metrics": [
+          109,
+          96,
+          54
+        ]
+      },
+      "oracle_function": {
+        "unit": "root",
+        "seg": 1944,
+        "off": 903,
+        "size": 568,
+        "region": "game_or_library",
+        "extent": "DESCENT",
+        "evidence": [
+          "far_call"
+        ],
+        "jump_tables": [
+          {
+            "site": 32054,
+            "table": 32059,
+            "count": 15
+          }
+        ],
+        "name": "ProcModeEvent"
+      }
+    },
+    {
+      "kind": "mode",
+      "code": 4621,
+      "start_auto": null,
+      "initial_point": [
+        191,
+        345
+      ],
+      "initial_control_point": [
+        192,
+        381
+      ],
+      "cursor_samples": [
+        [
+          192,
+          346
+        ],
+        [
+          192,
+          346
+        ]
+      ],
+      "callback_order": [
+        {
+          "provider": "clip_set",
+          "args": [
+            4608
+          ]
+        },
+        {
+          "provider": "select",
+          "args": [
+            4613
+          ]
+        },
+        {
+          "provider": "group_visible",
+          "args": [
+            4608,
+            4
+          ]
+        },
+        {
+          "provider": "clip_set",
+          "args": [
+            4608
+          ]
+        },
+        {
+          "provider": "draw",
+          "args": [
+            3
+          ]
+        },
+        {
+          "provider": "pointer_poll",
+          "point": [
+            192,
+            346
+          ]
+        },
+        {
+          "provider": "still_down",
+          "down": 1
+        },
+        {
+          "provider": "draw",
+          "args": [
+            3
+          ]
+        },
+        {
+          "provider": "pointer_poll",
+          "point": [
+            192,
+            346
+          ]
+        },
+        {
+          "provider": "still_down",
+          "down": 0
+        },
+        {
+          "provider": "clip_off",
+          "args": []
+        }
+      ],
+      "callback_raw_trace": [
+        {
+          "name": "clip_SetWin",
+          "args": [
+            4608
+          ]
+        },
+        {
+          "name": "win_MakeObjSelected",
+          "args": [
+            4613
+          ]
+        },
+        {
+          "name": "win_MakeGroupVisible",
+          "args": [
+            4608,
+            4
+          ]
+        },
+        {
+          "name": "clip_SetWin",
+          "args": [
+            4608
+          ]
+        },
+        {
+          "name": "win_DrawModeWindow",
+          "args": [
+            3
+          ]
+        },
+        {
+          "name": "f_1FD2_04D0",
+          "args": [
+            264,
+            28672
+          ]
+        },
+        {
+          "name": "StillDown",
+          "args": []
+        },
+        {
+          "name": "win_DrawModeWindow",
+          "args": [
+            3
+          ]
+        },
+        {
+          "name": "f_1FD2_04D0",
+          "args": [
+            264,
+            28672
+          ]
+        },
+        {
+          "name": "StillDown",
+          "args": []
+        },
+        {
+          "name": "clip_Off",
+          "args": []
+        }
+      ],
+      "source_draw_point_projection": [
+        192,
+        346
+      ],
+      "snapshot": {
+        "current": [
+          64140,
+          0,
+          1395
+        ],
+        "presets": [
+          64140,
+          0,
+          1395,
+          65535,
+          0,
+          0,
+          0,
+          65535,
+          0,
+          0,
+          0,
+          65535
+        ],
+        "auto": 0,
+        "selector": 0,
+        "percent": 1,
+        "ideal_caste": [
+          60,
+          40,
+          0,
+          0
+        ],
+        "level_point": [
+          192,
+          346
+        ],
+        "actual_triangle_rect": [
+          136,
+          344,
+          247,
+          440
+        ],
+        "shared_triangle_metrics": [
+          109,
+          96,
+          54
+        ]
+      },
+      "oracle_function": {
+        "unit": "root",
+        "seg": 1944,
+        "off": 903,
+        "size": 568,
+        "region": "game_or_library",
+        "extent": "DESCENT",
+        "evidence": [
+          "far_call"
+        ],
+        "jump_tables": [
+          {
+            "site": 32054,
+            "table": 32059,
+            "count": 15
+          }
+        ],
+        "name": "ProcModeEvent"
+      }
+    },
+    {
+      "kind": "caste",
+      "code": 4867,
+      "start_auto": null,
+      "initial_point": [
+        446,
+        345
+      ],
+      "initial_control_point": [
+        436,
+        438
+      ],
+      "cursor_samples": [],
+      "callback_order": [
+        {
+          "provider": "clip_set",
+          "args": [
+            4864
+          ]
+        },
+        {
+          "provider": "help",
+          "args": [
+            4878
+          ]
+        },
+        {
+          "provider": "clip_off",
+          "args": []
+        }
+      ],
+      "callback_raw_trace": [
+        {
+          "name": "clip_SetWin",
+          "args": [
+            4864
+          ]
+        },
+        {
+          "name": "DoWinHelp",
+          "args": [
+            4878
+          ]
+        },
+        {
+          "name": "clip_Off",
+          "args": []
+        }
+      ],
+      "source_draw_point_projection": null,
+      "snapshot": {
+        "current": [
+          0,
+          39321,
+          26214
+        ],
+        "presets": [
+          0,
+          39321,
+          26214,
+          32767,
+          16383,
+          16383,
+          0,
+          65535,
+          0,
+          0,
+          0,
+          65535
+        ],
+        "auto": 1,
+        "selector": 0,
+        "percent": 1,
+        "ideal_caste": [
+          60,
+          40,
+          0,
+          0
+        ],
+        "level_point": [
+          436,
+          438
+        ],
+        "actual_triangle_rect": [
+          392,
+          344,
+          501,
+          440
+        ],
+        "shared_triangle_metrics": [
+          109,
+          96,
+          54
+        ]
+      },
+      "oracle_function": {
+        "unit": "root",
+        "seg": 1944,
+        "off": 321,
+        "size": 582,
+        "region": "game_or_library",
+        "extent": "DESCENT",
+        "evidence": [
+          "far_call"
+        ],
+        "jump_tables": [
+          {
+            "site": 31472,
+            "table": 31477,
+            "count": 15
+          }
+        ],
+        "name": "ProcCasteEvent"
+      }
+    },
+    {
+      "kind": "caste",
+      "code": 4868,
+      "start_auto": 0,
+      "initial_point": [
+        446,
+        345
+      ],
+      "initial_control_point": [
+        436,
+        438
+      ],
+      "cursor_samples": [],
+      "callback_order": [
+        {
+          "provider": "clip_set",
+          "args": [
+            4864
+          ]
+        },
+        {
+          "provider": "group_invisible",
+          "args": [
+            4864,
+            4
+          ]
+        },
+        {
+          "provider": "clip_off",
+          "args": []
+        }
+      ],
+      "callback_raw_trace": [
+        {
+          "name": "clip_SetWin",
+          "args": [
+            4864
+          ]
+        },
+        {
+          "name": "win_MakeGroupInvisible",
+          "args": [
+            4864,
+            4
+          ]
+        },
+        {
+          "name": "clip_Off",
+          "args": []
+        }
+      ],
+      "source_draw_point_projection": null,
+      "snapshot": {
+        "current": [
+          0,
+          39321,
+          26214
+        ],
+        "presets": [
+          0,
+          39321,
+          26214,
+          32767,
+          16383,
+          16383,
+          0,
+          65535,
+          0,
+          0,
+          0,
+          65535
+        ],
+        "auto": 1,
+        "selector": 0,
+        "percent": 1,
+        "ideal_caste": [
+          60,
+          40,
+          0,
+          0
+        ],
+        "level_point": [
+          436,
+          438
+        ],
+        "actual_triangle_rect": [
+          392,
+          344,
+          501,
+          440
+        ],
+        "shared_triangle_metrics": [
+          109,
+          96,
+          54
+        ]
+      },
+      "oracle_function": {
+        "unit": "root",
+        "seg": 1944,
+        "off": 321,
+        "size": 582,
+        "region": "game_or_library",
+        "extent": "DESCENT",
+        "evidence": [
+          "far_call"
+        ],
+        "jump_tables": [
+          {
+            "site": 31472,
+            "table": 31477,
+            "count": 15
+          }
+        ],
+        "name": "ProcCasteEvent"
+      }
+    },
+    {
+      "kind": "caste",
+      "code": 4868,
+      "start_auto": null,
+      "initial_point": [
+        446,
+        345
+      ],
+      "initial_control_point": [
+        436,
+        438
+      ],
+      "cursor_samples": [],
+      "callback_order": [
+        {
+          "provider": "clip_set",
+          "args": [
+            4864
+          ]
+        },
+        {
+          "provider": "clip_off",
+          "args": []
+        }
+      ],
+      "callback_raw_trace": [
+        {
+          "name": "clip_SetWin",
+          "args": [
+            4864
+          ]
+        },
+        {
+          "name": "clip_Off",
+          "args": []
+        }
+      ],
+      "source_draw_point_projection": null,
+      "snapshot": {
+        "current": [
+          0,
+          39321,
+          26214
+        ],
+        "presets": [
+          0,
+          39321,
+          26214,
+          32767,
+          16383,
+          16383,
+          0,
+          65535,
+          0,
+          0,
+          0,
+          65535
+        ],
+        "auto": 1,
+        "selector": 0,
+        "percent": 1,
+        "ideal_caste": [
+          60,
+          40,
+          0,
+          0
+        ],
+        "level_point": [
+          436,
+          438
+        ],
+        "actual_triangle_rect": [
+          392,
+          344,
+          501,
+          440
+        ],
+        "shared_triangle_metrics": [
+          109,
+          96,
+          54
+        ]
+      },
+      "oracle_function": {
+        "unit": "root",
+        "seg": 1944,
+        "off": 321,
+        "size": 582,
+        "region": "game_or_library",
+        "extent": "DESCENT",
+        "evidence": [
+          "far_call"
+        ],
+        "jump_tables": [
+          {
+            "site": 31472,
+            "table": 31477,
+            "count": 15
+          }
+        ],
+        "name": "ProcCasteEvent"
+      }
+    },
+    {
+      "kind": "caste",
+      "code": 4869,
+      "start_auto": null,
+      "initial_point": [
+        446,
+        345
+      ],
+      "initial_control_point": [
+        436,
+        438
+      ],
+      "cursor_samples": [],
+      "callback_order": [
+        {
+          "provider": "clip_set",
+          "args": [
+            4864
+          ]
+        },
+        {
+          "provider": "group_visible",
+          "args": [
+            4864,
+            4
+          ]
+        },
+        {
+          "provider": "clip_off",
+          "args": []
+        }
+      ],
+      "callback_raw_trace": [
+        {
+          "name": "clip_SetWin",
+          "args": [
+            4864
+          ]
+        },
+        {
+          "name": "win_MakeGroupVisible",
+          "args": [
+            4864,
+            4
+          ]
+        },
+        {
+          "name": "clip_Off",
+          "args": []
+        }
+      ],
+      "source_draw_point_projection": null,
+      "snapshot": {
+        "current": [
+          0,
+          39321,
+          26214
+        ],
+        "presets": [
+          0,
+          39321,
+          26214,
+          32767,
+          16383,
+          16383,
+          0,
+          65535,
+          0,
+          0,
+          0,
+          65535
+        ],
+        "auto": 0,
+        "selector": 0,
+        "percent": 1,
+        "ideal_caste": [
+          60,
+          40,
+          0,
+          0
+        ],
+        "level_point": [
+          436,
+          438
+        ],
+        "actual_triangle_rect": [
+          392,
+          344,
+          501,
+          440
+        ],
+        "shared_triangle_metrics": [
+          109,
+          96,
+          54
+        ]
+      },
+      "oracle_function": {
+        "unit": "root",
+        "seg": 1944,
+        "off": 321,
+        "size": 582,
+        "region": "game_or_library",
+        "extent": "DESCENT",
+        "evidence": [
+          "far_call"
+        ],
+        "jump_tables": [
+          {
+            "site": 31472,
+            "table": 31477,
+            "count": 15
+          }
+        ],
+        "name": "ProcCasteEvent"
+      }
+    },
+    {
+      "kind": "caste",
+      "code": 4869,
+      "start_auto": 0,
+      "initial_point": [
+        446,
+        345
+      ],
+      "initial_control_point": [
+        436,
+        438
+      ],
+      "cursor_samples": [],
+      "callback_order": [
+        {
+          "provider": "clip_set",
+          "args": [
+            4864
+          ]
+        },
+        {
+          "provider": "clip_off",
+          "args": []
+        }
+      ],
+      "callback_raw_trace": [
+        {
+          "name": "clip_SetWin",
+          "args": [
+            4864
+          ]
+        },
+        {
+          "name": "clip_Off",
+          "args": []
+        }
+      ],
+      "source_draw_point_projection": null,
+      "snapshot": {
+        "current": [
+          0,
+          39321,
+          26214
+        ],
+        "presets": [
+          0,
+          39321,
+          26214,
+          32767,
+          16383,
+          16383,
+          0,
+          65535,
+          0,
+          0,
+          0,
+          65535
+        ],
+        "auto": 0,
+        "selector": 0,
+        "percent": 1,
+        "ideal_caste": [
+          60,
+          40,
+          0,
+          0
+        ],
+        "level_point": [
+          436,
+          438
+        ],
+        "actual_triangle_rect": [
+          392,
+          344,
+          501,
+          440
+        ],
+        "shared_triangle_metrics": [
+          109,
+          96,
+          54
+        ]
+      },
+      "oracle_function": {
+        "unit": "root",
+        "seg": 1944,
+        "off": 321,
+        "size": 582,
+        "region": "game_or_library",
+        "extent": "DESCENT",
+        "evidence": [
+          "far_call"
+        ],
+        "jump_tables": [
+          {
+            "site": 31472,
+            "table": 31477,
+            "count": 15
+          }
+        ],
+        "name": "ProcCasteEvent"
+      }
+    },
+    {
+      "kind": "caste",
+      "code": 4870,
+      "start_auto": null,
+      "initial_point": [
+        446,
+        345
+      ],
+      "initial_control_point": [
+        436,
+        438
+      ],
+      "cursor_samples": [],
+      "callback_order": [
+        {
+          "provider": "clip_set",
+          "args": [
+            4864
+          ]
+        },
+        {
+          "provider": "select",
+          "args": [
+            4869
+          ]
+        },
+        {
+          "provider": "clip_set",
+          "args": [
+            4864
+          ]
+        },
+        {
+          "provider": "draw",
+          "args": [
+            3
+          ]
+        },
+        {
+          "provider": "group_visible",
+          "args": [
+            4864,
+            4
+          ]
+        },
+        {
+          "provider": "clip_off",
+          "args": []
+        }
+      ],
+      "callback_raw_trace": [
+        {
+          "name": "clip_SetWin",
+          "args": [
+            4864
+          ]
+        },
+        {
+          "name": "win_MakeObjSelected",
+          "args": [
+            4869
+          ]
+        },
+        {
+          "name": "clip_SetWin",
+          "args": [
+            4864
+          ]
+        },
+        {
+          "name": "win_DrawCasteWindow",
+          "args": [
+            3
+          ]
+        },
+        {
+          "name": "win_MakeGroupVisible",
+          "args": [
+            4864,
+            4
+          ]
+        },
+        {
+          "name": "clip_Off",
+          "args": []
+        }
+      ],
+      "source_draw_point_projection": [
+        436,
+        438
+      ],
+      "snapshot": {
+        "current": [
+          0,
+          39321,
+          26214
+        ],
+        "presets": [
+          0,
+          39321,
+          26214,
+          32767,
+          16383,
+          16383,
+          0,
+          65535,
+          0,
+          0,
+          0,
+          65535
+        ],
+        "auto": 0,
+        "selector": 0,
+        "percent": 1,
+        "ideal_caste": [
+          60,
+          40,
+          0,
+          0
+        ],
+        "level_point": [
+          436,
+          438
+        ],
+        "actual_triangle_rect": [
+          392,
+          344,
+          501,
+          440
+        ],
+        "shared_triangle_metrics": [
+          109,
+          96,
+          54
+        ]
+      },
+      "oracle_function": {
+        "unit": "root",
+        "seg": 1944,
+        "off": 321,
+        "size": 582,
+        "region": "game_or_library",
+        "extent": "DESCENT",
+        "evidence": [
+          "far_call"
+        ],
+        "jump_tables": [
+          {
+            "site": 31472,
+            "table": 31477,
+            "count": 15
+          }
+        ],
+        "name": "ProcCasteEvent"
+      }
+    },
+    {
+      "kind": "caste",
+      "code": 4871,
+      "start_auto": null,
+      "initial_point": [
+        446,
+        345
+      ],
+      "initial_control_point": [
+        436,
+        438
+      ],
+      "cursor_samples": [],
+      "callback_order": [
+        {
+          "provider": "clip_set",
+          "args": [
+            4864
+          ]
+        },
+        {
+          "provider": "select",
+          "args": [
+            4869
+          ]
+        },
+        {
+          "provider": "clip_set",
+          "args": [
+            4864
+          ]
+        },
+        {
+          "provider": "draw",
+          "args": [
+            3
+          ]
+        },
+        {
+          "provider": "group_visible",
+          "args": [
+            4864,
+            4
+          ]
+        },
+        {
+          "provider": "clip_off",
+          "args": []
+        }
+      ],
+      "callback_raw_trace": [
+        {
+          "name": "clip_SetWin",
+          "args": [
+            4864
+          ]
+        },
+        {
+          "name": "win_MakeObjSelected",
+          "args": [
+            4869
+          ]
+        },
+        {
+          "name": "clip_SetWin",
+          "args": [
+            4864
+          ]
+        },
+        {
+          "name": "win_DrawCasteWindow",
+          "args": [
+            3
+          ]
+        },
+        {
+          "name": "win_MakeGroupVisible",
+          "args": [
+            4864,
+            4
+          ]
+        },
+        {
+          "name": "clip_Off",
+          "args": []
+        }
+      ],
+      "source_draw_point_projection": [
+        446,
+        391
+      ],
+      "snapshot": {
+        "current": [
+          32767,
+          16383,
+          16383
+        ],
+        "presets": [
+          0,
+          39321,
+          26214,
+          32767,
+          16383,
+          16383,
+          0,
+          65535,
+          0,
+          0,
+          0,
+          65535
+        ],
+        "auto": 0,
+        "selector": 1,
+        "percent": 1,
+        "ideal_caste": [
+          60,
+          40,
+          0,
+          0
+        ],
+        "level_point": [
+          446,
+          391
+        ],
+        "actual_triangle_rect": [
+          392,
+          344,
+          501,
+          440
+        ],
+        "shared_triangle_metrics": [
+          109,
+          96,
+          54
+        ]
+      },
+      "oracle_function": {
+        "unit": "root",
+        "seg": 1944,
+        "off": 321,
+        "size": 582,
+        "region": "game_or_library",
+        "extent": "DESCENT",
+        "evidence": [
+          "far_call"
+        ],
+        "jump_tables": [
+          {
+            "site": 31472,
+            "table": 31477,
+            "count": 15
+          }
+        ],
+        "name": "ProcCasteEvent"
+      }
+    },
+    {
+      "kind": "caste",
+      "code": 4872,
+      "start_auto": null,
+      "initial_point": [
+        446,
+        345
+      ],
+      "initial_control_point": [
+        436,
+        438
+      ],
+      "cursor_samples": [],
+      "callback_order": [
+        {
+          "provider": "clip_set",
+          "args": [
+            4864
+          ]
+        },
+        {
+          "provider": "select",
+          "args": [
+            4869
+          ]
+        },
+        {
+          "provider": "clip_set",
+          "args": [
+            4864
+          ]
+        },
+        {
+          "provider": "draw",
+          "args": [
+            3
+          ]
+        },
+        {
+          "provider": "group_visible",
+          "args": [
+            4864,
+            4
+          ]
+        },
+        {
+          "provider": "clip_off",
+          "args": []
+        }
+      ],
+      "callback_raw_trace": [
+        {
+          "name": "clip_SetWin",
+          "args": [
+            4864
+          ]
+        },
+        {
+          "name": "win_MakeObjSelected",
+          "args": [
+            4869
+          ]
+        },
+        {
+          "name": "clip_SetWin",
+          "args": [
+            4864
+          ]
+        },
+        {
+          "name": "win_DrawCasteWindow",
+          "args": [
+            3
+          ]
+        },
+        {
+          "name": "win_MakeGroupVisible",
+          "args": [
+            4864,
+            4
+          ]
+        },
+        {
+          "name": "clip_Off",
+          "args": []
+        }
+      ],
+      "source_draw_point_projection": [
+        394,
+        438
+      ],
+      "snapshot": {
+        "current": [
+          0,
+          65535,
+          0
+        ],
+        "presets": [
+          0,
+          39321,
+          26214,
+          32767,
+          16383,
+          16383,
+          0,
+          65535,
+          0,
+          0,
+          0,
+          65535
+        ],
+        "auto": 0,
+        "selector": 2,
+        "percent": 1,
+        "ideal_caste": [
+          60,
+          40,
+          0,
+          0
+        ],
+        "level_point": [
+          394,
+          438
+        ],
+        "actual_triangle_rect": [
+          392,
+          344,
+          501,
+          440
+        ],
+        "shared_triangle_metrics": [
+          109,
+          96,
+          54
+        ]
+      },
+      "oracle_function": {
+        "unit": "root",
+        "seg": 1944,
+        "off": 321,
+        "size": 582,
+        "region": "game_or_library",
+        "extent": "DESCENT",
+        "evidence": [
+          "far_call"
+        ],
+        "jump_tables": [
+          {
+            "site": 31472,
+            "table": 31477,
+            "count": 15
+          }
+        ],
+        "name": "ProcCasteEvent"
+      }
+    },
+    {
+      "kind": "caste",
+      "code": 4879,
+      "start_auto": null,
+      "initial_point": [
+        446,
+        345
+      ],
+      "initial_control_point": [
+        436,
+        438
+      ],
+      "cursor_samples": [],
+      "callback_order": [
+        {
+          "provider": "clip_set",
+          "args": [
+            4864
+          ]
+        },
+        {
+          "provider": "draw",
+          "args": [
+            3
+          ]
+        },
+        {
+          "provider": "clip_off",
+          "args": []
+        }
+      ],
+      "callback_raw_trace": [
+        {
+          "name": "clip_SetWin",
+          "args": [
+            4864
+          ]
+        },
+        {
+          "name": "win_DrawCasteWindow",
+          "args": [
+            3
+          ]
+        },
+        {
+          "name": "clip_Off",
+          "args": []
+        }
+      ],
+      "source_draw_point_projection": [
+        436,
+        438
+      ],
+      "snapshot": {
+        "current": [
+          0,
+          39321,
+          26214
+        ],
+        "presets": [
+          0,
+          39321,
+          26214,
+          32767,
+          16383,
+          16383,
+          0,
+          65535,
+          0,
+          0,
+          0,
+          65535
+        ],
+        "auto": 1,
+        "selector": 0,
+        "percent": 0,
+        "ideal_caste": [
+          60,
+          40,
+          0,
+          0
+        ],
+        "level_point": [
+          436,
+          438
+        ],
+        "actual_triangle_rect": [
+          392,
+          344,
+          501,
+          440
+        ],
+        "shared_triangle_metrics": [
+          109,
+          96,
+          54
+        ]
+      },
+      "oracle_function": {
+        "unit": "root",
+        "seg": 1944,
+        "off": 321,
+        "size": 582,
+        "region": "game_or_library",
+        "extent": "DESCENT",
+        "evidence": [
+          "far_call"
+        ],
+        "jump_tables": [
+          {
+            "site": 31472,
+            "table": 31477,
+            "count": 15
+          }
+        ],
+        "name": "ProcCasteEvent"
+      }
+    },
+    {
+      "kind": "caste",
+      "code": 4880,
+      "start_auto": null,
+      "initial_point": [
+        446,
+        345
+      ],
+      "initial_control_point": [
+        436,
+        438
+      ],
+      "cursor_samples": [],
+      "callback_order": [
+        {
+          "provider": "clip_set",
+          "args": [
+            4864
+          ]
+        },
+        {
+          "provider": "draw",
+          "args": [
+            3
+          ]
+        },
+        {
+          "provider": "clip_off",
+          "args": []
+        }
+      ],
+      "callback_raw_trace": [
+        {
+          "name": "clip_SetWin",
+          "args": [
+            4864
+          ]
+        },
+        {
+          "name": "win_DrawCasteWindow",
+          "args": [
+            3
+          ]
+        },
+        {
+          "name": "clip_Off",
+          "args": []
+        }
+      ],
+      "source_draw_point_projection": [
+        436,
+        438
+      ],
+      "snapshot": {
+        "current": [
+          0,
+          39321,
+          26214
+        ],
+        "presets": [
+          0,
+          39321,
+          26214,
+          32767,
+          16383,
+          16383,
+          0,
+          65535,
+          0,
+          0,
+          0,
+          65535
+        ],
+        "auto": 1,
+        "selector": 0,
+        "percent": 0,
+        "ideal_caste": [
+          60,
+          40,
+          0,
+          0
+        ],
+        "level_point": [
+          436,
+          438
+        ],
+        "actual_triangle_rect": [
+          392,
+          344,
+          501,
+          440
+        ],
+        "shared_triangle_metrics": [
+          109,
+          96,
+          54
+        ]
+      },
+      "oracle_function": {
+        "unit": "root",
+        "seg": 1944,
+        "off": 321,
+        "size": 582,
+        "region": "game_or_library",
+        "extent": "DESCENT",
+        "evidence": [
+          "far_call"
+        ],
+        "jump_tables": [
+          {
+            "site": 31472,
+            "table": 31477,
+            "count": 15
+          }
+        ],
+        "name": "ProcCasteEvent"
+      }
+    },
+    {
+      "kind": "caste",
+      "code": 4881,
+      "start_auto": null,
+      "initial_point": [
+        446,
+        345
+      ],
+      "initial_control_point": [
+        436,
+        438
+      ],
+      "cursor_samples": [],
+      "callback_order": [
+        {
+          "provider": "clip_set",
+          "args": [
+            4864
+          ]
+        },
+        {
+          "provider": "draw",
+          "args": [
+            3
+          ]
+        },
+        {
+          "provider": "clip_off",
+          "args": []
+        }
+      ],
+      "callback_raw_trace": [
+        {
+          "name": "clip_SetWin",
+          "args": [
+            4864
+          ]
+        },
+        {
+          "name": "win_DrawCasteWindow",
+          "args": [
+            3
+          ]
+        },
+        {
+          "name": "clip_Off",
+          "args": []
+        }
+      ],
+      "source_draw_point_projection": [
+        436,
+        438
+      ],
+      "snapshot": {
+        "current": [
+          0,
+          39321,
+          26214
+        ],
+        "presets": [
+          0,
+          39321,
+          26214,
+          32767,
+          16383,
+          16383,
+          0,
+          65535,
+          0,
+          0,
+          0,
+          65535
+        ],
+        "auto": 1,
+        "selector": 0,
+        "percent": 0,
+        "ideal_caste": [
+          60,
+          40,
+          0,
+          0
+        ],
+        "level_point": [
+          436,
+          438
+        ],
+        "actual_triangle_rect": [
+          392,
+          344,
+          501,
+          440
+        ],
+        "shared_triangle_metrics": [
+          109,
+          96,
+          54
+        ]
+      },
+      "oracle_function": {
+        "unit": "root",
+        "seg": 1944,
+        "off": 321,
+        "size": 582,
+        "region": "game_or_library",
+        "extent": "DESCENT",
+        "evidence": [
+          "far_call"
+        ],
+        "jump_tables": [
+          {
+            "site": 31472,
+            "table": 31477,
+            "count": 15
+          }
+        ],
+        "name": "ProcCasteEvent"
+      }
+    },
+    {
+      "kind": "caste",
+      "code": 4877,
+      "start_auto": null,
+      "initial_point": [
+        446,
+        345
+      ],
+      "initial_control_point": [
+        436,
+        438
+      ],
+      "cursor_samples": [],
+      "callback_order": [
+        {
+          "provider": "clip_set",
+          "args": [
+            4864
+          ]
+        },
+        {
+          "provider": "select",
+          "args": [
+            4869
+          ]
+        },
+        {
+          "provider": "group_visible",
+          "args": [
+            4864,
+            4
+          ]
+        },
+        {
+          "provider": "clip_set",
+          "args": [
+            4864
+          ]
+        },
+        {
+          "provider": "draw",
+          "args": [
+            3
+          ]
+        },
+        {
+          "provider": "pointer_poll",
+          "point": "unchanged"
+        },
+        {
+          "provider": "still_down",
+          "down": 0
+        },
+        {
+          "provider": "clip_off",
+          "args": []
+        }
+      ],
+      "callback_raw_trace": [
+        {
+          "name": "clip_SetWin",
+          "args": [
+            4864
+          ]
+        },
+        {
+          "name": "win_MakeObjSelected",
+          "args": [
+            4869
+          ]
+        },
+        {
+          "name": "win_MakeGroupVisible",
+          "args": [
+            4864,
+            4
+          ]
+        },
+        {
+          "name": "clip_SetWin",
+          "args": [
+            4864
+          ]
+        },
+        {
+          "name": "win_DrawCasteWindow",
+          "args": [
+            3
+          ]
+        },
+        {
+          "name": "f_1FD2_04D0",
+          "args": [
+            264,
+            28672
+          ]
+        },
+        {
+          "name": "StillDown",
+          "args": []
+        },
+        {
+          "name": "clip_Off",
+          "args": []
+        }
+      ],
+      "source_draw_point_projection": [
+        447,
+        345
+      ],
+      "snapshot": {
+        "current": [
+          64837,
+          0,
+          698
+        ],
+        "presets": [
+          64837,
+          0,
+          698,
+          32767,
+          16383,
+          16383,
+          0,
+          65535,
+          0,
+          0,
+          0,
+          65535
+        ],
+        "auto": 0,
+        "selector": 0,
+        "percent": 1,
+        "ideal_caste": [
+          0,
+          1,
+          49,
+          49
+        ],
+        "level_point": [
+          447,
+          345
+        ],
+        "actual_triangle_rect": [
+          392,
+          344,
+          501,
+          440
+        ],
+        "shared_triangle_metrics": [
+          109,
+          96,
+          54
+        ]
+      },
+      "oracle_function": {
+        "unit": "root",
+        "seg": 1944,
+        "off": 321,
+        "size": 582,
+        "region": "game_or_library",
+        "extent": "DESCENT",
+        "evidence": [
+          "far_call"
+        ],
+        "jump_tables": [
+          {
+            "site": 31472,
+            "table": 31477,
+            "count": 15
+          }
+        ],
+        "name": "ProcCasteEvent"
+      }
+    },
+    {
+      "kind": "caste",
+      "code": 4877,
+      "start_auto": null,
+      "initial_point": [
+        391,
+        345
+      ],
+      "initial_control_point": [
+        436,
+        438
+      ],
+      "cursor_samples": [],
+      "callback_order": [
+        {
+          "provider": "clip_set",
+          "args": [
+            4864
+          ]
+        },
+        {
+          "provider": "clip_off",
+          "args": []
+        }
+      ],
+      "callback_raw_trace": [
+        {
+          "name": "clip_SetWin",
+          "args": [
+            4864
+          ]
+        },
+        {
+          "name": "clip_Off",
+          "args": []
+        }
+      ],
+      "source_draw_point_projection": null,
+      "snapshot": {
+        "current": [
+          0,
+          39321,
+          26214
+        ],
+        "presets": [
+          0,
+          39321,
+          26214,
+          32767,
+          16383,
+          16383,
+          0,
+          65535,
+          0,
+          0,
+          0,
+          65535
+        ],
+        "auto": 1,
+        "selector": 0,
+        "percent": 1,
+        "ideal_caste": [
+          60,
+          40,
+          0,
+          0
+        ],
+        "level_point": [
+          436,
+          438
+        ],
+        "actual_triangle_rect": [
+          392,
+          344,
+          501,
+          440
+        ],
+        "shared_triangle_metrics": [
+          109,
+          96,
+          54
+        ]
+      },
+      "oracle_function": {
+        "unit": "root",
+        "seg": 1944,
+        "off": 321,
+        "size": 582,
+        "region": "game_or_library",
+        "extent": "DESCENT",
+        "evidence": [
+          "far_call"
+        ],
+        "jump_tables": [
+          {
+            "site": 31472,
+            "table": 31477,
+            "count": 15
+          }
+        ],
+        "name": "ProcCasteEvent"
+      }
+    },
+    {
+      "kind": "caste",
+      "code": 4877,
+      "start_auto": null,
+      "initial_point": [
+        446,
+        345
+      ],
+      "initial_control_point": [
+        436,
+        438
+      ],
+      "cursor_samples": [
+        [
+          447,
+          346
+        ],
+        [
+          447,
+          346
+        ]
+      ],
+      "callback_order": [
+        {
+          "provider": "clip_set",
+          "args": [
+            4864
+          ]
+        },
+        {
+          "provider": "select",
+          "args": [
+            4869
+          ]
+        },
+        {
+          "provider": "group_visible",
+          "args": [
+            4864,
+            4
+          ]
+        },
+        {
+          "provider": "clip_set",
+          "args": [
+            4864
+          ]
+        },
+        {
+          "provider": "draw",
+          "args": [
+            3
+          ]
+        },
+        {
+          "provider": "pointer_poll",
+          "point": [
+            447,
+            346
+          ]
+        },
+        {
+          "provider": "still_down",
+          "down": 1
+        },
+        {
+          "provider": "draw",
+          "args": [
+            3
+          ]
+        },
+        {
+          "provider": "pointer_poll",
+          "point": [
+            447,
+            346
+          ]
+        },
+        {
+          "provider": "still_down",
+          "down": 0
+        },
+        {
+          "provider": "clip_off",
+          "args": []
+        }
+      ],
+      "callback_raw_trace": [
+        {
+          "name": "clip_SetWin",
+          "args": [
+            4864
+          ]
+        },
+        {
+          "name": "win_MakeObjSelected",
+          "args": [
+            4869
+          ]
+        },
+        {
+          "name": "win_MakeGroupVisible",
+          "args": [
+            4864,
+            4
+          ]
+        },
+        {
+          "name": "clip_SetWin",
+          "args": [
+            4864
+          ]
+        },
+        {
+          "name": "win_DrawCasteWindow",
+          "args": [
+            3
+          ]
+        },
+        {
+          "name": "f_1FD2_04D0",
+          "args": [
+            264,
+            28672
+          ]
+        },
+        {
+          "name": "StillDown",
+          "args": []
+        },
+        {
+          "name": "win_DrawCasteWindow",
+          "args": [
+            3
+          ]
+        },
+        {
+          "name": "f_1FD2_04D0",
+          "args": [
+            264,
+            28672
+          ]
+        },
+        {
+          "name": "StillDown",
+          "args": []
+        },
+        {
+          "name": "clip_Off",
+          "args": []
+        }
+      ],
+      "source_draw_point_projection": [
+        448,
+        346
+      ],
+      "snapshot": {
+        "current": [
+          64140,
+          0,
+          1395
+        ],
+        "presets": [
+          64140,
+          0,
+          1395,
+          32767,
+          16383,
+          16383,
+          0,
+          65535,
+          0,
+          0,
+          0,
+          65535
+        ],
+        "auto": 0,
+        "selector": 0,
+        "percent": 1,
+        "ideal_caste": [
+          0,
+          2,
+          49,
+          49
+        ],
+        "level_point": [
+          448,
+          346
+        ],
+        "actual_triangle_rect": [
+          392,
+          344,
+          501,
+          440
+        ],
+        "shared_triangle_metrics": [
+          109,
+          96,
+          54
+        ]
+      },
+      "oracle_function": {
+        "unit": "root",
+        "seg": 1944,
+        "off": 321,
+        "size": 582,
+        "region": "game_or_library",
+        "extent": "DESCENT",
+        "evidence": [
+          "far_call"
+        ],
+        "jump_tables": [
+          {
+            "site": 31472,
+            "table": 31477,
+            "count": 15
+          }
+        ],
+        "name": "ProcCasteEvent"
+      }
+    }
+  ],
+  "provider_order_mismatches": 0,
+  "limitations": [
+    "window operations and pixel renderer are host provider callbacks",
+    "screen pixels and window-system side effects are not compared",
+    "drag cases use finite staged points in the fixture's loaded triangle geometry"
+  ]
+}

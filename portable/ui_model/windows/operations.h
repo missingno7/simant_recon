@@ -39,6 +39,11 @@ PortableObjectStatus portable_object_set_selected(
     const PortableObjectContext *context, uint16_t object_id, int selected);
 PortableObjectStatus portable_object_set_visible(
     const PortableObjectContext *context, uint16_t object_id, int visible);
+/* Source root:m22BF win_SetGroupVisibleState: update matching group members
+ * in object order and invert selected types other than 5 or 13. */
+PortableObjectStatus portable_object_group_visible(
+    const PortableObjectContext *context, uint16_t window_id,
+    uint8_t group, int visible);
 PortableObjectStatus portable_object_set_selectable(
     const PortableObjectContext *context, uint16_t object_id, int selectable);
 PortableObjectStatus portable_object_group_selected(
