@@ -1,0 +1,42 @@
+{
+ "function": "f_284A_0138",
+ "base_source": "work/takeover/hardtail/probes/root_284A.c",
+ "dimension": "READ_LVALUE_VOLATILITY",
+ "diagnostic_only": false,
+ "hypothesis": "The target preserves a redundant high-byte zero extension before packing. Test whether volatile byte reads constrain that frontend lowering without adding reads or changing data width. No prior volatile based-byte controls found.",
+ "variants": [
+  {
+   "parameters": {
+    "volatile": "high"
+   },
+   "edits": [
+    {
+     "old": "{\n    return SONG(off) << 8 | SONG(off + 1);\n}",
+     "new": "{\n    return ((unsigned)(*(volatile unsigned char _based(g_8DFC) *)(off)) << 8) | SONG(off + 1);\n}"
+    }
+   ]
+  },
+  {
+   "parameters": {
+    "volatile": "low"
+   },
+   "edits": [
+    {
+     "old": "{\n    return SONG(off) << 8 | SONG(off + 1);\n}",
+     "new": "{\n    return ((unsigned)SONG(off) << 8) | (*(volatile unsigned char _based(g_8DFC) *)(off + 1));\n}"
+    }
+   ]
+  },
+  {
+   "parameters": {
+    "volatile": "both"
+   },
+   "edits": [
+    {
+     "old": "{\n    return SONG(off) << 8 | SONG(off + 1);\n}",
+     "new": "{\n    return ((unsigned)(*(volatile unsigned char _based(g_8DFC) *)(off)) << 8) | (*(volatile unsigned char _based(g_8DFC) *)(off + 1));\n}"
+    }
+   ]
+  }
+ ]
+}

@@ -1,0 +1,116 @@
+{
+  "controls": [
+    {
+      "baseline_candidate_matches_oracle": true,
+      "baseline_matches": true,
+      "baseline_object": {
+        "path": "build/workers/behavior_text_card/standard-review-20261002/replays/win_PrintStyleTextInRect/baseline-negative-x-origin-plus-one/candidate.obj",
+        "sha256": "3924ee63cdc5b4722c0a33c4d58849bae1cb1709164285f402f561f92bbe6c30"
+      },
+      "baseline_object_sha256": "3924ee63cdc5b4722c0a33c4d58849bae1cb1709164285f402f561f92bbe6c30",
+      "case_id": "negative/x-origin-plus-one",
+      "detected_mismatch": true,
+      "difference": {
+        "state": {
+          "candidate": {
+            "draws": [
+              {
+                "text_hex": "6e656761746976652070726f6265",
+                "x": 2,
+                "y": 4
+              }
+            ],
+            "volatile": 42330
+          },
+          "oracle": {
+            "draws": [
+              {
+                "text_hex": "6e656761746976652070726f6265",
+                "x": 1,
+                "y": 4
+              }
+            ],
+            "volatile": 42330
+          }
+        },
+        "trace": {
+          "candidate": [
+            {
+              "args": {
+                "text_hex": "6e656761746976652070726f6265",
+                "x": 2,
+                "y": 4
+              },
+              "modified_state_at_entry": [
+                [
+                  377045,
+                  1
+                ],
+                [
+                  377047,
+                  163
+                ]
+              ],
+              "name": "f_24AB_038D",
+              "state_at_entry": {}
+            }
+          ],
+          "oracle": [
+            {
+              "args": {
+                "text_hex": "6e656761746976652070726f6265",
+                "x": 1,
+                "y": 4
+              },
+              "modified_state_at_entry": [
+                [
+                  377045,
+                  1
+                ],
+                [
+                  377047,
+                  163
+                ]
+              ],
+              "name": "f_24AB_038D",
+              "state_at_entry": {}
+            }
+          ]
+        }
+      },
+      "executed": true,
+      "execution_errors": 0,
+      "id": "negative/x-origin-plus-one",
+      "mismatch_categories": [
+        "state",
+        "trace"
+      ],
+      "mutant_differs": true,
+      "mutant_executed": true,
+      "mutant_object": {
+        "path": "evidence/behavior/functions/win_PrintStyleTextInRect/contracts/logical-text-v1/negative-0.obj",
+        "sha256": "451e301f1df0c62a985848ccfb2b880fd7848efae2afbf1783db9b012c58b845"
+      },
+      "mutant_object_sha256": "451e301f1df0c62a985848ccfb2b880fd7848efae2afbf1783db9b012c58b845",
+      "mutant_source": {
+        "path": "evidence/behavior/functions/win_PrintStyleTextInRect/contracts/logical-text-v1/negative-0.c",
+        "sha256": "a10dba162b5c8a829f5bd2bdbde259f6f83745c576c1cca402e909e897874fbd"
+      },
+      "mutant_source_sha256": "a10dba162b5c8a829f5bd2bdbde259f6f83745c576c1cca402e909e897874fbd",
+      "original_executed": true
+    }
+  ],
+  "errors": 0,
+  "function": "win_PrintStyleTextInRect",
+  "identity": {
+    "harness_sha256": "2c0799048057f59eae61a48be4d695278635594484adf0c70bf46c51b4e0c799",
+    "historical_manifest_sha256": "025a0a9255d910cae4b122ab5a3f3fb40888bb456d7fe42158db7c9e622fcf50",
+    "oracle_sha256": "aa0596c6766322a8229ee3c36e57048c92adc82d50fbe2ef37afb8b85fcf4f11",
+    "source_sha256": "5e8e5f39325914cc1a6f1b5de9e5c894818e47d68a7ce594b2a514c99b37a1ea",
+    "suite_sha256": "d99e5d47948a089b388862a22b463e5cb2d653ebe2f84663c333deb3e9cb9a46"
+  },
+  "mismatches_detected": 1,
+  "proposal_status": "PENDING_ROOT_REVIEW",
+  "schema": "behavior-negative-controls-v1",
+  "suite_id": "text-layout-v1"
+}

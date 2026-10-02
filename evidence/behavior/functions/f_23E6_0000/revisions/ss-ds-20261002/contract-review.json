@@ -1,0 +1,124 @@
+{
+  "function": "f_23E6_0000",
+  "suite": "tools/behavior_suites/lists.py",
+  "suite_id": "list-text-lookup-v1",
+  "module": "root:23E6",
+  "date": "2026-10-02",
+  "checkpoint": {
+    "commit": "54cb824d19c2f897ab17c8b163a954121d4e4843",
+    "date": "2026-10-02"
+  },
+  "positive_controls": [
+    {
+      "id": "list-positive-ss-ds",
+      "executed": true,
+      "matched": true,
+      "execution_errors": 0,
+      "original_executed": true,
+      "candidate_executed": true,
+      "source_sha256": "867a7f15631db0ef33079daedea99f99e7ddc75b57f04b15bafca036f14c5ee7",
+      "object_sha256": "7079eda3dc37e5180658d4df1357cfee9e50651f9c0d0e2c123402a4a651cc1d",
+      "oracle_sha256": "aa0596c6766322a8229ee3c36e57048c92adc82d50fbe2ef37afb8b85fcf4f11",
+      "compared_effects": [
+        "far pointer return",
+        "list cache",
+        "text",
+        "lock count and block age",
+        "global age",
+        "ordered actual lock/unlock/strlen calls",
+        "all nonstack writes",
+        "caller ABI"
+      ],
+      "original_observation_sha256": "266713558102ba6152a0eb28d1f557289ae5b620d961c4243880cefae2d14e96",
+      "candidate_observation_sha256": "266713558102ba6152a0eb28d1f557289ae5b620d961c4243880cefae2d14e96",
+      "report": "build/workers/behavior_reviews/list-positive-ss-ds/report.json",
+      "report_sha256": "ab4e83e98e809c786950da405588ae7f69b17bcf3da754635b7b2b08dbbe5c07"
+    }
+  ],
+  "helper_boundaries": [
+    {
+      "name": "f_171C_1B84",
+      "execution_mode": "ORIGINAL_EXE",
+      "executed_from_original": true,
+      "observed_call_count": 1,
+      "observed_call_count_scope": "recorded positive control"
+    },
+    {
+      "name": "f_171C_1BBA",
+      "execution_mode": "ORIGINAL_EXE",
+      "executed_from_original": true,
+      "observed_call_count": 1,
+      "observed_call_count_scope": "recorded positive control"
+    },
+    {
+      "name": "_fstrlen",
+      "execution_mode": "ORIGINAL_EXE",
+      "executed_from_original": true,
+      "observed_call_count": 2,
+      "observed_call_count_scope": "recorded positive control"
+    }
+  ],
+  "contract": {
+    "id": "list-text-lookup-v1",
+    "input_domain": {
+      "directed": "all valid cache ranges for [],[0],[1],[1,0,3],[1,2,3,4,5],[0,1,7,31,255] row lengths; negative and far-past-end signed line requests",
+      "randomized": "10000 valid cached lists, 0..128 rows, 0..64 nonzero bytes per row, all 32-bit ages, valid lock depths 0..99; seed 0x23E6",
+      "fixture": "master table one live handle, HARD type header, offset arithmetic within one far text segment"
+    },
+    "limits": [
+      "Finite randomized validation; not an exhaustive sweep of all string bytes and integer states.",
+      "Invalid/discarded handles, lock-depth violations and cross-segment huge strings are outside the valid list contract."
+    ],
+    "required_effects": [
+      "far pointer return",
+      "list cache",
+      "text",
+      "lock count and block age",
+      "global age",
+      "ordered actual lock/unlock/strlen calls",
+      "all nonstack writes",
+      "caller ABI"
+    ],
+    "excluded_effects": [
+      {
+        "effect": "local stack homes, dead CX reload and volatile registers",
+        "reason": "no caller-visible contract; original CX value is not consumed before redefinition/return, and all passed strings use the far pointer in SI plus its saved segment"
+      }
+    ],
+    "required_helpers": [
+      {
+        "name": "f_171C_1B84",
+        "must_execute": true
+      },
+      {
+        "name": "f_171C_1BBA",
+        "must_execute": true
+      },
+      {
+        "name": "_fstrlen",
+        "must_execute": true
+      }
+    ],
+    "review": {
+      "status": "APPROVED",
+      "reviewer": "lead reconstruction engineer /root",
+      "reviewed_at": "2026-10-02"
+    }
+  },
+  "historical_difference": {
+    "description": "Target159/candidate156 bytes. Original +0x73 mov cx,[bp-0xa] reloads the text segment after strlen/pointer advance; candidate omits it.",
+    "reason_exact_stopped": "The reload is a compiler-generated volatile-register value with no source-visible effect; preserved far-pointer semantics, original helpers and full state are now differentially checked.",
+    "evidence_refs": [
+      "work/takeover/hardtail/all-open.json",
+      "build/workers/hardtail_list/archive-reload-audit.json",
+      "tools/context.py f_23E6_0000"
+    ]
+  },
+  "semantic_evidence": [
+    "Reviewed whole-module list cache/offset algorithm in the retained root:23E6 seed.",
+    "Original root:171C:1FC2/2086 lock, age and unlock bodies execute in both VMs.",
+    "Original MSC runtime _fstrlen executes in both VMs; string termination and 16-bit offsets remain observable.",
+    "Extra CX reload changes no flags; next loop loads ES from the saved segment, runtime strlen initializes CX, and unlock defines CX before reading it.",
+    "Source mutant n+=2 is detected through pointer return and helper/state differences."
+  ]
+}

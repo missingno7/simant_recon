@@ -1,0 +1,827 @@
+{
+  "schema": 1,
+  "authority": "Diagnostic-only hypotheses; not semantic conclusions or acceptance evidence.",
+  "scope": {
+    "primary_report": "work/takeover/hardtail/all-open.json",
+    "raw_operand_fallback": "build/workers/hardtail_root/refreshed/all-open.json",
+    "functions_reviewed": 20,
+    "excluded": [
+      "o15_384C_0239",
+      "o25_3BA4_1035",
+      "f_171C_0CF4",
+      "FindIndex",
+      "f_23E6_0000",
+      "f_284A_0138",
+      "f_29D6_000A",
+      "LessonDone",
+      "f_0250_129E"
+    ],
+    "method": "Use first meaningful body divergence or first CFG divergence after excluding frame-size, BP-home mapping, and branch-address ripple; preserve exact report island IDs and offsets."
+  },
+  "functions": [
+    {
+      "function": "f_0250_1018",
+      "focus": "At +0x11, target keeps the two coordinate accumulators in SI and DI through bounds/wrap; candidate uses DI for the first, AX for the second, and adds a BP-4 spill before masking. The difference continues at +0x29 and +0x148.",
+      "hypothesis": "Test keeping the two coordinate values as distinct live word temporaries through both the 0x3f bounds test and wrap/mask step, without introducing a separate stored copy of the second coordinate. The report does not establish which C local corresponds to either register.",
+      "target_bytes": 646,
+      "candidate_bytes": 648,
+      "cfg_status": "MATCH",
+      "candidate_source": "work/takeover/hardtail/seeds/root_0250_e41a4ab8c56c.c",
+      "evidence": [
+        {
+          "summary_record": "work/takeover/hardtail/all-open.json",
+          "raw_instruction_report": "build/workers/hardtail_root/refreshed/all-open.json",
+          "island_id": 1,
+          "target_byte_offsets": [
+            17,
+            44
+          ],
+          "candidate_byte_offsets": [
+            17,
+            47
+          ],
+          "diagnostic_classes": [
+            "CALL_FRAME_OR_SEGMENT_REGISTER",
+            "REGISTER_ALLOCATION",
+            "BRANCH_TARGET_OR_LAYOUT",
+            "EXTRA_INSTRUCTIONS",
+            "LOCAL_CODEGEN_UNCLASSIFIED"
+          ]
+        }
+      ]
+    },
+    {
+      "function": "DrawBalloons",
+      "focus": "After the frame-size call, the early +0x61 differences are register substitutions. The first clear operand/extension divergence at +0x1d9 is target CWD before pushing DX:AX versus candidate SUB DX,DX; candidate also stores CX to BP-56 where target moves CX to SI.",
+      "hypothesis": "Inspect the signedness and extension of the word value passed as DX:AX at +0x1d9. Test a signed word intermediate versus zero-extended word while keeping the surrounding helper call and argument order fixed; do not infer the original variable type from CWD alone.",
+      "target_bytes": 1060,
+      "candidate_bytes": 1053,
+      "cfg_status": "MATCH",
+      "candidate_source": "work/takeover/hardtail/seeds/root_0250_e41a4ab8c56c.c",
+      "evidence": [
+        {
+          "summary_record": "work/takeover/hardtail/all-open.json",
+          "raw_instruction_report": "build/workers/hardtail_root/refreshed/all-open.json",
+          "island_id": 2,
+          "target_byte_offsets": [
+            97,
+            105
+          ],
+          "candidate_byte_offsets": [
+            97,
+            105
+          ],
+          "diagnostic_classes": [
+            "REGISTER_ALLOCATION",
+            "BRANCH_TARGET_OR_LAYOUT"
+          ]
+        },
+        {
+          "summary_record": "work/takeover/hardtail/all-open.json",
+          "raw_instruction_report": "build/workers/hardtail_root/refreshed/all-open.json",
+          "island_id": 14,
+          "target_byte_offsets": [
+            473,
+            478
+          ],
+          "candidate_byte_offsets": [
+            475,
+            482
+          ],
+          "diagnostic_classes": [
+            "CALL_FRAME_OR_SEGMENT_REGISTER",
+            "WIDTH_OR_EXTENSION",
+            "LOCAL_CODEGEN_UNCLASSIFIED"
+          ]
+        }
+      ]
+    },
+    {
+      "function": "SpiderScan",
+      "focus": "At +0x42, target clears AX and stores zero to BP-2 and BP-8; candidate writes zero only to BP-8.",
+      "hypothesis": "Trace the candidate local at BP-2 and test retaining a distinct zero-initialized word temporary if that value is live on later paths. The current evidence shows an omitted initialization store but does not identify its source-level name or purpose.",
+      "target_bytes": 392,
+      "candidate_bytes": 389,
+      "cfg_status": "MATCH",
+      "candidate_source": "work/takeover/hardtail/seeds/root_0CDB_2d2192f4ada7.c",
+      "evidence": [
+        {
+          "summary_record": "work/takeover/hardtail/all-open.json",
+          "raw_instruction_report": "build/workers/hardtail_root/refreshed/all-open.json",
+          "island_id": 1,
+          "target_byte_offsets": [
+            66,
+            74
+          ],
+          "candidate_byte_offsets": [
+            66,
+            71
+          ],
+          "diagnostic_classes": [
+            "MISSING_INSTRUCTIONS",
+            "LOCAL_CODEGEN_UNCLASSIFIED"
+          ]
+        }
+      ]
+    },
+    {
+      "function": "f_171C_09CC",
+      "focus": "The first body island exchanges DI/BX roles for the parameter and far pointer. After the helper call, target at +0x71 saves AX in SI and DX at BP-6; candidate proceeds after stack cleanup without the aligned DX store.",
+      "hypothesis": "Test representing the helper's returned offset:segment pair as one far-pointer value that remains live across the subsequent comparisons/call setup. Verify both return halves are used before changing declarations; the evidence does not prove that the target stack home is a source local.",
+      "target_bytes": 144,
+      "candidate_bytes": 146,
+      "cfg_status": "MATCH",
+      "candidate_source": "work/takeover/hardtail/seeds/root_171C_0fee78bc34bc.c",
+      "evidence": [
+        {
+          "summary_record": "work/takeover/hardtail/all-open.json",
+          "raw_instruction_report": "build/workers/hardtail_root/refreshed/all-open.json",
+          "island_id": 1,
+          "target_byte_offsets": [
+            8,
+            18
+          ],
+          "candidate_byte_offsets": [
+            8,
+            18
+          ],
+          "diagnostic_classes": [
+            "REGISTER_ALLOCATION"
+          ]
+        },
+        {
+          "summary_record": "work/takeover/hardtail/all-open.json",
+          "raw_instruction_report": "build/workers/hardtail_root/refreshed/all-open.json",
+          "island_id": 6,
+          "target_byte_offsets": [
+            113,
+            124
+          ],
+          "candidate_byte_offsets": [
+            120,
+            126
+          ],
+          "diagnostic_classes": [
+            "BRANCH_TARGET_OR_LAYOUT",
+            "MISSING_INSTRUCTIONS"
+          ]
+        }
+      ]
+    },
+    {
+      "function": "f_171C_0ADC",
+      "focus": "At +0x2a, target materializes DX and a zero high/low component into BP-28/BP-26; candidate instead holds corresponding values in SI:DI. In the next island target adds DI to the low argument word, while candidate emits ADD SI,0 then ADC DI,2.",
+      "hypothesis": "Test a named 32-bit/far temporary for the value returned by the helper and then add the constant offset to the original pointer pair. Keep the helper result and pointer argument distinct; the report does not prove their source-level identities.",
+      "target_bytes": 262,
+      "candidate_bytes": 260,
+      "cfg_status": "MATCH",
+      "candidate_source": "work/takeover/hardtail/seeds/root_171C_0fee78bc34bc.c",
+      "evidence": [
+        {
+          "summary_record": "work/takeover/hardtail/all-open.json",
+          "raw_instruction_report": "build/workers/hardtail_root/refreshed/all-open.json",
+          "island_id": 2,
+          "target_byte_offsets": [
+            42,
+            50
+          ],
+          "candidate_byte_offsets": [
+            42,
+            42
+          ],
+          "diagnostic_classes": [
+            "MISSING_INSTRUCTIONS"
+          ]
+        },
+        {
+          "summary_record": "work/takeover/hardtail/all-open.json",
+          "raw_instruction_report": "build/workers/hardtail_root/refreshed/all-open.json",
+          "island_id": 4,
+          "target_byte_offsets": [
+            74,
+            85
+          ],
+          "candidate_byte_offsets": [
+            70,
+            78
+          ],
+          "diagnostic_classes": [
+            "CALL_FRAME_OR_SEGMENT_REGISTER",
+            "REGISTER_ALLOCATION",
+            "MISSING_INSTRUCTIONS",
+            "LOCAL_CODEGEN_UNCLASSIFIED"
+          ]
+        }
+      ]
+    },
+    {
+      "function": "f_171C_0FBC",
+      "focus": "At +0x68 the target loads the byte at [SI+8] into CL, clears CH, checks byte [SI+9], then compares CX against 1, 3, and 0x80. Candidate compares [BX+8] directly as a byte and separately checks [BX+9]. At +0xb0 a later unsigned comparison also reverses CMP operands and JB/JA.",
+      "hypothesis": "Test widening the byte field at +0x8 before the three key comparisons, while preserving the separate byte-zero test. Treat the later JB/JA inversion as a second comparison-order probe, not evidence that the source conditions are equivalent.",
+      "target_bytes": 566,
+      "candidate_bytes": 568,
+      "cfg_status": "MISMATCH",
+      "candidate_source": "work/takeover/hardtail/seeds/root_171C_0fee78bc34bc.c",
+      "evidence": [
+        {
+          "summary_record": "work/takeover/hardtail/all-open.json",
+          "raw_instruction_report": "build/workers/hardtail_root/refreshed/all-open.json",
+          "island_id": 2,
+          "target_byte_offsets": [
+            25,
+            36
+          ],
+          "candidate_byte_offsets": [
+            25,
+            36
+          ],
+          "diagnostic_classes": [
+            "STACK_SLOT_ALLOCATION",
+            "EXTRA_INSTRUCTIONS",
+            "MISSING_INSTRUCTIONS",
+            "LOCAL_CODEGEN_UNCLASSIFIED"
+          ]
+        },
+        {
+          "summary_record": "work/takeover/hardtail/all-open.json",
+          "raw_instruction_report": "build/workers/hardtail_root/refreshed/all-open.json",
+          "island_id": 4,
+          "target_byte_offsets": [
+            104,
+            172
+          ],
+          "candidate_byte_offsets": [
+            104,
+            170
+          ],
+          "diagnostic_classes": [
+            "REGISTER_ALLOCATION",
+            "WIDTH_OR_EXTENSION",
+            "BRANCH_TARGET_OR_LAYOUT",
+            "BRANCH_TARGET_OR_LAYOUT",
+            "MISSING_INSTRUCTIONS",
+            "LOCAL_CODEGEN_UNCLASSIFIED"
+          ]
+        },
+        {
+          "summary_record": "work/takeover/hardtail/all-open.json",
+          "raw_instruction_report": "build/workers/hardtail_root/refreshed/all-open.json",
+          "island_id": 5,
+          "target_byte_offsets": [
+            178,
+            185
+          ],
+          "candidate_byte_offsets": [
+            176,
+            183
+          ],
+          "diagnostic_classes": [
+            "CALL_FRAME_OR_SEGMENT_REGISTER",
+            "CONTROL_FLOW_SHAPE",
+            "LOCAL_CODEGEN_UNCLASSIFIED"
+          ]
+        }
+      ]
+    },
+    {
+      "function": "f_1C62_0415",
+      "focus": "At +0x81 the target compares BP-0xc against the value loaded from BP-4 and uses JG; candidate reverses the CMP operands and uses JL. The same pattern recurs near +0x1bb.",
+      "hypothesis": "Test the source relation with operands written in the target order (the value at BP-0xc greater than the value at BP-4) rather than the algebraically reversed less-than form. Preserve the signedness and loop body while varying only relation orientation.",
+      "target_bytes": 649,
+      "candidate_bytes": 653,
+      "cfg_status": "MATCH",
+      "candidate_source": "work/takeover/hardtail/seeds/root_1C62_1a75da44054b.c",
+      "evidence": [
+        {
+          "summary_record": "work/takeover/hardtail/all-open.json",
+          "raw_instruction_report": "build/workers/hardtail_root/refreshed/all-open.json",
+          "island_id": 1,
+          "target_byte_offsets": [
+            80,
+            89
+          ],
+          "candidate_byte_offsets": [
+            80,
+            90
+          ],
+          "diagnostic_classes": [
+            "CALL_FRAME_OR_SEGMENT_REGISTER",
+            "STACK_SLOT_ALLOCATION",
+            "BRANCH_TARGET_OR_LAYOUT",
+            "LOCAL_CODEGEN_UNCLASSIFIED"
+          ]
+        },
+        {
+          "summary_record": "work/takeover/hardtail/all-open.json",
+          "raw_instruction_report": "build/workers/hardtail_root/refreshed/all-open.json",
+          "island_id": 2,
+          "target_byte_offsets": [
+            129,
+            137
+          ],
+          "candidate_byte_offsets": [
+            130,
+            138
+          ],
+          "diagnostic_classes": [
+            "STACK_SLOT_ALLOCATION",
+            "CONTROL_FLOW_SHAPE",
+            "LOCAL_CODEGEN_UNCLASSIFIED"
+          ]
+        }
+      ]
+    },
+    {
+      "function": "f_1E57_038E",
+      "focus": "After earlier frame/home differences, the first substantial body island begins at +0x1cb. Target pushes DI and subtracts it from the helper result after two calls; candidate passes BP-26 and subtracts that stack value. The island also has one fewer target-aligned control operation on the candidate side.",
+      "hypothesis": "Trace the lookup value loaded from the table at +0x1d0 and test retaining that value as one named word temporary across the two helper calls, then using the same value in the post-call subtraction. Check the actual call arguments before treating BP-26 as the same logical value as DI.",
+      "target_bytes": 997,
+      "candidate_bytes": 985,
+      "cfg_status": "MISMATCH",
+      "candidate_source": "work/takeover/hardtail/seeds/root_1E57_edfb01cec348.c",
+      "evidence": [
+        {
+          "summary_record": "work/takeover/hardtail/all-open.json",
+          "raw_instruction_report": "build/workers/hardtail_root/refreshed/all-open.json",
+          "island_id": 15,
+          "target_byte_offsets": [
+            459,
+            547
+          ],
+          "candidate_byte_offsets": [
+            459,
+            537
+          ],
+          "diagnostic_classes": [
+            "CALL_FRAME_OR_SEGMENT_REGISTER",
+            "STACK_SLOT_ALLOCATION",
+            "BRANCH_TARGET_OR_LAYOUT",
+            "CONTROL_FLOW_SHAPE",
+            "MISSING_INSTRUCTIONS",
+            "LOCAL_CODEGEN_UNCLASSIFIED"
+          ]
+        }
+      ]
+    },
+    {
+      "function": "f_20E8_0903",
+      "focus": "At +0x8a, target copies DI to BX before loading the far destination into DI; candidate loads the far destination into BX and omits the copy. Both then write through ES:[BX+DI].",
+      "hypothesis": "Test capturing the word index before loading the far destination pointer, so the emitted address uses BX for the index and DI for the far offset as in the target. The current difference is register-role/address formation evidence; it does not establish a semantic mismatch.",
+      "target_bytes": 286,
+      "candidate_bytes": 280,
+      "cfg_status": "MATCH",
+      "candidate_source": "work/takeover/hardtail/seeds/root_20E8_e9f7805d6d35.c",
+      "evidence": [
+        {
+          "summary_record": "work/takeover/hardtail/all-open.json",
+          "raw_instruction_report": "build/workers/hardtail_root/refreshed/all-open.json",
+          "island_id": 1,
+          "target_byte_offsets": [
+            118,
+            148
+          ],
+          "candidate_byte_offsets": [
+            118,
+            146
+          ],
+          "diagnostic_classes": [
+            "REGISTER_ALLOCATION",
+            "BRANCH_TARGET_OR_LAYOUT",
+            "BRANCH_TARGET_OR_LAYOUT",
+            "MISSING_INSTRUCTIONS"
+          ]
+        }
+      ]
+    },
+    {
+      "function": "win_UnlockWin",
+      "focus": "At +0xb3 target adds 0x2c to BX, performs LES through ES:[BX+SI], then copies BX to DI. Candidate folds +0x2c into the indirect memory operand.",
+      "hypothesis": "Test materializing the 0x2c-adjusted pointer before the far indirect load, for example by separating the field-base computation from the dereference. Keep the far-pointer type explicit and vary only whether the member displacement is folded into the final lvalue.",
+      "target_bytes": 386,
+      "candidate_bytes": 390,
+      "cfg_status": "MATCH",
+      "candidate_source": "work/takeover/hardtail/seeds/root_23AE_23aa124a97a2.c",
+      "evidence": [
+        {
+          "summary_record": "work/takeover/hardtail/all-open.json",
+          "raw_instruction_report": "build/workers/hardtail_root/refreshed/all-open.json",
+          "island_id": 12,
+          "target_byte_offsets": [
+            179,
+            187
+          ],
+          "candidate_byte_offsets": [
+            179,
+            183
+          ],
+          "diagnostic_classes": [
+            "MISSING_INSTRUCTIONS",
+            "LOCAL_CODEGEN_UNCLASSIFIED"
+          ]
+        }
+      ]
+    },
+    {
+      "function": "f_2505_0453",
+      "focus": "After the call at +0x28, target loads a word from BP-14 and masks it with 0xff before comparing ES:[BX+0xc]. Candidate later loads a byte from BP-12 and clears AH before that comparison.",
+      "hypothesis": "Test keeping the comparison value as a word and applying the low-byte mask at the comparison site, versus storing/loading it as a byte. Do not assume BP-14 and BP-12 are the same source value without checking the source and slot mapping.",
+      "target_bytes": 132,
+      "candidate_bytes": 124,
+      "cfg_status": "MATCH",
+      "candidate_source": "work/takeover/hardtail/seeds/root_2505_22a03f15e95f.c",
+      "evidence": [
+        {
+          "summary_record": "work/takeover/hardtail/all-open.json",
+          "raw_instruction_report": "build/workers/hardtail_root/refreshed/all-open.json",
+          "island_id": 3,
+          "target_byte_offsets": [
+            45,
+            52
+          ],
+          "candidate_byte_offsets": [
+            45,
+            45
+          ],
+          "diagnostic_classes": [
+            "MISSING_INSTRUCTIONS"
+          ]
+        },
+        {
+          "summary_record": "work/takeover/hardtail/all-open.json",
+          "raw_instruction_report": "build/workers/hardtail_root/refreshed/all-open.json",
+          "island_id": 5,
+          "target_byte_offsets": [
+            62,
+            73
+          ],
+          "candidate_byte_offsets": [
+            55,
+            70
+          ],
+          "diagnostic_classes": [
+            "REGISTER_ALLOCATION",
+            "BRANCH_TARGET_OR_LAYOUT",
+            "EXTRA_INSTRUCTIONS",
+            "LOCAL_CODEGEN_UNCLASSIFIED"
+          ]
+        }
+      ]
+    },
+    {
+      "function": "win_DrawBitMap",
+      "focus": "At +0x2a target stores BX's far-offset component at BP-16; candidate keeps it in DI. In the later branch, target returns from helper 1b4e:003b and jumps to 0x280, while candidate pushes another pair and calls 171c:2276 before jumping back.",
+      "hypothesis": "Trace the branch through helper 1b4e:003b and verify whether candidate's additional 171c:2276 call is required on that path. Test a shared post-call continuation only if source behavior permits it; separately check whether the target's saved far-offset value is needed after the helper.",
+      "target_bytes": 663,
+      "candidate_bytes": 675,
+      "cfg_status": "MISMATCH",
+      "candidate_source": "work/takeover/hardtail/seeds/root_259D_46f67c8023fd.c",
+      "evidence": [
+        {
+          "summary_record": "work/takeover/hardtail/all-open.json",
+          "raw_instruction_report": "build/workers/hardtail_root/refreshed/all-open.json",
+          "island_id": 2,
+          "target_byte_offsets": [
+            33,
+            45
+          ],
+          "candidate_byte_offsets": [
+            33,
+            44
+          ],
+          "diagnostic_classes": [
+            "CALL_FRAME_OR_SEGMENT_REGISTER",
+            "BRANCH_TARGET_OR_LAYOUT",
+            "LOCAL_CODEGEN_UNCLASSIFIED"
+          ]
+        },
+        {
+          "summary_record": "work/takeover/hardtail/all-open.json",
+          "raw_instruction_report": "build/workers/hardtail_root/refreshed/all-open.json",
+          "island_id": 15,
+          "target_byte_offsets": [
+            311,
+            338
+          ],
+          "candidate_byte_offsets": [
+            315,
+            356
+          ],
+          "diagnostic_classes": [
+            "CALL_FRAME_OR_SEGMENT_REGISTER",
+            "STACK_SLOT_ALLOCATION",
+            "BRANCH_TARGET_OR_LAYOUT",
+            "CONTROL_FLOW_SHAPE",
+            "EXTRA_INSTRUCTIONS",
+            "LOCAL_CODEGEN_UNCLASSIFIED"
+          ]
+        }
+      ]
+    },
+    {
+      "function": "f_2815_0165",
+      "focus": "At +0x20 target uses LES on the far pointer field at ES:[BX+2], stores its offset and segment, then adds the volume field at ES:[BX+0xd] to DI. Candidate loads offset and segment with separate MOVs, reloads ES, adds into BX, and clamps by writing the result back to the BP+0xa argument slot.",
+      "hypothesis": "Test preserving the record's field pointer as a single far-pointer value and clamping the selected volume into a distinct local instead of writing through the parameter home. Vary pointer materialization and clamp destination independently.",
+      "target_bytes": 232,
+      "candidate_bytes": 246,
+      "cfg_status": "MATCH",
+      "candidate_source": "work/takeover/hardtail/seeds/root_2815_8b6ca1b25908.c",
+      "evidence": [
+        {
+          "summary_record": "work/takeover/hardtail/all-open.json",
+          "raw_instruction_report": "build/workers/hardtail_root/refreshed/all-open.json",
+          "island_id": 2,
+          "target_byte_offsets": [
+            26,
+            59
+          ],
+          "candidate_byte_offsets": [
+            25,
+            72
+          ],
+          "diagnostic_classes": [
+            "CALL_FRAME_OR_SEGMENT_REGISTER",
+            "BRANCH_TARGET_OR_LAYOUT",
+            "EXTRA_INSTRUCTIONS",
+            "LOCAL_CODEGEN_UNCLASSIFIED"
+          ]
+        }
+      ]
+    },
+    {
+      "function": "o10_35F5_0384",
+      "focus": "The early body mismatch at +0x77 is primarily local/register materialization. The first CFG-shaped island at +0x488 dispatches constants 0x0b, 0x0d, 0x828, and 0x830: target uses a compact JE chain to two shared destinations; candidate uses JNE plus explicit JMPs.",
+      "hypothesis": "Test expressing this exact key dispatch as one switch with grouped cases for 0x0b/0x830 and 0x0d/0x828, sharing their existing bodies, rather than separate negative guards. Keep the case bodies and order fixed; the evidence identifies dispatch shape, not why the compiler selected it.",
+      "target_bytes": 1759,
+      "candidate_bytes": 1746,
+      "cfg_status": "MISMATCH",
+      "candidate_source": "work/takeover/hardtail/seeds/S10_35F5_4b9dda15dbea.c",
+      "evidence": [
+        {
+          "summary_record": "work/takeover/hardtail/all-open.json",
+          "raw_instruction_report": "build/workers/hardtail_root/refreshed/all-open.json",
+          "island_id": 6,
+          "target_byte_offsets": [
+            119,
+            144
+          ],
+          "candidate_byte_offsets": [
+            119,
+            139
+          ],
+          "diagnostic_classes": [
+            "STACK_SLOT_ALLOCATION",
+            "REGISTER_ALLOCATION",
+            "MISSING_INSTRUCTIONS",
+            "LOCAL_CODEGEN_UNCLASSIFIED"
+          ]
+        },
+        {
+          "summary_record": "work/takeover/hardtail/all-open.json",
+          "raw_instruction_report": "build/workers/hardtail_root/refreshed/all-open.json",
+          "island_id": 60,
+          "target_byte_offsets": [
+            1154,
+            1176
+          ],
+          "candidate_byte_offsets": [
+            1144,
+            1175
+          ],
+          "diagnostic_classes": [
+            "BRANCH_TARGET_OR_LAYOUT",
+            "BRANCH_TARGET_OR_LAYOUT",
+            "CONTROL_FLOW_SHAPE",
+            "EXTRA_INSTRUCTIONS",
+            "LOCAL_CODEGEN_UNCLASSIFIED"
+          ]
+        }
+      ]
+    },
+    {
+      "function": "DrawMapCursor",
+      "focus": "At +0x2c target reads [0x8674]/ES:[0x3858], then [0x867c]/[0x50a] for IMUL; candidate reads the second pair first and reverses the multiply operand order. The same pattern repeats for the paired globals at +0x6a.",
+      "hypothesis": "Test evaluating the two coordinate factors into separate temporaries in target order before multiplying, instead of reversing the global reads and commuting the factors. Do not infer which pair is X or Y from these addresses alone.",
+      "target_bytes": 205,
+      "candidate_bytes": 210,
+      "cfg_status": "MATCH",
+      "candidate_source": "work/takeover/hardtail/seeds/S12_384C_daa607847c4c.c",
+      "evidence": [
+        {
+          "summary_record": "work/takeover/hardtail/all-open.json",
+          "raw_instruction_report": "build/workers/hardtail_root/refreshed/all-open.json",
+          "island_id": 2,
+          "target_byte_offsets": [
+            44,
+            63
+          ],
+          "candidate_byte_offsets": [
+            44,
+            61
+          ],
+          "diagnostic_classes": [
+            "MISSING_INSTRUCTIONS",
+            "LOCAL_CODEGEN_UNCLASSIFIED"
+          ]
+        }
+      ]
+    },
+    {
+      "function": "InvertPatch",
+      "focus": "At +0x1c target computes 0x1c times the parameter and stores the product before reading the global origin at ES:[0x10d2]. Candidate reads/subtracts the origin first and computes the stride product later.",
+      "hypothesis": "Test materializing the 0x1c*parameter stride into one word temporary before the origin calculation and reusing it in the coordinate expressions. Hold the arithmetic operators and later loop structure constant.",
+      "target_bytes": 261,
+      "candidate_bytes": 260,
+      "cfg_status": "MATCH",
+      "candidate_source": "work/takeover/hardtail/seeds/S13_384C_1ace9a298569.c",
+      "evidence": [
+        {
+          "summary_record": "work/takeover/hardtail/all-open.json",
+          "raw_instruction_report": "build/workers/hardtail_root/refreshed/all-open.json",
+          "island_id": 1,
+          "target_byte_offsets": [
+            28,
+            39
+          ],
+          "candidate_byte_offsets": [
+            28,
+            28
+          ],
+          "diagnostic_classes": [
+            "MISSING_INSTRUCTIONS"
+          ]
+        },
+        {
+          "summary_record": "work/takeover/hardtail/all-open.json",
+          "raw_instruction_report": "build/workers/hardtail_root/refreshed/all-open.json",
+          "island_id": 2,
+          "target_byte_offsets": [
+            45,
+            67
+          ],
+          "candidate_byte_offsets": [
+            34,
+            63
+          ],
+          "diagnostic_classes": [
+            "STACK_SLOT_ALLOCATION",
+            "EXTRA_INSTRUCTIONS",
+            "MISSING_INSTRUCTIONS",
+            "LOCAL_CODEGEN_UNCLASSIFIED"
+          ]
+        }
+      ]
+    },
+    {
+      "function": "win_PrintStyleTextInRect",
+      "focus": "At +0x6a target stores AX at BP-12; candidate keeps it in SI. The next comparison and IDIV use that same memory home in the target and SI in the candidate.",
+      "hypothesis": "Test retaining the changing width/divisor value in a named local across the helper call and reloading it for the comparison and IDIV, instead of keeping it in SI. The report does not establish that a particular C spelling forces the target home.",
+      "target_bytes": 1039,
+      "candidate_bytes": 1035,
+      "cfg_status": "MATCH",
+      "candidate_source": "work/takeover/hardtail/seeds/S23_39C7_f4abf38a26c5.c",
+      "evidence": [
+        {
+          "summary_record": "work/takeover/hardtail/all-open.json",
+          "raw_instruction_report": "build/workers/hardtail_root/refreshed/all-open.json",
+          "island_id": 2,
+          "target_byte_offsets": [
+            106,
+            109
+          ],
+          "candidate_byte_offsets": [
+            106,
+            108
+          ],
+          "diagnostic_classes": [
+            "CALL_FRAME_OR_SEGMENT_REGISTER",
+            "LOCAL_CODEGEN_UNCLASSIFIED"
+          ]
+        },
+        {
+          "summary_record": "work/takeover/hardtail/all-open.json",
+          "raw_instruction_report": "build/workers/hardtail_root/refreshed/all-open.json",
+          "island_id": 4,
+          "target_byte_offsets": [
+            148,
+            154
+          ],
+          "candidate_byte_offsets": [
+            145,
+            153
+          ],
+          "diagnostic_classes": [
+            "CALL_FRAME_OR_SEGMENT_REGISTER",
+            "EXTRA_INSTRUCTIONS",
+            "LOCAL_CODEGEN_UNCLASSIFIED"
+          ]
+        }
+      ]
+    },
+    {
+      "function": "DisplayCard",
+      "focus": "At +0x2c6 both sides set a word to zero and compare against the same BP-4e value; target uses CMP 0,value / JL, candidate CMP value,0 / JG.",
+      "hypothesis": "Test spelling the loop predicate in target operand order (zero less than the bound) instead of the reversed greater-than form, preserving the body and signedness. This records a lowering hypothesis, not an equivalence claim.",
+      "target_bytes": 1457,
+      "candidate_bytes": 1457,
+      "cfg_status": "MATCH",
+      "candidate_source": "work/takeover/hardtail/seeds/S23_39C7_5e8e5f393259.c",
+      "evidence": [
+        {
+          "summary_record": "work/takeover/hardtail/all-open.json",
+          "raw_instruction_report": "build/workers/hardtail_root/refreshed/all-open.json",
+          "island_id": 15,
+          "target_byte_offsets": [
+            710,
+            723
+          ],
+          "candidate_byte_offsets": [
+            710,
+            723
+          ],
+          "diagnostic_classes": [
+            "CONTROL_FLOW_SHAPE",
+            "LOCAL_CODEGEN_UNCLASSIFIED"
+          ]
+        }
+      ]
+    },
+    {
+      "function": "drawHistGraph",
+      "focus": "At +0xfa target uses CMP [BP-3e],AX / JG; candidate uses CMP [BP-2],AX / JL. The report classifies the surrounding stack offsets as unmapped homes.",
+      "hypothesis": "First identify the logical values at BP-3e, BP-2, and BP-8. If they are the same compared pair after mapping, test reversing the source relation to place the target's JG orientation; otherwise keep this as an unresolved home-mapping lead.",
+      "target_bytes": 732,
+      "candidate_bytes": 714,
+      "cfg_status": "MISMATCH",
+      "candidate_source": "work/takeover/hardtail/seeds/S24_39C7_764bcd8f1272.c",
+      "evidence": [
+        {
+          "summary_record": "work/takeover/hardtail/all-open.json",
+          "raw_instruction_report": "build/workers/hardtail_root/refreshed/all-open.json",
+          "island_id": 10,
+          "target_byte_offsets": [
+            250,
+            273
+          ],
+          "candidate_byte_offsets": [
+            250,
+            275
+          ],
+          "diagnostic_classes": [
+            "STACK_SLOT_ALLOCATION",
+            "REGISTER_ALLOCATION",
+            "BRANCH_TARGET_OR_LAYOUT",
+            "CONTROL_FLOW_SHAPE",
+            "EXTRA_INSTRUCTIONS",
+            "LOCAL_CODEGEN_UNCLASSIFIED"
+          ]
+        }
+      ]
+    },
+    {
+      "function": "o25_3BA4_1686",
+      "focus": "At +0xd target initializes the sentinel in DI; candidate writes it to BP-6. The first CFG divergence at +0xe2 is target JNE to 0x162 versus candidate JE to 0xe9 plus JMP to 0x16a.",
+      "hypothesis": "Trace the sentinel/loop-exit condition at +0xe2 and test expressing the target edge as one direct negative guard/continue rather than a nested positive branch that requires an extra JMP. Verify both destinations' statements before editing source.",
+      "target_bytes": 516,
+      "candidate_bytes": 520,
+      "cfg_status": "MISMATCH",
+      "candidate_source": "work/takeover/hardtail/seeds/S25_3BA4_5fc31bb8f45f.c",
+      "evidence": [
+        {
+          "summary_record": "work/takeover/hardtail/all-open.json",
+          "raw_instruction_report": "build/workers/hardtail_root/refreshed/all-open.json",
+          "island_id": 2,
+          "target_byte_offsets": [
+            13,
+            16
+          ],
+          "candidate_byte_offsets": [
+            13,
+            18
+          ],
+          "diagnostic_classes": [
+            "CALL_FRAME_OR_SEGMENT_REGISTER",
+            "LOCAL_CODEGEN_UNCLASSIFIED"
+          ]
+        },
+        {
+          "summary_record": "work/takeover/hardtail/all-open.json",
+          "raw_instruction_report": "build/workers/hardtail_root/refreshed/all-open.json",
+          "island_id": 7,
+          "target_byte_offsets": [
+            226,
+            228
+          ],
+          "candidate_byte_offsets": [
+            228,
+            233
+          ],
+          "diagnostic_classes": [
+            "CONTROL_FLOW_SHAPE",
+            "EXTRA_INSTRUCTIONS",
+            "LOCAL_CODEGEN_UNCLASSIFIED"
+          ]
+        }
+      ]
+    }
+  ]
+}

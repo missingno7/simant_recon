@@ -1,0 +1,244 @@
+{
+  "schema": "behavior-run-evidence-v1",
+  "completion": "COMPLETE",
+  "identity": {
+    "function": "win_UnlockWin",
+    "suite_id": "window_recalc_integration_v1",
+    "module": "root:23AE",
+    "source_sha256": "23aa124a97a2f213fcf99d0f3e9790e2a35813ee5e62d338f7ef205c5b03acc0",
+    "compiled_source_sha256": "23aa124a97a2f213fcf99d0f3e9790e2a35813ee5e62d338f7ef205c5b03acc0",
+    "object_sha256": "fedd91f006fb28dc92993ee6112b81b4924218a6b6464a02063201cfa79c3526",
+    "linked_code_sha256": "925f717ba77ce8c0bce8268168bbcfd8c05a5ed7ffdea9018921705151a428f0",
+    "oracle_sha256": "aa0596c6766322a8229ee3c36e57048c92adc82d50fbe2ef37afb8b85fcf4f11",
+    "harness_sha256": "2c0799048057f59eae61a48be4d695278635594484adf0c70bf46c51b4e0c799",
+    "manifest_sha256": "025a0a9255d910cae4b122ab5a3f3fb40888bb456d7fe42158db7c9e622fcf50",
+    "profile": "msc600ax",
+    "flags": [
+      "/AL",
+      "/Os",
+      "/Oe",
+      "/Og",
+      "/Gs",
+      "/Zi"
+    ],
+    "address": {
+      "off": 475,
+      "seg": 9134,
+      "size": 386,
+      "unit": "root"
+    },
+    "suite_sha256": "303df073f38e8bca72345d85b21031a11c147bb89c2fbe48514fc4ab9566d9f2",
+    "historical_manifest_sha256": "025a0a9255d910cae4b122ab5a3f3fb40888bb456d7fe42158db7c9e622fcf50"
+  },
+  "execution": {
+    "engine": "PreparedPair.compare",
+    "actual_original_execution": true,
+    "actual_candidate_execution": true,
+    "original_exe_sha256": "aa0596c6766322a8229ee3c36e57048c92adc82d50fbe2ef37afb8b85fcf4f11"
+  },
+  "cases": {
+    "directed": {
+      "generated": 1,
+      "executed": 1,
+      "actual_original_invocations": 1,
+      "actual_candidate_invocations": 1,
+      "seeds": []
+    },
+    "randomized": {
+      "generated": 507,
+      "executed": 507,
+      "actual_original_invocations": 507,
+      "actual_candidate_invocations": 507,
+      "seeds": [
+        621145249
+      ]
+    }
+  },
+  "errors": 0,
+  "mismatches": 0,
+  "compared_effects": [
+    "nested and final window lock-count bytes",
+    "real Ralloc handle/header/free-list state and supported object handles",
+    "window-handle map and all object-handle slots",
+    "deferred redraw flags, map copy, and all non-stack writes",
+    "actual ordered original Ralloc lock/free/unlock/update helpers",
+    "preserved registers and caller stack"
+  ],
+  "case_ledger": {
+    "path": "evidence/behavior/functions/win_UnlockWin/contracts/window-valid-v1/cases.jsonl.gz",
+    "sha256": "87dfc700ab9627ac68908053cb908895b510dafb5cdc4343e8df2531b9a51d29",
+    "row_count": 508,
+    "lane_counts": {
+      "directed": 1,
+      "randomized": 507
+    },
+    "compression": "gzip",
+    "identity": {
+      "address": {
+        "off": 475,
+        "seg": 9134,
+        "size": 386,
+        "unit": "root"
+      },
+      "compiled_source_sha256": "23aa124a97a2f213fcf99d0f3e9790e2a35813ee5e62d338f7ef205c5b03acc0",
+      "flags": [
+        "/AL",
+        "/Os",
+        "/Oe",
+        "/Og",
+        "/Gs",
+        "/Zi"
+      ],
+      "function": "win_UnlockWin",
+      "harness_sha256": "2c0799048057f59eae61a48be4d695278635594484adf0c70bf46c51b4e0c799",
+      "linked_code_sha256": "925f717ba77ce8c0bce8268168bbcfd8c05a5ed7ffdea9018921705151a428f0",
+      "manifest_sha256": "025a0a9255d910cae4b122ab5a3f3fb40888bb456d7fe42158db7c9e622fcf50",
+      "object_sha256": "fedd91f006fb28dc92993ee6112b81b4924218a6b6464a02063201cfa79c3526",
+      "oracle_sha256": "aa0596c6766322a8229ee3c36e57048c92adc82d50fbe2ef37afb8b85fcf4f11",
+      "profile": "msc600ax",
+      "source": "work\\takeover\\hardtail\\seeds\\root_23AE_23aa124a97a2.c",
+      "source_sha256": "23aa124a97a2f213fcf99d0f3e9790e2a35813ee5e62d338f7ef205c5b03acc0",
+      "unicorn_version": "2.1.4"
+    }
+  },
+  "unmodeled_boundaries": 0,
+  "peer_data_gates": "PASS",
+  "positive_controls": [
+    {
+      "id": "unlock/positive",
+      "case_id": "unlock/positive",
+      "executed": true,
+      "matched": true,
+      "execution_errors": 0,
+      "original_executed": true,
+      "candidate_executed": true,
+      "source_sha256": "23aa124a97a2f213fcf99d0f3e9790e2a35813ee5e62d338f7ef205c5b03acc0",
+      "object_sha256": "fedd91f006fb28dc92993ee6112b81b4924218a6b6464a02063201cfa79c3526",
+      "oracle_sha256": "aa0596c6766322a8229ee3c36e57048c92adc82d50fbe2ef37afb8b85fcf4f11",
+      "compared_effects": [
+        "nested and final window lock-count bytes",
+        "real Ralloc handle/header/free-list state and supported object handles",
+        "window-handle map and all object-handle slots",
+        "deferred redraw flags, map copy, and all non-stack writes",
+        "actual ordered original Ralloc lock/free/unlock/update helpers",
+        "preserved registers and caller stack"
+      ],
+      "original_observation_sha256": "90cc7366e6b109e65c332e69bccfd4513f92d6482282887bbd4a159f229f20ac",
+      "candidate_observation_sha256": "90cc7366e6b109e65c332e69bccfd4513f92d6482282887bbd4a159f229f20ac"
+    }
+  ],
+  "helper_boundaries": [
+    {
+      "name": "f_171C_1686",
+      "execution_mode": "ORIGINAL_EXE",
+      "executed_from_original": true,
+      "observed_call_count": 508,
+      "original_call_count": 508,
+      "candidate_call_count": 508,
+      "observed_call_count_scope": "all integration cases"
+    },
+    {
+      "name": "f_171C_13E4",
+      "execution_mode": "ORIGINAL_EXE",
+      "executed_from_original": true,
+      "observed_call_count": 175,
+      "original_call_count": 175,
+      "candidate_call_count": 175,
+      "observed_call_count_scope": "all integration cases"
+    },
+    {
+      "name": "f_171C_2086",
+      "execution_mode": "ORIGINAL_EXE",
+      "executed_from_original": true,
+      "observed_call_count": 505,
+      "original_call_count": 505,
+      "candidate_call_count": 505,
+      "observed_call_count_scope": "all integration cases"
+    },
+    {
+      "name": "f_171C_20E2",
+      "execution_mode": "ORIGINAL_EXE",
+      "executed_from_original": true,
+      "observed_call_count": 61,
+      "original_call_count": 61,
+      "candidate_call_count": 61,
+      "observed_call_count_scope": "all integration cases"
+    }
+  ],
+  "review": {
+    "status": "PENDING_ROOT_REVIEW",
+    "artifacts": [
+      {
+        "name": "window-recalc-integration-303df073.py",
+        "path": "tools/behavior_suites/archive/window-recalc-integration-303df073.py",
+        "sha256": "303df073f38e8bca72345d85b21031a11c147bb89c2fbe48514fc4ab9566d9f2"
+      },
+      {
+        "name": "windows-fixture-76c6cf56.py",
+        "path": "tools/behavior_suites/archive/windows-fixture-76c6cf56.py",
+        "sha256": "76c6cf568a66dfc8d43db7683fa6263fd3213554662971a1a62de7ec16bd697d"
+      },
+      {
+        "name": "window-memory-fixture-dda4f6dd.py",
+        "path": "tools/behavior_suites/archive/window-memory-fixture-dda4f6dd.py",
+        "sha256": "dda4f6dd78778f2a98b811d1971fc5923300d57b2a2fa35221a213d208eb321d"
+      },
+      {
+        "name": "source-m171C.c",
+        "path": "src/root/m171C.c",
+        "sha256": "31bd9caa243220db2bd1ba940ac8fae7f5d189b2ec95f1662918e9ca2160b10e"
+      },
+      {
+        "name": "source-m171C.c",
+        "path": "src/root/m171C.c",
+        "sha256": "31bd9caa243220db2bd1ba940ac8fae7f5d189b2ec95f1662918e9ca2160b10e"
+      },
+      {
+        "name": "source-m171C.c",
+        "path": "src/root/m171C.c",
+        "sha256": "31bd9caa243220db2bd1ba940ac8fae7f5d189b2ec95f1662918e9ca2160b10e"
+      },
+      {
+        "name": "source-m171C.c",
+        "path": "src/root/m171C.c",
+        "sha256": "31bd9caa243220db2bd1ba940ac8fae7f5d189b2ec95f1662918e9ca2160b10e"
+      }
+    ],
+    "helper_source_hashes": {
+      "f_171C_1686": {
+        "path": "src/root/m171C.c",
+        "sha256": "31bd9caa243220db2bd1ba940ac8fae7f5d189b2ec95f1662918e9ca2160b10e"
+      },
+      "f_171C_13E4": {
+        "path": "src/root/m171C.c",
+        "sha256": "31bd9caa243220db2bd1ba940ac8fae7f5d189b2ec95f1662918e9ca2160b10e"
+      },
+      "f_171C_2086": {
+        "path": "src/root/m171C.c",
+        "sha256": "31bd9caa243220db2bd1ba940ac8fae7f5d189b2ec95f1662918e9ca2160b10e"
+      },
+      "f_171C_20E2": {
+        "path": "src/root/m171C.c",
+        "sha256": "31bd9caa243220db2bd1ba940ac8fae7f5d189b2ec95f1662918e9ca2160b10e"
+      }
+    },
+    "imported_suite_graph": [
+      {
+        "path": "tools/behavior_suites/archive/window-recalc-integration-303df073.py",
+        "sha256": "303df073f38e8bca72345d85b21031a11c147bb89c2fbe48514fc4ab9566d9f2"
+      },
+      {
+        "path": "tools/behavior_suites/archive/windows-fixture-76c6cf56.py",
+        "sha256": "76c6cf568a66dfc8d43db7683fa6263fd3213554662971a1a62de7ec16bd697d"
+      },
+      {
+        "path": "tools/behavior_suites/archive/window-memory-fixture-dda4f6dd.py",
+        "sha256": "dda4f6dd78778f2a98b811d1971fc5923300d57b2a2fa35221a213d208eb321d"
+      }
+    ]
+  },
+  "raw_report": {
+    "path": "evidence/behavior/functions/win_UnlockWin/contracts/window-valid-v1/raw-run.json",
+    "sha256": "bcebf9dc31302cb7b33a9fb9109c3241587f5656204b7ba027e62cb852a67280"
+  }
+}

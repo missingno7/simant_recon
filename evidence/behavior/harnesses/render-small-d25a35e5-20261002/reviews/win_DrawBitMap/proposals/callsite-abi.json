@@ -1,0 +1,40 @@
+{
+  "abi_facts": {
+    "direct": "canonical win_DrawBitMap entry ABI is fastcall AX/DX/BX (verified original DisplayCard callsite S24:39C7:083E); the original body has no BP+6/BP+8 input reads. This is distinct from the synthetic hook ABIs below.",
+    "g_9140": "target body pushes four stack words in order [y1,x1,y0,x0] and adds SP,8; modeled screen-size host contract; not a same-named DOS helper ABI.",
+    "g_9148": "target body pushes six stack words (buffer far pointer plus four coordinates) and adds SP,0C; modeled buffer transfer host contract; not a same-named DOS helper ABI.",
+    "original_decoders": "o03_3258_040D/o01_32B5_000F/o00_35A6_0007 are called with six stack words and caller cleanup; original decoder bodies actually execute."
+  },
+  "caller_and_helper_source_pins": [
+    {
+      "exists": true,
+      "path": "src/root/m259D.c",
+      "role": "target_source",
+      "sha256": "c4329ddb75629a235043d9da1eb11c7dd6f2cb3826fe392bfc8a27c98eeb97e1"
+    },
+    {
+      "exists": true,
+      "path": "src/root/m277D.c",
+      "role": "diagnostic helper source",
+      "sha256": "6b7b7e4b468987b3ad3c869934df31e0e9325ab7e1771735d1e6113971047591"
+    },
+    {
+      "exists": true,
+      "path": "src/root/m259D.c",
+      "role": "caller/helper source file",
+      "sha256": "c4329ddb75629a235043d9da1eb11c7dd6f2cb3826fe392bfc8a27c98eeb97e1"
+    }
+  ],
+  "function": "win_DrawBitMap",
+  "limitations": [
+    "The g_9140/g_9148 slots are synthetic 4-/6-argument host contracts reusing physical addresses for dispatch; they do not invoke same-named DOS functions with incompatible signatures. Pixel transfer/screen size is a deterministic virtual screen contract; no physical framebuffer. Original type-3 decoder bodies do execute.",
+    "Finite directed/random domain only; not universal proof.",
+    "No registry or canonical source modified."
+  ],
+  "run_source_sha256": "c4329ddb75629a235043d9da1eb11c7dd6f2cb3826fe392bfc8a27c98eeb97e1",
+  "schema": "render-callsite-abi-v1",
+  "status": "PENDING_ROOT_REVIEW",
+  "winprintf_diagnostic": [
+    "WinPrintf is excluded as a semantic contract: DOS root:277D:000A is an empty one-byte RETF debug sink. Callsite varargs vary; render_small captures a fixed/truncated stack prefix (the DrawBalloons suite uses stack6 and bitmap calls include 7-word and 5-word payloads), so report helper traces are diagnostic and are not treated as complete variadic arguments, return semantics, or drawing effects. The original sink body has no state effects; this exclusion does not remove bitmap resource/pixel/geometry effects from the target contract."
+  ]
+}

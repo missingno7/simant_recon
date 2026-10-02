@@ -1,0 +1,83 @@
+{
+  "boundary": "explicit callback implementation in tools/behavior_suites/text_card.py",
+  "callback_role": "CANONICAL_HELPER_ENTRY_HOOK",
+  "caller_effect_analysis": {
+    "caller_consumed_values": "border helper rectangle and width request are recorded; the helper's four g_9134 edge calls and resulting pixels are not expanded or compared",
+    "dynamic_caller_abi": null,
+    "external_state_not_claimed": [
+      "framebuffer pixels or bitmap decoding",
+      "clip intersections and pixel visibility",
+      "palette/driver color application",
+      "database cache, heap lock counters, and allocator lifetime"
+    ],
+    "no_omitted_effect_claim": "This proposal does not claim equivalence for listed external/backend effects; only the stated logical requests, projected text/rectangles, fixture return values, resource-byte consumption, and recorded ordering are in scope.",
+    "scope": "logical request and deterministic fixture boundary only",
+    "target_module_source": {
+      "path": "evidence/behavior/harnesses/behavior-text-card-review-20261002/runs/drawHistGraph/module.c",
+      "sha256": "764bcd8f1272b6f9655a1fe305cea71d98e95b9ad9c285f69dc944fbfe21d34c"
+    }
+  },
+  "canonical_symbol_abi_covered": true,
+  "compared_effects": [
+    "ordered line segments",
+    "label text and border geometry",
+    "history selection/scaling",
+    "all raw nonstack bytes plus approved private formatter views",
+    "return value and caller ABI"
+  ],
+  "dos_definition": {
+    "extent_bytes": 128,
+    "extent_status": "DESCENT",
+    "offset": 504,
+    "segment": 7394,
+    "unit": "root"
+  },
+  "dynamic_caller_abi": null,
+  "evidence": {
+    "negative_case_id": "negative/label-value-plus-one",
+    "negative_mismatch_categories": [
+      "state",
+      "trace"
+    ],
+    "positive_case_id": "grid/0/1/8/8",
+    "positive_observation_sha256": "e2bf3a4f98027d9ec23dc523cfe87af885534083f4701915e20b62c616012b7f"
+  },
+  "execution_mode": "MODELED",
+  "helper": "f_1CE2_01F8",
+  "input_domain": [
+    "graphs 0..3; both highlight paths; sample counts 0..64 and ring-buffer starts 0..63; valid 64-sample zero, maximum, ramp, and seeded 0..120 arrays; positive rectangles up to 640x480"
+  ],
+  "limitations": [
+    "border helper rectangle and width request are recorded; the helper's four g_9134 edge calls and resulting pixels are not expanded or compared"
+  ],
+  "negative_control_id": "negative/x-coordinate-plus-one",
+  "positive_control_id": "drawHistGraph:positive:grid/0/1/8/8",
+  "review": {
+    "status": "APPROVED",
+    "reviewer": "root",
+    "reviewed_at": "2026-10-02",
+    "reason": "Reviewed exact helper definition and caller data flow. This certifies the named logical boundary projection, with backend pixel/pen/cache/heap effects explicitly excluded; their implementation is not claimed equivalent."
+  },
+  "schema": "behavior-helper-cert-v1",
+  "source_definition": {
+    "definition_line": 88,
+    "definition_name": "f_1CE2_01F8",
+    "other_reference_lines": [
+      19,
+      24,
+      34,
+      46,
+      147,
+      158
+    ],
+    "path": "src/root/m1CE2.c",
+    "sha256": "e5c2cb4b8dbe7af6d263072002a49e012b290c1082f0fc877b479728b75bacd3"
+  },
+  "source_hashes": {
+    "evidence/behavior/harnesses/behavior-text-card-review-20261002/runs/drawHistGraph/module.c": "764bcd8f1272b6f9655a1fe305cea71d98e95b9ad9c285f69dc944fbfe21d34c",
+    "evidence/behavior/harnesses/live-state-v1/tools/behavior.py": "6fa847912d8d0bef1c8ee87ab69843f8380e3e3f4e88201af2505f754003182d",
+    "src/root/m1CE2.c": "e5c2cb4b8dbe7af6d263072002a49e012b290c1082f0fc877b479728b75bacd3",
+    "tools/behavior_suites/archive/text-card-20261002-drawHistGraph.py": "e818f63eaa89e2ef1490634c5b234cd9df421c0a9c07a4dfba9862e504a6a217"
+  },
+  "status": "CERTIFIED"
+}

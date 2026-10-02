@@ -1,0 +1,418 @@
+{
+  "case_ledger": {
+    "compression": "gzip",
+    "identity": {
+      "address": {
+        "off": 812,
+        "seg": 14791,
+        "size": 732,
+        "unit": "S24"
+      },
+      "compiled_source_sha256": "764bcd8f1272b6f9655a1fe305cea71d98e95b9ad9c285f69dc944fbfe21d34c",
+      "flags": [
+        "/AL",
+        "/Os",
+        "/Og",
+        "/Oe",
+        "/Zi"
+      ],
+      "function": "drawHistGraph",
+      "harness_sha256": "6fa847912d8d0bef1c8ee87ab69843f8380e3e3f4e88201af2505f754003182d",
+      "linked_code_sha256": "71704611838d872deb9deb27f8bd13f9e553d2faa09b741490dd5b99f7f184b5",
+      "manifest_sha256": "025a0a9255d910cae4b122ab5a3f3fb40888bb456d7fe42158db7c9e622fcf50",
+      "object_sha256": "194456362d784c5329ff55bfca371309de9b85445e9751de07850234bb7233da",
+      "oracle_sha256": "aa0596c6766322a8229ee3c36e57048c92adc82d50fbe2ef37afb8b85fcf4f11",
+      "profile": "msc600ax",
+      "source": "build\\workers\\behavior_text_card\\S24.c",
+      "source_sha256": "764bcd8f1272b6f9655a1fe305cea71d98e95b9ad9c285f69dc944fbfe21d34c",
+      "unicorn_version": "2.1.4"
+    },
+    "lane_counts": {
+      "directed": 48,
+      "randomized": 2000
+    },
+    "path": "evidence/behavior/harnesses/behavior-text-card-review-20261002/runs/drawHistGraph/cases.jsonl.gz",
+    "row_count": 2048,
+    "schema": "behavior-case-ledger-v1",
+    "sha256": "9b19341bfb273324172db37add8081cc20878efc713818cc12128f241491ca0e"
+  },
+  "cases": {
+    "directed": {
+      "actual_candidate_invocations": 48,
+      "actual_original_invocations": 48,
+      "executed": 48,
+      "generated": 48,
+      "seeds": []
+    },
+    "randomized": {
+      "actual_candidate_invocations": 2000,
+      "actual_original_invocations": 2000,
+      "executed": 2000,
+      "generated": 2000,
+      "seeds": [
+        539365378
+      ]
+    }
+  },
+  "compared_effects": [
+    "ordered line segments",
+    "label text and border geometry",
+    "history selection/scaling",
+    "all raw nonstack bytes plus approved private formatter views",
+    "return value and caller ABI"
+  ],
+  "completion": "COMPLETE",
+  "effect_boundary_limits": {
+    "border_edge_expansion": false,
+    "clip_list_and_pixel_visibility": false,
+    "fixed_fixture_window_rect": true,
+    "framebuffer_pixels": false,
+    "glyph_bitmap_masks": false,
+    "history_arrays_and_graph_arithmetic_in_vm": true,
+    "logical_line_color_text_border_requests": true,
+    "palette_application": false
+  },
+  "errors": 0,
+  "execution": {
+    "actual_candidate_execution": true,
+    "actual_original_execution": true,
+    "engine": "PreparedPair.compare",
+    "original_exe_sha256": "aa0596c6766322a8229ee3c36e57048c92adc82d50fbe2ef37afb8b85fcf4f11"
+  },
+  "helper_boundaries": [
+    {
+      "certification": {
+        "path": "evidence/behavior/harnesses/behavior-text-card-review-20261002/runs/drawHistGraph/helper-certs/f_1CE2_01F8.json",
+        "sha256": "2484feb61d161ead8c074e3cf661727d4f0de4dc9e63c657ca1afe22f81c84e8"
+      },
+      "certification_proposal": {
+        "path": "evidence/behavior/harnesses/behavior-text-card-review-20261002/runs/drawHistGraph/helper-certs/f_1CE2_01F8.json",
+        "sha256": "2484feb61d161ead8c074e3cf661727d4f0de4dc9e63c657ca1afe22f81c84e8"
+      },
+      "dos_definition": {
+        "extent_bytes": 128,
+        "extent_status": "DESCENT",
+        "offset": 504,
+        "segment": 7394,
+        "unit": "root"
+      },
+      "executed_from_original": false,
+      "execution_mode": "MODELED",
+      "modeled_boundary": "border helper rectangle and width request are recorded; the helper's four g_9134 edge calls and resulting pixels are not expanded or compared",
+      "name": "f_1CE2_01F8",
+      "observed_call_count": 1,
+      "observed_call_count_scope": "sum of all matched positive controls",
+      "source_definition": {
+        "definition_line": 88,
+        "definition_name": "f_1CE2_01F8",
+        "other_reference_lines": [
+          19,
+          24,
+          34,
+          46,
+          147,
+          158
+        ],
+        "path": "src/root/m1CE2.c",
+        "sha256": "e5c2cb4b8dbe7af6d263072002a49e012b290c1082f0fc877b479728b75bacd3"
+      },
+      "source_definition_role": "source definition for the named service"
+    },
+    {
+      "certification": {
+        "path": "evidence/behavior/harnesses/behavior-text-card-review-20261002/runs/drawHistGraph/helper-certs/f_24AB_038D.json",
+        "sha256": "f88f22420cc0eae79b8e6d6c6f9346be1138fd91156f5e17769a672a6ac66c08"
+      },
+      "certification_proposal": {
+        "path": "evidence/behavior/harnesses/behavior-text-card-review-20261002/runs/drawHistGraph/helper-certs/f_24AB_038D.json",
+        "sha256": "f88f22420cc0eae79b8e6d6c6f9346be1138fd91156f5e17769a672a6ac66c08"
+      },
+      "dos_definition": {
+        "extent_bytes": 127,
+        "extent_status": "DESCENT",
+        "offset": 909,
+        "segment": 9387,
+        "unit": "root"
+      },
+      "executed_from_original": false,
+      "execution_mode": "MODELED",
+      "modeled_boundary": "logical text draw request; target code consumes x/y/text and font metrics; bitmap generation, pen write, and pixels are outside this contract",
+      "name": "f_24AB_038D",
+      "observed_call_count": 1,
+      "observed_call_count_scope": "sum of all matched positive controls",
+      "source_definition": {
+        "definition_line": 152,
+        "definition_name": "f_24AB_038D",
+        "other_reference_lines": [
+          171,
+          182
+        ],
+        "path": "src/root/m24AB.c",
+        "sha256": "1d263c6e1f242981d7c3e37d839dc481dc75deed45d7d1bcaaa075cad124de7f"
+      },
+      "source_definition_role": "source definition for the named service"
+    },
+    {
+      "callback_role": "HOST_FUNCTION_POINTER_SERVICE",
+      "certification": {
+        "path": "evidence/behavior/harnesses/behavior-text-card-review-20261002/runs/drawHistGraph/helper-certs/win_DrawBitMap.json",
+        "sha256": "598c3c4336b816183f5385a0e186378db82d8e29966f2d3a5cfaa901d7cbe95f"
+      },
+      "certification_proposal": {
+        "path": "evidence/behavior/harnesses/behavior-text-card-review-20261002/runs/drawHistGraph/helper-certs/win_DrawBitMap.json",
+        "sha256": "598c3c4336b816183f5385a0e186378db82d8e29966f2d3a5cfaa901d7cbe95f"
+      },
+      "dos_definition": {
+        "extent_bytes": 663,
+        "extent_status": "DESCENT",
+        "offset": 14,
+        "segment": 9629,
+        "unit": "root"
+      },
+      "dynamic_caller_abi": {
+        "abi_distinction": "The hook address aliases a canonical DOS symbol, but this call uses the target's indirect host-service prototype and stack arguments. Do not interpret these observations as canonical helper entry ABI coverage.",
+        "callback_stack_words": 5,
+        "callsite": {
+          "argument_protocol": "5 words on caller stack",
+          "line": 272,
+          "path": "build/workers/behavior_text_card/S24.c",
+          "sha256": "764bcd8f1272b6f9655a1fe305cea71d98e95b9ad9c285f69dc944fbfe21d34c"
+        },
+        "canonical_symbol_argument_abi": "AX/DX/BX fastcall entry; distinct from this 5-word indirect callback",
+        "canonical_symbol_source": "int _fastcall win_DrawBitMap(int x, int y, int id)",
+        "declaration": {
+          "line": 192,
+          "path": "build/workers/behavior_text_card/S24.c",
+          "sha256": "764bcd8f1272b6f9655a1fe305cea71d98e95b9ad9c285f69dc944fbfe21d34c",
+          "signature": "void far (*g_916C)(int x0, int y0, int x1, int y1, int color)"
+        },
+        "pointer_global": "g_916C",
+        "resolved_address_symbol": "win_DrawBitMap",
+        "resolved_symbol_address": {
+          "offset": 14,
+          "segment": 9629,
+          "unit": "root"
+        },
+        "role": "HOST_FUNCTION_POINTER_SERVICE"
+      },
+      "executed_from_original": false,
+      "execution_mode": "MODELED",
+      "modeled_boundary": "logical bitmap/line request arguments are recorded; candidate body remains explicitly scaffolded, return-value use is discarded at these call sites, and bitmap decoding/raster pixels are not modeled",
+      "name": "win_DrawBitMap",
+      "observed_call_count": 63,
+      "observed_call_count_scope": "sum of all matched positive controls",
+      "source_definition": {
+        "definition_line": 49,
+        "definition_name": "win_DrawBitMap",
+        "other_reference_lines": [
+          44,
+          115,
+          125
+        ],
+        "path": "src/root/m259D.c",
+        "sha256": "c4329ddb75629a235043d9da1eb11c7dd6f2cb3826fe392bfc8a27c98eeb97e1"
+      },
+      "source_definition_role": "resolved-address canonical symbol source; dynamic caller ABI is separately recorded"
+    },
+    {
+      "certification": {
+        "path": "evidence/behavior/harnesses/behavior-text-card-review-20261002/runs/drawHistGraph/helper-certs/win_GetObjRect.json",
+        "sha256": "091ea895b2c8ff80e308bd94a667a72d37fe7e7045edc7d2b5b06a1c8c1c38d7"
+      },
+      "certification_proposal": {
+        "path": "evidence/behavior/harnesses/behavior-text-card-review-20261002/runs/drawHistGraph/helper-certs/win_GetObjRect.json",
+        "sha256": "091ea895b2c8ff80e308bd94a667a72d37fe7e7045edc7d2b5b06a1c8c1c38d7"
+      },
+      "dos_definition": {
+        "extent_bytes": 79,
+        "extent_status": "DESCENT",
+        "offset": 648,
+        "segment": 9477,
+        "unit": "root"
+      },
+      "executed_from_original": false,
+      "execution_mode": "MODELED",
+      "modeled_boundary": "fixture returns the four signed rectangle words into the caller destination; target consumes those VM words; real window lock tables and arbitrary window state are not modeled",
+      "name": "win_GetObjRect",
+      "observed_call_count": 1,
+      "observed_call_count_scope": "sum of all matched positive controls",
+      "source_definition": {
+        "definition_line": 158,
+        "definition_name": "win_GetObjRect",
+        "other_reference_lines": [],
+        "path": "src/root/m2505.c",
+        "sha256": "22a03f15e95fff376d27211426c4f9e3395e16e5decd92ef501fbfe3c1aba623"
+      },
+      "source_definition_role": "source definition for the named service"
+    },
+    {
+      "callback_role": "HOST_FUNCTION_POINTER_SERVICE",
+      "certification": {
+        "path": "evidence/behavior/harnesses/behavior-text-card-review-20261002/runs/drawHistGraph/helper-certs/win_SetColorFromObjNum.json",
+        "sha256": "e2db2e5033638476218a0c2005d718aba14922329fa45186c69edae81b206689"
+      },
+      "certification_proposal": {
+        "path": "evidence/behavior/harnesses/behavior-text-card-review-20261002/runs/drawHistGraph/helper-certs/win_SetColorFromObjNum.json",
+        "sha256": "e2db2e5033638476218a0c2005d718aba14922329fa45186c69edae81b206689"
+      },
+      "dos_definition": {
+        "extent_bytes": 35,
+        "extent_status": "DESCENT",
+        "offset": 429,
+        "segment": 8698,
+        "unit": "root"
+      },
+      "dynamic_caller_abi": {
+        "abi_distinction": "The hook address aliases a canonical DOS symbol, but this call uses the target's indirect host-service prototype and stack arguments. Do not interpret these observations as canonical helper entry ABI coverage.",
+        "callback_stack_words": 3,
+        "callsite": {
+          "argument_protocol": "3 words on caller stack",
+          "line": 282,
+          "path": "build/workers/behavior_text_card/S24.c",
+          "sha256": "764bcd8f1272b6f9655a1fe305cea71d98e95b9ad9c285f69dc944fbfe21d34c"
+        },
+        "canonical_symbol_argument_abi": "AX fastcall entry; distinct from this 3-word indirect callback",
+        "canonical_symbol_source": "void _fastcall win_SetColorFromObjNum(int obj)",
+        "declaration": {
+          "line": 195,
+          "path": "build/workers/behavior_text_card/S24.c",
+          "sha256": "764bcd8f1272b6f9655a1fe305cea71d98e95b9ad9c285f69dc944fbfe21d34c",
+          "signature": "void far (*g_9128)(int a, int b, int c)"
+        },
+        "pointer_global": "g_9128",
+        "resolved_address_symbol": "win_SetColorFromObjNum",
+        "resolved_symbol_address": {
+          "offset": 429,
+          "segment": 8698,
+          "unit": "root"
+        },
+        "role": "HOST_FUNCTION_POINTER_SERVICE"
+      },
+      "executed_from_original": false,
+      "execution_mode": "MODELED",
+      "modeled_boundary": "color-selection request/order is recorded; palette lookup, driver color state, and its application to pixels are not modeled",
+      "name": "win_SetColorFromObjNum",
+      "observed_call_count": 1,
+      "observed_call_count_scope": "sum of all matched positive controls",
+      "source_definition": {
+        "definition_line": 122,
+        "definition_name": "win_SetColorFromObjNum",
+        "other_reference_lines": [],
+        "path": "src/root/m21FA.c",
+        "sha256": "49dc5ef1b2e34263336fea6a4ab5e9992c6dc5fdca404c7efc2d2315b98f6b1f"
+      },
+      "source_definition_role": "resolved-address canonical symbol source; dynamic caller ABI is separately recorded"
+    }
+  ],
+  "identity": {
+    "address": {
+      "off": 812,
+      "seg": 14791,
+      "size": 732,
+      "unit": "S24"
+    },
+    "compiled_source_sha256": "764bcd8f1272b6f9655a1fe305cea71d98e95b9ad9c285f69dc944fbfe21d34c",
+    "flags": [
+      "/AL",
+      "/Os",
+      "/Og",
+      "/Oe",
+      "/Zi"
+    ],
+    "function": "drawHistGraph",
+    "harness_sha256": "6fa847912d8d0bef1c8ee87ab69843f8380e3e3f4e88201af2505f754003182d",
+    "historical_manifest_sha256": "025a0a9255d910cae4b122ab5a3f3fb40888bb456d7fe42158db7c9e622fcf50",
+    "linked_code_sha256": "71704611838d872deb9deb27f8bd13f9e553d2faa09b741490dd5b99f7f184b5",
+    "module": "S24",
+    "object_sha256": "194456362d784c5329ff55bfca371309de9b85445e9751de07850234bb7233da",
+    "oracle_sha256": "aa0596c6766322a8229ee3c36e57048c92adc82d50fbe2ef37afb8b85fcf4f11",
+    "profile": "msc600ax",
+    "source": "evidence/behavior/harnesses/behavior-text-card-review-20261002/runs/drawHistGraph/module.c",
+    "source_sha256": "764bcd8f1272b6f9655a1fe305cea71d98e95b9ad9c285f69dc944fbfe21d34c",
+    "suite_id": "history-graph-v1",
+    "suite_sha256": "e818f63eaa89e2ef1490634c5b234cd9df421c0a9c07a4dfba9862e504a6a217",
+    "unicorn_version": "2.1.4"
+  },
+  "implementation_views": [
+    {
+      "address": 387382,
+      "name": "sprintf-output-stream",
+      "proof_path": "evidence/behavior/runtime/format-cursors/format_cursor_proof.json",
+      "proof_sha256": "140c1d240cf48c5c868ccdd723b4651d71735f592b3d5baed1f4d552cbfbc628"
+    }
+  ],
+  "mismatches": 0,
+  "negative_control_ids": [
+    "negative/x-coordinate-plus-one",
+    "negative/label-value-plus-one"
+  ],
+  "peer_data_gates": "PASS",
+  "positive_controls": [
+    {
+      "candidate_executed": true,
+      "candidate_observation_sha256": "e2bf3a4f98027d9ec23dc523cfe87af885534083f4701915e20b62c616012b7f",
+      "case_id": "grid/0/1/8/8",
+      "case_ledger_sha256": "9b19341bfb273324172db37add8081cc20878efc713818cc12128f241491ca0e",
+      "compared_effects": [
+        "ordered line segments",
+        "label text and border geometry",
+        "history selection/scaling",
+        "all raw nonstack bytes plus approved private formatter views",
+        "return value and caller ABI"
+      ],
+      "executed": true,
+      "execution_errors": 0,
+      "id": "drawHistGraph:positive:grid/0/1/8/8",
+      "matched": true,
+      "object_sha256": "194456362d784c5329ff55bfca371309de9b85445e9751de07850234bb7233da",
+      "oracle_sha256": "aa0596c6766322a8229ee3c36e57048c92adc82d50fbe2ef37afb8b85fcf4f11",
+      "original_executed": true,
+      "original_observation_sha256": "e2bf3a4f98027d9ec23dc523cfe87af885534083f4701915e20b62c616012b7f",
+      "replay_ledger": {
+        "compression": "gzip",
+        "identity": {
+          "address": {
+            "off": 812,
+            "seg": 14791,
+            "size": 732,
+            "unit": "S24"
+          },
+          "compiled_source_sha256": "764bcd8f1272b6f9655a1fe305cea71d98e95b9ad9c285f69dc944fbfe21d34c",
+          "flags": [
+            "/AL",
+            "/Os",
+            "/Og",
+            "/Oe",
+            "/Zi"
+          ],
+          "function": "drawHistGraph",
+          "harness_sha256": "2c0799048057f59eae61a48be4d695278635594484adf0c70bf46c51b4e0c799",
+          "linked_code_sha256": "71704611838d872deb9deb27f8bd13f9e553d2faa09b741490dd5b99f7f184b5",
+          "manifest_sha256": "025a0a9255d910cae4b122ab5a3f3fb40888bb456d7fe42158db7c9e622fcf50",
+          "object_sha256": "194456362d784c5329ff55bfca371309de9b85445e9751de07850234bb7233da",
+          "oracle_sha256": "aa0596c6766322a8229ee3c36e57048c92adc82d50fbe2ef37afb8b85fcf4f11",
+          "profile": "msc600ax",
+          "source": "build\\workers\\behavior_text_card\\S24.c",
+          "source_sha256": "764bcd8f1272b6f9655a1fe305cea71d98e95b9ad9c285f69dc944fbfe21d34c",
+          "unicorn_version": "2.1.4"
+        },
+        "lane_counts": {
+          "directed": 1,
+          "randomized": 0
+        },
+        "path": "evidence/behavior/harnesses/behavior-text-card-review-20261002/runs/drawHistGraph/positive-replays/positive-case-0.jsonl.gz",
+        "row_count": 1,
+        "schema": "behavior-case-ledger-v1",
+        "sha256": "a9661a2f09079fd1137f9a974dd191225768187a5ce7c4a99864ccb39c46ba3d"
+      },
+      "source_sha256": "764bcd8f1272b6f9655a1fe305cea71d98e95b9ad9c285f69dc944fbfe21d34c"
+    }
+  ],
+  "proposal_status": "PENDING_ROOT_REVIEW",
+  "raw_report": {
+    "path": "evidence/behavior/harnesses/behavior-text-card-review-20261002/runs/drawHistGraph/raw-run.json",
+    "sha256": "33731491eff34f488e6e7b238a587ab8339cfaa11fb70de0631d599d16148415"
+  },
+  "schema": "behavior-run-evidence-v1",
+  "unmodeled_boundaries": 0
+}

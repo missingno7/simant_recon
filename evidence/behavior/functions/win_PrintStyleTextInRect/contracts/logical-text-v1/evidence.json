@@ -1,0 +1,284 @@
+{
+  "schema": "simant-behavior-evidence-v1",
+  "function": "win_PrintStyleTextInRect",
+  "status": "BEHAVIOR_EXACT",
+  "source": {
+    "path": "evidence/behavior/functions/win_PrintStyleTextInRect/contracts/logical-text-v1/module.c",
+    "sha256": "5e8e5f39325914cc1a6f1b5de9e5c894818e47d68a7ce594b2a514c99b37a1ea",
+    "whole_module": true,
+    "module": "S23"
+  },
+  "suite": {
+    "path": "tools/behavior_suites/archive/text-card-20261002-win_PrintStyleTextInRect.py",
+    "sha256": "d99e5d47948a089b388862a22b463e5cb2d653ebe2f84663c333deb3e9cb9a46",
+    "id": "text-layout-v1"
+  },
+  "harness": {
+    "runner": {
+      "path": "evidence/behavior/harnesses/text-font-metrics-20261002/tools/behavior.py",
+      "sha256": "2c0799048057f59eae61a48be4d695278635594484adf0c70bf46c51b4e0c799"
+    },
+    "components": {
+      "tools/exe.py": {
+        "path": "evidence/behavior/harnesses/text-font-metrics-20261002/tools/exe.py",
+        "sha256": "d560f69dcdf0d1c9e89278b50bebe225a9b86db2c259fa54ec9eace6ea05a8b5"
+      },
+      "tools/functions.py": {
+        "path": "evidence/behavior/harnesses/text-font-metrics-20261002/tools/functions.py",
+        "sha256": "0f67c8d9eb01e319620c9342e79c35f76006091d860894aad6dcf8d61ee2b39e"
+      },
+      "tools/match.py": {
+        "path": "evidence/behavior/harnesses/text-font-metrics-20261002/tools/match.py",
+        "sha256": "44fdd8b939b2bbf135d8947d8f6ef6b1854dec133da4af86c55eb94f02869b56"
+      },
+      "tools/modctx.py": {
+        "path": "evidence/behavior/harnesses/text-font-metrics-20261002/tools/modctx.py",
+        "sha256": "33f3a4e3d77371e3095bfeb00358c13bc7838235c27bfe8898dba7e313f1cc25"
+      },
+      "tools/modules.py": {
+        "path": "evidence/behavior/harnesses/text-font-metrics-20261002/tools/modules.py",
+        "sha256": "8a5c1e85db6970cce3c693c016b313b7ee1922fa6eaf146a00391bfea86edf1a"
+      },
+      "tools/autosearch.py": {
+        "path": "evidence/behavior/harnesses/text-font-metrics-20261002/tools/autosearch.py",
+        "sha256": "9c2727a875ee94c66ceac868d64c7070c316a5dbbef7cd6b21a670b44a2e1806"
+      },
+      "tools/compiler.py": {
+        "path": "evidence/behavior/harnesses/text-font-metrics-20261002/tools/compiler.py",
+        "sha256": "ef1d59a0fbe0e0780a6b8480e13d7d07859a14ae185c00a4420e1238a2ae35bb"
+      },
+      "tools/omf.py": {
+        "path": "evidence/behavior/harnesses/text-font-metrics-20261002/tools/omf.py",
+        "sha256": "951137ecbfaeb6e40fd5230c94398141da7ec7bdb7399d9cd74d46ded3045612"
+      },
+      "tools/symbols.py": {
+        "path": "evidence/behavior/harnesses/text-font-metrics-20261002/tools/symbols.py",
+        "sha256": "e3f25fb66717f743dea126e56b5b44538d452fb5a2d52695ef27cb5069bc1793"
+      },
+      "tools/lockfile.py": {
+        "path": "evidence/behavior/harnesses/text-font-metrics-20261002/tools/lockfile.py",
+        "sha256": "6773cd28150381c88a781862d0034e2ff0023c21e82aff7fad5358efb1bf34c5"
+      },
+      "tools/csrc.py": {
+        "path": "evidence/behavior/harnesses/text-font-metrics-20261002/tools/csrc.py",
+        "sha256": "3b13b7dbc17f39cbca7f329a3043ff363f91279c12312ba865941653c412567c"
+      },
+      "tools/srcrules.py": {
+        "path": "evidence/behavior/harnesses/text-font-metrics-20261002/tools/srcrules.py",
+        "sha256": "e34f8bd91d224df26b5981acd9316b00bdf96e3dcc28e744aaebfc466046fc30"
+      },
+      "tools/variants.py": {
+        "path": "evidence/behavior/harnesses/text-font-metrics-20261002/tools/variants.py",
+        "sha256": "b5dfd77ba5a96649d3e1503c1619b7fa6d9edc5f32c1f7684361fbfa59fa55c9"
+      },
+      "layout/toolchain.json": {
+        "path": "evidence/behavior/harnesses/text-font-metrics-20261002/layout/toolchain.json",
+        "sha256": "c0bb71cd8b1f4a1a1f91299bd3b6148aa67b7a1d12c3c3946a229272593eb274"
+      },
+      "tools/behavior_ledger.py": {
+        "path": "evidence/behavior/harnesses/text-font-metrics-20261002/tools/behavior_ledger.py",
+        "sha256": "6788ec00f1c02fd93d98b96b4c8d61d2b704c97308b2c3f4024bc3095e76395f"
+      }
+    },
+    "runner_snapshot_review": {
+      "status": "APPROVED",
+      "reviewer": "root",
+      "reviewed_at": "2026-10-02",
+      "reason": "Reviewed actual executed archived runner/component hashes and bounded SS=DS stack comparison. Formatter views retain their immutable root-reviewed certificate/graph. Fresh compiler peer/private-data replay remains mandatory.",
+      "runner_snapshot_reviewed": true,
+      "archived_components": [
+        {
+          "component": "tools/exe.py",
+          "path": "evidence/behavior/harnesses/text-font-metrics-20261002/tools/exe.py",
+          "sha256": "d560f69dcdf0d1c9e89278b50bebe225a9b86db2c259fa54ec9eace6ea05a8b5"
+        },
+        {
+          "component": "tools/functions.py",
+          "path": "evidence/behavior/harnesses/text-font-metrics-20261002/tools/functions.py",
+          "sha256": "0f67c8d9eb01e319620c9342e79c35f76006091d860894aad6dcf8d61ee2b39e"
+        },
+        {
+          "component": "tools/match.py",
+          "path": "evidence/behavior/harnesses/text-font-metrics-20261002/tools/match.py",
+          "sha256": "44fdd8b939b2bbf135d8947d8f6ef6b1854dec133da4af86c55eb94f02869b56"
+        },
+        {
+          "component": "tools/modctx.py",
+          "path": "evidence/behavior/harnesses/text-font-metrics-20261002/tools/modctx.py",
+          "sha256": "33f3a4e3d77371e3095bfeb00358c13bc7838235c27bfe8898dba7e313f1cc25"
+        },
+        {
+          "component": "tools/modules.py",
+          "path": "evidence/behavior/harnesses/text-font-metrics-20261002/tools/modules.py",
+          "sha256": "8a5c1e85db6970cce3c693c016b313b7ee1922fa6eaf146a00391bfea86edf1a"
+        },
+        {
+          "component": "tools/autosearch.py",
+          "path": "evidence/behavior/harnesses/text-font-metrics-20261002/tools/autosearch.py",
+          "sha256": "9c2727a875ee94c66ceac868d64c7070c316a5dbbef7cd6b21a670b44a2e1806"
+        },
+        {
+          "component": "tools/compiler.py",
+          "path": "evidence/behavior/harnesses/text-font-metrics-20261002/tools/compiler.py",
+          "sha256": "ef1d59a0fbe0e0780a6b8480e13d7d07859a14ae185c00a4420e1238a2ae35bb"
+        },
+        {
+          "component": "tools/omf.py",
+          "path": "evidence/behavior/harnesses/text-font-metrics-20261002/tools/omf.py",
+          "sha256": "951137ecbfaeb6e40fd5230c94398141da7ec7bdb7399d9cd74d46ded3045612"
+        },
+        {
+          "component": "tools/symbols.py",
+          "path": "evidence/behavior/harnesses/text-font-metrics-20261002/tools/symbols.py",
+          "sha256": "e3f25fb66717f743dea126e56b5b44538d452fb5a2d52695ef27cb5069bc1793"
+        },
+        {
+          "component": "tools/lockfile.py",
+          "path": "evidence/behavior/harnesses/text-font-metrics-20261002/tools/lockfile.py",
+          "sha256": "6773cd28150381c88a781862d0034e2ff0023c21e82aff7fad5358efb1bf34c5"
+        },
+        {
+          "component": "tools/csrc.py",
+          "path": "evidence/behavior/harnesses/text-font-metrics-20261002/tools/csrc.py",
+          "sha256": "3b13b7dbc17f39cbca7f329a3043ff363f91279c12312ba865941653c412567c"
+        },
+        {
+          "component": "tools/srcrules.py",
+          "path": "evidence/behavior/harnesses/text-font-metrics-20261002/tools/srcrules.py",
+          "sha256": "e34f8bd91d224df26b5981acd9316b00bdf96e3dcc28e744aaebfc466046fc30"
+        },
+        {
+          "component": "tools/variants.py",
+          "path": "evidence/behavior/harnesses/text-font-metrics-20261002/tools/variants.py",
+          "sha256": "b5dfd77ba5a96649d3e1503c1619b7fa6d9edc5f32c1f7684361fbfa59fa55c9"
+        },
+        {
+          "component": "layout/toolchain.json",
+          "path": "evidence/behavior/harnesses/text-font-metrics-20261002/layout/toolchain.json",
+          "sha256": "c0bb71cd8b1f4a1a1f91299bd3b6148aa67b7a1d12c3c3946a229272593eb274"
+        },
+        {
+          "component": "tools/behavior_ledger.py",
+          "path": "evidence/behavior/harnesses/text-font-metrics-20261002/tools/behavior_ledger.py",
+          "sha256": "6788ec00f1c02fd93d98b96b4c8d61d2b704c97308b2c3f4024bc3095e76395f"
+        }
+      ]
+    }
+  },
+  "oracle": {
+    "path": "assets/SIMANT.EXE",
+    "sha256": "aa0596c6766322a8229ee3c36e57048c92adc82d50fbe2ef37afb8b85fcf4f11",
+    "lock_sha256": "2c6d9e98c688621ad49a08c78d0e0968f4076b036be56ec0738217b533ccde13"
+  },
+  "historical_manifest_sha256": "025a0a9255d910cae4b122ab5a3f3fb40888bb456d7fe42158db7c9e622fcf50",
+  "checkpoint": {
+    "commit": "54cb824d19c2f897ab17c8b163a954121d4e4843",
+    "date": "2026-10-02"
+  },
+  "contract": {
+    "excluded_effects": [
+      "glyph bitmap masks",
+      "framebuffer pixels",
+      "f_24AB_038D pen update g_3DA0",
+      "arbitrary font-driver/resource state",
+      {
+        "effect": "backend pen, font bitmap, clip/palette state, database cache and heap lifecycle implementation",
+        "reason": "Only logical requests and provided inputs/results cross these boundaries; the reviewed caller consumes no omitted backend state. All target own nonstack writes and pointed contents remain compared."
+      }
+    ],
+    "helper_source_review": {
+      "path": "evidence/behavior/harnesses/behavior-text-card-review-20261002/runs/win_PrintStyleTextInRect/helper-source-review.json",
+      "sha256": "027f01be61afda7de3868e10d16a723bf78c2b047186ec492e2ee6bdc9c212b1"
+    },
+    "id": "text-layout-v1",
+    "input_domain": {
+      "directed_cases": 360,
+      "random_seed": 969343122,
+      "randomized_cases": 1000,
+      "tested": "directed text/control/punctuation, style-run positions/faces/font IDs 2..5, rectangle sizes/origins, first-line clipping and record mode; deterministic random strings and valid sorted styles; original font selection and metric helpers over explicit valid proportional/fixed font tables"
+    },
+    "limits": [
+      "Finite bounded differential suite; not exhaustive over all 16-bit inputs.",
+      "Only the explicitly listed logical request/fixture effects are claimed; helpers whose host callbacks replace DOS bodies are not certified for unlisted backend state.",
+      "Four explicit valid VM Font records cover proportional variable widths, negative-kern bonus plus missing glyph, fixed zero advance, and fixed width 7; this run does not cover arbitrary loaded font files or arbitrary 16-bit pointers.",
+      "f_24AB_038D is observed at the logical text-draw boundary with complete projected NUL text and x/y. The module does not consume g_3DA0 after the call; pen updates, glyph bitmap generation, and framebuffer pixels are outside the claim."
+    ],
+    "required_effects": [
+      "ordered draw calls and pointed text",
+      "font helper sequence and metrics",
+      "hotspot writes and all nonstack memory",
+      "return value and caller ABI"
+    ],
+    "required_helpers": [
+      {
+        "name": "f_24AB_038D",
+        "must_execute": true,
+        "certification": {
+          "path": "evidence/behavior/helpers/text-contracts-v1/win_PrintStyleTextInRect/f_24AB_038D.json",
+          "sha256": "756e7819ae2f5e67bad0c0fb103dd73a7bc0a682a4a00094ec661ef4f44c741e"
+        }
+      }
+    ],
+    "review": {
+      "reviewed_at": "2026-10-02",
+      "reviewer": "root",
+      "status": "APPROVED",
+      "reason": "Reviewed caller C and helper source definitions/ABIs, original font metric execution, explicit logical resource/draw boundaries, pointed resource/text/rectangle contents, caller noninterference, retained raw formatter records and pinned graph, ledger-grounded positives and compiled caller mutants. This is the recorded finite logical contract, not framebuffer or backend lifecycle equivalence."
+    }
+  },
+  "run_report": {
+    "path": "evidence/behavior/functions/win_PrintStyleTextInRect/contracts/logical-text-v1/run.json",
+    "sha256": "e5a05b81fa474ba22b3da4b3084acd4d60ce1855887c0bc6222af09c2af99f48"
+  },
+  "negative_controls": {
+    "path": "evidence/behavior/functions/win_PrintStyleTextInRect/contracts/logical-text-v1/negative-controls.json",
+    "sha256": "640d868a15cfc705fb880e87c2eb9cfc2606849e7e7a2cd65577175df97e0a64"
+  },
+  "historical_difference": {
+    "description": "Compiler-produced whole-module candidate matched the original DOS target over this finite recorded corpus; this is a bounded behavioral proposal and does not change or weaken historical EXACT.",
+    "evidence_refs": [
+      {
+        "path": "evidence/behavior/harnesses/behavior-text-card-review-20261002/runs/win_PrintStyleTextInRect/raw-run.json",
+        "sha256": "dcc5138974170cb67674812411c397b445727473a81d96e165cb793f13ab5c45"
+      },
+      {
+        "path": "evidence/behavior/harnesses/behavior-text-card-review-20261002/runs/win_PrintStyleTextInRect/cases.jsonl.gz",
+        "sha256": "e634a3c4bf70706104ca34523516f536e1583c6e0be770eab4905bb959f44d2a"
+      },
+      {
+        "path": "evidence/behavior/harnesses/behavior-text-card-review-20261002/runs/win_PrintStyleTextInRect/negative-controls.json",
+        "sha256": "c0a7608336ee41b669a404d2e38d2511091f3f260666ab4268451741a7cb96cb"
+      }
+    ],
+    "reason_exact_stopped": "Behavioral equivalence is a separate claim; byte identity and any whole-module completeness gates remain independent."
+  },
+  "semantic_evidence": {
+    "diagnostics": null,
+    "helper_certificates": [
+      {
+        "path": "evidence/behavior/harnesses/behavior-text-card-review-20261002/runs/win_PrintStyleTextInRect/helper-certs/f_24AB_038D.json",
+        "sha256": "e942ef4d6888753b77feeb95e269f919b4c7db6f320f90fed6d9b532ec0ac575"
+      }
+    ],
+    "helper_certification_proposals": {
+      "path": "evidence/behavior/harnesses/behavior-text-card-review-20261002/runs/win_PrintStyleTextInRect/helper-cert-proposals-v2.json",
+      "sha256": "b999107bfcbc0d5746b54fd02e842193629870e84db26ffa5c3fd0b7fe56c470"
+    },
+    "primary_execution": "Both original DOS and compiler-produced candidate executed in separate VM states for every recorded primary row; see the normalized run-evidence record, exact raw suite report, and gzip ledger.",
+    "scope": "See contract required/excluded effects and explicit helper-boundary proposals.",
+    "source_pins": {
+      "path": "evidence/behavior/harnesses/behavior-text-card-review-20261002/runs/win_PrintStyleTextInRect/source-pins-v3.json",
+      "sha256": "2372d34c28eb39b39f0daac169ef52d50a2112d219f49018cf079f79d608a972"
+    },
+    "source_review": {
+      "path": "evidence/behavior/harnesses/behavior-text-card-review-20261002/runs/win_PrintStyleTextInRect/helper-source-review.json",
+      "sha256": "027f01be61afda7de3868e10d16a723bf78c2b047186ec492e2ee6bdc9c212b1"
+    },
+    "supplemental_positive_controls": []
+  },
+  "evidence_date": "2026-10-02",
+  "review_record": {
+    "path": "evidence/behavior/functions/win_PrintStyleTextInRect/contracts/logical-text-v1/contract-review.json",
+    "sha256": "43f0d122ef962a952349e41409d7948b53859c8cbf97491b81d799a1b0b6787c"
+  }
+}

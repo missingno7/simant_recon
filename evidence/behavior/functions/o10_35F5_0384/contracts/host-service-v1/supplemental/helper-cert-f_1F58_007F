@@ -1,0 +1,73 @@
+{
+  "schema": "behavior-helper-cert-v1",
+  "helper": "f_1F58_007F",
+  "status": "PROPOSED",
+  "review": {
+    "status": "REVIEW_REQUIRED",
+    "reviewer": null,
+    "reviewed_at": null
+  },
+  "input_domain": [
+    "53 cases: current-menu -1/0/1; Enter, CR, LF, Space, ESC, 0x852/0x853, +/-, arrows 0x850/0x848, alphabet match/miss, extended-key flush, separator/disabled skipping, empty table, same-menu/non-menu/other-menu events, mouse selection.",
+    "100 cases, seed 0x35f50384; valid null-terminated far tables with 1..7 labels; selected byte 0..item count; current-menu -1..3; screens 320/640/800 by 200/400/600; line-height 8..19 and character-width 6..12.",
+    "Valid far pointers and NUL strings, one valid DOS Ralloc block for original malloc(4000)/free, menu geometry arrays, deterministic host input/mouse/timer/display sinks. Recovered Event is eight words; routing forwards code,xE,h,v plus trailing zero."
+  ],
+  "compared_effects": [
+    "return",
+    "ordered host/helper calls",
+    "ordered input consumption",
+    "pointed rectangles and strings",
+    "global and pointed writes",
+    "all nonstack writes",
+    "caller ABI"
+  ],
+  "positive_control_id": "pc-o10_35F5_0384-f_1F58_007F",
+  "negative_control_id": "menu-next-option",
+  "limitations": "Pending independent review; bounded host/resource contract only, not arbitrary driver, interrupt, RTLink or window-manager proof.",
+  "source_hashes": {
+    "tools/behavior.py": "2c0799048057f59eae61a48be4d695278635594484adf0c70bf46c51b4e0c799",
+    "layout/functions.json": "6089a06e18fbe8f0960392cfe30357f7c19c886f38f10f7f115c72d127a756e7",
+    "layout/symbols.json": "0f5dd5b0a211945a97782cfccdb9bb31b0dfd07fcde5df4d4f9486b487eb0125",
+    "layout/oracle.lock.json": "2c6d9e98c688621ad49a08c78d0e0968f4076b036be56ec0738217b533ccde13",
+    "tools/archive/behavior-tutorial-menu-review-20261002/e018/source-inputs/S10_35F5_4b9dda15dbea.c": "4b9dda15dbea1c8fd204ed95d4cb6a909751a59d0517909e90c4626cad3c7888",
+    "tools/archive/behavior-tutorial-menu-review-20261002/canonical-root/m1F58.asm": "9f314c6e964bcb0955c1f3e976819bdbeddf048781c1bb257c30b2c0b25d49d2",
+    "tools/behavior_suites/archive/tutorial-menu-e01896c0b9f96741a0ef8d11b1cb3d5a1b26e62677327699a01bb4c05778ec7a.py": "e01896c0b9f96741a0ef8d11b1cb3d5a1b26e62677327699a01bb4c05778ec7a"
+  },
+  "boundary_abi": {
+    "stack_words": 1,
+    "register_args": [],
+    "callee_pop_bytes": 0
+  },
+  "boundary_call_count": 6,
+  "boundary_call_count_scope": "all 153 matched campaign cases",
+  "caller_effect_reasoning": "This deterministic host/resource boundary is called by the pinned whole-module caller. Its modeled action is limited to the declared ABI and fixture contract; ordered calls, arguments, queue consumption, return, observed globals, pointed data, and all nonstack writes remain compared.",
+  "implementation_provenance": "HOST slot for original DOS entry root:1F58:007F (far DOS entry; stack_words=1 register_args=[] callee_pop_bytes=0), canonical named entry f_1F58_007F; exact containing source definition/module is pinned at tools/archive/behavior-tutorial-menu-review-20261002/canonical-root/m1F58.asm SHA-256 9f314c6e964bcb0955c1f3e976819bdbeddf048781c1bb257c30b2c0b25d49d2, entry anchor f_1F58_007F. This does not assert absence of historical code. This deterministic host/resource boundary is called by the pinned whole-module caller. Its modeled action is limited to the declared ABI and fixture contract; ordered calls, arguments, queue consumption, return, observed globals, pointed data, and all nonstack writes remain compared. Explicit modeled host slot; omitted effects are limited to its backend input/timer/presentation mechanics. The callback's declared inputs/results and all downstream call order, consumption, target globals and nonstack writes remain compared. Exact source definition span: tools/archive/behavior-tutorial-menu-review-20261002/canonical-root/m1F58.asm:108-117 (module SHA-256 9f314c6e964bcb0955c1f3e976819bdbeddf048781c1bb257c30b2c0b25d49d2).",
+  "host_boundary_identity": {
+    "kind": "HOST_SLOT",
+    "modeled_callback_name": "f_1F58_007F",
+    "original_dos_entry": {
+      "symbol": "f_1F58_007F",
+      "unit": "root",
+      "segment": "1F58",
+      "offset": "007F",
+      "alias_of": null
+    },
+    "canonical_name": "f_1F58_007F",
+    "abi": "far DOS entry; stack_words=1 register_args=[] callee_pop_bytes=0",
+    "boundary_abi": {
+      "stack_words": 1,
+      "register_args": [],
+      "callee_pop_bytes": 0
+    },
+    "canonical_source": {
+      "path": "tools/archive/behavior-tutorial-menu-review-20261002/canonical-root/m1F58.asm",
+      "sha256": "9f314c6e964bcb0955c1f3e976819bdbeddf048781c1bb257c30b2c0b25d49d2",
+      "anchor": "f_1F58_007F",
+      "start_line": 108,
+      "end_line": 117,
+      "definition_excerpt": "_f_1F58_007F\tproc\tfar\n\tpush bp\n\tmov bp, sp\n\tmov ax, word ptr [bp+6]\n\tmov ah, 80h\n\txchg word ptr _g_5A2A, ax\n\tmov word ptr _g_5A2C, ax\n\tpop bp\n\tretf\n_f_1F58_007F\tendp"
+    },
+    "role": "Fixture-provided platform input/timing/display/resource slot; this callback does not assert the original DOS helper is absent."
+  },
+  "omitted_backend_effects_reason": "This deterministic host/resource boundary is called by the pinned whole-module caller. Its modeled action is limited to the declared ABI and fixture contract; ordered calls, arguments, queue consumption, return, observed globals, pointed data, and all nonstack writes remain compared. Explicit modeled host slot; omitted effects are limited to its backend input/timer/presentation mechanics. The callback's declared inputs/results and all downstream call order, consumption, target globals and nonstack writes remain compared."
+}

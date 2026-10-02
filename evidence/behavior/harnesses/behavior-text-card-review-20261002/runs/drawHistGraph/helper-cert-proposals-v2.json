@@ -1,0 +1,42 @@
+{
+  "certificates": [
+    {
+      "path": "evidence/behavior/harnesses/behavior-text-card-review-20261002/runs/drawHistGraph/helper-certs/f_1CE2_01F8.json",
+      "sha256": "2484feb61d161ead8c074e3cf661727d4f0de4dc9e63c657ca1afe22f81c84e8"
+    },
+    {
+      "path": "evidence/behavior/harnesses/behavior-text-card-review-20261002/runs/drawHistGraph/helper-certs/f_24AB_038D.json",
+      "sha256": "f88f22420cc0eae79b8e6d6c6f9346be1138fd91156f5e17769a672a6ac66c08"
+    },
+    {
+      "path": "evidence/behavior/harnesses/behavior-text-card-review-20261002/runs/drawHistGraph/helper-certs/win_DrawBitMap.json",
+      "sha256": "598c3c4336b816183f5385a0e186378db82d8e29966f2d3a5cfaa901d7cbe95f"
+    },
+    {
+      "path": "evidence/behavior/harnesses/behavior-text-card-review-20261002/runs/drawHistGraph/helper-certs/win_GetObjRect.json",
+      "sha256": "091ea895b2c8ff80e308bd94a667a72d37fe7e7045edc7d2b5b06a1c8c1c38d7"
+    },
+    {
+      "path": "evidence/behavior/harnesses/behavior-text-card-review-20261002/runs/drawHistGraph/helper-certs/win_SetColorFromObjNum.json",
+      "sha256": "e2db2e5033638476218a0c2005d718aba14922329fa45186c69edae81b206689"
+    }
+  ],
+  "function": "drawHistGraph",
+  "harness_snapshot": {
+    "name": "live-state-v1",
+    "runner": {
+      "path": "evidence/behavior/harnesses/live-state-v1/tools/behavior.py",
+      "sha256": "6fa847912d8d0bef1c8ee87ab69843f8380e3e3f4e88201af2505f754003182d"
+    }
+  },
+  "schema": "behavior-helper-cert-proposal-set-v1",
+  "source": {
+    "path": "evidence/behavior/harnesses/behavior-text-card-review-20261002/runs/drawHistGraph/module.c",
+    "sha256": "764bcd8f1272b6f9655a1fe305cea71d98e95b9ad9c285f69dc944fbfe21d34c"
+  },
+  "status": "PENDING_ROOT_REVIEW",
+  "suite": {
+    "path": "tools/behavior_suites/archive/text-card-20261002-drawHistGraph.py",
+    "sha256": "e818f63eaa89e2ef1490634c5b234cd9df421c0a9c07a4dfba9862e504a6a217"
+  }
+}

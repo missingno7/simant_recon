@@ -1,0 +1,76 @@
+{
+  "schema": "behavior-helper-cert-v1",
+  "helper": "f_1CE2_056C",
+  "status": "CERTIFIED",
+  "review": {
+    "status": "APPROVED",
+    "reviewer": "root",
+    "reviewed_at": "2026-10-02",
+    "reason": "Surface restore is a logical command with complete pointed rectangle and supplied surface pointer. Neither caller reads restored raster/backend state after this boundary."
+  },
+  "input_domain": [
+    "56 cases: all sets 0/1/2 choices, ESC and upper/lower second-byte hotkeys, ignored keys, message geometry variants, event codes 0x0900/01/02/FF after an ignored key so the event branch executes.",
+    "100 cases, seed 0x29970791; sets 0..2, printable ASCII messages sized for screen/character width, screens 320/640/800 by 200/400/600, line-height 8..19, character-width 6..12, pending-key prefixes and at most one complete eight-word 0x09xx event.",
+    "Private DOS labels/tables and ctype remain from original module; host input/display/timer are modeled. Original string/font measurement, ctype, rectangle sizing/clipping and event-return logic execute; 0x09xx event returns its low byte."
+  ],
+  "compared_effects": [
+    "return",
+    "ordered host/helper calls",
+    "ordered input consumption",
+    "pointed rectangles and strings",
+    "global and pointed writes",
+    "all nonstack writes",
+    "caller ABI"
+  ],
+  "positive_control_id": "pc-f_1C62_0415-f_1CE2_056C",
+  "negative_control_id": "question-second-byte-hotkey",
+  "limitations": [
+    "Finite recorded input/state domain and explicit host-service projection only; original backend implementation equivalence is not claimed."
+  ],
+  "source_hashes": {
+    "tools/behavior.py": "2c0799048057f59eae61a48be4d695278635594484adf0c70bf46c51b4e0c799",
+    "layout/functions.json": "6089a06e18fbe8f0960392cfe30357f7c19c886f38f10f7f115c72d127a756e7",
+    "layout/symbols.json": "0f5dd5b0a211945a97782cfccdb9bb31b0dfd07fcde5df4d4f9486b487eb0125",
+    "layout/oracle.lock.json": "2c6d9e98c688621ad49a08c78d0e0968f4076b036be56ec0738217b533ccde13",
+    "tools/archive/behavior-tutorial-menu-review-20261002/e018/source-inputs/root_1C62_1a75da44054b.c": "1a75da44054b48e33e02b0dc551e9e690d1b0797b5e2cfe2e3e6e26ad3b632d4",
+    "tools/archive/behavior-tutorial-menu-review-20261002/canonical-root/m1CE2.c": "e5c2cb4b8dbe7af6d263072002a49e012b290c1082f0fc877b479728b75bacd3",
+    "tools/behavior_suites/archive/tutorial-menu-e01896c0b9f96741a0ef8d11b1cb3d5a1b26e62677327699a01bb4c05778ec7a.py": "e01896c0b9f96741a0ef8d11b1cb3d5a1b26e62677327699a01bb4c05778ec7a"
+  },
+  "boundary_abi": {
+    "stack_words": 4,
+    "register_args": [],
+    "callee_pop_bytes": 0
+  },
+  "boundary_call_count": 156,
+  "boundary_call_count_scope": "all 156 matched campaign cases",
+  "caller_effect_reasoning": "Surface restore is a logical command with complete pointed rectangle and supplied surface pointer. Neither caller reads restored raster/backend state after this boundary.",
+  "implementation_provenance": "HOST slot for original DOS entry root:1CE2:056C (far DOS entry; stack_words=4 register_args=[] callee_pop_bytes=0), canonical named entry f_1CE2_056C; exact containing source definition/module is pinned at tools/archive/behavior-tutorial-menu-review-20261002/canonical-root/m1CE2.c SHA-256 e5c2cb4b8dbe7af6d263072002a49e012b290c1082f0fc877b479728b75bacd3, entry anchor f_1CE2_056C. This does not assert absence of historical code. This deterministic host/resource boundary is called by the pinned whole-module caller. Its modeled action is limited to the declared ABI and fixture contract; ordered calls, arguments, queue consumption, return, observed globals, pointed data, and all nonstack writes remain compared. Explicit modeled host slot; omitted effects are limited to its backend input/timer/presentation mechanics. The callback's declared inputs/results and all downstream call order, consumption, target globals and nonstack writes remain compared. Exact source definition span: tools/archive/behavior-tutorial-menu-review-20261002/canonical-root/m1CE2.c:191-194 (module SHA-256 e5c2cb4b8dbe7af6d263072002a49e012b290c1082f0fc877b479728b75bacd3).",
+  "host_boundary_identity": {
+    "kind": "HOST_SLOT",
+    "modeled_callback_name": "f_1CE2_056C",
+    "original_dos_entry": {
+      "symbol": "f_1CE2_056C",
+      "unit": "root",
+      "segment": "1CE2",
+      "offset": "056C",
+      "alias_of": null
+    },
+    "canonical_name": "f_1CE2_056C",
+    "abi": "far DOS entry; stack_words=4 register_args=[] callee_pop_bytes=0",
+    "boundary_abi": {
+      "stack_words": 4,
+      "register_args": [],
+      "callee_pop_bytes": 0
+    },
+    "canonical_source": {
+      "path": "tools/archive/behavior-tutorial-menu-review-20261002/canonical-root/m1CE2.c",
+      "sha256": "e5c2cb4b8dbe7af6d263072002a49e012b290c1082f0fc877b479728b75bacd3",
+      "anchor": "f_1CE2_056C",
+      "start_line": 191,
+      "end_line": 194,
+      "definition_excerpt": "void far f_1CE2_056C(struct Rect far *r, char far *buf)\n{\n    f_1CE2_0587(r, buf, 1);\n}"
+    },
+    "role": "Fixture-provided platform input/timing/display/resource slot; this callback does not assert the original DOS helper is absent."
+  },
+  "omitted_backend_effects_reason": "Surface restore is a logical command with complete pointed rectangle and supplied surface pointer. Neither caller reads restored raster/backend state after this boundary."
+}

@@ -1,0 +1,108 @@
+{
+  "schema": "behavior-helper-cert-v1",
+  "helper": "f_1FD2_02B1",
+  "status": "CERTIFIED",
+  "review": {
+    "status": "APPROVED",
+    "reviewer": "root",
+    "reviewed_at": "2026-10-02",
+    "reason": "For menu this is a logical draw-mode request; for question it is the distinct three-word g9128 host slot. Driver color/pattern state is excluded; original downstream geometry/text requests are captured separately."
+  },
+  "input_domain": [
+    "56 cases: all sets 0/1/2 choices, ESC and upper/lower second-byte hotkeys, ignored keys, message geometry variants, event codes 0x0900/01/02/FF after an ignored key so the event branch executes.",
+    "100 cases, seed 0x29970791; sets 0..2, printable ASCII messages sized for screen/character width, screens 320/640/800 by 200/400/600, line-height 8..19, character-width 6..12, pending-key prefixes and at most one complete eight-word 0x09xx event.",
+    "Private DOS labels/tables and ctype remain from original module; host input/display/timer are modeled. Original string/font measurement, ctype, rectangle sizing/clipping and event-return logic execute; 0x09xx event returns its low byte."
+  ],
+  "compared_effects": [
+    "return",
+    "ordered host/helper calls",
+    "ordered input consumption",
+    "pointed rectangles and strings",
+    "global and pointed writes",
+    "all nonstack writes",
+    "caller ABI"
+  ],
+  "positive_control_id": "pc-f_1C62_0415-f_1FD2_02B1",
+  "negative_control_id": "question-second-byte-hotkey",
+  "limitations": [
+    "Finite recorded input/state domain and explicit host-service projection only; original backend implementation equivalence is not claimed."
+  ],
+  "source_hashes": {
+    "tools/behavior.py": "2c0799048057f59eae61a48be4d695278635594484adf0c70bf46c51b4e0c799",
+    "layout/functions.json": "6089a06e18fbe8f0960392cfe30357f7c19c886f38f10f7f115c72d127a756e7",
+    "layout/symbols.json": "0f5dd5b0a211945a97782cfccdb9bb31b0dfd07fcde5df4d4f9486b487eb0125",
+    "layout/oracle.lock.json": "2c6d9e98c688621ad49a08c78d0e0968f4076b036be56ec0738217b533ccde13",
+    "tools/archive/behavior-tutorial-menu-review-20261002/e018/source-inputs/root_1C62_1a75da44054b.c": "1a75da44054b48e33e02b0dc551e9e690d1b0797b5e2cfe2e3e6e26ad3b632d4",
+    "tools/archive/behavior-tutorial-menu-review-20261002/canonical-root/m1FD2.c": "f4359bdaf4cfc0fe326a54cf8a1eacb9ba3098b710bf2a561b3d0f48569bf6d8",
+    "tools/behavior_suites/archive/tutorial-menu-e01896c0b9f96741a0ef8d11b1cb3d5a1b26e62677327699a01bb4c05778ec7a.py": "e01896c0b9f96741a0ef8d11b1cb3d5a1b26e62677327699a01bb4c05778ec7a"
+  },
+  "boundary_abi": {
+    "stack_words": 3,
+    "register_args": [],
+    "callee_pop_bytes": 0
+  },
+  "boundary_call_count": 2138,
+  "boundary_call_count_scope": "all 156 matched campaign cases",
+  "caller_effect_reasoning": "For menu this is a logical draw-mode request; for question it is the distinct three-word g9128 host slot. Driver color/pattern state is excluded; original downstream geometry/text requests are captured separately.",
+  "implementation_provenance": "HOST slot alias: dialog caller g_9128 at root:55B3:9128 is a far void callback with three stack words. The synthetic callback is labeled f_1FD2_02B1 only to identify its fixture route. Canonical source function f_1FD2_02B1 at root:1FD2:02B1 is far void(int mode), one stack word (source m1FD2.c:162-178), and executed_from_original is false in this contract. The canonical function is not called as part of this modeled callback proof; its one-word ABI is not attributed to the three-word g_9128 call.",
+  "host_boundary_identity": {
+    "kind": "HOST_CALLER_SLOT_ALIAS",
+    "modeled_callback_name": "f_1FD2_02B1",
+    "host_service": {
+      "symbol": "g_9128",
+      "role": "far callback pointer used by the dialog caller",
+      "address": {
+        "unit": "root",
+        "segment": "55B3",
+        "offset": "9128"
+      },
+      "abi": {
+        "return": "void",
+        "stack_words": 3,
+        "arguments": [
+          "int a",
+          "int b",
+          "int c"
+        ],
+        "register_args": [],
+        "callee_pop_bytes": 0
+      }
+    },
+    "callback_route": "The fixture redirects the call through g_9128 and records its exact three-word host callback arguments.",
+    "canonical_function": {
+      "symbol": "f_1FD2_02B1",
+      "address": {
+        "unit": "root",
+        "segment": "1FD2",
+        "offset": "02B1"
+      },
+      "abi": {
+        "return": "void",
+        "stack_words": 1,
+        "arguments": [
+          "int mode"
+        ],
+        "register_args": [],
+        "callee_pop_bytes": 0
+      },
+      "source": {
+        "path": "tools/archive/behavior-tutorial-menu-review-20261002/canonical-root/m1FD2.c",
+        "sha256": "f4359bdaf4cfc0fe326a54cf8a1eacb9ba3098b710bf2a561b3d0f48569bf6d8",
+        "anchor": "f_1FD2_02B1",
+        "start_line": 162,
+        "end_line": 178,
+        "definition_excerpt": "void far f_1FD2_02B1(int mode)\n{\n    switch (mode) {\n    case 0:\n        g_9128(g_5FEC, g_5FEA, 0);\n        break;\n    case 1:\n        g_9128(g_5FEA, g_5FEC, 0xc0);\n        break;\n    case 2:\n        g_9128(g_5FEE, g_5FEA, 0x30);\n        break;\n    case 3:\n        g_9128(g_5FEE, g_5FEC, 0x30);\n        break;\n    }\n}"
+      },
+      "executed_from_original": false
+    },
+    "role": "HOST g_9128 callback slot alias. The one-argument canonical function is source context only and is not claimed as executed."
+  },
+  "omitted_backend_effects_reason": "For menu this is a logical draw-mode request; for question it is the distinct three-word g9128 host slot. Driver color/pattern state is excluded; original downstream geometry/text requests are captured separately.",
+  "canonical_function_not_executed": {
+    "symbol": "f_1FD2_02B1",
+    "address": "root:1FD2:02B1",
+    "abi": "far void(int mode), one stack word",
+    "executed_from_original": false,
+    "source_definition_span": "tools/archive/behavior-tutorial-menu-review-20261002/canonical-root/m1FD2.c:162-178"
+  }
+}

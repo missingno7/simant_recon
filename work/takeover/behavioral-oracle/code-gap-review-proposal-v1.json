@@ -1,0 +1,1238 @@
+{
+  "schema": "simant-code-gap-review-bundle-v1",
+  "review": {
+    "status": "PENDING",
+    "reviewer": null,
+    "reason": null
+  },
+  "oracle_sha256": "aa0596c6766322a8229ee3c36e57048c92adc82d50fbe2ef37afb8b85fcf4f11",
+  "status": "PROPOSED_NOT_APPROVED",
+  "summary": {
+    "known_callable_or_layout_spans_bytes": 54,
+    "link_fill_bytes": 246,
+    "text_prefix_bytes": 16,
+    "total_outside_29_function_extents_bytes": 316
+  },
+  "contracts": [
+    {
+      "id": "root_0ec11",
+      "status": "PROPOSED",
+      "unit": "root",
+      "seg": 3630,
+      "start": 2353,
+      "end": 2354,
+      "covered_bytes": 1,
+      "original_bytes_hex": "00",
+      "original_bytes_sha256": "6e340b9cffb37a989ca544e6bb780a2c78901d3fb33738768511a30617afa01d",
+      "classification": "UNOWNED_CODE_SHAPED_OR_LAYOUT_GAP",
+      "disposition": "A single zero byte lies exactly after the accepted LessonDone extent and before CompactListA at root 0EC1:0002, whose next address is even. It is a strong word-alignment candidate, not an instruction/function ownership claim.",
+      "entry_evidence_limit": "Relocated far pointers, RTLink vectors, and recursive-descent switch tables are checked. Raw near-offset words are separately searched over every executable unit. Dynamic arithmetic, unowned caller bodies, and arbitrary indirect register transfers are outside this proof.",
+      "evidence": {
+        "code_gap_scan": {
+          "path": "work/takeover/behavioral-oracle/debt-audit/code-gaps.json",
+          "sha256": "6efb452497c63a31cb7258ba010288b311376de36e429059f71030c5de2a9a97"
+        },
+        "repro_wrapper_report": {
+          "path": "work/takeover/behavioral-oracle/debt-audit/reproducible-wrapper-proof-v2/report.json",
+          "sha256": "3f8b87bb6bcfe7f980680b2fc7e4ce7d5c075bc9d5413a77650fc5819d6d798d"
+        }
+      },
+      "ranges": [
+        {
+          "unit": "root",
+          "seg": 3630,
+          "start": 2353,
+          "end": 2354,
+          "original_file_range": null,
+          "original_bytes_hex": "00",
+          "original_bytes_sha256": "6e340b9cffb37a989ca544e6bb780a2c78901d3fb33738768511a30617afa01d"
+        }
+      ]
+    },
+    {
+      "id": "root_1ccbe",
+      "status": "PROPOSED",
+      "unit": "root",
+      "seg": 7266,
+      "start": 1694,
+      "end": 1702,
+      "covered_bytes": 8,
+      "original_bytes_hex": "0ee8eef9b80100cb",
+      "original_bytes_sha256": "16d5961406a7cb94b0921174a13d5ec5cc005547210c60ced1575feb6267e256",
+      "classification": "UNOWNED_CODE_SHAPED_OR_LAYOUT_GAP",
+      "disposition": "Natural C-shaped 8-byte far routine: call f_1C62_0090, return AX=1. Entry starts immediately after f_1C62_0415's retf and ends immediately before f_1C62_06A6. The known source callee conditionally invokes g_9178 when fd_55B3_6262 is set. No entry reference is established.",
+      "entry_evidence_limit": "Relocated far pointers, RTLink vectors, and recursive-descent switch tables are checked. Raw near-offset words are separately searched over every executable unit. Dynamic arithmetic, unowned caller bodies, and arbitrary indirect register transfers are outside this proof.",
+      "evidence": {
+        "code_gap_scan": {
+          "path": "work/takeover/behavioral-oracle/debt-audit/code-gaps.json",
+          "sha256": "6efb452497c63a31cb7258ba010288b311376de36e429059f71030c5de2a9a97"
+        },
+        "repro_wrapper_report": {
+          "path": "work/takeover/behavioral-oracle/debt-audit/reproducible-wrapper-proof-v2/report.json",
+          "sha256": "3f8b87bb6bcfe7f980680b2fc7e4ce7d5c075bc9d5413a77650fc5819d6d798d"
+        }
+      },
+      "ranges": [
+        {
+          "unit": "root",
+          "seg": 7266,
+          "start": 1694,
+          "end": 1702,
+          "original_file_range": null,
+          "original_bytes_hex": "0ee8eef9b80100cb",
+          "original_bytes_sha256": "16d5961406a7cb94b0921174a13d5ec5cc005547210c60ced1575feb6267e256"
+        }
+      ]
+    },
+    {
+      "id": "root_1e578",
+      "status": "PROPOSED",
+      "unit": "root",
+      "seg": 7767,
+      "start": 8,
+      "end": 9,
+      "covered_bytes": 1,
+      "original_bytes_hex": "cb",
+      "original_bytes_sha256": "383e5d7d58caa41ce723cf16af471b38f6ee9065c032d07fa6bef1678cb72f1d",
+      "classification": "UNOWNED_CODE_SHAPED_OR_LAYOUT_GAP",
+      "disposition": "A standalone retf between accepted empty far entries f_1E57_0007 at offset 7 and f_1E57_0009 at offset 9 is consistent with a missing empty function at offset 8. The /Gs module profile and verified GS-1 support that source shape, but no entry reference is established.",
+      "entry_evidence_limit": "Relocated far pointers, RTLink vectors, and recursive-descent switch tables are checked. Raw near-offset words are separately searched over every executable unit. Dynamic arithmetic, unowned caller bodies, and arbitrary indirect register transfers are outside this proof.",
+      "evidence": {
+        "code_gap_scan": {
+          "path": "work/takeover/behavioral-oracle/debt-audit/code-gaps.json",
+          "sha256": "6efb452497c63a31cb7258ba010288b311376de36e429059f71030c5de2a9a97"
+        },
+        "repro_wrapper_report": {
+          "path": "work/takeover/behavioral-oracle/debt-audit/reproducible-wrapper-proof-v2/report.json",
+          "sha256": "3f8b87bb6bcfe7f980680b2fc7e4ce7d5c075bc9d5413a77650fc5819d6d798d"
+        }
+      },
+      "ranges": [
+        {
+          "unit": "root",
+          "seg": 7767,
+          "start": 8,
+          "end": 9,
+          "original_file_range": null,
+          "original_bytes_hex": "cb",
+          "original_bytes_sha256": "383e5d7d58caa41ce723cf16af471b38f6ee9065c032d07fa6bef1678cb72f1d"
+        }
+      ]
+    },
+    {
+      "id": "root_1f420",
+      "status": "PROPOSED",
+      "unit": "root",
+      "seg": 7767,
+      "start": 3760,
+      "end": 3769,
+      "covered_bytes": 9,
+      "original_bytes_hex": "0ee8f6fe0ee8aaf4cb",
+      "original_bytes_sha256": "26be0bc1223808bb3b774c9cb10a79ff3573a82b4aabe7e217b9a7985cabcc43",
+      "classification": "UNOWNED_CODE_SHAPED_OR_LAYOUT_GAP",
+      "disposition": "Natural C-shaped 9-byte far routine: clip_Push(); clip_Off(); retf. It starts exactly at clip_Push's extent end and ends exactly at clip_Pop's entry. Semantically it saves current clipping state then disables clipping; no entry reference is established.",
+      "entry_evidence_limit": "Relocated far pointers, RTLink vectors, and recursive-descent switch tables are checked. Raw near-offset words are separately searched over every executable unit. Dynamic arithmetic, unowned caller bodies, and arbitrary indirect register transfers are outside this proof.",
+      "evidence": {
+        "code_gap_scan": {
+          "path": "work/takeover/behavioral-oracle/debt-audit/code-gaps.json",
+          "sha256": "6efb452497c63a31cb7258ba010288b311376de36e429059f71030c5de2a9a97"
+        },
+        "repro_wrapper_report": {
+          "path": "work/takeover/behavioral-oracle/debt-audit/reproducible-wrapper-proof-v2/report.json",
+          "sha256": "3f8b87bb6bcfe7f980680b2fc7e4ce7d5c075bc9d5413a77650fc5819d6d798d"
+        }
+      },
+      "ranges": [
+        {
+          "unit": "root",
+          "seg": 7767,
+          "start": 3760,
+          "end": 3769,
+          "original_file_range": null,
+          "original_bytes_hex": "0ee8f6fe0ee8aaf4cb",
+          "original_bytes_sha256": "26be0bc1223808bb3b774c9cb10a79ff3573a82b4aabe7e217b9a7985cabcc43"
+        }
+      ]
+    },
+    {
+      "id": "root_23e5e",
+      "status": "PROPOSED",
+      "unit": "root",
+      "seg": 9134,
+      "start": 894,
+      "end": 896,
+      "covered_bytes": 2,
+      "original_bytes_hex": "cb00",
+      "original_bytes_sha256": "2de2adc09e5d703319c5eb96dc6aab69ee561d6e75a7b86b35af8bee453a25c4",
+      "classification": "UNOWNED_CODE_SHAPED_OR_LAYOUT_GAP",
+      "disposition": "A standalone retf follows the accepted fastcall win_LockWin body; a zero byte follows before the next frame. With this module's /Gs profile the byte shape is compatible with an empty far function plus alignment, but it is not assigned as such without an entry reference.",
+      "entry_evidence_limit": "Relocated far pointers, RTLink vectors, and recursive-descent switch tables are checked. Raw near-offset words are separately searched over every executable unit. Dynamic arithmetic, unowned caller bodies, and arbitrary indirect register transfers are outside this proof.",
+      "evidence": {
+        "code_gap_scan": {
+          "path": "work/takeover/behavioral-oracle/debt-audit/code-gaps.json",
+          "sha256": "6efb452497c63a31cb7258ba010288b311376de36e429059f71030c5de2a9a97"
+        },
+        "repro_wrapper_report": {
+          "path": "work/takeover/behavioral-oracle/debt-audit/reproducible-wrapper-proof-v2/report.json",
+          "sha256": "3f8b87bb6bcfe7f980680b2fc7e4ce7d5c075bc9d5413a77650fc5819d6d798d"
+        }
+      },
+      "ranges": [
+        {
+          "unit": "root",
+          "seg": 9134,
+          "start": 894,
+          "end": 896,
+          "original_file_range": null,
+          "original_bytes_hex": "cb00",
+          "original_bytes_sha256": "2de2adc09e5d703319c5eb96dc6aab69ee561d6e75a7b86b35af8bee453a25c4"
+        }
+      ]
+    },
+    {
+      "id": "root_285d7",
+      "status": "PROPOSED",
+      "unit": "root",
+      "seg": 10314,
+      "start": 311,
+      "end": 312,
+      "covered_bytes": 1,
+      "original_bytes_hex": "cb",
+      "original_bytes_sha256": "383e5d7d58caa41ce723cf16af471b38f6ee9065c032d07fa6bef1678cb72f1d",
+      "classification": "UNOWNED_CODE_SHAPED_OR_LAYOUT_GAP",
+      "disposition": "A standalone retf follows the accepted StopSong body and immediately precedes f_284A_0138. The module uses /Gs; an empty far function is a plausible source form, but its entry/reference remains unproven.",
+      "entry_evidence_limit": "Relocated far pointers, RTLink vectors, and recursive-descent switch tables are checked. Raw near-offset words are separately searched over every executable unit. Dynamic arithmetic, unowned caller bodies, and arbitrary indirect register transfers are outside this proof.",
+      "evidence": {
+        "code_gap_scan": {
+          "path": "work/takeover/behavioral-oracle/debt-audit/code-gaps.json",
+          "sha256": "6efb452497c63a31cb7258ba010288b311376de36e429059f71030c5de2a9a97"
+        },
+        "repro_wrapper_report": {
+          "path": "work/takeover/behavioral-oracle/debt-audit/reproducible-wrapper-proof-v2/report.json",
+          "sha256": "3f8b87bb6bcfe7f980680b2fc7e4ce7d5c075bc9d5413a77650fc5819d6d798d"
+        }
+      },
+      "ranges": [
+        {
+          "unit": "root",
+          "seg": 10314,
+          "start": 311,
+          "end": 312,
+          "original_file_range": null,
+          "original_bytes_hex": "cb",
+          "original_bytes_sha256": "383e5d7d58caa41ce723cf16af471b38f6ee9065c032d07fa6bef1678cb72f1d"
+        }
+      ]
+    },
+    {
+      "id": "s04_368d0",
+      "status": "PROPOSED",
+      "unit": "S04",
+      "seg": 13813,
+      "start": 2432,
+      "end": 2464,
+      "covered_bytes": 32,
+      "original_bytes_hex": "33c09acc02f429833e38230074050ee8ccffcb0ee831ffcb0000000000000000",
+      "original_bytes_sha256": "dbfd504feb18894ffa1c8ae1f4efdc169497dbe58ceae19d0f398fd5c288c160",
+      "classification": "UNOWNED_CODE_SHAPED_OR_LAYOUT_GAP",
+      "disposition": "Executable-shaped 24-byte far routine: __aFchkstk(0); if miniCursorOn then EraseMiniMapCursor else DrawMiniMapCursor; retf. S04 profile lacks /Gs, matching the observed stack-check prefix under GS-1. The next eight bytes are zero. Its behavior is supported by exact private DATA placement/source writes and a Win16 ToggleMiniMapCursor clue, but no DOS caller/address-taking reference was found.",
+      "entry_evidence_limit": "Relocated far pointers, RTLink vectors, and recursive-descent switch tables are checked. Raw near-offset words are separately searched over every executable unit. Dynamic arithmetic, unowned caller bodies, and arbitrary indirect register transfers are outside this proof.",
+      "evidence": {
+        "code_gap_scan": {
+          "path": "work/takeover/behavioral-oracle/debt-audit/code-gaps.json",
+          "sha256": "6efb452497c63a31cb7258ba010288b311376de36e429059f71030c5de2a9a97"
+        },
+        "repro_wrapper_report": {
+          "path": "work/takeover/behavioral-oracle/debt-audit/reproducible-wrapper-proof-v2/report.json",
+          "sha256": "3f8b87bb6bcfe7f980680b2fc7e4ce7d5c075bc9d5413a77650fc5819d6d798d"
+        }
+      },
+      "ranges": [
+        {
+          "unit": "S04",
+          "seg": 13813,
+          "start": 2432,
+          "end": 2464,
+          "original_file_range": null,
+          "original_bytes_hex": "33c09acc02f429833e38230074050ee8ccffcb0ee831ffcb0000000000000000",
+          "original_bytes_sha256": "dbfd504feb18894ffa1c8ae1f4efdc169497dbe58ceae19d0f398fd5c288c160"
+        }
+      ]
+    },
+    {
+      "id": "root_overlay_game_code_link_fill",
+      "status": "PROPOSED",
+      "covered_bytes": 246,
+      "classification": "LINK_FILL_FROM_CURRENT_PLACEMENT_MODEL",
+      "ranges": [
+        {
+          "unit": "root",
+          "seg": 74,
+          "start": 9,
+          "end": 10,
+          "original_file_range": [
+            16041,
+            16042
+          ],
+          "original_bytes_sha256": "6e340b9cffb37a989ca544e6bb780a2c78901d3fb33738768511a30617afa01d",
+          "class": "LINK_FILL",
+          "original_bytes_hex": "00"
+        },
+        {
+          "unit": "root",
+          "seg": 147,
+          "start": 1,
+          "end": 2,
+          "original_file_range": [
+            17201,
+            17202
+          ],
+          "original_bytes_sha256": "6e340b9cffb37a989ca544e6bb780a2c78901d3fb33738768511a30617afa01d",
+          "class": "LINK_FILL",
+          "original_bytes_hex": "00"
+        },
+        {
+          "unit": "root",
+          "seg": 186,
+          "start": 1,
+          "end": 2,
+          "original_file_range": [
+            17825,
+            17826
+          ],
+          "original_bytes_sha256": "6e340b9cffb37a989ca544e6bb780a2c78901d3fb33738768511a30617afa01d",
+          "class": "LINK_FILL",
+          "original_bytes_hex": "00"
+        },
+        {
+          "unit": "root",
+          "seg": 222,
+          "start": 9,
+          "end": 10,
+          "original_file_range": [
+            18409,
+            18410
+          ],
+          "original_bytes_sha256": "6e340b9cffb37a989ca544e6bb780a2c78901d3fb33738768511a30617afa01d",
+          "class": "LINK_FILL",
+          "original_bytes_hex": "00"
+        },
+        {
+          "unit": "root",
+          "seg": 248,
+          "start": 1,
+          "end": 2,
+          "original_file_range": [
+            18817,
+            18818
+          ],
+          "original_bytes_sha256": "6e340b9cffb37a989ca544e6bb780a2c78901d3fb33738768511a30617afa01d",
+          "class": "LINK_FILL",
+          "original_bytes_hex": "00"
+        },
+        {
+          "unit": "root",
+          "seg": 347,
+          "start": 13,
+          "end": 14,
+          "original_file_range": [
+            20413,
+            20414
+          ],
+          "original_bytes_sha256": "6e340b9cffb37a989ca544e6bb780a2c78901d3fb33738768511a30617afa01d",
+          "class": "LINK_FILL",
+          "original_bytes_hex": "00"
+        },
+        {
+          "unit": "root",
+          "seg": 579,
+          "start": 15,
+          "end": 16,
+          "original_file_range": [
+            24127,
+            24128
+          ],
+          "original_bytes_sha256": "6e340b9cffb37a989ca544e6bb780a2c78901d3fb33738768511a30617afa01d",
+          "class": "LINK_FILL",
+          "original_bytes_hex": "00"
+        },
+        {
+          "unit": "root",
+          "seg": 592,
+          "start": 13,
+          "end": 14,
+          "original_file_range": [
+            24333,
+            24334
+          ],
+          "original_bytes_sha256": "6e340b9cffb37a989ca544e6bb780a2c78901d3fb33738768511a30617afa01d",
+          "class": "LINK_FILL",
+          "original_bytes_hex": "00"
+        },
+        {
+          "unit": "root",
+          "seg": 1882,
+          "start": 15,
+          "end": 16,
+          "original_file_range": [
+            44975,
+            44976
+          ],
+          "original_bytes_sha256": "6e340b9cffb37a989ca544e6bb780a2c78901d3fb33738768511a30617afa01d",
+          "class": "LINK_FILL",
+          "original_bytes_hex": "00"
+        },
+        {
+          "unit": "root",
+          "seg": 2196,
+          "start": 13,
+          "end": 14,
+          "original_file_range": [
+            49997,
+            49998
+          ],
+          "original_bytes_sha256": "6e340b9cffb37a989ca544e6bb780a2c78901d3fb33738768511a30617afa01d",
+          "class": "LINK_FILL",
+          "original_bytes_hex": "00"
+        },
+        {
+          "unit": "root",
+          "seg": 3048,
+          "start": 1,
+          "end": 2,
+          "original_file_range": [
+            63617,
+            63618
+          ],
+          "original_bytes_sha256": "6e340b9cffb37a989ca544e6bb780a2c78901d3fb33738768511a30617afa01d",
+          "class": "LINK_FILL",
+          "original_bytes_hex": "00"
+        },
+        {
+          "unit": "root",
+          "seg": 3290,
+          "start": 15,
+          "end": 16,
+          "original_file_range": [
+            67503,
+            67504
+          ],
+          "original_bytes_sha256": "6e340b9cffb37a989ca544e6bb780a2c78901d3fb33738768511a30617afa01d",
+          "class": "LINK_FILL",
+          "original_bytes_hex": "00"
+        },
+        {
+          "unit": "root",
+          "seg": 3903,
+          "start": 7,
+          "end": 8,
+          "original_file_range": [
+            77303,
+            77304
+          ],
+          "original_bytes_sha256": "6e340b9cffb37a989ca544e6bb780a2c78901d3fb33738768511a30617afa01d",
+          "class": "LINK_FILL",
+          "original_bytes_hex": "00"
+        },
+        {
+          "unit": "root",
+          "seg": 4343,
+          "start": 13,
+          "end": 14,
+          "original_file_range": [
+            84349,
+            84350
+          ],
+          "original_bytes_sha256": "6e340b9cffb37a989ca544e6bb780a2c78901d3fb33738768511a30617afa01d",
+          "class": "LINK_FILL",
+          "original_bytes_hex": "00"
+        },
+        {
+          "unit": "root",
+          "seg": 4995,
+          "start": 1,
+          "end": 2,
+          "original_file_range": [
+            94769,
+            94770
+          ],
+          "original_bytes_sha256": "6e340b9cffb37a989ca544e6bb780a2c78901d3fb33738768511a30617afa01d",
+          "class": "LINK_FILL",
+          "original_bytes_hex": "00"
+        },
+        {
+          "unit": "root",
+          "seg": 5673,
+          "start": 11,
+          "end": 12,
+          "original_file_range": [
+            105627,
+            105628
+          ],
+          "original_bytes_sha256": "6e340b9cffb37a989ca544e6bb780a2c78901d3fb33738768511a30617afa01d",
+          "class": "LINK_FILL",
+          "original_bytes_hex": "00"
+        },
+        {
+          "unit": "root",
+          "seg": 5784,
+          "start": 15,
+          "end": 16,
+          "original_file_range": [
+            107407,
+            107408
+          ],
+          "original_bytes_sha256": "6e340b9cffb37a989ca544e6bb780a2c78901d3fb33738768511a30617afa01d",
+          "class": "LINK_FILL",
+          "original_bytes_hex": "00"
+        },
+        {
+          "unit": "root",
+          "seg": 6489,
+          "start": 1,
+          "end": 2,
+          "original_file_range": [
+            118673,
+            118674
+          ],
+          "original_bytes_sha256": "6e340b9cffb37a989ca544e6bb780a2c78901d3fb33738768511a30617afa01d",
+          "class": "LINK_FILL",
+          "original_bytes_hex": "00"
+        },
+        {
+          "unit": "root",
+          "seg": 6490,
+          "start": 11,
+          "end": 12,
+          "original_file_range": [
+            118699,
+            118700
+          ],
+          "original_bytes_sha256": "6e340b9cffb37a989ca544e6bb780a2c78901d3fb33738768511a30617afa01d",
+          "class": "LINK_FILL",
+          "original_bytes_hex": "00"
+        },
+        {
+          "unit": "root",
+          "seg": 6534,
+          "start": 3,
+          "end": 4,
+          "original_file_range": [
+            119395,
+            119396
+          ],
+          "original_bytes_sha256": "6e340b9cffb37a989ca544e6bb780a2c78901d3fb33738768511a30617afa01d",
+          "class": "LINK_FILL",
+          "original_bytes_hex": "00"
+        },
+        {
+          "unit": "root",
+          "seg": 6620,
+          "start": 7,
+          "end": 8,
+          "original_file_range": [
+            120775,
+            120776
+          ],
+          "original_bytes_sha256": "6e340b9cffb37a989ca544e6bb780a2c78901d3fb33738768511a30617afa01d",
+          "class": "LINK_FILL",
+          "original_bytes_hex": "00"
+        },
+        {
+          "unit": "root",
+          "seg": 6739,
+          "start": 5,
+          "end": 6,
+          "original_file_range": [
+            122677,
+            122678
+          ],
+          "original_bytes_sha256": "6e340b9cffb37a989ca544e6bb780a2c78901d3fb33738768511a30617afa01d",
+          "class": "LINK_FILL",
+          "original_bytes_hex": "00"
+        },
+        {
+          "unit": "root",
+          "seg": 6952,
+          "start": 5,
+          "end": 6,
+          "original_file_range": [
+            126085,
+            126086
+          ],
+          "original_bytes_sha256": "6e340b9cffb37a989ca544e6bb780a2c78901d3fb33738768511a30617afa01d",
+          "class": "LINK_FILL",
+          "original_bytes_hex": "00"
+        },
+        {
+          "unit": "root",
+          "seg": 6990,
+          "start": 11,
+          "end": 12,
+          "original_file_range": [
+            126699,
+            126700
+          ],
+          "original_bytes_sha256": "6e340b9cffb37a989ca544e6bb780a2c78901d3fb33738768511a30617afa01d",
+          "class": "LINK_FILL",
+          "original_bytes_hex": "00"
+        },
+        {
+          "unit": "root",
+          "seg": 7394,
+          "start": 11,
+          "end": 12,
+          "original_file_range": [
+            133163,
+            133164
+          ],
+          "original_bytes_sha256": "6e340b9cffb37a989ca544e6bb780a2c78901d3fb33738768511a30617afa01d",
+          "class": "LINK_FILL",
+          "original_bytes_hex": "00"
+        },
+        {
+          "unit": "root",
+          "seg": 7566,
+          "start": 1,
+          "end": 2,
+          "original_file_range": [
+            135905,
+            135906
+          ],
+          "original_bytes_sha256": "6e340b9cffb37a989ca544e6bb780a2c78901d3fb33738768511a30617afa01d",
+          "class": "LINK_FILL",
+          "original_bytes_hex": "00"
+        },
+        {
+          "unit": "root",
+          "seg": 7767,
+          "start": 5,
+          "end": 6,
+          "original_file_range": [
+            139125,
+            139126
+          ],
+          "original_bytes_sha256": "6e340b9cffb37a989ca544e6bb780a2c78901d3fb33738768511a30617afa01d",
+          "class": "LINK_FILL",
+          "original_bytes_hex": "00"
+        },
+        {
+          "unit": "root",
+          "seg": 8024,
+          "start": 5,
+          "end": 6,
+          "original_file_range": [
+            143237,
+            143238
+          ],
+          "original_bytes_sha256": "6e340b9cffb37a989ca544e6bb780a2c78901d3fb33738768511a30617afa01d",
+          "class": "LINK_FILL",
+          "original_bytes_hex": "00"
+        },
+        {
+          "unit": "root",
+          "seg": 8064,
+          "start": 11,
+          "end": 12,
+          "original_file_range": [
+            143883,
+            143884
+          ],
+          "original_bytes_sha256": "6e340b9cffb37a989ca544e6bb780a2c78901d3fb33738768511a30617afa01d",
+          "class": "LINK_FILL",
+          "original_bytes_hex": "00"
+        },
+        {
+          "unit": "root",
+          "seg": 8106,
+          "start": 5,
+          "end": 6,
+          "original_file_range": [
+            144549,
+            144550
+          ],
+          "original_bytes_sha256": "6e340b9cffb37a989ca544e6bb780a2c78901d3fb33738768511a30617afa01d",
+          "class": "LINK_FILL",
+          "original_bytes_hex": "00"
+        },
+        {
+          "unit": "root",
+          "seg": 8146,
+          "start": 7,
+          "end": 8,
+          "original_file_range": [
+            145191,
+            145192
+          ],
+          "original_bytes_sha256": "6e340b9cffb37a989ca544e6bb780a2c78901d3fb33738768511a30617afa01d",
+          "class": "LINK_FILL",
+          "original_bytes_hex": "00"
+        },
+        {
+          "unit": "root",
+          "seg": 8335,
+          "start": 7,
+          "end": 8,
+          "original_file_range": [
+            148215,
+            148216
+          ],
+          "original_bytes_sha256": "6e340b9cffb37a989ca544e6bb780a2c78901d3fb33738768511a30617afa01d",
+          "class": "LINK_FILL",
+          "original_bytes_hex": "00"
+        },
+        {
+          "unit": "root",
+          "seg": 8423,
+          "start": 15,
+          "end": 16,
+          "original_file_range": [
+            149631,
+            149632
+          ],
+          "original_bytes_sha256": "6e340b9cffb37a989ca544e6bb780a2c78901d3fb33738768511a30617afa01d",
+          "class": "LINK_FILL",
+          "original_bytes_hex": "00"
+        },
+        {
+          "unit": "root",
+          "seg": 8895,
+          "start": 9,
+          "end": 10,
+          "original_file_range": [
+            157177,
+            157178
+          ],
+          "original_bytes_sha256": "6e340b9cffb37a989ca544e6bb780a2c78901d3fb33738768511a30617afa01d",
+          "class": "LINK_FILL",
+          "original_bytes_hex": "00"
+        },
+        {
+          "unit": "root",
+          "seg": 9387,
+          "start": 1,
+          "end": 2,
+          "original_file_range": [
+            165041,
+            165042
+          ],
+          "original_bytes_sha256": "6e340b9cffb37a989ca544e6bb780a2c78901d3fb33738768511a30617afa01d",
+          "class": "LINK_FILL",
+          "original_bytes_hex": "00"
+        },
+        {
+          "unit": "root",
+          "seg": 9808,
+          "start": 5,
+          "end": 6,
+          "original_file_range": [
+            171781,
+            171782
+          ],
+          "original_bytes_sha256": "6e340b9cffb37a989ca544e6bb780a2c78901d3fb33738768511a30617afa01d",
+          "class": "LINK_FILL",
+          "original_bytes_hex": "00"
+        },
+        {
+          "unit": "root",
+          "seg": 9826,
+          "start": 7,
+          "end": 8,
+          "original_file_range": [
+            172071,
+            172072
+          ],
+          "original_bytes_sha256": "6e340b9cffb37a989ca544e6bb780a2c78901d3fb33738768511a30617afa01d",
+          "class": "LINK_FILL",
+          "original_bytes_hex": "00"
+        },
+        {
+          "unit": "root",
+          "seg": 10302,
+          "start": 9,
+          "end": 10,
+          "original_file_range": [
+            179689,
+            179690
+          ],
+          "original_bytes_sha256": "6e340b9cffb37a989ca544e6bb780a2c78901d3fb33738768511a30617afa01d",
+          "class": "LINK_FILL",
+          "original_bytes_hex": "00"
+        },
+        {
+          "unit": "root",
+          "seg": 10509,
+          "start": 13,
+          "end": 14,
+          "original_file_range": [
+            183005,
+            183006
+          ],
+          "original_bytes_sha256": "6e340b9cffb37a989ca544e6bb780a2c78901d3fb33738768511a30617afa01d",
+          "class": "LINK_FILL",
+          "original_bytes_hex": "00"
+        },
+        {
+          "unit": "root",
+          "seg": 10687,
+          "start": 7,
+          "end": 8,
+          "original_file_range": [
+            185847,
+            185848
+          ],
+          "original_bytes_sha256": "6e340b9cffb37a989ca544e6bb780a2c78901d3fb33738768511a30617afa01d",
+          "class": "LINK_FILL",
+          "original_bytes_hex": "00"
+        },
+        {
+          "unit": "S00",
+          "seg": 12582,
+          "start": 2163,
+          "end": 2164,
+          "original_file_range": [
+            218579,
+            218580
+          ],
+          "original_bytes_sha256": "6e340b9cffb37a989ca544e6bb780a2c78901d3fb33738768511a30617afa01d",
+          "class": "LINK_FILL",
+          "original_bytes_hex": "00"
+        },
+        {
+          "unit": "S00",
+          "seg": 12582,
+          "start": 13091,
+          "end": 13092,
+          "original_file_range": [
+            229507,
+            229508
+          ],
+          "original_bytes_sha256": "6e340b9cffb37a989ca544e6bb780a2c78901d3fb33738768511a30617afa01d",
+          "class": "LINK_FILL",
+          "original_bytes_hex": "00"
+        },
+        {
+          "unit": "S00",
+          "seg": 12582,
+          "start": 18437,
+          "end": 18438,
+          "original_file_range": [
+            234853,
+            234854
+          ],
+          "original_bytes_sha256": "6e340b9cffb37a989ca544e6bb780a2c78901d3fb33738768511a30617afa01d",
+          "class": "LINK_FILL",
+          "original_bytes_hex": "00"
+        },
+        {
+          "unit": "S00",
+          "seg": 12582,
+          "start": 19682,
+          "end": 19696,
+          "original_file_range": [
+            236098,
+            236112
+          ],
+          "original_bytes_sha256": "e7ecebbc590bc88b3761fa6cd03d749f87463dabb67021a5c6768c25ec68b3f2",
+          "class": "LINK_FILL",
+          "original_bytes_hex": "0000000000000000000000000000"
+        },
+        {
+          "unit": "S01",
+          "seg": 12582,
+          "start": 7051,
+          "end": 7056,
+          "original_file_range": [
+            243355,
+            243360
+          ],
+          "original_bytes_sha256": "8855508aade16ec573d21e6a485dfd0a7624085c1a14b5ecdd6485de0c6839a4",
+          "class": "LINK_FILL",
+          "original_bytes_hex": "0000000000"
+        },
+        {
+          "unit": "S02",
+          "seg": 12582,
+          "start": 2409,
+          "end": 2416,
+          "original_file_range": [
+            245929,
+            245936
+          ],
+          "original_bytes_sha256": "837885c8f8091aeaeb9ec3c3f85a6ff470a415e610b8ba3e49f9b33c9cf9d619",
+          "class": "LINK_FILL",
+          "original_bytes_hex": "00000000000000"
+        },
+        {
+          "unit": "S03",
+          "seg": 12582,
+          "start": 10963,
+          "end": 10976,
+          "original_file_range": [
+            257059,
+            257072
+          ],
+          "original_bytes_sha256": "dd46c3eebb1884ff3b5258c0a2fc9398e560a29e0780d4b53869b6254aa46a96",
+          "class": "LINK_FILL",
+          "original_bytes_hex": "00000000000000000000000000"
+        },
+        {
+          "unit": "S05",
+          "seg": 13813,
+          "start": 2508,
+          "end": 2512,
+          "original_file_range": [
+            262796,
+            262800
+          ],
+          "original_bytes_sha256": "df3f619804a92fdb4057192dc43dd748ea778adc52bc498ce80524c014b81119",
+          "class": "LINK_FILL",
+          "original_bytes_hex": "00000000"
+        },
+        {
+          "unit": "S06",
+          "seg": 13813,
+          "start": 9583,
+          "end": 9584,
+          "original_file_range": [
+            272863,
+            272864
+          ],
+          "original_bytes_sha256": "6e340b9cffb37a989ca544e6bb780a2c78901d3fb33738768511a30617afa01d",
+          "class": "LINK_FILL",
+          "original_bytes_hex": "00"
+        },
+        {
+          "unit": "S07",
+          "seg": 13813,
+          "start": 1174,
+          "end": 1184,
+          "original_file_range": [
+            274166,
+            274176
+          ],
+          "original_bytes_sha256": "01d448afd928065458cf670b60f5a594d735af0172c8d67f22a81680132681ca",
+          "class": "LINK_FILL",
+          "original_bytes_hex": "00000000000000000000"
+        },
+        {
+          "unit": "S08",
+          "seg": 13813,
+          "start": 5053,
+          "end": 5056,
+          "original_file_range": [
+            279693,
+            279696
+          ],
+          "original_bytes_sha256": "709e80c88487a2411e1ee4dfb9f22a861492d20c4765150c0c794abd70f8147c",
+          "class": "LINK_FILL",
+          "original_bytes_hex": "000000"
+        },
+        {
+          "unit": "S09",
+          "seg": 13813,
+          "start": 5225,
+          "end": 5232,
+          "original_file_range": [
+            285625,
+            285632
+          ],
+          "original_bytes_sha256": "837885c8f8091aeaeb9ec3c3f85a6ff470a415e610b8ba3e49f9b33c9cf9d619",
+          "class": "LINK_FILL",
+          "original_bytes_hex": "00000000000000"
+        },
+        {
+          "unit": "S10",
+          "seg": 13813,
+          "start": 2731,
+          "end": 2736,
+          "original_file_range": [
+            288619,
+            288624
+          ],
+          "original_bytes_sha256": "8855508aade16ec573d21e6a485dfd0a7624085c1a14b5ecdd6485de0c6839a4",
+          "class": "LINK_FILL",
+          "original_bytes_hex": "0000000000"
+        },
+        {
+          "unit": "S11",
+          "seg": 13813,
+          "start": 870,
+          "end": 880,
+          "original_file_range": [
+            289622,
+            289632
+          ],
+          "original_bytes_sha256": "01d448afd928065458cf670b60f5a594d735af0172c8d67f22a81680132681ca",
+          "class": "LINK_FILL",
+          "original_bytes_hex": "00000000000000000000"
+        },
+        {
+          "unit": "S12",
+          "seg": 14412,
+          "start": 4978,
+          "end": 4992,
+          "original_file_range": [
+            295186,
+            295200
+          ],
+          "original_bytes_sha256": "e7ecebbc590bc88b3761fa6cd03d749f87463dabb67021a5c6768c25ec68b3f2",
+          "class": "LINK_FILL",
+          "original_bytes_hex": "0000000000000000000000000000"
+        },
+        {
+          "unit": "S13",
+          "seg": 14412,
+          "start": 6051,
+          "end": 6064,
+          "original_file_range": [
+            301763,
+            301776
+          ],
+          "original_bytes_sha256": "dd46c3eebb1884ff3b5258c0a2fc9398e560a29e0780d4b53869b6254aa46a96",
+          "class": "LINK_FILL",
+          "original_bytes_hex": "00000000000000000000000000"
+        },
+        {
+          "unit": "S14",
+          "seg": 14412,
+          "start": 4653,
+          "end": 4656,
+          "original_file_range": [
+            307149,
+            307152
+          ],
+          "original_bytes_sha256": "709e80c88487a2411e1ee4dfb9f22a861492d20c4765150c0c794abd70f8147c",
+          "class": "LINK_FILL",
+          "original_bytes_hex": "000000"
+        },
+        {
+          "unit": "S15",
+          "seg": 14412,
+          "start": 1351,
+          "end": 1360,
+          "original_file_range": [
+            308759,
+            308768
+          ],
+          "original_bytes_sha256": "3e7077fd2f66d689e0cee6a7cf5b37bf2dca7c979af356d0a31cbc5c85605c7d",
+          "class": "LINK_FILL",
+          "original_bytes_hex": "000000000000000000"
+        },
+        {
+          "unit": "S16",
+          "seg": 14412,
+          "start": 1763,
+          "end": 1776,
+          "original_file_range": [
+            310851,
+            310864
+          ],
+          "original_bytes_sha256": "dd46c3eebb1884ff3b5258c0a2fc9398e560a29e0780d4b53869b6254aa46a96",
+          "class": "LINK_FILL",
+          "original_bytes_hex": "00000000000000000000000000"
+        },
+        {
+          "unit": "S17",
+          "seg": 14412,
+          "start": 443,
+          "end": 448,
+          "original_file_range": [
+            311355,
+            311360
+          ],
+          "original_bytes_sha256": "8855508aade16ec573d21e6a485dfd0a7624085c1a14b5ecdd6485de0c6839a4",
+          "class": "LINK_FILL",
+          "original_bytes_hex": "0000000000"
+        },
+        {
+          "unit": "S18",
+          "seg": 14412,
+          "start": 4359,
+          "end": 4368,
+          "original_file_range": [
+            316007,
+            316016
+          ],
+          "original_bytes_sha256": "3e7077fd2f66d689e0cee6a7cf5b37bf2dca7c979af356d0a31cbc5c85605c7d",
+          "class": "LINK_FILL",
+          "original_bytes_hex": "000000000000000000"
+        },
+        {
+          "unit": "S20",
+          "seg": 14791,
+          "start": 681,
+          "end": 682,
+          "original_file_range": [
+            318393,
+            318394
+          ],
+          "original_bytes_sha256": "6e340b9cffb37a989ca544e6bb780a2c78901d3fb33738768511a30617afa01d",
+          "class": "LINK_FILL",
+          "original_bytes_hex": "00"
+        },
+        {
+          "unit": "S20",
+          "seg": 14791,
+          "start": 2087,
+          "end": 2096,
+          "original_file_range": [
+            319799,
+            319808
+          ],
+          "original_bytes_sha256": "3e7077fd2f66d689e0cee6a7cf5b37bf2dca7c979af356d0a31cbc5c85605c7d",
+          "class": "LINK_FILL",
+          "original_bytes_hex": "000000000000000000"
+        },
+        {
+          "unit": "S21",
+          "seg": 14791,
+          "start": 472,
+          "end": 480,
+          "original_file_range": [
+            320296,
+            320304
+          ],
+          "original_bytes_sha256": "af5570f5a1810b7af78caf4bc70a660f0df51e42baf91d4de5b2328de0e83dfc",
+          "class": "LINK_FILL",
+          "original_bytes_hex": "0000000000000000"
+        },
+        {
+          "unit": "S22",
+          "seg": 14791,
+          "start": 12710,
+          "end": 12720,
+          "original_file_range": [
+            334502,
+            334512
+          ],
+          "original_bytes_sha256": "01d448afd928065458cf670b60f5a594d735af0172c8d67f22a81680132681ca",
+          "class": "LINK_FILL",
+          "original_bytes_hex": "00000000000000000000"
+        },
+        {
+          "unit": "S23",
+          "seg": 14791,
+          "start": 4362,
+          "end": 4368,
+          "original_file_range": [
+            339322,
+            339328
+          ],
+          "original_bytes_sha256": "b0f66adc83641586656866813fd9dd0b8ebb63796075661ba45d1aa8089e1d44",
+          "class": "LINK_FILL",
+          "original_bytes_hex": "000000000000"
+        },
+        {
+          "unit": "S24",
+          "seg": 14791,
+          "start": 1803,
+          "end": 1808,
+          "original_file_range": [
+            341259,
+            341264
+          ],
+          "original_bytes_sha256": "8855508aade16ec573d21e6a485dfd0a7624085c1a14b5ecdd6485de0c6839a4",
+          "class": "LINK_FILL",
+          "original_bytes_hex": "0000000000"
+        },
+        {
+          "unit": "S25",
+          "seg": 14791,
+          "start": 7639,
+          "end": 7640,
+          "original_file_range": [
+            350135,
+            350136
+          ],
+          "original_bytes_sha256": "6e340b9cffb37a989ca544e6bb780a2c78901d3fb33738768511a30617afa01d",
+          "class": "LINK_FILL",
+          "original_bytes_hex": "00"
+        },
+        {
+          "unit": "S25",
+          "seg": 14791,
+          "start": 14578,
+          "end": 14592,
+          "original_file_range": [
+            357074,
+            357088
+          ],
+          "original_bytes_sha256": "e7ecebbc590bc88b3761fa6cd03d749f87463dabb67021a5c6768c25ec68b3f2",
+          "class": "LINK_FILL",
+          "original_bytes_hex": "0000000000000000000000000000"
+        },
+        {
+          "unit": "S26",
+          "seg": 14791,
+          "start": 2236,
+          "end": 2240,
+          "original_file_range": [
+            359644,
+            359648
+          ],
+          "original_bytes_sha256": "df3f619804a92fdb4057192dc43dd748ea778adc52bc498ce80524c014b81119",
+          "class": "LINK_FILL",
+          "original_bytes_hex": "00000000"
+        }
+      ],
+      "disposition": "All listed bytes are zero and classified LINK_FILL by the current hybrid placement model. This supports layout fill accounting, not historical linker/source ownership. Keep RTLink/code-generation mechanism as separate historical proof debt.",
+      "evidence": {
+        "provenance": {
+          "path": "build/link/provenance.json",
+          "sha256": "1e61bead20694234d10d1bd35b2a23eac8c55c65e546c362f1c679a42ab3a664"
+        },
+        "linker_source": {
+          "path": "tools/link.py",
+          "sha256": "54456a85e985526299a9582ca4d21db36312509888f4d7821c77ab61d0d9d479"
+        },
+        "progress": {
+          "path": "docs/progress.json",
+          "sha256": "c6c412abaf7817ee2f19d33e3518a40a08222730bdb4caac37f5a487446e6b9a"
+        }
+      }
+    },
+    {
+      "id": "root_text_prefix16",
+      "status": "PROPOSED",
+      "unit": "root",
+      "seg": 10740,
+      "start": 12,
+      "end": 28,
+      "covered_bytes": 16,
+      "original_file_range": [
+        186700,
+        186716
+      ],
+      "original_bytes_hex": "00000000000000000000000000000000",
+      "original_bytes_sha256": "374708fff7719dd5979ec875d56cd2286f6d3cf7ec317a3b25632aab28ec37bb",
+      "classification": "TEXT_PREFIX_NULL_AREA_CANDIDATE_NOT_PROVEN_FILL",
+      "disposition": "Sixteen zero bytes precede the root runtime text contribution. They are a candidate null-area prefix; current evidence does not prove filler origin or function semantics.",
+      "evidence": {
+        "provenance": {
+          "path": "build/link/provenance.json",
+          "sha256": "1e61bead20694234d10d1bd35b2a23eac8c55c65e546c362f1c679a42ab3a664"
+        },
+        "code_gap_audit": {
+          "path": "work/takeover/behavioral-oracle/debt-audit/code-span-followup.md",
+          "sha256": "d1ebe2206b6a584e2b0dd3f50d40eeb4ddc11603ea1937f3cf03cb904b107abe"
+        }
+      },
+      "ranges": [
+        {
+          "unit": "root",
+          "seg": 10740,
+          "start": 12,
+          "end": 28,
+          "original_file_range": [
+            186700,
+            186716
+          ],
+          "original_bytes_hex": "00000000000000000000000000000000",
+          "original_bytes_sha256": "374708fff7719dd5979ec875d56cd2286f6d3cf7ec317a3b25632aab28ec37bb"
+        }
+      ]
+    }
+  ],
+  "scope": "Supplemental historical address/debt inventory only. Does not claim ownership, add function extents, change exact/behavior acceptance, or prove unreferenced callable spans dead."
+}

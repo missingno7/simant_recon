@@ -1,0 +1,76 @@
+{
+  "schema": "behavior-helper-cert-v1",
+  "helper": "GSaveRect",
+  "status": "CERTIFIED",
+  "review": {
+    "status": "APPROVED",
+    "reviewer": "root",
+    "reviewed_at": "2026-10-02",
+    "reason": "Surface acquisition is a host provider returning the explicit valid fixture pointer. Original g21A4 and allocator/driver state are omitted; caller consumes only that pointer for later matching restore. Complete rectangle/request order remains compared."
+  },
+  "input_domain": [
+    "53 cases: current-menu -1/0/1; Enter, CR, LF, Space, ESC, 0x852/0x853, +/-, arrows 0x850/0x848, alphabet match/miss, extended-key flush, separator/disabled skipping, empty table, same-menu/non-menu/other-menu events, mouse selection.",
+    "100 cases, seed 0x35f50384; valid null-terminated far tables with 1..7 labels; selected byte 0..item count; current-menu -1..3; screens 320/640/800 by 200/400/600; line-height 8..19 and character-width 6..12.",
+    "Valid far pointers and NUL strings, one valid DOS Ralloc block for original malloc(4000)/free, menu geometry arrays, deterministic host input/mouse/timer/display sinks. Recovered Event is eight words; routing forwards code,xE,h,v plus trailing zero."
+  ],
+  "compared_effects": [
+    "return",
+    "ordered host/helper calls",
+    "ordered input consumption",
+    "pointed rectangles and strings",
+    "global and pointed writes",
+    "all nonstack writes",
+    "caller ABI"
+  ],
+  "positive_control_id": "pc-o10_35F5_0384-GSaveRect",
+  "negative_control_id": "menu-next-option",
+  "limitations": [
+    "Finite recorded input/state domain and explicit host-service projection only; original backend implementation equivalence is not claimed."
+  ],
+  "source_hashes": {
+    "tools/behavior.py": "2c0799048057f59eae61a48be4d695278635594484adf0c70bf46c51b4e0c799",
+    "layout/functions.json": "6089a06e18fbe8f0960392cfe30357f7c19c886f38f10f7f115c72d127a756e7",
+    "layout/symbols.json": "0f5dd5b0a211945a97782cfccdb9bb31b0dfd07fcde5df4d4f9486b487eb0125",
+    "layout/oracle.lock.json": "2c6d9e98c688621ad49a08c78d0e0968f4076b036be56ec0738217b533ccde13",
+    "tools/archive/behavior-tutorial-menu-review-20261002/e018/source-inputs/S10_35F5_4b9dda15dbea.c": "4b9dda15dbea1c8fd204ed95d4cb6a909751a59d0517909e90c4626cad3c7888",
+    "tools/archive/behavior-tutorial-menu-review-20261002/canonical-root/m1CE2.c": "e5c2cb4b8dbe7af6d263072002a49e012b290c1082f0fc877b479728b75bacd3",
+    "tools/behavior_suites/archive/tutorial-menu-e01896c0b9f96741a0ef8d11b1cb3d5a1b26e62677327699a01bb4c05778ec7a.py": "e01896c0b9f96741a0ef8d11b1cb3d5a1b26e62677327699a01bb4c05778ec7a"
+  },
+  "boundary_abi": {
+    "stack_words": 2,
+    "register_args": [],
+    "callee_pop_bytes": 0
+  },
+  "boundary_call_count": 152,
+  "boundary_call_count_scope": "all 153 matched campaign cases",
+  "caller_effect_reasoning": "Surface acquisition is a host provider returning the explicit valid fixture pointer. Original g21A4 and allocator/driver state are omitted; caller consumes only that pointer for later matching restore. Complete rectangle/request order remains compared.",
+  "implementation_provenance": "HOST slot for original DOS entry root:1CE2:04C9 (far DOS entry; stack_words=2 register_args=[] callee_pop_bytes=0), canonical named entry GSaveRect; exact containing source definition/module is pinned at tools/archive/behavior-tutorial-menu-review-20261002/canonical-root/m1CE2.c SHA-256 e5c2cb4b8dbe7af6d263072002a49e012b290c1082f0fc877b479728b75bacd3, entry anchor GSaveRect. This does not assert absence of historical code. The original entry is a presentation/save-surface command. Fixture records ordered arguments and projected pointed rectangles/strings; physical framebuffer and driver-owned backing-surface state are backend effects. Caller control flow, return, globals and nonstack writes remain compared. Exact source definition span: tools/archive/behavior-tutorial-menu-review-20261002/canonical-root/m1CE2.c:166-182 (module SHA-256 e5c2cb4b8dbe7af6d263072002a49e012b290c1082f0fc877b479728b75bacd3).",
+  "host_boundary_identity": {
+    "kind": "HOST_SLOT",
+    "modeled_callback_name": "GSaveRect",
+    "original_dos_entry": {
+      "symbol": "GSaveRect",
+      "unit": "root",
+      "segment": "1CE2",
+      "offset": "04C9",
+      "alias_of": null
+    },
+    "canonical_name": "GSaveRect",
+    "abi": "far DOS entry; stack_words=2 register_args=[] callee_pop_bytes=0",
+    "boundary_abi": {
+      "stack_words": 2,
+      "register_args": [],
+      "callee_pop_bytes": 0
+    },
+    "canonical_source": {
+      "path": "tools/archive/behavior-tutorial-menu-review-20261002/canonical-root/m1CE2.c",
+      "sha256": "e5c2cb4b8dbe7af6d263072002a49e012b290c1082f0fc877b479728b75bacd3",
+      "anchor": "GSaveRect",
+      "start_line": 166,
+      "end_line": 182,
+      "definition_excerpt": "char far * far GSaveRect(struct Rect far *r)\n{\n    int x;\n    long size;\n    char far *p;\n\n    g_21A4 = 1;\n    x = r->left & ~7;\n    size = g_9140(x, r->top, r->right, r->bottom);\n    if (size > 0xffdc)\n        return 0;\n    p = f_171C_2190(size, \"GSaveRect\");\n    if (p)\n        g_9148(x, r->top, r->right, r->bottom, p);\n    g_21A4 = 0;\n    return p;\n}"
+    },
+    "role": "Fixture-provided platform input/timing/display/resource slot; this callback does not assert the original DOS helper is absent."
+  },
+  "omitted_backend_effects_reason": "Surface acquisition is a host provider returning the explicit valid fixture pointer. Original g21A4 and allocator/driver state are omitted; caller consumes only that pointer for later matching restore. Complete rectangle/request order remains compared."
+}

@@ -1,0 +1,156 @@
+{
+  "method": "normal MSC600AX compile with /Fc; tools/slots.py parse_listing; compare signed 16-bit local home against /B3 pre-C3 PR named record",
+  "flags_passed": [
+    "/AL",
+    "/Os",
+    "/Og",
+    "/Oe",
+    "/Zi",
+    "/Fc"
+  ],
+  "compile_c_required_flags": [
+    "/EM"
+  ],
+  "cases": [
+    {
+      "case": "toy-far-pointer",
+      "source": "work/takeover/compiler-ir/c2/sources/far-pointer.c",
+      "source_sha256": "d288e91fca39f8671b37db64c0032fa5cf4f555950337bca4ffa2f90e82007c4",
+      "profile": "msc600ax",
+      "flags_passed": [
+        "/AL",
+        "/Os",
+        "/Og",
+        "/Oe",
+        "/Zi",
+        "/Fc"
+      ],
+      "required_flags_appended_by_compile_c": [
+        "/EM"
+      ],
+      "listing_public": "_keep_ptr",
+      "listing_local_home": -4,
+      "listing_home_signed16_le_hex": "fc ff",
+      "listing_slots": {
+        "input": 6,
+        "saved": -4
+      },
+      "pr_file": "build/workers/c2_observability/b3/toy-far-pointer/IR/000352PR",
+      "pr_size": 146,
+      "pr_sha256": "ff7bcbeaf9f18f20830e4cdcc22976333df0cecfcaadce4ab19d768fc576166c",
+      "pr_summary_sha256": "ff7bcbeaf9f18f20830e4cdcc22976333df0cecfcaadce4ab19d768fc576166c",
+      "pr_name": "saved",
+      "pr_name_offset": 76,
+      "pr_named_record_window_start": 68,
+      "pr_named_record_window_hex": "00 00 06 00 00 00 09 01 73 61 76 65 64 00 80 c1 00 00 fc 00 00 00 00 0e 04 0a 64 00 00 01 02 01 00 04 06 05 00 00 01 02 01 02 04 08 05 00",
+      "full_signed16_home_occurrences_in_named_record_window": [],
+      "full_signed16_home_occurrences_in_entire_pr": [],
+      "matched_near_name_record": false
+    },
+    {
+      "case": "toy-far-pointer-renamed",
+      "source": "work/takeover/compiler-ir/c2/sources/far-pointer-renamed.c",
+      "source_sha256": "681baf53630449a7887817502f655693919644c1e9f482f87d839a518f7e39d6",
+      "profile": "msc600ax",
+      "flags_passed": [
+        "/AL",
+        "/Os",
+        "/Og",
+        "/Oe",
+        "/Zi",
+        "/Fc"
+      ],
+      "required_flags_appended_by_compile_c": [
+        "/EM"
+      ],
+      "listing_public": "_keep_ptr",
+      "listing_local_home": -4,
+      "listing_home_signed16_le_hex": "fc ff",
+      "listing_slots": {
+        "input": 6,
+        "payload": -4
+      },
+      "pr_file": "build/workers/c2_observability/b3/toy-far-pointer-renamed/IR/000352PR",
+      "pr_size": 148,
+      "pr_sha256": "95d622ee8fcd8fe8452fceaf7bb6b2cdecf9b431bae776ac251ebe830c525897",
+      "pr_summary_sha256": "95d622ee8fcd8fe8452fceaf7bb6b2cdecf9b431bae776ac251ebe830c525897",
+      "pr_name": "payload",
+      "pr_name_offset": 76,
+      "pr_named_record_window_start": 68,
+      "pr_named_record_window_hex": "00 00 06 00 00 00 09 01 70 61 79 6c 6f 61 64 00 80 c1 00 00 fc 00 00 00 00 0e 04 0a 64 00 00 01 02 01 00 04 06 05 00 00 01 02 01 02 04 08 05 00",
+      "full_signed16_home_occurrences_in_named_record_window": [],
+      "full_signed16_home_occurrences_in_entire_pr": [],
+      "matched_near_name_record": false
+    },
+    {
+      "case": "toy-long-home",
+      "source": "work/takeover/compiler-ir/c2/sources/long-home.c",
+      "source_sha256": "f6baf16c67ce397f7bb752dfbb8d14241a2af7253ed80f6d57f9509c214cb459",
+      "profile": "msc600ax",
+      "flags_passed": [
+        "/AL",
+        "/Os",
+        "/Og",
+        "/Oe",
+        "/Zi",
+        "/Fc"
+      ],
+      "required_flags_appended_by_compile_c": [
+        "/EM"
+      ],
+      "listing_public": "_keep_long",
+      "listing_local_home": -4,
+      "listing_home_signed16_le_hex": "fc ff",
+      "listing_slots": {
+        "input": 6,
+        "saved": -4
+      },
+      "pr_file": "build/workers/c2_observability/b3/toy-long-home/IR/000352PR",
+      "pr_size": 146,
+      "pr_sha256": "7b21924e8dd922e7e2f694a0499a66ab71eb001d7e98d8baab4db33f53f684c7",
+      "pr_summary_sha256": "7b21924e8dd922e7e2f694a0499a66ab71eb001d7e98d8baab4db33f53f684c7",
+      "pr_name": "saved",
+      "pr_name_offset": 76,
+      "pr_named_record_window_start": 68,
+      "pr_named_record_window_hex": "00 00 06 00 00 00 09 01 73 61 76 65 64 00 80 82 00 00 fc 00 00 00 00 0e 04 0a 64 00 00 01 02 01 00 04 06 05 00 00 01 02 01 02 04 08 05 00",
+      "full_signed16_home_occurrences_in_named_record_window": [],
+      "full_signed16_home_occurrences_in_entire_pr": [],
+      "matched_near_name_record": false
+    },
+    {
+      "case": "toy-word-home",
+      "source": "work/takeover/compiler-ir/c2/sources/word-home.c",
+      "source_sha256": "0a2e89f9822ddb1c64f0407f325553393dd66e4e4abd65ca4f54f8827171c636",
+      "profile": "msc600ax",
+      "flags_passed": [
+        "/AL",
+        "/Os",
+        "/Og",
+        "/Oe",
+        "/Zi",
+        "/Fc"
+      ],
+      "required_flags_appended_by_compile_c": [
+        "/EM"
+      ],
+      "listing_public": "_keep_word",
+      "listing_local_home": -2,
+      "listing_home_signed16_le_hex": "fe ff",
+      "listing_slots": {
+        "input": 6,
+        "saved": -2
+      },
+      "pr_file": "build/workers/c2_observability/b3/toy-word-home/IR/000352PR",
+      "pr_size": 137,
+      "pr_sha256": "7c239b21c9cabb79c052a572bb14bb88cb80c308ffbc4fbd21f87a1c98bd6955",
+      "pr_summary_sha256": "7c239b21c9cabb79c052a572bb14bb88cb80c308ffbc4fbd21f87a1c98bd6955",
+      "pr_name": "saved",
+      "pr_name_offset": 76,
+      "pr_named_record_window_start": 68,
+      "pr_named_record_window_hex": "00 00 06 00 00 00 09 01 73 61 76 65 64 00 80 81 00 00 fe 00 00 00 00 0e 04 0a 64 00 00 01 02 01 00 04 06 05 00 0f 1b 0f 1d 00 ce 02 01 06",
+      "full_signed16_home_occurrences_in_named_record_window": [],
+      "full_signed16_home_occurrences_in_entire_pr": [],
+      "matched_near_name_record": false
+    }
+  ]
+}

@@ -1,0 +1,26 @@
+{
+  "schema": "behavior-helper-cert-v1",
+  "helper": "WinPrintf",
+  "status": "CERTIFIED",
+  "kind": "DIAGNOSTIC_NONSEMANTIC_SINK",
+  "input_domain": [
+    "All variable-arity debug calls encountered in the valid DisplayCard resource fixtures."
+  ],
+  "compared_effects": [
+    "Call marker only; no formatted argument or output claim."
+  ],
+  "positive_control_id": "DisplayCard:positive:styled-text",
+  "negative_control_id": "negative/bitmap-link",
+  "limitations": [
+    "The primary hook records a diagnostic marker and does not capture printf args. The actual original WinPrintf is one RETF with no state/return promise; its four-case unhooked original-body check is archived. This certificate is not printf formatting proof."
+  ],
+  "source_hashes": {
+    "src/root/m277D.c": "6b7b7e4b468987b3ad3c869934df31e0e9325ab7e1771735d1e6113971047591"
+  },
+  "review": {
+    "status": "APPROVED",
+    "reviewer": "root",
+    "reviewed_at": "2026-10-02",
+    "reason": "Reviewed exact empty DOS WinPrintf body and ignored return at all DisplayCard debug call sites; four unhooked original-body comparisons corroborate no semantic effect."
+  }
+}

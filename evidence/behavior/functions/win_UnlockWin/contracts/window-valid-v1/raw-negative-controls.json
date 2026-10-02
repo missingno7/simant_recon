@@ -1,0 +1,44 @@
+{
+  "schema": "behavior-negative-controls-v1",
+  "function": "win_UnlockWin",
+  "suite_id": "window_recalc_integration_v1",
+  "identity": {
+    "source_sha256": "23aa124a97a2f213fcf99d0f3e9790e2a35813ee5e62d338f7ef205c5b03acc0",
+    "harness_sha256": "2c0799048057f59eae61a48be4d695278635594484adf0c70bf46c51b4e0c799",
+    "oracle_sha256": "aa0596c6766322a8229ee3c36e57048c92adc82d50fbe2ef37afb8b85fcf4f11",
+    "historical_manifest_sha256": "025a0a9255d910cae4b122ab5a3f3fb40888bb456d7fe42158db7c9e622fcf50",
+    "suite_sha256": "303df073f38e8bca72345d85b21031a11c147bb89c2fbe48514fc4ab9566d9f2"
+  },
+  "errors": 0,
+  "mismatches_detected": 1,
+  "controls": [
+    {
+      "id": "actual-unlock-wrong-threshold",
+      "target": "win_UnlockWin",
+      "executed": true,
+      "detected_mismatch": true,
+      "original_executed": true,
+      "mutant_executed": true,
+      "baseline_matches": true,
+      "mutant_differs": true,
+      "execution_errors": 0,
+      "mismatch_categories": [
+        "nonstack_memory",
+        "ranges",
+        "trace"
+      ],
+      "baseline_observation_sha256": "4f7f25eadf907b50d98f164e2e7216b01e848b5b6e821eff547454bebbb7f0ba",
+      "mutant_observation_sha256": "48deb16ba43f3827b940425cbc07915c6b2facc128bb90d2e4506e6153716406",
+      "mutant_source_sha256": "d77da615a90091207d341d984712a80ecf23531ebd250282e814ccae9767a4d2",
+      "mutant_source": {
+        "path": "build/workers/behavior_window/packet-proposals-final-20261002/win_UnlockWin/negative-artifacts/actual-unlock-wrong-threshold.c",
+        "sha256": "d77da615a90091207d341d984712a80ecf23531ebd250282e814ccae9767a4d2"
+      },
+      "mutant_object": {
+        "path": "build/workers/behavior_window/packet-proposals-final-20261002/win_UnlockWin/negative-artifacts/actual-unlock-wrong-threshold.obj",
+        "sha256": "926744a13bb8d57c303f278cf7b9c82b0b32ef9ff861fdb5406218d5843a3cbb"
+      },
+      "baseline_case_label": "unlock/positive"
+    }
+  ]
+}

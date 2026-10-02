@@ -1,0 +1,77 @@
+{
+  "boundary": "explicit callback implementation in tools/behavior_suites/text_card.py",
+  "callback_role": "CANONICAL_HELPER_ENTRY_HOOK",
+  "caller_effect_analysis": {
+    "caller_consumed_values": "window clip-selection request/order is recorded; resulting clip list/global pointers and pixel clipping are outside the logical draw-request contract",
+    "dynamic_caller_abi": null,
+    "external_state_not_claimed": [
+      "framebuffer pixels or bitmap decoding",
+      "clip intersections and pixel visibility",
+      "palette/driver color application",
+      "database cache, heap lock counters, and allocator lifetime"
+    ],
+    "no_omitted_effect_claim": "This proposal does not claim equivalence for listed external/backend effects; only the stated logical requests, projected text/rectangles, fixture return values, resource-byte consumption, and recorded ordering are in scope.",
+    "scope": "logical request and deterministic fixture boundary only",
+    "target_module_source": {
+      "path": "evidence/behavior/harnesses/behavior-text-card-review-20261002/runs/DisplayCard/module.c",
+      "sha256": "5e8e5f39325914cc1a6f1b5de9e5c894818e47d68a7ce594b2a514c99b37a1ea"
+    }
+  },
+  "canonical_symbol_abi_covered": true,
+  "compared_effects": [
+    "resource request/lock/size/unlock/purge order",
+    "ordered window, bitmap and text draw commands",
+    "projected draw text and coordinates",
+    "all nonstack memory",
+    "caller ABI"
+  ],
+  "dos_definition": {
+    "extent_bytes": 197,
+    "extent_status": "DESCENT",
+    "offset": 372,
+    "segment": 7767,
+    "unit": "root"
+  },
+  "dynamic_caller_abi": null,
+  "evidence": {
+    "negative_case_id": "negative/bitmap-link",
+    "negative_mismatch_categories": [
+      "state",
+      "trace"
+    ],
+    "positive_case_id": "styled-text",
+    "positive_observation_sha256": "963984772cb03d20662166b2ef12a4d8bb31c50bde806490924010269de0170f"
+  },
+  "execution_mode": "MODELED",
+  "helper": "clip_SetWin",
+  "input_domain": [
+    "missing card resource; valid unknown-record card; one bitmap with one hotspot; one plain text frame; one styled CHITIN text frame; seeded valid card streams of 1..8 P/T records, 0..6 in-range hotspot links per P record, 1..4 text frames, 1..4 sorted style runs, text resources, variable positive rectangles, fixed valid window geometry, and explicit font fallback metrics"
+  ],
+  "limitations": [
+    "window clip-selection request/order is recorded; resulting clip list/global pointers and pixel clipping are outside the logical draw-request contract",
+    "Proposal only; callback semantics require independent root review."
+  ],
+  "negative_control_id": "negative/bitmap-link",
+  "positive_control_id": "DisplayCard:positive:styled-text",
+  "proposal_status": "PENDING_ROOT_REVIEW",
+  "review": {
+    "reviewed_at": null,
+    "reviewer": null,
+    "status": "PENDING"
+  },
+  "schema": "behavior-helper-cert-v1",
+  "source_definition": {
+    "definition_line": 120,
+    "definition_name": "clip_SetWin",
+    "other_reference_lines": [],
+    "path": "src/root/m1E57.c",
+    "sha256": "812e8ec90bcf25c56adf073e753bf72f8f6a3bc108055e112c43f894e9d8d0c3"
+  },
+  "source_hashes": {
+    "evidence/behavior/harnesses/behavior-text-card-review-20261002/runs/DisplayCard/module.c": "5e8e5f39325914cc1a6f1b5de9e5c894818e47d68a7ce594b2a514c99b37a1ea",
+    "evidence/behavior/harnesses/ss-ds-window-v1/tools/behavior.py": "ee7c997d2f89efa85ce932cd5ac7c674c465f1013a16a8c08e83d43c69f4be5b",
+    "src/root/m1E57.c": "812e8ec90bcf25c56adf073e753bf72f8f6a3bc108055e112c43f894e9d8d0c3",
+    "tools/behavior_suites/archive/text-card-20261002-DisplayCard.py": "a5dfe315124bd942960e5cf892781ebfd479db8fbfe7b90e3d6b9febf89ca2be"
+  },
+  "status": "PROPOSED_PENDING_REVIEW"
+}

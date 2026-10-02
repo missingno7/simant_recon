@@ -1,0 +1,140 @@
+{
+  "boundary_alias": null,
+  "boundary_scope": "picture resource lifetime release trace",
+  "caller_dataflow_and_omissions": "canonical body looks up the handle and calls f_171C_15A2(handle,3). The caller has finished reading the picture at release. Modeled callback records release request only; backend DB/Ralloc firm/soft counters and heap changes are excluded.",
+  "compared_effects": [
+    "return and caller ABI",
+    "ordered helper/render commands and arguments",
+    "global/map/cache writes",
+    "projected far-pointer data and nonstack memory"
+  ],
+  "definition_source_sha256": {
+    "src/root/m1A53.c": "6bb066ea34c3721c90956a5b7e8849cb3c5916628a842c2684a8c0137154b698"
+  },
+  "execution_identity": {
+    "historical_manifest_sha256": "025a0a9255d910cae4b122ab5a3f3fb40888bb456d7fe42158db7c9e622fcf50",
+    "object_sha256": "2fecee4aeab85572334ab6954c86026e20c4ccbbfea06e0da9439e8996c8304b",
+    "oracle_sha256": "aa0596c6766322a8229ee3c36e57048c92adc82d50fbe2ef37afb8b85fcf4f11",
+    "runner_sha256": "2c0799048057f59eae61a48be4d695278635594484adf0c70bf46c51b4e0c799",
+    "source_sha256": "c4329ddb75629a235043d9da1eb11c7dd6f2cb3826fe392bfc8a27c98eeb97e1",
+    "suite_sha256": "d25a35e5a516d8f490bec1678e583c3a449c648b0a105a7bc32d3734841230df"
+  },
+  "execution_mode": "MODELED",
+  "function": "win_DrawBitMap",
+  "helper": "db_ReleaseObject",
+  "input_domain": [
+    "Bitmap resource type/shape/clip/mode handling, actual compressed type-3 decode helpers, and normalized display-buffer transfer calls.",
+    "Finite directed/random partition pinned in raw_input_partition and executed suite."
+  ],
+  "limitations": [
+    "The g_9140/g_9148 slots are synthetic 4-/6-argument host contracts reusing physical addresses for dispatch; they do not invoke same-named DOS functions with incompatible signatures. Pixel transfer/screen size is a deterministic virtual screen contract; no physical framebuffer. Original type-3 decoder bodies do execute.",
+    "Finite directed/random domain only; not universal proof.",
+    "No registry or canonical source modified.",
+    "canonical body looks up the handle and calls f_171C_15A2(handle,3). The caller has finished reading the picture at release. Modeled callback records release request only; backend DB/Ralloc firm/soft counters and heap changes are excluded.",
+    "This models only the named bounded host/logical request projection; it does not certify the full helper implementation."
+  ],
+  "negative_control_ids": [
+    "win_DrawBitMap/pixel-source-offset",
+    "win_DrawBitMap/draw-release-order"
+  ],
+  "observed_call_abi": "two stack words (object,kind)",
+  "positive_control": {
+    "candidate_observation_sha256": "69f644b49b9a12feb82a86b6f4173eb05d3299613e76ff876d68f8ff5808061f",
+    "case_id": "directed/type0-copy",
+    "id": "directed/type0-copy",
+    "input_sha256": "ff2e580d588cae3c8ac7a4d17b9663259769be861e24af9987edb96ab0075f91",
+    "object_sha256": "2fecee4aeab85572334ab6954c86026e20c4ccbbfea06e0da9439e8996c8304b",
+    "oracle_sha256": "aa0596c6766322a8229ee3c36e57048c92adc82d50fbe2ef37afb8b85fcf4f11",
+    "original_observation_sha256": "69f644b49b9a12feb82a86b6f4173eb05d3299613e76ff876d68f8ff5808061f",
+    "source_sha256": "c4329ddb75629a235043d9da1eb11c7dd6f2cb3826fe392bfc8a27c98eeb97e1"
+  },
+  "review": {
+    "status": "APPROVED",
+    "reviewer": "root",
+    "reviewed_at": "2026-10-02",
+    "reason": "Reviewed caller service ABI and source-specific omitted effects in the pinned audit. Only the explicit logical request/fixture projection is certified; the canonical backend body is not claimed executed."
+  },
+  "schema": "behavior-helper-cert-v1",
+  "source_definition": "void far db_ReleaseObject(unsigned int object,int kind)",
+  "source_hashes": {
+    "src/root/m259D.c": "c4329ddb75629a235043d9da1eb11c7dd6f2cb3826fe392bfc8a27c98eeb97e1",
+    "src/root/m277D.c": "6b7b7e4b468987b3ad3c869934df31e0e9325ab7e1771735d1e6113971047591"
+  },
+  "status": "CERTIFIED",
+  "positive_control_id": "directed/type0-copy",
+  "negative_control_id": "win_DrawBitMap/pixel-source-offset",
+  "raw_input_partition": {
+    "directed_cases": 15,
+    "fixture_and_sampling": "Bitmap resource type/shape/clip/mode handling, actual compressed type-3 decode helpers, and normalized display-buffer transfer calls.",
+    "partition": {
+      "display_families": [
+        0,
+        1,
+        2
+      ],
+      "display_modes": [
+        0,
+        1
+      ],
+      "missing_resource_cases": 2,
+      "picture_heights": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15
+      ],
+      "picture_widths": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        16,
+        17,
+        18,
+        19,
+        20,
+        21,
+        22,
+        23,
+        24
+      ],
+      "pixel_encodings": {
+        "type3/display0": "four one-bit planes, row bytes ceil(width/8)",
+        "type3/display1": "two one-bit planes, row bytes ceil(width/8)",
+        "type3/display2": "four-bit packed pixels, row bytes ceil(width/2)"
+      },
+      "resource_types": [
+        -32768,
+        -1,
+        0,
+        3
+      ]
+    },
+    "randomized_cases": 1000,
+    "seeds": [
+      48879
+    ]
+  }
+}

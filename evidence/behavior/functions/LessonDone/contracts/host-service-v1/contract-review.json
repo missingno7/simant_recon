@@ -1,0 +1,516 @@
+{
+  "schema": "behavior-contract-review-v1",
+  "status": "APPROVED",
+  "function": "LessonDone",
+  "module": "root:0E2E",
+  "source": "tools/archive/behavior-tutorial-menu-review-20261002/7043/source-inputs/root_0E2E_c611660dde4d.c",
+  "source_sha256": "c611660dde4da7117c3232aa06e597871394cc4112466d46559705b235424359",
+  "object_sha256": "679b972a9eae557c6aeeb09d7768f4b6bca858a04c035186fd5e68a8242b0453",
+  "oracle_sha256": "aa0596c6766322a8229ee3c36e57048c92adc82d50fbe2ef37afb8b85fcf4f11",
+  "harness_sha256": "2c0799048057f59eae61a48be4d695278635594484adf0c70bf46c51b4e0c799",
+  "manifest_sha256": "025a0a9255d910cae4b122ab5a3f3fb40888bb456d7fe42158db7c9e622fcf50",
+  "suite": "tools/behavior_suites/archive/tutorial-menu-7043a99e654807271bb186442b8105f63d05f50bf18174726ee7a9e47343e172.py",
+  "suite_id": "tutorial_menu_v1",
+  "date": "2026-10-02",
+  "checkpoint": {
+    "commit": "54cb824d19c2f897ab17c8b163a954121d4e4843",
+    "date": "2026-10-02"
+  },
+  "harness_snapshot": "tutorial-menu-20261002-7043",
+  "harness_snapshot_review": {
+    "status": "APPROVED",
+    "reviewer": "root",
+    "reviewed_at": "2026-10-02",
+    "reason": "Verified actual archived runner/suite identities and source snapshots, SS=DS reserved stack and enforced caller ABI. Original semantic helper bodies execute; named host providers are separately certified. Formatter normalization retains raw observations and the immutable proof graph."
+  },
+  "positive_controls": [
+    {
+      "id": "pc-LessonDone-InvalEuMap",
+      "case_id": "grid/30/fd_50F6_104E/1",
+      "executed": true,
+      "matched": true,
+      "execution_errors": 0,
+      "original_executed": true,
+      "candidate_executed": true,
+      "source_sha256": "c611660dde4da7117c3232aa06e597871394cc4112466d46559705b235424359",
+      "object_sha256": "679b972a9eae557c6aeeb09d7768f4b6bca858a04c035186fd5e68a8242b0453",
+      "oracle_sha256": "aa0596c6766322a8229ee3c36e57048c92adc82d50fbe2ef37afb8b85fcf4f11",
+      "input_sha256": "c7c70c2a21d130b25821aab4903594ca07482e7873ea6cdda8b17821f5872f4c",
+      "compared_effects": [
+        "return",
+        "ordered host/helper calls",
+        "ordered input consumption",
+        "pointed rectangles and strings",
+        "global and pointed writes",
+        "all nonstack writes",
+        "caller ABI"
+      ],
+      "original_observation_sha256": "cf7af7d853ff28370ce1aa0f5c53811a8578618955cb6e51f96f3951908d430b",
+      "candidate_observation_sha256": "cf7af7d853ff28370ce1aa0f5c53811a8578618955cb6e51f96f3951908d430b",
+      "observed_helper": "InvalEuMap",
+      "report": "build/workers/behavior_tutorial_menu/final_lesson_mapfix/report.json",
+      "report_sha256": "bc9ecc064ed636a64ad880a8089a1c1bd7d1edc1b4a59c8b01414a1ca6e08d09"
+    },
+    {
+      "id": "pc-LessonDone-TickCount",
+      "case_id": "grid/7/fd_50F6_1074/8",
+      "executed": true,
+      "matched": true,
+      "execution_errors": 0,
+      "original_executed": true,
+      "candidate_executed": true,
+      "source_sha256": "c611660dde4da7117c3232aa06e597871394cc4112466d46559705b235424359",
+      "object_sha256": "679b972a9eae557c6aeeb09d7768f4b6bca858a04c035186fd5e68a8242b0453",
+      "oracle_sha256": "aa0596c6766322a8229ee3c36e57048c92adc82d50fbe2ef37afb8b85fcf4f11",
+      "input_sha256": "610d3cdc183063528491bfdb9ffe5939706ff69ea62180a0438626bf12fc9611",
+      "compared_effects": [
+        "return",
+        "ordered host/helper calls",
+        "ordered input consumption",
+        "pointed rectangles and strings",
+        "global and pointed writes",
+        "all nonstack writes",
+        "caller ABI"
+      ],
+      "original_observation_sha256": "79ae4c185b062e873c2a36aa66e2a8284bf508121609f7551342950fdf53d439",
+      "candidate_observation_sha256": "79ae4c185b062e873c2a36aa66e2a8284bf508121609f7551342950fdf53d439",
+      "observed_helper": "TickCount",
+      "report": "build/workers/behavior_tutorial_menu/final_lesson_mapfix/report.json",
+      "report_sha256": "bc9ecc064ed636a64ad880a8089a1c1bd7d1edc1b4a59c8b01414a1ca6e08d09"
+    },
+    {
+      "id": "pc-LessonDone-f_22BF_0A22",
+      "case_id": "directed/10",
+      "executed": true,
+      "matched": true,
+      "execution_errors": 0,
+      "original_executed": true,
+      "candidate_executed": true,
+      "source_sha256": "c611660dde4da7117c3232aa06e597871394cc4112466d46559705b235424359",
+      "object_sha256": "679b972a9eae557c6aeeb09d7768f4b6bca858a04c035186fd5e68a8242b0453",
+      "oracle_sha256": "aa0596c6766322a8229ee3c36e57048c92adc82d50fbe2ef37afb8b85fcf4f11",
+      "input_sha256": "68e88993ff44a9429bf168d639013df8ff48ac2e4f8628318137a6b0f8267176",
+      "compared_effects": [
+        "return",
+        "ordered host/helper calls",
+        "ordered input consumption",
+        "pointed rectangles and strings",
+        "global and pointed writes",
+        "all nonstack writes",
+        "caller ABI"
+      ],
+      "original_observation_sha256": "df500a3767f54203a045b50dd5d594e77b913165ebc93439613446f5b267296d",
+      "candidate_observation_sha256": "df500a3767f54203a045b50dd5d594e77b913165ebc93439613446f5b267296d",
+      "observed_helper": "f_22BF_0A22",
+      "report": "build/workers/behavior_tutorial_menu/final_lesson_mapfix/report.json",
+      "report_sha256": "bc9ecc064ed636a64ad880a8089a1c1bd7d1edc1b4a59c8b01414a1ca6e08d09"
+    },
+    {
+      "id": "pc-LessonDone-win_SetObjSelectedState",
+      "case_id": "grid/30/fd_50F6_104E/1",
+      "executed": true,
+      "matched": true,
+      "execution_errors": 0,
+      "original_executed": true,
+      "candidate_executed": true,
+      "source_sha256": "c611660dde4da7117c3232aa06e597871394cc4112466d46559705b235424359",
+      "object_sha256": "679b972a9eae557c6aeeb09d7768f4b6bca858a04c035186fd5e68a8242b0453",
+      "oracle_sha256": "aa0596c6766322a8229ee3c36e57048c92adc82d50fbe2ef37afb8b85fcf4f11",
+      "input_sha256": "c7c70c2a21d130b25821aab4903594ca07482e7873ea6cdda8b17821f5872f4c",
+      "compared_effects": [
+        "return",
+        "ordered host/helper calls",
+        "ordered input consumption",
+        "pointed rectangles and strings",
+        "global and pointed writes",
+        "all nonstack writes",
+        "caller ABI"
+      ],
+      "original_observation_sha256": "cf7af7d853ff28370ce1aa0f5c53811a8578618955cb6e51f96f3951908d430b",
+      "candidate_observation_sha256": "cf7af7d853ff28370ce1aa0f5c53811a8578618955cb6e51f96f3951908d430b",
+      "observed_helper": "win_SetObjSelectedState",
+      "report": "build/workers/behavior_tutorial_menu/final_lesson_mapfix/report.json",
+      "report_sha256": "bc9ecc064ed636a64ad880a8089a1c1bd7d1edc1b4a59c8b01414a1ca6e08d09"
+    },
+    {
+      "id": "pc-LessonDone-MacTickCount",
+      "case_id": "grid/7/fd_50F6_1074/8",
+      "executed": true,
+      "matched": true,
+      "execution_errors": 0,
+      "original_executed": true,
+      "candidate_executed": true,
+      "source_sha256": "c611660dde4da7117c3232aa06e597871394cc4112466d46559705b235424359",
+      "object_sha256": "679b972a9eae557c6aeeb09d7768f4b6bca858a04c035186fd5e68a8242b0453",
+      "oracle_sha256": "aa0596c6766322a8229ee3c36e57048c92adc82d50fbe2ef37afb8b85fcf4f11",
+      "input_sha256": "610d3cdc183063528491bfdb9ffe5939706ff69ea62180a0438626bf12fc9611",
+      "compared_effects": [
+        "return",
+        "ordered host/helper calls",
+        "ordered input consumption",
+        "pointed rectangles and strings",
+        "global and pointed writes",
+        "all nonstack writes",
+        "caller ABI"
+      ],
+      "original_observation_sha256": "79ae4c185b062e873c2a36aa66e2a8284bf508121609f7551342950fdf53d439",
+      "candidate_observation_sha256": "79ae4c185b062e873c2a36aa66e2a8284bf508121609f7551342950fdf53d439",
+      "observed_helper": "MacTickCount",
+      "report": "build/workers/behavior_tutorial_menu/final_lesson_mapfix/report.json",
+      "report_sha256": "bc9ecc064ed636a64ad880a8089a1c1bd7d1edc1b4a59c8b01414a1ca6e08d09"
+    }
+  ],
+  "negative_controls": "tools/archive/behavior-tutorial-menu-review-20261002/7043/LessonDone/negative-controls.json",
+  "negative_control_ids": [
+    "lesson-strict-threshold"
+  ],
+  "helper_boundaries": [
+    {
+      "name": "InvalEuMap",
+      "execution_mode": "MODELED",
+      "executed_from_original": false,
+      "observed_call_count": 4,
+      "observed_call_count_scope": "all 2228 matched campaign cases",
+      "stack_words": 4,
+      "register_args": [],
+      "callee_pop_bytes": 0,
+      "certification": {
+        "path": "evidence/behavior/helpers/tutorial-contracts-v1/LessonDone/InvalEuMap.json",
+        "sha256": "b21d782925d82b2a7391c6b320261274916ad955b09dffa727e36cece628b5bb"
+      }
+    },
+    {
+      "name": "TickCount",
+      "execution_mode": "MODELED",
+      "executed_from_original": false,
+      "observed_call_count": 37,
+      "observed_call_count_scope": "all 2228 matched campaign cases",
+      "stack_words": 0,
+      "register_args": [],
+      "callee_pop_bytes": 0,
+      "certification": {
+        "path": "evidence/behavior/helpers/tutorial-contracts-v1/LessonDone/TickCount.json",
+        "sha256": "b2719b3442ffebeb42df9c9f1283e93e81a9357148388bf2606485ec313f6802"
+      }
+    },
+    {
+      "name": "f_22BF_0A22",
+      "execution_mode": "ORIGINAL_EXE",
+      "executed_from_original": true,
+      "observed_call_count": 235,
+      "observed_call_count_scope": "all 2228 matched campaign cases",
+      "stack_words": 0,
+      "register_args": [
+        "ax"
+      ],
+      "callee_pop_bytes": 0
+    },
+    {
+      "name": "win_SetObjSelectedState",
+      "execution_mode": "MODELED",
+      "executed_from_original": false,
+      "observed_call_count": 4,
+      "observed_call_count_scope": "all 2228 matched campaign cases",
+      "stack_words": 0,
+      "register_args": [
+        "ax",
+        "dx"
+      ],
+      "callee_pop_bytes": 0,
+      "certification": {
+        "path": "evidence/behavior/helpers/tutorial-contracts-v1/LessonDone/win_SetObjSelectedState.json",
+        "sha256": "33bc0d43638f28a7352d41921f0f5a7b6a1ee0d0c91163e863e3c59fe084c275"
+      }
+    },
+    {
+      "name": "MacTickCount",
+      "execution_mode": "ORIGINAL_EXE",
+      "executed_from_original": true,
+      "observed_call_count": 37,
+      "observed_call_count_scope": "original MacTickCount source body calls TickCount exactly once per invocation",
+      "stack_words": 0,
+      "register_args": [],
+      "callee_pop_bytes": 0
+    }
+  ],
+  "helper_certification_proposals": [
+    {
+      "helper": "InvalEuMap",
+      "path": "build/workers/behavior_tutorial_menu/final_lesson_mapfix/proposals/LessonDone/helper-cert-proposals-derived/InvalEuMap.json",
+      "sha256": "7d58ccdebaa1e79e68e530e1f460cc7c718561bf6481a50b4530c4db07362aef",
+      "status": "PROPOSED",
+      "observed_call_count": 4,
+      "boundary_abi": {
+        "stack_words": 4,
+        "register_args": [],
+        "callee_pop_bytes": 0
+      }
+    },
+    {
+      "helper": "TickCount",
+      "path": "build/workers/behavior_tutorial_menu/final_lesson_mapfix/proposals/LessonDone/helper-cert-proposals-derived/TickCount.json",
+      "sha256": "60f27f4a2c23f307846df83e1ce482d40eb32a895d763c14a0743575fe3461b4",
+      "status": "PROPOSED",
+      "observed_call_count": 37,
+      "boundary_abi": {
+        "stack_words": 0,
+        "register_args": [],
+        "callee_pop_bytes": 0
+      }
+    },
+    {
+      "helper": "win_SetObjSelectedState",
+      "path": "build/workers/behavior_tutorial_menu/final_lesson_mapfix/proposals/LessonDone/helper-cert-proposals-derived/win_SetObjSelectedState.json",
+      "sha256": "fcf68f1e024470720752193631b971734abb2aab19876dfc292428b895bb4e89",
+      "status": "PROPOSED",
+      "observed_call_count": 4,
+      "boundary_abi": {
+        "stack_words": 0,
+        "register_args": [
+          "ax",
+          "dx"
+        ],
+        "callee_pop_bytes": 0
+      }
+    }
+  ],
+  "contract": {
+    "id": "lesson-done-v1",
+    "input_domain": {
+      "directed": "1,728 cases: lesson argument -2..59, 0x7fff, -0x8000 plus one-at-a-time partitions over MePlane={0,1,2,3}, counters={9,10,11}, tutorial booleans, fd_50F6_1074={8,9,10}, fd_50F6_04C2={0x10,0x18,0x28}, modeLevels, b12 and map-position predicates. MapA is initialized as 128x64 bytes with a 64-byte row stride and lesson-13 cell [4][5] set above/below threshold. The 32-bit fd_50F6_0204 threshold has base -1 and partitions {9,10,0x10000}; top-window state g_5702[0] is varied across signed -32768, 0, 0x0100, 0x1200, 0x1300 and 0x0200.",
+      "randomized": "500 cases, seed 0x3bdb05da; lesson -4..63, initialized 128x64 MapA with 64-byte row stride, bounded signed counters/coordinates and byte fields; clock request is two uint16 words mapped through inverse 3 modulo 2**32 to TickCount; fd_50F6_0204 spans signed 32-bit values; g_5702[0] is sampled from signed -32768, 0, 0x0100, 0x1200, 0x1300 and 0x0200.",
+      "fixture": "Whole-module root:0E2E state. Original MacTickCount (f_00F8_02BE alias) executes TickCount()*3; only TickCount is modeled. f_22BF_0A22 uses fastcall AX and continues through the original canonical win_IsWinInFront body reading seeded g_5702[0]. No synthetic completion dictionary is used. MapA uses the original 128x64 row-major layout and the target-valid sampled coordinate domain. SetAlarmDropState and other semantic helpers execute original code; Win16 object-selection and map-invalidation are host sinks."
+    },
+    "limits": [
+      "Finite deterministic/fixed-seed domains; no universal proof.",
+      "Host driver, BIOS/input scheduling, arbitrary RTLink overlay sequences and full framebuffer are outside this contract."
+    ],
+    "required_effects": [
+      "return",
+      "ordered host/helper calls",
+      "ordered input consumption",
+      "pointed rectangles and strings",
+      "global and pointed writes",
+      "all nonstack writes",
+      "caller ABI"
+    ],
+    "excluded_effects": [
+      {
+        "effect": "reserved call-stack homes and dead locals",
+        "reason": "Caller ABI, call effects, pointed data, globals and all nonstack writes remain compared."
+      },
+      {
+        "effect": "host input queues/hooks, clock ISR scheduling, presentation pen/glyph/surface state and backend allocation bookkeeping",
+        "reason": "Source-specific per-helper root certificates identify every omitted backend effect. Public input results, queue consumption, logical requests and all caller own writes remain compared; the callers do not directly consume these backend fields."
+      }
+    ],
+    "required_helpers": [
+      {
+        "name": "InvalEuMap",
+        "must_execute": true,
+        "certification": {
+          "path": "evidence/behavior/helpers/tutorial-contracts-v1/LessonDone/InvalEuMap.json",
+          "sha256": "b21d782925d82b2a7391c6b320261274916ad955b09dffa727e36cece628b5bb"
+        }
+      },
+      {
+        "name": "TickCount",
+        "must_execute": true,
+        "certification": {
+          "path": "evidence/behavior/helpers/tutorial-contracts-v1/LessonDone/TickCount.json",
+          "sha256": "b2719b3442ffebeb42df9c9f1283e93e81a9357148388bf2606485ec313f6802"
+        }
+      },
+      {
+        "name": "f_22BF_0A22",
+        "must_execute": true
+      },
+      {
+        "name": "win_SetObjSelectedState",
+        "must_execute": true,
+        "certification": {
+          "path": "evidence/behavior/helpers/tutorial-contracts-v1/LessonDone/win_SetObjSelectedState.json",
+          "sha256": "33bc0d43638f28a7352d41921f0f5a7b6a1ee0d0c91163e863e3c59fe084c275"
+        }
+      },
+      {
+        "name": "MacTickCount",
+        "must_execute": true
+      }
+    ],
+    "implementation_views": [],
+    "review": {
+      "status": "APPROVED",
+      "reviewer": "root",
+      "reviewed_at": "2026-10-02",
+      "reason": "Read target C and all unique reached helper definitions/ABIs. Verified tutorial original map stride/32-bit thresholds/top-window queries and original MacTickCount arithmetic; reviewed menu/question input providers, pointed rendering data, exact stream-view proof graph and compiled caller mutants. This certifies the finite host-service contract and preserves historical EXACT separately."
+    }
+  },
+  "historical_difference": {
+    "description": "length 727 != target 723; bytes differ (first at +0x14, 527 differing); relocation set differs (9 vs 9)",
+    "reason_exact_stopped": "Whole-module seed is behaviorally compared while target bytes, extent or relocations remain inexact; the behavioral proof does not alter historical exactness.",
+    "evidence_refs": [
+      "work/takeover/hardtail/catalog.json",
+      "docs/behavioral-proof.md"
+    ]
+  },
+  "semantic_evidence": [
+    "Every pinned case executed the original DOS function and the compiler-produced whole module.",
+    "The same-input unchanged baseline matched in each source-mutant control, then the compiled mutant differed.",
+    "Every explicit callback boundary has source, execution mode, observed invocation count and ABI pinned in callback-boundary-audit.json.",
+    "Unintercepted semantic helpers continue through the original DOS image.",
+    "S10 cases retain raw hashes/differences and the root-approved typed view and proof-graph pins; contract review remains pending.",
+    "Alias/ABI audit pins symbols.alias_of for f_00F8_02BE\u00e2\u2020\u2019MacTickCount and f_22BF_0A22\u00e2\u2020\u2019win_IsWinInFront, with canonical source/hash, exact caller ABIs and corrected four-byte threshold observations.",
+    "Focused ABI and width controls: build/workers/behavior_tutorial_menu/final_lesson_mapfix/abi-boundary-probes.json SHA-256 4dcc720db294c1dee2a942959b552f2bb32b1c7411d2b8169b445e090f7c3012; proves both original top-window outcomes, original MacTickCount high-word arithmetic, and fd_50F6_0204 high-word threshold handling.",
+    "MapA fixture shape/stride are pinned by the whole-module declaration and the 128x64 focused true/false lesson-13 probes; no truncated 64x32 map buffer is used.",
+    "Executed run evidence: build/workers/behavior_tutorial_menu/final_lesson_mapfix/proposals/LessonDone/run.json SHA-256 5e9db6564466635b7dc87ed5e96b632c99b69c5ed53c08df53f083f3c9954552.",
+    "Executed case ledger: build/workers/behavior_tutorial_menu/final_lesson_mapfix/LessonDone.jsonl.gz SHA-256 bf92beb70bb305b2c5ec643b464cde85a7063af377ea816552bf80ee27fb03c1.",
+    "Archived suite bytecopy: tools/behavior_suites/archive/tutorial-menu-7043a99e654807271bb186442b8105f63d05f50bf18174726ee7a9e47343e172.py SHA-256 7043a99e654807271bb186442b8105f63d05f50bf18174726ee7a9e47343e172.",
+    "Archived target source: tools/archive/behavior-tutorial-menu-review-20261002/7043/source-inputs/root_0E2E_c611660dde4d.c SHA-256 c611660dde4da7117c3232aa06e597871394cc4112466d46559705b235424359.",
+    "Negative-control record: tools/archive/behavior-tutorial-menu-review-20261002/7043/LessonDone/negative-controls.json SHA-256 8082ea9bffb8488c7b5fdeb8eeac98392a4d9f8000c1b24d7dafe61dfec6aa4b; IDs lesson-strict-threshold."
+  ],
+  "artifacts": [
+    {
+      "name": "tested-source-snapshot",
+      "path": "tools/archive/behavior-tutorial-menu-review-20261002/7043/source-inputs/root_0E2E_c611660dde4d.c",
+      "sha256": "c611660dde4da7117c3232aa06e597871394cc4112466d46559705b235424359"
+    },
+    {
+      "name": "executed-suite",
+      "path": "tools/behavior_suites/archive/tutorial-menu-7043a99e654807271bb186442b8105f63d05f50bf18174726ee7a9e47343e172.py",
+      "sha256": "7043a99e654807271bb186442b8105f63d05f50bf18174726ee7a9e47343e172"
+    },
+    {
+      "name": "negative-controls",
+      "path": "tools/archive/behavior-tutorial-menu-review-20261002/7043/LessonDone/negative-controls.json",
+      "sha256": "8082ea9bffb8488c7b5fdeb8eeac98392a4d9f8000c1b24d7dafe61dfec6aa4b"
+    },
+    {
+      "name": "run-evidence",
+      "path": "build/workers/behavior_tutorial_menu/final_lesson_mapfix/proposals/LessonDone/run.json",
+      "sha256": "5e9db6564466635b7dc87ed5e96b632c99b69c5ed53c08df53f083f3c9954552"
+    },
+    {
+      "name": "suite-report",
+      "path": "build/workers/behavior_tutorial_menu/final_lesson_mapfix/report.json",
+      "sha256": "bc9ecc064ed636a64ad880a8089a1c1bd7d1edc1b4a59c8b01414a1ca6e08d09"
+    },
+    {
+      "name": "case-ledger",
+      "path": "build/workers/behavior_tutorial_menu/final_lesson_mapfix/LessonDone.jsonl.gz",
+      "sha256": "bf92beb70bb305b2c5ec643b464cde85a7063af377ea816552bf80ee27fb03c1"
+    },
+    {
+      "name": "callback_boundary_audit",
+      "path": "build/workers/behavior_tutorial_menu/final_lesson_mapfix/callback-boundary-audit.json",
+      "sha256": "99a7531dd9567a79fb870e37e8fca0ca7747695c8aecc345504bcdf245fff8be"
+    },
+    {
+      "name": "positive_boundary_cases",
+      "path": "build/workers/behavior_tutorial_menu/final_lesson_mapfix/positive-boundary-cases.json",
+      "sha256": "a524fcfa5617b7aafdff1061497f1f01eca9d344e7548d2cb1cbde44d3b10b9d"
+    },
+    {
+      "name": "retained_input_bundle",
+      "path": "evidence/behavior/harnesses/tutorial-menu-20261002-7043/bundle.json",
+      "sha256": "1fd59bb75ad283fc11ed96206835afb2a973b2937de15378b221afacfd95fde0"
+    },
+    {
+      "name": "abi_boundary_probes",
+      "path": "build/workers/behavior_tutorial_menu/final_lesson_mapfix/abi-boundary-probes.json",
+      "sha256": "4dcc720db294c1dee2a942959b552f2bb32b1c7411d2b8169b445e090f7c3012"
+    },
+    {
+      "name": "helper_alias_abi_audit",
+      "path": "build/workers/behavior_tutorial_menu/helper-alias-abi-audit.json",
+      "sha256": "1ce37f3751b4660758892d0b49eeb0f1831c7f11099ba1e4c0df207bbb0a27cd"
+    },
+    {
+      "name": "archived_source_snapshot",
+      "path": "tools/archive/behavior-tutorial-menu-review-20261002/7043/source-inputs/root_0E2E_c611660dde4d.c",
+      "sha256": "c611660dde4da7117c3232aa06e597871394cc4112466d46559705b235424359"
+    },
+    {
+      "name": "archived_suite",
+      "path": "tools/archive/behavior-tutorial-menu-review-20261002/7043/source-inputs/tutorial_menu.py",
+      "sha256": "7043a99e654807271bb186442b8105f63d05f50bf18174726ee7a9e47343e172"
+    },
+    {
+      "name": "archived_negative_controls",
+      "path": "tools/archive/behavior-tutorial-menu-review-20261002/7043/LessonDone/negative-controls.json",
+      "sha256": "8082ea9bffb8488c7b5fdeb8eeac98392a4d9f8000c1b24d7dafe61dfec6aa4b"
+    },
+    {
+      "name": "helper-cert-InvalEuMap",
+      "path": "build/workers/behavior_tutorial_menu/final_lesson_mapfix/proposals/LessonDone/helper-cert-proposals-derived/InvalEuMap.json",
+      "sha256": "7d58ccdebaa1e79e68e530e1f460cc7c718561bf6481a50b4530c4db07362aef"
+    },
+    {
+      "name": "helper-cert-TickCount",
+      "path": "build/workers/behavior_tutorial_menu/final_lesson_mapfix/proposals/LessonDone/helper-cert-proposals-derived/TickCount.json",
+      "sha256": "60f27f4a2c23f307846df83e1ce482d40eb32a895d763c14a0743575fe3461b4"
+    },
+    {
+      "name": "helper-cert-win_SetObjSelectedState",
+      "path": "build/workers/behavior_tutorial_menu/final_lesson_mapfix/proposals/LessonDone/helper-cert-proposals-derived/win_SetObjSelectedState.json",
+      "sha256": "fcf68f1e024470720752193631b971734abb2aab19876dfc292428b895bb4e89"
+    },
+    {
+      "name": "original-review-proposal",
+      "path": "build/workers/behavior_tutorial_menu/final_lesson_mapfix/proposals/LessonDone/contract-review.proposal.json",
+      "sha256": "7c1728ed8bfe34afc66109365655cff95ffe4d2c8d7cb489718de4b51ec63760"
+    }
+  ],
+  "run_report": {
+    "path": "build/workers/behavior_tutorial_menu/final_lesson_mapfix/proposals/LessonDone/run.json",
+    "sha256": "5e9db6564466635b7dc87ed5e96b632c99b69c5ed53c08df53f083f3c9954552"
+  },
+  "case_ledger": {
+    "path": "build/workers/behavior_tutorial_menu/final_lesson_mapfix/LessonDone.jsonl.gz",
+    "sha256": "bf92beb70bb305b2c5ec643b464cde85a7063af377ea816552bf80ee27fb03c1"
+  },
+  "review_inputs": {
+    "callback_boundary_audit": {
+      "path": "build/workers/behavior_tutorial_menu/final_lesson_mapfix/callback-boundary-audit.json",
+      "sha256": "99a7531dd9567a79fb870e37e8fca0ca7747695c8aecc345504bcdf245fff8be"
+    },
+    "positive_boundary_cases": {
+      "path": "build/workers/behavior_tutorial_menu/final_lesson_mapfix/positive-boundary-cases.json",
+      "sha256": "a524fcfa5617b7aafdff1061497f1f01eca9d344e7548d2cb1cbde44d3b10b9d"
+    },
+    "retained_input_bundle": {
+      "path": "evidence/behavior/harnesses/tutorial-menu-20261002-7043/bundle.json",
+      "sha256": "1fd59bb75ad283fc11ed96206835afb2a973b2937de15378b221afacfd95fde0"
+    },
+    "abi_boundary_probes": {
+      "path": "build/workers/behavior_tutorial_menu/final_lesson_mapfix/abi-boundary-probes.json",
+      "sha256": "4dcc720db294c1dee2a942959b552f2bb32b1c7411d2b8169b445e090f7c3012"
+    },
+    "helper_alias_abi_audit": {
+      "path": "build/workers/behavior_tutorial_menu/helper-alias-abi-audit.json",
+      "sha256": "1ce37f3751b4660758892d0b49eeb0f1831c7f11099ba1e4c0df207bbb0a27cd"
+    },
+    "archived_source_snapshot": {
+      "path": "tools/archive/behavior-tutorial-menu-review-20261002/7043/source-inputs/root_0E2E_c611660dde4d.c",
+      "sha256": "c611660dde4da7117c3232aa06e597871394cc4112466d46559705b235424359"
+    },
+    "archived_suite": {
+      "path": "tools/archive/behavior-tutorial-menu-review-20261002/7043/source-inputs/tutorial_menu.py",
+      "sha256": "7043a99e654807271bb186442b8105f63d05f50bf18174726ee7a9e47343e172"
+    },
+    "archived_negative_controls": {
+      "path": "tools/archive/behavior-tutorial-menu-review-20261002/7043/LessonDone/negative-controls.json",
+      "sha256": "8082ea9bffb8488c7b5fdeb8eeac98392a4d9f8000c1b24d7dafe61dfec6aa4b"
+    }
+  },
+  "review_provenance": {
+    "derived_from": "build/workers/behavior_tutorial_menu/final_lesson_mapfix/proposals/LessonDone/contract-review.proposal.json",
+    "original_proposal_sha256": "7c1728ed8bfe34afc66109365655cff95ffe4d2c8d7cb489718de4b51ec63760",
+    "run_identity_source_sha256": "c611660dde4da7117c3232aa06e597871394cc4112466d46559705b235424359",
+    "run_identity_suite_sha256": "7043a99e654807271bb186442b8105f63d05f50bf18174726ee7a9e47343e172"
+  },
+  "root_review_inputs": {
+    "path": "build/workers/behavior_tutorial_menu/final_lesson_mapfix/proposals/LessonDone/contract-review.derived.pending.json",
+    "sha256": "13fdf7122962ae31d7f972616a4ddacf4dd7bc363aeef8bcd5dd9d6870719457"
+  }
+}

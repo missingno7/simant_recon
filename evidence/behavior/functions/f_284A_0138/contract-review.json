@@ -1,0 +1,55 @@
+{
+  "function": "f_284A_0138",
+  "source": "work/takeover/hardtail/seeds/root_284A_5d328bf943dd.c",
+  "suite": "tools/behavior_suites/archive/small-contracts-finalmanifest-20261002.py",
+  "module": "root:284A",
+  "negative_controls": "build/workers/behavior_small_contracts_finalmanifest/negative-controls-midi.json",
+  "date": "2026-10-02",
+  "checkpoint": {
+    "commit": "54cb824d19c2f897ab17c8b163a954121d4e4843",
+    "date": "2026-10-02"
+  },
+  "contract": {
+    "id": "small_contracts_v1",
+    "input_domain": {
+      "directed": "538 cases: every high/low byte lane value, five segment-end offsets, endian boundaries and an FFFF offset with a distinct carry-segment decoy",
+      "randomized": "20000 deterministic pairs with arbitrary byte values and near/far offset extremes; seed recorded by execution ledger",
+      "valid_state": "song base g8DFC points to an accessible 64KB segment; all 16-bit offsets including wrapped second byte"
+    },
+    "limits": [
+      "No malformed song segment pointers; caller-visible result and unchanged memory are the contract."
+    ],
+    "required_effects": [
+      "return word",
+      "based-segment byte reads including offset wrap",
+      "all non-stack writes and final bytes",
+      "preserved caller registers and stack"
+    ],
+    "excluded_effects": [
+      {
+        "effect": "volatile register assignments and unused local stack bytes",
+        "reason": "No value crosses the caller or I/O boundary; return, preserved ABI, actual commands and all nonstack writes are compared."
+      }
+    ],
+    "required_helpers": [],
+    "review": {
+      "status": "APPROVED",
+      "reviewer": "lead reconstruction engineer /root",
+      "reviewed_at": "2026-10-02"
+    }
+  },
+  "historical_difference": {
+    "description": "25-byte target/candidate with historical AH/AL assignment differences; both read high byte then low byte using 16-bit based-pointer offset wrap.",
+    "reason_exact_stopped": "The natural source contract is verified against original execution; residual historical codegen identity stays separately unresolved.",
+    "evidence_refs": [
+      "work/takeover/hardtail/all-open.json",
+      "work/takeover/hardtail/seeds/root_284A_5d328bf943dd.c"
+    ]
+  },
+  "semantic_evidence": [
+    "Reviewed natural C SONG(off)<<8 | SONG(off+1), retaining MSC16 integer and based-pointer semantics.",
+    "Actual original function executes without helper models.",
+    "Segment FFFF wrap uses A000:0000; distinct B000:0000 decoy proves no linear carry.",
+    "Compiled source mutation swaps byte order and is detected."
+  ]
+}

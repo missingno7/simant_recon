@@ -1,0 +1,36 @@
+{
+ "schema": 1,
+ "main_commit": "54cb824d19c2f897ab17c8b163a954121d4e4843",
+ "manifest_sha256": "c2850fb5d252bd490bb9d0d2994e1463b25a5e6a4f187ed4f4730dcf91e2f4fd",
+ "functions": 29,
+ "unresolved_game_code_bytes": 15355,
+ "unresolved_game_data_bytes": 129,
+ "accepted_new_functions": 0,
+ "synthetic_or_workaround_promotions": 0,
+ "normalized_skeleton_matches": [
+  "f_0250_129E",
+  "f_171C_0CF4",
+  "o15_384C_0239",
+  "o25_3BA4_1035"
+ ],
+ "experiment_rows": 102,
+ "compiled_rows": 102,
+ "diagnostic_failures_in_historical_rows": 51,
+ "strict_exact_rows": 0,
+ "validation": "PASS",
+ "hybrid": "byte-identical",
+ "hybrid_sha256": "aa0596c6766322a8229ee3c36e57048c92adc82d50fbe2ef37afb8b85fcf4f11",
+ "authority": "DIAGNOSTIC_ONLY; no promotion or frozen historical oracle",
+ "known_open_function_bytes": 15039,
+ "unresolved_code_outside_known_open_functions_bytes": 316,
+ "nonfunction_code_accounting_by_provenance_class": {
+  "LINK_FILL": 246,
+  "debt:game_code": 22,
+  "debt:text_prefix16": 16,
+  "debt:overlay_code": 32
+ },
+ "validation_tests": 240,
+ "validation_skips": 2,
+ "codegen_probes_reproduced": 48,
+ "compiler_instrumentation_scope": "Candidate C1 and post-C2 streams captured by pass overrides; no production binary modification; partial grammar only"
+}

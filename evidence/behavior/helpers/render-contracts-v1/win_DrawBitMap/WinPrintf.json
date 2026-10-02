@@ -1,0 +1,26 @@
+{
+  "schema": "behavior-helper-cert-v1",
+  "helper": "WinPrintf",
+  "status": "CERTIFIED",
+  "kind": "DIAGNOSTIC_NONSEMANTIC_SINK",
+  "input_domain": [
+    "Variable-arity debug calls in the recorded valid resource domain."
+  ],
+  "compared_effects": [
+    "Diagnostic call marker only; no formatting/output claim."
+  ],
+  "positive_control_id": "directed/missing",
+  "negative_control_id": "win_DrawBitMap/pixel-source-offset",
+  "limitations": [
+    "Canonical WinPrintf is an empty RETF. Return is ignored at these call sites. The hook does not capture complete variadic arguments and is not formatting proof."
+  ],
+  "source_hashes": {
+    "src/root/m277D.c": "6b7b7e4b468987b3ad3c869934df31e0e9325ab7e1771735d1e6113971047591"
+  },
+  "review": {
+    "status": "APPROVED",
+    "reviewer": "root",
+    "reviewed_at": "2026-10-02",
+    "reason": "Read canonical empty WinPrintf definition and all target call sites; diagnostic return is never consumed."
+  }
+}

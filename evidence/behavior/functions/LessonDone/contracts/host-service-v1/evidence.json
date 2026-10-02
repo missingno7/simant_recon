@@ -1,0 +1,286 @@
+{
+  "schema": "simant-behavior-evidence-v1",
+  "function": "LessonDone",
+  "status": "BEHAVIOR_EXACT",
+  "source": {
+    "path": "evidence/behavior/functions/LessonDone/contracts/host-service-v1/module.c",
+    "sha256": "c611660dde4da7117c3232aa06e597871394cc4112466d46559705b235424359",
+    "whole_module": true,
+    "module": "root:0E2E"
+  },
+  "suite": {
+    "path": "tools/behavior_suites/archive/tutorial-menu-7043a99e654807271bb186442b8105f63d05f50bf18174726ee7a9e47343e172.py",
+    "sha256": "7043a99e654807271bb186442b8105f63d05f50bf18174726ee7a9e47343e172",
+    "id": "tutorial_menu_v1"
+  },
+  "harness": {
+    "runner": {
+      "path": "evidence/behavior/harnesses/tutorial-menu-20261002-7043/tools/behavior.py",
+      "sha256": "2c0799048057f59eae61a48be4d695278635594484adf0c70bf46c51b4e0c799"
+    },
+    "components": {
+      "tools/exe.py": {
+        "path": "evidence/behavior/harnesses/tutorial-menu-20261002-7043/tools/exe.py",
+        "sha256": "d560f69dcdf0d1c9e89278b50bebe225a9b86db2c259fa54ec9eace6ea05a8b5"
+      },
+      "tools/functions.py": {
+        "path": "evidence/behavior/harnesses/tutorial-menu-20261002-7043/tools/functions.py",
+        "sha256": "0f67c8d9eb01e319620c9342e79c35f76006091d860894aad6dcf8d61ee2b39e"
+      },
+      "tools/match.py": {
+        "path": "evidence/behavior/harnesses/tutorial-menu-20261002-7043/tools/match.py",
+        "sha256": "44fdd8b939b2bbf135d8947d8f6ef6b1854dec133da4af86c55eb94f02869b56"
+      },
+      "tools/modctx.py": {
+        "path": "evidence/behavior/harnesses/tutorial-menu-20261002-7043/tools/modctx.py",
+        "sha256": "33f3a4e3d77371e3095bfeb00358c13bc7838235c27bfe8898dba7e313f1cc25"
+      },
+      "tools/modules.py": {
+        "path": "evidence/behavior/harnesses/tutorial-menu-20261002-7043/tools/modules.py",
+        "sha256": "8a5c1e85db6970cce3c693c016b313b7ee1922fa6eaf146a00391bfea86edf1a"
+      },
+      "tools/autosearch.py": {
+        "path": "evidence/behavior/harnesses/tutorial-menu-20261002-7043/tools/autosearch.py",
+        "sha256": "9c2727a875ee94c66ceac868d64c7070c316a5dbbef7cd6b21a670b44a2e1806"
+      },
+      "tools/compiler.py": {
+        "path": "evidence/behavior/harnesses/tutorial-menu-20261002-7043/tools/compiler.py",
+        "sha256": "ef1d59a0fbe0e0780a6b8480e13d7d07859a14ae185c00a4420e1238a2ae35bb"
+      },
+      "tools/omf.py": {
+        "path": "evidence/behavior/harnesses/tutorial-menu-20261002-7043/tools/omf.py",
+        "sha256": "951137ecbfaeb6e40fd5230c94398141da7ec7bdb7399d9cd74d46ded3045612"
+      },
+      "tools/symbols.py": {
+        "path": "evidence/behavior/harnesses/tutorial-menu-20261002-7043/tools/symbols.py",
+        "sha256": "e3f25fb66717f743dea126e56b5b44538d452fb5a2d52695ef27cb5069bc1793"
+      },
+      "tools/lockfile.py": {
+        "path": "evidence/behavior/harnesses/tutorial-menu-20261002-7043/tools/lockfile.py",
+        "sha256": "6773cd28150381c88a781862d0034e2ff0023c21e82aff7fad5358efb1bf34c5"
+      },
+      "tools/csrc.py": {
+        "path": "evidence/behavior/harnesses/tutorial-menu-20261002-7043/tools/csrc.py",
+        "sha256": "3b13b7dbc17f39cbca7f329a3043ff363f91279c12312ba865941653c412567c"
+      },
+      "tools/srcrules.py": {
+        "path": "evidence/behavior/harnesses/tutorial-menu-20261002-7043/tools/srcrules.py",
+        "sha256": "e34f8bd91d224df26b5981acd9316b00bdf96e3dcc28e744aaebfc466046fc30"
+      },
+      "tools/variants.py": {
+        "path": "evidence/behavior/harnesses/tutorial-menu-20261002-7043/tools/variants.py",
+        "sha256": "b5dfd77ba5a96649d3e1503c1619b7fa6d9edc5f32c1f7684361fbfa59fa55c9"
+      },
+      "layout/toolchain.json": {
+        "path": "evidence/behavior/harnesses/tutorial-menu-20261002-7043/layout/toolchain.json",
+        "sha256": "c0bb71cd8b1f4a1a1f91299bd3b6148aa67b7a1d12c3c3946a229272593eb274"
+      },
+      "tools/behavior_ledger.py": {
+        "path": "evidence/behavior/harnesses/tutorial-menu-20261002-7043/tools/behavior_ledger.py",
+        "sha256": "6788ec00f1c02fd93d98b96b4c8d61d2b704c97308b2c3f4024bc3095e76395f"
+      }
+    },
+    "runner_snapshot_review": {
+      "status": "APPROVED",
+      "reviewer": "root",
+      "reviewed_at": "2026-10-02",
+      "reason": "Verified actual archived runner/suite identities and source snapshots, SS=DS reserved stack and enforced caller ABI. Original semantic helper bodies execute; named host providers are separately certified. Formatter normalization retains raw observations and the immutable proof graph.",
+      "runner_snapshot_reviewed": true,
+      "archived_components": [
+        {
+          "component": "tools/exe.py",
+          "path": "evidence/behavior/harnesses/tutorial-menu-20261002-7043/tools/exe.py",
+          "sha256": "d560f69dcdf0d1c9e89278b50bebe225a9b86db2c259fa54ec9eace6ea05a8b5"
+        },
+        {
+          "component": "tools/functions.py",
+          "path": "evidence/behavior/harnesses/tutorial-menu-20261002-7043/tools/functions.py",
+          "sha256": "0f67c8d9eb01e319620c9342e79c35f76006091d860894aad6dcf8d61ee2b39e"
+        },
+        {
+          "component": "tools/match.py",
+          "path": "evidence/behavior/harnesses/tutorial-menu-20261002-7043/tools/match.py",
+          "sha256": "44fdd8b939b2bbf135d8947d8f6ef6b1854dec133da4af86c55eb94f02869b56"
+        },
+        {
+          "component": "tools/modctx.py",
+          "path": "evidence/behavior/harnesses/tutorial-menu-20261002-7043/tools/modctx.py",
+          "sha256": "33f3a4e3d77371e3095bfeb00358c13bc7838235c27bfe8898dba7e313f1cc25"
+        },
+        {
+          "component": "tools/modules.py",
+          "path": "evidence/behavior/harnesses/tutorial-menu-20261002-7043/tools/modules.py",
+          "sha256": "8a5c1e85db6970cce3c693c016b313b7ee1922fa6eaf146a00391bfea86edf1a"
+        },
+        {
+          "component": "tools/autosearch.py",
+          "path": "evidence/behavior/harnesses/tutorial-menu-20261002-7043/tools/autosearch.py",
+          "sha256": "9c2727a875ee94c66ceac868d64c7070c316a5dbbef7cd6b21a670b44a2e1806"
+        },
+        {
+          "component": "tools/compiler.py",
+          "path": "evidence/behavior/harnesses/tutorial-menu-20261002-7043/tools/compiler.py",
+          "sha256": "ef1d59a0fbe0e0780a6b8480e13d7d07859a14ae185c00a4420e1238a2ae35bb"
+        },
+        {
+          "component": "tools/omf.py",
+          "path": "evidence/behavior/harnesses/tutorial-menu-20261002-7043/tools/omf.py",
+          "sha256": "951137ecbfaeb6e40fd5230c94398141da7ec7bdb7399d9cd74d46ded3045612"
+        },
+        {
+          "component": "tools/symbols.py",
+          "path": "evidence/behavior/harnesses/tutorial-menu-20261002-7043/tools/symbols.py",
+          "sha256": "e3f25fb66717f743dea126e56b5b44538d452fb5a2d52695ef27cb5069bc1793"
+        },
+        {
+          "component": "tools/lockfile.py",
+          "path": "evidence/behavior/harnesses/tutorial-menu-20261002-7043/tools/lockfile.py",
+          "sha256": "6773cd28150381c88a781862d0034e2ff0023c21e82aff7fad5358efb1bf34c5"
+        },
+        {
+          "component": "tools/csrc.py",
+          "path": "evidence/behavior/harnesses/tutorial-menu-20261002-7043/tools/csrc.py",
+          "sha256": "3b13b7dbc17f39cbca7f329a3043ff363f91279c12312ba865941653c412567c"
+        },
+        {
+          "component": "tools/srcrules.py",
+          "path": "evidence/behavior/harnesses/tutorial-menu-20261002-7043/tools/srcrules.py",
+          "sha256": "e34f8bd91d224df26b5981acd9316b00bdf96e3dcc28e744aaebfc466046fc30"
+        },
+        {
+          "component": "tools/variants.py",
+          "path": "evidence/behavior/harnesses/tutorial-menu-20261002-7043/tools/variants.py",
+          "sha256": "b5dfd77ba5a96649d3e1503c1619b7fa6d9edc5f32c1f7684361fbfa59fa55c9"
+        },
+        {
+          "component": "layout/toolchain.json",
+          "path": "evidence/behavior/harnesses/tutorial-menu-20261002-7043/layout/toolchain.json",
+          "sha256": "c0bb71cd8b1f4a1a1f91299bd3b6148aa67b7a1d12c3c3946a229272593eb274"
+        },
+        {
+          "component": "tools/behavior_ledger.py",
+          "path": "evidence/behavior/harnesses/tutorial-menu-20261002-7043/tools/behavior_ledger.py",
+          "sha256": "6788ec00f1c02fd93d98b96b4c8d61d2b704c97308b2c3f4024bc3095e76395f"
+        }
+      ]
+    }
+  },
+  "oracle": {
+    "path": "assets/SIMANT.EXE",
+    "sha256": "aa0596c6766322a8229ee3c36e57048c92adc82d50fbe2ef37afb8b85fcf4f11",
+    "lock_sha256": "2c6d9e98c688621ad49a08c78d0e0968f4076b036be56ec0738217b533ccde13"
+  },
+  "historical_manifest_sha256": "025a0a9255d910cae4b122ab5a3f3fb40888bb456d7fe42158db7c9e622fcf50",
+  "checkpoint": {
+    "commit": "54cb824d19c2f897ab17c8b163a954121d4e4843",
+    "date": "2026-10-02"
+  },
+  "contract": {
+    "id": "lesson-done-v1",
+    "input_domain": {
+      "directed": "1,728 cases: lesson argument -2..59, 0x7fff, -0x8000 plus one-at-a-time partitions over MePlane={0,1,2,3}, counters={9,10,11}, tutorial booleans, fd_50F6_1074={8,9,10}, fd_50F6_04C2={0x10,0x18,0x28}, modeLevels, b12 and map-position predicates. MapA is initialized as 128x64 bytes with a 64-byte row stride and lesson-13 cell [4][5] set above/below threshold. The 32-bit fd_50F6_0204 threshold has base -1 and partitions {9,10,0x10000}; top-window state g_5702[0] is varied across signed -32768, 0, 0x0100, 0x1200, 0x1300 and 0x0200.",
+      "randomized": "500 cases, seed 0x3bdb05da; lesson -4..63, initialized 128x64 MapA with 64-byte row stride, bounded signed counters/coordinates and byte fields; clock request is two uint16 words mapped through inverse 3 modulo 2**32 to TickCount; fd_50F6_0204 spans signed 32-bit values; g_5702[0] is sampled from signed -32768, 0, 0x0100, 0x1200, 0x1300 and 0x0200.",
+      "fixture": "Whole-module root:0E2E state. Original MacTickCount (f_00F8_02BE alias) executes TickCount()*3; only TickCount is modeled. f_22BF_0A22 uses fastcall AX and continues through the original canonical win_IsWinInFront body reading seeded g_5702[0]. No synthetic completion dictionary is used. MapA uses the original 128x64 row-major layout and the target-valid sampled coordinate domain. SetAlarmDropState and other semantic helpers execute original code; Win16 object-selection and map-invalidation are host sinks."
+    },
+    "limits": [
+      "Finite deterministic/fixed-seed domains; no universal proof.",
+      "Host driver, BIOS/input scheduling, arbitrary RTLink overlay sequences and full framebuffer are outside this contract."
+    ],
+    "required_effects": [
+      "return",
+      "ordered host/helper calls",
+      "ordered input consumption",
+      "pointed rectangles and strings",
+      "global and pointed writes",
+      "all nonstack writes",
+      "caller ABI"
+    ],
+    "excluded_effects": [
+      {
+        "effect": "reserved call-stack homes and dead locals",
+        "reason": "Caller ABI, call effects, pointed data, globals and all nonstack writes remain compared."
+      },
+      {
+        "effect": "host input queues/hooks, clock ISR scheduling, presentation pen/glyph/surface state and backend allocation bookkeeping",
+        "reason": "Source-specific per-helper root certificates identify every omitted backend effect. Public input results, queue consumption, logical requests and all caller own writes remain compared; the callers do not directly consume these backend fields."
+      }
+    ],
+    "required_helpers": [
+      {
+        "name": "InvalEuMap",
+        "must_execute": true,
+        "certification": {
+          "path": "evidence/behavior/helpers/tutorial-contracts-v1/LessonDone/InvalEuMap.json",
+          "sha256": "b21d782925d82b2a7391c6b320261274916ad955b09dffa727e36cece628b5bb"
+        }
+      },
+      {
+        "name": "TickCount",
+        "must_execute": true,
+        "certification": {
+          "path": "evidence/behavior/helpers/tutorial-contracts-v1/LessonDone/TickCount.json",
+          "sha256": "b2719b3442ffebeb42df9c9f1283e93e81a9357148388bf2606485ec313f6802"
+        }
+      },
+      {
+        "name": "f_22BF_0A22",
+        "must_execute": true
+      },
+      {
+        "name": "win_SetObjSelectedState",
+        "must_execute": true,
+        "certification": {
+          "path": "evidence/behavior/helpers/tutorial-contracts-v1/LessonDone/win_SetObjSelectedState.json",
+          "sha256": "33bc0d43638f28a7352d41921f0f5a7b6a1ee0d0c91163e863e3c59fe084c275"
+        }
+      },
+      {
+        "name": "MacTickCount",
+        "must_execute": true
+      }
+    ],
+    "implementation_views": [],
+    "review": {
+      "status": "APPROVED",
+      "reviewer": "root",
+      "reviewed_at": "2026-10-02",
+      "reason": "Read target C and all unique reached helper definitions/ABIs. Verified tutorial original map stride/32-bit thresholds/top-window queries and original MacTickCount arithmetic; reviewed menu/question input providers, pointed rendering data, exact stream-view proof graph and compiled caller mutants. This certifies the finite host-service contract and preserves historical EXACT separately."
+    }
+  },
+  "run_report": {
+    "path": "evidence/behavior/functions/LessonDone/contracts/host-service-v1/run.json",
+    "sha256": "1930667ce288db35aec4227619534a06b3a6e4e990e4a460f6f247818db96b32"
+  },
+  "negative_controls": {
+    "path": "evidence/behavior/functions/LessonDone/contracts/host-service-v1/negative-controls.json",
+    "sha256": "2c21b29a7294fa99ce040628b65f03a1baf810c8a521ab48ccc0e72a65a013f5"
+  },
+  "historical_difference": {
+    "description": "length 727 != target 723; bytes differ (first at +0x14, 527 differing); relocation set differs (9 vs 9)",
+    "reason_exact_stopped": "Whole-module seed is behaviorally compared while target bytes, extent or relocations remain inexact; the behavioral proof does not alter historical exactness.",
+    "evidence_refs": [
+      "work/takeover/hardtail/catalog.json",
+      "docs/behavioral-proof.md"
+    ]
+  },
+  "semantic_evidence": [
+    "Every pinned case executed the original DOS function and the compiler-produced whole module.",
+    "The same-input unchanged baseline matched in each source-mutant control, then the compiled mutant differed.",
+    "Every explicit callback boundary has source, execution mode, observed invocation count and ABI pinned in callback-boundary-audit.json.",
+    "Unintercepted semantic helpers continue through the original DOS image.",
+    "S10 cases retain raw hashes/differences and the root-approved typed view and proof-graph pins; contract review remains pending.",
+    "Alias/ABI audit pins symbols.alias_of for f_00F8_02BE\u00e2\u2020\u2019MacTickCount and f_22BF_0A22\u00e2\u2020\u2019win_IsWinInFront, with canonical source/hash, exact caller ABIs and corrected four-byte threshold observations.",
+    "Focused ABI and width controls: build/workers/behavior_tutorial_menu/final_lesson_mapfix/abi-boundary-probes.json SHA-256 4dcc720db294c1dee2a942959b552f2bb32b1c7411d2b8169b445e090f7c3012; proves both original top-window outcomes, original MacTickCount high-word arithmetic, and fd_50F6_0204 high-word threshold handling.",
+    "MapA fixture shape/stride are pinned by the whole-module declaration and the 128x64 focused true/false lesson-13 probes; no truncated 64x32 map buffer is used.",
+    "Executed run evidence: build/workers/behavior_tutorial_menu/final_lesson_mapfix/proposals/LessonDone/run.json SHA-256 5e9db6564466635b7dc87ed5e96b632c99b69c5ed53c08df53f083f3c9954552.",
+    "Executed case ledger: build/workers/behavior_tutorial_menu/final_lesson_mapfix/LessonDone.jsonl.gz SHA-256 bf92beb70bb305b2c5ec643b464cde85a7063af377ea816552bf80ee27fb03c1.",
+    "Archived suite bytecopy: tools/behavior_suites/archive/tutorial-menu-7043a99e654807271bb186442b8105f63d05f50bf18174726ee7a9e47343e172.py SHA-256 7043a99e654807271bb186442b8105f63d05f50bf18174726ee7a9e47343e172.",
+    "Archived target source: tools/archive/behavior-tutorial-menu-review-20261002/7043/source-inputs/root_0E2E_c611660dde4d.c SHA-256 c611660dde4da7117c3232aa06e597871394cc4112466d46559705b235424359.",
+    "Negative-control record: tools/archive/behavior-tutorial-menu-review-20261002/7043/LessonDone/negative-controls.json SHA-256 8082ea9bffb8488c7b5fdeb8eeac98392a4d9f8000c1b24d7dafe61dfec6aa4b; IDs lesson-strict-threshold."
+  ],
+  "evidence_date": "2026-10-02",
+  "review_record": {
+    "path": "evidence/behavior/functions/LessonDone/contracts/host-service-v1/contract-review.json",
+    "sha256": "f5329826887ad702ec5d2afb2848281132f587c5dabefa3811751ce7dc887e88"
+  }
+}

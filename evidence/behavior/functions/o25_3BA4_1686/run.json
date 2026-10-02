@@ -1,0 +1,264 @@
+{
+  "schema": "behavior-run-evidence-v1",
+  "completion": "COMPLETE",
+  "identity": {
+    "function": "o25_3BA4_1686",
+    "suite_id": "get_my_rand_dirs_v1",
+    "module": "S25:3BA4",
+    "source_sha256": "5fc31bb8f45f9e7fa299efe9667af06b29d61ab82a6a2f38715f40d939bd3947",
+    "compiled_source_sha256": "5fc31bb8f45f9e7fa299efe9667af06b29d61ab82a6a2f38715f40d939bd3947",
+    "suite_sha256": "f7aad88da70befc902bcc4b8f48670f43df38e90f81e45a59ef4c584090dd360",
+    "suite_snapshot_path": "tools/behavior_suites/archive/randdirs-20261002-current-runner-ledger-final.py",
+    "harness_sha256": "ee7c997d2f89efa85ce932cd5ac7c674c465f1013a16a8c08e83d43c69f4be5b",
+    "oracle_sha256": "aa0596c6766322a8229ee3c36e57048c92adc82d50fbe2ef37afb8b85fcf4f11",
+    "historical_manifest_sha256": "025a0a9255d910cae4b122ab5a3f3fb40888bb456d7fe42158db7c9e622fcf50",
+    "object_sha256": "39c71dd8cd8bac22e14de2fa341db3c7f74c835516f99aa08e007a8ab5e9b03f",
+    "address": {
+      "off": 5766,
+      "seg": 15268,
+      "size": 516,
+      "unit": "S25"
+    },
+    "profile": "msc600ax",
+    "flags": [
+      "/AL",
+      "/Os",
+      "/Oe",
+      "/Og",
+      "/Zi"
+    ]
+  },
+  "execution": {
+    "engine": "PreparedPair.compare",
+    "actual_original_execution": true,
+    "actual_candidate_execution": true,
+    "original_exe_sha256": "aa0596c6766322a8229ee3c36e57048c92adc82d50fbe2ef37afb8b85fcf4f11"
+  },
+  "cases": {
+    "directed": {
+      "generated": 222720,
+      "executed": 222720,
+      "actual_original_invocations": 222720,
+      "actual_candidate_invocations": 222720,
+      "seeds": []
+    },
+    "randomized": {
+      "generated": 100000,
+      "executed": 100000,
+      "actual_original_invocations": 100000,
+      "actual_candidate_invocations": 100000,
+      "seeds": [
+        5766
+      ]
+    }
+  },
+  "errors": 0,
+  "mismatches": 0,
+  "compared_effects": [
+    "s16_return",
+    "rot_and_dir_pointer_values",
+    "all_observed_input_globals",
+    "GetDir_GetDis_and_actual_TileCanBeMovedOn_order_arguments_and_entry_state",
+    "all_final_nonstack_write_bytes",
+    "caller_ABI_preservation"
+  ],
+  "case_ledger": {
+    "schema": "behavior-case-ledger-v1",
+    "path": "evidence/behavior/functions/o25_3BA4_1686/cases.jsonl.gz",
+    "sha256": "2e482fc32bb6d1ce62a9c957f5882ef2c15a95f7cd72641ad5628210f70d26e4",
+    "row_count": 322720,
+    "lane_counts": {
+      "directed": 222720,
+      "randomized": 100000
+    },
+    "identity": {
+      "address": {
+        "off": 5766,
+        "seg": 15268,
+        "size": 516,
+        "unit": "S25"
+      },
+      "compiled_source_sha256": "5fc31bb8f45f9e7fa299efe9667af06b29d61ab82a6a2f38715f40d939bd3947",
+      "flags": [
+        "/AL",
+        "/Os",
+        "/Oe",
+        "/Og",
+        "/Zi"
+      ],
+      "function": "o25_3BA4_1686",
+      "harness_sha256": "ee7c997d2f89efa85ce932cd5ac7c674c465f1013a16a8c08e83d43c69f4be5b",
+      "linked_code_sha256": "2783b02baf8f4f36f0367eb4edce59210cd32d4ffad4f7c17acb62f3aca0879f",
+      "manifest_sha256": "025a0a9255d910cae4b122ab5a3f3fb40888bb456d7fe42158db7c9e622fcf50",
+      "object_sha256": "39c71dd8cd8bac22e14de2fa341db3c7f74c835516f99aa08e007a8ab5e9b03f",
+      "oracle_sha256": "aa0596c6766322a8229ee3c36e57048c92adc82d50fbe2ef37afb8b85fcf4f11",
+      "profile": "msc600ax",
+      "source": "work\\takeover\\hardtail\\seeds\\S25_3BA4_5fc31bb8f45f.c",
+      "source_sha256": "5fc31bb8f45f9e7fa299efe9667af06b29d61ab82a6a2f38715f40d939bd3947",
+      "unicorn_version": "2.1.4"
+    },
+    "compression": "gzip"
+  },
+  "unmodeled_boundaries": 0,
+  "peer_data_gates": "PASS",
+  "positive_controls": [
+    {
+      "id": "positive/actual-helper-boundary-witness",
+      "executed": true,
+      "matched": true,
+      "execution_errors": 0,
+      "original_executed": true,
+      "candidate_executed": true,
+      "source_sha256": "5fc31bb8f45f9e7fa299efe9667af06b29d61ab82a6a2f38715f40d939bd3947",
+      "object_sha256": "39c71dd8cd8bac22e14de2fa341db3c7f74c835516f99aa08e007a8ab5e9b03f",
+      "oracle_sha256": "aa0596c6766322a8229ee3c36e57048c92adc82d50fbe2ef37afb8b85fcf4f11",
+      "compared_effects": [
+        "s16_return",
+        "rot_and_dir_pointer_values",
+        "all_observed_input_globals",
+        "GetDir_GetDis_and_actual_TileCanBeMovedOn_order_arguments_and_entry_state",
+        "all_final_nonstack_write_bytes",
+        "caller_ABI_preservation"
+      ],
+      "original_observation_sha256": "ce4155418782262d809afe49a8adab828ecfb1d42fac117cc8bbf014740f77bd",
+      "candidate_observation_sha256": "ce4155418782262d809afe49a8adab828ecfb1d42fac117cc8bbf014740f77bd",
+      "original_helper_counts": {
+        "f_0BE8_0B83": 1,
+        "TileCanBeMovedOn": 8,
+        "f_0BE8_0B21": 1
+      },
+      "candidate_helper_counts": {
+        "f_0BE8_0B83": 1,
+        "TileCanBeMovedOn": 8,
+        "f_0BE8_0B21": 1
+      }
+    }
+  ],
+  "helper_boundaries": [
+    {
+      "name": "f_0BE8_0B83",
+      "execution_mode": "ORIGINAL_EXE",
+      "executed_from_original": true,
+      "observed_call_count": 1,
+      "count_scope": "positive-control witness; function body and candidate external calls resolved against original EXE"
+    },
+    {
+      "name": "f_0BE8_0B21",
+      "execution_mode": "ORIGINAL_EXE",
+      "executed_from_original": true,
+      "observed_call_count": 1,
+      "count_scope": "positive-control witness; function body and candidate external calls resolved against original EXE"
+    },
+    {
+      "name": "TileCanBeMovedOn",
+      "execution_mode": "ORIGINAL_EXE",
+      "executed_from_original": true,
+      "observed_call_count": 8,
+      "count_scope": "positive-control witness; function body and candidate external calls resolved against original EXE"
+    }
+  ],
+  "execution_environment": {
+    "ss": 21939,
+    "ss_hex": "55b3",
+    "ds": 21939,
+    "ds_hex": "55b3",
+    "sp": 41984,
+    "sp_hex": "a400",
+    "reserved_stack_bytes": 3840,
+    "stack_low_offset": 38144,
+    "stack_high_offset_exclusive": 42006,
+    "per_case_call_frame_bytes": 22,
+    "ledger_and_diff_exclude_dynamic_stack_bounds": true
+  },
+  "domain_note": "Map cells are synthesized from a movable mask; original helper executes. This does not cover arbitrary map/LifeA state; no BEHAVIOR_EXACT claim",
+  "prior_environment_run": {
+    "path": "build/workers/behavior_randdirs/actual-tile-ledger-20261002-01/randdirs-results.json",
+    "ledger_sha256": "ea0f93fccf2e64cb093655108452719a065e13fa87f0986f29d948abadaf93be",
+    "row_count": 322720,
+    "harness_sha256": "e2adfcd7425d99c52cfe5af57c608959e73e9d6a520fcc0dd648616fdfb505b4",
+    "manifest_sha256": "c2850fb5d252bd490bb9d0d2994e1463b25a5e6a4f187ed4f4730dcf91e2f4fd",
+    "status": "diagnostic_only_prior_SS_DS_and_stack-exclusion_environment"
+  },
+  "domain_composition": {
+    "review_status": "PROPOSED_FOR_SUPERVISOR_REVIEW",
+    "function_input_domain": "All 256 TileCanBeMovedOn boolean result vectors are covered across incoming direction and caller-supported rot classes; globals, targets, previous-position exclusion, and boundary coordinates are controlled in the ledgered function run.",
+    "helper_domain": {
+      "function": "TileCanBeMovedOn",
+      "randomized_cases": 5000,
+      "seed": "0x710ecafe",
+      "ledger": {
+        "schema": "behavior-case-ledger-v1",
+        "path": "build/workers/behavior_randdirs/tile-helper-arbitrary-valid-ledger-20261002-03/case-ledger.jsonl.gz",
+        "sha256": "7848e6618abf50b7ca7036b9d313866c071f4ef4d560eef3f425293b1fbbbc28",
+        "row_count": 5000,
+        "lane_counts": {
+          "directed": 0,
+          "randomized": 5000
+        },
+        "identity": {
+          "address": {
+            "off": 8910,
+            "seg": 4343,
+            "size": 398,
+            "unit": "root"
+          },
+          "compiled_source_sha256": "a4cc271d57a4a80dd255953554a886026297b0560453c4b2c7b302b5878fff88",
+          "flags": [
+            "/AL",
+            "/Os",
+            "/Oe",
+            "/Og",
+            "/Zi"
+          ],
+          "function": "TileCanBeMovedOn",
+          "harness_sha256": "ee7c997d2f89efa85ce932cd5ac7c674c465f1013a16a8c08e83d43c69f4be5b",
+          "linked_code_sha256": "21724da0f0ff60b6fb87c31063687707dca6b23e7580ecda2d75180ad8af9af4",
+          "manifest_sha256": "025a0a9255d910cae4b122ab5a3f3fb40888bb456d7fe42158db7c9e622fcf50",
+          "object_sha256": "aac7adfd26401804b87d288a924570531080839f0629e78cd116ffd50b08b4f8",
+          "oracle_sha256": "aa0596c6766322a8229ee3c36e57048c92adc82d50fbe2ef37afb8b85fcf4f11",
+          "profile": "msc600ax",
+          "source": "src\\root\\m10F7.c",
+          "source_sha256": "a4cc271d57a4a80dd255953554a886026297b0560453c4b2c7b302b5878fff88",
+          "unicorn_version": "2.1.4"
+        },
+        "compression": "gzip"
+      },
+      "identity": {
+        "function": "TileCanBeMovedOn",
+        "address": {
+          "unit": "root",
+          "seg": 4343,
+          "off": 8910,
+          "size": 398
+        },
+        "source": "src\\root\\m10F7.c",
+        "source_sha256": "a4cc271d57a4a80dd255953554a886026297b0560453c4b2c7b302b5878fff88",
+        "compiled_source_sha256": "a4cc271d57a4a80dd255953554a886026297b0560453c4b2c7b302b5878fff88",
+        "object_sha256": "aac7adfd26401804b87d288a924570531080839f0629e78cd116ffd50b08b4f8",
+        "linked_code_sha256": "21724da0f0ff60b6fb87c31063687707dca6b23e7580ecda2d75180ad8af9af4",
+        "oracle_sha256": "aa0596c6766322a8229ee3c36e57048c92adc82d50fbe2ef37afb8b85fcf4f11",
+        "unicorn_version": "2.1.4",
+        "harness_sha256": "ee7c997d2f89efa85ce932cd5ac7c674c465f1013a16a8c08e83d43c69f4be5b",
+        "profile": "msc600ax",
+        "flags": [
+          "/AL",
+          "/Os",
+          "/Oe",
+          "/Og",
+          "/Zi"
+        ],
+        "manifest_sha256": "025a0a9255d910cae4b122ab5a3f3fb40888bb456d7fe42158db7c9e622fcf50",
+        "suite_id": "tile_can_be_moved_on_arbitrary_valid_map_v1",
+        "suite_sha256": "bbd7e306595a9343c2fd3fe2697a69029a66f53cabd284bb493b79d7764bff77",
+        "suite_snapshot_path": "tools/behavior_suites/archive/randdirs-20261002-arbitrary-valid-helper-suite.py"
+      },
+      "suite_snapshot_path": "tools/behavior_suites/archive/randdirs-20261002-arbitrary-valid-helper-suite.py"
+    },
+    "source_review": "build/workers/behavior_randdirs/DOMAIN.md",
+    "limits": "This is a composed function-domain proposal, not an unqualified claim over all gameplay histories or arbitrary global memory. Root must approve the function/helper domain and interactions before registration."
+  },
+  "raw_report": {
+    "path": "evidence/behavior/functions/o25_3BA4_1686/raw-run.json",
+    "sha256": "6edc4549980d41bc57326516120d00f9999779913cbef4e9a119e9e4db558f94"
+  }
+}

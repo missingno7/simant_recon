@@ -1,0 +1,39 @@
+{
+  "abi_facts": {
+    "Ralloc": "actual f_171C_1A9E/f_171C_1B84/f_171C_1BBA/f_171C_1C0A helper bodies ran against valid fixture allocations.",
+    "direct": "original DrawBalloons reads no stack args; far-return target using global state.",
+    "fd_50F6_37EA": "callsite pushes six words and does caller cleanup (12 bytes); synthetic host blit role, not original f_0250_0721 two-stack-word body."
+  },
+  "caller_and_helper_source_pins": [
+    {
+      "exists": true,
+      "path": "work/takeover/hardtail/seeds/root_0250_e41a4ab8c56c.c",
+      "role": "target_source",
+      "sha256": "e41a4ab8c56c0d4923ace8b02027f2471feee049aabe0577588e206e930b4db2"
+    },
+    {
+      "exists": true,
+      "path": "src/root/m277D.c",
+      "role": "diagnostic helper source",
+      "sha256": "6b7b7e4b468987b3ad3c869934df31e0e9325ab7e1771735d1e6113971047591"
+    },
+    {
+      "exists": true,
+      "path": "src/root/m0250.c",
+      "role": "caller/helper source file",
+      "sha256": "bb8a325c543151e09cb173d2194844877805a9e1058d3b24362ff5a7cbd9f61b"
+    }
+  ],
+  "function": "DrawBalloons",
+  "limitations": [
+    "The picture blit function-pointer address is a synthetic six-argument host slot (fd_50F6_37EA role), not proof that same-address f_0250_0721 body was invoked. Host pixel transfer/blit is modeled; no physical display/framebuffer equivalence.",
+    "Finite directed/random domain only; not universal proof.",
+    "No registry or canonical source modified."
+  ],
+  "run_source_sha256": "e41a4ab8c56c0d4923ace8b02027f2471feee049aabe0577588e206e930b4db2",
+  "schema": "render-callsite-abi-v1",
+  "status": "PENDING_ROOT_REVIEW",
+  "winprintf_diagnostic": [
+    "WinPrintf is excluded as a semantic contract: DOS root:277D:000A is an empty one-byte RETF debug sink. Callsite varargs vary; render_small captures a fixed/truncated stack prefix (the DrawBalloons suite uses stack6 and bitmap calls include 7-word and 5-word payloads), so report helper traces are diagnostic and are not treated as complete variadic arguments, return semantics, or drawing effects. The original sink body has no state effects; this exclusion does not remove bitmap resource/pixel/geometry effects from the target contract."
+  ]
+}

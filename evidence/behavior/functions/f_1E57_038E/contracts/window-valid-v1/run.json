@@ -1,0 +1,210 @@
+{
+  "schema": "behavior-run-evidence-v1",
+  "completion": "COMPLETE",
+  "identity": {
+    "function": "f_1E57_038E",
+    "suite_id": "windows_v1",
+    "module": "root:1E57",
+    "source_sha256": "edfb01cec348d79243d7cc1630248045fa7790a321192f83d185298d0e9b67f6",
+    "compiled_source_sha256": "edfb01cec348d79243d7cc1630248045fa7790a321192f83d185298d0e9b67f6",
+    "suite_sha256": "d30cd821105091af11ddd1b4daa6b60a5516fbd6a8cc61b4a7cb338412935b26",
+    "harness_sha256": "2c0799048057f59eae61a48be4d695278635594484adf0c70bf46c51b4e0c799",
+    "oracle_sha256": "aa0596c6766322a8229ee3c36e57048c92adc82d50fbe2ef37afb8b85fcf4f11",
+    "historical_manifest_sha256": "025a0a9255d910cae4b122ab5a3f3fb40888bb456d7fe42158db7c9e622fcf50",
+    "object_sha256": "089ae2f292394329010bb1f30272c21d90eeac08a5766fbec5abcbcd2d98962f",
+    "profile": "msc600ax",
+    "flags": [
+      "/AL",
+      "/Os",
+      "/Oe",
+      "/Og",
+      "/Gs",
+      "/Zi"
+    ],
+    "address": {
+      "off": 910,
+      "seg": 7767,
+      "size": 997,
+      "unit": "root"
+    }
+  },
+  "execution": {
+    "engine": "PreparedPair.compare",
+    "actual_original_execution": true,
+    "actual_candidate_execution": true,
+    "original_exe_sha256": "aa0596c6766322a8229ee3c36e57048c92adc82d50fbe2ef37afb8b85fcf4f11"
+  },
+  "cases": {
+    "directed": {
+      "generated": 9,
+      "executed": 9,
+      "actual_original_invocations": 9,
+      "actual_candidate_invocations": 9,
+      "seeds": []
+    },
+    "randomized": {
+      "generated": 256,
+      "executed": 256,
+      "actual_original_invocations": 256,
+      "actual_candidate_invocations": 256,
+      "seeds": [
+        509019022
+      ]
+    }
+  },
+  "errors": 0,
+  "mismatches": 0,
+  "compared_effects": [
+    "ordered screen/window clipping rectangles",
+    "45-entry clip handle table",
+    "Ralloc heap/master-table state",
+    "window stack and screen rectangle",
+    "geometry callback order",
+    "all non-stack writes",
+    "caller ABI"
+  ],
+  "case_ledger": {
+    "path": "evidence/behavior/functions/f_1E57_038E/contracts/window-valid-v1/cases.jsonl.gz",
+    "sha256": "c272c1115d3f899a789d92e2c0270ec5b428be4135a76a7aca0e1abe79c32f40",
+    "row_count": 265,
+    "lane_counts": {
+      "directed": 9,
+      "randomized": 256
+    },
+    "compression": "gzip",
+    "identity": {
+      "address": {
+        "off": 910,
+        "seg": 7767,
+        "size": 997,
+        "unit": "root"
+      },
+      "compiled_source_sha256": "edfb01cec348d79243d7cc1630248045fa7790a321192f83d185298d0e9b67f6",
+      "flags": [
+        "/AL",
+        "/Os",
+        "/Oe",
+        "/Og",
+        "/Gs",
+        "/Zi"
+      ],
+      "function": "f_1E57_038E",
+      "harness_sha256": "2c0799048057f59eae61a48be4d695278635594484adf0c70bf46c51b4e0c799",
+      "linked_code_sha256": "132e3dd6e2b5f191f0d6e55044ba4730e2df72721bc74af33ac4c6afebf28faa",
+      "manifest_sha256": "025a0a9255d910cae4b122ab5a3f3fb40888bb456d7fe42158db7c9e622fcf50",
+      "object_sha256": "089ae2f292394329010bb1f30272c21d90eeac08a5766fbec5abcbcd2d98962f",
+      "oracle_sha256": "aa0596c6766322a8229ee3c36e57048c92adc82d50fbe2ef37afb8b85fcf4f11",
+      "profile": "msc600ax",
+      "source": "work\\takeover\\hardtail\\seeds\\root_1E57_edfb01cec348.c",
+      "source_sha256": "edfb01cec348d79243d7cc1630248045fa7790a321192f83d185298d0e9b67f6",
+      "unicorn_version": "2.1.4"
+    }
+  },
+  "unmodeled_boundaries": 0,
+  "peer_data_gates": "PASS",
+  "positive_controls": [
+    {
+      "id": "clip/overlap",
+      "case_id": "clip/overlap",
+      "executed": true,
+      "matched": true,
+      "execution_errors": 0,
+      "original_executed": true,
+      "candidate_executed": true,
+      "source_sha256": "edfb01cec348d79243d7cc1630248045fa7790a321192f83d185298d0e9b67f6",
+      "object_sha256": "089ae2f292394329010bb1f30272c21d90eeac08a5766fbec5abcbcd2d98962f",
+      "oracle_sha256": "aa0596c6766322a8229ee3c36e57048c92adc82d50fbe2ef37afb8b85fcf4f11",
+      "compared_effects": [
+        "ordered screen/window clipping rectangles",
+        "45-entry clip handle table",
+        "Ralloc heap/master-table state",
+        "window stack and screen rectangle",
+        "geometry callback order",
+        "all non-stack writes",
+        "caller ABI"
+      ],
+      "original_observation_sha256": "10945fd7ac61e1616f871aaeef5ec72a4e79b4aa41f17e825599a46e7a0b2a71",
+      "candidate_observation_sha256": "10945fd7ac61e1616f871aaeef5ec72a4e79b4aa41f17e825599a46e7a0b2a71"
+    }
+  ],
+  "helper_boundaries": [
+    {
+      "name": "win_GetObjRect",
+      "execution_mode": "MODELED",
+      "original_call_count": 8250,
+      "candidate_call_count": 8250,
+      "executed_from_original": false,
+      "contract": "Case-indexed valid window Rects; ordered invocation and the actual far output pointer are retained.",
+      "certification": {
+        "path": "evidence/behavior/helpers/window-geometry-v1/win_GetObjRect.json",
+        "sha256": "02b3a07f19f35ce81a8d0b85d44d896a6222360d20dd82521c7df0eddcae1d4c"
+      },
+      "observed_call_count": 8250,
+      "observed_call_count_scope": "all clip integration cases"
+    }
+  ],
+  "review": {
+    "status": "PENDING_ROOT_REVIEW",
+    "artifacts": [
+      {
+        "name": "windows-fixture-d30cd821.py",
+        "path": "tools/behavior_suites/archive/windows-fixture-d30cd821.py",
+        "sha256": "d30cd821105091af11ddd1b4daa6b60a5516fbd6a8cc61b4a7cb338412935b26"
+      },
+      {
+        "name": "window-memory-fixture-dda4f6dd.py",
+        "path": "tools/behavior_suites/archive/window-memory-fixture-dda4f6dd.py",
+        "sha256": "dda4f6dd78778f2a98b811d1971fc5923300d57b2a2fa35221a213d208eb321d"
+      },
+      {
+        "name": "source-m2505.c",
+        "path": "src/root/m2505.c",
+        "sha256": "22a03f15e95fff376d27211426c4f9e3395e16e5decd92ef501fbfe3c1aba623"
+      },
+      {
+        "name": "source-m1D8E.c",
+        "path": "src/root/m1D8E.c",
+        "sha256": "afe9364f319633dd85c276bed18e848a605934156bfbb4fc276d304cd2ec2556"
+      },
+      {
+        "name": "win_GetObjRect-certification-proposal.json",
+        "path": "build/workers/behavior_window/packet-proposals-final-20261002/helpers/win_GetObjRect-certification-proposal.json",
+        "sha256": "1e830f1c99ec73ea061a0213765874e636047ef10b0cf090c243d3f32efe62c1"
+      },
+      {
+        "name": "win_GetObjRect-run-evidence.json",
+        "path": "build/workers/behavior_window/final-pinned-final-20261002/getobjrect/win_GetObjRect-run-evidence.json",
+        "sha256": "73d996ba1096d876336836b13a85927396abe1a0d1ec56c329c64dda225e389c"
+      },
+      {
+        "name": "win_GetObjRect-case-ledger.jsonl.gz",
+        "path": "build/workers/behavior_window/final-pinned-final-20261002/getobjrect/win_GetObjRect-case-ledger.jsonl.gz",
+        "sha256": "01eafab63247ac366b639838818b256751183c6b0e3ea0413d849329079e3724"
+      }
+    ],
+    "helper_source_hashes": {
+      "win_GetObjRect": {
+        "path": "src/root/m2505.c",
+        "sha256": "22a03f15e95fff376d27211426c4f9e3395e16e5decd92ef501fbfe3c1aba623"
+      },
+      "f_1D8E_02BD": {
+        "path": "src/root/m1D8E.c",
+        "sha256": "afe9364f319633dd85c276bed18e848a605934156bfbb4fc276d304cd2ec2556"
+      }
+    },
+    "imported_suite_graph": [
+      {
+        "path": "tools/behavior_suites/archive/windows-fixture-d30cd821.py",
+        "sha256": "d30cd821105091af11ddd1b4daa6b60a5516fbd6a8cc61b4a7cb338412935b26"
+      },
+      {
+        "path": "tools/behavior_suites/archive/window-memory-fixture-dda4f6dd.py",
+        "sha256": "dda4f6dd78778f2a98b811d1971fc5923300d57b2a2fa35221a213d208eb321d"
+      }
+    ]
+  },
+  "raw_report": {
+    "path": "evidence/behavior/functions/f_1E57_038E/contracts/window-valid-v1/raw-run.json",
+    "sha256": "3a5597c5603ac9465ac1f35697c257a3646519ebbb6e14240460c32b4bec4526"
+  }
+}

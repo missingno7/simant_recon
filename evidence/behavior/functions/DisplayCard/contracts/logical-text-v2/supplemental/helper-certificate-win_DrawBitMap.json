@@ -1,0 +1,81 @@
+{
+  "boundary": "explicit callback implementation in tools/behavior_suites/text_card.py",
+  "callback_role": "CANONICAL_HELPER_ENTRY_HOOK",
+  "caller_effect_analysis": {
+    "caller_consumed_values": "logical bitmap/line request arguments are recorded; candidate body remains explicitly scaffolded, return-value use is discarded at these call sites, and bitmap decoding/raster pixels are not modeled",
+    "dynamic_caller_abi": null,
+    "external_state_not_claimed": [
+      "framebuffer pixels or bitmap decoding",
+      "clip intersections and pixel visibility",
+      "palette/driver color application",
+      "database cache, heap lock counters, and allocator lifetime"
+    ],
+    "no_omitted_effect_claim": "This proposal does not claim equivalence for listed external/backend effects; only the stated logical requests, projected text/rectangles, fixture return values, resource-byte consumption, and recorded ordering are in scope.",
+    "scope": "logical request and deterministic fixture boundary only",
+    "target_module_source": {
+      "path": "evidence/behavior/harnesses/behavior-text-card-review-20261002/runs/DisplayCard/module.c",
+      "sha256": "5e8e5f39325914cc1a6f1b5de9e5c894818e47d68a7ce594b2a514c99b37a1ea"
+    }
+  },
+  "canonical_symbol_abi_covered": true,
+  "compared_effects": [
+    "resource request/lock/size/unlock/purge order",
+    "ordered window, bitmap and text draw commands",
+    "projected draw text and coordinates",
+    "all nonstack memory",
+    "caller ABI"
+  ],
+  "dos_definition": {
+    "extent_bytes": 663,
+    "extent_status": "DESCENT",
+    "offset": 14,
+    "segment": 9629,
+    "unit": "root"
+  },
+  "dynamic_caller_abi": null,
+  "evidence": {
+    "negative_case_id": "negative/bitmap-link",
+    "negative_mismatch_categories": [
+      "state",
+      "trace"
+    ],
+    "positive_case_id": "bitmap-link",
+    "positive_observation_sha256": "9b572f92a47b85568769fc1a1d30fb70c05624ce15fce1d653774ae3cef30796"
+  },
+  "execution_mode": "MODELED",
+  "helper": "win_DrawBitMap",
+  "input_domain": [
+    "missing card resource; valid unknown-record card; one bitmap with one hotspot; one plain text frame; one styled CHITIN text frame; seeded valid card streams of 1..8 P/T records, 0..6 in-range hotspot links per P record, 1..4 text frames, 1..4 sorted style runs, text resources, variable positive rectangles, fixed valid window geometry, and explicit font fallback metrics"
+  ],
+  "limitations": [
+    "logical bitmap/line request arguments are recorded; candidate body remains explicitly scaffolded, return-value use is discarded at these call sites, and bitmap decoding/raster pixels are not modeled",
+    "Proposal only; callback semantics require independent root review."
+  ],
+  "negative_control_id": "negative/bitmap-link",
+  "positive_control_id": "DisplayCard:positive:bitmap-link",
+  "proposal_status": "PENDING_ROOT_REVIEW",
+  "review": {
+    "reviewed_at": null,
+    "reviewer": null,
+    "status": "PENDING"
+  },
+  "schema": "behavior-helper-cert-v1",
+  "source_definition": {
+    "definition_line": 49,
+    "definition_name": "win_DrawBitMap",
+    "other_reference_lines": [
+      44,
+      115,
+      125
+    ],
+    "path": "src/root/m259D.c",
+    "sha256": "c4329ddb75629a235043d9da1eb11c7dd6f2cb3826fe392bfc8a27c98eeb97e1"
+  },
+  "source_hashes": {
+    "evidence/behavior/harnesses/behavior-text-card-review-20261002/runs/DisplayCard/module.c": "5e8e5f39325914cc1a6f1b5de9e5c894818e47d68a7ce594b2a514c99b37a1ea",
+    "evidence/behavior/harnesses/ss-ds-window-v1/tools/behavior.py": "ee7c997d2f89efa85ce932cd5ac7c674c465f1013a16a8c08e83d43c69f4be5b",
+    "src/root/m259D.c": "c4329ddb75629a235043d9da1eb11c7dd6f2cb3826fe392bfc8a27c98eeb97e1",
+    "tools/behavior_suites/archive/text-card-20261002-DisplayCard.py": "a5dfe315124bd942960e5cf892781ebfd479db8fbfe7b90e3d6b9febf89ca2be"
+  },
+  "status": "PROPOSED_PENDING_REVIEW"
+}

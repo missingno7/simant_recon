@@ -1,0 +1,128 @@
+{
+  "schema": "tutorial-menu-callback-audit-v1",
+  "run_report": "report.json",
+  "suite_sha256": "d12a1513ea348ac4b81fcc242aed1acb0d9aef82d9fb18874f629cbe13baf599",
+  "runner_sha256": "2c0799048057f59eae61a48be4d695278635594484adf0c70bf46c51b4e0c799",
+  "targets": {
+    "LessonDone": {
+      "cases": 2228,
+      "equal_comparisons": 2228,
+      "execution_errors": 0,
+      "callback_boundaries": [
+        {
+          "name": "InvalEuMap",
+          "execution_mode": "MODELED",
+          "executed_from_original": false,
+          "observed_call_count": 3,
+          "observed_call_count_scope": "all 2228 matched campaign cases",
+          "stack_words": 4,
+          "register_args": [],
+          "callee_pop_bytes": 0,
+          "contract_note": "explicit deterministic Win16 UI sink"
+        },
+        {
+          "name": "TickCount",
+          "execution_mode": "MODELED",
+          "executed_from_original": false,
+          "observed_call_count": 40,
+          "observed_call_count_scope": "all 2228 matched campaign cases",
+          "stack_words": 0,
+          "register_args": [],
+          "callee_pop_bytes": 0,
+          "contract_note": "explicit deterministic host clock callback"
+        },
+        {
+          "name": "f_22BF_0A22",
+          "execution_mode": "ORIGINAL_EXE",
+          "executed_from_original": true,
+          "observed_call_count": 234,
+          "observed_call_count_scope": "all 2228 matched campaign cases",
+          "stack_words": 0,
+          "register_args": [
+            "ax"
+          ],
+          "callee_pop_bytes": 0,
+          "contract_note": "callback is trace-only; execution continued through canonical original source body"
+        },
+        {
+          "name": "win_SetObjSelectedState",
+          "execution_mode": "MODELED",
+          "executed_from_original": false,
+          "observed_call_count": 3,
+          "observed_call_count_scope": "all 2228 matched campaign cases",
+          "stack_words": 0,
+          "register_args": [
+            "ax",
+            "dx"
+          ],
+          "callee_pop_bytes": 0,
+          "contract_note": "explicit deterministic Win16 UI sink"
+        },
+        {
+          "name": "MacTickCount",
+          "execution_mode": "ORIGINAL_EXE",
+          "executed_from_original": true,
+          "observed_call_count": 40,
+          "observed_call_count_scope": "one TickCount per actual original MacTickCount body; original source return expression at src/root/m00F8.c:161",
+          "stack_words": 0,
+          "register_args": [],
+          "callee_pop_bytes": 0,
+          "contract_note": "actual DOS alias target f_00F8_02BE; return TickCount()*3 executes original code"
+        }
+      ],
+      "all_observed_entry_counts": {
+        "InvalEuMap": 3,
+        "TickCount": 40,
+        "f_22BF_0A22": 234,
+        "win_SetObjSelectedState": 3
+      }
+    }
+  },
+  "alias_and_source_audit": {
+    "f_00F8_02BE": {
+      "alias_of": "MacTickCount",
+      "symbol_record": "layout/symbols.json:code.f_00F8_02BE",
+      "canonical_symbol_record": "layout/symbols.json:code.MacTickCount",
+      "source": {
+        "path": "src/root/m00F8.c",
+        "sha256": "4ee148ec616e199f61b671df89da8a21f1789c4177d3dbc7b76a478acb98184a",
+        "line_start": 159,
+        "line_end": 162,
+        "text": "long far MacTickCount(void)\n{\n    return TickCount() * 3;\n}"
+      },
+      "abi": "far long, zero stack words; original MacTickCount calls zero-argument far unsigned-long TickCount then multiplies by 3"
+    },
+    "f_22BF_0A22": {
+      "alias_of": "win_IsWinInFront",
+      "symbol_record": "layout/symbols.json:code.f_22BF_0A22",
+      "canonical_symbol_record": "layout/symbols.json:code.win_IsWinInFront",
+      "source": {
+        "path": "src/root/m22BF.c",
+        "sha256": "f5b617067cdc711593e94dbb725ae9ceaeb12b890f198af0d66c1973e15133a0",
+        "line_start": 501,
+        "line_end": 505,
+        "text": "int _fastcall win_IsWinInFront(int win)\n{\n    if (g_5702[0] == win)\n        return 1;\n    return 0;"
+      },
+      "abi": "__fastcall int win in AX; zero stack words; trace-only callback handler continues into original body reading g_5702[0]"
+    },
+    "fd_50F6_0204": {
+      "declaration": {
+        "path": "work/takeover/hardtail/seeds/root_0E2E_c611660dde4d.c",
+        "sha256": "c611660dde4da7117c3232aa06e597871394cc4112466d46559705b235424359",
+        "line": 59,
+        "text": "extern long far fd_50F6_0204;"
+      },
+      "fixture_width_bytes": 4,
+      "observed_width_bytes": 4
+    },
+    "g_5702": {
+      "canonical_source": {
+        "path": "src/root/m22BF.c",
+        "sha256": "f5b617067cdc711593e94dbb725ae9ceaeb12b890f198af0d66c1973e15133a0",
+        "line": 32,
+        "text": "extern int g_5702[];"
+      },
+      "seeded_element": "g_5702[0] is the current top-window ID; no completion dictionary"
+    }
+  }
+}

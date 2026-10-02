@@ -1,0 +1,438 @@
+{
+  "schema": "simant-behavior-evidence-manifest-v1",
+  "policy": {
+    "exact_evidence": "Maintained only by the historical acceptance tools. This registry does not edit or reclassify EXACT claims.",
+    "behavior_exact": "Requires a validated original-vs-candidate run, reviewed boundary contract, negative controls, current pins, and explicit registration.",
+    "initial_status": "All rows below were open in the pinned hard-tail inventory; no behavioral claims are registered."
+  },
+  "inventory_source": "work\\takeover\\hardtail\\all-open.json",
+  "inventory_source_sha256": "2b9038df4ee8cad474a346ce754af81d607da3cd6213615185e17c40dc4cf97f",
+  "main_commit": "54cb824d19c2f897ab17c8b163a954121d4e4843",
+  "historical_manifest_sha256": "c2850fb5d252bd490bb9d0d2994e1463b25a5e6a4f187ed4f4730dcf91e2f4fd",
+  "entries": {
+    "f_0250_1018": {
+      "status": "BEHAVIOR_EXACT",
+      "evidence_path": "evidence/behavior/functions/f_0250_1018/contracts/logical-render-v2/evidence.json",
+      "evidence_sha256": "9a7cf20f48849f8f63517b1752484be48f06cf14c5d9b521f54decfb1ff73e36",
+      "initial_source_path": "work/takeover/hardtail/seeds/root_0250_e41a4ab8c56c.c",
+      "initial_source_sha256": "e41a4ab8c56c0d4923ace8b02027f2471feee049aabe0577588e206e930b4db2",
+      "initial_target_bytes": 646,
+      "registered_at": "2026-10-02T01:01:42+00:00",
+      "registration_review": {
+        "reviewer": "root",
+        "note": "Independent root source/contract/ABI review; immutable differential ledgers and compiled controls verified. Finite recorded domain only; historical EXACT status unchanged."
+      },
+      "validation_receipt_sha256": "b88064bdfca6be5b64690fefc6eb2357df33acb375d27233d59b49387f6437c5"
+    },
+    "f_0250_129E": {
+      "status": "BEHAVIOR_EXACT",
+      "evidence_path": "evidence/behavior/functions/f_0250_129E/contracts/logical-render-v2/evidence.json",
+      "evidence_sha256": "2fa51f664b8d89603b85960376d79d3c2daf0ffa6cbf248c8c2cf7685f155717",
+      "initial_source_path": "work/takeover/hardtail/seeds/root_0250_e41a4ab8c56c.c",
+      "initial_source_sha256": "e41a4ab8c56c0d4923ace8b02027f2471feee049aabe0577588e206e930b4db2",
+      "initial_target_bytes": 264,
+      "registered_at": "2026-10-02T01:02:01+00:00",
+      "registration_review": {
+        "reviewer": "root",
+        "note": "Independent root source/contract/ABI review; immutable differential ledgers and compiled controls verified. Finite recorded domain only; historical EXACT status unchanged."
+      },
+      "validation_receipt_sha256": "a83952967462d26271d1423388ffbac54aa32f7010d9e03da324816ff72e7509"
+    },
+    "DrawBalloons": {
+      "status": "BEHAVIOR_EXACT",
+      "evidence_path": "evidence/behavior/functions/DrawBalloons/contracts/logical-render-v1/evidence.json",
+      "evidence_sha256": "d2a8cd74ac2703c968e267b6744593921e1253db7ab4f3056e8eacc9c3e8ed12",
+      "initial_source_path": "work/takeover/hardtail/seeds/root_0250_e41a4ab8c56c.c",
+      "initial_source_sha256": "e41a4ab8c56c0d4923ace8b02027f2471feee049aabe0577588e206e930b4db2",
+      "initial_target_bytes": 1060,
+      "registered_at": "2026-10-02T01:13:43+00:00",
+      "registration_review": {
+        "reviewer": "root",
+        "note": "Independent root source/contract/ABI review; immutable differential ledgers and compiled controls verified. Finite recorded domain only; historical EXACT status unchanged."
+      },
+      "validation_receipt_sha256": "a6501a3fabe5c01895a2a6ffae11b446b4a11584a06f67e2fc39c1c19df547e6"
+    },
+    "SpiderScan": {
+      "status": "BEHAVIOR_EXACT",
+      "evidence_path": "evidence/behavior/functions/SpiderScan/reviews/contract-v2/evidence.json",
+      "evidence_sha256": "f33c28dd24f9d070513b66fb9bb1f02b7c789cafe269f2dc61cd09531447bc67",
+      "initial_source_path": "work/takeover/hardtail/seeds/root_0CDB_2d2192f4ada7.c",
+      "initial_source_sha256": "2d2192f4ada76eb4676d174932847e3807c987f294b1fbbae9287ddcbbd81734",
+      "initial_target_bytes": 392,
+      "registered_at": "2026-10-01T23:42:36+00:00",
+      "registration_review": {
+        "reviewer": "root",
+        "note": "Reviewed dead initialization data flow, original RNG/ant/map helpers, all simulation state and exact laser request tuples;10146 paired cases and two source mutants pass. Device effects remain normalized intent and historical byte debt remains separate."
+      },
+      "validation_receipt_sha256": "9f3f22ec88ed8138e84fcb839352e254af29b8a9fffb591387cc908817b69751"
+    },
+    "LessonDone": {
+      "status": "BEHAVIOR_EXACT",
+      "evidence_path": "evidence/behavior/functions/LessonDone/contracts/host-service-v1/evidence.json",
+      "evidence_sha256": "848ee18ec26e7ad2b0f9d541772d9c6d58bc3a9499cefcc9cc2eee126747f94a",
+      "initial_source_path": "work/takeover/hardtail/seeds/root_0E2E_c611660dde4d.c",
+      "initial_source_sha256": "c611660dde4da7117c3232aa06e597871394cc4112466d46559705b235424359",
+      "initial_target_bytes": 723,
+      "registered_at": "2026-10-02T01:06:30+00:00",
+      "registration_review": {
+        "reviewer": "root",
+        "note": "Independent root source/contract/ABI review; immutable differential ledgers and compiled controls verified. Finite recorded domain only; historical EXACT status unchanged."
+      },
+      "validation_receipt_sha256": "8d8c3f3b5f7ba7587938f4b174e6314af900ce23d695bacffb07bcccef8c87a5"
+    },
+    "f_171C_09CC": {
+      "status": "BEHAVIOR_EXACT",
+      "evidence_path": "evidence/behavior/functions/f_171C_09CC/contracts/live-state-v2/evidence.json",
+      "evidence_sha256": "3eb10d7520c4f48c708d5c16d18e16b66d72f7262cc39d8a2863c9f4fd90f88d",
+      "initial_source_path": "work/takeover/hardtail/seeds/root_171C_0fee78bc34bc.c",
+      "initial_source_sha256": "0fee78bc34bc65ef6b9e3742cc5fd5f5ca5c749eb5844f71f42c66b52242c294",
+      "initial_target_bytes": 144,
+      "registered_at": "2026-10-02T00:28:39+00:00",
+      "registration_review": {
+        "reviewer": "root",
+        "note": "Independent root source/contract/ABI review; immutable differential ledgers and compiled controls verified. Finite recorded domain only; historical EXACT status unchanged."
+      },
+      "validation_receipt_sha256": "6087d343c0ee822d59108340937d9632a54d211c0d367da07d2640522c8ba3bf"
+    },
+    "f_171C_0ADC": {
+      "status": "BEHAVIOR_EXACT",
+      "evidence_path": "evidence/behavior/functions/f_171C_0ADC/contracts/live-state-v2/evidence.json",
+      "evidence_sha256": "357d1709069e947c450fe39e64254bda89d83c76f95b18c944e32f3439512600",
+      "initial_source_path": "work/takeover/hardtail/seeds/root_171C_0fee78bc34bc.c",
+      "initial_source_sha256": "0fee78bc34bc65ef6b9e3742cc5fd5f5ca5c749eb5844f71f42c66b52242c294",
+      "initial_target_bytes": 262,
+      "registered_at": "2026-10-02T00:28:49+00:00",
+      "registration_review": {
+        "reviewer": "root",
+        "note": "Independent root source/contract/ABI review; immutable differential ledgers and compiled controls verified. Finite recorded domain only; historical EXACT status unchanged."
+      },
+      "validation_receipt_sha256": "8da1f98afb8785b0b88e6f937c2d2cf9c3cd9d8b9cc23b94a347dc63b2c26aea"
+    },
+    "f_171C_0FBC": {
+      "status": "BEHAVIOR_EXACT",
+      "evidence_path": "evidence/behavior/functions/f_171C_0FBC/contracts/live-state-v2/evidence.json",
+      "evidence_sha256": "283d65f7c8d32de78190b5f6b34186d77470833629771af3c66ce58ca6adb02c",
+      "initial_source_path": "work/takeover/hardtail/seeds/root_171C_0fee78bc34bc.c",
+      "initial_source_sha256": "0fee78bc34bc65ef6b9e3742cc5fd5f5ca5c749eb5844f71f42c66b52242c294",
+      "initial_target_bytes": 566,
+      "registered_at": "2026-10-02T00:29:11+00:00",
+      "registration_review": {
+        "reviewer": "root",
+        "note": "Independent root source/contract/ABI review; immutable differential ledgers and compiled controls verified. Finite recorded domain only; historical EXACT status unchanged."
+      },
+      "validation_receipt_sha256": "2e7635033d5bddea0cecc125f49e1f717f714ff83079d72d86091923d8e9dd1f"
+    },
+    "f_171C_0CF4": {
+      "status": "BEHAVIOR_EXACT",
+      "evidence_path": "evidence/behavior/functions/f_171C_0CF4/contracts/live-state-v2/evidence.json",
+      "evidence_sha256": "2b7ed4379388ba1fcb93cd78c19c10f43965185e3c96ee61bbf5ebea8ef955c8",
+      "initial_source_path": "work/takeover/hardtail/seeds/root_171C_7decbec511e9.c",
+      "initial_source_sha256": "7decbec511e93ca79a5b4238561aa24e3fb1c794506f337af6d3aa11506bbfac",
+      "initial_target_bytes": 490,
+      "registered_at": "2026-10-02T00:29:00+00:00",
+      "registration_review": {
+        "reviewer": "root",
+        "note": "Independent root source/contract/ABI review; immutable differential ledgers and compiled controls verified. Finite recorded domain only; historical EXACT status unchanged."
+      },
+      "validation_receipt_sha256": "49639d4feb6fbc2655ce5b05a94ac2d624e7530cdd81aa85ae8a4869a721c470"
+    },
+    "FindIndex": {
+      "status": "BEHAVIOR_EXACT",
+      "evidence_path": "evidence/behavior/functions/FindIndex/evidence.json",
+      "evidence_sha256": "8de2f5ff812103303c0240d944214bbd0e996a5c9f26ac1b7987abba81a52e1e",
+      "initial_source_path": "work/takeover/hardtail/seeds/root_1986_1af5252fe844.c",
+      "initial_source_sha256": "1af5252fe8449eeca44b4099fe4a4bd1ff5ab24521c7a888253adfdd4554ac5a",
+      "initial_target_bytes": 267,
+      "registered_at": "2026-10-01T22:55:49+00:00",
+      "registration_review": {
+        "reviewer": "root",
+        "note": "Reviewed signed key ordering, cursor writes and preserved one-past lookahead behavior. All 15785 recorded oracle comparisons match; source mutants detected. Historical lowering debt remains unowned."
+      },
+      "validation_receipt_sha256": "37f184799a6489358cfa6ea2c1bbb2303b29b1feb31bb6d954a6debb9c312a22"
+    },
+    "f_1C62_0415": {
+      "status": "BEHAVIOR_EXACT",
+      "evidence_path": "evidence/behavior/functions/f_1C62_0415/contracts/host-service-v1/evidence.json",
+      "evidence_sha256": "5a187518c7864bf81caf5c7499e013b76767a8232577e830dbc0d055d5c5dd7a",
+      "initial_source_path": "work/takeover/hardtail/seeds/root_1C62_1a75da44054b.c",
+      "initial_source_sha256": "1a75da44054b48e33e02b0dc551e9e690d1b0797b5e2cfe2e3e6e26ad3b632d4",
+      "initial_target_bytes": 649,
+      "registered_at": "2026-10-02T01:06:41+00:00",
+      "registration_review": {
+        "reviewer": "root",
+        "note": "Independent root source/contract/ABI review; immutable differential ledgers and compiled controls verified. Finite recorded domain only; historical EXACT status unchanged."
+      },
+      "validation_receipt_sha256": "78e1e3c364bd72309fdc4cbf81c3da448473d769e4ae798cc024a025feb299bc"
+    },
+    "f_1E57_038E": {
+      "status": "BEHAVIOR_EXACT",
+      "evidence_path": "evidence/behavior/functions/f_1E57_038E/contracts/window-valid-v1/evidence.json",
+      "evidence_sha256": "f4d0f8436d03cd13c11e8117d737ec57fbed965f4eccafaac6a6a1a0a6a617ba",
+      "initial_source_path": "work/takeover/hardtail/seeds/root_1E57_edfb01cec348.c",
+      "initial_source_sha256": "edfb01cec348d79243d7cc1630248045fa7790a321192f83d185298d0e9b67f6",
+      "initial_target_bytes": 997,
+      "registered_at": "2026-10-02T00:27:58+00:00",
+      "registration_review": {
+        "reviewer": "root",
+        "note": "Independent root source/contract/ABI review; immutable differential ledgers and compiled controls verified. Finite recorded domain only; historical EXACT status unchanged."
+      },
+      "validation_receipt_sha256": "92c74ef1fe7f8c12d52fb51647a2f269d86972db91359becf9138a0253e9c609"
+    },
+    "f_20E8_0903": {
+      "status": "BEHAVIOR_EXACT",
+      "evidence_path": "evidence/behavior/functions/f_20E8_0903/contracts/window-valid-v1/evidence.json",
+      "evidence_sha256": "cb2e168ebd15fbf81eb5f99d049da9db26a2205d136f3ecca5ad6c45a84e832c",
+      "initial_source_path": "work/takeover/hardtail/seeds/root_20E8_e9f7805d6d35.c",
+      "initial_source_sha256": "e9f7805d6d353e1d3d432cd146073bae6bb8ec0be13b20e3543a3895e2a1ef49",
+      "initial_target_bytes": 286,
+      "registered_at": "2026-10-02T00:27:44+00:00",
+      "registration_review": {
+        "reviewer": "root",
+        "note": "Independent root source/contract/ABI review; immutable differential ledgers and compiled controls verified. Finite recorded domain only; historical EXACT status unchanged."
+      },
+      "validation_receipt_sha256": "f6797c316d9740ae16e51589b872527dae833fb1b7cffda98d7008fb7901bf13"
+    },
+    "win_UnlockWin": {
+      "status": "BEHAVIOR_EXACT",
+      "evidence_path": "evidence/behavior/functions/win_UnlockWin/contracts/window-valid-v1/evidence.json",
+      "evidence_sha256": "e9ec0087a5658073c7bb63b6ee6437936905936d85b6a8c5cb0ac8e523da608d",
+      "initial_source_path": "work/takeover/hardtail/seeds/root_23AE_23aa124a97a2.c",
+      "initial_source_sha256": "23aa124a97a2f213fcf99d0f3e9790e2a35813ee5e62d338f7ef205c5b03acc0",
+      "initial_target_bytes": 386,
+      "registered_at": "2026-10-02T00:27:53+00:00",
+      "registration_review": {
+        "reviewer": "root",
+        "note": "Independent root source/contract/ABI review; immutable differential ledgers and compiled controls verified. Finite recorded domain only; historical EXACT status unchanged."
+      },
+      "validation_receipt_sha256": "d95574328ce2093cd02d4749f91c60bc47b2e5ddce3b9ee0c4fa6ddffd210157"
+    },
+    "f_23E6_0000": {
+      "status": "BEHAVIOR_EXACT",
+      "evidence_path": "evidence/behavior/functions/f_23E6_0000/revisions/ss-ds-20261002/evidence.json",
+      "evidence_sha256": "33dd6ae134d51692b0d719e9694c7563d92afdac0a584b68178759a9058789ca",
+      "initial_source_path": "work/takeover/hardtail/seeds/root_23E6_867a7f15631d.c",
+      "initial_source_sha256": "867a7f15631db0ef33079daedea99f99e7ddc75b57f04b15bafca036f14c5ee7",
+      "initial_target_bytes": 159,
+      "registered_at": "2026-10-01T22:15:05+00:00",
+      "registration_review": {
+        "reviewer": "lead reconstruction engineer /root",
+        "note": "Reviewed original CX def-use, valid list fixture, original helpers, 10600 matched ledger rows and compiled-source skip-row negative. Behavioral closure only; historical bytes remain unowned."
+      },
+      "validation_receipt_sha256": "b2b0c2b25c31451cb13f1b525c0fc0e61bbc1d4d45d2163ef3ce712c93e312ba",
+      "initial_evidence_path": "evidence/behavior/functions/f_23E6_0000/evidence.json",
+      "initial_evidence_sha256": "e5a8edcc2ec724b3dae5c3a09ac922bf49ba9a275a3f655490d53836c9bf3d6e",
+      "revisions": [
+        {
+          "from_path": "evidence/behavior/functions/f_23E6_0000/evidence.json",
+          "from_sha256": "e5a8edcc2ec724b3dae5c3a09ac922bf49ba9a275a3f655490d53836c9bf3d6e",
+          "to_path": "evidence/behavior/functions/f_23E6_0000/revisions/ss-ds-20261002/evidence.json",
+          "to_sha256": "33dd6ae134d51692b0d719e9694c7563d92afdac0a584b68178759a9058789ca",
+          "receipt_sha256": "589ee6372483425f587a27480b9349d0cf392c5c3d5229cfb5a7df61f62625ec",
+          "review": {
+            "reviewer": "root",
+            "reason": "SS=DS stack-window correction; prior packet retained unchanged",
+            "reviewed_at": "2026-10-02"
+          }
+        }
+      ],
+      "last_revision_receipt_sha256": "589ee6372483425f587a27480b9349d0cf392c5c3d5229cfb5a7df61f62625ec"
+    },
+    "f_2505_0453": {
+      "status": "BEHAVIOR_EXACT",
+      "evidence_path": "evidence/behavior/functions/f_2505_0453/contracts/window-valid-v1/evidence.json",
+      "evidence_sha256": "c65527040e4aa8ac8dfcbbb90366d7f65aa92efdb2540fe919c890d96ee5b45e",
+      "initial_source_path": "work/takeover/hardtail/seeds/root_2505_22a03f15e95f.c",
+      "initial_source_sha256": "22a03f15e95fff376d27211426c4f9e3395e16e5decd92ef501fbfe3c1aba623",
+      "initial_target_bytes": 132,
+      "registered_at": "2026-10-02T00:27:49+00:00",
+      "registration_review": {
+        "reviewer": "root",
+        "note": "Independent root source/contract/ABI review; immutable differential ledgers and compiled controls verified. Finite recorded domain only; historical EXACT status unchanged."
+      },
+      "validation_receipt_sha256": "a458d8fb77307d0064521387c5f789bfc1cd9227504f075c2320f96d911c0f74"
+    },
+    "win_DrawBitMap": {
+      "status": "BEHAVIOR_EXACT",
+      "evidence_path": "evidence/behavior/functions/win_DrawBitMap/contracts/logical-render-v2/evidence.json",
+      "evidence_sha256": "990f93402c1192f7ce685e8b5825aac684cd1fdf17c07ee779c83024154f29e0",
+      "initial_source_path": "work/takeover/hardtail/seeds/root_259D_46f67c8023fd.c",
+      "initial_source_sha256": "46f67c8023fddd3389b7007a6d0f92df2d12373ed27eb3e78544f3ae4fe4bfab",
+      "initial_target_bytes": 663,
+      "registered_at": "2026-10-02T01:02:05+00:00",
+      "registration_review": {
+        "reviewer": "root",
+        "note": "Independent root source/contract/ABI review; immutable differential ledgers and compiled controls verified. Finite recorded domain only; historical EXACT status unchanged."
+      },
+      "validation_receipt_sha256": "f991cfe3cf8f195464983630a014f30f738884b313d7a3e93d7a59f4b5e2c6e9"
+    },
+    "f_2815_0165": {
+      "status": "BEHAVIOR_EXACT",
+      "evidence_path": "evidence/behavior/functions/f_2815_0165/evidence.json",
+      "evidence_sha256": "dde6cb84a43ab8668dca3c9c4869ef6af534bf17e2e790d5a64ea9e290b0dc2a",
+      "initial_source_path": "work/takeover/hardtail/seeds/root_2815_8b6ca1b25908.c",
+      "initial_source_sha256": "8b6ca1b25908a00cdd6fea2212943f7345680945d25e1a59e0f1fb69352958bc",
+      "initial_target_bytes": 232,
+      "registered_at": "2026-10-01T22:44:29+00:00",
+      "registration_review": {
+        "reviewer": "lead reconstruction engineer /root",
+        "note": "Reviewed natural C scaling/transposition/clamps, original AdLib assembly execution, 7851 actual recorded comparisons, independent status-byte controls and three detected compiled source mutations. Acoustic hardware and historical codegen remain separate."
+      },
+      "validation_receipt_sha256": "6012b3f4407a3ca36a14612086d0461aedca6d0cd5fbd64c4ec02cdb695ac108"
+    },
+    "f_284A_0138": {
+      "status": "BEHAVIOR_EXACT",
+      "evidence_path": "evidence/behavior/functions/f_284A_0138/evidence.json",
+      "evidence_sha256": "cbe831e8260b122b537c96510fe3c17c2409fe5247b40dd2574c4a16aac2e8e7",
+      "initial_source_path": "work/takeover/hardtail/seeds/root_284A_5d328bf943dd.c",
+      "initial_source_sha256": "5d328bf943dd3b1dd8dd797ba7d63885777facf9ea5c194b6b222244bd937a35",
+      "initial_target_bytes": 25,
+      "registered_at": "2026-10-01T22:44:14+00:00",
+      "registration_review": {
+        "reviewer": "lead reconstruction engineer /root",
+        "note": "Reviewed natural based-pointer C, all byte lanes/endian/wrap controls, 20538 actual recorded comparisons and compiled source mutation. Codegen byte-role debt remains separate."
+      },
+      "validation_receipt_sha256": "73846cb5ad0e5812e3fb1c469c908bdc9e6350d0acbdc15d2a9f633f5e41d12e"
+    },
+    "f_29D6_000A": {
+      "status": "BEHAVIOR_EXACT",
+      "evidence_path": "evidence/behavior/functions/f_29D6_000A/evidence.json",
+      "evidence_sha256": "fc2ddba53c13660ea8201699b7bf08c4d08a33ddc4d46c0face2d2bb3d49b91e",
+      "initial_source_path": "work/takeover/hardtail/seeds/root_29D6_55476efe4ad6.c",
+      "initial_source_sha256": "55476efe4ad6d0cd853cd794f731ff8f33df921577e092fc3e80e9b322b4c388",
+      "initial_target_bytes": 120,
+      "registered_at": "2026-10-01T22:56:04+00:00",
+      "registration_review": {
+        "reviewer": "root",
+        "note": "Reviewed natural whole-module C replacing arithmetic ASM workaround; supported channel/note/volume grid and 20000 randomized caller states agree with original ordered port205 writes. Other module claims/data remain exact. Out-of-domain probes are diagnostic only."
+      },
+      "validation_receipt_sha256": "31dbdfd1116b0182be449fbaa0f1a05baa128935e8a6dcf22e8087fbbad36104"
+    },
+    "o10_35F5_0384": {
+      "status": "BEHAVIOR_EXACT",
+      "evidence_path": "evidence/behavior/functions/o10_35F5_0384/contracts/host-service-v1/evidence.json",
+      "evidence_sha256": "2952a0a32bcd2e488ef97ee767eb96c75165e90447bd269b0a9cc138fd8b53ff",
+      "initial_source_path": "work/takeover/hardtail/seeds/S10_35F5_4b9dda15dbea.c",
+      "initial_source_sha256": "4b9dda15dbea1c8fd204ed95d4cb6a909751a59d0517909e90c4626cad3c7888",
+      "initial_target_bytes": 1759,
+      "registered_at": "2026-10-02T01:06:37+00:00",
+      "registration_review": {
+        "reviewer": "root",
+        "note": "Independent root source/contract/ABI review; immutable differential ledgers and compiled controls verified. Finite recorded domain only; historical EXACT status unchanged."
+      },
+      "validation_receipt_sha256": "fbcf50171b0553c82dd04175c3c3c64deb76043176631e09386a304c6bff32fa"
+    },
+    "DrawMapCursor": {
+      "status": "BEHAVIOR_EXACT",
+      "evidence_path": "evidence/behavior/functions/DrawMapCursor/contracts/logical-render-v2/evidence.json",
+      "evidence_sha256": "088fcdbfce80ba2838939df6a66904bbad765530afdec664b228ca971671d224",
+      "initial_source_path": "work/takeover/hardtail/seeds/S12_384C_daa607847c4c.c",
+      "initial_source_sha256": "daa607847c4c0364358a7b57d3f790dd9981e284bf2cedd01fa1fb3ac4df918a",
+      "initial_target_bytes": 205,
+      "registered_at": "2026-10-02T01:01:16+00:00",
+      "registration_review": {
+        "reviewer": "root",
+        "note": "Independent root source/contract/ABI review; immutable differential ledgers and compiled controls verified. Finite recorded domain only; historical EXACT status unchanged."
+      },
+      "validation_receipt_sha256": "eb98866d0e38de4349088a99ebf1d1f1ebc22205fe9c742f67f7060f6916765b"
+    },
+    "InvertPatch": {
+      "status": "BEHAVIOR_EXACT",
+      "evidence_path": "evidence/behavior/functions/InvertPatch/contracts/logical-render-v2/evidence.json",
+      "evidence_sha256": "6b2dd650eeaca16004f1baaab03becb15ecde10d6fb445c618e6ddfde6453cac",
+      "initial_source_path": "work/takeover/hardtail/seeds/S13_384C_1ace9a298569.c",
+      "initial_source_sha256": "1ace9a2985696a7c254c9cfcfafc504be9126f07c47672c6bf79e3e2a570e801",
+      "initial_target_bytes": 261,
+      "registered_at": "2026-10-02T01:01:23+00:00",
+      "registration_review": {
+        "reviewer": "root",
+        "note": "Independent root source/contract/ABI review; immutable differential ledgers and compiled controls verified. Finite recorded domain only; historical EXACT status unchanged."
+      },
+      "validation_receipt_sha256": "439ab44440611ac29fa350539bee12becdbe8bda8b1fbf0c347837b8561edc96"
+    },
+    "o15_384C_0239": {
+      "status": "BEHAVIOR_EXACT",
+      "evidence_path": "evidence/behavior/functions/o15_384C_0239/contracts/actual-window-v2/evidence.json",
+      "evidence_sha256": "c53338c7b842eec90b3879bb66ab7aa3670ef440d1dc276e8e1255218e26a326",
+      "initial_source_path": "work/takeover/hardtail/seeds/S15_384C_01b51eecedcd.c",
+      "initial_source_sha256": "01b51eecedcd28e2213819572c846a9754039f4a527e6da5e56e57783398bdd5",
+      "initial_target_bytes": 326,
+      "registered_at": "2026-10-02T01:41:52+00:00",
+      "registration_review": {
+        "reviewer": "root",
+        "note": "Independent root source/contract/ABI review; immutable differential ledgers and compiled controls verified. Finite recorded domain only; historical EXACT status unchanged."
+      },
+      "validation_receipt_sha256": "4bbaafc3560e26ddc146df60e23d02b7343b27c79db35fa8e27e0bf0901b2493"
+    },
+    "win_PrintStyleTextInRect": {
+      "status": "BEHAVIOR_EXACT",
+      "evidence_path": "evidence/behavior/functions/win_PrintStyleTextInRect/contracts/logical-text-v2/evidence.json",
+      "evidence_sha256": "2c2c403b2892bd7dff568a90c9384475c83be29d4441e3c2b35e5c0b388ad350",
+      "initial_source_path": "work/takeover/hardtail/seeds/S23_39C7_f4abf38a26c5.c",
+      "initial_source_sha256": "f4abf38a26c57d6871cc0df7102929216e1706ad9b92de7ede807199df1f26db",
+      "initial_target_bytes": 1039,
+      "registered_at": "2026-10-02T00:56:52+00:00",
+      "registration_review": {
+        "reviewer": "root",
+        "note": "Independent root source/contract/ABI review; immutable differential ledgers and compiled controls verified. Finite recorded domain only; historical EXACT status unchanged."
+      },
+      "validation_receipt_sha256": "276b21f819e8559a15877de0c11e2f6810f6e550803ce4fab5c383f2851d1e1a"
+    },
+    "DisplayCard": {
+      "status": "BEHAVIOR_EXACT",
+      "evidence_path": "evidence/behavior/functions/DisplayCard/contracts/logical-text-v2/evidence.json",
+      "evidence_sha256": "88c2e427234dab982d1e80bb3dfd1329c32116e29c425e475cbbe45099a53399",
+      "initial_source_path": "work/takeover/hardtail/seeds/S23_39C7_5e8e5f393259.c",
+      "initial_source_sha256": "5e8e5f39325914cc1a6f1b5de9e5c894818e47d68a7ce594b2a514c99b37a1ea",
+      "initial_target_bytes": 1457,
+      "registered_at": "2026-10-02T00:56:59+00:00",
+      "registration_review": {
+        "reviewer": "root",
+        "note": "Independent root source/contract/ABI review; immutable differential ledgers and compiled controls verified. Finite recorded domain only; historical EXACT status unchanged."
+      },
+      "validation_receipt_sha256": "cc6e8298f31003e46ea7e69bd6c97e7a737f59196ed9282dd1c19d3774c85b62"
+    },
+    "drawHistGraph": {
+      "status": "BEHAVIOR_EXACT",
+      "evidence_path": "evidence/behavior/functions/drawHistGraph/contracts/logical-text-v3/evidence.json",
+      "evidence_sha256": "45068b9f8d3ee028f6522b5450958fbea09feeab2f75a5ecb71c3df61e2dba89",
+      "initial_source_path": "work/takeover/hardtail/seeds/S24_39C7_764bcd8f1272.c",
+      "initial_source_sha256": "764bcd8f1272b6f9655a1fe305cea71d98e95b9ad9c285f69dc944fbfe21d34c",
+      "initial_target_bytes": 732,
+      "registered_at": "2026-10-02T00:58:27+00:00",
+      "registration_review": {
+        "reviewer": "root",
+        "note": "Independent root source/contract/ABI review; immutable differential ledgers and compiled controls verified. Finite recorded domain only; historical EXACT status unchanged."
+      },
+      "validation_receipt_sha256": "1357434a7b8dc7936ac031c6eb1296f1a619ef34a78752eeed5226e3f6bffdf5"
+    },
+    "o25_3BA4_1035": {
+      "status": "BEHAVIOR_EXACT",
+      "evidence_path": "evidence/behavior/functions/o25_3BA4_1035/evidence.json",
+      "evidence_sha256": "2181e1bc8d62d47308aa5b72f50360804a18afe2327e03103124a980c601029c",
+      "initial_source_path": "work/takeover/hardtail/seeds/S25_3BA4_5fc31bb8f45f.c",
+      "initial_source_sha256": "5fc31bb8f45f9e7fa299efe9667af06b29d61ab82a6a2f38715f40d939bd3947",
+      "initial_target_bytes": 281,
+      "registered_at": "2026-10-02T00:02:12+00:00",
+      "registration_review": {
+        "reviewer": "root",
+        "note": "10809 original-DOS differential transitions; original simulation helpers and all nonstack state checked, four compiled source controls detected. Logical UI/clock boundaries reviewed. Supplemental two-case clock replay retained under enternest-clock-boundary-20261002/root-review.json; historical register-allocation debt remains separate."
+      },
+      "validation_receipt_sha256": "d5b45360891c396185915ca392d2a5574e6b090a75287defa315df6ffa0f0732"
+    },
+    "o25_3BA4_1686": {
+      "status": "BEHAVIOR_EXACT",
+      "evidence_path": "evidence/behavior/functions/o25_3BA4_1686/evidence.json",
+      "evidence_sha256": "0cac92f88cdb80d3f276197dd0bd4e11617ecb107aafe7953a84823ad9b8a324",
+      "initial_source_path": "work/takeover/hardtail/seeds/S25_3BA4_5fc31bb8f45f.c",
+      "initial_source_sha256": "5fc31bb8f45f9e7fa299efe9667af06b29d61ab82a6a2f38715f40d939bd3947",
+      "initial_target_bytes": 516,
+      "registered_at": "2026-10-01T23:05:41+00:00",
+      "registration_review": {
+        "reviewer": "root",
+        "note": "Reviewed caller/state/helper composition: eight boolean neighbor classes exhaust all256 masks, original pure helper body runs, 322720 recorded comparisons and5000 arbitrary valid tile checks agree. Return/rot/dir/global mutations and actualcalls strict; two source mutants detected. Historical codegen debt stays separate."
+      },
+      "validation_receipt_sha256": "a9d2fa2a7de12c1f027dc89ed3763f2b087d45039d9643042e4f983daa8fec8a"
+    }
+  },
+  "updated_at": "2026-10-02T01:41:52+00:00"
+}

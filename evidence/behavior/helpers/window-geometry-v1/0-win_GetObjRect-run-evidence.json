@@ -1,0 +1,158 @@
+{
+  "schema": "behavior-run-evidence-v1",
+  "completion": "COMPLETE",
+  "identity": {
+    "function": "win_GetObjRect",
+    "suite_id": "window_recalc_integration_v1",
+    "module": "root:2505",
+    "source_sha256": "22a03f15e95fff376d27211426c4f9e3395e16e5decd92ef501fbfe3c1aba623",
+    "compiled_source_sha256": "22a03f15e95fff376d27211426c4f9e3395e16e5decd92ef501fbfe3c1aba623",
+    "object_sha256": "21fce82ff3af12cd8fa9d95eb567ded80836c801967d1fe20bc24ef7bd1a3651",
+    "linked_code_sha256": "b2ba376c8f5c582f27f649a938e82e3ab08e30f98f3a8f47541e885140138139",
+    "oracle_sha256": "aa0596c6766322a8229ee3c36e57048c92adc82d50fbe2ef37afb8b85fcf4f11",
+    "harness_sha256": "2c0799048057f59eae61a48be4d695278635594484adf0c70bf46c51b4e0c799",
+    "manifest_sha256": "025a0a9255d910cae4b122ab5a3f3fb40888bb456d7fe42158db7c9e622fcf50",
+    "profile": "msc600ax",
+    "flags": [
+      "/AL",
+      "/Os",
+      "/Oe",
+      "/Og",
+      "/Gs",
+      "/Zi"
+    ],
+    "address": {
+      "unit": "root",
+      "seg": 9477,
+      "off": 648,
+      "size": 79
+    },
+    "suite_sha256": "303df073f38e8bca72345d85b21031a11c147bb89c2fbe48514fc4ab9566d9f2",
+    "historical_manifest_sha256": "025a0a9255d910cae4b122ab5a3f3fb40888bb456d7fe42158db7c9e622fcf50"
+  },
+  "execution": {
+    "engine": "PreparedPair.compare",
+    "actual_original_execution": true,
+    "actual_candidate_execution": true,
+    "original_exe_sha256": "aa0596c6766322a8229ee3c36e57048c92adc82d50fbe2ef37afb8b85fcf4f11"
+  },
+  "cases": {
+    "directed": {
+      "generated": 1,
+      "executed": 1,
+      "actual_original_invocations": 1,
+      "actual_candidate_invocations": 1,
+      "seeds": []
+    },
+    "randomized": {
+      "generated": 99,
+      "executed": 99,
+      "actual_original_invocations": 99,
+      "actual_candidate_invocations": 99,
+      "seeds": [
+        621145249
+      ]
+    }
+  },
+  "errors": 0,
+  "mismatches": 0,
+  "compared_effects": [
+    "win_GetObjRect returned Rect through far output pointer",
+    "selected real DOS window/object table and geometry",
+    "valid Ralloc handle/header/free-list and lock state",
+    "actual original win_LockWin/f_2505_0006/win_UnlockWin execution",
+    "all non-stack writes and final bytes",
+    "preserved registers and caller stack"
+  ],
+  "case_ledger": {
+    "path": "win_GetObjRect-case-ledger.jsonl.gz",
+    "sha256": "01eafab63247ac366b639838818b256751183c6b0e3ea0413d849329079e3724",
+    "row_count": 100,
+    "lane_counts": {
+      "directed": 1,
+      "randomized": 99
+    },
+    "compression": "gzip",
+    "identity": {
+      "address": {
+        "off": 648,
+        "seg": 9477,
+        "size": 79,
+        "unit": "root"
+      },
+      "compiled_source_sha256": "22a03f15e95fff376d27211426c4f9e3395e16e5decd92ef501fbfe3c1aba623",
+      "flags": [
+        "/AL",
+        "/Os",
+        "/Oe",
+        "/Og",
+        "/Gs",
+        "/Zi"
+      ],
+      "function": "win_GetObjRect",
+      "harness_sha256": "2c0799048057f59eae61a48be4d695278635594484adf0c70bf46c51b4e0c799",
+      "linked_code_sha256": "b2ba376c8f5c582f27f649a938e82e3ab08e30f98f3a8f47541e885140138139",
+      "manifest_sha256": "025a0a9255d910cae4b122ab5a3f3fb40888bb456d7fe42158db7c9e622fcf50",
+      "object_sha256": "21fce82ff3af12cd8fa9d95eb567ded80836c801967d1fe20bc24ef7bd1a3651",
+      "oracle_sha256": "aa0596c6766322a8229ee3c36e57048c92adc82d50fbe2ef37afb8b85fcf4f11",
+      "profile": "msc600ax",
+      "source": "src\\root\\m2505.c",
+      "source_sha256": "22a03f15e95fff376d27211426c4f9e3395e16e5decd92ef501fbfe3c1aba623",
+      "unicorn_version": "2.1.4"
+    }
+  },
+  "unmodeled_boundaries": 0,
+  "peer_data_gates": "PASS",
+  "positive_controls": [
+    {
+      "id": "getobjrect/positive",
+      "executed": true,
+      "matched": true,
+      "execution_errors": 0,
+      "original_executed": true,
+      "candidate_executed": true,
+      "source_sha256": "22a03f15e95fff376d27211426c4f9e3395e16e5decd92ef501fbfe3c1aba623",
+      "object_sha256": "21fce82ff3af12cd8fa9d95eb567ded80836c801967d1fe20bc24ef7bd1a3651",
+      "oracle_sha256": "aa0596c6766322a8229ee3c36e57048c92adc82d50fbe2ef37afb8b85fcf4f11",
+      "compared_effects": [
+        "win_GetObjRect returned Rect through far output pointer",
+        "selected real DOS window/object table and geometry",
+        "valid Ralloc handle/header/free-list and lock state",
+        "actual original win_LockWin/f_2505_0006/win_UnlockWin execution",
+        "all non-stack writes and final bytes",
+        "preserved registers and caller stack"
+      ],
+      "original_observation_sha256": "624f497018fd108e6ed5308d34ab44b581302b6d89f2537b503b2e22b3d9ed9e",
+      "candidate_observation_sha256": "624f497018fd108e6ed5308d34ab44b581302b6d89f2537b503b2e22b3d9ed9e"
+    }
+  ],
+  "helper_boundaries": [
+    {
+      "name": "win_LockWin",
+      "execution_mode": "ORIGINAL_EXE",
+      "executed_from_original": true,
+      "observed_call_count": 100,
+      "original_call_count": 100,
+      "candidate_call_count": 100,
+      "observed_call_count_scope": "all integration cases"
+    },
+    {
+      "name": "f_2505_0006",
+      "execution_mode": "ORIGINAL_EXE",
+      "executed_from_original": true,
+      "observed_call_count": 200,
+      "original_call_count": 200,
+      "candidate_call_count": 200,
+      "observed_call_count_scope": "all integration cases"
+    },
+    {
+      "name": "win_UnlockWin",
+      "execution_mode": "ORIGINAL_EXE",
+      "executed_from_original": true,
+      "observed_call_count": 100,
+      "original_call_count": 100,
+      "candidate_call_count": 100,
+      "observed_call_count_scope": "all integration cases"
+    }
+  ]
+}

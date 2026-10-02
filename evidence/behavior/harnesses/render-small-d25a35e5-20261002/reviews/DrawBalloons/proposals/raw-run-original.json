@@ -1,0 +1,413 @@
+{
+  "schema": "behavior-run-evidence-v1",
+  "completion": "COMPLETE",
+  "identity": {
+    "function": "DrawBalloons",
+    "suite_id": "render_small_v1",
+    "module": "root:0250",
+    "address": {
+      "unit": "root",
+      "seg": 592,
+      "off": 19508,
+      "size": 1060
+    },
+    "source_sha256": "e41a4ab8c56c0d4923ace8b02027f2471feee049aabe0577588e206e930b4db2",
+    "compiled_source_sha256": "e41a4ab8c56c0d4923ace8b02027f2471feee049aabe0577588e206e930b4db2",
+    "suite_sha256": "d25a35e5a516d8f490bec1678e583c3a449c648b0a105a7bc32d3734841230df",
+    "harness_sha256": "2c0799048057f59eae61a48be4d695278635594484adf0c70bf46c51b4e0c799",
+    "oracle_sha256": "aa0596c6766322a8229ee3c36e57048c92adc82d50fbe2ef37afb8b85fcf4f11",
+    "historical_manifest_sha256": "025a0a9255d910cae4b122ab5a3f3fb40888bb456d7fe42158db7c9e622fcf50",
+    "object_sha256": "65e7e3cba83ea4eb02a221c4313e5e2ddb1570139d5881180e699fdeedfdd13a",
+    "profile": "msc600ax",
+    "flags": [
+      "/AL",
+      "/Os",
+      "/Oe",
+      "/Og",
+      "/Zi"
+    ]
+  },
+  "execution": {
+    "engine": "PreparedPair.compare",
+    "actual_original_execution": true,
+    "actual_candidate_execution": true,
+    "original_exe_sha256": "aa0596c6766322a8229ee3c36e57048c92adc82d50fbe2ef37afb8b85fcf4f11"
+  },
+  "cases": {
+    "directed": {
+      "generated": 9,
+      "executed": 9,
+      "actual_original_invocations": 9,
+      "actual_candidate_invocations": 9,
+      "seeds": []
+    },
+    "randomized": {
+      "generated": 1000,
+      "executed": 1000,
+      "actual_original_invocations": 1000,
+      "actual_candidate_invocations": 1000,
+      "seeds": [
+        48879
+      ]
+    }
+  },
+  "errors": 0,
+  "mismatches": 0,
+  "compared_effects": [
+    "return and caller ABI",
+    "ordered helper/render commands and arguments",
+    "global/map/cache writes",
+    "projected far-pointer data and nonstack memory"
+  ],
+  "case_ledger": {
+    "path": "build/workers/behavior_render_small/pinned-resource-final/DrawBalloons.cases.jsonl.gz",
+    "sha256": "a0fd7066fc2d216e62c62c5424b31023db3b4e3dfef4e33b6165179dc109d40e",
+    "row_count": 1009,
+    "lane_counts": {
+      "directed": 9,
+      "randomized": 1000
+    },
+    "compression": "gzip",
+    "identity": {
+      "address": {
+        "off": 19508,
+        "seg": 592,
+        "size": 1060,
+        "unit": "root"
+      },
+      "compiled_source_sha256": "e41a4ab8c56c0d4923ace8b02027f2471feee049aabe0577588e206e930b4db2",
+      "flags": [
+        "/AL",
+        "/Os",
+        "/Oe",
+        "/Og",
+        "/Zi"
+      ],
+      "function": "DrawBalloons",
+      "harness_sha256": "2c0799048057f59eae61a48be4d695278635594484adf0c70bf46c51b4e0c799",
+      "linked_code_sha256": "e54490818026c5883025c674710b4faf0bf9114a8d1c5943df96f733c17c660c",
+      "manifest_sha256": "025a0a9255d910cae4b122ab5a3f3fb40888bb456d7fe42158db7c9e622fcf50",
+      "object_sha256": "65e7e3cba83ea4eb02a221c4313e5e2ddb1570139d5881180e699fdeedfdd13a",
+      "oracle_sha256": "aa0596c6766322a8229ee3c36e57048c92adc82d50fbe2ef37afb8b85fcf4f11",
+      "profile": "msc600ax",
+      "source": "work\\takeover\\hardtail\\seeds\\root_0250_e41a4ab8c56c.c",
+      "source_sha256": "e41a4ab8c56c0d4923ace8b02027f2471feee049aabe0577588e206e930b4db2",
+      "unicorn_version": "2.1.4"
+    }
+  },
+  "unmodeled_boundaries": 0,
+  "peer_data_gates": "PASS",
+  "positive_controls": [
+    {
+      "id": "directed/mode1/no-spider",
+      "executed": true,
+      "matched": true,
+      "execution_errors": 0,
+      "original_executed": true,
+      "candidate_executed": true,
+      "source_sha256": "e41a4ab8c56c0d4923ace8b02027f2471feee049aabe0577588e206e930b4db2",
+      "object_sha256": "65e7e3cba83ea4eb02a221c4313e5e2ddb1570139d5881180e699fdeedfdd13a",
+      "oracle_sha256": "aa0596c6766322a8229ee3c36e57048c92adc82d50fbe2ef37afb8b85fcf4f11",
+      "compared_effects": [
+        "return and caller ABI",
+        "ordered helper/render commands and arguments",
+        "global/map/cache writes",
+        "projected far-pointer data and nonstack memory"
+      ],
+      "original_observation_sha256": "9f81f7d8076f1125be7b0f578388b2cd22436f50a1bc6ca7e8e224a6306bd0ef",
+      "candidate_observation_sha256": "9f81f7d8076f1125be7b0f578388b2cd22436f50a1bc6ca7e8e224a6306bd0ef"
+    }
+  ],
+  "helper_boundaries": [
+    {
+      "name": "WinPrintf",
+      "execution_mode": "MODELED",
+      "observed_call_count": 2014,
+      "executed_from_original": false,
+      "contract": "formatted text command projection",
+      "certification": {
+        "status": "PENDING_SUPERVISOR_REVIEW",
+        "positive_control_id": "directed/mode1/no-spider",
+        "negative_control_ids": [
+          "DrawBalloons/width-increment",
+          "DrawBalloons/buffer-destination-offset"
+        ]
+      }
+    },
+    {
+      "name": "db_ReleaseHandle",
+      "execution_mode": "MODELED",
+      "observed_call_count": 0,
+      "executed_from_original": false,
+      "contract": "tile resource handle release fixture",
+      "certification": {
+        "status": "PENDING_SUPERVISOR_REVIEW",
+        "positive_control_id": "directed/mode1/no-spider",
+        "negative_control_ids": [
+          "DrawBalloons/width-increment",
+          "DrawBalloons/buffer-destination-offset"
+        ]
+      }
+    },
+    {
+      "name": "f_0250_062A",
+      "execution_mode": "ORIGINAL_EXE",
+      "observed_call_count": 1007,
+      "executed_from_original": true,
+      "contract": "original tile-set lookup helper; entry arguments traced",
+      "certification": null
+    },
+    {
+      "name": "f_0250_0643",
+      "execution_mode": "ORIGINAL_EXE",
+      "observed_call_count": 1007,
+      "executed_from_original": true,
+      "contract": "original tile-set selection helper; entry arguments traced",
+      "certification": null
+    },
+    {
+      "name": "f_0250_0721",
+      "execution_mode": "MODELED",
+      "observed_call_count": 1007,
+      "executed_from_original": false,
+      "contract": "message picture host blit trace",
+      "certification": {
+        "status": "PENDING_SUPERVISOR_REVIEW",
+        "positive_control_id": "directed/mode1/no-spider",
+        "negative_control_ids": [
+          "DrawBalloons/width-increment",
+          "DrawBalloons/buffer-destination-offset"
+        ]
+      }
+    },
+    {
+      "name": "f_0250_0915",
+      "execution_mode": "MODELED",
+      "observed_call_count": 259,
+      "executed_from_original": false,
+      "contract": "tile raster request and deterministic tile pixels",
+      "certification": {
+        "status": "PENDING_SUPERVISOR_REVIEW",
+        "positive_control_id": "directed/mode1/no-spider",
+        "negative_control_ids": [
+          "DrawBalloons/width-increment",
+          "DrawBalloons/buffer-destination-offset"
+        ]
+      }
+    },
+    {
+      "name": "f_0250_0ADB",
+      "execution_mode": "MODELED",
+      "observed_call_count": 1837,
+      "executed_from_original": false,
+      "contract": "tile pixel transfer into the composition buffer",
+      "certification": {
+        "status": "PENDING_SUPERVISOR_REVIEW",
+        "positive_control_id": "directed/mode1/no-spider",
+        "negative_control_ids": [
+          "DrawBalloons/width-increment",
+          "DrawBalloons/buffer-destination-offset"
+        ]
+      }
+    },
+    {
+      "name": "f_0250_0B86",
+      "execution_mode": "MODELED",
+      "observed_call_count": 1578,
+      "executed_from_original": false,
+      "contract": "alternate tile raster request and deterministic tile pixels",
+      "certification": {
+        "status": "PENDING_SUPERVISOR_REVIEW",
+        "positive_control_id": "directed/mode1/no-spider",
+        "negative_control_ids": [
+          "DrawBalloons/width-increment",
+          "DrawBalloons/buffer-destination-offset"
+        ]
+      }
+    },
+    {
+      "name": "f_0250_0D10",
+      "execution_mode": "MODELED",
+      "observed_call_count": 508,
+      "executed_from_original": false,
+      "contract": "clipping save/restore copy trace",
+      "certification": {
+        "status": "PENDING_SUPERVISOR_REVIEW",
+        "positive_control_id": "directed/mode1/no-spider",
+        "negative_control_ids": [
+          "DrawBalloons/width-increment",
+          "DrawBalloons/buffer-destination-offset"
+        ]
+      }
+    },
+    {
+      "name": "f_0250_5058",
+      "execution_mode": "MODELED",
+      "observed_call_count": 755,
+      "executed_from_original": false,
+      "contract": "window clipping state setup",
+      "certification": {
+        "status": "PENDING_SUPERVISOR_REVIEW",
+        "positive_control_id": "directed/mode1/no-spider",
+        "negative_control_ids": [
+          "DrawBalloons/width-increment",
+          "DrawBalloons/buffer-destination-offset"
+        ]
+      }
+    },
+    {
+      "name": "f_1629_000C",
+      "execution_mode": "MODELED",
+      "observed_call_count": 1007,
+      "executed_from_original": false,
+      "contract": "message database resource acquisition and message bytes",
+      "certification": {
+        "status": "PENDING_SUPERVISOR_REVIEW",
+        "positive_control_id": "directed/mode1/no-spider",
+        "negative_control_ids": [
+          "DrawBalloons/width-increment",
+          "DrawBalloons/buffer-destination-offset"
+        ]
+      }
+    },
+    {
+      "name": "f_171C_1A9E",
+      "execution_mode": "ORIGINAL_EXE",
+      "observed_call_count": 1007,
+      "executed_from_original": true,
+      "contract": "original Ralloc allocation helper over valid fixture arena",
+      "certification": null
+    },
+    {
+      "name": "f_171C_1B84",
+      "execution_mode": "ORIGINAL_EXE",
+      "observed_call_count": 2014,
+      "executed_from_original": true,
+      "contract": "original Ralloc lock helper over valid fixture handle table",
+      "certification": null
+    },
+    {
+      "name": "f_171C_1BBA",
+      "execution_mode": "ORIGINAL_EXE",
+      "observed_call_count": 1007,
+      "executed_from_original": true,
+      "contract": "original Ralloc unlock helper over valid fixture handle table",
+      "certification": null
+    },
+    {
+      "name": "f_171C_1C0A",
+      "execution_mode": "ORIGINAL_EXE",
+      "observed_call_count": 1007,
+      "executed_from_original": true,
+      "contract": "original Ralloc free helper over valid fixture arena",
+      "certification": null
+    },
+    {
+      "name": "f_1A53_00BA",
+      "execution_mode": "MODELED",
+      "observed_call_count": 1007,
+      "executed_from_original": false,
+      "contract": "tile resource handle acquisition fixture",
+      "certification": {
+        "status": "PENDING_SUPERVISOR_REVIEW",
+        "positive_control_id": "directed/mode1/no-spider",
+        "negative_control_ids": [
+          "DrawBalloons/width-increment",
+          "DrawBalloons/buffer-destination-offset"
+        ]
+      }
+    },
+    {
+      "name": "f_24AB_02AD",
+      "execution_mode": "MODELED",
+      "observed_call_count": 2018,
+      "executed_from_original": false,
+      "contract": "font selection state",
+      "certification": {
+        "status": "PENDING_SUPERVISOR_REVIEW",
+        "positive_control_id": "directed/mode1/no-spider",
+        "negative_control_ids": [
+          "DrawBalloons/width-increment",
+          "DrawBalloons/buffer-destination-offset"
+        ]
+      }
+    }
+  ],
+  "source_snapshot": {
+    "path": "build/workers/behavior_render_small/pinned-resource-final/source-snapshots/DrawBalloons.c",
+    "sha256": "e41a4ab8c56c0d4923ace8b02027f2471feee049aabe0577588e206e930b4db2"
+  },
+  "helper_boundary_plan": "DrawBalloons.helper-boundary-plan.json",
+  "coverage": {
+    "directed_labels": [
+      "directed/mode1/no-spider",
+      "directed/mode2/no-spider",
+      "directed/mode3/no-spider",
+      "directed/mode1/spider-clip",
+      "directed/pixel-phase",
+      "directed/visible-left-top",
+      "directed/visible-right-bottom",
+      "directed/outside-right-bottom",
+      "directed/outside-negative"
+    ],
+    "randomized_labels_sha256": "8905efa5f860d3c56325a3074488a17704918ba32429702b0d5b9ac08f233167",
+    "domain_values": {
+      "modes": [
+        1,
+        2,
+        3
+      ],
+      "planes": [
+        0,
+        1,
+        2,
+        3
+      ],
+      "picture_widths": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13
+      ],
+      "picture_heights": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12
+      ],
+      "coordinate_ranges": {
+        "x": [
+          -16,
+          640
+        ],
+        "y": [
+          48,
+          480
+        ]
+      },
+      "spider_clip_cases": 254
+    }
+  },
+  "helper_boundary_plan_sha256": "81b11f712eb0a709511e8ea8ed3b21e5954fede719835dd27704fc532b5becc6",
+  "negative_controls": {
+    "path": "build/workers/behavior_render_small/pinned-resource-final/DrawBalloons.negative-controls.json",
+    "sha256": "fabd02fd15469f9449ebac3e67874cb821b38da49a0249a55e2b838b487d6ce3"
+  }
+}

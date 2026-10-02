@@ -1,0 +1,419 @@
+{
+  "case_ledger": {
+    "compression": "gzip",
+    "identity": {
+      "address": {
+        "off": 19508,
+        "seg": 592,
+        "size": 1060,
+        "unit": "root"
+      },
+      "compiled_source_sha256": "e41a4ab8c56c0d4923ace8b02027f2471feee049aabe0577588e206e930b4db2",
+      "flags": [
+        "/AL",
+        "/Os",
+        "/Oe",
+        "/Og",
+        "/Zi"
+      ],
+      "function": "DrawBalloons",
+      "harness_sha256": "2c0799048057f59eae61a48be4d695278635594484adf0c70bf46c51b4e0c799",
+      "linked_code_sha256": "e54490818026c5883025c674710b4faf0bf9114a8d1c5943df96f733c17c660c",
+      "manifest_sha256": "025a0a9255d910cae4b122ab5a3f3fb40888bb456d7fe42158db7c9e622fcf50",
+      "object_sha256": "65e7e3cba83ea4eb02a221c4313e5e2ddb1570139d5881180e699fdeedfdd13a",
+      "oracle_sha256": "aa0596c6766322a8229ee3c36e57048c92adc82d50fbe2ef37afb8b85fcf4f11",
+      "profile": "msc600ax",
+      "source": "work\\takeover\\hardtail\\seeds\\root_0250_e41a4ab8c56c.c",
+      "source_sha256": "e41a4ab8c56c0d4923ace8b02027f2471feee049aabe0577588e206e930b4db2",
+      "unicorn_version": "2.1.4"
+    },
+    "lane_counts": {
+      "directed": 9,
+      "randomized": 1000
+    },
+    "path": "evidence/behavior/harnesses/render-small-d25a35e5-20261002/runs/DrawBalloons/DrawBalloons.cases.jsonl.gz",
+    "row_count": 1009,
+    "sha256": "a0fd7066fc2d216e62c62c5424b31023db3b4e3dfef4e33b6165179dc109d40e"
+  },
+  "cases": {
+    "directed": {
+      "actual_candidate_invocations": 9,
+      "actual_original_invocations": 9,
+      "executed": 9,
+      "generated": 9,
+      "seeds": []
+    },
+    "randomized": {
+      "actual_candidate_invocations": 1000,
+      "actual_original_invocations": 1000,
+      "executed": 1000,
+      "generated": 1000,
+      "seeds": [
+        48879
+      ]
+    }
+  },
+  "compared_effects": [
+    "return and caller ABI",
+    "ordered helper/render commands and arguments",
+    "global/map/cache writes",
+    "projected far-pointer data and nonstack memory"
+  ],
+  "completion": "COMPLETE",
+  "coverage": {
+    "directed_labels": [
+      "directed/mode1/no-spider",
+      "directed/mode2/no-spider",
+      "directed/mode3/no-spider",
+      "directed/mode1/spider-clip",
+      "directed/pixel-phase",
+      "directed/visible-left-top",
+      "directed/visible-right-bottom",
+      "directed/outside-right-bottom",
+      "directed/outside-negative"
+    ],
+    "domain_values": {
+      "coordinate_ranges": {
+        "x": [
+          -16,
+          640
+        ],
+        "y": [
+          48,
+          480
+        ]
+      },
+      "modes": [
+        1,
+        2,
+        3
+      ],
+      "picture_heights": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12
+      ],
+      "picture_widths": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13
+      ],
+      "planes": [
+        0,
+        1,
+        2,
+        3
+      ],
+      "spider_clip_cases": 254
+    },
+    "randomized_labels_sha256": "8905efa5f860d3c56325a3074488a17704918ba32429702b0d5b9ac08f233167"
+  },
+  "errors": 0,
+  "execution": {
+    "actual_candidate_execution": true,
+    "actual_original_execution": true,
+    "engine": "PreparedPair.compare",
+    "original_exe_sha256": "aa0596c6766322a8229ee3c36e57048c92adc82d50fbe2ef37afb8b85fcf4f11"
+  },
+  "helper_boundaries": [
+    {
+      "certification": {
+        "negative_control_ids": [
+          "DrawBalloons/width-increment",
+          "DrawBalloons/buffer-destination-offset"
+        ],
+        "positive_control_id": "directed/mode1/no-spider",
+        "status": "PENDING_SUPERVISOR_REVIEW"
+      },
+      "contract": "formatted text command projection",
+      "executed_from_original": false,
+      "execution_mode": "MODELED",
+      "name": "WinPrintf",
+      "observed_call_count": 2014
+    },
+    {
+      "certification": {
+        "negative_control_ids": [
+          "DrawBalloons/width-increment",
+          "DrawBalloons/buffer-destination-offset"
+        ],
+        "positive_control_id": "directed/mode1/no-spider",
+        "status": "PENDING_SUPERVISOR_REVIEW"
+      },
+      "contract": "tile resource handle release fixture",
+      "executed_from_original": false,
+      "execution_mode": "MODELED",
+      "name": "db_ReleaseHandle",
+      "observed_call_count": 0
+    },
+    {
+      "certification": null,
+      "contract": "original tile-set lookup helper; entry arguments traced",
+      "executed_from_original": true,
+      "execution_mode": "ORIGINAL_EXE",
+      "name": "f_0250_062A",
+      "observed_call_count": 1007
+    },
+    {
+      "certification": null,
+      "contract": "original tile-set selection helper; entry arguments traced",
+      "executed_from_original": true,
+      "execution_mode": "ORIGINAL_EXE",
+      "name": "f_0250_0643",
+      "observed_call_count": 1007
+    },
+    {
+      "certification": {
+        "negative_control_ids": [
+          "DrawBalloons/width-increment",
+          "DrawBalloons/buffer-destination-offset"
+        ],
+        "positive_control_id": "directed/mode1/no-spider",
+        "status": "PENDING_SUPERVISOR_REVIEW"
+      },
+      "contract": "message picture host blit trace",
+      "executed_from_original": false,
+      "execution_mode": "MODELED",
+      "name": "f_0250_0721",
+      "observed_call_count": 1007
+    },
+    {
+      "certification": {
+        "negative_control_ids": [
+          "DrawBalloons/width-increment",
+          "DrawBalloons/buffer-destination-offset"
+        ],
+        "positive_control_id": "directed/mode1/no-spider",
+        "status": "PENDING_SUPERVISOR_REVIEW"
+      },
+      "contract": "tile raster request and deterministic tile pixels",
+      "executed_from_original": false,
+      "execution_mode": "MODELED",
+      "name": "f_0250_0915",
+      "observed_call_count": 259
+    },
+    {
+      "certification": {
+        "negative_control_ids": [
+          "DrawBalloons/width-increment",
+          "DrawBalloons/buffer-destination-offset"
+        ],
+        "positive_control_id": "directed/mode1/no-spider",
+        "status": "PENDING_SUPERVISOR_REVIEW"
+      },
+      "contract": "tile pixel transfer into the composition buffer",
+      "executed_from_original": false,
+      "execution_mode": "MODELED",
+      "name": "f_0250_0ADB",
+      "observed_call_count": 1837
+    },
+    {
+      "certification": {
+        "negative_control_ids": [
+          "DrawBalloons/width-increment",
+          "DrawBalloons/buffer-destination-offset"
+        ],
+        "positive_control_id": "directed/mode1/no-spider",
+        "status": "PENDING_SUPERVISOR_REVIEW"
+      },
+      "contract": "alternate tile raster request and deterministic tile pixels",
+      "executed_from_original": false,
+      "execution_mode": "MODELED",
+      "name": "f_0250_0B86",
+      "observed_call_count": 1578
+    },
+    {
+      "certification": {
+        "negative_control_ids": [
+          "DrawBalloons/width-increment",
+          "DrawBalloons/buffer-destination-offset"
+        ],
+        "positive_control_id": "directed/mode1/no-spider",
+        "status": "PENDING_SUPERVISOR_REVIEW"
+      },
+      "contract": "clipping save/restore copy trace",
+      "executed_from_original": false,
+      "execution_mode": "MODELED",
+      "name": "f_0250_0D10",
+      "observed_call_count": 508
+    },
+    {
+      "certification": {
+        "negative_control_ids": [
+          "DrawBalloons/width-increment",
+          "DrawBalloons/buffer-destination-offset"
+        ],
+        "positive_control_id": "directed/mode1/no-spider",
+        "status": "PENDING_SUPERVISOR_REVIEW"
+      },
+      "contract": "window clipping state setup",
+      "executed_from_original": false,
+      "execution_mode": "MODELED",
+      "name": "f_0250_5058",
+      "observed_call_count": 755
+    },
+    {
+      "certification": {
+        "negative_control_ids": [
+          "DrawBalloons/width-increment",
+          "DrawBalloons/buffer-destination-offset"
+        ],
+        "positive_control_id": "directed/mode1/no-spider",
+        "status": "PENDING_SUPERVISOR_REVIEW"
+      },
+      "contract": "message database resource acquisition and message bytes",
+      "executed_from_original": false,
+      "execution_mode": "MODELED",
+      "name": "f_1629_000C",
+      "observed_call_count": 1007
+    },
+    {
+      "certification": null,
+      "contract": "original Ralloc allocation helper over valid fixture arena",
+      "executed_from_original": true,
+      "execution_mode": "ORIGINAL_EXE",
+      "name": "f_171C_1A9E",
+      "observed_call_count": 1007
+    },
+    {
+      "certification": null,
+      "contract": "original Ralloc lock helper over valid fixture handle table",
+      "executed_from_original": true,
+      "execution_mode": "ORIGINAL_EXE",
+      "name": "f_171C_1B84",
+      "observed_call_count": 2014
+    },
+    {
+      "certification": null,
+      "contract": "original Ralloc unlock helper over valid fixture handle table",
+      "executed_from_original": true,
+      "execution_mode": "ORIGINAL_EXE",
+      "name": "f_171C_1BBA",
+      "observed_call_count": 1007
+    },
+    {
+      "certification": null,
+      "contract": "original Ralloc free helper over valid fixture arena",
+      "executed_from_original": true,
+      "execution_mode": "ORIGINAL_EXE",
+      "name": "f_171C_1C0A",
+      "observed_call_count": 1007
+    },
+    {
+      "certification": {
+        "negative_control_ids": [
+          "DrawBalloons/width-increment",
+          "DrawBalloons/buffer-destination-offset"
+        ],
+        "positive_control_id": "directed/mode1/no-spider",
+        "status": "PENDING_SUPERVISOR_REVIEW"
+      },
+      "contract": "tile resource handle acquisition fixture",
+      "executed_from_original": false,
+      "execution_mode": "MODELED",
+      "name": "f_1A53_00BA",
+      "observed_call_count": 1007
+    },
+    {
+      "certification": {
+        "negative_control_ids": [
+          "DrawBalloons/width-increment",
+          "DrawBalloons/buffer-destination-offset"
+        ],
+        "positive_control_id": "directed/mode1/no-spider",
+        "status": "PENDING_SUPERVISOR_REVIEW"
+      },
+      "contract": "font selection state",
+      "executed_from_original": false,
+      "execution_mode": "MODELED",
+      "name": "f_24AB_02AD",
+      "observed_call_count": 2018
+    }
+  ],
+  "helper_boundary_plan": "evidence/behavior/harnesses/render-small-d25a35e5-20261002/runs/DrawBalloons/DrawBalloons.helper-boundary-plan.json",
+  "helper_boundary_plan_sha256": "81b11f712eb0a709511e8ea8ed3b21e5954fede719835dd27704fc532b5becc6",
+  "identity": {
+    "address": {
+      "off": 19508,
+      "seg": 592,
+      "size": 1060,
+      "unit": "root"
+    },
+    "compiled_source_sha256": "e41a4ab8c56c0d4923ace8b02027f2471feee049aabe0577588e206e930b4db2",
+    "flags": [
+      "/AL",
+      "/Os",
+      "/Oe",
+      "/Og",
+      "/Zi"
+    ],
+    "function": "DrawBalloons",
+    "harness_sha256": "2c0799048057f59eae61a48be4d695278635594484adf0c70bf46c51b4e0c799",
+    "historical_manifest_sha256": "025a0a9255d910cae4b122ab5a3f3fb40888bb456d7fe42158db7c9e622fcf50",
+    "module": "root:0250",
+    "object_sha256": "65e7e3cba83ea4eb02a221c4313e5e2ddb1570139d5881180e699fdeedfdd13a",
+    "oracle_sha256": "aa0596c6766322a8229ee3c36e57048c92adc82d50fbe2ef37afb8b85fcf4f11",
+    "profile": "msc600ax",
+    "source_sha256": "e41a4ab8c56c0d4923ace8b02027f2471feee049aabe0577588e206e930b4db2",
+    "suite_id": "render_small_v1",
+    "suite_sha256": "d25a35e5a516d8f490bec1678e583c3a449c648b0a105a7bc32d3734841230df"
+  },
+  "mismatches": 0,
+  "negative_control_reports": [
+    {
+      "path": "evidence/behavior/harnesses/render-small-d25a35e5-20261002/runs/DrawBalloons/DrawBalloons.negative-controls.json",
+      "sha256": "529f83e6d68ba8d1d25fbec28ca4cf48b5aca28ef75bff82773d2bb8073e3e55"
+    }
+  ],
+  "negative_controls": {
+    "path": "evidence/behavior/harnesses/render-small-d25a35e5-20261002/runs/DrawBalloons/DrawBalloons.negative-controls.json",
+    "sha256": "529f83e6d68ba8d1d25fbec28ca4cf48b5aca28ef75bff82773d2bb8073e3e55"
+  },
+  "peer_data_gates": "PASS",
+  "positive_controls": [
+    {
+      "candidate_executed": true,
+      "candidate_observation_sha256": "9f81f7d8076f1125be7b0f578388b2cd22436f50a1bc6ca7e8e224a6306bd0ef",
+      "compared_effects": [
+        "return and caller ABI",
+        "ordered helper/render commands and arguments",
+        "global/map/cache writes",
+        "projected far-pointer data and nonstack memory"
+      ],
+      "executed": true,
+      "execution_errors": 0,
+      "id": "directed/mode1/no-spider",
+      "matched": true,
+      "object_sha256": "65e7e3cba83ea4eb02a221c4313e5e2ddb1570139d5881180e699fdeedfdd13a",
+      "oracle_sha256": "aa0596c6766322a8229ee3c36e57048c92adc82d50fbe2ef37afb8b85fcf4f11",
+      "original_executed": true,
+      "original_observation_sha256": "9f81f7d8076f1125be7b0f578388b2cd22436f50a1bc6ca7e8e224a6306bd0ef",
+      "source_sha256": "e41a4ab8c56c0d4923ace8b02027f2471feee049aabe0577588e206e930b4db2"
+    }
+  ],
+  "schema": "behavior-run-evidence-v1",
+  "source_snapshot": {
+    "path": "evidence/behavior/harnesses/render-small-d25a35e5-20261002/reviews/DrawBalloons/source-pins/00-root_0250_e41a4ab8c56c.c",
+    "sha256": "e41a4ab8c56c0d4923ace8b02027f2471feee049aabe0577588e206e930b4db2"
+  },
+  "unmodeled_boundaries": 0
+}

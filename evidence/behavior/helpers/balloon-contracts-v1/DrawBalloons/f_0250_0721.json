@@ -1,0 +1,126 @@
+{
+  "boundary_alias": null,
+  "boundary_scope": "message picture host blit trace",
+  "caller_dataflow_and_omissions": "message picture is projected into the composed balloon buffer; callback captures pointed bytes and offsets but does not execute a display blit.",
+  "compared_effects": [
+    "return and caller ABI",
+    "ordered helper/render commands and arguments",
+    "global/map/cache writes",
+    "projected far-pointer data and nonstack memory"
+  ],
+  "definition_source_sha256": {
+    "src/root/m0250.c": "bb8a325c543151e09cb173d2194844877805a9e1058d3b24362ff5a7cbd9f61b"
+  },
+  "execution_identity": {
+    "historical_manifest_sha256": "025a0a9255d910cae4b122ab5a3f3fb40888bb456d7fe42158db7c9e622fcf50",
+    "object_sha256": "65e7e3cba83ea4eb02a221c4313e5e2ddb1570139d5881180e699fdeedfdd13a",
+    "oracle_sha256": "aa0596c6766322a8229ee3c36e57048c92adc82d50fbe2ef37afb8b85fcf4f11",
+    "runner_sha256": "2c0799048057f59eae61a48be4d695278635594484adf0c70bf46c51b4e0c799",
+    "source_sha256": "e41a4ab8c56c0d4923ace8b02027f2471feee049aabe0577588e206e930b4db2",
+    "suite_sha256": "d25a35e5a516d8f490bec1678e583c3a449c648b0a105a7bc32d3734841230df"
+  },
+  "execution_mode": "MODELED",
+  "function": "DrawBalloons",
+  "helper": "f_0250_0721",
+  "input_domain": {
+    "directed_cases": 9,
+    "fixture_and_sampling": "Balloon resource acquisition and pointer/buffer transfer under valid Ralloc fixtures, with normalized blit command trace.",
+    "partition": {
+      "coordinate_ranges": {
+        "x": [
+          -16,
+          640
+        ],
+        "y": [
+          48,
+          480
+        ]
+      },
+      "modes": [
+        1,
+        2,
+        3
+      ],
+      "picture_heights": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12
+      ],
+      "picture_widths": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13
+      ],
+      "planes": [
+        0,
+        1,
+        2,
+        3
+      ],
+      "spider_clip_cases": 254
+    },
+    "randomized_cases": 1000,
+    "seeds": [
+      48879
+    ]
+  },
+  "limitations": [
+    [
+      "The picture blit function-pointer address is a synthetic six-argument host slot (fd_50F6_37EA role), not proof that same-address f_0250_0721 body was invoked. Host pixel transfer/blit is modeled; no physical display/framebuffer equivalence.",
+      "Finite directed/random domain only; not universal proof.",
+      "No registry or canonical source modified."
+    ],
+    "message picture is projected into the composed balloon buffer; callback captures pointed bytes and offsets but does not execute a display blit.",
+    "This models only the named bounded host/logical request projection; it does not certify the full helper implementation."
+  ],
+  "negative_control_ids": [
+    "DrawBalloons/width-increment",
+    "DrawBalloons/buffer-destination-offset"
+  ],
+  "observed_call_abi": "synthetic fd_50F6_37EA slot: six stack words (source/destination far pointers and x/y phases); not the direct two-int function",
+  "positive_control": {
+    "candidate_observation_sha256": "9f81f7d8076f1125be7b0f578388b2cd22436f50a1bc6ca7e8e224a6306bd0ef",
+    "case_id": "directed/mode1/no-spider",
+    "id": "directed/mode1/no-spider",
+    "input_sha256": "5957faf4fc289ea8d9bb5ecd571eb120f9811d7f37af0c69b9f3f66eb594ef4f",
+    "object_sha256": "65e7e3cba83ea4eb02a221c4313e5e2ddb1570139d5881180e699fdeedfdd13a",
+    "oracle_sha256": "aa0596c6766322a8229ee3c36e57048c92adc82d50fbe2ef37afb8b85fcf4f11",
+    "original_observation_sha256": "9f81f7d8076f1125be7b0f578388b2cd22436f50a1bc6ca7e8e224a6306bd0ef",
+    "source_sha256": "e41a4ab8c56c0d4923ace8b02027f2471feee049aabe0577588e206e930b4db2"
+  },
+  "review": {
+    "status": "APPROVED",
+    "reviewer": "root",
+    "reviewed_at": "2026-10-02",
+    "reason": "Reviewed caller service ABI and source-specific omitted effects in the pinned audit. Only the explicit logical request/fixture projection is certified; the canonical backend body is not claimed executed."
+  },
+  "schema": "behavior-helper-cert-v1",
+  "source_definition": "void far f_0250_0721(int x,int y) (actual direct function ABI)",
+  "source_hashes": {
+    "src/root/m0250.c": "bb8a325c543151e09cb173d2194844877805a9e1058d3b24362ff5a7cbd9f61b",
+    "src/root/m277D.c": "6b7b7e4b468987b3ad3c869934df31e0e9325ab7e1771735d1e6113971047591",
+    "work/takeover/hardtail/seeds/root_0250_e41a4ab8c56c.c": "e41a4ab8c56c0d4923ace8b02027f2471feee049aabe0577588e206e930b4db2"
+  },
+  "status": "CERTIFIED",
+  "positive_control_id": "directed/mode1/no-spider",
+  "negative_control_id": "DrawBalloons/width-increment"
+}

@@ -1,0 +1,143 @@
+{
+  "schema": "behavior-negative-controls-v1",
+  "function": "f_29D6_000A",
+  "suite_id": "small_contracts_v1",
+  "errors": 0,
+  "mismatches_detected": 1,
+  "identity": {
+    "source_sha256": "43b2d29dea982299edc3d3b173f9cb70bc88b76c1b9bc268c02a9a52c6a21626",
+    "oracle_sha256": "aa0596c6766322a8229ee3c36e57048c92adc82d50fbe2ef37afb8b85fcf4f11",
+    "harness_sha256": "ee7c997d2f89efa85ce932cd5ac7c674c465f1013a16a8c08e83d43c69f4be5b",
+    "historical_manifest_sha256": "025a0a9255d910cae4b122ab5a3f3fb40888bb456d7fe42158db7c9e622fcf50"
+  },
+  "controls": [
+    {
+      "id": "tandy",
+      "target": "f_29D6_000A",
+      "executed": true,
+      "detected_mismatch": true,
+      "original_executed": true,
+      "mutant_executed": true,
+      "baseline_matches": true,
+      "mutant_differs": true,
+      "execution_errors": 0,
+      "mismatch_categories": [
+        "io",
+        "trace"
+      ],
+      "mutant_source_sha256": "66f8ed539bcaa3e69c1f89dae89830743dc87cc0278b87a381dfd1773741778a",
+      "mutant_source": {
+        "path": "build/workers/behavior_small_contracts_review20261002/negative/tandy.c",
+        "sha256": "66f8ed539bcaa3e69c1f89dae89830743dc87cc0278b87a381dfd1773741778a"
+      },
+      "mutant_object": {
+        "path": "build/workers/behavior_small_contracts_review20261002/negative/tandy/candidate.obj",
+        "sha256": "062042a36d2cf6e11aa4a6830f73142190cba13b34dfcf7631e9897c3b67a6f7"
+      },
+      "diff": {
+        "trace": {
+          "oracle": [
+            {
+              "name": "f_29F0_002A",
+              "args": [
+                517,
+                238
+              ],
+              "state_at_entry": {},
+              "modified_state_at_entry": []
+            },
+            {
+              "name": "f_29F0_002A",
+              "args": [
+                517,
+                14
+              ],
+              "state_at_entry": {},
+              "modified_state_at_entry": []
+            },
+            {
+              "name": "f_29F0_002A",
+              "args": [
+                517,
+                243
+              ],
+              "state_at_entry": {},
+              "modified_state_at_entry": []
+            }
+          ],
+          "candidate": [
+            {
+              "name": "f_29F0_002A",
+              "args": [
+                517,
+                14
+              ],
+              "state_at_entry": {},
+              "modified_state_at_entry": []
+            },
+            {
+              "name": "f_29F0_002A",
+              "args": [
+                517,
+                750
+              ],
+              "state_at_entry": {},
+              "modified_state_at_entry": []
+            },
+            {
+              "name": "f_29F0_002A",
+              "args": [
+                517,
+                243
+              ],
+              "state_at_entry": {},
+              "modified_state_at_entry": []
+            }
+          ]
+        },
+        "io": {
+          "oracle": [
+            [
+              "out",
+              517,
+              1,
+              238
+            ],
+            [
+              "out",
+              517,
+              1,
+              14
+            ],
+            [
+              "out",
+              517,
+              1,
+              243
+            ]
+          ],
+          "candidate": [
+            [
+              "out",
+              517,
+              1,
+              14
+            ],
+            [
+              "out",
+              517,
+              1,
+              238
+            ],
+            [
+              "out",
+              517,
+              1,
+              243
+            ]
+          ]
+        }
+      }
+    }
+  ]
+}

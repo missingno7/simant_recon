@@ -1,0 +1,105 @@
+{
+ "function": "S15:384C:0239",
+ "base_source": "work/takeover/hardtail/probes/s15-base.c",
+ "dimension": "SYNTHETIC_FRAME_RESERVATION",
+ "diagnostic_only": true,
+ "hypothesis": "Global identifier phase did not change the unnamed spill. Test whether unused automatic home reservation changes the spill ranking or merely grows the frame. Padding is never promotable.",
+ "variants": [
+  {
+   "parameters": {
+    "count": 0,
+    "width": "int"
+   },
+   "edits": [
+    {
+     "old": "    struct Event ev;",
+     "new": "    struct Event ev;"
+    }
+   ]
+  },
+  {
+   "parameters": {
+    "count": 1,
+    "width": "int"
+   },
+   "edits": [
+    {
+     "old": "    struct Event ev;",
+     "new": "    int hardtail_local_pad[1];\n    struct Event ev;"
+    }
+   ]
+  },
+  {
+   "parameters": {
+    "count": 2,
+    "width": "int"
+   },
+   "edits": [
+    {
+     "old": "    struct Event ev;",
+     "new": "    int hardtail_local_pad[2];\n    struct Event ev;"
+    }
+   ]
+  },
+  {
+   "parameters": {
+    "count": 3,
+    "width": "int"
+   },
+   "edits": [
+    {
+     "old": "    struct Event ev;",
+     "new": "    int hardtail_local_pad[3];\n    struct Event ev;"
+    }
+   ]
+  },
+  {
+   "parameters": {
+    "count": 0,
+    "width": "long"
+   },
+   "edits": [
+    {
+     "old": "    struct Event ev;",
+     "new": "    struct Event ev;"
+    }
+   ]
+  },
+  {
+   "parameters": {
+    "count": 1,
+    "width": "long"
+   },
+   "edits": [
+    {
+     "old": "    struct Event ev;",
+     "new": "    long hardtail_local_pad[1];\n    struct Event ev;"
+    }
+   ]
+  },
+  {
+   "parameters": {
+    "count": 2,
+    "width": "long"
+   },
+   "edits": [
+    {
+     "old": "    struct Event ev;",
+     "new": "    long hardtail_local_pad[2];\n    struct Event ev;"
+    }
+   ]
+  },
+  {
+   "parameters": {
+    "count": 3,
+    "width": "long"
+   },
+   "edits": [
+    {
+     "old": "    struct Event ev;",
+     "new": "    long hardtail_local_pad[3];\n    struct Event ev;"
+    }
+   ]
+  }
+ ]
+}

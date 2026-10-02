@@ -1,0 +1,75 @@
+{
+  "schema": "behavior-helper-cert-v1",
+  "helper": "InvalEuMap",
+  "status": "PROPOSED",
+  "review": {
+    "status": "REVIEW_REQUIRED",
+    "reviewer": null,
+    "reviewed_at": null
+  },
+  "input_domain": [
+    "1,728 cases: lesson argument -2..59, 0x7fff, -0x8000 plus one-at-a-time partitions over MePlane={0,1,2,3}, counters={9,10,11}, tutorial booleans, fd_50F6_1074={8,9,10}, fd_50F6_04C2={0x10,0x18,0x28}, modeLevels, b12 and map-position predicates. MapA is initialized as 128x64 bytes with a 64-byte row stride and lesson-13 cell [4][5] set above/below threshold. The 32-bit fd_50F6_0204 threshold has base -1 and partitions {9,10,0x10000}; top-window state g_5702[0] is varied across signed -32768, 0, 0x0100, 0x1200, 0x1300 and 0x0200.",
+    "500 cases, seed 0x3bdb05da; lesson -4..63, initialized 128x64 MapA with 64-byte row stride, bounded signed counters/coordinates and byte fields; clock request is two uint16 words mapped through inverse 3 modulo 2**32 to TickCount; fd_50F6_0204 spans signed 32-bit values; g_5702[0] is sampled from signed -32768, 0, 0x0100, 0x1200, 0x1300 and 0x0200.",
+    "Whole-module root:0E2E state. Original MacTickCount (f_00F8_02BE alias) executes TickCount()*3; only TickCount is modeled. f_22BF_0A22 uses fastcall AX and continues through the original canonical win_IsWinInFront body reading seeded g_5702[0]. No synthetic completion dictionary is used. MapA uses the original 128x64 row-major layout and the target-valid sampled coordinate domain. SetAlarmDropState and other semantic helpers execute original code; Win16 object-selection and map-invalidation are host sinks."
+  ],
+  "compared_effects": [
+    "return",
+    "ordered host/helper calls",
+    "ordered input consumption",
+    "pointed rectangles and strings",
+    "global and pointed writes",
+    "all nonstack writes",
+    "caller ABI"
+  ],
+  "positive_control_id": "pc-LessonDone-InvalEuMap",
+  "negative_control_id": "lesson-strict-threshold",
+  "limitations": "Pending independent review; bounded host/resource contract only, not arbitrary driver, interrupt, RTLink or window-manager proof.",
+  "source_hashes": {
+    "tools/behavior.py": "2c0799048057f59eae61a48be4d695278635594484adf0c70bf46c51b4e0c799",
+    "layout/functions.json": "6089a06e18fbe8f0960392cfe30357f7c19c886f38f10f7f115c72d127a756e7",
+    "layout/symbols.json": "0f5dd5b0a211945a97782cfccdb9bb31b0dfd07fcde5df4d4f9486b487eb0125",
+    "layout/oracle.lock.json": "2c6d9e98c688621ad49a08c78d0e0968f4076b036be56ec0738217b533ccde13",
+    "tools/archive/behavior-tutorial-menu-review-20261002/7043/source-inputs/root_0E2E_c611660dde4d.c": "c611660dde4da7117c3232aa06e597871394cc4112466d46559705b235424359",
+    "tools/archive/behavior-tutorial-menu-review-20261002/canonical-root/m00F8.c": "4ee148ec616e199f61b671df89da8a21f1789c4177d3dbc7b76a478acb98184a",
+    "tools/archive/behavior-tutorial-menu-review-20261002/canonical-root/m22BF.c": "f5b617067cdc711593e94dbb725ae9ceaeb12b890f198af0d66c1973e15133a0",
+    "tools/archive/behavior-tutorial-menu-review-20261002/canonical-root/m0250.c": "bb8a325c543151e09cb173d2194844877805a9e1058d3b24362ff5a7cbd9f61b",
+    "tools/behavior_suites/archive/tutorial-menu-7043a99e654807271bb186442b8105f63d05f50bf18174726ee7a9e47343e172.py": "7043a99e654807271bb186442b8105f63d05f50bf18174726ee7a9e47343e172"
+  },
+  "boundary_abi": {
+    "stack_words": 4,
+    "register_args": [],
+    "callee_pop_bytes": 0
+  },
+  "boundary_call_count": 4,
+  "boundary_call_count_scope": "all 2228 matched campaign cases",
+  "caller_effect_reasoning": "This deterministic host/resource boundary is called by the pinned whole-module caller. Its modeled action is limited to the declared ABI and fixture contract; ordered calls, arguments, queue consumption, return, observed globals, pointed data, and all nonstack writes remain compared.",
+  "implementation_provenance": "Explicit HOST slot for original DOS entry root:0250:006E (far void(int left, int top, int right, int bottom); four 16-bit stack words). The exact containing canonical source module is pinned at tools/archive/behavior-tutorial-menu-review-20261002/canonical-root/m0250.c SHA-256 bb8a325c543151e09cb173d2194844877805a9e1058d3b24362ff5a7cbd9f61b; entry anchor: InvalEuMap. This proposal models the bounded host boundary described in the contract and does not assert that the historical DOS implementation is absent. Omitted platform backend effects: The canonical body writes the edit/update dirty-cell buffer for the bounded map rectangle. The modeled slot records exact ordered rectangle arguments; dirty-cell painting is presentation-cache work consumed by later renderer/update processing, outside this LessonDone call. Other caller globals, nonstack writes, call order and return remain compared; this explicitly bounds the host display effect rather than claiming the DOS body has no effects. Exact source definition span: tools/archive/behavior-tutorial-menu-review-20261002/canonical-root/m0250.c:47-67 (module SHA-256 bb8a325c543151e09cb173d2194844877805a9e1058d3b24362ff5a7cbd9f61b).",
+  "host_boundary_identity": {
+    "kind": "HOST_SLOT",
+    "modeled_callback_name": "InvalEuMap",
+    "original_dos_entry": {
+      "symbol": "InvalEuMap",
+      "unit": "root",
+      "segment": "0250",
+      "offset": "006E",
+      "alias_of": null
+    },
+    "canonical_name": "InvalEuMap",
+    "abi": "far void(int left, int top, int right, int bottom); four 16-bit stack words",
+    "boundary_abi": {
+      "stack_words": 4,
+      "register_args": [],
+      "callee_pop_bytes": 0
+    },
+    "canonical_source": {
+      "path": "tools/archive/behavior-tutorial-menu-review-20261002/canonical-root/m0250.c",
+      "sha256": "bb8a325c543151e09cb173d2194844877805a9e1058d3b24362ff5a7cbd9f61b",
+      "anchor": "InvalEuMap",
+      "start_line": 47,
+      "end_line": 67,
+      "definition_excerpt": "void far InvalEuMap(int left, int top, int right, int bottom)\n{\n    int x;\n    int i;\n    int y;\n\n    if (left < 0)\n        left = 0;\n    else if (right > 127)\n        right = 127;\n    if (top < 0)\n        top = 0;\n    else if (bottom > 63)\n        bottom = 63;\n    for (y = top; y <= bottom; y++) {\n        i = y * 40 + left;\n        for (x = left; x <= right; x++, i++)\n            if (x >= 0 && x < fd_50F6_10E0 && y >= 0 && y < fd_50F6_10DE)\n                fd_50F6_15C4[0][i] = -1;\n    }\n}"
+    },
+    "role": "Fixture-provided host input/timing/display/resource boundary; callback does not claim that the original DOS entry or its reconstructed implementation is absent."
+  },
+  "omitted_backend_effects_reason": "The canonical body writes the edit/update dirty-cell buffer for the bounded map rectangle. The modeled slot records exact ordered rectangle arguments; dirty-cell painting is presentation-cache work consumed by later renderer/update processing, outside this LessonDone call. Other caller globals, nonstack writes, call order and return remain compared; this explicitly bounds the host display effect rather than claiming the DOS body has no effects."
+}

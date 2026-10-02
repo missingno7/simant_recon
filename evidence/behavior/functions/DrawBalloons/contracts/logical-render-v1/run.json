@@ -1,0 +1,476 @@
+{
+  "case_ledger": {
+    "compression": "gzip",
+    "identity": {
+      "address": {
+        "off": 19508,
+        "seg": 592,
+        "size": 1060,
+        "unit": "root"
+      },
+      "compiled_source_sha256": "e41a4ab8c56c0d4923ace8b02027f2471feee049aabe0577588e206e930b4db2",
+      "flags": [
+        "/AL",
+        "/Os",
+        "/Oe",
+        "/Og",
+        "/Zi"
+      ],
+      "function": "DrawBalloons",
+      "harness_sha256": "2c0799048057f59eae61a48be4d695278635594484adf0c70bf46c51b4e0c799",
+      "linked_code_sha256": "e54490818026c5883025c674710b4faf0bf9114a8d1c5943df96f733c17c660c",
+      "manifest_sha256": "025a0a9255d910cae4b122ab5a3f3fb40888bb456d7fe42158db7c9e622fcf50",
+      "object_sha256": "65e7e3cba83ea4eb02a221c4313e5e2ddb1570139d5881180e699fdeedfdd13a",
+      "oracle_sha256": "aa0596c6766322a8229ee3c36e57048c92adc82d50fbe2ef37afb8b85fcf4f11",
+      "profile": "msc600ax",
+      "source": "work\\takeover\\hardtail\\seeds\\root_0250_e41a4ab8c56c.c",
+      "source_sha256": "e41a4ab8c56c0d4923ace8b02027f2471feee049aabe0577588e206e930b4db2",
+      "unicorn_version": "2.1.4"
+    },
+    "lane_counts": {
+      "directed": 9,
+      "randomized": 1000
+    },
+    "path": "evidence/behavior/functions/DrawBalloons/contracts/logical-render-v1/cases.jsonl.gz",
+    "row_count": 1009,
+    "sha256": "a0fd7066fc2d216e62c62c5424b31023db3b4e3dfef4e33b6165179dc109d40e"
+  },
+  "cases": {
+    "directed": {
+      "actual_candidate_invocations": 9,
+      "actual_original_invocations": 9,
+      "executed": 9,
+      "generated": 9,
+      "seeds": []
+    },
+    "randomized": {
+      "actual_candidate_invocations": 1000,
+      "actual_original_invocations": 1000,
+      "executed": 1000,
+      "generated": 1000,
+      "seeds": [
+        48879
+      ]
+    }
+  },
+  "compared_effects": [
+    "return and caller ABI",
+    "ordered helper/render commands and arguments",
+    "global/map/cache writes",
+    "projected far-pointer data and nonstack memory"
+  ],
+  "completion": "COMPLETE",
+  "coverage": {
+    "directed_labels": [
+      "directed/mode1/no-spider",
+      "directed/mode2/no-spider",
+      "directed/mode3/no-spider",
+      "directed/mode1/spider-clip",
+      "directed/pixel-phase",
+      "directed/visible-left-top",
+      "directed/visible-right-bottom",
+      "directed/outside-right-bottom",
+      "directed/outside-negative"
+    ],
+    "domain_values": {
+      "coordinate_ranges": {
+        "x": [
+          -16,
+          640
+        ],
+        "y": [
+          48,
+          480
+        ]
+      },
+      "modes": [
+        1,
+        2,
+        3
+      ],
+      "picture_heights": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12
+      ],
+      "picture_widths": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13
+      ],
+      "planes": [
+        0,
+        1,
+        2,
+        3
+      ],
+      "spider_clip_cases": 254
+    },
+    "randomized_labels_sha256": "8905efa5f860d3c56325a3074488a17704918ba32429702b0d5b9ac08f233167"
+  },
+  "errors": 0,
+  "execution": {
+    "actual_candidate_execution": true,
+    "actual_original_execution": true,
+    "engine": "PreparedPair.compare",
+    "original_exe_sha256": "aa0596c6766322a8229ee3c36e57048c92adc82d50fbe2ef37afb8b85fcf4f11"
+  },
+  "helper_boundaries": [
+    {
+      "certification": null,
+      "contract": "original tile-set lookup helper; entry arguments traced",
+      "executed_from_original": true,
+      "execution_mode": "ORIGINAL_EXE",
+      "name": "f_0250_062A",
+      "observed_call_count": 1007
+    },
+    {
+      "certification": null,
+      "contract": "original tile-set selection helper; entry arguments traced",
+      "executed_from_original": true,
+      "execution_mode": "ORIGINAL_EXE",
+      "name": "f_0250_0643",
+      "observed_call_count": 1007
+    },
+    {
+      "boundary_analysis": {
+        "caller_dataflow_and_omissions": "message picture is projected into the composed balloon buffer; callback captures pointed bytes and offsets but does not execute a display blit.",
+        "canonical_definition_or_role": "void far f_0250_0721(int x,int y) (actual direct function ABI)",
+        "definition_file": "src/root/m0250.c",
+        "definition_sha256": "bb8a325c543151e09cb173d2194844877805a9e1058d3b24362ff5a7cbd9f61b",
+        "full_helper_equivalence_claimed": false,
+        "observed_call_abi": "synthetic fd_50F6_37EA slot: six stack words (source/destination far pointers and x/y phases); not the direct two-int function",
+        "review_status": "PENDING_ROOT_REVIEW"
+      },
+      "certification": {
+        "path": "evidence/behavior/helpers/balloon-contracts-v2/DrawBalloons/f_0250_0721.json",
+        "sha256": "0c61f18462284a38995562af233fe5feb73f69f8b8121c5cd880e3b9d79e7b0f"
+      },
+      "contract": "message picture host blit trace; BOUNDED HOST/LOGICAL PROJECTION ONLY",
+      "executed_from_original": false,
+      "execution_mode": "MODELED",
+      "name": "f_0250_0721",
+      "observed_call_count": 1007
+    },
+    {
+      "boundary_analysis": {
+        "caller_dataflow_and_omissions": "f_0250_1018 writes g_94E4=0 and g_9126=0 before map/life reads on each tile. f_0250_0915 mutates g_9126 and dispatches pixels; next iteration resets both before any read, and after the final tile DrawBalloons reads neither again. Final g_9126 and renderer pixels remain excluded; see drawballoons-caller-state-audit.json.",
+        "canonical_definition_or_role": "void far f_0250_0915(void)",
+        "definition_file": "src/root/m0250.c",
+        "definition_sha256": "bb8a325c543151e09cb173d2194844877805a9e1058d3b24362ff5a7cbd9f61b",
+        "full_helper_equivalence_claimed": false,
+        "observed_call_abi": "direct zero-argument far call",
+        "review_status": "PENDING_ROOT_REVIEW"
+      },
+      "certification": {
+        "path": "evidence/behavior/helpers/balloon-contracts-v2/DrawBalloons/f_0250_0915.json",
+        "sha256": "7018fd3c38a907d1b1379ec586e23537dbf55f7a08a6538b132a28ba5bb80ab4"
+      },
+      "contract": "tile renderer input/control request projection only; g_9126 backend mutation and pixels excluded",
+      "executed_from_original": false,
+      "execution_mode": "MODELED",
+      "name": "f_0250_0915",
+      "observed_call_count": 259
+    },
+    {
+      "boundary_analysis": {
+        "caller_dataflow_and_omissions": "target consumes this pointer-slot return as tile pixel transfer into its composition buffer; callback copies deterministic modeled bytes and captures before/after bytes/stride. Synthetic slot is distinct from f_0250_0ADB body.",
+        "canonical_definition_or_role": "void far f_0250_0ADB(int x,int y) (actual direct function ABI)",
+        "definition_file": "src/root/m0250.c",
+        "definition_sha256": "bb8a325c543151e09cb173d2194844877805a9e1058d3b24362ff5a7cbd9f61b",
+        "full_helper_equivalence_claimed": false,
+        "observed_call_abi": "synthetic fd_50F6_37E6 slot: three stack words (destination far pointer,stride); not the direct two-int function",
+        "review_status": "PENDING_ROOT_REVIEW"
+      },
+      "certification": {
+        "path": "evidence/behavior/helpers/balloon-contracts-v2/DrawBalloons/f_0250_0ADB.json",
+        "sha256": "0de0bc38747769323a0b6ce986d15b5faf7b00a5381d55f6cfbeabdfc79e458d"
+      },
+      "contract": "tile pixel transfer into the composition buffer; BOUNDED HOST/LOGICAL PROJECTION ONLY",
+      "executed_from_original": false,
+      "execution_mode": "MODELED",
+      "name": "f_0250_0ADB",
+      "observed_call_count": 1837
+    },
+    {
+      "boundary_analysis": {
+        "caller_dataflow_and_omissions": "f_0250_1018 resets both tile globals before this direct zero-arg call. f_0250_0B86 may write g_3D20, but the next synthetic fd_50F6_37E6 hook does not read g_3D20; it supplies deterministic fixture bytes to the composition buffer. The target has no later g_3D20 read; renderer bytes are excluded.",
+        "canonical_definition_or_role": "void far f_0250_0B86(void)",
+        "definition_file": "src/root/m0250.c",
+        "definition_sha256": "bb8a325c543151e09cb173d2194844877805a9e1058d3b24362ff5a7cbd9f61b",
+        "full_helper_equivalence_claimed": false,
+        "observed_call_abi": "direct zero-argument far call",
+        "review_status": "PENDING_ROOT_REVIEW"
+      },
+      "certification": {
+        "path": "evidence/behavior/helpers/balloon-contracts-v2/DrawBalloons/f_0250_0B86.json",
+        "sha256": "b85fc9de140c5fdebf00d100de58fb53a8f67c3349decbb40537876e80cf37b4"
+      },
+      "contract": "alternate tile renderer request projection only; g_3D20/backend pixel writes excluded",
+      "executed_from_original": false,
+      "execution_mode": "MODELED",
+      "name": "f_0250_0B86",
+      "observed_call_count": 1578
+    },
+    {
+      "boundary_analysis": {
+        "caller_dataflow_and_omissions": "Synthetic fd_50F6_37EE is void, so no return-dependent control exists. The no-write callback projects pointers/data only; actual screen-save/restore and composed-buffer pixel writes are excluded. See drawballoons-caller-state-audit.json.",
+        "canonical_definition_or_role": "int far f_0250_0D10(int dx,int dy) (actual direct function ABI)",
+        "definition_file": "src/root/m0250.c",
+        "definition_sha256": "bb8a325c543151e09cb173d2194844877805a9e1058d3b24362ff5a7cbd9f61b",
+        "full_helper_equivalence_claimed": false,
+        "observed_call_abi": "synthetic fd_50F6_37EE slot: eight stack words, four far pointers to Rect/buffer records; not the direct two-int function",
+        "review_status": "PENDING_ROOT_REVIEW"
+      },
+      "certification": {
+        "path": "evidence/behavior/helpers/balloon-contracts-v2/DrawBalloons/f_0250_0D10.json",
+        "sha256": "40a2d573737dadfbab96d1a20108e5b92e1295315b142d66a91ebf941d163e30"
+      },
+      "contract": "synthetic fd_50F6_37EE pointer/call-order trace only; no return or write equivalence",
+      "executed_from_original": false,
+      "execution_mode": "MODELED",
+      "name": "f_0250_0D10",
+      "observed_call_count": 508
+    },
+    {
+      "boundary_analysis": {
+        "caller_dataflow_and_omissions": "The canonical call writes fd_50F6_1104 via win_GetObjRect and f_1E57_08F5 changes clip-list globals/Ralloc state. Within DrawBalloons, only preexisting fd_50F6_110C feeds later rectangle geometry; fd_50F6_1104/clip globals are not read. Surrounding caller/platform clipping effects are excluded.",
+        "canonical_definition_or_role": "void far f_0250_5058(void)",
+        "definition_file": "src/root/m0250.c",
+        "definition_sha256": "bb8a325c543151e09cb173d2194844877805a9e1058d3b24362ff5a7cbd9f61b",
+        "full_helper_equivalence_claimed": false,
+        "observed_call_abi": "direct zero-argument far call",
+        "review_status": "PENDING_ROOT_REVIEW"
+      },
+      "certification": {
+        "path": "evidence/behavior/helpers/balloon-contracts-v2/DrawBalloons/f_0250_5058.json",
+        "sha256": "0d6349d4f9923fffffaba67b6da5411072e31a439c3cd112d41afa9187a591aa"
+      },
+      "contract": "clip setup request trace only; nested clipping globals/Ralloc effects excluded",
+      "executed_from_original": false,
+      "execution_mode": "MODELED",
+      "name": "f_0250_5058",
+      "observed_call_count": 755
+    },
+    {
+      "boundary_analysis": {
+        "caller_dataflow_and_omissions": "fixture returns a valid existing Ralloc handle and deterministic picture bytes. DrawBalloons reads width/height and pixels then releases the Ralloc handle. Database lookup/cache/age/counters are excluded; no claim the original resource database ran.",
+        "canonical_definition_or_role": "original message resource routine; no canonical C body in this source tree",
+        "definition_file": null,
+        "definition_sha256": null,
+        "full_helper_equivalence_claimed": false,
+        "observed_call_abi": "three stack words: far message pointer plus flags",
+        "review_status": "PENDING_ROOT_REVIEW"
+      },
+      "certification": {
+        "path": "evidence/behavior/helpers/balloon-contracts-v2/DrawBalloons/f_1629_000C.json",
+        "sha256": "4e4c8c070dbce5faec548d6b1940b4eaecb3783838b3584b86914db3f85c8828"
+      },
+      "contract": "message database resource acquisition and message bytes; BOUNDED HOST/LOGICAL PROJECTION ONLY",
+      "executed_from_original": false,
+      "execution_mode": "MODELED",
+      "name": "f_1629_000C",
+      "observed_call_count": 1007
+    },
+    {
+      "certification": null,
+      "contract": "original Ralloc allocation helper over valid fixture arena",
+      "executed_from_original": true,
+      "execution_mode": "ORIGINAL_EXE",
+      "name": "f_171C_1A9E",
+      "observed_call_count": 1007
+    },
+    {
+      "certification": null,
+      "contract": "original Ralloc lock helper over valid fixture handle table",
+      "executed_from_original": true,
+      "execution_mode": "ORIGINAL_EXE",
+      "name": "f_171C_1B84",
+      "observed_call_count": 2014
+    },
+    {
+      "certification": null,
+      "contract": "original Ralloc unlock helper over valid fixture handle table",
+      "executed_from_original": true,
+      "execution_mode": "ORIGINAL_EXE",
+      "name": "f_171C_1BBA",
+      "observed_call_count": 1007
+    },
+    {
+      "certification": null,
+      "contract": "original Ralloc free helper over valid fixture arena",
+      "executed_from_original": true,
+      "execution_mode": "ORIGINAL_EXE",
+      "name": "f_171C_1C0A",
+      "observed_call_count": 1007
+    },
+    {
+      "boundary_analysis": {
+        "caller_dataflow_and_omissions": "canonical body calls db_LoadObject and f_171C_15A2(handle,1); selected by actual f_0250_0643. The suite substitutes a valid tile handle fixture, so database cache/firm/soft counters are excluded.",
+        "canonical_definition_or_role": "char far * far f_1A53_00BA(int object,int kind)",
+        "definition_file": "src/root/m1A53.c",
+        "definition_sha256": "6bb066ea34c3721c90956a5b7e8849cb3c5916628a842c2684a8c0137154b698",
+        "full_helper_equivalence_claimed": false,
+        "observed_call_abi": "two stack words (object,kind)",
+        "review_status": "PENDING_ROOT_REVIEW"
+      },
+      "certification": {
+        "path": "evidence/behavior/helpers/balloon-contracts-v2/DrawBalloons/f_1A53_00BA.json",
+        "sha256": "618ec5ea977d7749b573b6fc05535e9001f86f4302145dd32c6e508c89344248"
+      },
+      "contract": "tile resource handle acquisition fixture; BOUNDED HOST/LOGICAL PROJECTION ONLY",
+      "executed_from_original": false,
+      "execution_mode": "MODELED",
+      "name": "f_1A53_00BA",
+      "observed_call_count": 1007
+    },
+    {
+      "boundary_analysis": {
+        "caller_dataflow_and_omissions": "called with 2 before composition and 0 after. Callback records a font-selection intent only; platform font state/glyph rendering is excluded.",
+        "canonical_definition_or_role": "void far f_24AB_02AD(int font)",
+        "definition_file": "src/root/m24AB.c",
+        "definition_sha256": "1d263c6e1f242981d7c3e37d839dc481dc75deed45d7d1bcaaa075cad124de7f",
+        "full_helper_equivalence_claimed": false,
+        "observed_call_abi": "one stack word (font); caller cleanup",
+        "review_status": "PENDING_ROOT_REVIEW"
+      },
+      "certification": {
+        "path": "evidence/behavior/helpers/balloon-contracts-v2/DrawBalloons/f_24AB_02AD.json",
+        "sha256": "4b249404a9bb319973eba2c4f771e27581f3e23f590af2ce771b0f13f2270f9a"
+      },
+      "contract": "font selection state; BOUNDED HOST/LOGICAL PROJECTION ONLY",
+      "executed_from_original": false,
+      "execution_mode": "MODELED",
+      "name": "f_24AB_02AD",
+      "observed_call_count": 2018
+    },
+    {
+      "certification": {
+        "path": "evidence/behavior/helpers/balloon-contracts-v2/DrawBalloons/WinPrintf.json",
+        "sha256": "a25501efaeeac5b906692f4a1b2f7d23f69c40492f0e3b0365da427f074dff47"
+      },
+      "contract": "formatted text command projection",
+      "executed_from_original": false,
+      "execution_mode": "MODELED",
+      "name": "WinPrintf",
+      "observed_call_count": 2014,
+      "reason": "Variadic debug sink only; complete args are not captured and no semantic/display effect is claimed.",
+      "review_scope": "SUPPLEMENTAL_DIAGNOSTIC_ONLY"
+    }
+  ],
+  "helper_boundary_plan": "evidence/behavior/harnesses/render-small-d25a35e5-20261002/runs/DrawBalloons/DrawBalloons.helper-boundary-plan.json",
+  "helper_boundary_plan_sha256": "81b11f712eb0a709511e8ea8ed3b21e5954fede719835dd27704fc532b5becc6",
+  "identity": {
+    "address": {
+      "off": 19508,
+      "seg": 592,
+      "size": 1060,
+      "unit": "root"
+    },
+    "compiled_source_sha256": "e41a4ab8c56c0d4923ace8b02027f2471feee049aabe0577588e206e930b4db2",
+    "flags": [
+      "/AL",
+      "/Os",
+      "/Oe",
+      "/Og",
+      "/Zi"
+    ],
+    "function": "DrawBalloons",
+    "harness_sha256": "2c0799048057f59eae61a48be4d695278635594484adf0c70bf46c51b4e0c799",
+    "historical_manifest_sha256": "025a0a9255d910cae4b122ab5a3f3fb40888bb456d7fe42158db7c9e622fcf50",
+    "module": "root:0250",
+    "object_sha256": "65e7e3cba83ea4eb02a221c4313e5e2ddb1570139d5881180e699fdeedfdd13a",
+    "oracle_sha256": "aa0596c6766322a8229ee3c36e57048c92adc82d50fbe2ef37afb8b85fcf4f11",
+    "profile": "msc600ax",
+    "source_sha256": "e41a4ab8c56c0d4923ace8b02027f2471feee049aabe0577588e206e930b4db2",
+    "suite_id": "render_small_v1",
+    "suite_sha256": "d25a35e5a516d8f490bec1678e583c3a449c648b0a105a7bc32d3734841230df"
+  },
+  "mismatches": 0,
+  "negative_control_reports": [
+    {
+      "path": "evidence/behavior/harnesses/render-small-d25a35e5-20261002/runs/DrawBalloons/DrawBalloons.negative-controls.json",
+      "sha256": "529f83e6d68ba8d1d25fbec28ca4cf48b5aca28ef75bff82773d2bb8073e3e55"
+    }
+  ],
+  "negative_controls": {
+    "path": "evidence/behavior/harnesses/render-small-d25a35e5-20261002/runs/DrawBalloons/DrawBalloons.negative-controls.json",
+    "sha256": "529f83e6d68ba8d1d25fbec28ca4cf48b5aca28ef75bff82773d2bb8073e3e55"
+  },
+  "peer_data_gates": "PASS",
+  "positive_controls": [
+    {
+      "candidate_executed": true,
+      "candidate_observation_sha256": "9f81f7d8076f1125be7b0f578388b2cd22436f50a1bc6ca7e8e224a6306bd0ef",
+      "case_id": "directed/mode1/no-spider",
+      "compared_effects": [
+        "return and caller ABI",
+        "ordered helper/render commands and arguments",
+        "global/map/cache writes",
+        "projected far-pointer data and nonstack memory"
+      ],
+      "executed": true,
+      "execution_errors": 0,
+      "id": "directed/mode1/no-spider",
+      "input_sha256": "5957faf4fc289ea8d9bb5ecd571eb120f9811d7f37af0c69b9f3f66eb594ef4f",
+      "matched": true,
+      "object_sha256": "65e7e3cba83ea4eb02a221c4313e5e2ddb1570139d5881180e699fdeedfdd13a",
+      "oracle_sha256": "aa0596c6766322a8229ee3c36e57048c92adc82d50fbe2ef37afb8b85fcf4f11",
+      "original_executed": true,
+      "original_observation_sha256": "9f81f7d8076f1125be7b0f578388b2cd22436f50a1bc6ca7e8e224a6306bd0ef",
+      "provenance": "Existing equal actual DOS/candidate case-ledger row; selected here for boundary-specific review, not replayed.",
+      "source_sha256": "e41a4ab8c56c0d4923ace8b02027f2471feee049aabe0577588e206e930b4db2"
+    },
+    {
+      "candidate_executed": true,
+      "candidate_observation_sha256": "b7372c4fbf65d82b8cba6dd252e1c7febd0d7c41a5505de56540990b78dd7183",
+      "case_id": "directed/mode1/spider-clip",
+      "compared_effects": [
+        "return and caller ABI",
+        "ordered helper/render commands and arguments",
+        "global/map/cache writes",
+        "projected far-pointer data and nonstack memory"
+      ],
+      "executed": true,
+      "execution_errors": 0,
+      "id": "directed/mode1/spider-clip",
+      "input_sha256": "36059cd0589c0c76dbca06b0bdd876fca32db321264e6a5d9177d1bc9e9704f3",
+      "matched": true,
+      "object_sha256": "65e7e3cba83ea4eb02a221c4313e5e2ddb1570139d5881180e699fdeedfdd13a",
+      "oracle_sha256": "aa0596c6766322a8229ee3c36e57048c92adc82d50fbe2ef37afb8b85fcf4f11",
+      "original_executed": true,
+      "original_observation_sha256": "b7372c4fbf65d82b8cba6dd252e1c7febd0d7c41a5505de56540990b78dd7183",
+      "provenance": "Existing equal actual DOS/candidate case-ledger row; selected here for boundary-specific review, not replayed.",
+      "source_sha256": "e41a4ab8c56c0d4923ace8b02027f2471feee049aabe0577588e206e930b4db2"
+    }
+  ],
+  "schema": "behavior-run-evidence-v1",
+  "source_snapshot": {
+    "path": "evidence/behavior/harnesses/render-small-d25a35e5-20261002/reviews/DrawBalloons/source-pins/00-root_0250_e41a4ab8c56c.c",
+    "sha256": "e41a4ab8c56c0d4923ace8b02027f2471feee049aabe0577588e206e930b4db2"
+  },
+  "unmodeled_boundaries": 0,
+  "raw_report": {
+    "path": "evidence/behavior/functions/DrawBalloons/contracts/logical-render-v1/raw-run.json",
+    "sha256": "049d0cc38cacf96342ddbd208fd49a7f8cd717b24e0567ea94479f2b9bb7125b"
+  }
+}

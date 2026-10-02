@@ -1,0 +1,76 @@
+{
+  "schema": "behavior-helper-cert-v1",
+  "helper": "f_1FBD_0000",
+  "status": "CERTIFIED",
+  "review": {
+    "status": "APPROVED",
+    "reviewer": "root",
+    "reviewed_at": "2026-10-02",
+    "reason": "The NUL text, x/y and ordered text request are compared. Glyph buffers g5ABA/g5ABE/g5ECE and pen g3DA0/g3DA2 are backend writes; the reviewed caller reads none of these buffers or pen fields."
+  },
+  "input_domain": [
+    "56 cases: all sets 0/1/2 choices, ESC and upper/lower second-byte hotkeys, ignored keys, message geometry variants, event codes 0x0900/01/02/FF after an ignored key so the event branch executes.",
+    "100 cases, seed 0x29970791; sets 0..2, printable ASCII messages sized for screen/character width, screens 320/640/800 by 200/400/600, line-height 8..19, character-width 6..12, pending-key prefixes and at most one complete eight-word 0x09xx event.",
+    "Private DOS labels/tables and ctype remain from original module; host input/display/timer are modeled. Original string/font measurement, ctype, rectangle sizing/clipping and event-return logic execute; 0x09xx event returns its low byte."
+  ],
+  "compared_effects": [
+    "return",
+    "ordered host/helper calls",
+    "ordered input consumption",
+    "pointed rectangles and strings",
+    "global and pointed writes",
+    "all nonstack writes",
+    "caller ABI"
+  ],
+  "positive_control_id": "pc-f_1C62_0415-f_1FBD_0000",
+  "negative_control_id": "question-second-byte-hotkey",
+  "limitations": [
+    "Finite recorded input/state domain and explicit host-service projection only; original backend implementation equivalence is not claimed."
+  ],
+  "source_hashes": {
+    "tools/behavior.py": "2c0799048057f59eae61a48be4d695278635594484adf0c70bf46c51b4e0c799",
+    "layout/functions.json": "6089a06e18fbe8f0960392cfe30357f7c19c886f38f10f7f115c72d127a756e7",
+    "layout/symbols.json": "0f5dd5b0a211945a97782cfccdb9bb31b0dfd07fcde5df4d4f9486b487eb0125",
+    "layout/oracle.lock.json": "2c6d9e98c688621ad49a08c78d0e0968f4076b036be56ec0738217b533ccde13",
+    "tools/archive/behavior-tutorial-menu-review-20261002/e018/source-inputs/root_1C62_1a75da44054b.c": "1a75da44054b48e33e02b0dc551e9e690d1b0797b5e2cfe2e3e6e26ad3b632d4",
+    "tools/archive/behavior-tutorial-menu-review-20261002/canonical-root/m1FBD.asm": "5e32f1c409a2fc20cb7bba200a3d2fd11e43edc0b7e2b8781ca91415a1a43417",
+    "tools/behavior_suites/archive/tutorial-menu-e01896c0b9f96741a0ef8d11b1cb3d5a1b26e62677327699a01bb4c05778ec7a.py": "e01896c0b9f96741a0ef8d11b1cb3d5a1b26e62677327699a01bb4c05778ec7a"
+  },
+  "boundary_abi": {
+    "stack_words": 4,
+    "register_args": [],
+    "callee_pop_bytes": 0
+  },
+  "boundary_call_count": 526,
+  "boundary_call_count_scope": "all 156 matched campaign cases",
+  "caller_effect_reasoning": "The NUL text, x/y and ordered text request are compared. Glyph buffers g5ABA/g5ABE/g5ECE and pen g3DA0/g3DA2 are backend writes; the reviewed caller reads none of these buffers or pen fields.",
+  "implementation_provenance": "HOST slot for original DOS entry root:1FBD:0000 (far DOS entry; stack_words=4 register_args=[] callee_pop_bytes=0), canonical named entry f_1FBD_0000; exact containing source definition/module is pinned at tools/archive/behavior-tutorial-menu-review-20261002/canonical-root/m1FBD.asm SHA-256 5e32f1c409a2fc20cb7bba200a3d2fd11e43edc0b7e2b8781ca91415a1a43417, entry anchor f_1FBD_0000. This does not assert absence of historical code. The original entry is a presentation/save-surface command. Fixture records ordered arguments and projected pointed rectangles/strings; physical framebuffer and driver-owned backing-surface state are backend effects. Caller control flow, return, globals and nonstack writes remain compared. Exact source definition span: tools/archive/behavior-tutorial-menu-review-20261002/canonical-root/m1FBD.asm:33-210 (module SHA-256 5e32f1c409a2fc20cb7bba200a3d2fd11e43edc0b7e2b8781ca91415a1a43417).",
+  "host_boundary_identity": {
+    "kind": "HOST_SLOT",
+    "modeled_callback_name": "f_1FBD_0000",
+    "original_dos_entry": {
+      "symbol": "f_1FBD_0000",
+      "unit": "root",
+      "segment": "1FBD",
+      "offset": "0000",
+      "alias_of": null
+    },
+    "canonical_name": "f_1FBD_0000",
+    "abi": "far DOS entry; stack_words=4 register_args=[] callee_pop_bytes=0",
+    "boundary_abi": {
+      "stack_words": 4,
+      "register_args": [],
+      "callee_pop_bytes": 0
+    },
+    "canonical_source": {
+      "path": "tools/archive/behavior-tutorial-menu-review-20261002/canonical-root/m1FBD.asm",
+      "sha256": "5e32f1c409a2fc20cb7bba200a3d2fd11e43edc0b7e2b8781ca91415a1a43417",
+      "anchor": "f_1FBD_0000",
+      "start_line": 33,
+      "end_line": 210,
+      "definition_excerpt": "_f_1FBD_0000\tproc\tfar\n\tpush bp\n\tmov bp, sp\n\tpush si\n\tpush di\n\tcmp byte ptr _g_5A97, 6\n\tje L000E\n\tjne L0025\nL000E:\n\tles ax, dword ptr [bp+0Ah]\n\tpush es\n\tpush ax\n\tpush word ptr [bp+8]\n\tpush word ptr [bp+6]\n\tcall far ptr _f_1B4E_0081\n\tadd sp, 8\n\tpop di\n\tpop si\n\tpop bp\n\tretf\nL0025:\n\tmov bl, byte ptr _g_3DDC\n\txor bh, bh\n\tmov word ptr _g_5ABC, bx\n\tmov ax, ds\n\tmov es, ax\n\tmov di, offset DGROUP:_g_5ECE\n\tlds si, dword ptr [bp+0Ah]\n\txor dl, dl\nL003B:\n\tlodsb\n\tstosb\n\tor al, al\n\tje L004A\n\tinc dl\n\tcmp dl, 50h\n\tjne L003B\n\tdec dl\nL004A:\n\tmov ax, DGROUP\n\tmov ds, ax\n\tor dl, dl\n\tjne L0057\n\tpop di\n\tpop si\n\tpop bp\n\tretf\nL0057:\n\tcmp byte ptr _g_3DDE, 8\n\tjne L00A5\n\tmov byte ptr _g_5F1D, 0\n\tmov al, byte ptr _g_3DDE\n\tmul dl\n\tmov word ptr _g_5ABA, ax\n\tdec ax\n\tor ax, 7\n\tinc ax\n\tshr ax, 1\n\tshr ax, 1\n\tshr ax, 1\n\tmov dx, ax\n\tdec dx\n\tmov di, offset DGROUP:_g_5ABE\n\tmov si, offset DGROUP:_g_5ECE\nL007F:\n\tlodsb\n\tor al, al\n\tje L00A2\n\tmov cx, word ptr _g_3DDA\n\tmul cl\n\tpush si\n\tlds si, dword ptr _g_3DD6\n\tadd si, ax\n\tmov ax, di\nL0093:\n\tmovsb\n\tadd di, dx\n\tloop L0093\n\tmov di, ax\n\tinc di\n\tpop si\n\tmov ax, es\n\tmov ds, ax\n\tjmp L007F\nL00A2:\n\tjmp near ptr L0130\nL00A5:\n\tmov byte ptr _g_5F1D, 0\n\tmov al, byte ptr _g_3DDE\n\tmul dl\n\tmov word ptr _g_5ABA, ax\n\tdec ax\n\tor ax, 7\n\tinc ax\n\tshr ax, 1\n\tshr ax, 1\n\tshr ax, 1\n\tmov dx, ax\n\tmov di, offset DGROUP:_g_5ABE\n\tmov si, offset DGROUP:_g_5ECE\nL00C5:\n\tlodsb\n\tor al, al\n\tje L0130\n\ttest al, 80h\n\tje L00D8\n\tpush bx\n\tmov bl, al\n\txor bh, bh\n\tmov al, byte ptr [bx+_g_5FBE]\n\tpop bx\nL00D8:\n\tmov cx, word ptr _g_3DDA\n\tmul cl\n\tpush si\n\tlds si, dword ptr _g_3DD6\n\tadd si, ax\n\tpush di\nL00E6:\n\tlodsb\n\tand al, 0F0h\n\tmov byte ptr es:[di], al\n\tadd di, dx\n\tloop L00E6\n\tpop di\n\tpop si\n\tmov ax, es\n\tmov ds, ax\n\tlodsb\n\tor al, al\n\tje L0130\n\ttest al, 80h\n\tje L0109\n\tpush bx\n\tmov bl, al\n\txor bh, bh\n\tmov al, byte ptr [bx+_g_5FBE]\n\tpop bx\nL0109:\n\tmov cx, word ptr _g_3DDA\n\tmul cl\n\tpush si\n\tlds si, dword ptr _g_3DD6\n\tadd si, ax\n\tpush di\nL0117:\n\tlodsb\n\tshr al, 1\n\tshr al, 1\n\tshr al, 1\n\tshr al, 1\n\tor byte ptr es:[di], al\n\tadd di, dx\n\tloop L0117\n\tpop di\n\tinc di\n\tpop si\n\tmov ax, es\n\tmov ds, ax\n\tjmp L00C5\nL0130:\n\tpush ds\n\tmov ax, offset DGROUP:_g_5ABA\n\tpush ax\n\tpush word ptr [bp+8]\n\tpush word ptr [bp+6]\n\tcall far ptr _f_1B4E_005E\n\tadd sp, 8\n\tmov ax, word ptr [bp+6]\n\tadd ax, word ptr _g_5ABA\n\tmov word ptr _g_3DA0, ax\n\tmov ax, word ptr [bp+8]\n\tmov word ptr _g_3DA2, ax\n\tpop di\n\tpop si\n\tpop bp\n\tretf\n_f_1FBD_0000\tendp"
+    },
+    "role": "Fixture-provided platform input/timing/display/resource slot; this callback does not assert the original DOS helper is absent."
+  },
+  "omitted_backend_effects_reason": "The NUL text, x/y and ordered text request are compared. Glyph buffers g5ABA/g5ABE/g5ECE and pen g3DA0/g3DA2 are backend writes; the reviewed caller reads none of these buffers or pen fields."
+}

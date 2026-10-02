@@ -1,0 +1,68 @@
+{
+  "schema": "behavior-helper-cert-v1",
+  "helper": "win_GetObjRect",
+  "status": "CERTIFIED",
+  "source": {
+    "path": "src/root/m2505.c",
+    "sha256": "22a03f15e95fff376d27211426c4f9e3395e16e5decd92ef501fbfe3c1aba623",
+    "module": "root:2505"
+  },
+  "input_contract": {
+    "window": "valid locked DOS window id; high byte names a present window, low-byte object index is less than count",
+    "object_geometry": "accessible 8-byte signed Rect at the selected object-table far pointer, normalized in the bounded logical screen x=0..640,y=0..400",
+    "memory": "valid Ralloc-backed window/master table; output is the actual supplied far pointer"
+  },
+  "source_based_explanation": [
+    "Pinned root:2505 source calls win_LockWin(obj), obtains the window with f_2505_0006(obj), selects the far Rect pointer at window+0x2C indexed by obj&0xFF, copies all four words through the supplied far pointer, then calls win_UnlockWin(obj).",
+    "The clip callback supplies only the indexed Rect for each valid window ID, records ordered calls, and writes through the actual far pointer passed by original f_1E57_038E.",
+    "A separate 100-case direct integration runs original win_GetObjRect with original lock/window lookup/unlock helpers over 1..6 object records; the 265-case clip suite runs original f_1D8E_02BD and original allocator/memory helpers."
+  ],
+  "evidence": [
+    {
+      "kind": "direct-original-helper-integration",
+      "run": "evidence/behavior/helpers/window-geometry-v1/0-win_GetObjRect-run-evidence.json",
+      "case_ledger": "evidence/behavior/helpers/window-geometry-v1/0-win_GetObjRect-case-ledger.jsonl.gz",
+      "case_id": "getobjrect/positive",
+      "run_sha256": "73d996ba1096d876336836b13a85927396abe1a0d1ec56c329c64dda225e389c",
+      "case_ledger_sha256": "01eafab63247ac366b639838818b256751183c6b0e3ea0413d849329079e3724"
+    },
+    {
+      "kind": "clip-boundary",
+      "run": "evidence/behavior/helpers/window-geometry-v1/1-f_1E57_038E-run-evidence.json",
+      "case_ledger": "evidence/behavior/helpers/window-geometry-v1/1-f_1E57_038E-case-ledger.jsonl.gz",
+      "case_id": "clip/overlap",
+      "negative_control": "wrong-clip-rectangle",
+      "run_sha256": "113518db78f49466060277c58c193e668f2bbc952262b8858eeb7d5a2ee8babe",
+      "case_ledger_sha256": "c272c1115d3f899a789d92e2c0270ec5b428be4135a76a7aca0e1abe79c32f40"
+    }
+  ],
+  "review": {
+    "status": "APPROVED",
+    "reviewer": "root",
+    "reviewed_at": "2026-10-02",
+    "reason": "Reviewed exact canonical win_GetObjRect source: it copies four signed words without arithmetic, with AX object and callee-popped far output pointer. The model represents the logical geometry service for open windows; it is not a complete replacement for window/heap lifecycle. Separate direct original-helper integration supports the boundary and the clip caller mutant detects incorrect geometry."
+  },
+  "input_domain": [
+    "Open-window logical geometry service: valid high-byte window IDs, accessible supplied output pointer, four signed 16-bit rectangle coordinates, including the recorded clip suite x=-128..768/y=-80..480.",
+    "The exact helper copies all four words without coordinate restrictions. Direct real-window integration covers 100 valid Ralloc fixtures; clip fixtures supply the geometry service directly."
+  ],
+  "compared_effects": [
+    "ordered screen/window clipping rectangles",
+    "45-entry clip handle table",
+    "Ralloc heap/master-table state",
+    "window stack and screen rectangle",
+    "geometry callback order",
+    "all non-stack writes",
+    "caller ABI"
+  ],
+  "positive_control_id": "clip/overlap",
+  "negative_control_id": "wrong-clip-rectangle",
+  "limitations": [
+    "No malformed/unmapped object indices, inaccessible pointers, invalid handles, or arbitrary resource geometry.",
+    "The model supplies per-case window Rects; it does not reconstruct full window manager or resource loading behavior.",
+    "Window loading, lock-manager implementation effects and resource disposal are outside this geometry-service projection. The clip caller own allocator/master table, outputs and every nonstack write remain compared."
+  ],
+  "source_hashes": {
+    "src/root/m2505.c": "22a03f15e95fff376d27211426c4f9e3395e16e5decd92ef501fbfe3c1aba623"
+  }
+}

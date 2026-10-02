@@ -1,0 +1,418 @@
+{
+  "schema": "simant-data-debt-disposition-proposal-v1",
+  "status": "APPROVED_DISPOSITIONS",
+  "oracle_sha256": "aa0596c6766322a8229ee3c36e57048c92adc82d50fbe2ef37afb8b85fcf4f11",
+  "inventory": {
+    "path": "work/takeover/behavioral-oracle/data-debt.json",
+    "sha256": "2e4a87fedfcd10ffe239a93ab6201958cc50cfeb6a9679b01e49bd24f7b8a40a"
+  },
+  "summary": {
+    "literal_spans": 8,
+    "literal_bytes": 110,
+    "section27_common_tail_overlap_bytes": 3,
+    "total_explicit_bytes": 113
+  },
+  "spans": [
+    {
+      "id": "far_data",
+      "status": "APPROVED_DISPOSITION",
+      "classification": "LAYOUT_OR_SEGMENT_ALIGNMENT_CANDIDATE",
+      "original_exe_file_range": [
+        451092,
+        451104
+      ],
+      "original_exe_file_range_hex": [
+        "0x6E214",
+        "0x6E220"
+      ],
+      "section_linear_range": [
+        "0x50F54",
+        "0x50F60"
+      ],
+      "size": 12,
+      "bytes_hex": "000000000000000000000000",
+      "sha256": "15ec7bf0b50732b49f8228e07d24365338f9e3ab994b00af08e5a3bffe55fd8b",
+      "semantic_assessment": "12 zero bytes precede FAR_BSS at a paragraph boundary. No game symbol/reference is known. The bytes cannot be called harmless or generated fill until original SEGDEF/link record evidence distinguishes alignment from source data.",
+      "reason_historical_ownership_is_blocked": "Historical owner blocked: missing source/link record proving paragraph fill. Modern port need: none identified, but keep provenance unresolved.",
+      "original_audit_fields": {
+        "provenance_class": "debt:far_data",
+        "provenance_owner": "debt:far_data",
+        "nonzero_bytes": 0,
+        "relocations_inside": []
+      },
+      "evidence": {
+        "data_debt_inventory": {
+          "path": "work/takeover/behavioral-oracle/data-debt.json",
+          "sha256": "2e4a87fedfcd10ffe239a93ab6201958cc50cfeb6a9679b01e49bd24f7b8a40a"
+        },
+        "data_debt_report": {
+          "path": "work/takeover/behavioral-oracle/data-debt.md",
+          "sha256": "d6cee16e4d1ba4eb312de28d4ce5cc3fd5f87949d4b5115dd4abfe87f161a1af"
+        },
+        "reference_scan": {
+          "path": "work/takeover/behavioral-oracle/debt-audit/reference-scan.json",
+          "sha256": "c395daab89fccd0d0c8220e9dcc5e32bf6a677209712f72b0f73dd959de7fbf2"
+        }
+      }
+    },
+    {
+      "id": "dgroup_2100",
+      "status": "APPROVED_DISPOSITION",
+      "classification": "MEANINGFUL_GRAPHICS_TABLES_OWNER_SPLIT_UNRESOLVED",
+      "original_exe_file_range": [
+        478960,
+        478984
+      ],
+      "original_exe_file_range_hex": [
+        "0x74EF0",
+        "0x74F08"
+      ],
+      "section_linear_range": [
+        "0x57C30",
+        "0x57C48"
+      ],
+      "size": 24,
+      "bytes_hex": "80402010080402010f0e0c040d05010b020a060607070800",
+      "sha256": "70c6f7370bdfe2a389eec1c60eb0dbde6ee6bc8dcbc9eab919d6b44af4bd1e1d",
+      "semantic_assessment": "Eight bit masks and a 16-byte pixel lookup are consumed by S00/S01 code. Their exact bytes and behavior matter to rendering; the defining S00A/S00B object split is unproven.",
+      "reason_historical_ownership_is_blocked": "Historical owner blocked: source-object split and relocation/data-order proof missing. Port requirement: preserve both tables and their consumers.",
+      "original_audit_fields": {
+        "provenance_class": "debt:dgroup_data",
+        "provenance_owner": "debt:dgroup_data",
+        "nonzero_bytes": 23,
+        "relocations_inside": []
+      },
+      "evidence": {
+        "data_debt_inventory": {
+          "path": "work/takeover/behavioral-oracle/data-debt.json",
+          "sha256": "2e4a87fedfcd10ffe239a93ab6201958cc50cfeb6a9679b01e49bd24f7b8a40a"
+        },
+        "data_debt_report": {
+          "path": "work/takeover/behavioral-oracle/data-debt.md",
+          "sha256": "d6cee16e4d1ba4eb312de28d4ce5cc3fd5f87949d4b5115dd4abfe87f161a1af"
+        },
+        "reference_scan": {
+          "path": "work/takeover/behavioral-oracle/debt-audit/reference-scan.json",
+          "sha256": "c395daab89fccd0d0c8220e9dcc5e32bf6a677209712f72b0f73dd959de7fbf2"
+        }
+      }
+    },
+    {
+      "id": "dgroup_56fe",
+      "status": "APPROVED_DISPOSITION",
+      "classification": "UNKNOWN_FIELD_SEMANTICS",
+      "original_exe_file_range": [
+        492782,
+        492786
+      ],
+      "original_exe_file_range_hex": [
+        "0x784EE",
+        "0x784F2"
+      ],
+      "section_linear_range": [
+        "0x5B22E",
+        "0x5B232"
+      ],
+      "size": 4,
+      "bytes_hex": "00000000",
+      "sha256": "df3f619804a92fdb4057192dc43dd748ea778adc52bc498ce80524c014b81119",
+      "semantic_assessment": "Four zero bytes lie before g_5702; no typed field or use chain identifies them. Zero content is not evidence of padding or irrelevance.",
+      "reason_historical_ownership_is_blocked": "Historical owner blocked: no field-level symbol, initializer, or owning object. Port requirement: unknown until runtime reachability and semantics are established.",
+      "original_audit_fields": {
+        "provenance_class": "debt:dgroup_data",
+        "provenance_owner": "debt:dgroup_data",
+        "nonzero_bytes": 0,
+        "relocations_inside": []
+      },
+      "evidence": {
+        "data_debt_inventory": {
+          "path": "work/takeover/behavioral-oracle/data-debt.json",
+          "sha256": "2e4a87fedfcd10ffe239a93ab6201958cc50cfeb6a9679b01e49bd24f7b8a40a"
+        },
+        "data_debt_report": {
+          "path": "work/takeover/behavioral-oracle/data-debt.md",
+          "sha256": "d6cee16e4d1ba4eb312de28d4ce5cc3fd5f87949d4b5115dd4abfe87f161a1af"
+        },
+        "reference_scan": {
+          "path": "work/takeover/behavioral-oracle/debt-audit/reference-scan.json",
+          "sha256": "c395daab89fccd0d0c8220e9dcc5e32bf6a677209712f72b0f73dd959de7fbf2"
+        }
+      }
+    },
+    {
+      "id": "dgroup_5a28",
+      "status": "APPROVED_DISPOSITION",
+      "classification": "PARTLY_ANCHORED_STATE_UNKNOWN_LEADING_WORD",
+      "original_exe_file_range": [
+        493592,
+        493594
+      ],
+      "original_exe_file_range_hex": [
+        "0x78818",
+        "0x7881A"
+      ],
+      "section_linear_range": [
+        "0x5B558",
+        "0x5B55A"
+      ],
+      "size": 2,
+      "bytes_hex": "0000",
+      "sha256": "96a296d224f285c67bee93c30f8a309157f0daa35dc5b87e410b78630a09cfc7",
+      "semantic_assessment": "Two leading zero bytes begin a root:1F58 state range followed by identified keyboard/interrupt fields; no read/write is identified for this word.",
+      "reason_historical_ownership_is_blocked": "Historical owner blocked: source-level state record ownership/order is not established for the leading word. Port requirement: preserve neighboring state; leading field remains unknown.",
+      "original_audit_fields": {
+        "provenance_class": "debt:dgroup_data",
+        "provenance_owner": "debt:dgroup_data",
+        "nonzero_bytes": 0,
+        "relocations_inside": []
+      },
+      "evidence": {
+        "data_debt_inventory": {
+          "path": "work/takeover/behavioral-oracle/data-debt.json",
+          "sha256": "2e4a87fedfcd10ffe239a93ab6201958cc50cfeb6a9679b01e49bd24f7b8a40a"
+        },
+        "data_debt_report": {
+          "path": "work/takeover/behavioral-oracle/data-debt.md",
+          "sha256": "d6cee16e4d1ba4eb312de28d4ce5cc3fd5f87949d4b5115dd4abfe87f161a1af"
+        },
+        "reference_scan": {
+          "path": "work/takeover/behavioral-oracle/debt-audit/reference-scan.json",
+          "sha256": "c395daab89fccd0d0c8220e9dcc5e32bf6a677209712f72b0f73dd959de7fbf2"
+        }
+      }
+    },
+    {
+      "id": "dgroup_5a96",
+      "status": "APPROVED_DISPOSITION",
+      "classification": "PARTLY_TYPED_SHARED_UI_STATE",
+      "original_exe_file_range": [
+        493702,
+        493728
+      ],
+      "original_exe_file_range_hex": [
+        "0x78886",
+        "0x788A0"
+      ],
+      "section_linear_range": [
+        "0x5B5C6",
+        "0x5B5E0"
+      ],
+      "size": 26,
+      "bytes_hex": "00ffff010000000000005d017f02008000800080008000000000",
+      "sha256": "5c2d9330239c1485e73c9e6f5d1d137a2a901ce086aec624e8f3eb3cf5ec1929",
+      "semantic_assessment": "A 26-byte portion of a shared 1,360-byte UI region includes named/used fields (display selector, far pointer, saved cursor pointers) and other incompletely typed bytes.",
+      "reason_historical_ownership_is_blocked": "Historical owner blocked: shared multi-module allocation must be partitioned by source fields and ordering. Port requirement: preserve evidenced UI fields; do not assume unknown bytes inert.",
+      "original_audit_fields": {
+        "provenance_class": "debt:dgroup_data",
+        "provenance_owner": "debt:dgroup_data",
+        "nonzero_bytes": 11,
+        "relocations_inside": []
+      },
+      "evidence": {
+        "data_debt_inventory": {
+          "path": "work/takeover/behavioral-oracle/data-debt.json",
+          "sha256": "2e4a87fedfcd10ffe239a93ab6201958cc50cfeb6a9679b01e49bd24f7b8a40a"
+        },
+        "data_debt_report": {
+          "path": "work/takeover/behavioral-oracle/data-debt.md",
+          "sha256": "d6cee16e4d1ba4eb312de28d4ce5cc3fd5f87949d4b5115dd4abfe87f161a1af"
+        },
+        "reference_scan": {
+          "path": "work/takeover/behavioral-oracle/debt-audit/reference-scan.json",
+          "sha256": "c395daab89fccd0d0c8220e9dcc5e32bf6a677209712f72b0f73dd959de7fbf2"
+        }
+      }
+    },
+    {
+      "id": "dgroup_60b0",
+      "status": "APPROVED_DISPOSITION",
+      "classification": "UNREFERENCED_TIMER_COMPATIBLE_RECORD_WITH_REAL_RELOCATION",
+      "original_exe_file_range": [
+        495264,
+        495282
+      ],
+      "original_exe_file_range_hex": [
+        "0x78EA0",
+        "0x78EB2"
+      ],
+      "section_linear_range": [
+        "0x5BBE0",
+        "0x5BBF2"
+      ],
+      "size": 18,
+      "bytes_hex": "000000007f0210000f03731b000000000106",
+      "sha256": "f04c78a82fe6b6554e3a0b90d515eb576029c2f20a60836d1f10f0a2b52f69e5",
+      "semantic_assessment": "18-byte Timer-shaped record includes a relocated callback pointer; exhaustive bounded scan found no static inbound reference/registration, but computed or unowned accesses are not excluded.",
+      "reason_historical_ownership_is_blocked": "Historical owner/reachability blocked: defining owner and registration path are unknown. Port requirement: unresolved until a call/data-flow chain rules its role in or out; do not mark harmless.",
+      "original_audit_fields": {
+        "provenance_class": "debt:dgroup_data",
+        "provenance_owner": "debt:dgroup_data",
+        "nonzero_bytes": 9,
+        "relocations_inside": [
+          {
+            "site": "55B7:607A",
+            "linear": "5BBEA",
+            "relative_offset": 10
+          }
+        ]
+      },
+      "evidence": {
+        "data_debt_inventory": {
+          "path": "work/takeover/behavioral-oracle/data-debt.json",
+          "sha256": "2e4a87fedfcd10ffe239a93ab6201958cc50cfeb6a9679b01e49bd24f7b8a40a"
+        },
+        "data_debt_report": {
+          "path": "work/takeover/behavioral-oracle/data-debt.md",
+          "sha256": "d6cee16e4d1ba4eb312de28d4ce5cc3fd5f87949d4b5115dd4abfe87f161a1af"
+        },
+        "reference_scan": {
+          "path": "work/takeover/behavioral-oracle/debt-audit/reference-scan.json",
+          "sha256": "c395daab89fccd0d0c8220e9dcc5e32bf6a677209712f72b0f73dd959de7fbf2"
+        }
+      }
+    },
+    {
+      "id": "dgroup_68ac",
+      "status": "APPROVED_DISPOSITION",
+      "classification": "MEANINGFUL_EDGE_MASKS_OWNER_UNRESOLVED",
+      "original_exe_file_range": [
+        497308,
+        497318
+      ],
+      "original_exe_file_range_hex": [
+        "0x7969C",
+        "0x796A6"
+      ],
+      "section_linear_range": [
+        "0x5C3DC",
+        "0x5C3E6"
+      ],
+      "size": 10,
+      "bytes_hex": "ff80c0e0f0f8fcfefff0",
+      "sha256": "5c6cbc686a260e59272b8333d13c1f84bc473886d6793952378ce6667dfd4565",
+      "semantic_assessment": "Ten edge/pixel masks are indexed by original S01 and S03 driver code. Values and index semantics are live rendering behavior.",
+      "reason_historical_ownership_is_blocked": "Historical owner blocked: defining driver/data object and ordering are unknown; adjacent g_68B6 dispatch table is separate. Port requirement: preserve masks and lookup behavior.",
+      "original_audit_fields": {
+        "provenance_class": "debt:dgroup_data",
+        "provenance_owner": "debt:dgroup_data",
+        "nonzero_bytes": 10,
+        "relocations_inside": []
+      },
+      "evidence": {
+        "data_debt_inventory": {
+          "path": "work/takeover/behavioral-oracle/data-debt.json",
+          "sha256": "2e4a87fedfcd10ffe239a93ab6201958cc50cfeb6a9679b01e49bd24f7b8a40a"
+        },
+        "data_debt_report": {
+          "path": "work/takeover/behavioral-oracle/data-debt.md",
+          "sha256": "d6cee16e4d1ba4eb312de28d4ce5cc3fd5f87949d4b5115dd4abfe87f161a1af"
+        },
+        "reference_scan": {
+          "path": "work/takeover/behavioral-oracle/debt-audit/reference-scan.json",
+          "sha256": "c395daab89fccd0d0c8220e9dcc5e32bf6a677209712f72b0f73dd959de7fbf2"
+        }
+      }
+    },
+    {
+      "id": "dgroup_79f0",
+      "status": "APPROVED_DISPOSITION",
+      "classification": "RUNTIME_MEMBER_SELECTION_AND_ORDER_UNRESOLVED",
+      "original_exe_file_range": [
+        501728,
+        501742
+      ],
+      "original_exe_file_range_hex": [
+        "0x7A7E0",
+        "0x7A7EE"
+      ],
+      "section_linear_range": [
+        "0x5D520",
+        "0x5D52E"
+      ],
+      "size": 14,
+      "bytes_hex": "0000000000000000000000000300",
+      "sha256": "92780880ee22e61258cd8e4375f94c75f10d3c410c86152967022bd14f8f5f0b",
+      "semantic_assessment": "Fourteen bytes match candidate llibcr fdata.asm __fheap data, but runtime library selection/ordering and game call path are unproven.",
+      "reason_historical_ownership_is_blocked": "Historical owner blocked: runtime member inclusion/selection proof absent. Port requirement: DOS far-heap state is not imported into modern memory API without an evidenced game contract.",
+      "original_audit_fields": {
+        "provenance_class": "debt:dgroup_data",
+        "provenance_owner": "debt:dgroup_data",
+        "nonzero_bytes": 1,
+        "relocations_inside": []
+      },
+      "evidence": {
+        "data_debt_inventory": {
+          "path": "work/takeover/behavioral-oracle/data-debt.json",
+          "sha256": "2e4a87fedfcd10ffe239a93ab6201958cc50cfeb6a9679b01e49bd24f7b8a40a"
+        },
+        "data_debt_report": {
+          "path": "work/takeover/behavioral-oracle/data-debt.md",
+          "sha256": "d6cee16e4d1ba4eb312de28d4ce5cc3fd5f87949d4b5115dd4abfe87f161a1af"
+        },
+        "reference_scan": {
+          "path": "work/takeover/behavioral-oracle/debt-audit/reference-scan.json",
+          "sha256": "c395daab89fccd0d0c8220e9dcc5e32bf6a677209712f72b0f73dd959de7fbf2"
+        }
+      }
+    },
+    {
+      "id": "common_tail_overlap_3",
+      "status": "APPROVED_DISPOSITION",
+      "classification": "LINKER_FILE_BOUNDARY_UNRESOLVED",
+      "original_exe_file_range": [
+        506253,
+        506256
+      ],
+      "size": 3,
+      "bytes_hex": "7224e7",
+      "sha256": "401653aeff0fb1a0dfd4646b419298c5fcc0a0bf2bd25d4cc9694b94538182e2",
+      "semantic_assessment": "The 3 bytes are the overlap between the end of S27 file data and debt:common_tail; no game reference is evidenced. The neighboring 253 common-tail bytes are outside S27. This is a linker/file-boundary issue, not a harmlessness finding.",
+      "reason_historical_ownership_is_blocked": "The exact common-tail/section-end mechanism and ownership remain unproved.",
+      "original_audit_fields": {
+        "provenance_class": "debt:common_tail",
+        "provenance_owner": "debt:common_tail"
+      },
+      "evidence": {
+        "data_debt_inventory": {
+          "path": "work/takeover/behavioral-oracle/data-debt.json",
+          "sha256": "2e4a87fedfcd10ffe239a93ab6201958cc50cfeb6a9679b01e49bd24f7b8a40a"
+        },
+        "data_debt_report": {
+          "path": "work/takeover/behavioral-oracle/data-debt.md",
+          "sha256": "d6cee16e4d1ba4eb312de28d4ce5cc3fd5f87949d4b5115dd4abfe87f161a1af"
+        },
+        "reference_scan": {
+          "path": "work/takeover/behavioral-oracle/debt-audit/reference-scan.json",
+          "sha256": "c395daab89fccd0d0c8220e9dcc5e32bf6a677209712f72b0f73dd959de7fbf2"
+        }
+      }
+    }
+  ],
+  "memory_failure_path_supplemental_review": {
+    "status": "SUPPLEMENTAL_DIAGNOSTIC_ONLY",
+    "report_path": "evidence/behavior/harnesses/memory-final-20261002/failure-paths/report-repro-v1.json",
+    "report_sha256": "ad061b0780ee9fc05fadfe429cf66bf332fa8c8be54f9f34b1a592b6c1134c7e",
+    "producer_path": "evidence/behavior/harnesses/memory-final-20261002/failure-paths/reproduce-v1.py",
+    "producer_sha256": "0ebfaeb824f65c6f94b89455686ab1185433b1cd41a2a7ac2ba5a93e6220feaa",
+    "index_path": "evidence/behavior/harnesses/memory-final-20261002/failure-paths/repro-v1-index.json",
+    "index_sha256": "9ec00bddb9bf37f2676a87b9525b971ca94f4e34ad3b0082c9495641398822a0",
+    "reported_probe_counts": {
+      "returned_differential_control": 3,
+      "original_helper_return_both_lanes": 2,
+      "terminal_punt_boundary_pair": 1,
+      "negative_omit_punt_caller": 1
+    },
+    "limitations": "Diagnostic reproduction; Punt probe is a terminal nonreturn boundary, not a fabricated null result; no registered BEHAVIOR_EXACT evidence or accepted-function count is changed."
+  },
+  "review": {
+    "status": "APPROVED",
+    "reviewer": "root",
+    "reviewed_at": "2026-10-02",
+    "reason": "Reviewed original instruction streams, finite original/candidate differential execution, source-specific logical boundaries, accepted peer/data gates and explicit residual ownership limitations. This checkpoint closes recorded game contracts without promoting historical byte identity."
+  },
+  "proposal": {
+    "path": "work/takeover/behavioral-oracle/data-debt-disposition-proposal-v1.json",
+    "sha256": "f0880ce218973e414afd54818146d89bcae460a2051d8491d7da090a0b98e74c"
+  },
+  "port_constraint": "Preserve meaningful table values and every consumed initial state field. Unknown bytes are not declared harmless; retain pinned original values/provenance until a source-level replacement proves their contract. Remaining ownership/source-object/linker uncertainties do not become EXACT claims."
+}

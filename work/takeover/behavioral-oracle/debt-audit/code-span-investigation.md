@@ -1,0 +1,29 @@
+# Unowned code-gap behavior investigation
+
+This is a read-only audit of the 54 game-code bytes outside the current known function extents. It does not add ownership, alter function extents, relax acceptance, or establish that unreferenced spans are dead. The input pins and complete machine-readable scan are in `code-gaps.json`.
+
+## Findings by span
+
+| Span | Observed body and context | Mechanism / confidence |
+|---|---|---|
+| root `0E2E:0931` (file `012611`, 1 byte) | `00`, immediately after `LessonDone` (its accepted extent ends exactly at offset `0931`) and before `CompactListA` at `0EC1:0002`. | Strong alignment byte explanation: the next function begins at an even address after the odd end. Not a function body based on current evidence. The byte remains layout debt; do not trim either extent. |
+| root `1C62:069E` / linear `1CCBE` (8 bytes) | `push cs; call 1C62:0090; mov ax,1; retf`. The prior `f_1C62_0415` extent ends exactly here; next known function begins at `06A6`. | Concrete behavior: invoke `f_1C62_0090`, return 1. That callee checks `fd_55B3_6262` and invokes callback `g_9178` if nonzero. The C module is a dialog/error UI family. This is a complete far-callable wrapper shape, but its own source role/name and entry path are not established. |
+| root `1E57:0008` (1 byte) | Standalone `retf`; accepted empty far entries `f_1E57_0006` and `f_1E57_0007` occupy offsets 6 and 7; `f_1E57_0009` begins at 9. | Strong missing-empty-function hypothesis. Module profile includes `/Gs`; verified GS-1 says an empty far function under `/Gs` emits one `retf`. There are 415 raw occurrences of offset word `0008` in the image, which are not attributable as pointers; no direct call, exact relocated far pointer, vector, or switch-table entry identifies this entry. |
+| root `1E57:0EB0` (9 bytes) | `push cs; call clip_Push; push cs; call clip_Off; retf`, exactly between accepted `clip_Push` and `clip_Pop`. | Concrete clipping operation: preserve the current clip state on the clip stack, then disable the active clip. The calls resolve to same-segment accepted functions and the sequence fits the window clipping module. This is a complete wrapper shape; no catalogued caller/address-taking site found. |
+| root `23AE:037E` (2 bytes) | `retf; 00`, immediately after the seven-byte `win_LockWin` extent and before `root:23E6:0000` (a new frame). | `/Gs` profile makes an empty far function at `037E` plausible; the following zero may be contribution-end/alignment material, but exact segment-tail ownership is not established. 108 image occurrences of raw word `037E` are ambiguous data/immediates, not pointer evidence. Do not merge into `win_LockWin` or call the zero padding without further layout proof. |
+| root `284A:0137` (1 byte) | `retf`, immediately after accepted `StopSong` (whose extent ends at `0137`) and before `f_284A_0138`. | `/Gs` profile makes a separate empty far function plausible. Six raw `0137` word occurrences are ambiguous; no direct call, relocation, vector, or switch table identifies an entry. Keep as unresolved ownership. |
+| S04 `35F5:0980` (24 code bytes + 8 zero bytes) | Code: `xor ax,ax; lcall 29F4:02CC; cmp word ptr DS:2338,0; je draw; call EraseMiniMapCursor; retf; draw: call DrawMiniMapCursor; retf`. The following 8 bytes are zero. | Strong behavior/source-family match for toggling the mini-map cursor. The far call is the runtime stack-check entry `__aFchkstk`; S04 lacks `/Gs`, matching the verified GS-1 stack-check prefix. `DS:2338` is the private `miniCursorOn` static in the S04 source's exact `_DATA` placement; Draw sets it to 1 and Erase to 0. The branch calls Erase when set and Draw when clear. Win16 cross-version evidence places `ToggleMiniMapCursor` after Draw/Erase; this supports semantics/name correspondence but does not authorize a DOS name or prove the DOS routine has an entry path. The trailing eight zero bytes remain unowned layout/content debt. |
+
+## Reference and table checks
+
+The pinned scan covers 1,730 catalogued function extents, 9,075 loader relocation sites, 136 RTLink vectors, and 35 same-unit switch tables. It finds no direct catalogued call/branch into these spans; no exact relocated far pointer to a span; no RTLink vector target; and no known switch-table target. A raw offset-word scan also records every literal near-offset occurrence. The 0x069E, 0x0EB0, and 0x0980 words have no occurrences; low/common offsets such as 0x0008, 0x037E, and 0x0137 have ambiguous raw occurrences. Raw word presence alone is not a function-pointer table, and absence of a word is not a proof against dynamic/computed transfers.
+
+For function-pointer tables in this large-model DOS image, relocated far-pointer scans are the meaningful static check; all loader fixups were visited and none targets these spans. The recursive inventory recognizes switch tables but does not claim to recover arbitrary hand-built near-pointer arrays, unowned callers, or runtime-computed targets. This audit therefore does not claim “no incoming reference means dead.”
+
+## Reproducibility and limits
+
+- `analyze_code_gaps.py` reads the DOS executable, unit relocation records, function inventory, symbols, manifest, and cross-version decision file. It writes only the JSON report in its build worker directory.
+- `code-gaps.json` preserves exact decoded streams, neighboring function extents/tails, source/layout hashes, and scan counts.
+- `code-span-followup.md` preserves the 316-byte reconciliation context (54 unowned spans + 246 link-fill + 16 text-prefix bytes).
+- The earlier data audit reports are included alongside this report because they explain the original inventory context; they do not change the scope of this code-gap conclusion.
+- No canonical source, manifest, function table, promotion journal, or executable was modified by this audit.

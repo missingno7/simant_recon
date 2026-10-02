@@ -1,0 +1,1158 @@
+{
+ "schema": "msc600ax-s15-ex-identity-audit-v1",
+ "captures": {
+  "a": "s15-base",
+  "b": "s15-top-extern-plus-one",
+  "same_flags": "/AL /Os /Og /Oe /Zi",
+  "source_basename": "UNIT.C",
+  "source_line_numbers_preserved": true
+ },
+ "raw": {
+  "ex_size_each": [
+   3681,
+   3681
+  ],
+  "different_offsets": 335,
+  "IN_differences": 1,
+  "ST_differences": 5,
+  "SY_differences": 178
+ },
+ "local_control_confirmed_pattern": {
+  "source_files": [
+   "probes/extern-read-a.c",
+   "probes/extern-read-ab.c"
+  ],
+  "control_result": {
+   "EX_size_each": 71,
+   "changed_offsets": 4,
+   "candidate_patterns": [
+    {
+     "offset": 35,
+     "marker": "0x26",
+     "a_value": 101,
+     "b_value": 102,
+     "delta": 1
+    },
+    {
+     "offset": 43,
+     "marker": "0x26",
+     "a_value": 100,
+     "b_value": 101,
+     "delta": 1
+    },
+    {
+     "offset": 52,
+     "marker": "0x3a",
+     "a_value": 102,
+     "b_value": 103,
+     "delta": 1
+    },
+    {
+     "offset": 60,
+     "marker": "0x29",
+     "a_value": 102,
+     "b_value": 103,
+     "delta": 1
+    }
+   ],
+   "unclassified": 0
+  },
+  "scope": "Confirms these local byte patterns respond to one earlier extern in this tiny stream; does not define a global EX grammar."
+ },
+ "rename_controls": {
+  "sources": [
+   "probes/extern-read-a.c",
+   "probes/extern-read-b.c",
+   "probes/function-renamed.c",
+   "probes/local-name-x.c",
+   "probes/local-name-y.c"
+  ],
+  "extern_symbol_rename": {
+   "EX_differences": 0,
+   "SY_differences": 1
+  },
+  "function_rename": {
+   "000352EX": {
+    "size": [
+     69,
+     69
+    ],
+    "common_length_diffs": 0,
+    "tail_bytes": [
+     0,
+     0
+    ]
+   },
+   "000352IN": {
+    "size": [
+     1,
+     1
+    ],
+    "common_length_diffs": 0,
+    "tail_bytes": [
+     0,
+     0
+    ]
+   },
+   "000352ST": {
+    "size": [
+     1,
+     1
+    ],
+    "common_length_diffs": 0,
+    "tail_bytes": [
+     0,
+     0
+    ]
+   },
+   "000352SY": {
+    "size": [
+     64,
+     64
+    ],
+    "common_length_diffs": 1,
+    "tail_bytes": [
+     0,
+     0
+    ]
+   }
+  },
+  "local_rename": {
+   "000352EX": {
+    "size": [
+     82,
+     82
+    ],
+    "common_length_diffs": 0,
+    "tail_bytes": [
+     0,
+     0
+    ]
+   },
+   "000352IN": {
+    "size": [
+     1,
+     1
+    ],
+    "common_length_diffs": 0,
+    "tail_bytes": [
+     0,
+     0
+    ]
+   },
+   "000352ST": {
+    "size": [
+     1,
+     1
+    ],
+    "common_length_diffs": 0,
+    "tail_bytes": [
+     0,
+     0
+    ]
+   },
+   "000352SY": {
+    "size": [
+     82,
+     82
+    ],
+    "common_length_diffs": 1,
+    "tail_bytes": [
+     0,
+     0
+    ]
+   }
+  },
+  "interpretation": "Names can change in SY while EX remains byte-identical in these controls; this is a negative contrast for spelling bytes in EX."
+ },
+ "declaration_position_controls": {
+  "typedef_before": {
+   "000352EX": {
+    "size": [
+     69,
+     69
+    ],
+    "common_length_diffs": 3,
+    "tail_bytes": [
+     0,
+     0
+    ]
+   },
+   "000352IN": {
+    "size": [
+     1,
+     1
+    ],
+    "common_length_diffs": 0,
+    "tail_bytes": [
+     0,
+     0
+    ]
+   },
+   "000352ST": {
+    "size": [
+     1,
+     1
+    ],
+    "common_length_diffs": 0,
+    "tail_bytes": [
+     0,
+     0
+    ]
+   },
+   "000352SY": {
+    "size": [
+     64,
+     64
+    ],
+    "common_length_diffs": 2,
+    "tail_bytes": [
+     0,
+     0
+    ]
+   }
+  },
+  "typedef_after": {
+   "000352EX": {
+    "size": [
+     69,
+     72
+    ],
+    "common_length_diffs": 1,
+    "tail_bytes": [
+     0,
+     3
+    ]
+   },
+   "000352IN": {
+    "size": [
+     1,
+     2
+    ],
+    "common_length_diffs": 0,
+    "tail_bytes": [
+     0,
+     1
+    ]
+   },
+   "000352ST": {
+    "size": [
+     1,
+     2
+    ],
+    "common_length_diffs": 0,
+    "tail_bytes": [
+     0,
+     1
+    ]
+   },
+   "000352SY": {
+    "size": [
+     64,
+     65
+    ],
+    "common_length_diffs": 0,
+    "tail_bytes": [
+     0,
+     1
+    ]
+   }
+  },
+  "extern_after_function": {
+   "000352EX": {
+    "size": [
+     69,
+     72
+    ],
+    "common_length_diffs": 1,
+    "tail_bytes": [
+     0,
+     3
+    ]
+   },
+   "000352IN": {
+    "size": [
+     1,
+     2
+    ],
+    "common_length_diffs": 0,
+    "tail_bytes": [
+     0,
+     1
+    ]
+   },
+   "000352ST": {
+    "size": [
+     1,
+     2
+    ],
+    "common_length_diffs": 0,
+    "tail_bytes": [
+     0,
+     1
+    ]
+   },
+   "000352SY": {
+    "size": [
+     64,
+     65
+    ],
+    "common_length_diffs": 0,
+    "tail_bytes": [
+     0,
+     1
+    ]
+   }
+  },
+  "sources": [
+   "probes/typedef-before.c",
+   "probes/typedef-after.c",
+   "probes/extern-after-function.c"
+  ],
+  "interpretation": "A typedef before the function changes three EX offsets; a declaration after it appends records and leaves the prior function prefix intact. This establishes order sensitivity in these tiny examples, not S15 field ownership."
+ },
+ "S15_scan": {
+  "heuristic_marker_candidates": 274,
+  "candidate_value_delta_counts": {
+   "1": 274
+  },
+  "raw_diff_bytes_under_candidate_spans": 275,
+  "residual_diff_offsets": 60,
+  "overlapping_interpretations": [
+   {
+    "offset": 464,
+    "outer_marker": "0x3a",
+    "next_marker": "0x29",
+    "outer_values": [
+     33833,
+     34089
+    ]
+   }
+  ],
+  "interpretation": "Strongly consistent with systematic identity/control-label renumbering, but not proven. Candidate marker scanning is heuristic in this large stream. Residual bytes are not parsed, and SY names/source text are context only. Full EX equivalence after normalization is unknown.",
+  "source_lines_by_c1_line": {
+   "47": "if (h == 0 || **(int far * far *)h != 0x300)",
+   "52": "for (i = 0; i < n; i++)",
+   "56": "if (h == 0)",
+   "61": "for (i = 0; i < n; i++)",
+   "70": "for (drive = 0; drive < 12; drive++) {",
+   "72": "mov dl, byte ptr drive",
+   "76": "jc skip",
+   "98": "{",
+   "100": "switch (g_2BD4++) {",
+   "106": "if (flag)",
+   "110": "if (fd_55B3_610A)",
+   "115": "}",
+   "116": "if (flag)",
+   "129": "if (fd_3D57_02C2) {",
+   "132": "if (r == 2)",
+   "134": "if (r != 1)",
+   "136": "} while (o09_35F5_0188(0) == 0);",
+   "160": "{",
+   "171": "if (g_5A97 & 1) {",
+   "181": "if (f_1F58_0038()) {",
+   "182": "switch (f_1F58_0090()) {",
+   "197": "}",
+   "199": "if (win_GetEvent(&ev)) {",
+   "200": "switch (ev.code) {",
+   "210": "}",
+   "236": "if (!win_IsWinOpen(0x100))",
+   "264": "{",
+   "270": "if (r == 0x205)",
+   "272": "if (r == 0x207) {",
+   "273": "if (o09_35F5_0000(0, 0) == 0)",
+   "277": "switch (r) {",
+   "290": "}",
+   "291": "if (r >= 0 && r < 4) {",
+   "293": "if (fd_50F6_105E == 10)",
+   "295": "else if (fd_50F6_105E == 11)",
+   "304": "if (fd_50F6_0EAC == 0) {",
+   "307": "if (flag == 0)",
+   "316": "if (r == 0 && !f_22BF_0A65())"
+  },
+  "nearest_control_lines_by_c1_line": {
+   "47": {
+    "source": "if (h == 0 || **(int far * far *)h != 0x300)",
+    "SY_spellings": []
+   },
+   "52": {
+    "source": "for (i = 0; i < n; i++)",
+    "SY_spellings": []
+   },
+   "56": {
+    "source": "if (h == 0)",
+    "SY_spellings": []
+   },
+   "61": {
+    "source": "for (i = 0; i < n; i++)",
+    "SY_spellings": []
+   },
+   "70": {
+    "source": "for (drive = 0; drive < 12; drive++) {",
+    "SY_spellings": [
+     "drive"
+    ]
+   },
+   "100": {
+    "source": "switch (g_2BD4++) {",
+    "SY_spellings": [
+     "g_2BD4"
+    ]
+   },
+   "106": {
+    "source": "if (flag)",
+    "SY_spellings": [
+     "flag"
+    ]
+   },
+   "110": {
+    "source": "if (fd_55B3_610A)",
+    "SY_spellings": [
+     "fd_55B3_610A"
+    ]
+   },
+   "116": {
+    "source": "if (flag)",
+    "SY_spellings": [
+     "flag"
+    ]
+   },
+   "129": {
+    "source": "if (fd_3D57_02C2) {",
+    "SY_spellings": [
+     "fd_3D57_02C2"
+    ]
+   },
+   "132": {
+    "source": "if (r == 2)",
+    "SY_spellings": []
+   },
+   "134": {
+    "source": "if (r != 1)",
+    "SY_spellings": []
+   },
+   "136": {
+    "source": "} while (o09_35F5_0188(0) == 0);",
+    "SY_spellings": [
+     "o09_35F5_0188"
+    ]
+   },
+   "138": {
+    "source": "o15_384C_0152(\"SimAnt was brought to you by the people at MAXIS.  Thank you for playing.\", 0);",
+    "SY_spellings": [
+     "o15_384C_0152"
+    ]
+   },
+   "171": {
+    "source": "if (g_5A97 & 1) {",
+    "SY_spellings": [
+     "g_5A97"
+    ]
+   },
+   "181": {
+    "source": "if (f_1F58_0038()) {",
+    "SY_spellings": [
+     "f_1F58_0038"
+    ]
+   },
+   "182": {
+    "source": "switch (f_1F58_0090()) {",
+    "SY_spellings": [
+     "f_1F58_0090"
+    ]
+   },
+   "196": {
+    "source": "goto done;",
+    "SY_spellings": [
+     "done"
+    ]
+   },
+   "199": {
+    "source": "if (win_GetEvent(&ev)) {",
+    "SY_spellings": [
+     "ev",
+     "win_GetEvent"
+    ]
+   },
+   "200": {
+    "source": "switch (ev.code) {",
+    "SY_spellings": []
+   },
+   "209": {
+    "source": "goto done;",
+    "SY_spellings": [
+     "done"
+    ]
+   },
+   "236": {
+    "source": "if (!win_IsWinOpen(0x100))",
+    "SY_spellings": [
+     "win_IsWinOpen"
+    ]
+   },
+   "270": {
+    "source": "if (r == 0x205)",
+    "SY_spellings": []
+   },
+   "272": {
+    "source": "if (r == 0x207) {",
+    "SY_spellings": []
+   },
+   "273": {
+    "source": "if (o09_35F5_0000(0, 0) == 0)",
+    "SY_spellings": [
+     "o09_35F5_0000"
+    ]
+   },
+   "277": {
+    "source": "switch (r) {",
+    "SY_spellings": []
+   },
+   "287": {
+    "source": "case 0x206:",
+    "SY_spellings": []
+   },
+   "291": {
+    "source": "if (r >= 0 && r < 4) {",
+    "SY_spellings": []
+   },
+   "293": {
+    "source": "if (fd_50F6_105E == 10)",
+    "SY_spellings": [
+     "fd_50F6_105E"
+    ]
+   },
+   "295": {
+    "source": "else if (fd_50F6_105E == 11)",
+    "SY_spellings": [
+     "fd_50F6_105E"
+    ]
+   },
+   "304": {
+    "source": "if (fd_50F6_0EAC == 0) {",
+    "SY_spellings": [
+     "fd_50F6_0EAC"
+    ]
+   },
+   "307": {
+    "source": "if (flag == 0)",
+    "SY_spellings": [
+     "flag"
+    ]
+   },
+   "316": {
+    "source": "if (r == 0 && !f_22BF_0A65())",
+    "SY_spellings": [
+     "f_22BF_0A65"
+    ]
+   }
+  },
+  "residual_contexts": [
+   {
+    "offset": 165,
+    "a_window": "01 00 00 1f 39 7f 00 26 79 00 30",
+    "b_window": "01 00 00 1f 39 80 00 26 7a 00 30",
+    "preceding_line_marker": 47,
+    "SY_spellings_on_source_line": [],
+    "source_line_ref": "47",
+    "control_context_ref": "47"
+   },
+   {
+    "offset": 193,
+    "a_window": "03 00 00 20 38 7e 00 29 7f 00 4f",
+    "b_window": "03 00 00 20 38 7f 00 29 80 00 4f",
+    "preceding_line_marker": 47,
+    "SY_spellings_on_source_line": [],
+    "source_line_ref": "47",
+    "control_context_ref": "47"
+   },
+   {
+    "offset": 322,
+    "a_window": "30 01 02 22 38 83 00 4f 01 35 26",
+    "b_window": "30 01 02 22 38 84 00 4f 01 35 26",
+    "preceding_line_marker": 52,
+    "SY_spellings_on_source_line": [],
+    "source_line_ref": "52",
+    "control_context_ref": "52"
+   },
+   {
+    "offset": 442,
+    "a_window": "01 00 00 1f 38 84 00 4f 01 39 26",
+    "b_window": "01 00 00 1f 38 85 00 4f 01 39 26",
+    "preceding_line_marker": 56,
+    "SY_spellings_on_source_line": [],
+    "source_line_ref": "56",
+    "control_context_ref": "56"
+   },
+   {
+    "offset": 588,
+    "a_window": "30 01 02 22 38 88 00 4f 01 3e 26",
+    "b_window": "30 01 02 22 38 89 00 4f 01 3e 26",
+    "preceding_line_marker": 61,
+    "SY_spellings_on_source_line": [],
+    "source_line_ref": "61",
+    "control_context_ref": "61"
+   },
+   {
+    "offset": 737,
+    "a_window": "01 00 0c 22 38 8e 00 53 4f 01 47",
+    "b_window": "01 00 0c 22 38 8f 00 53 4f 01 47",
+    "preceding_line_marker": 70,
+    "SY_spellings_on_source_line": [
+     "drive"
+    ],
+    "source_line_ref": "70",
+    "control_context_ref": "70"
+   },
+   {
+    "offset": 757,
+    "a_window": "01 01 01 02 12 8b 00 05 04 00 00",
+    "b_window": "01 01 01 02 12 8c 00 05 04 00 00",
+    "preceding_line_marker": 72,
+    "SY_spellings_on_source_line": [
+     "drive"
+    ],
+    "source_line_ref": "72",
+    "control_context_ref": "70"
+   },
+   {
+    "offset": 823,
+    "a_window": "06 06 0f 02 0a 8f 00 4f 01 4d 4f",
+    "b_window": "06 06 0f 02 0a 90 00 4f 01 4d 4f",
+    "preceding_line_marker": 76,
+    "SY_spellings_on_source_line": [
+     "skip"
+    ],
+    "source_line_ref": "76",
+    "control_context_ref": "70"
+   },
+   {
+    "offset": 905,
+    "a_window": "26 69 00 46 2d a2 00 2d a1 00 4c",
+    "b_window": "26 6a 00 46 2d a3 00 2d a2 00 4c",
+    "preceding_line_marker": 98,
+    "SY_spellings_on_source_line": [],
+    "source_line_ref": "98",
+    "control_context_ref": "70"
+   },
+   {
+    "offset": 908,
+    "a_window": "46 2d a2 00 2d a1 00 4c 4f 1c 53",
+    "b_window": "46 2d a3 00 2d a2 00 4c 4f 1c 53",
+    "preceding_line_marker": 98,
+    "SY_spellings_on_source_line": [],
+    "source_line_ref": "98",
+    "control_context_ref": "70"
+   },
+   {
+    "offset": 947,
+    "a_window": "01 35 01 02 3b a4 00 53 4f 01 65",
+    "b_window": "01 35 01 02 3b a5 00 53 4f 01 65",
+    "preceding_line_marker": 100,
+    "SY_spellings_on_source_line": [
+     "g_2BD4"
+    ],
+    "source_line_ref": "100",
+    "control_context_ref": "100"
+   },
+   {
+    "offset": 1021,
+    "a_window": "00 30 01 02 38 aa 00 4f 01 6b 26",
+    "b_window": "00 30 01 02 38 ab 00 4f 01 6b 26",
+    "preceding_line_marker": 106,
+    "SY_spellings_on_source_line": [
+     "flag"
+    ],
+    "source_line_ref": "106",
+    "control_context_ref": "106"
+   },
+   {
+    "offset": 1077,
+    "a_window": "00 30 01 02 38 ac 00 4f 01 6f 26",
+    "b_window": "00 30 01 02 38 ad 00 4f 01 6f 26",
+    "preceding_line_marker": 110,
+    "SY_spellings_on_source_line": [
+     "fd_55B3_610A"
+    ],
+    "source_line_ref": "110",
+    "control_context_ref": "110"
+   },
+   {
+    "offset": 1154,
+    "a_window": "00 26 a4 00 3c a5 00 3d a8 00 00",
+    "b_window": "00 26 a5 00 3c a6 00 3d a9 00 00",
+    "preceding_line_marker": 115,
+    "SY_spellings_on_source_line": [],
+    "source_line_ref": "115",
+    "control_context_ref": "110"
+   },
+   {
+    "offset": 1157,
+    "a_window": "00 3c a5 00 3d a8 00 00 3d a9 00",
+    "b_window": "00 3c a6 00 3d a9 00 00 3d aa 00",
+    "preceding_line_marker": 115,
+    "SY_spellings_on_source_line": [],
+    "source_line_ref": "115",
+    "control_context_ref": "110"
+   },
+   {
+    "offset": 1161,
+    "a_window": "3d a8 00 00 3d a9 00 01 3d ab 00",
+    "b_window": "3d a9 00 00 3d aa 00 01 3d ac 00",
+    "preceding_line_marker": 115,
+    "SY_spellings_on_source_line": [],
+    "source_line_ref": "115",
+    "control_context_ref": "110"
+   },
+   {
+    "offset": 1165,
+    "a_window": "3d a9 00 01 3d ab 00 02 4c 29 a5",
+    "b_window": "3d aa 00 01 3d ac 00 02 4c 29 a6",
+    "preceding_line_marker": 115,
+    "SY_spellings_on_source_line": [],
+    "source_line_ref": "115",
+    "control_context_ref": "110"
+   },
+   {
+    "offset": 1182,
+    "a_window": "00 30 01 02 38 ad 00 4f 01 75 26",
+    "b_window": "00 30 01 02 38 ae 00 4f 01 75 26",
+    "preceding_line_marker": 116,
+    "SY_spellings_on_source_line": [
+     "flag"
+    ],
+    "source_line_ref": "116",
+    "control_context_ref": "116"
+   },
+   {
+    "offset": 1271,
+    "a_window": "00 30 01 02 38 b6 00 53 4f 01 80",
+    "b_window": "00 30 01 02 38 b7 00 53 4f 01 80",
+    "preceding_line_marker": 129,
+    "SY_spellings_on_source_line": [
+     "fd_3D57_02C2"
+    ],
+    "source_line_ref": "129",
+    "control_context_ref": "129"
+   },
+   {
+    "offset": 1327,
+    "a_window": "01 00 02 1f 38 ba 00 4f 01 80 85",
+    "b_window": "01 00 02 1f 38 bb 00 4f 01 80 85",
+    "preceding_line_marker": 132,
+    "SY_spellings_on_source_line": [],
+    "source_line_ref": "132",
+    "control_context_ref": "132"
+   },
+   {
+    "offset": 1364,
+    "a_window": "01 00 01 20 38 bb 00 4f 01 80 87",
+    "b_window": "01 00 01 20 38 bc 00 4f 01 80 87",
+    "preceding_line_marker": 134,
+    "SY_spellings_on_source_line": [],
+    "source_line_ref": "134",
+    "control_context_ref": "134"
+   },
+   {
+    "offset": 1408,
+    "a_window": "01 00 00 1f 39 b7 00 4f 01 80 88",
+    "b_window": "01 00 00 1f 39 b8 00 4f 01 80 88",
+    "preceding_line_marker": 136,
+    "SY_spellings_on_source_line": [
+     "o09_35F5_0188"
+    ],
+    "source_line_ref": "136",
+    "control_context_ref": "136"
+   },
+   {
+    "offset": 1489,
+    "a_window": "26 b0 00 46 2d e3 00 4c 4f 1c 53",
+    "b_window": "26 b1 00 46 2d e4 00 4c 4f 1c 53",
+    "preceding_line_marker": 160,
+    "SY_spellings_on_source_line": [],
+    "source_line_ref": "160",
+    "control_context_ref": "138"
+   },
+   {
+    "offset": 1686,
+    "a_window": "01 00 01 0b 38 ea 00 53 4f 01 80",
+    "b_window": "01 00 01 0b 38 eb 00 53 4f 01 80",
+    "preceding_line_marker": 171,
+    "SY_spellings_on_source_line": [
+     "g_5A97"
+    ],
+    "source_line_ref": "171",
+    "control_context_ref": "171"
+   },
+   {
+    "offset": 1931,
+    "a_window": "01 02 00 4c 38 ee 00 53 4f 01 80",
+    "b_window": "01 02 00 4c 38 ef 00 53 4f 01 80",
+    "preceding_line_marker": 181,
+    "SY_spellings_on_source_line": [
+     "f_1F58_0038"
+    ],
+    "source_line_ref": "181",
+    "control_context_ref": "181"
+   },
+   {
+    "offset": 1948,
+    "a_window": "01 02 00 4c 3b ef 00 53 4f 01 80",
+    "b_window": "01 02 00 4c 3b f0 00 53 4f 01 80",
+    "preceding_line_marker": 182,
+    "SY_spellings_on_source_line": [
+     "f_1F58_0090"
+    ],
+    "source_line_ref": "182",
+    "control_context_ref": "182"
+   },
+   {
+    "offset": 2091,
+    "a_window": "00 26 ef 00 3c f0 00 3d f3 00 0d",
+    "b_window": "00 26 f0 00 3c f1 00 3d f4 00 0d",
+    "preceding_line_marker": 197,
+    "SY_spellings_on_source_line": [],
+    "source_line_ref": "197",
+    "control_context_ref": "196"
+   },
+   {
+    "offset": 2094,
+    "a_window": "00 3c f0 00 3d f3 00 0d 3d f6 00",
+    "b_window": "00 3c f1 00 3d f4 00 0d 3d f7 00",
+    "preceding_line_marker": 197,
+    "SY_spellings_on_source_line": [],
+    "source_line_ref": "197",
+    "control_context_ref": "196"
+   },
+   {
+    "offset": 2098,
+    "a_window": "3d f3 00 0d 3d f6 00 1b 3d f6 00",
+    "b_window": "3d f4 00 0d 3d f7 00 1b 3d f7 00",
+    "preceding_line_marker": 197,
+    "SY_spellings_on_source_line": [],
+    "source_line_ref": "197",
+    "control_context_ref": "196"
+   },
+   {
+    "offset": 2102,
+    "a_window": "3d f6 00 1b 3d f6 00 43 3d f3 00",
+    "b_window": "3d f7 00 1b 3d f7 00 43 3d f4 00",
+    "preceding_line_marker": 197,
+    "SY_spellings_on_source_line": [],
+    "source_line_ref": "197",
+    "control_context_ref": "196"
+   },
+   {
+    "offset": 2106,
+    "a_window": "3d f6 00 43 3d f3 00 44 3d f5 00",
+    "b_window": "3d f7 00 43 3d f4 00 44 3d f6 00",
+    "preceding_line_marker": 197,
+    "SY_spellings_on_source_line": [],
+    "source_line_ref": "197",
+    "control_context_ref": "196"
+   },
+   {
+    "offset": 2110,
+    "a_window": "3d f3 00 44 3d f5 00 53 3d f6 00",
+    "b_window": "3d f4 00 44 3d f6 00 53 3d f7 00",
+    "preceding_line_marker": 197,
+    "SY_spellings_on_source_line": [],
+    "source_line_ref": "197",
+    "control_context_ref": "196"
+   },
+   {
+    "offset": 2114,
+    "a_window": "3d f5 00 53 3d f6 00 63 3d f3 00",
+    "b_window": "3d f6 00 53 3d f7 00 63 3d f4 00",
+    "preceding_line_marker": 197,
+    "SY_spellings_on_source_line": [],
+    "source_line_ref": "197",
+    "control_context_ref": "196"
+   },
+   {
+    "offset": 2118,
+    "a_window": "3d f6 00 63 3d f3 00 64 3d f5 00",
+    "b_window": "3d f7 00 63 3d f4 00 64 3d f6 00",
+    "preceding_line_marker": 197,
+    "SY_spellings_on_source_line": [],
+    "source_line_ref": "197",
+    "control_context_ref": "196"
+   },
+   {
+    "offset": 2122,
+    "a_window": "3d f3 00 64 3d f5 00 73 4c 29 f0",
+    "b_window": "3d f4 00 64 3d f6 00 73 4c 29 f1",
+    "preceding_line_marker": 197,
+    "SY_spellings_on_source_line": [],
+    "source_line_ref": "197",
+    "control_context_ref": "196"
+   },
+   {
+    "offset": 2159,
+    "a_window": "55 03 04 4c 38 f7 00 53 4f 01 80",
+    "b_window": "55 03 04 4c 38 f8 00 53 4f 01 80",
+    "preceding_line_marker": 199,
+    "SY_spellings_on_source_line": [
+     "ev",
+     "win_GetEvent"
+    ],
+    "source_line_ref": "199",
+    "control_context_ref": "199"
+   },
+   {
+    "offset": 2181,
+    "a_window": "00 30 01 02 3b f8 00 53 4f 01 80",
+    "b_window": "00 30 01 02 3b f9 00 53 4f 01 80",
+    "preceding_line_marker": 200,
+    "SY_spellings_on_source_line": [],
+    "source_line_ref": "200",
+    "control_context_ref": "200"
+   },
+   {
+    "offset": 2299,
+    "a_window": "00 26 f8 00 3c f9 00 3d fc 00 80",
+    "b_window": "00 26 f9 00 3c fa 00 3d fd 00 80",
+    "preceding_line_marker": 210,
+    "SY_spellings_on_source_line": [],
+    "source_line_ref": "210",
+    "control_context_ref": "209"
+   },
+   {
+    "offset": 2302,
+    "a_window": "00 3c f9 00 3d fc 00 80 03 21 00",
+    "b_window": "00 3c fa 00 3d fd 00 80 03 21 00",
+    "preceding_line_marker": 210,
+    "SY_spellings_on_source_line": [],
+    "source_line_ref": "210",
+    "control_context_ref": "209"
+   },
+   {
+    "offset": 2310,
+    "a_window": "03 21 00 00 3d fd 00 80 04 21 00",
+    "b_window": "03 21 00 00 3d fe 00 80 04 21 00",
+    "preceding_line_marker": 210,
+    "SY_spellings_on_source_line": [],
+    "source_line_ref": "210",
+    "control_context_ref": "209"
+   },
+   {
+    "offset": 2318,
+    "a_window": "04 21 00 00 3d fe 00 80 05 21 00",
+    "b_window": "04 21 00 00 3d ff 00 80 05 21 00",
+    "preceding_line_marker": 210,
+    "SY_spellings_on_source_line": [],
+    "source_line_ref": "210",
+    "control_context_ref": "209"
+   },
+   {
+    "offset": 2582,
+    "a_window": "55 01 02 4c 39 0d 01 4f 01 80 ed",
+    "b_window": "55 01 02 4c 39 0e 01 4f 01 80 ed",
+    "preceding_line_marker": 236,
+    "SY_spellings_on_source_line": [
+     "win_IsWinOpen"
+    ],
+    "source_line_ref": "236",
+    "control_context_ref": "236"
+   },
+   {
+    "offset": 2663,
+    "a_window": "26 29 01 46 2d 28 01 4c 4f 1c 53",
+    "b_window": "26 2a 01 46 2d 29 01 4c 4f 1c 53",
+    "preceding_line_marker": 264,
+    "SY_spellings_on_source_line": [],
+    "source_line_ref": "264",
+    "control_context_ref": "236"
+   },
+   {
+    "offset": 2749,
+    "a_window": "02 00 00 1f 38 2f 01 4f 01 80 0f",
+    "b_window": "02 00 00 1f 38 30 01 4f 01 80 0f",
+    "preceding_line_marker": 270,
+    "SY_spellings_on_source_line": [],
+    "source_line_ref": "270",
+    "control_context_ref": "270"
+   },
+   {
+    "offset": 2790,
+    "a_window": "02 00 00 1f 38 30 01 53 4f 01 80",
+    "b_window": "02 00 00 1f 38 31 01 53 4f 01 80",
+    "preceding_line_marker": 272,
+    "SY_spellings_on_source_line": [],
+    "source_line_ref": "272",
+    "control_context_ref": "272"
+   },
+   {
+    "offset": 2826,
+    "a_window": "01 00 00 1f 38 31 01 4f 01 80 12",
+    "b_window": "01 00 00 1f 38 32 01 4f 01 80 12",
+    "preceding_line_marker": 273,
+    "SY_spellings_on_source_line": [
+     "o09_35F5_0000"
+    ],
+    "source_line_ref": "273",
+    "control_context_ref": "273"
+   },
+   {
+    "offset": 2886,
+    "a_window": "01 30 01 02 3b 33 01 53 4f 01 80",
+    "b_window": "01 30 01 02 3b 34 01 53 4f 01 80",
+    "preceding_line_marker": 277,
+    "SY_spellings_on_source_line": [],
+    "source_line_ref": "277",
+    "control_context_ref": "277"
+   },
+   {
+    "offset": 3036,
+    "a_window": "01 26 33 01 3c 34 01 3d 37 01 80",
+    "b_window": "01 26 34 01 3c 35 01 3d 38 01 80",
+    "preceding_line_marker": 290,
+    "SY_spellings_on_source_line": [],
+    "source_line_ref": "290",
+    "control_context_ref": "287"
+   },
+   {
+    "offset": 3039,
+    "a_window": "01 3c 34 01 3d 37 01 80 02 02 00",
+    "b_window": "01 3c 35 01 3d 38 01 80 02 02 00",
+    "preceding_line_marker": 290,
+    "SY_spellings_on_source_line": [],
+    "source_line_ref": "290",
+    "control_context_ref": "287"
+   },
+   {
+    "offset": 3047,
+    "a_window": "02 02 00 00 3d 38 01 80 03 02 00",
+    "b_window": "02 02 00 00 3d 39 01 80 03 02 00",
+    "preceding_line_marker": 290,
+    "SY_spellings_on_source_line": [],
+    "source_line_ref": "290",
+    "control_context_ref": "287"
+   },
+   {
+    "offset": 3055,
+    "a_window": "03 02 00 00 3d 39 01 80 04 02 00",
+    "b_window": "03 02 00 00 3d 3a 01 80 04 02 00",
+    "preceding_line_marker": 290,
+    "SY_spellings_on_source_line": [],
+    "source_line_ref": "290",
+    "control_context_ref": "287"
+   },
+   {
+    "offset": 3063,
+    "a_window": "04 02 00 00 3d 3a 01 80 06 02 00",
+    "b_window": "04 02 00 00 3d 3b 01 80 06 02 00",
+    "preceding_line_marker": 290,
+    "SY_spellings_on_source_line": [],
+    "source_line_ref": "290",
+    "control_context_ref": "287"
+   },
+   {
+    "offset": 3091,
+    "a_window": "01 00 00 23 38 3b 01 26 2b 01 30",
+    "b_window": "01 00 00 23 38 3c 01 26 2c 01 30",
+    "preceding_line_marker": 291,
+    "SY_spellings_on_source_line": [],
+    "source_line_ref": "291",
+    "control_context_ref": "291"
+   },
+   {
+    "offset": 3105,
+    "a_window": "01 00 04 22 38 3b 01 53 4f 01 80",
+    "b_window": "01 00 04 22 38 3c 01 53 4f 01 80",
+    "preceding_line_marker": 291,
+    "SY_spellings_on_source_line": [],
+    "source_line_ref": "291",
+    "control_context_ref": "291"
+   },
+   {
+    "offset": 3143,
+    "a_window": "01 00 0a 1f 38 3c 01 4f 01 80 26",
+    "b_window": "01 00 0a 1f 38 3d 01 4f 01 80 26",
+    "preceding_line_marker": 293,
+    "SY_spellings_on_source_line": [
+     "fd_50F6_105E"
+    ],
+    "source_line_ref": "293",
+    "control_context_ref": "293"
+   },
+   {
+    "offset": 3187,
+    "a_window": "01 00 0b 1f 38 3e 01 4f 01 80 28",
+    "b_window": "01 00 0b 1f 38 3f 01 4f 01 80 28",
+    "preceding_line_marker": 295,
+    "SY_spellings_on_source_line": [
+     "fd_50F6_105E"
+    ],
+    "source_line_ref": "295",
+    "control_context_ref": "295"
+   },
+   {
+    "offset": 3366,
+    "a_window": "01 00 00 1f 38 40 01 53 4f 01 80",
+    "b_window": "01 00 00 1f 38 41 01 53 4f 01 80",
+    "preceding_line_marker": 304,
+    "SY_spellings_on_source_line": [
+     "fd_50F6_0EAC"
+    ],
+    "source_line_ref": "304",
+    "control_context_ref": "304"
+   },
+   {
+    "offset": 3418,
+    "a_window": "01 00 00 1f 38 41 01 4f 01 80 34",
+    "b_window": "01 00 00 1f 38 42 01 4f 01 80 34",
+    "preceding_line_marker": 307,
+    "SY_spellings_on_source_line": [
+     "flag"
+    ],
+    "source_line_ref": "307",
+    "control_context_ref": "307"
+   },
+   {
+    "offset": 3549,
+    "a_window": "01 00 00 1f 38 42 01 26 20 01 3e",
+    "b_window": "01 00 00 1f 38 43 01 26 21 01 3e",
+    "preceding_line_marker": 316,
+    "SY_spellings_on_source_line": [
+     "f_22BF_0A65"
+    ],
+    "source_line_ref": "316",
+    "control_context_ref": "316"
+   },
+   {
+    "offset": 3560,
+    "a_window": "01 02 00 4c 39 42 01 4f 01 80 3d",
+    "b_window": "01 02 00 4c 39 43 01 4f 01 80 3d",
+    "preceding_line_marker": 316,
+    "SY_spellings_on_source_line": [
+     "f_22BF_0A65"
+    ],
+    "source_line_ref": "316",
+    "control_context_ref": "316"
+   }
+  ]
+ },
+ "normalization": "None. No EX byte is normalized or treated as semantically equivalent.",
+ "reproduction": {
+  "s15_control_generator": "python work/takeover/compiler-ir/probes/make_s15_extern.py",
+  "audit_command": "python tools/compiler_ir.py inspect-ids build/workers/compiler_ir/s15-base build/workers/compiler_ir/s15-top-extern-plus-one --source build/workers/compiler_ir/sources/s15-base.c --out build/workers/compiler_ir/analysis/s15-extern-ids.json",
+  "detailed_output": "build/workers/compiler_ir/analysis/s15-extern-ids.json (ignored research output)"
+ },
+ "baseline_controls": {
+  "integer_positive": {
+   "sources": [
+    "probes/tiny-return-one.c",
+    "probes/tiny-return-two.c"
+   ],
+   "result": "EX differs at one byte, offset 46; IN/ST/SY identical."
+  },
+  "whitespace_negative": {
+   "sources": [
+    "probes/tiny-return-one.c",
+    "probes/tiny-return-one-whitespace.c"
+   ],
+   "result": "EX/IN/ST/SY byte-identical."
+  }
+ }
+}

@@ -1,0 +1,73 @@
+{
+  "schema": "supplemental-address-wrapper-smoke-v1",
+  "oracle_sha256": "aa0596c6766322a8229ee3c36e57048c92adc82d50fbe2ef37afb8b85fcf4f11",
+  "cases": [
+    {
+      "case": "flag 0",
+      "equal": true,
+      "diff": {},
+      "oracle_trace": [],
+      "candidate_trace": []
+    },
+    {
+      "case": "flag 1",
+      "equal": true,
+      "diff": {},
+      "oracle_trace": [
+        {
+          "name": "f_1C62_00A1",
+          "args": [],
+          "state_at_entry": {
+            "enabled": "0100",
+            "callback": "a100621c"
+          },
+          "modified_state_at_entry": []
+        }
+      ],
+      "candidate_trace": [
+        {
+          "name": "f_1C62_00A1",
+          "args": [],
+          "state_at_entry": {
+            "enabled": "0100",
+            "callback": "a100621c"
+          },
+          "modified_state_at_entry": []
+        }
+      ]
+    },
+    {
+      "case": "clip wrapper modeled helper boundary",
+      "equal": true,
+      "diff": {},
+      "oracle_trace": [
+        {
+          "name": "clip_Push",
+          "args": [],
+          "state_at_entry": {},
+          "modified_state_at_entry": []
+        },
+        {
+          "name": "clip_Off",
+          "args": [],
+          "state_at_entry": {},
+          "modified_state_at_entry": []
+        }
+      ],
+      "candidate_trace": [
+        {
+          "name": "clip_Push",
+          "args": [],
+          "state_at_entry": {},
+          "modified_state_at_entry": []
+        },
+        {
+          "name": "clip_Off",
+          "args": [],
+          "state_at_entry": {},
+          "modified_state_at_entry": []
+        }
+      ]
+    }
+  ]
+}

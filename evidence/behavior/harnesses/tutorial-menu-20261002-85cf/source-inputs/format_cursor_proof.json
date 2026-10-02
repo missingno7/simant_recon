@@ -1,0 +1,43 @@
+{
+  "schema": "behavior-format-cursor-proof-v1",
+  "oracle_sha256": "aa0596c6766322a8229ee3c36e57048c92adc82d50fbe2ef37afb8b85fcf4f11",
+  "review": {
+    "status": "APPROVED",
+    "reviewer": "root",
+    "reviewed_at": "2026-10-02",
+    "reason": "Exact runtime member/xref ownership and defining stores establish private stream lifetimes. Both original formatter executions overwrite all ten bytes before reading them; different-stack-depth and stale-pointer/capacity poisoning preserve output. Only stack-local cursor displacement is abstracted, retaining advancement and remaining capacity. Raw differences remain in the ledger."
+  },
+  "audit": {
+    "path": "evidence/behavior/runtime/format-cursors/format_cursor_audit.json",
+    "sha256": "ccadb000b0d44af3911c3addf53f1a0ab4729a7e61a7aa87f0a54d70af7efcdb"
+  },
+  "records": [
+    {
+      "name": "sprintf-output-stream",
+      "address": 387382,
+      "size": 10,
+      "private_owner": "sprintf.c",
+      "overwrite_before_read_proven": true,
+      "semantic_fields": [
+        "cursor-minus-base advancement",
+        "remaining capacity"
+      ]
+    },
+    {
+      "name": "vsprintf-output-stream",
+      "address": 387394,
+      "size": 10,
+      "private_owner": "vsprintf.c",
+      "overwrite_before_read_proven": true,
+      "semantic_fields": [
+        "cursor-minus-base advancement",
+        "remaining capacity"
+      ]
+    }
+  ],
+  "limitations": [
+    "Applies only to these two CRT private stream records and stack-resident output buffers.",
+    "Does not abstract other pointers, output bytes, output advancement, remaining capacity, public state, or escaped addresses.",
+    "Historical EXACT validation remains unchanged."
+  ]
+}

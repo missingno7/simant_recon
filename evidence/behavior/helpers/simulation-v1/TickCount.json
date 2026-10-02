@@ -1,0 +1,30 @@
+{
+  "schema": "behavior-helper-cert-v1",
+  "helper": "TickCount",
+  "status": "CERTIFIED",
+  "execution_mode": "MODELED",
+  "input_domain": [
+    "10809 main directed/randomized EnterNest executions use deterministic +37 tick callback; supplementary actual VM boundary cases now=7199 and now=7200 compare original TryAntTheme behavior and observed song dispatch."
+  ],
+  "compared_effects": [
+    "ordered TickCount request count/order",
+    "timer/theme globals and myBeginSong notification trace at 7199/7200 boundary",
+    "all declared EnterNest simulation state and final non-stack writes"
+  ],
+  "positive_control_id": "pc-enternest-plane2",
+  "negative_control_id": "EnterNest-omit-theme-clock",
+  "limitations": [
+    "TickCount is a volatile host clock. The modeled stream is bounded to fixed +37 increments and explicit threshold boundary cases; it does not claim arbitrary DOS interrupt schedules. Original TickCount code is the pinned CS tick_count reader in m1B73.asm."
+  ],
+  "source_hashes": {
+    "src/root/m1B73.asm": "3097a6b03ff1d8bdfa7d573632d9905de88d754c8b1e047de4014c4f186cb848",
+    "src/root/m0BE8.c": "42664e07331fbba4cc257f1e49e03dff5e93deddb764d33101ad0f454a9377d7"
+  },
+  "source_contract": "Original TryAntTheme executes in oracle and candidate whole-module contexts; deterministic TickCount inputs demonstrate no song below threshold and one song at threshold. Caller mutant omitting TryAntTheme is detected through trace/state. TickCount reads the interrupt-maintained 32-bit CS tick_count; the fixed-step adapter is an explicit environment model, not a claimed exact substitute for arbitrary wall-clock histories.",
+  "review": {
+    "status": "APPROVED",
+    "reviewer": "root",
+    "reviewed_at": "2026-10-02",
+    "reason": "Reviewed exact helper source and caller data flow. This certificate compares logical UI/audio/timing requests at a simulation boundary; actual simulation/map/RNG helpers execute in the original oracle, and caller-source mutants expose changed boundary requests."
+  }
+}

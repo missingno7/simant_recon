@@ -1,0 +1,413 @@
+{
+  "artifacts": [
+    {
+      "name": "source-pins.json",
+      "path": "evidence/behavior/harnesses/render-small-dec283-20261002/reviews/InvertPatch/proposals/source-pins.json",
+      "sha256": "961c9744295392dfb3e93d6e1203ef1eb723a07e0228a68d753223b7c1978f02"
+    },
+    {
+      "name": "callsite-abi.json",
+      "path": "evidence/behavior/harnesses/render-small-dec283-20261002/reviews/InvertPatch/proposals/callsite-abi.json",
+      "sha256": "cff9ce9f2ffc7146544e1bf7bc02bc4b0490ebb76b279fd4b824e6ea53ab05d5"
+    },
+    {
+      "name": "harness-archive-index.json",
+      "path": "evidence/behavior/harnesses/render-small-dec283-20261002/reviews/InvertPatch/proposals/harness-archive-index.json",
+      "sha256": "aa78efc2e4373ad60f1e9f0bf3c2bec15aa10f35ac8f498ebcd06dbbb71f200a"
+    },
+    {
+      "name": "helper-boundary-plan.json",
+      "path": "evidence/behavior/harnesses/render-small-dec283-20261002/reviews/InvertPatch/proposals/helper-boundary-plan.json",
+      "sha256": "bf1159f5b89f5e84b9bf94b5455a96c054770171917364ad931f01898d3049c2"
+    },
+    {
+      "name": "raw-run-path-normalized.json",
+      "path": "evidence/behavior/harnesses/render-small-dec283-20261002/reviews/InvertPatch/proposals/raw-run-path-normalized.json",
+      "sha256": "ed9297ba75ab6128ea6ddae32f709abed4201ff9e1cce41fbbeea79044cc7b09"
+    },
+    {
+      "name": "raw-run-original.json",
+      "path": "evidence/behavior/harnesses/render-small-dec283-20261002/reviews/InvertPatch/proposals/raw-run-original.json",
+      "sha256": "f96eaf0d9455da67c6957e72cbe6104cf3b2849f9328e893fb278e031e175111"
+    },
+    {
+      "name": "cases.jsonl.gz",
+      "path": "evidence/behavior/harnesses/render-small-dec283-20261002/reviews/InvertPatch/proposals/cases.jsonl.gz",
+      "sha256": "36baab71114afe1e62c0f875a42bfacfc5dc68d55bc88d620d684b97c3dabe97"
+    },
+    {
+      "name": "InvertPatch-negative-controls.json",
+      "path": "evidence/behavior/harnesses/render-small-dec283-20261002/reviews/InvertPatch/proposals/InvertPatch-negative-controls.json",
+      "sha256": "2965630d2746a5abd2358d03b69d0ee6c515ec9b46255e6b1fe2b49ae408012f"
+    },
+    {
+      "name": "helper-proposal-clip_Pop.json",
+      "path": "evidence/behavior/harnesses/render-small-dec283-20261002/reviews/InvertPatch/proposals/helper-proposal-clip_Pop.json",
+      "sha256": "1c7834fe0f156eb7d6a1e37c49e165a7c402c03564ddf6a062058c8dcc36f00a"
+    },
+    {
+      "name": "helper-proposal-clip_Push.json",
+      "path": "evidence/behavior/harnesses/render-small-dec283-20261002/reviews/InvertPatch/proposals/helper-proposal-clip_Push.json",
+      "sha256": "d776e194557f18fc1294e242295e9c3442ff08cc18b7e8fa9eb4fcef0ac4a20b"
+    },
+    {
+      "name": "helper-proposal-clip_SetWin.json",
+      "path": "evidence/behavior/harnesses/render-small-dec283-20261002/reviews/InvertPatch/proposals/helper-proposal-clip_SetWin.json",
+      "sha256": "11b0dbefff286840614e5e1b4d1fc02eb9108cfa528703623435971259aeb5a2"
+    },
+    {
+      "name": "helper-proposal-f_1FAA_0006.json",
+      "path": "evidence/behavior/harnesses/render-small-dec283-20261002/reviews/InvertPatch/proposals/helper-proposal-f_1FAA_0006.json",
+      "sha256": "58addb05c6713733092dfca0134f2bc4bbe2c888611a6b2e174e89e42ed302f0"
+    },
+    {
+      "name": "helper-definition-audit.json",
+      "path": "evidence/behavior/harnesses/render-small-dec283-20261002/reviews/InvertPatch/proposals/helper-definition-audit.json",
+      "sha256": "a775b9c4ea11255481b3f11fc13455a03e839f49c40143d24543e86a63b19e54"
+    }
+  ],
+  "checkpoint": {
+    "commit": "54cb824d19c2f897ab17c8b163a954121d4e4843",
+    "date": "2026-10-02"
+  },
+  "contract": {
+    "excluded_effects": [
+      {
+        "effect": "private stack locals and dead stack homes",
+        "reason": "The runner enforces caller ABI and compares projected callback data plus all changed non-stack memory; dead locals are implementation-specific."
+      },
+      {
+        "effect": "physical display/framebuffer pixels",
+        "reason": "The explicit host render/screen boundary captures logical commands and buffers; no physical framebuffer implementation was run."
+      },
+      {
+        "effect": "clip stack/region allocator and backend raster state",
+        "reason": "Target emits balanced clip commands and a complete rectangle/polygon draw request; it never consumes clip internals or raster state. Geometry and request order remain compared."
+      }
+    ],
+    "id": "render_small_v1-InvertPatch-normalized-v1",
+    "input_domain": {
+      "directed_cases": 84,
+      "fixture_and_sampling": "Patch polygon input, projected point data and normalized raster/draw command sequence.",
+      "partition": {
+        "argument_domains_from_case_generator": "See the target-specific case generator in this pinned suite snapshot; case labels and input_sha256 are preserved in the per-case ledger.",
+        "directed_labels": [
+          "directed/r320/-1/-1",
+          "directed/r320/-1/0",
+          "directed/r320/-1/1",
+          "directed/r320/-1/2",
+          "directed/r320/-1/31",
+          "directed/r320/-1/63",
+          "directed/r320/0/-1",
+          "directed/r320/0/0",
+          "directed/r320/0/1",
+          "directed/r320/0/2",
+          "directed/r320/0/31",
+          "directed/r320/0/63",
+          "directed/r320/1/-1",
+          "directed/r320/1/0",
+          "directed/r320/1/1",
+          "directed/r320/1/2",
+          "directed/r320/1/31",
+          "directed/r320/1/63",
+          "directed/r320/2/-1",
+          "directed/r320/2/0",
+          "directed/r320/2/1",
+          "directed/r320/2/2",
+          "directed/r320/2/31",
+          "directed/r320/2/63",
+          "directed/r320/31/-1",
+          "directed/r320/31/0",
+          "directed/r320/31/1",
+          "directed/r320/31/2",
+          "directed/r320/31/31",
+          "directed/r320/31/63",
+          "directed/r320/63/-1",
+          "directed/r320/63/0",
+          "directed/r320/63/1",
+          "directed/r320/63/2",
+          "directed/r320/63/31",
+          "directed/r320/63/63",
+          "directed/r320/127/-1",
+          "directed/r320/127/0",
+          "directed/r320/127/1",
+          "directed/r320/127/2",
+          "directed/r320/127/31",
+          "directed/r320/127/63",
+          "directed/r640/-1/-1",
+          "directed/r640/-1/0",
+          "directed/r640/-1/1",
+          "directed/r640/-1/2",
+          "directed/r640/-1/31",
+          "directed/r640/-1/63",
+          "directed/r640/0/-1",
+          "directed/r640/0/0",
+          "directed/r640/0/1",
+          "directed/r640/0/2",
+          "directed/r640/0/31",
+          "directed/r640/0/63",
+          "directed/r640/1/-1",
+          "directed/r640/1/0",
+          "directed/r640/1/1",
+          "directed/r640/1/2",
+          "directed/r640/1/31",
+          "directed/r640/1/63",
+          "directed/r640/2/-1",
+          "directed/r640/2/0",
+          "directed/r640/2/1",
+          "directed/r640/2/2",
+          "directed/r640/2/31",
+          "directed/r640/2/63",
+          "directed/r640/31/-1",
+          "directed/r640/31/0",
+          "directed/r640/31/1",
+          "directed/r640/31/2",
+          "directed/r640/31/31",
+          "directed/r640/31/63",
+          "directed/r640/63/-1",
+          "directed/r640/63/0",
+          "directed/r640/63/1",
+          "directed/r640/63/2",
+          "directed/r640/63/31",
+          "directed/r640/63/63",
+          "directed/r640/127/-1",
+          "directed/r640/127/0",
+          "directed/r640/127/1",
+          "directed/r640/127/2",
+          "directed/r640/127/31",
+          "directed/r640/127/63"
+        ],
+        "randomized_count": 1000
+      },
+      "randomized_cases": 1000,
+      "seeds": [
+        48879
+      ]
+    },
+    "limits": [
+      "The callback boundary models command emission, not the original rasterizer or a physical framebuffer. The suite compares projected polygon data and command sequence but does not establish pixel-for-pixel raster equivalence.",
+      "Finite directed/random domain only; not universal proof.",
+      "No registry or canonical source modified."
+    ],
+    "required_effects": [
+      "return and caller ABI",
+      "ordered helper/render commands and arguments",
+      "global/map/cache writes",
+      "projected far-pointer data and nonstack memory"
+    ],
+    "required_helpers": [
+      {
+        "name": "clip_Pop",
+        "must_execute": true,
+        "certification": {
+          "path": "evidence/behavior/helpers/render-contracts-v2/InvertPatch/clip_Pop.json",
+          "sha256": "73b4e7cf2b1757b370b7e426e14c0fcfca827f6f0c5ec765ee27dea713977abc"
+        }
+      },
+      {
+        "name": "clip_Push",
+        "must_execute": true,
+        "certification": {
+          "path": "evidence/behavior/helpers/render-contracts-v2/InvertPatch/clip_Push.json",
+          "sha256": "3609bcff735880a50225fe5129bfb642a8360f3aa75d75291bea4d65cb50807d"
+        }
+      },
+      {
+        "name": "clip_SetWin",
+        "must_execute": true,
+        "certification": {
+          "path": "evidence/behavior/helpers/render-contracts-v2/InvertPatch/clip_SetWin.json",
+          "sha256": "4d8a3cdeb3f2261e0a4f8aca0738d4b40d5c199aa8736622bc2a59c4fb59e2a0"
+        }
+      },
+      {
+        "name": "f_1FAA_0006",
+        "must_execute": true,
+        "certification": {
+          "path": "evidence/behavior/helpers/render-contracts-v2/InvertPatch/f_1FAA_0006.json",
+          "sha256": "a62ea183a3a6d41e95759cafd331770512334e6460729dc1f438378730ca3271"
+        }
+      }
+    ],
+    "review": {
+      "reviewed_at": "2026-10-02",
+      "reviewer": "root",
+      "status": "APPROVED",
+      "reason": "Reviewed target C, actual callsite ABIs, helper definitions and source-specific noninterference. Original/candidate instruction execution, pointed request contents, target own nonstack effects, compiled caller controls and ledger identities establish the finite logical contract. Raster and backend resource lifecycle implementations are separate boundaries."
+    }
+  },
+  "date": "2026-10-02",
+  "function": "InvertPatch",
+  "harness_snapshot": "render-small-dec283-20261002",
+  "harness_snapshot_review": {
+    "status": "APPROVED",
+    "reviewer": "root",
+    "reviewed_at": "2026-10-02",
+    "reason": "Exact archived runner/suite identities checked; archive component pins reviewed against the shared executed harness. SS=DS reserved stack is excluded only under enforced caller ABI. Strict fresh whole-module peers/private-data validation remains mandatory."
+  },
+  "helper_boundaries": [
+    {
+      "binding_role": "modeled callback slot; address/name reuse does not assert execution of a same-named DOS helper body",
+      "boundary_analysis": {
+        "caller_dataflow_and_omissions": "balanced restore call; no subsequent target read of clip internals.",
+        "canonical_definition_or_role": "void far clip_Pop(void)",
+        "definition_file": "src/root/m1E57.c",
+        "definition_sha256": "812e8ec90bcf25c56adf073e753bf72f8f6a3bc108055e112c43f894e9d8d0c3",
+        "full_helper_equivalence_claimed": false,
+        "observed_call_abi": "direct zero-argument far call",
+        "review_status": "PENDING_ROOT_REVIEW"
+      },
+      "certification": {
+        "path": "evidence/behavior/helpers/render-contracts-v2/InvertPatch/clip_Pop.json",
+        "sha256": "73b4e7cf2b1757b370b7e426e14c0fcfca827f6f0c5ec765ee27dea713977abc"
+      },
+      "contract": "ordered clipping stack command trace; clip geometry is not simulated; BOUNDED HOST/LOGICAL PROJECTION ONLY",
+      "executed_from_original": false,
+      "execution_mode": "MODELED",
+      "name": "clip_Pop",
+      "observed_call_count": 1084
+    },
+    {
+      "binding_role": "modeled callback slot; address/name reuse does not assert execution of a same-named DOS helper body",
+      "boundary_analysis": {
+        "caller_dataflow_and_omissions": "the target emits the clip push then does not read clip internals before pop; clip-state geometry excluded.",
+        "canonical_definition_or_role": "void far clip_Push(void)",
+        "definition_file": "src/root/m1E57.c",
+        "definition_sha256": "812e8ec90bcf25c56adf073e753bf72f8f6a3bc108055e112c43f894e9d8d0c3",
+        "full_helper_equivalence_claimed": false,
+        "observed_call_abi": "direct zero-argument far call",
+        "review_status": "PENDING_ROOT_REVIEW"
+      },
+      "certification": {
+        "path": "evidence/behavior/helpers/render-contracts-v2/InvertPatch/clip_Push.json",
+        "sha256": "3609bcff735880a50225fe5129bfb642a8360f3aa75d75291bea4d65cb50807d"
+      },
+      "contract": "ordered clipping stack command trace; clip geometry is not simulated; BOUNDED HOST/LOGICAL PROJECTION ONLY",
+      "executed_from_original": false,
+      "execution_mode": "MODELED",
+      "name": "clip_Push",
+      "observed_call_count": 1084
+    },
+    {
+      "binding_role": "modeled callback slot; address/name reuse does not assert execution of a same-named DOS helper body",
+      "boundary_analysis": {
+        "caller_dataflow_and_omissions": "the target emits this clipping request; physical clip rectangle/state is not modeled.",
+        "canonical_definition_or_role": "void far clip_SetWin(int win)",
+        "definition_file": "src/root/m1E57.c",
+        "definition_sha256": "812e8ec90bcf25c56adf073e753bf72f8f6a3bc108055e112c43f894e9d8d0c3",
+        "full_helper_equivalence_claimed": false,
+        "observed_call_abi": "one stack word 0x1900; caller cleanup",
+        "review_status": "PENDING_ROOT_REVIEW"
+      },
+      "certification": {
+        "path": "evidence/behavior/helpers/render-contracts-v2/InvertPatch/clip_SetWin.json",
+        "sha256": "4d8a3cdeb3f2261e0a4f8aca0738d4b40d5c199aa8736622bc2a59c4fb59e2a0"
+      },
+      "contract": "ordered clipping window command trace; clip geometry is not simulated; BOUNDED HOST/LOGICAL PROJECTION ONLY",
+      "executed_from_original": false,
+      "execution_mode": "MODELED",
+      "name": "clip_SetWin",
+      "observed_call_count": 1084
+    },
+    {
+      "binding_role": "modeled callback slot; address/name reuse does not assert execution of a same-named DOS helper body",
+      "boundary_analysis": {
+        "caller_dataflow_and_omissions": "source body scans a four-vertex quadrilateral and dispatches per-scanline pixel writes; modeled callback captures q[0..3] and colors, not the loop/raster or physical screen.",
+        "canonical_definition_or_role": "void far f_1FAA_0006(struct Pt far *q,int fore,int back)",
+        "definition_file": "src/root/m1FAA.c",
+        "definition_sha256": "e13a110be3cf3643419027a40a18002af231b6f9e159e89fc78f031a70929f66",
+        "full_helper_equivalence_claimed": false,
+        "observed_call_abi": "four stack words: far q plus fore/back, caller cleanup",
+        "review_status": "PENDING_ROOT_REVIEW"
+      },
+      "certification": {
+        "path": "evidence/behavior/helpers/render-contracts-v2/InvertPatch/f_1FAA_0006.json",
+        "sha256": "a62ea183a3a6d41e95759cafd331770512334e6460729dc1f438378730ca3271"
+      },
+      "contract": "host polygon draw boundary with four pointed semantic vertices and two draw arguments; BOUNDED HOST/LOGICAL PROJECTION ONLY",
+      "executed_from_original": false,
+      "execution_mode": "MODELED",
+      "name": "f_1FAA_0006",
+      "observed_call_count": 1084
+    }
+  ],
+  "helper_proposals": [
+    {
+      "helper": "clip_Pop",
+      "path": "evidence/behavior/harnesses/render-small-dec283-20261002/reviews/InvertPatch/proposals/helper-proposal-clip_Pop.json",
+      "sha256": "1c7834fe0f156eb7d6a1e37c49e165a7c402c03564ddf6a062058c8dcc36f00a"
+    },
+    {
+      "helper": "clip_Push",
+      "path": "evidence/behavior/harnesses/render-small-dec283-20261002/reviews/InvertPatch/proposals/helper-proposal-clip_Push.json",
+      "sha256": "d776e194557f18fc1294e242295e9c3442ff08cc18b7e8fa9eb4fcef0ac4a20b"
+    },
+    {
+      "helper": "clip_SetWin",
+      "path": "evidence/behavior/harnesses/render-small-dec283-20261002/reviews/InvertPatch/proposals/helper-proposal-clip_SetWin.json",
+      "sha256": "11b0dbefff286840614e5e1b4d1fc02eb9108cfa528703623435971259aeb5a2"
+    },
+    {
+      "helper": "f_1FAA_0006",
+      "path": "evidence/behavior/harnesses/render-small-dec283-20261002/reviews/InvertPatch/proposals/helper-proposal-f_1FAA_0006.json",
+      "sha256": "58addb05c6713733092dfca0134f2bc4bbe2c888611a6b2e174e89e42ed302f0"
+    }
+  ],
+  "historical_difference": {
+    "description": "The compiler-produced whole-module candidate is behaviorally compared in the pinned finite domain; this packet makes no acceptance claim and strict historical byte proof remains separately gated.",
+    "evidence_refs": [
+      "evidence/behavior/harnesses/render-small-dec283-20261002/runs/InvertPatch/raw-run.original.json",
+      "evidence/behavior/harnesses/render-small-dec283-20261002/reviews/InvertPatch/callsite-abi.json"
+    ],
+    "reason_exact_stopped": "This packet is a review proposal for a bounded render/resource contract; it does not substitute semantic execution for historical byte, fixup, relocation, or extent acceptance."
+  },
+  "module": "S13:384C",
+  "negative_controls": "evidence/behavior/harnesses/render-small-dec283-20261002/runs/InvertPatch/InvertPatch.negative-controls.json",
+  "positive_controls": [
+    {
+      "candidate_executed": true,
+      "candidate_observation_sha256": "21cf2a61049858de211d26749bfb6be37669fa1a84f55471f27ca123c7ba697e",
+      "case_id": "directed/r320/-1/-1",
+      "compared_effects": [
+        "return and caller ABI",
+        "ordered helper/render commands and arguments",
+        "global/map/cache writes",
+        "projected far-pointer data and nonstack memory"
+      ],
+      "executed": true,
+      "execution_errors": 0,
+      "id": "directed/r320/-1/-1",
+      "input_sha256": "7a89ef583640c997921f0695ba11c2cd83d38feaef31b807f45b79d05bb7ee07",
+      "matched": true,
+      "object_sha256": "f0cd89cd774d159404750fe6b1577d133628058c68a13d032c533231036ec4b5",
+      "oracle_sha256": "aa0596c6766322a8229ee3c36e57048c92adc82d50fbe2ef37afb8b85fcf4f11",
+      "original_executed": true,
+      "original_observation_sha256": "21cf2a61049858de211d26749bfb6be37669fa1a84f55471f27ca123c7ba697e",
+      "provenance": "Existing equal actual DOS/candidate case-ledger row; selected here for boundary-specific review, not replayed.",
+      "source_sha256": "1ace9a2985696a7c254c9cfcfafc504be9126f07c47672c6bf79e3e2a570e801"
+    }
+  ],
+  "schema": "behavior-contract-review-v1",
+  "semantic_evidence": [
+    {
+      "description": "Patch polygon input, projected point data and normalized raster/draw command sequence.",
+      "reference": "evidence/behavior/harnesses/render-small-dec283-20261002/reviews/InvertPatch/callsite-abi.json"
+    },
+    {
+      "description": "Raw directed/random differential report, case ledger and source-mutant controls are retained without changing observations.",
+      "reference": "evidence/behavior/harnesses/render-small-dec283-20261002/runs/InvertPatch/raw-run.json"
+    }
+  ],
+  "source": "work/takeover/hardtail/seeds/S13_384C_1ace9a298569.c",
+  "suite": "tools/behavior_suites/archive/render_small-dec2831104d224ad.py",
+  "suite_id": "render_small_v1",
+  "supplemental_boundaries": [],
+  "status": "APPROVED",
+  "normalization_provenance": {
+    "pending_review": {
+      "path": "evidence/behavior/harnesses/render-small-dec283-20261002/reviews/InvertPatch/InvertPatch.contract-review.json",
+      "sha256": "785f16a52a78da04dc07f2d30fec064d63bb037227eb9b8556b94da295ea3d56"
+    },
+    "reason": "Root approval, explicit helper certifications and traversing cursor positive added; actual suite/source/observations are unchanged."
+  }
+}

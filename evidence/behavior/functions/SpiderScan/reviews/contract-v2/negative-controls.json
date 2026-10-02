@@ -1,0 +1,61 @@
+{
+  "schema": "behavior-negative-controls-v1",
+  "function": "SpiderScan",
+  "suite_id": "spider_nest_contracts_v1",
+  "identity": {
+    "source_sha256": "2d2192f4ada76eb4676d174932847e3807c987f294b1fbbae9287ddcbbd81734",
+    "oracle_sha256": "aa0596c6766322a8229ee3c36e57048c92adc82d50fbe2ef37afb8b85fcf4f11",
+    "harness_sha256": "ee7c997d2f89efa85ce932cd5ac7c674c465f1013a16a8c08e83d43c69f4be5b",
+    "historical_manifest_sha256": "025a0a9255d910cae4b122ab5a3f3fb40888bb456d7fe42158db7c9e622fcf50"
+  },
+  "controls": [
+    {
+      "id": "SpiderScan-omit-deadant",
+      "executed": true,
+      "detected_mismatch": true,
+      "original_executed": true,
+      "mutant_executed": true,
+      "baseline_matches": true,
+      "mutant_differs": true,
+      "execution_errors": 0,
+      "mismatch_categories": [
+        "nonstack_memory",
+        "ranges",
+        "trace"
+      ],
+      "mutant_source_sha256": "4d35c8f7fad730993f1099ef8173448ed9235ffa372afd7436a68dec664109af",
+      "mutant_source": {
+        "path": "evidence/behavior/functions/SpiderScan/reviews/contract-v2/negative-0.c",
+        "sha256": "4d35c8f7fad730993f1099ef8173448ed9235ffa372afd7436a68dec664109af"
+      },
+      "mutant_object": {
+        "path": "evidence/behavior/functions/SpiderScan/reviews/contract-v2/negative-0.obj",
+        "sha256": "20c23931e5f79b25dc9fc712e2491815e5efdba3975fff54223206dc81bacf72"
+      }
+    },
+    {
+      "id": "SpiderScan-laser-coordinate",
+      "executed": true,
+      "detected_mismatch": true,
+      "original_executed": true,
+      "mutant_executed": true,
+      "baseline_matches": true,
+      "mutant_differs": true,
+      "execution_errors": 0,
+      "mismatch_categories": [
+        "trace"
+      ],
+      "mutant_source_sha256": "ee9b9e92cd4e68274fcaa822c5de9daa6471f605e384a57e87bf97dcf14f26fa",
+      "mutant_source": {
+        "path": "evidence/behavior/functions/SpiderScan/reviews/contract-v2/negative-1.c",
+        "sha256": "ee9b9e92cd4e68274fcaa822c5de9daa6471f605e384a57e87bf97dcf14f26fa"
+      },
+      "mutant_object": {
+        "path": "evidence/behavior/functions/SpiderScan/reviews/contract-v2/negative-1.obj",
+        "sha256": "3dcc24920d81539744e11fafd42c54bb8dd8907abbb9cc4f0a338699eefac504"
+      }
+    }
+  ],
+  "errors": 0,
+  "mismatches_detected": 2
+}

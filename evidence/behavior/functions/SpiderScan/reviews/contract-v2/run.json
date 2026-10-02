@@ -1,0 +1,343 @@
+{
+  "schema": "behavior-run-evidence-v1",
+  "completion": "COMPLETE",
+  "suite": "spider_nest_contracts_v1",
+  "function": "SpiderScan",
+  "original_helpers_enabled": [
+    "SRand1",
+    "SRand4",
+    "fracSIN",
+    "fracCOS",
+    "FindAntIndex",
+    "DeadAntHere"
+  ],
+  "original_helper_call_counts": {
+    "SRand1": 1109278,
+    "fracCOS": 1109278,
+    "fracSIN": 2218556,
+    "FindAntIndex": 2160,
+    "SRand4": 2997,
+    "DeadAntHere": 1272
+  },
+  "observed_call_counts": {
+    "SRand1": 1109278,
+    "fracCOS": 1109278,
+    "fracSIN": 2218556,
+    "FindAntIndex": 2160,
+    "DoLaserFire": 1725,
+    "SRand4": 2997,
+    "DeadAntHere": 1272
+  },
+  "identity": {
+    "function": "SpiderScan",
+    "address": {
+      "off": 3984,
+      "seg": 3291,
+      "size": 392,
+      "unit": "root"
+    },
+    "source": "work\\takeover\\hardtail\\seeds\\root_0CDB_2d2192f4ada7.c",
+    "source_sha256": "2d2192f4ada76eb4676d174932847e3807c987f294b1fbbae9287ddcbbd81734",
+    "compiled_source_sha256": "2d2192f4ada76eb4676d174932847e3807c987f294b1fbbae9287ddcbbd81734",
+    "object_sha256": "e10c18bd2a23d02d403732dcc4ec79fead1b10a8134cafa5d06d6797455a12d0",
+    "linked_code_sha256": "e338aeeff434e6def6a1d4bc2297100dc9317b231bbee028fb087ec4ad449112",
+    "oracle_sha256": "aa0596c6766322a8229ee3c36e57048c92adc82d50fbe2ef37afb8b85fcf4f11",
+    "unicorn_version": "2.1.4",
+    "harness_sha256": "ee7c997d2f89efa85ce932cd5ac7c674c465f1013a16a8c08e83d43c69f4be5b",
+    "profile": "msc600ax",
+    "flags": [
+      "/AL",
+      "/Os",
+      "/Oe",
+      "/Og",
+      "/Zi"
+    ],
+    "manifest_sha256": "025a0a9255d910cae4b122ab5a3f3fb40888bb456d7fe42158db7c9e622fcf50",
+    "suite_id": "spider_nest_contracts_v1",
+    "suite_source_sha256": "41fa2c46acdc8c74d033d07d4d2afcf13abd77cd9cdee80e5060a61649aa8f67",
+    "suite_sha256": "41fa2c46acdc8c74d033d07d4d2afcf13abd77cd9cdee80e5060a61649aa8f67",
+    "historical_manifest_sha256": "025a0a9255d910cae4b122ab5a3f3fb40888bb456d7fe42158db7c9e622fcf50",
+    "module": "root:0CDB"
+  },
+  "suite_source_sha256": "41fa2c46acdc8c74d033d07d4d2afcf13abd77cd9cdee80e5060a61649aa8f67",
+  "runner_source_sha256": "b84f12b74bf728ce93ac2e6e1154e395a1e1ddba0e4dbb2dcfa117208062a63a",
+  "harness_snapshot": "build\\workers\\behavior_sim_contracts\\20261002\\stack-window-v1-final\\SpiderScan\\prepared\\behavior-harness.py",
+  "domain_coverage": {
+    "ant_count": {
+      "distinct": 20,
+      "minimum": 0,
+      "maximum": 81,
+      "values": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        16,
+        17,
+        18,
+        81
+      ]
+    },
+    "direction": {
+      "distinct": 11,
+      "minimum": 0,
+      "maximum": 65535,
+      "values": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        32767,
+        65535
+      ]
+    },
+    "lfsr_seed": {
+      "distinct": 9296,
+      "minimum": 1,
+      "maximum": 65535
+    },
+    "life_cells": {
+      "distinct": 22,
+      "minimum": 0,
+      "maximum": 81,
+      "values": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        16,
+        17,
+        18,
+        19,
+        20,
+        81
+      ]
+    },
+    "spider_x16": {
+      "distinct": 939,
+      "minimum": 0,
+      "maximum": 65535
+    },
+    "spider_y16": {
+      "distinct": 785,
+      "minimum": 0,
+      "maximum": 65535
+    }
+  },
+  "contract": {
+    "target": "root:0CDB:0F90",
+    "current_residue": "Target is 392 bytes; best source is 389 bytes. Original has an additional dead initialization sequence before the pass loop. Candidate CFG is reported matching; strict historical proof remains open.",
+    "compared": [
+      "return",
+      "spider globals",
+      "LifeA",
+      "A ant arrays/count",
+      "MapA",
+      "corpse-ring state",
+      "LFSR state and callback results",
+      "laser callback arguments",
+      "all non-stack writes"
+    ],
+    "helper_policy": "In original-helper mode, SRand1/SRand4/fracSIN/fracCOS/FindAntIndex/DeadAntHere execute as original overlay/oracle helpers and are entry-watched. Default mode retains source-derived trig/RNG callbacks. DoLaserFire is trace-only.",
+    "boundedness": "DoLaserFire output is represented by its ordered call/argument trace; rendering/audio device effects are outside this simulation contract."
+  },
+  "seed": "0x5A17E2",
+  "requested_randomized": 10000,
+  "counts": {
+    "directed": 146,
+    "randomized": 10000,
+    "generated_directed": 146,
+    "generated_randomized": 10000,
+    "mismatches": 0,
+    "execution_errors": 0
+  },
+  "execution": {
+    "engine": "PreparedPair.compare",
+    "actual_original_execution": true,
+    "actual_candidate_execution": true,
+    "original_exe_sha256": "aa0596c6766322a8229ee3c36e57048c92adc82d50fbe2ef37afb8b85fcf4f11"
+  },
+  "cases": {
+    "directed": {
+      "generated": 146,
+      "executed": 146,
+      "actual_original_invocations": 146,
+      "actual_candidate_invocations": 146,
+      "seeds": []
+    },
+    "randomized": {
+      "generated": 10000,
+      "executed": 10000,
+      "actual_original_invocations": 10000,
+      "actual_candidate_invocations": 10000,
+      "seeds": [
+        "0x5A17E2"
+      ]
+    }
+  },
+  "errors": 0,
+  "mismatches": 0,
+  "compared_effects": [
+    "return value",
+    "declared global/array/map state",
+    "ordered helper/callback names and arguments",
+    "final bytes across union of non-stack writes",
+    "caller-preserved register and stack ABI"
+  ],
+  "unmodeled_boundaries": 0,
+  "peer_data_gates": "PASS",
+  "case_ledger": {
+    "schema": "behavior-case-ledger-v1",
+    "path": "evidence/behavior/functions/SpiderScan/reviews/contract-v2/cases.jsonl.gz",
+    "sha256": "af700a266ef5adf08c5f0d51d3e58368ac034b5161f3800ac8607c6c6e0e389a",
+    "row_count": 10146,
+    "lane_counts": {
+      "directed": 146,
+      "randomized": 10000
+    },
+    "identity": {
+      "address": {
+        "off": 3984,
+        "seg": 3291,
+        "size": 392,
+        "unit": "root"
+      },
+      "compiled_source_sha256": "2d2192f4ada76eb4676d174932847e3807c987f294b1fbbae9287ddcbbd81734",
+      "flags": [
+        "/AL",
+        "/Os",
+        "/Oe",
+        "/Og",
+        "/Zi"
+      ],
+      "function": "SpiderScan",
+      "harness_sha256": "ee7c997d2f89efa85ce932cd5ac7c674c465f1013a16a8c08e83d43c69f4be5b",
+      "historical_manifest_sha256": "025a0a9255d910cae4b122ab5a3f3fb40888bb456d7fe42158db7c9e622fcf50",
+      "linked_code_sha256": "e338aeeff434e6def6a1d4bc2297100dc9317b231bbee028fb087ec4ad449112",
+      "manifest_sha256": "025a0a9255d910cae4b122ab5a3f3fb40888bb456d7fe42158db7c9e622fcf50",
+      "module": "root:0CDB",
+      "object_sha256": "e10c18bd2a23d02d403732dcc4ec79fead1b10a8134cafa5d06d6797455a12d0",
+      "oracle_sha256": "aa0596c6766322a8229ee3c36e57048c92adc82d50fbe2ef37afb8b85fcf4f11",
+      "profile": "msc600ax",
+      "source": "work\\takeover\\hardtail\\seeds\\root_0CDB_2d2192f4ada7.c",
+      "source_sha256": "2d2192f4ada76eb4676d174932847e3807c987f294b1fbbae9287ddcbbd81734",
+      "suite_id": "spider_nest_contracts_v1",
+      "suite_sha256": "41fa2c46acdc8c74d033d07d4d2afcf13abd77cd9cdee80e5060a61649aa8f67",
+      "suite_source_sha256": "41fa2c46acdc8c74d033d07d4d2afcf13abd77cd9cdee80e5060a61649aa8f67",
+      "unicorn_version": "2.1.4"
+    },
+    "compression": "gzip"
+  },
+  "helper_boundaries": [
+    {
+      "name": "SRand1",
+      "observed_call_count": 1109278,
+      "execution_mode": "ORIGINAL_EXE",
+      "executed_from_original": true
+    },
+    {
+      "name": "SRand4",
+      "observed_call_count": 2997,
+      "execution_mode": "ORIGINAL_EXE",
+      "executed_from_original": true
+    },
+    {
+      "name": "fracSIN",
+      "observed_call_count": 2218556,
+      "execution_mode": "ORIGINAL_EXE",
+      "executed_from_original": true
+    },
+    {
+      "name": "fracCOS",
+      "observed_call_count": 1109278,
+      "execution_mode": "ORIGINAL_EXE",
+      "executed_from_original": true
+    },
+    {
+      "name": "FindAntIndex",
+      "observed_call_count": 2160,
+      "execution_mode": "ORIGINAL_EXE",
+      "executed_from_original": true
+    },
+    {
+      "name": "DeadAntHere",
+      "observed_call_count": 1272,
+      "execution_mode": "ORIGINAL_EXE",
+      "executed_from_original": true
+    },
+    {
+      "name": "DoLaserFire",
+      "observed_call_count": 1725,
+      "execution_mode": "TRACE_ONLY",
+      "executed_from_original": false,
+      "certification": {
+        "path": "evidence/behavior/helpers/simulation-v1/DoLaserFire.json",
+        "sha256": "0243150da2a44db5336b60cdbbe4673d7b88d2dd4db8710160d337b77723fa5a"
+      }
+    }
+  ],
+  "positive_controls": [
+    {
+      "id": "pc-spider-target-kill",
+      "case_id": "matching-target-kill-dir0-life01",
+      "executed": true,
+      "matched": true,
+      "original_executed": true,
+      "candidate_executed": true,
+      "execution_errors": 0,
+      "source_sha256": "2d2192f4ada76eb4676d174932847e3807c987f294b1fbbae9287ddcbbd81734",
+      "object_sha256": "e10c18bd2a23d02d403732dcc4ec79fead1b10a8134cafa5d06d6797455a12d0",
+      "oracle_sha256": "aa0596c6766322a8229ee3c36e57048c92adc82d50fbe2ef37afb8b85fcf4f11",
+      "original_observation_sha256": "019fb053c25b076bb55da837a605383a416b7539f4e751d16db03602b6c43924",
+      "candidate_observation_sha256": "019fb053c25b076bb55da837a605383a416b7539f4e751d16db03602b6c43924",
+      "compared_effects": [
+        "return value",
+        "declared global/array/map state",
+        "ordered helper/callback names and arguments",
+        "final bytes across union of non-stack writes",
+        "caller-preserved register and stack ABI"
+      ],
+      "ledger_input_sha256": "678cc60c865bdcd81e5f23880c221d8d83074f8c2c988ebfbf0ce2a73b5e0cca"
+    }
+  ],
+  "helper_call_trace": {
+    "path": "build/workers/behavior_sim_contracts/20261002/stack-window-v1-final/SpiderScan/helper-call-traces.jsonl.gz",
+    "sha256": "0491d89f071104ec114c57110d0257db0942564336a5a7384f9372c9001aad49",
+    "case_count": 10146
+  },
+  "first_mismatch_artifact": null,
+  "execution_error": null,
+  "raw_report": {
+    "path": "evidence/behavior/functions/SpiderScan/reviews/contract-v2/raw-run.json",
+    "sha256": "59e00a6acc09cf4a5b720bd05d54bb3c960400a3f783047c4bbe8288ab3afb01"
+  }
+}

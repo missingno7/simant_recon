@@ -1,0 +1,141 @@
+{
+  "schema": "behavior-suite-run-v1",
+  "suite": "tutorial_menu_v1",
+  "suite_sha256": "7043a99e654807271bb186442b8105f63d05f50bf18174726ee7a9e47343e172",
+  "targets": [
+    {
+      "target": "LessonDone",
+      "identity": {
+        "function": "LessonDone",
+        "address": {
+          "unit": "root",
+          "seg": 3630,
+          "off": 1630,
+          "size": 723
+        },
+        "source": "work\\takeover\\hardtail\\seeds\\root_0E2E_c611660dde4d.c",
+        "source_sha256": "c611660dde4da7117c3232aa06e597871394cc4112466d46559705b235424359",
+        "compiled_source_sha256": "c611660dde4da7117c3232aa06e597871394cc4112466d46559705b235424359",
+        "object_sha256": "679b972a9eae557c6aeeb09d7768f4b6bca858a04c035186fd5e68a8242b0453",
+        "linked_code_sha256": "26e576dab40169c9828223ab40b2540f479e54c83224cca23e0b3bd58f49cb95",
+        "oracle_sha256": "aa0596c6766322a8229ee3c36e57048c92adc82d50fbe2ef37afb8b85fcf4f11",
+        "unicorn_version": "2.1.4",
+        "harness_sha256": "2c0799048057f59eae61a48be4d695278635594484adf0c70bf46c51b4e0c799",
+        "profile": "msc600ax",
+        "flags": [
+          "/AL",
+          "/Os",
+          "/Oe",
+          "/Og",
+          "/Zi"
+        ],
+        "manifest_sha256": "025a0a9255d910cae4b122ab5a3f3fb40888bb456d7fe42158db7c9e622fcf50"
+      },
+      "candidate_strict": {
+        "exact": false,
+        "reasons": [
+          "length 727 != target 723",
+          "bytes differ (first at +0x14, 527 differing)",
+          "relocation set differs (9 vs 9)"
+        ],
+        "fixups": 142,
+        "relocations": 9,
+        "reloc_order": "EXACT"
+      },
+      "cases_generated": 2228,
+      "cases_attempted": 2228,
+      "completed_comparisons": 2228,
+      "execution_error_count": 0,
+      "mismatches": 0,
+      "execution_errors": [],
+      "failures": [],
+      "ledger": {
+        "schema": "behavior-case-ledger-v1",
+        "path": "D:/Prog/simant_recon/build/workers/behavior_tutorial_menu/final_lesson_mapfix/LessonDone.jsonl.gz",
+        "sha256": "bf92beb70bb305b2c5ec643b464cde85a7063af377ea816552bf80ee27fb03c1",
+        "row_count": 2228,
+        "lane_counts": {
+          "directed": 1728,
+          "randomized": 500
+        },
+        "identity": {
+          "address": {
+            "off": 1630,
+            "seg": 3630,
+            "size": 723,
+            "unit": "root"
+          },
+          "compiled_source_sha256": "c611660dde4da7117c3232aa06e597871394cc4112466d46559705b235424359",
+          "flags": [
+            "/AL",
+            "/Os",
+            "/Oe",
+            "/Og",
+            "/Zi"
+          ],
+          "function": "LessonDone",
+          "harness_sha256": "2c0799048057f59eae61a48be4d695278635594484adf0c70bf46c51b4e0c799",
+          "linked_code_sha256": "26e576dab40169c9828223ab40b2540f479e54c83224cca23e0b3bd58f49cb95",
+          "manifest_sha256": "025a0a9255d910cae4b122ab5a3f3fb40888bb456d7fe42158db7c9e622fcf50",
+          "object_sha256": "679b972a9eae557c6aeeb09d7768f4b6bca858a04c035186fd5e68a8242b0453",
+          "oracle_sha256": "aa0596c6766322a8229ee3c36e57048c92adc82d50fbe2ef37afb8b85fcf4f11",
+          "profile": "msc600ax",
+          "source": "work\\takeover\\hardtail\\seeds\\root_0E2E_c611660dde4d.c",
+          "source_sha256": "c611660dde4da7117c3232aa06e597871394cc4112466d46559705b235424359",
+          "unicorn_version": "2.1.4"
+        },
+        "compression": "gzip"
+      },
+      "elapsed_seconds": 6.969,
+      "behavioral_status": "UNRESOLVED pending contract review"
+    }
+  ],
+  "negative_controls": [
+    {
+      "id": "lesson-strict-threshold",
+      "target": "LessonDone",
+      "mutation": "strict > changed to >= for lesson 3",
+      "baseline_matches": true,
+      "detected": true,
+      "mutant_differs": true,
+      "baseline_diff": {},
+      "diff": {
+        "return": {
+          "oracle": 0,
+          "candidate": 1
+        }
+      },
+      "mutant_source": "D:\\Prog\\simant_recon\\build\\workers\\behavior_tutorial_menu\\final_lesson_mapfix\\negative\\lesson-wrong-threshold.c",
+      "mutant_identity": {
+        "function": "LessonDone",
+        "address": {
+          "unit": "root",
+          "seg": 3630,
+          "off": 1630,
+          "size": 723
+        },
+        "source": "build\\workers\\behavior_tutorial_menu\\final_lesson_mapfix\\negative\\lesson-wrong-threshold.c",
+        "source_sha256": "60b8606c4fe774fb2fa41f8715053b3de307e70373abba222a8b31b253866362",
+        "compiled_source_sha256": "333a31b609fd81545f87f6127c35e8202eeff11becf2c66ae67b4cd2b37ae9e1",
+        "object_sha256": "8a52bf90dc53cd83a23c639f04f300ff93f5cbc7147f8f1b794b6559351ceaed",
+        "linked_code_sha256": "467b5fa1f8414e7f151fce1b7676da27d6ede193a306b18df420804fd6448711",
+        "oracle_sha256": "aa0596c6766322a8229ee3c36e57048c92adc82d50fbe2ef37afb8b85fcf4f11",
+        "unicorn_version": "2.1.4",
+        "harness_sha256": "2c0799048057f59eae61a48be4d695278635594484adf0c70bf46c51b4e0c799",
+        "profile": "msc600ax",
+        "flags": [
+          "/AL",
+          "/Os",
+          "/Oe",
+          "/Og",
+          "/Zi"
+        ],
+        "manifest_sha256": "025a0a9255d910cae4b122ab5a3f3fb40888bb456d7fe42158db7c9e622fcf50"
+      }
+    }
+  ],
+  "seed": 905249668,
+  "elapsed_seconds": 11.594,
+  "scope": "Corrected 32-bit timer threshold, original MacTickCount/TickCount arithmetic, original win_IsWinInFront AX/global contract, and MapA[128][64] row-major layout.",
+  "status": "UNRESOLVED pending independent review of fixture validity and boundary contracts"
+}

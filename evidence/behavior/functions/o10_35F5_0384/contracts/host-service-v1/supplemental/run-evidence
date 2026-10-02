@@ -1,0 +1,970 @@
+{
+  "schema": "behavior-run-evidence-v1",
+  "completion": "COMPLETE",
+  "identity": {
+    "function": "o10_35F5_0384",
+    "address": {
+      "unit": "S10",
+      "seg": 13813,
+      "off": 900,
+      "size": 1759
+    },
+    "source": "work\\takeover\\hardtail\\seeds\\S10_35F5_4b9dda15dbea.c",
+    "source_sha256": "4b9dda15dbea1c8fd204ed95d4cb6a909751a59d0517909e90c4626cad3c7888",
+    "compiled_source_sha256": "4b9dda15dbea1c8fd204ed95d4cb6a909751a59d0517909e90c4626cad3c7888",
+    "object_sha256": "898342fa8bf5a0fc880402e8800225acab55dbab2e6ec8cf45bcabecf381ba41",
+    "linked_code_sha256": "c6cace84ca007eb589d3c3fec777a6923a0ed72daa597d0d35acc75237689d7c",
+    "oracle_sha256": "aa0596c6766322a8229ee3c36e57048c92adc82d50fbe2ef37afb8b85fcf4f11",
+    "unicorn_version": "2.1.4",
+    "harness_sha256": "2c0799048057f59eae61a48be4d695278635594484adf0c70bf46c51b4e0c799",
+    "profile": "msc600ax",
+    "flags": [
+      "/AL",
+      "/Os",
+      "/Og",
+      "/Oe",
+      "/Gs",
+      "/Zi"
+    ],
+    "manifest_sha256": "025a0a9255d910cae4b122ab5a3f3fb40888bb456d7fe42158db7c9e622fcf50",
+    "suite_id": "tutorial_menu_v1",
+    "suite_sha256": "e01896c0b9f96741a0ef8d11b1cb3d5a1b26e62677327699a01bb4c05778ec7a",
+    "module": "S10:35F5",
+    "historical_manifest_sha256": "025a0a9255d910cae4b122ab5a3f3fb40888bb456d7fe42158db7c9e622fcf50"
+  },
+  "execution": {
+    "engine": "PreparedPair.compare",
+    "actual_original_execution": true,
+    "actual_candidate_execution": true,
+    "original_exe_sha256": "aa0596c6766322a8229ee3c36e57048c92adc82d50fbe2ef37afb8b85fcf4f11"
+  },
+  "cases": {
+    "directed": {
+      "generated": 53,
+      "executed": 53,
+      "actual_original_invocations": 53,
+      "actual_candidate_invocations": 53,
+      "seeds": []
+    },
+    "randomized": {
+      "generated": 100,
+      "executed": 100,
+      "actual_original_invocations": 100,
+      "actual_candidate_invocations": 100,
+      "seeds": [
+        905249668
+      ]
+    }
+  },
+  "errors": 0,
+  "mismatches": 0,
+  "compared_effects": [
+    "return",
+    "ordered host/helper calls",
+    "ordered input consumption",
+    "pointed rectangles and strings",
+    "global and pointed writes",
+    "all nonstack writes",
+    "caller ABI"
+  ],
+  "case_ledger": {
+    "schema": "behavior-case-ledger-v1",
+    "path": "build/workers/behavior_tutorial_menu/final_conditional_v4/o10_35F5_0384.jsonl.gz",
+    "sha256": "15d15e90ac8eab4ddf3dd4c84c05030823b35244b9200054d1d6c10c3e2e1118",
+    "row_count": 153,
+    "lane_counts": {
+      "directed": 53,
+      "randomized": 100
+    },
+    "identity": {
+      "address": {
+        "off": 900,
+        "seg": 13813,
+        "size": 1759,
+        "unit": "S10"
+      },
+      "compiled_source_sha256": "4b9dda15dbea1c8fd204ed95d4cb6a909751a59d0517909e90c4626cad3c7888",
+      "flags": [
+        "/AL",
+        "/Os",
+        "/Og",
+        "/Oe",
+        "/Gs",
+        "/Zi"
+      ],
+      "function": "o10_35F5_0384",
+      "harness_sha256": "2c0799048057f59eae61a48be4d695278635594484adf0c70bf46c51b4e0c799",
+      "linked_code_sha256": "c6cace84ca007eb589d3c3fec777a6923a0ed72daa597d0d35acc75237689d7c",
+      "manifest_sha256": "025a0a9255d910cae4b122ab5a3f3fb40888bb456d7fe42158db7c9e622fcf50",
+      "object_sha256": "898342fa8bf5a0fc880402e8800225acab55dbab2e6ec8cf45bcabecf381ba41",
+      "oracle_sha256": "aa0596c6766322a8229ee3c36e57048c92adc82d50fbe2ef37afb8b85fcf4f11",
+      "profile": "msc600ax",
+      "source": "work\\takeover\\hardtail\\seeds\\S10_35F5_4b9dda15dbea.c",
+      "source_sha256": "4b9dda15dbea1c8fd204ed95d4cb6a909751a59d0517909e90c4626cad3c7888",
+      "unicorn_version": "2.1.4"
+    },
+    "compression": "gzip"
+  },
+  "unmodeled_boundaries": 0,
+  "peer_data_gates": "PASS",
+  "positive_controls": [
+    {
+      "id": "pc-o10_35F5_0384-GSaveRect",
+      "case_id": "directed/menu-1/end000a",
+      "executed": true,
+      "matched": true,
+      "execution_errors": 0,
+      "original_executed": true,
+      "candidate_executed": true,
+      "source_sha256": "4b9dda15dbea1c8fd204ed95d4cb6a909751a59d0517909e90c4626cad3c7888",
+      "object_sha256": "898342fa8bf5a0fc880402e8800225acab55dbab2e6ec8cf45bcabecf381ba41",
+      "oracle_sha256": "aa0596c6766322a8229ee3c36e57048c92adc82d50fbe2ef37afb8b85fcf4f11",
+      "input_sha256": "3f429ef1e0339c7dd0bc3b58680f9aa621247e1448983cd41e1fdf869ac134a8",
+      "compared_effects": [
+        "return",
+        "ordered host/helper calls",
+        "ordered input consumption",
+        "pointed rectangles and strings",
+        "global and pointed writes",
+        "all nonstack writes",
+        "caller ABI"
+      ],
+      "original_observation_sha256": "ce56c95bcbbdd40c0a4eddac4b9580c41d2bb1b8d0b58657b62a3a18d408a3b1",
+      "candidate_observation_sha256": "ce56c95bcbbdd40c0a4eddac4b9580c41d2bb1b8d0b58657b62a3a18d408a3b1",
+      "observed_helper": "GSaveRect",
+      "report": "build/workers/behavior_tutorial_menu/final_conditional_v4/report.json",
+      "report_sha256": "6624d14aa5684b48867862d6686e972f4c5743524b3f937e3372e05c126000c6"
+    },
+    {
+      "id": "pc-o10_35F5_0384-f_1B73_030F",
+      "case_id": "directed/menu0/key002b",
+      "executed": true,
+      "matched": true,
+      "execution_errors": 0,
+      "original_executed": true,
+      "candidate_executed": true,
+      "source_sha256": "4b9dda15dbea1c8fd204ed95d4cb6a909751a59d0517909e90c4626cad3c7888",
+      "object_sha256": "898342fa8bf5a0fc880402e8800225acab55dbab2e6ec8cf45bcabecf381ba41",
+      "oracle_sha256": "aa0596c6766322a8229ee3c36e57048c92adc82d50fbe2ef37afb8b85fcf4f11",
+      "input_sha256": "ab6da1fab3a0511eda2833d63a1efc47149c7423604f15475f04433cf722362c",
+      "compared_effects": [
+        "return",
+        "ordered host/helper calls",
+        "ordered input consumption",
+        "pointed rectangles and strings",
+        "global and pointed writes",
+        "all nonstack writes",
+        "caller ABI"
+      ],
+      "original_observation_sha256": "bcc7d60e650a4bec3994e7e3e79d32860efe3a442dc7c6d74a759c26d45e6bb3",
+      "candidate_observation_sha256": "bcc7d60e650a4bec3994e7e3e79d32860efe3a442dc7c6d74a759c26d45e6bb3",
+      "observed_helper": "f_1B73_030F",
+      "report": "build/workers/behavior_tutorial_menu/final_conditional_v4/report.json",
+      "report_sha256": "6624d14aa5684b48867862d6686e972f4c5743524b3f937e3372e05c126000c6"
+    },
+    {
+      "id": "pc-o10_35F5_0384-f_1B73_032A",
+      "case_id": "directed/menu-1/end000a",
+      "executed": true,
+      "matched": true,
+      "execution_errors": 0,
+      "original_executed": true,
+      "candidate_executed": true,
+      "source_sha256": "4b9dda15dbea1c8fd204ed95d4cb6a909751a59d0517909e90c4626cad3c7888",
+      "object_sha256": "898342fa8bf5a0fc880402e8800225acab55dbab2e6ec8cf45bcabecf381ba41",
+      "oracle_sha256": "aa0596c6766322a8229ee3c36e57048c92adc82d50fbe2ef37afb8b85fcf4f11",
+      "input_sha256": "3f429ef1e0339c7dd0bc3b58680f9aa621247e1448983cd41e1fdf869ac134a8",
+      "compared_effects": [
+        "return",
+        "ordered host/helper calls",
+        "ordered input consumption",
+        "pointed rectangles and strings",
+        "global and pointed writes",
+        "all nonstack writes",
+        "caller ABI"
+      ],
+      "original_observation_sha256": "ce56c95bcbbdd40c0a4eddac4b9580c41d2bb1b8d0b58657b62a3a18d408a3b1",
+      "candidate_observation_sha256": "ce56c95bcbbdd40c0a4eddac4b9580c41d2bb1b8d0b58657b62a3a18d408a3b1",
+      "observed_helper": "f_1B73_032A",
+      "report": "build/workers/behavior_tutorial_menu/final_conditional_v4/report.json",
+      "report_sha256": "6624d14aa5684b48867862d6686e972f4c5743524b3f937e3372e05c126000c6"
+    },
+    {
+      "id": "pc-o10_35F5_0384-f_1B73_032E",
+      "case_id": "event/other-menu",
+      "executed": true,
+      "matched": true,
+      "execution_errors": 0,
+      "original_executed": true,
+      "candidate_executed": true,
+      "source_sha256": "4b9dda15dbea1c8fd204ed95d4cb6a909751a59d0517909e90c4626cad3c7888",
+      "object_sha256": "898342fa8bf5a0fc880402e8800225acab55dbab2e6ec8cf45bcabecf381ba41",
+      "oracle_sha256": "aa0596c6766322a8229ee3c36e57048c92adc82d50fbe2ef37afb8b85fcf4f11",
+      "input_sha256": "8274799593094a78ed9ab091a5c1cc57227711f9e5ab5a5efa0a5a29b68d110a",
+      "compared_effects": [
+        "return",
+        "ordered host/helper calls",
+        "ordered input consumption",
+        "pointed rectangles and strings",
+        "global and pointed writes",
+        "all nonstack writes",
+        "caller ABI"
+      ],
+      "original_observation_sha256": "7d7d64b2377fbcf40e61d8999db9152e29fd15f9a5e186674b73b16b94576f97",
+      "candidate_observation_sha256": "7d7d64b2377fbcf40e61d8999db9152e29fd15f9a5e186674b73b16b94576f97",
+      "observed_helper": "f_1B73_032E",
+      "report": "build/workers/behavior_tutorial_menu/final_conditional_v4/report.json",
+      "report_sha256": "6624d14aa5684b48867862d6686e972f4c5743524b3f937e3372e05c126000c6"
+    },
+    {
+      "id": "pc-o10_35F5_0384-f_1B73_09E9",
+      "case_id": "directed/menu-1/key002b",
+      "executed": true,
+      "matched": true,
+      "execution_errors": 0,
+      "original_executed": true,
+      "candidate_executed": true,
+      "source_sha256": "4b9dda15dbea1c8fd204ed95d4cb6a909751a59d0517909e90c4626cad3c7888",
+      "object_sha256": "898342fa8bf5a0fc880402e8800225acab55dbab2e6ec8cf45bcabecf381ba41",
+      "oracle_sha256": "aa0596c6766322a8229ee3c36e57048c92adc82d50fbe2ef37afb8b85fcf4f11",
+      "input_sha256": "4faf98af0353efabe1e9d9438612dbb0054801d27d2071037e44dba78d370d5e",
+      "compared_effects": [
+        "return",
+        "ordered host/helper calls",
+        "ordered input consumption",
+        "pointed rectangles and strings",
+        "global and pointed writes",
+        "all nonstack writes",
+        "caller ABI"
+      ],
+      "original_observation_sha256": "7d81eca5d66d2d113b6dadcde88e74f4fac3f8c8f77933e22f0891ad04241bdb",
+      "candidate_observation_sha256": "7d81eca5d66d2d113b6dadcde88e74f4fac3f8c8f77933e22f0891ad04241bdb",
+      "observed_helper": "f_1B73_09E9",
+      "report": "build/workers/behavior_tutorial_menu/final_conditional_v4/report.json",
+      "report_sha256": "6624d14aa5684b48867862d6686e972f4c5743524b3f937e3372e05c126000c6"
+    },
+    {
+      "id": "pc-o10_35F5_0384-f_1B73_0A40",
+      "case_id": "directed/menu-1/end000a",
+      "executed": true,
+      "matched": true,
+      "execution_errors": 0,
+      "original_executed": true,
+      "candidate_executed": true,
+      "source_sha256": "4b9dda15dbea1c8fd204ed95d4cb6a909751a59d0517909e90c4626cad3c7888",
+      "object_sha256": "898342fa8bf5a0fc880402e8800225acab55dbab2e6ec8cf45bcabecf381ba41",
+      "oracle_sha256": "aa0596c6766322a8229ee3c36e57048c92adc82d50fbe2ef37afb8b85fcf4f11",
+      "input_sha256": "3f429ef1e0339c7dd0bc3b58680f9aa621247e1448983cd41e1fdf869ac134a8",
+      "compared_effects": [
+        "return",
+        "ordered host/helper calls",
+        "ordered input consumption",
+        "pointed rectangles and strings",
+        "global and pointed writes",
+        "all nonstack writes",
+        "caller ABI"
+      ],
+      "original_observation_sha256": "ce56c95bcbbdd40c0a4eddac4b9580c41d2bb1b8d0b58657b62a3a18d408a3b1",
+      "candidate_observation_sha256": "ce56c95bcbbdd40c0a4eddac4b9580c41d2bb1b8d0b58657b62a3a18d408a3b1",
+      "observed_helper": "f_1B73_0A40",
+      "report": "build/workers/behavior_tutorial_menu/final_conditional_v4/report.json",
+      "report_sha256": "6624d14aa5684b48867862d6686e972f4c5743524b3f937e3372e05c126000c6"
+    },
+    {
+      "id": "pc-o10_35F5_0384-f_1B73_0A6C",
+      "case_id": "directed/menu-1/end000a",
+      "executed": true,
+      "matched": true,
+      "execution_errors": 0,
+      "original_executed": true,
+      "candidate_executed": true,
+      "source_sha256": "4b9dda15dbea1c8fd204ed95d4cb6a909751a59d0517909e90c4626cad3c7888",
+      "object_sha256": "898342fa8bf5a0fc880402e8800225acab55dbab2e6ec8cf45bcabecf381ba41",
+      "oracle_sha256": "aa0596c6766322a8229ee3c36e57048c92adc82d50fbe2ef37afb8b85fcf4f11",
+      "input_sha256": "3f429ef1e0339c7dd0bc3b58680f9aa621247e1448983cd41e1fdf869ac134a8",
+      "compared_effects": [
+        "return",
+        "ordered host/helper calls",
+        "ordered input consumption",
+        "pointed rectangles and strings",
+        "global and pointed writes",
+        "all nonstack writes",
+        "caller ABI"
+      ],
+      "original_observation_sha256": "ce56c95bcbbdd40c0a4eddac4b9580c41d2bb1b8d0b58657b62a3a18d408a3b1",
+      "candidate_observation_sha256": "ce56c95bcbbdd40c0a4eddac4b9580c41d2bb1b8d0b58657b62a3a18d408a3b1",
+      "observed_helper": "f_1B73_0A6C",
+      "report": "build/workers/behavior_tutorial_menu/final_conditional_v4/report.json",
+      "report_sha256": "6624d14aa5684b48867862d6686e972f4c5743524b3f937e3372e05c126000c6"
+    },
+    {
+      "id": "pc-o10_35F5_0384-f_1CE2_056C",
+      "case_id": "directed/menu-1/end000a",
+      "executed": true,
+      "matched": true,
+      "execution_errors": 0,
+      "original_executed": true,
+      "candidate_executed": true,
+      "source_sha256": "4b9dda15dbea1c8fd204ed95d4cb6a909751a59d0517909e90c4626cad3c7888",
+      "object_sha256": "898342fa8bf5a0fc880402e8800225acab55dbab2e6ec8cf45bcabecf381ba41",
+      "oracle_sha256": "aa0596c6766322a8229ee3c36e57048c92adc82d50fbe2ef37afb8b85fcf4f11",
+      "input_sha256": "3f429ef1e0339c7dd0bc3b58680f9aa621247e1448983cd41e1fdf869ac134a8",
+      "compared_effects": [
+        "return",
+        "ordered host/helper calls",
+        "ordered input consumption",
+        "pointed rectangles and strings",
+        "global and pointed writes",
+        "all nonstack writes",
+        "caller ABI"
+      ],
+      "original_observation_sha256": "ce56c95bcbbdd40c0a4eddac4b9580c41d2bb1b8d0b58657b62a3a18d408a3b1",
+      "candidate_observation_sha256": "ce56c95bcbbdd40c0a4eddac4b9580c41d2bb1b8d0b58657b62a3a18d408a3b1",
+      "observed_helper": "f_1CE2_056C",
+      "report": "build/workers/behavior_tutorial_menu/final_conditional_v4/report.json",
+      "report_sha256": "6624d14aa5684b48867862d6686e972f4c5743524b3f937e3372e05c126000c6"
+    },
+    {
+      "id": "pc-o10_35F5_0384-f_1F58_0038",
+      "case_id": "directed/menu-1/end000a",
+      "executed": true,
+      "matched": true,
+      "execution_errors": 0,
+      "original_executed": true,
+      "candidate_executed": true,
+      "source_sha256": "4b9dda15dbea1c8fd204ed95d4cb6a909751a59d0517909e90c4626cad3c7888",
+      "object_sha256": "898342fa8bf5a0fc880402e8800225acab55dbab2e6ec8cf45bcabecf381ba41",
+      "oracle_sha256": "aa0596c6766322a8229ee3c36e57048c92adc82d50fbe2ef37afb8b85fcf4f11",
+      "input_sha256": "3f429ef1e0339c7dd0bc3b58680f9aa621247e1448983cd41e1fdf869ac134a8",
+      "compared_effects": [
+        "return",
+        "ordered host/helper calls",
+        "ordered input consumption",
+        "pointed rectangles and strings",
+        "global and pointed writes",
+        "all nonstack writes",
+        "caller ABI"
+      ],
+      "original_observation_sha256": "ce56c95bcbbdd40c0a4eddac4b9580c41d2bb1b8d0b58657b62a3a18d408a3b1",
+      "candidate_observation_sha256": "ce56c95bcbbdd40c0a4eddac4b9580c41d2bb1b8d0b58657b62a3a18d408a3b1",
+      "observed_helper": "f_1F58_0038",
+      "report": "build/workers/behavior_tutorial_menu/final_conditional_v4/report.json",
+      "report_sha256": "6624d14aa5684b48867862d6686e972f4c5743524b3f937e3372e05c126000c6"
+    },
+    {
+      "id": "pc-o10_35F5_0384-f_1F58_007F",
+      "case_id": "directed/menu-1/key0801",
+      "executed": true,
+      "matched": true,
+      "execution_errors": 0,
+      "original_executed": true,
+      "candidate_executed": true,
+      "source_sha256": "4b9dda15dbea1c8fd204ed95d4cb6a909751a59d0517909e90c4626cad3c7888",
+      "object_sha256": "898342fa8bf5a0fc880402e8800225acab55dbab2e6ec8cf45bcabecf381ba41",
+      "oracle_sha256": "aa0596c6766322a8229ee3c36e57048c92adc82d50fbe2ef37afb8b85fcf4f11",
+      "input_sha256": "5e97feab234c9e3ce93bbd66a3041f4ba92681d913bfc3fc174aa64126d109c2",
+      "compared_effects": [
+        "return",
+        "ordered host/helper calls",
+        "ordered input consumption",
+        "pointed rectangles and strings",
+        "global and pointed writes",
+        "all nonstack writes",
+        "caller ABI"
+      ],
+      "original_observation_sha256": "b68eed2e2de2782329f1e2275b895c1f03c14c98323c5eaeb616d555ec39e48c",
+      "candidate_observation_sha256": "b68eed2e2de2782329f1e2275b895c1f03c14c98323c5eaeb616d555ec39e48c",
+      "observed_helper": "f_1F58_007F",
+      "report": "build/workers/behavior_tutorial_menu/final_conditional_v4/report.json",
+      "report_sha256": "6624d14aa5684b48867862d6686e972f4c5743524b3f937e3372e05c126000c6"
+    },
+    {
+      "id": "pc-o10_35F5_0384-f_1F58_0090",
+      "case_id": "directed/menu-1/end000a",
+      "executed": true,
+      "matched": true,
+      "execution_errors": 0,
+      "original_executed": true,
+      "candidate_executed": true,
+      "source_sha256": "4b9dda15dbea1c8fd204ed95d4cb6a909751a59d0517909e90c4626cad3c7888",
+      "object_sha256": "898342fa8bf5a0fc880402e8800225acab55dbab2e6ec8cf45bcabecf381ba41",
+      "oracle_sha256": "aa0596c6766322a8229ee3c36e57048c92adc82d50fbe2ef37afb8b85fcf4f11",
+      "input_sha256": "3f429ef1e0339c7dd0bc3b58680f9aa621247e1448983cd41e1fdf869ac134a8",
+      "compared_effects": [
+        "return",
+        "ordered host/helper calls",
+        "ordered input consumption",
+        "pointed rectangles and strings",
+        "global and pointed writes",
+        "all nonstack writes",
+        "caller ABI"
+      ],
+      "original_observation_sha256": "ce56c95bcbbdd40c0a4eddac4b9580c41d2bb1b8d0b58657b62a3a18d408a3b1",
+      "candidate_observation_sha256": "ce56c95bcbbdd40c0a4eddac4b9580c41d2bb1b8d0b58657b62a3a18d408a3b1",
+      "observed_helper": "f_1F58_0090",
+      "report": "build/workers/behavior_tutorial_menu/final_conditional_v4/report.json",
+      "report_sha256": "6624d14aa5684b48867862d6686e972f4c5743524b3f937e3372e05c126000c6"
+    },
+    {
+      "id": "pc-o10_35F5_0384-f_1F80_0081",
+      "case_id": "directed/menu-1/end000a",
+      "executed": true,
+      "matched": true,
+      "execution_errors": 0,
+      "original_executed": true,
+      "candidate_executed": true,
+      "source_sha256": "4b9dda15dbea1c8fd204ed95d4cb6a909751a59d0517909e90c4626cad3c7888",
+      "object_sha256": "898342fa8bf5a0fc880402e8800225acab55dbab2e6ec8cf45bcabecf381ba41",
+      "oracle_sha256": "aa0596c6766322a8229ee3c36e57048c92adc82d50fbe2ef37afb8b85fcf4f11",
+      "input_sha256": "3f429ef1e0339c7dd0bc3b58680f9aa621247e1448983cd41e1fdf869ac134a8",
+      "compared_effects": [
+        "return",
+        "ordered host/helper calls",
+        "ordered input consumption",
+        "pointed rectangles and strings",
+        "global and pointed writes",
+        "all nonstack writes",
+        "caller ABI"
+      ],
+      "original_observation_sha256": "ce56c95bcbbdd40c0a4eddac4b9580c41d2bb1b8d0b58657b62a3a18d408a3b1",
+      "candidate_observation_sha256": "ce56c95bcbbdd40c0a4eddac4b9580c41d2bb1b8d0b58657b62a3a18d408a3b1",
+      "observed_helper": "f_1F80_0081",
+      "report": "build/workers/behavior_tutorial_menu/final_conditional_v4/report.json",
+      "report_sha256": "6624d14aa5684b48867862d6686e972f4c5743524b3f937e3372e05c126000c6"
+    },
+    {
+      "id": "pc-o10_35F5_0384-f_1FBD_0000",
+      "case_id": "directed/menu-1/end000a",
+      "executed": true,
+      "matched": true,
+      "execution_errors": 0,
+      "original_executed": true,
+      "candidate_executed": true,
+      "source_sha256": "4b9dda15dbea1c8fd204ed95d4cb6a909751a59d0517909e90c4626cad3c7888",
+      "object_sha256": "898342fa8bf5a0fc880402e8800225acab55dbab2e6ec8cf45bcabecf381ba41",
+      "oracle_sha256": "aa0596c6766322a8229ee3c36e57048c92adc82d50fbe2ef37afb8b85fcf4f11",
+      "input_sha256": "3f429ef1e0339c7dd0bc3b58680f9aa621247e1448983cd41e1fdf869ac134a8",
+      "compared_effects": [
+        "return",
+        "ordered host/helper calls",
+        "ordered input consumption",
+        "pointed rectangles and strings",
+        "global and pointed writes",
+        "all nonstack writes",
+        "caller ABI"
+      ],
+      "original_observation_sha256": "ce56c95bcbbdd40c0a4eddac4b9580c41d2bb1b8d0b58657b62a3a18d408a3b1",
+      "candidate_observation_sha256": "ce56c95bcbbdd40c0a4eddac4b9580c41d2bb1b8d0b58657b62a3a18d408a3b1",
+      "observed_helper": "f_1FBD_0000",
+      "report": "build/workers/behavior_tutorial_menu/final_conditional_v4/report.json",
+      "report_sha256": "6624d14aa5684b48867862d6686e972f4c5743524b3f937e3372e05c126000c6"
+    },
+    {
+      "id": "pc-o10_35F5_0384-f_1FD2_02B1",
+      "case_id": "directed/menu-1/end000a",
+      "executed": true,
+      "matched": true,
+      "execution_errors": 0,
+      "original_executed": true,
+      "candidate_executed": true,
+      "source_sha256": "4b9dda15dbea1c8fd204ed95d4cb6a909751a59d0517909e90c4626cad3c7888",
+      "object_sha256": "898342fa8bf5a0fc880402e8800225acab55dbab2e6ec8cf45bcabecf381ba41",
+      "oracle_sha256": "aa0596c6766322a8229ee3c36e57048c92adc82d50fbe2ef37afb8b85fcf4f11",
+      "input_sha256": "3f429ef1e0339c7dd0bc3b58680f9aa621247e1448983cd41e1fdf869ac134a8",
+      "compared_effects": [
+        "return",
+        "ordered host/helper calls",
+        "ordered input consumption",
+        "pointed rectangles and strings",
+        "global and pointed writes",
+        "all nonstack writes",
+        "caller ABI"
+      ],
+      "original_observation_sha256": "ce56c95bcbbdd40c0a4eddac4b9580c41d2bb1b8d0b58657b62a3a18d408a3b1",
+      "candidate_observation_sha256": "ce56c95bcbbdd40c0a4eddac4b9580c41d2bb1b8d0b58657b62a3a18d408a3b1",
+      "observed_helper": "f_1FD2_02B1",
+      "report": "build/workers/behavior_tutorial_menu/final_conditional_v4/report.json",
+      "report_sha256": "6624d14aa5684b48867862d6686e972f4c5743524b3f937e3372e05c126000c6"
+    },
+    {
+      "id": "pc-o10_35F5_0384-f_1FD2_02FF",
+      "case_id": "directed/menu-1/end000a",
+      "executed": true,
+      "matched": true,
+      "execution_errors": 0,
+      "original_executed": true,
+      "candidate_executed": true,
+      "source_sha256": "4b9dda15dbea1c8fd204ed95d4cb6a909751a59d0517909e90c4626cad3c7888",
+      "object_sha256": "898342fa8bf5a0fc880402e8800225acab55dbab2e6ec8cf45bcabecf381ba41",
+      "oracle_sha256": "aa0596c6766322a8229ee3c36e57048c92adc82d50fbe2ef37afb8b85fcf4f11",
+      "input_sha256": "3f429ef1e0339c7dd0bc3b58680f9aa621247e1448983cd41e1fdf869ac134a8",
+      "compared_effects": [
+        "return",
+        "ordered host/helper calls",
+        "ordered input consumption",
+        "pointed rectangles and strings",
+        "global and pointed writes",
+        "all nonstack writes",
+        "caller ABI"
+      ],
+      "original_observation_sha256": "ce56c95bcbbdd40c0a4eddac4b9580c41d2bb1b8d0b58657b62a3a18d408a3b1",
+      "candidate_observation_sha256": "ce56c95bcbbdd40c0a4eddac4b9580c41d2bb1b8d0b58657b62a3a18d408a3b1",
+      "observed_helper": "f_1FD2_02FF",
+      "report": "build/workers/behavior_tutorial_menu/final_conditional_v4/report.json",
+      "report_sha256": "6624d14aa5684b48867862d6686e972f4c5743524b3f937e3372e05c126000c6"
+    },
+    {
+      "id": "pc-o10_35F5_0384-f_1FD2_031A",
+      "case_id": "directed/menu-1/end000a",
+      "executed": true,
+      "matched": true,
+      "execution_errors": 0,
+      "original_executed": true,
+      "candidate_executed": true,
+      "source_sha256": "4b9dda15dbea1c8fd204ed95d4cb6a909751a59d0517909e90c4626cad3c7888",
+      "object_sha256": "898342fa8bf5a0fc880402e8800225acab55dbab2e6ec8cf45bcabecf381ba41",
+      "oracle_sha256": "aa0596c6766322a8229ee3c36e57048c92adc82d50fbe2ef37afb8b85fcf4f11",
+      "input_sha256": "3f429ef1e0339c7dd0bc3b58680f9aa621247e1448983cd41e1fdf869ac134a8",
+      "compared_effects": [
+        "return",
+        "ordered host/helper calls",
+        "ordered input consumption",
+        "pointed rectangles and strings",
+        "global and pointed writes",
+        "all nonstack writes",
+        "caller ABI"
+      ],
+      "original_observation_sha256": "ce56c95bcbbdd40c0a4eddac4b9580c41d2bb1b8d0b58657b62a3a18d408a3b1",
+      "candidate_observation_sha256": "ce56c95bcbbdd40c0a4eddac4b9580c41d2bb1b8d0b58657b62a3a18d408a3b1",
+      "observed_helper": "f_1FD2_031A",
+      "report": "build/workers/behavior_tutorial_menu/final_conditional_v4/report.json",
+      "report_sha256": "6624d14aa5684b48867862d6686e972f4c5743524b3f937e3372e05c126000c6"
+    },
+    {
+      "id": "pc-o10_35F5_0384-f_1FD2_04D0",
+      "case_id": "directed/menu-1/end000a",
+      "executed": true,
+      "matched": true,
+      "execution_errors": 0,
+      "original_executed": true,
+      "candidate_executed": true,
+      "source_sha256": "4b9dda15dbea1c8fd204ed95d4cb6a909751a59d0517909e90c4626cad3c7888",
+      "object_sha256": "898342fa8bf5a0fc880402e8800225acab55dbab2e6ec8cf45bcabecf381ba41",
+      "oracle_sha256": "aa0596c6766322a8229ee3c36e57048c92adc82d50fbe2ef37afb8b85fcf4f11",
+      "input_sha256": "3f429ef1e0339c7dd0bc3b58680f9aa621247e1448983cd41e1fdf869ac134a8",
+      "compared_effects": [
+        "return",
+        "ordered host/helper calls",
+        "ordered input consumption",
+        "pointed rectangles and strings",
+        "global and pointed writes",
+        "all nonstack writes",
+        "caller ABI"
+      ],
+      "original_observation_sha256": "ce56c95bcbbdd40c0a4eddac4b9580c41d2bb1b8d0b58657b62a3a18d408a3b1",
+      "candidate_observation_sha256": "ce56c95bcbbdd40c0a4eddac4b9580c41d2bb1b8d0b58657b62a3a18d408a3b1",
+      "observed_helper": "f_1FD2_04D0",
+      "report": "build/workers/behavior_tutorial_menu/final_conditional_v4/report.json",
+      "report_sha256": "6624d14aa5684b48867862d6686e972f4c5743524b3f937e3372e05c126000c6"
+    },
+    {
+      "id": "pc-o10_35F5_0384-f_1FD2_0542",
+      "case_id": "directed/menu-1/end000a",
+      "executed": true,
+      "matched": true,
+      "execution_errors": 0,
+      "original_executed": true,
+      "candidate_executed": true,
+      "source_sha256": "4b9dda15dbea1c8fd204ed95d4cb6a909751a59d0517909e90c4626cad3c7888",
+      "object_sha256": "898342fa8bf5a0fc880402e8800225acab55dbab2e6ec8cf45bcabecf381ba41",
+      "oracle_sha256": "aa0596c6766322a8229ee3c36e57048c92adc82d50fbe2ef37afb8b85fcf4f11",
+      "input_sha256": "3f429ef1e0339c7dd0bc3b58680f9aa621247e1448983cd41e1fdf869ac134a8",
+      "compared_effects": [
+        "return",
+        "ordered host/helper calls",
+        "ordered input consumption",
+        "pointed rectangles and strings",
+        "global and pointed writes",
+        "all nonstack writes",
+        "caller ABI"
+      ],
+      "original_observation_sha256": "ce56c95bcbbdd40c0a4eddac4b9580c41d2bb1b8d0b58657b62a3a18d408a3b1",
+      "candidate_observation_sha256": "ce56c95bcbbdd40c0a4eddac4b9580c41d2bb1b8d0b58657b62a3a18d408a3b1",
+      "observed_helper": "f_1FD2_0542",
+      "report": "build/workers/behavior_tutorial_menu/final_conditional_v4/report.json",
+      "report_sha256": "6624d14aa5684b48867862d6686e972f4c5743524b3f937e3372e05c126000c6"
+    },
+    {
+      "id": "pc-o10_35F5_0384-free",
+      "case_id": "directed/menu-1/end000a",
+      "executed": true,
+      "matched": true,
+      "execution_errors": 0,
+      "original_executed": true,
+      "candidate_executed": true,
+      "source_sha256": "4b9dda15dbea1c8fd204ed95d4cb6a909751a59d0517909e90c4626cad3c7888",
+      "object_sha256": "898342fa8bf5a0fc880402e8800225acab55dbab2e6ec8cf45bcabecf381ba41",
+      "oracle_sha256": "aa0596c6766322a8229ee3c36e57048c92adc82d50fbe2ef37afb8b85fcf4f11",
+      "input_sha256": "3f429ef1e0339c7dd0bc3b58680f9aa621247e1448983cd41e1fdf869ac134a8",
+      "compared_effects": [
+        "return",
+        "ordered host/helper calls",
+        "ordered input consumption",
+        "pointed rectangles and strings",
+        "global and pointed writes",
+        "all nonstack writes",
+        "caller ABI"
+      ],
+      "original_observation_sha256": "ce56c95bcbbdd40c0a4eddac4b9580c41d2bb1b8d0b58657b62a3a18d408a3b1",
+      "candidate_observation_sha256": "ce56c95bcbbdd40c0a4eddac4b9580c41d2bb1b8d0b58657b62a3a18d408a3b1",
+      "observed_helper": "free",
+      "report": "build/workers/behavior_tutorial_menu/final_conditional_v4/report.json",
+      "report_sha256": "6624d14aa5684b48867862d6686e972f4c5743524b3f937e3372e05c126000c6"
+    },
+    {
+      "id": "pc-o10_35F5_0384-malloc",
+      "case_id": "directed/menu-1/end000a",
+      "executed": true,
+      "matched": true,
+      "execution_errors": 0,
+      "original_executed": true,
+      "candidate_executed": true,
+      "source_sha256": "4b9dda15dbea1c8fd204ed95d4cb6a909751a59d0517909e90c4626cad3c7888",
+      "object_sha256": "898342fa8bf5a0fc880402e8800225acab55dbab2e6ec8cf45bcabecf381ba41",
+      "oracle_sha256": "aa0596c6766322a8229ee3c36e57048c92adc82d50fbe2ef37afb8b85fcf4f11",
+      "input_sha256": "3f429ef1e0339c7dd0bc3b58680f9aa621247e1448983cd41e1fdf869ac134a8",
+      "compared_effects": [
+        "return",
+        "ordered host/helper calls",
+        "ordered input consumption",
+        "pointed rectangles and strings",
+        "global and pointed writes",
+        "all nonstack writes",
+        "caller ABI"
+      ],
+      "original_observation_sha256": "ce56c95bcbbdd40c0a4eddac4b9580c41d2bb1b8d0b58657b62a3a18d408a3b1",
+      "candidate_observation_sha256": "ce56c95bcbbdd40c0a4eddac4b9580c41d2bb1b8d0b58657b62a3a18d408a3b1",
+      "observed_helper": "malloc",
+      "report": "build/workers/behavior_tutorial_menu/final_conditional_v4/report.json",
+      "report_sha256": "6624d14aa5684b48867862d6686e972f4c5743524b3f937e3372e05c126000c6"
+    }
+  ],
+  "helper_boundaries": [
+    {
+      "name": "GSaveRect",
+      "execution_mode": "MODELED",
+      "executed_from_original": false,
+      "observed_call_count": 152,
+      "observed_call_count_scope": "all 153 matched campaign cases",
+      "stack_words": 2,
+      "register_args": [],
+      "callee_pop_bytes": 0,
+      "certification_proposal": {
+        "path": "build/workers/behavior_tutorial_menu/final_conditional_v4/proposals/o10_35F5_0384/helper-cert-proposals/GSaveRect.json",
+        "sha256": "e68be1cc0bb5e07ab441d38555cc055aa416804da5fe9fe5f54c62763be8850e"
+      }
+    },
+    {
+      "name": "f_1B73_030F",
+      "execution_mode": "MODELED",
+      "executed_from_original": false,
+      "observed_call_count": 17,
+      "observed_call_count_scope": "all 153 matched campaign cases",
+      "stack_words": 5,
+      "register_args": [],
+      "callee_pop_bytes": 0,
+      "certification_proposal": {
+        "path": "build/workers/behavior_tutorial_menu/final_conditional_v4/proposals/o10_35F5_0384/helper-cert-proposals/f_1B73_030F.json",
+        "sha256": "6ecdd81bab07ac03ef68c5774f73b3e4423f959ec1d6fb7be3e869603942503c"
+      }
+    },
+    {
+      "name": "f_1B73_032A",
+      "execution_mode": "MODELED",
+      "executed_from_original": false,
+      "observed_call_count": 179,
+      "observed_call_count_scope": "all 153 matched campaign cases",
+      "stack_words": 0,
+      "register_args": [],
+      "callee_pop_bytes": 0,
+      "certification_proposal": {
+        "path": "build/workers/behavior_tutorial_menu/final_conditional_v4/proposals/o10_35F5_0384/helper-cert-proposals/f_1B73_032A.json",
+        "sha256": "e120c1322ef1dcda3426584f8d5a54ed0ea3603322bd8f523affd3489f156f90"
+      }
+    },
+    {
+      "name": "f_1B73_032E",
+      "execution_mode": "MODELED",
+      "executed_from_original": false,
+      "observed_call_count": 3,
+      "observed_call_count_scope": "all 153 matched campaign cases",
+      "stack_words": 2,
+      "register_args": [],
+      "callee_pop_bytes": 0,
+      "certification_proposal": {
+        "path": "build/workers/behavior_tutorial_menu/final_conditional_v4/proposals/o10_35F5_0384/helper-cert-proposals/f_1B73_032E.json",
+        "sha256": "6e4719f4b9ad21944c256b7702d644cfe9c2c0c9a7d08aedfb26058310de6f58"
+      }
+    },
+    {
+      "name": "f_1B73_09E9",
+      "execution_mode": "MODELED",
+      "executed_from_original": false,
+      "observed_call_count": 24,
+      "observed_call_count_scope": "all 153 matched campaign cases",
+      "stack_words": 2,
+      "register_args": [],
+      "callee_pop_bytes": 0,
+      "certification_proposal": {
+        "path": "build/workers/behavior_tutorial_menu/final_conditional_v4/proposals/o10_35F5_0384/helper-cert-proposals/f_1B73_09E9.json",
+        "sha256": "55a06545e626baf69d913c616afde0711124bcbe3212c7f6af90493f95bd52b9"
+      }
+    },
+    {
+      "name": "f_1B73_0A40",
+      "execution_mode": "MODELED",
+      "executed_from_original": false,
+      "observed_call_count": 152,
+      "observed_call_count_scope": "all 153 matched campaign cases",
+      "stack_words": 0,
+      "register_args": [],
+      "callee_pop_bytes": 0,
+      "certification_proposal": {
+        "path": "build/workers/behavior_tutorial_menu/final_conditional_v4/proposals/o10_35F5_0384/helper-cert-proposals/f_1B73_0A40.json",
+        "sha256": "38069748d00023b05278f5eba78d14d41904176ac185b2e2890e13aff36adfea"
+      }
+    },
+    {
+      "name": "f_1B73_0A6C",
+      "execution_mode": "MODELED",
+      "executed_from_original": false,
+      "observed_call_count": 152,
+      "observed_call_count_scope": "all 153 matched campaign cases",
+      "stack_words": 0,
+      "register_args": [],
+      "callee_pop_bytes": 0,
+      "certification_proposal": {
+        "path": "build/workers/behavior_tutorial_menu/final_conditional_v4/proposals/o10_35F5_0384/helper-cert-proposals/f_1B73_0A6C.json",
+        "sha256": "f1a2b4bdd4d5b667494f0176e1b3664ef6b59573bf6d3c27bc37762f3d48c54c"
+      }
+    },
+    {
+      "name": "f_1CE2_056C",
+      "execution_mode": "MODELED",
+      "executed_from_original": false,
+      "observed_call_count": 152,
+      "observed_call_count_scope": "all 153 matched campaign cases",
+      "stack_words": 4,
+      "register_args": [],
+      "callee_pop_bytes": 0,
+      "certification_proposal": {
+        "path": "build/workers/behavior_tutorial_menu/final_conditional_v4/proposals/o10_35F5_0384/helper-cert-proposals/f_1CE2_056C.json",
+        "sha256": "e379ed81892cac8e11097c25b598c4ca44c6bd7bdbd6d18da9ba06eaa2bbbdbb"
+      }
+    },
+    {
+      "name": "f_1F58_0038",
+      "execution_mode": "MODELED",
+      "executed_from_original": false,
+      "observed_call_count": 177,
+      "observed_call_count_scope": "all 153 matched campaign cases",
+      "stack_words": 0,
+      "register_args": [],
+      "callee_pop_bytes": 0,
+      "certification_proposal": {
+        "path": "build/workers/behavior_tutorial_menu/final_conditional_v4/proposals/o10_35F5_0384/helper-cert-proposals/f_1F58_0038.json",
+        "sha256": "33c69b43c26910fde5f19fa57d691a1d899485fd0ddf96f9abb0cfeab2a56033"
+      }
+    },
+    {
+      "name": "f_1F58_007F",
+      "execution_mode": "MODELED",
+      "executed_from_original": false,
+      "observed_call_count": 6,
+      "observed_call_count_scope": "all 153 matched campaign cases",
+      "stack_words": 1,
+      "register_args": [],
+      "callee_pop_bytes": 0,
+      "certification_proposal": {
+        "path": "build/workers/behavior_tutorial_menu/final_conditional_v4/proposals/o10_35F5_0384/helper-cert-proposals/f_1F58_007F.json",
+        "sha256": "668df1b2da9b37321097cd4cb5883b8ea9c36a050cad703b143f5afa5ec36cf3"
+      }
+    },
+    {
+      "name": "f_1F58_0090",
+      "execution_mode": "MODELED",
+      "executed_from_original": false,
+      "observed_call_count": 177,
+      "observed_call_count_scope": "all 153 matched campaign cases",
+      "stack_words": 0,
+      "register_args": [],
+      "callee_pop_bytes": 0,
+      "certification_proposal": {
+        "path": "build/workers/behavior_tutorial_menu/final_conditional_v4/proposals/o10_35F5_0384/helper-cert-proposals/f_1F58_0090.json",
+        "sha256": "bb16906d31f7552345d5ee3b60af3961ab9c9aff032e86b0f909a565b731e314"
+      }
+    },
+    {
+      "name": "f_1F80_0081",
+      "execution_mode": "MODELED",
+      "executed_from_original": false,
+      "observed_call_count": 152,
+      "observed_call_count_scope": "all 153 matched campaign cases",
+      "stack_words": 1,
+      "register_args": [],
+      "callee_pop_bytes": 0,
+      "certification_proposal": {
+        "path": "build/workers/behavior_tutorial_menu/final_conditional_v4/proposals/o10_35F5_0384/helper-cert-proposals/f_1F80_0081.json",
+        "sha256": "8ff1fe4b319c2836752677ca7b3b4917c628d003736003838b8a21c39ff4a4ab"
+      }
+    },
+    {
+      "name": "f_1FBD_0000",
+      "execution_mode": "MODELED",
+      "executed_from_original": false,
+      "observed_call_count": 601,
+      "observed_call_count_scope": "all 153 matched campaign cases",
+      "stack_words": 4,
+      "register_args": [],
+      "callee_pop_bytes": 0,
+      "certification_proposal": {
+        "path": "build/workers/behavior_tutorial_menu/final_conditional_v4/proposals/o10_35F5_0384/helper-cert-proposals/f_1FBD_0000.json",
+        "sha256": "413b75bc6b73a637bc7911fbc1fd624b9731f9060b7b8cfad5030c2c89e34f84"
+      }
+    },
+    {
+      "name": "f_1FD2_02B1",
+      "execution_mode": "MODELED",
+      "executed_from_original": false,
+      "observed_call_count": 1081,
+      "observed_call_count_scope": "all 153 matched campaign cases",
+      "stack_words": 1,
+      "register_args": [],
+      "callee_pop_bytes": 0,
+      "certification_proposal": {
+        "path": "build/workers/behavior_tutorial_menu/final_conditional_v4/proposals/o10_35F5_0384/helper-cert-proposals/f_1FD2_02B1.json",
+        "sha256": "63a915d97cba507d5718e022e8ec45d24fb477ebae1be610e6362a5bcfe0f7aa"
+      }
+    },
+    {
+      "name": "f_1FD2_02FF",
+      "execution_mode": "ORIGINAL_EXE",
+      "executed_from_original": true,
+      "observed_call_count": 152,
+      "observed_call_count_scope": "all 153 matched campaign cases",
+      "stack_words": 0,
+      "register_args": [],
+      "callee_pop_bytes": 0,
+      "certification_proposal": null
+    },
+    {
+      "name": "f_1FD2_031A",
+      "execution_mode": "MODELED",
+      "executed_from_original": false,
+      "observed_call_count": 152,
+      "observed_call_count_scope": "all 153 matched campaign cases",
+      "stack_words": 0,
+      "register_args": [],
+      "callee_pop_bytes": 0,
+      "certification_proposal": {
+        "path": "build/workers/behavior_tutorial_menu/final_conditional_v4/proposals/o10_35F5_0384/helper-cert-proposals/f_1FD2_031A.json",
+        "sha256": "0341c5eb6776b7d2ba4856c1ad104a3c4df17335348c28a865e67eccd0644a98"
+      }
+    },
+    {
+      "name": "f_1FD2_04D0",
+      "execution_mode": "MODELED",
+      "executed_from_original": false,
+      "observed_call_count": 153,
+      "observed_call_count_scope": "all 153 matched campaign cases",
+      "stack_words": 2,
+      "register_args": [],
+      "callee_pop_bytes": 0,
+      "certification_proposal": {
+        "path": "build/workers/behavior_tutorial_menu/final_conditional_v4/proposals/o10_35F5_0384/helper-cert-proposals/f_1FD2_04D0.json",
+        "sha256": "a8162ab08e563be73216225c770344fb6723e3e2e7dbe03f02335944bbbb392b"
+      }
+    },
+    {
+      "name": "f_1FD2_0542",
+      "execution_mode": "MODELED",
+      "executed_from_original": false,
+      "observed_call_count": 484,
+      "observed_call_count_scope": "all 153 matched campaign cases",
+      "stack_words": 0,
+      "register_args": [],
+      "callee_pop_bytes": 0,
+      "certification_proposal": {
+        "path": "build/workers/behavior_tutorial_menu/final_conditional_v4/proposals/o10_35F5_0384/helper-cert-proposals/f_1FD2_0542.json",
+        "sha256": "907f2c6fe385992b0d27c5aa83a34813c547b805288d06100c27fc2ddd4e6736"
+      }
+    },
+    {
+      "name": "free",
+      "execution_mode": "MODELED",
+      "executed_from_original": false,
+      "observed_call_count": 152,
+      "observed_call_count_scope": "all 153 matched campaign cases",
+      "stack_words": 2,
+      "register_args": [],
+      "callee_pop_bytes": 0,
+      "certification_proposal": {
+        "path": "build/workers/behavior_tutorial_menu/final_conditional_v4/proposals/o10_35F5_0384/helper-cert-proposals/free.json",
+        "sha256": "0665c81caff72933f0b692cd9641f4b5cff839eb4b814212e045b34b8e30b105"
+      }
+    },
+    {
+      "name": "malloc",
+      "execution_mode": "MODELED",
+      "executed_from_original": false,
+      "observed_call_count": 152,
+      "observed_call_count_scope": "all 153 matched campaign cases",
+      "stack_words": 1,
+      "register_args": [],
+      "callee_pop_bytes": 0,
+      "certification_proposal": {
+        "path": "build/workers/behavior_tutorial_menu/final_conditional_v4/proposals/o10_35F5_0384/helper-cert-proposals/malloc.json",
+        "sha256": "eccfe6668035b28b77a32d9fda7ba03cbe5441493b855e7c6fee9af73997d861"
+      }
+    }
+  ],
+  "implementation_views": [
+    {
+      "address": 387382,
+      "name": "sprintf-output-stream",
+      "proof_path": "evidence/behavior/runtime/format-cursors/format_cursor_proof.json",
+      "proof_sha256": "140c1d240cf48c5c868ccdd723b4651d71735f592b3d5baed1f4d552cbfbc628"
+    },
+    {
+      "address": 387394,
+      "name": "vsprintf-output-stream",
+      "proof_path": "evidence/behavior/runtime/format-cursors/format_cursor_proof.json",
+      "proof_sha256": "140c1d240cf48c5c868ccdd723b4651d71735f592b3d5baed1f4d552cbfbc628"
+    }
+  ],
+  "callback_boundary_audit": {
+    "path": "build/workers/behavior_tutorial_menu/final_conditional_v4/callback-boundary-audit.json",
+    "sha256": "660c83c937c0cc219cb9dba6c11eeb09e67d76d20f9fbde4128a38e189562b88"
+  },
+  "positive_boundary_cases": {
+    "path": "build/workers/behavior_tutorial_menu/final_conditional_v4/positive-boundary-cases.json",
+    "sha256": "4299570e904dacc6ba4b284927a7b9359c73b0dff3eb0c19cea647e3f4a04770"
+  },
+  "retained_input_bundle": {
+    "path": "evidence/behavior/harnesses/tutorial-menu-20261002-e018/bundle.json",
+    "sha256": "f27d7904119109a9c5619fa480dac9859753678a6746b189cc7d45f70ade86a5"
+  },
+  "raw_report": {
+    "path": "build/workers/behavior_tutorial_menu/final_conditional_v4/report.json",
+    "sha256": "6624d14aa5684b48867862d6686e972f4c5743524b3f937e3372e05c126000c6"
+  },
+  "campaign_scope": {
+    "directed": "53 cases: current-menu -1/0/1; Enter, CR, LF, Space, ESC, 0x852/0x853, +/-, arrows 0x850/0x848, alphabet match/miss, extended-key flush, separator/disabled skipping, empty table, same-menu/non-menu/other-menu events, mouse selection.",
+    "randomized": "100 cases, seed 0x35f50384; valid null-terminated far tables with 1..7 labels; selected byte 0..item count; current-menu -1..3; screens 320/640/800 by 200/400/600; line-height 8..19 and character-width 6..12.",
+    "fixture": "Valid far pointers and NUL strings, one valid DOS Ralloc block for original malloc(4000)/free, menu geometry arrays, deterministic host input/mouse/timer/display sinks. Recovered Event is eight words; routing forwards code,xE,h,v plus trailing zero."
+  },
+  "helper_alias_abi_audit": {
+    "path": "evidence/behavior/harnesses/tutorial-menu-20261002-e018/source-inputs/helper_alias_abi_audit.json",
+    "sha256": "00385a2f225ce7a409bb0b780f69d448818dafa0c2599e3e87e1b114e505ddcb"
+  }
+}

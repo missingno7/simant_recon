@@ -1,0 +1,127 @@
+{
+  "method": "same /AL /Os /Og /Oe /Zi controls; keep_ptr(saved) remains int far *; address-taken hold is passed to same call and read after it",
+  "baseline": {
+    "source": "work/takeover/compiler-ir/c2/sources/far-pointer.c",
+    "source_sha256": "d288e91fca39f8671b37db64c0032fa5cf4f555950337bca4ffa2f90e82007c4",
+    "flags_passed": [
+      "/AL",
+      "/Os",
+      "/Og",
+      "/Oe",
+      "/Zi",
+      "/Fc"
+    ],
+    "required_flags_appended_by_compile_c": [
+      "/EM"
+    ],
+    "listing_public": "_keep_ptr",
+    "saved_home": -4,
+    "listing_slots": {
+      "input": 6,
+      "saved": -4
+    },
+    "case": "toy-far-pointer",
+    "saved_type": "int far *"
+  },
+  "baseline_pr": {
+    "pr_file": "build/workers/c2_observability/b3/toy-far-pointer/IR/000352PR",
+    "pr_size": 146,
+    "pr_sha256": "ff7bcbeaf9f18f20830e4cdcc22976333df0cecfcaadce4ab19d768fc576166c",
+    "pr_summary_sha256": "ff7bcbeaf9f18f20830e4cdcc22976333df0cecfcaadce4ab19d768fc576166c",
+    "listing_saved_home": -4,
+    "listing_signed8_byte_hex": "fc",
+    "listing_signed16_le_hex": "fc ff",
+    "signed16_home_occurrences_in_entire_pr": [],
+    "saved_named_records": [
+      {
+        "name_offset": 76,
+        "window_start": 68,
+        "window_hex": "00 00 06 00 00 00 09 01 73 61 76 65 64 00 80 c1 00 00 fc 00 00 00 00 0e 04 0a 64 00 00 01 02 01 00 04 06 05 00 00 01 02 01 02 04 08 05 00",
+        "tentative_home_byte_record_relative_offset": 10,
+        "tentative_home_byte_observed_hex": "fc",
+        "tentative_home_byte_expected_signed8_hex": "fc",
+        "tentative_home_byte_matches_listing": true,
+        "two_bytes_at_tentative_home_field_hex": "fc 00",
+        "signed16_home_occurrences_in_named_record_window": []
+      }
+    ]
+  },
+  "candidates": [
+    {
+      "source": "work/takeover/compiler-ir/c2/sources/far-pointer-extra-int.c",
+      "source_sha256": "c942c53ef777babcefb8baa008cae0fba9a0043788e0dc3ff92a898acc17c1c5",
+      "flags_passed": [
+        "/AL",
+        "/Os",
+        "/Og",
+        "/Oe",
+        "/Zi",
+        "/Fc"
+      ],
+      "required_flags_appended_by_compile_c": [
+        "/EM"
+      ],
+      "listing_public": "_keep_ptr",
+      "saved_home": -6,
+      "listing_slots": {
+        "input": 6,
+        "hold": -2,
+        "saved": -6
+      },
+      "case": "toy-far-pointer-extra-int",
+      "saved_type": "int far *",
+      "home_changed_from_baseline": true
+    },
+    {
+      "source": "work/takeover/compiler-ir/c2/sources/far-pointer-extra-long.c",
+      "source_sha256": "b7cd9a3889de06a622ba62f84b04cd4c5511f24b3f9a3528520663e3095ab602",
+      "flags_passed": [
+        "/AL",
+        "/Os",
+        "/Og",
+        "/Oe",
+        "/Zi",
+        "/Fc"
+      ],
+      "required_flags_appended_by_compile_c": [
+        "/EM"
+      ],
+      "listing_public": "_keep_ptr",
+      "saved_home": -4,
+      "listing_slots": {
+        "input": 6,
+        "hold": -8,
+        "saved": -4
+      },
+      "case": "toy-far-pointer-extra-long",
+      "saved_type": "int far *",
+      "home_changed_from_baseline": false
+    }
+  ],
+  "captured_moved_controls_only": {
+    "toy-far-pointer-extra-int": {
+      "pr_file": "build/workers/c2_observability/b3/toy-far-pointer-extra-int/IR/000352PR",
+      "pr_size": 272,
+      "pr_sha256": "402fe5b4c3f492abeaaf5ea434481bf8ebcfe962bc894198c9a739a648fb1d66",
+      "pr_summary_sha256": "402fe5b4c3f492abeaaf5ea434481bf8ebcfe962bc894198c9a739a648fb1d66",
+      "listing_saved_home": -6,
+      "listing_signed8_byte_hex": "fa",
+      "listing_signed16_le_hex": "fa ff",
+      "signed16_home_occurrences_in_entire_pr": [],
+      "saved_named_records": [
+        {
+          "name_offset": 91,
+          "window_start": 83,
+          "window_hex": "00 00 fe 00 00 00 09 01 73 61 76 65 64 00 80 c1 00 00 fa 06 00 00 00 01 02 01 00 04 06 05 00 00 01 02 01 02 04 08 05 00 00 01 02 01 06 01",
+          "tentative_home_byte_record_relative_offset": 10,
+          "tentative_home_byte_observed_hex": "fa",
+          "tentative_home_byte_expected_signed8_hex": "fa",
+          "tentative_home_byte_matches_listing": true,
+          "two_bytes_at_tentative_home_field_hex": "fa 06",
+          "signed16_home_occurrences_in_named_record_window": []
+        }
+      ]
+    }
+  },
+  "interpretation": "For same-name, same-type `saved`, the PR byte at record-relative +10 changes from FC (listing BP-4) to FA (listing BP-6). This supports a tentative one-byte home/displacement field before C3; the adjacent byte changes 00 to 06, so the record format is not decoded, and no signed16 home word is present."
+}

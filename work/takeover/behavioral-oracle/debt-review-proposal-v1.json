@@ -1,0 +1,50 @@
+{
+  "schema": "simant-freeze-debt-review-proposal-v1",
+  "status": "PROPOSED_NOT_APPROVED",
+  "oracle_sha256": "aa0596c6766322a8229ee3c36e57048c92adc82d50fbe2ef37afb8b85fcf4f11",
+  "review": {
+    "status": "PENDING",
+    "reviewer": null,
+    "reason": null
+  },
+  "code_gap_bundle": {
+    "path": "work/takeover/behavioral-oracle/code-gap-review-proposal-v1.json",
+    "sha256": "7430bf477d3ccc30e35d8b1cfad9cae37ba2d3f45908333a5b14f491da9520aa",
+    "summary_bytes": 316,
+    "partition": {
+      "callable_or_layout_spans": 54,
+      "LINK_FILL": 246,
+      "TEXT_PREFIX_CANDIDATE": 16
+    },
+    "evidence": {
+      "code_gap_scan": {
+        "path": "work/takeover/behavioral-oracle/debt-audit/code-gaps.json",
+        "sha256": "6efb452497c63a31cb7258ba010288b311376de36e429059f71030c5de2a9a97"
+      },
+      "wrapper_reproduction": {
+        "path": "work/takeover/behavioral-oracle/debt-audit/reproducible-wrapper-proof-v2/report.json",
+        "sha256": "3f8b87bb6bcfe7f980680b2fc7e4ce7d5c075bc9d5413a77650fc5819d6d798d"
+      },
+      "code_span_disposition": {
+        "path": "work/takeover/behavioral-oracle/debt-audit/wrapper-gap-disposition.md",
+        "sha256": "00cfab8299cc06bd99cd0d97dc40408a155d0fbc79d7b6e30b0d71d220d61360"
+      }
+    }
+  },
+  "data_disposition": {
+    "path": "work/takeover/behavioral-oracle/data-debt-disposition-proposal-v1.json",
+    "sha256": "f0880ce218973e414afd54818146d89bcae460a2051d8491d7da090a0b98e74c",
+    "summary_bytes": 113,
+    "literal_spans": 8,
+    "tail_overlap_bytes": 3
+  },
+  "currentness": {
+    "data_debt_inventory_provenance_pin": {
+      "recorded": "658a3e6862a10ba43ddcc8a0df5c56668616d794a8d59c7d8e939356922a010a",
+      "current": "1e61bead20694234d10d1bd35b2a23eac8c55c65e546c362f1c679a42ab3a664",
+      "matches": false
+    },
+    "note": "The current data-debt inventory is not fully fresh against build/link/provenance.json; regenerate or reconcile that audit before freeze review. Original byte ranges were independently rechecked against current assets/SIMANT.EXE."
+  },
+  "counts_effect": "No EXACT claim, BEHAVIOR_EXACT registry row, function inventory count, or accepted-data count is changed by these proposals."
+}

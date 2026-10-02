@@ -1,7 +1,43 @@
-# Handoff: state and next steps (2026-10-01)
+# Handoff: state and next steps (2026-10-02)
 
 Read README.md, AGENTS.md, docs/codegen-rules.md and docs/tu-evidence.md before work.
+The active phase now follows `docs/behavioral-proof.md`: preserve all EXACT
+claims, close the remaining game contracts through original-DOS differential
+execution, freeze the reviewed semantic oracle, then start a separate SDL3 branch.
+`tools/behavior.py` and family suites are research tools; exploratory passing runs
+do not grant BEHAVIOR_EXACT. The fresh behavioral inventory is under
+`work/takeover/behavioral-oracle/`; the frozen oracle is dos-semantic-oracle-v1 and portable work starts on
+codex/portable-sdl3; see docs/dos-semantic-oracle-v1.md.
+The current 2026-10-02 status is recorded separately in
+`work/takeover/behavioral-oracle/current-status.md`: 29 registered behavioral
+closures, zero unresolved known game functions and 113 historical data bytes. The dated
+hard-tail search checkpoint below is retained as prior evidence.
 `python tools/validate.py` is the source of truth for totals (docs/progress.md/json).
+The hard-tail checkpoint adds `tools/hardtail.py`, `tools/codecfg.py`,
+`tools/compilerstate.py` and research-only C1/post-C2 capture hooks. Read
+`work/takeover/hardtail/README.md` and its all-open JSON before another search.
+All 29 open functions have fresh whole-module gates and normalized instruction/CFG
+reports; S15, S25:1035, memory compaction and root:0250:129E match the normalized
+skeleton and CFG. Their remaining operand substitutions are recorded by use site,
+not assumed to be global renames. The best reviewed LessonDone seed is 727 bytes
+and still has a shared-tail CFG mismatch. No function was accepted in this wave.
+The corrected archive audit and 102-row ledger preserve tested dimensions and
+whole-module inputs; 51 early ledger rows retain explicit diagnostic errors while
+their strict gates remain available. Synthetic context is diagnostic only.
+C1 identity scanning remains partial. A same-type/name far-pointer control supports
+a tentative pre-C3 named-home byte in PR. A split-pointer control also exposes
+segment store/reload motifs whose displacement follows the final home. S15 has
+the matching candidate store motif; its source/context-to-home allocation or
+coalescing decision remains unexplained. Anonymous spill ownership is not assumed. See
+`work/takeover/compiler-ir/c2/FINDINGS.md`; failed searches are not ASM evidence.
+The 29 open function extents sum to 15,039 bytes; 316 additional code-span bytes
+reconcile the validated 15,355-byte debt. Their inventory changes no ownership.
+Full validation passes 240 tests (two skips), all 48 codegen probes, accepted modules,
+runtime and FAR_BSS checks. The reused-object hybrid remains byte-identical. Game
+data stays at 129 unresolved bytes; RTLink debt stays separate at 17,001 bytes.
+No historical freeze is claimed. Use `--prior-ledger` when running compilerstate
+controls and check the archive's exhaustion index for earlier equivalent work.
+
 The latest pointer-form follow-up retains 183 whole-module source-gate rows, all
 compiled and none exact, in work/takeover/pointer-forms/. It tests the window
 coordinate helper, AdLib volume, unlock, map/cursor and small clip helper. Twenty-two
@@ -37,7 +73,7 @@ The earlier phase-index checkpoint accepts CalcScore and completes S14:384C as
 a 4,653-byte TU, and repairs the memory-compaction seed's accepted-peer regression.
 Evidence is in work/takeover/context-next/. The sibling-tool comparison remains
 in work/takeover/siblings/; its 203-test checkpoint is historical.
-The latest checkpoint passes 214 test cases (two skips), all 48 compiler probes,
+The preceding fleet checkpoint passes 214 test cases (two skips), all 48 compiler probes,
 accepted-module and FAR_BSS checks. Full validation, a fresh byte-identical hybrid
 rebuild and reconciliation with current totals are in work/takeover/fleet-lifetimes/.
 The pointer-form follow-up rechecks validation and the hybrid with the same manifest.
@@ -52,10 +88,16 @@ Check Git for the current checkpoint and publication status.
 | ASM used as a workaround for C | 0 |
 | complete TUs / with proven cross-function relocation order | 97 / 96 |
 | accepted MSC runtime | 90 members; 12,339 code + 2,021 data bytes |
-| accepted game data / far data | 113,884 / 80,310 bytes |
-| unresolved game code / data | 15,355 / 129 bytes |
+| accepted game data / far data | 113,900 / 80,310 bytes |
+| unresolved historical game code / data | 15,355 / 113 bytes |
 | RTLink manager and associated metadata debt | 17,001 bytes |
 | owned functions / known functions | 1,701 / 1,730 |
+
+The separate behavioral registry closes the 29 known functions outside historical
+ownership. This is 1,611 EXACT game functions plus 29 BEHAVIOR_EXACT functions,
+covering the 1,640-function game inventory. It does not change the historical
+owned-function or byte-coverage counts. Supplemental code-gap contracts, finite
+input-domain limits and source-specific modeled backend boundaries remain explicit.
 
 Proof quality is separate from coverage: 14,115 C bytes are STEERED, 20,867 are
 layout-inferred, and 11,742 have within-group order pending. S00:31AD is the only

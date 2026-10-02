@@ -1,0 +1,128 @@
+{
+  "schema": "behavior-run-evidence-v1",
+  "completion": "COMPLETE",
+  "identity": {
+    "function": "FindIndex",
+    "suite_id": "small_contracts_v1",
+    "module": "root:1986",
+    "source_sha256": "1af5252fe8449eeca44b4099fe4a4bd1ff5ab24521c7a888253adfdd4554ac5a",
+    "compiled_source_sha256": "1af5252fe8449eeca44b4099fe4a4bd1ff5ab24521c7a888253adfdd4554ac5a",
+    "suite_sha256": "6f319c90f1a979c6f27a9be5e4b98f1f04f4c96caa0aac3c01cb3dabbe52be3b",
+    "harness_sha256": "ee7c997d2f89efa85ce932cd5ac7c674c465f1013a16a8c08e83d43c69f4be5b",
+    "oracle_sha256": "aa0596c6766322a8229ee3c36e57048c92adc82d50fbe2ef37afb8b85fcf4f11",
+    "historical_manifest_sha256": "025a0a9255d910cae4b122ab5a3f3fb40888bb456d7fe42158db7c9e622fcf50",
+    "object_sha256": "1077ab157fc98baa43591af5ab30095bbaf387b86dff389851cf3eedb0b47fcd",
+    "profile": "msc600ax",
+    "flags": [
+      "/AL",
+      "/Os",
+      "/Oeg",
+      "/Gs",
+      "/Zi"
+    ],
+    "address": {
+      "off": 298,
+      "seg": 6534,
+      "size": 267,
+      "unit": "root"
+    }
+  },
+  "execution": {
+    "engine": "PreparedPair.compare",
+    "actual_original_execution": true,
+    "actual_candidate_execution": true,
+    "original_exe_sha256": "aa0596c6766322a8229ee3c36e57048c92adc82d50fbe2ef37afb8b85fcf4f11"
+  },
+  "cases": {
+    "directed": {
+      "generated": 5785,
+      "executed": 5785,
+      "actual_original_invocations": 5785,
+      "actual_candidate_invocations": 5785,
+      "seeds": []
+    },
+    "randomized": {
+      "generated": 10000,
+      "executed": 10000,
+      "actual_original_invocations": 10000,
+      "actual_candidate_invocations": 10000,
+      "seeds": [
+        735857
+      ]
+    }
+  },
+  "errors": 0,
+  "mismatches": 0,
+  "compared_effects": [
+    "return pointer/result",
+    "search cursor globals",
+    "observed database table state",
+    "all non-stack writes and final bytes",
+    "preserved caller registers and stack"
+  ],
+  "case_ledger": {
+    "path": "evidence/behavior/functions/FindIndex/cases.jsonl.gz",
+    "sha256": "688f42fc09667d4e99a30fa660d5fd3a2a79d7c23a11c63b6950270f5fb63a9a",
+    "row_count": 15785,
+    "lane_counts": {
+      "directed": 5785,
+      "randomized": 10000
+    },
+    "compression": "gzip",
+    "identity": {
+      "address": {
+        "off": 298,
+        "seg": 6534,
+        "size": 267,
+        "unit": "root"
+      },
+      "compiled_source_sha256": "1af5252fe8449eeca44b4099fe4a4bd1ff5ab24521c7a888253adfdd4554ac5a",
+      "flags": [
+        "/AL",
+        "/Os",
+        "/Oeg",
+        "/Gs",
+        "/Zi"
+      ],
+      "function": "FindIndex",
+      "harness_sha256": "ee7c997d2f89efa85ce932cd5ac7c674c465f1013a16a8c08e83d43c69f4be5b",
+      "linked_code_sha256": "b920ab6144d1a7da1656f6ea4e3a07909b511adbe6bea418f9796223b1a2435f",
+      "manifest_sha256": "025a0a9255d910cae4b122ab5a3f3fb40888bb456d7fe42158db7c9e622fcf50",
+      "object_sha256": "1077ab157fc98baa43591af5ab30095bbaf387b86dff389851cf3eedb0b47fcd",
+      "oracle_sha256": "aa0596c6766322a8229ee3c36e57048c92adc82d50fbe2ef37afb8b85fcf4f11",
+      "profile": "msc600ax",
+      "source": "work\\takeover\\hardtail\\seeds\\root_1986_1af5252fe844.c",
+      "source_sha256": "1af5252fe8449eeca44b4099fe4a4bd1ff5ab24521c7a888253adfdd4554ac5a",
+      "unicorn_version": "2.1.4"
+    }
+  },
+  "unmodeled_boundaries": 0,
+  "peer_data_gates": "PASS",
+  "positive_controls": [
+    {
+      "id": "empty/negative",
+      "executed": true,
+      "matched": true,
+      "execution_errors": 0,
+      "original_executed": true,
+      "candidate_executed": true,
+      "source_sha256": "1af5252fe8449eeca44b4099fe4a4bd1ff5ab24521c7a888253adfdd4554ac5a",
+      "object_sha256": "1077ab157fc98baa43591af5ab30095bbaf387b86dff389851cf3eedb0b47fcd",
+      "oracle_sha256": "aa0596c6766322a8229ee3c36e57048c92adc82d50fbe2ef37afb8b85fcf4f11",
+      "compared_effects": [
+        "return pointer/result",
+        "search cursor globals",
+        "observed database table state",
+        "all non-stack writes and final bytes",
+        "preserved caller registers and stack"
+      ],
+      "original_observation_sha256": "dc06c263027216b9b87d41adebf27718adf756f788d03f088db24bfa543de972",
+      "candidate_observation_sha256": "dc06c263027216b9b87d41adebf27718adf756f788d03f088db24bfa543de972"
+    }
+  ],
+  "helper_boundaries": [],
+  "raw_report": {
+    "path": "evidence/behavior/functions/FindIndex/raw-run.json",
+    "sha256": "f9cacc927a7d35a11017be3ea74be6dade25aa7db998c70d55925d74261fdc18"
+  }
+}

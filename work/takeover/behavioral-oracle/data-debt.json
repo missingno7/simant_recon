@@ -1,0 +1,440 @@
+{
+  "schema": "simant-behavior-data-debt-v1",
+  "oracle_sha256": "aa0596c6766322a8229ee3c36e57048c92adc82d50fbe2ef37afb8b85fcf4f11",
+  "section": {
+    "index": 27,
+    "load_segment": 15703,
+    "load_segment_hex": "3D57",
+    "data_file_offset": 370736,
+    "data_size": 135520,
+    "data_sha256": "e2204e36388b3049169c1e55227fcadf793dc6fe8a1f9150325dff22684cf69d"
+  },
+  "source_pins": [
+    {
+      "path": "assets/SIMANT.EXE",
+      "sha256": "aa0596c6766322a8229ee3c36e57048c92adc82d50fbe2ef37afb8b85fcf4f11"
+    },
+    {
+      "path": "docs/progress.json",
+      "sha256": "c6c412abaf7817ee2f19d33e3518a40a08222730bdb4caac37f5a487446e6b9a"
+    },
+    {
+      "path": "build/link/provenance.json",
+      "sha256": "1e61bead20694234d10d1bd35b2a23eac8c55c65e546c362f1c679a42ab3a664"
+    },
+    {
+      "path": "work/data/s27_map.json",
+      "sha256": "1567460fb893a26016e7b89feaed5454e505aeca0579635d0945be391e91fa40"
+    },
+    {
+      "path": "layout/manifest.json",
+      "sha256": "025a0a9255d910cae4b122ab5a3f3fb40888bb456d7fe42158db7c9e622fcf50"
+    },
+    {
+      "path": "layout/symbols.json",
+      "sha256": "0f5dd5b0a211945a97782cfccdb9bb31b0dfd07fcde5df4d4f9486b487eb0125"
+    },
+    {
+      "path": "src/S00/m31AD.asm",
+      "sha256": "5d2ad69ff4affb4be4242e82187065cc5e0b3502cc0cc3e00ad3802ccee2656e"
+    },
+    {
+      "path": "src/S01/m3126.asm",
+      "sha256": "ac99ea7821999d034e64201798d49dfaf64632f34e5f5dee428c9b6dec01a44a"
+    },
+    {
+      "path": "src/S01/m32B5.asm",
+      "sha256": "b8db05f10b37941e1a9cfa60f5dc87180e6075576703f29fc7b7557273b17394"
+    },
+    {
+      "path": "src/S03/m3253.asm",
+      "sha256": "5f67726c1477bfb28285078c835fef3b8e1b9a7e1ad19ce34e225b76366b8165"
+    },
+    {
+      "path": "src/root/m1B73.asm",
+      "sha256": "3097a6b03ff1d8bdfa7d573632d9905de88d754c8b1e047de4014c4f186cb848"
+    },
+    {
+      "path": "src/root/m1FBD.asm",
+      "sha256": "5e32f1c409a2fc20cb7bba200a3d2fd11e43edc0b7e2b8781ca91415a1a43417"
+    },
+    {
+      "path": "evidence/promotions.jsonl",
+      "sha256": "d14326c8ee4f24b92002c92ebc1e27c13929f9c0b41964311fd6530966b13dda"
+    },
+    {
+      "path": "src/root/m277E.c",
+      "sha256": "4e928689c743f473c5a007bbbbb5287cdf8728d12e9cae5652b1cb55debf09ee"
+    }
+  ],
+  "progress": {
+    "generated": "2026-10-02",
+    "unresolved_data_bytes": 113,
+    "accepted_data_bytes": 113900,
+    "link_fill_data_bytes": 78,
+    "far_bss_bytes": 19408
+  },
+  "reconciliation": {
+    "literal_debt_spans": 8,
+    "literal_debt_bytes": 110,
+    "section27_common_tail_overlap_bytes": 3,
+    "provenance_residual": 113,
+    "progress_residual": 113,
+    "progress_matches_provenance": true,
+    "reconciliation_note": "matches current progress",
+    "rule": "113 = 110 bytes in 8 remaining far/DGROUP debt ranges + 3 bytes of debt:common_tail overlapping S27 file extent; accepted LINK_FILL (78) and FAR_BSS zero fill (19,408) are already subtracted."
+  },
+  "literal_spans": [
+    {
+      "id": "far_data",
+      "size": 12,
+      "original_exe_file_range": [
+        451092,
+        451104
+      ],
+      "original_exe_file_range_hex": [
+        "0x6E214",
+        "0x6E220"
+      ],
+      "section": "S27",
+      "section_file_range": [
+        80356,
+        80368
+      ],
+      "section_linear_range": [
+        "0x50F54",
+        "0x50F60"
+      ],
+      "dgroup_frame": null,
+      "dgroup_offset": null,
+      "bytes_hex": "00 00 00 00 00 00 00 00 00 00 00 00",
+      "nonzero_bytes": 0,
+      "sha256": "15ec7bf0b50732b49f8228e07d24365338f9e3ab994b00af08e5a3bffe55fd8b",
+      "provenance_class": "debt:far_data",
+      "provenance_owner": "debt:far_data",
+      "relocations_inside": [],
+      "classification": "PARAGRAPH_ALIGNMENT_CANDIDATE",
+      "purpose": "12 zero bytes immediately before the FAR_BSS frame at 50F6; linear range ends on the next paragraph.",
+      "references": [
+        "build/link/provenance.json: debt:far_data at section-27 file range",
+        "work/data/s27_map.md: FAR_BSS 50F6 and paragraph-fill accounting"
+      ],
+      "ownership": "No game symbol or function reads/writes this gap in the current ownership evidence.",
+      "next_step": "Confirm the original linker record/SEGDEF alignment rule before reclassifying as generated fill."
+    },
+    {
+      "id": "dgroup_2100",
+      "size": 24,
+      "original_exe_file_range": [
+        478960,
+        478984
+      ],
+      "original_exe_file_range_hex": [
+        "0x74EF0",
+        "0x74F08"
+      ],
+      "section": "S27",
+      "section_file_range": [
+        108224,
+        108248
+      ],
+      "section_linear_range": [
+        "0x57C30",
+        "0x57C48"
+      ],
+      "dgroup_frame": "55B3",
+      "dgroup_offset": "0x2100",
+      "bytes_hex": "80 40 20 10 08 04 02 01 0f 0e 0c 04 0d 05 01 0b 02 0a 06 06 07 07 08 00",
+      "nonzero_bytes": 23,
+      "sha256": "70c6f7370bdfe2a389eec1c60eb0dbde6ee6bc8dcbc9eab919d6b44af4bd1e1d",
+      "provenance_class": "debt:dgroup_data",
+      "provenance_owner": "debt:dgroup_data",
+      "relocations_inside": [],
+      "classification": "MEANINGFUL_GRAPHICS_TABLES_OWNER_SPLIT_UNRESOLVED",
+      "purpose": "First 8 bytes are pixel bit masks; next 16 bytes are a byte lookup copied as eight words.",
+      "references": [
+        "layout/symbols.json:data.g_2100",
+        "layout/symbols.json:data.g_2108",
+        "src/S00/m31AD.asm:2884,3606-3608",
+        "src/S01/m3126.asm:1711",
+        "work/data/s27_map.md: 2100-2117 S00 object split ambiguity"
+      ],
+      "ownership": "Original source anchors establish both tables and consumers. Exact defining object split S00A/S00B is unresolved; do not assign the data to a convenient module without a relocation/order proof.",
+      "next_step": "Try natural symbolic table definitions in the historically correct S00 object split; retain S01 as an external reference and verify all existing claims/data order."
+    },
+    {
+      "id": "dgroup_56fe",
+      "size": 4,
+      "original_exe_file_range": [
+        492782,
+        492786
+      ],
+      "original_exe_file_range_hex": [
+        "0x784EE",
+        "0x784F2"
+      ],
+      "section": "S27",
+      "section_file_range": [
+        122046,
+        122050
+      ],
+      "section_linear_range": [
+        "0x5B22E",
+        "0x5B232"
+      ],
+      "dgroup_frame": "55B3",
+      "dgroup_offset": "0x56FE",
+      "bytes_hex": "00 00 00 00",
+      "nonzero_bytes": 0,
+      "sha256": "df3f619804a92fdb4057192dc43dd748ea778adc52bc498ce80524c014b81119",
+      "provenance_class": "debt:dgroup_data",
+      "provenance_owner": "debt:dgroup_data",
+      "relocations_inside": [],
+      "classification": "ZERO_DATA_OWNER_HINT_NO_FIELD_SEMANTICS",
+      "purpose": "Four zero bytes directly before the placed word g_5702.",
+      "references": [
+        "work/data/s27_map.json: DGROUP:56FE owner root:195A; adjacent 5702 is root:1E57/_DATA",
+        "layout/symbols.json:data.g_5702"
+      ],
+      "ownership": "The map associates this extent with root:195A, but no field-level symbol or typed source declaration establishes what the four bytes represent.",
+      "next_step": "Inspect root:195A operands and original allocation/object order; keep the four bytes explicit until a field/owner is established."
+    },
+    {
+      "id": "dgroup_5a28",
+      "size": 2,
+      "original_exe_file_range": [
+        493592,
+        493594
+      ],
+      "original_exe_file_range_hex": [
+        "0x78818",
+        "0x7881A"
+      ],
+      "section": "S27",
+      "section_file_range": [
+        122856,
+        122858
+      ],
+      "section_linear_range": [
+        "0x5B558",
+        "0x5B55A"
+      ],
+      "dgroup_frame": "55B3",
+      "dgroup_offset": "0x5A28",
+      "bytes_hex": "00 00",
+      "nonzero_bytes": 0,
+      "sha256": "96a296d224f285c67bee93c30f8a309157f0daa35dc5b87e410b78630a09cfc7",
+      "provenance_class": "debt:dgroup_data",
+      "provenance_owner": "debt:dgroup_data",
+      "relocations_inside": [],
+      "classification": "PARTLY_ANCHORED_STATE_RECORD_LEADING_WORD_UNKNOWN",
+      "purpose": "First two bytes of the 10-byte root:1F58 range; the next eight bytes are named keyboard/interrupt state.",
+      "references": [
+        "work/data/s27_map.json: DGROUP:5A28 owner root:1F58, extent 10 bytes",
+        "layout/symbols.json:data.g_5A2A,g_5A2C,g_5A2E,g_5A30"
+      ],
+      "ownership": "Known fields at 5A2A/5A2C are pending key words; 5A2E/5A30 save the INT 23h vector. The two leading zeros have no identified read/write or name.",
+      "next_step": "Review root:1F58 initialization/use of its 10-byte state block to identify the leading word; otherwise leave it unowned."
+    },
+    {
+      "id": "dgroup_5a96",
+      "size": 26,
+      "original_exe_file_range": [
+        493702,
+        493728
+      ],
+      "original_exe_file_range_hex": [
+        "0x78886",
+        "0x788A0"
+      ],
+      "section": "S27",
+      "section_file_range": [
+        122966,
+        122992
+      ],
+      "section_linear_range": [
+        "0x5B5C6",
+        "0x5B5E0"
+      ],
+      "dgroup_frame": "55B3",
+      "dgroup_offset": "0x5A96",
+      "bytes_hex": "00 ff ff 01 00 00 00 00 00 00 5d 01 7f 02 00 80 00 80 00 80 00 80 00 00 00 00",
+      "nonzero_bytes": 11,
+      "sha256": "5c2d9330239c1485e73c9e6f5d1d137a2a901ce086aec624e8f3eb3cf5ec1929",
+      "provenance_class": "debt:dgroup_data",
+      "provenance_owner": "debt:dgroup_data",
+      "relocations_inside": [],
+      "classification": "PARTLY_TYPED_MULTI_MODULE_UI_STATE_BLOCK",
+      "purpose": "First 26 bytes of a 1,360-byte unplaced UI/data region shared by multiple root modules.",
+      "references": [
+        "work/data/s27_map.json: DGROUP:5A96 owner root:1FBD,21FA,1D8E,1E57,1B73,1CE2",
+        "layout/symbols.json:data.g_5A97,g_5A9C,g_5AAC,g_5AAE",
+        "src/root/m1B73.asm:352-359,387-388",
+        "src/root/m1FBD.asm:13-17,38,86,123"
+      ],
+      "ownership": "Known byte g_5A97 selects a display path; 5A9C is passed as a far pointer; 5AAC/5AAE are saved cursor far-pointer words. The remaining leading bytes do not yet have complete field meanings. Source m1FBD provides typed text-bitmap fields starting at 5ABA, outside this 26-byte span, illustrating that the larger region is not one opaque blob.",
+      "next_step": "Partition the entire 5A96-5FE5 area by source-level symbols, initialization, and module data-order evidence; do not assign all 1,360 bytes to one consumer."
+    },
+    {
+      "id": "dgroup_60b0",
+      "size": 18,
+      "original_exe_file_range": [
+        495264,
+        495282
+      ],
+      "original_exe_file_range_hex": [
+        "0x78EA0",
+        "0x78EB2"
+      ],
+      "section": "S27",
+      "section_file_range": [
+        124528,
+        124546
+      ],
+      "section_linear_range": [
+        "0x5BBE0",
+        "0x5BBF2"
+      ],
+      "dgroup_frame": "55B3",
+      "dgroup_offset": "0x60B0",
+      "bytes_hex": "00 00 00 00 7f 02 10 00 0f 03 73 1b 00 00 00 00 01 06",
+      "nonzero_bytes": 9,
+      "sha256": "f04c78a82fe6b6554e3a0b90d515eb576029c2f20a60836d1f10f0a2b52f69e5",
+      "provenance_class": "debt:dgroup_data",
+      "provenance_owner": "debt:dgroup_data",
+      "relocations_inside": [
+        {
+          "site": "55B7:607A",
+          "linear": "5BBEA",
+          "relative_offset": 10
+        }
+      ],
+      "classification": "UNREFERENCED_UI_RECORD_WITH_FAR_RELOCATION",
+      "purpose": "18-byte record, nine nonzero bytes, with one relocation at DGROUP:60BA (byte +10).",
+      "references": [
+        "work/data/s27_map.json: DGROUP:60B0 owner unreferenced, 18 bytes, one relocation",
+        "layout/manifest.json: following placement S20:39F1/_DATA begins at 60C2"
+      ],
+      "ownership": "A relocated word proves a far-pointer-like field at +10, but no accepted source reference identifies its record type or intended owner. The pointer bytes alone do not establish semantics.",
+      "next_step": "Resolve the relocated target and search original accesses to 60B0..60C1; keep all bytes explicit until an owning declaration is supported."
+    },
+    {
+      "id": "dgroup_68ac",
+      "size": 10,
+      "original_exe_file_range": [
+        497308,
+        497318
+      ],
+      "original_exe_file_range_hex": [
+        "0x7969C",
+        "0x796A6"
+      ],
+      "section": "S27",
+      "section_file_range": [
+        126572,
+        126582
+      ],
+      "section_linear_range": [
+        "0x5C3DC",
+        "0x5C3E6"
+      ],
+      "dgroup_frame": "55B3",
+      "dgroup_offset": "0x68AC",
+      "bytes_hex": "ff 80 c0 e0 f0 f8 fc fe ff f0",
+      "nonzero_bytes": 10,
+      "sha256": "5c6cbc686a260e59272b8333d13c1f84bc473886d6793952378ce6667dfd4565",
+      "provenance_class": "debt:dgroup_data",
+      "provenance_owner": "debt:dgroup_data",
+      "relocations_inside": [],
+      "classification": "MEANINGFUL_EDGE_MASK_TABLE_OWNER_UNRESOLVED",
+      "purpose": "Ten nonzero edge/bit masks immediately before the nine-entry far dispatch table at 68B6.",
+      "references": [
+        "src/S01/m32B5.asm:120 (SS:[BX+68AC])",
+        "src/root/m277E.c:32,73 (g_68B6 dispatch table)",
+        "work/data/s27_map.json: DGROUP:68AC unplaced, 10 bytes"
+      ],
+      "ownership": "The direct original operand establishes indexed consumption of the mask bytes. The following placed g_68B6 table starts at 68B6; a relocation at 68B8 belongs to that next table, not the ten-byte gap.",
+      "next_step": "Identify the defining source module/object for the SS-indexed mask lookup and verify its data contribution/order."
+    },
+    {
+      "id": "dgroup_79f0",
+      "size": 14,
+      "original_exe_file_range": [
+        501728,
+        501742
+      ],
+      "original_exe_file_range_hex": [
+        "0x7A7E0",
+        "0x7A7EE"
+      ],
+      "section": "S27",
+      "section_file_range": [
+        130992,
+        131006
+      ],
+      "section_linear_range": [
+        "0x5D520",
+        "0x5D52E"
+      ],
+      "dgroup_frame": "55B3",
+      "dgroup_offset": "0x79F0",
+      "bytes_hex": "00 00 00 00 00 00 00 00 00 00 00 00 03 00",
+      "nonzero_bytes": 1,
+      "sha256": "92780880ee22e61258cd8e4375f94c75f10d3c410c86152967022bd14f8f5f0b",
+      "provenance_class": "debt:dgroup_data",
+      "provenance_owner": "debt:dgroup_data",
+      "relocations_inside": [],
+      "classification": "ZERO_DATA_RUNTIME_ADJACENCY_UNRESOLVED",
+      "purpose": "Twelve zero bytes followed by 03 00, before the runtime ctype table at DGROUP:7A1E. This matches the candidate __fheap declaration in llibcr.lib fdata.asm, but library membership and source ownership are not proven.",
+      "references": [
+        "layout/symbols.json:data._ctype at 55B3:7A1E",
+        "work/data/s27_map.md: runtime DGROUP data begins at 7700"
+      ],
+      "ownership": "The bytes lie in the runtime-DGROUP address interval adjacent to _ctype; no source/header field has been identified for 79F0-79FD. Zero values do not prove padding or harmlessness.",
+      "next_step": "Compare runtime member SEGDEF/COMMON placement and original data refs around 79F0; separate runtime ownership from game data only with member evidence."
+    }
+  ],
+  "closed_data_spans": [
+    {
+      "id": "dgroup_2328",
+      "status": "EXACT_DATA_OWNED",
+      "size": 16,
+      "dgroup_frame": "55B3",
+      "dgroup_offset": "0x2328",
+      "bytes_hex": "0f 0e 0c 04 0d 05 01 0b 0a 02 06 06 0f 07 08 00",
+      "classification": "MEANINGFUL_LOW_NIBBLE_LOOKUP_EXACTLY_OWNED",
+      "purpose": "16-byte low-nibble colour lookup paired with the 16-byte high-nibble table at DGROUP:2318.",
+      "references": [
+        "src/S03/m3253.asm:53,61-63",
+        "layout/symbols.json:data.g_2318",
+        "build/workers/behavior_data/m3253.asm",
+        "work/data/s27_map.md: S03:3253 private DATA"
+      ],
+      "ownership": "o03_3253_002F starts from 2318, advances BX by 10h for the second XLAT, then restores it. The symbolic 16-byte contribution was promoted through the strict gate; the resulting module retains both existing ASM claims, 48 private DATA bytes, and TU-order checks.",
+      "next_step": "Closed by the exact S03:3253 data contribution. Preserve its separate historical exact proof; this audit does not reclassify any remaining span.",
+      "evidence": [
+        "evidence/promotions.jsonl: S03:3253 record dated 2026-10-02",
+        "layout/manifest.json: current placement at DGROUP:2328",
+        "src/S03/m3253.asm: original second-XLAT reference"
+      ]
+    }
+  ],
+  "common_tail_overlap": [
+    {
+      "file_range": [
+        506253,
+        506256
+      ],
+      "bytes_hex": "72 24 e7",
+      "class": "debt:common_tail",
+      "owner": "debt:common_tail",
+      "size": 3
+    }
+  ],
+  "notes": [
+    "The current executable's far paragraph bytes are linear 50F54-50F5F (12 zero bytes), inside S27 data file at 6E214-6E21F; do not confuse the linear address with physical file offset.",
+    "The 2328-2337 bytes are meaningful table data: o03_3253_002F reads the high-nibble table at 2318, adds 10h to BX for the second XLAT, and restores BX. This 16-byte low-nibble table is now exactly owned by S03:3253 after strict promotion.",
+    "Three common-tail overlap bytes are reported separately from game data. Their current provenance class is debt:common_tail; no semantic claim or harmless-padding claim is made.",
+    "No unresolved zero bytes are classified as harmless solely because they are zero."
+  ]
+}

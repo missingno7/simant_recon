@@ -1,0 +1,20 @@
+{
+ "function": "f_29D6_000A",
+ "base_source": "work/takeover/hardtail/probes/m29D6.c",
+ "dimension": "NATIVE_SHIFT_GRAPH",
+ "hypothesis": "Fresh gate recheck of bounded worker frontend lowering controls; no claim follows unless every byte and gate passes.",
+ "variants": [
+  {
+   "parameters": {
+    "form": "shlassign"
+   },
+   "source": "work/takeover/hardtail/probes/tandy-shlassign-canonical.c"
+  },
+  {
+   "parameters": {
+    "form": "multiply"
+   },
+   "source": "work/takeover/hardtail/probes/tandy-mul-canonical.c"
+  }
+ ]
+}

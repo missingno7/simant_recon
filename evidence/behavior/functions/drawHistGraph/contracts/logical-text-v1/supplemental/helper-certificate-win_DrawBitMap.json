@@ -1,0 +1,131 @@
+{
+  "boundary": "explicit callback implementation in tools/behavior_suites/text_card.py",
+  "callback_role": "HOST_FUNCTION_POINTER_SERVICE",
+  "caller_effect_analysis": {
+    "caller_consumed_values": "logical bitmap/line request arguments are recorded; candidate body remains explicitly scaffolded, return-value use is discarded at these call sites, and bitmap decoding/raster pixels are not modeled",
+    "dynamic_caller_abi": {
+      "abi_distinction": "The hook address aliases a canonical DOS symbol, but this call uses the target's indirect host-service prototype and stack arguments. Do not interpret these observations as canonical helper entry ABI coverage.",
+      "callback_stack_words": 5,
+      "callsite": {
+        "argument_protocol": "5 words on caller stack",
+        "line": 272,
+        "path": "build/workers/behavior_text_card/S24.c",
+        "sha256": "764bcd8f1272b6f9655a1fe305cea71d98e95b9ad9c285f69dc944fbfe21d34c"
+      },
+      "canonical_symbol_argument_abi": "AX/DX/BX fastcall entry; distinct from this 5-word indirect callback",
+      "canonical_symbol_source": "int _fastcall win_DrawBitMap(int x, int y, int id)",
+      "declaration": {
+        "line": 192,
+        "path": "build/workers/behavior_text_card/S24.c",
+        "sha256": "764bcd8f1272b6f9655a1fe305cea71d98e95b9ad9c285f69dc944fbfe21d34c",
+        "signature": "void far (*g_916C)(int x0, int y0, int x1, int y1, int color)"
+      },
+      "pointer_global": "g_916C",
+      "resolved_address_symbol": "win_DrawBitMap",
+      "resolved_symbol_address": {
+        "offset": 14,
+        "segment": 9629,
+        "unit": "root"
+      },
+      "role": "HOST_FUNCTION_POINTER_SERVICE"
+    },
+    "external_state_not_claimed": [
+      "framebuffer pixels or bitmap decoding",
+      "clip intersections and pixel visibility",
+      "palette/driver color application",
+      "database cache, heap lock counters, and allocator lifetime"
+    ],
+    "no_omitted_effect_claim": "This proposal does not claim equivalence for listed external/backend effects; only the stated logical requests, projected text/rectangles, fixture return values, resource-byte consumption, and recorded ordering are in scope.",
+    "scope": "logical request and deterministic fixture boundary only",
+    "target_module_source": {
+      "path": "evidence/behavior/harnesses/behavior-text-card-review-20261002/runs/drawHistGraph/module.c",
+      "sha256": "764bcd8f1272b6f9655a1fe305cea71d98e95b9ad9c285f69dc944fbfe21d34c"
+    }
+  },
+  "canonical_symbol_abi_covered": false,
+  "compared_effects": [
+    "ordered line segments",
+    "label text and border geometry",
+    "history selection/scaling",
+    "all raw nonstack bytes plus approved private formatter views",
+    "return value and caller ABI"
+  ],
+  "dos_definition": {
+    "extent_bytes": 663,
+    "extent_status": "DESCENT",
+    "offset": 14,
+    "segment": 9629,
+    "unit": "root"
+  },
+  "dynamic_caller_abi": {
+    "abi_distinction": "The hook address aliases a canonical DOS symbol, but this call uses the target's indirect host-service prototype and stack arguments. Do not interpret these observations as canonical helper entry ABI coverage.",
+    "callback_stack_words": 5,
+    "callsite": {
+      "argument_protocol": "5 words on caller stack",
+      "line": 272,
+      "path": "build/workers/behavior_text_card/S24.c",
+      "sha256": "764bcd8f1272b6f9655a1fe305cea71d98e95b9ad9c285f69dc944fbfe21d34c"
+    },
+    "canonical_symbol_argument_abi": "AX/DX/BX fastcall entry; distinct from this 5-word indirect callback",
+    "canonical_symbol_source": "int _fastcall win_DrawBitMap(int x, int y, int id)",
+    "declaration": {
+      "line": 192,
+      "path": "build/workers/behavior_text_card/S24.c",
+      "sha256": "764bcd8f1272b6f9655a1fe305cea71d98e95b9ad9c285f69dc944fbfe21d34c",
+      "signature": "void far (*g_916C)(int x0, int y0, int x1, int y1, int color)"
+    },
+    "pointer_global": "g_916C",
+    "resolved_address_symbol": "win_DrawBitMap",
+    "resolved_symbol_address": {
+      "offset": 14,
+      "segment": 9629,
+      "unit": "root"
+    },
+    "role": "HOST_FUNCTION_POINTER_SERVICE"
+  },
+  "evidence": {
+    "negative_case_id": "negative/label-value-plus-one",
+    "negative_mismatch_categories": [
+      "state",
+      "trace"
+    ],
+    "positive_case_id": "grid/0/1/8/8",
+    "positive_observation_sha256": "e2bf3a4f98027d9ec23dc523cfe87af885534083f4701915e20b62c616012b7f"
+  },
+  "execution_mode": "MODELED",
+  "helper": "win_DrawBitMap",
+  "input_domain": [
+    "graphs 0..3; both highlight paths; sample counts 0..64 and ring-buffer starts 0..63; valid 64-sample zero, maximum, ramp, and seeded 0..120 arrays; positive rectangles up to 640x480"
+  ],
+  "limitations": [
+    "logical bitmap/line request arguments are recorded; candidate body remains explicitly scaffolded, return-value use is discarded at these call sites, and bitmap decoding/raster pixels are not modeled",
+    "Proposal only; callback semantics require independent root review."
+  ],
+  "negative_control_id": "negative/x-coordinate-plus-one",
+  "positive_control_id": "drawHistGraph:positive:grid/0/1/8/8",
+  "proposal_status": "PENDING_ROOT_REVIEW",
+  "review": {
+    "reviewed_at": null,
+    "reviewer": null,
+    "status": "PENDING"
+  },
+  "schema": "behavior-helper-cert-v1",
+  "source_definition": {
+    "definition_line": 49,
+    "definition_name": "win_DrawBitMap",
+    "other_reference_lines": [
+      44,
+      115,
+      125
+    ],
+    "path": "src/root/m259D.c",
+    "sha256": "c4329ddb75629a235043d9da1eb11c7dd6f2cb3826fe392bfc8a27c98eeb97e1"
+  },
+  "source_hashes": {
+    "evidence/behavior/harnesses/behavior-text-card-review-20261002/runs/drawHistGraph/module.c": "764bcd8f1272b6f9655a1fe305cea71d98e95b9ad9c285f69dc944fbfe21d34c",
+    "evidence/behavior/harnesses/live-state-v1/tools/behavior.py": "6fa847912d8d0bef1c8ee87ab69843f8380e3e3f4e88201af2505f754003182d",
+    "src/root/m259D.c": "c4329ddb75629a235043d9da1eb11c7dd6f2cb3826fe392bfc8a27c98eeb97e1",
+    "tools/behavior_suites/archive/text-card-20261002-drawHistGraph.py": "e818f63eaa89e2ef1490634c5b234cd9df421c0a9c07a4dfba9862e504a6a217"
+  },
+  "status": "PROPOSED_PENDING_REVIEW"
+}

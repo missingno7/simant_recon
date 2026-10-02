@@ -2,11 +2,15 @@
 ; Overlay section S03, code frame 3253, linear 32538-3258C.
 
 _DATA	segment word public 'DATA'
-; S03B private data (DGROUP:2308-2327): the two 16-byte xlat tables of o03_3253_0008/002F.
+; S03B mini-map xlat tables: byte colours, high nibbles, low nibbles.
 _g_2308	db	0FFh, 0EEh, 0CCh, 044h, 0DDh, 055h, 011h, 0BBh, 0AAh, 022h, 066h, 066h
 	db	0FFh, 077h, 088h, 0
 _g_2318	db	0F0h, 0E0h, 0C0h, 040h, 0D0h, 050h, 010h, 0B0h, 0A0h, 020h, 060h, 060h
 	db	0F0h, 070h, 080h, 0
+; o03_3253_002F adds 10h to BX after translating the first pixel.
+; Its second xlat therefore uses the following low-nibble colour table.
+_g_2328	db	0Fh, 0Eh, 0Ch, 04h, 0Dh, 05h, 01h, 0Bh
+	db	0Ah, 02h, 06h, 06h, 0Fh, 07h, 08h, 0
 _DATA	ends
 DGROUP	group	_DATA
 

@@ -1,0 +1,964 @@
+{
+  "function": "o15_384C_0239",
+  "source": "tools/behavior_suites/archive/dialog-window-aef69d1f-final/candidate-source.c",
+  "suite": "tools/behavior_suites/archive/dialog-real-window-poison-aef69d1f.py",
+  "suite_id": "dialog-actual-2100-window-v1",
+  "module": "S15:384C",
+  "status": "APPROVED",
+  "date": "2026-10-02",
+  "checkpoint": {
+    "date": "2026-10-02",
+    "commit": null
+  },
+  "contract": {
+    "id": "dialog-actual-2100-window-v1",
+    "input_domain": {
+      "which": [
+        0,
+        1
+      ],
+      "width": [
+        320,
+        640
+      ],
+      "display_flags": [
+        0,
+        1,
+        2,
+        3
+      ],
+      "key_endings": [
+        13,
+        27,
+        67,
+        68,
+        83,
+        99,
+        100,
+        115
+      ],
+      "event_endings": [
+        8451,
+        8452,
+        8453
+      ],
+      "resource": "arbitrary nonzero NUL-terminated bytes for a valid text resource"
+    },
+    "limits": [
+      "Finite recorded valid resource and terminating input domain, not a universal proof.",
+      "Logical rendering/event/clip/focus service contract; pixels, private timer queues, future callbacks and device ISR internals are excluded.",
+      "Original win_Open reads four unavailable variadic words, but no object uses geometry mode5 in the pinned real asset. Poison controls vary them; raw state and results agree. Synthetic mode5 sensitivity remains diagnostic."
+    ],
+    "required_effects": [
+      "return",
+      "ordered GUI/window/font/resource/input commands",
+      "rectangle/text/font contents",
+      "resource lock/unlock/release and age",
+      "input arbitration and consumption",
+      "logical window state",
+      "all nonstack writes",
+      "caller ABI"
+    ],
+    "excluded_effects": [
+      {
+        "effect": "win_DrawWindow",
+        "reason": "inner object rendering and draw-state mutations are not executed"
+      },
+      {
+        "effect": "f_2505_0831 / f_2505_08EA",
+        "reason": "focus/dirty and cursor transitions are trace-only"
+      },
+      {
+        "effect": "clip_SetWin / clip_Off / f_1E57_038E",
+        "reason": "actual clipping-list state is not seeded/executed"
+      },
+      {
+        "effect": "f_21FA_0B4B",
+        "reason": "only invalidation rectangle is captured; exposed-window redraw is omitted"
+      },
+      {
+        "effect": "resource, text, keyboard, event services",
+        "reason": "host providers are modeled over valid supplied resources and queues"
+      },
+      {
+        "effect": "Focus timer g6004/scheduler/future callback state",
+        "reason": "Complete focus request/window ID is compared. Source focus timers are reachable on actual button objects3-5 (bit2); bit16 dirty timers absent. g6004/scheduler/future callbacks are excluded, never called absent. Target does not read them under the controlled event stream."
+      }
+    ],
+    "required_helpers": [
+      {
+        "name": "clip_KillWin",
+        "must_execute": true
+      },
+      {
+        "name": "clip_Off",
+        "must_execute": true,
+        "certification": {
+          "path": "evidence/behavior/helpers/dialog-contracts-v1/clip_Off.json",
+          "sha256": "851ee8aea4c09dfa01404df04ceed6bcebda7e4c581e997acb9ca58e3de4e372"
+        }
+      },
+      {
+        "name": "clip_SetWin",
+        "must_execute": true,
+        "certification": {
+          "path": "evidence/behavior/helpers/dialog-contracts-v1/clip_SetWin.json",
+          "sha256": "9fb0eb0d0b6fd230c6a6d1cc3839249496e091422c39192a0b6ee978763f1c55"
+        }
+      },
+      {
+        "name": "db_ReleaseHandle",
+        "must_execute": true
+      },
+      {
+        "name": "f_171C_1B84",
+        "must_execute": true
+      },
+      {
+        "name": "f_171C_1BBA",
+        "must_execute": true
+      },
+      {
+        "name": "f_1A53_00F0",
+        "must_execute": true,
+        "certification": {
+          "path": "evidence/behavior/helpers/dialog-contracts-v1/f_1A53_00F0.json",
+          "sha256": "67236d09d3a807692575c5475dbe3d7944f15e11dfa20d1296665e4e28bd8eb9"
+        }
+      },
+      {
+        "name": "f_1B4E_000C",
+        "must_execute": true
+      },
+      {
+        "name": "f_1CE2_044D",
+        "must_execute": true,
+        "certification": {
+          "path": "evidence/behavior/helpers/dialog-contracts-v1/f_1CE2_044D.json",
+          "sha256": "ec5bfd2b7f956e9a996cbe48138adbb8c5a34876d9240c0cbf6b20d37c68d0ef"
+        }
+      },
+      {
+        "name": "f_1E57_038E",
+        "must_execute": true,
+        "certification": {
+          "path": "evidence/behavior/helpers/dialog-contracts-v1/f_1E57_038E.json",
+          "sha256": "e7b3c598a96a25772419088a7e86f4b2678e23e1f85fd8ce29c4486c47315d2b"
+        }
+      },
+      {
+        "name": "f_1F58_0038",
+        "must_execute": true,
+        "certification": {
+          "path": "evidence/behavior/helpers/dialog-contracts-v1/f_1F58_0038.json",
+          "sha256": "f81f84cdf44a5fc12de6be8643fd2dea6eb2b4429b5c76f44bba03f5cd592484"
+        }
+      },
+      {
+        "name": "f_1F58_0090",
+        "must_execute": true,
+        "certification": {
+          "path": "evidence/behavior/helpers/dialog-contracts-v1/f_1F58_0090.json",
+          "sha256": "5197ee3d661d2d8e349603ad38edf76d8aad66c536c6b78dad08df3c31f67762"
+        }
+      },
+      {
+        "name": "f_21FA_0B4B",
+        "must_execute": true,
+        "certification": {
+          "path": "evidence/behavior/helpers/dialog-contracts-v1/f_21FA_0B4B.json",
+          "sha256": "0ae81ae6db7650520c39d6e5b26196d3f1e3186c0fd67d69c8766d348d50d3ae"
+        }
+      },
+      {
+        "name": "f_24AB_02AD",
+        "must_execute": true
+      },
+      {
+        "name": "f_2505_0831",
+        "must_execute": true,
+        "certification": {
+          "path": "evidence/behavior/helpers/dialog-contracts-v1/f_2505_0831.json",
+          "sha256": "3be4a281ee5b7ca1d2c4def52a409cc9975c67cc0b89018070f2b4511eee121e"
+        }
+      },
+      {
+        "name": "f_2505_08EA",
+        "must_execute": true,
+        "certification": {
+          "path": "evidence/behavior/helpers/dialog-contracts-v1/f_2505_08EA.json",
+          "sha256": "25235fb72fefca90925834f31b8a11541282ce348e5cadab31bae60a519f054c"
+        }
+      },
+      {
+        "name": "win_Close",
+        "must_execute": true
+      },
+      {
+        "name": "win_DrawWindow",
+        "must_execute": true,
+        "certification": {
+          "path": "evidence/behavior/helpers/dialog-contracts-v1/win_DrawWindow.json",
+          "sha256": "28b02d65516c66e1bfbd3a87403e038ebac9208a69949f22f7dc1106c43449ee"
+        }
+      },
+      {
+        "name": "win_FlushEvents",
+        "must_execute": true,
+        "certification": {
+          "path": "evidence/behavior/helpers/dialog-contracts-v1/win_FlushEvents.json",
+          "sha256": "b49d01901c88f0f9d6e2dfa91c987d70e954cb2b78e5f9325dd7cdd8195331e1"
+        }
+      },
+      {
+        "name": "win_GetEvent",
+        "must_execute": true,
+        "certification": {
+          "path": "evidence/behavior/helpers/dialog-contracts-v1/win_GetEvent.json",
+          "sha256": "2f2dd106855905d5228d64f560c7c953b35371a2d5c5679c1cbbf4f0a047e9cc"
+        }
+      },
+      {
+        "name": "win_GetObjRect",
+        "must_execute": true
+      },
+      {
+        "name": "win_Open",
+        "must_execute": true
+      },
+      {
+        "name": "win_PrintTextInRect",
+        "must_execute": true,
+        "certification": {
+          "path": "evidence/behavior/helpers/dialog-contracts-v1/win_PrintTextInRect.json",
+          "sha256": "5756f05244d77eabedfdecaf4b6914cefe3e1ed5b7cad3c72004657d86e3c099"
+        }
+      },
+      {
+        "name": "win_SetColorFromObjNum",
+        "must_execute": true,
+        "certification": {
+          "path": "evidence/behavior/helpers/dialog-contracts-v1/win_SetColorFromObjNum.json",
+          "sha256": "e0e244ec7b8416bc2b52cac71d8070a72e5dae948679a9c8f8edc96e87534074"
+        }
+      }
+    ],
+    "review": {
+      "status": "APPROVED",
+      "reviewer": "root",
+      "reviewed_at": "2026-10-02",
+      "reason": "Read target/callers, reached helper definitions, real asset geometry/types and ABI. Original/candidate execution and immutable ledger prove the finite dialog control-flow, return, resource lifetime and complete logical request contract; private raster, clipping, input device and timer machinery are explicit service boundaries."
+    }
+  },
+  "positive_controls": [
+    {
+      "id": "0/320/0/[13]/[]",
+      "executed": true,
+      "matched": true,
+      "execution_errors": 0,
+      "original_executed": true,
+      "candidate_executed": true,
+      "compared_effects": [
+        "return",
+        "ordered GUI/window/font/resource/input commands",
+        "rectangle/text/font contents",
+        "resource lock/unlock/release and age",
+        "input arbitration and consumption",
+        "logical window state",
+        "all nonstack writes",
+        "caller ABI"
+      ],
+      "source_sha256": "01b51eecedcd28e2213819572c846a9754039f4a527e6da5e56e57783398bdd5",
+      "object_sha256": "bf28a33144db9e5fa67228d8c64d0681b5d4626e3f901069b9870849ba1e4868",
+      "oracle_sha256": "aa0596c6766322a8229ee3c36e57048c92adc82d50fbe2ef37afb8b85fcf4f11",
+      "original_observation_sha256": "0267c6a123dde2170836b8ea7f3d0ee613a6b63be07081ec01fe77ea0e190d3d",
+      "candidate_observation_sha256": "0267c6a123dde2170836b8ea7f3d0ee613a6b63be07081ec01fe77ea0e190d3d",
+      "case_id": "0/320/0/[13]/[]",
+      "equal": true,
+      "function": "o15_384C_0239",
+      "input_sha256": "42cae42876541f5769ac3f5c09e31abad6f57a002dda5c2850318fed1a03d688",
+      "lane": "directed"
+    },
+    {
+      "id": "0/320/0/[]/[8451]",
+      "executed": true,
+      "matched": true,
+      "execution_errors": 0,
+      "original_executed": true,
+      "candidate_executed": true,
+      "compared_effects": [
+        "return",
+        "ordered GUI/window/font/resource/input commands",
+        "rectangle/text/font contents",
+        "resource lock/unlock/release and age",
+        "input arbitration and consumption",
+        "logical window state",
+        "all nonstack writes",
+        "caller ABI"
+      ],
+      "source_sha256": "01b51eecedcd28e2213819572c846a9754039f4a527e6da5e56e57783398bdd5",
+      "object_sha256": "bf28a33144db9e5fa67228d8c64d0681b5d4626e3f901069b9870849ba1e4868",
+      "oracle_sha256": "aa0596c6766322a8229ee3c36e57048c92adc82d50fbe2ef37afb8b85fcf4f11",
+      "original_observation_sha256": "961b99a0015c31d0151a0fcb46f744ce41f342acf6c9a19494bcd1f6c58a5697",
+      "candidate_observation_sha256": "961b99a0015c31d0151a0fcb46f744ce41f342acf6c9a19494bcd1f6c58a5697",
+      "case_id": "0/320/0/[]/[8451]",
+      "equal": true,
+      "function": "o15_384C_0239",
+      "input_sha256": "7846b650619b70673c76fe3c26de5ae08dbaba09ef86757199bfd15a615e4b9e",
+      "lane": "directed"
+    },
+    {
+      "id": "0/320/1/[13]/[]",
+      "executed": true,
+      "matched": true,
+      "execution_errors": 0,
+      "original_executed": true,
+      "candidate_executed": true,
+      "compared_effects": [
+        "return",
+        "ordered GUI/window/font/resource/input commands",
+        "rectangle/text/font contents",
+        "resource lock/unlock/release and age",
+        "input arbitration and consumption",
+        "logical window state",
+        "all nonstack writes",
+        "caller ABI"
+      ],
+      "source_sha256": "01b51eecedcd28e2213819572c846a9754039f4a527e6da5e56e57783398bdd5",
+      "object_sha256": "bf28a33144db9e5fa67228d8c64d0681b5d4626e3f901069b9870849ba1e4868",
+      "oracle_sha256": "aa0596c6766322a8229ee3c36e57048c92adc82d50fbe2ef37afb8b85fcf4f11",
+      "original_observation_sha256": "fa409461ec6772c8fdc289647124ea3fd13b496c58f01fdec570411652f4a85f",
+      "candidate_observation_sha256": "fa409461ec6772c8fdc289647124ea3fd13b496c58f01fdec570411652f4a85f",
+      "case_id": "0/320/1/[13]/[]",
+      "equal": true,
+      "function": "o15_384C_0239",
+      "input_sha256": "c4e6afeb386a967a9dad95fc4a4624ae9f5d86fac27e0d260169c3b8dd949dec",
+      "lane": "directed"
+    }
+  ],
+  "helper_boundaries": [
+    {
+      "name": "clip_KillWin",
+      "execution_mode": "ORIGINAL_EXE",
+      "executed_from_original": true,
+      "observed_call_count": 1242,
+      "observed_case_count": 1242,
+      "positive_case_ids": [
+        "0/320/0/[13]/[]",
+        "0/320/0/[27]/[]",
+        "0/320/0/[67]/[]",
+        "0/320/0/[68]/[]",
+        "0/320/0/[83]/[]"
+      ],
+      "callback_abi": {
+        "stack_words": 1,
+        "register_args": [],
+        "callee_pop_bytes": 0,
+        "handler": null,
+        "projection": null
+      }
+    },
+    {
+      "name": "clip_Off",
+      "execution_mode": "MODELED",
+      "executed_from_original": false,
+      "observed_call_count": 2484,
+      "observed_case_count": 1242,
+      "positive_case_ids": [
+        "0/320/0/[13]/[]",
+        "0/320/0/[27]/[]",
+        "0/320/0/[67]/[]",
+        "0/320/0/[68]/[]",
+        "0/320/0/[83]/[]"
+      ],
+      "callback_abi": {
+        "stack_words": 0,
+        "register_args": [],
+        "callee_pop_bytes": 0,
+        "handler": "<lambda>",
+        "projection": null
+      },
+      "certification": {
+        "path": "evidence/behavior/helpers/dialog-contracts-v1/clip_Off.json",
+        "sha256": "851ee8aea4c09dfa01404df04ceed6bcebda7e4c581e997acb9ca58e3de4e372"
+      }
+    },
+    {
+      "name": "clip_SetWin",
+      "execution_mode": "MODELED",
+      "executed_from_original": false,
+      "observed_call_count": 1242,
+      "observed_case_count": 1242,
+      "positive_case_ids": [
+        "0/320/0/[13]/[]",
+        "0/320/0/[27]/[]",
+        "0/320/0/[67]/[]",
+        "0/320/0/[68]/[]",
+        "0/320/0/[83]/[]"
+      ],
+      "callback_abi": {
+        "stack_words": 1,
+        "register_args": [],
+        "callee_pop_bytes": 0,
+        "handler": "<lambda>",
+        "projection": null
+      },
+      "certification": {
+        "path": "evidence/behavior/helpers/dialog-contracts-v1/clip_SetWin.json",
+        "sha256": "9fb0eb0d0b6fd230c6a6d1cc3839249496e091422c39192a0b6ee978763f1c55"
+      }
+    },
+    {
+      "name": "db_ReleaseHandle",
+      "execution_mode": "ORIGINAL_EXE",
+      "executed_from_original": true,
+      "observed_call_count": 1242,
+      "observed_case_count": 1242,
+      "positive_case_ids": [
+        "0/320/0/[13]/[]",
+        "0/320/0/[27]/[]",
+        "0/320/0/[67]/[]",
+        "0/320/0/[68]/[]",
+        "0/320/0/[83]/[]"
+      ],
+      "callback_abi": {
+        "stack_words": 2,
+        "register_args": [],
+        "callee_pop_bytes": 0,
+        "handler": null,
+        "projection": null
+      }
+    },
+    {
+      "name": "f_171C_1B84",
+      "execution_mode": "ORIGINAL_EXE",
+      "executed_from_original": true,
+      "observed_call_count": 6840,
+      "observed_case_count": 1242,
+      "positive_case_ids": [
+        "0/320/0/[13]/[]",
+        "0/320/0/[27]/[]",
+        "0/320/0/[67]/[]",
+        "0/320/0/[68]/[]",
+        "0/320/0/[83]/[]"
+      ],
+      "callback_abi": {
+        "stack_words": 2,
+        "register_args": [],
+        "callee_pop_bytes": 0,
+        "handler": null,
+        "projection": null
+      }
+    },
+    {
+      "name": "f_171C_1BBA",
+      "execution_mode": "ORIGINAL_EXE",
+      "executed_from_original": true,
+      "observed_call_count": 2484,
+      "observed_case_count": 1242,
+      "positive_case_ids": [
+        "0/320/0/[13]/[]",
+        "0/320/0/[27]/[]",
+        "0/320/0/[67]/[]",
+        "0/320/0/[68]/[]",
+        "0/320/0/[83]/[]"
+      ],
+      "callback_abi": {
+        "stack_words": 2,
+        "register_args": [],
+        "callee_pop_bytes": 0,
+        "handler": null,
+        "projection": null
+      }
+    },
+    {
+      "name": "f_1A53_00F0",
+      "execution_mode": "MODELED",
+      "executed_from_original": false,
+      "observed_call_count": 1242,
+      "observed_case_count": 1242,
+      "positive_case_ids": [
+        "0/320/0/[13]/[]",
+        "0/320/0/[27]/[]",
+        "0/320/0/[67]/[]",
+        "0/320/0/[68]/[]",
+        "0/320/0/[83]/[]"
+      ],
+      "callback_abi": {
+        "stack_words": 3,
+        "register_args": [],
+        "callee_pop_bytes": 0,
+        "handler": "resource",
+        "projection": null
+      },
+      "certification": {
+        "path": "evidence/behavior/helpers/dialog-contracts-v1/f_1A53_00F0.json",
+        "sha256": "67236d09d3a807692575c5475dbe3d7944f15e11dfa20d1296665e4e28bd8eb9"
+      }
+    },
+    {
+      "name": "f_1B4E_000C",
+      "execution_mode": "ORIGINAL_EXE",
+      "executed_from_original": true,
+      "observed_call_count": 630,
+      "observed_case_count": 630,
+      "positive_case_ids": [
+        "0/320/1/[13]/[]",
+        "0/320/1/[27]/[]",
+        "0/320/1/[67]/[]",
+        "0/320/1/[68]/[]",
+        "0/320/1/[83]/[]"
+      ],
+      "callback_abi": {
+        "stack_words": 3,
+        "register_args": [],
+        "callee_pop_bytes": 0,
+        "handler": null,
+        "projection": null
+      }
+    },
+    {
+      "name": "f_1CE2_044D",
+      "execution_mode": "MODELED",
+      "executed_from_original": false,
+      "observed_call_count": 630,
+      "observed_case_count": 630,
+      "positive_case_ids": [
+        "0/320/1/[13]/[]",
+        "0/320/1/[27]/[]",
+        "0/320/1/[67]/[]",
+        "0/320/1/[68]/[]",
+        "0/320/1/[83]/[]"
+      ],
+      "callback_abi": {
+        "stack_words": 3,
+        "register_args": [],
+        "callee_pop_bytes": 0,
+        "handler": "command",
+        "projection": "rect_input"
+      },
+      "certification": {
+        "path": "evidence/behavior/helpers/dialog-contracts-v1/f_1CE2_044D.json",
+        "sha256": "ec5bfd2b7f956e9a996cbe48138adbb8c5a34876d9240c0cbf6b20d37c68d0ef"
+      }
+    },
+    {
+      "name": "f_1E57_038E",
+      "execution_mode": "MODELED",
+      "executed_from_original": false,
+      "observed_call_count": 2484,
+      "observed_case_count": 1242,
+      "positive_case_ids": [
+        "0/320/0/[13]/[]",
+        "0/320/0/[27]/[]",
+        "0/320/0/[67]/[]",
+        "0/320/0/[68]/[]",
+        "0/320/0/[83]/[]"
+      ],
+      "callback_abi": {
+        "stack_words": 0,
+        "register_args": [],
+        "callee_pop_bytes": 0,
+        "handler": "<lambda>",
+        "projection": null
+      },
+      "certification": {
+        "path": "evidence/behavior/helpers/dialog-contracts-v1/f_1E57_038E.json",
+        "sha256": "e7b3c598a96a25772419088a7e86f4b2678e23e1f85fd8ce29c4486c47315d2b"
+      }
+    },
+    {
+      "name": "f_1F58_0038",
+      "execution_mode": "MODELED",
+      "executed_from_original": false,
+      "observed_call_count": 6827,
+      "observed_case_count": 1242,
+      "positive_case_ids": [
+        "0/320/0/[13]/[]",
+        "0/320/0/[27]/[]",
+        "0/320/0/[67]/[]",
+        "0/320/0/[68]/[]",
+        "0/320/0/[83]/[]"
+      ],
+      "callback_abi": {
+        "stack_words": 0,
+        "register_args": [],
+        "callee_pop_bytes": 0,
+        "handler": "key_ready",
+        "projection": null
+      },
+      "certification": {
+        "path": "evidence/behavior/helpers/dialog-contracts-v1/f_1F58_0038.json",
+        "sha256": "f81f84cdf44a5fc12de6be8643fd2dea6eb2b4429b5c76f44bba03f5cd592484"
+      }
+    },
+    {
+      "name": "f_1F58_0090",
+      "execution_mode": "MODELED",
+      "executed_from_original": false,
+      "observed_call_count": 6511,
+      "observed_case_count": 1166,
+      "positive_case_ids": [
+        "0/320/0/[13]/[]",
+        "0/320/0/[27]/[]",
+        "0/320/0/[67]/[]",
+        "0/320/0/[68]/[]",
+        "0/320/0/[83]/[]"
+      ],
+      "callback_abi": {
+        "stack_words": 0,
+        "register_args": [],
+        "callee_pop_bytes": 0,
+        "handler": "key_read",
+        "projection": null
+      },
+      "certification": {
+        "path": "evidence/behavior/helpers/dialog-contracts-v1/f_1F58_0090.json",
+        "sha256": "5197ee3d661d2d8e349603ad38edf76d8aad66c536c6b78dad08df3c31f67762"
+      }
+    },
+    {
+      "name": "f_21FA_0B4B",
+      "execution_mode": "MODELED",
+      "executed_from_original": false,
+      "observed_call_count": 1242,
+      "observed_case_count": 1242,
+      "positive_case_ids": [
+        "0/320/0/[13]/[]",
+        "0/320/0/[27]/[]",
+        "0/320/0/[67]/[]",
+        "0/320/0/[68]/[]",
+        "0/320/0/[83]/[]"
+      ],
+      "callback_abi": {
+        "stack_words": 2,
+        "register_args": [],
+        "callee_pop_bytes": 4,
+        "handler": "_rect_invalidated",
+        "projection": null
+      },
+      "certification": {
+        "path": "evidence/behavior/helpers/dialog-contracts-v1/f_21FA_0B4B.json",
+        "sha256": "0ae81ae6db7650520c39d6e5b26196d3f1e3186c0fd67d69c8766d348d50d3ae"
+      }
+    },
+    {
+      "name": "f_24AB_02AD",
+      "execution_mode": "ORIGINAL_EXE",
+      "executed_from_original": true,
+      "observed_call_count": 2484,
+      "observed_case_count": 1242,
+      "positive_case_ids": [
+        "0/320/0/[13]/[]",
+        "0/320/0/[27]/[]",
+        "0/320/0/[67]/[]",
+        "0/320/0/[68]/[]",
+        "0/320/0/[83]/[]"
+      ],
+      "callback_abi": {
+        "stack_words": 1,
+        "register_args": [],
+        "callee_pop_bytes": 0,
+        "handler": null,
+        "projection": null
+      }
+    },
+    {
+      "name": "f_2505_0831",
+      "execution_mode": "MODELED",
+      "executed_from_original": false,
+      "observed_call_count": 2484,
+      "observed_case_count": 1242,
+      "positive_case_ids": [
+        "0/320/0/[13]/[]",
+        "0/320/0/[27]/[]",
+        "0/320/0/[67]/[]",
+        "0/320/0/[68]/[]",
+        "0/320/0/[83]/[]"
+      ],
+      "callback_abi": {
+        "stack_words": 0,
+        "register_args": [
+          "ax"
+        ],
+        "callee_pop_bytes": 0,
+        "handler": "<lambda>",
+        "projection": null
+      },
+      "certification": {
+        "path": "evidence/behavior/helpers/dialog-contracts-v1/f_2505_0831.json",
+        "sha256": "3be4a281ee5b7ca1d2c4def52a409cc9975c67cc0b89018070f2b4511eee121e"
+      }
+    },
+    {
+      "name": "f_2505_08EA",
+      "execution_mode": "MODELED",
+      "executed_from_original": false,
+      "observed_call_count": 2484,
+      "observed_case_count": 1242,
+      "positive_case_ids": [
+        "0/320/0/[13]/[]",
+        "0/320/0/[27]/[]",
+        "0/320/0/[67]/[]",
+        "0/320/0/[68]/[]",
+        "0/320/0/[83]/[]"
+      ],
+      "callback_abi": {
+        "stack_words": 0,
+        "register_args": [
+          "ax"
+        ],
+        "callee_pop_bytes": 0,
+        "handler": "<lambda>",
+        "projection": null
+      },
+      "certification": {
+        "path": "evidence/behavior/helpers/dialog-contracts-v1/f_2505_08EA.json",
+        "sha256": "25235fb72fefca90925834f31b8a11541282ce348e5cadab31bae60a519f054c"
+      }
+    },
+    {
+      "name": "win_Close",
+      "execution_mode": "ORIGINAL_EXE",
+      "executed_from_original": true,
+      "observed_call_count": 1242,
+      "observed_case_count": 1242,
+      "positive_case_ids": [
+        "0/320/0/[13]/[]",
+        "0/320/0/[27]/[]",
+        "0/320/0/[67]/[]",
+        "0/320/0/[68]/[]",
+        "0/320/0/[83]/[]"
+      ],
+      "callback_abi": {
+        "stack_words": 0,
+        "register_args": [
+          "ax"
+        ],
+        "callee_pop_bytes": 0,
+        "handler": null,
+        "projection": null
+      }
+    },
+    {
+      "name": "win_DrawWindow",
+      "execution_mode": "MODELED",
+      "executed_from_original": false,
+      "observed_call_count": 1242,
+      "observed_case_count": 1242,
+      "positive_case_ids": [
+        "0/320/0/[13]/[]",
+        "0/320/0/[27]/[]",
+        "0/320/0/[67]/[]",
+        "0/320/0/[68]/[]",
+        "0/320/0/[83]/[]"
+      ],
+      "callback_abi": {
+        "stack_words": 0,
+        "register_args": [
+          "ax"
+        ],
+        "callee_pop_bytes": 0,
+        "handler": "_capture_window_draw",
+        "projection": null
+      },
+      "certification": {
+        "path": "evidence/behavior/helpers/dialog-contracts-v1/win_DrawWindow.json",
+        "sha256": "28b02d65516c66e1bfbd3a87403e038ebac9208a69949f22f7dc1106c43449ee"
+      }
+    },
+    {
+      "name": "win_FlushEvents",
+      "execution_mode": "MODELED",
+      "executed_from_original": false,
+      "observed_call_count": 1242,
+      "observed_case_count": 1242,
+      "positive_case_ids": [
+        "0/320/0/[13]/[]",
+        "0/320/0/[27]/[]",
+        "0/320/0/[67]/[]",
+        "0/320/0/[68]/[]",
+        "0/320/0/[83]/[]"
+      ],
+      "callback_abi": {
+        "stack_words": 0,
+        "register_args": [],
+        "callee_pop_bytes": 0,
+        "handler": "_flush_stale",
+        "projection": null
+      },
+      "certification": {
+        "path": "evidence/behavior/helpers/dialog-contracts-v1/win_FlushEvents.json",
+        "sha256": "b49d01901c88f0f9d6e2dfa91c987d70e954cb2b78e5f9325dd7cdd8195331e1"
+      }
+    },
+    {
+      "name": "win_GetEvent",
+      "execution_mode": "MODELED",
+      "executed_from_original": false,
+      "observed_call_count": 5901,
+      "observed_case_count": 1003,
+      "positive_case_ids": [
+        "0/320/0/[]/[8451]",
+        "0/320/0/[]/[8452]",
+        "0/320/0/[]/[8453]",
+        "0/320/1/[]/[8451]",
+        "0/320/1/[]/[8452]"
+      ],
+      "callback_abi": {
+        "stack_words": 2,
+        "register_args": [],
+        "callee_pop_bytes": 4,
+        "handler": "event",
+        "projection": "<lambda>"
+      },
+      "certification": {
+        "path": "evidence/behavior/helpers/dialog-contracts-v1/win_GetEvent.json",
+        "sha256": "2f2dd106855905d5228d64f560c7c953b35371a2d5c5679c1cbbf4f0a047e9cc"
+      }
+    },
+    {
+      "name": "win_GetObjRect",
+      "execution_mode": "ORIGINAL_EXE",
+      "executed_from_original": true,
+      "observed_call_count": 1872,
+      "observed_case_count": 1242,
+      "positive_case_ids": [
+        "0/320/0/[13]/[]",
+        "0/320/0/[27]/[]",
+        "0/320/0/[67]/[]",
+        "0/320/0/[68]/[]",
+        "0/320/0/[83]/[]"
+      ],
+      "callback_abi": {
+        "stack_words": 2,
+        "register_args": [
+          "ax"
+        ],
+        "callee_pop_bytes": 4,
+        "handler": null,
+        "projection": null
+      }
+    },
+    {
+      "name": "win_Open",
+      "execution_mode": "ORIGINAL_EXE",
+      "executed_from_original": true,
+      "observed_call_count": 1242,
+      "observed_case_count": 1242,
+      "positive_case_ids": [
+        "0/320/0/[13]/[]",
+        "0/320/0/[27]/[]",
+        "0/320/0/[67]/[]",
+        "0/320/0/[68]/[]",
+        "0/320/0/[83]/[]"
+      ],
+      "callback_abi": {
+        "stack_words": 1,
+        "register_args": [],
+        "callee_pop_bytes": 0,
+        "handler": null,
+        "projection": null
+      }
+    },
+    {
+      "name": "win_PrintTextInRect",
+      "execution_mode": "MODELED",
+      "executed_from_original": false,
+      "observed_call_count": 1242,
+      "observed_case_count": 1242,
+      "positive_case_ids": [
+        "0/320/0/[13]/[]",
+        "0/320/0/[27]/[]",
+        "0/320/0/[67]/[]",
+        "0/320/0/[68]/[]",
+        "0/320/0/[83]/[]"
+      ],
+      "callback_abi": {
+        "stack_words": 4,
+        "register_args": [
+          "ax"
+        ],
+        "callee_pop_bytes": 8,
+        "handler": "command",
+        "projection": "text_input"
+      },
+      "certification": {
+        "path": "evidence/behavior/helpers/dialog-contracts-v1/win_PrintTextInRect.json",
+        "sha256": "5756f05244d77eabedfdecaf4b6914cefe3e1ed5b7cad3c72004657d86e3c099"
+      }
+    },
+    {
+      "name": "win_SetColorFromObjNum",
+      "execution_mode": "MODELED",
+      "executed_from_original": false,
+      "observed_call_count": 1242,
+      "observed_case_count": 1242,
+      "positive_case_ids": [
+        "0/320/0/[13]/[]",
+        "0/320/0/[27]/[]",
+        "0/320/0/[67]/[]",
+        "0/320/0/[68]/[]",
+        "0/320/0/[83]/[]"
+      ],
+      "callback_abi": {
+        "stack_words": 0,
+        "register_args": [
+          "ax"
+        ],
+        "callee_pop_bytes": 0,
+        "handler": "command",
+        "projection": null
+      },
+      "certification": {
+        "path": "evidence/behavior/helpers/dialog-contracts-v1/win_SetColorFromObjNum.json",
+        "sha256": "e0e244ec7b8416bc2b52cac71d8070a72e5dae948679a9c8f8edc96e87534074"
+      }
+    }
+  ],
+  "negative_controls": "build/workers/behavior_reviews/dialog-approved-v1/negative-controls.json",
+  "harness_snapshot": "dialog-final-20261002",
+  "harness_snapshot_review": {
+    "status": "APPROVED",
+    "reviewer": "root",
+    "reviewed_at": "2026-10-02",
+    "reason": "Archive components byte-match executed runner dependencies; original binary remains external locked input; fresh-clone producer verified bootstrap and one actual directed replay."
+  },
+  "historical_difference": {
+    "description": "Target and reviewed candidate are both326 bytes; two BP displacement bytes differ, assigning the text pointer segment home differently. No opcode/CFG/extent difference.",
+    "reason_exact_stopped": "Recorded allocator/declaration context searches and research C1/C2 probes did not recover target anonymous spill/home assignment. Original/candidate actual executions, stack poison controls and caller ABI demonstrate the declared semantic contract independently.",
+    "evidence_refs": [
+      "work/takeover/hardtail/",
+      "work/takeover/compiler-ir/c2/FINDINGS.md"
+    ]
+  },
+  "semantic_evidence": [
+    "whole-module source calls and return mapping in src/S15/m384C.c",
+    "caller domain in src/S09/m35F5.c and src/S15/m384C.c",
+    "source-pinned actual window open/close, geometry, and allocator helpers",
+    "case ledger equal observations for both oracle and candidate",
+    "mode-5 positive sensitivity control demonstrates the private arguments can affect geometry"
+  ],
+  "artifacts": [
+    {
+      "name": "caller-boundary-audit.json",
+      "path": "tools/behavior_suites/archive/dialog-window-aef69d1f-final/contract-review-repro.json",
+      "sha256": "26325e9a4e6c79293f8e496358ad4a7a5a4f8a72e44c6703ebe1d385bf9ecc75"
+    },
+    {
+      "name": "raw-report.json",
+      "path": "tools/behavior_suites/archive/dialog-window-aef69d1f-final/run.json",
+      "sha256": "4dde6e552c5c36828206eb52f88fe783c939b2b214a176a4b87faff22bc441d8"
+    },
+    {
+      "name": "pending-run-review.json",
+      "path": "tools/behavior_suites/archive/dialog-window-aef69d1f-final/run-evidence-pending.json",
+      "sha256": "6d2dd011d64132d71c43c0ee91dd39edd32847899b399be568ebe54db4bf2dcd"
+    },
+    {
+      "name": "helper-proposals.json",
+      "path": "tools/behavior_suites/archive/dialog-window-aef69d1f-final/helper-proposals.json",
+      "sha256": "9a5285568c5eceb4739fc7b476002f712a58830b716791b862ac4cc36309f18f"
+    }
+  ]
+}

@@ -1,0 +1,44 @@
+{
+  "schema": "behavior-negative-controls-v1",
+  "function": "f_20E8_0903",
+  "suite_id": "window_recalc_integration_v1",
+  "identity": {
+    "source_sha256": "e9f7805d6d353e1d3d432cd146073bae6bb8ec0be13b20e3543a3895e2a1ef49",
+    "harness_sha256": "2c0799048057f59eae61a48be4d695278635594484adf0c70bf46c51b4e0c799",
+    "oracle_sha256": "aa0596c6766322a8229ee3c36e57048c92adc82d50fbe2ef37afb8b85fcf4f11",
+    "historical_manifest_sha256": "025a0a9255d910cae4b122ab5a3f3fb40888bb456d7fe42158db7c9e622fcf50",
+    "suite_sha256": "303df073f38e8bca72345d85b21031a11c147bb89c2fbe48514fc4ab9566d9f2"
+  },
+  "errors": 0,
+  "mismatches_detected": 1,
+  "controls": [
+    {
+      "id": "actual-recalc-wrong-rectangle",
+      "target": "f_20E8_0903",
+      "executed": true,
+      "detected_mismatch": true,
+      "original_executed": true,
+      "mutant_executed": true,
+      "baseline_matches": true,
+      "mutant_differs": true,
+      "execution_errors": 0,
+      "mismatch_categories": [
+        "nonstack_memory",
+        "ranges",
+        "trace"
+      ],
+      "baseline_observation_sha256": "9db0a93693c5df6a3068f4cd2b42ae5d47cf03197398bc1f9f8eefeddcb5c5a2",
+      "mutant_observation_sha256": "ae628fbdb80ffd87ecea5ea5d1c42529de98e68c750f9649d35c192b29510d2a",
+      "mutant_source_sha256": "971cc061d22518448aa15377a3c52ed1a7a9607ddf73f57f5973103564b9d1ee",
+      "mutant_source": {
+        "path": "evidence/behavior/functions/f_20E8_0903/contracts/window-valid-v1/negative-0.c",
+        "sha256": "971cc061d22518448aa15377a3c52ed1a7a9607ddf73f57f5973103564b9d1ee"
+      },
+      "mutant_object": {
+        "path": "evidence/behavior/functions/f_20E8_0903/contracts/window-valid-v1/negative-0.obj",
+        "sha256": "77c4acf078bfca9ea985d9528fe82558acc71ebdb13968ab52780444bc4fea27"
+      },
+      "baseline_case_label": "recalc/positive"
+    }
+  ]
+}

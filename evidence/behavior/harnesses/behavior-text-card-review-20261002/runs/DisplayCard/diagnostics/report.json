@@ -1,0 +1,112 @@
+{
+  "schema": "behavior-winprintf-empty-body-check-v1",
+  "status": "PASS_FOCUSED_ORIGINAL_BODY_CHECK",
+  "interpretation": "The DOS WinPrintf entry is reached as original code with its one-byte RETF; the suite callback is a diagnostic sink only and does not establish printf argument parsing or a complete varargs ABI claim.",
+  "target_function": "DisplayCard",
+  "oracle": {
+    "path": "assets/SIMANT.EXE",
+    "sha256": "aa0596c6766322a8229ee3c36e57048c92adc82d50fbe2ef37afb8b85fcf4f11"
+  },
+  "candidate_module": {
+    "path": "build/workers/behavior_text_card/S23.c",
+    "sha256": "5e8e5f39325914cc1a6f1b5de9e5c894818e47d68a7ce594b2a514c99b37a1ea"
+  },
+  "suite_source": {
+    "path": "tools/behavior_suites/text_card.py",
+    "sha256": "d99e5d47948a089b388862a22b463e5cb2d653ebe2f84663c333deb3e9cb9a46"
+  },
+  "dos_stub_source": {
+    "path": "src/root/m277D.c",
+    "sha256": "6b7b7e4b468987b3ad3c869934df31e0e9325ab7e1771735d1e6113971047591"
+  },
+  "dos_stub_extent": {
+    "unit": "root",
+    "segment": 10109,
+    "offset": 10,
+    "bytes": 1
+  },
+  "runner": {
+    "path": "tools/behavior.py",
+    "sha256": "2c0799048057f59eae61a48be4d695278635594484adf0c70bf46c51b4e0c799"
+  },
+  "ledger": {
+    "schema": "behavior-case-ledger-v1",
+    "path": "D:/Prog/simant_recon/build/workers/behavior_text_card/standard-review-20261002/winprintf-empty-body/cases.jsonl.gz",
+    "sha256": "871534a957c85629d718cf2abf9ca7439c84e1f6608ff9252e1a1cfcfe2b6e6f",
+    "row_count": 4,
+    "lane_counts": {
+      "directed": 4,
+      "randomized": 0
+    },
+    "identity": {
+      "address": {
+        "off": 1640,
+        "seg": 14791,
+        "size": 1457,
+        "unit": "S23"
+      },
+      "compiled_source_sha256": "5e8e5f39325914cc1a6f1b5de9e5c894818e47d68a7ce594b2a514c99b37a1ea",
+      "flags": [
+        "/AL",
+        "/Os",
+        "/Oe",
+        "/Og",
+        "/Zi"
+      ],
+      "function": "DisplayCard",
+      "harness_sha256": "2c0799048057f59eae61a48be4d695278635594484adf0c70bf46c51b4e0c799",
+      "linked_code_sha256": "50f26fadc7ad26bf00aff4e99b55ddf658057e6673264aa3364641fee3a351ad",
+      "manifest_sha256": "025a0a9255d910cae4b122ab5a3f3fb40888bb456d7fe42158db7c9e622fcf50",
+      "object_sha256": "3924ee63cdc5b4722c0a33c4d58849bae1cb1709164285f402f561f92bbe6c30",
+      "oracle_sha256": "aa0596c6766322a8229ee3c36e57048c92adc82d50fbe2ef37afb8b85fcf4f11",
+      "profile": "msc600ax",
+      "source": "build\\workers\\behavior_text_card\\S23.c",
+      "source_sha256": "5e8e5f39325914cc1a6f1b5de9e5c894818e47d68a7ce594b2a514c99b37a1ea",
+      "unicorn_version": "2.1.4"
+    },
+    "compression": "gzip"
+  },
+  "cases": [
+    {
+      "case_id": "printf-check/styled-text",
+      "equal": true,
+      "original_executed": true,
+      "candidate_executed": true,
+      "WinPrintf_callback_installed": false,
+      "original_observation_sha256": "d628018c9d3c03e5e8903622067e8fc7057e06cd9570d16a604543fd44459ef0",
+      "candidate_observation_sha256": "d628018c9d3c03e5e8903622067e8fc7057e06cd9570d16a604543fd44459ef0"
+    },
+    {
+      "case_id": "printf-check/bitmap-link",
+      "equal": true,
+      "original_executed": true,
+      "candidate_executed": true,
+      "WinPrintf_callback_installed": false,
+      "original_observation_sha256": "820d8e124364c93554ffcbc8dff27e435f49bf3970d05ae1ed7aff4c24be2ef9",
+      "candidate_observation_sha256": "820d8e124364c93554ffcbc8dff27e435f49bf3970d05ae1ed7aff4c24be2ef9"
+    },
+    {
+      "case_id": "printf-check/random-0",
+      "equal": true,
+      "original_executed": true,
+      "candidate_executed": true,
+      "WinPrintf_callback_installed": false,
+      "original_observation_sha256": "65ff95e25573007d9fdba339e7b22ce77068f86320f08087765e7b1a4ecd7032",
+      "candidate_observation_sha256": "65ff95e25573007d9fdba339e7b22ce77068f86320f08087765e7b1a4ecd7032"
+    },
+    {
+      "case_id": "printf-check/random-1",
+      "equal": true,
+      "original_executed": true,
+      "candidate_executed": true,
+      "WinPrintf_callback_installed": false,
+      "original_observation_sha256": "6e1a31a551220813c8bdfaf8b7612fe6289fdaa1ebe0ea3715f8a867c8973b38",
+      "candidate_observation_sha256": "6e1a31a551220813c8bdfaf8b7612fe6289fdaa1ebe0ea3715f8a867c8973b38"
+    }
+  ],
+  "call_site_arities": "Variable WinPrintf call sites are present in DisplayCard; this focused run checks target completion through the real empty stub, not formatted-output semantics or argument values.",
+  "limitations": [
+    "No claim that varargs arguments are parsed or observed.",
+    "No new primary corpus rows; existing primary run and ledger are unchanged."
+  ]
+}

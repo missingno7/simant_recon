@@ -1,0 +1,42 @@
+{
+  "schema": "behavior-negative-controls-v1",
+  "function": "f_2505_0453",
+  "suite_id": "window_recalc_integration_v1",
+  "identity": {
+    "source_sha256": "22a03f15e95fff376d27211426c4f9e3395e16e5decd92ef501fbfe3c1aba623",
+    "harness_sha256": "2c0799048057f59eae61a48be4d695278635594484adf0c70bf46c51b4e0c799",
+    "oracle_sha256": "aa0596c6766322a8229ee3c36e57048c92adc82d50fbe2ef37afb8b85fcf4f11",
+    "historical_manifest_sha256": "025a0a9255d910cae4b122ab5a3f3fb40888bb456d7fe42158db7c9e622fcf50",
+    "suite_sha256": "303df073f38e8bca72345d85b21031a11c147bb89c2fbe48514fc4ab9566d9f2"
+  },
+  "errors": 0,
+  "mismatches_detected": 1,
+  "controls": [
+    {
+      "id": "actual-field-wrong-value",
+      "target": "f_2505_0453",
+      "executed": true,
+      "detected_mismatch": true,
+      "original_executed": true,
+      "mutant_executed": true,
+      "baseline_matches": true,
+      "mutant_differs": true,
+      "execution_errors": 0,
+      "mismatch_categories": [
+        "return"
+      ],
+      "baseline_observation_sha256": "a87e51ec1841b73cf7823f53f1c5ade9bba68ccbc8cf537aa4643efddfbea9ee",
+      "mutant_observation_sha256": "75f10de7dc68f44ee1a246b5e56ba7ea7e8b908c238db82bf0ac6b5c7b9a14a7",
+      "mutant_source_sha256": "e39a6c00076c6b1ed3f3ca8e167d839dc716fd70780858c5d0b46f59054a9916",
+      "mutant_source": {
+        "path": "evidence/behavior/functions/f_2505_0453/contracts/window-valid-v1/negative-0.c",
+        "sha256": "e39a6c00076c6b1ed3f3ca8e167d839dc716fd70780858c5d0b46f59054a9916"
+      },
+      "mutant_object": {
+        "path": "evidence/behavior/functions/f_2505_0453/contracts/window-valid-v1/negative-0.obj",
+        "sha256": "a946bd6412940822f92ebc9926abf225bd930874cf18170e1ec91583e98e8bed"
+      },
+      "baseline_case_label": "field/positive"
+    }
+  ]
+}

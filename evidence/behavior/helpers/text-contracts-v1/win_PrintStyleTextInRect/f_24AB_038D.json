@@ -1,0 +1,78 @@
+{
+  "boundary": "explicit callback implementation in tools/behavior_suites/text_card.py",
+  "callback_role": "CANONICAL_HELPER_ENTRY_HOOK",
+  "caller_effect_analysis": {
+    "caller_consumed_values": "logical text draw request; target code consumes x/y/text and font metrics; bitmap generation, pen write, and pixels are outside this contract",
+    "dynamic_caller_abi": null,
+    "external_state_not_claimed": [
+      "framebuffer pixels or bitmap decoding",
+      "clip intersections and pixel visibility",
+      "palette/driver color application",
+      "database cache, heap lock counters, and allocator lifetime"
+    ],
+    "no_omitted_effect_claim": "This proposal does not claim equivalence for listed external/backend effects; only the stated logical requests, projected text/rectangles, fixture return values, resource-byte consumption, and recorded ordering are in scope.",
+    "scope": "logical request and deterministic fixture boundary only",
+    "target_module_source": {
+      "path": "evidence/behavior/harnesses/behavior-text-card-review-20261002/runs/win_PrintStyleTextInRect/module.c",
+      "sha256": "5e8e5f39325914cc1a6f1b5de9e5c894818e47d68a7ce594b2a514c99b37a1ea"
+    }
+  },
+  "canonical_symbol_abi_covered": true,
+  "compared_effects": [
+    "ordered draw calls and pointed text",
+    "font helper sequence and metrics",
+    "hotspot writes and all nonstack memory",
+    "return value and caller ABI"
+  ],
+  "dos_definition": {
+    "extent_bytes": 127,
+    "extent_status": "DESCENT",
+    "offset": 909,
+    "segment": 9387,
+    "unit": "root"
+  },
+  "dynamic_caller_abi": null,
+  "evidence": {
+    "negative_case_id": "negative/x-origin-plus-one",
+    "negative_mismatch_categories": [
+      "state",
+      "trace"
+    ],
+    "positive_case_id": "grid/2/0/1/0",
+    "positive_observation_sha256": "0ebd9a608ab7267dc2de9b92038912273cb28bf1b573b7d98f7dca61909930ef"
+  },
+  "execution_mode": "MODELED",
+  "helper": "f_24AB_038D",
+  "input_domain": [
+    "directed text/control/punctuation, style-run positions/faces/font IDs 2..5, rectangle sizes/origins, first-line clipping and record mode; deterministic random strings and valid sorted styles; original font selection and metric helpers over explicit valid proportional/fixed font tables"
+  ],
+  "limitations": [
+    "logical text draw request; target code consumes x/y/text and font metrics; bitmap generation, pen write, and pixels are outside this contract"
+  ],
+  "negative_control_id": "negative/x-origin-plus-one",
+  "positive_control_id": "win_PrintStyleTextInRect:positive:grid/2/0/1/0",
+  "review": {
+    "status": "APPROVED",
+    "reviewer": "root",
+    "reviewed_at": "2026-10-02",
+    "reason": "Reviewed exact helper definition and caller data flow. This certifies the named logical boundary projection, with backend pixel/pen/cache/heap effects explicitly excluded; their implementation is not claimed equivalent."
+  },
+  "schema": "behavior-helper-cert-v1",
+  "source_definition": {
+    "definition_line": 152,
+    "definition_name": "f_24AB_038D",
+    "other_reference_lines": [
+      171,
+      182
+    ],
+    "path": "src/root/m24AB.c",
+    "sha256": "1d263c6e1f242981d7c3e37d839dc481dc75deed45d7d1bcaaa075cad124de7f"
+  },
+  "source_hashes": {
+    "evidence/behavior/harnesses/behavior-text-card-review-20261002/runs/win_PrintStyleTextInRect/module.c": "5e8e5f39325914cc1a6f1b5de9e5c894818e47d68a7ce594b2a514c99b37a1ea",
+    "evidence/behavior/harnesses/text-font-metrics-20261002/tools/behavior.py": "2c0799048057f59eae61a48be4d695278635594484adf0c70bf46c51b4e0c799",
+    "src/root/m24AB.c": "1d263c6e1f242981d7c3e37d839dc481dc75deed45d7d1bcaaa075cad124de7f",
+    "tools/behavior_suites/archive/text-card-20261002-win_PrintStyleTextInRect.py": "d99e5d47948a089b388862a22b463e5cb2d653ebe2f84663c333deb3e9cb9a46"
+  },
+  "status": "CERTIFIED"
+}

@@ -1,0 +1,65 @@
+{
+  "schema": "behavior-helper-cert-v1",
+  "helper": "win_GetObjRect",
+  "status": "PENDING_ROOT_REVIEW",
+  "source": {
+    "path": "src/root/m2505.c",
+    "sha256": "22a03f15e95fff376d27211426c4f9e3395e16e5decd92ef501fbfe3c1aba623",
+    "module": "root:2505"
+  },
+  "input_contract": {
+    "window": "valid locked DOS window id; high byte names a present window, low-byte object index is less than count",
+    "object_geometry": "accessible 8-byte signed Rect at the selected object-table far pointer, normalized in the bounded logical screen x=0..640,y=0..400",
+    "memory": "valid Ralloc-backed window/master table; output is the actual supplied far pointer"
+  },
+  "source_based_explanation": [
+    "Pinned root:2505 source calls win_LockWin(obj), obtains the window with f_2505_0006(obj), selects the far Rect pointer at window+0x2C indexed by obj&0xFF, copies all four words through the supplied far pointer, then calls win_UnlockWin(obj).",
+    "The clip callback supplies only the indexed Rect for each valid window ID, records ordered calls, and writes through the actual far pointer passed by original f_1E57_038E.",
+    "A separate 100-case direct integration runs original win_GetObjRect with original lock/window lookup/unlock helpers over 1..6 object records; the 265-case clip suite runs original f_1D8E_02BD and original allocator/memory helpers."
+  ],
+  "evidence": [
+    {
+      "kind": "direct-original-helper-integration",
+      "run": "build/workers/behavior_window/final-pinned-final-20261002/getobjrect/win_GetObjRect-run-evidence.json",
+      "case_ledger": "build/workers/behavior_window/final-pinned-final-20261002/getobjrect/win_GetObjRect-case-ledger.jsonl.gz",
+      "case_id": "getobjrect/positive",
+      "run_sha256": "73d996ba1096d876336836b13a85927396abe1a0d1ec56c329c64dda225e389c",
+      "case_ledger_sha256": "01eafab63247ac366b639838818b256751183c6b0e3ea0413d849329079e3724"
+    },
+    {
+      "kind": "clip-boundary",
+      "run": "build/workers/behavior_window/final-clip-pinned-20261002/f_1E57_038E-run-evidence.json",
+      "case_ledger": "build/workers/behavior_window/final-clip-pinned-20261002/f_1E57_038E-case-ledger.jsonl.gz",
+      "case_id": "clip/overlap",
+      "negative_control": "wrong-clip-rectangle",
+      "run_sha256": "113518db78f49466060277c58c193e668f2bbc952262b8858eeb7d5a2ee8babe",
+      "case_ledger_sha256": "c272c1115d3f899a789d92e2c0270ec5b428be4135a76a7aca0e1abe79c32f40"
+    }
+  ],
+  "review": {
+    "status": "PENDING_ROOT_REVIEW"
+  },
+  "input_domain": [
+    "valid locked DOS window object id; high byte selects a present window and low-byte object index is less than object count",
+    "accessible 8-byte signed Rect at the selected object-table far pointer; normalized x=0..640,y=0..400",
+    "valid Ralloc-backed window/master table and actual supplied far output pointer"
+  ],
+  "compared_effects": [
+    "ordered screen/window clipping rectangles",
+    "45-entry clip handle table",
+    "Ralloc heap/master-table state",
+    "window stack and screen rectangle",
+    "geometry callback order",
+    "all non-stack writes",
+    "caller ABI"
+  ],
+  "positive_control_id": "clip/overlap",
+  "negative_control_id": "wrong-clip-rectangle",
+  "limitations": [
+    "No malformed/unmapped object indices, inaccessible pointers, invalid handles, or arbitrary resource geometry.",
+    "The model supplies per-case window Rects; it does not reconstruct full window manager or resource loading behavior."
+  ],
+  "source_hashes": {
+    "src/root/m2505.c": "22a03f15e95fff376d27211426c4f9e3395e16e5decd92ef501fbfe3c1aba623"
+  }
+}

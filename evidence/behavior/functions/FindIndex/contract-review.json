@@ -1,0 +1,63 @@
+{
+  "function": "FindIndex",
+  "source": "work/takeover/hardtail/seeds/root_1986_1af5252fe844.c",
+  "suite": "tools/behavior_suites/archive/small-contracts-review20261002.py",
+  "module": "root:1986",
+  "negative_controls": "build/workers/behavior_small_contracts_review20261002/negative-controls-findindex.json",
+  "date": "2026-10-02",
+  "checkpoint": {
+    "commit": "54cb824d19c2f897ab17c8b163a954121d4e4843",
+    "date": "2026-10-02"
+  },
+  "harness_snapshot": "ss-ds-window-v1",
+  "harness_snapshot_review": {
+    "status": "APPROVED",
+    "reviewer": "root",
+    "reviewed_at": "2026-10-02",
+    "reason": "Exact executedSS=DSstack-windowrunner andledger retained; currentcompilerreplay independently verifies naturalwholemodule source/object/peers/private data."
+  },
+  "contract": {
+    "id": "small_contracts_v1",
+    "input_domain": {
+      "tables": "every subset of8keys, duplicate ordering, signed IDs/allbytekinds, cardinalities1..256 plus511/512/1023/1024/4095/7679",
+      "lookahead": "20 initialized one-past record variants with matching/missing query; includes empty-table early return",
+      "randomized": "10000 deterministic sorted tables spanning all unsignedkindbytes and signed16 IDs; seed inledger"
+    },
+    "limits": [
+      "Valid DB indexes0..3 with sorted accessible index arrays and initialized lookahead entry; invalidfarhandles/unsortedarrays excluded.",
+      "Observed end-lookahead match is retained as original behavior, not corrected."
+    ],
+    "required_effects": [
+      "return pointer/result",
+      "search cursor globals",
+      "observed database table state",
+      "all non-stack writes and final bytes",
+      "preserved caller registers and stack"
+    ],
+    "excluded_effects": [
+      {
+        "effect": "volatile registers andprivate localstack homes",
+        "reason": "Return,callerABI,allnonstackwrites andcommands arecompared; stacklayout itself isimplementation-specific."
+      }
+    ],
+    "required_helpers": [],
+    "review": {
+      "status": "APPROVED",
+      "reviewer": "root",
+      "reviewed_at": "2026-10-02"
+    }
+  },
+  "historical_difference": {
+    "description": "Target267/candidate267 bytes. First-branch/lower-bound source lowering differs; stack/callstructure and returnedentry/searchcursor behavior are tested.",
+    "reason_exact_stopped": "Natural source semantics tested against original oracle; exact historicalcompileridentity stays separate debt.",
+    "evidence_refs": [
+      "work/takeover/hardtail/all-open.json",
+      "work/takeover/hardtail/seeds/root_1986_1af5252fe844.c"
+    ]
+  },
+  "semantic_evidence": [
+    "Original signed-ID and zero-extended byte-kind comparison predicates reviewed at +79 JG/+97 JL.",
+    "Natural C lower-bound algorithm preserves empty-table null result and nonempty matching one-past lookahead return.",
+    "Allhelper-free original code executes; three compiled source controls detect return/cursor/key semantic mutations."
+  ]
+}

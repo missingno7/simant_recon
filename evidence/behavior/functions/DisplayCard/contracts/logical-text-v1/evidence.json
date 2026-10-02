@@ -1,0 +1,502 @@
+{
+  "schema": "simant-behavior-evidence-v1",
+  "function": "DisplayCard",
+  "status": "BEHAVIOR_EXACT",
+  "source": {
+    "path": "evidence/behavior/functions/DisplayCard/contracts/logical-text-v1/module.c",
+    "sha256": "5e8e5f39325914cc1a6f1b5de9e5c894818e47d68a7ce594b2a514c99b37a1ea",
+    "whole_module": true,
+    "module": "S23"
+  },
+  "suite": {
+    "path": "tools/behavior_suites/archive/text-card-20261002-DisplayCard.py",
+    "sha256": "a5dfe315124bd942960e5cf892781ebfd479db8fbfe7b90e3d6b9febf89ca2be",
+    "id": "display-card-v1"
+  },
+  "harness": {
+    "runner": {
+      "path": "evidence/behavior/harnesses/ss-ds-window-v1/tools/behavior.py",
+      "sha256": "ee7c997d2f89efa85ce932cd5ac7c674c465f1013a16a8c08e83d43c69f4be5b"
+    },
+    "components": {
+      "tools/exe.py": {
+        "path": "evidence/behavior/harnesses/ss-ds-window-v1/tools/exe.py",
+        "sha256": "d560f69dcdf0d1c9e89278b50bebe225a9b86db2c259fa54ec9eace6ea05a8b5"
+      },
+      "tools/functions.py": {
+        "path": "evidence/behavior/harnesses/ss-ds-window-v1/tools/functions.py",
+        "sha256": "0f67c8d9eb01e319620c9342e79c35f76006091d860894aad6dcf8d61ee2b39e"
+      },
+      "tools/match.py": {
+        "path": "evidence/behavior/harnesses/ss-ds-window-v1/tools/match.py",
+        "sha256": "44fdd8b939b2bbf135d8947d8f6ef6b1854dec133da4af86c55eb94f02869b56"
+      },
+      "tools/modctx.py": {
+        "path": "evidence/behavior/harnesses/ss-ds-window-v1/tools/modctx.py",
+        "sha256": "33f3a4e3d77371e3095bfeb00358c13bc7838235c27bfe8898dba7e313f1cc25"
+      },
+      "tools/modules.py": {
+        "path": "evidence/behavior/harnesses/ss-ds-window-v1/tools/modules.py",
+        "sha256": "8a5c1e85db6970cce3c693c016b313b7ee1922fa6eaf146a00391bfea86edf1a"
+      },
+      "tools/autosearch.py": {
+        "path": "evidence/behavior/harnesses/ss-ds-window-v1/tools/autosearch.py",
+        "sha256": "9c2727a875ee94c66ceac868d64c7070c316a5dbbef7cd6b21a670b44a2e1806"
+      },
+      "tools/compiler.py": {
+        "path": "evidence/behavior/harnesses/ss-ds-window-v1/tools/compiler.py",
+        "sha256": "ef1d59a0fbe0e0780a6b8480e13d7d07859a14ae185c00a4420e1238a2ae35bb"
+      },
+      "tools/omf.py": {
+        "path": "evidence/behavior/harnesses/ss-ds-window-v1/tools/omf.py",
+        "sha256": "951137ecbfaeb6e40fd5230c94398141da7ec7bdb7399d9cd74d46ded3045612"
+      },
+      "tools/symbols.py": {
+        "path": "evidence/behavior/harnesses/ss-ds-window-v1/tools/symbols.py",
+        "sha256": "e3f25fb66717f743dea126e56b5b44538d452fb5a2d52695ef27cb5069bc1793"
+      },
+      "tools/lockfile.py": {
+        "path": "evidence/behavior/harnesses/ss-ds-window-v1/tools/lockfile.py",
+        "sha256": "6773cd28150381c88a781862d0034e2ff0023c21e82aff7fad5358efb1bf34c5"
+      },
+      "tools/csrc.py": {
+        "path": "evidence/behavior/harnesses/ss-ds-window-v1/tools/csrc.py",
+        "sha256": "3b13b7dbc17f39cbca7f329a3043ff363f91279c12312ba865941653c412567c"
+      },
+      "tools/srcrules.py": {
+        "path": "evidence/behavior/harnesses/ss-ds-window-v1/tools/srcrules.py",
+        "sha256": "e34f8bd91d224df26b5981acd9316b00bdf96e3dcc28e744aaebfc466046fc30"
+      },
+      "tools/variants.py": {
+        "path": "evidence/behavior/harnesses/ss-ds-window-v1/tools/variants.py",
+        "sha256": "b5dfd77ba5a96649d3e1503c1619b7fa6d9edc5f32c1f7684361fbfa59fa55c9"
+      },
+      "layout/toolchain.json": {
+        "path": "evidence/behavior/harnesses/ss-ds-window-v1/layout/toolchain.json",
+        "sha256": "c0bb71cd8b1f4a1a1f91299bd3b6148aa67b7a1d12c3c3946a229272593eb274"
+      },
+      "tools/behavior_ledger.py": {
+        "path": "evidence/behavior/harnesses/ss-ds-window-v1/tools/behavior_ledger.py",
+        "sha256": "e0e385aa395196104e8fcd3768a7853e37f0b4e5b102f39381b74de1963400c4"
+      }
+    },
+    "runner_snapshot_review": {
+      "status": "APPROVED",
+      "reviewer": "root",
+      "reviewed_at": "2026-10-02",
+      "reason": "Reviewed actual executed archived runner/component hashes and bounded SS=DS stack comparison. Formatter views retain their immutable root-reviewed certificate/graph. Fresh compiler peer/private-data replay remains mandatory.",
+      "runner_snapshot_reviewed": true,
+      "archived_components": [
+        {
+          "component": "tools/exe.py",
+          "path": "evidence/behavior/harnesses/ss-ds-window-v1/tools/exe.py",
+          "sha256": "d560f69dcdf0d1c9e89278b50bebe225a9b86db2c259fa54ec9eace6ea05a8b5"
+        },
+        {
+          "component": "tools/functions.py",
+          "path": "evidence/behavior/harnesses/ss-ds-window-v1/tools/functions.py",
+          "sha256": "0f67c8d9eb01e319620c9342e79c35f76006091d860894aad6dcf8d61ee2b39e"
+        },
+        {
+          "component": "tools/match.py",
+          "path": "evidence/behavior/harnesses/ss-ds-window-v1/tools/match.py",
+          "sha256": "44fdd8b939b2bbf135d8947d8f6ef6b1854dec133da4af86c55eb94f02869b56"
+        },
+        {
+          "component": "tools/modctx.py",
+          "path": "evidence/behavior/harnesses/ss-ds-window-v1/tools/modctx.py",
+          "sha256": "33f3a4e3d77371e3095bfeb00358c13bc7838235c27bfe8898dba7e313f1cc25"
+        },
+        {
+          "component": "tools/modules.py",
+          "path": "evidence/behavior/harnesses/ss-ds-window-v1/tools/modules.py",
+          "sha256": "8a5c1e85db6970cce3c693c016b313b7ee1922fa6eaf146a00391bfea86edf1a"
+        },
+        {
+          "component": "tools/autosearch.py",
+          "path": "evidence/behavior/harnesses/ss-ds-window-v1/tools/autosearch.py",
+          "sha256": "9c2727a875ee94c66ceac868d64c7070c316a5dbbef7cd6b21a670b44a2e1806"
+        },
+        {
+          "component": "tools/compiler.py",
+          "path": "evidence/behavior/harnesses/ss-ds-window-v1/tools/compiler.py",
+          "sha256": "ef1d59a0fbe0e0780a6b8480e13d7d07859a14ae185c00a4420e1238a2ae35bb"
+        },
+        {
+          "component": "tools/omf.py",
+          "path": "evidence/behavior/harnesses/ss-ds-window-v1/tools/omf.py",
+          "sha256": "951137ecbfaeb6e40fd5230c94398141da7ec7bdb7399d9cd74d46ded3045612"
+        },
+        {
+          "component": "tools/symbols.py",
+          "path": "evidence/behavior/harnesses/ss-ds-window-v1/tools/symbols.py",
+          "sha256": "e3f25fb66717f743dea126e56b5b44538d452fb5a2d52695ef27cb5069bc1793"
+        },
+        {
+          "component": "tools/lockfile.py",
+          "path": "evidence/behavior/harnesses/ss-ds-window-v1/tools/lockfile.py",
+          "sha256": "6773cd28150381c88a781862d0034e2ff0023c21e82aff7fad5358efb1bf34c5"
+        },
+        {
+          "component": "tools/csrc.py",
+          "path": "evidence/behavior/harnesses/ss-ds-window-v1/tools/csrc.py",
+          "sha256": "3b13b7dbc17f39cbca7f329a3043ff363f91279c12312ba865941653c412567c"
+        },
+        {
+          "component": "tools/srcrules.py",
+          "path": "evidence/behavior/harnesses/ss-ds-window-v1/tools/srcrules.py",
+          "sha256": "e34f8bd91d224df26b5981acd9316b00bdf96e3dcc28e744aaebfc466046fc30"
+        },
+        {
+          "component": "tools/variants.py",
+          "path": "evidence/behavior/harnesses/ss-ds-window-v1/tools/variants.py",
+          "sha256": "b5dfd77ba5a96649d3e1503c1619b7fa6d9edc5f32c1f7684361fbfa59fa55c9"
+        },
+        {
+          "component": "layout/toolchain.json",
+          "path": "evidence/behavior/harnesses/ss-ds-window-v1/layout/toolchain.json",
+          "sha256": "c0bb71cd8b1f4a1a1f91299bd3b6148aa67b7a1d12c3c3946a229272593eb274"
+        },
+        {
+          "component": "tools/behavior_ledger.py",
+          "path": "evidence/behavior/harnesses/ss-ds-window-v1/tools/behavior_ledger.py",
+          "sha256": "e0e385aa395196104e8fcd3768a7853e37f0b4e5b102f39381b74de1963400c4"
+        }
+      ]
+    }
+  },
+  "oracle": {
+    "path": "assets/SIMANT.EXE",
+    "sha256": "aa0596c6766322a8229ee3c36e57048c92adc82d50fbe2ef37afb8b85fcf4f11",
+    "lock_sha256": "2c6d9e98c688621ad49a08c78d0e0968f4076b036be56ec0738217b533ccde13"
+  },
+  "historical_manifest_sha256": "025a0a9255d910cae4b122ab5a3f3fb40888bb456d7fe42158db7c9e622fcf50",
+  "checkpoint": {
+    "commit": "54cb824d19c2f897ab17c8b163a954121d4e4843",
+    "date": "2026-10-02"
+  },
+  "contract": {
+    "excluded_effects": [
+      "database cache and allocator internals",
+      "real resource lock counters/lifetime",
+      "printf formatted output and varargs semantics",
+      "clip intersections and pixel visibility",
+      "palette/driver color state",
+      "bitmap decoding",
+      "glyph bitmap masks",
+      "framebuffer pixels",
+      {
+        "effect": "backend pen, font bitmap, clip/palette state, database cache and heap lifecycle implementation",
+        "reason": "Only logical requests and provided inputs/results cross these boundaries; the reviewed caller consumes no omitted backend state. All target own nonstack writes and pointed contents remain compared."
+      }
+    ],
+    "helper_source_review": {
+      "path": "evidence/behavior/harnesses/behavior-text-card-review-20261002/runs/DisplayCard/helper-source-review.json",
+      "sha256": "d2c50072b9a1023155632d09bb0b21c5897da6f881e4d5cde15ec16aae0e1dc1"
+    },
+    "id": "display-card-v1",
+    "input_domain": {
+      "directed_cases": 5,
+      "random_seed": 969366193,
+      "randomized_cases": 500,
+      "tested": "missing card resource; valid unknown-record card; one bitmap with one hotspot; one plain text frame; one styled CHITIN text frame; seeded valid card streams of 1..8 P/T records, 0..6 in-range hotspot links per P record, 1..4 text frames, 1..4 sorted style runs, text resources, variable positive rectangles, fixed valid window geometry, and explicit font fallback metrics"
+    },
+    "limits": [
+      "Finite bounded differential suite; not exhaustive over all 16-bit inputs.",
+      "Only the explicitly listed logical request/fixture effects are claimed; helpers whose host callbacks replace DOS bodies are not certified for unlisted backend state.",
+      "Resource bytes and returned fixture handles/pointers/sizes are deterministic inputs in VM memory; the DOS database cache, allocator state, real lock counters, and resource lifetime enforcement are not modeled.",
+      "Font fixtures use the explicit 12px line-height and 8px character-width fallback globals with a null active font pointer; loaded proportional/fixed font tables are not tested by this DisplayCard run.",
+      "WinPrintf is a diagnostic nonsemantic sink. The primary callback observes only a call marker and does not capture formatted arguments; the focused unhooked check executes the actual one-byte DOS RETF across variable-arity call sites without claiming printf formatting semantics.",
+      "Window geometry is a fixed fixture rectangle written to the caller's VM buffer. Clip/color/bitmap/text services are compared as ordered logical requests only; clipping results, palette application, bitmap decoding, glyph masks, and framebuffer pixels are not claimed."
+    ],
+    "required_effects": [
+      "resource request/lock/size/unlock/purge order",
+      "ordered window, bitmap and text draw commands",
+      "projected draw text and coordinates",
+      "all nonstack memory",
+      "caller ABI"
+    ],
+    "required_helpers": [
+      {
+        "name": "WinPrintf",
+        "must_execute": true,
+        "certification": {
+          "path": "evidence/behavior/helpers/text-contracts-v1/DisplayCard/WinPrintf.json",
+          "sha256": "430c8323709593e6507d76134abdeb423b5cbfba3fcd5fc16e57b5a4133f812e"
+        }
+      },
+      {
+        "name": "clip_SetWin",
+        "must_execute": true,
+        "certification": {
+          "path": "evidence/behavior/helpers/text-contracts-v1/DisplayCard/clip_SetWin.json",
+          "sha256": "7fc508fd166c4889c2676febb3ffb08dc595527544425244a89ed1ed399a756c"
+        }
+      },
+      {
+        "name": "clip_SubInclude",
+        "must_execute": true,
+        "certification": {
+          "path": "evidence/behavior/helpers/text-contracts-v1/DisplayCard/clip_SubInclude.json",
+          "sha256": "a6b24ef99e81491c74c77a8c95ab3251c7d930452cbeb49f3ca180e3aaeb17dd"
+        }
+      },
+      {
+        "name": "db_PurgeObject",
+        "must_execute": true,
+        "certification": {
+          "path": "evidence/behavior/helpers/text-contracts-v1/DisplayCard/db_PurgeObject.json",
+          "sha256": "936eaa4b464afd4ac6e133318db3dfd34535a0bb6f52d23a1c07693ed6550da3"
+        }
+      },
+      {
+        "name": "f_171C_1B84",
+        "must_execute": true,
+        "certification": {
+          "path": "evidence/behavior/helpers/text-contracts-v1/DisplayCard/f_171C_1B84.json",
+          "sha256": "377cf01143a59aa4984105f24c1b5496c61fc4593e7af163987f366eaead5b1f"
+        }
+      },
+      {
+        "name": "f_171C_1BBA",
+        "must_execute": true,
+        "certification": {
+          "path": "evidence/behavior/helpers/text-contracts-v1/DisplayCard/f_171C_1BBA.json",
+          "sha256": "e7ae3018b84d2c57d4c06246ee9d1301ab78f04b04e05f337e80823e549be982"
+        }
+      },
+      {
+        "name": "f_171C_1C1C",
+        "must_execute": true,
+        "certification": {
+          "path": "evidence/behavior/helpers/text-contracts-v1/DisplayCard/f_171C_1C1C.json",
+          "sha256": "38cffe505a4ac60c17ade00e9895ce5ffd228d65a1e5d010215765309ee46ecc"
+        }
+      },
+      {
+        "name": "f_1A53_00F0",
+        "must_execute": true,
+        "certification": {
+          "path": "evidence/behavior/helpers/text-contracts-v1/DisplayCard/f_1A53_00F0.json",
+          "sha256": "aa98a8a385ae7363bccea9eaef95fcfa61d962edc4e1165a8d498b74312b0735"
+        }
+      },
+      {
+        "name": "f_24AB_038D",
+        "must_execute": true,
+        "certification": {
+          "path": "evidence/behavior/helpers/text-contracts-v1/DisplayCard/f_24AB_038D.json",
+          "sha256": "ee69163afd57260fa9990515d40e6994b5fe68ace37d43f5c5154b8f2ceb01b9"
+        }
+      },
+      {
+        "name": "win_DrawBitMap",
+        "must_execute": true,
+        "certification": {
+          "path": "evidence/behavior/helpers/text-contracts-v1/DisplayCard/win_DrawBitMap.json",
+          "sha256": "59964b08b6901ca132899af8ba1935cdfeaa6c9b26ecc14dc18ae814770d9410"
+        }
+      },
+      {
+        "name": "win_GetObjRect",
+        "must_execute": true,
+        "certification": {
+          "path": "evidence/behavior/helpers/text-contracts-v1/DisplayCard/win_GetObjRect.json",
+          "sha256": "42645daed3083a08cccb0f58422272d762e9097fa2c51fe6bc31773dcf9890c2"
+        }
+      },
+      {
+        "name": "win_SetColorFromObjNum",
+        "must_execute": true,
+        "certification": {
+          "path": "evidence/behavior/helpers/text-contracts-v1/DisplayCard/win_SetColorFromObjNum.json",
+          "sha256": "2a14144bc315be9417b5b57084dd2c1d2ed6b2b45580cb6914ed6a31cdee3b85"
+        }
+      }
+    ],
+    "review": {
+      "reviewed_at": "2026-10-02",
+      "reviewer": "root",
+      "status": "APPROVED",
+      "reason": "Reviewed caller C and helper source definitions/ABIs, original font metric execution, explicit logical resource/draw boundaries, pointed resource/text/rectangle contents, caller noninterference, retained raw formatter records and pinned graph, ledger-grounded positives and compiled caller mutants. This is the recorded finite logical contract, not framebuffer or backend lifecycle equivalence."
+    }
+  },
+  "run_report": {
+    "path": "evidence/behavior/functions/DisplayCard/contracts/logical-text-v1/run.json",
+    "sha256": "df902f87a8108b8d1eb163ca0875d113278812cd000c14f655c2bd074d656f89"
+  },
+  "negative_controls": {
+    "path": "evidence/behavior/functions/DisplayCard/contracts/logical-text-v1/negative-controls.json",
+    "sha256": "ab817d06e0f1c89c69c3ba859a2cbc53a0214001f216ce08f1a15491c6f9e3e3"
+  },
+  "historical_difference": {
+    "description": "Compiler-produced whole-module candidate matched the original DOS target over this finite recorded corpus; this is a bounded behavioral proposal and does not change or weaken historical EXACT.",
+    "evidence_refs": [
+      {
+        "path": "evidence/behavior/harnesses/behavior-text-card-review-20261002/runs/DisplayCard/raw-run.json",
+        "sha256": "c46d738bb6fd437c4d32b4efd68febe0ae6832e6f86e540ae4ed224c937f2e3a"
+      },
+      {
+        "path": "evidence/behavior/harnesses/behavior-text-card-review-20261002/runs/DisplayCard/cases.jsonl.gz",
+        "sha256": "3e1fc368518f8a6c66cd43ef7afcd2dac3b1c8c9b9a698b6223378bae77a2705"
+      },
+      {
+        "path": "evidence/behavior/harnesses/behavior-text-card-review-20261002/runs/DisplayCard/negative-controls.json",
+        "sha256": "4d62c484720391ff8f0df878868a547d4a76af554671f5133390c18ccbc59d5b"
+      }
+    ],
+    "reason_exact_stopped": "Behavioral equivalence is a separate claim; byte identity and any whole-module completeness gates remain independent."
+  },
+  "semantic_evidence": {
+    "diagnostics": "WinPrintf actual one-byte RETF focused check is archived separately; it is not a primary run row and makes no printf formatting/varargs claim.",
+    "helper_certificates": [
+      {
+        "path": "evidence/behavior/harnesses/behavior-text-card-review-20261002/runs/DisplayCard/helper-certs/clip_SetWin.json",
+        "sha256": "b91a9cfecfab83edd8c48ca1024a9614a9f0d2bd190e321294323deba278d19c"
+      },
+      {
+        "path": "evidence/behavior/harnesses/behavior-text-card-review-20261002/runs/DisplayCard/helper-certs/clip_SubInclude.json",
+        "sha256": "d8c8b6be57dcc63192d1853ce82ec55eaf2230428986bb9850ddc48acec492f2"
+      },
+      {
+        "path": "evidence/behavior/harnesses/behavior-text-card-review-20261002/runs/DisplayCard/helper-certs/db_PurgeObject.json",
+        "sha256": "556acce1dd6f40d30206a85ac12b44bf74675673207ddc877335dcab56b4695e"
+      },
+      {
+        "path": "evidence/behavior/harnesses/behavior-text-card-review-20261002/runs/DisplayCard/helper-certs/f_171C_1B84.json",
+        "sha256": "5cf20df4bb3c20a1953323e3b74fcbdb9cb89a75d697967298b88bd0c84d2d4d"
+      },
+      {
+        "path": "evidence/behavior/harnesses/behavior-text-card-review-20261002/runs/DisplayCard/helper-certs/f_171C_1BBA.json",
+        "sha256": "96fcee55807fe9cb8a93b3ea2d096df04cf0c83b186fe88ca2c5c5177b8c9e6e"
+      },
+      {
+        "path": "evidence/behavior/harnesses/behavior-text-card-review-20261002/runs/DisplayCard/helper-certs/f_171C_1C1C.json",
+        "sha256": "f60cac5fb36e860294521ab144149fd14240773e22146dddb13703c5483df751"
+      },
+      {
+        "path": "evidence/behavior/harnesses/behavior-text-card-review-20261002/runs/DisplayCard/helper-certs/f_1A53_00F0.json",
+        "sha256": "d5b9f5d3dcf4d9c9fc204ed5519dc3feb98e933a33c5cc26debeed13a30ec483"
+      },
+      {
+        "path": "evidence/behavior/harnesses/behavior-text-card-review-20261002/runs/DisplayCard/helper-certs/f_24AB_038D.json",
+        "sha256": "0035faf14764312277a25bf242ae25b2864ae9be9468fad0416b72db476521b6"
+      },
+      {
+        "path": "evidence/behavior/harnesses/behavior-text-card-review-20261002/runs/DisplayCard/helper-certs/win_DrawBitMap.json",
+        "sha256": "ab90a3738a2807dd7158dbb5d5ce0c5f8c1fc2d1f907b9ad38ba507112a3168c"
+      },
+      {
+        "path": "evidence/behavior/harnesses/behavior-text-card-review-20261002/runs/DisplayCard/helper-certs/win_GetObjRect.json",
+        "sha256": "92d47123d0edbc53b335c2d6c892fd4cdba0e37a80df783f00df60b44014fd30"
+      },
+      {
+        "path": "evidence/behavior/harnesses/behavior-text-card-review-20261002/runs/DisplayCard/helper-certs/win_SetColorFromObjNum.json",
+        "sha256": "a2f05c1301ae39341577d75ac62a07f8b5984144f8a1696c811e818cc6485f1b"
+      }
+    ],
+    "helper_certification_proposals": {
+      "path": "evidence/behavior/harnesses/behavior-text-card-review-20261002/runs/DisplayCard/helper-cert-proposals-v2.json",
+      "sha256": "10d9766081de822f27cf3a4244558664ea9fd28caefdca179169858f422374d6"
+    },
+    "primary_execution": "Both original DOS and compiler-produced candidate executed in separate VM states for every recorded primary row; see the normalized run-evidence record, exact raw suite report, and gzip ledger.",
+    "scope": "See contract required/excluded effects and explicit helper-boundary proposals.",
+    "source_pins": {
+      "path": "evidence/behavior/harnesses/behavior-text-card-review-20261002/runs/DisplayCard/source-pins-v3.json",
+      "sha256": "93ec06150f128c5c06a1f3e3de327f7f4eead6f690be13fdde11dd881fff45f7"
+    },
+    "source_review": {
+      "path": "evidence/behavior/harnesses/behavior-text-card-review-20261002/runs/DisplayCard/helper-source-review.json",
+      "sha256": "d2c50072b9a1023155632d09bb0b21c5897da6f881e4d5cde15ec16aae0e1dc1"
+    },
+    "supplemental_positive_controls": [
+      {
+        "case_id": "helper-coverage-seed-0",
+        "id": "DisplayCard:positive:helper-coverage-seed-0",
+        "replay_ledger": {
+          "compression": "gzip",
+          "identity": {
+            "address": {
+              "off": 1640,
+              "seg": 14791,
+              "size": 1457,
+              "unit": "S23"
+            },
+            "compiled_source_sha256": "5e8e5f39325914cc1a6f1b5de9e5c894818e47d68a7ce594b2a514c99b37a1ea",
+            "flags": [
+              "/AL",
+              "/Os",
+              "/Oe",
+              "/Og",
+              "/Zi"
+            ],
+            "function": "DisplayCard",
+            "harness_sha256": "2c0799048057f59eae61a48be4d695278635594484adf0c70bf46c51b4e0c799",
+            "linked_code_sha256": "50f26fadc7ad26bf00aff4e99b55ddf658057e6673264aa3364641fee3a351ad",
+            "manifest_sha256": "025a0a9255d910cae4b122ab5a3f3fb40888bb456d7fe42158db7c9e622fcf50",
+            "object_sha256": "3924ee63cdc5b4722c0a33c4d58849bae1cb1709164285f402f561f92bbe6c30",
+            "oracle_sha256": "aa0596c6766322a8229ee3c36e57048c92adc82d50fbe2ef37afb8b85fcf4f11",
+            "profile": "msc600ax",
+            "source": "build\\workers\\behavior_text_card\\S23.c",
+            "source_sha256": "5e8e5f39325914cc1a6f1b5de9e5c894818e47d68a7ce594b2a514c99b37a1ea",
+            "unicorn_version": "2.1.4"
+          },
+          "lane_counts": {
+            "directed": 1,
+            "randomized": 0
+          },
+          "path": "evidence/behavior/harnesses/behavior-text-card-review-20261002/runs/DisplayCard/positive-replays/positive-case-2.jsonl.gz",
+          "row_count": 1,
+          "schema": "behavior-case-ledger-v1",
+          "sha256": "b0a872a9397d7bbf266127809b5bc00d10f1c31fd48d27deefb0ddd74a7bafd7"
+        }
+      },
+      {
+        "case_id": "helper-coverage-seed-1",
+        "id": "DisplayCard:positive:helper-coverage-seed-1",
+        "replay_ledger": {
+          "compression": "gzip",
+          "identity": {
+            "address": {
+              "off": 1640,
+              "seg": 14791,
+              "size": 1457,
+              "unit": "S23"
+            },
+            "compiled_source_sha256": "5e8e5f39325914cc1a6f1b5de9e5c894818e47d68a7ce594b2a514c99b37a1ea",
+            "flags": [
+              "/AL",
+              "/Os",
+              "/Oe",
+              "/Og",
+              "/Zi"
+            ],
+            "function": "DisplayCard",
+            "harness_sha256": "2c0799048057f59eae61a48be4d695278635594484adf0c70bf46c51b4e0c799",
+            "linked_code_sha256": "50f26fadc7ad26bf00aff4e99b55ddf658057e6673264aa3364641fee3a351ad",
+            "manifest_sha256": "025a0a9255d910cae4b122ab5a3f3fb40888bb456d7fe42158db7c9e622fcf50",
+            "object_sha256": "3924ee63cdc5b4722c0a33c4d58849bae1cb1709164285f402f561f92bbe6c30",
+            "oracle_sha256": "aa0596c6766322a8229ee3c36e57048c92adc82d50fbe2ef37afb8b85fcf4f11",
+            "profile": "msc600ax",
+            "source": "build\\workers\\behavior_text_card\\S23.c",
+            "source_sha256": "5e8e5f39325914cc1a6f1b5de9e5c894818e47d68a7ce594b2a514c99b37a1ea",
+            "unicorn_version": "2.1.4"
+          },
+          "lane_counts": {
+            "directed": 1,
+            "randomized": 0
+          },
+          "path": "evidence/behavior/harnesses/behavior-text-card-review-20261002/runs/DisplayCard/positive-replays/positive-case-3.jsonl.gz",
+          "row_count": 1,
+          "schema": "behavior-case-ledger-v1",
+          "sha256": "5d9be91317325e8f0194d8025aee6e4064a9c99bb2638dac5b86ebaae647953b"
+        }
+      }
+    ]
+  },
+  "evidence_date": "2026-10-02",
+  "review_record": {
+    "path": "evidence/behavior/functions/DisplayCard/contracts/logical-text-v1/contract-review.json",
+    "sha256": "afef4c7779aecf4caf2cd9467c608266870994d0cb18731e8071452a21d427de"
+  }
+}

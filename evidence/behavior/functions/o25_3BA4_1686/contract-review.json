@@ -1,0 +1,93 @@
+{
+  "function": "o25_3BA4_1686",
+  "source": "work/takeover/hardtail/seeds/S25_3BA4_5fc31bb8f45f.c",
+  "suite": "tools/behavior_suites/archive/randdirs-20261002-current-runner-ledger-final.py",
+  "module": "S25:3BA4",
+  "negative_controls": "build/workers/behavior_randdirs/standard-evidence-20261002-04/negative-controls.json",
+  "date": "2026-10-02",
+  "checkpoint": {
+    "commit": "54cb824d19c2f897ab17c8b163a954121d4e4843",
+    "date": "2026-10-02"
+  },
+  "harness_snapshot": "ss-ds-window-v1",
+  "harness_snapshot_review": {
+    "status": "APPROVED",
+    "reviewer": "root",
+    "reviewed_at": "2026-10-02",
+    "reason": "Exact imported runner and ledger for all322720 actual comparisons. Later opt-in UI formatter-pointer views are absent from this campaign. Fresh historical compiler replay independently verifies the whole-module source, object, profile, peers and private data."
+  },
+  "contract": {
+    "id": "get_my_rand_dirs_v1",
+    "input_domain": {
+      "caller": "rot -1/0/+1, dir0..7, planes1..3, legal surface/underground coordinates, movement modes0..4; coincident targets return before indexing dir.",
+      "directed": "222720 cases covering all256 neighbor masks, eight incoming directions, three rotation classes, all previous-neighbor exclusions, all planes, coordinate boundaries and target geometric classes.",
+      "randomized": "100000 reproducible cases, seed1686; additional rot classes/modes are robustness probes.",
+      "composition": "The function consumes helper boolean results and only listed position/mode/previous globals. Original TileCanBeMovedOn executes; exhaustive masks cover every eight-neighbor result class. Its exact source depends only on map tiles, terrain and supplied arguments, and reads no LifeA/HoleMap/RNG state. Supplementary5000 cases vary arbitrary valid byte tiles/terrain with unrelated-state canaries."
+    },
+    "limits": [
+      "Finite geometry/state validation; this claim does not assert exhaustive equivalence of arbitrary invalid pointers or every complete gameplay history.",
+      "Invalid rot/dir indexes, malformed map handles and incoherent memory are outside caller contract; out-of-map neighbor queries remain covered and must be rejected by the helper."
+    ],
+    "required_effects": [
+      "s16_return",
+      "rot_and_dir_pointer_values",
+      "all_observed_input_globals",
+      "GetDir_GetDis_and_actual_TileCanBeMovedOn_order_arguments_and_entry_state",
+      "all_final_nonstack_write_bytes",
+      "caller_ABI_preservation"
+    ],
+    "excluded_effects": [
+      {
+        "effect": "local stack homes and volatile register allocation",
+        "reason": "Return,rot/dir words,all listed globals,helper arguments,caller ABI andall nonstack mutations are compared. RNG is not read by this function or these helpers."
+      }
+    ],
+    "required_helpers": [
+      {
+        "name": "f_0BE8_0B83",
+        "must_execute": true
+      },
+      {
+        "name": "f_0BE8_0B21",
+        "must_execute": true
+      },
+      {
+        "name": "TileCanBeMovedOn",
+        "must_execute": true
+      }
+    ],
+    "review": {
+      "status": "APPROVED",
+      "reviewer": "root",
+      "reviewed_at": "2026-10-02"
+    }
+  },
+  "historical_difference": {
+    "description": "Target516/candidate520 bytes; structural lowering and local allocation differ. Natural candidate implements eight-neighbor eligibility and left/right selection with the same directional state transitions.",
+    "reason_exact_stopped": "Original-helper differential coverage closes the reconstructed function contract; historical instruction and allocation identity remains separate debt.",
+    "evidence_refs": [
+      "work/takeover/hardtail/all-open.json",
+      "work/takeover/hardtail/seeds/S25_3BA4_5fc31bb8f45f.c"
+    ]
+  },
+  "semantic_evidence": [
+    "Reviewed caller initialization: o25_3BA4_19AD sets rot0 and GetDir-1; subsequent values remain -1,0,+1 and dir0..7.",
+    "Pure neighbor predicate source and exact original helper explain composition over all256 boolean eligibility masks.",
+    "No candidate helper models, scaffolds or RNG substitutions execute; GetDir/GetDis/TileCanBeMovedOn are original DOS bodies.",
+    "Changed rotation output and unexpected ninth neighbor query compiled controls are detected with zero execution errors."
+  ],
+  "artifacts": [
+    {
+      "path": "build/workers/behavior_randdirs/DOMAIN.md",
+      "name": "domain-review.md"
+    },
+    {
+      "path": "build/workers/behavior_randdirs/tile-helper-arbitrary-valid-ledger-20261002-03/case-ledger.jsonl.gz",
+      "name": "tile-helper-5000-cases.jsonl.gz"
+    },
+    {
+      "path": "build/workers/behavior_randdirs/actual-tile-ledger-20261002-04-current-runner/randdirs-results.json",
+      "name": "campaign-and-helper-review.json"
+    }
+  ]
+}

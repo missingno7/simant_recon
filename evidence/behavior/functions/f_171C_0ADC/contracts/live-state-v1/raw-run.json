@@ -1,0 +1,221 @@
+{
+  "schema": "behavior-run-evidence-v1",
+  "completion": "COMPLETE",
+  "suite": "ralloc_memory_v2_stateful",
+  "identity": {
+    "address": {
+      "off": 2780,
+      "seg": 5916,
+      "size": 262,
+      "unit": "root"
+    },
+    "compiled_source_sha256": "3e0b67f3779b45261b13154aaf4a7b0f3d4e99d5262b3131991562eb6d2262a2",
+    "flags": [
+      "/AL",
+      "/Oeg",
+      "/Gs",
+      "/Zi"
+    ],
+    "function": "f_171C_0ADC",
+    "harness_sha256": "2c0799048057f59eae61a48be4d695278635594484adf0c70bf46c51b4e0c799",
+    "linked_code_sha256": "cb233a313aed216553fbd7a77b3c5d959f49c35e2c4d11c8ce2f8f92866161cf",
+    "manifest_sha256": "025a0a9255d910cae4b122ab5a3f3fb40888bb456d7fe42158db7c9e622fcf50",
+    "object_sha256": "8a085ca5ee2926a9e6632bdb8a2cf79b9f07b471518693b7694b5804b6b8e260",
+    "oracle_sha256": "aa0596c6766322a8229ee3c36e57048c92adc82d50fbe2ef37afb8b85fcf4f11",
+    "profile": "msc600ax",
+    "sequence_targets": [
+      "f_171C_09CC",
+      "f_171C_0ADC",
+      "f_171C_0CF4",
+      "f_171C_0FBC"
+    ],
+    "source": "evidence/behavior/harnesses/memory-final-20261002/runs/candidate/ralloc-module.c",
+    "source_sha256": "3d24904696b29c36b118479ecc50dd80b8d173f58a632a339df9391d08ea085b",
+    "unicorn_version": "2.1.4",
+    "suite_id": "ralloc-memory-final-20261002",
+    "module": "root:171C",
+    "suite_sha256": "dda4f6dd78778f2a98b811d1971fc5923300d57b2a2fa35221a213d208eb321d",
+    "historical_manifest_sha256": "025a0a9255d910cae4b122ab5a3f3fb40888bb456d7fe42158db7c9e622fcf50",
+    "seed": 5916
+  },
+  "execution": {
+    "engine": "PreparedPair.compare_sequence",
+    "actual_original_execution": true,
+    "actual_candidate_execution": true,
+    "original_exe_sha256": "aa0596c6766322a8229ee3c36e57048c92adc82d50fbe2ef37afb8b85fcf4f11",
+    "helper_policy": "non-target same-module helpers run original DOS code on both sides"
+  },
+  "cases": {
+    "directed": {
+      "generated": 7,
+      "executed": 7,
+      "actual_original_invocations": 7,
+      "actual_candidate_invocations": 7
+    },
+    "randomized": {
+      "generated": 117,
+      "executed": 117,
+      "actual_original_invocations": 117,
+      "actual_candidate_invocations": 117,
+      "seeds": [
+        5916
+      ]
+    }
+  },
+  "sequence_campaign": {
+    "generated_sequences": 265,
+    "directed_sequences": 9,
+    "randomized_sequences": 256,
+    "seed": 5916,
+    "ordered_plan_path": "evidence/behavior/harnesses/memory-final-20261002/runs/ordered-sequence-plan.json",
+    "helper_entry_step_ledgers": [
+      {
+        "function": "f_171C_1B84",
+        "path": "evidence/behavior/harnesses/memory-final-20261002/runs/ledgers/f_171C_1B84.jsonl.gz",
+        "sha256": "6aa0f1b5677503379f7d47caccfb37918e4cdb604af152d0625f831f3a354421",
+        "row_count": 265,
+        "sequence_entry_invocations": 265,
+        "execution_mode": "ORIGINAL_EXE",
+        "scope": "explicit helper entry step once per completed sequence; not a nested call count attributed to any target function"
+      },
+      {
+        "function": "f_171C_1BBA",
+        "path": "evidence/behavior/harnesses/memory-final-20261002/runs/ledgers/f_171C_1BBA.jsonl.gz",
+        "sha256": "88a0a81c063806d59ff03282a5d3fb8eb7fd19d1e567cb985a532e7644b612af",
+        "row_count": 265,
+        "sequence_entry_invocations": 265,
+        "execution_mode": "ORIGINAL_EXE",
+        "scope": "explicit helper entry step once per completed sequence; not a nested call count attributed to any target function"
+      },
+      {
+        "function": "f_171C_0BE2",
+        "path": "evidence/behavior/harnesses/memory-final-20261002/runs/ledgers/f_171C_0BE2.jsonl.gz",
+        "sha256": "2598c44630bb8e5d9b265cecd505f703990fb8a1bfb1a7c3c861416781e85916",
+        "row_count": 265,
+        "sequence_entry_invocations": 265,
+        "execution_mode": "ORIGINAL_EXE",
+        "scope": "explicit helper entry step once per completed sequence; not a nested call count attributed to any target function"
+      },
+      {
+        "function": "f_171C_13E4",
+        "path": "evidence/behavior/harnesses/memory-final-20261002/runs/ledgers/f_171C_13E4.jsonl.gz",
+        "sha256": "1c6247a127ef066052a3b1625d00b72134d1154a0d74aa77bc77d0191aa6efd3",
+        "row_count": 265,
+        "sequence_entry_invocations": 265,
+        "execution_mode": "ORIGINAL_EXE",
+        "scope": "explicit helper entry step once per completed sequence; not a nested call count attributed to any target function"
+      }
+    ]
+  },
+  "errors": 0,
+  "mismatches": 0,
+  "compared_effects": [
+    "operation return",
+    "allocator and master-table state",
+    "heap headers and payload bytes",
+    "handle identity and payload preservation",
+    "free-list topology",
+    "lock/unlock/free/reclaim effects",
+    "all nonstack writes",
+    "ordered actual helper calls",
+    "caller ABI"
+  ],
+  "unmodeled_boundaries": 0,
+  "peer_data_gates": "PASS",
+  "case_ledger": {
+    "schema": "behavior-case-ledger-v1",
+    "path": "evidence/behavior/harnesses/memory-final-20261002/runs/ledgers/f_171C_0ADC.jsonl.gz",
+    "sha256": "4a72522190bf959ffa0639db97e6b962154f964ad87cf79ed01cde5e7c4c7224",
+    "row_count": 124,
+    "lane_counts": {
+      "directed": 7,
+      "randomized": 117
+    },
+    "compression": "gzip",
+    "identity": {
+      "address": {
+        "off": 2780,
+        "seg": 5916,
+        "size": 262,
+        "unit": "root"
+      },
+      "compiled_source_sha256": "3e0b67f3779b45261b13154aaf4a7b0f3d4e99d5262b3131991562eb6d2262a2",
+      "flags": [
+        "/AL",
+        "/Oeg",
+        "/Gs",
+        "/Zi"
+      ],
+      "function": "f_171C_0ADC",
+      "harness_sha256": "2c0799048057f59eae61a48be4d695278635594484adf0c70bf46c51b4e0c799",
+      "linked_code_sha256": "cb233a313aed216553fbd7a77b3c5d959f49c35e2c4d11c8ce2f8f92866161cf",
+      "manifest_sha256": "025a0a9255d910cae4b122ab5a3f3fb40888bb456d7fe42158db7c9e622fcf50",
+      "object_sha256": "8a085ca5ee2926a9e6632bdb8a2cf79b9f07b471518693b7694b5804b6b8e260",
+      "oracle_sha256": "aa0596c6766322a8229ee3c36e57048c92adc82d50fbe2ef37afb8b85fcf4f11",
+      "profile": "msc600ax",
+      "sequence_targets": [
+        "f_171C_09CC",
+        "f_171C_0ADC",
+        "f_171C_0CF4",
+        "f_171C_0FBC"
+      ],
+      "source": "build\\workers\\behavior_memory\\final-run\\source\\ralloc-module.c",
+      "source_sha256": "3d24904696b29c36b118479ecc50dd80b8d173f58a632a339df9391d08ea085b",
+      "unicorn_version": "2.1.4"
+    }
+  },
+  "positive_controls": [
+    {
+      "id": "positive-f_171C_0ADC-directed-basic-00-f_171C_0ADC",
+      "case_id": "directed/basic/00-f_171C_0ADC",
+      "executed": true,
+      "matched": true,
+      "original_executed": true,
+      "candidate_executed": true,
+      "execution_errors": 0,
+      "source_sha256": "3d24904696b29c36b118479ecc50dd80b8d173f58a632a339df9391d08ea085b",
+      "object_sha256": "8a085ca5ee2926a9e6632bdb8a2cf79b9f07b471518693b7694b5804b6b8e260",
+      "oracle_sha256": "aa0596c6766322a8229ee3c36e57048c92adc82d50fbe2ef37afb8b85fcf4f11",
+      "original_observation_sha256": "f97011dc346ef157cefef459258969d8bef24c3be724511dbf222af39fb124f2",
+      "candidate_observation_sha256": "f97011dc346ef157cefef459258969d8bef24c3be724511dbf222af39fb124f2",
+      "compared_effects": [
+        "operation return",
+        "allocator and master-table state",
+        "heap headers and payload bytes",
+        "handle identity and payload preservation",
+        "free-list topology",
+        "lock/unlock/free/reclaim effects",
+        "all nonstack writes",
+        "ordered actual helper calls",
+        "caller ABI"
+      ]
+    },
+    {
+      "id": "positive-f_171C_0ADC-random-0000171c-0-00-f_171C_0ADC",
+      "case_id": "random/0000171c/0/00-f_171C_0ADC",
+      "executed": true,
+      "matched": true,
+      "original_executed": true,
+      "candidate_executed": true,
+      "execution_errors": 0,
+      "source_sha256": "3d24904696b29c36b118479ecc50dd80b8d173f58a632a339df9391d08ea085b",
+      "object_sha256": "8a085ca5ee2926a9e6632bdb8a2cf79b9f07b471518693b7694b5804b6b8e260",
+      "oracle_sha256": "aa0596c6766322a8229ee3c36e57048c92adc82d50fbe2ef37afb8b85fcf4f11",
+      "original_observation_sha256": "1b956ec31c22ca870e4c7c70595fcf2734ab243397ef2a544fd664eed52afbb2",
+      "candidate_observation_sha256": "1b956ec31c22ca870e4c7c70595fcf2734ab243397ef2a544fd664eed52afbb2",
+      "compared_effects": [
+        "operation return",
+        "allocator and master-table state",
+        "heap headers and payload bytes",
+        "handle identity and payload preservation",
+        "free-list topology",
+        "lock/unlock/free/reclaim effects",
+        "all nonstack writes",
+        "ordered actual helper calls",
+        "caller ABI"
+      ]
+    }
+  ],
+  "helper_boundaries": [],
+  "behavioral_status": "UNRESOLVED; root review template only; no claim registered"
+}

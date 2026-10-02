@@ -1,0 +1,70 @@
+{
+  "schema": "behavior-suite-run-v1",
+  "suite": "ralloc_memory_v2_stateful",
+  "function": "f_171C_09CC",
+  "source": "build\\workers\\behavior_memory\\final-run\\source\\ralloc-module.c",
+  "source_sha256": "3d24904696b29c36b118479ecc50dd80b8d173f58a632a339df9391d08ea085b",
+  "object_sha256": "8a085ca5ee2926a9e6632bdb8a2cf79b9f07b471518693b7694b5804b6b8e260",
+  "oracle_sha256": "aa0596c6766322a8229ee3c36e57048c92adc82d50fbe2ef37afb8b85fcf4f11",
+  "manifest_sha256": "025a0a9255d910cae4b122ab5a3f3fb40888bb456d7fe42158db7c9e622fcf50",
+  "harness_sha256": "2c0799048057f59eae61a48be4d695278635594484adf0c70bf46c51b4e0c799",
+  "suite_sha256": "dda4f6dd78778f2a98b811d1971fc5923300d57b2a2fa35221a213d208eb321d",
+  "candidate_strict": {
+    "exact": false,
+    "reasons": [
+      "length 146 != target 144",
+      "bytes differ (first at +0x9, 85 differing)"
+    ],
+    "fixups": 3,
+    "relocations": 0,
+    "reloc_order": "EXACT"
+  },
+  "case_ledger": {
+    "schema": "behavior-case-ledger-v1",
+    "path": "D:/Prog/simant_recon/build/workers/behavior_memory/final-pinned-20261002/snapshot/build/workers/behavior_memory/final-run/f_171C_09CC-case-ledger.jsonl.gz",
+    "sha256": "61ada385364efb9cb94e61c89f6f5bebc466e830508aa0926718c46c7f6309fa",
+    "row_count": 265,
+    "lane_counts": {
+      "directed": 9,
+      "randomized": 256
+    },
+    "identity": {
+      "address": {
+        "off": 2508,
+        "seg": 5916,
+        "size": 144,
+        "unit": "root"
+      },
+      "compiled_source_sha256": "3e0b67f3779b45261b13154aaf4a7b0f3d4e99d5262b3131991562eb6d2262a2",
+      "flags": [
+        "/AL",
+        "/Oeg",
+        "/Gs",
+        "/Zi"
+      ],
+      "function": "f_171C_09CC",
+      "harness_sha256": "2c0799048057f59eae61a48be4d695278635594484adf0c70bf46c51b4e0c799",
+      "linked_code_sha256": "cb233a313aed216553fbd7a77b3c5d959f49c35e2c4d11c8ce2f8f92866161cf",
+      "manifest_sha256": "025a0a9255d910cae4b122ab5a3f3fb40888bb456d7fe42158db7c9e622fcf50",
+      "object_sha256": "8a085ca5ee2926a9e6632bdb8a2cf79b9f07b471518693b7694b5804b6b8e260",
+      "oracle_sha256": "aa0596c6766322a8229ee3c36e57048c92adc82d50fbe2ef37afb8b85fcf4f11",
+      "profile": "msc600ax",
+      "sequence_targets": [
+        "f_171C_09CC",
+        "f_171C_0ADC",
+        "f_171C_0CF4",
+        "f_171C_0FBC"
+      ],
+      "source": "build\\workers\\behavior_memory\\final-run\\source\\ralloc-module.c",
+      "source_sha256": "3d24904696b29c36b118479ecc50dd80b8d173f58a632a339df9391d08ea085b",
+      "unicorn_version": "2.1.4"
+    },
+    "compression": "gzip"
+  },
+  "calls": 265,
+  "matched": 265,
+  "mismatches": 0,
+  "errors": 0,
+  "negative_control_detected": true,
+  "behavioral_status": "UNRESOLVED; diagnostic behavioral differential only; supervisor review required"
+}

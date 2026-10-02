@@ -1,0 +1,42 @@
+{
+  "excluded_effects": [
+    "glyph bitmap masks",
+    "framebuffer pixels",
+    "f_24AB_038D pen update g_3DA0",
+    "arbitrary font-driver/resource state"
+  ],
+  "helper_source_review": {
+    "path": "evidence/behavior/harnesses/behavior-text-card-review-20261002/runs/win_PrintStyleTextInRect/helper-source-review.json",
+    "sha256": "027f01be61afda7de3868e10d16a723bf78c2b047186ec492e2ee6bdc9c212b1"
+  },
+  "id": "text-layout-v1",
+  "input_domain": {
+    "directed_cases": 360,
+    "random_seed": 969343122,
+    "randomized_cases": 1000,
+    "tested": "directed text/control/punctuation, style-run positions/faces/font IDs 2..5, rectangle sizes/origins, first-line clipping and record mode; deterministic random strings and valid sorted styles; original font selection and metric helpers over explicit valid proportional/fixed font tables"
+  },
+  "limits": [
+    "Finite bounded differential suite; not exhaustive over all 16-bit inputs.",
+    "Only the explicitly listed logical request/fixture effects are claimed; helpers whose host callbacks replace DOS bodies are not certified for unlisted backend state.",
+    "Four explicit valid VM Font records cover proportional variable widths, negative-kern bonus plus missing glyph, fixed zero advance, and fixed width 7; this run does not cover arbitrary loaded font files or arbitrary 16-bit pointers.",
+    "f_24AB_038D is observed at the logical text-draw boundary with complete projected NUL text and x/y. The module does not consume g_3DA0 after the call; pen updates, glyph bitmap generation, and framebuffer pixels are outside the claim."
+  ],
+  "required_effects": [
+    "ordered draw calls and pointed text",
+    "font helper sequence and metrics",
+    "hotspot writes and all nonstack memory",
+    "return value and caller ABI"
+  ],
+  "required_helpers": [
+    {
+      "must_execute": true,
+      "name": "f_24AB_038D"
+    }
+  ],
+  "review": {
+    "reviewed_at": null,
+    "reviewer": null,
+    "status": "PENDING_ROOT_REVIEW"
+  }
+}

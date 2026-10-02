@@ -1,0 +1,43 @@
+{
+  "schema": "behavior-negative-controls-v1",
+  "function": "f_1E57_038E",
+  "suite_id": "windows_v1",
+  "identity": {
+    "source_sha256": "edfb01cec348d79243d7cc1630248045fa7790a321192f83d185298d0e9b67f6",
+    "harness_sha256": "2c0799048057f59eae61a48be4d695278635594484adf0c70bf46c51b4e0c799",
+    "oracle_sha256": "aa0596c6766322a8229ee3c36e57048c92adc82d50fbe2ef37afb8b85fcf4f11",
+    "historical_manifest_sha256": "025a0a9255d910cae4b122ab5a3f3fb40888bb456d7fe42158db7c9e622fcf50",
+    "suite_sha256": "d30cd821105091af11ddd1b4daa6b60a5516fbd6a8cc61b4a7cb338412935b26"
+  },
+  "errors": 0,
+  "mismatches_detected": 1,
+  "controls": [
+    {
+      "id": "wrong-clip-rectangle",
+      "target": "f_1E57_038E",
+      "executed": true,
+      "detected_mismatch": true,
+      "original_executed": true,
+      "mutant_executed": true,
+      "baseline_matches": true,
+      "mutant_differs": true,
+      "execution_errors": 0,
+      "mismatch_categories": [
+        "nonstack_memory",
+        "ranges",
+        "trace"
+      ],
+      "baseline_observation_sha256": "454965b1fe646fb04e936afd90aa4c912a63b6b2e84a0589686095811166f695",
+      "mutant_observation_sha256": "a909513ceb17ffd903e60fb3b17051e30d89f8ab71191b7f329f74fd06c7c7b6",
+      "mutant_source_sha256": "113209d73b38b847c6309bd12fe949867cb366030a8ef325998259ca95f10de9",
+      "mutant_source": {
+        "path": "build/workers/behavior_window/packet-proposals-final-20261002/f_1E57_038E/negative-artifacts/wrong-clip-rectangle.c",
+        "sha256": "113209d73b38b847c6309bd12fe949867cb366030a8ef325998259ca95f10de9"
+      },
+      "mutant_object": {
+        "path": "build/workers/behavior_window/packet-proposals-final-20261002/f_1E57_038E/negative-artifacts/wrong-clip-rectangle.obj",
+        "sha256": "8354209f251b2da45dd4c62eafb75bbaf44bec5d4dcc8c54414a19491d1a1fd7"
+      }
+    }
+  ]
+}

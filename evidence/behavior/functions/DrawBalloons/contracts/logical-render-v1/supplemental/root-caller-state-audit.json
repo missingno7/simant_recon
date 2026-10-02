@@ -1,0 +1,125 @@
+{
+  "schema": "render-drawballoons-caller-state-audit-v1",
+  "status": "PENDING_ROOT_REVIEW",
+  "purpose": "Source-specific caller-dataflow analysis of omitted renderer writes; supports narrow logical render-contract review only. It is not helper equivalence or physical-display proof.",
+  "target": "DrawBalloons",
+  "target_source": "work/takeover/hardtail/seeds/root_0250_e41a4ab8c56c.c",
+  "target_source_sha256": "e41a4ab8c56c0d4923ace8b02027f2471feee049aabe0577588e206e930b4db2",
+  "suite": "tools/behavior_suites/archive/render_small-d25a35e5a516d8f4.py",
+  "suite_sha256": "d25a35e5a516d8f490bec1678e583c3a449c648b0a105a7bc32d3734841230df",
+  "source_pins": {
+    "src/root/m0250.c": {
+      "sha256": "bb8a325c543151e09cb173d2194844877805a9e1058d3b24362ff5a7cbd9f61b",
+      "role": "canonical caller/helper definitions"
+    },
+    "src/root/m1E57.c": {
+      "sha256": "812e8ec90bcf25c56adf073e753bf72f8f6a3bc108055e112c43f894e9d8d0c3",
+      "role": "nested clip implementation"
+    },
+    "work/takeover/hardtail/seeds/root_0250_e41a4ab8c56c.c": {
+      "sha256": "e41a4ab8c56c0d4923ace8b02027f2471feee049aabe0577588e206e930b4db2",
+      "role": "compiled target source"
+    },
+    "tools/behavior_suites/archive/render_small-d25a35e5a516d8f4.py": {
+      "sha256": "d25a35e5a516d8f490bec1678e583c3a449c648b0a105a7bc32d3734841230df",
+      "role": "exact suite copy"
+    },
+    "evidence/behavior/harnesses/render-small-d25a35e5-20261002/tools/behavior.py": {
+      "sha256": "2c0799048057f59eae61a48be4d695278635594484adf0c70bf46c51b4e0c799",
+      "role": "execution harness"
+    }
+  },
+  "execution_note": {
+    "target_corpus_replayed": false,
+    "focused_original_helper_controls": [
+      {
+        "helper": "f_0250_0915",
+        "attempted": true,
+        "result": "UNUSABLE_PLATFORM_PATH",
+        "detail": "A one-case original-helper probe entered the S00 renderer routine and stopped with an invalid-instruction fault at 31AD:BAA5 before producing a completed helper observation. This shows the helper cannot be isolated here without reproducing the renderer overlay path; it is not counted as a passing control."
+      },
+      {
+        "helper": "f_0250_0B86",
+        "attempted": true,
+        "result": "FIXTURE_NOT_VALIDATED",
+        "detail": "A one-case original/candidate probe completed, but the attempted standalone fd_50F6_10EE pointer fixture produced an unvalidated g_3D20 byte view. The output is not used as pixel or helper proof; exact source dataflow below is the evidence."
+      }
+    ],
+    "use": "Keep existing 1009-case paired target corpus unchanged; these focused attempts do not alter run counts or claims."
+  },
+  "source_dataflow": [
+    {
+      "helper": "f_0250_0915",
+      "canonical_definition": "void far f_0250_0915(void)",
+      "source": "src/root/m0250.c",
+      "source_sha256": "bb8a325c543151e09cb173d2194844877805a9e1058d3b24362ff5a7cbd9f61b",
+      "abi": "direct zero-argument far call",
+      "effects_in_body": [
+        "reads g_94E4",
+        "reads and mutates g_9126 by subtracting one of 0x100, 0x200, or 0x280 based on its range",
+        "dispatches mode-specific low-level tile/life raster routines; output/pixel storage is backend-dependent"
+      ],
+      "caller_order": "For every balloon tile, DrawBalloons calls f_0250_1018(tx,ty) immediately before testing g_9126 and selecting exactly one renderer: f_0250_0915 when nonzero, otherwise f_0250_0B86. f_0250_1018 first sets g_94E4=0 and g_9126=0, then computes both from the selected map/life cell; its life-zero early returns occur only after both resets.",
+      "noninterference_within_target": "If another tile iteration follows, its f_0250_1018 reset occurs before any read of the prior g_9126/g_94E4. After the last tile, DrawBalloons calls f_0250_062A (which reads only g_19D0 and calls f_195A_010D), then its g_50F6_37EE/g_50F6_37EA boundaries, Ralloc unlock/free, font reset, and fd_50F6_1092=0. No subsequent DrawBalloons source expression reads g_9126 or g_94E4.",
+      "omitted_state_limit": "The final f_0250_0915 mutation to g_9126 can remain visible after DrawBalloons returns; it is excluded backend renderer state, not claimed equivalent. This analysis proves only that it cannot change later control or input reads inside this target. The next caller outside DrawBalloons is out of scope."
+    },
+    {
+      "helper": "f_0250_0B86",
+      "canonical_definition": "void far f_0250_0B86(void)",
+      "source": "src/root/m0250.c",
+      "source_sha256": "bb8a325c543151e09cb173d2194844877805a9e1058d3b24362ff5a7cbd9f61b",
+      "abi": "direct zero-argument far call",
+      "effects_in_body": [
+        "reads fd_50F6_1102 and g_94E4",
+        "mode 1 dispatches to o00_31AD_1A8F; modes 2 and 3 copy tile data to g_3D20 using source offsets derived from g_94E4"
+      ],
+      "caller_order": "The same f_0250_1018 reset and g_9126 branch precede the call. After f_0250_0B86, DrawBalloons immediately calls the synthetic fd_50F6_37E6 destination/stride slot. The hook produces a deterministic fixture tile payload into the composition buffer; it does not read g_3D20 or execute f_0250_0ADB.",
+      "noninterference_within_target": "DrawBalloons has no later source read of g_3D20 or of the helper-local tile-source address. If another iteration follows, f_0250_1018 rewrites g_94E4/g_9126 first. After the last iteration, only f_0250_062A, clip/blit host slots, Ralloc lifecycle, font reset, and queued-count reset execute.",
+      "omitted_state_limit": "The g_3D20 copy and mode-1 hardware raster are backend pixel outputs. They are not modeled or claimed; the callback\u2019s deterministic tile payload is a logical fixture boundary only, not original tile pixel equivalence."
+    },
+    {
+      "helper": "f_0250_5058",
+      "canonical_definition": "void far f_0250_5058(void)",
+      "source": "src/root/m0250.c",
+      "source_sha256": "bb8a325c543151e09cb173d2194844877805a9e1058d3b24362ff5a7cbd9f61b",
+      "nested_definition": "void far f_1E57_08F5(struct Rect far *r)",
+      "nested_source": "src/root/m1E57.c",
+      "nested_source_sha256": "812e8ec90bcf25c56adf073e753bf72f8f6a3bc108055e112c43f894e9d8d0c3",
+      "abi": "direct zero-argument f_0250_5058; nested helper receives far Rect pointer with a three-Rect sequence terminated by top=0x8000",
+      "body_effects": "f_0250_5058 calls win_GetObjRect(0x15,&fd_50F6_1104), builds rects from fd_50F6_110C, fd_50F6_1104, and the sentinel, then calls f_1E57_08F5. The nested helper allocates through Ralloc, computes/intersects clip lists, updates g_5AAC/g_5742 and invokes clip-state update helpers.",
+      "caller_dataflow": "DrawBalloons invokes f_0250_5058 only when fd_50F6_37D2==500. Inside DrawBalloons, the only later window rectangle reads are from fd_50F6_110C for balloonRect geometry; there is no later read of fd_50F6_1104, g_5AAC, or g_5742. f_0250_5058\u2019s clipping state can affect drawing in the surrounding f_0250_13A6 caller and the actual platform renderer; those effects are outside this standalone target contract.",
+      "omitted_state_limit": "The suite callback logs the existing fd_50F6_110C bytes only. It does not execute win_GetObjRect, f_1E57_08F5, Ralloc clip-list allocation, or alter clip globals. Treat this as a window-clip setup request trace, not executed clipping behavior."
+    },
+    {
+      "helper": "fd_50F6_37EE and fd_50F6_37EA",
+      "canonical_role": "two synthetic host slots that reuse f_0250_0D10/f_0250_0721 address keys; fd_50F6_37EE is eight stack words and fd_50F6_37EA is six stack words. Neither hook invokes the direct canonical two-int helper body at its reused address.",
+      "caller_order": "When fd_50F6_37D2!=500, DrawBalloons invokes fd_50F6_37EE with (background rect, buffer-size record, balloon rect, buffer pointer), invokes fd_50F6_37EA with (picture source, buffer destination, x/y phases), then invokes fd_50F6_37EE with reversed rect/buffer ordering. All slots return void; caller assigns no result and branches on no result.",
+      "actual_effects_excluded": "Real implementations may read screen pixels into the buffer, composite picture pixels, then write pixels back to the screen. The hooks project pointed records/source bytes and perform no writes. The trace supports ordered callsite arguments and source pointers only; it cannot support changed buffer contents after the sequence or physical clipping/drawing equivalence.",
+      "caller_dependency": "The second fd_50F6_37EE display operation may consume the composed buffer to generate external screen output. DrawBalloons has no later C read of that buffer after the second slot and releases it, but final composition/pixel output is excluded because the external host slots are the output boundary.",
+      "suite_hook_behavior": {
+        "fd_50F6_37EE": "stack8 callback only projects four records and current buffer bytes; no handler writes memory or returns a value",
+        "fd_50F6_37EA": "stack6 callback only projects picture source bytes, current buffer bytes, and phase offsets; no handler writes memory or returns a value"
+      }
+    }
+  ],
+  "contract_limits": [
+    "f_0250_0915 final g_9126 mutation may persist after return and is explicitly excluded.",
+    "f_0250_0B86 g_3D20 and hardware pixel outputs are excluded; deterministic fixture bytes from the host transfer slot are not original renderer output.",
+    "f_0250_5058/f_1E57_08F5 clip-list globals and Ralloc allocation are excluded; the outer caller may consume clip state after this target returns.",
+    "fd_50F6_37EE and fd_50F6_37EA are void and has no return-dependent control path, but its no-write hook omits screen/buffer copy effects; only call order and argument/pointer projection are retained.",
+    "No framebuffer, actual nested clip setup, or full helper-equivalence claim; run corpus and original/candidate observations remain unchanged.",
+    "The modeled message-blit slot fd_50F6_37EA reads picture and buffer inputs but does not composite pixels into the buffer; that output is outside the contract."
+  ],
+  "source_ranges": {
+    "src/root/m0250.c": {
+      "f_0250_0915": "356-400",
+      "f_0250_0B86": "425-438",
+      "f_0250_1018 resets and map/life writes": "737-842",
+      "DrawBalloons per-tile sequencing and later use": "1921-2025",
+      "f_0250_5058 callsite/definition": "1959-1965; 2031-2041"
+    },
+    "src/root/m1E57.c": {
+      "f_1E57_08F5 nested clip-state/Ralloc body": "330-364"
+    }
+  }
+}

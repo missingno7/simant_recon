@@ -1,0 +1,712 @@
+{
+  "schema": "ralloc-memory-failure-path-diagnostic-v2",
+  "status": "SUPPLEMENTAL_DIAGNOSTIC_ONLY",
+  "fixture_contract": "tools/behavior_suites/memory.py heap_case: valid A100 heap, A000 master table, heap/master disjoint from reserved DOS stack; no fake callbacks or returned Punt values",
+  "dependencies": {
+    "source": "build\\workers\\behavior_memory\\final-pinned-20261002\\snapshot\\build\\workers\\behavior_memory\\final-run\\source\\ralloc-module.c",
+    "source_sha256": "3d24904696b29c36b118479ecc50dd80b8d173f58a632a339df9391d08ea085b",
+    "runner": "build\\workers\\behavior_memory\\final-pinned-20261002\\snapshot\\tools\\behavior.py",
+    "runner_sha256": "2c0799048057f59eae61a48be4d695278635594484adf0c70bf46c51b4e0c799",
+    "suite": "build\\workers\\behavior_memory\\final-pinned-20261002\\snapshot\\tools\\behavior_suites\\memory.py",
+    "suite_sha256": "dda4f6dd78778f2a98b811d1971fc5923300d57b2a2fa35221a213d208eb321d",
+    "oracle_exe_sha256": "aa0596c6766322a8229ee3c36e57048c92adc82d50fbe2ef37afb8b85fcf4f11",
+    "manifest_sha256": "025a0a9255d910cae4b122ab5a3f3fb40888bb456d7fe42158db7c9e622fcf50",
+    "unicorn_version": "2.1.4",
+    "canonical_archive_paths": {
+      "source": "evidence/behavior/harnesses/memory-final-20261002/runs/candidate/ralloc-module.c",
+      "runner": "evidence/behavior/harnesses/memory-final-20261002/tools/behavior.py",
+      "suite": "evidence/behavior/harnesses/memory-final-20261002/tools/behavior_suites/memory.py"
+    }
+  },
+  "probes": [
+    {
+      "kind": "returned_differential_control",
+      "target": "f_171C_09CC",
+      "case": "success/09cc-shrink-split",
+      "oracle_return": 1,
+      "candidate_return": 1,
+      "equal": true,
+      "diff": {},
+      "pair_identity": {
+        "function": "f_171C_09CC",
+        "address": {
+          "unit": "root",
+          "seg": 5916,
+          "off": 2508,
+          "size": 144
+        },
+        "source": "build\\workers\\behavior_memory\\final-run\\source\\ralloc-module.c",
+        "source_sha256": "3d24904696b29c36b118479ecc50dd80b8d173f58a632a339df9391d08ea085b",
+        "compiled_source_sha256": "e5f764f8673f8bf143425194d07bb549f589fb6db4baa644ab943f27b019455c",
+        "object_sha256": "c0e2f3d08ff3fddd5a36401856093bbeec9e199ca488d6b1b46302a96d151ea7",
+        "linked_code_sha256": "cb233a313aed216553fbd7a77b3c5d959f49c35e2c4d11c8ce2f8f92866161cf",
+        "oracle_sha256": "aa0596c6766322a8229ee3c36e57048c92adc82d50fbe2ef37afb8b85fcf4f11",
+        "unicorn_version": "2.1.4",
+        "harness_sha256": "2c0799048057f59eae61a48be4d695278635594484adf0c70bf46c51b4e0c799",
+        "profile": "msc600ax",
+        "flags": [
+          "/AL",
+          "/Oeg",
+          "/Gs",
+          "/Zi"
+        ],
+        "manifest_sha256": "025a0a9255d910cae4b122ab5a3f3fb40888bb456d7fe42158db7c9e622fcf50"
+      }
+    },
+    {
+      "kind": "returned_differential_control",
+      "target": "f_171C_09CC",
+      "case": "failure/09cc-grow-too-large",
+      "oracle_return": 0,
+      "candidate_return": 0,
+      "equal": true,
+      "diff": {},
+      "pair_identity": {
+        "function": "f_171C_09CC",
+        "address": {
+          "unit": "root",
+          "seg": 5916,
+          "off": 2508,
+          "size": 144
+        },
+        "source": "build\\workers\\behavior_memory\\final-run\\source\\ralloc-module.c",
+        "source_sha256": "3d24904696b29c36b118479ecc50dd80b8d173f58a632a339df9391d08ea085b",
+        "compiled_source_sha256": "e5f764f8673f8bf143425194d07bb549f589fb6db4baa644ab943f27b019455c",
+        "object_sha256": "c0e2f3d08ff3fddd5a36401856093bbeec9e199ca488d6b1b46302a96d151ea7",
+        "linked_code_sha256": "cb233a313aed216553fbd7a77b3c5d959f49c35e2c4d11c8ce2f8f92866161cf",
+        "oracle_sha256": "aa0596c6766322a8229ee3c36e57048c92adc82d50fbe2ef37afb8b85fcf4f11",
+        "unicorn_version": "2.1.4",
+        "harness_sha256": "2c0799048057f59eae61a48be4d695278635594484adf0c70bf46c51b4e0c799",
+        "profile": "msc600ax",
+        "flags": [
+          "/AL",
+          "/Oeg",
+          "/Gs",
+          "/Zi"
+        ],
+        "manifest_sha256": "025a0a9255d910cae4b122ab5a3f3fb40888bb456d7fe42158db7c9e622fcf50"
+      }
+    },
+    {
+      "kind": "returned_differential_control",
+      "target": "f_171C_0FBC",
+      "case": "0fbc/split",
+      "oracle_return": 2707030016,
+      "candidate_return": 2707030016,
+      "equal": true,
+      "diff": {},
+      "pair_identity": {
+        "function": "f_171C_0FBC",
+        "address": {
+          "unit": "root",
+          "seg": 5916,
+          "off": 4028,
+          "size": 566
+        },
+        "source": "build\\workers\\behavior_memory\\final-run\\source\\ralloc-module.c",
+        "source_sha256": "3d24904696b29c36b118479ecc50dd80b8d173f58a632a339df9391d08ea085b",
+        "compiled_source_sha256": "630a5ddcfcff8d85c6cc7c22619c0e3f44ea8d3dc7e34ed5a29f84e996e13853",
+        "object_sha256": "35368dca0b0642a63ca2d7c94770260b04b446e72b9d059b36d86e7bce572473",
+        "linked_code_sha256": "cb233a313aed216553fbd7a77b3c5d959f49c35e2c4d11c8ce2f8f92866161cf",
+        "oracle_sha256": "aa0596c6766322a8229ee3c36e57048c92adc82d50fbe2ef37afb8b85fcf4f11",
+        "unicorn_version": "2.1.4",
+        "harness_sha256": "2c0799048057f59eae61a48be4d695278635594484adf0c70bf46c51b4e0c799",
+        "profile": "msc600ax",
+        "flags": [
+          "/AL",
+          "/Oeg",
+          "/Gs",
+          "/Zi"
+        ],
+        "manifest_sha256": "025a0a9255d910cae4b122ab5a3f3fb40888bb456d7fe42158db7c9e622fcf50"
+      }
+    },
+    {
+      "kind": "original_helper_return_both_lanes",
+      "target": "f_171C_0BE2",
+      "case": "failure/full-firm-no-reclaim",
+      "oracle_return": 0,
+      "candidate_return": 0,
+      "equal": true,
+      "execution_mode": "actual same-module original helper on both lanes",
+      "pair_identity": {
+        "function": "f_171C_0FBC",
+        "address": {
+          "unit": "root",
+          "seg": 5916,
+          "off": 4028,
+          "size": 566
+        },
+        "source": "build\\workers\\behavior_memory\\final-run\\source\\ralloc-module.c",
+        "source_sha256": "3d24904696b29c36b118479ecc50dd80b8d173f58a632a339df9391d08ea085b",
+        "compiled_source_sha256": "630a5ddcfcff8d85c6cc7c22619c0e3f44ea8d3dc7e34ed5a29f84e996e13853",
+        "object_sha256": "35368dca0b0642a63ca2d7c94770260b04b446e72b9d059b36d86e7bce572473",
+        "linked_code_sha256": "cb233a313aed216553fbd7a77b3c5d959f49c35e2c4d11c8ce2f8f92866161cf",
+        "oracle_sha256": "aa0596c6766322a8229ee3c36e57048c92adc82d50fbe2ef37afb8b85fcf4f11",
+        "unicorn_version": "2.1.4",
+        "harness_sha256": "2c0799048057f59eae61a48be4d695278635594484adf0c70bf46c51b4e0c799",
+        "profile": "msc600ax",
+        "flags": [
+          "/AL",
+          "/Oeg",
+          "/Gs",
+          "/Zi"
+        ],
+        "manifest_sha256": "025a0a9255d910cae4b122ab5a3f3fb40888bb456d7fe42158db7c9e622fcf50",
+        "sequence_targets": [
+          "f_171C_0FBC"
+        ]
+      }
+    },
+    {
+      "kind": "original_helper_success_both_lanes",
+      "target": "f_171C_0BE2",
+      "case": "success/reclaim-oldest-soft",
+      "oracle_return": 1,
+      "candidate_return": 1,
+      "equal": true,
+      "execution_mode": "actual same-module original helper on both lanes",
+      "fixture": {
+        "suite": "ralloc_memory_v2_stateful",
+        "contract": "valid full arena; reclaim oldest unlocked soft handle",
+        "heap_start": 41216,
+        "heap_end": 41344,
+        "blocks": [
+          {
+            "seg": 41216,
+            "paras": 16,
+            "type": 3,
+            "size": 224,
+            "age": 1,
+            "handle": 65532
+          },
+          {
+            "seg": 41232,
+            "paras": 112,
+            "type": 1,
+            "size": 1760,
+            "age": 2,
+            "handle": 65528
+          }
+        ]
+      },
+      "args": [
+        0
+      ],
+      "pair_identity": {
+        "function": "f_171C_0FBC",
+        "address": {
+          "unit": "root",
+          "seg": 5916,
+          "off": 4028,
+          "size": 566
+        },
+        "source": "build\\workers\\behavior_memory\\final-run\\source\\ralloc-module.c",
+        "source_sha256": "3d24904696b29c36b118479ecc50dd80b8d173f58a632a339df9391d08ea085b",
+        "compiled_source_sha256": "630a5ddcfcff8d85c6cc7c22619c0e3f44ea8d3dc7e34ed5a29f84e996e13853",
+        "object_sha256": "35368dca0b0642a63ca2d7c94770260b04b446e72b9d059b36d86e7bce572473",
+        "linked_code_sha256": "cb233a313aed216553fbd7a77b3c5d959f49c35e2c4d11c8ce2f8f92866161cf",
+        "oracle_sha256": "aa0596c6766322a8229ee3c36e57048c92adc82d50fbe2ef37afb8b85fcf4f11",
+        "unicorn_version": "2.1.4",
+        "harness_sha256": "2c0799048057f59eae61a48be4d695278635594484adf0c70bf46c51b4e0c799",
+        "profile": "msc600ax",
+        "flags": [
+          "/AL",
+          "/Oeg",
+          "/Gs",
+          "/Zi"
+        ],
+        "manifest_sha256": "025a0a9255d910cae4b122ab5a3f3fb40888bb456d7fe42158db7c9e622fcf50",
+        "sequence_targets": [
+          "f_171C_0FBC"
+        ]
+      }
+    },
+    {
+      "kind": "terminal_punt_boundary_pair",
+      "target": "f_171C_0FBC",
+      "case": "failure/f0fbc-full-no-reclaim",
+      "fixture": {
+        "suite": "ralloc_memory_v2_stateful",
+        "contract": "valid full arena; no free block and no reclaimable soft handle",
+        "heap_start": 41216,
+        "heap_end": 41344,
+        "blocks": [
+          {
+            "seg": 41216,
+            "paras": 128,
+            "type": 1,
+            "size": 2016,
+            "age": 1,
+            "handle": 65532
+          }
+        ]
+      },
+      "args": [
+        1,
+        1
+      ],
+      "lanes": [
+        {
+          "lane": "original",
+          "outcome": "PUNT_BOUNDARY",
+          "error": "failure/f0fbc-full-no-reclaim oracle at 1C62:000C: instruction budget exhausted or stopped before return",
+          "punt": {
+            "kind": "actual_original_Punt_entry_nonreturn_boundary",
+            "entry_linear": 116268,
+            "entry_far": {
+              "seg": 7266,
+              "off": 12
+            },
+            "registers": {
+              "ax": 41864,
+              "bx": 41906,
+              "cx": 0,
+              "dx": 41,
+              "si": 22136,
+              "di": 1,
+              "bp": 41982,
+              "sp": 41852,
+              "ss": 21939,
+              "ds": 21939,
+              "es": 21939
+            },
+            "stack_frame": {
+              "return_far": {
+                "off": 4398,
+                "seg": 5916
+              },
+              "format_far": {
+                "off": 41864,
+                "seg": 21939
+              }
+            },
+            "format_string_far_linear": 392888,
+            "format_string_utf8_projection": "Cannot find a big enough space! (16 bytes)",
+            "format_string_raw_hex": "43616e6e6f742066696e6420612062696720656e6f756768207370616365212028313620627974657329",
+            "nonstack_bytes_changed_before_punt": [
+              {
+                "address": 387382,
+                "before": 0,
+                "at_punt": 179
+              },
+              {
+                "address": 387383,
+                "before": 0,
+                "at_punt": 163
+              },
+              {
+                "address": 387384,
+                "before": 0,
+                "at_punt": 179
+              },
+              {
+                "address": 387385,
+                "before": 0,
+                "at_punt": 85
+              },
+              {
+                "address": 387386,
+                "before": 0,
+                "at_punt": 212
+              },
+              {
+                "address": 387387,
+                "before": 0,
+                "at_punt": 127
+              },
+              {
+                "address": 387388,
+                "before": 0,
+                "at_punt": 136
+              },
+              {
+                "address": 387389,
+                "before": 0,
+                "at_punt": 163
+              },
+              {
+                "address": 387390,
+                "before": 0,
+                "at_punt": 179
+              },
+              {
+                "address": 387391,
+                "before": 0,
+                "at_punt": 85
+              },
+              {
+                "address": 387392,
+                "before": 0,
+                "at_punt": 66
+              }
+            ],
+            "written_addresses_before_punt": [
+              387382,
+              387383,
+              387384,
+              387385,
+              387386,
+              387387,
+              387388,
+              387389,
+              387390,
+              387391,
+              387392
+            ],
+            "raw_trace_before_punt": [],
+            "raw_effect_trace_before_punt": [],
+            "basic_blocks_before_punt": 670,
+            "observed_ranges": {
+              "heap": "fcffe00700008000010001000000000000000042300000000000000000000000011e3b587592afcce90623405d7a97b4d1ee0b2845627f9cb9d6f3102d4a6784a1bedbf815324f6c89a6c3e0fd1a3754718eabc8e5021f3c597693b0cdea0724415e7b98b5d2ef0c294663809dbad7f4112e4b6885a2bfdcf91633506d8aa7c4e1fe1b3855728facc9e603203d5a7794b1ceeb0825425f7c99b6d3f00d2a4764819ebbd8f5122f4c6986a3c0ddfa1734516e8ba8c5e2ff1c39567390adcae704213e5b7895b2cfec092643607d9ab7d4f10e2b4865829fbcd9f613304d6a87a4c1defb1835526f8ca9c6e3001d3a577491aecbe805223f5c7996b3d0ed0a2744617e9bb8d5f20f2c496683a0bddaf714314e6b88a5c2dffc193653708daac7e4011e3b587592afcce90623405d7a97b4d1ee0b2845627f9cb9d6f3102d4a6784a1bedbf815324f6c89a6c3e0fd1a3754718eabc8e5021f3c597693b0cdea0724415e7b98b5d2ef0c294663809dbad7f4112e4b6885a2bfdcf91633506d8aa7c4e1fe1b3855728facc9e603203d5a7794b1ceeb0825425f7c99b6d3f00d2a4764819ebbd8f5122f4c6986a3c0ddfa1734516e8ba8c5e2ff1c39567390adcae704213e5b7895b2cfec092643607d9ab7d4f10e2b4865829fbcd9f613304d6a87a4c1defb1835526f8ca9c6e3001d3a577491aecbe805223f5c7996b3d0ed0a2744617e9bb8d5f20f2c496683a0bddaf714314e6b88a5c2dffc193653708daac7e4011e3b587592afcce90623405d7a97b4d1ee0b2845627f9cb9d6f3102d4a6784a1bedbf815324f6c89a6c3e0fd1a3754718eabc8e5021f3c597693b0cdea0724415e7b98b5d2ef0c294663809dbad7f4112e4b6885a2bfdcf91633506d8aa7c4e1fe1b3855728facc9e603203d5a7794b1ceeb0825425f7c99b6d3f00d2a4764819ebbd8f5122f4c6986a3c0ddfa1734516e8ba8c5e2ff1c39567390adcae704213e5b7895b2cfec092643607d9ab7d4f10e2b4865829fbcd9f613304d6a87a4c1defb1835526f8ca9c6e3001d3a577491aecbe805223f5c7996b3d0ed0a2744617e9bb8d5f20f2c496683a0bddaf714314e6b88a5c2dffc193653708daac7e4011e3b587592afcce90623405d7a97b4d1ee0b2845627f9cb9d6f3102d4a6784a1bedbf815324f6c89a6c3e0fd1a3754718eabc8e5021f3c597693b0cdea0724415e7b98b5d2ef0c294663809dbad7f4112e4b6885a2bfdcf91633506d8aa7c4e1fe1b3855728facc9e603203d5a7794b1ceeb0825425f7c99b6d3f00d2a4764819ebbd8f5122f4c6986a3c0ddfa1734516e8ba8c5e2ff1c39567390adcae704213e5b7895b2cfec092643607d9ab7d4f10e2b4865829fbcd9f613304d6a87a4c1defb1835526f8ca9c6e3001d3a577491aecbe805223f5c7996b3d0ed0a2744617e9bb8d5f20f2c496683a0bddaf714314e6b88a5c2dffc193653708daac7e4011e3b587592afcce90623405d7a97b4d1ee0b2845627f9cb9d6f3102d4a6784a1bedbf815324f6c89a6c3e0fd1a3754718eabc8e5021f3c597693b0cdea0724415e7b98b5d2ef0c294663809dbad7f4112e4b6885a2bfdcf91633506d8aa7c4e1fe1b3855728facc9e603203d5a7794b1ceeb0825425f7c99b6d3f00d2a4764819ebbd8f5122f4c6986a3c0ddfa1734516e8ba8c5e2ff1c39567390adcae704213e5b7895b2cfec092643607d9ab7d4f10e2b4865829fbcd9f613304d6a87a4c1defb1835526f8ca9c6e3001d3a577491aecbe805223f5c7996b3d0ed0a2744617e9bb8d5f20f2c496683a0bddaf714314e6b88a5c2dffc193653708daac7e4011e3b587592afcce90623405d7a97b4d1ee0b2845627f9cb9d6f3102d4a6784a1bedbf815324f6c89a6c3e0fd1a3754718eabc8e5021f3c597693b0cdea0724415e7b98b5d2ef0c294663809dbad7f4112e4b6885a2bfdcf91633506d8aa7c4e1fe1b3855728facc9e603203d5a7794b1ceeb0825425f7c99b6d3f00d2a4764819ebbd8f5122f4c6986a3c0ddfa1734516e8ba8c5e2ff1c39567390adcae704213e5b7895b2cfec092643607d9ab7d4f10e2b4865829fbcd9f613304d6a87a4c1defb1835526f8ca9c6e3001d3a577491aecbe805223f5c7996b3d0ed0a2744617e9bb8d5f20f2c496683a0bddaf714314e6b88a5c2dffc193653708daac7e4011e3b587592afcce90623405d7a97b4d1ee0b2845627f9cb9d6f3102d4a6784a1bedbf815324f6c89a6c3e0fd1a3754718eabc8e5021f3c597693b0cdea0724415e7b98b5d2ef0c294663809dbad7f4112e4b6885a2bfdcf91633506d8aa7c4e1fe1b3855728facc9e603203d5a7794b1ceeb0825425f7c99b6d3f00d2a4764819ebbd8f5122f4c6986a3c0ddfa1734516e8ba8c5e2ff1c39567390adcae704213e5b7895b2cfec092643607d9ab7d4f10e2b4865829fbcd9f613304d6a87a4c1defb1835526f8ca9c6e3001d3a577491aecbe805223f5c7996b3d0ed0a2744617e9bb8d5f20f2c496683a0bddaf714314e6b88a5c2dffc193653708daac7e4011e3b587592afcce90623405d7a97b4d1ee0b2845627f9cb9d6f3102d4a6784a1bedbf815324f6c89a6c3e0fd1a3754718eabc8e5021f3c597693b0cdea0724415e7b98b5d2ef0c294663809dbad7f4112e4b6885a2bfdcf91633506d8aa7c4e1fe1b3855728facc9e603203d5a7794b1ceeb0825425f7c99b6d3f00d2a4764819ebbd8f5122f4c6986a3c0ddfa1734516e8ba8c5e2ff1c39567390adcae704213e5b7895b2cfec092643607d9ab7d4f10e2b4865829fbcd9f613304d6a87a4c1defb1835526f8ca9c6e3001d3a577491aecbe805223f5c7996b3d0ed0a2744",
+              "handle_table": "00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
+              "allocator_globals": "00000000000064000000010000000000800080000000800001000100040100a04000000000000000",
+              "free_list_head": "00000000",
+              "heap_bounds": "000000a1000080a100000000",
+              "ems_limit": "80a1",
+              "discard_entry_pointer": "000002a2",
+              "discard_entry_header": "0000200000000400050000000000000000000044697363617264456e74727900"
+            },
+            "completed": false,
+            "return_value": null,
+            "caller_abi_check_performed": false
+          }
+        },
+        {
+          "lane": "candidate",
+          "outcome": "PUNT_BOUNDARY",
+          "error": "failure/f0fbc-full-no-reclaim candidate at 1C62:000C: instruction budget exhausted or stopped before return",
+          "punt": {
+            "kind": "actual_original_Punt_entry_nonreturn_boundary",
+            "entry_linear": 116268,
+            "entry_far": {
+              "seg": 7266,
+              "off": 12
+            },
+            "registers": {
+              "ax": 41864,
+              "bx": 41906,
+              "cx": 0,
+              "dx": 41,
+              "si": 22136,
+              "di": 1,
+              "bp": 41982,
+              "sp": 41848,
+              "ss": 21939,
+              "ds": 21939,
+              "es": 21939
+            },
+            "stack_frame": {
+              "return_far": {
+                "off": 4408,
+                "seg": 36864
+              },
+              "format_far": {
+                "off": 41864,
+                "seg": 21939
+              }
+            },
+            "format_string_far_linear": 392888,
+            "format_string_utf8_projection": "Cannot find a big enough space! (16 bytes)",
+            "format_string_raw_hex": "43616e6e6f742066696e6420612062696720656e6f756768207370616365212028313620627974657329",
+            "nonstack_bytes_changed_before_punt": [
+              {
+                "address": 387382,
+                "before": 0,
+                "at_punt": 179
+              },
+              {
+                "address": 387383,
+                "before": 0,
+                "at_punt": 163
+              },
+              {
+                "address": 387384,
+                "before": 0,
+                "at_punt": 179
+              },
+              {
+                "address": 387385,
+                "before": 0,
+                "at_punt": 85
+              },
+              {
+                "address": 387386,
+                "before": 0,
+                "at_punt": 212
+              },
+              {
+                "address": 387387,
+                "before": 0,
+                "at_punt": 127
+              },
+              {
+                "address": 387388,
+                "before": 0,
+                "at_punt": 136
+              },
+              {
+                "address": 387389,
+                "before": 0,
+                "at_punt": 163
+              },
+              {
+                "address": 387390,
+                "before": 0,
+                "at_punt": 179
+              },
+              {
+                "address": 387391,
+                "before": 0,
+                "at_punt": 85
+              },
+              {
+                "address": 387392,
+                "before": 0,
+                "at_punt": 66
+              }
+            ],
+            "written_addresses_before_punt": [
+              387382,
+              387383,
+              387384,
+              387385,
+              387386,
+              387387,
+              387388,
+              387389,
+              387390,
+              387391,
+              387392
+            ],
+            "raw_trace_before_punt": [],
+            "raw_effect_trace_before_punt": [],
+            "basic_blocks_before_punt": 671,
+            "observed_ranges": {
+              "heap": "fcffe00700008000010001000000000000000042300000000000000000000000011e3b587592afcce90623405d7a97b4d1ee0b2845627f9cb9d6f3102d4a6784a1bedbf815324f6c89a6c3e0fd1a3754718eabc8e5021f3c597693b0cdea0724415e7b98b5d2ef0c294663809dbad7f4112e4b6885a2bfdcf91633506d8aa7c4e1fe1b3855728facc9e603203d5a7794b1ceeb0825425f7c99b6d3f00d2a4764819ebbd8f5122f4c6986a3c0ddfa1734516e8ba8c5e2ff1c39567390adcae704213e5b7895b2cfec092643607d9ab7d4f10e2b4865829fbcd9f613304d6a87a4c1defb1835526f8ca9c6e3001d3a577491aecbe805223f5c7996b3d0ed0a2744617e9bb8d5f20f2c496683a0bddaf714314e6b88a5c2dffc193653708daac7e4011e3b587592afcce90623405d7a97b4d1ee0b2845627f9cb9d6f3102d4a6784a1bedbf815324f6c89a6c3e0fd1a3754718eabc8e5021f3c597693b0cdea0724415e7b98b5d2ef0c294663809dbad7f4112e4b6885a2bfdcf91633506d8aa7c4e1fe1b3855728facc9e603203d5a7794b1ceeb0825425f7c99b6d3f00d2a4764819ebbd8f5122f4c6986a3c0ddfa1734516e8ba8c5e2ff1c39567390adcae704213e5b7895b2cfec092643607d9ab7d4f10e2b4865829fbcd9f613304d6a87a4c1defb1835526f8ca9c6e3001d3a577491aecbe805223f5c7996b3d0ed0a2744617e9bb8d5f20f2c496683a0bddaf714314e6b88a5c2dffc193653708daac7e4011e3b587592afcce90623405d7a97b4d1ee0b2845627f9cb9d6f3102d4a6784a1bedbf815324f6c89a6c3e0fd1a3754718eabc8e5021f3c597693b0cdea0724415e7b98b5d2ef0c294663809dbad7f4112e4b6885a2bfdcf91633506d8aa7c4e1fe1b3855728facc9e603203d5a7794b1ceeb0825425f7c99b6d3f00d2a4764819ebbd8f5122f4c6986a3c0ddfa1734516e8ba8c5e2ff1c39567390adcae704213e5b7895b2cfec092643607d9ab7d4f10e2b4865829fbcd9f613304d6a87a4c1defb1835526f8ca9c6e3001d3a577491aecbe805223f5c7996b3d0ed0a2744617e9bb8d5f20f2c496683a0bddaf714314e6b88a5c2dffc193653708daac7e4011e3b587592afcce90623405d7a97b4d1ee0b2845627f9cb9d6f3102d4a6784a1bedbf815324f6c89a6c3e0fd1a3754718eabc8e5021f3c597693b0cdea0724415e7b98b5d2ef0c294663809dbad7f4112e4b6885a2bfdcf91633506d8aa7c4e1fe1b3855728facc9e603203d5a7794b1ceeb0825425f7c99b6d3f00d2a4764819ebbd8f5122f4c6986a3c0ddfa1734516e8ba8c5e2ff1c39567390adcae704213e5b7895b2cfec092643607d9ab7d4f10e2b4865829fbcd9f613304d6a87a4c1defb1835526f8ca9c6e3001d3a577491aecbe805223f5c7996b3d0ed0a2744617e9bb8d5f20f2c496683a0bddaf714314e6b88a5c2dffc193653708daac7e4011e3b587592afcce90623405d7a97b4d1ee0b2845627f9cb9d6f3102d4a6784a1bedbf815324f6c89a6c3e0fd1a3754718eabc8e5021f3c597693b0cdea0724415e7b98b5d2ef0c294663809dbad7f4112e4b6885a2bfdcf91633506d8aa7c4e1fe1b3855728facc9e603203d5a7794b1ceeb0825425f7c99b6d3f00d2a4764819ebbd8f5122f4c6986a3c0ddfa1734516e8ba8c5e2ff1c39567390adcae704213e5b7895b2cfec092643607d9ab7d4f10e2b4865829fbcd9f613304d6a87a4c1defb1835526f8ca9c6e3001d3a577491aecbe805223f5c7996b3d0ed0a2744617e9bb8d5f20f2c496683a0bddaf714314e6b88a5c2dffc193653708daac7e4011e3b587592afcce90623405d7a97b4d1ee0b2845627f9cb9d6f3102d4a6784a1bedbf815324f6c89a6c3e0fd1a3754718eabc8e5021f3c597693b0cdea0724415e7b98b5d2ef0c294663809dbad7f4112e4b6885a2bfdcf91633506d8aa7c4e1fe1b3855728facc9e603203d5a7794b1ceeb0825425f7c99b6d3f00d2a4764819ebbd8f5122f4c6986a3c0ddfa1734516e8ba8c5e2ff1c39567390adcae704213e5b7895b2cfec092643607d9ab7d4f10e2b4865829fbcd9f613304d6a87a4c1defb1835526f8ca9c6e3001d3a577491aecbe805223f5c7996b3d0ed0a2744617e9bb8d5f20f2c496683a0bddaf714314e6b88a5c2dffc193653708daac7e4011e3b587592afcce90623405d7a97b4d1ee0b2845627f9cb9d6f3102d4a6784a1bedbf815324f6c89a6c3e0fd1a3754718eabc8e5021f3c597693b0cdea0724415e7b98b5d2ef0c294663809dbad7f4112e4b6885a2bfdcf91633506d8aa7c4e1fe1b3855728facc9e603203d5a7794b1ceeb0825425f7c99b6d3f00d2a4764819ebbd8f5122f4c6986a3c0ddfa1734516e8ba8c5e2ff1c39567390adcae704213e5b7895b2cfec092643607d9ab7d4f10e2b4865829fbcd9f613304d6a87a4c1defb1835526f8ca9c6e3001d3a577491aecbe805223f5c7996b3d0ed0a2744617e9bb8d5f20f2c496683a0bddaf714314e6b88a5c2dffc193653708daac7e4011e3b587592afcce90623405d7a97b4d1ee0b2845627f9cb9d6f3102d4a6784a1bedbf815324f6c89a6c3e0fd1a3754718eabc8e5021f3c597693b0cdea0724415e7b98b5d2ef0c294663809dbad7f4112e4b6885a2bfdcf91633506d8aa7c4e1fe1b3855728facc9e603203d5a7794b1ceeb0825425f7c99b6d3f00d2a4764819ebbd8f5122f4c6986a3c0ddfa1734516e8ba8c5e2ff1c39567390adcae704213e5b7895b2cfec092643607d9ab7d4f10e2b4865829fbcd9f613304d6a87a4c1defb1835526f8ca9c6e3001d3a577491aecbe805223f5c7996b3d0ed0a2744",
+              "handle_table": "00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
+              "allocator_globals": "00000000000064000000010000000000800080000000800001000100040100a04000000000000000",
+              "free_list_head": "00000000",
+              "heap_bounds": "000000a1000080a100000000",
+              "ems_limit": "80a1",
+              "discard_entry_pointer": "000002a2",
+              "discard_entry_header": "0000200000000400050000000000000000000044697363617264456e74727900"
+            },
+            "completed": false,
+            "return_value": null,
+            "caller_abi_check_performed": false
+          }
+        }
+      ],
+      "pair_identity": {
+        "function": "f_171C_0FBC",
+        "address": {
+          "unit": "root",
+          "seg": 5916,
+          "off": 4028,
+          "size": 566
+        },
+        "source": "build\\workers\\behavior_memory\\final-run\\source\\ralloc-module.c",
+        "source_sha256": "3d24904696b29c36b118479ecc50dd80b8d173f58a632a339df9391d08ea085b",
+        "compiled_source_sha256": "630a5ddcfcff8d85c6cc7c22619c0e3f44ea8d3dc7e34ed5a29f84e996e13853",
+        "object_sha256": "35368dca0b0642a63ca2d7c94770260b04b446e72b9d059b36d86e7bce572473",
+        "linked_code_sha256": "cb233a313aed216553fbd7a77b3c5d959f49c35e2c4d11c8ce2f8f92866161cf",
+        "oracle_sha256": "aa0596c6766322a8229ee3c36e57048c92adc82d50fbe2ef37afb8b85fcf4f11",
+        "unicorn_version": "2.1.4",
+        "harness_sha256": "2c0799048057f59eae61a48be4d695278635594484adf0c70bf46c51b4e0c799",
+        "profile": "msc600ax",
+        "flags": [
+          "/AL",
+          "/Oeg",
+          "/Gs",
+          "/Zi"
+        ],
+        "manifest_sha256": "025a0a9255d910cae4b122ab5a3f3fb40888bb456d7fe42158db7c9e622fcf50",
+        "sequence_targets": [
+          "f_171C_0FBC"
+        ]
+      },
+      "boundary_comparison": {
+        "same_punt_entry": true,
+        "same_message_bytes": true,
+        "same_observed_ranges": true,
+        "same_nonstack_pre_punt_changes": true
+      },
+      "interpretation": "Punt invocation/nonreturn boundary; no return comparison, completion, or ABI forgery"
+    },
+    {
+      "kind": "negative_omit_punt_caller",
+      "target": "f_171C_0FBC",
+      "case": "failure/f0fbc-full-no-reclaim",
+      "mutant_source": "build\\workers\\behavior_memory\\final-pinned-20261002\\snapshot\\build\\workers\\behavior_memory\\failure-path-probes\\negative-omit-punt.c",
+      "mutant_source_sha256": "e8ff9efeada7b6e261e257ac762c3bcf5f314bb59b8d46f233581d0a4889696e",
+      "lanes": [
+        {
+          "lane": "original",
+          "outcome": "PUNT_BOUNDARY",
+          "error": "failure/f0fbc-full-no-reclaim oracle at 1C62:000C: instruction budget exhausted or stopped before return",
+          "punt": {
+            "kind": "actual_original_Punt_entry_nonreturn_boundary",
+            "entry_linear": 116268,
+            "entry_far": {
+              "seg": 7266,
+              "off": 12
+            },
+            "registers": {
+              "ax": 41864,
+              "bx": 41906,
+              "cx": 0,
+              "dx": 41,
+              "si": 22136,
+              "di": 1,
+              "bp": 41982,
+              "sp": 41852,
+              "ss": 21939,
+              "ds": 21939,
+              "es": 21939
+            },
+            "stack_frame": {
+              "return_far": {
+                "off": 4398,
+                "seg": 5916
+              },
+              "format_far": {
+                "off": 41864,
+                "seg": 21939
+              }
+            },
+            "format_string_far_linear": 392888,
+            "format_string_utf8_projection": "Cannot find a big enough space! (16 bytes)",
+            "format_string_raw_hex": "43616e6e6f742066696e6420612062696720656e6f756768207370616365212028313620627974657329",
+            "nonstack_bytes_changed_before_punt": [
+              {
+                "address": 387382,
+                "before": 0,
+                "at_punt": 179
+              },
+              {
+                "address": 387383,
+                "before": 0,
+                "at_punt": 163
+              },
+              {
+                "address": 387384,
+                "before": 0,
+                "at_punt": 179
+              },
+              {
+                "address": 387385,
+                "before": 0,
+                "at_punt": 85
+              },
+              {
+                "address": 387386,
+                "before": 0,
+                "at_punt": 212
+              },
+              {
+                "address": 387387,
+                "before": 0,
+                "at_punt": 127
+              },
+              {
+                "address": 387388,
+                "before": 0,
+                "at_punt": 136
+              },
+              {
+                "address": 387389,
+                "before": 0,
+                "at_punt": 163
+              },
+              {
+                "address": 387390,
+                "before": 0,
+                "at_punt": 179
+              },
+              {
+                "address": 387391,
+                "before": 0,
+                "at_punt": 85
+              },
+              {
+                "address": 387392,
+                "before": 0,
+                "at_punt": 66
+              }
+            ],
+            "written_addresses_before_punt": [
+              387382,
+              387383,
+              387384,
+              387385,
+              387386,
+              387387,
+              387388,
+              387389,
+              387390,
+              387391,
+              387392
+            ],
+            "raw_trace_before_punt": [],
+            "raw_effect_trace_before_punt": [],
+            "basic_blocks_before_punt": 670,
+            "observed_ranges": {
+              "heap": "fcffe00700008000010001000000000000000042300000000000000000000000011e3b587592afcce90623405d7a97b4d1ee0b2845627f9cb9d6f3102d4a6784a1bedbf815324f6c89a6c3e0fd1a3754718eabc8e5021f3c597693b0cdea0724415e7b98b5d2ef0c294663809dbad7f4112e4b6885a2bfdcf91633506d8aa7c4e1fe1b3855728facc9e603203d5a7794b1ceeb0825425f7c99b6d3f00d2a4764819ebbd8f5122f4c6986a3c0ddfa1734516e8ba8c5e2ff1c39567390adcae704213e5b7895b2cfec092643607d9ab7d4f10e2b4865829fbcd9f613304d6a87a4c1defb1835526f8ca9c6e3001d3a577491aecbe805223f5c7996b3d0ed0a2744617e9bb8d5f20f2c496683a0bddaf714314e6b88a5c2dffc193653708daac7e4011e3b587592afcce90623405d7a97b4d1ee0b2845627f9cb9d6f3102d4a6784a1bedbf815324f6c89a6c3e0fd1a3754718eabc8e5021f3c597693b0cdea0724415e7b98b5d2ef0c294663809dbad7f4112e4b6885a2bfdcf91633506d8aa7c4e1fe1b3855728facc9e603203d5a7794b1ceeb0825425f7c99b6d3f00d2a4764819ebbd8f5122f4c6986a3c0ddfa1734516e8ba8c5e2ff1c39567390adcae704213e5b7895b2cfec092643607d9ab7d4f10e2b4865829fbcd9f613304d6a87a4c1defb1835526f8ca9c6e3001d3a577491aecbe805223f5c7996b3d0ed0a2744617e9bb8d5f20f2c496683a0bddaf714314e6b88a5c2dffc193653708daac7e4011e3b587592afcce90623405d7a97b4d1ee0b2845627f9cb9d6f3102d4a6784a1bedbf815324f6c89a6c3e0fd1a3754718eabc8e5021f3c597693b0cdea0724415e7b98b5d2ef0c294663809dbad7f4112e4b6885a2bfdcf91633506d8aa7c4e1fe1b3855728facc9e603203d5a7794b1ceeb0825425f7c99b6d3f00d2a4764819ebbd8f5122f4c6986a3c0ddfa1734516e8ba8c5e2ff1c39567390adcae704213e5b7895b2cfec092643607d9ab7d4f10e2b4865829fbcd9f613304d6a87a4c1defb1835526f8ca9c6e3001d3a577491aecbe805223f5c7996b3d0ed0a2744617e9bb8d5f20f2c496683a0bddaf714314e6b88a5c2dffc193653708daac7e4011e3b587592afcce90623405d7a97b4d1ee0b2845627f9cb9d6f3102d4a6784a1bedbf815324f6c89a6c3e0fd1a3754718eabc8e5021f3c597693b0cdea0724415e7b98b5d2ef0c294663809dbad7f4112e4b6885a2bfdcf91633506d8aa7c4e1fe1b3855728facc9e603203d5a7794b1ceeb0825425f7c99b6d3f00d2a4764819ebbd8f5122f4c6986a3c0ddfa1734516e8ba8c5e2ff1c39567390adcae704213e5b7895b2cfec092643607d9ab7d4f10e2b4865829fbcd9f613304d6a87a4c1defb1835526f8ca9c6e3001d3a577491aecbe805223f5c7996b3d0ed0a2744617e9bb8d5f20f2c496683a0bddaf714314e6b88a5c2dffc193653708daac7e4011e3b587592afcce90623405d7a97b4d1ee0b2845627f9cb9d6f3102d4a6784a1bedbf815324f6c89a6c3e0fd1a3754718eabc8e5021f3c597693b0cdea0724415e7b98b5d2ef0c294663809dbad7f4112e4b6885a2bfdcf91633506d8aa7c4e1fe1b3855728facc9e603203d5a7794b1ceeb0825425f7c99b6d3f00d2a4764819ebbd8f5122f4c6986a3c0ddfa1734516e8ba8c5e2ff1c39567390adcae704213e5b7895b2cfec092643607d9ab7d4f10e2b4865829fbcd9f613304d6a87a4c1defb1835526f8ca9c6e3001d3a577491aecbe805223f5c7996b3d0ed0a2744617e9bb8d5f20f2c496683a0bddaf714314e6b88a5c2dffc193653708daac7e4011e3b587592afcce90623405d7a97b4d1ee0b2845627f9cb9d6f3102d4a6784a1bedbf815324f6c89a6c3e0fd1a3754718eabc8e5021f3c597693b0cdea0724415e7b98b5d2ef0c294663809dbad7f4112e4b6885a2bfdcf91633506d8aa7c4e1fe1b3855728facc9e603203d5a7794b1ceeb0825425f7c99b6d3f00d2a4764819ebbd8f5122f4c6986a3c0ddfa1734516e8ba8c5e2ff1c39567390adcae704213e5b7895b2cfec092643607d9ab7d4f10e2b4865829fbcd9f613304d6a87a4c1defb1835526f8ca9c6e3001d3a577491aecbe805223f5c7996b3d0ed0a2744617e9bb8d5f20f2c496683a0bddaf714314e6b88a5c2dffc193653708daac7e4011e3b587592afcce90623405d7a97b4d1ee0b2845627f9cb9d6f3102d4a6784a1bedbf815324f6c89a6c3e0fd1a3754718eabc8e5021f3c597693b0cdea0724415e7b98b5d2ef0c294663809dbad7f4112e4b6885a2bfdcf91633506d8aa7c4e1fe1b3855728facc9e603203d5a7794b1ceeb0825425f7c99b6d3f00d2a4764819ebbd8f5122f4c6986a3c0ddfa1734516e8ba8c5e2ff1c39567390adcae704213e5b7895b2cfec092643607d9ab7d4f10e2b4865829fbcd9f613304d6a87a4c1defb1835526f8ca9c6e3001d3a577491aecbe805223f5c7996b3d0ed0a2744617e9bb8d5f20f2c496683a0bddaf714314e6b88a5c2dffc193653708daac7e4011e3b587592afcce90623405d7a97b4d1ee0b2845627f9cb9d6f3102d4a6784a1bedbf815324f6c89a6c3e0fd1a3754718eabc8e5021f3c597693b0cdea0724415e7b98b5d2ef0c294663809dbad7f4112e4b6885a2bfdcf91633506d8aa7c4e1fe1b3855728facc9e603203d5a7794b1ceeb0825425f7c99b6d3f00d2a4764819ebbd8f5122f4c6986a3c0ddfa1734516e8ba8c5e2ff1c39567390adcae704213e5b7895b2cfec092643607d9ab7d4f10e2b4865829fbcd9f613304d6a87a4c1defb1835526f8ca9c6e3001d3a577491aecbe805223f5c7996b3d0ed0a2744",
+              "handle_table": "00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
+              "allocator_globals": "00000000000064000000010000000000800080000000800001000100040100a04000000000000000",
+              "free_list_head": "00000000",
+              "heap_bounds": "000000a1000080a100000000",
+              "ems_limit": "80a1",
+              "discard_entry_pointer": "000002a2",
+              "discard_entry_header": "0000200000000400050000000000000000000044697363617264456e74727900"
+            },
+            "completed": false,
+            "return_value": null,
+            "caller_abi_check_performed": false
+          }
+        },
+        {
+          "lane": "candidate",
+          "outcome": "RETURNED",
+          "return": 0,
+          "punctuation": null
+        }
+      ],
+      "pair_identity": {
+        "function": "f_171C_0FBC",
+        "address": {
+          "unit": "root",
+          "seg": 5916,
+          "off": 4028,
+          "size": 566
+        },
+        "source": "build\\workers\\behavior_memory\\failure-path-probes\\negative-omit-punt.c",
+        "source_sha256": "e8ff9efeada7b6e261e257ac762c3bcf5f314bb59b8d46f233581d0a4889696e",
+        "compiled_source_sha256": "1a7651509e0a29a95ec3f42b14f7bdcf7043b2b337f1d76019a2c3169995c9d5",
+        "object_sha256": "e7cd1c6935bf91a5e3254ae28435a3fc91a7e1371c9ece6e00c4429e36c4f2e4",
+        "linked_code_sha256": "44c935a9d0b4bc3a83172d9a78a9760dba9a4fa541607fd95896a7c2b46fa632",
+        "oracle_sha256": "aa0596c6766322a8229ee3c36e57048c92adc82d50fbe2ef37afb8b85fcf4f11",
+        "unicorn_version": "2.1.4",
+        "harness_sha256": "2c0799048057f59eae61a48be4d695278635594484adf0c70bf46c51b4e0c799",
+        "profile": "msc600ax",
+        "flags": [
+          "/AL",
+          "/Oeg",
+          "/Gs",
+          "/Zi"
+        ],
+        "manifest_sha256": "025a0a9255d910cae4b122ab5a3f3fb40888bb456d7fe42158db7c9e622fcf50",
+        "sequence_targets": [
+          "f_171C_0FBC"
+        ]
+      },
+      "sensitivity_detected": true,
+      "interpretation": "diagnostic only; omission mutant must not be treated as a recovered implementation"
+    }
+  ],
+  "producer_script_sha256": "21fe9d47c7b9dc769307d4e9ae4880e0f2a8e7194d05d0c92be8c51dc4c592bb",
+  "producer_script_path": "evidence/behavior/harnesses/memory-final-20261002/failure-paths/probe.py",
+  "committable_negative_mutant_path": "evidence/behavior/harnesses/memory-final-20261002/failure-paths/negative-omit-punt.c",
+  "committable_negative_mutant_sha256": "e8ff9efeada7b6e261e257ac762c3bcf5f314bb59b8d46f233581d0a4889696e"
+}

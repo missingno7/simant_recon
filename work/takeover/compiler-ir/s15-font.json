@@ -1,0 +1,73 @@
+{
+  "schema": "msc600ax-c1-compare-v1",
+  "a": "s15-base",
+  "b": "s15-font-predicate-equivalent",
+  "same_source_bytes": false,
+  "streams": {
+    "000352EX": {
+      "a_size": 3681,
+      "b_size": 3681,
+      "common_prefix": 1653,
+      "different_offsets": [
+        1653,
+        1657,
+        1661
+      ],
+      "different_count_in_common_length": 3,
+      "tail_a": "",
+      "tail_b": "",
+      "a_sha256": "9580e167de1dd313d2462d57cf0ccf1f00acdebe7c7e269f70b0a94d5dda769d",
+      "b_sha256": "e44c04957b2c333a2245949d4ab574dded721d524644079ac765a1dcbd5d608f",
+      "recognized_source_name_markers": {
+        "UNIT.C": {
+          "a": [
+            8,
+            23
+          ],
+          "b": [
+            8,
+            23
+          ]
+        }
+      }
+    },
+    "000352IN": {
+      "a_size": 17,
+      "b_size": 17,
+      "common_prefix": 17,
+      "different_offsets": [],
+      "different_count_in_common_length": 0,
+      "tail_a": "",
+      "tail_b": "",
+      "a_sha256": "41be4ec98ea02f833dd6752babddba8e6b9201d3a4b4b12109b15cddc48caf7c",
+      "b_sha256": "41be4ec98ea02f833dd6752babddba8e6b9201d3a4b4b12109b15cddc48caf7c",
+      "recognized_source_name_markers": {}
+    },
+    "000352ST": {
+      "a_size": 254,
+      "b_size": 254,
+      "common_prefix": 254,
+      "different_offsets": [],
+      "different_count_in_common_length": 0,
+      "tail_a": "",
+      "tail_b": "",
+      "a_sha256": "1a349025816915f69f30893408f70d8940fe149e1c238529f8be04b397ab08c7",
+      "b_sha256": "1a349025816915f69f30893408f70d8940fe149e1c238529f8be04b397ab08c7",
+      "recognized_source_name_markers": {}
+    },
+    "000352SY": {
+      "a_size": 3076,
+      "b_size": 3076,
+      "common_prefix": 3076,
+      "different_offsets": [],
+      "different_count_in_common_length": 0,
+      "tail_a": "",
+      "tail_b": "",
+      "a_sha256": "18161d05e6e1cc70e28493bc32a390c050da32a3b1a7c9583654b32d43f34f38",
+      "b_sha256": "18161d05e6e1cc70e28493bc32a390c050da32a3b1a7c9583654b32d43f34f38",
+      "recognized_source_name_markers": {}
+    }
+  },
+  "normalization": "No opaque EX/IN/ST/SY bytes were normalized. Only source-name marker offsets are identified. Review raw differences before attributing a byte to syntax, source metadata, or debug metadata.",
+  "interpretation_limit": "These are C1 front-end temporary streams from a diagnostic compile, not the original compiler's retained IR or the original source's compiler state."
+}

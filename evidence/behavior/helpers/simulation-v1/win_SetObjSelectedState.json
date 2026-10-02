@@ -1,0 +1,30 @@
+{
+  "schema": "behavior-helper-cert-v1",
+  "helper": "win_SetObjSelectedState",
+  "status": "CERTIFIED",
+  "execution_mode": "MODELED",
+  "input_domain": [
+    "10809-case EnterNest run; callback invoked 7136 times; positive plane2-x-1-y0-type08 case records args object=16,selected=0."
+  ],
+  "compared_effects": [
+    "object ID and requested selected state",
+    "ordered helper trace",
+    "all game simulation globals, map/life state, and non-stack writes"
+  ],
+  "positive_control_id": "pc-enternest-plane2",
+  "negative_control_id": "EnterNest-window-selection-state",
+  "limitations": [
+    "The legacy window/object memory graph and redraw effects are not executed. Contract boundary retains logical selected-state request; physical UI projection must be implemented and separately verified by UI-focused tests before port acceptance."
+  ],
+  "source_hashes": {
+    "src/S22/m39C7.c": "e9add4ebd445bd943f24a65764be2a79581f2fc26c349741fdfe8efae3b7030d",
+    "src/root/m22BF.c": "f5b617067cdc711593e94dbb725ae9ceaeb12b890f198af0d66c1973e15133a0"
+  },
+  "source_contract": "SetAlarmDropState source forwards state to win_SetObjSelectedState(0x10,state). Original win_SetObjSelectedState locks window/object, applies selected bit 2 at object offset 0x24, updates groups and requests redraw depending on object kind. Current bounded contract captures exact object/state call at boundary; caller mutants changing state or omitting the UI helper are detected.",
+  "review": {
+    "status": "APPROVED",
+    "reviewer": "root",
+    "reviewed_at": "2026-10-02",
+    "reason": "Reviewed exact helper source and caller data flow. This certificate compares logical UI/audio/timing requests at a simulation boundary; actual simulation/map/RNG helpers execute in the original oracle, and caller-source mutants expose changed boundary requests."
+  }
+}

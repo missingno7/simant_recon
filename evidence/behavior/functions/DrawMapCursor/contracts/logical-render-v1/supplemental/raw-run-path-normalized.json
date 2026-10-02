@@ -1,0 +1,251 @@
+{
+  "case_ledger": {
+    "compression": "gzip",
+    "identity": {
+      "address": {
+        "off": 674,
+        "seg": 14412,
+        "size": 205,
+        "unit": "S12"
+      },
+      "compiled_source_sha256": "daa607847c4c0364358a7b57d3f790dd9981e284bf2cedd01fa1fb3ac4df918a",
+      "flags": [
+        "/AL",
+        "/Os",
+        "/Og",
+        "/Oe",
+        "/Zi"
+      ],
+      "function": "DrawMapCursor",
+      "harness_sha256": "2c0799048057f59eae61a48be4d695278635594484adf0c70bf46c51b4e0c799",
+      "linked_code_sha256": "cb9dd901198d515c1f37f1e60aaa2956b5ccad475592ea2c313c5bd0e398f100",
+      "manifest_sha256": "025a0a9255d910cae4b122ab5a3f3fb40888bb456d7fe42158db7c9e622fcf50",
+      "object_sha256": "e056a9b3142661f51ddc702e13aff60535266d22b4d79850e0fd70adbcb5c5d3",
+      "oracle_sha256": "aa0596c6766322a8229ee3c36e57048c92adc82d50fbe2ef37afb8b85fcf4f11",
+      "profile": "msc600ax",
+      "source": "work\\takeover\\hardtail\\seeds\\S12_384C_daa607847c4c.c",
+      "source_sha256": "daa607847c4c0364358a7b57d3f790dd9981e284bf2cedd01fa1fb3ac4df918a",
+      "unicorn_version": "2.1.4"
+    },
+    "lane_counts": {
+      "directed": 16,
+      "randomized": 1000
+    },
+    "path": "evidence/behavior/harnesses/render-small-e86e7f47-20261002/runs/DrawMapCursor/DrawMapCursor.cases.jsonl.gz",
+    "row_count": 1016,
+    "sha256": "31dfdecd34312230e5ce7bd4a3d852d022c85b6303331140e54d549b3746daaa"
+  },
+  "cases": {
+    "directed": {
+      "actual_candidate_invocations": 16,
+      "actual_original_invocations": 16,
+      "executed": 16,
+      "generated": 16,
+      "seeds": []
+    },
+    "randomized": {
+      "actual_candidate_invocations": 1000,
+      "actual_original_invocations": 1000,
+      "executed": 1000,
+      "generated": 1000,
+      "seeds": [
+        49170
+      ]
+    }
+  },
+  "compared_effects": [
+    "return and caller ABI",
+    "ordered helper/render commands and arguments",
+    "global/map/cache writes",
+    "projected far-pointer data and nonstack memory"
+  ],
+  "completion": "COMPLETE",
+  "coverage": {
+    "directed_labels": [
+      "directed/True/absent/0",
+      "directed/True/absent/1",
+      "directed/True/absent/2",
+      "directed/True/absent/3",
+      "directed/True/open/4",
+      "directed/True/open/5",
+      "directed/True/open/6",
+      "directed/True/open/7",
+      "directed/True/closed/8",
+      "directed/True/closed/9",
+      "directed/True/closed/10",
+      "directed/True/closed/11",
+      "directed/True/invalid/12",
+      "directed/True/invalid/13",
+      "directed/True/invalid/14",
+      "directed/True/invalid/15"
+    ],
+    "domain_values": {
+      "argument_domains_from_case_generator": "See the target-specific case generator in this pinned suite snapshot; case labels and input_sha256 are preserved in the per-case ledger.",
+      "directed_labels": [
+        "directed/True/absent/0",
+        "directed/True/absent/1",
+        "directed/True/absent/2",
+        "directed/True/absent/3",
+        "directed/True/open/4",
+        "directed/True/open/5",
+        "directed/True/open/6",
+        "directed/True/open/7",
+        "directed/True/closed/8",
+        "directed/True/closed/9",
+        "directed/True/closed/10",
+        "directed/True/closed/11",
+        "directed/True/invalid/12",
+        "directed/True/invalid/13",
+        "directed/True/invalid/14",
+        "directed/True/invalid/15"
+      ],
+      "randomized_count": 1000
+    },
+    "randomized_labels_sha256": "8905efa5f860d3c56325a3074488a17704918ba32429702b0d5b9ac08f233167"
+  },
+  "errors": 0,
+  "execution": {
+    "actual_candidate_execution": true,
+    "actual_original_execution": true,
+    "engine": "PreparedPair.compare",
+    "original_exe_sha256": "aa0596c6766322a8229ee3c36e57048c92adc82d50fbe2ef37afb8b85fcf4f11"
+  },
+  "helper_boundaries": [
+    {
+      "binding_role": "modeled callback slot; address/name reuse does not assert execution of a same-named DOS helper body",
+      "certification": {
+        "negative_control_ids": [
+          "negative/cursor-offset"
+        ],
+        "positive_control_id": "directed/True/absent/0",
+        "status": "PENDING_SUPERVISOR_REVIEW"
+      },
+      "contract": "ordered clipping stack command trace; clip geometry is not simulated",
+      "executed_from_original": false,
+      "execution_mode": "MODELED",
+      "name": "clip_Pop",
+      "observed_call_count": 246
+    },
+    {
+      "binding_role": "modeled callback slot; address/name reuse does not assert execution of a same-named DOS helper body",
+      "certification": {
+        "negative_control_ids": [
+          "negative/cursor-offset"
+        ],
+        "positive_control_id": "directed/True/absent/0",
+        "status": "PENDING_SUPERVISOR_REVIEW"
+      },
+      "contract": "ordered clipping stack command trace; clip geometry is not simulated",
+      "executed_from_original": false,
+      "execution_mode": "MODELED",
+      "name": "clip_Push",
+      "observed_call_count": 246
+    },
+    {
+      "binding_role": "modeled callback slot; address/name reuse does not assert execution of a same-named DOS helper body",
+      "certification": {
+        "negative_control_ids": [
+          "negative/cursor-offset"
+        ],
+        "positive_control_id": "directed/True/absent/0",
+        "status": "PENDING_SUPERVISOR_REVIEW"
+      },
+      "contract": "ordered clipping window command trace; clip geometry is not simulated",
+      "executed_from_original": false,
+      "execution_mode": "MODELED",
+      "name": "clip_SetWin",
+      "observed_call_count": 246
+    },
+    {
+      "binding_role": "modeled callback slot; address/name reuse does not assert execution of a same-named DOS helper body",
+      "certification": {
+        "negative_control_ids": [
+          "negative/cursor-offset"
+        ],
+        "positive_control_id": "directed/True/absent/0",
+        "status": "PENDING_SUPERVISOR_REVIEW"
+      },
+      "contract": "host XOR draw boundary with semantic Rect fields and width projected from the pointed record",
+      "executed_from_original": false,
+      "execution_mode": "MODELED",
+      "name": "f_1CE2_0410",
+      "observed_call_count": 246
+    },
+    {
+      "binding_role": "original DOS helper body",
+      "certification": null,
+      "contract": "original root:22BF win_IsWinOpen body with AX argument; valid/open, valid/closed, absent, and stale-handle fixtures exercise Ralloc lock/unlock and failed-lock table clearing",
+      "executed_from_original": true,
+      "execution_mode": "ORIGINAL_EXE",
+      "name": "f_22BF_09B0",
+      "observed_call_count": 1016
+    }
+  ],
+  "helper_boundary_plan": "evidence/behavior/harnesses/render-small-e86e7f47-20261002/runs/DrawMapCursor/DrawMapCursor.helper-boundary-plan.json",
+  "helper_boundary_plan_sha256": "bf87e3642de7d2e8942cef67fe7306b2a2dcb188a01f967df09842f352174c72",
+  "identity": {
+    "address": {
+      "off": 674,
+      "seg": 14412,
+      "size": 205,
+      "unit": "S12"
+    },
+    "compiled_source_sha256": "daa607847c4c0364358a7b57d3f790dd9981e284bf2cedd01fa1fb3ac4df918a",
+    "flags": [
+      "/AL",
+      "/Os",
+      "/Og",
+      "/Oe",
+      "/Zi"
+    ],
+    "function": "DrawMapCursor",
+    "harness_sha256": "2c0799048057f59eae61a48be4d695278635594484adf0c70bf46c51b4e0c799",
+    "historical_manifest_sha256": "025a0a9255d910cae4b122ab5a3f3fb40888bb456d7fe42158db7c9e622fcf50",
+    "module": "S12:384C",
+    "object_sha256": "e056a9b3142661f51ddc702e13aff60535266d22b4d79850e0fd70adbcb5c5d3",
+    "oracle_sha256": "aa0596c6766322a8229ee3c36e57048c92adc82d50fbe2ef37afb8b85fcf4f11",
+    "profile": "msc600ax",
+    "source_sha256": "daa607847c4c0364358a7b57d3f790dd9981e284bf2cedd01fa1fb3ac4df918a",
+    "suite_id": "render_small_v1",
+    "suite_sha256": "e86e7f479c726b0aca78f5ee5d06d3c684f93086513f52ea05157d7c0e06f2fc"
+  },
+  "mismatches": 0,
+  "negative_control_reports": [
+    {
+      "path": "evidence/behavior/harnesses/render-small-e86e7f47-20261002/runs/DrawMapCursor/DrawMapCursor.negative-controls.json",
+      "sha256": "1826b5b5813a2918e8c8508c3f819fd3c5ace311d8a106448f02b771c3db610d"
+    }
+  ],
+  "negative_controls": {
+    "path": "evidence/behavior/harnesses/render-small-e86e7f47-20261002/runs/DrawMapCursor/DrawMapCursor.negative-controls.json",
+    "sha256": "1826b5b5813a2918e8c8508c3f819fd3c5ace311d8a106448f02b771c3db610d"
+  },
+  "peer_data_gates": "PASS",
+  "positive_controls": [
+    {
+      "candidate_executed": true,
+      "candidate_observation_sha256": "9abf5c6f05d423bf9e2d015d874221ca25d5f1dafe1c67e04c47ddabee74ab06",
+      "compared_effects": [
+        "return and caller ABI",
+        "ordered helper/render commands and arguments",
+        "global/map/cache writes",
+        "projected far-pointer data and nonstack memory"
+      ],
+      "executed": true,
+      "execution_errors": 0,
+      "id": "directed/True/absent/0",
+      "matched": true,
+      "object_sha256": "e056a9b3142661f51ddc702e13aff60535266d22b4d79850e0fd70adbcb5c5d3",
+      "oracle_sha256": "aa0596c6766322a8229ee3c36e57048c92adc82d50fbe2ef37afb8b85fcf4f11",
+      "original_executed": true,
+      "original_observation_sha256": "9abf5c6f05d423bf9e2d015d874221ca25d5f1dafe1c67e04c47ddabee74ab06",
+      "source_sha256": "daa607847c4c0364358a7b57d3f790dd9981e284bf2cedd01fa1fb3ac4df918a"
+    }
+  ],
+  "schema": "behavior-run-evidence-v1",
+  "source_snapshot": {
+    "path": "evidence/behavior/harnesses/render-small-e86e7f47-20261002/reviews/DrawMapCursor/source-pins/00-S12_384C_daa607847c4c.c",
+    "sha256": "daa607847c4c0364358a7b57d3f790dd9981e284bf2cedd01fa1fb3ac4df918a"
+  },
+  "unmodeled_boundaries": 0
+}

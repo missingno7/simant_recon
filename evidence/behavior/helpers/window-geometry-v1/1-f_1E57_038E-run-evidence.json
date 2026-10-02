@@ -1,0 +1,131 @@
+{
+  "schema": "behavior-run-evidence-v1",
+  "completion": "COMPLETE",
+  "identity": {
+    "function": "f_1E57_038E",
+    "suite_id": "windows_v1",
+    "module": "root:1E57",
+    "source_sha256": "edfb01cec348d79243d7cc1630248045fa7790a321192f83d185298d0e9b67f6",
+    "compiled_source_sha256": "edfb01cec348d79243d7cc1630248045fa7790a321192f83d185298d0e9b67f6",
+    "suite_sha256": "d30cd821105091af11ddd1b4daa6b60a5516fbd6a8cc61b4a7cb338412935b26",
+    "harness_sha256": "2c0799048057f59eae61a48be4d695278635594484adf0c70bf46c51b4e0c799",
+    "oracle_sha256": "aa0596c6766322a8229ee3c36e57048c92adc82d50fbe2ef37afb8b85fcf4f11",
+    "historical_manifest_sha256": "025a0a9255d910cae4b122ab5a3f3fb40888bb456d7fe42158db7c9e622fcf50",
+    "object_sha256": "089ae2f292394329010bb1f30272c21d90eeac08a5766fbec5abcbcd2d98962f",
+    "profile": "msc600ax",
+    "flags": [
+      "/AL",
+      "/Os",
+      "/Oe",
+      "/Og",
+      "/Gs",
+      "/Zi"
+    ]
+  },
+  "execution": {
+    "engine": "PreparedPair.compare",
+    "actual_original_execution": true,
+    "actual_candidate_execution": true,
+    "original_exe_sha256": "aa0596c6766322a8229ee3c36e57048c92adc82d50fbe2ef37afb8b85fcf4f11"
+  },
+  "cases": {
+    "directed": {
+      "generated": 9,
+      "executed": 9,
+      "actual_original_invocations": 9,
+      "actual_candidate_invocations": 9,
+      "seeds": []
+    },
+    "randomized": {
+      "generated": 256,
+      "executed": 256,
+      "actual_original_invocations": 256,
+      "actual_candidate_invocations": 256,
+      "seeds": [
+        509019022
+      ]
+    }
+  },
+  "errors": 0,
+  "mismatches": 0,
+  "compared_effects": [
+    "ordered screen/window clipping rectangles",
+    "45-entry clip handle table",
+    "Ralloc heap/master-table state",
+    "window stack and screen rectangle",
+    "geometry callback order",
+    "all non-stack writes",
+    "caller ABI"
+  ],
+  "case_ledger": {
+    "path": "f_1E57_038E-case-ledger.jsonl.gz",
+    "sha256": "c272c1115d3f899a789d92e2c0270ec5b428be4135a76a7aca0e1abe79c32f40",
+    "row_count": 265,
+    "lane_counts": {
+      "directed": 9,
+      "randomized": 256
+    },
+    "compression": "gzip",
+    "identity": {
+      "address": {
+        "off": 910,
+        "seg": 7767,
+        "size": 997,
+        "unit": "root"
+      },
+      "compiled_source_sha256": "edfb01cec348d79243d7cc1630248045fa7790a321192f83d185298d0e9b67f6",
+      "flags": [
+        "/AL",
+        "/Os",
+        "/Oe",
+        "/Og",
+        "/Gs",
+        "/Zi"
+      ],
+      "function": "f_1E57_038E",
+      "harness_sha256": "2c0799048057f59eae61a48be4d695278635594484adf0c70bf46c51b4e0c799",
+      "linked_code_sha256": "132e3dd6e2b5f191f0d6e55044ba4730e2df72721bc74af33ac4c6afebf28faa",
+      "manifest_sha256": "025a0a9255d910cae4b122ab5a3f3fb40888bb456d7fe42158db7c9e622fcf50",
+      "object_sha256": "089ae2f292394329010bb1f30272c21d90eeac08a5766fbec5abcbcd2d98962f",
+      "oracle_sha256": "aa0596c6766322a8229ee3c36e57048c92adc82d50fbe2ef37afb8b85fcf4f11",
+      "profile": "msc600ax",
+      "source": "work\\takeover\\hardtail\\seeds\\root_1E57_edfb01cec348.c",
+      "source_sha256": "edfb01cec348d79243d7cc1630248045fa7790a321192f83d185298d0e9b67f6",
+      "unicorn_version": "2.1.4"
+    }
+  },
+  "unmodeled_boundaries": 0,
+  "peer_data_gates": "PASS",
+  "positive_controls": [
+    {
+      "id": "clip/empty-stack",
+      "executed": true,
+      "matched": true,
+      "execution_errors": 0,
+      "original_executed": true,
+      "candidate_executed": true,
+      "source_sha256": "edfb01cec348d79243d7cc1630248045fa7790a321192f83d185298d0e9b67f6",
+      "object_sha256": "089ae2f292394329010bb1f30272c21d90eeac08a5766fbec5abcbcd2d98962f",
+      "oracle_sha256": "aa0596c6766322a8229ee3c36e57048c92adc82d50fbe2ef37afb8b85fcf4f11",
+      "compared_effects": [
+        "ordered screen/window clipping rectangles",
+        "45-entry clip handle table",
+        "Ralloc heap/master-table state",
+        "window stack and screen rectangle",
+        "geometry callback order",
+        "all non-stack writes",
+        "caller ABI"
+      ],
+      "original_observation_sha256": "69fff2a91b24581c0b1cc99ca2ea6d1e8f880d3ac748a906446a4dde961a73aa",
+      "candidate_observation_sha256": "69fff2a91b24581c0b1cc99ca2ea6d1e8f880d3ac748a906446a4dde961a73aa"
+    }
+  ],
+  "helper_boundaries": [
+    {
+      "name": "win_GetObjRect",
+      "execution_mode": "DETERMINISTIC_CALLBACK",
+      "original_call_count": 8250,
+      "candidate_call_count": 8250
+    }
+  ]
+}

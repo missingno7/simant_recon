@@ -1,0 +1,115 @@
+{
+  "schema": "behavior-negative-controls-v1",
+  "function": "o15_384C_0239",
+  "suite_id": "dialog-actual-2100-window-v1",
+  "identity": {
+    "source_sha256": "01b51eecedcd28e2213819572c846a9754039f4a527e6da5e56e57783398bdd5",
+    "object_sha256": "bf28a33144db9e5fa67228d8c64d0681b5d4626e3f901069b9870849ba1e4868",
+    "oracle_sha256": "aa0596c6766322a8229ee3c36e57048c92adc82d50fbe2ef37afb8b85fcf4f11",
+    "harness_sha256": "2c0799048057f59eae61a48be4d695278635594484adf0c70bf46c51b4e0c799",
+    "historical_manifest_sha256": "025a0a9255d910cae4b122ab5a3f3fb40888bb456d7fe42158db7c9e622fcf50",
+    "suite_sha256": "aef69d1fd351b766b6718424c2ef20ab5b287960d2f387ef90ebd2428a992248"
+  },
+  "errors": 0,
+  "mismatches_detected": 2,
+  "controls": [
+    {
+      "id": "save-result-mutated-to-cancel",
+      "executed": true,
+      "original_executed": true,
+      "mutant_executed": true,
+      "baseline_matches": true,
+      "mutant_differs": true,
+      "execution_errors": 0,
+      "mismatch_categories": [
+        "return"
+      ],
+      "mutant_source": {
+        "path": "tools/behavior_suites/archive/dialog-window-aef69d1f-final/controls/negative-return.c",
+        "sha256": "337983c47bd1af117cf31059fb573a649c8e5162973a1dbad40f1f49c41d14bb"
+      },
+      "mutant_object": {
+        "path": "tools/behavior_suites/archive/dialog-window-aef69d1f-final/controls/negative-return.obj",
+        "sha256": "1ae686fd18a2db6e1456cd947e94083f65c02bf7272907a4434be35e93d27075"
+      },
+      "positive_case_id": "0/320/0/[13]/[]",
+      "identity": {
+        "function": "o15_384C_0239",
+        "address": {
+          "unit": "S15",
+          "seg": 14412,
+          "off": 569,
+          "size": 326
+        },
+        "source": "build\\workers\\behavior_dialog\\actual-window-final-20261002-packet\\negative-return.c",
+        "source_sha256": "337983c47bd1af117cf31059fb573a649c8e5162973a1dbad40f1f49c41d14bb",
+        "compiled_source_sha256": "ac839de85443147ca06776d0e3a768ba60dc4efe615642901946132229457771",
+        "object_sha256": "1ae686fd18a2db6e1456cd947e94083f65c02bf7272907a4434be35e93d27075",
+        "linked_code_sha256": "28fb0888924618f6614f8adc41f029180acfc07b055f5df444bd522fb35f68ca",
+        "oracle_sha256": "aa0596c6766322a8229ee3c36e57048c92adc82d50fbe2ef37afb8b85fcf4f11",
+        "unicorn_version": "2.1.4",
+        "harness_sha256": "2c0799048057f59eae61a48be4d695278635594484adf0c70bf46c51b4e0c799",
+        "profile": "msc600ax",
+        "flags": [
+          "/AL",
+          "/Os",
+          "/Og",
+          "/Oe",
+          "/Zi"
+        ],
+        "manifest_sha256": "025a0a9255d910cae4b122ab5a3f3fb40888bb456d7fe42158db7c9e622fcf50"
+      },
+      "mutant_source_sha256": "337983c47bd1af117cf31059fb573a649c8e5162973a1dbad40f1f49c41d14bb"
+    },
+    {
+      "id": "omit-resource-release",
+      "executed": true,
+      "original_executed": true,
+      "mutant_executed": true,
+      "baseline_matches": true,
+      "mutant_differs": true,
+      "execution_errors": 0,
+      "mismatch_categories": [
+        "ranges",
+        "trace",
+        "nonstack_memory"
+      ],
+      "mutant_source": {
+        "path": "tools/behavior_suites/archive/dialog-window-aef69d1f-final/controls/negative-release.c",
+        "sha256": "7a2259a303eafe6587c3d78d3fe216d2517a5e386132fa95b32860581b46ec76"
+      },
+      "mutant_object": {
+        "path": "tools/behavior_suites/archive/dialog-window-aef69d1f-final/controls/negative-release.obj",
+        "sha256": "faed657906f1346fa2939d37b62ae3aa29b709969b7351d19fc70321f1f2afce"
+      },
+      "positive_case_id": "0/320/0/[13]/[]",
+      "identity": {
+        "function": "o15_384C_0239",
+        "address": {
+          "unit": "S15",
+          "seg": 14412,
+          "off": 569,
+          "size": 326
+        },
+        "source": "build\\workers\\behavior_dialog\\actual-window-final-20261002-packet\\negative-release.c",
+        "source_sha256": "7a2259a303eafe6587c3d78d3fe216d2517a5e386132fa95b32860581b46ec76",
+        "compiled_source_sha256": "b5b66e87ed21c36ee69e766a4407ef189714352342dfe7677dd21566f692a4d6",
+        "object_sha256": "faed657906f1346fa2939d37b62ae3aa29b709969b7351d19fc70321f1f2afce",
+        "linked_code_sha256": "6ea32737fafdfa2f990f8d5f812eb0d8c685596c01bc0ead0762748d5b799647",
+        "oracle_sha256": "aa0596c6766322a8229ee3c36e57048c92adc82d50fbe2ef37afb8b85fcf4f11",
+        "unicorn_version": "2.1.4",
+        "harness_sha256": "2c0799048057f59eae61a48be4d695278635594484adf0c70bf46c51b4e0c799",
+        "profile": "msc600ax",
+        "flags": [
+          "/AL",
+          "/Os",
+          "/Og",
+          "/Oe",
+          "/Zi"
+        ],
+        "manifest_sha256": "025a0a9255d910cae4b122ab5a3f3fb40888bb456d7fe42158db7c9e622fcf50"
+      },
+      "mutant_source_sha256": "7a2259a303eafe6587c3d78d3fe216d2517a5e386132fa95b32860581b46ec76"
+    }
+  ]
+}

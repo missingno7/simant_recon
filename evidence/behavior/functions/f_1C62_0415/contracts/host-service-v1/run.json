@@ -1,0 +1,624 @@
+{
+  "schema": "behavior-run-evidence-v1",
+  "completion": "COMPLETE",
+  "identity": {
+    "function": "f_1C62_0415",
+    "address": {
+      "off": 1045,
+      "seg": 7266,
+      "size": 649,
+      "unit": "root"
+    },
+    "source": "work\\takeover\\hardtail\\seeds\\root_1C62_1a75da44054b.c",
+    "source_sha256": "1a75da44054b48e33e02b0dc551e9e690d1b0797b5e2cfe2e3e6e26ad3b632d4",
+    "compiled_source_sha256": "1a75da44054b48e33e02b0dc551e9e690d1b0797b5e2cfe2e3e6e26ad3b632d4",
+    "object_sha256": "a5636bec0983cca368d802c3e5e3b11f43efd56c531ab0ef51e89aee2d4cb419",
+    "linked_code_sha256": "6849f193d0b19c4bb96e793268549defef9c36b38bcfcb8c363c9596cd9f7d44",
+    "oracle_sha256": "aa0596c6766322a8229ee3c36e57048c92adc82d50fbe2ef37afb8b85fcf4f11",
+    "unicorn_version": "2.1.4",
+    "harness_sha256": "2c0799048057f59eae61a48be4d695278635594484adf0c70bf46c51b4e0c799",
+    "profile": "msc600ax",
+    "flags": [
+      "/AL",
+      "/Os",
+      "/Oe",
+      "/Og",
+      "/Gs",
+      "/Zd"
+    ],
+    "manifest_sha256": "025a0a9255d910cae4b122ab5a3f3fb40888bb456d7fe42158db7c9e622fcf50",
+    "suite_id": "tutorial_menu_v1",
+    "suite_sha256": "e01896c0b9f96741a0ef8d11b1cb3d5a1b26e62677327699a01bb4c05778ec7a",
+    "module": "root:1C62",
+    "historical_manifest_sha256": "025a0a9255d910cae4b122ab5a3f3fb40888bb456d7fe42158db7c9e622fcf50"
+  },
+  "execution": {
+    "engine": "PreparedPair.compare",
+    "actual_original_execution": true,
+    "actual_candidate_execution": true,
+    "original_exe_sha256": "aa0596c6766322a8229ee3c36e57048c92adc82d50fbe2ef37afb8b85fcf4f11"
+  },
+  "cases": {
+    "directed": {
+      "generated": 56,
+      "executed": 56,
+      "actual_original_invocations": 56,
+      "actual_candidate_invocations": 56,
+      "seeds": []
+    },
+    "randomized": {
+      "generated": 100,
+      "executed": 100,
+      "actual_original_invocations": 100,
+      "actual_candidate_invocations": 100,
+      "seeds": [
+        697763729
+      ]
+    }
+  },
+  "errors": 0,
+  "mismatches": 0,
+  "compared_effects": [
+    "return",
+    "ordered host/helper calls",
+    "ordered input consumption",
+    "pointed rectangles and strings",
+    "global and pointed writes",
+    "all nonstack writes",
+    "caller ABI"
+  ],
+  "case_ledger": {
+    "schema": "behavior-case-ledger-v1",
+    "path": "evidence/behavior/functions/f_1C62_0415/contracts/host-service-v1/cases.jsonl.gz",
+    "sha256": "e899ed4e82140c77be2c44aafbb70c64d73f955404d4db3ce8116399e4522c3a",
+    "row_count": 156,
+    "lane_counts": {
+      "directed": 56,
+      "randomized": 100
+    },
+    "identity": {
+      "address": {
+        "off": 1045,
+        "seg": 7266,
+        "size": 649,
+        "unit": "root"
+      },
+      "compiled_source_sha256": "1a75da44054b48e33e02b0dc551e9e690d1b0797b5e2cfe2e3e6e26ad3b632d4",
+      "flags": [
+        "/AL",
+        "/Os",
+        "/Oe",
+        "/Og",
+        "/Gs",
+        "/Zd"
+      ],
+      "function": "f_1C62_0415",
+      "harness_sha256": "2c0799048057f59eae61a48be4d695278635594484adf0c70bf46c51b4e0c799",
+      "linked_code_sha256": "6849f193d0b19c4bb96e793268549defef9c36b38bcfcb8c363c9596cd9f7d44",
+      "manifest_sha256": "025a0a9255d910cae4b122ab5a3f3fb40888bb456d7fe42158db7c9e622fcf50",
+      "object_sha256": "a5636bec0983cca368d802c3e5e3b11f43efd56c531ab0ef51e89aee2d4cb419",
+      "oracle_sha256": "aa0596c6766322a8229ee3c36e57048c92adc82d50fbe2ef37afb8b85fcf4f11",
+      "profile": "msc600ax",
+      "source": "work\\takeover\\hardtail\\seeds\\root_1C62_1a75da44054b.c",
+      "source_sha256": "1a75da44054b48e33e02b0dc551e9e690d1b0797b5e2cfe2e3e6e26ad3b632d4",
+      "unicorn_version": "2.1.4"
+    },
+    "compression": "gzip"
+  },
+  "unmodeled_boundaries": 0,
+  "peer_data_gates": "PASS",
+  "positive_controls": [
+    {
+      "id": "pc-f_1C62_0415-GSaveRect",
+      "case_id": "directed/set0/choice0/key000d",
+      "executed": true,
+      "matched": true,
+      "execution_errors": 0,
+      "original_executed": true,
+      "candidate_executed": true,
+      "source_sha256": "1a75da44054b48e33e02b0dc551e9e690d1b0797b5e2cfe2e3e6e26ad3b632d4",
+      "object_sha256": "a5636bec0983cca368d802c3e5e3b11f43efd56c531ab0ef51e89aee2d4cb419",
+      "oracle_sha256": "aa0596c6766322a8229ee3c36e57048c92adc82d50fbe2ef37afb8b85fcf4f11",
+      "input_sha256": "1a012fca353ae5243b3322cb63ffbded12618589c7058ac6469ed109d7791273",
+      "compared_effects": [
+        "return",
+        "ordered host/helper calls",
+        "ordered input consumption",
+        "pointed rectangles and strings",
+        "global and pointed writes",
+        "all nonstack writes",
+        "caller ABI"
+      ],
+      "original_observation_sha256": "4e7b53fd99076ca5827fcc1a459a3240af706c262f687a1946daf9c949d30f7d",
+      "candidate_observation_sha256": "4e7b53fd99076ca5827fcc1a459a3240af706c262f687a1946daf9c949d30f7d",
+      "observed_helper": "GSaveRect",
+      "report": "build/workers/behavior_tutorial_menu/final_conditional_v4/report.json",
+      "report_sha256": "6624d14aa5684b48867862d6686e972f4c5743524b3f937e3372e05c126000c6"
+    },
+    {
+      "id": "pc-f_1C62_0415-f_1B73_032A",
+      "case_id": "directed/set0/event0900",
+      "executed": true,
+      "matched": true,
+      "execution_errors": 0,
+      "original_executed": true,
+      "candidate_executed": true,
+      "source_sha256": "1a75da44054b48e33e02b0dc551e9e690d1b0797b5e2cfe2e3e6e26ad3b632d4",
+      "object_sha256": "a5636bec0983cca368d802c3e5e3b11f43efd56c531ab0ef51e89aee2d4cb419",
+      "oracle_sha256": "aa0596c6766322a8229ee3c36e57048c92adc82d50fbe2ef37afb8b85fcf4f11",
+      "input_sha256": "a106e42f7a318937a4e60292888b4f57260f1e48a40a39ad97a9200b57c99c39",
+      "compared_effects": [
+        "return",
+        "ordered host/helper calls",
+        "ordered input consumption",
+        "pointed rectangles and strings",
+        "global and pointed writes",
+        "all nonstack writes",
+        "caller ABI"
+      ],
+      "original_observation_sha256": "b66e0b6b5d97accd3241b9478aec2c07ca94bb3775e4c22de845f7fb1988b609",
+      "candidate_observation_sha256": "b66e0b6b5d97accd3241b9478aec2c07ca94bb3775e4c22de845f7fb1988b609",
+      "observed_helper": "f_1B73_032A",
+      "report": "build/workers/behavior_tutorial_menu/final_conditional_v4/report.json",
+      "report_sha256": "6624d14aa5684b48867862d6686e972f4c5743524b3f937e3372e05c126000c6"
+    },
+    {
+      "id": "pc-f_1C62_0415-f_1B73_032E",
+      "case_id": "directed/set0/event0900",
+      "executed": true,
+      "matched": true,
+      "execution_errors": 0,
+      "original_executed": true,
+      "candidate_executed": true,
+      "source_sha256": "1a75da44054b48e33e02b0dc551e9e690d1b0797b5e2cfe2e3e6e26ad3b632d4",
+      "object_sha256": "a5636bec0983cca368d802c3e5e3b11f43efd56c531ab0ef51e89aee2d4cb419",
+      "oracle_sha256": "aa0596c6766322a8229ee3c36e57048c92adc82d50fbe2ef37afb8b85fcf4f11",
+      "input_sha256": "a106e42f7a318937a4e60292888b4f57260f1e48a40a39ad97a9200b57c99c39",
+      "compared_effects": [
+        "return",
+        "ordered host/helper calls",
+        "ordered input consumption",
+        "pointed rectangles and strings",
+        "global and pointed writes",
+        "all nonstack writes",
+        "caller ABI"
+      ],
+      "original_observation_sha256": "b66e0b6b5d97accd3241b9478aec2c07ca94bb3775e4c22de845f7fb1988b609",
+      "candidate_observation_sha256": "b66e0b6b5d97accd3241b9478aec2c07ca94bb3775e4c22de845f7fb1988b609",
+      "observed_helper": "f_1B73_032E",
+      "report": "build/workers/behavior_tutorial_menu/final_conditional_v4/report.json",
+      "report_sha256": "6624d14aa5684b48867862d6686e972f4c5743524b3f937e3372e05c126000c6"
+    },
+    {
+      "id": "pc-f_1C62_0415-f_1CE2_056C",
+      "case_id": "directed/set0/choice0/key000d",
+      "executed": true,
+      "matched": true,
+      "execution_errors": 0,
+      "original_executed": true,
+      "candidate_executed": true,
+      "source_sha256": "1a75da44054b48e33e02b0dc551e9e690d1b0797b5e2cfe2e3e6e26ad3b632d4",
+      "object_sha256": "a5636bec0983cca368d802c3e5e3b11f43efd56c531ab0ef51e89aee2d4cb419",
+      "oracle_sha256": "aa0596c6766322a8229ee3c36e57048c92adc82d50fbe2ef37afb8b85fcf4f11",
+      "input_sha256": "1a012fca353ae5243b3322cb63ffbded12618589c7058ac6469ed109d7791273",
+      "compared_effects": [
+        "return",
+        "ordered host/helper calls",
+        "ordered input consumption",
+        "pointed rectangles and strings",
+        "global and pointed writes",
+        "all nonstack writes",
+        "caller ABI"
+      ],
+      "original_observation_sha256": "4e7b53fd99076ca5827fcc1a459a3240af706c262f687a1946daf9c949d30f7d",
+      "candidate_observation_sha256": "4e7b53fd99076ca5827fcc1a459a3240af706c262f687a1946daf9c949d30f7d",
+      "observed_helper": "f_1CE2_056C",
+      "report": "build/workers/behavior_tutorial_menu/final_conditional_v4/report.json",
+      "report_sha256": "6624d14aa5684b48867862d6686e972f4c5743524b3f937e3372e05c126000c6"
+    },
+    {
+      "id": "pc-f_1C62_0415-f_1F58_0038",
+      "case_id": "directed/set0/choice0/key000d",
+      "executed": true,
+      "matched": true,
+      "execution_errors": 0,
+      "original_executed": true,
+      "candidate_executed": true,
+      "source_sha256": "1a75da44054b48e33e02b0dc551e9e690d1b0797b5e2cfe2e3e6e26ad3b632d4",
+      "object_sha256": "a5636bec0983cca368d802c3e5e3b11f43efd56c531ab0ef51e89aee2d4cb419",
+      "oracle_sha256": "aa0596c6766322a8229ee3c36e57048c92adc82d50fbe2ef37afb8b85fcf4f11",
+      "input_sha256": "1a012fca353ae5243b3322cb63ffbded12618589c7058ac6469ed109d7791273",
+      "compared_effects": [
+        "return",
+        "ordered host/helper calls",
+        "ordered input consumption",
+        "pointed rectangles and strings",
+        "global and pointed writes",
+        "all nonstack writes",
+        "caller ABI"
+      ],
+      "original_observation_sha256": "4e7b53fd99076ca5827fcc1a459a3240af706c262f687a1946daf9c949d30f7d",
+      "candidate_observation_sha256": "4e7b53fd99076ca5827fcc1a459a3240af706c262f687a1946daf9c949d30f7d",
+      "observed_helper": "f_1F58_0038",
+      "report": "build/workers/behavior_tutorial_menu/final_conditional_v4/report.json",
+      "report_sha256": "6624d14aa5684b48867862d6686e972f4c5743524b3f937e3372e05c126000c6"
+    },
+    {
+      "id": "pc-f_1C62_0415-f_1F58_005A",
+      "case_id": "directed/set0/ignored0058",
+      "executed": true,
+      "matched": true,
+      "execution_errors": 0,
+      "original_executed": true,
+      "candidate_executed": true,
+      "source_sha256": "1a75da44054b48e33e02b0dc551e9e690d1b0797b5e2cfe2e3e6e26ad3b632d4",
+      "object_sha256": "a5636bec0983cca368d802c3e5e3b11f43efd56c531ab0ef51e89aee2d4cb419",
+      "oracle_sha256": "aa0596c6766322a8229ee3c36e57048c92adc82d50fbe2ef37afb8b85fcf4f11",
+      "input_sha256": "cc8b5e2333c5a2ca3810499aea46c0083da9dc0bbbbd64935730c33f5302f687",
+      "compared_effects": [
+        "return",
+        "ordered host/helper calls",
+        "ordered input consumption",
+        "pointed rectangles and strings",
+        "global and pointed writes",
+        "all nonstack writes",
+        "caller ABI"
+      ],
+      "original_observation_sha256": "f419c16379cb9cb09b08effc663524e16133a15c55ccbe465165b6dd8ba5de0f",
+      "candidate_observation_sha256": "f419c16379cb9cb09b08effc663524e16133a15c55ccbe465165b6dd8ba5de0f",
+      "observed_helper": "f_1F58_005A",
+      "report": "build/workers/behavior_tutorial_menu/final_conditional_v4/report.json",
+      "report_sha256": "6624d14aa5684b48867862d6686e972f4c5743524b3f937e3372e05c126000c6"
+    },
+    {
+      "id": "pc-f_1C62_0415-f_1F58_0090",
+      "case_id": "directed/set0/choice0/key000d",
+      "executed": true,
+      "matched": true,
+      "execution_errors": 0,
+      "original_executed": true,
+      "candidate_executed": true,
+      "source_sha256": "1a75da44054b48e33e02b0dc551e9e690d1b0797b5e2cfe2e3e6e26ad3b632d4",
+      "object_sha256": "a5636bec0983cca368d802c3e5e3b11f43efd56c531ab0ef51e89aee2d4cb419",
+      "oracle_sha256": "aa0596c6766322a8229ee3c36e57048c92adc82d50fbe2ef37afb8b85fcf4f11",
+      "input_sha256": "1a012fca353ae5243b3322cb63ffbded12618589c7058ac6469ed109d7791273",
+      "compared_effects": [
+        "return",
+        "ordered host/helper calls",
+        "ordered input consumption",
+        "pointed rectangles and strings",
+        "global and pointed writes",
+        "all nonstack writes",
+        "caller ABI"
+      ],
+      "original_observation_sha256": "4e7b53fd99076ca5827fcc1a459a3240af706c262f687a1946daf9c949d30f7d",
+      "candidate_observation_sha256": "4e7b53fd99076ca5827fcc1a459a3240af706c262f687a1946daf9c949d30f7d",
+      "observed_helper": "f_1F58_0090",
+      "report": "build/workers/behavior_tutorial_menu/final_conditional_v4/report.json",
+      "report_sha256": "6624d14aa5684b48867862d6686e972f4c5743524b3f937e3372e05c126000c6"
+    },
+    {
+      "id": "pc-f_1C62_0415-f_1FBD_0000",
+      "case_id": "directed/set0/choice0/key000d",
+      "executed": true,
+      "matched": true,
+      "execution_errors": 0,
+      "original_executed": true,
+      "candidate_executed": true,
+      "source_sha256": "1a75da44054b48e33e02b0dc551e9e690d1b0797b5e2cfe2e3e6e26ad3b632d4",
+      "object_sha256": "a5636bec0983cca368d802c3e5e3b11f43efd56c531ab0ef51e89aee2d4cb419",
+      "oracle_sha256": "aa0596c6766322a8229ee3c36e57048c92adc82d50fbe2ef37afb8b85fcf4f11",
+      "input_sha256": "1a012fca353ae5243b3322cb63ffbded12618589c7058ac6469ed109d7791273",
+      "compared_effects": [
+        "return",
+        "ordered host/helper calls",
+        "ordered input consumption",
+        "pointed rectangles and strings",
+        "global and pointed writes",
+        "all nonstack writes",
+        "caller ABI"
+      ],
+      "original_observation_sha256": "4e7b53fd99076ca5827fcc1a459a3240af706c262f687a1946daf9c949d30f7d",
+      "candidate_observation_sha256": "4e7b53fd99076ca5827fcc1a459a3240af706c262f687a1946daf9c949d30f7d",
+      "observed_helper": "f_1FBD_0000",
+      "report": "build/workers/behavior_tutorial_menu/final_conditional_v4/report.json",
+      "report_sha256": "6624d14aa5684b48867862d6686e972f4c5743524b3f937e3372e05c126000c6"
+    },
+    {
+      "id": "pc-f_1C62_0415-f_1FD2_02B1",
+      "case_id": "directed/set0/choice0/key000d",
+      "executed": true,
+      "matched": true,
+      "execution_errors": 0,
+      "original_executed": true,
+      "candidate_executed": true,
+      "source_sha256": "1a75da44054b48e33e02b0dc551e9e690d1b0797b5e2cfe2e3e6e26ad3b632d4",
+      "object_sha256": "a5636bec0983cca368d802c3e5e3b11f43efd56c531ab0ef51e89aee2d4cb419",
+      "oracle_sha256": "aa0596c6766322a8229ee3c36e57048c92adc82d50fbe2ef37afb8b85fcf4f11",
+      "input_sha256": "1a012fca353ae5243b3322cb63ffbded12618589c7058ac6469ed109d7791273",
+      "compared_effects": [
+        "return",
+        "ordered host/helper calls",
+        "ordered input consumption",
+        "pointed rectangles and strings",
+        "global and pointed writes",
+        "all nonstack writes",
+        "caller ABI"
+      ],
+      "original_observation_sha256": "4e7b53fd99076ca5827fcc1a459a3240af706c262f687a1946daf9c949d30f7d",
+      "candidate_observation_sha256": "4e7b53fd99076ca5827fcc1a459a3240af706c262f687a1946daf9c949d30f7d",
+      "observed_helper": "f_1FD2_02B1",
+      "report": "build/workers/behavior_tutorial_menu/final_conditional_v4/report.json",
+      "report_sha256": "6624d14aa5684b48867862d6686e972f4c5743524b3f937e3372e05c126000c6"
+    },
+    {
+      "id": "pc-f_1C62_0415-f_1FD2_02FF",
+      "case_id": "directed/set0/choice0/key000d",
+      "executed": true,
+      "matched": true,
+      "execution_errors": 0,
+      "original_executed": true,
+      "candidate_executed": true,
+      "source_sha256": "1a75da44054b48e33e02b0dc551e9e690d1b0797b5e2cfe2e3e6e26ad3b632d4",
+      "object_sha256": "a5636bec0983cca368d802c3e5e3b11f43efd56c531ab0ef51e89aee2d4cb419",
+      "oracle_sha256": "aa0596c6766322a8229ee3c36e57048c92adc82d50fbe2ef37afb8b85fcf4f11",
+      "input_sha256": "1a012fca353ae5243b3322cb63ffbded12618589c7058ac6469ed109d7791273",
+      "compared_effects": [
+        "return",
+        "ordered host/helper calls",
+        "ordered input consumption",
+        "pointed rectangles and strings",
+        "global and pointed writes",
+        "all nonstack writes",
+        "caller ABI"
+      ],
+      "original_observation_sha256": "4e7b53fd99076ca5827fcc1a459a3240af706c262f687a1946daf9c949d30f7d",
+      "candidate_observation_sha256": "4e7b53fd99076ca5827fcc1a459a3240af706c262f687a1946daf9c949d30f7d",
+      "observed_helper": "f_1FD2_02FF",
+      "report": "build/workers/behavior_tutorial_menu/final_conditional_v4/report.json",
+      "report_sha256": "6624d14aa5684b48867862d6686e972f4c5743524b3f937e3372e05c126000c6"
+    },
+    {
+      "id": "pc-f_1C62_0415-f_1FD2_031A",
+      "case_id": "directed/set0/choice0/key000d",
+      "executed": true,
+      "matched": true,
+      "execution_errors": 0,
+      "original_executed": true,
+      "candidate_executed": true,
+      "source_sha256": "1a75da44054b48e33e02b0dc551e9e690d1b0797b5e2cfe2e3e6e26ad3b632d4",
+      "object_sha256": "a5636bec0983cca368d802c3e5e3b11f43efd56c531ab0ef51e89aee2d4cb419",
+      "oracle_sha256": "aa0596c6766322a8229ee3c36e57048c92adc82d50fbe2ef37afb8b85fcf4f11",
+      "input_sha256": "1a012fca353ae5243b3322cb63ffbded12618589c7058ac6469ed109d7791273",
+      "compared_effects": [
+        "return",
+        "ordered host/helper calls",
+        "ordered input consumption",
+        "pointed rectangles and strings",
+        "global and pointed writes",
+        "all nonstack writes",
+        "caller ABI"
+      ],
+      "original_observation_sha256": "4e7b53fd99076ca5827fcc1a459a3240af706c262f687a1946daf9c949d30f7d",
+      "candidate_observation_sha256": "4e7b53fd99076ca5827fcc1a459a3240af706c262f687a1946daf9c949d30f7d",
+      "observed_helper": "f_1FD2_031A",
+      "report": "build/workers/behavior_tutorial_menu/final_conditional_v4/report.json",
+      "report_sha256": "6624d14aa5684b48867862d6686e972f4c5743524b3f937e3372e05c126000c6"
+    },
+    {
+      "id": "pc-f_1C62_0415-f_1C62_0737",
+      "case_id": "directed/set0/ignored0058",
+      "executed": true,
+      "matched": true,
+      "execution_errors": 0,
+      "original_executed": true,
+      "candidate_executed": true,
+      "source_sha256": "1a75da44054b48e33e02b0dc551e9e690d1b0797b5e2cfe2e3e6e26ad3b632d4",
+      "object_sha256": "a5636bec0983cca368d802c3e5e3b11f43efd56c531ab0ef51e89aee2d4cb419",
+      "oracle_sha256": "aa0596c6766322a8229ee3c36e57048c92adc82d50fbe2ef37afb8b85fcf4f11",
+      "input_sha256": "cc8b5e2333c5a2ca3810499aea46c0083da9dc0bbbbd64935730c33f5302f687",
+      "compared_effects": [
+        "return",
+        "ordered host/helper calls",
+        "ordered input consumption",
+        "pointed rectangles and strings",
+        "global and pointed writes",
+        "all nonstack writes",
+        "caller ABI"
+      ],
+      "original_observation_sha256": "f419c16379cb9cb09b08effc663524e16133a15c55ccbe465165b6dd8ba5de0f",
+      "candidate_observation_sha256": "f419c16379cb9cb09b08effc663524e16133a15c55ccbe465165b6dd8ba5de0f",
+      "observed_helper": "f_1C62_0737",
+      "report": "build/workers/behavior_tutorial_menu/final_conditional_v4/report.json",
+      "report_sha256": "6624d14aa5684b48867862d6686e972f4c5743524b3f937e3372e05c126000c6"
+    }
+  ],
+  "helper_boundaries": [
+    {
+      "name": "GSaveRect",
+      "execution_mode": "MODELED",
+      "executed_from_original": false,
+      "observed_call_count": 156,
+      "observed_call_count_scope": "all 156 matched campaign cases",
+      "stack_words": 2,
+      "register_args": [],
+      "callee_pop_bytes": 0,
+      "certification": {
+        "path": "evidence/behavior/helpers/tutorial-contracts-v1/f_1C62_0415/GSaveRect.json",
+        "sha256": "94d9d4dcc43362137da566ffff44269b553880b955c949c468b2055d5a58ae5d"
+      }
+    },
+    {
+      "name": "f_1B73_032A",
+      "execution_mode": "MODELED",
+      "executed_from_original": false,
+      "observed_call_count": 52,
+      "observed_call_count_scope": "all 156 matched campaign cases",
+      "stack_words": 0,
+      "register_args": [],
+      "callee_pop_bytes": 0,
+      "certification": {
+        "path": "evidence/behavior/helpers/tutorial-contracts-v1/f_1C62_0415/f_1B73_032A.json",
+        "sha256": "763c45b723a57c670b00ecd43a280988a42fcfb01304a3c8d07a8ad057fa6a7a"
+      }
+    },
+    {
+      "name": "f_1B73_032E",
+      "execution_mode": "MODELED",
+      "executed_from_original": false,
+      "observed_call_count": 52,
+      "observed_call_count_scope": "all 156 matched campaign cases",
+      "stack_words": 2,
+      "register_args": [],
+      "callee_pop_bytes": 0,
+      "certification": {
+        "path": "evidence/behavior/helpers/tutorial-contracts-v1/f_1C62_0415/f_1B73_032E.json",
+        "sha256": "0bf5bf7174edc39fe166b8aa1855424e12da82c92a6a2159efdbef7d50e999ae"
+      }
+    },
+    {
+      "name": "f_1CE2_056C",
+      "execution_mode": "MODELED",
+      "executed_from_original": false,
+      "observed_call_count": 156,
+      "observed_call_count_scope": "all 156 matched campaign cases",
+      "stack_words": 4,
+      "register_args": [],
+      "callee_pop_bytes": 0,
+      "certification": {
+        "path": "evidence/behavior/helpers/tutorial-contracts-v1/f_1C62_0415/f_1CE2_056C.json",
+        "sha256": "541245de8b9bbd0a64a1eac6de14ccfd95706d7527dafe9e3aacaf701888b98f"
+      }
+    },
+    {
+      "name": "f_1F58_0038",
+      "execution_mode": "MODELED",
+      "executed_from_original": false,
+      "observed_call_count": 485,
+      "observed_call_count_scope": "all 156 matched campaign cases",
+      "stack_words": 0,
+      "register_args": [],
+      "callee_pop_bytes": 0,
+      "certification": {
+        "path": "evidence/behavior/helpers/tutorial-contracts-v1/f_1C62_0415/f_1F58_0038.json",
+        "sha256": "2e313ae2e2d60b9376d0ec7ad9b95a0452497a46f3b734e39ade36aa0a5cfb95"
+      }
+    },
+    {
+      "name": "f_1F58_005A",
+      "execution_mode": "MODELED",
+      "executed_from_original": false,
+      "observed_call_count": 173,
+      "observed_call_count_scope": "all 156 matched campaign cases",
+      "stack_words": 0,
+      "register_args": [],
+      "callee_pop_bytes": 0,
+      "certification": {
+        "path": "evidence/behavior/helpers/tutorial-contracts-v1/f_1C62_0415/f_1F58_005A.json",
+        "sha256": "6c25ee77f8bca6914f4c8f93973dc0902268cee68aa387d84615cf4d8a751e2e"
+      }
+    },
+    {
+      "name": "f_1F58_0090",
+      "execution_mode": "MODELED",
+      "executed_from_original": false,
+      "observed_call_count": 156,
+      "observed_call_count_scope": "all 156 matched campaign cases",
+      "stack_words": 0,
+      "register_args": [],
+      "callee_pop_bytes": 0,
+      "certification": {
+        "path": "evidence/behavior/helpers/tutorial-contracts-v1/f_1C62_0415/f_1F58_0090.json",
+        "sha256": "6dd957bd2b893b5c426f3de8f8a706e5924d140ac6304fbace1f3b6d940426c5"
+      }
+    },
+    {
+      "name": "f_1FBD_0000",
+      "execution_mode": "MODELED",
+      "executed_from_original": false,
+      "observed_call_count": 526,
+      "observed_call_count_scope": "all 156 matched campaign cases",
+      "stack_words": 4,
+      "register_args": [],
+      "callee_pop_bytes": 0,
+      "certification": {
+        "path": "evidence/behavior/helpers/tutorial-contracts-v1/f_1C62_0415/f_1FBD_0000.json",
+        "sha256": "6d03235ee8163d56bae90d2fec75cc0830a5373e1f3a9637793074a24cf18472"
+      }
+    },
+    {
+      "name": "f_1FD2_02B1",
+      "execution_mode": "MODELED",
+      "executed_from_original": false,
+      "observed_call_count": 2138,
+      "observed_call_count_scope": "all 156 matched campaign cases",
+      "stack_words": 3,
+      "register_args": [],
+      "callee_pop_bytes": 0,
+      "certification": {
+        "path": "evidence/behavior/helpers/tutorial-contracts-v1/f_1C62_0415/f_1FD2_02B1.json",
+        "sha256": "8ec71fabb4e42892fd00fa41c2307ec6f145c434304680a40e9efcb3fbfc1b0f"
+      }
+    },
+    {
+      "name": "f_1FD2_02FF",
+      "execution_mode": "ORIGINAL_EXE",
+      "executed_from_original": true,
+      "observed_call_count": 156,
+      "observed_call_count_scope": "all 156 matched campaign cases",
+      "stack_words": 0,
+      "register_args": [],
+      "callee_pop_bytes": 0
+    },
+    {
+      "name": "f_1FD2_031A",
+      "execution_mode": "MODELED",
+      "executed_from_original": false,
+      "observed_call_count": 156,
+      "observed_call_count_scope": "all 156 matched campaign cases",
+      "stack_words": 0,
+      "register_args": [],
+      "callee_pop_bytes": 0,
+      "certification": {
+        "path": "evidence/behavior/helpers/tutorial-contracts-v1/f_1C62_0415/f_1FD2_031A.json",
+        "sha256": "6dff36345fea9d1ed336af56dc6b3deb1cc1c6606847a2467064b7eea5ef0d37"
+      }
+    },
+    {
+      "name": "f_1C62_0737",
+      "execution_mode": "ORIGINAL_EXE",
+      "executed_from_original": true,
+      "observed_call_count": 156,
+      "observed_call_count_scope": "one unconditional same-module call per matched top-level case; source callsite root_1C62 seed line 268",
+      "stack_words": 0,
+      "register_args": [],
+      "callee_pop_bytes": 0
+    }
+  ],
+  "implementation_views": [],
+  "callback_boundary_audit": {
+    "path": "build/workers/behavior_tutorial_menu/final_conditional_v4/callback-boundary-audit.json",
+    "sha256": "660c83c937c0cc219cb9dba6c11eeb09e67d76d20f9fbde4128a38e189562b88"
+  },
+  "positive_boundary_cases": {
+    "path": "build/workers/behavior_tutorial_menu/final_conditional_v4/positive-boundary-cases.json",
+    "sha256": "4299570e904dacc6ba4b284927a7b9359c73b0dff3eb0c19cea647e3f4a04770"
+  },
+  "retained_input_bundle": {
+    "path": "evidence/behavior/harnesses/tutorial-menu-20261002-e018/bundle.json",
+    "sha256": "f27d7904119109a9c5619fa480dac9859753678a6746b189cc7d45f70ade86a5"
+  },
+  "raw_report": {
+    "path": "evidence/behavior/functions/f_1C62_0415/contracts/host-service-v1/raw-run.json",
+    "sha256": "395ac721eadaf00e4784f3e28c38e310db3c4550f5b95a2fe920551eb6a4a2b5"
+  },
+  "campaign_scope": {
+    "directed": "56 cases: all sets 0/1/2 choices, ESC and upper/lower second-byte hotkeys, ignored keys, message geometry variants, event codes 0x0900/01/02/FF after an ignored key so the event branch executes.",
+    "randomized": "100 cases, seed 0x29970791; sets 0..2, printable ASCII messages sized for screen/character width, screens 320/640/800 by 200/400/600, line-height 8..19, character-width 6..12, pending-key prefixes and at most one complete eight-word 0x09xx event.",
+    "fixture": "Private DOS labels/tables and ctype remain from original module; host input/display/timer are modeled. Original string/font measurement, ctype, rectangle sizing/clipping and event-return logic execute; 0x09xx event returns its low byte."
+  },
+  "helper_alias_abi_audit": {
+    "path": "evidence/behavior/harnesses/tutorial-menu-20261002-e018/source-inputs/helper_alias_abi_audit.json",
+    "sha256": "00385a2f225ce7a409bb0b780f69d448818dafa0c2599e3e87e1b114e505ddcb"
+  }
+}

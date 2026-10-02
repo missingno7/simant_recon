@@ -1,0 +1,74 @@
+{
+  "function": "InvertPatch",
+  "observed_modeled_helpers": [
+    {
+      "binding_role": "modeled callback slot; address/name reuse does not assert execution of a same-named DOS helper body",
+      "caller_dataflow_and_omissions": "balanced restore call; no subsequent target read of clip internals.",
+      "canonical_definition_or_role": "void far clip_Pop(void)",
+      "definition_file": "src/root/m1E57.c",
+      "definition_sha256": "812e8ec90bcf25c56adf073e753bf72f8f6a3bc108055e112c43f894e9d8d0c3",
+      "execution_boundary": "ordered clipping stack command trace; clip geometry is not simulated",
+      "execution_mode": "MODELED",
+      "helper": "clip_Pop",
+      "observed_call_abi": "direct zero-argument far call",
+      "observed_call_count": 1084,
+      "review_status": "PENDING_ROOT_REVIEW"
+    },
+    {
+      "binding_role": "modeled callback slot; address/name reuse does not assert execution of a same-named DOS helper body",
+      "caller_dataflow_and_omissions": "the target emits the clip push then does not read clip internals before pop; clip-state geometry excluded.",
+      "canonical_definition_or_role": "void far clip_Push(void)",
+      "definition_file": "src/root/m1E57.c",
+      "definition_sha256": "812e8ec90bcf25c56adf073e753bf72f8f6a3bc108055e112c43f894e9d8d0c3",
+      "execution_boundary": "ordered clipping stack command trace; clip geometry is not simulated",
+      "execution_mode": "MODELED",
+      "helper": "clip_Push",
+      "observed_call_abi": "direct zero-argument far call",
+      "observed_call_count": 1084,
+      "review_status": "PENDING_ROOT_REVIEW"
+    },
+    {
+      "binding_role": "modeled callback slot; address/name reuse does not assert execution of a same-named DOS helper body",
+      "caller_dataflow_and_omissions": "the target emits this clipping request; physical clip rectangle/state is not modeled.",
+      "canonical_definition_or_role": "void far clip_SetWin(int win)",
+      "definition_file": "src/root/m1E57.c",
+      "definition_sha256": "812e8ec90bcf25c56adf073e753bf72f8f6a3bc108055e112c43f894e9d8d0c3",
+      "execution_boundary": "ordered clipping window command trace; clip geometry is not simulated",
+      "execution_mode": "MODELED",
+      "helper": "clip_SetWin",
+      "observed_call_abi": "one stack word 0x1900; caller cleanup",
+      "observed_call_count": 1084,
+      "review_status": "PENDING_ROOT_REVIEW"
+    },
+    {
+      "binding_role": "modeled callback slot; address/name reuse does not assert execution of a same-named DOS helper body",
+      "caller_dataflow_and_omissions": "source body scans a four-vertex quadrilateral and dispatches per-scanline pixel writes; modeled callback captures q[0..3] and colors, not the loop/raster or physical screen.",
+      "canonical_definition_or_role": "void far f_1FAA_0006(struct Pt far *q,int fore,int back)",
+      "definition_file": "src/root/m1FAA.c",
+      "definition_sha256": "e13a110be3cf3643419027a40a18002af231b6f9e159e89fc78f031a70929f66",
+      "execution_boundary": "host polygon draw boundary with four pointed semantic vertices and two draw arguments",
+      "execution_mode": "MODELED",
+      "helper": "f_1FAA_0006",
+      "observed_call_abi": "four stack words: far q plus fore/back, caller cleanup",
+      "observed_call_count": 1084,
+      "review_status": "PENDING_ROOT_REVIEW"
+    }
+  ],
+  "reviewed_source_pins": [
+    {
+      "exists": true,
+      "path": "work/takeover/hardtail/seeds/S13_384C_1ace9a298569.c",
+      "role": "target_source",
+      "sha256": "1ace9a2985696a7c254c9cfcfafc504be9126f07c47672c6bf79e3e2a570e801"
+    },
+    {
+      "exists": true,
+      "path": "src/root/m1FAA.c",
+      "role": "caller/helper source file",
+      "sha256": "e13a110be3cf3643419027a40a18002af231b6f9e159e89fc78f031a70929f66"
+    }
+  ],
+  "schema": "render-helper-source-dataflow-audit-v1",
+  "status": "PENDING_ROOT_REVIEW",
+  "supplemental_or_unreached_boundaries": []
+}

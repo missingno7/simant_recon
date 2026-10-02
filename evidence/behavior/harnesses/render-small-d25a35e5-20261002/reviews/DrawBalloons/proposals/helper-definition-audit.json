@@ -1,0 +1,184 @@
+{
+  "function": "DrawBalloons",
+  "observed_modeled_helpers": [
+    {
+      "binding_role": null,
+      "caller_dataflow_and_omissions": "message picture is projected into the composed balloon buffer; callback captures pointed bytes and offsets but does not execute a display blit.",
+      "canonical_definition_or_role": "void far f_0250_0721(int x,int y) (actual direct function ABI)",
+      "definition_file": "src/root/m0250.c",
+      "definition_sha256": "bb8a325c543151e09cb173d2194844877805a9e1058d3b24362ff5a7cbd9f61b",
+      "execution_boundary": "message picture host blit trace",
+      "execution_mode": "MODELED",
+      "helper": "f_0250_0721",
+      "observed_call_abi": "synthetic fd_50F6_37EA slot: six stack words (source/destination far pointers and x/y phases); not the direct two-int function",
+      "observed_call_count": 1007,
+      "review_status": "PENDING_ROOT_REVIEW"
+    },
+    {
+      "binding_role": null,
+      "caller_dataflow_and_omissions": "f_0250_1018 writes g_94E4=0 and g_9126=0 before map/life reads on each tile. f_0250_0915 mutates g_9126 and dispatches pixels; next iteration resets both before any read, and after the final tile DrawBalloons reads neither again. Final g_9126 and renderer pixels remain excluded; see drawballoons-caller-state-audit.json.",
+      "canonical_definition_or_role": "void far f_0250_0915(void)",
+      "definition_file": "src/root/m0250.c",
+      "definition_sha256": "bb8a325c543151e09cb173d2194844877805a9e1058d3b24362ff5a7cbd9f61b",
+      "execution_boundary": "tile raster request and deterministic tile pixels",
+      "execution_mode": "MODELED",
+      "helper": "f_0250_0915",
+      "observed_call_abi": "direct zero-argument far call",
+      "observed_call_count": 259,
+      "review_status": "PENDING_ROOT_REVIEW"
+    },
+    {
+      "binding_role": null,
+      "caller_dataflow_and_omissions": "target consumes this pointer-slot return as tile pixel transfer into its composition buffer; callback copies deterministic modeled bytes and captures before/after bytes/stride. Synthetic slot is distinct from f_0250_0ADB body.",
+      "canonical_definition_or_role": "void far f_0250_0ADB(int x,int y) (actual direct function ABI)",
+      "definition_file": "src/root/m0250.c",
+      "definition_sha256": "bb8a325c543151e09cb173d2194844877805a9e1058d3b24362ff5a7cbd9f61b",
+      "execution_boundary": "tile pixel transfer into the composition buffer",
+      "execution_mode": "MODELED",
+      "helper": "f_0250_0ADB",
+      "observed_call_abi": "synthetic fd_50F6_37E6 slot: three stack words (destination far pointer,stride); not the direct two-int function",
+      "observed_call_count": 1837,
+      "review_status": "PENDING_ROOT_REVIEW"
+    },
+    {
+      "binding_role": null,
+      "caller_dataflow_and_omissions": "f_0250_1018 resets both tile globals before this direct zero-arg call. f_0250_0B86 may write g_3D20, but the next synthetic fd_50F6_37E6 hook does not read g_3D20; it supplies deterministic fixture bytes to the composition buffer. The target has no later g_3D20 read; renderer bytes are excluded.",
+      "canonical_definition_or_role": "void far f_0250_0B86(void)",
+      "definition_file": "src/root/m0250.c",
+      "definition_sha256": "bb8a325c543151e09cb173d2194844877805a9e1058d3b24362ff5a7cbd9f61b",
+      "execution_boundary": "alternate tile raster request and deterministic tile pixels",
+      "execution_mode": "MODELED",
+      "helper": "f_0250_0B86",
+      "observed_call_abi": "direct zero-argument far call",
+      "observed_call_count": 1578,
+      "review_status": "PENDING_ROOT_REVIEW"
+    },
+    {
+      "binding_role": null,
+      "caller_dataflow_and_omissions": "Synthetic fd_50F6_37EE is void, so no return-dependent control exists. The no-write callback projects pointers/data only; actual screen-save/restore and composed-buffer pixel writes are excluded. See drawballoons-caller-state-audit.json.",
+      "canonical_definition_or_role": "int far f_0250_0D10(int dx,int dy) (actual direct function ABI)",
+      "definition_file": "src/root/m0250.c",
+      "definition_sha256": "bb8a325c543151e09cb173d2194844877805a9e1058d3b24362ff5a7cbd9f61b",
+      "execution_boundary": "clipping save/restore copy trace",
+      "execution_mode": "MODELED",
+      "helper": "f_0250_0D10",
+      "observed_call_abi": "synthetic fd_50F6_37EE slot: eight stack words, four far pointers to Rect/buffer records; not the direct two-int function",
+      "observed_call_count": 508,
+      "review_status": "PENDING_ROOT_REVIEW"
+    },
+    {
+      "binding_role": null,
+      "caller_dataflow_and_omissions": "The canonical call writes fd_50F6_1104 via win_GetObjRect and f_1E57_08F5 changes clip-list globals/Ralloc state. Within DrawBalloons, only preexisting fd_50F6_110C feeds later rectangle geometry; fd_50F6_1104/clip globals are not read. Surrounding caller/platform clipping effects are excluded.",
+      "canonical_definition_or_role": "void far f_0250_5058(void)",
+      "definition_file": "src/root/m0250.c",
+      "definition_sha256": "bb8a325c543151e09cb173d2194844877805a9e1058d3b24362ff5a7cbd9f61b",
+      "execution_boundary": "window clipping state setup",
+      "execution_mode": "MODELED",
+      "helper": "f_0250_5058",
+      "observed_call_abi": "direct zero-argument far call",
+      "observed_call_count": 755,
+      "review_status": "PENDING_ROOT_REVIEW"
+    },
+    {
+      "binding_role": null,
+      "caller_dataflow_and_omissions": "fixture returns a valid existing Ralloc handle and deterministic picture bytes. DrawBalloons reads width/height and pixels then releases the Ralloc handle. Database lookup/cache/age/counters are excluded; no claim the original resource database ran.",
+      "canonical_definition_or_role": "original message resource routine; no canonical C body in this source tree",
+      "definition_file": null,
+      "definition_sha256": null,
+      "execution_boundary": "message database resource acquisition and message bytes",
+      "execution_mode": "MODELED",
+      "helper": "f_1629_000C",
+      "observed_call_abi": "three stack words: far message pointer plus flags",
+      "observed_call_count": 1007,
+      "review_status": "PENDING_ROOT_REVIEW"
+    },
+    {
+      "binding_role": null,
+      "caller_dataflow_and_omissions": "canonical body calls db_LoadObject and f_171C_15A2(handle,1); selected by actual f_0250_0643. The suite substitutes a valid tile handle fixture, so database cache/firm/soft counters are excluded.",
+      "canonical_definition_or_role": "char far * far f_1A53_00BA(int object,int kind)",
+      "definition_file": "src/root/m1A53.c",
+      "definition_sha256": "6bb066ea34c3721c90956a5b7e8849cb3c5916628a842c2684a8c0137154b698",
+      "execution_boundary": "tile resource handle acquisition fixture",
+      "execution_mode": "MODELED",
+      "helper": "f_1A53_00BA",
+      "observed_call_abi": "two stack words (object,kind)",
+      "observed_call_count": 1007,
+      "review_status": "PENDING_ROOT_REVIEW"
+    },
+    {
+      "binding_role": null,
+      "caller_dataflow_and_omissions": "called with 2 before composition and 0 after. Callback records a font-selection intent only; platform font state/glyph rendering is excluded.",
+      "canonical_definition_or_role": "void far f_24AB_02AD(int font)",
+      "definition_file": "src/root/m24AB.c",
+      "definition_sha256": "1d263c6e1f242981d7c3e37d839dc481dc75deed45d7d1bcaaa075cad124de7f",
+      "execution_boundary": "font selection state",
+      "execution_mode": "MODELED",
+      "helper": "f_24AB_02AD",
+      "observed_call_abi": "one stack word (font); caller cleanup",
+      "observed_call_count": 2018,
+      "review_status": "PENDING_ROOT_REVIEW"
+    }
+  ],
+  "reviewed_source_pins": [
+    {
+      "exists": true,
+      "path": "work/takeover/hardtail/seeds/root_0250_e41a4ab8c56c.c",
+      "role": "target_source",
+      "sha256": "e41a4ab8c56c0d4923ace8b02027f2471feee049aabe0577588e206e930b4db2"
+    },
+    {
+      "exists": true,
+      "path": "src/root/m277D.c",
+      "role": "diagnostic helper source",
+      "sha256": "6b7b7e4b468987b3ad3c869934df31e0e9325ab7e1771735d1e6113971047591"
+    },
+    {
+      "exists": true,
+      "path": "src/root/m0250.c",
+      "role": "caller/helper source file",
+      "sha256": "bb8a325c543151e09cb173d2194844877805a9e1058d3b24362ff5a7cbd9f61b"
+    }
+  ],
+  "schema": "render-helper-source-dataflow-audit-v1",
+  "status": "PENDING_ROOT_REVIEW",
+  "supplemental_or_unreached_boundaries": [
+    {
+      "certification": {
+        "negative_control_ids": [
+          "DrawBalloons/width-increment",
+          "DrawBalloons/buffer-destination-offset"
+        ],
+        "positive_control_id": "directed/mode1/no-spider",
+        "status": "PENDING_SUPERVISOR_REVIEW"
+      },
+      "contract": "formatted text command projection",
+      "executed_from_original": false,
+      "execution_mode": "MODELED",
+      "name": "WinPrintf",
+      "observed_call_count": 2014,
+      "reason": "Variadic debug sink only; complete args are not captured and no semantic/display effect is claimed.",
+      "review_scope": "SUPPLEMENTAL_DIAGNOSTIC_ONLY"
+    },
+    {
+      "certification": {
+        "negative_control_ids": [
+          "DrawBalloons/width-increment",
+          "DrawBalloons/buffer-destination-offset"
+        ],
+        "positive_control_id": "directed/mode1/no-spider",
+        "status": "PENDING_SUPERVISOR_REVIEW"
+      },
+      "contract": "tile resource handle release fixture",
+      "executed_from_original": false,
+      "execution_mode": "MODELED",
+      "name": "db_ReleaseHandle",
+      "observed_call_count": 0,
+      "reason": "Zero observed calls in the actual case domain; not a required helper boundary or helper certificate.",
+      "review_scope": "SUPPLEMENTAL_DIAGNOSTIC_ONLY"
+    }
+  ],
+  "caller_state_audit": {
+    "path": "evidence/behavior/harnesses/render-small-d25a35e5-20261002/reviews/DrawBalloons/proposals/drawballoons-caller-state-audit.json",
+    "sha256": "588096a97eabe4a9a3b689ece816a958fb26afdb2d808df6c30d42f992d83c39"
+  }
+}

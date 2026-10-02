@@ -1,0 +1,1354 @@
+{
+  "schema": "behavior-contract-review-repro-v1",
+  "status": "PENDING_ROOT_REVIEW",
+  "acceptance_claim": false,
+  "function": "o15_384C_0239",
+  "address": {
+    "unit": "S15",
+    "seg": 14412,
+    "off": 569,
+    "size": 326
+  },
+  "proposed_category": "BEHAVIOR_EXACT",
+  "historical_exact_claims_changed": false,
+  "suite_id": "dialog-actual-2100-window-v1",
+  "suite": {
+    "path": "tools/behavior_suites/archive/dialog-real-window-poison-aef69d1f.py",
+    "sha256": "aef69d1fd351b766b6718424c2ef20ab5b287960d2f387ef90ebd2428a992248",
+    "id": "dialog-actual-2100-window-v1"
+  },
+  "candidate": {
+    "function": "o15_384C_0239",
+    "address": {
+      "unit": "S15",
+      "seg": 14412,
+      "off": 569,
+      "size": 326
+    },
+    "source": "work\\takeover\\hardtail\\seeds\\S15_384C_01b51eecedcd.c",
+    "source_sha256": "01b51eecedcd28e2213819572c846a9754039f4a527e6da5e56e57783398bdd5",
+    "compiled_source_sha256": "01b51eecedcd28e2213819572c846a9754039f4a527e6da5e56e57783398bdd5",
+    "object_sha256": "bf28a33144db9e5fa67228d8c64d0681b5d4626e3f901069b9870849ba1e4868",
+    "linked_code_sha256": "256a556ed87d8babbc1be2cea3e6df7ae53d3089568de9e1cb300cc5729c4b72",
+    "oracle_sha256": "aa0596c6766322a8229ee3c36e57048c92adc82d50fbe2ef37afb8b85fcf4f11",
+    "unicorn_version": "2.1.4",
+    "harness_sha256": "2c0799048057f59eae61a48be4d695278635594484adf0c70bf46c51b4e0c799",
+    "profile": "msc600ax",
+    "flags": [
+      "/AL",
+      "/Os",
+      "/Og",
+      "/Oe",
+      "/Zi"
+    ],
+    "manifest_sha256": "025a0a9255d910cae4b122ab5a3f3fb40888bb456d7fe42158db7c9e622fcf50"
+  },
+  "source_files": {
+    "src/root/m20E8.c": {
+      "sha256": "c2ec2474010ef9821fd46cdf72e50f164c850446b6f4b051a91d474b53dd5ae2",
+      "bytes": 11458,
+      "definitions": {
+        "win_Open": {
+          "line": 207,
+          "definition_sha256": "b6ab9067ca94497171f13b5c7215f6c5d71b057564b8d8fa981254f4a8ec850e",
+          "definition_bytes": 1476
+        },
+        "win_Close": {
+          "line": 259,
+          "definition_sha256": "6ec5678b66d3816a2b3d7b6936046891a5537eeaf8db325366a01d600d7678fa",
+          "definition_bytes": 819
+        },
+        "win_LoadAllWindows": {
+          "line": 96,
+          "definition_sha256": "11999231186f723769c64a02b0fdd65d5b2c4fd25b0626e84210013ff9a64154",
+          "definition_bytes": 1185
+        },
+        "win_SetWinDrawHook": {
+          "line": 351,
+          "definition_sha256": "33973db239f0f1431ea32b1ea1890f9740a4a757d1d20588aeaeac745043956c",
+          "definition_bytes": 96
+        }
+      }
+    },
+    "src/root/m1A53.c": {
+      "sha256": "6bb066ea34c3721c90956a5b7e8849cb3c5916628a842c2684a8c0137154b698",
+      "bytes": 5159,
+      "definitions": {
+        "f_1A53_00F0": {
+          "line": 70,
+          "definition_sha256": "7843c7671382d1c6a8bbb1cad3664b03f51ed0dae7b090ff93df2b6cc8881930",
+          "definition_bytes": 182
+        },
+        "db_ReleaseHandle": {
+          "line": 132,
+          "definition_sha256": "f283db1df54de37cb70abdf6e4c2434828d99459bb582c78c201528eb7b2fc1d",
+          "definition_bytes": 66
+        }
+      }
+    },
+    "src/root/m171C.c": {
+      "sha256": "31bd9caa243220db2bd1ba940ac8fae7f5d189b2ec95f1662918e9ca2160b10e",
+      "bytes": 26452,
+      "definitions": {
+        "f_171C_1B84": {
+          "line": 888,
+          "definition_sha256": "4dba0b328c97bb4ddc1e33ba76fd82356dbe60a63677fbc95c39e1e3f6922158",
+          "definition_bytes": 110
+        },
+        "f_171C_1BBA": {
+          "line": 898,
+          "definition_sha256": "8bde12d8ecbb5276f786431ffcb7318572f8fc4afe711fe5bdc54a04f6e31311",
+          "definition_bytes": 67
+        },
+        "f_171C_15A2": {
+          "line": 736,
+          "definition_sha256": "f4a0afe392405a9f72bfe800e72aa764165f6468fa925a6a5fd85b1709f487a3",
+          "definition_bytes": 841
+        }
+      }
+    },
+    "src/root/m24AB.c": {
+      "sha256": "1d263c6e1f242981d7c3e37d839dc481dc75deed45d7d1bcaaa075cad124de7f",
+      "bytes": 5171,
+      "definitions": {
+        "f_24AB_02AD": {
+          "line": 93,
+          "definition_sha256": "17850a96f0d7af47dcd4dc6ad1cd38fef26c59bd299aec90408da4ed56b730fb",
+          "definition_bytes": 468
+        }
+      }
+    },
+    "src/root/m2505.c": {
+      "sha256": "22a03f15e95fff376d27211426c4f9e3395e16e5decd92ef501fbfe3c1aba623",
+      "bytes": 10178,
+      "definitions": {
+        "win_GetObjRect": {
+          "line": 158,
+          "definition_sha256": "d98a19b52da5e2d7c10b2c3895747475b399df66d7430605665f5ba24f1ed88a",
+          "definition_bytes": 204
+        },
+        "f_2505_03B9": {
+          "line": 206,
+          "definition_sha256": "ea808218ceb12dd722b2e41dc496aaf16a8e2d3954db4c96f926d765a7285fe8",
+          "definition_bytes": 670
+        },
+        "f_2505_04D7": {
+          "line": 265,
+          "definition_sha256": "472be35ba9a51c87c503ccb7fd83d2be493bbe858179a559261496b7e72e3510",
+          "definition_bytes": 168
+        },
+        "f_2505_0831": {
+          "line": 389,
+          "definition_sha256": "b46c2fe39c2bd077dabe82241c8c43c2b8090a58c6e7b77c2a96e62c4d703073",
+          "definition_bytes": 552
+        },
+        "f_2505_08EA": {
+          "line": 419,
+          "definition_sha256": "3f3321176fd6eae22d937ba6a1d561e607b090c5398e3325ff46b61a1375017e",
+          "definition_bytes": 498
+        },
+        "win_AutoSize": {
+          "line": 116,
+          "definition_sha256": "beec05193bd95060b3f281750a5584697b41bab9639dc440348006ba637bd955",
+          "definition_bytes": 743
+        },
+        "win_Recalc": {
+          "line": 294,
+          "definition_sha256": "48ca4f263195d966d9f5fa4f5a52d5273594e3b11f8c9f7d4ae43be4e2c2aa1a",
+          "definition_bytes": 1364
+        }
+      }
+    },
+    "src/root/m21FA.c": {
+      "sha256": "49dc5ef1b2e34263336fea6a4ab5e9992c6dc5fdca404c7efc2d2315b98f6b1f",
+      "bytes": 13758,
+      "definitions": {
+        "win_DrawWindow": {
+          "line": 389,
+          "definition_sha256": "5ffcf270b2ac2f3d0be30fa2f7b45fc8ed9c25b1196edc01c6c6a4f540fce4a8",
+          "definition_bytes": 1113
+        },
+        "win_SetColorFromObjNum": {
+          "line": 122,
+          "definition_sha256": "27b1fcfd8d4dab08e2f6545d3da2f947476d1f6cb7676c8c498f4d34e834ddf4",
+          "definition_bytes": 124
+        },
+        "f_21FA_0B4B": {
+          "line": 451,
+          "definition_sha256": "1edd646ff52590591ee9b0f13a8d0124114e69836d5e523cda1e6885feeabb6d",
+          "definition_bytes": 679
+        },
+        "win_DrawObjectI": {
+          "line": 227,
+          "definition_sha256": "df095a5ef8ce3239170c3db1c0061fd6548a457451d7e1af038fd6b2f9a3686f",
+          "definition_bytes": 2984
+        }
+      }
+    },
+    "src/root/m23AE.c": {
+      "sha256": "531c983e47c1f39b6be2d94bb9fa0ccc1fa557ca9ec35542178a566f4d48076c",
+      "bytes": 5115,
+      "definitions": {
+        "win_LockInit": {
+          "line": 19,
+          "definition_sha256": "6d0fcf933511db6978c9f4e95920077b5ded294bf3d7fb2f241a395bc4d448fa",
+          "definition_bytes": 118
+        }
+      }
+    },
+    "src/root/m1CE2.c": {
+      "sha256": "e5c2cb4b8dbe7af6d263072002a49e012b290c1082f0fc877b479728b75bacd3",
+      "bytes": 10210,
+      "definitions": {
+        "f_1CE2_044D": {
+          "line": 145,
+          "definition_sha256": "beed6d9a13157069cb7819430ce72213e1042ad2cb1aa13e7b73c2ad91555d11",
+          "definition_bytes": 108
+        }
+      }
+    },
+    "src/root/m218D.c": {
+      "sha256": "3ccc2dedf58831dc2f853beb3133847e7f1f8c1883c445379fd5584b3255112e",
+      "bytes": 8739,
+      "definitions": {
+        "win_GetEvent": {
+          "line": 201,
+          "definition_sha256": "22239863ab3b4a4d491c93e9b526331d6a9e79c91b594232ce43aa12e6ff57a3",
+          "definition_bytes": 184
+        },
+        "win_FlushEvents": {
+          "line": 213,
+          "definition_sha256": "6f4f25ffa37cc796be5ea37049ed820e4efedac11166ae298e8eadde10e52d8c",
+          "definition_bytes": 115
+        },
+        "f_218D_01EB": {
+          "line": 85,
+          "definition_sha256": "4f7a1aeabefcab2f119eab0caf4ab8483a0cbba1beaf8e0b7d719c2799c3cf93",
+          "definition_bytes": 38
+        }
+      }
+    },
+    "src/root/m1E57.c": {
+      "sha256": "812e8ec90bcf25c56adf073e753bf72f8f6a3bc108055e112c43f894e9d8d0c3",
+      "bytes": 12957,
+      "definitions": {
+        "clip_KillWin": {
+          "line": 95,
+          "definition_sha256": "4d8e3b431d8c2f7d2311f33e4f5310d70d95020413ab158a7531090a3bda61a2",
+          "definition_bytes": 353
+        },
+        "clip_SetWin": {
+          "line": 120,
+          "definition_sha256": "af034cedea9cf5280b4bc2410b79d9d4216e55928f5b1bdf0e20d16e5167c4f0",
+          "definition_bytes": 541
+        },
+        "clip_Off": {
+          "line": 187,
+          "definition_sha256": "e7db5fd97444d40d4a7a8629a77143e846c503ad7192f35af399d56d6090a88b",
+          "definition_bytes": 53
+        },
+        "f_1E57_038E": {
+          "line": 215,
+          "definition_sha256": "16fbde51bd921dfbe2fd28168300180ba9f0603f87f2364cd71fced3d52e6b90",
+          "definition_bytes": 2355
+        }
+      }
+    },
+    "src/root/m259D.c": {
+      "sha256": "c4329ddb75629a235043d9da1eb11c7dd6f2cb3826fe392bfc8a27c98eeb97e1",
+      "bytes": 6533,
+      "definitions": {
+        "win_PrintTextInRect": {
+          "line": 134,
+          "definition_sha256": "7ec355f7795ca39ea13f20042d9cd29433186372ea90d3be331a132041795ba4",
+          "definition_bytes": 1676
+        }
+      }
+    },
+    "src/root/m00BA.c": {
+      "sha256": "d72629d827e2bccd7557566b725f652862d2b1199f40390361179c61cc9ff5dc",
+      "bytes": 3562,
+      "definitions": {
+        "f_00BA_0002": {
+          "line": 42,
+          "definition_sha256": "c5d264d6c03c2700cee5730f061fa27ba636133ab5a9b03258e21e1cd87ae7a5",
+          "definition_bytes": 1029
+        }
+      }
+    },
+    "src/root/m1FD2.c": {
+      "sha256": "f4359bdaf4cfc0fe326a54cf8a1eacb9ba3098b710bf2a561b3d0f48569bf6d8",
+      "bytes": 10086,
+      "definitions": {
+        "f_1FD2_03EB": {
+          "line": 230,
+          "definition_sha256": "1e4e610315c65125ee9560834f4ee0128b8228fd9c37e18b989412f2df613498",
+          "definition_bytes": 270
+        },
+        "f_1FD2_044F": {
+          "line": 248,
+          "definition_sha256": "5dc18d191ae572fb8e3504c48c927420ae3d65225d311e3d2e3c1c4f78970c60",
+          "definition_bytes": 270
+        },
+        "f_1FD2_0883": {
+          "line": 467,
+          "definition_sha256": "48a4c9ec6846ed42eb4a2cad974078f349fbb67ad9b25167ff3eec6e6e88caba",
+          "definition_bytes": 329
+        }
+      }
+    }
+  },
+  "modeled_helper_boundaries": [
+    {
+      "name": "clip_Off",
+      "proposal_status": "PENDING_REVIEW",
+      "execution_mode": "MODELED",
+      "observed_call_count": 2484,
+      "observed_case_count": 1242,
+      "positive_case_ids": [
+        "0/320/0/[13]/[]",
+        "0/320/0/[27]/[]",
+        "0/320/0/[67]/[]",
+        "0/320/0/[68]/[]",
+        "0/320/0/[83]/[]"
+      ],
+      "required_effects": [
+        "call order and arguments",
+        "source-specific state transition or normalized logical command"
+      ],
+      "excluded_effects": [
+        {
+          "effect": "clip list global and actual clip-region restoration; only ordered command call is observed",
+          "reason": "explicitly outside this pending boundary; requires reviewer agreement"
+        }
+      ],
+      "callback_abi": {
+        "stack_words": 0,
+        "register_args": [],
+        "callee_pop_bytes": 0,
+        "handler": "<lambda>",
+        "projection": null
+      },
+      "source_pin": {
+        "path": "src/root/m1E57.c",
+        "line": 187,
+        "sha256": "e7db5fd97444d40d4a7a8629a77143e846c503ad7192f35af399d56d6090a88b",
+        "bytes": 53
+      },
+      "source_file_sha256": "812e8ec90bcf25c56adf073e753bf72f8f6a3bc108055e112c43f894e9d8d0c3",
+      "source_file_bytes": 12957,
+      "definition": {
+        "line": 187,
+        "definition_sha256": "e7db5fd97444d40d4a7a8629a77143e846c503ad7192f35af399d56d6090a88b",
+        "definition_bytes": 53
+      }
+    },
+    {
+      "name": "clip_SetWin",
+      "proposal_status": "PENDING_REVIEW",
+      "execution_mode": "MODELED",
+      "observed_call_count": 1242,
+      "observed_case_count": 1242,
+      "positive_case_ids": [
+        "0/320/0/[13]/[]",
+        "0/320/0/[27]/[]",
+        "0/320/0/[67]/[]",
+        "0/320/0/[68]/[]",
+        "0/320/0/[83]/[]"
+      ],
+      "required_effects": [
+        "call order and arguments",
+        "source-specific state transition or normalized logical command"
+      ],
+      "excluded_effects": [
+        {
+          "effect": "clip handle/list contents and actual clipping rectangle sequence; only selected window command is observed",
+          "reason": "explicitly outside this pending boundary; requires reviewer agreement"
+        }
+      ],
+      "callback_abi": {
+        "stack_words": 1,
+        "register_args": [],
+        "callee_pop_bytes": 0,
+        "handler": "<lambda>",
+        "projection": null
+      },
+      "source_pin": {
+        "path": "src/root/m1E57.c",
+        "line": 120,
+        "sha256": "af034cedea9cf5280b4bc2410b79d9d4216e55928f5b1bdf0e20d16e5167c4f0",
+        "bytes": 541
+      },
+      "source_file_sha256": "812e8ec90bcf25c56adf073e753bf72f8f6a3bc108055e112c43f894e9d8d0c3",
+      "source_file_bytes": 12957,
+      "definition": {
+        "line": 120,
+        "definition_sha256": "af034cedea9cf5280b4bc2410b79d9d4216e55928f5b1bdf0e20d16e5167c4f0",
+        "definition_bytes": 541
+      }
+    },
+    {
+      "name": "f_1A53_00F0",
+      "proposal_status": "PENDING_REVIEW",
+      "execution_mode": "MODELED",
+      "observed_call_count": 1242,
+      "observed_case_count": 1242,
+      "positive_case_ids": [
+        "0/320/0/[13]/[]",
+        "0/320/0/[27]/[]",
+        "0/320/0/[67]/[]",
+        "0/320/0/[68]/[]",
+        "0/320/0/[83]/[]"
+      ],
+      "required_effects": [
+        "call order and arguments",
+        "source-specific state transition or normalized logical command"
+      ],
+      "excluded_effects": [
+        {
+          "effect": "database index/cache miss and invalid-resource behavior; fixture supplies one valid text handle and source-derived type transition",
+          "reason": "explicitly outside this pending boundary; requires reviewer agreement"
+        }
+      ],
+      "callback_abi": {
+        "stack_words": 3,
+        "register_args": [],
+        "callee_pop_bytes": 0,
+        "handler": "resource",
+        "projection": null
+      },
+      "source_pin": {
+        "path": "src/root/m1A53.c",
+        "line": 70,
+        "sha256": "7843c7671382d1c6a8bbb1cad3664b03f51ed0dae7b090ff93df2b6cc8881930",
+        "bytes": 182
+      },
+      "source_file_sha256": "6bb066ea34c3721c90956a5b7e8849cb3c5916628a842c2684a8c0137154b698",
+      "source_file_bytes": 5159,
+      "definition": {
+        "line": 70,
+        "definition_sha256": "7843c7671382d1c6a8bbb1cad3664b03f51ed0dae7b090ff93df2b6cc8881930",
+        "definition_bytes": 182
+      }
+    },
+    {
+      "name": "f_1CE2_044D",
+      "proposal_status": "PENDING_REVIEW",
+      "execution_mode": "MODELED",
+      "observed_call_count": 630,
+      "observed_case_count": 630,
+      "positive_case_ids": [
+        "0/320/1/[13]/[]",
+        "0/320/1/[27]/[]",
+        "0/320/1/[67]/[]",
+        "0/320/1/[68]/[]",
+        "0/320/1/[83]/[]"
+      ],
+      "required_effects": [
+        "call order and arguments",
+        "source-specific state transition or normalized logical command"
+      ],
+      "excluded_effects": [
+        {
+          "effect": "framebuffer pixels and VGA register state; projected signed rectangle and outline width are observed as a normalized command",
+          "reason": "explicitly outside this pending boundary; requires reviewer agreement"
+        }
+      ],
+      "callback_abi": {
+        "stack_words": 3,
+        "register_args": [],
+        "callee_pop_bytes": 0,
+        "handler": "command",
+        "projection": "rect_input"
+      },
+      "source_pin": {
+        "path": "src/root/m1CE2.c",
+        "line": 145,
+        "sha256": "beed6d9a13157069cb7819430ce72213e1042ad2cb1aa13e7b73c2ad91555d11",
+        "bytes": 108
+      },
+      "source_file_sha256": "e5c2cb4b8dbe7af6d263072002a49e012b290c1082f0fc877b479728b75bacd3",
+      "source_file_bytes": 10210,
+      "definition": {
+        "line": 145,
+        "definition_sha256": "beed6d9a13157069cb7819430ce72213e1042ad2cb1aa13e7b73c2ad91555d11",
+        "definition_bytes": 108
+      }
+    },
+    {
+      "name": "f_1E57_038E",
+      "proposal_status": "PENDING_REVIEW",
+      "execution_mode": "MODELED",
+      "observed_call_count": 2484,
+      "observed_case_count": 1242,
+      "positive_case_ids": [
+        "0/320/0/[13]/[]",
+        "0/320/0/[27]/[]",
+        "0/320/0/[67]/[]",
+        "0/320/0/[68]/[]",
+        "0/320/0/[83]/[]"
+      ],
+      "required_effects": [
+        "call order and arguments",
+        "source-specific state transition or normalized logical command"
+      ],
+      "excluded_effects": [
+        {
+          "effect": "clip-list rebuild state; helper body is skipped and this may affect subsequent drawing",
+          "reason": "explicitly outside this pending boundary; requires reviewer agreement"
+        }
+      ],
+      "callback_abi": {
+        "stack_words": 0,
+        "register_args": [],
+        "callee_pop_bytes": 0,
+        "handler": "<lambda>",
+        "projection": null
+      },
+      "source_pin": {
+        "path": "src/root/m1E57.c",
+        "line": 215,
+        "sha256": "16fbde51bd921dfbe2fd28168300180ba9f0603f87f2364cd71fced3d52e6b90",
+        "bytes": 2355
+      },
+      "source_file_sha256": "812e8ec90bcf25c56adf073e753bf72f8f6a3bc108055e112c43f894e9d8d0c3",
+      "source_file_bytes": 12957,
+      "definition": {
+        "line": 215,
+        "definition_sha256": "16fbde51bd921dfbe2fd28168300180ba9f0603f87f2364cd71fced3d52e6b90",
+        "definition_bytes": 2355
+      }
+    },
+    {
+      "name": "f_1F58_0038",
+      "proposal_status": "PENDING_REVIEW",
+      "execution_mode": "MODELED",
+      "observed_call_count": 6827,
+      "observed_case_count": 1242,
+      "positive_case_ids": [
+        "0/320/0/[13]/[]",
+        "0/320/0/[27]/[]",
+        "0/320/0/[67]/[]",
+        "0/320/0/[68]/[]",
+        "0/320/0/[83]/[]"
+      ],
+      "required_effects": [
+        "call order and arguments",
+        "source-specific state transition or normalized logical command"
+      ],
+      "excluded_effects": [
+        {
+          "effect": "physical keyboard/controller state; a deterministic future-key queue supplies readiness",
+          "reason": "explicitly outside this pending boundary; requires reviewer agreement"
+        }
+      ],
+      "callback_abi": {
+        "stack_words": 0,
+        "register_args": [],
+        "callee_pop_bytes": 0,
+        "handler": "key_ready",
+        "projection": null
+      },
+      "source_pin": {
+        "path": "tools/behavior_suites/archive/dialog-window-aef69d1f-final/dependencies/src/root/m1F58.asm",
+        "source_path": "src/root/m1F58.asm",
+        "sha256": "9f314c6e964bcb0955c1f3e976819bdbeddf048781c1bb257c30b2c0b25d49d2",
+        "bytes": 2852
+      },
+      "source_file_sha256": "9f314c6e964bcb0955c1f3e976819bdbeddf048781c1bb257c30b2c0b25d49d2",
+      "source_file_bytes": 2852
+    },
+    {
+      "name": "f_1F58_0090",
+      "proposal_status": "PENDING_REVIEW",
+      "execution_mode": "MODELED",
+      "observed_call_count": 6511,
+      "observed_case_count": 1166,
+      "positive_case_ids": [
+        "0/320/0/[13]/[]",
+        "0/320/0/[27]/[]",
+        "0/320/0/[67]/[]",
+        "0/320/0/[68]/[]",
+        "0/320/0/[83]/[]"
+      ],
+      "required_effects": [
+        "call order and arguments",
+        "source-specific state transition or normalized logical command"
+      ],
+      "excluded_effects": [
+        {
+          "effect": "physical keyboard/controller state; a deterministic future-key queue supplies key bytes",
+          "reason": "explicitly outside this pending boundary; requires reviewer agreement"
+        }
+      ],
+      "callback_abi": {
+        "stack_words": 0,
+        "register_args": [],
+        "callee_pop_bytes": 0,
+        "handler": "key_read",
+        "projection": null
+      },
+      "source_pin": {
+        "path": "tools/behavior_suites/archive/dialog-window-aef69d1f-final/dependencies/src/root/m1F58.asm",
+        "source_path": "src/root/m1F58.asm",
+        "sha256": "9f314c6e964bcb0955c1f3e976819bdbeddf048781c1bb257c30b2c0b25d49d2",
+        "bytes": 2852
+      },
+      "source_file_sha256": "9f314c6e964bcb0955c1f3e976819bdbeddf048781c1bb257c30b2c0b25d49d2",
+      "source_file_bytes": 2852
+    },
+    {
+      "name": "f_21FA_0B4B",
+      "proposal_status": "PENDING_REVIEW",
+      "execution_mode": "MODELED",
+      "observed_call_count": 1242,
+      "observed_case_count": 1242,
+      "positive_case_ids": [
+        "0/320/0/[13]/[]",
+        "0/320/0/[27]/[]",
+        "0/320/0/[67]/[]",
+        "0/320/0/[68]/[]",
+        "0/320/0/[83]/[]"
+      ],
+      "required_effects": [
+        "call order and arguments",
+        "source-specific state transition or normalized logical command"
+      ],
+      "excluded_effects": [
+        {
+          "effect": "redraws of windows exposed beneath the invalidated rectangle; only actual rectangle argument is recorded",
+          "reason": "explicitly outside this pending boundary; requires reviewer agreement"
+        }
+      ],
+      "callback_abi": {
+        "stack_words": 2,
+        "register_args": [],
+        "callee_pop_bytes": 4,
+        "handler": "_rect_invalidated",
+        "projection": null
+      },
+      "source_pin": {
+        "path": "src/root/m21FA.c",
+        "line": 451,
+        "sha256": "1edd646ff52590591ee9b0f13a8d0124114e69836d5e523cda1e6885feeabb6d",
+        "bytes": 679
+      },
+      "source_file_sha256": "49dc5ef1b2e34263336fea6a4ab5e9992c6dc5fdca404c7efc2d2315b98f6b1f",
+      "source_file_bytes": 13758,
+      "definition": {
+        "line": 451,
+        "definition_sha256": "1edd646ff52590591ee9b0f13a8d0124114e69836d5e523cda1e6885feeabb6d",
+        "definition_bytes": 679
+      }
+    },
+    {
+      "name": "f_2505_0831",
+      "proposal_status": "PENDING_REVIEW",
+      "execution_mode": "MODELED",
+      "observed_call_count": 2484,
+      "observed_case_count": 1242,
+      "positive_case_ids": [
+        "0/320/0/[13]/[]",
+        "0/320/0/[27]/[]",
+        "0/320/0/[67]/[]",
+        "0/320/0/[68]/[]",
+        "0/320/0/[83]/[]"
+      ],
+      "required_effects": [
+        "call order and arguments",
+        "source-specific state transition or normalized logical command"
+      ],
+      "excluded_effects": [
+        {
+          "effect": "focus/dirty flags and inner cursor/object draw effects; helper is replaced by trace-only command callback",
+          "reason": "explicitly outside this pending boundary; requires reviewer agreement"
+        }
+      ],
+      "callback_abi": {
+        "stack_words": 0,
+        "register_args": [
+          "ax"
+        ],
+        "callee_pop_bytes": 0,
+        "handler": "<lambda>",
+        "projection": null
+      },
+      "source_pin": {
+        "path": "src/root/m2505.c",
+        "line": 389,
+        "sha256": "b46c2fe39c2bd077dabe82241c8c43c2b8090a58c6e7b77c2a96e62c4d703073",
+        "bytes": 552
+      },
+      "source_file_sha256": "22a03f15e95fff376d27211426c4f9e3395e16e5decd92ef501fbfe3c1aba623",
+      "source_file_bytes": 10178,
+      "definition": {
+        "line": 389,
+        "definition_sha256": "b46c2fe39c2bd077dabe82241c8c43c2b8090a58c6e7b77c2a96e62c4d703073",
+        "definition_bytes": 552
+      }
+    },
+    {
+      "name": "f_2505_08EA",
+      "proposal_status": "PENDING_REVIEW",
+      "execution_mode": "MODELED",
+      "observed_call_count": 2484,
+      "observed_case_count": 1242,
+      "positive_case_ids": [
+        "0/320/0/[13]/[]",
+        "0/320/0/[27]/[]",
+        "0/320/0/[67]/[]",
+        "0/320/0/[68]/[]",
+        "0/320/0/[83]/[]"
+      ],
+      "required_effects": [
+        "call order and arguments",
+        "source-specific state transition or normalized logical command"
+      ],
+      "excluded_effects": [
+        {
+          "effect": "focus/dirty flags and inner cursor/object erase effects; helper is replaced by trace-only command callback",
+          "reason": "explicitly outside this pending boundary; requires reviewer agreement"
+        }
+      ],
+      "callback_abi": {
+        "stack_words": 0,
+        "register_args": [
+          "ax"
+        ],
+        "callee_pop_bytes": 0,
+        "handler": "<lambda>",
+        "projection": null
+      },
+      "source_pin": {
+        "path": "src/root/m2505.c",
+        "line": 419,
+        "sha256": "3f3321176fd6eae22d937ba6a1d561e607b090c5398e3325ff46b61a1375017e",
+        "bytes": 498
+      },
+      "source_file_sha256": "22a03f15e95fff376d27211426c4f9e3395e16e5decd92ef501fbfe3c1aba623",
+      "source_file_bytes": 10178,
+      "definition": {
+        "line": 419,
+        "definition_sha256": "3f3321176fd6eae22d937ba6a1d561e607b090c5398e3325ff46b61a1375017e",
+        "definition_bytes": 498
+      }
+    },
+    {
+      "name": "win_DrawWindow",
+      "proposal_status": "PENDING_REVIEW",
+      "execution_mode": "MODELED",
+      "observed_call_count": 1242,
+      "observed_case_count": 1242,
+      "positive_case_ids": [
+        "0/320/0/[13]/[]",
+        "0/320/0/[27]/[]",
+        "0/320/0/[67]/[]",
+        "0/320/0/[68]/[]",
+        "0/320/0/[83]/[]"
+      ],
+      "required_effects": [
+        "call order and arguments",
+        "source-specific state transition or normalized logical command"
+      ],
+      "excluded_effects": [
+        {
+          "effect": "inner object draw order/hooks and any mutation of window/object draw state; captured state is the real logical window and object rectangles at draw entry",
+          "reason": "explicitly outside this pending boundary; requires reviewer agreement"
+        }
+      ],
+      "callback_abi": {
+        "stack_words": 0,
+        "register_args": [
+          "ax"
+        ],
+        "callee_pop_bytes": 0,
+        "handler": "_capture_window_draw",
+        "projection": null
+      },
+      "source_pin": {
+        "path": "src/root/m21FA.c",
+        "line": 389,
+        "sha256": "5ffcf270b2ac2f3d0be30fa2f7b45fc8ed9c25b1196edc01c6c6a4f540fce4a8",
+        "bytes": 1113
+      },
+      "source_file_sha256": "49dc5ef1b2e34263336fea6a4ab5e9992c6dc5fdca404c7efc2d2315b98f6b1f",
+      "source_file_bytes": 13758,
+      "definition": {
+        "line": 389,
+        "definition_sha256": "5ffcf270b2ac2f3d0be30fa2f7b45fc8ed9c25b1196edc01c6c6a4f540fce4a8",
+        "definition_bytes": 1113
+      }
+    },
+    {
+      "name": "win_FlushEvents",
+      "proposal_status": "PENDING_REVIEW",
+      "execution_mode": "MODELED",
+      "observed_call_count": 1242,
+      "observed_case_count": 1242,
+      "positive_case_ids": [
+        "0/320/0/[13]/[]",
+        "0/320/0/[27]/[]",
+        "0/320/0/[67]/[]",
+        "0/320/0/[68]/[]",
+        "0/320/0/[83]/[]"
+      ],
+      "required_effects": [
+        "call order and arguments",
+        "source-specific state transition or normalized logical command"
+      ],
+      "excluded_effects": [
+        {
+          "effect": "physical event device state; deterministic stale-queue flush callback is used",
+          "reason": "explicitly outside this pending boundary; requires reviewer agreement"
+        }
+      ],
+      "callback_abi": {
+        "stack_words": 0,
+        "register_args": [],
+        "callee_pop_bytes": 0,
+        "handler": "_flush_stale",
+        "projection": null
+      },
+      "source_pin": {
+        "path": "src/root/m218D.c",
+        "line": 213,
+        "sha256": "6f4f25ffa37cc796be5ea37049ed820e4efedac11166ae298e8eadde10e52d8c",
+        "bytes": 115
+      },
+      "source_file_sha256": "3ccc2dedf58831dc2f853beb3133847e7f1f8c1883c445379fd5584b3255112e",
+      "source_file_bytes": 8739,
+      "definition": {
+        "line": 213,
+        "definition_sha256": "6f4f25ffa37cc796be5ea37049ed820e4efedac11166ae298e8eadde10e52d8c",
+        "definition_bytes": 115
+      }
+    },
+    {
+      "name": "win_GetEvent",
+      "proposal_status": "PENDING_REVIEW",
+      "execution_mode": "MODELED",
+      "observed_call_count": 5901,
+      "observed_case_count": 1003,
+      "positive_case_ids": [
+        "0/320/0/[]/[8451]",
+        "0/320/0/[]/[8452]",
+        "0/320/0/[]/[8453]",
+        "0/320/1/[]/[8451]",
+        "0/320/1/[]/[8452]"
+      ],
+      "required_effects": [
+        "call order and arguments",
+        "source-specific state transition or normalized logical command"
+      ],
+      "excluded_effects": [
+        {
+          "effect": "physical event-device state; deterministic future-event queue and event-code write are modeled",
+          "reason": "explicitly outside this pending boundary; requires reviewer agreement"
+        }
+      ],
+      "callback_abi": {
+        "stack_words": 2,
+        "register_args": [],
+        "callee_pop_bytes": 4,
+        "handler": "event",
+        "projection": "<lambda>"
+      },
+      "source_pin": {
+        "path": "src/root/m218D.c",
+        "line": 201,
+        "sha256": "22239863ab3b4a4d491c93e9b526331d6a9e79c91b594232ce43aa12e6ff57a3",
+        "bytes": 184
+      },
+      "source_file_sha256": "3ccc2dedf58831dc2f853beb3133847e7f1f8c1883c445379fd5584b3255112e",
+      "source_file_bytes": 8739,
+      "definition": {
+        "line": 201,
+        "definition_sha256": "22239863ab3b4a4d491c93e9b526331d6a9e79c91b594232ce43aa12e6ff57a3",
+        "definition_bytes": 184
+      }
+    },
+    {
+      "name": "win_PrintTextInRect",
+      "proposal_status": "PENDING_REVIEW",
+      "execution_mode": "MODELED",
+      "observed_call_count": 1242,
+      "observed_case_count": 1242,
+      "positive_case_ids": [
+        "0/320/0/[13]/[]",
+        "0/320/0/[27]/[]",
+        "0/320/0/[67]/[]",
+        "0/320/0/[68]/[]",
+        "0/320/0/[83]/[]"
+      ],
+      "required_effects": [
+        "call order and arguments",
+        "source-specific state transition or normalized logical command"
+      ],
+      "excluded_effects": [
+        {
+          "effect": "glyph framebuffer writes; text bytes, font handle, rect, and call order are observed",
+          "reason": "explicitly outside this pending boundary; requires reviewer agreement"
+        }
+      ],
+      "callback_abi": {
+        "stack_words": 4,
+        "register_args": [
+          "ax"
+        ],
+        "callee_pop_bytes": 8,
+        "handler": "command",
+        "projection": "text_input"
+      },
+      "source_pin": {
+        "path": "src/root/m259D.c",
+        "line": 134,
+        "sha256": "7ec355f7795ca39ea13f20042d9cd29433186372ea90d3be331a132041795ba4",
+        "bytes": 1676
+      },
+      "source_file_sha256": "c4329ddb75629a235043d9da1eb11c7dd6f2cb3826fe392bfc8a27c98eeb97e1",
+      "source_file_bytes": 6533,
+      "definition": {
+        "line": 134,
+        "definition_sha256": "7ec355f7795ca39ea13f20042d9cd29433186372ea90d3be331a132041795ba4",
+        "definition_bytes": 1676
+      }
+    },
+    {
+      "name": "win_SetColorFromObjNum",
+      "proposal_status": "PENDING_REVIEW",
+      "execution_mode": "MODELED",
+      "observed_call_count": 1242,
+      "observed_case_count": 1242,
+      "positive_case_ids": [
+        "0/320/0/[13]/[]",
+        "0/320/0/[27]/[]",
+        "0/320/0/[67]/[]",
+        "0/320/0/[68]/[]",
+        "0/320/0/[83]/[]"
+      ],
+      "required_effects": [
+        "call order and arguments",
+        "source-specific state transition or normalized logical command"
+      ],
+      "excluded_effects": [
+        {
+          "effect": "palette/hardware color state; object id and call position are observed",
+          "reason": "explicitly outside this pending boundary; requires reviewer agreement"
+        }
+      ],
+      "callback_abi": {
+        "stack_words": 0,
+        "register_args": [
+          "ax"
+        ],
+        "callee_pop_bytes": 0,
+        "handler": "command",
+        "projection": null
+      },
+      "source_pin": {
+        "path": "src/root/m21FA.c",
+        "line": 122,
+        "sha256": "27b1fcfd8d4dab08e2f6545d3da2f947476d1f6cb7676c8c498f4d34e834ddf4",
+        "bytes": 124
+      },
+      "source_file_sha256": "49dc5ef1b2e34263336fea6a4ab5e9992c6dc5fdca404c7efc2d2315b98f6b1f",
+      "source_file_bytes": 13758,
+      "definition": {
+        "line": 122,
+        "definition_sha256": "27b1fcfd8d4dab08e2f6545d3da2f947476d1f6cb7676c8c498f4d34e834ddf4",
+        "definition_bytes": 124
+      }
+    }
+  ],
+  "negative_controls": [
+    {
+      "id": "save-result-mutated-to-cancel",
+      "executed": true,
+      "original_executed": true,
+      "mutant_executed": true,
+      "baseline_matches": true,
+      "mutant_differs": true,
+      "execution_errors": 0,
+      "mismatch_categories": [
+        "return"
+      ],
+      "source": {
+        "path": "tools/behavior_suites/archive/dialog-window-aef69d1f-final/controls/negative-return.c",
+        "sha256": "337983c47bd1af117cf31059fb573a649c8e5162973a1dbad40f1f49c41d14bb"
+      },
+      "object": {
+        "path": "tools/behavior_suites/archive/dialog-window-aef69d1f-final/controls/negative-return.obj",
+        "sha256": "1ae686fd18a2db6e1456cd947e94083f65c02bf7272907a4434be35e93d27075"
+      },
+      "positive_case_id": "0/320/0/[13]/[]",
+      "linked_code_sha256": "28fb0888924618f6614f8adc41f029180acfc07b055f5df444bd522fb35f68ca"
+    },
+    {
+      "id": "omit-resource-release",
+      "executed": true,
+      "original_executed": true,
+      "mutant_executed": true,
+      "baseline_matches": true,
+      "mutant_differs": true,
+      "execution_errors": 0,
+      "mismatch_categories": [
+        "ranges",
+        "trace",
+        "nonstack_memory"
+      ],
+      "source": {
+        "path": "tools/behavior_suites/archive/dialog-window-aef69d1f-final/controls/negative-release.c",
+        "sha256": "7a2259a303eafe6587c3d78d3fe216d2517a5e386132fa95b32860581b46ec76"
+      },
+      "object": {
+        "path": "tools/behavior_suites/archive/dialog-window-aef69d1f-final/controls/negative-release.obj",
+        "sha256": "faed657906f1346fa2939d37b62ae3aa29b709969b7351d19fc70321f1f2afce"
+      },
+      "positive_case_id": "0/320/0/[13]/[]",
+      "linked_code_sha256": "6ea32737fafdfa2f990f8d5f812eb0d8c685596c01bc0ead0762748d5b799647"
+    }
+  ],
+  "artifacts": {
+    "suite_snapshot": {
+      "path": "tools/behavior_suites/archive/dialog-window-aef69d1f-final/suite.py",
+      "sha256": "aef69d1fd351b766b6718424c2ef20ab5b287960d2f387ef90ebd2428a992248",
+      "bytes": 39000
+    },
+    "candidate_source": {
+      "path": "tools/behavior_suites/archive/dialog-window-aef69d1f-final/candidate-source.c",
+      "sha256": "01b51eecedcd28e2213819572c846a9754039f4a527e6da5e56e57783398bdd5",
+      "bytes": 8116
+    },
+    "harness_snapshot": {
+      "path": "tools/behavior_suites/archive/dialog-window-aef69d1f-final/harness.py",
+      "sha256": "2c0799048057f59eae61a48be4d695278635594484adf0c70bf46c51b4e0c799",
+      "bytes": 29979
+    },
+    "runner_snapshot": {
+      "path": "tools/behavior_suites/archive/dialog-window-aef69d1f-final/dependencies/tools/behavior.py",
+      "sha256": "2c0799048057f59eae61a48be4d695278635594484adf0c70bf46c51b4e0c799",
+      "bytes": 29979
+    },
+    "raw_run": {
+      "path": "tools/behavior_suites/archive/dialog-window-aef69d1f-final/run.json",
+      "sha256": "4dde6e552c5c36828206eb52f88fe783c939b2b214a176a4b87faff22bc441d8",
+      "bytes": 1106882
+    },
+    "case_ledger": {
+      "path": "tools/behavior_suites/archive/dialog-window-aef69d1f-final/cases.jsonl.gz",
+      "sha256": "f044e0f8395f31af6fd674e7ec32057a7c1ff41915131547108d495de7aa5e1d",
+      "bytes": 108151
+    },
+    "negative_controls": {
+      "path": "tools/behavior_suites/archive/dialog-window-aef69d1f-final/negative-controls.json",
+      "sha256": "7dafe1a2b794b85d887b90e1ff3d34fe5e36bf1370504a498ef9c3f2ff6a80e6",
+      "bytes": 4690
+    },
+    "producer": {
+      "path": "tools/behavior_suites/repro_dialog_freshclone.py",
+      "sha256": "30917503b83ac99ff6ce84a6f5703b38c4cef2970cf30381d162beca466a3a75",
+      "bytes": 9695
+    },
+    "freshclone_replay": {
+      "path": "build/workers/behavior_dialog/freshclone-repro-pinned-20261002/build/freshclone-directed-replay/repro.json",
+      "sha256": "45606b972ca654ed27f4b2383d12b3237a23d406f9e437d98b64050a8e0caac7",
+      "bytes": 1903684
+    },
+    "asset_reference_manifest": {
+      "path": "tools/behavior_suites/archive/dialog-window-aef69d1f-final/dependencies/assets/original-asset-pins.json",
+      "sha256": "ceb495018ba683a362dc98475de5cd8bb057980a3dd45da445d87e7738bdf3da",
+      "bytes": 788
+    },
+    "pending_run_packet": {
+      "path": "tools/behavior_suites/archive/dialog-window-aef69d1f-final/run-evidence-pending.json",
+      "sha256": "6d2dd011d64132d71c43c0ee91dd39edd32847899b399be568ebe54db4bf2dcd",
+      "bytes": 23120
+    },
+    "pending_evidence_packet": {
+      "path": "tools/behavior_suites/archive/dialog-window-aef69d1f-final/evidence-pending.json",
+      "sha256": "2ef70675785e927808e76da7810a3b29bc06f0dcdb3080b360bd645cd1df128f",
+      "bytes": 10044
+    },
+    "helper_proposals": {
+      "path": "tools/behavior_suites/archive/dialog-window-aef69d1f-final/helper-proposals.json",
+      "sha256": "9a5285568c5eceb4739fc7b476002f712a58830b716791b862ac4cc36309f18f",
+      "bytes": 33979
+    },
+    "negative_control_report": {
+      "path": "tools/behavior_suites/archive/dialog-window-aef69d1f-final/negative-controls.json",
+      "sha256": "7dafe1a2b794b85d887b90e1ff3d34fe5e36bf1370504a498ef9c3f2ff6a80e6",
+      "bytes": 4690
+    },
+    "identity": {
+      "path": "tools/behavior_suites/archive/dialog-window-aef69d1f-final/identity.json",
+      "sha256": "bb37c47dfb625c47dfec4e8bd55f0ac41780068be1bac489e600687ff2724100",
+      "bytes": 974
+    },
+    "candidate_object": {
+      "path": "tools/behavior_suites/archive/dialog-window-aef69d1f-final/candidate.obj",
+      "sha256": "bf28a33144db9e5fa67228d8c64d0681b5d4626e3f901069b9870849ba1e4868",
+      "bytes": 6329
+    }
+  },
+  "fresh_clone_replay": {
+    "status": "REPRODUCED_PENDING_ROOT_REVIEW",
+    "root_correct_before_imports": true,
+    "fresh_clone_root": "D:\\Prog\\simant_recon\\build\\workers\\behavior_dialog\\freshclone-repro-pinned-20261002",
+    "suite_snapshot_sha256": "aef69d1fd351b766b6718424c2ef20ab5b287960d2f387ef90ebd2428a992248",
+    "candidate_source_sha256": "01b51eecedcd28e2213819572c846a9754039f4a527e6da5e56e57783398bdd5",
+    "harness_snapshot_sha256": "2c0799048057f59eae61a48be4d695278635594484adf0c70bf46c51b4e0c799",
+    "runner_sha256": "2c0799048057f59eae61a48be4d695278635594484adf0c70bf46c51b4e0c799",
+    "component_snapshot_count": 40,
+    "asset_original_references": [
+      {
+        "path": "assets/HCEGANT.NDX",
+        "sha256": "077d8aecdad5e816f0828204f7ca500a68b3a4a3288740ac75e73e44eaa8efc4",
+        "bytes": 2444
+      },
+      {
+        "path": "assets/HCEGANT.DAT",
+        "sha256": "9c98c0f110e901a2c2db65944e4ebdf6b26392181e9415a34eb7b29617eaa899",
+        "bytes": 629438
+      },
+      {
+        "path": "assets/SIMANT.EXE",
+        "sha256": "aa0596c6766322a8229ee3c36e57048c92adc82d50fbe2ef37afb8b85fcf4f11",
+        "bytes": 506509
+      }
+    ],
+    "asset_junction_target": "D:\\Prog\\simant_recon\\assets",
+    "win_2100_draw_hook_pointer_before_case": {
+      "address": 350146,
+      "bytes": "00000000",
+      "is_null": true
+    },
+    "directed_case": "0/320/0/[13]/[]",
+    "case_lane": "directed",
+    "original_observation_sha256": "98964e55790518b7ea6bf351354d18834798036980b53efbfbd1fd792278a1dc",
+    "candidate_observation_sha256": "98964e55790518b7ea6bf351354d18834798036980b53efbfbd1fd792278a1dc",
+    "equal": true,
+    "oracle_sha256": "aa0596c6766322a8229ee3c36e57048c92adc82d50fbe2ef37afb8b85fcf4f11",
+    "compiled_object_sha256": "bf28a33144db9e5fa67228d8c64d0681b5d4626e3f901069b9870849ba1e4868",
+    "linked_code_sha256": "256a556ed87d8babbc1be2cea3e6df7ae53d3089568de9e1cb300cc5729c4b72",
+    "lock_init_setup": {
+      "initializer": "win_LockInit",
+      "executed_original": true,
+      "changed_nonstack_bytes": 227,
+      "write_groups": [
+        {
+          "address": "0x5bf7c",
+          "length": 2
+        },
+        {
+          "address": "0x5e822",
+          "length": 225
+        }
+      ]
+    }
+  },
+  "asset_policy": {
+    "embedded_original_resource_copies": false,
+    "canonical_local_asset_refs": [
+      {
+        "path": "assets/HCEGANT.NDX",
+        "sha256": "077d8aecdad5e816f0828204f7ca500a68b3a4a3288740ac75e73e44eaa8efc4",
+        "bytes": 2444,
+        "role": "window resource index used by suite"
+      },
+      {
+        "path": "assets/HCEGANT.DAT",
+        "sha256": "9c98c0f110e901a2c2db65944e4ebdf6b26392181e9415a34eb7b29617eaa899",
+        "bytes": 629438,
+        "role": "window resource data used by suite"
+      },
+      {
+        "path": "assets/SIMANT.EXE",
+        "sha256": "aa0596c6766322a8229ee3c36e57048c92adc82d50fbe2ef37afb8b85fcf4f11",
+        "bytes": 506509,
+        "role": "hash-locked original DOS oracle"
+      }
+    ],
+    "note": "The older exploratory archive tools/behavior_suites/archive/dialog-window-aef69d1f remains separate historical diagnostic evidence with copies pending root cleanup; this final derived packet and its fresh clone use only ignored repository assets."
+  },
+  "actual_window_evidence": {
+    "resource_address": "0x2100",
+    "resource_index_sha256": "077d8aecdad5e816f0828204f7ca500a68b3a4a3288740ac75e73e44eaa8efc4",
+    "resource_data_sha256": "9c98c0f110e901a2c2db65944e4ebdf6b26392181e9415a34eb7b29617eaa899",
+    "index_entry": {
+      "object_id": "0x21",
+      "kind": 0,
+      "flags": 8,
+      "data_offset": "0x38FE"
+    },
+    "payload_bytes": 344,
+    "object_count": 6,
+    "objects": [
+      {
+        "index": 0,
+        "type": 0,
+        "object_flags": "0x0801",
+        "mode": [
+          0,
+          0,
+          1,
+          2
+        ]
+      },
+      {
+        "index": 1,
+        "type": 1,
+        "object_flags": "0x0801",
+        "mode": [
+          1,
+          2,
+          1,
+          2
+        ]
+      },
+      {
+        "index": 2,
+        "type": 1,
+        "object_flags": "0x0801",
+        "mode": [
+          1,
+          2,
+          1,
+          2
+        ]
+      },
+      {
+        "index": 3,
+        "type": 5,
+        "object_flags": "0x0807",
+        "mode": [
+          1,
+          2,
+          1,
+          2
+        ]
+      },
+      {
+        "index": 4,
+        "type": 5,
+        "object_flags": "0x0803",
+        "mode": [
+          1,
+          2,
+          1,
+          2
+        ]
+      },
+      {
+        "index": 5,
+        "type": 5,
+        "object_flags": "0x0803",
+        "mode": [
+          1,
+          2,
+          1,
+          2
+        ]
+      }
+    ],
+    "window_flags_before_open": "0x0840",
+    "window_flags_after_open": "0x0A40",
+    "autosize": {
+      "source_condition": "win_Recalc calls win_AutoSize iff object flags at +0x24 have bit 0x40",
+      "actual_objects_have_0x40": false
+    },
+    "title_decoration": {
+      "source": "f_21FA_077D decoration branches for window flag bits 0x4/0x8/0x100/0x10/0x400",
+      "actual_window_has_any": false
+    },
+    "focus_timers": {
+      "source": "f_2505_0831 submits focus-animation timer requests via f_1FD2_03EB when each object flags field at +0x24 has bit 0x2; it submits dirty timer work via f_1FD2_044F when any object has bit 0x10. f_1FD2_03EB writes g_6004 rectangle/ticks and calls the timer scheduler; f_1FD2_044F writes g_603A rectangle/ticks and calls the scheduler.",
+      "object_flag_bits": [
+        {
+          "index": 0,
+          "flags": "0x0801",
+          "focus_bit_0x2": false,
+          "dirty_bit_0x10": false
+        },
+        {
+          "index": 1,
+          "flags": "0x0801",
+          "focus_bit_0x2": false,
+          "dirty_bit_0x10": false
+        },
+        {
+          "index": 2,
+          "flags": "0x0801",
+          "focus_bit_0x2": false,
+          "dirty_bit_0x10": false
+        },
+        {
+          "index": 3,
+          "flags": "0x0807",
+          "focus_bit_0x2": true,
+          "dirty_bit_0x10": false
+        },
+        {
+          "index": 4,
+          "flags": "0x0803",
+          "focus_bit_0x2": true,
+          "dirty_bit_0x10": false
+        },
+        {
+          "index": 5,
+          "flags": "0x0803",
+          "focus_bit_0x2": true,
+          "dirty_bit_0x10": false
+        }
+      ],
+      "actual_requests": "Focus-animation requests are reachable for object indices 3, 4, and 5. Dirty g_603A requests are not triggered by this resource because no object has bit 0x10.",
+      "private_timer_backend_excluded": true,
+      "exclusion_reason": "The dialog target does not read g_6004/g_603A, scheduler queues, callback countdowns, or timer callback state after the win_Open focus request. The trace retains f_2505_0831(win=0x2100), the source-level focus/timer request boundary. This suite does not claim exact private timer backend effects or future callback behavior."
+    },
+    "draw_hooks": {
+      "source": "win_LoadAllWindows clears 0xB4 bytes of the 45-entry hook table; f_00BA_0002 installs only windows 0x0000,0x0100,0x0500,0x1200,0x1300,0x1500,0x1900.",
+      "tested_window_hook_pointer": "00000000",
+      "helper_invocation_seen": false
+    },
+    "geometry": {
+      "post_recalc_pre_draw_window_rect": [
+        133,
+        70,
+        470,
+        236
+      ],
+      "object_0_rect": [
+        133,
+        70,
+        470,
+        236
+      ],
+      "post_draw_capture_window_rect": [
+        133,
+        70,
+        470,
+        236
+      ],
+      "source_draw_action": "win_DrawWindow copies object 0 rectangle to window rectangle; captured values are equal, so the source copy is idempotent for this resource."
+    },
+    "object_4_semantics": {
+      "index": 4,
+      "type": 5,
+      "object_flags": "0x0803",
+      "autosize_bit_0x40": false,
+      "text": "The fifth packed object is the Save button; it does not request auto-size."
+    },
+    "draw_object_mutations": {
+      "actual_types": [
+        0,
+        1,
+        5
+      ],
+      "source_review": "win_DrawObjectI has no direct rectangle-field writes for these types; delegated rectangle-mutating cases 4,7,8 are absent from the locked resource. Focus-animation bit 0x2 and dirty/timer bit 0x10 are absent from all six object flags.",
+      "timer_bits": {
+        "bit_0x2": "present on objects 3-5; causes focus timer request",
+        "bit_0x10": "absent on all six objects; no dirty timer request"
+      }
+    }
+  },
+  "review_scope": "Root must review 15 modeled helper boundaries, caller contract, explicit focus timer request boundary/exclusion, draw-hook behavior, and source-specific projections. No worker-side certification or registry update."
+}

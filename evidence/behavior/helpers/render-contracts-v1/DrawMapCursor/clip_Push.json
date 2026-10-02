@@ -1,0 +1,94 @@
+{
+  "boundary_alias": "modeled callback slot; address/name reuse does not assert execution of a same-named DOS helper body",
+  "boundary_scope": "ordered clipping stack command trace; clip geometry is not simulated",
+  "caller_dataflow_and_omissions": "clip state/stack and Ralloc allocation; caller never reads those internal fields before clip_Pop; only the normalized ordered push request is observed here.",
+  "compared_effects": [
+    "return and caller ABI",
+    "ordered helper/render commands and arguments",
+    "global/map/cache writes",
+    "projected far-pointer data and nonstack memory"
+  ],
+  "definition_source_sha256": {
+    "src/root/m1E57.c": "812e8ec90bcf25c56adf073e753bf72f8f6a3bc108055e112c43f894e9d8d0c3"
+  },
+  "execution_identity": {
+    "historical_manifest_sha256": "025a0a9255d910cae4b122ab5a3f3fb40888bb456d7fe42158db7c9e622fcf50",
+    "object_sha256": "e056a9b3142661f51ddc702e13aff60535266d22b4d79850e0fd70adbcb5c5d3",
+    "oracle_sha256": "aa0596c6766322a8229ee3c36e57048c92adc82d50fbe2ef37afb8b85fcf4f11",
+    "runner_sha256": "2c0799048057f59eae61a48be4d695278635594484adf0c70bf46c51b4e0c799",
+    "source_sha256": "daa607847c4c0364358a7b57d3f790dd9981e284bf2cedd01fa1fb3ac4df918a",
+    "suite_sha256": "e86e7f479c726b0aca78f5ee5d06d3c684f93086513f52ea05157d7c0e06f2fc"
+  },
+  "execution_mode": "MODELED",
+  "function": "DrawMapCursor",
+  "helper": "clip_Push",
+  "input_domain": {
+    "directed_cases": 16,
+    "fixture_and_sampling": "Map cursor movement; clip/draw call sequence and Rect/width projection, with actual original AX-ABI win_IsWinOpen helper and Ralloc side effects.",
+    "partition": {
+      "argument_domains_from_case_generator": "See the target-specific case generator in this pinned suite snapshot; case labels and input_sha256 are preserved in the per-case ledger.",
+      "directed_labels": [
+        "directed/True/absent/0",
+        "directed/True/absent/1",
+        "directed/True/absent/2",
+        "directed/True/absent/3",
+        "directed/True/open/4",
+        "directed/True/open/5",
+        "directed/True/open/6",
+        "directed/True/open/7",
+        "directed/True/closed/8",
+        "directed/True/closed/9",
+        "directed/True/closed/10",
+        "directed/True/closed/11",
+        "directed/True/invalid/12",
+        "directed/True/invalid/13",
+        "directed/True/invalid/14",
+        "directed/True/invalid/15"
+      ],
+      "randomized_count": 1000
+    },
+    "randomized_cases": 1000,
+    "seeds": [
+      49170
+    ]
+  },
+  "limitations": [
+    [
+      "The modeled clip callbacks record ordered calls and values; they do not execute clip_SetWin/Push/Pop bodies or simulate clip geometry. XOR draw is an ordered host command only; no pixels/framebuffer. win_IsWinOpen did execute the original body with AX, and valid-open/closed/absent/stale fixtures capture its Ralloc/handle-table effects.",
+      "Finite directed/random domain only; not universal proof.",
+      "No registry or canonical source modified."
+    ],
+    "clip state/stack and Ralloc allocation; caller never reads those internal fields before clip_Pop; only the normalized ordered push request is observed here.",
+    "This models only the named bounded host/logical request projection; it does not certify the full helper implementation."
+  ],
+  "negative_control_ids": [
+    "negative/cursor-offset"
+  ],
+  "observed_call_abi": "direct zero-argument far call",
+  "positive_control": {
+    "candidate_observation_sha256": "9abf5c6f05d423bf9e2d015d874221ca25d5f1dafe1c67e04c47ddabee74ab06",
+    "case_id": "directed/True/absent/0",
+    "id": "directed/True/absent/0",
+    "input_sha256": "9331baac803a78f0dc9e7b01e4f3894bfac109134a261ec49d1dae823db38c8d",
+    "object_sha256": "e056a9b3142661f51ddc702e13aff60535266d22b4d79850e0fd70adbcb5c5d3",
+    "oracle_sha256": "aa0596c6766322a8229ee3c36e57048c92adc82d50fbe2ef37afb8b85fcf4f11",
+    "original_observation_sha256": "9abf5c6f05d423bf9e2d015d874221ca25d5f1dafe1c67e04c47ddabee74ab06",
+    "source_sha256": "daa607847c4c0364358a7b57d3f790dd9981e284bf2cedd01fa1fb3ac4df918a"
+  },
+  "review": {
+    "status": "APPROVED",
+    "reviewer": "root",
+    "reviewed_at": "2026-10-02",
+    "reason": "Reviewed caller service ABI and source-specific omitted effects in the pinned audit. Only the explicit logical request/fixture projection is certified; the canonical backend body is not claimed executed."
+  },
+  "schema": "behavior-helper-cert-v1",
+  "source_definition": "void far clip_Push(void)",
+  "source_hashes": {
+    "src/root/m1E57.c": "812e8ec90bcf25c56adf073e753bf72f8f6a3bc108055e112c43f894e9d8d0c3",
+    "src/root/m22BF.c": "f5b617067cdc711593e94dbb725ae9ceaeb12b890f198af0d66c1973e15133a0",
+    "work/takeover/hardtail/seeds/S12_384C_daa607847c4c.c": "daa607847c4c0364358a7b57d3f790dd9981e284bf2cedd01fa1fb3ac4df918a"
+  },
+  "status": "CERTIFIED",
+  "positive_control_id": "directed/True/open/4",
+  "negative_control_id": "negative/cursor-offset"
+}

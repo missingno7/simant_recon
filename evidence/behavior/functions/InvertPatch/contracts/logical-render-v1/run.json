@@ -1,0 +1,409 @@
+{
+  "case_ledger": {
+    "compression": "gzip",
+    "identity": {
+      "address": {
+        "off": 4749,
+        "seg": 14412,
+        "size": 261,
+        "unit": "S13"
+      },
+      "compiled_source_sha256": "1ace9a2985696a7c254c9cfcfafc504be9126f07c47672c6bf79e3e2a570e801",
+      "flags": [
+        "/AL",
+        "/Os",
+        "/Og",
+        "/Oe",
+        "/Zi"
+      ],
+      "function": "InvertPatch",
+      "harness_sha256": "2c0799048057f59eae61a48be4d695278635594484adf0c70bf46c51b4e0c799",
+      "linked_code_sha256": "0079b5b4ff340e1ac0c46a9114f11730e794586585f9d23a78d5ee1dc8361df0",
+      "manifest_sha256": "025a0a9255d910cae4b122ab5a3f3fb40888bb456d7fe42158db7c9e622fcf50",
+      "object_sha256": "f0cd89cd774d159404750fe6b1577d133628058c68a13d032c533231036ec4b5",
+      "oracle_sha256": "aa0596c6766322a8229ee3c36e57048c92adc82d50fbe2ef37afb8b85fcf4f11",
+      "profile": "msc600ax",
+      "source": "work\\takeover\\hardtail\\seeds\\S13_384C_1ace9a298569.c",
+      "source_sha256": "1ace9a2985696a7c254c9cfcfafc504be9126f07c47672c6bf79e3e2a570e801",
+      "unicorn_version": "2.1.4"
+    },
+    "lane_counts": {
+      "directed": 84,
+      "randomized": 1000
+    },
+    "path": "evidence/behavior/functions/InvertPatch/contracts/logical-render-v1/cases.jsonl.gz",
+    "row_count": 1084,
+    "sha256": "36baab71114afe1e62c0f875a42bfacfc5dc68d55bc88d620d684b97c3dabe97"
+  },
+  "cases": {
+    "directed": {
+      "actual_candidate_invocations": 84,
+      "actual_original_invocations": 84,
+      "executed": 84,
+      "generated": 84,
+      "seeds": []
+    },
+    "randomized": {
+      "actual_candidate_invocations": 1000,
+      "actual_original_invocations": 1000,
+      "executed": 1000,
+      "generated": 1000,
+      "seeds": [
+        48879
+      ]
+    }
+  },
+  "compared_effects": [
+    "return and caller ABI",
+    "ordered helper/render commands and arguments",
+    "global/map/cache writes",
+    "projected far-pointer data and nonstack memory"
+  ],
+  "completion": "COMPLETE",
+  "coverage": {
+    "directed_labels": [
+      "directed/r320/-1/-1",
+      "directed/r320/-1/0",
+      "directed/r320/-1/1",
+      "directed/r320/-1/2",
+      "directed/r320/-1/31",
+      "directed/r320/-1/63",
+      "directed/r320/0/-1",
+      "directed/r320/0/0",
+      "directed/r320/0/1",
+      "directed/r320/0/2",
+      "directed/r320/0/31",
+      "directed/r320/0/63",
+      "directed/r320/1/-1",
+      "directed/r320/1/0",
+      "directed/r320/1/1",
+      "directed/r320/1/2",
+      "directed/r320/1/31",
+      "directed/r320/1/63",
+      "directed/r320/2/-1",
+      "directed/r320/2/0",
+      "directed/r320/2/1",
+      "directed/r320/2/2",
+      "directed/r320/2/31",
+      "directed/r320/2/63",
+      "directed/r320/31/-1",
+      "directed/r320/31/0",
+      "directed/r320/31/1",
+      "directed/r320/31/2",
+      "directed/r320/31/31",
+      "directed/r320/31/63",
+      "directed/r320/63/-1",
+      "directed/r320/63/0",
+      "directed/r320/63/1",
+      "directed/r320/63/2",
+      "directed/r320/63/31",
+      "directed/r320/63/63",
+      "directed/r320/127/-1",
+      "directed/r320/127/0",
+      "directed/r320/127/1",
+      "directed/r320/127/2",
+      "directed/r320/127/31",
+      "directed/r320/127/63",
+      "directed/r640/-1/-1",
+      "directed/r640/-1/0",
+      "directed/r640/-1/1",
+      "directed/r640/-1/2",
+      "directed/r640/-1/31",
+      "directed/r640/-1/63",
+      "directed/r640/0/-1",
+      "directed/r640/0/0",
+      "directed/r640/0/1",
+      "directed/r640/0/2",
+      "directed/r640/0/31",
+      "directed/r640/0/63",
+      "directed/r640/1/-1",
+      "directed/r640/1/0",
+      "directed/r640/1/1",
+      "directed/r640/1/2",
+      "directed/r640/1/31",
+      "directed/r640/1/63",
+      "directed/r640/2/-1",
+      "directed/r640/2/0",
+      "directed/r640/2/1",
+      "directed/r640/2/2",
+      "directed/r640/2/31",
+      "directed/r640/2/63",
+      "directed/r640/31/-1",
+      "directed/r640/31/0",
+      "directed/r640/31/1",
+      "directed/r640/31/2",
+      "directed/r640/31/31",
+      "directed/r640/31/63",
+      "directed/r640/63/-1",
+      "directed/r640/63/0",
+      "directed/r640/63/1",
+      "directed/r640/63/2",
+      "directed/r640/63/31",
+      "directed/r640/63/63",
+      "directed/r640/127/-1",
+      "directed/r640/127/0",
+      "directed/r640/127/1",
+      "directed/r640/127/2",
+      "directed/r640/127/31",
+      "directed/r640/127/63"
+    ],
+    "domain_values": {
+      "argument_domains_from_case_generator": "See the target-specific case generator in this pinned suite snapshot; case labels and input_sha256 are preserved in the per-case ledger.",
+      "directed_labels": [
+        "directed/r320/-1/-1",
+        "directed/r320/-1/0",
+        "directed/r320/-1/1",
+        "directed/r320/-1/2",
+        "directed/r320/-1/31",
+        "directed/r320/-1/63",
+        "directed/r320/0/-1",
+        "directed/r320/0/0",
+        "directed/r320/0/1",
+        "directed/r320/0/2",
+        "directed/r320/0/31",
+        "directed/r320/0/63",
+        "directed/r320/1/-1",
+        "directed/r320/1/0",
+        "directed/r320/1/1",
+        "directed/r320/1/2",
+        "directed/r320/1/31",
+        "directed/r320/1/63",
+        "directed/r320/2/-1",
+        "directed/r320/2/0",
+        "directed/r320/2/1",
+        "directed/r320/2/2",
+        "directed/r320/2/31",
+        "directed/r320/2/63",
+        "directed/r320/31/-1",
+        "directed/r320/31/0",
+        "directed/r320/31/1",
+        "directed/r320/31/2",
+        "directed/r320/31/31",
+        "directed/r320/31/63",
+        "directed/r320/63/-1",
+        "directed/r320/63/0",
+        "directed/r320/63/1",
+        "directed/r320/63/2",
+        "directed/r320/63/31",
+        "directed/r320/63/63",
+        "directed/r320/127/-1",
+        "directed/r320/127/0",
+        "directed/r320/127/1",
+        "directed/r320/127/2",
+        "directed/r320/127/31",
+        "directed/r320/127/63",
+        "directed/r640/-1/-1",
+        "directed/r640/-1/0",
+        "directed/r640/-1/1",
+        "directed/r640/-1/2",
+        "directed/r640/-1/31",
+        "directed/r640/-1/63",
+        "directed/r640/0/-1",
+        "directed/r640/0/0",
+        "directed/r640/0/1",
+        "directed/r640/0/2",
+        "directed/r640/0/31",
+        "directed/r640/0/63",
+        "directed/r640/1/-1",
+        "directed/r640/1/0",
+        "directed/r640/1/1",
+        "directed/r640/1/2",
+        "directed/r640/1/31",
+        "directed/r640/1/63",
+        "directed/r640/2/-1",
+        "directed/r640/2/0",
+        "directed/r640/2/1",
+        "directed/r640/2/2",
+        "directed/r640/2/31",
+        "directed/r640/2/63",
+        "directed/r640/31/-1",
+        "directed/r640/31/0",
+        "directed/r640/31/1",
+        "directed/r640/31/2",
+        "directed/r640/31/31",
+        "directed/r640/31/63",
+        "directed/r640/63/-1",
+        "directed/r640/63/0",
+        "directed/r640/63/1",
+        "directed/r640/63/2",
+        "directed/r640/63/31",
+        "directed/r640/63/63",
+        "directed/r640/127/-1",
+        "directed/r640/127/0",
+        "directed/r640/127/1",
+        "directed/r640/127/2",
+        "directed/r640/127/31",
+        "directed/r640/127/63"
+      ],
+      "randomized_count": 1000
+    },
+    "randomized_labels_sha256": "8905efa5f860d3c56325a3074488a17704918ba32429702b0d5b9ac08f233167"
+  },
+  "errors": 0,
+  "execution": {
+    "actual_candidate_execution": true,
+    "actual_original_execution": true,
+    "engine": "PreparedPair.compare",
+    "original_exe_sha256": "aa0596c6766322a8229ee3c36e57048c92adc82d50fbe2ef37afb8b85fcf4f11"
+  },
+  "helper_boundaries": [
+    {
+      "binding_role": "modeled callback slot; address/name reuse does not assert execution of a same-named DOS helper body",
+      "boundary_analysis": {
+        "caller_dataflow_and_omissions": "balanced restore call; no subsequent target read of clip internals.",
+        "canonical_definition_or_role": "void far clip_Pop(void)",
+        "definition_file": "src/root/m1E57.c",
+        "definition_sha256": "812e8ec90bcf25c56adf073e753bf72f8f6a3bc108055e112c43f894e9d8d0c3",
+        "full_helper_equivalence_claimed": false,
+        "observed_call_abi": "direct zero-argument far call",
+        "review_status": "PENDING_ROOT_REVIEW"
+      },
+      "certification": {
+        "path": "evidence/behavior/helpers/render-contracts-v1/InvertPatch/clip_Pop.json",
+        "sha256": "757aaae8a0529e484edb132ee4ab2050e295d2990b96926d71e98db0818178e9"
+      },
+      "contract": "ordered clipping stack command trace; clip geometry is not simulated; BOUNDED HOST/LOGICAL PROJECTION ONLY",
+      "executed_from_original": false,
+      "execution_mode": "MODELED",
+      "name": "clip_Pop",
+      "observed_call_count": 1084
+    },
+    {
+      "binding_role": "modeled callback slot; address/name reuse does not assert execution of a same-named DOS helper body",
+      "boundary_analysis": {
+        "caller_dataflow_and_omissions": "the target emits the clip push then does not read clip internals before pop; clip-state geometry excluded.",
+        "canonical_definition_or_role": "void far clip_Push(void)",
+        "definition_file": "src/root/m1E57.c",
+        "definition_sha256": "812e8ec90bcf25c56adf073e753bf72f8f6a3bc108055e112c43f894e9d8d0c3",
+        "full_helper_equivalence_claimed": false,
+        "observed_call_abi": "direct zero-argument far call",
+        "review_status": "PENDING_ROOT_REVIEW"
+      },
+      "certification": {
+        "path": "evidence/behavior/helpers/render-contracts-v1/InvertPatch/clip_Push.json",
+        "sha256": "2a8bd2549397b5902cb978c245c6a28d8182a0c296df422c3d6a9660d686c48b"
+      },
+      "contract": "ordered clipping stack command trace; clip geometry is not simulated; BOUNDED HOST/LOGICAL PROJECTION ONLY",
+      "executed_from_original": false,
+      "execution_mode": "MODELED",
+      "name": "clip_Push",
+      "observed_call_count": 1084
+    },
+    {
+      "binding_role": "modeled callback slot; address/name reuse does not assert execution of a same-named DOS helper body",
+      "boundary_analysis": {
+        "caller_dataflow_and_omissions": "the target emits this clipping request; physical clip rectangle/state is not modeled.",
+        "canonical_definition_or_role": "void far clip_SetWin(int win)",
+        "definition_file": "src/root/m1E57.c",
+        "definition_sha256": "812e8ec90bcf25c56adf073e753bf72f8f6a3bc108055e112c43f894e9d8d0c3",
+        "full_helper_equivalence_claimed": false,
+        "observed_call_abi": "one stack word 0x1900; caller cleanup",
+        "review_status": "PENDING_ROOT_REVIEW"
+      },
+      "certification": {
+        "path": "evidence/behavior/helpers/render-contracts-v1/InvertPatch/clip_SetWin.json",
+        "sha256": "67ced63ea0cee6d7401579cb9e4d6f378a75fa3897fc4a9041616ab2c109841f"
+      },
+      "contract": "ordered clipping window command trace; clip geometry is not simulated; BOUNDED HOST/LOGICAL PROJECTION ONLY",
+      "executed_from_original": false,
+      "execution_mode": "MODELED",
+      "name": "clip_SetWin",
+      "observed_call_count": 1084
+    },
+    {
+      "binding_role": "modeled callback slot; address/name reuse does not assert execution of a same-named DOS helper body",
+      "boundary_analysis": {
+        "caller_dataflow_and_omissions": "source body scans a four-vertex quadrilateral and dispatches per-scanline pixel writes; modeled callback captures q[0..3] and colors, not the loop/raster or physical screen.",
+        "canonical_definition_or_role": "void far f_1FAA_0006(struct Pt far *q,int fore,int back)",
+        "definition_file": "src/root/m1FAA.c",
+        "definition_sha256": "e13a110be3cf3643419027a40a18002af231b6f9e159e89fc78f031a70929f66",
+        "full_helper_equivalence_claimed": false,
+        "observed_call_abi": "four stack words: far q plus fore/back, caller cleanup",
+        "review_status": "PENDING_ROOT_REVIEW"
+      },
+      "certification": {
+        "path": "evidence/behavior/helpers/render-contracts-v1/InvertPatch/f_1FAA_0006.json",
+        "sha256": "ff936060cb940a8a152bfc1d9a3eb18c23a6cf5bbe73921e2a813f10b185ac13"
+      },
+      "contract": "host polygon draw boundary with four pointed semantic vertices and two draw arguments; BOUNDED HOST/LOGICAL PROJECTION ONLY",
+      "executed_from_original": false,
+      "execution_mode": "MODELED",
+      "name": "f_1FAA_0006",
+      "observed_call_count": 1084
+    }
+  ],
+  "helper_boundary_plan": "evidence/behavior/harnesses/render-small-dec283-20261002/runs/InvertPatch/InvertPatch.helper-boundary-plan.json",
+  "helper_boundary_plan_sha256": "bf1159f5b89f5e84b9bf94b5455a96c054770171917364ad931f01898d3049c2",
+  "identity": {
+    "address": {
+      "off": 4749,
+      "seg": 14412,
+      "size": 261,
+      "unit": "S13"
+    },
+    "compiled_source_sha256": "1ace9a2985696a7c254c9cfcfafc504be9126f07c47672c6bf79e3e2a570e801",
+    "flags": [
+      "/AL",
+      "/Os",
+      "/Og",
+      "/Oe",
+      "/Zi"
+    ],
+    "function": "InvertPatch",
+    "harness_sha256": "2c0799048057f59eae61a48be4d695278635594484adf0c70bf46c51b4e0c799",
+    "historical_manifest_sha256": "025a0a9255d910cae4b122ab5a3f3fb40888bb456d7fe42158db7c9e622fcf50",
+    "module": "S13:384C",
+    "object_sha256": "f0cd89cd774d159404750fe6b1577d133628058c68a13d032c533231036ec4b5",
+    "oracle_sha256": "aa0596c6766322a8229ee3c36e57048c92adc82d50fbe2ef37afb8b85fcf4f11",
+    "profile": "msc600ax",
+    "source_sha256": "1ace9a2985696a7c254c9cfcfafc504be9126f07c47672c6bf79e3e2a570e801",
+    "suite_id": "render_small_v1",
+    "suite_sha256": "dec2831104d224ad8623c534782f57a5ad2742d151ec482b120982ec5f6ea7f4"
+  },
+  "mismatches": 0,
+  "negative_control_reports": [
+    {
+      "path": "evidence/behavior/harnesses/render-small-dec283-20261002/runs/InvertPatch/InvertPatch.negative-controls.json",
+      "sha256": "2965630d2746a5abd2358d03b69d0ee6c515ec9b46255e6b1fe2b49ae408012f"
+    }
+  ],
+  "negative_controls": {
+    "path": "evidence/behavior/harnesses/render-small-dec283-20261002/runs/InvertPatch/InvertPatch.negative-controls.json",
+    "sha256": "2965630d2746a5abd2358d03b69d0ee6c515ec9b46255e6b1fe2b49ae408012f"
+  },
+  "peer_data_gates": "PASS",
+  "positive_controls": [
+    {
+      "candidate_executed": true,
+      "candidate_observation_sha256": "21cf2a61049858de211d26749bfb6be37669fa1a84f55471f27ca123c7ba697e",
+      "case_id": "directed/r320/-1/-1",
+      "compared_effects": [
+        "return and caller ABI",
+        "ordered helper/render commands and arguments",
+        "global/map/cache writes",
+        "projected far-pointer data and nonstack memory"
+      ],
+      "executed": true,
+      "execution_errors": 0,
+      "id": "directed/r320/-1/-1",
+      "input_sha256": "7a89ef583640c997921f0695ba11c2cd83d38feaef31b807f45b79d05bb7ee07",
+      "matched": true,
+      "object_sha256": "f0cd89cd774d159404750fe6b1577d133628058c68a13d032c533231036ec4b5",
+      "oracle_sha256": "aa0596c6766322a8229ee3c36e57048c92adc82d50fbe2ef37afb8b85fcf4f11",
+      "original_executed": true,
+      "original_observation_sha256": "21cf2a61049858de211d26749bfb6be37669fa1a84f55471f27ca123c7ba697e",
+      "provenance": "Existing equal actual DOS/candidate case-ledger row; selected here for boundary-specific review, not replayed.",
+      "source_sha256": "1ace9a2985696a7c254c9cfcfafc504be9126f07c47672c6bf79e3e2a570e801"
+    }
+  ],
+  "schema": "behavior-run-evidence-v1",
+  "source_snapshot": {
+    "path": "evidence/behavior/harnesses/render-small-dec283-20261002/reviews/InvertPatch/source-pins/00-S13_384C_1ace9a298569.c",
+    "sha256": "1ace9a2985696a7c254c9cfcfafc504be9126f07c47672c6bf79e3e2a570e801"
+  },
+  "unmodeled_boundaries": 0,
+  "raw_report": {
+    "path": "evidence/behavior/functions/InvertPatch/contracts/logical-render-v1/raw-run.json",
+    "sha256": "ed9297ba75ab6128ea6ddae32f709abed4201ff9e1cce41fbbeea79044cc7b09"
+  }
+}

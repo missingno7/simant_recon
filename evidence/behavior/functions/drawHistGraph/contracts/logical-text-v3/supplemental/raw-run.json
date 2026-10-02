@@ -1,0 +1,99 @@
+{
+  "schema": "behavior-suite-run-v1",
+  "function": "drawHistGraph",
+  "identity": {
+    "function": "drawHistGraph",
+    "address": {
+      "unit": "S24",
+      "seg": 14791,
+      "off": 812,
+      "size": 732
+    },
+    "source": "build\\workers\\behavior_text_card\\S24.c",
+    "source_sha256": "764bcd8f1272b6f9655a1fe305cea71d98e95b9ad9c285f69dc944fbfe21d34c",
+    "compiled_source_sha256": "764bcd8f1272b6f9655a1fe305cea71d98e95b9ad9c285f69dc944fbfe21d34c",
+    "object_sha256": "194456362d784c5329ff55bfca371309de9b85445e9751de07850234bb7233da",
+    "linked_code_sha256": "71704611838d872deb9deb27f8bd13f9e553d2faa09b741490dd5b99f7f184b5",
+    "oracle_sha256": "aa0596c6766322a8229ee3c36e57048c92adc82d50fbe2ef37afb8b85fcf4f11",
+    "unicorn_version": "2.1.4",
+    "harness_sha256": "6fa847912d8d0bef1c8ee87ab69843f8380e3e3f4e88201af2505f754003182d",
+    "profile": "msc600ax",
+    "flags": [
+      "/AL",
+      "/Os",
+      "/Og",
+      "/Oe",
+      "/Zi"
+    ],
+    "manifest_sha256": "025a0a9255d910cae4b122ab5a3f3fb40888bb456d7fe42158db7c9e622fcf50"
+  },
+  "suite_sha256": "e818f63eaa89e2ef1490634c5b234cd9df421c0a9c07a4dfba9862e504a6a217",
+  "case_ledger": {
+    "schema": "behavior-case-ledger-v1",
+    "path": "D:/Prog/simant_recon/build/workers/behavior_text_card/text/draw-history/run-e818f63eaa89-6fa847912d8d/cases-20261002-2000.jsonl.gz",
+    "sha256": "9b19341bfb273324172db37add8081cc20878efc713818cc12128f241491ca0e",
+    "row_count": 2048,
+    "lane_counts": {
+      "directed": 48,
+      "randomized": 2000
+    },
+    "identity": {
+      "address": {
+        "off": 812,
+        "seg": 14791,
+        "size": 732,
+        "unit": "S24"
+      },
+      "compiled_source_sha256": "764bcd8f1272b6f9655a1fe305cea71d98e95b9ad9c285f69dc944fbfe21d34c",
+      "flags": [
+        "/AL",
+        "/Os",
+        "/Og",
+        "/Oe",
+        "/Zi"
+      ],
+      "function": "drawHistGraph",
+      "harness_sha256": "6fa847912d8d0bef1c8ee87ab69843f8380e3e3f4e88201af2505f754003182d",
+      "linked_code_sha256": "71704611838d872deb9deb27f8bd13f9e553d2faa09b741490dd5b99f7f184b5",
+      "manifest_sha256": "025a0a9255d910cae4b122ab5a3f3fb40888bb456d7fe42158db7c9e622fcf50",
+      "object_sha256": "194456362d784c5329ff55bfca371309de9b85445e9751de07850234bb7233da",
+      "oracle_sha256": "aa0596c6766322a8229ee3c36e57048c92adc82d50fbe2ef37afb8b85fcf4f11",
+      "profile": "msc600ax",
+      "source": "build\\workers\\behavior_text_card\\S24.c",
+      "source_sha256": "764bcd8f1272b6f9655a1fe305cea71d98e95b9ad9c285f69dc944fbfe21d34c",
+      "unicorn_version": "2.1.4"
+    },
+    "compression": "gzip"
+  },
+  "directed": 48,
+  "randomized": 2000,
+  "requested_randomized": 2000,
+  "seed": 539365378,
+  "mismatches": 0,
+  "errors": 0,
+  "failures": [],
+  "negative_control": {
+    "detected": true,
+    "changed_fields": [
+      "state",
+      "trace"
+    ]
+  },
+  "label_negative_control": {
+    "detected": true,
+    "changed_fields": [
+      "state",
+      "trace"
+    ]
+  },
+  "compared": [
+    "ordered line segments",
+    "label rendering and border geometry",
+    "private state and all nonstack writes",
+    "caller ABI"
+  ],
+  "domain": "graphs 0..3; both highlight paths; sample counts 0..64 and ring-buffer starts 0..63; valid 64-sample zero, maximum, ramp, and seeded 0..120 arrays; positive rectangles up to 640x480",
+  "boundaries": "window rect and line/color/text/border raster callbacks; all graph reads/scaling, sprintf, font/string helpers execute in original/candidate code; the reviewed sprintf cursor view retains semantic advancement/count and raw observations",
+  "status": "UNRESOLVED pending contract review",
+  "elapsed_seconds": 30.734
+}

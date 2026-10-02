@@ -1,0 +1,145 @@
+{
+  "inputs": [
+    {
+      "path": "evidence/behavior/runtime/format-cursors/audit_format_cursors.py",
+      "role": "producer",
+      "sha256": "80fb7504e44d7798823aa4d092b1726035bcc8dbdf1b09b768ba03631d666330"
+    },
+    {
+      "path": "evidence/behavior/runtime/format-cursors/S24.c",
+      "role": "source",
+      "sha256": "764bcd8f1272b6f9655a1fe305cea71d98e95b9ad9c285f69dc944fbfe21d34c"
+    },
+    {
+      "path": "evidence/behavior/runtime/format-cursors/text_card_suite_snapshot.py",
+      "role": "suite",
+      "sha256": "a5dfe315124bd942960e5cf892781ebfd479db8fbfe7b90e3d6b9febf89ca2be"
+    },
+    {
+      "path": "evidence/behavior/harnesses/live-state-v1/tools/behavior.py",
+      "role": "runner",
+      "sha256": "6fa847912d8d0bef1c8ee87ab69843f8380e3e3f4e88201af2505f754003182d"
+    },
+    {
+      "path": "evidence/behavior/harnesses/live-state-v1/tools/exe.py",
+      "role": "component",
+      "sha256": "d560f69dcdf0d1c9e89278b50bebe225a9b86db2c259fa54ec9eace6ea05a8b5"
+    },
+    {
+      "path": "evidence/behavior/harnesses/live-state-v1/tools/functions.py",
+      "role": "component",
+      "sha256": "0f67c8d9eb01e319620c9342e79c35f76006091d860894aad6dcf8d61ee2b39e"
+    },
+    {
+      "path": "evidence/behavior/harnesses/live-state-v1/tools/match.py",
+      "role": "component",
+      "sha256": "44fdd8b939b2bbf135d8947d8f6ef6b1854dec133da4af86c55eb94f02869b56"
+    },
+    {
+      "path": "evidence/behavior/harnesses/live-state-v1/tools/modctx.py",
+      "role": "component",
+      "sha256": "33f3a4e3d77371e3095bfeb00358c13bc7838235c27bfe8898dba7e313f1cc25"
+    },
+    {
+      "path": "evidence/behavior/harnesses/live-state-v1/tools/modules.py",
+      "role": "component",
+      "sha256": "8a5c1e85db6970cce3c693c016b313b7ee1922fa6eaf146a00391bfea86edf1a"
+    },
+    {
+      "path": "evidence/behavior/harnesses/live-state-v1/tools/autosearch.py",
+      "role": "component",
+      "sha256": "9c2727a875ee94c66ceac868d64c7070c316a5dbbef7cd6b21a670b44a2e1806"
+    },
+    {
+      "path": "evidence/behavior/harnesses/live-state-v1/tools/compiler.py",
+      "role": "component",
+      "sha256": "ef1d59a0fbe0e0780a6b8480e13d7d07859a14ae185c00a4420e1238a2ae35bb"
+    },
+    {
+      "path": "evidence/behavior/harnesses/live-state-v1/tools/omf.py",
+      "role": "component",
+      "sha256": "951137ecbfaeb6e40fd5230c94398141da7ec7bdb7399d9cd74d46ded3045612"
+    },
+    {
+      "path": "evidence/behavior/harnesses/live-state-v1/tools/symbols.py",
+      "role": "component",
+      "sha256": "e3f25fb66717f743dea126e56b5b44538d452fb5a2d52695ef27cb5069bc1793"
+    },
+    {
+      "path": "evidence/behavior/harnesses/live-state-v1/tools/lockfile.py",
+      "role": "component",
+      "sha256": "6773cd28150381c88a781862d0034e2ff0023c21e82aff7fad5358efb1bf34c5"
+    },
+    {
+      "path": "evidence/behavior/harnesses/live-state-v1/tools/csrc.py",
+      "role": "component",
+      "sha256": "3b13b7dbc17f39cbca7f329a3043ff363f91279c12312ba865941653c412567c"
+    },
+    {
+      "path": "evidence/behavior/harnesses/live-state-v1/tools/srcrules.py",
+      "role": "component",
+      "sha256": "e34f8bd91d224df26b5981acd9316b00bdf96e3dcc28e744aaebfc466046fc30"
+    },
+    {
+      "path": "evidence/behavior/harnesses/live-state-v1/tools/variants.py",
+      "role": "component",
+      "sha256": "b5dfd77ba5a96649d3e1503c1619b7fa6d9edc5f32c1f7684361fbfa59fa55c9"
+    },
+    {
+      "path": "evidence/behavior/harnesses/live-state-v1/tools/behavior_ledger.py",
+      "role": "component",
+      "sha256": "6788ec00f1c02fd93d98b96b4c8d61d2b704c97308b2c3f4024bc3095e76395f"
+    },
+    {
+      "path": "evidence/behavior/harnesses/live-state-v1/layout/toolchain.json",
+      "role": "component",
+      "sha256": "c0bb71cd8b1f4a1a1f91299bd3b6148aa67b7a1d12c3c3946a229272593eb274"
+    },
+    {
+      "path": "evidence/behavior/runtime/format-cursors/format_cursor_audit.json",
+      "role": "observation",
+      "sha256": "ccadb000b0d44af3911c3addf53f1a0ab4729a7e61a7aa87f0a54d70af7efcdb"
+    },
+    {
+      "path": "evidence/behavior/runtime/format-cursors/format_cursor_audit_replay_20261002.json",
+      "role": "observation",
+      "sha256": "371d8e3b06708fb60c1e800f4c3af5fff684d0fdeac3745c46cd469607bc0cf2"
+    },
+    {
+      "path": "evidence/behavior/runtime/format-cursors/observations/drawHistGraph-cases-20261002-2000.jsonl.gz",
+      "role": "observation",
+      "sha256": "9b19341bfb273324172db37add8081cc20878efc713818cc12128f241491ca0e"
+    },
+    {
+      "path": "evidence/behavior/runtime/format-cursors/observations/drawHistGraph-report-20261002.json",
+      "role": "observation",
+      "sha256": "33731491eff34f488e6e7b238a587ab8339cfaa11fb70de0631d599d16148415"
+    },
+    {
+      "path": "evidence/behavior/runtime/format-cursors/observations/tutorial-menu-raw-original-formatter-cases.jsonl.gz",
+      "role": "observation",
+      "sha256": "3f96047be1b78bf694dabbbef27ab7f060a705a22f1aeb012d292813db741d71"
+    },
+    {
+      "path": "evidence/behavior/runtime/format-cursors/observations/tutorial-menu-raw-original-formatter-report.json",
+      "role": "observation",
+      "sha256": "8a1b7780966f689e48da99e16da7a1142b53c7bda179982ac83876f1c27d6cfe"
+    },
+    {
+      "role": "observation",
+      "path": "evidence/behavior/runtime/format-cursors/observations/format-cursor-audit-pinned-live-state-20261002.json",
+      "sha256": "99e66576380b7091313d10146017c2165d46bd4b05cf2ce83270c10198e3c577"
+    }
+  ],
+  "proof": {
+    "path": "evidence/behavior/runtime/format-cursors/format_cursor_proof.json",
+    "sha256": "140c1d240cf48c5c868ccdd723b4651d71735f592b3d5baed1f4d552cbfbc628"
+  },
+  "review": {
+    "status": "APPROVED",
+    "reviewer": "root",
+    "reviewed_at": "2026-10-02",
+    "reason": "Reviewed private CRT ownership and defining stores, both retained original audits and fresh replay using pinned live-state-v1 runner, stack-depth and stale-cursor contrasts. Only live stack output records are normalized; heap pointers and every other nonstack byte remain raw. Producer/source/suite/runtime inputs and positive/raw mismatch observations are archived and hash verified. This supplements the immutable original certificate without rewriting it."
+  },
+  "schema": "behavior-runtime-proof-graph-v1"
+}

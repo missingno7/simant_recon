@@ -1,0 +1,735 @@
+{
+  "schema": "behavior-dialog-contract-proposal-v1",
+  "status": "PROPOSAL_NOT_APPROVED",
+  "proof_category": "BEHAVIOR_EXACT_PROPOSED",
+  "function": "o15_384C_0239",
+  "address": {
+    "unit": "S15",
+    "seg": 14412,
+    "off": 569,
+    "size": 326
+  },
+  "historical_exact_claim_changed": false,
+  "oracle_identity": "aa0596c6766322a8229ee3c36e57048c92adc82d50fbe2ef37afb8b85fcf4f11",
+  "candidate_identity": {
+    "source_sha256": "01b51eecedcd28e2213819572c846a9754039f4a527e6da5e56e57783398bdd5",
+    "object_sha256": "bf28a33144db9e5fa67228d8c64d0681b5d4626e3f901069b9870849ba1e4868",
+    "linked_code_sha256": "256a556ed87d8babbc1be2cea3e6df7ae53d3089568de9e1cb300cc5729c4b72",
+    "profile": "msc600ax",
+    "flags": [
+      "/AL",
+      "/Os",
+      "/Og",
+      "/Oe",
+      "/Zi"
+    ],
+    "manifest_sha256": "025a0a9255d910cae4b122ab5a3f3fb40888bb456d7fe42158db7c9e622fcf50"
+  },
+  "suite": {
+    "path": "tools/behavior_suites/archive/dialog-real-window-poison-aef69d1f.py",
+    "sha256": "aef69d1fd351b766b6718424c2ef20ab5b287960d2f387ef90ebd2428a992248",
+    "id": "dialog-actual-2100-window-v1"
+  },
+  "executed_source_archive": {
+    "path": "tools/behavior_suites/archive/dialog-window-aef69d1f-final/candidate-source.c",
+    "sha256": "01b51eecedcd28e2213819572c846a9754039f4a527e6da5e56e57783398bdd5"
+  },
+  "harness": {
+    "path": "tools/behavior_suites/archive/dialog-window-aef69d1f-final/harness.py",
+    "sha256": "2c0799048057f59eae61a48be4d695278635594484adf0c70bf46c51b4e0c799",
+    "snapshot_id": "behavior-harness-2c079904"
+  },
+  "validation": {
+    "directed": 242,
+    "randomized": 1000,
+    "seed": 944505401,
+    "mismatches": 0,
+    "errors": 0,
+    "ledger_path": "tools/behavior_suites/archive/dialog-window-aef69d1f-final/cases.jsonl.gz",
+    "ledger_sha256": "f044e0f8395f31af6fd674e7ec32057a7c1ff41915131547108d495de7aa5e1d"
+  },
+  "source_evidence": [
+    {
+      "path": "src/S15/m384C.c",
+      "sha256": "01b51eecedcd28e2213819572c846a9754039f4a527e6da5e56e57783398bdd5"
+    },
+    {
+      "path": "src/S09/m35F5.c",
+      "sha256": "028e1575990d5d45233f9102a0d2a060810349bd2f1297182c4af435ecbe912a"
+    },
+    {
+      "path": "src/root/m20E8.c",
+      "sha256": "c2ec2474010ef9821fd46cdf72e50f164c850446b6f4b051a91d474b53dd5ae2"
+    },
+    {
+      "path": "src/root/m2505.c",
+      "sha256": "22a03f15e95fff376d27211426c4f9e3395e16e5decd92ef501fbfe3c1aba623"
+    },
+    {
+      "path": "src/root/m1A53.c",
+      "sha256": "6bb066ea34c3721c90956a5b7e8849cb3c5916628a842c2684a8c0137154b698"
+    },
+    {
+      "path": "src/root/m171C.c",
+      "sha256": "31bd9caa243220db2bd1ba940ac8fae7f5d189b2ec95f1662918e9ca2160b10e"
+    },
+    {
+      "path": "src/root/m21FA.c",
+      "sha256": "49dc5ef1b2e34263336fea6a4ab5e9992c6dc5fdca404c7efc2d2315b98f6b1f"
+    },
+    {
+      "path": "src/root/m1E57.c",
+      "sha256": "812e8ec90bcf25c56adf073e753bf72f8f6a3bc108055e112c43f894e9d8d0c3"
+    }
+  ],
+  "source_definition_hashes": [
+    {
+      "name": "win_Open",
+      "path": "src/root/m20E8.c",
+      "line": 207,
+      "sha256": "b6ab9067ca94497171f13b5c7215f6c5d71b057564b8d8fa981254f4a8ec850e",
+      "bytes": 1476
+    },
+    {
+      "name": "win_Close",
+      "path": "src/root/m20E8.c",
+      "line": 259,
+      "sha256": "6ec5678b66d3816a2b3d7b6936046891a5537eeaf8db325366a01d600d7678fa",
+      "bytes": 819
+    },
+    {
+      "name": "f_1A53_00F0",
+      "path": "src/root/m1A53.c",
+      "line": 70,
+      "sha256": "7843c7671382d1c6a8bbb1cad3664b03f51ed0dae7b090ff93df2b6cc8881930",
+      "bytes": 182
+    },
+    {
+      "name": "f_171C_1B84",
+      "path": "src/root/m171C.c",
+      "line": 888,
+      "sha256": "4dba0b328c97bb4ddc1e33ba76fd82356dbe60a63677fbc95c39e1e3f6922158",
+      "bytes": 110
+    },
+    {
+      "name": "f_171C_1BBA",
+      "path": "src/root/m171C.c",
+      "line": 898,
+      "sha256": "8bde12d8ecbb5276f786431ffcb7318572f8fc4afe711fe5bdc54a04f6e31311",
+      "bytes": 67
+    },
+    {
+      "name": "f_24AB_02AD",
+      "path": "src/root/m24AB.c",
+      "line": 93,
+      "sha256": "17850a96f0d7af47dcd4dc6ad1cd38fef26c59bd299aec90408da4ed56b730fb",
+      "bytes": 468
+    },
+    {
+      "name": "win_GetObjRect",
+      "path": "src/root/m2505.c",
+      "line": 158,
+      "sha256": "d98a19b52da5e2d7c10b2c3895747475b399df66d7430605665f5ba24f1ed88a",
+      "bytes": 204
+    },
+    {
+      "name": "win_DrawWindow",
+      "path": "src/root/m21FA.c",
+      "line": 389,
+      "sha256": "5ffcf270b2ac2f3d0be30fa2f7b45fc8ed9c25b1196edc01c6c6a4f540fce4a8",
+      "bytes": 1113
+    },
+    {
+      "name": "f_2505_03B9",
+      "path": "src/root/m2505.c",
+      "line": 206,
+      "sha256": "ea808218ceb12dd722b2e41dc496aaf16a8e2d3954db4c96f926d765a7285fe8",
+      "bytes": 670
+    },
+    {
+      "name": "f_2505_04D7",
+      "path": "src/root/m2505.c",
+      "line": 265,
+      "sha256": "472be35ba9a51c87c503ccb7fd83d2be493bbe858179a559261496b7e72e3510",
+      "bytes": 168
+    },
+    {
+      "name": "f_2505_0831",
+      "path": "src/root/m2505.c",
+      "line": 389,
+      "sha256": "b46c2fe39c2bd077dabe82241c8c43c2b8090a58c6e7b77c2a96e62c4d703073",
+      "bytes": 552
+    },
+    {
+      "name": "f_2505_08EA",
+      "path": "src/root/m2505.c",
+      "line": 419,
+      "sha256": "3f3321176fd6eae22d937ba6a1d561e607b090c5398e3325ff46b61a1375017e",
+      "bytes": 498
+    },
+    {
+      "name": "win_LockInit",
+      "path": "src/root/m23AE.c",
+      "line": 19,
+      "sha256": "6d0fcf933511db6978c9f4e95920077b5ded294bf3d7fb2f241a395bc4d448fa",
+      "bytes": 118
+    },
+    {
+      "name": "db_ReleaseHandle",
+      "path": "src/root/m1A53.c",
+      "line": 132,
+      "sha256": "f283db1df54de37cb70abdf6e4c2434828d99459bb582c78c201528eb7b2fc1d",
+      "bytes": 66
+    },
+    {
+      "name": "f_171C_15A2",
+      "path": "src/root/m171C.c",
+      "line": 736,
+      "sha256": "f4a0afe392405a9f72bfe800e72aa764165f6468fa925a6a5fd85b1709f487a3",
+      "bytes": 841
+    },
+    {
+      "name": "win_SetColorFromObjNum",
+      "path": "src/root/m21FA.c",
+      "line": 122,
+      "sha256": "27b1fcfd8d4dab08e2f6545d3da2f947476d1f6cb7676c8c498f4d34e834ddf4",
+      "bytes": 124
+    },
+    {
+      "name": "f_21FA_0B4B",
+      "path": "src/root/m21FA.c",
+      "line": 451,
+      "sha256": "1edd646ff52590591ee9b0f13a8d0124114e69836d5e523cda1e6885feeabb6d",
+      "bytes": 679
+    },
+    {
+      "name": "f_1CE2_044D",
+      "path": "src/root/m1CE2.c",
+      "line": 145,
+      "sha256": "beed6d9a13157069cb7819430ce72213e1042ad2cb1aa13e7b73c2ad91555d11",
+      "bytes": 108
+    },
+    {
+      "name": "win_GetEvent",
+      "path": "src/root/m218D.c",
+      "line": 201,
+      "sha256": "22239863ab3b4a4d491c93e9b526331d6a9e79c91b594232ce43aa12e6ff57a3",
+      "bytes": 184
+    },
+    {
+      "name": "win_FlushEvents",
+      "path": "src/root/m218D.c",
+      "line": 213,
+      "sha256": "6f4f25ffa37cc796be5ea37049ed820e4efedac11166ae298e8eadde10e52d8c",
+      "bytes": 115
+    },
+    {
+      "name": "f_218D_01EB",
+      "path": "src/root/m218D.c",
+      "line": 85,
+      "sha256": "4f7a1aeabefcab2f119eab0caf4ab8483a0cbba1beaf8e0b7d719c2799c3cf93",
+      "bytes": 38
+    },
+    {
+      "name": "clip_KillWin",
+      "path": "src/root/m1E57.c",
+      "line": 95,
+      "sha256": "4d8e3b431d8c2f7d2311f33e4f5310d70d95020413ab158a7531090a3bda61a2",
+      "bytes": 353
+    },
+    {
+      "name": "clip_SetWin",
+      "path": "src/root/m1E57.c",
+      "line": 120,
+      "sha256": "af034cedea9cf5280b4bc2410b79d9d4216e55928f5b1bdf0e20d16e5167c4f0",
+      "bytes": 541
+    },
+    {
+      "name": "clip_Off",
+      "path": "src/root/m1E57.c",
+      "line": 187,
+      "sha256": "e7db5fd97444d40d4a7a8629a77143e846c503ad7192f35af399d56d6090a88b",
+      "bytes": 53
+    },
+    {
+      "name": "f_1E57_038E",
+      "path": "src/root/m1E57.c",
+      "line": 215,
+      "sha256": "16fbde51bd921dfbe2fd28168300180ba9f0603f87f2364cd71fced3d52e6b90",
+      "bytes": 2355
+    },
+    {
+      "name": "win_PrintTextInRect",
+      "path": "src/root/m259D.c",
+      "line": 134,
+      "sha256": "7ec355f7795ca39ea13f20042d9cd29433186372ea90d3be331a132041795ba4",
+      "bytes": 1676
+    }
+  ],
+  "caller_domain": {
+    "values": [
+      0,
+      1
+    ],
+    "evidence": [
+      "src/S09/m35F5.c:LoadGame calls with 0",
+      "src/S15/m384C.c:MenuQuit calls with 1"
+    ],
+    "diagnostic_only_inputs": [
+      -1,
+      2,
+      32767
+    ]
+  },
+  "contract": {
+    "input_domain": {
+      "which": [
+        0,
+        1
+      ],
+      "width": [
+        320,
+        640
+      ],
+      "display_flags": [
+        0,
+        1,
+        2,
+        3
+      ],
+      "key_endings": [
+        13,
+        27,
+        67,
+        68,
+        83,
+        99,
+        100,
+        115
+      ],
+      "event_endings": [
+        8451,
+        8452,
+        8453
+      ],
+      "resource": "arbitrary nonzero NUL-terminated bytes for a valid text resource"
+    },
+    "required_effects": [
+      "return",
+      "ordered GUI/window/font/resource/input commands",
+      "rectangle/text/font contents",
+      "resource lock/unlock/release and age",
+      "input arbitration and consumption",
+      "logical window state",
+      "all nonstack writes",
+      "caller ABI"
+    ],
+    "required_helpers": [
+      {
+        "name": "clip_KillWin",
+        "must_execute": true
+      },
+      {
+        "name": "clip_Off",
+        "must_execute": true
+      },
+      {
+        "name": "clip_SetWin",
+        "must_execute": true
+      },
+      {
+        "name": "db_ReleaseHandle",
+        "must_execute": true
+      },
+      {
+        "name": "f_171C_1B84",
+        "must_execute": true
+      },
+      {
+        "name": "f_171C_1BBA",
+        "must_execute": true
+      },
+      {
+        "name": "f_1A53_00F0",
+        "must_execute": true
+      },
+      {
+        "name": "f_1B4E_000C",
+        "must_execute": true
+      },
+      {
+        "name": "f_1CE2_044D",
+        "must_execute": true
+      },
+      {
+        "name": "f_1E57_038E",
+        "must_execute": true
+      },
+      {
+        "name": "f_1F58_0038",
+        "must_execute": true
+      },
+      {
+        "name": "f_1F58_0090",
+        "must_execute": true
+      },
+      {
+        "name": "f_21FA_0B4B",
+        "must_execute": true
+      },
+      {
+        "name": "f_24AB_02AD",
+        "must_execute": true
+      },
+      {
+        "name": "f_2505_0831",
+        "must_execute": true
+      },
+      {
+        "name": "f_2505_08EA",
+        "must_execute": true
+      },
+      {
+        "name": "win_Close",
+        "must_execute": true
+      },
+      {
+        "name": "win_DrawWindow",
+        "must_execute": true
+      },
+      {
+        "name": "win_FlushEvents",
+        "must_execute": true
+      },
+      {
+        "name": "win_GetEvent",
+        "must_execute": true
+      },
+      {
+        "name": "win_GetObjRect",
+        "must_execute": true
+      },
+      {
+        "name": "win_Open",
+        "must_execute": true
+      },
+      {
+        "name": "win_PrintTextInRect",
+        "must_execute": true
+      },
+      {
+        "name": "win_SetColorFromObjNum",
+        "must_execute": true
+      }
+    ],
+    "return_values": {
+      "0": "Load/primary response",
+      "1": "save/alternate response",
+      "2": "cancel"
+    },
+    "resource_formula": "object=((0x41-which)*2) modulo 65536; kind 10; type 1",
+    "window_resource": {
+      "asset": "assets/HCEGANT.NDX + assets/HCEGANT.DAT",
+      "object": 33,
+      "kind": 0,
+      "uncompressed": true,
+      "index_count": 271,
+      "ndx_entry_offset": 14590,
+      "ndx_sha256": "077d8aecdad5e816f0828204f7ca500a68b3a4a3288740ac75e73e44eaa8efc4",
+      "dat_sha256": "9c98c0f110e901a2c2db65944e4ebdf6b26392181e9415a34eb7b29617eaa899",
+      "record_header": [
+        22136,
+        4660,
+        0,
+        344,
+        0
+      ],
+      "payload_size": 344,
+      "object_count": 6,
+      "object_offsets": [
+        68,
+        109,
+        149,
+        189,
+        244,
+        293
+      ],
+      "geometry_modes": [
+        [
+          0,
+          0,
+          1,
+          2
+        ],
+        [
+          1,
+          2,
+          1,
+          2
+        ],
+        [
+          1,
+          2,
+          1,
+          2
+        ],
+        [
+          1,
+          2,
+          1,
+          2
+        ],
+        [
+          1,
+          2,
+          1,
+          2
+        ],
+        [
+          1,
+          2,
+          1,
+          2
+        ]
+      ],
+      "win_Open_private_arguments_are_read_only_by_mode5": "src/root/m2505.c f_2505_03B9 / f_2505_04D7 source-pinned"
+    },
+    "window_arg_poison_controls": {
+      "count": 4,
+      "controls": [
+        {
+          "input": {
+            "si": 4951,
+            "di": 9320,
+            "stack_byte": 17
+          },
+          "private_bytes": "5713682411111111",
+          "semantic_sha256": "15db30252c5cf3ea96cfa7754d7a6763fc51f55d496da34197b682740a92c049",
+          "matched_baseline": true
+        },
+        {
+          "input": {
+            "si": 65535,
+            "di": 32768,
+            "stack_byte": 238
+          },
+          "private_bytes": "ffff0080eeeeeeee",
+          "semantic_sha256": "15db30252c5cf3ea96cfa7754d7a6763fc51f55d496da34197b682740a92c049",
+          "matched_baseline": true
+        },
+        {
+          "input": {
+            "si": 0,
+            "di": 0,
+            "stack_byte": 0
+          },
+          "private_bytes": "0000000000000000",
+          "semantic_sha256": "15db30252c5cf3ea96cfa7754d7a6763fc51f55d496da34197b682740a92c049",
+          "matched_baseline": true
+        },
+        {
+          "input": {
+            "si": 32767,
+            "di": 32769,
+            "stack_byte": 90
+          },
+          "private_bytes": "ff7f01805a5a5a5a",
+          "semantic_sha256": "15db30252c5cf3ea96cfa7754d7a6763fc51f55d496da34197b682740a92c049",
+          "matched_baseline": true
+        }
+      ],
+      "semantic_invariant": {
+        "return": 0,
+        "rect": [
+          133,
+          70,
+          470,
+          236
+        ],
+        "flags": 2112,
+        "objects": [
+          [
+            133,
+            70,
+            470,
+            236
+          ],
+          [
+            172,
+            79,
+            438,
+            188
+          ],
+          [
+            140,
+            133,
+            460,
+            188
+          ],
+          [
+            140,
+            202,
+            231,
+            230
+          ],
+          [
+            294,
+            202,
+            367,
+            230
+          ],
+          [
+            384,
+            201,
+            460,
+            229
+          ]
+        ],
+        "zorder": [
+          512,
+          32768,
+          32768,
+          252
+        ],
+        "resource_state": "acquired-firm",
+        "flush_count": 1,
+        "invalidated": [
+          [
+            133,
+            70,
+            470,
+            236
+          ]
+        ]
+      },
+      "negative_mode5_control": [
+        {
+          "si": 1,
+          "rect": [
+            134,
+            70,
+            471,
+            236
+          ],
+          "original_candidate_equal": true,
+          "oracle_observation_sha256": "957045650d7297b451f35d010d62134de898e65d243d630899567bbed2103654",
+          "candidate_observation_sha256": "957045650d7297b451f35d010d62134de898e65d243d630899567bbed2103654"
+        },
+        {
+          "si": 20,
+          "rect": [
+            153,
+            70,
+            490,
+            236
+          ],
+          "original_candidate_equal": true,
+          "oracle_observation_sha256": "01f035260b71a361f5bf97debbb71dc436775a6d2e1414cca9122cacc83ee7d7",
+          "candidate_observation_sha256": "01f035260b71a361f5bf97debbb71dc436775a6d2e1414cca9122cacc83ee7d7"
+        }
+      ],
+      "mode5_detected_effect": true
+    },
+    "allocator_setup_provenance": {
+      "lock_init": {
+        "initializer": "win_LockInit",
+        "executed_original": true,
+        "changed_nonstack_bytes": 227,
+        "write_groups": [
+          {
+            "address": "0x5bf7c",
+            "length": 2
+          },
+          {
+            "address": "0x5e822",
+            "length": 225
+          }
+        ]
+      },
+      "captured_nonstack_write_sha256": "e8f661a7f144b6676963411eb30005889f5b8462dcf1518efc8b7839b7d1390f",
+      "captured_nonstack_write_bytes": 227,
+      "all_static_setup_values_are_zero_or_lockinit_one": true
+    }
+  },
+  "modeled_boundaries": {
+    "modeled": [
+      "clip_Off",
+      "clip_SetWin",
+      "f_1A53_00F0",
+      "f_1CE2_044D",
+      "f_1E57_038E",
+      "f_1F58_0038",
+      "f_1F58_0090",
+      "f_21FA_0B4B",
+      "f_2505_0831",
+      "f_2505_08EA",
+      "win_DrawWindow",
+      "win_FlushEvents",
+      "win_GetEvent",
+      "win_PrintTextInRect",
+      "win_SetColorFromObjNum"
+    ],
+    "original_executed": [
+      "clip_KillWin",
+      "db_ReleaseHandle",
+      "f_171C_1B84",
+      "f_171C_1BBA",
+      "f_1B4E_000C",
+      "f_24AB_02AD",
+      "win_Close",
+      "win_GetObjRect",
+      "win_Open"
+    ],
+    "not_claimed": [
+      "framebuffer/VGA pixel identity",
+      "physical keyboard/event device behavior",
+      "database cache miss/failure behavior",
+      "actual clip list contents or redraw of underlying windows",
+      "object focus/dirty side effects in f_2505_0831/f_2505_08EA",
+      "invalid which values or missing resource behavior"
+    ]
+  },
+  "semantic_evidence": [
+    "whole-module source calls and return mapping in src/S15/m384C.c",
+    "caller domain in src/S09/m35F5.c and src/S15/m384C.c",
+    "source-pinned actual window open/close, geometry, and allocator helpers",
+    "case ledger equal observations for both oracle and candidate",
+    "mode-5 positive sensitivity control demonstrates the private arguments can affect geometry"
+  ],
+  "historical_difference": {
+    "description": "PENDING; this proposal separates GUI/platform helper behavior from the dialog control-flow contract.",
+    "reason_exact_stopped": "No change to historical exact claims is proposed before reviewer approval.",
+    "evidence_refs": [
+      "tools/behavior_suites/archive/dialog-window-aef69d1f-final/run.json",
+      "tools/behavior_suites/archive/dialog-window-aef69d1f-final/helper-proposals.json"
+    ]
+  },
+  "unmodeled_boundaries": [
+    {
+      "name": "win_DrawWindow",
+      "reason": "inner object rendering and draw-state mutations are not executed"
+    },
+    {
+      "name": "f_2505_0831 / f_2505_08EA",
+      "reason": "focus/dirty and cursor transitions are trace-only"
+    },
+    {
+      "name": "clip_SetWin / clip_Off / f_1E57_038E",
+      "reason": "actual clipping-list state is not seeded/executed"
+    },
+    {
+      "name": "f_21FA_0B4B",
+      "reason": "only invalidation rectangle is captured; exposed-window redraw is omitted"
+    },
+    {
+      "name": "resource, text, keyboard, event services",
+      "reason": "host providers are modeled over valid supplied resources and queues"
+    }
+  ],
+  "review_notes": [
+    "PENDING_REVIEW. Do not register or call BEHAVIOR_EXACT.",
+    "This suite has exact raw per-lane comparisons and source-pinned helper boundaries, but currently models several stateful window/render helpers.",
+    "Mode-5 mutation is a diagnostic invalid-resource control only, never an acceptance case.",
+    "No registry write, canonical source change, or historical proof change was made."
+  ]
+}
