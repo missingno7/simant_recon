@@ -250,8 +250,14 @@ captures actual original-DOS SaveGame writes and reproduces their 48,386-byte
 stream in its stated startup domain. An independent audit found thirteen
 coordinate-pair records whose V2 conversion incorrectly uses 32-bit component
 width on big-endian hosts. Decode/encode round trips alone do not detect this.
-The codec remains outside the live build pending corrected independent binding
-comparisons; live filesystem/save/load services remain unfinished.
+The [V3 binding packet](../tests/save/evidence/legacy-save-codec-v3/README.md)
+uses an independent catalog of all Next9 backing members and source-address
+sentinels. Its native little-endian and forced-big-endian encodings match one
+actual DOS SaveGame stream (307 writes, 48,386 bytes). Swapped bindings, wrong
+point-component width, and numeric interpretation of a raw table interior
+each fail the comparison. This finite binding proof does not establish the
+file lifecycle or all runtime states. The codec remains outside the live build;
+live filesystem/save/load services remain unfinished. V2 evidence is retained.
 
 The [49-suite native integration gate](../tests/evidence/current/20261002/native-gate-49-menu-controls-final-20261002.json)
 passes with stable compiler inputs, including dropdown command plans, active
