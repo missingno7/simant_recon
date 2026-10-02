@@ -54,10 +54,10 @@ def native_sources() -> list[Path]:
     for folder in ("game/simulation", "game/state", "game/resources",
                    "game/render", "render", "ui_model", "audio"):
         native.extend(path for path in PORT.joinpath(folder).rglob("*.c")
-                      if path.name not in {"control_events.c", "history_render.c"})
+                      if path.name != "history_render.c")
     native.extend(PORT / "game/recovered" / name for name in (
         "engine.c", "session_bridge.c", "audio_adapter.c",
-        "memory_adapter.c", "nest_adapter.c", "menu_adapter.c"))
+        "memory_adapter.c", "nest_adapter.c", "menu_adapter.c", "control_adapter.c"))
     return sorted(set(path.resolve() for path in native))
 
 

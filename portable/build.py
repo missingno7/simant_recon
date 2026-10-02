@@ -28,7 +28,6 @@ SDK_URL = f"https://github.com/libsdl-org/SDL/releases/download/release-{VERSION
 # Link them into the SDL host after their contracts and callers are reviewed.
 UNINTEGRATED_MODELS = {
     "portable/ui_model/windows/zoom.c",
-    "portable/ui_model/windows/control_events.c",
     "portable/ui_model/windows/history_render.c",
     "portable/ui_model/dialogs/menu_quit.c",
 }
@@ -257,7 +256,7 @@ def build(main: Path, output: Path, sources: list[Path],
                  profile / "recovered_native_adapters.c",
                  *(ROOT / "portable/game/recovered" / name for name in
                    ("engine.c","session_bridge.c","audio_adapter.c","nest_adapter.c",
-                    "memory_adapter.c", "menu_adapter.c"))]
+                    "memory_adapter.c", "menu_adapter.c", "control_adapter.c"))]
         extra_flags=["-DSIMANT_ENABLE_RECOVERED_CORE=1","-I",str(profile),"-I",str(ROOT)]
         if next9 is not None:
             # Backing admission is separate from a reviewed save codec and

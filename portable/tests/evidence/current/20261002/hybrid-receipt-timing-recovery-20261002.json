@@ -1,0 +1,18 @@
+{
+  "schema": "portable-frozen-link-receipt-recovery-v1",
+  "status": "PASS",
+  "date": "2026-10-02",
+  "frozen_receipt": {
+    "path": "portable/tests/evidence/current/20261002/frozen-hybrid-provenance.json",
+    "sha256": "1e61bead20694234d10d1bd35b2a23eac8c55c65e546c362f1c679a42ab3a664"
+  },
+  "fresh_reuse_receipt": {
+    "path": "build/portable/historical-rebuild-controls-20261002/hybrid-reuse-provenance.json",
+    "sha256": "0a6b662496ad742a23b3542ad3f267ceb31b800d3957f9b8555f4d3b577d96d2"
+  },
+  "only_json_difference": "timing: cached original compilation durations versus reused=True",
+  "restoration_source": "unchanged cached build/link/collection.json timing; full recreated frozen receipt SHA-256 required before restoring scratch path",
+  "hybrid_sha256": "aa0596c6766322a8229ee3c36e57048c92adc82d50fbe2ef37afb8b85fcf4f11",
+  "historical_sources_or_certificate_modified": false,
+  "scope": "Scratch receipt recovery only; no new historical or behavioral acceptance."
+}

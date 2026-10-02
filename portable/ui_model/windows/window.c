@@ -312,6 +312,25 @@ int portable_window_hit_test(const PortableWindowResource *window,
     return -1;
 }
 
+int portable_window_mouse_hit_test(const PortableWindowResource *window,
+                                   PortableWindowPoint point)
+{
+    uint16_t i;
+    if (window == NULL || window->objects == NULL || window->count == 0)
+        return -1;
+    i = window->count;
+    while (i != 0) {
+        const PortableWindowObject *object;
+        --i;
+        object = &window->objects[i];
+        if ((object->flags & PORTABLE_WINDOW_OBJECT_SELECTABLE) != 0 &&
+            object->rect.left <= point.x && point.x <= object->rect.right &&
+            object->rect.top <= point.y && point.y <= object->rect.bottom)
+            return (int)i;
+    }
+    return -1;
+}
+
 size_t portable_window_render_trace(const PortableWindowResource *window,
                                     int surface_ready,
                                     int draw_hook_enabled,

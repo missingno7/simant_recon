@@ -66,6 +66,12 @@ int portable_window_rect_contains(const PortableWindowRect *rect,
 /* DOS f_218D_052F order: first selectable hit, object zero is the frame. */
 int portable_window_hit_test(const PortableWindowResource *window,
                              PortableWindowPoint point);
+/* Source f_2505_0831 registration + f_1B73_0CEF mouse scan: selectable
+ * objects are prepended in ascending registration order, so later (higher)
+ * object indices win. Edges are inclusive. Frame chrome registration and
+ * dynamic hotbox re-registration are outside this object-only helper. */
+int portable_window_mouse_hit_test(const PortableWindowResource *window,
+                                   PortableWindowPoint point);
 
 typedef enum PortableWindowRenderStepKind {
     PORTABLE_WINDOW_HOOK_BEFORE = 0,

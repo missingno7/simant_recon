@@ -1,5 +1,6 @@
 #include "engine.h"
 #include "menu_adapter.h"
+#include "control_adapter.h"
 #include "../../ui_model/windows/game_view.h"
 #ifdef SIMANT_ENABLE_BALLOON_STATE_NEXT3
 #include "balloon_adapter.h"
@@ -22,6 +23,12 @@ extern void SetPause(int16_t pause);
 extern void SetMapPlane(int16_t plane);
 extern void SetMenuEntries(void);
 extern int16_t YellowCommandKey(int16_t key);
+struct SimRecoveredControlRequest {
+    SimSetupControlKind kind;
+    const SimControlEventMessage *message;
+    SimControlEventPrivateState *private_state;
+    const SimControlEventProvider *provider;
+};
 #ifdef SIMANT_ENABLE_CONTROL_INIT_NEXT4
 extern void RandYard(void);
 #endif
@@ -1055,7 +1062,7 @@ SimRecoveredEngineStatus sim_recovered_engine_action(
 #else
     const int needs_nest = action == SIM_RECOVERED_ACTION_RAND_YARD ||
                           action == SIM_RECOVERED_ACTION_PROC_MENU;
-    const SimRecoveredAction last_action = SIM_RECOVERED_ACTION_PROC_MENU;
+    const SimRecoveredAction last_action = SIM_RECOVERED_ACTION_CONTROL_EVENT;
 #endif
     if (engine == NULL || !engine->initialized || engine->session == NULL)
         return SIM_RECOVERED_ENGINE_INVALID_ARGUMENT;
@@ -1072,6 +1079,8 @@ SimRecoveredEngineStatus sim_recovered_engine_action(
         (action == SIM_RECOVERED_ACTION_RAND_YARD &&
             (a < 0 || a > 3 || b != 0)) ||
         (action == SIM_RECOVERED_ACTION_PROC_MENU && b != 0) ||
+        (action == SIM_RECOVERED_ACTION_CONTROL_EVENT &&
+            (engine->control_request == NULL || a != 0 || b != 0)) ||
         action < SIM_RECOVERED_ACTION_PAUSE ||
         action > last_action)
         return SIM_RECOVERED_ENGINE_INVALID_ARGUMENT;
@@ -1134,6 +1143,15 @@ SimRecoveredEngineStatus sim_recovered_engine_action(
         sim_recovered_source_proc_menu_command(command);
         break;
     }
+    case SIM_RECOVERED_ACTION_CONTROL_EVENT: {
+        struct SimRecoveredControlRequest *request = engine->control_request;
+        SimControlEventStatus status = sim_recovered_source_control_event(
+            &engine->session->setup_controls, request->private_state,
+            request->kind, request->message, request->provider);
+        if (status != SIM_CONTROL_EVENT_OK)
+            unsupported_call(sim_control_event_status_string(status));
+        break;
+    }
 #ifdef SIMANT_ENABLE_END_GAME_ACTION_DIAGNOSTIC
     case SIM_RECOVERED_ACTION_DIAGNOSTIC_END_GAME:
         EndGameDialog(0);
@@ -1191,6 +1209,31 @@ SimRecoveredEngineStatus sim_recovered_engine_proc_menu_command(
     memcpy(&source_word, &command, sizeof(source_word));
     return sim_recovered_engine_action(engine, SIM_RECOVERED_ACTION_PROC_MENU,
                                         source_word, 0);
+}
+
+SimRecoveredEngineStatus sim_recovered_engine_control_event(
+    SimRecoveredEngine *engine, SimSetupControlKind kind,
+    const SimControlEventMessage *message,
+    SimControlEventPrivateState *private_state,
+    const SimControlEventProvider *provider)
+{
+    struct SimRecoveredControlRequest request;
+    SimRecoveredEngineStatus status;
+    if (engine == NULL || !engine->initialized || engine->session == NULL ||
+        message == NULL || private_state == NULL ||
+        provider == NULL || engine->control_request != NULL ||
+        active_engine != NULL || active_abort_target != NULL ||
+        (kind != SIM_SETUP_MODE_CONTROL && kind != SIM_SETUP_CASTE_CONTROL))
+        return SIM_RECOVERED_ENGINE_INVALID_ARGUMENT;
+    request.kind = kind;
+    request.message = message;
+    request.private_state = private_state;
+    request.provider = provider;
+    engine->control_request = &request;
+    status = sim_recovered_engine_action(engine,
+                        SIM_RECOVERED_ACTION_CONTROL_EVENT, 0, 0);
+    engine->control_request = NULL;
+    return status;
 }
 
 SimRecoveredEngineStatus sim_recovered_engine_process_edit_event(

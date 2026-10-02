@@ -7,6 +7,7 @@
 #include "nest_adapter.h"
 #include "session_bridge.h"
 #include "../../ui_model/dialogs/game_over.h"
+#include "../../ui_model/windows/control_events.h"
 
 typedef enum SimRecoveredQuery {
     SIM_RECOVERED_QUERY_WINDOW_OPEN = 1,
@@ -146,7 +147,9 @@ typedef enum SimRecoveredAction {
      * a is the caller's scenario (0..3), b must be zero. Requires next4. */
     SIM_RECOVERED_ACTION_RAND_YARD,
     /* Actual S11 ProcMenu. a retains the command word, b must be zero. */
-    SIM_RECOVERED_ACTION_PROC_MENU
+    SIM_RECOVERED_ACTION_PROC_MENU,
+    /* Internal dispatcher slot; use the typed control-event API below. */
+    SIM_RECOVERED_ACTION_CONTROL_EVENT
 #ifdef SIMANT_ENABLE_END_GAME_ACTION_DIAGNOSTIC
     /* Test executable only: invoke the source EndGame contract directly on
      * its dedicated session. This does not prove the natural trigger. */
@@ -167,6 +170,7 @@ typedef struct SimRecoveredEvent {
     int16_t xE;
 } SimRecoveredEvent;
 
+struct SimRecoveredControlRequest;
 typedef struct SimRecoveredEngine {
     SimSession *session; /* Borrowed; must outlive the engine. */
     SimRecoveredHost host;
@@ -185,6 +189,7 @@ typedef struct SimRecoveredEngine {
     uint8_t initialized;
     uint8_t recovered_binding_active;
     uint8_t end_game_modal_active;
+    struct SimRecoveredControlRequest *control_request; /* synchronous only */
 } SimRecoveredEngine;
 
 typedef enum SimRecoveredEngineInitStatus {
@@ -229,6 +234,16 @@ SimRecoveredEngineStatus sim_recovered_engine_action(
  * fault through the same terminal boundary as other source actions. */
 SimRecoveredEngineStatus sim_recovered_engine_proc_menu_command(
     SimRecoveredEngine *engine, uint16_t command);
+
+/* Finite DOS-compared control model under the engine's state/RNG boundary.
+ * Selector and percent ownership stays with the session/caller across NewGame.
+ * Shared triangle geometry is supplied from active source TLS, not inferred
+ * from the event's rectangle. No tick or RNG consumption is introduced. */
+SimRecoveredEngineStatus sim_recovered_engine_control_event(
+    SimRecoveredEngine *engine, SimSetupControlKind kind,
+    const SimControlEventMessage *message,
+    SimControlEventPrivateState *private_state,
+    const SimControlEventProvider *provider);
 
 /* Dispatches one already-translated native event through the original
  * processEdit(Event*) entry. A nonnull clock selects fixed headless samples;

@@ -1,0 +1,1196 @@
+{
+  "schema": "portable-window-mouse-hotbox-differential-v1",
+  "target": "root:1B73:0CEF",
+  "source_chain": [
+    "root:m2505.c f_2505_0831 visits object indices 0..count-1 and registers only flags&2",
+    "root:m1FD2.c f_1FD2_03EB builds the 18-byte hotbox and calls f_1B73_0B00",
+    "root:m1B73.asm f_1B73_0B00 prepends records",
+    "root:m1B73.asm f_1B73_0CEF scans list order and compares all four rectangle edges inclusively"
+  ],
+  "domain": {
+    "objects_max": 9,
+    "record_size": 18,
+    "registered_mask_word": 1,
+    "left_press_AX": 513,
+    "point_coordinate_range": [
+      -35,
+      35
+    ],
+    "count": 222
+  },
+  "result": {
+    "status": "PASS",
+    "mismatch_count": 0,
+    "oracle_scan_indices": [
+      7027,
+      3311
+    ]
+  },
+  "negative_control": {
+    "id": "scanner-event-mask-disjoint",
+    "AX": 1024,
+    "original_hit": -1,
+    "portable_comparison": "excluded: helper models geometry after source event-mask routing"
+  },
+  "limits": [
+    "normalized object hit index only; callbacks and Event construction are not exercised",
+    "frame-decoration hotbox precedence is excluded",
+    "dynamic hotbox re-registration is excluded",
+    "controlled scanner masks are intersected as supplied; actual INT33 event dispatch is outside this proof"
+  ],
+  "input_sha256_before": {
+    "portable/tests/windows/mouse_hotbox/probe.c": "f6cee9bb35cbcd2915e7b638704f1d441f08ac6a49abf67028445befd07cd0dd",
+    "portable/tests/windows/mouse_hotbox/test_mouse_hotbox.py": "8063f88163941c1e39d8123cffee465e4df763a7803ead2ad0aaade6723c58fc",
+    "portable/ui_model/windows/window.c": "10b7fc27692c4a75849f836824254870b7e695b0a21a35b52ee3f3d863cee095",
+    "portable/ui_model/windows/window.h": "6525061bf8ba2b2b108814b28781c1d4933a2067645136d00e6227df1db12df6",
+    "src/root/m1B73.asm": "3097a6b03ff1d8bdfa7d573632d9905de88d754c8b1e047de4014c4f186cb848",
+    "src/root/m1FD2.c": "f4359bdaf4cfc0fe326a54cf8a1eacb9ba3098b710bf2a561b3d0f48569bf6d8",
+    "src/root/m2505.c": "22a03f15e95fff376d27211426c4f9e3395e16e5decd92ef501fbfe3c1aba623",
+    "tools/behavior.py": "2c0799048057f59eae61a48be4d695278635594484adf0c70bf46c51b4e0c799",
+    "tools/exe.py": "d560f69dcdf0d1c9e89278b50bebe225a9b86db2c259fa54ec9eace6ea05a8b5",
+    "tools/functions.py": "0f67c8d9eb01e319620c9342e79c35f76006091d860894aad6dcf8d61ee2b39e",
+    "tools/match.py": "44fdd8b939b2bbf135d8947d8f6ef6b1854dec133da4af86c55eb94f02869b56",
+    "tools/modctx.py": "33f3a4e3d77371e3095bfeb00358c13bc7838235c27bfe8898dba7e313f1cc25",
+    "tools/modules.py": "8a5c1e85db6970cce3c693c016b313b7ee1922fa6eaf146a00391bfea86edf1a",
+    "layout/oracle.lock.json": "2c6d9e98c688621ad49a08c78d0e0968f4076b036be56ec0738217b533ccde13",
+    "assets/SIMANT.EXE": "aa0596c6766322a8229ee3c36e57048c92adc82d50fbe2ef37afb8b85fcf4f11"
+  },
+  "input_sha256_after": {
+    "portable/tests/windows/mouse_hotbox/probe.c": "f6cee9bb35cbcd2915e7b638704f1d441f08ac6a49abf67028445befd07cd0dd",
+    "portable/tests/windows/mouse_hotbox/test_mouse_hotbox.py": "8063f88163941c1e39d8123cffee465e4df763a7803ead2ad0aaade6723c58fc",
+    "portable/ui_model/windows/window.c": "10b7fc27692c4a75849f836824254870b7e695b0a21a35b52ee3f3d863cee095",
+    "portable/ui_model/windows/window.h": "6525061bf8ba2b2b108814b28781c1d4933a2067645136d00e6227df1db12df6",
+    "src/root/m1B73.asm": "3097a6b03ff1d8bdfa7d573632d9905de88d754c8b1e047de4014c4f186cb848",
+    "src/root/m1FD2.c": "f4359bdaf4cfc0fe326a54cf8a1eacb9ba3098b710bf2a561b3d0f48569bf6d8",
+    "src/root/m2505.c": "22a03f15e95fff376d27211426c4f9e3395e16e5decd92ef501fbfe3c1aba623",
+    "tools/behavior.py": "2c0799048057f59eae61a48be4d695278635594484adf0c70bf46c51b4e0c799",
+    "tools/exe.py": "d560f69dcdf0d1c9e89278b50bebe225a9b86db2c259fa54ec9eace6ea05a8b5",
+    "tools/functions.py": "0f67c8d9eb01e319620c9342e79c35f76006091d860894aad6dcf8d61ee2b39e",
+    "tools/match.py": "44fdd8b939b2bbf135d8947d8f6ef6b1854dec133da4af86c55eb94f02869b56",
+    "tools/modctx.py": "33f3a4e3d77371e3095bfeb00358c13bc7838235c27bfe8898dba7e313f1cc25",
+    "tools/modules.py": "8a5c1e85db6970cce3c693c016b313b7ee1922fa6eaf146a00391bfea86edf1a",
+    "layout/oracle.lock.json": "2c6d9e98c688621ad49a08c78d0e0968f4076b036be56ec0738217b533ccde13",
+    "assets/SIMANT.EXE": "aa0596c6766322a8229ee3c36e57048c92adc82d50fbe2ef37afb8b85fcf4f11"
+  },
+  "compiler_dependency_sha256": {
+    "portable/ui_model/windows/window.c": "10b7fc27692c4a75849f836824254870b7e695b0a21a35b52ee3f3d863cee095",
+    "portable/ui_model/windows/window.h": "6525061bf8ba2b2b108814b28781c1d4933a2067645136d00e6227df1db12df6",
+    "portable/game/resources/database.h": "3b62dd145abf89a1eb88b93fa41830ed454de2cbe493718edfb9b57da75b1272"
+  },
+  "native_executable_sha256": "2449909cf33770063720a2a35830c8fbe71e2412639da32b9f597f40a0cabdd6",
+  "oracle_lock_sha256": "2c6d9e98c688621ad49a08c78d0e0968f4076b036be56ec0738217b533ccde13",
+  "compiler": "gcc (Rev10, Built by MSYS2 project) 12.2.0",
+  "seed": "0x1B730CEF",
+  "cases": [
+    {
+      "id": "frame-object-zero",
+      "native": 0,
+      "original": 0
+    },
+    {
+      "id": "inclusive-bottom-right",
+      "native": 0,
+      "original": 0
+    },
+    {
+      "id": "outside-right",
+      "native": -1,
+      "original": -1
+    },
+    {
+      "id": "overlap-higher-index-prepended-first",
+      "native": 1,
+      "original": 1
+    },
+    {
+      "id": "nonselectable-top-record-skipped",
+      "native": 0,
+      "original": 0
+    },
+    {
+      "id": "empty-list",
+      "native": -1,
+      "original": -1
+    },
+    {
+      "id": "seeded-1-0",
+      "native": -1,
+      "original": -1
+    },
+    {
+      "id": "seeded-1-1",
+      "native": -1,
+      "original": -1
+    },
+    {
+      "id": "seeded-1-2",
+      "native": 0,
+      "original": 0
+    },
+    {
+      "id": "seeded-1-3",
+      "native": -1,
+      "original": -1
+    },
+    {
+      "id": "seeded-1-4",
+      "native": -1,
+      "original": -1
+    },
+    {
+      "id": "seeded-1-5",
+      "native": -1,
+      "original": -1
+    },
+    {
+      "id": "seeded-1-6",
+      "native": 0,
+      "original": 0
+    },
+    {
+      "id": "seeded-1-7",
+      "native": -1,
+      "original": -1
+    },
+    {
+      "id": "seeded-1-8",
+      "native": 0,
+      "original": 0
+    },
+    {
+      "id": "seeded-1-9",
+      "native": -1,
+      "original": -1
+    },
+    {
+      "id": "seeded-1-10",
+      "native": 0,
+      "original": 0
+    },
+    {
+      "id": "seeded-1-11",
+      "native": -1,
+      "original": -1
+    },
+    {
+      "id": "seeded-1-12",
+      "native": -1,
+      "original": -1
+    },
+    {
+      "id": "seeded-1-13",
+      "native": 0,
+      "original": 0
+    },
+    {
+      "id": "seeded-1-14",
+      "native": -1,
+      "original": -1
+    },
+    {
+      "id": "seeded-1-15",
+      "native": -1,
+      "original": -1
+    },
+    {
+      "id": "seeded-1-16",
+      "native": 0,
+      "original": 0
+    },
+    {
+      "id": "seeded-1-17",
+      "native": -1,
+      "original": -1
+    },
+    {
+      "id": "seeded-1-18",
+      "native": -1,
+      "original": -1
+    },
+    {
+      "id": "seeded-1-19",
+      "native": 0,
+      "original": 0
+    },
+    {
+      "id": "seeded-1-20",
+      "native": 0,
+      "original": 0
+    },
+    {
+      "id": "seeded-1-21",
+      "native": -1,
+      "original": -1
+    },
+    {
+      "id": "seeded-1-22",
+      "native": -1,
+      "original": -1
+    },
+    {
+      "id": "seeded-1-23",
+      "native": -1,
+      "original": -1
+    },
+    {
+      "id": "seeded-2-0",
+      "native": -1,
+      "original": -1
+    },
+    {
+      "id": "seeded-2-1",
+      "native": -1,
+      "original": -1
+    },
+    {
+      "id": "seeded-2-2",
+      "native": 1,
+      "original": 1
+    },
+    {
+      "id": "seeded-2-3",
+      "native": 1,
+      "original": 1
+    },
+    {
+      "id": "seeded-2-4",
+      "native": 0,
+      "original": 0
+    },
+    {
+      "id": "seeded-2-5",
+      "native": 0,
+      "original": 0
+    },
+    {
+      "id": "seeded-2-6",
+      "native": -1,
+      "original": -1
+    },
+    {
+      "id": "seeded-2-7",
+      "native": -1,
+      "original": -1
+    },
+    {
+      "id": "seeded-2-8",
+      "native": -1,
+      "original": -1
+    },
+    {
+      "id": "seeded-2-9",
+      "native": -1,
+      "original": -1
+    },
+    {
+      "id": "seeded-2-10",
+      "native": -1,
+      "original": -1
+    },
+    {
+      "id": "seeded-2-11",
+      "native": -1,
+      "original": -1
+    },
+    {
+      "id": "seeded-2-12",
+      "native": -1,
+      "original": -1
+    },
+    {
+      "id": "seeded-2-13",
+      "native": -1,
+      "original": -1
+    },
+    {
+      "id": "seeded-2-14",
+      "native": -1,
+      "original": -1
+    },
+    {
+      "id": "seeded-2-15",
+      "native": 0,
+      "original": 0
+    },
+    {
+      "id": "seeded-2-16",
+      "native": 1,
+      "original": 1
+    },
+    {
+      "id": "seeded-2-17",
+      "native": -1,
+      "original": -1
+    },
+    {
+      "id": "seeded-2-18",
+      "native": -1,
+      "original": -1
+    },
+    {
+      "id": "seeded-2-19",
+      "native": -1,
+      "original": -1
+    },
+    {
+      "id": "seeded-2-20",
+      "native": -1,
+      "original": -1
+    },
+    {
+      "id": "seeded-2-21",
+      "native": -1,
+      "original": -1
+    },
+    {
+      "id": "seeded-2-22",
+      "native": -1,
+      "original": -1
+    },
+    {
+      "id": "seeded-2-23",
+      "native": -1,
+      "original": -1
+    },
+    {
+      "id": "seeded-3-0",
+      "native": 1,
+      "original": 1
+    },
+    {
+      "id": "seeded-3-1",
+      "native": -1,
+      "original": -1
+    },
+    {
+      "id": "seeded-3-2",
+      "native": -1,
+      "original": -1
+    },
+    {
+      "id": "seeded-3-3",
+      "native": -1,
+      "original": -1
+    },
+    {
+      "id": "seeded-3-4",
+      "native": -1,
+      "original": -1
+    },
+    {
+      "id": "seeded-3-5",
+      "native": -1,
+      "original": -1
+    },
+    {
+      "id": "seeded-3-6",
+      "native": -1,
+      "original": -1
+    },
+    {
+      "id": "seeded-3-7",
+      "native": 1,
+      "original": 1
+    },
+    {
+      "id": "seeded-3-8",
+      "native": -1,
+      "original": -1
+    },
+    {
+      "id": "seeded-3-9",
+      "native": 2,
+      "original": 2
+    },
+    {
+      "id": "seeded-3-10",
+      "native": 2,
+      "original": 2
+    },
+    {
+      "id": "seeded-3-11",
+      "native": 1,
+      "original": 1
+    },
+    {
+      "id": "seeded-3-12",
+      "native": -1,
+      "original": -1
+    },
+    {
+      "id": "seeded-3-13",
+      "native": -1,
+      "original": -1
+    },
+    {
+      "id": "seeded-3-14",
+      "native": 1,
+      "original": 1
+    },
+    {
+      "id": "seeded-3-15",
+      "native": 1,
+      "original": 1
+    },
+    {
+      "id": "seeded-3-16",
+      "native": -1,
+      "original": -1
+    },
+    {
+      "id": "seeded-3-17",
+      "native": 2,
+      "original": 2
+    },
+    {
+      "id": "seeded-3-18",
+      "native": -1,
+      "original": -1
+    },
+    {
+      "id": "seeded-3-19",
+      "native": -1,
+      "original": -1
+    },
+    {
+      "id": "seeded-3-20",
+      "native": -1,
+      "original": -1
+    },
+    {
+      "id": "seeded-3-21",
+      "native": -1,
+      "original": -1
+    },
+    {
+      "id": "seeded-3-22",
+      "native": 2,
+      "original": 2
+    },
+    {
+      "id": "seeded-3-23",
+      "native": -1,
+      "original": -1
+    },
+    {
+      "id": "seeded-4-0",
+      "native": -1,
+      "original": -1
+    },
+    {
+      "id": "seeded-4-1",
+      "native": -1,
+      "original": -1
+    },
+    {
+      "id": "seeded-4-2",
+      "native": 3,
+      "original": 3
+    },
+    {
+      "id": "seeded-4-3",
+      "native": -1,
+      "original": -1
+    },
+    {
+      "id": "seeded-4-4",
+      "native": 1,
+      "original": 1
+    },
+    {
+      "id": "seeded-4-5",
+      "native": 1,
+      "original": 1
+    },
+    {
+      "id": "seeded-4-6",
+      "native": 3,
+      "original": 3
+    },
+    {
+      "id": "seeded-4-7",
+      "native": -1,
+      "original": -1
+    },
+    {
+      "id": "seeded-4-8",
+      "native": 2,
+      "original": 2
+    },
+    {
+      "id": "seeded-4-9",
+      "native": -1,
+      "original": -1
+    },
+    {
+      "id": "seeded-4-10",
+      "native": -1,
+      "original": -1
+    },
+    {
+      "id": "seeded-4-11",
+      "native": -1,
+      "original": -1
+    },
+    {
+      "id": "seeded-4-12",
+      "native": -1,
+      "original": -1
+    },
+    {
+      "id": "seeded-4-13",
+      "native": -1,
+      "original": -1
+    },
+    {
+      "id": "seeded-4-14",
+      "native": -1,
+      "original": -1
+    },
+    {
+      "id": "seeded-4-15",
+      "native": -1,
+      "original": -1
+    },
+    {
+      "id": "seeded-4-16",
+      "native": -1,
+      "original": -1
+    },
+    {
+      "id": "seeded-4-17",
+      "native": 0,
+      "original": 0
+    },
+    {
+      "id": "seeded-4-18",
+      "native": -1,
+      "original": -1
+    },
+    {
+      "id": "seeded-4-19",
+      "native": -1,
+      "original": -1
+    },
+    {
+      "id": "seeded-4-20",
+      "native": -1,
+      "original": -1
+    },
+    {
+      "id": "seeded-4-21",
+      "native": 0,
+      "original": 0
+    },
+    {
+      "id": "seeded-4-22",
+      "native": -1,
+      "original": -1
+    },
+    {
+      "id": "seeded-4-23",
+      "native": -1,
+      "original": -1
+    },
+    {
+      "id": "seeded-5-0",
+      "native": -1,
+      "original": -1
+    },
+    {
+      "id": "seeded-5-1",
+      "native": -1,
+      "original": -1
+    },
+    {
+      "id": "seeded-5-2",
+      "native": -1,
+      "original": -1
+    },
+    {
+      "id": "seeded-5-3",
+      "native": 3,
+      "original": 3
+    },
+    {
+      "id": "seeded-5-4",
+      "native": -1,
+      "original": -1
+    },
+    {
+      "id": "seeded-5-5",
+      "native": -1,
+      "original": -1
+    },
+    {
+      "id": "seeded-5-6",
+      "native": 1,
+      "original": 1
+    },
+    {
+      "id": "seeded-5-7",
+      "native": 0,
+      "original": 0
+    },
+    {
+      "id": "seeded-5-8",
+      "native": -1,
+      "original": -1
+    },
+    {
+      "id": "seeded-5-9",
+      "native": -1,
+      "original": -1
+    },
+    {
+      "id": "seeded-5-10",
+      "native": 3,
+      "original": 3
+    },
+    {
+      "id": "seeded-5-11",
+      "native": -1,
+      "original": -1
+    },
+    {
+      "id": "seeded-5-12",
+      "native": 1,
+      "original": 1
+    },
+    {
+      "id": "seeded-5-13",
+      "native": -1,
+      "original": -1
+    },
+    {
+      "id": "seeded-5-14",
+      "native": -1,
+      "original": -1
+    },
+    {
+      "id": "seeded-5-15",
+      "native": 1,
+      "original": 1
+    },
+    {
+      "id": "seeded-5-16",
+      "native": -1,
+      "original": -1
+    },
+    {
+      "id": "seeded-5-17",
+      "native": -1,
+      "original": -1
+    },
+    {
+      "id": "seeded-5-18",
+      "native": -1,
+      "original": -1
+    },
+    {
+      "id": "seeded-5-19",
+      "native": -1,
+      "original": -1
+    },
+    {
+      "id": "seeded-5-20",
+      "native": 2,
+      "original": 2
+    },
+    {
+      "id": "seeded-5-21",
+      "native": 4,
+      "original": 4
+    },
+    {
+      "id": "seeded-5-22",
+      "native": -1,
+      "original": -1
+    },
+    {
+      "id": "seeded-5-23",
+      "native": 1,
+      "original": 1
+    },
+    {
+      "id": "seeded-6-0",
+      "native": 1,
+      "original": 1
+    },
+    {
+      "id": "seeded-6-1",
+      "native": -1,
+      "original": -1
+    },
+    {
+      "id": "seeded-6-2",
+      "native": -1,
+      "original": -1
+    },
+    {
+      "id": "seeded-6-3",
+      "native": 4,
+      "original": 4
+    },
+    {
+      "id": "seeded-6-4",
+      "native": -1,
+      "original": -1
+    },
+    {
+      "id": "seeded-6-5",
+      "native": -1,
+      "original": -1
+    },
+    {
+      "id": "seeded-6-6",
+      "native": -1,
+      "original": -1
+    },
+    {
+      "id": "seeded-6-7",
+      "native": -1,
+      "original": -1
+    },
+    {
+      "id": "seeded-6-8",
+      "native": 5,
+      "original": 5
+    },
+    {
+      "id": "seeded-6-9",
+      "native": 5,
+      "original": 5
+    },
+    {
+      "id": "seeded-6-10",
+      "native": -1,
+      "original": -1
+    },
+    {
+      "id": "seeded-6-11",
+      "native": 1,
+      "original": 1
+    },
+    {
+      "id": "seeded-6-12",
+      "native": -1,
+      "original": -1
+    },
+    {
+      "id": "seeded-6-13",
+      "native": -1,
+      "original": -1
+    },
+    {
+      "id": "seeded-6-14",
+      "native": -1,
+      "original": -1
+    },
+    {
+      "id": "seeded-6-15",
+      "native": 4,
+      "original": 4
+    },
+    {
+      "id": "seeded-6-16",
+      "native": -1,
+      "original": -1
+    },
+    {
+      "id": "seeded-6-17",
+      "native": -1,
+      "original": -1
+    },
+    {
+      "id": "seeded-6-18",
+      "native": 1,
+      "original": 1
+    },
+    {
+      "id": "seeded-6-19",
+      "native": -1,
+      "original": -1
+    },
+    {
+      "id": "seeded-6-20",
+      "native": -1,
+      "original": -1
+    },
+    {
+      "id": "seeded-6-21",
+      "native": -1,
+      "original": -1
+    },
+    {
+      "id": "seeded-6-22",
+      "native": -1,
+      "original": -1
+    },
+    {
+      "id": "seeded-6-23",
+      "native": -1,
+      "original": -1
+    },
+    {
+      "id": "seeded-7-0",
+      "native": 1,
+      "original": 1
+    },
+    {
+      "id": "seeded-7-1",
+      "native": -1,
+      "original": -1
+    },
+    {
+      "id": "seeded-7-2",
+      "native": 6,
+      "original": 6
+    },
+    {
+      "id": "seeded-7-3",
+      "native": -1,
+      "original": -1
+    },
+    {
+      "id": "seeded-7-4",
+      "native": -1,
+      "original": -1
+    },
+    {
+      "id": "seeded-7-5",
+      "native": -1,
+      "original": -1
+    },
+    {
+      "id": "seeded-7-6",
+      "native": -1,
+      "original": -1
+    },
+    {
+      "id": "seeded-7-7",
+      "native": -1,
+      "original": -1
+    },
+    {
+      "id": "seeded-7-8",
+      "native": 5,
+      "original": 5
+    },
+    {
+      "id": "seeded-7-9",
+      "native": -1,
+      "original": -1
+    },
+    {
+      "id": "seeded-7-10",
+      "native": 2,
+      "original": 2
+    },
+    {
+      "id": "seeded-7-11",
+      "native": 1,
+      "original": 1
+    },
+    {
+      "id": "seeded-7-12",
+      "native": -1,
+      "original": -1
+    },
+    {
+      "id": "seeded-7-13",
+      "native": -1,
+      "original": -1
+    },
+    {
+      "id": "seeded-7-14",
+      "native": 0,
+      "original": 0
+    },
+    {
+      "id": "seeded-7-15",
+      "native": 4,
+      "original": 4
+    },
+    {
+      "id": "seeded-7-16",
+      "native": -1,
+      "original": -1
+    },
+    {
+      "id": "seeded-7-17",
+      "native": -1,
+      "original": -1
+    },
+    {
+      "id": "seeded-7-18",
+      "native": -1,
+      "original": -1
+    },
+    {
+      "id": "seeded-7-19",
+      "native": -1,
+      "original": -1
+    },
+    {
+      "id": "seeded-7-20",
+      "native": 4,
+      "original": 4
+    },
+    {
+      "id": "seeded-7-21",
+      "native": -1,
+      "original": -1
+    },
+    {
+      "id": "seeded-7-22",
+      "native": -1,
+      "original": -1
+    },
+    {
+      "id": "seeded-7-23",
+      "native": -1,
+      "original": -1
+    },
+    {
+      "id": "seeded-8-0",
+      "native": 0,
+      "original": 0
+    },
+    {
+      "id": "seeded-8-1",
+      "native": 1,
+      "original": 1
+    },
+    {
+      "id": "seeded-8-2",
+      "native": -1,
+      "original": -1
+    },
+    {
+      "id": "seeded-8-3",
+      "native": -1,
+      "original": -1
+    },
+    {
+      "id": "seeded-8-4",
+      "native": -1,
+      "original": -1
+    },
+    {
+      "id": "seeded-8-5",
+      "native": -1,
+      "original": -1
+    },
+    {
+      "id": "seeded-8-6",
+      "native": 3,
+      "original": 3
+    },
+    {
+      "id": "seeded-8-7",
+      "native": -1,
+      "original": -1
+    },
+    {
+      "id": "seeded-8-8",
+      "native": -1,
+      "original": -1
+    },
+    {
+      "id": "seeded-8-9",
+      "native": -1,
+      "original": -1
+    },
+    {
+      "id": "seeded-8-10",
+      "native": -1,
+      "original": -1
+    },
+    {
+      "id": "seeded-8-11",
+      "native": -1,
+      "original": -1
+    },
+    {
+      "id": "seeded-8-12",
+      "native": -1,
+      "original": -1
+    },
+    {
+      "id": "seeded-8-13",
+      "native": -1,
+      "original": -1
+    },
+    {
+      "id": "seeded-8-14",
+      "native": 3,
+      "original": 3
+    },
+    {
+      "id": "seeded-8-15",
+      "native": -1,
+      "original": -1
+    },
+    {
+      "id": "seeded-8-16",
+      "native": 4,
+      "original": 4
+    },
+    {
+      "id": "seeded-8-17",
+      "native": -1,
+      "original": -1
+    },
+    {
+      "id": "seeded-8-18",
+      "native": -1,
+      "original": -1
+    },
+    {
+      "id": "seeded-8-19",
+      "native": -1,
+      "original": -1
+    },
+    {
+      "id": "seeded-8-20",
+      "native": 3,
+      "original": 3
+    },
+    {
+      "id": "seeded-8-21",
+      "native": 1,
+      "original": 1
+    },
+    {
+      "id": "seeded-8-22",
+      "native": -1,
+      "original": -1
+    },
+    {
+      "id": "seeded-8-23",
+      "native": -1,
+      "original": -1
+    },
+    {
+      "id": "seeded-9-0",
+      "native": -1,
+      "original": -1
+    },
+    {
+      "id": "seeded-9-1",
+      "native": -1,
+      "original": -1
+    },
+    {
+      "id": "seeded-9-2",
+      "native": -1,
+      "original": -1
+    },
+    {
+      "id": "seeded-9-3",
+      "native": -1,
+      "original": -1
+    },
+    {
+      "id": "seeded-9-4",
+      "native": -1,
+      "original": -1
+    },
+    {
+      "id": "seeded-9-5",
+      "native": -1,
+      "original": -1
+    },
+    {
+      "id": "seeded-9-6",
+      "native": -1,
+      "original": -1
+    },
+    {
+      "id": "seeded-9-7",
+      "native": -1,
+      "original": -1
+    },
+    {
+      "id": "seeded-9-8",
+      "native": 6,
+      "original": 6
+    },
+    {
+      "id": "seeded-9-9",
+      "native": 0,
+      "original": 0
+    },
+    {
+      "id": "seeded-9-10",
+      "native": 0,
+      "original": 0
+    },
+    {
+      "id": "seeded-9-11",
+      "native": -1,
+      "original": -1
+    },
+    {
+      "id": "seeded-9-12",
+      "native": 0,
+      "original": 0
+    },
+    {
+      "id": "seeded-9-13",
+      "native": -1,
+      "original": -1
+    },
+    {
+      "id": "seeded-9-14",
+      "native": -1,
+      "original": -1
+    },
+    {
+      "id": "seeded-9-15",
+      "native": -1,
+      "original": -1
+    },
+    {
+      "id": "seeded-9-16",
+      "native": -1,
+      "original": -1
+    },
+    {
+      "id": "seeded-9-17",
+      "native": 7,
+      "original": 7
+    },
+    {
+      "id": "seeded-9-18",
+      "native": 4,
+      "original": 4
+    },
+    {
+      "id": "seeded-9-19",
+      "native": -1,
+      "original": -1
+    },
+    {
+      "id": "seeded-9-20",
+      "native": -1,
+      "original": -1
+    },
+    {
+      "id": "seeded-9-21",
+      "native": -1,
+      "original": -1
+    },
+    {
+      "id": "seeded-9-22",
+      "native": -1,
+      "original": -1
+    },
+    {
+      "id": "seeded-9-23",
+      "native": -1,
+      "original": -1
+    }
+  ]
+}

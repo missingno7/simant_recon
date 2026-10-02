@@ -9,7 +9,6 @@ list(FILTER SIMANT_NATIVE_SOURCES EXCLUDE REGEX "/game/recovered/")
 list(FILTER SIMANT_NATIVE_SOURCES EXCLUDE REGEX "/game/save/")
 # Standalone diagnostic models are integrated only after caller review.
 list(FILTER SIMANT_NATIVE_SOURCES EXCLUDE REGEX "/ui_model/windows/zoom[.]c$")
-list(FILTER SIMANT_NATIVE_SOURCES EXCLUDE REGEX "/ui_model/windows/control_events[.]c$")
 list(FILTER SIMANT_NATIVE_SOURCES EXCLUDE REGEX "/ui_model/windows/history_render[.]c$")
 list(FILTER SIMANT_NATIVE_SOURCES EXCLUDE REGEX "/ui_model/dialogs/menu_quit[.]c$")
 add_executable(simant-sdl3 main.c ${SIMANT_NATIVE_SOURCES})
