@@ -1,0 +1,40 @@
+{
+  "schema": "simant-window-source-body-conversion-v1",
+  "functions": [
+    {
+      "name": "f_1FD2_0883",
+      "source": "src/root/m1FD2.c",
+      "signature_prefix": "void far f_1FD2_0883(",
+      "replacements": [
+        {"old": "void far f_1FD2_0883(", "new": "void f_1FD2_0883(", "count": 1}
+      ]
+    },
+    {
+      "name": "f_2505_06B9",
+      "source": "src/root/m2505.c",
+      "signature_prefix": "void _fastcall f_2505_06B9(",
+      "replacements": [
+        {"old": "void _fastcall f_2505_06B9(int flag, char far *w)", "new": "void f_2505_06B9(int flag, PortableDecorationWindow *w)", "count": 1},
+        {"old": "rect = *(struct Rect far *)w;", "new": "rect = w->rect;", "count": 1},
+        {"old": "m = (*((char far * far *)(w + 0x2c)))[0x28];", "new": "m = (signed char)w->state[0x28];", "count": 1},
+        {"old": "*(int far *)(w + 0x1c)", "new": "w->flags", "count": 6}
+      ]
+    }
+  ],
+  "type_adaptations": {
+    "far": "removed only from function signatures; function bodies use typed local views",
+    "_fastcall": "removed at the native boundary; runner invokes converted f_2505_06B9(flag, window)",
+    "int": "macro-lowered to int16_t only while including the extracted source bodies",
+    "window": "PortableDecorationWindow contains Rect rect, int16_t flags, and borrowed uint8_t state pointer",
+    "margin": "source plain-char load explicitly cast to signed char before conversion to int16_t local",
+    "external_calls": {
+      "f_208F_0419": "metric sink loads actual HCEGANT kind-2 record and returns point dimensions",
+      "f_1FD2_03EB": "hotbox sink captures the source-produced Rect and mode",
+      "f_1FD2_0438": "unregister sink captures the source mode"
+    }
+  },
+  "not_converted": [
+    "No branch, statement, call order, arithmetic expression, or constant in either source function body is authored by the extractor.",
+    "Allocator-backed mouse-list lifetime and scanner dispatch remain outside this conversion test."
+  ]
+}
