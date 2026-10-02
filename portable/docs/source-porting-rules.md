@@ -37,6 +37,15 @@ The rest of the frozen C/ASM is not implicitly ported. The source-route inventor
 tracks that remaining work. Historical EXACT and BEHAVIOR_EXACT records are
 unchanged.
 
+The current control event adapter still invokes a handwritten source-derived
+implementation with bounded DOS comparisons. Movement and several rendering
+providers also use explicit native implementations. Those existing routes must
+be listed separately from mechanically converted source bodies; their tests
+do not make them mechanical conversions. Reusing the original control event C
+bodies is the next replacement task. A native implementation of genuine ASM or
+an obsolete platform boundary remains necessary, with its source-visible
+behavior separately verified.
+
 Reference workflows reviewed locally: Stunts
 `docs/porting/semantic-audit.md` and Empires
 `docs/portable/tu-porting-rules.md`. These are workflow references, not SimAnt
