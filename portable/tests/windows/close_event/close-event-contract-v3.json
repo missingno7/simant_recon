@@ -1,0 +1,397 @@
+{
+  "schema": "portable-window-close-event-contract-v1",
+  "status": "PASS",
+  "original_targets": [
+    "root:218D:02D5",
+    "root:218D:000C"
+  ],
+  "source_anchors": [
+    {
+      "file": "src/root/m2505.c",
+      "line": 405,
+      "claim": "selectable objects including index 0 register as win+i hotboxes"
+    },
+    {
+      "file": "src/root/m2505.c",
+      "line": 428,
+      "claim": "frame controls register separate F083/F084/F085/F088/F082 command records"
+    },
+    {
+      "file": "src/root/m1FD2.c",
+      "line": 467,
+      "claim": "decoration hotbox receives command code in ticks slot"
+    },
+    {
+      "file": "src/root/m218D.c",
+      "line": 142,
+      "claim": "F083 special dispatch closes front and drains queue before return"
+    },
+    {
+      "file": "src/root/m218D.c",
+      "line": 178,
+      "claim": "ordinary matching window code calls object handler; pending event follows"
+    },
+    {
+      "file": "src/root/m218D.c",
+      "line": 34,
+      "claim": "object handler owns double-click bookkeeping"
+    }
+  ],
+  "route_cases": [
+    {
+      "case": "frame-close-F083",
+      "native_contract": [
+        1,
+        1,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "case": "object-zero-code-1300",
+      "native_contract": [
+        3,
+        0,
+        1,
+        1,
+        0
+      ]
+    },
+    {
+      "case": "object-index-two",
+      "native_contract": [
+        3,
+        0,
+        1,
+        1,
+        2
+      ]
+    },
+    {
+      "case": "foreign-window-object",
+      "native_contract": [
+        0,
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "case": "no-front-close-code",
+      "native_contract": [
+        4,
+        0,
+        1,
+        0,
+        0
+      ]
+    },
+    {
+      "case": "frame-zoom-F082",
+      "native_contract": [
+        2,
+        1,
+        0,
+        0,
+        0
+      ]
+    }
+  ],
+  "native_click_history": [
+    {
+      "doubled": 1,
+      "modifiers": 8193
+    },
+    {
+      "doubled": 0,
+      "modifiers": 513
+    },
+    {
+      "doubled": 0,
+      "modifiers": 513
+    },
+    {
+      "doubled": 0,
+      "modifiers": 513
+    }
+  ],
+  "original_observations": {
+    "frame-close-F083": {
+      "calls": [
+        {
+          "call": "win_Close",
+          "front_window": 4864
+        }
+      ],
+      "object_handler_entries": [],
+      "queue_query_calls": 2,
+      "pending_byte": 0,
+      "event": "00000000d20401029600960083f00101"
+    },
+    "object-zero-code-1300": {
+      "calls": [],
+      "object_handler_entries": [
+        {
+          "event_far_pointer": [
+            20726,
+            18938
+          ],
+          "event": "00000000d20401029600960000130101"
+        }
+      ],
+      "queue_query_calls": 1,
+      "pending_byte": 1,
+      "event": "00000000d20401029600960000130101"
+    },
+    "no-front-close-code": {
+      "calls": [],
+      "object_handler_entries": [],
+      "queue_query_calls": 1,
+      "pending_byte": 1,
+      "event": "00000000d20401029600960083f00101"
+    },
+    "foreign-window-object": {
+      "calls": [],
+      "object_handler_entries": [],
+      "queue_query_calls": 1,
+      "pending_byte": 0,
+      "event": "00000000d20401029600960000140101"
+    },
+    "object-click-double-within-window": {
+      "current": "00000000d20401209600960000130101",
+      "previous": "00000000d20401029600960000130101",
+      "tick": "ffffffff",
+      "tick_calls": 1
+    },
+    "object-click-strict-ten-tick-boundary": {
+      "current": "00000000d20401029600960000130101",
+      "previous": "00000000d20401029600960000130101",
+      "tick": "f2030000",
+      "tick_calls": 2
+    },
+    "object-click-button-mismatch": {
+      "current": "00000000d20401029600960000130101",
+      "previous": "00000000d20401029600960000130101",
+      "tick": "ed030000",
+      "tick_calls": 2
+    },
+    "object-click-different-index": {
+      "current": "00000000d20401029600960000130101",
+      "previous": "00000000d20401029600960000130101",
+      "tick": "ed030000",
+      "tick_calls": 1
+    }
+  },
+  "checks": {
+    "native_route_contract_matches_expected": true,
+    "native_click_history_matches_expected": true,
+    "close_calls_front_once": true,
+    "close_drains_queue": true,
+    "object_zero_not_close": true,
+    "no_front_skips_close": true,
+    "foreign_object_ignored": true
+  },
+  "click_history_controls": {
+    "same-object-within-window": 8193,
+    "exact-ten-tick-boundary": 513,
+    "button-mismatch": 513,
+    "different-object-index": 513,
+    "double-click-timer_reset": 4294967295
+  },
+  "limits": [
+    "close callback is observed as a typed call boundary; native close manager/UI effects are not executed",
+    "f_218D_000C object-handler body is directly executed with the WinObjAddr/lock/Unlock/TickCount boundaries supplied deterministically",
+    "the separate selectable-object scanner and decoration registration ordering are not rerun here",
+    "frame-decoration precedence over overlapping ordinary object hotboxes and live moving/re-registration state are not proven",
+    "physical INT33 producer state and subsequent redraw/audio effects are outside this contract"
+  ],
+  "inputs_sha256_before": {
+    "portable/tests/windows/close_event/test_close_event.py": "1183184b59dec426dca6d5f04984042e8b428d3127fca6259b3cf61c620f3dab",
+    "portable/tests/windows/close_event/probe.c": "95feb6af4c603b702c0aad568b7db419f366b663003c21455a2e68ce66434c60",
+    "portable/tests/windows/close_event/close_event_contract.c": "3840262fafaf74995ce6d35526ea4d7cefe527f49f63d4863af914bf636df7f0",
+    "portable/tests/windows/close_event/close_event_contract.h": "bb375714cf4bc4e9adadd61eb25e74431068b0ce21f50479802bf3db8a90e07b",
+    "src/root/m218D.c": "3ccc2dedf58831dc2f853beb3133847e7f1f8c1883c445379fd5584b3255112e",
+    "src/root/m20E8.c": "c2ec2474010ef9821fd46cdf72e50f164c850446b6f4b051a91d474b53dd5ae2",
+    "src/root/m2505.c": "22a03f15e95fff376d27211426c4f9e3395e16e5decd92ef501fbfe3c1aba623",
+    "src/root/m1FD2.c": "f4359bdaf4cfc0fe326a54cf8a1eacb9ba3098b710bf2a561b3d0f48569bf6d8",
+    "src/root/m1B73.asm": "3097a6b03ff1d8bdfa7d573632d9905de88d754c8b1e047de4014c4f186cb848",
+    "tools/behavior.py": "2c0799048057f59eae61a48be4d695278635594484adf0c70bf46c51b4e0c799",
+    "tools/exe.py": "d560f69dcdf0d1c9e89278b50bebe225a9b86db2c259fa54ec9eace6ea05a8b5",
+    "tools/functions.py": "0f67c8d9eb01e319620c9342e79c35f76006091d860894aad6dcf8d61ee2b39e",
+    "tools/match.py": "44fdd8b939b2bbf135d8947d8f6ef6b1854dec133da4af86c55eb94f02869b56",
+    "tools/modctx.py": "33f3a4e3d77371e3095bfeb00358c13bc7838235c27bfe8898dba7e313f1cc25",
+    "tools/modules.py": "8a5c1e85db6970cce3c693c016b313b7ee1922fa6eaf146a00391bfea86edf1a",
+    "tools/omf.py": "951137ecbfaeb6e40fd5230c94398141da7ec7bdb7399d9cd74d46ded3045612",
+    "tools/symbols.py": "e3f25fb66717f743dea126e56b5b44538d452fb5a2d52695ef27cb5069bc1793",
+    "layout/oracle.lock.json": "2c6d9e98c688621ad49a08c78d0e0968f4076b036be56ec0738217b533ccde13",
+    "layout/symbols.json": "0f5dd5b0a211945a97782cfccdb9bb31b0dfd07fcde5df4d4f9486b487eb0125",
+    "assets/SIMANT.EXE": "aa0596c6766322a8229ee3c36e57048c92adc82d50fbe2ef37afb8b85fcf4f11",
+    "build/behavior/deps/unicorn/arm64_const.py": "ddadd814eccd0a312bb43da7b4f2298690660bd5698c27edc306b1d981cff972",
+    "build/behavior/deps/unicorn/arm_const.py": "ace0c3e49f61649034a1bec4279576b67e064df146ea8062c67e68dc14e6eb7b",
+    "build/behavior/deps/unicorn/m68k_const.py": "af95f32f2810fe19888ac723db70c74c7fb1df2bc8ba3578ede0a28b8eca94a7",
+    "build/behavior/deps/unicorn/mips_const.py": "087925a25a128662e095bb861af3c38a2a6c522fc21e222e31b71aeacaaa63d3",
+    "build/behavior/deps/unicorn/ppc_const.py": "11e0c52a1c137874352119fb3d1621639079feda6574ee575271ef683a0a8f17",
+    "build/behavior/deps/unicorn/py.typed": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "build/behavior/deps/unicorn/riscv_const.py": "86e08d5f6327d154306d5d02899331892de6f44020ff86900a84d2b212205925",
+    "build/behavior/deps/unicorn/s390x_const.py": "4f6194d1697d8684921782a81f494458dc859f8ebf2f78e30f673bd5f7cd590f",
+    "build/behavior/deps/unicorn/sparc_const.py": "9dd58fa5aeab225a0f8186f653f5c8fc5fd161b75ccc6a541e5af79f36af2698",
+    "build/behavior/deps/unicorn/tricore_const.py": "88310f61e12b731b2550031eb6423fbf815e66428b483132d3df47614c9d53ae",
+    "build/behavior/deps/unicorn/unicorn.py": "2aed71e6d5bc60807198cdcc3ed43a485a7acae1f41f08d986137afc55df2029",
+    "build/behavior/deps/unicorn/unicorn_const.py": "c21d7c49f62296591a5f09ed0119ef95083b82f5f3f66b829578784c7b164368",
+    "build/behavior/deps/unicorn/unicorn_py2.py": "b82ccc7c00762e10f0326e8d8ad4381872cf531799d5e003ad52c9d7ac61ae42",
+    "build/behavior/deps/unicorn/x86_const.py": "d7663db6425f52838f3e79e45a8fe22b6c02be7edb44367ea2118aec04ee5728",
+    "build/behavior/deps/unicorn/__init__.py": "0e8ac7115c755994a968fa865bd1b2f2075edea715c17e91d62af2cc52c13392",
+    "build/behavior/deps/unicorn/include/unicorn/arm.h": "7746a8a6714ddfce7036a3d41c4d26c59b3edaf532458f8a8a35127eb61b0381",
+    "build/behavior/deps/unicorn/include/unicorn/arm64.h": "a0f19ff95563eb45ec1b78dfd759e1b23ac19ee562ee8554a5270bb53144621c",
+    "build/behavior/deps/unicorn/include/unicorn/m68k.h": "1647203eb80ee34891ff7ec217e3d2b6b1b14532df32d33e75a5738b546050b1",
+    "build/behavior/deps/unicorn/include/unicorn/mips.h": "e3aa91f7c2aeda746abfe1fb44e4de3cbe866517a478f1acc7739b7e6474754d",
+    "build/behavior/deps/unicorn/include/unicorn/platform.h": "a1b9ae7e9384ad18942b7abaaaf62d51d604e3722753d7e20dd1b82b1eb00b9f",
+    "build/behavior/deps/unicorn/include/unicorn/ppc.h": "402f7db37c4a4f8b90c5e2f80b85dee031d814b37aed7c5a671a601f4a42a80c",
+    "build/behavior/deps/unicorn/include/unicorn/riscv.h": "313cf8db927aa8501496ff5c89fffc2a690837fe394a25d7dcbd7d4caafa7e64",
+    "build/behavior/deps/unicorn/include/unicorn/s390x.h": "591db40b7c93b1584da3b93a98ccc01ef2df89c9be3c3d348721b8cccff187c8",
+    "build/behavior/deps/unicorn/include/unicorn/sparc.h": "4f4ffd28c02be0fe1f18695f755b8a5964d07d563c5f32156c716acf69e96bc5",
+    "build/behavior/deps/unicorn/include/unicorn/tricore.h": "4a6baa756c91c2ef74813d95800d556e89b133a860ea6970160332f32aaa3fab",
+    "build/behavior/deps/unicorn/include/unicorn/unicorn.h": "0414b3948a8bdd3f28451f7f2ae03b5c790d08ea93e6e02b2e4db19a0de49507",
+    "build/behavior/deps/unicorn/include/unicorn/x86.h": "dd75a7680a5552717a4abe559c10f5b805f7c68ae6f2be9729387f2300860c0f",
+    "build/behavior/deps/unicorn/lib/unicorn.dll": "010d85dce84b8f6ffaec3d5420f1b5f7768f859eb831be574c7da23e656ee8f1",
+    "build/behavior/deps/unicorn/lib/unicorn.lib": "60a95ffb6572942b7db1f57901d23e664ed22a54a7d92dfcad15fc3e3ef1f724",
+    "build/behavior/deps/unicorn/unicorn_py3/unicorn.py": "b4de7d560790a587157b17edd71c83b4f2d2bade2447d1a5433c497468ac8aeb",
+    "build/behavior/deps/unicorn/unicorn_py3/__init__.py": "2cd4a0d95ef236b5b9e3efb68b20fb6a6d1fb4190db2e9cc0a6447eb2c0aa755",
+    "build/behavior/deps/unicorn/unicorn_py3/arch/arm.py": "d486ff4a9c3f797e5e57a5201a1e2304b97a54b6bc61e320062f1290f4e3dc33",
+    "build/behavior/deps/unicorn/unicorn_py3/arch/arm64.py": "2e393f3f863da1576619e03abcbda2a2e2e54d673aac98979cf0b6caed8926b4",
+    "build/behavior/deps/unicorn/unicorn_py3/arch/intel.py": "b3b8338a85ac74623e7a67dfb4f44dc9933786a329e64d772987490dbf751637",
+    "build/behavior/deps/unicorn/unicorn_py3/arch/types.py": "525ed179db874a13291f9469bd6243e7293aba17454de9b10a9227106d093787",
+    "build/behavior/deps/unicorn/unicorn_py3/arch/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "build/behavior/deps/unicorn/unicorn_py3/arch/__pycache__/intel.cpython-310.pyc": "5528227fb32c939a592cdea5ff5f84050afd1f64480d80c8bcdf26fa0cb24508",
+    "build/behavior/deps/unicorn/unicorn_py3/arch/__pycache__/intel.cpython-312.pyc": "ce12c68983393cefdc9069c28fc20c3645b2839da2551721c4313ff37bc2c8fc",
+    "build/behavior/deps/unicorn/unicorn_py3/arch/__pycache__/types.cpython-310.pyc": "a9e9946c857305358d3272f4cb783599c2d90b7f8a2d8491830e6981c8ded278",
+    "build/behavior/deps/unicorn/unicorn_py3/arch/__pycache__/types.cpython-312.pyc": "de967fc5e40ddd5747923b73f00c0c566764e65745a58116406fc020269b56bd",
+    "build/behavior/deps/unicorn/unicorn_py3/arch/__pycache__/__init__.cpython-310.pyc": "bdc3d31bdbae3a6309f27a31a5fa2c4d5859e6d1d2121ef0d3844aba751ea92e",
+    "build/behavior/deps/unicorn/unicorn_py3/arch/__pycache__/__init__.cpython-312.pyc": "cb0fa0ffef7ec92aa8b6a88f4cc1b6a7ff649d3bc0c05a0d483c570391c6c7c4",
+    "build/behavior/deps/unicorn/unicorn_py3/__pycache__/unicorn.cpython-310.pyc": "d0fe3cb7bc6d8cc55cf5ad32872d963208b27b1a97472892a2bfa1bfa13f0991",
+    "build/behavior/deps/unicorn/unicorn_py3/__pycache__/unicorn.cpython-312.pyc": "650fd9ce3589a6da86d11b2056d5f8320a1407d2d978e95b7918f3fe137ab369",
+    "build/behavior/deps/unicorn/unicorn_py3/__pycache__/__init__.cpython-310.pyc": "b77817d6a7c68f54e7b4ee8e762cc7be5194e69b97f8c87a3e970b9dd4c29f8f",
+    "build/behavior/deps/unicorn/unicorn_py3/__pycache__/__init__.cpython-312.pyc": "a088dada0860a48b3d2e0bf205356eae80d0480e033ec964c798907ebae92df9",
+    "build/behavior/deps/unicorn/__pycache__/arm64_const.cpython-310.pyc": "0c41c522bba64b1360399988be32b2a202a3805aa96b5a792038daa1b2e90a8b",
+    "build/behavior/deps/unicorn/__pycache__/arm64_const.cpython-312.pyc": "b723a6e76b669efa74ff1b62db2c3d5b45794dbd94784090ace597059ed872d6",
+    "build/behavior/deps/unicorn/__pycache__/arm_const.cpython-310.pyc": "99ef75d995771c8ce248a9433edcadecab41de2cb07153fc2b50e608fcefa558",
+    "build/behavior/deps/unicorn/__pycache__/arm_const.cpython-312.pyc": "04f621999c3e5ff0887b8e1fdd4c49258051c6b948f0820e0b9c065b8bb2c1cf",
+    "build/behavior/deps/unicorn/__pycache__/m68k_const.cpython-310.pyc": "5074a6952aa3ed9080a8b1ba3be2c4d47ed813bea469c0305ad02a878155d20f",
+    "build/behavior/deps/unicorn/__pycache__/m68k_const.cpython-312.pyc": "53394acd2f9f513d42e4390a6202d49f35b62175983e53e1ace9314f4880ac40",
+    "build/behavior/deps/unicorn/__pycache__/mips_const.cpython-310.pyc": "f8e8bc685fde4f65e4f1afdbfc547deec1be4f1fd42b4c03d5a4e0459b1e357b",
+    "build/behavior/deps/unicorn/__pycache__/mips_const.cpython-312.pyc": "a15f6430d4d902702e121185b79c2048bbf96e7f386214652943c782e28366e2",
+    "build/behavior/deps/unicorn/__pycache__/riscv_const.cpython-310.pyc": "a24140cfde2238dd15e21e459f4675a258b41c12f4615be174149bb593b43a64",
+    "build/behavior/deps/unicorn/__pycache__/riscv_const.cpython-312.pyc": "dea42eb127279841c5e03e0b8cbf6b0b6afe7c94482e592423c6cf5b9df3dec4",
+    "build/behavior/deps/unicorn/__pycache__/s390x_const.cpython-310.pyc": "36fce2874d2c5b5a491da7be485319c11fcfb17bfdb18875bcbffd622b856da9",
+    "build/behavior/deps/unicorn/__pycache__/s390x_const.cpython-312.pyc": "1ea440c19554ad0d0f67b40e175fbb2a5b2c6aa0e1dc38cef91977ceee98d19c",
+    "build/behavior/deps/unicorn/__pycache__/sparc_const.cpython-310.pyc": "3fdc72e9910d636fc5c3bc5d4242dcd8f5347775ec3c959e2781baead428ef18",
+    "build/behavior/deps/unicorn/__pycache__/sparc_const.cpython-312.pyc": "2861977ecee5393e44b965e61d2bb78d6d62efb4f0443e67fe8b0101b1403ef8",
+    "build/behavior/deps/unicorn/__pycache__/tricore_const.cpython-310.pyc": "7a5ef7376f2d8378e222df67bf86171c319b4b8838eaf0160ee8f612630f48cd",
+    "build/behavior/deps/unicorn/__pycache__/tricore_const.cpython-312.pyc": "475deb606cd11872b058ba2cc4c96171ebae1a520b12afbf9ca77b67d11fe80a",
+    "build/behavior/deps/unicorn/__pycache__/unicorn.cpython-310.pyc": "a4df8809743b48f689b3dc65ea3124ccb8678636d442ed3ad79ad5a8f72d53dc",
+    "build/behavior/deps/unicorn/__pycache__/unicorn.cpython-312.pyc": "f317b6d11cf9c82436efcc4c8324835fd5db8f0180facaae1e4ecd4d996a71db",
+    "build/behavior/deps/unicorn/__pycache__/unicorn_const.cpython-310.pyc": "25e94b1caac5dbfb35456f43f0def2d025c9104f1f4927d45b496be28a2740ba",
+    "build/behavior/deps/unicorn/__pycache__/unicorn_const.cpython-312.pyc": "3637df4006ea927ead6832dcfefc65d771e57c7785206e925646a90645b62e84",
+    "build/behavior/deps/unicorn/__pycache__/x86_const.cpython-310.pyc": "6b19ef28be3508e33492af8578df7ae6ef66b5c535e1fa85761b6fcfbf5ab31f",
+    "build/behavior/deps/unicorn/__pycache__/x86_const.cpython-312.pyc": "50c60226a160ba98ee84e31d2e79566f9fcc7494b04d36c54a15935d52ead0ea",
+    "build/behavior/deps/unicorn/__pycache__/__init__.cpython-310.pyc": "32adb0c421721d555df52c71903870ac1f99bca07db683d55af66e21e3989b3e",
+    "build/behavior/deps/unicorn/__pycache__/__init__.cpython-312.pyc": "cd0fef86cf7b12df8050c672f8711784f6b94a8f4e85ea65f7a8fc0f1f62c2e1"
+  },
+  "inputs_sha256_after": {
+    "portable/tests/windows/close_event/test_close_event.py": "1183184b59dec426dca6d5f04984042e8b428d3127fca6259b3cf61c620f3dab",
+    "portable/tests/windows/close_event/probe.c": "95feb6af4c603b702c0aad568b7db419f366b663003c21455a2e68ce66434c60",
+    "portable/tests/windows/close_event/close_event_contract.c": "3840262fafaf74995ce6d35526ea4d7cefe527f49f63d4863af914bf636df7f0",
+    "portable/tests/windows/close_event/close_event_contract.h": "bb375714cf4bc4e9adadd61eb25e74431068b0ce21f50479802bf3db8a90e07b",
+    "src/root/m218D.c": "3ccc2dedf58831dc2f853beb3133847e7f1f8c1883c445379fd5584b3255112e",
+    "src/root/m20E8.c": "c2ec2474010ef9821fd46cdf72e50f164c850446b6f4b051a91d474b53dd5ae2",
+    "src/root/m2505.c": "22a03f15e95fff376d27211426c4f9e3395e16e5decd92ef501fbfe3c1aba623",
+    "src/root/m1FD2.c": "f4359bdaf4cfc0fe326a54cf8a1eacb9ba3098b710bf2a561b3d0f48569bf6d8",
+    "src/root/m1B73.asm": "3097a6b03ff1d8bdfa7d573632d9905de88d754c8b1e047de4014c4f186cb848",
+    "tools/behavior.py": "2c0799048057f59eae61a48be4d695278635594484adf0c70bf46c51b4e0c799",
+    "tools/exe.py": "d560f69dcdf0d1c9e89278b50bebe225a9b86db2c259fa54ec9eace6ea05a8b5",
+    "tools/functions.py": "0f67c8d9eb01e319620c9342e79c35f76006091d860894aad6dcf8d61ee2b39e",
+    "tools/match.py": "44fdd8b939b2bbf135d8947d8f6ef6b1854dec133da4af86c55eb94f02869b56",
+    "tools/modctx.py": "33f3a4e3d77371e3095bfeb00358c13bc7838235c27bfe8898dba7e313f1cc25",
+    "tools/modules.py": "8a5c1e85db6970cce3c693c016b313b7ee1922fa6eaf146a00391bfea86edf1a",
+    "tools/omf.py": "951137ecbfaeb6e40fd5230c94398141da7ec7bdb7399d9cd74d46ded3045612",
+    "tools/symbols.py": "e3f25fb66717f743dea126e56b5b44538d452fb5a2d52695ef27cb5069bc1793",
+    "layout/oracle.lock.json": "2c6d9e98c688621ad49a08c78d0e0968f4076b036be56ec0738217b533ccde13",
+    "layout/symbols.json": "0f5dd5b0a211945a97782cfccdb9bb31b0dfd07fcde5df4d4f9486b487eb0125",
+    "assets/SIMANT.EXE": "aa0596c6766322a8229ee3c36e57048c92adc82d50fbe2ef37afb8b85fcf4f11",
+    "build/behavior/deps/unicorn/arm64_const.py": "ddadd814eccd0a312bb43da7b4f2298690660bd5698c27edc306b1d981cff972",
+    "build/behavior/deps/unicorn/arm_const.py": "ace0c3e49f61649034a1bec4279576b67e064df146ea8062c67e68dc14e6eb7b",
+    "build/behavior/deps/unicorn/m68k_const.py": "af95f32f2810fe19888ac723db70c74c7fb1df2bc8ba3578ede0a28b8eca94a7",
+    "build/behavior/deps/unicorn/mips_const.py": "087925a25a128662e095bb861af3c38a2a6c522fc21e222e31b71aeacaaa63d3",
+    "build/behavior/deps/unicorn/ppc_const.py": "11e0c52a1c137874352119fb3d1621639079feda6574ee575271ef683a0a8f17",
+    "build/behavior/deps/unicorn/py.typed": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "build/behavior/deps/unicorn/riscv_const.py": "86e08d5f6327d154306d5d02899331892de6f44020ff86900a84d2b212205925",
+    "build/behavior/deps/unicorn/s390x_const.py": "4f6194d1697d8684921782a81f494458dc859f8ebf2f78e30f673bd5f7cd590f",
+    "build/behavior/deps/unicorn/sparc_const.py": "9dd58fa5aeab225a0f8186f653f5c8fc5fd161b75ccc6a541e5af79f36af2698",
+    "build/behavior/deps/unicorn/tricore_const.py": "88310f61e12b731b2550031eb6423fbf815e66428b483132d3df47614c9d53ae",
+    "build/behavior/deps/unicorn/unicorn.py": "2aed71e6d5bc60807198cdcc3ed43a485a7acae1f41f08d986137afc55df2029",
+    "build/behavior/deps/unicorn/unicorn_const.py": "c21d7c49f62296591a5f09ed0119ef95083b82f5f3f66b829578784c7b164368",
+    "build/behavior/deps/unicorn/unicorn_py2.py": "b82ccc7c00762e10f0326e8d8ad4381872cf531799d5e003ad52c9d7ac61ae42",
+    "build/behavior/deps/unicorn/x86_const.py": "d7663db6425f52838f3e79e45a8fe22b6c02be7edb44367ea2118aec04ee5728",
+    "build/behavior/deps/unicorn/__init__.py": "0e8ac7115c755994a968fa865bd1b2f2075edea715c17e91d62af2cc52c13392",
+    "build/behavior/deps/unicorn/include/unicorn/arm.h": "7746a8a6714ddfce7036a3d41c4d26c59b3edaf532458f8a8a35127eb61b0381",
+    "build/behavior/deps/unicorn/include/unicorn/arm64.h": "a0f19ff95563eb45ec1b78dfd759e1b23ac19ee562ee8554a5270bb53144621c",
+    "build/behavior/deps/unicorn/include/unicorn/m68k.h": "1647203eb80ee34891ff7ec217e3d2b6b1b14532df32d33e75a5738b546050b1",
+    "build/behavior/deps/unicorn/include/unicorn/mips.h": "e3aa91f7c2aeda746abfe1fb44e4de3cbe866517a478f1acc7739b7e6474754d",
+    "build/behavior/deps/unicorn/include/unicorn/platform.h": "a1b9ae7e9384ad18942b7abaaaf62d51d604e3722753d7e20dd1b82b1eb00b9f",
+    "build/behavior/deps/unicorn/include/unicorn/ppc.h": "402f7db37c4a4f8b90c5e2f80b85dee031d814b37aed7c5a671a601f4a42a80c",
+    "build/behavior/deps/unicorn/include/unicorn/riscv.h": "313cf8db927aa8501496ff5c89fffc2a690837fe394a25d7dcbd7d4caafa7e64",
+    "build/behavior/deps/unicorn/include/unicorn/s390x.h": "591db40b7c93b1584da3b93a98ccc01ef2df89c9be3c3d348721b8cccff187c8",
+    "build/behavior/deps/unicorn/include/unicorn/sparc.h": "4f4ffd28c02be0fe1f18695f755b8a5964d07d563c5f32156c716acf69e96bc5",
+    "build/behavior/deps/unicorn/include/unicorn/tricore.h": "4a6baa756c91c2ef74813d95800d556e89b133a860ea6970160332f32aaa3fab",
+    "build/behavior/deps/unicorn/include/unicorn/unicorn.h": "0414b3948a8bdd3f28451f7f2ae03b5c790d08ea93e6e02b2e4db19a0de49507",
+    "build/behavior/deps/unicorn/include/unicorn/x86.h": "dd75a7680a5552717a4abe559c10f5b805f7c68ae6f2be9729387f2300860c0f",
+    "build/behavior/deps/unicorn/lib/unicorn.dll": "010d85dce84b8f6ffaec3d5420f1b5f7768f859eb831be574c7da23e656ee8f1",
+    "build/behavior/deps/unicorn/lib/unicorn.lib": "60a95ffb6572942b7db1f57901d23e664ed22a54a7d92dfcad15fc3e3ef1f724",
+    "build/behavior/deps/unicorn/unicorn_py3/unicorn.py": "b4de7d560790a587157b17edd71c83b4f2d2bade2447d1a5433c497468ac8aeb",
+    "build/behavior/deps/unicorn/unicorn_py3/__init__.py": "2cd4a0d95ef236b5b9e3efb68b20fb6a6d1fb4190db2e9cc0a6447eb2c0aa755",
+    "build/behavior/deps/unicorn/unicorn_py3/arch/arm.py": "d486ff4a9c3f797e5e57a5201a1e2304b97a54b6bc61e320062f1290f4e3dc33",
+    "build/behavior/deps/unicorn/unicorn_py3/arch/arm64.py": "2e393f3f863da1576619e03abcbda2a2e2e54d673aac98979cf0b6caed8926b4",
+    "build/behavior/deps/unicorn/unicorn_py3/arch/intel.py": "b3b8338a85ac74623e7a67dfb4f44dc9933786a329e64d772987490dbf751637",
+    "build/behavior/deps/unicorn/unicorn_py3/arch/types.py": "525ed179db874a13291f9469bd6243e7293aba17454de9b10a9227106d093787",
+    "build/behavior/deps/unicorn/unicorn_py3/arch/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "build/behavior/deps/unicorn/unicorn_py3/arch/__pycache__/intel.cpython-310.pyc": "5528227fb32c939a592cdea5ff5f84050afd1f64480d80c8bcdf26fa0cb24508",
+    "build/behavior/deps/unicorn/unicorn_py3/arch/__pycache__/intel.cpython-312.pyc": "ce12c68983393cefdc9069c28fc20c3645b2839da2551721c4313ff37bc2c8fc",
+    "build/behavior/deps/unicorn/unicorn_py3/arch/__pycache__/types.cpython-310.pyc": "a9e9946c857305358d3272f4cb783599c2d90b7f8a2d8491830e6981c8ded278",
+    "build/behavior/deps/unicorn/unicorn_py3/arch/__pycache__/types.cpython-312.pyc": "de967fc5e40ddd5747923b73f00c0c566764e65745a58116406fc020269b56bd",
+    "build/behavior/deps/unicorn/unicorn_py3/arch/__pycache__/__init__.cpython-310.pyc": "bdc3d31bdbae3a6309f27a31a5fa2c4d5859e6d1d2121ef0d3844aba751ea92e",
+    "build/behavior/deps/unicorn/unicorn_py3/arch/__pycache__/__init__.cpython-312.pyc": "cb0fa0ffef7ec92aa8b6a88f4cc1b6a7ff649d3bc0c05a0d483c570391c6c7c4",
+    "build/behavior/deps/unicorn/unicorn_py3/__pycache__/unicorn.cpython-310.pyc": "d0fe3cb7bc6d8cc55cf5ad32872d963208b27b1a97472892a2bfa1bfa13f0991",
+    "build/behavior/deps/unicorn/unicorn_py3/__pycache__/unicorn.cpython-312.pyc": "650fd9ce3589a6da86d11b2056d5f8320a1407d2d978e95b7918f3fe137ab369",
+    "build/behavior/deps/unicorn/unicorn_py3/__pycache__/__init__.cpython-310.pyc": "b77817d6a7c68f54e7b4ee8e762cc7be5194e69b97f8c87a3e970b9dd4c29f8f",
+    "build/behavior/deps/unicorn/unicorn_py3/__pycache__/__init__.cpython-312.pyc": "a088dada0860a48b3d2e0bf205356eae80d0480e033ec964c798907ebae92df9",
+    "build/behavior/deps/unicorn/__pycache__/arm64_const.cpython-310.pyc": "0c41c522bba64b1360399988be32b2a202a3805aa96b5a792038daa1b2e90a8b",
+    "build/behavior/deps/unicorn/__pycache__/arm64_const.cpython-312.pyc": "b723a6e76b669efa74ff1b62db2c3d5b45794dbd94784090ace597059ed872d6",
+    "build/behavior/deps/unicorn/__pycache__/arm_const.cpython-310.pyc": "99ef75d995771c8ce248a9433edcadecab41de2cb07153fc2b50e608fcefa558",
+    "build/behavior/deps/unicorn/__pycache__/arm_const.cpython-312.pyc": "04f621999c3e5ff0887b8e1fdd4c49258051c6b948f0820e0b9c065b8bb2c1cf",
+    "build/behavior/deps/unicorn/__pycache__/m68k_const.cpython-310.pyc": "5074a6952aa3ed9080a8b1ba3be2c4d47ed813bea469c0305ad02a878155d20f",
+    "build/behavior/deps/unicorn/__pycache__/m68k_const.cpython-312.pyc": "53394acd2f9f513d42e4390a6202d49f35b62175983e53e1ace9314f4880ac40",
+    "build/behavior/deps/unicorn/__pycache__/mips_const.cpython-310.pyc": "f8e8bc685fde4f65e4f1afdbfc547deec1be4f1fd42b4c03d5a4e0459b1e357b",
+    "build/behavior/deps/unicorn/__pycache__/mips_const.cpython-312.pyc": "a15f6430d4d902702e121185b79c2048bbf96e7f386214652943c782e28366e2",
+    "build/behavior/deps/unicorn/__pycache__/riscv_const.cpython-310.pyc": "a24140cfde2238dd15e21e459f4675a258b41c12f4615be174149bb593b43a64",
+    "build/behavior/deps/unicorn/__pycache__/riscv_const.cpython-312.pyc": "dea42eb127279841c5e03e0b8cbf6b0b6afe7c94482e592423c6cf5b9df3dec4",
+    "build/behavior/deps/unicorn/__pycache__/s390x_const.cpython-310.pyc": "36fce2874d2c5b5a491da7be485319c11fcfb17bfdb18875bcbffd622b856da9",
+    "build/behavior/deps/unicorn/__pycache__/s390x_const.cpython-312.pyc": "1ea440c19554ad0d0f67b40e175fbb2a5b2c6aa0e1dc38cef91977ceee98d19c",
+    "build/behavior/deps/unicorn/__pycache__/sparc_const.cpython-310.pyc": "3fdc72e9910d636fc5c3bc5d4242dcd8f5347775ec3c959e2781baead428ef18",
+    "build/behavior/deps/unicorn/__pycache__/sparc_const.cpython-312.pyc": "2861977ecee5393e44b965e61d2bb78d6d62efb4f0443e67fe8b0101b1403ef8",
+    "build/behavior/deps/unicorn/__pycache__/tricore_const.cpython-310.pyc": "7a5ef7376f2d8378e222df67bf86171c319b4b8838eaf0160ee8f612630f48cd",
+    "build/behavior/deps/unicorn/__pycache__/tricore_const.cpython-312.pyc": "475deb606cd11872b058ba2cc4c96171ebae1a520b12afbf9ca77b67d11fe80a",
+    "build/behavior/deps/unicorn/__pycache__/unicorn.cpython-310.pyc": "a4df8809743b48f689b3dc65ea3124ccb8678636d442ed3ad79ad5a8f72d53dc",
+    "build/behavior/deps/unicorn/__pycache__/unicorn.cpython-312.pyc": "f317b6d11cf9c82436efcc4c8324835fd5db8f0180facaae1e4ecd4d996a71db",
+    "build/behavior/deps/unicorn/__pycache__/unicorn_const.cpython-310.pyc": "25e94b1caac5dbfb35456f43f0def2d025c9104f1f4927d45b496be28a2740ba",
+    "build/behavior/deps/unicorn/__pycache__/unicorn_const.cpython-312.pyc": "3637df4006ea927ead6832dcfefc65d771e57c7785206e925646a90645b62e84",
+    "build/behavior/deps/unicorn/__pycache__/x86_const.cpython-310.pyc": "6b19ef28be3508e33492af8578df7ae6ef66b5c535e1fa85761b6fcfbf5ab31f",
+    "build/behavior/deps/unicorn/__pycache__/x86_const.cpython-312.pyc": "50c60226a160ba98ee84e31d2e79566f9fcc7494b04d36c54a15935d52ead0ea",
+    "build/behavior/deps/unicorn/__pycache__/__init__.cpython-310.pyc": "32adb0c421721d555df52c71903870ac1f99bca07db683d55af66e21e3989b3e",
+    "build/behavior/deps/unicorn/__pycache__/__init__.cpython-312.pyc": "cd0fef86cf7b12df8050c672f8711784f6b94a8f4e85ea65f7a8fc0f1f62c2e1"
+  },
+  "native_executable_sha256": "a4f625557f7ecf027227b91f3e3d56a574caff47a15ebe94bba1ec8f9f470009",
+  "oracle_sha256": "aa0596c6766322a8229ee3c36e57048c92adc82d50fbe2ef37afb8b85fcf4f11",
+  "compiler": "gcc (Rev10, Built by MSYS2 project) 12.2.0"
+}
