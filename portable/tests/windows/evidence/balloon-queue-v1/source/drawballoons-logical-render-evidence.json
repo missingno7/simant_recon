@@ -1,0 +1,435 @@
+{
+  "schema": "simant-behavior-evidence-v1",
+  "function": "DrawBalloons",
+  "status": "BEHAVIOR_EXACT",
+  "source": {
+    "path": "evidence/behavior/functions/DrawBalloons/contracts/logical-render-v1/module.c",
+    "sha256": "e41a4ab8c56c0d4923ace8b02027f2471feee049aabe0577588e206e930b4db2",
+    "whole_module": true,
+    "module": "root:0250"
+  },
+  "suite": {
+    "path": "tools/behavior_suites/archive/render_small-d25a35e5a516d8f4.py",
+    "sha256": "d25a35e5a516d8f490bec1678e583c3a449c648b0a105a7bc32d3734841230df",
+    "id": "render_small_v1"
+  },
+  "harness": {
+    "runner": {
+      "path": "evidence/behavior/harnesses/render-small-d25a35e5-20261002/tools/behavior.py",
+      "sha256": "2c0799048057f59eae61a48be4d695278635594484adf0c70bf46c51b4e0c799"
+    },
+    "components": {
+      "tools/exe.py": {
+        "path": "evidence/behavior/harnesses/render-small-d25a35e5-20261002/tools/exe.py",
+        "sha256": "d560f69dcdf0d1c9e89278b50bebe225a9b86db2c259fa54ec9eace6ea05a8b5"
+      },
+      "tools/functions.py": {
+        "path": "evidence/behavior/harnesses/render-small-d25a35e5-20261002/tools/functions.py",
+        "sha256": "0f67c8d9eb01e319620c9342e79c35f76006091d860894aad6dcf8d61ee2b39e"
+      },
+      "tools/match.py": {
+        "path": "evidence/behavior/harnesses/render-small-d25a35e5-20261002/tools/match.py",
+        "sha256": "44fdd8b939b2bbf135d8947d8f6ef6b1854dec133da4af86c55eb94f02869b56"
+      },
+      "tools/modctx.py": {
+        "path": "evidence/behavior/harnesses/render-small-d25a35e5-20261002/tools/modctx.py",
+        "sha256": "33f3a4e3d77371e3095bfeb00358c13bc7838235c27bfe8898dba7e313f1cc25"
+      },
+      "tools/modules.py": {
+        "path": "evidence/behavior/harnesses/render-small-d25a35e5-20261002/tools/modules.py",
+        "sha256": "8a5c1e85db6970cce3c693c016b313b7ee1922fa6eaf146a00391bfea86edf1a"
+      },
+      "tools/autosearch.py": {
+        "path": "evidence/behavior/harnesses/render-small-d25a35e5-20261002/tools/autosearch.py",
+        "sha256": "9c2727a875ee94c66ceac868d64c7070c316a5dbbef7cd6b21a670b44a2e1806"
+      },
+      "tools/compiler.py": {
+        "path": "evidence/behavior/harnesses/render-small-d25a35e5-20261002/tools/compiler.py",
+        "sha256": "ef1d59a0fbe0e0780a6b8480e13d7d07859a14ae185c00a4420e1238a2ae35bb"
+      },
+      "tools/omf.py": {
+        "path": "evidence/behavior/harnesses/render-small-d25a35e5-20261002/tools/omf.py",
+        "sha256": "951137ecbfaeb6e40fd5230c94398141da7ec7bdb7399d9cd74d46ded3045612"
+      },
+      "tools/symbols.py": {
+        "path": "evidence/behavior/harnesses/render-small-d25a35e5-20261002/tools/symbols.py",
+        "sha256": "e3f25fb66717f743dea126e56b5b44538d452fb5a2d52695ef27cb5069bc1793"
+      },
+      "tools/lockfile.py": {
+        "path": "evidence/behavior/harnesses/render-small-d25a35e5-20261002/tools/lockfile.py",
+        "sha256": "6773cd28150381c88a781862d0034e2ff0023c21e82aff7fad5358efb1bf34c5"
+      },
+      "tools/csrc.py": {
+        "path": "evidence/behavior/harnesses/render-small-d25a35e5-20261002/tools/csrc.py",
+        "sha256": "3b13b7dbc17f39cbca7f329a3043ff363f91279c12312ba865941653c412567c"
+      },
+      "tools/srcrules.py": {
+        "path": "evidence/behavior/harnesses/render-small-d25a35e5-20261002/tools/srcrules.py",
+        "sha256": "e34f8bd91d224df26b5981acd9316b00bdf96e3dcc28e744aaebfc466046fc30"
+      },
+      "tools/variants.py": {
+        "path": "evidence/behavior/harnesses/render-small-d25a35e5-20261002/tools/variants.py",
+        "sha256": "b5dfd77ba5a96649d3e1503c1619b7fa6d9edc5f32c1f7684361fbfa59fa55c9"
+      },
+      "layout/toolchain.json": {
+        "path": "evidence/behavior/harnesses/render-small-d25a35e5-20261002/layout/toolchain.json",
+        "sha256": "c0bb71cd8b1f4a1a1f91299bd3b6148aa67b7a1d12c3c3946a229272593eb274"
+      },
+      "tools/behavior_ledger.py": {
+        "path": "evidence/behavior/harnesses/render-small-d25a35e5-20261002/tools/behavior_ledger.py",
+        "sha256": "6788ec00f1c02fd93d98b96b4c8d61d2b704c97308b2c3f4024bc3095e76395f"
+      }
+    },
+    "runner_snapshot_review": {
+      "status": "APPROVED",
+      "reviewer": "root",
+      "reviewed_at": "2026-10-02",
+      "reason": "Exact archived runner/suite identities checked; archive component pins reviewed against the shared executed harness. SS=DS reserved stack is excluded only under enforced caller ABI. Strict fresh whole-module peers/private-data validation remains mandatory.",
+      "runner_snapshot_reviewed": true,
+      "archived_components": [
+        {
+          "component": "tools/exe.py",
+          "path": "evidence/behavior/harnesses/render-small-d25a35e5-20261002/tools/exe.py",
+          "sha256": "d560f69dcdf0d1c9e89278b50bebe225a9b86db2c259fa54ec9eace6ea05a8b5"
+        },
+        {
+          "component": "tools/functions.py",
+          "path": "evidence/behavior/harnesses/render-small-d25a35e5-20261002/tools/functions.py",
+          "sha256": "0f67c8d9eb01e319620c9342e79c35f76006091d860894aad6dcf8d61ee2b39e"
+        },
+        {
+          "component": "tools/match.py",
+          "path": "evidence/behavior/harnesses/render-small-d25a35e5-20261002/tools/match.py",
+          "sha256": "44fdd8b939b2bbf135d8947d8f6ef6b1854dec133da4af86c55eb94f02869b56"
+        },
+        {
+          "component": "tools/modctx.py",
+          "path": "evidence/behavior/harnesses/render-small-d25a35e5-20261002/tools/modctx.py",
+          "sha256": "33f3a4e3d77371e3095bfeb00358c13bc7838235c27bfe8898dba7e313f1cc25"
+        },
+        {
+          "component": "tools/modules.py",
+          "path": "evidence/behavior/harnesses/render-small-d25a35e5-20261002/tools/modules.py",
+          "sha256": "8a5c1e85db6970cce3c693c016b313b7ee1922fa6eaf146a00391bfea86edf1a"
+        },
+        {
+          "component": "tools/autosearch.py",
+          "path": "evidence/behavior/harnesses/render-small-d25a35e5-20261002/tools/autosearch.py",
+          "sha256": "9c2727a875ee94c66ceac868d64c7070c316a5dbbef7cd6b21a670b44a2e1806"
+        },
+        {
+          "component": "tools/compiler.py",
+          "path": "evidence/behavior/harnesses/render-small-d25a35e5-20261002/tools/compiler.py",
+          "sha256": "ef1d59a0fbe0e0780a6b8480e13d7d07859a14ae185c00a4420e1238a2ae35bb"
+        },
+        {
+          "component": "tools/omf.py",
+          "path": "evidence/behavior/harnesses/render-small-d25a35e5-20261002/tools/omf.py",
+          "sha256": "951137ecbfaeb6e40fd5230c94398141da7ec7bdb7399d9cd74d46ded3045612"
+        },
+        {
+          "component": "tools/symbols.py",
+          "path": "evidence/behavior/harnesses/render-small-d25a35e5-20261002/tools/symbols.py",
+          "sha256": "e3f25fb66717f743dea126e56b5b44538d452fb5a2d52695ef27cb5069bc1793"
+        },
+        {
+          "component": "tools/lockfile.py",
+          "path": "evidence/behavior/harnesses/render-small-d25a35e5-20261002/tools/lockfile.py",
+          "sha256": "6773cd28150381c88a781862d0034e2ff0023c21e82aff7fad5358efb1bf34c5"
+        },
+        {
+          "component": "tools/csrc.py",
+          "path": "evidence/behavior/harnesses/render-small-d25a35e5-20261002/tools/csrc.py",
+          "sha256": "3b13b7dbc17f39cbca7f329a3043ff363f91279c12312ba865941653c412567c"
+        },
+        {
+          "component": "tools/srcrules.py",
+          "path": "evidence/behavior/harnesses/render-small-d25a35e5-20261002/tools/srcrules.py",
+          "sha256": "e34f8bd91d224df26b5981acd9316b00bdf96e3dcc28e744aaebfc466046fc30"
+        },
+        {
+          "component": "tools/variants.py",
+          "path": "evidence/behavior/harnesses/render-small-d25a35e5-20261002/tools/variants.py",
+          "sha256": "b5dfd77ba5a96649d3e1503c1619b7fa6d9edc5f32c1f7684361fbfa59fa55c9"
+        },
+        {
+          "component": "layout/toolchain.json",
+          "path": "evidence/behavior/harnesses/render-small-d25a35e5-20261002/layout/toolchain.json",
+          "sha256": "c0bb71cd8b1f4a1a1f91299bd3b6148aa67b7a1d12c3c3946a229272593eb274"
+        },
+        {
+          "component": "tools/behavior_ledger.py",
+          "path": "evidence/behavior/harnesses/render-small-d25a35e5-20261002/tools/behavior_ledger.py",
+          "sha256": "6788ec00f1c02fd93d98b96b4c8d61d2b704c97308b2c3f4024bc3095e76395f"
+        }
+      ]
+    }
+  },
+  "oracle": {
+    "path": "assets/SIMANT.EXE",
+    "sha256": "aa0596c6766322a8229ee3c36e57048c92adc82d50fbe2ef37afb8b85fcf4f11",
+    "lock_sha256": "2c6d9e98c688621ad49a08c78d0e0968f4076b036be56ec0738217b533ccde13"
+  },
+  "historical_manifest_sha256": "025a0a9255d910cae4b122ab5a3f3fb40888bb456d7fe42158db7c9e622fcf50",
+  "checkpoint": {
+    "commit": "54cb824d19c2f897ab17c8b163a954121d4e4843",
+    "date": "2026-10-02"
+  },
+  "contract": {
+    "excluded_effects": [
+      {
+        "effect": "private stack locals and dead stack homes",
+        "reason": "The runner enforces caller ABI and compares projected callback data plus all changed non-stack memory; dead locals are implementation-specific."
+      },
+      {
+        "effect": "physical display/framebuffer pixels",
+        "reason": "The explicit host render/screen boundary captures logical commands and buffers; no physical framebuffer implementation was run."
+      },
+      {
+        "effect": "complete WinPrintf variadic arguments or semantic drawing effects",
+        "reason": "DOS WinPrintf is the empty one-byte RETF diagnostic sink; fixture captures fixed/truncated stack prefixes and does not cover variable call payloads."
+      },
+      {
+        "effect": "f_0250_0915/f_0250_0B86 tile-renderer backend state and pixels",
+        "reason": "f_0250_0915 may leave a final g_9126 mutation and f_0250_0B86 may write g_3D20; next f_0250_1018 resets both tile inputs before any following iteration, and the target has no later source read of these values. Their final external state and raster bytes are explicitly outside this target contract."
+      },
+      {
+        "effect": "f_0250_5058/f_1E57_08F5 clipping globals and nested clip Ralloc effects",
+        "reason": "The target consumes fd_50F6_110C for rectangle geometry but does not read fd_50F6_1104 or clip globals later. The surrounding f_0250_13A6 caller and real renderer may consume clipping state after this function; the setup hook logs a request only."
+      },
+      {
+        "effect": "fd_50F6_37EE/fd_50F6_37EA physical screen and composed-pixel writes",
+        "reason": "fd_50F6_37EE is a void synthetic eight-word hook with no return-dependent path. Its no-write callback omits screen-save/restore and composed-buffer pixel effects; only call ordering and pointers/arguments are projected."
+      }
+    ],
+    "id": "render_small_v1-DrawBalloons-normalized-v1",
+    "input_domain": {
+      "directed_cases": 9,
+      "fixture_and_sampling": "Balloon resource acquisition and pointer/buffer transfer under valid Ralloc fixtures, with normalized blit command trace.",
+      "partition": {
+        "coordinate_ranges": {
+          "x": [
+            -16,
+            640
+          ],
+          "y": [
+            48,
+            480
+          ]
+        },
+        "modes": [
+          1,
+          2,
+          3
+        ],
+        "picture_heights": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10,
+          11,
+          12
+        ],
+        "picture_widths": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10,
+          11,
+          12,
+          13
+        ],
+        "planes": [
+          0,
+          1,
+          2,
+          3
+        ],
+        "spider_clip_cases": 254
+      },
+      "randomized_cases": 1000,
+      "seeds": [
+        48879
+      ]
+    },
+    "limits": [
+      "The picture blit function-pointer address is a synthetic six-argument host slot (fd_50F6_37EA role), not proof that same-address f_0250_0721 body was invoked. Host pixel transfer/blit is modeled; no physical display/framebuffer equivalence.",
+      "Finite directed/random domain only; not universal proof.",
+      "No registry or canonical source modified.",
+      "Source audit proves only within-DrawBalloons local control/data noninterference for omitted tile globals; final g_9126 may persist after return and is excluded.",
+      "No faithful final composed buffer or physical pixel output is claimed; fd_50F6_37EE and fd_50F6_37EA are host boundary projections.",
+      "f_0250_5058 clip-list state may affect the surrounding caller after DrawBalloons returns and is not covered."
+    ],
+    "required_effects": [
+      "return and caller ABI",
+      "ordered helper/render commands and arguments",
+      "global/map/cache writes",
+      "projected far-pointer data and nonstack memory"
+    ],
+    "required_helpers": [
+      {
+        "name": "f_0250_062A",
+        "must_execute": true
+      },
+      {
+        "name": "f_0250_0643",
+        "must_execute": true
+      },
+      {
+        "name": "f_0250_0721",
+        "must_execute": true,
+        "certification": {
+          "path": "evidence/behavior/helpers/balloon-contracts-v2/DrawBalloons/f_0250_0721.json",
+          "sha256": "0c61f18462284a38995562af233fe5feb73f69f8b8121c5cd880e3b9d79e7b0f"
+        }
+      },
+      {
+        "name": "f_0250_0915",
+        "must_execute": true,
+        "certification": {
+          "path": "evidence/behavior/helpers/balloon-contracts-v2/DrawBalloons/f_0250_0915.json",
+          "sha256": "7018fd3c38a907d1b1379ec586e23537dbf55f7a08a6538b132a28ba5bb80ab4"
+        }
+      },
+      {
+        "name": "f_0250_0ADB",
+        "must_execute": true,
+        "certification": {
+          "path": "evidence/behavior/helpers/balloon-contracts-v2/DrawBalloons/f_0250_0ADB.json",
+          "sha256": "0de0bc38747769323a0b6ce986d15b5faf7b00a5381d55f6cfbeabdfc79e458d"
+        }
+      },
+      {
+        "name": "f_0250_0B86",
+        "must_execute": true,
+        "certification": {
+          "path": "evidence/behavior/helpers/balloon-contracts-v2/DrawBalloons/f_0250_0B86.json",
+          "sha256": "b85fc9de140c5fdebf00d100de58fb53a8f67c3349decbb40537876e80cf37b4"
+        }
+      },
+      {
+        "name": "f_0250_0D10",
+        "must_execute": true,
+        "certification": {
+          "path": "evidence/behavior/helpers/balloon-contracts-v2/DrawBalloons/f_0250_0D10.json",
+          "sha256": "40a2d573737dadfbab96d1a20108e5b92e1295315b142d66a91ebf941d163e30"
+        }
+      },
+      {
+        "name": "f_0250_5058",
+        "must_execute": true,
+        "certification": {
+          "path": "evidence/behavior/helpers/balloon-contracts-v2/DrawBalloons/f_0250_5058.json",
+          "sha256": "0d6349d4f9923fffffaba67b6da5411072e31a439c3cd112d41afa9187a591aa"
+        }
+      },
+      {
+        "name": "f_1629_000C",
+        "must_execute": true,
+        "certification": {
+          "path": "evidence/behavior/helpers/balloon-contracts-v2/DrawBalloons/f_1629_000C.json",
+          "sha256": "4e4c8c070dbce5faec548d6b1940b4eaecb3783838b3584b86914db3f85c8828"
+        }
+      },
+      {
+        "name": "f_171C_1A9E",
+        "must_execute": true
+      },
+      {
+        "name": "f_171C_1B84",
+        "must_execute": true
+      },
+      {
+        "name": "f_171C_1BBA",
+        "must_execute": true
+      },
+      {
+        "name": "f_171C_1C0A",
+        "must_execute": true
+      },
+      {
+        "name": "f_1A53_00BA",
+        "must_execute": true,
+        "certification": {
+          "path": "evidence/behavior/helpers/balloon-contracts-v2/DrawBalloons/f_1A53_00BA.json",
+          "sha256": "618ec5ea977d7749b573b6fc05535e9001f86f4302145dd32c6e508c89344248"
+        }
+      },
+      {
+        "name": "f_24AB_02AD",
+        "must_execute": true,
+        "certification": {
+          "path": "evidence/behavior/helpers/balloon-contracts-v2/DrawBalloons/f_24AB_02AD.json",
+          "sha256": "4b249404a9bb319973eba2c4f771e27581f3e23f590af2ce771b0f13f2270f9a"
+        }
+      },
+      {
+        "name": "WinPrintf",
+        "must_execute": true,
+        "certification": {
+          "path": "evidence/behavior/helpers/balloon-contracts-v2/DrawBalloons/WinPrintf.json",
+          "sha256": "a25501efaeeac5b906692f4a1b2f7d23f69c40492f0e3b0365da427f074dff47"
+        }
+      }
+    ],
+    "review": {
+      "reviewed_at": "2026-10-02",
+      "reviewer": "root",
+      "status": "APPROVED",
+      "reason": "Read original and candidate DrawBalloons, f1018 tile reset, f0915 mutation, f0B86 scratch pixels, f5058/f1E5708F5 clip setup, and void fd37EA/fd37EE transfer sites. Their ordered logical requests and caller own writes match over the retained 1009 cases. Source dataflow supports the specified host boundary exclusions; final backend tile/clip/pixel state is not claimed. Failed standalone controls are diagnostic only."
+    },
+    "required_effect_scope": {
+      "return and caller ABI": "Raw runner/ledger category for the controlled host-provider execution. Backend mutations excluded below are not claims of original helper-body equivalence.",
+      "ordered helper/render commands and arguments": "Raw runner/ledger category for the controlled host-provider execution. Backend mutations excluded below are not claims of original helper-body equivalence.",
+      "global/map/cache writes": "Raw runner/ledger category for the controlled host-provider execution. Backend mutations excluded below are not claims of original helper-body equivalence.",
+      "projected far-pointer data and nonstack memory": "Raw runner/ledger category for the controlled host-provider execution. Backend mutations excluded below are not claims of original helper-body equivalence."
+    }
+  },
+  "run_report": {
+    "path": "evidence/behavior/functions/DrawBalloons/contracts/logical-render-v1/run.json",
+    "sha256": "13f14f3646bd1f1eb0d6720259d2760db507d4eb74d805d839d4146ea7951490"
+  },
+  "negative_controls": {
+    "path": "evidence/behavior/functions/DrawBalloons/contracts/logical-render-v1/negative-controls.json",
+    "sha256": "e70b65cc49b10326097a5ebce7b9187f610b55968622f2d511296cca76c81830"
+  },
+  "historical_difference": {
+    "description": "The compiler-produced whole-module candidate is behaviorally compared in the pinned finite domain; this packet makes no acceptance claim and strict historical byte proof remains separately gated.",
+    "evidence_refs": [
+      "evidence/behavior/harnesses/render-small-d25a35e5-20261002/runs/DrawBalloons/raw-run.original.json",
+      "evidence/behavior/harnesses/render-small-d25a35e5-20261002/reviews/DrawBalloons/callsite-abi.json"
+    ],
+    "reason_exact_stopped": "This packet is a review proposal for a bounded render/resource contract; it does not substitute semantic execution for historical byte, fixup, relocation, or extent acceptance."
+  },
+  "semantic_evidence": [
+    {
+      "description": "Balloon resource acquisition and pointer/buffer transfer under valid Ralloc fixtures, with normalized blit command trace.",
+      "reference": "evidence/behavior/harnesses/render-small-d25a35e5-20261002/reviews/DrawBalloons/callsite-abi.json"
+    },
+    {
+      "description": "Raw directed/random differential report, case ledger and source-mutant controls are retained without changing observations.",
+      "reference": "evidence/behavior/harnesses/render-small-d25a35e5-20261002/runs/DrawBalloons/raw-run.json"
+    },
+    {
+      "description": "Source-specific proof of omitted tile-renderer and clip-state dataflow and limits; does not change the paired corpus.",
+      "reference": "evidence/behavior/harnesses/render-small-d25a35e5-20261002/reviews/DrawBalloons/proposals/drawballoons-caller-state-audit.json"
+    }
+  ],
+  "evidence_date": "2026-10-02",
+  "review_record": {
+    "path": "evidence/behavior/functions/DrawBalloons/contracts/logical-render-v1/contract-review.json",
+    "sha256": "3c50ebc5f5c846c0d4eb4efafba998bc9361503fa8f54e8a2dcd9c3e9d353286"
+  }
+}

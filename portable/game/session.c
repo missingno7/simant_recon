@@ -231,6 +231,7 @@ SimSessionStatus sim_session_init(SimSession *session,
     session->world.tick_count_delays[2] = 0;
     session->world.tick_count_delays[3] = -1;
     session->feeding.next_food_threshold = 0x28;
+    sim_setup_controls_init_data(&session->setup_controls);
     session->setup_controls.mode_current = 0;
     session->setup_controls.caste_current = 0;
     bind_context(session);

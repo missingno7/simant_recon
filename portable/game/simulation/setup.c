@@ -19,6 +19,17 @@ static const SimSetupTriangle caste_presets[4] = {
     { 0x0000u, 0x0000u, 0xffffu }
 };
 
+void sim_setup_controls_init_data(SimSetupControls *controls)
+{
+    if (controls == 0 || controls->source_data_initialized)
+        return;
+    controls->mode_defaults = initial_mode_levels;
+    controls->caste_defaults = initial_caste_levels;
+    memcpy(controls->mode_levels, mode_presets, sizeof mode_presets);
+    memcpy(controls->caste_levels, caste_presets, sizeof caste_presets);
+    controls->source_data_initialized = 1;
+}
+
 void sim_setup_clear_history(SimSetupState *state, int16_t new_game)
 {
     if (state == 0)
@@ -128,6 +139,8 @@ SimSetupStatus sim_setup_init_controls(SimSetupControls *controls,
 
     if (controls == 0)
         return SIM_SETUP_INVALID_ARGUMENT;
+    if (!controls->source_data_initialized)
+        return SIM_SETUP_INVALID_ARGUMENT;
     if (hooks == 0 || hooks->resource_size == 0 ||
         hooks->get_object_rect == 0 || hooks->refresh_control == 0)
         return SIM_SETUP_UNSUPPORTED;
@@ -150,10 +163,10 @@ SimSetupStatus sim_setup_init_controls(SimSetupControls *controls,
     next.caste_enabled = 1;
     next.state_0370 = -1;
     next.state_024e = -1;
-    next.mode_level = initial_mode_levels;
-    next.caste_level = initial_caste_levels;
-    memcpy(next.mode_levels, mode_presets, sizeof mode_presets);
-    memcpy(next.caste_levels, caste_presets, sizeof caste_presets);
+    next.mode_level = next.mode_defaults;
+    next.caste_level = next.caste_defaults;
+    next.mode_levels[0] = next.mode_defaults;
+    next.caste_levels[0] = next.caste_defaults;
 
     status = refresh_one(&next, hooks, SIM_SETUP_MODE_CONTROL,
                          &next.mode_level);

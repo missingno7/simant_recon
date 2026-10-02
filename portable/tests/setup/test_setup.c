@@ -133,6 +133,7 @@ static void test_controls_source_order_and_defaults(void)
     SetupTrace trace = { 0 };
     SimSetupHooks hooks = make_hooks(&trace);
     memset(&controls, 0, sizeof controls);
+    sim_setup_controls_init_data(&controls);
     controls.mode_current = 3;
     controls.caste_current = 2;
 
@@ -182,6 +183,7 @@ static void test_missing_callbacks_fail_before_side_effects(void)
     SetupTrace trace = { 0 };
     SimSetupHooks hooks = make_hooks(&trace);
     memset(&controls, 0x5a, sizeof controls);
+    sim_setup_controls_init_data(&controls);
     before = controls;
     hooks.resource_size = 0;
     assert(sim_setup_init_controls(&controls, &hooks) == SIM_SETUP_UNSUPPORTED);
@@ -195,6 +197,7 @@ static void test_slope_retains_source_long_width(void)
     SetupTrace trace = { 0 };
     SimSetupHooks hooks = make_hooks(&trace);
     memset(&controls, 0, sizeof controls);
+    sim_setup_controls_init_data(&controls);
     trace.wide_caste_rect = 1;
     assert(sim_setup_init_controls(&controls, &hooks) == SIM_SETUP_OK);
     assert(controls.mode_slope == 256);
@@ -207,6 +210,7 @@ static void test_missing_resource_fails_closed(void)
     SetupTrace trace = { 0 };
     SimSetupHooks hooks = make_hooks(&trace);
     memset(&controls, 0x5a, sizeof controls);
+    sim_setup_controls_init_data(&controls);
     before = controls;
     trace.fail_resource = 1;
     assert(sim_setup_init_controls(&controls, &hooks) == SIM_SETUP_CALLBACK_FAILED);
@@ -220,12 +224,79 @@ static void test_later_callback_failure_does_not_publish_partial_state(void)
     SetupTrace trace = { 0 };
     SimSetupHooks hooks = make_hooks(&trace);
     memset(&controls, 0x5a, sizeof controls);
+    sim_setup_controls_init_data(&controls);
     before = controls;
     trace.fail_refresh_at = 1;
     assert(sim_setup_init_controls(&controls, &hooks) == SIM_SETUP_CALLBACK_FAILED);
     assert(trace.resource_calls == 1 && trace.rect_calls == 2);
     assert(trace.refresh_calls == 1);
     assert(memcmp(&controls, &before, sizeof controls) == 0);
+}
+
+static void test_init_controls_requires_explicit_data_image(void)
+{
+    SimSetupControls controls, before;
+    SetupTrace trace = { 0 };
+    SimSetupHooks hooks = make_hooks(&trace);
+    memset(&controls, 0, sizeof controls);
+    before = controls;
+    assert(sim_setup_init_controls(&controls, &hooks) == SIM_SETUP_INVALID_ARGUMENT);
+    assert(memcmp(&controls, &before, sizeof controls) == 0);
+    assert(trace.cursor == 0);
+}
+
+static void test_repeated_init_preserves_mutable_presets_and_selectors(void)
+{
+    SimSetupControls controls;
+    SetupTrace first_trace = { 0 }, second_trace = { 0 };
+    SimSetupHooks hooks = make_hooks(&first_trace);
+    SimSetupTriangle mode_tail[3], caste_tail[3];
+    SimSetupTriangle mode_default = { 0x1234u, 0x5678u, 0x9abcu };
+    SimSetupTriangle caste_default = { 0x2345u, 0x6789u, 0xabcd };
+    memset(&controls, 0, sizeof controls);
+    sim_setup_controls_init_data(&controls);
+    assert(controls.mode_defaults.frac == 0x9999u);
+    assert(controls.caste_defaults.mid == 0x9999u);
+    assert(controls.mode_levels[1].frac == 0xffffu);
+    assert(controls.caste_levels[1].frac == 0x7fffu);
+
+    controls.mode_current = 2;
+    controls.caste_current = 3;
+    controls.mode_defaults = mode_default;
+    controls.caste_defaults = caste_default;
+    controls.mode_levels[1] = (SimSetupTriangle){ 0x1111u, 0x2222u, 0x3333u };
+    controls.mode_levels[2] = (SimSetupTriangle){ 0x4444u, 0x5555u, 0x6666u };
+    controls.mode_levels[3] = (SimSetupTriangle){ 0x7777u, 0x8888u, 0x9999u };
+    controls.caste_levels[1] = (SimSetupTriangle){ 0xaaaaU, 0xbbbbU, 0xccccU };
+    controls.caste_levels[2] = (SimSetupTriangle){ 0xddddU, 0xeeeeU, 0xffffU };
+    controls.caste_levels[3] = (SimSetupTriangle){ 0x0101U, 0x0202U, 0x0303U };
+    memcpy(mode_tail, &controls.mode_levels[1], sizeof mode_tail);
+    memcpy(caste_tail, &controls.caste_levels[1], sizeof caste_tail);
+    sim_setup_controls_init_data(&controls);
+    assert(memcmp(&controls.mode_defaults, &mode_default, sizeof mode_default) == 0);
+    assert(memcmp(&controls.caste_defaults, &caste_default, sizeof caste_default) == 0);
+    assert(memcmp(&controls.mode_levels[1], mode_tail, sizeof mode_tail) == 0);
+    assert(memcmp(&controls.caste_levels[1], caste_tail, sizeof caste_tail) == 0);
+    assert(sim_setup_init_controls(&controls, &hooks) == SIM_SETUP_OK);
+    assert(controls.mode_level.frac == mode_default.frac &&
+           controls.mode_level.mid == mode_default.mid &&
+           controls.mode_level.weight == mode_default.weight);
+    assert(controls.caste_level.frac == caste_default.frac &&
+           controls.caste_level.mid == caste_default.mid &&
+           controls.caste_level.weight == caste_default.weight);
+    assert(memcmp(&controls.mode_levels[0], &mode_default, sizeof mode_default) == 0);
+    assert(memcmp(&controls.caste_levels[0], &caste_default, sizeof caste_default) == 0);
+    assert(memcmp(&controls.mode_levels[1], mode_tail, sizeof mode_tail) == 0);
+    assert(memcmp(&controls.caste_levels[1], caste_tail, sizeof caste_tail) == 0);
+    assert(controls.mode_current == 2 && controls.caste_current == 3);
+
+    /* A second source call repeats only current/default row zero. */
+    hooks.context = &second_trace;
+    assert(sim_setup_init_controls(&controls, &hooks) == SIM_SETUP_OK);
+    assert(second_trace.cursor == 6 && second_trace.refresh_calls == 2);
+    assert(memcmp(&controls.mode_levels[1], mode_tail, sizeof mode_tail) == 0);
+    assert(memcmp(&controls.caste_levels[1], caste_tail, sizeof caste_tail) == 0);
+    assert(controls.mode_current == 2 && controls.caste_current == 3);
 }
 
 int main(void)
@@ -237,6 +308,8 @@ int main(void)
     test_missing_callbacks_fail_before_side_effects();
     test_missing_resource_fails_closed();
     test_later_callback_failure_does_not_publish_partial_state();
+    test_init_controls_requires_explicit_data_image();
+    test_repeated_init_preserves_mutable_presets_and_selectors();
     puts("setup tests passed");
     return 0;
 }

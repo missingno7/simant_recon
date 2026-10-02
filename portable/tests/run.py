@@ -43,6 +43,10 @@ UNITS = {
     "titles": ("windows/titles/test_titles.c", ["assets"]),
     "dialogs": ("dialogs/test_picture_dialog.c", ["assets"]),
     "game_over": ("dialogs/game_over_test.c", []),
+    "end_game_flow": ("dialogs/end_game_flow_test.c", []),
+    "end_game_view": ("dialogs/end_game_view_test.c", ["assets"]),
+    "scenario_flow": ("dialogs/test_scenario_flow.c", []),
+    "balloon_queue": ("windows/test_balloon_queue.c", []),
     "nest_live_clock": ("nest/live_clock_test.c", []),
     "input": ("input/test_input.c", []),
     "bios_fonts": ("windows/render/test_bios_fonts_loader.c",
@@ -61,6 +65,7 @@ UNITS = {
     "yard": ("yard/test_yard.c", []),
 }
 EXTRA_SOURCES = {
+    "scenario_flow": [PORT / "tests/dialogs/scenario_flow_fixture.c"],
     "platform_memory": [PORT / "game/recovered/memory_adapter.c"],
     "lesson_adapter": [PORT / "game/recovered/lesson_adapter.c"],
     "session_bridge": [PORT / "game/recovered/session_bridge.c"],

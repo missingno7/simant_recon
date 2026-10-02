@@ -1,0 +1,145 @@
+{
+  "schema": "portable-controls-next4-archive-pins-v1",
+  "status": "DIAGNOSTIC_ONLY_NOT_BEHAVIOR_ACCEPTANCE",
+  "oracle_function_id": "root0798:0F0D",
+  "oracle_executable_sha256": "aa0596c6766322a8229ee3c36e57048c92adc82d50fbe2ef37afb8b85fcf4f11",
+  "report_sha256": "cd365af24eb4de1b9ea5ca3a496da567ed12fbf4f6ec887664264e4f5c141e68",
+  "profile": {
+    "next3_symbol_count": 389,
+    "next4_symbol_count": 411,
+    "next3_unknown_extent_count": 0,
+    "next4_unknown_extent_count": 0,
+    "shared_module_count": 23,
+    "shared_module_hashes_unchanged": true,
+    "changed_shared_modules": [],
+    "all_24_module_compiles_passed": true,
+    "support_compile_passed": true,
+    "native_adapter_compile_passed": true
+  },
+  "run_to_archive_dependency_hashes": {
+    "source": {
+      "path": "src/root/m0798.c",
+      "run_sha256": "ecf807dc3159f583f6ee3ea8a9f5422650a64bb557d4551e9c97b5dcc7b6a1b8",
+      "post_sha256": "ecf807dc3159f583f6ee3ea8a9f5422650a64bb557d4551e9c97b5dcc7b6a1b8",
+      "stable": true
+    },
+    "generator": {
+      "path": "portable/tools/recover_source_next4.py",
+      "run_sha256": "d03b7601eadf09e61063ca36f791e09f9c578165ab50577e8beb8f23013e326b",
+      "post_sha256": "d03b7601eadf09e61063ca36f791e09f9c578165ab50577e8beb8f23013e326b",
+      "stable": true
+    },
+    "header": {
+      "path": "build/workers/recovered_source_next4/generated/recovered_state.h",
+      "run_sha256": "8d22b87f06dbc9f9761cf7ae33e0219b1f10e6e33ebdfecf80c625af7f454268",
+      "post_sha256": "8d22b87f06dbc9f9761cf7ae33e0219b1f10e6e33ebdfecf80c625af7f454268",
+      "stable": true
+    },
+    "state_source": {
+      "path": "build/workers/recovered_source_next4/generated/recovered_state.c",
+      "run_sha256": "697b4013bb4660ab82916e3eb7b8003f2e0078ba272f18cd3c68344cdc82ccbe",
+      "post_sha256": "697b4013bb4660ab82916e3eb7b8003f2e0078ba272f18cd3c68344cdc82ccbe",
+      "stable": true
+    },
+    "selected_tu": {
+      "path": "build/workers/recovered_source_next4/generated/root_m0798_controls.c",
+      "run_sha256": "0d4922c008a5443ce23f9472c6468b427f36908f24b4f5b52c7cf22c32b86ab8",
+      "post_sha256": "0d4922c008a5443ce23f9472c6468b427f36908f24b4f5b52c7cf22c32b86ab8",
+      "stable": true
+    },
+    "native_probe": {
+      "path": "build/workers/behavior_controls_next4/native_probe.c",
+      "run_sha256": "4f5115bd1de37c17117bd29fda517d137296d4080af2164e8e0e795431968341",
+      "post_sha256": "4f5115bd1de37c17117bd29fda517d137296d4080af2164e8e0e795431968341",
+      "stable": true
+    },
+    "native_dll": {
+      "path": "build/workers/behavior_controls_next4/native_probe.dll",
+      "run_sha256": "b400056f4151bdaebe7c62f0f63b07e43ae5e554a6d0fccc0d22ba99f502d259",
+      "post_sha256": "b400056f4151bdaebe7c62f0f63b07e43ae5e554a6d0fccc0d22ba99f502d259",
+      "stable": true
+    },
+    "ndx": {
+      "path": "assets/HCEGANT.NDX",
+      "run_sha256": "077d8aecdad5e816f0828204f7ca500a68b3a4a3288740ac75e73e44eaa8efc4",
+      "post_sha256": "077d8aecdad5e816f0828204f7ca500a68b3a4a3288740ac75e73e44eaa8efc4",
+      "stable": true
+    },
+    "dat": {
+      "path": "assets/HCEGANT.DAT",
+      "run_sha256": "9c98c0f110e901a2c2db65944e4ebdf6b26392181e9415a34eb7b29617eaa899",
+      "post_sha256": "9c98c0f110e901a2c2db65944e4ebdf6b26392181e9415a34eb7b29617eaa899",
+      "stable": true
+    },
+    "setup_reuse_runner": {
+      "path": "portable/tests/setup/evidence/setup_reuse_differential.py",
+      "run_sha256": "7471e0b24e1451ceaf2b8fed93ed72d93dcd43c868b70e49645941e7cec260e8",
+      "post_sha256": "7471e0b24e1451ceaf2b8fed93ed72d93dcd43c868b70e49645941e7cec260e8",
+      "stable": true
+    },
+    "behavior_harness": {
+      "path": "tools/behavior.py",
+      "run_sha256": "2c0799048057f59eae61a48be4d695278635594484adf0c70bf46c51b4e0c799",
+      "post_sha256": "2c0799048057f59eae61a48be4d695278635594484adf0c70bf46c51b4e0c799",
+      "stable": true
+    },
+    "base_generator": {
+      "path": "portable/tools/recover_source.py",
+      "run_sha256": "c1fd7616c392d39ebe4574e6ccde85b4e7f79205d21afcfbcb7ead249d5ffc50",
+      "post_sha256": "c1fd7616c392d39ebe4574e6ccde85b4e7f79205d21afcfbcb7ead249d5ffc50",
+      "stable": true
+    },
+    "next3_generator": {
+      "path": "portable/tools/recover_source_next3.py",
+      "run_sha256": "2a819b1c9d23213ecfd8fdebbb3bae580b8ef0914e535357b3e91aa0d2606edd",
+      "post_sha256": "2a819b1c9d23213ecfd8fdebbb3bae580b8ef0914e535357b3e91aa0d2606edd",
+      "stable": true
+    },
+    "profile_provenance": {
+      "path": "build/workers/recovered_source_next4/generated/provenance.json",
+      "run_sha256": "4b4277f921f8b38a5d0c4debd0246ec36fe76cf22d57e5c437d9ed704102f28e",
+      "post_sha256": "4b4277f921f8b38a5d0c4debd0246ec36fe76cf22d57e5c437d9ed704102f28e",
+      "stable": true
+    },
+    "native_adapters": {
+      "path": "build/workers/recovered_source_next4/generated/recovered_native_adapters.c",
+      "run_sha256": "ce2206c52ba57034074403a4e3e267300cbce2898ddec1693923ea9e28edef4e",
+      "post_sha256": "ce2206c52ba57034074403a4e3e267300cbce2898ddec1693923ea9e28edef4e",
+      "stable": true
+    },
+    "setup_base_runner": {
+      "path": "portable/tests/setup/evidence/setup_differential.py",
+      "run_sha256": "5e86861a344e3e8bd1accb51249f3e236c3776f7a9a2bd460c168839fe7db639",
+      "post_sha256": "5e86861a344e3e8bd1accb51249f3e236c3776f7a9a2bd460c168839fe7db639",
+      "stable": true
+    }
+  },
+  "unexplained_write_guard": {
+    "fields": "all RecoveredState bytes on both initControls calls",
+    "allowed_source_write_ranges": [
+      "knobSize",
+      "ModeAuto",
+      "CasteAuto",
+      "fd_50F6_0468",
+      "fd_3D57_07EA",
+      "fd_50F6_0370",
+      "fd_50F6_024E",
+      "modeLevels[0..2]",
+      "casteLevels[0..2]",
+      "fd_3D57_0810[0..2]",
+      "fd_3D57_07F2[0..2]",
+      "IdealCaste",
+      "triWidth",
+      "triWidthL",
+      "triWidthR",
+      "triHeight",
+      "fd_50F6_382E",
+      "fd_50F6_3816",
+      "fd_50F6_3822",
+      "fd_50F6_0358",
+      "fd_50F6_022E"
+    ],
+    "unexplained_changed_bytes": 0,
+    "passed": true
+  }
+}

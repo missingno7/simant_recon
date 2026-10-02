@@ -129,9 +129,35 @@ static const SimRecoveredProjectionEntry projection[] = {
     MAP("fd_50F6_0508[2]", "world.map_view_x/y", "fd_50F6_0508"),
     MAP("fd_50F6_1040", "world.food_added_terrain", "fd_50F6_1040"),
     MAP("fd_50F6_0378 / ModeAuto", "setup_controls.mode_auto", "ModeAuto"),
+#ifndef SIMANT_ENABLE_CONTROL_INIT_NEXT4
     MAP("modeLevels", "setup_controls.mode_level", "three-word current mode triangle"),
     MAP("ModeMe", "setup_controls.mode_current", "ModeMe"),
+#else
+    MAP("modeLevels", "setup_controls.mode_level", "modeLevels[3]"),
+    MAP("casteLevels", "setup_controls.caste_level", "casteLevels[3]"),
+    MAP("fd_3D57_080A[3]", "setup_controls.mode_defaults", "fd_3D57_080A"),
+    MAP("fd_3D57_07EC[3]", "setup_controls.caste_defaults", "fd_3D57_07EC"),
+    MAP("fd_3D57_0810[12]", "setup_controls.mode_levels[4]", "fd_3D57_0810"),
+    MAP("fd_3D57_07F2[12]", "setup_controls.caste_levels[4]", "fd_3D57_07F2"),
+    MAP("CasteAuto", "setup_controls.caste_auto", "CasteAuto"),
+    MAP("fd_50F6_0468", "setup_controls.mode_enabled", "fd_50F6_0468"),
+    MAP("fd_3D57_07EA", "setup_controls.caste_enabled", "fd_3D57_07EA"),
+    MAP("fd_50F6_0370", "setup_controls.state_0370", "fd_50F6_0370"),
+    MAP("fd_50F6_024E", "setup_controls.state_024e", "fd_50F6_024E"),
+    MAP("IdealCaste[0..3]", "setup_controls.ideal_caste[4]", "IdealCaste[0..3]; [4..6] retain source DATA"),
+    MAP("knobSize", "setup_controls.knob_width/height", "knobSize.x/y"),
+    MAP("fd_50F6_3816", "setup_controls.mode_rect", "mode rect -> InitTriVars TriPoints"),
+    MAP("fd_50F6_3822", "setup_controls.caste_rect", "caste rect -> InitTriVars TriPoints"),
+    MAP("fd_50F6_0358", "setup_controls.mode_point", "SetTriLatPoint mode output"),
+    MAP("fd_50F6_022E", "setup_controls.caste_point", "SetTriLatPoint caste output"),
+    MAP("triWidth/triWidthL/triWidthR/triHeight", "setup_controls.caste_width/height", "last InitTriVars call is caste"),
+    MAP("fd_50F6_382E", "setup_controls.caste_slope", "last InitTriVars call is caste"),
+    MAP("fd_50F6_37F6", "session.controls[mode].animation_resource", "borrowed actual animation resource or NULL"),
+    MAP("fd_50F6_37F2", "session.controls[caste].animation_resource", "borrowed actual animation resource or NULL"),
+#endif
+#ifndef SIMANT_ENABLE_CONTROL_INIT_NEXT4
     MAP("IdealCaste[4]", "setup_controls.ideal_caste", "IdealCaste"),
+#endif
     MAP("BAntsEaten", "setup_state.black_ants_eaten", "BAntsEaten"),
     MAP("RAntsEaten", "setup_state.red_ants_eaten", "RAntsEaten"),
     MAP("fd_50F6_0F30", "setup_state.counter_0f30", "fd_50F6_0F30"),
@@ -223,9 +249,15 @@ static const SimRecoveredProjectionEntry projection[] = {
 };
 #undef MAP
 
+#ifndef SIMANT_ENABLE_CONTROL_INIT_NEXT4
 static const char *const unmapped_new_game_writes[] = {
     "RandYard/initControls writes CasteAuto, casteLevels, fd_3D57_07EA, fd_50F6_0468, fd_50F6_0370, fd_50F6_024E, mode/caste preset arrays, knobSize and triangle dimensions. SimSetupControls has typed views, but the current generated RecoveredState profile omits these globals, so they cannot be overlaid into this core state yet.",
 };
+#else
+static const char *const unmapped_new_game_writes[] = {
+    "The next4 RecoveredState profile projects the RandYard/initControls defaults, presets, levels, flags, geometry, ideal caste values and real session animation pointers. The TU-static preset selectors g_1B50/g_1B4E are not fields in this profile and are explicitly outside this bridge projection.",
+};
+#endif
 
 const SimRecoveredProjectionEntry *sim_recovered_projection_manifest(size_t *count)
 {
@@ -246,6 +278,115 @@ const char *const *sim_recovered_unmapped_new_game_writes(size_t *count)
 /* Read/write the source module's first-word view while retaining the complete
  * initialized backing object in profiles with wider DATA table declarations. */
 #define SOURCE_WORD(field) (*(int16_t *)(void *)&(field))
+
+#ifdef SIMANT_ENABLE_CONTROL_INIT_NEXT4
+static void controls_into_next4(RecoveredState *s, const SimSession *session)
+{
+    const SimSetupControls *c = &session->setup_controls;
+    const SimSessionControlVisual *mode =
+        &session->controls[SIM_SETUP_MODE_CONTROL];
+    const SimSessionControlVisual *caste =
+        &session->controls[SIM_SETUP_CASTE_CONTROL];
+    int16_t half;
+
+    s->ModeAuto = c->mode_auto;
+    s->CasteAuto = c->caste_auto;
+    s->fd_50F6_0468 = c->mode_enabled;
+    s->fd_3D57_07EA = c->caste_enabled;
+    s->fd_50F6_0370 = c->state_0370;
+    s->fd_50F6_024E = c->state_024e;
+    memcpy(s->modeLevels, &c->mode_level, sizeof s->modeLevels);
+    memcpy(s->casteLevels, &c->caste_level, sizeof s->casteLevels);
+    memcpy(s->fd_3D57_080A, &c->mode_defaults, sizeof s->fd_3D57_080A);
+    memcpy(s->fd_3D57_07EC, &c->caste_defaults, sizeof s->fd_3D57_07EC);
+    memcpy(s->fd_3D57_0810, c->mode_levels, sizeof s->fd_3D57_0810);
+    memcpy(s->fd_3D57_07F2, c->caste_levels, sizeof s->fd_3D57_07F2);
+    memcpy(s->IdealCaste, c->ideal_caste, sizeof c->ideal_caste);
+
+    s->knobSize.x = c->knob_width;
+    s->knobSize.y = c->knob_height;
+    half = (int16_t)(c->mode_width >> 1);
+    s->fd_50F6_3816.apexX = (int16_t)(half + c->mode_rect.left);
+    s->fd_50F6_3816.apexY = c->mode_rect.top;
+    s->fd_50F6_3816.leftX = c->mode_rect.left;
+    s->fd_50F6_3816.leftY = c->mode_rect.bottom;
+    s->fd_50F6_3816.rightX = c->mode_rect.right;
+    s->fd_50F6_3816.rightY = c->mode_rect.bottom;
+    half = (int16_t)(c->caste_width >> 1);
+    s->fd_50F6_3822.apexX = (int16_t)(half + c->caste_rect.left);
+    s->fd_50F6_3822.apexY = c->caste_rect.top;
+    s->fd_50F6_3822.leftX = c->caste_rect.left;
+    s->fd_50F6_3822.leftY = c->caste_rect.bottom;
+    s->fd_50F6_3822.rightX = c->caste_rect.right;
+    s->fd_50F6_3822.rightY = c->caste_rect.bottom;
+    s->fd_50F6_0358.x = c->mode_point.x;
+    s->fd_50F6_0358.y = c->mode_point.y;
+    s->fd_50F6_022E.x = c->caste_point.x;
+    s->fd_50F6_022E.y = c->caste_point.y;
+    /* initControls calls mode Changed then caste Changed; the latter owns
+     * the shared triangle width/height/slope globals at return. */
+    s->triWidth = (uint16_t)c->caste_width;
+    s->triWidthL = (uint16_t)(c->caste_width >> 1);
+    s->triWidthR = (uint16_t)(c->caste_width >> 1);
+    s->triHeight = (uint16_t)c->caste_height;
+    s->fd_50F6_382E = c->caste_slope;
+    s->fd_50F6_37F6 = mode->animation_resource;
+    s->fd_50F6_37F2 = caste->animation_resource;
+}
+
+static void controls_from_next4(SimSession *session, const RecoveredState *s)
+{
+    SimSetupControls *c = &session->setup_controls;
+    SimSetupRect *rect;
+
+    c->mode_auto = s->ModeAuto;
+    c->caste_auto = s->CasteAuto;
+    c->mode_enabled = s->fd_50F6_0468;
+    c->caste_enabled = s->fd_3D57_07EA;
+    c->state_0370 = s->fd_50F6_0370;
+    c->state_024e = s->fd_50F6_024E;
+    memcpy(&c->mode_level, s->modeLevels, sizeof c->mode_level);
+    memcpy(&c->caste_level, s->casteLevels, sizeof c->caste_level);
+    memcpy(&c->mode_defaults, s->fd_3D57_080A, sizeof c->mode_defaults);
+    memcpy(&c->caste_defaults, s->fd_3D57_07EC, sizeof c->caste_defaults);
+    memcpy(c->mode_levels, s->fd_3D57_0810, sizeof c->mode_levels);
+    memcpy(c->caste_levels, s->fd_3D57_07F2, sizeof c->caste_levels);
+    memcpy(c->ideal_caste, s->IdealCaste, sizeof c->ideal_caste);
+    c->knob_width = s->knobSize.x;
+    c->knob_height = s->knobSize.y;
+
+    rect = &c->mode_rect;
+    rect->left = s->fd_50F6_3816.leftX;
+    rect->top = s->fd_50F6_3816.apexY;
+    rect->right = s->fd_50F6_3816.rightX;
+    rect->bottom = s->fd_50F6_3816.leftY;
+    c->mode_width = (int16_t)(rect->right - rect->left);
+    c->mode_height = (int16_t)(rect->bottom - rect->top);
+    c->mode_slope = c->mode_height != 0 ?
+        (((int32_t)(c->mode_width >> 1) << 8) / c->mode_height) : 0;
+    c->mode_point.x = s->fd_50F6_0358.x;
+    c->mode_point.y = s->fd_50F6_0358.y;
+
+    rect = &c->caste_rect;
+    rect->left = s->fd_50F6_3822.leftX;
+    rect->top = s->fd_50F6_3822.apexY;
+    rect->right = s->fd_50F6_3822.rightX;
+    rect->bottom = s->fd_50F6_3822.leftY;
+    c->caste_width = (int16_t)(rect->right - rect->left);
+    c->caste_height = (int16_t)(rect->bottom - rect->top);
+    c->caste_slope = s->fd_50F6_382E;
+    c->caste_point.x = s->fd_50F6_022E.x;
+    c->caste_point.y = s->fd_50F6_022E.y;
+    session->controls[SIM_SETUP_MODE_CONTROL].animation_resource =
+        s->fd_50F6_37F6;
+    session->controls[SIM_SETUP_CASTE_CONTROL].animation_resource =
+        s->fd_50F6_37F2;
+    session->controls[SIM_SETUP_MODE_CONTROL].rectangle = c->mode_rect;
+    session->controls[SIM_SETUP_MODE_CONTROL].point = c->mode_point;
+    session->controls[SIM_SETUP_CASTE_CONTROL].rectangle = c->caste_rect;
+    session->controls[SIM_SETUP_CASTE_CONTROL].point = c->caste_point;
+}
+#endif
 
 SimRecoveredBridgeStatus sim_recovered_state_from_session(
     RecoveredState *s, SimSession *session)
@@ -423,12 +564,16 @@ SimRecoveredBridgeStatus sim_recovered_state_from_session(
     s->fd_50F6_0FFA = session->nest_runtime.invalidate_bottom;
     s->fd_50F6_0508[0] = session->world.map_view_x;
     s->fd_50F6_0508[1] = session->world.map_view_y;
+#ifdef SIMANT_ENABLE_CONTROL_INIT_NEXT4
+    controls_into_next4(s, session);
+#else
     s->ModeAuto = session->setup_controls.mode_auto;
     s->ModeMe = session->setup_controls.mode_current;
     COPY_IN(s->modeLevels, &session->setup_controls.mode_level);
     /* initControls owns four words; keep the remaining source DATA words. */
     memcpy(s->IdealCaste, session->setup_controls.ideal_caste,
            sizeof(session->setup_controls.ideal_caste));
+#endif
     s->BAntsEaten = session->setup_state.black_ants_eaten;
     s->RAntsEaten = session->setup_state.red_ants_eaten;
     s->fd_50F6_0F30 = session->setup_state.counter_0f30;
@@ -667,11 +812,15 @@ SimRecoveredBridgeStatus sim_session_from_recovered_state(
     session->nest_runtime.invalidate_bottom = s->fd_50F6_0FFA;
     session->world.map_view_x = s->fd_50F6_0508[0];
     session->world.map_view_y = s->fd_50F6_0508[1];
+#ifdef SIMANT_ENABLE_CONTROL_INIT_NEXT4
+    controls_from_next4(session, s);
+#else
     session->setup_controls.mode_auto = s->ModeAuto;
     session->setup_controls.mode_current = s->ModeMe;
     memcpy(&session->setup_controls.mode_level, s->modeLevels,
            sizeof session->setup_controls.mode_level);
     COPY_OUT(session->setup_controls.ideal_caste, s->IdealCaste);
+#endif
     session->setup_state.black_ants_eaten = s->BAntsEaten;
     session->setup_state.red_ants_eaten = s->RAntsEaten;
     session->setup_state.counter_0f30 = s->fd_50F6_0F30;

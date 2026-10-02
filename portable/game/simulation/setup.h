@@ -67,6 +67,10 @@ typedef struct SimSetupControls {
     int16_t caste_current;
     int16_t state_0370;          /* fd_50F6_0370; initControls sets -1. */
     int16_t state_024e;          /* fd_50F6_024E; initControls sets -1. */
+    /* Mutable DATA triples at 3D57:080A (mode) and 3D57:07EC (caste).
+     * The source initControls reads these on every invocation. */
+    SimSetupTriangle mode_defaults;
+    SimSetupTriangle caste_defaults;
     SimSetupTriangle mode_levels[4];
     SimSetupTriangle caste_levels[4];
     SimSetupTriangle mode_level;
@@ -82,6 +86,9 @@ typedef struct SimSetupControls {
     int16_t caste_width;
     int16_t caste_height;
     int32_t caste_slope;
+    /* Set only by sim_setup_controls_init_data; prevents zeroed host state
+     * from silently substituting invented defaults at initControls time. */
+    uint8_t source_data_initialized;
 } SimSetupControls;
 
 typedef struct SimSetupHooks {
@@ -108,12 +115,20 @@ void sim_setup_clear_history(SimSetupState *state, int16_t new_game);
 void sim_setup_convert_ideal_caste(const SimSetupTriangle *level,
                                    int16_t ideal[4]);
 
-/* Source-derived root initControls / f_0798_0F0D. The caller initializes
- * mode_current/caste_current from their source-global initial/current values;
- * initControls preserves those selectors. Required platform/resource
+/* Source-derived root initControls / f_0798_0F0D. The caller first applies
+ * sim_setup_controls_init_data once for a fresh session, then initializes
+ * mode_current/caste_current from their source-global initial/current values.
+ * initControls rereads the mutable defaults into the current triples and row
+ * zero, while preserving preset rows one through three and both selectors.
+ * Required platform/resource
  * operations fail closed when absent; successful setup preserves resource,
  * rectangle-query, mode-refresh, caste-refresh ordering. */
 SimSetupStatus sim_setup_init_controls(SimSetupControls *controls,
                                       const SimSetupHooks *hooks);
+
+/* Apply the source DATA image once when a fresh SimSession is constructed.
+ * This initializes the two mutable default triples and all four preset rows;
+ * NewGame/initControls must not call it again. */
+void sim_setup_controls_init_data(SimSetupControls *controls);
 
 #endif

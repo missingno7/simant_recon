@@ -1,0 +1,10900 @@
+{
+  "candidate_identity": {
+    "address": {
+      "off": 17514,
+      "seg": 592,
+      "size": 227,
+      "unit": "root"
+    },
+    "compiled_source_sha256": "e41a4ab8c56c0d4923ace8b02027f2471feee049aabe0577588e206e930b4db2",
+    "flags": [
+      "/AL",
+      "/Os",
+      "/Oe",
+      "/Og",
+      "/Zi"
+    ],
+    "function": "AddMsgBalloon",
+    "harness_sha256": "2c0799048057f59eae61a48be4d695278635594484adf0c70bf46c51b4e0c799",
+    "linked_code_sha256": "e54490818026c5883025c674710b4faf0bf9114a8d1c5943df96f733c17c660c",
+    "manifest_sha256": "025a0a9255d910cae4b122ab5a3f3fb40888bb456d7fe42158db7c9e622fcf50",
+    "object_sha256": "65e7e3cba83ea4eb02a221c4313e5e2ddb1570139d5881180e699fdeedfdd13a",
+    "oracle_sha256": "aa0596c6766322a8229ee3c36e57048c92adc82d50fbe2ef37afb8b85fcf4f11",
+    "profile": "msc600ax",
+    "source": "evidence\\behavior\\functions\\DrawBalloons\\contracts\\logical-render-v1\\module.c",
+    "source_sha256": "e41a4ab8c56c0d4923ace8b02027f2471feee049aabe0577588e206e930b4db2",
+    "unicorn_version": "2.1.4"
+  },
+  "case_count": 107,
+  "case_ledger": {
+    "compression": "gzip",
+    "identity": {
+      "address": {
+        "off": 17514,
+        "seg": 592,
+        "size": 227,
+        "unit": "root"
+      },
+      "compiled_source_sha256": "e41a4ab8c56c0d4923ace8b02027f2471feee049aabe0577588e206e930b4db2",
+      "flags": [
+        "/AL",
+        "/Os",
+        "/Oe",
+        "/Og",
+        "/Zi"
+      ],
+      "function": "AddMsgBalloon",
+      "harness_sha256": "2c0799048057f59eae61a48be4d695278635594484adf0c70bf46c51b4e0c799",
+      "linked_code_sha256": "e54490818026c5883025c674710b4faf0bf9114a8d1c5943df96f733c17c660c",
+      "manifest_sha256": "025a0a9255d910cae4b122ab5a3f3fb40888bb456d7fe42158db7c9e622fcf50",
+      "object_sha256": "65e7e3cba83ea4eb02a221c4313e5e2ddb1570139d5881180e699fdeedfdd13a",
+      "oracle_sha256": "aa0596c6766322a8229ee3c36e57048c92adc82d50fbe2ef37afb8b85fcf4f11",
+      "profile": "msc600ax",
+      "source": "evidence\\behavior\\functions\\DrawBalloons\\contracts\\logical-render-v1\\module.c",
+      "source_sha256": "e41a4ab8c56c0d4923ace8b02027f2471feee049aabe0577588e206e930b4db2",
+      "unicorn_version": "2.1.4"
+    },
+    "lane_counts": {
+      "directed": 11,
+      "randomized": 96
+    },
+    "path": "D:/Prog/simant_recon/build/workers/behavior_text_card/balloon_queue_addmsg/addmsg-cases.jsonl.gz",
+    "row_count": 107,
+    "schema": "behavior-case-ledger-v1",
+    "sha256": "15b2643bbf2d4ce9f173e196b0fb15b7192c91f1fbecab6fbf52e7f90407a56d"
+  },
+  "cases": [
+    {
+      "dos_candidate_equal": true,
+      "id": "directed/style-0/0",
+      "input": {
+        "args": [
+          10,
+          23,
+          2,
+          0,
+          0
+        ],
+        "initial_queue": [],
+        "pixel_size": [
+          16,
+          16
+        ],
+        "viewport": [
+          10,
+          20,
+          32,
+          24,
+          2
+        ]
+      },
+      "native_equals_dos": true,
+      "native_queue": [
+        [
+          168,
+          376,
+          2,
+          0,
+          5,
+          0,
+          0
+        ]
+      ],
+      "native_status": 0,
+      "oracle_queue": [
+        [
+          168,
+          376,
+          2,
+          0,
+          5,
+          0,
+          0
+        ]
+      ],
+      "pair_diff": {},
+      "x_plus_one_negative_detected": true
+    },
+    {
+      "dos_candidate_equal": true,
+      "id": "directed/style-1/1",
+      "input": {
+        "args": [
+          11,
+          23,
+          2,
+          1,
+          1
+        ],
+        "initial_queue": [],
+        "pixel_size": [
+          16,
+          16
+        ],
+        "viewport": [
+          10,
+          20,
+          32,
+          24,
+          2
+        ]
+      },
+      "native_equals_dos": true,
+      "native_queue": [
+        [
+          184,
+          376,
+          2,
+          1,
+          5,
+          1,
+          0
+        ]
+      ],
+      "native_status": 0,
+      "oracle_queue": [
+        [
+          184,
+          376,
+          2,
+          1,
+          5,
+          1,
+          0
+        ]
+      ],
+      "pair_diff": {},
+      "x_plus_one_negative_detected": null
+    },
+    {
+      "dos_candidate_equal": true,
+      "id": "directed/style-2/2",
+      "input": {
+        "args": [
+          12,
+          24,
+          2,
+          2,
+          2
+        ],
+        "initial_queue": [],
+        "pixel_size": [
+          16,
+          16
+        ],
+        "viewport": [
+          10,
+          20,
+          32,
+          24,
+          2
+        ]
+      },
+      "native_equals_dos": true,
+      "native_queue": [
+        [
+          200,
+          392,
+          2,
+          2,
+          5,
+          2,
+          0
+        ]
+      ],
+      "native_status": 0,
+      "oracle_queue": [
+        [
+          200,
+          392,
+          2,
+          2,
+          5,
+          2,
+          0
+        ]
+      ],
+      "pair_diff": {},
+      "x_plus_one_negative_detected": null
+    },
+    {
+      "dos_candidate_equal": true,
+      "id": "directed/style-10/3",
+      "input": {
+        "args": [
+          224,
+          368,
+          2,
+          10,
+          3
+        ],
+        "initial_queue": [],
+        "pixel_size": [
+          16,
+          16
+        ],
+        "viewport": [
+          10,
+          20,
+          32,
+          24,
+          2
+        ]
+      },
+      "native_equals_dos": true,
+      "native_queue": [
+        [
+          224,
+          368,
+          2,
+          10,
+          5,
+          3,
+          0
+        ]
+      ],
+      "native_status": 0,
+      "oracle_queue": [
+        [
+          224,
+          368,
+          2,
+          10,
+          5,
+          3,
+          0
+        ]
+      ],
+      "pair_diff": {},
+      "x_plus_one_negative_detected": null
+    },
+    {
+      "dos_candidate_equal": true,
+      "id": "directed/style-0/4",
+      "input": {
+        "args": [
+          42,
+          23,
+          2,
+          0,
+          4
+        ],
+        "initial_queue": [],
+        "pixel_size": [
+          16,
+          16
+        ],
+        "viewport": [
+          10,
+          20,
+          32,
+          24,
+          2
+        ]
+      },
+      "native_equals_dos": true,
+      "native_queue": [],
+      "native_status": 0,
+      "oracle_queue": [],
+      "pair_diff": {},
+      "x_plus_one_negative_detected": null
+    },
+    {
+      "dos_candidate_equal": true,
+      "id": "directed/style-0/5",
+      "input": {
+        "args": [
+          11,
+          22,
+          2,
+          0,
+          5
+        ],
+        "initial_queue": [],
+        "pixel_size": [
+          16,
+          16
+        ],
+        "viewport": [
+          10,
+          20,
+          32,
+          24,
+          2
+        ]
+      },
+      "native_equals_dos": true,
+      "native_queue": [],
+      "native_status": 0,
+      "oracle_queue": [],
+      "pair_diff": {},
+      "x_plus_one_negative_detected": null
+    },
+    {
+      "dos_candidate_equal": true,
+      "id": "directed/style-0/6",
+      "input": {
+        "args": [
+          11,
+          23,
+          1,
+          0,
+          6
+        ],
+        "initial_queue": [],
+        "pixel_size": [
+          16,
+          16
+        ],
+        "viewport": [
+          10,
+          20,
+          32,
+          24,
+          2
+        ]
+      },
+      "native_equals_dos": true,
+      "native_queue": [],
+      "native_status": 0,
+      "oracle_queue": [],
+      "pair_diff": {},
+      "x_plus_one_negative_detected": null
+    },
+    {
+      "dos_candidate_equal": true,
+      "id": "directed/queue-full",
+      "input": {
+        "args": [
+          12,
+          24,
+          2,
+          2,
+          0
+        ],
+        "initial_queue": [
+          [
+            12,
+            24,
+            2,
+            0,
+            0
+          ],
+          [
+            13,
+            24,
+            2,
+            1,
+            1
+          ],
+          [
+            14,
+            24,
+            2,
+            2,
+            2
+          ],
+          [
+            15,
+            24,
+            2,
+            3,
+            3
+          ],
+          [
+            16,
+            24,
+            2,
+            4,
+            4
+          ],
+          [
+            17,
+            24,
+            2,
+            5,
+            5
+          ]
+        ],
+        "pixel_size": [
+          16,
+          16
+        ],
+        "viewport": [
+          10,
+          20,
+          32,
+          24,
+          2
+        ]
+      },
+      "native_equals_dos": true,
+      "native_queue": [
+        [
+          12,
+          24,
+          2,
+          0,
+          5,
+          0,
+          0
+        ],
+        [
+          13,
+          24,
+          2,
+          1,
+          5,
+          1,
+          0
+        ],
+        [
+          14,
+          24,
+          2,
+          2,
+          5,
+          2,
+          0
+        ],
+        [
+          15,
+          24,
+          2,
+          3,
+          5,
+          3,
+          0
+        ],
+        [
+          16,
+          24,
+          2,
+          4,
+          5,
+          4,
+          0
+        ],
+        [
+          17,
+          24,
+          2,
+          5,
+          5,
+          5,
+          0
+        ]
+      ],
+      "native_status": 0,
+      "oracle_queue": [
+        [
+          12,
+          24,
+          2,
+          0,
+          5,
+          0,
+          0
+        ],
+        [
+          13,
+          24,
+          2,
+          1,
+          5,
+          1,
+          0
+        ],
+        [
+          14,
+          24,
+          2,
+          2,
+          5,
+          2,
+          0
+        ],
+        [
+          15,
+          24,
+          2,
+          3,
+          5,
+          3,
+          0
+        ],
+        [
+          16,
+          24,
+          2,
+          4,
+          5,
+          4,
+          0
+        ],
+        [
+          17,
+          24,
+          2,
+          5,
+          5,
+          5,
+          0
+        ]
+      ],
+      "pair_diff": {},
+      "x_plus_one_negative_detected": null
+    },
+    {
+      "dos_candidate_equal": true,
+      "id": "directed/queue-five-visible",
+      "input": {
+        "args": [
+          15,
+          25,
+          2,
+          0,
+          6
+        ],
+        "initial_queue": [
+          [
+            12,
+            24,
+            2,
+            0,
+            0
+          ],
+          [
+            13,
+            24,
+            2,
+            1,
+            1
+          ],
+          [
+            14,
+            24,
+            2,
+            2,
+            2
+          ],
+          [
+            15,
+            24,
+            2,
+            3,
+            3
+          ],
+          [
+            16,
+            24,
+            2,
+            4,
+            4
+          ]
+        ],
+        "pixel_size": [
+          16,
+          16
+        ],
+        "viewport": [
+          10,
+          20,
+          32,
+          24,
+          2
+        ]
+      },
+      "native_equals_dos": true,
+      "native_queue": [
+        [
+          12,
+          24,
+          2,
+          0,
+          5,
+          0,
+          0
+        ],
+        [
+          13,
+          24,
+          2,
+          1,
+          5,
+          1,
+          0
+        ],
+        [
+          14,
+          24,
+          2,
+          2,
+          5,
+          2,
+          0
+        ],
+        [
+          15,
+          24,
+          2,
+          3,
+          5,
+          3,
+          0
+        ],
+        [
+          16,
+          24,
+          2,
+          4,
+          5,
+          4,
+          0
+        ],
+        [
+          248,
+          408,
+          2,
+          0,
+          5,
+          6,
+          0
+        ]
+      ],
+      "native_status": 0,
+      "oracle_queue": [
+        [
+          12,
+          24,
+          2,
+          0,
+          5,
+          0,
+          0
+        ],
+        [
+          13,
+          24,
+          2,
+          1,
+          5,
+          1,
+          0
+        ],
+        [
+          14,
+          24,
+          2,
+          2,
+          5,
+          2,
+          0
+        ],
+        [
+          15,
+          24,
+          2,
+          3,
+          5,
+          3,
+          0
+        ],
+        [
+          16,
+          24,
+          2,
+          4,
+          5,
+          4,
+          0
+        ],
+        [
+          248,
+          408,
+          2,
+          0,
+          5,
+          6,
+          0
+        ]
+      ],
+      "pair_diff": {},
+      "x_plus_one_negative_detected": null
+    },
+    {
+      "dos_candidate_equal": true,
+      "id": "directed/style10-negative-trunc",
+      "input": {
+        "args": [
+          -17,
+          -17,
+          2,
+          10,
+          2
+        ],
+        "initial_queue": [],
+        "pixel_size": [
+          16,
+          16
+        ],
+        "viewport": [
+          -2,
+          -4,
+          12,
+          12,
+          2
+        ]
+      },
+      "native_equals_dos": true,
+      "native_queue": [
+        [
+          -17,
+          -17,
+          2,
+          10,
+          5,
+          2,
+          0
+        ]
+      ],
+      "native_status": 0,
+      "oracle_queue": [
+        [
+          -17,
+          -17,
+          2,
+          10,
+          5,
+          2,
+          0
+        ]
+      ],
+      "pair_diff": {},
+      "x_plus_one_negative_detected": null
+    },
+    {
+      "dos_candidate_equal": true,
+      "id": "directed/pixel-word-wrap",
+      "input": {
+        "args": [
+          2048,
+          2048,
+          2,
+          1,
+          1
+        ],
+        "initial_queue": [],
+        "pixel_size": [
+          32,
+          32
+        ],
+        "viewport": [
+          0,
+          0,
+          3000,
+          3000,
+          2
+        ]
+      },
+      "native_equals_dos": true,
+      "native_queue": [
+        [
+          8,
+          8,
+          2,
+          1,
+          5,
+          1,
+          0
+        ]
+      ],
+      "native_status": 0,
+      "oracle_queue": [
+        [
+          8,
+          8,
+          2,
+          1,
+          5,
+          1,
+          0
+        ]
+      ],
+      "pair_diff": {},
+      "x_plus_one_negative_detected": null
+    },
+    {
+      "dos_candidate_equal": true,
+      "id": "random/0000",
+      "input": {
+        "args": [
+          -49,
+          -50,
+          0,
+          2,
+          3
+        ],
+        "initial_queue": [
+          [
+            -929,
+            866,
+            1,
+            4,
+            7
+          ],
+          [
+            -606,
+            866,
+            0,
+            -1,
+            3
+          ],
+          [
+            153,
+            -841,
+            2,
+            -1,
+            1
+          ],
+          [
+            -440,
+            319,
+            0,
+            2,
+            4
+          ],
+          [
+            -169,
+            -717,
+            3,
+            -3,
+            1
+          ],
+          [
+            228,
+            -837,
+            3,
+            6,
+            1
+          ]
+        ],
+        "pixel_size": [
+          16,
+          8
+        ],
+        "viewport": [
+          28,
+          -31,
+          8,
+          7,
+          2
+        ]
+      },
+      "native_equals_dos": true,
+      "native_queue": [
+        [
+          -929,
+          866,
+          1,
+          4,
+          5,
+          7,
+          0
+        ],
+        [
+          -606,
+          866,
+          0,
+          -1,
+          5,
+          3,
+          0
+        ],
+        [
+          153,
+          -841,
+          2,
+          -1,
+          5,
+          1,
+          0
+        ],
+        [
+          -440,
+          319,
+          0,
+          2,
+          5,
+          4,
+          0
+        ],
+        [
+          -169,
+          -717,
+          3,
+          -3,
+          5,
+          1,
+          0
+        ],
+        [
+          228,
+          -837,
+          3,
+          6,
+          5,
+          1,
+          0
+        ]
+      ],
+      "native_status": 0,
+      "oracle_queue": [
+        [
+          -929,
+          866,
+          1,
+          4,
+          5,
+          7,
+          0
+        ],
+        [
+          -606,
+          866,
+          0,
+          -1,
+          5,
+          3,
+          0
+        ],
+        [
+          153,
+          -841,
+          2,
+          -1,
+          5,
+          1,
+          0
+        ],
+        [
+          -440,
+          319,
+          0,
+          2,
+          5,
+          4,
+          0
+        ],
+        [
+          -169,
+          -717,
+          3,
+          -3,
+          5,
+          1,
+          0
+        ],
+        [
+          228,
+          -837,
+          3,
+          6,
+          5,
+          1,
+          0
+        ]
+      ],
+      "pair_diff": {},
+      "x_plus_one_negative_detected": null
+    },
+    {
+      "dos_candidate_equal": true,
+      "id": "random/0001",
+      "input": {
+        "args": [
+          79,
+          26,
+          1,
+          2,
+          3
+        ],
+        "initial_queue": [],
+        "pixel_size": [
+          16,
+          12
+        ],
+        "viewport": [
+          -12,
+          31,
+          32,
+          26,
+          1
+        ]
+      },
+      "native_equals_dos": true,
+      "native_queue": [],
+      "native_status": 0,
+      "oracle_queue": [],
+      "pair_diff": {},
+      "x_plus_one_negative_detected": null
+    },
+    {
+      "dos_candidate_equal": true,
+      "id": "random/0002",
+      "input": {
+        "args": [
+          12,
+          6,
+          0,
+          0,
+          0
+        ],
+        "initial_queue": [
+          [
+            -9,
+            -638,
+            1,
+            6,
+            6
+          ],
+          [
+            -879,
+            -557,
+            0,
+            2,
+            4
+          ],
+          [
+            438,
+            -734,
+            0,
+            12,
+            1
+          ],
+          [
+            -152,
+            -952,
+            2,
+            2,
+            6
+          ],
+          [
+            81,
+            -565,
+            0,
+            -2,
+            0
+          ]
+        ],
+        "pixel_size": [
+          24,
+          16
+        ],
+        "viewport": [
+          24,
+          -4,
+          31,
+          28,
+          3
+        ]
+      },
+      "native_equals_dos": true,
+      "native_queue": [
+        [
+          -9,
+          -638,
+          1,
+          6,
+          5,
+          6,
+          0
+        ],
+        [
+          -879,
+          -557,
+          0,
+          2,
+          5,
+          4,
+          0
+        ],
+        [
+          438,
+          -734,
+          0,
+          12,
+          5,
+          1,
+          0
+        ],
+        [
+          -152,
+          -952,
+          2,
+          2,
+          5,
+          6,
+          0
+        ],
+        [
+          81,
+          -565,
+          0,
+          -2,
+          5,
+          0,
+          0
+        ]
+      ],
+      "native_status": 0,
+      "oracle_queue": [
+        [
+          -9,
+          -638,
+          1,
+          6,
+          5,
+          6,
+          0
+        ],
+        [
+          -879,
+          -557,
+          0,
+          2,
+          5,
+          4,
+          0
+        ],
+        [
+          438,
+          -734,
+          0,
+          12,
+          5,
+          1,
+          0
+        ],
+        [
+          -152,
+          -952,
+          2,
+          2,
+          5,
+          6,
+          0
+        ],
+        [
+          81,
+          -565,
+          0,
+          -2,
+          5,
+          0,
+          0
+        ]
+      ],
+      "pair_diff": {},
+      "x_plus_one_negative_detected": null
+    },
+    {
+      "dos_candidate_equal": true,
+      "id": "random/0003",
+      "input": {
+        "args": [
+          55,
+          63,
+          3,
+          0,
+          4
+        ],
+        "initial_queue": [
+          [
+            -547,
+            349,
+            0,
+            11,
+            2
+          ]
+        ],
+        "pixel_size": [
+          8,
+          16
+        ],
+        "viewport": [
+          26,
+          -7,
+          14,
+          16,
+          1
+        ]
+      },
+      "native_equals_dos": true,
+      "native_queue": [
+        [
+          -547,
+          349,
+          0,
+          11,
+          5,
+          2,
+          0
+        ]
+      ],
+      "native_status": 0,
+      "oracle_queue": [
+        [
+          -547,
+          349,
+          0,
+          11,
+          5,
+          2,
+          0
+        ]
+      ],
+      "pair_diff": {},
+      "x_plus_one_negative_detected": null
+    },
+    {
+      "dos_candidate_equal": true,
+      "id": "random/0004",
+      "input": {
+        "args": [
+          -38,
+          692,
+          3,
+          10,
+          1
+        ],
+        "initial_queue": [],
+        "pixel_size": [
+          8,
+          12
+        ],
+        "viewport": [
+          8,
+          10,
+          6,
+          15,
+          1
+        ]
+      },
+      "native_equals_dos": true,
+      "native_queue": [],
+      "native_status": 0,
+      "oracle_queue": [],
+      "pair_diff": {},
+      "x_plus_one_negative_detected": null
+    },
+    {
+      "dos_candidate_equal": true,
+      "id": "random/0005",
+      "input": {
+        "args": [
+          390,
+          -86,
+          3,
+          10,
+          0
+        ],
+        "initial_queue": [
+          [
+            -972,
+            -122,
+            0,
+            12,
+            0
+          ],
+          [
+            332,
+            -755,
+            2,
+            7,
+            2
+          ],
+          [
+            -588,
+            417,
+            0,
+            10,
+            0
+          ]
+        ],
+        "pixel_size": [
+          16,
+          12
+        ],
+        "viewport": [
+          30,
+          -27,
+          37,
+          31,
+          0
+        ]
+      },
+      "native_equals_dos": true,
+      "native_queue": [
+        [
+          -972,
+          -122,
+          0,
+          12,
+          5,
+          0,
+          0
+        ],
+        [
+          332,
+          -755,
+          2,
+          7,
+          5,
+          2,
+          0
+        ],
+        [
+          -588,
+          417,
+          0,
+          10,
+          5,
+          0,
+          0
+        ]
+      ],
+      "native_status": 0,
+      "oracle_queue": [
+        [
+          -972,
+          -122,
+          0,
+          12,
+          5,
+          0,
+          0
+        ],
+        [
+          332,
+          -755,
+          2,
+          7,
+          5,
+          2,
+          0
+        ],
+        [
+          -588,
+          417,
+          0,
+          10,
+          5,
+          0,
+          0
+        ]
+      ],
+      "pair_diff": {},
+      "x_plus_one_negative_detected": null
+    },
+    {
+      "dos_candidate_equal": true,
+      "id": "random/0006",
+      "input": {
+        "args": [
+          -111,
+          -284,
+          0,
+          10,
+          3
+        ],
+        "initial_queue": [
+          [
+            -294,
+            -699,
+            2,
+            12,
+            6
+          ],
+          [
+            755,
+            -291,
+            3,
+            11,
+            1
+          ],
+          [
+            897,
+            696,
+            3,
+            -3,
+            1
+          ],
+          [
+            272,
+            -402,
+            1,
+            3,
+            0
+          ]
+        ],
+        "pixel_size": [
+          12,
+          12
+        ],
+        "viewport": [
+          -28,
+          -10,
+          33,
+          26,
+          1
+        ]
+      },
+      "native_equals_dos": true,
+      "native_queue": [
+        [
+          -294,
+          -699,
+          2,
+          12,
+          5,
+          6,
+          0
+        ],
+        [
+          755,
+          -291,
+          3,
+          11,
+          5,
+          1,
+          0
+        ],
+        [
+          897,
+          696,
+          3,
+          -3,
+          5,
+          1,
+          0
+        ],
+        [
+          272,
+          -402,
+          1,
+          3,
+          5,
+          0,
+          0
+        ]
+      ],
+      "native_status": 0,
+      "oracle_queue": [
+        [
+          -294,
+          -699,
+          2,
+          12,
+          5,
+          6,
+          0
+        ],
+        [
+          755,
+          -291,
+          3,
+          11,
+          5,
+          1,
+          0
+        ],
+        [
+          897,
+          696,
+          3,
+          -3,
+          5,
+          1,
+          0
+        ],
+        [
+          272,
+          -402,
+          1,
+          3,
+          5,
+          0,
+          0
+        ]
+      ],
+      "pair_diff": {},
+      "x_plus_one_negative_detected": null
+    },
+    {
+      "dos_candidate_equal": true,
+      "id": "random/0007",
+      "input": {
+        "args": [
+          -45,
+          -39,
+          1,
+          2,
+          4
+        ],
+        "initial_queue": [],
+        "pixel_size": [
+          16,
+          12
+        ],
+        "viewport": [
+          21,
+          25,
+          3,
+          15,
+          3
+        ]
+      },
+      "native_equals_dos": true,
+      "native_queue": [],
+      "native_status": 0,
+      "oracle_queue": [],
+      "pair_diff": {},
+      "x_plus_one_negative_detected": null
+    },
+    {
+      "dos_candidate_equal": true,
+      "id": "random/0008",
+      "input": {
+        "args": [
+          32,
+          76,
+          3,
+          2,
+          3
+        ],
+        "initial_queue": [
+          [
+            -194,
+            -63,
+            1,
+            4,
+            7
+          ],
+          [
+            -362,
+            981,
+            0,
+            8,
+            1
+          ],
+          [
+            -431,
+            -345,
+            1,
+            2,
+            5
+          ],
+          [
+            -682,
+            -964,
+            1,
+            11,
+            3
+          ],
+          [
+            169,
+            460,
+            3,
+            7,
+            2
+          ],
+          [
+            -496,
+            528,
+            3,
+            -2,
+            6
+          ]
+        ],
+        "pixel_size": [
+          16,
+          8
+        ],
+        "viewport": [
+          24,
+          27,
+          30,
+          19,
+          3
+        ]
+      },
+      "native_equals_dos": true,
+      "native_queue": [
+        [
+          -194,
+          -63,
+          1,
+          4,
+          5,
+          7,
+          0
+        ],
+        [
+          -362,
+          981,
+          0,
+          8,
+          5,
+          1,
+          0
+        ],
+        [
+          -431,
+          -345,
+          1,
+          2,
+          5,
+          5,
+          0
+        ],
+        [
+          -682,
+          -964,
+          1,
+          11,
+          5,
+          3,
+          0
+        ],
+        [
+          169,
+          460,
+          3,
+          7,
+          5,
+          2,
+          0
+        ],
+        [
+          -496,
+          528,
+          3,
+          -2,
+          5,
+          6,
+          0
+        ]
+      ],
+      "native_status": 0,
+      "oracle_queue": [
+        [
+          -194,
+          -63,
+          1,
+          4,
+          5,
+          7,
+          0
+        ],
+        [
+          -362,
+          981,
+          0,
+          8,
+          5,
+          1,
+          0
+        ],
+        [
+          -431,
+          -345,
+          1,
+          2,
+          5,
+          5,
+          0
+        ],
+        [
+          -682,
+          -964,
+          1,
+          11,
+          5,
+          3,
+          0
+        ],
+        [
+          169,
+          460,
+          3,
+          7,
+          5,
+          2,
+          0
+        ],
+        [
+          -496,
+          528,
+          3,
+          -2,
+          5,
+          6,
+          0
+        ]
+      ],
+      "pair_diff": {},
+      "x_plus_one_negative_detected": null
+    },
+    {
+      "dos_candidate_equal": true,
+      "id": "random/0009",
+      "input": {
+        "args": [
+          -2,
+          4,
+          1,
+          2,
+          3
+        ],
+        "initial_queue": [
+          [
+            -706,
+            -862,
+            2,
+            2,
+            4
+          ]
+        ],
+        "pixel_size": [
+          16,
+          8
+        ],
+        "viewport": [
+          -17,
+          12,
+          31,
+          6,
+          3
+        ]
+      },
+      "native_equals_dos": true,
+      "native_queue": [
+        [
+          -706,
+          -862,
+          2,
+          2,
+          5,
+          4,
+          0
+        ]
+      ],
+      "native_status": 0,
+      "oracle_queue": [
+        [
+          -706,
+          -862,
+          2,
+          2,
+          5,
+          4,
+          0
+        ]
+      ],
+      "pair_diff": {},
+      "x_plus_one_negative_detected": null
+    },
+    {
+      "dos_candidate_equal": true,
+      "id": "random/0010",
+      "input": {
+        "args": [
+          540,
+          332,
+          2,
+          10,
+          2
+        ],
+        "initial_queue": [
+          [
+            68,
+            242,
+            3,
+            0,
+            1
+          ],
+          [
+            -678,
+            197,
+            1,
+            4,
+            1
+          ],
+          [
+            -710,
+            -561,
+            2,
+            4,
+            2
+          ],
+          [
+            402,
+            -56,
+            0,
+            -1,
+            1
+          ],
+          [
+            83,
+            -7,
+            3,
+            1,
+            3
+          ],
+          [
+            -982,
+            -456,
+            0,
+            1,
+            3
+          ]
+        ],
+        "pixel_size": [
+          16,
+          12
+        ],
+        "viewport": [
+          -17,
+          6,
+          36,
+          8,
+          3
+        ]
+      },
+      "native_equals_dos": true,
+      "native_queue": [
+        [
+          68,
+          242,
+          3,
+          0,
+          5,
+          1,
+          0
+        ],
+        [
+          -678,
+          197,
+          1,
+          4,
+          5,
+          1,
+          0
+        ],
+        [
+          -710,
+          -561,
+          2,
+          4,
+          5,
+          2,
+          0
+        ],
+        [
+          402,
+          -56,
+          0,
+          -1,
+          5,
+          1,
+          0
+        ],
+        [
+          83,
+          -7,
+          3,
+          1,
+          5,
+          3,
+          0
+        ],
+        [
+          -982,
+          -456,
+          0,
+          1,
+          5,
+          3,
+          0
+        ]
+      ],
+      "native_status": 0,
+      "oracle_queue": [
+        [
+          68,
+          242,
+          3,
+          0,
+          5,
+          1,
+          0
+        ],
+        [
+          -678,
+          197,
+          1,
+          4,
+          5,
+          1,
+          0
+        ],
+        [
+          -710,
+          -561,
+          2,
+          4,
+          5,
+          2,
+          0
+        ],
+        [
+          402,
+          -56,
+          0,
+          -1,
+          5,
+          1,
+          0
+        ],
+        [
+          83,
+          -7,
+          3,
+          1,
+          5,
+          3,
+          0
+        ],
+        [
+          -982,
+          -456,
+          0,
+          1,
+          5,
+          3,
+          0
+        ]
+      ],
+      "pair_diff": {},
+      "x_plus_one_negative_detected": null
+    },
+    {
+      "dos_candidate_equal": true,
+      "id": "random/0011",
+      "input": {
+        "args": [
+          17,
+          -5,
+          2,
+          0,
+          3
+        ],
+        "initial_queue": [
+          [
+            -450,
+            75,
+            1,
+            5,
+            0
+          ]
+        ],
+        "pixel_size": [
+          16,
+          12
+        ],
+        "viewport": [
+          20,
+          -11,
+          3,
+          18,
+          1
+        ]
+      },
+      "native_equals_dos": true,
+      "native_queue": [
+        [
+          -450,
+          75,
+          1,
+          5,
+          5,
+          0,
+          0
+        ]
+      ],
+      "native_status": 0,
+      "oracle_queue": [
+        [
+          -450,
+          75,
+          1,
+          5,
+          5,
+          0,
+          0
+        ]
+      ],
+      "pair_diff": {},
+      "x_plus_one_negative_detected": null
+    },
+    {
+      "dos_candidate_equal": true,
+      "id": "random/0012",
+      "input": {
+        "args": [
+          16,
+          5,
+          0,
+          1,
+          4
+        ],
+        "initial_queue": [
+          [
+            587,
+            2,
+            3,
+            4,
+            2
+          ],
+          [
+            723,
+            82,
+            2,
+            -1,
+            6
+          ],
+          [
+            -981,
+            959,
+            1,
+            12,
+            6
+          ],
+          [
+            -598,
+            976,
+            2,
+            10,
+            3
+          ],
+          [
+            -591,
+            682,
+            2,
+            -1,
+            0
+          ],
+          [
+            -496,
+            767,
+            3,
+            1,
+            1
+          ]
+        ],
+        "pixel_size": [
+          32,
+          16
+        ],
+        "viewport": [
+          31,
+          13,
+          5,
+          10,
+          3
+        ]
+      },
+      "native_equals_dos": true,
+      "native_queue": [
+        [
+          587,
+          2,
+          3,
+          4,
+          5,
+          2,
+          0
+        ],
+        [
+          723,
+          82,
+          2,
+          -1,
+          5,
+          6,
+          0
+        ],
+        [
+          -981,
+          959,
+          1,
+          12,
+          5,
+          6,
+          0
+        ],
+        [
+          -598,
+          976,
+          2,
+          10,
+          5,
+          3,
+          0
+        ],
+        [
+          -591,
+          682,
+          2,
+          -1,
+          5,
+          0,
+          0
+        ],
+        [
+          -496,
+          767,
+          3,
+          1,
+          5,
+          1,
+          0
+        ]
+      ],
+      "native_status": 0,
+      "oracle_queue": [
+        [
+          587,
+          2,
+          3,
+          4,
+          5,
+          2,
+          0
+        ],
+        [
+          723,
+          82,
+          2,
+          -1,
+          5,
+          6,
+          0
+        ],
+        [
+          -981,
+          959,
+          1,
+          12,
+          5,
+          6,
+          0
+        ],
+        [
+          -598,
+          976,
+          2,
+          10,
+          5,
+          3,
+          0
+        ],
+        [
+          -591,
+          682,
+          2,
+          -1,
+          5,
+          0,
+          0
+        ],
+        [
+          -496,
+          767,
+          3,
+          1,
+          5,
+          1,
+          0
+        ]
+      ],
+      "pair_diff": {},
+      "x_plus_one_negative_detected": null
+    },
+    {
+      "dos_candidate_equal": true,
+      "id": "random/0013",
+      "input": {
+        "args": [
+          -33,
+          23,
+          3,
+          2,
+          2
+        ],
+        "initial_queue": [
+          [
+            517,
+            -85,
+            1,
+            11,
+            7
+          ],
+          [
+            -212,
+            -923,
+            1,
+            4,
+            0
+          ]
+        ],
+        "pixel_size": [
+          24,
+          24
+        ],
+        "viewport": [
+          -26,
+          -29,
+          16,
+          21,
+          1
+        ]
+      },
+      "native_equals_dos": true,
+      "native_queue": [
+        [
+          517,
+          -85,
+          1,
+          11,
+          5,
+          7,
+          0
+        ],
+        [
+          -212,
+          -923,
+          1,
+          4,
+          5,
+          0,
+          0
+        ]
+      ],
+      "native_status": 0,
+      "oracle_queue": [
+        [
+          517,
+          -85,
+          1,
+          11,
+          5,
+          7,
+          0
+        ],
+        [
+          -212,
+          -923,
+          1,
+          4,
+          5,
+          0,
+          0
+        ]
+      ],
+      "pair_diff": {},
+      "x_plus_one_negative_detected": null
+    },
+    {
+      "dos_candidate_equal": true,
+      "id": "random/0014",
+      "input": {
+        "args": [
+          -17,
+          39,
+          2,
+          1,
+          2
+        ],
+        "initial_queue": [
+          [
+            591,
+            -247,
+            0,
+            2,
+            1
+          ],
+          [
+            547,
+            -989,
+            2,
+            6,
+            0
+          ],
+          [
+            33,
+            -31,
+            2,
+            6,
+            1
+          ],
+          [
+            -722,
+            303,
+            0,
+            1,
+            5
+          ]
+        ],
+        "pixel_size": [
+          12,
+          24
+        ],
+        "viewport": [
+          -6,
+          20,
+          31,
+          22,
+          2
+        ]
+      },
+      "native_equals_dos": true,
+      "native_queue": [
+        [
+          591,
+          -247,
+          0,
+          2,
+          5,
+          1,
+          0
+        ],
+        [
+          547,
+          -989,
+          2,
+          6,
+          5,
+          0,
+          0
+        ],
+        [
+          33,
+          -31,
+          2,
+          6,
+          5,
+          1,
+          0
+        ],
+        [
+          -722,
+          303,
+          0,
+          1,
+          5,
+          5,
+          0
+        ]
+      ],
+      "native_status": 0,
+      "oracle_queue": [
+        [
+          591,
+          -247,
+          0,
+          2,
+          5,
+          1,
+          0
+        ],
+        [
+          547,
+          -989,
+          2,
+          6,
+          5,
+          0,
+          0
+        ],
+        [
+          33,
+          -31,
+          2,
+          6,
+          5,
+          1,
+          0
+        ],
+        [
+          -722,
+          303,
+          0,
+          1,
+          5,
+          5,
+          0
+        ]
+      ],
+      "pair_diff": {},
+      "x_plus_one_negative_detected": null
+    },
+    {
+      "dos_candidate_equal": true,
+      "id": "random/0015",
+      "input": {
+        "args": [
+          14,
+          1,
+          3,
+          2,
+          5
+        ],
+        "initial_queue": [
+          [
+            -993,
+            727,
+            2,
+            11,
+            2
+          ],
+          [
+            -416,
+            69,
+            0,
+            9,
+            7
+          ],
+          [
+            -943,
+            -647,
+            3,
+            8,
+            1
+          ],
+          [
+            -727,
+            866,
+            3,
+            12,
+            1
+          ]
+        ],
+        "pixel_size": [
+          32,
+          12
+        ],
+        "viewport": [
+          18,
+          21,
+          2,
+          24,
+          0
+        ]
+      },
+      "native_equals_dos": true,
+      "native_queue": [
+        [
+          -993,
+          727,
+          2,
+          11,
+          5,
+          2,
+          0
+        ],
+        [
+          -416,
+          69,
+          0,
+          9,
+          5,
+          7,
+          0
+        ],
+        [
+          -943,
+          -647,
+          3,
+          8,
+          5,
+          1,
+          0
+        ],
+        [
+          -727,
+          866,
+          3,
+          12,
+          5,
+          1,
+          0
+        ]
+      ],
+      "native_status": 0,
+      "oracle_queue": [
+        [
+          -993,
+          727,
+          2,
+          11,
+          5,
+          2,
+          0
+        ],
+        [
+          -416,
+          69,
+          0,
+          9,
+          5,
+          7,
+          0
+        ],
+        [
+          -943,
+          -647,
+          3,
+          8,
+          5,
+          1,
+          0
+        ],
+        [
+          -727,
+          866,
+          3,
+          12,
+          5,
+          1,
+          0
+        ]
+      ],
+      "pair_diff": {},
+      "x_plus_one_negative_detected": null
+    },
+    {
+      "dos_candidate_equal": true,
+      "id": "random/0016",
+      "input": {
+        "args": [
+          496,
+          93,
+          0,
+          10,
+          6
+        ],
+        "initial_queue": [
+          [
+            -628,
+            -17,
+            3,
+            10,
+            6
+          ]
+        ],
+        "pixel_size": [
+          32,
+          12
+        ],
+        "viewport": [
+          -6,
+          -18,
+          14,
+          1,
+          2
+        ]
+      },
+      "native_equals_dos": true,
+      "native_queue": [
+        [
+          -628,
+          -17,
+          3,
+          10,
+          5,
+          6,
+          0
+        ]
+      ],
+      "native_status": 0,
+      "oracle_queue": [
+        [
+          -628,
+          -17,
+          3,
+          10,
+          5,
+          6,
+          0
+        ]
+      ],
+      "pair_diff": {},
+      "x_plus_one_negative_detected": null
+    },
+    {
+      "dos_candidate_equal": true,
+      "id": "random/0017",
+      "input": {
+        "args": [
+          -16,
+          1,
+          1,
+          1,
+          2
+        ],
+        "initial_queue": [],
+        "pixel_size": [
+          8,
+          24
+        ],
+        "viewport": [
+          -30,
+          27,
+          1,
+          7,
+          3
+        ]
+      },
+      "native_equals_dos": true,
+      "native_queue": [],
+      "native_status": 0,
+      "oracle_queue": [],
+      "pair_diff": {},
+      "x_plus_one_negative_detected": null
+    },
+    {
+      "dos_candidate_equal": true,
+      "id": "random/0018",
+      "input": {
+        "args": [
+          2,
+          59,
+          0,
+          0,
+          3
+        ],
+        "initial_queue": [
+          [
+            376,
+            547,
+            1,
+            2,
+            7
+          ],
+          [
+            528,
+            529,
+            3,
+            3,
+            0
+          ],
+          [
+            440,
+            -441,
+            1,
+            6,
+            6
+          ]
+        ],
+        "pixel_size": [
+          24,
+          32
+        ],
+        "viewport": [
+          -12,
+          8,
+          30,
+          18,
+          1
+        ]
+      },
+      "native_equals_dos": true,
+      "native_queue": [
+        [
+          376,
+          547,
+          1,
+          2,
+          5,
+          7,
+          0
+        ],
+        [
+          528,
+          529,
+          3,
+          3,
+          5,
+          0,
+          0
+        ],
+        [
+          440,
+          -441,
+          1,
+          6,
+          5,
+          6,
+          0
+        ]
+      ],
+      "native_status": 0,
+      "oracle_queue": [
+        [
+          376,
+          547,
+          1,
+          2,
+          5,
+          7,
+          0
+        ],
+        [
+          528,
+          529,
+          3,
+          3,
+          5,
+          0,
+          0
+        ],
+        [
+          440,
+          -441,
+          1,
+          6,
+          5,
+          6,
+          0
+        ]
+      ],
+      "pair_diff": {},
+      "x_plus_one_negative_detected": null
+    },
+    {
+      "dos_candidate_equal": true,
+      "id": "random/0019",
+      "input": {
+        "args": [
+          82,
+          67,
+          1,
+          0,
+          0
+        ],
+        "initial_queue": [
+          [
+            -299,
+            70,
+            1,
+            11,
+            1
+          ],
+          [
+            187,
+            -986,
+            1,
+            -2,
+            7
+          ],
+          [
+            932,
+            -566,
+            2,
+            6,
+            2
+          ],
+          [
+            525,
+            -206,
+            1,
+            2,
+            7
+          ],
+          [
+            643,
+            -839,
+            1,
+            8,
+            2
+          ],
+          [
+            -273,
+            -38,
+            1,
+            5,
+            1
+          ]
+        ],
+        "pixel_size": [
+          8,
+          12
+        ],
+        "viewport": [
+          -6,
+          -15,
+          41,
+          19,
+          0
+        ]
+      },
+      "native_equals_dos": true,
+      "native_queue": [
+        [
+          -299,
+          70,
+          1,
+          11,
+          5,
+          1,
+          0
+        ],
+        [
+          187,
+          -986,
+          1,
+          -2,
+          5,
+          7,
+          0
+        ],
+        [
+          932,
+          -566,
+          2,
+          6,
+          5,
+          2,
+          0
+        ],
+        [
+          525,
+          -206,
+          1,
+          2,
+          5,
+          7,
+          0
+        ],
+        [
+          643,
+          -839,
+          1,
+          8,
+          5,
+          2,
+          0
+        ],
+        [
+          -273,
+          -38,
+          1,
+          5,
+          5,
+          1,
+          0
+        ]
+      ],
+      "native_status": 0,
+      "oracle_queue": [
+        [
+          -299,
+          70,
+          1,
+          11,
+          5,
+          1,
+          0
+        ],
+        [
+          187,
+          -986,
+          1,
+          -2,
+          5,
+          7,
+          0
+        ],
+        [
+          932,
+          -566,
+          2,
+          6,
+          5,
+          2,
+          0
+        ],
+        [
+          525,
+          -206,
+          1,
+          2,
+          5,
+          7,
+          0
+        ],
+        [
+          643,
+          -839,
+          1,
+          8,
+          5,
+          2,
+          0
+        ],
+        [
+          -273,
+          -38,
+          1,
+          5,
+          5,
+          1,
+          0
+        ]
+      ],
+      "pair_diff": {},
+      "x_plus_one_negative_detected": null
+    },
+    {
+      "dos_candidate_equal": true,
+      "id": "random/0020",
+      "input": {
+        "args": [
+          34,
+          -20,
+          0,
+          2,
+          2
+        ],
+        "initial_queue": [
+          [
+            -584,
+            498,
+            2,
+            2,
+            3
+          ],
+          [
+            784,
+            -946,
+            0,
+            7,
+            2
+          ],
+          [
+            782,
+            67,
+            0,
+            9,
+            2
+          ],
+          [
+            -848,
+            -313,
+            0,
+            8,
+            6
+          ],
+          [
+            648,
+            -854,
+            0,
+            -2,
+            1
+          ]
+        ],
+        "pixel_size": [
+          16,
+          12
+        ],
+        "viewport": [
+          -30,
+          -24,
+          27,
+          35,
+          3
+        ]
+      },
+      "native_equals_dos": true,
+      "native_queue": [
+        [
+          -584,
+          498,
+          2,
+          2,
+          5,
+          3,
+          0
+        ],
+        [
+          784,
+          -946,
+          0,
+          7,
+          5,
+          2,
+          0
+        ],
+        [
+          782,
+          67,
+          0,
+          9,
+          5,
+          2,
+          0
+        ],
+        [
+          -848,
+          -313,
+          0,
+          8,
+          5,
+          6,
+          0
+        ],
+        [
+          648,
+          -854,
+          0,
+          -2,
+          5,
+          1,
+          0
+        ]
+      ],
+      "native_status": 0,
+      "oracle_queue": [
+        [
+          -584,
+          498,
+          2,
+          2,
+          5,
+          3,
+          0
+        ],
+        [
+          784,
+          -946,
+          0,
+          7,
+          5,
+          2,
+          0
+        ],
+        [
+          782,
+          67,
+          0,
+          9,
+          5,
+          2,
+          0
+        ],
+        [
+          -848,
+          -313,
+          0,
+          8,
+          5,
+          6,
+          0
+        ],
+        [
+          648,
+          -854,
+          0,
+          -2,
+          5,
+          1,
+          0
+        ]
+      ],
+      "pair_diff": {},
+      "x_plus_one_negative_detected": null
+    },
+    {
+      "dos_candidate_equal": true,
+      "id": "random/0021",
+      "input": {
+        "args": [
+          64,
+          42,
+          2,
+          0,
+          6
+        ],
+        "initial_queue": [
+          [
+            620,
+            687,
+            3,
+            12,
+            0
+          ]
+        ],
+        "pixel_size": [
+          8,
+          8
+        ],
+        "viewport": [
+          7,
+          -31,
+          23,
+          19,
+          2
+        ]
+      },
+      "native_equals_dos": true,
+      "native_queue": [
+        [
+          620,
+          687,
+          3,
+          12,
+          5,
+          0,
+          0
+        ]
+      ],
+      "native_status": 0,
+      "oracle_queue": [
+        [
+          620,
+          687,
+          3,
+          12,
+          5,
+          0,
+          0
+        ]
+      ],
+      "pair_diff": {},
+      "x_plus_one_negative_detected": null
+    },
+    {
+      "dos_candidate_equal": true,
+      "id": "random/0022",
+      "input": {
+        "args": [
+          38,
+          21,
+          1,
+          2,
+          4
+        ],
+        "initial_queue": [],
+        "pixel_size": [
+          12,
+          32
+        ],
+        "viewport": [
+          -20,
+          9,
+          32,
+          32,
+          3
+        ]
+      },
+      "native_equals_dos": true,
+      "native_queue": [],
+      "native_status": 0,
+      "oracle_queue": [],
+      "pair_diff": {},
+      "x_plus_one_negative_detected": null
+    },
+    {
+      "dos_candidate_equal": true,
+      "id": "random/0023",
+      "input": {
+        "args": [
+          80,
+          66,
+          2,
+          0,
+          7
+        ],
+        "initial_queue": [
+          [
+            -26,
+            875,
+            3,
+            12,
+            7
+          ],
+          [
+            756,
+            -819,
+            1,
+            -3,
+            2
+          ],
+          [
+            82,
+            341,
+            3,
+            7,
+            7
+          ],
+          [
+            566,
+            127,
+            0,
+            -2,
+            1
+          ]
+        ],
+        "pixel_size": [
+          24,
+          12
+        ],
+        "viewport": [
+          3,
+          -4,
+          27,
+          31,
+          2
+        ]
+      },
+      "native_equals_dos": true,
+      "native_queue": [
+        [
+          -26,
+          875,
+          3,
+          12,
+          5,
+          7,
+          0
+        ],
+        [
+          756,
+          -819,
+          1,
+          -3,
+          5,
+          2,
+          0
+        ],
+        [
+          82,
+          341,
+          3,
+          7,
+          5,
+          7,
+          0
+        ],
+        [
+          566,
+          127,
+          0,
+          -2,
+          5,
+          1,
+          0
+        ]
+      ],
+      "native_status": 0,
+      "oracle_queue": [
+        [
+          -26,
+          875,
+          3,
+          12,
+          5,
+          7,
+          0
+        ],
+        [
+          756,
+          -819,
+          1,
+          -3,
+          5,
+          2,
+          0
+        ],
+        [
+          82,
+          341,
+          3,
+          7,
+          5,
+          7,
+          0
+        ],
+        [
+          566,
+          127,
+          0,
+          -2,
+          5,
+          1,
+          0
+        ]
+      ],
+      "pair_diff": {},
+      "x_plus_one_negative_detected": null
+    },
+    {
+      "dos_candidate_equal": true,
+      "id": "random/0024",
+      "input": {
+        "args": [
+          81,
+          40,
+          0,
+          1,
+          5
+        ],
+        "initial_queue": [
+          [
+            592,
+            -357,
+            1,
+            4,
+            0
+          ],
+          [
+            -346,
+            803,
+            3,
+            2,
+            6
+          ],
+          [
+            921,
+            -139,
+            1,
+            -3,
+            2
+          ],
+          [
+            588,
+            612,
+            1,
+            4,
+            7
+          ],
+          [
+            25,
+            514,
+            3,
+            8,
+            5
+          ],
+          [
+            187,
+            21,
+            0,
+            11,
+            4
+          ]
+        ],
+        "pixel_size": [
+          8,
+          8
+        ],
+        "viewport": [
+          22,
+          3,
+          7,
+          24,
+          2
+        ]
+      },
+      "native_equals_dos": true,
+      "native_queue": [
+        [
+          592,
+          -357,
+          1,
+          4,
+          5,
+          0,
+          0
+        ],
+        [
+          -346,
+          803,
+          3,
+          2,
+          5,
+          6,
+          0
+        ],
+        [
+          921,
+          -139,
+          1,
+          -3,
+          5,
+          2,
+          0
+        ],
+        [
+          588,
+          612,
+          1,
+          4,
+          5,
+          7,
+          0
+        ],
+        [
+          25,
+          514,
+          3,
+          8,
+          5,
+          5,
+          0
+        ],
+        [
+          187,
+          21,
+          0,
+          11,
+          5,
+          4,
+          0
+        ]
+      ],
+      "native_status": 0,
+      "oracle_queue": [
+        [
+          592,
+          -357,
+          1,
+          4,
+          5,
+          0,
+          0
+        ],
+        [
+          -346,
+          803,
+          3,
+          2,
+          5,
+          6,
+          0
+        ],
+        [
+          921,
+          -139,
+          1,
+          -3,
+          5,
+          2,
+          0
+        ],
+        [
+          588,
+          612,
+          1,
+          4,
+          5,
+          7,
+          0
+        ],
+        [
+          25,
+          514,
+          3,
+          8,
+          5,
+          5,
+          0
+        ],
+        [
+          187,
+          21,
+          0,
+          11,
+          5,
+          4,
+          0
+        ]
+      ],
+      "pair_diff": {},
+      "x_plus_one_negative_detected": null
+    },
+    {
+      "dos_candidate_equal": true,
+      "id": "random/0025",
+      "input": {
+        "args": [
+          9,
+          52,
+          2,
+          2,
+          4
+        ],
+        "initial_queue": [
+          [
+            508,
+            416,
+            3,
+            3,
+            1
+          ],
+          [
+            991,
+            125,
+            1,
+            -3,
+            5
+          ],
+          [
+            -869,
+            960,
+            3,
+            0,
+            7
+          ],
+          [
+            261,
+            -928,
+            2,
+            7,
+            7
+          ],
+          [
+            -331,
+            -888,
+            2,
+            -1,
+            3
+          ]
+        ],
+        "pixel_size": [
+          12,
+          12
+        ],
+        "viewport": [
+          21,
+          6,
+          14,
+          27,
+          2
+        ]
+      },
+      "native_equals_dos": true,
+      "native_queue": [
+        [
+          508,
+          416,
+          3,
+          3,
+          5,
+          1,
+          0
+        ],
+        [
+          991,
+          125,
+          1,
+          -3,
+          5,
+          5,
+          0
+        ],
+        [
+          -869,
+          960,
+          3,
+          0,
+          5,
+          7,
+          0
+        ],
+        [
+          261,
+          -928,
+          2,
+          7,
+          5,
+          7,
+          0
+        ],
+        [
+          -331,
+          -888,
+          2,
+          -1,
+          5,
+          3,
+          0
+        ]
+      ],
+      "native_status": 0,
+      "oracle_queue": [
+        [
+          508,
+          416,
+          3,
+          3,
+          5,
+          1,
+          0
+        ],
+        [
+          991,
+          125,
+          1,
+          -3,
+          5,
+          5,
+          0
+        ],
+        [
+          -869,
+          960,
+          3,
+          0,
+          5,
+          7,
+          0
+        ],
+        [
+          261,
+          -928,
+          2,
+          7,
+          5,
+          7,
+          0
+        ],
+        [
+          -331,
+          -888,
+          2,
+          -1,
+          5,
+          3,
+          0
+        ]
+      ],
+      "pair_diff": {},
+      "x_plus_one_negative_detected": null
+    },
+    {
+      "dos_candidate_equal": true,
+      "id": "random/0026",
+      "input": {
+        "args": [
+          -26,
+          45,
+          2,
+          0,
+          5
+        ],
+        "initial_queue": [
+          [
+            -187,
+            35,
+            1,
+            11,
+            6
+          ],
+          [
+            483,
+            400,
+            1,
+            12,
+            3
+          ]
+        ],
+        "pixel_size": [
+          8,
+          32
+        ],
+        "viewport": [
+          0,
+          8,
+          42,
+          25,
+          0
+        ]
+      },
+      "native_equals_dos": true,
+      "native_queue": [
+        [
+          -187,
+          35,
+          1,
+          11,
+          5,
+          6,
+          0
+        ],
+        [
+          483,
+          400,
+          1,
+          12,
+          5,
+          3,
+          0
+        ]
+      ],
+      "native_status": 0,
+      "oracle_queue": [
+        [
+          -187,
+          35,
+          1,
+          11,
+          5,
+          6,
+          0
+        ],
+        [
+          483,
+          400,
+          1,
+          12,
+          5,
+          3,
+          0
+        ]
+      ],
+      "pair_diff": {},
+      "x_plus_one_negative_detected": null
+    },
+    {
+      "dos_candidate_equal": true,
+      "id": "random/0027",
+      "input": {
+        "args": [
+          35,
+          -24,
+          1,
+          2,
+          1
+        ],
+        "initial_queue": [
+          [
+            79,
+            -821,
+            0,
+            5,
+            3
+          ],
+          [
+            56,
+            -742,
+            2,
+            4,
+            6
+          ],
+          [
+            775,
+            -611,
+            1,
+            3,
+            1
+          ],
+          [
+            -869,
+            422,
+            0,
+            5,
+            5
+          ]
+        ],
+        "pixel_size": [
+          32,
+          12
+        ],
+        "viewport": [
+          5,
+          -12,
+          41,
+          7,
+          2
+        ]
+      },
+      "native_equals_dos": true,
+      "native_queue": [
+        [
+          79,
+          -821,
+          0,
+          5,
+          5,
+          3,
+          0
+        ],
+        [
+          56,
+          -742,
+          2,
+          4,
+          5,
+          6,
+          0
+        ],
+        [
+          775,
+          -611,
+          1,
+          3,
+          5,
+          1,
+          0
+        ],
+        [
+          -869,
+          422,
+          0,
+          5,
+          5,
+          5,
+          0
+        ]
+      ],
+      "native_status": 0,
+      "oracle_queue": [
+        [
+          79,
+          -821,
+          0,
+          5,
+          5,
+          3,
+          0
+        ],
+        [
+          56,
+          -742,
+          2,
+          4,
+          5,
+          6,
+          0
+        ],
+        [
+          775,
+          -611,
+          1,
+          3,
+          5,
+          1,
+          0
+        ],
+        [
+          -869,
+          422,
+          0,
+          5,
+          5,
+          5,
+          0
+        ]
+      ],
+      "pair_diff": {},
+      "x_plus_one_negative_detected": null
+    },
+    {
+      "dos_candidate_equal": true,
+      "id": "random/0028",
+      "input": {
+        "args": [
+          74,
+          -50,
+          0,
+          0,
+          0
+        ],
+        "initial_queue": [
+          [
+            -365,
+            -536,
+            2,
+            2,
+            4
+          ],
+          [
+            718,
+            204,
+            2,
+            -2,
+            2
+          ],
+          [
+            -993,
+            869,
+            3,
+            2,
+            7
+          ],
+          [
+            174,
+            743,
+            3,
+            5,
+            1
+          ]
+        ],
+        "pixel_size": [
+          8,
+          16
+        ],
+        "viewport": [
+          -27,
+          -6,
+          21,
+          6,
+          0
+        ]
+      },
+      "native_equals_dos": true,
+      "native_queue": [
+        [
+          -365,
+          -536,
+          2,
+          2,
+          5,
+          4,
+          0
+        ],
+        [
+          718,
+          204,
+          2,
+          -2,
+          5,
+          2,
+          0
+        ],
+        [
+          -993,
+          869,
+          3,
+          2,
+          5,
+          7,
+          0
+        ],
+        [
+          174,
+          743,
+          3,
+          5,
+          5,
+          1,
+          0
+        ]
+      ],
+      "native_status": 0,
+      "oracle_queue": [
+        [
+          -365,
+          -536,
+          2,
+          2,
+          5,
+          4,
+          0
+        ],
+        [
+          718,
+          204,
+          2,
+          -2,
+          5,
+          2,
+          0
+        ],
+        [
+          -993,
+          869,
+          3,
+          2,
+          5,
+          7,
+          0
+        ],
+        [
+          174,
+          743,
+          3,
+          5,
+          5,
+          1,
+          0
+        ]
+      ],
+      "pair_diff": {},
+      "x_plus_one_negative_detected": null
+    },
+    {
+      "dos_candidate_equal": true,
+      "id": "random/0029",
+      "input": {
+        "args": [
+          -40,
+          -5,
+          3,
+          2,
+          0
+        ],
+        "initial_queue": [
+          [
+            -883,
+            -12,
+            2,
+            6,
+            5
+          ],
+          [
+            -86,
+            482,
+            1,
+            -2,
+            0
+          ],
+          [
+            19,
+            -24,
+            2,
+            1,
+            1
+          ],
+          [
+            583,
+            -871,
+            1,
+            -1,
+            4
+          ],
+          [
+            -338,
+            394,
+            3,
+            12,
+            2
+          ]
+        ],
+        "pixel_size": [
+          12,
+          16
+        ],
+        "viewport": [
+          12,
+          8,
+          41,
+          11,
+          1
+        ]
+      },
+      "native_equals_dos": true,
+      "native_queue": [
+        [
+          -883,
+          -12,
+          2,
+          6,
+          5,
+          5,
+          0
+        ],
+        [
+          -86,
+          482,
+          1,
+          -2,
+          5,
+          0,
+          0
+        ],
+        [
+          19,
+          -24,
+          2,
+          1,
+          5,
+          1,
+          0
+        ],
+        [
+          583,
+          -871,
+          1,
+          -1,
+          5,
+          4,
+          0
+        ],
+        [
+          -338,
+          394,
+          3,
+          12,
+          5,
+          2,
+          0
+        ]
+      ],
+      "native_status": 0,
+      "oracle_queue": [
+        [
+          -883,
+          -12,
+          2,
+          6,
+          5,
+          5,
+          0
+        ],
+        [
+          -86,
+          482,
+          1,
+          -2,
+          5,
+          0,
+          0
+        ],
+        [
+          19,
+          -24,
+          2,
+          1,
+          5,
+          1,
+          0
+        ],
+        [
+          583,
+          -871,
+          1,
+          -1,
+          5,
+          4,
+          0
+        ],
+        [
+          -338,
+          394,
+          3,
+          12,
+          5,
+          2,
+          0
+        ]
+      ],
+      "pair_diff": {},
+      "x_plus_one_negative_detected": null
+    },
+    {
+      "dos_candidate_equal": true,
+      "id": "random/0030",
+      "input": {
+        "args": [
+          170,
+          389,
+          2,
+          10,
+          4
+        ],
+        "initial_queue": [
+          [
+            44,
+            -347,
+            1,
+            5,
+            1
+          ],
+          [
+            780,
+            293,
+            2,
+            -1,
+            3
+          ],
+          [
+            -781,
+            -771,
+            3,
+            -2,
+            5
+          ]
+        ],
+        "pixel_size": [
+          12,
+          12
+        ],
+        "viewport": [
+          24,
+          -21,
+          16,
+          17,
+          1
+        ]
+      },
+      "native_equals_dos": true,
+      "native_queue": [
+        [
+          44,
+          -347,
+          1,
+          5,
+          5,
+          1,
+          0
+        ],
+        [
+          780,
+          293,
+          2,
+          -1,
+          5,
+          3,
+          0
+        ],
+        [
+          -781,
+          -771,
+          3,
+          -2,
+          5,
+          5,
+          0
+        ]
+      ],
+      "native_status": 0,
+      "oracle_queue": [
+        [
+          44,
+          -347,
+          1,
+          5,
+          5,
+          1,
+          0
+        ],
+        [
+          780,
+          293,
+          2,
+          -1,
+          5,
+          3,
+          0
+        ],
+        [
+          -781,
+          -771,
+          3,
+          -2,
+          5,
+          5,
+          0
+        ]
+      ],
+      "pair_diff": {},
+      "x_plus_one_negative_detected": null
+    },
+    {
+      "dos_candidate_equal": true,
+      "id": "random/0031",
+      "input": {
+        "args": [
+          5,
+          29,
+          3,
+          1,
+          5
+        ],
+        "initial_queue": [
+          [
+            -501,
+            -359,
+            1,
+            11,
+            1
+          ],
+          [
+            502,
+            263,
+            3,
+            12,
+            2
+          ],
+          [
+            767,
+            -455,
+            3,
+            6,
+            7
+          ],
+          [
+            12,
+            800,
+            0,
+            12,
+            7
+          ]
+        ],
+        "pixel_size": [
+          16,
+          12
+        ],
+        "viewport": [
+          28,
+          16,
+          41,
+          19,
+          1
+        ]
+      },
+      "native_equals_dos": true,
+      "native_queue": [
+        [
+          -501,
+          -359,
+          1,
+          11,
+          5,
+          1,
+          0
+        ],
+        [
+          502,
+          263,
+          3,
+          12,
+          5,
+          2,
+          0
+        ],
+        [
+          767,
+          -455,
+          3,
+          6,
+          5,
+          7,
+          0
+        ],
+        [
+          12,
+          800,
+          0,
+          12,
+          5,
+          7,
+          0
+        ]
+      ],
+      "native_status": 0,
+      "oracle_queue": [
+        [
+          -501,
+          -359,
+          1,
+          11,
+          5,
+          1,
+          0
+        ],
+        [
+          502,
+          263,
+          3,
+          12,
+          5,
+          2,
+          0
+        ],
+        [
+          767,
+          -455,
+          3,
+          6,
+          5,
+          7,
+          0
+        ],
+        [
+          12,
+          800,
+          0,
+          12,
+          5,
+          7,
+          0
+        ]
+      ],
+      "pair_diff": {},
+      "x_plus_one_negative_detected": null
+    },
+    {
+      "dos_candidate_equal": true,
+      "id": "random/0032",
+      "input": {
+        "args": [
+          55,
+          -44,
+          3,
+          0,
+          7
+        ],
+        "initial_queue": [],
+        "pixel_size": [
+          8,
+          8
+        ],
+        "viewport": [
+          26,
+          -11,
+          1,
+          5,
+          3
+        ]
+      },
+      "native_equals_dos": true,
+      "native_queue": [],
+      "native_status": 0,
+      "oracle_queue": [],
+      "pair_diff": {},
+      "x_plus_one_negative_detected": null
+    },
+    {
+      "dos_candidate_equal": true,
+      "id": "random/0033",
+      "input": {
+        "args": [
+          -3,
+          -44,
+          3,
+          0,
+          6
+        ],
+        "initial_queue": [
+          [
+            -474,
+            -999,
+            0,
+            11,
+            0
+          ],
+          [
+            422,
+            226,
+            2,
+            7,
+            5
+          ],
+          [
+            -857,
+            -348,
+            1,
+            -2,
+            7
+          ],
+          [
+            -433,
+            746,
+            2,
+            9,
+            7
+          ]
+        ],
+        "pixel_size": [
+          32,
+          8
+        ],
+        "viewport": [
+          11,
+          2,
+          39,
+          21,
+          1
+        ]
+      },
+      "native_equals_dos": true,
+      "native_queue": [
+        [
+          -474,
+          -999,
+          0,
+          11,
+          5,
+          0,
+          0
+        ],
+        [
+          422,
+          226,
+          2,
+          7,
+          5,
+          5,
+          0
+        ],
+        [
+          -857,
+          -348,
+          1,
+          -2,
+          5,
+          7,
+          0
+        ],
+        [
+          -433,
+          746,
+          2,
+          9,
+          5,
+          7,
+          0
+        ]
+      ],
+      "native_status": 0,
+      "oracle_queue": [
+        [
+          -474,
+          -999,
+          0,
+          11,
+          5,
+          0,
+          0
+        ],
+        [
+          422,
+          226,
+          2,
+          7,
+          5,
+          5,
+          0
+        ],
+        [
+          -857,
+          -348,
+          1,
+          -2,
+          5,
+          7,
+          0
+        ],
+        [
+          -433,
+          746,
+          2,
+          9,
+          5,
+          7,
+          0
+        ]
+      ],
+      "pair_diff": {},
+      "x_plus_one_negative_detected": null
+    },
+    {
+      "dos_candidate_equal": true,
+      "id": "random/0034",
+      "input": {
+        "args": [
+          46,
+          65,
+          2,
+          0,
+          1
+        ],
+        "initial_queue": [
+          [
+            -274,
+            -956,
+            1,
+            1,
+            7
+          ]
+        ],
+        "pixel_size": [
+          8,
+          32
+        ],
+        "viewport": [
+          -11,
+          16,
+          43,
+          14,
+          2
+        ]
+      },
+      "native_equals_dos": true,
+      "native_queue": [
+        [
+          -274,
+          -956,
+          1,
+          1,
+          5,
+          7,
+          0
+        ]
+      ],
+      "native_status": 0,
+      "oracle_queue": [
+        [
+          -274,
+          -956,
+          1,
+          1,
+          5,
+          7,
+          0
+        ]
+      ],
+      "pair_diff": {},
+      "x_plus_one_negative_detected": null
+    },
+    {
+      "dos_candidate_equal": true,
+      "id": "random/0035",
+      "input": {
+        "args": [
+          295,
+          -292,
+          2,
+          10,
+          7
+        ],
+        "initial_queue": [],
+        "pixel_size": [
+          12,
+          12
+        ],
+        "viewport": [
+          20,
+          11,
+          45,
+          29,
+          0
+        ]
+      },
+      "native_equals_dos": true,
+      "native_queue": [],
+      "native_status": 0,
+      "oracle_queue": [],
+      "pair_diff": {},
+      "x_plus_one_negative_detected": null
+    },
+    {
+      "dos_candidate_equal": true,
+      "id": "random/0036",
+      "input": {
+        "args": [
+          -39,
+          -1,
+          0,
+          2,
+          3
+        ],
+        "initial_queue": [],
+        "pixel_size": [
+          8,
+          16
+        ],
+        "viewport": [
+          12,
+          6,
+          25,
+          23,
+          3
+        ]
+      },
+      "native_equals_dos": true,
+      "native_queue": [],
+      "native_status": 0,
+      "oracle_queue": [],
+      "pair_diff": {},
+      "x_plus_one_negative_detected": null
+    },
+    {
+      "dos_candidate_equal": true,
+      "id": "random/0037",
+      "input": {
+        "args": [
+          19,
+          653,
+          0,
+          10,
+          6
+        ],
+        "initial_queue": [
+          [
+            -996,
+            -211,
+            2,
+            9,
+            4
+          ],
+          [
+            868,
+            -37,
+            0,
+            9,
+            6
+          ],
+          [
+            -350,
+            148,
+            0,
+            4,
+            4
+          ],
+          [
+            -705,
+            -43,
+            1,
+            0,
+            5
+          ]
+        ],
+        "pixel_size": [
+          12,
+          24
+        ],
+        "viewport": [
+          17,
+          -27,
+          37,
+          20,
+          0
+        ]
+      },
+      "native_equals_dos": true,
+      "native_queue": [
+        [
+          -996,
+          -211,
+          2,
+          9,
+          5,
+          4,
+          0
+        ],
+        [
+          868,
+          -37,
+          0,
+          9,
+          5,
+          6,
+          0
+        ],
+        [
+          -350,
+          148,
+          0,
+          4,
+          5,
+          4,
+          0
+        ],
+        [
+          -705,
+          -43,
+          1,
+          0,
+          5,
+          5,
+          0
+        ]
+      ],
+      "native_status": 0,
+      "oracle_queue": [
+        [
+          -996,
+          -211,
+          2,
+          9,
+          5,
+          4,
+          0
+        ],
+        [
+          868,
+          -37,
+          0,
+          9,
+          5,
+          6,
+          0
+        ],
+        [
+          -350,
+          148,
+          0,
+          4,
+          5,
+          4,
+          0
+        ],
+        [
+          -705,
+          -43,
+          1,
+          0,
+          5,
+          5,
+          0
+        ]
+      ],
+      "pair_diff": {},
+      "x_plus_one_negative_detected": null
+    },
+    {
+      "dos_candidate_equal": true,
+      "id": "random/0038",
+      "input": {
+        "args": [
+          22,
+          -22,
+          3,
+          2,
+          0
+        ],
+        "initial_queue": [
+          [
+            728,
+            201,
+            2,
+            2,
+            0
+          ],
+          [
+            659,
+            625,
+            3,
+            5,
+            3
+          ],
+          [
+            -231,
+            812,
+            0,
+            3,
+            6
+          ]
+        ],
+        "pixel_size": [
+          32,
+          12
+        ],
+        "viewport": [
+          15,
+          -8,
+          9,
+          30,
+          1
+        ]
+      },
+      "native_equals_dos": true,
+      "native_queue": [
+        [
+          728,
+          201,
+          2,
+          2,
+          5,
+          0,
+          0
+        ],
+        [
+          659,
+          625,
+          3,
+          5,
+          5,
+          3,
+          0
+        ],
+        [
+          -231,
+          812,
+          0,
+          3,
+          5,
+          6,
+          0
+        ]
+      ],
+      "native_status": 0,
+      "oracle_queue": [
+        [
+          728,
+          201,
+          2,
+          2,
+          5,
+          0,
+          0
+        ],
+        [
+          659,
+          625,
+          3,
+          5,
+          5,
+          3,
+          0
+        ],
+        [
+          -231,
+          812,
+          0,
+          3,
+          5,
+          6,
+          0
+        ]
+      ],
+      "pair_diff": {},
+      "x_plus_one_negative_detected": null
+    },
+    {
+      "dos_candidate_equal": true,
+      "id": "random/0039",
+      "input": {
+        "args": [
+          -90,
+          77,
+          2,
+          10,
+          6
+        ],
+        "initial_queue": [
+          [
+            772,
+            25,
+            2,
+            4,
+            2
+          ],
+          [
+            -723,
+            901,
+            1,
+            6,
+            4
+          ],
+          [
+            -731,
+            -40,
+            3,
+            1,
+            5
+          ],
+          [
+            -431,
+            612,
+            3,
+            1,
+            5
+          ],
+          [
+            15,
+            122,
+            1,
+            10,
+            4
+          ],
+          [
+            -274,
+            -475,
+            2,
+            -2,
+            5
+          ]
+        ],
+        "pixel_size": [
+          16,
+          24
+        ],
+        "viewport": [
+          6,
+          21,
+          28,
+          17,
+          1
+        ]
+      },
+      "native_equals_dos": true,
+      "native_queue": [
+        [
+          772,
+          25,
+          2,
+          4,
+          5,
+          2,
+          0
+        ],
+        [
+          -723,
+          901,
+          1,
+          6,
+          5,
+          4,
+          0
+        ],
+        [
+          -731,
+          -40,
+          3,
+          1,
+          5,
+          5,
+          0
+        ],
+        [
+          -431,
+          612,
+          3,
+          1,
+          5,
+          5,
+          0
+        ],
+        [
+          15,
+          122,
+          1,
+          10,
+          5,
+          4,
+          0
+        ],
+        [
+          -274,
+          -475,
+          2,
+          -2,
+          5,
+          5,
+          0
+        ]
+      ],
+      "native_status": 0,
+      "oracle_queue": [
+        [
+          772,
+          25,
+          2,
+          4,
+          5,
+          2,
+          0
+        ],
+        [
+          -723,
+          901,
+          1,
+          6,
+          5,
+          4,
+          0
+        ],
+        [
+          -731,
+          -40,
+          3,
+          1,
+          5,
+          5,
+          0
+        ],
+        [
+          -431,
+          612,
+          3,
+          1,
+          5,
+          5,
+          0
+        ],
+        [
+          15,
+          122,
+          1,
+          10,
+          5,
+          4,
+          0
+        ],
+        [
+          -274,
+          -475,
+          2,
+          -2,
+          5,
+          5,
+          0
+        ]
+      ],
+      "pair_diff": {},
+      "x_plus_one_negative_detected": null
+    },
+    {
+      "dos_candidate_equal": true,
+      "id": "random/0040",
+      "input": {
+        "args": [
+          -33,
+          31,
+          0,
+          0,
+          6
+        ],
+        "initial_queue": [
+          [
+            -884,
+            756,
+            0,
+            8,
+            6
+          ],
+          [
+            -415,
+            -857,
+            0,
+            0,
+            6
+          ]
+        ],
+        "pixel_size": [
+          12,
+          32
+        ],
+        "viewport": [
+          26,
+          25,
+          2,
+          9,
+          0
+        ]
+      },
+      "native_equals_dos": true,
+      "native_queue": [
+        [
+          -884,
+          756,
+          0,
+          8,
+          5,
+          6,
+          0
+        ],
+        [
+          -415,
+          -857,
+          0,
+          0,
+          5,
+          6,
+          0
+        ]
+      ],
+      "native_status": 0,
+      "oracle_queue": [
+        [
+          -884,
+          756,
+          0,
+          8,
+          5,
+          6,
+          0
+        ],
+        [
+          -415,
+          -857,
+          0,
+          0,
+          5,
+          6,
+          0
+        ]
+      ],
+      "pair_diff": {},
+      "x_plus_one_negative_detected": null
+    },
+    {
+      "dos_candidate_equal": true,
+      "id": "random/0041",
+      "input": {
+        "args": [
+          -43,
+          -1,
+          3,
+          1,
+          7
+        ],
+        "initial_queue": [
+          [
+            847,
+            456,
+            1,
+            7,
+            4
+          ],
+          [
+            -128,
+            -369,
+            3,
+            10,
+            6
+          ],
+          [
+            -89,
+            -643,
+            2,
+            7,
+            4
+          ],
+          [
+            -616,
+            425,
+            0,
+            -3,
+            6
+          ]
+        ],
+        "pixel_size": [
+          24,
+          16
+        ],
+        "viewport": [
+          -5,
+          -20,
+          14,
+          22,
+          2
+        ]
+      },
+      "native_equals_dos": true,
+      "native_queue": [
+        [
+          847,
+          456,
+          1,
+          7,
+          5,
+          4,
+          0
+        ],
+        [
+          -128,
+          -369,
+          3,
+          10,
+          5,
+          6,
+          0
+        ],
+        [
+          -89,
+          -643,
+          2,
+          7,
+          5,
+          4,
+          0
+        ],
+        [
+          -616,
+          425,
+          0,
+          -3,
+          5,
+          6,
+          0
+        ]
+      ],
+      "native_status": 0,
+      "oracle_queue": [
+        [
+          847,
+          456,
+          1,
+          7,
+          5,
+          4,
+          0
+        ],
+        [
+          -128,
+          -369,
+          3,
+          10,
+          5,
+          6,
+          0
+        ],
+        [
+          -89,
+          -643,
+          2,
+          7,
+          5,
+          4,
+          0
+        ],
+        [
+          -616,
+          425,
+          0,
+          -3,
+          5,
+          6,
+          0
+        ]
+      ],
+      "pair_diff": {},
+      "x_plus_one_negative_detected": null
+    },
+    {
+      "dos_candidate_equal": true,
+      "id": "random/0042",
+      "input": {
+        "args": [
+          21,
+          18,
+          0,
+          0,
+          6
+        ],
+        "initial_queue": [],
+        "pixel_size": [
+          16,
+          12
+        ],
+        "viewport": [
+          -9,
+          -21,
+          40,
+          28,
+          1
+        ]
+      },
+      "native_equals_dos": true,
+      "native_queue": [],
+      "native_status": 0,
+      "oracle_queue": [],
+      "pair_diff": {},
+      "x_plus_one_negative_detected": null
+    },
+    {
+      "dos_candidate_equal": true,
+      "id": "random/0043",
+      "input": {
+        "args": [
+          -6,
+          64,
+          3,
+          0,
+          3
+        ],
+        "initial_queue": [
+          [
+            541,
+            257,
+            0,
+            10,
+            4
+          ],
+          [
+            998,
+            -367,
+            2,
+            -2,
+            4
+          ],
+          [
+            -131,
+            -992,
+            3,
+            0,
+            7
+          ],
+          [
+            -822,
+            430,
+            2,
+            8,
+            7
+          ]
+        ],
+        "pixel_size": [
+          32,
+          32
+        ],
+        "viewport": [
+          -12,
+          6,
+          6,
+          23,
+          3
+        ]
+      },
+      "native_equals_dos": true,
+      "native_queue": [
+        [
+          541,
+          257,
+          0,
+          10,
+          5,
+          4,
+          0
+        ],
+        [
+          998,
+          -367,
+          2,
+          -2,
+          5,
+          4,
+          0
+        ],
+        [
+          -131,
+          -992,
+          3,
+          0,
+          5,
+          7,
+          0
+        ],
+        [
+          -822,
+          430,
+          2,
+          8,
+          5,
+          7,
+          0
+        ]
+      ],
+      "native_status": 0,
+      "oracle_queue": [
+        [
+          541,
+          257,
+          0,
+          10,
+          5,
+          4,
+          0
+        ],
+        [
+          998,
+          -367,
+          2,
+          -2,
+          5,
+          4,
+          0
+        ],
+        [
+          -131,
+          -992,
+          3,
+          0,
+          5,
+          7,
+          0
+        ],
+        [
+          -822,
+          430,
+          2,
+          8,
+          5,
+          7,
+          0
+        ]
+      ],
+      "pair_diff": {},
+      "x_plus_one_negative_detected": null
+    },
+    {
+      "dos_candidate_equal": true,
+      "id": "random/0044",
+      "input": {
+        "args": [
+          45,
+          22,
+          3,
+          0,
+          1
+        ],
+        "initial_queue": [
+          [
+            861,
+            -30,
+            2,
+            3,
+            3
+          ],
+          [
+            -202,
+            -667,
+            1,
+            7,
+            6
+          ],
+          [
+            283,
+            -943,
+            2,
+            11,
+            0
+          ],
+          [
+            567,
+            -557,
+            3,
+            0,
+            5
+          ],
+          [
+            915,
+            603,
+            2,
+            8,
+            6
+          ]
+        ],
+        "pixel_size": [
+          24,
+          12
+        ],
+        "viewport": [
+          25,
+          -22,
+          30,
+          16,
+          1
+        ]
+      },
+      "native_equals_dos": true,
+      "native_queue": [
+        [
+          861,
+          -30,
+          2,
+          3,
+          5,
+          3,
+          0
+        ],
+        [
+          -202,
+          -667,
+          1,
+          7,
+          5,
+          6,
+          0
+        ],
+        [
+          283,
+          -943,
+          2,
+          11,
+          5,
+          0,
+          0
+        ],
+        [
+          567,
+          -557,
+          3,
+          0,
+          5,
+          5,
+          0
+        ],
+        [
+          915,
+          603,
+          2,
+          8,
+          5,
+          6,
+          0
+        ]
+      ],
+      "native_status": 0,
+      "oracle_queue": [
+        [
+          861,
+          -30,
+          2,
+          3,
+          5,
+          3,
+          0
+        ],
+        [
+          -202,
+          -667,
+          1,
+          7,
+          5,
+          6,
+          0
+        ],
+        [
+          283,
+          -943,
+          2,
+          11,
+          5,
+          0,
+          0
+        ],
+        [
+          567,
+          -557,
+          3,
+          0,
+          5,
+          5,
+          0
+        ],
+        [
+          915,
+          603,
+          2,
+          8,
+          5,
+          6,
+          0
+        ]
+      ],
+      "pair_diff": {},
+      "x_plus_one_negative_detected": null
+    },
+    {
+      "dos_candidate_equal": true,
+      "id": "random/0045",
+      "input": {
+        "args": [
+          -8,
+          9,
+          2,
+          2,
+          0
+        ],
+        "initial_queue": [
+          [
+            442,
+            856,
+            1,
+            8,
+            4
+          ],
+          [
+            904,
+            779,
+            3,
+            4,
+            3
+          ]
+        ],
+        "pixel_size": [
+          16,
+          32
+        ],
+        "viewport": [
+          -1,
+          -25,
+          25,
+          26,
+          2
+        ]
+      },
+      "native_equals_dos": true,
+      "native_queue": [
+        [
+          442,
+          856,
+          1,
+          8,
+          5,
+          4,
+          0
+        ],
+        [
+          904,
+          779,
+          3,
+          4,
+          5,
+          3,
+          0
+        ]
+      ],
+      "native_status": 0,
+      "oracle_queue": [
+        [
+          442,
+          856,
+          1,
+          8,
+          5,
+          4,
+          0
+        ],
+        [
+          904,
+          779,
+          3,
+          4,
+          5,
+          3,
+          0
+        ]
+      ],
+      "pair_diff": {},
+      "x_plus_one_negative_detected": null
+    },
+    {
+      "dos_candidate_equal": true,
+      "id": "random/0046",
+      "input": {
+        "args": [
+          15,
+          -37,
+          3,
+          1,
+          4
+        ],
+        "initial_queue": [
+          [
+            634,
+            183,
+            0,
+            9,
+            7
+          ],
+          [
+            842,
+            -900,
+            0,
+            12,
+            3
+          ]
+        ],
+        "pixel_size": [
+          8,
+          16
+        ],
+        "viewport": [
+          -4,
+          8,
+          24,
+          31,
+          1
+        ]
+      },
+      "native_equals_dos": true,
+      "native_queue": [
+        [
+          634,
+          183,
+          0,
+          9,
+          5,
+          7,
+          0
+        ],
+        [
+          842,
+          -900,
+          0,
+          12,
+          5,
+          3,
+          0
+        ]
+      ],
+      "native_status": 0,
+      "oracle_queue": [
+        [
+          634,
+          183,
+          0,
+          9,
+          5,
+          7,
+          0
+        ],
+        [
+          842,
+          -900,
+          0,
+          12,
+          5,
+          3,
+          0
+        ]
+      ],
+      "pair_diff": {},
+      "x_plus_one_negative_detected": null
+    },
+    {
+      "dos_candidate_equal": true,
+      "id": "random/0047",
+      "input": {
+        "args": [
+          31,
+          -30,
+          1,
+          2,
+          4
+        ],
+        "initial_queue": [
+          [
+            618,
+            -198,
+            3,
+            6,
+            3
+          ]
+        ],
+        "pixel_size": [
+          8,
+          24
+        ],
+        "viewport": [
+          31,
+          -1,
+          3,
+          26,
+          1
+        ]
+      },
+      "native_equals_dos": true,
+      "native_queue": [
+        [
+          618,
+          -198,
+          3,
+          6,
+          5,
+          3,
+          0
+        ]
+      ],
+      "native_status": 0,
+      "oracle_queue": [
+        [
+          618,
+          -198,
+          3,
+          6,
+          5,
+          3,
+          0
+        ]
+      ],
+      "pair_diff": {},
+      "x_plus_one_negative_detected": null
+    },
+    {
+      "dos_candidate_equal": true,
+      "id": "random/0048",
+      "input": {
+        "args": [
+          35,
+          -262,
+          0,
+          10,
+          7
+        ],
+        "initial_queue": [
+          [
+            997,
+            679,
+            1,
+            6,
+            2
+          ],
+          [
+            303,
+            -78,
+            2,
+            2,
+            4
+          ],
+          [
+            -364,
+            -157,
+            0,
+            -1,
+            4
+          ],
+          [
+            334,
+            81,
+            3,
+            9,
+            0
+          ]
+        ],
+        "pixel_size": [
+          16,
+          12
+        ],
+        "viewport": [
+          -30,
+          -5,
+          41,
+          32,
+          2
+        ]
+      },
+      "native_equals_dos": true,
+      "native_queue": [
+        [
+          997,
+          679,
+          1,
+          6,
+          5,
+          2,
+          0
+        ],
+        [
+          303,
+          -78,
+          2,
+          2,
+          5,
+          4,
+          0
+        ],
+        [
+          -364,
+          -157,
+          0,
+          -1,
+          5,
+          4,
+          0
+        ],
+        [
+          334,
+          81,
+          3,
+          9,
+          5,
+          0,
+          0
+        ]
+      ],
+      "native_status": 0,
+      "oracle_queue": [
+        [
+          997,
+          679,
+          1,
+          6,
+          5,
+          2,
+          0
+        ],
+        [
+          303,
+          -78,
+          2,
+          2,
+          5,
+          4,
+          0
+        ],
+        [
+          -364,
+          -157,
+          0,
+          -1,
+          5,
+          4,
+          0
+        ],
+        [
+          334,
+          81,
+          3,
+          9,
+          5,
+          0,
+          0
+        ]
+      ],
+      "pair_diff": {},
+      "x_plus_one_negative_detected": null
+    },
+    {
+      "dos_candidate_equal": true,
+      "id": "random/0049",
+      "input": {
+        "args": [
+          -16,
+          39,
+          0,
+          2,
+          6
+        ],
+        "initial_queue": [],
+        "pixel_size": [
+          24,
+          12
+        ],
+        "viewport": [
+          23,
+          16,
+          13,
+          26,
+          3
+        ]
+      },
+      "native_equals_dos": true,
+      "native_queue": [],
+      "native_status": 0,
+      "oracle_queue": [],
+      "pair_diff": {},
+      "x_plus_one_negative_detected": null
+    },
+    {
+      "dos_candidate_equal": true,
+      "id": "random/0050",
+      "input": {
+        "args": [
+          -47,
+          -41,
+          2,
+          1,
+          7
+        ],
+        "initial_queue": [
+          [
+            -81,
+            785,
+            1,
+            0,
+            1
+          ],
+          [
+            890,
+            -171,
+            2,
+            8,
+            6
+          ],
+          [
+            710,
+            -44,
+            3,
+            -1,
+            3
+          ],
+          [
+            931,
+            -891,
+            3,
+            -3,
+            7
+          ]
+        ],
+        "pixel_size": [
+          24,
+          16
+        ],
+        "viewport": [
+          -14,
+          -17,
+          35,
+          23,
+          0
+        ]
+      },
+      "native_equals_dos": true,
+      "native_queue": [
+        [
+          -81,
+          785,
+          1,
+          0,
+          5,
+          1,
+          0
+        ],
+        [
+          890,
+          -171,
+          2,
+          8,
+          5,
+          6,
+          0
+        ],
+        [
+          710,
+          -44,
+          3,
+          -1,
+          5,
+          3,
+          0
+        ],
+        [
+          931,
+          -891,
+          3,
+          -3,
+          5,
+          7,
+          0
+        ]
+      ],
+      "native_status": 0,
+      "oracle_queue": [
+        [
+          -81,
+          785,
+          1,
+          0,
+          5,
+          1,
+          0
+        ],
+        [
+          890,
+          -171,
+          2,
+          8,
+          5,
+          6,
+          0
+        ],
+        [
+          710,
+          -44,
+          3,
+          -1,
+          5,
+          3,
+          0
+        ],
+        [
+          931,
+          -891,
+          3,
+          -3,
+          5,
+          7,
+          0
+        ]
+      ],
+      "pair_diff": {},
+      "x_plus_one_negative_detected": null
+    },
+    {
+      "dos_candidate_equal": true,
+      "id": "random/0051",
+      "input": {
+        "args": [
+          12,
+          13,
+          0,
+          2,
+          4
+        ],
+        "initial_queue": [
+          [
+            -272,
+            -122,
+            0,
+            9,
+            2
+          ]
+        ],
+        "pixel_size": [
+          32,
+          24
+        ],
+        "viewport": [
+          7,
+          -13,
+          27,
+          20,
+          0
+        ]
+      },
+      "native_equals_dos": true,
+      "native_queue": [
+        [
+          -272,
+          -122,
+          0,
+          9,
+          5,
+          2,
+          0
+        ]
+      ],
+      "native_status": 0,
+      "oracle_queue": [
+        [
+          -272,
+          -122,
+          0,
+          9,
+          5,
+          2,
+          0
+        ]
+      ],
+      "pair_diff": {},
+      "x_plus_one_negative_detected": null
+    },
+    {
+      "dos_candidate_equal": true,
+      "id": "random/0052",
+      "input": {
+        "args": [
+          -5,
+          65,
+          0,
+          0,
+          2
+        ],
+        "initial_queue": [
+          [
+            -207,
+            198,
+            0,
+            10,
+            3
+          ],
+          [
+            -702,
+            -869,
+            0,
+            1,
+            6
+          ],
+          [
+            884,
+            757,
+            0,
+            2,
+            1
+          ],
+          [
+            483,
+            787,
+            0,
+            -1,
+            2
+          ]
+        ],
+        "pixel_size": [
+          32,
+          8
+        ],
+        "viewport": [
+          -32,
+          -1,
+          13,
+          5,
+          2
+        ]
+      },
+      "native_equals_dos": true,
+      "native_queue": [
+        [
+          -207,
+          198,
+          0,
+          10,
+          5,
+          3,
+          0
+        ],
+        [
+          -702,
+          -869,
+          0,
+          1,
+          5,
+          6,
+          0
+        ],
+        [
+          884,
+          757,
+          0,
+          2,
+          5,
+          1,
+          0
+        ],
+        [
+          483,
+          787,
+          0,
+          -1,
+          5,
+          2,
+          0
+        ]
+      ],
+      "native_status": 0,
+      "oracle_queue": [
+        [
+          -207,
+          198,
+          0,
+          10,
+          5,
+          3,
+          0
+        ],
+        [
+          -702,
+          -869,
+          0,
+          1,
+          5,
+          6,
+          0
+        ],
+        [
+          884,
+          757,
+          0,
+          2,
+          5,
+          1,
+          0
+        ],
+        [
+          483,
+          787,
+          0,
+          -1,
+          5,
+          2,
+          0
+        ]
+      ],
+      "pair_diff": {},
+      "x_plus_one_negative_detected": null
+    },
+    {
+      "dos_candidate_equal": true,
+      "id": "random/0053",
+      "input": {
+        "args": [
+          5,
+          61,
+          0,
+          0,
+          7
+        ],
+        "initial_queue": [
+          [
+            -167,
+            591,
+            2,
+            -3,
+            1
+          ]
+        ],
+        "pixel_size": [
+          12,
+          16
+        ],
+        "viewport": [
+          -18,
+          0,
+          7,
+          35,
+          3
+        ]
+      },
+      "native_equals_dos": true,
+      "native_queue": [
+        [
+          -167,
+          591,
+          2,
+          -3,
+          5,
+          1,
+          0
+        ]
+      ],
+      "native_status": 0,
+      "oracle_queue": [
+        [
+          -167,
+          591,
+          2,
+          -3,
+          5,
+          1,
+          0
+        ]
+      ],
+      "pair_diff": {},
+      "x_plus_one_negative_detected": null
+    },
+    {
+      "dos_candidate_equal": true,
+      "id": "random/0054",
+      "input": {
+        "args": [
+          257,
+          384,
+          3,
+          10,
+          3
+        ],
+        "initial_queue": [
+          [
+            -751,
+            147,
+            3,
+            11,
+            1
+          ],
+          [
+            -881,
+            -435,
+            3,
+            4,
+            4
+          ],
+          [
+            -402,
+            -1000,
+            1,
+            4,
+            3
+          ],
+          [
+            208,
+            479,
+            3,
+            1,
+            4
+          ],
+          [
+            -937,
+            583,
+            0,
+            4,
+            6
+          ],
+          [
+            -793,
+            473,
+            3,
+            4,
+            7
+          ]
+        ],
+        "pixel_size": [
+          24,
+          8
+        ],
+        "viewport": [
+          10,
+          7,
+          19,
+          30,
+          3
+        ]
+      },
+      "native_equals_dos": true,
+      "native_queue": [
+        [
+          -751,
+          147,
+          3,
+          11,
+          5,
+          1,
+          0
+        ],
+        [
+          -881,
+          -435,
+          3,
+          4,
+          5,
+          4,
+          0
+        ],
+        [
+          -402,
+          -1000,
+          1,
+          4,
+          5,
+          3,
+          0
+        ],
+        [
+          208,
+          479,
+          3,
+          1,
+          5,
+          4,
+          0
+        ],
+        [
+          -937,
+          583,
+          0,
+          4,
+          5,
+          6,
+          0
+        ],
+        [
+          -793,
+          473,
+          3,
+          4,
+          5,
+          7,
+          0
+        ]
+      ],
+      "native_status": 0,
+      "oracle_queue": [
+        [
+          -751,
+          147,
+          3,
+          11,
+          5,
+          1,
+          0
+        ],
+        [
+          -881,
+          -435,
+          3,
+          4,
+          5,
+          4,
+          0
+        ],
+        [
+          -402,
+          -1000,
+          1,
+          4,
+          5,
+          3,
+          0
+        ],
+        [
+          208,
+          479,
+          3,
+          1,
+          5,
+          4,
+          0
+        ],
+        [
+          -937,
+          583,
+          0,
+          4,
+          5,
+          6,
+          0
+        ],
+        [
+          -793,
+          473,
+          3,
+          4,
+          5,
+          7,
+          0
+        ]
+      ],
+      "pair_diff": {},
+      "x_plus_one_negative_detected": null
+    },
+    {
+      "dos_candidate_equal": true,
+      "id": "random/0055",
+      "input": {
+        "args": [
+          -4,
+          2,
+          3,
+          0,
+          7
+        ],
+        "initial_queue": [],
+        "pixel_size": [
+          32,
+          32
+        ],
+        "viewport": [
+          -1,
+          24,
+          29,
+          21,
+          1
+        ]
+      },
+      "native_equals_dos": true,
+      "native_queue": [],
+      "native_status": 0,
+      "oracle_queue": [],
+      "pair_diff": {},
+      "x_plus_one_negative_detected": null
+    },
+    {
+      "dos_candidate_equal": true,
+      "id": "random/0056",
+      "input": {
+        "args": [
+          -30,
+          6,
+          2,
+          2,
+          5
+        ],
+        "initial_queue": [
+          [
+            -705,
+            -284,
+            2,
+            1,
+            2
+          ]
+        ],
+        "pixel_size": [
+          32,
+          12
+        ],
+        "viewport": [
+          4,
+          -13,
+          17,
+          8,
+          3
+        ]
+      },
+      "native_equals_dos": true,
+      "native_queue": [
+        [
+          -705,
+          -284,
+          2,
+          1,
+          5,
+          2,
+          0
+        ]
+      ],
+      "native_status": 0,
+      "oracle_queue": [
+        [
+          -705,
+          -284,
+          2,
+          1,
+          5,
+          2,
+          0
+        ]
+      ],
+      "pair_diff": {},
+      "x_plus_one_negative_detected": null
+    },
+    {
+      "dos_candidate_equal": true,
+      "id": "random/0057",
+      "input": {
+        "args": [
+          -12,
+          26,
+          3,
+          2,
+          2
+        ],
+        "initial_queue": [],
+        "pixel_size": [
+          32,
+          24
+        ],
+        "viewport": [
+          -9,
+          8,
+          7,
+          33,
+          0
+        ]
+      },
+      "native_equals_dos": true,
+      "native_queue": [],
+      "native_status": 0,
+      "oracle_queue": [],
+      "pair_diff": {},
+      "x_plus_one_negative_detected": null
+    },
+    {
+      "dos_candidate_equal": true,
+      "id": "random/0058",
+      "input": {
+        "args": [
+          52,
+          62,
+          2,
+          1,
+          7
+        ],
+        "initial_queue": [
+          [
+            869,
+            -602,
+            1,
+            -3,
+            5
+          ],
+          [
+            -844,
+            128,
+            0,
+            10,
+            7
+          ],
+          [
+            406,
+            101,
+            1,
+            0,
+            7
+          ],
+          [
+            30,
+            -555,
+            2,
+            -3,
+            4
+          ]
+        ],
+        "pixel_size": [
+          32,
+          8
+        ],
+        "viewport": [
+          21,
+          23,
+          38,
+          12,
+          1
+        ]
+      },
+      "native_equals_dos": true,
+      "native_queue": [
+        [
+          869,
+          -602,
+          1,
+          -3,
+          5,
+          5,
+          0
+        ],
+        [
+          -844,
+          128,
+          0,
+          10,
+          5,
+          7,
+          0
+        ],
+        [
+          406,
+          101,
+          1,
+          0,
+          5,
+          7,
+          0
+        ],
+        [
+          30,
+          -555,
+          2,
+          -3,
+          5,
+          4,
+          0
+        ]
+      ],
+      "native_status": 0,
+      "oracle_queue": [
+        [
+          869,
+          -602,
+          1,
+          -3,
+          5,
+          5,
+          0
+        ],
+        [
+          -844,
+          128,
+          0,
+          10,
+          5,
+          7,
+          0
+        ],
+        [
+          406,
+          101,
+          1,
+          0,
+          5,
+          7,
+          0
+        ],
+        [
+          30,
+          -555,
+          2,
+          -3,
+          5,
+          4,
+          0
+        ]
+      ],
+      "pair_diff": {},
+      "x_plus_one_negative_detected": null
+    },
+    {
+      "dos_candidate_equal": true,
+      "id": "random/0059",
+      "input": {
+        "args": [
+          53,
+          1,
+          0,
+          2,
+          6
+        ],
+        "initial_queue": [
+          [
+            -181,
+            641,
+            1,
+            2,
+            6
+          ],
+          [
+            -565,
+            -532,
+            2,
+            2,
+            2
+          ]
+        ],
+        "pixel_size": [
+          12,
+          12
+        ],
+        "viewport": [
+          30,
+          7,
+          5,
+          33,
+          3
+        ]
+      },
+      "native_equals_dos": true,
+      "native_queue": [
+        [
+          -181,
+          641,
+          1,
+          2,
+          5,
+          6,
+          0
+        ],
+        [
+          -565,
+          -532,
+          2,
+          2,
+          5,
+          2,
+          0
+        ]
+      ],
+      "native_status": 0,
+      "oracle_queue": [
+        [
+          -181,
+          641,
+          1,
+          2,
+          5,
+          6,
+          0
+        ],
+        [
+          -565,
+          -532,
+          2,
+          2,
+          5,
+          2,
+          0
+        ]
+      ],
+      "pair_diff": {},
+      "x_plus_one_negative_detected": null
+    },
+    {
+      "dos_candidate_equal": true,
+      "id": "random/0060",
+      "input": {
+        "args": [
+          -19,
+          -25,
+          3,
+          2,
+          6
+        ],
+        "initial_queue": [
+          [
+            495,
+            -777,
+            2,
+            1,
+            7
+          ],
+          [
+            448,
+            696,
+            1,
+            5,
+            7
+          ],
+          [
+            -141,
+            853,
+            2,
+            -3,
+            0
+          ],
+          [
+            740,
+            -162,
+            0,
+            9,
+            7
+          ],
+          [
+            -618,
+            203,
+            3,
+            -2,
+            2
+          ],
+          [
+            -882,
+            -788,
+            0,
+            3,
+            4
+          ]
+        ],
+        "pixel_size": [
+          12,
+          32
+        ],
+        "viewport": [
+          10,
+          3,
+          13,
+          21,
+          2
+        ]
+      },
+      "native_equals_dos": true,
+      "native_queue": [
+        [
+          495,
+          -777,
+          2,
+          1,
+          5,
+          7,
+          0
+        ],
+        [
+          448,
+          696,
+          1,
+          5,
+          5,
+          7,
+          0
+        ],
+        [
+          -141,
+          853,
+          2,
+          -3,
+          5,
+          0,
+          0
+        ],
+        [
+          740,
+          -162,
+          0,
+          9,
+          5,
+          7,
+          0
+        ],
+        [
+          -618,
+          203,
+          3,
+          -2,
+          5,
+          2,
+          0
+        ],
+        [
+          -882,
+          -788,
+          0,
+          3,
+          5,
+          4,
+          0
+        ]
+      ],
+      "native_status": 0,
+      "oracle_queue": [
+        [
+          495,
+          -777,
+          2,
+          1,
+          5,
+          7,
+          0
+        ],
+        [
+          448,
+          696,
+          1,
+          5,
+          5,
+          7,
+          0
+        ],
+        [
+          -141,
+          853,
+          2,
+          -3,
+          5,
+          0,
+          0
+        ],
+        [
+          740,
+          -162,
+          0,
+          9,
+          5,
+          7,
+          0
+        ],
+        [
+          -618,
+          203,
+          3,
+          -2,
+          5,
+          2,
+          0
+        ],
+        [
+          -882,
+          -788,
+          0,
+          3,
+          5,
+          4,
+          0
+        ]
+      ],
+      "pair_diff": {},
+      "x_plus_one_negative_detected": null
+    },
+    {
+      "dos_candidate_equal": true,
+      "id": "random/0061",
+      "input": {
+        "args": [
+          -35,
+          54,
+          0,
+          1,
+          1
+        ],
+        "initial_queue": [
+          [
+            683,
+            -692,
+            0,
+            1,
+            5
+          ]
+        ],
+        "pixel_size": [
+          16,
+          12
+        ],
+        "viewport": [
+          14,
+          23,
+          11,
+          35,
+          1
+        ]
+      },
+      "native_equals_dos": true,
+      "native_queue": [
+        [
+          683,
+          -692,
+          0,
+          1,
+          5,
+          5,
+          0
+        ]
+      ],
+      "native_status": 0,
+      "oracle_queue": [
+        [
+          683,
+          -692,
+          0,
+          1,
+          5,
+          5,
+          0
+        ]
+      ],
+      "pair_diff": {},
+      "x_plus_one_negative_detected": null
+    },
+    {
+      "dos_candidate_equal": true,
+      "id": "random/0062",
+      "input": {
+        "args": [
+          77,
+          22,
+          1,
+          1,
+          4
+        ],
+        "initial_queue": [
+          [
+            221,
+            0,
+            2,
+            6,
+            3
+          ],
+          [
+            871,
+            -210,
+            1,
+            -1,
+            2
+          ]
+        ],
+        "pixel_size": [
+          32,
+          12
+        ],
+        "viewport": [
+          -10,
+          0,
+          28,
+          2,
+          3
+        ]
+      },
+      "native_equals_dos": true,
+      "native_queue": [
+        [
+          221,
+          0,
+          2,
+          6,
+          5,
+          3,
+          0
+        ],
+        [
+          871,
+          -210,
+          1,
+          -1,
+          5,
+          2,
+          0
+        ]
+      ],
+      "native_status": 0,
+      "oracle_queue": [
+        [
+          221,
+          0,
+          2,
+          6,
+          5,
+          3,
+          0
+        ],
+        [
+          871,
+          -210,
+          1,
+          -1,
+          5,
+          2,
+          0
+        ]
+      ],
+      "pair_diff": {},
+      "x_plus_one_negative_detected": null
+    },
+    {
+      "dos_candidate_equal": true,
+      "id": "random/0063",
+      "input": {
+        "args": [
+          -13,
+          -19,
+          1,
+          0,
+          4
+        ],
+        "initial_queue": [
+          [
+            -437,
+            109,
+            0,
+            -3,
+            2
+          ],
+          [
+            856,
+            -730,
+            1,
+            8,
+            3
+          ]
+        ],
+        "pixel_size": [
+          24,
+          12
+        ],
+        "viewport": [
+          -4,
+          18,
+          26,
+          33,
+          0
+        ]
+      },
+      "native_equals_dos": true,
+      "native_queue": [
+        [
+          -437,
+          109,
+          0,
+          -3,
+          5,
+          2,
+          0
+        ],
+        [
+          856,
+          -730,
+          1,
+          8,
+          5,
+          3,
+          0
+        ]
+      ],
+      "native_status": 0,
+      "oracle_queue": [
+        [
+          -437,
+          109,
+          0,
+          -3,
+          5,
+          2,
+          0
+        ],
+        [
+          856,
+          -730,
+          1,
+          8,
+          5,
+          3,
+          0
+        ]
+      ],
+      "pair_diff": {},
+      "x_plus_one_negative_detected": null
+    },
+    {
+      "dos_candidate_equal": true,
+      "id": "random/0064",
+      "input": {
+        "args": [
+          4,
+          -50,
+          2,
+          0,
+          5
+        ],
+        "initial_queue": [
+          [
+            -277,
+            400,
+            3,
+            12,
+            7
+          ],
+          [
+            857,
+            955,
+            0,
+            9,
+            0
+          ],
+          [
+            -612,
+            -864,
+            2,
+            12,
+            1
+          ],
+          [
+            -752,
+            -361,
+            3,
+            5,
+            5
+          ],
+          [
+            11,
+            -219,
+            1,
+            -2,
+            5
+          ],
+          [
+            -565,
+            -574,
+            1,
+            12,
+            0
+          ]
+        ],
+        "pixel_size": [
+          12,
+          32
+        ],
+        "viewport": [
+          -8,
+          2,
+          35,
+          32,
+          0
+        ]
+      },
+      "native_equals_dos": true,
+      "native_queue": [
+        [
+          -277,
+          400,
+          3,
+          12,
+          5,
+          7,
+          0
+        ],
+        [
+          857,
+          955,
+          0,
+          9,
+          5,
+          0,
+          0
+        ],
+        [
+          -612,
+          -864,
+          2,
+          12,
+          5,
+          1,
+          0
+        ],
+        [
+          -752,
+          -361,
+          3,
+          5,
+          5,
+          5,
+          0
+        ],
+        [
+          11,
+          -219,
+          1,
+          -2,
+          5,
+          5,
+          0
+        ],
+        [
+          -565,
+          -574,
+          1,
+          12,
+          5,
+          0,
+          0
+        ]
+      ],
+      "native_status": 0,
+      "oracle_queue": [
+        [
+          -277,
+          400,
+          3,
+          12,
+          5,
+          7,
+          0
+        ],
+        [
+          857,
+          955,
+          0,
+          9,
+          5,
+          0,
+          0
+        ],
+        [
+          -612,
+          -864,
+          2,
+          12,
+          5,
+          1,
+          0
+        ],
+        [
+          -752,
+          -361,
+          3,
+          5,
+          5,
+          5,
+          0
+        ],
+        [
+          11,
+          -219,
+          1,
+          -2,
+          5,
+          5,
+          0
+        ],
+        [
+          -565,
+          -574,
+          1,
+          12,
+          5,
+          0,
+          0
+        ]
+      ],
+      "pair_diff": {},
+      "x_plus_one_negative_detected": null
+    },
+    {
+      "dos_candidate_equal": true,
+      "id": "random/0065",
+      "input": {
+        "args": [
+          649,
+          132,
+          0,
+          10,
+          1
+        ],
+        "initial_queue": [
+          [
+            -506,
+            -950,
+            0,
+            11,
+            7
+          ],
+          [
+            -186,
+            190,
+            1,
+            8,
+            1
+          ]
+        ],
+        "pixel_size": [
+          24,
+          12
+        ],
+        "viewport": [
+          27,
+          23,
+          24,
+          16,
+          2
+        ]
+      },
+      "native_equals_dos": true,
+      "native_queue": [
+        [
+          -506,
+          -950,
+          0,
+          11,
+          5,
+          7,
+          0
+        ],
+        [
+          -186,
+          190,
+          1,
+          8,
+          5,
+          1,
+          0
+        ]
+      ],
+      "native_status": 0,
+      "oracle_queue": [
+        [
+          -506,
+          -950,
+          0,
+          11,
+          5,
+          7,
+          0
+        ],
+        [
+          -186,
+          190,
+          1,
+          8,
+          5,
+          1,
+          0
+        ]
+      ],
+      "pair_diff": {},
+      "x_plus_one_negative_detected": null
+    },
+    {
+      "dos_candidate_equal": true,
+      "id": "random/0066",
+      "input": {
+        "args": [
+          247,
+          603,
+          3,
+          10,
+          0
+        ],
+        "initial_queue": [
+          [
+            51,
+            -868,
+            3,
+            3,
+            5
+          ]
+        ],
+        "pixel_size": [
+          32,
+          32
+        ],
+        "viewport": [
+          2,
+          -8,
+          25,
+          21,
+          1
+        ]
+      },
+      "native_equals_dos": true,
+      "native_queue": [
+        [
+          51,
+          -868,
+          3,
+          3,
+          5,
+          5,
+          0
+        ]
+      ],
+      "native_status": 0,
+      "oracle_queue": [
+        [
+          51,
+          -868,
+          3,
+          3,
+          5,
+          5,
+          0
+        ]
+      ],
+      "pair_diff": {},
+      "x_plus_one_negative_detected": null
+    },
+    {
+      "dos_candidate_equal": true,
+      "id": "random/0067",
+      "input": {
+        "args": [
+          -17,
+          76,
+          0,
+          1,
+          6
+        ],
+        "initial_queue": [
+          [
+            397,
+            -706,
+            3,
+            11,
+            7
+          ],
+          [
+            -335,
+            414,
+            3,
+            2,
+            2
+          ],
+          [
+            -394,
+            24,
+            3,
+            9,
+            7
+          ],
+          [
+            841,
+            -3,
+            2,
+            -1,
+            7
+          ],
+          [
+            -990,
+            -363,
+            0,
+            5,
+            7
+          ],
+          [
+            -215,
+            -452,
+            2,
+            10,
+            2
+          ]
+        ],
+        "pixel_size": [
+          12,
+          24
+        ],
+        "viewport": [
+          -2,
+          -14,
+          6,
+          17,
+          2
+        ]
+      },
+      "native_equals_dos": true,
+      "native_queue": [
+        [
+          397,
+          -706,
+          3,
+          11,
+          5,
+          7,
+          0
+        ],
+        [
+          -335,
+          414,
+          3,
+          2,
+          5,
+          2,
+          0
+        ],
+        [
+          -394,
+          24,
+          3,
+          9,
+          5,
+          7,
+          0
+        ],
+        [
+          841,
+          -3,
+          2,
+          -1,
+          5,
+          7,
+          0
+        ],
+        [
+          -990,
+          -363,
+          0,
+          5,
+          5,
+          7,
+          0
+        ],
+        [
+          -215,
+          -452,
+          2,
+          10,
+          5,
+          2,
+          0
+        ]
+      ],
+      "native_status": 0,
+      "oracle_queue": [
+        [
+          397,
+          -706,
+          3,
+          11,
+          5,
+          7,
+          0
+        ],
+        [
+          -335,
+          414,
+          3,
+          2,
+          5,
+          2,
+          0
+        ],
+        [
+          -394,
+          24,
+          3,
+          9,
+          5,
+          7,
+          0
+        ],
+        [
+          841,
+          -3,
+          2,
+          -1,
+          5,
+          7,
+          0
+        ],
+        [
+          -990,
+          -363,
+          0,
+          5,
+          5,
+          7,
+          0
+        ],
+        [
+          -215,
+          -452,
+          2,
+          10,
+          5,
+          2,
+          0
+        ]
+      ],
+      "pair_diff": {},
+      "x_plus_one_negative_detected": null
+    },
+    {
+      "dos_candidate_equal": true,
+      "id": "random/0068",
+      "input": {
+        "args": [
+          67,
+          -36,
+          0,
+          2,
+          1
+        ],
+        "initial_queue": [
+          [
+            -673,
+            -286,
+            1,
+            -3,
+            7
+          ],
+          [
+            978,
+            -130,
+            1,
+            0,
+            4
+          ],
+          [
+            485,
+            387,
+            2,
+            2,
+            4
+          ],
+          [
+            820,
+            -368,
+            1,
+            3,
+            6
+          ],
+          [
+            69,
+            578,
+            0,
+            5,
+            1
+          ],
+          [
+            687,
+            -638,
+            0,
+            12,
+            6
+          ]
+        ],
+        "pixel_size": [
+          32,
+          16
+        ],
+        "viewport": [
+          -27,
+          -27,
+          2,
+          33,
+          2
+        ]
+      },
+      "native_equals_dos": true,
+      "native_queue": [
+        [
+          -673,
+          -286,
+          1,
+          -3,
+          5,
+          7,
+          0
+        ],
+        [
+          978,
+          -130,
+          1,
+          0,
+          5,
+          4,
+          0
+        ],
+        [
+          485,
+          387,
+          2,
+          2,
+          5,
+          4,
+          0
+        ],
+        [
+          820,
+          -368,
+          1,
+          3,
+          5,
+          6,
+          0
+        ],
+        [
+          69,
+          578,
+          0,
+          5,
+          5,
+          1,
+          0
+        ],
+        [
+          687,
+          -638,
+          0,
+          12,
+          5,
+          6,
+          0
+        ]
+      ],
+      "native_status": 0,
+      "oracle_queue": [
+        [
+          -673,
+          -286,
+          1,
+          -3,
+          5,
+          7,
+          0
+        ],
+        [
+          978,
+          -130,
+          1,
+          0,
+          5,
+          4,
+          0
+        ],
+        [
+          485,
+          387,
+          2,
+          2,
+          5,
+          4,
+          0
+        ],
+        [
+          820,
+          -368,
+          1,
+          3,
+          5,
+          6,
+          0
+        ],
+        [
+          69,
+          578,
+          0,
+          5,
+          5,
+          1,
+          0
+        ],
+        [
+          687,
+          -638,
+          0,
+          12,
+          5,
+          6,
+          0
+        ]
+      ],
+      "pair_diff": {},
+      "x_plus_one_negative_detected": null
+    },
+    {
+      "dos_candidate_equal": true,
+      "id": "random/0069",
+      "input": {
+        "args": [
+          31,
+          74,
+          3,
+          0,
+          7
+        ],
+        "initial_queue": [
+          [
+            6,
+            -938,
+            3,
+            2,
+            3
+          ],
+          [
+            245,
+            34,
+            1,
+            4,
+            4
+          ],
+          [
+            -549,
+            -604,
+            0,
+            -2,
+            4
+          ],
+          [
+            89,
+            358,
+            3,
+            9,
+            1
+          ],
+          [
+            -404,
+            867,
+            2,
+            9,
+            7
+          ]
+        ],
+        "pixel_size": [
+          8,
+          24
+        ],
+        "viewport": [
+          -6,
+          7,
+          22,
+          5,
+          1
+        ]
+      },
+      "native_equals_dos": true,
+      "native_queue": [
+        [
+          6,
+          -938,
+          3,
+          2,
+          5,
+          3,
+          0
+        ],
+        [
+          245,
+          34,
+          1,
+          4,
+          5,
+          4,
+          0
+        ],
+        [
+          -549,
+          -604,
+          0,
+          -2,
+          5,
+          4,
+          0
+        ],
+        [
+          89,
+          358,
+          3,
+          9,
+          5,
+          1,
+          0
+        ],
+        [
+          -404,
+          867,
+          2,
+          9,
+          5,
+          7,
+          0
+        ]
+      ],
+      "native_status": 0,
+      "oracle_queue": [
+        [
+          6,
+          -938,
+          3,
+          2,
+          5,
+          3,
+          0
+        ],
+        [
+          245,
+          34,
+          1,
+          4,
+          5,
+          4,
+          0
+        ],
+        [
+          -549,
+          -604,
+          0,
+          -2,
+          5,
+          4,
+          0
+        ],
+        [
+          89,
+          358,
+          3,
+          9,
+          5,
+          1,
+          0
+        ],
+        [
+          -404,
+          867,
+          2,
+          9,
+          5,
+          7,
+          0
+        ]
+      ],
+      "pair_diff": {},
+      "x_plus_one_negative_detected": null
+    },
+    {
+      "dos_candidate_equal": true,
+      "id": "random/0070",
+      "input": {
+        "args": [
+          -30,
+          -23,
+          2,
+          0,
+          4
+        ],
+        "initial_queue": [
+          [
+            -638,
+            -329,
+            2,
+            1,
+            1
+          ],
+          [
+            622,
+            -96,
+            0,
+            2,
+            0
+          ]
+        ],
+        "pixel_size": [
+          16,
+          12
+        ],
+        "viewport": [
+          -31,
+          -11,
+          37,
+          10,
+          1
+        ]
+      },
+      "native_equals_dos": true,
+      "native_queue": [
+        [
+          -638,
+          -329,
+          2,
+          1,
+          5,
+          1,
+          0
+        ],
+        [
+          622,
+          -96,
+          0,
+          2,
+          5,
+          0,
+          0
+        ]
+      ],
+      "native_status": 0,
+      "oracle_queue": [
+        [
+          -638,
+          -329,
+          2,
+          1,
+          5,
+          1,
+          0
+        ],
+        [
+          622,
+          -96,
+          0,
+          2,
+          5,
+          0,
+          0
+        ]
+      ],
+      "pair_diff": {},
+      "x_plus_one_negative_detected": null
+    },
+    {
+      "dos_candidate_equal": true,
+      "id": "random/0071",
+      "input": {
+        "args": [
+          28,
+          -43,
+          2,
+          0,
+          1
+        ],
+        "initial_queue": [
+          [
+            -203,
+            640,
+            3,
+            0,
+            3
+          ],
+          [
+            603,
+            -840,
+            3,
+            6,
+            4
+          ]
+        ],
+        "pixel_size": [
+          24,
+          8
+        ],
+        "viewport": [
+          -7,
+          -20,
+          24,
+          34,
+          3
+        ]
+      },
+      "native_equals_dos": true,
+      "native_queue": [
+        [
+          -203,
+          640,
+          3,
+          0,
+          5,
+          3,
+          0
+        ],
+        [
+          603,
+          -840,
+          3,
+          6,
+          5,
+          4,
+          0
+        ]
+      ],
+      "native_status": 0,
+      "oracle_queue": [
+        [
+          -203,
+          640,
+          3,
+          0,
+          5,
+          3,
+          0
+        ],
+        [
+          603,
+          -840,
+          3,
+          6,
+          5,
+          4,
+          0
+        ]
+      ],
+      "pair_diff": {},
+      "x_plus_one_negative_detected": null
+    },
+    {
+      "dos_candidate_equal": true,
+      "id": "random/0072",
+      "input": {
+        "args": [
+          104,
+          -47,
+          0,
+          10,
+          5
+        ],
+        "initial_queue": [
+          [
+            398,
+            789,
+            2,
+            12,
+            6
+          ]
+        ],
+        "pixel_size": [
+          8,
+          32
+        ],
+        "viewport": [
+          11,
+          18,
+          31,
+          21,
+          1
+        ]
+      },
+      "native_equals_dos": true,
+      "native_queue": [
+        [
+          398,
+          789,
+          2,
+          12,
+          5,
+          6,
+          0
+        ]
+      ],
+      "native_status": 0,
+      "oracle_queue": [
+        [
+          398,
+          789,
+          2,
+          12,
+          5,
+          6,
+          0
+        ]
+      ],
+      "pair_diff": {},
+      "x_plus_one_negative_detected": null
+    },
+    {
+      "dos_candidate_equal": true,
+      "id": "random/0073",
+      "input": {
+        "args": [
+          -39,
+          -22,
+          0,
+          0,
+          2
+        ],
+        "initial_queue": [
+          [
+            811,
+            855,
+            2,
+            5,
+            5
+          ],
+          [
+            -398,
+            -120,
+            0,
+            -2,
+            7
+          ],
+          [
+            83,
+            -372,
+            3,
+            6,
+            1
+          ],
+          [
+            725,
+            800,
+            3,
+            12,
+            6
+          ],
+          [
+            -960,
+            -268,
+            1,
+            5,
+            0
+          ],
+          [
+            360,
+            -289,
+            2,
+            5,
+            4
+          ]
+        ],
+        "pixel_size": [
+          12,
+          16
+        ],
+        "viewport": [
+          20,
+          -29,
+          28,
+          26,
+          1
+        ]
+      },
+      "native_equals_dos": true,
+      "native_queue": [
+        [
+          811,
+          855,
+          2,
+          5,
+          5,
+          5,
+          0
+        ],
+        [
+          -398,
+          -120,
+          0,
+          -2,
+          5,
+          7,
+          0
+        ],
+        [
+          83,
+          -372,
+          3,
+          6,
+          5,
+          1,
+          0
+        ],
+        [
+          725,
+          800,
+          3,
+          12,
+          5,
+          6,
+          0
+        ],
+        [
+          -960,
+          -268,
+          1,
+          5,
+          5,
+          0,
+          0
+        ],
+        [
+          360,
+          -289,
+          2,
+          5,
+          5,
+          4,
+          0
+        ]
+      ],
+      "native_status": 0,
+      "oracle_queue": [
+        [
+          811,
+          855,
+          2,
+          5,
+          5,
+          5,
+          0
+        ],
+        [
+          -398,
+          -120,
+          0,
+          -2,
+          5,
+          7,
+          0
+        ],
+        [
+          83,
+          -372,
+          3,
+          6,
+          5,
+          1,
+          0
+        ],
+        [
+          725,
+          800,
+          3,
+          12,
+          5,
+          6,
+          0
+        ],
+        [
+          -960,
+          -268,
+          1,
+          5,
+          5,
+          0,
+          0
+        ],
+        [
+          360,
+          -289,
+          2,
+          5,
+          5,
+          4,
+          0
+        ]
+      ],
+      "pair_diff": {},
+      "x_plus_one_negative_detected": null
+    },
+    {
+      "dos_candidate_equal": true,
+      "id": "random/0074",
+      "input": {
+        "args": [
+          -25,
+          -50,
+          0,
+          2,
+          7
+        ],
+        "initial_queue": [],
+        "pixel_size": [
+          32,
+          8
+        ],
+        "viewport": [
+          22,
+          -14,
+          13,
+          24,
+          0
+        ]
+      },
+      "native_equals_dos": true,
+      "native_queue": [],
+      "native_status": 0,
+      "oracle_queue": [],
+      "pair_diff": {},
+      "x_plus_one_negative_detected": null
+    },
+    {
+      "dos_candidate_equal": true,
+      "id": "random/0075",
+      "input": {
+        "args": [
+          70,
+          40,
+          3,
+          2,
+          3
+        ],
+        "initial_queue": [
+          [
+            -360,
+            -444,
+            3,
+            9,
+            1
+          ]
+        ],
+        "pixel_size": [
+          16,
+          32
+        ],
+        "viewport": [
+          26,
+          8,
+          23,
+          3,
+          1
+        ]
+      },
+      "native_equals_dos": true,
+      "native_queue": [
+        [
+          -360,
+          -444,
+          3,
+          9,
+          5,
+          1,
+          0
+        ]
+      ],
+      "native_status": 0,
+      "oracle_queue": [
+        [
+          -360,
+          -444,
+          3,
+          9,
+          5,
+          1,
+          0
+        ]
+      ],
+      "pair_diff": {},
+      "x_plus_one_negative_detected": null
+    },
+    {
+      "dos_candidate_equal": true,
+      "id": "random/0076",
+      "input": {
+        "args": [
+          69,
+          -6,
+          0,
+          0,
+          0
+        ],
+        "initial_queue": [
+          [
+            169,
+            897,
+            0,
+            6,
+            1
+          ]
+        ],
+        "pixel_size": [
+          32,
+          12
+        ],
+        "viewport": [
+          3,
+          -17,
+          14,
+          28,
+          3
+        ]
+      },
+      "native_equals_dos": true,
+      "native_queue": [
+        [
+          169,
+          897,
+          0,
+          6,
+          5,
+          1,
+          0
+        ]
+      ],
+      "native_status": 0,
+      "oracle_queue": [
+        [
+          169,
+          897,
+          0,
+          6,
+          5,
+          1,
+          0
+        ]
+      ],
+      "pair_diff": {},
+      "x_plus_one_negative_detected": null
+    },
+    {
+      "dos_candidate_equal": true,
+      "id": "random/0077",
+      "input": {
+        "args": [
+          -38,
+          73,
+          3,
+          2,
+          4
+        ],
+        "initial_queue": [
+          [
+            42,
+            270,
+            1,
+            9,
+            6
+          ],
+          [
+            -315,
+            979,
+            1,
+            2,
+            7
+          ],
+          [
+            28,
+            979,
+            3,
+            1,
+            4
+          ]
+        ],
+        "pixel_size": [
+          32,
+          12
+        ],
+        "viewport": [
+          30,
+          0,
+          25,
+          27,
+          2
+        ]
+      },
+      "native_equals_dos": true,
+      "native_queue": [
+        [
+          42,
+          270,
+          1,
+          9,
+          5,
+          6,
+          0
+        ],
+        [
+          -315,
+          979,
+          1,
+          2,
+          5,
+          7,
+          0
+        ],
+        [
+          28,
+          979,
+          3,
+          1,
+          5,
+          4,
+          0
+        ]
+      ],
+      "native_status": 0,
+      "oracle_queue": [
+        [
+          42,
+          270,
+          1,
+          9,
+          5,
+          6,
+          0
+        ],
+        [
+          -315,
+          979,
+          1,
+          2,
+          5,
+          7,
+          0
+        ],
+        [
+          28,
+          979,
+          3,
+          1,
+          5,
+          4,
+          0
+        ]
+      ],
+      "pair_diff": {},
+      "x_plus_one_negative_detected": null
+    },
+    {
+      "dos_candidate_equal": true,
+      "id": "random/0078",
+      "input": {
+        "args": [
+          -42,
+          34,
+          2,
+          0,
+          7
+        ],
+        "initial_queue": [
+          [
+            677,
+            -125,
+            1,
+            10,
+            0
+          ],
+          [
+            -112,
+            275,
+            2,
+            0,
+            6
+          ]
+        ],
+        "pixel_size": [
+          12,
+          24
+        ],
+        "viewport": [
+          7,
+          -26,
+          46,
+          28,
+          3
+        ]
+      },
+      "native_equals_dos": true,
+      "native_queue": [
+        [
+          677,
+          -125,
+          1,
+          10,
+          5,
+          0,
+          0
+        ],
+        [
+          -112,
+          275,
+          2,
+          0,
+          5,
+          6,
+          0
+        ]
+      ],
+      "native_status": 0,
+      "oracle_queue": [
+        [
+          677,
+          -125,
+          1,
+          10,
+          5,
+          0,
+          0
+        ],
+        [
+          -112,
+          275,
+          2,
+          0,
+          5,
+          6,
+          0
+        ]
+      ],
+      "pair_diff": {},
+      "x_plus_one_negative_detected": null
+    },
+    {
+      "dos_candidate_equal": true,
+      "id": "random/0079",
+      "input": {
+        "args": [
+          -47,
+          -38,
+          0,
+          2,
+          2
+        ],
+        "initial_queue": [
+          [
+            253,
+            -379,
+            1,
+            8,
+            0
+          ],
+          [
+            31,
+            -256,
+            1,
+            7,
+            2
+          ],
+          [
+            749,
+            -113,
+            1,
+            6,
+            7
+          ],
+          [
+            -725,
+            31,
+            1,
+            11,
+            7
+          ]
+        ],
+        "pixel_size": [
+          24,
+          24
+        ],
+        "viewport": [
+          -19,
+          23,
+          25,
+          23,
+          0
+        ]
+      },
+      "native_equals_dos": true,
+      "native_queue": [
+        [
+          253,
+          -379,
+          1,
+          8,
+          5,
+          0,
+          0
+        ],
+        [
+          31,
+          -256,
+          1,
+          7,
+          5,
+          2,
+          0
+        ],
+        [
+          749,
+          -113,
+          1,
+          6,
+          5,
+          7,
+          0
+        ],
+        [
+          -725,
+          31,
+          1,
+          11,
+          5,
+          7,
+          0
+        ]
+      ],
+      "native_status": 0,
+      "oracle_queue": [
+        [
+          253,
+          -379,
+          1,
+          8,
+          5,
+          0,
+          0
+        ],
+        [
+          31,
+          -256,
+          1,
+          7,
+          5,
+          2,
+          0
+        ],
+        [
+          749,
+          -113,
+          1,
+          6,
+          5,
+          7,
+          0
+        ],
+        [
+          -725,
+          31,
+          1,
+          11,
+          5,
+          7,
+          0
+        ]
+      ],
+      "pair_diff": {},
+      "x_plus_one_negative_detected": null
+    },
+    {
+      "dos_candidate_equal": true,
+      "id": "random/0080",
+      "input": {
+        "args": [
+          7,
+          -30,
+          2,
+          0,
+          5
+        ],
+        "initial_queue": [],
+        "pixel_size": [
+          8,
+          24
+        ],
+        "viewport": [
+          -16,
+          30,
+          39,
+          28,
+          0
+        ]
+      },
+      "native_equals_dos": true,
+      "native_queue": [],
+      "native_status": 0,
+      "oracle_queue": [],
+      "pair_diff": {},
+      "x_plus_one_negative_detected": null
+    },
+    {
+      "dos_candidate_equal": true,
+      "id": "random/0081",
+      "input": {
+        "args": [
+          10,
+          40,
+          1,
+          0,
+          6
+        ],
+        "initial_queue": [
+          [
+            974,
+            937,
+            3,
+            0,
+            4
+          ],
+          [
+            859,
+            -607,
+            0,
+            11,
+            0
+          ],
+          [
+            -251,
+            -95,
+            1,
+            4,
+            0
+          ]
+        ],
+        "pixel_size": [
+          16,
+          32
+        ],
+        "viewport": [
+          1,
+          23,
+          35,
+          33,
+          2
+        ]
+      },
+      "native_equals_dos": true,
+      "native_queue": [
+        [
+          974,
+          937,
+          3,
+          0,
+          5,
+          4,
+          0
+        ],
+        [
+          859,
+          -607,
+          0,
+          11,
+          5,
+          0,
+          0
+        ],
+        [
+          -251,
+          -95,
+          1,
+          4,
+          5,
+          0,
+          0
+        ]
+      ],
+      "native_status": 0,
+      "oracle_queue": [
+        [
+          974,
+          937,
+          3,
+          0,
+          5,
+          4,
+          0
+        ],
+        [
+          859,
+          -607,
+          0,
+          11,
+          5,
+          0,
+          0
+        ],
+        [
+          -251,
+          -95,
+          1,
+          4,
+          5,
+          0,
+          0
+        ]
+      ],
+      "pair_diff": {},
+      "x_plus_one_negative_detected": null
+    },
+    {
+      "dos_candidate_equal": true,
+      "id": "random/0082",
+      "input": {
+        "args": [
+          685,
+          -269,
+          1,
+          10,
+          6
+        ],
+        "initial_queue": [
+          [
+            420,
+            -262,
+            1,
+            0,
+            3
+          ],
+          [
+            840,
+            -233,
+            1,
+            10,
+            2
+          ],
+          [
+            120,
+            211,
+            2,
+            -1,
+            3
+          ],
+          [
+            91,
+            983,
+            2,
+            9,
+            3
+          ]
+        ],
+        "pixel_size": [
+          24,
+          12
+        ],
+        "viewport": [
+          20,
+          -10,
+          13,
+          26,
+          0
+        ]
+      },
+      "native_equals_dos": true,
+      "native_queue": [
+        [
+          420,
+          -262,
+          1,
+          0,
+          5,
+          3,
+          0
+        ],
+        [
+          840,
+          -233,
+          1,
+          10,
+          5,
+          2,
+          0
+        ],
+        [
+          120,
+          211,
+          2,
+          -1,
+          5,
+          3,
+          0
+        ],
+        [
+          91,
+          983,
+          2,
+          9,
+          5,
+          3,
+          0
+        ]
+      ],
+      "native_status": 0,
+      "oracle_queue": [
+        [
+          420,
+          -262,
+          1,
+          0,
+          5,
+          3,
+          0
+        ],
+        [
+          840,
+          -233,
+          1,
+          10,
+          5,
+          2,
+          0
+        ],
+        [
+          120,
+          211,
+          2,
+          -1,
+          5,
+          3,
+          0
+        ],
+        [
+          91,
+          983,
+          2,
+          9,
+          5,
+          3,
+          0
+        ]
+      ],
+      "pair_diff": {},
+      "x_plus_one_negative_detected": null
+    },
+    {
+      "dos_candidate_equal": true,
+      "id": "random/0083",
+      "input": {
+        "args": [
+          -18,
+          -31,
+          0,
+          2,
+          2
+        ],
+        "initial_queue": [
+          [
+            263,
+            993,
+            1,
+            1,
+            2
+          ]
+        ],
+        "pixel_size": [
+          8,
+          16
+        ],
+        "viewport": [
+          10,
+          6,
+          32,
+          27,
+          3
+        ]
+      },
+      "native_equals_dos": true,
+      "native_queue": [
+        [
+          263,
+          993,
+          1,
+          1,
+          5,
+          2,
+          0
+        ]
+      ],
+      "native_status": 0,
+      "oracle_queue": [
+        [
+          263,
+          993,
+          1,
+          1,
+          5,
+          2,
+          0
+        ]
+      ],
+      "pair_diff": {},
+      "x_plus_one_negative_detected": null
+    },
+    {
+      "dos_candidate_equal": true,
+      "id": "random/0084",
+      "input": {
+        "args": [
+          -4,
+          -1,
+          1,
+          2,
+          7
+        ],
+        "initial_queue": [
+          [
+            687,
+            -924,
+            0,
+            0,
+            3
+          ],
+          [
+            350,
+            946,
+            2,
+            6,
+            2
+          ],
+          [
+            -225,
+            572,
+            0,
+            12,
+            2
+          ],
+          [
+            913,
+            695,
+            3,
+            12,
+            0
+          ],
+          [
+            341,
+            -104,
+            2,
+            0,
+            0
+          ],
+          [
+            -347,
+            743,
+            0,
+            4,
+            5
+          ]
+        ],
+        "pixel_size": [
+          12,
+          24
+        ],
+        "viewport": [
+          -27,
+          22,
+          28,
+          28,
+          3
+        ]
+      },
+      "native_equals_dos": true,
+      "native_queue": [
+        [
+          687,
+          -924,
+          0,
+          0,
+          5,
+          3,
+          0
+        ],
+        [
+          350,
+          946,
+          2,
+          6,
+          5,
+          2,
+          0
+        ],
+        [
+          -225,
+          572,
+          0,
+          12,
+          5,
+          2,
+          0
+        ],
+        [
+          913,
+          695,
+          3,
+          12,
+          5,
+          0,
+          0
+        ],
+        [
+          341,
+          -104,
+          2,
+          0,
+          5,
+          0,
+          0
+        ],
+        [
+          -347,
+          743,
+          0,
+          4,
+          5,
+          5,
+          0
+        ]
+      ],
+      "native_status": 0,
+      "oracle_queue": [
+        [
+          687,
+          -924,
+          0,
+          0,
+          5,
+          3,
+          0
+        ],
+        [
+          350,
+          946,
+          2,
+          6,
+          5,
+          2,
+          0
+        ],
+        [
+          -225,
+          572,
+          0,
+          12,
+          5,
+          2,
+          0
+        ],
+        [
+          913,
+          695,
+          3,
+          12,
+          5,
+          0,
+          0
+        ],
+        [
+          341,
+          -104,
+          2,
+          0,
+          5,
+          0,
+          0
+        ],
+        [
+          -347,
+          743,
+          0,
+          4,
+          5,
+          5,
+          0
+        ]
+      ],
+      "pair_diff": {},
+      "x_plus_one_negative_detected": null
+    },
+    {
+      "dos_candidate_equal": true,
+      "id": "random/0085",
+      "input": {
+        "args": [
+          5,
+          21,
+          3,
+          1,
+          0
+        ],
+        "initial_queue": [
+          [
+            -841,
+            -337,
+            3,
+            -1,
+            0
+          ],
+          [
+            187,
+            861,
+            3,
+            8,
+            6
+          ]
+        ],
+        "pixel_size": [
+          24,
+          32
+        ],
+        "viewport": [
+          25,
+          -17,
+          44,
+          21,
+          2
+        ]
+      },
+      "native_equals_dos": true,
+      "native_queue": [
+        [
+          -841,
+          -337,
+          3,
+          -1,
+          5,
+          0,
+          0
+        ],
+        [
+          187,
+          861,
+          3,
+          8,
+          5,
+          6,
+          0
+        ]
+      ],
+      "native_status": 0,
+      "oracle_queue": [
+        [
+          -841,
+          -337,
+          3,
+          -1,
+          5,
+          0,
+          0
+        ],
+        [
+          187,
+          861,
+          3,
+          8,
+          5,
+          6,
+          0
+        ]
+      ],
+      "pair_diff": {},
+      "x_plus_one_negative_detected": null
+    },
+    {
+      "dos_candidate_equal": true,
+      "id": "random/0086",
+      "input": {
+        "args": [
+          4,
+          55,
+          2,
+          2,
+          2
+        ],
+        "initial_queue": [
+          [
+            975,
+            172,
+            3,
+            9,
+            5
+          ],
+          [
+            363,
+            543,
+            1,
+            7,
+            3
+          ],
+          [
+            30,
+            876,
+            3,
+            5,
+            0
+          ],
+          [
+            -328,
+            398,
+            3,
+            0,
+            1
+          ],
+          [
+            77,
+            -817,
+            0,
+            10,
+            3
+          ],
+          [
+            -126,
+            647,
+            1,
+            9,
+            1
+          ]
+        ],
+        "pixel_size": [
+          24,
+          8
+        ],
+        "viewport": [
+          -23,
+          -13,
+          12,
+          11,
+          0
+        ]
+      },
+      "native_equals_dos": true,
+      "native_queue": [
+        [
+          975,
+          172,
+          3,
+          9,
+          5,
+          5,
+          0
+        ],
+        [
+          363,
+          543,
+          1,
+          7,
+          5,
+          3,
+          0
+        ],
+        [
+          30,
+          876,
+          3,
+          5,
+          5,
+          0,
+          0
+        ],
+        [
+          -328,
+          398,
+          3,
+          0,
+          5,
+          1,
+          0
+        ],
+        [
+          77,
+          -817,
+          0,
+          10,
+          5,
+          3,
+          0
+        ],
+        [
+          -126,
+          647,
+          1,
+          9,
+          5,
+          1,
+          0
+        ]
+      ],
+      "native_status": 0,
+      "oracle_queue": [
+        [
+          975,
+          172,
+          3,
+          9,
+          5,
+          5,
+          0
+        ],
+        [
+          363,
+          543,
+          1,
+          7,
+          5,
+          3,
+          0
+        ],
+        [
+          30,
+          876,
+          3,
+          5,
+          5,
+          0,
+          0
+        ],
+        [
+          -328,
+          398,
+          3,
+          0,
+          5,
+          1,
+          0
+        ],
+        [
+          77,
+          -817,
+          0,
+          10,
+          5,
+          3,
+          0
+        ],
+        [
+          -126,
+          647,
+          1,
+          9,
+          5,
+          1,
+          0
+        ]
+      ],
+      "pair_diff": {},
+      "x_plus_one_negative_detected": null
+    },
+    {
+      "dos_candidate_equal": true,
+      "id": "random/0087",
+      "input": {
+        "args": [
+          -2,
+          -48,
+          3,
+          2,
+          7
+        ],
+        "initial_queue": [
+          [
+            -561,
+            811,
+            1,
+            3,
+            2
+          ],
+          [
+            -924,
+            -801,
+            3,
+            -1,
+            6
+          ],
+          [
+            539,
+            -397,
+            1,
+            -3,
+            5
+          ],
+          [
+            306,
+            905,
+            3,
+            3,
+            4
+          ]
+        ],
+        "pixel_size": [
+          8,
+          24
+        ],
+        "viewport": [
+          31,
+          -2,
+          13,
+          29,
+          1
+        ]
+      },
+      "native_equals_dos": true,
+      "native_queue": [
+        [
+          -561,
+          811,
+          1,
+          3,
+          5,
+          2,
+          0
+        ],
+        [
+          -924,
+          -801,
+          3,
+          -1,
+          5,
+          6,
+          0
+        ],
+        [
+          539,
+          -397,
+          1,
+          -3,
+          5,
+          5,
+          0
+        ],
+        [
+          306,
+          905,
+          3,
+          3,
+          5,
+          4,
+          0
+        ]
+      ],
+      "native_status": 0,
+      "oracle_queue": [
+        [
+          -561,
+          811,
+          1,
+          3,
+          5,
+          2,
+          0
+        ],
+        [
+          -924,
+          -801,
+          3,
+          -1,
+          5,
+          6,
+          0
+        ],
+        [
+          539,
+          -397,
+          1,
+          -3,
+          5,
+          5,
+          0
+        ],
+        [
+          306,
+          905,
+          3,
+          3,
+          5,
+          4,
+          0
+        ]
+      ],
+      "pair_diff": {},
+      "x_plus_one_negative_detected": null
+    },
+    {
+      "dos_candidate_equal": true,
+      "id": "random/0088",
+      "input": {
+        "args": [
+          164,
+          -27,
+          1,
+          10,
+          0
+        ],
+        "initial_queue": [
+          [
+            -200,
+            918,
+            1,
+            3,
+            3
+          ],
+          [
+            889,
+            -921,
+            3,
+            12,
+            6
+          ],
+          [
+            -547,
+            -147,
+            1,
+            -1,
+            2
+          ],
+          [
+            -462,
+            415,
+            3,
+            1,
+            2
+          ],
+          [
+            -334,
+            -914,
+            3,
+            1,
+            0
+          ]
+        ],
+        "pixel_size": [
+          32,
+          32
+        ],
+        "viewport": [
+          27,
+          29,
+          42,
+          33,
+          0
+        ]
+      },
+      "native_equals_dos": true,
+      "native_queue": [
+        [
+          -200,
+          918,
+          1,
+          3,
+          5,
+          3,
+          0
+        ],
+        [
+          889,
+          -921,
+          3,
+          12,
+          5,
+          6,
+          0
+        ],
+        [
+          -547,
+          -147,
+          1,
+          -1,
+          5,
+          2,
+          0
+        ],
+        [
+          -462,
+          415,
+          3,
+          1,
+          5,
+          2,
+          0
+        ],
+        [
+          -334,
+          -914,
+          3,
+          1,
+          5,
+          0,
+          0
+        ]
+      ],
+      "native_status": 0,
+      "oracle_queue": [
+        [
+          -200,
+          918,
+          1,
+          3,
+          5,
+          3,
+          0
+        ],
+        [
+          889,
+          -921,
+          3,
+          12,
+          5,
+          6,
+          0
+        ],
+        [
+          -547,
+          -147,
+          1,
+          -1,
+          5,
+          2,
+          0
+        ],
+        [
+          -462,
+          415,
+          3,
+          1,
+          5,
+          2,
+          0
+        ],
+        [
+          -334,
+          -914,
+          3,
+          1,
+          5,
+          0,
+          0
+        ]
+      ],
+      "pair_diff": {},
+      "x_plus_one_negative_detected": null
+    },
+    {
+      "dos_candidate_equal": true,
+      "id": "random/0089",
+      "input": {
+        "args": [
+          0,
+          70,
+          2,
+          0,
+          6
+        ],
+        "initial_queue": [
+          [
+            -281,
+            25,
+            3,
+            5,
+            5
+          ],
+          [
+            -436,
+            129,
+            2,
+            3,
+            6
+          ],
+          [
+            -888,
+            -631,
+            0,
+            7,
+            7
+          ],
+          [
+            -341,
+            -754,
+            1,
+            3,
+            4
+          ],
+          [
+            -932,
+            287,
+            3,
+            11,
+            5
+          ],
+          [
+            -168,
+            169,
+            1,
+            3,
+            6
+          ]
+        ],
+        "pixel_size": [
+          16,
+          8
+        ],
+        "viewport": [
+          5,
+          -27,
+          43,
+          22,
+          0
+        ]
+      },
+      "native_equals_dos": true,
+      "native_queue": [
+        [
+          -281,
+          25,
+          3,
+          5,
+          5,
+          5,
+          0
+        ],
+        [
+          -436,
+          129,
+          2,
+          3,
+          5,
+          6,
+          0
+        ],
+        [
+          -888,
+          -631,
+          0,
+          7,
+          5,
+          7,
+          0
+        ],
+        [
+          -341,
+          -754,
+          1,
+          3,
+          5,
+          4,
+          0
+        ],
+        [
+          -932,
+          287,
+          3,
+          11,
+          5,
+          5,
+          0
+        ],
+        [
+          -168,
+          169,
+          1,
+          3,
+          5,
+          6,
+          0
+        ]
+      ],
+      "native_status": 0,
+      "oracle_queue": [
+        [
+          -281,
+          25,
+          3,
+          5,
+          5,
+          5,
+          0
+        ],
+        [
+          -436,
+          129,
+          2,
+          3,
+          5,
+          6,
+          0
+        ],
+        [
+          -888,
+          -631,
+          0,
+          7,
+          5,
+          7,
+          0
+        ],
+        [
+          -341,
+          -754,
+          1,
+          3,
+          5,
+          4,
+          0
+        ],
+        [
+          -932,
+          287,
+          3,
+          11,
+          5,
+          5,
+          0
+        ],
+        [
+          -168,
+          169,
+          1,
+          3,
+          5,
+          6,
+          0
+        ]
+      ],
+      "pair_diff": {},
+      "x_plus_one_negative_detected": null
+    },
+    {
+      "dos_candidate_equal": true,
+      "id": "random/0090",
+      "input": {
+        "args": [
+          294,
+          620,
+          3,
+          10,
+          0
+        ],
+        "initial_queue": [
+          [
+            176,
+            -507,
+            2,
+            12,
+            5
+          ],
+          [
+            -975,
+            -230,
+            1,
+            10,
+            7
+          ]
+        ],
+        "pixel_size": [
+          12,
+          8
+        ],
+        "viewport": [
+          31,
+          -15,
+          24,
+          29,
+          3
+        ]
+      },
+      "native_equals_dos": true,
+      "native_queue": [
+        [
+          176,
+          -507,
+          2,
+          12,
+          5,
+          5,
+          0
+        ],
+        [
+          -975,
+          -230,
+          1,
+          10,
+          5,
+          7,
+          0
+        ]
+      ],
+      "native_status": 0,
+      "oracle_queue": [
+        [
+          176,
+          -507,
+          2,
+          12,
+          5,
+          5,
+          0
+        ],
+        [
+          -975,
+          -230,
+          1,
+          10,
+          5,
+          7,
+          0
+        ]
+      ],
+      "pair_diff": {},
+      "x_plus_one_negative_detected": null
+    },
+    {
+      "dos_candidate_equal": true,
+      "id": "random/0091",
+      "input": {
+        "args": [
+          73,
+          19,
+          0,
+          0,
+          4
+        ],
+        "initial_queue": [
+          [
+            524,
+            -681,
+            2,
+            6,
+            2
+          ],
+          [
+            -706,
+            497,
+            1,
+            5,
+            0
+          ],
+          [
+            -779,
+            -446,
+            0,
+            12,
+            7
+          ],
+          [
+            -164,
+            316,
+            1,
+            3,
+            0
+          ],
+          [
+            -29,
+            181,
+            2,
+            -1,
+            4
+          ]
+        ],
+        "pixel_size": [
+          16,
+          12
+        ],
+        "viewport": [
+          -28,
+          -13,
+          16,
+          26,
+          3
+        ]
+      },
+      "native_equals_dos": true,
+      "native_queue": [
+        [
+          524,
+          -681,
+          2,
+          6,
+          5,
+          2,
+          0
+        ],
+        [
+          -706,
+          497,
+          1,
+          5,
+          5,
+          0,
+          0
+        ],
+        [
+          -779,
+          -446,
+          0,
+          12,
+          5,
+          7,
+          0
+        ],
+        [
+          -164,
+          316,
+          1,
+          3,
+          5,
+          0,
+          0
+        ],
+        [
+          -29,
+          181,
+          2,
+          -1,
+          5,
+          4,
+          0
+        ]
+      ],
+      "native_status": 0,
+      "oracle_queue": [
+        [
+          524,
+          -681,
+          2,
+          6,
+          5,
+          2,
+          0
+        ],
+        [
+          -706,
+          497,
+          1,
+          5,
+          5,
+          0,
+          0
+        ],
+        [
+          -779,
+          -446,
+          0,
+          12,
+          5,
+          7,
+          0
+        ],
+        [
+          -164,
+          316,
+          1,
+          3,
+          5,
+          0,
+          0
+        ],
+        [
+          -29,
+          181,
+          2,
+          -1,
+          5,
+          4,
+          0
+        ]
+      ],
+      "pair_diff": {},
+      "x_plus_one_negative_detected": null
+    },
+    {
+      "dos_candidate_equal": true,
+      "id": "random/0092",
+      "input": {
+        "args": [
+          -32,
+          41,
+          2,
+          1,
+          3
+        ],
+        "initial_queue": [
+          [
+            -729,
+            -448,
+            0,
+            1,
+            1
+          ],
+          [
+            -119,
+            863,
+            3,
+            8,
+            0
+          ]
+        ],
+        "pixel_size": [
+          24,
+          24
+        ],
+        "viewport": [
+          -32,
+          -2,
+          4,
+          27,
+          1
+        ]
+      },
+      "native_equals_dos": true,
+      "native_queue": [
+        [
+          -729,
+          -448,
+          0,
+          1,
+          5,
+          1,
+          0
+        ],
+        [
+          -119,
+          863,
+          3,
+          8,
+          5,
+          0,
+          0
+        ]
+      ],
+      "native_status": 0,
+      "oracle_queue": [
+        [
+          -729,
+          -448,
+          0,
+          1,
+          5,
+          1,
+          0
+        ],
+        [
+          -119,
+          863,
+          3,
+          8,
+          5,
+          0,
+          0
+        ]
+      ],
+      "pair_diff": {},
+      "x_plus_one_negative_detected": null
+    },
+    {
+      "dos_candidate_equal": true,
+      "id": "random/0093",
+      "input": {
+        "args": [
+          569,
+          -298,
+          3,
+          10,
+          1
+        ],
+        "initial_queue": [
+          [
+            -276,
+            -756,
+            0,
+            6,
+            6
+          ]
+        ],
+        "pixel_size": [
+          12,
+          8
+        ],
+        "viewport": [
+          23,
+          -14,
+          26,
+          17,
+          3
+        ]
+      },
+      "native_equals_dos": true,
+      "native_queue": [
+        [
+          -276,
+          -756,
+          0,
+          6,
+          5,
+          6,
+          0
+        ]
+      ],
+      "native_status": 0,
+      "oracle_queue": [
+        [
+          -276,
+          -756,
+          0,
+          6,
+          5,
+          6,
+          0
+        ]
+      ],
+      "pair_diff": {},
+      "x_plus_one_negative_detected": null
+    },
+    {
+      "dos_candidate_equal": true,
+      "id": "random/0094",
+      "input": {
+        "args": [
+          -27,
+          -9,
+          0,
+          1,
+          1
+        ],
+        "initial_queue": [],
+        "pixel_size": [
+          16,
+          24
+        ],
+        "viewport": [
+          -21,
+          7,
+          43,
+          35,
+          2
+        ]
+      },
+      "native_equals_dos": true,
+      "native_queue": [],
+      "native_status": 0,
+      "oracle_queue": [],
+      "pair_diff": {},
+      "x_plus_one_negative_detected": null
+    },
+    {
+      "dos_candidate_equal": true,
+      "id": "random/0095",
+      "input": {
+        "args": [
+          88,
+          1,
+          0,
+          0,
+          4
+        ],
+        "initial_queue": [],
+        "pixel_size": [
+          24,
+          16
+        ],
+        "viewport": [
+          -13,
+          -23,
+          40,
+          2,
+          3
+        ]
+      },
+      "native_equals_dos": true,
+      "native_queue": [],
+      "native_status": 0,
+      "oracle_queue": [],
+      "pair_diff": {},
+      "x_plus_one_negative_detected": null
+    }
+  ],
+  "directed_count": 11,
+  "limits": [
+    "AddMsgBalloon only; DrawCurBalloons is not yet differentially closed.",
+    "Borrowed text identity is a controlled fixture table/index, not a production resource binding.",
+    "Finite source geometry domain; no visual pixel claim."
+  ],
+  "native_model": {
+    "header": "portable/ui_model/windows/balloon_queue.h",
+    "header_sha256": "45470b8b170e35ba665bbc8c21e25b0aeaac369f23dd105dc411ee62861dfe27",
+    "path": "portable/ui_model/windows/balloon_queue.c",
+    "sha256": "ae61a7e34f0e58551352cfe8d2045e053104dc191fb7be971c920089dc6dabfe"
+  },
+  "native_model_binary": {
+    "path": "build/workers/behavior_text_card/balloon_queue_addmsg/balloon_queue_model.dll",
+    "sha256": "5ceafe8a74327de2ac35f6ad80716ec0696da96069ca4d09438ae1c931571a9e"
+  },
+  "random_count": 96,
+  "random_seed": 12194058,
+  "schema": "balloon-queue-addmsg-differential-v1",
+  "source": {
+    "path": "evidence/behavior/functions/DrawBalloons/contracts/logical-render-v1/module.c",
+    "sha256": "e41a4ab8c56c0d4923ace8b02027f2471feee049aabe0577588e206e930b4db2"
+  },
+  "status": "PASS_BOUNDED_COMPARISON",
+  "target": "root:m0250 AddMsgBalloon plus portable logical queue model",
+  "totals": {
+    "dos_candidate_equal": 107,
+    "errors": 0,
+    "native_dos_equal": 107,
+    "negative_controls_detected": 1
+  }
+}

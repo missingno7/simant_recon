@@ -1,0 +1,510 @@
+{
+  "schema": "portable-init-controls-reuse-dos-differential-v1",
+  "original_exe_sha256": "aa0596c6766322a8229ee3c36e57048c92adc82d50fbe2ef37afb8b85fcf4f11",
+  "behavior_harness_sha256": "2c0799048057f59eae61a48be4d695278635594484adf0c70bf46c51b4e0c799",
+  "setup_source_sha256": "c0b644d621320da87540edc46c3d13df852cdffc757202d6f7b4ab8d87566ea7",
+  "setup_header_sha256": "ed4d35dc8f58ff5a2225c9418c0387e8e3dba0d9c1a3a19493e190562fe3c3e5",
+  "native_adapter_sha256": "d8b4dbeb71f3b8fd3470422fc5c8b90e676c04a1df189ca695885f0e797067f4",
+  "native_library_sha256": "51b0b6dd6dca8ffbd9cf498f141259128303da24a086ac2779c9ba9158f0c7a6",
+  "ndx_sha256": "077d8aecdad5e816f0828204f7ca500a68b3a4a3288740ac75e73e44eaa8efc4",
+  "dat_sha256": "9c98c0f110e901a2c2db65944e4ebdf6b26392181e9415a34eb7b29617eaa899",
+  "original_initControls_address": {
+    "unit": "root",
+    "seg": 9477,
+    "off": 1349,
+    "size": 372,
+    "region": "game_or_library",
+    "extent": "DESCENT",
+    "evidence": [
+      "far_call"
+    ],
+    "name": "win_Recalc"
+  },
+  "fixture_windows": [
+    18,
+    19
+  ],
+  "initial_fresh_snapshot": {
+    "knob_size": [
+      14,
+      14
+    ],
+    "controls": [
+      1,
+      1,
+      1,
+      1,
+      0,
+      0,
+      -1,
+      -1
+    ],
+    "mode_level": [
+      39321,
+      13107,
+      13107
+    ],
+    "caste_level": [
+      0,
+      39321,
+      26214
+    ],
+    "mode_presets": [
+      39321,
+      13107,
+      13107,
+      65535,
+      0,
+      0,
+      0,
+      65535,
+      0,
+      0,
+      0,
+      65535
+    ],
+    "caste_presets": [
+      0,
+      39321,
+      26214,
+      32767,
+      16383,
+      16383,
+      0,
+      65535,
+      0,
+      0,
+      0,
+      65535
+    ],
+    "ideal_caste": [
+      60,
+      40,
+      0,
+      0
+    ],
+    "mode_rect": [
+      136,
+      344,
+      247,
+      440
+    ],
+    "caste_rect": [
+      392,
+      344,
+      501,
+      440
+    ],
+    "mode_point": [
+      192,
+      381
+    ],
+    "caste_point": [
+      436,
+      438
+    ],
+    "mode_triangle_dimensions": [
+      111,
+      96,
+      146
+    ],
+    "caste_triangle_dimensions": [
+      109,
+      96,
+      144
+    ],
+    "mode_triangle_points": [
+      191,
+      344,
+      136,
+      440,
+      247,
+      440
+    ],
+    "caste_triangle_points": [
+      446,
+      344,
+      392,
+      440,
+      501,
+      440
+    ],
+    "resource_size_calls": {
+      "object_id": 1400,
+      "kind": 2,
+      "flags": 8,
+      "record_sha256": "c04e39275055bb743b2b46b4a3914fabe94b0dc418ee9df61b1eddc7874ccb4a",
+      "width": 14,
+      "height": 14
+    },
+    "window_resource_requests": [
+      [
+        18,
+        0,
+        1
+      ],
+      [
+        19,
+        0,
+        1
+      ]
+    ],
+    "closed_ui_calls": [
+      "mode",
+      "caste"
+    ],
+    "raw_callback_trace": [
+      {
+        "name": "f_208F_0419",
+        "args": [
+          14386,
+          20726,
+          1400
+        ]
+      },
+      {
+        "name": "win_ModeControlClosed",
+        "args": []
+      },
+      {
+        "name": "win_CasteControlClosed",
+        "args": []
+      }
+    ]
+  },
+  "mutation": {
+    "mode_defaults": [
+      4660,
+      22136,
+      39612
+    ],
+    "caste_defaults": [
+      9029,
+      26505,
+      43981
+    ],
+    "mode_rows_1_3": [
+      [
+        4369,
+        8738,
+        13107
+      ],
+      [
+        17476,
+        21845,
+        26214
+      ],
+      [
+        30583,
+        34952,
+        39321
+      ]
+    ],
+    "caste_rows_1_3": [
+      [
+        43690,
+        48059,
+        52428
+      ],
+      [
+        56797,
+        61166,
+        65535
+      ],
+      [
+        257,
+        514,
+        771
+      ]
+    ],
+    "selectors": {
+      "mode": 0,
+      "caste": 0,
+      "basis": "source C static initializers in m0798"
+    }
+  },
+  "original_snapshot": {
+    "mode_level": [
+      4660,
+      22136,
+      39612
+    ],
+    "caste_level": [
+      9029,
+      26505,
+      43981
+    ],
+    "mode_presets": [
+      4660,
+      22136,
+      39612,
+      4369,
+      8738,
+      13107,
+      17476,
+      21845,
+      26214,
+      30583,
+      34952,
+      39321
+    ],
+    "caste_presets": [
+      9029,
+      26505,
+      43981,
+      43690,
+      48059,
+      52428,
+      56797,
+      61166,
+      65535,
+      257,
+      514,
+      771
+    ],
+    "ideal_caste": [
+      40,
+      67,
+      7,
+      7
+    ],
+    "controls": [
+      1,
+      1,
+      1,
+      1,
+      0,
+      0,
+      -1,
+      -1
+    ],
+    "callback_trace": [
+      {
+        "name": "f_208F_0419",
+        "args": [
+          14386,
+          20726,
+          1400
+        ]
+      },
+      {
+        "name": "win_ModeControlClosed",
+        "args": []
+      },
+      {
+        "name": "win_CasteControlClosed",
+        "args": []
+      }
+    ],
+    "post_default_words": {
+      "mode": [
+        4660,
+        22136,
+        39612
+      ],
+      "caste": [
+        9029,
+        26505,
+        43981
+      ]
+    },
+    "injected_before_second_call": {
+      "mode_defaults": [
+        4660,
+        22136,
+        39612
+      ],
+      "caste_defaults": [
+        9029,
+        26505,
+        43981
+      ],
+      "mode_presets": [
+        39321,
+        13107,
+        13107,
+        4369,
+        8738,
+        13107,
+        17476,
+        21845,
+        26214,
+        30583,
+        34952,
+        39321
+      ],
+      "caste_presets": [
+        0,
+        39321,
+        26214,
+        43690,
+        48059,
+        52428,
+        56797,
+        61166,
+        65535,
+        257,
+        514,
+        771
+      ]
+    },
+    "preset_table_write_trace": [
+      {
+        "linear": 253312,
+        "size": 2,
+        "value": 4660,
+        "cs_ip": [
+          1944,
+          3980
+        ]
+      },
+      {
+        "linear": 253282,
+        "size": 2,
+        "value": 9029,
+        "cs_ip": [
+          1944,
+          4007
+        ]
+      },
+      {
+        "linear": 253314,
+        "size": 2,
+        "value": 22136,
+        "cs_ip": [
+          1944,
+          3980
+        ]
+      },
+      {
+        "linear": 253284,
+        "size": 2,
+        "value": 26505,
+        "cs_ip": [
+          1944,
+          4007
+        ]
+      },
+      {
+        "linear": 253316,
+        "size": 2,
+        "value": 39612,
+        "cs_ip": [
+          1944,
+          3980
+        ]
+      },
+      {
+        "linear": 253286,
+        "size": 2,
+        "value": 43981,
+        "cs_ip": [
+          1944,
+          4007
+        ]
+      }
+    ]
+  },
+  "native_snapshot": {
+    "knob_size": [
+      14,
+      14
+    ],
+    "controls": [
+      1,
+      1,
+      1,
+      1,
+      0,
+      0,
+      -1,
+      -1
+    ],
+    "mode_level": [
+      4660,
+      22136,
+      39612
+    ],
+    "caste_level": [
+      9029,
+      26505,
+      43981
+    ],
+    "mode_presets": [
+      4660,
+      22136,
+      39612,
+      4369,
+      8738,
+      13107,
+      17476,
+      21845,
+      26214,
+      30583,
+      34952,
+      39321
+    ],
+    "caste_presets": [
+      9029,
+      26505,
+      43981,
+      43690,
+      48059,
+      52428,
+      56797,
+      61166,
+      65535,
+      257,
+      514,
+      771
+    ],
+    "ideal_caste": [
+      40,
+      67,
+      7,
+      7
+    ],
+    "mode_rect": [
+      136,
+      344,
+      247,
+      440
+    ],
+    "caste_rect": [
+      392,
+      344,
+      501,
+      440
+    ],
+    "mode_point": [
+      207,
+      431
+    ],
+    "caste_point": [
+      472,
+      425
+    ],
+    "mode_triangle_dimensions": [
+      111,
+      96,
+      146
+    ],
+    "caste_triangle_dimensions": [
+      109,
+      96,
+      144
+    ],
+    "events": [
+      358402,
+      135693,
+      135693,
+      196608,
+      135949,
+      196609
+    ]
+  },
+  "mismatches": {},
+  "mismatch_count": 0,
+  "selector_scope": "initControls does not write g_1B50/g_1B4E; the source static values remain their original zero initializers and are not separately exposed by the frozen layout map. Native unit tests separately mutate selectors to nonzero sentinels and prove repeated initControls preserves them.",
+  "claim_boundary": "This checks repeated initControls on an initialized pair of real HCEGANT windows. It does not claim a full RandYard/NewGame restart sequence."
+}

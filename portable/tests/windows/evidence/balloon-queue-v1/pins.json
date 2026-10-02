@@ -1,0 +1,121 @@
+{
+  "schema": "portable-balloon-queue-dos-differential-v1",
+  "status": "PRESERVED_BOUNDED_RUNS",
+  "common": {
+    "source_snapshot": {
+      "path": "source/module.c",
+      "sha256": "e41a4ab8c56c0d4923ace8b02027f2471feee049aabe0577588e206e930b4db2"
+    },
+    "drawballoons_logical_render_evidence": {
+      "path": "source/drawballoons-logical-render-evidence.json",
+      "sha256": "d2a8cd74ac2703c968e267b6744593921e1253db7ab4f3056e8eacc9c3e8ed12"
+    },
+    "oracle_executable_sha256": "aa0596c6766322a8229ee3c36e57048c92adc82d50fbe2ef37afb8b85fcf4f11",
+    "oracle_lock_sha256": "2c6d9e98c688621ad49a08c78d0e0968f4076b036be56ec0738217b533ccde13",
+    "manifest_sha256": "025a0a9255d910cae4b122ab5a3f3fb40888bb456d7fe42158db7c9e622fcf50",
+    "harness_sha256": "2c0799048057f59eae61a48be4d695278635594484adf0c70bf46c51b4e0c799",
+    "harness_components": "Pinned by source/drawballoons-logical-render-evidence.json under evidence/behavior/harnesses/render-small-d25a35e5-20261002/",
+    "msc_profile": "msc600ax",
+    "msc_flags": ["/AL", "/Os", "/Oe", "/Og", "/Zi"],
+    "unicorn": "2.1.4",
+    "candidate_object_sha256": "65e7e3cba83ea4eb02a221c4313e5e2ddb1570139d5881180e699fdeedfdd13a",
+    "linked_code_sha256": "e54490818026c5883025c674710b4faf0bf9114a8d1c5943df96f733c17c660c"
+  },
+  "native_model": {
+    "source_path": "inputs/balloon_queue.c",
+    "source_sha256": "ae61a7e34f0e58551352cfe8d2045e053104dc191fb7be971c920089dc6dabfe",
+    "header_path": "inputs/balloon_queue.h",
+    "header_sha256": "45470b8b170e35ba665bbc8c21e25b0aeaac369f23dd105dc411ee62861dfe27",
+    "balloons_dependency_sha256": "a40080d33eb36bd73e5f17c3755f589ca0f099bd6707891e3f5432e14ed768c3",
+    "balloons_header_sha256": "b46c39ad41e8a391cf3e15807c14c0b43fb489569fd41fd2e8768a2f6722bf99",
+    "compiled_probe": {
+      "path": "run/common/balloon_queue_model.dll",
+      "sha256": "05fc09c3d9bb4e15e030e003699914d9cb2d0667febdb014494a31aab8515289"
+    }
+  },
+  "runs": {
+    "AddMsgBalloon": {
+      "report": {
+        "path": "run/addmsg/report.json",
+        "sha256": "494c1faeb3ce689931942848f15b4255ec4a84e23b25bb5701796129a3bad391"
+      },
+      "ledger": {
+        "path": "run/addmsg/cases.jsonl.gz",
+        "sha256": "15b2643bbf2d4ce9f173e196b0fb15b7192c91f1fbecab6fbf52e7f90407a56d",
+        "rows": 107,
+        "lane_counts": {"directed": 11, "randomized": 96}
+      },
+      "candidate_identity": {
+        "path": "run/addmsg/candidate-identity.json",
+        "sha256": "799e79ec58978188fb0aaa968a4fda2417a11fb87f802286b972429e340895fa"
+      },
+      "totals": {
+        "dos_candidate_equal": 107,
+        "native_dos_equal": 107,
+        "negative_controls_detected": 1,
+        "errors": 0
+      },
+      "random_seed": "0xBA110A"
+    },
+    "DrawCurBalloons": {
+      "report": {
+        "path": "run/drawcur/report.json",
+        "sha256": "1a7c0ba0f48b2f8731c5c9bed62f542e6f7ea29ee1ff7142dd0328040d0ab1ca"
+      },
+      "ledger": {
+        "path": "run/drawcur/cases.jsonl.gz",
+        "sha256": "7db8fd0e0075ae31a537af0dac4ecd6d3e64204c1b5b09fb7854be6ac977b143",
+        "rows": 55,
+        "lane_counts": {"directed": 7, "randomized": 48}
+      },
+      "candidate_identity": {
+        "path": "run/drawcur/candidate-identity.json",
+        "sha256": "4e45ea5e6459e3c501ed4df398c384b42423a011e2819da1bba9fe54d9d7b06a"
+      },
+      "totals": {
+        "dos_candidate_equal": 55,
+        "native_dos_equal": 55,
+        "service_order_equal": 55,
+        "errors": 0
+      },
+      "random_seed": "0xB41100"
+    },
+    "native_test": {
+      "path": "inputs/test_balloon_queue.c",
+      "sha256": "d61a266605717c617a36859424e061c1f791e0c34c51978291b46b9216a943f3",
+      "result": "balloon queue model tests passed"
+    }
+  },
+  "producers": {
+    "AddMsgBalloon_runner": {
+      "path": "inputs/balloon_queue_differential.py",
+      "sha256": "f123acfdb022470f96cd7a1f645bfc8a54a096bf0b498190620299a8b6903ddd"
+    },
+    "DrawCurBalloons_runner": {
+      "path": "inputs/balloon_draw_current_differential.py",
+      "sha256": "1bfd9e3b3fb68853d7d892647f8bb4049b9d74dfea734b1f6e86c389091d8491"
+    },
+    "behavior_harness_snapshot": {
+      "path": "inputs/behavior.py",
+      "sha256": "2c0799048057f59eae61a48be4d695278635594484adf0c70bf46c51b4e0c799"
+    },
+    "case_ledger_producer": {
+      "path": "inputs/behavior_ledger.py",
+      "sha256": "6788ec00f1c02fd93d98b96b4c8d61d2b704c97308b2c3f4024bc3095e76395f"
+    },
+    "oracle_lock_snapshot": {
+      "path": "inputs/oracle.lock.json",
+      "sha256": "2c6d9e98c688621ad49a08c78d0e0968f4076b036be56ec0738217b533ccde13"
+    },
+    "manifest_snapshot": {
+      "path": "inputs/manifest.json",
+      "sha256": "025a0a9255d910cae4b122ab5a3f3fb40888bb456d7fe42158db7c9e622fcf50"
+    }
+  },
+  "limits": [
+    "Finite controlled source state, service-return sequences, and terminated fixture string tables.",
+    "Queue and selection only; rendered pixels and physical backend effects are outside this model.",
+    "The queue stores borrowed text pointers; production resource owner binding remains a caller responsibility.",
+    "These runs do not create a BEHAVIOR_EXACT registry claim."
+  ]
+}

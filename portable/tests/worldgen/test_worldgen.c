@@ -256,6 +256,7 @@ static void test_native_new_game_bootstrap(void)
     unsigned i;
     memset(&world, 0, sizeof world);
     memset(&context, 0, sizeof context);
+    sim_setup_controls_init_data(&controls);
     sim_worldgen_seed_startup_rng(&rng, 0x2468ace0u, 0x13572468u);
     expected_rng = rng;
     for (i = 0; i < 192; ++i)

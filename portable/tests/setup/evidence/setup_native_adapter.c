@@ -99,6 +99,7 @@ __declspec(dllexport) int setup_native_init(const char *root, int16_t profile_id
     memset(&database, 0, sizeof(database));
     memset(&registry, 0, sizeof(registry));
     memset(&controls, 0, sizeof(controls));
+    sim_setup_controls_init_data(&controls);
     event_count = 0;
     db_status = portable_db_open(&database, root);
     if (db_status != PORTABLE_DB_OK) return 100 + (int)db_status;
@@ -115,6 +116,38 @@ __declspec(dllexport) int setup_native_init(const char *root, int16_t profile_id
     hooks.context = NULL;
     setup_status = sim_setup_init_controls(&controls, &hooks);
     return (int)setup_status;
+}
+
+/* Mutated-state lane for the repeated source initControls contract. values:
+ * defaults[0..5], selectors[6..7], then three remaining mode and caste rows
+ * (frac/mid/weight each). */
+__declspec(dllexport) int setup_native_mutate_reinit(const int32_t *values)
+{
+    SimSetupHooks hooks;
+    unsigned i;
+    unsigned at = 8;
+    if (!ready || values == NULL || !controls.source_data_initialized)
+        return SIM_SETUP_INVALID_ARGUMENT;
+    controls.mode_defaults = (SimSetupTriangle){
+        (uint16_t)values[0], (uint16_t)values[1], (uint16_t)values[2] };
+    controls.caste_defaults = (SimSetupTriangle){
+        (uint16_t)values[3], (uint16_t)values[4], (uint16_t)values[5] };
+    controls.mode_current = (int16_t)values[6];
+    controls.caste_current = (int16_t)values[7];
+    for (i = 1; i < 4; ++i, at += 3)
+        controls.mode_levels[i] = (SimSetupTriangle){
+            (uint16_t)values[at], (uint16_t)values[at + 1],
+            (uint16_t)values[at + 2] };
+    for (i = 1; i < 4; ++i, at += 3)
+        controls.caste_levels[i] = (SimSetupTriangle){
+            (uint16_t)values[at], (uint16_t)values[at + 1],
+            (uint16_t)values[at + 2] };
+    event_count = 0;
+    hooks.resource_size = resource_size;
+    hooks.get_object_rect = get_object_rect;
+    hooks.refresh_control = refresh_control;
+    hooks.context = NULL;
+    return (int)sim_setup_init_controls(&controls, &hooks);
 }
 
 __declspec(dllexport) size_t setup_native_snapshot(int32_t *values,

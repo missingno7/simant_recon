@@ -22,8 +22,9 @@ typedef struct SimRecoveredProjectionEntry {
  * RecoveredState member and never allocate independent duplicate storage. */
 const SimRecoveredProjectionEntry *sim_recovered_projection_manifest(size_t *count);
 
-/* Explicitly reported NewGame-written source globals without a typed session
- * owner. Their source DATA initializer remains in force in RecoveredState. */
+/* Explicitly reported source globals outside the active session projection.
+ * In profiles without control-init bindings this includes NewGame-written
+ * setup globals; next4 reports the private TU-static preset selectors. */
 const char *const *sim_recovered_unmapped_new_game_writes(size_t *count);
 
 /* Start from recovered DATA initializers, then overlay typed fields. After a
