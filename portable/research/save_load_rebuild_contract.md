@@ -1,0 +1,36 @@
+# Post-load reset and derived rebuild: source contract
+
+Status: source-grounded boundary inventory, **not** a native/DOS differential and not an integrated Save/Load claim.
+
+## Exact S09 flow
+
+`src/S09/m35F5.c:o09_35F5_0D7A` sets `fd_50F6_0354=1`, clears `fd_50F6_0214`, sets `fd_50F6_0204=300`, clears `fd_50F6_0472`, then calls `RandYard`. `LoadGame` calls it after a selected file opens successfully and before its first `SaveRec` read. It is therefore observable even when the first read fails. The 0204 assignment is overwritten by `RandYard` (`fd_50F6_0204=0`) before the first read; the other reset effects must be traced through RandYard, not assumed to survive.
+
+The retained RandYard diagnostic at `portable/tests/recovered/evidence/randyard-differential-20261002/` is a real source-vs-native action comparison with imported DOS state and source RNG, not an opaque output replay. It compares full SRand1 bounds/results and final RNG for scenario 1 (889 draws), repeat (900), and scenario 3 (688). Its old Next6/7 packet's nine geometry/control mismatches compare native values against invalid DOS overlay bytes: the report itself says the post-action window object reads are code bytes. Its setup fixture does retain valid source object rectangles: mode control `136,344..247,440` (111x96), caste control `392,344..501,440` (109x96). `SetDefaultWindows` opens caste then mode, so the shared `InitTriVars` globals finish with mode dimensions (111x96; slope 55), whereas the old native values 109x96/slope54 reflect caste geometry. This identifies a native shared-field mapping defect in that old profile, but does not rehabilitate its invalid DOS comparison. The diagnostic is not a `LoadGame -> o09:0D7A -> RandYard` test. Scenario 2 terminates at original `INT 21h/AH=48h` through `Ralloc -> malloc` because it has no DOS render allocator. It cannot certify the reset wrapper or all RandYard domains.
+
+## Rebuild order and state
+
+`o09_35F5_0DBB` performs, in source order:
+
+1. Derive `CurGndTileID` from loaded `TERRAINset` (`1000` unless exactly `1`, then `1001`) and call `OverlayTileSet(0, CurGndTileID)`. Source `OverlayTileSet` chooses the corresponding tile resource set and writes `Barrier` as `0x50` or `0x90`. `Barrier` is itself SaveRec row 104, so its loaded value is overwritten by this derived selection.
+2. Zero all `LifeA[128][64]`, `LifeB[64][64]`, and `LifeR[64][64]` cells.
+3. Reverse-replay `Alist*`, `Blist*`, `Rlist*` from each corresponding `ListIndex*` down through index zero, assigning `Life*[x][y]=*T[i]`. Reverse order matters when records collide: the lower index is written last and wins. This loop is inclusive although the list insertion/count code treats the index as the next-free/count value. A saved count at full capacity would read one entry beyond the list array; bounds must be explicitly constrained or treated as unsupported rather than normalized.
+4. If loaded `fd_50F6_0A06==0`, invoke `SetMyLife(MePlane,MeLocX,MeLocY,fd_50F6_04C2,fd_50F6_0496,255)`. This can update player/life-map state using the loaded location, direction/type, plane, and world occupancy.
+5. Call `FullCount` (`CountAnts`, then `CountUpdate`/`Feedback`). Counting recomputes caste/population totals and resets `fd_50F6_0354=0`. It can also cause queen-loss sound/UI effects; the source path can consume SRand1 in a particular scenario/world condition. `Feedback` can mutate tutorial/advice state, run the tutorial in scenario 0, or submit/clear wind prompt state. It is not safe to replace this call with a pure count receipt without modeling the consumed mutations.
+6. Call `SetDefaultWindows` (source `o15_384C_037F`): open caste, then mode controls; set edit title; select `MapPlane`; if window `0x100` is closed, convert yard to map; set map title; open edit window. The two control-open routines invoke their Changed handlers, each of which calls `InitTriVars`; the last mode call owns the shared triangle width/height/slope. Window/object rectangle reads and registry changes are part of the nested source boundary.
+7. Call `CenterEdit(MeLocX,MeLocY)`. It derives the requested camera offset from loaded player coordinates and view dimensions/current camera, applies `f_0250_0F2C` bounds based on loaded `MapPlane`, and updates edit/map rendering state via `f_0250_0CF6 -> f_0250_0D10`.
+8. Call `SetDefaultWindPrompt(1)`, which reads loaded `fd_50F6_047E`, `fd_50F6_105E`, and the `fd_50F6_034C` pointer table; it may issue the `EditMessage` host effect or clear the prompt.
+
+After `o09:0DBB` returns, `LoadGame` checks the then-current `fd_3D57_07AA` and may call `StopSong`. The predicate must observe row/rebuild mutations, not a scalar cached before loading.
+
+## State ownership and saved-vs-derived distinction
+
+The V3 SaveRec binding map records `Barrier` at row 104, `fd_50F6_0354` at row 297, and list counts `ListIndexA/B/R` at rows 180–182. The saved arrays and loaded world/player fields are the inputs to reconstruction. `LifeA/B/R` are not SaveRec records: they are fully cleared and rebuilt. `CurGndTileID` is derived from saved `TERRAINset`, while the resource selection and `Barrier` write are consequences of `OverlayTileSet`; its prior row-104 value is intentionally replaced. `fd_50F6_0354` is set before reset/RandYard to suppress count side effects and then reset by `CountAnts` during rebuild. `fd_50F6_0214`, `fd_50F6_0204`, and `fd_50F6_0472` are pre-reset controls whose state must be described through the subsequent RandYard and row-read sequence, not by inspecting the immediate assignment alone.
+
+Portable integration currently has multiple representations across `SimGameWorld`, runtime DTOs, and generated recovered globals. In particular, the simulation movement contract compares terrain with thresholds independently while source `Barrier` is a saved global subsequently rewritten by `OverlayTileSet`. These authorities need one explicit projection/binding before a full post-load acceptance. The saved-field inventory confirms `fd_50F6_0214`, `fd_50F6_0204`, and `fd_50F6_0472` are not SaveRec rows: after a successful open, reset zeroes 0214, writes 0204=300 (then RandYard sets it to 0), and zeroes 0472; later record reads cannot restore them. `fd_50F6_0354` is not a pre-reset record write either, but is a SaveRec row, so the file read may replace the guard before `CountAnts` clears it. Do not infer a complete live Save/Load implementation from the current source adapter inventory.
+
+## Proof decision
+
+No new native/DOS pair is claimed here. A meaningful pair must call actual DOS `o09:0DBB` and an actual native implementation on independently initialized valid saved-state inputs, then compare all three life planes, colliding list replay outcomes, player/life state, population/count fields, RNG, and typed ordered host requests. Any controlled boundary must be narrow and include every consumed/modified value; `FullCount/Feedback`, `SetDefaultWindows`, and `CenterEdit` cannot be replaced by opaque callbacks if their state effects are included in the claim. Out-of-range list counts/coordinates are explicit rejection cases, not silently skipped rows.
+
+The small reproducible test under `portable/tests/save/rebuild/` checks source anchors and the existing binding-map rows only. It validates this inventory and proves no native behavior.
