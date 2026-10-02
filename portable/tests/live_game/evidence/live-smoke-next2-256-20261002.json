@@ -1,0 +1,39 @@
+{
+  "schema": "portable-live-game-smoke-v1",
+  "claim": "a resource-backed NewGame scene completed the bounded source-scheduled tick count through the native SDL adapter",
+  "scope": {
+    "ticks": 256,
+    "input_events": 0,
+    "sdl_video_driver": "dummy",
+    "does_not_claim": [
+      "long-run simulation equivalence",
+      "interactive mouse/window event support",
+      "complete recovered UI operation coverage",
+      "audio playback"
+    ]
+  },
+  "command": [
+    "D:\\Prog\\simant_recon\\build\\portable\\simant-sdl3.exe",
+    "--live-newgame",
+    "--ticks",
+    "256",
+    "--screenshot",
+    "D:\\Prog\\simant_recon\\portable\\tests\\live_game\\evidence\\live-smoke-next2-256-20261002-frame-256.bmp"
+  ],
+  "executable": {
+    "path": "D:\\Prog\\simant_recon\\build\\portable\\simant-sdl3.exe",
+    "sha256": "a58e3b44800d836b8af9f52b821c9dda36210eb1731fe004f97302f4a377bf80"
+  },
+  "build_receipt": {
+    "path": "D:\\Prog\\simant_recon\\build\\portable\\simant-sdl3.build.json",
+    "sha256": "44d95930189ef7e6c1e00bdcd0d49db39f73b00b7f563f209e6fc4d58aaf0ecc",
+    "recovered_core_profile": "build/workers/recovered_source_next2/generated"
+  },
+  "final_frame": null,
+  "timeout_seconds": 20,
+  "timed_out": true,
+  "exit_code": null,
+  "stdout": "",
+  "stderr": "",
+  "passed": false
+}

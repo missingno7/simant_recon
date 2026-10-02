@@ -99,6 +99,25 @@ static uint16_t dos_key(const SDL_KeyboardEvent *event)
         case SDLK_PAGEDOWN: scan=0x51; break;
         case SDLK_INSERT: scan=0x52; break;
         case SDLK_DELETE: scan=0x53; break;
+        /* The game clears NumLock while polling its DOS keyboard. Keep the
+         * physical keypad directions available to the logical event model. */
+        case SDLK_KP_7: scan=0x47; break;
+        case SDLK_KP_8: scan=0x48; break;
+        case SDLK_KP_9: scan=0x49; break;
+        case SDLK_KP_4: scan=0x4b; break;
+        case SDLK_KP_5: scan=0x4c; break;
+        case SDLK_KP_6: scan=0x4d; break;
+        case SDLK_KP_1: scan=0x4f; break;
+        case SDLK_KP_2: scan=0x50; break;
+        case SDLK_KP_3: scan=0x51; break;
+        case SDLK_KP_0: scan=0x52; break;
+        case SDLK_KP_PERIOD: scan=0x53; break;
+        /* Modifier transitions update the host held-key model. They are
+         * physical events, and do not enter the DOS logical key queue. */
+        case SDLK_LCTRL: case SDLK_RCTRL: scan=0x1d; break;
+        case SDLK_LSHIFT: scan=0x2a; break;
+        case SDLK_RSHIFT: scan=0x36; break;
+        case SDLK_LALT: case SDLK_RALT: scan=0x38; break;
         default:
             if (key >= SDLK_F1 && key <= SDLK_F10)
                 scan = (uint16_t)(0x3b + key - SDLK_F1);

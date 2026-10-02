@@ -1,0 +1,660 @@
+{
+  "schema": "simant-recovered-source-scalar-byte-initializer-audit-v1",
+  "status": "DIAGNOSTIC_SOURCE_INITIALIZER_AUDIT",
+  "semantic_status": "NOT_A_BEHAVIORAL_EQUIVALENCE_CLAIM",
+  "active_next_profile_modified": false,
+  "next2_profile": "build/workers/recovered_source_next2/generated",
+  "root_cause": "source_data_initializers skipped every resolved candidate with an empty dims list before scanning source arrays; an exact two-byte uint8_t[2] source initializer therefore never reached the existing same-extent byte-view rule for the int16_t scalar candidate.",
+  "controls": {
+    "added_source_initializers": 35,
+    "added_with_nonzero_bytes": 14,
+    "initializer_mismatches": 0,
+    "modules": 23,
+    "module_compile_passed": 23,
+    "support_compile_passed": true,
+    "focused_initializer_tests": 9,
+    "focused_initializer_tests_passed": 9,
+    "positive_runtime_controls": [
+      "fd_3D57_07BE == -1",
+      "fd_3D57_0828 == 0x003f",
+      "CurGndTileID == 1000",
+      "fd_3D57_0C22 == 0x00fd",
+      "fd_3D57_0C2C == 180"
+    ],
+    "negative_extent_control": "same source initializer paired with int32_t scalar is rejected at 2-byte vs 4-byte mismatch"
+  },
+  "profiles": {
+    "next_provenance_sha256": "a9322bb1aadd9ffbef60d8101542ddd0a874855e91e6ffbd194aa52ec3942d51",
+    "next2_provenance_sha256": "67246e91c244173892533bbc27095ea8c09e273bd455a44e100c45798e9ab710",
+    "next2_header_sha256": "bb89c625bfb8bccbf827e1c701bd1490f57106276d81b6abcdf7aa8e7b42fec6",
+    "next2_source_sha256": "4d7527a1961b5792f8322366cbd51b70559e889b41e0b941b2f7e7477441095f"
+  },
+  "inputs": [
+    {
+      "path": "portable/tools/recover_source.py",
+      "sha256": "c1fd7616c392d39ebe4574e6ccde85b4e7f79205d21afcfbcb7ead249d5ffc50"
+    },
+    {
+      "path": "portable/tests/recovered/test_source_initializer_views.py",
+      "sha256": "010e453e1168713f28e9bc72dd62ac97a3ed36dcd3cd32e5a372dd103138e244"
+    },
+    {
+      "path": "src/data/d3D57.c",
+      "sha256": "983251ad55176050efcdea33c62f0a34a93686474b0de4b2bdde6c6c808716f5"
+    },
+    {
+      "path": "layout/symbols.json",
+      "sha256": "0f5dd5b0a211945a97782cfccdb9bb31b0dfd07fcde5df4d4f9486b487eb0125"
+    }
+  ],
+  "newly_initialized_same_extent_views": [
+    {
+      "symbol": "CurGndTileID",
+      "address": "3D57:07A0",
+      "source": "src/data/d3D57.c",
+      "source_type": "uint8_t",
+      "source_dims": [
+        "2"
+      ],
+      "source_bytes": 2,
+      "candidate_type": "int16_t",
+      "candidate_dims": [],
+      "initializer": "{\n    0xE8, 0x03\n}",
+      "initializer_sha256": "2a5721af1a64ff6dd82b2874f96b61389fc2b6667b6354e394c72654768f43dd",
+      "initialized_bytes_hex": "E8 03",
+      "nonzero_source_bytes": true,
+      "copy": "exact same-extent source byte initializer copied into candidate storage"
+    },
+    {
+      "symbol": "LionIndex",
+      "address": "3D57:0C4A",
+      "source": "src/data/d3D57.c",
+      "source_type": "uint8_t",
+      "source_dims": [
+        "2"
+      ],
+      "source_bytes": 2,
+      "candidate_type": "int16_t",
+      "candidate_dims": [],
+      "initializer": "{ 0 }",
+      "initializer_sha256": "73a2e0a0f1b09f9235e5b405a175b9953003703c6fedef624ab16a736ba388fb",
+      "initialized_bytes_hex": "00 00",
+      "nonzero_source_bytes": false,
+      "copy": "exact same-extent source byte initializer copied into candidate storage"
+    },
+    {
+      "symbol": "ModeMe",
+      "address": "3D57:0C10",
+      "source": "src/data/d3D57.c",
+      "source_type": "uint8_t",
+      "source_dims": [
+        "2"
+      ],
+      "source_bytes": 2,
+      "candidate_type": "int16_t",
+      "candidate_dims": [],
+      "initializer": "{\n    0x02, 0x00\n}",
+      "initializer_sha256": "5aaf1c35790a19c50458e4a836f3242c838966440761114fa0396b129e458414",
+      "initialized_bytes_hex": "02 00",
+      "nonzero_source_bytes": true,
+      "copy": "exact same-extent source byte initializer copied into candidate storage"
+    },
+    {
+      "symbol": "PillarState",
+      "address": "3D57:0C4C",
+      "source": "src/data/d3D57.c",
+      "source_type": "uint8_t",
+      "source_dims": [
+        "2"
+      ],
+      "source_bytes": 2,
+      "candidate_type": "int16_t",
+      "candidate_dims": [],
+      "initializer": "{ 0 }",
+      "initializer_sha256": "73a2e0a0f1b09f9235e5b405a175b9953003703c6fedef624ab16a736ba388fb",
+      "initialized_bytes_hex": "00 00",
+      "nonzero_source_bytes": false,
+      "copy": "exact same-extent source byte initializer copied into candidate storage"
+    },
+    {
+      "symbol": "PillarX",
+      "address": "3D57:0C4E",
+      "source": "src/data/d3D57.c",
+      "source_type": "uint8_t",
+      "source_dims": [
+        "2"
+      ],
+      "source_bytes": 2,
+      "candidate_type": "int16_t",
+      "candidate_dims": [],
+      "initializer": "{ 0 }",
+      "initializer_sha256": "73a2e0a0f1b09f9235e5b405a175b9953003703c6fedef624ab16a736ba388fb",
+      "initialized_bytes_hex": "00 00",
+      "nonzero_source_bytes": false,
+      "copy": "exact same-extent source byte initializer copied into candidate storage"
+    },
+    {
+      "symbol": "PillarY",
+      "address": "3D57:0C50",
+      "source": "src/data/d3D57.c",
+      "source_type": "uint8_t",
+      "source_dims": [
+        "2"
+      ],
+      "source_bytes": 2,
+      "candidate_type": "int16_t",
+      "candidate_dims": [],
+      "initializer": "{ 0 }",
+      "initializer_sha256": "73a2e0a0f1b09f9235e5b405a175b9953003703c6fedef624ab16a736ba388fb",
+      "initialized_bytes_hex": "00 00",
+      "nonzero_source_bytes": false,
+      "copy": "exact same-extent source byte initializer copied into candidate storage"
+    },
+    {
+      "symbol": "fd_3D57_02C0",
+      "address": "3D57:02C0",
+      "source": "src/data/d3D57.c",
+      "source_type": "uint8_t",
+      "source_dims": [
+        "2"
+      ],
+      "source_bytes": 2,
+      "candidate_type": "int16_t",
+      "candidate_dims": [],
+      "initializer": "{ 0 }",
+      "initializer_sha256": "73a2e0a0f1b09f9235e5b405a175b9953003703c6fedef624ab16a736ba388fb",
+      "initialized_bytes_hex": "00 00",
+      "nonzero_source_bytes": false,
+      "copy": "exact same-extent source byte initializer copied into candidate storage"
+    },
+    {
+      "symbol": "fd_3D57_07A2",
+      "address": "3D57:07A2",
+      "source": "src/data/d3D57.c",
+      "source_type": "uint8_t",
+      "source_dims": [
+        "2"
+      ],
+      "source_bytes": 2,
+      "candidate_type": "int16_t",
+      "candidate_dims": [],
+      "initializer": "{ 0 }",
+      "initializer_sha256": "73a2e0a0f1b09f9235e5b405a175b9953003703c6fedef624ab16a736ba388fb",
+      "initialized_bytes_hex": "00 00",
+      "nonzero_source_bytes": false,
+      "copy": "exact same-extent source byte initializer copied into candidate storage"
+    },
+    {
+      "symbol": "fd_3D57_07A4",
+      "address": "3D57:07A4",
+      "source": "src/data/d3D57.c",
+      "source_type": "uint8_t",
+      "source_dims": [
+        "2"
+      ],
+      "source_bytes": 2,
+      "candidate_type": "int16_t",
+      "candidate_dims": [],
+      "initializer": "{\n    0x01, 0x00\n}",
+      "initializer_sha256": "96276388c9685f6c91623f72706dda937b9c4eb31d1aa3517fe94e18c4fb4d54",
+      "initialized_bytes_hex": "01 00",
+      "nonzero_source_bytes": true,
+      "copy": "exact same-extent source byte initializer copied into candidate storage"
+    },
+    {
+      "symbol": "fd_3D57_07A6",
+      "address": "3D57:07A6",
+      "source": "src/data/d3D57.c",
+      "source_type": "uint8_t",
+      "source_dims": [
+        "2"
+      ],
+      "source_bytes": 2,
+      "candidate_type": "int16_t",
+      "candidate_dims": [],
+      "initializer": "{ 0 }",
+      "initializer_sha256": "73a2e0a0f1b09f9235e5b405a175b9953003703c6fedef624ab16a736ba388fb",
+      "initialized_bytes_hex": "00 00",
+      "nonzero_source_bytes": false,
+      "copy": "exact same-extent source byte initializer copied into candidate storage"
+    },
+    {
+      "symbol": "fd_3D57_07BE",
+      "address": "3D57:07BE",
+      "source": "src/data/d3D57.c",
+      "source_type": "uint8_t",
+      "source_dims": [
+        "2"
+      ],
+      "source_bytes": 2,
+      "candidate_type": "int16_t",
+      "candidate_dims": [],
+      "initializer": "{\n    0xFF, 0xFF\n}",
+      "initializer_sha256": "ba180559c4c3f49577e41666ba5e4fe0c5acd07a0f19d08832155a88de94b3c3",
+      "initialized_bytes_hex": "FF FF",
+      "nonzero_source_bytes": true,
+      "copy": "exact same-extent source byte initializer copied into candidate storage"
+    },
+    {
+      "symbol": "fd_3D57_0828",
+      "address": "3D57:0828",
+      "source": "src/data/d3D57.c",
+      "source_type": "uint8_t",
+      "source_dims": [
+        "2"
+      ],
+      "source_bytes": 2,
+      "candidate_type": "int16_t",
+      "candidate_dims": [],
+      "initializer": "{\n    0x3F, 0x00\n}",
+      "initializer_sha256": "6b652bd57c6b0d399656dcdae7a2e09fdccb97d5c9a98d9eacc09a3ec77801e1",
+      "initialized_bytes_hex": "3F 00",
+      "nonzero_source_bytes": true,
+      "copy": "exact same-extent source byte initializer copied into candidate storage"
+    },
+    {
+      "symbol": "fd_3D57_0C0E",
+      "address": "3D57:0C0E",
+      "source": "src/data/d3D57.c",
+      "source_type": "uint8_t",
+      "source_dims": [
+        "2"
+      ],
+      "source_bytes": 2,
+      "candidate_type": "int16_t",
+      "candidate_dims": [],
+      "initializer": "{\n    0x02, 0x00\n}",
+      "initializer_sha256": "5aaf1c35790a19c50458e4a836f3242c838966440761114fa0396b129e458414",
+      "initialized_bytes_hex": "02 00",
+      "nonzero_source_bytes": true,
+      "copy": "exact same-extent source byte initializer copied into candidate storage"
+    },
+    {
+      "symbol": "fd_3D57_0C12",
+      "address": "3D57:0C12",
+      "source": "src/data/d3D57.c",
+      "source_type": "uint8_t",
+      "source_dims": [
+        "2"
+      ],
+      "source_bytes": 2,
+      "candidate_type": "int16_t",
+      "candidate_dims": [],
+      "initializer": "{ 0 }",
+      "initializer_sha256": "73a2e0a0f1b09f9235e5b405a175b9953003703c6fedef624ab16a736ba388fb",
+      "initialized_bytes_hex": "00 00",
+      "nonzero_source_bytes": false,
+      "copy": "exact same-extent source byte initializer copied into candidate storage"
+    },
+    {
+      "symbol": "fd_3D57_0C14",
+      "address": "3D57:0C14",
+      "source": "src/data/d3D57.c",
+      "source_type": "uint8_t",
+      "source_dims": [
+        "2"
+      ],
+      "source_bytes": 2,
+      "candidate_type": "int16_t",
+      "candidate_dims": [],
+      "initializer": "{ 0 }",
+      "initializer_sha256": "73a2e0a0f1b09f9235e5b405a175b9953003703c6fedef624ab16a736ba388fb",
+      "initialized_bytes_hex": "00 00",
+      "nonzero_source_bytes": false,
+      "copy": "exact same-extent source byte initializer copied into candidate storage"
+    },
+    {
+      "symbol": "fd_3D57_0C16",
+      "address": "3D57:0C16",
+      "source": "src/data/d3D57.c",
+      "source_type": "uint8_t",
+      "source_dims": [
+        "2"
+      ],
+      "source_bytes": 2,
+      "candidate_type": "int16_t",
+      "candidate_dims": [],
+      "initializer": "{ 0 }",
+      "initializer_sha256": "73a2e0a0f1b09f9235e5b405a175b9953003703c6fedef624ab16a736ba388fb",
+      "initialized_bytes_hex": "00 00",
+      "nonzero_source_bytes": false,
+      "copy": "exact same-extent source byte initializer copied into candidate storage"
+    },
+    {
+      "symbol": "fd_3D57_0C18",
+      "address": "3D57:0C18",
+      "source": "src/data/d3D57.c",
+      "source_type": "uint8_t",
+      "source_dims": [
+        "2"
+      ],
+      "source_bytes": 2,
+      "candidate_type": "int16_t",
+      "candidate_dims": [],
+      "initializer": "{ 0 }",
+      "initializer_sha256": "73a2e0a0f1b09f9235e5b405a175b9953003703c6fedef624ab16a736ba388fb",
+      "initialized_bytes_hex": "00 00",
+      "nonzero_source_bytes": false,
+      "copy": "exact same-extent source byte initializer copied into candidate storage"
+    },
+    {
+      "symbol": "fd_3D57_0C1E",
+      "address": "3D57:0C1E",
+      "source": "src/data/d3D57.c",
+      "source_type": "uint8_t",
+      "source_dims": [
+        "2"
+      ],
+      "source_bytes": 2,
+      "candidate_type": "int16_t",
+      "candidate_dims": [],
+      "initializer": "{ 0 }",
+      "initializer_sha256": "73a2e0a0f1b09f9235e5b405a175b9953003703c6fedef624ab16a736ba388fb",
+      "initialized_bytes_hex": "00 00",
+      "nonzero_source_bytes": false,
+      "copy": "exact same-extent source byte initializer copied into candidate storage"
+    },
+    {
+      "symbol": "fd_3D57_0C20",
+      "address": "3D57:0C20",
+      "source": "src/data/d3D57.c",
+      "source_type": "uint8_t",
+      "source_dims": [
+        "2"
+      ],
+      "source_bytes": 2,
+      "candidate_type": "int16_t",
+      "candidate_dims": [],
+      "initializer": "{\n    0x01, 0x00\n}",
+      "initializer_sha256": "96276388c9685f6c91623f72706dda937b9c4eb31d1aa3517fe94e18c4fb4d54",
+      "initialized_bytes_hex": "01 00",
+      "nonzero_source_bytes": true,
+      "copy": "exact same-extent source byte initializer copied into candidate storage"
+    },
+    {
+      "symbol": "fd_3D57_0C22",
+      "address": "3D57:0C22",
+      "source": "src/data/d3D57.c",
+      "source_type": "uint8_t",
+      "source_dims": [
+        "2"
+      ],
+      "source_bytes": 2,
+      "candidate_type": "int16_t",
+      "candidate_dims": [],
+      "initializer": "{\n    0xFD, 0x00\n}",
+      "initializer_sha256": "f02791fa5043cc525441e9193e7e424b114a82f7b1b5e1b555987ee289c62295",
+      "initialized_bytes_hex": "FD 00",
+      "nonzero_source_bytes": true,
+      "copy": "exact same-extent source byte initializer copied into candidate storage"
+    },
+    {
+      "symbol": "fd_3D57_0C24",
+      "address": "3D57:0C24",
+      "source": "src/data/d3D57.c",
+      "source_type": "uint8_t",
+      "source_dims": [
+        "2"
+      ],
+      "source_bytes": 2,
+      "candidate_type": "int16_t",
+      "candidate_dims": [],
+      "initializer": "{ 0 }",
+      "initializer_sha256": "73a2e0a0f1b09f9235e5b405a175b9953003703c6fedef624ab16a736ba388fb",
+      "initialized_bytes_hex": "00 00",
+      "nonzero_source_bytes": false,
+      "copy": "exact same-extent source byte initializer copied into candidate storage"
+    },
+    {
+      "symbol": "fd_3D57_0C26",
+      "address": "3D57:0C26",
+      "source": "src/data/d3D57.c",
+      "source_type": "uint8_t",
+      "source_dims": [
+        "2"
+      ],
+      "source_bytes": 2,
+      "candidate_type": "int16_t",
+      "candidate_dims": [],
+      "initializer": "{\n    0xFF, 0xFF\n}",
+      "initializer_sha256": "ba180559c4c3f49577e41666ba5e4fe0c5acd07a0f19d08832155a88de94b3c3",
+      "initialized_bytes_hex": "FF FF",
+      "nonzero_source_bytes": true,
+      "copy": "exact same-extent source byte initializer copied into candidate storage"
+    },
+    {
+      "symbol": "fd_3D57_0C28",
+      "address": "3D57:0C28",
+      "source": "src/data/d3D57.c",
+      "source_type": "uint8_t",
+      "source_dims": [
+        "2"
+      ],
+      "source_bytes": 2,
+      "candidate_type": "int16_t",
+      "candidate_dims": [],
+      "initializer": "{ 0 }",
+      "initializer_sha256": "73a2e0a0f1b09f9235e5b405a175b9953003703c6fedef624ab16a736ba388fb",
+      "initialized_bytes_hex": "00 00",
+      "nonzero_source_bytes": false,
+      "copy": "exact same-extent source byte initializer copied into candidate storage"
+    },
+    {
+      "symbol": "fd_3D57_0C2A",
+      "address": "3D57:0C2A",
+      "source": "src/data/d3D57.c",
+      "source_type": "uint8_t",
+      "source_dims": [
+        "2"
+      ],
+      "source_bytes": 2,
+      "candidate_type": "int16_t",
+      "candidate_dims": [],
+      "initializer": "{\n    0x14, 0x00\n}",
+      "initializer_sha256": "1a1aec2ddf11331444906bcccfef80f0f2ae2709df0a984e50304f8ffeac21f6",
+      "initialized_bytes_hex": "14 00",
+      "nonzero_source_bytes": true,
+      "copy": "exact same-extent source byte initializer copied into candidate storage"
+    },
+    {
+      "symbol": "fd_3D57_0C2C",
+      "address": "3D57:0C2C",
+      "source": "src/data/d3D57.c",
+      "source_type": "uint8_t",
+      "source_dims": [
+        "2"
+      ],
+      "source_bytes": 2,
+      "candidate_type": "int16_t",
+      "candidate_dims": [],
+      "initializer": "{\n    0xB4, 0x00\n}",
+      "initializer_sha256": "ea98630ffa0cbe4b7f83e47b40bd27d0940757d542f568e5f8e59c5d3c84a9d3",
+      "initialized_bytes_hex": "B4 00",
+      "nonzero_source_bytes": true,
+      "copy": "exact same-extent source byte initializer copied into candidate storage"
+    },
+    {
+      "symbol": "fd_3D57_0C2E",
+      "address": "3D57:0C2E",
+      "source": "src/data/d3D57.c",
+      "source_type": "uint8_t",
+      "source_dims": [
+        "2"
+      ],
+      "source_bytes": 2,
+      "candidate_type": "int16_t",
+      "candidate_dims": [],
+      "initializer": "{\n    0x49, 0x00\n}",
+      "initializer_sha256": "296c7fabe24300fe838b31148cc8fc8e36dc3084bfc12f1ebfa8950cf3b9d433",
+      "initialized_bytes_hex": "49 00",
+      "nonzero_source_bytes": true,
+      "copy": "exact same-extent source byte initializer copied into candidate storage"
+    },
+    {
+      "symbol": "fd_3D57_0C30",
+      "address": "3D57:0C30",
+      "source": "src/data/d3D57.c",
+      "source_type": "uint8_t",
+      "source_dims": [
+        "2"
+      ],
+      "source_bytes": 2,
+      "candidate_type": "int16_t",
+      "candidate_dims": [],
+      "initializer": "{\n    0x02, 0x00\n}",
+      "initializer_sha256": "5aaf1c35790a19c50458e4a836f3242c838966440761114fa0396b129e458414",
+      "initialized_bytes_hex": "02 00",
+      "nonzero_source_bytes": true,
+      "copy": "exact same-extent source byte initializer copied into candidate storage"
+    },
+    {
+      "symbol": "fd_3D57_0C32",
+      "address": "3D57:0C32",
+      "source": "src/data/d3D57.c",
+      "source_type": "uint8_t",
+      "source_dims": [
+        "2"
+      ],
+      "source_bytes": 2,
+      "candidate_type": "int16_t",
+      "candidate_dims": [],
+      "initializer": "{ 0 }",
+      "initializer_sha256": "73a2e0a0f1b09f9235e5b405a175b9953003703c6fedef624ab16a736ba388fb",
+      "initialized_bytes_hex": "00 00",
+      "nonzero_source_bytes": false,
+      "copy": "exact same-extent source byte initializer copied into candidate storage"
+    },
+    {
+      "symbol": "fd_3D57_0C34",
+      "address": "3D57:0C34",
+      "source": "src/data/d3D57.c",
+      "source_type": "uint8_t",
+      "source_dims": [
+        "2"
+      ],
+      "source_bytes": 2,
+      "candidate_type": "int16_t",
+      "candidate_dims": [],
+      "initializer": "{\n    0x0C, 0x00\n}",
+      "initializer_sha256": "dcffe0d48cf55d52f6b84700735f09219197e2c2487cc9f8d3733bcee5c007ad",
+      "initialized_bytes_hex": "0C 00",
+      "nonzero_source_bytes": true,
+      "copy": "exact same-extent source byte initializer copied into candidate storage"
+    },
+    {
+      "symbol": "fd_3D57_0C3E",
+      "address": "3D57:0C3E",
+      "source": "src/data/d3D57.c",
+      "source_type": "uint8_t",
+      "source_dims": [
+        "2"
+      ],
+      "source_bytes": 2,
+      "candidate_type": "int16_t",
+      "candidate_dims": [],
+      "initializer": "{ 0 }",
+      "initializer_sha256": "73a2e0a0f1b09f9235e5b405a175b9953003703c6fedef624ab16a736ba388fb",
+      "initialized_bytes_hex": "00 00",
+      "nonzero_source_bytes": false,
+      "copy": "exact same-extent source byte initializer copied into candidate storage"
+    },
+    {
+      "symbol": "fd_3D57_0C40",
+      "address": "3D57:0C40",
+      "source": "src/data/d3D57.c",
+      "source_type": "uint8_t",
+      "source_dims": [
+        "2"
+      ],
+      "source_bytes": 2,
+      "candidate_type": "int16_t",
+      "candidate_dims": [],
+      "initializer": "{ 0 }",
+      "initializer_sha256": "73a2e0a0f1b09f9235e5b405a175b9953003703c6fedef624ab16a736ba388fb",
+      "initialized_bytes_hex": "00 00",
+      "nonzero_source_bytes": false,
+      "copy": "exact same-extent source byte initializer copied into candidate storage"
+    },
+    {
+      "symbol": "fd_3D57_0C42",
+      "address": "3D57:0C42",
+      "source": "src/data/d3D57.c",
+      "source_type": "uint8_t",
+      "source_dims": [
+        "2"
+      ],
+      "source_bytes": 2,
+      "candidate_type": "int16_t",
+      "candidate_dims": [],
+      "initializer": "{ 0 }",
+      "initializer_sha256": "73a2e0a0f1b09f9235e5b405a175b9953003703c6fedef624ab16a736ba388fb",
+      "initialized_bytes_hex": "00 00",
+      "nonzero_source_bytes": false,
+      "copy": "exact same-extent source byte initializer copied into candidate storage"
+    },
+    {
+      "symbol": "fd_3D57_0C44",
+      "address": "3D57:0C44",
+      "source": "src/data/d3D57.c",
+      "source_type": "uint8_t",
+      "source_dims": [
+        "2"
+      ],
+      "source_bytes": 2,
+      "candidate_type": "int16_t",
+      "candidate_dims": [],
+      "initializer": "{ 0 }",
+      "initializer_sha256": "73a2e0a0f1b09f9235e5b405a175b9953003703c6fedef624ab16a736ba388fb",
+      "initialized_bytes_hex": "00 00",
+      "nonzero_source_bytes": false,
+      "copy": "exact same-extent source byte initializer copied into candidate storage"
+    },
+    {
+      "symbol": "fd_3D57_0C46",
+      "address": "3D57:0C46",
+      "source": "src/data/d3D57.c",
+      "source_type": "uint8_t",
+      "source_dims": [
+        "2"
+      ],
+      "source_bytes": 2,
+      "candidate_type": "int16_t",
+      "candidate_dims": [],
+      "initializer": "{ 0 }",
+      "initializer_sha256": "73a2e0a0f1b09f9235e5b405a175b9953003703c6fedef624ab16a736ba388fb",
+      "initialized_bytes_hex": "00 00",
+      "nonzero_source_bytes": false,
+      "copy": "exact same-extent source byte initializer copied into candidate storage"
+    },
+    {
+      "symbol": "fd_3D57_0C48",
+      "address": "3D57:0C48",
+      "source": "src/data/d3D57.c",
+      "source_type": "uint8_t",
+      "source_dims": [
+        "2"
+      ],
+      "source_bytes": 2,
+      "candidate_type": "int16_t",
+      "candidate_dims": [],
+      "initializer": "{ 0 }",
+      "initializer_sha256": "73a2e0a0f1b09f9235e5b405a175b9953003703c6fedef624ab16a736ba388fb",
+      "initialized_bytes_hex": "00 00",
+      "nonzero_source_bytes": false,
+      "copy": "exact same-extent source byte initializer copied into candidate storage"
+    }
+  ],
+  "limits": [
+    "The evidence covers readable accepted src/data initializers for symbols represented by the selected recovered-state catalog.",
+    "This does not certify startup or simulation equivalence; next2 remains diagnostic-only and requires the existing core differential suite.",
+    "No original executable bytes were imported."
+  ],
+  "full_resolved_catalog_audit": {
+    "tracked_fields": 377,
+    "unknown_extent_symbols": 0,
+    "readable_source_initializers": 108,
+    "initializers_with_nonzero_bytes": 45,
+    "same_name_type_or_extent_mismatches": 0,
+    "status": "all matched initializer spans have exact candidate extent; no mismatch rows"
+  }
+}

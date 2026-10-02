@@ -1,0 +1,129 @@
+{
+  "schema": "portable-overview-cursor-inversion-trace-v1",
+  "status": "PASS",
+  "function": "f_1CE2_032B",
+  "positive_control": {
+    "width": 2,
+    "calls": [
+      [
+        12,
+        22,
+        28,
+        20
+      ],
+      [
+        12,
+        38,
+        28,
+        40
+      ],
+      [
+        12,
+        20,
+        10,
+        40
+      ],
+      [
+        30,
+        20,
+        28,
+        40
+      ]
+    ],
+    "raw_trace": [
+      {
+        "name": "f_1B4E_000C",
+        "args": [
+          12,
+          22,
+          28,
+          20
+        ]
+      },
+      {
+        "name": "f_1B4E_000C",
+        "args": [
+          12,
+          38,
+          28,
+          40
+        ]
+      },
+      {
+        "name": "f_1B4E_000C",
+        "args": [
+          12,
+          20,
+          10,
+          40
+        ]
+      },
+      {
+        "name": "f_1B4E_000C",
+        "args": [
+          30,
+          20,
+          28,
+          40
+        ]
+      }
+    ],
+    "blocks": 10
+  },
+  "negative_control": {
+    "width": 0,
+    "calls": [],
+    "raw_trace": [],
+    "blocks": 2
+  },
+  "expected_positive_calls": [
+    [
+      12,
+      22,
+      28,
+      20
+    ],
+    [
+      12,
+      38,
+      28,
+      40
+    ],
+    [
+      12,
+      20,
+      10,
+      40
+    ],
+    [
+      30,
+      20,
+      28,
+      40
+    ]
+  ],
+  "execution_boundary": "Original DOS f_1CE2_032B executes. Its g_913C pointer is redirected to f_1B4E_000C, intercepted as a four-stack-word callback recorder. No S00 driver body or VGA hardware memory is executed by this trace.",
+  "source_contract": {
+    "dispatch": "S00 DispatchS00 index 5 is _o00_31AD_037C, the g_913C slot; profiles 0 and 8 both select S00.",
+    "raster_op": "_o00_31AD_0394 writes GC data-rotate 0x18 (XOR), set/reset 0x0f, enable-set/reset 0x0f, sequencer map mask 0x0f, and bit mask 0xff before per-byte RMW writes; inferred indexed effect is pixel XOR 0x0f.",
+    "outline": "f_1CE2_032B issues four half-open strips in top, bottom, left, right order, with no corner overlap for ordinary dimensions.",
+    "clipping": "The caller DrawMapCursor brackets this helper with clip_SetWin(0x0100); the portable renderer applies the caller-provided framebuffer clip."
+  },
+  "source_hashes": {
+    "src/root/m1CE2.c": "e5c2cb4b8dbe7af6d263072002a49e012b290c1082f0fc877b479728b75bacd3",
+    "src/S00/m3126.asm": "be7a4a3b0fd9c56c47be50d20c60b0c2835002b7721bd913d36f8183be47ce5a",
+    "src/S00/m31AD.asm": "5d2ad69ff4affb4be4242e82187065cc5e0b3502cc0cc3e00ad3802ccee2656e",
+    "src/root/m1B4E.asm": "a32d75d2d4ea36980b659d26e9ddd86bcde65d9e250ebac4cdc29c0e847c67a2",
+    "src/root/m205F.c": "225326bdd127dd3825035ae0fe8434e6677c0ee81203fee2e16bac0cf90fffc6",
+    "tools/behavior.py": "2c0799048057f59eae61a48be4d695278635594484adf0c70bf46c51b4e0c799",
+    "tools/functions.py": "0f67c8d9eb01e319620c9342e79c35f76006091d860894aad6dcf8d61ee2b39e",
+    "portable/ui_model/windows/overview_view.c": "2037fbe05555aa602d318262db376c27778e824f19503baf348c10777a7e4be4",
+    "portable/ui_model/windows/overview_view.h": "62c69e6d441fd877f28810639ac5bfa7d048bfd2de7dc025d2cc2727fb9d4219",
+    "portable/tests/render/test_overview_view.c": "38895566b482ddefa0e9bd459d78a7fb3c96f20403561c31aaadded7eed0b0eb",
+    "portable/tests/render/evidence/dos_cursor_inversion_trace.py": "08853a4effd89af65e3fef49147437549ab89979f4dbae6e80df9fae94ca1207",
+    "portable/render/primitives.c": "46f440ab374b1a83ba1f402c40cf9af73d88ca862ae747e786ee8b99b8e67df0",
+    "portable/render/primitives.h": "19e705578695c72e281322b75772bd031f37c1bb82dc3857fa990aa23dfdd1f0"
+  },
+  "oracle_sha256": "aa0596c6766322a8229ee3c36e57048c92adc82d50fbe2ef37afb8b85fcf4f11",
+  "unicorn_version": "2.1.4"
+}

@@ -17,12 +17,13 @@
     "portable/render/bitmap.c",
     "portable/render/font.c",
     "portable/render/primitives.c",
+    "portable/game/resources/bios_fonts.c",
     "portable/tests/windows/render/test_startup_render.c",
     "portable/tests/windows/render/test_object_render_coverage.c"
   ],
   "input_sha256": {
-    "portable/ui_model/windows/render.h": "625c1baa4eb489e6dae9804ad842fa0855b36810e8efb271de28d8a52515090f",
-    "portable/ui_model/windows/render.c": "54e7619f35f6ee0d83910758796215e4dc2d56e08a6b3701ef3e5bf457d888fd",
+    "portable/ui_model/windows/render.h": "5ace9cae0ef4a6c3a869a493740988ef53e4047be2666a02c386fa2e601fe9f8",
+    "portable/ui_model/windows/render.c": "f2e4aace2e829e32a12173495f22d150acd5b0eb73edf6fda6e5dc3c3fd09e0d",
     "portable/ui_model/windows/window.h": "a0375187333f24e898103c8dc222ffbe80037a983f3c73177e6ec8e735311a24",
     "portable/ui_model/windows/window.c": "172517766211101ef3bd7b2f32ef2438c30b9b9dc6a58419a0df7b0e30c413fc",
     "portable/game/resources/database.h": "3b62dd145abf89a1eb88b93fa41830ed454de2cbe493718edfb9b57da75b1272",
@@ -33,8 +34,14 @@
     "portable/render/font.c": "8519b5a26de76a4f13a70e5bd1b25762151148ba6acfcddf10271c78617bbb5e",
     "portable/render/primitives.h": "19e705578695c72e281322b75772bd031f37c1bb82dc3857fa990aa23dfdd1f0",
     "portable/render/primitives.c": "46f440ab374b1a83ba1f402c40cf9af73d88ca862ae747e786ee8b99b8e67df0",
-    "portable/tests/windows/render/test_startup_render.c": "1d3eb32a7d186b06115e3babe23c89825a63d5097e260185bd5f3aa1d6d29a19",
-    "portable/tests/windows/render/test_object_render_coverage.c": "e96b81bba290092dad19fa6e881f1d2fea259c8e708d016ce6afa17739fed463",
+    "portable/tests/windows/render/test_startup_render.c": "d49e7e773ae1c51c95e903d62e8af8b23a544fa61561ade118a120b3b502406b",
+    "portable/tests/windows/render/test_object_render_coverage.c": "68b93d7074ce53f20d2fb594b51378acfbacaa086b58cd894dbd886b6919074d",
+    "portable/tests/windows/render/test_formatted_text_projection.c": "220c305d497be96514a756ffe23df15adf7cb70fc38e40d79b08393a33cdb5f8",
+    "portable/tests/windows/render/test_bios_fonts_loader.c": "e369f16dd48b633eae34bdc24a53690e7d7e65752ce52453110989a4e8d5cb70",
+    "portable/game/resources/bios_fonts.h": "efacbba8e3ea001ccf08abc1ebf8e47d019d9757aa7bdf271fb83b8651ce02ec",
+    "portable/game/resources/bios_fonts.c": "167ed9618d2ec2af7464ca7c531d15716059b05480219d021fbaa6b4763f617c",
+    "portable/tests/windows/render/BIOS_REFERENCE.md": "7fbe66758b2011b026fad53a2c27f03e95b947de1b055da03c6bbd32e10b3b31",
+    "portable/tests/windows/render/evidence/fetch_bios_reference.py": "df1310ff77528607eec58eb7a8c35eef0ecb94b51848e891248a2262f3587e1e",
     "src/root/m21FA.c": "49dc5ef1b2e34263336fea6a4ab5e9992c6dc5fdca404c7efc2d2315b98f6b1f",
     "src/root/m24AB.c": "1d263c6e1f242981d7c3e37d839dc481dc75deed45d7d1bcaaa075cad124de7f",
     "src/root/m1CE2.c": "e5c2cb4b8dbe7af6d263072002a49e012b290c1082f0fc877b479728b75bacd3",
@@ -46,6 +53,13 @@
     "assets/FONT3": "56480958990bda60d7f798d1922ae40762261c7453cc9e99c0573e5f7a2286ff",
     "assets/FONT4": "0d0ccb62f197213e6ea793913c0b68d194fefeed63d58f6b7e36dbe25347bc15"
   },
+  "bios_reference": {
+    "provider_id": "DOSBox Staging/v0.83.0/7b40053b7ac580843d0461eba8c36a47a990e66c",
+    "manifest_sha256": "ccfb943edb92e17108bb3a74fa326052ab940839f9199df743182ef6280a5aa9",
+    "font8x8_sha256": "75c79a7e7fa423dda67ec6d6d76cec86b63f85677726368750c75b0920ddf319",
+    "font8x14_sha256": "657ca6588b6bf729f0ed71a3d3c781a465bd30cdfb11eb5fc7e27594c0717ea1",
+    "status": "optional host reference tables; not proof of the original machine BIOS"
+  },
   "startup_windows": [
     0,
     1,
@@ -53,24 +67,25 @@
     19,
     25
   ],
-  "full_render_stdout": "window=0 objects=23 pixels_sha_fnv1a=6d3aabe63262fcc0\nwindow=1 objects=31 pixels_sha_fnv1a=bbb25db9a27a0c9a\nwindow=18 objects=18 full_render=unsupported object=1 type=18 font=0 (DOS g_912C/g_9130 driver text)\nwindow=19 objects=18 full_render=unsupported object=1 type=18 font=0 (DOS g_912C/g_9130 driver text)\nwindow=25 objects=22 pixels_sha_fnv1a=347cf88d008050ec\nnonzero_draws=217557",
-  "isolated_object_coverage_stdout": "window=0 objects=23\n object=0 type=15 status=ok\n object=1 type=18 status=ok\n object=3 type=6 status=ok\n object=4 type=1 status=ok\n object=5 type=1 status=ok\n object=6 type=1 status=ok\n object=7 type=1 status=ok\n object=8 type=1 status=ok\n object=9 type=1 status=ok\n object=10 type=1 status=ok\n object=11 type=1 status=ok\n object=12 type=1 status=ok\n object=13 type=1 status=ok\n object=14 type=1 status=ok\n object=15 type=1 status=ok\n object=16 type=1 status=ok\n object=17 type=1 status=ok\n object=18 type=1 status=ok\n object=19 type=1 status=ok\n object=20 type=2 status=ok\n object=22 type=2 status=ok\nwindow=1 objects=31\n object=0 type=15 status=ok\n object=1 type=18 status=ok\n object=4 type=6 status=ok\n object=5 type=1 status=ok\n object=6 type=1 status=ok\n object=7 type=1 status=ok\n object=8 type=1 status=ok\n object=9 type=1 status=ok\n object=10 type=1 status=ok\n object=11 type=1 status=ok\n object=12 type=1 status=ok\n object=13 type=1 status=ok\n object=14 type=1 status=ok\n object=15 type=1 status=ok\n object=16 type=1 status=ok\n object=17 type=1 status=ok\n object=18 type=1 status=ok\n object=19 type=1 status=ok\n object=20 type=1 status=ok\n object=21 type=1 status=ok\n object=22 type=1 status=ok\n object=23 type=1 status=ok\n object=24 type=1 status=ok\n object=25 type=1 status=ok\n object=26 type=1 status=ok\n object=27 type=1 status=ok\n object=28 type=1 status=ok\n object=29 type=1 status=ok\n object=30 type=1 status=ok\nwindow=18 objects=18\n object=0 type=15 status=ok\n object=1 type=18 status=unsupported-mode font=0\n object=2 type=6 status=ok\n object=3 type=1 status=ok\n object=4 type=1 status=ok\n object=5 type=1 status=ok\n object=9 type=1 status=ok\n object=10 type=1 status=ok\n object=11 type=1 status=ok\n object=12 type=1 status=ok\n object=13 type=1 status=ok\n object=15 type=1 status=ok\n object=16 type=1 status=ok\n object=17 type=1 status=ok\nwindow=19 objects=18\n object=0 type=15 status=ok\n object=1 type=18 status=unsupported-mode font=0\n object=2 type=6 status=ok\n object=3 type=1 status=ok\n object=4 type=1 status=ok\n object=5 type=1 status=ok\n object=9 type=1 status=ok\n object=10 type=1 status=ok\n object=11 type=1 status=ok\n object=12 type=1 status=ok\n object=13 type=1 status=ok\n object=15 type=1 status=ok\n object=16 type=1 status=ok\n object=17 type=1 status=ok\nwindow=25 objects=22\n object=0 type=15 status=ok\n object=1 type=18 status=ok\n object=3 type=6 status=ok\n object=4 type=6 status=ok\n object=5 type=21 status=ok\n object=7 type=1 status=ok\n object=8 type=1 status=ok\n object=9 type=1 status=ok\n object=10 type=1 status=ok\n object=11 type=1 status=ok\n object=12 type=16 status=ok\n object=13 type=1 status=ok\n object=14 type=1 status=ok\n object=15 type=6 status=ok\n object=16 type=1 status=ok\n object=17 type=1 status=ok\n object=18 type=16 status=ok\n object=19 type=16 status=ok\n object=21 type=19 status=ok\nsupported_objects=95 explicit_unsupported_objects=2",
+  "full_render_stdout": "window=0 objects=23 pixels_sha_fnv1a=6d3aabe63262fcc0\nwindow=1 objects=31 pixels_sha_fnv1a=bbb25db9a27a0c9a\nwindow=18 objects=18 pixels_sha_fnv1a=3bc0b5a4b6313038\nwindow=19 objects=18 pixels_sha_fnv1a=82166f590c0f08bb\nwindow=25 objects=22 pixels_sha_fnv1a=347cf88d008050ec\nnonzero_draws=276236",
+  "isolated_object_coverage_stdout": "window=0 objects=23\n object=0 type=15 status=ok\n object=1 type=18 status=ok\n object=3 type=6 status=ok\n object=4 type=1 status=ok\n object=5 type=1 status=ok\n object=6 type=1 status=ok\n object=7 type=1 status=ok\n object=8 type=1 status=ok\n object=9 type=1 status=ok\n object=10 type=1 status=ok\n object=11 type=1 status=ok\n object=12 type=1 status=ok\n object=13 type=1 status=ok\n object=14 type=1 status=ok\n object=15 type=1 status=ok\n object=16 type=1 status=ok\n object=17 type=1 status=ok\n object=18 type=1 status=ok\n object=19 type=1 status=ok\n object=20 type=2 status=ok\n object=22 type=2 status=ok\nwindow=1 objects=31\n object=0 type=15 status=ok\n object=1 type=18 status=ok\n object=4 type=6 status=ok\n object=5 type=1 status=ok\n object=6 type=1 status=ok\n object=7 type=1 status=ok\n object=8 type=1 status=ok\n object=9 type=1 status=ok\n object=10 type=1 status=ok\n object=11 type=1 status=ok\n object=12 type=1 status=ok\n object=13 type=1 status=ok\n object=14 type=1 status=ok\n object=15 type=1 status=ok\n object=16 type=1 status=ok\n object=17 type=1 status=ok\n object=18 type=1 status=ok\n object=19 type=1 status=ok\n object=20 type=1 status=ok\n object=21 type=1 status=ok\n object=22 type=1 status=ok\n object=23 type=1 status=ok\n object=24 type=1 status=ok\n object=25 type=1 status=ok\n object=26 type=1 status=ok\n object=27 type=1 status=ok\n object=28 type=1 status=ok\n object=29 type=1 status=ok\n object=30 type=1 status=ok\nwindow=18 objects=18\n object=0 type=15 status=ok\n object=1 type=18 status=ok\n object=2 type=6 status=ok\n object=3 type=1 status=ok\n object=4 type=1 status=ok\n object=5 type=1 status=ok\n object=9 type=1 status=ok\n object=10 type=1 status=ok\n object=11 type=1 status=ok\n object=12 type=1 status=ok\n object=13 type=1 status=ok\n object=15 type=1 status=ok\n object=16 type=1 status=ok\n object=17 type=1 status=ok\nwindow=19 objects=18\n object=0 type=15 status=ok\n object=1 type=18 status=ok\n object=2 type=6 status=ok\n object=3 type=1 status=ok\n object=4 type=1 status=ok\n object=5 type=1 status=ok\n object=9 type=1 status=ok\n object=10 type=1 status=ok\n object=11 type=1 status=ok\n object=12 type=1 status=ok\n object=13 type=1 status=ok\n object=15 type=1 status=ok\n object=16 type=1 status=ok\n object=17 type=1 status=ok\nwindow=25 objects=22\n object=0 type=15 status=ok\n object=1 type=18 status=ok\n object=3 type=6 status=ok\n object=4 type=6 status=ok\n object=5 type=21 status=ok\n object=7 type=1 status=ok\n object=8 type=1 status=ok\n object=9 type=1 status=ok\n object=10 type=1 status=ok\n object=11 type=1 status=ok\n object=12 type=16 status=ok\n object=13 type=1 status=ok\n object=14 type=1 status=ok\n object=15 type=6 status=ok\n object=16 type=1 status=ok\n object=17 type=1 status=ok\n object=18 type=16 status=ok\n object=19 type=16 status=ok\n object=21 type=19 status=ok\nsupported_objects=97 explicit_unsupported_objects=0",
+  "formatted_text_projection_stdout": "formatted projection override, zero-pointer fallback, and nonzero-pointer failure passed",
+  "bios_fonts_loader_stdout": "pinned BIOS reference load, cleanup on failure, and reload passed",
   "result": {
     "full_render_windows": [
       0,
       1,
+      18,
+      19,
       25
     ],
-    "full_render_blocked_windows": {
-      "18": "object 1 type 18 selects BIOS font 0; source calls DOS driver g_912C or g_9130",
-      "19": "object 1 type 18 selects BIOS font 0; source calls DOS driver g_912C or g_9130"
-    },
-    "isolated_supported_objects": 95,
-    "isolated_explicit_unsupported_objects": 2,
+    "full_render_blocked_windows": {},
+    "isolated_supported_objects": 97,
+    "isolated_explicit_unsupported_objects": 0,
     "unsupported_font_contract": {
       "source": "src/root/m24AB.c:f_24AB_02AD",
       "meaning": "font IDs 0 and 1 select the screen-width-dependent g_912C/g_9130 driver font; IDs 2..5 use FONT1..FONT4"
     },
-    "pixel_equivalence": "not tested: the DOS g_9128/g_9134 display-driver callbacks are not represented by an oracle capture in this packet"
+    "pixel_equivalence": "not tested: the provider contract is source-differential for glyph selection/geometry, while the display-driver callback is native; DOSBox Staging font tables are a host reference and are not asserted authentic to the original target BIOS"
   }
 }

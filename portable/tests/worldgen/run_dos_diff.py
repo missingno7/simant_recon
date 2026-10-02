@@ -99,8 +99,9 @@ def source_address(name: str) -> int:
     return behavior.symbol_address(name)
 
 
-def build_native():
+def build_native(library: Path = LIB):
     OUT.mkdir(parents=True, exist_ok=True)
+    library.parent.mkdir(parents=True, exist_ok=True)
     sources = [
         "portable/tests/worldgen/native_snapshot.c",
         "portable/game/simulation/worldgen.c",
@@ -118,10 +119,10 @@ def build_native():
     command = [str(GCC), "-std=c11", "-O2", "-Wall", "-Wextra", "-Werror",
                "-shared", "-I", str(ROOT / "portable/game/simulation"),
                "-I", str(ROOT / "portable/game/state"),
-               *(str(ROOT / p) for p in sources), "-o", str(LIB)]
+               *(str(ROOT / p) for p in sources), "-o", str(library)]
     subprocess = __import__("subprocess")
     subprocess.run(command, check=True, cwd=ROOT)
-    lib = ct.CDLL(str(LIB))
+    lib = ct.CDLL(str(library))
     lib.sim_worldgen_native_snapshot.argtypes = [ct.c_uint16, ct.c_int16, ct.c_int16,
                                                   ct.c_int16, ct.c_int16,
                                                   ct.POINTER(ct.c_uint8), ct.c_size_t]
@@ -358,7 +359,13 @@ def main():
     parser.add_argument("--report", type=Path, default=OUT / "report.json")
     args = parser.parse_args()
 
-    lib, command = build_native()
+    # Give every report its own native DLL. Evidence rows pin the exact bytes
+    # loaded for the run; a later edge/sweep build must not overwrite them.
+    library = args.report.with_suffix(".dll")
+    if args.report.exists() or library.exists():
+        raise SystemExit(f"refusing to overwrite report or compiler artifact: {args.report}")
+
+    lib, command = build_native(library)
     x = behavior.exe.load()
     pair = SimpleNamespace(function=functions.get("RandWorld"),
                            vectors={behavior.exe.MANAGER_SEG * 16 + v.offset: v
@@ -423,10 +430,24 @@ def main():
                             "sha256": x.sha256},
         "oracle_sha256": x.sha256,
         "harness_sha256": hashlib.sha256((TOOLS / "behavior.py").read_bytes()).hexdigest(),
+        "evidence_input_hashes": {
+            path: hashlib.sha256((ROOT / path).read_bytes()).hexdigest()
+            for path in [
+                "tools/behavior.py", "tools/functions.py", "tools/exe.py",
+                "tools/match.py", "tools/modules.py", "tools/modctx.py",
+                "tools/symbols.py", "layout/manifest.json",
+                "layout/functions.json", "layout/symbols.json",
+                "layout/oracle.lock.json", "assets/SIMANT.EXE",
+            ]
+        },
+        "python_version": sys.version,
+        "unicorn_version": behavior.uc.__version__,
         "source_sha256": hashlib.sha256((ROOT / "portable/game/simulation/worldgen.c").read_bytes()).hexdigest(),
         "header_sha256": hashlib.sha256((ROOT / "portable/game/simulation/worldgen.h").read_bytes()).hexdigest(),
         "native_bridge_sha256": hashlib.sha256((ROOT / "portable/tests/worldgen/native_snapshot.c").read_bytes()).hexdigest(),
-        "native_library_sha256": hashlib.sha256(LIB.read_bytes()).hexdigest(),
+        "native_library_sha256": hashlib.sha256(library.read_bytes()).hexdigest(),
+        "native_library_path": str(library),
+        "runner_sha256": hashlib.sha256(Path(__file__).read_bytes()).hexdigest(),
         "native_source_hashes": {
             path: hashlib.sha256((ROOT / path).read_bytes()).hexdigest()
             for path in [
@@ -467,6 +488,11 @@ def main():
                                "all pheromone planes", "ant M/T/S lists"],
             "preserved_poison": ["inactive ant-list coordinate slots",
                                  "InitYelloAnt condition globals 104E/07BE"],
+            "preserved_dos_data": {
+                "fd_3D57_07A8_word_options_0_to_5": [0, 1, 1, 1, 1, 0],
+                "reason": "NewGame/RandYard does not write these words; src/data/d3D57.c initializes the six-word range and only S11 menu toggles or save loading updates it",
+                "source_write_search": "all src/**/*.c and src/**/*.h; no fd_3D57_07B2 assignment and no fd_3D57_07A8[index] assignment in S08 NewGame/RandYard",
+            },
             "sine_table": "test-owned far arena D000:0000 via fd_50F6_0B22 far pointer",
             "rng": "original SetSRandSeed input and post-call original GetSRandSeed comparison",
         },

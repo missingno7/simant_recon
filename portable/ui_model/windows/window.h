@@ -22,6 +22,8 @@ typedef struct PortableWindowObject {
     int16_t indices[4]; /* Origin/size source indices at object offset 0x10. */
     int16_t modes[4];   /* Axis modes at object offset 0x18. */
     const uint8_t *resource_bytes; /* Borrowed from the immutable record. */
+    int16_t bitmap_override; /* Mutable source +0x28 for type 6 only. */
+    uint8_t has_bitmap_override;
 } PortableWindowObject;
 
 typedef struct PortableWindowResource {

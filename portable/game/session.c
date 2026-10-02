@@ -203,7 +203,9 @@ SimSessionStatus sim_session_init(SimSession *session,
     session->shared_open = 1;
     session->window_database = window_database;
     session->window_registry = window_registry;
-    if (!load_sine_resource(session)) {
+    if (!load_sine_resource(session) ||
+        portable_advice_load(&session->advice, &session->shared_database) !=
+        PORTABLE_ADVICE_OK) {
         sim_session_close(session);
         return SIM_SESSION_RESOURCE_ERROR;
     }
@@ -215,6 +217,15 @@ SimSessionStatus sim_session_init(SimSession *session,
     session->tileset_open = 1;
 
     sim_world_init_sim_vars(&session->world);
+    /* CurGndTileID starts at 1000 in d3D57 DATA. RandYard's default terrain
+     * path preserves it; this is a startup default, not a NewGame reset. */
+    session->world.current_ground_tile_id = 1000;
+    /* fd_3D57_07BE has a source DATA initializer of -1. RandYard does not
+     * overwrite it; its only NewGame write is RandWorld's conditional reset
+     * to the same -1 when fd_50F6_104E was active. Keep the typed view and
+     * the compatibility NestRuntime mirror synchronized at session start. */
+    session->world.source_state_07be = -1;
+    session->nest_runtime.alarm_indicator = -1;
     session->world.tick_count_delays[0] = 21;
     session->world.tick_count_delays[1] = 7;
     session->world.tick_count_delays[2] = 0;
@@ -238,6 +249,7 @@ void sim_session_close(SimSession *session)
         return;
     for (i = 0; i < 2; ++i)
         release_control_animation(&session->controls[i]);
+    portable_advice_free(&session->advice);
     if (session->tileset_open) {
         portable_tileset_free(&session->tileset);
         session->tileset_open = 0;
@@ -285,6 +297,9 @@ SimSessionStatus sim_session_new_game(SimSession *session,
         config, &session->worldgen_context);
     if (status != SIM_WORLDGEN_OK)
         return SIM_SESSION_WORLDGEN_ERROR;
+    /* RandYard writes fd_50F6_105E=-1 before RandWorld and InitSimVars does
+     * not reset it. Keep this source-named modal-state view for core import. */
+    session->modal_mode_105e = -1;
     session->new_game_ready = 1;
     return SIM_SESSION_OK;
 }

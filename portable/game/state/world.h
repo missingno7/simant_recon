@@ -67,7 +67,14 @@ typedef struct SimGameWorld {
     uint8_t hole_r[SIM_NEST_WIDTH];
     uint16_t random_seed_grid[16 * 12];
     uint8_t build_black[12][16];
-    uint8_t build_red[12][16];
+    union {
+        uint8_t build_red[12][16]; /* Source fd_3D57_0164, 192 bytes. */
+        struct {
+            uint8_t source_red_grid_prefix[2][16];
+            /* Source fd_3D57_0184 is the same storage at offset 32. */
+            uint8_t lifetime_graph[10][16];
+        };
+    };
     SimAntList ants_a;
     SimSmallAntList ants_b;
     SimSmallAntList ants_r;
@@ -94,7 +101,12 @@ typedef struct SimGameWorld {
     int16_t current_ant_plane;
     int16_t me_x;
     int16_t me_y;
-    int16_t me_type;
+    /* SetMyLife and population counting both read/write source global
+     * fd_50F6_04C2. Keep the compatibility names as one physical value. */
+    union {
+        int16_t me_type;
+        int16_t player_caste_type;
+    };
     int16_t me_direction;
     int16_t me_health;
     int16_t health_warning_threshold; /* fd_50F6_0FBA */
@@ -160,14 +172,12 @@ typedef struct SimGameWorld {
     int16_t ants_by_type[32];
     int16_t population_black[6];
     int16_t population_red[6];
-    int16_t player_caste_type;
     int16_t player_death_plane; /* fd_50F6_04E2 */
     int16_t population_new_game; /* fd_50F6_0354 */
     int16_t population_lifetime_graph_enabled; /* fd_50F6_0400 */
     int16_t population_selection_pending; /* fd_50F6_0376 */
     int16_t population_selection_colony; /* fd_50F6_0366 */
     int16_t lifetime_graph_preset[2]; /* fd_50F6_07CA[0..1] */
-    uint8_t lifetime_graph[10][16];
     int16_t total_population_black;
     int16_t total_population_red;
     int16_t source_counter_0242; /* fd_50F6_0242 */

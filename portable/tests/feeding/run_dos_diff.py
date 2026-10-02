@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import ctypes as ct
+import argparse
 import hashlib
 import json
 from pathlib import Path
@@ -47,14 +48,14 @@ def u16(value: int) -> bytes:
     return struct.pack("<H", value & 0xffff)
 
 
-def build_native():
+def build_native(library_path: Path):
     command = [str(GCC), "-std=c11", "-O2", "-Wall", "-Wextra", "-Werror",
                "-shared", "-I", str(ROOT / "portable"),
                str(ROOT / "portable/game/simulation/feeding.c"),
                str(ROOT / "portable/game/simulation/rng.c"),
                str(ROOT / "portable/tests/feeding/native_probe.c"),
-               "-o", str(LIBRARY)]
-    LIBRARY.parent.mkdir(parents=True, exist_ok=True)
+               "-o", str(library_path)]
+    library_path.parent.mkdir(parents=True, exist_ok=True)
     subprocess.run(command, cwd=ROOT, check=True)
     library = ct.CDLL(str(LIBRARY))
     library.sim_feeding_probe.argtypes = [ct.POINTER(ct.c_uint8), ct.c_size_t,
@@ -165,7 +166,11 @@ def native_call(library, payload):
 
 
 def main():
-    library, command = build_native()
+    parser = argparse.ArgumentParser()
+    parser.add_argument("--report", type=Path, default=REPORT)
+    parser.add_argument("--library", type=Path, default=LIBRARY)
+    cli = parser.parse_args()
+    library, command = build_native(cli.library)
     image = exe.load()
     vectors = {exe.MANAGER_SEG * 16 + vector.offset: vector
                for vector in image.vectors}
@@ -208,10 +213,25 @@ def main():
                              "original_state_sha256": hashlib.sha256(original_state).hexdigest()})
         executed += 1
 
+    native_paths = [
+        "portable/game/simulation/feeding.c", "portable/game/simulation/feeding.h",
+        "portable/game/simulation/rng.c", "portable/game/simulation/rng.h",
+        "portable/game/state/world.h", "portable/game/simulation/movement.h",
+        "portable/game/simulation/spider.h",
+        "portable/tests/feeding/native_probe.c", "portable/tests/feeding/test_feeding.c",
+    ]
+    oracle_inputs = ["assets/SIMANT.EXE", "assets/SHARED.NDX", "assets/SHARED.DAT",
+                     "layout/manifest.json", "layout/functions.json", "layout/symbols.json",
+                     "layout/oracle.lock.json", "tools/behavior.py", "tools/exe.py",
+                     "tools/functions.py", "tools/match.py", "tools/modules.py",
+                     "tools/modctx.py", "tools/symbols.py"]
     report = {"schema": "portable-feeding-dos-diff-v1",
               "oracle_execution": "original DOS only",
               "runner_sha256": digest(Path(__file__)),
               "oracle_exe_sha256": digest(exe.EXE_PATH),
+              "native_source_hashes": {path: digest(ROOT / path) for path in native_paths},
+              "oracle_input_hashes": {path: digest(ROOT / path) for path in oracle_inputs},
+              "compiler_sha256": digest(GCC), "native_library_path": str(cli.library),
               "harness_sha256": {name: digest(ROOT / "tools" / f"{name}.py")
                                   for name in ("behavior", "exe", "functions", "match")},
               "native_source_sha256": {
@@ -220,7 +240,7 @@ def main():
                   "rng.c": digest(ROOT / "portable/game/simulation/rng.c"),
                   "native_probe.c": digest(ROOT / "portable/tests/feeding/native_probe.c")},
               "unit_test_sha256": digest(ROOT / "portable/tests/feeding/test_feeding.c"),
-              "native_library_sha256": digest(LIBRARY), "native_command": command,
+              "native_library_sha256": digest(cli.library), "native_command": command,
               "case_count": len(cases), "executed_count": executed,
               "passed": executed - len(failures), "failures": failures,
               "coverage": coverage, "case_inputs": cases,
@@ -228,9 +248,9 @@ def main():
                                  "source S-RNG"],
               "services": {"myBeginSound": "typed host audio intent"},
               "limitations": ["Presentation audio is compared as an ordered intent; all game-state and S-RNG outputs are compared exactly."]}
-    REPORT.parent.mkdir(parents=True, exist_ok=True)
-    REPORT.write_text(json.dumps(report, indent=2) + "\n", encoding="utf-8")
-    print(f"feeding DOS differential: {report['passed']}/{report['executed_count']} pass; report {REPORT}")
+    cli.report.parent.mkdir(parents=True, exist_ok=True)
+    cli.report.write_text(json.dumps(report, indent=2) + "\n", encoding="utf-8")
+    print(f"feeding DOS differential: {report['passed']}/{report['executed_count']} pass; report {cli.report}")
     return 0 if not failures else 1
 
 

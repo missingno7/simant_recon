@@ -1,0 +1,620 @@
+{
+  "schema": "native-dos-randworld-differential-v1",
+  "oracle_identity": {
+    "path": "assets/SIMANT.EXE",
+    "sha256": "aa0596c6766322a8229ee3c36e57048c92adc82d50fbe2ef37afb8b85fcf4f11"
+  },
+  "oracle_sha256": "aa0596c6766322a8229ee3c36e57048c92adc82d50fbe2ef37afb8b85fcf4f11",
+  "harness_sha256": "2c0799048057f59eae61a48be4d695278635594484adf0c70bf46c51b4e0c799",
+  "source_sha256": "ada960cbad2ca6f448f58aec8ff76afe1bc25b89e6a5a431c7a5e3002d059cc7",
+  "header_sha256": "bfc39ec2530cb6e06ad5cd292c28ed6b5020b3983695d55d5ad641ac375f6c34",
+  "native_bridge_sha256": "bf9709a4f7daa41dcdbc5f7483e2baeaa0f068be06906054b296448345346847",
+  "native_library_sha256": "0ac02ee78a2b450072cbd4c220faefa13e7780416136cb61fe399545a5ab8388",
+  "native_library_path": "portable\\tests\\worldgen\\evidence\\randworld-union-edge-8000-20261002.dll",
+  "runner_sha256": "e0a97ac3f3cd60273bc09fabbf0206fe9a1f93c05d0556f04d5bf276f02b5261",
+  "native_source_hashes": {
+    "portable/game/simulation/worldgen.c": "ada960cbad2ca6f448f58aec8ff76afe1bc25b89e6a5a431c7a5e3002d059cc7",
+    "portable/game/simulation/worldgen.h": "bfc39ec2530cb6e06ad5cd292c28ed6b5020b3983695d55d5ad641ac375f6c34",
+    "portable/game/simulation/rng.c": "e8cd2b561f91fbb6cda7c07b9f7dbe5deca798869f31edc98178e37cdb19d589",
+    "portable/game/simulation/rng.h": "fc68a178bb200dbc211232c39b05bc237a57771854917da59ef2ce7f57046712",
+    "portable/game/simulation/terrain.c": "544ab347d4a87d437c0617bbeb44ef22f96ff95371f5bb5899624cc338ff8ef3",
+    "portable/game/simulation/terrain.h": "4d0bccb7f2606f20d5fcf70584f8209748a2f40aa9a1d3bef45a0aaee6fa2853",
+    "portable/game/simulation/ants.c": "a8c6f4258ce204ab1bd57f63e4d30446c617794329ba6a594b70ef38e667ecaa",
+    "portable/game/simulation/ants.h": "b9c9566336de4e5000dc4e8b7a6ff37ee60dd1011ec8e02a6442f7ed4f90a386",
+    "portable/game/simulation/population.c": "e8291c1dc50bfdb343bb0067a096a56e3a03cdbbb0ff877b2032b2ee8b66f612",
+    "portable/game/simulation/population.h": "3c46e7044c512295aaf9c5d8c8a1e819e9dec1efdfc69ceef34d42b7a548a325",
+    "portable/game/simulation/spider.c": "06101635a1abc046eb9242569b2768d64dc8d96e72c0e92bcbb6daa6aa2c79b1",
+    "portable/game/simulation/spider.h": "da0183d66a65c93f1ab0544841dee61adfc4a71c2a192b8a33a7a519147d6924",
+    "portable/game/simulation/nest.c": "551f8c7d968c6682e88939398a047bf3e282686e482af2f4dcddafc22dee334f",
+    "portable/game/simulation/nest.h": "96c8c41c84d50e7b7ff8bbf981f21f21a8461e27fef398fdd7efb042567b54a5",
+    "portable/game/simulation/setup.c": "a9493a4a6b842740177b8da0c57a5619573225780218cfe3a62375647f6ddc50",
+    "portable/game/simulation/setup.h": "c85d68ca58584025109857b97f4f9bb324fc58ab4f916d830d94a52acae342c8",
+    "portable/game/simulation/yard.c": "60923fc0c08d65a8a04667ae03942d9fe741b9ce68c361fa25c93ada3715fa97",
+    "portable/game/simulation/yard.h": "05eb2d901925eafcbe0c15d6dfdd52317caa7ce863875b4a5e2d8e85e3d76ea8",
+    "portable/game/state/world.c": "7c623acd769d9fd230815acd407deceb13ff0737ccaa5b0842b23faae24c1d80",
+    "portable/game/state/world.h": "e093d20c8778f126afb027ee5b399c01aa9cf3cc9f362aa9350c090c1f84d5af",
+    "portable/game/simulation/movement.c": "1e82fb8c81c30ffde31cc6970572731e07e67828de68c25851b5588f7f6fa699",
+    "portable/game/simulation/movement.h": "b20d81bc8b545f7929a5f9bc3367f8349782b7daaf876518a7c9df8abc0bc447"
+  },
+  "compiler_sha256": "c5005ba5380351c10743e9ca53ef9632164c54be3bd6b93324795114e4589a7d",
+  "compared_ranges": [
+    {
+      "name": "MapA",
+      "size": 8192
+    },
+    {
+      "name": "MapB",
+      "size": 4096
+    },
+    {
+      "name": "MapR",
+      "size": 4096
+    },
+    {
+      "name": "ExitMapB",
+      "size": 4096
+    },
+    {
+      "name": "ExitMapR",
+      "size": 4096
+    },
+    {
+      "name": "LifeA",
+      "size": 8192
+    },
+    {
+      "name": "LifeB",
+      "size": 4096
+    },
+    {
+      "name": "LifeR",
+      "size": 4096
+    },
+    {
+      "name": "fd_3E1D_D89F",
+      "size": 2048
+    },
+    {
+      "name": "PherMapA",
+      "size": 2048
+    },
+    {
+      "name": "PherMapBN",
+      "size": 2048
+    },
+    {
+      "name": "PherMapBT",
+      "size": 2048
+    },
+    {
+      "name": "PherMapRN",
+      "size": 2048
+    },
+    {
+      "name": "PherMapRT",
+      "size": 2048
+    },
+    {
+      "name": "HoleMapB",
+      "size": 64
+    },
+    {
+      "name": "HoleMapR",
+      "size": 64
+    },
+    {
+      "name": "AlistX",
+      "size": 1000
+    },
+    {
+      "name": "AlistY",
+      "size": 1000
+    },
+    {
+      "name": "AlistM",
+      "size": 1000
+    },
+    {
+      "name": "AlistT",
+      "size": 1000
+    },
+    {
+      "name": "AlistS",
+      "size": 1000
+    },
+    {
+      "name": "BlistX",
+      "size": 500
+    },
+    {
+      "name": "BlistY",
+      "size": 500
+    },
+    {
+      "name": "BlistM",
+      "size": 500
+    },
+    {
+      "name": "BlistT",
+      "size": 500
+    },
+    {
+      "name": "BlistS",
+      "size": 500
+    },
+    {
+      "name": "RlistX",
+      "size": 500
+    },
+    {
+      "name": "RlistY",
+      "size": 500
+    },
+    {
+      "name": "RlistM",
+      "size": 500
+    },
+    {
+      "name": "RlistT",
+      "size": 500
+    },
+    {
+      "name": "RlistS",
+      "size": 500
+    },
+    {
+      "name": "ListIndexA",
+      "size": 2
+    },
+    {
+      "name": "ListIndexB",
+      "size": 2
+    },
+    {
+      "name": "ListIndexR",
+      "size": 2
+    },
+    {
+      "name": "fd_50F6_0242",
+      "size": 2
+    },
+    {
+      "name": "fd_50F6_0472",
+      "size": 4
+    },
+    {
+      "name": "fd_50F6_09FA",
+      "size": 2
+    },
+    {
+      "name": "fd_50F6_0A00",
+      "size": 2
+    },
+    {
+      "name": "fd_50F6_035E",
+      "size": 2
+    },
+    {
+      "name": "fd_50F6_036C",
+      "size": 2
+    },
+    {
+      "name": "FoodB",
+      "size": 2
+    },
+    {
+      "name": "FoodR",
+      "size": 2
+    },
+    {
+      "name": "fd_50F6_1040",
+      "size": 2
+    },
+    {
+      "name": "HealthB",
+      "size": 2
+    },
+    {
+      "name": "HealthR",
+      "size": 2
+    },
+    {
+      "name": "Cycle",
+      "size": 2
+    },
+    {
+      "name": "fd_50F6_0508",
+      "size": 4
+    },
+    {
+      "name": "fd_50F6_0596",
+      "size": 4
+    },
+    {
+      "name": "fd_50F6_06A6",
+      "size": 4
+    },
+    {
+      "name": "fd_50F6_072E",
+      "size": 4
+    },
+    {
+      "name": "fd_50F6_0F0E",
+      "size": 2
+    },
+    {
+      "name": "fd_50F6_0F26",
+      "size": 2
+    },
+    {
+      "name": "MePlane",
+      "size": 2
+    },
+    {
+      "name": "MeLocX",
+      "size": 2
+    },
+    {
+      "name": "MeLocY",
+      "size": 2
+    },
+    {
+      "name": "fd_50F6_04C2",
+      "size": 2
+    },
+    {
+      "name": "fd_50F6_0496",
+      "size": 2
+    },
+    {
+      "name": "fd_50F6_04C4",
+      "size": 2
+    },
+    {
+      "name": "fd_50F6_0AFA",
+      "size": 12
+    },
+    {
+      "name": "fd_50F6_0AEC",
+      "size": 12
+    },
+    {
+      "name": "fd_50F6_0EB6",
+      "size": 64
+    },
+    {
+      "name": "BpopT",
+      "size": 2
+    },
+    {
+      "name": "RpopT",
+      "size": 2
+    },
+    {
+      "name": "fd_50F6_0354",
+      "size": 2
+    },
+    {
+      "name": "fd_50F6_0366",
+      "size": 2
+    },
+    {
+      "name": "fd_50F6_0376",
+      "size": 2
+    },
+    {
+      "name": "fd_50F6_105E",
+      "size": 2
+    },
+    {
+      "name": "fd_50F6_0214",
+      "size": 4
+    },
+    {
+      "name": "fd_50F6_0204",
+      "size": 4
+    },
+    {
+      "name": "fd_50F6_0228",
+      "size": 2
+    },
+    {
+      "name": "fd_50F6_0478",
+      "size": 2
+    },
+    {
+      "name": "fd_50F6_0504",
+      "size": 2
+    },
+    {
+      "name": "fd_3D57_0C44",
+      "size": 2
+    },
+    {
+      "name": "fd_3D57_0C18",
+      "size": 2
+    },
+    {
+      "name": "fd_3D57_0C16",
+      "size": 2
+    },
+    {
+      "name": "fd_3D57_0C14",
+      "size": 2
+    },
+    {
+      "name": "fd_50F6_0C26",
+      "size": 4
+    },
+    {
+      "name": "fd_50F6_049A",
+      "size": 2
+    },
+    {
+      "name": "fd_3D57_0C22",
+      "size": 2
+    },
+    {
+      "name": "fd_50F6_104E",
+      "size": 2
+    },
+    {
+      "name": "fd_3D57_07BE",
+      "size": 2
+    },
+    {
+      "name": "fd_3D57_02BC",
+      "size": 4
+    },
+    {
+      "name": "CurGndTileID",
+      "size": 2
+    },
+    {
+      "name": "DROPdir",
+      "size": 2
+    },
+    {
+      "name": "fd_50F6_0480",
+      "size": 2
+    },
+    {
+      "name": "TERRAINset",
+      "size": 2
+    },
+    {
+      "name": "g_1A2E",
+      "size": 2
+    },
+    {
+      "name": "LionIndex",
+      "size": 2
+    },
+    {
+      "name": "InitialLions",
+      "size": 2
+    },
+    {
+      "name": "AntsEatenByLions",
+      "size": 2
+    },
+    {
+      "name": "LionListX",
+      "size": 10
+    },
+    {
+      "name": "LionListY",
+      "size": 10
+    },
+    {
+      "name": "LionListM",
+      "size": 10
+    },
+    {
+      "name": "LionListS",
+      "size": 10
+    },
+    {
+      "name": "LionListT",
+      "size": 10
+    },
+    {
+      "name": "SowX",
+      "size": 6
+    },
+    {
+      "name": "SowY",
+      "size": 6
+    },
+    {
+      "name": "SowDir",
+      "size": 6
+    },
+    {
+      "name": "SowSave",
+      "size": 6
+    },
+    {
+      "name": "PillarState",
+      "size": 2
+    },
+    {
+      "name": "PillarX",
+      "size": 2
+    },
+    {
+      "name": "PillarY",
+      "size": 2
+    },
+    {
+      "name": "PillarSeg",
+      "size": 2
+    },
+    {
+      "name": "PillDir",
+      "size": 2
+    },
+    {
+      "name": "PillarMap",
+      "size": 12
+    }
+  ],
+  "build_command": [
+    "C:\\msys64\\mingw64\\bin\\gcc.exe",
+    "-std=c11",
+    "-O2",
+    "-Wall",
+    "-Wextra",
+    "-Werror",
+    "-shared",
+    "-I",
+    "D:\\Prog\\simant_recon\\portable\\game\\simulation",
+    "-I",
+    "D:\\Prog\\simant_recon\\portable\\game\\state",
+    "D:\\Prog\\simant_recon\\portable\\tests\\worldgen\\native_snapshot.c",
+    "D:\\Prog\\simant_recon\\portable\\game\\simulation\\worldgen.c",
+    "D:\\Prog\\simant_recon\\portable\\game\\simulation\\rng.c",
+    "D:\\Prog\\simant_recon\\portable\\game\\simulation\\terrain.c",
+    "D:\\Prog\\simant_recon\\portable\\game\\simulation\\ants.c",
+    "D:\\Prog\\simant_recon\\portable\\game\\simulation\\population.c",
+    "D:\\Prog\\simant_recon\\portable\\game\\simulation\\spider.c",
+    "D:\\Prog\\simant_recon\\portable\\game\\simulation\\nest.c",
+    "D:\\Prog\\simant_recon\\portable\\game\\simulation\\setup.c",
+    "D:\\Prog\\simant_recon\\portable\\game\\simulation\\yard.c",
+    "D:\\Prog\\simant_recon\\portable\\game\\state\\world.c",
+    "D:\\Prog\\simant_recon\\portable\\game\\simulation\\movement.c",
+    "-o",
+    "portable\\tests\\worldgen\\evidence\\randworld-union-edge-8000-20261002.dll"
+  ],
+  "domain": {
+    "scenarios": [
+      0,
+      1
+    ],
+    "terrain_set": 0,
+    "black_size": 1,
+    "red_size": 1,
+    "map_width": 11,
+    "map_kind": 8,
+    "seed_range": "0..0x7fff",
+    "game_helpers": "original DOS bodies",
+    "modeled_boundaries": [
+      "o22_39C7_07FD",
+      "InvalEuMap"
+    ]
+  },
+  "prestate_contract": {
+    "phase": "RandYard immediately after ClrArrays and before RandWorld",
+    "cleared_arrays": [
+      "MapA",
+      "MapB/R",
+      "ExitMapB/R",
+      "LifeA/B/R",
+      "all pheromone planes",
+      "ant M/T/S lists"
+    ],
+    "preserved_poison": [
+      "inactive ant-list coordinate slots",
+      "InitYelloAnt condition globals 104E/07BE"
+    ],
+    "sine_table": "test-owned far arena D000:0000 via fd_50F6_0B22 far pointer",
+    "rng": "original SetSRandSeed input and post-call original GetSRandSeed comparison"
+  },
+  "limits": [
+    "bounded seed/scenario domain",
+    "black/red size fixed to 1",
+    "terrain selector fixed to 0",
+    "map fixed to 11x8",
+    "player-selection and map-invalidation are explicit host boundaries"
+  ],
+  "case_count": 2,
+  "random_count": 0,
+  "random_seed": 5386583,
+  "mismatch_count": 0,
+  "first_mismatch": null,
+  "rows": [
+    {
+      "label": "scenario-0-seed-8000",
+      "seed": 32768,
+      "mismatches": {},
+      "input_sha256": "2f4b584402265c716ea687d889149cb0a557aa4ae437910b65c2b493adfd775b",
+      "oracle_host_boundaries": [
+        [
+          2,
+          32,
+          12
+        ],
+        [
+          0,
+          0,
+          128,
+          64
+        ]
+      ],
+      "oracle_s_state": 38526,
+      "native_s_state": 38526,
+      "oracle_return": null,
+      "native_return": null,
+      "oracle_observation_sha256": "16ce01d91cf03fea45ee1c3bee4ae7220d5a5ab29c51cf30f405142186afbbc0",
+      "native_observation_sha256": "16ce01d91cf03fea45ee1c3bee4ae7220d5a5ab29c51cf30f405142186afbbc0",
+      "native_event_counts": {
+        "total_population_black": 3,
+        "total_population_red": 2,
+        "dug_b_x_sum": 417,
+        "dug_b_y_sum": 101,
+        "dug_b_count": 13,
+        "dug_b_x_average": 32,
+        "dug_b_y_average": 7,
+        "dug_r_x_sum": 347,
+        "dug_r_y_sum": 62,
+        "dug_r_count": 10,
+        "dug_r_x_average": 34,
+        "dug_r_y_average": 6,
+        "worldgen_effect_count": 2,
+        "population_effect_count": 0
+      }
+    },
+    {
+      "label": "scenario-1-seed-8000",
+      "seed": 32768,
+      "mismatches": {},
+      "input_sha256": "a09f08864133b78659b989f8b386d239142ce8524af0cda62f728285f9e7e98a",
+      "oracle_host_boundaries": [
+        [
+          2,
+          32,
+          12
+        ],
+        [
+          0,
+          0,
+          128,
+          64
+        ]
+      ],
+      "oracle_s_state": 38526,
+      "native_s_state": 38526,
+      "oracle_return": null,
+      "native_return": null,
+      "oracle_observation_sha256": "16ce01d91cf03fea45ee1c3bee4ae7220d5a5ab29c51cf30f405142186afbbc0",
+      "native_observation_sha256": "16ce01d91cf03fea45ee1c3bee4ae7220d5a5ab29c51cf30f405142186afbbc0",
+      "native_event_counts": {
+        "total_population_black": 3,
+        "total_population_red": 2,
+        "dug_b_x_sum": 417,
+        "dug_b_y_sum": 101,
+        "dug_b_count": 13,
+        "dug_b_x_average": 32,
+        "dug_b_y_average": 7,
+        "dug_r_x_sum": 347,
+        "dug_r_y_sum": 62,
+        "dug_r_count": 10,
+        "dug_r_x_average": 34,
+        "dug_r_y_average": 6,
+        "worldgen_effect_count": 2,
+        "population_effect_count": 0
+      }
+    }
+  ],
+  "status": "PASS"
+}

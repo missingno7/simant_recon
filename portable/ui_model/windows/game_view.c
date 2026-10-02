@@ -22,10 +22,11 @@ static PortableRect intersect_clip(PortableRect a, PortableRect b)
     return result;
 }
 
-PortableGameViewStatus portable_game_view_resolve(
+static PortableGameViewStatus resolve_view(
     const PortableWindowRegistry *registry,
     const SimGameWorld *world,
     const PortableGameViewState *state,
+    int16_t plane, int32_t camera_x, int32_t camera_y,
     PortableGameView *view)
 {
     const PortableWindowRegistrySlot *slot;
@@ -33,10 +34,7 @@ PortableGameViewStatus portable_game_view_resolve(
     PortableWindowRect rect;
     int32_t width, height, columns, rows;
     int16_t map_width;
-    int32_t camera_x, camera_y;
-    int16_t plane;
-
-    if (registry == 0 || world == 0 || state == 0 || view == 0 ||
+    if (registry == 0 || state == 0 || view == 0 ||
         !registry->initialized)
         return PORTABLE_GAME_VIEW_BAD_ARGUMENT;
     slot = &registry->slots[PORTABLE_GAME_VIEW_WINDOW_ID];
@@ -58,7 +56,6 @@ PortableGameViewStatus portable_game_view_resolve(
         columns > INT16_MAX || rows > INT16_MAX)
         return PORTABLE_GAME_VIEW_UNSUPPORTED_GEOMETRY;
 
-    plane = world->selected_map_plane;
     if (plane < 0 || plane > 3 || state->pheromone_mode < -1 ||
         state->pheromone_mode > 4 ||
         (state->ega_profile != 0 && state->ega_profile != 8))
@@ -69,8 +66,10 @@ PortableGameViewStatus portable_game_view_resolve(
 
     /* SetDefaultWindows finishes with CenterEdit(MeLocX,MeLocY). That leaves
      * camera origin at player minus half the visible logical cell count. */
-    camera_x = (int32_t)world->me_x - columns / 2;
-    camera_y = (int32_t)world->me_y - rows / 2;
+    if (world != 0) {
+        camera_x = (int32_t)world->me_x - columns / 2;
+        camera_y = (int32_t)world->me_y - rows / 2;
+    }
     camera_x = clamp_axis(camera_x, (int16_t)columns, map_width);
     camera_y = clamp_axis(camera_y, (int16_t)rows, SIM_WORLD_HEIGHT);
 
@@ -91,6 +90,26 @@ PortableGameViewStatus portable_game_view_resolve(
     view->map.young_frame = state->young_frame;
     view->map.caste_frame = state->caste_frame;
     return PORTABLE_GAME_VIEW_OK;
+}
+
+PortableGameViewStatus portable_game_view_resolve(
+    const PortableWindowRegistry *registry,
+    const SimGameWorld *world,
+    const PortableGameViewState *state,
+    PortableGameView *view)
+{
+    if (world == 0) return PORTABLE_GAME_VIEW_BAD_ARGUMENT;
+    return resolve_view(registry, world, state, world->selected_map_plane,
+                        0, 0, view);
+}
+
+PortableGameViewStatus portable_game_view_at(
+    const PortableWindowRegistry *registry,
+    const PortableGameViewState *state,
+    int16_t plane, int16_t camera_x, int16_t camera_y,
+    PortableGameView *view)
+{
+    return resolve_view(registry, 0, state, plane, camera_x, camera_y, view);
 }
 
 PortableGameViewStatus portable_game_view_render(

@@ -134,6 +134,11 @@ static void test_scenario_two_black_loss_consumes_sr1(void)
     assert(rng.s_state == 0x1bf7);
     assert(world.lifetime_graph[1][0] == 0x14);
     assert(world.lifetime_graph[0][0] == 0);
+    /* CountAnts writes 0184, which is red-grid 0164 at byte offset 32.
+     * Yard simulation must see this population effect through its own view. */
+    assert(world.build_red[3][0] == 0x14);
+    world.build_red[11][8] = 2;
+    assert(world.lifetime_graph[9][8] == 2);
     assert(effects.count == 4);
     assert(effects.events[0].values[0] == 0x2b0c);
     assert(effects.events[1].values[1] == 0x271a);

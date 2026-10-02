@@ -50,6 +50,24 @@ int main(int argc, char **argv)
         translated.modifiers!=2) { fprintf(stderr,"keyboard translation failed\n");
         host_destroy(host); free(pixels); return 1; }
     memset(&injected,0,sizeof(injected));
+    injected.type=SDL_EVENT_KEY_DOWN;
+    injected.key.key=SDLK_KP_8;
+    injected.key.mod=SDL_KMOD_CTRL;
+    if (!SDL_PushEvent(&injected) || next_event(host,&translated)!=1 ||
+        translated.key!=0x4800 || translated.modifiers!=4) {
+        fprintf(stderr,"keypad translation failed\n");
+        host_destroy(host); free(pixels); return 1;
+    }
+    memset(&injected,0,sizeof(injected));
+    injected.type=SDL_EVENT_KEY_UP;
+    injected.key.key=SDLK_LCTRL;
+    if (!SDL_PushEvent(&injected) || next_event(host,&translated)!=1 ||
+        translated.kind!=HOST_EVENT_KEY_UP || translated.key!=0x1d00 ||
+        translated.modifiers!=0) {
+        fprintf(stderr,"modifier release translation failed\n");
+        host_destroy(host); free(pixels); return 1;
+    }
+    memset(&injected,0,sizeof(injected));
     injected.type=SDL_EVENT_QUIT;
     if (!SDL_PushEvent(&injected) || next_event(host,&translated)!=1 ||
         translated.kind!=HOST_EVENT_QUIT) { fprintf(stderr,"quit translation failed\n");

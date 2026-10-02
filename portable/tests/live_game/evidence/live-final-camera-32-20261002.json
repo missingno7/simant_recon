@@ -1,0 +1,186 @@
+{
+  "schema": "portable-live-game-smoke-v1",
+  "claim": "a resource-backed NewGame scene completed the bounded source-scheduled tick count through the native SDL adapter",
+  "scope": {
+    "ticks": 32,
+    "user_input_events": 0,
+    "test_injected_events": "SDL Control+keypad-right down/up transitions",
+    "sdl_video_driver": "dummy",
+    "does_not_claim": [
+      "long-run simulation equivalence",
+      "mouse events outside the proven Edit object-4 left-press route",
+      "complete recovered UI operation coverage",
+      "audio playback"
+    ]
+  },
+  "command": [
+    "D:\\Prog\\simant_recon\\build\\portable\\tests\\live-smoke-camera.exe",
+    "--live-newgame",
+    "--ticks",
+    "32",
+    "--screenshot",
+    "D:\\Prog\\simant_recon\\portable\\tests\\live_game\\evidence\\live-final-camera-32-20261002-frame-32.bmp"
+  ],
+  "harness_source": {
+    "path": "D:\\Prog\\simant_recon\\portable\\tests\\live_game\\run_smoke.py",
+    "sha256": "c7dcb4fa56554c74dce5cec2ff2022ec01c540f8cba936d8ba754a37cc822d8a"
+  },
+  "executable": {
+    "path": "D:\\Prog\\simant_recon\\build\\portable\\tests\\live-smoke-camera.exe",
+    "sha256": "f95a930b469c624e2af3b53573594539e5458e27e8a3f598defede446c5424ae"
+  },
+  "production_executable": {
+    "path": "D:\\Prog\\simant_recon\\build\\portable\\simant-sdl3.exe",
+    "sha256": "62984300ae1297fb57a72e6418aadce375d09d45d595fda468a856cee61ea6a9"
+  },
+  "build_receipt": {
+    "path": "D:\\Prog\\simant_recon\\build\\portable\\simant-sdl3.build.json",
+    "sha256": "4fbf48eacc151702c8fa80587147e18e10552cb19e4551d1ed079ab9811b895c",
+    "recovered_core_profile": "build/workers/recovered_source_next2/generated"
+  },
+  "test_event_driver": {
+    "kind": "source_control_keypad_camera_step",
+    "source_path": "D:\\Prog\\simant_recon\\portable\\tests\\live_game\\camera_key_injector.c",
+    "source_sha256": "8bac40821781dbdb42137be6847c952fa93b8dab165859661baba41ae157579b",
+    "sequence": [
+      "control-down",
+      "keypad-right-down",
+      "keypad-right-up",
+      "control-up"
+    ],
+    "pushed_event_count": 4
+  },
+  "final_state": {
+    "recovered_state": {
+      "path": "D:\\Prog\\simant_recon\\portable\\tests\\live_game\\evidence\\live-final-camera-32-20261002-state-32.recovered.bin",
+      "sha256": "9679c113dd5c868effb10e5bd1716bb752f9df5ae14173d8ae3208a814bdbf65"
+    },
+    "normalized_recovered_state": {
+      "path": "D:\\Prog\\simant_recon\\portable\\tests\\live_game\\evidence\\live-final-camera-32-20261002-state-32.normalized.bin",
+      "sha256": "fca6f060a1d0f12af36fd9bf1b069eca6e4e7812ebe3bc73e6e98960e483e913",
+      "pointer_fields_zeroed": [
+        "AdviceStrs",
+        "fd_3D57_0852[40]",
+        "fd_50F6_02BA",
+        "fd_50F6_034C",
+        "fd_50F6_0B22",
+        "g_5AAC"
+      ]
+    },
+    "rng_state": {
+      "path": "D:\\Prog\\simant_recon\\portable\\tests\\live_game\\evidence\\live-final-camera-32-20261002-state-32.rng.bin",
+      "sha256": "b782e8976edd56eeb61b4ea79795014d17b8a76bd13f020192d01cbdf138ae96"
+    },
+    "statistics": {
+      "completed_ticks": 32,
+      "bios_tick_count": 93,
+      "mac_tick_count": 279,
+      "wall_elapsed_ns": 5112989900,
+      "recovered_state_size": 70040,
+      "normalized_state_size": 70040,
+      "rng_state_size": 8,
+      "source_pause": 0,
+      "source_speed": 1,
+      "menu_resource_id": 0,
+      "camera_x": 26,
+      "camera_y": 2,
+      "scroll_action_calls": 1,
+      "menu_loaded": true,
+      "active_clip_window": -32768,
+      "pause_action_calls": 0,
+      "pause_start_ticks": 0,
+      "pause_end_ticks": 0,
+      "pause_duration_ns": 0,
+      "paused_update_calls": 0,
+      "speed_action_calls": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "menu_item_state_calls": 0,
+      "menu_item_text_calls": 0,
+      "edit_hotbox_clicks": 0,
+      "edit_events_delivered": 0,
+      "edit_double_clicks": 0,
+      "edit_queue_remaining": 0,
+      "event_goal_active": 0,
+      "event_goal_mode": 0,
+      "event_goal_x": 0,
+      "event_goal_y": 0,
+      "event_goal_plane": 0,
+      "event_left_down": 0,
+      "edit_object4_rect": [
+        64,
+        41,
+        416,
+        330
+      ],
+      "edit_object4_flags": 3,
+      "edit_object4_type": 1,
+      "edit_object4_value": 0,
+      "front_window": 0,
+      "source_goal_active": 0,
+      "source_goal_mode": 0,
+      "source_goal_x": 0,
+      "source_goal_y": 0,
+      "left_down": 0,
+      "effects": [
+        0,
+        32,
+        0,
+        0,
+        32,
+        0,
+        0,
+        1,
+        0,
+        0
+      ],
+      "queries": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "effect_calls_by_kind": {
+        "map_cell_invalidate": 32,
+        "edit_message": 0,
+        "picture_string_dialog": 0,
+        "default_wind_prompt": 32,
+        "nest_map_invalidate": 0,
+        "alarm_selection": 0,
+        "window_operation": 1,
+        "graphics_rect": 0,
+        "graphics_line": 0
+      },
+      "query_calls_by_kind": {
+        "window_open": 0,
+        "window_events": 0,
+        "window_in_front": 0,
+        "still_down": 0,
+        "dialog_abort_or_continue": 0,
+        "get_event": 0,
+        "get_object_rect": 0,
+        "button": 0
+      },
+      "picture_string_dialog_calls_observed": 0,
+      "modal_dismissal_verified_by_this_smoke": false
+    }
+  },
+  "final_frame": {
+    "path": "D:\\Prog\\simant_recon\\portable\\tests\\live_game\\evidence\\live-final-camera-32-20261002-frame-32.bmp",
+    "sha256": "c9963cb7a4378bc7e434ecd86f9998a4c695fda3524caea694784c518a981dfd"
+  },
+  "timeout_seconds": 26,
+  "timed_out": false,
+  "exit_code": 0,
+  "stdout": "Native NewGame scenario=1 player=(36,11) plane=2 camera=(25,2) cells=418 life=3\nCompleted native simulation ticks: 32\n",
+  "stderr": "",
+  "passed": true
+}

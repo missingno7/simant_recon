@@ -1,0 +1,190 @@
+{
+  "schema": "portable-live-game-smoke-v1",
+  "claim": "a resource-backed NewGame scene completed the bounded source-scheduled tick count through the native SDL adapter",
+  "scope": {
+    "ticks": 32,
+    "user_input_events": 0,
+    "test_injected_events": "SDL pause and four speed shortcuts with explicit Shift transitions",
+    "sdl_video_driver": "dummy",
+    "does_not_claim": [
+      "long-run simulation equivalence",
+      "mouse events outside the proven Edit object-4 left-press route",
+      "complete recovered UI operation coverage",
+      "audio playback"
+    ]
+  },
+  "command": [
+    "D:\\Prog\\simant_recon\\build\\portable\\tests\\live-smoke-menu-keys.exe",
+    "--live-newgame",
+    "--ticks",
+    "32",
+    "--screenshot",
+    "D:\\Prog\\simant_recon\\portable\\tests\\live_game\\evidence\\live-final-menu-32-20261002-frame-32.bmp"
+  ],
+  "harness_source": {
+    "path": "D:\\Prog\\simant_recon\\portable\\tests\\live_game\\run_smoke.py",
+    "sha256": "c7dcb4fa56554c74dce5cec2ff2022ec01c540f8cba936d8ba754a37cc822d8a"
+  },
+  "executable": {
+    "path": "D:\\Prog\\simant_recon\\build\\portable\\tests\\live-smoke-menu-keys.exe",
+    "sha256": "ced4cfbaa5438bd78ab11a18e4b39bf96d40d5a16ac4a4ba45e26f50ee46f61a"
+  },
+  "production_executable": {
+    "path": "D:\\Prog\\simant_recon\\build\\portable\\simant-sdl3.exe",
+    "sha256": "62984300ae1297fb57a72e6418aadce375d09d45d595fda468a856cee61ea6a9"
+  },
+  "build_receipt": {
+    "path": "D:\\Prog\\simant_recon\\build\\portable\\simant-sdl3.build.json",
+    "sha256": "4fbf48eacc151702c8fa80587147e18e10552cb19e4551d1ed079ab9811b895c",
+    "recovered_core_profile": "build/workers/recovered_source_next2/generated"
+  },
+  "test_event_driver": {
+    "kind": "source_menu_speed_pause_shortcut_sequence",
+    "source_path": "D:\\Prog\\simant_recon\\portable\\tests\\live_game\\menu_key_injector.c",
+    "source_sha256": "a3464dc04e74745bd9410073719df0ec8c7f3ad407175b3f7e4d74ba1efed2c4",
+    "sequence": [
+      "speed-0 (!)",
+      "speed-1 (@)",
+      "speed-2 (#)",
+      "speed-3 ($)",
+      "restore-speed-0 (!)",
+      "pause-on ())",
+      "pause-off ())"
+    ],
+    "pushed_event_count": 28,
+    "pause_hold_ns": 249988400
+  },
+  "final_state": {
+    "recovered_state": {
+      "path": "D:\\Prog\\simant_recon\\portable\\tests\\live_game\\evidence\\live-final-menu-32-20261002-state-32.recovered.bin",
+      "sha256": "7f5fb512f9b6c81661f7a2d43cbc5d2d90f5e6def91ad5473ce1550179c7a21f"
+    },
+    "normalized_recovered_state": {
+      "path": "D:\\Prog\\simant_recon\\portable\\tests\\live_game\\evidence\\live-final-menu-32-20261002-state-32.normalized.bin",
+      "sha256": "c355c45a5f2576811d85727d076b801b5b40f26cc7c2a4629a5b75bb3f775b02",
+      "pointer_fields_zeroed": [
+        "AdviceStrs",
+        "fd_3D57_0852[40]",
+        "fd_50F6_02BA",
+        "fd_50F6_034C",
+        "fd_50F6_0B22",
+        "g_5AAC"
+      ]
+    },
+    "rng_state": {
+      "path": "D:\\Prog\\simant_recon\\portable\\tests\\live_game\\evidence\\live-final-menu-32-20261002-state-32.rng.bin",
+      "sha256": "5dd4fe5f95af78aec9beddb31a07c0295aa7bd4ed26688695a8489024dc04ce1"
+    },
+    "statistics": {
+      "completed_ticks": 32,
+      "bios_tick_count": 218,
+      "mac_tick_count": 654,
+      "wall_elapsed_ns": 11978242800,
+      "recovered_state_size": 70040,
+      "normalized_state_size": 70040,
+      "rng_state_size": 8,
+      "source_pause": 0,
+      "source_speed": 0,
+      "menu_resource_id": 0,
+      "camera_x": 25,
+      "camera_y": 2,
+      "scroll_action_calls": 0,
+      "menu_loaded": true,
+      "active_clip_window": -32768,
+      "pause_action_calls": 2,
+      "pause_start_ticks": 0,
+      "pause_end_ticks": 0,
+      "pause_duration_ns": 90083000,
+      "paused_update_calls": 753870,
+      "speed_action_calls": [
+        2,
+        1,
+        1,
+        1
+      ],
+      "menu_item_state_calls": 70,
+      "menu_item_text_calls": 7,
+      "edit_hotbox_clicks": 0,
+      "edit_events_delivered": 0,
+      "edit_double_clicks": 0,
+      "edit_queue_remaining": 0,
+      "event_goal_active": 0,
+      "event_goal_mode": 0,
+      "event_goal_x": 0,
+      "event_goal_y": 0,
+      "event_goal_plane": 0,
+      "event_left_down": 0,
+      "edit_object4_rect": [
+        64,
+        41,
+        416,
+        330
+      ],
+      "edit_object4_flags": 3,
+      "edit_object4_type": 1,
+      "edit_object4_value": 0,
+      "front_window": 0,
+      "source_goal_active": 0,
+      "source_goal_mode": 0,
+      "source_goal_x": 0,
+      "source_goal_y": 0,
+      "left_down": 0,
+      "effects": [
+        0,
+        32,
+        2,
+        0,
+        32,
+        0,
+        0,
+        83,
+        0,
+        0
+      ],
+      "queries": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "effect_calls_by_kind": {
+        "map_cell_invalidate": 32,
+        "edit_message": 2,
+        "picture_string_dialog": 0,
+        "default_wind_prompt": 32,
+        "nest_map_invalidate": 0,
+        "alarm_selection": 0,
+        "window_operation": 83,
+        "graphics_rect": 0,
+        "graphics_line": 0
+      },
+      "query_calls_by_kind": {
+        "window_open": 0,
+        "window_events": 0,
+        "window_in_front": 0,
+        "still_down": 0,
+        "dialog_abort_or_continue": 0,
+        "get_event": 0,
+        "get_object_rect": 0,
+        "button": 0
+      },
+      "picture_string_dialog_calls_observed": 0,
+      "modal_dismissal_verified_by_this_smoke": false
+    }
+  },
+  "final_frame": {
+    "path": "D:\\Prog\\simant_recon\\portable\\tests\\live_game\\evidence\\live-final-menu-32-20261002-frame-32.bmp",
+    "sha256": "a0a46c7a0a5cdbd75db478e65e2a88ab423b424d594b9326abd9e4c33f34f44b"
+  },
+  "timeout_seconds": 26,
+  "timed_out": false,
+  "exit_code": 0,
+  "stdout": "Native NewGame scenario=1 player=(36,11) plane=2 camera=(25,2) cells=418 life=3\nCompleted native simulation ticks: 32\n",
+  "stderr": "",
+  "passed": true
+}

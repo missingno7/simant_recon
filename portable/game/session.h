@@ -3,6 +3,7 @@
 
 #include "resources/database.h"
 #include "resources/tiles.h"
+#include "resources/advice.h"
 #include "simulation/feeding.h"
 #include "simulation/worldgen.h"
 #include "../render/bitmap.h"
@@ -38,10 +39,12 @@ typedef struct SimSessionControlVisual {
 
 typedef struct SimSession {
     PortableDatabase shared_database;
+    PortableAdviceResources advice;
     PortableDatabase *window_database; /* Borrowed from the host startup. */
     PortableWindowRegistry *window_registry; /* Borrowed; must outlive session. */
     PortableTileSet tileset;
     SimGameWorld world;
+    int16_t modal_mode_105e; /* fd_50F6_105E: TargetAnt/transfer modal state. */
     SimRng rng;
     SimFeedingState feeding;
     SimFeedingTrace feeding_trace;

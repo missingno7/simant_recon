@@ -62,10 +62,18 @@ int far ret(void) { call(); }
                             capture_output=True, text=True)
             report = json.loads((out / "provenance.json").read_text(encoding="utf-8"))
             self.assertEqual(report["status"], "DIAGNOSTIC_ONLY_NOT_PRODUCTION")
-            self.assertEqual(len(report["modules"]), 18)
+            self.assertEqual(len(report["modules"]), 23)
+            map_to_yard = next(x for x in report["modules"] if x["name"] == "root_m00F8_MapToYard")
+            self.assertTrue(map_to_yard["excluded_unrelated_module_bodies"])
+            self.assertEqual(map_to_yard["explicit_host_edges"],
+                             ["win_IsWinOpen", "SetMapPlane", "win_Swap", "win_Open"])
+            selected = (out / Path(map_to_yard["generated"]).name).read_text(encoding="utf-8")
+            self.assertIn("MapToYard(void)", selected)
+            self.assertIn("MapToYard", selected)
+            self.assertNotIn("win_YardClosed", selected)
             self.assertEqual(report["recovered_state"]["binding_status"], "COMPLETE")
-            self.assertEqual({x["symbol"] for x in report["recovered_state"]["same_width_signedness_views"]},
-                             {"fd_50F6_0472", "fd_50F6_0214"})
+            self.assertTrue({"fd_50F6_0472", "fd_50F6_0214"}.issubset(
+                {x["symbol"] for x in report["recovered_state"]["same_width_signedness_views"]}))
             alias_rows = report["recovered_state"]["alias_declaration_audit"]
             byte_view = next(row for row in alias_rows if row["alias"] == "fd_50F6_0F08")
             self.assertEqual(byte_view["address"], "50F6:0F08")
@@ -82,21 +90,31 @@ int far ret(void) { call(); }
             self.assertEqual(adjacent["bytes"], 14)
             self.assertEqual(adjacent["members"]["fd_3D57_07B2"], 10)
             self.assertEqual(len(adjacent["initializers"]), 5)
+            delay_field = state_rows["fd_3D57_07CC"]
+            self.assertEqual(delay_field["dims"], ["7"])
+            delay_view = next(x for x in report["recovered_state"]["adjacent_source_data_views"]
+                              if x["base"] == "fd_3D57_07CC")
+            self.assertEqual(delay_view["bytes"], 14)
+            self.assertEqual(delay_view["members"]["fd_3D57_07CE"], 2)
+            self.assertEqual(delay_view["initializers"][0]["source_bytes"], 14)
             self.assertEqual(report["recovered_state"]["derived_source_pointer_tables"][0]["name"], "fd_3D57_082A")
             header = (out / "recovered_state.h").read_text(encoding="utf-8")
             self.assertIn("uint8_t HoleMapB[64]", header)
             self.assertIn("int8_t Dx8[8]", header)
             self.assertIn("#define fd_3D57_07B2 (fd_3D57_07A8[5])", header)
+            self.assertIn("#define fd_3D57_07CE (fd_3D57_07CC + 1)", header)
+            exp_module = next(x for x in report["modules"] if x["name"] == "S22_m3BBD")
+            self.assertTrue(exp_module["source_type_view_adaptations"])
             self.assertIn("recovered_keyboard_set_modifiers", header)
             self.assertEqual(sum(row["count"] for module in report["modules"]
-                                 for row in module["platform_boundary_adaptations"]), 16)
+                                 for row in module["platform_boundary_adaptations"]), 22)
             for item in report["modules"]:
                 source = (ROOT / item["source"]).read_bytes()
                 generated = (out / Path(item["generated"]).name).read_bytes()
                 self.assertEqual(hashlib.sha256(source).hexdigest(), item["source_sha256"])
                 self.assertEqual(hashlib.sha256(generated).hexdigest(), item["generated_sha256"])
                 self.assertIn("UNREVIEWED_HOST_PROMOTIONS", item["integer_promotion_status"])
-                self.assertTrue(item["external_objects"])
+                self.assertIn("external_objects", item)
 
     def test_adjacent_data_initializers_share_array_and_named_word_view(self) -> None:
         import subprocess

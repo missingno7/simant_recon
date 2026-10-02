@@ -19,6 +19,14 @@ typedef struct PortableBiosFontProvider {
     PortableBiosFontBitmap font_8x14;
 } PortableBiosFontProvider;
 
+/* Build a borrowed provider over source tables; table and ID storage must
+ * outlive the renderer that uses it. */
+PortableRenderStatus portable_bios_font_provider_init(
+    PortableBiosFontProvider *provider,
+    const uint8_t *font_8x8,size_t font_8x8_size,
+    const uint8_t *font_8x14,size_t font_8x14_size,
+    const char *provider_id);
+
 typedef struct PortableWindowRenderer {
     PortableFramebuffer *framebuffer;
     PortableDatabase *database;

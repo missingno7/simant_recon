@@ -41,10 +41,12 @@ int main(int argc,char **argv)
     PortableWindowRenderer renderer={0};
     PortableFramebuffer framebuffer;
     PortableFont fonts[4];
+    PortableBiosFontProvider bios_fonts={0};
+    uint8_t *bios8=NULL,*bios14=NULL;
     uint8_t pixels[640*480];
     unsigned i;
     size_t nonzero=0;
-    assert(argc==2);
+    assert(argc==2 || argc==5);
     assert(snprintf(root,sizeof(root),"%s/HCEGANT",argv[1])<(int)sizeof(root));
     assert(portable_db_open(&database,root)==PORTABLE_DB_OK);
     assert(portable_db_load(&database,0x81,0,&colors)==PORTABLE_DB_OK);
@@ -65,6 +67,15 @@ int main(int argc,char **argv)
     renderer.colors=colors.data;
     renderer.colors_size=colors.size;
     renderer.screen_width=640;
+    if(argc==5) {
+        size_t size8,size14;
+        bios8=read_file(argv[2],&size8);
+        bios14=read_file(argv[3],&size14);
+        assert(portable_bios_font_provider_init(&bios_fonts,bios8,size8,
+                                                bios14,size14,argv[4])
+               ==PORTABLE_RENDER_OK);
+        renderer.bios_fonts=&bios_fonts;
+    }
     for(i=0;i<sizeof(windows)/sizeof(windows[0]);i++) {
         PortableDbRecord record={0};
         PortableWindowResource window;
@@ -105,6 +116,7 @@ int main(int argc,char **argv)
     }
     assert(nonzero>1000);
     for(i=0;i<4;i++)portable_font_destroy(&fonts[i]);
+    free(bios8); free(bios14);
     portable_db_record_free(&colors);
     portable_db_close(&database);
     printf("nonzero_draws=%lu\n",(unsigned long)nonzero);

@@ -53,6 +53,10 @@ typedef struct SimNestEvent {
     int32_t arguments[6];
 } SimNestEvent;
 
+/* A nonzero sink result accepts the source-ordered event. Returning zero
+ * rejects it and stops the native transition with SIM_NEST_EVENT_REJECTED. */
+typedef int (*SimNestEventSink)(void *context, const SimNestEvent *event);
+
 #define SIM_NEST_EVENT_CAPACITY 256
 
 typedef struct SimNestRequest {
@@ -61,6 +65,11 @@ typedef struct SimNestRequest {
     int32_t tick_values[2];
     uint8_t tick_count;
 } SimNestRequest;
+
+/* Optional source-clock boundary. It is called at each original TickCount
+ * read, rather than sampled up front, so synchronous effects between reads
+ * can advance the clock. A zero return reports provider failure. */
+typedef int (*SimNestTickCountProvider)(void *context, int32_t *value);
 
 typedef struct SimNestTrace {
     uint16_t count;
@@ -72,7 +81,9 @@ typedef enum SimNestStatus {
     SIM_NEST_OK = 0,
     SIM_NEST_INVALID_ARGUMENT = 1,
     SIM_NEST_TICK_INPUT_EXHAUSTED = 2,
-    SIM_NEST_TRACE_OVERFLOW = 3
+    SIM_NEST_TRACE_OVERFLOW = 3,
+    SIM_NEST_EVENT_REJECTED = 4,
+    SIM_NEST_TICK_PROVIDER_FAILED = 5
 } SimNestStatus;
 
 /* Executes the source-level nest transition over native arrays and state.
@@ -82,6 +93,25 @@ SimNestStatus sim_enter_nest(SimGameWorld *world, SimRng *rng,
                              SimNestRuntime *runtime,
                              const SimNestRequest *request,
                              SimNestTrace *trace);
+
+/* Sink-aware variant for host adapters. Events are still copied into trace,
+ * then synchronously offered to the optional sink in source append order.
+ * Returning zero aborts this transition with SIM_NEST_EVENT_REJECTED. */
+SimNestStatus sim_enter_nest_with_sink(SimGameWorld *world, SimRng *rng,
+                                       SimNestRuntime *runtime,
+                                       const SimNestRequest *request,
+                                       SimNestTrace *trace,
+                                       SimNestEventSink event_sink,
+                                       void *event_context);
+
+/* Same transition with an on-demand host TickCount provider. When nonnull,
+ * this takes precedence over request samples; the legacy/static entry points
+ * remain unchanged for differential fixtures. */
+SimNestStatus sim_enter_nest_with_tick_provider(
+    SimGameWorld *world, SimRng *rng, SimNestRuntime *runtime,
+    const SimNestRequest *request, SimNestTrace *trace,
+    SimNestEventSink event_sink, void *event_context,
+    SimNestTickCountProvider tick_provider, void *tick_context);
 
 /* Shared source-derived nest/map operations for world generation and queen
  * placement. Planes must be 2 (black) or 3 (red); traces preserve RNG/dig

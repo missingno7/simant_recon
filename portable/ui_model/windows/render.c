@@ -3,6 +3,24 @@
 #include <limits.h>
 #include <stdlib.h>
 
+PortableRenderStatus portable_bios_font_provider_init(
+    PortableBiosFontProvider *provider,
+    const uint8_t *font_8x8,size_t font_8x8_size,
+    const uint8_t *font_8x14,size_t font_8x14_size,
+    const char *provider_id)
+{
+    if(provider==NULL || provider_id==NULL || provider_id[0]=='\0')
+        return PORTABLE_RENDER_INVALID_ARGUMENT;
+    if(font_8x8==NULL || font_8x8_size!=256u*8u ||
+       font_8x14==NULL || font_8x14_size!=256u*14u)
+        return PORTABLE_RENDER_INVALID_RESOURCE;
+    provider->font_8x8=(PortableBiosFontBitmap){font_8x8,font_8x8_size,8,8,
+                                                provider_id};
+    provider->font_8x14=(PortableBiosFontBitmap){font_8x14,font_8x14_size,8,14,
+                                                 provider_id};
+    return PORTABLE_RENDER_OK;
+}
+
 static PortableRect render_rect(PortableWindowRect r)
 {
     PortableRect result={r.left,r.top,r.right,r.bottom};
@@ -203,14 +221,15 @@ static PortableRenderStatus draw_formatted_text(
     unsigned font_id=object->resource_bytes[0x28];
     uint32_t text_pointer=(uint32_t)read_u16(object->resource_bytes+0x2a) |
                          ((uint32_t)read_u16(object->resource_bytes+0x2c)<<16);
-    if(text_pointer!=0) {
-        if(renderer->resolve_text==NULL ||
-           !renderer->resolve_text(renderer->text_context,window->resource_id,index,
-                                   object->resource_bytes+start,
-                                   object->resource_size-start,&text,&length))
-            return PORTABLE_RENDER_UNSUPPORTED_MODE;
+    if(start>object->resource_size) return PORTABLE_RENDER_INVALID_RESOURCE;
+    if(renderer->resolve_text!=NULL &&
+       renderer->resolve_text(renderer->text_context,window->resource_id,index,
+                              object->resource_bytes+start,
+                              object->resource_size-start,&text,&length)) {
+        /* Native projections may resolve known formatted objects without
+         * manufacturing the runtime far pointer written by the DOS caller. */
     } else {
-        if(start>object->resource_size) return PORTABLE_RENDER_INVALID_RESOURCE;
+        if(text_pointer!=0) return PORTABLE_RENDER_UNSUPPORTED_MODE;
         text=object->resource_bytes+start;
         remaining=object->resource_size-start;
         if(!cstring_length(text,remaining,&length))
@@ -336,7 +355,8 @@ static PortableRenderStatus draw_object(
         break;
     case 6: case 13: {
         int16_t id;
-        if(object->type==6) id=(int16_t)read_u16(object->resource_bytes+0x28);
+        if(object->type==6) id=object->has_bitmap_override
+            ? object->bitmap_override : (int16_t)read_u16(object->resource_bytes+0x28);
         else id=(int16_t)read_u16(object->resource_bytes+
                          ((object->flags&4u)?0x28:0x2a));
         status=draw_image(renderer,id,r.left,r.top,NULL,NULL);

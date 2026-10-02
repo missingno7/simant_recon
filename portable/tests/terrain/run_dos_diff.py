@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import ctypes as ct
+import argparse
 import hashlib
 import json
 from pathlib import Path
@@ -33,13 +34,13 @@ def digest(path: Path) -> str:
     return hashlib.sha256(path.read_bytes()).hexdigest()
 
 
-def build_native():
-    LIBRARY.parent.mkdir(parents=True, exist_ok=True)
+def build_native(library_path: Path):
+    library_path.parent.mkdir(parents=True, exist_ok=True)
     command = [str(GCC), "-std=c11", "-O2", "-Wall", "-Wextra", "-Werror", "-shared",
                "-I", str(ROOT / "portable"),
                str(ROOT / "portable/game/simulation/terrain.c"),
                str(ROOT / "portable/game/simulation/rng.c"),
-               str(ROOT / "portable/tests/terrain/native_probe.c"), "-o", str(LIBRARY)]
+               str(ROOT / "portable/tests/terrain/native_probe.c"), "-o", str(library_path)]
     subprocess.run(command, cwd=ROOT, check=True)
     library = ct.CDLL(str(LIBRARY))
     library.sim_terrain_probe.argtypes = [ct.c_uint16, ct.c_int16, ct.c_int16,
@@ -137,7 +138,11 @@ def overlay_tileset(machine, args):
 
 
 def main():
-    library, command = build_native()
+    parser = argparse.ArgumentParser()
+    parser.add_argument("--report", type=Path, default=REPORT)
+    parser.add_argument("--library", type=Path, default=LIBRARY)
+    args = parser.parse_args()
+    library, command = build_native(args.library)
     target = functions.get("MakeMap")
     image = exe.load()
     pair = SimpleNamespace(function=target,
@@ -202,17 +207,31 @@ def main():
                              "expected_sha256": hashlib.sha256(expected).hexdigest(),
                              "actual_sha256": hashlib.sha256(actual).hexdigest(),
                              "expected_hex": expected.hex(), "actual_hex": actual.hex()})
+    native_paths = [
+        "portable/game/simulation/terrain.c", "portable/game/simulation/terrain.h",
+        "portable/game/simulation/rng.c", "portable/game/simulation/rng.h",
+        "portable/game/state/world.h", "portable/game/simulation/movement.h",
+        "portable/tests/terrain/native_probe.c", "portable/tests/terrain/test_terrain.c",
+    ]
+    oracle_inputs = ["assets/SIMANT.EXE", "assets/HCEGANT.NDX", "assets/HCEGANT.DAT",
+                     "assets/SHARED.NDX", "assets/SHARED.DAT", "layout/manifest.json",
+                     "layout/functions.json", "layout/symbols.json", "layout/oracle.lock.json",
+                     "tools/behavior.py", "tools/exe.py", "tools/functions.py", "tools/match.py",
+                     "tools/modules.py", "tools/modctx.py", "tools/symbols.py"]
     report = {"schema": "portable-terrain-dos-diff-v1", "oracle_execution": "original DOS only",
               "runner_sha256": digest(Path(__file__)),
               "oracle_exe_sha256": digest(exe.EXE_PATH),
               "harness_sha256": {name: digest(ROOT / "tools" / f"{name}.py")
                                   for name in ("behavior", "exe", "functions", "match")},
+              "native_source_hashes": {path: digest(ROOT / path) for path in native_paths},
+              "oracle_input_hashes": {path: digest(ROOT / path) for path in oracle_inputs},
+              "compiler_sha256": digest(GCC), "native_library_path": str(args.library),
               "native_source_sha256": {"terrain.c": digest(ROOT / "portable/game/simulation/terrain.c"),
                                        "terrain.h": digest(ROOT / "portable/game/simulation/terrain.h"),
                                        "rng.c": digest(ROOT / "portable/game/simulation/rng.c"),
                                        "native_probe.c": digest(ROOT / "portable/tests/terrain/native_probe.c"),
                                        "test_terrain.c": digest(ROOT / "portable/tests/terrain/test_terrain.c")},
-              "native_library_sha256": digest(LIBRARY), "native_command": command,
+              "native_library_sha256": digest(args.library), "native_command": command,
               "case_count": len(cases), "executed_count": executed_count,
               "compared_count": executed_count - len(oracle_execution_failures),
               "passed": executed_count - len(failures) - len(oracle_execution_failures),
@@ -232,8 +251,11 @@ def main():
                                                        "TERRAINset selected set", "fd_50F6_0480 bitmap width"],
                                    "excluded": "physical EGA/EMS page copies and allocator-owned resource heap"},
               "limitations": ["The compared boundary is surface tiles, drop direction, ant-lion/sow/pillar state, overlay selection globals, and source S-RNG state."]}
-    REPORT.write_text(json.dumps(report, indent=2) + "\n", encoding="utf-8")
-    print(json.dumps(report, indent=2))
+    args.report.parent.mkdir(parents=True, exist_ok=True)
+    args.report.write_text(json.dumps(report, indent=2) + "\n", encoding="utf-8")
+    print(json.dumps({"report": str(args.report), "executed": executed_count,
+                      "compared": report["compared_count"], "passed": report["passed"],
+                      "mismatches": len(failures)}, indent=2))
     return 1 if failures else 0
 
 

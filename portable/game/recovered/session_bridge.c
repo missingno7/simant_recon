@@ -1,10 +1,14 @@
 #include "session_bridge.h"
+#include "../../ui_model/windows/game_view.h"
 
 #include <string.h>
 
 #define MAP(src, dst, view) { src, dst, view }
 static const SimRecoveredProjectionEntry projection[] = {
     MAP("fd_3E1D_0180 / MapA", "world.tiles.surface", "MapA"),
+    MAP("fd_3D57_0164[12][16] / fd_3D57_0184[10][16]", "world.build_red / world.lifetime_graph", "one 192-byte backing; 0184 aliases rows 2..11"),
+    MAP("CurGndTileID", "world.current_ground_tile_id", "CurGndTileID"),
+    MAP("fd_3E1D_0000[16][12]", "world.random_seed_grid", "fd_3E1D_0000"),
     MAP("fd_3E1D_2180 / MapB", "world.tiles.nest_b", "MapB"),
     MAP("fd_3E1D_3180 / MapR", "world.tiles.nest_r", "MapR"),
     MAP("fd_3E1D_4180 / ExitMapB", "world.exit_b", "ExitMapB"),
@@ -13,6 +17,7 @@ static const SimRecoveredProjectionEntry projection[] = {
     MAP("fd_3E1D_8180 / LifeB", "world.life_b", "LifeB"),
     MAP("fd_3E1D_9180 / LifeR", "world.life_r", "LifeR"),
     MAP("fd_3E1D_D09F / PherMapA", "world.pheromone_a", "PherMapA"),
+    MAP("fd_3E1D_C89F", "world.pheromone_aux", "fd_3E1D_C89F"),
     MAP("fd_3E1D_E09F / PherMapBN", "world.pheromone_b_nest", "PherMapBN"),
     MAP("fd_3E1D_E89F / PherMapBT", "world.pheromone_b_trail", "PherMapBT"),
     MAP("fd_3E1D_F09F / PherMapRN", "world.pheromone_r_nest", "PherMapRN"),
@@ -43,15 +48,19 @@ static const SimRecoveredProjectionEntry projection[] = {
     MAP("SowY", "world.sow_y", "SowY"),
     MAP("SowDir", "world.sow_direction", "SowDir"),
     MAP("SowSave", "world.sow_saved_tile", "SowSave"),
-    MAP("SowTab", "recovered DATA initializer", "SowTab"),
     MAP("PillarMap", "world.pillar_map", "PillarMap"),
     MAP("PillarState", "world.pillar_state", "PillarState"),
     MAP("PillarX", "world.pillar_x", "PillarX"),
     MAP("PillarY", "world.pillar_y", "PillarY"),
     MAP("PillarSeg", "world.pillar_segment", "PillarSeg"),
     MAP("PillDir", "world.pillar_direction", "PillDir"),
+    MAP("fd_3D57_02B4[2]", "world.queen_black_x/y", "fd_3D57_02B4"),
+    MAP("fd_3D57_02B8[2]", "world.queen_red_x/y", "fd_3D57_02B8"),
     MAP("fd_50F6_032E / MapPlane", "world.map_plane", "MapPlane"),
     MAP("fd_50F6_0EAC", "world.scenario", "fd_50F6_0EAC"),
+    MAP("fd_3D57_07C8", "world.selected_map_plane", "fd_3D57_07C8"),
+    MAP("YardMode", "world.yard_mode", "YardMode"),
+    MAP("fd_3D57_07CC[0] + fd_3D57_07CE[4]", "world.simulation_speed_index + world.tick_count_delays[4]", "canonical packed 07CC[0..6]; speed[0], deadlines[1..4], source DATA tail[5..6]"),
     MAP("fd_50F6_048C / MePlane", "world.current_ant_plane", "MePlane"),
     MAP("fd_50F6_047C / MeLocX", "world.me_x", "MeLocX"),
     MAP("fd_50F6_048A / MeLocY", "world.me_y", "MeLocY"),
@@ -60,7 +69,67 @@ static const SimRecoveredProjectionEntry projection[] = {
     MAP("fd_50F6_0F78 / MeHealth", "world.me_health", "MeHealth"),
     MAP("fd_50F6_0FBA", "world.health_warning_threshold", "fd_50F6_0FBA"),
     MAP("fd_50F6_0FFE", "world.colony_health_warning_threshold", "fd_50F6_0FFE"),
+    MAP("fd_50F6_0204", "world.source_state_0204", "fd_50F6_0204"),
+    MAP("fd_50F6_0228", "nest_runtime.theme_index", "fd_50F6_0228"),
+    MAP("fd_50F6_0214", "nest_runtime.theme_last_tick", "fd_50F6_0214"),
+    MAP("fd_50F6_0224", "nest_runtime.dug_b_count", "fd_50F6_0224"),
+    MAP("fd_50F6_1068", "nest_runtime.dug_b_x_sum", "fd_50F6_1068"),
+    MAP("fd_50F6_1082", "nest_runtime.dug_b_y_sum", "fd_50F6_1082"),
+    MAP("fd_50F6_10B2", "nest_runtime.dug_b_x_average", "fd_50F6_10B2"),
+    MAP("fd_50F6_10C0", "nest_runtime.dug_b_y_average", "fd_50F6_10C0"),
+    MAP("TilesDugR", "nest_runtime.dug_r_count", "TilesDugR"),
+    MAP("fd_50F6_108E", "nest_runtime.dug_r_x_sum", "fd_50F6_108E"),
+    MAP("fd_50F6_10A2", "nest_runtime.dug_r_y_sum", "fd_50F6_10A2"),
+    MAP("fd_50F6_0200", "nest_runtime.dug_r_x_average", "fd_50F6_0200"),
+    MAP("fd_50F6_020E", "nest_runtime.dug_r_y_average", "fd_50F6_020E"),
+    MAP("fd_50F6_104E", "world.source_state_104e / nest_runtime.alarm_drop_state", "fd_50F6_104E"),
+    MAP("fd_3D57_07BE", "world.source_state_07be / nest_runtime.alarm_indicator", "fd_3D57_07BE"),
+    MAP("fd_50F6_0FB6", "nest_runtime.invalidate_right", "active window-0/object-4 logical column bound from resolved resource geometry"),
+    MAP("fd_50F6_0FFA", "nest_runtime.invalidate_bottom", "active window-0/object-4 logical row bound from resolved resource geometry"),
+    MAP("fd_50F6_0478", "world.source_state_0478", "fd_50F6_0478"),
+    MAP("fd_50F6_0504", "world.source_state_0504", "fd_50F6_0504"),
+    MAP("fd_3D57_0C44", "world.source_state_0c44", "fd_3D57_0C44"),
+    MAP("fd_3D57_0C18", "world.source_state_0c18", "fd_3D57_0C18"),
+    MAP("fd_3D57_0C16", "world.health_force_full", "fd_3D57_0C16"),
+    MAP("fd_3D57_0C14", "world.source_state_0c14", "fd_3D57_0C14"),
+    MAP("fd_50F6_049A", "world.source_state_049a", "fd_50F6_049A"),
+    MAP("fd_3D57_0C22", "world.source_state_0c22", "fd_3D57_0C22"),
+    MAP("fd_50F6_04C4", "world.source_state_04c4", "fd_50F6_04C4"),
+    MAP("fd_50F6_0242", "world.source_counter_0242", "fd_50F6_0242"),
+    MAP("fd_50F6_0472", "world.source_counter_0472", "fd_50F6_0472"),
+    MAP("fd_50F6_09FA", "world.source_counter_09fa", "fd_50F6_09FA"),
+    MAP("fd_50F6_0A00", "world.source_counter_0a00", "fd_50F6_0A00"),
+    MAP("fd_50F6_0A06", "world.player_mode", "fd_50F6_0A06"),
+    MAP("fd_50F6_035E", "world.queens_black", "fd_50F6_035E"),
+    MAP("fd_50F6_036C", "world.queens_red", "fd_50F6_036C"),
+    MAP("fd_50F6_04E2", "world.player_death_plane", "fd_50F6_04E2"),
+    MAP("fd_50F6_0354", "world.population_new_game", "fd_50F6_0354"),
+    MAP("fd_50F6_0400", "world.population_lifetime_graph_enabled", "fd_50F6_0400"),
+    MAP("fd_50F6_0376", "world.population_selection_pending", "fd_50F6_0376"),
+    MAP("fd_50F6_0366", "world.population_selection_colony", "fd_50F6_0366"),
+    MAP("fd_50F6_07CA[2]", "world.lifetime_graph_preset", "fd_50F6_07CA"),
+    MAP("fd_50F6_07BC[2]", "world.requested_preset_x/y", "fd_50F6_07BC"),
+    MAP("fd_50F6_0596[2]", "world.map_focus[0]", "fd_50F6_0596"),
+    MAP("fd_50F6_06A6[2]", "world.map_focus[1]", "fd_50F6_06A6"),
+    MAP("fd_50F6_072E[2]", "world.map_focus[2]", "fd_50F6_072E"),
+    MAP("fd_50F6_0AEC[6]", "world.population_black", "fd_50F6_0AEC"),
+    MAP("fd_50F6_0AFA[6]", "world.population_red", "fd_50F6_0AFA"),
+    MAP("fd_50F6_0EB6[32]", "world.ants_by_type", "fd_50F6_0EB6"),
+    MAP("BpopT", "world.total_population_black", "BpopT"),
+    MAP("RpopT", "world.total_population_red", "RpopT"),
+    MAP("FoodB", "world.food_black", "FoodB"),
+    MAP("FoodR", "world.food_red", "FoodR"),
+    MAP("HealthB", "world.health_black", "HealthB"),
+    MAP("HealthR", "world.health_red", "HealthR"),
+    MAP("Cycle", "world.cycle", "Cycle"),
+    MAP("fd_50F6_0C26", "world.world_ticks", "fd_50F6_0C26 (zeroed by RandYard, incremented once per DoAntSim)"),
+    MAP("fd_50F6_105E", "session.modal_mode_105e", "RandYard sets -1; main-loop gate and TargetAnt/StartLifeTransfer transitions"),
+    MAP("CurExpTool", "world.current_experiment_tool", "CurExpTool"),
+    MAP("DROPdir", "world.drop_direction", "DROPdir"),
+    MAP("fd_50F6_0508[2]", "world.map_view_x/y", "fd_50F6_0508"),
+    MAP("fd_50F6_1040", "world.food_added_terrain", "fd_50F6_1040"),
     MAP("fd_50F6_0378 / ModeAuto", "setup_controls.mode_auto", "ModeAuto"),
+    MAP("modeLevels", "setup_controls.mode_level", "three-word current mode triangle"),
     MAP("ModeMe", "setup_controls.mode_current", "ModeMe"),
     MAP("IdealCaste[4]", "setup_controls.ideal_caste", "IdealCaste"),
     MAP("BAntsEaten", "setup_state.black_ants_eaten", "BAntsEaten"),
@@ -149,14 +218,13 @@ static const SimRecoveredProjectionEntry projection[] = {
     MAP("fd_3D57_0C12", "spider.direction", "fd_3D57_0C12"),
     MAP("fd_50F6_06AC", "spider.aux_mode", "fd_50F6_06AC"),
     MAP("g_5AAC", "session.sine_q15", "native sine pointer"),
-    MAP("fd_3D57_07A8[5] / fd_3D57_07B2", "unmapped setup state", "fd_3D57_07A8[5] (07B2 alias)"),
+    MAP("AdviceStrs / fd_50F6_034C", "session.advice", "PrepareStrings: retained SHARED kind-4 tables 1020 and 1010; separately typed void* pointer backing"),
+    MAP("fd_3D57_07A8[5] / fd_3D57_07B2", "options runtime state (not session-owned)", "one alias; source DATA defaults {0,1,1,1,1,0} survive fresh import; S11 menu and S09 save mutate it outside NewGame/this bridge"),
 };
 #undef MAP
 
 static const char *const unmapped_new_game_writes[] = {
-    "fd_3D57_07A8[0..6], with fd_3D57_07B2 exactly aliasing element 5 (NewGame source control state; no session owner assigned)",
-    "CasteAuto (fd_3D57_07E8), casteLevels (fd_50F6_0482), modeLevels (fd_50F6_049E), knob/triangle dimensions (fd_50F6_380E..3832), and fd_50F6_0370/fd_50F6_024E (setup controls only partly represented; no exact aggregate projection)",
-    "fd_50F6_0200/0204/020E/0210/0212/0224/0226/0228/0232/0240/032C/0334/0354/0356/035E/0366/036C/0376/037A/03E2/0400/0402/04A4/04F2/0502/0504/0508/0510/0596/059E/06A6/06AA/072E/0736/073A/07BC/07C0/07C8/07CA/084E/0850/0852/08DA/08DC/08E2/08E8/08EC/09F0/09FA/0A00/0A02/0A06/0A8E/0AA0/0AA2/0AB6/0AC6/0AD6/0AE8/0AEC/0AF8/0AFA/0B12/0B1E/0B20/0B22/0C26/0C2A/0C38/0C3E/0D40/0D6C/0D72/0EF6/0EF8/0EFA/0F06/0F0C/0F0E/0F10/0F12/0F26/0F2E/0F34/0F44/0FB6/0FFA/1004/1006/1040/1044/104E/1058/105E/1068/1074/1082/108E/10A2/10A6/10AC/10B2/10BA/10C0/383A/3856/3858 (known source globals without exact typed session projection)",
+    "RandYard/initControls writes CasteAuto, casteLevels, fd_3D57_07EA, fd_50F6_0468, fd_50F6_0370, fd_50F6_024E, mode/caste preset arrays, knobSize and triangle dimensions. SimSetupControls has typed views, but the current generated RecoveredState profile omits these globals, so they cannot be overlaid into this core state yet.",
 };
 
 const SimRecoveredProjectionEntry *sim_recovered_projection_manifest(size_t *count)
@@ -175,14 +243,51 @@ const char *const *sim_recovered_unmapped_new_game_writes(size_t *count)
 
 #define COPY_IN(dst, src) memcpy((dst), (src), sizeof(dst))
 #define COPY_OUT(dst, src) memcpy((dst), (src), sizeof(dst))
+/* Read/write the source module's first-word view while retaining the complete
+ * initialized backing object in profiles with wider DATA table declarations. */
+#define SOURCE_WORD(field) (*(int16_t *)(void *)&(field))
 
 SimRecoveredBridgeStatus sim_recovered_state_from_session(
     RecoveredState *s, SimSession *session)
 {
     int i;
+    int16_t resolved_right, resolved_bottom;
     if (s == NULL || session == NULL)
         return SIM_RECOVERED_BRIDGE_INVALID_ARGUMENT;
+    resolved_right = session->nest_runtime.invalidate_right;
+    resolved_bottom = session->nest_runtime.invalidate_bottom;
+    if (session->new_game_ready) {
+        PortableGameViewState view_state = {
+            0, session->world.source_state_07be, 0, 0, 0, 0
+        };
+        PortableGameView view;
+        if (portable_game_view_resolve(session->window_registry,
+                                       &session->world,
+                                       &view_state, &view) !=
+            PORTABLE_GAME_VIEW_OK)
+            return SIM_RECOVERED_BRIDGE_VIEW_UNAVAILABLE;
+        /* InitEuMapOrigins uses the active Edit viewport, not guessed logical
+         * dimensions. The resolver applies the resource rectangle's original
+         * cell-size/partial-bottom-row formula and this is the same pair the
+         * native window owner uses for map invalidation. */
+        resolved_right = view.map.columns;
+        resolved_bottom = view.map.rows;
+    }
+    if (session->world.source_state_104e != session->nest_runtime.alarm_drop_state ||
+        session->world.source_state_07be != session->nest_runtime.alarm_indicator)
+        return SIM_RECOVERED_BRIDGE_INCONSISTENT_MIRROR;
+    if (session->new_game_ready) {
+        session->nest_runtime.invalidate_right = resolved_right;
+        session->nest_runtime.invalidate_bottom = resolved_bottom;
+    }
     recovered_state_init(s);
+    s->AdviceStrs = portable_advice_source_pointers(&session->advice,
+        PORTABLE_ADVICE_TUTORIAL, NULL);
+    s->fd_50F6_034C = portable_advice_source_pointers(&session->advice,
+        PORTABLE_ADVICE_SHARED_MESSAGES, NULL);
+    COPY_IN(s->fd_3E1D_0000, session->world.random_seed_grid);
+    COPY_IN(s->fd_3D57_0164, session->world.build_red);
+    s->CurGndTileID = session->world.current_ground_tile_id;
     COPY_IN(s->MapA, session->world.tiles.surface);
     COPY_IN(s->MapB, session->world.tiles.nest_b);
     COPY_IN(s->MapR, session->world.tiles.nest_r);
@@ -192,6 +297,7 @@ SimRecoveredBridgeStatus sim_recovered_state_from_session(
     COPY_IN(s->LifeB, session->world.life_b);
     COPY_IN(s->LifeR, session->world.life_r);
     COPY_IN(s->PherMapA, session->world.pheromone_a);
+    COPY_IN(s->fd_3E1D_C89F, session->world.pheromone_aux);
     COPY_IN(s->PherMapBN, session->world.pheromone_b_nest);
     COPY_IN(s->PherMapBT, session->world.pheromone_b_trail);
     COPY_IN(s->PherMapRN, session->world.pheromone_r_nest);
@@ -236,9 +342,20 @@ SimRecoveredBridgeStatus sim_recovered_state_from_session(
     s->PillarSeg = session->world.pillar_segment;
     s->PillDir = session->world.pillar_direction;
     COPY_IN(s->PillarMap, session->world.pillar_map);
+    s->fd_50F6_035E = session->world.queens_black;
+    s->fd_50F6_036C = session->world.queens_red;
+    s->fd_3D57_02B4[0] = session->world.queen_black_x;
+    s->fd_3D57_02B4[1] = session->world.queen_black_y;
+    s->fd_3D57_02B8[0] = session->world.queen_red_x;
+    s->fd_3D57_02B8[1] = session->world.queen_red_y;
     s->TERRAINset = session->world.tiles.terrain_set;
     s->MapPlane = session->world.map_plane;
     s->fd_50F6_0EAC = session->world.scenario;
+    SOURCE_WORD(s->fd_3D57_07C8) = session->world.selected_map_plane;
+    s->YardMode = session->world.yard_mode;
+    s->fd_3D57_07CC[0] = session->world.simulation_speed_index;
+    memcpy(&s->fd_3D57_07CC[1], session->world.tick_count_delays,
+           sizeof session->world.tick_count_delays);
     s->MePlane = session->world.current_ant_plane;
     s->MeLocX = session->world.me_x;
     s->MeLocY = session->world.me_y;
@@ -247,9 +364,71 @@ SimRecoveredBridgeStatus sim_recovered_state_from_session(
     s->MeHealth = session->world.me_health;
     s->fd_50F6_0FBA = session->world.health_warning_threshold;
     s->fd_50F6_0FFE = session->world.colony_health_warning_threshold;
+    s->fd_50F6_0204 = session->world.source_state_0204;
+    s->fd_50F6_0478 = session->world.source_state_0478;
+    s->fd_50F6_0504 = session->world.source_state_0504;
+    s->fd_3D57_0C44 = session->world.source_state_0c44;
+    s->fd_3D57_0C18 = session->world.source_state_0c18;
+    s->fd_3D57_0C16 = session->world.health_force_full;
+    s->fd_3D57_0C14 = session->world.source_state_0c14;
+    s->fd_50F6_049A = session->world.source_state_049a;
+    s->fd_3D57_0C22 = session->world.source_state_0c22;
+    s->fd_50F6_0242 = session->world.source_counter_0242;
+    s->fd_50F6_0472 = session->world.source_counter_0472;
+    s->fd_50F6_09FA = session->world.source_counter_09fa;
+    s->fd_50F6_0A00 = session->world.source_counter_0a00;
+    s->fd_50F6_0A06 = session->world.player_mode;
+    s->fd_50F6_04E2 = session->world.player_death_plane;
+    s->fd_50F6_0354 = session->world.population_new_game;
+    s->fd_50F6_0400 = session->world.population_lifetime_graph_enabled;
+    s->fd_50F6_0376 = session->world.population_selection_pending;
+    s->fd_50F6_0366 = session->world.population_selection_colony;
+    s->fd_50F6_07CA[0] = session->world.lifetime_graph_preset[0];
+    s->fd_50F6_07CA[1] = session->world.lifetime_graph_preset[1];
+    s->fd_50F6_07BC[0] = session->world.requested_preset_x;
+    s->fd_50F6_07BC[1] = session->world.requested_preset_y;
+    COPY_IN(s->fd_50F6_0596, session->world.map_focus[0]);
+    COPY_IN(s->fd_50F6_06A6, session->world.map_focus[1]);
+    COPY_IN(s->fd_50F6_072E, session->world.map_focus[2]);
+    COPY_IN(s->fd_50F6_0AEC, session->world.population_black);
+    COPY_IN(s->fd_50F6_0AFA, session->world.population_red);
+    COPY_IN(s->fd_50F6_0EB6, session->world.ants_by_type);
+    s->BpopT = session->world.total_population_black;
+    s->RpopT = session->world.total_population_red;
+    s->FoodB = session->world.food_black;
+    s->FoodR = session->world.food_red;
+    s->HealthB = session->world.health_black;
+    s->HealthR = session->world.health_red;
+    s->Cycle = session->world.cycle;
+    s->fd_50F6_0C26 = session->world.world_ticks;
+    s->fd_50F6_105E = session->modal_mode_105e;
+    s->CurExpTool = session->world.current_experiment_tool;
+    s->DROPdir = session->world.drop_direction;
+    s->fd_50F6_1040 = session->world.food_added_terrain;
+    s->fd_50F6_0214 = session->nest_runtime.theme_last_tick;
+    s->fd_50F6_0228 = session->nest_runtime.theme_index;
+    s->fd_50F6_0224 = session->nest_runtime.dug_b_count;
+    s->fd_50F6_1068 = session->nest_runtime.dug_b_x_sum;
+    s->fd_50F6_1082 = session->nest_runtime.dug_b_y_sum;
+    s->fd_50F6_10B2 = session->nest_runtime.dug_b_x_average;
+    s->fd_50F6_10C0 = session->nest_runtime.dug_b_y_average;
+    s->TilesDugR = session->nest_runtime.dug_r_count;
+    s->fd_50F6_108E = session->nest_runtime.dug_r_x_sum;
+    s->fd_50F6_10A2 = session->nest_runtime.dug_r_y_sum;
+    s->fd_50F6_0200 = session->nest_runtime.dug_r_x_average;
+    s->fd_50F6_020E = session->nest_runtime.dug_r_y_average;
+    s->fd_50F6_104E = session->world.source_state_104e;
+    s->fd_3D57_07BE = session->world.source_state_07be;
+    s->fd_50F6_0FB6 = session->nest_runtime.invalidate_right;
+    s->fd_50F6_0FFA = session->nest_runtime.invalidate_bottom;
+    s->fd_50F6_0508[0] = session->world.map_view_x;
+    s->fd_50F6_0508[1] = session->world.map_view_y;
     s->ModeAuto = session->setup_controls.mode_auto;
     s->ModeMe = session->setup_controls.mode_current;
-    COPY_IN(s->IdealCaste, session->setup_controls.ideal_caste);
+    COPY_IN(s->modeLevels, &session->setup_controls.mode_level);
+    /* initControls owns four words; keep the remaining source DATA words. */
+    memcpy(s->IdealCaste, session->setup_controls.ideal_caste,
+           sizeof(session->setup_controls.ideal_caste));
     s->BAntsEaten = session->setup_state.black_ants_eaten;
     s->RAntsEaten = session->setup_state.red_ants_eaten;
     s->fd_50F6_0F30 = session->setup_state.counter_0f30;
@@ -349,6 +528,7 @@ SimRecoveredBridgeStatus sim_session_from_recovered_state(
     if (session == NULL || s == NULL)
         return SIM_RECOVERED_BRIDGE_INVALID_ARGUMENT;
     COPY_OUT(session->world.tiles.surface, s->MapA);
+    COPY_OUT(session->world.random_seed_grid, s->fd_3E1D_0000);
     COPY_OUT(session->world.tiles.nest_b, s->MapB);
     COPY_OUT(session->world.tiles.nest_r, s->MapR);
     COPY_OUT(session->world.exit_b, s->ExitMapB);
@@ -357,6 +537,7 @@ SimRecoveredBridgeStatus sim_session_from_recovered_state(
     COPY_OUT(session->world.life_b, s->LifeB);
     COPY_OUT(session->world.life_r, s->LifeR);
     COPY_OUT(session->world.pheromone_a, s->PherMapA);
+    COPY_OUT(session->world.pheromone_aux, s->fd_3E1D_C89F);
     COPY_OUT(session->world.pheromone_b_nest, s->PherMapBN);
     COPY_OUT(session->world.pheromone_b_trail, s->PherMapBT);
     COPY_OUT(session->world.pheromone_r_nest, s->PherMapRN);
@@ -401,9 +582,21 @@ SimRecoveredBridgeStatus sim_session_from_recovered_state(
     session->world.pillar_segment = s->PillarSeg;
     session->world.pillar_direction = s->PillDir;
     COPY_OUT(session->world.pillar_map, s->PillarMap);
+    session->world.queen_black_x = s->fd_3D57_02B4[0];
+    session->world.queen_black_y = s->fd_3D57_02B4[1];
+    session->world.queen_red_x = s->fd_3D57_02B8[0];
+    session->world.queen_red_y = s->fd_3D57_02B8[1];
+    session->world.queens_black = s->fd_50F6_035E;
+    session->world.queens_red = s->fd_50F6_036C;
     session->world.tiles.terrain_set = s->TERRAINset;
     session->world.map_plane = s->MapPlane;
     session->world.scenario = s->fd_50F6_0EAC;
+    session->world.selected_map_plane = SOURCE_WORD(s->fd_3D57_07C8);
+    session->world.current_ground_tile_id = s->CurGndTileID;
+    session->world.yard_mode = s->YardMode;
+    session->world.simulation_speed_index = s->fd_3D57_07CC[0];
+    memcpy(session->world.tick_count_delays, &s->fd_3D57_07CC[1],
+           sizeof session->world.tick_count_delays);
     session->world.current_ant_plane = s->MePlane;
     session->world.me_x = s->MeLocX;
     session->world.me_y = s->MeLocY;
@@ -412,8 +605,72 @@ SimRecoveredBridgeStatus sim_session_from_recovered_state(
     session->world.me_health = s->MeHealth;
     session->world.health_warning_threshold = s->fd_50F6_0FBA;
     session->world.colony_health_warning_threshold = s->fd_50F6_0FFE;
+    session->world.source_state_0204 = s->fd_50F6_0204;
+    session->world.source_state_0478 = s->fd_50F6_0478;
+    session->world.source_state_0504 = s->fd_50F6_0504;
+    session->world.source_state_0c44 = s->fd_3D57_0C44;
+    session->world.source_state_0c18 = s->fd_3D57_0C18;
+    session->world.health_force_full = s->fd_3D57_0C16;
+    session->world.source_state_0c14 = s->fd_3D57_0C14;
+    session->world.source_state_049a = s->fd_50F6_049A;
+    session->world.source_state_0c22 = s->fd_3D57_0C22;
+    session->world.source_counter_0242 = s->fd_50F6_0242;
+    session->world.source_counter_0472 = s->fd_50F6_0472;
+    session->world.source_counter_09fa = s->fd_50F6_09FA;
+    session->world.source_counter_0a00 = s->fd_50F6_0A00;
+    session->world.player_mode = s->fd_50F6_0A06;
+    session->world.player_death_plane = s->fd_50F6_04E2;
+    session->world.population_new_game = s->fd_50F6_0354;
+    session->world.population_lifetime_graph_enabled = s->fd_50F6_0400;
+    session->world.population_selection_pending = s->fd_50F6_0376;
+    session->world.population_selection_colony = s->fd_50F6_0366;
+    session->world.lifetime_graph_preset[0] = s->fd_50F6_07CA[0];
+    session->world.lifetime_graph_preset[1] = s->fd_50F6_07CA[1];
+    session->world.requested_preset_x = s->fd_50F6_07BC[0];
+    session->world.requested_preset_y = s->fd_50F6_07BC[1];
+    COPY_OUT(session->world.map_focus[0], s->fd_50F6_0596);
+    COPY_OUT(session->world.map_focus[1], s->fd_50F6_06A6);
+    COPY_OUT(session->world.map_focus[2], s->fd_50F6_072E);
+    COPY_OUT(session->world.population_black, s->fd_50F6_0AEC);
+    COPY_OUT(session->world.population_red, s->fd_50F6_0AFA);
+    COPY_OUT(session->world.ants_by_type, s->fd_50F6_0EB6);
+    COPY_OUT(session->world.build_red, s->fd_3D57_0164);
+    session->world.total_population_black = s->BpopT;
+    session->world.total_population_red = s->RpopT;
+    session->world.food_black = s->FoodB;
+    session->world.food_red = s->FoodR;
+    session->world.health_black = s->HealthB;
+    session->world.health_red = s->HealthR;
+    session->world.cycle = s->Cycle;
+    session->world.world_ticks = s->fd_50F6_0C26;
+    session->modal_mode_105e = s->fd_50F6_105E;
+    session->world.current_experiment_tool = s->CurExpTool;
+    session->world.drop_direction = s->DROPdir;
+    session->world.food_added_terrain = s->fd_50F6_1040;
+    session->nest_runtime.theme_last_tick = s->fd_50F6_0214;
+    session->nest_runtime.theme_index = s->fd_50F6_0228;
+    session->nest_runtime.dug_b_count = s->fd_50F6_0224;
+    session->nest_runtime.dug_b_x_sum = s->fd_50F6_1068;
+    session->nest_runtime.dug_b_y_sum = s->fd_50F6_1082;
+    session->nest_runtime.dug_b_x_average = s->fd_50F6_10B2;
+    session->nest_runtime.dug_b_y_average = s->fd_50F6_10C0;
+    session->nest_runtime.dug_r_count = s->TilesDugR;
+    session->nest_runtime.dug_r_x_sum = s->fd_50F6_108E;
+    session->nest_runtime.dug_r_y_sum = s->fd_50F6_10A2;
+    session->nest_runtime.dug_r_x_average = s->fd_50F6_0200;
+    session->nest_runtime.dug_r_y_average = s->fd_50F6_020E;
+    session->nest_runtime.alarm_drop_state = s->fd_50F6_104E;
+    session->nest_runtime.alarm_indicator = s->fd_3D57_07BE;
+    session->world.source_state_104e = s->fd_50F6_104E;
+    session->world.source_state_07be = s->fd_3D57_07BE;
+    session->nest_runtime.invalidate_right = s->fd_50F6_0FB6;
+    session->nest_runtime.invalidate_bottom = s->fd_50F6_0FFA;
+    session->world.map_view_x = s->fd_50F6_0508[0];
+    session->world.map_view_y = s->fd_50F6_0508[1];
     session->setup_controls.mode_auto = s->ModeAuto;
     session->setup_controls.mode_current = s->ModeMe;
+    memcpy(&session->setup_controls.mode_level, s->modeLevels,
+           sizeof session->setup_controls.mode_level);
     COPY_OUT(session->setup_controls.ideal_caste, s->IdealCaste);
     session->setup_state.black_ants_eaten = s->BAntsEaten;
     session->setup_state.red_ants_eaten = s->RAntsEaten;

@@ -1,0 +1,170 @@
+{
+  "schema": "portable-live-game-smoke-v1",
+  "claim": "a resource-backed NewGame scene completed the bounded source-scheduled tick count through the native SDL adapter",
+  "scope": {
+    "ticks": 1,
+    "user_input_events": 0,
+    "test_injected_events": "periodic SDL Tab key-down/up pairs (unbound by the native input model)",
+    "sdl_video_driver": "dummy",
+    "does_not_claim": [
+      "long-run simulation equivalence",
+      "mouse events outside the proven Edit object-4 left-press route",
+      "complete recovered UI operation coverage",
+      "audio playback"
+    ]
+  },
+  "command": [
+    "D:\\Prog\\simant_recon\\build\\portable\\tests\\live-smoke-injected.exe",
+    "--live-newgame",
+    "--ticks",
+    "1",
+    "--screenshot",
+    "D:\\Prog\\simant_recon\\portable\\tests\\live_game\\evidence\\live-click-asset-profile-1-20261002-frame-1.bmp"
+  ],
+  "harness_source": {
+    "path": "D:\\Prog\\simant_recon\\portable\\tests\\live_game\\run_smoke.py",
+    "sha256": "6a874540ececc0f758e1ba894529c8f7a79d689a50c5fdb7cc5dad599c2eb420"
+  },
+  "executable": {
+    "path": "D:\\Prog\\simant_recon\\build\\portable\\tests\\live-smoke-injected.exe",
+    "sha256": "8b714bcb80178317083dfda1a2c978bab9d5f62175823258a0e4b149f8effc65"
+  },
+  "production_executable": {
+    "path": "D:\\Prog\\simant_recon\\build\\portable\\simant-sdl3.exe",
+    "sha256": "6e4a58989754d080443a353623185adfe22c839bee454496b2b6965e4a2ab1d8"
+  },
+  "build_receipt": {
+    "path": "D:\\Prog\\simant_recon\\build\\portable\\simant-sdl3.build.json",
+    "sha256": "9232d1dbf716d168d00ab91b96f57dd2b84a90904914031cab0843314282627b",
+    "recovered_core_profile": "build/workers/recovered_source_next2/generated"
+  },
+  "test_event_driver": {
+    "kind": "periodic_unbound_tab_key_pairs",
+    "source_path": "D:\\Prog\\simant_recon\\portable\\tests\\live_game\\modal_tab_injector.c",
+    "source_sha256": "4bed8ca0e3510da434d997fcc73188e1e397e0dc86c40ff7c819aaebb6d74f53",
+    "sequence": null,
+    "pushed_event_count": 0
+  },
+  "final_state": {
+    "recovered_state": {
+      "path": "D:\\Prog\\simant_recon\\portable\\tests\\live_game\\evidence\\live-click-asset-profile-1-20261002-state-1.recovered.bin",
+      "sha256": "30456b1b1cf85528f9e1fbf146317d08c784fadc0aad722c31d6e1ad28cbbbdb"
+    },
+    "normalized_recovered_state": {
+      "path": "D:\\Prog\\simant_recon\\portable\\tests\\live_game\\evidence\\live-click-asset-profile-1-20261002-state-1.normalized.bin",
+      "sha256": "f63f8e18ecb35dc59cf9e030cf02a033299c3e47c0a0a30a5c38f388559b8a60",
+      "pointer_fields_zeroed": [
+        "AdviceStrs",
+        "fd_3D57_0852[40]",
+        "fd_50F6_02BA",
+        "fd_50F6_034C",
+        "fd_50F6_0B22",
+        "g_5AAC"
+      ]
+    },
+    "rng_state": {
+      "path": "D:\\Prog\\simant_recon\\portable\\tests\\live_game\\evidence\\live-click-asset-profile-1-20261002-state-1.rng.bin",
+      "sha256": "76619fff36a83b64497492d73eb00c315c810d811fb39ccbe429ba958bde65c5"
+    },
+    "statistics": {
+      "completed_ticks": 1,
+      "bios_tick_count": 0,
+      "mac_tick_count": 0,
+      "wall_elapsed_ns": 3805500,
+      "recovered_state_size": 70040,
+      "normalized_state_size": 70040,
+      "rng_state_size": 8,
+      "source_pause": 0,
+      "source_speed": 1,
+      "menu_resource_id": 0,
+      "camera_x": 25,
+      "camera_y": 2,
+      "scroll_action_calls": 0,
+      "menu_loaded": true,
+      "active_clip_window": -32768,
+      "pause_action_calls": 0,
+      "pause_start_ticks": 0,
+      "pause_end_ticks": 0,
+      "pause_duration_ns": 0,
+      "paused_update_calls": 0,
+      "speed_action_calls": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "menu_item_state_calls": 0,
+      "menu_item_text_calls": 0,
+      "edit_hotbox_clicks": 0,
+      "edit_events_delivered": 0,
+      "edit_double_clicks": 0,
+      "edit_queue_remaining": 0,
+      "edit_object4_rect": [
+        64,
+        41,
+        416,
+        330
+      ],
+      "edit_object4_flags": 3,
+      "edit_object4_type": 1,
+      "edit_object4_value": 0,
+      "front_window": 0,
+      "effects": [
+        0,
+        1,
+        0,
+        0,
+        1,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "queries": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "effect_calls_by_kind": {
+        "map_cell_invalidate": 1,
+        "edit_message": 0,
+        "picture_string_dialog": 0,
+        "default_wind_prompt": 1,
+        "nest_map_invalidate": 0,
+        "alarm_selection": 0,
+        "window_operation": 0,
+        "graphics_rect": 0,
+        "graphics_line": 0
+      },
+      "query_calls_by_kind": {
+        "window_open": 0,
+        "window_events": 0,
+        "window_in_front": 0,
+        "still_down": 0,
+        "dialog_abort_or_continue": 0,
+        "get_event": 0,
+        "get_object_rect": 0,
+        "button": 0
+      },
+      "picture_string_dialog_calls_observed": 0,
+      "modal_dismissal_verified_by_this_smoke": false
+    }
+  },
+  "final_frame": {
+    "path": "D:\\Prog\\simant_recon\\portable\\tests\\live_game\\evidence\\live-click-asset-profile-1-20261002-frame-1.bmp",
+    "sha256": "e148d3653d347cf773e48edfe456fdcc2f8b41fc6b084de5b68227f02cf6fe27"
+  },
+  "timeout_seconds": 20,
+  "timed_out": false,
+  "exit_code": 0,
+  "stdout": "Native NewGame scenario=1 player=(36,11) plane=2 camera=(25,2) cells=418 life=3\nCompleted native simulation ticks: 1\n",
+  "stderr": "",
+  "passed": true
+}

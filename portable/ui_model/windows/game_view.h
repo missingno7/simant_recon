@@ -53,6 +53,15 @@ PortableGameViewStatus portable_game_view_resolve(
     const PortableGameViewState *state,
     PortableGameView *view);
 
+/* Resolve a live source MapPlane/0508 camera without centering on the player.
+ * The same f_0250_0F2C bounds apply. This keeps presentation from moving the
+ * camera or changing simulation state on every host refresh. */
+PortableGameViewStatus portable_game_view_at(
+    const PortableWindowRegistry *registry,
+    const PortableGameViewState *state,
+    int16_t plane, int16_t camera_x, int16_t camera_y,
+    PortableGameView *view);
+
 /* Draws map cells only, clipped to the source viewport and caller's current
  * framebuffer clip. Window frame and UI objects remain the native window
  * renderer's responsibility; unsupported object paths must remain errors. */

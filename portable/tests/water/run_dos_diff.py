@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import ctypes as ct
+import argparse
 import hashlib
 import json
 from pathlib import Path
@@ -50,13 +51,13 @@ def u32(value: int) -> bytes:
     return struct.pack("<I", value & 0xffffffff)
 
 
-def build_native():
-    LIBRARY.parent.mkdir(parents=True, exist_ok=True)
+def build_native(library_path: Path):
+    library_path.parent.mkdir(parents=True, exist_ok=True)
     command = [str(GCC), "-std=c11", "-O2", "-Wall", "-Wextra", "-Werror", "-shared",
                "-I", str(ROOT / "portable"),
                str(ROOT / "portable/game/simulation/water.c"),
                str(ROOT / "portable/game/simulation/rng.c"),
-               str(ROOT / "portable/tests/water/native_probe.c"), "-o", str(LIBRARY)]
+               str(ROOT / "portable/tests/water/native_probe.c"), "-o", str(library_path)]
     subprocess.run(command, cwd=ROOT, check=True)
     library = ct.CDLL(str(LIBRARY))
     library.sim_water_probe.argtypes = [ct.POINTER(ct.c_uint8), ct.c_size_t,
@@ -247,7 +248,11 @@ def build_cases():
 
 
 def main():
-    library, command = build_native()
+    parser = argparse.ArgumentParser()
+    parser.add_argument("--report", type=Path, default=REPORT)
+    parser.add_argument("--library", type=Path, default=LIBRARY)
+    cli = parser.parse_args()
+    library, command = build_native(cli.library)
     target = functions.get("DoWater")
     image = exe.load()
     pair = SimpleNamespace(function=target,
@@ -352,10 +357,23 @@ def main():
                 break
         executed += 1
 
+    native_paths = [
+        "portable/game/simulation/water.c", "portable/game/simulation/water.h",
+        "portable/game/simulation/rng.c", "portable/game/simulation/rng.h",
+        "portable/game/state/world.h", "portable/game/simulation/movement.h",
+        "portable/tests/water/native_probe.c", "portable/tests/water/test_water.c",
+    ]
+    oracle_inputs = ["assets/SIMANT.EXE", "layout/manifest.json", "layout/functions.json",
+                     "layout/symbols.json", "layout/oracle.lock.json", "tools/behavior.py",
+                     "tools/exe.py", "tools/functions.py", "tools/match.py", "tools/modules.py",
+                     "tools/modctx.py", "tools/symbols.py"]
     report = {"schema": "portable-water-dos-diff-v1", "oracle_execution": "original DOS only",
               "runner_sha256": digest(Path(__file__)), "oracle_exe_sha256": digest(exe.EXE_PATH),
               "harness_sha256": {name: digest(ROOT / "tools" / f"{name}.py")
                                   for name in ("behavior", "exe", "functions", "match")},
+              "native_source_hashes": {path: digest(ROOT / path) for path in native_paths},
+              "oracle_input_hashes": {path: digest(ROOT / path) for path in oracle_inputs},
+              "compiler_sha256": digest(GCC), "native_library_path": str(cli.library),
               "native_source_sha256": {
                   "water.c": digest(ROOT / "portable/game/simulation/water.c"),
                   "water.h": digest(ROOT / "portable/game/simulation/water.h"),
@@ -367,7 +385,7 @@ def main():
                                     str(ROOT / "portable/game/simulation/water.c"),
                                     str(ROOT / "portable/game/simulation/rng.c"),
                                     str(ROOT / "portable/tests/water/test_water.c")],
-              "native_library_sha256": digest(LIBRARY), "native_command": command,
+              "native_library_sha256": digest(cli.library), "native_command": command,
               "case_count": len(cases), "executed_count": executed,
               "passed": executed - len(failures), "failures": failures,
               "coverage": coverage,
@@ -383,11 +401,11 @@ def main():
                            "DrownBList/DrownRList": "actual original DOS helpers during oracle runs"},
               "limitations": ["Timer input was fixed per run through TickCount; the original SeedRRand and CRT RNG executed.",
                               "The host audio and map invalidation sinks are modeled as ordered intents; simulation state and RNG are compared exactly."]}
-    REPORT.parent.mkdir(parents=True, exist_ok=True)
-    REPORT.write_text(json.dumps(report, indent=2) + "\n", encoding="utf-8")
+    cli.report.parent.mkdir(parents=True, exist_ok=True)
+    cli.report.write_text(json.dumps(report, indent=2) + "\n", encoding="utf-8")
     print(json.dumps({"case_count": len(cases), "executed_count": executed,
                       "passed": report["passed"], "mismatch_count": len(failures),
-                      "report_path": str(REPORT)}))
+                      "report_path": str(cli.report)}))
     return 1 if failures else 0
 
 

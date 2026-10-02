@@ -1,0 +1,1280 @@
+{
+  "schema": "portable-water-dos-diff-v1",
+  "oracle_execution": "original DOS only",
+  "runner_sha256": "467797c88fb7c5c014f0cd0201ca2d93aa3412a9c776e470286de56d9b490b2a",
+  "oracle_exe_sha256": "aa0596c6766322a8229ee3c36e57048c92adc82d50fbe2ef37afb8b85fcf4f11",
+  "harness_sha256": {
+    "behavior": "2c0799048057f59eae61a48be4d695278635594484adf0c70bf46c51b4e0c799",
+    "exe": "d560f69dcdf0d1c9e89278b50bebe225a9b86db2c259fa54ec9eace6ea05a8b5",
+    "functions": "0f67c8d9eb01e319620c9342e79c35f76006091d860894aad6dcf8d61ee2b39e",
+    "match": "44fdd8b939b2bbf135d8947d8f6ef6b1854dec133da4af86c55eb94f02869b56"
+  },
+  "native_source_hashes": {
+    "portable/game/simulation/water.c": "ff75bcbb0457b9179325400ac9c5feed26e9844522ecab31ce9efd83a731f4b8",
+    "portable/game/simulation/water.h": "4328618e7c152543d62f6946564cab931de0a17672772b0ee2ded2438ab1692b",
+    "portable/game/simulation/rng.c": "e8cd2b561f91fbb6cda7c07b9f7dbe5deca798869f31edc98178e37cdb19d589",
+    "portable/game/simulation/rng.h": "fc68a178bb200dbc211232c39b05bc237a57771854917da59ef2ce7f57046712",
+    "portable/game/state/world.h": "eeec830e2e223e93626508903ff09ee4d2e84507f819f6fb3d7134a016c2c6e5",
+    "portable/game/simulation/movement.h": "b20d81bc8b545f7929a5f9bc3367f8349782b7daaf876518a7c9df8abc0bc447",
+    "portable/tests/water/native_probe.c": "beb04c2604da956f2decf63daaad75119f6678c4a2693fe8d599dc1d06b8230f",
+    "portable/tests/water/test_water.c": "17cf3cbfe43b376b4be638b3b06e914d958eca35fa8306eac4775724fc943d84"
+  },
+  "oracle_input_hashes": {
+    "assets/SIMANT.EXE": "aa0596c6766322a8229ee3c36e57048c92adc82d50fbe2ef37afb8b85fcf4f11",
+    "layout/manifest.json": "025a0a9255d910cae4b122ab5a3f3fb40888bb456d7fe42158db7c9e622fcf50",
+    "layout/functions.json": "6089a06e18fbe8f0960392cfe30357f7c19c886f38f10f7f115c72d127a756e7",
+    "layout/symbols.json": "0f5dd5b0a211945a97782cfccdb9bb31b0dfd07fcde5df4d4f9486b487eb0125",
+    "layout/oracle.lock.json": "2c6d9e98c688621ad49a08c78d0e0968f4076b036be56ec0738217b533ccde13",
+    "tools/behavior.py": "2c0799048057f59eae61a48be4d695278635594484adf0c70bf46c51b4e0c799",
+    "tools/exe.py": "d560f69dcdf0d1c9e89278b50bebe225a9b86db2c259fa54ec9eace6ea05a8b5",
+    "tools/functions.py": "0f67c8d9eb01e319620c9342e79c35f76006091d860894aad6dcf8d61ee2b39e",
+    "tools/match.py": "44fdd8b939b2bbf135d8947d8f6ef6b1854dec133da4af86c55eb94f02869b56",
+    "tools/modules.py": "8a5c1e85db6970cce3c693c016b313b7ee1922fa6eaf146a00391bfea86edf1a",
+    "tools/modctx.py": "33f3a4e3d77371e3095bfeb00358c13bc7838235c27bfe8898dba7e313f1cc25",
+    "tools/symbols.py": "e3f25fb66717f743dea126e56b5b44538d452fb5a2d52695ef27cb5069bc1793"
+  },
+  "compiler_sha256": "c5005ba5380351c10743e9ca53ef9632164c54be3bd6b93324795114e4589a7d",
+  "native_library_path": "D:\\Prog\\simant_recon\\build\\portable\\current-20261002\\water-probe-rerun3.dll",
+  "native_source_sha256": {
+    "water.c": "ff75bcbb0457b9179325400ac9c5feed26e9844522ecab31ce9efd83a731f4b8",
+    "water.h": "4328618e7c152543d62f6946564cab931de0a17672772b0ee2ded2438ab1692b",
+    "rng.c": "e8cd2b561f91fbb6cda7c07b9f7dbe5deca798869f31edc98178e37cdb19d589",
+    "native_probe.c": "beb04c2604da956f2decf63daaad75119f6678c4a2693fe8d599dc1d06b8230f"
+  },
+  "unit_test_sha256": "17cf3cbfe43b376b4be638b3b06e914d958eca35fa8306eac4775724fc943d84",
+  "unit_test_command": [
+    "C:\\msys64\\mingw64\\bin\\gcc.exe",
+    "-std=c11",
+    "-O2",
+    "-Wall",
+    "-Wextra",
+    "-Werror",
+    "-I",
+    "D:\\Prog\\simant_recon\\portable",
+    "D:\\Prog\\simant_recon\\portable\\game\\simulation\\water.c",
+    "D:\\Prog\\simant_recon\\portable\\game\\simulation\\rng.c",
+    "D:\\Prog\\simant_recon\\portable\\tests\\water\\test_water.c"
+  ],
+  "native_library_sha256": "70f7b23d7819e34f087e18d4991407bc9aa29958792d206de8f45cf21a017950",
+  "native_command": [
+    "C:\\msys64\\mingw64\\bin\\gcc.exe",
+    "-std=c11",
+    "-O2",
+    "-Wall",
+    "-Wextra",
+    "-Werror",
+    "-shared",
+    "-I",
+    "D:\\Prog\\simant_recon\\portable",
+    "D:\\Prog\\simant_recon\\portable\\game\\simulation\\water.c",
+    "D:\\Prog\\simant_recon\\portable\\game\\simulation\\rng.c",
+    "D:\\Prog\\simant_recon\\portable\\tests\\water\\native_probe.c",
+    "-o",
+    "D:\\Prog\\simant_recon\\build\\portable\\current-20261002\\water-probe-rerun3.dll"
+  ],
+  "case_count": 50,
+  "executed_count": 50,
+  "passed": 50,
+  "failures": [],
+  "coverage": {
+    "InitWater_calls": 8,
+    "PlaceDrop_calls": 800,
+    "AddWater_calls": 1,
+    "DropWater_calls": 1,
+    "DoWater_calls": 113,
+    "DoWater_rain_on": 55,
+    "DoWater_rain_off": 58,
+    "nonzero_terrain_DoWater_calls": 64,
+    "sound_intents": 1,
+    "map_invalidation_intents": 768
+  },
+  "case_inputs": [
+    {
+      "label": "edge/0",
+      "seed_a": 731103118,
+      "seed_b": 3174697914,
+      "terrain": 0,
+      "height": 0,
+      "transition": 0,
+      "operations": [
+        [
+          0,
+          0,
+          0
+        ]
+      ],
+      "fixture_seed": 1004005854
+    },
+    {
+      "label": "edge/1",
+      "seed_a": 3701438672,
+      "seed_b": 604535243,
+      "terrain": 0,
+      "height": 4,
+      "transition": 1,
+      "operations": [
+        [
+          0,
+          0,
+          0
+        ]
+      ],
+      "fixture_seed": 3270220256
+    },
+    {
+      "label": "edge/2",
+      "seed_a": 2838647647,
+      "seed_b": 926101469,
+      "terrain": 0,
+      "height": 5,
+      "transition": 0,
+      "operations": [
+        [
+          1,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          1
+        ]
+      ],
+      "fixture_seed": 1249922183
+    },
+    {
+      "label": "edge/3",
+      "seed_a": 1266781091,
+      "seed_b": 662834030,
+      "terrain": 0,
+      "height": 63,
+      "transition": 1,
+      "operations": [
+        [
+          0,
+          0,
+          0
+        ]
+      ],
+      "fixture_seed": 420076371
+    },
+    {
+      "label": "edge/4",
+      "seed_a": 2184530358,
+      "seed_b": 690450159,
+      "terrain": 0,
+      "height": 64,
+      "transition": 0,
+      "operations": [
+        [
+          0,
+          0,
+          1
+        ],
+        [
+          0,
+          0,
+          0
+        ]
+      ],
+      "fixture_seed": 290864539
+    },
+    {
+      "label": "edge/5",
+      "seed_a": 2217092217,
+      "seed_b": 2989150701,
+      "terrain": 1,
+      "height": 5,
+      "transition": 1,
+      "operations": [
+        [
+          1,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          1
+        ],
+        [
+          0,
+          0,
+          0
+        ]
+      ],
+      "fixture_seed": 1397675256
+    },
+    {
+      "label": "edge/6",
+      "seed_a": 1504475415,
+      "seed_b": 546314749,
+      "terrain": 2,
+      "height": 0,
+      "transition": 0,
+      "operations": [
+        [
+          3,
+          0,
+          0
+        ],
+        [
+          4,
+          0,
+          0
+        ]
+      ],
+      "fixture_seed": 3557945135
+    },
+    {
+      "label": "edge/7",
+      "seed_a": 57026509,
+      "seed_b": 3692636803,
+      "terrain": 0,
+      "height": 24,
+      "transition": 0,
+      "operations": [
+        [
+          0,
+          0,
+          1
+        ],
+        [
+          0,
+          0,
+          1
+        ],
+        [
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0
+        ]
+      ],
+      "fixture_seed": 1954388059
+    },
+    {
+      "label": "edge/8",
+      "seed_a": 2240061130,
+      "seed_b": 1786925485,
+      "terrain": 0,
+      "height": 4,
+      "transition": 1,
+      "operations": [
+        [
+          0,
+          0,
+          1
+        ],
+        [
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          1
+        ]
+      ],
+      "fixture_seed": 616089522
+    },
+    {
+      "label": "directed/rain-sound-add-water",
+      "seed_a": 8198,
+      "seed_b": 19058,
+      "terrain": 0,
+      "height": 8,
+      "transition": 0,
+      "operations": [
+        [
+          0,
+          0,
+          1
+        ]
+      ],
+      "fixture_seed": 199805694
+    },
+    {
+      "label": "random/000",
+      "seed_a": 760254406,
+      "seed_b": 4165374180,
+      "terrain": 1,
+      "height": 5,
+      "transition": 0,
+      "operations": [
+        [
+          1,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          1
+        ]
+      ],
+      "fixture_seed": 1285137766
+    },
+    {
+      "label": "random/001",
+      "seed_a": 349397295,
+      "seed_b": 612662469,
+      "terrain": 1,
+      "height": 4,
+      "transition": 1,
+      "operations": [
+        [
+          0,
+          0,
+          1
+        ],
+        [
+          0,
+          0,
+          1
+        ]
+      ],
+      "fixture_seed": 2408479940
+    },
+    {
+      "label": "random/002",
+      "seed_a": 185391690,
+      "seed_b": 2932706731,
+      "terrain": 0,
+      "height": 31,
+      "transition": 0,
+      "operations": [
+        [
+          0,
+          0,
+          0
+        ]
+      ],
+      "fixture_seed": 2929139484
+    },
+    {
+      "label": "random/003",
+      "seed_a": 1278016219,
+      "seed_b": 99626634,
+      "terrain": 2,
+      "height": 64,
+      "transition": 0,
+      "operations": [
+        [
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0
+        ]
+      ],
+      "fixture_seed": 3182721773
+    },
+    {
+      "label": "random/004",
+      "seed_a": 2460581433,
+      "seed_b": 1046711135,
+      "terrain": 1,
+      "height": 0,
+      "transition": 1,
+      "operations": [
+        [
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          1
+        ],
+        [
+          0,
+          0,
+          1
+        ]
+      ],
+      "fixture_seed": 2060671131
+    },
+    {
+      "label": "random/005",
+      "seed_a": 3747517189,
+      "seed_b": 320283501,
+      "terrain": 1,
+      "height": 64,
+      "transition": 0,
+      "operations": [
+        [
+          0,
+          0,
+          1
+        ],
+        [
+          0,
+          0,
+          1
+        ]
+      ],
+      "fixture_seed": 493637749
+    },
+    {
+      "label": "random/006",
+      "seed_a": 811181089,
+      "seed_b": 1428845029,
+      "terrain": 0,
+      "height": 63,
+      "transition": 1,
+      "operations": [
+        [
+          0,
+          0,
+          1
+        ]
+      ],
+      "fixture_seed": 3264044418
+    },
+    {
+      "label": "random/007",
+      "seed_a": 1188759501,
+      "seed_b": 157162916,
+      "terrain": 1,
+      "height": 1,
+      "transition": 1,
+      "operations": [
+        [
+          1,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          1
+        ]
+      ],
+      "fixture_seed": 420396347
+    },
+    {
+      "label": "random/008",
+      "seed_a": 1465092657,
+      "seed_b": 1282407249,
+      "terrain": 0,
+      "height": 63,
+      "transition": 1,
+      "operations": [
+        [
+          0,
+          0,
+          1
+        ],
+        [
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0
+        ]
+      ],
+      "fixture_seed": 4010323674
+    },
+    {
+      "label": "random/009",
+      "seed_a": 3855189118,
+      "seed_b": 8433768,
+      "terrain": 0,
+      "height": 62,
+      "transition": 1,
+      "operations": [
+        [
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0
+        ]
+      ],
+      "fixture_seed": 4247702577
+    },
+    {
+      "label": "random/010",
+      "seed_a": 2466776387,
+      "seed_b": 2181213522,
+      "terrain": 1,
+      "height": 1,
+      "transition": 1,
+      "operations": [
+        [
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          1
+        ]
+      ],
+      "fixture_seed": 1112520844
+    },
+    {
+      "label": "random/011",
+      "seed_a": 460441639,
+      "seed_b": 2039346963,
+      "terrain": 1,
+      "height": 62,
+      "transition": 0,
+      "operations": [
+        [
+          0,
+          0,
+          1
+        ],
+        [
+          0,
+          0,
+          1
+        ],
+        [
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0
+        ]
+      ],
+      "fixture_seed": 1950803865
+    },
+    {
+      "label": "random/012",
+      "seed_a": 1166232488,
+      "seed_b": 3430883931,
+      "terrain": 0,
+      "height": 0,
+      "transition": 0,
+      "operations": [
+        [
+          0,
+          0,
+          1
+        ],
+        [
+          0,
+          0,
+          1
+        ],
+        [
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0
+        ]
+      ],
+      "fixture_seed": 2310847214
+    },
+    {
+      "label": "random/013",
+      "seed_a": 1579208296,
+      "seed_b": 3804437921,
+      "terrain": 0,
+      "height": 31,
+      "transition": 0,
+      "operations": [
+        [
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0
+        ]
+      ],
+      "fixture_seed": 3875833227
+    },
+    {
+      "label": "random/014",
+      "seed_a": 239585085,
+      "seed_b": 3667491126,
+      "terrain": 1,
+      "height": 64,
+      "transition": 1,
+      "operations": [
+        [
+          1,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          1
+        ],
+        [
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          1
+        ]
+      ],
+      "fixture_seed": 542161048
+    },
+    {
+      "label": "random/015",
+      "seed_a": 1335197525,
+      "seed_b": 52255185,
+      "terrain": 0,
+      "height": 4,
+      "transition": 0,
+      "operations": [
+        [
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          1
+        ],
+        [
+          0,
+          0,
+          0
+        ]
+      ],
+      "fixture_seed": 1446234794
+    },
+    {
+      "label": "random/016",
+      "seed_a": 388177320,
+      "seed_b": 3371428192,
+      "terrain": 2,
+      "height": 62,
+      "transition": 1,
+      "operations": [
+        [
+          0,
+          0,
+          1
+        ],
+        [
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0
+        ]
+      ],
+      "fixture_seed": 3913596378
+    },
+    {
+      "label": "random/017",
+      "seed_a": 1038893779,
+      "seed_b": 1040969799,
+      "terrain": 2,
+      "height": 0,
+      "transition": 0,
+      "operations": [
+        [
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          1
+        ]
+      ],
+      "fixture_seed": 3667596733
+    },
+    {
+      "label": "random/018",
+      "seed_a": 389026066,
+      "seed_b": 2964224831,
+      "terrain": 2,
+      "height": 62,
+      "transition": 1,
+      "operations": [
+        [
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          1
+        ]
+      ],
+      "fixture_seed": 1601791509
+    },
+    {
+      "label": "random/019",
+      "seed_a": 3403504098,
+      "seed_b": 116397890,
+      "terrain": 0,
+      "height": 0,
+      "transition": 0,
+      "operations": [
+        [
+          0,
+          0,
+          0
+        ]
+      ],
+      "fixture_seed": 594441933
+    },
+    {
+      "label": "random/020",
+      "seed_a": 786327275,
+      "seed_b": 38440724,
+      "terrain": 0,
+      "height": 5,
+      "transition": 1,
+      "operations": [
+        [
+          0,
+          0,
+          1
+        ]
+      ],
+      "fixture_seed": 851629811
+    },
+    {
+      "label": "random/021",
+      "seed_a": 3578447285,
+      "seed_b": 1760777483,
+      "terrain": 1,
+      "height": 4,
+      "transition": 0,
+      "operations": [
+        [
+          1,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0
+        ]
+      ],
+      "fixture_seed": 2003087302
+    },
+    {
+      "label": "random/022",
+      "seed_a": 2320463202,
+      "seed_b": 1481955023,
+      "terrain": 0,
+      "height": 5,
+      "transition": 0,
+      "operations": [
+        [
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          1
+        ]
+      ],
+      "fixture_seed": 2084122122
+    },
+    {
+      "label": "random/023",
+      "seed_a": 3533123605,
+      "seed_b": 3307797277,
+      "terrain": 1,
+      "height": 1,
+      "transition": 1,
+      "operations": [
+        [
+          0,
+          0,
+          1
+        ]
+      ],
+      "fixture_seed": 333681896
+    },
+    {
+      "label": "random/024",
+      "seed_a": 3765601171,
+      "seed_b": 2554994447,
+      "terrain": 0,
+      "height": 31,
+      "transition": 0,
+      "operations": [
+        [
+          0,
+          0,
+          1
+        ]
+      ],
+      "fixture_seed": 3697952139
+    },
+    {
+      "label": "random/025",
+      "seed_a": 1700044801,
+      "seed_b": 495395210,
+      "terrain": 0,
+      "height": 64,
+      "transition": 0,
+      "operations": [
+        [
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0
+        ]
+      ],
+      "fixture_seed": 1378272395
+    },
+    {
+      "label": "random/026",
+      "seed_a": 1113810437,
+      "seed_b": 4092289132,
+      "terrain": 0,
+      "height": 5,
+      "transition": 0,
+      "operations": [
+        [
+          0,
+          0,
+          1
+        ],
+        [
+          0,
+          0,
+          0
+        ]
+      ],
+      "fixture_seed": 1650183716
+    },
+    {
+      "label": "random/027",
+      "seed_a": 3566049268,
+      "seed_b": 1847729280,
+      "terrain": 0,
+      "height": 5,
+      "transition": 0,
+      "operations": [
+        [
+          0,
+          0,
+          1
+        ],
+        [
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          1
+        ]
+      ],
+      "fixture_seed": 3084956686
+    },
+    {
+      "label": "random/028",
+      "seed_a": 2288474129,
+      "seed_b": 770183696,
+      "terrain": 2,
+      "height": 31,
+      "transition": 0,
+      "operations": [
+        [
+          1,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          1
+        ],
+        [
+          0,
+          0,
+          1
+        ],
+        [
+          0,
+          0,
+          1
+        ]
+      ],
+      "fixture_seed": 1109774981
+    },
+    {
+      "label": "random/029",
+      "seed_a": 1542097593,
+      "seed_b": 1903072512,
+      "terrain": 2,
+      "height": 0,
+      "transition": 1,
+      "operations": [
+        [
+          0,
+          0,
+          1
+        ],
+        [
+          0,
+          0,
+          1
+        ],
+        [
+          0,
+          0,
+          1
+        ]
+      ],
+      "fixture_seed": 1609883509
+    },
+    {
+      "label": "random/030",
+      "seed_a": 2110230911,
+      "seed_b": 1530056520,
+      "terrain": 1,
+      "height": 4,
+      "transition": 1,
+      "operations": [
+        [
+          0,
+          0,
+          1
+        ],
+        [
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          1
+        ]
+      ],
+      "fixture_seed": 242529515
+    },
+    {
+      "label": "random/031",
+      "seed_a": 1244980454,
+      "seed_b": 1543748813,
+      "terrain": 0,
+      "height": 4,
+      "transition": 0,
+      "operations": [
+        [
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          1
+        ],
+        [
+          0,
+          0,
+          1
+        ],
+        [
+          0,
+          0,
+          0
+        ]
+      ],
+      "fixture_seed": 2436997658
+    },
+    {
+      "label": "random/032",
+      "seed_a": 1462593596,
+      "seed_b": 3495758140,
+      "terrain": 1,
+      "height": 5,
+      "transition": 1,
+      "operations": [
+        [
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          1
+        ],
+        [
+          0,
+          0,
+          1
+        ]
+      ],
+      "fixture_seed": 2291629766
+    },
+    {
+      "label": "random/033",
+      "seed_a": 1966280556,
+      "seed_b": 2169647738,
+      "terrain": 0,
+      "height": 1,
+      "transition": 1,
+      "operations": [
+        [
+          0,
+          0,
+          0
+        ]
+      ],
+      "fixture_seed": 3957196601
+    },
+    {
+      "label": "random/034",
+      "seed_a": 931458369,
+      "seed_b": 161404367,
+      "terrain": 2,
+      "height": 64,
+      "transition": 1,
+      "operations": [
+        [
+          0,
+          0,
+          1
+        ],
+        [
+          0,
+          0,
+          1
+        ],
+        [
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0
+        ]
+      ],
+      "fixture_seed": 3120349140
+    },
+    {
+      "label": "random/035",
+      "seed_a": 2160282076,
+      "seed_b": 2499122145,
+      "terrain": 2,
+      "height": 64,
+      "transition": 1,
+      "operations": [
+        [
+          1,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0
+        ]
+      ],
+      "fixture_seed": 553713476
+    },
+    {
+      "label": "random/036",
+      "seed_a": 3281792462,
+      "seed_b": 168481248,
+      "terrain": 2,
+      "height": 63,
+      "transition": 0,
+      "operations": [
+        [
+          0,
+          0,
+          0
+        ]
+      ],
+      "fixture_seed": 2262149579
+    },
+    {
+      "label": "random/037",
+      "seed_a": 1958872447,
+      "seed_b": 321167059,
+      "terrain": 2,
+      "height": 31,
+      "transition": 0,
+      "operations": [
+        [
+          0,
+          0,
+          1
+        ],
+        [
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          1
+        ],
+        [
+          0,
+          0,
+          1
+        ]
+      ],
+      "fixture_seed": 3641080901
+    },
+    {
+      "label": "random/038",
+      "seed_a": 2775388148,
+      "seed_b": 570609924,
+      "terrain": 1,
+      "height": 63,
+      "transition": 1,
+      "operations": [
+        [
+          0,
+          0,
+          1
+        ],
+        [
+          0,
+          0,
+          1
+        ]
+      ],
+      "fixture_seed": 4247176512
+    },
+    {
+      "label": "random/039",
+      "seed_a": 1611458016,
+      "seed_b": 3785073474,
+      "terrain": 2,
+      "height": 62,
+      "transition": 0,
+      "operations": [
+        [
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0
+        ]
+      ],
+      "fixture_seed": 548521315
+    }
+  ],
+  "state_boundary": [
+    "surface/nest maps",
+    "LifeB/LifeR",
+    "six pheromone arrays",
+    "B/R ant lists and modes",
+    "drop-coordinate arrays",
+    "drop scan transition",
+    "water height",
+    "LFSR seed",
+    "MSC C rand state",
+    "ordered sound and map-invalidation intents"
+  ],
+  "sequence_observation": "Compare every state snapshot and ordered effect trace after each operation, including each DoWater tick within a sequence.",
+  "services": {
+    "myBeginSound": "typed audio intent boundary",
+    "ZapEuMapAt": "typed map-invalidation boundary",
+    "DrownBList/DrownRList": "actual original DOS helpers during oracle runs"
+  },
+  "limitations": [
+    "Timer input was fixed per run through TickCount; the original SeedRRand and CRT RNG executed.",
+    "The host audio and map invalidation sinks are modeled as ordered intents; simulation state and RNG are compared exactly."
+  ]
+}

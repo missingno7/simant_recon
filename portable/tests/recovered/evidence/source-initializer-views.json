@@ -1,0 +1,142 @@
+{
+  "schema": "simant-source-initializer-view-probe-v1",
+  "status": "SOURCE_BACKING_AND_INITIALIZATION_CONTROLS_PASS",
+  "semantic_status": "NOT_A_BEHAVIORAL_EQUIVALENCE_CLAIM",
+  "active_generated_profile_regenerated": false,
+  "inputs": [
+    {
+      "path": "portable/tools/recover_source.py",
+      "sha256": "cc28fef33fa0ebfca28c4d30d5d99a12753a2be5371aa97648fbab8d030959ac"
+    },
+    {
+      "path": "portable/tests/recovered/test_source_initializer_views.py",
+      "sha256": "3994e3337cc959ab14caad5db9fb9ad37a4727d44173bbb65661007d39585e03"
+    },
+    {
+      "path": "src/data/d3D57.c",
+      "sha256": "983251ad55176050efcdea33c62f0a34a93686474b0de4b2bdde6c6c808716f5"
+    },
+    {
+      "path": "src/data/d3E1D.c",
+      "sha256": "ab35eb29d30ac1bcf6390bf8a979c5d018f43f4cae45f9f0d9a1f00200611d05"
+    },
+    {
+      "path": "layout/symbols.json",
+      "sha256": "0f5dd5b0a211945a97782cfccdb9bb31b0dfd07fcde5df4d4f9486b487eb0125"
+    }
+  ],
+  "controls": {
+    "existing_generator_tests": 8,
+    "existing_generator_tests_passed": 8,
+    "new_initializer_tests": 7,
+    "new_initializer_tests_passed": 7,
+    "generated_modules_compiled": 23,
+    "generated_modules_compile_passed": 23,
+    "source_initializer_mismatches": 0,
+    "negative_narrow_extent_controls": 1,
+    "negative_narrow_extent_rejected": true
+  },
+  "resolved_source_backings": [
+    {
+      "symbol": "Dx9",
+      "address": "3D57:0010",
+      "bytes": 10,
+      "view": "int8_t[10]"
+    },
+    {
+      "symbol": "Dy9",
+      "address": "3D57:001A",
+      "bytes": 10,
+      "view": "int8_t[10]"
+    },
+    {
+      "symbol": "TurnTab",
+      "address": "3D57:0024",
+      "bytes": 72,
+      "view": "int8_t[9][8]"
+    },
+    {
+      "symbol": "IdealCaste",
+      "address": "3D57:07DA",
+      "bytes": 14,
+      "view": "int16_t[7]; setup projection copies four words"
+    },
+    {
+      "symbol": "ModeTabB",
+      "address": "3D57:0B6E",
+      "bytes": 48,
+      "view": "int16_t[24]"
+    },
+    {
+      "symbol": "fd_3D57_02C2",
+      "address": "3D57:02C2",
+      "bytes": 76,
+      "view": "int16_t[38]; scalar module views use word zero"
+    },
+    {
+      "symbol": "fd_3D57_0798",
+      "address": "3D57:0798",
+      "bytes": 8,
+      "view": "int16_t[4]; scalar module views use word zero"
+    },
+    {
+      "symbol": "fd_3D57_07C8",
+      "address": "3D57:07C8",
+      "bytes": 4,
+      "view": "int16_t[2]; scalar module views use word zero"
+    },
+    {
+      "symbol": "PherMapRT",
+      "address": "4DA7:0000",
+      "bytes": 2048,
+      "view": "uint8_t[64][32]"
+    },
+    {
+      "symbol": "fd_3D57_0164",
+      "address": "3D57:0164",
+      "bytes": 192,
+      "view": "fd_0164[12][16], fd_0184 rows 2..11"
+    },
+    {
+      "symbol": "fd_3D57_0B14",
+      "address": "3D57:0B14",
+      "bytes": 16,
+      "view": "four aligned struct Pt values"
+    },
+    {
+      "symbol": "fd_3D57_0B24",
+      "address": "3D57:0B24",
+      "bytes": 18,
+      "view": "one aligned union point view plus 18-byte representation"
+    },
+    {
+      "symbol": "fd_3D57_0C1A",
+      "address": "3D57:0C1A",
+      "bytes": 4,
+      "view": "int16_t[2]; source scalar accesses word zero"
+    },
+    {
+      "symbol": "AlistM/S/T",
+      "address": "3E1D:A952/B124/AD3B",
+      "bytes": 1001,
+      "view": "one array extent per named DATA symbol, including terminal byte"
+    },
+    {
+      "symbol": "BlistM/S/T",
+      "address": "3E1D:B8F7/BCE1/BAEC",
+      "bytes": 501,
+      "view": "one array extent per named DATA symbol, including terminal byte"
+    },
+    {
+      "symbol": "RlistM/S/T",
+      "address": "3E1D:C2C0/C6AA/C4B5",
+      "bytes": 501,
+      "view": "one array extent per named DATA symbol, including terminal byte"
+    }
+  ],
+  "limits": [
+    "This validates readable source DATA extents and native initialization copies only.",
+    "It does not establish simulation equivalence, host integer-promotion equivalence, or production readiness.",
+    "The active generated profile was deliberately left unchanged; the next profile must update its session bridge for full table backings."
+  ]
+}\n

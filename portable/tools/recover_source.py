@@ -25,7 +25,6 @@ MODULES = {
     "root_m1496": "src/root/m1496.c",
     "root_m1383": "src/root/m1383.c",
     "root_m10F7": "src/root/m10F7.c",
-    "root_m00F8": "src/root/m00F8.c",
     "root_m0AD9": "src/root/m0AD9.c",
     "root_m0CDB": "src/root/m0CDB.c",
     "S06_m35F5": "src/S06/m35F5.c",
@@ -34,7 +33,24 @@ MODULES = {
     "root_m0BE8": "src/root/m0BE8.c",
     "root_m14EE": "src/root/m14EE.c",
     "root_m0DEF": "src/root/m0DEF.c",
+    "root_m015B": "src/root/m015B.c",
+    "S18_m384C": "src/S18/m384C.c",
+    "root_m0E2E": "src/root/m0E2E.c",
+    "S11_m35F5": "src/S11/m35F5.c",
     "S22_m39C7": "src/S22/m39C7.c",
+    "S22_m3BBD": "src/S22/m3BBD.c",
+}
+SELECTED_SOURCE_FUNCTIONS = {
+    "root_m00F8_MapToYard": {
+        "source": "src/root/m00F8.c", "function": "MapToYard",
+        "prototypes": [
+            "extern int16_t win_IsWinOpen(int16_t win);",
+            "extern void SetMapPlane(int16_t plane);",
+            "extern void win_Swap(int16_t from, int16_t to);",
+            "extern void win_Open(int16_t win);",
+        ],
+        "host_edges": ["win_IsWinOpen", "SetMapPlane", "win_Swap", "win_Open"],
+    }
 }
 EXCLUDED_MODULES = {
     "root_m0093": {
@@ -63,9 +79,82 @@ SOURCE_ADJACENT_WORD_VIEWS = {
         "source_symbols": ["fd_3D57_07A8", "fd_3D57_07AA", "fd_3D57_07AE",
                            "fd_3D57_07B0", "fd_3D57_07B2"],
         "address": [0x3D57, 0x07A8],
+    },
+    "fd_3D57_07CC": {
+        "words": 7,
+        "bytes": 14,
+        "members": {"fd_3D57_07CC": 0, "fd_3D57_07CE": 2},
+        "array_members": ["fd_3D57_07CE"],
+        "source_symbols": ["fd_3D57_07CC"],
+        "address": [0x3D57, 0x07CC],
+    }
+}
+SOURCE_ADJACENT_BYTE_VIEWS = {
+    "fd_3D57_0164": {
+        "bytes": 192,
+        "members": {"fd_3D57_0164": 0, "fd_3D57_0184": 32},
+        "source_symbols": ["fd_3D57_0164", "fd_3D57_0184"],
+        "address": [0x3D57, 0x0164],
+        "view": "uint8_t[12][16] with fd_3D57_0184 as rows 2..11",
     }
 }
 DERIVED_SOURCE_POINTER_TABLES = {"fd_3D57_082A"}
+SOURCE_SCALAR_WORD_VIEWS = {"S08_m35F5", "S11_m35F5"}
+
+# Complete readable DATA extents can be wider than a particular module's
+# declaration. Keep the whole backing extent in the native projection and
+# apply logical scalar/table views only at those source call sites.
+SOURCE_BACKING_OVERRIDES = {
+    "Dx9": {"type": "int8_t", "dims": ["10"], "reason": "10-byte readable DATA symbol"},
+    "Dy9": {"type": "int8_t", "dims": ["10"], "reason": "10-byte readable DATA symbol"},
+    "TurnTab": {"type": "int8_t", "dims": ["9", "8"], "reason": "72-byte readable DATA table, direction by random slot"},
+    "IdealCaste": {"type": "int16_t", "dims": ["7"], "reason": "14-byte source backing; setup controls project only the first four words"},
+    "ModeTabB": {"type": "int16_t", "dims": ["24"], "reason": "48-byte readable DATA table"},
+    "fd_3D57_02C2": {"type": "int16_t", "dims": ["38"], "reason": "76-byte readable DATA table with scalar source views of word zero"},
+    "fd_3D57_0798": {"type": "int16_t", "dims": ["4"], "reason": "8-byte readable DATA table with scalar source views of word zero"},
+    "fd_3D57_07C8": {"type": "int16_t", "dims": ["2"], "reason": "4-byte readable DATA table with scalar source views of word zero"},
+    "fd_3D57_07C0": {"type": "int16_t", "dims": ["4"], "reason": "8-byte DATA table read as four int16_t per-plane edit modes"},
+    "fd_3D57_0B14": {"type": "struct Pt", "dims": ["4"], "reason": "16-byte DATA object is four four-byte points"},
+    "fd_3D57_0B24": {"type": "RecoveredPointBytes18", "dims": ["1"], "reason": "18-byte backing with aligned union point view; all bytes retained"},
+    "fd_3D57_0C1A": {"type": "int16_t", "dims": ["2"], "reason": "4-byte readable DATA table with scalar source views of word zero"},
+    "AlistM": {"type": "uint8_t", "dims": ["1001"], "reason": "complete 1001-byte DATA extent including terminal slot"},
+    "AlistS": {"type": "uint8_t", "dims": ["1001"], "reason": "complete 1001-byte DATA extent including terminal slot"},
+    "AlistT": {"type": "uint8_t", "dims": ["1001"], "reason": "complete 1001-byte DATA extent including terminal slot"},
+    "BlistM": {"type": "uint8_t", "dims": ["501"], "reason": "complete 501-byte DATA extent including terminal slot"},
+    "BlistS": {"type": "uint8_t", "dims": ["501"], "reason": "complete 501-byte DATA extent including terminal slot"},
+    "BlistT": {"type": "uint8_t", "dims": ["501"], "reason": "complete 501-byte DATA extent including terminal slot"},
+    "RlistM": {"type": "uint8_t", "dims": ["501"], "reason": "complete 501-byte DATA extent including terminal slot"},
+    "RlistS": {"type": "uint8_t", "dims": ["501"], "reason": "complete 501-byte DATA extent including terminal slot"},
+    "RlistT": {"type": "uint8_t", "dims": ["501"], "reason": "complete 501-byte DATA extent including terminal slot"},
+    "PherMapRT": {"type": "uint8_t", "dims": ["64", "32"], "reason": "0x800-byte DATA symbol is the 64x32 map view"},
+}
+
+SOURCE_EXTRA_STATE_DECLARATIONS = {
+    "fd_50F6_10DE": {
+        "type": "int16_t", "dims": [],
+        "source_declaration": "extern int far fd_50F6_10DE in src/S04/m35F5.c and src/S05/m35F5.c",
+        "layout_grounding": "layout/symbols.json entry fd_50F6_10DE at 50F6:10DE",
+        "initialization": "BSS zero-initialized native state mirrors DOS uninitialized DATA/BSS zero state",
+    },
+    "fd_50F6_10E0": {
+        "type": "int16_t", "dims": [],
+        "source_declaration": "extern int far fd_50F6_10E0 in src/S04/m35F5.c and src/S05/m35F5.c",
+        "layout_grounding": "layout/symbols.json entry fd_50F6_10E0 at 50F6:10E0",
+        "initialization": "BSS zero-initialized native state mirrors DOS uninitialized DATA/BSS zero state",
+    },
+}
+
+REVIEWED_BEHAVIOR_SCAFFOLD_WHITELIST = {
+    "root_m0E2E": {
+        "function": "LessonDone",
+        "source_path": "evidence/behavior/functions/LessonDone/contracts/host-service-v1/supplemental/tested-source-snapshot",
+        "source_sha256": "c611660dde4da7117c3232aa06e597871394cc4112466d46559705b235424359",
+        "review_path": "evidence/behavior/functions/LessonDone/contracts/host-service-v1/run.json",
+        "review_sha256": "1930667ce288db35aec4227619534a06b3a6e4e990e4a460f6f247818db96b32",
+        "oracle_sha256": "aa0596c6766322a8229ee3c36e57048c92adc82d50fbe2ef37afb8b85fcf4f11",
+        "manifest_sha256": "025a0a9255d910cae4b122ab5a3f3fb40888bb456d7fe42158db7c9e622fcf50",
+    }
+}
 
 
 def sha(data: bytes) -> str:
@@ -123,7 +212,7 @@ def adapt_ax_tail_return(source: str) -> tuple[str, bool]:
 
 
 def adapt_keyboard_bda(module: str, source: str) -> tuple[str, list[dict[str, object]]]:
-    read = re.compile(r"\*\s*\(\s*unsigned\s+char\s+far\s+\*\s*\)\s*0x417L")
+    read = re.compile(r"\*\s*\(\s*(?:unsigned\s+)?char\s+far\s+\*\s*\)\s*0x0*417L", re.I)
     matches = list(read.finditer(source))
     rows: list[dict[str, object]] = []
     if matches:
@@ -136,6 +225,79 @@ def adapt_keyboard_bda(module: str, source: str) -> tuple[str, list[dict[str, ob
     if unsupported:
         raise ValueError(f"unsupported absolute pointer access in {module}: {unsupported.group(0)}")
     return source, rows
+
+
+def extract_named_function(source: str, name: str) -> tuple[str, int, int]:
+    signature = re.search(r"(?m)^\s*[^;{}\n]*\b" + re.escape(name) + r"\s*\([^;{}]*\)\s*\{", source)
+    if not signature:
+        raise ValueError(f"function definition not found: {name}")
+    opening = source.find("{", signature.start(), signature.end())
+    depth = 0
+    end = opening
+    while end < len(source):
+        if source[end] == "{":
+            depth += 1
+        elif source[end] == "}":
+            depth -= 1
+            if depth == 0:
+                end += 1
+                break
+        end += 1
+    if depth != 0:
+        raise ValueError(f"unterminated function definition: {name}")
+    return source[signature.start():end], source.count("\n", 0, signature.start()) + 1, source.count("\n", 0, end) + 1
+
+
+def restore_reviewed_behavior_scaffold(module: str, source: str) -> tuple[str, list[dict[str, str]]]:
+    """Replace only the explicitly pinned LessonDone scaffold with its tested source snapshot."""
+    spec = REVIEWED_BEHAVIOR_SCAFFOLD_WHITELIST.get(module)
+    if spec is None:
+        return source, []
+    function = str(spec["function"])
+    begin_pattern = re.compile(r"/\*\s*SCAFFOLD BEGIN:\s*" + re.escape(function) + r"\b[^*]*\*/")
+    begins = list(begin_pattern.finditer(source))
+    if len(begins) != 1:
+        raise ValueError(f"reviewed scaffold whitelist requires exactly one {function} scaffold in {module}")
+    begin = begins[0]
+    end_match = re.search(r"/\*\s*SCAFFOLD END\s*\*/", source[begin.end():])
+    if not end_match:
+        raise ValueError(f"reviewed scaffold whitelist found unclosed {function} scaffold in {module}")
+    end_start = begin.end() + end_match.start()
+    end_after = begin.end() + end_match.end()
+    scaffold = source[begin.end():end_start]
+    if not re.search(r"\b" + re.escape(function) + r"\s*\([^;{}]*\)\s*\{", scaffold):
+        raise ValueError(f"reviewed scaffold whitelist did not find {function} body in {module}")
+
+    source_path = ROOT / str(spec["source_path"])
+    review_path = ROOT / str(spec["review_path"])
+    source_bytes = source_path.read_bytes()
+    review_bytes = review_path.read_bytes()
+    source_hash = sha(source_bytes)
+    review_hash = sha(review_bytes)
+    if source_hash != spec["source_sha256"] or review_hash != spec["review_sha256"]:
+        raise ValueError(f"reviewed scaffold source/evidence hash changed for {function}")
+    review = json.loads(review_bytes.decode("utf-8"))
+    identity = review.get("identity", {})
+    execution = review.get("execution", {})
+    if (review.get("completion") != "COMPLETE" or identity.get("function") != function or
+            identity.get("source_sha256") != source_hash or identity.get("compiled_source_sha256") != source_hash or
+            identity.get("oracle_sha256") != spec["oracle_sha256"] or
+            identity.get("manifest_sha256") != spec["manifest_sha256"] or
+            execution.get("actual_original_execution") is not True or
+            execution.get("actual_candidate_execution") is not True or
+            review.get("errors") != 0 or review.get("mismatches") != 0):
+        raise ValueError(f"reviewed scaffold evidence no longer proves the pinned {function} source")
+    body, _, _ = extract_named_function(source_bytes.decode("utf-8"), function)
+    body, imported_aliases = apply_function_aliases(body)
+    replaced = source[:begin.start()] + body + source[end_after:]
+    row = {"module": module, "function": function,
+           "source_path": str(spec["source_path"]), "source_sha256": source_hash,
+           "review_path": str(spec["review_path"]), "review_sha256": review_hash,
+           "oracle_sha256": str(spec["oracle_sha256"]),
+           "manifest_sha256": str(spec["manifest_sha256"]),
+           "function_aliases_applied": imported_aliases,
+           "replacement_scope": "one named scaffold body only"}
+    return replaced, [row]
 
 
 def transform(source: str, shared_struct_names: set[str] | None = None,
@@ -168,8 +330,11 @@ def transform(source: str, shared_struct_names: set[str] | None = None,
         code = re.sub(r"\bextern\s+([^;]+);", strip_object_declaration, code)
         parts[i] = code
     translated = "".join(parts)
+    xy_point = bool(re.search(r"typedef\s+struct\s*\{\s*int16_t\s+x\s*;\s*int16_t\s+y\s*;\s*\}\s*Point\s*;", translated, flags=re.S))
     translated = re.sub(r"typedef\s+struct\s*\{\s*int16_t\s+v\s*;\s*int16_t\s+h\s*;\s*\}\s*Point\s*;", "", translated, flags=re.S)
-    translated = re.sub(r"\bPoint\b", "RecoveredPoint", translated)
+    if xy_point:
+        translated = re.sub(r"typedef\s+struct\s*\{\s*int16_t\s+x\s*;\s*int16_t\s+y\s*;\s*\}\s*Point\s*;", "", translated, flags=re.S)
+    translated = re.sub(r"\bPoint\b", "RecoveredXY" if xy_point else "RecoveredPoint", translated)
     return ('#include "recovered_state.h"\n#include <stdint.h>\n#include <stddef.h>\n\n' + translated,
             excluded, ax_tail_adapted)
 
@@ -333,8 +498,11 @@ def source_array_dimensions(name: str) -> list[str] | None:
         found = pattern.search(path.read_text(encoding="utf-8", errors="replace"))
         if found:
             dims = re.findall(r"\[([^\]]*)\]", found.group(1))
-            if dims and all(d.strip().isdigit() for d in dims):
-                return [d.strip() for d in dims]
+            try:
+                if dims:
+                    return [str(int(d.strip(), 0)) for d in dims]
+            except ValueError:
+                pass
     return None
 
 
@@ -362,19 +530,26 @@ def source_array_definition(name: str) -> dict[str, object] | None:
         if depth:
             return None
         dims = re.findall(r"\[([^\]]*)\]", found.group(2))
-        if not dims or not all(d.strip().isdigit() for d in dims):
+        try:
+            parsed_dims = [str(int(d.strip(), 0)) for d in dims]
+        except ValueError:
+            if not dims:
+                return None
+            continue
+        if not dims:
             return None
         return {"name": name, "source": path.relative_to(ROOT).as_posix(),
                 "source_sha256": sha(source_bytes),
                 "source_type": normalize_state_type(found.group(1)),
-                "dims": [d.strip() for d in dims],
+                "dims": parsed_dims,
                 "initializer": source[start:end + 1]}
     return None
 
 
 def scalar_type_size(base: str) -> int:
     return {"uint8_t": 1, "int8_t": 1, "uint16_t": 2, "int16_t": 2,
-            "uint32_t": 4, "int32_t": 4}.get(base, 0)
+            "uint32_t": 4, "int32_t": 4, "struct Pt": 4,
+            "RecoveredPointBytes18": 18}.get(base, 0)
 
 
 def source_data_bytes(name: str) -> int | None:
@@ -514,7 +689,7 @@ def build_state_catalog(sources: dict[str, str]) -> tuple[list[dict[str, object]
                 by_name[canonical] = {"name": canonical, "type": base, "dims": dims, "observed": [dims]}
                 continue
             prior["observed"].append(dims)
-            if canonical == "fd_50F6_0508" and base in {"int16_t", "struct Pt"}:
+            if canonical == "fd_50F6_0508" and base in {"int16_t", "struct Pt", "struct Point", "RecoveredPoint", "RecoveredXY"}:
                 # Confirmed four-byte overlay: historical modules declare both
                 # two int words and Pt{x,y}; generated S22 member reads are
                 # rewritten to [0]/[1] over the shared word pair.
@@ -578,6 +753,26 @@ def build_state_catalog(sources: dict[str, str]) -> tuple[list[dict[str, object]
         for member in group["members"]:
             if member != base_name:
                 by_name.pop(member, None)
+    for base_name, group in SOURCE_ADJACENT_BYTE_VIEWS.items():
+        for member in group["members"]:
+            if member != base_name:
+                by_name.pop(member, None)
+    for name, override in SOURCE_BACKING_OVERRIDES.items():
+        entry = by_name.get(name)
+        if entry is None:
+            continue
+        entry["type"] = str(override["type"])
+        entry["dims"] = list(override["dims"])
+        entry["extent_basis"] = "readable_source_data_full_backing_with_logical_module_views"
+        entry["source_backing_reason"] = str(override["reason"])
+        entry["extent_status"] = "RESOLVED"
+    for name, evidence in SOURCE_EXTRA_STATE_DECLARATIONS.items():
+        if name not in by_name:
+            by_name[name] = {
+                "name": name, "type": evidence["type"], "dims": list(evidence["dims"]),
+                "observed": [], "extent_basis": "source_declaration_plus_layout_symbol",
+                "extent_status": "RESOLVED", "source_state_evidence": evidence,
+            }
     return sorted(by_name.values(), key=lambda x: str(x["name"])), conflicts
 
 
@@ -631,10 +826,13 @@ def reconcile_source_backed_views(catalog: list[dict[str, object]], conflicts: l
 
 def reconcile_same_width_signed_views(catalog: list[dict[str, object]],
                                       conflicts: list[dict[str, object]]) -> tuple[list[dict[str, object]], list[dict[str, object]], list[dict[str, object]]]:
-    """Reconcile two known 32-bit scalar signedness declarations by usage evidence."""
+    """Reconcile source-grounded same-storage scalar/pointer views."""
     decisions = {
         "fd_50F6_0472": {"type": "int32_t", "reason": "root m10F7 and S08 m35F5 only assign zero; preserve signed 32-bit storage view"},
         "fd_50F6_0214": {"type": "int32_t", "reason": "root m0BE8 compares/stores signed TickCount; S08 m35F5 only assigns zero"},
+        "fd_50F6_0204": {"type": "int32_t", "reason": "same four-byte deadline storage; source assigns nonnegative TickCount-derived values and compares against TickCount in root m0E2E; S08 view only clears/stores zero"},
+        "modeLevels": {"type": "uint16_t", "reason": "same three-word source table at 50F6:049E; source values are control levels [0..255], unsigned S25 view and signed root m0E2E view only sum/compare nonnegative values"},
+        "fd_50F6_034C": {"type": "void * *", "reason": "same far-pointer table at one source symbol; char* and void* element views are compatible object-pointer representations on the native ABI; no separate copied table"},
     }
     by_name = {str(item["name"]): item for item in catalog}
     removed = []
@@ -642,13 +840,39 @@ def reconcile_same_width_signed_views(catalog: list[dict[str, object]],
     for conflict in conflicts:
         name = str(conflict.get("symbol"))
         if (name in decisions and conflict.get("kind") == "type" and
-                set(conflict.get("values", [])) == {"int32_t", "uint32_t"}):
+                (set(conflict.get("values", [])) == {"int32_t", "uint32_t"} or
+                 (name == "modeLevels" and set(conflict.get("values", [])) == {"int16_t", "uint16_t"}) or
+                 (name == "fd_50F6_034C" and set(conflict.get("values", [])) == {"void * *", "int8_t * *"}))):
             entry = by_name[name]
             entry["type"] = str(decisions[name]["type"])
             entry["signedness_view_mechanism"] = decisions[name]["reason"]
             removed.append({"symbol": name, "declared_types": conflict["values"],
                             "canonical_type": decisions[name]["type"],
                             "reason": decisions[name]["reason"]})
+        elif name in {"fd_50F6_10D2", "fd_50F6_110C"} and conflict.get("kind") in {"type", "rank"}:
+            entry = by_name[name]
+            entry["type"] = "struct Rect"
+            entry["dims"] = []
+            entry["typed_view_mechanism"] = "int16_t[2] left/top prefix overlays the first four bytes of same-address source struct Rect"
+            removed.append({"symbol": name, "declared_types": conflict.get("values"),
+                            "canonical_type": entry["type"],
+                            "reason": entry["typed_view_mechanism"]})
+        elif name in {"fd_3D57_02B4", "fd_3D57_02B8", "fd_50F6_07BC",
+                      "fd_50F6_07CA", "fd_50F6_0596", "fd_50F6_06A6",
+                      "fd_50F6_072E", "fd_55B3_2A42"} and conflict.get("kind") in {"type", "rank"}:
+            entry = by_name[name]
+            entry["type"] = "int16_t"
+            entry["dims"] = ["2"]
+            entry["typed_view_mechanism"] = "same-address Point{x,y} and int16_t[2] views; generated Point member uses lower to two source words"
+            removed.append({"symbol": name, "declared_types": conflict.get("values"),
+                            "canonical_type": "int16_t[2]",
+                            "reason": entry["typed_view_mechanism"]})
+        elif name == "fd_50F6_0508" and conflict.get("kind") in {"type", "rank"}:
+            entry = by_name[name]
+            entry["typed_view_mechanism"] = "same four-byte Point{x,y} / int16_t[2] source storage; member references lower to words"
+            removed.append({"symbol": name, "declared_types": conflict.get("values"),
+                            "canonical_type": entry["type"],
+                            "reason": entry["typed_view_mechanism"]})
         else:
             remaining.append(conflict)
     return catalog, remaining, removed
@@ -680,14 +904,21 @@ def source_data_initializers(catalog: list[dict[str, object]]) -> tuple[list[dic
     found: dict[str, dict[str, object]] = {}
     mismatches: list[dict[str, object]] = []
     type_sizes = {"uint8_t": 1, "int8_t": 1, "uint16_t": 2, "int16_t": 2,
-                  "uint32_t": 4, "int32_t": 4}
+                  "uint32_t": 4, "int32_t": 4, "struct Pt": 4,
+                  "RecoveredPointBytes18": 18}
     adjacent_members = {name for group in SOURCE_ADJACENT_WORD_VIEWS.values()
                         for name in group["source_symbols"]}
+    adjacent_members.update(name for group in SOURCE_ADJACENT_BYTE_VIEWS.values()
+                            for name in group["source_symbols"])
     for path in sorted((ROOT / "src/data").glob("*.c")):
         source = path.read_text(encoding="utf-8", errors="replace")
         for item in catalog:
             name = str(item["name"])
-            if item["extent_status"] != "RESOLVED" or not item["dims"]:
+            # A module's logical view can be scalar even when the original
+            # readable DATA symbol is declared as a byte array (for example,
+            # a two-byte little-endian signed word).  Compare complete byte
+            # extents below; do not skip scalar candidate views here.
+            if item["extent_status"] != "RESOLVED":
                 continue
             if name in adjacent_members:
                 continue
@@ -710,8 +941,12 @@ def source_data_initializers(catalog: list[dict[str, object]]) -> tuple[list[dic
                 continue
             declared_dims = re.findall(r"\[([^\]]*)\]", match.group(2))
             source_type = normalize_state_type(match.group(1))
-            source_dims = [int(d.strip()) for d in declared_dims if d.strip().isdigit()]
-            target_dims = [int(d) for d in item["dims"] if str(d).isdigit()]
+            try:
+                source_dims = [int(d.strip(), 0) for d in declared_dims]
+                target_dims = [int(str(d), 0) for d in item["dims"]]
+            except ValueError:
+                source_dims = []
+                target_dims = []
             source_bytes = type_sizes.get(source_type, 0)
             target_bytes = type_sizes.get(str(item["type"]), 0)
             for dim in source_dims:
@@ -721,6 +956,7 @@ def source_data_initializers(catalog: list[dict[str, object]]) -> tuple[list[dic
             byte_view = source_type in {"uint8_t", "int8_t"} and source_bytes == target_bytes
             shape_match = (len(source_dims) == len(declared_dims) and
                            len(target_dims) == len(item["dims"]) and
+                           len(source_dims) == len(target_dims) and
                            all(d.strip().isdigit() and d.strip() == str(item["dims"][i])
                                for i, d in enumerate(declared_dims)))
             if not byte_view and (not shape_match or source_bytes != target_bytes):
@@ -778,6 +1014,32 @@ def adjacent_source_data_initializers(catalog: list[dict[str, object]]) -> list[
                            "source_sha256": definition["source_sha256"],
                            "initializer_sha256": sha(str(definition["initializer"]).encode("utf-8")),
                            "address": f"{int(row['seg']):04X}:{int(row['off']):04X}"})
+    for base, group in SOURCE_ADJACENT_BYTE_VIEWS.items():
+        base_symbol = symbols.get(base)
+        if not base_symbol or [int(base_symbol.get("seg", -1)), int(base_symbol.get("off", -1))] != group["address"]:
+            raise ValueError(f"layout address changed for adjacent source view {base}")
+        state_field = by_name.get(base)
+        if not state_field or state_field["dims"] != ["12", "16"]:
+            raise ValueError(f"state field does not cover adjacent byte view {base}")
+        for name in group["source_symbols"]:
+            row = symbols.get(name)
+            definition = source_array_definition(name)
+            if not row or not definition:
+                raise ValueError(f"missing layout/source initializer for adjacent byte view {name}")
+            offset = int(row["off"]) - int(base_symbol["off"])
+            if int(row["seg"]) != int(base_symbol["seg"]) or offset != group["members"][name]:
+                raise ValueError(f"noncontiguous layout view {name} in {base}")
+            byte_count = source_data_bytes(name)
+            if byte_count is None or offset + byte_count > int(group["bytes"]):
+                raise ValueError(f"source initializer overruns adjacent byte view storage: {name}")
+            result.append({"base": base, "symbol": name, "offset": offset,
+                           "source_bytes": byte_count, "source_dims": definition["dims"],
+                           "source_type": definition["source_type"],
+                           "initializer": definition["initializer"],
+                           "source": definition["source"],
+                           "source_sha256": definition["source_sha256"],
+                           "initializer_sha256": sha(str(definition["initializer"]).encode("utf-8")),
+                           "address": f"{int(row['seg']):04X}:{int(row['off']):04X}"})
     return result
 
 
@@ -787,8 +1049,10 @@ def emit_state_bindings(out: Path, catalog: list[dict[str, object]],
     known = [x for x in catalog if x["extent_status"] != "UNKNOWN_SOURCE_EXTENT"]
     lines = ["#ifndef SIMANT_RECOVERED_STATE_H", "#define SIMANT_RECOVERED_STATE_H", "",
              "#include <stdint.h>", "#include <stddef.h>", "",
-             "typedef struct { int16_t v; int16_t h; } RecoveredPoint;", "",
-             *[struct_defs[name] for name in sorted(struct_defs)], "",
+             "typedef struct { int16_t v; int16_t h; } RecoveredPoint;",
+             "typedef struct { int16_t x; int16_t y; } RecoveredXY;", "",
+             *[struct_defs[name] for name in sorted(struct_defs)],
+             "typedef union { struct Pt point; uint8_t bytes[18]; } RecoveredPointBytes18;", "",
              "typedef struct RecoveredState {"]
     for item in known:
         suffix = "".join(f"[{d}]" for d in item["dims"])
@@ -815,7 +1079,8 @@ def emit_state_bindings(out: Path, catalog: list[dict[str, object]],
         for name, offset in group["members"].items():
             if name == base:
                 continue
-            lines.append(f"#define {name} ({base}[{offset // 2}])")
+            expr = f"({base} + {offset // 2})" if name in group.get("array_members", []) else f"({base}[{offset // 2}])"
+            lines.append(f"#define {name} {expr}")
     lines += ["",
               "void recovered_bind_begin(RecoveredBindingFrame *frame, const RecoveredState *state);",
               "void recovered_state_init(RecoveredState *state);",
@@ -905,17 +1170,72 @@ def main() -> int:
         path = ROOT / rel
         raw = path.read_bytes()
         source, applied_function_aliases = apply_function_aliases(source_texts[name])
+        source, reviewed_behavior_scaffolds = restore_reviewed_behavior_scaffold(name, source)
         source, bda_adaptations = adapt_keyboard_bda(name, source)
         source_type_view_adaptations: list[dict[str, str]] = []
-        if name == "S22_m39C7":
+        if name in {"S22_m39C7", "root_m0E2E"}:
             source = re.sub(r"\bfd_50F6_0508\s*\.\s*x\b", "fd_50F6_0508[0]", source)
             source = re.sub(r"\bfd_50F6_0508\s*\.\s*y\b", "fd_50F6_0508[1]", source)
             source_type_view_adaptations.append({
                 "symbol": "fd_50F6_0508", "from": "struct Pt { x, y }",
                 "to": "two int16_t words sharing the same four-byte source storage",
                 "evidence": "layout/symbols.json and module declarations in S22/m39C7 + S22/m3BBD; no copy or address change"})
+        if name == "S22_m3BBD":
+            for symbol in ("fd_50F6_10D2", "fd_50F6_110C"):
+                source = re.sub(r"\b" + symbol + r"\s*\[\s*0\s*\]", symbol + ".left", source)
+                source = re.sub(r"\b" + symbol + r"\s*\[\s*1\s*\]", symbol + ".top", source)
+            source_type_view_adaptations.append({
+                "symbols": ["fd_50F6_10D2", "fd_50F6_110C"],
+                "from": "int16_t[2] leading view",
+                "to": "source struct Rect left/top fields",
+                "evidence": "same address/type overlays in S22/m3BBD and S22/m39C7; struct Rect declaration is {left,top,right,bottom}; no copy or address change"})
+        if name == "root_m015B":
+            point_words = ("fd_3D57_02B4", "fd_3D57_02B8", "fd_50F6_07BC",
+                           "fd_50F6_07CA", "fd_50F6_0596", "fd_50F6_06A6",
+                           "fd_50F6_072E", "fd_55B3_2A42")
+            rewritten = {}
+            for symbol in point_words:
+                for field, index in (("x", 0), ("y", 1)):
+                    source, count = re.subn(r"\b" + symbol + r"\s*\.\s*" + field + r"\b",
+                                            f"{symbol}[{index}]", source)
+                    rewritten[f"{symbol}.{field}"] = count
+            source, count = re.subn(r"\bfd_50F6_10D2\s*\.\s*x\b", "fd_50F6_10D2.left", source)
+            rewritten["fd_50F6_10D2.x"] = count
+            source, count = re.subn(r"\bfd_50F6_10D2\s*\.\s*y\b", "fd_50F6_10D2.top", source)
+            rewritten["fd_50F6_10D2.y"] = count
+            source, count = re.subn(
+                r"\bfd_50F6_07BC\s*=\s*fd_50F6_07CA\s*;",
+                "fd_50F6_07BC[0] = fd_50F6_07CA[0]; fd_50F6_07BC[1] = fd_50F6_07CA[1];", source)
+            rewritten["fd_50F6_07BC = fd_50F6_07CA"] = count
+            for symbol in ("fd_50F6_07BC", "fd_50F6_0596", "fd_50F6_06A6", "fd_50F6_072E"):
+                source, count = re.subn(r"\bpt\s*=\s*" + symbol + r"\s*;",
+                                        f"pt.x = {symbol}[0]; pt.y = {symbol}[1];", source)
+                rewritten[f"pt = {symbol}"] = count
+            if any(rewritten.values()):
+                source_type_view_adaptations.append({
+                    "symbols": sorted(rewritten), "member_access_rewrites": rewritten,
+                    "evidence": "root:015B source declares Point{x,y}; layout/symbols.json and shared declaration conflicts ground the same-address int16_t[2] words; fd_50F6_10D2 uses the first two words of source Rect left/top"})
+        if name == "root_m0BE8":
+            source, replaced = re.subn(
+                r"\bfd_3D57_0184\s*\[([^\]]+)\]",
+                r"fd_3D57_0164[2 + (\1)]", source)
+            if replaced:
+                source_type_view_adaptations.append({
+                    "symbol": "fd_3D57_0184", "from": "separate 160-byte array view",
+                    "to": "rows 2..11 of fd_3D57_0164[12][16]",
+                    "accesses_rewritten": replaced,
+                    "evidence": "layout symbols place fd_3D57_0184 exactly 32 bytes after fd_3D57_0164; both complete DATA source extents total 192 bytes; source accesses remain uint8_t lvalues"})
         dest = out / f"{name}.c"
         identifier_views: dict[str, str] = {}
+        if name in SOURCE_SCALAR_WORD_VIEWS:
+            identifier_views["fd_3D57_07CC"] = "fd_3D57_07CC[0]"
+        for symbol in ("fd_3D57_02C2", "fd_3D57_0798", "fd_3D57_07C8", "fd_3D57_0C1A"):
+            if catalog_by_name.get(symbol) and any(
+                    str(row["name"]) == symbol and not row["dims"]
+                    for row in object_declarations(source_texts[name])):
+                identifier_views[symbol] = f"{symbol}[0]"
+        if name == "S22_m39C7" and "fd_3D57_0B24" in catalog_by_name:
+            identifier_views["fd_3D57_0B24"] = "fd_3D57_0B24[0].point"
         for declaration in object_declarations(source_texts[name]):
             symbol = str(declaration["name"])
             item = catalog_by_name.get(symbol)
@@ -963,6 +1283,7 @@ def main() -> int:
             "source_type_view_adaptations": source_type_view_adaptations,
             "platform_boundary_adaptations": bda_adaptations,
             "layout_grounded_function_aliases_applied": applied_function_aliases,
+            "reviewed_behavior_scaffold_bodies": reviewed_behavior_scaffolds,
             "source_data_extent_typed_views_applied": identifier_views,
             "reviewed_native_scaffold_adapters": scaffold_adapters,
             "external_functions": sorted(set(declared_functions) - set(defined)),
@@ -974,9 +1295,60 @@ def main() -> int:
         }
         if args.compile:
             obj = out / f"{name}.o"
-            flags = ["-std=c11", "-Wall", "-Wextra", "-Werror", "-Wno-unused-parameter", "-Wno-unused-variable", "-Wno-unused-but-set-variable", "-Wno-unused-but-set-parameter", "-Wno-parentheses", "-Wno-type-limits", "-Wno-implicit-fallthrough", "-Wno-tautological-compare", "-Wno-char-subscripts", "-Wno-sign-compare", "-Wno-builtin-declaration-mismatch"]
+            flags = ["-std=c11", "-Wall", "-Wextra", "-Werror", "-Wno-missing-braces", "-Wno-unused-parameter", "-Wno-unused-variable", "-Wno-unused-but-set-variable", "-Wno-unused-but-set-parameter", "-Wno-parentheses", "-Wno-type-limits", "-Wno-implicit-fallthrough", "-Wno-tautological-compare", "-Wno-char-subscripts", "-Wno-sign-compare", "-Wno-builtin-declaration-mismatch"]
             proc = subprocess.run([args.cc, *flags, "-I", ".", "-c", str(dest), "-o", str(obj)], cwd=ROOT, capture_output=True, text=True)
-            record["compile"] = {"passed": proc.returncode == 0, "command": [args.cc, *flags, "-I", ".", "-c", dest.relative_to(ROOT).as_posix(), "-o", obj.relative_to(ROOT).as_posix()], "suppressed_historical_diagnostics": ["unused-parameter", "unused-variable", "unused-but-set-variable", "unused-but-set-parameter", "parentheses", "type-limits", "implicit-fallthrough", "tautological-compare (source BIOS mask expression in S22)", "char-subscripts (source signed-char indexing in S08 tutorial tables)", "sign-compare (source signed/unsigned clock expression in root m0BE8)", "builtin-declaration-mismatch (source K&R sprintf declaration in S24)"], "diagnostics": (proc.stdout + proc.stderr)[-12000:]}
+            record["compile"] = {"passed": proc.returncode == 0, "command": [args.cc, *flags, "-I", ".", "-c", dest.relative_to(ROOT).as_posix(), "-o", obj.relative_to(ROOT).as_posix()], "suppressed_historical_diagnostics": ["missing-braces (source row-major aggregate initialization of 2D tiles in S18)", "unused-parameter", "unused-variable", "unused-but-set-variable", "unused-but-set-parameter", "parentheses", "type-limits", "implicit-fallthrough", "tautological-compare (source BIOS mask expression in S22)", "char-subscripts (source signed-char indexing in S08 tutorial tables)", "sign-compare (source signed/unsigned clock expression in root m0BE8)", "builtin-declaration-mismatch (source K&R sprintf declaration in S24)"], "diagnostics": (proc.stdout + proc.stderr)[-12000:]}
+            if proc.returncode:
+                print(f"{name}: compile failed\n{record['compile']['diagnostics']}", file=sys.stderr)
+            else:
+                record["object_sha256"] = sha(obj.read_bytes())
+                nm = shutil.which("nm")
+                if nm:
+                    undefined = subprocess.run([nm, "-u", str(obj)], cwd=ROOT, capture_output=True, text=True)
+                    symbols = sorted({line.split()[-1] for line in undefined.stdout.splitlines() if line.split()})
+                    record["undefined_symbols"] = symbols
+                    record["unresolved_callable_dependencies"] = [s for s in symbols if not s.startswith("__") and s not in {"memcpy", "memmove", "memset"}]
+        records.append(record)
+    for name, spec in SELECTED_SOURCE_FUNCTIONS.items():
+        source_path = ROOT / str(spec["source"])
+        source_bytes = source_path.read_bytes()
+        original_source = source_bytes.decode("utf-8")
+        body, line_start, line_end = extract_named_function(original_source, str(spec["function"]))
+        function_source = "\n".join(str(x) for x in spec["prototypes"]) + "\n" + body
+        generated, excluded_scaffolds, ax_tail_adapted = transform(function_source, set(struct_defs))
+        dest = out / f"{name}.c"
+        if state_complete:
+            generated += ("\nvoid recovered_map_to_yard(RecoveredState *state)\n{\n"
+                          "    RecoveredBindingFrame frame;\n"
+                          "    recovered_bind_begin(&frame, state);\n"
+                          "    MapToYard();\n"
+                          "    recovered_bind_end(&frame, state);\n}\n")
+        dest.write_text(generated, encoding="utf-8", newline="")
+        record = {
+            "name": name, "source": str(spec["source"]),
+            "source_sha256": sha(source_bytes),
+            "generated": dest.relative_to(ROOT).as_posix(),
+            "generated_sha256": sha(dest.read_bytes()),
+            "selected_original_function": str(spec["function"]),
+            "original_source_lines": {"start": line_start, "end": line_end},
+            "original_function_sha256": sha(body.encode("utf-8")),
+            "defined_functions": function_names(function_source),
+            "external_functions": list(spec["host_edges"]),
+            "external_objects": [],
+            "explicit_host_edges": list(spec["host_edges"]),
+            "platform_boundary_adaptations": [],
+            "excluded_unrelated_module_bodies": True,
+            "source_semantics_adaptations": [],
+            "width_mapping": {"int": "int16_t", "unsigned int": "uint16_t", "long": "int32_t", "unsigned long": "uint32_t"},
+            "integer_promotion_status": "UNREVIEWED_HOST_PROMOTIONS",
+            "pointer_layout_status": "NO_PLATFORM_POINTERS_IN_SELECTED_BODY",
+            "entry_wrappers": ["recovered_map_to_yard"] if state_complete else [],
+        }
+        if args.compile:
+            flags = ["-std=c11", "-Wall", "-Wextra", "-Werror", "-Wno-missing-braces", "-Wno-unused-parameter", "-Wno-unused-variable", "-Wno-unused-but-set-variable", "-Wno-unused-but-set-parameter", "-Wno-parentheses", "-Wno-type-limits", "-Wno-implicit-fallthrough", "-Wno-tautological-compare", "-Wno-char-subscripts", "-Wno-sign-compare", "-Wno-builtin-declaration-mismatch"]
+            obj = out / f"{name}.o"
+            proc = subprocess.run([args.cc, *flags, "-I", ".", "-c", str(dest), "-o", str(obj)], cwd=ROOT, capture_output=True, text=True)
+            record["compile"] = {"passed": proc.returncode == 0, "command": [args.cc, *flags, "-I", ".", "-c", dest.relative_to(ROOT).as_posix(), "-o", obj.relative_to(ROOT).as_posix()], "diagnostics": (proc.stdout + proc.stderr)[-12000:]}
             if proc.returncode:
                 print(f"{name}: compile failed\n{record['compile']['diagnostics']}", file=sys.stderr)
             else:
@@ -1046,7 +1418,13 @@ def main() -> int:
                  "address": f"{group['address'][0]:04X}:{group['address'][1]:04X}",
                  "members": group["members"], "initializers": [x for x in adjacent_view_initializers if x["base"] == base],
                  "resolution": "layout-grounded contiguous source DATA storage; int16_t module views share word backing; all initialized spans come from readable source/data declarations"}
-                for base, group in SOURCE_ADJACENT_WORD_VIEWS.items()],
+                for base, group in SOURCE_ADJACENT_WORD_VIEWS.items()] + [
+                {"base": base, "bytes": group["bytes"],
+                 "address": f"{group['address'][0]:04X}:{group['address'][1]:04X}",
+                 "members": group["members"], "view": group["view"],
+                 "initializers": [x for x in adjacent_view_initializers if x["base"] == base],
+                 "resolution": "layout-grounded contiguous source DATA storage; all complete member initializers copied at verified offsets from readable source definitions"}
+                for base, group in SOURCE_ADJACENT_BYTE_VIEWS.items()],
             "derived_source_pointer_tables": source_pointer_tables,
             "same_width_signedness_views": signedness_views,
         },

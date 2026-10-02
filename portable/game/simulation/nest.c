@@ -9,7 +9,8 @@ static const uint8_t hole_border_tiles[8] = {
     0x19, 0x1a, 0x1c, 0x1f, 0x1e, 0x1d, 0x1b, 0x18
 };
 
-static int add_event(SimNestTrace *trace, SimNestEventKind kind,
+static int add_event(SimNestTrace *trace, SimNestEventSink event_sink,
+                     void *event_context, SimNestEventKind kind,
                      uint16_t count, int32_t a, int32_t b, int32_t c,
                      int32_t d, int32_t e, int32_t f)
 {
@@ -27,7 +28,20 @@ static int add_event(SimNestTrace *trace, SimNestEventKind kind,
     event->arguments[3] = d;
     event->arguments[4] = e;
     event->arguments[5] = f;
+    if (event_sink != NULL && !event_sink(event_context, event)) {
+        return 0;
+    }
     return 1;
+}
+
+static SimNestStatus trace_status(const SimNestTrace *trace)
+{
+    return trace->overflow ? SIM_NEST_TRACE_OVERFLOW : SIM_NEST_OK;
+}
+
+static SimNestStatus event_failure_status(const SimNestTrace *trace)
+{
+    return trace->overflow ? SIM_NEST_TRACE_OVERFLOW : SIM_NEST_EVENT_REJECTED;
 }
 
 static int valid_location(int16_t plane, int16_t x, int16_t y)
@@ -103,18 +117,26 @@ static uint16_t get_life(SimGameWorld *world, int16_t plane,
     return *life == 0 ? 0xffffu : *life;
 }
 
-static void set_life(SimGameWorld *world, SimRng *rng,
-                     SimNestRuntime *runtime, SimNestTrace *trace,
-                     int16_t plane, int16_t x, int16_t y, uint8_t value);
+static SimNestStatus set_life(SimGameWorld *world, SimRng *rng,
+                              SimNestRuntime *runtime, SimNestTrace *trace,
+                              SimNestEventSink event_sink, void *event_context,
+                              int16_t plane, int16_t x, int16_t y, uint8_t value);
 
-static void clear_life(SimGameWorld *world, SimRng *rng,
-                      SimNestRuntime *runtime, SimNestTrace *trace,
-                      int16_t plane, int16_t x, int16_t y, uint8_t marker)
+static SimNestStatus clear_life(SimGameWorld *world, SimRng *rng,
+                                SimNestRuntime *runtime, SimNestTrace *trace,
+                                SimNestEventSink event_sink, void *event_context,
+                                int16_t plane, int16_t x, int16_t y, uint8_t marker)
 {
-    if (!valid_location(plane, x, y)) return;
+    SimNestStatus status;
+    if (!valid_location(plane, x, y)) return SIM_NEST_OK;
     if (get_life(world, plane, x, y) == marker)
-        set_life(world, rng, runtime, trace, plane, x, y, 0);
+    {
+        status = set_life(world, rng, runtime, trace,
+                          event_sink, event_context, plane, x, y, 0);
+        if (status != SIM_NEST_OK) return status;
+    }
     zap_tile(trace, plane, x, y);
+    return SIM_NEST_OK;
 }
 
 static int clear_surface_tile(const SimGameWorld *world, int16_t x, int16_t y)
@@ -258,15 +280,19 @@ static void set_hole_border(SimGameWorld *world, int16_t x, int16_t y)
     }
 }
 
-static void make_new_hole(SimGameWorld *world, SimRng *rng,
-                          SimNestRuntime *runtime, SimNestTrace *trace,
-                          int16_t plane, int16_t x)
+static SimNestStatus make_new_hole(SimGameWorld *world, SimRng *rng,
+                                   SimNestRuntime *runtime, SimNestTrace *trace,
+                                   SimNestEventSink event_sink,
+                                   void *event_context,
+                                   int16_t plane, int16_t x)
 {
     uint16_t start = 0;
     int i;
     int16_t y = 0;
-    (void)add_event(trace, SIM_NEST_SRAND1, 1, 31, 0, 0, 0, 0, 0);
-    if (!sim_rng_s1(rng, 31, &start)) return;
+    if (!add_event(trace, event_sink, event_context,
+                   SIM_NEST_SRAND1, 1, 31, 0, 0, 0, 0, 0))
+        return event_failure_status(trace);
+    if (!sim_rng_s1(rng, 31, &start)) return SIM_NEST_INVALID_ARGUMENT;
     if (world->tiles.terrain_set) {
         for (i = 0; i < 34; ++i) {
             int value;
@@ -278,7 +304,7 @@ static void make_new_hole(SimGameWorld *world, SimRng *rng,
                 break;
             }
         }
-        if (i == 34) return;
+        if (i == 34) return SIM_NEST_OK;
     } else {
         for (i = 0; i < 34; ++i) {
             y = plane == 2 ? (int16_t)((start + i) % 32 + 2)
@@ -289,7 +315,7 @@ static void make_new_hole(SimGameWorld *world, SimRng *rng,
                 break;
             }
         }
-        if (i == 34) return;
+        if (i == 34) return SIM_NEST_OK;
     }
     if (plane == 2) {
         world->hole_b[x] = (uint8_t)y;
@@ -305,28 +331,39 @@ static void make_new_hole(SimGameWorld *world, SimRng *rng,
         runtime->entrance_r_nest_y = 0;
     }
     dig_tile(world, rng, runtime, plane, x, 1);
+    return trace_status(trace);
 }
 
-static void dig_my_tile(SimGameWorld *world, SimRng *rng,
-                        SimNestRuntime *runtime, SimNestTrace *trace,
-                        int16_t plane, int16_t x, int16_t y)
+static SimNestStatus dig_my_tile(SimGameWorld *world, SimRng *rng,
+                                 SimNestRuntime *runtime, SimNestTrace *trace,
+                                 SimNestEventSink event_sink,
+                                 void *event_context,
+                                 int16_t plane, int16_t x, int16_t y)
 {
-    if (!add_event(trace, SIM_NEST_DIG_TILE, 3, plane, x, y, 0, 0, 0)) return;
-    if (!is_diggable(world, plane, x, y)) return;
+    SimNestStatus status;
+    if (!add_event(trace, event_sink, event_context,
+                   SIM_NEST_DIG_TILE, 3, plane, x, y, 0, 0, 0))
+        return event_failure_status(trace);
+    if (!is_diggable(world, plane, x, y)) return SIM_NEST_OK;
     if (plane == 2) {
         if (y <= 1) {
             world->tiles.nest_b[x][0] = 0x18;
-            make_new_hole(world, rng, runtime, trace, plane, x);
-            if (y != 1) return;
+            status = make_new_hole(world, rng, runtime, trace,
+                                   event_sink, event_context, plane, x);
+            if (status != SIM_NEST_OK) return status;
+            if (y != 1) return SIM_NEST_OK;
         }
     } else {
         if (y <= 1) {
             world->tiles.nest_r[x][0] = 0x18;
-            make_new_hole(world, rng, runtime, trace, plane, x);
-            if (y != 1) return;
+            status = make_new_hole(world, rng, runtime, trace,
+                                   event_sink, event_context, plane, x);
+            if (status != SIM_NEST_OK) return status;
+            if (y != 1) return SIM_NEST_OK;
         }
     }
     dig_tile(world, rng, runtime, plane, x, y);
+    return trace_status(trace);
 }
 
 SimNestStatus sim_nest_dig_tile(SimGameWorld *world, SimRng *rng,
@@ -347,8 +384,7 @@ SimNestStatus sim_nest_make_new_hole(SimGameWorld *world, SimRng *rng,
     if (world == NULL || rng == NULL || runtime == NULL || trace == NULL ||
         (plane != 2 && plane != 3) || nest_x < 0 || nest_x > 63)
         return SIM_NEST_INVALID_ARGUMENT;
-    make_new_hole(world, rng, runtime, trace, plane, nest_x);
-    return trace->overflow ? SIM_NEST_TRACE_OVERFLOW : SIM_NEST_OK;
+    return make_new_hole(world, rng, runtime, trace, NULL, NULL, plane, nest_x);
 }
 
 SimNestStatus sim_nest_dig_my_tile(SimGameWorld *world, SimRng *rng,
@@ -358,57 +394,89 @@ SimNestStatus sim_nest_dig_my_tile(SimGameWorld *world, SimRng *rng,
     if (world == NULL || rng == NULL || runtime == NULL || trace == NULL ||
         (plane != 2 && plane != 3) || x < 0 || x > 63 || y < 0 || y > 63)
         return SIM_NEST_INVALID_ARGUMENT;
-    dig_my_tile(world, rng, runtime, trace, plane, x, y);
-    return trace->overflow ? SIM_NEST_TRACE_OVERFLOW : SIM_NEST_OK;
+    return dig_my_tile(world, rng, runtime, trace, NULL, NULL, plane, x, y);
 }
 
-static void set_life(SimGameWorld *world, SimRng *rng,
-                     SimNestRuntime *runtime, SimNestTrace *trace,
-                     int16_t plane, int16_t x, int16_t y, uint8_t value)
+static SimNestStatus set_life(SimGameWorld *world, SimRng *rng,
+                              SimNestRuntime *runtime, SimNestTrace *trace,
+                              SimNestEventSink event_sink, void *event_context,
+                              int16_t plane, int16_t x, int16_t y, uint8_t value)
 {
     uint8_t *life;
-    if (!valid_location(plane, x, y)) return;
+    SimNestStatus status;
+    if (!valid_location(plane, x, y)) return SIM_NEST_OK;
     life = life_cell(world, plane, x, y);
     if (life != NULL) *life = value;
     if ((plane == 2 || plane == 3) && value != 0 && is_diggable(world, plane, x, y)) {
-        dig_my_tile(world, rng, runtime, trace, plane, x, y);
-        (void)add_event(trace, SIM_NEST_SOUND, 3, 0x13, 0, 0x3f, 0, 0, 0);
+        status = dig_my_tile(world, rng, runtime, trace,
+                             event_sink, event_context, plane, x, y);
+        if (status != SIM_NEST_OK) return status;
+        if (!add_event(trace, event_sink, event_context,
+                       SIM_NEST_SOUND, 3, 0x13, 0, 0x3f, 0, 0, 0))
+            return event_failure_status(trace);
     }
     zap_tile(trace, plane, x, y);
+    return SIM_NEST_OK;
 }
 
-static int32_t next_tick(const SimNestRequest *request, uint8_t *cursor)
+static SimNestStatus next_tick(const SimNestRequest *request, uint8_t *cursor,
+                               SimNestTickCountProvider tick_provider,
+                               void *tick_context, int32_t *value)
 {
-    return request->tick_values[(*cursor)++];
-}
-
-static SimNestStatus try_ant_theme(SimNestRuntime *runtime,
-                                   const SimNestRequest *request,
-                                   SimNestTrace *trace)
-{
-    uint8_t tick_index = 0;
-    (void)add_event(trace, SIM_NEST_TRY_THEME, 0, 0, 0, 0, 0, 0, 0);
-    const int32_t first = next_tick(request, &tick_index);
-    const int32_t threshold = runtime->theme_last_tick + 0x1c20;
-    (void)add_event(trace, SIM_NEST_TICK, 0, first, 0, 0, 0, 0, 0);
-    if (first >= threshold) {
-        int32_t second;
-        if (request->tick_count < 2) return SIM_NEST_TICK_INPUT_EXHAUSTED;
-        second = next_tick(request, &tick_index);
-        runtime->theme_last_tick = second;
-        runtime->theme_index = (int16_t)(runtime->theme_index + 1);
-        if (runtime->theme_index > 2) runtime->theme_index = 0;
-        (void)add_event(trace, SIM_NEST_TICK, 0, second, 0, 0, 0, 0, 0);
-        (void)add_event(trace, SIM_NEST_SONG, 2,
-                        runtime->theme_index + 0x2713, 0x7e, 0, 0, 0, 0);
+    if (tick_provider != NULL) {
+        if (!tick_provider(tick_context, value))
+            return SIM_NEST_TICK_PROVIDER_FAILED;
+    } else {
+        if (*cursor >= request->tick_count)
+            return SIM_NEST_TICK_INPUT_EXHAUSTED;
+        *value = request->tick_values[(*cursor)++];
     }
     return SIM_NEST_OK;
 }
 
-SimNestStatus sim_enter_nest(SimGameWorld *world, SimRng *rng,
-                             SimNestRuntime *runtime,
-                             const SimNestRequest *request,
-                             SimNestTrace *trace)
+static SimNestStatus try_ant_theme(SimNestRuntime *runtime,
+                                   const SimNestRequest *request,
+                                   SimNestTrace *trace,
+                                   SimNestEventSink event_sink,
+                                   void *event_context,
+                                   SimNestTickCountProvider tick_provider,
+                                   void *tick_context)
+{
+    uint8_t tick_index = 0;
+    if (!add_event(trace, event_sink, event_context,
+                   SIM_NEST_TRY_THEME, 0, 0, 0, 0, 0, 0, 0))
+        return event_failure_status(trace);
+    int32_t first;
+    SimNestStatus status = next_tick(request, &tick_index, tick_provider,
+                                     tick_context, &first);
+    if (status != SIM_NEST_OK) return status;
+    const int32_t threshold = runtime->theme_last_tick + 0x1c20;
+    if (!add_event(trace, event_sink, event_context,
+                   SIM_NEST_TICK, 0, first, 0, 0, 0, 0, 0))
+        return event_failure_status(trace);
+    if (first >= threshold) {
+        int32_t second;
+        status = next_tick(request, &tick_index, tick_provider, tick_context,
+                           &second);
+        if (status != SIM_NEST_OK) return status;
+        runtime->theme_last_tick = second;
+        runtime->theme_index = (int16_t)(runtime->theme_index + 1);
+        if (runtime->theme_index > 2) runtime->theme_index = 0;
+        if (!add_event(trace, event_sink, event_context,
+                       SIM_NEST_TICK, 0, second, 0, 0, 0, 0, 0))
+            return event_failure_status(trace);
+        if (!add_event(trace, event_sink, event_context, SIM_NEST_SONG, 2,
+                       runtime->theme_index + 0x2713, 0x7e, 0, 0, 0, 0))
+            return event_failure_status(trace);
+    }
+    return SIM_NEST_OK;
+}
+
+SimNestStatus sim_enter_nest_with_tick_provider(
+    SimGameWorld *world, SimRng *rng, SimNestRuntime *runtime,
+    const SimNestRequest *request, SimNestTrace *trace,
+    SimNestEventSink event_sink, void *event_context,
+    SimNestTickCountProvider tick_provider, void *tick_context)
 {
     SimNestStatus status;
     int16_t plane, x, y, ant_type, direction;
@@ -417,13 +485,18 @@ SimNestStatus sim_enter_nest(SimGameWorld *world, SimRng *rng,
     if (world == NULL || rng == NULL || runtime == NULL || request == NULL || trace == NULL)
         return SIM_NEST_INVALID_ARGUMENT;
     memset(trace, 0, sizeof(*trace));
-    if (request->tick_count == 0) return SIM_NEST_TICK_INPUT_EXHAUSTED;
+    if (tick_provider == NULL && request->tick_count == 0)
+        return SIM_NEST_TICK_INPUT_EXHAUSTED;
 
-    /* Avoid partial mutation if the first tick proves that a second is needed. */
-    if (request->tick_values[0] >= runtime->theme_last_tick + 0x1c20 &&
+    /* Static fixtures can be rejected before mutation if the fixed sample
+     * proves a second is needed. Live clocks are sampled lazily in source
+     * order and cannot be preflighted without changing observable timing. */
+    if (tick_provider == NULL &&
+        request->tick_values[0] >= runtime->theme_last_tick + 0x1c20 &&
         request->tick_count < 2)
         return SIM_NEST_TICK_INPUT_EXHAUSTED;
-    status = try_ant_theme(runtime, request, trace);
+    status = try_ant_theme(runtime, request, trace, event_sink, event_context,
+                           tick_provider, tick_context);
     if (status != SIM_NEST_OK) return status;
 
     plane = world->current_ant_plane;
@@ -434,20 +507,30 @@ SimNestStatus sim_enter_nest(SimGameWorld *world, SimRng *rng,
     if (runtime->alarm_drop_state != 0) {
         runtime->alarm_drop_state = 0;
         runtime->alarm_indicator = -1;
-        (void)add_event(trace, SIM_NEST_ALARM_CLEAR, 2, 0, 1, 0, 0, 0, 0);
-        (void)add_event(trace, SIM_NEST_ALARM_SELECTION, 2, 0x10, 0, 0, 0, 0, 0);
-        (void)add_event(trace, SIM_NEST_MAP_INVALIDATE, 4,
-                        0, 0, runtime->invalidate_right,
-                        runtime->invalidate_bottom, 0, 0);
+        if (!add_event(trace, event_sink, event_context,
+                       SIM_NEST_ALARM_CLEAR, 2, 0, 1, 0, 0, 0, 0))
+            return event_failure_status(trace);
+        if (!add_event(trace, event_sink, event_context,
+                       SIM_NEST_ALARM_SELECTION, 2, 0x10, 0, 0, 0, 0, 0))
+            return event_failure_status(trace);
+        if (!add_event(trace, event_sink, event_context, SIM_NEST_MAP_INVALIDATE, 4,
+                       0, 0, runtime->invalidate_right,
+                       runtime->invalidate_bottom, 0, 0))
+            return event_failure_status(trace);
     }
 
-    (void)add_event(trace, SIM_NEST_CLEAR_LIFE, 5,
-                    plane, x, y, ant_type, direction, 0);
-    clear_life(world, rng, runtime, trace, plane, x, y, 0xff);
+    if (!add_event(trace, event_sink, event_context, SIM_NEST_CLEAR_LIFE, 5,
+                   plane, x, y, ant_type, direction, 0))
+        return event_failure_status(trace);
+    status = clear_life(world, rng, runtime, trace, event_sink, event_context,
+                        plane, x, y, 0xff);
+    if (status != SIM_NEST_OK) return status;
     if (ant_type == 0x60) {
         const int back = direction ^ 4;
-        clear_life(world, rng, runtime, trace, plane,
-                   (int16_t)(x + dx8[back]), (int16_t)(y + dy8[back]), 0xfe);
+        status = clear_life(world, rng, runtime, trace, event_sink, event_context,
+                            plane,
+                            (int16_t)(x + dx8[back]), (int16_t)(y + dy8[back]), 0xfe);
+        if (status != SIM_NEST_OK) return status;
     }
 
     next_plane = x > 0x40 ? 3 : 2;
@@ -458,17 +541,44 @@ SimNestStatus sim_enter_nest(SimGameWorld *world, SimRng *rng,
     world->me_y = next_y;
     world->me_direction = 4;
 
-    dig_my_tile(world, rng, runtime, trace, next_plane, next_x, next_y);
-    (void)add_event(trace, SIM_NEST_SET_LIFE, 6,
-                    next_plane, next_x, next_y, ant_type, 4, 0xff);
-    set_life(world, rng, runtime, trace, next_plane, next_x, next_y, 0xff);
+    status = dig_my_tile(world, rng, runtime, trace, event_sink, event_context,
+                         next_plane, next_x, next_y);
+    if (status != SIM_NEST_OK) return status;
+    if (!add_event(trace, event_sink, event_context, SIM_NEST_SET_LIFE, 6,
+                   next_plane, next_x, next_y, ant_type, 4, 0xff))
+        return event_failure_status(trace);
+    status = set_life(world, rng, runtime, trace, event_sink, event_context,
+                      next_plane, next_x, next_y, 0xff);
+    if (status != SIM_NEST_OK) return status;
     if (ant_type == 0x60) {
         const int back = 4 ^ 4;
-        set_life(world, rng, runtime, trace, next_plane,
-                 (int16_t)(next_x + dx8[back]),
-                 (int16_t)(next_y + dy8[back]), 0xfe);
+        status = set_life(world, rng, runtime, trace, event_sink, event_context,
+                          next_plane,
+                          (int16_t)(next_x + dx8[back]),
+                          (int16_t)(next_y + dy8[back]), 0xfe);
+        if (status != SIM_NEST_OK) return status;
     }
     world->me_type = ant_type;
-    if (trace->overflow) return SIM_NEST_TRACE_OVERFLOW;
-    return SIM_NEST_OK;
+    return trace_status(trace);
+}
+
+SimNestStatus sim_enter_nest_with_sink(SimGameWorld *world, SimRng *rng,
+                                       SimNestRuntime *runtime,
+                                       const SimNestRequest *request,
+                                       SimNestTrace *trace,
+                                       SimNestEventSink event_sink,
+                                       void *event_context)
+{
+    return sim_enter_nest_with_tick_provider(
+        world, rng, runtime, request, trace, event_sink, event_context,
+        NULL, NULL);
+}
+
+SimNestStatus sim_enter_nest(SimGameWorld *world, SimRng *rng,
+                             SimNestRuntime *runtime,
+                             const SimNestRequest *request,
+                             SimNestTrace *trace)
+{
+    return sim_enter_nest_with_sink(world, rng, runtime, request, trace,
+                                    NULL, NULL);
 }

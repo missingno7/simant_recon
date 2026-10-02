@@ -79,6 +79,7 @@ int main(void)
     uint8_t colors[6]={3,0,3,3,0,0};
     uint8_t object_bytes[0x2c]={0};
     PortableBiosFontProvider provider={0};
+    PortableBiosFontProvider rejected={0};
     PortableWindowObject object={0};
     PortableWindowResource window={0};
     PortableDatabase database={0};
@@ -87,10 +88,14 @@ int main(void)
     uint8_t pixels[8*14];
     make_font(rows8,8);
     make_font(rows14,14);
-    provider.font_8x8=(PortableBiosFontBitmap){rows8,sizeof(rows8),8,8,
-                                               "controlled-fixture-8x8"};
-    provider.font_8x14=(PortableBiosFontBitmap){rows14,sizeof(rows14),8,14,
-                                                "controlled-fixture-8x14"};
+    assert(portable_bios_font_provider_init(&provider,rows8,sizeof(rows8),
+                                            rows14,sizeof(rows14),
+                                            "controlled-fixture")
+           ==PORTABLE_RENDER_OK);
+    assert(portable_bios_font_provider_init(&rejected,rows8,sizeof(rows8),
+                                            rows14,sizeof(rows14)-1,
+                                            "bad-fixture")
+           ==PORTABLE_RENDER_INVALID_RESOURCE);
     check_font(0,640,14,&provider);
     check_font(1,640,8,&provider);
     check_font(0,320,8,&provider);

@@ -31,6 +31,8 @@ Source changes require review and a relevant rerun before a current claim.
 | RandWorld | 12 original-DOS comparisons with full generated maps, lists, RNG and counters | Scenarios 0/1, nest sizes 1/1, default terrain, listed seeds; NewGame resource composition separate |
 | RNG | Original-DOS helper comparisons plus separately counted exhaustive recurrence checks | Invalid zero divisors rejected explicitly; unsigned/signed helper domains recorded in the suite |
 | DoAntSim scheduler | Source call-order and counter unit tests | Full simulation services remain required; no placeholder service may stand in for a game rule |
+| Edit object-4 command | Eight DOS/native comparisons from resource-backed NewGame state; 371 mapped fields, ordered service arguments/results, clock and RNG | Controlled quick-release boundary on planes 0–3; physical SDL press/release and double-click pumping have separate integration tests |
+| CalcScore | 63 DOS/native comparisons of the long return and eight score components | Numeric scoring only; game-over modal and subsequent NewGame/MenuQuit flow remain separate |
 
 The native unit gate is `python portable/tests/run.py --host`. Its report lives
 under ignored `build/portable/tests/`; original-DOS differential producers and
@@ -39,6 +41,67 @@ compiler binaries or generated native binaries are redistributed.
 
 Large ant modules are also being tested through mechanical source reuse under
 `research/source-reuse` and `tools/recover_source.py`. Generated diagnostic
-objects do not enter the game build. That path must preserve shared aliases,
+objects enter only explicitly selected diagnostic integration builds. That path must preserve shared aliases,
 16-bit arithmetic and MSC return behavior, and replace scaffolds with proven
 semantics before it can become a production core.
+
+The next2 source profile has now passed three consecutive 256-tick DOS
+comparisons (768 ticks), with 370 nonpointer globals, both RNG states and
+ordered host arguments checked at every tick. See the
+[current next2 replay](../research/core-proof/original-256-tick-summary-next2-lazy-clock-20261002.json).
+The original captures retain their earlier profile provenance; next2 has the
+same header and 23 game bodies, with separately recorded initializer changes.
+The full-state fixtures are research inputs, never native startup data.
+This replay uses the explicit static two-sample EnterNest clock lane. The live
+lazy clock provider has separate source-order controls and SDL integration
+checks; the replay does not certify a physical-clock input domain.
+
+The [resource-backed startup comparison](../tests/core/evidence/randyard-session-startup-next2-20261002.json)
+separately checks 146 ranges, both 32-value RNG tails and the final game-RNG
+seed. It executes real resource initialization and NewGame, with no DOS
+snapshot hydration. Pointer-valued resources and the stated UI boundary stay
+outside that comparison. Source DATA overlaps now share backing storage, and
+the scalar initializer audit records exact-span readable declarations.
+
+The [39-suite native gate](../tests/evidence/native-unit-gate-39-20261002.json)
+and the real SDL host checks pass at their pinned input versions. They are
+unit/integration checks, separate from DOS behavioral proof. Window opening,
+picture modals, ribbon text and live actions require their own host contracts;
+passing the simulation fixture does not certify those interactive services.
+
+The [current proof audit](../research/native-proof-triage-20261002.md) separately
+tracks reports whose inputs still match, reports preserved for earlier input
+versions, and reports with incomplete dependency pins. A passing archived run
+does not automatically certify a changed native implementation.
+
+The [longer headless run](../tests/core/evidence/long-run-smoke-next2.json)
+completed 2,687 no-input ticks before reaching the unsupported `EndGameDialog`
+service. The source trigger was red-queen extinction. This identifies a normal
+game-over integration task; it is not a 4,096-tick pass or a DOS differential.
+The host acknowledged typed presentation requests without rendering them.
+
+The SDL smoke receipts retain executable/source identities, logical time,
+RNG and final state checksums. Pointer-normalized checksums remove only native
+pointer fields for diagnostics; they are not a DOS equivalence gate. Unbound
+Tab injection is a test-only event driver and does not prove modal dismissal.
+
+The original Edit mouse producer, the historical MSC-compiled source checks,
+and the [portable-native code-4 differential](../tests/input/evidence/native-process-edit-code4-lazy-clock-20261002.json)
+are distinct proof lanes. The 49-case MapAreaEvent report is a DOS/MSC source
+comparison with a separate event-DTO check; it is not a portable-native gameplay
+differential. The native eight-case suite initializes the DOS VM from native
+pre-call semantic state and compares the resulting state. It never uses a DOS
+snapshot to initialize native NewGame.
+
+The [overview raster differential](../tests/render/evidence/dos-overview-selector-raster-differential.json)
+compares original S00 planar output, normalized to indexed pixels, against the
+native 4-by-4 selector conversion. All selectors 0–23 pass in four controlled
+cases covering both converter entries and profiles 0/8. This corrects the
+earlier direct-palette interpretation of selectors above 15. It establishes
+the conversion boundary; full window composition and physical VGA behavior
+remain separate.
+
+The [corrected CalcScore report](../tests/dialogs/evidence/calcscore-original-dos-portable-20261002-corrected.json)
+retains its original passing predecessor. Source alias review confirms that
+`EndGameDialog` continues with `NewGame(0)` and calls `MenuQuit` on a negative
+result. Its unresolved services concern that modal/restart/quit lifecycle.

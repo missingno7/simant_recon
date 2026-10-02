@@ -1,0 +1,129 @@
+{
+  "schema": "original-dos-consecutive-doantsim-summary-v2",
+  "scope": "Actual original DOS RandWorld followed by 256 uninterrupted actual DoAntSim ticks; three separate native runs compared every tick.",
+  "oracle_sha256": "aa0596c6766322a8229ee3c36e57048c92adc82d50fbe2ef37afb8b85fcf4f11",
+  "generated_profile": "build/workers/recovered_source_next2/generated",
+  "profile_status": "next2 profile hashes were unchanged before and after the three native comparisons; original DOS captures are reused because the state header and all 23 generated game body files are byte-identical to next profile",
+  "profile_hashes": {
+    "recovered_state_header_sha256": "bb89c625bfb8bccbf827e1c701bd1490f57106276d81b6abcdf7aa8e7b42fec6",
+    "recovered_state_source_sha256": "4d7527a1961b5792f8322366cbd51b70559e889b41e0b941b2f7e7477441095f",
+    "provenance_sha256": "67246e91c244173892533bbc27095ea8c09e273bd455a44e100c45798e9ab710",
+    "generator_sha256": "c1fd7616c392d39ebe4574e6ccde85b4e7f79205d21afcfbcb7ead249d5ffc50",
+    "LessonDone_source_sha256": "1f219384cffbb44077dde74fa2ef4e542ba9174878c73fe47ad45ec8fbed444b"
+  },
+  "tool_hashes": {
+    "original_tick_probe_sha256": "32a054e1ff71ef1f34672bd380f352d642c13f5b2bdefe584a21bd4d9ccfb539",
+    "original_256_tick_probe_sha256": "f76feefc1f6c5e8ab83018bed7541c367b4983d8bac09fc626c03b6543fc02bb",
+    "native_tick_runner_sha256": "17daea4df042e064a7e7f0efcf05952cf58d9ba196a86e95d36214c6341e0d5b"
+  },
+  "source_state": {
+    "global_count": 370,
+    "bytes_per_tick": 69623,
+    "ticks_per_case": 256,
+    "total_native_tick_comparisons": 768,
+    "snapshot_bytes_per_case": 17823488,
+    "pointer_fields": "excluded host bindings; every nonpointer recovered-state global was captured and compared"
+  },
+  "rng": {
+    "dos_c_runtime_state_address": "DGROUP:7BBE",
+    "linear_address": 382702,
+    "read_method": "direct original-DOS memory reads after SeedRRand/RandWorld and after each DoAntSim",
+    "initial_c_state_after_randworld": 1218146458,
+    "c_state_post_tick_checkpoints": {
+      "tick_0": 3255514357,
+      "tick_31": 1594990229,
+      "tick_63": 3954284597,
+      "tick_127": 197864855,
+      "tick_255": 3230553320
+    },
+    "comparison": "both the 16-bit game RNG and 32-bit C runtime RNG matched at each of all 256 tick boundaries in all three cases"
+  },
+  "normalized_host_trace": {
+    "compared": "ordered effectful calls and exact logical arguments at every tick; all EditMessage pointers were null and normalized to logical ID 0",
+    "providers": [
+      "MacTickCount",
+      "TickCount",
+      "ZapEuMapAt",
+      "SetDefaultWindPrompt",
+      "EditMessage",
+      "PictStrnDialog"
+    ],
+    "per_case_trace_sha256": {
+      "5a31/0": "901dfe843dfab0aa186216adb588d9b40ad8b8ab26c4ba0455b13d1b20866872",
+      "1234/1": "4589c52ff153e12bc051cf5f6c455dbd19f2bc835c12a8049a80770141ac64f0",
+      "5a31/2": "648c0f4d790653928bf772bffe261ebeb45e99ef472325aa7ec5b26add8ff5d8"
+    },
+    "call_counts": {
+      "5a31/0": {
+        "MacTickCount": 325,
+        "TickCount": 325,
+        "ZapEuMapAt": 256,
+        "SetDefaultWindPrompt": 260,
+        "EditMessage": 260,
+        "PictStrnDialog": 3
+      },
+      "1234/1": {
+        "MacTickCount": 257,
+        "TickCount": 257,
+        "ZapEuMapAt": 256,
+        "SetDefaultWindPrompt": 260,
+        "EditMessage": 260
+      },
+      "5a31/2": {
+        "MacTickCount": 258,
+        "TickCount": 258,
+        "ZapEuMapAt": 256,
+        "SetDefaultWindPrompt": 260,
+        "EditMessage": 260
+      }
+    },
+    "pure_window_queries": "the closed history-window query returned false; no history drawing or dialog intent followed"
+  },
+  "cases": [
+    {
+      "seed": "0x5a31",
+      "scenario": 0,
+      "original_report_sha256": "08fd2e74e924e270f4cadfaf9ea9a42ccbd4536a59c39101796563a451791a7a",
+      "snapshot_sha256": "7aa0f4c37147cb66c19a3fa820a9d91b7d78d3953cf21cf298991a90967bed21",
+      "last_tick_state_sha256": "5d8cb31f5ba3ac7cd6ec13ab737fff20c1ac89dcdd4f392afad73d06be8f34d1",
+      "native_result": "PASS 256/256 against next2 profile",
+      "comparison_descriptor_sha256": "9ef00c230da38e9e7fed3ef27b64ef7fa0c401954b0865437f6d9d6f815612c8"
+    },
+    {
+      "seed": "0x1234",
+      "scenario": 1,
+      "original_report_sha256": "4482516b9fd0a8f461341588b5921c2a416f911057d72784dd248f53feb42a22",
+      "snapshot_sha256": "d67a3c32c8357c6de8fa4d0be9874e0c7eb87ab27d6e87d4dc17b713c1f67b50",
+      "last_tick_state_sha256": "d49d88cddcf06958bf53907b0261666a21be1b3bc5748148ee4fef6b4549b405",
+      "native_result": "PASS 256/256 against next2 profile",
+      "comparison_descriptor_sha256": "ea9825d82fa6c7fc5c3120b6094adcc5ca5d7a4012186fac161bc05095d16758"
+    },
+    {
+      "seed": "0x5a31",
+      "scenario": 2,
+      "original_report_sha256": "22d2d893f5b62d994c2b5a82df7f26d49685da9171b48923e4d8d84ca25c3c99",
+      "snapshot_sha256": "c9de2a6697037534aec4f89c546330a6efe72b0c8a0c942385f91908a36e4452",
+      "last_tick_state_sha256": "9d1ebc441c8e2ad1c7bf9a55bb36b6865a502dd6bff98e97e5170f7c596d85ae",
+      "native_result": "PASS 256/256 against next2 profile",
+      "comparison_descriptor_sha256": "68e6878e82a10a5ad15e049ba55e7104e009c46838584fe83a10e350cecb6c8e"
+    }
+  ],
+  "link_scope": "61 unresolved symbols were linked to exit-77 fail-closed stubs; none was reached in any of the 768 native tick executions.",
+  "previous_profile": "The separate original-256-tick-summary.json retains the earlier-profile stop points; it has not been overwritten.",
+  "capture_reuse": {
+    "original_capture_profile": "build/workers/recovered_source_next/generated",
+    "original_capture_provenance_sha256": "a9322bb1aadd9ffbef60d8101542ddd0a874855e91e6ffbd194aa52ec3942d51",
+    "comparison_profile": "build/workers/recovered_source_next2/generated",
+    "comparison_provenance_sha256": "67246e91c244173892533bbc27095ea8c09e273bd455a44e100c45798e9ab710",
+    "comparison_state_source_sha256": "4d7527a1961b5792f8322366cbd51b70559e889b41e0b941b2f7e7477441095f",
+    "identical_header_sha256": "bb89c625bfb8bccbf827e1c701bd1490f57106276d81b6abcdf7aa8e7b42fec6",
+    "identical_generated_game_body_module_count": 23,
+    "generated_body_module_sha256_set": "36ff3e703087c1952e58aaf3da5c1986acca99525518c0bb95dbd0f1a042bec4",
+    "source_change": "only recovered_state.c DATA initializer/source provenance changed; 14 nonzero scalar-array defaults added; fixtures explicitly hydrate all 370 nonpointer fields before tick 1",
+    "descriptor_sha256": {
+      "sequence-5a31-0.json": "9ef00c230da38e9e7fed3ef27b64ef7fa0c401954b0865437f6d9d6f815612c8",
+      "sequence-1234-1.json": "ea9825d82fa6c7fc5c3120b6094adcc5ca5d7a4012186fac161bc05095d16758",
+      "sequence-5a31-2.json": "68e6878e82a10a5ad15e049ba55e7104e009c46838584fe83a10e350cecb6c8e"
+    }
+  }
+}

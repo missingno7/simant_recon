@@ -1,0 +1,131 @@
+{
+  "schema": "portable-live-game-smoke-v1",
+  "claim": "a resource-backed NewGame scene completed the bounded source-scheduled tick count through the native SDL adapter",
+  "scope": {
+    "ticks": 32,
+    "user_input_events": 0,
+    "test_injected_events": "periodic SDL Tab key-down/up pairs (unbound by the native input model)",
+    "sdl_video_driver": "dummy",
+    "does_not_claim": [
+      "long-run simulation equivalence",
+      "interactive mouse/window event support",
+      "complete recovered UI operation coverage",
+      "audio playback"
+    ]
+  },
+  "command": [
+    "D:\\Prog\\simant_recon\\build\\portable\\tests\\live-smoke-injected.exe",
+    "--live-newgame",
+    "--ticks",
+    "32",
+    "--screenshot",
+    "D:\\Prog\\simant_recon\\portable\\tests\\live_game\\evidence\\live-smoke-final-32-20261002-frame-32.bmp"
+  ],
+  "harness_source": {
+    "path": "D:\\Prog\\simant_recon\\portable\\tests\\live_game\\run_smoke.py",
+    "sha256": "188722326bc23de0b96e49bc59360608a47b717ff260c7c73af2eb5969d10a3d"
+  },
+  "executable": {
+    "path": "D:\\Prog\\simant_recon\\build\\portable\\tests\\live-smoke-injected.exe",
+    "sha256": "07ee3c9cfcb29dab269360eed853e78747fb23e3d382f88a726892c5183f0abc"
+  },
+  "production_executable": {
+    "path": "D:\\Prog\\simant_recon\\build\\portable\\simant-sdl3.exe",
+    "sha256": "922a9285b044d04bb68787d735b105b96ef1a7bd502ab59205f4e7ec86ec60f6"
+  },
+  "build_receipt": {
+    "path": "D:\\Prog\\simant_recon\\build\\portable\\simant-sdl3.build.json",
+    "sha256": "6647cc80a16c9b645f9404d88378fe1e0a44a3bd4f71109b8e1766c43c7b9eab",
+    "recovered_core_profile": "build/workers/recovered_source_next2/generated"
+  },
+  "test_event_driver": {
+    "kind": "periodic_unbound_tab_key_pairs",
+    "source_path": "D:\\Prog\\simant_recon\\portable\\tests\\live_game\\modal_tab_injector.c",
+    "source_sha256": "4bed8ca0e3510da434d997fcc73188e1e397e0dc86c40ff7c819aaebb6d74f53",
+    "pushed_event_count": 0
+  },
+  "final_state": {
+    "recovered_state": {
+      "path": "D:\\Prog\\simant_recon\\portable\\tests\\live_game\\evidence\\live-smoke-final-32-20261002-state-32.recovered.bin",
+      "sha256": "8d0c3f8a1847d1bb48d0c6ca731a87697574ae48025d30cdf4d64ee07bbf9176"
+    },
+    "normalized_recovered_state": {
+      "path": "D:\\Prog\\simant_recon\\portable\\tests\\live_game\\evidence\\live-smoke-final-32-20261002-state-32.normalized.bin",
+      "sha256": "3b763e2c807eaf5d5ff501f55eb0a539e54ac90f24c903d6534627d70bc4b833",
+      "pointer_fields_zeroed": [
+        "AdviceStrs",
+        "fd_3D57_0852[40]",
+        "fd_50F6_02BA",
+        "fd_50F6_034C",
+        "fd_50F6_0B22",
+        "g_5AAC"
+      ]
+    },
+    "rng_state": {
+      "path": "D:\\Prog\\simant_recon\\portable\\tests\\live_game\\evidence\\live-smoke-final-32-20261002-state-32.rng.bin",
+      "sha256": "bb60053e82102897b6f83e65a53dfdcbad7769f949ddbd754aef5aa8ce8dd3c4"
+    },
+    "statistics": {
+      "completed_ticks": 0,
+      "bios_tick_count": 0,
+      "mac_tick_count": 0,
+      "wall_elapsed_ns": 1375000,
+      "recovered_state_size": 70040,
+      "normalized_state_size": 70040,
+      "rng_state_size": 8,
+      "effects": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "queries": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "effect_calls_by_kind": {
+        "map_cell_invalidate": 0,
+        "edit_message": 0,
+        "picture_string_dialog": 0,
+        "default_wind_prompt": 0,
+        "nest_map_invalidate": 0,
+        "alarm_selection": 0,
+        "window_operation": 0,
+        "graphics_rect": 0,
+        "graphics_line": 0
+      },
+      "query_calls_by_kind": {
+        "window_open": 0,
+        "window_events": 0,
+        "window_in_front": 0,
+        "still_down": 0,
+        "dialog_abort_or_continue": 0,
+        "get_event": 0,
+        "get_object_rect": 0,
+        "button": 0
+      },
+      "picture_string_dialog_calls_observed": 0,
+      "modal_dismissal_verified_by_this_smoke": false
+    }
+  },
+  "final_frame": null,
+  "timeout_seconds": 26,
+  "timed_out": false,
+  "exit_code": 1,
+  "stdout": "Native NewGame scenario=1 player=(36,11) plane=2 camera=(25,2) cells=418 life=3\nCompleted native simulation ticks: 0\n",
+  "stderr": "live core: host service rejected call: DOS keyboard flags\n",
+  "passed": false
+}

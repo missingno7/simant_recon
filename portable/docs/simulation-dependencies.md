@@ -1,6 +1,6 @@
 # Native simulation dependency boundary
 
-This note maps the frozen DOS startup/game loop to the current native simulation code. It is a source-derived dependency map, not a claim that the game is playable or that the native port has a complete simulation tick.
+This note maps the frozen DOS startup/game loop to the current native simulation code. It is a source-derived dependency map; the finite startup/tick comparisons and live-host checks have separate pinned reports.
 
 ## Original loop and clock
 
@@ -59,10 +59,16 @@ DoAntMoveY -> movement and tile effects
 late world/update callbacks, optional sound/UI notification
 ```
 
-Those are real subsystems, not replaceable no-op hooks. `DoAntSim` touches cycle and mode counters, map/tile state, food/health, pheromone grids, multiple ant lists, player state, and callbacks for combat, death, digging, food, and resource effects. The native [`SimGameWorld`](../game/state/world.h) already has typed storage for a subset of these arrays and counters, while `movement.c` supplies low-level movement logic. There is not yet a complete native `DoAntSim` composition or a contract-complete world state for the full DOS call chain.
+Those are real subsystems, not replaceable no-op hooks. `DoAntSim` touches cycle and mode counters, map/tile state, food/health, pheromone grids, multiple ant lists, player state, and callbacks for combat, death, digging, food, and resource effects. The explicit source-reuse integration executes these game bodies against shared recovered state. Its state bridge projects the native [`SimGameWorld`](../game/state/world.h) at completed calls and supplies current TLS snapshots to synchronous host callbacks. Named missing host/game services still fault the call; they are not silently acknowledged.
 
 ## Smallest honest native milestone
 
 Current modules execute real world generation, resource decoding, map/life tile composition, RNG, nest transitions, water and spider behavior. The tests under `portable/tests/` establish their recorded module contracts. The source-reuse work additionally compiles large colony modules against shared native state, but remains outside production until its remaining dependencies and arithmetic adaptations are reviewed.
 
-The `--newgame-view` mode now executes **NewGame world initialization and presentation** with actual assets in the source edit viewport. The complete **DoAntSim tick** is being connected through source reuse and checked against original DOS global-state snapshots. Until that comparison and host integration pass, this remains a native integration build. UI/event/audio functions in the DOS loop belong behind explicit host adapters; silent substitutes for game logic cannot establish a running faithful game.
+The `--newgame-view` mode executes **NewGame world initialization and presentation** with actual assets in the source edit viewport. The explicit recovered-core build additionally supports `--live-newgame` and scenario selection through `--live-game`. Three consecutive 256-tick DOS comparisons have passed for the recorded source profile, and bounded live SDL runs exercise actual session initialization, the source tick body, and presentation. The remaining input/UI/audio services prevent a complete playable-game claim. See [proof boundaries](proof-boundaries.md) for the input versions, compared state, and finite limits.
+
+The live scheduler samples its deadline before `DoAntSim`, runs at most one
+source tick per outer update, and preserves the original pause exception
+`fd_50F6_0AA0 != 0 && fd_50F6_105E < 10`. A synchronous modal or other slow
+callback does not manufacture accumulated catch-up ticks. UI/event/audio
+functions in the DOS loop remain explicit host adapters.

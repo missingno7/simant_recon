@@ -133,6 +133,17 @@ static void test_plane_bounds_and_camera_edges(void)
     assert(portable_game_view_resolve(&registry, &world, &state, &view) ==
            PORTABLE_GAME_VIEW_OK);
     assert(view.map.camera_x == 42 && view.map.camera_y == 45);
+    /* Live refresh retains an explicit source camera even if the player is
+     * elsewhere. Source MapPlane can differ from the selected title plane. */
+    assert(portable_game_view_at(&registry, &state, 0, 95, 12, &view) ==
+           PORTABLE_GAME_VIEW_OK);
+    assert(view.map.plane == 0 && view.map.camera_x == 95 &&
+           view.map.camera_y == 12);
+    assert(portable_game_view_at(&registry, &state, 3, 95, -7, &view) ==
+           PORTABLE_GAME_VIEW_OK);
+    assert(view.map.camera_x == 42 && view.map.camera_y == 0);
+    assert(portable_game_view_at(&registry, &state, 4, 0, 0, &view) ==
+           PORTABLE_GAME_VIEW_UNSUPPORTED_MAP_STATE);
     world.selected_map_plane = 3;
     assert(portable_game_view_resolve(&registry, &world, &state, &view) ==
            PORTABLE_GAME_VIEW_OK);

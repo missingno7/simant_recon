@@ -7,7 +7,9 @@
 
 typedef enum SimRecoveredBridgeStatus {
     SIM_RECOVERED_BRIDGE_OK = 0,
-    SIM_RECOVERED_BRIDGE_INVALID_ARGUMENT = 1
+    SIM_RECOVERED_BRIDGE_INVALID_ARGUMENT = 1,
+    SIM_RECOVERED_BRIDGE_INCONSISTENT_MIRROR = 2,
+    SIM_RECOVERED_BRIDGE_VIEW_UNAVAILABLE = 3
 } SimRecoveredBridgeStatus;
 
 typedef struct SimRecoveredProjectionEntry {
@@ -24,9 +26,10 @@ const SimRecoveredProjectionEntry *sim_recovered_projection_manifest(size_t *cou
  * owner. Their source DATA initializer remains in force in RecoveredState. */
 const char *const *sim_recovered_unmapped_new_game_writes(size_t *count);
 
-/* Start from accepted source DATA initializers, then overlay only the typed
- * fields in the projection manifest. No DOS addresses or resource capsules
- * are imported. */
+/* Start from recovered DATA initializers, then overlay typed fields. After a
+ * successful NewGame, a loaded/recalculated Edit viewport resource is required
+ * to derive source map invalidation bounds; otherwise VIEW_UNAVAILABLE is
+ * returned. No DOS addresses or resource capsules are imported. */
 SimRecoveredBridgeStatus sim_recovered_state_from_session(
     RecoveredState *state, SimSession *session);
 

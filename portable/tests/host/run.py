@@ -23,7 +23,9 @@ for y in range(height):
 report = {"status":"PASS", "scope":"SDL3 host boundary; not game startup or DOS raster proof",
           "harness_sha256":hashlib.sha256(Path(__file__).read_bytes()).hexdigest(),
           "framebuffer_pixels_compared":width*height,
-          "keyboard_queue_test":"SDL left-shift A -> DOS scan/ASCII 1e41, shift flag 2",
+          "keyboard_queue_test":["SDL left-shift A -> DOS scan/ASCII 1e41, shift flag 2",
+                                 "Ctrl+keypad8 -> 4800, control flag 4",
+                                 "Control release -> physical 1d00, flags 0"],
           "quit_queue_test":True,"monotonic_clock_test":True,
           "bmp_sha256":hashlib.sha256(data).hexdigest(),
           "build_receipt":json.loads((ROOT / "build/portable/host-smoke.build.json").read_text())}

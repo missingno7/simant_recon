@@ -1,0 +1,97 @@
+{
+  "schema": "edit-object-process-edit-dos-probe-v1",
+  "status": "PASS",
+  "proof_lanes": {
+    "DOS_candidate_differential": "original DOS processEdit versus source-authored C recompiled by MSC 6.00AX in the Unicorn harness",
+    "portable_native_C": "not exercised by this report"
+  },
+  "pair_identity": {
+    "function": "processEdit",
+    "address": {
+      "unit": "S22",
+      "seg": 14791,
+      "off": 0,
+      "size": 1029
+    },
+    "source": "src\\S22\\m39C7.c",
+    "source_sha256": "e9add4ebd445bd943f24a65764be2a79581f2fc26c349741fdfe8efae3b7030d",
+    "compiled_source_sha256": "e9add4ebd445bd943f24a65764be2a79581f2fc26c349741fdfe8efae3b7030d",
+    "object_sha256": "2aed031ef53a3efb32f720324c989845141d7dd126d85be61276cef1830620be",
+    "linked_code_sha256": "cafa3e14798f3c17a53a9bd4e43ea703069b9213d878c2c4cb631ac8aeb4d0e6",
+    "oracle_sha256": "aa0596c6766322a8229ee3c36e57048c92adc82d50fbe2ef37afb8b85fcf4f11",
+    "unicorn_version": "2.1.4",
+    "harness_sha256": "2c0799048057f59eae61a48be4d695278635594484adf0c70bf46c51b4e0c799",
+    "profile": "msc600ax",
+    "flags": [
+      "/AL",
+      "/Os",
+      "/Oe",
+      "/Og",
+      "/Zi"
+    ],
+    "manifest_sha256": "025a0a9255d910cae4b122ab5a3f3fb40888bb456d7fe42158db7c9e622fcf50"
+  },
+  "producer_report": {
+    "path": "portable\\tests\\input\\evidence\\edit-object-dos-hotbox-event-probe.json",
+    "sha256": "92f6eabc48e9a77d7c792fcce33d3863037598b9dcd9a0f1b1f3690ddcd105e8"
+  },
+  "event_words": [
+    0,
+    0,
+    4660,
+    513,
+    130,
+    72,
+    4,
+    257
+  ],
+  "input_contract": {
+    "physical_phase": "left-button press emits code 4; processEdit waits for the normal six-tick window and reads StillDown=false after the release",
+    "mouse_release": "INT33 release condition is excluded from the code-4 selectable-region mask; it changes button state but adds no code-4 queue record",
+    "BIOS_message_and_tick": "controlled words for this direct semantic probe; the producer report separately proves their original queue construction"
+  },
+  "compared": [
+    "return",
+    "goal flag",
+    "goal x/y",
+    "mode and plane globals",
+    "callback order",
+    "written non-stack state"
+  ],
+  "original_candidate_equal": true,
+  "original_ranges": {
+    "MapPlane": "0000",
+    "fd_50F6_0F44": "0000",
+    "fd_50F6_0A8E": "0000",
+    "fd_50F6_0AA0": "0100",
+    "fd_50F6_0AF8": "0100",
+    "fd_50F6_0AD6": "2800",
+    "fd_50F6_0AE8": "1400",
+    "fd_50F6_0D6C": "feff",
+    "fd_50F6_0508": "0c000800"
+  },
+  "callback_order": [
+    "WinPrintf",
+    "win_IsWinInFront",
+    "TickCount",
+    "TickCount",
+    "win_GetEvent",
+    "TickCount",
+    "win_GetEvent",
+    "TickCount",
+    "win_GetEvent",
+    "TickCount",
+    "win_GetEvent",
+    "TickCount",
+    "win_GetEvent",
+    "TickCount",
+    "myButton",
+    "WinPrintf"
+  ],
+  "tick_count_after": 107,
+  "limitations": [
+    "The candidate is MSC-compiled historical source, not the SDL/native C implementation. The native Event8 DTO has separate transformation tests only.",
+    "The original DOS `processEdit` and MSC candidate plus simulation helpers run in the DOS/candidate differential. Only the host window/timer/button boundary is controlled.",
+    "This is a controlled code-4 semantic case linked to the separate producer trace; it does not replay the entire live window stack or claim universal GUI state coverage."
+  ]
+}

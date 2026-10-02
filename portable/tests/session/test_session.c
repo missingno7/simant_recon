@@ -40,6 +40,9 @@ static void test_open_and_new_game(void)
         fprintf(stderr, "session open: %s (%d)\n",
                 sim_session_status_string(open_status), (int)open_status);
     assert(open_status == SIM_SESSION_OK);
+    assert(session.world.current_ground_tile_id == 1000);
+    assert(session.advice.loaded && session.advice.tutorial.count == 6 &&
+           session.advice.shared_messages.count == 26);
     assert(session.shared_open && session.window_database == &window_database &&
            session.window_registry == &window_registry && session.tileset_open);
     assert(session.world.tick_count_delays[0] == 21);
@@ -64,6 +67,7 @@ static void test_open_and_new_game(void)
 
     assert(sim_session_new_game(&session, &config) == SIM_SESSION_OK);
     assert(session.new_game_ready);
+    assert(session.world.current_ground_tile_id == 1000);
     assert(session.world.scenario == 1);
     assert(session.world.map_plane == 2);
     assert(session.world.selected_map_plane == 2);

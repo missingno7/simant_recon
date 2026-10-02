@@ -16,6 +16,22 @@ selection request and map invalidation are modeled host boundaries.
 | `randworld-session-edge-8000-20261002.json` | 2 cases: scenarios 0/1, seed `8000` | 0 mismatches | `610f5936b70b4f3dba5017b98442464be3c89bb96563fe2140ad0de0cfa31ed8` |
 | `randworld-session-edge-ffff-20261002.json` | 2 cases: scenarios 0/1, seed `ffff` | 0 mismatches | `8b3125a6be755840f6dae1e55de103cbb6b8d21dbcb6c44402578724707bfa9b` |
 
+The following reports rerun those same 12 cases after the source-identity
+union of `world.me_type` and `world.player_caste_type` was added. Each build
+uses a separate, never-overwritten DLL beside its report; the JSON pins the
+loaded DLL SHA-256, runner and imported harness dependency hashes, complete
+native source/header hashes, compiler SHA-256, Unicorn version, oracle SHA-256,
+and case inputs, including the source-DATA prestate for the six words at
+`fd_3D57_07A8..07B2`. The earlier `randworld-union-*.json` and
+`randworld-union-pinned-*.json` reports are retained as dated outputs; the
+`randworld-union-final-*.json` reports additionally pin this prestate claim.
+
+| Report | Domain | Result | Report SHA-256 | DLL SHA-256 |
+| --- | --- | --- | --- | --- |
+| `randworld-union-final-sweep-20261002.json` | 8 cases: scenarios 0/1, seeds `5a31`, `1227`, `52f7`, `7e29` | 0 mismatches | `64dbbf964e5877a6feed4a2798b4bbe54d04f3000a2d39f267de660d146c4d41` | `30e96be0b3037edc73abc807a53c45fade224fc30119cb6d89dee00a47451377` |
+| `randworld-union-final-edge-8000-20261002.json` | 2 cases: scenarios 0/1, seed `8000` | 0 mismatches | `2a42f69575a2d861f5db9f7e367181a169d87b1d02246f8f2eb0289872a57dde` | `4304981c812983843dabaa415f7af2aeae1f101eb7e20eac2207e78751291793` |
+| `randworld-union-final-edge-ffff-20261002.json` | 2 cases: scenarios 0/1, seed `ffff` | 0 mismatches | `00b9d19fb62a6a2c67efeb857311db2755346b0b7b66c18bf8ec4b5d4399ea83` | `b72e08b498d9a1e82c55765108d2c33a73bf9dc718691bfb98914dff4c06e015` |
+
 These are the current post-setup reports. Each pins
 `setup.c` SHA-256 `a9493a4a6b842740177b8da0c57a5619573225780218cfe3a62375647f6ddc50`.
 The original `randworld-seed-sweep-20261002.json` and `randworld-edge-*-20261002.json`

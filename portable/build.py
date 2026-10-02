@@ -10,6 +10,7 @@ from pathlib import Path
 import shutil
 import shlex
 import subprocess
+import sys
 import urllib.request
 import zipfile
 
@@ -40,7 +41,8 @@ def install_sdk() -> None:
     print(f"Verified SDL3 {VERSION}: {actual}")
 
 
-def build(main: Path, output: Path, sources: list[Path]) -> None:
+def build(main: Path, output: Path, sources: list[Path],
+          profile: Path | None = None) -> None:
     sdk = sdk_path()
     if not (sdk / "include" / "SDL3" / "SDL.h").exists():
         raise SystemExit("SDL3 SDK missing; run python portable/build.py --setup-sdk")
@@ -51,12 +53,63 @@ def build(main: Path, output: Path, sources: list[Path]) -> None:
     if not compiler:
         raise SystemExit("MinGW-w64 GCC required; set SIMANT_CC")
     output.parent.mkdir(parents=True, exist_ok=True)
+    frozen_check = output.parent / "frozen-oracle-check.json"
+    subprocess.run([sys.executable, str(ROOT / "tools/oracle_checkpoint.py"),
+                    "--output", str(frozen_check)], cwd=ROOT, check=True)
+    if not json.loads(frozen_check.read_text())["ready"]:
+        raise SystemExit("Frozen historical input identity check failed")
+    core_objects=[]
+    core_hashes={}
+    extra_flags=[]
+    if profile is not None:
+        profile=profile.resolve()
+        if not profile.is_relative_to(ROOT):
+            raise SystemExit("Source profile must be in the workspace")
+        provenance=json.loads((profile / "provenance.json").read_text())
+        if not all(row.get("compile", {}).get("passed")
+                   for row in provenance["modules"]) or not (
+                provenance.get("support_compile", {}).get("passed") and
+                provenance.get("native_adapter_compile", {}).get("passed")):
+            raise SystemExit("Source profile has not passed its complete compile gate")
+        state=provenance["recovered_state"]
+        if state["binding_status"] != "COMPLETE" or state["source_data_initializer_mismatches"]:
+            raise SystemExit("Incomplete recovered source profile")
+        expected={state["path"]:state["header_sha256"],
+                  state["source_path"]:state["source_sha256"],
+                  provenance["native_adapter_compile"]["path"]:
+                      provenance["native_adapter_compile"]["source_sha256"]}
+        expected["portable/tools/recover_source.py"] = provenance["generator_sha256"]
+        for row in provenance["modules"]:
+            expected[row["source"]]=row["source_sha256"]
+            expected[row["generated"]]=row["generated_sha256"]
+        for name,digest in expected.items():
+            if hashlib.sha256((ROOT / name).read_bytes()).hexdigest()!=digest:
+                raise SystemExit(f"Recovered source profile identity mismatch: {name}")
+        core_hashes={**expected, (profile / "provenance.json").relative_to(ROOT).as_posix():
+                     hashlib.sha256((profile / "provenance.json").read_bytes()).hexdigest()}
+        for row in provenance["modules"]:
+            obj=output.parent / "core-objects" / (row["name"]+".o")
+            obj.parent.mkdir(parents=True,exist_ok=True)
+            # Preserve the profile's recorded warning policy for historical
+            # bodies. Native adapters and host code keep the strict gate.
+            flags=[flag for flag in row["compile"]["command"]
+                   if flag.startswith("-W") or flag.startswith("-std=")]
+            subprocess.run([compiler,*flags,"-I",str(ROOT),"-I",str(profile),
+                            "-c",str(ROOT / row["generated"]),"-o",str(obj)],
+                           cwd=ROOT,check=True)
+            core_objects.append(obj)
+        sources=[*sources,profile / "recovered_state.c",
+                 profile / "recovered_native_adapters.c",
+                 *(ROOT / "portable/game/recovered" / name for name in
+                   ("engine.c","session_bridge.c","audio_adapter.c","nest_adapter.c",
+                    "memory_adapter.c"))]
+        extra_flags=["-DSIMANT_ENABLE_RECOVERED_CORE=1","-I",str(profile),"-I",str(ROOT)]
     command = [compiler, "-std=c11", "-O2", "-Wall", "-Wextra", "-Werror",
                "-I", str(ROOT / "portable"), "-I", str(sdk / "include"),
-               str(main), *(str(p) for p in sources),
+               *extra_flags,str(main), *(str(p) for p in sources),*(str(p) for p in core_objects),
                "-L", str(sdk / "lib"), "-lSDL3", "-o", str(output)]
     dependencies = subprocess.check_output(
-        [compiler, "-std=c11", "-I", "portable", "-I", str(sdk / "include"),
+        [compiler, "-std=c11", "-I", "portable", "-I", str(sdk / "include"),*extra_flags,
          "-MM", "-MT", "SIMANT_DEP",
          *(p.relative_to(ROOT).as_posix() for p in [main, *sources])],
         text=True, cwd=ROOT)
@@ -69,6 +122,7 @@ def build(main: Path, output: Path, sources: list[Path]) -> None:
                 inputs.add(dependency)
     input_hashes = {p.relative_to(ROOT).as_posix(): hashlib.sha256(
         p.read_bytes()).hexdigest() for p in sorted(inputs)}
+    input_hashes.update(core_hashes)
     subprocess.run(command, check=True, cwd=ROOT)
     changed = [name for name,expected in input_hashes.items()
                if hashlib.sha256((ROOT / name).read_bytes()).hexdigest()!=expected]
@@ -81,12 +135,19 @@ def build(main: Path, output: Path, sources: list[Path]) -> None:
                "oracle": subprocess.check_output(["git", "-c",
                    f"safe.directory={ROOT.as_posix()}", "rev-parse",
                    "dos-semantic-oracle-v1^{commit}"], text=True, cwd=ROOT).strip(),
+               "frozen_oracle_inputs": {"status": "PASS", "receipt_sha256":
+                   hashlib.sha256(frozen_check.read_bytes()).hexdigest()},
                "command": command,
                "inputs": input_hashes,
                "sources_stable_during_build": True,
                "compiler_sha256":hashlib.sha256(Path(compiler).read_bytes()).hexdigest(),
                "sdl_library_sha256": hashlib.sha256((sdk / "bin/SDL3.dll").read_bytes()).hexdigest(),
                "executable_sha256": hashlib.sha256(output.read_bytes()).hexdigest()}
+    if profile is not None:
+        receipt["recovered_core"]={"status":"DIAGNOSTIC_INTEGRATION",
+             "profile":profile.relative_to(ROOT).as_posix(),
+             "objects":{p.relative_to(ROOT).as_posix():hashlib.sha256(p.read_bytes()).hexdigest()
+                        for p in core_objects}}
     output.with_suffix(".build.json").write_text(json.dumps(receipt, indent=2)+"\n")
     print(output)
 
@@ -95,6 +156,8 @@ def main() -> None:
     parser = argparse.ArgumentParser()
     parser.add_argument("--setup-sdk", action="store_true")
     parser.add_argument("--host-test", action="store_true")
+    parser.add_argument("--core-profile",type=Path,
+                        help="explicit diagnostic source-reuse profile; no default")
     args = parser.parse_args()
     if args.setup_sdk:
         install_sdk()
@@ -110,7 +173,7 @@ def main() -> None:
     sources = sorted(p for folder in ("game", "render", "ui_model", "audio", "platform")
                      for p in (ROOT / "portable" / folder).rglob("*.c")
                      if not p.is_relative_to(ROOT / "portable/game/recovered"))
-    build(main_file, ROOT / "build/portable/simant-sdl3.exe", sources)
+    build(main_file, ROOT / "build/portable/simant-sdl3.exe", sources,args.core_profile)
 
 
 if __name__ == "__main__":

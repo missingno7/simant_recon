@@ -1,0 +1,2285 @@
+{
+  "schema": "calcscore-original-dos-portable-model-v1",
+  "status": "PASS",
+  "scope": "Original 16-bit DOS CalcScore return and eight score-array values versus portable native model. This does not prove EndGameDialog modal behavior, text rendering, audio completion, high-score registration, or record-entry flow.",
+  "prepared_pair": {
+    "function": "CalcScore",
+    "address": {
+      "unit": "S14",
+      "seg": 14412,
+      "off": 0,
+      "size": 1169
+    },
+    "source": "src\\S14\\m384C.c",
+    "source_sha256": "245f8c01d5a330c571048b8cd1b134cf544394af84f7b502a153c73adbd91020",
+    "compiled_source_sha256": "245f8c01d5a330c571048b8cd1b134cf544394af84f7b502a153c73adbd91020",
+    "object_sha256": "e9c9d27ae37302e4428915a562f7a7b052aaae9debcc17e08868f9d599224541",
+    "linked_code_sha256": "f60d58529aef503bccab39b0b7a73b75b79fe37c7703b00e5b49415b62d4699b",
+    "oracle_sha256": "aa0596c6766322a8229ee3c36e57048c92adc82d50fbe2ef37afb8b85fcf4f11",
+    "unicorn_version": "2.1.4",
+    "harness_sha256": "2c0799048057f59eae61a48be4d695278635594484adf0c70bf46c51b4e0c799",
+    "profile": "msc600ax",
+    "flags": [
+      "/AL",
+      "/Os",
+      "/Og",
+      "/Oe",
+      "/Zi"
+    ],
+    "manifest_sha256": "025a0a9255d910cae4b122ab5a3f3fb40888bb456d7fe42158db7c9e622fcf50"
+  },
+  "native_shared_library_sha256": "be50ddf9d48d385dccc091bbfc6d9d33855193b705d6e9e3a18801d2ae8b0fe0",
+  "native_adapter": "portable/tests/dialogs/game_over_native_adapter.c",
+  "native_adapter_sha256": "9fa4b757c1cc9a3ac0b14ac8308e41c92cf5d495cee86c1e5503feb13f5f93bf",
+  "source_pins": {
+    "portable/ui_model/dialogs/game_over.c": "6219ad899957686398158c96e0f3f3d20a26c08bfddc7701307eddd6f1a34161",
+    "portable/ui_model/dialogs/game_over.h": "8191655e3f1ba516459d94f748071709d6da96c281ae45e8599ffe33ba9d1fca",
+    "portable/tests/dialogs/game_over_native_adapter.c": "9fa4b757c1cc9a3ac0b14ac8308e41c92cf5d495cee86c1e5503feb13f5f93bf",
+    "portable/tests/dialogs/run_calcscore_dos_differential.py": "34e9fb7fc6a571ff2a24bf8a66be5c9e6d04f712e212c641ed7a59ee5eb94f21",
+    "src/S14/m384C.c": "245f8c01d5a330c571048b8cd1b134cf544394af84f7b502a153c73adbd91020",
+    "tools/behavior.py": "2c0799048057f59eae61a48be4d695278635594484adf0c70bf46c51b4e0c799",
+    "tools/functions.py": "0f67c8d9eb01e319620c9342e79c35f76006091d860894aad6dcf8d61ee2b39e",
+    "tools/match.py": "44fdd8b939b2bbf135d8947d8f6ef6b1854dec133da4af86c55eb94f02869b56",
+    "tools/exe.py": "d560f69dcdf0d1c9e89278b50bebe225a9b86db2c259fa54ec9eace6ea05a8b5",
+    "tools/modules.py": "8a5c1e85db6970cce3c693c016b313b7ee1922fa6eaf146a00391bfea86edf1a",
+    "tools/modctx.py": "33f3a4e3d77371e3095bfeb00358c13bc7838235c27bfe8898dba7e313f1cc25",
+    "tools/autosearch.py": "9c2727a875ee94c66ceac868d64c7070c316a5dbbef7cd6b21a670b44a2e1806",
+    "assets/SHARED.NDX": "e172f030c11f417af4b5be34dacbda9a63f157820827b40d62c08ca2c6ea7477",
+    "assets/SHARED.DAT": "aa0d2342510f99abf57a685ea93178d9dd8d2d5be1e65b556c9b27f974012750"
+  },
+  "source_pins_after": {
+    "portable/ui_model/dialogs/game_over.c": "6219ad899957686398158c96e0f3f3d20a26c08bfddc7701307eddd6f1a34161",
+    "portable/ui_model/dialogs/game_over.h": "8191655e3f1ba516459d94f748071709d6da96c281ae45e8599ffe33ba9d1fca",
+    "portable/tests/dialogs/game_over_native_adapter.c": "9fa4b757c1cc9a3ac0b14ac8308e41c92cf5d495cee86c1e5503feb13f5f93bf",
+    "portable/tests/dialogs/run_calcscore_dos_differential.py": "34e9fb7fc6a571ff2a24bf8a66be5c9e6d04f712e212c641ed7a59ee5eb94f21",
+    "src/S14/m384C.c": "245f8c01d5a330c571048b8cd1b134cf544394af84f7b502a153c73adbd91020",
+    "tools/behavior.py": "2c0799048057f59eae61a48be4d695278635594484adf0c70bf46c51b4e0c799",
+    "tools/functions.py": "0f67c8d9eb01e319620c9342e79c35f76006091d860894aad6dcf8d61ee2b39e",
+    "tools/match.py": "44fdd8b939b2bbf135d8947d8f6ef6b1854dec133da4af86c55eb94f02869b56",
+    "tools/exe.py": "d560f69dcdf0d1c9e89278b50bebe225a9b86db2c259fa54ec9eace6ea05a8b5",
+    "tools/modules.py": "8a5c1e85db6970cce3c693c016b313b7ee1922fa6eaf146a00391bfea86edf1a",
+    "tools/modctx.py": "33f3a4e3d77371e3095bfeb00358c13bc7838235c27bfe8898dba7e313f1cc25",
+    "tools/autosearch.py": "9c2727a875ee94c66ceac868d64c7070c316a5dbbef7cd6b21a670b44a2e1806",
+    "assets/SHARED.NDX": "e172f030c11f417af4b5be34dacbda9a63f157820827b40d62c08ca2c6ea7477",
+    "assets/SHARED.DAT": "aa0d2342510f99abf57a685ea93178d9dd8d2d5be1e65b556c9b27f974012750"
+  },
+  "case_count": 63,
+  "compared_count": 63,
+  "source_candidate_control_mismatch_count": 0,
+  "portable_model_mismatch_count": 0,
+  "cases": [
+    {
+      "label": "directed/scenario-0/near-time",
+      "equal": true,
+      "original_dos": {
+        "score": 497574,
+        "components": [
+          0,
+          0,
+          100,
+          66,
+          0,
+          0,
+          0,
+          0
+        ]
+      },
+      "portable": {
+        "score": 497574,
+        "components": [
+          0,
+          0,
+          100,
+          66,
+          0,
+          0,
+          0,
+          0
+        ]
+      },
+      "plan": {
+        "rank_score": 497574,
+        "level_index": 7,
+        "opening_sound_id": 10010
+      }
+    },
+    {
+      "label": "directed/scenario-1/near-time",
+      "equal": true,
+      "original_dos": {
+        "score": 497574,
+        "components": [
+          0,
+          0,
+          100,
+          66,
+          0,
+          0,
+          0,
+          0
+        ]
+      },
+      "portable": {
+        "score": 497574,
+        "components": [
+          0,
+          0,
+          100,
+          66,
+          0,
+          0,
+          0,
+          0
+        ]
+      },
+      "plan": {
+        "rank_score": 497574,
+        "level_index": 2,
+        "opening_sound_id": 10008
+      }
+    },
+    {
+      "label": "directed/scenario-2/near-time",
+      "equal": true,
+      "original_dos": {
+        "score": 2380529,
+        "components": [
+          0,
+          0,
+          100,
+          66,
+          100,
+          100,
+          0,
+          0
+        ]
+      },
+      "portable": {
+        "score": 2380529,
+        "components": [
+          0,
+          0,
+          100,
+          66,
+          100,
+          100,
+          0,
+          0
+        ]
+      },
+      "plan": {
+        "rank_score": 476105,
+        "level_index": 7,
+        "opening_sound_id": 10010
+      }
+    },
+    {
+      "label": "directed/scenario-3/near-time",
+      "equal": true,
+      "original_dos": {
+        "score": 1363330,
+        "components": [
+          0,
+          0,
+          100,
+          66,
+          100,
+          100,
+          0,
+          0
+        ]
+      },
+      "portable": {
+        "score": 1363330,
+        "components": [
+          0,
+          0,
+          100,
+          66,
+          100,
+          100,
+          0,
+          0
+        ]
+      },
+      "plan": {
+        "rank_score": 1363330,
+        "level_index": 4,
+        "opening_sound_id": 10008
+      }
+    },
+    {
+      "label": "ring/cursor-0/count-0",
+      "equal": true,
+      "original_dos": {
+        "score": 1542184,
+        "components": [
+          0,
+          0,
+          0,
+          50,
+          100,
+          100,
+          52,
+          48
+        ]
+      },
+      "portable": {
+        "score": 1542184,
+        "components": [
+          0,
+          0,
+          0,
+          50,
+          100,
+          100,
+          52,
+          48
+        ]
+      },
+      "plan": {
+        "rank_score": 1542184,
+        "level_index": 9,
+        "opening_sound_id": 10010
+      }
+    },
+    {
+      "label": "ring/cursor-0/count-63",
+      "equal": true,
+      "original_dos": {
+        "score": 1126499,
+        "components": [
+          70,
+          0,
+          0,
+          50,
+          100,
+          0,
+          47,
+          54
+        ]
+      },
+      "portable": {
+        "score": 1126499,
+        "components": [
+          70,
+          0,
+          0,
+          50,
+          100,
+          0,
+          47,
+          54
+        ]
+      },
+      "plan": {
+        "rank_score": 225299,
+        "level_index": 6,
+        "opening_sound_id": 0
+      }
+    },
+    {
+      "label": "ring/cursor-1/count-1",
+      "equal": true,
+      "original_dos": {
+        "score": 45711,
+        "components": [
+          100,
+          100,
+          100,
+          0,
+          100,
+          100,
+          48,
+          45
+        ]
+      },
+      "portable": {
+        "score": 45711,
+        "components": [
+          100,
+          100,
+          100,
+          0,
+          100,
+          100,
+          48,
+          45
+        ]
+      },
+      "plan": {
+        "rank_score": 9142,
+        "level_index": 0,
+        "opening_sound_id": 0
+      }
+    },
+    {
+      "label": "ring/cursor-63/count-63",
+      "equal": true,
+      "original_dos": {
+        "score": 749687,
+        "components": [
+          -255,
+          375,
+          100,
+          9,
+          0,
+          0,
+          0,
+          0
+        ]
+      },
+      "portable": {
+        "score": 749687,
+        "components": [
+          -255,
+          375,
+          100,
+          9,
+          0,
+          0,
+          0,
+          0
+        ]
+      },
+      "plan": {
+        "rank_score": 749687,
+        "level_index": 8,
+        "opening_sound_id": 10010
+      }
+    },
+    {
+      "label": "ring/cursor-62/count-2",
+      "equal": true,
+      "original_dos": {
+        "score": 44391245,
+        "components": [
+          -15884,
+          31857,
+          0,
+          100,
+          50,
+          50,
+          45,
+          45
+        ]
+      },
+      "portable": {
+        "score": 44391245,
+        "components": [
+          -15884,
+          31857,
+          0,
+          100,
+          50,
+          50,
+          45,
+          45
+        ]
+      },
+      "plan": {
+        "rank_score": 8878249,
+        "level_index": 9,
+        "opening_sound_id": 10010
+      }
+    },
+    {
+      "label": "food-long/0-0",
+      "equal": true,
+      "original_dos": {
+        "score": 455485,
+        "components": [
+          0,
+          0,
+          100,
+          50,
+          0,
+          0,
+          0,
+          0
+        ]
+      },
+      "portable": {
+        "score": 455485,
+        "components": [
+          0,
+          0,
+          100,
+          50,
+          0,
+          0,
+          0,
+          0
+        ]
+      },
+      "plan": {
+        "rank_score": 455485,
+        "level_index": 7,
+        "opening_sound_id": 0
+      }
+    },
+    {
+      "label": "food-long/1-0",
+      "equal": true,
+      "original_dos": {
+        "score": 455485,
+        "components": [
+          0,
+          0,
+          100,
+          50,
+          0,
+          0,
+          0,
+          0
+        ]
+      },
+      "portable": {
+        "score": 455485,
+        "components": [
+          0,
+          0,
+          100,
+          50,
+          0,
+          0,
+          0,
+          0
+        ]
+      },
+      "plan": {
+        "rank_score": 455485,
+        "level_index": 7,
+        "opening_sound_id": 0
+      }
+    },
+    {
+      "label": "food-long/100-100",
+      "equal": true,
+      "original_dos": {
+        "score": 174475,
+        "components": [
+          0,
+          0,
+          0,
+          50,
+          0,
+          0,
+          0,
+          0
+        ]
+      },
+      "portable": {
+        "score": 174475,
+        "components": [
+          0,
+          0,
+          0,
+          50,
+          0,
+          0,
+          0,
+          0
+        ]
+      },
+      "plan": {
+        "rank_score": 174475,
+        "level_index": 5,
+        "opening_sound_id": 0
+      }
+    },
+    {
+      "label": "food-long/100-101",
+      "equal": true,
+      "original_dos": {
+        "score": 171664,
+        "components": [
+          0,
+          0,
+          -1,
+          50,
+          0,
+          0,
+          0,
+          0
+        ]
+      },
+      "portable": {
+        "score": 171664,
+        "components": [
+          0,
+          0,
+          -1,
+          50,
+          0,
+          0,
+          0,
+          0
+        ]
+      },
+      "plan": {
+        "rank_score": 171664,
+        "level_index": 5,
+        "opening_sound_id": 0
+      }
+    },
+    {
+      "label": "food-long/2147483647--1",
+      "equal": true,
+      "original_dos": {
+        "score": 174475,
+        "components": [
+          0,
+          0,
+          0,
+          50,
+          0,
+          0,
+          0,
+          0
+        ]
+      },
+      "portable": {
+        "score": 174475,
+        "components": [
+          0,
+          0,
+          0,
+          50,
+          0,
+          0,
+          0,
+          0
+        ]
+      },
+      "plan": {
+        "rank_score": 174475,
+        "level_index": 5,
+        "opening_sound_id": 0
+      }
+    },
+    {
+      "label": "food-long/2147418112-2147483647",
+      "equal": true,
+      "original_dos": {
+        "score": 174475,
+        "components": [
+          0,
+          0,
+          0,
+          50,
+          0,
+          0,
+          0,
+          0
+        ]
+      },
+      "portable": {
+        "score": 174475,
+        "components": [
+          0,
+          0,
+          0,
+          50,
+          0,
+          0,
+          0,
+          0
+        ]
+      },
+      "plan": {
+        "rank_score": 174475,
+        "level_index": 5,
+        "opening_sound_id": 0
+      }
+    },
+    {
+      "label": "seeded/0",
+      "equal": true,
+      "original_dos": {
+        "score": 1526884,
+        "components": [
+          613,
+          0,
+          0,
+          100,
+          0,
+          0,
+          0,
+          0
+        ]
+      },
+      "portable": {
+        "score": 1526884,
+        "components": [
+          613,
+          0,
+          0,
+          100,
+          0,
+          0,
+          0,
+          0
+        ]
+      },
+      "plan": {
+        "rank_score": 1526884,
+        "level_index": 4,
+        "opening_sound_id": 10008
+      }
+    },
+    {
+      "label": "seeded/1",
+      "equal": true,
+      "original_dos": {
+        "score": 47835,
+        "components": [
+          203,
+          -120,
+          0,
+          100,
+          100,
+          100,
+          44,
+          51
+        ]
+      },
+      "portable": {
+        "score": 47835,
+        "components": [
+          203,
+          -120,
+          0,
+          100,
+          100,
+          100,
+          44,
+          51
+        ]
+      },
+      "plan": {
+        "rank_score": 47835,
+        "level_index": 5,
+        "opening_sound_id": 10010
+      }
+    },
+    {
+      "label": "seeded/2",
+      "equal": true,
+      "original_dos": {
+        "score": -1134064,
+        "components": [
+          55,
+          0,
+          -16584,
+          0,
+          0,
+          0,
+          0,
+          0
+        ]
+      },
+      "portable": {
+        "score": -1134064,
+        "components": [
+          55,
+          0,
+          -16584,
+          0,
+          0,
+          0,
+          0,
+          0
+        ]
+      },
+      "plan": {
+        "rank_score": -1134064,
+        "level_index": 5,
+        "opening_sound_id": 10010
+      }
+    },
+    {
+      "label": "seeded/3",
+      "equal": true,
+      "original_dos": {
+        "score": 1406496,
+        "components": [
+          636,
+          0,
+          100,
+          -31,
+          0,
+          0,
+          0,
+          0
+        ]
+      },
+      "portable": {
+        "score": 1406496,
+        "components": [
+          636,
+          0,
+          100,
+          -31,
+          0,
+          0,
+          0,
+          0
+        ]
+      },
+      "plan": {
+        "rank_score": 1406496,
+        "level_index": 4,
+        "opening_sound_id": 0
+      }
+    },
+    {
+      "label": "seeded/4",
+      "equal": true,
+      "original_dos": {
+        "score": 12734,
+        "components": [
+          -240,
+          0,
+          0,
+          0,
+          0,
+          100,
+          50,
+          54
+        ]
+      },
+      "portable": {
+        "score": 12734,
+        "components": [
+          -240,
+          0,
+          0,
+          0,
+          0,
+          100,
+          50,
+          54
+        ]
+      },
+      "plan": {
+        "rank_score": 2546,
+        "level_index": 5,
+        "opening_sound_id": 10010
+      }
+    },
+    {
+      "label": "seeded/5",
+      "equal": true,
+      "original_dos": {
+        "score": 23810,
+        "components": [
+          -355,
+          -54,
+          100,
+          100,
+          100,
+          100,
+          56,
+          35
+        ]
+      },
+      "portable": {
+        "score": 23810,
+        "components": [
+          -355,
+          -54,
+          100,
+          100,
+          100,
+          100,
+          56,
+          35
+        ]
+      },
+      "plan": {
+        "rank_score": 4762,
+        "level_index": 0,
+        "opening_sound_id": 10008
+      }
+    },
+    {
+      "label": "seeded/6",
+      "equal": true,
+      "original_dos": {
+        "score": 31752836,
+        "components": [
+          16383,
+          0,
+          0,
+          100,
+          0,
+          0,
+          0,
+          0
+        ]
+      },
+      "portable": {
+        "score": 31752836,
+        "components": [
+          16383,
+          0,
+          0,
+          100,
+          0,
+          0,
+          0,
+          0
+        ]
+      },
+      "plan": {
+        "rank_score": 31752836,
+        "level_index": 4,
+        "opening_sound_id": 10008
+      }
+    },
+    {
+      "label": "seeded/7",
+      "equal": true,
+      "original_dos": {
+        "score": 722893,
+        "components": [
+          50,
+          0,
+          99,
+          100,
+          0,
+          0,
+          0,
+          0
+        ]
+      },
+      "portable": {
+        "score": 722893,
+        "components": [
+          50,
+          0,
+          99,
+          100,
+          0,
+          0,
+          0,
+          0
+        ]
+      },
+      "plan": {
+        "rank_score": 722893,
+        "level_index": 8,
+        "opening_sound_id": 0
+      }
+    },
+    {
+      "label": "seeded/8",
+      "equal": true,
+      "original_dos": {
+        "score": 6923,
+        "components": [
+          0,
+          0,
+          101,
+          0,
+          0,
+          0,
+          0,
+          0
+        ]
+      },
+      "portable": {
+        "score": 6923,
+        "components": [
+          0,
+          0,
+          101,
+          0,
+          0,
+          0,
+          0,
+          0
+        ]
+      },
+      "plan": {
+        "rank_score": 6923,
+        "level_index": 5,
+        "opening_sound_id": 0
+      }
+    },
+    {
+      "label": "seeded/9",
+      "equal": true,
+      "original_dos": {
+        "score": -1096194,
+        "components": [
+          5,
+          50,
+          -16584,
+          -31,
+          100,
+          100,
+          52,
+          59
+        ]
+      },
+      "portable": {
+        "score": -1096194,
+        "components": [
+          5,
+          50,
+          -16584,
+          -31,
+          100,
+          100,
+          52,
+          59
+        ]
+      },
+      "plan": {
+        "rank_score": -1096194,
+        "level_index": 0,
+        "opening_sound_id": 0
+      }
+    },
+    {
+      "label": "seeded/10",
+      "equal": true,
+      "original_dos": {
+        "score": -761106,
+        "components": [
+          -16384,
+          50,
+          0,
+          50,
+          0,
+          0,
+          0,
+          0
+        ]
+      },
+      "portable": {
+        "score": -761106,
+        "components": [
+          -16384,
+          50,
+          0,
+          50,
+          0,
+          0,
+          0,
+          0
+        ]
+      },
+      "plan": {
+        "rank_score": -761106,
+        "level_index": 0,
+        "opening_sound_id": 10008
+      }
+    },
+    {
+      "label": "seeded/11",
+      "equal": true,
+      "original_dos": {
+        "score": 1525879,
+        "components": [
+          0,
+          0,
+          0,
+          0,
+          100,
+          100,
+          49,
+          51
+        ]
+      },
+      "portable": {
+        "score": 1525879,
+        "components": [
+          0,
+          0,
+          0,
+          0,
+          100,
+          100,
+          49,
+          51
+        ]
+      },
+      "plan": {
+        "rank_score": 1525879,
+        "level_index": 9,
+        "opening_sound_id": 0
+      }
+    },
+    {
+      "label": "seeded/12",
+      "equal": true,
+      "original_dos": {
+        "score": -2146361164,
+        "components": [
+          0,
+          0,
+          99,
+          -15,
+          0,
+          100,
+          44,
+          48
+        ]
+      },
+      "portable": {
+        "score": -2146361164,
+        "components": [
+          0,
+          0,
+          99,
+          -15,
+          0,
+          100,
+          44,
+          48
+        ]
+      },
+      "plan": {
+        "rank_score": -2146361164,
+        "level_index": 5,
+        "opening_sound_id": 0
+      }
+    },
+    {
+      "label": "seeded/13",
+      "equal": true,
+      "original_dos": {
+        "score": 44144635,
+        "components": [
+          -32768,
+          100,
+          100,
+          100,
+          0,
+          0,
+          0,
+          0
+        ]
+      },
+      "portable": {
+        "score": 44144635,
+        "components": [
+          -32768,
+          100,
+          100,
+          100,
+          0,
+          0,
+          0,
+          0
+        ]
+      },
+      "plan": {
+        "rank_score": 44144635,
+        "level_index": 4,
+        "opening_sound_id": 10008
+      }
+    },
+    {
+      "label": "seeded/14",
+      "equal": true,
+      "original_dos": {
+        "score": 1345587,
+        "components": [
+          0,
+          0,
+          100,
+          100,
+          0,
+          50,
+          46,
+          45
+        ]
+      },
+      "portable": {
+        "score": 1345587,
+        "components": [
+          0,
+          0,
+          100,
+          100,
+          0,
+          50,
+          46,
+          45
+        ]
+      },
+      "plan": {
+        "rank_score": 1345587,
+        "level_index": 4,
+        "opening_sound_id": 10008
+      }
+    },
+    {
+      "label": "seeded/15",
+      "equal": true,
+      "original_dos": {
+        "score": 2609071,
+        "components": [
+          161,
+          74,
+          100,
+          100,
+          100,
+          100,
+          47,
+          56
+        ]
+      },
+      "portable": {
+        "score": 2609071,
+        "components": [
+          161,
+          74,
+          100,
+          100,
+          100,
+          100,
+          47,
+          56
+        ]
+      },
+      "plan": {
+        "rank_score": 2609071,
+        "level_index": 4,
+        "opening_sound_id": 0
+      }
+    },
+    {
+      "label": "seeded/16",
+      "equal": true,
+      "original_dos": {
+        "score": -623926,
+        "components": [
+          -16334,
+          0,
+          100,
+          100,
+          100,
+          100,
+          47,
+          54
+        ]
+      },
+      "portable": {
+        "score": -623926,
+        "components": [
+          -16334,
+          0,
+          100,
+          100,
+          100,
+          100,
+          47,
+          54
+        ]
+      },
+      "plan": {
+        "rank_score": -124785,
+        "level_index": 5,
+        "opening_sound_id": 10010
+      }
+    },
+    {
+      "label": "seeded/17",
+      "equal": true,
+      "original_dos": {
+        "score": 39299,
+        "components": [
+          0,
+          0,
+          100,
+          -31,
+          100,
+          100,
+          47,
+          48
+        ]
+      },
+      "portable": {
+        "score": 39299,
+        "components": [
+          0,
+          0,
+          100,
+          -31,
+          100,
+          100,
+          47,
+          48
+        ]
+      },
+      "plan": {
+        "rank_score": 39299,
+        "level_index": 0,
+        "opening_sound_id": 0
+      }
+    },
+    {
+      "label": "seeded/18",
+      "equal": true,
+      "original_dos": {
+        "score": 2261405,
+        "components": [
+          -523,
+          0,
+          200,
+          100,
+          50,
+          100,
+          52,
+          59
+        ]
+      },
+      "portable": {
+        "score": 2261405,
+        "components": [
+          -523,
+          0,
+          200,
+          100,
+          50,
+          100,
+          52,
+          59
+        ]
+      },
+      "plan": {
+        "rank_score": 452281,
+        "level_index": 2,
+        "opening_sound_id": 10008
+      }
+    },
+    {
+      "label": "seeded/19",
+      "equal": true,
+      "original_dos": {
+        "score": 32535,
+        "components": [
+          505,
+          0,
+          101,
+          50,
+          0,
+          0,
+          0,
+          0
+        ]
+      },
+      "portable": {
+        "score": 32535,
+        "components": [
+          505,
+          0,
+          101,
+          50,
+          0,
+          0,
+          0,
+          0
+        ]
+      },
+      "plan": {
+        "rank_score": 32535,
+        "level_index": 0,
+        "opening_sound_id": 0
+      }
+    },
+    {
+      "label": "seeded/20",
+      "equal": true,
+      "original_dos": {
+        "score": 5339385,
+        "components": [
+          500,
+          16,
+          99,
+          100,
+          100,
+          100,
+          57,
+          45
+        ]
+      },
+      "portable": {
+        "score": 5339385,
+        "components": [
+          500,
+          16,
+          99,
+          100,
+          100,
+          100,
+          57,
+          45
+        ]
+      },
+      "plan": {
+        "rank_score": 1067877,
+        "level_index": 9,
+        "opening_sound_id": 10010
+      }
+    },
+    {
+      "label": "seeded/21",
+      "equal": true,
+      "original_dos": {
+        "score": -8429,
+        "components": [
+          -340,
+          179,
+          0,
+          -15,
+          0,
+          0,
+          0,
+          0
+        ]
+      },
+      "portable": {
+        "score": -8429,
+        "components": [
+          -340,
+          179,
+          0,
+          -15,
+          0,
+          0,
+          0,
+          0
+        ]
+      },
+      "plan": {
+        "rank_score": -8429,
+        "level_index": 0,
+        "opening_sound_id": 0
+      }
+    },
+    {
+      "label": "seeded/22",
+      "equal": true,
+      "original_dos": {
+        "score": 43910,
+        "components": [
+          46,
+          0,
+          0,
+          100,
+          100,
+          100,
+          56,
+          45
+        ]
+      },
+      "portable": {
+        "score": 43910,
+        "components": [
+          46,
+          0,
+          0,
+          100,
+          100,
+          100,
+          56,
+          45
+        ]
+      },
+      "plan": {
+        "rank_score": 43910,
+        "level_index": 5,
+        "opening_sound_id": 0
+      }
+    },
+    {
+      "label": "seeded/23",
+      "equal": true,
+      "original_dos": {
+        "score": -1525556,
+        "components": [
+          -32768,
+          0,
+          100,
+          50,
+          0,
+          0,
+          0,
+          0
+        ]
+      },
+      "portable": {
+        "score": -1525556,
+        "components": [
+          -32768,
+          0,
+          100,
+          50,
+          0,
+          0,
+          0,
+          0
+        ]
+      },
+      "plan": {
+        "rank_score": -1525556,
+        "level_index": 5,
+        "opening_sound_id": 10010
+      }
+    },
+    {
+      "label": "seeded/24",
+      "equal": true,
+      "original_dos": {
+        "score": 20329,
+        "components": [
+          -279,
+          0,
+          0,
+          -15,
+          100,
+          100,
+          41,
+          51
+        ]
+      },
+      "portable": {
+        "score": 20329,
+        "components": [
+          -279,
+          0,
+          0,
+          -15,
+          100,
+          100,
+          41,
+          51
+        ]
+      },
+      "plan": {
+        "rank_score": 20329,
+        "level_index": 0,
+        "opening_sound_id": 0
+      }
+    },
+    {
+      "label": "seeded/25",
+      "equal": true,
+      "original_dos": {
+        "score": -2097660429,
+        "components": [
+          32767,
+          100,
+          -4900,
+          100,
+          0,
+          0,
+          0,
+          0
+        ]
+      },
+      "portable": {
+        "score": -2097660429,
+        "components": [
+          32767,
+          100,
+          -4900,
+          100,
+          0,
+          0,
+          0,
+          0
+        ]
+      },
+      "plan": {
+        "rank_score": -2097660429,
+        "level_index": 5,
+        "opening_sound_id": 0
+      }
+    },
+    {
+      "label": "seeded/26",
+      "equal": true,
+      "original_dos": {
+        "score": -731150,
+        "components": [
+          -15884,
+          100,
+          100,
+          9,
+          0,
+          0,
+          0,
+          0
+        ]
+      },
+      "portable": {
+        "score": -731150,
+        "components": [
+          -15884,
+          100,
+          100,
+          9,
+          0,
+          0,
+          0,
+          0
+        ]
+      },
+      "plan": {
+        "rank_score": -731150,
+        "level_index": 5,
+        "opening_sound_id": 10010
+      }
+    },
+    {
+      "label": "seeded/27",
+      "equal": true,
+      "original_dos": {
+        "score": 9632,
+        "components": [
+          -30,
+          0,
+          99,
+          50,
+          0,
+          0,
+          0,
+          0
+        ]
+      },
+      "portable": {
+        "score": 9632,
+        "components": [
+          -30,
+          0,
+          99,
+          50,
+          0,
+          0,
+          0,
+          0
+        ]
+      },
+      "plan": {
+        "rank_score": 9632,
+        "level_index": 0,
+        "opening_sound_id": 10008
+      }
+    },
+    {
+      "label": "seeded/28",
+      "equal": true,
+      "original_dos": {
+        "score": 8304,
+        "components": [
+          0,
+          0,
+          0,
+          100,
+          0,
+          0,
+          0,
+          0
+        ]
+      },
+      "portable": {
+        "score": 8304,
+        "components": [
+          0,
+          0,
+          0,
+          100,
+          0,
+          0,
+          0,
+          0
+        ]
+      },
+      "plan": {
+        "rank_score": 8304,
+        "level_index": 5,
+        "opening_sound_id": 0
+      }
+    },
+    {
+      "label": "seeded/29",
+      "equal": true,
+      "original_dos": {
+        "score": 1590230,
+        "components": [
+          32767,
+          99,
+          200,
+          100,
+          0,
+          100,
+          47,
+          54
+        ]
+      },
+      "portable": {
+        "score": 1590230,
+        "components": [
+          32767,
+          99,
+          200,
+          100,
+          0,
+          100,
+          47,
+          54
+        ]
+      },
+      "plan": {
+        "rank_score": 1590230,
+        "level_index": 9,
+        "opening_sound_id": 0
+      }
+    },
+    {
+      "label": "seeded/30",
+      "equal": true,
+      "original_dos": {
+        "score": 2146533019,
+        "components": [
+          -380,
+          -185,
+          0,
+          100,
+          0,
+          0,
+          0,
+          0
+        ]
+      },
+      "portable": {
+        "score": 2146533019,
+        "components": [
+          -380,
+          -185,
+          0,
+          100,
+          0,
+          0,
+          0,
+          0
+        ]
+      },
+      "plan": {
+        "rank_score": 2146533019,
+        "level_index": 4,
+        "opening_sound_id": 10008
+      }
+    },
+    {
+      "label": "seeded/31",
+      "equal": true,
+      "original_dos": {
+        "score": -228581,
+        "components": [
+          100,
+          100,
+          -3999,
+          0,
+          100,
+          100,
+          50,
+          43
+        ]
+      },
+      "portable": {
+        "score": -228581,
+        "components": [
+          100,
+          100,
+          -3999,
+          0,
+          100,
+          100,
+          50,
+          43
+        ]
+      },
+      "plan": {
+        "rank_score": -228581,
+        "level_index": 0,
+        "opening_sound_id": 0
+      }
+    },
+    {
+      "label": "seeded/32",
+      "equal": true,
+      "original_dos": {
+        "score": -31120271,
+        "components": [
+          -16334,
+          0,
+          100,
+          0,
+          0,
+          0,
+          0,
+          0
+        ]
+      },
+      "portable": {
+        "score": -31120271,
+        "components": [
+          -16334,
+          0,
+          100,
+          0,
+          0,
+          0,
+          0,
+          0
+        ]
+      },
+      "plan": {
+        "rank_score": -31120271,
+        "level_index": 0,
+        "opening_sound_id": 0
+      }
+    },
+    {
+      "label": "seeded/33",
+      "equal": true,
+      "original_dos": {
+        "score": -21190,
+        "components": [
+          -291,
+          -123,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ]
+      },
+      "portable": {
+        "score": -21190,
+        "components": [
+          -291,
+          -123,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ]
+      },
+      "plan": {
+        "rank_score": -21190,
+        "level_index": 0,
+        "opening_sound_id": 0
+      }
+    },
+    {
+      "label": "seeded/34",
+      "equal": true,
+      "original_dos": {
+        "score": 34929,
+        "components": [
+          -1,
+          100,
+          100,
+          0,
+          100,
+          0,
+          42,
+          40
+        ]
+      },
+      "portable": {
+        "score": 34929,
+        "components": [
+          -1,
+          100,
+          100,
+          0,
+          100,
+          0,
+          42,
+          40
+        ]
+      },
+      "plan": {
+        "rank_score": 34929,
+        "level_index": 0,
+        "opening_sound_id": 0
+      }
+    },
+    {
+      "label": "seeded/35",
+      "equal": true,
+      "original_dos": {
+        "score": 38323,
+        "components": [
+          5,
+          50,
+          0,
+          0,
+          100,
+          100,
+          47,
+          48
+        ]
+      },
+      "portable": {
+        "score": 38323,
+        "components": [
+          5,
+          50,
+          0,
+          0,
+          100,
+          100,
+          47,
+          48
+        ]
+      },
+      "plan": {
+        "rank_score": 38323,
+        "level_index": 5,
+        "opening_sound_id": 10010
+      }
+    },
+    {
+      "label": "seeded/36",
+      "equal": true,
+      "original_dos": {
+        "score": 3877,
+        "components": [
+          0,
+          0,
+          0,
+          -28,
+          0,
+          0,
+          0,
+          0
+        ]
+      },
+      "portable": {
+        "score": 3877,
+        "components": [
+          0,
+          0,
+          0,
+          -28,
+          0,
+          0,
+          0,
+          0
+        ]
+      },
+      "plan": {
+        "rank_score": 3877,
+        "level_index": 0,
+        "opening_sound_id": 0
+      }
+    },
+    {
+      "label": "seeded/37",
+      "equal": true,
+      "original_dos": {
+        "score": 2353610,
+        "components": [
+          376,
+          -86,
+          98,
+          50,
+          100,
+          100,
+          54,
+          45
+        ]
+      },
+      "portable": {
+        "score": 2353610,
+        "components": [
+          376,
+          -86,
+          98,
+          50,
+          100,
+          100,
+          54,
+          45
+        ]
+      },
+      "plan": {
+        "rank_score": 2353610,
+        "level_index": 4,
+        "opening_sound_id": 10008
+      }
+    },
+    {
+      "label": "seeded/38",
+      "equal": true,
+      "original_dos": {
+        "score": 15082,
+        "components": [
+          0,
+          0,
+          99,
+          100,
+          0,
+          0,
+          0,
+          0
+        ]
+      },
+      "portable": {
+        "score": 15082,
+        "components": [
+          0,
+          0,
+          99,
+          100,
+          0,
+          0,
+          0,
+          0
+        ]
+      },
+      "plan": {
+        "rank_score": 15082,
+        "level_index": 0,
+        "opening_sound_id": 0
+      }
+    },
+    {
+      "label": "seeded/39",
+      "equal": true,
+      "original_dos": {
+        "score": 10161,
+        "components": [
+          -114,
+          -21,
+          99,
+          0,
+          0,
+          0,
+          0,
+          0
+        ]
+      },
+      "portable": {
+        "score": 10161,
+        "components": [
+          -114,
+          -21,
+          99,
+          0,
+          0,
+          0,
+          0,
+          0
+        ]
+      },
+      "plan": {
+        "rank_score": 10161,
+        "level_index": 0,
+        "opening_sound_id": 0
+      }
+    },
+    {
+      "label": "seeded/40",
+      "equal": true,
+      "original_dos": {
+        "score": 70813,
+        "components": [
+          724,
+          428,
+          0,
+          100,
+          0,
+          0,
+          0,
+          0
+        ]
+      },
+      "portable": {
+        "score": 70813,
+        "components": [
+          724,
+          428,
+          0,
+          100,
+          0,
+          0,
+          0,
+          0
+        ]
+      },
+      "plan": {
+        "rank_score": 70813,
+        "level_index": 5,
+        "opening_sound_id": 10010
+      }
+    },
+    {
+      "label": "seeded/41",
+      "equal": true,
+      "original_dos": {
+        "score": 2176343,
+        "components": [
+          -122,
+          0,
+          200,
+          100,
+          100,
+          100,
+          50,
+          56
+        ]
+      },
+      "portable": {
+        "score": 2176343,
+        "components": [
+          -122,
+          0,
+          200,
+          100,
+          100,
+          100,
+          50,
+          56
+        ]
+      },
+      "plan": {
+        "rank_score": 2176343,
+        "level_index": 4,
+        "opening_sound_id": 10008
+      }
+    },
+    {
+      "label": "seeded/42",
+      "equal": true,
+      "original_dos": {
+        "score": 718857,
+        "components": [
+          15050,
+          101,
+          99,
+          0,
+          0,
+          0,
+          0,
+          0
+        ]
+      },
+      "portable": {
+        "score": 718857,
+        "components": [
+          15050,
+          101,
+          99,
+          0,
+          0,
+          0,
+          0,
+          0
+        ]
+      },
+      "plan": {
+        "rank_score": 718857,
+        "level_index": 8,
+        "opening_sound_id": 10010
+      }
+    },
+    {
+      "label": "seeded/43",
+      "equal": true,
+      "original_dos": {
+        "score": -284225,
+        "components": [
+          -526,
+          0,
+          101,
+          100,
+          0,
+          0,
+          0,
+          0
+        ]
+      },
+      "portable": {
+        "score": -284225,
+        "components": [
+          -526,
+          0,
+          101,
+          100,
+          0,
+          0,
+          0,
+          0
+        ]
+      },
+      "plan": {
+        "rank_score": -284225,
+        "level_index": 0,
+        "opening_sound_id": 10008
+      }
+    },
+    {
+      "label": "seeded/44",
+      "equal": true,
+      "original_dos": {
+        "score": -1115029,
+        "components": [
+          241,
+          33,
+          -16584,
+          100,
+          0,
+          0,
+          0,
+          0
+        ]
+      },
+      "portable": {
+        "score": -1115029,
+        "components": [
+          241,
+          33,
+          -16584,
+          100,
+          0,
+          0,
+          0,
+          0
+        ]
+      },
+      "plan": {
+        "rank_score": -1115029,
+        "level_index": 5,
+        "opening_sound_id": 0
+      }
+    },
+    {
+      "label": "seeded/45",
+      "equal": true,
+      "original_dos": {
+        "score": 59626316,
+        "components": [
+          30000,
+          100,
+          0,
+          100,
+          100,
+          100,
+          49,
+          32
+        ]
+      },
+      "portable": {
+        "score": 59626316,
+        "components": [
+          30000,
+          100,
+          0,
+          100,
+          100,
+          100,
+          49,
+          32
+        ]
+      },
+      "plan": {
+        "rank_score": 59626316,
+        "level_index": 9,
+        "opening_sound_id": 0
+      }
+    },
+    {
+      "label": "seeded/46",
+      "equal": true,
+      "original_dos": {
+        "score": 1357275,
+        "components": [
+          0,
+          0,
+          0,
+          100,
+          0,
+          100,
+          51,
+          51
+        ]
+      },
+      "portable": {
+        "score": 1357275,
+        "components": [
+          0,
+          0,
+          0,
+          100,
+          0,
+          100,
+          51,
+          51
+        ]
+      },
+      "plan": {
+        "rank_score": 1357275,
+        "level_index": 9,
+        "opening_sound_id": 10010
+      }
+    },
+    {
+      "label": "seeded/47",
+      "equal": true,
+      "original_dos": {
+        "score": -30322977,
+        "components": [
+          -16379,
+          0,
+          100,
+          9,
+          0,
+          0,
+          0,
+          0
+        ]
+      },
+      "portable": {
+        "score": -30322977,
+        "components": [
+          -16379,
+          0,
+          100,
+          9,
+          0,
+          0,
+          0,
+          0
+        ]
+      },
+      "plan": {
+        "rank_score": -30322977,
+        "level_index": 0,
+        "opening_sound_id": 10008
+      }
+    }
+  ],
+  "source_candidate_control_mismatches": [],
+  "portable_model_mismatches": [],
+  "notes": [
+    "DOS globals were initialized at their named original addresses; CalcScore ran in the pinned 16-bit Machine.",
+    "Same-module source-compiled CalcScore is an independent candidate control; all compared cases must pass it before model comparison.",
+    "Rank bands are checked by pure source tests, not by executing modal EndGameDialog in DOS.",
+    "SHARED kind-4 resources 1001 and 1900 were parsed by the companion unit test; live resource pointer tables are not model state."
+  ]
+}

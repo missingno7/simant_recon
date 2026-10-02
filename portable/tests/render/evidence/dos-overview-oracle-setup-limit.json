@@ -1,0 +1,36 @@
+{
+  "schema": "portable-render-oracle-setup-limit-v1",
+  "scope": "Attempted direct execution of original S12 o12_384C_0706 against portable overview pheromone output.",
+  "status": "INCONCLUSIVE_INVALID_ORACLE_SETUP",
+  "purpose": "Preserve the failed oracle setup as negative search evidence. This is not a semantic mismatch and is not a DOS differential result.",
+  "source_hashes": {
+    "src/S12/m384C.c": "584bf940832e3f8e975afdf85ed398fc82b6470e4a5c3ec46c1b4fcd15240002",
+    "src/data/d3D57.c": "983251ad55176050efcdea33c62f0a34a93686474b0de4b2bdde6c6c808716f5",
+    "tools/behavior.py": "2c0799048057f59eae61a48be4d695278635594484adf0c70bf46c51b4e0c799",
+    "portable/game/render/overview.c": "85b5a2dab060f641700c33ae1dda7b6207defb0f98fbcaf876dc9947e85aa26f",
+    "portable/game/render/overview.h": "522120a4c372281a976f0823c69d0fea07ef613ff02bfcc3b8b1ebe794e64f65"
+  },
+  "attempt": {
+    "function": "o12_384C_0706",
+    "case": "mode 4, profile byte 0, 2048-byte deterministic pheromone buffer",
+    "boundaries": [
+      "f_171C_1B84 was replaced with a callback returning a synthetic far buffer pointer",
+      "f_171C_1BBA was replaced with a no-op unlock callback"
+    ],
+    "initial_stack_words": [512, 41216],
+    "initial_source_address": "A100:0200",
+    "reported_first_difference": {
+      "output_offset": 4608,
+      "portable_byte": "12",
+      "DOS_byte": "10"
+    },
+    "reverse_stack_word_order_probe": {
+      "stack_words": [41216, 512],
+      "output_offset": 0,
+      "portable_byte": "15",
+      "DOS_byte": "10"
+    }
+  },
+  "invalid_setup_reason": "The synthetic handle-lock callback did not establish or verify the original far-pointer argument/return ABI and handle block semantics. Reversing the source pointer words changed the first mismatch, confirming the setup was not controlled. The output differences therefore cannot be attributed to o12_384C_0706 behavior.",
+  "remaining_work": "Retry only after establishing the original f_171C_1B84 far-return convention and a valid Ralloc handle fixture, then compare the full 8192-byte output."
+}

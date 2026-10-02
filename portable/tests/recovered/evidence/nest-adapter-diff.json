@@ -1,0 +1,64 @@
+{
+  "schema": "recovered-state-enter-nest-adapter-diff-v1",
+  "oracle_sha256": "aa0596c6766322a8229ee3c36e57048c92adc82d50fbe2ef37afb8b85fcf4f11",
+  "historical_manifest_sha256": "025a0a9255d910cae4b122ab5a3f3fb40888bb456d7fe42158db7c9e622fcf50",
+  "generated_state_sha256": "07f29b808c0e7b33c0c4d95752f5be1a30347b50238a57c39b86d7b95902f746",
+  "entry": "o25_3BA4_1035 -> sim_recovered_nest_apply -> sim_enter_nest",
+  "executed": 937,
+  "matched": 937,
+  "mismatches": 0,
+  "first_mismatch": null,
+  "domain": {
+    "archived_enter_nest_cases": true,
+    "random_count": 0,
+    "dirt_and_grass_cases": 128,
+    "source_helpers": [
+      "SRand1",
+      "SRand4"
+    ]
+  },
+  "native": {
+    "library_sha256": "b67db819abdf327e8ad2f80610763f98b628bbb3cafb3fa0e4e1921f8c52bbd9",
+    "build_command": [
+      "C:\\msys64\\mingw64\\bin\\gcc.exe",
+      "-std=c11",
+      "-O2",
+      "-Wall",
+      "-Wextra",
+      "-Werror",
+      "-shared",
+      "-I",
+      "D:\\Prog\\simant_recon",
+      "-I",
+      "D:\\Prog\\simant_recon\\build\\workers\\recovered_source\\generated",
+      "-I",
+      "D:\\Prog\\simant_recon\\portable\\game\\simulation",
+      "-I",
+      "D:\\Prog\\simant_recon\\portable\\game\\recovered",
+      "-I",
+      "D:\\Prog\\simant_recon\\portable\\tests\\nest",
+      "D:\\Prog\\simant_recon\\portable\\tests\\recovered\\nest_adapter_test.c",
+      "D:\\Prog\\simant_recon\\portable\\game\\recovered\\nest_adapter.c",
+      "D:\\Prog\\simant_recon\\build\\workers\\recovered_source\\generated\\recovered_state.c",
+      "D:\\Prog\\simant_recon\\portable\\game\\simulation\\nest.c",
+      "D:\\Prog\\simant_recon\\portable\\game\\simulation\\rng.c",
+      "-o",
+      "D:\\Prog\\simant_recon\\build\\portable\\recovered-nest-adapter.dll"
+    ],
+    "source_sha256": {
+      "portable/game/recovered/nest_adapter.c": "7d21b514ccf831c7ae03892487bfd0fb8eeb7ddb40740d3ef7be177f61e6e82c",
+      "portable/game/recovered/nest_adapter.h": "84f974185c102a3b079b676676c8043a73a35f9f237ce90def40c3e19a730555",
+      "portable/tests/recovered/nest_adapter_test.c": "e8b921b6b073fff5077b85c43360f000e08dffaa377b0a7ff61aec376ae51c05",
+      "portable/tests/recovered/run_nest_adapter_diff.py": "62908b808cd612f7b8f65c486861c00c09b7789d7a5a4cb050d9d498f94a1d76",
+      "portable/game/simulation/nest.c": "551f8c7d968c6682e88939398a047bf3e282686e482af2f4dcddafc22dee334f",
+      "portable/game/simulation/nest.h": "96c8c41c84d50e7b7ff8bbf981f21f21a8461e27fef398fdd7efb042567b54a5",
+      "build/workers/recovered_source/generated/recovered_state.c": "d29675c1a0b9ebb636891ccc3f5a10fb98d947bbfbf9abd5343e562204a2be14",
+      "build/workers/recovered_source/generated/recovered_state.h": "07f29b808c0e7b33c0c4d95752f5be1a30347b50238a57c39b86d7b95902f746",
+      "build/workers/recovered_source/generated/recovered_native_adapters.c": "ce2206c52ba57034074403a4e3e267300cbce2898ddec1693923ea9e28edef4e",
+      "build/workers/recovered_source/generated/S25_m3BA4.c": "871db4aa4b919341e34251187521718e3f8cb1ed26d482deed4c10c6740e9ecc",
+      "build/workers/recovered_source/generated/provenance.json": "2c0268a33afab38b65e6b3cc1a1a098556a372324d53ee374d908a5f0fb3b30f",
+      "portable/tests/nest/run_dos_diff.py": "2398b587122c94d2fb9790b533f1da4d6db87690984c75d6ef6e762971a4e1f9"
+    }
+  },
+  "status": "PASS"
+}

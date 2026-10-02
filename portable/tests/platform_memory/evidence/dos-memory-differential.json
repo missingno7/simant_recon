@@ -1,0 +1,56 @@
+{
+  "schema": "portable-memory-dos-differential-v1",
+  "status": "DIAGNOSTIC_PASS",
+  "oracle_exe_sha256": "aa0596c6766322a8229ee3c36e57048c92adc82d50fbe2ef37afb8b85fcf4f11",
+  "source_anchors": {
+    "BlockMove": "root:0244:0000; wrapper calls __fmemcpy(destination,source,[bp+0E]); root:m0EC1 caller passes a long but the wrapper reads only its low count word",
+    "ABS": "root:00F8:0459; signed 16-bit compare and NEG, so INT16_MIN returns INT16_MIN"
+  },
+  "runtime_entries": {
+    "fmemcpy": {
+      "alias": "__fmemcpy",
+      "unit": "root",
+      "seg": 10740,
+      "off": 10266,
+      "library": "libh.lib",
+      "member": "hmemcpy.asm",
+      "alias_note": "same code as the verified near-named member at this address (large-model alias); one linked copy"
+    },
+    "fmemmove": {
+      "alias": "__fmemmove",
+      "unit": "root",
+      "seg": 10740,
+      "off": 9972,
+      "library": "libh.lib",
+      "member": "hmemcpy.asm",
+      "alias_note": "same code as the verified near-named member at this address (large-model alias); one linked copy"
+    },
+    "fmemcpy_disassembly": "root:29F4:281A, 94 bytes; forward REP MOVSW/MOVSB, far return AX:DX=destination",
+    "fmemmove_disassembly": "root:29F4:26F4, 202 bytes; overlap-distance branch uses STD/REP MOVSB then CLD, forward path otherwise; far return AX:DX=destination"
+  },
+  "fmemcpy_fmemmove": {
+    "cases": 16,
+    "mismatches": [],
+    "overlap_direction_distinguished": true
+  },
+  "ABS": {
+    "cases": 11,
+    "inputs_include_int16_min": true,
+    "int16_min_result": -32768
+  },
+  "BlockMove": {
+    "tested": true,
+    "source_destination_order": "source,destination,count",
+    "adapter_count_width": "int32_t caller value; low uint16_t matches original callee stack read",
+    "test_caller_count": 65555,
+    "effective_dos_count": 19
+  },
+  "excluded": [
+    "DOS far-pointer segment wrap normalization beyond a native contiguous span",
+    "invalid native pointers with nonzero count"
+  ],
+  "unicorn_version": "2.1.4",
+  "portable_source_sha256": "de523d686a9153d11c83bd024e6b7b1131631ee03d8f20108c3359b66b95cfec",
+  "adapter_source_sha256": "108d811f6241e2079295c4cac82c6144dd6772c022369158811d37f8414e704a",
+  "runner_sha256": "1e89c0e5835ab9d1ad47d46fed4f84d60fc350926b3dcd42321324e9e1b5bec2"
+}

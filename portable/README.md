@@ -14,8 +14,9 @@ packed bitmap decoding, transparency merge and font metrics have direct DOS
 comparison evidence. Scenario selection reaches the original logical event
 codes and starts actual resource-backed native world initialization. The
 `--newgame-view` mode opens that world directly in the original edit viewport.
-The full colony update loop and game UI are still being integrated; this build
-does not yet provide a playable game.
+An explicit recovered-core build runs the original colony update loop through
+the native SDL host. The interactive game UI is still being integrated; this
+build does not yet provide a complete playable game.
 The native movement implementation has passed 322,720 direction-selection and
 18,440 tile-predicate comparisons against fresh original DOS executions.
 Database decoding loads all 840 shipped records, including 205 compressed records.
@@ -24,6 +25,16 @@ scenario/window model execute natively. [Proof boundaries](docs/proof-boundaries
 original-DOS comparisons from unit checks and list known corrections in progress.
 Missing required services return an explicit failure; they must
 not be replaced with no-op hooks to make startup appear complete.
+
+The explicitly selected source-reuse profile has passed three 256-tick
+consecutive differentials against DOS (768 ticks total). Every tick compares
+370 nonpointer globals, both RNG states, and ordered host callback arguments.
+The retained [tick proof](research/core-proof/original-256-tick-summary-next2-lazy-clock-20261002.json)
+records the exact profile and finite domains. A separate resource-backed
+NewGame comparison covers 146 source ranges and both RNG output streams,
+without hydrating the native session from a DOS memory snapshot. These checks
+do not certify the remaining interactive host services; the live integration
+build is still explicitly diagnostic.
 
 ## Build prerequisites
 
@@ -38,6 +49,7 @@ From the repository root:
 
 ```powershell
 python portable/build.py --setup-sdk
+python portable/tests/windows/render/evidence/fetch_bios_reference.py
 python portable/build.py
 build/portable/simant-sdl3.exe --scenario-screen
 build/portable/simant-sdl3.exe --newgame-view
@@ -45,12 +57,47 @@ python portable/tests/run.py --host
 python portable/tools/verify_evidence.py
 ```
 
+An explicit generated profile may be linked with
+`python portable/build.py --core-profile build/workers/recovered_source_next2/generated`.
+First follow the [profile recipe](docs/recovered-source-next2-recipe.md) to
+recreate the reviewed generated inputs. The build checks the frozen historical
+checkpoint and recorded source/profile identities, and keeps the generated
+modules' warning policy separate from strict native host compilation. It does
+not promote a diagnostic profile into a behavioral acceptance claim.
+
+```powershell
+build/portable/simant-sdl3.exe --live-game
+build/portable/simant-sdl3.exe --live-newgame --ticks 32
+```
+
+The first command starts at scenario selection; the second runs a bounded live
+NewGame. Simulation uses the source logical tick schedule independently of
+presentation refresh. Unsupported host services stop with the source service
+name. The audio driver remains disabled while its complete native backend is
+being reconstructed.
+
+The live prototype supports quick left clicks in the Edit map area and the
+source double-click command. Shift+0 (`)`) toggles pause; Shift+1 through
+Shift+4 (`!`, `@`, `#`, `$`) select speed. Ctrl+numeric-keypad directions move
+the camera one cell on each new key press; held-key repeat cadence is still
+unverified. Menu text/state and its BIOS-font bar are rendered from the actual
+SHARED resource. The nest overview uses the DOS selector-to-pixel conversion
+and draws behind the front Edit window. The source yellow-ant key handler is
+connected; supported and unhandled keys retain its logical result. Other
+interactive UI routes and the game-over restart/quit
+flow remain unfinished. The retained SDL event tests and DOS/native click
+comparison state their exact coverage in [proof boundaries](docs/proof-boundaries.md).
+
 Original resources remain in ignored `assets/`. Their identities are recorded in
 `tests/resources/ASSET_SHA256.md`. No original executable or asset archive is
 redistributed with the port. A native build receipt records its compiler, SDK,
 source inputs, frozen oracle commit and executable hash under `build/portable/`.
 The development modes use fixed startup TickCount samples for reproducibility.
-They render a static initialized world until the complete simulation is wired.
+`--scenario-screen` and `--newgame-view` are static presentation modes;
+`--live-game` and `--live-newgame` require the explicit recovered-core build.
+BIOS font IDs use the pinned DOSBox reference-host tables generated under
+`build/`; their source/license identity is retained there. They are a presentation
+choice, with separate controlled glyph-provider tests, not an original BIOS claim.
 An optional CMake project is provided for systems with an installed SDL3
 development package; this workstation uses the verified MinGW build script.
 

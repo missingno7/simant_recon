@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import ctypes as ct
+import argparse
 import hashlib
 import json
 from pathlib import Path
@@ -37,13 +38,13 @@ def address(name: str) -> int:
     return symbol["seg"] * 16 + symbol["off"]
 
 
-def build_native():
+def build_native(library_path: Path):
     command = [str(GCC), "-std=c11", "-O2", "-Wall", "-Wextra", "-Werror",
                "-shared", "-I", str(ROOT / "portable"),
                str(ROOT / "portable/game/simulation/scent.c"),
                str(ROOT / "portable/tests/scent/native_probe.c"),
-               "-o", str(LIBRARY)]
-    LIBRARY.parent.mkdir(parents=True, exist_ok=True)
+               "-o", str(library_path)]
+    library_path.parent.mkdir(parents=True, exist_ok=True)
     subprocess.run(command, cwd=ROOT, check=True)
     library = ct.CDLL(str(LIBRARY))
     library.sim_scent_probe.argtypes = [ct.POINTER(ct.c_uint8), ct.c_size_t,
@@ -95,7 +96,11 @@ def native_call(library, payload):
 
 
 def main():
-    library, command = build_native()
+    parser = argparse.ArgumentParser()
+    parser.add_argument("--report", type=Path, default=REPORT)
+    parser.add_argument("--library", type=Path, default=LIBRARY)
+    args = parser.parse_args()
+    library, command = build_native(args.library)
     image = exe.load()
     vectors = {exe.MANAGER_SEG * 16 + vector.offset: vector
                for vector in image.vectors}
@@ -146,10 +151,22 @@ def main():
                              "original_length": len(original_state)})
         executed += 1
 
+    native_paths = [
+        "portable/game/simulation/scent.c", "portable/game/simulation/scent.h",
+        "portable/game/state/world.h", "portable/game/simulation/movement.h",
+        "portable/tests/scent/native_probe.c", "portable/tests/scent/test_scent.c",
+    ]
+    oracle_inputs = ["assets/SIMANT.EXE", "layout/manifest.json", "layout/functions.json",
+                     "layout/symbols.json", "layout/oracle.lock.json", "tools/behavior.py",
+                     "tools/exe.py", "tools/functions.py", "tools/match.py", "tools/modules.py",
+                     "tools/modctx.py", "tools/symbols.py"]
     report = {"schema": "portable-scent-dos-diff-v1",
               "oracle_execution": "original DOS only",
               "runner_sha256": digest(Path(__file__)),
               "oracle_exe_sha256": digest(exe.EXE_PATH),
+              "native_source_hashes": {path: digest(ROOT / path) for path in native_paths},
+              "oracle_input_hashes": {path: digest(ROOT / path) for path in oracle_inputs},
+              "compiler_sha256": digest(GCC), "native_library_path": str(args.library),
               "harness_sha256": {name: digest(ROOT / "tools" / f"{name}.py")
                                   for name in ("behavior", "exe", "functions", "match")},
               "native_source_sha256": {
@@ -157,7 +174,7 @@ def main():
                   "scent.h": digest(ROOT / "portable/game/simulation/scent.h"),
                   "native_probe.c": digest(ROOT / "portable/tests/scent/native_probe.c")},
               "unit_test_sha256": digest(ROOT / "portable/tests/scent/test_scent.c"),
-              "native_library_sha256": digest(LIBRARY), "native_command": command,
+              "native_library_sha256": digest(args.library), "native_command": command,
               "case_count": len(cases), "executed_count": executed,
               "passed": executed - len(failures), "failures": failures,
               "coverage": coverage,
@@ -166,9 +183,9 @@ def main():
                                  "PherMapRT", "fd_3E1D_D89F untouched aux", "fd_3E1D_C89F SmoothAlarm work"],
               "services": {},
               "limitations": ["Tests the exact pheromone child bodies only; it does not claim full DoSmells dispatch, CompactList, FullCount, or history-window behavior."]}
-    REPORT.parent.mkdir(parents=True, exist_ok=True)
-    REPORT.write_text(json.dumps(report, indent=2) + "\n", encoding="utf-8")
-    print(f"scent DOS differential: {report['passed']}/{executed} pass; report {REPORT}")
+    args.report.parent.mkdir(parents=True, exist_ok=True)
+    args.report.write_text(json.dumps(report, indent=2) + "\n", encoding="utf-8")
+    print(f"scent DOS differential: {report['passed']}/{executed} pass; report {args.report}")
     return 0 if not failures else 1
 
 

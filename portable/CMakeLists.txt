@@ -3,7 +3,7 @@ project(simant_sdl3 LANGUAGES C)
 
 find_package(SDL3 3.4 CONFIG REQUIRED)
 file(GLOB_RECURSE SIMANT_NATIVE_SOURCES CONFIGURE_DEPENDS
-    game/*.c render/*.c ui_model/*.c audio/*.c platform/sdl3/*.c)
+    game/*.c render/*.c ui_model/*.c audio/*.c platform/*.c)
 # Diagnostic source-reuse modules have not passed the production proof gate.
 list(FILTER SIMANT_NATIVE_SOURCES EXCLUDE REGEX "/game/recovered/")
 add_executable(simant-sdl3 main.c ${SIMANT_NATIVE_SOURCES})
