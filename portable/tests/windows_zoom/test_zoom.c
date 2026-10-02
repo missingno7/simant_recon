@@ -21,6 +21,9 @@ static PortableWindowZoomState seed(void)
 int main(void)
 {
     PortableWindowZoomState s, before;
+    uint8_t resource_bytes[0x24] = {0};
+    PortableWindowObject frame_object;
+    PortableWindowResource resource;
     PortableWindowZoomBounds bounds = {24, 640, 400};
     PortableWindowZoomResidue residue = {0, 0, {12, 13, 14, 15}, {100, 100, 300, 250}};
     PortableWindowZoomStep steps[64];
@@ -28,6 +31,32 @@ int main(void)
     int16_t stack[] = {0x0700, 0x0701, 0x0702, (int16_t)0x8000};
     PortableWindowRect object_rects[] = {{100,100,300,250},{0,0,100,80},{0,0,90,60},{0,0,0,0}};
     PortableWindowZoomStatus status;
+
+    memset(&frame_object, 0, sizeof(frame_object));
+    frame_object.offsets[0] = 14;
+    frame_object.offsets[1] = 22;
+    frame_object.offsets[2] = 404;
+    frame_object.offsets[3] = 357;
+    memset(&resource, 0, sizeof(resource));
+    resource.count = 1;
+    resource.record_bytes = resource_bytes;
+    resource.record_size = sizeof(resource_bytes);
+    resource.objects = &frame_object;
+    resource_bytes[0x18] = 252;
+    resource_bytes[0x19] = 0;
+    resource_bytes[0x1a] = 24;
+    resource_bytes[0x1b] = 1; /* 280 */
+    resource_bytes[0x20] = 16;
+    resource_bytes[0x22] = 16;
+    status = portable_window_zoom_state_from_resource(
+        &s, &resource, (PortableWindowRect){14, 22, 418, 379}, 0x070e);
+    assert(status == PORTABLE_WINDOW_ZOOM_OK);
+    assert(s.window_rect.left == 14 && s.window_rect.top == 22 &&
+           s.window_rect.right == 418 && s.window_rect.bottom == 379);
+    assert(s.frame_rect.left == 14 && s.frame_rect.top == 22 &&
+           s.frame_rect.right == 404 && s.frame_rect.bottom == 357);
+    assert(s.flags == 0x070e && s.min_width == 252 && s.min_height == 280 &&
+           s.grid_x == 16 && s.grid_y == 16 && !s.has_zoom_rect);
 
     s = seed();
     before = s;

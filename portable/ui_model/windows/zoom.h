@@ -13,6 +13,10 @@ enum {
     PORTABLE_WINDOW_ZOOM_SOURCE_FLAG_1000 = 0x1000
 };
 
+typedef enum PortableWindowZoomHostRepaintPolicy {
+    PORTABLE_WINDOW_ZOOM_HOST_REPAINT_FULL_Z_ORDER = 1
+} PortableWindowZoomHostRepaintPolicy;
+
 typedef struct PortableWindowZoomState {
     PortableWindowRect window_rect; /* runtime Win.rect */
     PortableWindowRect frame_rect;  /* Raw Obj x/y/width/height words, not edges. */
@@ -45,6 +49,16 @@ typedef enum PortableWindowZoomStatus {
     PORTABLE_WINDOW_ZOOM_NO_PROGRESS,
     PORTABLE_WINDOW_ZOOM_ITERATION_LIMIT
 } PortableWindowZoomStatus;
+
+/* Initialize the unzoomed state from a decoded kind-0 resource and its live
+   runtime flags. The caller supplies the current Win.rect, since it may have
+   been recalculated after resource loading. Object zero's raw x/y/width/height
+   are read from the decoded source offsets. */
+PortableWindowZoomStatus portable_window_zoom_state_from_resource(
+    PortableWindowZoomState *state,
+    const PortableWindowResource *resource,
+    PortableWindowRect runtime_window_rect,
+    uint16_t runtime_flags);
 
 typedef enum PortableWindowZoomStepKind {
     PORTABLE_ZOOM_LOCK,
@@ -85,5 +99,11 @@ PortableWindowZoomStatus portable_window_zoom_toggle(
     const PortableWindowRect *open_object_rects,
     PortableWindowZoomStep *steps, size_t step_capacity, size_t *step_count,
     size_t iteration_limit);
+
+/* SDL host repaint boundary: after a successful geometry transition, redraw
+   all open windows in current z-order (or repaint the full logical surface).
+   Use PORTABLE_WINDOW_ZOOM_HOST_REPAINT_FULL_Z_ORDER. This intentionally does
+   not emulate DOS clip-list history. In particular, it must not synthesize
+   the original function's uninitialized `saved` Rect. */
 
 #endif

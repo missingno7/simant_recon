@@ -33,6 +33,33 @@ static int rect_equal(const PortableWindowRect *a, const PortableWindowRect *b)
            a->right == b->right && a->bottom == b->bottom;
 }
 
+PortableWindowZoomStatus portable_window_zoom_state_from_resource(
+    PortableWindowZoomState *state, const PortableWindowResource *resource,
+    PortableWindowRect runtime_window_rect, uint16_t runtime_flags)
+{
+    if (state == NULL || resource == NULL || resource->record_bytes == NULL ||
+        resource->record_size < 0x24 || resource->objects == NULL ||
+        resource->count == 0)
+        return PORTABLE_WINDOW_ZOOM_BAD_ARGUMENT;
+
+    memset(state, 0, sizeof(*state));
+    state->window_rect = runtime_window_rect;
+    state->frame_rect.left = resource->objects[0].offsets[0];
+    state->frame_rect.top = resource->objects[0].offsets[1];
+    state->frame_rect.right = resource->objects[0].offsets[2];
+    state->frame_rect.bottom = resource->objects[0].offsets[3];
+    state->flags = runtime_flags;
+    state->min_width = (int16_t)((uint16_t)resource->record_bytes[0x18] |
+        ((uint16_t)resource->record_bytes[0x19] << 8));
+    state->min_height = (int16_t)((uint16_t)resource->record_bytes[0x1a] |
+        ((uint16_t)resource->record_bytes[0x1b] << 8));
+    state->grid_x = (int16_t)((uint16_t)resource->record_bytes[0x20] |
+        ((uint16_t)resource->record_bytes[0x21] << 8));
+    state->grid_y = (int16_t)((uint16_t)resource->record_bytes[0x22] |
+        ((uint16_t)resource->record_bytes[0x23] << 8));
+    return PORTABLE_WINDOW_ZOOM_OK;
+}
+
 PortableWindowZoomStatus portable_window_zoom_constrain(
     const PortableWindowZoomState *state, const PortableWindowZoomBounds *bounds,
     int mode, PortableWindowRect *rect, size_t iteration_limit)

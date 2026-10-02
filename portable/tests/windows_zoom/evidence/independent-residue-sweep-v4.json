@@ -1,0 +1,2494 @@
+{
+  "schema": "portable-window-zoom-independent-residue-sweep-v4",
+  "status": "PASS",
+  "claim": "Across an independent 8-by-8 directed sweep of first-call uninitialized mode-0 right/bottom values, the original DOS converges to the same HCEGANT window-0 final geometry. The separate saved rectangle remains stack-residue-dependent as established in resource0-profile-v2; this sweep does not claim redraw/clip equivalence.",
+  "scope": {
+    "window_profile": "HCEGANT resource 0, opened flags 0x070e, min 252x280, grid 16x16",
+    "original_executed": [
+      "o26_39C7_0000",
+      "o26_39C7_022F"
+    ],
+    "controlled_leaves": "Same pointer, recalc, clipping, callback, and draw boundaries as dos_toggle_diff.setup_case.",
+    "screen_inputs": {
+      "desktop_top": 24,
+      "right": 640,
+      "bottom": 350
+    },
+    "residue_values_each_axis": [
+      0,
+      1,
+      23,
+      24,
+      350,
+      640,
+      32767,
+      -32768
+    ],
+    "case_count": 64,
+    "compared": 64,
+    "budget_exceeded": 0,
+    "distinct_final_geometries": 1,
+    "final_geometry": [
+      [
+        14,
+        38,
+        626,
+        363
+      ],
+      [
+        14,
+        38,
+        612,
+        325
+      ],
+      [
+        14,
+        22,
+        404,
+        357
+      ],
+      1934
+    ]
+  },
+  "pins": {
+    "oracle_sha256": "aa0596c6766322a8229ee3c36e57048c92adc82d50fbe2ef37afb8b85fcf4f11",
+    "harness_sha256": "2c0799048057f59eae61a48be4d695278635594484adf0c70bf46c51b4e0c799",
+    "zoom_source_sha256": "fb4938daa334a8e9f929b44a542392f47fc7c1a654ca87f303ee80528b34c4c4",
+    "toggle_runner_sha256": "c436c0496c8709a5bc4900ee395ac9d95b0144b07b845aae6dc8d987ab20fb7b",
+    "runner_sha256": "2572b56796faf9b0c5bcb788867fdbcdc4c3d5300c25fa882a9b5f78d1e2f9e5"
+  },
+  "cases": [
+    {
+      "input_right_bottom": [
+        0,
+        0
+      ],
+      "captured_mode0_initial_rect": [
+        0,
+        24,
+        0,
+        0
+      ],
+      "final_window_rect": [
+        14,
+        38,
+        626,
+        363
+      ],
+      "final_frame_geometry": [
+        14,
+        38,
+        612,
+        325
+      ],
+      "final_zoom_rect": [
+        14,
+        22,
+        404,
+        357
+      ],
+      "final_flags": 1934,
+      "uninitialized_saved_rect": [
+        -23131,
+        -23131,
+        -23131,
+        -23131
+      ],
+      "status": "COMPARED"
+    },
+    {
+      "input_right_bottom": [
+        0,
+        1
+      ],
+      "captured_mode0_initial_rect": [
+        0,
+        24,
+        0,
+        1
+      ],
+      "final_window_rect": [
+        14,
+        38,
+        626,
+        363
+      ],
+      "final_frame_geometry": [
+        14,
+        38,
+        612,
+        325
+      ],
+      "final_zoom_rect": [
+        14,
+        22,
+        404,
+        357
+      ],
+      "final_flags": 1934,
+      "uninitialized_saved_rect": [
+        -23131,
+        -23131,
+        -23131,
+        -23131
+      ],
+      "status": "COMPARED"
+    },
+    {
+      "input_right_bottom": [
+        0,
+        23
+      ],
+      "captured_mode0_initial_rect": [
+        0,
+        24,
+        0,
+        23
+      ],
+      "final_window_rect": [
+        14,
+        38,
+        626,
+        363
+      ],
+      "final_frame_geometry": [
+        14,
+        38,
+        612,
+        325
+      ],
+      "final_zoom_rect": [
+        14,
+        22,
+        404,
+        357
+      ],
+      "final_flags": 1934,
+      "uninitialized_saved_rect": [
+        -23131,
+        -23131,
+        -23131,
+        -23131
+      ],
+      "status": "COMPARED"
+    },
+    {
+      "input_right_bottom": [
+        0,
+        24
+      ],
+      "captured_mode0_initial_rect": [
+        0,
+        24,
+        0,
+        24
+      ],
+      "final_window_rect": [
+        14,
+        38,
+        626,
+        363
+      ],
+      "final_frame_geometry": [
+        14,
+        38,
+        612,
+        325
+      ],
+      "final_zoom_rect": [
+        14,
+        22,
+        404,
+        357
+      ],
+      "final_flags": 1934,
+      "uninitialized_saved_rect": [
+        -23131,
+        -23131,
+        -23131,
+        -23131
+      ],
+      "status": "COMPARED"
+    },
+    {
+      "input_right_bottom": [
+        0,
+        350
+      ],
+      "captured_mode0_initial_rect": [
+        0,
+        24,
+        0,
+        350
+      ],
+      "final_window_rect": [
+        14,
+        38,
+        626,
+        363
+      ],
+      "final_frame_geometry": [
+        14,
+        38,
+        612,
+        325
+      ],
+      "final_zoom_rect": [
+        14,
+        22,
+        404,
+        357
+      ],
+      "final_flags": 1934,
+      "uninitialized_saved_rect": [
+        -23131,
+        -23131,
+        -23131,
+        -23131
+      ],
+      "status": "COMPARED"
+    },
+    {
+      "input_right_bottom": [
+        0,
+        640
+      ],
+      "captured_mode0_initial_rect": [
+        0,
+        24,
+        0,
+        640
+      ],
+      "final_window_rect": [
+        14,
+        38,
+        626,
+        363
+      ],
+      "final_frame_geometry": [
+        14,
+        38,
+        612,
+        325
+      ],
+      "final_zoom_rect": [
+        14,
+        22,
+        404,
+        357
+      ],
+      "final_flags": 1934,
+      "uninitialized_saved_rect": [
+        -23131,
+        -23131,
+        -23131,
+        -23131
+      ],
+      "status": "COMPARED"
+    },
+    {
+      "input_right_bottom": [
+        0,
+        32767
+      ],
+      "captured_mode0_initial_rect": [
+        0,
+        24,
+        0,
+        32767
+      ],
+      "final_window_rect": [
+        14,
+        38,
+        626,
+        363
+      ],
+      "final_frame_geometry": [
+        14,
+        38,
+        612,
+        325
+      ],
+      "final_zoom_rect": [
+        14,
+        22,
+        404,
+        357
+      ],
+      "final_flags": 1934,
+      "uninitialized_saved_rect": [
+        -23131,
+        -23131,
+        -23131,
+        -23131
+      ],
+      "status": "COMPARED"
+    },
+    {
+      "input_right_bottom": [
+        0,
+        -32768
+      ],
+      "captured_mode0_initial_rect": [
+        0,
+        24,
+        0,
+        -32768
+      ],
+      "final_window_rect": [
+        14,
+        38,
+        626,
+        363
+      ],
+      "final_frame_geometry": [
+        14,
+        38,
+        612,
+        325
+      ],
+      "final_zoom_rect": [
+        14,
+        22,
+        404,
+        357
+      ],
+      "final_flags": 1934,
+      "uninitialized_saved_rect": [
+        -23131,
+        -23131,
+        -23131,
+        -23131
+      ],
+      "status": "COMPARED"
+    },
+    {
+      "input_right_bottom": [
+        1,
+        0
+      ],
+      "captured_mode0_initial_rect": [
+        0,
+        24,
+        1,
+        0
+      ],
+      "final_window_rect": [
+        14,
+        38,
+        626,
+        363
+      ],
+      "final_frame_geometry": [
+        14,
+        38,
+        612,
+        325
+      ],
+      "final_zoom_rect": [
+        14,
+        22,
+        404,
+        357
+      ],
+      "final_flags": 1934,
+      "uninitialized_saved_rect": [
+        -23131,
+        -23131,
+        -23131,
+        -23131
+      ],
+      "status": "COMPARED"
+    },
+    {
+      "input_right_bottom": [
+        1,
+        1
+      ],
+      "captured_mode0_initial_rect": [
+        0,
+        24,
+        1,
+        1
+      ],
+      "final_window_rect": [
+        14,
+        38,
+        626,
+        363
+      ],
+      "final_frame_geometry": [
+        14,
+        38,
+        612,
+        325
+      ],
+      "final_zoom_rect": [
+        14,
+        22,
+        404,
+        357
+      ],
+      "final_flags": 1934,
+      "uninitialized_saved_rect": [
+        -23131,
+        -23131,
+        -23131,
+        -23131
+      ],
+      "status": "COMPARED"
+    },
+    {
+      "input_right_bottom": [
+        1,
+        23
+      ],
+      "captured_mode0_initial_rect": [
+        0,
+        24,
+        1,
+        23
+      ],
+      "final_window_rect": [
+        14,
+        38,
+        626,
+        363
+      ],
+      "final_frame_geometry": [
+        14,
+        38,
+        612,
+        325
+      ],
+      "final_zoom_rect": [
+        14,
+        22,
+        404,
+        357
+      ],
+      "final_flags": 1934,
+      "uninitialized_saved_rect": [
+        -23131,
+        -23131,
+        -23131,
+        -23131
+      ],
+      "status": "COMPARED"
+    },
+    {
+      "input_right_bottom": [
+        1,
+        24
+      ],
+      "captured_mode0_initial_rect": [
+        0,
+        24,
+        1,
+        24
+      ],
+      "final_window_rect": [
+        14,
+        38,
+        626,
+        363
+      ],
+      "final_frame_geometry": [
+        14,
+        38,
+        612,
+        325
+      ],
+      "final_zoom_rect": [
+        14,
+        22,
+        404,
+        357
+      ],
+      "final_flags": 1934,
+      "uninitialized_saved_rect": [
+        -23131,
+        -23131,
+        -23131,
+        -23131
+      ],
+      "status": "COMPARED"
+    },
+    {
+      "input_right_bottom": [
+        1,
+        350
+      ],
+      "captured_mode0_initial_rect": [
+        0,
+        24,
+        1,
+        350
+      ],
+      "final_window_rect": [
+        14,
+        38,
+        626,
+        363
+      ],
+      "final_frame_geometry": [
+        14,
+        38,
+        612,
+        325
+      ],
+      "final_zoom_rect": [
+        14,
+        22,
+        404,
+        357
+      ],
+      "final_flags": 1934,
+      "uninitialized_saved_rect": [
+        -23131,
+        -23131,
+        -23131,
+        -23131
+      ],
+      "status": "COMPARED"
+    },
+    {
+      "input_right_bottom": [
+        1,
+        640
+      ],
+      "captured_mode0_initial_rect": [
+        0,
+        24,
+        1,
+        640
+      ],
+      "final_window_rect": [
+        14,
+        38,
+        626,
+        363
+      ],
+      "final_frame_geometry": [
+        14,
+        38,
+        612,
+        325
+      ],
+      "final_zoom_rect": [
+        14,
+        22,
+        404,
+        357
+      ],
+      "final_flags": 1934,
+      "uninitialized_saved_rect": [
+        -23131,
+        -23131,
+        -23131,
+        -23131
+      ],
+      "status": "COMPARED"
+    },
+    {
+      "input_right_bottom": [
+        1,
+        32767
+      ],
+      "captured_mode0_initial_rect": [
+        0,
+        24,
+        1,
+        32767
+      ],
+      "final_window_rect": [
+        14,
+        38,
+        626,
+        363
+      ],
+      "final_frame_geometry": [
+        14,
+        38,
+        612,
+        325
+      ],
+      "final_zoom_rect": [
+        14,
+        22,
+        404,
+        357
+      ],
+      "final_flags": 1934,
+      "uninitialized_saved_rect": [
+        -23131,
+        -23131,
+        -23131,
+        -23131
+      ],
+      "status": "COMPARED"
+    },
+    {
+      "input_right_bottom": [
+        1,
+        -32768
+      ],
+      "captured_mode0_initial_rect": [
+        0,
+        24,
+        1,
+        -32768
+      ],
+      "final_window_rect": [
+        14,
+        38,
+        626,
+        363
+      ],
+      "final_frame_geometry": [
+        14,
+        38,
+        612,
+        325
+      ],
+      "final_zoom_rect": [
+        14,
+        22,
+        404,
+        357
+      ],
+      "final_flags": 1934,
+      "uninitialized_saved_rect": [
+        -23131,
+        -23131,
+        -23131,
+        -23131
+      ],
+      "status": "COMPARED"
+    },
+    {
+      "input_right_bottom": [
+        23,
+        0
+      ],
+      "captured_mode0_initial_rect": [
+        0,
+        24,
+        23,
+        0
+      ],
+      "final_window_rect": [
+        14,
+        38,
+        626,
+        363
+      ],
+      "final_frame_geometry": [
+        14,
+        38,
+        612,
+        325
+      ],
+      "final_zoom_rect": [
+        14,
+        22,
+        404,
+        357
+      ],
+      "final_flags": 1934,
+      "uninitialized_saved_rect": [
+        -23131,
+        -23131,
+        -23131,
+        -23131
+      ],
+      "status": "COMPARED"
+    },
+    {
+      "input_right_bottom": [
+        23,
+        1
+      ],
+      "captured_mode0_initial_rect": [
+        0,
+        24,
+        23,
+        1
+      ],
+      "final_window_rect": [
+        14,
+        38,
+        626,
+        363
+      ],
+      "final_frame_geometry": [
+        14,
+        38,
+        612,
+        325
+      ],
+      "final_zoom_rect": [
+        14,
+        22,
+        404,
+        357
+      ],
+      "final_flags": 1934,
+      "uninitialized_saved_rect": [
+        -23131,
+        -23131,
+        -23131,
+        -23131
+      ],
+      "status": "COMPARED"
+    },
+    {
+      "input_right_bottom": [
+        23,
+        23
+      ],
+      "captured_mode0_initial_rect": [
+        0,
+        24,
+        23,
+        23
+      ],
+      "final_window_rect": [
+        14,
+        38,
+        626,
+        363
+      ],
+      "final_frame_geometry": [
+        14,
+        38,
+        612,
+        325
+      ],
+      "final_zoom_rect": [
+        14,
+        22,
+        404,
+        357
+      ],
+      "final_flags": 1934,
+      "uninitialized_saved_rect": [
+        -23131,
+        -23131,
+        -23131,
+        -23131
+      ],
+      "status": "COMPARED"
+    },
+    {
+      "input_right_bottom": [
+        23,
+        24
+      ],
+      "captured_mode0_initial_rect": [
+        0,
+        24,
+        23,
+        24
+      ],
+      "final_window_rect": [
+        14,
+        38,
+        626,
+        363
+      ],
+      "final_frame_geometry": [
+        14,
+        38,
+        612,
+        325
+      ],
+      "final_zoom_rect": [
+        14,
+        22,
+        404,
+        357
+      ],
+      "final_flags": 1934,
+      "uninitialized_saved_rect": [
+        -23131,
+        -23131,
+        -23131,
+        -23131
+      ],
+      "status": "COMPARED"
+    },
+    {
+      "input_right_bottom": [
+        23,
+        350
+      ],
+      "captured_mode0_initial_rect": [
+        0,
+        24,
+        23,
+        350
+      ],
+      "final_window_rect": [
+        14,
+        38,
+        626,
+        363
+      ],
+      "final_frame_geometry": [
+        14,
+        38,
+        612,
+        325
+      ],
+      "final_zoom_rect": [
+        14,
+        22,
+        404,
+        357
+      ],
+      "final_flags": 1934,
+      "uninitialized_saved_rect": [
+        -23131,
+        -23131,
+        -23131,
+        -23131
+      ],
+      "status": "COMPARED"
+    },
+    {
+      "input_right_bottom": [
+        23,
+        640
+      ],
+      "captured_mode0_initial_rect": [
+        0,
+        24,
+        23,
+        640
+      ],
+      "final_window_rect": [
+        14,
+        38,
+        626,
+        363
+      ],
+      "final_frame_geometry": [
+        14,
+        38,
+        612,
+        325
+      ],
+      "final_zoom_rect": [
+        14,
+        22,
+        404,
+        357
+      ],
+      "final_flags": 1934,
+      "uninitialized_saved_rect": [
+        -23131,
+        -23131,
+        -23131,
+        -23131
+      ],
+      "status": "COMPARED"
+    },
+    {
+      "input_right_bottom": [
+        23,
+        32767
+      ],
+      "captured_mode0_initial_rect": [
+        0,
+        24,
+        23,
+        32767
+      ],
+      "final_window_rect": [
+        14,
+        38,
+        626,
+        363
+      ],
+      "final_frame_geometry": [
+        14,
+        38,
+        612,
+        325
+      ],
+      "final_zoom_rect": [
+        14,
+        22,
+        404,
+        357
+      ],
+      "final_flags": 1934,
+      "uninitialized_saved_rect": [
+        -23131,
+        -23131,
+        -23131,
+        -23131
+      ],
+      "status": "COMPARED"
+    },
+    {
+      "input_right_bottom": [
+        23,
+        -32768
+      ],
+      "captured_mode0_initial_rect": [
+        0,
+        24,
+        23,
+        -32768
+      ],
+      "final_window_rect": [
+        14,
+        38,
+        626,
+        363
+      ],
+      "final_frame_geometry": [
+        14,
+        38,
+        612,
+        325
+      ],
+      "final_zoom_rect": [
+        14,
+        22,
+        404,
+        357
+      ],
+      "final_flags": 1934,
+      "uninitialized_saved_rect": [
+        -23131,
+        -23131,
+        -23131,
+        -23131
+      ],
+      "status": "COMPARED"
+    },
+    {
+      "input_right_bottom": [
+        24,
+        0
+      ],
+      "captured_mode0_initial_rect": [
+        0,
+        24,
+        24,
+        0
+      ],
+      "final_window_rect": [
+        14,
+        38,
+        626,
+        363
+      ],
+      "final_frame_geometry": [
+        14,
+        38,
+        612,
+        325
+      ],
+      "final_zoom_rect": [
+        14,
+        22,
+        404,
+        357
+      ],
+      "final_flags": 1934,
+      "uninitialized_saved_rect": [
+        -23131,
+        -23131,
+        -23131,
+        -23131
+      ],
+      "status": "COMPARED"
+    },
+    {
+      "input_right_bottom": [
+        24,
+        1
+      ],
+      "captured_mode0_initial_rect": [
+        0,
+        24,
+        24,
+        1
+      ],
+      "final_window_rect": [
+        14,
+        38,
+        626,
+        363
+      ],
+      "final_frame_geometry": [
+        14,
+        38,
+        612,
+        325
+      ],
+      "final_zoom_rect": [
+        14,
+        22,
+        404,
+        357
+      ],
+      "final_flags": 1934,
+      "uninitialized_saved_rect": [
+        -23131,
+        -23131,
+        -23131,
+        -23131
+      ],
+      "status": "COMPARED"
+    },
+    {
+      "input_right_bottom": [
+        24,
+        23
+      ],
+      "captured_mode0_initial_rect": [
+        0,
+        24,
+        24,
+        23
+      ],
+      "final_window_rect": [
+        14,
+        38,
+        626,
+        363
+      ],
+      "final_frame_geometry": [
+        14,
+        38,
+        612,
+        325
+      ],
+      "final_zoom_rect": [
+        14,
+        22,
+        404,
+        357
+      ],
+      "final_flags": 1934,
+      "uninitialized_saved_rect": [
+        -23131,
+        -23131,
+        -23131,
+        -23131
+      ],
+      "status": "COMPARED"
+    },
+    {
+      "input_right_bottom": [
+        24,
+        24
+      ],
+      "captured_mode0_initial_rect": [
+        0,
+        24,
+        24,
+        24
+      ],
+      "final_window_rect": [
+        14,
+        38,
+        626,
+        363
+      ],
+      "final_frame_geometry": [
+        14,
+        38,
+        612,
+        325
+      ],
+      "final_zoom_rect": [
+        14,
+        22,
+        404,
+        357
+      ],
+      "final_flags": 1934,
+      "uninitialized_saved_rect": [
+        -23131,
+        -23131,
+        -23131,
+        -23131
+      ],
+      "status": "COMPARED"
+    },
+    {
+      "input_right_bottom": [
+        24,
+        350
+      ],
+      "captured_mode0_initial_rect": [
+        0,
+        24,
+        24,
+        350
+      ],
+      "final_window_rect": [
+        14,
+        38,
+        626,
+        363
+      ],
+      "final_frame_geometry": [
+        14,
+        38,
+        612,
+        325
+      ],
+      "final_zoom_rect": [
+        14,
+        22,
+        404,
+        357
+      ],
+      "final_flags": 1934,
+      "uninitialized_saved_rect": [
+        -23131,
+        -23131,
+        -23131,
+        -23131
+      ],
+      "status": "COMPARED"
+    },
+    {
+      "input_right_bottom": [
+        24,
+        640
+      ],
+      "captured_mode0_initial_rect": [
+        0,
+        24,
+        24,
+        640
+      ],
+      "final_window_rect": [
+        14,
+        38,
+        626,
+        363
+      ],
+      "final_frame_geometry": [
+        14,
+        38,
+        612,
+        325
+      ],
+      "final_zoom_rect": [
+        14,
+        22,
+        404,
+        357
+      ],
+      "final_flags": 1934,
+      "uninitialized_saved_rect": [
+        -23131,
+        -23131,
+        -23131,
+        -23131
+      ],
+      "status": "COMPARED"
+    },
+    {
+      "input_right_bottom": [
+        24,
+        32767
+      ],
+      "captured_mode0_initial_rect": [
+        0,
+        24,
+        24,
+        32767
+      ],
+      "final_window_rect": [
+        14,
+        38,
+        626,
+        363
+      ],
+      "final_frame_geometry": [
+        14,
+        38,
+        612,
+        325
+      ],
+      "final_zoom_rect": [
+        14,
+        22,
+        404,
+        357
+      ],
+      "final_flags": 1934,
+      "uninitialized_saved_rect": [
+        -23131,
+        -23131,
+        -23131,
+        -23131
+      ],
+      "status": "COMPARED"
+    },
+    {
+      "input_right_bottom": [
+        24,
+        -32768
+      ],
+      "captured_mode0_initial_rect": [
+        0,
+        24,
+        24,
+        -32768
+      ],
+      "final_window_rect": [
+        14,
+        38,
+        626,
+        363
+      ],
+      "final_frame_geometry": [
+        14,
+        38,
+        612,
+        325
+      ],
+      "final_zoom_rect": [
+        14,
+        22,
+        404,
+        357
+      ],
+      "final_flags": 1934,
+      "uninitialized_saved_rect": [
+        -23131,
+        -23131,
+        -23131,
+        -23131
+      ],
+      "status": "COMPARED"
+    },
+    {
+      "input_right_bottom": [
+        350,
+        0
+      ],
+      "captured_mode0_initial_rect": [
+        0,
+        24,
+        350,
+        0
+      ],
+      "final_window_rect": [
+        14,
+        38,
+        626,
+        363
+      ],
+      "final_frame_geometry": [
+        14,
+        38,
+        612,
+        325
+      ],
+      "final_zoom_rect": [
+        14,
+        22,
+        404,
+        357
+      ],
+      "final_flags": 1934,
+      "uninitialized_saved_rect": [
+        -23131,
+        -23131,
+        -23131,
+        -23131
+      ],
+      "status": "COMPARED"
+    },
+    {
+      "input_right_bottom": [
+        350,
+        1
+      ],
+      "captured_mode0_initial_rect": [
+        0,
+        24,
+        350,
+        1
+      ],
+      "final_window_rect": [
+        14,
+        38,
+        626,
+        363
+      ],
+      "final_frame_geometry": [
+        14,
+        38,
+        612,
+        325
+      ],
+      "final_zoom_rect": [
+        14,
+        22,
+        404,
+        357
+      ],
+      "final_flags": 1934,
+      "uninitialized_saved_rect": [
+        -23131,
+        -23131,
+        -23131,
+        -23131
+      ],
+      "status": "COMPARED"
+    },
+    {
+      "input_right_bottom": [
+        350,
+        23
+      ],
+      "captured_mode0_initial_rect": [
+        0,
+        24,
+        350,
+        23
+      ],
+      "final_window_rect": [
+        14,
+        38,
+        626,
+        363
+      ],
+      "final_frame_geometry": [
+        14,
+        38,
+        612,
+        325
+      ],
+      "final_zoom_rect": [
+        14,
+        22,
+        404,
+        357
+      ],
+      "final_flags": 1934,
+      "uninitialized_saved_rect": [
+        -23131,
+        -23131,
+        -23131,
+        -23131
+      ],
+      "status": "COMPARED"
+    },
+    {
+      "input_right_bottom": [
+        350,
+        24
+      ],
+      "captured_mode0_initial_rect": [
+        0,
+        24,
+        350,
+        24
+      ],
+      "final_window_rect": [
+        14,
+        38,
+        626,
+        363
+      ],
+      "final_frame_geometry": [
+        14,
+        38,
+        612,
+        325
+      ],
+      "final_zoom_rect": [
+        14,
+        22,
+        404,
+        357
+      ],
+      "final_flags": 1934,
+      "uninitialized_saved_rect": [
+        -23131,
+        -23131,
+        -23131,
+        -23131
+      ],
+      "status": "COMPARED"
+    },
+    {
+      "input_right_bottom": [
+        350,
+        350
+      ],
+      "captured_mode0_initial_rect": [
+        0,
+        24,
+        350,
+        350
+      ],
+      "final_window_rect": [
+        14,
+        38,
+        626,
+        363
+      ],
+      "final_frame_geometry": [
+        14,
+        38,
+        612,
+        325
+      ],
+      "final_zoom_rect": [
+        14,
+        22,
+        404,
+        357
+      ],
+      "final_flags": 1934,
+      "uninitialized_saved_rect": [
+        -23131,
+        -23131,
+        -23131,
+        -23131
+      ],
+      "status": "COMPARED"
+    },
+    {
+      "input_right_bottom": [
+        350,
+        640
+      ],
+      "captured_mode0_initial_rect": [
+        0,
+        24,
+        350,
+        640
+      ],
+      "final_window_rect": [
+        14,
+        38,
+        626,
+        363
+      ],
+      "final_frame_geometry": [
+        14,
+        38,
+        612,
+        325
+      ],
+      "final_zoom_rect": [
+        14,
+        22,
+        404,
+        357
+      ],
+      "final_flags": 1934,
+      "uninitialized_saved_rect": [
+        -23131,
+        -23131,
+        -23131,
+        -23131
+      ],
+      "status": "COMPARED"
+    },
+    {
+      "input_right_bottom": [
+        350,
+        32767
+      ],
+      "captured_mode0_initial_rect": [
+        0,
+        24,
+        350,
+        32767
+      ],
+      "final_window_rect": [
+        14,
+        38,
+        626,
+        363
+      ],
+      "final_frame_geometry": [
+        14,
+        38,
+        612,
+        325
+      ],
+      "final_zoom_rect": [
+        14,
+        22,
+        404,
+        357
+      ],
+      "final_flags": 1934,
+      "uninitialized_saved_rect": [
+        -23131,
+        -23131,
+        -23131,
+        -23131
+      ],
+      "status": "COMPARED"
+    },
+    {
+      "input_right_bottom": [
+        350,
+        -32768
+      ],
+      "captured_mode0_initial_rect": [
+        0,
+        24,
+        350,
+        -32768
+      ],
+      "final_window_rect": [
+        14,
+        38,
+        626,
+        363
+      ],
+      "final_frame_geometry": [
+        14,
+        38,
+        612,
+        325
+      ],
+      "final_zoom_rect": [
+        14,
+        22,
+        404,
+        357
+      ],
+      "final_flags": 1934,
+      "uninitialized_saved_rect": [
+        -23131,
+        -23131,
+        -23131,
+        -23131
+      ],
+      "status": "COMPARED"
+    },
+    {
+      "input_right_bottom": [
+        640,
+        0
+      ],
+      "captured_mode0_initial_rect": [
+        0,
+        24,
+        640,
+        0
+      ],
+      "final_window_rect": [
+        14,
+        38,
+        626,
+        363
+      ],
+      "final_frame_geometry": [
+        14,
+        38,
+        612,
+        325
+      ],
+      "final_zoom_rect": [
+        14,
+        22,
+        404,
+        357
+      ],
+      "final_flags": 1934,
+      "uninitialized_saved_rect": [
+        -23131,
+        -23131,
+        -23131,
+        -23131
+      ],
+      "status": "COMPARED"
+    },
+    {
+      "input_right_bottom": [
+        640,
+        1
+      ],
+      "captured_mode0_initial_rect": [
+        0,
+        24,
+        640,
+        1
+      ],
+      "final_window_rect": [
+        14,
+        38,
+        626,
+        363
+      ],
+      "final_frame_geometry": [
+        14,
+        38,
+        612,
+        325
+      ],
+      "final_zoom_rect": [
+        14,
+        22,
+        404,
+        357
+      ],
+      "final_flags": 1934,
+      "uninitialized_saved_rect": [
+        -23131,
+        -23131,
+        -23131,
+        -23131
+      ],
+      "status": "COMPARED"
+    },
+    {
+      "input_right_bottom": [
+        640,
+        23
+      ],
+      "captured_mode0_initial_rect": [
+        0,
+        24,
+        640,
+        23
+      ],
+      "final_window_rect": [
+        14,
+        38,
+        626,
+        363
+      ],
+      "final_frame_geometry": [
+        14,
+        38,
+        612,
+        325
+      ],
+      "final_zoom_rect": [
+        14,
+        22,
+        404,
+        357
+      ],
+      "final_flags": 1934,
+      "uninitialized_saved_rect": [
+        -23131,
+        -23131,
+        -23131,
+        -23131
+      ],
+      "status": "COMPARED"
+    },
+    {
+      "input_right_bottom": [
+        640,
+        24
+      ],
+      "captured_mode0_initial_rect": [
+        0,
+        24,
+        640,
+        24
+      ],
+      "final_window_rect": [
+        14,
+        38,
+        626,
+        363
+      ],
+      "final_frame_geometry": [
+        14,
+        38,
+        612,
+        325
+      ],
+      "final_zoom_rect": [
+        14,
+        22,
+        404,
+        357
+      ],
+      "final_flags": 1934,
+      "uninitialized_saved_rect": [
+        -23131,
+        -23131,
+        -23131,
+        -23131
+      ],
+      "status": "COMPARED"
+    },
+    {
+      "input_right_bottom": [
+        640,
+        350
+      ],
+      "captured_mode0_initial_rect": [
+        0,
+        24,
+        640,
+        350
+      ],
+      "final_window_rect": [
+        14,
+        38,
+        626,
+        363
+      ],
+      "final_frame_geometry": [
+        14,
+        38,
+        612,
+        325
+      ],
+      "final_zoom_rect": [
+        14,
+        22,
+        404,
+        357
+      ],
+      "final_flags": 1934,
+      "uninitialized_saved_rect": [
+        -23131,
+        -23131,
+        -23131,
+        -23131
+      ],
+      "status": "COMPARED"
+    },
+    {
+      "input_right_bottom": [
+        640,
+        640
+      ],
+      "captured_mode0_initial_rect": [
+        0,
+        24,
+        640,
+        640
+      ],
+      "final_window_rect": [
+        14,
+        38,
+        626,
+        363
+      ],
+      "final_frame_geometry": [
+        14,
+        38,
+        612,
+        325
+      ],
+      "final_zoom_rect": [
+        14,
+        22,
+        404,
+        357
+      ],
+      "final_flags": 1934,
+      "uninitialized_saved_rect": [
+        -23131,
+        -23131,
+        -23131,
+        -23131
+      ],
+      "status": "COMPARED"
+    },
+    {
+      "input_right_bottom": [
+        640,
+        32767
+      ],
+      "captured_mode0_initial_rect": [
+        0,
+        24,
+        640,
+        32767
+      ],
+      "final_window_rect": [
+        14,
+        38,
+        626,
+        363
+      ],
+      "final_frame_geometry": [
+        14,
+        38,
+        612,
+        325
+      ],
+      "final_zoom_rect": [
+        14,
+        22,
+        404,
+        357
+      ],
+      "final_flags": 1934,
+      "uninitialized_saved_rect": [
+        -23131,
+        -23131,
+        -23131,
+        -23131
+      ],
+      "status": "COMPARED"
+    },
+    {
+      "input_right_bottom": [
+        640,
+        -32768
+      ],
+      "captured_mode0_initial_rect": [
+        0,
+        24,
+        640,
+        -32768
+      ],
+      "final_window_rect": [
+        14,
+        38,
+        626,
+        363
+      ],
+      "final_frame_geometry": [
+        14,
+        38,
+        612,
+        325
+      ],
+      "final_zoom_rect": [
+        14,
+        22,
+        404,
+        357
+      ],
+      "final_flags": 1934,
+      "uninitialized_saved_rect": [
+        -23131,
+        -23131,
+        -23131,
+        -23131
+      ],
+      "status": "COMPARED"
+    },
+    {
+      "input_right_bottom": [
+        32767,
+        0
+      ],
+      "captured_mode0_initial_rect": [
+        0,
+        24,
+        32767,
+        0
+      ],
+      "final_window_rect": [
+        14,
+        38,
+        626,
+        363
+      ],
+      "final_frame_geometry": [
+        14,
+        38,
+        612,
+        325
+      ],
+      "final_zoom_rect": [
+        14,
+        22,
+        404,
+        357
+      ],
+      "final_flags": 1934,
+      "uninitialized_saved_rect": [
+        -23131,
+        -23131,
+        -23131,
+        -23131
+      ],
+      "status": "COMPARED"
+    },
+    {
+      "input_right_bottom": [
+        32767,
+        1
+      ],
+      "captured_mode0_initial_rect": [
+        0,
+        24,
+        32767,
+        1
+      ],
+      "final_window_rect": [
+        14,
+        38,
+        626,
+        363
+      ],
+      "final_frame_geometry": [
+        14,
+        38,
+        612,
+        325
+      ],
+      "final_zoom_rect": [
+        14,
+        22,
+        404,
+        357
+      ],
+      "final_flags": 1934,
+      "uninitialized_saved_rect": [
+        -23131,
+        -23131,
+        -23131,
+        -23131
+      ],
+      "status": "COMPARED"
+    },
+    {
+      "input_right_bottom": [
+        32767,
+        23
+      ],
+      "captured_mode0_initial_rect": [
+        0,
+        24,
+        32767,
+        23
+      ],
+      "final_window_rect": [
+        14,
+        38,
+        626,
+        363
+      ],
+      "final_frame_geometry": [
+        14,
+        38,
+        612,
+        325
+      ],
+      "final_zoom_rect": [
+        14,
+        22,
+        404,
+        357
+      ],
+      "final_flags": 1934,
+      "uninitialized_saved_rect": [
+        -23131,
+        -23131,
+        -23131,
+        -23131
+      ],
+      "status": "COMPARED"
+    },
+    {
+      "input_right_bottom": [
+        32767,
+        24
+      ],
+      "captured_mode0_initial_rect": [
+        0,
+        24,
+        32767,
+        24
+      ],
+      "final_window_rect": [
+        14,
+        38,
+        626,
+        363
+      ],
+      "final_frame_geometry": [
+        14,
+        38,
+        612,
+        325
+      ],
+      "final_zoom_rect": [
+        14,
+        22,
+        404,
+        357
+      ],
+      "final_flags": 1934,
+      "uninitialized_saved_rect": [
+        -23131,
+        -23131,
+        -23131,
+        -23131
+      ],
+      "status": "COMPARED"
+    },
+    {
+      "input_right_bottom": [
+        32767,
+        350
+      ],
+      "captured_mode0_initial_rect": [
+        0,
+        24,
+        32767,
+        350
+      ],
+      "final_window_rect": [
+        14,
+        38,
+        626,
+        363
+      ],
+      "final_frame_geometry": [
+        14,
+        38,
+        612,
+        325
+      ],
+      "final_zoom_rect": [
+        14,
+        22,
+        404,
+        357
+      ],
+      "final_flags": 1934,
+      "uninitialized_saved_rect": [
+        -23131,
+        -23131,
+        -23131,
+        -23131
+      ],
+      "status": "COMPARED"
+    },
+    {
+      "input_right_bottom": [
+        32767,
+        640
+      ],
+      "captured_mode0_initial_rect": [
+        0,
+        24,
+        32767,
+        640
+      ],
+      "final_window_rect": [
+        14,
+        38,
+        626,
+        363
+      ],
+      "final_frame_geometry": [
+        14,
+        38,
+        612,
+        325
+      ],
+      "final_zoom_rect": [
+        14,
+        22,
+        404,
+        357
+      ],
+      "final_flags": 1934,
+      "uninitialized_saved_rect": [
+        -23131,
+        -23131,
+        -23131,
+        -23131
+      ],
+      "status": "COMPARED"
+    },
+    {
+      "input_right_bottom": [
+        32767,
+        32767
+      ],
+      "captured_mode0_initial_rect": [
+        0,
+        24,
+        32767,
+        32767
+      ],
+      "final_window_rect": [
+        14,
+        38,
+        626,
+        363
+      ],
+      "final_frame_geometry": [
+        14,
+        38,
+        612,
+        325
+      ],
+      "final_zoom_rect": [
+        14,
+        22,
+        404,
+        357
+      ],
+      "final_flags": 1934,
+      "uninitialized_saved_rect": [
+        -23131,
+        -23131,
+        -23131,
+        -23131
+      ],
+      "status": "COMPARED"
+    },
+    {
+      "input_right_bottom": [
+        32767,
+        -32768
+      ],
+      "captured_mode0_initial_rect": [
+        0,
+        24,
+        32767,
+        -32768
+      ],
+      "final_window_rect": [
+        14,
+        38,
+        626,
+        363
+      ],
+      "final_frame_geometry": [
+        14,
+        38,
+        612,
+        325
+      ],
+      "final_zoom_rect": [
+        14,
+        22,
+        404,
+        357
+      ],
+      "final_flags": 1934,
+      "uninitialized_saved_rect": [
+        -23131,
+        -23131,
+        -23131,
+        -23131
+      ],
+      "status": "COMPARED"
+    },
+    {
+      "input_right_bottom": [
+        -32768,
+        0
+      ],
+      "captured_mode0_initial_rect": [
+        0,
+        24,
+        -32768,
+        0
+      ],
+      "final_window_rect": [
+        14,
+        38,
+        626,
+        363
+      ],
+      "final_frame_geometry": [
+        14,
+        38,
+        612,
+        325
+      ],
+      "final_zoom_rect": [
+        14,
+        22,
+        404,
+        357
+      ],
+      "final_flags": 1934,
+      "uninitialized_saved_rect": [
+        -23131,
+        -23131,
+        -23131,
+        -23131
+      ],
+      "status": "COMPARED"
+    },
+    {
+      "input_right_bottom": [
+        -32768,
+        1
+      ],
+      "captured_mode0_initial_rect": [
+        0,
+        24,
+        -32768,
+        1
+      ],
+      "final_window_rect": [
+        14,
+        38,
+        626,
+        363
+      ],
+      "final_frame_geometry": [
+        14,
+        38,
+        612,
+        325
+      ],
+      "final_zoom_rect": [
+        14,
+        22,
+        404,
+        357
+      ],
+      "final_flags": 1934,
+      "uninitialized_saved_rect": [
+        -23131,
+        -23131,
+        -23131,
+        -23131
+      ],
+      "status": "COMPARED"
+    },
+    {
+      "input_right_bottom": [
+        -32768,
+        23
+      ],
+      "captured_mode0_initial_rect": [
+        0,
+        24,
+        -32768,
+        23
+      ],
+      "final_window_rect": [
+        14,
+        38,
+        626,
+        363
+      ],
+      "final_frame_geometry": [
+        14,
+        38,
+        612,
+        325
+      ],
+      "final_zoom_rect": [
+        14,
+        22,
+        404,
+        357
+      ],
+      "final_flags": 1934,
+      "uninitialized_saved_rect": [
+        -23131,
+        -23131,
+        -23131,
+        -23131
+      ],
+      "status": "COMPARED"
+    },
+    {
+      "input_right_bottom": [
+        -32768,
+        24
+      ],
+      "captured_mode0_initial_rect": [
+        0,
+        24,
+        -32768,
+        24
+      ],
+      "final_window_rect": [
+        14,
+        38,
+        626,
+        363
+      ],
+      "final_frame_geometry": [
+        14,
+        38,
+        612,
+        325
+      ],
+      "final_zoom_rect": [
+        14,
+        22,
+        404,
+        357
+      ],
+      "final_flags": 1934,
+      "uninitialized_saved_rect": [
+        -23131,
+        -23131,
+        -23131,
+        -23131
+      ],
+      "status": "COMPARED"
+    },
+    {
+      "input_right_bottom": [
+        -32768,
+        350
+      ],
+      "captured_mode0_initial_rect": [
+        0,
+        24,
+        -32768,
+        350
+      ],
+      "final_window_rect": [
+        14,
+        38,
+        626,
+        363
+      ],
+      "final_frame_geometry": [
+        14,
+        38,
+        612,
+        325
+      ],
+      "final_zoom_rect": [
+        14,
+        22,
+        404,
+        357
+      ],
+      "final_flags": 1934,
+      "uninitialized_saved_rect": [
+        -23131,
+        -23131,
+        -23131,
+        -23131
+      ],
+      "status": "COMPARED"
+    },
+    {
+      "input_right_bottom": [
+        -32768,
+        640
+      ],
+      "captured_mode0_initial_rect": [
+        0,
+        24,
+        -32768,
+        640
+      ],
+      "final_window_rect": [
+        14,
+        38,
+        626,
+        363
+      ],
+      "final_frame_geometry": [
+        14,
+        38,
+        612,
+        325
+      ],
+      "final_zoom_rect": [
+        14,
+        22,
+        404,
+        357
+      ],
+      "final_flags": 1934,
+      "uninitialized_saved_rect": [
+        -23131,
+        -23131,
+        -23131,
+        -23131
+      ],
+      "status": "COMPARED"
+    },
+    {
+      "input_right_bottom": [
+        -32768,
+        32767
+      ],
+      "captured_mode0_initial_rect": [
+        0,
+        24,
+        -32768,
+        32767
+      ],
+      "final_window_rect": [
+        14,
+        38,
+        626,
+        363
+      ],
+      "final_frame_geometry": [
+        14,
+        38,
+        612,
+        325
+      ],
+      "final_zoom_rect": [
+        14,
+        22,
+        404,
+        357
+      ],
+      "final_flags": 1934,
+      "uninitialized_saved_rect": [
+        -23131,
+        -23131,
+        -23131,
+        -23131
+      ],
+      "status": "COMPARED"
+    },
+    {
+      "input_right_bottom": [
+        -32768,
+        -32768
+      ],
+      "captured_mode0_initial_rect": [
+        0,
+        24,
+        -32768,
+        -32768
+      ],
+      "final_window_rect": [
+        14,
+        38,
+        626,
+        363
+      ],
+      "final_frame_geometry": [
+        14,
+        38,
+        612,
+        325
+      ],
+      "final_zoom_rect": [
+        14,
+        22,
+        404,
+        357
+      ],
+      "final_flags": 1934,
+      "uninitialized_saved_rect": [
+        -23131,
+        -23131,
+        -23131,
+        -23131
+      ],
+      "status": "COMPARED"
+    }
+  ]
+}
