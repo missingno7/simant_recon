@@ -240,6 +240,13 @@ into a pixel-equivalence claim. Live composition now paints Edit contents and
 each ribbon with their owning window during the back-to-front pass, so a front
 window can cover them. Complete control interaction remains separate.
 
+The [engine control packet](../tests/setup/control_engine/evidence/control-engine-next9-20261002T181619Z.json)
+passes fifteen native boundary cases, including ten successful events after one
+actual simulation tick. Callback snapshots check published source state;
+RandYard preserves the caller-owned selectors and percentage words. These
+engine checks compose the separately DOS-compared event model and do not add
+DOS comparisons to the frozen certificate.
+
 The [control event model](../tests/setup/control_events/README.md) matches 34
 directed DOS cases for Auto, presets, percentage toggles, triangle drags,
 current/preset level triples, IdealCaste, and ordered provider arguments.
@@ -250,6 +257,13 @@ the clip, selection and five-tick wait order. Frame and slider handlers remain
 outside that model. [Group visibility](../tests/windows/group_visible/evidence/group-visible-dos-native-final-20261002.json)
 matches 5,380 cases and 486 ordered inversion events. These finite contracts
 do not establish DOS framebuffer equality or the complete live input path.
+
+The [mouse hotbox packet](../tests/windows/mouse_hotbox/evidence/mouse-hotbox-differential-v5.json)
+matches 222 cases against the original assembly scanner. Window opening
+registers objects in ascending order, but registration prepends each record;
+mouse picking therefore uses descending object order and inclusive rectangle
+edges. Keyboard picking retains its separate first-index, half-open contract.
+Decoration precedence and dynamic re-registration remain outside the helper.
 
 The [legacy save codec](../tests/save/evidence/legacy-save-codec-v1/README.md)
 validates the source-derived 307-record, 48,386-byte payload mechanically with
@@ -270,12 +284,36 @@ each fail the comparison. This finite binding proof does not establish the
 file lifecycle or all runtime states. The codec remains outside the live build;
 live filesystem/save/load services remain unfinished. V2 evidence is retained.
 
+The [V4 closure refresh](../tests/save/evidence/legacy-save-codec-v4/README.md)
+repeats the independent sentinel experiment with complete native compiler
+dependencies, including the header omitted from V3's manual pins. Both byte
+order positives pass and all three sensitivity controls fail as expected.
+V3 remains preserved with its incomplete dependency receipt. V4 still proves
+one controlled SaveGame invocation, rather than 307 independent function cases.
+Its compiler snapshots were taken after the DOS probe, so they do not cover
+that probe's compilation. This execution-identity gap remains explicit while
+a separate receipt refresh takes snapshots before the entire experiment.
+
+The [history renderer comparison](../tests/history_render/transitive_closure_report.json)
+passes 448 original-DOS cases (48 directed and 400 seeded), comparing ordered
+logical drawing requests. Forty-six cases exercise source pointer aliasing;
+the native binding preserves that alias rather than duplicating the series.
+The receipt records the compiler's local dependency closure and stable source,
+oracle, evaluator, and resource inputs. Resource-backed native raster checks
+cover 70 window commands and 361 touched pixels. DOS framebuffer equality and
+the live History window remain separate work.
+
 The [49-suite native integration gate](../tests/evidence/current/20261002/native-gate-49-menu-controls-final-20261002.json)
 passes with stable compiler inputs, including dropdown command plans, active
 menu title modes, and resource-backed control rasterization. Its SDL host test
 compares 224,000 exported presentation pixels against the host fixture and
 checks keyboard, quit, and monotonic-clock boundaries. These are native host
 checks; they add no original-DOS differential cases to the frozen certificate.
+
+The [fresh 50-suite gate](../tests/evidence/current/20261002/native-gate-50-mouse-controls-20261002.json)
+passes with the mouse helper and control model in the native source closure.
+The [refreshed engine menu packet](../tests/menus/evidence/engine-procmenu-next7-mouse-control-closure-20261002.json)
+also passes its 21 command cases and retains the explicit StopSong boundary.
 
 The [fresh 84-case menu packet](../tests/menus/evidence/procmenu-next7-dos-differential-adapter-complete-closure-20261002.json)
 pins the compiler's non-system dependency closure and records stable inputs
