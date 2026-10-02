@@ -19,6 +19,7 @@ ROOT = Path(__file__).resolve().parents[1]
 if str(ROOT) not in sys.path:
     sys.path.insert(0, str(ROOT))
 from portable.tools.profile_next9 import validate_next9
+from portable.tools.profile_next10 import validate_next10
 
 VERSION = "3.4.16"
 SDK_SHA = "9828bb735cf8a007bcf0ac5aa9f01f3fcb54b7ca67c932e775c905c5d5053a60"
@@ -84,6 +85,12 @@ def build(main: Path, output: Path, sources: list[Path],
                 provenance.get("support_compile", {}).get("passed") and
                 provenance.get("native_adapter_compile", {}).get("passed")):
             raise SystemExit("Source profile has not passed its complete compile gate")
+        selected_provenance = provenance
+        next10_input_pins = {}
+        if "versioned_profile_extension_next10" in provenance:
+            # Validate the complete unchanged parent through every existing
+            # gate; separately admit all actual Next10 generated inputs.
+            provenance, next10_input_pins = validate_next10(provenance)
         state=provenance["recovered_state"]
         if state["binding_status"] != "COMPLETE" or state["source_data_initializer_mismatches"]:
             raise SystemExit("Incomplete recovered source profile")
@@ -233,6 +240,8 @@ def build(main: Path, output: Path, sources: list[Path],
         for row in provenance["modules"]:
             expected[row["source"]]=row["source_sha256"]
             expected[row["generated"]]=row["generated_sha256"]
+        expected.update(next10_input_pins)
+        provenance = selected_provenance
         for name,digest in expected.items():
             input_path = (ROOT / name).resolve()
             if not input_path.is_relative_to(ROOT):
@@ -288,7 +297,8 @@ def build(main: Path, output: Path, sources: list[Path],
         text=True, cwd=ROOT)
     dependencies = dependencies.replace("\\\n", " ")
     inputs = {main, *sources, Path(__file__).resolve(),
-              ROOT / "portable/tools/profile_next9.py"}
+              ROOT / "portable/tools/profile_next9.py",
+              ROOT / "portable/tools/profile_next10.py"}
     for block in dependencies.split("SIMANT_DEP:")[1:]:
         for token in shlex.split(block):
             dependency = (ROOT / token).resolve()

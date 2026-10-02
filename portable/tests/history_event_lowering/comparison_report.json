@@ -1,0 +1,1779 @@
+{
+  "schema": "history-event-lowering-paired-dos-native-v1",
+  "status": "PASS",
+  "next10_profile_provenance_sha256": "d8d03f5cafbed1cbc5f23ea95051f7476a29d0aa8b925cefa83565ebf44fcf48",
+  "next10_generated_s24_sha256": "b3d6ce42e310b6d6cd8655604a82909fac0c82e512b690436e7b66e8d01c274e",
+  "next10_producer_sha256": "910fef123be01851d7e346eaf446f79a0b83c14605d062b6141f8bac44ff5c58",
+  "event_harness_sha256": "2f08ed69ea8128b77da5b6f1dfaa7556332455bdde771071003c61ce0e0ead0c",
+  "lowered_native_harness_source_sha256": "92f6b478d2c68cdec62f52f226b9a8d9b1600884485f70e57425f2aca1854e7f",
+  "buggy_native_control_source_sha256": "2e2ef83093e800dcfc590e7f47a7419571edbc7d50e47762e142a8ce60619f4f",
+  "canonical_source_sha256": "3de9615a57dbe35eacd073726b451478dc5b12396360501631d7553b6139e240",
+  "oracle_fixture_source_sha256": "764bcd8f1272b6f9655a1fe305cea71d98e95b9ad9c285f69dc944fbfe21d34c",
+  "context_tool_sha256": "6d94d66482736663f4dd29945ae3d206e5543aaccdb062e96304f5cb0d1a97be",
+  "context_output_sha256": "ce95f1895253aca64e62854ce2fbcbbb70619feda16290132b84688b002fb752",
+  "behavior_harness_sha256": "2c0799048057f59eae61a48be4d695278635594484adf0c70bf46c51b4e0c799",
+  "original_exe_sha256": "aa0596c6766322a8229ee3c36e57048c92adc82d50fbe2ef37afb8b85fcf4f11",
+  "original_data_bindings": {
+    "graphColors": "DS:2ee8",
+    "shownGraphs": "DS:2ef0",
+    "freeColors": "DS:2ef8",
+    "histColor": "DS:8c26",
+    "histShown": "DS:8c4e"
+  },
+  "snapshot_api": {
+    "name": "S24_GetHistoryUiSnapshot",
+    "history_colors_count": 10,
+    "shown_graph_count": "non-sentinel entries in shownGraphs[4]",
+    "source_histColor_declared_capacity": 20
+  },
+  "scope": {
+    "cases": 29,
+    "scenario_count": 7,
+    "event_codes": "0x1503..0x1507",
+    "events_covering": [
+      "first add",
+      "partial-list adds",
+      "first removal",
+      "middle removal at slots 1 and 2",
+      "last removal",
+      "full-list eviction"
+    ],
+    "state_fields_compared": [
+      "graphColors[4]",
+      "histColor[0..9]",
+      "shownGraphs[4]",
+      "active count",
+      "freeColors",
+      "histShown[10]"
+    ],
+    "callback_order_fields": [
+      "clip_SetWin",
+      "_fmemmove",
+      "win_MakeObjUnselected",
+      "win_DrawHistoryWindow",
+      "clip_Off"
+    ]
+  },
+  "dos_native_events": {
+    "add_first": {
+      "input_items": [
+        5379
+      ],
+      "events": [
+        {
+          "item": 5379,
+          "callback_order_equal": true,
+          "source_state_equal": true,
+          "dos_memmove": {
+            "dst_index": 1,
+            "src_index": 0,
+            "count": 6
+          },
+          "bounded_native_memmove": {
+            "dst_index": 1,
+            "src_index": 0,
+            "count": 6,
+            "guard_violation": false
+          },
+          "snapshot": {
+            "shown_graph_count": 1,
+            "graph_colors": [
+              67,
+              70,
+              73,
+              69
+            ],
+            "history_colors": [
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            "shown_graphs": [
+              0,
+              -32768,
+              -32768,
+              -32768
+            ],
+            "free_colors": 14,
+            "hist_shown": [
+              1,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ]
+          }
+        }
+      ]
+    },
+    "add_to_partial_list": {
+      "input_items": [
+        5379,
+        5380,
+        5381
+      ],
+      "events": [
+        {
+          "item": 5379,
+          "callback_order_equal": true,
+          "source_state_equal": true,
+          "dos_memmove": {
+            "dst_index": 1,
+            "src_index": 0,
+            "count": 6
+          },
+          "bounded_native_memmove": {
+            "dst_index": 1,
+            "src_index": 0,
+            "count": 6,
+            "guard_violation": false
+          },
+          "snapshot": {
+            "shown_graph_count": 1,
+            "graph_colors": [
+              67,
+              70,
+              73,
+              69
+            ],
+            "history_colors": [
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            "shown_graphs": [
+              0,
+              -32768,
+              -32768,
+              -32768
+            ],
+            "free_colors": 14,
+            "hist_shown": [
+              1,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ]
+          }
+        },
+        {
+          "item": 5380,
+          "callback_order_equal": true,
+          "source_state_equal": true,
+          "dos_memmove": {
+            "dst_index": 1,
+            "src_index": 0,
+            "count": 6
+          },
+          "bounded_native_memmove": {
+            "dst_index": 1,
+            "src_index": 0,
+            "count": 6,
+            "guard_violation": false
+          },
+          "snapshot": {
+            "shown_graph_count": 2,
+            "graph_colors": [
+              67,
+              70,
+              73,
+              69
+            ],
+            "history_colors": [
+              0,
+              1,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            "shown_graphs": [
+              1,
+              0,
+              -32768,
+              -32768
+            ],
+            "free_colors": 12,
+            "hist_shown": [
+              1,
+              1,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ]
+          }
+        },
+        {
+          "item": 5381,
+          "callback_order_equal": true,
+          "source_state_equal": true,
+          "dos_memmove": {
+            "dst_index": 1,
+            "src_index": 0,
+            "count": 6
+          },
+          "bounded_native_memmove": {
+            "dst_index": 1,
+            "src_index": 0,
+            "count": 6,
+            "guard_violation": false
+          },
+          "snapshot": {
+            "shown_graph_count": 3,
+            "graph_colors": [
+              67,
+              70,
+              73,
+              69
+            ],
+            "history_colors": [
+              0,
+              1,
+              2,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            "shown_graphs": [
+              2,
+              1,
+              0,
+              -32768
+            ],
+            "free_colors": 8,
+            "hist_shown": [
+              1,
+              1,
+              1,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ]
+          }
+        }
+      ]
+    },
+    "remove_first_slot": {
+      "input_items": [
+        5379,
+        5380,
+        5381,
+        5382,
+        5382
+      ],
+      "events": [
+        {
+          "item": 5379,
+          "callback_order_equal": true,
+          "source_state_equal": true,
+          "dos_memmove": {
+            "dst_index": 1,
+            "src_index": 0,
+            "count": 6
+          },
+          "bounded_native_memmove": {
+            "dst_index": 1,
+            "src_index": 0,
+            "count": 6,
+            "guard_violation": false
+          },
+          "snapshot": {
+            "shown_graph_count": 1,
+            "graph_colors": [
+              67,
+              70,
+              73,
+              69
+            ],
+            "history_colors": [
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            "shown_graphs": [
+              0,
+              -32768,
+              -32768,
+              -32768
+            ],
+            "free_colors": 14,
+            "hist_shown": [
+              1,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ]
+          }
+        },
+        {
+          "item": 5380,
+          "callback_order_equal": true,
+          "source_state_equal": true,
+          "dos_memmove": {
+            "dst_index": 1,
+            "src_index": 0,
+            "count": 6
+          },
+          "bounded_native_memmove": {
+            "dst_index": 1,
+            "src_index": 0,
+            "count": 6,
+            "guard_violation": false
+          },
+          "snapshot": {
+            "shown_graph_count": 2,
+            "graph_colors": [
+              67,
+              70,
+              73,
+              69
+            ],
+            "history_colors": [
+              0,
+              1,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            "shown_graphs": [
+              1,
+              0,
+              -32768,
+              -32768
+            ],
+            "free_colors": 12,
+            "hist_shown": [
+              1,
+              1,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ]
+          }
+        },
+        {
+          "item": 5381,
+          "callback_order_equal": true,
+          "source_state_equal": true,
+          "dos_memmove": {
+            "dst_index": 1,
+            "src_index": 0,
+            "count": 6
+          },
+          "bounded_native_memmove": {
+            "dst_index": 1,
+            "src_index": 0,
+            "count": 6,
+            "guard_violation": false
+          },
+          "snapshot": {
+            "shown_graph_count": 3,
+            "graph_colors": [
+              67,
+              70,
+              73,
+              69
+            ],
+            "history_colors": [
+              0,
+              1,
+              2,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            "shown_graphs": [
+              2,
+              1,
+              0,
+              -32768
+            ],
+            "free_colors": 8,
+            "hist_shown": [
+              1,
+              1,
+              1,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ]
+          }
+        },
+        {
+          "item": 5382,
+          "callback_order_equal": true,
+          "source_state_equal": true,
+          "dos_memmove": {
+            "dst_index": 1,
+            "src_index": 0,
+            "count": 6
+          },
+          "bounded_native_memmove": {
+            "dst_index": 1,
+            "src_index": 0,
+            "count": 6,
+            "guard_violation": false
+          },
+          "snapshot": {
+            "shown_graph_count": 4,
+            "graph_colors": [
+              67,
+              70,
+              73,
+              69
+            ],
+            "history_colors": [
+              0,
+              1,
+              2,
+              3,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            "shown_graphs": [
+              3,
+              2,
+              1,
+              0
+            ],
+            "free_colors": 0,
+            "hist_shown": [
+              1,
+              1,
+              1,
+              1,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ]
+          }
+        },
+        {
+          "item": 5382,
+          "callback_order_equal": true,
+          "source_state_equal": true,
+          "dos_memmove": {
+            "dst_index": 0,
+            "src_index": 1,
+            "count": 8
+          },
+          "bounded_native_memmove": {
+            "dst_index": 0,
+            "src_index": 1,
+            "count": 6,
+            "guard_violation": false
+          },
+          "snapshot": {
+            "shown_graph_count": 3,
+            "graph_colors": [
+              67,
+              70,
+              73,
+              69
+            ],
+            "history_colors": [
+              0,
+              1,
+              2,
+              3,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            "shown_graphs": [
+              2,
+              1,
+              0,
+              -32768
+            ],
+            "free_colors": 8,
+            "hist_shown": [
+              1,
+              1,
+              1,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ]
+          }
+        }
+      ]
+    },
+    "remove_middle_slot_1": {
+      "input_items": [
+        5379,
+        5380,
+        5381,
+        5382,
+        5381
+      ],
+      "events": [
+        {
+          "item": 5379,
+          "callback_order_equal": true,
+          "source_state_equal": true,
+          "dos_memmove": {
+            "dst_index": 1,
+            "src_index": 0,
+            "count": 6
+          },
+          "bounded_native_memmove": {
+            "dst_index": 1,
+            "src_index": 0,
+            "count": 6,
+            "guard_violation": false
+          },
+          "snapshot": {
+            "shown_graph_count": 1,
+            "graph_colors": [
+              67,
+              70,
+              73,
+              69
+            ],
+            "history_colors": [
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            "shown_graphs": [
+              0,
+              -32768,
+              -32768,
+              -32768
+            ],
+            "free_colors": 14,
+            "hist_shown": [
+              1,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ]
+          }
+        },
+        {
+          "item": 5380,
+          "callback_order_equal": true,
+          "source_state_equal": true,
+          "dos_memmove": {
+            "dst_index": 1,
+            "src_index": 0,
+            "count": 6
+          },
+          "bounded_native_memmove": {
+            "dst_index": 1,
+            "src_index": 0,
+            "count": 6,
+            "guard_violation": false
+          },
+          "snapshot": {
+            "shown_graph_count": 2,
+            "graph_colors": [
+              67,
+              70,
+              73,
+              69
+            ],
+            "history_colors": [
+              0,
+              1,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            "shown_graphs": [
+              1,
+              0,
+              -32768,
+              -32768
+            ],
+            "free_colors": 12,
+            "hist_shown": [
+              1,
+              1,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ]
+          }
+        },
+        {
+          "item": 5381,
+          "callback_order_equal": true,
+          "source_state_equal": true,
+          "dos_memmove": {
+            "dst_index": 1,
+            "src_index": 0,
+            "count": 6
+          },
+          "bounded_native_memmove": {
+            "dst_index": 1,
+            "src_index": 0,
+            "count": 6,
+            "guard_violation": false
+          },
+          "snapshot": {
+            "shown_graph_count": 3,
+            "graph_colors": [
+              67,
+              70,
+              73,
+              69
+            ],
+            "history_colors": [
+              0,
+              1,
+              2,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            "shown_graphs": [
+              2,
+              1,
+              0,
+              -32768
+            ],
+            "free_colors": 8,
+            "hist_shown": [
+              1,
+              1,
+              1,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ]
+          }
+        },
+        {
+          "item": 5382,
+          "callback_order_equal": true,
+          "source_state_equal": true,
+          "dos_memmove": {
+            "dst_index": 1,
+            "src_index": 0,
+            "count": 6
+          },
+          "bounded_native_memmove": {
+            "dst_index": 1,
+            "src_index": 0,
+            "count": 6,
+            "guard_violation": false
+          },
+          "snapshot": {
+            "shown_graph_count": 4,
+            "graph_colors": [
+              67,
+              70,
+              73,
+              69
+            ],
+            "history_colors": [
+              0,
+              1,
+              2,
+              3,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            "shown_graphs": [
+              3,
+              2,
+              1,
+              0
+            ],
+            "free_colors": 0,
+            "hist_shown": [
+              1,
+              1,
+              1,
+              1,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ]
+          }
+        },
+        {
+          "item": 5381,
+          "callback_order_equal": true,
+          "source_state_equal": true,
+          "dos_memmove": {
+            "dst_index": 1,
+            "src_index": 2,
+            "count": 6
+          },
+          "bounded_native_memmove": {
+            "dst_index": 1,
+            "src_index": 2,
+            "count": 4,
+            "guard_violation": false
+          },
+          "snapshot": {
+            "shown_graph_count": 3,
+            "graph_colors": [
+              67,
+              70,
+              73,
+              69
+            ],
+            "history_colors": [
+              0,
+              1,
+              2,
+              3,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            "shown_graphs": [
+              3,
+              1,
+              0,
+              -32768
+            ],
+            "free_colors": 4,
+            "hist_shown": [
+              1,
+              1,
+              0,
+              1,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ]
+          }
+        }
+      ]
+    },
+    "remove_middle_slot_2": {
+      "input_items": [
+        5379,
+        5380,
+        5381,
+        5382,
+        5380
+      ],
+      "events": [
+        {
+          "item": 5379,
+          "callback_order_equal": true,
+          "source_state_equal": true,
+          "dos_memmove": {
+            "dst_index": 1,
+            "src_index": 0,
+            "count": 6
+          },
+          "bounded_native_memmove": {
+            "dst_index": 1,
+            "src_index": 0,
+            "count": 6,
+            "guard_violation": false
+          },
+          "snapshot": {
+            "shown_graph_count": 1,
+            "graph_colors": [
+              67,
+              70,
+              73,
+              69
+            ],
+            "history_colors": [
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            "shown_graphs": [
+              0,
+              -32768,
+              -32768,
+              -32768
+            ],
+            "free_colors": 14,
+            "hist_shown": [
+              1,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ]
+          }
+        },
+        {
+          "item": 5380,
+          "callback_order_equal": true,
+          "source_state_equal": true,
+          "dos_memmove": {
+            "dst_index": 1,
+            "src_index": 0,
+            "count": 6
+          },
+          "bounded_native_memmove": {
+            "dst_index": 1,
+            "src_index": 0,
+            "count": 6,
+            "guard_violation": false
+          },
+          "snapshot": {
+            "shown_graph_count": 2,
+            "graph_colors": [
+              67,
+              70,
+              73,
+              69
+            ],
+            "history_colors": [
+              0,
+              1,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            "shown_graphs": [
+              1,
+              0,
+              -32768,
+              -32768
+            ],
+            "free_colors": 12,
+            "hist_shown": [
+              1,
+              1,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ]
+          }
+        },
+        {
+          "item": 5381,
+          "callback_order_equal": true,
+          "source_state_equal": true,
+          "dos_memmove": {
+            "dst_index": 1,
+            "src_index": 0,
+            "count": 6
+          },
+          "bounded_native_memmove": {
+            "dst_index": 1,
+            "src_index": 0,
+            "count": 6,
+            "guard_violation": false
+          },
+          "snapshot": {
+            "shown_graph_count": 3,
+            "graph_colors": [
+              67,
+              70,
+              73,
+              69
+            ],
+            "history_colors": [
+              0,
+              1,
+              2,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            "shown_graphs": [
+              2,
+              1,
+              0,
+              -32768
+            ],
+            "free_colors": 8,
+            "hist_shown": [
+              1,
+              1,
+              1,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ]
+          }
+        },
+        {
+          "item": 5382,
+          "callback_order_equal": true,
+          "source_state_equal": true,
+          "dos_memmove": {
+            "dst_index": 1,
+            "src_index": 0,
+            "count": 6
+          },
+          "bounded_native_memmove": {
+            "dst_index": 1,
+            "src_index": 0,
+            "count": 6,
+            "guard_violation": false
+          },
+          "snapshot": {
+            "shown_graph_count": 4,
+            "graph_colors": [
+              67,
+              70,
+              73,
+              69
+            ],
+            "history_colors": [
+              0,
+              1,
+              2,
+              3,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            "shown_graphs": [
+              3,
+              2,
+              1,
+              0
+            ],
+            "free_colors": 0,
+            "hist_shown": [
+              1,
+              1,
+              1,
+              1,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ]
+          }
+        },
+        {
+          "item": 5380,
+          "callback_order_equal": true,
+          "source_state_equal": true,
+          "dos_memmove": {
+            "dst_index": 2,
+            "src_index": 3,
+            "count": 4
+          },
+          "bounded_native_memmove": {
+            "dst_index": 2,
+            "src_index": 3,
+            "count": 2,
+            "guard_violation": false
+          },
+          "snapshot": {
+            "shown_graph_count": 3,
+            "graph_colors": [
+              67,
+              70,
+              73,
+              69
+            ],
+            "history_colors": [
+              0,
+              1,
+              2,
+              3,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            "shown_graphs": [
+              3,
+              2,
+              0,
+              -32768
+            ],
+            "free_colors": 2,
+            "hist_shown": [
+              1,
+              0,
+              1,
+              1,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ]
+          }
+        }
+      ]
+    },
+    "remove_last_slot": {
+      "input_items": [
+        5379,
+        5380,
+        5381,
+        5382,
+        5379
+      ],
+      "events": [
+        {
+          "item": 5379,
+          "callback_order_equal": true,
+          "source_state_equal": true,
+          "dos_memmove": {
+            "dst_index": 1,
+            "src_index": 0,
+            "count": 6
+          },
+          "bounded_native_memmove": {
+            "dst_index": 1,
+            "src_index": 0,
+            "count": 6,
+            "guard_violation": false
+          },
+          "snapshot": {
+            "shown_graph_count": 1,
+            "graph_colors": [
+              67,
+              70,
+              73,
+              69
+            ],
+            "history_colors": [
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            "shown_graphs": [
+              0,
+              -32768,
+              -32768,
+              -32768
+            ],
+            "free_colors": 14,
+            "hist_shown": [
+              1,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ]
+          }
+        },
+        {
+          "item": 5380,
+          "callback_order_equal": true,
+          "source_state_equal": true,
+          "dos_memmove": {
+            "dst_index": 1,
+            "src_index": 0,
+            "count": 6
+          },
+          "bounded_native_memmove": {
+            "dst_index": 1,
+            "src_index": 0,
+            "count": 6,
+            "guard_violation": false
+          },
+          "snapshot": {
+            "shown_graph_count": 2,
+            "graph_colors": [
+              67,
+              70,
+              73,
+              69
+            ],
+            "history_colors": [
+              0,
+              1,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            "shown_graphs": [
+              1,
+              0,
+              -32768,
+              -32768
+            ],
+            "free_colors": 12,
+            "hist_shown": [
+              1,
+              1,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ]
+          }
+        },
+        {
+          "item": 5381,
+          "callback_order_equal": true,
+          "source_state_equal": true,
+          "dos_memmove": {
+            "dst_index": 1,
+            "src_index": 0,
+            "count": 6
+          },
+          "bounded_native_memmove": {
+            "dst_index": 1,
+            "src_index": 0,
+            "count": 6,
+            "guard_violation": false
+          },
+          "snapshot": {
+            "shown_graph_count": 3,
+            "graph_colors": [
+              67,
+              70,
+              73,
+              69
+            ],
+            "history_colors": [
+              0,
+              1,
+              2,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            "shown_graphs": [
+              2,
+              1,
+              0,
+              -32768
+            ],
+            "free_colors": 8,
+            "hist_shown": [
+              1,
+              1,
+              1,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ]
+          }
+        },
+        {
+          "item": 5382,
+          "callback_order_equal": true,
+          "source_state_equal": true,
+          "dos_memmove": {
+            "dst_index": 1,
+            "src_index": 0,
+            "count": 6
+          },
+          "bounded_native_memmove": {
+            "dst_index": 1,
+            "src_index": 0,
+            "count": 6,
+            "guard_violation": false
+          },
+          "snapshot": {
+            "shown_graph_count": 4,
+            "graph_colors": [
+              67,
+              70,
+              73,
+              69
+            ],
+            "history_colors": [
+              0,
+              1,
+              2,
+              3,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            "shown_graphs": [
+              3,
+              2,
+              1,
+              0
+            ],
+            "free_colors": 0,
+            "hist_shown": [
+              1,
+              1,
+              1,
+              1,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ]
+          }
+        },
+        {
+          "item": 5379,
+          "callback_order_equal": true,
+          "source_state_equal": true,
+          "dos_memmove": {
+            "dst_index": 3,
+            "src_index": 4,
+            "count": 2
+          },
+          "bounded_native_memmove": {
+            "dst_index": 3,
+            "src_index": 4,
+            "count": 0,
+            "guard_violation": false
+          },
+          "snapshot": {
+            "shown_graph_count": 3,
+            "graph_colors": [
+              67,
+              70,
+              73,
+              69
+            ],
+            "history_colors": [
+              0,
+              1,
+              2,
+              3,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            "shown_graphs": [
+              3,
+              2,
+              1,
+              -32768
+            ],
+            "free_colors": 1,
+            "hist_shown": [
+              0,
+              1,
+              1,
+              1,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ]
+          }
+        }
+      ]
+    },
+    "add_at_capacity_evict_oldest": {
+      "input_items": [
+        5379,
+        5380,
+        5381,
+        5382,
+        5383
+      ],
+      "events": [
+        {
+          "item": 5379,
+          "callback_order_equal": true,
+          "source_state_equal": true,
+          "dos_memmove": {
+            "dst_index": 1,
+            "src_index": 0,
+            "count": 6
+          },
+          "bounded_native_memmove": {
+            "dst_index": 1,
+            "src_index": 0,
+            "count": 6,
+            "guard_violation": false
+          },
+          "snapshot": {
+            "shown_graph_count": 1,
+            "graph_colors": [
+              67,
+              70,
+              73,
+              69
+            ],
+            "history_colors": [
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            "shown_graphs": [
+              0,
+              -32768,
+              -32768,
+              -32768
+            ],
+            "free_colors": 14,
+            "hist_shown": [
+              1,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ]
+          }
+        },
+        {
+          "item": 5380,
+          "callback_order_equal": true,
+          "source_state_equal": true,
+          "dos_memmove": {
+            "dst_index": 1,
+            "src_index": 0,
+            "count": 6
+          },
+          "bounded_native_memmove": {
+            "dst_index": 1,
+            "src_index": 0,
+            "count": 6,
+            "guard_violation": false
+          },
+          "snapshot": {
+            "shown_graph_count": 2,
+            "graph_colors": [
+              67,
+              70,
+              73,
+              69
+            ],
+            "history_colors": [
+              0,
+              1,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            "shown_graphs": [
+              1,
+              0,
+              -32768,
+              -32768
+            ],
+            "free_colors": 12,
+            "hist_shown": [
+              1,
+              1,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ]
+          }
+        },
+        {
+          "item": 5381,
+          "callback_order_equal": true,
+          "source_state_equal": true,
+          "dos_memmove": {
+            "dst_index": 1,
+            "src_index": 0,
+            "count": 6
+          },
+          "bounded_native_memmove": {
+            "dst_index": 1,
+            "src_index": 0,
+            "count": 6,
+            "guard_violation": false
+          },
+          "snapshot": {
+            "shown_graph_count": 3,
+            "graph_colors": [
+              67,
+              70,
+              73,
+              69
+            ],
+            "history_colors": [
+              0,
+              1,
+              2,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            "shown_graphs": [
+              2,
+              1,
+              0,
+              -32768
+            ],
+            "free_colors": 8,
+            "hist_shown": [
+              1,
+              1,
+              1,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ]
+          }
+        },
+        {
+          "item": 5382,
+          "callback_order_equal": true,
+          "source_state_equal": true,
+          "dos_memmove": {
+            "dst_index": 1,
+            "src_index": 0,
+            "count": 6
+          },
+          "bounded_native_memmove": {
+            "dst_index": 1,
+            "src_index": 0,
+            "count": 6,
+            "guard_violation": false
+          },
+          "snapshot": {
+            "shown_graph_count": 4,
+            "graph_colors": [
+              67,
+              70,
+              73,
+              69
+            ],
+            "history_colors": [
+              0,
+              1,
+              2,
+              3,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            "shown_graphs": [
+              3,
+              2,
+              1,
+              0
+            ],
+            "free_colors": 0,
+            "hist_shown": [
+              1,
+              1,
+              1,
+              1,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ]
+          }
+        },
+        {
+          "item": 5383,
+          "callback_order_equal": true,
+          "source_state_equal": true,
+          "dos_memmove": {
+            "dst_index": 1,
+            "src_index": 0,
+            "count": 6
+          },
+          "bounded_native_memmove": {
+            "dst_index": 1,
+            "src_index": 0,
+            "count": 6,
+            "guard_violation": false
+          },
+          "snapshot": {
+            "shown_graph_count": 4,
+            "graph_colors": [
+              67,
+              70,
+              73,
+              69
+            ],
+            "history_colors": [
+              0,
+              1,
+              2,
+              3,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            "shown_graphs": [
+              4,
+              3,
+              2,
+              1
+            ],
+            "free_colors": 0,
+            "hist_shown": [
+              0,
+              1,
+              1,
+              1,
+              1,
+              0,
+              0,
+              0,
+              0,
+              0
+            ]
+          }
+        }
+      ]
+    }
+  },
+  "negative_buggy_count_control": {
+    "guard_triggered": true,
+    "input_items": [
+      5379,
+      5380,
+      5381,
+      5382,
+      5379
+    ],
+    "dos_count": 2,
+    "buggy_native_count": 2,
+    "source_index": 4,
+    "observable_last_removal_state_preserved_by_guard": true
+  },
+  "disassembly_anchor_lines": [
+    "  00F1  sub si, 4",
+    "  00F6  shl si, 1",
+    "  0108  lcall 0x29f4, 0x26f4               -> __fmemmove",
+    "  0110  mov word ptr [0x2ef6], 0x8000      DS:2EF6"
+  ],
+  "limits": [
+    "Native logical state/callback order is compared to the frozen original DOS machine.",
+    "The test-local bounded memmove shim detects and suppresses invalid spans; it never executes OOB access.",
+    "No DOS pixel claim; the win_DrawHistoryWindow callback is a deliberate state-observation boundary."
+  ]
+}
