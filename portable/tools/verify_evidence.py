@@ -78,11 +78,14 @@ REPORTS: list[dict[str, Any]] = [
              "hash_links": [("report_sha256", "portable/tests/spider_sim/evidence/native-dos-movespider-10146-current-world.json"),
                             ("receipt_sha256", "portable/tests/spider_sim/evidence/source-stability-receipt-current-world.json")],
              "file_pins": [("producer_sha256", "portable/tests/spider_sim/evidence/run-pinned-current-world.py"),
-                           ("world_header_sha256", "portable/game/state/world.h")]},
+                           ("world_header_sha256", "portable/game/state/world.h")],
+             "assertions": [("all_dependency_hashes_stable_during_run", True), ("passed", 10146), ("total_cases", 10146)]},
             {"path": "portable/tests/spider_sim/evidence/source-stability-receipt-current-world.json",
              "source_maps": ["source_hashes_before", "source_hashes_after"],
              "file_pins": [("producer_sha256", "portable/tests/spider_sim/evidence/run-pinned-current-world.py")],
-             "hash_links": [("report_sha256", "build/portable/spider-tick-current-world-10146.json")]},
+             "hash_links": [("report_sha256", "build/portable/spider-tick-current-world-10146.json")],
+             "compare_maps_to_primary": "source_hashes",
+             "assertions": [("status", "source-stable"), ("runner_exit_code", 0)]},
         ],
     },
     {"id": "movespider_prior_stale_world_archived",
@@ -154,44 +157,134 @@ REPORTS: list[dict[str, Any]] = [
         "oracle_fields": ["oracle_exe_sha256"], "dos_count": "executed_count",
     },
     {
-        "id": "worldgen_session_sweep",
-        "report": "portable/tests/worldgen/evidence/randworld-session-sweep-20261002.json",
-        "path_hash_maps": ["native_source_hashes"],
-        "native": [("native_bridge_sha256", "portable/tests/worldgen/native_snapshot.c")],
+        "id": "terrain950_current_20261002",
+        "report": "portable/tests/terrain/evidence/current/20261002/terrain-950-rerun3.json",
+        "path_hash_maps": ["native_source_hashes", "oracle_input_hashes"],
         "native_tu_maps": ["native_source_hashes"],
-        "command_fields": ["build_command"],
-        "harness": [("harness_sha256", "tools/behavior.py")],
+        "command_fields": ["native_command"],
+        "runner": [("runner_sha256", "portable/tests/terrain/run_dos_diff.py")],
         "producer": [("compiler_sha256", "C:/msys64/mingw64/bin/gcc.exe")],
-        "library": ("native_library_sha256", "build/portable/worldgen-dos-diff/worldgen_snapshot.dll"),
-        "oracle_fields": ["oracle_sha256", "oracle_identity.sha256"], "dos_count": "case_count",
-        "requires_missing": ["worldgen differential producer/runner hash was not recorded"],
+        "library_from_report": ("native_library_sha256", "native_library_path"),
+        "oracle_field": "oracle_exe_sha256", "manifest_field": "oracle_input_hashes.layout/manifest.json",
+        "dos_count": "compared_count",
+        "related_documents": [{
+            "path": "portable/tests/evidence/current/20261002/leaf-suite-source-stability-receipt-rerun3.json",
+            "source_maps": ["runs.0.inputs_before", "runs.0.inputs_after"],
+            "hash_links": [("runs.0.report_sha256", "portable/tests/terrain/evidence/current/20261002/terrain-950-rerun3.json"),
+                           ("runs.0.library_sha256", "build/portable/current-20261002/terrain-probe-rerun3.dll")],
+            "file_pins": [("producer_sha256", "portable/tests/evidence/run-current-leaf-suites-20261002.py")],
+            "assertions": [("runs.0.id", "terrain"), ("runs.0.runner_exit_code", 0),
+                           ("runs.0.source_stability", "stable")],
+        }],
     },
     {
-        "id": "worldgen_session_edge_8000",
-        "report": "portable/tests/worldgen/evidence/randworld-session-edge-8000-20261002.json",
-        "path_hash_maps": ["native_source_hashes"],
-        "native": [("native_bridge_sha256", "portable/tests/worldgen/native_snapshot.c")],
+        "id": "water50_current_20261002",
+        "report": "portable/tests/water/evidence/current/20261002/water-50-rerun3.json",
+        "path_hash_maps": ["native_source_hashes", "oracle_input_hashes"],
         "native_tu_maps": ["native_source_hashes"],
-        "command_fields": ["build_command"],
-        "harness": [("harness_sha256", "tools/behavior.py")],
+        "command_fields": ["native_command"],
+        "runner": [("runner_sha256", "portable/tests/water/run_dos_diff.py")],
         "producer": [("compiler_sha256", "C:/msys64/mingw64/bin/gcc.exe")],
-        "library": ("native_library_sha256", "build/portable/worldgen-dos-diff/worldgen_snapshot.dll"),
-        "oracle_fields": ["oracle_sha256", "oracle_identity.sha256"], "dos_count": "case_count",
-        "requires_missing": ["worldgen differential producer/runner hash was not recorded"],
+        "library_from_report": ("native_library_sha256", "native_library_path"),
+        "oracle_field": "oracle_exe_sha256", "manifest_field": "oracle_input_hashes.layout/manifest.json",
+        "dos_count": "executed_count",
+        "related_documents": [{
+            "path": "portable/tests/evidence/current/20261002/leaf-suite-source-stability-receipt-rerun3.json",
+            "source_maps": ["runs.1.inputs_before", "runs.1.inputs_after"],
+            "hash_links": [("runs.1.report_sha256", "portable/tests/water/evidence/current/20261002/water-50-rerun3.json"),
+                           ("runs.1.library_sha256", "build/portable/current-20261002/water-probe-rerun3.dll")],
+            "file_pins": [("producer_sha256", "portable/tests/evidence/run-current-leaf-suites-20261002.py")],
+            "assertions": [("runs.1.id", "water"), ("runs.1.runner_exit_code", 0),
+                           ("runs.1.source_stability", "stable")],
+        }],
     },
     {
-        "id": "worldgen_session_edge_ffff",
-        "report": "portable/tests/worldgen/evidence/randworld-session-edge-ffff-20261002.json",
-        "path_hash_maps": ["native_source_hashes"],
+        "id": "feeding126_current_20261002",
+        "report": "portable/tests/feeding/evidence/current/20261002/feeding-126-rerun3.json",
+        "path_hash_maps": ["native_source_hashes", "oracle_input_hashes"],
+        "native_tu_maps": ["native_source_hashes"],
+        "command_fields": ["native_command"],
+        "runner": [("runner_sha256", "portable/tests/feeding/run_dos_diff.py")],
+        "producer": [("compiler_sha256", "C:/msys64/mingw64/bin/gcc.exe")],
+        "library_from_report": ("native_library_sha256", "native_library_path"),
+        "oracle_field": "oracle_exe_sha256", "manifest_field": "oracle_input_hashes.layout/manifest.json",
+        "dos_count": "executed_count",
+        "related_documents": [{
+            "path": "portable/tests/evidence/current/20261002/leaf-suite-source-stability-receipt-rerun3.json",
+            "source_maps": ["runs.2.inputs_before", "runs.2.inputs_after"],
+            "hash_links": [("runs.2.report_sha256", "portable/tests/feeding/evidence/current/20261002/feeding-126-rerun3.json"),
+                           ("runs.2.library_sha256", "build/portable/current-20261002/feeding-probe-rerun3.dll")],
+            "file_pins": [("producer_sha256", "portable/tests/evidence/run-current-leaf-suites-20261002.py")],
+            "assertions": [("runs.2.id", "feeding"), ("runs.2.runner_exit_code", 0),
+                           ("runs.2.source_stability", "stable")],
+        }],
+    },
+    {
+        "id": "scent360_current_20261002",
+        "report": "portable/tests/scent/evidence/current/20261002/scent-360-rerun3.json",
+        "path_hash_maps": ["native_source_hashes", "oracle_input_hashes"],
+        "native_tu_maps": ["native_source_hashes"],
+        "command_fields": ["native_command"],
+        "runner": [("runner_sha256", "portable/tests/scent/run_dos_diff.py")],
+        "producer": [("compiler_sha256", "C:/msys64/mingw64/bin/gcc.exe")],
+        "library_from_report": ("native_library_sha256", "native_library_path"),
+        "oracle_field": "oracle_exe_sha256", "manifest_field": "oracle_input_hashes.layout/manifest.json",
+        "dos_count": "executed_count",
+        "related_documents": [{
+            "path": "portable/tests/evidence/current/20261002/leaf-suite-source-stability-receipt-rerun3.json",
+            "source_maps": ["runs.3.inputs_before", "runs.3.inputs_after"],
+            "hash_links": [("runs.3.report_sha256", "portable/tests/scent/evidence/current/20261002/scent-360-rerun3.json"),
+                           ("runs.3.library_sha256", "build/portable/current-20261002/scent-probe-rerun3.dll")],
+            "file_pins": [("producer_sha256", "portable/tests/evidence/run-current-leaf-suites-20261002.py")],
+            "assertions": [("runs.3.id", "scent"), ("runs.3.runner_exit_code", 0),
+                           ("runs.3.source_stability", "stable")],
+        }],
+    },
+    {
+        "id": "worldgen_union_final_sweep",
+        "report": "portable/tests/worldgen/evidence/randworld-union-final-sweep-20261002.json",
+        "path_hash_maps": ["native_source_hashes", "evidence_input_hashes"],
         "native": [("native_bridge_sha256", "portable/tests/worldgen/native_snapshot.c")],
         "native_tu_maps": ["native_source_hashes"],
         "command_fields": ["build_command"],
+        "runner": [("runner_sha256", "portable/tests/worldgen/run_dos_diff.py")],
         "harness": [("harness_sha256", "tools/behavior.py")],
         "producer": [("compiler_sha256", "C:/msys64/mingw64/bin/gcc.exe")],
-        "library": ("native_library_sha256", "build/portable/worldgen-dos-diff/worldgen_snapshot.dll"),
+        "library_from_report": ("native_library_sha256", "native_library_path"),
         "oracle_fields": ["oracle_sha256", "oracle_identity.sha256"], "dos_count": "case_count",
-        "requires_missing": ["worldgen differential producer/runner hash was not recorded"],
     },
+    {
+        "id": "worldgen_union_final_edge_8000",
+        "report": "portable/tests/worldgen/evidence/randworld-union-final-edge-8000-20261002.json",
+        "path_hash_maps": ["native_source_hashes", "evidence_input_hashes"],
+        "native": [("native_bridge_sha256", "portable/tests/worldgen/native_snapshot.c")],
+        "native_tu_maps": ["native_source_hashes"],
+        "command_fields": ["build_command"],
+        "runner": [("runner_sha256", "portable/tests/worldgen/run_dos_diff.py")],
+        "harness": [("harness_sha256", "tools/behavior.py")],
+        "producer": [("compiler_sha256", "C:/msys64/mingw64/bin/gcc.exe")],
+        "library_from_report": ("native_library_sha256", "native_library_path"),
+        "oracle_fields": ["oracle_sha256", "oracle_identity.sha256"], "dos_count": "case_count",
+    },
+    {
+        "id": "worldgen_union_final_edge_ffff",
+        "report": "portable/tests/worldgen/evidence/randworld-union-final-edge-ffff-20261002.json",
+        "path_hash_maps": ["native_source_hashes", "evidence_input_hashes"],
+        "native": [("native_bridge_sha256", "portable/tests/worldgen/native_snapshot.c")],
+        "native_tu_maps": ["native_source_hashes"],
+        "command_fields": ["build_command"],
+        "runner": [("runner_sha256", "portable/tests/worldgen/run_dos_diff.py")],
+        "harness": [("harness_sha256", "tools/behavior.py")],
+        "producer": [("compiler_sha256", "C:/msys64/mingw64/bin/gcc.exe")],
+        "library_from_report": ("native_library_sha256", "native_library_path"),
+        "oracle_fields": ["oracle_sha256", "oracle_identity.sha256"], "dos_count": "case_count",
+    },
+    {"id": "worldgen_session_sweep_prior_archived",
+     "report": "portable/tests/worldgen/evidence/randworld-session-sweep-20261002.json", "archived": True},
+    {"id": "worldgen_session_edge_8000_prior_archived",
+     "report": "portable/tests/worldgen/evidence/randworld-session-edge-8000-20261002.json", "archived": True},
+    {"id": "worldgen_session_edge_ffff_prior_archived",
+     "report": "portable/tests/worldgen/evidence/randworld-session-edge-ffff-20261002.json", "archived": True},
     {"id": "worldgen_seed_sweep_prior_archived",
      "report": "portable/tests/worldgen/evidence/randworld-seed-sweep-20261002.json", "archived": True},
     {"id": "worldgen_edge_8000_prior_archived",
@@ -267,7 +360,6 @@ REPORTS: list[dict[str, Any]] = [
      "command_fields": ["native.build_command"],
      "library_from_command": ("native", "build_command"),
      "manifest_field": "historical_manifest_sha256", "oracle_field": "oracle_sha256",
-     "requires_missing": ["yellow differential producer/runner hash was not recorded"],
      "dos_count": "executed"},
     {"id": "yellow_exit_nest_direct_128",
      "report": "portable/tests/yellow/evidence/exit-nest-differential-128.json",
@@ -275,7 +367,6 @@ REPORTS: list[dict[str, Any]] = [
      "command_fields": ["native.build_command"],
      "library_from_command": ("native", "build_command"),
      "manifest_field": "historical_manifest_sha256", "oracle_field": "oracle_sha256",
-     "requires_missing": ["yellow ExitNest differential producer/runner hash was not recorded"],
      "dos_count": "executed"},
     {"id": "yellow_legacy_5000_archived",
      "report": "portable/tests/yellow/evidence/dos-differential-5000.json", "archived": True},
@@ -287,6 +378,66 @@ REPORTS: list[dict[str, Any]] = [
         "asset_fields": [("assets.SOUND.NDX.sha256", "assets/SOUND.NDX"),
                          ("assets.SOUND.DAT.sha256", "assets/SOUND.DAT")],
         "oracle_field": "oracle.sha256", "dos_count": "record_count",
+    },
+    {
+        "id": "bios_font_provider_diagnostic",
+        "report": "portable/tests/windows/render/evidence/bios_font_provider_dos_diff.json",
+        "audit_class": "controlled-provider-diagnostic",
+        "scope": "Four direct glyph-provider calls; generated provider bytes and modeled graphics callback. Not physical DOS pixels or a historical BIOS-ROM claim.",
+        "path_hash_maps": ["input_sha256"],
+        "producer_fields": [("producer.path", "producer.sha256")],
+        "command_fields": ["build.command"],
+        "oracle_fields": ["oracle.oracle_sha256"],
+        "dos_count": "cases_array_length",
+    },
+    {
+        "id": "window_titles_source_mapped_model",
+        "report": "portable/tests/windows/titles/title-model-evidence.json",
+        "audit_class": "source-mapped-native-model-identity-only",
+        "scope": "Native model test and source/resource identity only; no direct original-DOS execution is claimed.",
+        "native": [
+            ("implementation.source_sha256", "portable/ui_model/windows/titles.c"),
+            ("implementation.header_sha256", "portable/ui_model/windows/titles.h"),
+            ("validation.test_source_sha256", "portable/tests/windows/titles/test_titles.c"),
+            ("source_facts.0.sha256", "src/root/m075B.c"),
+            ("source_facts.1.sha256", "src/root/m0250.c"),
+            ("source_facts.2.sha256", "src/root/m00F8.c"),
+            ("source_facts.3.sha256", "src/root/m015B.c"),
+            ("source_facts.4.sha256", "src/root/m22BF.c"),
+        ],
+        "asset_fields": [("resource_evidence.index_sha256", "assets/SHARED.NDX"),
+                         ("resource_evidence.data_sha256", "assets/SHARED.DAT")],
+        "library": ("validation.executable_sha256", "build/portable/tests/titles-test-final.exe"),
+        "scope_only": True,
+        "skip_dependency_closure": True,
+        "requires_missing": ["title-model report does not pin the database implementation/header inputs used by its compiled test"],
+    },
+    {
+        "id": "recovered_enter_nest_adapter_937",
+        "report": "portable/tests/recovered/evidence/nest-adapter-diff.json",
+        "audit_class": "direct-dos-adapter-differential",
+        "scope": "937 EnterNest adapter cases including 128 dirt/grass cases. Generated mechanical state reuse remains diagnostic, not a historical source claim.",
+        "path_hash_maps": ["native.source_sha256"],
+        "native": [("native.library_sha256", "build/portable/recovered-nest-adapter.dll"),
+                   ("generated_state_sha256", "build/workers/recovered_source/generated/recovered_state.h")],
+        "native_tu_maps": ["native.source_sha256"],
+        "command_fields": ["native.build_command"],
+        "oracle_field": "oracle_sha256",
+        "manifest_field": "historical_manifest_sha256",
+        "dos_count": "executed",
+        "related_documents": [
+            {"path": "build/workers/recovered_source/generated/provenance.json",
+             "file_pins": [("generator_sha256", "portable/tools/recover_source.py")]},
+        ],
+    },
+    {
+        "id": "doantsim_integer_bounds_rationale",
+        "report": "portable/research/core-proof/doantsim-integer-promotion-review-20261002.json",
+        "audit_class": "pinned-source-rationale-only",
+        "scope": "Source-hash-pinned arithmetic bounds and excluded out-of-domain counterexamples; not a DOS differential or semantic-closure claim.",
+        "path_hash_maps": ["source_sha256"],
+        "scope_only": True,
+        "skip_dependency_closure": True,
     },
     {
         "id": "feeding126",
@@ -324,6 +475,209 @@ REPORTS: list[dict[str, Any]] = [
         "id": "spider_superseded_mapping_bug",
         "report": "portable/tests/spider/evidence/native-dos-10146-SUPERSEDED-MAPPING-BUG.json",
         "archived": True,
+    },
+    {
+        "id": "enternest_current_5937_20261002",
+        "report": "portable/tests/evidence/current/20261002/enternest-5937.json",
+        "native": [
+            ("native.source_sha256", "portable/game/simulation/nest.c"),
+            ("native.header_sha256", "portable/game/simulation/nest.h"),
+            ("native.adapter_sha256", "portable/tests/nest/native_adapter.c"),
+            ("native.library_sha256", "build/portable/nest.dll"),
+        ],
+        "command_fields": ["native.build_command"],
+        "suite_path_field": "suite", "suite_hash_field": "suite_sha256",
+        "harness": [("runner_sha256", "tools/behavior.py")],
+        "manifest_field": "historical_manifest_sha256",
+        "oracle_field": "oracle_sha256", "dos_count": "executed",
+        "related_documents": [{
+            "path": "portable/tests/evidence/current/20261002/source-stability-receipt.json",
+            "source_maps": ["runs.0.inputs_before", "runs.0.inputs_after"],
+            "hash_links": [("runs.0.report_sha256", "portable/tests/evidence/current/20261002/enternest-5937.json")],
+            "file_pins": [("wrapper_sha256", "portable/tests/evidence/run-current-core-diffs-20261002.py")],
+            "assertions": [("runs.0.source_stability", "stable"), ("runs.0.runner_exit_code", 0)],
+        }],
+    },
+    {
+        "id": "enternest_current_5937_rerun4_20261002",
+        "report": "portable/tests/evidence/current/20261002/enternest-5937-rerun4.json",
+        "native": [("native.source_sha256", "portable/game/simulation/nest.c"),
+                   ("native.header_sha256", "portable/game/simulation/nest.h"),
+                   ("native.adapter_sha256", "portable/tests/nest/native_adapter.c")],
+        "command_fields": ["native.build_command"],
+        "library_from_command": ("native", "build_command"),
+        "suite_path_field": "suite", "suite_hash_field": "suite_sha256",
+        "harness": [("runner_sha256", "tools/behavior.py")],
+        "manifest_field": "historical_manifest_sha256", "oracle_field": "oracle_sha256",
+        "dos_count": "executed",
+        "related_documents": [{
+            "path": "portable/tests/evidence/current/20261002/enternest-source-stability-rerun4.json",
+            "source_maps": ["inputs_before", "inputs_after"],
+            "hash_links": [("report_sha256", "portable/tests/evidence/current/20261002/enternest-5937-rerun4.json"),
+                           ("library_sha256", "build/portable/current-20261002/nest-rerun4.dll")],
+            "file_pins": [("producer_sha256", "portable/tests/evidence/run-enternest-rerun4-20261002.py")],
+            "assertions": [("runner_exit_code", 0), ("source_stability", "stable")],
+        }],
+    },
+    {
+        "id": "spiderscan_current_10146_20261002",
+        "report": "portable/tests/evidence/current/20261002/spiderscan-10146-complete.json",
+        "native": [
+            ("native_source_sha256", "portable/game/simulation/spider.c"),
+            ("native_header_sha256", "portable/game/simulation/spider.h"),
+            ("native_bridge_sha256", "portable/tests/spider/native_bridge.c"),
+            ("native_library_sha256", "build/portable/spider-test.dll"),
+        ],
+        "command_fields": ["compile_command"],
+        "suite_path_field": "archived_suite", "suite_hash_field": "suite_sha256",
+        "harness": [("runner_sha256", "tools/behavior.py")],
+        "oracle_field": "oracle_sha256", "dos_count": "cases",
+        "related_documents": [{
+            "path": "portable/tests/evidence/current/20261002/spiderscan-source-stability.json",
+            "source_maps": ["inputs_before", "inputs_after"],
+            "hash_links": [("report_sha256", "portable/tests/evidence/current/20261002/spiderscan-10146-complete.json")],
+            "file_pins": [("producer_sha256", "portable/tests/evidence/run-spiderscan-complete-20261002.py")],
+            "assertions": [("source_stability", "stable"), ("runner_exit_code", 0)],
+        }],
+    },
+    {
+        "id": "movespider_current_10146_20261002",
+        "report": "portable/tests/evidence/current/20261002/movespider-10146.json",
+        "path_hash_maps": ["source_hashes"],
+        "native_tu_maps": ["source_hashes"],
+        "library": ("native_library_sha256", "build/portable/spider-sim-test.dll"),
+        "command_fields": ["compile_command"],
+        "oracle_field": "oracle_sha256", "dos_count": "cases",
+        "related_documents": [{
+            "path": "portable/tests/evidence/current/20261002/source-stability-receipt.json",
+            "source_maps": ["runs.2.inputs_before", "runs.2.inputs_after"],
+            "hash_links": [("runs.2.report_sha256", "portable/tests/evidence/current/20261002/movespider-10146.json")],
+            "file_pins": [("wrapper_sha256", "portable/tests/evidence/run-current-core-diffs-20261002.py")],
+            "assertions": [("runs.2.source_stability", "stable"), ("runs.2.runner_exit_code", 0)],
+        }],
+    },
+    {
+        "id": "worldgen_union_current_sweep_20261002",
+        "report": "portable/tests/worldgen/evidence/current/20261002/randworld-union-current-sweep-20261002.json",
+        "path_hash_maps": ["native_source_hashes", "evidence_input_hashes"],
+        "native": [("native_bridge_sha256", "portable/tests/worldgen/native_snapshot.c")],
+        "native_tu_maps": ["native_source_hashes"],
+        "command_fields": ["build_command"],
+        "runner": [("runner_sha256", "portable/tests/worldgen/run_dos_diff.py")],
+        "harness": [("harness_sha256", "tools/behavior.py")],
+        "producer": [("compiler_sha256", "C:/msys64/mingw64/bin/gcc.exe")],
+        "library_from_report": ("native_library_sha256", "native_library_path"),
+        "oracle_fields": ["oracle_sha256", "oracle_identity.sha256"], "dos_count": "case_count",
+        "related_documents": [{
+            "path": "portable/tests/worldgen/evidence/current/20261002/source-stability-receipt.json",
+            "source_maps": ["runs.0.inputs_before", "runs.0.inputs_after"],
+            "hash_links": [("runs.0.report_sha256", "portable/tests/worldgen/evidence/current/20261002/randworld-union-current-sweep-20261002.json")],
+            "file_pins": [("producer_sha256", "portable/tests/evidence/run-worldgen-current-20261002.py")],
+            "assertions": [("runs.0.source_stability", "stable"), ("runs.0.runner_exit_code", 0)],
+        }],
+    },
+    {
+        "id": "worldgen_union_current_edge_8000_20261002",
+        "report": "portable/tests/worldgen/evidence/current/20261002/randworld-union-current-edge-8000-20261002.json",
+        "path_hash_maps": ["native_source_hashes", "evidence_input_hashes"],
+        "native": [("native_bridge_sha256", "portable/tests/worldgen/native_snapshot.c")],
+        "native_tu_maps": ["native_source_hashes"],
+        "command_fields": ["build_command"],
+        "runner": [("runner_sha256", "portable/tests/worldgen/run_dos_diff.py")],
+        "harness": [("harness_sha256", "tools/behavior.py")],
+        "producer": [("compiler_sha256", "C:/msys64/mingw64/bin/gcc.exe")],
+        "library_from_report": ("native_library_sha256", "native_library_path"),
+        "oracle_fields": ["oracle_sha256", "oracle_identity.sha256"], "dos_count": "case_count",
+        "related_documents": [{
+            "path": "portable/tests/worldgen/evidence/current/20261002/source-stability-receipt.json",
+            "source_maps": ["runs.1.inputs_before", "runs.1.inputs_after"],
+            "hash_links": [("runs.1.report_sha256", "portable/tests/worldgen/evidence/current/20261002/randworld-union-current-edge-8000-20261002.json")],
+            "file_pins": [("producer_sha256", "portable/tests/evidence/run-worldgen-current-20261002.py")],
+            "assertions": [("runs.1.source_stability", "stable"), ("runs.1.runner_exit_code", 0)],
+        }],
+    },
+    {
+        "id": "worldgen_union_current_edge_ffff_20261002",
+        "report": "portable/tests/worldgen/evidence/current/20261002/randworld-union-current-edge-ffff-20261002.json",
+        "path_hash_maps": ["native_source_hashes", "evidence_input_hashes"],
+        "native": [("native_bridge_sha256", "portable/tests/worldgen/native_snapshot.c")],
+        "native_tu_maps": ["native_source_hashes"],
+        "command_fields": ["build_command"],
+        "runner": [("runner_sha256", "portable/tests/worldgen/run_dos_diff.py")],
+        "harness": [("harness_sha256", "tools/behavior.py")],
+        "producer": [("compiler_sha256", "C:/msys64/mingw64/bin/gcc.exe")],
+        "library_from_report": ("native_library_sha256", "native_library_path"),
+        "oracle_fields": ["oracle_sha256", "oracle_identity.sha256"], "dos_count": "case_count",
+        "related_documents": [{
+            "path": "portable/tests/worldgen/evidence/current/20261002/source-stability-receipt.json",
+            "source_maps": ["runs.2.inputs_before", "runs.2.inputs_after"],
+            "hash_links": [("runs.2.report_sha256", "portable/tests/worldgen/evidence/current/20261002/randworld-union-current-edge-ffff-20261002.json")],
+            "file_pins": [("producer_sha256", "portable/tests/evidence/run-worldgen-current-20261002.py")],
+            "assertions": [("runs.2.source_stability", "stable"), ("runs.2.runner_exit_code", 0)],
+        }],
+    },
+    {
+        "id": "worldgen_union_current_rerun4_sweep",
+        "report": "portable/tests/worldgen/evidence/current/20261002/randworld-union-current-sweep-rerun4-20261002.json",
+        "path_hash_maps": ["native_source_hashes", "evidence_input_hashes"],
+        "native": [("native_bridge_sha256", "portable/tests/worldgen/native_snapshot.c")],
+        "native_tu_maps": ["native_source_hashes"], "command_fields": ["build_command"],
+        "runner": [("runner_sha256", "portable/tests/worldgen/run_dos_diff.py")],
+        "harness": [("harness_sha256", "tools/behavior.py")],
+        "producer": [("compiler_sha256", "C:/msys64/mingw64/bin/gcc.exe")],
+        "library_from_report": ("native_library_sha256", "native_library_path"),
+        "oracle_fields": ["oracle_sha256", "oracle_identity.sha256"], "dos_count": "case_count",
+        "related_documents": [{
+            "path": "portable/tests/worldgen/evidence/current/20261002/source-stability-receipt-rerun4.json",
+            "source_maps": ["runs.0.inputs_before", "runs.0.inputs_after"],
+            "hash_links": [("runs.0.report_sha256", "portable/tests/worldgen/evidence/current/20261002/randworld-union-current-sweep-rerun4-20261002.json"),
+                           ("runs.0.library_sha256", "portable/tests/worldgen/evidence/current/20261002/randworld-union-current-sweep-rerun4-20261002.dll")],
+            "file_pins": [("producer_sha256", "portable/tests/evidence/run-worldgen-current-rerun4-20261002.py")],
+            "assertions": [("runs.0.id", "sweep"), ("runs.0.runner_exit_code", 0),
+                           ("runs.0.source_stability", "stable"), ("runs.0.mismatch_count", 0)],
+        }],
+    },
+    {
+        "id": "worldgen_union_current_rerun4_edge_8000",
+        "report": "portable/tests/worldgen/evidence/current/20261002/randworld-union-current-edge-8000-rerun4-20261002.json",
+        "path_hash_maps": ["native_source_hashes", "evidence_input_hashes"],
+        "native": [("native_bridge_sha256", "portable/tests/worldgen/native_snapshot.c")],
+        "native_tu_maps": ["native_source_hashes"], "command_fields": ["build_command"],
+        "runner": [("runner_sha256", "portable/tests/worldgen/run_dos_diff.py")],
+        "harness": [("harness_sha256", "tools/behavior.py")],
+        "producer": [("compiler_sha256", "C:/msys64/mingw64/bin/gcc.exe")],
+        "library_from_report": ("native_library_sha256", "native_library_path"),
+        "oracle_fields": ["oracle_sha256", "oracle_identity.sha256"], "dos_count": "case_count",
+        "related_documents": [{
+            "path": "portable/tests/worldgen/evidence/current/20261002/source-stability-receipt-rerun4.json",
+            "source_maps": ["runs.1.inputs_before", "runs.1.inputs_after"],
+            "hash_links": [("runs.1.report_sha256", "portable/tests/worldgen/evidence/current/20261002/randworld-union-current-edge-8000-rerun4-20261002.json"),
+                           ("runs.1.library_sha256", "portable/tests/worldgen/evidence/current/20261002/randworld-union-current-edge-8000-rerun4-20261002.dll")],
+            "file_pins": [("producer_sha256", "portable/tests/evidence/run-worldgen-current-rerun4-20261002.py")],
+            "assertions": [("runs.1.id", "edge-8000"), ("runs.1.runner_exit_code", 0),
+                           ("runs.1.source_stability", "stable"), ("runs.1.mismatch_count", 0)],
+        }],
+    },
+    {
+        "id": "worldgen_union_current_rerun4_edge_ffff",
+        "report": "portable/tests/worldgen/evidence/current/20261002/randworld-union-current-edge-ffff-rerun4-20261002.json",
+        "path_hash_maps": ["native_source_hashes", "evidence_input_hashes"],
+        "native": [("native_bridge_sha256", "portable/tests/worldgen/native_snapshot.c")],
+        "native_tu_maps": ["native_source_hashes"], "command_fields": ["build_command"],
+        "runner": [("runner_sha256", "portable/tests/worldgen/run_dos_diff.py")],
+        "harness": [("harness_sha256", "tools/behavior.py")],
+        "producer": [("compiler_sha256", "C:/msys64/mingw64/bin/gcc.exe")],
+        "library_from_report": ("native_library_sha256", "native_library_path"),
+        "oracle_fields": ["oracle_sha256", "oracle_identity.sha256"], "dos_count": "case_count",
+        "related_documents": [{
+            "path": "portable/tests/worldgen/evidence/current/20261002/source-stability-receipt-rerun4.json",
+            "source_maps": ["runs.2.inputs_before", "runs.2.inputs_after"],
+            "hash_links": [("runs.2.report_sha256", "portable/tests/worldgen/evidence/current/20261002/randworld-union-current-edge-ffff-rerun4-20261002.json"),
+                           ("runs.2.library_sha256", "portable/tests/worldgen/evidence/current/20261002/randworld-union-current-edge-ffff-rerun4-20261002.dll")],
+            "file_pins": [("producer_sha256", "portable/tests/evidence/run-worldgen-current-rerun4-20261002.py")],
+            "assertions": [("runs.2.id", "edge-ffff"), ("runs.2.runner_exit_code", 0),
+                           ("runs.2.source_stability", "stable"), ("runs.2.mismatch_count", 0)],
+        }],
     },
 ]
 
@@ -498,7 +852,14 @@ def check_cpp_dependency_closure(checks: list[dict[str, Any]], missing: list[str
 def dos_comparison_count(spec, report):
     field = spec.get("dos_count")
     if field is None:
+        if spec.get("scope_only"):
+            return 0, "Identity-only report; no original-DOS invocations are claimed."
         return None, "No explicit original-DOS comparison count was recorded."
+    if field == "cases_array_length":
+        try:
+            return len(get_field(report, "cases")), "Counted direct-oracle case records."
+        except (KeyError, TypeError):
+            return None, "Report has no cases array."
     if field == "cases_count":
         try:
             return len(get_field(report, "cases")), "Counted case records in a DOS differential report."
@@ -673,6 +1034,18 @@ def audit(spec: dict[str, Any]) -> dict[str, Any]:
             missing.append(f"{field}: compiled native library hash was not recorded")
         else:
             check_hash(checks, missing, label=f"native-library:{field}", expected=expected, path=path)
+    if spec.get("library_from_report"):
+        hash_field, path_field = spec["library_from_report"]
+        try:
+            expected = get_field(report, hash_field)
+            path = get_field(report, path_field)
+            if not isinstance(path, str):
+                raise TypeError("library path is not a string")
+        except (KeyError, IndexError, TypeError):
+            missing.append(f"{hash_field}/{path_field}: native library hash/path was not recorded")
+        else:
+            check_hash(checks, missing, label=f"native-library:{hash_field}",
+                       expected=expected, path=path)
     if spec.get("library_from_command"):
         owner_field, command_field = spec["library_from_command"]
         try:
@@ -749,6 +1122,29 @@ def audit(spec: dict[str, Any]) -> dict[str, Any]:
                     missing.append(f"{document_path}: source hashes changed during execution")
             except (KeyError, IndexError, TypeError):
                 pass
+        if document_spec.get("compare_maps_to_primary"):
+            try:
+                primary_map = get_field(report, document_spec["compare_maps_to_primary"])
+                source_maps = document_spec.get("source_maps", [])
+                normalize_map = lambda value: {
+                    str(key).replace("\\", "/").casefold(): item
+                    for key, item in value.items()
+                }
+                if source_maps and any(
+                    normalize_map(get_field(document, f)) != normalize_map(primary_map)
+                    for f in source_maps
+                ):
+                    missing.append(f"{document_path}: dependency receipt differs from the primary report source map")
+            except (KeyError, IndexError, TypeError):
+                missing.append(f"{document_path}: source-stability receipt cannot be compared to primary pins")
+        for field, expected in document_spec.get("assertions", []):
+            try:
+                actual = get_field(document, field)
+            except (KeyError, IndexError, TypeError):
+                missing.append(f"{document_path}:{field}: required run-plan/receipt field absent")
+                continue
+            if actual != expected:
+                missing.append(f"{document_path}:{field}: expected {expected!r}, got {actual!r}")
 
     count, count_basis = dos_comparison_count(spec, report)
     base["direct_original_dos_comparisons"] = {"count": count, "basis": count_basis}
@@ -775,7 +1171,7 @@ def audit(spec: dict[str, Any]) -> dict[str, Any]:
         tus = None
     else:
         tus = list(dict.fromkeys(tus))
-    dependency_rows = check_cpp_dependency_closure(checks, missing, tus)
+    dependency_rows = [] if spec.get("skip_dependency_closure") else check_cpp_dependency_closure(checks, missing, tus)
     base["cpp_dependency_closure"] = dependency_rows
     for check in checks:
         if check["result"] == "MISMATCH":
@@ -788,9 +1184,9 @@ def audit(spec: dict[str, Any]) -> dict[str, Any]:
         base["status"] = "ARCHIVED"
     elif mismatches:
         base["status"] = "STALE"
-    elif missing or count is None or count == 0:
+    elif missing or count is None or (count == 0 and not spec.get("scope_only")):
         base["status"] = "INCOMPLETE"
-    elif report.get("mismatches", report.get("mismatch_count", 0)) not in (0, [], None):
+    elif report.get("mismatches", report.get("mismatch_count", 0)) not in (0, [], {}, None):
         base["status"] = "INCOMPLETE"
         missing.append("Report itself records nonzero or malformed mismatch state")
     elif report.get("mismatch_count", 0) != 0:
@@ -798,6 +1194,10 @@ def audit(spec: dict[str, Any]) -> dict[str, Any]:
         missing.append("Report mismatch_count is not zero")
     else:
         base["status"] = "CURRENT"
+    if spec.get("audit_class"):
+        base["audit_class"] = spec["audit_class"]
+    if spec.get("scope"):
+        base["scope"] = spec["scope"]
     return base
 
 

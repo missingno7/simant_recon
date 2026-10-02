@@ -83,15 +83,15 @@ def read_suite():
     return module
 
 
-def build_library():
-    LIBRARY.parent.mkdir(parents=True, exist_ok=True)
+def build_library(library_path: Path):
+    library_path.parent.mkdir(parents=True, exist_ok=True)
     command = [str(GCC), "-std=c11", "-O2", "-Wall", "-Wextra", "-Werror", "-shared",
                "-I", str(ROOT / "portable/game/simulation"),
                str(ROOT / "portable/tests/nest/native_adapter.c"),
                str(ROOT / "portable/game/simulation/nest.c"),
-               str(ROOT / "portable/game/simulation/rng.c"), "-o", str(LIBRARY)]
+               str(ROOT / "portable/game/simulation/rng.c"), "-o", str(library_path)]
     subprocess.run(command, check=True, cwd=ROOT)
-    return command, hashlib.sha256(LIBRARY.read_bytes()).hexdigest()
+    return command, hashlib.sha256(library_path.read_bytes()).hexdigest()
 
 
 def append_write(case, name, value, size=2):
@@ -330,10 +330,12 @@ def main():
     parser.add_argument("--dirt-cases", type=int, default=128,
                         help="additional dirt/grass target cases following source suite cases")
     parser.add_argument("--report", type=Path, default=REPORT)
+    parser.add_argument("--library", type=Path, default=LIBRARY)
     args = parser.parse_args()
+    library_path = args.library if args.library.is_absolute() else ROOT / args.library
     suite = read_suite()
-    command, library_hash = build_library()
-    lib = ct.CDLL(str(LIBRARY))
+    command, library_hash = build_library(library_path)
+    lib = ct.CDLL(str(library_path))
     lib.sim_nest_test_run.argtypes = [ct.POINTER(SimNestTestWorld), ct.POINTER(SimRng),
                                      ct.POINTER(SimNestRuntime), ct.POINTER(SimNestRequest),
                                      ct.POINTER(SimNestTrace)]
