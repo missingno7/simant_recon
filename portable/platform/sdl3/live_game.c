@@ -49,6 +49,7 @@ void portable_live_game_mark_presented(PortableLiveGame *game) { (void)game; }
 #include "../../ui_model/windows/operations.h"
 #include "../../ui_model/windows/ribbon.h"
 #include "../../ui_model/windows/control_render/control_input_from_session.h"
+#include "../../ui_model/windows/control_preselect.h"
 #include "../../ui_model/menus/render.h"
 #include "../../ui_model/dialogs/end_game_view.h"
 
@@ -103,8 +104,7 @@ struct PortableLiveGame {
     uint8_t frame_pending;
     int quit_requested;
     uint8_t control_down;
-    /* TU-private g_1B62/g_1B64 begin at one. Their toggle handlers remain
-     * explicit unsupported input boundaries until they own these fields. */
+    /* TU-private g_1B62/g_1B64 begin at one and survive NewGame. */
     int16_t mode_percent;
     int16_t caste_percent;
     uint8_t faulted;
@@ -162,6 +162,8 @@ struct PortableLiveGame {
     uint64_t speed_action_calls[4];
     uint64_t menu_item_state_calls;
     uint64_t menu_item_text_calls;
+    uint64_t control_event_calls;
+    uint16_t control_last_code;
     uint64_t scroll_action_calls;
     uint64_t edit_hotbox_clicks;
     uint64_t edit_events_delivered;
@@ -205,6 +207,58 @@ static int redraw(PortableLiveGame *game);
 static int redraw_snapshot_edit(PortableLiveGame *game);
 static int apply_window_object_operation(PortableLiveGame *game,
                                          const SimRecoveredEffect *effect);
+static int run_source_control(PortableLiveGame *game, int16_t x, int16_t y,
+                              int *handled);
+
+#ifdef SIMANT_LIVE_GAME_TEST_DIAGNOSTICS
+static void trace_control_input(const char *kind, int a, int b, int c, int d)
+{
+    const char *path = getenv("SIMANT_LIVE_CONTROL_INPUT_TRACE");
+    FILE *file;
+    if (path == NULL || *path == '\0') return;
+    file = fopen(path, "ab");
+    if (file == NULL) return;
+    (void)fprintf(file, "{\"kind\":\"%s\",\"values\":[%d,%d,%d,%d]}\n",
+                  kind, a, b, c, d);
+    (void)fclose(file);
+}
+
+static int write_control_geometry(PortableLiveGame *game)
+{
+    const char *path = getenv("SIMANT_LIVE_CONTROL_GEOMETRY_REPORT");
+    FILE *file;
+    unsigned window, object;
+    if (path == NULL || *path == '\0') return 1;
+    file = fopen(path, "wb");
+    if (file == NULL) return 0;
+    (void)fprintf(file, "{\"schema\":\"portable-live-control-geometry-v1\","
+        "\"front_window\":%d,\"shared_triangle\":[%u,%u,%u],\"windows\":[",
+        game->windows.front_window_id, game->engine.recovered.triWidth,
+        game->engine.recovered.triHeight, game->engine.recovered.triWidthL);
+    for (window = 18; window <= 19; ++window) {
+        const PortableWindowRegistrySlot *slot = &game->registry->slots[window];
+        const SimSetupRect *rect = window == 18 ?
+            &game->session->setup_controls.mode_rect :
+            &game->session->setup_controls.caste_rect;
+        (void)fprintf(file, "%s{\"window_id\":%u,\"loaded\":%s,"
+            "\"source_triangle_rect\":[%d,%d,%d,%d],\"objects\":[",
+            window == 18 ? "" : ",", window << 8,
+            slot->loaded ? "true" : "false", rect->left, rect->top,
+            rect->right, rect->bottom);
+        for (object = 0; slot->loaded && object < slot->window.count; ++object) {
+            const PortableWindowObject *item = &slot->window.objects[object];
+            (void)fprintf(file, "%s{\"object_id\":%u,\"type\":%u,"
+                "\"flags\":%u,\"rect\":[%d,%d,%d,%d]}",
+                object == 0 ? "" : ",", (window << 8) | object,
+                item->type, item->flags, item->rect.left, item->rect.top,
+                item->rect.right, item->rect.bottom);
+        }
+        (void)fprintf(file, "]}");
+    }
+    (void)fprintf(file, "]}\n");
+    return fclose(file) == 0;
+}
+#endif
 
 static int point_in_source_menu_bar(PortableLiveGame *game, int16_t x, int16_t y)
 {
@@ -240,7 +294,7 @@ static int enqueue_edit_hotbox(PortableLiveGame *game, int16_t x, int16_t y)
     slot = &game->registry->slots[0];
     point.x = x;
     point.y = y;
-    hit = portable_window_hit_test(&slot->window, point);
+    hit = portable_window_mouse_hit_test(&slot->window, point);
     if (hit < 0) return 1;
     if (hit != 4) {
         set_error(game, "selectable Edit-window object input is not yet mapped");
@@ -287,7 +341,7 @@ static int reject_registered_right_hotbox(PortableLiveGame *game,
     slot = &game->registry->slots[0];
     point.x = x;
     point.y = y;
-    if (portable_window_hit_test(&slot->window, point) < 0) return 1;
+    if (portable_window_mouse_hit_test(&slot->window, point) < 0) return 1;
     set_error(game, "right-button registered Edit hotbox input is not yet mapped");
     return 0;
 }
@@ -2041,6 +2095,245 @@ static int apply_window_object_operation(PortableLiveGame *game,
     return 1;
 }
 
+/* Synchronous control providers run inside the recovered binding boundary.
+ * State is published by control_adapter before each callback. Rendering uses
+ * a new snapshot so intermediate source writes are visible immediately. */
+static int control_window_operation(PortableLiveGame *game,
+                                    SimRecoveredWindowOperation operation,
+                                    uint16_t object_id)
+{
+    SimRecoveredEffect effect;
+    memset(&effect, 0, sizeof(effect));
+    effect.kind = SIM_RECOVERED_EFFECT_WINDOW_OPERATION;
+    effect.arguments[0] = (uintptr_t)operation;
+    effect.arguments[1] = object_id;
+    return apply_window_object_operation(game, &effect);
+}
+
+static int control_clip_set(void *context, uint16_t window_id)
+{
+    return control_window_operation(context, SIM_RECOVERED_WINDOW_CLIP_SET,
+                                     window_id);
+}
+
+static int control_clip_off(void *context)
+{
+    return control_window_operation(context, SIM_RECOVERED_WINDOW_CLIP_OFF, 0);
+}
+
+static int control_help(void *context, uint16_t help_context)
+{
+    (void)help_context;
+    set_error(context, "source control DoWinHelp host service is unavailable");
+    return 0;
+}
+
+static int control_group_visible(void *context, uint16_t window_id,
+                                 uint8_t group, int visible)
+{
+    PortableLiveGame *game = context;
+    PortableObjectContext objects;
+    PortableObjectStatus status;
+    memset(&objects, 0, sizeof(objects));
+    objects.registry = game->registry;
+    objects.window_open = (game->windows.windows[window_id >> 8].flags &
+                           PORTABLE_WINDOW_OPEN) != 0;
+    objects.window_in_front = game->windows.front_window_id == (int16_t)window_id;
+    objects.effect = object_effect_sink;
+    objects.context = game;
+    status = portable_object_group_visible(&objects, window_id, group, visible);
+    if (status != PORTABLE_OBJECT_OK) {
+        set_error(game, "source control group visibility mutation failed");
+        return 0;
+    }
+    return 1;
+}
+
+static int control_select(void *context, uint16_t object_id)
+{
+    return control_window_operation(context, SIM_RECOVERED_WINDOW_MAKE_SELECTED,
+                                     object_id);
+}
+
+static int control_rect(void *context, uint16_t object_id, SimSetupRect *rect)
+{
+    PortableLiveGame *game = context;
+    PortableWindowRect loaded;
+    if (rect == NULL || portable_window_registry_get_object_rect(game->registry,
+            object_id, &loaded) != PORTABLE_WINDOW_REGISTRY_OK) {
+        set_error(game, "source control object rectangle is unavailable");
+        return 0;
+    }
+    rect->left = loaded.left; rect->top = loaded.top;
+    rect->right = loaded.right; rect->bottom = loaded.bottom;
+#ifdef SIMANT_LIVE_GAME_TEST_DIAGNOSTICS
+    trace_control_input("rect", loaded.left, loaded.top, loaded.right, loaded.bottom);
+#endif
+    return 1;
+}
+
+static int control_draw(void *context, SimSetupControlKind kind, uint16_t flags,
+                         const SimSetupControls *controls, int16_t percent)
+{
+    PortableLiveGame *game = context;
+    int16_t window_id = kind == SIM_SETUP_MODE_CONTROL ? 0x1200 : 0x1300;
+    if (flags != 3 || controls != &game->session->setup_controls ||
+        game->source_clip_window != window_id) {
+        set_error(game, "source control draw lacks its active window state");
+        return 0;
+    }
+    if (kind == SIM_SETUP_MODE_CONTROL) game->mode_percent = percent;
+    else game->caste_percent = percent;
+    return redraw_snapshot_edit(game);
+}
+
+static int control_pointer_poll(void *context, SimSetupPoint *point)
+{
+    PortableLiveGame *game = context;
+    HostEvent event;
+    int polled = host_poll_event(game->host, &event);
+    if (polled < 0) {
+        set_error(game, "SDL event conversion failed during control drag");
+        return 0;
+    }
+    if (polled == 0) host_wait_ms(1);
+    else if (event.kind == HOST_EVENT_QUIT) {
+        game->quit_requested = 1;
+        game->left_down = 0;
+    } else if (event.kind == HOST_EVENT_MOUSE_MOVE ||
+               ((event.kind == HOST_EVENT_MOUSE_UP ||
+                 event.kind == HOST_EVENT_MOUSE_DOWN) && event.button == 1)) {
+        game->cursor_x = event.x; game->cursor_y = event.y;
+        if (event.kind == HOST_EVENT_MOUSE_UP) game->left_down = 0;
+        else if (event.kind == HOST_EVENT_MOUSE_DOWN) game->left_down = 1;
+    } else if (event.kind != HOST_EVENT_NONE) {
+        if (game->deferred_host_event_count >= LIVE_DEFERRED_HOST_EVENT_CAPACITY) {
+            set_error(game, "host event backlog exceeded during control drag");
+            return 0;
+        }
+        game->deferred_host_events[game->deferred_host_event_count++] = event;
+    }
+    point->x = game->cursor_x; point->y = game->cursor_y;
+#ifdef SIMANT_LIVE_GAME_TEST_DIAGNOSTICS
+    trace_control_input("poll", point->x, point->y, game->left_down, polled);
+#endif
+    return 1;
+}
+
+static int control_still_down(void *context, int *down)
+{
+    *down = ((PortableLiveGame *)context)->left_down;
+    return 1;
+}
+
+static int control_clip_push(void *context)
+{ return control_window_operation(context, SIM_RECOVERED_WINDOW_CLIP_PUSH, 0); }
+
+static int control_top_clip(void *context)
+{
+    PortableLiveGame *game = context;
+    return control_clip_set(game, (uint16_t)game->windows.front_window_id);
+}
+
+static int control_clip_pop(void *context)
+{ return control_window_operation(context, SIM_RECOVERED_WINDOW_CLIP_POP, 0); }
+
+static int control_selected_state(void *context, uint16_t object_id, int selected)
+{
+    SimRecoveredEffect effect;
+    memset(&effect, 0, sizeof(effect));
+    effect.kind = SIM_RECOVERED_EFFECT_WINDOW_OPERATION;
+    effect.arguments[0] = SIM_RECOVERED_WINDOW_SET_SELECTED_STATE;
+    effect.arguments[1] = object_id;
+    effect.arguments[2] = (uintptr_t)selected;
+    return apply_window_object_operation(context, &effect);
+}
+
+static int control_wait_ticks(void *context, uint16_t ticks)
+{
+    PortableLiveGame *game = context;
+    uint32_t start;
+    if (!advance_clock_to(game, host_time_ns())) return 0;
+    start = sim_timing_tick_count(&game->clock);
+    while ((uint32_t)(sim_timing_tick_count(&game->clock) - start) < ticks) {
+        host_wait_ms(1);
+        if (!advance_clock_to(game, host_time_ns())) return 0;
+    }
+    return 1;
+}
+
+static int run_source_control(PortableLiveGame *game, int16_t x, int16_t y,
+                              int *handled)
+{
+    int16_t window_id = game->windows.front_window_id;
+    PortableWindowRegistrySlot *slot;
+    SimControlEventPrivateState private_state;
+    SimControlEventProvider provider;
+    SimControlEventMessage message;
+    SimRecoveredEngineStatus status;
+    int hit;
+    *handled = 0;
+    if (window_id != 0x1200 && window_id != 0x1300) return 1;
+    slot = &game->registry->slots[(uint16_t)window_id >> 8];
+    if (!slot->loaded || !(game->windows.windows[(uint16_t)window_id >> 8].flags &
+                           PORTABLE_WINDOW_OPEN)) return 1;
+    hit = portable_window_mouse_hit_test(&slot->window, (PortableWindowPoint){x, y});
+    if (hit < 0) return 1;
+    *handled = 1;
+    if (hit < 3 || slot->window.objects[hit].type != 1) {
+        set_error(game, "source control frame/close dispatch is unavailable");
+        return 0;
+    }
+    {
+        PortableControlPreselectCallbacks preselect = {
+            control_clip_push, control_top_clip, control_selected_state,
+            control_wait_ticks, control_clip_pop, game};
+        if (portable_control_preselect(game->registry,
+                (uint16_t)(window_id | hit), &preselect) !=
+                PORTABLE_CONTROL_PRESELECT_OK) {
+            if (game->error[0] == '\0')
+                set_error(game, "source control button preselection failed");
+            return 0;
+        }
+    }
+    memset(&provider, 0, sizeof(provider));
+    provider.clip_set_window = control_clip_set;
+    provider.clip_off = control_clip_off;
+    provider.help = control_help;
+    provider.set_group_visible = control_group_visible;
+    provider.select_object = control_select;
+    provider.get_object_rect = control_rect;
+    provider.draw_control = control_draw;
+    provider.pointer_poll = control_pointer_poll;
+    provider.still_down = control_still_down;
+    provider.context = game;
+    memset(&private_state, 0, sizeof(private_state));
+    private_state.mode_percent = game->mode_percent;
+    private_state.caste_percent = game->caste_percent;
+    message.code = (uint16_t)(window_id | hit);
+    message.point = (SimSetupPoint){x, y};
+#ifdef SIMANT_LIVE_GAME_TEST_DIAGNOSTICS
+    trace_control_input("message", message.code, x, y, game->left_down);
+#endif
+    status = sim_recovered_engine_control_event(&game->engine,
+        window_id == 0x1200 ? SIM_SETUP_MODE_CONTROL : SIM_SETUP_CASTE_CONTROL,
+        &message, &private_state, &provider);
+    if (status != SIM_RECOVERED_ENGINE_OK) {
+        if (game->error[0] == '\0') set_error(game, game->engine.failed_service != NULL ?
+            game->engine.failed_service : sim_recovered_engine_status_string(status));
+        return 0;
+    }
+    game->mode_percent = private_state.mode_percent;
+    game->caste_percent = private_state.caste_percent;
+#ifdef SIMANT_LIVE_GAME_TEST_DIAGNOSTICS
+    ++game->control_event_calls;
+    game->control_last_code = message.code;
+#endif
+    game->scheduler.initialized = 0;
+    if (!reconcile_modal_input(game) || !redraw(game)) return 0;
+    return dispatch_deferred_host_events(game);
+}
+
 static int apply_input_effects(PortableLiveGame *game,
                                const PortableInputEffects *effects)
 {
@@ -2267,6 +2560,12 @@ PortableLiveGame *portable_live_game_create(
         }
     }
 #endif
+#ifdef SIMANT_LIVE_GAME_TEST_DIAGNOSTICS
+    if (!write_control_geometry(game)) {
+        set_error(game, "could not write control geometry diagnostic");
+        goto fail;
+    }
+#endif
     return game;
 fail:
     game->faulted = 1;
@@ -2375,6 +2674,14 @@ int portable_live_game_event(PortableLiveGame *game, const HostEvent *event)
                         return 0;
                     }
                     return 1;
+                }
+                {
+                    int handled = 0;
+                    if (!run_source_control(game, event->x, event->y, &handled)) {
+                        game->faulted = 1;
+                        return 0;
+                    }
+                    if (handled) return 1;
                 }
                 if (!enqueue_edit_hotbox(game, event->x, event->y)) {
                     game->faulted = 1;
@@ -2664,7 +2971,24 @@ void portable_live_game_destroy(PortableLiveGame *game)
                 for (i = 0; i <= SIM_RECOVERED_QUERY_BUTTON; ++i)
                     (void)fprintf(file, "%s%llu", i == 0 ? "" : ",",
                                   (unsigned long long)game->query_calls[i]);
-                (void)fprintf(file, "]}\n");
+                (void)fprintf(file,
+                    "],\"control_event_calls\":%llu,\"control_last_code\":%u,"
+                    "\"mode_percent\":%d,\"caste_percent\":%d,"
+                    "\"mode_selector\":%d,\"caste_selector\":%d,"
+                    "\"mode_auto\":%d,\"caste_auto\":%d,"
+                    "\"mode_level\":[%u,%u,%u],\"caste_level\":[%u,%u,%u]}\n",
+                    (unsigned long long)game->control_event_calls,
+                    game->control_last_code, game->mode_percent, game->caste_percent,
+                    game->session->setup_controls.mode_current,
+                    game->session->setup_controls.caste_current,
+                    game->session->setup_controls.mode_auto,
+                    game->session->setup_controls.caste_auto,
+                    game->session->setup_controls.mode_level.frac,
+                    game->session->setup_controls.mode_level.mid,
+                    game->session->setup_controls.mode_level.weight,
+                    game->session->setup_controls.caste_level.frac,
+                    game->session->setup_controls.caste_level.mid,
+                    game->session->setup_controls.caste_level.weight);
                 (void)fclose(file);
             }
             if (snprintf(path, sizeof(path), "%s.endgame.json", base) <

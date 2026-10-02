@@ -94,8 +94,12 @@ game-over flow, dismisses its window, selects scenario 0x0202, and returns
 through source NewGame to a simulation tick. Tutorial/load/save/quit routes
 still need integration. Mode and caste control
 contents now use source-derived rendering plans, current populations, active
-resource providers, and each window's position in the scene order. Their mouse
-handlers and a direct DOS framebuffer comparison remain separate work. A
+resource providers, and each window's position in the scene order. Physical
+control clicks support Auto, manual presets, percentage display, and triangle
+dragging through the guarded source-state boundary. A bounded SDL test checks
+both windows against the separately DOS-compared model and completes 32 ticks.
+Control frame/close dispatch and direct DOS framebuffer comparison remain
+separate work. A
 separate natural-trigger host test reaches game
 over at completed tick 2,879 after physical Shift+4 selects the source's fastest
 speed. It dismisses EndGame, restarts scenario 0x0202, and continues to tick

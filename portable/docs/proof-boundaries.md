@@ -265,6 +265,16 @@ mouse picking therefore uses descending object order and inclusive rectangle
 edges. Keyboard picking retains its separate first-index, half-open contract.
 Decoration precedence and dynamic re-registration remain outside the helper.
 
+The [physical control receipt](../tests/live_controls/evidence/physical-controls-next9-final-source-geometry-20261002.json)
+passes 34 injected SDL events across 14 phases and ten control calls, followed
+by 32 simulation ticks. Its independent expected sequence applies the actual
+OpenModeWindow/OpenCasteWindow changes to shared triangle geometry. Both final
+level triples match. The 18-record live pointer/rectangle trace and 249 checked
+source/artifact inputs identify the bounded host run. Earlier pointer-loop,
+geometry-context, and invalid pass-result receipts remain preserved. This
+composes separately DOS-compared contracts; the whole event sequence and its
+framebuffer have not been replayed against DOS.
+
 The [legacy save codec](../tests/save/evidence/legacy-save-codec-v1/README.md)
 validates the source-derived 307-record, 48,386-byte payload mechanically with
 synthetic fields. It requires every binding and prevalidates decode destinations.
