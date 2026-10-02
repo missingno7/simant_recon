@@ -59,6 +59,22 @@ class VerifyEvidenceTests(unittest.TestCase):
             self.assertFalse(missing)
             self.assertEqual(checks[0]["result"], "MATCH")
 
+    def test_map_length_assertion_keeps_recorded_closure_cardinality_explicit(self) -> None:
+        checks: list[dict] = []
+        missing: list[str] = []
+        mismatches: list[str] = []
+        verify.check_map_length(checks, missing, mismatches,
+                                {"receipt": {"inputs": {"a": "1", "b": "2"}}},
+                                "receipt.inputs", 2)
+        self.assertFalse(missing)
+        self.assertFalse(mismatches)
+        self.assertEqual(checks[0]["result"], "MATCH")
+
+        verify.check_map_length(checks, missing, mismatches,
+                                {"receipt": {"inputs": {"a": "1"}}},
+                                "receipt.inputs", 2)
+        self.assertIn("receipt.inputs: expected 2 entries, got 1", mismatches)
+
     def test_original_save_write_callbacks_are_not_counted_as_calls(self) -> None:
         report = {"save": {"function": "o09_35F5_0188", "write_calls": 307}}
         count, basis = verify.dos_comparison_count(
@@ -133,6 +149,27 @@ class VerifyEvidenceTests(unittest.TestCase):
         self.assertTrue(by_id["historical_integrity_controls_frozen_20261002"]["scope_only"])
         control_engine = by_id["control_engine_next9_175047_archived_20261002"]
         self.assertTrue(control_engine["archived"])
+        stop_song = by_id["stop_song_v2_dos_msc_native_diagnostic_20261002"]
+        self.assertEqual(stop_song["dos_count"], "invocations")
+        self.assertTrue(stop_song["scope_only"])
+        self.assertIn("Production remains FAIL_VOID0", stop_song["scope"])
+        history_adapter = by_id["history_adapter_next10_archived_dos_corpus_replay_20261002"]
+        self.assertEqual(history_adapter["dos_count"]["literal"], 0)
+        self.assertIn("zero new DOS calls", history_adapter["scope"])
+        self.assertIn("requires_missing", history_adapter)
+        lifecycle = by_id["save_lifecycle_v2_paired_dos_native_controlled_15_20261002"]
+        self.assertEqual(lifecycle["dos_count"], "semantic_result.scenario_count")
+        self.assertIn("(6 save, 9 load)", lifecycle["scope"])
+        history_v2 = by_id["history_adapter_next10_closure_v2_archived_replay_20261002"]
+        self.assertEqual(history_v2["dos_count"]["literal"], 0)
+        self.assertEqual(len(history_v2["path_hash_lists"]), 2)
+        self.assertTrue(any(row["field"] == "gcc_mm.distinct_dependencies"
+                            for row in history_v2["path_hash_lists"]))
+        physical_history = by_id["live_history_next10_physical_paused_capture_native_only_20261002"]
+        self.assertEqual(physical_history["dos_count"]["literal"], 0)
+        self.assertEqual(physical_history["map_lengths"][0],
+                         ("source_closure.receipt.inputs_before", 261))
+        self.assertIn("not archived", physical_history["scope"])
         self.assertTrue(control_engine["report"].endswith("control-engine-next9-20261002T175047Z.json"))
         refreshed = by_id["control_engine_next9_181619_15_boundaries_20261002"]
         self.assertEqual(refreshed["assert_fields"][1], ("compile.local_transitive_dependency_count", 115))
