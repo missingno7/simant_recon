@@ -9,8 +9,12 @@ decompilation.
 The [source conversion policy](docs/source-porting-rules.md) keeps recovered
 game bodies and shared state as the authority. Mechanical type/pointer
 conversion and explicit platform services follow the Stunts/Empires port
-workflow. Independent contract models support tests; they do not replace
-recovered game logic in production.
+workflow. Existing movement and control-event routes still use manually
+translated implementations with bounded DOS evidence. The
+[source-route inventory](docs/source-port-inventory.md) distinguishes those
+routes from generated source bodies. Replacing these exceptions with
+reproducible source conversions is active work; a passing independent model
+does not by itself establish a mechanical conversion.
 
 ## Current integration state
 
