@@ -1,8 +1,6 @@
-/* Host providers for mechanically converted m0798 control handlers.
- * The selected source bodies are reproduced by convert_control_events.py. */
-#include "control_adapter.h"
-#ifdef SIMANT_ENABLE_CONTROL_INIT_NEXT4
-#include "control_source_internal.h"
+/* Draft bridge from source-extracted m0798 handlers into the active Next10
+ * TLS image and existing portable host providers. Not in production build. */
+#include "source_control_integration.h"
 
 #include <setjmp.h>
 #include <stdlib.h>
@@ -235,16 +233,3 @@ SimControlEventStatus sim_recovered_source_control_event(
         return result;
     }
 }
-
-#include "source/control_events.inc"
-#else
-void sim_recovered_source_control_abort_cleanup(void) {}
-SimControlEventStatus sim_recovered_source_control_event(
-    SimSetupControls *c, SimControlEventPrivateState *p,
-    SimSetupControlKind k, const SimControlEventMessage *m,
-    const SimControlEventProvider *provider)
-{
-    (void)c; (void)p; (void)k; (void)m; (void)provider;
-    return SIM_CONTROL_EVENT_INVALID_SOURCE_STATE;
-}
-#endif

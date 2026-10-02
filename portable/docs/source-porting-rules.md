@@ -37,14 +37,15 @@ The rest of the frozen C/ASM is not implicitly ported. The source-route inventor
 tracks that remaining work. Historical EXACT and BEHAVIOR_EXACT records are
 unchanged.
 
-The current control event adapter still invokes a handwritten source-derived
-implementation with bounded DOS comparisons. Movement and several rendering
-providers also use explicit native implementations. Those existing routes must
-be listed separately from mechanically converted source bodies; their tests
-do not make them mechanical conversions. Reusing the original control event C
-bodies is the next replacement task. A native implementation of genuine ASM or
-an obsolete platform boundary remains necessary, with its source-visible
-behavior separately verified.
+The control event adapter now invokes mechanically extracted `ProcModeEvent`
+and `ProcCasteEvent` bodies, with three original triangle helpers and the
+existing compiled `SetTriLatPoint`/caste conversion dependencies. See the
+[conversion packet](../tests/setup/source_control_bridge/README.md).
+Movement and several rendering providers still use explicit native
+implementations. Those routes remain distinct from mechanically converted
+source bodies; their tests do not make them mechanical conversions. A native
+implementation of genuine ASM or an obsolete platform boundary remains
+necessary, with its source-visible behavior separately verified.
 
 Reference workflows reviewed locally: Stunts
 `docs/porting/semantic-audit.md` and Empires

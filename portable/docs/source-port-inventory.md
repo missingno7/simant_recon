@@ -31,6 +31,13 @@ These are mechanical conversion batches that preserve each complete source TU an
 
 ## Whole-TU backlog
 
+The v3 inventory captures the build before the control source replacement.
+The later [control conversion packet](../tests/setup/source_control_bridge/README.md)
+supersedes its two handwritten event-route descriptions. Five original m0798
+bodies now execute through `control_adapter.c`; the eight existing profile
+definitions and Next10 generated files are unchanged. The remaining m0798
+rendering/platform boundaries still need their own conversions.
+
 The report keeps a separate largest-remaining-members ranking: `root:171C` has 61 remaining functions and nine unsupported edges; `root:0250` has 53 remaining and 58 unsupported edges; `root:22BF` has 47 remaining and 27 unsupported edges. This is a backlog view only, not dependency readiness. For example, `root:171C` has EMS, far-memory-copy, and error-handling edges that should stay explicit rather than being mapped to host `malloc` behavior.
 
 ## Arithmetic and evidence boundary

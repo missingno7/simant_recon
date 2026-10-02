@@ -10,7 +10,4 @@ SimControlEventStatus sim_recovered_source_control_event(
     SimSetupControlKind kind, const SimControlEventMessage *message,
     const SimControlEventProvider *provider);
 
-/* Release borrowed event owners before an outer engine abort unbinds TLS. */
-void sim_recovered_source_control_abort_cleanup(void);
-
 #endif

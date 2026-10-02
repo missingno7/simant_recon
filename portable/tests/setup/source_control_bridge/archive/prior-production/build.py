@@ -20,7 +20,6 @@ if str(ROOT) not in sys.path:
     sys.path.insert(0, str(ROOT))
 from portable.tools.profile_next9 import validate_next9
 from portable.tools.profile_next10 import validate_next10
-from portable.tools.convert_control_events import verify as verify_control_conversion
 
 VERSION = "3.4.16"
 SDK_SHA = "9828bb735cf8a007bcf0ac5aa9f01f3fcb54b7ca67c932e775c905c5d5053a60"
@@ -31,7 +30,6 @@ SDK_URL = f"https://github.com/libsdl-org/SDL/releases/download/release-{VERSION
 UNINTEGRATED_MODELS = {
     "portable/ui_model/windows/zoom.c",
     "portable/ui_model/windows/history_render.c",
-    "portable/ui_model/windows/decorations.c",
     "portable/ui_model/dialogs/menu_quit.c",
 }
 
@@ -283,7 +281,6 @@ def build(main: Path, output: Path, sources: list[Path],
             sources.append(ROOT / "portable/game/recovered/balloon_adapter.c")
             extra_flags.append("-DSIMANT_ENABLE_BALLOON_STATE_NEXT3=1")
             if extension["id"] == "selected-control-init-source-next4-v1":
-                core_hashes.update(verify_control_conversion())
                 extra_flags.append("-DSIMANT_ENABLE_CONTROL_INIT_NEXT4=1")
             if next5 is not None:
                 extra_flags.append("-DSIMANT_ENABLE_NEW_GAME_NEXT5=1")
@@ -294,7 +291,6 @@ def build(main: Path, output: Path, sources: list[Path],
     os.close(fd)
     linked_output = Path(temporary_name)
     command = [compiler, "-std=c11", "-O2", "-Wall", "-Wextra", "-Werror",
-               "-D__USE_MINGW_SETJMP_NON_SEH",
                "-I", str(ROOT / "portable"), "-I", str(sdk / "include"),
                *extra_flags,str(main), *(str(p) for p in sources),*(str(p) for p in core_objects),
                "-L", str(sdk / "lib"), "-lSDL3", "-o", str(linked_output)]

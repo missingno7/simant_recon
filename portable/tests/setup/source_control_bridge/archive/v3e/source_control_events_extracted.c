@@ -1,0 +1,242 @@
+/* Generated only for the source_control_integration draft. */
+#include "source_control_integration.h"
+
+/* ProcCasteEvent source lines 129-191; original source definition sha256 963e177d43be2d44d78d4717986a399b99d69b528a391e47084c790015bc3416 */
+#include <stdint.h>
+#include <stddef.h>
+
+
+void  ProcCasteEvent(struct CtlMsg  *msg)
+{
+    struct Rect rect;
+    struct Pt last;
+
+    source_clip_set(0x1300);
+    switch (msg->code - 0x1303) {
+    case 0:
+        source_help(0x130e);
+        break;
+    case 1:
+        if (CasteAuto == 0) {
+            CasteAuto = 1;
+            source_group_invisible(0x1300, 4);
+        }
+        break;
+    case 3:
+    case 4:
+    case 5:
+        source_select_object(0x1305);
+        source_copy_bytes(&fd_3D57_07F2[(uint16_t)(*source_caste_selector) * 3u], casteLevels, 6);
+        (*source_caste_selector) = msg->code - 0x1306;
+        source_copy_bytes(casteLevels, &fd_3D57_07F2[(uint16_t)(*source_caste_selector) * 3u], 6);
+        source_clip_set(0x1300);
+        source_draw_caste(3);
+    case 2:
+        if (CasteAuto) {
+            CasteAuto = 0;
+            source_group_visible(0x1300, 4);
+        }
+        break;
+    case 10:
+        source_get_rect(0x130d, &rect);
+        if (!IsPointInIsoTri(&msg->pt, &rect))
+            break;
+        if (CasteAuto) {
+            CasteAuto = 0;
+            source_select_object(0x1305);
+            source_group_visible(0x1300, 4);
+        }
+        last.x = -1;
+        source_clip_set(0x1300);
+        do {
+            if (source_compare_bytes(&last, &msg->pt, 4)) {
+                last = msg->pt;
+                BoundPointToTri(&msg->pt, &rect);
+                source_GetTriLatDist(casteLevels, &fd_50F6_3822, &msg->pt);
+                source_draw_caste(3);
+            }
+            source_pointer_update(&msg->pt);
+        } while (source_still_down());
+        source_copy_bytes(&fd_3D57_07F2[(uint16_t)(*source_caste_selector) * 3u], casteLevels, 6);
+        cvtLevels2IdealCaste(IdealCaste);
+        break;
+    case 12:
+    case 13:
+    case 14:
+        (*source_caste_percent) ^= 1;
+        source_draw_caste(3);
+        break;
+    }
+    source_clip_off();
+}
+
+/* ProcModeEvent source lines 197-258; original source definition sha256 fb675afb7b3dd9eb37f6b338d479517da36238883195a53fa05a431b25eebc24 */
+#include <stdint.h>
+#include <stddef.h>
+
+
+void  ProcModeEvent(struct CtlMsg  *msg)
+{
+    struct Rect rect;
+    struct Pt last;
+
+    source_clip_set(0x1200);
+    switch (msg->code - 0x1203) {
+    case 0:
+        source_help(0x120e);
+        break;
+    case 1:
+        if (ModeAuto == 0) {
+            ModeAuto = 1;
+            source_group_invisible(0x1200, 4);
+        }
+        break;
+    case 3:
+    case 4:
+    case 5:
+        source_select_object(0x1205);
+        source_copy_bytes(&fd_3D57_0810[(uint16_t)(*source_mode_selector) * 3u], modeLevels, 6);
+        (*source_mode_selector) = msg->code - 0x1206;
+        source_copy_bytes(modeLevels, &fd_3D57_0810[(uint16_t)(*source_mode_selector) * 3u], 6);
+        source_clip_set(0x1200);
+        source_draw_mode(3);
+    case 2:
+        if (ModeAuto) {
+            ModeAuto = 0;
+            source_group_visible(0x1200, 4);
+        }
+        break;
+    case 10:
+        source_get_rect(0x120d, &rect);
+        if (!IsPointInIsoTri(&msg->pt, &rect))
+            break;
+        if (ModeAuto) {
+            ModeAuto = 0;
+            source_select_object(0x1205);
+            source_group_visible(0x1200, 4);
+        }
+        last.x = -1;
+        source_clip_set(0x1200);
+        do {
+            if (source_compare_bytes(&last, &msg->pt, 4)) {
+                last = msg->pt;
+                BoundPointToTri(&msg->pt, &rect);
+                source_GetTriLatDist(modeLevels, &fd_50F6_3816, &msg->pt);
+                source_draw_mode(3);
+            }
+            source_pointer_update(&msg->pt);
+        } while (source_still_down());
+        source_copy_bytes(&fd_3D57_0810[(uint16_t)(*source_mode_selector) * 3u], modeLevels, 6);
+        break;
+    case 12:
+    case 13:
+    case 14:
+        (*source_mode_percent) ^= 1;
+        source_draw_mode(3);
+        break;
+    }
+    source_clip_off();
+}
+
+/* IsPointInIsoTri source lines 260-284; original source definition sha256 a119fab8fce93f66907a4e304284bce29c5103c78099918a1a989a49894230a7 */
+#include <stdint.h>
+#include <stddef.h>
+
+
+int16_t  IsPointInIsoTri(struct Pt  *pt, struct Rect  *r)
+{
+    int16_t top;
+    int16_t bottom;
+    int16_t right;
+    int16_t left;
+    int16_t mid;
+    int16_t x;
+    int16_t y;
+
+    top = r->top;
+    bottom = r->bottom;
+    right = r->right;
+    left = r->left;
+    mid = (right + left) / 2;
+    x = pt->x;
+    y = pt->y;
+    if (y >= bottom || y < top)
+        return 0;
+    if ((int32_t)(left - mid) * (y - bottom) / (int32_t)(bottom - top) + left > x)
+        return 0;
+    if ((int32_t)(mid - right) * (y - top) / (int32_t)(top - bottom) + mid < x)
+        return 0;
+    return 1;
+}
+
+/* BoundPointToTri source lines 286-318; original source definition sha256 4436012b9ca61e93ca828afe99f086c4ce3ccaaed7c9c91a644ebfe4426828fe */
+#include <stdint.h>
+#include <stddef.h>
+
+
+void  BoundPointToTri(struct Pt  *pt, struct Rect  *r)
+{
+    int16_t top;
+    int16_t bottom;
+    int16_t right;
+    int16_t left;
+    int16_t mid;
+    int16_t x;
+    int16_t y;
+    int16_t edge;
+
+    top = r->top;
+    bottom = r->bottom - 1;
+    right = r->right;
+    left = r->left;
+    mid = (right + left) / 2;
+    x = pt->x;
+    y = pt->y;
+    if (y > bottom)
+        y = bottom;
+    else if (y < top)
+        y = top;
+    edge = (int32_t)(left - mid) * (y - bottom) / (int32_t)(bottom - top) + left;
+    if (edge > x)
+        x = edge;
+    else {
+        edge = (int32_t)(mid - right) * (y - top) / (int32_t)(top - bottom) + mid;
+        if (edge < x)
+            x = edge;
+    }
+    pt->x = x;
+    pt->y = y;
+}
+
+/* GetTriLatDist source lines 467-493; original source definition sha256 726868fc3d68d5b221221c97a6761b775b29747ed4d0ad961cdfd7f658890aa3 */
+#include <stdint.h>
+#include <stddef.h>
+
+
+void  source_GetTriLatDist(uint16_t *level, struct TriPoints  *tri, struct Pt  *pt)
+{
+    int16_t dx;
+    int16_t dy;
+    int16_t row;
+    uint16_t w;
+
+    dx = pt->x - tri->leftX;
+    dy = pt->y - tri->apexY;
+    if ((uint16_t)dy > triHeight - 2)
+        level[0] = 0;
+    else
+        level[0] = (int32_t)(triHeight - dy - 2) * 0xffffL / (int32_t)(triHeight - 2);
+    w = (uint32_t)level[0] * triWidthL / 0xffffUL;
+    row = triWidth - w * 2;
+    if (row <= 2) {
+        level[2] = level[1] = 0;
+        return;
+    }
+    if (dx - (int16_t)w >= row - 2)
+        level[2] = 0xffff - level[0];
+    else if (dx - (int16_t)w <= 2)
+        level[2] = 0;
+    else
+        level[2] = (0xffffL - level[0]) * (int32_t)(dx - (int16_t)w) / (int32_t)(row - 2);
+    level[1] = 0xffff - level[2] - level[0];
+}

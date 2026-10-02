@@ -1208,6 +1208,7 @@ SimRecoveredEngineStatus sim_recovered_engine_action(
     return engine->status;
 
 interrupted_action:
+    sim_recovered_source_control_abort_cleanup();
     if (engine->recovered_binding_active) {
         RecoveredBindingFrame restore_frame;
         recovered_bind_begin(&restore_frame, &engine->binding_frame.previous);

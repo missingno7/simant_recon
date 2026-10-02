@@ -9,12 +9,19 @@ decompilation.
 The [source conversion policy](docs/source-porting-rules.md) keeps recovered
 game bodies and shared state as the authority. Mechanical type/pointer
 conversion and explicit platform services follow the Stunts/Empires port
-workflow. Existing movement and control-event routes still use manually
-translated implementations with bounded DOS evidence. The
+workflow. Mode/Caste events now use
+[mechanically converted original handlers](tests/setup/source_control_bridge/README.md).
+Movement and several rendering providers still use manually translated
+implementations with bounded DOS evidence. The
 [source-route inventory](docs/source-port-inventory.md) distinguishes those
 routes from generated source bodies. Replacing these exceptions with
 reproducible source conversions is active work; a passing independent model
 does not by itself establish a mechanical conversion.
+
+An isolated extracted movement body also passes
+[322,720 fresh DOS comparisons](tests/movement/source_conversion/source-conversion-dos-diff-v3.json).
+That conversion has not replaced the production movement adapter yet; its tile
+predicate dependency remains a separately tested native implementation.
 
 ## Current integration state
 
