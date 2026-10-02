@@ -308,6 +308,17 @@ the DOS probe and confirms them after all five native runs. Both positive
 stream comparisons pass; all three negative controls fail as expected. V5
 remains a finite binding experiment, outside the production save lifecycle.
 
+The [save/load lifecycle V2 packet](../tests/save/lifecycle/evidence/closed-execution-v2.md)
+passes fifteen paired original-DOS/native cases. It compares ordered callbacks,
+filename/dirty/load-mode state, aliased option words, and all reached SaveRec
+row-byte effects. It includes short writes, partial reads, failures, cancellations,
+and both post-rebuild song decisions. Compiler, evaluator, source and asset
+identities remain stable before and after the run. File selection, filesystem,
+reset and rebuild are controlled callbacks; the lifecycle model is outside
+the live build. The [scope erratum](../tests/save/lifecycle/evidence/codec-v3-scope-erratum.md)
+corrects the earlier README's broad decoding claim without changing its pinned
+bytes. V1 receipts and earlier semantic mismatches remain preserved.
+
 The [history renderer comparison](../tests/history_render/transitive_closure_report.json)
 passes 448 original-DOS cases (48 directed and 400 seeded), comparing ordered
 logical drawing requests. Forty-six cases exercise source pointer aliasing;

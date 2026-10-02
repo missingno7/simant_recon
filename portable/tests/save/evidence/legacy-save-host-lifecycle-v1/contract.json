@@ -1,0 +1,109 @@
+{
+  "schema": "simant-savegame-host-lifecycle-contract-v1",
+  "status": "SOURCE_GROUNDED_DESIGN_NOT_INTEGRATED",
+  "inputs": {
+    "S09": {
+      "path": "src/S09/m35F5.c",
+      "sha256": "028e1575990d5d45233f9102a0d2a060810349bd2f1297182c4af435ecbe912a"
+    },
+    "S15": {
+      "path": "src/S15/m384C.c",
+      "sha256": "01b51eecedcd28e2213819572c846a9754039f4a527e6da5e56e57783398bdd5"
+    },
+    "S08": {
+      "path": "src/S08/m35F5.c",
+      "sha256": "ef6eea405f6497cb5a6648ef258cc1afeab308f995ded573794465d831e3501f"
+    },
+    "contract_producer": {
+      "path": "portable/tests/save/write_lifecycle_contract.py",
+      "sha256": "ae3b4c6680a767e16b2d97eb81c011821ab3154bacc60b5115b337e94a176d9b"
+    },
+    "SaveRec_inventory": {
+      "path": "portable/tests/dialogs/evidence/savegame-format-source-inventory-v1/save-records.json",
+      "sha256": "a48c4d650ee7a0a2d37e115d61bce36c442d83586183d7f3997e416573ac85e1",
+      "rows": 307,
+      "payload_bytes": 48386
+    }
+  },
+  "function_anchors": {
+    "LoadGame": {
+      "line_start": 88,
+      "line_end": 138,
+      "body_sha256": "bd936ca8f2c0b89a5b9020faa7af096af3fb84a0b89090da2f5a0f0561c34692"
+    },
+    "SaveGame": {
+      "line_start": 141,
+      "line_end": 200,
+      "body_sha256": "8cfdce97d0b10b9c9ab66b0727336734497c18970a549e39b5e60c7a18c18c05"
+    },
+    "FileSelect": {
+      "line_start": 267,
+      "line_end": 533,
+      "body_sha256": "43b03a0f668d4bf3921fee53aa109cd5dd34891cd1ab965251b31ad494088404"
+    },
+    "ResetYardBeforeLoad": {
+      "line_start": 553,
+      "line_end": 560,
+      "body_sha256": "9c802c6464fdae16c2fae71d10a608e773a636bd9acb6a8f835c1d9bae359425"
+    },
+    "RebuildDerivedAfterLoad": {
+      "line_start": 563,
+      "line_end": 595,
+      "body_sha256": "da1bc91360c9c5c2d8b391df04e729867e95165799c80f2fe42ce3946b84a0dc"
+    },
+    "DirtyPrompt": {
+      "line_start": 158,
+      "line_end": 218,
+      "body_sha256": "95a658d912ce2fdeae3fa8942b80579a326c5e40134ab590cfd95305230977ca"
+    },
+    "RandYard": {
+      "line_start": 372,
+      "line_end": 427,
+      "body_sha256": "cb266aa8194978283c73d68fd1f51dfd15ab69443a7a29a9e609ab993b99954b"
+    }
+  },
+  "format": {
+    "records": 307,
+    "terminator_rows": 1,
+    "payload_bytes": 48386,
+    "stream": "concatenated SaveRec rows in source order, no header, no trailing read on load"
+  },
+  "dirty_load_gate": {
+    "prompt": "o15_384C_0239(0)",
+    "result_2": "return failure without opening a selector; preserve dirty state",
+    "result_1": "call SaveGame(useLast=0); if it returns 0 repeat prompt; any nonzero save result continues",
+    "other_result": "continue to file selector",
+    "prompt_result_values": "0=discard/continue; 1=save; 2=cancel, source-defined by keyboard and event switches"
+  },
+  "load_sequence": [
+    "FileSelect(name, 'Load Game', 'LOAD', 0); zero means cancel and returns failure before last-name or dirty changes.",
+    "On selection, copy name to lastFileName and clear dirty before attempting open.",
+    "Open O_RDONLY|O_BINARY; fd <= 0 is treated as failure; report error and return failure with dirty already clear and selected lastFileName retained.",
+    "Before the first read, o09_35F5_0D7A resets selected controls and calls S08 RandYard. RandYard clears arrays, resets yard/world controls, sets yard dimensions, generates 192 seed-table words with RRand(0x7fff), passes the selected table word to RandWorld (which initializes S-RNG), and restores the active ant location. These mutations happen before the first file read.",
+    "Read each of 307 records once, requesting exactly size*count bytes. Any result other than the full count, including a positive short read or -1, reports error, stores fd_50F6_0EAC=-1, closes, and returns failure.",
+    "There is no state snapshot/rollback: RandYard reset and all earlier/partial destination writes survive a later read failure.",
+    "No trailing-byte read/check occurs; a valid prefix is accepted even if the file has extra bytes.",
+    "On complete reads, close is called and its result ignored; then UI refresh, derived life-map/count rebuild and optional StopSong run."
+  ],
+  "save_sequence": [
+    "When useLast!=0 and lastFileName is nonempty, copy it and bypass FileSelect; otherwise select with ('Save Game','SAVE',save=1). Selector cancel returns 0 without clearing dirty.",
+    "Once a path is selected, copy it to lastFileName before opening/confirmation.",
+    "First open O_RDWR|O_BINARY. fd>0 means existing: ask overwrite. Result 0 proceeds; nonzero closes (close result ignored) and returns to selector.",
+    "If first open returns <=0, try O_RDWR|O_CREAT|O_TRUNC|O_BINARY with read/write mode. Create failure reports error, clears only the first lastFileName byte, and returns 0.",
+    "Existing accepted files are not truncated and writes are not explicitly sought; an old longer tail can remain.",
+    "Write each SaveRec row once in order. Only exactly -1 is considered failure; positive short writes are accepted and later rows continue.",
+    "On -1, clear first lastFileName byte, report error, close ignoring its result, remove(name), and return 0.",
+    "After all row calls, clear dirty before success message and close; both success-message result and close result are ignored; copy name to lastFileName and return 1."
+  ],
+  "host_design_constraints": [
+    "Separate file selection, overwrite confirmation, open/read/write/close/remove, diagnostics, and game-state codec as typed effects; never infer a successful full write from a generic boolean.",
+    "Source-compatible mode must decide explicitly whether to preserve positive-short-write acceptance, existing-file non-truncation, fd<=0 tests, no rollback on failed loads, and ignored close errors.",
+    "A transactional staged load, full-write loop, atomic replacement, or guaranteed tail truncation is a sensible host policy but differs from the DOS flow and requires an explicit behavior-version boundary.",
+    "Cancellation before a path is selected leaves save-state dirty data intact. Once load selection is accepted, the DOS code clears dirty before open and does not restore it after failure.",
+    "`o09_35F5_0D7A` executes RandYard before reading record 0; a failed/short load is not side-effect free and can alter terrain, random-dependent state, and current derived world before any file row is accepted."
+  ],
+  "limitations": [
+    "This document is a source-grounded lifecycle design contract, not a SaveGame/LoadGame native DOS differential or a filesystem implementation.",
+    "V2 codec evidence proves 307-row payload binding, not load rollback, prompting, file replacement, or I/O error behavior."
+  ]
+}
