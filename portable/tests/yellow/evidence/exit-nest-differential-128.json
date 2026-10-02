@@ -1,0 +1,64 @@
+{
+  "schema": "native-dos-exit-nest-differential-v1",
+  "oracle_sha256": "aa0596c6766322a8229ee3c36e57048c92adc82d50fbe2ef37afb8b85fcf4f11",
+  "historical_manifest_sha256": "025a0a9255d910cae4b122ab5a3f3fb40888bb456d7fe42158db7c9e622fcf50",
+  "target": {
+    "name": "ExitNest",
+    "address": "S25:3BA4:114E"
+  },
+  "executed": 128,
+  "matched": 128,
+  "unmatched": 0,
+  "first_unmatched": null,
+  "domain": {
+    "count_requested": 128,
+    "theme_ticks": "controlled TickCount; 7199/7200 boundary",
+    "planes": [
+      2,
+      3
+    ],
+    "hole_map": "preexisting and generated entrances",
+    "ant_types": [
+      16,
+      96
+    ]
+  },
+  "native": {
+    "library_sha256": "49bf9ec7cf99269ad854c75232097090b7c7c659d13815f66ad861234682d064",
+    "build_command": [
+      "C:\\msys64\\mingw64\\bin\\gcc.exe",
+      "-std=c11",
+      "-O2",
+      "-Wall",
+      "-Wextra",
+      "-Werror",
+      "-shared",
+      "-I",
+      "D:\\Prog\\simant_recon\\portable\\game\\simulation",
+      "-I",
+      "D:\\Prog\\simant_recon\\portable\\game\\state",
+      "-I",
+      "D:\\Prog\\simant_recon\\portable\\tests\\yellow",
+      "D:\\Prog\\simant_recon\\portable\\tests\\yellow\\native_adapter.c",
+      "D:\\Prog\\simant_recon\\portable\\game\\simulation\\yellow.c",
+      "D:\\Prog\\simant_recon\\portable\\game\\simulation\\exit_nest.c",
+      "D:\\Prog\\simant_recon\\portable\\game\\simulation\\nest.c",
+      "D:\\Prog\\simant_recon\\portable\\game\\simulation\\ants.c",
+      "D:\\Prog\\simant_recon\\portable\\game\\simulation\\movement.c",
+      "D:\\Prog\\simant_recon\\portable\\game\\simulation\\rng.c",
+      "-o",
+      "D:\\Prog\\simant_recon\\build\\portable\\exit_nest.dll"
+    ],
+    "source_sha256": {
+      "portable/game/simulation/exit_nest.c": "655031367785995a18da834b190a7e40b052bbc9fc0e4fd1c77932678a040343",
+      "portable/game/simulation/exit_nest.h": "e97a6e7ad6c1e6e509266b30636c0f547f74c14ddd7dbe8aa99ea155d0ecef84",
+      "portable/game/simulation/nest.c": "551f8c7d968c6682e88939398a047bf3e282686e482af2f4dcddafc22dee334f",
+      "portable/game/simulation/ants.c": "a8c6f4258ce204ab1bd57f63e4d30446c617794329ba6a594b70ef38e667ecaa",
+      "portable/game/simulation/movement.c": "1e82fb8c81c30ffde31cc6970572731e07e67828de68c25851b5588f7f6fa699",
+      "portable/game/simulation/rng.c": "e8cd2b561f91fbb6cda7c07b9f7dbe5deca798869f31edc98178e37cdb19d589",
+      "portable/tests/yellow/native_adapter.c": "e35215090b178030c3bc8f51ac7b7fa49933f8555adc0bce9191234d3a81bf9e",
+      "portable/tests/yellow/run_exit_nest_diff.py": "75e0e674303926be386598b07bdc71f6dce438d706e7a502262be14b4d422b53"
+    }
+  },
+  "status": "PASS"
+}

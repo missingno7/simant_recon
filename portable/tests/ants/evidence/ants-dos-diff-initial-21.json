@@ -1,0 +1,506 @@
+{
+  "schema": "portable-ant-dos-diff-v1",
+  "oracle_sha256": "aa0596c6766322a8229ee3c36e57048c92adc82d50fbe2ef37afb8b85fcf4f11",
+  "original_execution_only": true,
+  "native_probe_sha256": "6b00ff6d5feeec05f4a976a3fc1477dea5cec1d899457b35e300a3f174aac5de",
+  "sources": {
+    "portable\\game\\simulation\\ants.c": "a8c6f4258ce204ab1bd57f63e4d30446c617794329ba6a594b70ef38e667ecaa",
+    "portable\\tests\\ants\\probe.c": "4d8d114bd4701bfd03efca1d4af6b44acd36d6adb62fd3f92570bcce58453c6a",
+    "portable\\tests\\ants\\run_dos_diff.py": "82582d1656ac778516feba564bcac03d1835907d27063299fd9090c5561220ec"
+  },
+  "prepared_pairs": {
+    "AddAntToAList": {
+      "function": "AddAntToAList",
+      "address": {
+        "unit": "root",
+        "seg": 3777,
+        "off": 1367,
+        "size": 125
+      },
+      "source": "src\\root\\m0EC1.c",
+      "source_sha256": "516121f3568fffaa6a6f17a0a87da5696dbb1e4db02cbcfa93ad5ad4497454cc",
+      "compiled_source_sha256": "516121f3568fffaa6a6f17a0a87da5696dbb1e4db02cbcfa93ad5ad4497454cc",
+      "object_sha256": "e57b15122526b0bebef4c369ce9a46b1d1f764829dbcd353958b51d5a3124f06",
+      "linked_code_sha256": "fd15171936a6bb42926071059d5e6b4d11327e482e571e3292e20ef7b413fcba",
+      "oracle_sha256": "aa0596c6766322a8229ee3c36e57048c92adc82d50fbe2ef37afb8b85fcf4f11",
+      "unicorn_version": "2.1.4",
+      "harness_sha256": "2c0799048057f59eae61a48be4d695278635594484adf0c70bf46c51b4e0c799",
+      "profile": "msc600ax",
+      "flags": [
+        "/AL",
+        "/Os",
+        "/Oe",
+        "/Og",
+        "/Zi"
+      ],
+      "manifest_sha256": "025a0a9255d910cae4b122ab5a3f3fb40888bb456d7fe42158db7c9e622fcf50"
+    },
+    "AddAntToBList": {
+      "function": "AddAntToBList",
+      "address": {
+        "unit": "root",
+        "seg": 3777,
+        "off": 1492,
+        "size": 125
+      },
+      "source": "src\\root\\m0EC1.c",
+      "source_sha256": "516121f3568fffaa6a6f17a0a87da5696dbb1e4db02cbcfa93ad5ad4497454cc",
+      "compiled_source_sha256": "516121f3568fffaa6a6f17a0a87da5696dbb1e4db02cbcfa93ad5ad4497454cc",
+      "object_sha256": "e57b15122526b0bebef4c369ce9a46b1d1f764829dbcd353958b51d5a3124f06",
+      "linked_code_sha256": "fd15171936a6bb42926071059d5e6b4d11327e482e571e3292e20ef7b413fcba",
+      "oracle_sha256": "aa0596c6766322a8229ee3c36e57048c92adc82d50fbe2ef37afb8b85fcf4f11",
+      "unicorn_version": "2.1.4",
+      "harness_sha256": "2c0799048057f59eae61a48be4d695278635594484adf0c70bf46c51b4e0c799",
+      "profile": "msc600ax",
+      "flags": [
+        "/AL",
+        "/Os",
+        "/Oe",
+        "/Og",
+        "/Zi"
+      ],
+      "manifest_sha256": "025a0a9255d910cae4b122ab5a3f3fb40888bb456d7fe42158db7c9e622fcf50"
+    },
+    "AddAntToRList": {
+      "function": "AddAntToRList",
+      "address": {
+        "unit": "root",
+        "seg": 3777,
+        "off": 1617,
+        "size": 125
+      },
+      "source": "src\\root\\m0EC1.c",
+      "source_sha256": "516121f3568fffaa6a6f17a0a87da5696dbb1e4db02cbcfa93ad5ad4497454cc",
+      "compiled_source_sha256": "516121f3568fffaa6a6f17a0a87da5696dbb1e4db02cbcfa93ad5ad4497454cc",
+      "object_sha256": "e57b15122526b0bebef4c369ce9a46b1d1f764829dbcd353958b51d5a3124f06",
+      "linked_code_sha256": "fd15171936a6bb42926071059d5e6b4d11327e482e571e3292e20ef7b413fcba",
+      "oracle_sha256": "aa0596c6766322a8229ee3c36e57048c92adc82d50fbe2ef37afb8b85fcf4f11",
+      "unicorn_version": "2.1.4",
+      "harness_sha256": "2c0799048057f59eae61a48be4d695278635594484adf0c70bf46c51b4e0c799",
+      "profile": "msc600ax",
+      "flags": [
+        "/AL",
+        "/Os",
+        "/Oe",
+        "/Og",
+        "/Zi"
+      ],
+      "manifest_sha256": "025a0a9255d910cae4b122ab5a3f3fb40888bb456d7fe42158db7c9e622fcf50"
+    }
+  },
+  "life_pair": {
+    "function": "SetMyLife",
+    "address": {
+      "unit": "root",
+      "seg": 4343,
+      "off": 2628,
+      "size": 138
+    },
+    "source": "src\\root\\m10F7.c",
+    "source_sha256": "a4cc271d57a4a80dd255953554a886026297b0560453c4b2c7b302b5878fff88",
+    "compiled_source_sha256": "a4cc271d57a4a80dd255953554a886026297b0560453c4b2c7b302b5878fff88",
+    "object_sha256": "aac7adfd26401804b87d288a924570531080839f0629e78cd116ffd50b08b4f8",
+    "linked_code_sha256": "21724da0f0ff60b6fb87c31063687707dca6b23e7580ecda2d75180ad8af9af4",
+    "oracle_sha256": "aa0596c6766322a8229ee3c36e57048c92adc82d50fbe2ef37afb8b85fcf4f11",
+    "unicorn_version": "2.1.4",
+    "harness_sha256": "2c0799048057f59eae61a48be4d695278635594484adf0c70bf46c51b4e0c799",
+    "profile": "msc600ax",
+    "flags": [
+      "/AL",
+      "/Os",
+      "/Oe",
+      "/Og",
+      "/Zi"
+    ],
+    "manifest_sha256": "025a0a9255d910cae4b122ab5a3f3fb40888bb456d7fe42158db7c9e622fcf50"
+  },
+  "health_pair": {
+    "function": "SetMyHealth",
+    "address": {
+      "unit": "root",
+      "seg": 4343,
+      "off": 7635,
+      "size": 158
+    },
+    "source": "src\\root\\m10F7.c",
+    "source_sha256": "a4cc271d57a4a80dd255953554a886026297b0560453c4b2c7b302b5878fff88",
+    "compiled_source_sha256": "a4cc271d57a4a80dd255953554a886026297b0560453c4b2c7b302b5878fff88",
+    "object_sha256": "aac7adfd26401804b87d288a924570531080839f0629e78cd116ffd50b08b4f8",
+    "linked_code_sha256": "21724da0f0ff60b6fb87c31063687707dca6b23e7580ecda2d75180ad8af9af4",
+    "oracle_sha256": "aa0596c6766322a8229ee3c36e57048c92adc82d50fbe2ef37afb8b85fcf4f11",
+    "unicorn_version": "2.1.4",
+    "harness_sha256": "2c0799048057f59eae61a48be4d695278635594484adf0c70bf46c51b4e0c799",
+    "profile": "msc600ax",
+    "flags": [
+      "/AL",
+      "/Os",
+      "/Oe",
+      "/Og",
+      "/Zi"
+    ],
+    "manifest_sha256": "025a0a9255d910cae4b122ab5a3f3fb40888bb456d7fe42158db7c9e622fcf50"
+  },
+  "native_build_command": [
+    "C:\\msys64\\mingw64\\bin\\gcc.exe",
+    "-std=c11",
+    "-O2",
+    "-Wall",
+    "-Wextra",
+    "-Werror",
+    "-shared",
+    "-I",
+    "D:\\Prog\\simant_recon\\portable",
+    "D:\\Prog\\simant_recon\\portable\\game\\simulation\\ants.c",
+    "D:\\Prog\\simant_recon\\portable\\tests\\ants\\probe.c",
+    "-o",
+    "D:\\Prog\\simant_recon\\build\\portable\\ants-probe.dll"
+  ],
+  "targets": {
+    "AddAntToAList/AddAntToBList/AddAntToRList": [
+      {
+        "case": "AddAntToAList/count-0/xy-0-0/type-81",
+        "expected": {
+          "count": "0100",
+          "AlistX": "00",
+          "AlistY": "00",
+          "AlistT": "81",
+          "AlistM": "03",
+          "AlistS": "78",
+          "life": "81"
+        },
+        "actual": {
+          "count": "0100",
+          "life": "81",
+          "AlistX": "00",
+          "AlistY": "00",
+          "AlistT": "81",
+          "AlistM": "03",
+          "AlistS": "78"
+        }
+      },
+      {
+        "case": "AddAntToAList/count-999/xy-127-63/type-40",
+        "expected": {
+          "count": "e803",
+          "AlistX": "7f",
+          "AlistY": "3f",
+          "AlistT": "40",
+          "AlistM": "09",
+          "AlistS": "00",
+          "life": "40"
+        },
+        "actual": {
+          "count": "e803",
+          "life": "40",
+          "AlistX": "7f",
+          "AlistY": "3f",
+          "AlistT": "40",
+          "AlistM": "09",
+          "AlistS": "00"
+        }
+      },
+      {
+        "case": "AddAntToAList/count-1000/xy-3-4/type-60",
+        "expected": {
+          "count": "e803"
+        },
+        "actual": {
+          "count": "e803"
+        }
+      },
+      {
+        "case": "AddAntToBList/count-0/xy-0-0/type-60",
+        "expected": {
+          "count": "0100",
+          "BlistX": "00",
+          "BlistY": "00",
+          "BlistT": "60",
+          "BlistM": "09",
+          "BlistS": "00",
+          "life": "60"
+        },
+        "actual": {
+          "count": "0100",
+          "life": "60",
+          "BlistX": "00",
+          "BlistY": "00",
+          "BlistT": "60",
+          "BlistM": "09",
+          "BlistS": "00"
+        }
+      },
+      {
+        "case": "AddAntToBList/count-499/xy-63-63/type-68",
+        "expected": {
+          "count": "f401",
+          "BlistX": "3f",
+          "BlistY": "3f",
+          "BlistT": "68",
+          "BlistM": "09",
+          "BlistS": "00",
+          "life": "68"
+        },
+        "actual": {
+          "count": "f401",
+          "life": "68",
+          "BlistX": "3f",
+          "BlistY": "3f",
+          "BlistT": "68",
+          "BlistM": "09",
+          "BlistS": "00"
+        }
+      },
+      {
+        "case": "AddAntToBList/count-500/xy-4-5/type-61",
+        "expected": {
+          "count": "f401"
+        },
+        "actual": {
+          "count": "f401"
+        }
+      },
+      {
+        "case": "AddAntToRList/count-0/xy-63-63/type-e0",
+        "expected": {
+          "count": "0100",
+          "RlistX": "3f",
+          "RlistY": "3f",
+          "RlistT": "e0",
+          "RlistM": "09",
+          "RlistS": "00",
+          "life": "e0"
+        },
+        "actual": {
+          "count": "0100",
+          "life": "e0",
+          "RlistX": "3f",
+          "RlistY": "3f",
+          "RlistT": "e0",
+          "RlistM": "09",
+          "RlistS": "00"
+        }
+      },
+      {
+        "case": "AddAntToRList/count-499/xy-0-0/type-e8",
+        "expected": {
+          "count": "f401",
+          "RlistX": "00",
+          "RlistY": "00",
+          "RlistT": "e8",
+          "RlistM": "09",
+          "RlistS": "00",
+          "life": "e8"
+        },
+        "actual": {
+          "count": "f401",
+          "life": "e8",
+          "RlistX": "00",
+          "RlistY": "00",
+          "RlistT": "e8",
+          "RlistM": "09",
+          "RlistS": "00"
+        }
+      },
+      {
+        "case": "AddAntToRList/count-500/xy-4-5/type-e1",
+        "expected": {
+          "count": "f401"
+        },
+        "actual": {
+          "count": "f401"
+        }
+      }
+    ],
+    "SetMyLife": [
+      {
+        "case": "SetMyLife/1/20/20/40/ff",
+        "expected": {
+          "MeLocX": "1400",
+          "MeLocY": "1400",
+          "MePlane": "0100",
+          "fd_50F6_04C2": "4000",
+          "fd_50F6_0496": "0200",
+          "life": "ff"
+        },
+        "actual": {
+          "MeLocX": "1400",
+          "MeLocY": "1400",
+          "MePlane": "0100",
+          "fd_50F6_04C2": "4000",
+          "fd_50F6_0496": "0200",
+          "life": "ff"
+        }
+      },
+      {
+        "case": "SetMyLife/1/20/20/60/ff",
+        "expected": {
+          "MeLocX": "1400",
+          "MeLocY": "1400",
+          "MePlane": "0100",
+          "fd_50F6_04C2": "6000",
+          "fd_50F6_0496": "0200",
+          "life": "ff",
+          "tail_life": "fe"
+        },
+        "actual": {
+          "MeLocX": "1400",
+          "MeLocY": "1400",
+          "MePlane": "0100",
+          "fd_50F6_04C2": "6000",
+          "fd_50F6_0496": "0200",
+          "life": "ff",
+          "tail_life": "fe"
+        }
+      },
+      {
+        "case": "SetMyLife/1/21/20/40/00",
+        "expected": {
+          "MeLocX": "f9ff",
+          "MeLocY": "f8ff",
+          "MePlane": "0300",
+          "fd_50F6_04C2": "2000",
+          "fd_50F6_0496": "0500",
+          "life": "00"
+        },
+        "actual": {
+          "MeLocX": "f9ff",
+          "MeLocY": "f8ff",
+          "MePlane": "0300",
+          "fd_50F6_04C2": "2000",
+          "fd_50F6_0496": "0500",
+          "life": "00"
+        }
+      },
+      {
+        "case": "SetMyLife/1/127/63/40/ff",
+        "expected": {
+          "MeLocX": "7f00",
+          "MeLocY": "3f00",
+          "MePlane": "0100",
+          "fd_50F6_04C2": "4000",
+          "fd_50F6_0496": "0000",
+          "life": "ff"
+        },
+        "actual": {
+          "MeLocX": "7f00",
+          "MeLocY": "3f00",
+          "MePlane": "0100",
+          "fd_50F6_04C2": "4000",
+          "fd_50F6_0496": "0000",
+          "life": "ff"
+        }
+      }
+    ],
+    "SetMyHealth": [
+      {
+        "case": "SetMyHealth/-1/50/0/1",
+        "expected": {
+          "MeHealth": "0000",
+          "fd_50F6_1044": "0100",
+          "fd_50F6_1006": "0100"
+        },
+        "actual": {
+          "MeHealth": "0000",
+          "fd_50F6_1044": "0100",
+          "fd_50F6_1006": "0100"
+        }
+      },
+      {
+        "case": "SetMyHealth/0/50/0/1",
+        "expected": {
+          "MeHealth": "0000",
+          "fd_50F6_1044": "0100",
+          "fd_50F6_1006": "0100"
+        },
+        "actual": {
+          "MeHealth": "0000",
+          "fd_50F6_1044": "0100",
+          "fd_50F6_1006": "0100"
+        }
+      },
+      {
+        "case": "SetMyHealth/9/0/0/1",
+        "expected": {
+          "MeHealth": "0900",
+          "fd_50F6_1044": "0100",
+          "fd_50F6_1006": "0000"
+        },
+        "actual": {
+          "MeHealth": "0900",
+          "fd_50F6_1044": "0100",
+          "fd_50F6_1006": "0000"
+        }
+      },
+      {
+        "case": "SetMyHealth/10/10/0/1",
+        "expected": {
+          "MeHealth": "0a00",
+          "fd_50F6_1044": "0100",
+          "fd_50F6_1006": "0000"
+        },
+        "actual": {
+          "MeHealth": "0a00",
+          "fd_50F6_1044": "0100",
+          "fd_50F6_1006": "0000"
+        }
+      },
+      {
+        "case": "SetMyHealth/50/50/0/1",
+        "expected": {
+          "MeHealth": "3200",
+          "fd_50F6_1044": "0100",
+          "fd_50F6_1006": "0000"
+        },
+        "actual": {
+          "MeHealth": "3200",
+          "fd_50F6_1044": "0100",
+          "fd_50F6_1006": "0000"
+        }
+      },
+      {
+        "case": "SetMyHealth/51/50/0/1",
+        "expected": {
+          "MeHealth": "3300",
+          "fd_50F6_1044": "0000",
+          "fd_50F6_1006": "0000"
+        },
+        "actual": {
+          "MeHealth": "3300",
+          "fd_50F6_1044": "0000",
+          "fd_50F6_1006": "0000"
+        }
+      },
+      {
+        "case": "SetMyHealth/101/50/0/1",
+        "expected": {
+          "MeHealth": "6400",
+          "fd_50F6_1044": "0000",
+          "fd_50F6_1006": "0000"
+        },
+        "actual": {
+          "MeHealth": "6400",
+          "fd_50F6_1044": "0000",
+          "fd_50F6_1006": "0000"
+        }
+      },
+      {
+        "case": "SetMyHealth/0/50/1/1",
+        "expected": {
+          "MeHealth": "6400",
+          "fd_50F6_1044": "0000",
+          "fd_50F6_1006": "0000"
+        },
+        "actual": {
+          "MeHealth": "6400",
+          "fd_50F6_1044": "0000",
+          "fd_50F6_1006": "0000"
+        }
+      }
+    ]
+  },
+  "case_count": 21,
+  "mismatches": [],
+  "coverage": "3 direct list-write targets at empty/last-slot/full counts with edge coordinates; player life on surface including queen tail, zero-life state retention, and far map edge; health clamp/threshold/forced-full boundaries.",
+  "limits": "Does not claim world-generation equivalence; list rebuild has native directed unit coverage, while randomized/map generation and unsupported-plane side effects are excluded.",
+  "status": "PASS"
+}

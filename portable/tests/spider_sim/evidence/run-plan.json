@@ -1,0 +1,23 @@
+{
+  "schema": "native-dos-spider-tick-run-plan-v1",
+  "target": "MoveSpider / f_0CDB_00B3",
+  "command": "python portable/tests/spider_sim/run_dos_diff.py --random-count 10134 --report build/portable/spider-tick-final-10146-v2.json",
+  "directed_case_count": 12,
+  "seeded_random_case_count": 10134,
+  "total_cases": 10146,
+  "random_seed": 215679155,
+  "report": "native-dos-movespider-10146.json",
+  "report_sha256": "4dcc7642b16ef321aa3a94dea2197234b74a8afec75467dbd8582c2e0f72cf0f",
+  "comparison": "original 16-bit DOS Machine execution versus native candidate; compares all spider/tick/world state, LifeA/MapA/ant type/ring history, RNG state, ordered logical host-boundary events, status and event overflow",
+  "modeled_boundaries": [
+    "o25_39C7_0CBD route return",
+    "myBeginSound",
+    "PictStrnDialog",
+    "YellowDeath",
+    "MoveMyLife",
+    "f_0BE8_0812",
+    "f_015B_06A2",
+    "DoLaserFire"
+  ],
+  "evidence_limits": "Modeled host callbacks are explicit contract boundaries; every other callable helper remains actual original DOS code in the original lane. This report is behavioral differential evidence, not a historic EXACT claim or registry registration."
+}

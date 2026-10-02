@@ -1,0 +1,59 @@
+{
+  "schema": "portable-scent-dos-diff-v1",
+  "oracle_execution": "original DOS only",
+  "runner_sha256": "d05413aff21efd2a094260f59671c842a9e4a2c272419927549ba29f5191fd1d",
+  "oracle_exe_sha256": "aa0596c6766322a8229ee3c36e57048c92adc82d50fbe2ef37afb8b85fcf4f11",
+  "harness_sha256": {
+    "behavior": "2c0799048057f59eae61a48be4d695278635594484adf0c70bf46c51b4e0c799",
+    "exe": "d560f69dcdf0d1c9e89278b50bebe225a9b86db2c259fa54ec9eace6ea05a8b5",
+    "functions": "0f67c8d9eb01e319620c9342e79c35f76006091d860894aad6dcf8d61ee2b39e",
+    "match": "44fdd8b939b2bbf135d8947d8f6ef6b1854dec133da4af86c55eb94f02869b56"
+  },
+  "native_source_sha256": {
+    "scent.c": "b444b46f7addbbfc30b79cec69af455d6c78088d74062fbb17024c15f2eb02df",
+    "scent.h": "befa9ac391e4bf5fe7b190ced2a283136b5e493d1fbba033d377f7193d3ef01e",
+    "native_probe.c": "7b73fdb74cb4221acf66aaee856327ebf0b83c43edefcbcd0cbb97fa6c88fd4e"
+  },
+  "unit_test_sha256": "a9849cd7ddc06ca248e90627dca77854d922374a1834b5dc338093aba4dedf82",
+  "native_library_sha256": "d1ab37679010360d2b02067ba2399b999b12c3c7bcc7233bb794e165900bf2cd",
+  "native_command": [
+    "C:\\msys64\\mingw64\\bin\\gcc.exe",
+    "-std=c11",
+    "-O2",
+    "-Wall",
+    "-Wextra",
+    "-Werror",
+    "-shared",
+    "-I",
+    "D:\\Prog\\simant_recon\\portable",
+    "D:\\Prog\\simant_recon\\portable\\game\\simulation\\scent.c",
+    "D:\\Prog\\simant_recon\\portable\\tests\\scent\\native_probe.c",
+    "-o",
+    "D:\\Prog\\simant_recon\\build\\portable\\scent-probe.dll"
+  ],
+  "case_count": 360,
+  "executed_count": 360,
+  "passed": 360,
+  "failures": [],
+  "coverage": {
+    "ColonySmellBN": 72,
+    "ColonySmellRN": 72,
+    "ColonySmellBT": 72,
+    "ColonySmellRT": 72,
+    "SmoothAlarm": 72
+  },
+  "input_seed_algorithm": "directed boundaries plus seed = 0x5CE17 + caseIndex*97",
+  "compared_state": [
+    "PherMapA",
+    "PherMapBN",
+    "PherMapBT",
+    "PherMapRN",
+    "PherMapRT",
+    "fd_3E1D_D89F untouched aux",
+    "fd_3E1D_C89F SmoothAlarm work"
+  ],
+  "services": {},
+  "limitations": [
+    "Tests the exact pheromone child bodies only; it does not claim full DoSmells dispatch, CompactList, FullCount, or history-window behavior."
+  ]
+}

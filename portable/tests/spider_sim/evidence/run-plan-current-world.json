@@ -1,0 +1,30 @@
+{
+  "schema": "native-dos-spider-tick-run-plan-v2",
+  "evidence_status": "current-world-source-stable",
+  "target": "MoveSpider / f_0CDB_00B3",
+  "command": "python portable/tests/spider_sim/evidence/run-pinned-current-world.py",
+  "directed_case_count": 12,
+  "seeded_random_case_count": 10134,
+  "total_cases": 10146,
+  "passed": 10146,
+  "seed": 215679155,
+  "report": "native-dos-movespider-10146-current-world.json",
+  "report_sha256": "73f9e75368ad754c69168dafdd790f715d9bedb824ade8a04c6504d92a8ba42b",
+  "receipt": "source-stability-receipt-current-world.json",
+  "receipt_sha256": "f4be1f2a8ea6ce529aebe3a870b5a3bc7515c066fa84e1c48780049c855ecbb0",
+  "producer": "run-pinned-current-world.py",
+  "producer_sha256": "4046b992640ac6c68b861c0be6a2be93a4439c723492628a7e0852a847a0fb06",
+  "world_header_sha256": "34d908a534fc720385c7f96fa80f0db2fac3ae83aef66c7bff0a08ba18b3a732",
+  "all_dependency_hashes_stable_during_run": true,
+  "modeled_boundaries": [
+    "o25_39C7_0CBD route return",
+    "myBeginSound",
+    "PictStrnDialog",
+    "YellowDeath",
+    "MoveMyLife",
+    "f_0BE8_0812",
+    "f_015B_06A2",
+    "DoLaserFire"
+  ],
+  "limit": "Modeled host callbacks are explicit boundaries. This is native differential behavior evidence, not a historical EXACT or registry claim."
+}

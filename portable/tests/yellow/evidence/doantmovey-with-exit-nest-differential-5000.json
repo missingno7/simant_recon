@@ -1,0 +1,76 @@
+{
+  "schema": "native-dos-doantmovey-differential-v1",
+  "oracle_sha256": "aa0596c6766322a8229ee3c36e57048c92adc82d50fbe2ef37afb8b85fcf4f11",
+  "historical_manifest_sha256": "025a0a9255d910cae4b122ab5a3f3fb40888bb456d7fe42158db7c9e622fcf50",
+  "target": {
+    "name": "DoAntMoveY",
+    "address": "S25:3BA4:0008"
+  },
+  "executed": 5000,
+  "matched": 5000,
+  "unmatched": 0,
+  "first_unmatched": null,
+  "unsupported_cases": [],
+  "domain": {
+    "count_requested": 5000,
+    "seed": 53322,
+    "movement_modes": [
+      0,
+      1,
+      2,
+      3,
+      4
+    ],
+    "planes": [
+      1,
+      2
+    ],
+    "fixture_description": "random valid obstacles/occupied Life maps; surface and B-nest planes"
+  },
+  "native": {
+    "library_sha256": "17dc06d033090cfc52bc1ba858eda5cb92d4ab94607f7c8be4037e9d27763d9c",
+    "build_command": [
+      "C:\\msys64\\mingw64\\bin\\gcc.exe",
+      "-std=c11",
+      "-O2",
+      "-Wall",
+      "-Wextra",
+      "-Werror",
+      "-shared",
+      "-I",
+      "D:\\Prog\\simant_recon\\portable\\game\\simulation",
+      "-I",
+      "D:\\Prog\\simant_recon\\portable\\game\\state",
+      "-I",
+      "D:\\Prog\\simant_recon\\portable\\tests\\yellow",
+      "D:\\Prog\\simant_recon\\portable\\tests\\yellow\\native_adapter.c",
+      "D:\\Prog\\simant_recon\\portable\\game\\simulation\\yellow.c",
+      "D:\\Prog\\simant_recon\\portable\\game\\simulation\\exit_nest.c",
+      "D:\\Prog\\simant_recon\\portable\\game\\simulation\\nest.c",
+      "D:\\Prog\\simant_recon\\portable\\game\\simulation\\ants.c",
+      "D:\\Prog\\simant_recon\\portable\\game\\simulation\\movement.c",
+      "D:\\Prog\\simant_recon\\portable\\game\\simulation\\rng.c",
+      "-o",
+      "D:\\Prog\\simant_recon\\build\\portable\\yellow.dll"
+    ],
+    "source_sha256": {
+      "portable/game/simulation/yellow.c": "3933b3a340e723cb87064c477fc9ee7abe47cb82e1493f489b663771d3188a4e",
+      "portable/game/simulation/yellow.h": "dc1d090fa61411b65d96203760d8124f6489a326fb92bc7ec90ac505f6825d51",
+      "portable/game/simulation/nest.c": "551f8c7d968c6682e88939398a047bf3e282686e482af2f4dcddafc22dee334f",
+      "portable/game/simulation/exit_nest.c": "655031367785995a18da834b190a7e40b052bbc9fc0e4fd1c77932678a040343",
+      "portable/game/simulation/exit_nest.h": "e97a6e7ad6c1e6e509266b30636c0f547f74c14ddd7dbe8aa99ea155d0ecef84",
+      "portable/game/simulation/movement.c": "1e82fb8c81c30ffde31cc6970572731e07e67828de68c25851b5588f7f6fa699",
+      "portable/game/simulation/ants.c": "a8c6f4258ce204ab1bd57f63e4d30446c617794329ba6a594b70ef38e667ecaa",
+      "portable/game/simulation/rng.c": "e8cd2b561f91fbb6cda7c07b9f7dbe5deca798869f31edc98178e37cdb19d589",
+      "portable/game/simulation/nest.h": "96c8c41c84d50e7b7ff8bbf981f21f21a8461e27fef398fdd7efb042567b54a5",
+      "portable/game/simulation/movement.h": "b20d81bc8b545f7929a5f9bc3367f8349782b7daaf876518a7c9df8abc0bc447",
+      "portable/game/simulation/ants.h": "b9c9566336de4e5000dc4e8b7a6ff37ee60dd1011ec8e02a6442f7ed4f90a386",
+      "portable/game/simulation/rng.h": "fc68a178bb200dbc211232c39b05bc237a57771854917da59ef2ce7f57046712",
+      "portable/game/state/world.h": "34d908a534fc720385c7f96fa80f0db2fac3ae83aef66c7bff0a08ba18b3a732",
+      "portable/tests/yellow/native_adapter.c": "e35215090b178030c3bc8f51ac7b7fa49933f8555adc0bce9191234d3a81bf9e",
+      "portable/tests/yellow/native_adapter.h": "d22802558b618bed37e7a6732427b4cb5936fa0265529eaa4f9893ea4ff0143e",
+      "portable/tests/yellow/run_dos_diff.py": "dbb62c2ea7f878d071f002555f47a1bd6df0ca7ddf56b1f181834c8cd5950986"
+    }
+  },
+  "status": "PASS"
+}

@@ -1,0 +1,129 @@
+{
+  "schema": "bios-bitmap-provider-original-glyph-v1",
+  "status": "DIAGNOSTIC_PASS_NO_HISTORICAL_ACCEPTANCE_CLAIM",
+  "oracle": {
+    "function": "f_1B4E_0110",
+    "address": {
+      "unit": "root",
+      "seg": 6990,
+      "off": 272,
+      "size": 75
+    },
+    "oracle_sha256": "aa0596c6766322a8229ee3c36e57048c92adc82d50fbe2ef37afb8b85fcf4f11",
+    "unicorn_version": "2.1.4",
+    "harness_sha256": "2c0799048057f59eae61a48be4d695278635594484adf0c70bf46c51b4e0c799"
+  },
+  "direct_oracle_call": "Original SIMANT.EXE f_1B4E_0110; g_9154 is intercepted only at its graphics callback boundary and its exact bitmap pointer/geometry are projected.",
+  "font_selection_source": "src/root/m24AB.c:f_24AB_02AD and src/S00/m31AD.asm:o00_31AD_166A/o00_31AD_168C",
+  "glyph_source_contract": "src/root/m1B4E.asm:f_1B4E_0110 uses byte offset character*height and forwards width then height to g_9154. The original callback is deliberately intercepted: the test proves table selection and byte forwarding, while the native provider contract interprets each row MSB-first.",
+  "fixture": {
+    "kind": "deterministic generated provider bytes, not ROM/game bytes",
+    "glyph_code": 165,
+    "heights": [
+      8,
+      14
+    ],
+    "table_formula": "((code*29 + row*71) ^ ((code >> (row%5))*11) ^ (0x81 >> (row%8))) & 0xff"
+  },
+  "cases": [
+    {
+      "font_id": 0,
+      "screen_width": 640,
+      "height": 14,
+      "dos_glyph_rows_sha256": "85005fb23092232f04a60ad26a0922941eed431f84d063e1aebaf4f5f0af47ed",
+      "native_pixel_fnv1a": "f53dfc94",
+      "status": "matched controlled provider contract"
+    },
+    {
+      "font_id": 1,
+      "screen_width": 640,
+      "height": 8,
+      "dos_glyph_rows_sha256": "618e5a49cb1b959830ffe7ea490a0d04f032647906d8ff10598e01dd10f16b27",
+      "native_pixel_fnv1a": "e10c1b55",
+      "status": "matched controlled provider contract"
+    },
+    {
+      "font_id": 0,
+      "screen_width": 320,
+      "height": 8,
+      "dos_glyph_rows_sha256": "618e5a49cb1b959830ffe7ea490a0d04f032647906d8ff10598e01dd10f16b27",
+      "native_pixel_fnv1a": "e10c1b55",
+      "status": "matched controlled provider contract"
+    },
+    {
+      "font_id": 1,
+      "screen_width": 320,
+      "height": 14,
+      "dos_glyph_rows_sha256": "85005fb23092232f04a60ad26a0922941eed431f84d063e1aebaf4f5f0af47ed",
+      "native_pixel_fnv1a": "f53dfc94",
+      "status": "matched controlled provider contract"
+    }
+  ],
+  "negative_control": {
+    "wrong_row_order": "reversed 8x14 glyph differs from original selected row sequence"
+  },
+  "native_stdout": "font_id=0 screen_width=640 glyph_height=14 raster_contract=pass pixel_fnv1a=f53dfc94 glyph_rows=273edc4aab07df60b41e4028ce94\nfont_id=1 screen_width=640 glyph_height=8 raster_contract=pass pixel_fnv1a=e10c1b55 glyph_rows=273edc4aab07df60\nfont_id=0 screen_width=320 glyph_height=8 raster_contract=pass pixel_fnv1a=e10c1b55 glyph_rows=273edc4aab07df60\nfont_id=1 screen_width=320 glyph_height=14 raster_contract=pass pixel_fnv1a=f53dfc94 glyph_rows=273edc4aab07df60b41e4028ce94\nmalformed_provider=explicitly_unsupported",
+  "host_reference_limit": "This proves the provider layout/selection and glyph bit interpretation for controlled bytes. g_9154 is a modeled graphics boundary, so the test does not establish physical DOS display pixels. It also does not establish that any real BIOS ROM or DOSBox font is historical SIMANT display output.",
+  "producer": {
+    "path": "portable\\tests\\windows\\render\\evidence\\bios_font_provider_dos_diff.py",
+    "sha256": "a61c9a1560d5b1f97e3505685b4fd7d198b204dca37193416100cefc2f6315fe"
+  },
+  "input_sha256": {
+    "portable/tests/windows/render/test_bios_font_provider.c": "cc52841af9209e860d41b1fde4ce105f0544b1bf60f3fe79dcf1817ae4818a85",
+    "portable/ui_model/windows/render.c": "54e7619f35f6ee0d83910758796215e4dc2d56e08a6b3701ef3e5bf457d888fd",
+    "portable/ui_model/windows/window.c": "172517766211101ef3bd7b2f32ef2438c30b9b9dc6a58419a0df7b0e30c413fc",
+    "portable/game/resources/database.c": "de237a7b134c1d938a334f504a5f9abb9f10f3da33ee931ef58d3dfca3c708aa",
+    "portable/render/bitmap.c": "72639d1f51aeb766e6752270143f881578b1172c1c120b6da81a9ceba18729b5",
+    "portable/render/font.c": "8519b5a26de76a4f13a70e5bd1b25762151148ba6acfcddf10271c78617bbb5e",
+    "portable/render/primitives.c": "46f440ab374b1a83ba1f402c40cf9af73d88ca862ae747e786ee8b99b8e67df0",
+    "portable/ui_model/windows/render.h": "625c1baa4eb489e6dae9804ad842fa0855b36810e8efb271de28d8a52515090f",
+    "portable/ui_model/windows/window.h": "a0375187333f24e898103c8dc222ffbe80037a983f3c73177e6ec8e735311a24",
+    "portable/game/resources/database.h": "3b62dd145abf89a1eb88b93fa41830ed454de2cbe493718edfb9b57da75b1272",
+    "portable/render/bitmap.h": "7f60c27ea7b230207c898c155e581764935e799f7ecc7d476bd24a8425dc3de5",
+    "portable/render/font.h": "19e144d04cf61144cab723fca05ca881c6842e4e671130bbcc3aa90b49e15582",
+    "portable/render/primitives.h": "19e705578695c72e281322b75772bd031f37c1bb82dc3857fa990aa23dfdd1f0",
+    "src/S00/m31AD.asm": "5d2ad69ff4affb4be4242e82187065cc5e0b3502cc0cc3e00ad3802ccee2656e",
+    "src/root/m1B4E.asm": "a32d75d2d4ea36980b659d26e9ddd86bcde65d9e250ebac4cdc29c0e847c67a2",
+    "src/root/m1FBD.asm": "5e32f1c409a2fc20cb7bba200a3d2fd11e43edc0b7e2b8781ca91415a1a43417",
+    "src/root/m24AB.c": "1d263c6e1f242981d7c3e37d839dc481dc75deed45d7d1bcaaa075cad124de7f",
+    "tools/behavior.py": "2c0799048057f59eae61a48be4d695278635594484adf0c70bf46c51b4e0c799",
+    "tools/exe.py": "d560f69dcdf0d1c9e89278b50bebe225a9b86db2c259fa54ec9eace6ea05a8b5",
+    "tools/functions.py": "0f67c8d9eb01e319620c9342e79c35f76006091d860894aad6dcf8d61ee2b39e",
+    "tools/match.py": "44fdd8b939b2bbf135d8947d8f6ef6b1854dec133da4af86c55eb94f02869b56",
+    "tools/modctx.py": "33f3a4e3d77371e3095bfeb00358c13bc7838235c27bfe8898dba7e313f1cc25",
+    "tools/symbols.py": "e3f25fb66717f743dea126e56b5b44538d452fb5a2d52695ef27cb5069bc1793",
+    "tools/behavior_suites/tutorial_menu.py": "7043a99e654807271bb186442b8105f63d05f50bf18174726ee7a9e47343e172",
+    "layout/oracle.lock.json": "2c6d9e98c688621ad49a08c78d0e0968f4076b036be56ec0738217b533ccde13",
+    "assets/SIMANT.EXE": "aa0596c6766322a8229ee3c36e57048c92adc82d50fbe2ef37afb8b85fcf4f11"
+  },
+  "build": {
+    "command": [
+      "gcc",
+      "-std=c11",
+      "-O2",
+      "-Wall",
+      "-Wextra",
+      "-Werror",
+      "-Iportable",
+      "portable/tests/windows/render/test_bios_font_provider.c",
+      "portable/ui_model/windows/render.c",
+      "portable/ui_model/windows/window.c",
+      "portable/game/resources/database.c",
+      "portable/render/bitmap.c",
+      "portable/render/font.c",
+      "portable/render/primitives.c",
+      "-o",
+      "D:\\Prog\\simant_recon\\build\\workers\\behavior_tutorial_menu\\bios_font_provider_contract.exe"
+    ],
+    "compiler": "gcc",
+    "flags": [
+      "-std=c11",
+      "-O2",
+      "-Wall",
+      "-Wextra",
+      "-Werror",
+      "-Iportable"
+    ],
+    "native_test_stdout": "font_id=0 screen_width=640 glyph_height=14 raster_contract=pass pixel_fnv1a=f53dfc94 glyph_rows=273edc4aab07df60b41e4028ce94\nfont_id=1 screen_width=640 glyph_height=8 raster_contract=pass pixel_fnv1a=e10c1b55 glyph_rows=273edc4aab07df60\nfont_id=0 screen_width=320 glyph_height=8 raster_contract=pass pixel_fnv1a=e10c1b55 glyph_rows=273edc4aab07df60\nfont_id=1 screen_width=320 glyph_height=14 raster_contract=pass pixel_fnv1a=f53dfc94 glyph_rows=273edc4aab07df60b41e4028ce94\nmalformed_provider=explicitly_unsupported"
+  }
+}

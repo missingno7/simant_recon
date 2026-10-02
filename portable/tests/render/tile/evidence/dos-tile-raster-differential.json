@@ -1,0 +1,34 @@
+{
+  "schema": "portable-kind9-life-dos-differential-v1",
+  "status": "DIAGNOSTIC_PASS_NORMALIZED_READBACK_ONLY",
+  "function": "o00_31AD_2B1A",
+  "cases": 140,
+  "random_cases": 128,
+  "actual_resource_samples": [
+    "resource-15-frame-0",
+    "resource-15-frame-127",
+    "resource-16-frame-0",
+    "resource-16-frame-127",
+    "resource-17-frame-0",
+    "resource-17-frame-127",
+    "resource-18-frame-0",
+    "resource-18-frame-127",
+    "resource-19-frame-0",
+    "resource-19-frame-127",
+    "resource-20-frame-0",
+    "resource-20-frame-127"
+  ],
+  "mismatch_count": 0,
+  "first_mismatches": [],
+  "oracle_exe_sha256": "aa0596c6766322a8229ee3c36e57048c92adc82d50fbe2ef37afb8b85fcf4f11",
+  "ground_raw_contract": "128 bytes, 16 rows of four two-byte EGA planes",
+  "life_raw_contract": "160 bytes, 16 rows of one mask and four two-byte EGA planes",
+  "compared_effect": "all 128 bytes written to g_3D20",
+  "excluded_effects": [
+    "physical EGA read-map device behavior",
+    "tile atlas address calculation/placement",
+    "_o00_31AD_2FDA screen blit and clipping"
+  ],
+  "unicorn_version": "2.1.4",
+  "portable_sha256": "ca512817b06410da30e5eb1e8d1324cd281396359f181f9c34a4c2808e939cb9"
+}

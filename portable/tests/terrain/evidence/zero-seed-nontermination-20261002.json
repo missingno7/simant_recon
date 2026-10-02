@@ -1,0 +1,11 @@
+{
+  "schema": "portable-terrain-diagnostic-v1",
+  "classification": "ORIGINAL_DOS_NONTERMINATION_INPUT_EDGE",
+  "input": {"seed": 0, "x": 11, "y": 8, "initial_terrain_sets": [0, 1, 2]},
+  "oracle_execution": "all three original executions exceeded the documented behavior instruction/block budget; no native comparison was made for these rows",
+  "observed_pcs": ["root:0AD9:0031", "root:0093:0148"],
+  "source_path": ["MakeMap(11,8)", "MakeYardPatch", "InitPillar", "InitSow", "SRand1"],
+  "reason": "S-RNG seed zero is a fixed point: SRand1(128), SRand1(64), and SRand1(8) always return zero. InitSow places the first sow at MapA[0][0], changes that cell to SowTab[0] (0x72), then repeatedly samples (0,0) for the next sow. The source loop only decrements its index when MapA[x][y] < 16, so it cannot finish.",
+  "source_files": {"InitSow": "src/root/m0AD9.c", "S-RNG": "src/root/m0093.c", "MakeMap": "src/S18/m384C.c"},
+  "report": "terrain-dos-diff-953-20261002.json"
+}

@@ -1,0 +1,347 @@
+{
+  "schema": "portable-population-dos-diff-v1",
+  "target": "CountAnts",
+  "identity": {
+    "function": "CountAnts",
+    "address": {
+      "unit": "root",
+      "seg": 3048,
+      "off": 2,
+      "size": 909
+    },
+    "source": "src\\root\\m0BE8.c",
+    "source_sha256": "42664e07331fbba4cc257f1e49e03dff5e93deddb764d33101ad0f454a9377d7",
+    "compiled_source_sha256": "42664e07331fbba4cc257f1e49e03dff5e93deddb764d33101ad0f454a9377d7",
+    "object_sha256": "2bd81d3d0124063b18c78637c7e9ee5186c0423b0f6ec3a47b40f66a2546c8f9",
+    "linked_code_sha256": "ee106d9abed3b8dc5baff8aff78b8637ada7fd230a358d0b388175b154e48d73",
+    "oracle_sha256": "aa0596c6766322a8229ee3c36e57048c92adc82d50fbe2ef37afb8b85fcf4f11",
+    "unicorn_version": "2.1.4",
+    "harness_sha256": "2c0799048057f59eae61a48be4d695278635594484adf0c70bf46c51b4e0c799",
+    "profile": "msc600ax",
+    "flags": [
+      "/AL",
+      "/Os",
+      "/Oe",
+      "/Og"
+    ],
+    "manifest_sha256": "025a0a9255d910cae4b122ab5a3f3fb40888bb456d7fe42158db7c9e622fcf50"
+  },
+  "oracle_sha256": "aa0596c6766322a8229ee3c36e57048c92adc82d50fbe2ef37afb8b85fcf4f11",
+  "seed_storage": {
+    "module": "root:0093",
+    "placement": {
+      "seg": 21939,
+      "off": 35746,
+      "size": 2
+    },
+    "meaning": "the module's sole 2-byte _BSS item, static SRand1 seed"
+  },
+  "callbacks": "CountAnts and SRand1 execute as original DOS code; only myBeginSong and o14_384C_0B6A are explicit captured host-boundary callbacks.",
+  "callback_limits": "Captured callback arguments/order are compared; sound playback and modal report presentation are not executed.",
+  "native_build_command": [
+    "C:\\msys64\\mingw64\\bin\\gcc.exe",
+    "-std=c11",
+    "-O2",
+    "-Wall",
+    "-Wextra",
+    "-Werror",
+    "-shared",
+    "-I",
+    "D:\\Prog\\simant_recon\\portable",
+    "D:\\Prog\\simant_recon\\portable\\game\\simulation\\population.c",
+    "D:\\Prog\\simant_recon\\portable\\game\\simulation\\rng.c",
+    "D:\\Prog\\simant_recon\\portable\\tests\\population\\probe.c",
+    "-o",
+    "D:\\Prog\\simant_recon\\build\\portable\\population-probe.dll"
+  ],
+  "native_compiler": "gcc.exe (Rev10, Built by MSYS2 project) 12.2.0",
+  "pinned_sources": {
+    "portable\\game\\simulation\\population.c": "e8291c1dc50bfdb343bb0067a096a56e3a03cdbbb0ff877b2032b2ee8b66f612",
+    "portable\\game\\simulation\\population.h": "3c46e7044c512295aaf9c5d8c8a1e819e9dec1efdfc69ceef34d42b7a548a325",
+    "portable\\tests\\population\\probe.c": "0fa6352533ecb4f722d4f29022cbfcb16e05202e89f4f6fd6b1c87187b0e6abd",
+    "portable\\tests\\population\\run_dos_diff.py": "0cbf11c2ab894a3b2a41979d8bc1f137bd206985b40de12534b5685ad255cce7",
+    "portable\\game\\simulation\\rng.c": "e8cd2b561f91fbb6cda7c07b9f7dbe5deca798869f31edc98178e37cdb19d589",
+    "portable\\game\\state\\world.h": "34d908a534fc720385c7f96fa80f0db2fac3ae83aef66c7bff0a08ba18b3a732",
+    "src\\root\\m0BE8.c": "42664e07331fbba4cc257f1e49e03dff5e93deddb764d33101ad0f454a9377d7",
+    "src\\root\\m0093.c": "dd5a593457dd72297e41dabef1e00e0be2fbca53d7586adc2c47812e960297af",
+    "layout\\manifest.json": "025a0a9255d910cae4b122ab5a3f3fb40888bb456d7fe42158db7c9e622fcf50"
+  },
+  "cases": [
+    {
+      "case": "all-bins-player-normal-newgame",
+      "mismatches": [],
+      "events": [],
+      "native_events": [],
+      "expected_effect_count": 0,
+      "oracle_callback_count": 0
+    },
+    {
+      "case": "player-death-plane-and-mode-gate",
+      "mismatches": [],
+      "events": [],
+      "native_events": [],
+      "expected_effect_count": 0,
+      "oracle_callback_count": 0
+    },
+    {
+      "case": "both-queen-loss-tutorial-order",
+      "mismatches": [],
+      "events": [
+        [
+          1,
+          [
+            11020,
+            126,
+            0
+          ]
+        ],
+        [
+          2,
+          [
+            0,
+            10010,
+            1
+          ]
+        ],
+        [
+          2,
+          [
+            0,
+            10011,
+            1
+          ]
+        ],
+        [
+          1,
+          [
+            11021,
+            126,
+            0
+          ]
+        ],
+        [
+          2,
+          [
+            0,
+            10012,
+            1
+          ]
+        ],
+        [
+          2,
+          [
+            0,
+            10013,
+            1
+          ]
+        ]
+      ],
+      "native_events": [
+        [
+          1,
+          [
+            11020,
+            126,
+            0
+          ]
+        ],
+        [
+          2,
+          [
+            0,
+            10010,
+            1
+          ]
+        ],
+        [
+          2,
+          [
+            0,
+            10011,
+            1
+          ]
+        ],
+        [
+          1,
+          [
+            11021,
+            126,
+            0
+          ]
+        ],
+        [
+          2,
+          [
+            0,
+            10012,
+            1
+          ]
+        ],
+        [
+          2,
+          [
+            0,
+            10013,
+            1
+          ]
+        ]
+      ],
+      "expected_effect_count": 6,
+      "oracle_callback_count": 6
+    },
+    {
+      "case": "red-queen-loss-scenario-two-graph",
+      "mismatches": [],
+      "events": [
+        [
+          1,
+          [
+            11021,
+            126,
+            0
+          ]
+        ],
+        [
+          2,
+          [
+            0,
+            10012,
+            1
+          ]
+        ]
+      ],
+      "native_events": [
+        [
+          1,
+          [
+            11021,
+            126,
+            0
+          ]
+        ],
+        [
+          2,
+          [
+            0,
+            10012,
+            1
+          ]
+        ]
+      ],
+      "expected_effect_count": 2,
+      "oracle_callback_count": 2
+    },
+    {
+      "case": "red-queen-loss-without-graph-gates",
+      "mismatches": [],
+      "events": [
+        [
+          1,
+          [
+            11021,
+            126,
+            0
+          ]
+        ],
+        [
+          2,
+          [
+            0,
+            10012,
+            1
+          ]
+        ]
+      ],
+      "native_events": [
+        [
+          1,
+          [
+            11021,
+            126,
+            0
+          ]
+        ],
+        [
+          2,
+          [
+            0,
+            10012,
+            1
+          ]
+        ]
+      ],
+      "expected_effect_count": 2,
+      "oracle_callback_count": 2
+    },
+    {
+      "case": "red-queen-loss-scenario-one",
+      "mismatches": [],
+      "events": [
+        [
+          1,
+          [
+            11021,
+            126,
+            0
+          ]
+        ],
+        [
+          2,
+          [
+            0,
+            10012,
+            1
+          ]
+        ],
+        [
+          2,
+          [
+            0,
+            10013,
+            1
+          ]
+        ]
+      ],
+      "native_events": [
+        [
+          1,
+          [
+            11021,
+            126,
+            0
+          ]
+        ],
+        [
+          2,
+          [
+            0,
+            10012,
+            1
+          ]
+        ],
+        [
+          2,
+          [
+            0,
+            10013,
+            1
+          ]
+        ]
+      ],
+      "expected_effect_count": 3,
+      "oracle_callback_count": 3
+    },
+    {
+      "case": "black-loss-no-previous-queen",
+      "mismatches": [],
+      "events": [],
+      "native_events": [],
+      "expected_effect_count": 0,
+      "oracle_callback_count": 0
+    }
+  ],
+  "case_count": 7,
+  "mismatch_count": 0,
+  "status": "PASS",
+  "coverage": "32 raw caste bins across lists and player state; new-game flag 0354 suppressing prior-queen loss; black/red ordered queen-loss music/report/selection callbacks; scenario-two graph gates, real SRand1 seed mutation, and lifetime graph cell write."
+}

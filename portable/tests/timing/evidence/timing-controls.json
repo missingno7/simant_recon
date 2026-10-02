@@ -1,0 +1,66 @@
+{
+  "schema": "portable-source-timing-controls-v1",
+  "status": "bounded-controls-pass",
+  "test": "portable/tests/timing/test_timing.c",
+  "compile_command": "C:/msys64/mingw64/bin/gcc.exe -std=c11 -O2 -Wall -Wextra -Werror -I portable/game -I portable/game/state portable/game/timing.c portable/tests/timing/test_timing.c",
+  "result": "timing tests passed",
+  "source_facts": {
+    "tick_count": "m1B73.asm TickCount reads a 32-bit counter incremented by INT 08h only while tick_count_on is set.",
+    "mac_tick_count": "m00F8.c returns TickCount()*3.",
+    "audio_timer_setup": "m277E.c calls f_28BC_046B/0488(0xD6,0x132). m28BC.asm programs PIT divisor 214 and chains the prior INT 08h handler once per 306 mixer IRQs.",
+    "audio_interval_pit_clocks": 65484,
+    "restore": "f_28BC_04E0(0) restores the prior INT 08h vector and programs PIT divisor zero, modeled as 65536 input clocks per interrupt.",
+    "main_deadline": "m15F8.c reads MacTickCount, adds speed delay only if DoAntSim runs, and pumps events until MacTickCount reaches that deadline. Speed 3 updates presentation/windows once every four loop iterations.",
+    "speed_data": "d3D57.c stores speed selector followed by signed delay values [21,7,0,-1] in MacTickCount units.",
+    "game_pause": "S11 SetPause only changes fd_50F6_047E/mode UI; TickCount continues. The separate timer counter enable flag is in m1B73.asm."
+  },
+  "nominal_platform_assumption": {
+    "pit_input_hz_numerator": 14318180,
+    "pit_input_hz_denominator": 12,
+    "description": "Nominal PC PIT crystal ratio supplied by host adapter; not exact physical-frequency evidence from game source. The rational 14318180/12 input avoids rounding drift in accumulation."
+  },
+  "derived_nominal_rates": {
+    "audio_tick_count_hz": "3579545/196452",
+    "audio_mac_tick_count_hz": "3579545/65484",
+    "bios_restored_tick_count_hz": "3579545/196608"
+  },
+  "controls": [
+    {
+      "name": "audio-rational-positive",
+      "assertion": "ten audio source intervals yield ten TickCount increments and thirty MacTickCount units; split elapsed-nanosecond updates preserve exact remainder"
+    },
+    {
+      "name": "deadline-and-refresh",
+      "assertion": "source delays, speed changes, multi-deadline backlog, wrap-safe deadlines, and speed-3 presentation cadence; no SDL calls"
+    },
+    {
+      "name": "invalid-config",
+      "assertion": "zero input rate and zero old-handler chain interval rejected"
+    },
+    {
+      "name": "pause-separation",
+      "assertion": "game pause suppresses simulation, pause exception permits it, and TickCount remains independent; explicit TickCount disable freezes counter only"
+    },
+    {
+      "name": "restored-bios-negative-contrast",
+      "assertion": "over a bounded time equal to two audio intervals, audio timer yields 2 ticks while BIOS-divisor timer yields 1; catches a fixed nominal-18.2Hz model"
+    },
+    {
+      "name": "timer-reprogram-continuity",
+      "assertion": "reconfiguring timer preserves TickCount while resetting fractional source phase"
+    }
+  ],
+  "source_hashes": {
+    "portable/game/timing.c": "90fddb1eed99a3511fecad98ff26fc147529246a3d0ff2c930420942d38cab91",
+    "portable/game/timing.h": "4a5d00305f858509ed117dd91471c8fba6944c92b77eddc00bb00cb56d36fedd",
+    "portable/tests/timing/test_timing.c": "0ed9f8eef7d96365130be4f3c009db6be831a06901e326cc4ed3c476ad6eff54",
+    "portable/tests/timing/README.md": "ec1888b78710e6af357e4488ee1d58d850a5a998142827ed34da4a2f08ffd247",
+    "src/root/m00F8.c": "4ee148ec616e199f61b671df89da8a21f1789c4177d3dbc7b76a478acb98184a",
+    "src/root/m1B73.asm": "3097a6b03ff1d8bdfa7d573632d9905de88d754c8b1e047de4014c4f186cb848",
+    "src/root/m28BC.asm": "361f33c1d86502fef4d43559cb7f424e350eee3fe8a31881ed3c21b4d865f7a5",
+    "src/root/m277E.c": "4e928689c743f473c5a007bbbbb5287cdf8728d12e9cae5652b1cb55debf09ee",
+    "src/root/m15F8.c": "d6d4daddab943ee3436ca0e9c8dbc866a9d67659f7448f3c307f858abe06b70a",
+    "src/data/d3D57.c": "983251ad55176050efcdea33c62f0a34a93686474b0de4b2bdde6c6c808716f5",
+    "src/S11/m35F5.c": "39b6df453387ee12a16dd07313e12cbe29a598eb1441011c03c6d33cba576ec8"
+  }
+}

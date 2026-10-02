@@ -1,0 +1,8519 @@
+{
+  "schema": "portable-map-logical-diff-v1",
+  "target": "root:m0250:f_0250_1018",
+  "identity": {
+    "function": "f_0250_1018",
+    "address": {
+      "unit": "root",
+      "seg": 592,
+      "off": 4120,
+      "size": 646
+    },
+    "source": "src\\root\\m0250.c",
+    "source_sha256": "bb8a325c543151e09cb173d2194844877805a9e1058d3b24362ff5a7cbd9f61b",
+    "compiled_source_sha256": "b178b9383c485fbd4f601a446a98115497f7d30ad8a5517636d1435b8b80cade",
+    "object_sha256": "87ab4dee75073f9c7951d2cd6a71eb81a000396562d501571a1d80167af241d7",
+    "linked_code_sha256": "e54490818026c5883025c674710b4faf0bf9114a8d1c5943df96f733c17c660c",
+    "oracle_sha256": "aa0596c6766322a8229ee3c36e57048c92adc82d50fbe2ef37afb8b85fcf4f11",
+    "unicorn_version": "2.1.4",
+    "harness_sha256": "2c0799048057f59eae61a48be4d695278635594484adf0c70bf46c51b4e0c799",
+    "profile": "msc600ax",
+    "flags": [
+      "/AL",
+      "/Os",
+      "/Oe",
+      "/Og",
+      "/Zi"
+    ],
+    "manifest_sha256": "025a0a9255d910cae4b122ab5a3f3fb40888bb456d7fe42158db7c9e622fcf50"
+  },
+  "native_build_command": [
+    "C:\\msys64\\mingw64\\bin\\gcc.exe",
+    "-std=c11",
+    "-O2",
+    "-Wall",
+    "-Wextra",
+    "-Werror",
+    "-shared",
+    "-I",
+    "D:\\Prog\\simant_recon\\portable",
+    "D:\\Prog\\simant_recon\\portable\\game\\render\\map.c",
+    "D:\\Prog\\simant_recon\\portable\\render\\tile_raster.c",
+    "D:\\Prog\\simant_recon\\portable\\render\\primitives.c",
+    "D:\\Prog\\simant_recon\\portable\\tests\\map\\probe.c",
+    "-o",
+    "D:\\Prog\\simant_recon\\build\\portable\\map-probe.dll"
+  ],
+  "native_compiler": "gcc.exe (Rev10, Built by MSYS2 project) 12.2.0",
+  "pinned_sources": {
+    "portable\\game\\render\\map.c": "2e63e618901420c8d1267d661eef7c484d53addf7ab539f1337dfd9c54c967cb",
+    "portable\\game\\render\\map.h": "16e917bc0df82a3189a9f4336c8fffceed3bcd7a9782bdb3b8b9e03322239e0c",
+    "portable\\render\\tile_raster.c": "ca512817b06410da30e5eb1e8d1324cd281396359f181f9c34a4c2808e939cb9",
+    "portable\\render\\tile_raster.h": "5875ff0846d0ad1e78655239f9d5045b5c78861663b486c83f227a0c9b7e77e9",
+    "portable\\render\\primitives.c": "46f440ab374b1a83ba1f402c40cf9af73d88ca862ae747e786ee8b99b8e67df0",
+    "portable\\tests\\map\\probe.c": "a1417ccadcf8350feb8510e67c7ae63ccb1817f388571b02d2b472cb6e31ebed",
+    "portable\\tests\\map\\test_map.c": "51da6c82ae1a54c16c97939812953e7ea4e0d18e06551fd4f7d9fc5a3f89223b",
+    "portable\\tests\\render\\tile\\test_tile_raster.c": "7f08660d28e46ab10f4d22ac58cf218f0f6a7309b9923bdf4ccb8249babd6bff",
+    "portable\\tests\\map\\run_dos_diff.py": "c5d9cc354281d4f4e3136e2c6864133e8140f927478f26ce0a6ab4465ff4231f",
+    "src\\root\\m0250.c": "bb8a325c543151e09cb173d2194844877805a9e1058d3b24362ff5a7cbd9f61b",
+    "src\\S00\\m31AD.asm": "5d2ad69ff4affb4be4242e82187065cc5e0b3502cc0cc3e00ad3802ccee2656e",
+    "src\\S00\\m31AD_2AB4.asm": "3ef3979a3c35e9e36c4ddc48408bc4cac601ad26f4728e044012a489f831fd55",
+    "portable\\tests\\render\\tile\\evidence\\dos-tile-raster-differential.json": "bacc7342ee74fad8114db15d98fc0b0f6e80aca8e16e45fa5f7732e5fcf43ee6",
+    "portable\\tests\\resources\\evidence\\tile-layout-positive.json": "0dc140bf44ae0b6b53b0ae22e67f1fe698a5af844a4d5a8fb3f1cc2b9aa7a35a",
+    "portable\\game\\state\\world.h": "1b4ab00db5a818bc8e561b9b82aec933dc5b5b16903e499e829893058c045ada",
+    "portable\\game\\simulation\\movement.h": "b20d81bc8b545f7929a5f9bc3367f8349782b7daaf876518a7c9df8abc0bc447",
+    "portable\\game\\resources\\tiles.c": "a8b4a122af58e604da8694d20e619acfb6986a91d3b1a95020f3884ae3c3782b",
+    "portable\\game\\resources\\tiles.h": "e17c9c705355072ade17676e27c1dd8739d0732eabb8d079f6541ac33905c0d1",
+    "portable\\tests\\resources\\evidence\\tile-layout-review.json": "fc26e2c8a5858cbb347e4c8773911ecd689dbbde00b620031ee9ba6b69b4e9c8",
+    "portable\\tests\\resources\\ASSET_SHA256.md": "856db37d557539f4598ab21efe73a4fe9361c3da6809e21182fb3ce29aa7afd4",
+    "layout\\manifest.json": "025a0a9255d910cae4b122ab5a3f3fb40888bb456d7fe42158db7c9e622fcf50"
+  },
+  "callbacks": "The logical differential compares f_0250_1018 output globals g_94E4/g_9126. Pixel drawing uses the source-derived tile/life decoders and indexed framebuffer; no physical VGA device or DOS clipping path is emulated.",
+  "coverage": "Four MapPlane values; surface and both nest map/life grids; source scent selectors 0..4 plus invalid/default fallback; life 0, ordinary, FE, FF; all four camera-wrap planes; 128 seeded randomized source-valid cells. Native raster tests cover indexed tile/life composition and surface/nest EMS page routing.",
+  "cases": [
+    {
+      "case": "direct/p0/l00/s0",
+      "input": {
+        "plane": 0,
+        "x": 63,
+        "y": 63,
+        "scent": 0,
+        "tile": 114,
+        "life": 0,
+        "pheromone": 0,
+        "anim": [
+          3,
+          5,
+          7,
+          4
+        ]
+      },
+      "mismatches": [],
+      "expected": {
+        "tile": 114,
+        "life": 0,
+        "map_xy": [
+          63,
+          63
+        ]
+      },
+      "dos": {
+        "tile": 114,
+        "life": 0
+      }
+    },
+    {
+      "case": "direct/p0/l00/s1",
+      "input": {
+        "plane": 0,
+        "x": 63,
+        "y": 63,
+        "scent": 1,
+        "tile": 114,
+        "life": 0,
+        "pheromone": 16,
+        "anim": [
+          3,
+          5,
+          7,
+          4
+        ]
+      },
+      "mismatches": [],
+      "expected": {
+        "tile": 114,
+        "life": 0,
+        "map_xy": [
+          63,
+          63
+        ]
+      },
+      "dos": {
+        "tile": 114,
+        "life": 0
+      }
+    },
+    {
+      "case": "direct/p0/l00/s2",
+      "input": {
+        "plane": 0,
+        "x": 63,
+        "y": 63,
+        "scent": 2,
+        "tile": 114,
+        "life": 0,
+        "pheromone": 17,
+        "anim": [
+          3,
+          5,
+          7,
+          4
+        ]
+      },
+      "mismatches": [],
+      "expected": {
+        "tile": 241,
+        "life": 0,
+        "map_xy": [
+          63,
+          63
+        ]
+      },
+      "dos": {
+        "tile": 241,
+        "life": 0
+      }
+    },
+    {
+      "case": "direct/p0/l00/s3",
+      "input": {
+        "plane": 0,
+        "x": 63,
+        "y": 63,
+        "scent": 3,
+        "tile": 114,
+        "life": 0,
+        "pheromone": 31,
+        "anim": [
+          3,
+          5,
+          7,
+          4
+        ]
+      },
+      "mismatches": [],
+      "expected": {
+        "tile": 241,
+        "life": 0,
+        "map_xy": [
+          63,
+          63
+        ]
+      },
+      "dos": {
+        "tile": 241,
+        "life": 0
+      }
+    },
+    {
+      "case": "direct/p0/l00/s4",
+      "input": {
+        "plane": 0,
+        "x": 63,
+        "y": 63,
+        "scent": 4,
+        "tile": 114,
+        "life": 0,
+        "pheromone": 47,
+        "anim": [
+          3,
+          5,
+          7,
+          4
+        ]
+      },
+      "mismatches": [],
+      "expected": {
+        "tile": 242,
+        "life": 0,
+        "map_xy": [
+          63,
+          63
+        ]
+      },
+      "dos": {
+        "tile": 242,
+        "life": 0
+      }
+    },
+    {
+      "case": "direct/p0/l01/s0",
+      "input": {
+        "plane": 0,
+        "x": 63,
+        "y": 63,
+        "scent": 0,
+        "tile": 114,
+        "life": 1,
+        "pheromone": 0,
+        "anim": [
+          3,
+          5,
+          7,
+          4
+        ]
+      },
+      "mismatches": [],
+      "expected": {
+        "tile": 114,
+        "life": 257,
+        "map_xy": [
+          63,
+          63
+        ]
+      },
+      "dos": {
+        "tile": 114,
+        "life": 257
+      }
+    },
+    {
+      "case": "direct/p0/l01/s1",
+      "input": {
+        "plane": 0,
+        "x": 63,
+        "y": 63,
+        "scent": 1,
+        "tile": 114,
+        "life": 1,
+        "pheromone": 16,
+        "anim": [
+          3,
+          5,
+          7,
+          4
+        ]
+      },
+      "mismatches": [],
+      "expected": {
+        "tile": 114,
+        "life": 257,
+        "map_xy": [
+          63,
+          63
+        ]
+      },
+      "dos": {
+        "tile": 114,
+        "life": 257
+      }
+    },
+    {
+      "case": "direct/p0/l01/s2",
+      "input": {
+        "plane": 0,
+        "x": 63,
+        "y": 63,
+        "scent": 2,
+        "tile": 114,
+        "life": 1,
+        "pheromone": 17,
+        "anim": [
+          3,
+          5,
+          7,
+          4
+        ]
+      },
+      "mismatches": [],
+      "expected": {
+        "tile": 241,
+        "life": 257,
+        "map_xy": [
+          63,
+          63
+        ]
+      },
+      "dos": {
+        "tile": 241,
+        "life": 257
+      }
+    },
+    {
+      "case": "direct/p0/l01/s3",
+      "input": {
+        "plane": 0,
+        "x": 63,
+        "y": 63,
+        "scent": 3,
+        "tile": 114,
+        "life": 1,
+        "pheromone": 31,
+        "anim": [
+          3,
+          5,
+          7,
+          4
+        ]
+      },
+      "mismatches": [],
+      "expected": {
+        "tile": 241,
+        "life": 257,
+        "map_xy": [
+          63,
+          63
+        ]
+      },
+      "dos": {
+        "tile": 241,
+        "life": 257
+      }
+    },
+    {
+      "case": "direct/p0/l01/s4",
+      "input": {
+        "plane": 0,
+        "x": 63,
+        "y": 63,
+        "scent": 4,
+        "tile": 114,
+        "life": 1,
+        "pheromone": 47,
+        "anim": [
+          3,
+          5,
+          7,
+          4
+        ]
+      },
+      "mismatches": [],
+      "expected": {
+        "tile": 242,
+        "life": 257,
+        "map_xy": [
+          63,
+          63
+        ]
+      },
+      "dos": {
+        "tile": 242,
+        "life": 257
+      }
+    },
+    {
+      "case": "direct/p0/l40/s0",
+      "input": {
+        "plane": 0,
+        "x": 63,
+        "y": 63,
+        "scent": 0,
+        "tile": 114,
+        "life": 64,
+        "pheromone": 0,
+        "anim": [
+          3,
+          5,
+          7,
+          4
+        ]
+      },
+      "mismatches": [],
+      "expected": {
+        "tile": 114,
+        "life": 320,
+        "map_xy": [
+          63,
+          63
+        ]
+      },
+      "dos": {
+        "tile": 114,
+        "life": 320
+      }
+    },
+    {
+      "case": "direct/p0/l40/s1",
+      "input": {
+        "plane": 0,
+        "x": 63,
+        "y": 63,
+        "scent": 1,
+        "tile": 114,
+        "life": 64,
+        "pheromone": 16,
+        "anim": [
+          3,
+          5,
+          7,
+          4
+        ]
+      },
+      "mismatches": [],
+      "expected": {
+        "tile": 114,
+        "life": 320,
+        "map_xy": [
+          63,
+          63
+        ]
+      },
+      "dos": {
+        "tile": 114,
+        "life": 320
+      }
+    },
+    {
+      "case": "direct/p0/l40/s2",
+      "input": {
+        "plane": 0,
+        "x": 63,
+        "y": 63,
+        "scent": 2,
+        "tile": 114,
+        "life": 64,
+        "pheromone": 17,
+        "anim": [
+          3,
+          5,
+          7,
+          4
+        ]
+      },
+      "mismatches": [],
+      "expected": {
+        "tile": 241,
+        "life": 320,
+        "map_xy": [
+          63,
+          63
+        ]
+      },
+      "dos": {
+        "tile": 241,
+        "life": 320
+      }
+    },
+    {
+      "case": "direct/p0/l40/s3",
+      "input": {
+        "plane": 0,
+        "x": 63,
+        "y": 63,
+        "scent": 3,
+        "tile": 114,
+        "life": 64,
+        "pheromone": 31,
+        "anim": [
+          3,
+          5,
+          7,
+          4
+        ]
+      },
+      "mismatches": [],
+      "expected": {
+        "tile": 241,
+        "life": 320,
+        "map_xy": [
+          63,
+          63
+        ]
+      },
+      "dos": {
+        "tile": 241,
+        "life": 320
+      }
+    },
+    {
+      "case": "direct/p0/l40/s4",
+      "input": {
+        "plane": 0,
+        "x": 63,
+        "y": 63,
+        "scent": 4,
+        "tile": 114,
+        "life": 64,
+        "pheromone": 47,
+        "anim": [
+          3,
+          5,
+          7,
+          4
+        ]
+      },
+      "mismatches": [],
+      "expected": {
+        "tile": 242,
+        "life": 320,
+        "map_xy": [
+          63,
+          63
+        ]
+      },
+      "dos": {
+        "tile": 242,
+        "life": 320
+      }
+    },
+    {
+      "case": "direct/p0/l68/s0",
+      "input": {
+        "plane": 0,
+        "x": 63,
+        "y": 63,
+        "scent": 0,
+        "tile": 114,
+        "life": 104,
+        "pheromone": 0,
+        "anim": [
+          3,
+          5,
+          7,
+          4
+        ]
+      },
+      "mismatches": [],
+      "expected": {
+        "tile": 114,
+        "life": 360,
+        "map_xy": [
+          63,
+          63
+        ]
+      },
+      "dos": {
+        "tile": 114,
+        "life": 360
+      }
+    },
+    {
+      "case": "direct/p0/l68/s1",
+      "input": {
+        "plane": 0,
+        "x": 63,
+        "y": 63,
+        "scent": 1,
+        "tile": 114,
+        "life": 104,
+        "pheromone": 16,
+        "anim": [
+          3,
+          5,
+          7,
+          4
+        ]
+      },
+      "mismatches": [],
+      "expected": {
+        "tile": 114,
+        "life": 360,
+        "map_xy": [
+          63,
+          63
+        ]
+      },
+      "dos": {
+        "tile": 114,
+        "life": 360
+      }
+    },
+    {
+      "case": "direct/p0/l68/s2",
+      "input": {
+        "plane": 0,
+        "x": 63,
+        "y": 63,
+        "scent": 2,
+        "tile": 114,
+        "life": 104,
+        "pheromone": 17,
+        "anim": [
+          3,
+          5,
+          7,
+          4
+        ]
+      },
+      "mismatches": [],
+      "expected": {
+        "tile": 241,
+        "life": 360,
+        "map_xy": [
+          63,
+          63
+        ]
+      },
+      "dos": {
+        "tile": 241,
+        "life": 360
+      }
+    },
+    {
+      "case": "direct/p0/l68/s3",
+      "input": {
+        "plane": 0,
+        "x": 63,
+        "y": 63,
+        "scent": 3,
+        "tile": 114,
+        "life": 104,
+        "pheromone": 31,
+        "anim": [
+          3,
+          5,
+          7,
+          4
+        ]
+      },
+      "mismatches": [],
+      "expected": {
+        "tile": 241,
+        "life": 360,
+        "map_xy": [
+          63,
+          63
+        ]
+      },
+      "dos": {
+        "tile": 241,
+        "life": 360
+      }
+    },
+    {
+      "case": "direct/p0/l68/s4",
+      "input": {
+        "plane": 0,
+        "x": 63,
+        "y": 63,
+        "scent": 4,
+        "tile": 114,
+        "life": 104,
+        "pheromone": 47,
+        "anim": [
+          3,
+          5,
+          7,
+          4
+        ]
+      },
+      "mismatches": [],
+      "expected": {
+        "tile": 242,
+        "life": 360,
+        "map_xy": [
+          63,
+          63
+        ]
+      },
+      "dos": {
+        "tile": 242,
+        "life": 360
+      }
+    },
+    {
+      "case": "direct/p0/le0/s0",
+      "input": {
+        "plane": 0,
+        "x": 63,
+        "y": 63,
+        "scent": 0,
+        "tile": 114,
+        "life": 224,
+        "pheromone": 0,
+        "anim": [
+          3,
+          5,
+          7,
+          4
+        ]
+      },
+      "mismatches": [],
+      "expected": {
+        "tile": 114,
+        "life": 480,
+        "map_xy": [
+          63,
+          63
+        ]
+      },
+      "dos": {
+        "tile": 114,
+        "life": 480
+      }
+    },
+    {
+      "case": "direct/p0/le0/s1",
+      "input": {
+        "plane": 0,
+        "x": 63,
+        "y": 63,
+        "scent": 1,
+        "tile": 114,
+        "life": 224,
+        "pheromone": 16,
+        "anim": [
+          3,
+          5,
+          7,
+          4
+        ]
+      },
+      "mismatches": [],
+      "expected": {
+        "tile": 114,
+        "life": 480,
+        "map_xy": [
+          63,
+          63
+        ]
+      },
+      "dos": {
+        "tile": 114,
+        "life": 480
+      }
+    },
+    {
+      "case": "direct/p0/le0/s2",
+      "input": {
+        "plane": 0,
+        "x": 63,
+        "y": 63,
+        "scent": 2,
+        "tile": 114,
+        "life": 224,
+        "pheromone": 17,
+        "anim": [
+          3,
+          5,
+          7,
+          4
+        ]
+      },
+      "mismatches": [],
+      "expected": {
+        "tile": 241,
+        "life": 480,
+        "map_xy": [
+          63,
+          63
+        ]
+      },
+      "dos": {
+        "tile": 241,
+        "life": 480
+      }
+    },
+    {
+      "case": "direct/p0/le0/s3",
+      "input": {
+        "plane": 0,
+        "x": 63,
+        "y": 63,
+        "scent": 3,
+        "tile": 114,
+        "life": 224,
+        "pheromone": 31,
+        "anim": [
+          3,
+          5,
+          7,
+          4
+        ]
+      },
+      "mismatches": [],
+      "expected": {
+        "tile": 241,
+        "life": 480,
+        "map_xy": [
+          63,
+          63
+        ]
+      },
+      "dos": {
+        "tile": 241,
+        "life": 480
+      }
+    },
+    {
+      "case": "direct/p0/le0/s4",
+      "input": {
+        "plane": 0,
+        "x": 63,
+        "y": 63,
+        "scent": 4,
+        "tile": 114,
+        "life": 224,
+        "pheromone": 47,
+        "anim": [
+          3,
+          5,
+          7,
+          4
+        ]
+      },
+      "mismatches": [],
+      "expected": {
+        "tile": 242,
+        "life": 480,
+        "map_xy": [
+          63,
+          63
+        ]
+      },
+      "dos": {
+        "tile": 242,
+        "life": 480
+      }
+    },
+    {
+      "case": "direct/p0/lfe/s0",
+      "input": {
+        "plane": 0,
+        "x": 63,
+        "y": 63,
+        "scent": 0,
+        "tile": 114,
+        "life": 254,
+        "pheromone": 0,
+        "anim": [
+          3,
+          5,
+          7,
+          4
+        ]
+      },
+      "mismatches": [],
+      "expected": {
+        "tile": 114,
+        "life": 916,
+        "map_xy": [
+          63,
+          63
+        ]
+      },
+      "dos": {
+        "tile": 114,
+        "life": 916
+      }
+    },
+    {
+      "case": "direct/p0/lfe/s1",
+      "input": {
+        "plane": 0,
+        "x": 63,
+        "y": 63,
+        "scent": 1,
+        "tile": 114,
+        "life": 254,
+        "pheromone": 16,
+        "anim": [
+          3,
+          5,
+          7,
+          4
+        ]
+      },
+      "mismatches": [],
+      "expected": {
+        "tile": 114,
+        "life": 916,
+        "map_xy": [
+          63,
+          63
+        ]
+      },
+      "dos": {
+        "tile": 114,
+        "life": 916
+      }
+    },
+    {
+      "case": "direct/p0/lfe/s2",
+      "input": {
+        "plane": 0,
+        "x": 63,
+        "y": 63,
+        "scent": 2,
+        "tile": 114,
+        "life": 254,
+        "pheromone": 17,
+        "anim": [
+          3,
+          5,
+          7,
+          4
+        ]
+      },
+      "mismatches": [],
+      "expected": {
+        "tile": 241,
+        "life": 916,
+        "map_xy": [
+          63,
+          63
+        ]
+      },
+      "dos": {
+        "tile": 241,
+        "life": 916
+      }
+    },
+    {
+      "case": "direct/p0/lfe/s3",
+      "input": {
+        "plane": 0,
+        "x": 63,
+        "y": 63,
+        "scent": 3,
+        "tile": 114,
+        "life": 254,
+        "pheromone": 31,
+        "anim": [
+          3,
+          5,
+          7,
+          4
+        ]
+      },
+      "mismatches": [],
+      "expected": {
+        "tile": 241,
+        "life": 916,
+        "map_xy": [
+          63,
+          63
+        ]
+      },
+      "dos": {
+        "tile": 241,
+        "life": 916
+      }
+    },
+    {
+      "case": "direct/p0/lfe/s4",
+      "input": {
+        "plane": 0,
+        "x": 63,
+        "y": 63,
+        "scent": 4,
+        "tile": 114,
+        "life": 254,
+        "pheromone": 47,
+        "anim": [
+          3,
+          5,
+          7,
+          4
+        ]
+      },
+      "mismatches": [],
+      "expected": {
+        "tile": 242,
+        "life": 916,
+        "map_xy": [
+          63,
+          63
+        ]
+      },
+      "dos": {
+        "tile": 242,
+        "life": 916
+      }
+    },
+    {
+      "case": "direct/p0/lff/s0",
+      "input": {
+        "plane": 0,
+        "x": 63,
+        "y": 63,
+        "scent": 0,
+        "tile": 114,
+        "life": 255,
+        "pheromone": 0,
+        "anim": [
+          3,
+          5,
+          7,
+          4
+        ]
+      },
+      "mismatches": [],
+      "expected": {
+        "tile": 114,
+        "life": 910,
+        "map_xy": [
+          63,
+          63
+        ]
+      },
+      "dos": {
+        "tile": 114,
+        "life": 910
+      }
+    },
+    {
+      "case": "direct/p0/lff/s1",
+      "input": {
+        "plane": 0,
+        "x": 63,
+        "y": 63,
+        "scent": 1,
+        "tile": 114,
+        "life": 255,
+        "pheromone": 16,
+        "anim": [
+          3,
+          5,
+          7,
+          4
+        ]
+      },
+      "mismatches": [],
+      "expected": {
+        "tile": 114,
+        "life": 910,
+        "map_xy": [
+          63,
+          63
+        ]
+      },
+      "dos": {
+        "tile": 114,
+        "life": 910
+      }
+    },
+    {
+      "case": "direct/p0/lff/s2",
+      "input": {
+        "plane": 0,
+        "x": 63,
+        "y": 63,
+        "scent": 2,
+        "tile": 114,
+        "life": 255,
+        "pheromone": 17,
+        "anim": [
+          3,
+          5,
+          7,
+          4
+        ]
+      },
+      "mismatches": [],
+      "expected": {
+        "tile": 241,
+        "life": 910,
+        "map_xy": [
+          63,
+          63
+        ]
+      },
+      "dos": {
+        "tile": 241,
+        "life": 910
+      }
+    },
+    {
+      "case": "direct/p0/lff/s3",
+      "input": {
+        "plane": 0,
+        "x": 63,
+        "y": 63,
+        "scent": 3,
+        "tile": 114,
+        "life": 255,
+        "pheromone": 31,
+        "anim": [
+          3,
+          5,
+          7,
+          4
+        ]
+      },
+      "mismatches": [],
+      "expected": {
+        "tile": 241,
+        "life": 910,
+        "map_xy": [
+          63,
+          63
+        ]
+      },
+      "dos": {
+        "tile": 241,
+        "life": 910
+      }
+    },
+    {
+      "case": "direct/p0/lff/s4",
+      "input": {
+        "plane": 0,
+        "x": 63,
+        "y": 63,
+        "scent": 4,
+        "tile": 114,
+        "life": 255,
+        "pheromone": 47,
+        "anim": [
+          3,
+          5,
+          7,
+          4
+        ]
+      },
+      "mismatches": [],
+      "expected": {
+        "tile": 242,
+        "life": 910,
+        "map_xy": [
+          63,
+          63
+        ]
+      },
+      "dos": {
+        "tile": 242,
+        "life": 910
+      }
+    },
+    {
+      "case": "direct/p1/l00/s0",
+      "input": {
+        "plane": 1,
+        "x": 63,
+        "y": 63,
+        "scent": 0,
+        "tile": 121,
+        "life": 0,
+        "pheromone": 0,
+        "anim": [
+          3,
+          5,
+          7,
+          4
+        ]
+      },
+      "mismatches": [],
+      "expected": {
+        "tile": 121,
+        "life": 0,
+        "map_xy": [
+          63,
+          63
+        ]
+      },
+      "dos": {
+        "tile": 121,
+        "life": 0
+      }
+    },
+    {
+      "case": "direct/p1/l00/s1",
+      "input": {
+        "plane": 1,
+        "x": 63,
+        "y": 63,
+        "scent": 1,
+        "tile": 121,
+        "life": 0,
+        "pheromone": 16,
+        "anim": [
+          3,
+          5,
+          7,
+          4
+        ]
+      },
+      "mismatches": [],
+      "expected": {
+        "tile": 121,
+        "life": 0,
+        "map_xy": [
+          63,
+          63
+        ]
+      },
+      "dos": {
+        "tile": 121,
+        "life": 0
+      }
+    },
+    {
+      "case": "direct/p1/l00/s2",
+      "input": {
+        "plane": 1,
+        "x": 63,
+        "y": 63,
+        "scent": 2,
+        "tile": 121,
+        "life": 0,
+        "pheromone": 17,
+        "anim": [
+          3,
+          5,
+          7,
+          4
+        ]
+      },
+      "mismatches": [],
+      "expected": {
+        "tile": 241,
+        "life": 0,
+        "map_xy": [
+          63,
+          63
+        ]
+      },
+      "dos": {
+        "tile": 241,
+        "life": 0
+      }
+    },
+    {
+      "case": "direct/p1/l00/s3",
+      "input": {
+        "plane": 1,
+        "x": 63,
+        "y": 63,
+        "scent": 3,
+        "tile": 121,
+        "life": 0,
+        "pheromone": 31,
+        "anim": [
+          3,
+          5,
+          7,
+          4
+        ]
+      },
+      "mismatches": [],
+      "expected": {
+        "tile": 241,
+        "life": 0,
+        "map_xy": [
+          63,
+          63
+        ]
+      },
+      "dos": {
+        "tile": 241,
+        "life": 0
+      }
+    },
+    {
+      "case": "direct/p1/l00/s4",
+      "input": {
+        "plane": 1,
+        "x": 63,
+        "y": 63,
+        "scent": 4,
+        "tile": 121,
+        "life": 0,
+        "pheromone": 47,
+        "anim": [
+          3,
+          5,
+          7,
+          4
+        ]
+      },
+      "mismatches": [],
+      "expected": {
+        "tile": 242,
+        "life": 0,
+        "map_xy": [
+          63,
+          63
+        ]
+      },
+      "dos": {
+        "tile": 242,
+        "life": 0
+      }
+    },
+    {
+      "case": "direct/p1/l01/s0",
+      "input": {
+        "plane": 1,
+        "x": 63,
+        "y": 63,
+        "scent": 0,
+        "tile": 121,
+        "life": 1,
+        "pheromone": 0,
+        "anim": [
+          3,
+          5,
+          7,
+          4
+        ]
+      },
+      "mismatches": [],
+      "expected": {
+        "tile": 121,
+        "life": 257,
+        "map_xy": [
+          63,
+          63
+        ]
+      },
+      "dos": {
+        "tile": 121,
+        "life": 257
+      }
+    },
+    {
+      "case": "direct/p1/l01/s1",
+      "input": {
+        "plane": 1,
+        "x": 63,
+        "y": 63,
+        "scent": 1,
+        "tile": 121,
+        "life": 1,
+        "pheromone": 16,
+        "anim": [
+          3,
+          5,
+          7,
+          4
+        ]
+      },
+      "mismatches": [],
+      "expected": {
+        "tile": 121,
+        "life": 257,
+        "map_xy": [
+          63,
+          63
+        ]
+      },
+      "dos": {
+        "tile": 121,
+        "life": 257
+      }
+    },
+    {
+      "case": "direct/p1/l01/s2",
+      "input": {
+        "plane": 1,
+        "x": 63,
+        "y": 63,
+        "scent": 2,
+        "tile": 121,
+        "life": 1,
+        "pheromone": 17,
+        "anim": [
+          3,
+          5,
+          7,
+          4
+        ]
+      },
+      "mismatches": [],
+      "expected": {
+        "tile": 241,
+        "life": 257,
+        "map_xy": [
+          63,
+          63
+        ]
+      },
+      "dos": {
+        "tile": 241,
+        "life": 257
+      }
+    },
+    {
+      "case": "direct/p1/l01/s3",
+      "input": {
+        "plane": 1,
+        "x": 63,
+        "y": 63,
+        "scent": 3,
+        "tile": 121,
+        "life": 1,
+        "pheromone": 31,
+        "anim": [
+          3,
+          5,
+          7,
+          4
+        ]
+      },
+      "mismatches": [],
+      "expected": {
+        "tile": 241,
+        "life": 257,
+        "map_xy": [
+          63,
+          63
+        ]
+      },
+      "dos": {
+        "tile": 241,
+        "life": 257
+      }
+    },
+    {
+      "case": "direct/p1/l01/s4",
+      "input": {
+        "plane": 1,
+        "x": 63,
+        "y": 63,
+        "scent": 4,
+        "tile": 121,
+        "life": 1,
+        "pheromone": 47,
+        "anim": [
+          3,
+          5,
+          7,
+          4
+        ]
+      },
+      "mismatches": [],
+      "expected": {
+        "tile": 242,
+        "life": 257,
+        "map_xy": [
+          63,
+          63
+        ]
+      },
+      "dos": {
+        "tile": 242,
+        "life": 257
+      }
+    },
+    {
+      "case": "direct/p1/l40/s0",
+      "input": {
+        "plane": 1,
+        "x": 63,
+        "y": 63,
+        "scent": 0,
+        "tile": 121,
+        "life": 64,
+        "pheromone": 0,
+        "anim": [
+          3,
+          5,
+          7,
+          4
+        ]
+      },
+      "mismatches": [],
+      "expected": {
+        "tile": 121,
+        "life": 320,
+        "map_xy": [
+          63,
+          63
+        ]
+      },
+      "dos": {
+        "tile": 121,
+        "life": 320
+      }
+    },
+    {
+      "case": "direct/p1/l40/s1",
+      "input": {
+        "plane": 1,
+        "x": 63,
+        "y": 63,
+        "scent": 1,
+        "tile": 121,
+        "life": 64,
+        "pheromone": 16,
+        "anim": [
+          3,
+          5,
+          7,
+          4
+        ]
+      },
+      "mismatches": [],
+      "expected": {
+        "tile": 121,
+        "life": 320,
+        "map_xy": [
+          63,
+          63
+        ]
+      },
+      "dos": {
+        "tile": 121,
+        "life": 320
+      }
+    },
+    {
+      "case": "direct/p1/l40/s2",
+      "input": {
+        "plane": 1,
+        "x": 63,
+        "y": 63,
+        "scent": 2,
+        "tile": 121,
+        "life": 64,
+        "pheromone": 17,
+        "anim": [
+          3,
+          5,
+          7,
+          4
+        ]
+      },
+      "mismatches": [],
+      "expected": {
+        "tile": 241,
+        "life": 320,
+        "map_xy": [
+          63,
+          63
+        ]
+      },
+      "dos": {
+        "tile": 241,
+        "life": 320
+      }
+    },
+    {
+      "case": "direct/p1/l40/s3",
+      "input": {
+        "plane": 1,
+        "x": 63,
+        "y": 63,
+        "scent": 3,
+        "tile": 121,
+        "life": 64,
+        "pheromone": 31,
+        "anim": [
+          3,
+          5,
+          7,
+          4
+        ]
+      },
+      "mismatches": [],
+      "expected": {
+        "tile": 241,
+        "life": 320,
+        "map_xy": [
+          63,
+          63
+        ]
+      },
+      "dos": {
+        "tile": 241,
+        "life": 320
+      }
+    },
+    {
+      "case": "direct/p1/l40/s4",
+      "input": {
+        "plane": 1,
+        "x": 63,
+        "y": 63,
+        "scent": 4,
+        "tile": 121,
+        "life": 64,
+        "pheromone": 47,
+        "anim": [
+          3,
+          5,
+          7,
+          4
+        ]
+      },
+      "mismatches": [],
+      "expected": {
+        "tile": 242,
+        "life": 320,
+        "map_xy": [
+          63,
+          63
+        ]
+      },
+      "dos": {
+        "tile": 242,
+        "life": 320
+      }
+    },
+    {
+      "case": "direct/p1/l68/s0",
+      "input": {
+        "plane": 1,
+        "x": 63,
+        "y": 63,
+        "scent": 0,
+        "tile": 121,
+        "life": 104,
+        "pheromone": 0,
+        "anim": [
+          3,
+          5,
+          7,
+          4
+        ]
+      },
+      "mismatches": [],
+      "expected": {
+        "tile": 121,
+        "life": 360,
+        "map_xy": [
+          63,
+          63
+        ]
+      },
+      "dos": {
+        "tile": 121,
+        "life": 360
+      }
+    },
+    {
+      "case": "direct/p1/l68/s1",
+      "input": {
+        "plane": 1,
+        "x": 63,
+        "y": 63,
+        "scent": 1,
+        "tile": 121,
+        "life": 104,
+        "pheromone": 16,
+        "anim": [
+          3,
+          5,
+          7,
+          4
+        ]
+      },
+      "mismatches": [],
+      "expected": {
+        "tile": 121,
+        "life": 360,
+        "map_xy": [
+          63,
+          63
+        ]
+      },
+      "dos": {
+        "tile": 121,
+        "life": 360
+      }
+    },
+    {
+      "case": "direct/p1/l68/s2",
+      "input": {
+        "plane": 1,
+        "x": 63,
+        "y": 63,
+        "scent": 2,
+        "tile": 121,
+        "life": 104,
+        "pheromone": 17,
+        "anim": [
+          3,
+          5,
+          7,
+          4
+        ]
+      },
+      "mismatches": [],
+      "expected": {
+        "tile": 241,
+        "life": 360,
+        "map_xy": [
+          63,
+          63
+        ]
+      },
+      "dos": {
+        "tile": 241,
+        "life": 360
+      }
+    },
+    {
+      "case": "direct/p1/l68/s3",
+      "input": {
+        "plane": 1,
+        "x": 63,
+        "y": 63,
+        "scent": 3,
+        "tile": 121,
+        "life": 104,
+        "pheromone": 31,
+        "anim": [
+          3,
+          5,
+          7,
+          4
+        ]
+      },
+      "mismatches": [],
+      "expected": {
+        "tile": 241,
+        "life": 360,
+        "map_xy": [
+          63,
+          63
+        ]
+      },
+      "dos": {
+        "tile": 241,
+        "life": 360
+      }
+    },
+    {
+      "case": "direct/p1/l68/s4",
+      "input": {
+        "plane": 1,
+        "x": 63,
+        "y": 63,
+        "scent": 4,
+        "tile": 121,
+        "life": 104,
+        "pheromone": 47,
+        "anim": [
+          3,
+          5,
+          7,
+          4
+        ]
+      },
+      "mismatches": [],
+      "expected": {
+        "tile": 242,
+        "life": 360,
+        "map_xy": [
+          63,
+          63
+        ]
+      },
+      "dos": {
+        "tile": 242,
+        "life": 360
+      }
+    },
+    {
+      "case": "direct/p1/le0/s0",
+      "input": {
+        "plane": 1,
+        "x": 63,
+        "y": 63,
+        "scent": 0,
+        "tile": 121,
+        "life": 224,
+        "pheromone": 0,
+        "anim": [
+          3,
+          5,
+          7,
+          4
+        ]
+      },
+      "mismatches": [],
+      "expected": {
+        "tile": 121,
+        "life": 480,
+        "map_xy": [
+          63,
+          63
+        ]
+      },
+      "dos": {
+        "tile": 121,
+        "life": 480
+      }
+    },
+    {
+      "case": "direct/p1/le0/s1",
+      "input": {
+        "plane": 1,
+        "x": 63,
+        "y": 63,
+        "scent": 1,
+        "tile": 121,
+        "life": 224,
+        "pheromone": 16,
+        "anim": [
+          3,
+          5,
+          7,
+          4
+        ]
+      },
+      "mismatches": [],
+      "expected": {
+        "tile": 121,
+        "life": 480,
+        "map_xy": [
+          63,
+          63
+        ]
+      },
+      "dos": {
+        "tile": 121,
+        "life": 480
+      }
+    },
+    {
+      "case": "direct/p1/le0/s2",
+      "input": {
+        "plane": 1,
+        "x": 63,
+        "y": 63,
+        "scent": 2,
+        "tile": 121,
+        "life": 224,
+        "pheromone": 17,
+        "anim": [
+          3,
+          5,
+          7,
+          4
+        ]
+      },
+      "mismatches": [],
+      "expected": {
+        "tile": 241,
+        "life": 480,
+        "map_xy": [
+          63,
+          63
+        ]
+      },
+      "dos": {
+        "tile": 241,
+        "life": 480
+      }
+    },
+    {
+      "case": "direct/p1/le0/s3",
+      "input": {
+        "plane": 1,
+        "x": 63,
+        "y": 63,
+        "scent": 3,
+        "tile": 121,
+        "life": 224,
+        "pheromone": 31,
+        "anim": [
+          3,
+          5,
+          7,
+          4
+        ]
+      },
+      "mismatches": [],
+      "expected": {
+        "tile": 241,
+        "life": 480,
+        "map_xy": [
+          63,
+          63
+        ]
+      },
+      "dos": {
+        "tile": 241,
+        "life": 480
+      }
+    },
+    {
+      "case": "direct/p1/le0/s4",
+      "input": {
+        "plane": 1,
+        "x": 63,
+        "y": 63,
+        "scent": 4,
+        "tile": 121,
+        "life": 224,
+        "pheromone": 47,
+        "anim": [
+          3,
+          5,
+          7,
+          4
+        ]
+      },
+      "mismatches": [],
+      "expected": {
+        "tile": 242,
+        "life": 480,
+        "map_xy": [
+          63,
+          63
+        ]
+      },
+      "dos": {
+        "tile": 242,
+        "life": 480
+      }
+    },
+    {
+      "case": "direct/p1/lfe/s0",
+      "input": {
+        "plane": 1,
+        "x": 63,
+        "y": 63,
+        "scent": 0,
+        "tile": 121,
+        "life": 254,
+        "pheromone": 0,
+        "anim": [
+          3,
+          5,
+          7,
+          4
+        ]
+      },
+      "mismatches": [],
+      "expected": {
+        "tile": 121,
+        "life": 916,
+        "map_xy": [
+          63,
+          63
+        ]
+      },
+      "dos": {
+        "tile": 121,
+        "life": 916
+      }
+    },
+    {
+      "case": "direct/p1/lfe/s1",
+      "input": {
+        "plane": 1,
+        "x": 63,
+        "y": 63,
+        "scent": 1,
+        "tile": 121,
+        "life": 254,
+        "pheromone": 16,
+        "anim": [
+          3,
+          5,
+          7,
+          4
+        ]
+      },
+      "mismatches": [],
+      "expected": {
+        "tile": 121,
+        "life": 916,
+        "map_xy": [
+          63,
+          63
+        ]
+      },
+      "dos": {
+        "tile": 121,
+        "life": 916
+      }
+    },
+    {
+      "case": "direct/p1/lfe/s2",
+      "input": {
+        "plane": 1,
+        "x": 63,
+        "y": 63,
+        "scent": 2,
+        "tile": 121,
+        "life": 254,
+        "pheromone": 17,
+        "anim": [
+          3,
+          5,
+          7,
+          4
+        ]
+      },
+      "mismatches": [],
+      "expected": {
+        "tile": 241,
+        "life": 916,
+        "map_xy": [
+          63,
+          63
+        ]
+      },
+      "dos": {
+        "tile": 241,
+        "life": 916
+      }
+    },
+    {
+      "case": "direct/p1/lfe/s3",
+      "input": {
+        "plane": 1,
+        "x": 63,
+        "y": 63,
+        "scent": 3,
+        "tile": 121,
+        "life": 254,
+        "pheromone": 31,
+        "anim": [
+          3,
+          5,
+          7,
+          4
+        ]
+      },
+      "mismatches": [],
+      "expected": {
+        "tile": 241,
+        "life": 916,
+        "map_xy": [
+          63,
+          63
+        ]
+      },
+      "dos": {
+        "tile": 241,
+        "life": 916
+      }
+    },
+    {
+      "case": "direct/p1/lfe/s4",
+      "input": {
+        "plane": 1,
+        "x": 63,
+        "y": 63,
+        "scent": 4,
+        "tile": 121,
+        "life": 254,
+        "pheromone": 47,
+        "anim": [
+          3,
+          5,
+          7,
+          4
+        ]
+      },
+      "mismatches": [],
+      "expected": {
+        "tile": 242,
+        "life": 916,
+        "map_xy": [
+          63,
+          63
+        ]
+      },
+      "dos": {
+        "tile": 242,
+        "life": 916
+      }
+    },
+    {
+      "case": "direct/p1/lff/s0",
+      "input": {
+        "plane": 1,
+        "x": 63,
+        "y": 63,
+        "scent": 0,
+        "tile": 121,
+        "life": 255,
+        "pheromone": 0,
+        "anim": [
+          3,
+          5,
+          7,
+          4
+        ]
+      },
+      "mismatches": [],
+      "expected": {
+        "tile": 121,
+        "life": 910,
+        "map_xy": [
+          63,
+          63
+        ]
+      },
+      "dos": {
+        "tile": 121,
+        "life": 910
+      }
+    },
+    {
+      "case": "direct/p1/lff/s1",
+      "input": {
+        "plane": 1,
+        "x": 63,
+        "y": 63,
+        "scent": 1,
+        "tile": 121,
+        "life": 255,
+        "pheromone": 16,
+        "anim": [
+          3,
+          5,
+          7,
+          4
+        ]
+      },
+      "mismatches": [],
+      "expected": {
+        "tile": 121,
+        "life": 910,
+        "map_xy": [
+          63,
+          63
+        ]
+      },
+      "dos": {
+        "tile": 121,
+        "life": 910
+      }
+    },
+    {
+      "case": "direct/p1/lff/s2",
+      "input": {
+        "plane": 1,
+        "x": 63,
+        "y": 63,
+        "scent": 2,
+        "tile": 121,
+        "life": 255,
+        "pheromone": 17,
+        "anim": [
+          3,
+          5,
+          7,
+          4
+        ]
+      },
+      "mismatches": [],
+      "expected": {
+        "tile": 241,
+        "life": 910,
+        "map_xy": [
+          63,
+          63
+        ]
+      },
+      "dos": {
+        "tile": 241,
+        "life": 910
+      }
+    },
+    {
+      "case": "direct/p1/lff/s3",
+      "input": {
+        "plane": 1,
+        "x": 63,
+        "y": 63,
+        "scent": 3,
+        "tile": 121,
+        "life": 255,
+        "pheromone": 31,
+        "anim": [
+          3,
+          5,
+          7,
+          4
+        ]
+      },
+      "mismatches": [],
+      "expected": {
+        "tile": 241,
+        "life": 910,
+        "map_xy": [
+          63,
+          63
+        ]
+      },
+      "dos": {
+        "tile": 241,
+        "life": 910
+      }
+    },
+    {
+      "case": "direct/p1/lff/s4",
+      "input": {
+        "plane": 1,
+        "x": 63,
+        "y": 63,
+        "scent": 4,
+        "tile": 121,
+        "life": 255,
+        "pheromone": 47,
+        "anim": [
+          3,
+          5,
+          7,
+          4
+        ]
+      },
+      "mismatches": [],
+      "expected": {
+        "tile": 242,
+        "life": 910,
+        "map_xy": [
+          63,
+          63
+        ]
+      },
+      "dos": {
+        "tile": 242,
+        "life": 910
+      }
+    },
+    {
+      "case": "direct/p2/l00/s0",
+      "input": {
+        "plane": 2,
+        "x": 63,
+        "y": 63,
+        "scent": 0,
+        "tile": 128,
+        "life": 0,
+        "pheromone": 0,
+        "anim": [
+          3,
+          5,
+          7,
+          4
+        ]
+      },
+      "mismatches": [],
+      "expected": {
+        "tile": 128,
+        "life": 0,
+        "map_xy": [
+          63,
+          63
+        ]
+      },
+      "dos": {
+        "tile": 128,
+        "life": 0
+      }
+    },
+    {
+      "case": "direct/p2/l00/s1",
+      "input": {
+        "plane": 2,
+        "x": 63,
+        "y": 63,
+        "scent": 1,
+        "tile": 128,
+        "life": 0,
+        "pheromone": 16,
+        "anim": [
+          3,
+          5,
+          7,
+          4
+        ]
+      },
+      "mismatches": [],
+      "expected": {
+        "tile": 128,
+        "life": 0,
+        "map_xy": [
+          63,
+          63
+        ]
+      },
+      "dos": {
+        "tile": 128,
+        "life": 0
+      }
+    },
+    {
+      "case": "direct/p2/l00/s2",
+      "input": {
+        "plane": 2,
+        "x": 63,
+        "y": 63,
+        "scent": 2,
+        "tile": 128,
+        "life": 0,
+        "pheromone": 17,
+        "anim": [
+          3,
+          5,
+          7,
+          4
+        ]
+      },
+      "mismatches": [],
+      "expected": {
+        "tile": 128,
+        "life": 0,
+        "map_xy": [
+          63,
+          63
+        ]
+      },
+      "dos": {
+        "tile": 128,
+        "life": 0
+      }
+    },
+    {
+      "case": "direct/p2/l00/s3",
+      "input": {
+        "plane": 2,
+        "x": 63,
+        "y": 63,
+        "scent": 3,
+        "tile": 128,
+        "life": 0,
+        "pheromone": 31,
+        "anim": [
+          3,
+          5,
+          7,
+          4
+        ]
+      },
+      "mismatches": [],
+      "expected": {
+        "tile": 128,
+        "life": 0,
+        "map_xy": [
+          63,
+          63
+        ]
+      },
+      "dos": {
+        "tile": 128,
+        "life": 0
+      }
+    },
+    {
+      "case": "direct/p2/l00/s4",
+      "input": {
+        "plane": 2,
+        "x": 63,
+        "y": 63,
+        "scent": 4,
+        "tile": 128,
+        "life": 0,
+        "pheromone": 47,
+        "anim": [
+          3,
+          5,
+          7,
+          4
+        ]
+      },
+      "mismatches": [],
+      "expected": {
+        "tile": 128,
+        "life": 0,
+        "map_xy": [
+          63,
+          63
+        ]
+      },
+      "dos": {
+        "tile": 128,
+        "life": 0
+      }
+    },
+    {
+      "case": "direct/p2/l01/s0",
+      "input": {
+        "plane": 2,
+        "x": 63,
+        "y": 63,
+        "scent": 0,
+        "tile": 128,
+        "life": 1,
+        "pheromone": 0,
+        "anim": [
+          3,
+          5,
+          7,
+          4
+        ]
+      },
+      "mismatches": [],
+      "expected": {
+        "tile": 128,
+        "life": 513,
+        "map_xy": [
+          63,
+          63
+        ]
+      },
+      "dos": {
+        "tile": 128,
+        "life": 513
+      }
+    },
+    {
+      "case": "direct/p2/l01/s1",
+      "input": {
+        "plane": 2,
+        "x": 63,
+        "y": 63,
+        "scent": 1,
+        "tile": 128,
+        "life": 1,
+        "pheromone": 16,
+        "anim": [
+          3,
+          5,
+          7,
+          4
+        ]
+      },
+      "mismatches": [],
+      "expected": {
+        "tile": 128,
+        "life": 513,
+        "map_xy": [
+          63,
+          63
+        ]
+      },
+      "dos": {
+        "tile": 128,
+        "life": 513
+      }
+    },
+    {
+      "case": "direct/p2/l01/s2",
+      "input": {
+        "plane": 2,
+        "x": 63,
+        "y": 63,
+        "scent": 2,
+        "tile": 128,
+        "life": 1,
+        "pheromone": 17,
+        "anim": [
+          3,
+          5,
+          7,
+          4
+        ]
+      },
+      "mismatches": [],
+      "expected": {
+        "tile": 128,
+        "life": 513,
+        "map_xy": [
+          63,
+          63
+        ]
+      },
+      "dos": {
+        "tile": 128,
+        "life": 513
+      }
+    },
+    {
+      "case": "direct/p2/l01/s3",
+      "input": {
+        "plane": 2,
+        "x": 63,
+        "y": 63,
+        "scent": 3,
+        "tile": 128,
+        "life": 1,
+        "pheromone": 31,
+        "anim": [
+          3,
+          5,
+          7,
+          4
+        ]
+      },
+      "mismatches": [],
+      "expected": {
+        "tile": 128,
+        "life": 513,
+        "map_xy": [
+          63,
+          63
+        ]
+      },
+      "dos": {
+        "tile": 128,
+        "life": 513
+      }
+    },
+    {
+      "case": "direct/p2/l01/s4",
+      "input": {
+        "plane": 2,
+        "x": 63,
+        "y": 63,
+        "scent": 4,
+        "tile": 128,
+        "life": 1,
+        "pheromone": 47,
+        "anim": [
+          3,
+          5,
+          7,
+          4
+        ]
+      },
+      "mismatches": [],
+      "expected": {
+        "tile": 128,
+        "life": 513,
+        "map_xy": [
+          63,
+          63
+        ]
+      },
+      "dos": {
+        "tile": 128,
+        "life": 513
+      }
+    },
+    {
+      "case": "direct/p2/l40/s0",
+      "input": {
+        "plane": 2,
+        "x": 63,
+        "y": 63,
+        "scent": 0,
+        "tile": 128,
+        "life": 64,
+        "pheromone": 0,
+        "anim": [
+          3,
+          5,
+          7,
+          4
+        ]
+      },
+      "mismatches": [],
+      "expected": {
+        "tile": 128,
+        "life": 576,
+        "map_xy": [
+          63,
+          63
+        ]
+      },
+      "dos": {
+        "tile": 128,
+        "life": 576
+      }
+    },
+    {
+      "case": "direct/p2/l40/s1",
+      "input": {
+        "plane": 2,
+        "x": 63,
+        "y": 63,
+        "scent": 1,
+        "tile": 128,
+        "life": 64,
+        "pheromone": 16,
+        "anim": [
+          3,
+          5,
+          7,
+          4
+        ]
+      },
+      "mismatches": [],
+      "expected": {
+        "tile": 128,
+        "life": 576,
+        "map_xy": [
+          63,
+          63
+        ]
+      },
+      "dos": {
+        "tile": 128,
+        "life": 576
+      }
+    },
+    {
+      "case": "direct/p2/l40/s2",
+      "input": {
+        "plane": 2,
+        "x": 63,
+        "y": 63,
+        "scent": 2,
+        "tile": 128,
+        "life": 64,
+        "pheromone": 17,
+        "anim": [
+          3,
+          5,
+          7,
+          4
+        ]
+      },
+      "mismatches": [],
+      "expected": {
+        "tile": 128,
+        "life": 576,
+        "map_xy": [
+          63,
+          63
+        ]
+      },
+      "dos": {
+        "tile": 128,
+        "life": 576
+      }
+    },
+    {
+      "case": "direct/p2/l40/s3",
+      "input": {
+        "plane": 2,
+        "x": 63,
+        "y": 63,
+        "scent": 3,
+        "tile": 128,
+        "life": 64,
+        "pheromone": 31,
+        "anim": [
+          3,
+          5,
+          7,
+          4
+        ]
+      },
+      "mismatches": [],
+      "expected": {
+        "tile": 128,
+        "life": 576,
+        "map_xy": [
+          63,
+          63
+        ]
+      },
+      "dos": {
+        "tile": 128,
+        "life": 576
+      }
+    },
+    {
+      "case": "direct/p2/l40/s4",
+      "input": {
+        "plane": 2,
+        "x": 63,
+        "y": 63,
+        "scent": 4,
+        "tile": 128,
+        "life": 64,
+        "pheromone": 47,
+        "anim": [
+          3,
+          5,
+          7,
+          4
+        ]
+      },
+      "mismatches": [],
+      "expected": {
+        "tile": 128,
+        "life": 576,
+        "map_xy": [
+          63,
+          63
+        ]
+      },
+      "dos": {
+        "tile": 128,
+        "life": 576
+      }
+    },
+    {
+      "case": "direct/p2/l68/s0",
+      "input": {
+        "plane": 2,
+        "x": 63,
+        "y": 63,
+        "scent": 0,
+        "tile": 128,
+        "life": 104,
+        "pheromone": 0,
+        "anim": [
+          3,
+          5,
+          7,
+          4
+        ]
+      },
+      "mismatches": [],
+      "expected": {
+        "tile": 128,
+        "life": 616,
+        "map_xy": [
+          63,
+          63
+        ]
+      },
+      "dos": {
+        "tile": 128,
+        "life": 616
+      }
+    },
+    {
+      "case": "direct/p2/l68/s1",
+      "input": {
+        "plane": 2,
+        "x": 63,
+        "y": 63,
+        "scent": 1,
+        "tile": 128,
+        "life": 104,
+        "pheromone": 16,
+        "anim": [
+          3,
+          5,
+          7,
+          4
+        ]
+      },
+      "mismatches": [],
+      "expected": {
+        "tile": 128,
+        "life": 616,
+        "map_xy": [
+          63,
+          63
+        ]
+      },
+      "dos": {
+        "tile": 128,
+        "life": 616
+      }
+    },
+    {
+      "case": "direct/p2/l68/s2",
+      "input": {
+        "plane": 2,
+        "x": 63,
+        "y": 63,
+        "scent": 2,
+        "tile": 128,
+        "life": 104,
+        "pheromone": 17,
+        "anim": [
+          3,
+          5,
+          7,
+          4
+        ]
+      },
+      "mismatches": [],
+      "expected": {
+        "tile": 128,
+        "life": 616,
+        "map_xy": [
+          63,
+          63
+        ]
+      },
+      "dos": {
+        "tile": 128,
+        "life": 616
+      }
+    },
+    {
+      "case": "direct/p2/l68/s3",
+      "input": {
+        "plane": 2,
+        "x": 63,
+        "y": 63,
+        "scent": 3,
+        "tile": 128,
+        "life": 104,
+        "pheromone": 31,
+        "anim": [
+          3,
+          5,
+          7,
+          4
+        ]
+      },
+      "mismatches": [],
+      "expected": {
+        "tile": 128,
+        "life": 616,
+        "map_xy": [
+          63,
+          63
+        ]
+      },
+      "dos": {
+        "tile": 128,
+        "life": 616
+      }
+    },
+    {
+      "case": "direct/p2/l68/s4",
+      "input": {
+        "plane": 2,
+        "x": 63,
+        "y": 63,
+        "scent": 4,
+        "tile": 128,
+        "life": 104,
+        "pheromone": 47,
+        "anim": [
+          3,
+          5,
+          7,
+          4
+        ]
+      },
+      "mismatches": [],
+      "expected": {
+        "tile": 128,
+        "life": 616,
+        "map_xy": [
+          63,
+          63
+        ]
+      },
+      "dos": {
+        "tile": 128,
+        "life": 616
+      }
+    },
+    {
+      "case": "direct/p2/le0/s0",
+      "input": {
+        "plane": 2,
+        "x": 63,
+        "y": 63,
+        "scent": 0,
+        "tile": 128,
+        "life": 224,
+        "pheromone": 0,
+        "anim": [
+          3,
+          5,
+          7,
+          4
+        ]
+      },
+      "mismatches": [],
+      "expected": {
+        "tile": 128,
+        "life": 736,
+        "map_xy": [
+          63,
+          63
+        ]
+      },
+      "dos": {
+        "tile": 128,
+        "life": 736
+      }
+    },
+    {
+      "case": "direct/p2/le0/s1",
+      "input": {
+        "plane": 2,
+        "x": 63,
+        "y": 63,
+        "scent": 1,
+        "tile": 128,
+        "life": 224,
+        "pheromone": 16,
+        "anim": [
+          3,
+          5,
+          7,
+          4
+        ]
+      },
+      "mismatches": [],
+      "expected": {
+        "tile": 128,
+        "life": 736,
+        "map_xy": [
+          63,
+          63
+        ]
+      },
+      "dos": {
+        "tile": 128,
+        "life": 736
+      }
+    },
+    {
+      "case": "direct/p2/le0/s2",
+      "input": {
+        "plane": 2,
+        "x": 63,
+        "y": 63,
+        "scent": 2,
+        "tile": 128,
+        "life": 224,
+        "pheromone": 17,
+        "anim": [
+          3,
+          5,
+          7,
+          4
+        ]
+      },
+      "mismatches": [],
+      "expected": {
+        "tile": 128,
+        "life": 736,
+        "map_xy": [
+          63,
+          63
+        ]
+      },
+      "dos": {
+        "tile": 128,
+        "life": 736
+      }
+    },
+    {
+      "case": "direct/p2/le0/s3",
+      "input": {
+        "plane": 2,
+        "x": 63,
+        "y": 63,
+        "scent": 3,
+        "tile": 128,
+        "life": 224,
+        "pheromone": 31,
+        "anim": [
+          3,
+          5,
+          7,
+          4
+        ]
+      },
+      "mismatches": [],
+      "expected": {
+        "tile": 128,
+        "life": 736,
+        "map_xy": [
+          63,
+          63
+        ]
+      },
+      "dos": {
+        "tile": 128,
+        "life": 736
+      }
+    },
+    {
+      "case": "direct/p2/le0/s4",
+      "input": {
+        "plane": 2,
+        "x": 63,
+        "y": 63,
+        "scent": 4,
+        "tile": 128,
+        "life": 224,
+        "pheromone": 47,
+        "anim": [
+          3,
+          5,
+          7,
+          4
+        ]
+      },
+      "mismatches": [],
+      "expected": {
+        "tile": 128,
+        "life": 736,
+        "map_xy": [
+          63,
+          63
+        ]
+      },
+      "dos": {
+        "tile": 128,
+        "life": 736
+      }
+    },
+    {
+      "case": "direct/p2/lfe/s0",
+      "input": {
+        "plane": 2,
+        "x": 63,
+        "y": 63,
+        "scent": 0,
+        "tile": 128,
+        "life": 254,
+        "pheromone": 0,
+        "anim": [
+          3,
+          5,
+          7,
+          4
+        ]
+      },
+      "mismatches": [],
+      "expected": {
+        "tile": 128,
+        "life": 788,
+        "map_xy": [
+          63,
+          63
+        ]
+      },
+      "dos": {
+        "tile": 128,
+        "life": 788
+      }
+    },
+    {
+      "case": "direct/p2/lfe/s1",
+      "input": {
+        "plane": 2,
+        "x": 63,
+        "y": 63,
+        "scent": 1,
+        "tile": 128,
+        "life": 254,
+        "pheromone": 16,
+        "anim": [
+          3,
+          5,
+          7,
+          4
+        ]
+      },
+      "mismatches": [],
+      "expected": {
+        "tile": 128,
+        "life": 788,
+        "map_xy": [
+          63,
+          63
+        ]
+      },
+      "dos": {
+        "tile": 128,
+        "life": 788
+      }
+    },
+    {
+      "case": "direct/p2/lfe/s2",
+      "input": {
+        "plane": 2,
+        "x": 63,
+        "y": 63,
+        "scent": 2,
+        "tile": 128,
+        "life": 254,
+        "pheromone": 17,
+        "anim": [
+          3,
+          5,
+          7,
+          4
+        ]
+      },
+      "mismatches": [],
+      "expected": {
+        "tile": 128,
+        "life": 788,
+        "map_xy": [
+          63,
+          63
+        ]
+      },
+      "dos": {
+        "tile": 128,
+        "life": 788
+      }
+    },
+    {
+      "case": "direct/p2/lfe/s3",
+      "input": {
+        "plane": 2,
+        "x": 63,
+        "y": 63,
+        "scent": 3,
+        "tile": 128,
+        "life": 254,
+        "pheromone": 31,
+        "anim": [
+          3,
+          5,
+          7,
+          4
+        ]
+      },
+      "mismatches": [],
+      "expected": {
+        "tile": 128,
+        "life": 788,
+        "map_xy": [
+          63,
+          63
+        ]
+      },
+      "dos": {
+        "tile": 128,
+        "life": 788
+      }
+    },
+    {
+      "case": "direct/p2/lfe/s4",
+      "input": {
+        "plane": 2,
+        "x": 63,
+        "y": 63,
+        "scent": 4,
+        "tile": 128,
+        "life": 254,
+        "pheromone": 47,
+        "anim": [
+          3,
+          5,
+          7,
+          4
+        ]
+      },
+      "mismatches": [],
+      "expected": {
+        "tile": 128,
+        "life": 788,
+        "map_xy": [
+          63,
+          63
+        ]
+      },
+      "dos": {
+        "tile": 128,
+        "life": 788
+      }
+    },
+    {
+      "case": "direct/p2/lff/s0",
+      "input": {
+        "plane": 2,
+        "x": 63,
+        "y": 63,
+        "scent": 0,
+        "tile": 128,
+        "life": 255,
+        "pheromone": 0,
+        "anim": [
+          3,
+          5,
+          7,
+          4
+        ]
+      },
+      "mismatches": [],
+      "expected": {
+        "tile": 128,
+        "life": 782,
+        "map_xy": [
+          63,
+          63
+        ]
+      },
+      "dos": {
+        "tile": 128,
+        "life": 782
+      }
+    },
+    {
+      "case": "direct/p2/lff/s1",
+      "input": {
+        "plane": 2,
+        "x": 63,
+        "y": 63,
+        "scent": 1,
+        "tile": 128,
+        "life": 255,
+        "pheromone": 16,
+        "anim": [
+          3,
+          5,
+          7,
+          4
+        ]
+      },
+      "mismatches": [],
+      "expected": {
+        "tile": 128,
+        "life": 782,
+        "map_xy": [
+          63,
+          63
+        ]
+      },
+      "dos": {
+        "tile": 128,
+        "life": 782
+      }
+    },
+    {
+      "case": "direct/p2/lff/s2",
+      "input": {
+        "plane": 2,
+        "x": 63,
+        "y": 63,
+        "scent": 2,
+        "tile": 128,
+        "life": 255,
+        "pheromone": 17,
+        "anim": [
+          3,
+          5,
+          7,
+          4
+        ]
+      },
+      "mismatches": [],
+      "expected": {
+        "tile": 128,
+        "life": 782,
+        "map_xy": [
+          63,
+          63
+        ]
+      },
+      "dos": {
+        "tile": 128,
+        "life": 782
+      }
+    },
+    {
+      "case": "direct/p2/lff/s3",
+      "input": {
+        "plane": 2,
+        "x": 63,
+        "y": 63,
+        "scent": 3,
+        "tile": 128,
+        "life": 255,
+        "pheromone": 31,
+        "anim": [
+          3,
+          5,
+          7,
+          4
+        ]
+      },
+      "mismatches": [],
+      "expected": {
+        "tile": 128,
+        "life": 782,
+        "map_xy": [
+          63,
+          63
+        ]
+      },
+      "dos": {
+        "tile": 128,
+        "life": 782
+      }
+    },
+    {
+      "case": "direct/p2/lff/s4",
+      "input": {
+        "plane": 2,
+        "x": 63,
+        "y": 63,
+        "scent": 4,
+        "tile": 128,
+        "life": 255,
+        "pheromone": 47,
+        "anim": [
+          3,
+          5,
+          7,
+          4
+        ]
+      },
+      "mismatches": [],
+      "expected": {
+        "tile": 128,
+        "life": 782,
+        "map_xy": [
+          63,
+          63
+        ]
+      },
+      "dos": {
+        "tile": 128,
+        "life": 782
+      }
+    },
+    {
+      "case": "direct/p3/l00/s0",
+      "input": {
+        "plane": 3,
+        "x": 63,
+        "y": 63,
+        "scent": 0,
+        "tile": 135,
+        "life": 0,
+        "pheromone": 0,
+        "anim": [
+          3,
+          5,
+          7,
+          4
+        ]
+      },
+      "mismatches": [],
+      "expected": {
+        "tile": 135,
+        "life": 0,
+        "map_xy": [
+          63,
+          63
+        ]
+      },
+      "dos": {
+        "tile": 135,
+        "life": 0
+      }
+    },
+    {
+      "case": "direct/p3/l00/s1",
+      "input": {
+        "plane": 3,
+        "x": 63,
+        "y": 63,
+        "scent": 1,
+        "tile": 135,
+        "life": 0,
+        "pheromone": 16,
+        "anim": [
+          3,
+          5,
+          7,
+          4
+        ]
+      },
+      "mismatches": [],
+      "expected": {
+        "tile": 135,
+        "life": 0,
+        "map_xy": [
+          63,
+          63
+        ]
+      },
+      "dos": {
+        "tile": 135,
+        "life": 0
+      }
+    },
+    {
+      "case": "direct/p3/l00/s2",
+      "input": {
+        "plane": 3,
+        "x": 63,
+        "y": 63,
+        "scent": 2,
+        "tile": 135,
+        "life": 0,
+        "pheromone": 17,
+        "anim": [
+          3,
+          5,
+          7,
+          4
+        ]
+      },
+      "mismatches": [],
+      "expected": {
+        "tile": 135,
+        "life": 0,
+        "map_xy": [
+          63,
+          63
+        ]
+      },
+      "dos": {
+        "tile": 135,
+        "life": 0
+      }
+    },
+    {
+      "case": "direct/p3/l00/s3",
+      "input": {
+        "plane": 3,
+        "x": 63,
+        "y": 63,
+        "scent": 3,
+        "tile": 135,
+        "life": 0,
+        "pheromone": 31,
+        "anim": [
+          3,
+          5,
+          7,
+          4
+        ]
+      },
+      "mismatches": [],
+      "expected": {
+        "tile": 135,
+        "life": 0,
+        "map_xy": [
+          63,
+          63
+        ]
+      },
+      "dos": {
+        "tile": 135,
+        "life": 0
+      }
+    },
+    {
+      "case": "direct/p3/l00/s4",
+      "input": {
+        "plane": 3,
+        "x": 63,
+        "y": 63,
+        "scent": 4,
+        "tile": 135,
+        "life": 0,
+        "pheromone": 47,
+        "anim": [
+          3,
+          5,
+          7,
+          4
+        ]
+      },
+      "mismatches": [],
+      "expected": {
+        "tile": 135,
+        "life": 0,
+        "map_xy": [
+          63,
+          63
+        ]
+      },
+      "dos": {
+        "tile": 135,
+        "life": 0
+      }
+    },
+    {
+      "case": "direct/p3/l01/s0",
+      "input": {
+        "plane": 3,
+        "x": 63,
+        "y": 63,
+        "scent": 0,
+        "tile": 135,
+        "life": 1,
+        "pheromone": 0,
+        "anim": [
+          3,
+          5,
+          7,
+          4
+        ]
+      },
+      "mismatches": [],
+      "expected": {
+        "tile": 135,
+        "life": 513,
+        "map_xy": [
+          63,
+          63
+        ]
+      },
+      "dos": {
+        "tile": 135,
+        "life": 513
+      }
+    },
+    {
+      "case": "direct/p3/l01/s1",
+      "input": {
+        "plane": 3,
+        "x": 63,
+        "y": 63,
+        "scent": 1,
+        "tile": 135,
+        "life": 1,
+        "pheromone": 16,
+        "anim": [
+          3,
+          5,
+          7,
+          4
+        ]
+      },
+      "mismatches": [],
+      "expected": {
+        "tile": 135,
+        "life": 513,
+        "map_xy": [
+          63,
+          63
+        ]
+      },
+      "dos": {
+        "tile": 135,
+        "life": 513
+      }
+    },
+    {
+      "case": "direct/p3/l01/s2",
+      "input": {
+        "plane": 3,
+        "x": 63,
+        "y": 63,
+        "scent": 2,
+        "tile": 135,
+        "life": 1,
+        "pheromone": 17,
+        "anim": [
+          3,
+          5,
+          7,
+          4
+        ]
+      },
+      "mismatches": [],
+      "expected": {
+        "tile": 135,
+        "life": 513,
+        "map_xy": [
+          63,
+          63
+        ]
+      },
+      "dos": {
+        "tile": 135,
+        "life": 513
+      }
+    },
+    {
+      "case": "direct/p3/l01/s3",
+      "input": {
+        "plane": 3,
+        "x": 63,
+        "y": 63,
+        "scent": 3,
+        "tile": 135,
+        "life": 1,
+        "pheromone": 31,
+        "anim": [
+          3,
+          5,
+          7,
+          4
+        ]
+      },
+      "mismatches": [],
+      "expected": {
+        "tile": 135,
+        "life": 513,
+        "map_xy": [
+          63,
+          63
+        ]
+      },
+      "dos": {
+        "tile": 135,
+        "life": 513
+      }
+    },
+    {
+      "case": "direct/p3/l01/s4",
+      "input": {
+        "plane": 3,
+        "x": 63,
+        "y": 63,
+        "scent": 4,
+        "tile": 135,
+        "life": 1,
+        "pheromone": 47,
+        "anim": [
+          3,
+          5,
+          7,
+          4
+        ]
+      },
+      "mismatches": [],
+      "expected": {
+        "tile": 135,
+        "life": 513,
+        "map_xy": [
+          63,
+          63
+        ]
+      },
+      "dos": {
+        "tile": 135,
+        "life": 513
+      }
+    },
+    {
+      "case": "direct/p3/l40/s0",
+      "input": {
+        "plane": 3,
+        "x": 63,
+        "y": 63,
+        "scent": 0,
+        "tile": 135,
+        "life": 64,
+        "pheromone": 0,
+        "anim": [
+          3,
+          5,
+          7,
+          4
+        ]
+      },
+      "mismatches": [],
+      "expected": {
+        "tile": 135,
+        "life": 576,
+        "map_xy": [
+          63,
+          63
+        ]
+      },
+      "dos": {
+        "tile": 135,
+        "life": 576
+      }
+    },
+    {
+      "case": "direct/p3/l40/s1",
+      "input": {
+        "plane": 3,
+        "x": 63,
+        "y": 63,
+        "scent": 1,
+        "tile": 135,
+        "life": 64,
+        "pheromone": 16,
+        "anim": [
+          3,
+          5,
+          7,
+          4
+        ]
+      },
+      "mismatches": [],
+      "expected": {
+        "tile": 135,
+        "life": 576,
+        "map_xy": [
+          63,
+          63
+        ]
+      },
+      "dos": {
+        "tile": 135,
+        "life": 576
+      }
+    },
+    {
+      "case": "direct/p3/l40/s2",
+      "input": {
+        "plane": 3,
+        "x": 63,
+        "y": 63,
+        "scent": 2,
+        "tile": 135,
+        "life": 64,
+        "pheromone": 17,
+        "anim": [
+          3,
+          5,
+          7,
+          4
+        ]
+      },
+      "mismatches": [],
+      "expected": {
+        "tile": 135,
+        "life": 576,
+        "map_xy": [
+          63,
+          63
+        ]
+      },
+      "dos": {
+        "tile": 135,
+        "life": 576
+      }
+    },
+    {
+      "case": "direct/p3/l40/s3",
+      "input": {
+        "plane": 3,
+        "x": 63,
+        "y": 63,
+        "scent": 3,
+        "tile": 135,
+        "life": 64,
+        "pheromone": 31,
+        "anim": [
+          3,
+          5,
+          7,
+          4
+        ]
+      },
+      "mismatches": [],
+      "expected": {
+        "tile": 135,
+        "life": 576,
+        "map_xy": [
+          63,
+          63
+        ]
+      },
+      "dos": {
+        "tile": 135,
+        "life": 576
+      }
+    },
+    {
+      "case": "direct/p3/l40/s4",
+      "input": {
+        "plane": 3,
+        "x": 63,
+        "y": 63,
+        "scent": 4,
+        "tile": 135,
+        "life": 64,
+        "pheromone": 47,
+        "anim": [
+          3,
+          5,
+          7,
+          4
+        ]
+      },
+      "mismatches": [],
+      "expected": {
+        "tile": 135,
+        "life": 576,
+        "map_xy": [
+          63,
+          63
+        ]
+      },
+      "dos": {
+        "tile": 135,
+        "life": 576
+      }
+    },
+    {
+      "case": "direct/p3/l68/s0",
+      "input": {
+        "plane": 3,
+        "x": 63,
+        "y": 63,
+        "scent": 0,
+        "tile": 135,
+        "life": 104,
+        "pheromone": 0,
+        "anim": [
+          3,
+          5,
+          7,
+          4
+        ]
+      },
+      "mismatches": [],
+      "expected": {
+        "tile": 135,
+        "life": 616,
+        "map_xy": [
+          63,
+          63
+        ]
+      },
+      "dos": {
+        "tile": 135,
+        "life": 616
+      }
+    },
+    {
+      "case": "direct/p3/l68/s1",
+      "input": {
+        "plane": 3,
+        "x": 63,
+        "y": 63,
+        "scent": 1,
+        "tile": 135,
+        "life": 104,
+        "pheromone": 16,
+        "anim": [
+          3,
+          5,
+          7,
+          4
+        ]
+      },
+      "mismatches": [],
+      "expected": {
+        "tile": 135,
+        "life": 616,
+        "map_xy": [
+          63,
+          63
+        ]
+      },
+      "dos": {
+        "tile": 135,
+        "life": 616
+      }
+    },
+    {
+      "case": "direct/p3/l68/s2",
+      "input": {
+        "plane": 3,
+        "x": 63,
+        "y": 63,
+        "scent": 2,
+        "tile": 135,
+        "life": 104,
+        "pheromone": 17,
+        "anim": [
+          3,
+          5,
+          7,
+          4
+        ]
+      },
+      "mismatches": [],
+      "expected": {
+        "tile": 135,
+        "life": 616,
+        "map_xy": [
+          63,
+          63
+        ]
+      },
+      "dos": {
+        "tile": 135,
+        "life": 616
+      }
+    },
+    {
+      "case": "direct/p3/l68/s3",
+      "input": {
+        "plane": 3,
+        "x": 63,
+        "y": 63,
+        "scent": 3,
+        "tile": 135,
+        "life": 104,
+        "pheromone": 31,
+        "anim": [
+          3,
+          5,
+          7,
+          4
+        ]
+      },
+      "mismatches": [],
+      "expected": {
+        "tile": 135,
+        "life": 616,
+        "map_xy": [
+          63,
+          63
+        ]
+      },
+      "dos": {
+        "tile": 135,
+        "life": 616
+      }
+    },
+    {
+      "case": "direct/p3/l68/s4",
+      "input": {
+        "plane": 3,
+        "x": 63,
+        "y": 63,
+        "scent": 4,
+        "tile": 135,
+        "life": 104,
+        "pheromone": 47,
+        "anim": [
+          3,
+          5,
+          7,
+          4
+        ]
+      },
+      "mismatches": [],
+      "expected": {
+        "tile": 135,
+        "life": 616,
+        "map_xy": [
+          63,
+          63
+        ]
+      },
+      "dos": {
+        "tile": 135,
+        "life": 616
+      }
+    },
+    {
+      "case": "direct/p3/le0/s0",
+      "input": {
+        "plane": 3,
+        "x": 63,
+        "y": 63,
+        "scent": 0,
+        "tile": 135,
+        "life": 224,
+        "pheromone": 0,
+        "anim": [
+          3,
+          5,
+          7,
+          4
+        ]
+      },
+      "mismatches": [],
+      "expected": {
+        "tile": 135,
+        "life": 736,
+        "map_xy": [
+          63,
+          63
+        ]
+      },
+      "dos": {
+        "tile": 135,
+        "life": 736
+      }
+    },
+    {
+      "case": "direct/p3/le0/s1",
+      "input": {
+        "plane": 3,
+        "x": 63,
+        "y": 63,
+        "scent": 1,
+        "tile": 135,
+        "life": 224,
+        "pheromone": 16,
+        "anim": [
+          3,
+          5,
+          7,
+          4
+        ]
+      },
+      "mismatches": [],
+      "expected": {
+        "tile": 135,
+        "life": 736,
+        "map_xy": [
+          63,
+          63
+        ]
+      },
+      "dos": {
+        "tile": 135,
+        "life": 736
+      }
+    },
+    {
+      "case": "direct/p3/le0/s2",
+      "input": {
+        "plane": 3,
+        "x": 63,
+        "y": 63,
+        "scent": 2,
+        "tile": 135,
+        "life": 224,
+        "pheromone": 17,
+        "anim": [
+          3,
+          5,
+          7,
+          4
+        ]
+      },
+      "mismatches": [],
+      "expected": {
+        "tile": 135,
+        "life": 736,
+        "map_xy": [
+          63,
+          63
+        ]
+      },
+      "dos": {
+        "tile": 135,
+        "life": 736
+      }
+    },
+    {
+      "case": "direct/p3/le0/s3",
+      "input": {
+        "plane": 3,
+        "x": 63,
+        "y": 63,
+        "scent": 3,
+        "tile": 135,
+        "life": 224,
+        "pheromone": 31,
+        "anim": [
+          3,
+          5,
+          7,
+          4
+        ]
+      },
+      "mismatches": [],
+      "expected": {
+        "tile": 135,
+        "life": 736,
+        "map_xy": [
+          63,
+          63
+        ]
+      },
+      "dos": {
+        "tile": 135,
+        "life": 736
+      }
+    },
+    {
+      "case": "direct/p3/le0/s4",
+      "input": {
+        "plane": 3,
+        "x": 63,
+        "y": 63,
+        "scent": 4,
+        "tile": 135,
+        "life": 224,
+        "pheromone": 47,
+        "anim": [
+          3,
+          5,
+          7,
+          4
+        ]
+      },
+      "mismatches": [],
+      "expected": {
+        "tile": 135,
+        "life": 736,
+        "map_xy": [
+          63,
+          63
+        ]
+      },
+      "dos": {
+        "tile": 135,
+        "life": 736
+      }
+    },
+    {
+      "case": "direct/p3/lfe/s0",
+      "input": {
+        "plane": 3,
+        "x": 63,
+        "y": 63,
+        "scent": 0,
+        "tile": 135,
+        "life": 254,
+        "pheromone": 0,
+        "anim": [
+          3,
+          5,
+          7,
+          4
+        ]
+      },
+      "mismatches": [],
+      "expected": {
+        "tile": 135,
+        "life": 788,
+        "map_xy": [
+          63,
+          63
+        ]
+      },
+      "dos": {
+        "tile": 135,
+        "life": 788
+      }
+    },
+    {
+      "case": "direct/p3/lfe/s1",
+      "input": {
+        "plane": 3,
+        "x": 63,
+        "y": 63,
+        "scent": 1,
+        "tile": 135,
+        "life": 254,
+        "pheromone": 16,
+        "anim": [
+          3,
+          5,
+          7,
+          4
+        ]
+      },
+      "mismatches": [],
+      "expected": {
+        "tile": 135,
+        "life": 788,
+        "map_xy": [
+          63,
+          63
+        ]
+      },
+      "dos": {
+        "tile": 135,
+        "life": 788
+      }
+    },
+    {
+      "case": "direct/p3/lfe/s2",
+      "input": {
+        "plane": 3,
+        "x": 63,
+        "y": 63,
+        "scent": 2,
+        "tile": 135,
+        "life": 254,
+        "pheromone": 17,
+        "anim": [
+          3,
+          5,
+          7,
+          4
+        ]
+      },
+      "mismatches": [],
+      "expected": {
+        "tile": 135,
+        "life": 788,
+        "map_xy": [
+          63,
+          63
+        ]
+      },
+      "dos": {
+        "tile": 135,
+        "life": 788
+      }
+    },
+    {
+      "case": "direct/p3/lfe/s3",
+      "input": {
+        "plane": 3,
+        "x": 63,
+        "y": 63,
+        "scent": 3,
+        "tile": 135,
+        "life": 254,
+        "pheromone": 31,
+        "anim": [
+          3,
+          5,
+          7,
+          4
+        ]
+      },
+      "mismatches": [],
+      "expected": {
+        "tile": 135,
+        "life": 788,
+        "map_xy": [
+          63,
+          63
+        ]
+      },
+      "dos": {
+        "tile": 135,
+        "life": 788
+      }
+    },
+    {
+      "case": "direct/p3/lfe/s4",
+      "input": {
+        "plane": 3,
+        "x": 63,
+        "y": 63,
+        "scent": 4,
+        "tile": 135,
+        "life": 254,
+        "pheromone": 47,
+        "anim": [
+          3,
+          5,
+          7,
+          4
+        ]
+      },
+      "mismatches": [],
+      "expected": {
+        "tile": 135,
+        "life": 788,
+        "map_xy": [
+          63,
+          63
+        ]
+      },
+      "dos": {
+        "tile": 135,
+        "life": 788
+      }
+    },
+    {
+      "case": "direct/p3/lff/s0",
+      "input": {
+        "plane": 3,
+        "x": 63,
+        "y": 63,
+        "scent": 0,
+        "tile": 135,
+        "life": 255,
+        "pheromone": 0,
+        "anim": [
+          3,
+          5,
+          7,
+          4
+        ]
+      },
+      "mismatches": [],
+      "expected": {
+        "tile": 135,
+        "life": 782,
+        "map_xy": [
+          63,
+          63
+        ]
+      },
+      "dos": {
+        "tile": 135,
+        "life": 782
+      }
+    },
+    {
+      "case": "direct/p3/lff/s1",
+      "input": {
+        "plane": 3,
+        "x": 63,
+        "y": 63,
+        "scent": 1,
+        "tile": 135,
+        "life": 255,
+        "pheromone": 16,
+        "anim": [
+          3,
+          5,
+          7,
+          4
+        ]
+      },
+      "mismatches": [],
+      "expected": {
+        "tile": 135,
+        "life": 782,
+        "map_xy": [
+          63,
+          63
+        ]
+      },
+      "dos": {
+        "tile": 135,
+        "life": 782
+      }
+    },
+    {
+      "case": "direct/p3/lff/s2",
+      "input": {
+        "plane": 3,
+        "x": 63,
+        "y": 63,
+        "scent": 2,
+        "tile": 135,
+        "life": 255,
+        "pheromone": 17,
+        "anim": [
+          3,
+          5,
+          7,
+          4
+        ]
+      },
+      "mismatches": [],
+      "expected": {
+        "tile": 135,
+        "life": 782,
+        "map_xy": [
+          63,
+          63
+        ]
+      },
+      "dos": {
+        "tile": 135,
+        "life": 782
+      }
+    },
+    {
+      "case": "direct/p3/lff/s3",
+      "input": {
+        "plane": 3,
+        "x": 63,
+        "y": 63,
+        "scent": 3,
+        "tile": 135,
+        "life": 255,
+        "pheromone": 31,
+        "anim": [
+          3,
+          5,
+          7,
+          4
+        ]
+      },
+      "mismatches": [],
+      "expected": {
+        "tile": 135,
+        "life": 782,
+        "map_xy": [
+          63,
+          63
+        ]
+      },
+      "dos": {
+        "tile": 135,
+        "life": 782
+      }
+    },
+    {
+      "case": "direct/p3/lff/s4",
+      "input": {
+        "plane": 3,
+        "x": 63,
+        "y": 63,
+        "scent": 4,
+        "tile": 135,
+        "life": 255,
+        "pheromone": 47,
+        "anim": [
+          3,
+          5,
+          7,
+          4
+        ]
+      },
+      "mismatches": [],
+      "expected": {
+        "tile": 135,
+        "life": 782,
+        "map_xy": [
+          63,
+          63
+        ]
+      },
+      "dos": {
+        "tile": 135,
+        "life": 782
+      }
+    },
+    {
+      "case": "random/0",
+      "input": {
+        "plane": 3,
+        "x": 16,
+        "y": 42,
+        "scent": 0,
+        "tile": 239,
+        "life": 0,
+        "pheromone": 35,
+        "anim": [
+          -1,
+          -8,
+          0,
+          6
+        ]
+      },
+      "mismatches": [],
+      "expected": {
+        "tile": 239,
+        "life": 0,
+        "map_xy": [
+          16,
+          42
+        ]
+      },
+      "dos": {
+        "tile": 239,
+        "life": 0
+      }
+    },
+    {
+      "case": "random/1",
+      "input": {
+        "plane": 3,
+        "x": 56,
+        "y": 15,
+        "scent": 0,
+        "tile": 19,
+        "life": 0,
+        "pheromone": 133,
+        "anim": [
+          -13,
+          -6,
+          6,
+          3
+        ]
+      },
+      "mismatches": [],
+      "expected": {
+        "tile": 19,
+        "life": 0,
+        "map_xy": [
+          56,
+          15
+        ]
+      },
+      "dos": {
+        "tile": 19,
+        "life": 0
+      }
+    },
+    {
+      "case": "random/2",
+      "input": {
+        "plane": 3,
+        "x": 13,
+        "y": 1,
+        "scent": 4,
+        "tile": 90,
+        "life": 104,
+        "pheromone": 92,
+        "anim": [
+          11,
+          16,
+          10,
+          4
+        ]
+      },
+      "mismatches": [],
+      "expected": {
+        "tile": 90,
+        "life": 616,
+        "map_xy": [
+          13,
+          1
+        ]
+      },
+      "dos": {
+        "tile": 90,
+        "life": 616
+      }
+    },
+    {
+      "case": "random/3",
+      "input": {
+        "plane": 3,
+        "x": 101,
+        "y": 9,
+        "scent": 3,
+        "tile": 239,
+        "life": 224,
+        "pheromone": 248,
+        "anim": [
+          12,
+          16,
+          6,
+          -12
+        ]
+      },
+      "mismatches": [],
+      "expected": {
+        "tile": 239,
+        "life": 736,
+        "map_xy": [
+          37,
+          9
+        ]
+      },
+      "dos": {
+        "tile": 239,
+        "life": 736
+      }
+    },
+    {
+      "case": "random/4",
+      "input": {
+        "plane": 3,
+        "x": 49,
+        "y": 36,
+        "scent": 3,
+        "tile": 29,
+        "life": 17,
+        "pheromone": 114,
+        "anim": [
+          15,
+          14,
+          -7,
+          7
+        ]
+      },
+      "mismatches": [],
+      "expected": {
+        "tile": 29,
+        "life": 529,
+        "map_xy": [
+          49,
+          36
+        ]
+      },
+      "dos": {
+        "tile": 29,
+        "life": 529
+      }
+    },
+    {
+      "case": "random/5",
+      "input": {
+        "plane": 2,
+        "x": 96,
+        "y": 53,
+        "scent": 1,
+        "tile": 53,
+        "life": 0,
+        "pheromone": 247,
+        "anim": [
+          -3,
+          5,
+          -14,
+          5
+        ]
+      },
+      "mismatches": [],
+      "expected": {
+        "tile": 53,
+        "life": 0,
+        "map_xy": [
+          32,
+          53
+        ]
+      },
+      "dos": {
+        "tile": 53,
+        "life": 0
+      }
+    },
+    {
+      "case": "random/6",
+      "input": {
+        "plane": 0,
+        "x": 2,
+        "y": 59,
+        "scent": 2,
+        "tile": 231,
+        "life": 255,
+        "pheromone": 242,
+        "anim": [
+          -8,
+          -4,
+          -15,
+          6
+        ]
+      },
+      "mismatches": [],
+      "expected": {
+        "tile": 255,
+        "life": 879,
+        "map_xy": [
+          2,
+          59
+        ]
+      },
+      "dos": {
+        "tile": 255,
+        "life": 879
+      }
+    },
+    {
+      "case": "random/7",
+      "input": {
+        "plane": 1,
+        "x": 29,
+        "y": 25,
+        "scent": 3,
+        "tile": 199,
+        "life": 104,
+        "pheromone": 192,
+        "anim": [
+          2,
+          -2,
+          -4,
+          6
+        ]
+      },
+      "mismatches": [],
+      "expected": {
+        "tile": 252,
+        "life": 360,
+        "map_xy": [
+          29,
+          25
+        ]
+      },
+      "dos": {
+        "tile": 252,
+        "life": 360
+      }
+    },
+    {
+      "case": "random/8",
+      "input": {
+        "plane": 3,
+        "x": 98,
+        "y": 13,
+        "scent": 3,
+        "tile": 63,
+        "life": 224,
+        "pheromone": 0,
+        "anim": [
+          -1,
+          3,
+          9,
+          11
+        ]
+      },
+      "mismatches": [],
+      "expected": {
+        "tile": 63,
+        "life": 736,
+        "map_xy": [
+          34,
+          13
+        ]
+      },
+      "dos": {
+        "tile": 63,
+        "life": 736
+      }
+    },
+    {
+      "case": "random/9",
+      "input": {
+        "plane": 2,
+        "x": 89,
+        "y": 47,
+        "scent": 3,
+        "tile": 141,
+        "life": 0,
+        "pheromone": 194,
+        "anim": [
+          4,
+          4,
+          -12,
+          1
+        ]
+      },
+      "mismatches": [],
+      "expected": {
+        "tile": 141,
+        "life": 0,
+        "map_xy": [
+          25,
+          47
+        ]
+      },
+      "dos": {
+        "tile": 141,
+        "life": 0
+      }
+    },
+    {
+      "case": "random/10",
+      "input": {
+        "plane": 3,
+        "x": 37,
+        "y": 33,
+        "scent": 0,
+        "tile": 81,
+        "life": 254,
+        "pheromone": 117,
+        "anim": [
+          -3,
+          9,
+          -11,
+          -13
+        ]
+      },
+      "mismatches": [],
+      "expected": {
+        "tile": 81,
+        "life": 769,
+        "map_xy": [
+          37,
+          33
+        ]
+      },
+      "dos": {
+        "tile": 81,
+        "life": 769
+      }
+    },
+    {
+      "case": "random/11",
+      "input": {
+        "plane": 0,
+        "x": 61,
+        "y": 2,
+        "scent": 1,
+        "tile": 17,
+        "life": 0,
+        "pheromone": 152,
+        "anim": [
+          -13,
+          -7,
+          11,
+          13
+        ]
+      },
+      "mismatches": [],
+      "expected": {
+        "tile": 249,
+        "life": 0,
+        "map_xy": [
+          61,
+          2
+        ]
+      },
+      "dos": {
+        "tile": 249,
+        "life": 0
+      }
+    },
+    {
+      "case": "random/12",
+      "input": {
+        "plane": 3,
+        "x": 127,
+        "y": 11,
+        "scent": 2,
+        "tile": 96,
+        "life": 255,
+        "pheromone": 182,
+        "anim": [
+          4,
+          6,
+          -7,
+          13
+        ]
+      },
+      "mismatches": [],
+      "expected": {
+        "tile": 96,
+        "life": 791,
+        "map_xy": [
+          63,
+          11
+        ]
+      },
+      "dos": {
+        "tile": 96,
+        "life": 791
+      }
+    },
+    {
+      "case": "random/13",
+      "input": {
+        "plane": 3,
+        "x": 124,
+        "y": 7,
+        "scent": 0,
+        "tile": 95,
+        "life": 254,
+        "pheromone": 88,
+        "anim": [
+          -6,
+          2,
+          -2,
+          -4
+        ]
+      },
+      "mismatches": [],
+      "expected": {
+        "tile": 95,
+        "life": 768,
+        "map_xy": [
+          60,
+          7
+        ]
+      },
+      "dos": {
+        "tile": 95,
+        "life": 768
+      }
+    },
+    {
+      "case": "random/14",
+      "input": {
+        "plane": 0,
+        "x": 26,
+        "y": 30,
+        "scent": 2,
+        "tile": 205,
+        "life": 255,
+        "pheromone": 185,
+        "anim": [
+          -9,
+          -10,
+          5,
+          -4
+        ]
+      },
+      "mismatches": [],
+      "expected": {
+        "tile": 251,
+        "life": 888,
+        "map_xy": [
+          26,
+          30
+        ]
+      },
+      "dos": {
+        "tile": 251,
+        "life": 888
+      }
+    },
+    {
+      "case": "random/15",
+      "input": {
+        "plane": 0,
+        "x": 57,
+        "y": 34,
+        "scent": 3,
+        "tile": 107,
+        "life": 224,
+        "pheromone": 99,
+        "anim": [
+          -6,
+          2,
+          -1,
+          14
+        ]
+      },
+      "mismatches": [],
+      "expected": {
+        "tile": 246,
+        "life": 480,
+        "map_xy": [
+          57,
+          34
+        ]
+      },
+      "dos": {
+        "tile": 246,
+        "life": 480
+      }
+    },
+    {
+      "case": "random/16",
+      "input": {
+        "plane": 0,
+        "x": 52,
+        "y": 19,
+        "scent": 4,
+        "tile": 219,
+        "life": 0,
+        "pheromone": 207,
+        "anim": [
+          -5,
+          4,
+          -6,
+          11
+        ]
+      },
+      "mismatches": [],
+      "expected": {
+        "tile": 252,
+        "life": 0,
+        "map_xy": [
+          52,
+          19
+        ]
+      },
+      "dos": {
+        "tile": 252,
+        "life": 0
+      }
+    },
+    {
+      "case": "random/17",
+      "input": {
+        "plane": 0,
+        "x": 92,
+        "y": 9,
+        "scent": 3,
+        "tile": 239,
+        "life": 0,
+        "pheromone": 242,
+        "anim": [
+          1,
+          6,
+          -13,
+          -12
+        ]
+      },
+      "mismatches": [],
+      "expected": {
+        "tile": 255,
+        "life": 0,
+        "map_xy": [
+          92,
+          9
+        ]
+      },
+      "dos": {
+        "tile": 255,
+        "life": 0
+      }
+    },
+    {
+      "case": "random/18",
+      "input": {
+        "plane": 1,
+        "x": 24,
+        "y": 43,
+        "scent": 2,
+        "tile": 254,
+        "life": 17,
+        "pheromone": 94,
+        "anim": [
+          16,
+          -7,
+          6,
+          -13
+        ]
+      },
+      "mismatches": [],
+      "expected": {
+        "tile": 245,
+        "life": 273,
+        "map_xy": [
+          24,
+          43
+        ]
+      },
+      "dos": {
+        "tile": 245,
+        "life": 273
+      }
+    },
+    {
+      "case": "random/19",
+      "input": {
+        "plane": 3,
+        "x": 46,
+        "y": 30,
+        "scent": 3,
+        "tile": 149,
+        "life": 0,
+        "pheromone": 218,
+        "anim": [
+          8,
+          -2,
+          -4,
+          7
+        ]
+      },
+      "mismatches": [],
+      "expected": {
+        "tile": 149,
+        "life": 0,
+        "map_xy": [
+          46,
+          30
+        ]
+      },
+      "dos": {
+        "tile": 149,
+        "life": 0
+      }
+    },
+    {
+      "case": "random/20",
+      "input": {
+        "plane": 2,
+        "x": 19,
+        "y": 36,
+        "scent": 3,
+        "tile": 189,
+        "life": 17,
+        "pheromone": 236,
+        "anim": [
+          6,
+          3,
+          0,
+          3
+        ]
+      },
+      "mismatches": [],
+      "expected": {
+        "tile": 189,
+        "life": 529,
+        "map_xy": [
+          19,
+          36
+        ]
+      },
+      "dos": {
+        "tile": 189,
+        "life": 529
+      }
+    },
+    {
+      "case": "random/21",
+      "input": {
+        "plane": 1,
+        "x": 118,
+        "y": 54,
+        "scent": 3,
+        "tile": 136,
+        "life": 254,
+        "pheromone": 237,
+        "anim": [
+          -4,
+          7,
+          16,
+          -15
+        ]
+      },
+      "mismatches": [],
+      "expected": {
+        "tile": 254,
+        "life": 892,
+        "map_xy": [
+          118,
+          54
+        ]
+      },
+      "dos": {
+        "tile": 254,
+        "life": 892
+      }
+    },
+    {
+      "case": "random/22",
+      "input": {
+        "plane": 3,
+        "x": 98,
+        "y": 40,
+        "scent": 3,
+        "tile": 175,
+        "life": 17,
+        "pheromone": 200,
+        "anim": [
+          -9,
+          -10,
+          9,
+          6
+        ]
+      },
+      "mismatches": [],
+      "expected": {
+        "tile": 175,
+        "life": 529,
+        "map_xy": [
+          34,
+          40
+        ]
+      },
+      "dos": {
+        "tile": 175,
+        "life": 529
+      }
+    },
+    {
+      "case": "random/23",
+      "input": {
+        "plane": 2,
+        "x": 60,
+        "y": 44,
+        "scent": 3,
+        "tile": 69,
+        "life": 224,
+        "pheromone": 9,
+        "anim": [
+          9,
+          11,
+          12,
+          -8
+        ]
+      },
+      "mismatches": [],
+      "expected": {
+        "tile": 69,
+        "life": 736,
+        "map_xy": [
+          60,
+          44
+        ]
+      },
+      "dos": {
+        "tile": 69,
+        "life": 736
+      }
+    },
+    {
+      "case": "random/24",
+      "input": {
+        "plane": 0,
+        "x": 39,
+        "y": 48,
+        "scent": 2,
+        "tile": 170,
+        "life": 104,
+        "pheromone": 43,
+        "anim": [
+          -7,
+          11,
+          -6,
+          -3
+        ]
+      },
+      "mismatches": [],
+      "expected": {
+        "tile": 242,
+        "life": 360,
+        "map_xy": [
+          39,
+          48
+        ]
+      },
+      "dos": {
+        "tile": 242,
+        "life": 360
+      }
+    },
+    {
+      "case": "random/25",
+      "input": {
+        "plane": 3,
+        "x": 9,
+        "y": 35,
+        "scent": 1,
+        "tile": 87,
+        "life": 254,
+        "pheromone": 241,
+        "anim": [
+          -5,
+          0,
+          10,
+          4
+        ]
+      },
+      "mismatches": [],
+      "expected": {
+        "tile": 87,
+        "life": 775,
+        "map_xy": [
+          9,
+          35
+        ]
+      },
+      "dos": {
+        "tile": 87,
+        "life": 775
+      }
+    },
+    {
+      "case": "random/26",
+      "input": {
+        "plane": 0,
+        "x": 94,
+        "y": 63,
+        "scent": 0,
+        "tile": 132,
+        "life": 64,
+        "pheromone": 8,
+        "anim": [
+          9,
+          -9,
+          -2,
+          -7
+        ]
+      },
+      "mismatches": [],
+      "expected": {
+        "tile": 132,
+        "life": 320,
+        "map_xy": [
+          94,
+          63
+        ]
+      },
+      "dos": {
+        "tile": 132,
+        "life": 320
+      }
+    },
+    {
+      "case": "random/27",
+      "input": {
+        "plane": 2,
+        "x": 18,
+        "y": 46,
+        "scent": 4,
+        "tile": 130,
+        "life": 255,
+        "pheromone": 206,
+        "anim": [
+          -13,
+          2,
+          9,
+          4
+        ]
+      },
+      "mismatches": [],
+      "expected": {
+        "tile": 130,
+        "life": 768,
+        "map_xy": [
+          18,
+          46
+        ]
+      },
+      "dos": {
+        "tile": 130,
+        "life": 768
+      }
+    },
+    {
+      "case": "random/28",
+      "input": {
+        "plane": 3,
+        "x": 109,
+        "y": 41,
+        "scent": 4,
+        "tile": 3,
+        "life": 104,
+        "pheromone": 78,
+        "anim": [
+          -15,
+          -2,
+          14,
+          -1
+        ]
+      },
+      "mismatches": [],
+      "expected": {
+        "tile": 3,
+        "life": 616,
+        "map_xy": [
+          45,
+          41
+        ]
+      },
+      "dos": {
+        "tile": 3,
+        "life": 616
+      }
+    },
+    {
+      "case": "random/29",
+      "input": {
+        "plane": 1,
+        "x": 20,
+        "y": 32,
+        "scent": 1,
+        "tile": 191,
+        "life": 17,
+        "pheromone": 92,
+        "anim": [
+          4,
+          4,
+          -8,
+          2
+        ]
+      },
+      "mismatches": [],
+      "expected": {
+        "tile": 245,
+        "life": 273,
+        "map_xy": [
+          20,
+          32
+        ]
+      },
+      "dos": {
+        "tile": 245,
+        "life": 273
+      }
+    },
+    {
+      "case": "random/30",
+      "input": {
+        "plane": 0,
+        "x": 13,
+        "y": 14,
+        "scent": 1,
+        "tile": 67,
+        "life": 17,
+        "pheromone": 227,
+        "anim": [
+          4,
+          11,
+          9,
+          -14
+        ]
+      },
+      "mismatches": [],
+      "expected": {
+        "tile": 254,
+        "life": 273,
+        "map_xy": [
+          13,
+          14
+        ]
+      },
+      "dos": {
+        "tile": 254,
+        "life": 273
+      }
+    },
+    {
+      "case": "random/31",
+      "input": {
+        "plane": 0,
+        "x": 114,
+        "y": 58,
+        "scent": 4,
+        "tile": 196,
+        "life": 64,
+        "pheromone": 47,
+        "anim": [
+          -4,
+          -16,
+          -7,
+          -16
+        ]
+      },
+      "mismatches": [],
+      "expected": {
+        "tile": 242,
+        "life": 320,
+        "map_xy": [
+          114,
+          58
+        ]
+      },
+      "dos": {
+        "tile": 242,
+        "life": 320
+      }
+    },
+    {
+      "case": "random/32",
+      "input": {
+        "plane": 2,
+        "x": 23,
+        "y": 13,
+        "scent": 4,
+        "tile": 23,
+        "life": 64,
+        "pheromone": 107,
+        "anim": [
+          15,
+          15,
+          9,
+          0
+        ]
+      },
+      "mismatches": [],
+      "expected": {
+        "tile": 23,
+        "life": 576,
+        "map_xy": [
+          23,
+          13
+        ]
+      },
+      "dos": {
+        "tile": 23,
+        "life": 576
+      }
+    },
+    {
+      "case": "random/33",
+      "input": {
+        "plane": 3,
+        "x": 119,
+        "y": 46,
+        "scent": 3,
+        "tile": 208,
+        "life": 255,
+        "pheromone": 164,
+        "anim": [
+          -16,
+          10,
+          -5,
+          -3
+        ]
+      },
+      "mismatches": [],
+      "expected": {
+        "tile": 208,
+        "life": 744,
+        "map_xy": [
+          55,
+          46
+        ]
+      },
+      "dos": {
+        "tile": 208,
+        "life": 744
+      }
+    },
+    {
+      "case": "random/34",
+      "input": {
+        "plane": 3,
+        "x": 119,
+        "y": 47,
+        "scent": 3,
+        "tile": 168,
+        "life": 255,
+        "pheromone": 247,
+        "anim": [
+          1,
+          5,
+          -6,
+          -6
+        ]
+      },
+      "mismatches": [],
+      "expected": {
+        "tile": 168,
+        "life": 757,
+        "map_xy": [
+          55,
+          47
+        ]
+      },
+      "dos": {
+        "tile": 168,
+        "life": 757
+      }
+    },
+    {
+      "case": "random/35",
+      "input": {
+        "plane": 2,
+        "x": 4,
+        "y": 26,
+        "scent": 1,
+        "tile": 147,
+        "life": 255,
+        "pheromone": 132,
+        "anim": [
+          10,
+          -7,
+          -15,
+          4
+        ]
+      },
+      "mismatches": [],
+      "expected": {
+        "tile": 147,
+        "life": 767,
+        "map_xy": [
+          4,
+          26
+        ]
+      },
+      "dos": {
+        "tile": 147,
+        "life": 767
+      }
+    },
+    {
+      "case": "random/36",
+      "input": {
+        "plane": 3,
+        "x": 24,
+        "y": 25,
+        "scent": 3,
+        "tile": 173,
+        "life": 0,
+        "pheromone": 110,
+        "anim": [
+          7,
+          -10,
+          -9,
+          15
+        ]
+      },
+      "mismatches": [],
+      "expected": {
+        "tile": 173,
+        "life": 0,
+        "map_xy": [
+          24,
+          25
+        ]
+      },
+      "dos": {
+        "tile": 173,
+        "life": 0
+      }
+    },
+    {
+      "case": "random/37",
+      "input": {
+        "plane": 2,
+        "x": 99,
+        "y": 60,
+        "scent": 4,
+        "tile": 28,
+        "life": 224,
+        "pheromone": 249,
+        "anim": [
+          -9,
+          4,
+          1,
+          -7
+        ]
+      },
+      "mismatches": [],
+      "expected": {
+        "tile": 28,
+        "life": 736,
+        "map_xy": [
+          35,
+          60
+        ]
+      },
+      "dos": {
+        "tile": 28,
+        "life": 736
+      }
+    },
+    {
+      "case": "random/38",
+      "input": {
+        "plane": 2,
+        "x": 63,
+        "y": 22,
+        "scent": 4,
+        "tile": 150,
+        "life": 0,
+        "pheromone": 104,
+        "anim": [
+          8,
+          14,
+          6,
+          6
+        ]
+      },
+      "mismatches": [],
+      "expected": {
+        "tile": 150,
+        "life": 0,
+        "map_xy": [
+          63,
+          22
+        ]
+      },
+      "dos": {
+        "tile": 150,
+        "life": 0
+      }
+    },
+    {
+      "case": "random/39",
+      "input": {
+        "plane": 2,
+        "x": 17,
+        "y": 3,
+        "scent": 2,
+        "tile": 178,
+        "life": 0,
+        "pheromone": 106,
+        "anim": [
+          0,
+          -12,
+          -6,
+          4
+        ]
+      },
+      "mismatches": [],
+      "expected": {
+        "tile": 178,
+        "life": 0,
+        "map_xy": [
+          17,
+          3
+        ]
+      },
+      "dos": {
+        "tile": 178,
+        "life": 0
+      }
+    },
+    {
+      "case": "random/40",
+      "input": {
+        "plane": 0,
+        "x": 25,
+        "y": 43,
+        "scent": 3,
+        "tile": 20,
+        "life": 104,
+        "pheromone": 48,
+        "anim": [
+          -9,
+          11,
+          2,
+          15
+        ]
+      },
+      "mismatches": [],
+      "expected": {
+        "tile": 243,
+        "life": 360,
+        "map_xy": [
+          25,
+          43
+        ]
+      },
+      "dos": {
+        "tile": 243,
+        "life": 360
+      }
+    },
+    {
+      "case": "random/41",
+      "input": {
+        "plane": 2,
+        "x": 48,
+        "y": 61,
+        "scent": 3,
+        "tile": 202,
+        "life": 104,
+        "pheromone": 57,
+        "anim": [
+          9,
+          16,
+          -6,
+          -9
+        ]
+      },
+      "mismatches": [],
+      "expected": {
+        "tile": 202,
+        "life": 616,
+        "map_xy": [
+          48,
+          61
+        ]
+      },
+      "dos": {
+        "tile": 202,
+        "life": 616
+      }
+    },
+    {
+      "case": "random/42",
+      "input": {
+        "plane": 3,
+        "x": 76,
+        "y": 48,
+        "scent": 3,
+        "tile": 234,
+        "life": 17,
+        "pheromone": 215,
+        "anim": [
+          -15,
+          -14,
+          -13,
+          4
+        ]
+      },
+      "mismatches": [],
+      "expected": {
+        "tile": 234,
+        "life": 529,
+        "map_xy": [
+          12,
+          48
+        ]
+      },
+      "dos": {
+        "tile": 234,
+        "life": 529
+      }
+    },
+    {
+      "case": "random/43",
+      "input": {
+        "plane": 0,
+        "x": 117,
+        "y": 21,
+        "scent": 0,
+        "tile": 141,
+        "life": 254,
+        "pheromone": 198,
+        "anim": [
+          11,
+          7,
+          -11,
+          11
+        ]
+      },
+      "mismatches": [],
+      "expected": {
+        "tile": 252,
+        "life": 933,
+        "map_xy": [
+          117,
+          21
+        ]
+      },
+      "dos": {
+        "tile": 252,
+        "life": 933
+      }
+    },
+    {
+      "case": "random/44",
+      "input": {
+        "plane": 0,
+        "x": 7,
+        "y": 41,
+        "scent": 1,
+        "tile": 179,
+        "life": 0,
+        "pheromone": 230,
+        "anim": [
+          -13,
+          10,
+          -2,
+          13
+        ]
+      },
+      "mismatches": [],
+      "expected": {
+        "tile": 254,
+        "life": 0,
+        "map_xy": [
+          7,
+          41
+        ]
+      },
+      "dos": {
+        "tile": 254,
+        "life": 0
+      }
+    },
+    {
+      "case": "random/45",
+      "input": {
+        "plane": 2,
+        "x": 99,
+        "y": 26,
+        "scent": 0,
+        "tile": 193,
+        "life": 0,
+        "pheromone": 140,
+        "anim": [
+          11,
+          15,
+          12,
+          0
+        ]
+      },
+      "mismatches": [],
+      "expected": {
+        "tile": 193,
+        "life": 0,
+        "map_xy": [
+          35,
+          26
+        ]
+      },
+      "dos": {
+        "tile": 193,
+        "life": 0
+      }
+    },
+    {
+      "case": "random/46",
+      "input": {
+        "plane": 2,
+        "x": 99,
+        "y": 16,
+        "scent": 3,
+        "tile": 147,
+        "life": 104,
+        "pheromone": 212,
+        "anim": [
+          7,
+          -4,
+          -5,
+          -5
+        ]
+      },
+      "mismatches": [],
+      "expected": {
+        "tile": 147,
+        "life": 616,
+        "map_xy": [
+          35,
+          16
+        ]
+      },
+      "dos": {
+        "tile": 147,
+        "life": 616
+      }
+    },
+    {
+      "case": "random/47",
+      "input": {
+        "plane": 2,
+        "x": 80,
+        "y": 23,
+        "scent": 3,
+        "tile": 26,
+        "life": 0,
+        "pheromone": 80,
+        "anim": [
+          -4,
+          7,
+          3,
+          0
+        ]
+      },
+      "mismatches": [],
+      "expected": {
+        "tile": 26,
+        "life": 0,
+        "map_xy": [
+          16,
+          23
+        ]
+      },
+      "dos": {
+        "tile": 26,
+        "life": 0
+      }
+    },
+    {
+      "case": "random/48",
+      "input": {
+        "plane": 2,
+        "x": 51,
+        "y": 41,
+        "scent": 0,
+        "tile": 117,
+        "life": 224,
+        "pheromone": 86,
+        "anim": [
+          14,
+          13,
+          2,
+          -8
+        ]
+      },
+      "mismatches": [],
+      "expected": {
+        "tile": 117,
+        "life": 736,
+        "map_xy": [
+          51,
+          41
+        ]
+      },
+      "dos": {
+        "tile": 117,
+        "life": 736
+      }
+    },
+    {
+      "case": "random/49",
+      "input": {
+        "plane": 3,
+        "x": 60,
+        "y": 62,
+        "scent": 2,
+        "tile": 166,
+        "life": 0,
+        "pheromone": 178,
+        "anim": [
+          -9,
+          -10,
+          -15,
+          -4
+        ]
+      },
+      "mismatches": [],
+      "expected": {
+        "tile": 166,
+        "life": 0,
+        "map_xy": [
+          60,
+          62
+        ]
+      },
+      "dos": {
+        "tile": 166,
+        "life": 0
+      }
+    },
+    {
+      "case": "random/50",
+      "input": {
+        "plane": 2,
+        "x": 81,
+        "y": 23,
+        "scent": 3,
+        "tile": 122,
+        "life": 0,
+        "pheromone": 196,
+        "anim": [
+          9,
+          -8,
+          12,
+          4
+        ]
+      },
+      "mismatches": [],
+      "expected": {
+        "tile": 122,
+        "life": 0,
+        "map_xy": [
+          17,
+          23
+        ]
+      },
+      "dos": {
+        "tile": 122,
+        "life": 0
+      }
+    },
+    {
+      "case": "random/51",
+      "input": {
+        "plane": 1,
+        "x": 23,
+        "y": 40,
+        "scent": 4,
+        "tile": 123,
+        "life": 254,
+        "pheromone": 49,
+        "anim": [
+          2,
+          -16,
+          -10,
+          0
+        ]
+      },
+      "mismatches": [],
+      "expected": {
+        "tile": 243,
+        "life": 890,
+        "map_xy": [
+          23,
+          40
+        ]
+      },
+      "dos": {
+        "tile": 243,
+        "life": 890
+      }
+    },
+    {
+      "case": "random/52",
+      "input": {
+        "plane": 3,
+        "x": 105,
+        "y": 53,
+        "scent": 1,
+        "tile": 212,
+        "life": 64,
+        "pheromone": 154,
+        "anim": [
+          -15,
+          -15,
+          5,
+          7
+        ]
+      },
+      "mismatches": [],
+      "expected": {
+        "tile": 212,
+        "life": 576,
+        "map_xy": [
+          41,
+          53
+        ]
+      },
+      "dos": {
+        "tile": 212,
+        "life": 576
+      }
+    },
+    {
+      "case": "random/53",
+      "input": {
+        "plane": 1,
+        "x": 74,
+        "y": 17,
+        "scent": 1,
+        "tile": 25,
+        "life": 17,
+        "pheromone": 43,
+        "anim": [
+          -15,
+          6,
+          -6,
+          7
+        ]
+      },
+      "mismatches": [],
+      "expected": {
+        "tile": 242,
+        "life": 273,
+        "map_xy": [
+          74,
+          17
+        ]
+      },
+      "dos": {
+        "tile": 242,
+        "life": 273
+      }
+    },
+    {
+      "case": "random/54",
+      "input": {
+        "plane": 0,
+        "x": 67,
+        "y": 46,
+        "scent": 4,
+        "tile": 100,
+        "life": 17,
+        "pheromone": 119,
+        "anim": [
+          15,
+          -2,
+          7,
+          10
+        ]
+      },
+      "mismatches": [],
+      "expected": {
+        "tile": 247,
+        "life": 273,
+        "map_xy": [
+          67,
+          46
+        ]
+      },
+      "dos": {
+        "tile": 247,
+        "life": 273
+      }
+    },
+    {
+      "case": "random/55",
+      "input": {
+        "plane": 2,
+        "x": 16,
+        "y": 52,
+        "scent": 2,
+        "tile": 5,
+        "life": 64,
+        "pheromone": 194,
+        "anim": [
+          6,
+          -3,
+          15,
+          16
+        ]
+      },
+      "mismatches": [],
+      "expected": {
+        "tile": 5,
+        "life": 576,
+        "map_xy": [
+          16,
+          52
+        ]
+      },
+      "dos": {
+        "tile": 5,
+        "life": 576
+      }
+    },
+    {
+      "case": "random/56",
+      "input": {
+        "plane": 2,
+        "x": 71,
+        "y": 31,
+        "scent": 0,
+        "tile": 21,
+        "life": 0,
+        "pheromone": 82,
+        "anim": [
+          15,
+          -11,
+          7,
+          14
+        ]
+      },
+      "mismatches": [],
+      "expected": {
+        "tile": 21,
+        "life": 0,
+        "map_xy": [
+          7,
+          31
+        ]
+      },
+      "dos": {
+        "tile": 21,
+        "life": 0
+      }
+    },
+    {
+      "case": "random/57",
+      "input": {
+        "plane": 1,
+        "x": 79,
+        "y": 17,
+        "scent": 2,
+        "tile": 120,
+        "life": 0,
+        "pheromone": 178,
+        "anim": [
+          12,
+          -16,
+          1,
+          -15
+        ]
+      },
+      "mismatches": [],
+      "expected": {
+        "tile": 251,
+        "life": 0,
+        "map_xy": [
+          79,
+          17
+        ]
+      },
+      "dos": {
+        "tile": 251,
+        "life": 0
+      }
+    },
+    {
+      "case": "random/58",
+      "input": {
+        "plane": 3,
+        "x": 20,
+        "y": 5,
+        "scent": 0,
+        "tile": 185,
+        "life": 17,
+        "pheromone": 148,
+        "anim": [
+          -15,
+          8,
+          3,
+          -9
+        ]
+      },
+      "mismatches": [],
+      "expected": {
+        "tile": 185,
+        "life": 529,
+        "map_xy": [
+          20,
+          5
+        ]
+      },
+      "dos": {
+        "tile": 185,
+        "life": 529
+      }
+    },
+    {
+      "case": "random/59",
+      "input": {
+        "plane": 3,
+        "x": 65,
+        "y": 42,
+        "scent": 2,
+        "tile": 129,
+        "life": 0,
+        "pheromone": 120,
+        "anim": [
+          -5,
+          7,
+          2,
+          2
+        ]
+      },
+      "mismatches": [],
+      "expected": {
+        "tile": 129,
+        "life": 0,
+        "map_xy": [
+          1,
+          42
+        ]
+      },
+      "dos": {
+        "tile": 129,
+        "life": 0
+      }
+    },
+    {
+      "case": "random/60",
+      "input": {
+        "plane": 2,
+        "x": 25,
+        "y": 61,
+        "scent": 2,
+        "tile": 96,
+        "life": 104,
+        "pheromone": 154,
+        "anim": [
+          -6,
+          -10,
+          14,
+          10
+        ]
+      },
+      "mismatches": [],
+      "expected": {
+        "tile": 96,
+        "life": 616,
+        "map_xy": [
+          25,
+          61
+        ]
+      },
+      "dos": {
+        "tile": 96,
+        "life": 616
+      }
+    },
+    {
+      "case": "random/61",
+      "input": {
+        "plane": 3,
+        "x": 119,
+        "y": 14,
+        "scent": 1,
+        "tile": 49,
+        "life": 104,
+        "pheromone": 96,
+        "anim": [
+          -6,
+          -9,
+          3,
+          0
+        ]
+      },
+      "mismatches": [],
+      "expected": {
+        "tile": 49,
+        "life": 616,
+        "map_xy": [
+          55,
+          14
+        ]
+      },
+      "dos": {
+        "tile": 49,
+        "life": 616
+      }
+    },
+    {
+      "case": "random/62",
+      "input": {
+        "plane": 3,
+        "x": 111,
+        "y": 14,
+        "scent": 0,
+        "tile": 138,
+        "life": 254,
+        "pheromone": 238,
+        "anim": [
+          13,
+          14,
+          12,
+          -12
+        ]
+      },
+      "mismatches": [],
+      "expected": {
+        "tile": 138,
+        "life": 791,
+        "map_xy": [
+          47,
+          14
+        ]
+      },
+      "dos": {
+        "tile": 138,
+        "life": 791
+      }
+    },
+    {
+      "case": "random/63",
+      "input": {
+        "plane": 0,
+        "x": 98,
+        "y": 46,
+        "scent": 0,
+        "tile": 92,
+        "life": 254,
+        "pheromone": 226,
+        "anim": [
+          7,
+          -10,
+          14,
+          -4
+        ]
+      },
+      "mismatches": [],
+      "expected": {
+        "tile": 254,
+        "life": 897,
+        "map_xy": [
+          98,
+          46
+        ]
+      },
+      "dos": {
+        "tile": 254,
+        "life": 897
+      }
+    },
+    {
+      "case": "random/64",
+      "input": {
+        "plane": 0,
+        "x": 80,
+        "y": 14,
+        "scent": 0,
+        "tile": 244,
+        "life": 0,
+        "pheromone": 52,
+        "anim": [
+          10,
+          -4,
+          0,
+          4
+        ]
+      },
+      "mismatches": [],
+      "expected": {
+        "tile": 243,
+        "life": 0,
+        "map_xy": [
+          80,
+          14
+        ]
+      },
+      "dos": {
+        "tile": 243,
+        "life": 0
+      }
+    },
+    {
+      "case": "random/65",
+      "input": {
+        "plane": 0,
+        "x": 104,
+        "y": 13,
+        "scent": 4,
+        "tile": 198,
+        "life": 0,
+        "pheromone": 252,
+        "anim": [
+          -10,
+          3,
+          14,
+          -6
+        ]
+      },
+      "mismatches": [],
+      "expected": {
+        "tile": 255,
+        "life": 0,
+        "map_xy": [
+          104,
+          13
+        ]
+      },
+      "dos": {
+        "tile": 255,
+        "life": 0
+      }
+    },
+    {
+      "case": "random/66",
+      "input": {
+        "plane": 1,
+        "x": 63,
+        "y": 13,
+        "scent": 2,
+        "tile": 155,
+        "life": 0,
+        "pheromone": 137,
+        "anim": [
+          -14,
+          -8,
+          -16,
+          -2
+        ]
+      },
+      "mismatches": [],
+      "expected": {
+        "tile": 248,
+        "life": 0,
+        "map_xy": [
+          63,
+          13
+        ]
+      },
+      "dos": {
+        "tile": 248,
+        "life": 0
+      }
+    },
+    {
+      "case": "random/67",
+      "input": {
+        "plane": 3,
+        "x": 37,
+        "y": 2,
+        "scent": 1,
+        "tile": 94,
+        "life": 254,
+        "pheromone": 61,
+        "anim": [
+          -11,
+          -16,
+          -14,
+          0
+        ]
+      },
+      "mismatches": [],
+      "expected": {
+        "tile": 94,
+        "life": 749,
+        "map_xy": [
+          37,
+          2
+        ]
+      },
+      "dos": {
+        "tile": 94,
+        "life": 749
+      }
+    },
+    {
+      "case": "random/68",
+      "input": {
+        "plane": 3,
+        "x": 84,
+        "y": 55,
+        "scent": 1,
+        "tile": 87,
+        "life": 255,
+        "pheromone": 55,
+        "anim": [
+          4,
+          6,
+          -14,
+          4
+        ]
+      },
+      "mismatches": [],
+      "expected": {
+        "tile": 87,
+        "life": 762,
+        "map_xy": [
+          20,
+          55
+        ]
+      },
+      "dos": {
+        "tile": 87,
+        "life": 762
+      }
+    },
+    {
+      "case": "random/69",
+      "input": {
+        "plane": 2,
+        "x": 31,
+        "y": 22,
+        "scent": 0,
+        "tile": 136,
+        "life": 0,
+        "pheromone": 112,
+        "anim": [
+          -5,
+          -8,
+          16,
+          -7
+        ]
+      },
+      "mismatches": [],
+      "expected": {
+        "tile": 136,
+        "life": 0,
+        "map_xy": [
+          31,
+          22
+        ]
+      },
+      "dos": {
+        "tile": 136,
+        "life": 0
+      }
+    },
+    {
+      "case": "random/70",
+      "input": {
+        "plane": 2,
+        "x": 113,
+        "y": 59,
+        "scent": 2,
+        "tile": 26,
+        "life": 254,
+        "pheromone": 170,
+        "anim": [
+          7,
+          12,
+          -13,
+          -1
+        ]
+      },
+      "mismatches": [],
+      "expected": {
+        "tile": 26,
+        "life": 794,
+        "map_xy": [
+          49,
+          59
+        ]
+      },
+      "dos": {
+        "tile": 26,
+        "life": 794
+      }
+    },
+    {
+      "case": "random/71",
+      "input": {
+        "plane": 1,
+        "x": 76,
+        "y": 26,
+        "scent": 3,
+        "tile": 41,
+        "life": 224,
+        "pheromone": 79,
+        "anim": [
+          -6,
+          -3,
+          2,
+          4
+        ]
+      },
+      "mismatches": [],
+      "expected": {
+        "tile": 244,
+        "life": 480,
+        "map_xy": [
+          76,
+          26
+        ]
+      },
+      "dos": {
+        "tile": 244,
+        "life": 480
+      }
+    },
+    {
+      "case": "random/72",
+      "input": {
+        "plane": 1,
+        "x": 100,
+        "y": 16,
+        "scent": 0,
+        "tile": 190,
+        "life": 0,
+        "pheromone": 84,
+        "anim": [
+          -11,
+          15,
+          1,
+          -7
+        ]
+      },
+      "mismatches": [],
+      "expected": {
+        "tile": 245,
+        "life": 0,
+        "map_xy": [
+          100,
+          16
+        ]
+      },
+      "dos": {
+        "tile": 245,
+        "life": 0
+      }
+    },
+    {
+      "case": "random/73",
+      "input": {
+        "plane": 0,
+        "x": 127,
+        "y": 13,
+        "scent": 0,
+        "tile": 115,
+        "life": 255,
+        "pheromone": 37,
+        "anim": [
+          4,
+          -1,
+          8,
+          5
+        ]
+      },
+      "mismatches": [],
+      "expected": {
+        "tile": 242,
+        "life": 913,
+        "map_xy": [
+          127,
+          13
+        ]
+      },
+      "dos": {
+        "tile": 242,
+        "life": 913
+      }
+    },
+    {
+      "case": "random/74",
+      "input": {
+        "plane": 3,
+        "x": 95,
+        "y": 41,
+        "scent": 2,
+        "tile": 133,
+        "life": 0,
+        "pheromone": 81,
+        "anim": [
+          7,
+          3,
+          -5,
+          12
+        ]
+      },
+      "mismatches": [],
+      "expected": {
+        "tile": 133,
+        "life": 0,
+        "map_xy": [
+          31,
+          41
+        ]
+      },
+      "dos": {
+        "tile": 133,
+        "life": 0
+      }
+    },
+    {
+      "case": "random/75",
+      "input": {
+        "plane": 3,
+        "x": 49,
+        "y": 49,
+        "scent": 2,
+        "tile": 139,
+        "life": 104,
+        "pheromone": 178,
+        "anim": [
+          -7,
+          14,
+          -13,
+          -5
+        ]
+      },
+      "mismatches": [],
+      "expected": {
+        "tile": 139,
+        "life": 616,
+        "map_xy": [
+          49,
+          49
+        ]
+      },
+      "dos": {
+        "tile": 139,
+        "life": 616
+      }
+    },
+    {
+      "case": "random/76",
+      "input": {
+        "plane": 0,
+        "x": 45,
+        "y": 8,
+        "scent": 0,
+        "tile": 116,
+        "life": 224,
+        "pheromone": 186,
+        "anim": [
+          -2,
+          2,
+          -6,
+          3
+        ]
+      },
+      "mismatches": [],
+      "expected": {
+        "tile": 251,
+        "life": 480,
+        "map_xy": [
+          45,
+          8
+        ]
+      },
+      "dos": {
+        "tile": 251,
+        "life": 480
+      }
+    },
+    {
+      "case": "random/77",
+      "input": {
+        "plane": 1,
+        "x": 11,
+        "y": 25,
+        "scent": 0,
+        "tile": 116,
+        "life": 0,
+        "pheromone": 24,
+        "anim": [
+          -9,
+          0,
+          -11,
+          -14
+        ]
+      },
+      "mismatches": [],
+      "expected": {
+        "tile": 241,
+        "life": 0,
+        "map_xy": [
+          11,
+          25
+        ]
+      },
+      "dos": {
+        "tile": 241,
+        "life": 0
+      }
+    },
+    {
+      "case": "random/78",
+      "input": {
+        "plane": 0,
+        "x": 43,
+        "y": 10,
+        "scent": 1,
+        "tile": 143,
+        "life": 17,
+        "pheromone": 255,
+        "anim": [
+          -12,
+          11,
+          -16,
+          13
+        ]
+      },
+      "mismatches": [],
+      "expected": {
+        "tile": 255,
+        "life": 273,
+        "map_xy": [
+          43,
+          10
+        ]
+      },
+      "dos": {
+        "tile": 255,
+        "life": 273
+      }
+    },
+    {
+      "case": "random/79",
+      "input": {
+        "plane": 3,
+        "x": 35,
+        "y": 48,
+        "scent": 4,
+        "tile": 145,
+        "life": 254,
+        "pheromone": 137,
+        "anim": [
+          15,
+          -13,
+          -3,
+          -6
+        ]
+      },
+      "mismatches": [],
+      "expected": {
+        "tile": 145,
+        "life": 772,
+        "map_xy": [
+          35,
+          48
+        ]
+      },
+      "dos": {
+        "tile": 145,
+        "life": 772
+      }
+    },
+    {
+      "case": "random/80",
+      "input": {
+        "plane": 1,
+        "x": 11,
+        "y": 43,
+        "scent": 1,
+        "tile": 113,
+        "life": 254,
+        "pheromone": 147,
+        "anim": [
+          16,
+          7,
+          8,
+          4
+        ]
+      },
+      "mismatches": [],
+      "expected": {
+        "tile": 249,
+        "life": 931,
+        "map_xy": [
+          11,
+          43
+        ]
+      },
+      "dos": {
+        "tile": 249,
+        "life": 931
+      }
+    },
+    {
+      "case": "random/81",
+      "input": {
+        "plane": 3,
+        "x": 63,
+        "y": 31,
+        "scent": 3,
+        "tile": 231,
+        "life": 64,
+        "pheromone": 129,
+        "anim": [
+          -15,
+          -2,
+          8,
+          -15
+        ]
+      },
+      "mismatches": [],
+      "expected": {
+        "tile": 231,
+        "life": 576,
+        "map_xy": [
+          63,
+          31
+        ]
+      },
+      "dos": {
+        "tile": 231,
+        "life": 576
+      }
+    },
+    {
+      "case": "random/82",
+      "input": {
+        "plane": 1,
+        "x": 32,
+        "y": 8,
+        "scent": 0,
+        "tile": 242,
+        "life": 224,
+        "pheromone": 117,
+        "anim": [
+          -5,
+          0,
+          -13,
+          -5
+        ]
+      },
+      "mismatches": [],
+      "expected": {
+        "tile": 247,
+        "life": 480,
+        "map_xy": [
+          32,
+          8
+        ]
+      },
+      "dos": {
+        "tile": 247,
+        "life": 480
+      }
+    },
+    {
+      "case": "random/83",
+      "input": {
+        "plane": 1,
+        "x": 94,
+        "y": 56,
+        "scent": 1,
+        "tile": 157,
+        "life": 0,
+        "pheromone": 141,
+        "anim": [
+          16,
+          -11,
+          -1,
+          -10
+        ]
+      },
+      "mismatches": [],
+      "expected": {
+        "tile": 248,
+        "life": 0,
+        "map_xy": [
+          94,
+          56
+        ]
+      },
+      "dos": {
+        "tile": 248,
+        "life": 0
+      }
+    },
+    {
+      "case": "random/84",
+      "input": {
+        "plane": 2,
+        "x": 27,
+        "y": 3,
+        "scent": 3,
+        "tile": 191,
+        "life": 0,
+        "pheromone": 142,
+        "anim": [
+          6,
+          4,
+          -12,
+          16
+        ]
+      },
+      "mismatches": [],
+      "expected": {
+        "tile": 191,
+        "life": 0,
+        "map_xy": [
+          27,
+          3
+        ]
+      },
+      "dos": {
+        "tile": 191,
+        "life": 0
+      }
+    },
+    {
+      "case": "random/85",
+      "input": {
+        "plane": 2,
+        "x": 86,
+        "y": 5,
+        "scent": 0,
+        "tile": 183,
+        "life": 0,
+        "pheromone": 17,
+        "anim": [
+          6,
+          5,
+          0,
+          3
+        ]
+      },
+      "mismatches": [],
+      "expected": {
+        "tile": 183,
+        "life": 0,
+        "map_xy": [
+          22,
+          5
+        ]
+      },
+      "dos": {
+        "tile": 183,
+        "life": 0
+      }
+    },
+    {
+      "case": "random/86",
+      "input": {
+        "plane": 3,
+        "x": 73,
+        "y": 29,
+        "scent": 2,
+        "tile": 6,
+        "life": 64,
+        "pheromone": 158,
+        "anim": [
+          -9,
+          2,
+          7,
+          -14
+        ]
+      },
+      "mismatches": [],
+      "expected": {
+        "tile": 6,
+        "life": 576,
+        "map_xy": [
+          9,
+          29
+        ]
+      },
+      "dos": {
+        "tile": 6,
+        "life": 576
+      }
+    },
+    {
+      "case": "random/87",
+      "input": {
+        "plane": 1,
+        "x": 15,
+        "y": 28,
+        "scent": 0,
+        "tile": 63,
+        "life": 0,
+        "pheromone": 109,
+        "anim": [
+          5,
+          -13,
+          3,
+          7
+        ]
+      },
+      "mismatches": [],
+      "expected": {
+        "tile": 246,
+        "life": 0,
+        "map_xy": [
+          15,
+          28
+        ]
+      },
+      "dos": {
+        "tile": 246,
+        "life": 0
+      }
+    },
+    {
+      "case": "random/88",
+      "input": {
+        "plane": 0,
+        "x": 48,
+        "y": 7,
+        "scent": 4,
+        "tile": 120,
+        "life": 255,
+        "pheromone": 57,
+        "anim": [
+          -8,
+          -5,
+          3,
+          7
+        ]
+      },
+      "mismatches": [],
+      "expected": {
+        "tile": 243,
+        "life": 898,
+        "map_xy": [
+          48,
+          7
+        ]
+      },
+      "dos": {
+        "tile": 243,
+        "life": 898
+      }
+    },
+    {
+      "case": "random/89",
+      "input": {
+        "plane": 3,
+        "x": 11,
+        "y": 21,
+        "scent": 2,
+        "tile": 128,
+        "life": 17,
+        "pheromone": 152,
+        "anim": [
+          0,
+          13,
+          14,
+          12
+        ]
+      },
+      "mismatches": [],
+      "expected": {
+        "tile": 128,
+        "life": 529,
+        "map_xy": [
+          11,
+          21
+        ]
+      },
+      "dos": {
+        "tile": 128,
+        "life": 529
+      }
+    },
+    {
+      "case": "random/90",
+      "input": {
+        "plane": 1,
+        "x": 91,
+        "y": 18,
+        "scent": 4,
+        "tile": 143,
+        "life": 64,
+        "pheromone": 58,
+        "anim": [
+          15,
+          7,
+          0,
+          -9
+        ]
+      },
+      "mismatches": [],
+      "expected": {
+        "tile": 243,
+        "life": 320,
+        "map_xy": [
+          91,
+          18
+        ]
+      },
+      "dos": {
+        "tile": 243,
+        "life": 320
+      }
+    },
+    {
+      "case": "random/91",
+      "input": {
+        "plane": 2,
+        "x": 62,
+        "y": 47,
+        "scent": 3,
+        "tile": 88,
+        "life": 0,
+        "pheromone": 233,
+        "anim": [
+          12,
+          3,
+          4,
+          2
+        ]
+      },
+      "mismatches": [],
+      "expected": {
+        "tile": 88,
+        "life": 0,
+        "map_xy": [
+          62,
+          47
+        ]
+      },
+      "dos": {
+        "tile": 88,
+        "life": 0
+      }
+    },
+    {
+      "case": "random/92",
+      "input": {
+        "plane": 2,
+        "x": 66,
+        "y": 0,
+        "scent": 3,
+        "tile": 208,
+        "life": 0,
+        "pheromone": 46,
+        "anim": [
+          2,
+          6,
+          -3,
+          3
+        ]
+      },
+      "mismatches": [],
+      "expected": {
+        "tile": 208,
+        "life": 0,
+        "map_xy": [
+          2,
+          0
+        ]
+      },
+      "dos": {
+        "tile": 208,
+        "life": 0
+      }
+    },
+    {
+      "case": "random/93",
+      "input": {
+        "plane": 0,
+        "x": 36,
+        "y": 36,
+        "scent": 2,
+        "tile": 186,
+        "life": 0,
+        "pheromone": 160,
+        "anim": [
+          -15,
+          -12,
+          -7,
+          8
+        ]
+      },
+      "mismatches": [],
+      "expected": {
+        "tile": 250,
+        "life": 0,
+        "map_xy": [
+          36,
+          36
+        ]
+      },
+      "dos": {
+        "tile": 250,
+        "life": 0
+      }
+    },
+    {
+      "case": "random/94",
+      "input": {
+        "plane": 3,
+        "x": 45,
+        "y": 43,
+        "scent": 2,
+        "tile": 36,
+        "life": 255,
+        "pheromone": 198,
+        "anim": [
+          -11,
+          3,
+          9,
+          -9
+        ]
+      },
+      "mismatches": [],
+      "expected": {
+        "tile": 36,
+        "life": 757,
+        "map_xy": [
+          45,
+          43
+        ]
+      },
+      "dos": {
+        "tile": 36,
+        "life": 757
+      }
+    },
+    {
+      "case": "random/95",
+      "input": {
+        "plane": 2,
+        "x": 31,
+        "y": 37,
+        "scent": 4,
+        "tile": 240,
+        "life": 255,
+        "pheromone": 165,
+        "anim": [
+          10,
+          -15,
+          -13,
+          -15
+        ]
+      },
+      "mismatches": [],
+      "expected": {
+        "tile": 240,
+        "life": 750,
+        "map_xy": [
+          31,
+          37
+        ]
+      },
+      "dos": {
+        "tile": 240,
+        "life": 750
+      }
+    },
+    {
+      "case": "random/96",
+      "input": {
+        "plane": 0,
+        "x": 19,
+        "y": 24,
+        "scent": 2,
+        "tile": 121,
+        "life": 0,
+        "pheromone": 87,
+        "anim": [
+          16,
+          -8,
+          11,
+          14
+        ]
+      },
+      "mismatches": [],
+      "expected": {
+        "tile": 245,
+        "life": 0,
+        "map_xy": [
+          19,
+          24
+        ]
+      },
+      "dos": {
+        "tile": 245,
+        "life": 0
+      }
+    },
+    {
+      "case": "random/97",
+      "input": {
+        "plane": 2,
+        "x": 52,
+        "y": 28,
+        "scent": 2,
+        "tile": 233,
+        "life": 0,
+        "pheromone": 187,
+        "anim": [
+          5,
+          9,
+          8,
+          6
+        ]
+      },
+      "mismatches": [],
+      "expected": {
+        "tile": 233,
+        "life": 0,
+        "map_xy": [
+          52,
+          28
+        ]
+      },
+      "dos": {
+        "tile": 233,
+        "life": 0
+      }
+    },
+    {
+      "case": "random/98",
+      "input": {
+        "plane": 2,
+        "x": 76,
+        "y": 42,
+        "scent": 2,
+        "tile": 6,
+        "life": 254,
+        "pheromone": 179,
+        "anim": [
+          -15,
+          9,
+          13,
+          6
+        ]
+      },
+      "mismatches": [],
+      "expected": {
+        "tile": 6,
+        "life": 776,
+        "map_xy": [
+          12,
+          42
+        ]
+      },
+      "dos": {
+        "tile": 6,
+        "life": 776
+      }
+    },
+    {
+      "case": "random/99",
+      "input": {
+        "plane": 2,
+        "x": 105,
+        "y": 51,
+        "scent": 4,
+        "tile": 24,
+        "life": 0,
+        "pheromone": 250,
+        "anim": [
+          -14,
+          8,
+          -14,
+          -10
+        ]
+      },
+      "mismatches": [],
+      "expected": {
+        "tile": 24,
+        "life": 0,
+        "map_xy": [
+          41,
+          51
+        ]
+      },
+      "dos": {
+        "tile": 24,
+        "life": 0
+      }
+    },
+    {
+      "case": "random/100",
+      "input": {
+        "plane": 2,
+        "x": 98,
+        "y": 45,
+        "scent": 1,
+        "tile": 125,
+        "life": 254,
+        "pheromone": 162,
+        "anim": [
+          15,
+          -9,
+          16,
+          16
+        ]
+      },
+      "mismatches": [],
+      "expected": {
+        "tile": 125,
+        "life": 798,
+        "map_xy": [
+          34,
+          45
+        ]
+      },
+      "dos": {
+        "tile": 125,
+        "life": 798
+      }
+    },
+    {
+      "case": "random/101",
+      "input": {
+        "plane": 2,
+        "x": 84,
+        "y": 11,
+        "scent": 2,
+        "tile": 91,
+        "life": 224,
+        "pheromone": 136,
+        "anim": [
+          1,
+          -12,
+          -16,
+          14
+        ]
+      },
+      "mismatches": [],
+      "expected": {
+        "tile": 91,
+        "life": 736,
+        "map_xy": [
+          20,
+          11
+        ]
+      },
+      "dos": {
+        "tile": 91,
+        "life": 736
+      }
+    },
+    {
+      "case": "random/102",
+      "input": {
+        "plane": 3,
+        "x": 127,
+        "y": 8,
+        "scent": 2,
+        "tile": 223,
+        "life": 64,
+        "pheromone": 20,
+        "anim": [
+          -9,
+          13,
+          16,
+          -2
+        ]
+      },
+      "mismatches": [],
+      "expected": {
+        "tile": 223,
+        "life": 576,
+        "map_xy": [
+          63,
+          8
+        ]
+      },
+      "dos": {
+        "tile": 223,
+        "life": 576
+      }
+    },
+    {
+      "case": "random/103",
+      "input": {
+        "plane": 0,
+        "x": 101,
+        "y": 7,
+        "scent": 0,
+        "tile": 219,
+        "life": 224,
+        "pheromone": 221,
+        "anim": [
+          -4,
+          -7,
+          -13,
+          13
+        ]
+      },
+      "mismatches": [],
+      "expected": {
+        "tile": 253,
+        "life": 480,
+        "map_xy": [
+          101,
+          7
+        ]
+      },
+      "dos": {
+        "tile": 253,
+        "life": 480
+      }
+    },
+    {
+      "case": "random/104",
+      "input": {
+        "plane": 0,
+        "x": 35,
+        "y": 54,
+        "scent": 4,
+        "tile": 214,
+        "life": 0,
+        "pheromone": 43,
+        "anim": [
+          -14,
+          -9,
+          6,
+          15
+        ]
+      },
+      "mismatches": [],
+      "expected": {
+        "tile": 242,
+        "life": 0,
+        "map_xy": [
+          35,
+          54
+        ]
+      },
+      "dos": {
+        "tile": 242,
+        "life": 0
+      }
+    },
+    {
+      "case": "random/105",
+      "input": {
+        "plane": 0,
+        "x": 104,
+        "y": 29,
+        "scent": 3,
+        "tile": 161,
+        "life": 64,
+        "pheromone": 17,
+        "anim": [
+          -2,
+          -9,
+          -12,
+          9
+        ]
+      },
+      "mismatches": [],
+      "expected": {
+        "tile": 241,
+        "life": 320,
+        "map_xy": [
+          104,
+          29
+        ]
+      },
+      "dos": {
+        "tile": 241,
+        "life": 320
+      }
+    },
+    {
+      "case": "random/106",
+      "input": {
+        "plane": 1,
+        "x": 82,
+        "y": 31,
+        "scent": 3,
+        "tile": 239,
+        "life": 224,
+        "pheromone": 154,
+        "anim": [
+          0,
+          14,
+          -14,
+          -3
+        ]
+      },
+      "mismatches": [],
+      "expected": {
+        "tile": 249,
+        "life": 480,
+        "map_xy": [
+          82,
+          31
+        ]
+      },
+      "dos": {
+        "tile": 249,
+        "life": 480
+      }
+    },
+    {
+      "case": "random/107",
+      "input": {
+        "plane": 3,
+        "x": 97,
+        "y": 1,
+        "scent": 0,
+        "tile": 241,
+        "life": 254,
+        "pheromone": 189,
+        "anim": [
+          -10,
+          -13,
+          1,
+          10
+        ]
+      },
+      "mismatches": [],
+      "expected": {
+        "tile": 241,
+        "life": 763,
+        "map_xy": [
+          33,
+          1
+        ]
+      },
+      "dos": {
+        "tile": 241,
+        "life": 763
+      }
+    },
+    {
+      "case": "random/108",
+      "input": {
+        "plane": 3,
+        "x": 112,
+        "y": 15,
+        "scent": 1,
+        "tile": 100,
+        "life": 0,
+        "pheromone": 13,
+        "anim": [
+          2,
+          -10,
+          -4,
+          -1
+        ]
+      },
+      "mismatches": [],
+      "expected": {
+        "tile": 100,
+        "life": 0,
+        "map_xy": [
+          48,
+          15
+        ]
+      },
+      "dos": {
+        "tile": 100,
+        "life": 0
+      }
+    },
+    {
+      "case": "random/109",
+      "input": {
+        "plane": 0,
+        "x": 80,
+        "y": 24,
+        "scent": 2,
+        "tile": 186,
+        "life": 0,
+        "pheromone": 166,
+        "anim": [
+          -13,
+          3,
+          -5,
+          8
+        ]
+      },
+      "mismatches": [],
+      "expected": {
+        "tile": 250,
+        "life": 0,
+        "map_xy": [
+          80,
+          24
+        ]
+      },
+      "dos": {
+        "tile": 250,
+        "life": 0
+      }
+    },
+    {
+      "case": "random/110",
+      "input": {
+        "plane": 2,
+        "x": 4,
+        "y": 15,
+        "scent": 3,
+        "tile": 16,
+        "life": 64,
+        "pheromone": 196,
+        "anim": [
+          15,
+          -11,
+          -2,
+          7
+        ]
+      },
+      "mismatches": [],
+      "expected": {
+        "tile": 16,
+        "life": 576,
+        "map_xy": [
+          4,
+          15
+        ]
+      },
+      "dos": {
+        "tile": 16,
+        "life": 576
+      }
+    },
+    {
+      "case": "random/111",
+      "input": {
+        "plane": 0,
+        "x": 30,
+        "y": 6,
+        "scent": 2,
+        "tile": 121,
+        "life": 64,
+        "pheromone": 123,
+        "anim": [
+          -15,
+          15,
+          -6,
+          15
+        ]
+      },
+      "mismatches": [],
+      "expected": {
+        "tile": 247,
+        "life": 320,
+        "map_xy": [
+          30,
+          6
+        ]
+      },
+      "dos": {
+        "tile": 247,
+        "life": 320
+      }
+    },
+    {
+      "case": "random/112",
+      "input": {
+        "plane": 0,
+        "x": 116,
+        "y": 28,
+        "scent": 3,
+        "tile": 94,
+        "life": 0,
+        "pheromone": 201,
+        "anim": [
+          3,
+          -14,
+          9,
+          10
+        ]
+      },
+      "mismatches": [],
+      "expected": {
+        "tile": 252,
+        "life": 0,
+        "map_xy": [
+          116,
+          28
+        ]
+      },
+      "dos": {
+        "tile": 252,
+        "life": 0
+      }
+    },
+    {
+      "case": "random/113",
+      "input": {
+        "plane": 2,
+        "x": 18,
+        "y": 17,
+        "scent": 1,
+        "tile": 243,
+        "life": 64,
+        "pheromone": 172,
+        "anim": [
+          2,
+          -5,
+          1,
+          3
+        ]
+      },
+      "mismatches": [],
+      "expected": {
+        "tile": 243,
+        "life": 576,
+        "map_xy": [
+          18,
+          17
+        ]
+      },
+      "dos": {
+        "tile": 243,
+        "life": 576
+      }
+    },
+    {
+      "case": "random/114",
+      "input": {
+        "plane": 1,
+        "x": 40,
+        "y": 30,
+        "scent": 1,
+        "tile": 101,
+        "life": 224,
+        "pheromone": 219,
+        "anim": [
+          -9,
+          -3,
+          -6,
+          2
+        ]
+      },
+      "mismatches": [],
+      "expected": {
+        "tile": 253,
+        "life": 480,
+        "map_xy": [
+          40,
+          30
+        ]
+      },
+      "dos": {
+        "tile": 253,
+        "life": 480
+      }
+    },
+    {
+      "case": "random/115",
+      "input": {
+        "plane": 2,
+        "x": 106,
+        "y": 42,
+        "scent": 2,
+        "tile": 132,
+        "life": 64,
+        "pheromone": 194,
+        "anim": [
+          -13,
+          16,
+          4,
+          -6
+        ]
+      },
+      "mismatches": [],
+      "expected": {
+        "tile": 132,
+        "life": 576,
+        "map_xy": [
+          42,
+          42
+        ]
+      },
+      "dos": {
+        "tile": 132,
+        "life": 576
+      }
+    },
+    {
+      "case": "random/116",
+      "input": {
+        "plane": 3,
+        "x": 41,
+        "y": 27,
+        "scent": 3,
+        "tile": 96,
+        "life": 64,
+        "pheromone": 145,
+        "anim": [
+          13,
+          -8,
+          11,
+          12
+        ]
+      },
+      "mismatches": [],
+      "expected": {
+        "tile": 96,
+        "life": 576,
+        "map_xy": [
+          41,
+          27
+        ]
+      },
+      "dos": {
+        "tile": 96,
+        "life": 576
+      }
+    },
+    {
+      "case": "random/117",
+      "input": {
+        "plane": 1,
+        "x": 113,
+        "y": 51,
+        "scent": 4,
+        "tile": 153,
+        "life": 17,
+        "pheromone": 249,
+        "anim": [
+          4,
+          8,
+          -3,
+          -1
+        ]
+      },
+      "mismatches": [],
+      "expected": {
+        "tile": 255,
+        "life": 273,
+        "map_xy": [
+          113,
+          51
+        ]
+      },
+      "dos": {
+        "tile": 255,
+        "life": 273
+      }
+    },
+    {
+      "case": "random/118",
+      "input": {
+        "plane": 2,
+        "x": 78,
+        "y": 22,
+        "scent": 3,
+        "tile": 20,
+        "life": 255,
+        "pheromone": 215,
+        "anim": [
+          2,
+          -4,
+          2,
+          1
+        ]
+      },
+      "mismatches": [],
+      "expected": {
+        "tile": 20,
+        "life": 773,
+        "map_xy": [
+          14,
+          22
+        ]
+      },
+      "dos": {
+        "tile": 20,
+        "life": 773
+      }
+    },
+    {
+      "case": "random/119",
+      "input": {
+        "plane": 2,
+        "x": 17,
+        "y": 19,
+        "scent": 2,
+        "tile": 205,
+        "life": 255,
+        "pheromone": 34,
+        "anim": [
+          -1,
+          2,
+          -14,
+          -4
+        ]
+      },
+      "mismatches": [],
+      "expected": {
+        "tile": 205,
+        "life": 749,
+        "map_xy": [
+          17,
+          19
+        ]
+      },
+      "dos": {
+        "tile": 205,
+        "life": 749
+      }
+    },
+    {
+      "case": "random/120",
+      "input": {
+        "plane": 3,
+        "x": 6,
+        "y": 23,
+        "scent": 2,
+        "tile": 15,
+        "life": 64,
+        "pheromone": 138,
+        "anim": [
+          -5,
+          6,
+          11,
+          2
+        ]
+      },
+      "mismatches": [],
+      "expected": {
+        "tile": 15,
+        "life": 576,
+        "map_xy": [
+          6,
+          23
+        ]
+      },
+      "dos": {
+        "tile": 15,
+        "life": 576
+      }
+    },
+    {
+      "case": "random/121",
+      "input": {
+        "plane": 1,
+        "x": 88,
+        "y": 54,
+        "scent": 0,
+        "tile": 40,
+        "life": 0,
+        "pheromone": 190,
+        "anim": [
+          -16,
+          -15,
+          -14,
+          -10
+        ]
+      },
+      "mismatches": [],
+      "expected": {
+        "tile": 251,
+        "life": 0,
+        "map_xy": [
+          88,
+          54
+        ]
+      },
+      "dos": {
+        "tile": 251,
+        "life": 0
+      }
+    },
+    {
+      "case": "random/122",
+      "input": {
+        "plane": 3,
+        "x": 30,
+        "y": 1,
+        "scent": 0,
+        "tile": 193,
+        "life": 255,
+        "pheromone": 252,
+        "anim": [
+          -4,
+          13,
+          10,
+          -4
+        ]
+      },
+      "mismatches": [],
+      "expected": {
+        "tile": 193,
+        "life": 770,
+        "map_xy": [
+          30,
+          1
+        ]
+      },
+      "dos": {
+        "tile": 193,
+        "life": 770
+      }
+    },
+    {
+      "case": "random/123",
+      "input": {
+        "plane": 3,
+        "x": 8,
+        "y": 40,
+        "scent": 2,
+        "tile": 161,
+        "life": 255,
+        "pheromone": 120,
+        "anim": [
+          10,
+          9,
+          1,
+          4
+        ]
+      },
+      "mismatches": [],
+      "expected": {
+        "tile": 161,
+        "life": 783,
+        "map_xy": [
+          8,
+          40
+        ]
+      },
+      "dos": {
+        "tile": 161,
+        "life": 783
+      }
+    },
+    {
+      "case": "random/124",
+      "input": {
+        "plane": 1,
+        "x": 20,
+        "y": 20,
+        "scent": 1,
+        "tile": 210,
+        "life": 0,
+        "pheromone": 180,
+        "anim": [
+          4,
+          -1,
+          3,
+          -13
+        ]
+      },
+      "mismatches": [],
+      "expected": {
+        "tile": 251,
+        "life": 0,
+        "map_xy": [
+          20,
+          20
+        ]
+      },
+      "dos": {
+        "tile": 251,
+        "life": 0
+      }
+    },
+    {
+      "case": "random/125",
+      "input": {
+        "plane": 3,
+        "x": 106,
+        "y": 38,
+        "scent": 2,
+        "tile": 17,
+        "life": 104,
+        "pheromone": 131,
+        "anim": [
+          -11,
+          -11,
+          -1,
+          -5
+        ]
+      },
+      "mismatches": [],
+      "expected": {
+        "tile": 17,
+        "life": 616,
+        "map_xy": [
+          42,
+          38
+        ]
+      },
+      "dos": {
+        "tile": 17,
+        "life": 616
+      }
+    },
+    {
+      "case": "random/126",
+      "input": {
+        "plane": 0,
+        "x": 39,
+        "y": 22,
+        "scent": 0,
+        "tile": 253,
+        "life": 17,
+        "pheromone": 80,
+        "anim": [
+          0,
+          10,
+          2,
+          -4
+        ]
+      },
+      "mismatches": [],
+      "expected": {
+        "tile": 245,
+        "life": 273,
+        "map_xy": [
+          39,
+          22
+        ]
+      },
+      "dos": {
+        "tile": 245,
+        "life": 273
+      }
+    },
+    {
+      "case": "random/127",
+      "input": {
+        "plane": 0,
+        "x": 32,
+        "y": 7,
+        "scent": 3,
+        "tile": 146,
+        "life": 0,
+        "pheromone": 178,
+        "anim": [
+          -13,
+          -15,
+          -2,
+          6
+        ]
+      },
+      "mismatches": [],
+      "expected": {
+        "tile": 251,
+        "life": 0,
+        "map_xy": [
+          32,
+          7
+        ]
+      },
+      "dos": {
+        "tile": 251,
+        "life": 0
+      }
+    },
+    {
+      "case": "camera-wrap/p0",
+      "input": {
+        "plane": 0,
+        "x": 63,
+        "y": 63,
+        "column": 1,
+        "row": 1,
+        "scent": 0,
+        "tile": 85,
+        "life": 254,
+        "pheromone": 32,
+        "anim": [
+          2,
+          4,
+          6,
+          10
+        ]
+      },
+      "mismatches": [],
+      "expected": {
+        "tile": 242,
+        "life": 920,
+        "map_xy": [
+          0,
+          0
+        ]
+      },
+      "dos": {
+        "tile": 242,
+        "life": 920
+      }
+    },
+    {
+      "case": "camera-wrap/p1",
+      "input": {
+        "plane": 1,
+        "x": 63,
+        "y": 63,
+        "column": 1,
+        "row": 1,
+        "scent": 1,
+        "tile": 86,
+        "life": 254,
+        "pheromone": 32,
+        "anim": [
+          2,
+          4,
+          6,
+          10
+        ]
+      },
+      "mismatches": [],
+      "expected": {
+        "tile": 242,
+        "life": 920,
+        "map_xy": [
+          0,
+          0
+        ]
+      },
+      "dos": {
+        "tile": 242,
+        "life": 920
+      }
+    },
+    {
+      "case": "camera-wrap/p2",
+      "input": {
+        "plane": 2,
+        "x": 63,
+        "y": 63,
+        "column": 1,
+        "row": 1,
+        "scent": 2,
+        "tile": 87,
+        "life": 254,
+        "pheromone": 32,
+        "anim": [
+          2,
+          4,
+          6,
+          10
+        ]
+      },
+      "mismatches": [],
+      "expected": {
+        "tile": 87,
+        "life": 792,
+        "map_xy": [
+          0,
+          0
+        ]
+      },
+      "dos": {
+        "tile": 87,
+        "life": 792
+      }
+    },
+    {
+      "case": "camera-wrap/p3",
+      "input": {
+        "plane": 3,
+        "x": 63,
+        "y": 63,
+        "column": 1,
+        "row": 1,
+        "scent": 3,
+        "tile": 88,
+        "life": 254,
+        "pheromone": 32,
+        "anim": [
+          2,
+          4,
+          6,
+          10
+        ]
+      },
+      "mismatches": [],
+      "expected": {
+        "tile": 88,
+        "life": 792,
+        "map_xy": [
+          0,
+          0
+        ]
+      },
+      "dos": {
+        "tile": 88,
+        "life": 792
+      }
+    }
+  ],
+  "case_count": 272,
+  "mismatch_count": 0,
+  "status": "PASS",
+  "limits": "The native draw path uses instruction-derived 16x16 EGA source layouts and 0x80/0xA0 ground/life strides. The logical selector is differentially compared to DOS; the life combiner has a normalized-readback differential. Full physical EGA, atlas placement, screen clipping and _2FDA output equality are not claimed."
+}

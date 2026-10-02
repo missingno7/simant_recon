@@ -1,0 +1,99 @@
+{
+  "schema": "portable-kind9-layout-positive-v1",
+  "status": "SOURCE_LAYOUT_AND_MASK_CONTRACT_CONFIRMED_NORMALIZED_READBACK",
+  "supplements_without_replacing": "portable/tests/resources/evidence/tile-layout-review.json",
+  "scope": "Kind-9 raw pixel layout and EMS mask/composition contract. No physical EGA, atlas-addressing, or framebuffer equivalence claim.",
+  "source_anchors": [
+    {
+      "path": "src/S00/m31AD.asm",
+      "sha256": "5d2ad69ff4affb4be4242e82187065cc5e0b3502cc0cc3e00ad3802ccee2656e",
+      "range": "3307-3386",
+      "function": "_o00_31AD_18BA",
+      "evidence": [
+        "Each tile iterates four EGA Map Mask values 1, 2, 4, 8.",
+        "Each selected plane copies sixteen words with MOVSW; ADD SI,6 advances from one two-byte plane word to the next row's word.",
+        "SUB SI,78h followed by ADD SI,78h makes the full source advance 0x80 bytes per tile: sixteen rows of four two-byte plane words.",
+        "Each plane contributes two bytes per row, so the source tile is 16x16 pixels in plane-interleaved-row order: p0[2], p1[2], p2[2], p3[2]."
+      ]
+    },
+    {
+      "path": "src/S00/m31AD_2AB4.asm",
+      "sha256": "3ef3979a3c35e9e36c4ddc48408bc4cac601ad26f4728e044012a489f831fd55",
+      "range": "88-802",
+      "function": "_o00_31AD_2B1A",
+      "evidence": [
+        "Unrolled body contains sixteen mask-word reads, sixty-four life-plane word reads, and sixty-four base LODSW reads.",
+        "The source frame cursor advances 160 bytes: sixteen rows, each containing one two-byte mask and four two-byte color planes.",
+        "For each word, XOR overlay/base; AND with mask; XOR base implements base XOR ((overlay XOR base) AND mask). A set mask bit selects the overlay color bit; a clear mask bit preserves the base bit.",
+        "Four output words per row are written to _g_3D20, totaling 128 bytes."
+      ]
+    },
+    {
+      "path": "src/S00/m31AD_2AB4.asm",
+      "sha256": "3ef3979a3c35e9e36c4ddc48408bc4cac601ad26f4728e044012a489f831fd55",
+      "range": "804-826",
+      "function": "_o00_31AD_2FDA",
+      "evidence": [
+        "Calls _o00_31AD_2B1A, then calls _o00_31AD_0CF9 with _g_3D20 and width/height 16,16."
+      ]
+    },
+    {
+      "path": "src/root/m0250.c",
+      "sha256": "bb8a325c543151e09cb173d2194844877805a9e1058d3b24362ff5a7cbd9f61b",
+      "range": "LoadTiles and f_0250_0256",
+      "evidence": [
+        "Kind-9 IDs 9/10 are the ground atlases selected by ground selection.",
+        "Kind-9 IDs 15-17 and 18-20 are separately grouped for surface and nest EMS content."
+      ]
+    }
+  ],
+  "asset_checks": {
+    "database": "assets/HCEGANT",
+    "kind": 9,
+    "ground_objects": {
+      "ids": [9, 10],
+      "bytes_each": 32768,
+      "tiles_decoded_each": 256,
+      "tile_bytes": 128
+    },
+    "life_objects": {
+      "ids": [15, 16, 17, 18, 19, 20],
+      "frame_bytes": 160,
+      "all_complete_frames_decoded": true
+    },
+    "test": "portable/tests/render/tile/test_tile_raster.c",
+    "test_sha256": "7f08660d28e46ab10f4d22ac58cf218f0f6a7309b9923bdf4ccb8249babd6bff"
+  },
+  "original_helper_differential": {
+    "runner": "portable/tests/render/tile/evidence/dos_tile_raster.py",
+    "runner_sha256": "706fa7520f0729a74240b7dce92de0acfc41dc2a338a8aaba6abf7fc38a450e4",
+    "report": "portable/tests/render/tile/evidence/dos-tile-raster-differential.json",
+    "report_sha256": "bacc7342ee74fad8114db15d98fc0b0f6e80aca8e16e45fa5f7732e5fcf43ee6",
+    "function": "o00_31AD_2B1A",
+    "oracle_exe_sha256": "aa0596c6766322a8229ee3c36e57048c92adc82d50fbe2ef37afb8b85fcf4f11",
+    "cases": 140,
+    "random_cases": 128,
+    "actual_resource_samples": [
+      "resource-15-frame-0", "resource-15-frame-127",
+      "resource-16-frame-0", "resource-16-frame-127",
+      "resource-17-frame-0", "resource-17-frame-127",
+      "resource-18-frame-0", "resource-18-frame-127",
+      "resource-19-frame-0", "resource-19-frame-127",
+      "resource-20-frame-0", "resource-20-frame-127"
+    ],
+    "compared_bytes_per_case": 128,
+    "mismatches": 0,
+    "readback_fixture": "The fixture supplies bytes that the selected EGA read plane would return at DS:g3DB0+col; source function and output scratch execute unmodified in Unicorn.",
+    "status": "DIAGNOSTIC_PASS_NORMALIZED_READBACK_ONLY"
+  },
+  "limitations": [
+    "No EGA device model: physical graphics-controller read-map behavior is not exercised.",
+    "The atlas placement/address calculation from g_94E4 through row/col is not differentially validated.",
+    "The _o00_31AD_2FDA display call and DOS clipping/framebuffer effects are excluded.",
+    "The existing tile-layout-review.json remains unchanged as the historical rejection of geometry claims based only on resource size and pointer stride; this supplement adds instruction-level source evidence and a normalized-readback helper differential."
+  ],
+  "portable_source_hashes": {
+    "portable/render/tile_raster.h": "5875ff0846d0ad1e78655239f9d5045b5c78861663b486c83f227a0c9b7e77e9",
+    "portable/render/tile_raster.c": "ca512817b06410da30e5eb1e8d1324cd281396359f181f9c34a4c2808e939cb9"
+  }
+}

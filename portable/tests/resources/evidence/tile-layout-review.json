@@ -1,0 +1,38 @@
+{
+  "status": "OPAQUE_RESOURCE_BYTES_LAYOUT_UNPROVEN",
+  "scope": "Portable kind-9 resource roles and owned byte extents only; no pixel or tile geometry claim.",
+  "source_anchors": [
+    {
+      "path": "src/root/m0250.c",
+      "sha256": "bb8a325c543151e09cb173d2194844877805a9e1058d3b24362ff5a7cbd9f61b",
+      "evidence": [
+        "LoadTiles loads kind 9 object IDs 15 through 20.",
+        "LoadTiles maps IDs 15 through 17 with g_19D2 and IDs 18 through 20 with g_19E2; f_0250_05EB chooses the mapping using MapPlane.",
+        "f_0250_0256 loads kind 9 object ID 10-set, independent of the surface/nest grouping."
+      ]
+    },
+    {
+      "path": "src/S00/m31AD.asm",
+      "sha256": "5d2ad69ff4affb4be4242e82187065cc5e0b3502cc0cc3e00ad3802ccee2656e",
+      "evidence": [
+        "_o00_31AD_18BA copies bytes into EGA display memory with plane-mask I/O; this does not establish a portable tile width/height contract for kind-9 objects 9/10."
+      ]
+    }
+  ],
+  "rejected_inference": {
+    "claim": "Objects 15 through 20 each contain 128 16x20 tiles because the resource size is 0x5000 and the DOS source uses a 0xA0 pointer multiplier.",
+    "reason": "The size and pointer arithmetic alone do not prove tile dimensions or row layout. The resource groups are selected by MapPlane as surface versus nest and are independent of ground selection.",
+    "disposition": "Removed from portable API and tests. Raw bytes and resource roles remain available."
+  },
+  "confirmed_asset_extents": {
+    "kind": 9,
+    "objects_9_10_bytes_each": 32768,
+    "objects_15_20_bytes_each": 20480,
+    "asset_identity": "See ../ASSET_SHA256.md for original HCEGANT asset and payload hashes."
+  },
+  "portable_sources": {
+    "header_sha256": "e17c9c705355072ade17676e27c1dd8739d0732eabb8d079f6541ac33905c0d1",
+    "implementation_sha256": "a8b4a122af58e604da8694d20e619acfb6986a91d3b1a95020f3884ae3c3782b",
+    "test_sha256": "8fe594a6c1c2ca1dae8da294703815e27b84389551316625f2143d5e114ba80c"
+  }
+}

@@ -1,0 +1,35 @@
+{
+  "schema": "native-dos-movement-differential-v1",
+  "oracle_sha256": "aa0596c6766322a8229ee3c36e57048c92adc82d50fbe2ef37afb8b85fcf4f11",
+  "historical_manifest_sha256": "025a0a9255d910cae4b122ab5a3f3fb40888bb456d7fe42158db7c9e622fcf50",
+  "archived_suite": "tools\\behavior_suites\\archive\\randdirs-20261002-current-runner-ledger-final.py",
+  "suite_sha256": "f7aad88da70befc902bcc4b8f48670f43df38e90f81e45a59ef4c584090dd360",
+  "runner_sha256": "2c0799048057f59eae61a48be4d695278635594484adf0c70bf46c51b4e0c799",
+  "native_sources": {
+    "header_sha256": "b20d81bc8b545f7929a5f9bc3367f8349782b7daaf876518a7c9df8abc0bc447",
+    "source_sha256": "1e82fb8c81c30ffde31cc6970572731e07e67828de68c25851b5588f7f6fa699",
+    "library_sha256": "06a1311f2aec0b819494b287d83120d3b0901506bc248a0259c035fc0f03cce7",
+    "build_command": [
+      "C:\\msys64\\mingw64\\bin\\gcc.exe",
+      "-std=c11",
+      "-O2",
+      "-Wall",
+      "-Wextra",
+      "-Werror",
+      "-shared",
+      "-I",
+      "D:\\Prog\\simant_recon\\portable\\game\\simulation",
+      "D:\\Prog\\simant_recon\\portable\\game\\simulation\\movement.c",
+      "-o",
+      "D:\\Prog\\simant_recon\\build\\portable\\movement.dll"
+    ]
+  },
+  "lane": "original DOS invocation vs native shared-library call",
+  "directed": true,
+  "random_count_requested": 100000,
+  "random_seed": 5766,
+  "executed": 322720,
+  "mismatches": 0,
+  "first_mismatch": null,
+  "status": "PASS"
+}
