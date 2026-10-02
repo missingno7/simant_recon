@@ -1,0 +1,36 @@
+{
+  "schema": "portable-historical-integrity-check-v1",
+  "date": "2026-10-02",
+  "frozen_tag": "dos-semantic-oracle-v1",
+  "frozen_commit": "66e85041ee54f59774ae0fd5a08b37ffbcf77172",
+  "historical_validation": {
+    "command": "python tools/validate.py",
+    "status": "PASS",
+    "codegen_rules": 48,
+    "test_summary": "OK (skipped=2)",
+    "log_path": "build/portable/historical-validation-controls-clean-assets-20261002.log",
+    "log_sha256": "fe86895759534286937a671bfb5fec1bccd9384b6527d1e05ee172b171cd76d7"
+  },
+  "hybrid": {
+    "command": "python tools/link.py --reuse",
+    "status": "PASS",
+    "byte_identical": true,
+    "sha256": "aa0596c6766322a8229ee3c36e57048c92adc82d50fbe2ef37afb8b85fcf4f11",
+    "log_path": "build/portable/hybrid-controls-20261002.log",
+    "log_sha256": "dbf58540d2b7f4b65686f64d35345345f404dd0e7ad5d9859e9e2993d98393e5"
+  },
+  "manifest_sha256": "025a0a9255d910cae4b122ab5a3f3fb40888bb456d7fe42158db7c9e622fcf50",
+  "oracle_lock_sha256": "2c6d9e98c688621ad49a08c78d0e0968f4076b036be56ec0738217b533ccde13",
+  "frozen_input_receipt": {
+    "status": "PASS",
+    "receipt_sha256": "072e2b2db963c13f5a37d6bd2328e08cf1cd6455ed1d5005e228337fe1755d01"
+  },
+  "asset_inventory_correction": {
+    "extra_file": "assets/SDL3.dll",
+    "preserved_at": "build/portable/asset-contamination-preserved/SDL3.dll",
+    "sha256": "8d6167e6d27e27e640deb0b259445d606ec011c63e580396dff76fd8d46f9631",
+    "locked_original_assets_changed": false,
+    "oracle_lock_changed": false
+  },
+  "scope": "Historical integrity only. Does not expand EXACT or BEHAVIOR_EXACT claims, establish a historical RTLink rebuild, or certify native UI/filesystem behavior."
+}
