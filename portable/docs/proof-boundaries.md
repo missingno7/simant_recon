@@ -328,7 +328,7 @@ oracle, evaluator, and resource inputs. Resource-backed native raster checks
 cover 70 window commands and 361 touched pixels. DOS framebuffer equality and
 complete live UI behavior remain separate work.
 
-The [Next10 History adapter](../tests/history_event_lowering/history_adapter_report.json)
+The [Next10 History adapter](../tests/history_event_lowering/history_adapter_closure_v2_report.json)
 replays the 29 archived DOS event traces through the actual recovered
 ProcHistoryEvent/ToggleHistButton bodies. It preserves the unsigned command
 word at byte 12 of the 16-byte event record and exposes source-owned private
@@ -336,6 +336,11 @@ selection state through a read-only accessor. Callback order and private state
 match across seven scenarios; snapshot reads leave that state unchanged.
 This replay adds no new DOS invocations. The [Next10 recipe](recovered-source-next10-recipe.md)
 records the separately reviewed bounded-copy lowering and strict profile gate.
+The V2 adapter receipt pins all ten repository-local compiler dependencies
+before and after native compilation, with a missing-header negative control.
+It retains 131 path/hash inputs plus compiler-stage and loaded Unicorn-library
+identities. The earlier adapter receipt is preserved with its transitive-header
+identity gap; its functional result is separate from that gap.
 
 The [physical History packet](../tests/live_history/README.md) passes the
 pause → FD15 open → unpause sequence with 28 injected SDL events. Nine actual
