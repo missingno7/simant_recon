@@ -50,3 +50,11 @@ Reference workflows reviewed locally: Stunts
 `docs/porting/semantic-audit.md` and Empires
 `docs/portable/tu-porting-rules.md`. These are workflow references, not SimAnt
 semantic evidence.
+
+The pinned original source generator leaves bare `unsigned` as a host-width
+type. `portable/tools/word_spelling.py` provides a separate, opt-in lexical pass
+that converts this DOS word spelling to `uint16_t` while preserving comments,
+literals, and explicit scalar spellings. Its controls include the frozen
+`RandWorld` signature. Existing Next9/Next10 outputs remain unchanged; a new
+profile must record use of this pass and rerun the relevant oracle comparisons.
+This declaration conversion does not solve host integer-promotion differences.
