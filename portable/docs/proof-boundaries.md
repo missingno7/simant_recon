@@ -341,6 +341,16 @@ It explicitly retains the unsupported `StopSong` service reached by FD32.
 inputs during checkout. It applies only to the port tree and does not change
 historical reconstruction files or their frozen identities.
 
+The [StopSong contract packet](../tests/audio/stop_song/evidence/stop-song-contract-v2.json)
+matches three controlled original-DOS/native scenarios, each invoked twice.
+Inactive calls do nothing; playing and finished calls clear the active flag
+before releasing the current song and resetting the synth. The receipt pins
+compiler helpers and the native Unicorn library before and after execution.
+Release internals and device output are controlled helper boundaries. This
+isolated test fixture is outside production; the live FD32 action still reports
+its unavailable StopSong service. It adds no behavioral claims to the frozen
+historical certificate.
+
 The [physical menu smoke](../tests/live_menu/evidence/physical-menu-slow-final-next8-20261002.json)
 passes three SDL mouse drag/release interactions: Slow, Pause, and Unpause.
 It completes 32 source simulation ticks with nine injected events, exactly

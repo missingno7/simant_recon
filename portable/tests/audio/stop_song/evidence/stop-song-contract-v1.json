@@ -1,0 +1,1096 @@
+{
+  "schema": "simant-stop-song-contract-v1",
+  "status": "PASS_DIAGNOSTIC_NOT_PRODUCTION",
+  "function": "root:284A:010A StopSong",
+  "oracle_sha256": "aa0596c6766322a8229ee3c36e57048c92adc82d50fbe2ef37afb8b85fcf4f11",
+  "contract": {
+    "guard": "any nonzero g_756E, including source states 1=playing and 2=finished, enters stop path",
+    "transition_order": [
+      "g_756E := 0",
+      "release current Song/resource ownership",
+      "reset active MIDI/song synth channels"
+    ],
+    "inactive": "g_756E == 0 causes no release or reset callback",
+    "number": "g_7578 is passed as a signed 16-bit number to release; source helper f_0000_039B does not read it",
+    "ownership_boundary": "f_0000_039B owns clearing Song.data and returning loaded sample references; this suite abstracts that edge by clearing the test handle at callback entry",
+    "reset_boundary": "f_295C_0391 owns scanning active MIDI-channel descriptors and calling f_295C_02E8; this suite tests StopSong order, not device-register sequencing"
+  },
+  "domains": {
+    "music_states": [
+      0,
+      1,
+      2
+    ],
+    "source_backed_song_numbers": [
+      10003,
+      11006,
+      20007
+    ],
+    "note": "No signed high-bit song IDs are in the inspected myBeginSong call-site domain; 0x8000/0xFFFF are not treated as valid songs."
+  },
+  "scenario_count": 3,
+  "invocations": 6,
+  "exact_historical_candidate": true,
+  "pair_identity": {
+    "function": "StopSong",
+    "address": {
+      "unit": "root",
+      "seg": 10314,
+      "off": 266,
+      "size": 45
+    },
+    "source": "src\\root\\m284A.c",
+    "source_sha256": "bad7d3701a853ba2de166e4f875ba3043f33ca136b7d0dcff41db8e5459f9fa5",
+    "compiled_source_sha256": "bad7d3701a853ba2de166e4f875ba3043f33ca136b7d0dcff41db8e5459f9fa5",
+    "object_sha256": "fe8acec4a8f3d81cc325993d13fa999f78c66243c515cea30386eea627722599",
+    "linked_code_sha256": "6dca175e5e9734ca06b4af296d6d84775ec2d7e1a9802f1e23eab80d175445ad",
+    "oracle_sha256": "aa0596c6766322a8229ee3c36e57048c92adc82d50fbe2ef37afb8b85fcf4f11",
+    "unicorn_version": "2.1.4",
+    "harness_sha256": "2c0799048057f59eae61a48be4d695278635594484adf0c70bf46c51b4e0c799",
+    "profile": "msc600ax",
+    "flags": [
+      "/AL",
+      "/Os",
+      "/Oe",
+      "/Og",
+      "/Gs",
+      "/Zi"
+    ],
+    "manifest_sha256": "025a0a9255d910cae4b122ab5a3f3fb40888bb456d7fe42158db7c9e622fcf50"
+  },
+  "rows": [
+    {
+      "scenario": "inactive",
+      "initial_active": 0,
+      "song_number": 11006,
+      "calls": 2,
+      "status": "MATCH",
+      "dos_callbacks": [],
+      "candidate_callbacks": [],
+      "native_callbacks": [],
+      "dos_final": {
+        "active": 0,
+        "song_number": 11006,
+        "song_data_live": 1,
+        "calls": 2
+      },
+      "native_final": {
+        "active": 0,
+        "song_number": 11006,
+        "song_data_live": 1,
+        "calls": 2
+      },
+      "dos_raw_first": {
+        "return": null,
+        "ranges": {
+          "active": "0000",
+          "song_number": "fe2a",
+          "current_song_pointer": "000100a1",
+          "song_data_handle": "000200a2"
+        },
+        "trace": [],
+        "raw_trace": [],
+        "io": [],
+        "state": {},
+        "raw_effect_trace": [],
+        "private_formatter_views": {},
+        "preserved_registers": {
+          "si": 22136,
+          "di": 26505,
+          "bp": 30874,
+          "sp": 41988,
+          "ss": 21939,
+          "ds": 21939
+        },
+        "written_addresses": [],
+        "blocks": 2
+      },
+      "dos_raw_repeat": {
+        "return": null,
+        "ranges": {
+          "active": "0000",
+          "song_number": "fe2a",
+          "current_song_pointer": "000100a1",
+          "song_data_handle": "000200a2"
+        },
+        "trace": [],
+        "raw_trace": [],
+        "io": [],
+        "state": {},
+        "raw_effect_trace": [],
+        "private_formatter_views": {},
+        "preserved_registers": {
+          "si": 22136,
+          "di": 26505,
+          "bp": 30874,
+          "sp": 41988,
+          "ss": 21939,
+          "ds": 21939
+        },
+        "written_addresses": [],
+        "blocks": 2
+      },
+      "candidate_raw_first": {
+        "return": null,
+        "ranges": {
+          "active": "0000",
+          "song_number": "fe2a",
+          "current_song_pointer": "000100a1",
+          "song_data_handle": "000200a2"
+        },
+        "trace": [],
+        "raw_trace": [],
+        "io": [],
+        "state": {},
+        "raw_effect_trace": [],
+        "private_formatter_views": {},
+        "preserved_registers": {
+          "si": 22136,
+          "di": 26505,
+          "bp": 30874,
+          "sp": 41988,
+          "ss": 21939,
+          "ds": 21939
+        },
+        "written_addresses": [],
+        "blocks": 2
+      },
+      "candidate_raw_repeat": {
+        "return": null,
+        "ranges": {
+          "active": "0000",
+          "song_number": "fe2a",
+          "current_song_pointer": "000100a1",
+          "song_data_handle": "000200a2"
+        },
+        "trace": [],
+        "raw_trace": [],
+        "io": [],
+        "state": {},
+        "raw_effect_trace": [],
+        "private_formatter_views": {},
+        "preserved_registers": {
+          "si": 22136,
+          "di": 26505,
+          "bp": 30874,
+          "sp": 41988,
+          "ss": 21939,
+          "ds": 21939
+        },
+        "written_addresses": [],
+        "blocks": 2
+      }
+    },
+    {
+      "scenario": "playing",
+      "initial_active": 1,
+      "song_number": 10001,
+      "calls": 2,
+      "status": "MATCH",
+      "dos_callbacks": [
+        {
+          "kind": "release",
+          "active_at_entry": 0,
+          "song_number": 10001,
+          "song_token": "current-song",
+          "song_data_live_at_entry": 1
+        },
+        {
+          "kind": "reset",
+          "active_at_entry": 0,
+          "song_data_live_at_entry": 0
+        }
+      ],
+      "candidate_callbacks": [
+        {
+          "kind": "release",
+          "active_at_entry": 0,
+          "song_number": 10001,
+          "song_token": "current-song",
+          "song_data_live_at_entry": 1
+        },
+        {
+          "kind": "reset",
+          "active_at_entry": 0,
+          "song_data_live_at_entry": 0
+        }
+      ],
+      "native_callbacks": [
+        {
+          "kind": "release",
+          "active_at_entry": 0,
+          "song_number": 10001,
+          "song_token": "current-song",
+          "song_data_live_at_entry": 1
+        },
+        {
+          "kind": "reset",
+          "active_at_entry": 0,
+          "song_data_live_at_entry": 0
+        }
+      ],
+      "dos_final": {
+        "active": 0,
+        "song_number": 10001,
+        "song_data_live": 0,
+        "calls": 2
+      },
+      "native_final": {
+        "active": 0,
+        "song_number": 10001,
+        "song_data_live": 0,
+        "calls": 2
+      },
+      "dos_raw_first": {
+        "return": null,
+        "ranges": {
+          "active": "0000",
+          "song_number": "1127",
+          "current_song_pointer": "000100a1",
+          "song_data_handle": "00000000"
+        },
+        "trace": [
+          {
+            "name": "f_0000_039B",
+            "args": [
+              256,
+              41216,
+              10001
+            ],
+            "state_at_entry": {
+              "active": "0000",
+              "song_number": "1127",
+              "current_song_pointer": "000100a1",
+              "song_data_handle": "000200a2"
+            },
+            "modified_state_at_entry": [
+              [
+                381086,
+                0
+              ]
+            ]
+          },
+          {
+            "name": "f_295C_0391",
+            "args": [],
+            "state_at_entry": {
+              "active": "0000",
+              "song_number": "1127",
+              "current_song_pointer": "000100a1",
+              "song_data_handle": "00000000"
+            },
+            "modified_state_at_entry": [
+              [
+                381086,
+                0
+              ],
+              [
+                659769,
+                0
+              ],
+              [
+                659771,
+                0
+              ]
+            ]
+          }
+        ],
+        "raw_trace": [
+          {
+            "name": "f_0000_039B",
+            "args": [
+              256,
+              41216,
+              10001
+            ]
+          },
+          {
+            "name": "f_295C_0391",
+            "args": []
+          }
+        ],
+        "io": [],
+        "state": {},
+        "raw_effect_trace": [
+          {
+            "name": "f_0000_039B",
+            "args": [
+              256,
+              41216,
+              10001
+            ],
+            "state_at_entry": {
+              "active": "0000",
+              "song_number": "1127",
+              "current_song_pointer": "000100a1",
+              "song_data_handle": "000200a2"
+            },
+            "modified_state_at_entry": [
+              [
+                381086,
+                0
+              ]
+            ]
+          },
+          {
+            "name": "f_295C_0391",
+            "args": [],
+            "state_at_entry": {
+              "active": "0000",
+              "song_number": "1127",
+              "current_song_pointer": "000100a1",
+              "song_data_handle": "00000000"
+            },
+            "modified_state_at_entry": [
+              [
+                381086,
+                0
+              ],
+              [
+                659769,
+                0
+              ],
+              [
+                659771,
+                0
+              ]
+            ]
+          }
+        ],
+        "private_formatter_views": {},
+        "preserved_registers": {
+          "si": 22136,
+          "di": 26505,
+          "bp": 30874,
+          "sp": 41988,
+          "ss": 21939,
+          "ds": 21939
+        },
+        "written_addresses": [
+          381086,
+          381087,
+          659768,
+          659769,
+          659770,
+          659771
+        ],
+        "blocks": 6
+      },
+      "dos_raw_repeat": {
+        "return": null,
+        "ranges": {
+          "active": "0000",
+          "song_number": "1127",
+          "current_song_pointer": "000100a1",
+          "song_data_handle": "00000000"
+        },
+        "trace": [],
+        "raw_trace": [],
+        "io": [],
+        "state": {},
+        "raw_effect_trace": [],
+        "private_formatter_views": {},
+        "preserved_registers": {
+          "si": 22136,
+          "di": 26505,
+          "bp": 30874,
+          "sp": 41988,
+          "ss": 21939,
+          "ds": 21939
+        },
+        "written_addresses": [
+          381086,
+          381087,
+          659768,
+          659769,
+          659770,
+          659771
+        ],
+        "blocks": 2
+      },
+      "candidate_raw_first": {
+        "return": null,
+        "ranges": {
+          "active": "0000",
+          "song_number": "1127",
+          "current_song_pointer": "000100a1",
+          "song_data_handle": "00000000"
+        },
+        "trace": [
+          {
+            "name": "f_0000_039B",
+            "args": [
+              256,
+              41216,
+              10001
+            ],
+            "state_at_entry": {
+              "active": "0000",
+              "song_number": "1127",
+              "current_song_pointer": "000100a1",
+              "song_data_handle": "000200a2"
+            },
+            "modified_state_at_entry": [
+              [
+                381086,
+                0
+              ]
+            ]
+          },
+          {
+            "name": "f_295C_0391",
+            "args": [],
+            "state_at_entry": {
+              "active": "0000",
+              "song_number": "1127",
+              "current_song_pointer": "000100a1",
+              "song_data_handle": "00000000"
+            },
+            "modified_state_at_entry": [
+              [
+                381086,
+                0
+              ],
+              [
+                659769,
+                0
+              ],
+              [
+                659771,
+                0
+              ]
+            ]
+          }
+        ],
+        "raw_trace": [
+          {
+            "name": "f_0000_039B",
+            "args": [
+              256,
+              41216,
+              10001
+            ]
+          },
+          {
+            "name": "f_295C_0391",
+            "args": []
+          }
+        ],
+        "io": [],
+        "state": {},
+        "raw_effect_trace": [
+          {
+            "name": "f_0000_039B",
+            "args": [
+              256,
+              41216,
+              10001
+            ],
+            "state_at_entry": {
+              "active": "0000",
+              "song_number": "1127",
+              "current_song_pointer": "000100a1",
+              "song_data_handle": "000200a2"
+            },
+            "modified_state_at_entry": [
+              [
+                381086,
+                0
+              ]
+            ]
+          },
+          {
+            "name": "f_295C_0391",
+            "args": [],
+            "state_at_entry": {
+              "active": "0000",
+              "song_number": "1127",
+              "current_song_pointer": "000100a1",
+              "song_data_handle": "00000000"
+            },
+            "modified_state_at_entry": [
+              [
+                381086,
+                0
+              ],
+              [
+                659769,
+                0
+              ],
+              [
+                659771,
+                0
+              ]
+            ]
+          }
+        ],
+        "private_formatter_views": {},
+        "preserved_registers": {
+          "si": 22136,
+          "di": 26505,
+          "bp": 30874,
+          "sp": 41988,
+          "ss": 21939,
+          "ds": 21939
+        },
+        "written_addresses": [
+          381086,
+          381087,
+          659768,
+          659769,
+          659770,
+          659771
+        ],
+        "blocks": 6
+      },
+      "candidate_raw_repeat": {
+        "return": null,
+        "ranges": {
+          "active": "0000",
+          "song_number": "1127",
+          "current_song_pointer": "000100a1",
+          "song_data_handle": "00000000"
+        },
+        "trace": [],
+        "raw_trace": [],
+        "io": [],
+        "state": {},
+        "raw_effect_trace": [],
+        "private_formatter_views": {},
+        "preserved_registers": {
+          "si": 22136,
+          "di": 26505,
+          "bp": 30874,
+          "sp": 41988,
+          "ss": 21939,
+          "ds": 21939
+        },
+        "written_addresses": [
+          381086,
+          381087,
+          659768,
+          659769,
+          659770,
+          659771
+        ],
+        "blocks": 2
+      }
+    },
+    {
+      "scenario": "finished",
+      "initial_active": 2,
+      "song_number": 20007,
+      "calls": 2,
+      "status": "MATCH",
+      "dos_callbacks": [
+        {
+          "kind": "release",
+          "active_at_entry": 0,
+          "song_number": 20007,
+          "song_token": "current-song",
+          "song_data_live_at_entry": 1
+        },
+        {
+          "kind": "reset",
+          "active_at_entry": 0,
+          "song_data_live_at_entry": 0
+        }
+      ],
+      "candidate_callbacks": [
+        {
+          "kind": "release",
+          "active_at_entry": 0,
+          "song_number": 20007,
+          "song_token": "current-song",
+          "song_data_live_at_entry": 1
+        },
+        {
+          "kind": "reset",
+          "active_at_entry": 0,
+          "song_data_live_at_entry": 0
+        }
+      ],
+      "native_callbacks": [
+        {
+          "kind": "release",
+          "active_at_entry": 0,
+          "song_number": 20007,
+          "song_token": "current-song",
+          "song_data_live_at_entry": 1
+        },
+        {
+          "kind": "reset",
+          "active_at_entry": 0,
+          "song_data_live_at_entry": 0
+        }
+      ],
+      "dos_final": {
+        "active": 0,
+        "song_number": 20007,
+        "song_data_live": 0,
+        "calls": 2
+      },
+      "native_final": {
+        "active": 0,
+        "song_number": 20007,
+        "song_data_live": 0,
+        "calls": 2
+      },
+      "dos_raw_first": {
+        "return": null,
+        "ranges": {
+          "active": "0000",
+          "song_number": "274e",
+          "current_song_pointer": "000100a1",
+          "song_data_handle": "00000000"
+        },
+        "trace": [
+          {
+            "name": "f_0000_039B",
+            "args": [
+              256,
+              41216,
+              20007
+            ],
+            "state_at_entry": {
+              "active": "0000",
+              "song_number": "274e",
+              "current_song_pointer": "000100a1",
+              "song_data_handle": "000200a2"
+            },
+            "modified_state_at_entry": [
+              [
+                381086,
+                0
+              ]
+            ]
+          },
+          {
+            "name": "f_295C_0391",
+            "args": [],
+            "state_at_entry": {
+              "active": "0000",
+              "song_number": "274e",
+              "current_song_pointer": "000100a1",
+              "song_data_handle": "00000000"
+            },
+            "modified_state_at_entry": [
+              [
+                381086,
+                0
+              ],
+              [
+                659769,
+                0
+              ],
+              [
+                659771,
+                0
+              ]
+            ]
+          }
+        ],
+        "raw_trace": [
+          {
+            "name": "f_0000_039B",
+            "args": [
+              256,
+              41216,
+              20007
+            ]
+          },
+          {
+            "name": "f_295C_0391",
+            "args": []
+          }
+        ],
+        "io": [],
+        "state": {},
+        "raw_effect_trace": [
+          {
+            "name": "f_0000_039B",
+            "args": [
+              256,
+              41216,
+              20007
+            ],
+            "state_at_entry": {
+              "active": "0000",
+              "song_number": "274e",
+              "current_song_pointer": "000100a1",
+              "song_data_handle": "000200a2"
+            },
+            "modified_state_at_entry": [
+              [
+                381086,
+                0
+              ]
+            ]
+          },
+          {
+            "name": "f_295C_0391",
+            "args": [],
+            "state_at_entry": {
+              "active": "0000",
+              "song_number": "274e",
+              "current_song_pointer": "000100a1",
+              "song_data_handle": "00000000"
+            },
+            "modified_state_at_entry": [
+              [
+                381086,
+                0
+              ],
+              [
+                659769,
+                0
+              ],
+              [
+                659771,
+                0
+              ]
+            ]
+          }
+        ],
+        "private_formatter_views": {},
+        "preserved_registers": {
+          "si": 22136,
+          "di": 26505,
+          "bp": 30874,
+          "sp": 41988,
+          "ss": 21939,
+          "ds": 21939
+        },
+        "written_addresses": [
+          381086,
+          381087,
+          659768,
+          659769,
+          659770,
+          659771
+        ],
+        "blocks": 6
+      },
+      "dos_raw_repeat": {
+        "return": null,
+        "ranges": {
+          "active": "0000",
+          "song_number": "274e",
+          "current_song_pointer": "000100a1",
+          "song_data_handle": "00000000"
+        },
+        "trace": [],
+        "raw_trace": [],
+        "io": [],
+        "state": {},
+        "raw_effect_trace": [],
+        "private_formatter_views": {},
+        "preserved_registers": {
+          "si": 22136,
+          "di": 26505,
+          "bp": 30874,
+          "sp": 41988,
+          "ss": 21939,
+          "ds": 21939
+        },
+        "written_addresses": [
+          381086,
+          381087,
+          659768,
+          659769,
+          659770,
+          659771
+        ],
+        "blocks": 2
+      },
+      "candidate_raw_first": {
+        "return": null,
+        "ranges": {
+          "active": "0000",
+          "song_number": "274e",
+          "current_song_pointer": "000100a1",
+          "song_data_handle": "00000000"
+        },
+        "trace": [
+          {
+            "name": "f_0000_039B",
+            "args": [
+              256,
+              41216,
+              20007
+            ],
+            "state_at_entry": {
+              "active": "0000",
+              "song_number": "274e",
+              "current_song_pointer": "000100a1",
+              "song_data_handle": "000200a2"
+            },
+            "modified_state_at_entry": [
+              [
+                381086,
+                0
+              ]
+            ]
+          },
+          {
+            "name": "f_295C_0391",
+            "args": [],
+            "state_at_entry": {
+              "active": "0000",
+              "song_number": "274e",
+              "current_song_pointer": "000100a1",
+              "song_data_handle": "00000000"
+            },
+            "modified_state_at_entry": [
+              [
+                381086,
+                0
+              ],
+              [
+                659769,
+                0
+              ],
+              [
+                659771,
+                0
+              ]
+            ]
+          }
+        ],
+        "raw_trace": [
+          {
+            "name": "f_0000_039B",
+            "args": [
+              256,
+              41216,
+              20007
+            ]
+          },
+          {
+            "name": "f_295C_0391",
+            "args": []
+          }
+        ],
+        "io": [],
+        "state": {},
+        "raw_effect_trace": [
+          {
+            "name": "f_0000_039B",
+            "args": [
+              256,
+              41216,
+              20007
+            ],
+            "state_at_entry": {
+              "active": "0000",
+              "song_number": "274e",
+              "current_song_pointer": "000100a1",
+              "song_data_handle": "000200a2"
+            },
+            "modified_state_at_entry": [
+              [
+                381086,
+                0
+              ]
+            ]
+          },
+          {
+            "name": "f_295C_0391",
+            "args": [],
+            "state_at_entry": {
+              "active": "0000",
+              "song_number": "274e",
+              "current_song_pointer": "000100a1",
+              "song_data_handle": "00000000"
+            },
+            "modified_state_at_entry": [
+              [
+                381086,
+                0
+              ],
+              [
+                659769,
+                0
+              ],
+              [
+                659771,
+                0
+              ]
+            ]
+          }
+        ],
+        "private_formatter_views": {},
+        "preserved_registers": {
+          "si": 22136,
+          "di": 26505,
+          "bp": 30874,
+          "sp": 41988,
+          "ss": 21939,
+          "ds": 21939
+        },
+        "written_addresses": [
+          381086,
+          381087,
+          659768,
+          659769,
+          659770,
+          659771
+        ],
+        "blocks": 6
+      },
+      "candidate_raw_repeat": {
+        "return": null,
+        "ranges": {
+          "active": "0000",
+          "song_number": "274e",
+          "current_song_pointer": "000100a1",
+          "song_data_handle": "00000000"
+        },
+        "trace": [],
+        "raw_trace": [],
+        "io": [],
+        "state": {},
+        "raw_effect_trace": [],
+        "private_formatter_views": {},
+        "preserved_registers": {
+          "si": 22136,
+          "di": 26505,
+          "bp": 30874,
+          "sp": 41988,
+          "ss": 21939,
+          "ds": 21939
+        },
+        "written_addresses": [
+          381086,
+          381087,
+          659768,
+          659769,
+          659770,
+          659771
+        ],
+        "blocks": 2
+      }
+    }
+  ],
+  "inputs_before_sha256": {
+    "assets/SIMANT.EXE": "aa0596c6766322a8229ee3c36e57048c92adc82d50fbe2ef37afb8b85fcf4f11",
+    "layout/functions.json": "6089a06e18fbe8f0960392cfe30357f7c19c886f38f10f7f115c72d127a756e7",
+    "layout/manifest.json": "025a0a9255d910cae4b122ab5a3f3fb40888bb456d7fe42158db7c9e622fcf50",
+    "layout/oracle.lock.json": "2c6d9e98c688621ad49a08c78d0e0968f4076b036be56ec0738217b533ccde13",
+    "layout/symbols.json": "0f5dd5b0a211945a97782cfccdb9bb31b0dfd07fcde5df4d4f9486b487eb0125",
+    "layout/toolchain.json": "c0bb71cd8b1f4a1a1f91299bd3b6148aa67b7a1d12c3c3946a229272593eb274",
+    "portable/audio/intent.c": "01ba4f7a26e52582970565e52a755fbaca418c3fcfb97a4b70edb63920e64e77",
+    "portable/audio/intent.h": "4b44d29eca5ed65088a34132561aed35d0dee45439fc4a4bccf15cc74f1b99a0",
+    "portable/game/recovered/engine.c": "f64ccf03561d0ba3b80f8ca10b873e5f382c8455ec9c82630fd0f150219d1220",
+    "portable/platform/sdl3/audio_host.c": "61590519c9ecc7fd4ff4679cab1658d431075e1cdacbdf93e08807a56556be2a",
+    "portable/platform/sdl3/audio_host.h": "e9047a4500ed53339f69e7b81fb40d15cd50fbfd592d92602a2d15be06ce02fc",
+    "portable/tests/audio/stop_song/run_contract.py": "6f43fd55e301e2b3f71b82e46cc636b881d3caec64e80f284349e4f846e52729",
+    "portable/tests/audio/stop_song/stop_song_contract.c": "8c987555c6142aff433a5d053eec25e3afbba082dd8d826fcc624cae399cd922",
+    "portable/tests/menus/engine_procmenu.c": "1e4581ed0852060ced23fbc29ce69c435e1a29dd108c0bdd023e1573dcbc1498",
+    "portable/tests/menus/procmenu_native_probe.c": "4de075a0b2959c4943c564ac59e4e3e03513b8e39944464b1bb801b904ebdc36",
+    "src/data/d55B3_00B8.c": "d04646a28691ff05ad93a50c5e7142405ab64932f875f2d2a4d10d04a4566f3d",
+    "src/root/m0000.c": "d9ccffbb69c4fdcae55eef918bf420cff81ead6849f67298271c2844e04199f9",
+    "src/root/m171C.c": "31bd9caa243220db2bd1ba940ac8fae7f5d189b2ec95f1662918e9ca2160b10e",
+    "src/root/m277E.c": "4e928689c743f473c5a007bbbbb5287cdf8728d12e9cae5652b1cb55debf09ee",
+    "src/root/m284A.c": "bad7d3701a853ba2de166e4f875ba3043f33ca136b7d0dcff41db8e5459f9fa5",
+    "src/root/m295C.c": "d392b6ce886cfd664a192194b79569bb6a0d4dea8b0bc029ffa9e32ff44add89",
+    "tools/autosearch.py": "9c2727a875ee94c66ceac868d64c7070c316a5dbbef7cd6b21a670b44a2e1806",
+    "tools/behavior.py": "2c0799048057f59eae61a48be4d695278635594484adf0c70bf46c51b4e0c799",
+    "tools/compiler.py": "ef1d59a0fbe0e0780a6b8480e13d7d07859a14ae185c00a4420e1238a2ae35bb",
+    "tools/exe.py": "d560f69dcdf0d1c9e89278b50bebe225a9b86db2c259fa54ec9eace6ea05a8b5",
+    "tools/functions.py": "0f67c8d9eb01e319620c9342e79c35f76006091d860894aad6dcf8d61ee2b39e",
+    "tools/match.py": "44fdd8b939b2bbf135d8947d8f6ef6b1854dec133da4af86c55eb94f02869b56",
+    "tools/modctx.py": "33f3a4e3d77371e3095bfeb00358c13bc7838235c27bfe8898dba7e313f1cc25",
+    "tools/modules.py": "8a5c1e85db6970cce3c693c016b313b7ee1922fa6eaf146a00391bfea86edf1a",
+    "tools/omf.py": "951137ecbfaeb6e40fd5230c94398141da7ec7bdb7399d9cd74d46ded3045612",
+    "tools/symbols.py": "e3f25fb66717f743dea126e56b5b44538d452fb5a2d52695ef27cb5069bc1793"
+  },
+  "inputs_after_sha256": {
+    "assets/SIMANT.EXE": "aa0596c6766322a8229ee3c36e57048c92adc82d50fbe2ef37afb8b85fcf4f11",
+    "layout/functions.json": "6089a06e18fbe8f0960392cfe30357f7c19c886f38f10f7f115c72d127a756e7",
+    "layout/manifest.json": "025a0a9255d910cae4b122ab5a3f3fb40888bb456d7fe42158db7c9e622fcf50",
+    "layout/oracle.lock.json": "2c6d9e98c688621ad49a08c78d0e0968f4076b036be56ec0738217b533ccde13",
+    "layout/symbols.json": "0f5dd5b0a211945a97782cfccdb9bb31b0dfd07fcde5df4d4f9486b487eb0125",
+    "layout/toolchain.json": "c0bb71cd8b1f4a1a1f91299bd3b6148aa67b7a1d12c3c3946a229272593eb274",
+    "portable/audio/intent.c": "01ba4f7a26e52582970565e52a755fbaca418c3fcfb97a4b70edb63920e64e77",
+    "portable/audio/intent.h": "4b44d29eca5ed65088a34132561aed35d0dee45439fc4a4bccf15cc74f1b99a0",
+    "portable/game/recovered/engine.c": "f64ccf03561d0ba3b80f8ca10b873e5f382c8455ec9c82630fd0f150219d1220",
+    "portable/platform/sdl3/audio_host.c": "61590519c9ecc7fd4ff4679cab1658d431075e1cdacbdf93e08807a56556be2a",
+    "portable/platform/sdl3/audio_host.h": "e9047a4500ed53339f69e7b81fb40d15cd50fbfd592d92602a2d15be06ce02fc",
+    "portable/tests/audio/stop_song/run_contract.py": "6f43fd55e301e2b3f71b82e46cc636b881d3caec64e80f284349e4f846e52729",
+    "portable/tests/audio/stop_song/stop_song_contract.c": "8c987555c6142aff433a5d053eec25e3afbba082dd8d826fcc624cae399cd922",
+    "portable/tests/menus/engine_procmenu.c": "1e4581ed0852060ced23fbc29ce69c435e1a29dd108c0bdd023e1573dcbc1498",
+    "portable/tests/menus/procmenu_native_probe.c": "4de075a0b2959c4943c564ac59e4e3e03513b8e39944464b1bb801b904ebdc36",
+    "src/data/d55B3_00B8.c": "d04646a28691ff05ad93a50c5e7142405ab64932f875f2d2a4d10d04a4566f3d",
+    "src/root/m0000.c": "d9ccffbb69c4fdcae55eef918bf420cff81ead6849f67298271c2844e04199f9",
+    "src/root/m171C.c": "31bd9caa243220db2bd1ba940ac8fae7f5d189b2ec95f1662918e9ca2160b10e",
+    "src/root/m277E.c": "4e928689c743f473c5a007bbbbb5287cdf8728d12e9cae5652b1cb55debf09ee",
+    "src/root/m284A.c": "bad7d3701a853ba2de166e4f875ba3043f33ca136b7d0dcff41db8e5459f9fa5",
+    "src/root/m295C.c": "d392b6ce886cfd664a192194b79569bb6a0d4dea8b0bc029ffa9e32ff44add89",
+    "tools/autosearch.py": "9c2727a875ee94c66ceac868d64c7070c316a5dbbef7cd6b21a670b44a2e1806",
+    "tools/behavior.py": "2c0799048057f59eae61a48be4d695278635594484adf0c70bf46c51b4e0c799",
+    "tools/compiler.py": "ef1d59a0fbe0e0780a6b8480e13d7d07859a14ae185c00a4420e1238a2ae35bb",
+    "tools/exe.py": "d560f69dcdf0d1c9e89278b50bebe225a9b86db2c259fa54ec9eace6ea05a8b5",
+    "tools/functions.py": "0f67c8d9eb01e319620c9342e79c35f76006091d860894aad6dcf8d61ee2b39e",
+    "tools/match.py": "44fdd8b939b2bbf135d8947d8f6ef6b1854dec133da4af86c55eb94f02869b56",
+    "tools/modctx.py": "33f3a4e3d77371e3095bfeb00358c13bc7838235c27bfe8898dba7e313f1cc25",
+    "tools/modules.py": "8a5c1e85db6970cce3c693c016b313b7ee1922fa6eaf146a00391bfea86edf1a",
+    "tools/omf.py": "951137ecbfaeb6e40fd5230c94398141da7ec7bdb7399d9cd74d46ded3045612",
+    "tools/symbols.py": "e3f25fb66717f743dea126e56b5b44538d452fb5a2d52695ef27cb5069bc1793"
+  },
+  "gcc_binaries_before_sha256": {
+    "C:/msys64/mingw64/bin/gcc.exe": "c5005ba5380351c10743e9ca53ef9632164c54be3bd6b93324795114e4589a7d",
+    "C:/msys64/mingw64/lib/gcc/x86_64-w64-mingw32/12.2.0/cc1.exe": "4b8f580dfbb18a5b1dd32f68d432f8f44453ee636f93d4e1921a16c4e5dc8a36",
+    "C:/msys64/mingw64/lib/gcc/x86_64-w64-mingw32/12.2.0/collect2.exe": "da4f4c181325655d7ad9c15318e4d45b4bb7baf7f9641f3e2606510b6b4c84ff",
+    "C:/msys64/mingw64/x86_64-w64-mingw32/bin/as.exe": "c8d49ddaaed068031fe22f8403cfc18f7dffdba1e6d0d0c8386beb8f6298aad4",
+    "C:/msys64/mingw64/x86_64-w64-mingw32/bin/ld.exe": "bd94728f0c75d50c1f8e2ab22ee87a2603e831e4532dc0b2318fe46879589b7b"
+  },
+  "gcc_binaries_after_sha256": {
+    "C:/msys64/mingw64/bin/gcc.exe": "c5005ba5380351c10743e9ca53ef9632164c54be3bd6b93324795114e4589a7d",
+    "C:/msys64/mingw64/lib/gcc/x86_64-w64-mingw32/12.2.0/cc1.exe": "4b8f580dfbb18a5b1dd32f68d432f8f44453ee636f93d4e1921a16c4e5dc8a36",
+    "C:/msys64/mingw64/lib/gcc/x86_64-w64-mingw32/12.2.0/collect2.exe": "da4f4c181325655d7ad9c15318e4d45b4bb7baf7f9641f3e2606510b6b4c84ff",
+    "C:/msys64/mingw64/x86_64-w64-mingw32/bin/as.exe": "c8d49ddaaed068031fe22f8403cfc18f7dffdba1e6d0d0c8386beb8f6298aad4",
+    "C:/msys64/mingw64/x86_64-w64-mingw32/bin/ld.exe": "bd94728f0c75d50c1f8e2ab22ee87a2603e831e4532dc0b2318fe46879589b7b"
+  },
+  "gcc_version_before": "gcc.exe (Rev10, Built by MSYS2 project) 12.2.0",
+  "gcc_version_after": "gcc.exe (Rev10, Built by MSYS2 project) 12.2.0",
+  "msc_toolchain_before_sha256": {
+    "C:/tools/msc-6.00ax-archive/BIN/C1.ERR": "637444915870f3283d5df41c5cdb1be8c32cc6c19b080f2bb3891edbc3751c6e",
+    "C:/tools/msc-6.00ax-archive/BIN/C1L.EXE": "d3db38b875a95048bca2809cd1f84783c6c070805f188fec9161054d6350ded3",
+    "C:/tools/msc-6.00ax-archive/BIN/C23.ERR": "22944a0dffef336c0ebb8f6d5aeb97b4dbeb5c9758a48759557176bff49d1151",
+    "C:/tools/msc-6.00ax-archive/BIN/C2L.EXE": "62490de22e7b279ea59218a54d677bfc752cb5fc1287533d2e23d03519f155e0",
+    "C:/tools/msc-6.00ax-archive/BIN/C3L.EXE": "9e82ecc87ffcdb2def53ac64c0d1f048b26421c1415b5600ad4d8d6fcbc06553",
+    "C:/tools/msc-6.00ax-archive/BIN/CL.ERR": "ca22f37e5e0c09faebde9e4d549dd1f53523cc6f23049d2239a040cd19a424e7",
+    "C:/tools/msc-6.00ax-archive/BIN/CL.EXE": "92df4a0839aac77940189ce54f107381b829babe8103926cb05d1adffe947347",
+    "C:/tools/msc-6.00ax-archive/BIN/CL.MSG": "3379f283aec74842bc82205e4c848d759e6e2dcbb6d4820eec9719f1297213ec"
+  },
+  "msc_toolchain_after_sha256": {
+    "C:/tools/msc-6.00ax-archive/BIN/C1.ERR": "637444915870f3283d5df41c5cdb1be8c32cc6c19b080f2bb3891edbc3751c6e",
+    "C:/tools/msc-6.00ax-archive/BIN/C1L.EXE": "d3db38b875a95048bca2809cd1f84783c6c070805f188fec9161054d6350ded3",
+    "C:/tools/msc-6.00ax-archive/BIN/C23.ERR": "22944a0dffef336c0ebb8f6d5aeb97b4dbeb5c9758a48759557176bff49d1151",
+    "C:/tools/msc-6.00ax-archive/BIN/C2L.EXE": "62490de22e7b279ea59218a54d677bfc752cb5fc1287533d2e23d03519f155e0",
+    "C:/tools/msc-6.00ax-archive/BIN/C3L.EXE": "9e82ecc87ffcdb2def53ac64c0d1f048b26421c1415b5600ad4d8d6fcbc06553",
+    "C:/tools/msc-6.00ax-archive/BIN/CL.ERR": "ca22f37e5e0c09faebde9e4d549dd1f53523cc6f23049d2239a040cd19a424e7",
+    "C:/tools/msc-6.00ax-archive/BIN/CL.EXE": "92df4a0839aac77940189ce54f107381b829babe8103926cb05d1adffe947347",
+    "C:/tools/msc-6.00ax-archive/BIN/CL.MSG": "3379f283aec74842bc82205e4c848d759e6e2dcbb6d4820eec9719f1297213ec"
+  },
+  "python_identity_before": {
+    "executable": "C:\\msys64\\mingw64\\bin\\python.exe",
+    "sha256": "dc4118f08b58c8457f1a82f0a9d91c930904109f70fe952f3616a0d6e547c129",
+    "version": "3.10.11 (main, Apr  7 2023, 17:44:59)  [GCC 12.2.0 64 bit (AMD64)]",
+    "implementation": "cpython"
+  },
+  "python_identity_after": {
+    "executable": "C:\\msys64\\mingw64\\bin\\python.exe",
+    "sha256": "dc4118f08b58c8457f1a82f0a9d91c930904109f70fe952f3616a0d6e547c129",
+    "version": "3.10.11 (main, Apr  7 2023, 17:44:59)  [GCC 12.2.0 64 bit (AMD64)]",
+    "implementation": "cpython"
+  },
+  "native_source_sha256": "8c987555c6142aff433a5d053eec25e3afbba082dd8d826fcc624cae399cd922",
+  "native_executable_sha256": "7cc0ff5866e42c14fb10f238fc3c7efca29c4ecddc1076e064e72de664d64632",
+  "limitations": [
+    "DOS resource and physical ISA/MIDI device internals are normalized as two reviewed helper boundaries.",
+    "This suite does not establish the internal f_0000_039B allocator/freelist contract or f_295C_0391 MIDI register sequence.",
+    "It is a focused StopSong orchestration contract, not a BEHAVIOR_EXACT registration or a full lifecycle proof."
+  ]
+}
