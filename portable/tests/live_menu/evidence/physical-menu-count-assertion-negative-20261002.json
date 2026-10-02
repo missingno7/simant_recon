@@ -1,0 +1,20 @@
+{
+  "schema": "portable-live-physical-menu-negative-v1",
+  "status": "ASSERTION_TOO_STRICT",
+  "claim": "An intermediate Slow-row run completed all three physical interactions and the source actions, but its harness incorrectly expected four menu text writes.",
+  "observed": {
+    "completed_ticks": 32,
+    "return_code": 0,
+    "source_speed": 0,
+    "source_pause": 0,
+    "paused_update_calls": 6324031,
+    "menu_item_state_calls": 30,
+    "menu_item_text_calls": 3,
+    "timer_interactions_completed": 3,
+    "pushed_sdl_event_count": 9,
+    "pause_interval_ns": 700000000,
+    "fault_reported": false
+  },
+  "correction": "Source ProcMenu calls SetMenuEntries once for each of the three selected rows; each call writes ten states and one pause label. The final harness pins exactly 30 state writes and 3 text writes.",
+  "proof_boundary": "Finite SDL live-host diagnostic only; no DOS state or framebuffer equivalence claim."
+}

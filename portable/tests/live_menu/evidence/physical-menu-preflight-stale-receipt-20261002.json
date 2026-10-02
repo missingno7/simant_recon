@@ -1,0 +1,25 @@
+{
+  "schema": "portable-live-physical-menu-preflight-v1",
+  "status": "BLOCKED_STALE_PRODUCTION_RECEIPT",
+  "claim": "The physical menu test refused to compile or run because the production build receipt did not pin the current portable/build.py input.",
+  "preflight": {
+    "production_executable": {
+      "path": "build/portable/simant-sdl3.exe",
+      "sha256": "d90c2c1579622caad8f1f5ab0605a164d4a64b1559c0cf2efa831411464d86ed"
+    },
+    "production_build_receipt": {
+      "path": "build/portable/simant-sdl3.build.json"
+    },
+    "production_sdl3_dll": {
+      "path": "build/portable/SDL3.dll",
+      "sha256": "8d6167e6d27e27e640deb0b259445d606ec011c63e580396dff76fd8d46f9631"
+    },
+    "stale_input": {
+      "path": "portable/build.py",
+      "receipt_sha256": "9bcb3fc071be9b9e75324a6881956527dcde8e0cf5b98cc8178cf1f6dbe1ef6e",
+      "current_sha256": "fc0c7f2fbbaccc986c5a907e3d70f52e15620b2efc570b5f4205b069ff9faf43"
+    },
+    "test_executable_created": false,
+    "test_process_started": false
+  }
+}

@@ -264,3 +264,13 @@ It explicitly retains the unsupported `StopSong` service reached by FD32.
 `portable/.gitattributes` preserves byte-pinned native source and evidence
 inputs during checkout. It applies only to the port tree and does not change
 historical reconstruction files or their frozen identities.
+
+The [physical menu smoke](../tests/live_menu/evidence/physical-menu-slow-final-next8-20261002.json)
+passes three SDL mouse drag/release interactions: Slow, Pause, and Unpause.
+It completes 32 source simulation ticks with nine injected events, exactly
+30 menu-state writes and three menu-text writes, and a 700 ms pause interval.
+Its 212 production inputs and test inputs remain stable before and after the
+run. All state captures, geometry, events and native screenshot have distinct
+artifact identities. This uses SDL's dummy driver and proves that bounded
+host route; it does not compare DOS state or framebuffer bytes. Earlier
+timing, assertion-count and incorrect-description receipts remain archived.
