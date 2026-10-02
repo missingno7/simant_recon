@@ -326,7 +326,7 @@ the native binding preserves that alias rather than duplicating the series.
 The receipt records the compiler's local dependency closure and stable source,
 oracle, evaluator, and resource inputs. Resource-backed native raster checks
 cover 70 window commands and 361 touched pixels. DOS framebuffer equality and
-the live History window remain separate work.
+complete live UI behavior remain separate work.
 
 The [Next10 History adapter](../tests/history_event_lowering/history_adapter_report.json)
 replays the 29 archived DOS event traces through the actual recovered
@@ -336,6 +336,18 @@ selection state through a read-only accessor. Callback order and private state
 match across seven scenarios; snapshot reads leave that state unchanged.
 This replay adds no new DOS invocations. The [Next10 recipe](recovered-source-next10-recipe.md)
 records the separately reviewed bounded-copy lowering and strict profile gate.
+
+The [physical History packet](../tests/live_history/README.md) passes the
+pause → FD15 open → unpause sequence with 28 injected SDL events. Nine actual
+History engine actions preserve RNG/tick counters and match the source private
+list transitions, including full-list eviction and three removal positions.
+The StillDown path drains held motion and release; simulation then completes
+32 ticks. Root checked 279 input/artifact records against current files and
+inspected the screenshot. This adds zero DOS calls or framebuffer comparisons.
+History uses one source-owned private UI state, retained across NewGame. A
+terminal host fault does not roll that private state back; the live process
+stops on that fault. Background painting uses the modern complete z-order
+pass, while foreground highlighting is presented during the source wait.
 
 The [49-suite native integration gate](../tests/evidence/current/20261002/native-gate-49-menu-controls-final-20261002.json)
 passes with stable compiler inputs, including dropdown command plans, active

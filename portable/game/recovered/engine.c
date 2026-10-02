@@ -1,6 +1,9 @@
 #include "engine.h"
 #include "menu_adapter.h"
 #include "control_adapter.h"
+#ifdef SIMANT_ENABLE_HISTORY_UI_NEXT10
+#include "history_adapter.h"
+#endif
 #include "../../ui_model/windows/game_view.h"
 #ifdef SIMANT_ENABLE_BALLOON_STATE_NEXT3
 #include "balloon_adapter.h"
@@ -843,9 +846,16 @@ FAIL_VOID0(f_0250_0E15)
 FAIL_VOID0(f_0250_5058)
 int16_t f_1B4E_000D(int16_t color)
 {
-    (void)color;
-    unsupported_call("f_1B4E_000D");
-    return 0;
+    uintptr_t arguments[] = {(uintptr_t)(uint16_t)color};
+    int32_t mapped = host_query(SIM_RECOVERED_QUERY_DRIVER_COLOR,
+                                arguments, 1, "f_1B4E_000D");
+    uint16_t word;
+    int16_t result;
+    if (mapped < 0 || mapped > UINT16_MAX)
+        unsupported_call("f_1B4E_000D invalid driver color word");
+    word = (uint16_t)mapped;
+    memcpy(&result, &word, sizeof result);
+    return result;
 }
 int16_t f_1F58_0038(void)
 {
@@ -1062,7 +1072,7 @@ SimRecoveredEngineStatus sim_recovered_engine_action(
 #else
     const int needs_nest = action == SIM_RECOVERED_ACTION_RAND_YARD ||
                           action == SIM_RECOVERED_ACTION_PROC_MENU;
-    const SimRecoveredAction last_action = SIM_RECOVERED_ACTION_CONTROL_EVENT;
+    const SimRecoveredAction last_action = SIM_RECOVERED_ACTION_HISTORY_EVENT;
 #endif
     if (engine == NULL || !engine->initialized || engine->session == NULL)
         return SIM_RECOVERED_ENGINE_INVALID_ARGUMENT;
@@ -1079,6 +1089,7 @@ SimRecoveredEngineStatus sim_recovered_engine_action(
         (action == SIM_RECOVERED_ACTION_RAND_YARD &&
             (a < 0 || a > 3 || b != 0)) ||
         (action == SIM_RECOVERED_ACTION_PROC_MENU && b != 0) ||
+        (action == SIM_RECOVERED_ACTION_HISTORY_EVENT && b != 0) ||
         (action == SIM_RECOVERED_ACTION_CONTROL_EVENT &&
             (engine->control_request == NULL || a != 0 || b != 0)) ||
         action < SIM_RECOVERED_ACTION_PAUSE ||
@@ -1152,6 +1163,17 @@ SimRecoveredEngineStatus sim_recovered_engine_action(
             unsupported_call(sim_control_event_status_string(status));
         break;
     }
+    case SIM_RECOVERED_ACTION_HISTORY_EVENT: {
+#ifdef SIMANT_ENABLE_HISTORY_UI_NEXT10
+        uint16_t command;
+        memcpy(&command, &a, sizeof command);
+        if (!sim_recovered_source_history_event(command))
+            unsupported_call("ProcHistoryEvent native event ABI unavailable");
+#else
+        unsupported_call("ProcHistoryEvent requires reviewed Next10 profile");
+#endif
+        break;
+    }
 #ifdef SIMANT_ENABLE_END_GAME_ACTION_DIAGNOSTIC
     case SIM_RECOVERED_ACTION_DIAGNOSTIC_END_GAME:
         EndGameDialog(0);
@@ -1209,6 +1231,27 @@ SimRecoveredEngineStatus sim_recovered_engine_proc_menu_command(
     memcpy(&source_word, &command, sizeof(source_word));
     return sim_recovered_engine_action(engine, SIM_RECOVERED_ACTION_PROC_MENU,
                                         source_word, 0);
+}
+
+SimRecoveredEngineStatus sim_recovered_engine_history_event(
+    SimRecoveredEngine *engine, uint16_t command)
+{
+    int16_t source_word;
+    memcpy(&source_word, &command, sizeof source_word);
+    return sim_recovered_engine_action(engine, SIM_RECOVERED_ACTION_HISTORY_EVENT,
+                                       source_word, 0);
+}
+
+int sim_recovered_engine_history_ui_snapshot(const SimRecoveredEngine *engine,
+    struct PortableHistoryUiSnapshot *ui, int16_t *shown_count)
+{
+    if (engine == NULL || !engine->initialized || ui == NULL || shown_count == NULL ||
+        (active_engine != NULL && active_engine != engine)) return 0;
+#ifdef SIMANT_ENABLE_HISTORY_UI_NEXT10
+    return sim_recovered_source_history_ui_snapshot(ui, shown_count);
+#else
+    return 0;
+#endif
 }
 
 SimRecoveredEngineStatus sim_recovered_engine_control_event(

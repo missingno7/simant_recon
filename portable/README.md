@@ -59,8 +59,8 @@ python portable/tools/verify_evidence.py
 ```
 
 An explicit generated profile may be linked with
-`python portable/build.py --core-profile build/workers/recovered_source_next8/generated`.
-First follow the [profile recipe](docs/recovered-source-next8-recipe.md) to
+`python portable/build.py --core-profile build/workers/recovered_source_next10/generated`.
+First follow the [profile recipe](docs/recovered-source-next10-recipe.md) to
 recreate the reviewed generated inputs. The build checks the frozen historical
 checkpoint and recorded source/profile identities, and keeps the generated
 modules' warning policy separate from strict native host compilation. It does
@@ -76,6 +76,14 @@ NewGame. Simulation uses the source logical tick schedule independently of
 presentation refresh. Unsupported host services stop with the source service
 name. The audio driver remains disabled while its complete native backend is
 being reconstructed.
+
+The selected Next10 build opens the source History window through Window →
+History. Graph buttons retain the source four-slot selection/eviction order;
+holding the graph area highlights the selected series until mouse release.
+The renderer uses the shipped labels, font and window resources. A bounded
+[physical test](tests/live_history/README.md) checks nine History actions while
+paused, then runs 32 simulation ticks. Frame/close dispatch and DOS framebuffer
+equality remain separate work.
 
 The live prototype supports quick left clicks in the Edit map area and the
 source double-click command. Shift+0 (`)`) toggles pause; Shift+1 through

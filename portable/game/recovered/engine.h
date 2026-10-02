@@ -19,7 +19,9 @@ typedef enum SimRecoveredQuery {
     SIM_RECOVERED_QUERY_GET_OBJECT_RECT,
     SIM_RECOVERED_QUERY_BUTTON,
     /* Exact unsigned BIOS data-area byte at 0040:0017, not Event.modifiers. */
-    SIM_RECOVERED_QUERY_DOS_KEYBOARD_FLAGS
+    SIM_RECOVERED_QUERY_DOS_KEYBOARD_FLAGS,
+    /* Map a DOS color word through the active driver's low-nibble table. */
+    SIM_RECOVERED_QUERY_DRIVER_COLOR
 } SimRecoveredQuery;
 
 typedef enum SimRecoveredEffectKind {
@@ -149,7 +151,8 @@ typedef enum SimRecoveredAction {
     /* Actual S11 ProcMenu. a retains the command word, b must be zero. */
     SIM_RECOVERED_ACTION_PROC_MENU,
     /* Internal dispatcher slot; use the typed control-event API below. */
-    SIM_RECOVERED_ACTION_CONTROL_EVENT
+    SIM_RECOVERED_ACTION_CONTROL_EVENT,
+    SIM_RECOVERED_ACTION_HISTORY_EVENT
 #ifdef SIMANT_ENABLE_END_GAME_ACTION_DIAGNOSTIC
     /* Test executable only: invoke the source EndGame contract directly on
      * its dedicated session. This does not prove the natural trigger. */
@@ -234,6 +237,15 @@ SimRecoveredEngineStatus sim_recovered_engine_action(
  * fault through the same terminal boundary as other source actions. */
 SimRecoveredEngineStatus sim_recovered_engine_proc_menu_command(
     SimRecoveredEngine *engine, uint16_t command);
+
+/* S24 uses an eight-word Event with an unsigned command at byte twelve.
+ * The reviewed Next10 profile preserves source private UI state ownership. */
+SimRecoveredEngineStatus sim_recovered_engine_history_event(
+    SimRecoveredEngine *engine, uint16_t command);
+
+struct PortableHistoryUiSnapshot;
+int sim_recovered_engine_history_ui_snapshot(const SimRecoveredEngine *engine,
+    struct PortableHistoryUiSnapshot *ui, int16_t *shown_count);
 
 /* Finite DOS-compared control model under the engine's state/RNG boundary.
  * Selector and percent ownership stays with the session/caller across NewGame.

@@ -271,6 +271,10 @@ def build(main: Path, output: Path, sources: list[Path],
             # Backing admission is separate from a reviewed save codec and
             # filesystem lifecycle. Standalone codec probes stay unlinked.
             extra_flags.append("-DSIMANT_ENABLE_SAVE_STATE_NEXT9=1")
+        if next10_input_pins:
+            sources.extend((ROOT / "portable/game/recovered/history_adapter.c",
+                            ROOT / "portable/ui_model/windows/history_render.c"))
+            extra_flags.append("-DSIMANT_ENABLE_HISTORY_UI_NEXT10=1")
         if extension is not None:
             # This reviewed extension supplies all twelve omitted source cue
             # fields. Cue submission does not imply a completed frame renderer.

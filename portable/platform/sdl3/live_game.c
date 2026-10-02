@@ -52,6 +52,9 @@ void portable_live_game_mark_presented(PortableLiveGame *game) { (void)game; }
 #include "../../ui_model/windows/control_preselect.h"
 #include "../../ui_model/menus/render.h"
 #include "../../ui_model/dialogs/end_game_view.h"
+#ifdef SIMANT_ENABLE_HISTORY_UI_NEXT10
+#include "../../ui_model/windows/history_render.h"
+#endif
 
 #include <stdio.h>
 #include <string.h>
@@ -85,6 +88,10 @@ struct PortableLiveGame {
     PortableWindowOpenResult open_result;
     PortableMenuBar menu;
     PortableRibbonState ribbons;
+#ifdef SIMANT_ENABLE_HISTORY_UI_NEXT10
+    PortableHistoryActiveResources history_resources;
+    uint8_t history_input_active;
+#endif
     HostEvent held_keys[LIVE_MAX_HELD_KEYS];
     size_t held_key_count;
     SimRecoveredEvent source_events[LIVE_SOURCE_EVENT_CAPACITY];
@@ -209,6 +216,13 @@ static int apply_window_object_operation(PortableLiveGame *game,
                                          const SimRecoveredEffect *effect);
 static int run_source_control(PortableLiveGame *game, int16_t x, int16_t y,
                               int *handled);
+static int control_pointer_poll(void *context, SimSetupPoint *point);
+#ifdef SIMANT_ENABLE_HISTORY_UI_NEXT10
+static int run_source_history(PortableLiveGame *game, int16_t x, int16_t y,
+                              int *handled);
+static int draw_history_graph_effect(PortableLiveGame *game, int16_t graph,
+                                     int16_t hilite, int16_t slot);
+#endif
 
 #ifdef SIMANT_LIVE_GAME_TEST_DIAGNOSTICS
 static void trace_control_input(const char *kind, int a, int b, int c, int d)
@@ -222,6 +236,33 @@ static void trace_control_input(const char *kind, int a, int b, int c, int d)
                   kind, a, b, c, d);
     (void)fclose(file);
 }
+
+#ifdef SIMANT_ENABLE_HISTORY_UI_NEXT10
+static int write_history_geometry(PortableLiveGame *game)
+{
+    const char *path = getenv("SIMANT_LIVE_HISTORY_GEOMETRY_REPORT");
+    const PortableWindowRegistrySlot *slot = &game->registry->slots[0x15];
+    FILE *file;
+    unsigned i;
+    if (path == NULL || *path == '\0') return 1;
+    file = fopen(path, "wb");
+    if (file == NULL) return 0;
+    (void)fprintf(file, "{\"schema\":\"portable-live-history-geometry-v1\","
+        "\"window_id\":5376,\"front_window\":%d,"
+        "\"window_rect\":[%d,%d,%d,%d],\"objects\":[",
+        game->windows.front_window_id, slot->window.rect.left, slot->window.rect.top,
+        slot->window.rect.right, slot->window.rect.bottom);
+    for (i = 0; slot->loaded && i < slot->window.count; ++i) {
+        const PortableWindowObject *item = &slot->window.objects[i];
+        (void)fprintf(file, "%s{\"object_id\":%u,\"type\":%u,\"flags\":%u,"
+            "\"rect\":[%d,%d,%d,%d]}", i == 0 ? "" : ",", 0x1500u | i,
+            item->type, item->flags, item->rect.left, item->rect.top,
+            item->rect.right, item->rect.bottom);
+    }
+    (void)fprintf(file, "]}\n");
+    return fclose(file) == 0;
+}
+#endif
 
 static int write_control_geometry(PortableLiveGame *game)
 {
@@ -577,6 +618,12 @@ static int host_query(void *context, SimRecoveredQuery query,
         return 1;
     case SIM_RECOVERED_QUERY_STILL_DOWN:
         if (argument_count != 0) return 0;
+#ifdef SIMANT_ENABLE_HISTORY_UI_NEXT10
+        if (game->history_input_active) {
+            SimSetupPoint point;
+            if (!control_pointer_poll(game, &point)) return 0;
+        }
+#endif
         *value = game->left_down != 0;
         return 1;
     case SIM_RECOVERED_QUERY_BUTTON:
@@ -586,6 +633,14 @@ static int host_query(void *context, SimRecoveredQuery query,
     case SIM_RECOVERED_QUERY_DOS_KEYBOARD_FLAGS:
         if (argument_count != 0) return 0;
         *value = game->dos_keyboard_flags;
+        return 1;
+    case SIM_RECOVERED_QUERY_DRIVER_COLOR:
+        if (arguments == NULL || argument_count != 1 || arguments[0] > UINT16_MAX ||
+            game->registry->profile_id != 0) return 0;
+        /* The 640x350 EGA driver retains g_41C0's identity table. Only the
+         * historical 320x200 CGA/low-resolution initializers replace it.
+         * f_1B4E_000D preserves the word's upper bits and maps its low nibble. */
+        *value = (int32_t)arguments[0];
         return 1;
     case SIM_RECOVERED_QUERY_DIALOG_ABORT_OR_CONTINUE:
         if (argument_count != 0) return 0;
@@ -958,6 +1013,133 @@ static int draw_control_window(PortableLiveGame *game, SimSession *scene_session
     return 1;
 }
 
+#ifdef SIMANT_ENABLE_HISTORY_UI_NEXT10
+static int prepare_history_resources(PortableLiveGame *game)
+{
+    PortableWindowRect rect;
+    PortableHistoryStatus status;
+    if (!game->history_resources.ready) {
+        status = portable_history_active_resources_load(&game->history_resources,
+            &game->session->shared_database, game->registry, game->renderer);
+        if (status != PORTABLE_HISTORY_OK) {
+            set_error(game, portable_history_status_string(status));
+            return 0;
+        }
+    }
+    if (portable_window_registry_get_object_rect(game->registry, 0x150e, &rect) !=
+            PORTABLE_WINDOW_REGISTRY_OK ||
+        portable_history_active_resources_set_rect(&game->history_resources,
+            &(PortableHistoryRect){rect.left, rect.top, rect.right, rect.bottom}) !=
+            PORTABLE_HISTORY_OK) {
+        set_error(game, "source History graph geometry is unavailable");
+        return 0;
+    }
+    return 1;
+}
+
+static int draw_history_window(PortableLiveGame *game, const SimSession *scene_session)
+{
+    PortableHistoryUiSnapshot ui;
+    PortableHistoryWindowInput input;
+    PortableHistoryProviders providers;
+    PortableHistoryRasterProviders raster;
+    PortableHistoryCommand *commands;
+    PortableHistoryStatus status;
+    PortableFramebuffer *fb = game->renderer->framebuffer;
+    PortableRect saved_clip = fb->clip;
+    const PortableWindowRect *window_rect = &game->registry->slots[0x15].window.rect;
+    int16_t shown_count;
+    size_t command_count = 0;
+    const size_t capacity = PORTABLE_HISTORY_MAX_COMMANDS * 4u + 1u;
+    if (!prepare_history_resources(game) ||
+        !sim_recovered_engine_history_ui_snapshot(&game->engine, &ui, &shown_count)) {
+        set_error(game, "source History UI snapshot is unavailable");
+        return 0;
+    }
+    status = portable_history_bind_window(&input, scene_session->setup_state.history_series,
+        scene_session->setup_state.history_start, scene_session->setup_state.graph_selection,
+        3, &ui, &game->history_resources.labels);
+    if (status != PORTABLE_HISTORY_OK) {
+        set_error(game, portable_history_status_string(status));
+        return 0;
+    }
+    commands = malloc(capacity * sizeof(*commands));
+    if (commands == NULL) {
+        set_error(game, "could not allocate History rendering commands");
+        return 0;
+    }
+    portable_history_active_providers(&game->history_resources, &providers);
+    portable_history_active_raster_providers(&game->history_resources, fb, &raster);
+    status = portable_history_render_window(&input, &providers, commands, capacity,
+                                            &command_count);
+    portable_framebuffer_set_clip(fb, rect_intersection(saved_clip,
+        (PortableRect){window_rect->left, window_rect->top, window_rect->right, window_rect->bottom}));
+    if (status == PORTABLE_HISTORY_OK)
+        status = portable_history_rasterize(commands, command_count, &raster);
+    portable_framebuffer_set_clip(fb, saved_clip);
+    free(commands);
+    if (status != PORTABLE_HISTORY_OK) {
+        set_error(game, portable_history_status_string(status));
+        return 0;
+    }
+    return 1;
+}
+
+static int draw_history_graph_effect(PortableLiveGame *game, int16_t graph,
+                                     int16_t hilite, int16_t slot)
+{
+    RecoveredState snapshot;
+    PortableHistoryUiSnapshot ui;
+    PortableHistoryInput input;
+    PortableHistoryProviders providers;
+    PortableHistoryRasterProviders raster;
+    PortableHistoryCommand commands[PORTABLE_HISTORY_MAX_COMMANDS];
+    PortableHistoryStatus status;
+    PortableFramebuffer *fb = game->renderer->framebuffer;
+    PortableRect saved_clip = fb->clip;
+    const PortableWindowRect *window_rect = &game->registry->slots[0x15].window.rect;
+    int16_t shown_count;
+    size_t command_count = 0;
+    if (game->source_clip_window != 0x1500 || !prepare_history_resources(game) ||
+        !sim_recovered_engine_snapshot(&game->engine, &snapshot) ||
+        sim_session_from_recovered_state(game->snapshot_session, &snapshot) != SIM_RECOVERED_BRIDGE_OK ||
+        !sim_recovered_engine_history_ui_snapshot(&game->engine, &ui, &shown_count)) {
+        set_error(game, "source History drawing context is unavailable");
+        return 0;
+    }
+    status = portable_history_bind_session(&input,
+        game->snapshot_session->setup_state.history_series,
+        game->snapshot_session->setup_state.history_start,
+        game->snapshot_session->setup_state.graph_selection,
+        graph, hilite, slot, &ui, &game->history_resources.labels);
+    portable_history_active_providers(&game->history_resources, &providers);
+    portable_history_active_raster_providers(&game->history_resources, fb, &raster);
+    if (status == PORTABLE_HISTORY_OK)
+        status = portable_history_render_graph(&input, &providers, commands,
+            PORTABLE_HISTORY_MAX_COMMANDS, &command_count);
+    /* Background updates are presented by the complete z-order pass. Keep
+     * foreground highlighting synchronous across the source StillDown wait. */
+    if (status == PORTABLE_HISTORY_OK && game->windows.front_window_id == 0x1500) {
+        portable_framebuffer_set_clip(fb, rect_intersection(saved_clip,
+            (PortableRect){window_rect->left, window_rect->top, window_rect->right, window_rect->bottom}));
+        status = portable_history_rasterize(commands, command_count, &raster);
+        portable_framebuffer_set_clip(fb, saved_clip);
+        if (status == PORTABLE_HISTORY_OK &&
+            !host_present(game->host, fb->pixels, fb->stride, game->host_palette)) {
+            set_error(game, "SDL History graph presentation failed");
+            return 0;
+        }
+    }
+    if (status != PORTABLE_HISTORY_OK) {
+        set_error(game, portable_history_status_string(status));
+        return 0;
+    }
+    game->dirty = 1;
+    game->frame_pending = 1;
+    return 1;
+}
+#endif
+
 static int redraw_scene(PortableLiveGame *game, SimSession *scene_session)
 {
     PortableGameViewState state;
@@ -1007,6 +1189,9 @@ static int redraw_scene(PortableLiveGame *game, SimSession *scene_session)
                                                 SIM_SETUP_MODE_CONTROL)) return 0;
         if (index == 0x13 && !draw_control_window(game, scene_session,
                                                 SIM_SETUP_CASTE_CONTROL)) return 0;
+#ifdef SIMANT_ENABLE_HISTORY_UI_NEXT10
+        if (index == 0x15 && !draw_history_window(game, scene_session)) return 0;
+#endif
         /* Paint each ribbon with its owning window. Front windows then cover
          * both the viewport and its ribbon during the same z-order pass. */
         if (index == 0 || index == 1 || index == 0x19) {
@@ -1825,6 +2010,12 @@ static int apply_source_window_open(PortableLiveGame *game, int16_t window_id)
         set_error(game, portable_window_open_status_string(status));
         return 0;
     }
+#if defined(SIMANT_LIVE_GAME_TEST_DIAGNOSTICS) && defined(SIMANT_ENABLE_HISTORY_UI_NEXT10)
+    if (window_id == 0x1500 && !write_history_geometry(game)) {
+        set_error(game, "could not record live History geometry");
+        return 0;
+    }
+#endif
     if (!result.already_front && !redraw_snapshot_edit(game)) return 0;
     game->dirty = 1;
     return 1;
@@ -1958,6 +2149,39 @@ static int apply_window_object_operation(PortableLiveGame *game,
             return 0;
         }
         return redraw_snapshot_edit(game);
+#ifdef SIMANT_ENABLE_HISTORY_UI_NEXT10
+    case SIM_RECOVERED_WINDOW_FILL_OBJECT: {
+        PortableFramebuffer *fb = game->renderer->framebuffer;
+        PortableRect saved_clip = fb->clip;
+        PortableHistoryRasterProviders raster;
+        uint8_t color;
+        if (object_id != 0x150e || source_value != 0 ||
+            game->source_clip_window != 0x1500 || !prepare_history_resources(game)) {
+            set_error(game, "source fill-object contract is unavailable");
+            return 0;
+        }
+        portable_history_active_raster_providers(&game->history_resources, fb, &raster);
+        if (!raster.resolve_color(raster.context, source_value, &color)) return 0;
+        if (game->windows.front_window_id == 0x1500) {
+            const PortableWindowRect *rect = &game->registry->slots[0x15].window.rect;
+            portable_framebuffer_set_clip(fb, rect_intersection(saved_clip,
+                (PortableRect){rect->left, rect->top, rect->right, rect->bottom}));
+            if (!raster.fill_object(raster.context, object_id, source_value, color)) {
+                portable_framebuffer_set_clip(fb, saved_clip);
+                return 0;
+            }
+            portable_framebuffer_set_clip(fb, saved_clip);
+        }
+        game->dirty = 1;
+        game->frame_pending = 1;
+        return 1;
+    }
+    case SIM_RECOVERED_WINDOW_DRAW_HISTORY_GRAPH:
+        return draw_history_graph_effect(game,
+            (int16_t)(intptr_t)effect->arguments[1],
+            (int16_t)(intptr_t)effect->arguments[2],
+            (int16_t)(intptr_t)effect->arguments[3]);
+#endif
     case SIM_RECOVERED_WINDOW_UPDATE_EDIT_IF_OPEN:
         /* root:m0250 UpdateEdit checks win_IsWinOpen(0), clips to the Edit
          * window, draws its current view/graphs, then turns clipping off. */
@@ -2280,11 +2504,13 @@ static int run_source_control(PortableLiveGame *game, int16_t x, int16_t y,
     hit = portable_window_mouse_hit_test(&slot->window, (PortableWindowPoint){x, y});
     if (hit < 0) return 1;
     *handled = 1;
-    if (hit < 3 || slot->window.objects[hit].type != 1) {
+    if ((hit < 3 || slot->window.objects[hit].type != 1) &&
+        !(hit == 2 && slot->window.objects[hit].type == 6 &&
+          !(slot->window.objects[hit].flags & 0x800u))) {
         set_error(game, "source control frame/close dispatch is unavailable");
         return 0;
     }
-    {
+    if (slot->window.objects[hit].type == 1) {
         PortableControlPreselectCallbacks preselect = {
             control_clip_push, control_top_clip, control_selected_state,
             control_wait_ticks, control_clip_pop, game};
@@ -2333,6 +2559,56 @@ static int run_source_control(PortableLiveGame *game, int16_t x, int16_t y,
     if (!reconcile_modal_input(game) || !redraw(game)) return 0;
     return dispatch_deferred_host_events(game);
 }
+
+#ifdef SIMANT_ENABLE_HISTORY_UI_NEXT10
+static int run_source_history(PortableLiveGame *game, int16_t x, int16_t y,
+                              int *handled)
+{
+    PortableWindowRegistrySlot *slot;
+    SimRecoveredEngineStatus status;
+    PortableWindowObject *object;
+    int hit;
+    *handled = 0;
+    if (game->windows.front_window_id != 0x1500) return 1;
+    slot = &game->registry->slots[0x15];
+    if (!slot->loaded || !(game->windows.windows[0x15].flags & PORTABLE_WINDOW_OPEN))
+        return 1;
+    hit = portable_window_mouse_hit_test(&slot->window, (PortableWindowPoint){x, y});
+    if (hit < 0) return 1;
+    *handled = 1;
+    object = &slot->window.objects[hit];
+    if (hit < 2 || hit > 14) {
+        set_error(game, "source History frame/close dispatch is unavailable");
+        return 0;
+    }
+    if (object->type == 1) {
+        PortableControlPreselectCallbacks preselect = {
+            control_clip_push, control_top_clip, control_selected_state,
+            control_wait_ticks, control_clip_pop, game};
+        if (portable_control_preselect(game->registry, (uint16_t)(0x1500 | hit),
+                &preselect) != PORTABLE_CONTROL_PRESELECT_OK) {
+            set_error(game, "source History button preselection failed");
+            return 0;
+        }
+    } else if (object->type != 6 || (object->flags & 0x800u)) {
+        /* f_218D_000C has no type-specific work for type 6, and its common
+         * selection path is skipped when bit 0x800 is clear. */
+        set_error(game, "source History object preselection is unavailable");
+        return 0;
+    }
+    game->history_input_active = 1;
+    status = sim_recovered_engine_history_event(&game->engine, (uint16_t)(0x1500 | hit));
+    game->history_input_active = 0;
+    if (status != SIM_RECOVERED_ENGINE_OK) {
+        if (game->error[0] == '\0') set_error(game, game->engine.failed_service != NULL ?
+            game->engine.failed_service : sim_recovered_engine_status_string(status));
+        return 0;
+    }
+    game->scheduler.initialized = 0;
+    if (!reconcile_modal_input(game) || !redraw(game)) return 0;
+    return dispatch_deferred_host_events(game);
+}
+#endif
 
 static int apply_input_effects(PortableLiveGame *game,
                                const PortableInputEffects *effects)
@@ -2683,6 +2959,16 @@ int portable_live_game_event(PortableLiveGame *game, const HostEvent *event)
                     }
                     if (handled) return 1;
                 }
+#ifdef SIMANT_ENABLE_HISTORY_UI_NEXT10
+                {
+                    int handled = 0;
+                    if (!run_source_history(game, event->x, event->y, &handled)) {
+                        game->faulted = 1;
+                        return 0;
+                    }
+                    if (handled) return 1;
+                }
+#endif
                 if (!enqueue_edit_hotbox(game, event->x, event->y)) {
                     game->faulted = 1;
                     return 0;
@@ -3110,6 +3396,9 @@ void portable_live_game_destroy(PortableLiveGame *game)
     }
 #endif
     if (game != NULL) {
+#ifdef SIMANT_ENABLE_HISTORY_UI_NEXT10
+        portable_history_active_resources_free(&game->history_resources);
+#endif
         portable_menu_release(&game->menu);
         free(game->snapshot_session);
     }
