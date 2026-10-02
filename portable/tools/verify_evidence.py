@@ -1714,6 +1714,45 @@ REPORTS.extend([
         "audit_class": "native_and_sdl_host_checks_zero_dos_calls",
     },
     {
+        "id": "native_gate_50_mouse_controls_20261002",
+        "report": "portable/tests/evidence/current/20261002/native-gate-50-mouse-controls-20261002.json",
+        "path_hash_maps": ["inputs", "sdl3_host.receipt.build_receipt.inputs"],
+        "opaque_artifact_maps": [{"field": "common_objects", "expected_entries": 63,
+                                   "retention": "compiled object outputs are build artifacts; source identities are independently pinned in inputs",
+                                   "meaning": "Compiled object SHA-256 values keyed by translation-unit source paths; never source-file hashes."}],
+        "assert_fields": [("status", "PASS"), ("scope", "native unit/integration checks; not DOS differential acceptance"),
+                          ("frozen_oracle_inputs.status", "PASS"),
+                          ("sdl3_host.status", "PASS"), ("sdl3_host.receipt.status", "PASS")],
+        "host_list_assertions": [{"field": "tests", "length": 50, "item_field": "exit_code", "equals": 0}],
+        "native_tu_maps": ["inputs"],
+        "scope_only": True,
+        "metrics": [{"name": "native_checks", "field": "tests", "operation": "len"},
+                    {"name": "host_pixels_compared", "field": "sdl3_host.receipt.framebuffer_pixels_compared", "operation": "value"}],
+        "scope": "50 native unit/integration checks and a separate mouse-controls SDL host receipt. Host/native only; no original-DOS invocations or framebuffer-equivalence claim.",
+        "audit_class": "native_and_sdl_host_checks_zero_dos_calls",
+    },
+    {
+        "id": "engine_procmenu_next7_mouse_control_21_20261002",
+        "report": "portable/tests/menus/evidence/engine-procmenu-next7-mouse-control-closure-20261002.json",
+        "partitioned_path_hash_maps": [{"field": "inputs", "artifact_suffixes": [".o"]}],
+        "path_hash_fields": [("executable.path", "executable.sha256")],
+        "hash_fields": [
+            ("generated_profile_provenance_sha256", "build/workers/recovered_source_next7/generated/provenance.json"),
+            ("runner_sha256", "portable/tests/menus/run_engine_procmenu.py"),
+        ],
+        "assert_fields": [("status", "PASS"), ("profile", "NEXT7 generated recovered source"),
+                          ("inputs_stable_before_after", True),
+                          ("compiler_dependency_method", "GCC -MM non-system transitive dependencies for each directly compiled native/recovered/harness TU and each linked generated profile TU; exact generated source/object pair and provenance, original source anchors, and HCEGANT/SHARED asset files are hash-pinned."),
+                          ("summary.0", "SUMMARY|PASS|completed_ticks=1|queries_flags=22")],
+        "host_list_assertions": [{"field": "cases", "length": 21,
+                                  "item_field": "recovered_binding_clean_after_return", "equals": True}],
+        "skip_dependency_closure": True,
+        "scope_only": True,
+        "metrics": [{"name": "engine_menu_cases", "field": "cases", "operation": "len"}],
+        "scope": "Mouse-control closure receipt for the same 21-case resource-backed NEXT7 engine ProcMenu integration. Active GCC -MM dependencies and build artifacts are hash-pinned; no DOS calls are claimed.",
+        "audit_class": "native_engine_procmenu_mouse_control_model_next7",
+    },
+    {
         "id": "control_preselect_type1_all_flags_20261002",
         "report": "portable/tests/windows/control_preselect/evidence/control-preselect-dos-native-final-20261002.json",
         "path_hash_maps": ["input_stability.input_sha256_before", "input_stability.input_sha256_after",
@@ -1758,8 +1797,9 @@ REPORTS.extend([
         "audit_class": "historical_integrity_identity_only",
     },
     {
-        "id": "control_engine_next9_10_event_integration_20261002",
+        "id": "control_engine_next9_175047_archived_20261002",
         "report": "portable/tests/setup/control_engine/evidence/control-engine-next9-20261002T175047Z.json",
+        "archived": True,
         "path_hash_maps": ["compile.input_sha256_before", "compile.input_sha256_after"],
         "equal_hash_maps": [("compile.input_sha256_before", "compile.input_sha256_after")],
         "path_list_hash_map_membership": [{"list_field": "compile.local_transitive_dependencies",
@@ -1781,6 +1821,362 @@ REPORTS.extend([
                     {"name": "native_simulation_ticks", "field": "counts.actual_do_antsim_ticks", "operation": "value"}],
         "scope": "One resource-backed actual DoAntSim tick and ten successful source-backed engine control events, plus native-only invalid/reentrant/provider-failure controls. The report pins its exact compiler transitive dependency list and stable before/after source map. No DOS calls are counted by this engine-boundary probe.",
         "audit_class": "native_control_engine_boundary_no_dos_claim",
+    },
+    {
+        "id": "control_engine_next9_181619_15_boundaries_20261002",
+        "report": "portable/tests/setup/control_engine/evidence/control-engine-next9-20261002T181619Z.json",
+        "path_hash_maps": ["compile.input_sha256_before", "compile.input_sha256_after"],
+        "equal_hash_maps": [("compile.input_sha256_before", "compile.input_sha256_after")],
+        "path_list_hash_map_membership": [{"list_field": "compile.local_transitive_dependencies",
+                                           "map_field": "compile.input_sha256_before"}],
+        "hash_fields": [
+            ("profile_state.header_sha256", "build/workers/recovered_source_next9/generated/recovered_state.h"),
+            ("profile_state.source_sha256", "build/workers/recovered_source_next9/generated/recovered_state.c"),
+            ("compile.compiler_binary_sha256", "C:/msys64/mingw64/bin/gcc.EXE"),
+        ],
+        "equal_fields": [("compile.built_executable_sha256_before_run", "compile.built_executable_sha256_after_run")],
+        "assert_fields": [("status", "PASS"), ("compile.local_transitive_dependency_count", 115),
+                          ("counts.engine_boundary_cases", 15),
+                          ("counts.successful_engine_control_events", 10),
+                          ("counts.actual_do_antsim_ticks", 1),
+                          ("counts.actual_randyard_lifetime_call", 1),
+                          ("checks.session_selectors_and_caller_percent_words_survive_RandYard", True),
+                          ("checks.provider_failure_unbinds_and_fresh_engine_succeeds", True),
+                          ("run.return_code", 0)],
+        "skip_dependency_closure": True,
+        "scope_only": True,
+        "metrics": [{"name": "native_boundary_cases", "field": "counts.engine_boundary_cases", "operation": "value"},
+                    {"name": "successful_native_control_events", "field": "counts.successful_engine_control_events", "operation": "value"},
+                    {"name": "native_simulation_ticks", "field": "counts.actual_do_antsim_ticks", "operation": "value"}],
+        "scope": "Resource-backed native engine boundary probe: one DoAntSim tick, ten successful control events, fifteen boundary cases, invalid dispatch/reentry/provider-fault checks. Compiler dependency paths and before/after source hashes are pinned; built executable hashes are checked for stability but treated as build artifacts. No DOS comparisons are claimed.",
+        "audit_class": "native_control_engine_boundary_no_dos_claim",
+    },
+    {
+        "id": "frozen_hybrid_reuse_provenance_identity_20261002",
+        "report": "portable/tests/evidence/current/20261002/frozen-hybrid-provenance.json",
+        "compare_json_documents": [{
+            "left": "portable/tests/evidence/current/20261002/frozen-hybrid-provenance.json",
+            "right": "portable/tests/evidence/current/20261002/hybrid-reuse-provenance-20261002.json",
+            "ignore_fields": ["timing"],
+        }],
+        "assert_fields": [("verdict", "PASS"), ("hybrid_equal", True),
+                          ("hybrid_sha256", "aa0596c6766322a8229ee3c36e57048c92adc82d50fbe2ef37afb8b85fcf4f11"),
+                          ("oracle_sha256", "aa0596c6766322a8229ee3c36e57048c92adc82d50fbe2ef37afb8b85fcf4f11"),
+                          ("failures", []), ("first_differences", [])],
+        "related_documents": [{
+            "path": "portable/tests/evidence/current/20261002/hybrid-reuse-provenance-20261002.json",
+            "assertions": [("verdict", "PASS"), ("hybrid_equal", True),
+                           ("hybrid_sha256", "aa0596c6766322a8229ee3c36e57048c92adc82d50fbe2ef37afb8b85fcf4f11"),
+                           ("oracle_sha256", "aa0596c6766322a8229ee3c36e57048c92adc82d50fbe2ef37afb8b85fcf4f11"),
+                           ("failures", []), ("first_differences", [])],
+        }],
+        "scope_only": True,
+        "metrics": [{"name": "hybrid_byte_identity", "field": "hybrid_equal", "operation": "value"}],
+        "scope": "Frozen hybrid identity and reuse metadata compared field-for-field after excluding timing metadata only. This verifies report identity and prior byte-identity receipt; it is not a new build, native behavior, or DOS/native comparison.",
+        "audit_class": "frozen_hybrid_provenance_identity_only",
+    },
+    {
+        "id": "next9_profile_regeneration_review_identity_20261002",
+        "report": "portable/tests/recovered/evidence/next9-profile-regeneration-review-20261002/review.json",
+        "hash_fields": [("current_profile_sha256", "build/workers/recovered_source_next9/generated/provenance.json")],
+        "assert_fields": [("schema", "portable-next9-profile-regeneration-review-v1"),
+                          ("status", "PASS"),
+                          ("current_profile_sha256", "9821efeca4abdaf177f748c5179d9c7138618751641780b589baf7ac2efdf4ff"),
+                          ("production_input_changes", ["build/workers/recovered_source_next9/generated/provenance.json"]),
+                          ("all_other_production_inputs_unchanged", True),
+                          ("all_other_engine_source_object_inputs_unchanged", True),
+                          ("strict_next9_admission", "PASS")],
+        "related_documents": [{
+            "path": "portable/tests/recovered/evidence/next9-profile-regeneration-review-20261002/regenerated-provenance.json",
+            "assertions": [("status", "DIAGNOSTIC_ONLY_NOT_PRODUCTION"),
+                           ("recovered_state.binding_status", "COMPLETE"),
+                           ("recovered_state.unknown_extent_symbols", []),
+                           ("recovered_state.conflicts", [])],
+            "file_pins": [("recovered_state.header_sha256", "build/workers/recovered_source_next9/generated/recovered_state.h"),
+                          ("recovered_state.source_sha256", "build/workers/recovered_source_next9/generated/recovered_state.c")],
+            "path_hash_lists": [
+                {"field": "modules", "path_field": "source", "hash_field": "source_sha256"},
+                {"field": "modules", "path_field": "generated", "hash_field": "generated_sha256"},
+            ],
+        }, {
+            "path": "portable/tests/recovered/evidence/next9-profile-regeneration-review-20261002/preceding-production-build.json",
+            "assertions": [("sources_stable_during_build", True),
+                           ("recovered_core.status", "DIAGNOSTIC_INTEGRATION")],
+        }],
+        "scope_only": True,
+        "metrics": [{"name": "current_profile_identity", "field": "current_profile_sha256", "operation": "value"}],
+        "scope": "Identity audit of the Next9 regeneration review and retained generated source profile. It verifies the changed provenance digest, source and generated-module pins, and complete state header/source; it does not certify production readiness, binary reproducibility, or refresh earlier execution receipts.",
+        "audit_class": "next9_profile_regeneration_identity_only",
+    },
+    {
+        "id": "mouse_hotbox_original_asm_native_222_20261002",
+        "report": "portable/tests/windows/mouse_hotbox/evidence/mouse-hotbox-differential-v5.json",
+        "path_hash_maps": ["input_sha256_before", "input_sha256_after",
+                           "compiler_dependency_sha256_before", "compiler_dependency_sha256_after"],
+        "equal_hash_maps": [("input_sha256_before", "input_sha256_after"),
+                            ("compiler_dependency_sha256_before", "compiler_dependency_sha256_after")],
+        "hash_fields": [("oracle_lock_sha256", "layout/oracle.lock.json")],
+        "assert_fields": [("target", "root:1B73:0CEF"), ("domain.count", 222),
+                          ("result.status", "PASS"), ("result.mismatch_count", 0),
+                          ("negative_control.id", "scanner-event-mask-disjoint")],
+        "dos_count": "domain.count",
+        "metrics": [{"name": "original_asm_native_cases", "field": "domain.count", "operation": "value"},
+                    {"name": "mismatches", "field": "result.mismatch_count", "operation": "value"}],
+        "scope": "222 original-ASM/native comparisons for the source-backed mouse hotbox scanner, with stable before/after input and compiler dependency maps. The report limits the claim to normalized hit index; event construction, callback execution, decoration precedence, and dynamic re-registration are excluded.",
+        "audit_class": "original_asm_native_helper_comparison",
+    },
+    {
+        "id": "next9_v5_save_stream_sentinels_1dos_20261002",
+        "report": "portable/tests/save/evidence/legacy-save-codec-v5/original-dos-sentinel-report.json",
+        "hash_fields": [("source_sha256", "src/S09/m35F5.c"),
+                        ("oracle_sha256", "assets/SIMANT.EXE"),
+                        ("harness_sha256", "tools/behavior.py"),
+                        ("layout_symbols_sha256", "layout/symbols.json"),
+                        ("inventory_sha256", "portable/tests/dialogs/evidence/savegame-format-source-inventory-v1/save-records.json")],
+        "assert_fields": [("status", "PASS_ORIGINAL_DOS_SOURCE_ADDRESS_TRACE"),
+                          ("function", "o09_35F5_0188"), ("write_calls", 307),
+                          ("payload_bytes", 48386), ("payload_matches_address_stream", True),
+                          ("payload_sha256", "7895bc872a8a58504ef85b0f8bcaa81bcabc35cd2576ca0ea4e14241679cedbc")],
+        "related_documents": [{
+            "path": "portable/tests/save/evidence/legacy-save-codec-v5/native-validation.json",
+            "assertions": [("status", "PASS_DIAGNOSTIC_NOT_PRODUCTION"),
+                           ("original_dos_write_calls", 307), ("original_dos_payload_bytes", 48386),
+                           ("independent_source_sentinel_members", 410), ("native_save_rows", 307),
+                           ("native_payload_bytes", 48386), ("positive_count", 2), ("negative_count", 3)],
+            "assertions": [("original_payload_sha256", "7895bc872a8a58504ef85b0f8bcaa81bcabc35cd2576ca0ea4e14241679cedbc")],
+        }, {
+            "path": "portable/tests/save/evidence/legacy-save-codec-v5/source-pins.json",
+            "assertions": [("status", "DIAGNOSTIC_NOT_PRODUCTION"), ("source_inputs_stable", True),
+                           ("toolchain_snapshot_taken_before_original_dos_probe", True),
+                           ("prior_evidence_limitations.v3", "manual source pins omitted the unconditional legacy_codec.h include; V5 GCC -MM closures include it"),
+                           ("prior_evidence_limitations.v4", "toolchain before fields were recomputed after the DOS probe; V5 captures and retains before maps before that probe")],
+            "path_hash_maps": ["source_inputs_before_sha256", "source_inputs_after_sha256",
+                               "gcc_toolchain_sha256_before", "gcc_toolchain_sha256_after",
+                               "msc_toolchain_sha256_before", "msc_toolchain_sha256_after",
+                               "python_executable_sha256_before", "python_executable_sha256_after",
+                               "external_file_sha256", "gcc_mm_local_dependency_union"],
+            "equal_hash_maps": [("source_inputs_before_sha256", "source_inputs_after_sha256"),
+                                ("gcc_toolchain_sha256_before", "gcc_toolchain_sha256_after"),
+                                ("msc_toolchain_sha256_before", "msc_toolchain_sha256_after"),
+                                ("python_executable_sha256_before", "python_executable_sha256_after")],
+            "file_pins": [("original_dos_report_sha256", "portable/tests/save/evidence/legacy-save-codec-v5/original-dos-sentinel-report.json"),
+                          ("native_validation_sha256", "portable/tests/save/evidence/legacy-save-codec-v5/native-validation.json"),
+                          ("binding_map_sha256", "portable/tests/save/evidence/legacy-save-codec-v5/binding-map.json")],
+        }, {
+            "path": "portable/tests/save/evidence/legacy-save-codec-v5/binding-map.json",
+            "assertions": [("status", "GENERATED_SOURCE_MAP_NOT_ACCEPTANCE")],
+        }],
+        "dos_count": {"single_function_invocation": {"function_field": "function",
+                                                        "function": "o09_35F5_0188",
+                                                        "positive_field": "write_calls"}},
+        "metrics": [{"name": "actual_savegame_invocations", "field": "function", "operation": "one"},
+                    {"name": "nested_original_writer_callbacks", "field": "write_calls", "operation": "value"},
+                    {"name": "payload_bytes", "field": "payload_bytes", "operation": "value"},
+                    {"name": "original_source_rows", "field": "rows", "operation": "len"}],
+        "scope": "One original DOS SaveGame invocation emitted 307 source-address writes and a 48,386-byte payload. Two native sentinel runs match; three negative controls fail as intended. V5 pins 410 independent source sentinels, the Next9 profile provenance, 80 pre/post source/compiler/Python path identities, and per-variant GCC -MM closure including legacy_codec.h. Diagnostic only; not production codec acceptance.",
+        "audit_class": "incomplete_diagnostic_next9_v5_save_stream_sentinels",
+    },
+    {
+        "id": "next9_v4_save_post_probe_execution_identity_limited_20261002",
+        "report": "portable/tests/save/evidence/legacy-save-codec-v4/original-dos-sentinel-report.json",
+        "hash_fields": [("source_sha256", "src/S09/m35F5.c"),
+                        ("oracle_sha256", "assets/SIMANT.EXE"),
+                        ("harness_sha256", "tools/behavior.py"),
+                        ("layout_symbols_sha256", "layout/symbols.json"),
+                        ("inventory_sha256", "portable/tests/dialogs/evidence/savegame-format-source-inventory-v1/save-records.json")],
+        "assert_fields": [("status", "PASS_ORIGINAL_DOS_SOURCE_ADDRESS_TRACE"),
+                          ("function", "o09_35F5_0188"), ("write_calls", 307),
+                          ("payload_bytes", 48386), ("payload_matches_address_stream", True)],
+        "related_documents": [{
+            "path": "portable/tests/save/evidence/legacy-save-codec-v4/source-pins.json",
+            "assertions": [("status", "DIAGNOSTIC_NOT_PRODUCTION"), ("source_inputs_stable", True)],
+            "path_hash_maps": ["source_inputs_before_sha256", "source_inputs_after_sha256",
+                               "gcc_toolchain_sha256_before", "gcc_toolchain_sha256_after",
+                               "msc_toolchain_sha256_before", "msc_toolchain_sha256_after"],
+            "equal_hash_maps": [("source_inputs_before_sha256", "source_inputs_after_sha256"),
+                                ("gcc_toolchain_sha256_before", "gcc_toolchain_sha256_after"),
+                                ("msc_toolchain_sha256_before", "msc_toolchain_sha256_after")],
+        }, {
+            "path": "portable/tests/save/evidence/legacy-save-codec-v4/native-validation.json",
+            "assertions": [("status", "PASS_DIAGNOSTIC_NOT_PRODUCTION"),
+                           ("original_dos_write_calls", 307), ("original_dos_payload_bytes", 48386),
+                           ("positive_count", 2), ("negative_count", 3)],
+        }, {
+            "path": "portable/tests/save/evidence/legacy-save-codec-v5/source-pins.json",
+            "assertions": [("prior_evidence_limitations.v4", "toolchain before fields were recomputed after the DOS probe; V5 captures and retains before maps before that probe")],
+        }],
+        "dos_count": {"single_function_invocation": {"function_field": "function",
+                                                        "function": "o09_35F5_0188",
+                                                        "positive_field": "write_calls"}},
+        "requires_missing": ["V4 compiler and toolchain snapshots were recomputed after the original DOS probe. Despite equal reported before/after maps, they do not establish compiler/toolchain identity before the DOS execution; classify V4 as execution-identity limited, not complete evidence."],
+        "scope": "The original DOS SaveGame address trace and later native sentinel controls are retained as finite diagnostics. V4's path stability does not establish compiler identity across the earlier DOS probe; V5 is the corrected execution-identity packet.",
+        "audit_class": "incomplete_execution_identity_limited_next9_v4",
+    },
+    {
+        "id": "history_render_transitive_closure_448_20261002",
+        "report": "portable/tests/history_render/transitive_closure_report.json",
+        "path_hash_fields": [("archive.runner_path", "archive.runner_sha256"),
+                             ("archive.original_448_case_receipt_path", "archive.original_448_case_receipt_sha256"),
+                             ("archive.oracle_fixture_path", "archive.oracle_fixture_sha256"),
+                             ("archive.canonical_source_path", "archive.canonical_source_sha256"),
+                             ("ctypes_wrapper.path", "ctypes_wrapper.sha256"),
+                             ("compiler.path", "compiler.sha256_before")],
+        "equal_fields": [("compiler.sha256_before", "compiler.sha256_after")],
+        "path_hash_lists": [
+            {"field": "compiled_dependency_closure.files", "path_field": "path", "hash_field": "sha256_before"},
+            {"field": "compiled_dependency_closure.files", "path_field": "path", "hash_field": "sha256_after"},
+            {"field": "python_oracle_resource_closure.files", "path_field": "path", "hash_field": "sha256_before"},
+            {"field": "python_oracle_resource_closure.files", "path_field": "path", "hash_field": "sha256_after"},
+        ],
+        "assert_fields": [("status", "PASS"), ("checked", 448), ("directed", 48),
+                          ("signed_randomized", 400), ("effective_address_alias_cases", 46),
+                          ("failures", []), ("resource_window_commands_asserted", 70),
+                          ("resource_window_pixels_touched", 361),
+                          ("pixel_boundary", "resource FONT2 raster helper is smoke-checked on a native framebuffer; no DOS pixels were compared or claimed")],
+        "metrics": [{"name": "original_DOS_native_cases", "field": "checked", "operation": "value"},
+                    {"name": "resource_window_commands", "field": "resource_window_commands_asserted", "operation": "value"},
+                    {"name": "native_pixels_touched_not_compared", "field": "resource_window_pixels_touched", "operation": "value"}],
+        "dos_count": "checked",
+        "scope": "448 native-versus-original-DOS history-render comparisons (48 directed and 400 seeded), with 46 effective-address alias cases and zero failures. The 70 resource-window commands and 361 touched native pixels are a separate raster smoke; DOS pixels were not compared.",
+        "audit_class": "history_render_direct_dos_closure_with_separate_native_raster_smoke",
+    },
+    {
+        "id": "history_event_lowering_next10_closure_29_20261002",
+        "report": "portable/tests/history_event_lowering/comparison_report_closure_next10.json",
+        "hash_fields": [
+            ("next10_profile_provenance_sha256", "build/workers/recovered_source_next10/generated/provenance.json"),
+            ("next10_generated_s24_sha256", "build/workers/recovered_source_next10/generated/S24_m39C7.c"),
+            ("next10_producer_sha256", "portable/tools/recover_source_next10.py"),
+            ("event_harness_sha256", "portable/tests/history_event_lowering/compare_closure.py"),
+            ("canonical_source_sha256", "src/S24/m39C7.c"),
+            ("oracle_fixture_source_sha256", "portable/tests/history_event_lowering/archive/oracle_S24_behavior_text_card.c"),
+            ("context_tool_sha256", "tools/context.py"),
+            ("behavior_harness_sha256", "tools/behavior.py"),
+            ("original_exe_sha256", "assets/SIMANT.EXE"),
+            ("next9_parent.provenance_sha256", "build/workers/recovered_source_next9/generated/provenance.json"),
+            ("next9_parent.review_sha256", "portable/tests/recovered/evidence/next9-profile-regeneration-review-20261002/review.json"),
+            ("next9_parent.regenerated_provenance_sha256", "portable/tests/recovered/evidence/next9-profile-regeneration-review-20261002/regenerated-provenance.json"),
+            ("archived_prior_packet.producer_sha256", "portable/tests/history_event_lowering/archive/recover_source_next10.py"),
+            ("archived_prior_packet.provenance_sha256", "portable/tests/history_event_lowering/archive/next10_provenance.json"),
+            ("archived_prior_packet.harness_sha256", "portable/tests/history_event_lowering/archive/compare.py"),
+            ("archived_prior_packet.comparison_report_sha256", "portable/tests/history_event_lowering/archive/comparison_report.json"),
+            ("archived_prior_packet.oracle_fixture_sha256", "portable/tests/history_event_lowering/archive/oracle_S24_behavior_text_card.c"),
+        ],
+        "partitioned_path_hash_maps": [
+            {"field": "input_closure.before", "artifact_suffixes": [".o"]},
+            {"field": "input_closure.after", "artifact_suffixes": [".o"]},
+        ],
+        "equal_hash_maps": [("input_closure.before", "input_closure.after")],
+        "path_list_hash_map_membership": [
+            {"list_field": "input_closure.current_next10_files_and_objects", "map_field": "input_closure.before"},
+            {"list_field": "input_closure.reviewed_next9_parent_files_and_objects", "map_field": "input_closure.before"},
+        ],
+        "path_hash_lists": [
+            {"field": "next10_compiled_profile.compiled_dependencies", "path_field": "path", "hash_field": "sha256_before"},
+            {"field": "next10_compiled_profile.compiled_dependencies", "path_field": "path", "hash_field": "sha256_after"},
+        ],
+        "path_hash_fields": [("compiler.path", "compiler.sha256_before"), ("python.path", "python.sha256_before")],
+        "equal_fields": [("compiler.sha256_before", "compiler.sha256_after"),
+                         ("python.sha256_before", "python.sha256_after")],
+        "assert_fields": [
+            ("status", "PASS"),
+            ("next10_profile_provenance_sha256", "62b17c962c31cfa14e98bd3728cc4dffec80f004a3dda000958e2bf8b564111c"),
+            ("next9_parent.provenance_sha256", "9821efeca4abdaf177f748c5179d9c7138618751641780b589baf7ac2efdf4ff"),
+            ("next10_compiled_profile.module_count", 25),
+            ("input_closure.all_pins_unchanged", True),
+            ("scope.cases", 29), ("scope.scenario_count", 7),
+            ("snapshot_api.name", "S24_GetHistoryUiSnapshot"),
+            ("snapshot_api.history_colors_count", 10),
+            ("snapshot_api.source_histColor_declared_capacity", 20),
+            ("original_data_bindings.histColor", "DS:8c26"),
+            ("negative_buggy_count_control.guard_triggered", True),
+            ("negative_buggy_count_control.source_index", 4),
+            ("negative_buggy_count_control.observable_last_removal_state_preserved_by_guard", True),
+            ("limits.0", "Native logical state/callback order is compared to the frozen original DOS machine."),
+            ("limits.2", "No DOS pixel claim; the win_DrawHistoryWindow callback is a deliberate state-observation boundary."),
+        ],
+        "list_lengths": [
+            ("next10_compiled_profile.gcc_mm_commands", 25),
+            ("next10_compiled_profile.compiled_dependencies", 26),
+            ("next10_compiled_profile.module_objects", 25),
+            ("input_closure.current_next10_files_and_objects", 52),
+            ("input_closure.reviewed_next9_parent_files_and_objects", 52),
+            ("scope.events_covering", 6),
+            ("limits", 3),
+            ("dos_native_events.add_first.events", 1),
+            ("dos_native_events.add_to_partial_list.events", 3),
+            ("dos_native_events.remove_first_slot.events", 5),
+            ("dos_native_events.remove_middle_slot_1.events", 5),
+            ("dos_native_events.remove_middle_slot_2.events", 5),
+            ("dos_native_events.remove_last_slot.events", 5),
+            ("dos_native_events.add_at_capacity_evict_oldest.events", 5),
+        ],
+        "dos_count": "scope.cases",
+        "metrics": [{"name": "original_DOS_native_event_cases", "field": "scope.cases", "operation": "value"},
+                    {"name": "source_scenarios", "field": "scope.scenario_count", "operation": "value"},
+                    {"name": "guarded_buggy_count_case", "field": "negative_buggy_count_control.guard_triggered", "operation": "value"}],
+        "scope": "29 original-DOS/native logical event comparisons over seven S24 history scenarios, including private source state and callback order plus a guarded negative buggy-count control. DOS pixels are not part of the comparison.",
+        "audit_class": "next10_s24_history_event_dos_native_with_guard",
+    },
+    {
+        "id": "physical_controls_source_geometry_native_sequence_20261002",
+        "report": "portable/tests/live_controls/evidence/physical-controls-next9-final-source-geometry-20261002.json",
+        "path_hash_maps": [
+            "source_closure.test_inputs_before", "source_closure.test_inputs_after",
+            "source_closure.receipt.inputs_before", "source_closure.receipt.inputs_after",
+        ],
+        "equal_hash_maps": [
+            ("source_closure.test_inputs_before", "source_closure.test_inputs_after"),
+            ("source_closure.receipt.inputs_before", "source_closure.receipt.inputs_after"),
+        ],
+        "equal_fields": [
+            ("source_closure.receipt.sha256_before", "source_closure.receipt.sha256_after"),
+        ],
+        "path_hash_fields": [
+            ("source_closure.receipt.path", "source_closure.receipt.sha256_before"),
+            ("source_control_input_trace.path", "source_control_input_trace.sha256"),
+            ("artifacts.event_report.path", "artifacts.event_report.sha256"),
+            ("artifacts.geometry_report.path", "artifacts.geometry_report.sha256"),
+            ("artifacts.control_input_trace.path", "artifacts.control_input_trace.sha256"),
+            ("artifacts.statistics.path", "artifacts.statistics.sha256"),
+            ("artifacts.end_game_boundary.path", "artifacts.end_game_boundary.sha256"),
+        ],
+        "assert_fields": [
+            ("status", "PASS"), ("passed", True),
+            ("production_profile", "build/workers/recovered_source_next9/generated"),
+            ("execution.return_code", 0), ("execution.timed_out", False),
+            ("paired_control_model.case_count", 34), ("paired_control_model.mismatch_count", 0),
+            ("paired_control_model.status", "PASS"), ("paired_control_model.native_model_matches", True),
+            ("injected_events.phase_count", 14), ("injected_events.pushed_event_count", 34),
+            ("injected_events.injection_failures", 0), ("injected_events.pause_toggle_count", 2),
+            ("final_diagnostics.completed_ticks", 32), ("source_closure.test_sources_stable", True),
+        ],
+        "list_lengths": [
+            ("injected_events.control_action_order", 10),
+            ("source_control_input_trace.records", 18),
+        ],
+        "related_documents": [
+            {
+                "path": "portable/tests/setup/control_events/evidence/paired-control-events.json",
+                "assertions": [("status", "PASS"), ("case_count", 34), ("mismatch_count", 0)],
+            },
+            {
+                "path": "portable/tests/menus/evidence/procmenu-next7-dos-differential-adapter-complete-closure-20261002.json",
+                "assertions": [("status", "PASS"), ("case_count", 84), ("mismatch_count", 0)],
+            },
+            {
+                "path": "portable/tests/windows/control_preselect/evidence/control-preselect-dos-native-final-20261002.json",
+                "assertions": [("status", "PASS"), ("case_count", 65536), ("mismatch_count", 0)],
+            },
+        ],
+        "skip_dependency_closure": True,
+        "scope_only": True,
+        "dos_count": {"literal": 0, "basis": "Physical SDL host sequence; it has no original DOS invocations."},
+        "metrics": [{"name": "physical_sequence_host_events", "field": "injected_events.pushed_event_count", "operation": "value"},
+                    {"name": "native_simulation_ticks", "field": "final_diagnostics.completed_ticks", "operation": "value"},
+                    {"name": "input_trace_records", "field": "source_control_input_trace.records", "operation": "len"}],
+        "scope": "Native-only physical SDL source-geometry sequence: 34 injected events over 14 phases and 10 control actions, followed by 32 native ticks. Its resulting logical controls agree with the separately paired 34-case DOS/model corpus; the physical sequence itself has zero DOS invocations and makes no DOS-pixel claim.",
+        "audit_class": "native_only_physical_controls_checked_against_paired_dos_model",
     },
 ])
 
@@ -1832,6 +2228,19 @@ def get_field(obj: Any, dotted: str) -> Any:
         else:
             raise KeyError(dotted)
     return cur
+
+
+def json_equal_except_fields(left: Any, right: Any, ignored_fields: list[str]) -> bool:
+    """Compare JSON structures after ignoring named top-level metadata fields."""
+    if not isinstance(left, dict) or not isinstance(right, dict):
+        return False
+    left_value, right_value = dict(left), dict(right)
+    for field in ignored_fields:
+        if field not in left_value or field not in right_value:
+            return False
+        left_value.pop(field)
+        right_value.pop(field)
+    return left_value == right_value
 
 
 def check_hash(checks: list[dict[str, Any]], missing: list[str], *, label: str,
@@ -2074,6 +2483,12 @@ def dos_comparison_count(spec, report):
         if "original_initControls_address" in report and "original_snapshot" in report:
             return 1, "One original initControls invocation represented by paired original/native snapshots."
         return None, "Setup report does not pin the original entry and paired snapshot."
+    if isinstance(field, dict) and "literal" in field:
+        try:
+            count = int(field["literal"])
+            return count, field.get("basis", "Explicitly recorded direct-original call count.")
+        except (TypeError, ValueError):
+            return None, "Literal direct-original call count is malformed."
     if isinstance(field, dict) and "single_function_invocation" in field:
         descriptor = field["single_function_invocation"]
         try:
@@ -2149,6 +2564,8 @@ def audit(spec: dict[str, Any]) -> dict[str, Any]:
                    expected=expected, path=path)
     for field in spec.get("path_hash_maps", []):
         check_path_map(checks, missing, report, field)
+    for list_spec in spec.get("path_hash_lists", []):
+        check_path_hash_rows(checks, missing, report, spec["report"], list_spec)
     for membership in spec.get("path_list_hash_map_membership", []):
         try:
             paths = get_field(report, membership["list_field"])
@@ -2430,6 +2847,8 @@ def audit(spec: dict[str, Any]) -> dict[str, Any]:
                        expected=expected, path=target)
         for map_field in document_spec.get("source_maps", []):
             check_path_map(checks, missing, document, map_field)
+        for map_field in document_spec.get("path_hash_maps", []):
+            check_path_map(checks, missing, document, map_field)
         for list_spec in document_spec.get("path_hash_lists", []):
             check_path_hash_rows(checks, missing, document, document_path, list_spec)
         if len(document_spec.get("source_maps", [])) >= 2:
@@ -2455,6 +2874,16 @@ def audit(spec: dict[str, Any]) -> dict[str, Any]:
                     missing.append(f"{document_path}: dependency receipt differs from the primary report source map")
             except (KeyError, IndexError, TypeError):
                 missing.append(f"{document_path}: source-stability receipt cannot be compared to primary pins")
+        for field, expected_length in document_spec.get("list_lengths", []):
+            try:
+                rows = get_field(document, field)
+            except (KeyError, IndexError, TypeError):
+                missing.append(f"{document_path}:{field}: required list is absent")
+                continue
+            if not isinstance(rows, list):
+                missing.append(f"{document_path}:{field}: expected list, got {type(rows).__name__}")
+            elif len(rows) != expected_length:
+                mismatches.append(f"{document_path}:{field}: expected {expected_length} entries, got {len(rows)}")
         for field, expected in document_spec.get("assertions", []):
             try:
                 actual = get_field(document, field)
@@ -2463,6 +2892,20 @@ def audit(spec: dict[str, Any]) -> dict[str, Any]:
                 continue
             if actual != expected:
                 missing.append(f"{document_path}:{field}: expected {expected!r}, got {actual!r}")
+
+    for comparison in spec.get("compare_json_documents", []):
+        left_path, right_path = comparison["left"], comparison["right"]
+        try:
+            left_doc = json.loads(path_for(left_path).read_text(encoding="utf-8"))
+            right_doc = json.loads(path_for(right_path).read_text(encoding="utf-8"))
+        except (OSError, UnicodeError, json.JSONDecodeError) as exc:
+            missing.append(f"comparison documents {left_path}/{right_path} unreadable: {exc}")
+            continue
+        equal = json_equal_except_fields(left_doc, right_doc, comparison.get("ignore_fields", []))
+        checks.append({"label": f"document-comparison:{left_path}:{right_path}",
+                       "path": f"{norm_rel(left_path)} <> {norm_rel(right_path)}",
+                       "ignored_fields": comparison.get("ignore_fields", []),
+                       "result": "MATCH" if equal else "MISMATCH"})
 
     for left_field, right_field in spec.get("equal_hash_maps", []):
         try:
@@ -2473,6 +2916,15 @@ def audit(spec: dict[str, Any]) -> dict[str, Any]:
             continue
         if left != right:
             missing.append(f"{left_field}/{right_field}: recorded before/after maps differ")
+    for left_field, right_field in spec.get("equal_fields", []):
+        try:
+            left_value = get_field(report, left_field)
+            right_value = get_field(report, right_field)
+        except (KeyError, IndexError, TypeError):
+            missing.append(f"{left_field}/{right_field}: required matching report fields are absent")
+            continue
+        if left_value != right_value:
+            missing.append(f"{left_field}/{right_field}: recorded values differ")
     if spec.get("replay_capture_files"):
         replay = spec["replay_capture_files"]
         try:
@@ -2510,6 +2962,16 @@ def audit(spec: dict[str, Any]) -> dict[str, Any]:
             continue
         if actual != expected:
             missing.append(f"{field}: expected {expected!r}, got {actual!r}")
+    for field, expected_length in spec.get("list_lengths", []):
+        try:
+            rows = get_field(report, field)
+        except (KeyError, IndexError, TypeError):
+            missing.append(f"{field}: required list is absent")
+            continue
+        if not isinstance(rows, list):
+            missing.append(f"{field}: expected list, got {type(rows).__name__}")
+        elif len(rows) != expected_length:
+            mismatches.append(f"{field}: expected {expected_length} entries, got {len(rows)}")
     for assertion in spec.get("host_list_assertions", []):
         try:
             rows = get_field(report, assertion["field"])

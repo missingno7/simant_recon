@@ -131,10 +131,89 @@ class VerifyEvidenceTests(unittest.TestCase):
         self.assertEqual(engine["partitioned_path_hash_maps"][0]["artifact_suffixes"], [".o"])
         self.assertIn("compiler_dependency_method", [field for field, _ in engine["assert_fields"]])
         self.assertTrue(by_id["historical_integrity_controls_frozen_20261002"]["scope_only"])
-        control_engine = by_id["control_engine_next9_10_event_integration_20261002"]
+        control_engine = by_id["control_engine_next9_175047_archived_20261002"]
+        self.assertTrue(control_engine["archived"])
         self.assertTrue(control_engine["report"].endswith("control-engine-next9-20261002T175047Z.json"))
+        refreshed = by_id["control_engine_next9_181619_15_boundaries_20261002"]
+        self.assertEqual(refreshed["assert_fields"][1], ("compile.local_transitive_dependency_count", 115))
+        self.assertEqual(refreshed["assert_fields"][2], ("counts.engine_boundary_cases", 15))
+        self.assertTrue(by_id["native_gate_50_mouse_controls_20261002"]["scope_only"])
+        self.assertEqual(by_id["engine_procmenu_next7_mouse_control_21_20261002"]["assert_fields"][1],
+                         ("profile", "NEXT7 generated recovered source"))
+        self.assertTrue(by_id["frozen_hybrid_reuse_provenance_identity_20261002"]["scope_only"])
+        self.assertEqual(by_id["frozen_hybrid_reuse_provenance_identity_20261002"]["compare_json_documents"][0]["ignore_fields"], ["timing"])
+        hotbox = by_id["mouse_hotbox_original_asm_native_222_20261002"]
+        self.assertEqual(hotbox["dos_count"], "domain.count")
+        self.assertEqual(hotbox["assert_fields"][2], ("result.status", "PASS"))
+        save_v5 = by_id["next9_v5_save_stream_sentinels_1dos_20261002"]
+        self.assertEqual(save_v5["dos_count"]["single_function_invocation"]["function"], "o09_35F5_0188")
+        self.assertEqual(save_v5["related_documents"][1]["path_hash_maps"][-1], "gcc_mm_local_dependency_union")
+        self.assertIn("not production", save_v5["scope"].lower())
+        save_v4 = by_id["next9_v4_save_post_probe_execution_identity_limited_20261002"]
+        self.assertIn("recomputed after the original DOS probe", save_v4["requires_missing"][0])
+        self.assertEqual(save_v4["audit_class"], "incomplete_execution_identity_limited_next9_v4")
+        history = by_id["history_render_transitive_closure_448_20261002"]
+        self.assertEqual(history["dos_count"], "checked")
+        self.assertEqual(history["metrics"][1]["field"], "resource_window_commands_asserted")
+        self.assertEqual(history["metrics"][2]["field"], "resource_window_pixels_touched")
+        history_events = by_id["history_event_lowering_next10_closure_29_20261002"]
+        self.assertEqual(history_events["dos_count"], "scope.cases")
+        self.assertIn(("next10_compiled_profile.gcc_mm_commands", 25), history_events["list_lengths"])
+        physical = by_id["physical_controls_source_geometry_native_sequence_20261002"]
+        self.assertTrue(physical["skip_dependency_closure"])
+        self.assertEqual(physical["dos_count"]["literal"], 0)
+        self.assertEqual(physical["list_lengths"][-1], ("source_control_input_trace.records", 18))
+        regeneration = by_id["next9_profile_regeneration_review_identity_20261002"]
+        self.assertTrue(regeneration["scope_only"])
+        module_hashes = regeneration["related_documents"][0]["path_hash_lists"]
+        self.assertEqual(len(module_hashes), 2)
+        self.assertEqual(regeneration["related_documents"][0]["assertions"][0],
+                         ("status", "DIAGNOSTIC_ONLY_NOT_PRODUCTION"))
         self.assertEqual(control_engine["path_list_hash_map_membership"][0]["list_field"],
                          "compile.local_transitive_dependencies")
+
+    def test_related_documents_check_recorded_path_hash_maps(self) -> None:
+        with tempfile.TemporaryDirectory(prefix="verify-evidence-related-map-") as temp:
+            root = Path(temp)
+            dependency = root / "dependency.c"
+            dependency.write_text("int dependency(void) { return 3; }\n", encoding="utf-8")
+            dependency_hash = hashlib.sha256(dependency.read_bytes()).hexdigest()
+            related = root / "related.json"
+            related.write_text(json.dumps({"pins": {str(dependency): dependency_hash}}), encoding="utf-8")
+            report = root / "report.json"
+            report.write_text(json.dumps({"status": "PASS"}), encoding="utf-8")
+            row = verify.audit({
+                "id": "related-map-test", "report": str(report), "scope_only": True,
+                "related_documents": [{"path": str(related), "path_hash_maps": ["pins"]}],
+            })
+            self.assertEqual(row["status"], "CURRENT")
+            self.assertTrue(any(check["label"].startswith("pins:") and check["result"] == "MATCH"
+                                for check in row["checks"]))
+            report.write_text(json.dumps({"status": "PASS", "inputs": [
+                {"path": str(dependency), "sha256": dependency_hash}]}), encoding="utf-8")
+            row_list = verify.audit({
+                "id": "related-row-test", "report": str(report), "scope_only": True,
+                "path_hash_lists": [{"field": "inputs", "path_field": "path", "hash_field": "sha256"}],
+            })
+            self.assertEqual(row_list["status"], "CURRENT")
+            self.assertTrue(any(check["result"] == "MATCH" for check in row_list["checks"]))
+            one_item = verify.audit({
+                "id": "list-length-test", "report": str(report), "scope_only": True,
+                "list_lengths": [("inputs", 1)],
+            })
+            self.assertEqual(one_item["status"], "CURRENT")
+            wrong_length = verify.audit({
+                "id": "list-length-negative-test", "report": str(report), "scope_only": True,
+                "list_lengths": [("inputs", 2)],
+            })
+            self.assertEqual(wrong_length["status"], "STALE")
+
+    def test_json_document_comparison_ignores_only_named_metadata(self) -> None:
+        left = {"verdict": "PASS", "hybrid": "same", "timing": {"seconds": 1}}
+        right = {"verdict": "PASS", "hybrid": "same", "timing": {"reused": True}}
+        self.assertTrue(verify.json_equal_except_fields(left, right, ["timing"]))
+        right["hybrid"] = "different"
+        self.assertFalse(verify.json_equal_except_fields(left, right, ["timing"]))
 
     def test_dynamic_path_hash_uses_the_recorded_path_and_digest(self) -> None:
         with tempfile.TemporaryDirectory(prefix="verify-evidence-dynamic-pin-") as temp:
