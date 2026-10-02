@@ -37,6 +37,7 @@ void portable_live_game_mark_presented(PortableLiveGame *game) { (void)game; }
 #else
 
 #include "picture_modal.h"
+#include "scenario_modal.h"
 #include "../../game/recovered/engine.h"
 #include "../../game/timing.h"
 #include "../../ui_model/input/input.h"
@@ -47,6 +48,7 @@ void portable_live_game_mark_presented(PortableLiveGame *game) { (void)game; }
 #include "../../ui_model/windows/operations.h"
 #include "../../ui_model/windows/ribbon.h"
 #include "../../ui_model/menus/render.h"
+#include "../../ui_model/dialogs/end_game_view.h"
 
 #include <stdio.h>
 #include <string.h>
@@ -101,10 +103,48 @@ struct PortableLiveGame {
     uint8_t control_down;
     uint8_t faulted;
     int16_t source_clip_window;
+    int16_t source_clip_stack[16];
+    uint8_t source_clip_depth;
     char error[192];
     uint64_t last_now_ns;
     uint64_t started_ns;
+    uint8_t end_game_opened;
+    uint8_t end_game_closed;
+    uint8_t end_game_boundary_reached;
+    uint8_t end_game_quit_seen;
+    uint32_t end_game_open_tick;
+    uint32_t end_game_close_tick;
+    uint32_t end_game_wait_start;
+    uint32_t end_game_wait_delay;
+    int16_t end_game_last_key;
+    int32_t end_game_score;
+    uint8_t end_game_scenario_index;
+    uint8_t end_game_level_index;
+    int16_t end_game_window_rect[4];
+    int16_t end_game_object_rects[12];
+    uint64_t end_game_polls;
+    uint64_t end_game_dialog_abort_polls;
+    uint64_t end_game_song_done_polls;
+    uint64_t end_game_song_requests;
+    uint64_t end_game_rendered_frames;
+    uint8_t end_game_modal_frame_saved;
+    char end_game_boundary[64];
 #ifdef SIMANT_LIVE_GAME_TEST_DIAGNOSTICS
+    uint8_t end_game_test_called;
+    int end_game_test_callback_result;
+#ifdef SIMANT_ENABLE_END_GAME_ACTION_DIAGNOSTIC
+    uint8_t newgame_202_action_called;
+    uint8_t newgame_202_returned;
+    int16_t newgame_202_action_status;
+    int16_t newgame_202_selection_code;
+    int16_t newgame_202_source_result;
+    uint64_t gameover_callback_count;
+    uint64_t gameover_entry_completed_ticks;
+    uint8_t gameover_callback_completed;
+    SimGameOverInput gameover_callback_input;
+    SimRng gameover_callback_rng_before;
+    SimRng gameover_callback_rng_after;
+#endif
     uint64_t query_calls[SIM_RECOVERED_QUERY_BUTTON + 1];
     uint64_t effect_calls[SIM_RECOVERED_EFFECT_GRAPHICS_LINE + 1];
     uint64_t pause_action_calls;
@@ -145,6 +185,15 @@ static void set_error(PortableLiveGame *game, const char *message)
     if (message == NULL) message = "unknown live-game error";
     (void)snprintf(game->error, sizeof(game->error), "%s", message);
 }
+
+#if defined(SIMANT_LIVE_GAME_TEST_DIAGNOSTICS) && \
+    defined(SIMANT_ENABLE_END_GAME_ACTION_DIAGNOSTIC)
+static int live_test_scenario_202_enabled(void)
+{
+    return getenv("SIMANT_LIVE_NEWGAME_202_DIAGNOSTIC") != NULL ||
+           getenv("SIMANT_LIVE_NATURAL_GAMEOVER_202_DIAGNOSTIC") != NULL;
+}
+#endif
 
 static int redraw(PortableLiveGame *game);
 static int redraw_snapshot_edit(PortableLiveGame *game);
@@ -943,6 +992,519 @@ static int redraw(PortableLiveGame *game)
     return game != NULL ? redraw_scene(game, game->session) : 0;
 }
 
+typedef struct LiveEndGameBinding {
+    PortableLiveGame *game;
+    PortableEndGameView *view;
+} LiveEndGameBinding;
+
+static int end_game_present(PortableLiveGame *game,
+                            const PortableEndGameView *view)
+{
+    PortableFramebuffer *fb;
+    if (game == NULL || view == NULL || game->renderer == NULL ||
+        game->renderer->framebuffer == NULL || game->host == NULL)
+        return 0;
+    if (portable_end_game_view_render(view, game->registry, &game->windows,
+            game->fonts, game->renderer) != PORTABLE_END_GAME_VIEW_OK) {
+        set_error(game, "source EndGame window render failed");
+        return 0;
+    }
+    fb = game->renderer->framebuffer;
+    if (!host_present(game->host, fb->pixels, fb->stride, game->host_palette)) {
+        set_error(game, "SDL presentation failed during source EndGame window");
+        return 0;
+    }
+    game->frame_pending = 0;
+    ++game->end_game_rendered_frames;
+#ifdef SIMANT_LIVE_GAME_TEST_DIAGNOSTICS
+    {
+        const char *frame_path = getenv("SIMANT_LIVE_END_GAME_FRAME_REPORT");
+        if (frame_path != NULL && frame_path[0] != '\0')
+            game->end_game_modal_frame_saved =
+                (uint8_t)host_save_frame(game->host, frame_path);
+    }
+#endif
+#if defined(SIMANT_LIVE_GAME_TEST_DIAGNOSTICS) && \
+    defined(SIMANT_ENABLE_END_GAME_ACTION_DIAGNOSTIC)
+    if (live_test_scenario_202_enabled()) {
+        const char *ready_path = getenv("SIMANT_LIVE_ENDGAME_READY");
+        if (ready_path != NULL && ready_path[0] != '\0') {
+            FILE *ready = fopen(ready_path, "wb");
+            if (ready == NULL) {
+                set_error(game, "could not publish EndGame test readiness");
+                return 0;
+            }
+            (void)fputs("active\n", ready);
+            (void)fclose(ready);
+        }
+    }
+#endif
+    return 1;
+}
+
+static int end_game_begin_song(void *context, int16_t song, int16_t arg)
+{
+    LiveEndGameBinding *binding = (LiveEndGameBinding *)context;
+    if (binding == NULL || binding->game == NULL) return 0;
+    ++binding->game->end_game_song_requests;
+    /* Route through the original root:m00DF gate. The recovered audio binding
+     * observes driver_ready==0 and disabled preferences exactly as source does. */
+    myBeginSong(song, arg);
+    return 1;
+}
+
+static int end_game_open_window(void *context, int16_t window_id)
+{
+    LiveEndGameBinding *binding = (LiveEndGameBinding *)context;
+    PortableLiveGame *game;
+    PortableWindowOpenResult result;
+    PortableWindowOpenStatus open_status;
+    static const int16_t args[4] = {0, 0, 0, 0};
+    const PortableWindowRect menu_rect = {0, 0, LIVE_SCREEN_WIDTH, 0};
+    if (binding == NULL || binding->game == NULL || binding->view == NULL ||
+        window_id != 0x0400)
+        return 0;
+    game = binding->game;
+    open_status = portable_window_open_apply(game->registry, &game->windows,
+            window_id, args, LIVE_SCREEN_WIDTH, LIVE_SCREEN_HEIGHT,
+            &menu_rect, &result);
+    if (open_status != PORTABLE_WINDOW_OPEN_OK ||
+        game->windows.front_window_id != window_id ||
+        !portable_end_game_view_note_open(binding->view, window_id)) {
+        (void)snprintf(game->error, sizeof(game->error),
+            "source win_Open rejected EndGame window 0x0400 (%s, loaded=%u, front=%d)",
+            portable_window_open_status_string(open_status),
+            game->registry->slots[4].loaded,
+            game->windows.front_window_id);
+        return 0;
+    }
+    game->end_game_opened = 1;
+    game->end_game_open_tick = sim_timing_tick_count(&game->clock);
+    game->end_game_window_rect[0] = game->registry->slots[4].window.rect.left;
+    game->end_game_window_rect[1] = game->registry->slots[4].window.rect.top;
+    game->end_game_window_rect[2] = game->registry->slots[4].window.rect.right;
+    game->end_game_window_rect[3] = game->registry->slots[4].window.rect.bottom;
+    {
+        static const uint8_t objects[] = {2, 3, 4};
+        size_t i;
+        for (i = 0; i < sizeof(objects); ++i) {
+            const PortableWindowRect rect =
+                game->registry->slots[4].window.objects[objects[i]].rect;
+            game->end_game_object_rects[i * 4u + 0u] = rect.left;
+            game->end_game_object_rects[i * 4u + 1u] = rect.top;
+            game->end_game_object_rects[i * 4u + 2u] = rect.right;
+            game->end_game_object_rects[i * 4u + 3u] = rect.bottom;
+        }
+    }
+    game->dirty = 1;
+    return 1;
+}
+
+static int end_game_set_font(void *context, int16_t font_id)
+{
+    LiveEndGameBinding *binding = (LiveEndGameBinding *)context;
+    return binding != NULL && binding->view != NULL &&
+           portable_end_game_view_set_font(binding->view, font_id);
+}
+
+static int end_game_set_resource_text(void *context, int16_t object_id,
+                                      int16_t resource_id, int16_t index)
+{
+    LiveEndGameBinding *binding = (LiveEndGameBinding *)context;
+    return binding != NULL && binding->view != NULL &&
+        portable_end_game_view_set_resource_text(binding->view, object_id,
+                                                  resource_id, index);
+}
+
+static int end_game_set_score_text(void *context, int16_t object_id,
+                                   int32_t score)
+{
+    LiveEndGameBinding *binding = (LiveEndGameBinding *)context;
+    return binding != NULL && binding->view != NULL &&
+        portable_end_game_view_set_score_text(binding->view, object_id, score);
+}
+
+static int end_game_dialog_wait_init(void *context, int16_t seconds)
+{
+    LiveEndGameBinding *binding = (LiveEndGameBinding *)context;
+    PortableLiveGame *game;
+    int32_t tick;
+    if (binding == NULL || binding->game == NULL || seconds < 0) return 0;
+    game = binding->game;
+    /* Source DialogWaitInit drains StillDown before sampling TickCount. */
+    while (game->left_down && !game->quit_requested) {
+        HostEvent event;
+        int polled = host_poll_event(game->host, &event);
+        if (polled < 0) return 0;
+        if (polled == 0) host_wait_ms(1);
+        else if (event.kind == HOST_EVENT_MOUSE_UP && event.button == 1)
+            game->left_down = 0;
+        else if (event.kind == HOST_EVENT_QUIT)
+            game->quit_requested = 1;
+    }
+    if (game->quit_requested || !tick_count_provider(game, &tick)) return 0;
+    game->end_game_wait_start = (uint32_t)tick;
+    game->end_game_wait_delay = (uint32_t)(uint16_t)seconds * 18u;
+    return 1;
+}
+
+static int end_game_window_is_open(void *context, int16_t window_id,
+                                   int *is_open)
+{
+    LiveEndGameBinding *binding = (LiveEndGameBinding *)context;
+    PortableLiveGame *game;
+    uint16_t index;
+    if (binding == NULL || binding->game == NULL || is_open == NULL ||
+        window_id != 0x0400)
+        return 0;
+    game = binding->game;
+    index = (uint16_t)window_id >> 8;
+    if (index >= game->registry->window_count ||
+        !game->registry->slots[index].loaded)
+        return 0;
+    *is_open = (game->windows.windows[index].flags & PORTABLE_WINDOW_OPEN) != 0;
+    return 1;
+}
+
+static int end_game_window_events(void *context, int *has_events)
+{
+    LiveEndGameBinding *binding = (LiveEndGameBinding *)context;
+    PortableLiveGame *game;
+    HostEvent event;
+    int polled;
+    if (binding == NULL || binding->game == NULL || has_events == NULL)
+        return 0;
+    game = binding->game;
+    ++game->end_game_polls;
+    *has_events = 0;
+    while ((polled = host_poll_event(game->host, &event)) > 0) {
+        if (event.kind == HOST_EVENT_QUIT) {
+            game->quit_requested = 1;
+            game->end_game_quit_seen = 1;
+            *has_events = 1;
+        } else if (event.kind == HOST_EVENT_MOUSE_MOVE) {
+            game->cursor_x = event.x;
+            game->cursor_y = event.y;
+        } else if (event.kind == HOST_EVENT_MOUSE_DOWN && event.button == 1) {
+            game->left_down = 1;
+            game->cursor_x = event.x;
+            game->cursor_y = event.y;
+        } else if (event.kind == HOST_EVENT_MOUSE_UP && event.button == 1) {
+            game->left_down = 0;
+            game->cursor_x = event.x;
+            game->cursor_y = event.y;
+        } else if (event.kind == HOST_EVENT_KEY_DOWN) {
+            int16_t logical_key;
+            PortableInputStatus key_status = portable_input_decode_bios_key(
+                event.key, &logical_key);
+            if (key_status == PORTABLE_INPUT_OK && logical_key != 0) {
+                game->end_game_last_key = logical_key;
+                *has_events = 1;
+            } else if (key_status != PORTABLE_INPUT_OK &&
+                     key_status != PORTABLE_INPUT_MODIFIER_ONLY &&
+                     key_status != PORTABLE_INPUT_NO_KEY) {
+                set_error(game, "EndGame received an invalid BIOS key word");
+                return 0;
+            }
+        }
+    }
+    if (polled < 0) {
+        set_error(game, "SDL event polling failed during EndGame modal loop");
+        return 0;
+    }
+    return 1;
+}
+
+static int32_t end_game_signed_tick(uint32_t bits)
+{
+    if (bits <= INT32_MAX) return (int32_t)bits;
+    return (int32_t)((int64_t)bits - INT64_C(4294967296));
+}
+
+static int end_game_waited_enough(PortableLiveGame *game)
+{
+    int32_t first, second, reset, start, deadline;
+    int result;
+    start = end_game_signed_tick(game->end_game_wait_start);
+    deadline = end_game_signed_tick(game->end_game_wait_start +
+                                    game->end_game_wait_delay);
+    if (!tick_count_provider(game, &first)) return -1;
+    if (first < start) {
+        result = 1;
+    } else {
+        if (!tick_count_provider(game, &second)) return -1;
+        result = deadline <= second;
+    }
+    if (result) {
+        if (!tick_count_provider(game, &reset)) return -1;
+        game->end_game_wait_start = (uint32_t)reset;
+    }
+    return result;
+}
+
+static int end_game_dialog_abort_or_continue(void *context,
+                                             int *requested_close)
+{
+    LiveEndGameBinding *binding = (LiveEndGameBinding *)context;
+    PortableLiveGame *game;
+    int waited;
+    if (binding == NULL || binding->game == NULL || requested_close == NULL)
+        return 0;
+    game = binding->game;
+    ++game->end_game_dialog_abort_polls;
+    waited = end_game_waited_enough(game);
+    if (waited < 0) {
+        set_error(game, "source DialogWait TickCount provider failed");
+        return 0;
+    }
+    *requested_close = waited != 0 || game->end_game_last_key != 0;
+    game->end_game_last_key = 0;
+    if (!*requested_close) host_wait_ms(1);
+    return 1;
+}
+
+static int end_game_close_window(void *context, int16_t window_id)
+{
+    LiveEndGameBinding *binding = (LiveEndGameBinding *)context;
+    PortableLiveGame *game;
+    PortableWindowOpenResult result;
+    PortableFramebuffer *fb;
+    if (binding == NULL || binding->game == NULL || window_id != 0x0400)
+        return 0;
+    game = binding->game;
+    if (portable_window_close_apply(game->registry, &game->windows, window_id,
+                                    &result) != PORTABLE_WINDOW_OPEN_OK) {
+        set_error(game, "source win_Close rejected EndGame window 0x0400");
+        return 0;
+    }
+    game->end_game_closed = 1;
+    game->end_game_close_tick = sim_timing_tick_count(&game->clock);
+    game->dirty = 1;
+    if (!redraw(game)) return 0;
+    fb = game->renderer->framebuffer;
+    if (!host_present(game->host, fb->pixels, fb->stride, game->host_palette)) {
+        set_error(game, "SDL presentation failed after source EndGame close");
+        return 0;
+    }
+    game->frame_pending = 0;
+    return 1;
+}
+
+static int end_game_song_done(void *context, int *is_done)
+{
+    LiveEndGameBinding *binding = (LiveEndGameBinding *)context;
+    if (binding == NULL || binding->game == NULL || is_done == NULL) return 0;
+    ++binding->game->end_game_song_done_polls;
+    /* mySongIsDone follows the original driver/options gate; with no audio
+     * driver its source result is true, which the modal flow must observe. */
+    *is_done = mySongIsDone() != 0;
+    return 1;
+}
+
+#ifdef SIMANT_ENABLE_NEW_GAME_NEXT5
+static int live_scenario_select_provider(void *context, int16_t flag,
+                                         int16_t *dos_result)
+{
+    PortableLiveGame *game = (PortableLiveGame *)context;
+    PortableScenarioModalRequest request;
+    PortableScenarioModalStatus status;
+    uint16_t selected = 0;
+    if (game == NULL || dos_result == NULL || flag != 0 || game->faulted) {
+        if (game != NULL)
+            set_error(game, "source DoScenario received an unsupported live flag");
+        return 0;
+    }
+    memset(&request, 0, sizeof(request));
+    request.registry = game->registry;
+    request.open_scene = &game->windows;
+    request.palette = game->palette;
+    request.fonts = game->fonts;
+    request.renderer = game->renderer;
+    request.screen_width = LIVE_SCREEN_WIDTH;
+    request.screen_height = LIVE_SCREEN_HEIGHT;
+    request.menu_rect = (PortableWindowRect){0, 0, LIVE_SCREEN_WIDTH, 0};
+    request.tick_count = modal_tick_count_provider;
+    request.clock_context = game;
+    request.quit_flag = &game->quit_requested;
+#if defined(SIMANT_LIVE_GAME_TEST_DIAGNOSTICS) && \
+    defined(SIMANT_ENABLE_END_GAME_ACTION_DIAGNOSTIC)
+    if (live_test_scenario_202_enabled()) {
+        const char *ready_path = getenv("SIMANT_LIVE_SCENARIO_READY");
+        if (ready_path != NULL && ready_path[0] != '\0') {
+            FILE *ready = fopen(ready_path, "wb");
+            if (ready == NULL) {
+                set_error(game, "could not publish scenario-modal test readiness");
+                return 0;
+            }
+            (void)fputs("active\n", ready);
+            (void)fclose(ready);
+        }
+    }
+#endif
+    status = portable_scenario_modal_run(game->host, &request, &selected);
+#if defined(SIMANT_LIVE_GAME_TEST_DIAGNOSTICS) && \
+    defined(SIMANT_ENABLE_END_GAME_ACTION_DIAGNOSTIC)
+    if (live_test_scenario_202_enabled()) {
+        const char *ready_path = getenv("SIMANT_LIVE_SCENARIO_READY");
+        if (ready_path != NULL && ready_path[0] != '\0') (void)remove(ready_path);
+    }
+#endif
+    if (status == PORTABLE_SCENARIO_MODAL_SELECTED ||
+        status == PORTABLE_SCENARIO_MODAL_CANCELLED) {
+        if (selected < 0x0202 || selected > 0x0207) {
+            set_error(game, "source DoScenario returned an invalid result code");
+            return 0;
+        }
+#if defined(SIMANT_LIVE_GAME_TEST_DIAGNOSTICS) && \
+    defined(SIMANT_ENABLE_END_GAME_ACTION_DIAGNOSTIC)
+        if (live_test_scenario_202_enabled())
+            game->newgame_202_selection_code = (int16_t)selected;
+#endif
+        *dos_result = (int16_t)selected;
+        return 1;
+    }
+    set_error(game, portable_scenario_modal_status_string(status));
+    return 0;
+}
+
+static int end_game_new_game(void *context, int16_t option,
+                             int16_t *result)
+{
+    LiveEndGameBinding *binding = (LiveEndGameBinding *)context;
+    PortableLiveGame *game;
+    if (binding == NULL || binding->game == NULL || binding->view == NULL ||
+        result == NULL || option != 0)
+        return 0;
+    game = binding->game;
+    /* EndGame's view owns copied SHARED records. Release them before entering
+     * source NewGame because a recovered host rejection longjmps past C frames. */
+    portable_end_game_view_release(binding->view);
+    if (!sim_recovered_engine_new_game_from_modal(&game->engine, option,
+                                                   result)) {
+        set_error(game, "source NewGame(option=0) continuation is unavailable");
+        return 0;
+    }
+#ifdef SIMANT_LIVE_GAME_TEST_DIAGNOSTICS
+#ifdef SIMANT_ENABLE_END_GAME_ACTION_DIAGNOSTIC
+    if (live_test_scenario_202_enabled()) {
+        game->newgame_202_returned = 1;
+        game->newgame_202_source_result = *result;
+    }
+#endif
+#endif
+    return 1;
+}
+#endif
+
+static int live_end_game_provider(void *context, const SimGameOverInput *input,
+                                  SimRng *rng)
+{
+    PortableLiveGame *game = (PortableLiveGame *)context;
+    PortableEndGameView view;
+    SimEndGameFlow flow;
+    SimEndGameFlowHost flow_host;
+    LiveEndGameBinding binding;
+    SimEndGameFlowStatus flow_status;
+    SimGameOverResult summary;
+    if (game == NULL || input == NULL || rng == NULL || game->faulted ||
+        game->end_game_opened || game->session == NULL || game->host == NULL ||
+        game->palette == NULL || game->fonts == NULL ||
+        game->renderer == NULL || game->registry == NULL) {
+        if (game != NULL) set_error(game, "invalid or repeated source EndGame callback");
+        return 0;
+    }
+    #if defined(SIMANT_LIVE_GAME_TEST_DIAGNOSTICS) && \
+        defined(SIMANT_ENABLE_END_GAME_ACTION_DIAGNOSTIC)
+    if (live_test_scenario_202_enabled()) {
+        ++game->gameover_callback_count;
+        game->gameover_entry_completed_ticks = game->engine.completed_ticks;
+        game->gameover_callback_input = *input;
+        game->gameover_callback_rng_before = *rng;
+        game->gameover_callback_completed = 0;
+    }
+    #endif
+    portable_end_game_view_init(&view);
+    binding.game = game;
+    binding.view = &view;
+    memset(&flow_host, 0, sizeof(flow_host));
+    flow_host.context = &binding;
+    flow_host.begin_song = end_game_begin_song;
+    flow_host.open_window = end_game_open_window;
+    flow_host.set_font = end_game_set_font;
+    flow_host.set_resource_text = end_game_set_resource_text;
+    flow_host.set_score_text = end_game_set_score_text;
+    flow_host.dialog_wait_init = end_game_dialog_wait_init;
+    flow_host.window_is_open = end_game_window_is_open;
+    flow_host.window_events = end_game_window_events;
+    flow_host.dialog_abort_or_continue = end_game_dialog_abort_or_continue;
+    flow_host.close_window = end_game_close_window;
+    flow_host.song_done = end_game_song_done;
+#ifdef SIMANT_ENABLE_NEW_GAME_NEXT5
+    flow_host.new_game = end_game_new_game;
+#endif
+    /* NewGame is exposed only by the guarded next5 source continuation.
+     * MenuQuit remains absent and therefore fails closed if NewGame returns
+     * its source negative result. */
+    if (sim_game_over_calculate(input, &summary) != SIM_GAME_OVER_OK ||
+        portable_end_game_view_prepare(&view, &game->session->shared_database,
+            &summary, LIVE_SCREEN_WIDTH) != PORTABLE_END_GAME_VIEW_OK) {
+        set_error(game, "source EndGame view could not load real string resources");
+        portable_end_game_view_release(&view);
+        return 0;
+    }
+    flow_status = sim_end_game_flow_begin(&flow, input, rng, &flow_host);
+    if (flow_status != SIM_END_GAME_FLOW_OK) {
+        if (game->error[0] == '\0')
+            set_error(game, flow.failed_service != NULL ? flow.failed_service :
+                sim_end_game_flow_status_string(flow_status));
+        goto done;
+    }
+    game->end_game_score = flow.summary.score;
+    game->end_game_scenario_index = (uint8_t)flow.summary.scenario_index;
+    game->end_game_level_index = flow.summary.level_index;
+    if (!end_game_present(game, &view)) goto done;
+    while (flow.phase == SIM_END_GAME_FLOW_WAIT_WINDOW) {
+        flow_status = sim_end_game_flow_step(&flow);
+        if (flow_status != SIM_END_GAME_FLOW_OK) break;
+        if (game->quit_requested) break;
+    }
+    if (flow.phase == SIM_END_GAME_FLOW_FAILED && flow.failed_service != NULL &&
+        strcmp(flow.failed_service, "NewGame") == 0 && game->end_game_closed) {
+        game->end_game_boundary_reached = 1;
+        (void)snprintf(game->end_game_boundary,
+            sizeof(game->end_game_boundary), "NewGame(option=0)");
+        set_error(game, "EndGame closed; unsupported NewGame continuation");
+    } else if (flow.phase == SIM_END_GAME_FLOW_COMPLETE &&
+               flow.outcome == SIM_END_GAME_FLOW_NEW_GAME_RETURNED) {
+        /* A true result means the actual recovered NewGame returned normally.
+         * Clear only host modal bookkeeping so a later source EndGame is legal. */
+        game->end_game_opened = 0;
+        game->end_game_closed = 0;
+        game->end_game_boundary_reached = 0;
+        game->end_game_boundary[0] = '\0';
+        #if defined(SIMANT_LIVE_GAME_TEST_DIAGNOSTICS) && \
+            defined(SIMANT_ENABLE_END_GAME_ACTION_DIAGNOSTIC)
+        if (live_test_scenario_202_enabled()) {
+            game->gameover_callback_rng_after = *rng;
+            game->gameover_callback_completed = 1;
+        }
+        #endif
+        portable_end_game_view_release(&view);
+        return 1;
+    } else {
+        set_error(game, flow.failed_service != NULL ? flow.failed_service :
+            sim_end_game_flow_status_string(flow_status));
+    }
+done:
+    if (game->end_game_opened && !game->end_game_closed) {
+        int is_open = 0;
+        if (end_game_window_is_open(&binding, 0x0400, &is_open) && is_open)
+            (void)end_game_close_window(&binding, 0x0400);
+    }
+    portable_end_game_view_release(&view);
+    return 0;
+}
+
 static int redraw_snapshot_edit(PortableLiveGame *game)
 {
     RecoveredState snapshot;
@@ -990,6 +1552,154 @@ static int object_effect_sink(void *context,
     return 0;
 }
 
+static int seed_new_window_state(PortableLiveGame *game, uint16_t index)
+{
+    PortableWindowRegistrySlot *slot;
+    PortableWindowObject *frame;
+    if (game == NULL || index >= game->registry->window_count ||
+        index >= PORTABLE_WINDOW_REGISTRY_SLOTS)
+        return 0;
+    slot = &game->registry->slots[index];
+    if (!slot->loaded || slot->window.count == 0) return 0;
+    frame = &slot->window.objects[0];
+    game->windows.windows[index].flags = (uint16_t)(
+        slot->window.flags & ~PORTABLE_WINDOW_OPEN);
+    game->windows.windows[index].origin.left = frame->offsets[0];
+    game->windows.windows[index].origin.top = frame->offsets[1];
+    game->windows.windows[index].origin.right = frame->offsets[2];
+    game->windows.windows[index].origin.bottom = frame->offsets[3];
+    game->windows.windows[index].has_saved_origin = 0;
+    return 1;
+}
+
+static int apply_source_window_open(PortableLiveGame *game, int16_t window_id)
+{
+    static const int16_t zero_args[4] = {0, 0, 0, 0};
+    const PortableWindowRect menu_rect = {0, 0, LIVE_SCREEN_WIDTH, 0};
+    PortableWindowOpenResult result;
+    PortableWindowOpenStatus status;
+    PortableWindowRegistrySlot *slot;
+    uint16_t index;
+    uint16_t object;
+    int was_loaded;
+    if (window_id < 0 || (window_id & 0xff) != 0 ||
+        (uint16_t)window_id >= (PORTABLE_WINDOW_REGISTRY_SLOTS << 8)) {
+        set_error(game, "source win_Open received an invalid window ID");
+        return 0;
+    }
+    index = (uint16_t)window_id >> 8;
+    if (index >= game->registry->window_count) {
+        set_error(game, "source win_Open window ID exceeds registry count");
+        return 0;
+    }
+    was_loaded = game->registry->slots[index].loaded != 0;
+    if (portable_window_registry_load(game->registry, (int16_t)index) !=
+            PORTABLE_WINDOW_REGISTRY_OK) {
+        set_error(game, "source win_Open could not load its resource");
+        return 0;
+    }
+    slot = &game->registry->slots[index];
+    if (!was_loaded && !seed_new_window_state(game, index)) {
+        set_error(game, "source win_Open could not initialize loaded window state");
+        return 0;
+    }
+    /* win_Open has a variadic ABI. Its recovered callers expose no argument
+     * words here, so accept only resources whose geometry does not consume
+     * mode-5 caller-stack values; all other geometry fails closed. */
+    for (object = 0; object < slot->window.count; ++object) {
+        unsigned axis;
+        for (axis = 0; axis < 4; ++axis) {
+            if (slot->window.objects[object].modes[axis] == 5) {
+                set_error(game, "source win_Open needs unavailable variadic geometry words");
+                return 0;
+            }
+        }
+    }
+    status = portable_window_open_apply(game->registry, &game->windows,
+        window_id, zero_args, LIVE_SCREEN_WIDTH, LIVE_SCREEN_HEIGHT,
+        &menu_rect, &result);
+    if (status != PORTABLE_WINDOW_OPEN_OK) {
+        set_error(game, portable_window_open_status_string(status));
+        return 0;
+    }
+    if (!result.already_front && !redraw_snapshot_edit(game)) return 0;
+    game->dirty = 1;
+    return 1;
+}
+
+static int apply_source_window_close(PortableLiveGame *game, int16_t window_id)
+{
+    PortableWindowOpenResult result;
+    PortableWindowOpenStatus status;
+    uint16_t index;
+    if (window_id < 0 || (window_id & 0xff) != 0 ||
+        (uint16_t)window_id >= (PORTABLE_WINDOW_REGISTRY_SLOTS << 8)) {
+        set_error(game, "source win_Close received an invalid window ID");
+        return 0;
+    }
+    index = (uint16_t)window_id >> 8;
+    if (index >= game->registry->window_count) {
+        set_error(game, "source win_Close window ID exceeds registry count");
+        return 0;
+    }
+    if (!game->registry->slots[index].loaded &&
+        portable_window_registry_load(game->registry, (int16_t)index) !=
+            PORTABLE_WINDOW_REGISTRY_OK) {
+        set_error(game, "source win_Close could not load its resource");
+        return 0;
+    }
+    if ((game->windows.windows[index].flags & PORTABLE_WINDOW_OPEN) == 0)
+        return 1;
+    status = portable_window_close_apply(game->registry, &game->windows,
+                                         window_id, &result);
+    if (status != PORTABLE_WINDOW_OPEN_OK) {
+        set_error(game, portable_window_open_status_string(status));
+        return 0;
+    }
+    if (!redraw_snapshot_edit(game)) return 0;
+    game->dirty = 1;
+    return 1;
+}
+
+static int refresh_edit_title_from_source(PortableLiveGame *game,
+                                          uint16_t object_id,
+                                          int16_t source_scenario)
+{
+    RecoveredState snapshot;
+    if (object_id != 1 || source_scenario < 0 || source_scenario > 3 ||
+        game->snapshot_session == NULL ||
+        !sim_recovered_engine_snapshot(&game->engine, &snapshot) ||
+        sim_session_from_recovered_state(game->snapshot_session, &snapshot) !=
+            SIM_RECOVERED_BRIDGE_OK ||
+        game->snapshot_session->world.scenario != source_scenario) {
+        set_error(game, "source SetEditWinTitle context is unavailable or inconsistent");
+        return 0;
+    }
+    if (!refresh_titles(game, &game->snapshot_session->world)) return 0;
+    game->dirty = 1;
+    return 1;
+}
+
+static int refresh_map_titles_from_source(PortableLiveGame *game)
+{
+    RecoveredState snapshot;
+    int map_open, yard_open;
+    if (game == NULL || game->snapshot_session == NULL ||
+        !sim_recovered_engine_snapshot(&game->engine, &snapshot) ||
+        sim_session_from_recovered_state(game->snapshot_session, &snapshot) !=
+            SIM_RECOVERED_BRIDGE_OK ||
+        !refresh_titles(game, &game->snapshot_session->world)) {
+        set_error(game, "source SetMapTitle context is unavailable");
+        return 0;
+    }
+    map_open = (game->windows.windows[1].flags & PORTABLE_WINDOW_OPEN) != 0;
+    yard_open = (game->windows.windows[0x19].flags & PORTABLE_WINDOW_OPEN) != 0;
+    if (map_open || (!map_open && yard_open))
+        return redraw_snapshot_edit(game);
+    game->dirty = 1;
+    return 1;
+}
+
 static int apply_window_object_operation(PortableLiveGame *game,
                                          const SimRecoveredEffect *effect)
 {
@@ -1006,6 +1716,72 @@ static int apply_window_object_operation(PortableLiveGame *game,
     operation = (SimRecoveredWindowOperation)(intptr_t)effect->arguments[0];
     object_id = (uint16_t)(int16_t)(intptr_t)effect->arguments[1];
     source_value = (int16_t)(intptr_t)effect->arguments[2];
+    switch (operation) {
+    case SIM_RECOVERED_WINDOW_OPEN:
+        return apply_source_window_open(game, (int16_t)object_id);
+    case SIM_RECOVERED_WINDOW_CLOSE:
+        return apply_source_window_close(game, (int16_t)object_id);
+    case SIM_RECOVERED_WINDOW_FLUSH_EVENTS:
+        game->source_event_head = 0;
+        game->source_event_count = 0;
+        game->previous_mouse_event_tick = 0;
+        memset(&game->previous_mouse_event, 0,
+               sizeof(game->previous_mouse_event));
+        return 1;
+    case SIM_RECOVERED_WINDOW_CLIP_PUSH:
+        if (game->source_clip_depth >=
+                sizeof(game->source_clip_stack) /
+                sizeof(game->source_clip_stack[0])) {
+            set_error(game, "source clip stack capacity exceeded");
+            return 0;
+        }
+        game->source_clip_stack[game->source_clip_depth++] =
+            game->source_clip_window;
+        return 1;
+    case SIM_RECOVERED_WINDOW_CLIP_POP:
+        if (game->source_clip_depth == 0) {
+            set_error(game, "source clip pop has no matching push");
+            return 0;
+        }
+        game->source_clip_window =
+            game->source_clip_stack[--game->source_clip_depth];
+        return 1;
+    case SIM_RECOVERED_WINDOW_DRAW_OBJECT:
+        if ((object_id >> 8) >= game->registry->window_count ||
+            !game->registry->slots[object_id >> 8].loaded ||
+            (object_id & 0xffu) >=
+                game->registry->slots[object_id >> 8].window.count) {
+            set_error(game, "source win_DrawObjectNum object is not loaded");
+            return 0;
+        }
+        return redraw_snapshot_edit(game);
+    case SIM_RECOVERED_WINDOW_UPDATE_EDIT_IF_OPEN:
+        /* root:m0250 UpdateEdit checks win_IsWinOpen(0), clips to the Edit
+         * window, draws its current view/graphs, then turns clipping off. */
+        if ((game->windows.windows[0].flags & PORTABLE_WINDOW_OPEN) == 0)
+            return 1;
+        game->source_clip_window = 0;
+        if (!redraw_snapshot_edit(game)) return 0;
+        game->source_clip_window = PORTABLE_WINDOW_OPEN_NONE;
+        game->dirty = 1;
+        return 1;
+    case SIM_RECOVERED_WINDOW_SET_EDIT_TITLE_FROM_SCENARIO:
+        return refresh_edit_title_from_source(game, object_id, source_value);
+    case SIM_RECOVERED_WINDOW_SET_MAP_TITLE:
+        return refresh_map_titles_from_source(game);
+    case SIM_RECOVERED_WINDOW_DRAW_EDIT_TITLE_OBJECT:
+        if (object_id != 1 || game->source_clip_window != 0 ||
+            !(game->windows.windows[0].flags & PORTABLE_WINDOW_OPEN)) {
+            set_error(game, "source edit-title draw lacks its window-0 clip context");
+            return 0;
+        }
+        return redraw_snapshot_edit(game);
+    case SIM_RECOVERED_WINDOW_SWAP:
+        set_error(game, "source win_Swap trailing geometry arguments are unavailable");
+        return 0;
+    default:
+        break;
+    }
     if ((object_id >> 8) >= PORTABLE_WINDOW_REGISTRY_SLOTS) {
         set_error(game, "source object operation names an invalid window");
         return 0;
@@ -1050,8 +1826,10 @@ static int apply_window_object_operation(PortableLiveGame *game,
                                               source_value);
         break;
     case SIM_RECOVERED_WINDOW_INVALIDATE_MAP:
+        /* InvalEuMap only marks its source cache entries invalid. The native
+         * view is rebuilt at the later source UpdateEdit/presentation point. */
         game->dirty = 1;
-        return redraw_snapshot_edit(game);
+        return 1;
     case SIM_RECOVERED_WINDOW_UNSELECT_GROUP:
         if (source_value < 0 || source_value > UINT8_MAX) {
             set_error(game, "source object group is outside its byte range");
@@ -1223,6 +2001,18 @@ PortableLiveGame *portable_live_game_create(
         goto fail;
     }
     memcpy(game->snapshot_session, session, sizeof(*game->snapshot_session));
+    if (portable_window_registry_load(registry, 4) !=
+            PORTABLE_WINDOW_REGISTRY_OK) {
+        set_error(game, "source EndGame window resource 0x0400 could not be loaded");
+        goto fail;
+    }
+#ifdef SIMANT_ENABLE_NEW_GAME_NEXT5
+    if (portable_window_registry_load(registry, 2) !=
+            PORTABLE_WINDOW_REGISTRY_OK) {
+        set_error(game, "source DoScenario window resource 0x0200 could not be loaded");
+        goto fail;
+    }
+#endif
     if (portable_window_open_scene_init(registry, NULL, 0, &game->windows) !=
         PORTABLE_WINDOW_OPEN_OK) {
         set_error(game, "could not initialize source open-window state");
@@ -1258,6 +2048,10 @@ PortableLiveGame *portable_live_game_create(
     core_host.query = host_query;
     core_host.effect = host_effect;
     core_host.song_done = song_done_provider;
+    core_host.end_game = live_end_game_provider;
+#ifdef SIMANT_ENABLE_NEW_GAME_NEXT5
+    core_host.scenario_select = live_scenario_select_provider;
+#endif
     core_host.audio_driver_ready = 0; /* No DOS PIT/DAC audio driver. */
     core_host.screen_width = LIVE_SCREEN_WIDTH;
     core_host.hardware_profile = registry->profile_id;
@@ -1268,6 +2062,60 @@ PortableLiveGame *portable_live_game_create(
     }
     game->dirty = 1;
     if (!redraw(game)) goto fail;
+#if defined(SIMANT_LIVE_GAME_TEST_DIAGNOSTICS) && \
+    defined(SIMANT_ENABLE_END_GAME_ACTION_DIAGNOSTIC)
+    if (getenv("SIMANT_LIVE_NEWGAME_202_DIAGNOSTIC") != NULL) {
+        SimRecoveredEngineStatus action_status;
+        game->newgame_202_action_called = 1;
+        action_status = sim_recovered_engine_action(&game->engine,
+            SIM_RECOVERED_ACTION_DIAGNOSTIC_END_GAME, 0, 0);
+        game->newgame_202_action_status = (int16_t)action_status;
+        if (action_status != SIM_RECOVERED_ENGINE_OK ||
+            game->newgame_202_selection_code != 0x0202 ||
+            !game->newgame_202_returned) {
+            if (game->error[0] == '\0')
+                set_error(game,
+                    "bounded EndGame-to-scenario-0x0202 diagnostic did not complete");
+            goto fail;
+        }
+    }
+#endif
+#ifdef SIMANT_LIVE_GAME_TEST_DIAGNOSTICS
+    if (getenv("SIMANT_LIVE_END_GAME_SMOKE") != NULL) {
+        SimGameOverInput test_input;
+        SimRng test_rng = session->rng;
+        memset(&test_input, 0, sizeof(test_input));
+        test_input.health = 100;
+        test_input.scenario = 0;
+        test_input.screen_width = LIVE_SCREEN_WIDTH;
+        /* This opt-in diagnostic invokes the exact host callback with an
+         * isolated input/RNG copy; it never resets or mutates live game state. */
+        game->end_game_test_called = 1;
+        game->engine.audio_binding.intents = &game->engine.audio_intents;
+        game->engine.audio_binding.driver_ready =
+            game->engine.host.audio_driver_ready;
+        game->engine.audio_binding.song_done = game->engine.host.song_done;
+        game->engine.audio_binding.song_done_context =
+            game->engine.host.context;
+        sim_recovered_audio_bind(&game->engine.audio_binding);
+        game->end_game_test_callback_result = game->engine.host.end_game(
+            game->engine.host.context, &test_input, &test_rng);
+        if (!sim_recovered_audio_unbind(&game->engine.audio_binding)) {
+            set_error(game, "could not release diagnostic EndGame audio binding");
+            goto fail;
+        }
+        if (game->end_game_test_callback_result != 0 ||
+            !game->end_game_boundary_reached || !game->end_game_opened ||
+            !game->end_game_closed) {
+            char prior[sizeof(game->error)];
+            (void)snprintf(prior, sizeof(prior), "%s", game->error);
+            (void)snprintf(game->error, sizeof(game->error),
+                "diagnostic EndGame did not stop at NewGame boundary: %.96s",
+                prior);
+            goto fail;
+        }
+    }
+#endif
     return game;
 fail:
     game->faulted = 1;
@@ -1661,6 +2509,121 @@ void portable_live_game_destroy(PortableLiveGame *game)
                 (void)fprintf(file, "]}\n");
                 (void)fclose(file);
             }
+            if (snprintf(path, sizeof(path), "%s.endgame.json", base) <
+                    (int)sizeof(path) && (file = fopen(path, "wb")) != NULL) {
+                (void)fprintf(file,
+                    "{\"schema\":\"portable-live-end-game-smoke-v1\","
+                    "\"diagnostic_callback_invoked\":%s,"
+                    "\"callback_result\":%d,\"opened\":%s,\"closed\":%s,"
+                    "\"restart_boundary_reached\":%s,\"boundary\":\"%s\","
+                    "\"score\":%ld,\"scenario_index\":%u,\"level_index\":%u,"
+                    "\"window_rect\":[%d,%d,%d,%d],"
+                    "\"text_object_rects\":[[%d,%d,%d,%d],[%d,%d,%d,%d],"
+                    "[%d,%d,%d,%d]],\"open_tick\":%u,\"close_tick\":%u,"
+                    "\"wait_delay_ticks\":%u,\"modal_event_polls\":%llu,"
+                    "\"dialog_abort_polls\":%llu,\"song_done_polls\":%llu,"
+                    "\"song_requests\":%llu,\"rendered_modal_frames\":%llu,"
+                    "\"modal_frame_saved\":%s,\"logical_key\":%d,"
+                    "\"quit_seen\":%s,\"audio_driver_ready\":%d,"
+                    "\"error\":\"%s\"}\n",
+                    game->end_game_test_called ? "true" : "false",
+                    game->end_game_test_callback_result,
+                    game->end_game_opened ? "true" : "false",
+                    game->end_game_closed ? "true" : "false",
+                    game->end_game_boundary_reached ? "true" : "false",
+                    game->end_game_boundary,
+                    (long)game->end_game_score,
+                    (unsigned)game->end_game_scenario_index,
+                    (unsigned)game->end_game_level_index,
+                    game->end_game_window_rect[0], game->end_game_window_rect[1],
+                    game->end_game_window_rect[2], game->end_game_window_rect[3],
+                    game->end_game_object_rects[0], game->end_game_object_rects[1],
+                    game->end_game_object_rects[2], game->end_game_object_rects[3],
+                    game->end_game_object_rects[4], game->end_game_object_rects[5],
+                    game->end_game_object_rects[6], game->end_game_object_rects[7],
+                    game->end_game_object_rects[8], game->end_game_object_rects[9],
+                    game->end_game_object_rects[10], game->end_game_object_rects[11],
+                    game->end_game_open_tick, game->end_game_close_tick,
+                    game->end_game_wait_delay,
+                    (unsigned long long)game->end_game_polls,
+                    (unsigned long long)game->end_game_dialog_abort_polls,
+                    (unsigned long long)game->end_game_song_done_polls,
+                    (unsigned long long)game->end_game_song_requests,
+                    (unsigned long long)game->end_game_rendered_frames,
+                    game->end_game_modal_frame_saved ? "true" : "false",
+                    game->end_game_last_key,
+                    game->end_game_quit_seen ? "true" : "false",
+                    game->engine.audio_binding.driver_ready,
+                    game->error);
+                (void)fclose(file);
+            }
+#ifdef SIMANT_ENABLE_END_GAME_ACTION_DIAGNOSTIC
+            if (snprintf(path, sizeof(path), "%s.newgame202.json", base) <
+                    (int)sizeof(path) && (file = fopen(path, "wb")) != NULL) {
+                (void)fprintf(file,
+                    "{\"schema\":\"portable-live-newgame-202-action-v1\","
+                    "\"diagnostic_action_called\":%s,"
+                    "\"diagnostic_action_status\":%d,"
+                    "\"scenario_result_code\":%d,"
+                    "\"source_newgame_returned\":%s,"
+                    "\"source_newgame_result\":%d,"
+                    "\"endgame_opened\":%s,\"endgame_closed\":%s,"
+                    "\"scenario_index_after\":%u,"
+                    "\"selected_map_plane_after\":%d,"
+                    "\"completed_ticks_after\":%llu,"
+                    "\"gameover_callback_count\":%llu,"
+                    "\"gameover_entry_completed_ticks\":%llu,"
+                    "\"gameover_callback_completed\":%s,"
+                    "\"gameover_input\":{\"scenario\":%d,\"world_ticks\":%d,"
+                    "\"health\":%d,\"blue_workers\":%d,\"red_workers\":%d,"
+                    "\"losing_side\":%d,\"sound_enabled\":%u,"
+                    "\"history_cursor\":%d,\"history_count\":%d,"
+                    "\"food_total\":%d,\"food_used\":%d,"
+                    "\"blue_colony_score\":%d,\"colony_score_a\":%d,"
+                    "\"colony_score_b\":%d,\"screen_width\":%u},"
+                    "\"rng_before\":{\"s\":%u,\"c\":%lu},"
+                    "\"rng_after\":{\"s\":%u,\"c\":%lu},"
+                    "\"engine_status\":%d,\"engine_failed_service\":\"%s\","
+                    "\"error\":\"%s\"}\n",
+                    game->newgame_202_action_called ? "true" : "false",
+                    game->newgame_202_action_status,
+                    game->newgame_202_selection_code,
+                    game->newgame_202_returned ? "true" : "false",
+                    game->newgame_202_source_result,
+                    game->end_game_opened ? "true" : "false",
+                    game->end_game_closed ? "true" : "false",
+                    (unsigned)game->engine.recovered.fd_50F6_0EAC,
+                    game->engine.recovered.fd_3D57_07C8[0],
+                    (unsigned long long)game->engine.completed_ticks,
+                    (unsigned long long)game->gameover_callback_count,
+                    (unsigned long long)game->gameover_entry_completed_ticks,
+                    game->gameover_callback_completed ? "true" : "false",
+                    game->gameover_callback_input.scenario,
+                    game->gameover_callback_input.world_ticks,
+                    game->gameover_callback_input.health,
+                    game->gameover_callback_input.blue_workers,
+                    game->gameover_callback_input.red_workers,
+                    game->gameover_callback_input.losing_side,
+                    game->gameover_callback_input.sound_enabled,
+                    game->gameover_callback_input.history_cursor,
+                    game->gameover_callback_input.history_count,
+                    game->gameover_callback_input.food_total,
+                    game->gameover_callback_input.food_used,
+                    game->gameover_callback_input.blue_colony_score,
+                    game->gameover_callback_input.colony_score_a,
+                    game->gameover_callback_input.colony_score_b,
+                    game->gameover_callback_input.screen_width,
+                    game->gameover_callback_rng_before.s_state,
+                    (unsigned long)game->gameover_callback_rng_before.c_state,
+                    game->gameover_callback_rng_after.s_state,
+                    (unsigned long)game->gameover_callback_rng_after.c_state,
+                    (int)game->engine.status,
+                    game->engine.failed_service != NULL ?
+                        game->engine.failed_service : "",
+                    game->error);
+                (void)fclose(file);
+            }
+#endif
         }
     }
 #endif

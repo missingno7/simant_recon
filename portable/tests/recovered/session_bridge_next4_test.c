@@ -82,6 +82,8 @@ static void test_resource_new_game_projection(void)
     mode_me_data = state.ModeMe;
     assert(sim_recovered_state_from_session(&state, &session) ==
            SIM_RECOVERED_BRIDGE_OK);
+    assert(state.fd_50F6_0B22 == session.sine_q15);
+    assert(state.g_5AAC == session.sine_q15);
 
     assert(state.ModeAuto == session.setup_controls.mode_auto);
     assert(state.CasteAuto == session.setup_controls.caste_auto);

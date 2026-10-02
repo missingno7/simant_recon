@@ -1,0 +1,367 @@
+{
+  "schema": "portable-menu-interaction-differential-v1",
+  "status": "PASS",
+  "target": {
+    "function": "o10_35F5_0384",
+    "address": {
+      "unit": "S10",
+      "seg": 13813,
+      "off": 900,
+      "size": 1759
+    },
+    "source": "work\\takeover\\hardtail\\seeds\\S10_35F5_4b9dda15dbea.c",
+    "source_sha256": "4b9dda15dbea1c8fd204ed95d4cb6a909751a59d0517909e90c4626cad3c7888",
+    "compiled_source_sha256": "4b9dda15dbea1c8fd204ed95d4cb6a909751a59d0517909e90c4626cad3c7888",
+    "object_sha256": "898342fa8bf5a0fc880402e8800225acab55dbab2e6ec8cf45bcabecf381ba41",
+    "linked_code_sha256": "c6cace84ca007eb589d3c3fec777a6923a0ed72daa597d0d35acc75237689d7c",
+    "oracle_sha256": "aa0596c6766322a8229ee3c36e57048c92adc82d50fbe2ef37afb8b85fcf4f11",
+    "unicorn_version": "2.1.4",
+    "harness_sha256": "2c0799048057f59eae61a48be4d695278635594484adf0c70bf46c51b4e0c799",
+    "profile": "msc600ax",
+    "flags": [
+      "/AL",
+      "/Os",
+      "/Og",
+      "/Oe",
+      "/Gs",
+      "/Zi"
+    ],
+    "manifest_sha256": "025a0a9255d910cae4b122ab5a3f3fb40888bb456d7fe42158db7c9e622fcf50"
+  },
+  "native": {
+    "source": "portable/ui_model/menus/interaction.c",
+    "source_sha256": "40a97b56af39898d33f92c17a57098ec8c7baec425a2c8903b0a0ccdad198751",
+    "fixture": "portable/tests/menus/menu_interaction_fixture.c",
+    "fixture_sha256": "ec4779c9640c7be3dc9c2bf5cd224f37904e08fe269d74dbadd7ca4736ce93d0",
+    "shared_library_sha256": "2c22405ee7045ef177937fa2212f9292dbb47ae2d1ae736f8e05383a6939771b",
+    "resource_harness": "portable/tests/menus/test_menu_interaction.c",
+    "resource_harness_sha256": "2ee6a9dfacac305c7178b2f32c1c1974f3391d8b591ff2183dc752b79fd81a29",
+    "asset_test_observation": "actual SHARED menu id 0: 5 titles, 8 first-menu items, title-hit and state gating verified"
+  },
+  "cases": {
+    "directed": 13,
+    "executed_original": 13,
+    "executed_native": 13,
+    "mismatches": 0
+  },
+  "compared_effects": [
+    "return code",
+    "selected byte",
+    "menu command ID",
+    "saved pull-down rectangle",
+    "forwarded full event ID"
+  ],
+  "domains": [
+    "title-targeted menu index 0; valid menu strings in far pointer-table layout",
+    "+/- and DOS scan-key navigation",
+    "second-byte letter accelerator",
+    "disabled and separator navigation; original hotkey quirk for disabled entries",
+    "mouse hit, disabled/outside-row, release and other-menu event"
+  ],
+  "limits": [
+    "Popup/context menu geometry with menu_index=-1 is unsupported.",
+    "SDL event collection and raster drawing remain host boundaries.",
+    "This finite UI interaction proof does not establish complete menu-system equivalence."
+  ],
+  "results": [
+    {
+      "case": "key-next-enter",
+      "equal": true,
+      "original_return": 1,
+      "native_return": 1,
+      "original_selection": 1,
+      "native_selection": 1,
+      "original_command_id": 64769,
+      "native_command_id": 64769,
+      "original_saved_rect": [
+        286,
+        17,
+        350,
+        59
+      ],
+      "native_saved_rect": [
+        286,
+        17,
+        350,
+        59
+      ],
+      "forwarded_event_match": true
+    },
+    {
+      "case": "key-previous-enter",
+      "equal": true,
+      "original_return": 1,
+      "native_return": 1,
+      "original_selection": 3,
+      "native_selection": 3,
+      "original_command_id": 64771,
+      "native_command_id": 64771,
+      "original_saved_rect": [
+        286,
+        17,
+        350,
+        59
+      ],
+      "native_saved_rect": [
+        286,
+        17,
+        350,
+        59
+      ],
+      "forwarded_event_match": true
+    },
+    {
+      "case": "key-down-enter",
+      "equal": true,
+      "original_return": 1,
+      "native_return": 1,
+      "original_selection": 1,
+      "native_selection": 1,
+      "original_command_id": 64769,
+      "native_command_id": 64769,
+      "original_saved_rect": [
+        286,
+        17,
+        350,
+        59
+      ],
+      "native_saved_rect": [
+        286,
+        17,
+        350,
+        59
+      ],
+      "forwarded_event_match": true
+    },
+    {
+      "case": "hotkey-second-character",
+      "equal": true,
+      "original_return": 1,
+      "native_return": 1,
+      "original_selection": 2,
+      "native_selection": 2,
+      "original_command_id": 64770,
+      "native_command_id": 64770,
+      "original_saved_rect": [
+        286,
+        17,
+        350,
+        59
+      ],
+      "native_saved_rect": [
+        286,
+        17,
+        350,
+        59
+      ],
+      "forwarded_event_match": true
+    },
+    {
+      "case": "separator-skip",
+      "equal": true,
+      "original_return": 1,
+      "native_return": 1,
+      "original_selection": 3,
+      "native_selection": 3,
+      "original_command_id": 64771,
+      "native_command_id": 64771,
+      "original_saved_rect": [
+        286,
+        17,
+        350,
+        59
+      ],
+      "native_saved_rect": [
+        286,
+        17,
+        350,
+        59
+      ],
+      "forwarded_event_match": true
+    },
+    {
+      "case": "disabled-skip",
+      "equal": true,
+      "original_return": 1,
+      "native_return": 1,
+      "original_selection": 3,
+      "native_selection": 3,
+      "original_command_id": 64771,
+      "native_command_id": 64771,
+      "original_saved_rect": [
+        286,
+        17,
+        350,
+        59
+      ],
+      "native_saved_rect": [
+        286,
+        17,
+        350,
+        59
+      ],
+      "forwarded_event_match": true
+    },
+    {
+      "case": "disabled-hotkey-source-quirk",
+      "equal": true,
+      "original_return": 1,
+      "native_return": 1,
+      "original_selection": 2,
+      "native_selection": 2,
+      "original_command_id": 64770,
+      "native_command_id": 64770,
+      "original_saved_rect": [
+        286,
+        17,
+        350,
+        59
+      ],
+      "native_saved_rect": [
+        286,
+        17,
+        350,
+        59
+      ],
+      "forwarded_event_match": true
+    },
+    {
+      "case": "escape-cancels-current",
+      "equal": true,
+      "original_return": 1,
+      "native_return": 1,
+      "original_selection": 2,
+      "native_selection": 2,
+      "original_command_id": null,
+      "native_command_id": null,
+      "original_saved_rect": [
+        286,
+        17,
+        350,
+        59
+      ],
+      "native_saved_rect": [
+        286,
+        17,
+        350,
+        59
+      ],
+      "forwarded_event_match": true
+    },
+    {
+      "case": "other-menu-event-forwarded",
+      "equal": true,
+      "original_return": 1,
+      "native_return": 1,
+      "original_selection": 1,
+      "native_selection": 1,
+      "original_command_id": null,
+      "native_command_id": null,
+      "original_saved_rect": [
+        286,
+        17,
+        350,
+        59
+      ],
+      "native_saved_rect": [
+        286,
+        17,
+        350,
+        59
+      ],
+      "forwarded_event_match": true
+    },
+    {
+      "case": "same-menu-event-ignored",
+      "equal": true,
+      "original_return": 1,
+      "native_return": 1,
+      "original_selection": 1,
+      "native_selection": 1,
+      "original_command_id": null,
+      "native_command_id": null,
+      "original_saved_rect": [
+        286,
+        17,
+        350,
+        59
+      ],
+      "native_saved_rect": [
+        286,
+        17,
+        350,
+        59
+      ],
+      "forwarded_event_match": true
+    },
+    {
+      "case": "mouse-first-row",
+      "equal": true,
+      "original_return": 1,
+      "native_return": 1,
+      "original_selection": 1,
+      "native_selection": 1,
+      "original_command_id": 64769,
+      "native_command_id": 64769,
+      "original_saved_rect": [
+        286,
+        17,
+        350,
+        59
+      ],
+      "native_saved_rect": [
+        286,
+        17,
+        350,
+        59
+      ],
+      "forwarded_event_match": true
+    },
+    {
+      "case": "mouse-disabled-row",
+      "equal": true,
+      "original_return": 1,
+      "native_return": 1,
+      "original_selection": 1,
+      "native_selection": 1,
+      "original_command_id": null,
+      "native_command_id": null,
+      "original_saved_rect": [
+        286,
+        17,
+        350,
+        59
+      ],
+      "native_saved_rect": [
+        286,
+        17,
+        350,
+        59
+      ],
+      "forwarded_event_match": true
+    },
+    {
+      "case": "mouse-outside-dropdown",
+      "equal": true,
+      "original_return": 1,
+      "native_return": 1,
+      "original_selection": 1,
+      "native_selection": 1,
+      "original_command_id": null,
+      "native_command_id": null,
+      "original_saved_rect": [
+        286,
+        17,
+        350,
+        59
+      ],
+      "native_saved_rect": [
+        286,
+        17,
+        350,
+        59
+      ],
+      "forwarded_event_match": true
+    }
+  ]
+}

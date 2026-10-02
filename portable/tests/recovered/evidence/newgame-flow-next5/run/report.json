@@ -1,0 +1,860 @@
+{
+  "schema": "portable-next5-newgame-controlled-dos-differential-v1",
+  "status": "DIAGNOSTIC_ONLY_NOT_BEHAVIOR_ACCEPTANCE",
+  "oracle_sha256": "aa0596c6766322a8229ee3c36e57048c92adc82d50fbe2ef37afb8b85fcf4f11",
+  "harness_sha256": "2c0799048057f59eae61a48be4d695278635594484adf0c70bf46c51b4e0c799",
+  "source": {
+    "path": "src/S15/m384C.c",
+    "sha256": "01b51eecedcd28e2213819572c846a9754039f4a527e6da5e56e57783398bdd5"
+  },
+  "next5": {
+    "wrapper": "portable/tools/recover_source_next5.py",
+    "wrapper_sha256": "9ee5ac29d38a330c63b13b430c63d737f505a58af53ed2b1abb6f786714bf974",
+    "profile_provenance_sha256": "3ede86127dad2b48532295c7d0206d09cb7658ea39690d10c5173afe1ba4611a",
+    "selected_source_sha256": "b72a1a96c74ff5f173db872e8d58470391b4f96c6d0dfea04ed655872df2eced",
+    "state_header_sha256": "8d22b87f06dbc9f9761cf7ae33e0219b1f10e6e33ebdfecf80c625af7f454268",
+    "state_source_sha256": "697b4013bb4660ab82916e3eb7b8003f2e0078ba272f18cd3c68344cdc82ccbe",
+    "native_probe_sha256": "56a9ba37379b9e4b4d75f8159250415fde71cb4b7a75a44084713524435906f6",
+    "native_library_sha256": "02ac2ddf206b4fedc21ca952b77c5703ceccdee6f964c2f8ea2215495402c8a0",
+    "selected_source_provenance": {
+      "name": "root_m384C_newgame",
+      "source": "src/S15/m384C.c",
+      "source_sha256": "01b51eecedcd28e2213819572c846a9754039f4a527e6da5e56e57783398bdd5",
+      "generated": "build/workers/recovered_source_next5/generated/root_m384C_newgame.c",
+      "generated_sha256": "b72a1a96c74ff5f173db872e8d58470391b4f96c6d0dfea04ed655872df2eced",
+      "defined_functions": [
+        "SetDefaultWindows",
+        "NewGame"
+      ],
+      "scaffold_functions_excluded_from_semantics": [],
+      "source_semantics_adaptations": [],
+      "source_type_view_adaptations": [
+        {
+          "source_symbol": "fd_3D57_02C2",
+          "source_declaration": "unsigned char[76] at S15 DATA offset 02C2",
+          "generated_view": "int16_t[38] canonical backing in RecoveredState",
+          "rewrite": "two scalar assignments become fd_3D57_02C2[0] = 0",
+          "reason": "preserves first 16-bit word write without assigning to a non-scalar array view"
+        }
+      ],
+      "historical_integer_width_lowerings": [
+        {
+          "pattern": "\\bint\\b",
+          "replacement": "int16_t",
+          "count": 17
+        }
+      ],
+      "platform_boundary_adaptations": [],
+      "called_functions": [
+        "CenterEdit",
+        "DoScenario",
+        "EndLifeTransferMode",
+        "EndTargetMode",
+        "OpenCasteWindow",
+        "OpenEditWindow",
+        "OpenModeWindow",
+        "RandYard",
+        "SetDefaultWindPrompt",
+        "SetEditWinTitle",
+        "SetMapTitle",
+        "UpdateEdit",
+        "WinPrintf",
+        "YardToMap",
+        "f_015B_053C",
+        "f_22BF_0A65",
+        "o09_35F5_0000",
+        "o26_39C7_0000",
+        "win_IsWinOpen",
+        "win_Open"
+      ],
+      "parent_source_body_dependencies": [
+        "EndLifeTransferMode",
+        "EndTargetMode",
+        "RandYard"
+      ],
+      "unresolved_host_or_external_edges": [
+        "CenterEdit",
+        "DoScenario",
+        "OpenCasteWindow",
+        "OpenEditWindow",
+        "OpenModeWindow",
+        "SetDefaultWindPrompt",
+        "SetEditWinTitle",
+        "SetMapTitle",
+        "UpdateEdit",
+        "WinPrintf",
+        "YardToMap",
+        "f_015B_053C",
+        "f_22BF_0A65",
+        "o09_35F5_0000",
+        "o26_39C7_0000",
+        "win_IsWinOpen",
+        "win_Open"
+      ],
+      "compile": {
+        "passed": true,
+        "command": [
+          "gcc",
+          "-std=c11",
+          "-Wall",
+          "-Wextra",
+          "-Werror",
+          "-I",
+          "D:\\Prog\\simant_recon\\build\\workers\\recovered_source_next5\\generated",
+          "-c",
+          "D:\\Prog\\simant_recon\\build\\workers\\recovered_source_next5\\generated\\root_m384C_newgame.c",
+          "-o",
+          "D:\\Prog\\simant_recon\\build\\workers\\recovered_source_next5\\generated\\root_m384C_newgame.o"
+        ],
+        "diagnostics": ""
+      },
+      "strict_compile": {
+        "passed": true,
+        "command": [
+          "gcc",
+          "-std=c11",
+          "-Wall",
+          "-Wextra",
+          "-Werror",
+          "-I",
+          "D:\\Prog\\simant_recon\\build\\workers\\recovered_source_next5\\generated",
+          "-c",
+          "D:\\Prog\\simant_recon\\build\\workers\\recovered_source_next5\\generated\\root_m384C_newgame.c",
+          "-o",
+          "D:\\Prog\\simant_recon\\build\\workers\\recovered_source_next5\\generated\\root_m384C_newgame.o"
+        ],
+        "object_sha256": "29a7e2d6eea6ac659e497c3f6ebf015b7cc0356df844be9945361b5b70630f60",
+        "diagnostics": ""
+      }
+    }
+  },
+  "ledger": {
+    "schema": "portable-next5-newgame-flow-ledger-v1",
+    "path": "build/workers/behavior_newgame_next5/flow/cases.jsonl.gz",
+    "sha256": "6a7aba35e52969a22ed1f6b6034d410260d326f1c052415d69f5024564ad4773",
+    "row_count": 130,
+    "lane_counts": {
+      "directed": 130
+    }
+  },
+  "domain": {
+    "newgame_cases": 128,
+    "direct_setdefault_cases": 2,
+    "scenario_ids": [
+      514,
+      515,
+      516,
+      518,
+      517,
+      519
+    ],
+    "modes": [
+      0,
+      10,
+      11
+    ],
+    "flags": [
+      0,
+      1
+    ],
+    "file_207": [
+      "retry then success",
+      "success"
+    ],
+    "randyard_boundary": {
+      "mutates": [
+        "MePlane",
+        "MeLocX",
+        "MeLocY"
+      ],
+      "rng": "original S/C RNG sentinels checked unchanged; no service consumes RNG",
+      "whole_randyard_claim": false
+    },
+    "implicit_ax": {
+      "helpers": [
+        "f_22BF_0A65",
+        "o26_39C7_0000"
+      ],
+      "native_service_input_records_replay_actual_original_entry_AX": true
+    }
+  },
+  "compared": [
+    "return",
+    "ordered typed service calls and LoadGame outcomes",
+    "11 named S15 fields",
+    "S15 field values at every controlled callback entry",
+    "original RNG sentinel preservation"
+  ],
+  "boundary": "Oracle runs NewGame/SetDefaultWindows from DOS; native runs selected next5 C. Modal selection, windows, LoadGame, RandYard, and window/UI calls are controlled typed services. The native boundary trace replays the entry AX captured by the original VM for f_22BF_0A65/o26_39C7_0000; those volatile register values are not claimed as independently generated by native C. Controlled RandYard writes only MePlane/MeLocX/MeLocY sentinels; this checks post-call flow, not RandWorld semantics.",
+  "newgame_results": [
+    {
+      "id": "newgame-000",
+      "equal": true,
+      "diff": {}
+    },
+    {
+      "id": "newgame-001",
+      "equal": true,
+      "diff": {}
+    },
+    {
+      "id": "newgame-002",
+      "equal": true,
+      "diff": {}
+    },
+    {
+      "id": "newgame-003",
+      "equal": true,
+      "diff": {}
+    },
+    {
+      "id": "newgame-004",
+      "equal": true,
+      "diff": {}
+    },
+    {
+      "id": "newgame-005",
+      "equal": true,
+      "diff": {}
+    },
+    {
+      "id": "newgame-006",
+      "equal": true,
+      "diff": {}
+    },
+    {
+      "id": "newgame-007",
+      "equal": true,
+      "diff": {}
+    },
+    {
+      "id": "newgame-008",
+      "equal": true,
+      "diff": {}
+    },
+    {
+      "id": "newgame-009",
+      "equal": true,
+      "diff": {}
+    },
+    {
+      "id": "newgame-010",
+      "equal": true,
+      "diff": {}
+    },
+    {
+      "id": "newgame-011",
+      "equal": true,
+      "diff": {}
+    },
+    {
+      "id": "newgame-012",
+      "equal": true,
+      "diff": {}
+    },
+    {
+      "id": "newgame-013",
+      "equal": true,
+      "diff": {}
+    },
+    {
+      "id": "newgame-014",
+      "equal": true,
+      "diff": {}
+    },
+    {
+      "id": "newgame-015",
+      "equal": true,
+      "diff": {}
+    },
+    {
+      "id": "newgame-016",
+      "equal": true,
+      "diff": {}
+    },
+    {
+      "id": "newgame-017",
+      "equal": true,
+      "diff": {}
+    },
+    {
+      "id": "newgame-018",
+      "equal": true,
+      "diff": {}
+    },
+    {
+      "id": "newgame-019",
+      "equal": true,
+      "diff": {}
+    },
+    {
+      "id": "newgame-020",
+      "equal": true,
+      "diff": {}
+    },
+    {
+      "id": "newgame-021",
+      "equal": true,
+      "diff": {}
+    },
+    {
+      "id": "newgame-022",
+      "equal": true,
+      "diff": {}
+    },
+    {
+      "id": "newgame-023",
+      "equal": true,
+      "diff": {}
+    },
+    {
+      "id": "newgame-024",
+      "equal": true,
+      "diff": {}
+    },
+    {
+      "id": "newgame-025",
+      "equal": true,
+      "diff": {}
+    },
+    {
+      "id": "newgame-026",
+      "equal": true,
+      "diff": {}
+    },
+    {
+      "id": "newgame-027",
+      "equal": true,
+      "diff": {}
+    },
+    {
+      "id": "newgame-028",
+      "equal": true,
+      "diff": {}
+    },
+    {
+      "id": "newgame-029",
+      "equal": true,
+      "diff": {}
+    },
+    {
+      "id": "newgame-030",
+      "equal": true,
+      "diff": {}
+    },
+    {
+      "id": "newgame-031",
+      "equal": true,
+      "diff": {}
+    },
+    {
+      "id": "newgame-032",
+      "equal": true,
+      "diff": {}
+    },
+    {
+      "id": "newgame-033",
+      "equal": true,
+      "diff": {}
+    },
+    {
+      "id": "newgame-034",
+      "equal": true,
+      "diff": {}
+    },
+    {
+      "id": "newgame-035",
+      "equal": true,
+      "diff": {}
+    },
+    {
+      "id": "newgame-036",
+      "equal": true,
+      "diff": {}
+    },
+    {
+      "id": "newgame-037",
+      "equal": true,
+      "diff": {}
+    },
+    {
+      "id": "newgame-038",
+      "equal": true,
+      "diff": {}
+    },
+    {
+      "id": "newgame-039",
+      "equal": true,
+      "diff": {}
+    },
+    {
+      "id": "newgame-040",
+      "equal": true,
+      "diff": {}
+    },
+    {
+      "id": "newgame-041",
+      "equal": true,
+      "diff": {}
+    },
+    {
+      "id": "newgame-042",
+      "equal": true,
+      "diff": {}
+    },
+    {
+      "id": "newgame-043",
+      "equal": true,
+      "diff": {}
+    },
+    {
+      "id": "newgame-044",
+      "equal": true,
+      "diff": {}
+    },
+    {
+      "id": "newgame-045",
+      "equal": true,
+      "diff": {}
+    },
+    {
+      "id": "newgame-046",
+      "equal": true,
+      "diff": {}
+    },
+    {
+      "id": "newgame-047",
+      "equal": true,
+      "diff": {}
+    },
+    {
+      "id": "newgame-048",
+      "equal": true,
+      "diff": {}
+    },
+    {
+      "id": "newgame-049",
+      "equal": true,
+      "diff": {}
+    },
+    {
+      "id": "newgame-050",
+      "equal": true,
+      "diff": {}
+    },
+    {
+      "id": "newgame-051",
+      "equal": true,
+      "diff": {}
+    },
+    {
+      "id": "newgame-052",
+      "equal": true,
+      "diff": {}
+    },
+    {
+      "id": "newgame-053",
+      "equal": true,
+      "diff": {}
+    },
+    {
+      "id": "newgame-054",
+      "equal": true,
+      "diff": {}
+    },
+    {
+      "id": "newgame-055",
+      "equal": true,
+      "diff": {}
+    },
+    {
+      "id": "newgame-056",
+      "equal": true,
+      "diff": {}
+    },
+    {
+      "id": "newgame-057",
+      "equal": true,
+      "diff": {}
+    },
+    {
+      "id": "newgame-058",
+      "equal": true,
+      "diff": {}
+    },
+    {
+      "id": "newgame-059",
+      "equal": true,
+      "diff": {}
+    },
+    {
+      "id": "newgame-060",
+      "equal": true,
+      "diff": {}
+    },
+    {
+      "id": "newgame-061",
+      "equal": true,
+      "diff": {}
+    },
+    {
+      "id": "newgame-062",
+      "equal": true,
+      "diff": {}
+    },
+    {
+      "id": "newgame-063",
+      "equal": true,
+      "diff": {}
+    },
+    {
+      "id": "newgame-064",
+      "equal": true,
+      "diff": {}
+    },
+    {
+      "id": "newgame-065",
+      "equal": true,
+      "diff": {}
+    },
+    {
+      "id": "newgame-066",
+      "equal": true,
+      "diff": {}
+    },
+    {
+      "id": "newgame-067",
+      "equal": true,
+      "diff": {}
+    },
+    {
+      "id": "newgame-068",
+      "equal": true,
+      "diff": {}
+    },
+    {
+      "id": "newgame-069",
+      "equal": true,
+      "diff": {}
+    },
+    {
+      "id": "newgame-070",
+      "equal": true,
+      "diff": {}
+    },
+    {
+      "id": "newgame-071",
+      "equal": true,
+      "diff": {}
+    },
+    {
+      "id": "newgame-072",
+      "equal": true,
+      "diff": {}
+    },
+    {
+      "id": "newgame-073",
+      "equal": true,
+      "diff": {}
+    },
+    {
+      "id": "newgame-074",
+      "equal": true,
+      "diff": {}
+    },
+    {
+      "id": "newgame-075",
+      "equal": true,
+      "diff": {}
+    },
+    {
+      "id": "newgame-076",
+      "equal": true,
+      "diff": {}
+    },
+    {
+      "id": "newgame-077",
+      "equal": true,
+      "diff": {}
+    },
+    {
+      "id": "newgame-078",
+      "equal": true,
+      "diff": {}
+    },
+    {
+      "id": "newgame-079",
+      "equal": true,
+      "diff": {}
+    },
+    {
+      "id": "newgame-080",
+      "equal": true,
+      "diff": {}
+    },
+    {
+      "id": "newgame-081",
+      "equal": true,
+      "diff": {}
+    },
+    {
+      "id": "newgame-082",
+      "equal": true,
+      "diff": {}
+    },
+    {
+      "id": "newgame-083",
+      "equal": true,
+      "diff": {}
+    },
+    {
+      "id": "newgame-084",
+      "equal": true,
+      "diff": {}
+    },
+    {
+      "id": "newgame-085",
+      "equal": true,
+      "diff": {}
+    },
+    {
+      "id": "newgame-086",
+      "equal": true,
+      "diff": {}
+    },
+    {
+      "id": "newgame-087",
+      "equal": true,
+      "diff": {}
+    },
+    {
+      "id": "newgame-088",
+      "equal": true,
+      "diff": {}
+    },
+    {
+      "id": "newgame-089",
+      "equal": true,
+      "diff": {}
+    },
+    {
+      "id": "newgame-090",
+      "equal": true,
+      "diff": {}
+    },
+    {
+      "id": "newgame-091",
+      "equal": true,
+      "diff": {}
+    },
+    {
+      "id": "newgame-092",
+      "equal": true,
+      "diff": {}
+    },
+    {
+      "id": "newgame-093",
+      "equal": true,
+      "diff": {}
+    },
+    {
+      "id": "newgame-094",
+      "equal": true,
+      "diff": {}
+    },
+    {
+      "id": "newgame-095",
+      "equal": true,
+      "diff": {}
+    },
+    {
+      "id": "newgame-096",
+      "equal": true,
+      "diff": {}
+    },
+    {
+      "id": "newgame-097",
+      "equal": true,
+      "diff": {}
+    },
+    {
+      "id": "newgame-098",
+      "equal": true,
+      "diff": {}
+    },
+    {
+      "id": "newgame-099",
+      "equal": true,
+      "diff": {}
+    },
+    {
+      "id": "newgame-100",
+      "equal": true,
+      "diff": {}
+    },
+    {
+      "id": "newgame-101",
+      "equal": true,
+      "diff": {}
+    },
+    {
+      "id": "newgame-102",
+      "equal": true,
+      "diff": {}
+    },
+    {
+      "id": "newgame-103",
+      "equal": true,
+      "diff": {}
+    },
+    {
+      "id": "newgame-104",
+      "equal": true,
+      "diff": {}
+    },
+    {
+      "id": "newgame-105",
+      "equal": true,
+      "diff": {}
+    },
+    {
+      "id": "newgame-106",
+      "equal": true,
+      "diff": {}
+    },
+    {
+      "id": "newgame-107",
+      "equal": true,
+      "diff": {}
+    },
+    {
+      "id": "newgame-108",
+      "equal": true,
+      "diff": {}
+    },
+    {
+      "id": "newgame-109",
+      "equal": true,
+      "diff": {}
+    },
+    {
+      "id": "newgame-110",
+      "equal": true,
+      "diff": {}
+    },
+    {
+      "id": "newgame-111",
+      "equal": true,
+      "diff": {}
+    },
+    {
+      "id": "newgame-112",
+      "equal": true,
+      "diff": {}
+    },
+    {
+      "id": "newgame-113",
+      "equal": true,
+      "diff": {}
+    },
+    {
+      "id": "newgame-114",
+      "equal": true,
+      "diff": {}
+    },
+    {
+      "id": "newgame-115",
+      "equal": true,
+      "diff": {}
+    },
+    {
+      "id": "newgame-116",
+      "equal": true,
+      "diff": {}
+    },
+    {
+      "id": "newgame-117",
+      "equal": true,
+      "diff": {}
+    },
+    {
+      "id": "newgame-118",
+      "equal": true,
+      "diff": {}
+    },
+    {
+      "id": "newgame-119",
+      "equal": true,
+      "diff": {}
+    },
+    {
+      "id": "newgame-120",
+      "equal": true,
+      "diff": {}
+    },
+    {
+      "id": "newgame-121",
+      "equal": true,
+      "diff": {}
+    },
+    {
+      "id": "newgame-122",
+      "equal": true,
+      "diff": {}
+    },
+    {
+      "id": "newgame-123",
+      "equal": true,
+      "diff": {}
+    },
+    {
+      "id": "newgame-124",
+      "equal": true,
+      "diff": {}
+    },
+    {
+      "id": "newgame-125",
+      "equal": true,
+      "diff": {}
+    },
+    {
+      "id": "newgame-126",
+      "equal": true,
+      "diff": {}
+    },
+    {
+      "id": "newgame-127",
+      "equal": true,
+      "diff": {}
+    }
+  ],
+  "setdefault_results": [
+    {
+      "id": "setdefault-0",
+      "equal": true,
+      "diff": {}
+    },
+    {
+      "id": "setdefault-1",
+      "equal": true,
+      "diff": {}
+    }
+  ],
+  "native_build_command": [
+    "C:\\msys64\\mingw64\\bin\\gcc.EXE",
+    "-std=c11",
+    "-O0",
+    "-Wall",
+    "-Wextra",
+    "-Werror",
+    "-shared",
+    "-I",
+    "D:\\Prog\\simant_recon\\build\\workers\\recovered_source_next5\\generated",
+    "D:\\Prog\\simant_recon\\portable\\tests\\recovered\\newgame_flow_probe.c",
+    "D:\\Prog\\simant_recon\\build\\workers\\recovered_source_next5\\generated\\recovered_state.c",
+    "D:\\Prog\\simant_recon\\build\\workers\\recovered_source_next5\\generated\\root_m384C_newgame.c",
+    "-o",
+    "D:\\Prog\\simant_recon\\build\\workers\\behavior_newgame_next5\\native.dll"
+  ],
+  "all_equal": true
+}

@@ -1,5 +1,8 @@
 #include "engine.h"
 #include "../../ui_model/windows/game_view.h"
+#ifdef SIMANT_ENABLE_BALLOON_STATE_NEXT3
+#include "balloon_adapter.h"
+#endif
 
 #include <setjmp.h>
 #include <stdarg.h>
@@ -18,9 +21,28 @@ extern void SetPause(int16_t pause);
 extern void SetMapPlane(int16_t plane);
 extern void SetMenuEntries(void);
 extern int16_t YellowCommandKey(int16_t key);
+#ifdef SIMANT_ENABLE_CONTROL_INIT_NEXT4
+extern void RandYard(void);
+#endif
 
 static _Thread_local SimRecoveredEngine *active_engine;
 static _Thread_local jmp_buf *active_abort_target;
+extern int16_t NewGame(int16_t option);
+
+int sim_recovered_engine_new_game_from_modal(SimRecoveredEngine *engine,
+                                             int16_t option, int16_t *result)
+{
+    if (engine == NULL || engine != active_engine || result == NULL ||
+        active_abort_target == NULL || !engine->recovered_binding_active ||
+        !engine->initialized || !engine->end_game_modal_active || option != 0)
+        return 0;
+#ifdef SIMANT_ENABLE_NEW_GAME_NEXT5
+    *result = NewGame(option);
+    return 1;
+#else
+    return 0;
+#endif
+}
 static void bind_dos_keyboard_flags(void);
 static int host_nest_event(void *context, const SimNestEvent *event);
 
@@ -631,22 +653,180 @@ void AntMenu(struct Event *event)
     unsupported_call("AntMenu");
 }
 FAIL_VOID1(DialogWaitInit, int16_t, mode)
+#ifdef SIMANT_ENABLE_BALLOON_STATE_NEXT3
+/* Pure source cue submission has no host effects. The next3 state profile
+ * supplies the otherwise omitted displayed/pending fields; rendering is a
+ * separate source boundary. The old next2 profile retains its named failure. */
+void EggBalloons(int16_t x, int16_t y, int16_t plane)
+{
+    sim_recovered_egg_balloons(x, y, plane);
+}
+void FightBalloons(int16_t x, int16_t y, int16_t plane)
+{
+    sim_recovered_fight_balloons(x, y, plane);
+}
+void QueenBalloons(int16_t x, int16_t y, int16_t plane)
+{
+    sim_recovered_queen_balloons(x, y, plane);
+}
+void RestBalloons(int16_t x, int16_t y, int16_t plane)
+{
+    sim_recovered_rest_balloons(x, y, plane);
+}
+#else
 FAIL_VOID3(EggBalloons, int16_t, x, int16_t, y, int16_t, plane)
-FAIL_VOID1(EndGameDialog, int16_t, code)
 FAIL_VOID3(FightBalloons, int16_t, x, int16_t, y, int16_t, plane)
+FAIL_VOID3(QueenBalloons, int16_t, x, int16_t, y, int16_t, plane)
+FAIL_VOID3(RestBalloons, int16_t, x, int16_t, y, int16_t, plane)
+#endif
+void EndGameDialog(int16_t code)
+{
+    SimGameOverInput input;
+    int completed;
+    (void)code; /* root_m0894's extra caller argument is ignored by S14. */
+    if (active_engine == NULL || active_engine->host.end_game == NULL)
+        unsupported_call("EndGameDialog");
+    memset(&input, 0, sizeof(input));
+    input.history_cursor = fd_50F6_04F4;
+    input.history_count = fd_3D57_0828;
+    memcpy(input.health_history, fd_50F6_073C, sizeof(input.health_history));
+    memcpy(input.blue_food_history, fd_50F6_0626,
+           sizeof(input.blue_food_history));
+    memcpy(input.red_food_history, fd_50F6_06AE,
+           sizeof(input.red_food_history));
+    input.food_total = fd_50F6_0FC2;
+    input.food_used = fd_50F6_1000;
+    input.blue_workers = fd_50F6_09FA;
+    input.red_workers = fd_50F6_0A00;
+    input.scenario = fd_50F6_0EAC;
+    input.blue_colony_score = fd_50F6_0A90;
+    input.colony_score_a = fd_50F6_0AC4;
+    input.colony_score_b = fd_50F6_0A9E;
+    memcpy(input.tutorial_marks, fd_3D57_00A4, sizeof(input.tutorial_marks));
+    input.health = MeHealth;
+    input.world_ticks = fd_50F6_0C26;
+    input.losing_side = fd_50F6_0366;
+    input.sound_enabled = fd_3D57_07A8[1] != 0;
+    input.screen_width = (uint16_t)g_3DB2;
+    if (active_engine->end_game_modal_active)
+        unsupported_call("recursive EndGameDialog");
+    active_engine->end_game_modal_active = 1;
+    completed = active_engine->host.end_game(active_engine->host.context, &input,
+                                              &active_engine->session->rng);
+    active_engine->end_game_modal_active = 0;
+    if (!completed)
+        interrupt_tick(SIM_RECOVERED_ENGINE_HOST_REJECTED, "EndGameDialog");
+}
+#ifndef SIMANT_ENABLE_NEW_GAME_NEXT5
 int16_t NewGame(int16_t option)
 {
     (void)option;
     unsupported_call("NewGame");
     return 0;
 }
+#endif
+#ifdef SIMANT_ENABLE_NEW_GAME_NEXT5
+extern void win_CasteControlChanged(void);
+extern void win_ModeControlChanged(void);
+
+/* S15's source wrappers preserve these ordered calls around the source
+ * control-state routines selected from root:m0798. */
+void OpenCasteWindow(void)
+{
+    win_CasteControlChanged();
+    win_Open(0x1300);
+}
+
+void OpenModeWindow(void)
+{
+    win_ModeControlChanged();
+    win_Open(0x1200);
+}
+
+void OpenEditWindow(void)
+{
+    /* root:20E8:04B6 is the reviewed source alias for win_Open. */
+    win_Open(0);
+}
+
+/* The original helper accepts one packed int16 result per modal call. The
+ * source NewGame consumes the result codes itself, including tutorial 0x207. */
+int16_t DoScenario(int16_t flag)
+{
+    int16_t result;
+    if (active_engine == NULL || active_engine->host.scenario_select == NULL)
+        unsupported_call("DoScenario");
+    if (!active_engine->host.scenario_select(active_engine->host.context,
+                                             (int16_t)flag, &result))
+        interrupt_tick(SIM_RECOVERED_ENGINE_HOST_REJECTED, "DoScenario");
+    return result;
+}
+
+/* The 0x207 branch enters the original LoadGame file service. */
+int16_t o09_35F5_0000(int16_t a, int16_t b)
+{
+    (void)a;
+    (void)b;
+    unsupported_call("LoadGame (o09_35F5_0000)");
+    return 0;
+}
+
+void f_015B_053C(int16_t plane)
+{
+    /* layout/symbols.json records this source alias as SetMapPlane. */
+    SetMapPlane(plane);
+}
+
+int16_t f_22BF_0A65(void)
+{
+    /* Tutorial scenario uses an implicit historical fastcall register input
+     * to query zoom state. Its native call boundary must be made explicit
+     * before it can safely consume the source window model. */
+    unsupported_call("NewGame tutorial zoom-state fastcall boundary");
+    return 0;
+}
+
+void o26_39C7_0000(void)
+{
+    unsupported_call("NewGame tutorial zoom-window boundary");
+}
+
+void SetEditWinTitle(char *title)
+{
+    (void)title; /* Source SetDefaultWindows passes NULL; root:m0250 reads DATA. */
+    window_operation(SIM_RECOVERED_WINDOW_SET_EDIT_TITLE_FROM_SCENARIO,
+                     1, (uintptr_t)(intptr_t)fd_50F6_0EAC, 0, 0,
+                     "SetEditWinTitle");
+    if (win_IsWinOpen(0)) {
+        clip_Push();
+        clip_SetWin(0);
+        window_operation(SIM_RECOVERED_WINDOW_DRAW_EDIT_TITLE_OBJECT,
+                         1, 0, 0, 0, "SetEditWinTitle/draw");
+        clip_Pop();
+    }
+}
+
+void YardToMap(void)
+{
+    win_MakeGroupUnselected(0x100, 2);
+    if (!win_IsWinOpen(0x100)) {
+        if (win_IsWinOpen(0x1900)) {
+            SetMapPlane(1);
+            win_Swap(0x1900, 0x100);
+        } else {
+            win_Open(0x100);
+        }
+    }
+}
+#else
 FAIL_VOID0(OpenCasteWindow)
 FAIL_VOID0(OpenEditWindow)
+#endif
 FAIL_VOID0(OpenInfoWindow)
 FAIL_VOID0(OpenMapYard)
+#ifndef SIMANT_ENABLE_NEW_GAME_NEXT5
 FAIL_VOID0(OpenModeWindow)
-FAIL_VOID3(QueenBalloons, int16_t, x, int16_t, y, int16_t, plane)
-FAIL_VOID3(RestBalloons, int16_t, x, int16_t, y, int16_t, plane)
+#endif
 FAIL_VOID0(ScoreDialog)
 FAIL_VOID1(SetSimCursor, int16_t, cursor)
 FAIL_VOID0(SpiderDialog)
@@ -669,7 +849,49 @@ void f_1FD2_04D0()
     unsupported_call("f_1FD2_04D0");
 }
 FAIL_VOID1(f_20E8_0725, int16_t, window)
+#ifdef SIMANT_ENABLE_CONTROL_INIT_NEXT4
+/* The selected source control bodies own their globals. Only resource-size
+ * lookup and release of an actual host-owned animation cross this boundary. */
+void f_208F_0419(struct Pt *size, int16_t id)
+{
+    SimSetupHooks *hooks;
+    int16_t width, height;
+    if (active_engine == NULL || size == NULL)
+        unsupported_call("f_208F_0419 resource-size arguments");
+    hooks = &active_engine->session->setup_hooks;
+    if (hooks->resource_size == NULL ||
+        !hooks->resource_size(hooks->context, (uint16_t)id, 2,
+                              &width, &height))
+        interrupt_tick(SIM_RECOVERED_ENGINE_HOST_REJECTED,
+                       "f_208F_0419 resource size");
+    size->x = width;
+    size->y = height;
+}
+
+void hanim_RemoveAnimSet(void *handle)
+{
+    size_t i;
+    if (active_engine == NULL || handle == NULL)
+        unsupported_call("hanim_RemoveAnimSet arguments");
+    for (i = 0; i < 2; ++i) {
+        SimSessionControlVisual *visual = &active_engine->session->controls[i];
+        if (visual->animation_resource == handle) {
+            if (visual->release_animation == NULL)
+                unsupported_call("hanim_RemoveAnimSet unowned animation");
+            visual->release_animation(handle);
+            visual->animation_resource = NULL;
+            visual->release_animation = NULL;
+            visual->active = 0;
+            return;
+        }
+    }
+    unsupported_call("hanim_RemoveAnimSet unknown animation");
+}
+#else
+#ifndef SIMANT_ENABLE_NEW_GAME_NEXT5
 FAIL_VOID0(initControls)
+#endif
+#endif
 FAIL_VOID0(o12_384C_100A)
 
 #undef FAIL_VOID0
@@ -818,8 +1040,20 @@ SimRecoveredEngineStatus sim_recovered_engine_action(
     int16_t a, int16_t b)
 {
     SimRecoveredBridgeStatus bridge_status;
+    SimNestStatus nest_status;
     jmp_buf abort_target;
     int jumped;
+#ifdef SIMANT_ENABLE_END_GAME_ACTION_DIAGNOSTIC
+    const int needs_nest = action == SIM_RECOVERED_ACTION_RAND_YARD ||
+                          action == SIM_RECOVERED_ACTION_DIAGNOSTIC_END_GAME;
+    const SimRecoveredAction last_action = SIM_RECOVERED_ACTION_DIAGNOSTIC_END_GAME;
+    if (action == SIM_RECOVERED_ACTION_DIAGNOSTIC_END_GAME) {
+        if (a != 0 || b != 0) return SIM_RECOVERED_ENGINE_INVALID_ARGUMENT;
+    }
+#else
+    const int needs_nest = action == SIM_RECOVERED_ACTION_RAND_YARD;
+    const SimRecoveredAction last_action = SIM_RECOVERED_ACTION_RAND_YARD;
+#endif
     if (engine == NULL || !engine->initialized || engine->session == NULL)
         return SIM_RECOVERED_ENGINE_INVALID_ARGUMENT;
     if (engine->status != SIM_RECOVERED_ENGINE_OK)
@@ -832,8 +1066,12 @@ SimRecoveredEngineStatus sim_recovered_engine_action(
             (a < 0 || a >= (engine->recovered.MapPlane <= 1 ? 128 : 64) ||
                                                 b < 0 || b >= 64)) ||
         (action == SIM_RECOVERED_ACTION_MAP_PLANE && (a < 0 || a > 3)) ||
+        (action == SIM_RECOVERED_ACTION_RAND_YARD &&
+            (a < 0 || a > 3 || b != 0)) ||
         action < SIM_RECOVERED_ACTION_PAUSE ||
-        action > SIM_RECOVERED_ACTION_MAP_PLANE)
+        action > last_action)
+        return SIM_RECOVERED_ENGINE_INVALID_ARGUMENT;
+    if (needs_nest && !prepare_nest_clock(engine, NULL))
         return SIM_RECOVERED_ENGINE_INVALID_ARGUMENT;
 
     engine->rng_before_tick = engine->session->rng;
@@ -854,6 +1092,8 @@ SimRecoveredEngineStatus sim_recovered_engine_action(
     bind_dos_keyboard_flags();
     recovered_rng_bind(&engine->session->rng);
     sim_recovered_audio_bind(&engine->audio_binding);
+    if (needs_nest)
+        sim_recovered_nest_bind(&engine->nest_binding);
     engine->recovered_binding_active = 1;
     recovered_bind_begin(&engine->binding_frame, &engine->recovered);
     switch (action) {
@@ -873,6 +1113,22 @@ SimRecoveredEngineStatus sim_recovered_engine_action(
     case SIM_RECOVERED_ACTION_MAP_PLANE:
         SetMapPlane(a);
         break;
+    case SIM_RECOVERED_ACTION_RAND_YARD:
+#ifdef SIMANT_ENABLE_CONTROL_INIT_NEXT4
+        /* This is the RandYard call boundary, not the surrounding NewGame UI
+         * flow. No state reinitialization or RNG reseeding is performed. */
+        fd_50F6_0EAC = a;
+        RandYard();
+        break;
+#else
+        unsupported_call("RandYard requires selected source initControls");
+        break;
+#endif
+#ifdef SIMANT_ENABLE_END_GAME_ACTION_DIAGNOSTIC
+    case SIM_RECOVERED_ACTION_DIAGNOSTIC_END_GAME:
+        EndGameDialog(0);
+        break;
+#endif
     default:
         interrupt_tick(SIM_RECOVERED_ENGINE_INVALID_ARGUMENT,
                        "invalid source action");
@@ -881,9 +1137,18 @@ SimRecoveredEngineStatus sim_recovered_engine_action(
     engine->recovered_binding_active = 0;
     if (!sim_recovered_audio_unbind(&engine->audio_binding))
         abort();
+    if (needs_nest) {
+        nest_status = sim_recovered_nest_unbind(&engine->nest_binding);
+        if (engine->nest_binding.calls != 0 && nest_status != SIM_NEST_OK) {
+            engine->status = SIM_RECOVERED_ENGINE_NEST_ERROR;
+            engine->failed_service = "source action nest transition";
+        }
+    }
     recovered_rng_bind(NULL);
     active_abort_target = NULL;
     active_engine = NULL;
+    if (engine->status != SIM_RECOVERED_ENGINE_OK)
+        return engine->status;
     bridge_status = sim_session_from_recovered_state(engine->session,
                                                      &engine->recovered);
     if (bridge_status != SIM_RECOVERED_BRIDGE_OK) {
@@ -899,6 +1164,8 @@ interrupted_action:
         engine->recovered_binding_active = 0;
     }
     (void)sim_recovered_audio_unbind(&engine->audio_binding);
+    if (needs_nest)
+        (void)sim_recovered_nest_unbind(&engine->nest_binding);
     recovered_rng_bind(NULL);
     engine->session->rng = engine->rng_before_tick;
     engine->audio_intents = engine->audio_before_tick;

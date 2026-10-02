@@ -1,0 +1,73 @@
+{
+  "schema": "menu-quit-dos-native-differential-v1",
+  "status": "PASS",
+  "claim": "frozen DOS MenuQuit/o15_384C_0239 flow compared to source-derived native C model; resource/font/window/input/save/terminal I/O are explicit deterministic host boundaries",
+  "source": {
+    "path": "src/S15/m384C.c",
+    "sha256": "01b51eecedcd28e2213819572c846a9754039f4a527e6da5e56e57783398bdd5"
+  },
+  "native": {
+    "model": "portable/ui_model/dialogs/menu_quit.c",
+    "sha256": "bb96f6689d6a91badf9d1833718868f4d22082d1a191462da6d65ca21cc163f2",
+    "header_sha256": "b1df69b58680e903afc6889ac481fb774851f164d8d47a2429942b90aa880a0f",
+    "probe_sha256": "1927011093a03d242379fe07602f066cee62ef0e81e05cfb27a9b11bbf7f1be8"
+  },
+  "oracle": {
+    "exe_sha256": "aa0596c6766322a8229ee3c36e57048c92adc82d50fbe2ef37afb8b85fcf4f11",
+    "harness_sha256": "2c0799048057f59eae61a48be4d695278635594484adf0c70bf46c51b4e0c799",
+    "target": {
+      "unit": "S15",
+      "seg": 14412,
+      "off": 494,
+      "size": 75,
+      "region": "game_or_library",
+      "extent": "DESCENT",
+      "evidence": [
+        "vector"
+      ],
+      "name": "MenuQuit"
+    }
+  },
+  "resource": {
+    "database": "assets/SHARED",
+    "id": 128,
+    "kind": 10,
+    "record_length": 165,
+    "record_sha256": "5fbac78fcb2339e22946b4173ef3f27330955c7299a3e2000802218289498785"
+  },
+  "counts": {
+    "cases": 18,
+    "executed_dos": 18,
+    "executed_native": 18,
+    "mismatches": 0
+  },
+  "ledger": {
+    "path": "portable/tests/dialogs/evidence/menu-quit-dos-native-20261002.jsonl.gz",
+    "sha256": "623868e11869ad6b0cf729512260ce4c668b407717620726527cd0fa457205c2",
+    "rows": 18
+  },
+  "native_binary": {
+    "path": "build/portable/menu-quit-differential/menu-quit-probe.dll",
+    "sha256": "0f66d7e767a631356fb1f1cf0be5193c9fc161341ac9ddd8c46246a393aad31a",
+    "retention": "local ignored build product; rebuild from pinned sources"
+  },
+  "compared_effects": [
+    "ordered resource/window/font/frame/color/text/input/resource cleanup/save/terminal notice calls",
+    "terminal exit versus cancellation return",
+    "dirty state word preservation",
+    "source kind-10 message bytes"
+  ],
+  "limitations": [
+    "SaveGame disk I/O, native window/resource ownership, actual keyboard/window delivery, and process termination are controlled typed host boundaries; this packet verifies MenuQuit orchestration and prompt semantics, not those host implementations."
+  ],
+  "inputs_sha256": {
+    "portable/ui_model/dialogs/menu_quit.c": "bb96f6689d6a91badf9d1833718868f4d22082d1a191462da6d65ca21cc163f2",
+    "portable/ui_model/dialogs/menu_quit.h": "b1df69b58680e903afc6889ac481fb774851f164d8d47a2429942b90aa880a0f",
+    "portable/game/resources/database.c": "de237a7b134c1d938a334f504a5f9abb9f10f3da33ee931ef58d3dfca3c708aa",
+    "portable/tests/dialogs/menu_quit_probe.c": "1927011093a03d242379fe07602f066cee62ef0e81e05cfb27a9b11bbf7f1be8",
+    "portable/tests/dialogs/menu_quit_probe.h": "0811347e191b61c74b0904253faa7fac7b1bb94c48ebd0c709a6d1b4a214ead2",
+    "portable/tests/dialogs/test_menu_quit.c": "93cd7964b5ce2b04e3afe9789f9092f4f2ec24950e6597d3349163e9061316cf",
+    "portable/tests/dialogs/run_menu_quit_differential.py": "16745b67ff56fb1dbfb8117cb8cb35af4adb3dcb6652a5472c7e282114ce0674",
+    "src/S15/m384C.c": "01b51eecedcd28e2213819572c846a9754039f4a527e6da5e56e57783398bdd5"
+  }
+}

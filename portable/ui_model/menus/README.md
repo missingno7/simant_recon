@@ -18,12 +18,24 @@ the source gap formula and returns title positions/rectangles. Text commands
 retain the menu bytes and identify whether `f_1FD2_0008` must clear the first
 byte's high bit and select color mode 3. `src/S17/m384C.c:o17_384C_0184`
 supplies the associated region ID `index - 0x200` and rectangle dimensions.
-The host still owns font/palette callbacks and raster output. Pull-down menus,
-keyboard menu navigation, and click dispatch remain unsupported.
+The host still owns font/palette callbacks and raster output. The separate
+`interaction.c` model implements the recovered title-targeted pull-down loop
+from `src/S10/m35F5.c:o10_35F5_0384`: it builds the source dropdown and row
+rectangles, selects the first enabled row, tracks pointer/key/event inputs,
+and returns the source command ID. `portable_menu_interaction_init_from_bar`
+connects the interaction model to a parsed resource menu and draw-plan title
+rectangles; `portable_menu_title_hit` exposes the source title hit test.
+Popup/context menus (`menu_index == -1`), SDL event collection, and dropdown
+raster drawing remain host/unsupported boundaries. The finite differential
+does not establish full menu-system equivalence.
 
-The focused test is source-derived and checks the actual asset parser, mutation
-addressing, safe string replacement, and draw-plan equations. It is not an
-original-DOS differential.
+The focused model test is source-derived and checks the actual asset parser,
+mutation addressing, safe string replacement, and draw-plan equations. The
+separate interaction runner compares the native model with original DOS
+`o10_35F5_0384` across directed key, mouse, disabled/separator, cancellation,
+and forwarded-event cases; it also checks title edges and state gating against
+the real SHARED menu resource. These tests do not claim complete menu-system
+equivalence.
 
 Run the reproducible strict test and create its pinned receipt with:
 
@@ -32,6 +44,14 @@ python portable/tests/menus/run_menu_model.py
 ```
 
 The receipt is written to `build/portable/menu-model/menu-model-test.json`.
+
+Run the source-backed menu interaction differential with:
+
+```powershell
+python portable/tests/menus/run_menu_interaction_differential.py
+```
+
+Its pinned receipt is `portable/tests/menus/evidence/menu-interaction-differential.json`.
 
 Pinned inputs used by the test:
 

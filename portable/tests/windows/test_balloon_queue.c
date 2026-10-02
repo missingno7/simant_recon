@@ -37,9 +37,6 @@ static int16_t next_random(void *context, PortableBalloonRandomFamily family)
 {
     Fixture *fixture = context;
     assert(fixture->random_at < fixture->random_count);
-    fprintf(stderr, "random call %zu family %d expected %d\n",
-            fixture->random_at, (int)family,
-            (int)fixture->random_families[fixture->random_at]);
     if (fixture->random_families[fixture->random_at] != family)
         fprintf(stderr, "S-RNG order mismatch at %zu: expected %d, got %d\n",
                 fixture->random_at,
@@ -229,7 +226,12 @@ static void test_rest_uses_srand64_for_timer(void)
     PortableBalloonViewport viewport = view();
     PortableBalloonServices api;
     Fixture fixture;
+    unsigned i;
     memset(&frame, 0, sizeof(frame));
+    /* Zero is a valid pending coordinate and activates an inactive cue.
+     * Isolate the rest timer with the source's absent-cue sentinel. */
+    for (i = 0; i < PORTABLE_BALLOON_CUE_COUNT; ++i)
+        frame.cue[i].pending = (PortableBalloonPoint){-1, -1};
     init_fixture(&fixture);
     fixture.ticks[0] = 1000;
     fixture.ticks[1] = 1000;

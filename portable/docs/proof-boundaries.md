@@ -5,6 +5,11 @@ below do not change its EXACT or BEHAVIOR_EXACT categories. Each comparison is
 finite and applies to the input versions and observables recorded in its report.
 Source changes require review and a relevant rerun before a current claim.
 
+The [41-suite native gate](../tests/evidence/native-unit-gate-41-20261002.json)
+adds the EndGame flow and resource-backed view checks to the previous gate.
+It compiles 52 shared translation units and records the actual SDL host run.
+These are native regression checks, not original-DOS equivalence proofs.
+
 | Native boundary | Evidence | Current limit |
 | --- | --- | --- |
 | SDL3 input, indexed presentation and clock | Real SDL queue tests and independent BMP inspection of 224,000 pixels | Host boundary only; CPU-exported framebuffer, no DOS VGA comparison |
@@ -48,7 +53,7 @@ semantics before it can become a production core.
 The next2 source profile has now passed three consecutive 256-tick DOS
 comparisons (768 ticks), with 370 nonpointer globals, both RNG states and
 ordered host arguments checked at every tick. See the
-[current next2 replay](../research/core-proof/original-256-tick-summary-next2-lazy-clock-20261002.json).
+[current next2 replay](../research/core-proof/original-256-tick-summary-next2-lazy-clock-final-20261002.json).
 The original captures retain their earlier profile provenance; next2 has the
 same header and 23 game bodies, with separately recorded initializer changes.
 The full-state fixtures are research inputs, never native startup data.
@@ -63,7 +68,7 @@ snapshot hydration. Pointer-valued resources and the stated UI boundary stay
 outside that comparison. Source DATA overlaps now share backing storage, and
 the scalar initializer audit records exact-span readable declarations.
 
-The [39-suite native gate](../tests/evidence/native-unit-gate-39-20261002.json)
+The [43-suite native gate](../tests/evidence/native-unit-gate-43-20261002.json)
 and the real SDL host checks pass at their pinned input versions. They are
 unit/integration checks, separate from DOS behavioral proof. Window opening,
 picture modals, ribbon text and live actions require their own host contracts;
@@ -105,3 +110,106 @@ The [corrected CalcScore report](../tests/dialogs/evidence/calcscore-original-do
 retains its original passing predecessor. Source alias review confirms that
 `EndGameDialog` continues with `NewGame(0)` and calls `MenuQuit` on a negative
 result. Its unresolved services concern that modal/restart/quit lifecycle.
+
+The separate [EndGame flow comparison](../tests/dialogs/evidence/end-game-dos-native-flow-20261002.json)
+matches five controlled original-DOS/native cases, including callback order,
+closing, delayed SongDone, SRand2 consumption, NewGame and MenuQuit requests.
+Its callbacks are controlled services. It does not certify live SDL modal
+events, resource rendering, restart, save, or quit implementations. The native
+resource-backed view has its own regression cases in the 41-suite gate.
+
+The [balloon cue packet](../tests/recovered/evidence/balloon-adapter-dos/README.md)
+records 164 original-DOS/native state matches and four detected negative
+controls. The next3 profile supplies twelve omitted source fields while
+preserving all 23 next2 generated bodies and prior field initializers. Cue
+submission emits no host calls. Visible frames and the timer/RNG-driven message
+selection remain separate boundaries; this packet does not replace the frozen
+DrawBalloons contract. The [profile recipe](recovered-source-next3-recipe.md)
+and [build-input controls](../tests/recovered/evidence/next3-profile-build-input-controls-20261002.json)
+record reproduction and identity rejection checks.
+
+The [next3 replay](../research/core-proof/original-256-tick-summary-next3-common370-20261002.json)
+also passes 768 ticks over the same 370-field comparison boundary. Its twelve
+new cue fields are excluded from those old captures, and no cue was activated
+in the three streams. The 164-case cue packet supplies separate state evidence.
+
+The [setup reuse proof](../tests/setup/evidence/setup_reuse_differential_report.json)
+shows that initControls copies mutable DATA defaults into current levels and
+only preset row zero. Rows one through three and private selectors survive
+reuse. The [refreshed startup proof](../tests/core/evidence/randyard-session-startup-setup-reset-20261002.json)
+checks 146 source ranges and RNG tails after that correction. These reports
+retain exact input versions and preserve their predecessors.
+
+The selected next4 controls have a [direct DOS packet](../tests/recovered/evidence/controls-next4/README.md)
+and [profile recipe](recovered-source-next4-recipe.md). Their session bridge and
+actual engine RandYard entry need separate integration checks; the controls
+packet alone does not certify either boundary.
+
+The [scenario flow differential](../tests/dialogs/evidence/scenario-flow-differential.json)
+passes 274 cases with ordered timer/key/event calls, including signed clock
+transitions. Its [SDL modal test](../tests/dialogs/evidence/scenario-modal-host.json)
+checks actual resource selection, Escape, quit cleanup and framebuffer restore.
+File loading after event 0x0207 is outside that modal.
+
+The [balloon queue packet](../tests/windows/evidence/balloon-queue-v1/README.md)
+compares 107 AddMsgBalloon cases and 55 DrawCurBalloons cases against DOS,
+including timer/RNG ordering and a signed timer boundary. Tables in that suite
+are controlled fixtures; full resource-backed balloon raster integration is
+still separate.
+
+The [matched next4 SDL EndGame smoke](../tests/live_game/evidence/end-game-modal-smoke-next4.json)
+opens, renders and closes resource 0x0400 with actual SDL Escape input and
+reaches the named NewGame(0) boundary. It checks production input identities
+and stable dependencies. It does not prove automatic game-over triggering,
+restart, save or quit; the selected source continuation is being integrated.
+
+The [selected NewGame flow packet](../tests/recovered/evidence/newgame-flow-next5/README.md)
+compares 128 NewGame cases and two SetDefaultWindows cases against original
+DOS execution. RandYard and UI leaves are controlled callbacks. Two volatile
+fastcall values are captured from the DOS lane and replayed at native service
+boundaries, so that packet does not independently prove their native values.
+The [16-case ABI probe](../tests/recovered/evidence/newgame-zoom-abi/report.json)
+separately executes the original query and clip_Off bodies and establishes
+window 0 as the implicit argument for this NewGame tutorial callsite.
+
+The [next6 live restart smoke](../tests/live_game/evidence/newgame-202-live-smoke-forced-next6-pass.json)
+uses a compile-only diagnostic engine action to enter EndGame on the test
+session. Physical SDL Escape dismisses that modal; a resource-derived click
+selects scenario 0x0202. Actual source NewGame/RandYard return normally, and
+the child completes a simulation tick. This host check does not compare DOS
+state or pixels, prove a natural game-over trigger, or cover tutorial, load,
+save and quit. Its failed predecessors retain the missing dismissal,
+UpdateEdit and SetMapTitle boundaries. The report pins its exact native build;
+later source/profile edits make it historical evidence, not a current receipt.
+
+The startup bridge now retains fd_50F6_0B22 from the resource-backed sine
+table, matching initStuff's kind-9 object-1000 lifetime. Actual RandYard uses
+that pointer through fracSIN/fracCOS. The next6/next7 explicit RNG sequencing
+is documented in [compiler lowerings](compiler-lowerings.md); passing
+source-order controls alone does not establish whole-RandYard equivalence.
+
+The [next7 captured replay](../research/core-proof/original-256-tick-summary-next7-captured370-20261002.json)
+passes 768 preserved DOS tick boundaries for 370 fields, both RNG streams,
+and ordered callback traces. Its other 41 profile fields are explicitly
+excluded. The captures were not regenerated; the report retains capture,
+producer, compiler-input, object, executable, and dependency-closure identities.
+It uses static nest-clock samples and does not certify live UI callbacks.
+
+The [menu interaction packet](../tests/menus/evidence/menu-interaction-differential.json)
+compares 13 original-DOS/native directed input sequences, including navigation,
+disabled/separator rows, accelerators, cancellation, selection, and forwarded
+events. The real SHARED resource supplies title hit geometry. Rendering and
+SDL event collection have separate boundaries. The MenuQuit and zoom models
+also have finite controlled-service differentials; their host implementations
+must be reviewed before they are connected to live gameplay.
+
+The [next7 natural restart smoke](../tests/live_game/evidence/natural-gameover-fast-202-live-smoke.json)
+uses physical Shift+4 to select source speed 3, preserving the logical clock.
+The actual simulation calls EndGame at completed tick 2,879 (world tick 2,880),
+then SDL Escape and a resource-derived scenario-0x0202 click return through
+source NewGame. The run continues to tick 3,798 before a test-only Quit event.
+No diagnostic EndGame action is used. Native inputs remain stable and source
+modal/RNG snapshots are retained. This is a bounded host integration test,
+not a DOS state/pixel comparison or a save/quit implementation claim. The
+earlier 58-second default-speed timeout is preserved; source pacing makes
+that timeout insufficient to reach the game-over point.

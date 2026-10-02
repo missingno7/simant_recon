@@ -29,8 +29,9 @@ not be replaced with no-op hooks to make startup appear complete.
 The explicitly selected source-reuse profile has passed three 256-tick
 consecutive differentials against DOS (768 ticks total). Every tick compares
 370 nonpointer globals, both RNG states, and ordered host callback arguments.
-The retained [tick proof](research/core-proof/original-256-tick-summary-next2-lazy-clock-20261002.json)
-records the exact profile and finite domains. A separate resource-backed
+The current [next7 tick proof](research/core-proof/original-256-tick-summary-next7-captured370-20261002.json)
+records the exact profile and finite domains. It excludes the 41 next7 fields
+absent from those preserved captures. A separate resource-backed
 NewGame comparison covers 146 source ranges and both RNG output streams,
 without hydrating the native session from a DOS memory snapshot. These checks
 do not certify the remaining interactive host services; the live integration
@@ -58,8 +59,8 @@ python portable/tools/verify_evidence.py
 ```
 
 An explicit generated profile may be linked with
-`python portable/build.py --core-profile build/workers/recovered_source_next2/generated`.
-First follow the [profile recipe](docs/recovered-source-next2-recipe.md) to
+`python portable/build.py --core-profile build/workers/recovered_source_next7/generated`.
+First follow the [profile recipe](docs/recovered-source-next7-recipe.md) to
 recreate the reviewed generated inputs. The build checks the frozen historical
 checkpoint and recorded source/profile identities, and keeps the generated
 modules' warning policy separate from strict native host compilation. It does
@@ -84,8 +85,15 @@ unverified. Menu text/state and its BIOS-font bar are rendered from the actual
 SHARED resource. The nest overview uses the DOS selector-to-pixel conversion
 and draws behind the front Edit window. The source yellow-ant key handler is
 connected; supported and unhandled keys retain its logical result. Other
-interactive UI routes and the game-over restart/quit
-flow remain unfinished. The retained SDL event tests and DOS/native click
+interactive UI routes remain unfinished. A bounded SDL test enters the source
+game-over flow, dismisses its window, selects scenario 0x0202, and returns
+through source NewGame to a simulation tick. The natural game-over trigger,
+tutorial/load/save/quit routes, and complete control-window composition still
+need integration checks. A separate natural-trigger host test reaches game
+over at completed tick 2,879 after physical Shift+4 selects the source's fastest
+speed. It dismisses EndGame, restarts scenario 0x0202, and continues to tick
+3,798 before a test-only Quit event. This is a finite live-host check. The
+retained SDL event tests and DOS/native click
 comparison state their exact coverage in [proof boundaries](docs/proof-boundaries.md).
 
 Original resources remain in ignored `assets/`. Their identities are recorded in

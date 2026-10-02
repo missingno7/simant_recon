@@ -6,6 +6,7 @@
 #include "audio_adapter.h"
 #include "nest_adapter.h"
 #include "session_bridge.h"
+#include "../../ui_model/dialogs/game_over.h"
 
 typedef enum SimRecoveredQuery {
     SIM_RECOVERED_QUERY_WINDOW_OPEN = 1,
@@ -71,7 +72,11 @@ typedef enum SimRecoveredWindowOperation {
     SIM_RECOVERED_WINDOW_SET_MENU_ITEM_TEXT,
     SIM_RECOVERED_WINDOW_UPDATE_EDIT_IF_OPEN,
     SIM_RECOVERED_WINDOW_DRAW_BITMAP,
-    SIM_RECOVERED_WINDOW_PRINTF_AT_OBJECT
+    SIM_RECOVERED_WINDOW_PRINTF_AT_OBJECT,
+    /* SetEditWinTitle's source DATA expression is "SimAnt" + fd_0368[15] +
+     * fd_0324[scenario]; the host resolves that text from loaded resources. */
+    SIM_RECOVERED_WINDOW_SET_EDIT_TITLE_FROM_SCENARIO,
+    SIM_RECOVERED_WINDOW_DRAW_EDIT_TITLE_OBJECT
 } SimRecoveredWindowOperation;
 
 /* Source arguments are retained as machine-sized values. Pointer arguments
@@ -91,6 +96,17 @@ typedef int (*SimRecoveredQueryProvider)(void *context,
                                         int32_t *value);
 typedef int (*SimRecoveredEffectProvider)(void *context,
                                          const SimRecoveredEffect *effect);
+/* Synchronous source EndGameDialog. The input is a snapshot of its current
+ * TLS operands and the RNG is borrowed for the modal flow's SRand2 call.
+ * Success includes NewGame(0) and any resulting MenuQuit continuation. */
+typedef int (*SimRecoveredEndGameProvider)(void *context,
+                                           const SimGameOverInput *input,
+                                           SimRng *rng);
+/* Synchronously runs the source DoScenario(flag) modal selector and returns
+ * its raw DOS result code through dos_result. Return zero to reject/fail the
+ * active recovered call; an absent provider fails as unsupported DoScenario. */
+typedef int (*SimRecoveredScenarioSelectProvider)(void *context, int16_t flag,
+                                                  int16_t *dos_result);
 
 typedef struct SimRecoveredHost {
     void *context;
@@ -101,6 +117,11 @@ typedef struct SimRecoveredHost {
     int audio_driver_ready;
     uint16_t screen_width; /* Source g_3DB2: 320 or 640. */
     uint8_t hardware_profile; /* Source g_5A97, supplied by the window host. */
+    /* Optional until this host implements the entire source modal flow;
+     * reaching EndGameDialog without it is an explicit terminal failure. */
+    SimRecoveredEndGameProvider end_game;
+    /* Required only when generated NewGame reaches DoScenario. */
+    SimRecoveredScenarioSelectProvider scenario_select;
 } SimRecoveredHost;
 
 typedef enum SimRecoveredEngineStatus {
@@ -120,7 +141,15 @@ typedef enum SimRecoveredAction {
     SIM_RECOVERED_ACTION_SPEED,
     SIM_RECOVERED_ACTION_PAN, /* Target center cell, source CenterEdit. */
     SIM_RECOVERED_ACTION_SCROLL, /* Source f_0250_0D10 pixel-cell delta. */
-    SIM_RECOVERED_ACTION_MAP_PLANE
+    SIM_RECOVERED_ACTION_MAP_PLANE,
+    /* Actual source RandYard, preserving the existing recovered state image.
+     * a is the caller's scenario (0..3), b must be zero. Requires next4. */
+    SIM_RECOVERED_ACTION_RAND_YARD
+#ifdef SIMANT_ENABLE_END_GAME_ACTION_DIAGNOSTIC
+    /* Test executable only: invoke the source EndGame contract directly on
+     * its dedicated session. This does not prove the natural trigger. */
+    , SIM_RECOVERED_ACTION_DIAGNOSTIC_END_GAME
+#endif
 } SimRecoveredAction;
 
 /* Source Event is eight packed 16-bit words. These offsets match
@@ -153,6 +182,7 @@ typedef struct SimRecoveredEngine {
     uint64_t completed_ticks;
     uint8_t initialized;
     uint8_t recovered_binding_active;
+    uint8_t end_game_modal_active;
 } SimRecoveredEngine;
 
 typedef enum SimRecoveredEngineInitStatus {
@@ -211,6 +241,13 @@ SimRecoveredEngineStatus sim_recovered_engine_yellow_command_key(
  * callback, including writes made earlier in the current recovered call. */
 int sim_recovered_engine_snapshot(const SimRecoveredEngine *engine,
                                   RecoveredState *snapshot);
+
+/* Synchronous EndGame continuation only. Calls the selected source NewGame
+ * with the currently bound TLS/RNG/host services; never rebuilds or reseeds
+ * the session. Other call sites are rejected. Source failures propagate to
+ * the enclosing engine call's existing abort boundary. Requires next5. */
+int sim_recovered_engine_new_game_from_modal(SimRecoveredEngine *engine,
+                                             int16_t option, int16_t *result);
 
 /* Audio requests produced by source calls remain queued as typed intents for
  * the host audio layer. */

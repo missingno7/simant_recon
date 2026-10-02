@@ -244,6 +244,7 @@ static const SimRecoveredProjectionEntry projection[] = {
     MAP("fd_3D57_0C12", "spider.direction", "fd_3D57_0C12"),
     MAP("fd_50F6_06AC", "spider.aux_mode", "fd_50F6_06AC"),
     MAP("g_5AAC", "session.sine_q15", "native sine pointer"),
+    MAP("fd_50F6_0B22", "session.sine_q15", "initStuff: retained kind-9 resource 1000, used by fracSIN/fracCOS"),
     MAP("AdviceStrs / fd_50F6_034C", "session.advice", "PrepareStrings: retained SHARED kind-4 tables 1020 and 1010; separately typed void* pointer backing"),
     MAP("fd_3D57_07A8[5] / fd_3D57_07B2", "options runtime state (not session-owned)", "one alias; source DATA defaults {0,1,1,1,1,0} survive fresh import; S11 menu and S09 save mutate it outside NewGame/this bridge"),
 };
@@ -663,6 +664,9 @@ SimRecoveredBridgeStatus sim_recovered_state_from_session(
     s->fd_3D57_0C12 = session->spider.direction;
     s->fd_50F6_06AC = session->spider.aux_mode;
     s->g_5AAC = session->sine_q15;
+    /* initStuff (root:075B) locks kind-9 object 1000 and retains its
+     * table pointer. fracSIN/fracCOS use this separate source global. */
+    s->fd_50F6_0B22 = session->sine_q15;
     return SIM_RECOVERED_BRIDGE_OK;
 }
 
