@@ -243,8 +243,15 @@ window can cover them. Complete control interaction remains separate.
 The [legacy save codec](../tests/save/evidence/legacy-save-codec-v1/README.md)
 validates the source-derived 307-record, 48,386-byte payload mechanically with
 synthetic fields. It requires every binding and prevalidates decode destinations.
-Seven source-state bindings are still being added; it does not yet prove an
-original-DOS SaveGame write or provide live filesystem/save/load services.
+The [Next9 extension](recovered-source-next9-recipe.md) adds the seven missing
+state members without changing inherited members or generated module bodies.
+The preserved [V2 stream packet](../tests/save/evidence/legacy-save-codec-v2/README.md)
+captures actual original-DOS SaveGame writes and reproduces their 48,386-byte
+stream in its stated startup domain. An independent audit found thirteen
+coordinate-pair records whose V2 conversion incorrectly uses 32-bit component
+width on big-endian hosts. Decode/encode round trips alone do not detect this.
+The codec remains outside the live build pending corrected independent binding
+comparisons; live filesystem/save/load services remain unfinished.
 
 The [49-suite native integration gate](../tests/evidence/current/20261002/native-gate-49-menu-controls-final-20261002.json)
 passes with stable compiler inputs, including dropdown command plans, active

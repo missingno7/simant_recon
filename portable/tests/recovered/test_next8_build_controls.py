@@ -75,7 +75,7 @@ class Next8BuildControls(unittest.TestCase):
     def test_unknown_extension_key_rejected(self):
         self.assert_rejected_before_compile(
             "unknown-extension",
-            lambda p: p.update(versioned_profile_extension_next9={"id": "unreviewed"}),
+            lambda p: p.update(versioned_profile_extension_next10={"id": "unreviewed"}),
             "Unreviewed recovered profile generation")
 
 

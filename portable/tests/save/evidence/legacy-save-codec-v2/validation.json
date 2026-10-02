@@ -1,0 +1,43 @@
+{
+  "schema": "simant-legacy-save-codec-v2-validation-v1",
+  "status": "PASS_DIAGNOSTIC_ONLY_NOT_PRODUCTION",
+  "next9_profile": {
+    "path": "build/workers/recovered_source_next9/generated/provenance.json",
+    "sha256": "e3547a24caab7a9037f4b1aa6727078a8f8759a6feba65bcca7dbbcd6ff10156",
+    "producer_sha256": "c9429350a6c8bc9453e0a34c5e0f13f5c5d10d34ac643e8271e7db00c4beb3ae",
+    "added_fields": 7,
+    "inherited_modules_strict_recompiled": 25,
+    "inherited_state_projection_byte_identical": true
+  },
+  "source_initializer": {
+    "positive_source_to_locked_EXE": true,
+    "negative_one_byte_mutation_detected": true,
+    "positive_bytes_hex": "0100000000000000000001000000000000000000",
+    "negative_mutant_hex": "0000000000000000000001000000000000000000"
+  },
+  "binding": {
+    "source_rows": 307,
+    "payload_bytes": 48386,
+    "row29": "NATIVE_NUMERIC_16; Next9 backing int16_t[16][12]",
+    "row99": "RAW_BYTES; object slice [20,40) of uint8_t[72]",
+    "rows_include_sha256": "7d7ca24e7aa164bafbda4d3901763d03fe813dc94f87076f3cd56ed2298ac8bc"
+  },
+  "actual_original_DOS_SaveGame": {
+    "function": "o09_35F5_0188",
+    "write_calls": 307,
+    "row_byte_counts_sha256": "310c93c5344f3b72a2f559d071b10d99327a2885aded2acfd7d454cd6c03e49c",
+    "payload_bytes": 48386,
+    "payload_sha256": "cb8c3f31b59eb869c230277876919193b4f887cbe8a3c41033a307d21abed480",
+    "return": 1,
+    "dirty_after": "0000",
+    "filesystem": "controlled callbacks only"
+  },
+  "native_replay": {
+    "normal_and_forced_big_endian": true,
+    "both_reproduced_actual_DOS_stream_byte_exactly": true
+  },
+  "limits": [
+    "No live filesystem write or production SaveGame registration is included.",
+    "The DOS-to-native replay proves stream-compatible binding for this source/oracle startup state; it does not certify portable UI, error, short-write, or file lifecycle behavior."
+  ]
+}

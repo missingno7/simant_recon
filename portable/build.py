@@ -16,6 +16,10 @@ import urllib.request
 import zipfile
 
 ROOT = Path(__file__).resolve().parents[1]
+if str(ROOT) not in sys.path:
+    sys.path.insert(0, str(ROOT))
+from portable.tools.profile_next9 import validate_next9
+
 VERSION = "3.4.16"
 SDK_SHA = "9828bb735cf8a007bcf0ac5aa9f01f3fcb54b7ca67c932e775c905c5d5053a60"
 SDK_URL = f"https://github.com/libsdl-org/SDL/releases/download/release-{VERSION}/SDL3-devel-{VERSION}-mingw.zip"
@@ -94,12 +98,19 @@ def build(main: Path, output: Path, sources: list[Path],
         next6 = provenance.get("versioned_profile_extension_next6")
         next7 = provenance.get("versioned_profile_extension_next7")
         next8 = provenance.get("versioned_profile_extension_next8")
+        next9 = provenance.get("versioned_profile_extension_next9")
         if any(key.startswith("versioned_profile_extension_") and
                key not in ("versioned_profile_extension_next5",
                            "versioned_profile_extension_next6",
                            "versioned_profile_extension_next7",
-                           "versioned_profile_extension_next8") for key in provenance):
+                           "versioned_profile_extension_next8",
+                           "versioned_profile_extension_next9") for key in provenance):
             raise SystemExit("Unreviewed recovered profile generation")
+        inherited_state = {"recovered_state.h": state["header_sha256"],
+                           "recovered_state.c": state["source_sha256"]}
+        if next9 is not None:
+            extra_expected, inherited_state = validate_next9(provenance)
+            expected.update(extra_expected)
         if next8 is not None:
             lowering8 = next8.get("lowering", {})
             if (next7 is None or next5 is None or
@@ -122,8 +133,7 @@ def build(main: Path, output: Path, sources: list[Path],
                     row8.get("generated_sha256") != lowering8.get("after_generated_sha256") or
                     parent8.get("changed_modules") != ["S24_m39C7"] or
                     parent8.get("module_count") != 25 or
-                    parent8.get("state_hashes", {}).get("recovered_state.h") != state["header_sha256"] or
-                    parent8.get("state_hashes", {}).get("recovered_state.c") != state["source_sha256"]):
+                    parent8.get("state_hashes") != inherited_state):
                 raise SystemExit("History-event lowering changed its profile boundary")
             expected[next8["wrapper_path"]] = next8["wrapper_sha256"]
             for anchor in next8["selected_source"]["function_anchors"].values():
@@ -149,8 +159,7 @@ def build(main: Path, output: Path, sources: list[Path],
                     row7.get("generated_sha256") != lowering7.get("after_generated_sha256")):
                 raise SystemExit("Yellow-ant lowering identity mismatch")
             state_hashes = next7.get("parent_module_hashes_unchanged_except_target", {}).get("state_hashes", {})
-            if (state_hashes.get("recovered_state.h") != state["header_sha256"] or
-                    state_hashes.get("recovered_state.c") != state["source_sha256"]):
+            if state_hashes != inherited_state:
                 raise SystemExit("RNG lowering changed the parent state profile")
             expected[next7["wrapper_path"]] = next7["wrapper_sha256"]
             for anchor in next7["selected_source"]["function_anchors"].values():
@@ -250,6 +259,10 @@ def build(main: Path, output: Path, sources: list[Path],
                    ("engine.c","session_bridge.c","audio_adapter.c","nest_adapter.c",
                     "memory_adapter.c", "menu_adapter.c"))]
         extra_flags=["-DSIMANT_ENABLE_RECOVERED_CORE=1","-I",str(profile),"-I",str(ROOT)]
+        if next9 is not None:
+            # Backing admission is separate from a reviewed save codec and
+            # filesystem lifecycle. Standalone codec probes stay unlinked.
+            extra_flags.append("-DSIMANT_ENABLE_SAVE_STATE_NEXT9=1")
         if extension is not None:
             # This reviewed extension supplies all twelve omitted source cue
             # fields. Cue submission does not imply a completed frame renderer.
@@ -275,7 +288,8 @@ def build(main: Path, output: Path, sources: list[Path],
          *(p.relative_to(ROOT).as_posix() for p in [main, *sources])],
         text=True, cwd=ROOT)
     dependencies = dependencies.replace("\\\n", " ")
-    inputs = {main, *sources, Path(__file__).resolve()}
+    inputs = {main, *sources, Path(__file__).resolve(),
+              ROOT / "portable/tools/profile_next9.py"}
     for block in dependencies.split("SIMANT_DEP:")[1:]:
         for token in shlex.split(block):
             dependency = (ROOT / token).resolve()
