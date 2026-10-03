@@ -1,6 +1,6 @@
 {
   "schema": "simant-source-only-dos-compact-intake-v1",
-  "source_only_base_checkpoint": "bfe8fb7",
+  "source_only_base_checkpoint": "c244dcf",
   "canonical_manifest": {
     "path": "layout/manifest.json",
     "sha256": "025a0a9255d910cae4b122ab5a3f3fb40888bb456d7fe42158db7c9e622fcf50",
@@ -8,18 +8,18 @@
   },
   "full_local_report": {
     "path": "build/source-only-dos/build-report.json",
-    "sha256": "818cb62df2594695836217c4c8c822f688a924055076417f22b2fc71425530b6",
-    "size": 4890887
+    "sha256": "2f2d140a4cac1609ea1c7704f83ccf60dd4939c471b222162dfa0122cf06d1f8",
+    "size": 5129954
   },
   "reproduction": "python tools/source_only_dos.py --compile --link --reuse --jobs 4",
   "status": "INCOMPLETE",
   "errors": [
     "data dispositions still need source-built semantic resolution",
-    "315 unresolved source symbols",
+    "294 unresolved source symbols",
     "source address/layout contracts remain unresolved",
     "independent link refused: incomplete source/data preflight"
   ],
-  "compiled_translation_units": 151,
+  "compiled_translation_units": 154,
   "function_dispositions": {
     "EXACT_C": 1244,
     "GENUINE_ASM": 367,
@@ -39,12 +39,12 @@
   "runnable": "NOT_EXECUTED",
   "human_acceptance": "PENDING",
   "unresolved_data_disposition_bytes": 78,
-  "unresolved_symbols": 315,
+  "unresolved_symbols": 294,
   "unresolved_symbol_categories": {
-    "reviewed FAR_BSS definition and compatible consumer views": 310,
+    "reviewed FAR_BSS definition and compatible consumer views": 289,
     "source storage/reachability investigation": 5
   },
-  "symbolic_aliases": 188,
+  "symbolic_aliases": 189,
   "duplicate_publics": {},
   "layout_dependencies": [
     {
@@ -393,6 +393,28 @@
       "module": "source-owned:display-mode-selector",
       "proof": "Reviewed source first-write dominance plus real config-producer/CRT tests; original initializer unobserved.",
       "scope_limit": "Other shared UI bytes, Rect sentinel and computed-copy layout remain unresolved."
+    }
+  ],
+  "control_resource_terrain_admission": {
+    "path": "work/source-only-dos/control-resource-terrain-admission-v17.md",
+    "sha256": "bb8d407713965251ede626f51bd4c8071bc7967a9ee05edc01fcc997386a2014",
+    "size": 3501
+  },
+  "v17_owner_bindings": [
+    {
+      "path": "work/source-only-dos/ant-ui-control-state-bindings-v1.json",
+      "sha256": "18087b1d7acdb7d0dba8e86e93a1d0692373716dcb0ad9ed615ee41c661f3e7d",
+      "size": 35727
+    },
+    {
+      "path": "work/source-only-dos/ui-resource-scalars-bindings-v1.json",
+      "sha256": "d53a61d7103e79688f119d2e8f9d57ef52272edb219086918554fcc1e8f6996e",
+      "size": 35168
+    },
+    {
+      "path": "work/source-only-dos/terrain-state-words-bindings-v1.json",
+      "sha256": "602c792fd87663802fbbd326be5091bd82ccbf1881b3600a8a8ea956077f6a53",
+      "size": 28043
     }
   ],
   "historical_data_debt_bytes": 113,
@@ -2990,6 +3012,209 @@
           "name": "_g_5A97",
           "kind": "near",
           "length": 1
+        }
+      ],
+      "publics": [],
+      "fixups": []
+    },
+    {
+      "module": "source-owned:ant-ui-control-state",
+      "source": {
+        "path": "work\\source-only-dos\\providers\\ant-ui-control-state.c",
+        "sha256": "c9457e4a6c711c889e9be3bc57bf38f86aea710f78297caf4b998f208e5a6c20",
+        "size": 1034
+      },
+      "object": {
+        "path": "build\\source-only-dos\\objects\\ANTCTRL.OBJ",
+        "sha256": "87abd9939bc814560361f28d1193396e6078dfc77157adaa53311458babd7476",
+        "size": 389
+      },
+      "status": "PASS",
+      "data_only": true,
+      "live_initialized_bytes": 0,
+      "code_bytes": 0,
+      "communals": [
+        {
+          "name": "_casteLevels",
+          "kind": "far",
+          "length": 6,
+          "count": 6,
+          "element_size": 1
+        },
+        {
+          "name": "_modeLevels",
+          "kind": "far",
+          "length": 6,
+          "count": 6,
+          "element_size": 1
+        },
+        {
+          "name": "_knobSize",
+          "kind": "far",
+          "length": 4,
+          "count": 4,
+          "element_size": 1
+        },
+        {
+          "name": "_triHeight",
+          "kind": "far",
+          "length": 2,
+          "count": 2,
+          "element_size": 1
+        },
+        {
+          "name": "_triWidth",
+          "kind": "far",
+          "length": 2,
+          "count": 2,
+          "element_size": 1
+        },
+        {
+          "name": "_triWidthL",
+          "kind": "far",
+          "length": 2,
+          "count": 2,
+          "element_size": 1
+        },
+        {
+          "name": "_triWidthR",
+          "kind": "far",
+          "length": 2,
+          "count": 2,
+          "element_size": 1
+        },
+        {
+          "name": "_fd_50F6_3816",
+          "kind": "far",
+          "length": 12,
+          "count": 12,
+          "element_size": 1
+        },
+        {
+          "name": "_fd_50F6_3822",
+          "kind": "far",
+          "length": 12,
+          "count": 12,
+          "element_size": 1
+        },
+        {
+          "name": "_fd_50F6_382E",
+          "kind": "far",
+          "length": 4,
+          "count": 4,
+          "element_size": 1
+        },
+        {
+          "name": "_fd_50F6_0358",
+          "kind": "far",
+          "length": 4,
+          "count": 4,
+          "element_size": 1
+        },
+        {
+          "name": "_fd_50F6_022E",
+          "kind": "far",
+          "length": 4,
+          "count": 4,
+          "element_size": 1
+        }
+      ],
+      "publics": [],
+      "fixups": []
+    },
+    {
+      "module": "source-owned:ui-resource-scalars",
+      "source": {
+        "path": "work\\source-only-dos\\providers\\ui-resource-state.c",
+        "sha256": "9025b51b87cc6b7c55e72fded546123307378e8ed41cca7add54121c882d9c6c",
+        "size": 479
+      },
+      "object": {
+        "path": "build\\source-only-dos\\objects\\UIRESOWN.OBJ",
+        "sha256": "cae9f3fc15c2a9ae03e6bdc6c52867efb0e15f1bad97adb99b8a7856ba00ca32",
+        "size": 313
+      },
+      "status": "PASS",
+      "data_only": true,
+      "live_initialized_bytes": 0,
+      "code_bytes": 0,
+      "communals": [
+        {
+          "name": "_win_numOfWindows",
+          "kind": "far",
+          "length": 2,
+          "count": 2,
+          "element_size": 1
+        },
+        {
+          "name": "_win_numOfColors",
+          "kind": "far",
+          "length": 2,
+          "count": 2,
+          "element_size": 1
+        },
+        {
+          "name": "_win_numOfGroups",
+          "kind": "far",
+          "length": 2,
+          "count": 2,
+          "element_size": 1
+        },
+        {
+          "name": "_fd_50F6_3B4C",
+          "kind": "far",
+          "length": 4,
+          "count": 4,
+          "element_size": 1
+        },
+        {
+          "name": "_fd_50F6_3B58",
+          "kind": "far",
+          "length": 4,
+          "count": 4,
+          "element_size": 1
+        },
+        {
+          "name": "_fd_50F6_3B5C",
+          "kind": "far",
+          "length": 4,
+          "count": 4,
+          "element_size": 1
+        }
+      ],
+      "publics": [],
+      "fixups": []
+    },
+    {
+      "module": "source-owned:terrain-state-words",
+      "source": {
+        "path": "work\\source-only-dos\\providers\\terrain-state.c",
+        "sha256": "f132ac4e22801d8576c9bb556fa7b23cd70efe54455b37b1666eeebe173855b4",
+        "size": 199
+      },
+      "object": {
+        "path": "build\\source-only-dos\\objects\\TERRNOWN.OBJ",
+        "sha256": "10829be45f08888db7470464cd0123a11a7aa4304d3971d459ba24885fc166f7",
+        "size": 224
+      },
+      "status": "PASS",
+      "data_only": true,
+      "live_initialized_bytes": 0,
+      "code_bytes": 0,
+      "communals": [
+        {
+          "name": "_Barrier",
+          "kind": "far",
+          "length": 2,
+          "count": 2,
+          "element_size": 1
+        },
+        {
+          "name": "_TERRAINset",
+          "kind": "far",
+          "length": 2,
+          "count": 2,
+          "element_size": 1
         }
       ],
       "publics": [],
@@ -7478,8 +7703,8 @@
   "tool_inputs": [
     {
       "path": "tools\\source_only_dos.py",
-      "sha256": "d51f5739b094cb6e39b85ed164f324ca85f3ff6c4374bccf0756b629e64bbd41",
-      "size": 60251
+      "sha256": "59264e96df3355448e8fe1c41b1513a1ff3c42ce7cbbe49610d41c6301f607fc",
+      "size": 60512
     },
     {
       "path": "tools\\compiler.py",
@@ -7498,8 +7723,8 @@
     },
     {
       "path": "tools\\dos_source_bindings.py",
-      "sha256": "ea046c5607063bd8719f851b751522bb42b1c956658e3d9daf1701e1d28e8459",
-      "size": 84215
+      "sha256": "2be0d094ad69596ce0fb40a0f245e0098f02c64c4742fb626bbb9d57c8ec902e",
+      "size": 90534
     },
     {
       "path": "tools\\farbss.py",
@@ -7509,22 +7734,22 @@
   ],
   "validation_logs": [
     {
-      "path": "build/source-only-dos-run-v16.log",
-      "sha256": "45554de79f3208fa699e2d0a21495e35531afeb6a0520c1142e3234ec882cf8c",
-      "size": 4875
+      "path": "build/source-only-dos-run-v17.log",
+      "sha256": "ba45c231e01c40a0430ff07d2c6c661efda4a48fbe87ef30b30698e66c66a11b",
+      "size": 5033
     },
     {
-      "path": "build/source-only-dos-tests-v16.log",
-      "sha256": "a36c111feffead3488175cfd9d5928c9cba0d286cdd77cbc4a591ee71e735f69",
-      "size": 25228
+      "path": "build/source-only-dos-tests-v17.log",
+      "sha256": "a0e330f1ac28b4803c3b583c384727e39d2c7ddd15b0e552b3f12fa1bebde298",
+      "size": 29971
     },
     {
-      "path": "build/source-only-dos-validation-v16.log",
+      "path": "build/source-only-dos-validation-v17.log",
       "sha256": "786ea0446e31ee04f020b58675893cfa939f724dddae99d859a181b6602b4ad5",
       "size": 4736
     }
   ],
   "historical_validation": "PASS",
-  "source_only_tests": "40 targeted tests included in 354 repository tests PASS (2 skips)",
+  "source_only_tests": "41 targeted tests included in 355 repository tests PASS (2 skips)",
   "claim_limit": "Compile and symbolic binding proofs only; no complete link, runtime equivalence or human acceptance. Full inventories are reproducible build output."
 }

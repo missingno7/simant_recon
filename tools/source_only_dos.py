@@ -200,7 +200,10 @@ def prepare(out, report):
                      'language-string-list-pointers-bindings-v1.json',
                      'dead-ant-coordinate-rings-bindings-v1.json',
                      'ant-player-state-words-bindings-v1.json',
-                     'display-mode-selector-bindings-v1.json'):
+                     'display-mode-selector-bindings-v1.json',
+                     'ant-ui-control-state-bindings-v1.json',
+                     'ui-resource-scalars-bindings-v1.json',
+                     'terrain-state-words-bindings-v1.json'):
         binding_raw, binding_pin = pin(ROOT / 'work/source-only-dos' / filename)
         binding_packet = json.loads(binding_raw)
         if binding_packet['category'] not in ('REVIEWED_SOURCE_LINK_BINDING', 'REVIEWED_SOURCE_STORAGE_BINDING'):
@@ -772,6 +775,7 @@ def link_units(out, report, profile):
     dos_source_bindings.require_near_storage_contracts(report, profile, tool)
     dos_source_bindings.require_additional_storage_contracts(report, profile, tool)
     dos_source_bindings.require_v15_storage_contracts(report, profile, tool)
+    dos_source_bindings.require_v17_storage_contracts(report, profile, tool)
     dos_source_bindings.require_display_selector_contract(report, profile, tool)
     dos_source_bindings.require_queue_startup_contract(report, profile, tool)
     dos_source_bindings.require_assembly_frame_contract(report, profile, tool)

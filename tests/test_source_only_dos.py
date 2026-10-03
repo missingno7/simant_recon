@@ -17,6 +17,62 @@ import source_only_dos as dos
 
 
 class SourceOnlyDosTests(unittest.TestCase):
+    def test_control_resource_terrain_owners_require_source_types_and_full_control_matrix(self):
+        worker = ROOT / 'build/workers/source_only_dos_tests'
+        worker.mkdir(parents=True, exist_ok=True)
+        with tempfile.TemporaryDirectory(dir=worker) as directory:
+            report = {'inputs': [], 'generated_files': [], 'translation_units': [], 'semantic_substitutions': []}
+            _, symbols = dos.prepare(Path(directory), report)
+            rows = [r for r in report['translation_units'] if r['module'] in bindings.V17_STORAGE_CONTRACTS]
+            self.assertEqual(len(rows), 3)
+            self.assertEqual(sum(len(r['storage_provider']['communals']) for r in rows), 20)
+            self.assertEqual(sum(c['length'] for r in rows for c in r['storage_provider']['communals']), 82)
+            for row in rows:
+                provider = row['storage_provider']
+                source = (ROOT / row['source']['path']).read_text(encoding='ascii')
+                result = compiler.compile_c(source, row['profile'], row['flags'], basename=row['basename'])
+                self.assertTrue(result.ok, result.log)
+                bindings.review_provider_source(source, provider, symbols)
+                bindings.verify_provider(OmfReader(communals=True).read(result.obj), provider)
+                # Equal-width C types can have distinct semantics despite
+                # identical COMDEFs. The exact producer ABI must be guarded.
+                if 'TriLevel' in source:
+                    changed = source.replace('unsigned frac;', 'int frac;')
+                elif 'EmsSlot' in source:
+                    changed = source.replace('EmsSlot far * far * far', 'EmsSlot far * near * far')
+                else:
+                    changed = source.replace('int far Barrier;', 'unsigned int far Barrier;')
+                with self.assertRaises(ValueError):
+                    bindings.review_provider_source(changed, provider, symbols)
+                changed_symbols = json.loads(json.dumps(symbols))
+                name = provider['communals'][0]['name'][1:]
+                changed_symbols['data']['new_interior'] = dict(changed_symbols['data'][name], off=changed_symbols['data'][name]['off']+1)
+                with self.assertRaises(ValueError):
+                    bindings.review_provider_source(source, provider, changed_symbols)
+            tc = compiler.toolchain()
+            for profile in ('rtlink400', 'rtlink610'):
+                bindings.require_v17_storage_contracts(report, profile, tc['linkers'][profile])
+            for module, (key, required) in bindings.V17_STORAGE_CONTRACTS.items():
+                for change in ('missing', 'duplicate', 'result', 'dictionary', 'tool', 'unreviewed', 'unresolved', 'map'):
+                    wrong = json.loads(json.dumps(report))
+                    contract = wrong[key]
+                    index = next(i for i,r in enumerate(contract['cases']) if r['linker'] == 'rtlink400')
+                    if change == 'missing': contract['cases'].pop(index)
+                    elif change == 'duplicate': contract['cases'].append(dict(contract['cases'][index]))
+                    elif change == 'result': contract['cases'][index]['actual'] = 'UNREVIEWED'
+                    elif change == 'dictionary': contract['required_cases']['extra'] = 'PASS'
+                    elif change == 'unreviewed': contract['root_reviewed'] = False
+                    elif change == 'unresolved': contract['cases'][index]['linker_diagnostics'] = ['Unresolved external']
+                    elif change == 'map': contract['cases'][index]['owner_publics_found_in_map'].pop()
+                    else:
+                        for pin in contract['inputs']: pin['sha256'] = '0'*64
+                    with self.assertRaisesRegex(ValueError, 'startup contract'):
+                        bindings.require_v17_storage_contracts(wrong, 'rtlink400', tc['linkers']['rtlink400'])
+            wrong = json.loads(json.dumps(report))
+            wrong['ant_ui_control_state_contract']['compiler_negative_controls'][0]['actual_communal']['length'] = 6
+            with self.assertRaisesRegex(ValueError, 'compiler negative controls'):
+                bindings.require_v17_storage_contracts(wrong, 'rtlink400', tc['linkers']['rtlink400'])
+
     def test_display_selector_owner_requires_closed_producer_and_partial_debt_proof(self):
         worker = ROOT / 'build/workers/source_only_dos_tests'
         worker.mkdir(parents=True, exist_ok=True)

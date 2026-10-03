@@ -588,16 +588,18 @@ def review_provider_source(text, provider, symbols=None):
         addresses.update({'_fd_50F6_3958': 0x3958, '_db_handles': 0x3B50})
         addresses.update({'_g_5A97': 0x5A97})
         addresses.update({name: row[0] for name, row in V15_STORAGE_ANCHORS.items()})
+        addresses.update({name: row[0] for name, row in V17_STORAGE_ANCHORS.items()})
         for name, size in spec[2]:
             anchor = symbols['data'][name[1:]]
             segment = 0x50F6 if provider['module'] in FAR_PROVIDER_MODULES else 0x55B3
             interiors = [(n, s['off'] - anchor['off']) for n, s in symbols['data'].items()
                          if s['seg'] == anchor['seg'] and anchor['off'] < s['off'] < anchor['off'] + size]
             expected_interiors = [('g_5AAE', 2)] if name == '_g_5AAC' else []
-            if name in V15_STORAGE_ANCHORS:
+            reviewed_anchors = {**V15_STORAGE_ANCHORS, **V17_STORAGE_ANCHORS}
+            if name in reviewed_anchors:
                 same_base = sorted(n for n, s in symbols['data'].items()
                                    if (s['seg'], s['off']) == (anchor['seg'], anchor['off']))
-                if same_base != sorted(V15_STORAGE_ANCHORS[name][1]):
+                if same_base != sorted(reviewed_anchors[name][1]):
                     raise ValueError('functional storage exact-base views changed')
             if name == '_g_5A97' and sorted(n for n, s in symbols['data'].items()
                     if (s['seg'], s['off']) == (anchor['seg'], anchor['off'])) != ['g_5A97']:
@@ -699,11 +701,15 @@ def require_v15_storage_contracts(report, profile, tool):
     Wider-owner and overrun diagnostics cannot replace rejected type/extent
     controls. They stay recorded outside this gating matrix.
     """
+    _require_reviewed_storage_contracts(report, profile, tool, V15_STORAGE_CONTRACTS)
+
+
+def _require_reviewed_storage_contracts(report, profile, tool, contracts):
     from pathlib import Path
     components = [(str(Path(tool['directory']) / name), digest) for name, digest in tool['files'].items()]
     components += [(r['path'], r['sha256']) for r in report['runtime_components']]
     modules = {r['module'] for r in report['translation_units']}
-    for module, (key, required) in V15_STORAGE_CONTRACTS.items():
+    for module, (key, required) in contracts.items():
         if module not in modules:
             continue
         contract = report.get(key, {})
@@ -718,6 +724,39 @@ def require_v15_storage_contracts(report, profile, tool):
                            and not r.get('timed_out', False) for r in cases)
                 or any(identities.get(runtime_component_path(path)) != digest for path, digest in components)):
             raise ValueError(f'{module} lacks the selected linker/MSC startup contract')
+
+
+def require_v17_storage_contracts(report, profile, tool):
+    _require_reviewed_storage_contracts(report, profile, tool, V17_STORAGE_CONTRACTS)
+    for module, (key, _) in V17_STORAGE_CONTRACTS.items():
+        if not any(r['module'] == module for r in report['translation_units']):
+            continue
+        expected_names = sorted(n for n, _ in PROVIDER_SPECS[module][2])
+        for case in report[key]['cases']:
+            if case['linker'] != profile:
+                continue
+            if (case.get('linker_diagnostics') != []
+                    or case.get('linker_produced_executable') is not True
+                    or case.get('linker_produced_map') is not True
+                    or sorted(case.get('expected_owner_publics', [])) != expected_names
+                    or sorted(case.get('owner_publics_found_in_map', [])) != expected_names):
+                raise ValueError(f'{module} lacks clean resolved owner maps in its startup contract')
+    if any(r['module'] == 'source-owned:ant-ui-control-state' for r in report['translation_units']):
+        controls = report.get('ant_ui_control_state_contract', {}).get('compiler_negative_controls', [])
+        if (len(controls) != 2 or controls[0].get('name') != 'mode triple shortened to two words'
+                or controls[0].get('detected') is not True
+                or controls[0].get('result_class') != 'OMF_FAR_COMMUNAL_SHORT_EXTENT'
+                or controls[0].get('expected_length') != 6 or controls[0].get('observed_length') != 4
+                or controls[0].get('runtime_executed') is not False
+                or {k: controls[0].get('actual_communal', {}).get(k) for k in ('name', 'kind', 'count', 'element_size', 'length')}
+                    != {'name': '_modeLevels', 'kind': 'far', 'count': 2, 'element_size': 2, 'length': 4}
+                or controls[1].get('name') != 'knobSize given a static initializer'
+                or controls[1].get('detected') is not True or controls[1].get('still_communal') is not False
+                or controls[1].get('result_class') != 'OMF_INITIALIZED_FAR_DATA_PUBLIC'
+                or controls[1].get('runtime_executed') is not False
+                or controls[1].get('initialized_data_segment', {}).get('class') != 'FAR_DATA'
+                or controls[1].get('initialized_data_segment', {}).get('length') != 4):
+            raise ValueError('ant control owner lacks the reviewed compiler negative controls')
 
 
 def display_selector_cases():
@@ -1285,3 +1324,44 @@ V15_STORAGE_CONTRACTS = {'source-owned:ant-list-counts': ('ant_list_counts_contr
                                     'typed_word_wrong_TilesDugR_alias_plus2': 'FAIL',
                                     'unsigned_consumer_sign_contrast': 'FAIL',
                                     'wrong_four_byte_extent_long_owner': 'FAIL'})}
+
+
+# Reviewed functional control/resource/terrain owners; no historical TU claim.
+PROVIDER_SPECS['source-owned:ant-ui-control-state'] = ('ANTCTRL', None, (('_casteLevels', 6), ('_modeLevels', 6), ('_knobSize', 4), ('_triHeight', 2), ('_triWidth', 2), ('_triWidthL', 2), ('_triWidthR', 2), ('_fd_50F6_3816', 12), ('_fd_50F6_3822', 12), ('_fd_50F6_382E', 4), ('_fd_50F6_0358', 4), ('_fd_50F6_022E', 4)), 'struct TriLevel { unsigned frac; unsigned mid; unsigned weight; }; struct Pt { int x; int y; }; struct TriPoints { int apexX; int apexY; int leftX; int leftY; int rightX; int rightY; }; struct TriLevel far casteLevels; struct TriLevel far modeLevels; struct Pt far knobSize; unsigned far triHeight; unsigned far triWidth; unsigned far triWidthL; unsigned far triWidthR; struct TriPoints far fd_50F6_3816; struct TriPoints far fd_50F6_3822; long far fd_50F6_382E; struct Pt far fd_50F6_0358; struct Pt far fd_50F6_022E;')
+FAR_PROVIDER_MODULES.add('source-owned:ant-ui-control-state')
+PROVIDER_SPECS['source-owned:ui-resource-scalars'] = ('UIRESOWN', None, (('_win_numOfWindows', 2), ('_win_numOfColors', 2), ('_win_numOfGroups', 2), ('_fd_50F6_3B4C', 4), ('_fd_50F6_3B58', 4), ('_fd_50F6_3B5C', 4)), 'typedef struct { unsigned int age; int file; int page; } EmsSlot; typedef char far * far *Handle; int far win_numOfWindows; int far win_numOfColors; int far win_numOfGroups; EmsSlot far * far * far fd_50F6_3B4C; void (far * far fd_50F6_3B58)(char far *, char far *, int, int); Handle far fd_50F6_3B5C;')
+FAR_PROVIDER_MODULES.add('source-owned:ui-resource-scalars')
+PROVIDER_SPECS['source-owned:terrain-state-words'] = ('TERRNOWN', None, (('_Barrier', 2), ('_TERRAINset', 2)), 'int far Barrier; int far TERRAINset;')
+FAR_PROVIDER_MODULES.add('source-owned:terrain-state-words')
+V17_STORAGE_ANCHORS = {'_Barrier': (1152, ('Barrier', 'fd_50F6_0480')),
+ '_TERRAINset': (3876, ('TERRAINset', 'fd_50F6_0F24')),
+ '_casteLevels': (1154, ('casteLevels', 'fd_50F6_0482')),
+ '_fd_50F6_022E': (558, ('fd_50F6_022E',)),
+ '_fd_50F6_0358': (856, ('fd_50F6_0358',)),
+ '_fd_50F6_3816': (14358, ('fd_50F6_3816',)),
+ '_fd_50F6_3822': (14370, ('fd_50F6_3822',)),
+ '_fd_50F6_382E': (14382, ('fd_50F6_382E',)),
+ '_fd_50F6_3B4C': (15180, ('fd_50F6_3B4C',)),
+ '_fd_50F6_3B58': (15192, ('fd_50F6_3B58',)),
+ '_fd_50F6_3B5C': (15196, ('fd_50F6_3B5C',)),
+ '_knobSize': (14386, ('fd_50F6_3832', 'knobSize')),
+ '_modeLevels': (1182, ('fd_50F6_049E', 'modeLevels')),
+ '_triHeight': (14350, ('fd_50F6_380E', 'triHeight')),
+ '_triWidth': (14356, ('fd_50F6_3814', 'triWidth')),
+ '_triWidthL': (14352, ('fd_50F6_3810', 'triWidthL')),
+ '_triWidthR': (14354, ('fd_50F6_3812', 'triWidthR')),
+ '_win_numOfColors': (18390, ('fd_50F6_47D6', 'win_numOfColors')),
+ '_win_numOfGroups': (18388, ('fd_50F6_47D4', 'win_numOfGroups')),
+ '_win_numOfWindows': (18392, ('fd_50F6_47D8', 'win_numOfWindows'))}
+
+V17_STORAGE_CONTRACTS = {
+    'source-owned:ant-ui-control-state': ('ant_ui_control_state_contract', {'typed_struct_array_save_views': 'PASS'}),
+    'source-owned:ui-resource-scalars': ('ui_resource_scalars_contract', {
+        'typed_startup_and_roundtrip': 'PASS', 'wrong_scalar_width_guard': 'FAIL',
+        'initialized_owner_zero_startup_guard': 'FAIL'}),
+    'source-owned:terrain-state-words': ('terrain_state_words_contract', {
+        'signed_word_exact_two_byte_save_view': 'PASS',
+        'one_byte_interior_save_view_rejected': 'FAIL_PTR',
+        'initialized_nonzero_owner_rejected': 'FAIL_ZERO',
+        'unsigned_consumer_is_semantically_different': 'TYPE_NEGATIVE_UNSIGNED_VIEW'}),
+}

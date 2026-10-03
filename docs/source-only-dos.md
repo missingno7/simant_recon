@@ -444,3 +444,31 @@ is claimed.
 The boundary checks 40 source-only tests plus 314 other repository tests, with
 two skips, and historical validation. Probe reruns write scratch candidate
 packets and cannot overwrite the admitted selector binding/contract.
+
+## v17: typed control, resource and terrain objects
+
+Three generated-only providers own 20 source-backed FAR_BSS objects, totaling
+82 bytes: control geometry/levels, three UI resource counts plus three pointer
+slots, and Barrier/TERRAINset. Whole source graphs, complete C types, saved byte
+views and fresh compiler/runtime controls establish these extents. Both RTLink
+profiles require clean symbol maps; an EXE emitted with unresolved warnings
+cannot count as a passing control. Ant-control shortened-level and initialized-
+knob negatives remain compiler-only. See the
+[root admission](../work/source-only-dos/control-resource-terrain-admission-v17.md).
+
+All 154 TUs compile, including 27 typed providers. Missing imports fall to 294:
+289 FAR_BSS and five DGROUP cases. The original 46-case DGROUP inventory still
+has 41 resolved cases. Functional data debt remains 78 bytes; the historical
+113-byte ledger is unchanged. All 29 effective behavior implementations retain
+strict static confirmation, with no contract-only or unresolved substitution.
+
+Resource array extents, clip/default-sentinel state, computed-copy interactions,
+database returning-error-path reachability and the remaining numeric/frame
+audit stay explicit gates. Test-owned fixtures do not constitute game execution.
+Independent linking remains refused; DOSBox-X game comparison and human
+acceptance are pending. SDL3 remains paused.
+
+The boundary checks 41 source-only tests and 314 other repository tests, with
+two skips, plus historical validation. The three source-review documents were
+finalized before the successful boundary; fresh execution receipts retain their
+original tool/probe identities.
