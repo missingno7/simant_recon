@@ -1,0 +1,111 @@
+{
+  "schema": "simant-dos-point-state-storage-bindings-v1",
+  "category": "REVIEWED_SOURCE_STORAGE_BINDING",
+  "root_reviewed": true,
+  "bindings": [],
+  "providers": [
+    {
+      "module": "source-owned:point-state",
+      "basename": "PTOWNER",
+      "owner": null,
+      "profile": "msc600ax",
+      "flags": [
+        "/AL",
+        "/Os",
+        "/Gs"
+      ],
+      "source": {
+        "path": "work/source-only-dos/providers/point-state.c",
+        "sha256": "94fd7ae1a436fe595f4ad987e24f21773633c95af9f121f03581002e54a3ce48",
+        "size": 463
+      },
+      "natural_type": "Point far { signed int x; signed int y; }",
+      "communals": [
+        {
+          "name": "_fd_50F6_0508",
+          "kind": "far",
+          "length": 4,
+          "count": 4,
+          "element_size": 1
+        },
+        {
+          "name": "_fd_50F6_0596",
+          "kind": "far",
+          "length": 4,
+          "count": 4,
+          "element_size": 1
+        },
+        {
+          "name": "_fd_50F6_06A6",
+          "kind": "far",
+          "length": 4,
+          "count": 4,
+          "element_size": 1
+        },
+        {
+          "name": "_fd_50F6_072E",
+          "kind": "far",
+          "length": 4,
+          "count": 4,
+          "element_size": 1
+        },
+        {
+          "name": "_fd_50F6_07BC",
+          "kind": "far",
+          "length": 4,
+          "count": 4,
+          "element_size": 1
+        }
+      ]
+    }
+  ],
+  "runtime_contract_key": "point_state_contract",
+  "runtime_contract": {
+    "path": "work/source-only-dos/point-state-contract-v1.json",
+    "sha256": "8e923dd150c7342722552a0e099e1804cd7f50f4f87be662b496b4cac8d61f26",
+    "size": 223167
+  },
+  "probe_source": {
+    "path": "work/source-only-dos/point-state-owner-probe.py",
+    "sha256": "b78825db79993c9cda832b9980b6cfb136cca88e4a4737dd7bcf8bbe4cb03ece",
+    "size": 46063
+  },
+  "review_sources": [
+    {
+      "path": "work/source-only-dos/point-state-owner-review-v1.md",
+      "sha256": "64971bab4637c03b6a41c2a1bd0e1ee1dc766062bec24ebc8c6bfa3b8165f135",
+      "size": 2664
+    },
+    {
+      "path": "src/root/m004A.c",
+      "sha256": "5456d454b2c16edb5eb6e3845976aaaa9d654a8833d3becbc3f7917bb978fc0a",
+      "size": 5462
+    },
+    {
+      "path": "src/root/m015B.c",
+      "sha256": "67f5c32deda5a49ab56243d50fba33647db7897c850706378fe2a8488277fa8f",
+      "size": 16241
+    },
+    {
+      "path": "src/root/m0250.c",
+      "sha256": "bb8a325c543151e09cb173d2194844877805a9e1058d3b24362ff5a7cbd9f61b",
+      "size": 65517
+    },
+    {
+      "path": "src/S22/m39C7.c",
+      "sha256": "e9add4ebd445bd943f24a65764be2a79581f2fc26c349741fdfe8efae3b7030d",
+      "size": 31328
+    },
+    {
+      "path": "src/S08/m35F5.c",
+      "sha256": "ef6eea405f6497cb5a6648ef258cc1afeab308f995ded573794465d831e3501f",
+      "size": 22166
+    },
+    {
+      "path": "src/S09/m35F5.c",
+      "sha256": "028e1575990d5d45233f9102a0d2a060810349bd2f1297182c4af435ecbe912a",
+      "size": 42150
+    }
+  ],
+  "status": "REVIEWED_SOURCE_STORAGE_BINDING"
+}

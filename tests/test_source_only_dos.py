@@ -823,6 +823,91 @@ class SourceOnlyDosTests(unittest.TestCase):
             with self.assertRaisesRegex(ValueError, 'startup contract'):
                 bindings.require_additional_storage_contracts(wrong, 'rtlink400', tc['linkers']['rtlink400'])
 
+    def test_spider_controls_and_points_have_exact_types_and_persistent_views(self):
+        worker = ROOT / 'build/workers/source_only_dos_tests'
+        worker.mkdir(parents=True, exist_ok=True)
+        with tempfile.TemporaryDirectory(dir=worker) as directory:
+            report = {'inputs': [], 'generated_files': [], 'translation_units': [], 'semantic_substitutions': []}
+            _, symbols = dos.prepare(Path(directory), report)
+            for module in ('source-owned:spider-controls', 'source-owned:point-state'):
+                row = next(r for r in report['translation_units'] if r['module'] == module)
+                text = (ROOT / row['source']['path']).read_text(encoding='ascii')
+                provider = row['storage_provider']
+                def compile(source):
+                    result = compiler.compile_c(source, row['profile'], row['flags'], basename=row['basename'])
+                    self.assertTrue(result.ok, result.log)
+                    return OmfReader(communals=True).read(result.obj)
+                bindings.review_provider_source(text, provider, symbols)
+                proof = bindings.verify_provider(compile(text), provider)
+                self.assertEqual(proof['code_bytes'], 0)
+                self.assertEqual(proof['live_initialized_bytes'], 0)
+                if module == 'source-owned:spider-controls':
+                    self.assertEqual([c['length'] for c in proof['communals']], [2] * 6)
+                    wrong_type = text.replace('int far Starg;', 'unsigned far Starg;')
+                    wrong_extent = text.replace('int far Starg;', 'long far Starg;')
+                else:
+                    self.assertEqual([c['length'] for c in proof['communals']], [4] * 5)
+                    # Equal four-byte COMDEF shape cannot establish signed Point fields.
+                    wrong_type = text.replace('    int x;', '    unsigned x;')
+                    same_shape = compile(wrong_type)
+                    self.assertEqual(bindings.verify_provider(same_shape, provider)['status'], 'PASS')
+                    wrong_extent = text.replace('Point far fd_50F6_0508;', 'Point far fd_50F6_0508[2];')
+                    self.assertNotIn('fd_50F6_0620', text)
+                with self.assertRaises(ValueError):
+                    bindings.review_provider_source(wrong_type, provider, symbols)
+                with self.assertRaises(ValueError):
+                    bindings.verify_provider(compile(wrong_extent), provider)
+                changed = json.loads(json.dumps(symbols))
+                changed['data'][provider['communals'][0]['name'][1:]]['off'] += 1
+                with self.assertRaises(ValueError):
+                    bindings.review_provider_source(text, provider, changed)
+            tc = compiler.toolchain()
+            for profile in ('rtlink400', 'rtlink610'):
+                bindings.require_additional_storage_contracts(report, profile, tc['linkers'][profile])
+            for key in ('spider_control_contract', 'point_state_contract'):
+                wrong = json.loads(json.dumps(report))
+                wrong[key]['cases'].pop(0)
+                with self.assertRaisesRegex(ValueError, 'startup contract'):
+                    bindings.require_additional_storage_contracts(wrong, 'rtlink400', tc['linkers']['rtlink400'])
+
+    def test_database_record_owners_preserve_overlays_and_failure_layout_gates(self):
+        worker = ROOT / 'build/workers/source_only_dos_tests'
+        worker.mkdir(parents=True, exist_ok=True)
+        with tempfile.TemporaryDirectory(dir=worker) as directory:
+            report = {'inputs': [], 'generated_files': [], 'translation_units': [], 'semantic_substitutions': []}
+            _, symbols = dos.prepare(Path(directory), report)
+            row = next(r for r in report['translation_units'] if r['module'] == 'source-owned:database-record-state')
+            provider = row['storage_provider']
+            text = (ROOT / row['source']['path']).read_text(encoding='ascii')
+            def compile(source):
+                result = compiler.compile_c(source, row['profile'], row['flags'], basename=row['basename'])
+                self.assertTrue(result.ok, result.log)
+                return OmfReader(communals=True).read(result.obj)
+            bindings.review_provider_source(text, provider, symbols)
+            proof = bindings.verify_provider(compile(text), provider)
+            self.assertEqual([(c['count'], c['element_size'], c['length']) for c in proof['communals']],
+                             [(4, 124, 496), (4, 2, 8)])
+            wrong_type = text.replace('IndexEntry far *index;', 'IndexEntry near *index;')
+            # The byte union keeps the same object extent while the typed header moves.
+            self.assertEqual(bindings.verify_provider(compile(wrong_type), provider)['status'], 'PASS')
+            with self.assertRaises(ValueError):
+                bindings.review_provider_source(wrong_type, provider, symbols)
+            for contrast in (text.replace('fd_50F6_3958[4]', 'fd_50F6_3958[3]'),
+                             text.replace('db_handles[4]', 'db_handles[5]')):
+                with self.assertRaises(ValueError):
+                    bindings.verify_provider(compile(contrast), provider)
+            dos.audit_layout(report)
+            gates = {r['id']: r for r in report['layout_dependencies']}
+            for key in ('database-open-minus-one-record', 'database-handle-plus-four'):
+                self.assertEqual(gates[key]['status'], 'UNRESOLVED')
+            tc = compiler.toolchain()
+            for profile in ('rtlink400', 'rtlink610'):
+                bindings.require_additional_storage_contracts(report, profile, tc['linkers'][profile])
+            wrong = json.loads(json.dumps(report))
+            wrong['database_record_state_contract']['cases'].pop(0)
+            with self.assertRaisesRegex(ValueError, 'startup contract'):
+                bindings.require_additional_storage_contracts(wrong, 'rtlink400', tc['linkers']['rtlink400'])
+
     def test_clip_rect_seg_correction_preserves_offset_and_unrelated_fixups(self):
         worker = ROOT / 'build/workers/source_only_dos_tests'
         worker.mkdir(parents=True, exist_ok=True)

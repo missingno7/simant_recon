@@ -12,16 +12,18 @@ research history and do not supersede this priority.
 behavioral registrations. The effective imported set has 29
 `BEHAVIOR_EXACT_CONFIRMED` implementations; DrawBalloons uses a reviewed signed
 allocation-width correction, with the original registered body separately marked
-unresolved. The source-only build compiles 127 canonical TUs plus eleven data-only
-providers. The seven-slot input queue, 42 far word scalars, 25-slot
+unresolved. The source-only build compiles 127 canonical TUs plus fourteen data-only
+providers. The seven-slot input queue, 48 far word scalars, 25-slot
 callback owner and their bounded views are reviewed; three mouse ES operand
 frames, 128 external and ten local driver SS frames are corrected. Three numeric
 pattern-bank reads now target its proven 256-byte source owner. Typed water arrays,
 memory far pointers, database index pointer/cursor, spider counters, render state,
 monochrome prefix, clip-pointer views and twelve lion/sow/pillar objects are
 source-owned. The paired `g_5A9C` SEG now targets DGROUP, with whole-object and
-shifted-group controls; its data remains unresolved. There are 368 missing
-data imports (360 FAR_BSS and eight
+shifted-group controls; its data remains unresolved. Six spider control words,
+five Point objects, four 124-byte database records and four signed handle words
+also have source owners. The two database returning-Punt layout gates remain open.
+There are 355 missing data imports (347 FAR_BSS and eight
 storage/reachability cases), 113 data-disposition bytes and an open wider address/
 frame audit. No independent executable, game runtime acceptance or functional
 milestone is claimed. The compact current receipt is

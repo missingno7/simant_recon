@@ -113,7 +113,7 @@ are hypotheses, not definitions. Multiple names for the same storage must bind
 to one source owner. Preserve the original DOS allocator, interrupt, video and
 window implementations; do not import native substitutes to make DOS link.
 
-The current compilation passes all 127 canonical TUs plus eleven reviewed data-only
+The current compilation passes all 127 canonical TUs plus fourteen reviewed data-only
 providers. Symbol-address joins provide 121
 code aliases and thirteen exact-base data aliases without rewriting objects. Reviewed generated
 ASM bindings expose eight names in existing storage: S00's memory-size table and
@@ -320,6 +320,22 @@ shifted-group pointer-word check and explicitly fail the old `_DATA` SEG frame
 before dereference. The minimal fixture does not execute the whole mouse TU;
 earlier full-fixture timeouts remain recorded. Rectangle ownership and initial
 fields remain a separate unresolved data gate.
+
+Six signed spider control words and five signed x/y Point objects now have
+separate functional owners. Their exact SaveRec bases, typed operations, resets,
+partial-load behavior and aliases are accounted for. MSC emits the same communal
+shape for a Point and four raw bytes, so source type review is an independent
+gate. Both linkers pass typed/byte views and reject shifted aliases, widths,
+signedness and nonzero-initializer controls. Unchecked loaded target indices and
+coordinates remain separate algorithm constraints; no range checks are invented.
+
+The database provider owns four 124-byte OpenDBRec records and four signed handle
+words. Natural union views preserve the 24-byte raw index area, far pointer halves,
+20-byte index header and remaining record fields. A near-pointer contrast keeps
+the total 124-byte extent but shifts the typed header; source review and runtime
+controls reject it. Owners add no resets for stale fields. The slot `-1` record
+and handle `[4]` accesses after a returning Punt remain two explicit unresolved
+layout gates. No preceding padding or fifth handle is allocated to hide them.
 
 The driver callback table now has one typed near array of 25 far pointers.
 The source reset writes 25 two-word slots, copy moves 50 words, and all four

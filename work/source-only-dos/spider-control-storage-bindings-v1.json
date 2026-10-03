@@ -1,0 +1,128 @@
+{
+  "schema": "simant-dos-spider-control-storage-bindings-v1",
+  "category": "REVIEWED_SOURCE_STORAGE_BINDING",
+  "bindings": [],
+  "providers": [
+    {
+      "module": "source-owned:spider-controls",
+      "basename": "SPICTRL",
+      "owner": null,
+      "profile": "msc600ax",
+      "flags": [
+        "/AL",
+        "/Os",
+        "/Gs"
+      ],
+      "source": {
+        "path": "work/source-only-dos/providers/spider-controls.c",
+        "sha256": "adb8123dce358114e37fa01ab6a593002faeb45090a3d1d01c81ba9292c7b77d",
+        "size": 181
+      },
+      "communals": [
+        {
+          "name": "_ChaseSpid",
+          "kind": "far",
+          "length": 2,
+          "count": 2,
+          "element_size": 1
+        },
+        {
+          "name": "_SMode",
+          "kind": "far",
+          "length": 2,
+          "count": 2,
+          "element_size": 1
+        },
+        {
+          "name": "_SuserX",
+          "kind": "far",
+          "length": 2,
+          "count": 2,
+          "element_size": 1
+        },
+        {
+          "name": "_SuserY",
+          "kind": "far",
+          "length": 2,
+          "count": 2,
+          "element_size": 1
+        },
+        {
+          "name": "_Starg",
+          "kind": "far",
+          "length": 2,
+          "count": 2,
+          "element_size": 1
+        },
+        {
+          "name": "_StargLife",
+          "kind": "far",
+          "length": 2,
+          "count": 2,
+          "element_size": 1
+        }
+      ]
+    }
+  ],
+  "runtime_contract_key": "spider_control_contract",
+  "runtime_contract": {
+    "path": "work/source-only-dos/spider-control-storage-contract-v1.json",
+    "sha256": "9e7358aee52cda712ccdc5543e47ff981184f561fda8e555a621ae97855fb578",
+    "size": 239197
+  },
+  "review_sources": [
+    {
+      "path": "work/source-only-dos/spider-control-review-v1.md",
+      "sha256": "207e40e23da50a2087188e394dc33fbafb790589fcf119744f6b9864b465afb4",
+      "size": 6804
+    },
+    {
+      "path": "src/root/m0CDB.c",
+      "sha256": "ae615fe56d075de2a59449b444709c79a847e4f4fb5806e58a50b5c59418c033",
+      "size": 15324
+    },
+    {
+      "path": "src/root/m1383.c",
+      "sha256": "489ee7d47f0ee27942bf6bea11fff7a8bbb90acd2c75fe4653d18a3e9efa5389",
+      "size": 15679
+    },
+    {
+      "path": "src/root/m10F7.c",
+      "sha256": "a4cc271d57a4a80dd255953554a886026297b0560453c4b2c7b302b5878fff88",
+      "size": 35707
+    },
+    {
+      "path": "src/S22/m39C7.c",
+      "sha256": "e9add4ebd445bd943f24a65764be2a79581f2fc26c349741fdfe8efae3b7030d",
+      "size": 31328
+    },
+    {
+      "path": "src/S04/m35F5.c",
+      "sha256": "65db48855f97c32600ff7527999a463019ba2884117f0c921b35e46d5d37d406",
+      "size": 11387
+    },
+    {
+      "path": "src/S05/m35F5.c",
+      "sha256": "b1ab82dff86dc635ad10974bf70d31dc73d8755ba3fd1605f4f0573ef71f9e87",
+      "size": 8438
+    },
+    {
+      "path": "src/S09/m35F5.c",
+      "sha256": "028e1575990d5d45233f9102a0d2a060810349bd2f1297182c4af435ecbe912a",
+      "size": 42150
+    },
+    {
+      "path": "layout/symbols.json",
+      "sha256": "0f5dd5b0a211945a97782cfccdb9bb31b0dfd07fcde5df4d4f9486b487eb0125",
+      "size": 800809
+    },
+    {
+      "path": "work/source-only-dos/static-completeness/index-v1.json",
+      "sha256": "092b3a15aaaf99737020c0c00e2a4340514dda3f0e2ff45369d1fa0a316d9a3a",
+      "size": 6796
+    }
+  ],
+  "candidate_only_reason": "Worker admission scratch; parent review remains pending and root_reviewed is false.",
+  "root_reviewed": true,
+  "status": "REVIEWED_SOURCE_STORAGE_BINDING"
+}

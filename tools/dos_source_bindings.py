@@ -147,16 +147,47 @@ PROVIDER_SPECS = {
         'unsigned char far LionListY[10]; int far PillDir; int far PillarSeg; '
         'int far PillarMap[6]; int far SowDir[3]; int far SowSave[3]; '
         'int far SowX[3]; int far SowY[3];'),
+    'source-owned:spider-controls': ('SPICTRL', None,
+        (('_ChaseSpid', 2), ('_SMode', 2), ('_SuserX', 2), ('_SuserY', 2),
+         ('_Starg', 2), ('_StargLife', 2)),
+        'int far ChaseSpid; int far SMode; int far SuserX; int far SuserY; '
+        'int far Starg; int far StargLife;'),
+    'source-owned:point-state': ('PTOWNER', None,
+        (('_fd_50F6_0508', 4), ('_fd_50F6_0596', 4), ('_fd_50F6_06A6', 4),
+         ('_fd_50F6_072E', 4), ('_fd_50F6_07BC', 4)),
+        'typedef struct { int x; int y; } Point; Point far fd_50F6_0508; '
+        'Point far fd_50F6_0596; Point far fd_50F6_06A6; '
+        'Point far fd_50F6_072E; Point far fd_50F6_07BC;'),
+    'source-owned:database-record-state': ('DBRECOWN', None,
+        (('_fd_50F6_3958', 496), ('_db_handles', 8)),
+        'typedef union IndexKey { char far *data; long offset; } IndexKey; '
+        'typedef struct IndexEntry { IndexKey key; int id; unsigned char kind; '
+        'unsigned char flags; } IndexEntry; typedef struct IndexHeader { '
+        'int count; int spare; long stat1; long stat2; long stat3; int field8; '
+        'int field9; } IndexHeader; typedef struct DBHeader { long magic; '
+        'int count; long freeBytes; long wastedBytes; } DBHeader; '
+        'typedef struct OpenDBIndexView { IndexEntry far *index; '
+        'IndexHeader header; } OpenDBIndexView; typedef union OpenDBIndexArea { '
+        'OpenDBIndexView typed; char bytes[0x18]; } OpenDBIndexArea; '
+        'typedef union OpenDBIndexFileView { int indexFile; char bytes[2]; } '
+        'OpenDBIndexFileView; typedef struct OpenDBRec { char name[0x50]; '
+        'OpenDBIndexArea indexArea; DBHeader dbHeader; '
+        'OpenDBIndexFileView indexFileArea; int file; int dirty; } OpenDBRec; '
+        'OpenDBRec far fd_50F6_3958[4]; int far db_handles[4];'),
 }
 
 FAR_PROVIDER_MODULES = {'source-owned:memory-far-state', 'source-owned:yard-scalars',
                         'source-owned:database-index-state', 'source-owned:spider-counters',
-                        'source-owned:lion-sow-pillar'}
+                        'source-owned:lion-sow-pillar', 'source-owned:spider-controls',
+                        'source-owned:point-state', 'source-owned:database-record-state'}
 
 # The compiler represents these actual word arrays by element count and width;
 # singleton words use its byte-count COMDEF form. Preserve both measured shapes.
 FAR_PROVIDER_WORD_ARRAYS = {'source-owned:lion-sow-pillar':
-                          {'_PillarMap', '_SowDir', '_SowSave', '_SowX', '_SowY'}}
+                          {'_PillarMap', '_SowDir', '_SowSave', '_SowX', '_SowY'},
+                          'source-owned:database-record-state': {'_db_handles'}}
+
+FAR_PROVIDER_RECORD_ARRAYS = {'source-owned:database-record-state': {'_fd_50F6_3958': 124}}
 
 def provider_communals(module):
     spec = PROVIDER_SPECS.get(module)
@@ -164,9 +195,11 @@ def provider_communals(module):
         raise ValueError('unreviewed functional storage provider')
     far = module in FAR_PROVIDER_MODULES
     words = FAR_PROVIDER_WORD_ARRAYS.get(module, set())
+    records = FAR_PROVIDER_RECORD_ARRAYS.get(module, {})
     return [{'name': name, 'kind': 'far' if far else 'near', 'length': size,
-             **({'count': size // (2 if name in words else 1),
-                 'element_size': 2 if name in words else 1} if far else {})} for name, size in spec[2]]
+             **({'count': size // records.get(name, 2 if name in words else 1),
+                 'element_size': records.get(name, 2 if name in words else 1)} if far else {})}
+            for name, size in spec[2]]
 
 
 def review_frame_sites(binding):
@@ -355,7 +388,13 @@ def review_provider_source(text, provider, symbols=None):
             '_LionListM': 0x0ABA, '_LionListS': 0x0ACC, '_LionListT': 0x0ADE,
             '_LionListX': 0x0A92, '_LionListY': 0x0AA8, '_PillDir': 0x0C3C,
             '_PillarSeg': 0x0C36, '_PillarMap': 0x0D9C, '_SowDir': 0x0F1A,
-            '_SowSave': 0x0F28, '_SowX': 0x0EAE, '_SowY': 0x0F00})
+            '_SowSave': 0x0F28, '_SowX': 0x0EAE, '_SowY': 0x0F00,
+            '_ChaseSpid': 0x0248, '_SMode': 0x0FB8, '_SuserX': 0x0F42,
+            '_SuserY': 0x0F7E, '_Starg': 0x0FFC, '_StargLife': 0x10AE,
+            '_fd_50F6_0508': 0x0508, '_fd_50F6_0596': 0x0596,
+            '_fd_50F6_06A6': 0x06A6, '_fd_50F6_072E': 0x072E,
+            '_fd_50F6_07BC': 0x07BC})
+        addresses.update({'_fd_50F6_3958': 0x3958, '_db_handles': 0x3B50})
         for name, size in spec[2]:
             anchor = symbols['data'][name[1:]]
             segment = 0x50F6 if provider['module'] in FAR_PROVIDER_MODULES else 0x55B3
@@ -445,7 +484,10 @@ def require_additional_storage_contracts(report, profile, tool):
         ('source-owned:yard-scalars', 'yard_scalar_contract', 6, 2),
         ('source-owned:database-index-state', 'database_index_state_contract', 2),
         ('source-owned:spider-counters', 'spider_counter_contract', 17, 2),
-        ('source-owned:lion-sow-pillar', 'lion_array_storage_contract', 5, 2)])
+        ('source-owned:lion-sow-pillar', 'lion_array_storage_contract', 5, 2),
+        ('source-owned:spider-controls', 'spider_control_contract', 14, 2),
+        ('source-owned:point-state', 'point_state_contract', 2),
+        ('source-owned:database-record-state', 'database_record_state_contract', 4, 2)])
 
 
 def require_provider_contracts(report, profile, tool, specifications):

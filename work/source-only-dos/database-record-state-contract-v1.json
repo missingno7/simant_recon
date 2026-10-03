@@ -1,0 +1,2000 @@
+{
+  "schema": "simant-dos-database-record-state-contract-v1",
+  "category": "REVIEWED_SOURCE_STORAGE_CONTRACT",
+  "status": "REVIEWED_SOURCE_STORAGE_CONTRACT",
+  "root_reviewed": true,
+  "all_required_checks_pass": true,
+  "communals": [
+    {
+      "name": "_fd_50F6_3958",
+      "kind": "far",
+      "length": 496,
+      "count": 4,
+      "element_size": 124
+    },
+    {
+      "name": "_db_handles",
+      "kind": "far",
+      "length": 8,
+      "count": 4,
+      "element_size": 2
+    }
+  ],
+  "typed_layout": {
+    "owners": [
+      {
+        "name": "_fd_50F6_3958",
+        "type": "OpenDBRec far[4]",
+        "storage": "FAR_BSS",
+        "size": 496,
+        "element_type_size": 124,
+        "count": 4,
+        "record_stride": 124,
+        "signedness": null
+      },
+      {
+        "name": "_db_handles",
+        "type": "int far[4]",
+        "storage": "FAR_BSS",
+        "size": 8,
+        "element_type_size": 2,
+        "count": 4,
+        "record_stride": null,
+        "signedness": "signed 16-bit int"
+      }
+    ],
+    "OpenDBRec": {
+      "size": 124,
+      "fields": [
+        {
+          "name": "name",
+          "offset": 0,
+          "size": 80,
+          "type": "char[0x50]"
+        },
+        {
+          "name": "indexArea",
+          "offset": 80,
+          "size": 24,
+          "type": "union of typed and raw views"
+        },
+        {
+          "name": "indexArea.typed.index",
+          "offset": 80,
+          "size": 4,
+          "type": "IndexEntry far *",
+          "storage_distinction": "far pointer value stored inside each far OpenDBRec"
+        },
+        {
+          "name": "indexArea.typed.header",
+          "offset": 84,
+          "size": 20,
+          "type": "IndexHeader"
+        },
+        {
+          "name": "dbHeader",
+          "offset": 104,
+          "size": 14,
+          "type": "DBHeader"
+        },
+        {
+          "name": "indexFileArea.indexFile",
+          "offset": 118,
+          "size": 2,
+          "type": "int"
+        },
+        {
+          "name": "file",
+          "offset": 120,
+          "size": 2,
+          "type": "int"
+        },
+        {
+          "name": "dirty",
+          "offset": 122,
+          "size": 2,
+          "type": "int"
+        }
+      ],
+      "raw_views": [
+        "m1A28 index[24] overlays the full index pointer plus 20-byte index header region",
+        "m19A9 raw indexHeader[20] overlays typed IndexHeader at +0x54",
+        "m1A28 pad[2] overlays the m1986 indexFile word at +0x76"
+      ],
+      "index_entry": {
+        "size": 8,
+        "key_overlay": [
+          "char far *data",
+          "long offset"
+        ],
+        "allocation": "separate dynamic per-database count*8 allocation; not part of owner"
+      }
+    },
+    "no_added_padding": true,
+    "no_historical_tu_or_communal_order_claim": true,
+    "no_extent_from_neighbor_address": true
+  },
+  "required_cases": {
+    "four_slot_overlay_startup_positive": "PASS",
+    "three_record_extent_negative": "FAIL",
+    "near_index_pointer_negative": "FAIL",
+    "unsigned_handle_view_negative": "FAIL",
+    "nonzero_initializer_negative": "FAIL",
+    "near_storage_type_contrast": "PASS"
+  },
+  "cases": [
+    {
+      "linker": "rtlink400",
+      "case": "four_slot_overlay_startup_positive",
+      "purpose": "exact 496+8 FAR_BSS bytes; zero at main; 124-byte stride; raw/typed index/header aliases; first/last fields; signed handle and pointer halves",
+      "expected_log": "PASS",
+      "actual_log": "PASS",
+      "link_succeeded": true,
+      "dosbox_exit": 0,
+      "far_bss_layout": {
+        "region_start_linear": 4736,
+        "region_stop_linear": 5239,
+        "region_length": 504,
+        "test_link_symbols": {
+          "_db_handles": {
+            "segment": 296,
+            "offset": 0
+          },
+          "_fd_50F6_3958": {
+            "segment": 296,
+            "offset": 8
+          }
+        }
+      },
+      "link_log_sha256": "d48ca840c776411314f897e16106f130157548711e889a0c57fcf50231780f1a",
+      "files": [
+        {
+          "path": "build\\workers\\dos_database_record_state_ax_run_7\\fixtures\\rtlink400\\four_slot_overlay_startup_positive\\dosbox.conf",
+          "sha256": "c6806967c90bc1c815f4edaa667adc854ff6f3f744d704374383dbe5356fdc8e",
+          "size": 455
+        },
+        {
+          "path": "build\\workers\\dos_database_record_state_ax_run_7\\fixtures\\rtlink400\\four_slot_overlay_startup_positive\\LIBH.LIB",
+          "sha256": "a4492e8f63da409d949643fd448f29e65e2cc9a8f2deea977372177bbe0ad818",
+          "size": 21033
+        },
+        {
+          "path": "build\\workers\\dos_database_record_state_ax_run_7\\fixtures\\rtlink400\\four_slot_overlay_startup_positive\\LINK.LOG",
+          "sha256": "22896d5b4300de088ae791b6abb5d14447b98c83ef4420120e2bff3221c65afe",
+          "size": 451
+        },
+        {
+          "path": "build\\workers\\dos_database_record_state_ax_run_7\\fixtures\\rtlink400\\four_slot_overlay_startup_positive\\LLIBCR.LIB",
+          "sha256": "3d0c6ae92972789e87def01fa96351c39216d731d5c880370155c5613d78c884",
+          "size": 148711
+        },
+        {
+          "path": "build\\workers\\dos_database_record_state_ax_run_7\\fixtures\\rtlink400\\four_slot_overlay_startup_positive\\MAIN.OBJ",
+          "sha256": "18cce269ebbf178f8b5410c8552ab4b4a50b0c4e9559799d504dfe14bbcb35cc",
+          "size": 922
+        },
+        {
+          "path": "build\\workers\\dos_database_record_state_ax_run_7\\fixtures\\rtlink400\\four_slot_overlay_startup_positive\\OWNER.OBJ",
+          "sha256": "37850c5f5dc95a3a3330bcc1deea78eb48f1df4d2309eddba1a0b6c079b5e362",
+          "size": 229
+        },
+        {
+          "path": "build\\workers\\dos_database_record_state_ax_run_7\\fixtures\\rtlink400\\four_slot_overlay_startup_positive\\PROBE.EXE",
+          "sha256": "3132c8807455f5264e1f9de283e40b221866ed4c3f6cf4a0e39a68440e59f425",
+          "size": 6791
+        },
+        {
+          "path": "build\\workers\\dos_database_record_state_ax_run_7\\fixtures\\rtlink400\\four_slot_overlay_startup_positive\\PROBE.LNK",
+          "sha256": "0a009822702029f2bb57f80264b8bf777b233058c9b1323291eedf46618cbcfc",
+          "size": 85
+        },
+        {
+          "path": "build\\workers\\dos_database_record_state_ax_run_7\\fixtures\\rtlink400\\four_slot_overlay_startup_positive\\PROBE.MAP",
+          "sha256": "ef02b2ecfb002e667ee097b58bc19627da02b9aaec55391dfff6d1d17e309634",
+          "size": 8916
+        },
+        {
+          "path": "build\\workers\\dos_database_record_state_ax_run_7\\fixtures\\rtlink400\\four_slot_overlay_startup_positive\\RTLINK.CFG",
+          "sha256": "5d0c3a5bbc20976e57a8a99e35732f9f2d314ac80485a17f6b7ddaec8f8e81e8",
+          "size": 21
+        },
+        {
+          "path": "build\\workers\\dos_database_record_state_ax_run_7\\fixtures\\rtlink400\\four_slot_overlay_startup_positive\\RUN.BAT",
+          "sha256": "164577f4cfc5ffa5b92aaf77779ef6f209a85bb039d194ae3745f35bffd51c41",
+          "size": 75
+        },
+        {
+          "path": "build\\workers\\dos_database_record_state_ax_run_7\\fixtures\\rtlink400\\four_slot_overlay_startup_positive\\RUN.LOG",
+          "sha256": "d938fa189912f8776c3deb31a6bec42f403f57b9c8e3ed936bdb076caf6bd61c",
+          "size": 6
+        }
+      ],
+      "passed": true,
+      "expected": "PASS",
+      "actual": "PASS"
+    },
+    {
+      "linker": "rtlink400",
+      "case": "three_record_extent_negative",
+      "purpose": "three-record owner reports the wrong extent and must not satisfy the four-slot assertion",
+      "expected_log": "FAIL",
+      "actual_log": "FAIL",
+      "link_succeeded": true,
+      "dosbox_exit": 0,
+      "far_bss_layout": null,
+      "link_log_sha256": "e750894fa2dbe94f168ae9774a9a38462cfac05f32bb5065bc292b5bf9de78ec",
+      "files": [
+        {
+          "path": "build\\workers\\dos_database_record_state_ax_run_7\\fixtures\\rtlink400\\three_record_extent_negative\\dosbox.conf",
+          "sha256": "f6070523fafff0df1250a194c66a7102c6582a4e0a63ab73ff3ea7bec2b94779",
+          "size": 449
+        },
+        {
+          "path": "build\\workers\\dos_database_record_state_ax_run_7\\fixtures\\rtlink400\\three_record_extent_negative\\LIBH.LIB",
+          "sha256": "a4492e8f63da409d949643fd448f29e65e2cc9a8f2deea977372177bbe0ad818",
+          "size": 21033
+        },
+        {
+          "path": "build\\workers\\dos_database_record_state_ax_run_7\\fixtures\\rtlink400\\three_record_extent_negative\\LINK.LOG",
+          "sha256": "8b7edae59376c9cb8781d9e8758c5e3b3bc6a1d4979e5da93a3309f2ad29b734",
+          "size": 451
+        },
+        {
+          "path": "build\\workers\\dos_database_record_state_ax_run_7\\fixtures\\rtlink400\\three_record_extent_negative\\LLIBCR.LIB",
+          "sha256": "3d0c6ae92972789e87def01fa96351c39216d731d5c880370155c5613d78c884",
+          "size": 148711
+        },
+        {
+          "path": "build\\workers\\dos_database_record_state_ax_run_7\\fixtures\\rtlink400\\three_record_extent_negative\\MAIN.OBJ",
+          "sha256": "093bc4678686793ae0e2f46ec2fe340902971997d40586780f434ed3c290d127",
+          "size": 310
+        },
+        {
+          "path": "build\\workers\\dos_database_record_state_ax_run_7\\fixtures\\rtlink400\\three_record_extent_negative\\OWNER.OBJ",
+          "sha256": "81f9036c872728b9efa613b8d5275140f96c796a3efeb6c9ed0cf058fdf98073",
+          "size": 225
+        },
+        {
+          "path": "build\\workers\\dos_database_record_state_ax_run_7\\fixtures\\rtlink400\\three_record_extent_negative\\PROBE.EXE",
+          "sha256": "dc30e1db8bd2813ccdf4d2c26b4700c93cae47b72dd6087cbabbfac6547815b2",
+          "size": 6103
+        },
+        {
+          "path": "build\\workers\\dos_database_record_state_ax_run_7\\fixtures\\rtlink400\\three_record_extent_negative\\PROBE.LNK",
+          "sha256": "0a009822702029f2bb57f80264b8bf777b233058c9b1323291eedf46618cbcfc",
+          "size": 85
+        },
+        {
+          "path": "build\\workers\\dos_database_record_state_ax_run_7\\fixtures\\rtlink400\\three_record_extent_negative\\PROBE.MAP",
+          "sha256": "69e1af28489eb9368af332a1b25854575e943b310fa0e894adad06abcb4bd147",
+          "size": 8916
+        },
+        {
+          "path": "build\\workers\\dos_database_record_state_ax_run_7\\fixtures\\rtlink400\\three_record_extent_negative\\RTLINK.CFG",
+          "sha256": "5d0c3a5bbc20976e57a8a99e35732f9f2d314ac80485a17f6b7ddaec8f8e81e8",
+          "size": 21
+        },
+        {
+          "path": "build\\workers\\dos_database_record_state_ax_run_7\\fixtures\\rtlink400\\three_record_extent_negative\\RUN.BAT",
+          "sha256": "164577f4cfc5ffa5b92aaf77779ef6f209a85bb039d194ae3745f35bffd51c41",
+          "size": 75
+        },
+        {
+          "path": "build\\workers\\dos_database_record_state_ax_run_7\\fixtures\\rtlink400\\three_record_extent_negative\\RUN.LOG",
+          "sha256": "765489fd1b16cabfd78a744ff35dbeccd0d050fb1bff907dca6e1eafa8d44938",
+          "size": 6
+        }
+      ],
+      "passed": true,
+      "expected": "FAIL",
+      "actual": "FAIL"
+    },
+    {
+      "linker": "rtlink400",
+      "case": "near_index_pointer_negative",
+      "purpose": "near two-byte pointer changes the typed pointer/header boundary within the 24-byte index area",
+      "expected_log": "FAIL",
+      "actual_log": "FAIL",
+      "link_succeeded": true,
+      "dosbox_exit": 0,
+      "far_bss_layout": null,
+      "link_log_sha256": "d48ca840c776411314f897e16106f130157548711e889a0c57fcf50231780f1a",
+      "files": [
+        {
+          "path": "build\\workers\\dos_database_record_state_ax_run_7\\fixtures\\rtlink400\\near_index_pointer_negative\\dosbox.conf",
+          "sha256": "c69b354906410812e6808fe185fddef16d390839386431af0a13727157d56bdb",
+          "size": 448
+        },
+        {
+          "path": "build\\workers\\dos_database_record_state_ax_run_7\\fixtures\\rtlink400\\near_index_pointer_negative\\LIBH.LIB",
+          "sha256": "a4492e8f63da409d949643fd448f29e65e2cc9a8f2deea977372177bbe0ad818",
+          "size": 21033
+        },
+        {
+          "path": "build\\workers\\dos_database_record_state_ax_run_7\\fixtures\\rtlink400\\near_index_pointer_negative\\LINK.LOG",
+          "sha256": "22896d5b4300de088ae791b6abb5d14447b98c83ef4420120e2bff3221c65afe",
+          "size": 451
+        },
+        {
+          "path": "build\\workers\\dos_database_record_state_ax_run_7\\fixtures\\rtlink400\\near_index_pointer_negative\\LLIBCR.LIB",
+          "sha256": "3d0c6ae92972789e87def01fa96351c39216d731d5c880370155c5613d78c884",
+          "size": 148711
+        },
+        {
+          "path": "build\\workers\\dos_database_record_state_ax_run_7\\fixtures\\rtlink400\\near_index_pointer_negative\\MAIN.OBJ",
+          "sha256": "45068d9618340cd6ddaddaa07bbb590b66aa9e5feb2cf1004281d9c98161c31f",
+          "size": 315
+        },
+        {
+          "path": "build\\workers\\dos_database_record_state_ax_run_7\\fixtures\\rtlink400\\near_index_pointer_negative\\OWNER.OBJ",
+          "sha256": "8bb1c1f0b0afac1d1fc0389188d1407902dd48e64fcc7cdeadf70952694675b0",
+          "size": 225
+        },
+        {
+          "path": "build\\workers\\dos_database_record_state_ax_run_7\\fixtures\\rtlink400\\near_index_pointer_negative\\PROBE.EXE",
+          "sha256": "6cdbbe069decddc10904fcb5f93c7c72d569cd15fbd9b58bde91feb78de48ad8",
+          "size": 6263
+        },
+        {
+          "path": "build\\workers\\dos_database_record_state_ax_run_7\\fixtures\\rtlink400\\near_index_pointer_negative\\PROBE.LNK",
+          "sha256": "0a009822702029f2bb57f80264b8bf777b233058c9b1323291eedf46618cbcfc",
+          "size": 85
+        },
+        {
+          "path": "build\\workers\\dos_database_record_state_ax_run_7\\fixtures\\rtlink400\\near_index_pointer_negative\\PROBE.MAP",
+          "sha256": "a4d1cfdc43b2dee2a5f3bd66f5fc9eae5874a9da3a5a2418838c3bfd8f566816",
+          "size": 8916
+        },
+        {
+          "path": "build\\workers\\dos_database_record_state_ax_run_7\\fixtures\\rtlink400\\near_index_pointer_negative\\RTLINK.CFG",
+          "sha256": "5d0c3a5bbc20976e57a8a99e35732f9f2d314ac80485a17f6b7ddaec8f8e81e8",
+          "size": 21
+        },
+        {
+          "path": "build\\workers\\dos_database_record_state_ax_run_7\\fixtures\\rtlink400\\near_index_pointer_negative\\RUN.BAT",
+          "sha256": "164577f4cfc5ffa5b92aaf77779ef6f209a85bb039d194ae3745f35bffd51c41",
+          "size": 75
+        },
+        {
+          "path": "build\\workers\\dos_database_record_state_ax_run_7\\fixtures\\rtlink400\\near_index_pointer_negative\\RUN.LOG",
+          "sha256": "765489fd1b16cabfd78a744ff35dbeccd0d050fb1bff907dca6e1eafa8d44938",
+          "size": 6
+        }
+      ],
+      "passed": true,
+      "expected": "FAIL",
+      "actual": "FAIL"
+    },
+    {
+      "linker": "rtlink400",
+      "case": "unsigned_handle_view_negative",
+      "purpose": "unsigned handle view loses the signed -1 sentinel comparison",
+      "expected_log": "FAIL",
+      "actual_log": "FAIL",
+      "link_succeeded": true,
+      "dosbox_exit": 0,
+      "far_bss_layout": null,
+      "link_log_sha256": "d48ca840c776411314f897e16106f130157548711e889a0c57fcf50231780f1a",
+      "files": [
+        {
+          "path": "build\\workers\\dos_database_record_state_ax_run_7\\fixtures\\rtlink400\\unsigned_handle_view_negative\\dosbox.conf",
+          "sha256": "9cb17057ca366a533a0e432806ee3f904bd8cfb2f24ac3d77747b45e4502acbf",
+          "size": 450
+        },
+        {
+          "path": "build\\workers\\dos_database_record_state_ax_run_7\\fixtures\\rtlink400\\unsigned_handle_view_negative\\LIBH.LIB",
+          "sha256": "a4492e8f63da409d949643fd448f29e65e2cc9a8f2deea977372177bbe0ad818",
+          "size": 21033
+        },
+        {
+          "path": "build\\workers\\dos_database_record_state_ax_run_7\\fixtures\\rtlink400\\unsigned_handle_view_negative\\LINK.LOG",
+          "sha256": "22896d5b4300de088ae791b6abb5d14447b98c83ef4420120e2bff3221c65afe",
+          "size": 451
+        },
+        {
+          "path": "build\\workers\\dos_database_record_state_ax_run_7\\fixtures\\rtlink400\\unsigned_handle_view_negative\\LLIBCR.LIB",
+          "sha256": "3d0c6ae92972789e87def01fa96351c39216d731d5c880370155c5613d78c884",
+          "size": 148711
+        },
+        {
+          "path": "build\\workers\\dos_database_record_state_ax_run_7\\fixtures\\rtlink400\\unsigned_handle_view_negative\\MAIN.OBJ",
+          "sha256": "f344738797fadced95affdb01b77ffcd06d5a54e01a47501c357f8464bd4d626",
+          "size": 330
+        },
+        {
+          "path": "build\\workers\\dos_database_record_state_ax_run_7\\fixtures\\rtlink400\\unsigned_handle_view_negative\\OWNER.OBJ",
+          "sha256": "37850c5f5dc95a3a3330bcc1deea78eb48f1df4d2309eddba1a0b6c079b5e362",
+          "size": 229
+        },
+        {
+          "path": "build\\workers\\dos_database_record_state_ax_run_7\\fixtures\\rtlink400\\unsigned_handle_view_negative\\PROBE.EXE",
+          "sha256": "2d1846e087ba2d53811b912f6eb49e88e57c11962ad4cef57a7f4f0e92eeea03",
+          "size": 6249
+        },
+        {
+          "path": "build\\workers\\dos_database_record_state_ax_run_7\\fixtures\\rtlink400\\unsigned_handle_view_negative\\PROBE.LNK",
+          "sha256": "0a009822702029f2bb57f80264b8bf777b233058c9b1323291eedf46618cbcfc",
+          "size": 85
+        },
+        {
+          "path": "build\\workers\\dos_database_record_state_ax_run_7\\fixtures\\rtlink400\\unsigned_handle_view_negative\\PROBE.MAP",
+          "sha256": "85f4fea9298b63b972dbd9adf5f0ba7324bd11e54ab118dd05833f5e5bd79545",
+          "size": 8916
+        },
+        {
+          "path": "build\\workers\\dos_database_record_state_ax_run_7\\fixtures\\rtlink400\\unsigned_handle_view_negative\\RTLINK.CFG",
+          "sha256": "5d0c3a5bbc20976e57a8a99e35732f9f2d314ac80485a17f6b7ddaec8f8e81e8",
+          "size": 21
+        },
+        {
+          "path": "build\\workers\\dos_database_record_state_ax_run_7\\fixtures\\rtlink400\\unsigned_handle_view_negative\\RUN.BAT",
+          "sha256": "164577f4cfc5ffa5b92aaf77779ef6f209a85bb039d194ae3745f35bffd51c41",
+          "size": 75
+        },
+        {
+          "path": "build\\workers\\dos_database_record_state_ax_run_7\\fixtures\\rtlink400\\unsigned_handle_view_negative\\RUN.LOG",
+          "sha256": "765489fd1b16cabfd78a744ff35dbeccd0d050fb1bff907dca6e1eafa8d44938",
+          "size": 6
+        }
+      ],
+      "passed": true,
+      "expected": "FAIL",
+      "actual": "FAIL"
+    },
+    {
+      "linker": "rtlink400",
+      "case": "nonzero_initializer_negative",
+      "purpose": "initialized storage violates zero-startup FAR_BSS state",
+      "expected_log": "FAIL",
+      "actual_log": "FAIL",
+      "link_succeeded": true,
+      "dosbox_exit": 0,
+      "far_bss_layout": null,
+      "link_log_sha256": "d48ca840c776411314f897e16106f130157548711e889a0c57fcf50231780f1a",
+      "files": [
+        {
+          "path": "build\\workers\\dos_database_record_state_ax_run_7\\fixtures\\rtlink400\\nonzero_initializer_negative\\dosbox.conf",
+          "sha256": "86481a5d097903a6fd6a747e701caeb4b668b5dbb3639dca9dac0d8de03b4e14",
+          "size": 449
+        },
+        {
+          "path": "build\\workers\\dos_database_record_state_ax_run_7\\fixtures\\rtlink400\\nonzero_initializer_negative\\LIBH.LIB",
+          "sha256": "a4492e8f63da409d949643fd448f29e65e2cc9a8f2deea977372177bbe0ad818",
+          "size": 21033
+        },
+        {
+          "path": "build\\workers\\dos_database_record_state_ax_run_7\\fixtures\\rtlink400\\nonzero_initializer_negative\\LINK.LOG",
+          "sha256": "22896d5b4300de088ae791b6abb5d14447b98c83ef4420120e2bff3221c65afe",
+          "size": 451
+        },
+        {
+          "path": "build\\workers\\dos_database_record_state_ax_run_7\\fixtures\\rtlink400\\nonzero_initializer_negative\\LLIBCR.LIB",
+          "sha256": "3d0c6ae92972789e87def01fa96351c39216d731d5c880370155c5613d78c884",
+          "size": 148711
+        },
+        {
+          "path": "build\\workers\\dos_database_record_state_ax_run_7\\fixtures\\rtlink400\\nonzero_initializer_negative\\MAIN.OBJ",
+          "sha256": "18cce269ebbf178f8b5410c8552ab4b4a50b0c4e9559799d504dfe14bbcb35cc",
+          "size": 922
+        },
+        {
+          "path": "build\\workers\\dos_database_record_state_ax_run_7\\fixtures\\rtlink400\\nonzero_initializer_negative\\OWNER.OBJ",
+          "sha256": "cf884639a2995092e0d2482bafe2a7f0b30544546b91c43b8b5164eaf009933d",
+          "size": 307
+        },
+        {
+          "path": "build\\workers\\dos_database_record_state_ax_run_7\\fixtures\\rtlink400\\nonzero_initializer_negative\\PROBE.EXE",
+          "sha256": "59e18f177a7239916c8a9f67079a85d89b933d7c5e17db60138e41b38bc3c4a3",
+          "size": 6791
+        },
+        {
+          "path": "build\\workers\\dos_database_record_state_ax_run_7\\fixtures\\rtlink400\\nonzero_initializer_negative\\PROBE.LNK",
+          "sha256": "0a009822702029f2bb57f80264b8bf777b233058c9b1323291eedf46618cbcfc",
+          "size": 85
+        },
+        {
+          "path": "build\\workers\\dos_database_record_state_ax_run_7\\fixtures\\rtlink400\\nonzero_initializer_negative\\PROBE.MAP",
+          "sha256": "6ad5b84e8787a583280d4686855b31bc65543e0aa223a4fe3f67f9064847237f",
+          "size": 8917
+        },
+        {
+          "path": "build\\workers\\dos_database_record_state_ax_run_7\\fixtures\\rtlink400\\nonzero_initializer_negative\\RTLINK.CFG",
+          "sha256": "5d0c3a5bbc20976e57a8a99e35732f9f2d314ac80485a17f6b7ddaec8f8e81e8",
+          "size": 21
+        },
+        {
+          "path": "build\\workers\\dos_database_record_state_ax_run_7\\fixtures\\rtlink400\\nonzero_initializer_negative\\RUN.BAT",
+          "sha256": "164577f4cfc5ffa5b92aaf77779ef6f209a85bb039d194ae3745f35bffd51c41",
+          "size": 75
+        },
+        {
+          "path": "build\\workers\\dos_database_record_state_ax_run_7\\fixtures\\rtlink400\\nonzero_initializer_negative\\RUN.LOG",
+          "sha256": "765489fd1b16cabfd78a744ff35dbeccd0d050fb1bff907dca6e1eafa8d44938",
+          "size": 6
+        }
+      ],
+      "passed": true,
+      "expected": "FAIL",
+      "actual": "FAIL"
+    },
+    {
+      "linker": "rtlink400",
+      "case": "near_storage_type_contrast",
+      "purpose": "the explicitly near control runs with near declarations but emits near COMDEFs, not either candidate far communal",
+      "expected_log": "PASS",
+      "actual_log": "PASS",
+      "link_succeeded": true,
+      "dosbox_exit": 0,
+      "far_bss_layout": null,
+      "link_log_sha256": "d48ca840c776411314f897e16106f130157548711e889a0c57fcf50231780f1a",
+      "files": [
+        {
+          "path": "build\\workers\\dos_database_record_state_ax_run_7\\fixtures\\rtlink400\\near_storage_type_contrast\\dosbox.conf",
+          "sha256": "fe4594b22519fd56aa89e01ad08df929275f792cfd4bd302c9100d3a07526c8a",
+          "size": 447
+        },
+        {
+          "path": "build\\workers\\dos_database_record_state_ax_run_7\\fixtures\\rtlink400\\near_storage_type_contrast\\LIBH.LIB",
+          "sha256": "a4492e8f63da409d949643fd448f29e65e2cc9a8f2deea977372177bbe0ad818",
+          "size": 21033
+        },
+        {
+          "path": "build\\workers\\dos_database_record_state_ax_run_7\\fixtures\\rtlink400\\near_storage_type_contrast\\LINK.LOG",
+          "sha256": "22896d5b4300de088ae791b6abb5d14447b98c83ef4420120e2bff3221c65afe",
+          "size": 451
+        },
+        {
+          "path": "build\\workers\\dos_database_record_state_ax_run_7\\fixtures\\rtlink400\\near_storage_type_contrast\\LLIBCR.LIB",
+          "sha256": "3d0c6ae92972789e87def01fa96351c39216d731d5c880370155c5613d78c884",
+          "size": 148711
+        },
+        {
+          "path": "build\\workers\\dos_database_record_state_ax_run_7\\fixtures\\rtlink400\\near_storage_type_contrast\\MAIN.OBJ",
+          "sha256": "8faa5a6c80060056b5b2a88f24543208ce03d65eae29fcb8cb43f3f624f012d0",
+          "size": 362
+        },
+        {
+          "path": "build\\workers\\dos_database_record_state_ax_run_7\\fixtures\\rtlink400\\near_storage_type_contrast\\OWNER.OBJ",
+          "sha256": "08fc54006cde459c72e7f6fb15964b62d7e639a50d7682a18b12b38da82b01bb",
+          "size": 225
+        },
+        {
+          "path": "build\\workers\\dos_database_record_state_ax_run_7\\fixtures\\rtlink400\\near_storage_type_contrast\\PROBE.EXE",
+          "sha256": "40f7f11479a6bb61466f8eb3d9b09c936bbdd53a05086e5e0c49d863a4703edc",
+          "size": 5751
+        },
+        {
+          "path": "build\\workers\\dos_database_record_state_ax_run_7\\fixtures\\rtlink400\\near_storage_type_contrast\\PROBE.LNK",
+          "sha256": "0a009822702029f2bb57f80264b8bf777b233058c9b1323291eedf46618cbcfc",
+          "size": 85
+        },
+        {
+          "path": "build\\workers\\dos_database_record_state_ax_run_7\\fixtures\\rtlink400\\near_storage_type_contrast\\PROBE.MAP",
+          "sha256": "61c481c28e14044effc690cbefffcacc6096a3b5fac4048f429049a15ff5f5b2",
+          "size": 8862
+        },
+        {
+          "path": "build\\workers\\dos_database_record_state_ax_run_7\\fixtures\\rtlink400\\near_storage_type_contrast\\RTLINK.CFG",
+          "sha256": "5d0c3a5bbc20976e57a8a99e35732f9f2d314ac80485a17f6b7ddaec8f8e81e8",
+          "size": 21
+        },
+        {
+          "path": "build\\workers\\dos_database_record_state_ax_run_7\\fixtures\\rtlink400\\near_storage_type_contrast\\RUN.BAT",
+          "sha256": "164577f4cfc5ffa5b92aaf77779ef6f209a85bb039d194ae3745f35bffd51c41",
+          "size": 75
+        },
+        {
+          "path": "build\\workers\\dos_database_record_state_ax_run_7\\fixtures\\rtlink400\\near_storage_type_contrast\\RUN.LOG",
+          "sha256": "d938fa189912f8776c3deb31a6bec42f403f57b9c8e3ed936bdb076caf6bd61c",
+          "size": 6
+        }
+      ],
+      "passed": true,
+      "expected": "PASS",
+      "actual": "PASS"
+    },
+    {
+      "linker": "rtlink610",
+      "case": "four_slot_overlay_startup_positive",
+      "purpose": "exact 496+8 FAR_BSS bytes; zero at main; 124-byte stride; raw/typed index/header aliases; first/last fields; signed handle and pointer halves",
+      "expected_log": "PASS",
+      "actual_log": "PASS",
+      "link_succeeded": true,
+      "dosbox_exit": 0,
+      "far_bss_layout": {
+        "region_start_linear": 4736,
+        "region_stop_linear": 5239,
+        "region_length": 504,
+        "test_link_symbols": {
+          "_db_handles": {
+            "segment": 296,
+            "offset": 0
+          },
+          "_fd_50F6_3958": {
+            "segment": 296,
+            "offset": 8
+          }
+        }
+      },
+      "link_log_sha256": "1a6a7b03e2c405360686992b7eefc708c5069e7953b69ceb24c6a07524364b8a",
+      "files": [
+        {
+          "path": "build\\workers\\dos_database_record_state_ax_run_7\\fixtures\\rtlink610\\four_slot_overlay_startup_positive\\dosbox.conf",
+          "sha256": "012405bb22919978deb04a217f87d6d29984d37092e1e42286c50a5063491228",
+          "size": 455
+        },
+        {
+          "path": "build\\workers\\dos_database_record_state_ax_run_7\\fixtures\\rtlink610\\four_slot_overlay_startup_positive\\LIBH.LIB",
+          "sha256": "a4492e8f63da409d949643fd448f29e65e2cc9a8f2deea977372177bbe0ad818",
+          "size": 21033
+        },
+        {
+          "path": "build\\workers\\dos_database_record_state_ax_run_7\\fixtures\\rtlink610\\four_slot_overlay_startup_positive\\LINK.LOG",
+          "sha256": "94dc8d17c5e9bffc41b1bf270222de1fc13b39833aec5861b6c2410280d3ffea",
+          "size": 982
+        },
+        {
+          "path": "build\\workers\\dos_database_record_state_ax_run_7\\fixtures\\rtlink610\\four_slot_overlay_startup_positive\\LLIBCR.LIB",
+          "sha256": "3d0c6ae92972789e87def01fa96351c39216d731d5c880370155c5613d78c884",
+          "size": 148711
+        },
+        {
+          "path": "build\\workers\\dos_database_record_state_ax_run_7\\fixtures\\rtlink610\\four_slot_overlay_startup_positive\\MAIN.OBJ",
+          "sha256": "18cce269ebbf178f8b5410c8552ab4b4a50b0c4e9559799d504dfe14bbcb35cc",
+          "size": 922
+        },
+        {
+          "path": "build\\workers\\dos_database_record_state_ax_run_7\\fixtures\\rtlink610\\four_slot_overlay_startup_positive\\OWNER.OBJ",
+          "sha256": "37850c5f5dc95a3a3330bcc1deea78eb48f1df4d2309eddba1a0b6c079b5e362",
+          "size": 229
+        },
+        {
+          "path": "build\\workers\\dos_database_record_state_ax_run_7\\fixtures\\rtlink610\\four_slot_overlay_startup_positive\\PROBE.EXE",
+          "sha256": "70334688bed91dbd61355258ae5152ed360cf4cd6ecd39bbbea3a0cc26b6b694",
+          "size": 6791
+        },
+        {
+          "path": "build\\workers\\dos_database_record_state_ax_run_7\\fixtures\\rtlink610\\four_slot_overlay_startup_positive\\PROBE.LNK",
+          "sha256": "0a009822702029f2bb57f80264b8bf777b233058c9b1323291eedf46618cbcfc",
+          "size": 85
+        },
+        {
+          "path": "build\\workers\\dos_database_record_state_ax_run_7\\fixtures\\rtlink610\\four_slot_overlay_startup_positive\\PROBE.MAP",
+          "sha256": "f5b2f2730e54ecb6df7b54b0ccbc99a829779687211fae1aa12a1bfbfc5d8f60",
+          "size": 9016
+        },
+        {
+          "path": "build\\workers\\dos_database_record_state_ax_run_7\\fixtures\\rtlink610\\four_slot_overlay_startup_positive\\RTLINK.CFG",
+          "sha256": "5d0c3a5bbc20976e57a8a99e35732f9f2d314ac80485a17f6b7ddaec8f8e81e8",
+          "size": 21
+        },
+        {
+          "path": "build\\workers\\dos_database_record_state_ax_run_7\\fixtures\\rtlink610\\four_slot_overlay_startup_positive\\RUN.BAT",
+          "sha256": "9351c86209ef8577c4042608e5173beb279210d743df083ea7585789f9c43b9f",
+          "size": 77
+        },
+        {
+          "path": "build\\workers\\dos_database_record_state_ax_run_7\\fixtures\\rtlink610\\four_slot_overlay_startup_positive\\RUN.LOG",
+          "sha256": "d938fa189912f8776c3deb31a6bec42f403f57b9c8e3ed936bdb076caf6bd61c",
+          "size": 6
+        }
+      ],
+      "passed": true,
+      "expected": "PASS",
+      "actual": "PASS"
+    },
+    {
+      "linker": "rtlink610",
+      "case": "three_record_extent_negative",
+      "purpose": "three-record owner reports the wrong extent and must not satisfy the four-slot assertion",
+      "expected_log": "FAIL",
+      "actual_log": "FAIL",
+      "link_succeeded": true,
+      "dosbox_exit": 0,
+      "far_bss_layout": null,
+      "link_log_sha256": "0732da13fd2fc45afd663c885a3d5f94bd694d445f42eb559117584aae1a32b9",
+      "files": [
+        {
+          "path": "build\\workers\\dos_database_record_state_ax_run_7\\fixtures\\rtlink610\\three_record_extent_negative\\dosbox.conf",
+          "sha256": "5a283849d4a08dad1bbf88d78770235c30dd76563a22cd3840a7fea0062d0bbf",
+          "size": 449
+        },
+        {
+          "path": "build\\workers\\dos_database_record_state_ax_run_7\\fixtures\\rtlink610\\three_record_extent_negative\\LIBH.LIB",
+          "sha256": "a4492e8f63da409d949643fd448f29e65e2cc9a8f2deea977372177bbe0ad818",
+          "size": 21033
+        },
+        {
+          "path": "build\\workers\\dos_database_record_state_ax_run_7\\fixtures\\rtlink610\\three_record_extent_negative\\LINK.LOG",
+          "sha256": "5aff7ac7706c0d64bf48a563309efecee1ac2300103ba6ffd37dae749248609b",
+          "size": 982
+        },
+        {
+          "path": "build\\workers\\dos_database_record_state_ax_run_7\\fixtures\\rtlink610\\three_record_extent_negative\\LLIBCR.LIB",
+          "sha256": "3d0c6ae92972789e87def01fa96351c39216d731d5c880370155c5613d78c884",
+          "size": 148711
+        },
+        {
+          "path": "build\\workers\\dos_database_record_state_ax_run_7\\fixtures\\rtlink610\\three_record_extent_negative\\MAIN.OBJ",
+          "sha256": "093bc4678686793ae0e2f46ec2fe340902971997d40586780f434ed3c290d127",
+          "size": 310
+        },
+        {
+          "path": "build\\workers\\dos_database_record_state_ax_run_7\\fixtures\\rtlink610\\three_record_extent_negative\\OWNER.OBJ",
+          "sha256": "81f9036c872728b9efa613b8d5275140f96c796a3efeb6c9ed0cf058fdf98073",
+          "size": 225
+        },
+        {
+          "path": "build\\workers\\dos_database_record_state_ax_run_7\\fixtures\\rtlink610\\three_record_extent_negative\\PROBE.EXE",
+          "sha256": "3778d7622218714de43c7e6cbb26153e20ca257a2ad739ebe8d69e85a246303f",
+          "size": 6103
+        },
+        {
+          "path": "build\\workers\\dos_database_record_state_ax_run_7\\fixtures\\rtlink610\\three_record_extent_negative\\PROBE.LNK",
+          "sha256": "0a009822702029f2bb57f80264b8bf777b233058c9b1323291eedf46618cbcfc",
+          "size": 85
+        },
+        {
+          "path": "build\\workers\\dos_database_record_state_ax_run_7\\fixtures\\rtlink610\\three_record_extent_negative\\PROBE.MAP",
+          "sha256": "538f9255a65ac1cc4aaadd015ed7d137967230d0e1d36d0de1df4f41a7a31214",
+          "size": 9016
+        },
+        {
+          "path": "build\\workers\\dos_database_record_state_ax_run_7\\fixtures\\rtlink610\\three_record_extent_negative\\RTLINK.CFG",
+          "sha256": "5d0c3a5bbc20976e57a8a99e35732f9f2d314ac80485a17f6b7ddaec8f8e81e8",
+          "size": 21
+        },
+        {
+          "path": "build\\workers\\dos_database_record_state_ax_run_7\\fixtures\\rtlink610\\three_record_extent_negative\\RUN.BAT",
+          "sha256": "9351c86209ef8577c4042608e5173beb279210d743df083ea7585789f9c43b9f",
+          "size": 77
+        },
+        {
+          "path": "build\\workers\\dos_database_record_state_ax_run_7\\fixtures\\rtlink610\\three_record_extent_negative\\RUN.LOG",
+          "sha256": "765489fd1b16cabfd78a744ff35dbeccd0d050fb1bff907dca6e1eafa8d44938",
+          "size": 6
+        }
+      ],
+      "passed": true,
+      "expected": "FAIL",
+      "actual": "FAIL"
+    },
+    {
+      "linker": "rtlink610",
+      "case": "near_index_pointer_negative",
+      "purpose": "near two-byte pointer changes the typed pointer/header boundary within the 24-byte index area",
+      "expected_log": "FAIL",
+      "actual_log": "FAIL",
+      "link_succeeded": true,
+      "dosbox_exit": 0,
+      "far_bss_layout": null,
+      "link_log_sha256": "98c5608f7f8bb734c41e6d0c7a859aab43fef7dbdfac1d175cb1724170847ec8",
+      "files": [
+        {
+          "path": "build\\workers\\dos_database_record_state_ax_run_7\\fixtures\\rtlink610\\near_index_pointer_negative\\dosbox.conf",
+          "sha256": "864df5d2caee806792490444f6e004401dafc68361fb5fbeba6d9654381a6f20",
+          "size": 448
+        },
+        {
+          "path": "build\\workers\\dos_database_record_state_ax_run_7\\fixtures\\rtlink610\\near_index_pointer_negative\\LIBH.LIB",
+          "sha256": "a4492e8f63da409d949643fd448f29e65e2cc9a8f2deea977372177bbe0ad818",
+          "size": 21033
+        },
+        {
+          "path": "build\\workers\\dos_database_record_state_ax_run_7\\fixtures\\rtlink610\\near_index_pointer_negative\\LINK.LOG",
+          "sha256": "07dde12221d6304e020b2a51587e234a9856b8f84d6b0814af73717cd90f48ab",
+          "size": 981
+        },
+        {
+          "path": "build\\workers\\dos_database_record_state_ax_run_7\\fixtures\\rtlink610\\near_index_pointer_negative\\LLIBCR.LIB",
+          "sha256": "3d0c6ae92972789e87def01fa96351c39216d731d5c880370155c5613d78c884",
+          "size": 148711
+        },
+        {
+          "path": "build\\workers\\dos_database_record_state_ax_run_7\\fixtures\\rtlink610\\near_index_pointer_negative\\MAIN.OBJ",
+          "sha256": "45068d9618340cd6ddaddaa07bbb590b66aa9e5feb2cf1004281d9c98161c31f",
+          "size": 315
+        },
+        {
+          "path": "build\\workers\\dos_database_record_state_ax_run_7\\fixtures\\rtlink610\\near_index_pointer_negative\\OWNER.OBJ",
+          "sha256": "8bb1c1f0b0afac1d1fc0389188d1407902dd48e64fcc7cdeadf70952694675b0",
+          "size": 225
+        },
+        {
+          "path": "build\\workers\\dos_database_record_state_ax_run_7\\fixtures\\rtlink610\\near_index_pointer_negative\\PROBE.EXE",
+          "sha256": "081560d4cbd84535659db2e30652906e405192497484da00352d8d91141511a2",
+          "size": 6263
+        },
+        {
+          "path": "build\\workers\\dos_database_record_state_ax_run_7\\fixtures\\rtlink610\\near_index_pointer_negative\\PROBE.LNK",
+          "sha256": "0a009822702029f2bb57f80264b8bf777b233058c9b1323291eedf46618cbcfc",
+          "size": 85
+        },
+        {
+          "path": "build\\workers\\dos_database_record_state_ax_run_7\\fixtures\\rtlink610\\near_index_pointer_negative\\PROBE.MAP",
+          "sha256": "68871c0b2150dbf99782d605805d19d494d91b13063039caead7291100414a19",
+          "size": 9016
+        },
+        {
+          "path": "build\\workers\\dos_database_record_state_ax_run_7\\fixtures\\rtlink610\\near_index_pointer_negative\\RTLINK.CFG",
+          "sha256": "5d0c3a5bbc20976e57a8a99e35732f9f2d314ac80485a17f6b7ddaec8f8e81e8",
+          "size": 21
+        },
+        {
+          "path": "build\\workers\\dos_database_record_state_ax_run_7\\fixtures\\rtlink610\\near_index_pointer_negative\\RUN.BAT",
+          "sha256": "9351c86209ef8577c4042608e5173beb279210d743df083ea7585789f9c43b9f",
+          "size": 77
+        },
+        {
+          "path": "build\\workers\\dos_database_record_state_ax_run_7\\fixtures\\rtlink610\\near_index_pointer_negative\\RUN.LOG",
+          "sha256": "765489fd1b16cabfd78a744ff35dbeccd0d050fb1bff907dca6e1eafa8d44938",
+          "size": 6
+        }
+      ],
+      "passed": true,
+      "expected": "FAIL",
+      "actual": "FAIL"
+    },
+    {
+      "linker": "rtlink610",
+      "case": "unsigned_handle_view_negative",
+      "purpose": "unsigned handle view loses the signed -1 sentinel comparison",
+      "expected_log": "FAIL",
+      "actual_log": "FAIL",
+      "link_succeeded": true,
+      "dosbox_exit": 0,
+      "far_bss_layout": null,
+      "link_log_sha256": "02ca9658a835a961ab997af1a7fa211c6a9655c7c39e194927350e86f060c0f1",
+      "files": [
+        {
+          "path": "build\\workers\\dos_database_record_state_ax_run_7\\fixtures\\rtlink610\\unsigned_handle_view_negative\\dosbox.conf",
+          "sha256": "d1b32e98be1df3cebe1e4a216ad1ea828677bbb6d85007c2065021435bc7fe8d",
+          "size": 450
+        },
+        {
+          "path": "build\\workers\\dos_database_record_state_ax_run_7\\fixtures\\rtlink610\\unsigned_handle_view_negative\\LIBH.LIB",
+          "sha256": "a4492e8f63da409d949643fd448f29e65e2cc9a8f2deea977372177bbe0ad818",
+          "size": 21033
+        },
+        {
+          "path": "build\\workers\\dos_database_record_state_ax_run_7\\fixtures\\rtlink610\\unsigned_handle_view_negative\\LINK.LOG",
+          "sha256": "9a9403abf816e537357bd02553558e65f2eee532c913fbc673a38c1d7950aff2",
+          "size": 981
+        },
+        {
+          "path": "build\\workers\\dos_database_record_state_ax_run_7\\fixtures\\rtlink610\\unsigned_handle_view_negative\\LLIBCR.LIB",
+          "sha256": "3d0c6ae92972789e87def01fa96351c39216d731d5c880370155c5613d78c884",
+          "size": 148711
+        },
+        {
+          "path": "build\\workers\\dos_database_record_state_ax_run_7\\fixtures\\rtlink610\\unsigned_handle_view_negative\\MAIN.OBJ",
+          "sha256": "f344738797fadced95affdb01b77ffcd06d5a54e01a47501c357f8464bd4d626",
+          "size": 330
+        },
+        {
+          "path": "build\\workers\\dos_database_record_state_ax_run_7\\fixtures\\rtlink610\\unsigned_handle_view_negative\\OWNER.OBJ",
+          "sha256": "37850c5f5dc95a3a3330bcc1deea78eb48f1df4d2309eddba1a0b6c079b5e362",
+          "size": 229
+        },
+        {
+          "path": "build\\workers\\dos_database_record_state_ax_run_7\\fixtures\\rtlink610\\unsigned_handle_view_negative\\PROBE.EXE",
+          "sha256": "13ecacc0c996afe247c183fa078ac641dabcd5dfb77bea10706593c29c1823bc",
+          "size": 6249
+        },
+        {
+          "path": "build\\workers\\dos_database_record_state_ax_run_7\\fixtures\\rtlink610\\unsigned_handle_view_negative\\PROBE.LNK",
+          "sha256": "0a009822702029f2bb57f80264b8bf777b233058c9b1323291eedf46618cbcfc",
+          "size": 85
+        },
+        {
+          "path": "build\\workers\\dos_database_record_state_ax_run_7\\fixtures\\rtlink610\\unsigned_handle_view_negative\\PROBE.MAP",
+          "sha256": "6ed62fdce003877a8eb512667415d177d590dac9ffbf0f94851488c7e704ce96",
+          "size": 9016
+        },
+        {
+          "path": "build\\workers\\dos_database_record_state_ax_run_7\\fixtures\\rtlink610\\unsigned_handle_view_negative\\RTLINK.CFG",
+          "sha256": "5d0c3a5bbc20976e57a8a99e35732f9f2d314ac80485a17f6b7ddaec8f8e81e8",
+          "size": 21
+        },
+        {
+          "path": "build\\workers\\dos_database_record_state_ax_run_7\\fixtures\\rtlink610\\unsigned_handle_view_negative\\RUN.BAT",
+          "sha256": "9351c86209ef8577c4042608e5173beb279210d743df083ea7585789f9c43b9f",
+          "size": 77
+        },
+        {
+          "path": "build\\workers\\dos_database_record_state_ax_run_7\\fixtures\\rtlink610\\unsigned_handle_view_negative\\RUN.LOG",
+          "sha256": "765489fd1b16cabfd78a744ff35dbeccd0d050fb1bff907dca6e1eafa8d44938",
+          "size": 6
+        }
+      ],
+      "passed": true,
+      "expected": "FAIL",
+      "actual": "FAIL"
+    },
+    {
+      "linker": "rtlink610",
+      "case": "nonzero_initializer_negative",
+      "purpose": "initialized storage violates zero-startup FAR_BSS state",
+      "expected_log": "FAIL",
+      "actual_log": "FAIL",
+      "link_succeeded": true,
+      "dosbox_exit": 0,
+      "far_bss_layout": null,
+      "link_log_sha256": "1a6a7b03e2c405360686992b7eefc708c5069e7953b69ceb24c6a07524364b8a",
+      "files": [
+        {
+          "path": "build\\workers\\dos_database_record_state_ax_run_7\\fixtures\\rtlink610\\nonzero_initializer_negative\\dosbox.conf",
+          "sha256": "b49e592737a6b18027d883535337d40eae60394d9c7799051710d61c888d62f0",
+          "size": 449
+        },
+        {
+          "path": "build\\workers\\dos_database_record_state_ax_run_7\\fixtures\\rtlink610\\nonzero_initializer_negative\\LIBH.LIB",
+          "sha256": "a4492e8f63da409d949643fd448f29e65e2cc9a8f2deea977372177bbe0ad818",
+          "size": 21033
+        },
+        {
+          "path": "build\\workers\\dos_database_record_state_ax_run_7\\fixtures\\rtlink610\\nonzero_initializer_negative\\LINK.LOG",
+          "sha256": "94dc8d17c5e9bffc41b1bf270222de1fc13b39833aec5861b6c2410280d3ffea",
+          "size": 982
+        },
+        {
+          "path": "build\\workers\\dos_database_record_state_ax_run_7\\fixtures\\rtlink610\\nonzero_initializer_negative\\LLIBCR.LIB",
+          "sha256": "3d0c6ae92972789e87def01fa96351c39216d731d5c880370155c5613d78c884",
+          "size": 148711
+        },
+        {
+          "path": "build\\workers\\dos_database_record_state_ax_run_7\\fixtures\\rtlink610\\nonzero_initializer_negative\\MAIN.OBJ",
+          "sha256": "18cce269ebbf178f8b5410c8552ab4b4a50b0c4e9559799d504dfe14bbcb35cc",
+          "size": 922
+        },
+        {
+          "path": "build\\workers\\dos_database_record_state_ax_run_7\\fixtures\\rtlink610\\nonzero_initializer_negative\\OWNER.OBJ",
+          "sha256": "cf884639a2995092e0d2482bafe2a7f0b30544546b91c43b8b5164eaf009933d",
+          "size": 307
+        },
+        {
+          "path": "build\\workers\\dos_database_record_state_ax_run_7\\fixtures\\rtlink610\\nonzero_initializer_negative\\PROBE.EXE",
+          "sha256": "2cee5abf7ddfc2e5946219e0af283a500b18aa24fd5dee297d3b3e4d5f7ca427",
+          "size": 6791
+        },
+        {
+          "path": "build\\workers\\dos_database_record_state_ax_run_7\\fixtures\\rtlink610\\nonzero_initializer_negative\\PROBE.LNK",
+          "sha256": "0a009822702029f2bb57f80264b8bf777b233058c9b1323291eedf46618cbcfc",
+          "size": 85
+        },
+        {
+          "path": "build\\workers\\dos_database_record_state_ax_run_7\\fixtures\\rtlink610\\nonzero_initializer_negative\\PROBE.MAP",
+          "sha256": "05d2417e09b19dece01b953c1799d6f2011621f0fccfd1e4d2db710bbeae0584",
+          "size": 9017
+        },
+        {
+          "path": "build\\workers\\dos_database_record_state_ax_run_7\\fixtures\\rtlink610\\nonzero_initializer_negative\\RTLINK.CFG",
+          "sha256": "5d0c3a5bbc20976e57a8a99e35732f9f2d314ac80485a17f6b7ddaec8f8e81e8",
+          "size": 21
+        },
+        {
+          "path": "build\\workers\\dos_database_record_state_ax_run_7\\fixtures\\rtlink610\\nonzero_initializer_negative\\RUN.BAT",
+          "sha256": "9351c86209ef8577c4042608e5173beb279210d743df083ea7585789f9c43b9f",
+          "size": 77
+        },
+        {
+          "path": "build\\workers\\dos_database_record_state_ax_run_7\\fixtures\\rtlink610\\nonzero_initializer_negative\\RUN.LOG",
+          "sha256": "765489fd1b16cabfd78a744ff35dbeccd0d050fb1bff907dca6e1eafa8d44938",
+          "size": 6
+        }
+      ],
+      "passed": true,
+      "expected": "FAIL",
+      "actual": "FAIL"
+    },
+    {
+      "linker": "rtlink610",
+      "case": "near_storage_type_contrast",
+      "purpose": "the explicitly near control runs with near declarations but emits near COMDEFs, not either candidate far communal",
+      "expected_log": "PASS",
+      "actual_log": "PASS",
+      "link_succeeded": true,
+      "dosbox_exit": 0,
+      "far_bss_layout": null,
+      "link_log_sha256": "98c5608f7f8bb734c41e6d0c7a859aab43fef7dbdfac1d175cb1724170847ec8",
+      "files": [
+        {
+          "path": "build\\workers\\dos_database_record_state_ax_run_7\\fixtures\\rtlink610\\near_storage_type_contrast\\dosbox.conf",
+          "sha256": "95df20c9373dbd1a071b4e153d96eeb37ba55a40d56fbe1fe56c1cda055cb5e6",
+          "size": 447
+        },
+        {
+          "path": "build\\workers\\dos_database_record_state_ax_run_7\\fixtures\\rtlink610\\near_storage_type_contrast\\LIBH.LIB",
+          "sha256": "a4492e8f63da409d949643fd448f29e65e2cc9a8f2deea977372177bbe0ad818",
+          "size": 21033
+        },
+        {
+          "path": "build\\workers\\dos_database_record_state_ax_run_7\\fixtures\\rtlink610\\near_storage_type_contrast\\LINK.LOG",
+          "sha256": "07dde12221d6304e020b2a51587e234a9856b8f84d6b0814af73717cd90f48ab",
+          "size": 981
+        },
+        {
+          "path": "build\\workers\\dos_database_record_state_ax_run_7\\fixtures\\rtlink610\\near_storage_type_contrast\\LLIBCR.LIB",
+          "sha256": "3d0c6ae92972789e87def01fa96351c39216d731d5c880370155c5613d78c884",
+          "size": 148711
+        },
+        {
+          "path": "build\\workers\\dos_database_record_state_ax_run_7\\fixtures\\rtlink610\\near_storage_type_contrast\\MAIN.OBJ",
+          "sha256": "8faa5a6c80060056b5b2a88f24543208ce03d65eae29fcb8cb43f3f624f012d0",
+          "size": 362
+        },
+        {
+          "path": "build\\workers\\dos_database_record_state_ax_run_7\\fixtures\\rtlink610\\near_storage_type_contrast\\OWNER.OBJ",
+          "sha256": "08fc54006cde459c72e7f6fb15964b62d7e639a50d7682a18b12b38da82b01bb",
+          "size": 225
+        },
+        {
+          "path": "build\\workers\\dos_database_record_state_ax_run_7\\fixtures\\rtlink610\\near_storage_type_contrast\\PROBE.EXE",
+          "sha256": "7243eb34ab4ebb117933b22b2f7ee24cca21b996f3a13713c876038bdeabd420",
+          "size": 5751
+        },
+        {
+          "path": "build\\workers\\dos_database_record_state_ax_run_7\\fixtures\\rtlink610\\near_storage_type_contrast\\PROBE.LNK",
+          "sha256": "0a009822702029f2bb57f80264b8bf777b233058c9b1323291eedf46618cbcfc",
+          "size": 85
+        },
+        {
+          "path": "build\\workers\\dos_database_record_state_ax_run_7\\fixtures\\rtlink610\\near_storage_type_contrast\\PROBE.MAP",
+          "sha256": "1eee898fda99b70a5ab19218d7fe45a3b7c32019e04fa4a388664e56824ececd",
+          "size": 8962
+        },
+        {
+          "path": "build\\workers\\dos_database_record_state_ax_run_7\\fixtures\\rtlink610\\near_storage_type_contrast\\RTLINK.CFG",
+          "sha256": "5d0c3a5bbc20976e57a8a99e35732f9f2d314ac80485a17f6b7ddaec8f8e81e8",
+          "size": 21
+        },
+        {
+          "path": "build\\workers\\dos_database_record_state_ax_run_7\\fixtures\\rtlink610\\near_storage_type_contrast\\RUN.BAT",
+          "sha256": "9351c86209ef8577c4042608e5173beb279210d743df083ea7585789f9c43b9f",
+          "size": 77
+        },
+        {
+          "path": "build\\workers\\dos_database_record_state_ax_run_7\\fixtures\\rtlink610\\near_storage_type_contrast\\RUN.LOG",
+          "sha256": "d938fa189912f8776c3deb31a6bec42f403f57b9c8e3ed936bdb076caf6bd61c",
+          "size": 6
+        }
+      ],
+      "passed": true,
+      "expected": "PASS",
+      "actual": "PASS"
+    }
+  ],
+  "inputs": [
+    {
+      "path": "src\\root\\m1986.c",
+      "sha256": "c6278f0729f2c7e8c1b36c423c7c4ab081573b8c26a8604ab1ee78036365fc96",
+      "size": 3351
+    },
+    {
+      "path": "src\\root\\m19A9.c",
+      "sha256": "552ca373a3a3721885915acd0a95e2126b8405b0c555f02d1833381331cda523",
+      "size": 4870
+    },
+    {
+      "path": "src\\root\\m1A28.c",
+      "sha256": "5db49039ef64717680153a4b9445554b58ab2abf8a3c3fd9d67e6573af58a740",
+      "size": 3200
+    },
+    {
+      "path": "src\\root\\m1A53.c",
+      "sha256": "6bb066ea34c3721c90956a5b7e8849cb3c5916628a842c2684a8c0137154b698",
+      "size": 5159
+    },
+    {
+      "path": "layout\\symbols.json",
+      "sha256": "0f5dd5b0a211945a97782cfccdb9bb31b0dfd07fcde5df4d4f9486b487eb0125",
+      "size": 800809
+    },
+    {
+      "path": "layout\\manifest.json",
+      "sha256": "025a0a9255d910cae4b122ab5a3f3fb40888bb456d7fe42158db7c9e622fcf50",
+      "size": 628980
+    },
+    {
+      "path": "layout\\toolchain.json",
+      "sha256": "c0bb71cd8b1f4a1a1f91299bd3b6148aa67b7a1d12c3c3946a229272593eb274",
+      "size": 39241
+    },
+    {
+      "path": "evidence\\behavior\\manifest.json",
+      "sha256": "dae79bdf74d7660e7e2eb47e8b463a9576c8d74a8e6ccd9e91af6d51f871ecea",
+      "size": 28379
+    },
+    {
+      "path": "evidence\\behavior\\functions\\FindIndex\\module.c",
+      "sha256": "1af5252fe8449eeca44b4099fe4a4bd1ff5ab24521c7a888253adfdd4554ac5a",
+      "size": 2872
+    },
+    {
+      "path": "evidence\\behavior\\functions\\FindIndex\\evidence.json",
+      "sha256": "8de2f5ff812103303c0240d944214bbd0e996a5c9f26ac1b7987abba81a52e1e",
+      "size": 11108
+    },
+    {
+      "path": "evidence\\behavior\\functions\\FindIndex\\run.json",
+      "sha256": "e8d643a0a584f8b5b1a080c64766c875a78602d7f74e8d8842ea6d18c358d875",
+      "size": 4611
+    },
+    {
+      "path": "evidence\\behavior\\functions\\FindIndex\\negative-controls.json",
+      "sha256": "2c7919aed1918f2d7bedf1724c198f8d7f4ca6e397b8f624bd8a76ecea2ecb68",
+      "size": 1533
+    },
+    {
+      "path": "work\\data\\s27_map.md",
+      "sha256": "af23dddcb230caae585a31b8e796fd1e0e6fb1de9740a491ad5945605085ee98",
+      "size": 9432
+    },
+    {
+      "path": "tools\\farbss.py",
+      "sha256": "8c2c32ce7ce760d30f257c50ab6e984883dd4a083b8902cd79910b616d84a178",
+      "size": 16330
+    },
+    {
+      "path": "docs\\exe-format.md",
+      "sha256": "94909094cf1c666eb587f350e4fa1209f2b3a1a54ce88692a8a5be2931ff902c",
+      "size": 8469
+    },
+    {
+      "path": "docs\\tu-evidence.md",
+      "sha256": "5029c31fbb0e71bd0342c8ecaa5ba33c4fad8c0022a34a80abbc0befbe5bca26",
+      "size": 9038
+    },
+    {
+      "path": "work\\source-only-dos\\providers\\database-index-state.c",
+      "sha256": "a052b1148cf3dca2ee2157bffeee5e2b92b3f51ef78235e37c8e5fe5d8b4f4d8",
+      "size": 458
+    },
+    {
+      "path": "work\\source-only-dos\\database-index-state-review-v1.md",
+      "sha256": "93eeb7a38b29703b5a9d8aeccfafe8d409b9c829eea15575a0bce6a333b7c5b6",
+      "size": 2802
+    },
+    {
+      "path": "work\\source-only-dos\\database-index-state-contract-v1.json",
+      "sha256": "78a00dac1f7eed77345ba10fc5383d9ceb7f6c523a2913a3e0a0ae7eaa8f1457",
+      "size": 44979
+    },
+    {
+      "path": "build\\workers\\dos_database_record_owners\\context\\f_1986_0004.txt",
+      "sha256": "dd4f2961ddc178daa7d36e5c10cb181611d9b050b978f89af0ca6c4e65c51865",
+      "size": 3187
+    },
+    {
+      "path": "build\\workers\\dos_database_record_owners\\context\\f_1986_00F5.txt",
+      "sha256": "aae19162515be950c27802aa517c9bfc33b66b140ee63fb423b6a3120b5f7178",
+      "size": 834
+    },
+    {
+      "path": "build\\workers\\dos_database_record_owners\\context\\f_1986_012A.txt",
+      "sha256": "20f62a69a5aba68df8ffac0f2254c3e8c3ab14ebf37765704e2a4dbfd9dfa5d3",
+      "size": 3337
+    },
+    {
+      "path": "build\\workers\\dos_database_record_owners\\context\\f_19A9_001D.txt",
+      "sha256": "7914d7c5c70e0b2f7130c0c07e8f4c5a6cee1613534d4fc04174d278d68b2604",
+      "size": 9044
+    },
+    {
+      "path": "build\\workers\\dos_database_record_owners\\context\\f_19A9_0310.txt",
+      "sha256": "0c2d1f01321bf2d02151fae3daff3a1c0ad144fca923ca96664f8f3b191411e1",
+      "size": 452
+    },
+    {
+      "path": "build\\workers\\dos_database_record_owners\\context\\f_19A9_031D.txt",
+      "sha256": "f8770ee6a131318e758f0c5cdd22a6180682c8f962340ff13b8d6b60fdfe45c5",
+      "size": 439
+    },
+    {
+      "path": "build\\workers\\dos_database_record_owners\\context\\f_1A28_0006.txt",
+      "sha256": "001d51049fd49f058ea212d35e5969f11856c34e9224c58b848c156d62ea1d94",
+      "size": 4005
+    },
+    {
+      "path": "build\\workers\\dos_database_record_owners\\context\\f_1A28_0149.txt",
+      "sha256": "da6b590422fe05523a8f4150db6f9dcfba5aa99f5e0e88b832f2ecabead89120",
+      "size": 1441
+    },
+    {
+      "path": "build\\workers\\dos_database_record_owners\\context\\f_1A28_0224.txt",
+      "sha256": "4f74662eacbc9ca670ce366ed6022475579fa944c3513589f504b56f8f5fc0b1",
+      "size": 1025
+    },
+    {
+      "path": "build\\workers\\dos_database_record_owners\\context\\f_1A53_0042.txt",
+      "sha256": "a3b2dc3c6ac8ce54bc96ba17db77b9db4e93524df19f542a2534781753688485",
+      "size": 1741
+    },
+    {
+      "path": "build\\workers\\dos_database_record_owners\\context\\f_1A53_0125.txt",
+      "sha256": "4ac58eb5704215eb07da43286b56995721913a0034c2ceaa68fd8efd02822821",
+      "size": 3215
+    },
+    {
+      "path": "build\\workers\\dos_database_record_owners\\context\\f_1A53_037C.txt",
+      "sha256": "514ff80654e3099213b48c78be8297b4fd0a1e143d5f1590f47ee76d6f3d6b81",
+      "size": 976
+    },
+    {
+      "path": "build\\workers\\dos_database_record_owners\\context\\f_1A53_03B6.txt",
+      "sha256": "b2ac6697f1e0a95b332739239220804f45186143af4864a045a3400faca28c00",
+      "size": 1179
+    },
+    {
+      "path": "build\\workers\\dos_database_record_owners\\context\\f_1A53_0404.txt",
+      "sha256": "554e2ed6d92f3ba4ebb378fdcb17ee4cb48a243fd68754997dee5860d9474721",
+      "size": 938
+    },
+    {
+      "path": "tools\\compiler.py",
+      "sha256": "ef1d59a0fbe0e0780a6b8480e13d7d07859a14ae185c00a4420e1238a2ae35bb",
+      "size": 11765
+    },
+    {
+      "path": "tools\\omf.py",
+      "sha256": "951137ecbfaeb6e40fd5230c94398141da7ec7bdb7399d9cd74d46ded3045612",
+      "size": 29112
+    },
+    {
+      "path": "tools\\source_only_dos.py",
+      "sha256": "46157a39f475a8b21c0f6adac360578a34faea8256093ce4ef9c8fb5fea5aa91",
+      "size": 54897
+    },
+    {
+      "path": "tools\\dos_source_bindings.py",
+      "sha256": "41289f8d39ac02cdb17200e1d70a8e5d8c48576c6801366f7fd65b7b3a50bb9b",
+      "size": 56279
+    },
+    {
+      "path": "work\\source-only-dos\\providers\\database-record-state.c",
+      "sha256": "6af09ce9166c8af6114e95a374c791e9d01056c3209de0d6cd1b5006401c022a",
+      "size": 1295
+    },
+    {
+      "path": "work\\source-only-dos\\database-record-state-review-v1.md",
+      "sha256": "517d8423693c5a03daca43937d677e141c0cc95c14dd584adf75c40b814769d9",
+      "size": 7067
+    },
+    {
+      "path": "work\\source-only-dos\\database-record-state-probe.py",
+      "sha256": "2137babd8bad7233f2f7c95340105e206b15567af9b11195149ae2994579cc96",
+      "size": 27133
+    },
+    {
+      "path": "C:\\tools\\msc-6.00ax-archive\\BIN\\CL.EXE",
+      "sha256": "92df4a0839aac77940189ce54f107381b829babe8103926cb05d1adffe947347",
+      "size": 81184
+    },
+    {
+      "path": "C:\\tools\\msc-6.00ax-archive\\BIN\\C1L.EXE",
+      "sha256": "d3db38b875a95048bca2809cd1f84783c6c070805f188fec9161054d6350ded3",
+      "size": 213680
+    },
+    {
+      "path": "C:\\tools\\msc-6.00ax-archive\\BIN\\C2L.EXE",
+      "sha256": "62490de22e7b279ea59218a54d677bfc752cb5fc1287533d2e23d03519f155e0",
+      "size": 473258
+    },
+    {
+      "path": "C:\\tools\\msc-6.00ax-archive\\BIN\\C3L.EXE",
+      "sha256": "9e82ecc87ffcdb2def53ac64c0d1f048b26421c1415b5600ad4d8d6fcbc06553",
+      "size": 195439
+    },
+    {
+      "path": "C:\\tools\\msc-6.00ax-archive\\BIN\\CL.ERR",
+      "sha256": "ca22f37e5e0c09faebde9e4d549dd1f53523cc6f23049d2239a040cd19a424e7",
+      "size": 1656
+    },
+    {
+      "path": "C:\\tools\\msc-6.00ax-archive\\BIN\\C1.ERR",
+      "sha256": "637444915870f3283d5df41c5cdb1be8c32cc6c19b080f2bb3891edbc3751c6e",
+      "size": 19500
+    },
+    {
+      "path": "C:\\tools\\msc-6.00ax-archive\\BIN\\C23.ERR",
+      "sha256": "22944a0dffef336c0ebb8f6d5aeb97b4dbeb5c9758a48759557176bff49d1151",
+      "size": 3649
+    },
+    {
+      "path": "C:\\tools\\msc-6.00ax-archive\\BIN\\CL.MSG",
+      "sha256": "3379f283aec74842bc82205e4c848d759e6e2dcbb6d4820eec9719f1297213ec",
+      "size": 2697
+    },
+    {
+      "path": "C:\\tools\\msc-6.00ax-archive\\INCLUDE\\assert.h",
+      "sha256": "55c174aec7e593e24c36768e5f542b564c4719f8155e49e2883560d511847c11",
+      "size": 594
+    },
+    {
+      "path": "C:\\tools\\msc-6.00ax-archive\\INCLUDE\\bios.h",
+      "sha256": "d144f91dd4ec686a38509842e35106e91af021487e2a45e7182ba350e35df66e",
+      "size": 4499
+    },
+    {
+      "path": "C:\\tools\\msc-6.00ax-archive\\INCLUDE\\bse.h",
+      "sha256": "64f26efdebe49d5cf98947a7214723ce128fc98e7c786a7cd692c0e65061d1e1",
+      "size": 1462
+    },
+    {
+      "path": "C:\\tools\\msc-6.00ax-archive\\INCLUDE\\bsedev.h",
+      "sha256": "506cad55079bf330c9fcf2cff5797955fa4dce2563b11b38b4667367daa7aca4",
+      "size": 12893
+    },
+    {
+      "path": "C:\\tools\\msc-6.00ax-archive\\INCLUDE\\bsedos.h",
+      "sha256": "6766919b0baa7cda9218907159047001b7f03b8b2fada6ed64721bd8c26d1f40",
+      "size": 48326
+    },
+    {
+      "path": "C:\\tools\\msc-6.00ax-archive\\INCLUDE\\bseerr.h",
+      "sha256": "bf8d57ec23c45747fac4dc52ab0140f6f8ba11086453b3a506c60d17f840d5a4",
+      "size": 26788
+    },
+    {
+      "path": "C:\\tools\\msc-6.00ax-archive\\INCLUDE\\bsesub.h",
+      "sha256": "e3018f4c397ba09c2a1dbc22ee58d2dbbac3278a9417ac53be46c3d1c82e63a1",
+      "size": 19051
+    },
+    {
+      "path": "C:\\tools\\msc-6.00ax-archive\\INCLUDE\\conio.h",
+      "sha256": "2a7c54dc07ef767042861324a2f73ced293577f57ca2e4901cc16e1e2a7b7c27",
+      "size": 965
+    },
+    {
+      "path": "C:\\tools\\msc-6.00ax-archive\\INCLUDE\\ctype.h",
+      "sha256": "5e2bc8b6e5fa103dc9b51d6a711553d435446dd5f23f102f34e3d868236d00b6",
+      "size": 2979
+    },
+    {
+      "path": "C:\\tools\\msc-6.00ax-archive\\INCLUDE\\direct.h",
+      "sha256": "c5f9f40f80bc538b253a8fe564cd1f264db515581e500c1b3ca7859b0ac621c2",
+      "size": 892
+    },
+    {
+      "path": "C:\\tools\\msc-6.00ax-archive\\INCLUDE\\dos.h",
+      "sha256": "027e81abad4ceae2892863858b939694e42aa24d73bd96cab8278fcc868c0b33",
+      "size": 5343
+    },
+    {
+      "path": "C:\\tools\\msc-6.00ax-archive\\INCLUDE\\errno.h",
+      "sha256": "1db2af1fcfbcb33cf1be4f97430cdf8194bf1d60f586c1f432832d69aa5bfe91",
+      "size": 1428
+    },
+    {
+      "path": "C:\\tools\\msc-6.00ax-archive\\INCLUDE\\fcntl.h",
+      "sha256": "d3b8e59fc779acde127068898ee1233119d1d79fb1e1f919666b38556f2c02c7",
+      "size": 1126
+    },
+    {
+      "path": "C:\\tools\\msc-6.00ax-archive\\INCLUDE\\float.h",
+      "sha256": "d5705d56bc25b990759f8c83669be2f99e404d6219f08fec0a45d8ae95b0c3b6",
+      "size": 4911
+    },
+    {
+      "path": "C:\\tools\\msc-6.00ax-archive\\INCLUDE\\graph.h",
+      "sha256": "dfc59cf76b6e25efe4a327063d2b7c9f4e7db243228c6e6e5d83ee05e1952869",
+      "size": 15438
+    },
+    {
+      "path": "C:\\tools\\msc-6.00ax-archive\\INCLUDE\\io.h",
+      "sha256": "f81a13f740240a05b48f6dc614e44e2269c6ecca07bae0393ab71fab30691f32",
+      "size": 1512
+    },
+    {
+      "path": "C:\\tools\\msc-6.00ax-archive\\INCLUDE\\limits.h",
+      "sha256": "53bb5efef276dfbe55628891764cc082fbb7b99f669c0055190d2ae8d0ab4a3b",
+      "size": 1326
+    },
+    {
+      "path": "C:\\tools\\msc-6.00ax-archive\\INCLUDE\\locale.h",
+      "sha256": "35d553ec119b669bf4fd0594c593fc8a6c48699afbf8bf60d106bbe485a940f7",
+      "size": 1519
+    },
+    {
+      "path": "C:\\tools\\msc-6.00ax-archive\\INCLUDE\\malloc.h",
+      "sha256": "94d10282abde89eb57b7d533a9a029bc0444ab0aebea8064d61a86fd97678a24",
+      "size": 4008
+    },
+    {
+      "path": "C:\\tools\\msc-6.00ax-archive\\INCLUDE\\math.h",
+      "sha256": "08f043122f5aff286a88bc1f4680c314347c3fae7c6b7ce0a78bea0a0d1083bc",
+      "size": 7881
+    },
+    {
+      "path": "C:\\tools\\msc-6.00ax-archive\\INCLUDE\\memory.h",
+      "sha256": "04af9356c798a0a8eb0274cf9e1e2660485ca972bd449a7ec3709b408400b196",
+      "size": 1628
+    },
+    {
+      "path": "C:\\tools\\msc-6.00ax-archive\\INCLUDE\\os2.h",
+      "sha256": "25b38cebe5219e6309e9656ec2f63f9ddccd40811d23542674bee4c80520f595",
+      "size": 676
+    },
+    {
+      "path": "C:\\tools\\msc-6.00ax-archive\\INCLUDE\\os2def.h",
+      "sha256": "c87ee78532176e5738aad764c3fec8418891960d7eecf2c4dcf84aa36e11deff",
+      "size": 10400
+    },
+    {
+      "path": "C:\\tools\\msc-6.00ax-archive\\INCLUDE\\pgchart.h",
+      "sha256": "ff92f7c9b7e6d699d59dbed276b506368848e4c145ddb2a90f02726b74476ce7",
+      "size": 8749
+    },
+    {
+      "path": "C:\\tools\\msc-6.00ax-archive\\INCLUDE\\pm.h",
+      "sha256": "b7ff7321180f2606742828294772ba4ea356baaac66193823172b92fb2e47355",
+      "size": 2255
+    },
+    {
+      "path": "C:\\tools\\msc-6.00ax-archive\\INCLUDE\\pmavio.h",
+      "sha256": "41425daa766423853a10c0d489392cb2e47fa9919d77d82e271fe1624b560386",
+      "size": 2069
+    },
+    {
+      "path": "C:\\tools\\msc-6.00ax-archive\\INCLUDE\\pmbitmap.h",
+      "sha256": "e8db1c7bf0b5e2f7e54a32766c2d7b1e7bc40e552b31de4e65c2cd6df1227b42",
+      "size": 1851
+    },
+    {
+      "path": "C:\\tools\\msc-6.00ax-archive\\INCLUDE\\pmdev.h",
+      "sha256": "9f01221d6a20e988f11c197ef04a2e3562d8ab6bf8b075267fcbadaac1ae2016",
+      "size": 8606
+    },
+    {
+      "path": "C:\\tools\\msc-6.00ax-archive\\INCLUDE\\pmerr.h",
+      "sha256": "ef08d00e473f6b9b4550f2561a523898b12383d6839cd5ebef409abef9400502",
+      "size": 30095
+    },
+    {
+      "path": "C:\\tools\\msc-6.00ax-archive\\INCLUDE\\pmfont.h",
+      "sha256": "973206a870ff44b98c6a4f10aeb94c7caea15e184aaeb58182a1015018f5770b",
+      "size": 3458
+    },
+    {
+      "path": "C:\\tools\\msc-6.00ax-archive\\INCLUDE\\pmgpi.h",
+      "sha256": "ee083b988e86ac67e98d1b170fb525b2bcf89cb5e7309b1ae4083905d7f89030",
+      "size": 49655
+    },
+    {
+      "path": "C:\\tools\\msc-6.00ax-archive\\INCLUDE\\pmhelp.h",
+      "sha256": "76954218875fa2788c307d171b9e25e5faa8fc83707176298f24b1804cda7121",
+      "size": 11291
+    },
+    {
+      "path": "C:\\tools\\msc-6.00ax-archive\\INCLUDE\\pmmle.h",
+      "sha256": "9d59a584824afef28fdc33dd77be1b64f5aaee126b454ebd2e36f9c82e0090de",
+      "size": 8802
+    },
+    {
+      "path": "C:\\tools\\msc-6.00ax-archive\\INCLUDE\\pmord.h",
+      "sha256": "81c6cbb06d06abaeb89307a9679325e7baa0cdb5e03ab6cecb0563794bdd7263",
+      "size": 23140
+    },
+    {
+      "path": "C:\\tools\\msc-6.00ax-archive\\INCLUDE\\pmpic.h",
+      "sha256": "b2646c5af6ed2dc781c5a4ce45ea4900f2d2bcf97048ae244f06aa26b2f0341e",
+      "size": 691
+    },
+    {
+      "path": "C:\\tools\\msc-6.00ax-archive\\INCLUDE\\pmshl.h",
+      "sha256": "aff9fc71b3049b741970f1bb8d81258b24ec22f7139dffddf1b5d261acb6cde9",
+      "size": 14249
+    },
+    {
+      "path": "C:\\tools\\msc-6.00ax-archive\\INCLUDE\\pmtypes.h",
+      "sha256": "462c35a20f284beeabcd930255f44845b28e2fcf451c3a9dec58d9951baaec10",
+      "size": 9645
+    },
+    {
+      "path": "C:\\tools\\msc-6.00ax-archive\\INCLUDE\\pmwin.h",
+      "sha256": "4f738c700b89d350631137f0b36e08ff465c570b5e4f98d6a2c34c5bdd8b305c",
+      "size": 85827
+    },
+    {
+      "path": "C:\\tools\\msc-6.00ax-archive\\INCLUDE\\process.h",
+      "sha256": "3a5f567651e9077b434c5e905b8c1308ea0f7557bb334bf40ef1d1cfd9e11119",
+      "size": 2829
+    },
+    {
+      "path": "C:\\tools\\msc-6.00ax-archive\\INCLUDE\\search.h",
+      "sha256": "3bbc62866ae6f4d62db16d9a77ee3066418b38698aa9556f6836dedc4aac2f9e",
+      "size": 1159
+    },
+    {
+      "path": "C:\\tools\\msc-6.00ax-archive\\INCLUDE\\setjmp.h",
+      "sha256": "99dd10459385315d95e2ba24091282eff815045e24027039e7790ddc4080648f",
+      "size": 822
+    },
+    {
+      "path": "C:\\tools\\msc-6.00ax-archive\\INCLUDE\\share.h",
+      "sha256": "0f632bbfc28e3ec3981e06e7ac27e1fabdf57b26dae3a805b75a00fed16d4e18",
+      "size": 450
+    },
+    {
+      "path": "C:\\tools\\msc-6.00ax-archive\\INCLUDE\\signal.h",
+      "sha256": "efff5cf9a3001b675def57dc4ec1bcf4e0475ae5fad10fc7e89f123deb0d204a",
+      "size": 2019
+    },
+    {
+      "path": "C:\\tools\\msc-6.00ax-archive\\INCLUDE\\stdarg.h",
+      "sha256": "e294f329eb9ae698502ec1d90989afb09b7a077804213d6edfd5442335d43e62",
+      "size": 894
+    },
+    {
+      "path": "C:\\tools\\msc-6.00ax-archive\\INCLUDE\\stddef.h",
+      "sha256": "1d6a31e2ca5c8453bfc18bfa94fd4e8a33425eb88214f55c920400c9d56a7ac2",
+      "size": 1254
+    },
+    {
+      "path": "C:\\tools\\msc-6.00ax-archive\\INCLUDE\\stdio.h",
+      "sha256": "9d3c3e54366c393dbd99982f90e1a2bca878fe4637eb8974fd3b6244c053e93b",
+      "size": 6047
+    },
+    {
+      "path": "C:\\tools\\msc-6.00ax-archive\\INCLUDE\\stdlib.h",
+      "sha256": "ff3c7aee2170b511396284608e61e11fb55c2976d4bf90d3ea58a539e55c9476",
+      "size": 6539
+    },
+    {
+      "path": "C:\\tools\\msc-6.00ax-archive\\INCLUDE\\string.h",
+      "sha256": "ff36b60adcf99a547032981a149cc6d37f48cfa2f556cebe327c59d79c93823e",
+      "size": 4975
+    },
+    {
+      "path": "C:\\tools\\msc-6.00ax-archive\\INCLUDE\\sys\\locking.h",
+      "sha256": "85e4a4663dd666f896ccdf3b76ac38dafa1d69a07b87d7ee9a2b418d904a213b",
+      "size": 468
+    },
+    {
+      "path": "C:\\tools\\msc-6.00ax-archive\\INCLUDE\\sys\\stat.h",
+      "sha256": "095555066b4880a40e56ed868e403536be326cfd9da1e067ccf22faec5314051",
+      "size": 1330
+    },
+    {
+      "path": "C:\\tools\\msc-6.00ax-archive\\INCLUDE\\sys\\timeb.h",
+      "sha256": "5281bdb34fb8f86c17251362abbefbd289574deeb7ea8e21263fee252fc0f880",
+      "size": 827
+    },
+    {
+      "path": "C:\\tools\\msc-6.00ax-archive\\INCLUDE\\sys\\types.h",
+      "sha256": "8cd9efa8807be8dd811d840a56eca6baa7d7798d4b571d4fb05255454f264abe",
+      "size": 734
+    },
+    {
+      "path": "C:\\tools\\msc-6.00ax-archive\\INCLUDE\\sys\\utime.h",
+      "sha256": "aa947a46dfba15c139cc7f043a545ee3a263255858d7f2f8e81b9448e6c2115c",
+      "size": 968
+    },
+    {
+      "path": "C:\\tools\\msc-6.00ax-archive\\INCLUDE\\time.h",
+      "sha256": "68204d55db0602d15263efddf0de7e77d789f9d7f3d4594416fedd4959e21c32",
+      "size": 3069
+    },
+    {
+      "path": "C:\\tools\\msc-6.00ax-archive\\INCLUDE\\varargs.h",
+      "sha256": "a71b1f4437d08073e0bbe5559a1cac64d63f2318677a827568b49ec12a99af7b",
+      "size": 922
+    },
+    {
+      "path": "C:\\tools\\dosbox-x\\dosbox-x.exe",
+      "sha256": "b028a4d328302ea270722dec69f3ec3a10ebf76beba72a51970db33a88df2bf6",
+      "size": 20481536
+    },
+    {
+      "path": "build\\workers\\dos_database_record_state_ax_run_7\\positive.c",
+      "sha256": "4b12ed913002824e471c77149c2c28908909fa662040097cfa0eccd5fe79d335",
+      "size": 4087
+    },
+    {
+      "path": "build\\workers\\dos_database_record_state_ax_run_7\\wrong-extent-owner.c",
+      "sha256": "85e70b740082eb5af6bcf98f3615b488622652451860670813b51bff2975a663",
+      "size": 1046
+    },
+    {
+      "path": "build\\workers\\dos_database_record_state_ax_run_7\\wrong-extent-main.c",
+      "sha256": "e2ec3039502aabbf53195df0c992db94bd58eaed4826443ee6daa818ad951461",
+      "size": 1260
+    },
+    {
+      "path": "build\\workers\\dos_database_record_state_ax_run_7\\wrong-near-pointer-owner.c",
+      "sha256": "866c7fa7e1fef56e7a97feac7a96fb5116678a662edfd9d83e8e5cb110d84f6b",
+      "size": 1047
+    },
+    {
+      "path": "build\\workers\\dos_database_record_state_ax_run_7\\wrong-near-pointer-main.c",
+      "sha256": "b745a2464dc293aaeb6cf511af7e17052eea5ee1aab1a767ac7a61f9b7642605",
+      "size": 1470
+    },
+    {
+      "path": "build\\workers\\dos_database_record_state_ax_run_7\\unsigned-handles-main.c",
+      "sha256": "8476c48122cd84bbea21dc140c971d83f5c8c37b58e5da9f6cc37555fc075cbf",
+      "size": 228
+    },
+    {
+      "path": "build\\workers\\dos_database_record_state_ax_run_7\\nonzero-owner.c",
+      "sha256": "5c8cdfd8423aa4add987d5927b3f2f375cecabf33e0b429e8d588ce96789c7b8",
+      "size": 1071
+    },
+    {
+      "path": "build\\workers\\dos_database_record_state_ax_run_7\\near-storage-owner.c",
+      "sha256": "6e68c021acf11cc4f3a23dbf7f8d6bb4756e08e59a02ea82b326aa01118fb83d",
+      "size": 1048
+    },
+    {
+      "path": "build\\workers\\dos_database_record_state_ax_run_7\\near-storage-main.c",
+      "sha256": "a6d97a84e58cae0cc7f497c6e94267d438d51b4085a6a623862995bd0332d04b",
+      "size": 1410
+    },
+    {
+      "path": "build\\workers\\dos_database_record_state_ax_run_7\\objects\\DBRECOWN.OBJ",
+      "sha256": "37850c5f5dc95a3a3330bcc1deea78eb48f1df4d2309eddba1a0b6c079b5e362",
+      "size": 229
+    },
+    {
+      "path": "build\\workers\\dos_database_record_state_ax_run_7\\objects\\DITEST.OBJ",
+      "sha256": "18cce269ebbf178f8b5410c8552ab4b4a50b0c4e9559799d504dfe14bbcb35cc",
+      "size": 922
+    },
+    {
+      "path": "build\\workers\\dos_database_record_state_ax_run_7\\objects\\DIREXT.OBJ",
+      "sha256": "81f9036c872728b9efa613b8d5275140f96c796a3efeb6c9ed0cf058fdf98073",
+      "size": 225
+    },
+    {
+      "path": "build\\workers\\dos_database_record_state_ax_run_7\\objects\\DIXTMC.OBJ",
+      "sha256": "093bc4678686793ae0e2f46ec2fe340902971997d40586780f434ed3c290d127",
+      "size": 310
+    },
+    {
+      "path": "build\\workers\\dos_database_record_state_ax_run_7\\objects\\DIRNEA.OBJ",
+      "sha256": "8bb1c1f0b0afac1d1fc0389188d1407902dd48e64fcc7cdeadf70952694675b0",
+      "size": 225
+    },
+    {
+      "path": "build\\workers\\dos_database_record_state_ax_run_7\\objects\\DINPMC.OBJ",
+      "sha256": "45068d9618340cd6ddaddaa07bbb590b66aa9e5feb2cf1004281d9c98161c31f",
+      "size": 315
+    },
+    {
+      "path": "build\\workers\\dos_database_record_state_ax_run_7\\objects\\DIUNSG.OBJ",
+      "sha256": "f344738797fadced95affdb01b77ffcd06d5a54e01a47501c357f8464bd4d626",
+      "size": 330
+    },
+    {
+      "path": "build\\workers\\dos_database_record_state_ax_run_7\\objects\\DIINIT.OBJ",
+      "sha256": "cf884639a2995092e0d2482bafe2a7f0b30544546b91c43b8b5164eaf009933d",
+      "size": 307
+    },
+    {
+      "path": "build\\workers\\dos_database_record_state_ax_run_7\\objects\\DINEAR.OBJ",
+      "sha256": "08fc54006cde459c72e7f6fb15964b62d7e639a50d7682a18b12b38da82b01bb",
+      "size": 225
+    },
+    {
+      "path": "build\\workers\\dos_database_record_state_ax_run_7\\objects\\DINMNE.OBJ",
+      "sha256": "8faa5a6c80060056b5b2a88f24543208ce03d65eae29fcb8cb43f3f624f012d0",
+      "size": 362
+    },
+    {
+      "path": "C:\\tools\\msc-6.00\\LIB\\llibcr.lib",
+      "sha256": "3d0c6ae92972789e87def01fa96351c39216d731d5c880370155c5613d78c884",
+      "size": 148711
+    },
+    {
+      "path": "C:\\tools\\msc-6.00\\LIB\\libh.lib",
+      "sha256": "a4492e8f63da409d949643fd448f29e65e2cc9a8f2deea977372177bbe0ad818",
+      "size": 21033
+    },
+    {
+      "path": "C:\\tools\\RTLink-Plus-4.00-DiscMaster\\installed\\dest\\RTLINK.EXE",
+      "sha256": "dff0a988738a2ba7716f7013ef5b8136e0857b6bfe700bccdeaad70ee5e87c74",
+      "size": 449497
+    },
+    {
+      "path": "C:\\tools\\RTLink-Plus-4.00-DiscMaster\\installed\\dest\\RTLINK.DAT",
+      "sha256": "c1e206fe4b3c34d43b47aa9aa215e2959fbb23c69c89eb69e36d80b1d9194eea",
+      "size": 63824
+    },
+    {
+      "path": "C:\\tools\\RTLink-Plus-4.00-DiscMaster\\installed\\dest\\RTLUTILS.LIB",
+      "sha256": "9060c022f65a2811b81936879f93eb16c5d349c14b56c704a3853d3cf79cd162",
+      "size": 266625
+    },
+    {
+      "path": "C:\\tools\\RTLink-Plus-4.00-DiscMaster\\installed\\dest\\RTLINKST.COM",
+      "sha256": "6ad9015869dc9598a2b498c58297224e5ab4a13fad9ada528650dfcedeb83cf2",
+      "size": 7184
+    },
+    {
+      "path": "C:\\tools\\rtlink-plus-6.10\\installed\\RTL-REAL.EXE",
+      "sha256": "228c5d429438ea32ee21dd02c65b7f8e198715b3fa957be9da328f9857482773",
+      "size": 717922
+    },
+    {
+      "path": "C:\\tools\\rtlink-plus-6.10\\installed\\RTL-SWAP.EXE",
+      "sha256": "daae0a8c358edc26f95540f4bc1629c0dc5c30652155d85ccd79bead4381cfe3",
+      "size": 692123
+    },
+    {
+      "path": "C:\\tools\\rtlink-plus-6.10\\installed\\RTLINK.DAT",
+      "sha256": "10723fb4d4381b6a38417a18409e32d254e59850bcd3b465fbb824e01367a77b",
+      "size": 100100
+    },
+    {
+      "path": "C:\\tools\\rtlink-plus-6.10\\installed\\RTLUTILS.LIB",
+      "sha256": "c718bac09b0b1204a259494446acfa8bfffb129144cc7d36799855621f4fdccb",
+      "size": 423823
+    },
+    {
+      "path": "C:\\tools\\rtlink-plus-6.10\\installed\\RTLINKST.COM",
+      "sha256": "635425a8feff822ca98ec536c55a31824161bffbf9d24d37851cc0d9f7ce3b5f",
+      "size": 11031
+    },
+    {
+      "path": "C:\\tools\\rtlink-plus-6.10\\installed\\RTLINK.EXE",
+      "sha256": "ea6f57a470a26801086593d54aa99f6bf983dd024fc19b5e13361a07f43e17fb",
+      "size": 687531
+    },
+    {
+      "path": "C:\\tools\\rtlink-plus-6.10\\installed\\DOS4GW.EXE",
+      "sha256": "7192b80d1551769c2d2897b2f58015dc18fadca2b7e093a20f45b34011933c6c",
+      "size": 231179
+    }
+  ],
+  "probe_receipt": {
+    "path": "build/workers/dos_database_record_state_ax_run_7/candidate-receipt.json",
+    "sha256": "d13e2f7a0fa73b8a288410d00883a269bcd101a6301ad0b5b0faa78e254fad16",
+    "size": 75496
+  },
+  "probe_source": {
+    "path": "work/source-only-dos/database-record-state-probe.py",
+    "sha256": "2137babd8bad7233f2f7c95340105e206b15567af9b11195149ae2994579cc96",
+    "size": 27133
+  },
+  "provider_source": {
+    "path": "work/source-only-dos/providers/database-record-state.c",
+    "sha256": "6af09ce9166c8af6114e95a374c791e9d01056c3209de0d6cd1b5006401c022a",
+    "size": 1295
+  },
+  "source_ownership_review": {
+    "path": "work/source-only-dos/database-record-state-review-v1.md",
+    "sha256": "517d8423693c5a03daca43937d677e141c0cc95c14dd584adf75c40b814769d9",
+    "size": 7067
+  },
+  "compiler": {
+    "profile": "msc600ax",
+    "product": "Microsoft C 6.00AX (DOS-extended CL /EM: C1L, C2L, C3L), archive.org Microsoft_c_60ax disk 8",
+    "owner_basename": "DBRECOWN",
+    "flags": [
+      "/AL",
+      "/Os",
+      "/Gs"
+    ],
+    "effective_required_flags": [
+      "/EM"
+    ],
+    "effective_runner": "dosbox-x",
+    "candidate_commdefs": [
+      {
+        "name": "_db_handles",
+        "kind": "far",
+        "count": 4,
+        "element_size": 2,
+        "length": 8
+      },
+      {
+        "name": "_fd_50F6_3958",
+        "kind": "far",
+        "count": 4,
+        "element_size": 124,
+        "length": 496
+      }
+    ],
+    "candidate_publics": [],
+    "candidate_nonempty_segments": [],
+    "candidate_code_length": 0,
+    "candidate_debug_bytes": 0,
+    "three_record_control_commdefs": [
+      {
+        "name": "_db_handles",
+        "kind": "far",
+        "count": 4,
+        "element_size": 2,
+        "length": 8
+      },
+      {
+        "name": "_fd_50F6_3958",
+        "kind": "far",
+        "count": 3,
+        "element_size": 124,
+        "length": 372
+      }
+    ],
+    "near_pointer_control_commdefs": [
+      {
+        "name": "_db_handles",
+        "kind": "far",
+        "count": 4,
+        "element_size": 2,
+        "length": 8
+      },
+      {
+        "name": "_fd_50F6_3958",
+        "kind": "far",
+        "count": 4,
+        "element_size": 124,
+        "length": 496
+      }
+    ],
+    "nonzero_control_initialized_segments": [
+      "DIINIT5_DATA"
+    ],
+    "near_storage_control": {
+      "control_object_publics": [],
+      "control_nonempty_segments": [],
+      "candidate_far_communal_shape": [
+        {
+          "name": "_db_handles",
+          "kind": "far",
+          "count": 4,
+          "element_size": 2,
+          "length": 8
+        },
+        {
+          "name": "_fd_50F6_3958",
+          "kind": "far",
+          "count": 4,
+          "element_size": 124,
+          "length": 496
+        }
+      ],
+      "near_storage_communal_shape": [
+        {
+          "name": "_db_handles",
+          "kind": "near",
+          "count": null,
+          "element_size": null,
+          "length": 8
+        },
+        {
+          "name": "_fd_50F6_3958",
+          "kind": "near",
+          "count": null,
+          "element_size": null,
+          "length": 496
+        }
+      ],
+      "purpose": "near storage emits near COMDEFs instead of the candidate FAR_BSS communal shape"
+    }
+  },
+  "flat_pin_scope": [
+    "The flat inputs array contains source/evidence, current tools, compiler and include tree, effective /EM runtime, both RTLink trees, DOSBox-X runner, MSC runtime libraries, and generated fixture artifacts.",
+    "The fresh receipt pins the current tools/dos_source_bindings.py and tools/source_only_dos.py hashes; no prior-run tool pin is carried forward.",
+    "No original executable, game stub, or database asset is used as a compiler, linker, or runtime input."
+  ],
+  "raw_and_near_contrasts": {
+    "raw_record_view": "Positive fixture verifies raw bytes in the 24-byte index area against typed header fields; it also round-trips far pointer offset/segment halves.",
+    "near_index_pointer": "Wrong near typed pointer shifts the pointer/header boundary and fails both-linker control; the 24-byte byte union preserves 124-byte record stride.",
+    "near_storage": {
+      "control_object_publics": [],
+      "control_nonempty_segments": [],
+      "candidate_far_communal_shape": [
+        {
+          "name": "_db_handles",
+          "kind": "far",
+          "count": 4,
+          "element_size": 2,
+          "length": 8
+        },
+        {
+          "name": "_fd_50F6_3958",
+          "kind": "far",
+          "count": 4,
+          "element_size": 124,
+          "length": 496
+        }
+      ],
+      "near_storage_communal_shape": [
+        {
+          "name": "_db_handles",
+          "kind": "near",
+          "count": null,
+          "element_size": null,
+          "length": 8
+        },
+        {
+          "name": "_fd_50F6_3958",
+          "kind": "near",
+          "count": null,
+          "element_size": null,
+          "length": 496
+        }
+      ],
+      "purpose": "near storage emits near COMDEFs instead of the candidate FAR_BSS communal shape"
+    },
+    "wrong_extent": [
+      {
+        "name": "_db_handles",
+        "kind": "far",
+        "count": 4,
+        "element_size": 2,
+        "length": 8
+      },
+      {
+        "name": "_fd_50F6_3958",
+        "kind": "far",
+        "count": 3,
+        "element_size": 124,
+        "length": 372
+      }
+    ],
+    "unsigned_handle": "Both linkers reject unsigned interpretation of -1 sentinel.",
+    "nonzero_initializer": [
+      "DIINIT5_DATA"
+    ]
+  },
+  "lifetime": {
+    "original_zero_fill": "Resident section-27 FAR_BSS frame 50F6 offsets 0000..4BCF are linker-zero bytes before C execution, grounded by work/data/s27_map.md and tools/farbss.py.",
+    "runtime_fixtures": "Both RTLink variants observe all 504 candidate bytes zero at main entry.",
+    "slot_initialization": "GetFreeHandle one-time initialization clears only name[0] for indices 0..3.",
+    "close_and_reuse": "CloseDB clears name[0], CloseIndex frees but does not clear the far pointer, create-file OpenDB does not clear a stale pointer, and db_CloseDataBase leaves handle words stale. Candidate adds no reset."
+  },
+  "normal_path_basis": [
+    "GetFreeHandle initializes and scans indices 0..3 at 0x7C stride; successful returns are 0..3.",
+    "OpenDB is its only caller; original code multiplies the returned slot by 0x7C and accesses segment 50F6 at 0x3958.",
+    "db_SetDataBase stores one successful returned index per active count; db_LoadObject scans below that count; db_CloseDataBase decrements and closes that entry.",
+    "db_handles values are signed database-record indices. db_SaveObject/db_ReplaceObject use index 0 under the active-database precondition.",
+    "OpenIndex stores a far dynamic IndexEntry pointer inside each record. Its allocation is count*8 and remains separate from this owner; FindIndex one-past/failure behavior is not closed.",
+    "The DOS CreateIndex, DBAdd and DBDelete write-side entry points are stubs; no SaveRec function is present in these canonical modules."
+  ],
+  "unresolved_layout_gates": [
+    {
+      "id": "database-open-minus-one-record",
+      "status": "UNRESOLVED_MUST_REMAIN_IN_GAME_PREFLIGHT",
+      "source": "src/root/m1A28.c",
+      "normal_owner": "fd_50F6_3958[4]",
+      "historical_failure_address": "50F6:38DC",
+      "trigger": "four occupied name[0] slots; GetFreeHandle returns -1",
+      "behavior": "OpenDB calls Punt and then computes the record address if Punt returns.",
+      "owner_effect": "No preceding record, padding or adjacent bytes are included.",
+      "required_gate": "Retain as an unresolved fixed-layout preflight dependency; do not assume Punt is noreturn."
+    },
+    {
+      "id": "database-handle-plus-four",
+      "status": "UNRESOLVED_MUST_REMAIN_IN_GAME_PREFLIGHT",
+      "source": "src/root/m1A53.c",
+      "normal_owner": "db_handles[4]",
+      "historical_failure_address": "50F6:3B58",
+      "trigger": "failed OpenDB returns after Punt while db_numOfHandles is four",
+      "behavior": "db_SetDataBase stores the result before testing for a negative value.",
+      "overlap": "The distinct registered fd_50F6_3B58 object begins at this address.",
+      "owner_effect": "No fifth word or padding is included.",
+      "required_gate": "Retain as an unresolved fixed-layout preflight dependency; do not assume Punt is noreturn."
+    }
+  ],
+  "scope": "v13 pure-owner boundary: two successful-path data-only FAR_BSS owners only; no historical COMDEF TU or order claim.",
+  "limits": [
+    "The candidate covers successful GetFreeHandle indices 0 through 3 only; it does not make db == -1 accesses safe.",
+    "If Punt returns after GetFreeHandle returns -1, OpenDB indexes record slot -1; if execution returns to db_SetDataBase, the front-end can also write db_handles[4]. Both unchecked failure layouts remain unresolved independent gates.",
+    "No universal capacity is inferred for FindIndex's dynamic index pointer; index-entry count and allocation are per-database and separate from the four OpenDBRec records.",
+    "The probe confirms fresh MSC 6.00AX/RTLink CRT behavior and the source-functional OMF shape; it makes no original historical C translation-unit, communal-order, or provider ownership claim.",
+    "Original resident section-27 FAR_BSS zero-fill is grounded separately by work/data/s27_map.md and tools/farbss.py; no original image or database asset is a compiler/linker/runtime input.",
+    "CloseDB clears only name[0]; CloseIndex frees but does not clear the index pointer; db_CloseDataBase leaves db_handles stale. The provider does not add resets or cleanup.",
+    "The candidate can be considered only as a natural normal-path storage provider; it does not close either database failure-path layout gate.",
+    "Initialized/indexed ownership is outside this v13 pure-owner candidate and remains a later batch.",
+    "No extent is inferred from neighboring addresses and no padding is added."
+  ],
+  "root_review": {
+    "reviewer": "root",
+    "source_type_extent_and_views": true,
+    "startup_and_lifetime_accounted": true,
+    "compiler_and_runtime_negatives": true,
+    "historical_tu_order_not_claimed": true,
+    "unchecked_state_and_layout_constraints_retained": true
+  }
+}

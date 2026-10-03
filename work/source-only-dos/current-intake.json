@@ -1,6 +1,6 @@
 {
   "schema": "simant-source-only-dos-compact-intake-v1",
-  "source_only_base_checkpoint": "1eae0c7",
+  "source_only_base_checkpoint": "a9b1d1a",
   "canonical_manifest": {
     "path": "layout/manifest.json",
     "sha256": "025a0a9255d910cae4b122ab5a3f3fb40888bb456d7fe42158db7c9e622fcf50",
@@ -8,18 +8,18 @@
   },
   "full_local_report": {
     "path": "build/source-only-dos/build-report.json",
-    "sha256": "9b6d57d1df77df2009908c63ec44c359639db1940f77d087daa62de35a93352b",
-    "size": 3271029
+    "sha256": "ed50ce28d8a5b0f93a482ac8046f3465ed7f66bbe8ca9fa67c36ff756983e55d",
+    "size": 3855546
   },
   "reproduction": "python tools/source_only_dos.py --compile --link --reuse --jobs 4",
   "status": "INCOMPLETE",
   "errors": [
     "data dispositions still need source-built semantic resolution",
-    "368 unresolved source symbols",
+    "355 unresolved source symbols",
     "source address/layout contracts remain unresolved",
     "independent link refused: incomplete source/data preflight"
   ],
-  "compiled_translation_units": 138,
+  "compiled_translation_units": 141,
   "function_dispositions": {
     "EXACT_C": 1244,
     "GENUINE_ASM": 367,
@@ -39,9 +39,9 @@
   "runnable": "NOT_EXECUTED",
   "human_acceptance": "PENDING",
   "unresolved_data_disposition_bytes": 113,
-  "unresolved_symbols": 368,
+  "unresolved_symbols": 355,
   "unresolved_symbol_categories": {
-    "reviewed FAR_BSS definition and compatible consumer views": 360,
+    "reviewed FAR_BSS definition and compatible consumer views": 347,
     "source storage/reachability investigation": 8
   },
   "symbolic_aliases": 184,
@@ -69,6 +69,22 @@
       "id": "remaining-assembly-address-audit",
       "status": "UNRESOLVED",
       "reason": "The broader audit of fixed numeric operands and segment/group frames is pending. Indexed numeric bases, g_5A9C storage/initializers and unchecked error-path addresses remain separate gates."
+    },
+    {
+      "id": "database-open-minus-one-record",
+      "status": "UNRESOLVED",
+      "source": "src/root/m1A28.c",
+      "normal_owner": "fd_50F6_3958[4]",
+      "historical_failure_address": "50F6:38DC",
+      "reason": "GetFreeHandle returns -1 when four slots are occupied. OpenDB calls Punt and then computes the record address if it returns. A four-record typed owner supplies no preceding storage; returning-Punt reachability and layout semantics must be proved separately."
+    },
+    {
+      "id": "database-handle-plus-four",
+      "status": "UNRESOLVED",
+      "source": "src/root/m1A53.c",
+      "normal_owner": "db_handles[4]",
+      "historical_failure_address": "50F6:3B58",
+      "reason": "A returning failed OpenDB can be stored at db_handles[4] before the front end checks the negative result. The original address overlaps the distinct fd_50F6_3B58 object. No fifth slot, padding or noreturn assumption is introduced; this remains a separate source-only preflight gate."
     },
     {
       "id": "clip-rect-segment-frame",
@@ -270,6 +286,21 @@
     "path": "work/source-only-dos/dgroup-rect-frame-bindings-v1.json",
     "sha256": "a202f6dceaffa65ee75f2af27e29f90d16d61b5c3d79b5bda63d88c633d3448a",
     "size": 2876
+  },
+  "spider_control_storage_bindings": {
+    "path": "work/source-only-dos/spider-control-storage-bindings-v1.json",
+    "sha256": "ded0ec2c0e8233b4e526f7d5340da6ca5a5d2dab5f4214e35181ee66d64a6ca4",
+    "size": 3531
+  },
+  "point_state_bindings": {
+    "path": "work/source-only-dos/point-state-bindings-v1.json",
+    "sha256": "d606282db13720a2838583e578c86dfe082b356e10e5f19cfc14b55b2e2231af",
+    "size": 3035
+  },
+  "database_record_state_bindings": {
+    "path": "work/source-only-dos/database-record-state-bindings-v1.json",
+    "sha256": "eb170ae0622b157da8b20c836935fe938c3a0b0bf6a10bec93022b90430daec9",
+    "size": 10328
   },
   "strict_static_index": {
     "path": "work/source-only-dos/static-completeness/index-v1.json",
@@ -2220,6 +2251,160 @@
           "kind": "far",
           "length": 6,
           "count": 3,
+          "element_size": 2
+        }
+      ],
+      "publics": [],
+      "fixups": []
+    },
+    {
+      "module": "source-owned:spider-controls",
+      "source": {
+        "path": "work\\source-only-dos\\providers\\spider-controls.c",
+        "sha256": "adb8123dce358114e37fa01ab6a593002faeb45090a3d1d01c81ba9292c7b77d",
+        "size": 181
+      },
+      "object": {
+        "path": "build\\source-only-dos\\objects\\SPICTRL.OBJ",
+        "sha256": "64ece0d32b4ce6a15efd69428eea40f9a470e71bdbf55d3762695d2398cd02b4",
+        "size": 269
+      },
+      "status": "PASS",
+      "data_only": true,
+      "live_initialized_bytes": 0,
+      "code_bytes": 0,
+      "communals": [
+        {
+          "name": "_ChaseSpid",
+          "kind": "far",
+          "length": 2,
+          "count": 2,
+          "element_size": 1
+        },
+        {
+          "name": "_SMode",
+          "kind": "far",
+          "length": 2,
+          "count": 2,
+          "element_size": 1
+        },
+        {
+          "name": "_SuserX",
+          "kind": "far",
+          "length": 2,
+          "count": 2,
+          "element_size": 1
+        },
+        {
+          "name": "_SuserY",
+          "kind": "far",
+          "length": 2,
+          "count": 2,
+          "element_size": 1
+        },
+        {
+          "name": "_Starg",
+          "kind": "far",
+          "length": 2,
+          "count": 2,
+          "element_size": 1
+        },
+        {
+          "name": "_StargLife",
+          "kind": "far",
+          "length": 2,
+          "count": 2,
+          "element_size": 1
+        }
+      ],
+      "publics": [],
+      "fixups": []
+    },
+    {
+      "module": "source-owned:point-state",
+      "source": {
+        "path": "work\\source-only-dos\\providers\\point-state.c",
+        "sha256": "94fd7ae1a436fe595f4ad987e24f21773633c95af9f121f03581002e54a3ce48",
+        "size": 463
+      },
+      "object": {
+        "path": "build\\source-only-dos\\objects\\PTOWNER.OBJ",
+        "sha256": "e91f203b5ee54eb8f8dc22f49993bc5d0557704d21f443ee9a67ad0b903d0bd0",
+        "size": 283
+      },
+      "status": "PASS",
+      "data_only": true,
+      "live_initialized_bytes": 0,
+      "code_bytes": 0,
+      "communals": [
+        {
+          "name": "_fd_50F6_0508",
+          "kind": "far",
+          "length": 4,
+          "count": 4,
+          "element_size": 1
+        },
+        {
+          "name": "_fd_50F6_0596",
+          "kind": "far",
+          "length": 4,
+          "count": 4,
+          "element_size": 1
+        },
+        {
+          "name": "_fd_50F6_06A6",
+          "kind": "far",
+          "length": 4,
+          "count": 4,
+          "element_size": 1
+        },
+        {
+          "name": "_fd_50F6_072E",
+          "kind": "far",
+          "length": 4,
+          "count": 4,
+          "element_size": 1
+        },
+        {
+          "name": "_fd_50F6_07BC",
+          "kind": "far",
+          "length": 4,
+          "count": 4,
+          "element_size": 1
+        }
+      ],
+      "publics": [],
+      "fixups": []
+    },
+    {
+      "module": "source-owned:database-record-state",
+      "source": {
+        "path": "work\\source-only-dos\\providers\\database-record-state.c",
+        "sha256": "6af09ce9166c8af6114e95a374c791e9d01056c3209de0d6cd1b5006401c022a",
+        "size": 1295
+      },
+      "object": {
+        "path": "build\\source-only-dos\\objects\\DBRECOWN.OBJ",
+        "sha256": "37850c5f5dc95a3a3330bcc1deea78eb48f1df4d2309eddba1a0b6c079b5e362",
+        "size": 229
+      },
+      "status": "PASS",
+      "data_only": true,
+      "live_initialized_bytes": 0,
+      "code_bytes": 0,
+      "communals": [
+        {
+          "name": "_fd_50F6_3958",
+          "kind": "far",
+          "length": 496,
+          "count": 4,
+          "element_size": 124
+        },
+        {
+          "name": "_db_handles",
+          "kind": "far",
+          "length": 8,
+          "count": 4,
           "element_size": 2
         }
       ],
@@ -6455,8 +6640,8 @@
   "tool_inputs": [
     {
       "path": "tools\\source_only_dos.py",
-      "sha256": "a7b03bddddf830522724f8d85994951b5a752d164a10be36bfbd2fe2e8fd9f4b",
-      "size": 53638
+      "sha256": "46157a39f475a8b21c0f6adac360578a34faea8256093ce4ef9c8fb5fea5aa91",
+      "size": 54897
     },
     {
       "path": "tools\\compiler.py",
@@ -6475,28 +6660,33 @@
     },
     {
       "path": "tools\\dos_source_bindings.py",
-      "sha256": "b605f02c8c2a9911b6a3720ae9ce6c1310c544e3dd79fb0f2b5c5794c5d8a997",
-      "size": 53451
+      "sha256": "41289f8d39ac02cdb17200e1d70a8e5d8c48576c6801366f7fd65b7b3a50bb9b",
+      "size": 56279
+    },
+    {
+      "path": "tools\\farbss.py",
+      "sha256": "8c2c32ce7ce760d30f257c50ab6e984883dd4a083b8902cd79910b616d84a178",
+      "size": 16330
     }
   ],
   "validation_logs": [
     {
-      "path": "build/source-only-dos-run-v12.log",
-      "sha256": "9ff2a0b78ba672ba31aaee0ca616bad800d792f9a471b149363098f758e6ceb5",
-      "size": 4229
+      "path": "build/source-only-dos-run-v13.log",
+      "sha256": "e0eab253a6de45a9755f440c9886e87008452e782c867114a28fa8012ec68c0f",
+      "size": 4348
     },
     {
-      "path": "build/source-only-dos-tests-v12.log",
-      "sha256": "e086c7d22e685ad12fed3ad8426744f20c014d3563d9ca2d79a178e5a98a6d7a",
-      "size": 605
+      "path": "build/source-only-dos-tests-v13.log",
+      "sha256": "b17fcb4da02ca6b5f90296b054825a936b8cdb076957fe9261161cb4ce534baf",
+      "size": 766
     },
     {
-      "path": "build/source-only-dos-validation-v12.log",
-      "sha256": "786ea0446e31ee04f020b58675893cfa939f724dddae99d859a181b6602b4ad5",
-      "size": 4736
+      "path": "build/source-only-dos-validation-v13.log",
+      "sha256": "fe86895759534286937a671bfb5fec1bccd9384b6527d1e05ee172b171cd76d7",
+      "size": 4752
     }
   ],
   "historical_validation": "PASS",
-  "source_only_tests": "33 targeted tests included in 347 repository tests PASS (2 skips)",
+  "source_only_tests": "35 targeted tests included in 349 repository tests PASS (2 skips)",
   "claim_limit": "Compile and symbolic binding proofs only; no complete link, runtime equivalence or human acceptance. Full inventories are reproducible build output."
 }

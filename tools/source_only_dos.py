@@ -188,7 +188,9 @@ def prepare(out, report):
                      'driver-local-frame-bindings-v1.json', 'mono-pattern-prefix-bindings-v1.json',
                      'clip-pointer-bindings-v1.json', 'yard-scalar-bindings-v1.json',
                      'database-index-state-bindings-v1.json', 'spider-counter-bindings-v1.json',
-                     'lion-array-storage-bindings-v1.json', 'dgroup-rect-frame-bindings-v1.json'):
+                     'lion-array-storage-bindings-v1.json', 'dgroup-rect-frame-bindings-v1.json',
+                     'spider-control-storage-bindings-v1.json', 'point-state-bindings-v1.json',
+                     'database-record-state-bindings-v1.json'):
         binding_raw, binding_pin = pin(ROOT / 'work/source-only-dos' / filename)
         binding_packet = json.loads(binding_raw)
         if binding_packet['category'] not in ('REVIEWED_SOURCE_LINK_BINDING', 'REVIEWED_SOURCE_STORAGE_BINDING'):
@@ -521,6 +523,20 @@ def audit_layout(report):
         'id': 'remaining-assembly-address-audit', 'status': 'UNRESOLVED',
         'reason': 'The broader audit of fixed numeric operands and segment/group frames is pending. '
                   'Indexed numeric bases, g_5A9C storage/initializers and unchecked error-path addresses remain separate gates.'}, {
+        'id': 'database-open-minus-one-record', 'status': 'UNRESOLVED',
+        'source': 'src/root/m1A28.c', 'normal_owner': 'fd_50F6_3958[4]',
+        'historical_failure_address': '50F6:38DC',
+        'reason': 'GetFreeHandle returns -1 when four slots are occupied. OpenDB calls Punt '
+                  'and then computes the record address if it returns. A four-record typed '
+                  'owner supplies no preceding storage; returning-Punt reachability and layout '
+                  'semantics must be proved separately.'}, {
+        'id': 'database-handle-plus-four', 'status': 'UNRESOLVED',
+        'source': 'src/root/m1A53.c', 'normal_owner': 'db_handles[4]',
+        'historical_failure_address': '50F6:3B58',
+        'reason': 'A returning failed OpenDB can be stored at db_handles[4] before the '
+                  'front end checks the negative result. The original address overlaps the '
+                  'distinct fd_50F6_3B58 object. No fifth slot, padding or noreturn assumption '
+                  'is introduced; this remains a separate source-only preflight gate.'}, {
         'id': 'clip-rect-segment-frame',
         'status': 'SOURCE_BOUND' if any((r.get('source_binding') or {}).get('segment_corrections')
                                       for r in report['translation_units']) else 'UNRESOLVED',
