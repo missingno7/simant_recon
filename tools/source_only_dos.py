@@ -186,7 +186,8 @@ def prepare(out, report):
                      'pattern-bank-bindings-v1.json', 'render-scalar-bindings-v1.json',
                      'memory-far-storage-bindings-v1.json', 'water-storage-bindings-v1.json',
                      'driver-local-frame-bindings-v1.json', 'mono-pattern-prefix-bindings-v1.json',
-                     'clip-pointer-bindings-v1.json', 'yard-scalar-bindings-v1.json'):
+                     'clip-pointer-bindings-v1.json', 'yard-scalar-bindings-v1.json',
+                     'database-index-state-bindings-v1.json', 'spider-counter-bindings-v1.json'):
         binding_raw, binding_pin = pin(ROOT / 'work/source-only-dos' / filename)
         binding_packet = json.loads(binding_raw)
         if binding_packet['category'] not in ('REVIEWED_SOURCE_LINK_BINDING', 'REVIEWED_SOURCE_STORAGE_BINDING'):

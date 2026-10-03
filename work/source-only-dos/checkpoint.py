@@ -60,7 +60,7 @@ def main():
     report = json.loads(report_path.read_text())
     if any(report['original_exe_bytes_used'].values()) or report['denied_oracle_reads']:
         raise ValueError('source-only invariant failed')
-    if len(report['translation_units']) != 135 or any('object' not in r for r in report['translation_units']):
+    if len(report['translation_units']) != 137 or any('object' not in r for r in report['translation_units']):
         raise ValueError('not all TUs compiled')
     bound = [r for r in report['translation_units'] if r.get('source_binding')]
     if any(r.get('binding_verification', {}).get('status') != 'PASS' for r in bound):
@@ -72,8 +72,8 @@ def main():
             or report['function_dispositions']['CONTRACT_EQUIVALENT']
             or report['function_dispositions']['UNRESOLVED']):
         raise ValueError('strict static function audit is incomplete')
-    logs = [pin(ROOT / p) for p in ('build/source-only-dos-run-v10.log',
-        'build/source-only-dos-tests-v10.log', 'build/source-only-dos-validation-v10.log')]
+    logs = [pin(ROOT / p) for p in ('build/source-only-dos-run-v11.log',
+        'build/source-only-dos-tests-v11.log', 'build/source-only-dos-validation-v11.log')]
     test_log = (ROOT / logs[1]['path']).read_text().strip()
     if not test_log.splitlines()[-1].startswith('OK'):
         raise ValueError('source-only tests did not finish successfully')
@@ -81,7 +81,7 @@ def main():
     if not (ROOT / logs[2]['path']).read_text().strip().endswith('VALIDATION PASS'):
         raise ValueError('historical validation did not finish successfully')
     receipt = {'schema': 'simant-source-only-dos-compact-intake-v1',
-        'source_only_base_checkpoint': '85ae0f7',
+        'source_only_base_checkpoint': 'f4d3208',
         'canonical_manifest': pin(ROOT / 'layout/manifest.json'),
         'full_local_report': pin(report_path),
         'reproduction': 'python tools/source_only_dos.py --compile --link --reuse --jobs 4',
@@ -125,6 +125,8 @@ def main():
         'mono_pattern_prefix_bindings': pin(OUT / 'mono-pattern-prefix-bindings-v1.json'),
         'clip_pointer_bindings': pin(OUT / 'clip-pointer-bindings-v1.json'),
         'yard_scalar_bindings': pin(OUT / 'yard-scalar-bindings-v1.json'),
+        'database_index_state_bindings': pin(OUT / 'database-index-state-bindings-v1.json'),
+        'spider_counter_bindings': pin(OUT / 'spider-counter-bindings-v1.json'),
         'strict_static_index': pin(OUT / 'static-completeness/index-v1.json'),
         'strict_static_audit': {name: {'status': row['status'], 'receipt': row['receipt']}
                                for name, row in report['strict_static_audit'].items()},
@@ -145,7 +147,7 @@ def main():
         'tool_inputs': [p for p in report['inputs'] if p['path'].startswith('tools')],
         'validation_logs': logs,
         'historical_validation': 'PASS',
-        'source_only_tests': f'29 targeted tests included in {test_count} repository tests PASS (2 skips)',
+        'source_only_tests': f'31 targeted tests included in {test_count} repository tests PASS (2 skips)',
         'claim_limit': 'Compile and symbolic binding proofs only; no complete link, runtime '
                        'equivalence or human acceptance. Full inventories are reproducible build output.'}
     (OUT / 'current-intake.json').write_text(json.dumps(receipt, indent=2) + '\n')

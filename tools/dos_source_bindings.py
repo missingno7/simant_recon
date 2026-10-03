@@ -110,9 +110,20 @@ PROVIDER_SPECS = {
         'int far fd_50F6_105E; int far fd_50F6_0478; int far fd_50F6_0504; '
         'int far fd_50F6_0228; int far MapPlane; int far YardMode; '
         'int far fd_50F6_0366; int far fd_50F6_0376;'),
+    'source-owned:database-index-state': ('DIOWNER', None,
+        (('_fd_50F6_3952', 4), ('_fd_50F6_3956', 2)),
+        'typedef union IndexKey { char far *data; long offset; } IndexKey; '
+        'typedef struct IndexEntry { IndexKey key; int id; unsigned char kind; unsigned char flags; } IndexEntry; '
+        'IndexEntry far * far fd_50F6_3952; int far fd_50F6_3956;'),
+    'source-owned:spider-counters': ('SPIDATA', None,
+        (('_DeathCnt', 2), ('_EatCnt', 2), ('_SCorpseBase', 2), ('_Scycle', 2),
+         ('_Scycle2', 2), ('_SpidBurpCnt', 2), ('_SpidRevenge', 2)),
+        'int far DeathCnt; int far EatCnt; int far SCorpseBase; int far Scycle; '
+        'int far Scycle2; int far SpidBurpCnt; int far SpidRevenge;'),
 }
 
-FAR_PROVIDER_MODULES = {'source-owned:memory-far-state', 'source-owned:yard-scalars'}
+FAR_PROVIDER_MODULES = {'source-owned:memory-far-state', 'source-owned:yard-scalars',
+                        'source-owned:database-index-state', 'source-owned:spider-counters'}
 
 def provider_communals(module):
     spec = PROVIDER_SPECS.get(module)
@@ -292,7 +303,10 @@ def review_provider_source(text, provider, symbols=None):
         addresses.update({'_g_8EC0': 0x8EC0, '_g_5AAC': 0x5AAC,
             '_fd_50F6_105E': 0x105E, '_fd_50F6_0478': 0x0478, '_fd_50F6_0504': 0x0504,
             '_fd_50F6_0228': 0x0228, '_MapPlane': 0x032E, '_YardMode': 0x035C,
-            '_fd_50F6_0366': 0x0366, '_fd_50F6_0376': 0x0376})
+            '_fd_50F6_0366': 0x0366, '_fd_50F6_0376': 0x0376,
+            '_fd_50F6_3952': 0x3952, '_fd_50F6_3956': 0x3956,
+            '_DeathCnt': 0x109A, '_EatCnt': 0x1054, '_SCorpseBase': 0x105A, '_Scycle': 0x1042,
+            '_Scycle2': 0x1072, '_SpidBurpCnt': 0x1076, '_SpidRevenge': 0x108A})
         for name, size in spec[2]:
             anchor = symbols['data'][name[1:]]
             segment = 0x50F6 if provider['module'] in FAR_PROVIDER_MODULES else 0x55B3
@@ -379,7 +393,9 @@ def require_additional_storage_contracts(report, profile, tool):
         ('source-owned:memory-far-state', 'memory_far_storage_contract', 3),
         ('source-owned:mono-pattern-prefix', 'mono_pattern_prefix_contract', 1),
         ('source-owned:clip-pointer', 'clip_pointer_contract', 2),
-        ('source-owned:yard-scalars', 'yard_scalar_contract', 6, 2)])
+        ('source-owned:yard-scalars', 'yard_scalar_contract', 6, 2),
+        ('source-owned:database-index-state', 'database_index_state_contract', 2),
+        ('source-owned:spider-counters', 'spider_counter_contract', 17, 2)])
 
 
 def require_provider_contracts(report, profile, tool, specifications):

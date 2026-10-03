@@ -50,7 +50,7 @@ class SourceOnlyDosTests(unittest.TestCase):
             report = {'inputs': [], 'generated_files': [], 'translation_units': [],
                       'semantic_substitutions': []}
             manifest, symbols = dos.prepare(Path(directory), report)
-            self.assertEqual(len(report['translation_units']), len(manifest['modules']) + 8)
+            self.assertEqual(len(report['translation_units']), len(manifest['modules']) + len(bindings.PROVIDER_SPECS))
             self.assertEqual(report['function_dispositions'], {
                 'EXACT_C': 1244, 'GENUINE_ASM': 367, 'BEHAVIOR_EXACT_CONFIRMED': 29,
                 'EXACT_AFTER_STATIC_AUDIT': 0, 'CONTRACT_EQUIVALENT': 0, 'UNRESOLVED': 0})
@@ -715,6 +715,71 @@ class SourceOnlyDosTests(unittest.TestCase):
             next(r for r in wrong['clip_pointer_contract']['cases'] if r['expected'] == 'PASS')['map_alias_geometry'] = False
             with self.assertRaisesRegex(ValueError, 'startup contract'):
                 bindings.require_additional_storage_contracts(wrong, 'rtlink400', tc['linkers']['rtlink400'])
+
+    def test_database_index_state_is_two_scalars_without_record_table_or_error_path_claim(self):
+        worker = ROOT / 'build/workers/source_only_dos_tests'
+        worker.mkdir(parents=True, exist_ok=True)
+        with tempfile.TemporaryDirectory(dir=worker) as directory:
+            report = {'inputs': [], 'generated_files': [], 'translation_units': [], 'semantic_substitutions': []}
+            _, symbols = dos.prepare(Path(directory), report)
+            row = next(r for r in report['translation_units'] if r['module'] == 'source-owned:database-index-state')
+            text = (ROOT / row['source']['path']).read_text(encoding='ascii')
+            provider = row['storage_provider']
+            def compile(source):
+                result = compiler.compile_c(source, row['profile'], row['flags'], basename=row['basename'])
+                self.assertTrue(result.ok, result.log)
+                return OmfReader(communals=True).read(result.obj)
+            bindings.review_provider_source(text, provider, symbols)
+            proof = bindings.verify_provider(compile(text), provider)
+            self.assertEqual([c['length'] for c in proof['communals']], [4, 2])
+            self.assertNotIn('fd_50F6_3958', text)
+            for contrast in (text.replace('IndexEntry far * far', 'IndexEntry near * far'),
+                             text.replace('int far fd_50F6_3956;', 'long far fd_50F6_3956;'),
+                             text + '\nint far invented_records[248];\n'):
+                with self.assertRaises(ValueError):
+                    bindings.verify_provider(compile(contrast), provider)
+            with self.assertRaises(ValueError):
+                bindings.review_provider_source(text.replace('int far fd_50F6_3956;',
+                    'unsigned far fd_50F6_3956;'), provider, symbols)
+            tc = compiler.toolchain()
+            for profile in ('rtlink400', 'rtlink610'):
+                bindings.require_additional_storage_contracts(report, profile, tc['linkers'][profile])
+            wrong = json.loads(json.dumps(report))
+            wrong['database_index_state_contract']['cases'].pop(0)
+            with self.assertRaisesRegex(ValueError, 'startup contract'):
+                bindings.require_additional_storage_contracts(wrong, 'rtlink400', tc['linkers']['rtlink400'])
+
+    def test_spider_counter_provider_preserves_signed_singletons_and_alias_contracts(self):
+        worker = ROOT / 'build/workers/source_only_dos_tests'
+        worker.mkdir(parents=True, exist_ok=True)
+        with tempfile.TemporaryDirectory(dir=worker) as directory:
+            report = {'inputs': [], 'generated_files': [], 'translation_units': [], 'semantic_substitutions': []}
+            _, symbols = dos.prepare(Path(directory), report)
+            row = next(r for r in report['translation_units'] if r['module'] == 'source-owned:spider-counters')
+            provider = row['storage_provider']
+            text = (ROOT / row['source']['path']).read_text(encoding='ascii')
+            bindings.review_provider_source(text, provider, symbols)
+            def compile(source):
+                result = compiler.compile_c(source, row['profile'], row['flags'], basename=row['basename'])
+                self.assertTrue(result.ok, result.log)
+                return OmfReader(communals=True).read(result.obj)
+            self.assertEqual([c['length'] for c in bindings.verify_provider(compile(text), provider)['communals']], [2] * 7)
+            with self.assertRaises(ValueError):
+                bindings.review_provider_source(text.replace('int far DeathCnt;', 'unsigned far DeathCnt;'), provider, symbols)
+            for contrast in (text.replace('int far EatCnt;', 'int far EatCnt[2];'),
+                             text.replace('int far Scycle2;', 'int far Scycle2 = 1;')):
+                with self.assertRaises(ValueError):
+                    bindings.verify_provider(compile(contrast), provider)
+            tc = compiler.toolchain()
+            for profile in ('rtlink400', 'rtlink610'):
+                bindings.require_additional_storage_contracts(report, profile, tc['linkers'][profile])
+            for change in ('case', 'signedness_negative'):
+                wrong = json.loads(json.dumps(report))
+                contract = wrong['spider_counter_contract']
+                if change == 'case': contract['cases'].pop(0)
+                else: contract['required_cases']['unsigned_word_consumer_sign_contrast'] = 'PASS'
+                with self.assertRaisesRegex(ValueError, 'startup contract'):
+                    bindings.require_additional_storage_contracts(wrong, 'rtlink400', tc['linkers']['rtlink400'])
 
     def test_water_pair_adds_exact_array_owners_without_changing_population_or_code(self):
         worker = ROOT / 'build/workers/source_only_dos_tests'
