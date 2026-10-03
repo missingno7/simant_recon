@@ -1,0 +1,1944 @@
+{
+  "schema": "simant-dos-food-cycle-contract-v1",
+  "category": "REVIEWED_SOURCE_STORAGE_CONTRACT",
+  "status": "ROOT_REVIEWED_FUNCTIONAL_STORAGE_CONTRACT",
+  "root_reviewed": true,
+  "all_required_checks_pass": true,
+  "probe_source": {
+    "path": "work\\source-only-dos\\food-cycle-probe.py",
+    "sha256": "0421e85774330ae3620cfb24a0250e0282b1f6e1d5399741f5a992ae7bb68277",
+    "size": 49122
+  },
+  "probe_report": {
+    "path": "build\\workers\\dos_food_cycle\\report.json",
+    "sha256": "36f41b1ce4e44aa3bd329b887c0ef59a35e1366390de44ae0b467c05551c005a",
+    "size": 117454
+  },
+  "source_module": {
+    "key": "S08:35F5",
+    "source": "src/S08/m35F5.c",
+    "sha256": "ef6eea405f6497cb5a6648ef258cc1afeab308f995ded573794465d831e3501f",
+    "profile": "msc600ax",
+    "flags": [
+      "/AL",
+      "/Os",
+      "/Og",
+      "/Oe",
+      "/Zi"
+    ],
+    "compiler_basename": "U016",
+    "manifest_source_pin_matches": true,
+    "control_regenerated_from_canonical_source_each_run": true
+  },
+  "source_edits": [
+    {
+      "before": "extern int far FoodB;",
+      "after": "int far FoodB;",
+      "scope": "generated full-module S08:35F5/U016 copy only"
+    },
+    {
+      "before": "extern int far FoodR;",
+      "after": "int far FoodR;",
+      "scope": "generated full-module S08:35F5/U016 copy only"
+    },
+    {
+      "before": "extern int far Cycle;",
+      "after": "int far Cycle;",
+      "scope": "generated full-module S08:35F5/U016 copy only"
+    }
+  ],
+  "whole_module_compile_checks": {
+    "all_segment_bytes_lengths_publics_and_fixup_order_unchanged_except_communals": true,
+    "segment_payloads_equal": true,
+    "publics_equal": true,
+    "segment_definitions_equal": true,
+    "groups_equal": true,
+    "fixup_sequence_equal": true,
+    "ordered_linker_fixups_equal": true,
+    "non_target_external_scope_order_equal": true,
+    "control_object_sha256": "5c77bb2bd1edc298168442992f5acc3ba6c114a425b95a747ef40e147ec78c1e",
+    "candidate_object_sha256": "f0c990110cc3a584a5fea6750da675db5f2caa8aca95984a1db32f200b7c6d7a",
+    "object_size_delta_bytes": 32,
+    "expected_communal_specs": [
+      {
+        "name": "_FoodB",
+        "kind": "far",
+        "type_index": 129,
+        "count": 2,
+        "element_size": 1,
+        "length": 2
+      },
+      {
+        "name": "_FoodR",
+        "kind": "far",
+        "type_index": 129,
+        "count": 2,
+        "element_size": 1,
+        "length": 2
+      },
+      {
+        "name": "_Cycle",
+        "kind": "far",
+        "type_index": 129,
+        "count": 2,
+        "element_size": 1,
+        "length": 2
+      }
+    ],
+    "negative_controls": {
+      "wrong_scalar_width": {
+        "source": "build/workers/dos_food_cycle/U16LONG.c",
+        "object_sha256": "0a284b58238023c38d76b5f0841138ae760b0fc576e3e104e3db2400f0224a64",
+        "FoodB_communal": {
+          "name": "_FoodB",
+          "kind": "far",
+          "type_index": 130,
+          "count": 4,
+          "element_size": 1,
+          "length": 4
+        },
+        "function_segment_changed": true,
+        "segment_payloads": {
+          "$$SYMBOLS": {
+            "declared_length": 3383,
+            "initialized_length": 3383,
+            "initialized_sha256": "d7993ce335792bec9c45dab405efc1e60d0af0155150164251da7486c52cdcda"
+          },
+          "$$TYPES": {
+            "declared_length": 584,
+            "initialized_length": 584,
+            "initialized_sha256": "82f3138ed71aadc3a5199be1dcbd2a16e5c68ddee7f0827931ce8eebd9ad16c6"
+          },
+          "CONST": {
+            "declared_length": 208,
+            "initialized_length": 208,
+            "initialized_sha256": "46f531b7ea0428fbf2c3ca2b60e8dc33d6bbfa000e0fd1b489c5e39140a47006"
+          },
+          "U016_TEXT": {
+            "declared_length": 5057,
+            "initialized_length": 5057,
+            "initialized_sha256": "cad57b2da7b36a523052658a39f73df757cd8b8e83c3b83b4bda2d0ce4f3006e"
+          },
+          "_BSS": {
+            "declared_length": 0,
+            "initialized_length": 0,
+            "initialized_sha256": null
+          },
+          "_DATA": {
+            "declared_length": 120,
+            "initialized_length": 120,
+            "initialized_sha256": "0217b7133ac43e20a16a65e7265901c8932d174954372945b9012100acb5322f"
+          }
+        }
+      },
+      "initialized_owner": {
+        "source": "build/workers/dos_food_cycle/U16INIT.c",
+        "object_sha256": "5159d090d6155ce7dc5f1def4ec5ffc7257c5745161853c919ecb8f8cc3f28d9",
+        "FoodR_communal_present": false,
+        "FoodR_public_present": true,
+        "segment_payloads": {
+          "$$SYMBOLS": {
+            "declared_length": 3383,
+            "initialized_length": 3383,
+            "initialized_sha256": "944970c304fcb4a94f3fb05e0930df4f7e17fdca3c5e1513a750654c211744da"
+          },
+          "$$TYPES": {
+            "declared_length": 584,
+            "initialized_length": 584,
+            "initialized_sha256": "82f3138ed71aadc3a5199be1dcbd2a16e5c68ddee7f0827931ce8eebd9ad16c6"
+          },
+          "CONST": {
+            "declared_length": 208,
+            "initialized_length": 208,
+            "initialized_sha256": "46f531b7ea0428fbf2c3ca2b60e8dc33d6bbfa000e0fd1b489c5e39140a47006"
+          },
+          "U0167_DATA": {
+            "declared_length": 2,
+            "initialized_length": 2,
+            "initialized_sha256": "47dc540c94ceb704a23875c11273e16bb0b8a87aed84de911f2133568115f254"
+          },
+          "U016_TEXT": {
+            "declared_length": 5053,
+            "initialized_length": 5053,
+            "initialized_sha256": "8103be220dd1e8f9af27d7e79d2488bb405c46022a85301c896d573a953e91fa"
+          },
+          "_BSS": {
+            "declared_length": 0,
+            "initialized_length": 0,
+            "initialized_sha256": null
+          },
+          "_DATA": {
+            "declared_length": 120,
+            "initialized_length": 120,
+            "initialized_sha256": "0217b7133ac43e20a16a65e7265901c8932d174954372945b9012100acb5322f"
+          }
+        }
+      },
+      "invalid_array_extent": {
+        "source": "build/workers/dos_food_cycle/U16ARRAY.c",
+        "compile_rejected": true,
+        "diagnostic": "U016.C\nU016.C(357) : error C2106: '=' : left operand must be lvalue\n",
+        "reason": "the live RandWorld `Cycle = 0` reset requires a modifiable scalar lvalue"
+      }
+    }
+  },
+  "communal_specs": [
+    {
+      "name": "_FoodB",
+      "source_name": "FoodB",
+      "kind": "far",
+      "count": 2,
+      "element_size": 1,
+      "length": 2,
+      "type_index": 129
+    },
+    {
+      "name": "_FoodR",
+      "source_name": "FoodR",
+      "kind": "far",
+      "count": 2,
+      "element_size": 1,
+      "length": 2,
+      "type_index": 129
+    },
+    {
+      "name": "_Cycle",
+      "source_name": "Cycle",
+      "kind": "far",
+      "count": 2,
+      "element_size": 1,
+      "length": 2,
+      "type_index": 129
+    }
+  ],
+  "members": [
+    "FoodB",
+    "FoodR",
+    "Cycle"
+  ],
+  "dos_type": "int far",
+  "word_bytes": 2,
+  "required_cases": {
+    "typed_owner_word_exact_aliases": "PASS",
+    "typed_owner_SaveRec_BYTE_exact_aliases": "PASS",
+    "wrong_FoodB_alias_plus2": "FAIL",
+    "wrong_FoodR_alias_plus2": "FAIL",
+    "wrong_Cycle_alias_plus2": "FAIL",
+    "initialized_nonzero_FoodR_owner": "FAIL"
+  },
+  "required_linkers": [
+    "rtlink400",
+    "rtlink610"
+  ],
+  "cases": [
+    {
+      "linker": "rtlink400",
+      "case": "typed_owner_word_exact_aliases",
+      "expected": "PASS",
+      "actual": "PASS",
+      "passed": true
+    },
+    {
+      "linker": "rtlink400",
+      "case": "typed_owner_SaveRec_BYTE_exact_aliases",
+      "expected": "PASS",
+      "actual": "PASS",
+      "passed": true
+    },
+    {
+      "linker": "rtlink400",
+      "case": "wrong_FoodB_alias_plus2",
+      "expected": "FAIL",
+      "actual": "FAIL",
+      "passed": true
+    },
+    {
+      "linker": "rtlink400",
+      "case": "wrong_FoodR_alias_plus2",
+      "expected": "FAIL",
+      "actual": "FAIL",
+      "passed": true
+    },
+    {
+      "linker": "rtlink400",
+      "case": "wrong_Cycle_alias_plus2",
+      "expected": "FAIL",
+      "actual": "FAIL",
+      "passed": true
+    },
+    {
+      "linker": "rtlink400",
+      "case": "initialized_nonzero_FoodR_owner",
+      "expected": "FAIL",
+      "actual": "FAIL",
+      "passed": true
+    },
+    {
+      "linker": "rtlink610",
+      "case": "typed_owner_word_exact_aliases",
+      "expected": "PASS",
+      "actual": "PASS",
+      "passed": true
+    },
+    {
+      "linker": "rtlink610",
+      "case": "typed_owner_SaveRec_BYTE_exact_aliases",
+      "expected": "PASS",
+      "actual": "PASS",
+      "passed": true
+    },
+    {
+      "linker": "rtlink610",
+      "case": "wrong_FoodB_alias_plus2",
+      "expected": "FAIL",
+      "actual": "FAIL",
+      "passed": true
+    },
+    {
+      "linker": "rtlink610",
+      "case": "wrong_FoodR_alias_plus2",
+      "expected": "FAIL",
+      "actual": "FAIL",
+      "passed": true
+    },
+    {
+      "linker": "rtlink610",
+      "case": "wrong_Cycle_alias_plus2",
+      "expected": "FAIL",
+      "actual": "FAIL",
+      "passed": true
+    },
+    {
+      "linker": "rtlink610",
+      "case": "initialized_nonzero_FoodR_owner",
+      "expected": "FAIL",
+      "actual": "FAIL",
+      "passed": true
+    }
+  ],
+  "pinned_runtime_tool_inputs": [
+    {
+      "path": "C:\\tools\\RTLink-Plus-4.00-DiscMaster\\installed\\dest\\RTLINK.DAT",
+      "sha256": "c1e206fe4b3c34d43b47aa9aa215e2959fbb23c69c89eb69e36d80b1d9194eea",
+      "size": 63824
+    },
+    {
+      "path": "C:\\tools\\RTLink-Plus-4.00-DiscMaster\\installed\\dest\\RTLINK.EXE",
+      "sha256": "dff0a988738a2ba7716f7013ef5b8136e0857b6bfe700bccdeaad70ee5e87c74",
+      "size": 449497
+    },
+    {
+      "path": "C:\\tools\\RTLink-Plus-4.00-DiscMaster\\installed\\dest\\RTLINKST.COM",
+      "sha256": "6ad9015869dc9598a2b498c58297224e5ab4a13fad9ada528650dfcedeb83cf2",
+      "size": 7184
+    },
+    {
+      "path": "C:\\tools\\RTLink-Plus-4.00-DiscMaster\\installed\\dest\\RTLUTILS.LIB",
+      "sha256": "9060c022f65a2811b81936879f93eb16c5d349c14b56c704a3853d3cf79cd162",
+      "size": 266625
+    },
+    {
+      "path": "C:\\tools\\dosbox-x\\dosbox-x.exe",
+      "sha256": "b028a4d328302ea270722dec69f3ec3a10ebf76beba72a51970db33a88df2bf6",
+      "size": 20481536
+    },
+    {
+      "path": "C:\\tools\\msc-6.00\\LIB\\libh.lib",
+      "sha256": "a4492e8f63da409d949643fd448f29e65e2cc9a8f2deea977372177bbe0ad818",
+      "size": 21033
+    },
+    {
+      "path": "C:\\tools\\msc-6.00\\LIB\\llibcr.lib",
+      "sha256": "3d0c6ae92972789e87def01fa96351c39216d731d5c880370155c5613d78c884",
+      "size": 148711
+    },
+    {
+      "path": "C:\\tools\\msc-6.00ax-archive\\BIN\\C1.ERR",
+      "sha256": "637444915870f3283d5df41c5cdb1be8c32cc6c19b080f2bb3891edbc3751c6e",
+      "size": 19500
+    },
+    {
+      "path": "C:\\tools\\msc-6.00ax-archive\\BIN\\C1L.EXE",
+      "sha256": "d3db38b875a95048bca2809cd1f84783c6c070805f188fec9161054d6350ded3",
+      "size": 213680
+    },
+    {
+      "path": "C:\\tools\\msc-6.00ax-archive\\BIN\\C23.ERR",
+      "sha256": "22944a0dffef336c0ebb8f6d5aeb97b4dbeb5c9758a48759557176bff49d1151",
+      "size": 3649
+    },
+    {
+      "path": "C:\\tools\\msc-6.00ax-archive\\BIN\\C2L.EXE",
+      "sha256": "62490de22e7b279ea59218a54d677bfc752cb5fc1287533d2e23d03519f155e0",
+      "size": 473258
+    },
+    {
+      "path": "C:\\tools\\msc-6.00ax-archive\\BIN\\C3L.EXE",
+      "sha256": "9e82ecc87ffcdb2def53ac64c0d1f048b26421c1415b5600ad4d8d6fcbc06553",
+      "size": 195439
+    },
+    {
+      "path": "C:\\tools\\msc-6.00ax-archive\\BIN\\CL.ERR",
+      "sha256": "ca22f37e5e0c09faebde9e4d549dd1f53523cc6f23049d2239a040cd19a424e7",
+      "size": 1656
+    },
+    {
+      "path": "C:\\tools\\msc-6.00ax-archive\\BIN\\CL.EXE",
+      "sha256": "92df4a0839aac77940189ce54f107381b829babe8103926cb05d1adffe947347",
+      "size": 81184
+    },
+    {
+      "path": "C:\\tools\\msc-6.00ax-archive\\BIN\\CL.MSG",
+      "sha256": "3379f283aec74842bc82205e4c848d759e6e2dcbb6d4820eec9719f1297213ec",
+      "size": 2697
+    },
+    {
+      "path": "C:\\tools\\rtlink-plus-6.10\\installed\\DOS4GW.EXE",
+      "sha256": "7192b80d1551769c2d2897b2f58015dc18fadca2b7e093a20f45b34011933c6c",
+      "size": 231179
+    },
+    {
+      "path": "C:\\tools\\rtlink-plus-6.10\\installed\\RTL-REAL.EXE",
+      "sha256": "228c5d429438ea32ee21dd02c65b7f8e198715b3fa957be9da328f9857482773",
+      "size": 717922
+    },
+    {
+      "path": "C:\\tools\\rtlink-plus-6.10\\installed\\RTL-SWAP.EXE",
+      "sha256": "daae0a8c358edc26f95540f4bc1629c0dc5c30652155d85ccd79bead4381cfe3",
+      "size": 692123
+    },
+    {
+      "path": "C:\\tools\\rtlink-plus-6.10\\installed\\RTLINK.DAT",
+      "sha256": "10723fb4d4381b6a38417a18409e32d254e59850bcd3b465fbb824e01367a77b",
+      "size": 100100
+    },
+    {
+      "path": "C:\\tools\\rtlink-plus-6.10\\installed\\RTLINK.EXE",
+      "sha256": "ea6f57a470a26801086593d54aa99f6bf983dd024fc19b5e13361a07f43e17fb",
+      "size": 687531
+    },
+    {
+      "path": "C:\\tools\\rtlink-plus-6.10\\installed\\RTLINKST.COM",
+      "sha256": "635425a8feff822ca98ec536c55a31824161bffbf9d24d37851cc0d9f7ce3b5f",
+      "size": 11031
+    },
+    {
+      "path": "C:\\tools\\rtlink-plus-6.10\\installed\\RTLUTILS.LIB",
+      "sha256": "c718bac09b0b1204a259494446acfa8bfffb129144cc7d36799855621f4fdccb",
+      "size": 423823
+    },
+    {
+      "path": "layout\\manifest.json",
+      "sha256": "025a0a9255d910cae4b122ab5a3f3fb40888bb456d7fe42158db7c9e622fcf50",
+      "size": 628980
+    },
+    {
+      "path": "layout\\toolchain.json",
+      "sha256": "c0bb71cd8b1f4a1a1f91299bd3b6148aa67b7a1d12c3c3946a229272593eb274",
+      "size": 39241
+    },
+    {
+      "path": "tools\\compiler.py",
+      "sha256": "ef1d59a0fbe0e0780a6b8480e13d7d07859a14ae185c00a4420e1238a2ae35bb",
+      "size": 11765
+    },
+    {
+      "path": "tools\\dos_source_bindings.py",
+      "sha256": "a75d188b40fe72caa74d77adc464e3ff87fa5932a3953c3bb8202a8dc6181806",
+      "size": 22547
+    },
+    {
+      "path": "tools\\omf.py",
+      "sha256": "951137ecbfaeb6e40fd5230c94398141da7ec7bdb7399d9cd74d46ded3045612",
+      "size": 29112
+    },
+    {
+      "path": "tools\\source_only_dos.py",
+      "sha256": "3729bdc1a125dcdb21c319b862f2035cde1a63e13875128bbb25646e3aba275d",
+      "size": 43225
+    }
+  ],
+  "pinned_source_consumer_inputs": [
+    {
+      "path": "src\\S08\\m35F5.c",
+      "sha256": "ef6eea405f6497cb5a6648ef258cc1afeab308f995ded573794465d831e3501f",
+      "size": 22166
+    },
+    {
+      "path": "src\\S09\\m35F5.c",
+      "sha256": "028e1575990d5d45233f9102a0d2a060810349bd2f1297182c4af435ecbe912a",
+      "size": 42150
+    },
+    {
+      "path": "src\\S22\\m3BBD.c",
+      "sha256": "22ed7dc5dbf4687dc3e971e6845bf28ce1934f771c81ae551dd30bc782753da2",
+      "size": 18576
+    },
+    {
+      "path": "src\\S24\\m39C7.c",
+      "sha256": "3de9615a57dbe35eacd073726b451478dc5b12396360501631d7553b6139e240",
+      "size": 8405
+    },
+    {
+      "path": "src\\S25\\m39C7.c",
+      "sha256": "90a2cf12a9e527d1836099c92e5327d47342eac0a8403639d66471ecbc859ba6",
+      "size": 27923
+    },
+    {
+      "path": "src\\S25\\m3BA4.c",
+      "sha256": "d2937c80fe0ef4f2bd30c4c3ebe344ce4f993870f08515e7436c60d30cacdec4",
+      "size": 25998
+    },
+    {
+      "path": "src\\root\\m0894.c",
+      "sha256": "57b40ad0a9ee74c501fbcb0d521b86b8158f206f44f4867e960bcb800b5e7484",
+      "size": 32636
+    },
+    {
+      "path": "src\\root\\m0BE8.c",
+      "sha256": "42664e07331fbba4cc257f1e49e03dff5e93deddb764d33101ad0f454a9377d7",
+      "size": 14621
+    },
+    {
+      "path": "src\\root\\m0F3F.c",
+      "sha256": "f1c903c7f29e4fbb64fd82c2de5390c00df4f7cf35c9c836007dfa07c56612e8",
+      "size": 22794
+    },
+    {
+      "path": "src\\root\\m10F7.c",
+      "sha256": "a4cc271d57a4a80dd255953554a886026297b0560453c4b2c7b302b5878fff88",
+      "size": 35707
+    }
+  ],
+  "pinned_static_evidence_inputs": [
+    {
+      "path": "layout\\symbols.json",
+      "sha256": "0f5dd5b0a211945a97782cfccdb9bb31b0dfd07fcde5df4d4f9486b487eb0125",
+      "size": 800809
+    },
+    {
+      "path": "work\\source-only-dos\\farbss-mechanical-worklist-v2.json",
+      "sha256": "fc2b353933acaaf1e346a8bfb2f12576230b90590e00ee541288b902cf60d6ad",
+      "size": 19290
+    }
+  ],
+  "static_ownership": {
+    "functional_owner": {
+      "manifest_module": "S08:35F5",
+      "generated_unit": "U016",
+      "source": "src/S08/m35F5.c",
+      "function": "RandWorld",
+      "reset_anchors": [
+        {
+          "symbol": "FoodB",
+          "file": "src/S08/m35F5.c",
+          "line": 345,
+          "source": "FoodB = 0;",
+          "function": "RandWorld"
+        },
+        {
+          "symbol": "FoodR",
+          "file": "src/S08/m35F5.c",
+          "line": 346,
+          "source": "FoodR = 0;",
+          "function": "RandWorld"
+        },
+        {
+          "symbol": "Cycle",
+          "file": "src/S08/m35F5.c",
+          "line": 357,
+          "source": "Cycle = 0;",
+          "function": "RandWorld"
+        }
+      ],
+      "RandYard_calls_RandWorld_lines": [
+        413,
+        415
+      ],
+      "historical_COMDEF_module_identity_or_order_claimed": false
+    },
+    "members": [
+      {
+        "name": "FoodB",
+        "address": "50F6:1050",
+        "dos_type": "int far",
+        "word_bytes": 2,
+        "exact_base_alias": "fd_50F6_1050",
+        "alias_registry_row": {
+          "seg": 20726,
+          "off": 4176,
+          "alias_of": "FoodB"
+        },
+        "typed_consumer_declarations": [
+          {
+            "file": "src/root/m0BE8.c",
+            "line": 62,
+            "declaration": "extern int far FoodB;"
+          },
+          {
+            "file": "src/root/m10F7.c",
+            "line": 34,
+            "declaration": "extern int far FoodB;"
+          },
+          {
+            "file": "src/S08/m35F5.c",
+            "line": 45,
+            "declaration": "extern int far FoodB;"
+          },
+          {
+            "file": "src/S09/m35F5.c",
+            "line": 754,
+            "declaration": "extern unsigned char far FoodB[];"
+          },
+          {
+            "file": "src/S22/m3BBD.c",
+            "line": 488,
+            "declaration": "extern int far FoodB;"
+          },
+          {
+            "file": "src/S24/m39C7.c",
+            "line": 293,
+            "declaration": "extern int far FoodB;"
+          }
+        ],
+        "direct_source_reads_writes_and_other_uses": [
+          {
+            "file": "src/root/m0BE8.c",
+            "line": 396,
+            "source": "if (flag == 1 && FoodB > 0)",
+            "access_modes": [
+              "read"
+            ]
+          },
+          {
+            "file": "src/root/m0BE8.c",
+            "line": 397,
+            "source": "FoodB--;",
+            "access_modes": [
+              "read",
+              "write"
+            ]
+          },
+          {
+            "file": "src/root/m10F7.c",
+            "line": 792,
+            "source": "FoodB++;",
+            "access_modes": [
+              "read",
+              "write"
+            ]
+          },
+          {
+            "file": "src/root/m10F7.c",
+            "line": 1150,
+            "source": "if (FoodB > 0)",
+            "access_modes": [
+              "read"
+            ]
+          },
+          {
+            "file": "src/root/m10F7.c",
+            "line": 1151,
+            "source": "FoodB--;",
+            "access_modes": [
+              "read",
+              "write"
+            ]
+          },
+          {
+            "file": "src/S08/m35F5.c",
+            "line": 345,
+            "source": "FoodB = 0;",
+            "access_modes": [
+              "write"
+            ]
+          },
+          {
+            "file": "src/S09/m35F5.c",
+            "line": 1052,
+            "source": "{ 2, 1, (void far *)&FoodB },",
+            "access_modes": [
+              "address_escape"
+            ]
+          },
+          {
+            "file": "src/S22/m3BBD.c",
+            "line": 515,
+            "source": "if (FoodB > 0)",
+            "access_modes": [
+              "read"
+            ]
+          },
+          {
+            "file": "src/S22/m3BBD.c",
+            "line": 516,
+            "source": "FoodB--;",
+            "access_modes": [
+              "read",
+              "write"
+            ]
+          },
+          {
+            "file": "src/S22/m3BBD.c",
+            "line": 530,
+            "source": "FoodB++;",
+            "access_modes": [
+              "read",
+              "write"
+            ]
+          },
+          {
+            "file": "src/S24/m39C7.c",
+            "line": 304,
+            "source": "fd_50F6_0626[fd_50F6_04F4] = FoodB;",
+            "access_modes": [
+              "read"
+            ]
+          }
+        ],
+        "direct_source_reads": [
+          {
+            "file": "src/root/m0BE8.c",
+            "line": 396,
+            "source": "if (flag == 1 && FoodB > 0)",
+            "access_modes": [
+              "read"
+            ]
+          },
+          {
+            "file": "src/root/m0BE8.c",
+            "line": 397,
+            "source": "FoodB--;",
+            "access_modes": [
+              "read",
+              "write"
+            ]
+          },
+          {
+            "file": "src/root/m10F7.c",
+            "line": 792,
+            "source": "FoodB++;",
+            "access_modes": [
+              "read",
+              "write"
+            ]
+          },
+          {
+            "file": "src/root/m10F7.c",
+            "line": 1150,
+            "source": "if (FoodB > 0)",
+            "access_modes": [
+              "read"
+            ]
+          },
+          {
+            "file": "src/root/m10F7.c",
+            "line": 1151,
+            "source": "FoodB--;",
+            "access_modes": [
+              "read",
+              "write"
+            ]
+          },
+          {
+            "file": "src/S22/m3BBD.c",
+            "line": 515,
+            "source": "if (FoodB > 0)",
+            "access_modes": [
+              "read"
+            ]
+          },
+          {
+            "file": "src/S22/m3BBD.c",
+            "line": 516,
+            "source": "FoodB--;",
+            "access_modes": [
+              "read",
+              "write"
+            ]
+          },
+          {
+            "file": "src/S22/m3BBD.c",
+            "line": 530,
+            "source": "FoodB++;",
+            "access_modes": [
+              "read",
+              "write"
+            ]
+          },
+          {
+            "file": "src/S24/m39C7.c",
+            "line": 304,
+            "source": "fd_50F6_0626[fd_50F6_04F4] = FoodB;",
+            "access_modes": [
+              "read"
+            ]
+          }
+        ],
+        "direct_source_writes": [
+          {
+            "file": "src/root/m0BE8.c",
+            "line": 397,
+            "source": "FoodB--;",
+            "access_modes": [
+              "read",
+              "write"
+            ]
+          },
+          {
+            "file": "src/root/m10F7.c",
+            "line": 792,
+            "source": "FoodB++;",
+            "access_modes": [
+              "read",
+              "write"
+            ]
+          },
+          {
+            "file": "src/root/m10F7.c",
+            "line": 1151,
+            "source": "FoodB--;",
+            "access_modes": [
+              "read",
+              "write"
+            ]
+          },
+          {
+            "file": "src/S08/m35F5.c",
+            "line": 345,
+            "source": "FoodB = 0;",
+            "access_modes": [
+              "write"
+            ]
+          },
+          {
+            "file": "src/S22/m3BBD.c",
+            "line": 516,
+            "source": "FoodB--;",
+            "access_modes": [
+              "read",
+              "write"
+            ]
+          },
+          {
+            "file": "src/S22/m3BBD.c",
+            "line": 530,
+            "source": "FoodB++;",
+            "access_modes": [
+              "read",
+              "write"
+            ]
+          }
+        ],
+        "pointer_taking_source_uses": [
+          {
+            "file": "src/S09/m35F5.c",
+            "line": 1052,
+            "source": "{ 2, 1, (void far *)&FoodB },",
+            "access_modes": [
+              "address_escape"
+            ]
+          }
+        ],
+        "numeric_alias_views": {
+          "declarations": [
+            {
+              "file": "src/S25/m39C7.c",
+              "line": 306,
+              "declaration": "extern int far fd_50F6_1050;"
+            }
+          ],
+          "direct_source_uses": [
+            {
+              "file": "src/S25/m39C7.c",
+              "line": 361,
+              "source": "fd_50F6_1050++;",
+              "access_modes": [
+                "read",
+                "write"
+              ]
+            },
+            {
+              "file": "src/S25/m39C7.c",
+              "line": 741,
+              "source": "if (fd_50F6_1050 > 0)",
+              "access_modes": [
+                "read"
+              ]
+            },
+            {
+              "file": "src/S25/m39C7.c",
+              "line": 742,
+              "source": "fd_50F6_1050--;",
+              "access_modes": [
+                "read",
+                "write"
+              ]
+            },
+            {
+              "file": "src/S25/m39C7.c",
+              "line": 758,
+              "source": "if (fd_50F6_1050 > 0)",
+              "access_modes": [
+                "read"
+              ]
+            },
+            {
+              "file": "src/S25/m39C7.c",
+              "line": 759,
+              "source": "fd_50F6_1050--;",
+              "access_modes": [
+                "read",
+                "write"
+              ]
+            },
+            {
+              "file": "src/S25/m39C7.c",
+              "line": 774,
+              "source": "if (fd_50F6_1050 > 0)",
+              "access_modes": [
+                "read"
+              ]
+            },
+            {
+              "file": "src/S25/m39C7.c",
+              "line": 775,
+              "source": "fd_50F6_1050--;",
+              "access_modes": [
+                "read",
+                "write"
+              ]
+            }
+          ],
+          "direct_source_reads": [
+            {
+              "file": "src/S25/m39C7.c",
+              "line": 361,
+              "source": "fd_50F6_1050++;",
+              "access_modes": [
+                "read",
+                "write"
+              ]
+            },
+            {
+              "file": "src/S25/m39C7.c",
+              "line": 741,
+              "source": "if (fd_50F6_1050 > 0)",
+              "access_modes": [
+                "read"
+              ]
+            },
+            {
+              "file": "src/S25/m39C7.c",
+              "line": 742,
+              "source": "fd_50F6_1050--;",
+              "access_modes": [
+                "read",
+                "write"
+              ]
+            },
+            {
+              "file": "src/S25/m39C7.c",
+              "line": 758,
+              "source": "if (fd_50F6_1050 > 0)",
+              "access_modes": [
+                "read"
+              ]
+            },
+            {
+              "file": "src/S25/m39C7.c",
+              "line": 759,
+              "source": "fd_50F6_1050--;",
+              "access_modes": [
+                "read",
+                "write"
+              ]
+            },
+            {
+              "file": "src/S25/m39C7.c",
+              "line": 774,
+              "source": "if (fd_50F6_1050 > 0)",
+              "access_modes": [
+                "read"
+              ]
+            },
+            {
+              "file": "src/S25/m39C7.c",
+              "line": 775,
+              "source": "fd_50F6_1050--;",
+              "access_modes": [
+                "read",
+                "write"
+              ]
+            }
+          ],
+          "direct_source_writes": [
+            {
+              "file": "src/S25/m39C7.c",
+              "line": 361,
+              "source": "fd_50F6_1050++;",
+              "access_modes": [
+                "read",
+                "write"
+              ]
+            },
+            {
+              "file": "src/S25/m39C7.c",
+              "line": 742,
+              "source": "fd_50F6_1050--;",
+              "access_modes": [
+                "read",
+                "write"
+              ]
+            },
+            {
+              "file": "src/S25/m39C7.c",
+              "line": 759,
+              "source": "fd_50F6_1050--;",
+              "access_modes": [
+                "read",
+                "write"
+              ]
+            },
+            {
+              "file": "src/S25/m39C7.c",
+              "line": 775,
+              "source": "fd_50F6_1050--;",
+              "access_modes": [
+                "read",
+                "write"
+              ]
+            }
+          ],
+          "pointer_taking_uses": []
+        },
+        "SaveRec_row": {
+          "line": 1052,
+          "row_number": 159,
+          "row_index_zero_based": 158,
+          "record": "{ 2, 1, (void far *)&FoodB },"
+        }
+      },
+      {
+        "name": "FoodR",
+        "address": "50F6:1060",
+        "dos_type": "int far",
+        "word_bytes": 2,
+        "exact_base_alias": "fd_50F6_1060",
+        "alias_registry_row": {
+          "seg": 20726,
+          "off": 4192,
+          "alias_of": "FoodR"
+        },
+        "typed_consumer_declarations": [
+          {
+            "file": "src/root/m0BE8.c",
+            "line": 63,
+            "declaration": "extern int far FoodR;"
+          },
+          {
+            "file": "src/root/m0F3F.c",
+            "line": 37,
+            "declaration": "extern int far FoodR;"
+          },
+          {
+            "file": "src/root/m10F7.c",
+            "line": 35,
+            "declaration": "extern int far FoodR;"
+          },
+          {
+            "file": "src/S08/m35F5.c",
+            "line": 46,
+            "declaration": "extern int far FoodR;"
+          },
+          {
+            "file": "src/S09/m35F5.c",
+            "line": 755,
+            "declaration": "extern unsigned char far FoodR[];"
+          },
+          {
+            "file": "src/S22/m3BBD.c",
+            "line": 489,
+            "declaration": "extern int far FoodR;"
+          },
+          {
+            "file": "src/S24/m39C7.c",
+            "line": 294,
+            "declaration": "extern int far FoodR;"
+          }
+        ],
+        "direct_source_reads_writes_and_other_uses": [
+          {
+            "file": "src/root/m0BE8.c",
+            "line": 414,
+            "source": "if (flag == 1 && FoodR > 0)",
+            "access_modes": [
+              "read"
+            ]
+          },
+          {
+            "file": "src/root/m0BE8.c",
+            "line": 415,
+            "source": "FoodR--;",
+            "access_modes": [
+              "read",
+              "write"
+            ]
+          },
+          {
+            "file": "src/root/m0F3F.c",
+            "line": 407,
+            "source": "++FoodR;",
+            "access_modes": [
+              "read",
+              "write"
+            ]
+          },
+          {
+            "file": "src/root/m0F3F.c",
+            "line": 663,
+            "source": "if (FoodR > 0)",
+            "access_modes": [
+              "read"
+            ]
+          },
+          {
+            "file": "src/root/m0F3F.c",
+            "line": 664,
+            "source": "FoodR--;",
+            "access_modes": [
+              "read",
+              "write"
+            ]
+          },
+          {
+            "file": "src/root/m0F3F.c",
+            "line": 680,
+            "source": "if (FoodR > 0)",
+            "access_modes": [
+              "read"
+            ]
+          },
+          {
+            "file": "src/root/m0F3F.c",
+            "line": 681,
+            "source": "FoodR--;",
+            "access_modes": [
+              "read",
+              "write"
+            ]
+          },
+          {
+            "file": "src/root/m0F3F.c",
+            "line": 696,
+            "source": "if (FoodR > 0)",
+            "access_modes": [
+              "read"
+            ]
+          },
+          {
+            "file": "src/root/m0F3F.c",
+            "line": 697,
+            "source": "FoodR--;",
+            "access_modes": [
+              "read",
+              "write"
+            ]
+          },
+          {
+            "file": "src/root/m10F7.c",
+            "line": 794,
+            "source": "FoodR++;",
+            "access_modes": [
+              "read",
+              "write"
+            ]
+          },
+          {
+            "file": "src/root/m10F7.c",
+            "line": 1152,
+            "source": "} else if (FoodR > 0)",
+            "access_modes": [
+              "read"
+            ]
+          },
+          {
+            "file": "src/root/m10F7.c",
+            "line": 1153,
+            "source": "FoodR--;",
+            "access_modes": [
+              "read",
+              "write"
+            ]
+          },
+          {
+            "file": "src/S08/m35F5.c",
+            "line": 346,
+            "source": "FoodR = 0;",
+            "access_modes": [
+              "write"
+            ]
+          },
+          {
+            "file": "src/S09/m35F5.c",
+            "line": 1053,
+            "source": "{ 2, 1, (void far *)&FoodR },",
+            "access_modes": [
+              "address_escape"
+            ]
+          },
+          {
+            "file": "src/S22/m3BBD.c",
+            "line": 518,
+            "source": "if (FoodR > 0)",
+            "access_modes": [
+              "read"
+            ]
+          },
+          {
+            "file": "src/S22/m3BBD.c",
+            "line": 519,
+            "source": "FoodR--;",
+            "access_modes": [
+              "read",
+              "write"
+            ]
+          },
+          {
+            "file": "src/S22/m3BBD.c",
+            "line": 532,
+            "source": "FoodR++;",
+            "access_modes": [
+              "read",
+              "write"
+            ]
+          },
+          {
+            "file": "src/S24/m39C7.c",
+            "line": 305,
+            "source": "fd_50F6_06AE[fd_50F6_04F4] = FoodR;",
+            "access_modes": [
+              "read"
+            ]
+          }
+        ],
+        "direct_source_reads": [
+          {
+            "file": "src/root/m0BE8.c",
+            "line": 414,
+            "source": "if (flag == 1 && FoodR > 0)",
+            "access_modes": [
+              "read"
+            ]
+          },
+          {
+            "file": "src/root/m0BE8.c",
+            "line": 415,
+            "source": "FoodR--;",
+            "access_modes": [
+              "read",
+              "write"
+            ]
+          },
+          {
+            "file": "src/root/m0F3F.c",
+            "line": 407,
+            "source": "++FoodR;",
+            "access_modes": [
+              "read",
+              "write"
+            ]
+          },
+          {
+            "file": "src/root/m0F3F.c",
+            "line": 663,
+            "source": "if (FoodR > 0)",
+            "access_modes": [
+              "read"
+            ]
+          },
+          {
+            "file": "src/root/m0F3F.c",
+            "line": 664,
+            "source": "FoodR--;",
+            "access_modes": [
+              "read",
+              "write"
+            ]
+          },
+          {
+            "file": "src/root/m0F3F.c",
+            "line": 680,
+            "source": "if (FoodR > 0)",
+            "access_modes": [
+              "read"
+            ]
+          },
+          {
+            "file": "src/root/m0F3F.c",
+            "line": 681,
+            "source": "FoodR--;",
+            "access_modes": [
+              "read",
+              "write"
+            ]
+          },
+          {
+            "file": "src/root/m0F3F.c",
+            "line": 696,
+            "source": "if (FoodR > 0)",
+            "access_modes": [
+              "read"
+            ]
+          },
+          {
+            "file": "src/root/m0F3F.c",
+            "line": 697,
+            "source": "FoodR--;",
+            "access_modes": [
+              "read",
+              "write"
+            ]
+          },
+          {
+            "file": "src/root/m10F7.c",
+            "line": 794,
+            "source": "FoodR++;",
+            "access_modes": [
+              "read",
+              "write"
+            ]
+          },
+          {
+            "file": "src/root/m10F7.c",
+            "line": 1152,
+            "source": "} else if (FoodR > 0)",
+            "access_modes": [
+              "read"
+            ]
+          },
+          {
+            "file": "src/root/m10F7.c",
+            "line": 1153,
+            "source": "FoodR--;",
+            "access_modes": [
+              "read",
+              "write"
+            ]
+          },
+          {
+            "file": "src/S22/m3BBD.c",
+            "line": 518,
+            "source": "if (FoodR > 0)",
+            "access_modes": [
+              "read"
+            ]
+          },
+          {
+            "file": "src/S22/m3BBD.c",
+            "line": 519,
+            "source": "FoodR--;",
+            "access_modes": [
+              "read",
+              "write"
+            ]
+          },
+          {
+            "file": "src/S22/m3BBD.c",
+            "line": 532,
+            "source": "FoodR++;",
+            "access_modes": [
+              "read",
+              "write"
+            ]
+          },
+          {
+            "file": "src/S24/m39C7.c",
+            "line": 305,
+            "source": "fd_50F6_06AE[fd_50F6_04F4] = FoodR;",
+            "access_modes": [
+              "read"
+            ]
+          }
+        ],
+        "direct_source_writes": [
+          {
+            "file": "src/root/m0BE8.c",
+            "line": 415,
+            "source": "FoodR--;",
+            "access_modes": [
+              "read",
+              "write"
+            ]
+          },
+          {
+            "file": "src/root/m0F3F.c",
+            "line": 407,
+            "source": "++FoodR;",
+            "access_modes": [
+              "read",
+              "write"
+            ]
+          },
+          {
+            "file": "src/root/m0F3F.c",
+            "line": 664,
+            "source": "FoodR--;",
+            "access_modes": [
+              "read",
+              "write"
+            ]
+          },
+          {
+            "file": "src/root/m0F3F.c",
+            "line": 681,
+            "source": "FoodR--;",
+            "access_modes": [
+              "read",
+              "write"
+            ]
+          },
+          {
+            "file": "src/root/m0F3F.c",
+            "line": 697,
+            "source": "FoodR--;",
+            "access_modes": [
+              "read",
+              "write"
+            ]
+          },
+          {
+            "file": "src/root/m10F7.c",
+            "line": 794,
+            "source": "FoodR++;",
+            "access_modes": [
+              "read",
+              "write"
+            ]
+          },
+          {
+            "file": "src/root/m10F7.c",
+            "line": 1153,
+            "source": "FoodR--;",
+            "access_modes": [
+              "read",
+              "write"
+            ]
+          },
+          {
+            "file": "src/S08/m35F5.c",
+            "line": 346,
+            "source": "FoodR = 0;",
+            "access_modes": [
+              "write"
+            ]
+          },
+          {
+            "file": "src/S22/m3BBD.c",
+            "line": 519,
+            "source": "FoodR--;",
+            "access_modes": [
+              "read",
+              "write"
+            ]
+          },
+          {
+            "file": "src/S22/m3BBD.c",
+            "line": 532,
+            "source": "FoodR++;",
+            "access_modes": [
+              "read",
+              "write"
+            ]
+          }
+        ],
+        "pointer_taking_source_uses": [
+          {
+            "file": "src/S09/m35F5.c",
+            "line": 1053,
+            "source": "{ 2, 1, (void far *)&FoodR },",
+            "access_modes": [
+              "address_escape"
+            ]
+          }
+        ],
+        "numeric_alias_views": {
+          "declarations": [],
+          "direct_source_uses": [],
+          "direct_source_reads": [],
+          "direct_source_writes": [],
+          "pointer_taking_uses": []
+        },
+        "SaveRec_row": {
+          "line": 1053,
+          "row_number": 160,
+          "row_index_zero_based": 159,
+          "record": "{ 2, 1, (void far *)&FoodR },"
+        }
+      },
+      {
+        "name": "Cycle",
+        "address": "50F6:0F08",
+        "dos_type": "int far",
+        "word_bytes": 2,
+        "exact_base_alias": "fd_50F6_0F08",
+        "alias_registry_row": {
+          "seg": 20726,
+          "off": 3848,
+          "alias_of": "Cycle"
+        },
+        "typed_consumer_declarations": [
+          {
+            "file": "src/root/m0894.c",
+            "line": 14,
+            "declaration": "extern int far Cycle;"
+          },
+          {
+            "file": "src/root/m0F3F.c",
+            "line": 39,
+            "declaration": "extern int far Cycle;"
+          },
+          {
+            "file": "src/S08/m35F5.c",
+            "line": 53,
+            "declaration": "extern int far Cycle;"
+          },
+          {
+            "file": "src/S09/m35F5.c",
+            "line": 738,
+            "declaration": "extern unsigned char far Cycle[];"
+          }
+        ],
+        "direct_source_reads_writes_and_other_uses": [
+          {
+            "file": "src/root/m0894.c",
+            "line": 170,
+            "source": "if (++Cycle > 0x1000)",
+            "access_modes": [
+              "read",
+              "write"
+            ]
+          },
+          {
+            "file": "src/root/m0894.c",
+            "line": 171,
+            "source": "Cycle = 0;",
+            "access_modes": [
+              "write"
+            ]
+          },
+          {
+            "file": "src/root/m0894.c",
+            "line": 184,
+            "source": "if ((Cycle & 0x3f) == 0)",
+            "access_modes": [
+              "read"
+            ]
+          },
+          {
+            "file": "src/root/m0894.c",
+            "line": 186,
+            "source": "if ((Cycle & 0x1f) == 0)",
+            "access_modes": [
+              "read"
+            ]
+          },
+          {
+            "file": "src/root/m0894.c",
+            "line": 192,
+            "source": "if (Cycle & 1)",
+            "access_modes": [
+              "read"
+            ]
+          },
+          {
+            "file": "src/root/m0894.c",
+            "line": 210,
+            "source": "switch ((Cycle & 0x60) >> 5) {",
+            "access_modes": [
+              "read"
+            ]
+          },
+          {
+            "file": "src/root/m0F3F.c",
+            "line": 425,
+            "source": "if (!(Cycle & mask)) {",
+            "access_modes": [
+              "read"
+            ]
+          },
+          {
+            "file": "src/root/m0F3F.c",
+            "line": 478,
+            "source": "if ((Cycle & 0xf) == 0 && SRand128() <= HealthR) {",
+            "access_modes": [
+              "read"
+            ]
+          },
+          {
+            "file": "src/S08/m35F5.c",
+            "line": 357,
+            "source": "Cycle = 0;",
+            "access_modes": [
+              "write"
+            ]
+          },
+          {
+            "file": "src/S09/m35F5.c",
+            "line": 1036,
+            "source": "{ 2, 1, (void far *)&Cycle },",
+            "access_modes": [
+              "address_escape"
+            ]
+          }
+        ],
+        "direct_source_reads": [
+          {
+            "file": "src/root/m0894.c",
+            "line": 170,
+            "source": "if (++Cycle > 0x1000)",
+            "access_modes": [
+              "read",
+              "write"
+            ]
+          },
+          {
+            "file": "src/root/m0894.c",
+            "line": 184,
+            "source": "if ((Cycle & 0x3f) == 0)",
+            "access_modes": [
+              "read"
+            ]
+          },
+          {
+            "file": "src/root/m0894.c",
+            "line": 186,
+            "source": "if ((Cycle & 0x1f) == 0)",
+            "access_modes": [
+              "read"
+            ]
+          },
+          {
+            "file": "src/root/m0894.c",
+            "line": 192,
+            "source": "if (Cycle & 1)",
+            "access_modes": [
+              "read"
+            ]
+          },
+          {
+            "file": "src/root/m0894.c",
+            "line": 210,
+            "source": "switch ((Cycle & 0x60) >> 5) {",
+            "access_modes": [
+              "read"
+            ]
+          },
+          {
+            "file": "src/root/m0F3F.c",
+            "line": 425,
+            "source": "if (!(Cycle & mask)) {",
+            "access_modes": [
+              "read"
+            ]
+          },
+          {
+            "file": "src/root/m0F3F.c",
+            "line": 478,
+            "source": "if ((Cycle & 0xf) == 0 && SRand128() <= HealthR) {",
+            "access_modes": [
+              "read"
+            ]
+          }
+        ],
+        "direct_source_writes": [
+          {
+            "file": "src/root/m0894.c",
+            "line": 170,
+            "source": "if (++Cycle > 0x1000)",
+            "access_modes": [
+              "read",
+              "write"
+            ]
+          },
+          {
+            "file": "src/root/m0894.c",
+            "line": 171,
+            "source": "Cycle = 0;",
+            "access_modes": [
+              "write"
+            ]
+          },
+          {
+            "file": "src/S08/m35F5.c",
+            "line": 357,
+            "source": "Cycle = 0;",
+            "access_modes": [
+              "write"
+            ]
+          }
+        ],
+        "pointer_taking_source_uses": [
+          {
+            "file": "src/S09/m35F5.c",
+            "line": 1036,
+            "source": "{ 2, 1, (void far *)&Cycle },",
+            "access_modes": [
+              "address_escape"
+            ]
+          }
+        ],
+        "numeric_alias_views": {
+          "declarations": [
+            {
+              "file": "src/S25/m39C7.c",
+              "line": 368,
+              "declaration": "extern int far fd_50F6_0F08;"
+            },
+            {
+              "file": "src/S25/m3BA4.c",
+              "line": 244,
+              "declaration": "extern unsigned char far fd_50F6_0F08;"
+            }
+          ],
+          "direct_source_uses": [
+            {
+              "file": "src/S25/m39C7.c",
+              "line": 387,
+              "source": "if (!(fd_50F6_0F08 & mask)) {",
+              "access_modes": [
+                "read"
+              ]
+            },
+            {
+              "file": "src/S25/m39C7.c",
+              "line": 466,
+              "source": "if (!(fd_50F6_0F08 & 0xf) && SRand128() <= fd_50F6_10BE) {",
+              "access_modes": [
+                "read"
+              ]
+            },
+            {
+              "file": "src/S25/m3BA4.c",
+              "line": 264,
+              "source": "if (!(fd_50F6_0F08 & 0x3f))",
+              "access_modes": [
+                "read"
+              ]
+            },
+            {
+              "file": "src/S25/m3BA4.c",
+              "line": 273,
+              "source": "if (fd_50F6_04C2 == 0x60 && fd_50F6_048C > 1 && !(fd_50F6_0F08 & 0xf)) {",
+              "access_modes": [
+                "read"
+              ]
+            }
+          ],
+          "direct_source_reads": [
+            {
+              "file": "src/S25/m39C7.c",
+              "line": 387,
+              "source": "if (!(fd_50F6_0F08 & mask)) {",
+              "access_modes": [
+                "read"
+              ]
+            },
+            {
+              "file": "src/S25/m39C7.c",
+              "line": 466,
+              "source": "if (!(fd_50F6_0F08 & 0xf) && SRand128() <= fd_50F6_10BE) {",
+              "access_modes": [
+                "read"
+              ]
+            },
+            {
+              "file": "src/S25/m3BA4.c",
+              "line": 264,
+              "source": "if (!(fd_50F6_0F08 & 0x3f))",
+              "access_modes": [
+                "read"
+              ]
+            },
+            {
+              "file": "src/S25/m3BA4.c",
+              "line": 273,
+              "source": "if (fd_50F6_04C2 == 0x60 && fd_50F6_048C > 1 && !(fd_50F6_0F08 & 0xf)) {",
+              "access_modes": [
+                "read"
+              ]
+            }
+          ],
+          "direct_source_writes": [],
+          "pointer_taking_uses": []
+        },
+        "SaveRec_row": {
+          "line": 1036,
+          "row_number": 143,
+          "row_index_zero_based": 142,
+          "record": "{ 2, 1, (void far *)&Cycle },"
+        }
+      }
+    ],
+    "SaveRec_table": {
+      "file": "src/S09/m35F5.c",
+      "record_definition": "lines 14-18: { int size; int count; void far *data; }",
+      "extern_declaration": "line 24: fd_4E4B_0000[]",
+      "table_definition": "line 893: fd_4E4B_0000[308]",
+      "load_walk": "lines 114-118: count/size walk and read(fd, p->data, count*size)",
+      "save_walk": "lines 177-183: count/size walk and write(fd, p->data, count*size)",
+      "rows": {
+        "Cycle": {
+          "line": 1036,
+          "row_number": 143,
+          "row_index_zero_based": 142,
+          "record": "{ 2, 1, (void far *)&Cycle },"
+        },
+        "FoodB": {
+          "line": 1052,
+          "row_number": 159,
+          "row_index_zero_based": 158,
+          "record": "{ 2, 1, (void far *)&FoodB },"
+        },
+        "FoodR": {
+          "line": 1053,
+          "row_number": 160,
+          "row_index_zero_based": 159,
+          "record": "{ 2, 1, (void far *)&FoodR },"
+        }
+      },
+      "pointers_persist_in_global_save_table": true,
+      "target_type_claim_from_save_view": false
+    },
+    "source_file_scan_count": 98,
+    "owner_reason": "RandWorld establishes the meaningful world-reset lifetime for FoodB, FoodR, and Cycle; no neighboring gap or historical COMDEF identity is used."
+  },
+  "fixture_limits": {
+    "full_module_control_regenerated_from_source": true,
+    "ignored_prebuilt_object_used": false,
+    "full_U016_candidate_linked_into_runtime_fixture": false,
+    "game_stubs_or_game_function_definitions_used": false,
+    "oracle_build_input_used": false,
+    "original_byte_fallback_used": false,
+    "historical_COMDEF_identity_or_order_claimed": false,
+    "denied_oracle_reads": []
+  },
+  "scope_limit": "Typed references and persistent SaveRec addresses establish a two-byte live state view. The owner choice follows the meaningful RandWorld reset lifetime; this does not identify which historical object emitted the COMDEF or establish historical communal allocation order.",
+  "root_review": {
+    "reviewer": "root",
+    "basis": "Typed word consumers, complete direct alias/pointer-use inventory, persistent two-byte SaveRec address views, and RandWorld reset lifetime. Fresh complete-TU controls preserve every segment byte/extent/definition/group/public and ordered symbolic fixup. Clean MSC-startup fixtures confirm both word and byte views on both linkers with separate wrong-alias and nonzero-initializer controls.",
+    "limit": "Source-functional owner only; original COMDEF-producing TU, order, padding and full-game integration remain unclaimed."
+  },
+  "inputs": [
+    {
+      "path": "C:\\tools\\RTLink-Plus-4.00-DiscMaster\\installed\\dest\\RTLINK.DAT",
+      "sha256": "c1e206fe4b3c34d43b47aa9aa215e2959fbb23c69c89eb69e36d80b1d9194eea",
+      "size": 63824
+    },
+    {
+      "path": "C:\\tools\\RTLink-Plus-4.00-DiscMaster\\installed\\dest\\RTLINK.EXE",
+      "sha256": "dff0a988738a2ba7716f7013ef5b8136e0857b6bfe700bccdeaad70ee5e87c74",
+      "size": 449497
+    },
+    {
+      "path": "C:\\tools\\RTLink-Plus-4.00-DiscMaster\\installed\\dest\\RTLINKST.COM",
+      "sha256": "6ad9015869dc9598a2b498c58297224e5ab4a13fad9ada528650dfcedeb83cf2",
+      "size": 7184
+    },
+    {
+      "path": "C:\\tools\\RTLink-Plus-4.00-DiscMaster\\installed\\dest\\RTLUTILS.LIB",
+      "sha256": "9060c022f65a2811b81936879f93eb16c5d349c14b56c704a3853d3cf79cd162",
+      "size": 266625
+    },
+    {
+      "path": "C:\\tools\\dosbox-x\\dosbox-x.exe",
+      "sha256": "b028a4d328302ea270722dec69f3ec3a10ebf76beba72a51970db33a88df2bf6",
+      "size": 20481536
+    },
+    {
+      "path": "C:\\tools\\msc-6.00\\LIB\\libh.lib",
+      "sha256": "a4492e8f63da409d949643fd448f29e65e2cc9a8f2deea977372177bbe0ad818",
+      "size": 21033
+    },
+    {
+      "path": "C:\\tools\\msc-6.00\\LIB\\llibcr.lib",
+      "sha256": "3d0c6ae92972789e87def01fa96351c39216d731d5c880370155c5613d78c884",
+      "size": 148711
+    },
+    {
+      "path": "C:\\tools\\msc-6.00ax-archive\\BIN\\C1.ERR",
+      "sha256": "637444915870f3283d5df41c5cdb1be8c32cc6c19b080f2bb3891edbc3751c6e",
+      "size": 19500
+    },
+    {
+      "path": "C:\\tools\\msc-6.00ax-archive\\BIN\\C1L.EXE",
+      "sha256": "d3db38b875a95048bca2809cd1f84783c6c070805f188fec9161054d6350ded3",
+      "size": 213680
+    },
+    {
+      "path": "C:\\tools\\msc-6.00ax-archive\\BIN\\C23.ERR",
+      "sha256": "22944a0dffef336c0ebb8f6d5aeb97b4dbeb5c9758a48759557176bff49d1151",
+      "size": 3649
+    },
+    {
+      "path": "C:\\tools\\msc-6.00ax-archive\\BIN\\C2L.EXE",
+      "sha256": "62490de22e7b279ea59218a54d677bfc752cb5fc1287533d2e23d03519f155e0",
+      "size": 473258
+    },
+    {
+      "path": "C:\\tools\\msc-6.00ax-archive\\BIN\\C3L.EXE",
+      "sha256": "9e82ecc87ffcdb2def53ac64c0d1f048b26421c1415b5600ad4d8d6fcbc06553",
+      "size": 195439
+    },
+    {
+      "path": "C:\\tools\\msc-6.00ax-archive\\BIN\\CL.ERR",
+      "sha256": "ca22f37e5e0c09faebde9e4d549dd1f53523cc6f23049d2239a040cd19a424e7",
+      "size": 1656
+    },
+    {
+      "path": "C:\\tools\\msc-6.00ax-archive\\BIN\\CL.EXE",
+      "sha256": "92df4a0839aac77940189ce54f107381b829babe8103926cb05d1adffe947347",
+      "size": 81184
+    },
+    {
+      "path": "C:\\tools\\msc-6.00ax-archive\\BIN\\CL.MSG",
+      "sha256": "3379f283aec74842bc82205e4c848d759e6e2dcbb6d4820eec9719f1297213ec",
+      "size": 2697
+    },
+    {
+      "path": "C:\\tools\\rtlink-plus-6.10\\installed\\DOS4GW.EXE",
+      "sha256": "7192b80d1551769c2d2897b2f58015dc18fadca2b7e093a20f45b34011933c6c",
+      "size": 231179
+    },
+    {
+      "path": "C:\\tools\\rtlink-plus-6.10\\installed\\RTL-REAL.EXE",
+      "sha256": "228c5d429438ea32ee21dd02c65b7f8e198715b3fa957be9da328f9857482773",
+      "size": 717922
+    },
+    {
+      "path": "C:\\tools\\rtlink-plus-6.10\\installed\\RTL-SWAP.EXE",
+      "sha256": "daae0a8c358edc26f95540f4bc1629c0dc5c30652155d85ccd79bead4381cfe3",
+      "size": 692123
+    },
+    {
+      "path": "C:\\tools\\rtlink-plus-6.10\\installed\\RTLINK.DAT",
+      "sha256": "10723fb4d4381b6a38417a18409e32d254e59850bcd3b465fbb824e01367a77b",
+      "size": 100100
+    },
+    {
+      "path": "C:\\tools\\rtlink-plus-6.10\\installed\\RTLINK.EXE",
+      "sha256": "ea6f57a470a26801086593d54aa99f6bf983dd024fc19b5e13361a07f43e17fb",
+      "size": 687531
+    },
+    {
+      "path": "C:\\tools\\rtlink-plus-6.10\\installed\\RTLINKST.COM",
+      "sha256": "635425a8feff822ca98ec536c55a31824161bffbf9d24d37851cc0d9f7ce3b5f",
+      "size": 11031
+    },
+    {
+      "path": "C:\\tools\\rtlink-plus-6.10\\installed\\RTLUTILS.LIB",
+      "sha256": "c718bac09b0b1204a259494446acfa8bfffb129144cc7d36799855621f4fdccb",
+      "size": 423823
+    }
+  ]
+}

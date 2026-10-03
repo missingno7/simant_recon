@@ -109,18 +109,77 @@ def reviewed_context(canonical, reviewed, name):
             'macros_sha256': sha(json.dumps(macros_a).encode()), 'status': 'MATCH'}
 
 
+def strict_static_reviews(registry, report, index_path=None):
+    """A historical finite registration cannot silently close static semantics."""
+    index_path = index_path or ROOT / 'work/source-only-dos/static-completeness/index-v1.json'
+    raw, identity = pin(index_path)
+    index = json.loads(raw)
+    if (index.get('schema') != 'simant-dos-strict-static-index-v1'
+            or set(index.get('entries', {})) != set(registry['entries'])):
+        raise ValueError('strict static audit does not cover the behavioral registry')
+    report['inputs'].append(identity)
+    reviews = {}
+    for name, entry in registry['entries'].items():
+        item = index['entries'][name]
+        raw, receipt_pin = pin(ROOT / item['path'], item['sha256'])
+        receipt = json.loads(raw)
+        evidence_raw, evidence_pin = pin(ROOT / entry['evidence_path'], entry['evidence_sha256'])
+        original_source = json.loads(evidence_raw)['source']
+        audit = receipt.get('audit', {})
+        review = receipt.get('root_review', {})
+        status = receipt.get('status')
+        if (receipt.get('schema') != 'simant-dos-strict-static-review-v1'
+                or receipt.get('function') != name or review.get('reviewer') != 'root'
+                or receipt.get('registered_evidence', {}).get('sha256') != evidence_pin['sha256']
+                or receipt.get('registered_source', {}).get('sha256') != original_source['sha256']
+                or status not in ('BEHAVIOR_EXACT_CONFIRMED', 'EXACT', 'CONTRACT_EQUIVALENT', 'UNRESOLVED')
+                or audit.get('status') != status):
+            raise ValueError('invalid strict static audit identity/verdict: ' + name)
+        if status in ('BEHAVIOR_EXACT_CONFIRMED', 'EXACT'):
+            if (audit.get('unexplained_semantic_differences') != []
+                    or not all(review.get(axis) is True for axis in
+                        ('complete_cfg', 'complete_data_widths', 'complete_calls_effects', 'codegen_only_residue'))):
+                raise ValueError('incomplete strict static acceptance: ' + name)
+            if status == 'EXACT' and not review.get('byte_exact_verified'):
+                raise ValueError('static semantics alone cannot claim EXACT: ' + name)
+        source = receipt.get('source_override', original_source)
+        if source.get('module') != original_source.get('module'):
+            raise ValueError('strict source override changes the module: ' + name)
+        if receipt.get('source_override') and review.get('source_correction_reviewed') is not True:
+            raise ValueError('unreviewed strict source correction: ' + name)
+        pin(ROOT / source['path'], source['sha256'])
+        if audit.get('source', {}).get('sha256') != source['sha256']:
+            raise ValueError('strict audit does not describe the imported source: ' + name)
+        report['inputs'].append(receipt_pin)
+        reviews[name] = {'status': status, 'receipt': receipt_pin,
+                         'source_override': receipt.get('source_override'), 'root_review': review}
+    report['strict_static_audit'] = reviews
+    report['unresolved_semantics'] = [{'function': name, 'kind': 'semantic', 'status': r['status'],
+                                      'receipt': r['receipt']}
+                                     for name, r in reviews.items()
+                                     if r['status'] not in ('BEHAVIOR_EXACT_CONFIRMED', 'EXACT')]
+    report['unresolved_functions'] = list(report['unresolved_semantics'])
+    return reviews
+
+
 def prepare(out, report):
     manifest_raw, manifest_pin = pin(ROOT / 'layout/manifest.json')
     manifest = json.loads(manifest_raw)
     registry_raw, registry_pin = pin(ROOT / 'evidence/behavior/manifest.json')
     registry = json.loads(registry_raw)
+    static_reviews = strict_static_reviews(registry, report)
     symbols_raw, symbols_pin = pin(ROOT / 'layout/symbols.json')
     symbols = json.loads(symbols_raw)
     aliases = identifier_aliases(symbols)
     report['inputs'] += [manifest_pin, registry_pin, symbols_pin]
     bindings = {}
+    providers = []
     report['reviewed_data_aliases'] = []
-    for filename in ('source-bindings-v1.json', 'c-data-bindings-v1.json', 'history-storage-bindings-v1.json'):
+    report['reviewed_communal_aliases'] = []
+    for filename in ('source-bindings-v1.json', 'c-data-bindings-v1.json', 'history-storage-bindings-v1.json',
+                     'queue-storage-bindings-v1.json', 'assembly-frame-bindings-v1.json',
+                     'world-scalar-bindings-v1.json', 'population-owner-bindings-v1.json',
+                     'lion-owner-bindings-v1.json', 'callback-table-bindings-v1.json'):
         binding_raw, binding_pin = pin(ROOT / 'work/source-only-dos' / filename)
         binding_packet = json.loads(binding_raw)
         if binding_packet['category'] not in ('REVIEWED_SOURCE_LINK_BINDING', 'REVIEWED_SOURCE_STORAGE_BINDING'):
@@ -133,18 +192,41 @@ def prepare(out, report):
             raw, identity = pin(ROOT / contract_pin['path'], contract_pin['sha256'])
             contract = json.loads(raw)
             if not contract['all_required_checks_pass']:
-                raise ValueError('history storage startup is not verified')
+                raise ValueError('storage runtime contract is not verified')
             script = contract['probe_source']
             report['inputs'] += [identity, pin(ROOT / script['path'], script['sha256'])[1]]
-            report['history_storage_contract'] = contract
+            report[binding_packet.get('runtime_contract_key', 'history_storage_contract')] = contract
+        for contract_key, contract_pin in binding_packet.get('runtime_contracts', {}).items():
+            raw, identity = pin(ROOT / contract_pin['path'], contract_pin['sha256'])
+            contract = json.loads(raw)
+            if not contract['all_required_checks_pass']:
+                raise ValueError('scalar runtime contract is not verified')
+            script = contract['probe_source']
+            report['inputs'] += [identity, pin(ROOT / script['path'], script['sha256'])[1]]
+            report[contract_key] = contract
         for binding in binding_packet['bindings']:
             if binding['module'] in bindings:
-                raise ValueError('duplicate DOS binding module')
+                previous = bindings[binding['module']]
+                base = binding_packet.get('extends_packet')
+                if not base or not binding.get('reframes'):
+                    raise ValueError('duplicate DOS binding module')
+                base_raw, base_pin = pin(ROOT / base['path'], base['sha256'])
+                if previous not in json.loads(base_raw)['bindings'] or any(
+                        binding[k] != previous[k] for k in ('module', 'source', 'source_sha256')):
+                    raise ValueError('DOS frame extension has a different source/control binding')
+                report['inputs'].append(base_pin)
+                combined = dict(previous)
+                for key in ('edits', 'exports', 'relocations', 'reframes'):
+                    combined[key] = previous.get(key, []) + binding.get(key, [])
+                combined['frame_review'] = binding['frame_review']
+                binding = combined
             bindings[binding['module']] = binding
         report['reviewed_data_aliases'] += binding_packet.get('aliases', [])
-    contract_raw, contract_pin = pin(ROOT / 'work/source-only-dos/linker-alias-contract-v1.json')
+        report['reviewed_communal_aliases'] += binding_packet.get('communal_aliases', [])
+        providers += binding_packet.get('providers', [])
+    contract_raw, contract_pin = pin(ROOT / 'work/source-only-dos/linker-alias-contract-v2.json')
     contract = json.loads(contract_raw)
-    if not contract['all_checks_pass'] or len(contract['cases']) != 6:
+    if not contract['all_checks_pass'] or len(contract['cases']) != 10:
         raise ValueError('linker interior alias contract not verified')
     _, probe_pin = pin(ROOT / contract['probe_source']['path'], contract['probe_source']['sha256'])
     report['inputs'] += [contract_pin, probe_pin]
@@ -155,7 +237,7 @@ def prepare(out, report):
             raise ValueError(f'unreviewed behavioral entry: {name}')
         evidence_raw, evidence_pin = pin(ROOT / entry['evidence_path'], entry['evidence_sha256'])
         packet = json.loads(evidence_raw)
-        source = packet['source']
+        source = static_reviews[name]['source_override'] or packet['source']
         source_raw, source_pin = pin(ROOT / source['path'], source['sha256'])
         text = rename_identifiers(source_raw.decode('latin1'), aliases)
         actual_name = aliases.get(name, name)
@@ -170,8 +252,10 @@ def prepare(out, report):
             unit_key = candidates[0]
         replacements.setdefault(unit_key, {})[actual_name] = (definition, text, source_pin, evidence_pin)
         report['semantic_substitutions'].append({
-            'function': actual_name, 'module': unit_key, 'category': 'reviewed BEHAVIOR_EXACT',
+            'function': actual_name, 'module': unit_key, 'category': static_reviews[name]['status'],
             'source': source_pin, 'evidence': evidence_pin,
+            'strict_status': static_reviews[name]['status'],
+            'static_receipt': static_reviews[name]['receipt'],
             'scope': 'reviewed definition only; canonical TU declarations/data retained'})
         report['inputs'] += [source_pin, evidence_pin]
     source_dir = out / 'sources'
@@ -238,10 +322,34 @@ def prepare(out, report):
             'lang': module.get('lang', 'c'), 'profile': module['profile'], 'flags': module['flags'],
             'reviewed_bodies': sorted(imported), 'source_binding': binding,
             'binding_control_source': control_pin, 'status': 'PREPARED'})
+    for provider in providers:
+        source = provider['source']
+        raw, source_pin = pin(ROOT / source['path'], source['sha256'])
+        text = raw.decode('ascii')
+        dos_source_bindings.review_provider_source(text, provider)
+        basename = provider['basename']
+        if (basename != 'CBOWNER' or provider['profile'] != 'msc600ax'
+                or provider['flags'] != ['/AL', '/Os', '/Gs']):
+            raise ValueError('unreviewed storage provider compiler context')
+        path = source_dir / (basename + '.c')
+        path.write_bytes(raw)
+        generated_pin = pin(path)[1]
+        report['inputs'].append(source_pin)
+        report['generated_files'].append(generated_pin)
+        report['translation_units'].append({
+            'module': provider['module'], 'unit': 'root', 'basename': basename,
+            'source': source_pin, 'generated_source': generated_pin, 'lang': 'c',
+            'profile': provider['profile'], 'flags': provider['flags'],
+            'reviewed_bodies': [], 'source_binding': None, 'storage_provider': provider,
+            'status': 'PREPARED'})
     report['function_dispositions'] = {
         'EXACT_C': sum(c.get('kind') == 'C' for m in manifest['modules'].values() for c in m.get('claims', [])),
         'GENUINE_ASM': sum(c.get('kind') == 'ASM' for m in manifest['modules'].values() for c in m.get('claims', [])),
-        'BEHAVIOR_EXACT': len(registry['entries']), 'UNRESOLVED': 0}
+        'BEHAVIOR_EXACT_CONFIRMED': sum(r['status'] == 'BEHAVIOR_EXACT_CONFIRMED' for r in static_reviews.values()),
+        'EXACT_AFTER_STATIC_AUDIT': sum(r['status'] == 'EXACT' for r in static_reviews.values()),
+        'CONTRACT_EQUIVALENT': sum(r['status'] == 'CONTRACT_EQUIVALENT' for r in static_reviews.values()),
+        'UNRESOLVED': sum(r['status'] == 'UNRESOLVED' for r in static_reviews.values())}
+    report['historical_behavior_registrations'] = len(registry['entries'])
     # Approved dispositions are a debt inventory, never initializer/build material.
     debt_raw, debt_pin = pin(ROOT / 'work/takeover/behavioral-oracle/data-debt-disposition-approved-v1.json')
     report['inputs'].append(debt_pin)
@@ -300,6 +408,9 @@ def compile_units(out, report, jobs, reuse):
             path.write_bytes(result.obj)
             row['status'] = 'COMPILED'
         row['object'] = pin(path)[1]
+        if row.get('storage_provider'):
+            row['provider_verification'] = dos_source_bindings.verify_provider(
+                OmfReader(communals=True).read(path.read_bytes()), row['storage_provider'])
         if row.get('source_binding'):
             # This reference object is source-built before visibility/address edits, never linked.
             # Reassemble it so a cached derived object cannot bypass the proof.
@@ -340,6 +451,11 @@ def audit_layout(report):
             if re.search(r'(?i)\b3DFCh\b', line.split(';', 1)[0]):
                 sites.append({'module': row['module'], 'source': row['source'],
                               'line': number, 'instruction': line.strip()})
+    queue = next((r for r in report['translation_units'] if r['module'] == 'root:1FD2'), {})
+    queue_source = (ROOT / queue['generated_source']['path']).read_text(encoding='latin1') if queue else ''
+    queue_bound = (queue.get('source_binding', {}).get('queue_storage') ==
+                   {'slots': 7, 'stride': 16, 'pointer_view': '_g_5FFE'}
+                   and '(int)0x91b0' not in queue_source)
     report['layout_dependencies'] = [{
         'id': 'driver-row-offset-buffer', 'status': 'UNRESOLVED' if sites else 'SOURCE_BOUND',
         'sites': sites, 'storage_source': 'src/root/m1B4E.asm',
@@ -348,25 +464,34 @@ def audit_layout(report):
                   'The accepted owner defines _g_3DFC and _g_3DAE as the DGROUP segment. '
                   'A changed layout needs reviewed symbolic references or proven placement.',
         'scope_limit': 'This is one confirmed family, not a completed scan of every numeric operand.'}, {
+        'id': 'driver-callback-table-owner',
+        'status': 'SOURCE_BOUND' if any(r.get('storage_provider') for r in report['translation_units']) else 'UNRESOLVED',
+        'owner': '_driver_callback_table', 'slots': 25, 'slot_bytes': 4,
+        'reason': 'Source reset/copy and four driver tables prove 25 far-pointer slots. One typed near communal owns the slots; 23 registered names are bounded aliases. The existing symbolic _g_3DF8 pointer is verified under shifted DGROUP on both linkers. Historical COMDEF TU/order and wider driver frame integration remain separate.'}, {
         'id': 'remaining-assembly-address-audit', 'status': 'UNRESOLVED',
         'reason': 'The broader audit of fixed numeric operands and segment/group frames is pending. '
                   'Reviewed bindings close only the listed buffer and S00 callback operands.'}, {
-        'id': 'input-event-queue-fixed-pointer', 'status': 'UNRESOLVED',
+        'id': 'input-event-queue-fixed-pointer', 'status': 'SOURCE_BOUND' if queue_bound else 'UNRESOLVED',
         'source': 'src/root/m1FD2.c', 'initializer': '(int)0x91b0',
         'storage_view': 'g_5FF2 + 12 (_g_5FFE)',
         'consumer_source': 'src/root/m1B73.asm',
         'consumer_functions': ['_f_1B73_032E', '_f_1B73_036E'],
         'capacity_from_source': 7, 'event_stride_from_source': 16,
+        'generated_storage': '_input_queue' if queue_bound else None,
+        'generated_symbolic_initializer': '(int)(struct Event near *)input_queue' if queue_bound else None,
         'reason': 'The C initializer is an input-event queue address, not an ordinary timer '
                   'count. ASM enqueue/dequeue load it into SI, index by 16*slot, and read/write '
                   '16 bytes with a seven-slot wrap bound. No accepted source placement owns '
-                  'DGROUP:91B0. Recover one queue buffer and a symbolic near-pointer initializer; '
-                  'the unchanged historical literal is unsafe after an independent link.'}]
+                  'DGROUP:91B0. The reviewed generated binding supplies a 112-byte near communal '
+                  'and symbolic pointer. Admission requires whole-object checks and the selected '
+                  'linker/MSC-startup execution contract; without that binding the literal remains unsafe.'}]
 
 
 def accept_binding_checks(report):
     bound = [r for r in report['translation_units'] if r.get('source_binding')]
-    if bound and all(r.get('binding_verification', {}).get('status') == 'PASS' for r in bound):
+    providers = [r for r in report['translation_units'] if r.get('storage_provider')]
+    if (bound and all(r.get('binding_verification', {}).get('status') == 'PASS' for r in bound)
+            and all(r.get('provider_verification', {}).get('status') == 'PASS' for r in providers)):
         for dependency in report['layout_dependencies']:
             if dependency['status'] == 'SOURCE_BOUND':
                 dependency['status'] = 'RESOLVED'
@@ -422,6 +547,13 @@ def unresolved_symbols(out, report, symbols, manifest):
         row = next(r for r in report['translation_units'] if r['module'] == spec['module'])
         definitions.append(dos_source_bindings.bind_data_alias(
             spec, objects[spec['module']], row, manifest['modules'][spec['module']], symbols))
+    for spec in report.get('reviewed_communal_aliases', []):
+        if spec['alias'] in owners or spec['alias'] in {d['alias'] for d in definitions}:
+            raise ValueError('communal alias already has a different definition')
+        if owners.get(spec['owner']) != [spec['module'] + ' (communal)']:
+            raise ValueError('communal alias source owner is missing or duplicated')
+        row = next(r for r in report['translation_units'] if r['module'] == spec['module'])
+        definitions.append(dos_source_bindings.bind_communal_alias(spec, objects[spec['module']], row, symbols))
     report['symbolic_aliases'] = definitions
     linker_publics.update(d['alias'] for d in definitions)
     missing = sorted(set(uses) - set(owners) - libraries - linker_publics)
@@ -458,7 +590,8 @@ def unresolved_symbols(out, report, symbols, manifest):
         report['unresolved_symbols'].append(item)
     report['duplicate_publics'] = {n: rows for n, rows in owners.items()
                                   if len([x for x in rows if '(communal)' not in x]) > 1}
-    report['unresolved_functions'] = [r for r in report['unresolved_symbols'] if r['kind'] == 'code']
+    report['unresolved_functions'] = (list(report.get('unresolved_semantics', []))
+        + [r for r in report['unresolved_symbols'] if r['kind'] == 'code'])
 
 
 def link_units(out, report, profile):
@@ -476,11 +609,18 @@ def link_units(out, report, profile):
     tc = compiler.toolchain()
     tool = tc['linkers'][profile]
     dos_source_bindings.require_history_startup_contract(report, profile, tool)
+    dos_source_bindings.require_scalar_startup_contracts(report, profile, tool)
+    dos_source_bindings.require_callback_storage_contract(report, profile, tool)
+    dos_source_bindings.require_queue_startup_contract(report, profile, tool)
+    dos_source_bindings.require_assembly_frame_contract(report, profile, tool)
     contract = report.get('linker_alias_contract', {})
     if any(row.get('offset') for row in report.get('symbolic_aliases', [])):
         cases = [r for r in contract.get('cases', []) if r['linker'] == profile]
         contract_inputs = {p['path'].replace('\\', '/'): p['sha256'] for p in contract.get('inputs', [])}
-        if (len(cases) != 3 or not all(r['passed'] for r in cases)
+        required = {'correct': 'PASS', 'wrong_near': 'FAIL', 'wrong_far': 'FAIL',
+                    'unsuffixed_near': 'FAIL', 'unsuffixed_far': 'FAIL'}
+        if (len(cases) != len(required) or {r['case'] for r in cases} != set(required)
+                or not all(r['passed'] and r['actual'] == r['expected'] == required[r['case']] for r in cases)
                 or any(contract_inputs.get(str(Path(tool['directory']) / name).replace('\\', '/')) != digest
                        for name, digest in tool['files'].items())):
             raise ValueError('selected linker lacks a matching reviewed interior alias contract')
@@ -518,7 +658,7 @@ def link_units(out, report, profile):
         lines.append('ENDAREA')
     quote = lambda name: '"' + name + '"' if name.startswith('@') else name
     for row in report.get('symbolic_aliases', []):
-        delta = f" + {row['offset']}" if row.get('offset') else ''
+        delta = dos_source_bindings.rtlink_alias_delta(row.get('offset', 0))
         lines.append(f"DEFINE {quote(row['alias'])} = {quote(row['owner'])}{delta}")
     script = link_dir / 'SOURCE.LNK'
     script.write_bytes(('\r\n'.join(lines) + '\r\n').encode('ascii'))
@@ -594,6 +734,8 @@ def main():
             report['errors'].append('data dispositions still need source-built semantic resolution')
         if report.get('unresolved_symbols'):
             report['errors'].append(f"{len(report['unresolved_symbols'])} unresolved source symbols")
+        if report.get('unresolved_semantics'):
+            report['errors'].append(f"{len(report['unresolved_semantics'])} functions lack strict static semantic closure")
         if report.get('duplicate_publics'):
             report['errors'].append('duplicate mutable storage/function owners')
         if any(r['status'] != 'RESOLVED' for r in report.get('layout_dependencies', [])):

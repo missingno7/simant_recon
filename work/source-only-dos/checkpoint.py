@@ -6,6 +6,7 @@ The DOS ZIP is explicitly the old hybrid package, never a standalone-build input
 from pathlib import Path
 import hashlib
 import json
+import re
 from collections import Counter
 
 ROOT = Path(__file__).resolve().parents[2]
@@ -59,19 +60,29 @@ def main():
     report = json.loads(report_path.read_text())
     if any(report['original_exe_bytes_used'].values()) or report['denied_oracle_reads']:
         raise ValueError('source-only invariant failed')
-    if len(report['translation_units']) != 127 or any('object' not in r for r in report['translation_units']):
+    if len(report['translation_units']) != 128 or any('object' not in r for r in report['translation_units']):
         raise ValueError('not all TUs compiled')
     bound = [r for r in report['translation_units'] if r.get('source_binding')]
     if any(r.get('binding_verification', {}).get('status') != 'PASS' for r in bound):
         raise ValueError('source binding proof did not pass')
-    logs = [pin(ROOT / p) for p in ('build/source-only-dos-run-v4.log',
-        'build/source-only-dos-tests-v4.log', 'build/source-only-dos-validation-v4.log')]
-    if not (ROOT / logs[1]['path']).read_text().strip().endswith('OK'):
+    providers = [r for r in report['translation_units'] if r.get('storage_provider')]
+    if any(r.get('provider_verification', {}).get('status') != 'PASS' for r in providers):
+        raise ValueError('source provider proof did not pass')
+    if (report['function_dispositions']['BEHAVIOR_EXACT_CONFIRMED'] != 29
+            or report['function_dispositions']['CONTRACT_EQUIVALENT']
+            or report['function_dispositions']['UNRESOLVED']):
+        raise ValueError('strict static function audit is incomplete')
+    logs = [pin(ROOT / p) for p in ('build/source-only-dos-run-v8.log',
+        'build/source-only-dos-tests-v8.log', 'build/source-only-dos-validation-v8.log')]
+    test_log = (ROOT / logs[1]['path']).read_text().strip()
+    if not test_log.splitlines()[-1].startswith('OK'):
         raise ValueError('source-only tests did not finish successfully')
+    test_count = int(re.search(r'Ran (\d+) tests', test_log).group(1))
     if not (ROOT / logs[2]['path']).read_text().strip().endswith('VALIDATION PASS'):
         raise ValueError('historical validation did not finish successfully')
     receipt = {'schema': 'simant-source-only-dos-compact-intake-v1',
-        'canonical_source_checkpoint': '6909977',
+        'source_only_base_checkpoint': '83627d3',
+        'canonical_manifest': pin(ROOT / 'layout/manifest.json'),
         'full_local_report': pin(report_path),
         'reproduction': 'python tools/source_only_dos.py --compile --link --reuse --jobs 4',
         'status': report['status'], 'errors': report['errors'],
@@ -90,10 +101,28 @@ def main():
         'layout_dependencies': report['layout_dependencies'],
         'source_bindings': pin(OUT / 'source-bindings-v1.json'),
         'c_data_bindings': pin(OUT / 'c-data-bindings-v1.json'),
-        'linker_alias_contract': pin(OUT / 'linker-alias-contract-v1.json'),
+        'linker_alias_contract': pin(OUT / 'linker-alias-contract-v2.json'),
         'history_storage_bindings': pin(OUT / 'history-storage-bindings-v1.json'),
         'history_storage_contract': pin(OUT / 'history-storage-contract-v1.json'),
-        'source_owned_history_arrays': [c for r in bound for c in r['source_binding'].get('communals', [])],
+        'queue_storage_bindings': pin(OUT / 'queue-storage-bindings-v1.json'),
+        'queue_storage_contract': pin(OUT / 'queue-storage-contract-v1.json'),
+        'queue_lifetime_contract': pin(OUT / 'queue-lifetime-contract-v1.json'),
+        'assembly_frame_bindings': pin(OUT / 'assembly-frame-bindings-v1.json'),
+        'assembly_frame_contract': pin(OUT / 'assembly-frame-contract-v1.json'),
+        'world_scalar_bindings': pin(OUT / 'world-scalar-bindings-v1.json'),
+        'population_scalar_bindings': pin(OUT / 'population-owner-bindings-v1.json'),
+        'lion_scalar_bindings': pin(OUT / 'lion-owner-bindings-v1.json'),
+        'callback_table_bindings': pin(OUT / 'callback-table-bindings-v1.json'),
+        'strict_static_index': pin(OUT / 'static-completeness/index-v1.json'),
+        'strict_static_audit': {name: {'status': row['status'], 'receipt': row['receipt']}
+                               for name, row in report['strict_static_audit'].items()},
+        'historical_behavior_registrations': report['historical_behavior_registrations'],
+        'source_owned_history_arrays': [c for r in bound for c in r['source_binding'].get('communals', [])
+                                       if c['kind'] == 'far' and c['length'] == 128],
+        'source_owned_far_scalars': [c for r in bound for c in r['source_binding'].get('communals', [])
+                                    if r['source_binding'].get('scalar_storage')],
+        'storage_provider_proofs': [{'module': r['module'], 'source': r['source'], 'object': r['object'],
+                                    **r['provider_verification']} for r in providers],
         'reviewed_data_aliases': [r for r in report['symbolic_aliases']
                                  if r['reason'] == 'reviewed source owner/interior view'],
         'binding_proofs': [{'module': r['module'], 'source': r['source'],
@@ -101,7 +130,8 @@ def main():
             **r['binding_verification']} for r in bound],
         'tool_inputs': [p for p in report['inputs'] if p['path'].startswith('tools')],
         'validation_logs': logs,
-        'historical_validation': 'PASS', 'source_only_tests': '13 tests PASS',
+        'historical_validation': 'PASS',
+        'source_only_tests': f'21 targeted tests included in {test_count} repository tests PASS (2 skips)',
         'claim_limit': 'Compile and symbolic binding proofs only; no complete link, runtime '
                        'equivalence or human acceptance. Full inventories are reproducible build output.'}
     (OUT / 'current-intake.json').write_text(json.dumps(receipt, indent=2) + '\n')

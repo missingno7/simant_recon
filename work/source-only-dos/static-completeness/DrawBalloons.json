@@ -1,0 +1,920 @@
+{
+  "schema": "simant-dos-strict-static-review-v1",
+  "function": "DrawBalloons",
+  "status": "BEHAVIOR_EXACT_CONFIRMED",
+  "registered_evidence": {
+    "path": "evidence/behavior/functions/DrawBalloons/contracts/logical-render-v1/evidence.json",
+    "sha256": "d2a8cd74ac2703c968e267b6744593921e1253db7ab4f3056e8eacc9c3e8ed12",
+    "size": 20368
+  },
+  "registered_source": {
+    "path": "evidence/behavior/functions/DrawBalloons/contracts/logical-render-v1/module.c",
+    "sha256": "e41a4ab8c56c0d4923ace8b02027f2471feee049aabe0577588e206e930b4db2",
+    "whole_module": true,
+    "module": "root:0250"
+  },
+  "worker_receipt": {
+    "path": "build/workers/dos_static_balloons/DrawBalloons-fixed-source-candidate.json",
+    "sha256": "211d00c52c7253bfeb346a1ff4a8bd7646b9cc4189ffe8a9fcb2393eca8a3506",
+    "size": 42081
+  },
+  "audit": {
+    "schema": "simant-strict-static-completeness-v1",
+    "function": "DrawBalloons",
+    "status": "BEHAVIOR_EXACT_CONFIRMED",
+    "source": {
+      "path": "work/source-only-dos/corrections/DrawBalloons/module.c",
+      "sha256": "e222bc77fd4d83a777507a8ba73aa2c0ba6dd4d6fc4cb42db69cd83f6374c920",
+      "size": 65384,
+      "whole_module": true,
+      "module": "root:0250"
+    },
+    "registry_evidence": {
+      "path": "evidence/behavior/functions/DrawBalloons/contracts/logical-render-v1/evidence.json",
+      "sha256": "d2a8cd74ac2703c968e267b6744593921e1253db7ab4f3056e8eacc9c3e8ed12",
+      "registry_path": "evidence/behavior/manifest.json",
+      "registry_sha256": "dae79bdf74d7660e7e2eb47e8b463a9576c8d74a8e6ccd9e91af6d51f871ecea",
+      "source_path": "evidence/behavior/functions/DrawBalloons/contracts/logical-render-v1/module.c",
+      "source_sha256": "e41a4ab8c56c0d4923ace8b02027f2471feee049aabe0577588e206e930b4db2"
+    },
+    "inputs": [
+      {
+        "path": "README.md",
+        "sha256": "eef0ab97d6cac61fe607ffc8101932389608cd96cd043adfcfa39bfc99c0b632",
+        "role": "repository workflow and authority"
+      },
+      {
+        "path": "docs/codegen-rules.md",
+        "sha256": "3ebff671acfb39d8e482163ffb0cc4294e76bcd669fd5099cda5a7a9744840d4",
+        "role": "historical compiler rules"
+      },
+      {
+        "path": "docs/tu-evidence.md",
+        "sha256": "5029c31fbb0e71bd0342c8ecaa5ba33c4fad8c0022a34a80abbc0befbe5bca26",
+        "role": "module and extent policy"
+      },
+      {
+        "path": "build/workers/dos_static_audit_instructions.md",
+        "sha256": "925289751d7b969d6cf3269db46f502d0133c94e5210cb35ae2f9dbfb6ff212a",
+        "role": "strict static audit instructions"
+      },
+      {
+        "path": "layout/functions.json",
+        "sha256": "6089a06e18fbe8f0960392cfe30357f7c19c886f38f10f7f115c72d127a756e7",
+        "role": "registered original function identity"
+      },
+      {
+        "path": "layout/symbols.json",
+        "sha256": "0f5dd5b0a211945a97782cfccdb9bb31b0dfd07fcde5df4d4f9486b487eb0125",
+        "role": "far code/data names and MapPlane identity"
+      },
+      {
+        "path": "layout/manifest.json",
+        "sha256": "025a0a9255d910cae4b122ab5a3f3fb40888bb456d7fe42158db7c9e622fcf50",
+        "role": "historical module/compiler context pin"
+      },
+      {
+        "path": "layout/toolchain.json",
+        "sha256": "c0bb71cd8b1f4a1a1f91299bd3b6148aa67b7a1d12c3c3946a229272593eb274",
+        "role": "pinned compiler profile"
+      },
+      {
+        "path": "layout/oracle.lock.json",
+        "sha256": "2c6d9e98c688621ad49a08c78d0e0968f4076b036be56ec0738217b533ccde13",
+        "role": "immutable original-image identity"
+      },
+      {
+        "path": "evidence/behavior/manifest.json",
+        "sha256": "dae79bdf74d7660e7e2eb47e8b463a9576c8d74a8e6ccd9e91af6d51f871ecea",
+        "role": "behavior registry row"
+      },
+      {
+        "path": "evidence/behavior/functions/DrawBalloons/contracts/logical-render-v1/evidence.json",
+        "sha256": "d2a8cd74ac2703c968e267b6744593921e1253db7ab4f3056e8eacc9c3e8ed12",
+        "role": "registered behavior evidence packet"
+      },
+      {
+        "path": "evidence/behavior/functions/DrawBalloons/contracts/logical-render-v1/module.c",
+        "sha256": "e41a4ab8c56c0d4923ace8b02027f2471feee049aabe0577588e206e930b4db2",
+        "role": "registered whole-module source"
+      },
+      {
+        "path": "build/workers/dos_static_balloons/original-context.txt",
+        "sha256": "c2aab6e904e9d6cd254be57b9d38a1cbba8bc824a12c1761ae5394f1594d1bb8",
+        "role": "tools/context.py DrawBalloons without --raw"
+      },
+      {
+        "path": "src/root/m0250.c",
+        "sha256": "bb8a325c543151e09cb173d2194844877805a9e1058d3b24362ff5a7cbd9f61b",
+        "role": "AddMsgBalloon count cap and mode initialization source"
+      },
+      {
+        "path": "src/root/m1629.c",
+        "sha256": "d8675d63616c6d1cd475ae37cf293d72b70b357d1da75cfff5e9da94f0ecf561",
+        "role": "MakeBalloon resource-size production source"
+      },
+      {
+        "path": "evidence/behavior/harnesses/render-small-d25a35e5-20261002/runs/DrawBalloons/suite.py",
+        "sha256": "d25a35e5a516d8f490bec1678e583c3a449c648b0a105a7bc32d3734841230df",
+        "role": "immutable archived render_small_v1 suite"
+      },
+      {
+        "path": "evidence/behavior/harnesses/render-small-d25a35e5-20261002/tools/behavior.py",
+        "sha256": "2c0799048057f59eae61a48be4d695278635594484adf0c70bf46c51b4e0c799",
+        "role": "immutable imported behavior harness"
+      },
+      {
+        "path": "evidence/behavior/harnesses/render-small-d25a35e5-20261002/tools/behavior_ledger.py",
+        "sha256": "6788ec00f1c02fd93d98b96b4c8d61d2b704c97308b2c3f4024bc3095e76395f",
+        "role": "immutable case ledger component"
+      },
+      {
+        "path": "evidence/behavior/harnesses/render-small-d25a35e5-20261002/tools/behavior_suites/memory.py",
+        "sha256": "927127a445081a032eb76b94e09b2f5e1aa712a659d95b2363f419fbe496b970",
+        "role": "immutable Ralloc fixture component"
+      },
+      {
+        "path": "build/workers/dos_static_balloons/replay/run/DrawBalloons.run-evidence.json",
+        "sha256": "19d74c66163b3e015d66d86d49919600f7504d801a59a27c0d5fccdcd8db27ef",
+        "role": "fresh corrected-source differential replay"
+      },
+      {
+        "path": "evidence/behavior/functions/DrawBalloons/contracts/logical-render-v1/negative-controls.json",
+        "sha256": "e70b65cc49b10326097a5ebce7b9187f610b55968622f2d511296cca76c81830",
+        "role": "registered behavior negative controls"
+      },
+      {
+        "path": "build/workers/dos_static_balloons/replay/run/DrawBalloons.cases.jsonl.gz",
+        "sha256": "37188e607e401cb4118767578f08df1724298721d2bf368e3578effe3a9e76dd",
+        "role": "fresh corrected-source 1009-case case ledger"
+      },
+      {
+        "path": "build/workers/dos_static_balloons/replay/run/DrawBalloons/candidate.obj",
+        "sha256": "c5d1e81d537de69614e30040f240c25f4f49094a82ff074eb68082c1518dc09e",
+        "role": "pinned MSC 6.00AX whole-module candidate object"
+      },
+      {
+        "path": "build/workers/dos_static_balloons/candidate-context.txt",
+        "sha256": "4f4d690b2ed0147c3f3faaf96db3cadc7a165dc88da34824aa2375f080ecb935",
+        "role": "candidate disassembly with unbound OMF relocation fields left visible"
+      },
+      {
+        "path": "build/workers/dos_static_balloons/width-boundary/report.json",
+        "sha256": "3dd81c0a81d569e1beb6de4e2928efaebfcde6d6a37bc229335296a833a04595",
+        "role": "full-function allocator-entry positive/negative width controls"
+      },
+      {
+        "path": "build/workers/dos_static_balloons/width-boundary/corrected/candidate.obj",
+        "sha256": "c5d1e81d537de69614e30040f240c25f4f49094a82ff074eb68082c1518dc09e",
+        "role": "corrected whole-module object used at allocator boundary"
+      },
+      {
+        "path": "build/workers/dos_static_balloons/width-boundary/unsigned-negative-control/candidate.obj",
+        "sha256": "be9ce1185626285f350531c18c032667a88042babd7cc3fdeb91ac8372c059b4",
+        "role": "unsigned full-module negative-control object"
+      },
+      {
+        "path": "build/workers/dos_static_balloons/width-boundary/expression-probe.json",
+        "sha256": "3238ffa106f7fd5aa0e83bebed8e4cea20cd9f5c2edf4edc49fdb1e929211183",
+        "role": "executed n=0x7ffc expression edge control"
+      },
+      {
+        "path": "build/workers/dos_static_balloons/width-expression-fixed.obj",
+        "sha256": "228dbeec685583468674dc8c4a8e0f4a2729487bf6f534cf58f50a9dbb121285",
+        "role": "compiled signed-expression edge control object"
+      },
+      {
+        "path": "build/workers/dos_static_balloons/width-expression-unsigned.obj",
+        "sha256": "157b98731e244a3bf3a22a84b4287ca5b8b6de05df573c216380fa23a9e32b32",
+        "role": "compiled unsigned-extension edge control object"
+      },
+      {
+        "path": "build/workers/dos_static_balloons/negative_unsigned.c",
+        "sha256": "67a80d6928a41bc55e87a9f4542a3e3148c43f76a99cfc2f0fb986bde3e06c74",
+        "role": "unsigned zero-extension negative-control source"
+      },
+      {
+        "path": "build/workers/dos_static_balloons/width-expression-fixed.c",
+        "sha256": "629645bf5ace7c65bd7ad6e4b9becaf5f2495779d133e2c6306b0ac96a64487b",
+        "role": "executed pinned signed-expression positive control"
+      },
+      {
+        "path": "build/workers/dos_static_balloons/width-expression-unsigned.c",
+        "sha256": "3eeef7b9d173a954aaaff045a1b34738886ac3c4aefb851153cc75c82ac1a961",
+        "role": "executed pinned unsigned-expression negative control"
+      },
+      {
+        "path": "build/workers/dos_static_balloons/replay/run/DrawBalloons.json",
+        "sha256": "43cde2227ac759cb4783e756429ca7bcc6ad91aa454b3b7eb242c2f3a34e1ac6",
+        "role": "fresh replay summary and target strict comparison"
+      },
+      {
+        "path": "build/workers/dos_static_balloons/replay/runs/DrawBalloons/suite.py",
+        "sha256": "d25a35e5a516d8f490bec1678e583c3a449c648b0a105a7bc32d3734841230df",
+        "role": "worker copy of immutable archived suite; hash-identical"
+      },
+      {
+        "path": "build/workers/dos_static_balloons/replay/runs/DrawBalloons/deps/behavior_ledger.py",
+        "sha256": "6788ec00f1c02fd93d98b96b4c8d61d2b704c97308b2c3f4024bc3095e76395f",
+        "role": "worker copy of immutable ledger dependency; hash-identical"
+      },
+      {
+        "path": "build/workers/dos_static_balloons/replay/runs/DrawBalloons/deps/behavior_suites/memory.py",
+        "sha256": "927127a445081a032eb76b94e09b2f5e1aa712a659d95b2363f419fbe496b970",
+        "role": "worker copy of immutable memory fixture; hash-identical"
+      },
+      {
+        "path": "build/workers/dos_static_balloons/queue-alias-probe/report.json",
+        "sha256": "b22fbfc9fcfc2e3ef741d92073a7061804ef7e789a17356e73ce8ecf8d459e58",
+        "role": "legal queue indices 0..5 stack-home matrix, full-function state/argument comparisons, and queue-index-4 width controls"
+      }
+    ],
+    "original_function": {
+      "unit": "root",
+      "seg": "0x0250",
+      "off": "0x4C34",
+      "size": "0x0424",
+      "linear": "0x07134",
+      "identity": "root:0250:4C34"
+    },
+    "branch_map": [
+      {
+        "address": "0x4C5E",
+        "mnemonic": "JE",
+        "targets": [
+          "0x4C72"
+        ],
+        "reconstructed_source_line": 1950,
+        "predicate_or_control": "mode == 1; shared mode-1 case body assigns div=2",
+        "operand_width": "16-bit near control transfer",
+        "value_width": "signed 16-bit int unless the predicate is the 16-bit far-pointer null test"
+      },
+      {
+        "address": "0x4C61",
+        "mnemonic": "JE",
+        "targets": [
+          "0x4C68"
+        ],
+        "reconstructed_source_line": 1947,
+        "predicate_or_control": "mode == 2; assigns bpp=6,rowbytes=0x48 then falls through to mode 1 body",
+        "operand_width": "16-bit near control transfer",
+        "value_width": "signed 16-bit int unless the predicate is the 16-bit far-pointer null test"
+      },
+      {
+        "address": "0x4C64",
+        "mnemonic": "JE",
+        "targets": [
+          "0x4C9D"
+        ],
+        "reconstructed_source_line": 1953,
+        "predicate_or_control": "mode == 3; assigns div=8,rowbytes=0x20",
+        "operand_width": "16-bit near control transfer",
+        "value_width": "signed 16-bit int unless the predicate is the 16-bit far-pointer null test"
+      },
+      {
+        "address": "0x4C66",
+        "mnemonic": "JMP",
+        "targets": [
+          "0x4C77"
+        ],
+        "reconstructed_source_line": 1946,
+        "predicate_or_control": "unrecognized mode goes to common clip/loop setup; div has no defined assignment on this path",
+        "operand_width": "16-bit near control transfer",
+        "value_width": "signed 16-bit int unless the predicate is the 16-bit far-pointer null test"
+      },
+      {
+        "address": "0x4C89",
+        "mnemonic": "JNE",
+        "targets": [
+          "0x4C8F"
+        ],
+        "reconstructed_source_line": 1958,
+        "predicate_or_control": "fd_50F6_37D2 != 500 skips f_0250_5058; equality calls it",
+        "operand_width": "16-bit near control transfer",
+        "value_width": "signed 16-bit int unless the predicate is the 16-bit far-pointer null test"
+      },
+      {
+        "address": "0x4C9A",
+        "mnemonic": "JMP",
+        "targets": [
+          "0x5030"
+        ],
+        "reconstructed_source_line": 1961,
+        "predicate_or_control": "for initializer enters the outer count test",
+        "operand_width": "16-bit near control transfer",
+        "value_width": "signed 16-bit int unless the predicate is the 16-bit far-pointer null test"
+      },
+      {
+        "address": "0x4CA7",
+        "mnemonic": "JMP",
+        "targets": [
+          "0x4C77"
+        ],
+        "reconstructed_source_line": 1953,
+        "predicate_or_control": "mode-3 assignments join common clip/loop setup",
+        "operand_width": "16-bit near control transfer",
+        "value_width": "signed 16-bit int unless the predicate is the 16-bit far-pointer null test"
+      },
+      {
+        "address": "0x4CAD",
+        "mnemonic": "JGE",
+        "targets": [
+          "0x4CCF"
+        ],
+        "reconstructed_source_line": 1962,
+        "predicate_or_control": "signed shown >= 1 breaks before queue pointer test",
+        "operand_width": "16-bit near control transfer",
+        "value_width": "signed 16-bit int unless the predicate is the 16-bit far-pointer null test"
+      },
+      {
+        "address": "0x4CCD",
+        "mnemonic": "JNE",
+        "targets": [
+          "0x4CD2"
+        ],
+        "reconstructed_source_line": 1962,
+        "predicate_or_control": "far message pointer non-null enters body; null takes loop-exit path",
+        "operand_width": "16-bit near control transfer",
+        "value_width": "signed 16-bit int unless the predicate is the 16-bit far-pointer null test"
+      },
+      {
+        "address": "0x4CCF",
+        "mnemonic": "JMP",
+        "targets": [
+          "0x503E"
+        ],
+        "reconstructed_source_line": 1963,
+        "predicate_or_control": "break from queue loop",
+        "operand_width": "16-bit near control transfer",
+        "value_width": "signed 16-bit int unless the predicate is the 16-bit far-pointer null test"
+      },
+      {
+        "address": "0x4D10",
+        "mnemonic": "JNE",
+        "targets": [
+          "0x4D15"
+        ],
+        "reconstructed_source_line": 1965,
+        "predicate_or_control": "BalloonIsVisible result nonzero enters body",
+        "operand_width": "16-bit near control transfer",
+        "value_width": "signed 16-bit int unless the predicate is the 16-bit far-pointer null test"
+      },
+      {
+        "address": "0x4D12",
+        "mnemonic": "JMP",
+        "targets": [
+          "0x502F"
+        ],
+        "reconstructed_source_line": 1966,
+        "predicate_or_control": "invisible entry continues at outer-loop increment",
+        "operand_width": "16-bit near control transfer",
+        "value_width": "signed 16-bit int unless the predicate is the 16-bit far-pointer null test"
+      },
+      {
+        "address": "0x4EE6",
+        "mnemonic": "JMP",
+        "targets": [
+          "0x4F72"
+        ],
+        "reconstructed_source_line": 1996,
+        "predicate_or_control": "outer tile-row initialization enters row < ht test",
+        "operand_width": "16-bit near control transfer",
+        "value_width": "signed 16-bit int unless the predicate is the 16-bit far-pointer null test"
+      },
+      {
+        "address": "0x4F03",
+        "mnemonic": "JMP",
+        "targets": [
+          "0x4F5E"
+        ],
+        "reconstructed_source_line": 1998,
+        "predicate_or_control": "inner tile-column initialization enters col < wt test",
+        "operand_width": "16-bit near control transfer",
+        "value_width": "signed 16-bit int unless the predicate is the 16-bit far-pointer null test"
+      },
+      {
+        "address": "0x4F16",
+        "mnemonic": "JE",
+        "targets": [
+          "0x4F1E"
+        ],
+        "reconstructed_source_line": 2000,
+        "predicate_or_control": "g_9126 == 0 selects f_0250_0B86",
+        "operand_width": "16-bit near control transfer",
+        "value_width": "signed 16-bit int unless the predicate is the 16-bit far-pointer null test"
+      },
+      {
+        "address": "0x4F1C",
+        "mnemonic": "JMP",
+        "targets": [
+          "0x4F22"
+        ],
+        "reconstructed_source_line": 2001,
+        "predicate_or_control": "skip else call after nonzero g_9126/f_0250_0915",
+        "operand_width": "16-bit near control transfer",
+        "value_width": "signed 16-bit int unless the predicate is the 16-bit far-pointer null test"
+      },
+      {
+        "address": "0x4F39",
+        "mnemonic": "JL",
+        "targets": [
+          "0x4F52"
+        ],
+        "reconstructed_source_line": 2005,
+        "predicate_or_control": "signed idx < 0 suppresses cache invalidation",
+        "operand_width": "16-bit near control transfer",
+        "value_width": "signed 16-bit int unless the predicate is the 16-bit far-pointer null test"
+      },
+      {
+        "address": "0x4F40",
+        "mnemonic": "JGE",
+        "targets": [
+          "0x4F52"
+        ],
+        "reconstructed_source_line": 2005,
+        "predicate_or_control": "signed idx >= 1200 suppresses cache invalidation",
+        "operand_width": "16-bit near control transfer",
+        "value_width": "signed 16-bit int unless the predicate is the 16-bit far-pointer null test"
+      },
+      {
+        "address": "0x4F64",
+        "mnemonic": "JG",
+        "targets": [
+          "0x4F05"
+        ],
+        "reconstructed_source_line": 1998,
+        "predicate_or_control": "signed wt > col repeats inner body; equivalent to col < wt",
+        "operand_width": "16-bit near control transfer",
+        "value_width": "signed 16-bit int unless the predicate is the 16-bit far-pointer null test"
+      },
+      {
+        "address": "0x4F78",
+        "mnemonic": "JLE",
+        "targets": [
+          "0x4F7D"
+        ],
+        "reconstructed_source_line": 1996,
+        "predicate_or_control": "signed ht <= row exits the outer tile loop",
+        "operand_width": "16-bit near control transfer",
+        "value_width": "signed 16-bit int unless the predicate is the 16-bit far-pointer null test"
+      },
+      {
+        "address": "0x4F7A",
+        "mnemonic": "JMP",
+        "targets": [
+          "0x4EE9"
+        ],
+        "reconstructed_source_line": 1996,
+        "predicate_or_control": "outer loop increment returns to row body",
+        "operand_width": "16-bit near control transfer",
+        "value_width": "signed 16-bit int unless the predicate is the 16-bit far-pointer null test"
+      },
+      {
+        "address": "0x4F89",
+        "mnemonic": "JE",
+        "targets": [
+          "0x4FB2"
+        ],
+        "reconstructed_source_line": 2010,
+        "predicate_or_control": "fd_50F6_37D2 == 500 skips clipping-save callback",
+        "operand_width": "16-bit near control transfer",
+        "value_width": "signed 16-bit int unless the predicate is the 16-bit far-pointer null test"
+      },
+      {
+        "address": "0x4FE9",
+        "mnemonic": "JE",
+        "targets": [
+          "0x5012"
+        ],
+        "reconstructed_source_line": 2013,
+        "predicate_or_control": "fd_50F6_37D2 == 500 skips clipping-restore callback",
+        "operand_width": "16-bit near control transfer",
+        "value_width": "signed 16-bit int unless the predicate is the 16-bit far-pointer null test"
+      },
+      {
+        "address": "0x5039",
+        "mnemonic": "JLE",
+        "targets": [
+          "0x503E"
+        ],
+        "reconstructed_source_line": 1961,
+        "predicate_or_control": "signed count <= i exits; count > i returns to loop body",
+        "operand_width": "16-bit near control transfer",
+        "value_width": "signed 16-bit int unless the predicate is the 16-bit far-pointer null test"
+      },
+      {
+        "address": "0x503B",
+        "mnemonic": "JMP",
+        "targets": [
+          "0x4CA9"
+        ],
+        "reconstructed_source_line": 1961,
+        "predicate_or_control": "outer for-loop increment returns to shown/count/pointer tests",
+        "operand_width": "16-bit near control transfer",
+        "value_width": "signed 16-bit int unless the predicate is the 16-bit far-pointer null test"
+      }
+    ],
+    "call_map": [
+      {
+        "address": "0x4C3A",
+        "target": "__aFchkstk",
+        "source_line": null,
+        "arguments": "compiler stack-check prologue for 0x58-byte frame",
+        "order_and_condition": "prologue",
+        "call_kind": "compiler prologue"
+      },
+      {
+        "address": "0x4C45",
+        "target": "f_24AB_02AD",
+        "source_line": 1943,
+        "arguments": "font select with 2",
+        "order_and_condition": "once before mode dispatch",
+        "call_kind": "direct far/near call"
+      },
+      {
+        "address": "0x4C8C",
+        "target": "f_0250_5058",
+        "source_line": 1959,
+        "arguments": "no stack arguments",
+        "order_and_condition": "if clip sentinel fd_50F6_37D2 == 500",
+        "call_kind": "direct far/near call"
+      },
+      {
+        "address": "0x4D08",
+        "target": "BalloonIsVisible",
+        "source_line": 1965,
+        "arguments": "plane, signed x/g_19BE, signed y/g_19C0",
+        "order_and_condition": "for each queue entry passing shown and non-null checks",
+        "call_kind": "direct far/near call"
+      },
+      {
+        "address": "0x4D2A",
+        "target": "WinPrintf",
+        "source_line": 1967,
+        "arguments": "format, far message, x, y at source ABI",
+        "order_and_condition": "visible entry before shown++ and acquisition",
+        "call_kind": "direct far/near call"
+      },
+      {
+        "address": "0x4D42",
+        "target": "f_1629_000C (MakeBalloon)",
+        "source_line": 1969,
+        "arguments": "far message, tail=0",
+        "order_and_condition": "once for the single shown visible entry",
+        "call_kind": "direct far/near call"
+      },
+      {
+        "address": "0x4D5B",
+        "target": "f_171C_1B84",
+        "source_line": 1970,
+        "arguments": "handle h",
+        "order_and_condition": "lock message picture",
+        "call_kind": "direct far/near call"
+      },
+      {
+        "address": "0x4E12",
+        "target": "f_171C_1A9E",
+        "source_line": 1982,
+        "arguments": "signed long (int16(n+4)), flags=9, far name 'balbuf'",
+        "order_and_condition": "temporary output allocation; corrected source matches original CWD",
+        "call_kind": "direct far/near call"
+      },
+      {
+        "address": "0x4E28",
+        "target": "f_171C_1B84",
+        "source_line": 1983,
+        "arguments": "balBufHandle",
+        "order_and_condition": "lock temporary output buffer",
+        "call_kind": "direct far/near call"
+      },
+      {
+        "address": "0x4E85",
+        "target": "__fmemset",
+        "source_line": 1989,
+        "arguments": "far dst=bufp+4, zero, unsigned n",
+        "order_and_condition": "clear temporary pixel buffer",
+        "call_kind": "direct far/near call"
+      },
+      {
+        "address": "0x4ED1",
+        "target": "f_0250_0643",
+        "source_line": 1994,
+        "arguments": "MapPlane / 2",
+        "order_and_condition": "select tile map before nested loops",
+        "call_kind": "direct far/near call"
+      },
+      {
+        "address": "0x4F0C",
+        "target": "f_0250_1018",
+        "source_line": 1999,
+        "arguments": "tx, ty",
+        "order_and_condition": "once per tile in row-major nested loops",
+        "call_kind": "direct far/near call"
+      },
+      {
+        "address": "0x4F19",
+        "target": "f_0250_0915",
+        "source_line": 2001,
+        "arguments": "no stack arguments",
+        "order_and_condition": "tile renderer when g_9126 != 0",
+        "call_kind": "direct far/near call"
+      },
+      {
+        "address": "0x4F1F",
+        "target": "f_0250_0B86",
+        "source_line": 2003,
+        "arguments": "no stack arguments",
+        "order_and_condition": "tile renderer when g_9126 == 0",
+        "call_kind": "direct far/near call"
+      },
+      {
+        "address": "0x4F2D",
+        "target": "indirect fd_50F6_37E6",
+        "source_line": 2004,
+        "arguments": "dst far pointer, wpix",
+        "order_and_condition": "per tile after tile-render selection",
+        "call_kind": "indirect far callback"
+      },
+      {
+        "address": "0x4F7E",
+        "target": "f_0250_062A",
+        "source_line": 2009,
+        "arguments": "no stack arguments",
+        "order_and_condition": "restore tile map after nested loops",
+        "call_kind": "direct far/near call"
+      },
+      {
+        "address": "0x4FAA",
+        "target": "indirect fd_50F6_37EE",
+        "source_line": 2011,
+        "arguments": "&clip rectangle, &clip size, &balloonRect, bufp",
+        "order_and_condition": "save background if clip sentinel != 500",
+        "call_kind": "indirect far callback"
+      },
+      {
+        "address": "0x4FD9",
+        "target": "indirect fd_50F6_37EA",
+        "source_line": 2012,
+        "arguments": "pic+8, bufp, signed bx%g_19BE, signed by%g_19C0",
+        "order_and_condition": "overlay balloon pixels",
+        "call_kind": "indirect far callback"
+      },
+      {
+        "address": "0x500A",
+        "target": "indirect fd_50F6_37EE",
+        "source_line": 2014,
+        "arguments": "&balloonRect, bufp, &clip rectangle, &clip size",
+        "order_and_condition": "restore background if clip sentinel != 500",
+        "call_kind": "indirect far callback"
+      },
+      {
+        "address": "0x5018",
+        "target": "f_171C_1BBA",
+        "source_line": 2015,
+        "arguments": "h",
+        "order_and_condition": "release/unlock balloon resource, before free",
+        "call_kind": "direct far/near call"
+      },
+      {
+        "address": "0x5025",
+        "target": "f_171C_1C0A",
+        "source_line": 2016,
+        "arguments": "h",
+        "order_and_condition": "free balloon resource after release",
+        "call_kind": "direct far/near call"
+      },
+      {
+        "address": "0x5041",
+        "target": "f_24AB_02AD",
+        "source_line": 2019,
+        "arguments": "font select with 0",
+        "order_and_condition": "once after queue processing",
+        "call_kind": "direct far/near call"
+      }
+    ],
+    "memory_state_inventory": {
+      "reads": [
+        "fd_50F6_1102: signed int16 display mode; case values 1,2,3 choose bpp/rowbytes/div; unsupported values use an uninitialized div home.",
+        "fd_50F6_37D2: signed int16 clip sentinel/left field, tested against 500 before setup and twice before save/restore callbacks.",
+        "fd_50F6_1092: signed int16 queue count; AddMsgBalloon normally keeps it in 0..6.",
+        "fd_50F6_04A6[i]: far message pointer; null test then format/acquisition use.",
+        "fd_50F6_04C8[i]: signed x/y int16 position pair; copied to stack-local pos.",
+        "fd_50F6_04F6[i]: signed int16 plane passed to BalloonIsVisible.",
+        "g_19BE/g_19C0: signed int16 tile dimensions used by IDIV-equivalent coordinate division/remainder, tile geometry and buffer dimensions.",
+        "pic[4]/pic[5]: signed int16 resource width/height at picture byte offsets +8/+10; source pixel pointer is pic+8.",
+        "fd_50F6_0508.x/y and fd_50F6_110C rect: signed map origin and viewport bounds used in rectangle construction.",
+        "MapPlane and g_9126; g_9126 is tested once per tile to choose tile-render helper.",
+        "fd_50F6_37E6/37EA/37EE far callback pointer words; fd_50F6_37D6 and fd_50F6_1F26 clip state/size passed through callbacks."
+      ],
+      "writes": [
+        "balTileRect.left is initialized to 500; top/left/bottom/right are set from balloon tile geometry.",
+        "hs[i] writes two 16-bit words at bp-0x38+4*i and bp-0x36+4*i for legal i=0..5. At i=1 both builds overwrite live pos.x/pos.y before later reads; at i=2 both overwrite shown before the next queue-loop guard; i=3/i=4 overlap differing compiler homes only before those homes are assigned, and i=0/i=5 have no later reads.",
+        "balBufHandle and balBufPtr receive allocation/lock results; buffer words at +0/+2 store pixel width/height; unsigned n bytes at +4 are zeroed then tile callbacks fill destinations.",
+        "balloonRect.left/top/bottom/right are constructed from map origin, viewport rect, and buffer dimensions.",
+        "fd_50F6_15C4[0][idx] is set to -1 as a 16-bit cache invalidation only for signed idx in [0,1200).",
+        "Indirect callbacks transfer background/pixels and can mutate their documented host-side state; f_0250_062A restores selected map state.",
+        "f_171C_1BBA(h) then f_171C_1C0A(h), in that order; font reset follows the loop; fd_50F6_1092 is finally set to zero."
+      ],
+      "returns": [
+        {
+          "address": "0x5057",
+          "kind": "single far return",
+          "early_returns": "none"
+        }
+      ],
+      "call_order": "Call map lists all 22 original call sites in ascending code order; per-tile and clip-dependent repetition is stated at each call."
+    },
+    "constants_widths_pointer_arithmetic": [
+      "MSC target ABI: int/unsigned are 16-bit, long is 32-bit; mode selectors 1/2/3; bpp 2/6/2; rowbytes 0x80/0x48/0x20; div 2/2/8; clip sentinel 500.",
+      "Coordinate / and % are signed 16-bit IDIV semantics, truncating toward zero; compiler-visible widths and source types agree on the valid display domain.",
+      "wt/ht, wpix, skip, tile index and ht*wt*rowbytes are computed with 16-bit machine products/low words. n is unsigned 16-bit for _fmemset; `(long)(int)(n + 4)` forces wrapped 16-bit sum -> signed int16 -> sign-extended long32, matching original CWD.",
+      "The original `cdq` alias at 0x4E0D is an unprefixed 16-bit CWD in CS_MODE_16; corrected candidate allocation site at 0x4E04 likewise executes CWD. The decoder mnemonic alone is not treated as width proof; default operand size and absence of 0x66 were checked.",
+      "Far queue arrays use 4-byte handles/message pointers and 4-byte Pnt entries; plane elements and cache elements are 2 bytes. `pic[4]`/`pic[5]` read words at byte offsets +8/+10; source pixels are pic+8; output header uses words at bufp+0/+2 and pixel data/memset begins at bufp+4.",
+      "Per-tile idx is signed `ty*40 + balTileRect.left`; only `[0,1200)` is written in the 2-byte fd_50F6_15C4 cache. dst advances by signed skip per row and bpp per tile; callback stride is wpix.",
+      "The mode switch has fallthrough from case 2 into case 1, no indirect switch jump, and no default initializer for div; valid LoadTiles paths assign 1/2/3 for supported graphics-mode tags."
+    ],
+    "static_axes": [
+      {
+        "axis": "complete algorithm and statement order",
+        "result": "ACCOUNTED",
+        "evidence": "Source lines 1943-2020 map font select, mode setup, clip setup, queue scan, one-visible-message gate, resource allocation, buffer composition, nested tile rendering, clipping transfers, resource release, font restore, and queue reset in original order."
+      },
+      {
+        "axis": "all original CFG paths and conditions",
+        "result": "ACCOUNTED_WITH_ENTRY_ASSUMPTIONS",
+        "evidence": "branch_map enumerates all 25 original conditional/unconditional transfer sites; mode fallthrough, for-loop entry/continues, break/return edges and single retf are recorded. `LoadTiles` assigns modes 1/2/3 for supported graphics tags; unrecognized tags leave the global unchanged, and invalid direct entry modes have an uninitialized div path."
+      },
+      {
+        "axis": "all calls and call ordering",
+        "result": "ACCOUNTED",
+        "evidence": "call_map includes 22 call sites including stack-check helper, both font calls, resource acquire/lock/allocate/release/free, memset, map/tile helpers, and the three indirect render/clip callbacks with conditions and source-order arguments."
+      },
+      {
+        "axis": "memory/state reads",
+        "result": "ACCOUNTED",
+        "evidence": "Reads include mode/clip/count, queued message/position/plane, 16-pixel tile dimensions, viewport origin/rectangle, picture header dimensions and pixels, MapPlane, g_9126, clip state/size and all three callback far pointers."
+      },
+      {
+        "axis": "memory/state writes and observable effects",
+        "result": "ACCOUNTED",
+        "evidence": "Writes include balTileRect and balloonRect, buffer header and unsigned-n pixel clear, per-tile callback destinations and cache sentinel entries, buffer handle/pointer globals, ordered helper traces, releases, and final queue-count zero."
+      },
+      {
+        "axis": "constants, widths, signedness, and pointer arithmetic",
+        "result": "ACCOUNTED",
+        "evidence": "16-bit signed int controls coordinates, divisors, indices and products; n remains 16-bit unsigned for memset; only allocation sum is reinterpreted through signed int then widened to 32-bit long. Far queue elements are 4 bytes; pic pixels begin at +8, buffer data at +4, cache elements are 2 bytes; idx is ty*40+left and is guarded 0<=idx<1200."
+      },
+      {
+        "axis": "queue index legal range and stack alias effects",
+        "result": "ACCOUNTED_FOR_NORMAL_QUEUE",
+        "evidence": "AddMsgBalloon caps fd_50F6_1092 at six. The original/candidate stack-home matrix is pinned in queue-alias-probe/report.json: i=1 overwrites live pos.x/pos.y in both and those changed values are read later; i=2 overwrites shown in both; i=3/i=4 frame homes differ, but each dynamic store precedes a later assignment to the differing saved/by/bx home and all later reads; i=0/i=5 touch otherwise unused homes. Six full-function cases place the first visible entry at each legal index after invisible prefixes; all observable state, calls/arguments, preserved registers, and ranges compare equal."
+      },
+      {
+        "axis": "whole Balloon resource dimensions and allocation domain",
+        "result": "NO_STATIC_MAXIMUM_FOUND",
+        "evidence": "MakeBalloon copies through `_fstrcpy` into a 300-byte allocation without an enforced length check, measures each line from live font metrics, has a 10-line scan break but no width/height clamp, then stores width/height in signed 16-bit header fields. DrawBalloons trusts those fields and does not bound wt, ht, n, or allocator size. Thus no code-enforced bound excludes the high-bit allocation-sum domain; the corrected cast handles every resulting 16-bit sum."
+      },
+      {
+        "axis": "compiler-sensitive signed conversion",
+        "result": "PINNED_OUTPUT_CONFIRMED",
+        "evidence": "Original allocation site is CWD under 16-bit operand size; corrected MSC 6.00AX whole-module output uses the matching CWD sequence; executed n=0x7ffc expression probe returns FFFF:8000, while the unsigned control returns 0000:8000. Width-boundary full-function capture also matches at sum 7ffc and across the 8000 sign boundary."
+      },
+      {
+        "axis": "dependency boundaries and evidence limits",
+        "result": "ACCOUNTED_WITH_LIMITS",
+        "evidence": "Original helpers execute through PreparedPair except registered suite callbacks. The width boundary hook stops at the real allocator entry before its first instruction, with no allocator result stub. The archived finite suite observes logical callbacks and projected pointed bytes, not final physical framebuffer/backend tile state."
+      }
+    ],
+    "remaining_differences": [
+      {
+        "category": "CODEGEN_ONLY",
+        "original_address": "0x4C34-0x5058",
+        "source_anchor": "worker whole-module DrawBalloons definition, lines 1930-2021",
+        "explanation": "The corrected target compiles to a 1052-byte function at candidate UNIT_TEXT:4C29 versus the 1060-byte original at root:0250:4C34. The pinned i=0..5 stack-home matrix accounts for all dynamic hs stores: the differing i=3/i=4 homes are written before the corresponding saved/by homes become live, while i=1/i=2 live aliases match. Full-function comparisons cover every legal queue index. Remaining differences are compiler scheduling/order, near/far fixup placement, differing dead stack homes, and emitted extent; no byte-exact claim is made."
+      }
+    ],
+    "unexplained_semantic_differences": [],
+    "differential_evidence": {
+      "existing_registered_contract": {
+        "evidence_path": "evidence/behavior/functions/DrawBalloons/contracts/logical-render-v1/evidence.json",
+        "evidence_sha256": "d2a8cd74ac2703c968e267b6744593921e1253db7ab4f3056e8eacc9c3e8ed12",
+        "run_path": "evidence/behavior/functions/DrawBalloons/contracts/logical-render-v1/run.json",
+        "run_sha256": "13f14f3646bd1f1eb0d6720259d2760db507d4eb74d805d839d4146ea7951490",
+        "status": "BEHAVIOR_EXACT",
+        "finite_contract_limits": "1009 cases, single balloon, picture 1..13 by 1..12; not a proof of allocation signedness outside the fixture domain."
+      },
+      "fresh_corrected_source_replay": {
+        "path": "build/workers/dos_static_balloons/replay/run/DrawBalloons.run-evidence.json",
+        "sha256": "19d74c66163b3e015d66d86d49919600f7504d801a59a27c0d5fccdcd8db27ef",
+        "status": "COMPLETE",
+        "suite_id": "render_small_v1",
+        "cases": 1009,
+        "directed": 9,
+        "randomized": 1000,
+        "seed": 48879,
+        "errors": 0,
+        "mismatches": 0,
+        "actual_original_and_candidate_execution": true,
+        "peer_and_private_data_gates": "PASS",
+        "suite_copy_note": "The immutable archived suite's expected sibling deps directory is absent. Its suite.py and both pinned dependencies were copied byte-for-byte into this worker; hashes remain pinned to archived sources.",
+        "limits": "One queued message per case; picture dimensions 1..13 by 1..12; logical callback/pointer projections only, not final framebuffer or all backend tile/clip mutations."
+      },
+      "normal_queue_stack_alias_probe": {
+        "path": "build/workers/dos_static_balloons/queue-alias-probe/report.json",
+        "sha256": "b22fbfc9fcfc2e3ef741d92073a7061804ef7e789a17356e73ce8ecf8d459e58",
+        "queue_indices": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5
+        ],
+        "full_function_cases": 6,
+        "all_state_call_argument_register_and_range_comparisons_equal": true,
+        "alias_findings": "i=1 pos.x/pos.y live alias and i=2 shown live alias match the original; i=3/i=4 homes differ but are assigned before read; i=0/i=5 homes unused."
+      },
+      "width_controls": {
+        "full_function_allocator_entry_report": "build/workers/dos_static_balloons/width-boundary/report.json",
+        "edge_expression_report": "build/workers/dos_static_balloons/width-boundary/expression-probe.json",
+        "result": "At sum 0x7ffc original/fixed DX:AX=0000:7ffc; at sum 0x8004 original/fixed=ffff:8004, unsigned control=0000:8004. Direct input n=0x7ffc yields fixed ffff:8000, unsigned control 0000:8000. The same full-function allocator-entry controls were repeated with queue count 5 and visible index 4 after four invisible entries.",
+        "service_boundary": "The full-function code hook records arguments at the real f_171C_1A9E entry before its first instruction; no allocator body or return value is stubbed."
+      },
+      "negative_controls": [
+        {
+          "id": "existing DrawBalloons/width-increment",
+          "path": "evidence/behavior/functions/DrawBalloons/contracts/logical-render-v1/negative-controls.json",
+          "sha256": "e70b65cc49b10326097a5ebce7b9187f610b55968622f2d511296cca76c81830",
+          "detected": true
+        },
+        {
+          "id": "existing DrawBalloons/buffer-destination-offset",
+          "path": "evidence/behavior/functions/DrawBalloons/contracts/logical-render-v1/negative-controls.json",
+          "sha256": "e70b65cc49b10326097a5ebce7b9187f610b55968622f2d511296cca76c81830",
+          "detected": true
+        },
+        {
+          "id": "unsigned-allocation-extension",
+          "path": "build/workers/dos_static_balloons/width-boundary/report.json",
+          "sha256": "3dd81c0a81d569e1beb6de4e2928efaebfcde6d6a37bc229335296a833a04595",
+          "detected": true,
+          "mutant_source": "build/workers/dos_static_balloons/negative_unsigned.c",
+          "mutant_source_sha256": "67a80d6928a41bc55e87a9f4542a3e3148c43f76a99cfc2f0fb986bde3e06c74"
+        }
+      ]
+    },
+    "review_notes": [
+      "Original disassembly came from `python tools/context.py DrawBalloons` with no `--raw`; the worker's original-context.txt is pinned. No raw original byte capsule is stored.",
+      "Current registered-source receipt keeps the actual 0x4E0D width mismatch explicit and UNRESOLVED. The separate corrected-source receipt is a candidate for root review only; it has not changed evidence/behavior/manifest.json, any v1 packet, canonical src/, layout/manifest.json or promotion history.",
+      "Supported fd_50F6_1102 values are 1/2/3 as established by `LoadTiles` for enumerated g_5A97 graphics tags. Unrecognized graphics tags leave the mode global unchanged; invalid direct entry state is not claimed as a normal game path.",
+      "MakeBalloon has no enforced message-length, width, or height limit. Its 300-byte scratch allocation and 10-line scan do not statically bound every source string or font metric; therefore no maximum `n` is asserted. The corrected cast matches the original for every 16-bit wrapped allocation sum, while large-buffer service behavior itself is not exercised by the finite render suite.",
+      "The archived suite expects a sibling deps/ folder that is not present in its immutable run snapshot. Worker copies of suite.py, behavior_ledger.py and memory.py are byte-identical to their pinned immutable sources; the run evidence records their hashes. No frozen packet was repaired or rewritten.",
+      "The separate stack-alias probe executes normal queue counts 1..6 with the first visible entry at each index 0..5, comparing full original/candidate state and call arguments. Its matrix records that i=1 deliberately aliases live pos in both builds and i=2 aliases shown in both; i=3/i=4 have differing compiler homes, but every affected home is overwritten before use. The allocation sign-boundary positive/negative controls also run at queue count 5, visible index 4.",
+      "Candidate has no historical byte-exact claim: its compiler-generated function extent/relocation placement remains inexact. The strict static verdict is behavioral, pending independent root review."
+    ]
+  },
+  "root_review": {
+    "reviewer": "root",
+    "complete_cfg": true,
+    "complete_data_widths": true,
+    "complete_calls_effects": true,
+    "codegen_only_residue": true,
+    "basis": "Reviewed the whole-function branch/call/state/width maps, source/evidence identities, explanations of residue and differential/negative limits. Matching observed service boundaries are composed through the actual caller ABI and same callee/slot/state; finite coverage alone is not acceptance.",
+    "source_correction_reviewed": true,
+    "note": "Only allocation widening changes: signed reinterpretation of the wrapped word before long widening reproduces original CWD for every 16-bit sum. Six legal queue-index paths and explicit stack-home liveness matrix resolve the hs[1] alias concern; negative width controls detect the old unsigned extension. Old registered source remains UNRESOLVED in its separate receipt.",
+    "correction_proofs": [
+      {
+        "path": "work/source-only-dos/corrections/DrawBalloons/replay.json",
+        "sha256": "19d74c66163b3e015d66d86d49919600f7504d801a59a27c0d5fccdcd8db27ef",
+        "size": 11993
+      },
+      {
+        "path": "work/source-only-dos/corrections/DrawBalloons/width-boundary.json",
+        "sha256": "3dd81c0a81d569e1beb6de4e2928efaebfcde6d6a37bc229335296a833a04595",
+        "size": 6343
+      },
+      {
+        "path": "work/source-only-dos/corrections/DrawBalloons/expression-boundary.json",
+        "sha256": "3238ffa106f7fd5aa0e83bebed8e4cea20cd9f5c2edf4edc49fdb1e929211183",
+        "size": 2571
+      },
+      {
+        "path": "work/source-only-dos/corrections/DrawBalloons/queue-alias-controls.json",
+        "sha256": "b22fbfc9fcfc2e3ef741d92073a7061804ef7e789a17356e73ce8ecf8d459e58",
+        "size": 85818
+      }
+    ]
+  },
+  "source_override": {
+    "path": "work/source-only-dos/corrections/DrawBalloons/module.c",
+    "sha256": "e222bc77fd4d83a777507a8ba73aa2c0ba6dd4d6fc4cb42db69cd83f6374c920",
+    "size": 65384,
+    "whole_module": true,
+    "module": "root:0250"
+  },
+  "registered_source_audit": {
+    "path": "work/source-only-dos/static-completeness/DrawBalloons-registered-source.json",
+    "sha256": "c5619530a904fe1588da7ddddf78cf3c789c1ef291391420cabad6e1a4b1d102",
+    "size": 40983
+  }
+}

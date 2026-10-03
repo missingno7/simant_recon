@@ -16,6 +16,13 @@ import source_only_dos as dos
 
 
 class SourceOnlyDosTests(unittest.TestCase):
+    def test_rtlink_alias_offsets_are_explicit_hexadecimal(self):
+        self.assertEqual(bindings.rtlink_alias_delta(12), ' + 0Ch')
+        self.assertEqual(bindings.rtlink_alias_delta(40), ' + 028h')
+        self.assertEqual(bindings.rtlink_alias_delta(0), '')
+        with self.assertRaises(ValueError):
+            bindings.rtlink_alias_delta(-1)
+
     def test_oracle_read_guard_in_isolated_process(self):
         # The audit hook is intentionally permanent: isolate it from historical tests.
         program = (
@@ -42,9 +49,11 @@ class SourceOnlyDosTests(unittest.TestCase):
             report = {'inputs': [], 'generated_files': [], 'translation_units': [],
                       'semantic_substitutions': []}
             manifest, symbols = dos.prepare(Path(directory), report)
-            self.assertEqual(len(report['translation_units']), len(manifest['modules']))
+            self.assertEqual(len(report['translation_units']), len(manifest['modules']) + 1)
             self.assertEqual(report['function_dispositions'], {
-                'EXACT_C': 1244, 'GENUINE_ASM': 367, 'BEHAVIOR_EXACT': 29, 'UNRESOLVED': 0})
+                'EXACT_C': 1244, 'GENUINE_ASM': 367, 'BEHAVIOR_EXACT_CONFIRMED': 29,
+                'EXACT_AFTER_STATIC_AUDIT': 0, 'CONTRACT_EQUIVALENT': 0, 'UNRESOLVED': 0})
+            self.assertEqual(report['historical_behavior_registrations'], 29)
             self.assertEqual(len(report['semantic_substitutions']), 29)
             aliases = dos.identifier_aliases(symbols)
             for row in report['translation_units']:
@@ -66,6 +75,59 @@ class SourceOnlyDosTests(unittest.TestCase):
     def test_stale_registered_source_rejected(self):
         with self.assertRaisesRegex(ValueError, 'stale source/evidence pin'):
             dos.pin(ROOT / 'README.md', '0' * 64)
+
+    def test_strict_static_gate_rejects_missing_mapping_and_unexplained_semantics(self):
+        registry = json.loads((ROOT / 'evidence/behavior/manifest.json').read_text())
+        index = json.loads((ROOT / 'work/source-only-dos/static-completeness/index-v1.json').read_text())
+        worker = ROOT / 'build/workers/source_only_dos_tests'
+        worker.mkdir(parents=True, exist_ok=True)
+        with tempfile.TemporaryDirectory(dir=worker) as directory:
+            directory = Path(directory)
+            missing = {**index, 'entries': dict(index['entries'])}
+            missing['entries'].pop('DrawBalloons')
+            path = directory / 'index.json'
+            path.write_text(json.dumps(missing))
+            with self.assertRaisesRegex(ValueError, 'does not cover'):
+                dos.strict_static_reviews(registry, {'inputs': []}, path)
+            original = json.loads((ROOT / index['entries']['DrawBalloons']['path']).read_text())
+            for change in ('missing_axis', 'semantic_gap', 'stale_source', 'false_exact', 'unreviewed_correction'):
+                receipt = json.loads(json.dumps(original))
+                if change == 'missing_axis':
+                    receipt['root_review']['complete_cfg'] = False
+                elif change == 'semantic_gap':
+                    receipt['audit']['unexplained_semantic_differences'] = ['unknown write']
+                elif change == 'stale_source':
+                    receipt['audit']['source']['sha256'] = '0' * 64
+                elif change == 'false_exact':
+                    receipt['status'] = receipt['audit']['status'] = 'EXACT'
+                else:
+                    receipt['root_review']['source_correction_reviewed'] = False
+                altered = directory / 'receipt.json'
+                altered.write_text(json.dumps(receipt))
+                updated = {**index, 'entries': {**index['entries'], 'DrawBalloons': dos.pin(altered)[1]}}
+                path.write_text(json.dumps(updated))
+                with self.assertRaises(ValueError, msg=change):
+                    dos.strict_static_reviews(registry, {'inputs': []}, path)
+
+    def test_contract_only_static_verdict_remains_a_link_blocker(self):
+        registry = json.loads((ROOT / 'evidence/behavior/manifest.json').read_text())
+        index = json.loads((ROOT / 'work/source-only-dos/static-completeness/index-v1.json').read_text())
+        worker = ROOT / 'build/workers/source_only_dos_tests'
+        worker.mkdir(parents=True, exist_ok=True)
+        with tempfile.TemporaryDirectory(dir=worker) as directory:
+            directory = Path(directory)
+            receipt = json.loads((ROOT / index['entries']['DrawBalloons']['path']).read_text())
+            receipt['status'] = receipt['audit']['status'] = 'CONTRACT_EQUIVALENT'
+            path = directory / 'receipt.json'
+            path.write_text(json.dumps(receipt))
+            index['entries']['DrawBalloons'] = dos.pin(path)[1]
+            path = directory / 'index.json'
+            path.write_text(json.dumps(index))
+            report = {'inputs': [], 'errors': [], 'unresolved_data': [], 'translation_units': []}
+            dos.strict_static_reviews(registry, report, path)
+            self.assertEqual([r['function'] for r in report['unresolved_functions']], ['DrawBalloons'])
+            dos.link_units(directory, report, 'rtlink400')
+            self.assertIn('independent link refused: incomplete source/data preflight', report['errors'])
 
     def test_reviewed_body_cannot_use_different_macro_or_type_context(self):
         original = '#define WIDTH 2\nstruct X { int a; };\nint f(int n) { return n; }'
@@ -199,6 +261,7 @@ class SourceOnlyDosTests(unittest.TestCase):
             wrong['runtime_components'][0]['sha256'] = '0'*64
             with self.assertRaisesRegex(ValueError, 'startup contract'):
                 bindings.require_history_startup_contract(wrong, 'rtlink400', tc['linkers']['rtlink400'])
+
             wrong = json.loads(json.dumps(report))
             for case in wrong['history_storage_contract']['cases']:
                 if case['case'] == 'crt_overlay_zero_communal':
@@ -206,6 +269,102 @@ class SourceOnlyDosTests(unittest.TestCase):
             with self.assertRaisesRegex(ValueError, 'startup contract'):
                 bindings.require_history_startup_contract(wrong, 'rtlink400', tc['linkers']['rtlink400'])
 
+    def test_scalar_owners_preserve_complete_objects_and_reject_storage_guesses(self):
+        worker = ROOT / 'build/workers/source_only_dos_tests'
+        worker.mkdir(parents=True, exist_ok=True)
+        with tempfile.TemporaryDirectory(dir=worker) as directory:
+            report = {'inputs': [], 'generated_files': [], 'translation_units': [], 'semantic_substitutions': []}
+            manifest, symbols = dos.prepare(Path(directory), report)
+            rows = [r for r in report['translation_units'] if (r.get('source_binding') or {}).get('scalar_storage')]
+            self.assertEqual({r['module'] for r in rows}, {'S08:35F5', 'root:0BE8', 'root:0AD9'})
+            for row in rows:
+                before = (ROOT / row['binding_control_source']['path']).read_text(encoding='latin1')
+                after = (ROOT / row['generated_source']['path']).read_text(encoding='latin1')
+                def compile(text):
+                    result = compiler.compile_c(text, row['profile'], row['flags'], basename=row['basename'])
+                    self.assertTrue(result.ok, result.log)
+                    return OmfReader(communals=True).read(result.obj)
+                control = compile(before)
+                binding = row['source_binding']
+                self.assertEqual(bindings.verify_objects(control, compile(after), binding)['status'], 'PASS')
+                owner = binding['communals'][0]['name'][1:]
+                declaration = f'int far {owner};'
+                for contrast in (after.replace(declaration, f'long far {owner};'),
+                                 after.replace(declaration, f'int far {owner}[2];'),
+                                 after.replace(declaration, f'int far {owner} = 1;')):
+                    self.assertNotEqual(after, contrast)
+                    result = compiler.compile_c(contrast, row['profile'], row['flags'], basename=row['basename'])
+                    if result.ok:
+                        with self.assertRaises(ValueError):
+                            bindings.verify_objects(control, OmfReader(communals=True).read(result.obj), binding)
+                    else:
+                        self.assertIn('error', result.log.lower())
+                wrong = json.loads(json.dumps(binding))
+                wrong['communals'][0]['historical_address'][1] += 1
+                with self.assertRaises(ValueError):
+                    bindings.review_addresses(wrong, manifest['modules'][row['module']], symbols)
+            tc = compiler.toolchain()
+            for profile in ('rtlink400', 'rtlink610'):
+                bindings.require_scalar_startup_contracts(report, profile, tc['linkers'][profile])
+            for key in ('health_storage_contract', 'food_cycle_storage_contract',
+                        'population_storage_contract', 'lion_storage_contract'):
+                wrong = json.loads(json.dumps(report))
+                wrong[key]['cases'].pop(0)
+                with self.assertRaisesRegex(ValueError, 'startup contract'):
+                    bindings.require_scalar_startup_contracts(wrong, 'rtlink400', tc['linkers']['rtlink400'])
+            wrong = json.loads(json.dumps(report))
+            wrong['runtime_components'][0]['sha256'] = '0' * 64
+            with self.assertRaisesRegex(ValueError, 'startup contract'):
+                bindings.require_scalar_startup_contracts(wrong, 'rtlink400', tc['linkers']['rtlink400'])
+
+    def test_queue_owner_rejects_extent_initializer_pointer_and_other_field_changes(self):
+        worker = ROOT / 'build/workers/source_only_dos_tests'
+        worker.mkdir(parents=True, exist_ok=True)
+        with tempfile.TemporaryDirectory(dir=worker) as directory:
+            report = {'inputs': [], 'generated_files': [], 'translation_units': [], 'semantic_substitutions': []}
+            dos.prepare(Path(directory), report)
+            row = next(r for r in report['translation_units'] if r['module'] == 'root:1FD2')
+            before = (ROOT / row['binding_control_source']['path']).read_text(encoding='latin1')
+            after = (ROOT / row['generated_source']['path']).read_text(encoding='latin1')
+            def compile(text):
+                result = compiler.compile_c(text, row['profile'], row['flags'], basename=row['basename'])
+                self.assertTrue(result.ok, result.log)
+                return OmfReader(communals=True).read(result.obj)
+            control = compile(before)
+            proof = bindings.verify_objects(control, compile(after), row['source_binding'])
+            self.assertEqual(proof['status'], 'PASS')
+            self.assertTrue(proof['live_segment_extents_unchanged'])
+            self.assertEqual(proof['added_communals'], [{'name': '_input_queue', 'kind': 'near', 'length': 112}])
+            for contrast in (after.replace('input_queue[7]', 'input_queue[6]'),
+                             after.replace('input_queue[7];', 'input_queue[7] = {{1}};'),
+                             after.replace('(struct Event near *)input_queue', '(struct Event near *)(input_queue + 1)'),
+                             after.replace('int g_5FF0 = 7;', 'int g_5FF0 = 6;')):
+                self.assertNotEqual(after, contrast)
+                with self.assertRaises(ValueError):
+                    bindings.verify_objects(control, compile(contrast), row['source_binding'])
+            wrong = json.loads(json.dumps(row['source_binding']))
+            wrong['debug_contributions']['$$SYMBOLS']['generated'] = '0' * 64
+            with self.assertRaisesRegex(ValueError, 'debug contribution or relocation'):
+                bindings.verify_objects(control, compile(after), wrong)
+
+    def test_queue_storage_requires_matching_runtime_and_frame_contrasts(self):
+        worker = ROOT / 'build/workers/source_only_dos_tests'
+        worker.mkdir(parents=True, exist_ok=True)
+        with tempfile.TemporaryDirectory(dir=worker) as directory:
+            report = {'inputs': [], 'generated_files': [], 'translation_units': [], 'semantic_substitutions': []}
+            dos.prepare(Path(directory), report)
+            tc = compiler.toolchain()
+            for profile in ('rtlink400', 'rtlink610'):
+                bindings.require_queue_startup_contract(report, profile, tc['linkers'][profile])
+            wrong = json.loads(json.dumps(report))
+            wrong['runtime_components'][0]['sha256'] = '0' * 64
+            with self.assertRaisesRegex(ValueError, 'startup contract'):
+                bindings.require_queue_startup_contract(wrong, 'rtlink400', tc['linkers']['rtlink400'])
+            wrong = json.loads(json.dumps(report))
+            wrong['queue_storage_contract']['cases'] = [r for r in wrong['queue_storage_contract']['cases']
+                                                       if r['case'] != 'data_segment_frame_contrast']
+            with self.assertRaisesRegex(ValueError, 'startup contract'):
+                bindings.require_queue_startup_contract(wrong, 'rtlink400', tc['linkers']['rtlink400'])
     def test_data_aliases_require_existing_bounded_source_storage(self):
         source = ("_DATA segment word public 'DATA'\npublic _owner\n"
                   "db 30 dup (0)\n_owner db 8 dup (1)\n_DATA ends\nend\n")
@@ -224,6 +383,68 @@ class SourceOnlyDosTests(unittest.TestCase):
                              ('source_sha256', 'b'*64), ('owner_offset', 32)):
             with self.assertRaises(ValueError):
                 bindings.bind_data_alias({**spec, field: wrong}, obj, row, module, symbols)
+
+    def test_callback_provider_requires_one_typed_object_and_bounded_registry_views(self):
+        worker = ROOT / 'build/workers/source_only_dos_tests'
+        worker.mkdir(parents=True, exist_ok=True)
+        with tempfile.TemporaryDirectory(dir=worker) as directory:
+            report = {'inputs': [], 'generated_files': [], 'translation_units': [], 'semantic_substitutions': []}
+            _, symbols = dos.prepare(Path(directory), report)
+            row = next(r for r in report['translation_units'] if r.get('storage_provider'))
+            text = (ROOT / row['source']['path']).read_text(encoding='ascii')
+            def compile(text):
+                result = compiler.compile_c(text, row['profile'], row['flags'], basename=row['basename'])
+                self.assertTrue(result.ok, result.log)
+                return OmfReader(communals=True).read(result.obj)
+            obj = compile(text)
+            self.assertEqual(bindings.verify_provider(obj, row['storage_provider'])['status'], 'PASS')
+            for contrast in (text.replace('[25]', '[24]'), text.replace('[25]', '[26]'),
+                             text.replace('();', '() = {0};'), text + '\nvoid extra(void) {}\n'):
+                with self.assertRaises(ValueError):
+                    bindings.verify_provider(compile(contrast), row['storage_provider'])
+            self.assertEqual(len(report['reviewed_communal_aliases']), 23)
+            for spec in report['reviewed_communal_aliases']:
+                self.assertEqual(bindings.bind_communal_alias(spec, obj, row, symbols)['offset'], spec['offset'])
+            spec = report['reviewed_communal_aliases'][0]
+            for field, value in (('offset', 100), ('offset', 2), ('view_size', 2),
+                                 ('source_sha256', '0' * 64), ('owner', '_other')):
+                with self.assertRaises(ValueError):
+                    bindings.bind_communal_alias({**spec, field: value}, obj, row, symbols)
+            tc = compiler.toolchain()
+            for profile in ('rtlink400', 'rtlink610'):
+                bindings.require_callback_storage_contract(report, profile, tc['linkers'][profile])
+            wrong = json.loads(json.dumps(report))
+            wrong['callback_storage_contract']['cases'].pop(0)
+            with self.assertRaisesRegex(ValueError, 'startup contract'):
+                bindings.require_callback_storage_contract(wrong, 'rtlink400', tc['linkers']['rtlink400'])
+
+    def test_assembly_frame_scope_changes_only_three_reviewed_fixups(self):
+        worker = ROOT / 'build/workers/source_only_dos_tests'
+        worker.mkdir(parents=True, exist_ok=True)
+        with tempfile.TemporaryDirectory(dir=worker) as directory:
+            report = {'inputs': [], 'generated_files': [], 'translation_units': [], 'semantic_substitutions': []}
+            dos.prepare(Path(directory), report)
+            row = next(r for r in report['translation_units'] if r['module'] == 'root:1B73')
+            before = (ROOT / row['source']['path']).read_text(encoding='latin1')
+            after = (ROOT / row['generated_source']['path']).read_text(encoding='latin1')
+            def assemble(text):
+                result = compiler.assemble(text, row['profile'], row['flags'], basename=row['basename'])
+                self.assertTrue(result.ok, result.log)
+                return OmfReader(communals=True).read(result.obj)
+            control = assemble(before)
+            generated = assemble(after)
+            self.assertEqual(len(bindings.verify_objects(control, generated, row['source_binding'])['reviewed_frame_corrections']), 3)
+            for contrast in (after.replace('assume es:DGROUP', 'assume es:_DATA'),
+                             after.replace('mov cx, word ptr es:_g_9122', 'mov cx, word ptr es:_g_9124')):
+                with self.assertRaises(ValueError):
+                    bindings.verify_objects(control, assemble(contrast), row['source_binding'])
+            tc = compiler.toolchain()
+            for profile in ('rtlink400', 'rtlink610'):
+                bindings.require_assembly_frame_contract(report, profile, tc['linkers'][profile])
+            report['assembly_frame_contract']['cases'] = [r for r in report['assembly_frame_contract']['cases']
+                                                         if r['case'] != 'canonical_data_frame']
+            with self.assertRaisesRegex(ValueError, 'shifted DGROUP contract'):
+                bindings.require_assembly_frame_contract(report, 'rtlink400', tc['linkers']['rtlink400'])
 
 
 if __name__ == '__main__':

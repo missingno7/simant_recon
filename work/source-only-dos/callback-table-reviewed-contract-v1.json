@@ -1,0 +1,2857 @@
+{
+  "schema": "simant-dos-callback-table-reviewed-contract-v1",
+  "category": "REVIEWED_SOURCE_STORAGE_CONTRACT",
+  "root_reviewed": true,
+  "all_required_checks_pass": true,
+  "slots": 25,
+  "slot_bytes": 4,
+  "owner_bytes": 100,
+  "probe_source": {
+    "path": "work/source-only-dos/callback-table-probe.py",
+    "sha256": "0dd3910e718ddbce36ea4abedd581971cd0b4c45a1152b5aa4089deca5d04e65",
+    "size": 40495
+  },
+  "provider_source": {
+    "path": "work/source-only-dos/providers/callback-table.c",
+    "sha256": "0768e9340f7d062ca81979e97abeeed70f083232963649b4d20d0ceeda0fdcf7",
+    "size": 47
+  },
+  "inputs": [
+    {
+      "path": "C:/tools/RTLink-Plus-4.00-DiscMaster/installed/dest/RTLINK.DAT",
+      "sha256": "c1e206fe4b3c34d43b47aa9aa215e2959fbb23c69c89eb69e36d80b1d9194eea",
+      "size": 63824
+    },
+    {
+      "path": "C:/tools/RTLink-Plus-4.00-DiscMaster/installed/dest/RTLINK.EXE",
+      "sha256": "dff0a988738a2ba7716f7013ef5b8136e0857b6bfe700bccdeaad70ee5e87c74",
+      "size": 449497
+    },
+    {
+      "path": "C:/tools/RTLink-Plus-4.00-DiscMaster/installed/dest/RTLINKST.COM",
+      "sha256": "6ad9015869dc9598a2b498c58297224e5ab4a13fad9ada528650dfcedeb83cf2",
+      "size": 7184
+    },
+    {
+      "path": "C:/tools/RTLink-Plus-4.00-DiscMaster/installed/dest/RTLUTILS.LIB",
+      "sha256": "9060c022f65a2811b81936879f93eb16c5d349c14b56c704a3853d3cf79cd162",
+      "size": 266625
+    },
+    {
+      "path": "C:/tools/dosbox-x/dosbox-x.exe",
+      "sha256": "b028a4d328302ea270722dec69f3ec3a10ebf76beba72a51970db33a88df2bf6",
+      "size": 20481536
+    },
+    {
+      "path": "C:/tools/masm-5.10/files/MASM.EXE",
+      "sha256": "233120302473749eafe9a54a30f8bda0127140c44346e5bcc047d113828a741e",
+      "size": 124712
+    },
+    {
+      "path": "C:/tools/msc-6.00/LIB/libh.lib",
+      "sha256": "a4492e8f63da409d949643fd448f29e65e2cc9a8f2deea977372177bbe0ad818",
+      "size": 21033
+    },
+    {
+      "path": "C:/tools/msc-6.00/LIB/llibcr.lib",
+      "sha256": "3d0c6ae92972789e87def01fa96351c39216d731d5c880370155c5613d78c884",
+      "size": 148711
+    },
+    {
+      "path": "C:/tools/msc-6.00ax-archive/BIN/C1.ERR",
+      "sha256": "637444915870f3283d5df41c5cdb1be8c32cc6c19b080f2bb3891edbc3751c6e",
+      "size": 19500
+    },
+    {
+      "path": "C:/tools/msc-6.00ax-archive/BIN/C1L.EXE",
+      "sha256": "d3db38b875a95048bca2809cd1f84783c6c070805f188fec9161054d6350ded3",
+      "size": 213680
+    },
+    {
+      "path": "C:/tools/msc-6.00ax-archive/BIN/C23.ERR",
+      "sha256": "22944a0dffef336c0ebb8f6d5aeb97b4dbeb5c9758a48759557176bff49d1151",
+      "size": 3649
+    },
+    {
+      "path": "C:/tools/msc-6.00ax-archive/BIN/C2L.EXE",
+      "sha256": "62490de22e7b279ea59218a54d677bfc752cb5fc1287533d2e23d03519f155e0",
+      "size": 473258
+    },
+    {
+      "path": "C:/tools/msc-6.00ax-archive/BIN/C3L.EXE",
+      "sha256": "9e82ecc87ffcdb2def53ac64c0d1f048b26421c1415b5600ad4d8d6fcbc06553",
+      "size": 195439
+    },
+    {
+      "path": "C:/tools/msc-6.00ax-archive/BIN/CL.ERR",
+      "sha256": "ca22f37e5e0c09faebde9e4d549dd1f53523cc6f23049d2239a040cd19a424e7",
+      "size": 1656
+    },
+    {
+      "path": "C:/tools/msc-6.00ax-archive/BIN/CL.EXE",
+      "sha256": "92df4a0839aac77940189ce54f107381b829babe8103926cb05d1adffe947347",
+      "size": 81184
+    },
+    {
+      "path": "C:/tools/msc-6.00ax-archive/BIN/CL.MSG",
+      "sha256": "3379f283aec74842bc82205e4c848d759e6e2dcbb6d4820eec9719f1297213ec",
+      "size": 2697
+    },
+    {
+      "path": "C:/tools/nmlgcdos/msdos.exe",
+      "sha256": "f7f6cb0a3e816c5edb13112d327c1bddbf7463fe7bf9a005ca1eb5317751bd02",
+      "size": 686592
+    },
+    {
+      "path": "C:/tools/rtlink-plus-6.10/installed/DOS4GW.EXE",
+      "sha256": "7192b80d1551769c2d2897b2f58015dc18fadca2b7e093a20f45b34011933c6c",
+      "size": 231179
+    },
+    {
+      "path": "C:/tools/rtlink-plus-6.10/installed/RTL-REAL.EXE",
+      "sha256": "228c5d429438ea32ee21dd02c65b7f8e198715b3fa957be9da328f9857482773",
+      "size": 717922
+    },
+    {
+      "path": "C:/tools/rtlink-plus-6.10/installed/RTL-SWAP.EXE",
+      "sha256": "daae0a8c358edc26f95540f4bc1629c0dc5c30652155d85ccd79bead4381cfe3",
+      "size": 692123
+    },
+    {
+      "path": "C:/tools/rtlink-plus-6.10/installed/RTLINK.DAT",
+      "sha256": "10723fb4d4381b6a38417a18409e32d254e59850bcd3b465fbb824e01367a77b",
+      "size": 100100
+    },
+    {
+      "path": "C:/tools/rtlink-plus-6.10/installed/RTLINK.EXE",
+      "sha256": "ea6f57a470a26801086593d54aa99f6bf983dd024fc19b5e13361a07f43e17fb",
+      "size": 687531
+    },
+    {
+      "path": "C:/tools/rtlink-plus-6.10/installed/RTLINKST.COM",
+      "sha256": "635425a8feff822ca98ec536c55a31824161bffbf9d24d37851cc0d9f7ce3b5f",
+      "size": 11031
+    },
+    {
+      "path": "C:/tools/rtlink-plus-6.10/installed/RTLUTILS.LIB",
+      "sha256": "c718bac09b0b1204a259494446acfa8bfffb129144cc7d36799855621f4fdccb",
+      "size": 423823
+    },
+    {
+      "path": "layout/manifest.json",
+      "sha256": "025a0a9255d910cae4b122ab5a3f3fb40888bb456d7fe42158db7c9e622fcf50",
+      "size": 628980
+    },
+    {
+      "path": "layout/symbols.json",
+      "sha256": "0f5dd5b0a211945a97782cfccdb9bb31b0dfd07fcde5df4d4f9486b487eb0125",
+      "size": 800809
+    },
+    {
+      "path": "src/S00/m3126.asm",
+      "sha256": "be7a4a3b0fd9c56c47be50d20c60b0c2835002b7721bd913d36f8183be47ce5a",
+      "size": 18484
+    },
+    {
+      "path": "src/S00/m31AD.asm",
+      "sha256": "5d2ad69ff4affb4be4242e82187065cc5e0b3502cc0cc3e00ad3802ccee2656e",
+      "size": 81450
+    },
+    {
+      "path": "src/S01/m3126.asm",
+      "sha256": "ac99ea7821999d034e64201798d49dfaf64632f34e5f5dee428c9b6dec01a44a",
+      "size": 44403
+    },
+    {
+      "path": "src/S02/m3126.asm",
+      "sha256": "4291e4084ff26dcee75016b03c1b8d8412129a97ad00787b41ac567c16f5178b",
+      "size": 20400
+    },
+    {
+      "path": "src/S03/m3126.asm",
+      "sha256": "b0b9d296f23b4f8a5b4706008b21b6ad96429636da11bf22ddb2126ee362f2ff",
+      "size": 35317
+    },
+    {
+      "path": "src/S04/m35F5.c",
+      "sha256": "65db48855f97c32600ff7527999a463019ba2884117f0c921b35e46d5d37d406",
+      "size": 11387
+    },
+    {
+      "path": "src/S10/m35F5.c",
+      "sha256": "69be1d6a9649e99102131c702e1920b6e84acc0c1b4cd737d2a047552f917ed5",
+      "size": 10707
+    },
+    {
+      "path": "src/S12/m384C.c",
+      "sha256": "584bf940832e3f8e975afdf85ed398fc82b6470e4a5c3ec46c1b4fcd15240002",
+      "size": 19819
+    },
+    {
+      "path": "src/S14/m384C.c",
+      "sha256": "245f8c01d5a330c571048b8cd1b134cf544394af84f7b502a153c73adbd91020",
+      "size": 17919
+    },
+    {
+      "path": "src/S15/m384C.c",
+      "sha256": "01b51eecedcd28e2213819572c846a9754039f4a527e6da5e56e57783398bdd5",
+      "size": 8116
+    },
+    {
+      "path": "src/S16/m384C.c",
+      "sha256": "9e3f4c34c560ca4d93346a43bf383f4e6cc3549ec6878b6194c974164d49a540",
+      "size": 8239
+    },
+    {
+      "path": "src/S19/m384C.c",
+      "sha256": "fac1a097c3d992fed772002a87cb5a206050c67a3061e9e9168edc6032e1696b",
+      "size": 7190
+    },
+    {
+      "path": "src/S20/m39F1.c",
+      "sha256": "6fd0a02991a29325f214049a8a8961aaee4bc65fbf760b296e63a6ac8f6fbe7b",
+      "size": 6627
+    },
+    {
+      "path": "src/S22/m39C7.c",
+      "sha256": "e9add4ebd445bd943f24a65764be2a79581f2fc26c349741fdfe8efae3b7030d",
+      "size": 31328
+    },
+    {
+      "path": "src/S24/m39C7.c",
+      "sha256": "3de9615a57dbe35eacd073726b451478dc5b12396360501631d7553b6139e240",
+      "size": 8405
+    },
+    {
+      "path": "src/root/m0250.c",
+      "sha256": "bb8a325c543151e09cb173d2194844877805a9e1058d3b24362ff5a7cbd9f61b",
+      "size": 65517
+    },
+    {
+      "path": "src/root/m0798.c",
+      "sha256": "ecf807dc3159f583f6ee3ea8a9f5422650a64bb557d4551e9c97b5dcc7b6a1b8",
+      "size": 14874
+    },
+    {
+      "path": "src/root/m1B4E.asm",
+      "sha256": "a32d75d2d4ea36980b659d26e9ddd86bcde65d9e250ebac4cdc29c0e847c67a2",
+      "size": 8451
+    },
+    {
+      "path": "src/root/m1B73.asm",
+      "sha256": "3097a6b03ff1d8bdfa7d573632d9905de88d754c8b1e047de4014c4f186cb848",
+      "size": 35010
+    },
+    {
+      "path": "src/root/m1C62.c",
+      "sha256": "927309d2bf5019e17e58962c7da6a0d45298a2f3bf18fef0b0347cc4498ada6c",
+      "size": 9885
+    },
+    {
+      "path": "src/root/m1CE2.c",
+      "sha256": "e5c2cb4b8dbe7af6d263072002a49e012b290c1082f0fc877b479728b75bacd3",
+      "size": 10210
+    },
+    {
+      "path": "src/root/m1D8E.c",
+      "sha256": "afe9364f319633dd85c276bed18e848a605934156bfbb4fc276d304cd2ec2556",
+      "size": 10996
+    },
+    {
+      "path": "src/root/m1FAA.c",
+      "sha256": "e13a110be3cf3643419027a40a18002af231b6f9e159e89fc78f031a70929f66",
+      "size": 1532
+    },
+    {
+      "path": "src/root/m1FD2.c",
+      "sha256": "f4359bdaf4cfc0fe326a54cf8a1eacb9ba3098b710bf2a561b3d0f48569bf6d8",
+      "size": 10086
+    },
+    {
+      "path": "src/root/m205F.c",
+      "sha256": "225326bdd127dd3825035ae0fe8434e6677c0ee81203fee2e16bac0cf90fffc6",
+      "size": 6015
+    },
+    {
+      "path": "src/root/m208F.c",
+      "sha256": "57fc64215f6ff681790e1afe2321f0348ee0cb8c3fbce066cef5f2dd5a18a72e",
+      "size": 6853
+    },
+    {
+      "path": "src/root/m21FA.c",
+      "sha256": "49dc5ef1b2e34263336fea6a4ab5e9992c6dc5fdca404c7efc2d2315b98f6b1f",
+      "size": 13758
+    },
+    {
+      "path": "src/root/m22BF.c",
+      "sha256": "f5b617067cdc711593e94dbb725ae9ceaeb12b890f198af0d66c1973e15133a0",
+      "size": 18937
+    },
+    {
+      "path": "src/root/m23E6.c",
+      "sha256": "6992614db2546bf039d6e9fb3be17df0a48607dfa3b3e3faba05ed5e5e938bec",
+      "size": 11709
+    },
+    {
+      "path": "src/root/m24AB.c",
+      "sha256": "1d263c6e1f242981d7c3e37d839dc481dc75deed45d7d1bcaaa075cad124de7f",
+      "size": 5171
+    },
+    {
+      "path": "src/root/m259D.c",
+      "sha256": "c4329ddb75629a235043d9da1eb11c7dd6f2cb3826fe392bfc8a27c98eeb97e1",
+      "size": 6533
+    },
+    {
+      "path": "src/root/m2662.c",
+      "sha256": "78971de2531570a3fb9c7ae28d888de90e092470c4414f654948e5a4f5e1f8be",
+      "size": 15289
+    },
+    {
+      "path": "work/source-only-dos/c-data-bindings-v1.json",
+      "sha256": "dbc792e0fba712cd1fb251149078cb3aa902c8860d6cc5e738aa1b8ddecc6f89",
+      "size": 17508
+    },
+    {
+      "path": "work/source-only-dos/callback-table-probe.py",
+      "sha256": "0dd3910e718ddbce36ea4abedd581971cd0b4c45a1152b5aa4089deca5d04e65",
+      "size": 40495
+    },
+    {
+      "path": "work/source-only-dos/history-storage-bindings-v1.json",
+      "sha256": "9de05b5bf7b34c168581189d4f4749a53b37576600205be32f0500e14b17c80a",
+      "size": 11658
+    },
+    {
+      "path": "work/source-only-dos/linker-alias-contract-v1.json",
+      "sha256": "d1fb7df567445937ccd4da0e793d3e8dca304b5a74244d3e22fda2f81c184791",
+      "size": 5278
+    },
+    {
+      "path": "work/source-only-dos/providers/callback-table.c",
+      "sha256": "0768e9340f7d062ca81979e97abeeed70f083232963649b4d20d0ceeda0fdcf7",
+      "size": 47
+    },
+    {
+      "path": "work/source-only-dos/source-bindings-v1.json",
+      "sha256": "c7fed5e7e2caac6cad41e63de2eb0ba3cfcbba112fa2877d9799c562b8f52bc4",
+      "size": 11388
+    }
+  ],
+  "source_extent_basis": [
+    "m1B4E reset: 0x19 iterations x 2 words per slot",
+    "m1B4E copy: 0x32 words",
+    "S00-S03 each contribute 25 dword dispatch entries"
+  ],
+  "ownership_map": [
+    {
+      "slot": 0,
+      "offset_from_owner": 0,
+      "historical_address": "0x9128",
+      "registered_name": "_g_9128",
+      "test_alias": "_g_9128",
+      "layout_symbol_grounding": "f_21FA_00EE/0144/01D0: lcall [9128](fore*0x101, back*0x101, pat*0x101) attribute setter (far function pointer)",
+      "optional_import_join": {
+        "status": "not_loaded; ignored build/source-only report is not a probe prerequisite",
+        "accepted_storage_candidates": null,
+        "declaration_contexts": null
+      },
+      "provider_targets": {
+        "S00": "_o00_31AD_1659",
+        "S01": "_o01_3126_0167",
+        "S02": "_o02_3126_0040",
+        "S03": "_o03_3126_019E"
+      },
+      "consumer_contract": "void far (int,int,int)",
+      "canonical_source_refs": [
+        {
+          "source": "src/root/m0250.c",
+          "line": 967,
+          "text": "extern void (far * near g_9128)(int a, int b, int c);"
+        },
+        {
+          "source": "src/root/m0250.c",
+          "line": 1002,
+          "text": "(*g_9128)(0, 0, 0);"
+        },
+        {
+          "source": "src/root/m0250.c",
+          "line": 1314,
+          "text": "(*g_9128)(f_1B4E_000D(1), 0, 0);"
+        },
+        {
+          "source": "src/root/m0250.c",
+          "line": 1316,
+          "text": "(*g_9128)(f_1B4E_000D(15), 0, 0);"
+        },
+        {
+          "source": "src/root/m0250.c",
+          "line": 1426,
+          "text": "(*g_9128)(f_1B4E_000D(15), 0, 0);"
+        },
+        {
+          "source": "src/root/m0798.c",
+          "line": 399,
+          "text": "extern void (far * near g_9128)(int fore, int back, int pattern);"
+        },
+        {
+          "source": "src/root/m0798.c",
+          "line": 449,
+          "text": "(*g_9128)(f_1B4E_000D(15), f_1B4E_000D(15), 0);"
+        },
+        {
+          "source": "src/root/m1B4E.asm",
+          "line": 10,
+          "text": "extrn\t_g_9128:byte"
+        },
+        {
+          "source": "src/root/m1B4E.asm",
+          "line": 56,
+          "text": "_g_3DF8\t\tdd\t_g_9128\t\t; driver entry table (25 far pointers)"
+        },
+        {
+          "source": "src/root/m1B73.asm",
+          "line": 43,
+          "text": "extrn\t_g_9128:byte"
+        },
+        {
+          "source": "src/root/m1B73.asm",
+          "line": 381,
+          "text": "call dword ptr _g_9128"
+        },
+        {
+          "source": "src/root/m1B73.asm",
+          "line": 2016,
+          "text": "call dword ptr _g_9128"
+        },
+        {
+          "source": "src/root/m1C62.c",
+          "line": 42,
+          "text": "extern void (far * near g_9128)(int fore, int back, int pattern);"
+        },
+        {
+          "source": "src/root/m1C62.c",
+          "line": 56,
+          "text": "g_9128(0, 15, 0);"
+        },
+        {
+          "source": "src/root/m1C62.c",
+          "line": 151,
+          "text": "g_9128(g_8CBE->frame, g_8CBE->frame, 0x20);"
+        },
+        {
+          "source": "src/root/m1C62.c",
+          "line": 153,
+          "text": "g_9128(0x404, g_8CBE->fill, 0);"
+        },
+        {
+          "source": "src/root/m1C62.c",
+          "line": 157,
+          "text": "g_9128(g_8CBE->frame, g_8CBE->text, 0xc0);"
+        },
+        {
+          "source": "src/root/m1C62.c",
+          "line": 159,
+          "text": "g_9128(g_8CBE->frame, g_8CBE->text, 0);"
+        },
+        {
+          "source": "src/root/m1C62.c",
+          "line": 286,
+          "text": "g_9128(0x404, 0x404, 0x40);"
+        },
+        {
+          "source": "src/root/m1C62.c",
+          "line": 288,
+          "text": "g_9128(0, 0, 0);"
+        },
+        {
+          "source": "src/root/m1C62.c",
+          "line": 290,
+          "text": "g_9128(0x404, 0xf0f, 0xc0);"
+        },
+        {
+          "source": "src/root/m1C62.c",
+          "line": 294,
+          "text": "g_9128(0x404, 0xc0c, 0xc0);"
+        },
+        {
+          "source": "src/root/m1C62.c",
+          "line": 386,
+          "text": "g_9128(g_8CBE->frame, g_8CBE->frame, 0x20);"
+        },
+        {
+          "source": "src/root/m1C62.c",
+          "line": 388,
+          "text": "g_9128(0x404, g_8CBE->fill, 0);"
+        },
+        {
+          "source": "src/root/m1CE2.c",
+          "line": 317,
+          "text": "extern void (far * near g_9128)(int fore, int back, int pattern);"
+        },
+        {
+          "source": "src/root/m1CE2.c",
+          "line": 323,
+          "text": "g_9128(fore, back, 0x20);"
+        },
+        {
+          "source": "src/root/m1CE2.c",
+          "line": 328,
+          "text": "g_9128(fore, back, 0x20);"
+        },
+        {
+          "source": "src/root/m1CE2.c",
+          "line": 337,
+          "text": "g_9128(fore, back, 0x20);"
+        },
+        {
+          "source": "src/root/m1CE2.c",
+          "line": 352,
+          "text": "g_9128(fore, back, 0x20);"
+        },
+        {
+          "source": "src/root/m1FAA.c",
+          "line": 12,
+          "text": "extern void (far * near g_9128)(int a, int b, int c);"
+        },
+        {
+          "source": "src/root/m1FAA.c",
+          "line": 42,
+          "text": "(*g_9128)(fore, back, fore);"
+        },
+        {
+          "source": "src/root/m1FD2.c",
+          "line": 160,
+          "text": "extern void (far * near g_9128)(int a, int b, int c);"
+        },
+        {
+          "source": "src/root/m1FD2.c",
+          "line": 166,
+          "text": "g_9128(g_5FEC, g_5FEA, 0);"
+        },
+        {
+          "source": "src/root/m1FD2.c",
+          "line": 169,
+          "text": "g_9128(g_5FEA, g_5FEC, 0xc0);"
+        },
+        {
+          "source": "src/root/m1FD2.c",
+          "line": 172,
+          "text": "g_9128(g_5FEE, g_5FEA, 0x30);"
+        },
+        {
+          "source": "src/root/m1FD2.c",
+          "line": 175,
+          "text": "g_9128(g_5FEE, g_5FEC, 0x30);"
+        },
+        {
+          "source": "src/root/m208F.c",
+          "line": 119,
+          "text": "extern void (far * near g_9128)(int a, int b, int c);"
+        },
+        {
+          "source": "src/root/m208F.c",
+          "line": 127,
+          "text": "g_9128(color, color, color);"
+        },
+        {
+          "source": "src/root/m21FA.c",
+          "line": 67,
+          "text": "extern void (far * near g_9128)(int fore, int back, int pattern);"
+        },
+        {
+          "source": "src/root/m21FA.c",
+          "line": 105,
+          "text": "(*g_9128)(colorEntry[0] * 0x101, colorEntry[2] * 0x101, colorEntry[0] * 0x101);"
+        },
+        {
+          "source": "src/root/m21FA.c",
+          "line": 107,
+          "text": "(*g_9128)(colorEntry[0] * 0x101, colorEntry[3] * 0x101, colorEntry[0] * 0x101);"
+        },
+        {
+          "source": "src/root/m21FA.c",
+          "line": 117,
+          "text": "(*g_9128)(colorEntry[0] * 0x101, colorEntry[2] * 0x101, colorEntry[0] * 0x101);"
+        },
+        {
+          "source": "src/root/m21FA.c",
+          "line": 119,
+          "text": "(*g_9128)(colorEntry[0] * 0x101, colorEntry[3] * 0x101, colorEntry[0] * 0x101);"
+        },
+        {
+          "source": "src/root/m21FA.c",
+          "line": 132,
+          "text": "(*g_9128)(colorEntry[3] * 0x101, colorEntry[2] * 0x101, colorEntry[0] * 0x101);"
+        },
+        {
+          "source": "src/root/m21FA.c",
+          "line": 134,
+          "text": "(*g_9128)(colorEntry[0] * 0x101, colorEntry[2] * 0x101, colorEntry[0] * 0x101);"
+        },
+        {
+          "source": "src/root/m21FA.c",
+          "line": 203,
+          "text": "(*g_9128)(entry[0] * 0x101, entry[0] * 0x101, entry[0] * 0x101);"
+        },
+        {
+          "source": "src/root/m21FA.c",
+          "line": 206,
+          "text": "(*g_9128)(entry[3] * 0x101, entry[3] * 0x101, entry[1] * 0x101);"
+        },
+        {
+          "source": "src/root/m21FA.c",
+          "line": 356,
+          "text": "(*g_9128)(0, 0, 0x40);"
+        },
+        {
+          "source": "src/S10/m35F5.c",
+          "line": 38,
+          "text": "extern void (far * near g_9128)(int a, int b, int c);"
+        },
+        {
+          "source": "src/S10/m35F5.c",
+          "line": 53,
+          "text": "(*g_9128)(g_3DE2, g_3DE0, g_3DE4);"
+        },
+        {
+          "source": "src/S10/m35F5.c",
+          "line": 55,
+          "text": "(*g_9128)(g_3DE2, g_3DE0, g_3DE4);"
+        },
+        {
+          "source": "src/S10/m35F5.c",
+          "line": 73,
+          "text": "(*g_9128)(g_3DE2, g_3DE0, g_3DE4);"
+        },
+        {
+          "source": "src/S10/m35F5.c",
+          "line": 75,
+          "text": "(*g_9128)(g_3DE2, g_3DE0, g_3DE4);"
+        },
+        {
+          "source": "src/S15/m384C.c",
+          "line": 148,
+          "text": "extern void (far * near g_9128)(int a, int b, int c);"
+        },
+        {
+          "source": "src/S15/m384C.c",
+          "line": 173,
+          "text": "(*g_9128)(0, 0, 0);"
+        },
+        {
+          "source": "src/S24/m39C7.c",
+          "line": 195,
+          "text": "extern void (far * near g_9128)(int a, int b, int c);"
+        },
+        {
+          "source": "src/S24/m39C7.c",
+          "line": 283,
+          "text": "(*g_9128)(color, 0, color);"
+        }
+      ]
+    },
+    {
+      "slot": 1,
+      "offset_from_owner": 4,
+      "historical_address": "0x912C",
+      "registered_name": "_g_912C",
+      "test_alias": "_g_912C",
+      "layout_symbol_grounding": "S00 driver (31AD) : extrn\t_g_912C:byte (DGROUP operand of genuine-assembly display driver; worker ovlA)",
+      "optional_import_join": {
+        "status": "not_loaded; ignored build/source-only report is not a probe prerequisite",
+        "accepted_storage_candidates": null,
+        "declaration_contexts": null
+      },
+      "provider_targets": {
+        "S00": "_o00_31AD_166A",
+        "S01": "_o01_3126_019A",
+        "S02": "_o02_3126_005C",
+        "S03": "_o03_3126_01BE"
+      },
+      "consumer_contract": "void far (void)",
+      "canonical_source_refs": [
+        {
+          "source": "src/root/m24AB.c",
+          "line": 90,
+          "text": "extern void (far * near g_912C)(void);"
+        },
+        {
+          "source": "src/root/m24AB.c",
+          "line": 98,
+          "text": "(*g_912C)();"
+        },
+        {
+          "source": "src/root/m24AB.c",
+          "line": 107,
+          "text": "(*g_912C)();"
+        },
+        {
+          "source": "src/S00/m31AD.asm",
+          "line": 56,
+          "text": "extrn\t_g_912C:byte"
+        },
+        {
+          "source": "src/S00/m31AD.asm",
+          "line": 3585,
+          "text": "lea bx, _g_912C"
+        }
+      ]
+    },
+    {
+      "slot": 2,
+      "offset_from_owner": 8,
+      "historical_address": "0x9130",
+      "registered_name": "_g_9130",
+      "test_alias": "_g_9130",
+      "layout_symbol_grounding": "o10_35F5_01C3: lcall [9130] with no arguments (far function pointer in BSS, next to g_9128/g_9134)",
+      "optional_import_join": {
+        "status": "not_loaded; ignored build/source-only report is not a probe prerequisite",
+        "accepted_storage_candidates": null,
+        "declaration_contexts": null
+      },
+      "provider_targets": {
+        "S00": "_o00_31AD_168C",
+        "S01": "_o01_3126_01B2",
+        "S02": "_o02_3126_0079",
+        "S03": "_o03_3126_01DB"
+      },
+      "consumer_contract": "void far (void)",
+      "canonical_source_refs": [
+        {
+          "source": "src/root/m1FD2.c",
+          "line": 366,
+          "text": "extern void (far * near g_9130)(void);"
+        },
+        {
+          "source": "src/root/m1FD2.c",
+          "line": 386,
+          "text": "g_9130();"
+        },
+        {
+          "source": "src/root/m205F.c",
+          "line": 59,
+          "text": "extern void (far * near g_9130)(void);"
+        },
+        {
+          "source": "src/root/m205F.c",
+          "line": 209,
+          "text": "(*g_9130)();"
+        },
+        {
+          "source": "src/root/m24AB.c",
+          "line": 89,
+          "text": "extern void (far * near g_9130)(void);"
+        },
+        {
+          "source": "src/root/m24AB.c",
+          "line": 100,
+          "text": "(*g_9130)();"
+        },
+        {
+          "source": "src/root/m24AB.c",
+          "line": 105,
+          "text": "(*g_9130)();"
+        },
+        {
+          "source": "src/S00/m31AD.asm",
+          "line": 57,
+          "text": "extrn\t_g_9130:byte"
+        },
+        {
+          "source": "src/S00/m31AD.asm",
+          "line": 3582,
+          "text": "lea bx, _g_9130"
+        },
+        {
+          "source": "src/S10/m35F5.c",
+          "line": 84,
+          "text": "extern void (far * near g_9130)(void);"
+        },
+        {
+          "source": "src/S10/m35F5.c",
+          "line": 103,
+          "text": "(*g_9130)();"
+        },
+        {
+          "source": "src/S19/m384C.c",
+          "line": 52,
+          "text": "extern void (far * near g_9130)(void);"
+        },
+        {
+          "source": "src/S19/m384C.c",
+          "line": 122,
+          "text": "(*g_9130)();"
+        }
+      ]
+    },
+    {
+      "slot": 3,
+      "offset_from_owner": 12,
+      "historical_address": "0x9134",
+      "registered_name": "_g_9134",
+      "test_alias": "_g_9134",
+      "layout_symbol_grounding": "f_21FA_0002/0413: lcall [9134](a,x0,y0,x1,y1) line drawer (far function pointer)",
+      "optional_import_join": {
+        "status": "not_loaded; ignored build/source-only report is not a probe prerequisite",
+        "accepted_storage_candidates": null,
+        "declaration_contexts": null
+      },
+      "provider_targets": {
+        "S00": "_o00_31AD_16A9",
+        "S01": "_o01_3126_024C",
+        "S02": "_o02_3126_027C",
+        "S03": "_o03_3126_059C"
+      },
+      "consumer_contract": "void far (int,int,int,int,int)",
+      "canonical_source_refs": [
+        {
+          "source": "src/root/m0250.c",
+          "line": 1232,
+          "text": "extern void (far * near g_9134)(int x0, int y0, int x1, int y1, int color);"
+        },
+        {
+          "source": "src/root/m0250.c",
+          "line": 1250,
+          "text": "(*g_9134)(x, y, 15 * g_19BE + x, 15 * g_19C0 + y, g_19C4 | 0x10);"
+        },
+        {
+          "source": "src/root/m0250.c",
+          "line": 1262,
+          "text": "(*g_9134)(x, y, 15 * g_19BE + x, 15 * g_19C0 + y, g_19C4 | 0x20);"
+        },
+        {
+          "source": "src/root/m1CE2.c",
+          "line": 18,
+          "text": "extern void (far * near g_9134)(int left, int top, int right, int bottom, int color);"
+        },
+        {
+          "source": "src/root/m1CE2.c",
+          "line": 23,
+          "text": "g_9134(left, top, right, bottom, g_3DE2);"
+        },
+        {
+          "source": "src/root/m1CE2.c",
+          "line": 41,
+          "text": "g_9134(left << 3, CELLY(top), right << 3, CELLY(bottom + 1), color);"
+        },
+        {
+          "source": "src/root/m1CE2.c",
+          "line": 91,
+          "text": "g_9134(left + width, top + width, right - width, top, g_3DE0);"
+        },
+        {
+          "source": "src/root/m1CE2.c",
+          "line": 92,
+          "text": "g_9134(left + width, bottom - width, right - width, bottom, g_3DE0);"
+        },
+        {
+          "source": "src/root/m1CE2.c",
+          "line": 93,
+          "text": "g_9134(left + width, top, left, bottom, g_3DE0);"
+        },
+        {
+          "source": "src/root/m1CE2.c",
+          "line": 94,
+          "text": "g_9134(right, top, right - width, bottom, g_3DE0);"
+        },
+        {
+          "source": "src/root/m1CE2.c",
+          "line": 103,
+          "text": "g_9134(r->left + width, r->top + width, r->right - width, r->top, color);"
+        },
+        {
+          "source": "src/root/m1CE2.c",
+          "line": 105,
+          "text": "g_9134(r->left + width, r->bottom - width, r->right - width, r->bottom, color);"
+        },
+        {
+          "source": "src/root/m1CE2.c",
+          "line": 107,
+          "text": "g_9134(r->left + width, r->top, r->left, r->bottom, color);"
+        },
+        {
+          "source": "src/root/m1CE2.c",
+          "line": 109,
+          "text": "g_9134(r->right, r->top, r->right - width, r->bottom, color);"
+        },
+        {
+          "source": "src/root/m1CE2.c",
+          "line": 152,
+          "text": "g_9134(r->left, r->top, r->right, r->bottom, color);"
+        },
+        {
+          "source": "src/root/m1CE2.c",
+          "line": 157,
+          "text": "g_9134(r->left, r->top, r->right, r->bottom, g_3DE2);"
+        },
+        {
+          "source": "src/root/m1CE2.c",
+          "line": 341,
+          "text": "g_9134(left, top, right, bottom, fore);"
+        },
+        {
+          "source": "src/root/m1FAA.c",
+          "line": 14,
+          "text": "extern void (far * near g_9134)(int x0, int y0, int x1, int y1, int color);"
+        },
+        {
+          "source": "src/root/m1FAA.c",
+          "line": 47,
+          "text": "(*g_9134)(x0, top, x1, top + 1, fore);"
+        },
+        {
+          "source": "src/root/m208F.c",
+          "line": 77,
+          "text": "extern void (far * near g_9134)(int left, int top, int right, int bottom, int color);"
+        },
+        {
+          "source": "src/root/m208F.c",
+          "line": 96,
+          "text": "g_9134(rect->left, r.top, r.left, r.bottom, g_3DE2);"
+        },
+        {
+          "source": "src/root/m208F.c",
+          "line": 98,
+          "text": "g_9134(r.right, r.top, rect->right, r.bottom, g_3DE2);"
+        },
+        {
+          "source": "src/root/m21FA.c",
+          "line": 68,
+          "text": "extern void (far * near g_9134)(int x0, int y0, int x1, int y1, int color);"
+        },
+        {
+          "source": "src/root/m21FA.c",
+          "line": 96,
+          "text": "(*g_9134)(g_3DA0, r.top, rect->right, r.top + g_3DDC, g_3DE2);"
+        },
+        {
+          "source": "src/root/m21FA.c",
+          "line": 97,
+          "text": "(*g_9134)(rect->left, r.top, x, r.top + g_3DDC, g_3DE2);"
+        },
+        {
+          "source": "src/root/m21FA.c",
+          "line": 267,
+          "text": "(*g_9134)(rect->left, rect->bottom - 1, rect->right, rect->bottom, colorEntry[0] * 0x101);"
+        },
+        {
+          "source": "src/root/m21FA.c",
+          "line": 299,
+          "text": "(*g_9134)(rect->left, rect->bottom - 1, rect->right, rect->bottom, colorEntry[0] * 0x101);"
+        },
+        {
+          "source": "src/root/m22BF.c",
+          "line": 72,
+          "text": "extern void (far * near g_9134)(int left, int top, int right, int bottom, int color);"
+        },
+        {
+          "source": "src/root/m22BF.c",
+          "line": 630,
+          "text": "(*g_9134)(left, top, r.right, r.bottom, c);"
+        },
+        {
+          "source": "src/root/m22BF.c",
+          "line": 644,
+          "text": "(*g_9134)(r.left, r.top, r.right, r.bottom, c);"
+        },
+        {
+          "source": "src/root/m23E6.c",
+          "line": 174,
+          "text": "extern void (far * near g_9134)(int left, int top, int right, int bottom, int color);"
+        },
+        {
+          "source": "src/root/m23E6.c",
+          "line": 218,
+          "text": "g_9134(r->left, y, r->right, y + h, g_3DE2);"
+        },
+        {
+          "source": "src/root/m23E6.c",
+          "line": 270,
+          "text": "g_9134(r.left, r.top, r.right, r.top + eleTop, g_3DE2);"
+        },
+        {
+          "source": "src/root/m23E6.c",
+          "line": 272,
+          "text": "g_9134(r.left, r.top + eleTop, r.right, eleTop + eleHeight + r.top, g_3DE0);"
+        },
+        {
+          "source": "src/root/m23E6.c",
+          "line": 274,
+          "text": "g_9134(r.left, eleTop + eleHeight + r.top, r.right, r.bottom, g_3DE2);"
+        },
+        {
+          "source": "src/root/m23E6.c",
+          "line": 287,
+          "text": "g_9134(r.left, fd_50F6_47DA.y + r.top, r.right, r.bottom - fd_50F6_47DA.y, g_3DE2);"
+        },
+        {
+          "source": "src/root/m24AB.c",
+          "line": 175,
+          "text": "extern void (far * near g_9134)(int left, int top, int right, int bottom, int color);"
+        },
+        {
+          "source": "src/root/m24AB.c",
+          "line": 185,
+          "text": "(*g_9134)(x, y, right, f_24AB_030B() + y, g_3DE2);"
+        },
+        {
+          "source": "src/S04/m35F5.c",
+          "line": 98,
+          "text": "extern void (far * near g_9134)(int left, int top, int right, int bottom, int color);"
+        },
+        {
+          "source": "src/S04/m35F5.c",
+          "line": 288,
+          "text": "(*g_9134)(fd_50F6_3842.left, fd_50F6_3842.top, fd_50F6_3842.left + fd_50F6_3852,"
+        },
+        {
+          "source": "src/S04/m35F5.c",
+          "line": 290,
+          "text": "(*g_9134)(fd_50F6_3842.right - fd_50F6_3852 - 1, fd_50F6_3842.top, fd_50F6_3842.right,"
+        },
+        {
+          "source": "src/S12/m384C.c",
+          "line": 420,
+          "text": "extern void (far * near g_9134)(int left, int top, int right, int bottom, int color);"
+        },
+        {
+          "source": "src/S12/m384C.c",
+          "line": 485,
+          "text": "(*g_9134)(fd_50F6_10D2.left, fd_50F6_10D2.top, fd_50F6_10D2.left + fd_50F6_38C0,"
+        },
+        {
+          "source": "src/S12/m384C.c",
+          "line": 487,
+          "text": "(*g_9134)(fd_50F6_10D2.right - fd_50F6_38C0, fd_50F6_10D2.top, fd_50F6_10D2.right,"
+        },
+        {
+          "source": "src/S14/m384C.c",
+          "line": 11,
+          "text": "*    PictStrnDialog are named (+6, CalcScore operand order), g_9134's and PictureDialog's forward"
+        },
+        {
+          "source": "src/S14/m384C.c",
+          "line": 326,
+          "text": "extern void (far * near g_9134)(int, int, int, int, int);"
+        },
+        {
+          "source": "src/S14/m384C.c",
+          "line": 385,
+          "text": "(*g_9134)(left, half / 2 + y, left + a, h - half + y, g_3DE0);"
+        },
+        {
+          "source": "src/S14/m384C.c",
+          "line": 390,
+          "text": "(*g_9134)(left, half / 2 + h + y, left + b, h * 2 - half + y, g_3DE0);"
+        },
+        {
+          "source": "src/S16/m384C.c",
+          "line": 138,
+          "text": "extern void (far * near g_9134)(int x0, int y0, int x1, int y1, int color);"
+        },
+        {
+          "source": "src/S16/m384C.c",
+          "line": 209,
+          "text": "(*g_9134)(g_3DA0, y, rect.right, height + y, g_3DE2);"
+        },
+        {
+          "source": "src/S16/m384C.c",
+          "line": 211,
+          "text": "(*g_9134)(rect.left, y, rect.right, height + y, g_3DE2);"
+        },
+        {
+          "source": "src/S20/m39F1.c",
+          "line": 45,
+          "text": "extern void (far * near g_9134)(int left, int top, int right, int bottom, int color);"
+        },
+        {
+          "source": "src/S20/m39F1.c",
+          "line": 162,
+          "text": "(*g_9134)(0, 0, g_3DB2, g_3DB4, f_1B4E_000D(15));"
+        },
+        {
+          "source": "src/S22/m39C7.c",
+          "line": 178,
+          "text": "extern void (far * near g_9134)(int x0, int y0, int x1, int y1, int color);"
+        },
+        {
+          "source": "src/S22/m39C7.c",
+          "line": 219,
+          "text": "g_9134(sx, sy, sx + 2, sy + 2, f_1B4E_000D(2));"
+        },
+        {
+          "source": "src/S22/m39C7.c",
+          "line": 232,
+          "text": "g_9134(sx, sy, sx + 2, sy + 2, f_1B4E_000D(1) | 0x20);"
+        }
+      ]
+    },
+    {
+      "slot": 4,
+      "offset_from_owner": 16,
+      "historical_address": "0x9138",
+      "registered_name": "_g_9138",
+      "test_alias": "_g_9138",
+      "layout_symbol_grounding": "f_21FA_01D0: lcall [9138](left,top,right,bottom,0) rect primitive (far function pointer)",
+      "optional_import_join": {
+        "status": "not_loaded; ignored build/source-only report is not a probe prerequisite",
+        "accepted_storage_candidates": null,
+        "declaration_contexts": null
+      },
+      "provider_targets": {
+        "S00": "_o00_31AD_0122",
+        "S01": "_o01_3126_024C",
+        "S02": "_o02_3126_0185",
+        "S03": "_o03_3126_03C2"
+      },
+      "consumer_contract": "void far (int,int,int,int,int)",
+      "canonical_source_refs": [
+        {
+          "source": "src/root/m1CE2.c",
+          "line": 57,
+          "text": "extern void (far * near g_9138)(int left, int top, int right, int bottom, int mode);"
+        },
+        {
+          "source": "src/root/m1CE2.c",
+          "line": 61,
+          "text": "g_9138(r->left, r->top, r->right, r->bottom, (char)((g_3DE0 >> 8) + 0x10) << 8 | 0x20);"
+        },
+        {
+          "source": "src/root/m1CE2.c",
+          "line": 66,
+          "text": "g_9138(left, top, right, bottom, (char)((g_3DE0 >> 8) + 0x10) << 8 | 0x20);"
+        },
+        {
+          "source": "src/root/m1FAA.c",
+          "line": 15,
+          "text": "extern void (far * near g_9138)(int x0, int y0, int x1, int y1, int color);"
+        },
+        {
+          "source": "src/root/m1FAA.c",
+          "line": 49,
+          "text": "(*g_9138)(x0, top, x1, top + 1, 0x20);"
+        },
+        {
+          "source": "src/root/m21FA.c",
+          "line": 69,
+          "text": "extern void (far * near g_9138)(int left, int top, int right, int bottom, int mode);"
+        },
+        {
+          "source": "src/root/m21FA.c",
+          "line": 133,
+          "text": "(*g_9138)(rect->left, rect->top, rect->right, rect->bottom, 0);"
+        }
+      ]
+    },
+    {
+      "slot": 5,
+      "offset_from_owner": 20,
+      "historical_address": "0x913C",
+      "registered_name": "_g_913C",
+      "test_alias": "_g_913C",
+      "layout_symbol_grounding": "f_1CE2_0430: lcall [913C] (far code pointer, BSS; 4-arg xor rect)",
+      "optional_import_join": {
+        "status": "not_loaded; ignored build/source-only report is not a probe prerequisite",
+        "accepted_storage_candidates": null,
+        "declaration_contexts": null
+      },
+      "provider_targets": {
+        "S00": "_o00_31AD_037C",
+        "S01": "_o01_3126_0414",
+        "S02": "_o02_3126_03B1",
+        "S03": "_o03_3126_070A"
+      },
+      "consumer_contract": "void far (int,int,int,int)",
+      "canonical_source_refs": [
+        {
+          "source": "src/root/m1CE2.c",
+          "line": 112,
+          "text": "extern void (far * near g_913C)(int left, int top, int right, int bottom);"
+        },
+        {
+          "source": "src/root/m1CE2.c",
+          "line": 117,
+          "text": "g_913C(left + width, top + width, right - width, top);"
+        },
+        {
+          "source": "src/root/m1CE2.c",
+          "line": 118,
+          "text": "g_913C(left + width, bottom - width, right - width, bottom);"
+        },
+        {
+          "source": "src/root/m1CE2.c",
+          "line": 119,
+          "text": "g_913C(left + width, top, left, bottom);"
+        },
+        {
+          "source": "src/root/m1CE2.c",
+          "line": 120,
+          "text": "g_913C(right, top, right - width, bottom);"
+        },
+        {
+          "source": "src/root/m1CE2.c",
+          "line": 142,
+          "text": "g_913C(r->left, r->top, r->right, r->bottom);"
+        },
+        {
+          "source": "src/root/m1FAA.c",
+          "line": 13,
+          "text": "extern void (far * near g_913C)(int left, int top, int right, int bottom);"
+        },
+        {
+          "source": "src/root/m1FAA.c",
+          "line": 45,
+          "text": "(*g_913C)(x0, top, x1, top + 1);"
+        }
+      ]
+    },
+    {
+      "slot": 6,
+      "offset_from_owner": 24,
+      "historical_address": "0x9140",
+      "registered_name": "_g_9140",
+      "test_alias": "_g_9140",
+      "layout_symbol_grounding": "f_259D_000E: lcall [9140] (x0,y0,x1,y1) -> byte size of screen area (far function pointer)",
+      "optional_import_join": {
+        "status": "not_loaded; ignored build/source-only report is not a probe prerequisite",
+        "accepted_storage_candidates": null,
+        "declaration_contexts": null
+      },
+      "provider_targets": {
+        "S00": "_o00_31AD_0522",
+        "S01": "_o01_3126_0437",
+        "S02": "_o02_3126_03D4",
+        "S03": "_o03_3126_072D"
+      },
+      "consumer_contract": "int/unsigned int far (int,int,int,int); signedness differs by consumer",
+      "canonical_source_refs": [
+        {
+          "source": "src/root/m1CE2.c",
+          "line": 162,
+          "text": "extern int (far * near g_9140)(int left, int top, int right, int bottom);"
+        },
+        {
+          "source": "src/root/m1CE2.c",
+          "line": 174,
+          "text": "size = g_9140(x, r->top, r->right, r->bottom);"
+        },
+        {
+          "source": "src/root/m1CE2.c",
+          "line": 270,
+          "text": "size = g_9140;"
+        },
+        {
+          "source": "src/root/m259D.c",
+          "line": 41,
+          "text": "extern unsigned int (far * near g_9140)(int x0, int y0, int x1, int y1);"
+        },
+        {
+          "source": "src/root/m259D.c",
+          "line": 82,
+          "text": "h = malloc((*g_9140)(x & ~1, y, x1, y1));"
+        },
+        {
+          "source": "src/root/m259D.c",
+          "line": 90,
+          "text": "n = (*g_9140)(x & ~7, y, x1, y1);"
+        }
+      ]
+    },
+    {
+      "slot": 7,
+      "offset_from_owner": 28,
+      "historical_address": "0x9144",
+      "registered_name": "_g_9144",
+      "test_alias": "_g_9144",
+      "layout_symbol_grounding": "GPutPacked: mov ax,[9144]; mov dx,[9146] (far code pointer, BSS)",
+      "optional_import_join": {
+        "status": "not_loaded; ignored build/source-only report is not a probe prerequisite",
+        "accepted_storage_candidates": null,
+        "declaration_contexts": null
+      },
+      "provider_targets": {
+        "S00": "_o00_31AD_11FB",
+        "S01": "_o01_3126_0437",
+        "S02": "_o02_3126_03D4",
+        "S03": "_o03_3126_072D"
+      },
+      "consumer_contract": "int far (int,int,int,int)",
+      "canonical_source_refs": [
+        {
+          "source": "src/root/m1CE2.c",
+          "line": 236,
+          "text": "extern int (far * near g_9144)(int, int, int, int);"
+        },
+        {
+          "source": "src/root/m1CE2.c",
+          "line": 265,
+          "text": "size = g_9144;"
+        }
+      ]
+    },
+    {
+      "slot": 8,
+      "offset_from_owner": 32,
+      "historical_address": "0x9148",
+      "registered_name": "_g_9148",
+      "test_alias": "_g_9148",
+      "layout_symbol_grounding": "f_259D_000E: lcall [9148] (x0,y0,x1,y1,buf) screen area to buffer (far function pointer)",
+      "optional_import_join": {
+        "status": "not_loaded; ignored build/source-only report is not a probe prerequisite",
+        "accepted_storage_candidates": null,
+        "declaration_contexts": null
+      },
+      "provider_targets": {
+        "S00": "_o00_31AD_0550",
+        "S01": "_o01_3126_045D",
+        "S02": "_o02_3126_03EF",
+        "S03": "_o03_3126_074E"
+      },
+      "consumer_contract": "void far (int,int,int,int,char far *)",
+      "canonical_source_refs": [
+        {
+          "source": "src/root/m1B73.asm",
+          "line": 44,
+          "text": "extrn\t_g_9148:byte"
+        },
+        {
+          "source": "src/root/m1B73.asm",
+          "line": 2008,
+          "text": "call dword ptr _g_9148"
+        },
+        {
+          "source": "src/root/m1CE2.c",
+          "line": 164,
+          "text": "extern void (far * near g_9148)(int left, int top, int right, int bottom, char far *buffer);"
+        },
+        {
+          "source": "src/root/m1CE2.c",
+          "line": 179,
+          "text": "g_9148(x, r->top, r->right, r->bottom, p);"
+        },
+        {
+          "source": "src/root/m1CE2.c",
+          "line": 295,
+          "text": "g_9148(x & ~7, y, right, y + 8, (char far *)save);"
+        },
+        {
+          "source": "src/root/m1CE2.c",
+          "line": 307,
+          "text": "g_9148(x & ~7, y, right, rem + y, (char far *)save);"
+        },
+        {
+          "source": "src/root/m259D.c",
+          "line": 42,
+          "text": "extern void (far * near g_9148)(int x0, int y0, int x1, int y1, char far *buffer);"
+        },
+        {
+          "source": "src/root/m259D.c",
+          "line": 83,
+          "text": "(*g_9148)(x & ~1, y, x1, y1, h);"
+        },
+        {
+          "source": "src/root/m259D.c",
+          "line": 94,
+          "text": "(*g_9148)(x & ~7, y, x1, y1, h);"
+        },
+        {
+          "source": "src/root/m2662.c",
+          "line": 52,
+          "text": "extern void (far * near g_9148)(int, int, int, int, char far *);"
+        },
+        {
+          "source": "src/root/m2662.c",
+          "line": 134,
+          "text": "(*g_9148)(r->left, r->top, r->right, r->bottom, buf);"
+        }
+      ]
+    },
+    {
+      "slot": 9,
+      "offset_from_owner": 36,
+      "historical_address": "0x914C",
+      "registered_name": "_g_914C",
+      "test_alias": "_g_914C",
+      "layout_symbol_grounding": "f_0250_0ADB: lcall [914C](x,y,far tile ptr,w,h) far function pointer (tile blitter, modes 2/3)",
+      "optional_import_join": {
+        "status": "not_loaded; ignored build/source-only report is not a probe prerequisite",
+        "accepted_storage_candidates": null,
+        "declaration_contexts": null
+      },
+      "provider_targets": {
+        "S00": "_o00_31AD_0CF9",
+        "S01": "_o01_3126_073C",
+        "S02": "_o02_3126_0505",
+        "S03": "_o03_3126_091F"
+      },
+      "consumer_contract": "void far (int,int,char far *,int,int); calls establish five arguments",
+      "canonical_source_refs": [
+        {
+          "source": "src/root/m0250.c",
+          "line": 403,
+          "text": "extern void (far * near g_914C)(int x, int y, char far *p, int w, int h);"
+        },
+        {
+          "source": "src/root/m0250.c",
+          "line": 414,
+          "text": "(*g_914C)(x & ~1, y, *fd_50F6_10EE + g_94E4 * 0x48, 12, 12);"
+        },
+        {
+          "source": "src/root/m0250.c",
+          "line": 417,
+          "text": "(*g_914C)(x & ~0xf, y, *fd_50F6_10EE + (g_94E4 << 5), 16, 16);"
+        },
+        {
+          "source": "src/root/m1B4E.asm",
+          "line": 8,
+          "text": "extrn\t_g_914C:byte"
+        },
+        {
+          "source": "src/root/m1B4E.asm",
+          "line": 155,
+          "text": "call dword ptr _g_914C"
+        },
+        {
+          "source": "src/root/m1CE2.c",
+          "line": 234,
+          "text": "extern void (far * near g_914C)();"
+        },
+        {
+          "source": "src/root/m1CE2.c",
+          "line": 264,
+          "text": "blit = (g_5A97 & 1) ? g_914C : g_9154;"
+        },
+        {
+          "source": "src/root/m1CE2.c",
+          "line": 269,
+          "text": "blit = g_914C;"
+        },
+        {
+          "source": "src/root/m208F.c",
+          "line": 134,
+          "text": "extern void (far * near g_914C)(int x, int y, char far *p, int w, int h);"
+        },
+        {
+          "source": "src/root/m208F.c",
+          "line": 143,
+          "text": "g_914C(r.left, r.top, *fd_50F6_46D2 + (n << 5), 8, 8);"
+        },
+        {
+          "source": "src/root/m208F.c",
+          "line": 147,
+          "text": "g_914C(r.left, r.top, *fd_50F6_46D2 + (n << 5), 16, 16);"
+        },
+        {
+          "source": "src/root/m208F.c",
+          "line": 156,
+          "text": "g_914C(x, y, *fd_50F6_46D2 + (n << 5), 8, 8);"
+        },
+        {
+          "source": "src/root/m208F.c",
+          "line": 158,
+          "text": "g_914C(x, y, *fd_50F6_46D2 + (n << 5), 8, 8);"
+        },
+        {
+          "source": "src/root/m208F.c",
+          "line": 162,
+          "text": "g_914C(x, y, *fd_50F6_46D2 + (n << 5), 16, 16);"
+        },
+        {
+          "source": "src/S04/m35F5.c",
+          "line": 101,
+          "text": "extern void (far * near g_914C)(int x, int y, char far *line, int width, int height);"
+        },
+        {
+          "source": "src/S04/m35F5.c",
+          "line": 298,
+          "text": "(*g_914C)(fd_50F6_3842.left + fd_50F6_3852, y, line, fd_50F6_3854 * g_8BD2, g_8BD4);"
+        },
+        {
+          "source": "src/S12/m384C.c",
+          "line": 429,
+          "text": "extern void (far * near g_914C)(int x, int y, char far *image, int width, int height);"
+        },
+        {
+          "source": "src/S12/m384C.c",
+          "line": 515,
+          "text": "(*g_914C)(fd_50F6_10D2.left + fd_50F6_38C0, y, gen, fd_50F6_3854 * fd_50F6_3856, fd_50F6_3858);"
+        }
+      ]
+    },
+    {
+      "slot": 10,
+      "offset_from_owner": 40,
+      "historical_address": "0x9150",
+      "registered_name": "_g_9150",
+      "test_alias": "_g_9150",
+      "layout_symbol_grounding": "f_1D8E_07F6: lcall [9150] (far code pointer, BSS)",
+      "optional_import_join": {
+        "status": "not_loaded; ignored build/source-only report is not a probe prerequisite",
+        "accepted_storage_candidates": null,
+        "declaration_contexts": null
+      },
+      "provider_targets": {
+        "S00": "_o00_31AD_0D06",
+        "S01": "_o01_3126_0749",
+        "S02": "_o02_3126_0512",
+        "S03": "_o03_3126_092C"
+      },
+      "consumer_contract": "void far (int,int,char far *,int,int)",
+      "canonical_source_refs": [
+        {
+          "source": "src/root/m1D8E.c",
+          "line": 23,
+          "text": "extern void (far * near g_9150)(int, int, char far *, int, int);"
+        },
+        {
+          "source": "src/root/m1D8E.c",
+          "line": 296,
+          "text": "g_9150(x, pieces[i].top, bits + (pieces[i].top - y) * rowbytes, width,"
+        },
+        {
+          "source": "src/root/m1D8E.c",
+          "line": 351,
+          "text": "g_9150(x, p->top, bits + (p->top - y) * rowbytes, width, p->bottom - p->top);"
+        },
+        {
+          "source": "src/root/m1D8E.c",
+          "line": 378,
+          "text": "g_9150(x, p->top, bits + (p->top - y) * rowbytes, width, p->bottom - p->top);"
+        }
+      ]
+    },
+    {
+      "slot": 11,
+      "offset_from_owner": 44,
+      "historical_address": "0x9154",
+      "registered_name": "_g_9154",
+      "test_alias": "_g_9154",
+      "layout_symbol_grounding": "GPutPacked: mov ax,[9154]; mov dx,[9156] (far code pointer, BSS)",
+      "optional_import_join": {
+        "status": "not_loaded; ignored build/source-only report is not a probe prerequisite",
+        "accepted_storage_candidates": null,
+        "declaration_contexts": null
+      },
+      "provider_targets": {
+        "S00": "_o00_31AD_1206",
+        "S01": "_o01_3126_0516",
+        "S02": "_o02_3126_0636",
+        "S03": "_o03_3126_0C11"
+      },
+      "consumer_contract": "void far (int,int,char far *,int,int)",
+      "canonical_source_refs": [
+        {
+          "source": "src/root/m1B4E.asm",
+          "line": 9,
+          "text": "extrn\t_g_9154:byte"
+        },
+        {
+          "source": "src/root/m1B4E.asm",
+          "line": 174,
+          "text": "call dword ptr _g_9154"
+        },
+        {
+          "source": "src/root/m1B4E.asm",
+          "line": 263,
+          "text": "call dword ptr _g_9154"
+        },
+        {
+          "source": "src/root/m1CE2.c",
+          "line": 235,
+          "text": "extern void (far * near g_9154)();"
+        },
+        {
+          "source": "src/root/m1CE2.c",
+          "line": 264,
+          "text": "blit = (g_5A97 & 1) ? g_914C : g_9154;"
+        },
+        {
+          "source": "src/root/m24AB.c",
+          "line": 150,
+          "text": "extern void (far * near g_9154)(int x, int y, char far *bits, int width, int height);"
+        },
+        {
+          "source": "src/root/m24AB.c",
+          "line": 164,
+          "text": "(*g_9154)(x, y, fd_50F6_392C.bits, fd_50F6_392C.width, fd_50F6_392C.height);"
+        }
+      ]
+    },
+    {
+      "slot": 12,
+      "offset_from_owner": 48,
+      "historical_address": "0x9158",
+      "registered_name": "_g_9158",
+      "test_alias": "_g_9158",
+      "layout_symbol_grounding": "f_1D8E_070E: lcall [9158] (far code pointer, BSS)",
+      "optional_import_join": {
+        "status": "not_loaded; ignored build/source-only report is not a probe prerequisite",
+        "accepted_storage_candidates": null,
+        "declaration_contexts": null
+      },
+      "provider_targets": {
+        "S00": "_o00_31AD_1213",
+        "S01": "_o01_3126_0523",
+        "S02": "_o02_3126_0643",
+        "S03": "_o03_3126_0C1E"
+      },
+      "consumer_contract": "void far (int,int,char far *,int,int)",
+      "canonical_source_refs": [
+        {
+          "source": "src/root/m1D8E.c",
+          "line": 21,
+          "text": "extern void (far * near g_9158)(int, int, char far *, int, int);"
+        },
+        {
+          "source": "src/root/m1D8E.c",
+          "line": 267,
+          "text": "g_9158(x, pieces[i].top, bits + (pieces[i].top - y) * rowbytes, width,"
+        },
+        {
+          "source": "src/root/m1D8E.c",
+          "line": 324,
+          "text": "g_9158(x, p->top, bits + (p->top - y) * rowbytes, width, p->bottom - p->top);"
+        },
+        {
+          "source": "src/root/m1D8E.c",
+          "line": 405,
+          "text": "g_9158(x, p->top, bits + (p->top - y) * rowbytes, width, p->bottom - p->top);"
+        }
+      ]
+    },
+    {
+      "slot": 13,
+      "offset_from_owner": 52,
+      "historical_address": "0x915C",
+      "registered_name": null,
+      "test_alias": "_g_915C",
+      "layout_symbol_grounding": null,
+      "optional_import_join": {
+        "status": "not_loaded; ignored build/source-only report is not a probe prerequisite",
+        "accepted_storage_candidates": null,
+        "declaration_contexts": null
+      },
+      "provider_targets": {
+        "S00": "_o00_31AD_062A",
+        "S01": "_o01_3126_0B26",
+        "S02": "_o02_3126_04C6",
+        "S03": "_o03_3126_08B8"
+      },
+      "consumer_contract": "provider mode-setter entries; no consumer call arity observed",
+      "canonical_source_refs": []
+    },
+    {
+      "slot": 14,
+      "offset_from_owner": 56,
+      "historical_address": "0x9160",
+      "registered_name": "_g_9160",
+      "test_alias": "_g_9160",
+      "layout_symbol_grounding": "module 1B73 at 1B73:0ED1: lcall [0x9160] (worker rootF)",
+      "optional_import_join": {
+        "status": "not_loaded; ignored build/source-only report is not a probe prerequisite",
+        "accepted_storage_candidates": null,
+        "declaration_contexts": null
+      },
+      "provider_targets": {
+        "S00": "_o00_31AD_062E",
+        "S01": "_o01_3126_0A20",
+        "S02": "_o02_3126_0490",
+        "S03": "_o03_3126_080A"
+      },
+      "consumer_contract": "indirect assembly caller/provider evidence; no canonical C prototype",
+      "canonical_source_refs": [
+        {
+          "source": "src/root/m1B73.asm",
+          "line": 45,
+          "text": "extrn\t_g_9160:byte"
+        },
+        {
+          "source": "src/root/m1B73.asm",
+          "line": 2028,
+          "text": "call dword ptr _g_9160"
+        }
+      ]
+    },
+    {
+      "slot": 15,
+      "offset_from_owner": 60,
+      "historical_address": "0x9164",
+      "registered_name": "_g_9164",
+      "test_alias": "_g_9164",
+      "layout_symbol_grounding": "module 1B73 at 1B73:0EB8: lcall [0x9164] (worker rootF)",
+      "optional_import_join": {
+        "status": "not_loaded; ignored build/source-only report is not a probe prerequisite",
+        "accepted_storage_candidates": null,
+        "declaration_contexts": null
+      },
+      "provider_targets": {
+        "S00": "_o00_31AD_0632",
+        "S01": "_o01_3126_0ACC",
+        "S02": "_o02_3126_04B4",
+        "S03": "_o03_3126_087E"
+      },
+      "consumer_contract": "indirect assembly caller/provider evidence; no canonical C prototype",
+      "canonical_source_refs": [
+        {
+          "source": "src/root/m1B73.asm",
+          "line": 46,
+          "text": "extrn\t_g_9164:byte"
+        },
+        {
+          "source": "src/root/m1B73.asm",
+          "line": 2018,
+          "text": "call dword ptr _g_9164"
+        }
+      ]
+    },
+    {
+      "slot": 16,
+      "offset_from_owner": 64,
+      "historical_address": "0x9168",
+      "registered_name": "_g_9168",
+      "test_alias": "_g_9168",
+      "layout_symbol_grounding": "module 1B73 at 1B73:0154: lcall [0x9168] (worker rootF)",
+      "optional_import_join": {
+        "status": "not_loaded; ignored build/source-only report is not a probe prerequisite",
+        "accepted_storage_candidates": null,
+        "declaration_contexts": null
+      },
+      "provider_targets": {
+        "S00": "_o00_31AD_0636",
+        "S01": "_o01_3126_0A7A",
+        "S02": "_o02_3126_04A2",
+        "S03": "_o03_3126_0844"
+      },
+      "consumer_contract": "indirect assembly caller/provider evidence; no canonical C prototype",
+      "canonical_source_refs": [
+        {
+          "source": "src/root/m1B73.asm",
+          "line": 47,
+          "text": "extrn\t_g_9168:byte"
+        },
+        {
+          "source": "src/root/m1B73.asm",
+          "line": 366,
+          "text": "call dword ptr _g_9168"
+        }
+      ]
+    },
+    {
+      "slot": 17,
+      "offset_from_owner": 68,
+      "historical_address": "0x916C",
+      "registered_name": "_g_916C",
+      "test_alias": "_g_916C",
+      "layout_symbol_grounding": "DoLaserFire (S22:39C7:0540): lcall [916C](x0,y0,x1,y1,color) line drawer far function pointer (companion of g_9134)",
+      "optional_import_join": {
+        "status": "not_loaded; ignored build/source-only report is not a probe prerequisite",
+        "accepted_storage_candidates": null,
+        "declaration_contexts": null
+      },
+      "provider_targets": {
+        "S00": "_o00_31AD_148C",
+        "S01": "_o01_3126_0C7A",
+        "S02": "_o02_3126_073A",
+        "S03": "_o03_3126_104D"
+      },
+      "consumer_contract": "void far (int,int,int,int,int)",
+      "canonical_source_refs": [
+        {
+          "source": "src/S22/m39C7.c",
+          "line": 177,
+          "text": "extern void (far * near g_916C)(int x0, int y0, int x1, int y1, int color);"
+        },
+        {
+          "source": "src/S22/m39C7.c",
+          "line": 217,
+          "text": "g_916C(ex, ey, sx, sy, f_1B4E_000D(3));"
+        },
+        {
+          "source": "src/S22/m39C7.c",
+          "line": 218,
+          "text": "g_916C(ex + 1, ey + 1, sx + 1, sy + 1, f_1B4E_000D(3));"
+        },
+        {
+          "source": "src/S22/m39C7.c",
+          "line": 230,
+          "text": "g_916C(ex, ey, sx, sy, f_1B4E_000D(3));"
+        },
+        {
+          "source": "src/S22/m39C7.c",
+          "line": 231,
+          "text": "g_916C(ex + 1, ey + 1, sx + 1, sy + 1, f_1B4E_000D(3));"
+        },
+        {
+          "source": "src/S24/m39C7.c",
+          "line": 192,
+          "text": "extern void (far * near g_916C)(int x0, int y0, int x1, int y1, int color);"
+        },
+        {
+          "source": "src/S24/m39C7.c",
+          "line": 273,
+          "text": "(*g_916C)(px, py, x, y, color);"
+        }
+      ]
+    },
+    {
+      "slot": 18,
+      "offset_from_owner": 72,
+      "historical_address": "0x9170",
+      "registered_name": "_g_9170",
+      "test_alias": "_g_9170",
+      "layout_symbol_grounding": "f_1D8E_0435: lcall [9170] (far code pointer, BSS)",
+      "optional_import_join": {
+        "status": "not_loaded; ignored build/source-only report is not a probe prerequisite",
+        "accepted_storage_candidates": null,
+        "declaration_contexts": null
+      },
+      "provider_targets": {
+        "S00": "_o00_31AD_1499",
+        "S01": "_o01_3126_0C87",
+        "S02": "_o02_3126_0747",
+        "S03": "_o03_3126_105A"
+      },
+      "consumer_contract": "void far (int,int,int,int,int)",
+      "canonical_source_refs": [
+        {
+          "source": "src/root/m1D8E.c",
+          "line": 18,
+          "text": "extern void (far * near g_9170)(int, int, int, int, int);"
+        },
+        {
+          "source": "src/root/m1D8E.c",
+          "line": 210,
+          "text": "g_9170(x1, y1, x2, y2, color);"
+        },
+        {
+          "source": "src/root/m1D8E.c",
+          "line": 244,
+          "text": "g_9170(p[0].x, p[0].y, p[1].x, p[1].y, color);"
+        }
+      ]
+    },
+    {
+      "slot": 19,
+      "offset_from_owner": 76,
+      "historical_address": "0x9174",
+      "registered_name": "_g_9174",
+      "test_alias": "_g_9174",
+      "layout_symbol_grounding": "f_1CE2_0104: lcall [9174] (far code pointer, BSS)",
+      "optional_import_join": {
+        "status": "not_loaded; ignored build/source-only report is not a probe prerequisite",
+        "accepted_storage_candidates": null,
+        "declaration_contexts": null
+      },
+      "provider_targets": {
+        "S00": "_o00_31AD_0004",
+        "S01": "_o01_3126_01CA",
+        "S02": "_o02_3126_0096",
+        "S03": "_o03_3126_01F8"
+      },
+      "consumer_contract": "void far (int,int,int,int,int)",
+      "canonical_source_refs": [
+        {
+          "source": "src/root/m1CE2.c",
+          "line": 49,
+          "text": "extern void (far * near g_9174)(int left, int top, int right, int bottom, int mode);"
+        },
+        {
+          "source": "src/root/m1CE2.c",
+          "line": 53,
+          "text": "g_9174(r->left, r->top, r->right, r->bottom, mode);"
+        }
+      ]
+    },
+    {
+      "slot": 20,
+      "offset_from_owner": 80,
+      "historical_address": "0x9178",
+      "registered_name": "_g_9178",
+      "test_alias": "_g_9178",
+      "layout_symbol_grounding": "f_1C62_0090: lcall [9178] (far code pointer, BSS)",
+      "optional_import_join": {
+        "status": "not_loaded; ignored build/source-only report is not a probe prerequisite",
+        "accepted_storage_candidates": null,
+        "declaration_contexts": null
+      },
+      "provider_targets": {
+        "S00": "_o00_31AD_1481",
+        "S01": "_o01_3126_0F78",
+        "S02": "_o02_3126_0051",
+        "S03": "_o03_3126_01B3"
+      },
+      "consumer_contract": "void far (void)",
+      "canonical_source_refs": [
+        {
+          "source": "src/root/m1C62.c",
+          "line": 63,
+          "text": "extern void (far * near g_9178)(void);"
+        },
+        {
+          "source": "src/root/m1C62.c",
+          "line": 68,
+          "text": "g_9178();"
+        }
+      ]
+    },
+    {
+      "slot": 21,
+      "offset_from_owner": 84,
+      "historical_address": "0x917C",
+      "registered_name": "_g_917C",
+      "test_alias": "_g_917C",
+      "layout_symbol_grounding": "f_0250_0ADB: lcall [917C](x,y,(tile-300h)<<5) far function pointer (tile blitter, mode 1)",
+      "optional_import_join": {
+        "status": "not_loaded; ignored build/source-only report is not a probe prerequisite",
+        "accepted_storage_candidates": null,
+        "declaration_contexts": null
+      },
+      "provider_targets": {
+        "S00": "_o00_31AD_0647",
+        "S01": "_o01_3126_0F66",
+        "S02": "_o02_3126_084E",
+        "S03": "_o03_3126_1180"
+      },
+      "consumer_contract": "void far (int,int,int)",
+      "canonical_source_refs": [
+        {
+          "source": "src/root/m0250.c",
+          "line": 402,
+          "text": "extern void (far * near g_917C)(int x, int y, int offset);"
+        },
+        {
+          "source": "src/root/m0250.c",
+          "line": 411,
+          "text": "(*g_917C)(x, y, (g_94E4 - 0x300) << 5);"
+        },
+        {
+          "source": "src/root/m208F.c",
+          "line": 132,
+          "text": "extern void (far * near g_917C)(int x, int y, int offset);"
+        },
+        {
+          "source": "src/root/m208F.c",
+          "line": 145,
+          "text": "g_917C(r.left, r.top, (n << g_62C0) + g_62BE);"
+        },
+        {
+          "source": "src/root/m208F.c",
+          "line": 160,
+          "text": "g_917C(x, y, (n << g_62C0) + g_62BE);"
+        }
+      ]
+    },
+    {
+      "slot": 22,
+      "offset_from_owner": 88,
+      "historical_address": "0x9180",
+      "registered_name": null,
+      "test_alias": "_g_9180",
+      "layout_symbol_grounding": null,
+      "optional_import_join": {
+        "status": "not_loaded; ignored build/source-only report is not a probe prerequisite",
+        "accepted_storage_candidates": null,
+        "declaration_contexts": null
+      },
+      "provider_targets": {
+        "S00": "_o00_31AD_18BA",
+        "S01": "_o01_3126_0F6F",
+        "S02": "_o02_3126_0857",
+        "S03": "_o03_3126_1189"
+      },
+      "consumer_contract": "S00 provider reads far source pointer and two words; no caller upper arity bound",
+      "canonical_source_refs": []
+    },
+    {
+      "slot": 23,
+      "offset_from_owner": 92,
+      "historical_address": "0x9184",
+      "registered_name": "_g_9184",
+      "test_alias": "_g_9184",
+      "layout_symbol_grounding": "module 1B73 at 1B73:017B: lcall [0x9184] (worker rootF)",
+      "optional_import_join": {
+        "status": "not_loaded; ignored build/source-only report is not a probe prerequisite",
+        "accepted_storage_candidates": null,
+        "declaration_contexts": null
+      },
+      "provider_targets": {
+        "S00": "_o00_31AD_063C",
+        "S01": "_o01_3126_0C53",
+        "S02": "_o02_3126_04D8",
+        "S03": "_o03_3126_08F2"
+      },
+      "consumer_contract": "void far (int)",
+      "canonical_source_refs": [
+        {
+          "source": "src/root/m1B73.asm",
+          "line": 48,
+          "text": "extrn\t_g_9184:byte"
+        },
+        {
+          "source": "src/root/m1B73.asm",
+          "line": 383,
+          "text": "call dword ptr _g_9184"
+        }
+      ]
+    },
+    {
+      "slot": 24,
+      "offset_from_owner": 96,
+      "historical_address": "0x9188",
+      "registered_name": "_g_9188",
+      "test_alias": "_g_9188",
+      "layout_symbol_grounding": "f_23E6_07A2: lcall [9188] (far code pointer, BSS; 6-arg rect blit)",
+      "optional_import_join": {
+        "status": "not_loaded; ignored build/source-only report is not a probe prerequisite",
+        "accepted_storage_candidates": null,
+        "declaration_contexts": null
+      },
+      "provider_targets": {
+        "S00": "_o00_31AD_1950",
+        "S01": "_o01_3126_109D",
+        "S02": "_o02_3126_0860",
+        "S03": "_o03_3126_1192"
+      },
+      "consumer_contract": "void far (int,int,int,int,int,int)",
+      "canonical_source_refs": [
+        {
+          "source": "src/root/m23E6.c",
+          "line": 324,
+          "text": "extern void (far * near g_9188)(int left, int top, int right, int bottom, int x, int y);"
+        },
+        {
+          "source": "src/root/m23E6.c",
+          "line": 342,
+          "text": "g_9188(r.left, r.top + h, r.right, r.bottom, r.left, r.top);"
+        },
+        {
+          "source": "src/root/m23E6.c",
+          "line": 372,
+          "text": "g_9188(r.left, r.top - 1, r.right, r.bottom - h - 1, r.left, h + r.top - 1);"
+        },
+        {
+          "source": "src/S01/m3126.asm",
+          "line": 54,
+          "text": "extrn\t_g_9188:byte"
+        },
+        {
+          "source": "src/S01/m3126.asm",
+          "line": 171,
+          "text": "lea bx, _g_9188"
+        },
+        {
+          "source": "src/S01/m3126.asm",
+          "line": 236,
+          "text": "lea bx, _g_9188"
+        },
+        {
+          "source": "src/S01/m3126.asm",
+          "line": 298,
+          "text": "lea bx, _g_9188"
+        },
+        {
+          "source": "src/S16/m384C.c",
+          "line": 134,
+          "text": "extern void (far * near g_9188)(int left, int top, int right, int bottom, int x, int y);"
+        },
+        {
+          "source": "src/S16/m384C.c",
+          "line": 199,
+          "text": "(*g_9188)(rect.left, rect.top + 1, rect.right, rect.bottom, rect.left, rect.top);"
+        }
+      ]
+    }
+  ],
+  "symbolic_pointer": {
+    "source": "src/root/m1B4E.asm",
+    "current_source_has_symbolic_initializer": true,
+    "canonical_source_is_compared_directly_without_an_initializer_edit": true,
+    "symbolic_source": {
+      "obj_sha256": "01d65e93a1e67f7cec6ccfe74e9ba8502ecdc894f2e97f6960f8a0158be48640",
+      "record_counts": {
+        "THEADR": 1,
+        "COMENT": 1,
+        "MODEND16": 1,
+        "EXTDEF": 1,
+        "PUBDEF16": 3,
+        "LNAMES": 1,
+        "SEGDEF16": 2,
+        "GRPDEF": 1,
+        "FIXUPP16": 3,
+        "LEDATA16": 9,
+        "LIDATA16": 12
+      },
+      "segments": {
+        "segment_defs": [
+          {
+            "index": 1,
+            "name": "_DATA",
+            "class": "DATA",
+            "length": 1545,
+            "alignment_code": 2,
+            "alignment": "word",
+            "combine_code": 2,
+            "combine": "public",
+            "big": false,
+            "use_32bit_offset": false,
+            "frame": null,
+            "offset": null,
+            "overlay_index": 1,
+            "acbp": 72
+          },
+          {
+            "index": 2,
+            "name": "VIDEO_TEXT",
+            "class": "CODE",
+            "length": 586,
+            "alignment_code": 2,
+            "alignment": "word",
+            "combine_code": 2,
+            "combine": "public",
+            "big": false,
+            "use_32bit_offset": false,
+            "frame": null,
+            "offset": null,
+            "overlay_index": 1,
+            "acbp": 72
+          }
+        ],
+        "segment_lengths": {
+          "_DATA": 1545,
+          "VIDEO_TEXT": 586
+        },
+        "nonempty_segments": {
+          "_DATA": 1545,
+          "VIDEO_TEXT": 586
+        },
+        "live_code_data_const_bss": {
+          "_DATA": 1545,
+          "VIDEO_TEXT": 586
+        }
+      },
+      "publics": [
+        {
+          "name": "_g_4220",
+          "segment": "_DATA",
+          "offset": 1280
+        },
+        {
+          "name": "_g_41C0",
+          "segment": "_DATA",
+          "offset": 1184
+        },
+        {
+          "name": "_g_3D20",
+          "segment": "_DATA",
+          "offset": 0
+        },
+        {
+          "name": "_g_3DA0",
+          "segment": "_DATA",
+          "offset": 128
+        },
+        {
+          "name": "_g_3DB0",
+          "segment": "_DATA",
+          "offset": 144
+        },
+        {
+          "name": "_g_3DA2",
+          "segment": "_DATA",
+          "offset": 130
+        },
+        {
+          "name": "_g_3DC1",
+          "segment": "_DATA",
+          "offset": 161
+        },
+        {
+          "name": "_g_3DB2",
+          "segment": "_DATA",
+          "offset": 146
+        },
+        {
+          "name": "_g_3DE0",
+          "segment": "_DATA",
+          "offset": 192
+        },
+        {
+          "name": "_g_3DA4",
+          "segment": "_DATA",
+          "offset": 132
+        },
+        {
+          "name": "_g_3DE1",
+          "segment": "_DATA",
+          "offset": 193
+        },
+        {
+          "name": "_g_3DD2",
+          "segment": "_DATA",
+          "offset": 178
+        },
+        {
+          "name": "_g_3DB4",
+          "segment": "_DATA",
+          "offset": 148
+        },
+        {
+          "name": "_g_3DF1",
+          "segment": "_DATA",
+          "offset": 209
+        },
+        {
+          "name": "_g_3DE2",
+          "segment": "_DATA",
+          "offset": 194
+        },
+        {
+          "name": "_g_3DF2",
+          "segment": "_DATA",
+          "offset": 210
+        },
+        {
+          "name": "_g_3DE3",
+          "segment": "_DATA",
+          "offset": 195
+        },
+        {
+          "name": "_g_3DD4",
+          "segment": "_DATA",
+          "offset": 180
+        },
+        {
+          "name": "_g_3DB6",
+          "segment": "_DATA",
+          "offset": 150
+        },
+        {
+          "name": "_g_3DE4",
+          "segment": "_DATA",
+          "offset": 196
+        },
+        {
+          "name": "_g_3DA8",
+          "segment": "_DATA",
+          "offset": 136
+        },
+        {
+          "name": "_g_3DF4",
+          "segment": "_DATA",
+          "offset": 212
+        },
+        {
+          "name": "_g_3DE5",
+          "segment": "_DATA",
+          "offset": 197
+        },
+        {
+          "name": "_g_3DD6",
+          "segment": "_DATA",
+          "offset": 182
+        },
+        {
+          "name": "_g_3DD8",
+          "segment": "_DATA",
+          "offset": 184
+        },
+        {
+          "name": "_g_3DF8",
+          "segment": "_DATA",
+          "offset": 216
+        },
+        {
+          "name": "_g_3DAA",
+          "segment": "_DATA",
+          "offset": 138
+        },
+        {
+          "name": "_g_3DCA",
+          "segment": "_DATA",
+          "offset": 170
+        },
+        {
+          "name": "_g_3DAC",
+          "segment": "_DATA",
+          "offset": 140
+        },
+        {
+          "name": "_g_3DDA",
+          "segment": "_DATA",
+          "offset": 186
+        },
+        {
+          "name": "_g_3DEA",
+          "segment": "_DATA",
+          "offset": 202
+        },
+        {
+          "name": "_g_3DAE",
+          "segment": "_DATA",
+          "offset": 142
+        },
+        {
+          "name": "_g_3DDC",
+          "segment": "_DATA",
+          "offset": 188
+        },
+        {
+          "name": "_g_3DEC",
+          "segment": "_DATA",
+          "offset": 204
+        },
+        {
+          "name": "_g_3DFC",
+          "segment": "_DATA",
+          "offset": 220
+        },
+        {
+          "name": "_g_3DED",
+          "segment": "_DATA",
+          "offset": 205
+        },
+        {
+          "name": "_g_3DDE",
+          "segment": "_DATA",
+          "offset": 190
+        },
+        {
+          "name": "_g_3DEE",
+          "segment": "_DATA",
+          "offset": 206
+        },
+        {
+          "name": "_g_3DEF",
+          "segment": "_DATA",
+          "offset": 207
+        },
+        {
+          "name": "_f_1B4E_0110",
+          "segment": "VIDEO_TEXT",
+          "offset": 260
+        },
+        {
+          "name": "_f_1B4E_0240",
+          "segment": "VIDEO_TEXT",
+          "offset": 564
+        },
+        {
+          "name": "_f_1B4E_0025",
+          "segment": "VIDEO_TEXT",
+          "offset": 25
+        },
+        {
+          "name": "_f_1B4E_0081",
+          "segment": "VIDEO_TEXT",
+          "offset": 117
+        },
+        {
+          "name": "_f_1B4E_0235",
+          "segment": "VIDEO_TEXT",
+          "offset": 553
+        },
+        {
+          "name": "_f_1B4E_0228",
+          "segment": "VIDEO_TEXT",
+          "offset": 540
+        },
+        {
+          "name": "_f_1B4E_0165",
+          "segment": "VIDEO_TEXT",
+          "offset": 345
+        },
+        {
+          "name": "_f_1B4E_0177",
+          "segment": "VIDEO_TEXT",
+          "offset": 363
+        },
+        {
+          "name": "_f_1B4E_01A1",
+          "segment": "VIDEO_TEXT",
+          "offset": 405
+        },
+        {
+          "name": "_f_1B4E_000C",
+          "segment": "VIDEO_TEXT",
+          "offset": 0
+        },
+        {
+          "name": "_f_1B4E_000D",
+          "segment": "VIDEO_TEXT",
+          "offset": 1
+        },
+        {
+          "name": "_f_1B4E_003B",
+          "segment": "VIDEO_TEXT",
+          "offset": 47
+        },
+        {
+          "name": "_f_1B4E_015B",
+          "segment": "VIDEO_TEXT",
+          "offset": 335
+        },
+        {
+          "name": "_f_1B4E_005E",
+          "segment": "VIDEO_TEXT",
+          "offset": 82
+        },
+        {
+          "name": "_f_1B4E_01AE",
+          "segment": "VIDEO_TEXT",
+          "offset": 418
+        },
+        {
+          "name": "_f_1B4E_00CE",
+          "segment": "VIDEO_TEXT",
+          "offset": 194
+        },
+        {
+          "name": "_fd_55B3_3DE6",
+          "segment": "_DATA",
+          "offset": 198
+        },
+        {
+          "name": "_fd_55B3_3DE8",
+          "segment": "_DATA",
+          "offset": 200
+        }
+      ],
+      "external_symbols": [
+        "_g_9154",
+        "_g_9128",
+        "_g_914C",
+        "_f_1FBD_0000"
+      ],
+      "groups": [
+        {
+          "index": 1,
+          "name": "DGROUP",
+          "segment_indices": [
+            1
+          ],
+          "segments": [
+            "_DATA"
+          ]
+        }
+      ],
+      "field_fixups": [
+        {
+          "segment": "_DATA",
+          "offset": 216,
+          "width": 4,
+          "loc": "pointer32",
+          "self_relative": false,
+          "target_kind": "external",
+          "target": "_g_9128",
+          "displacement": 0
+        }
+      ],
+      "source_declaration_lines": [
+        "extrn\t_g_9128:byte"
+      ]
+    },
+    "wrong_symbolic_base_negative": {
+      "obj_sha256": "c1c96239784cf28aca262187b05fd755c9a6e7589127251d14f14d4d9a3831d9",
+      "record_counts": {
+        "THEADR": 1,
+        "COMENT": 1,
+        "MODEND16": 1,
+        "EXTDEF": 1,
+        "PUBDEF16": 3,
+        "LNAMES": 1,
+        "SEGDEF16": 2,
+        "GRPDEF": 1,
+        "FIXUPP16": 3,
+        "LEDATA16": 9,
+        "LIDATA16": 12
+      },
+      "field_fixups": [
+        {
+          "segment": "_DATA",
+          "offset": 216,
+          "width": 4,
+          "loc": "pointer32",
+          "self_relative": false,
+          "target_kind": "external",
+          "target": "_g_9128",
+          "displacement": 4
+        }
+      ]
+    },
+    "field": {
+      "public": "_g_3DF8",
+      "segment": "_DATA",
+      "offset": 216,
+      "offset_hex": "0x00D8",
+      "width": 4,
+      "bytes_by_variant": {
+        "symbolic_candidate": "00000000",
+        "wrong_symbolic_base_negative": "00000000"
+      }
+    },
+    "symbolic_vs_wrong_base_negative": {
+      "segment_byte_differences": {
+        "_DATA": [],
+        "VIDEO_TEXT": []
+      },
+      "live_code_bytes_identical": true,
+      "live_data_bytes_identical": true,
+      "fixup_delta": {
+        "wrong_base_only": [
+          {
+            "displacement": 4,
+            "loc": "pointer32",
+            "offset": 216,
+            "segment": "_DATA",
+            "self_relative": false,
+            "target": "_g_9128",
+            "target_kind": "external",
+            "width": 4
+          }
+        ],
+        "symbolic_candidate_only": [
+          {
+            "displacement": 0,
+            "loc": "pointer32",
+            "offset": 216,
+            "segment": "_DATA",
+            "self_relative": false,
+            "target": "_g_9128",
+            "target_kind": "external",
+            "width": 4
+          }
+        ]
+      },
+      "publics_identical": true,
+      "externals_identical": true,
+      "groups_identical": true,
+      "segment_defs_identical": true,
+      "debug_records": {
+        "candidate_codeview_or_linnum_records": {},
+        "negative_codeview_or_linnum_records": {},
+        "candidate_debug_segments": [],
+        "negative_debug_segments": [],
+        "any_debug_metadata_present": false
+      }
+    }
+  },
+  "cases": [
+    {
+      "linker": "rtlink400",
+      "case": "positive",
+      "expected": "PASS",
+      "actual": "PASS",
+      "detailed_expected": "PASS",
+      "detailed_actual": "PASS",
+      "passed": true,
+      "map_contract_passed": true,
+      "alias_offsets": {
+        "g_9128": 0,
+        "g_912C": 4,
+        "g_9130": 8,
+        "g_9134": 12,
+        "g_9138": 16,
+        "g_913C": 20,
+        "g_9140": 24,
+        "g_9144": 28,
+        "g_9148": 32,
+        "g_914C": 36,
+        "g_9150": 40,
+        "g_9154": 44,
+        "g_9158": 48,
+        "g_915C": 52,
+        "g_9160": 56,
+        "g_9164": 60,
+        "g_9168": 64,
+        "g_916C": 68,
+        "g_9170": 72,
+        "g_9174": 76,
+        "g_9178": 80,
+        "g_917C": 84,
+        "g_9180": 88,
+        "g_9184": 92,
+        "g_9188": 96
+      }
+    },
+    {
+      "linker": "rtlink400",
+      "case": "wrong_alias_offset",
+      "expected": "FAIL",
+      "actual": "FAIL",
+      "detailed_expected": "FAIL g_9188",
+      "detailed_actual": "FAIL g_9188",
+      "passed": true,
+      "map_contract_passed": null,
+      "alias_offsets": {
+        "g_9128": 0,
+        "g_912C": 4,
+        "g_9130": 8,
+        "g_9134": 12,
+        "g_9138": 16,
+        "g_913C": 20,
+        "g_9140": 24,
+        "g_9144": 28,
+        "g_9148": 32,
+        "g_914C": 36,
+        "g_9150": 40,
+        "g_9154": 44,
+        "g_9158": 48,
+        "g_915C": 52,
+        "g_9160": 56,
+        "g_9164": 60,
+        "g_9168": 64,
+        "g_916C": 68,
+        "g_9170": 72,
+        "g_9174": 76,
+        "g_9178": 80,
+        "g_917C": 84,
+        "g_9180": 88,
+        "g_9184": 92,
+        "g_9188": 94
+      }
+    },
+    {
+      "linker": "rtlink400",
+      "case": "nonzero_initialized_owner",
+      "expected": "FAIL",
+      "actual": "FAIL",
+      "detailed_expected": "FAIL MSC_startup_near_zero",
+      "detailed_actual": "FAIL MSC_startup_near_zero",
+      "passed": true,
+      "map_contract_passed": null,
+      "alias_offsets": {
+        "g_9128": 0,
+        "g_912C": 4,
+        "g_9130": 8,
+        "g_9134": 12,
+        "g_9138": 16,
+        "g_913C": 20,
+        "g_9140": 24,
+        "g_9144": 28,
+        "g_9148": 32,
+        "g_914C": 36,
+        "g_9150": 40,
+        "g_9154": 44,
+        "g_9158": 48,
+        "g_915C": 52,
+        "g_9160": 56,
+        "g_9164": 60,
+        "g_9168": 64,
+        "g_916C": 68,
+        "g_9170": 72,
+        "g_9174": 76,
+        "g_9178": 80,
+        "g_917C": 84,
+        "g_9180": 88,
+        "g_9184": 92,
+        "g_9188": 96
+      }
+    },
+    {
+      "linker": "rtlink400",
+      "case": "wrong_g3df8_base",
+      "expected": "FAIL",
+      "actual": "FAIL",
+      "detailed_expected": "FAIL symbolic_table_pointer",
+      "detailed_actual": "FAIL symbolic_table_pointer",
+      "passed": true,
+      "map_contract_passed": null,
+      "alias_offsets": {
+        "g_9128": 0,
+        "g_912C": 4,
+        "g_9130": 8,
+        "g_9134": 12,
+        "g_9138": 16,
+        "g_913C": 20,
+        "g_9140": 24,
+        "g_9144": 28,
+        "g_9148": 32,
+        "g_914C": 36,
+        "g_9150": 40,
+        "g_9154": 44,
+        "g_9158": 48,
+        "g_915C": 52,
+        "g_9160": 56,
+        "g_9164": 60,
+        "g_9168": 64,
+        "g_916C": 68,
+        "g_9170": 72,
+        "g_9174": 76,
+        "g_9178": 80,
+        "g_917C": 84,
+        "g_9180": 88,
+        "g_9184": 92,
+        "g_9188": 96
+      }
+    },
+    {
+      "linker": "rtlink610",
+      "case": "positive",
+      "expected": "PASS",
+      "actual": "PASS",
+      "detailed_expected": "PASS",
+      "detailed_actual": "PASS",
+      "passed": true,
+      "map_contract_passed": true,
+      "alias_offsets": {
+        "g_9128": 0,
+        "g_912C": 4,
+        "g_9130": 8,
+        "g_9134": 12,
+        "g_9138": 16,
+        "g_913C": 20,
+        "g_9140": 24,
+        "g_9144": 28,
+        "g_9148": 32,
+        "g_914C": 36,
+        "g_9150": 40,
+        "g_9154": 44,
+        "g_9158": 48,
+        "g_915C": 52,
+        "g_9160": 56,
+        "g_9164": 60,
+        "g_9168": 64,
+        "g_916C": 68,
+        "g_9170": 72,
+        "g_9174": 76,
+        "g_9178": 80,
+        "g_917C": 84,
+        "g_9180": 88,
+        "g_9184": 92,
+        "g_9188": 96
+      }
+    },
+    {
+      "linker": "rtlink610",
+      "case": "wrong_alias_offset",
+      "expected": "FAIL",
+      "actual": "FAIL",
+      "detailed_expected": "FAIL g_9188",
+      "detailed_actual": "FAIL g_9188",
+      "passed": true,
+      "map_contract_passed": null,
+      "alias_offsets": {
+        "g_9128": 0,
+        "g_912C": 4,
+        "g_9130": 8,
+        "g_9134": 12,
+        "g_9138": 16,
+        "g_913C": 20,
+        "g_9140": 24,
+        "g_9144": 28,
+        "g_9148": 32,
+        "g_914C": 36,
+        "g_9150": 40,
+        "g_9154": 44,
+        "g_9158": 48,
+        "g_915C": 52,
+        "g_9160": 56,
+        "g_9164": 60,
+        "g_9168": 64,
+        "g_916C": 68,
+        "g_9170": 72,
+        "g_9174": 76,
+        "g_9178": 80,
+        "g_917C": 84,
+        "g_9180": 88,
+        "g_9184": 92,
+        "g_9188": 94
+      }
+    },
+    {
+      "linker": "rtlink610",
+      "case": "nonzero_initialized_owner",
+      "expected": "FAIL",
+      "actual": "FAIL",
+      "detailed_expected": "FAIL MSC_startup_near_zero",
+      "detailed_actual": "FAIL MSC_startup_near_zero",
+      "passed": true,
+      "map_contract_passed": null,
+      "alias_offsets": {
+        "g_9128": 0,
+        "g_912C": 4,
+        "g_9130": 8,
+        "g_9134": 12,
+        "g_9138": 16,
+        "g_913C": 20,
+        "g_9140": 24,
+        "g_9144": 28,
+        "g_9148": 32,
+        "g_914C": 36,
+        "g_9150": 40,
+        "g_9154": 44,
+        "g_9158": 48,
+        "g_915C": 52,
+        "g_9160": 56,
+        "g_9164": 60,
+        "g_9168": 64,
+        "g_916C": 68,
+        "g_9170": 72,
+        "g_9174": 76,
+        "g_9178": 80,
+        "g_917C": 84,
+        "g_9180": 88,
+        "g_9184": 92,
+        "g_9188": 96
+      }
+    },
+    {
+      "linker": "rtlink610",
+      "case": "wrong_g3df8_base",
+      "expected": "FAIL",
+      "actual": "FAIL",
+      "detailed_expected": "FAIL symbolic_table_pointer",
+      "detailed_actual": "FAIL symbolic_table_pointer",
+      "passed": true,
+      "map_contract_passed": null,
+      "alias_offsets": {
+        "g_9128": 0,
+        "g_912C": 4,
+        "g_9130": 8,
+        "g_9134": 12,
+        "g_9138": 16,
+        "g_913C": 20,
+        "g_9140": 24,
+        "g_9144": 28,
+        "g_9148": 32,
+        "g_914C": 36,
+        "g_9150": 40,
+        "g_9154": 44,
+        "g_9158": 48,
+        "g_915C": 52,
+        "g_9160": 56,
+        "g_9164": 60,
+        "g_9168": 64,
+        "g_916C": 68,
+        "g_9170": 72,
+        "g_9174": 76,
+        "g_9178": 80,
+        "g_917C": 84,
+        "g_9180": 88,
+        "g_9184": 92,
+        "g_9188": 96
+      }
+    }
+  ],
+  "required_cases": {
+    "positive": "PASS",
+    "wrong_alias_offset": "FAIL",
+    "nonzero_initialized_owner": "FAIL",
+    "wrong_g3df8_base": "FAIL"
+  },
+  "root_review": {
+    "reviewer": "root",
+    "basis": "Source reset writes 25 two-word slots; source copy moves 50 words; all four driver dispatch tables have 25 far pointers. All 23 registered views join to 4-byte slots within one typed near array. Clean MSC-startup fixtures verify all slots, source-shaped copy/reset and shifted-layout offset+segment pointer relocation on both linkers, with wrong last alias, nonzero owner and pointer+4 contrasts. Canonical m1B4E pointer is already symbolic and needs no source edit.",
+    "production_context": "The data-only provider uses /AL /Os /Gs without debug emission. The build verifies the exact single near COMDEF extent, zero initialized/code bytes, zero publics and fixups and no other externals. The test provider uses /Zi; only debug metadata and type indices differ, not storage extent or pointer representation.",
+    "limits": "Original COMDEF TU/order/padding, wider SS/ES frame dependencies and whole-game physical-driver integration remain unclaimed.",
+    "original_startup": "Accepted MSC startup clears [DGROUP:8B9E,94F0) before main. The source-access-derived callback array [9128,918C) is fully inside it. Runtime fixtures verify the equivalent near-communal zero initialization under both independently laid out linkers.",
+    "reproducer_output": "The probe writes candidate contracts only to ignored scratch; it never rewrites an admitted packet. The rerun after relocating that output preserves all eight runtime outcomes."
+  },
+  "denied_oracle_reads": [],
+  "original_startup_anchor": {
+    "path": "work/source-only-dos/queue-lifetime-contract-v1.json",
+    "sha256": "44b4f2afca0988722d1ff10df933771569c61cc02cd8f11b20ff4ffe8a8af97e",
+    "size": 6627
+  }
+}

@@ -1,0 +1,620 @@
+{
+  "schema": "simant-dos-strict-static-review-v1",
+  "function": "win_UnlockWin",
+  "status": "BEHAVIOR_EXACT_CONFIRMED",
+  "registered_evidence": {
+    "path": "evidence/behavior/functions/win_UnlockWin/contracts/window-valid-v1/evidence.json",
+    "sha256": "e9ec0087a5658073c7bb63b6ee6437936905936d85b6a8c5cb0ac8e523da608d",
+    "size": 11870
+  },
+  "registered_source": {
+    "path": "evidence/behavior/functions/win_UnlockWin/contracts/window-valid-v1/module.c",
+    "sha256": "23aa124a97a2f213fcf99d0f3e9790e2a35813ee5e62d338f7ef205c5b03acc0",
+    "whole_module": true,
+    "module": "root:23AE"
+  },
+  "worker_receipt": {
+    "path": "build/workers/dos_static_unlock/win_UnlockWin.json",
+    "sha256": "c5f80cecf77550ccab0c57686bbfd3d47de1c85cd537e18b09417bbe1d829fda",
+    "size": 21754
+  },
+  "audit": {
+    "schema": "simant-strict-static-completeness-v1",
+    "function": "win_UnlockWin",
+    "status": "BEHAVIOR_EXACT_CONFIRMED",
+    "source": {
+      "path": "evidence/behavior/functions/win_UnlockWin/contracts/window-valid-v1/module.c",
+      "sha256": "23aa124a97a2f213fcf99d0f3e9790e2a35813ee5e62d338f7ef205c5b03acc0"
+    },
+    "registry_evidence": {
+      "path": "evidence/behavior/functions/win_UnlockWin/contracts/window-valid-v1/evidence.json",
+      "sha256": "e9ec0087a5658073c7bb63b6ee6437936905936d85b6a8c5cb0ac8e523da608d"
+    },
+    "inputs": [
+      {
+        "path": "evidence/behavior/manifest.json",
+        "sha256": "dae79bdf74d7660e7e2eb47e8b463a9576c8d74a8e6ccd9e91af6d51f871ecea",
+        "role": "registry entry binding the function to evidence.json"
+      },
+      {
+        "path": "src/root/m171C.c",
+        "sha256": "31bd9caa243220db2bd1ba940ac8fae7f5d189b2ec95f1662918e9ca2160b10e",
+        "role": "pinned implementations and ABI types for the four Ralloc helper boundaries"
+      },
+      {
+        "path": "layout/symbols.json",
+        "sha256": "0f5dd5b0a211945a97782cfccdb9bb31b0dfd07fcde5df4d4f9486b487eb0125",
+        "role": "registered addresses for win_handles and win_offsets"
+      },
+      {
+        "path": "layout/oracle.lock.json",
+        "sha256": "2c6d9e98c688621ad49a08c78d0e0968f4076b036be56ec0738217b533ccde13",
+        "role": "oracle identity lock"
+      },
+      {
+        "path": "assets/SIMANT.EXE",
+        "sha256": "aa0596c6766322a8229ee3c36e57048c92adc82d50fbe2ef37afb8b85fcf4f11",
+        "role": "original disassembly research source"
+      },
+      {
+        "path": "evidence/behavior/functions/win_UnlockWin/contracts/window-valid-v1/run.json",
+        "sha256": "deaadf40ca4c5043ddc3966cad1bd77c354fbd12fc7c1fdcf47a6bd3f65a9eba",
+        "role": "existing differential run and finite contract record"
+      },
+      {
+        "path": "evidence/behavior/functions/win_UnlockWin/contracts/window-valid-v1/negative-controls.json",
+        "sha256": "b02cd5e78c67ff81ec099d4fcf3d3cf04c371b65ed72fa8f85627f7a3923a8b3",
+        "role": "existing compiled semantic negative control"
+      },
+      {
+        "path": "evidence/behavior/functions/win_UnlockWin/contracts/window-valid-v1/contract-review.json",
+        "sha256": "3d330d90813f975cf16b60b8ce22e16eb0f98ae1654cd7175ffcbe5e251b9392",
+        "role": "reviewed limits and required effects for the differential contract"
+      }
+    ],
+    "original_function": {
+      "unit": "root",
+      "seg": "23AE",
+      "off": "01DB",
+      "size": 386,
+      "size_hex": "0182",
+      "linear": "23CBB",
+      "end_exclusive": "23AE:035D"
+    },
+    "disassembly_research": {
+      "method": "python tools/context.py win_UnlockWin (without --raw)",
+      "source_path": "assets/SIMANT.EXE",
+      "source_sha256": "aa0596c6766322a8229ee3c36e57048c92adc82d50fbe2ef37afb8b85fcf4f11",
+      "oracle_lock_sha256": "2c6d9e98c688621ad49a08c78d0e0968f4076b036be56ec0738217b533ccde13",
+      "raw_bytes_or_capsule_recorded": false
+    },
+    "branch_map": [
+      {
+        "address": "23AE:01E9",
+        "mnemonic": "jne 01EE",
+        "target": "23AE:01EE",
+        "fallthrough": "23AE:01EB",
+        "predicate": "word g_644C != 0",
+        "source_anchor": "module.c:136"
+      },
+      {
+        "address": "23AE:0210",
+        "mnemonic": "jne 021E",
+        "target": "23AE:021E",
+        "fallthrough": "23AE:0212",
+        "predicate": "unsigned-byte g_8DA6[n] != 0; zero calls Punt, and execution continues if Punt returns",
+        "source_anchor": "module.c:139-140"
+      },
+      {
+        "address": "23AE:022C",
+        "mnemonic": "jne 023E",
+        "target": "23AE:023E",
+        "fallthrough": "23AE:022E",
+        "predicate": "signed 16-bit result of f_171C_1686(h) != 5; equality calls Punt, then execution continues if Punt returns",
+        "source_anchor": "module.c:141-142"
+      },
+      {
+        "address": "23AE:0245",
+        "mnemonic": "je 024A",
+        "target": "23AE:024A",
+        "fallthrough": "23AE:0247",
+        "predicate": "the post-decrement unsigned-byte lock count is zero; a nonzero count jumps directly to the epilogue",
+        "source_anchor": "module.c:143"
+      },
+      {
+        "address": "23AE:0255",
+        "mnemonic": "jne 026B",
+        "target": "23AE:026B",
+        "fallthrough": "23AE:0257",
+        "predicate": "((*h)->flags & 0x0200) != 0; this short-circuits the final-release condition",
+        "source_anchor": "module.c:144"
+      },
+      {
+        "address": "23AE:0262",
+        "mnemonic": "je 026B",
+        "target": "23AE:026B",
+        "fallthrough": "23AE:0264",
+        "predicate": "((*h)->flags & 0x0800) == 0; this selects the fallback unlock path",
+        "source_anchor": "module.c:144"
+      },
+      {
+        "address": "23AE:0269",
+        "mnemonic": "je 026E",
+        "target": "23AE:026E",
+        "fallthrough": "23AE:026B",
+        "predicate": "word g_644E == 0; a nonzero value selects the fallback unlock path",
+        "source_anchor": "module.c:144"
+      },
+      {
+        "address": "23AE:029E",
+        "mnemonic": "je 02B0",
+        "target": "23AE:02B0",
+        "fallthrough": "23AE:02A0",
+        "predicate": "signed-extended obj->type equals 4",
+        "source_anchor": "module.c:148-152"
+      },
+      {
+        "address": "23AE:02A3",
+        "mnemonic": "je 02B0",
+        "target": "23AE:02B0",
+        "fallthrough": "23AE:02A5",
+        "predicate": "signed-extended obj->type equals 10",
+        "source_anchor": "module.c:148-152"
+      },
+      {
+        "address": "23AE:02A8",
+        "mnemonic": "jl 02E0",
+        "target": "23AE:02E0",
+        "fallthrough": "23AE:02AA",
+        "predicate": "signed-extended obj->type minus 16 is negative, so type is below 16 and takes switch default",
+        "source_anchor": "module.c:148-160"
+      },
+      {
+        "address": "23AE:02AC",
+        "mnemonic": "jle 02B5",
+        "target": "23AE:02B5",
+        "fallthrough": "23AE:02AE",
+        "predicate": "after the preceding below-16 branch, type is 16, 17, or 18 and selects h2a; larger types take default",
+        "source_anchor": "module.c:153-160"
+      },
+      {
+        "address": "23AE:02C4",
+        "mnemonic": "je 02E0",
+        "target": "23AE:02E0",
+        "fallthrough": "23AE:02C6",
+        "predicate": "both 16-bit words of the selected far child handle are zero; otherwise free it and clear the slot",
+        "source_anchor": "module.c:161-164"
+      },
+      {
+        "address": "23AE:02ED",
+        "mnemonic": "jg 0288",
+        "target": "23AE:0288",
+        "fallthrough": "23AE:02EF",
+        "predicate": "signed 16-bit w->count > signed 16-bit i; true enters the next object iteration",
+        "source_anchor": "module.c:146-165"
+      }
+    ],
+    "unconditional_edges": [
+      {
+        "address": "23AE:01EB",
+        "mnemonic": "jmp 0357",
+        "target": "23AE:0357",
+        "meaning": "global lock support disabled: skip all state access and return"
+      },
+      {
+        "address": "23AE:0247",
+        "mnemonic": "jmp 0357",
+        "target": "23AE:0357",
+        "meaning": "nested lock remains after decrement: no final-release work"
+      },
+      {
+        "address": "23AE:026B",
+        "mnemonic": "jmp 034B",
+        "target": "23AE:034B",
+        "meaning": "final count reached but deferred-release condition is false"
+      },
+      {
+        "address": "23AE:0286",
+        "mnemonic": "jmp 02E3",
+        "target": "23AE:02E3",
+        "meaning": "initialize i and enter loop condition"
+      },
+      {
+        "address": "23AE:02AE",
+        "mnemonic": "jmp 02E0",
+        "target": "23AE:02E0",
+        "meaning": "switch default skips unsupported object types"
+      },
+      {
+        "address": "23AE:02B3",
+        "mnemonic": "jmp 02B8",
+        "target": "23AE:02B8",
+        "meaning": "selected type 4 or 10 uses obj+0x34 handle slot"
+      },
+      {
+        "address": "23AE:0349",
+        "mnemonic": "jmp 0357",
+        "target": "23AE:0357",
+        "meaning": "complete final-release path and return"
+      }
+    ],
+    "returns": [
+      {
+        "address": "23AE:035C",
+        "mnemonic": "retf",
+        "source_anchor": "module.c:127-176",
+        "meaning": "far return after restoring SI, DI, BP"
+      }
+    ],
+    "call_map": [
+      {
+        "order": 1,
+        "address": "23AE:0217",
+        "callee": "Punt",
+        "source_anchor": "module.c:139-140",
+        "condition": "g_8DA6[n] == 0",
+        "arguments": [
+          "far pointer to literal at DS:6487: Attemp to unlock when not locked!!"
+        ],
+        "ordering": "before f_171C_1686; if Punt returns, execution continues"
+      },
+      {
+        "order": 2,
+        "address": "23AE:0222",
+        "callee": "f_171C_1686",
+        "source_anchor": "module.c:141",
+        "condition": "g_644C != 0, after the unlocked-count Punt site",
+        "arguments": [
+          "h: 16:16 far pointer to the window master pointer"
+        ],
+        "ordering": "result in AX is compared with 5 before the lock-count decrement"
+      },
+      {
+        "order": 3,
+        "address": "23AE:0236",
+        "callee": "Punt",
+        "source_anchor": "module.c:141-142",
+        "condition": "f_171C_1686(h) == 5",
+        "arguments": [
+          "far pointer to literal at DS:64AA: Attemp to unlock when discarded win %x",
+          "original 16-bit win argument"
+        ],
+        "ordering": "before decrement; if Punt returns, decrement and subsequent paths still execute"
+      },
+      {
+        "order": 4,
+        "address": "23AE:02CD",
+        "callee": "f_171C_13E4",
+        "source_anchor": "module.c:161-164",
+        "condition": "supported object type and selected 4-byte far child handle is nonzero",
+        "arguments": [
+          "the selected h34 or h2a far handle, passed as a 16:16 handle pointer"
+        ],
+        "ordering": "once per qualifying object in ascending signed i order; the slot is zeroed after the call returns"
+      },
+      {
+        "order": 5,
+        "address": "23AE:02F5",
+        "callee": "f_171C_2086",
+        "source_anchor": "module.c:166",
+        "condition": "final count and all three deferred-release predicates true",
+        "arguments": [
+          "h: 16:16 far pointer to the window master pointer"
+        ],
+        "ordering": "after all child frees and before f_171C_20E2; helper return is discarded"
+      },
+      {
+        "order": 6,
+        "address": "23AE:0302",
+        "callee": "f_171C_20E2",
+        "source_anchor": "module.c:167",
+        "condition": "same final deferred-release path",
+        "arguments": [
+          "h: 16:16 far pointer to the window master pointer"
+        ],
+        "ordering": "after f_171C_2086 and before either handle-table clear"
+      },
+      {
+        "order": 7,
+        "address": "23AE:0350",
+        "callee": "f_171C_2086",
+        "source_anchor": "module.c:171-173",
+        "condition": "final count reached but a deferred-release predicate is false",
+        "arguments": [
+          "h: 16:16 far pointer to the window master pointer"
+        ],
+        "ordering": "fallback path performs this unlock only; it does not call f_171C_20E2 or clear tables"
+      }
+    ],
+    "memory_state": {
+      "reads": [
+        {
+          "item": "win argument",
+          "width": "16-bit signed int",
+          "use": "arithmetic right shift by 8 for n; original value passed to the discarded-window Punt format"
+        },
+        {
+          "item": "g_644C",
+          "width": "16-bit int",
+          "use": "global enable gate"
+        },
+        {
+          "item": "win_handles[n]",
+          "width": "4-byte far pointer",
+          "address": "55B3:9230 + 4*n",
+          "use": "saved as h once before helper calls"
+        },
+        {
+          "item": "g_8DA6[n]",
+          "width": "unsigned byte",
+          "address": "55B3:8DA6 + n",
+          "use": "zero check and then byte decrement"
+        },
+        {
+          "item": "Ralloc metadata through f_171C_1686(h)",
+          "width": "helper-owned",
+          "use": "block type compared with 5"
+        },
+        {
+          "item": "*h",
+          "width": "4-byte far window pointer",
+          "use": "read for each short-circuited flags test and again when saved as w; the source and original each dereference the master pointer at those points"
+        },
+        {
+          "item": "(*h)->flags",
+          "width": "16-bit int at window+0x1C",
+          "use": "bit 0x0200 test followed, when clear, by bit 0x0800 test"
+        },
+        {
+          "item": "g_644E",
+          "width": "16-bit int",
+          "use": "must equal zero for deferred release"
+        },
+        {
+          "item": "(*h)->count",
+          "width": "signed 16-bit int at window+0x0C",
+          "use": "re-read on every signed loop test"
+        },
+        {
+          "item": "w->objs[i]",
+          "width": "4-byte far pointer at window+0x2C+4*i",
+          "use": "loaded each iteration"
+        },
+        {
+          "item": "obj->type",
+          "width": "signed 8-bit char at object+0x21",
+          "use": "sign-extended for the switch"
+        },
+        {
+          "item": "selected obj->h34 or obj->h2a",
+          "width": "4-byte far handle at object+0x34 or object+0x2A",
+          "use": "both offset and segment words tested for zero, then passed to free helper"
+        },
+        {
+          "item": "w->objs[0]",
+          "width": "4-byte far pointer",
+          "use": "re-read after the final window helpers to locate the saved Rect"
+        },
+        {
+          "item": "source Rect",
+          "width": "8 bytes",
+          "address": "far byte pointer (w->objs[0]) + 8",
+          "use": "four 16-bit words copied to win_offsets[n]"
+        },
+        {
+          "item": "literal bytes",
+          "width": "far strings",
+          "use": "the two Punt messages"
+        }
+      ],
+      "writes": [
+        {
+          "item": "g_8DA6[n]",
+          "width": "unsigned byte",
+          "condition": "g_644C != 0 after both possible Punt sites",
+          "effect": "decrement modulo 256; only a resulting zero enters final-release work"
+        },
+        {
+          "item": "selected child handle slot",
+          "width": "4 bytes",
+          "condition": "supported type and nonzero slot, after f_171C_13E4 returns",
+          "effect": "clear both far-pointer words"
+        },
+        {
+          "item": "Ralloc state",
+          "width": "helper-owned",
+          "condition": "as shown in call_map",
+          "effect": "child free; window lock decrement; optional window type update"
+        },
+        {
+          "item": "win_handles[n]",
+          "width": "4 bytes",
+          "condition": "deferred-release branch only",
+          "effect": "clear; original stores high word then low word"
+        },
+        {
+          "item": "g_8CF2[n]",
+          "width": "4 bytes",
+          "condition": "deferred-release branch only, after win_handles clear",
+          "effect": "clear; original stores high word then low word"
+        },
+        {
+          "item": "win_offsets[n]",
+          "width": "8 bytes at 50F6:4892+8*n",
+          "condition": "deferred-release branch only, after both clears",
+          "effect": "copy four words from object zero at byte offset +8"
+        },
+        {
+          "item": "Punt diagnostic/output state",
+          "width": "helper-owned",
+          "condition": "zero lock count or discarded block",
+          "effect": "emits/reports the corresponding literal and optional win value; if Punt returns, target continues exactly as original"
+        }
+      ],
+      "unchanged_by_target_directly": [
+        "g_644C",
+        "g_644E",
+        "window flags/count",
+        "object pointer array",
+        "object type fields"
+      ],
+      "external_side_effect_boundary": "Punt and the four pinned f_171C_* Ralloc helpers; their ordering and arguments are mapped above."
+    },
+    "constants_widths_pointer_math": {
+      "constants": [
+        {
+          "value": "0x0000",
+          "meaning": "lock count, pointer, busy-state, or helper checks as applicable"
+        },
+        {
+          "value": "0x0005",
+          "meaning": "discarded Ralloc block type"
+        },
+        {
+          "value": "0x0200",
+          "meaning": "window flag that suppresses deferred release"
+        },
+        {
+          "value": "0x0800",
+          "meaning": "window flag required for deferred release"
+        },
+        {
+          "value": "4, 10",
+          "meaning": "object types whose h34 handle is freed"
+        },
+        {
+          "value": "16, 17, 18",
+          "meaning": "object types whose h2a handle is freed"
+        },
+        {
+          "value": "0x2A, 0x34",
+          "meaning": "selected child-handle field offsets"
+        },
+        {
+          "value": "0x21",
+          "meaning": "object type byte offset"
+        },
+        {
+          "value": "0x0C, 0x1C, 0x2C",
+          "meaning": "window count, flags, and object-pointer-array offsets"
+        },
+        {
+          "value": "8",
+          "meaning": "byte offset from object zero to the 8-byte saved Rect"
+        },
+        {
+          "value": "45",
+          "meaning": "declared lock-count, g_8CF2 and win_offsets table lengths"
+        }
+      ],
+      "integer_semantics": [
+        "win and n are 16-bit signed ints; MSC arithmetic right shift (SAR) makes n = sign_extend(win) >> 8. There is no bounds check in win_UnlockWin.",
+        "g_8DA6 is unsigned char; decrement is one byte and wraps modulo 256. The zero check is on the post-decrement byte.",
+        "window count and i are signed 16-bit ints; the loop uses signed i < count and re-reads count each iteration.",
+        "Obj.type is plain char under the pinned MSC target, which is signed; the original loads one byte and sign-extends it before switch comparisons.",
+        "flags and each Rect field are 16-bit ints; masks are 16-bit constants."
+      ],
+      "pointer_arithmetic": [
+        "win_handles[n]: far-pointer elements, 4-byte stride; registered base 55B3:9230.",
+        "g_8DA6[n]: byte stride; private BSS base 55B3:8DA6.",
+        "g_8CF2[n]: far-pointer elements, 4-byte stride; private BSS base 55B3:8CF2.",
+        "w->objs[i]: far object pointers, 4-byte stride from window offset +0x2C.",
+        "obj->h34 and obj->h2a: far handle-pointer fields at object offsets +0x34 and +0x2A; null is the pair of zero offset/segment words.",
+        "win_offsets[n]: Rect records of four words, 8-byte stride; registered base 50F6:4892.",
+        "The copied source address is the far pointer stored in w->objs[0], reinterpreted as far char*, plus 8 bytes; original code adds 8 to the offset word and keeps the segment word, then executes four MOVSW copies."
+      ],
+      "abi_and_pointer_conversions": [
+        "Entry is _fastcall with 16-bit win in AX and a far return. The source parameter type and original use agree.",
+        "h is a 16:16 far pointer to a far master pointer. Casting it to struct Win far * far * preserves its 4-byte representation; the Ralloc Handle typedef is char far * far * with the same representation.",
+        "The source declares f_171C_2086 as void while its pinned implementation returns Handle. The target discards AX:DX, so the return-type declaration difference has no observable effect here.",
+        "f_171C_1686 returns a 16-bit int compared to 5; f_171C_13E4 and f_171C_20E2 return void. All are far calls with the 4-byte handle argument on the stack."
+      ]
+    },
+    "static_axes": [
+      {
+        "axis": "complete algorithm and CFG",
+        "finding": "The enabled gate, both diagnostic paths and their continuation, byte decrement, nested-lock exit, three-part final-release gate, full object scan, type default, null-handle branch, both unlock outcomes, table clearing, map copy and far return all map to source lines 136-175 and the original sites in branch_map."
+      },
+      {
+        "axis": "branches, conditions and switch",
+        "finding": "Every decoded conditional/loop site is listed. Signed type switch partitions 4/10 to h34, 16-18 to h2a, and all other signed-char values to continue. The count loop is signed and reevaluates count after each body."
+      },
+      {
+        "axis": "calls, arguments and order",
+        "finding": "All seven static call sites are listed. The source preserves the original order, conditional execution, 16:16 handle arguments and continuation after Punt if it returns."
+      },
+      {
+        "axis": "memory and state",
+        "finding": "All target-owned reads/writes are inventoried, including byte lock counter, flags/count, indexed far object and handle slots, helper-owned Ralloc writes, two cleared tables and the 8-byte Rect destination."
+      },
+      {
+        "axis": "constants, widths, signedness",
+        "finding": "Masks, type values, field offsets, table lengths, 16-bit signed ints, unsigned-byte decrement, signed char promotion and signed loop test are accounted for."
+      },
+      {
+        "axis": "pointer calculation",
+        "finding": "All table strides, object-array stride, far-handle field offsets, Rect stride and byte +8 source calculation match the original indexed addressing and four-word copy."
+      },
+      {
+        "axis": "dependency boundaries and ABI",
+        "finding": "Pinned m171C.c confirms the helper contracts: 1686 reads Ralloc type; 13E4 frees; 2086 decrements lock and returns an unused Handle; 20E2 sets type 3. Pointer representation and far-call arguments are compatible."
+      },
+      {
+        "axis": "observable order",
+        "finding": "Child frees occur in ascending i order; each slot clears after its free; then window unlock, type update, win_handles clear, g_8CF2 clear, and Rect copy. Fallback performs only window unlock after the gate."
+      },
+      {
+        "axis": "semantic comparison",
+        "finding": "No source/original semantic difference was found on any decoded path under the pinned MSC 6.00AX 16-bit memory and ABI model; no codegen difference is needed to explain a semantic mismatch."
+      }
+    ],
+    "remaining_differences": [],
+    "unexplained_semantic_differences": [],
+    "differential_evidence": {
+      "run": {
+        "path": "evidence/behavior/functions/win_UnlockWin/contracts/window-valid-v1/run.json",
+        "sha256": "deaadf40ca4c5043ddc3966cad1bd77c354fbd12fc7c1fdcf47a6bd3f65a9eba",
+        "status": "COMPLETE",
+        "cases": 508,
+        "mismatches": 0,
+        "unmodeled_boundaries": 0,
+        "peer_data_gates": "PASS",
+        "actual_original_execution": true,
+        "actual_candidate_execution": true,
+        "actual_helper_counts": {
+          "f_171C_1686": 508,
+          "f_171C_13E4": 175,
+          "f_171C_2086": 505,
+          "f_171C_20E2": 61
+        }
+      },
+      "negative_control": {
+        "path": "evidence/behavior/functions/win_UnlockWin/contracts/window-valid-v1/negative-controls.json",
+        "sha256": "b02cd5e78c67ff81ec099d4fcf3d3cf04c371b65ed72fa8f85627f7a3923a8b3",
+        "control": "actual-unlock-wrong-threshold",
+        "executed": true,
+        "detected_mismatch": true,
+        "categories": [
+          "nonstack_memory",
+          "ranges",
+          "trace"
+        ]
+      },
+      "limits": "This is corroboration, not the static proof: the reviewed finite contract covers valid Ralloc-backed handles, depths 2/3/255, final-release flags 0/0x0200/0x0800/0x0A00, pending-update 0/1, 1-8 object trees, and object types {0,2,4,10,16,17,18,19}. Malformed handles/pointers, invalid Ralloc nodes and unsupported terminal heap paths are excluded."
+    },
+    "review_notes": [
+      "Static correspondence is conditional on the pinned MSC 6.00AX large-model ABI, signed plain-char behavior, and valid far pointers/layouts. win_UnlockWin has no explicit index bounds check; out-of-range n accesses remain outside the reviewed input domain.",
+      "The source and original both continue after either Punt call if Punt returns; this is represented in branch_map and call_map rather than assuming Punt is noreturn.",
+      "Differential evidence is finite and does not close malformed-handle or invalid-memory behavior. No such boundary was used to infer a missing branch or a semantic confirmation.",
+      "Original disassembly was obtained with tools/context.py win_UnlockWin without --raw. No raw byte array, byte capsule, production source edit, or generic matching search was used."
+    ]
+  },
+  "root_review": {
+    "reviewer": "root",
+    "complete_cfg": true,
+    "complete_data_widths": true,
+    "complete_calls_effects": true,
+    "codegen_only_residue": true,
+    "basis": "Reviewed the whole-function branch/call/state/width maps, source/evidence identities, explanations of residue and differential/negative limits. Matching observed service boundaries are composed through the actual caller ABI and same callee/slot/state; finite coverage alone is not acceptance."
+  }
+}

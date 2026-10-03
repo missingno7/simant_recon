@@ -1,0 +1,1041 @@
+{
+  "schema": "simant-dos-strict-static-review-v1",
+  "function": "o15_384C_0239",
+  "status": "BEHAVIOR_EXACT_CONFIRMED",
+  "registered_evidence": {
+    "path": "evidence/behavior/functions/o15_384C_0239/contracts/actual-window-v2/evidence.json",
+    "sha256": "c53338c7b842eec90b3879bb66ab7aa3670ef440d1dc276e8e1255218e26a326",
+    "size": 18545
+  },
+  "registered_source": {
+    "path": "evidence/behavior/functions/o15_384C_0239/contracts/actual-window-v2/module.c",
+    "sha256": "01b51eecedcd28e2213819572c846a9754039f4a527e6da5e56e57783398bdd5",
+    "whole_module": true,
+    "module": "S15:384C"
+  },
+  "worker_receipt": {
+    "path": "build/workers/dos_static_ovl15/o15_384C_0239.json",
+    "sha256": "1531e0eb79241a694ce5e9be1382514b51a09caeb5a80c28ab74c7a8883e72e5",
+    "size": 44724
+  },
+  "audit": {
+    "schema": "simant-strict-static-completeness-v1",
+    "function": "o15_384C_0239",
+    "status": "BEHAVIOR_EXACT_CONFIRMED",
+    "source": {
+      "path": "evidence/behavior/functions/o15_384C_0239/contracts/actual-window-v2/module.c",
+      "sha256": "01b51eecedcd28e2213819572c846a9754039f4a527e6da5e56e57783398bdd5",
+      "same_content_as_canonical": "src/S15/m384C.c"
+    },
+    "registry_evidence": {
+      "path": "evidence/behavior/functions/o15_384C_0239/contracts/actual-window-v2/evidence.json",
+      "sha256": "c53338c7b842eec90b3879bb66ab7aa3670ef440d1dc276e8e1255218e26a326",
+      "registry_path": "evidence/behavior/manifest.json",
+      "registry_sha256": "dae79bdf74d7660e7e2eb47e8b463a9576c8d74a8e6ccd9e91af6d51f871ecea"
+    },
+    "inputs": {
+      "pinned_files": [
+        {
+          "path": "src/S15/m384C.c",
+          "sha256": "01b51eecedcd28e2213819572c846a9754039f4a527e6da5e56e57783398bdd5"
+        },
+        {
+          "path": "src/S09/m35F5.c",
+          "sha256": "028e1575990d5d45233f9102a0d2a060810349bd2f1297182c4af435ecbe912a"
+        },
+        {
+          "path": "src/root/m20E8.c",
+          "sha256": "c2ec2474010ef9821fd46cdf72e50f164c850446b6f4b051a91d474b53dd5ae2"
+        },
+        {
+          "path": "evidence/behavior/functions/o15_384C_0239/contracts/actual-window-v2/evidence.json",
+          "sha256": "c53338c7b842eec90b3879bb66ab7aa3670ef440d1dc276e8e1255218e26a326"
+        },
+        {
+          "path": "evidence/behavior/functions/o15_384C_0239/contracts/actual-window-v2/run.json",
+          "sha256": "1f75bf6f47b4412e63e56e4fd2d445d96864af763c4f25813dd312bd28d54128"
+        },
+        {
+          "path": "evidence/behavior/functions/o15_384C_0239/contracts/actual-window-v2/negative-controls.json",
+          "sha256": "f15fb90739ac47ff30cbb1dcc48da4b2bd5fe5beaae4beccc749e6a0cc2251ac"
+        },
+        {
+          "path": "evidence/behavior/functions/o15_384C_0239/contracts/actual-window-v2/cases.jsonl.gz",
+          "sha256": "f044e0f8395f31af6fd674e7ec32057a7c1ff41915131547108d495de7aa5e1d"
+        },
+        {
+          "path": "evidence/behavior/functions/o15_384C_0239/contracts/actual-window-v2/contract-review.json",
+          "sha256": "8a3a138f906df9f780bdb22eaceef4a5d26d01facaa4789a1a58825e23d93fb5"
+        },
+        {
+          "path": "tools/behavior_suites/archive/dialog-window-aef69d1f-final/suite.py",
+          "sha256": "aef69d1fd351b766b6718424c2ef20ab5b287960d2f387ef90ebd2428a992248"
+        },
+        {
+          "path": "evidence/behavior/functions/o15_384C_0239/contracts/actual-window-v2/module.c",
+          "sha256": "01b51eecedcd28e2213819572c846a9754039f4a527e6da5e56e57783398bdd5",
+          "role": "registered whole-module candidate source; identical to current src/S15/m384C.c"
+        },
+        {
+          "path": "src/root/m2505.c",
+          "sha256": "22a03f15e95fff376d27211426c4f9e3395e16e5decd92ef501fbfe3c1aba623",
+          "role": "mode-5 axis selection and private window parameter reads"
+        },
+        {
+          "path": "build/workers/dos_static_ovl15/win_Open-context.txt",
+          "sha256": "57ac17ae43e0c7bf3dcb7d8ad1a01bd401aad8cd79cb9e448051ba005beb57dd",
+          "role": "tools/context.py win_Open disassembly without --raw; confirms target reads BP+8..+E"
+        },
+        {
+          "path": "build/workers/dos_static_ovl15/caller-contexts.txt",
+          "sha256": "fb4097998e26dc0a5460cc45c9d5e0a74bd60261d076ee4c7cc25f968f804b55",
+          "role": "tools/context.py contexts for LoadGame, MenuQuit and their S19 caller"
+        },
+        {
+          "path": "evidence/behavior/functions/o15_384C_0239/contracts/actual-window-v2/supplemental/caller-boundary-audit.json",
+          "sha256": "26325e9a4e6c79293f8e496358ad4a7a5a4f8a72e44c6703ebe1d385bf9ecc75",
+          "role": "pinned HCEGANT 0x2100 object modes and actual window asset evidence"
+        },
+        {
+          "path": "evidence/behavior/functions/o15_384C_0239/contracts/actual-window-v2/supplemental/raw-report.json",
+          "sha256": "4dde6e552c5c36828206eb52f88fe783c939b2b214a176a4b87faff22bc441d8",
+          "role": "four stack-poison cases and synthetic mode-5 original/candidate diagnostic"
+        },
+        {
+          "path": "tools/diag.py",
+          "sha256": "b82fb81504e6a1fdc6f5dc460aa346ea408121e6701537cb7f934c26e1b62fc4",
+          "role": "whole-module candidate/original instruction comparison"
+        },
+        {
+          "path": "tools/slots.py",
+          "sha256": "bbcfade37de7f823e69ca79b5bf778869d8438b879428662a70c836581d9fd9b",
+          "role": "candidate/original stack-slot correspondence"
+        },
+        {
+          "path": "build/source-only-dos/sources/U024.c",
+          "sha256": "7ed6c428f141619affc175e550142bdd8810b217fa0564dd32099d00e22f9172",
+          "role": "actual generated SOURCE_ONLY_DOS whole module source for S15:384C; build report records o15_384C_0239 as its reviewed body"
+        },
+        {
+          "path": "build/source-only-dos/objects/U024.OBJ",
+          "sha256": "f36949de9103ba94cbe718b796e790a199964048e90cb57ec08f84020d39fc16",
+          "role": "actual SOURCE_ONLY_DOS MSC object for S15:384C; function object bytes were extracted and symbolically bound to the oracle"
+        },
+        {
+          "path": "build/source-only-dos/build-report.json",
+          "sha256": "bd3d4b7c0b8ab5e0e1ac6711e5ee5d806dfcfa40943fec9d897fd00091671e0c",
+          "role": "pins U024 source/object hashes, source module, MSC profile, flags, COMPILED_REUSED status, and reviewed body identity"
+        },
+        {
+          "path": "build/source-only-dos/compile-cache.json",
+          "sha256": "c44333397e637515fe189e7d978aaed8d565b037afbb22209735f5c33b445cd3",
+          "role": "pins current source-only compile cache object identity for S15:384C"
+        },
+        {
+          "path": "tools/omf.py",
+          "sha256": "951137ecbfaeb6e40fd5230c94398141da7ec7bdb7399d9cd74d46ded3045612",
+          "role": "OMF object reader used to extract U024_TEXT and the function public"
+        },
+        {
+          "path": "tools/match.py",
+          "sha256": "44fdd8b939b2bbf135d8947d8f6ef6b1854dec133da4af86c55eb94f02869b56",
+          "role": "strict symbolic binder used to bind the source-only object and compare it to the original"
+        },
+        {
+          "path": "tools/mismatch.py",
+          "sha256": "99c1281ef9c2814776647c86a741ed32da874feee3f9907edec5cf2b8a5efc3b",
+          "role": "pinned decoder used for the source-only-object instruction comparison"
+        }
+      ],
+      "original_disassembly_research": {
+        "command": "python tools/context.py o15_384C_0239 (no --raw)",
+        "capture": "build/workers/dos_static_ovl15/o15_384C_0239-context.txt",
+        "capture_sha256": "83895d229503a36555a9628bdccb141b43bc2f456667d199783c485e0593276d",
+        "oracle_path": "assets/SIMANT.EXE",
+        "oracle_sha256": "aa0596c6766322a8229ee3c36e57048c92adc82d50fbe2ef37afb8b85fcf4f11",
+        "oracle_lock_sha256": "2c6d9e98c688621ad49a08c78d0e0968f4076b036be56ec0738217b533ccde13",
+        "raw_bytes_embedded": false,
+        "additional_captures": [
+          {
+            "command": "python tools/context.py win_Open (no --raw)",
+            "capture": "build/workers/dos_static_ovl15/win_Open-context.txt",
+            "capture_sha256": "57ac17ae43e0c7bf3dcb7d8ad1a01bd401aad8cd79cb9e448051ba005beb57dd",
+            "raw_bytes_embedded": false
+          },
+          {
+            "command": "python tools/context.py LoadGame; MenuQuit; o19_384C_0000 (each without --raw)",
+            "capture": "build/workers/dos_static_ovl15/caller-contexts.txt",
+            "capture_sha256": "fb4097998e26dc0a5460cc45c9d5e0a74bd60261d076ee4c7cc25f968f804b55",
+            "raw_bytes_embedded": false
+          }
+        ]
+      }
+    },
+    "original_function": {
+      "unit": "S15",
+      "seg": "0x384C",
+      "off": "0x0239",
+      "size": 326,
+      "size_hex": "0x0146",
+      "linear": "0x386F9"
+    },
+    "branch_map": [
+      {
+        "address": "0x0282",
+        "mnemonic": "jne",
+        "targets": {
+          "taken": "0x0289",
+          "fallthrough": "0x0284"
+        },
+        "source": {
+          "line": 170,
+          "predicate": "g_3DB2 == 0x0140 ? font 2 : font 4",
+          "width_signedness": "g_3DB2 and constants are 16-bit int; equality"
+        }
+      },
+      {
+        "address": "0x0298",
+        "mnemonic": "je",
+        "targets": {
+          "taken": "0x02C4",
+          "fallthrough": "0x029A"
+        },
+        "source": {
+          "line": 171,
+          "predicate": "(g_5A97 & 1) != 0 enables first-rectangle adjustment",
+          "width_signedness": "g_5A97 is 8-bit char; bit mask 0x01"
+        }
+      },
+      {
+        "address": "0x02FC",
+        "mnemonic": "je",
+        "targets": {
+          "taken": "0x0326",
+          "fallthrough": "0x02FE"
+        },
+        "source": {
+          "line": 181,
+          "predicate": "f_1F58_0038() != 0 before reading a key",
+          "width_signedness": "16-bit int return; zero test"
+        }
+      },
+      {
+        "address": "0x0306",
+        "mnemonic": "je",
+        "targets": {
+          "taken": "0x0348",
+          "fallthrough": "0x0308"
+        },
+        "source": {
+          "line": 182,
+          "predicate": "key == 's' yields result 1",
+          "width_signedness": "16-bit int / AX equality"
+        }
+      },
+      {
+        "address": "0x0308",
+        "mnemonic": "ja",
+        "targets": {
+          "taken": "0x0326",
+          "fallthrough": "0x030A"
+        },
+        "source": {
+          "line": 182,
+          "predicate": "unsigned AX > 0x0073 skips the low-key dispatch",
+          "width_signedness": "unsigned 16-bit range guard; below guard the byte arithmetic implements only exact keys through 0x73"
+        }
+      },
+      {
+        "address": "0x030C",
+        "mnemonic": "je",
+        "targets": {
+          "taken": "0x0344",
+          "fallthrough": "0x030E"
+        },
+        "source": {
+          "line": 183,
+          "predicate": "key == 0x000D yields result 0",
+          "width_signedness": "16-bit key; AL subtraction is safe after unsigned AX <= 0x73"
+        }
+      },
+      {
+        "address": "0x0310",
+        "mnemonic": "je",
+        "targets": {
+          "taken": "0x034D",
+          "fallthrough": "0x0312"
+        },
+        "source": {
+          "line": 192,
+          "predicate": "key == 0x001B yields result 2",
+          "width_signedness": "16-bit key; staged AL compare"
+        }
+      },
+      {
+        "address": "0x0314",
+        "mnemonic": "je",
+        "targets": {
+          "taken": "0x034D",
+          "fallthrough": "0x0316"
+        },
+        "source": {
+          "line": 194,
+          "predicate": "key == 'C' yields result 2",
+          "width_signedness": "16-bit key; staged AL compare"
+        }
+      },
+      {
+        "address": "0x0318",
+        "mnemonic": "je",
+        "targets": {
+          "taken": "0x0344",
+          "fallthrough": "0x031A"
+        },
+        "source": {
+          "line": 184,
+          "predicate": "key == 'D' yields result 0",
+          "width_signedness": "16-bit key; staged AL compare"
+        }
+      },
+      {
+        "address": "0x031C",
+        "mnemonic": "je",
+        "targets": {
+          "taken": "0x0348",
+          "fallthrough": "0x031E"
+        },
+        "source": {
+          "line": 188,
+          "predicate": "key == 'S' yields result 1",
+          "width_signedness": "16-bit key; staged AL compare"
+        }
+      },
+      {
+        "address": "0x0320",
+        "mnemonic": "je",
+        "targets": {
+          "taken": "0x034D",
+          "fallthrough": "0x0322"
+        },
+        "source": {
+          "line": 195,
+          "predicate": "key == 'c' yields result 2",
+          "width_signedness": "16-bit key; staged AL compare"
+        }
+      },
+      {
+        "address": "0x0324",
+        "mnemonic": "je",
+        "targets": {
+          "taken": "0x0344",
+          "fallthrough": "0x0326"
+        },
+        "source": {
+          "line": 185,
+          "predicate": "key == 'd' yields result 0",
+          "width_signedness": "16-bit key; staged AL compare"
+        }
+      },
+      {
+        "address": "0x0332",
+        "mnemonic": "je",
+        "targets": {
+          "taken": "0x02F5",
+          "fallthrough": "0x0334"
+        },
+        "source": {
+          "line": 199,
+          "predicate": "win_GetEvent(&ev) == 0 loops to input poll",
+          "width_signedness": "16-bit int return; zero test"
+        }
+      },
+      {
+        "address": "0x033A",
+        "mnemonic": "je",
+        "targets": {
+          "taken": "0x0344",
+          "fallthrough": "0x033C"
+        },
+        "source": {
+          "line": 200,
+          "predicate": "ev.code == 0x2103 yields result 0",
+          "width_signedness": "16-bit signed int equality; constant fits"
+        }
+      },
+      {
+        "address": "0x033D",
+        "mnemonic": "je",
+        "targets": {
+          "taken": "0x0348",
+          "fallthrough": "0x033F"
+        },
+        "source": {
+          "line": 200,
+          "predicate": "ev.code == 0x2104 yields result 1",
+          "width_signedness": "16-bit signed int equality; constant fits"
+        }
+      },
+      {
+        "address": "0x0340",
+        "mnemonic": "je",
+        "targets": {
+          "taken": "0x034D",
+          "fallthrough": "0x0342"
+        },
+        "source": {
+          "line": 200,
+          "predicate": "ev.code == 0x2105 yields result 2",
+          "width_signedness": "16-bit signed int equality; constant fits"
+        }
+      }
+    ],
+    "control_transfers": [
+      {
+        "address": "0x0287",
+        "mnemonic": "jmp",
+        "target": "0x028C",
+        "role": "compiler join for g_3DB2 font conditional"
+      },
+      {
+        "address": "0x0342",
+        "mnemonic": "jmp",
+        "target": "0x02F5",
+        "role": "unrecognized event restarts keyboard-first poll loop"
+      },
+      {
+        "address": "0x0346",
+        "mnemonic": "jmp",
+        "target": "0x0350",
+        "role": "join after assigning result 0"
+      },
+      {
+        "address": "0x034B",
+        "mnemonic": "jmp",
+        "target": "0x0350",
+        "role": "join after assigning result 1"
+      },
+      {
+        "address": "0x0350",
+        "mnemonic": "fallthrough",
+        "target": "0x0350-0x037E",
+        "role": "all recognized keyboard/event returns join cleanup"
+      },
+      {
+        "address": "0x037E",
+        "mnemonic": "retf",
+        "target": null,
+        "role": "returns 16-bit result in AX after cleanup"
+      }
+    ],
+    "call_map": [
+      {
+        "order": 1,
+        "address": "0x023F",
+        "target": "__aFchkstk",
+        "source": "compiler frame setup",
+        "arguments": [
+          "0x0028-byte stack frame"
+        ],
+        "abi": "runtime check; codegen only"
+      },
+      {
+        "order": 2,
+        "address": "0x024A",
+        "target": "win_Open",
+        "source": "module.c:167 win_Open(0x2100)",
+        "arguments": [
+          "one explicit 16-bit int: 0x2100"
+        ],
+        "abi": "Far call with one explicit 16-bit stack word (0x2100). The target reads four further physical words at its BP+8,+0xA,+0xC,+0xE; all four are accounted in stack_call_audit and candidate/oracle have identical values for identical entry machine state.",
+        "implicit_stack_inputs": "saved SI, saved DI, and the two not-yet-written o15 frame homes at BP-0x28 and BP-0x26"
+      },
+      {
+        "order": 3,
+        "address": "0x0261",
+        "target": "f_1A53_00F0",
+        "source": "module.c:168 f_1A53_00F0((0x41-which)*2,10,1)",
+        "arguments": [
+          "16-bit int expression (0x41 - which) * 2",
+          "16-bit int 10",
+          "16-bit int 1"
+        ],
+        "abi": "far C call; pushed right-to-left; arithmetic emitted as 16-bit sub/shift (wraps on target)"
+      },
+      {
+        "order": 4,
+        "address": "0x0270",
+        "target": "f_171C_1B84",
+        "source": "module.c:169 text = f_171C_1B84(h)",
+        "arguments": [
+          "far Handle h (32-bit pointer)"
+        ],
+        "abi": "far C call; returns far char pointer in DX:AX"
+      },
+      {
+        "order": 5,
+        "address": "0x028D",
+        "target": "f_24AB_02AD",
+        "source": "module.c:170 conditional font call",
+        "arguments": [
+          "2 if word g_3DB2 == 0x140, otherwise 4"
+        ],
+        "abi": "far C call; one 16-bit stack word"
+      },
+      {
+        "order": 6,
+        "address": "0x02A2",
+        "target": "win_GetObjRect",
+        "source": "module.c:172, only when (g_5A97 & 1)",
+        "arguments": [
+          "fastcall int 0x2100 in AX",
+          "far Rect* SS:offset"
+        ],
+        "abi": "fastcall far call; stack pointer consumes four bytes"
+      },
+      {
+        "order": 7,
+        "address": "0x02AC",
+        "target": "(*g_9128)",
+        "source": "module.c:173, only when (g_5A97 & 1)",
+        "arguments": [
+          "three 16-bit zeros"
+        ],
+        "abi": "indirect far function pointer loaded through near DS global; three stack words"
+      },
+      {
+        "order": 8,
+        "address": "0x02BC",
+        "target": "f_1CE2_044D",
+        "source": "module.c:174, only when (g_5A97 & 1)",
+        "arguments": [
+          "far Rect* &r",
+          "16-bit width 2"
+        ],
+        "abi": "far C call; pushed right-to-left"
+      },
+      {
+        "order": 9,
+        "address": "0x02CC",
+        "target": "win_GetObjRect",
+        "source": "module.c:176",
+        "arguments": [
+          "fastcall int 0x2101 in AX",
+          "far Rect* SS:offset"
+        ],
+        "abi": "fastcall far call; stack pointer consumes four bytes"
+      },
+      {
+        "order": 10,
+        "address": "0x02D4",
+        "target": "win_SetColorFromObjNum",
+        "source": "module.c:177",
+        "arguments": [
+          "fastcall int 0x2101 in AX"
+        ],
+        "abi": "fastcall far call; AX argument"
+      },
+      {
+        "order": 11,
+        "address": "0x02E4",
+        "target": "win_PrintTextInRect",
+        "source": "module.c:178",
+        "arguments": [
+          "fastcall first int 0 in AX",
+          "far char* text",
+          "far Rect* &r"
+        ],
+        "abi": "fastcall far call; two far pointers on stack, callee pops eight bytes"
+      },
+      {
+        "order": 12,
+        "address": "0x02EC",
+        "target": "f_24AB_02AD",
+        "source": "module.c:179",
+        "arguments": [
+          "16-bit int 0"
+        ],
+        "abi": "far C call; one stack word"
+      },
+      {
+        "order": 13,
+        "address": "0x02F5",
+        "target": "f_1F58_0038",
+        "source": "module.c:181",
+        "arguments": [],
+        "abi": "far C call returning 16-bit readiness value; called once per loop"
+      },
+      {
+        "order": 14,
+        "address": "0x02FE",
+        "target": "f_1F58_0090",
+        "source": "module.c:182, only if readiness is nonzero",
+        "arguments": [],
+        "abi": "far C call returning 16-bit key value"
+      },
+      {
+        "order": 15,
+        "address": "0x032B",
+        "target": "win_GetEvent",
+        "source": "module.c:199 after no recognized key",
+        "arguments": [
+          "far Event* &ev"
+        ],
+        "abi": "fastcall far call; event pointer on stack; callee pops four bytes; result in AX"
+      },
+      {
+        "order": 16,
+        "address": "0x035B",
+        "target": "f_171C_1BBA",
+        "source": "module.c:214",
+        "arguments": [
+          "far Handle h"
+        ],
+        "abi": "far C call; handle lock/usage transition before release"
+      },
+      {
+        "order": 17,
+        "address": "0x0368",
+        "target": "db_ReleaseHandle",
+        "source": "module.c:215",
+        "arguments": [
+          "far Handle h"
+        ],
+        "abi": "far C call; two stack words"
+      },
+      {
+        "order": 18,
+        "address": "0x0372",
+        "target": "win_Close",
+        "source": "module.c:216",
+        "arguments": [
+          "fastcall int 0x2100 in AX"
+        ],
+        "abi": "fastcall far call; AX argument"
+      }
+    ],
+    "memory_state_inventory": {
+      "parameter_reads": [
+        {
+          "source": "module.c:168",
+          "value": "which",
+          "width": 16,
+          "signedness": "int signed",
+          "operation": "0x41 - which, then multiply by 2; target emits 16-bit subtraction and left shift"
+        }
+      ],
+      "global_reads": [
+        {
+          "source": "module.c:170",
+          "symbol": "g_3DB2",
+          "width": 16,
+          "signedness": "int; equality with 0x0140"
+        },
+        {
+          "source": "module.c:171",
+          "symbol": "g_5A97",
+          "width": 8,
+          "signedness": "char; only low bit is tested"
+        },
+        {
+          "source": "module.c:173",
+          "symbol": "g_9128",
+          "width": 32,
+          "signedness": "far function pointer value read indirectly from near data"
+        }
+      ],
+      "stack_local_reads_writes": [
+        {
+          "name": "h",
+          "type": "far Handle = 32-bit far pointer-to-far-pointer",
+          "writes": [
+            "f_1A53_00F0 return"
+          ],
+          "reads": [
+            "f_171C_1B84",
+            "f_171C_1BBA",
+            "db_ReleaseHandle"
+          ]
+        },
+        {
+          "name": "text",
+          "type": "32-bit far char pointer",
+          "writes": [
+            "f_171C_1B84 return"
+          ],
+          "reads": [
+            "win_PrintTextInRect"
+          ],
+          "note": "the archived historical comparison reports a different BP home for its segment word; see remaining_differences"
+        },
+        {
+          "name": "r",
+          "type": "Rect: four 16-bit signed coordinates, 8 bytes",
+          "writes": [
+            "win_GetObjRect; f_1CE2_044D when flag set"
+          ],
+          "reads": [
+            "win_PrintTextInRect; callback argument"
+          ],
+          "pointer": "far SS:offset"
+        },
+        {
+          "name": "ev",
+          "type": "Event: eight 16-bit signed fields, 16 bytes",
+          "writes": [
+            "win_GetEvent"
+          ],
+          "reads": [
+            "ev.code only after a nonzero return; code is word at offset 12 from ev"
+          ],
+          "pointer": "far SS:offset"
+        },
+        {
+          "name": "result",
+          "type": "16-bit signed int",
+          "writes": [
+            "only the six terminal key/event classes, values 0,1,2"
+          ],
+          "reads": [
+            "return at 0x037E"
+          ]
+        }
+      ],
+      "direct_nonstack_writes": [],
+      "indirect_effects": "All nonstack mutations are made by the listed helpers/callback. The direct function does not store globals; helper order and pointer arguments are mapped above. No array indexing or persistent direct pointer arithmetic occurs."
+    },
+    "static_axes": {
+      "cfg": "All 16 conditional transfers in 0x0239-0x037E are listed. The only cycle is the input poll backedge 0x0342 -> 0x02F5, reached on absent events or unrecognized event codes. Keyboard polling has priority: a recognized key bypasses event fetch; an unknown key falls through to event fetch. Three key classes and three event codes assign results 0/1/2 and join one cleanup tail; no other return exists.",
+      "constants_widths_signedness": "The resource key expression and all constants are 16-bit target ints; g_5A97 alone is an 8-bit char. The key dispatch's unsigned upper guard makes its later AL-difference chain equivalent to exact 16-bit switch cases. Event codes are 16-bit equality checks. Font/width/object IDs and zero callback args are preserved.",
+      "pointer_arithmetic_and_abi": "Only (0x41 - which) * 2 computes the resource selector. For win_Open, the one explicit word 0x2100 is followed in the target by four physical stack reads at callee BP+8,+0xA,+0xC,+0xE, which map to o15 saved SI, saved DI, and its as-yet-uninitialized BP-0x28/-0x26 homes. The registered MSC candidate uses the same 40-byte frame, DI-then-SI saves, one-word push, and identical machine prefix through this call; all four values therefore match for equal entry machine state. Fastcall register/stack placement for the other helpers agrees with the pinned declarations.",
+      "calls_and_order": "All 18 far/runtime calls are in call_map in machine order. Resource acquire -> text lookup -> font setup -> optional rect/background adjustment -> second rect -> color -> text print -> font reset -> keyboard/event arbitration -> unlock -> release -> close -> return. This matches the entire C function lines 167-217.",
+      "observable_effects_and_state": "Direct globals read are g_3DB2, g_5A97, g_9128; direct global writes none. Helper-visible state is affected by ordered calls and far pointer contents. Handle unlock precedes release; window close follows release. Stack result is fully assigned before cleanup/return on every terminating path.",
+      "dependency_boundaries": "The registered function source and its direct call sequence are fully accounted. The 0x2100 DB resource has no mode-5 axis, but the proof does not depend on that restriction: the candidate passes the same four raw words to win_Open for arbitrary equal entry stack/register states, and the mode-5 diagnostic shows the effect is shared by original and candidate. The behavioral contract still excludes raster pixels, actual clipping-list internals, private timer backend/future callbacks, physical device state and invalid resource behavior.",
+      "complete_algorithm": "Setup, optional rectangle branch, keyboard dispatch, event dispatch, retry loop, cleanup and return map to every original path. The varargs stack reads are now statically accounted at the call boundary, including both saved-register words and both uninitialized frame words. Whole-module comparison proves the candidate uses the same inputs at win_Open for any identical entry machine state; the only two instruction differences are a later text-segment stack-home displacement and its matching reload, with no alias to those inputs."
+    },
+    "remaining_differences": [
+      {
+        "kind": "CODEGEN_ONLY",
+        "original_address": "0x0279 and 0x02D9",
+        "source_anchor": "module.c:169 text = f_171C_1B84(h)",
+        "explanation": "The complete whole-module MSC comparison has equal 326-byte extents and 137 instructions, with only two BP displacement bytes differing: the target stores/reloads the text pointer segment word at BP-0x06, while the candidate uses BP-0x02. Both hold the same DX value, and these homes do not overlap the win_Open inputs at BP-0x2C/-0x2A/-0x28/-0x26. No semantic mismatch is established."
+      }
+    ],
+    "unexplained_semantic_differences": [],
+    "differential_evidence": {
+      "run": {
+        "path": "evidence/behavior/functions/o15_384C_0239/contracts/actual-window-v2/run.json",
+        "sha256": "1f75bf6f47b4412e63e56e4fd2d445d96864af763c4f25813dd312bd28d54128",
+        "cases": {
+          "directed": 242,
+          "randomized": 1000
+        },
+        "errors": 0,
+        "mismatches": 0,
+        "actual_original_and_candidate_executed": true
+      },
+      "negative_controls": {
+        "path": "evidence/behavior/functions/o15_384C_0239/contracts/actual-window-v2/negative-controls.json",
+        "sha256": "f15fb90739ac47ff30cbb1dcc48da4b2bd5fe5beaae4beccc749e6a0cc2251ac",
+        "detected": 2,
+        "mutations": [
+          "save result changed to cancel: return mismatch",
+          "resource release omitted: ranges, trace and nonstack-memory mismatch"
+        ]
+      },
+      "limits": [
+        "which exercised only 0 and 1; widths only 320 and 640; display flags 0-3; supplied valid text resources and terminating keys/events only.",
+        "Pixel output, real clipping internals, physical device state and private timer backend/future callbacks are explicit excluded boundaries.",
+        "These replay and mutation controls support specific finite observations; neither proves the unrestricted source algorithm alone.",
+        "Synthetic mode-5 controls cover two SI values on axis 0; static same-state call-prefix and slot analysis accounts for all four hidden words and their original/candidate correspondence."
+      ],
+      "stack_input_controls": {
+        "path": "evidence/behavior/functions/o15_384C_0239/contracts/actual-window-v2/supplemental/raw-report.json",
+        "sha256": "4dde6e552c5c36828206eb52f88fe783c939b2b214a176a4b87faff22bc441d8",
+        "actual_resource_poison_cases": 4,
+        "hidden_words": "Saved SI, saved DI, then two 0x5a/0x11/0xee/0x00 repeated-byte poison words; private window bytes equal the expected sequence for each original and candidate execution.",
+        "synthetic_mode5_cases": 2,
+        "synthetic_mode5": "The first object axis is mutated to mode 5. SI=1 and SI=20 change the rect as expected; both original/candidate comparisons are equal. This corroborates the static all-word prefix/home proof but does not alone test every combination."
+      }
+    },
+    "review_notes": [
+      "The v2 evidence object embeds a root APPROVED review for its bounded contract, while the separately pinned contract-review.json is PENDING_ROOT_REVIEW with acceptance_claim=false. This revised static receipt accounts for the win_Open stack reads but does not change that evidence record or claim registry acceptance.",
+      "The two direct source callers are LoadGame with which=0 and MenuQuit with which=1. Original contexts locate their calls at S09:35F5:001D and S15:384C:0207; S19 reaches LoadGame at 0x0049 and MenuQuit at 0x006E. Neither direct caller synthesizes SI/DI values before calling o15.",
+      "The registered behavior whole-module source is SHA-256 identical to current src/S15/m384C.c. diag.py and slots.py compiled that exact whole module under msc600ax /AL /Os /Og /Oe /Zi; no source, canonical, promotion, or oracle file was changed.",
+      "Original disassembly was obtained only with tools/context.py without --raw. The stack values at BP-0x28/-0x26 are intentionally reported as uninitialized machine state at the first call; no source values or original bytes are invented."
+    ],
+    "stack_call_audit": {
+      "conclusion": "The four win_Open reads are real implicit machine-state inputs, not values supplied by the C prototype. Their origins, lifetimes, and candidate/oracle correspondence are now accounted. For equal o15 entry registers, SS:SP, and stack memory, the registered candidate presents the same four words to win_Open as the oracle, including when a mode-5 axis consumes them.",
+      "target_callee": {
+        "name": "win_Open",
+        "entry": "root:20E8:04B6",
+        "source": "src/root/m20E8.c:207-222",
+        "target_context": "build/workers/dos_static_ovl15/win_Open-context.txt",
+        "target_frame": "BP frame; target context reports arg_bytes_min=10; formal win is at BP+6; target reads BP+8,+0xA,+0xC,+0xE and stores those words to the private window fields w+0x10,+0x12,+0x14,+0x16 before win_Recalc."
+      },
+      "original_callsite_layout": {
+        "caller": "o15_384C_0239, S15:384C:0239",
+        "call": "0x024A far call to root:20E8:04B6",
+        "prologue": "push bp; mov bp,sp; __aFchkstk(0x28); push di; push si; mov ax,0x2100; push ax; lcall win_Open",
+        "caller_bp": "BPc denotes o15 BP after its frame is established.",
+        "win_Open_bp": "For the far call and the target push-bp prologue, BPwin=BPc-0x34. Thus BPwin+6 is the explicit 0x2100 at BPc-0x2E."
+      },
+      "words": [
+        {
+          "ordinal": 1,
+          "callee_bp": "BPwin+0x08",
+          "caller_bp": "BPc-0x2C",
+          "meaning": "saved SI word",
+          "origin": "push si at original 0x0245; value is o15 entry SI because no earlier instruction in o15 changes SI",
+          "destination": "w+0x10 (private window axis 0)"
+        },
+        {
+          "ordinal": 2,
+          "callee_bp": "BPwin+0x0A",
+          "caller_bp": "BPc-0x2A",
+          "meaning": "saved DI word",
+          "origin": "push di at original 0x0244; value is o15 entry DI because no earlier instruction in o15 changes DI",
+          "destination": "w+0x12 (private window axis 1)"
+        },
+        {
+          "ordinal": 3,
+          "callee_bp": "BPwin+0x0C",
+          "caller_bp": "BPc-0x28",
+          "meaning": "unnamed o15 frame home; uninitialized at the win_Open call",
+          "origin": "slots.py --sbs --all maps candidate and original BP-0x28 to the same unnamed slot. No function-body store to this slot occurs before 0x024A. At 0x0355, after dialog input has selected a terminal result, it receives DI (handle offset) as a scratch home; the stored offset is later pushed at 0x0365 for db_ReleaseHandle.",
+          "destination": "w+0x14 (private window axis 2)"
+        },
+        {
+          "ordinal": 4,
+          "callee_bp": "BPwin+0x0E",
+          "caller_bp": "BPc-0x26",
+          "meaning": "unnamed o15 frame home; uninitialized at the win_Open call",
+          "origin": "slots.py --sbs --all maps candidate and original BP-0x26 to the same unnamed slot. No function-body store to this slot occurs before 0x024A. At 0x0358 it receives AX (handle segment) alongside the BP-0x28 offset copy; the stored segment is later pushed at 0x0362 for db_ReleaseHandle.",
+          "destination": "w+0x16 (private window axis 3)"
+        }
+      ],
+      "later_private_home_lifetimes": {
+        "BPc-0x28": "Uninitialized through the first win_Open call; written at 0x0355 from DI (handle offset) after the terminal result; pushed at 0x0365 as the offset argument to db_ReleaseHandle at 0x0368.",
+        "BPc-0x26": "Uninitialized through the first win_Open call; written at 0x0358 from AX (handle segment) after the terminal result; pushed at 0x0362 as the segment argument to db_ReleaseHandle at 0x0368.",
+        "saved_SI_DI": "Both contain o15 entry register values through win_Open. After resource acquisition, DI holds the handle offset and SI receives the text offset; SI becomes the terminal result at 0x0344/0x0348/0x034D."
+      },
+      "registered_candidate_compile": {
+        "source": "evidence/behavior/functions/o15_384C_0239/contracts/actual-window-v2/module.c",
+        "source_sha256": "01b51eecedcd28e2213819572c846a9754039f4a527e6da5e56e57783398bdd5",
+        "current_canonical_source": "src/S15/m384C.c",
+        "canonical_sha256": "01b51eecedcd28e2213819572c846a9754039f4a527e6da5e56e57783398bdd5",
+        "whole_module_source_equal_to_canonical": true,
+        "compiler": "msc600ax",
+        "flags": [
+          "/AL",
+          "/Os",
+          "/Og",
+          "/Oe",
+          "/Zi"
+        ],
+        "commands": [
+          "python tools/diag.py o15_384C_0239 --source evidence/behavior/functions/o15_384C_0239/contracts/actual-window-v2/module.c",
+          "python tools/slots.py --sbs --all o15_384C_0239 evidence/behavior/functions/o15_384C_0239/contracts/actual-window-v2/module.c"
+        ],
+        "comparison": {
+          "target_bytes": 326,
+          "candidate_bytes": 326,
+          "target_instructions": 137,
+          "candidate_instructions": 137,
+          "frame_bytes_target": 40,
+          "frame_bytes_candidate": 40,
+          "instruction_prefix_identical": "from entry through the far win_Open call at 0x024A, including frame setup and both register saves",
+          "private_slot_mapping": {
+            "BP-0x28": "same unnamed home",
+            "BP-0x26": "same unnamed home",
+            "BP+0x06": "which in both",
+            "BP-0x14": "h in both",
+            "BP-0x10": "r in both",
+            "BP-0x24": "ev in both"
+          },
+          "non_bp_differences": 0,
+          "differing_displacement_sites": [
+            {
+              "instruction": "0x0279 store of f_171C_1B84 segment word",
+              "target_home": "BP-0x06",
+              "candidate_home": "BP-0x02"
+            },
+            {
+              "instruction": "0x02D9 push of the same text segment word",
+              "target_home": "BP-0x06",
+              "candidate_home": "BP-0x02"
+            }
+          ],
+          "codegen_home_lifetime_check": {
+            "original_BP-0x06": "Used only at 0x0279 to store the DX text-pointer segment after win_Open and at 0x02D9 to reload it for win_PrintTextInRect; there is no read before the store and no other use in this function.",
+            "source_only_BP-0x02": "Used only at 0x0279 to store the same DX text-pointer segment after win_Open and at 0x02D9 to reload it for win_PrintTextInRect; there is no read before the store and no other use in this function.",
+            "semantic_effect": "The displacement change selects another otherwise-dead stack home for one value with a dominating store and matching reload. It cannot affect any win_Open input (BP-0x2C, -0x2A, -0x28, -0x26), parameter (+6), handle (BP-0x12/-0x14), Rect (BP-0x10), Event (BP-0x24), or result (BP-0x18)."
+          }
+        },
+        "alias_and_order_proof": "Both displacement differences concern the text pointer segment home only. The segment value is stored after win_Open returns (target 0x0279; candidate same instruction with BP-0x02) and reloaded at text printing (0x02D9). These homes are BP-0x06/BP-0x02, disjoint from hidden inputs at BP-0x2C, BP-0x2A, BP-0x28 and BP-0x26. The changed text home therefore cannot change any of the four earlier win_Open words or mode-5 geometry.",
+        "source_only_dos_actual_object": {
+          "module": "S15:384C",
+          "generated_source": {
+            "path": "build/source-only-dos/sources/U024.c",
+            "sha256": "7ed6c428f141619affc175e550142bdd8810b217fa0564dd32099d00e22f9172"
+          },
+          "build_report": {
+            "path": "build/source-only-dos/build-report.json",
+            "sha256": "bd3d4b7c0b8ab5e0e1ac6711e5ee5d806dfcfa40943fec9d897fd00091671e0c",
+            "status": "COMPILED_REUSED",
+            "reviewed_bodies": [
+              "o15_384C_0239"
+            ]
+          },
+          "compile_cache": {
+            "path": "build/source-only-dos/compile-cache.json",
+            "sha256": "c44333397e637515fe189e7d978aaed8d565b037afbb22209735f5c33b445cd3"
+          },
+          "object": {
+            "path": "build/source-only-dos/objects/U024.OBJ",
+            "sha256": "f36949de9103ba94cbe718b796e790a199964048e90cb57ec08f84020d39fc16",
+            "size": 6324
+          },
+          "toolchain": {
+            "profile": "msc600ax",
+            "flags": [
+              "/AL",
+              "/Os",
+              "/Og",
+              "/Oe",
+              "/Zi"
+            ]
+          },
+          "extraction": {
+            "public": "_o15_384C_0239",
+            "segment": "U024_TEXT",
+            "object_offset": "0x0239",
+            "target_offset": "0x0239",
+            "extent_bytes": 326
+          },
+          "comparison": {
+            "bound_result": "MISMATCH with exactly two differing bytes; both are BP displacement operands for the text pointer segment home",
+            "target_instructions": 137,
+            "candidate_instructions": 137,
+            "target_decoded_bytes": 326,
+            "candidate_decoded_bytes": 326,
+            "byte_identical_prefix_through_win_Open_return": true,
+            "prefix_hex": "558becb828009acc02f4295756b80021509ab604e820",
+            "bp_home_mapping": {
+              "BP-0x2C": "saved SI; same original/candidate value at call",
+              "BP-0x2A": "saved DI; same original/candidate value at call",
+              "BP-0x28": "same unnamed, uninitialized frame home at call; later handle-offset scratch",
+              "BP-0x26": "same unnamed, uninitialized frame home at call; later handle-segment scratch"
+            },
+            "all_instruction_pairs_identical_except": [
+              {
+                "function_relative_disp": "0x42",
+                "module_offset": "0x0279",
+                "original": "mov word ptr [bp-6], dx",
+                "candidate": "mov word ptr [bp-2], dx",
+                "role": "text-pointer segment store, after win_Open returns"
+              },
+              {
+                "function_relative_disp": "0x0A1",
+                "module_offset": "0x02D9",
+                "original": "push word ptr [bp-6]",
+                "candidate": "push word ptr [bp-2]",
+                "role": "reload of the same text-pointer segment for text printing"
+              }
+            ],
+            "private_home_lifetimes_match": true,
+            "basis": "tools/omf.py extracted the actual registered whole-module U024.OBJ; tools/match.py bound its fixups for function-level comparison; tools/mismatch.py decoded the bound original/candidate streams. The build report pins U024.c, U024.OBJ, the MSC profile/flags, and the reviewed body identity. The generated source includes SOURCE_ONLY_DOS declarations/aliases, so this check covers those translation-unit declarations as compiled.",
+            "codegen_home_lifetime_check": {
+              "original_BP-0x06": "Used only at 0x0279 to store the DX text-pointer segment after win_Open and at 0x02D9 to reload it for win_PrintTextInRect; there is no read before the store and no other use in this function.",
+              "source_only_BP-0x02": "Used only at 0x0279 to store the same DX text-pointer segment after win_Open and at 0x02D9 to reload it for win_PrintTextInRect; there is no read before the store and no other use in this function.",
+              "semantic_effect": "The displacement change selects another otherwise-dead stack home for one value with a dominating store and matching reload. It cannot affect any win_Open input (BP-0x2C, -0x2A, -0x28, -0x26), parameter (+6), handle (BP-0x12/-0x14), Rect (BP-0x10), Event (BP-0x24), or result (BP-0x18)."
+            }
+          }
+        }
+      },
+      "mode5_semantics": {
+        "source": "src/root/m2505.c:211-269; src/root/m20E8.c:207-222",
+        "effect": "For an object axis whose mode is 5, f_2505_03B9 reads win+0x10+2*axis through f_2505_04D7, so each of the four win_Open words can contribute to that axis before the object origin is added. The words are genuinely observable when the corresponding axis uses mode 5.",
+        "actual_2100_resource": {
+          "source": "pinned caller-boundary-audit.json actual_window_evidence",
+          "resource_index_sha256": "077d8aecdad5e816f0828204f7ca500a68b3a4a3288740ac75e73e44eaa8efc4",
+          "resource_data_sha256": "9c98c0f110e901a2c2db65944e4ebdf6b26392181e9415a34eb7b29617eaa899",
+          "object_count": 6,
+          "modes": [
+            [
+              0,
+              0,
+              1,
+              2
+            ],
+            [
+              1,
+              2,
+              1,
+              2
+            ],
+            [
+              1,
+              2,
+              1,
+              2
+            ],
+            [
+              1,
+              2,
+              1,
+              2
+            ],
+            [
+              1,
+              2,
+              1,
+              2
+            ],
+            [
+              1,
+              2,
+              1,
+              2
+            ]
+          ],
+          "mode5_axes": []
+        },
+        "existing_diagnostic": "The pinned supplemental raw report varies SI, DI, and stack poison in four real-resource controls; private bytes are exactly SI, DI, poison repeated for the two uninitialized words and original/candidate observations match. Its synthetic mode-5 control changes object 0 axis 0 to mode 5: SI=1 produces rect [134,70,471,236], SI=20 produces [153,70,490,236], and both cases report original_candidate_equal=true. The test exercises axis 0 specifically; identical pre-call code and same slot layout account statically for all four words."
+      },
+      "actual_callers": [
+        {
+          "caller": "LoadGame",
+          "source": "src/S09/m35F5.c:101",
+          "original_call": "S09:35F5:0x001D far vector call to o15 with one word 0 (only when fd_3D57_02C2 != 0)",
+          "o15_entry_registers": "LoadGame makes no SI/DI changes before this call; it inherits them from its caller."
+        },
+        {
+          "caller": "MenuQuit",
+          "source": "src/S15/m384C.c:131",
+          "original_call": "S15:384C:0x0207 near same-module call to o15 with one word 1, after push cs",
+          "o15_entry_registers": "MenuQuit makes no SI/DI changes before the call; its direct path is reached from o19_384C_0000 case 8 or the failed-load/new-game path."
+        },
+        {
+          "outer_caller": "o19_384C_0000",
+          "source": "src/S19/m384C.c:68-83",
+          "original_calls": "Original context calls LoadGame at 0x0049 and MenuQuit at 0x006E. The two o15 caller modes are therefore 0 (LoadGame) and 1 (MenuQuit) on the recorded source paths; SI/DI are inherited machine state, not constants invented by this audit."
+        }
+      ],
+      "source_safe_repair": "No source semantic repair is indicated. Keep the one-word historical call and account for the physical reads. Adding four zero/guessed arguments would replace the target stack values for mode-5 resources; merely changing the extern declaration to ellipsis would not materialize those words. The source-level BP-0x28/BP-0x26 contents are uninitialized until cleanup, so a natural C expression for them does not exist without changing the ABI/state model."
+    },
+    "audit_revision": {
+      "date": "2026-10-03",
+      "revision": "source-only-object-prefix-homes-verified",
+      "review_state": "candidate for root review"
+    }
+  },
+  "root_review": {
+    "reviewer": "root",
+    "complete_cfg": true,
+    "complete_data_widths": true,
+    "complete_calls_effects": true,
+    "codegen_only_residue": true,
+    "basis": "Reviewed the whole-function branch/call/state/width maps, source/evidence identities, explanations of residue and differential/negative limits. Matching observed service boundaries are composed through the actual caller ABI and same callee/slot/state; finite coverage alone is not acceptance.",
+    "note": "Actual SOURCE_ONLY U024 prefix/frame and all four implicit win_Open stack-word locations match the original for equal complete entry state. The sole two text-segment home displacements are a paired store/reload after that call, with no other home use/alias. No resource-mode assumption is needed."
+  }
+}

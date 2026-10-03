@@ -1,0 +1,460 @@
+{
+  "schema": "simant-dos-callback-table-source-binding-v1",
+  "category": "REVIEWED_SOURCE_STORAGE_BINDING",
+  "scope": "One source-functional near array owns all 25 far callback slots; existing consumer names are bounded views.",
+  "historical_claim_limit": "No recovered original COMDEF TU, order or padding; canonical ASM and historical ledger stay frozen.",
+  "review_sources": [
+    {
+      "path": "src/S00/m3126.asm",
+      "sha256": "be7a4a3b0fd9c56c47be50d20c60b0c2835002b7721bd913d36f8183be47ce5a",
+      "size": 18484
+    },
+    {
+      "path": "src/S00/m31AD.asm",
+      "sha256": "5d2ad69ff4affb4be4242e82187065cc5e0b3502cc0cc3e00ad3802ccee2656e",
+      "size": 81450
+    },
+    {
+      "path": "src/S01/m3126.asm",
+      "sha256": "ac99ea7821999d034e64201798d49dfaf64632f34e5f5dee428c9b6dec01a44a",
+      "size": 44403
+    },
+    {
+      "path": "src/S02/m3126.asm",
+      "sha256": "4291e4084ff26dcee75016b03c1b8d8412129a97ad00787b41ac567c16f5178b",
+      "size": 20400
+    },
+    {
+      "path": "src/S03/m3126.asm",
+      "sha256": "b0b9d296f23b4f8a5b4706008b21b6ad96429636da11bf22ddb2126ee362f2ff",
+      "size": 35317
+    },
+    {
+      "path": "src/S04/m35F5.c",
+      "sha256": "65db48855f97c32600ff7527999a463019ba2884117f0c921b35e46d5d37d406",
+      "size": 11387
+    },
+    {
+      "path": "src/S10/m35F5.c",
+      "sha256": "69be1d6a9649e99102131c702e1920b6e84acc0c1b4cd737d2a047552f917ed5",
+      "size": 10707
+    },
+    {
+      "path": "src/S12/m384C.c",
+      "sha256": "584bf940832e3f8e975afdf85ed398fc82b6470e4a5c3ec46c1b4fcd15240002",
+      "size": 19819
+    },
+    {
+      "path": "src/S14/m384C.c",
+      "sha256": "245f8c01d5a330c571048b8cd1b134cf544394af84f7b502a153c73adbd91020",
+      "size": 17919
+    },
+    {
+      "path": "src/S15/m384C.c",
+      "sha256": "01b51eecedcd28e2213819572c846a9754039f4a527e6da5e56e57783398bdd5",
+      "size": 8116
+    },
+    {
+      "path": "src/S16/m384C.c",
+      "sha256": "9e3f4c34c560ca4d93346a43bf383f4e6cc3549ec6878b6194c974164d49a540",
+      "size": 8239
+    },
+    {
+      "path": "src/S19/m384C.c",
+      "sha256": "fac1a097c3d992fed772002a87cb5a206050c67a3061e9e9168edc6032e1696b",
+      "size": 7190
+    },
+    {
+      "path": "src/S20/m39F1.c",
+      "sha256": "6fd0a02991a29325f214049a8a8961aaee4bc65fbf760b296e63a6ac8f6fbe7b",
+      "size": 6627
+    },
+    {
+      "path": "src/S22/m39C7.c",
+      "sha256": "e9add4ebd445bd943f24a65764be2a79581f2fc26c349741fdfe8efae3b7030d",
+      "size": 31328
+    },
+    {
+      "path": "src/S24/m39C7.c",
+      "sha256": "3de9615a57dbe35eacd073726b451478dc5b12396360501631d7553b6139e240",
+      "size": 8405
+    },
+    {
+      "path": "src/root/m0250.c",
+      "sha256": "bb8a325c543151e09cb173d2194844877805a9e1058d3b24362ff5a7cbd9f61b",
+      "size": 65517
+    },
+    {
+      "path": "src/root/m0798.c",
+      "sha256": "ecf807dc3159f583f6ee3ea8a9f5422650a64bb557d4551e9c97b5dcc7b6a1b8",
+      "size": 14874
+    },
+    {
+      "path": "src/root/m1B4E.asm",
+      "sha256": "a32d75d2d4ea36980b659d26e9ddd86bcde65d9e250ebac4cdc29c0e847c67a2",
+      "size": 8451
+    },
+    {
+      "path": "src/root/m1B73.asm",
+      "sha256": "3097a6b03ff1d8bdfa7d573632d9905de88d754c8b1e047de4014c4f186cb848",
+      "size": 35010
+    },
+    {
+      "path": "src/root/m1C62.c",
+      "sha256": "927309d2bf5019e17e58962c7da6a0d45298a2f3bf18fef0b0347cc4498ada6c",
+      "size": 9885
+    },
+    {
+      "path": "src/root/m1CE2.c",
+      "sha256": "e5c2cb4b8dbe7af6d263072002a49e012b290c1082f0fc877b479728b75bacd3",
+      "size": 10210
+    },
+    {
+      "path": "src/root/m1D8E.c",
+      "sha256": "afe9364f319633dd85c276bed18e848a605934156bfbb4fc276d304cd2ec2556",
+      "size": 10996
+    },
+    {
+      "path": "src/root/m1FAA.c",
+      "sha256": "e13a110be3cf3643419027a40a18002af231b6f9e159e89fc78f031a70929f66",
+      "size": 1532
+    },
+    {
+      "path": "src/root/m1FD2.c",
+      "sha256": "f4359bdaf4cfc0fe326a54cf8a1eacb9ba3098b710bf2a561b3d0f48569bf6d8",
+      "size": 10086
+    },
+    {
+      "path": "src/root/m205F.c",
+      "sha256": "225326bdd127dd3825035ae0fe8434e6677c0ee81203fee2e16bac0cf90fffc6",
+      "size": 6015
+    },
+    {
+      "path": "src/root/m208F.c",
+      "sha256": "57fc64215f6ff681790e1afe2321f0348ee0cb8c3fbce066cef5f2dd5a18a72e",
+      "size": 6853
+    },
+    {
+      "path": "src/root/m21FA.c",
+      "sha256": "49dc5ef1b2e34263336fea6a4ab5e9992c6dc5fdca404c7efc2d2315b98f6b1f",
+      "size": 13758
+    },
+    {
+      "path": "src/root/m22BF.c",
+      "sha256": "f5b617067cdc711593e94dbb725ae9ceaeb12b890f198af0d66c1973e15133a0",
+      "size": 18937
+    },
+    {
+      "path": "src/root/m23E6.c",
+      "sha256": "6992614db2546bf039d6e9fb3be17df0a48607dfa3b3e3faba05ed5e5e938bec",
+      "size": 11709
+    },
+    {
+      "path": "src/root/m24AB.c",
+      "sha256": "1d263c6e1f242981d7c3e37d839dc481dc75deed45d7d1bcaaa075cad124de7f",
+      "size": 5171
+    },
+    {
+      "path": "src/root/m259D.c",
+      "sha256": "c4329ddb75629a235043d9da1eb11c7dd6f2cb3826fe392bfc8a27c98eeb97e1",
+      "size": 6533
+    },
+    {
+      "path": "src/root/m2662.c",
+      "sha256": "78971de2531570a3fb9c7ae28d888de90e092470c4414f654948e5a4f5e1f8be",
+      "size": 15289
+    },
+    {
+      "path": "work/source-only-dos/queue-lifetime-contract-v1.json",
+      "sha256": "44b4f2afca0988722d1ff10df933771569c61cc02cd8f11b20ff4ffe8a8af97e",
+      "size": 6627
+    }
+  ],
+  "runtime_contract_key": "callback_storage_contract",
+  "runtime_contract": {
+    "path": "work/source-only-dos/callback-table-reviewed-contract-v1.json",
+    "sha256": "687b19c934090234f23a129088fede174c97394bceb65f83c83b48ddd61c83d1",
+    "size": 89177
+  },
+  "bindings": [],
+  "providers": [
+    {
+      "module": "source-owned:driver-callback-table",
+      "owner": "_driver_callback_table",
+      "source": {
+        "path": "work/source-only-dos/providers/callback-table.c",
+        "sha256": "0768e9340f7d062ca81979e97abeeed70f083232963649b4d20d0ceeda0fdcf7",
+        "size": 47
+      },
+      "profile": "msc600ax",
+      "flags": [
+        "/AL",
+        "/Os",
+        "/Gs"
+      ],
+      "basename": "CBOWNER",
+      "communals": [
+        {
+          "name": "_driver_callback_table",
+          "kind": "near",
+          "length": 100
+        }
+      ]
+    }
+  ],
+  "communal_aliases": [
+    {
+      "alias": "_g_9128",
+      "owner": "_driver_callback_table",
+      "module": "source-owned:driver-callback-table",
+      "source": "work/source-only-dos/providers/callback-table.c",
+      "source_sha256": "0768e9340f7d062ca81979e97abeeed70f083232963649b4d20d0ceeda0fdcf7",
+      "owner_size": 100,
+      "view_size": 4,
+      "offset": 0,
+      "source_anchor": "25-entry source reset/copy and four driver dispatch tables; slot 0"
+    },
+    {
+      "alias": "_g_912C",
+      "owner": "_driver_callback_table",
+      "module": "source-owned:driver-callback-table",
+      "source": "work/source-only-dos/providers/callback-table.c",
+      "source_sha256": "0768e9340f7d062ca81979e97abeeed70f083232963649b4d20d0ceeda0fdcf7",
+      "owner_size": 100,
+      "view_size": 4,
+      "offset": 4,
+      "source_anchor": "25-entry source reset/copy and four driver dispatch tables; slot 1"
+    },
+    {
+      "alias": "_g_9130",
+      "owner": "_driver_callback_table",
+      "module": "source-owned:driver-callback-table",
+      "source": "work/source-only-dos/providers/callback-table.c",
+      "source_sha256": "0768e9340f7d062ca81979e97abeeed70f083232963649b4d20d0ceeda0fdcf7",
+      "owner_size": 100,
+      "view_size": 4,
+      "offset": 8,
+      "source_anchor": "25-entry source reset/copy and four driver dispatch tables; slot 2"
+    },
+    {
+      "alias": "_g_9134",
+      "owner": "_driver_callback_table",
+      "module": "source-owned:driver-callback-table",
+      "source": "work/source-only-dos/providers/callback-table.c",
+      "source_sha256": "0768e9340f7d062ca81979e97abeeed70f083232963649b4d20d0ceeda0fdcf7",
+      "owner_size": 100,
+      "view_size": 4,
+      "offset": 12,
+      "source_anchor": "25-entry source reset/copy and four driver dispatch tables; slot 3"
+    },
+    {
+      "alias": "_g_9138",
+      "owner": "_driver_callback_table",
+      "module": "source-owned:driver-callback-table",
+      "source": "work/source-only-dos/providers/callback-table.c",
+      "source_sha256": "0768e9340f7d062ca81979e97abeeed70f083232963649b4d20d0ceeda0fdcf7",
+      "owner_size": 100,
+      "view_size": 4,
+      "offset": 16,
+      "source_anchor": "25-entry source reset/copy and four driver dispatch tables; slot 4"
+    },
+    {
+      "alias": "_g_913C",
+      "owner": "_driver_callback_table",
+      "module": "source-owned:driver-callback-table",
+      "source": "work/source-only-dos/providers/callback-table.c",
+      "source_sha256": "0768e9340f7d062ca81979e97abeeed70f083232963649b4d20d0ceeda0fdcf7",
+      "owner_size": 100,
+      "view_size": 4,
+      "offset": 20,
+      "source_anchor": "25-entry source reset/copy and four driver dispatch tables; slot 5"
+    },
+    {
+      "alias": "_g_9140",
+      "owner": "_driver_callback_table",
+      "module": "source-owned:driver-callback-table",
+      "source": "work/source-only-dos/providers/callback-table.c",
+      "source_sha256": "0768e9340f7d062ca81979e97abeeed70f083232963649b4d20d0ceeda0fdcf7",
+      "owner_size": 100,
+      "view_size": 4,
+      "offset": 24,
+      "source_anchor": "25-entry source reset/copy and four driver dispatch tables; slot 6"
+    },
+    {
+      "alias": "_g_9144",
+      "owner": "_driver_callback_table",
+      "module": "source-owned:driver-callback-table",
+      "source": "work/source-only-dos/providers/callback-table.c",
+      "source_sha256": "0768e9340f7d062ca81979e97abeeed70f083232963649b4d20d0ceeda0fdcf7",
+      "owner_size": 100,
+      "view_size": 4,
+      "offset": 28,
+      "source_anchor": "25-entry source reset/copy and four driver dispatch tables; slot 7"
+    },
+    {
+      "alias": "_g_9148",
+      "owner": "_driver_callback_table",
+      "module": "source-owned:driver-callback-table",
+      "source": "work/source-only-dos/providers/callback-table.c",
+      "source_sha256": "0768e9340f7d062ca81979e97abeeed70f083232963649b4d20d0ceeda0fdcf7",
+      "owner_size": 100,
+      "view_size": 4,
+      "offset": 32,
+      "source_anchor": "25-entry source reset/copy and four driver dispatch tables; slot 8"
+    },
+    {
+      "alias": "_g_914C",
+      "owner": "_driver_callback_table",
+      "module": "source-owned:driver-callback-table",
+      "source": "work/source-only-dos/providers/callback-table.c",
+      "source_sha256": "0768e9340f7d062ca81979e97abeeed70f083232963649b4d20d0ceeda0fdcf7",
+      "owner_size": 100,
+      "view_size": 4,
+      "offset": 36,
+      "source_anchor": "25-entry source reset/copy and four driver dispatch tables; slot 9"
+    },
+    {
+      "alias": "_g_9150",
+      "owner": "_driver_callback_table",
+      "module": "source-owned:driver-callback-table",
+      "source": "work/source-only-dos/providers/callback-table.c",
+      "source_sha256": "0768e9340f7d062ca81979e97abeeed70f083232963649b4d20d0ceeda0fdcf7",
+      "owner_size": 100,
+      "view_size": 4,
+      "offset": 40,
+      "source_anchor": "25-entry source reset/copy and four driver dispatch tables; slot 10"
+    },
+    {
+      "alias": "_g_9154",
+      "owner": "_driver_callback_table",
+      "module": "source-owned:driver-callback-table",
+      "source": "work/source-only-dos/providers/callback-table.c",
+      "source_sha256": "0768e9340f7d062ca81979e97abeeed70f083232963649b4d20d0ceeda0fdcf7",
+      "owner_size": 100,
+      "view_size": 4,
+      "offset": 44,
+      "source_anchor": "25-entry source reset/copy and four driver dispatch tables; slot 11"
+    },
+    {
+      "alias": "_g_9158",
+      "owner": "_driver_callback_table",
+      "module": "source-owned:driver-callback-table",
+      "source": "work/source-only-dos/providers/callback-table.c",
+      "source_sha256": "0768e9340f7d062ca81979e97abeeed70f083232963649b4d20d0ceeda0fdcf7",
+      "owner_size": 100,
+      "view_size": 4,
+      "offset": 48,
+      "source_anchor": "25-entry source reset/copy and four driver dispatch tables; slot 12"
+    },
+    {
+      "alias": "_g_9160",
+      "owner": "_driver_callback_table",
+      "module": "source-owned:driver-callback-table",
+      "source": "work/source-only-dos/providers/callback-table.c",
+      "source_sha256": "0768e9340f7d062ca81979e97abeeed70f083232963649b4d20d0ceeda0fdcf7",
+      "owner_size": 100,
+      "view_size": 4,
+      "offset": 56,
+      "source_anchor": "25-entry source reset/copy and four driver dispatch tables; slot 14"
+    },
+    {
+      "alias": "_g_9164",
+      "owner": "_driver_callback_table",
+      "module": "source-owned:driver-callback-table",
+      "source": "work/source-only-dos/providers/callback-table.c",
+      "source_sha256": "0768e9340f7d062ca81979e97abeeed70f083232963649b4d20d0ceeda0fdcf7",
+      "owner_size": 100,
+      "view_size": 4,
+      "offset": 60,
+      "source_anchor": "25-entry source reset/copy and four driver dispatch tables; slot 15"
+    },
+    {
+      "alias": "_g_9168",
+      "owner": "_driver_callback_table",
+      "module": "source-owned:driver-callback-table",
+      "source": "work/source-only-dos/providers/callback-table.c",
+      "source_sha256": "0768e9340f7d062ca81979e97abeeed70f083232963649b4d20d0ceeda0fdcf7",
+      "owner_size": 100,
+      "view_size": 4,
+      "offset": 64,
+      "source_anchor": "25-entry source reset/copy and four driver dispatch tables; slot 16"
+    },
+    {
+      "alias": "_g_916C",
+      "owner": "_driver_callback_table",
+      "module": "source-owned:driver-callback-table",
+      "source": "work/source-only-dos/providers/callback-table.c",
+      "source_sha256": "0768e9340f7d062ca81979e97abeeed70f083232963649b4d20d0ceeda0fdcf7",
+      "owner_size": 100,
+      "view_size": 4,
+      "offset": 68,
+      "source_anchor": "25-entry source reset/copy and four driver dispatch tables; slot 17"
+    },
+    {
+      "alias": "_g_9170",
+      "owner": "_driver_callback_table",
+      "module": "source-owned:driver-callback-table",
+      "source": "work/source-only-dos/providers/callback-table.c",
+      "source_sha256": "0768e9340f7d062ca81979e97abeeed70f083232963649b4d20d0ceeda0fdcf7",
+      "owner_size": 100,
+      "view_size": 4,
+      "offset": 72,
+      "source_anchor": "25-entry source reset/copy and four driver dispatch tables; slot 18"
+    },
+    {
+      "alias": "_g_9174",
+      "owner": "_driver_callback_table",
+      "module": "source-owned:driver-callback-table",
+      "source": "work/source-only-dos/providers/callback-table.c",
+      "source_sha256": "0768e9340f7d062ca81979e97abeeed70f083232963649b4d20d0ceeda0fdcf7",
+      "owner_size": 100,
+      "view_size": 4,
+      "offset": 76,
+      "source_anchor": "25-entry source reset/copy and four driver dispatch tables; slot 19"
+    },
+    {
+      "alias": "_g_9178",
+      "owner": "_driver_callback_table",
+      "module": "source-owned:driver-callback-table",
+      "source": "work/source-only-dos/providers/callback-table.c",
+      "source_sha256": "0768e9340f7d062ca81979e97abeeed70f083232963649b4d20d0ceeda0fdcf7",
+      "owner_size": 100,
+      "view_size": 4,
+      "offset": 80,
+      "source_anchor": "25-entry source reset/copy and four driver dispatch tables; slot 20"
+    },
+    {
+      "alias": "_g_917C",
+      "owner": "_driver_callback_table",
+      "module": "source-owned:driver-callback-table",
+      "source": "work/source-only-dos/providers/callback-table.c",
+      "source_sha256": "0768e9340f7d062ca81979e97abeeed70f083232963649b4d20d0ceeda0fdcf7",
+      "owner_size": 100,
+      "view_size": 4,
+      "offset": 84,
+      "source_anchor": "25-entry source reset/copy and four driver dispatch tables; slot 21"
+    },
+    {
+      "alias": "_g_9184",
+      "owner": "_driver_callback_table",
+      "module": "source-owned:driver-callback-table",
+      "source": "work/source-only-dos/providers/callback-table.c",
+      "source_sha256": "0768e9340f7d062ca81979e97abeeed70f083232963649b4d20d0ceeda0fdcf7",
+      "owner_size": 100,
+      "view_size": 4,
+      "offset": 92,
+      "source_anchor": "25-entry source reset/copy and four driver dispatch tables; slot 23"
+    },
+    {
+      "alias": "_g_9188",
+      "owner": "_driver_callback_table",
+      "module": "source-owned:driver-callback-table",
+      "source": "work/source-only-dos/providers/callback-table.c",
+      "source_sha256": "0768e9340f7d062ca81979e97abeeed70f083232963649b4d20d0ceeda0fdcf7",
+      "owner_size": 100,
+      "view_size": 4,
+      "offset": 96,
+      "source_anchor": "25-entry source reset/copy and four driver dispatch tables; slot 24"
+    }
+  ]
+}

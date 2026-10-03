@@ -1,0 +1,326 @@
+{
+  "schema": "simant-dos-strict-static-review-v1",
+  "function": "f_171C_0ADC",
+  "status": "BEHAVIOR_EXACT_CONFIRMED",
+  "registered_evidence": {
+    "path": "evidence/behavior/functions/f_171C_0ADC/contracts/live-state-v2/evidence.json",
+    "sha256": "357d1709069e947c450fe39e64254bda89d83c76f95b18c944e32f3439512600",
+    "size": 13879
+  },
+  "registered_source": {
+    "path": "evidence/behavior/functions/f_171C_0ADC/contracts/live-state-v2/module.c",
+    "sha256": "3d24904696b29c36b118479ecc50dd80b8d173f58a632a339df9391d08ea085b",
+    "whole_module": true,
+    "module": "root:171C"
+  },
+  "worker_receipt": {
+    "path": "build/workers/dos_static_memory_small/f_171C_0ADC.json",
+    "sha256": "bb2bc1aa0bc1c0c82a148ed099f8fb3388456acb462572ad16699856da326465",
+    "size": 16164
+  },
+  "audit": {
+    "schema": "simant-strict-static-completeness-v1",
+    "function": "f_171C_0ADC",
+    "status": "BEHAVIOR_EXACT_CONFIRMED",
+    "source": {
+      "path": "evidence/behavior/functions/f_171C_0ADC/contracts/live-state-v2/module.c",
+      "sha256": "3d24904696b29c36b118479ecc50dd80b8d173f58a632a339df9391d08ea085b",
+      "function_lines": "446-472"
+    },
+    "registry_evidence": {
+      "path": "evidence/behavior/functions/f_171C_0ADC/contracts/live-state-v2/evidence.json",
+      "sha256": "357d1709069e947c450fe39e64254bda89d83c76f95b18c944e32f3439512600"
+    },
+    "inputs": [
+      {
+        "path": "evidence/behavior/manifest.json",
+        "sha256": "dae79bdf74d7660e7e2eb47e8b463a9576c8d74a8e6ccd9e91af6d51f871ecea",
+        "role": "behavior registration manifest"
+      },
+      {
+        "path": "tools/context.py",
+        "sha256": "6d94d66482736663f4dd29945ae3d206e5543aaccdb062e96304f5cb0d1a97be",
+        "role": "no-raw original disassembly tool"
+      },
+      {
+        "path": "layout/oracle.lock.json",
+        "sha256": "2c6d9e98c688621ad49a08c78d0e0968f4076b036be56ec0738217b533ccde13",
+        "role": "immutable oracle lock"
+      },
+      {
+        "path": "assets/SIMANT.EXE",
+        "sha256": "aa0596c6766322a8229ee3c36e57048c92adc82d50fbe2ef37afb8b85fcf4f11",
+        "role": "original oracle identity; no bytes copied into receipt"
+      },
+      {
+        "path": "tools/behavior_suites/archive/memory-final-dda4f6dd.py",
+        "sha256": "dda4f6dd78778f2a98b811d1971fc5923300d57b2a2fa35221a213d208eb321d",
+        "role": "executed differential suite"
+      },
+      {
+        "path": "evidence/behavior/harnesses/memory-final-20261002/tools/behavior.py",
+        "sha256": "2c0799048057f59eae61a48be4d695278635594484adf0c70bf46c51b4e0c799",
+        "role": "pinned behavior runner"
+      },
+      {
+        "path": "evidence/behavior/harnesses/memory-final-20261002/runs/ordered-sequence-plan.json",
+        "sha256": "d7a75b6979c978a5f0214bd4cee7c1afe387f35e36fa975dd75e03f109e3485c",
+        "role": "persistent sequence plan"
+      },
+      {
+        "path": "evidence/behavior/functions/f_171C_0ADC/contracts/live-state-v2/module.c",
+        "sha256": "3d24904696b29c36b118479ecc50dd80b8d173f58a632a339df9391d08ea085b",
+        "role": "registered reconstructed C whole module"
+      },
+      {
+        "path": "evidence/behavior/functions/f_171C_0ADC/contracts/live-state-v2/evidence.json",
+        "sha256": "357d1709069e947c450fe39e64254bda89d83c76f95b18c944e32f3439512600",
+        "role": "registered behavior evidence"
+      },
+      {
+        "path": "evidence/behavior/functions/f_171C_0ADC/contracts/live-state-v2/run.json",
+        "sha256": "af2bb88acbd97e719e01f325287bf33a334dfc200c5f01217f93ff4fc3ac627c",
+        "role": "pinned execution evidence"
+      },
+      {
+        "path": "evidence/behavior/functions/f_171C_0ADC/contracts/live-state-v2/negative-controls.json",
+        "sha256": "3d20d355d5e1f8a0f1795b5d99bce39bcb06c959391cc4fa605850d87e75c1df",
+        "role": "pinned negative-control evidence"
+      },
+      {
+        "path": "evidence/behavior/harnesses/memory-final-20261002/runs/f_171C_0ADC.worker-report.json",
+        "sha256": "1c0809bd146b19fe0797ef419e0ecb1a9d7e66e70688a8d09c3c19dda5a6f036",
+        "role": "per-function differential report"
+      },
+      {
+        "path": "build/workers/behavior_memory/final-pinned-20261002/snapshot/build/workers/behavior_memory/final-run/f_171C_0ADC-case-ledger.jsonl.gz",
+        "sha256": "4a72522190bf959ffa0639db97e6b962154f964ad87cf79ed01cde5e7c4c7224",
+        "role": "per-function differential case ledger"
+      }
+    ],
+    "original_function": {
+      "unit": "root",
+      "seg": "171C",
+      "off": "0ADC",
+      "size": 262
+    },
+    "disassembly_research": {
+      "tool": {
+        "path": "tools/context.py",
+        "sha256": "6d94d66482736663f4dd29945ae3d206e5543aaccdb062e96304f5cb0d1a97be",
+        "invocation": "python tools/context.py f_171C_0ADC (no --raw)"
+      },
+      "oracle": {
+        "path": "assets/SIMANT.EXE",
+        "sha256": "aa0596c6766322a8229ee3c36e57048c92adc82d50fbe2ef37afb8b85fcf4f11",
+        "lock_sha256": "2c6d9e98c688621ad49a08c78d0e0968f4076b036be56ec0738217b533ccde13"
+      },
+      "rendered_text": "disassembly.txt in this worker directory; addresses/mnemonics only, no byte arrays"
+    },
+    "branch_map": [
+      {
+        "address": "0x0B60/0x0B65",
+        "mnemonic": "je",
+        "target": "0x0B78",
+        "assembly_condition": "b->prev == 0",
+        "source_anchor": "module.c:458-461",
+        "width_signedness": "unsigned 16-bit previous-segment field",
+        "taken_edge": "Update g_91AC for a new free-list head; fallthrough otherwise writes previous->next."
+      },
+      {
+        "address": "0x0B83/0x0B8B",
+        "mnemonic": "je",
+        "target": "0x0BDB",
+        "assembly_condition": "b->next == 0",
+        "source_anchor": "module.c:462-470",
+        "width_signedness": "unsigned 16-bit next-segment field",
+        "taken_edge": "Skip next-neighbor coalescing and link repair when there is no successor."
+      },
+      {
+        "address": "0x0B9C/0x0BA4",
+        "mnemonic": "jne",
+        "target": "0x0BCC",
+        "assembly_condition": "b->next - b->paras != (unsigned)SEG(b)",
+        "source_anchor": "module.c:464-468",
+        "width_signedness": "unsigned 16-bit subtraction/equality; modular word arithmetic",
+        "taken_edge": "Skip coalescing when the next free block does not begin at b segment + b.paras."
+      },
+      {
+        "address": "0x0BC9/0x0BCF",
+        "mnemonic": "je",
+        "target": "0x0BDB",
+        "assembly_condition": "reloaded b->next == 0",
+        "source_anchor": "module.c:467-470",
+        "width_signedness": "unsigned 16-bit null segment word",
+        "taken_edge": "Skip successor->prev update when the merged/list successor is null."
+      }
+    ],
+    "returns": [
+      {
+        "address": "0x0BE0",
+        "source_anchor": "module.c:446-472",
+        "value": "void far return after copy, handle publication, free-header restoration, and link repair."
+      }
+    ],
+    "call_map": [
+      {
+        "address": "0x0B1E",
+        "callee": "f_194D_0006",
+        "source_anchor": "module.c:454",
+        "order": "Only call; completes before handle-table publication and free-list repair.",
+        "arguments": "(dst=b, src=NEXTBLK(b), paragraphs=NEXTBLK(b)->paras); two far pointers and unsigned 16-bit paragraph count; far caller-clean ABI (10 argument bytes). The pinned original helper copies count*16 bytes, including the moved block header and payload."
+      }
+    ],
+    "memory_state": {
+      "reads": [
+        "Input block header *b copied to the 32-byte automatic save; b.segment captured as unsigned long.",
+        "Adjacent source block begins at segment SEG(b)+b.paras, offset zero; its +0x06 paragraph count determines helper copy size; copied header provides handle, paras, prev, next.",
+        "s_2F46 far handle-table base plus copied block.handle selects the master-pointer entry.",
+        "After restoring the saved free header, reads b.prev and b.next; on adjacency path reads successor.next and successor.paras."
+      ],
+      "writes": [
+        "f_194D_0006 copies the entire adjacent block (paras paragraphs) into the hole at b.",
+        "Master table entry at s_2F46 + copied b.handle receives the moved payload far pointer at old hole address + 0x20000L (two paragraphs), preserving offset and advancing segment by two.",
+        "Restores save as a free header after the moved block; updates either prior free block next or g_91AC; if successor is contiguous, removes it and adds its paragraph count; updates successor.prev when non-null."
+      ]
+    },
+    "constants_widths_pointer_arithmetic": {
+      "findings": [
+        "Block byte layout used here: handle +0x00 word; paras +0x06 word; type +0x08 byte; lock +0x09 byte; next +0x0E word; prev +0x10 word; total 32 bytes (the 16-word save/copy shape).",
+        "SEG extraction and b->next/b->paras fields are 16-bit unsigned words; saved seg is unsigned long; (long)b + 0x20000L advances the far pointer by exactly two paragraphs while preserving its offset.",
+        "Adjacency expression is 16-bit unsigned subtraction; helper count is unsigned 16-bit paragraphs, not bytes."
+      ],
+      "pointer_accesses": [
+        "save=*b and *b=save copy one 32-byte header, with stack-local save distinct from the live heap.",
+        "The block move copies the full successor allocation, header plus data, from NEXTBLK(b) to b.",
+        "The published handle points to moved payload at b+2 paragraphs. Restored free block is at old b segment + moved b.paras.",
+        "Linked-list links are segment words with offset zero; BLK(0) is the null far pointer."
+      ]
+    },
+    "static_axes": {
+      "algorithm_and_control_flow": {
+        "complete": true,
+        "evidence": "Every conditional/loop site in the complete 0x0ADC function extent is mapped above, including taken/fallthrough effects and returns."
+      },
+      "constants_widths_signedness": {
+        "complete": true,
+        "evidence": [
+          "Block byte layout used here: handle +0x00 word; paras +0x06 word; type +0x08 byte; lock +0x09 byte; next +0x0E word; prev +0x10 word; total 32 bytes (the 16-word save/copy shape).",
+          "SEG extraction and b->next/b->paras fields are 16-bit unsigned words; saved seg is unsigned long; (long)b + 0x20000L advances the far pointer by exactly two paragraphs while preserving its offset.",
+          "Adjacency expression is 16-bit unsigned subtraction; helper count is unsigned 16-bit paragraphs, not bytes."
+        ]
+      },
+      "pointer_calculation_and_heap_layout": {
+        "complete": true,
+        "evidence": [
+          "save=*b and *b=save copy one 32-byte header, with stack-local save distinct from the live heap.",
+          "The block move copies the full successor allocation, header plus data, from NEXTBLK(b) to b.",
+          "The published handle points to moved payload at b+2 paragraphs. Restored free block is at old b segment + moved b.paras.",
+          "Linked-list links are segment words with offset zero; BLK(0) is the null far pointer."
+        ]
+      },
+      "calls_arguments_order_and_abi": {
+        "complete": true,
+        "evidence": "All observed calls are listed with source anchor, argument values, call ordering, call distance and caller stack cleanup where applicable."
+      },
+      "memory_and_state_effects": {
+        "complete": true,
+        "evidence": [
+          "Input block header *b copied to the 32-byte automatic save; b.segment captured as unsigned long.",
+          "Adjacent source block begins at segment SEG(b)+b.paras, offset zero; its +0x06 paragraph count determines helper copy size; copied header provides handle, paras, prev, next.",
+          "s_2F46 far handle-table base plus copied block.handle selects the master-pointer entry.",
+          "After restoring the saved free header, reads b.prev and b.next; on adjacency path reads successor.next and successor.paras.",
+          "f_194D_0006 copies the entire adjacent block (paras paragraphs) into the hole at b.",
+          "Master table entry at s_2F46 + copied b.handle receives the moved payload far pointer at old hole address + 0x20000L (two paragraphs), preserving offset and advancing segment by two.",
+          "Restores save as a free header after the moved block; updates either prior free block next or g_91AC; if successor is contiguous, removes it and adds its paragraph count; updates successor.prev when non-null."
+        ]
+      },
+      "observable_side_effects": {
+        "complete": true,
+        "evidence": "Heap/list/counter effects are delegated at the mapped helper boundaries; diagnostics and Punt/sprintf effects and their order are included where applicable."
+      },
+      "dependency_boundaries": {
+        "complete": true,
+        "evidence": "External far boundary: f_194D_0006 paragraph-copy helper. Its original context body consumes the 16-bit paragraph count as count*16 bytes in chunked REP MOVSW copies. The caller passes two far pointers plus the unsigned word count and cleans 10 argument bytes."
+      },
+      "residual_semantics": {
+        "complete": true,
+        "evidence": "No branch, condition, constant, width, pointer calculation, call, ordered side effect, memory access, or state update in the original extent is left without a C counterpart."
+      }
+    },
+    "remaining_differences": [
+      {
+        "kind": "CODEGEN_ONLY",
+        "original_address": "0x0ADC",
+        "source_anchor": "module.c:446-472",
+        "explicit_explanation": "Pinned production candidate is not strict-byte exact: length 260 != target 262, bytes differ (first at +0x5, 212 differing), relocation set differs (1 vs 1). The complete original CFG and all observable operations map to the source body; the residual is candidate instruction encoding/register/frame/ordering output under MSC, with no semantic difference identified by this audit. This receipt does not claim byte exactness."
+      }
+    ],
+    "unexplained_semantic_differences": [],
+    "differential_evidence": {
+      "contract": "f_171C_0ADC-valid-live-ralloc-sequences-v1",
+      "suite": {
+        "path": "tools/behavior_suites/archive/memory-final-dda4f6dd.py",
+        "sha256": "dda4f6dd78778f2a98b811d1971fc5923300d57b2a2fa35221a213d208eb321d",
+        "id": "ralloc-memory-final-20261002"
+      },
+      "run_report": {
+        "path": "evidence/behavior/functions/f_171C_0ADC/contracts/live-state-v2/run.json",
+        "sha256": "af2bb88acbd97e719e01f325287bf33a334dfc200c5f01217f93ff4fc3ac627c"
+      },
+      "matched": 124,
+      "calls": 124,
+      "mismatches": 0,
+      "errors": 0,
+      "target_invocations": 124,
+      "negative_control": {
+        "path": "evidence/behavior/functions/f_171C_0ADC/contracts/live-state-v2/negative-controls.json",
+        "sha256": "3d20d355d5e1f8a0f1795b5d99bce39bcb06c959391cc4fa605850d87e75c1df",
+        "errors": 0,
+        "mismatches_detected": 1,
+        "categories": [
+          "nonstack_memory"
+        ],
+        "mutant_executed": true,
+        "baseline_matches": true
+      },
+      "limits": [
+        "Finite directed plus deterministic seeded randomized differential run; not exhaustive.",
+        "The candidate module includes SCAFFOLD regions outside recovered target bodies.",
+        "Candidate target byte extents remain nonexact; any acceptance must be separate BEHAVIOR_EXACT and must not alter historical EXACT."
+      ],
+      "contract_excluded": [
+        {
+          "effect": "Invalid/corrupt heap and invalid-handle rejection paths",
+          "reason": "The corpus is intentionally restricted to structurally valid initialized heaps and live handle identities."
+        },
+        {
+          "effect": "Rootgate Punt/nonreturning paths",
+          "reason": "No Punt result is replaced with a synthetic allocator failure; terminal Punt behavior is outside this valid-state corpus."
+        },
+        {
+          "effect": "Unsequenced external callers, concurrency, and arbitrary aliasing",
+          "reason": "The run covers only the pinned deterministic operation sequences and their listed inputs."
+        }
+      ],
+      "case_ledger": {
+        "path": "build/workers/behavior_memory/final-pinned-20261002/snapshot/build/workers/behavior_memory/final-run/f_171C_0ADC-case-ledger.jsonl.gz",
+        "sha256": "4a72522190bf959ffa0639db97e6b962154f964ad87cf79ed01cde5e7c4c7224"
+      }
+    },
+    "review_notes": [
+      "Static correspondence covers the entire disassembled body and registered C function, including validation/error and loop paths present in the body.",
+      "Differential evidence is finite: valid initialized paragraph-aligned heaps and deterministic operation sequences only; the contract excludes corrupt/invalid heap and handle rejection behavior, terminal Punt behavior, unsequenced callers, concurrency, and arbitrary aliasing.",
+      "Calls into Punt, WinPrintf, compiler/runtime helpers, and any external host/VM behavior remain dependency boundaries. This audit proves the call sites and arguments/order, not those callees internals.",
+      "The source is a behavior reconstruction candidate; strict historical byte identity remains independently false and is not upgraded by this receipt."
+    ]
+  },
+  "root_review": {
+    "reviewer": "root",
+    "complete_cfg": true,
+    "complete_data_widths": true,
+    "complete_calls_effects": true,
+    "codegen_only_residue": true,
+    "basis": "Reviewed the whole-function branch/call/state/width maps, source/evidence identities, explanations of residue and differential/negative limits. Matching observed service boundaries are composed through the actual caller ABI and same callee/slot/state; finite coverage alone is not acceptance."
+  }
+}

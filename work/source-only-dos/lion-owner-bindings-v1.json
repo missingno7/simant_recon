@@ -1,0 +1,101 @@
+{
+  "schema": "simant-dos-lion-storage-binding-v1",
+  "category": "REVIEWED_SOURCE_STORAGE_BINDING",
+  "scope": "Own the two reviewed FAR_BSS lion counters in complete canonical root:0AD9 using typed tentative int far definitions.",
+  "historical_claim_limit": "The reviewed source-functional owner is the complete root:0AD9 module. Historical COMDEF-producing translation-unit identity, original COMDEF ordering and unobserved padding are not claimed. No original game object or executable bytes are an input.",
+  "review_sources": [
+    {
+      "path": "src/root/m0AD9.c",
+      "sha256": "726585ecdb17d969b478bf5a55b726736614dbaa2d5f6477b8f6907c86f73d0b",
+      "size": 14288
+    },
+    {
+      "path": "src/S09/m35F5.c",
+      "sha256": "028e1575990d5d45233f9102a0d2a060810349bd2f1297182c4af435ecbe912a",
+      "size": 42150
+    },
+    {
+      "path": "src/S18/m384C.c",
+      "sha256": "78a0f63aa99b2c2346e799b4e63f5d94256ab62b17f88d301bb986112aeed8d3",
+      "size": 12432
+    }
+  ],
+  "runtime_contract_key": "lion_storage_contract",
+  "runtime_contract": {
+    "path": "work/source-only-dos/lion-owner-contract-v1.json",
+    "sha256": "bafd12f1dc28832c041b1966fabada32e316d45248b30b2f8a4fe0b50e1da465",
+    "size": 29873
+  },
+  "bindings": [
+    {
+      "module": "root:0AD9",
+      "source": "src/root/m0AD9.c",
+      "source_sha256": "726585ecdb17d969b478bf5a55b726736614dbaa2d5f6477b8f6907c86f73d0b",
+      "edits": [
+        {
+          "before": "extern int far AntsEatenByLions;",
+          "after": "int far AntsEatenByLions;",
+          "count": 1
+        },
+        {
+          "before": "extern int far InitialLions;",
+          "after": "int far InitialLions;",
+          "count": 1
+        }
+      ],
+      "exports": [],
+      "communals": [
+        {
+          "name": "_AntsEatenByLions",
+          "kind": "far",
+          "count": 2,
+          "element_size": 1,
+          "length": 2,
+          "historical_address": [
+            20726,
+            2568
+          ],
+          "source_extent_anchor": "int far AntsEatenByLions;",
+          "initialization": "tentative definition, zero-initialized in FAR_BSS at startup",
+          "views": [
+            "int far word reads/writes in root:0AD9",
+            "one {size=2,count=1,&AntsEatenByLions} SaveRec row",
+            "SaveRec byte-pointer view covers exactly two bytes"
+          ],
+          "registered_interior_names": []
+        },
+        {
+          "name": "_InitialLions",
+          "kind": "far",
+          "count": 2,
+          "element_size": 1,
+          "length": 2,
+          "historical_address": [
+            20726,
+            2282
+          ],
+          "source_extent_anchor": "int far InitialLions;",
+          "initialization": "tentative definition, zero-initialized in FAR_BSS at startup",
+          "views": [
+            "int far word reads/writes in root:0AD9",
+            "one {size=2,count=1,&InitialLions} SaveRec row",
+            "SaveRec byte-pointer view covers exactly two bytes"
+          ],
+          "registered_interior_names": []
+        }
+      ],
+      "relocations": [],
+      "scalar_storage": {
+        "families": [
+          "lion"
+        ]
+      }
+    }
+  ],
+  "aliases": [],
+  "scalar_storage": {
+    "families": [
+      "lion"
+    ]
+  }
+}

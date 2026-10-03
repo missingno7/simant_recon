@@ -1,0 +1,810 @@
+{
+  "schema": "simant-dos-population-owner-contract-v1",
+  "category": "REVIEWED_SOURCE_STORAGE_CONTRACT",
+  "probe_source": {
+    "path": "work/source-only-dos/population-owner-probe.py",
+    "sha256": "5300458752337f767570f0f6d7847542c39fc5dc45964d8e050868835c88046c",
+    "size": 29829
+  },
+  "full_local_report": {
+    "path": "build/workers/dos_population_owners/population-owner-local-report.json",
+    "sha256": "22c2a06dd95fe587be5b5a7cfec6b06f4b42c84158b72b997f156982133c9c35",
+    "size": 55943
+  },
+  "members": [
+    "BpopT",
+    "RpopT"
+  ],
+  "dos_type": "int far",
+  "word_bytes": 2,
+  "required_cases": {
+    "typed_owner_word_exact_aliases": "PASS",
+    "typed_owner_SaveRec_BYTE_exact_aliases": "PASS",
+    "wrong_alias_word_plus2": "FAIL",
+    "wrong_type_unsigned_scalar": "FAIL",
+    "wrong_extent_two_element_array": "FAIL",
+    "initialized_nonzero_owner": "FAIL"
+  },
+  "owner_candidate": {
+    "module": "root:0BE8",
+    "source": {
+      "path": "src/root/m0BE8.c",
+      "sha256": "42664e07331fbba4cc257f1e49e03dff5e93deddb764d33101ad0f454a9377d7",
+      "size": 14621
+    },
+    "candidate_source": {
+      "path": "build/workers/dos_population_owners/m0BE8-population-owner.c",
+      "sha256": "d52bc9c12351234c43a74dc2a62f1a5223ee9a8015916b8b43d3431b5d894762"
+    },
+    "source_functional_owner": "CountAnts rebuilds caste counts from live ant lists and writes BpopT/RpopT from the resulting black/red caste buckets.",
+    "historical_comdef_module_identity": "NOT_CLAIMED",
+    "full_module_is_runtime_linked": false
+  },
+  "source_ownership_facts": {
+    "CountAnts": "Clears per-caste scratch counts, scans live ant lists, and assigns both totals from the caste buckets at the end; it does not directly zero these two words at entry.",
+    "FullCount": "Calls CountAnts then CountUpdate.",
+    "world_and_population_lifecycle": "S08 RandWorld calls CountAnts during world setup. Tutorial setup later adds 32 ants to each colony and calls FullCount. root:015B AddSomeAnts/KillSomeAnts and selected root:0894 DoSmells phases also call FullCount. S22 YellowBirth adjusts the matching total with its caste counters after successful birth.",
+    "save_load": "S09 SaveRec stores each value as one 2-byte item through unsigned-byte address views. LoadGame reads the records, rebuilds the life maps, and calls FullCount to recompute totals from the loaded lists.",
+    "typed_consumers": "All game computations declare signed int far words and use word reads, writes, increments, comparisons, shifts, sums, and divisions. S12 widens a display-bar numerator to long. SaveRec byte views only form addresses; no byte indexing or other pointer escape was found.",
+    "registered_aliases": {
+      "fd_50F6_0330": {
+        "alias_of": "BpopT",
+        "address": [
+          20726,
+          816
+        ]
+      },
+      "fd_50F6_0350": {
+        "alias_of": "RpopT",
+        "address": [
+          20726,
+          848
+        ]
+      }
+    },
+    "consumer_pins": [
+      {
+        "path": "src/root/m015B.c",
+        "sha256": "67f5c32deda5a49ab56243d50fba33647db7897c850706378fe2a8488277fa8f",
+        "size": 16241
+      },
+      {
+        "path": "src/root/m0BE8.c",
+        "sha256": "42664e07331fbba4cc257f1e49e03dff5e93deddb764d33101ad0f454a9377d7",
+        "size": 14621
+      },
+      {
+        "path": "src/root/m0DEF.c",
+        "sha256": "4325b570055de5daf8b96fe529d53f316b1a8a046daf845672672bd376d08142",
+        "size": 4635
+      },
+      {
+        "path": "src/root/m0F3F.c",
+        "sha256": "f1c903c7f29e4fbb64fd82c2de5390c00df4f7cf35c9c836007dfa07c56612e8",
+        "size": 22794
+      },
+      {
+        "path": "src/root/m10F7.c",
+        "sha256": "a4cc271d57a4a80dd255953554a886026297b0560453c4b2c7b302b5878fff88",
+        "size": 35707
+      },
+      {
+        "path": "src/root/m1383.c",
+        "sha256": "489ee7d47f0ee27942bf6bea11fff7a8bbb90acd2c75fe4653d18a3e9efa5389",
+        "size": 15679
+      },
+      {
+        "path": "src/S06/m35F5.c",
+        "sha256": "db35a96a492a6d36f6580222c17daca015aa9373b457b8758c751d3a70844a86",
+        "size": 43385
+      },
+      {
+        "path": "src/S09/m35F5.c",
+        "sha256": "028e1575990d5d45233f9102a0d2a060810349bd2f1297182c4af435ecbe912a",
+        "size": 42150
+      },
+      {
+        "path": "src/S12/m384C.c",
+        "sha256": "584bf940832e3f8e975afdf85ed398fc82b6470e4a5c3ec46c1b4fcd15240002",
+        "size": 19819
+      },
+      {
+        "path": "src/S22/m39C7.c",
+        "sha256": "e9add4ebd445bd943f24a65764be2a79581f2fc26c349741fdfe8efae3b7030d",
+        "size": 31328
+      },
+      {
+        "path": "src/S24/m39C7.c",
+        "sha256": "3de9615a57dbe35eacd073726b451478dc5b12396360501631d7553b6139e240",
+        "size": 8405
+      },
+      {
+        "path": "src/S25/m39C7.c",
+        "sha256": "90a2cf12a9e527d1836099c92e5327d47342eac0a8403639d66471ecbc859ba6",
+        "size": 27923
+      }
+    ],
+    "registry_pin": {
+      "path": "layout\\symbols.json",
+      "sha256": "0f5dd5b0a211945a97782cfccdb9bb31b0dfd07fcde5df4d4f9486b487eb0125",
+      "size": 800809
+    }
+  },
+  "inputs": [
+    {
+      "path": "src/root/m015B.c",
+      "sha256": "67f5c32deda5a49ab56243d50fba33647db7897c850706378fe2a8488277fa8f",
+      "size": 16241
+    },
+    {
+      "path": "src/root/m0BE8.c",
+      "sha256": "42664e07331fbba4cc257f1e49e03dff5e93deddb764d33101ad0f454a9377d7",
+      "size": 14621
+    },
+    {
+      "path": "src/root/m0DEF.c",
+      "sha256": "4325b570055de5daf8b96fe529d53f316b1a8a046daf845672672bd376d08142",
+      "size": 4635
+    },
+    {
+      "path": "src/root/m0F3F.c",
+      "sha256": "f1c903c7f29e4fbb64fd82c2de5390c00df4f7cf35c9c836007dfa07c56612e8",
+      "size": 22794
+    },
+    {
+      "path": "src/root/m10F7.c",
+      "sha256": "a4cc271d57a4a80dd255953554a886026297b0560453c4b2c7b302b5878fff88",
+      "size": 35707
+    },
+    {
+      "path": "src/root/m1383.c",
+      "sha256": "489ee7d47f0ee27942bf6bea11fff7a8bbb90acd2c75fe4653d18a3e9efa5389",
+      "size": 15679
+    },
+    {
+      "path": "src/S06/m35F5.c",
+      "sha256": "db35a96a492a6d36f6580222c17daca015aa9373b457b8758c751d3a70844a86",
+      "size": 43385
+    },
+    {
+      "path": "src/S09/m35F5.c",
+      "sha256": "028e1575990d5d45233f9102a0d2a060810349bd2f1297182c4af435ecbe912a",
+      "size": 42150
+    },
+    {
+      "path": "src/S12/m384C.c",
+      "sha256": "584bf940832e3f8e975afdf85ed398fc82b6470e4a5c3ec46c1b4fcd15240002",
+      "size": 19819
+    },
+    {
+      "path": "src/S22/m39C7.c",
+      "sha256": "e9add4ebd445bd943f24a65764be2a79581f2fc26c349741fdfe8efae3b7030d",
+      "size": 31328
+    },
+    {
+      "path": "src/S24/m39C7.c",
+      "sha256": "3de9615a57dbe35eacd073726b451478dc5b12396360501631d7553b6139e240",
+      "size": 8405
+    },
+    {
+      "path": "src/S25/m39C7.c",
+      "sha256": "90a2cf12a9e527d1836099c92e5327d47342eac0a8403639d66471ecbc859ba6",
+      "size": 27923
+    },
+    {
+      "path": "layout\\manifest.json",
+      "sha256": "025a0a9255d910cae4b122ab5a3f3fb40888bb456d7fe42158db7c9e622fcf50",
+      "size": 628980
+    },
+    {
+      "path": "layout\\symbols.json",
+      "sha256": "0f5dd5b0a211945a97782cfccdb9bb31b0dfd07fcde5df4d4f9486b487eb0125",
+      "size": 800809
+    },
+    {
+      "path": "layout/toolchain.json",
+      "sha256": "c0bb71cd8b1f4a1a1f91299bd3b6148aa67b7a1d12c3c3946a229272593eb274",
+      "size": 39241
+    },
+    {
+      "path": "tools/compiler.py",
+      "sha256": "ef1d59a0fbe0e0780a6b8480e13d7d07859a14ae185c00a4420e1238a2ae35bb",
+      "size": 11765
+    },
+    {
+      "path": "tools/omf.py",
+      "sha256": "951137ecbfaeb6e40fd5230c94398141da7ec7bdb7399d9cd74d46ded3045612",
+      "size": 29112
+    },
+    {
+      "path": "tools/dos_source_bindings.py",
+      "sha256": "a75d188b40fe72caa74d77adc464e3ff87fa5932a3953c3bb8202a8dc6181806",
+      "size": 22547
+    },
+    {
+      "path": "tools/source_only_dos.py",
+      "sha256": "3729bdc1a125dcdb21c319b862f2035cde1a63e13875128bbb25646e3aba275d",
+      "size": 43225
+    },
+    {
+      "path": "work/source-only-dos/population-owner-probe.py",
+      "sha256": "5300458752337f767570f0f6d7847542c39fc5dc45964d8e050868835c88046c",
+      "size": 29829
+    },
+    {
+      "path": "build/workers/dos_population_owners/POPONR.c",
+      "sha256": "9b0f67f7b85d0d3b134742dcf98b328c76476b230ef70755fb6c06de1e9505be",
+      "size": 133
+    },
+    {
+      "path": "build/workers/dos_population_owners/POPBAD.c",
+      "sha256": "a9d2f49225cf21feafd7d61392165bec32b88fe8db6b36736a17d1823a1ae7bb",
+      "size": 114
+    },
+    {
+      "path": "build/workers/dos_population_owners/POPSIGN.c",
+      "sha256": "77b1255b80aefcc574bac024620eea0a290f22d5256f720310cbd372058a43a3",
+      "size": 141
+    },
+    {
+      "path": "build/workers/dos_population_owners/POPEXT.c",
+      "sha256": "e73f9a7c9b665a1460af6602193aa09ed2d5fdc4474422785e49e2151e86da0a",
+      "size": 62
+    },
+    {
+      "path": "build/workers/dos_population_owners/POPWORD.c",
+      "sha256": "0ef800a7f480fa18664de93b7b8b4efe887a4dfb86d635ddc10d8b43594f96cc",
+      "size": 613
+    },
+    {
+      "path": "build/workers/dos_population_owners/POPBYTE.c",
+      "sha256": "9b8aa835e1bee80a79f514781c55fa1e93f08d3781263bbf381e1452fc30ec35",
+      "size": 1423
+    },
+    {
+      "path": "build/workers/dos_population_owners/POPTYPE.c",
+      "sha256": "45309ec03e2d059078ffd74679ff9a1046ba2f9932c8cae90dc65bfedb21f45e",
+      "size": 347
+    },
+    {
+      "path": "build/workers/dos_population_owners/POPSIZE.c",
+      "sha256": "80d026a9215971bec2342f557438f8a0f08f6b8d9f3037090abb6f73405bfba1",
+      "size": 265
+    },
+    {
+      "path": "C:\\tools\\msc-6.00ax-archive\\BIN\\CL.EXE",
+      "sha256": "92df4a0839aac77940189ce54f107381b829babe8103926cb05d1adffe947347",
+      "size": 81184
+    },
+    {
+      "path": "C:\\tools\\msc-6.00ax-archive\\BIN\\C1L.EXE",
+      "sha256": "d3db38b875a95048bca2809cd1f84783c6c070805f188fec9161054d6350ded3",
+      "size": 213680
+    },
+    {
+      "path": "C:\\tools\\msc-6.00ax-archive\\BIN\\C2L.EXE",
+      "sha256": "62490de22e7b279ea59218a54d677bfc752cb5fc1287533d2e23d03519f155e0",
+      "size": 473258
+    },
+    {
+      "path": "C:\\tools\\msc-6.00ax-archive\\BIN\\C3L.EXE",
+      "sha256": "9e82ecc87ffcdb2def53ac64c0d1f048b26421c1415b5600ad4d8d6fcbc06553",
+      "size": 195439
+    },
+    {
+      "path": "C:\\tools\\msc-6.00ax-archive\\BIN\\CL.ERR",
+      "sha256": "ca22f37e5e0c09faebde9e4d549dd1f53523cc6f23049d2239a040cd19a424e7",
+      "size": 1656
+    },
+    {
+      "path": "C:\\tools\\msc-6.00ax-archive\\BIN\\C1.ERR",
+      "sha256": "637444915870f3283d5df41c5cdb1be8c32cc6c19b080f2bb3891edbc3751c6e",
+      "size": 19500
+    },
+    {
+      "path": "C:\\tools\\msc-6.00ax-archive\\BIN\\C23.ERR",
+      "sha256": "22944a0dffef336c0ebb8f6d5aeb97b4dbeb5c9758a48759557176bff49d1151",
+      "size": 3649
+    },
+    {
+      "path": "C:\\tools\\msc-6.00ax-archive\\BIN\\CL.MSG",
+      "sha256": "3379f283aec74842bc82205e4c848d759e6e2dcbb6d4820eec9719f1297213ec",
+      "size": 2697
+    },
+    {
+      "path": "C:\\tools\\nmlgcdos\\msdos.exe",
+      "sha256": "f7f6cb0a3e816c5edb13112d327c1bddbf7463fe7bf9a005ca1eb5317751bd02",
+      "size": 686592
+    },
+    {
+      "path": "C:\\tools\\dosbox-x\\dosbox-x.exe",
+      "sha256": "b028a4d328302ea270722dec69f3ec3a10ebf76beba72a51970db33a88df2bf6",
+      "size": 20481536
+    },
+    {
+      "path": "C:\\tools\\RTLink-Plus-4.00-DiscMaster\\installed\\dest\\RTLINK.EXE",
+      "sha256": "dff0a988738a2ba7716f7013ef5b8136e0857b6bfe700bccdeaad70ee5e87c74",
+      "size": 449497
+    },
+    {
+      "path": "C:\\tools\\RTLink-Plus-4.00-DiscMaster\\installed\\dest\\RTLINK.DAT",
+      "sha256": "c1e206fe4b3c34d43b47aa9aa215e2959fbb23c69c89eb69e36d80b1d9194eea",
+      "size": 63824
+    },
+    {
+      "path": "C:\\tools\\RTLink-Plus-4.00-DiscMaster\\installed\\dest\\RTLUTILS.LIB",
+      "sha256": "9060c022f65a2811b81936879f93eb16c5d349c14b56c704a3853d3cf79cd162",
+      "size": 266625
+    },
+    {
+      "path": "C:\\tools\\RTLink-Plus-4.00-DiscMaster\\installed\\dest\\RTLINKST.COM",
+      "sha256": "6ad9015869dc9598a2b498c58297224e5ab4a13fad9ada528650dfcedeb83cf2",
+      "size": 7184
+    },
+    {
+      "path": "C:\\tools\\rtlink-plus-6.10\\installed\\RTL-REAL.EXE",
+      "sha256": "228c5d429438ea32ee21dd02c65b7f8e198715b3fa957be9da328f9857482773",
+      "size": 717922
+    },
+    {
+      "path": "C:\\tools\\rtlink-plus-6.10\\installed\\RTL-SWAP.EXE",
+      "sha256": "daae0a8c358edc26f95540f4bc1629c0dc5c30652155d85ccd79bead4381cfe3",
+      "size": 692123
+    },
+    {
+      "path": "C:\\tools\\rtlink-plus-6.10\\installed\\RTLINK.DAT",
+      "sha256": "10723fb4d4381b6a38417a18409e32d254e59850bcd3b465fbb824e01367a77b",
+      "size": 100100
+    },
+    {
+      "path": "C:\\tools\\rtlink-plus-6.10\\installed\\RTLUTILS.LIB",
+      "sha256": "c718bac09b0b1204a259494446acfa8bfffb129144cc7d36799855621f4fdccb",
+      "size": 423823
+    },
+    {
+      "path": "C:\\tools\\rtlink-plus-6.10\\installed\\RTLINKST.COM",
+      "sha256": "635425a8feff822ca98ec536c55a31824161bffbf9d24d37851cc0d9f7ce3b5f",
+      "size": 11031
+    },
+    {
+      "path": "C:\\tools\\rtlink-plus-6.10\\installed\\RTLINK.EXE",
+      "sha256": "ea6f57a470a26801086593d54aa99f6bf983dd024fc19b5e13361a07f43e17fb",
+      "size": 687531
+    },
+    {
+      "path": "C:\\tools\\rtlink-plus-6.10\\installed\\DOS4GW.EXE",
+      "sha256": "7192b80d1551769c2d2897b2f58015dc18fadca2b7e093a20f45b34011933c6c",
+      "size": 231179
+    },
+    {
+      "path": "C:\\tools\\msc-6.00\\LIB\\llibcr.lib",
+      "sha256": "3d0c6ae92972789e87def01fa96351c39216d731d5c880370155c5613d78c884",
+      "size": 148711
+    },
+    {
+      "path": "C:\\tools\\msc-6.00\\LIB\\libh.lib",
+      "sha256": "a4492e8f63da409d949643fd448f29e65e2cc9a8f2deea977372177bbe0ad818",
+      "size": 21033
+    }
+  ],
+  "tool_runtime_pins": {
+    "compiler_profile": "msc600ax",
+    "compiler_flags_full_module": [
+      "/AL",
+      "/Os",
+      "/Oe",
+      "/Og"
+    ],
+    "compiler_files": [
+      {
+        "path": "C:\\tools\\msc-6.00ax-archive\\BIN\\CL.EXE",
+        "sha256": "92df4a0839aac77940189ce54f107381b829babe8103926cb05d1adffe947347",
+        "size": 81184
+      },
+      {
+        "path": "C:\\tools\\msc-6.00ax-archive\\BIN\\C1L.EXE",
+        "sha256": "d3db38b875a95048bca2809cd1f84783c6c070805f188fec9161054d6350ded3",
+        "size": 213680
+      },
+      {
+        "path": "C:\\tools\\msc-6.00ax-archive\\BIN\\C2L.EXE",
+        "sha256": "62490de22e7b279ea59218a54d677bfc752cb5fc1287533d2e23d03519f155e0",
+        "size": 473258
+      },
+      {
+        "path": "C:\\tools\\msc-6.00ax-archive\\BIN\\C3L.EXE",
+        "sha256": "9e82ecc87ffcdb2def53ac64c0d1f048b26421c1415b5600ad4d8d6fcbc06553",
+        "size": 195439
+      },
+      {
+        "path": "C:\\tools\\msc-6.00ax-archive\\BIN\\CL.ERR",
+        "sha256": "ca22f37e5e0c09faebde9e4d549dd1f53523cc6f23049d2239a040cd19a424e7",
+        "size": 1656
+      },
+      {
+        "path": "C:\\tools\\msc-6.00ax-archive\\BIN\\C1.ERR",
+        "sha256": "637444915870f3283d5df41c5cdb1be8c32cc6c19b080f2bb3891edbc3751c6e",
+        "size": 19500
+      },
+      {
+        "path": "C:\\tools\\msc-6.00ax-archive\\BIN\\C23.ERR",
+        "sha256": "22944a0dffef336c0ebb8f6d5aeb97b4dbeb5c9758a48759557176bff49d1151",
+        "size": 3649
+      },
+      {
+        "path": "C:\\tools\\msc-6.00ax-archive\\BIN\\CL.MSG",
+        "sha256": "3379f283aec74842bc82205e4c848d759e6e2dcbb6d4820eec9719f1297213ec",
+        "size": 2697
+      }
+    ],
+    "compiler_runner": {
+      "path": "C:\\tools\\nmlgcdos\\msdos.exe",
+      "sha256": "f7f6cb0a3e816c5edb13112d327c1bddbf7463fe7bf9a005ca1eb5317751bd02",
+      "size": 686592
+    },
+    "dosbox_runner": {
+      "path": "C:\\tools\\dosbox-x\\dosbox-x.exe",
+      "sha256": "b028a4d328302ea270722dec69f3ec3a10ebf76beba72a51970db33a88df2bf6",
+      "size": 20481536
+    },
+    "linkers": {
+      "rtlink400": [
+        {
+          "path": "C:\\tools\\RTLink-Plus-4.00-DiscMaster\\installed\\dest\\RTLINK.EXE",
+          "sha256": "dff0a988738a2ba7716f7013ef5b8136e0857b6bfe700bccdeaad70ee5e87c74",
+          "size": 449497
+        },
+        {
+          "path": "C:\\tools\\RTLink-Plus-4.00-DiscMaster\\installed\\dest\\RTLINK.DAT",
+          "sha256": "c1e206fe4b3c34d43b47aa9aa215e2959fbb23c69c89eb69e36d80b1d9194eea",
+          "size": 63824
+        },
+        {
+          "path": "C:\\tools\\RTLink-Plus-4.00-DiscMaster\\installed\\dest\\RTLUTILS.LIB",
+          "sha256": "9060c022f65a2811b81936879f93eb16c5d349c14b56c704a3853d3cf79cd162",
+          "size": 266625
+        },
+        {
+          "path": "C:\\tools\\RTLink-Plus-4.00-DiscMaster\\installed\\dest\\RTLINKST.COM",
+          "sha256": "6ad9015869dc9598a2b498c58297224e5ab4a13fad9ada528650dfcedeb83cf2",
+          "size": 7184
+        }
+      ],
+      "rtlink610": [
+        {
+          "path": "C:\\tools\\rtlink-plus-6.10\\installed\\RTL-REAL.EXE",
+          "sha256": "228c5d429438ea32ee21dd02c65b7f8e198715b3fa957be9da328f9857482773",
+          "size": 717922
+        },
+        {
+          "path": "C:\\tools\\rtlink-plus-6.10\\installed\\RTL-SWAP.EXE",
+          "sha256": "daae0a8c358edc26f95540f4bc1629c0dc5c30652155d85ccd79bead4381cfe3",
+          "size": 692123
+        },
+        {
+          "path": "C:\\tools\\rtlink-plus-6.10\\installed\\RTLINK.DAT",
+          "sha256": "10723fb4d4381b6a38417a18409e32d254e59850bcd3b465fbb824e01367a77b",
+          "size": 100100
+        },
+        {
+          "path": "C:\\tools\\rtlink-plus-6.10\\installed\\RTLUTILS.LIB",
+          "sha256": "c718bac09b0b1204a259494446acfa8bfffb129144cc7d36799855621f4fdccb",
+          "size": 423823
+        },
+        {
+          "path": "C:\\tools\\rtlink-plus-6.10\\installed\\RTLINKST.COM",
+          "sha256": "635425a8feff822ca98ec536c55a31824161bffbf9d24d37851cc0d9f7ce3b5f",
+          "size": 11031
+        },
+        {
+          "path": "C:\\tools\\rtlink-plus-6.10\\installed\\RTLINK.EXE",
+          "sha256": "ea6f57a470a26801086593d54aa99f6bf983dd024fc19b5e13361a07f43e17fb",
+          "size": 687531
+        },
+        {
+          "path": "C:\\tools\\rtlink-plus-6.10\\installed\\DOS4GW.EXE",
+          "sha256": "7192b80d1551769c2d2897b2f58015dc18fadca2b7e093a20f45b34011933c6c",
+          "size": 231179
+        }
+      ]
+    },
+    "runtime_libraries": [
+      {
+        "path": "C:\\tools\\msc-6.00\\LIB\\llibcr.lib",
+        "sha256": "3d0c6ae92972789e87def01fa96351c39216d731d5c880370155c5613d78c884",
+        "size": 148711
+      },
+      {
+        "path": "C:\\tools\\msc-6.00\\LIB\\libh.lib",
+        "sha256": "a4492e8f63da409d949643fd448f29e65e2cc9a8f2deea977372177bbe0ad818",
+        "size": 21033
+      }
+    ]
+  },
+  "full_module_control": {
+    "module": "root:0BE8",
+    "source": "src/root/m0BE8.c",
+    "source_sha256": "42664e07331fbba4cc257f1e49e03dff5e93deddb764d33101ad0f454a9377d7",
+    "profile": "msc600ax",
+    "flags": [
+      "/AL",
+      "/Os",
+      "/Oe",
+      "/Og"
+    ],
+    "manifest_extent": {
+      "start": 48770,
+      "end": 52655
+    },
+    "manifest_object_sha256": "2bd81d3d0124063b18c78637c7e9ee5186c0423b0f6ec3a47b40f66a2546c8f9",
+    "fresh_control_object_sha256": "2bd81d3d0124063b18c78637c7e9ee5186c0423b0f6ec3a47b40f66a2546c8f9",
+    "candidate_object_sha256": "3f11e0ae02f9ed59ced68498ca1c3d356a5cf9a45de8a03d6db89fd5a35dadc9",
+    "candidate_object_size_delta": 18,
+    "candidate_source_path": "build/workers/dos_population_owners/m0BE8-population-owner.c",
+    "candidate_source_sha256": "d52bc9c12351234c43a74dc2a62f1a5223ee9a8015916b8b43d3431b5d894762",
+    "all_segment_bytes_equal": true,
+    "segment_definitions_lengths_groups_equal": true,
+    "publics_equal": true,
+    "ordered_fixups_equal": true,
+    "external_name_sequence_equal": true,
+    "only_external_scope_changes": [
+      {
+        "index": 35,
+        "name": "_BpopT",
+        "control": "external",
+        "candidate": "communal"
+      },
+      {
+        "index": 37,
+        "name": "_RpopT",
+        "control": "external",
+        "candidate": "communal"
+      }
+    ],
+    "candidate_communal_rows": [
+      {
+        "name": "_BpopT",
+        "kind": "far",
+        "type_index": 0,
+        "count": 2,
+        "element_size": 1,
+        "length": 2
+      },
+      {
+        "name": "_RpopT",
+        "kind": "far",
+        "type_index": 0,
+        "count": 2,
+        "element_size": 1,
+        "length": 2
+      }
+    ],
+    "negative_controls": {
+      "unsigned_byte_scalars": {
+        "communal_lengths": [
+          1,
+          1
+        ],
+        "segment_bytes_equal_control": false
+      },
+      "long_scalars": {
+        "communal_lengths": [
+          4,
+          4
+        ],
+        "segment_bytes_equal_control": false
+      },
+      "two_element_int_arrays": {
+        "communal_lengths": [
+          4,
+          4
+        ],
+        "communal_rows": [
+          {
+            "name": "_BpopT",
+            "kind": "far",
+            "type_index": 0,
+            "count": 2,
+            "element_size": 2,
+            "length": 4
+          },
+          {
+            "name": "_RpopT",
+            "kind": "far",
+            "type_index": 0,
+            "count": 2,
+            "element_size": 2,
+            "length": 4
+          }
+        ]
+      },
+      "nonzero_initialized_scalars": {
+        "communal_rows": [],
+        "data_segments": {
+          "UNIT5_DATA": 4,
+          "_DATA": 8
+        }
+      }
+    }
+  },
+  "cases": [
+    {
+      "linker": "rtlink400",
+      "case": "typed_owner_word_exact_aliases",
+      "expected": "PASS",
+      "actual": "PASS",
+      "passed": true,
+      "emulator_exit": 0,
+      "timed_out": false,
+      "alias_delta_bytes": [
+        0,
+        0
+      ]
+    },
+    {
+      "linker": "rtlink400",
+      "case": "typed_owner_SaveRec_BYTE_exact_aliases",
+      "expected": "PASS",
+      "actual": "PASS",
+      "passed": true,
+      "emulator_exit": 0,
+      "timed_out": false,
+      "alias_delta_bytes": [
+        0,
+        0
+      ]
+    },
+    {
+      "linker": "rtlink400",
+      "case": "wrong_alias_word_plus2",
+      "expected": "FAIL",
+      "actual": "FAIL",
+      "passed": true,
+      "emulator_exit": 0,
+      "timed_out": false,
+      "alias_delta_bytes": [
+        2,
+        0
+      ]
+    },
+    {
+      "linker": "rtlink400",
+      "case": "wrong_type_unsigned_scalar",
+      "expected": "FAIL",
+      "actual": "FAIL",
+      "passed": true,
+      "emulator_exit": 0,
+      "timed_out": false,
+      "alias_delta_bytes": [
+        0,
+        0
+      ]
+    },
+    {
+      "linker": "rtlink400",
+      "case": "wrong_extent_two_element_array",
+      "expected": "FAIL",
+      "actual": "FAIL",
+      "passed": true,
+      "emulator_exit": 0,
+      "timed_out": false,
+      "alias_delta_bytes": [
+        0,
+        0
+      ]
+    },
+    {
+      "linker": "rtlink400",
+      "case": "initialized_nonzero_owner",
+      "expected": "FAIL",
+      "actual": "FAIL",
+      "passed": true,
+      "emulator_exit": 0,
+      "timed_out": false,
+      "alias_delta_bytes": [
+        0,
+        0
+      ]
+    },
+    {
+      "linker": "rtlink610",
+      "case": "typed_owner_word_exact_aliases",
+      "expected": "PASS",
+      "actual": "PASS",
+      "passed": true,
+      "emulator_exit": 0,
+      "timed_out": false,
+      "alias_delta_bytes": [
+        0,
+        0
+      ]
+    },
+    {
+      "linker": "rtlink610",
+      "case": "typed_owner_SaveRec_BYTE_exact_aliases",
+      "expected": "PASS",
+      "actual": "PASS",
+      "passed": true,
+      "emulator_exit": 0,
+      "timed_out": false,
+      "alias_delta_bytes": [
+        0,
+        0
+      ]
+    },
+    {
+      "linker": "rtlink610",
+      "case": "wrong_alias_word_plus2",
+      "expected": "FAIL",
+      "actual": "FAIL",
+      "passed": true,
+      "emulator_exit": 0,
+      "timed_out": false,
+      "alias_delta_bytes": [
+        2,
+        0
+      ]
+    },
+    {
+      "linker": "rtlink610",
+      "case": "wrong_type_unsigned_scalar",
+      "expected": "FAIL",
+      "actual": "FAIL",
+      "passed": true,
+      "emulator_exit": 0,
+      "timed_out": false,
+      "alias_delta_bytes": [
+        0,
+        0
+      ]
+    },
+    {
+      "linker": "rtlink610",
+      "case": "wrong_extent_two_element_array",
+      "expected": "FAIL",
+      "actual": "FAIL",
+      "passed": true,
+      "emulator_exit": 0,
+      "timed_out": false,
+      "alias_delta_bytes": [
+        0,
+        0
+      ]
+    },
+    {
+      "linker": "rtlink610",
+      "case": "initialized_nonzero_owner",
+      "expected": "FAIL",
+      "actual": "FAIL",
+      "passed": true,
+      "emulator_exit": 0,
+      "timed_out": false,
+      "alias_delta_bytes": [
+        0,
+        0
+      ]
+    }
+  ],
+  "per_linker": {
+    "rtlink400": {
+      "pass_count": 2,
+      "fail_count": 4,
+      "all_expected_cases_pass": true
+    },
+    "rtlink610": {
+      "pass_count": 2,
+      "fail_count": 4,
+      "all_expected_cases_pass": true
+    }
+  },
+  "denied_oracle_reads": [],
+  "all_required_checks_pass": true,
+  "scope": "Test-owned typed scalar storage contract. Verifies the whole source-owner object delta, compiler communal extent, zero-filled MSC startup, numeric alias binding, word and SaveRec byte views, and wrong alias/type/extent/initializer contrasts under RTLink 4.00 and 6.10. No game stubs, original executable/build inputs, or historical COMDEF identity claim.",
+  "status": "ROOT_REVIEWED_FUNCTIONAL_STORAGE_CONTRACT",
+  "root_reviewed": true,
+  "root_review": {
+    "reviewer": "root",
+    "basis": "Complete canonical owner/control compilation preserves every emitted segment byte/extent/definition/group/public and ordered fixup. Only the two reviewed external scopes change to two-byte far communals. Source lifecycle and all known typed/direct address views, persistent two-byte SaveRec transfer and exact-base registry aliases were reviewed. Clean actual MSC-startup fixtures on both linkers verify word and byte views and detect wrong type/extent/alias/initializer controls.",
+    "limit": "Functional source owner only, not historical COMDEF TU/order/padding or complete game/save-load integration."
+  }
+}

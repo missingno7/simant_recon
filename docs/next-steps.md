@@ -8,6 +8,29 @@ reviewed behavioral bodies, followed by DOSBox-X integration checks and human
 acceptance. Earlier historical-link and SDL3 next actions below are retained
 research history and do not supersede this priority.
 
+**Current SOURCE_ONLY_DOS checkpoint:** the strict static audit covers all 29
+behavioral registrations. The effective imported set has 29
+`BEHAVIOR_EXACT_CONFIRMED` implementations; DrawBalloons uses a reviewed signed
+allocation-width correction, with the original registered body separately marked
+unresolved. The source-only build compiles 127 canonical TUs plus one data-only
+callback provider. The seven-slot input queue, nine far word scalars, 25-slot
+callback owner and their bounded views are reviewed; three mouse ES operand
+frames are corrected. There are 433 missing data imports (410 FAR_BSS and 23
+storage/reachability cases), 113 data-disposition bytes and an open wider address/
+frame audit. No independent executable, game runtime acceptance or functional
+milestone is claimed. The compact current receipt is
+`work/source-only-dos/current-intake.json`; exact canonical ownership is unchanged.
+
+Next ownership work is bounded: InitSimVars/ResetYellowVars scalar groups, mouse
+button/coordinate words, memory-manager state and the window-handle table's real
+extent. The 128 external driver SS frames have a separate provenance/shifted-layout
+review awaiting admission; ten local operands, the g_5A9C segment pair and three
+S00 `SS:[SI+41D0h]` literals remain distinct audit items. The 18-byte formula-table
+candidate is not admitted because indirect-write reachability is still open.
+Prioritize these source/type/layout proofs over behavioral byte matching. After
+clean preflight, build with the pinned stock RTLink runtime, then compare both DOS
+executables in DOSBox-X and deliver the standalone build for human acceptance.
+
 Read README.md, AGENTS.md, docs/codegen-rules.md and docs/tu-evidence.md before work.
 The active phase now follows `docs/behavioral-proof.md`: preserve all EXACT
 claims, close the remaining game contracts through original-DOS differential

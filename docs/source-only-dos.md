@@ -6,6 +6,12 @@ reconstruction. SDL3 integration is paused at
 Existing native source, providers, runtime evidence and v17 packages are retained.
 Human acceptance of the DOS build is required before further major SDL3 work.
 
+`dos-semantic-oracle-v1` freezes the accepted semantic contributions only. The
+next major milestone, `functional-source-oracle-v1`, requires zero original-byte
+fallback, zero unresolved imports and layout dependencies, a successful independent
+RTLink build, DOSBox-X runtime validation/comparison, and human acceptance. Storage
+and layout hypotheses cannot be frozen to make preflight pass.
+
 Before substantial changes, check whether they recover existing logic, resolve a
 representation/platform contract, or invent a replacement. Prefer recovered
 source, keep one logical state owner, and expose unknown contracts as failing
@@ -28,7 +34,8 @@ of repeated source-tree archives.
 | Path | Authority and limitation |
 |---|---|
 | `src/`, `layout/manifest.json`, historical promotion evidence | Exact C, genuine symbolic ASM and reconstructed data. Only `promote.py` writes canonical sources/ownership. Exactness is a contribution-level claim, not an independent executable build. |
-| `evidence/behavior/manifest.json`, pinned function packets | Reviewed implementations for 29 BEHAVIOR_EXACT functions. Finite differential contracts and named backend boundaries remain their limits. |
+| `evidence/behavior/manifest.json`, pinned function packets | Frozen finite behavioral registrations. Their status alone does not close static completeness. |
+| `work/source-only-dos/static-completeness/index-v1.json` | Strict, root-reviewed CFG/data/width/call/effect receipts for all 29 imported implementations. A contract-only or unresolved verdict blocks the independent link. The separate DrawBalloons correction preserves the failing original-source verdict. |
 | `tools/link.py` | Placement/provenance diagnostic. Deliberately copies explicitly labelled original debt into `SIMANT.HYBRID.EXE`. Hybrid SHA equality does **not** prove a source-only executable. |
 | `tools/rtlink.py` | Historical link research. Existing trials use zero code/data stubs for missing contributions and are not runnable reconstructions. Their objects and executable are excluded from SOURCE_ONLY_DOS. |
 | `tools/source_only_dos.py` | Separate source-only preparation/compilation and fail-closed input report. Uses canonical complete files, substitutes only the pinned reviewed behavioral definitions, retains function order and original DOS hardware/runtime semantics. No hybrid collector, original loader, zero-stub generator or object patcher. |
@@ -60,7 +67,8 @@ inputs are refused before the linker runs. A successful link still reports
 
 Generated whole module files and objects live under the chosen ignored build
 directory. They are derived inputs, not canonical promotions. Every behavioral
-definition is imported from its registered, hash-checked module snapshot. Its
+definition is imported from its registered, hash-checked module snapshot or an
+explicitly reviewed and pinned same-module correction. Its
 reviewed definition replaces the canonical candidate in place; canonical TU
 declarations, other functions and data remain intact. Name aliases come only from
 the existing reviewed symbol registry. Unreviewed scaffolds fail preparation.
@@ -83,8 +91,15 @@ game code, game data, fallback/debt and executable fragments.
 
 ## Outstanding integration work
 
-All 1,640 known game functions have semantic dispositions: 1,244 exact C,
-367 genuine ASM and 29 BEHAVIOR_EXACT. This does not close data integration.
+All 1,640 known game functions in the effective source-only set have strict
+semantic dispositions: 1,244 exact C, 367 genuine ASM and 29
+BEHAVIOR_EXACT_CONFIRMED. The
+[strict audit](../work/source-only-dos/static-completeness/README.md) maps all
+original paths, widths, constants, state accesses and ordered effects. It found
+and corrected DrawBalloons's unsigned allocation widening; the historical source
+registration remains explicitly unresolved in that separate review. The build
+does not silently preserve a behavioral status because its finite tests pass.
+This does not close data integration.
 The frozen 113-byte historical data disposition inventory includes live graphics
 tables and partially typed state, as well as unresolved layout/runtime boundaries.
 Those assessments are inventory metadata only; their byte strings are never
@@ -98,7 +113,8 @@ are hypotheses, not definitions. Multiple names for the same storage must bind
 to one source owner. Preserve the original DOS allocator, interrupt, video and
 window implementations; do not import native substitutes to make DOS link.
 
-The first full compilation passes all 127 TUs. Symbol-address joins provide 121
+The current compilation passes all 127 canonical TUs plus one reviewed data-only
+callback provider. Symbol-address joins provide 121
 code aliases and eight data aliases without rewriting objects. Reviewed generated
 ASM bindings expose eight names in existing storage: S00's memory-size table and
 dispatch pointer, S02's save-rectangle flag, and the timer countdown word shared
@@ -141,7 +157,7 @@ The bare ASM entry with an overlay owner fails under RTLink 4.00 and passes unde
 only the MSC startup and byte/word view contracts authorize the generated history
 owners. The link gate checks the selected linker and runtime hashes against those controls.
 
-The remaining 468 imports are data: 422 FAR_BSS names and 46 requiring
+The remaining 433 imports are data: 410 FAR_BSS names and 23 requiring
 storage/reachability investigation. None remains inside an accepted data
 placement. These are link ingredients
 missing from the source-built target, distinct from the historical 113-byte debt.
@@ -152,7 +168,7 @@ The generated drivers replace 16 literal `3DFCh` operands with references to the
 accepted `_g_3DFC` row-offset buffer in `src/root/m1B4E.asm`. Two S00 near callback
 offsets likewise refer to their existing procedures. The pinned transformations
 are in `work/source-only-dos/source-bindings-v1.json`. Canonical ASM remains intact.
-For each of twelve derived TUs, compilation builds a source control and
+For each bound derived TU, compilation builds a source control and
 checks unchanged segment extents, data, existing publics and relocations, and every
 byte outside the 18 reviewed address operands. Added fixups must have the correct
 target, frame, width and addend. DGROUP framing is explicit, including scoped
@@ -186,10 +202,50 @@ The audit also includes initialized C addresses. In root:1FD2 the source object
 spelled `Timer g_5FF2` is used by the ASM input queue as a different set of views.
 Its word at +12 (`_g_5FFE`) is initialized to literal `0x91B0`; enqueue/dequeue load
 it into SI and index seven 16-byte event slots. No accepted source placement owns
-that DGROUP buffer. This remains an explicit gate: recover its one buffer owner
-and a symbolic near-pointer initializer, preserving the queue operations and its
-other fields. The public/interior aliases expose this problem; they do not fix it
-by adding guessed storage or keeping a historical absolute address at a new layout.
+that DGROUP buffer. The reviewed generated module now owns a typed seven-element
+near Event array and initializes the descriptor field symbolically. Exclusive
+enqueue/dequeue access establishes seven 16-byte slots and six usable pending
+records. The accepted MSC startup clears the entire original queue interval
+before main, which matters because enqueue leaves the first word untouched.
+Whole-module checks account for the one changed pointer field/fixup, the new
+112-byte near communal and the exact changed compiler debug contributions. Both
+linkers pass actual queue execution controls; nonzero initialization, capacity
+eight, a shifted pointer and wrong segment framing are detected. Original COMDEF
+TU/order and padding remain unclaimed.
+
+Three reads in root:1B73 already run with ES=DGROUP but had `_DATA` offset frames.
+The generated scoped ES assumption now frames exactly those three relocations in
+DGROUP. All instruction bytes and other fixups remain unchanged. Shifted `_DATA`
+fixtures fail with the original frame and pass with the reviewed one under both
+linkers. The wider numeric-address and frame audit remains an explicit link gate.
+
+Nine far word scalars now have source-functional owners: HealthB/HealthR and
+FoodB/FoodR/Cycle in S08's world-reset module, BpopT/RpopT in CountAnts's module,
+and AntsEatenByLions/InitialLions in their reset/regeneration module. Complete
+consumer and persistent SaveRec address views support each two-byte extent.
+Fresh whole-module controls preserve every segment byte, extent, public and
+ordered fixup, changing only the nine external scopes to far communals. Clean
+MSC-startup fixtures verify word and save-record byte views on both linkers,
+with wrong type/extent/alias/initializer contrasts. The combined five-owner S08
+edit is verified as a whole module on every build. These allocations resolve
+twelve imports including existing exact-base aliases; they do not establish
+historical COMDEF module identity, order or full-game save/load integration.
+
+The driver callback table now has one typed near array of 25 far pointers.
+The source reset writes 25 two-word slots, copy moves 50 words, and all four
+driver tables contain 25 entries. Twenty-three registered callback names are
+four-byte views within the 100-byte owner; the two unnamed positions acquire no
+new registry names. The data-only provider adds no code or initialized data.
+Fresh build checks reject wrong extents, an initializer, extra allocation or
+code, and out-of-range/misaligned aliases. Both linkers verify startup zeroing,
+all slot offsets, reset/copy bounds and the existing symbolic `_g_3DF8` pointer
+under shifted DGROUP; wrong last-slot, initializer and pointer-base controls
+fail. This resolves 23 of the original 46 storage/reachability cases without
+claiming the historical COMDEF-producing module.
+
+RTLink's unsuffixed `DEFINE +12` means hexadecimal 12 (decimal 18). Production
+aliases now use explicit hexadecimal suffixes. The v2 alias controls check near
+and far offsets 12 and 40, detecting both shifted and unsuffixed operands.
 
 The simplest initial linker candidate is the already available, pinned
 RTLink/Plus 4.00 or 6.10 with source-built objects and its own stock manager.

@@ -1,0 +1,570 @@
+{
+  "schema": "simant-dos-strict-static-review-v1",
+  "function": "f_0250_1018",
+  "status": "BEHAVIOR_EXACT_CONFIRMED",
+  "registered_evidence": {
+    "path": "evidence/behavior/functions/f_0250_1018/contracts/logical-render-v2/evidence.json",
+    "sha256": "9a7cf20f48849f8f63517b1752484be48f06cf14c5d9b521f54decfb1ff73e36",
+    "size": 20871
+  },
+  "registered_source": {
+    "path": "evidence/behavior/functions/f_0250_1018/contracts/logical-render-v2/module.c",
+    "sha256": "e41a4ab8c56c0d4923ace8b02027f2471feee049aabe0577588e206e930b4db2",
+    "whole_module": true,
+    "module": "root:0250"
+  },
+  "worker_receipt": {
+    "path": "build/workers/dos_static_render0250/f_0250_1018.json",
+    "sha256": "850e4b17ac735f61072dfa188d0d5b91c678cc14e2b350f2c645fe3b27c0fc92",
+    "size": 26640
+  },
+  "audit": {
+    "schema": "simant-strict-static-completeness-v1",
+    "function": "f_0250_1018",
+    "status": "BEHAVIOR_EXACT_CONFIRMED",
+    "source": {
+      "path": "evidence/behavior/functions/f_0250_1018/contracts/logical-render-v2/module.c",
+      "sha256": "e41a4ab8c56c0d4923ace8b02027f2471feee049aabe0577588e206e930b4db2"
+    },
+    "registry_evidence": {
+      "path": "evidence/behavior/functions/f_0250_1018/contracts/logical-render-v2/evidence.json",
+      "sha256": "9a7cf20f48849f8f63517b1752484be48f06cf14c5d9b521f54decfb1ff73e36"
+    },
+    "inputs": [
+      {
+        "path": "evidence/behavior/manifest.json",
+        "sha256": "dae79bdf74d7660e7e2eb47e8b463a9576c8d74a8e6ccd9e91af6d51f871ecea",
+        "role": "behavior registry"
+      },
+      {
+        "path": "evidence/behavior/functions/f_0250_1018/contracts/logical-render-v2/module.c",
+        "sha256": "e41a4ab8c56c0d4923ace8b02027f2471feee049aabe0577588e206e930b4db2",
+        "role": "registered whole-module C source"
+      },
+      {
+        "path": "tools/behavior_suites/archive/render_small-dec2831104d224ad.py",
+        "sha256": "dec2831104d224ad8623c534782f57a5ad2742d151ec482b120982ec5f6ea7f4",
+        "role": "archived differential suite"
+      },
+      {
+        "path": "evidence/behavior/harnesses/render-small-dec283-20261002/tools/behavior.py",
+        "sha256": "2c0799048057f59eae61a48be4d695278635594484adf0c70bf46c51b4e0c799",
+        "role": "pinned harness runner"
+      },
+      {
+        "path": "evidence/behavior/functions/f_0250_1018/contracts/logical-render-v2/run.json",
+        "sha256": "b46081c762d3ecda2f429cc280be2774ffe2b36d0f07802f6dc9faa4c0222c92",
+        "role": "completed differential report"
+      },
+      {
+        "path": "evidence/behavior/functions/f_0250_1018/contracts/logical-render-v2/cases.jsonl.gz",
+        "sha256": "1a7aa0cec2ad68e797fada6b7d3b96d07e061ea190516755b86f657d71289c91",
+        "role": "directed and randomized case ledger"
+      },
+      {
+        "path": "evidence/behavior/functions/f_0250_1018/contracts/logical-render-v2/contract-review.json",
+        "sha256": "bfa595725cb4949374aa9c3eabcd9aa24d5b2dda02695144615c110165ba5d6e",
+        "role": "contract review record"
+      },
+      {
+        "path": "evidence/behavior/functions/f_0250_1018/contracts/logical-render-v2/negative-controls.json",
+        "sha256": "0a73f8af345c8a542def34dff2ab2e7e95372bdee76aae19b449ff4770a51f1d",
+        "role": "negative-control summary"
+      },
+      {
+        "path": "evidence/behavior/functions/f_0250_1018/contracts/logical-render-v2/negative-0.c",
+        "sha256": "4919527ac0ca26f944b1686d18b5e2ea195d4e9850c7350ac023c188b6d7addd",
+        "role": "compiled negative-control source"
+      },
+      {
+        "path": "evidence/behavior/functions/f_0250_1018/contracts/logical-render-v2/negative-0.obj",
+        "sha256": "1fc357c5863aacefb52e214657c0503cd505c35aee0031abf01f1e046f8aa1fd",
+        "role": "compiled negative-control object"
+      },
+      {
+        "path": "evidence/behavior/functions/f_0250_1018/contracts/logical-render-v2/supplemental/callsite-abi.json",
+        "sha256": "8a73c4c1446482c08ba601e31e0510eef3884356dd8f4935c370d0288e9763b1",
+        "role": "call-site ABI evidence"
+      },
+      {
+        "path": "src/root/m0250.c",
+        "sha256": "bb8a325c543151e09cb173d2194844877805a9e1058d3b24362ff5a7cbd9f61b",
+        "role": "pinned current caller/helper module referenced by call-site evidence"
+      },
+      {
+        "path": "layout/oracle.lock.json",
+        "sha256": "2c6d9e98c688621ad49a08c78d0e0968f4076b036be56ec0738217b533ccde13",
+        "role": "original executable lock"
+      },
+      {
+        "path": "assets/SIMANT.EXE",
+        "sha256": "aa0596c6766322a8229ee3c36e57048c92adc82d50fbe2ef37afb8b85fcf4f11",
+        "role": "read-only original executable identity"
+      },
+      {
+        "path": "tools/context.py",
+        "sha256": "6d94d66482736663f4dd29945ae3d206e5543aaccdb062e96304f5cb0d1a97be",
+        "role": "disassembly research tool"
+      },
+      {
+        "path": "build/workers/dos_static_render0250/f_0250_1018.disassembly.txt",
+        "sha256": "f3a4acc48fc1e6921891a4de4ae10e5c40ed824e985d3a860d537f749041f102",
+        "role": "saved context.py disassembly transcript"
+      }
+    ],
+    "original_function": {
+      "unit": "root",
+      "seg": "0x0250",
+      "off": "0x1018",
+      "linear": "0x03518",
+      "size": "0x0286",
+      "disassembly_research": {
+        "path": "build/workers/dos_static_render0250/f_0250_1018.disassembly.txt",
+        "sha256": "f3a4acc48fc1e6921891a4de4ae10e5c40ed824e985d3a860d537f749041f102",
+        "method": "python tools/context.py f_0250_1018 (without --raw); readable disassembly transcript, no original byte capsule"
+      }
+    },
+    "branch_map": {
+      "conditional_sites": [
+        {
+          "address": "0x103C",
+          "mnemonic": "jle",
+          "target": "0x1044",
+          "predicate": "my <= 0x3F; skip the row-wrap adjustment; signed comparison",
+          "source_anchor": "module.c:744",
+          "operand_width": "16-bit",
+          "signedness": "signed"
+        },
+        {
+          "address": "0x1059",
+          "mnemonic": "jge",
+          "target": "0x105E",
+          "predicate": "MapPlane >= 0; otherwise leave both outputs at their reset values",
+          "source_anchor": "module.c:750",
+          "operand_width": "16-bit",
+          "signedness": "signed"
+        },
+        {
+          "address": "0x105F",
+          "mnemonic": "jle",
+          "target": "0x1070",
+          "predicate": "MapPlane <= 1 after the nonnegative guard; planes 0 and 1 share the A path",
+          "source_anchor": "module.c:750",
+          "operand_width": "16-bit",
+          "signedness": "signed"
+        },
+        {
+          "address": "0x1062",
+          "mnemonic": "jne",
+          "target": "0x1067",
+          "predicate": "MapPlane != 2; equality falls through to the plane-2 dispatch",
+          "source_anchor": "module.c:794",
+          "operand_width": "16-bit",
+          "signedness": "signed"
+        },
+        {
+          "address": "0x1068",
+          "mnemonic": "jne",
+          "target": "0x106D",
+          "predicate": "MapPlane != 3; equality falls through to the plane-3 dispatch",
+          "source_anchor": "module.c:815",
+          "operand_width": "16-bit",
+          "signedness": "signed"
+        },
+        {
+          "address": "0x107D",
+          "mnemonic": "je",
+          "target": "0x108E",
+          "predicate": "fd_3D57_07BE == 0; select PherMapA",
+          "source_anchor": "module.c:754",
+          "operand_width": "16-bit",
+          "signedness": "signed"
+        },
+        {
+          "address": "0x1080",
+          "mnemonic": "je",
+          "target": "0x10A8",
+          "predicate": "fd_3D57_07BE == 1; select PherMapBN",
+          "source_anchor": "module.c:754",
+          "operand_width": "16-bit",
+          "signedness": "signed"
+        },
+        {
+          "address": "0x1083",
+          "mnemonic": "je",
+          "target": "0x10C2",
+          "predicate": "fd_3D57_07BE == 2; select PherMapBT",
+          "source_anchor": "module.c:754",
+          "operand_width": "16-bit",
+          "signedness": "signed"
+        },
+        {
+          "address": "0x1086",
+          "mnemonic": "je",
+          "target": "0x10DC",
+          "predicate": "fd_3D57_07BE == 3; select PherMapRN",
+          "source_anchor": "module.c:754",
+          "operand_width": "16-bit",
+          "signedness": "signed"
+        },
+        {
+          "address": "0x1089",
+          "mnemonic": "je",
+          "target": "0x10F6",
+          "predicate": "fd_3D57_07BE == 4; select PherMapRT",
+          "source_anchor": "module.c:754",
+          "operand_width": "16-bit",
+          "signedness": "signed"
+        },
+        {
+          "address": "0x1116",
+          "mnemonic": "jle",
+          "target": "0x1125",
+          "predicate": "pheromone byte v <= 0x10; set g_94E4 to zero",
+          "source_anchor": "module.c:773",
+          "operand_width": "16-bit",
+          "signedness": "unsigned-byte value zero-extended to word"
+        },
+        {
+          "address": "0x112F",
+          "mnemonic": "jne",
+          "target": "0x1145",
+          "predicate": "g_94E4 != 0; skip MapA fallback",
+          "source_anchor": "module.c:778",
+          "operand_width": "8-bit",
+          "signedness": "unsigned byte"
+        },
+        {
+          "address": "0x115B",
+          "mnemonic": "jne",
+          "target": "0x1160",
+          "predicate": "LifeA byte v != 0; zero falls to the common return",
+          "source_anchor": "module.c:780",
+          "operand_width": "16-bit",
+          "signedness": "unsigned-byte value zero-extended to word"
+        },
+        {
+          "address": "0x1163",
+          "mnemonic": "jne",
+          "target": "0x117C",
+          "predicate": "LifeA byte v != 0xFF; 0xFF takes the alternate-tile path",
+          "source_anchor": "module.c:783",
+          "operand_width": "16-bit",
+          "signedness": "unsigned-byte value zero-extended to word"
+        },
+        {
+          "address": "0x1182",
+          "mnemonic": "jne",
+          "target": "0x11A7",
+          "predicate": "LifeA byte v != 0xFE; 0xFE takes the special-tile path",
+          "source_anchor": "module.c:789",
+          "operand_width": "16-bit",
+          "signedness": "unsigned-byte value zero-extended to word"
+        },
+        {
+          "address": "0x122B",
+          "mnemonic": "jge",
+          "target": "0x128C",
+          "predicate": "fd_50F6_04C2 >= 8; use fd_50F6_0496, else fd_50F6_0502",
+          "source_anchor": "module.c:785, 806, 827",
+          "operand_width": "16-bit",
+          "signedness": "signed int"
+        },
+        {
+          "address": "0x11DA",
+          "mnemonic": "jne",
+          "target": "0x11DF",
+          "predicate": "LifeB/LifeR byte v != 0; zero falls to the common return",
+          "source_anchor": "module.c:798",
+          "operand_width": "16-bit",
+          "signedness": "unsigned-byte value zero-extended to word"
+        },
+        {
+          "address": "0x11E2",
+          "mnemonic": "je",
+          "target": "0x11EF",
+          "predicate": "LifeB byte v == 0xFE; use special-tile offset 0x308",
+          "source_anchor": "module.c:800",
+          "operand_width": "16-bit",
+          "signedness": "unsigned-byte value zero-extended to word"
+        },
+        {
+          "address": "0x11E5",
+          "mnemonic": "je",
+          "target": "0x120E",
+          "predicate": "LifeB byte v == 0xFF after the decrement; use alternate-tile offset 0x300",
+          "source_anchor": "module.c:800",
+          "operand_width": "16-bit",
+          "signedness": "unsigned-byte value zero-extended to word"
+        },
+        {
+          "address": "0x1260",
+          "mnemonic": "je",
+          "target": "0x1298",
+          "predicate": "LifeR byte v == 0; return with g_94E4 already loaded and g_9126 still zero",
+          "source_anchor": "module.c:818",
+          "operand_width": "16-bit",
+          "signedness": "unsigned-byte value zero-extended to word"
+        },
+        {
+          "address": "0x1265",
+          "mnemonic": "je",
+          "target": "0x11EF",
+          "predicate": "LifeR byte v == 0xFE; share the special-tile path",
+          "source_anchor": "module.c:821",
+          "operand_width": "16-bit",
+          "signedness": "unsigned-byte value zero-extended to word"
+        },
+        {
+          "address": "0x1268",
+          "mnemonic": "je",
+          "target": "0x126D",
+          "predicate": "LifeR byte v == 0xFF; use alternate-tile offset 0x300",
+          "source_anchor": "module.c:821",
+          "operand_width": "16-bit",
+          "signedness": "unsigned-byte value zero-extended to word"
+        },
+        {
+          "address": "0x128A",
+          "mnemonic": "jl",
+          "target": "0x122D",
+          "predicate": "fd_50F6_04C2 < 8; use fd_50F6_0502, else fd_50F6_0496",
+          "source_anchor": "module.c:827",
+          "operand_width": "16-bit",
+          "signedness": "signed int"
+        }
+      ],
+      "unconditional_and_terminal_edges": [
+        {
+          "address": "0x105B",
+          "mnemonic": "jmp",
+          "target": "0x1298",
+          "meaning": "negative MapPlane exits after the two output resets"
+        },
+        {
+          "address": "0x1064",
+          "mnemonic": "jmp",
+          "target": "0x11B1",
+          "meaning": "plane-2 switch arm"
+        },
+        {
+          "address": "0x106A",
+          "mnemonic": "jmp",
+          "target": "0x1237",
+          "meaning": "plane-3 switch arm"
+        },
+        {
+          "address": "0x106D",
+          "mnemonic": "jmp",
+          "target": "0x1298",
+          "meaning": "positive MapPlane other than 0..3 exits with reset outputs"
+        },
+        {
+          "address": "0x108B",
+          "mnemonic": "jmp",
+          "target": "0x112A",
+          "meaning": "default pheromone mode skips scent decoding and continues to MapA fallback"
+        },
+        {
+          "address": "0x1123",
+          "mnemonic": "jmp",
+          "target": "0x112A",
+          "meaning": "scent decode joins the MapA fallback test"
+        },
+        {
+          "address": "0x115D",
+          "mnemonic": "jmp",
+          "target": "0x1298",
+          "meaning": "LifeA zero return"
+        },
+        {
+          "address": "0x1179",
+          "mnemonic": "jmp",
+          "target": "0x1222",
+          "meaning": "LifeA 0xFF joins the common g_9126 store and page-count branch"
+        },
+        {
+          "address": "0x11A4",
+          "mnemonic": "jmp",
+          "target": "0x1298",
+          "meaning": "LifeA 0xFE result exits"
+        },
+        {
+          "address": "0x11AE",
+          "mnemonic": "jmp",
+          "target": "0x1298",
+          "meaning": "ordinary LifeA result exits"
+        },
+        {
+          "address": "0x11DC",
+          "mnemonic": "jmp",
+          "target": "0x1298",
+          "meaning": "LifeB zero return"
+        },
+        {
+          "address": "0x11ED",
+          "mnemonic": "jmp",
+          "target": "0x11A1",
+          "meaning": "ordinary LifeB result joins the common g_9126 store"
+        },
+        {
+          "address": "0x120C",
+          "mnemonic": "jmp",
+          "target": "0x11A1",
+          "meaning": "LifeB 0xFE result joins the common g_9126 store"
+        },
+        {
+          "address": "0x1235",
+          "mnemonic": "jmp",
+          "target": "0x1294",
+          "meaning": "LifeB 0xFF low-page branch joins the final page-offset addition"
+        },
+        {
+          "address": "0x126A",
+          "mnemonic": "jmp",
+          "target": "0x11E7",
+          "meaning": "ordinary LifeR result shares the +0x200 calculation"
+        },
+        {
+          "address": "0x129D",
+          "mnemonic": "retf",
+          "target": null,
+          "meaning": "single far return; invalid plane, life-zero, and completed paths share it"
+        }
+      ],
+      "switch_and_fallthrough_accounting": "MapPlane signed dispatch: negative and values outside 0..3 leave reset outputs; 0/1 share A; 2 and 3 use distinct map/life tables. The nested pheromone switch has cases 0..4 and a no-scent default; the source goto `noscent` is the target 0x112A path.",
+      "loops": "none",
+      "indirect_jumps": "none",
+      "returns": [
+        "LifeA/LifeB/LifeR zero returns and unsupported-plane fallthrough share the retf at 0x129D; normal completion also reaches it."
+      ]
+    },
+    "call_map": [
+      {
+        "address": "0x101E",
+        "callee": "__aFchkstk",
+        "source_counterpart": "compiler-generated stack-check prologue; no source-level function call",
+        "order": "entry, before register saves and game-state reads",
+        "arguments_abi": "MSC stack-check helper, generated for a 4-byte BP local frame",
+        "effects": "stack guard only; not a game-state helper"
+      }
+    ],
+    "memory_state_inventory": {
+      "reads": [
+        "signed int x/y arguments at SS:BP+6/+8",
+        "fd_50F6_0508.x/y words via far segment at DS:0x7EAC offsets 0x0508/0x050A",
+        "signed MapPlane word via segment DS:0x7EA8 offset 0x032E",
+        "signed pheromone mode fd_3D57_07BE via DS:0x7EB4 offset 0x07BE",
+        "unsigned-byte PherMapA/BN/BT/RN/RT at [mx>>1][my>>1], only for plane 0/1 and mode 0..4",
+        "unsigned-byte MapA/LifeA at [mx][my], plane 0/1",
+        "unsigned-byte MapB/LifeB at [mx][my], plane 2",
+        "unsigned-byte MapR/LifeR at [mx][my], plane 3",
+        "signed 16-bit fd_50F6_049A, 04C2, 0502 and 0496 on special Life values"
+      ],
+      "writes": [
+        "g_94E4 unsigned byte is reset to zero on entry; may then receive scent nibble, fallback map tile, or MapB/MapR tile narrowed modulo 256",
+        "g_9126 unsigned word is reset to zero on entry; assigned only for nonzero life after plane-specific sentinel decoding"
+      ],
+      "not_written": [
+        "map/life/pheromone tables, coordinate origin, and frame-count words are only read",
+        "no helper/render call is issued by this function; only generated __aFchkstk is called"
+      ],
+      "local_effects": "v is a local word holding zero-extended pheromone/life bytes; mx/my are signed 16-bit coordinate temporaries. Their BP/register homes are private."
+    },
+    "constants_widths_pointer_arithmetic": {
+      "coordinate": "mx=origin_x+x and my=origin_y+y in signed 16-bit arithmetic; if signed my>63 then mx+=64 and my&=63. Plane 0/1 then mx&=127; plane 2/3 then mx&=63. Negative my is not normalized by the >63 rule.",
+      "pheromone": "For plane 0/1, mode 0..4 selects one unsigned [64][32] table indexed [mx>>1][my>>1]; v>16 sets byte g_94E4=((v>>4)&31)-16 (byte narrowing), otherwise zero. Mode default skips scent decoding. Zero scent falls back to MapA[mx][my].",
+      "life": "Life byte 0 returns after tile selection with g_9126 still zero. Plane A: 0xFF uses A+04C2+0x380 plus 0502 when signed 04C2<8 else 0496; 0xFE uses A+0496+04C2+0x388; other nonzero byte uses v+0x100. Planes B/R: 0xFE uses A+0496+04C2+0x308; 0xFF uses A+04C2+0x300 plus 0502 or 0496 under the same signed <8 split; other nonzero byte uses v+0x200. Results narrow/wrap to unsigned 16-bit g_9126.",
+      "table_stride": "Source dimensions and original byte addressing agree: PherMap offset=(mx>>1)*32+(my>>1); MapA/LifeA offset=mx*64+my; MapB/R and LifeB/R offset=mx*64+my. Table elements are bytes."
+    },
+    "static_axes": {
+      "source_scope": "The registered module.c is a whole root:0250 translation-unit snapshot; both target bodies and same-module render helpers are in this exact pinned file.",
+      "abstract_machine": "Interpret integer operations as the pinned 16-bit MSC/DOS execution: int and pointers are 16-bit words, far pointers carry offset+segment, byte loads are zero-extended where source types are unsigned char, and word assignment/arithmetic wraps as the observed x86 target does. ISO-C signed-overflow portability is not claimed.",
+      "control_flow": "Every conditional site is enumerated with original target and source predicate. Neither target has a loop or indirect branch. Switch defaults, fall-throughs, early returns, joins, and common epilogues are separately recorded.",
+      "algorithm": "Reconstructed algorithm matches the decoded stream: input-relative map point and one-row wrap; clear output globals; dispatch MapPlane; optionally decode a selected half-resolution pheromone; choose tile byte; decode Life sentinel into draw-kind/page word; early return on zero life. Unsupported planes keep both outputs cleared.",
+      "branch_coverage": "23 conditional sites are listed below. The five pheromone-mode dispatch sites cover modes 0..4; their fallthrough default reaches the no-scent/MapA path. MapPlane dispatch accounts for negative, 0/1, 2, 3, and all other positive values. Three zero-life cases return through the common epilogue.",
+      "types_and_order": "MapPlane/mode/coordinate/index/locals are signed 16-bit ints; table elements and g_94E4 are unsigned bytes; g_9126 and frame parameters are words. The original uses arithmetic SAR for right shifts; masked mx is nonnegative at all table reads, while negative my remains signed and shifts arithmetically. The global resets precede every map-plane branch.",
+      "memory_effects": {
+        "reads": [
+          "signed int x/y arguments at SS:BP+6/+8",
+          "fd_50F6_0508.x/y words via far segment at DS:0x7EAC offsets 0x0508/0x050A",
+          "signed MapPlane word via segment DS:0x7EA8 offset 0x032E",
+          "signed pheromone mode fd_3D57_07BE via DS:0x7EB4 offset 0x07BE",
+          "unsigned-byte PherMapA/BN/BT/RN/RT at [mx>>1][my>>1], only for plane 0/1 and mode 0..4",
+          "unsigned-byte MapA/LifeA at [mx][my], plane 0/1",
+          "unsigned-byte MapB/LifeB at [mx][my], plane 2",
+          "unsigned-byte MapR/LifeR at [mx][my], plane 3",
+          "signed 16-bit fd_50F6_049A, 04C2, 0502 and 0496 on special Life values"
+        ],
+        "writes": [
+          "g_94E4 unsigned byte is reset to zero on entry; may then receive scent nibble, fallback map tile, or MapB/MapR tile narrowed modulo 256",
+          "g_9126 unsigned word is reset to zero on entry; assigned only for nonzero life after plane-specific sentinel decoding"
+        ],
+        "not_written": [
+          "map/life/pheromone tables, coordinate origin, and frame-count words are only read",
+          "no helper/render call is issued by this function; only generated __aFchkstk is called"
+        ],
+        "local_effects": "v is a local word holding zero-extended pheromone/life bytes; mx/my are signed 16-bit coordinate temporaries. Their BP/register homes are private."
+      },
+      "constants_and_pointer_arithmetic": {
+        "coordinate": "mx=origin_x+x and my=origin_y+y in signed 16-bit arithmetic; if signed my>63 then mx+=64 and my&=63. Plane 0/1 then mx&=127; plane 2/3 then mx&=63. Negative my is not normalized by the >63 rule.",
+        "pheromone": "For plane 0/1, mode 0..4 selects one unsigned [64][32] table indexed [mx>>1][my>>1]; v>16 sets byte g_94E4=((v>>4)&31)-16 (byte narrowing), otherwise zero. Mode default skips scent decoding. Zero scent falls back to MapA[mx][my].",
+        "life": "Life byte 0 returns after tile selection with g_9126 still zero. Plane A: 0xFF uses A+04C2+0x380 plus 0502 when signed 04C2<8 else 0496; 0xFE uses A+0496+04C2+0x388; other nonzero byte uses v+0x100. Planes B/R: 0xFE uses A+0496+04C2+0x308; 0xFF uses A+04C2+0x300 plus 0502 or 0496 under the same signed <8 split; other nonzero byte uses v+0x200. Results narrow/wrap to unsigned 16-bit g_9126.",
+        "table_stride": "Source dimensions and original byte addressing agree: PherMap offset=(mx>>1)*32+(my>>1); MapA/LifeA offset=mx*64+my; MapB/R and LifeB/R offset=mx*64+my. Table elements are bytes."
+      },
+      "calls": "Only generated __aFchkstk at entry; no direct source-level callee. No unaccounted callbacks or indirect calls.",
+      "dependencies": "Data declarations at module.c:709-724 pin the five pheromone tables, MapA/LifeA, MapB/LifeB, MapR/LifeR and four frame/count words. Original DS segment-word operands in the saved disassembly agree with those registered far symbols. No helper body is invoked."
+    },
+    "remaining_differences": [
+      {
+        "kind": "CODEGEN_ONLY",
+        "original_address": "0x1018 and 0x1031-0x1041",
+        "source_anchor": "module.c:738-747 (coordinate locals and wrap); module.c:783-790 and 802-830 (sentinel sums)",
+        "explanation": "The targeted compile diagnostic reports 648-byte candidate extent versus the 646-byte original. Its localized structural differences are coordinate/local register-home selection (including a candidate BP home for a coordinate) and resultant branch layout; the original keeps mx/my in SI/DI and the source candidate uses different homes. The temporary values and conditions are unchanged, and no private local escapes. No semantic difference is identified. The candidate extent is two bytes larger (648 vs 646); the full target body still reaches the corresponding common epilogue. This receipt does not turn the diagnostic into historical byte acceptance."
+      },
+      {
+        "kind": "CODEGEN_ONLY",
+        "original_address": "0x1169-0x1176 and 0x1184-0x119E",
+        "source_anchor": "module.c:783-790 and module.c:802-830",
+        "explanation": "The target and compiled source schedule some reads of the same non-volatile 16-bit frame/count globals in a different instruction order (the expressions are the same word sums). The targeted diagnostic labels these operand changes LOCAL_CODEGEN_UNCLASSIFIED; they do not change values under the pinned sequential DOS call model, where no call or target-side write interleaves these reads. An asynchronous writer/reentrant call between loads is not proven or claimed."
+      }
+    ],
+    "unexplained_semantic_differences": [],
+    "differential_evidence": {
+      "path": "evidence/behavior/functions/f_0250_1018/contracts/logical-render-v2/run.json",
+      "sha256": "b46081c762d3ecda2f429cc280be2774ffe2b36d0f07802f6dc9faa4c0222c92",
+      "cases": {
+        "directed": 227,
+        "randomized": 1000,
+        "total": 1227,
+        "seed": "0xBEEF"
+      },
+      "completion": "COMPLETE",
+      "mismatches": 0,
+      "errors": 0,
+      "negative_control": "negative/life-zero detected; mismatch categories include nonstack_memory and ranges",
+      "limits": [
+        "Finite target-specific domain only; not universal proof.",
+        "No framebuffer is in scope; this function issues no draw helper callback.",
+        "Historical byte/fixup/extent acceptance is separate."
+      ]
+    },
+    "review_notes": [
+      "Candidate for independent root review; this worker did not edit source, manifest, registry or frozen behavior evidence.",
+      "The static conclusion is grounded in the complete original extent and complete reconstructed C body; differential evidence corroborates but its finite input domain is not universal proof.",
+      "Assumes the pinned single-threaded DOS/MSC 16-bit execution model. Asynchronous mutation/reentrancy between non-volatile global reads is not separately modeled.",
+      "For f_0250_129E, physical driver/framebuffer state and Punt service internals lie behind explicit call boundaries; the target call, condition, order, arguments and post-call cache behavior are accounted for.",
+      "The behavior registry status remains unchanged; this receipt is a research review candidate only.",
+      "Targeted diag.py comparison reports register/home substitutions and same-expression global load scheduling in addition to branch-layout shifts; those operations are evaluated over stable non-volatile state for this static conclusion.",
+      "Pheromone indexing with negative my, if such an input is supplied, follows the pinned MSC signed-SAR/far-offset behavior; ISO C does not define out-of-range multidimensional array indexing. No caller-domain proof is claimed for arbitrary words."
+    ]
+  },
+  "root_review": {
+    "reviewer": "root",
+    "complete_cfg": true,
+    "complete_data_widths": true,
+    "complete_calls_effects": true,
+    "codegen_only_residue": true,
+    "basis": "Reviewed the whole-function branch/call/state/width maps, source/evidence identities, explanations of residue and differential/negative limits. Matching observed service boundaries are composed through the actual caller ABI and same callee/slot/state; finite coverage alone is not acceptance."
+  }
+}

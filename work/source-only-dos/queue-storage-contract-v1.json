@@ -1,0 +1,1264 @@
+{
+  "schema": "simant-dos-queue-runtime-probe-v1",
+  "contract": {
+    "ring_slots": 7,
+    "stride": 16,
+    "copy_bytes": 16,
+    "usable_capacity": 6
+  },
+  "inputs": [
+    {
+      "path": "work\\source-only-dos\\queue-storage-probe.py",
+      "sha256": "8db0b19e802abe82963da9dbdf97bb40c898c1bae2f5cf6030af2b0559025b5f",
+      "size": 28573
+    },
+    {
+      "path": "src\\root\\m1B73.asm",
+      "sha256": "3097a6b03ff1d8bdfa7d573632d9905de88d754c8b1e047de4014c4f186cb848",
+      "size": 35010
+    },
+    {
+      "path": "src\\root\\m1FD2.c",
+      "sha256": "f4359bdaf4cfc0fe326a54cf8a1eacb9ba3098b710bf2a561b3d0f48569bf6d8",
+      "size": 10086
+    },
+    {
+      "path": "layout\\toolchain.json",
+      "sha256": "c0bb71cd8b1f4a1a1f91299bd3b6148aa67b7a1d12c3c3946a229272593eb274",
+      "size": 39241
+    },
+    {
+      "path": "layout\\manifest.json",
+      "sha256": "025a0a9255d910cae4b122ab5a3f3fb40888bb456d7fe42158db7c9e622fcf50",
+      "size": 628980
+    },
+    {
+      "path": "evidence\\behavior\\supplemental\\enternest-clock-boundary-20261002\\dependencies\\TickCount-source.asm",
+      "sha256": "3097a6b03ff1d8bdfa7d573632d9905de88d754c8b1e047de4014c4f186cb848",
+      "size": 35010
+    },
+    {
+      "path": "evidence\\behavior\\supplemental\\enternest-clock-boundary-20261002\\negative-gating-research\\TickCount-source.asm",
+      "sha256": "3097a6b03ff1d8bdfa7d573632d9905de88d754c8b1e047de4014c4f186cb848",
+      "size": 35010
+    },
+    {
+      "path": "evidence\\behavior\\helpers\\tutorial-contracts-v1\\f_1C62_0415\\f_1B73_032A.json",
+      "sha256": "763c45b723a57c670b00ecd43a280988a42fcfb01304a3c8d07a8ad057fa6a7a",
+      "size": 5468
+    },
+    {
+      "path": "evidence\\behavior\\helpers\\tutorial-contracts-v1\\f_1C62_0415\\f_1B73_032E.json",
+      "sha256": "0bf5bf7174edc39fe166b8aa1855424e12da82c92a6a2159efdbef7d50e999ae",
+      "size": 6063
+    },
+    {
+      "path": "evidence\\behavior\\helpers\\tutorial-contracts-v1\\o10_35F5_0384\\f_1B73_032A.json",
+      "sha256": "d643edb66541b1c9f12fd2e3d1574deb5add5051ae88042a3897f78a529fc8bc",
+      "size": 5473
+    },
+    {
+      "path": "evidence\\behavior\\helpers\\tutorial-contracts-v1\\o10_35F5_0384\\f_1B73_032E.json",
+      "sha256": "3401ccd56286eeaac64c26e2dbbb17d87eab47943b11f6ae2508f6e64bed816e",
+      "size": 6066
+    },
+    {
+      "path": "evidence\\behavior\\harnesses\\tutorial-menu-20261002-e018\\source-inputs\\symbols.json",
+      "sha256": "0f5dd5b0a211945a97782cfccdb9bb31b0dfd07fcde5df4d4f9486b487eb0125",
+      "size": 800809
+    },
+    {
+      "path": "evidence\\behavior\\harnesses\\tutorial-menu-20261002-d12a\\source-inputs\\symbols.json",
+      "sha256": "0f5dd5b0a211945a97782cfccdb9bb31b0dfd07fcde5df4d4f9486b487eb0125",
+      "size": 800809
+    },
+    {
+      "path": "evidence\\behavior\\harnesses\\tutorial-menu-20261002-7043\\source-inputs\\symbols.json",
+      "sha256": "0f5dd5b0a211945a97782cfccdb9bb31b0dfd07fcde5df4d4f9486b487eb0125",
+      "size": 800809
+    },
+    {
+      "path": "C:\\tools\\msc-6.00ax-archive\\BIN\\CL.EXE",
+      "sha256": "92df4a0839aac77940189ce54f107381b829babe8103926cb05d1adffe947347",
+      "size": 81184
+    },
+    {
+      "path": "C:\\tools\\msc-6.00ax-archive\\BIN\\C1L.EXE",
+      "sha256": "d3db38b875a95048bca2809cd1f84783c6c070805f188fec9161054d6350ded3",
+      "size": 213680
+    },
+    {
+      "path": "C:\\tools\\msc-6.00ax-archive\\BIN\\C2L.EXE",
+      "sha256": "62490de22e7b279ea59218a54d677bfc752cb5fc1287533d2e23d03519f155e0",
+      "size": 473258
+    },
+    {
+      "path": "C:\\tools\\msc-6.00ax-archive\\BIN\\C3L.EXE",
+      "sha256": "9e82ecc87ffcdb2def53ac64c0d1f048b26421c1415b5600ad4d8d6fcbc06553",
+      "size": 195439
+    },
+    {
+      "path": "C:\\tools\\msc-6.00ax-archive\\BIN\\CL.ERR",
+      "sha256": "ca22f37e5e0c09faebde9e4d549dd1f53523cc6f23049d2239a040cd19a424e7",
+      "size": 1656
+    },
+    {
+      "path": "C:\\tools\\msc-6.00ax-archive\\BIN\\C1.ERR",
+      "sha256": "637444915870f3283d5df41c5cdb1be8c32cc6c19b080f2bb3891edbc3751c6e",
+      "size": 19500
+    },
+    {
+      "path": "C:\\tools\\msc-6.00ax-archive\\BIN\\C23.ERR",
+      "sha256": "22944a0dffef336c0ebb8f6d5aeb97b4dbeb5c9758a48759557176bff49d1151",
+      "size": 3649
+    },
+    {
+      "path": "C:\\tools\\msc-6.00ax-archive\\BIN\\CL.MSG",
+      "sha256": "3379f283aec74842bc82205e4c848d759e6e2dcbb6d4820eec9719f1297213ec",
+      "size": 2697
+    },
+    {
+      "path": "C:\\tools\\masm-5.10\\files\\MASM.EXE",
+      "sha256": "233120302473749eafe9a54a30f8bda0127140c44346e5bcc047d113828a741e",
+      "size": 124712
+    },
+    {
+      "path": "C:\\tools\\dosbox-x\\dosbox-x.exe",
+      "sha256": "b028a4d328302ea270722dec69f3ec3a10ebf76beba72a51970db33a88df2bf6",
+      "size": 20481536
+    },
+    {
+      "path": "C:\\tools\\nmlgcdos\\msdos.exe",
+      "sha256": "f7f6cb0a3e816c5edb13112d327c1bddbf7463fe7bf9a005ca1eb5317751bd02",
+      "size": 686592
+    },
+    {
+      "path": "C:\\tools\\msc-6.00\\LIB\\llibcr.lib",
+      "sha256": "3d0c6ae92972789e87def01fa96351c39216d731d5c880370155c5613d78c884",
+      "size": 148711
+    },
+    {
+      "path": "C:\\tools\\msc-6.00\\LIB\\libh.lib",
+      "sha256": "a4492e8f63da409d949643fd448f29e65e2cc9a8f2deea977372177bbe0ad818",
+      "size": 21033
+    },
+    {
+      "path": "C:\\tools\\RTLink-Plus-4.00-DiscMaster\\installed\\dest\\RTLINK.EXE",
+      "sha256": "dff0a988738a2ba7716f7013ef5b8136e0857b6bfe700bccdeaad70ee5e87c74",
+      "size": 449497
+    },
+    {
+      "path": "C:\\tools\\RTLink-Plus-4.00-DiscMaster\\installed\\dest\\RTLINK.DAT",
+      "sha256": "c1e206fe4b3c34d43b47aa9aa215e2959fbb23c69c89eb69e36d80b1d9194eea",
+      "size": 63824
+    },
+    {
+      "path": "C:\\tools\\RTLink-Plus-4.00-DiscMaster\\installed\\dest\\RTLUTILS.LIB",
+      "sha256": "9060c022f65a2811b81936879f93eb16c5d349c14b56c704a3853d3cf79cd162",
+      "size": 266625
+    },
+    {
+      "path": "C:\\tools\\RTLink-Plus-4.00-DiscMaster\\installed\\dest\\RTLINKST.COM",
+      "sha256": "6ad9015869dc9598a2b498c58297224e5ab4a13fad9ada528650dfcedeb83cf2",
+      "size": 7184
+    },
+    {
+      "path": "C:\\tools\\rtlink-plus-6.10\\installed\\RTL-REAL.EXE",
+      "sha256": "228c5d429438ea32ee21dd02c65b7f8e198715b3fa957be9da328f9857482773",
+      "size": 717922
+    },
+    {
+      "path": "C:\\tools\\rtlink-plus-6.10\\installed\\RTL-SWAP.EXE",
+      "sha256": "daae0a8c358edc26f95540f4bc1629c0dc5c30652155d85ccd79bead4381cfe3",
+      "size": 692123
+    },
+    {
+      "path": "C:\\tools\\rtlink-plus-6.10\\installed\\RTLINK.DAT",
+      "sha256": "10723fb4d4381b6a38417a18409e32d254e59850bcd3b465fbb824e01367a77b",
+      "size": 100100
+    },
+    {
+      "path": "C:\\tools\\rtlink-plus-6.10\\installed\\RTLUTILS.LIB",
+      "sha256": "c718bac09b0b1204a259494446acfa8bfffb129144cc7d36799855621f4fdccb",
+      "size": 423823
+    },
+    {
+      "path": "C:\\tools\\rtlink-plus-6.10\\installed\\RTLINKST.COM",
+      "sha256": "635425a8feff822ca98ec536c55a31824161bffbf9d24d37851cc0d9f7ce3b5f",
+      "size": 11031
+    },
+    {
+      "path": "C:\\tools\\rtlink-plus-6.10\\installed\\RTLINK.EXE",
+      "sha256": "ea6f57a470a26801086593d54aa99f6bf983dd024fc19b5e13361a07f43e17fb",
+      "size": 687531
+    },
+    {
+      "path": "C:\\tools\\rtlink-plus-6.10\\installed\\DOS4GW.EXE",
+      "sha256": "7192b80d1551769c2d2897b2f58015dc18fadca2b7e093a20f45b34011933c6c",
+      "size": 231179
+    }
+  ],
+  "denied_oracle_reads": [],
+  "canonical_source_assumption": "assume cs:MOUSE_TEXT, ds:DGROUP",
+  "reference_audit_scope": {
+    "canonical_modules": [
+      "root:1B73 src/root/m1B73.asm",
+      "root:1FD2 src/root/m1FD2.c"
+    ],
+    "canonical_tree_result": "In src/, only these two canonical source files contain the requested g_5FF* names or the 0x91B0 literal.",
+    "behavior_sources": "Two TickCount-source.asm copies match canonical m1B73.asm by SHA-256; selected tutorial contract excerpts cite 032A/032E; three selected symbol maps list the identifiers as addresses.",
+    "selected_behavior_has_91b0_literal": false
+  },
+  "reference_inventory": {
+    "g_5FF0": "C initialized to 7 at m1FD2.c:50; ASM reads capacity at m1B73.asm:598,635; no writes found.",
+    "g_5FF2": "Timer base; ASM count reads at m1B73.asm:581,591; writes at :594 (dequeue decrement), :643 (enqueue increment); C initializer at m1FD2.c:51 sets Rect.left to 0.",
+    "g_5FF4": "Timer+2; tail read at m1B73.asm:632, write at :641.",
+    "g_5FF6": "Timer+4; head reads at m1B73.asm:595,639, write at :604.",
+    "g_5FF8": "Timer+6; byte write at m1B73.asm:1530.",
+    "g_5FF9": "Timer+7; byte read at m1B73.asm:773, byte write at :1534.",
+    "g_5FFA": "Timer+8; word indirect call at m1B73.asm:775, word write at :1532.",
+    "g_5FFE": "Timer+12; queue-base reads at m1B73.asm:606,644; no direct writes found. C literal 0x91B0 initializes Timer.ticks at m1FD2.c:51.",
+    "canonical_buffer_declaration": "No canonical C Event[7] buffer declaration was found in src/; m1FD2.c:51 initializes the Timer.ticks word from literal 0x91B0. The separate QUEUE_DATA family is declared in m1B73.asm:137-152.",
+    "queue_mechanics": "Four index doublings at m1B73.asm:607-610 and :645-648 yield 16-byte stride; dequeue copies 8 words at :613-614; enqueue writes words at :651-655 and :667-668. Capacity 7 with head/tail sentinel leaves six usable records.",
+    "separate_queue_family": "m1B73.asm:137-152 declares QUEUE_DATA with Queue0 and _fd_5071_* far data; m1B73.asm:122 comments on its separate 18-byte entries, and its callers use _g_5484/_fd_5071_* rather than g_5FF*. Manifest root:1B73 places QUEUE_DATA at 2016 bytes and _DATA at 4519 bytes."
+  },
+  "extracted_procedures": {
+    "_f_1B73_030F": "d406adf87e7d7b1335124f292611cd340e2634adff0c817087648f66b9f9e551",
+    "_f_1B73_032A": "15eba335390b050e44896bbfd17ffc04b3236655cf26464b08bee88477162d8e",
+    "_f_1B73_032E": "7e20510fbd1d213291dd58bdbc5916999a282f6f08ee4db1fc27314fee5488a3",
+    "_f_1B73_036E": "6258c6f58f49e36823b44414d116f4b9e1f57321c42fea1f0c934e7f1637645e"
+  },
+  "fixture": {
+    "timer_descriptor": "struct Timer { struct Rect r; void (far *fn)(); int ticks; char a,b,c,d; }",
+    "buffer_declaration": "struct QueueBox near queue_box; struct Event input_queue[7] member;",
+    "base_initializer": "(int)(struct Event near *)input_queue",
+    "base_initializer_check": "runtime verifies g_5FF2.ticks equals the resolved near input_queue offset and differs from historical literal 0x91B0",
+    "overlay_aliases": {
+      "g_5FF4": "RTLink DEFINE _g_5FF2+2",
+      "g_5FF6": "RTLink DEFINE _g_5FF2+4",
+      "g_5FF8": "RTLink DEFINE _g_5FF2+6",
+      "g_5FF9": "RTLink DEFINE _g_5FF2+7",
+      "g_5FFA": "RTLink DEFINE _g_5FF2+8",
+      "g_5FFE": "RTLink DEFINE _g_5FF2+0Ch"
+    },
+    "prefix": "NULL16 is the first test-owned DGROUP segment before _DATA and occupies 16 bytes of 0xA5; a runtime offset check requires the _DATA g_5FF0 symbol at least 16 bytes after its marker. Runtime libraries may precede both with their NULL segment.",
+    "procedure_return_contract": "f_1B73_032E returns AX as remaining count, or -1 when empty.",
+    "ring_slots": 7,
+    "usable_capacity": 6,
+    "stride_bytes": 16,
+    "copy_bytes": 16,
+    "startup_zeroing": "all 7 queue records are checked before the fixture writes any sentinels.",
+    "runtime_assertions": [
+      "FIFO payload order",
+      "six accepted/seventh dropped",
+      "slot 6 reuse after read-index advance",
+      "all eight 16-bit words copied",
+      "word 0 sentinel preserved",
+      "queue and destination guards",
+      "empty returns -1 without changing destination",
+      "BIOS keyboard-state and tick words bracketed by BDA reads"
+    ],
+    "negative_controls": [
+      "queue initializer nonzero",
+      "buffer pointer plus one Event",
+      "capacity 8"
+    ]
+  },
+  "assembly_modes": {
+    "canonical_source_assumption": {
+      "queue_fixups": [
+        {
+          "segment": "MOUSE_TEXT",
+          "offset": 29,
+          "width": 2,
+          "loc": "offset16",
+          "target_kind": "external",
+          "target": "_g_5FF2",
+          "displacement": 0,
+          "frame_kind": "group",
+          "frame": "DGROUP",
+          "encoded_addend": "0000"
+        },
+        {
+          "segment": "MOUSE_TEXT",
+          "offset": 38,
+          "width": 2,
+          "loc": "offset16",
+          "target_kind": "external",
+          "target": "_g_5FF2",
+          "displacement": 0,
+          "frame_kind": "group",
+          "frame": "DGROUP",
+          "encoded_addend": "0000"
+        },
+        {
+          "segment": "MOUSE_TEXT",
+          "offset": 44,
+          "width": 2,
+          "loc": "offset16",
+          "target_kind": "external",
+          "target": "_g_5FF2",
+          "displacement": 0,
+          "frame_kind": "group",
+          "frame": "DGROUP",
+          "encoded_addend": "0000"
+        },
+        {
+          "segment": "MOUSE_TEXT",
+          "offset": 48,
+          "width": 2,
+          "loc": "offset16",
+          "target_kind": "external",
+          "target": "_g_5FF6",
+          "displacement": 0,
+          "frame_kind": "group",
+          "frame": "DGROUP",
+          "encoded_addend": "0000"
+        },
+        {
+          "segment": "MOUSE_TEXT",
+          "offset": 55,
+          "width": 2,
+          "loc": "offset16",
+          "target_kind": "external",
+          "target": "_g_5FF0",
+          "displacement": 0,
+          "frame_kind": "group",
+          "frame": "DGROUP",
+          "encoded_addend": "0000"
+        },
+        {
+          "segment": "MOUSE_TEXT",
+          "offset": 65,
+          "width": 2,
+          "loc": "offset16",
+          "target_kind": "external",
+          "target": "_g_5FF6",
+          "displacement": 0,
+          "frame_kind": "group",
+          "frame": "DGROUP",
+          "encoded_addend": "0000"
+        },
+        {
+          "segment": "MOUSE_TEXT",
+          "offset": 71,
+          "width": 2,
+          "loc": "offset16",
+          "target_kind": "external",
+          "target": "_g_5FFE",
+          "displacement": 0,
+          "frame_kind": "group",
+          "frame": "DGROUP",
+          "encoded_addend": "0000"
+        },
+        {
+          "segment": "MOUSE_TEXT",
+          "offset": 108,
+          "width": 2,
+          "loc": "offset16",
+          "target_kind": "external",
+          "target": "_g_5FF4",
+          "displacement": 0,
+          "frame_kind": "group",
+          "frame": "DGROUP",
+          "encoded_addend": "0000"
+        },
+        {
+          "segment": "MOUSE_TEXT",
+          "offset": 115,
+          "width": 2,
+          "loc": "offset16",
+          "target_kind": "external",
+          "target": "_g_5FF0",
+          "displacement": 0,
+          "frame_kind": "group",
+          "frame": "DGROUP",
+          "encoded_addend": "0000"
+        },
+        {
+          "segment": "MOUSE_TEXT",
+          "offset": 123,
+          "width": 2,
+          "loc": "offset16",
+          "target_kind": "external",
+          "target": "_g_5FF6",
+          "displacement": 0,
+          "frame_kind": "group",
+          "frame": "DGROUP",
+          "encoded_addend": "0000"
+        },
+        {
+          "segment": "MOUSE_TEXT",
+          "offset": 129,
+          "width": 2,
+          "loc": "offset16",
+          "target_kind": "external",
+          "target": "_g_5FF4",
+          "displacement": 0,
+          "frame_kind": "group",
+          "frame": "DGROUP",
+          "encoded_addend": "0000"
+        },
+        {
+          "segment": "MOUSE_TEXT",
+          "offset": 135,
+          "width": 2,
+          "loc": "offset16",
+          "target_kind": "external",
+          "target": "_g_5FF2",
+          "displacement": 0,
+          "frame_kind": "group",
+          "frame": "DGROUP",
+          "encoded_addend": "0000"
+        },
+        {
+          "segment": "MOUSE_TEXT",
+          "offset": 139,
+          "width": 2,
+          "loc": "offset16",
+          "target_kind": "external",
+          "target": "_g_5FFE",
+          "displacement": 0,
+          "frame_kind": "group",
+          "frame": "DGROUP",
+          "encoded_addend": "0000"
+        }
+      ],
+      "all_frames": [
+        "DGROUP"
+      ]
+    },
+    "reviewed_explicit_dgroup": {
+      "queue_fixups": [
+        {
+          "segment": "MOUSE_TEXT",
+          "offset": 29,
+          "width": 2,
+          "loc": "offset16",
+          "target_kind": "external",
+          "target": "_g_5FF2",
+          "displacement": 0,
+          "frame_kind": "group",
+          "frame": "DGROUP",
+          "encoded_addend": "0000"
+        },
+        {
+          "segment": "MOUSE_TEXT",
+          "offset": 38,
+          "width": 2,
+          "loc": "offset16",
+          "target_kind": "external",
+          "target": "_g_5FF2",
+          "displacement": 0,
+          "frame_kind": "group",
+          "frame": "DGROUP",
+          "encoded_addend": "0000"
+        },
+        {
+          "segment": "MOUSE_TEXT",
+          "offset": 44,
+          "width": 2,
+          "loc": "offset16",
+          "target_kind": "external",
+          "target": "_g_5FF2",
+          "displacement": 0,
+          "frame_kind": "group",
+          "frame": "DGROUP",
+          "encoded_addend": "0000"
+        },
+        {
+          "segment": "MOUSE_TEXT",
+          "offset": 48,
+          "width": 2,
+          "loc": "offset16",
+          "target_kind": "external",
+          "target": "_g_5FF6",
+          "displacement": 0,
+          "frame_kind": "group",
+          "frame": "DGROUP",
+          "encoded_addend": "0000"
+        },
+        {
+          "segment": "MOUSE_TEXT",
+          "offset": 55,
+          "width": 2,
+          "loc": "offset16",
+          "target_kind": "external",
+          "target": "_g_5FF0",
+          "displacement": 0,
+          "frame_kind": "group",
+          "frame": "DGROUP",
+          "encoded_addend": "0000"
+        },
+        {
+          "segment": "MOUSE_TEXT",
+          "offset": 65,
+          "width": 2,
+          "loc": "offset16",
+          "target_kind": "external",
+          "target": "_g_5FF6",
+          "displacement": 0,
+          "frame_kind": "group",
+          "frame": "DGROUP",
+          "encoded_addend": "0000"
+        },
+        {
+          "segment": "MOUSE_TEXT",
+          "offset": 71,
+          "width": 2,
+          "loc": "offset16",
+          "target_kind": "external",
+          "target": "_g_5FFE",
+          "displacement": 0,
+          "frame_kind": "group",
+          "frame": "DGROUP",
+          "encoded_addend": "0000"
+        },
+        {
+          "segment": "MOUSE_TEXT",
+          "offset": 108,
+          "width": 2,
+          "loc": "offset16",
+          "target_kind": "external",
+          "target": "_g_5FF4",
+          "displacement": 0,
+          "frame_kind": "group",
+          "frame": "DGROUP",
+          "encoded_addend": "0000"
+        },
+        {
+          "segment": "MOUSE_TEXT",
+          "offset": 115,
+          "width": 2,
+          "loc": "offset16",
+          "target_kind": "external",
+          "target": "_g_5FF0",
+          "displacement": 0,
+          "frame_kind": "group",
+          "frame": "DGROUP",
+          "encoded_addend": "0000"
+        },
+        {
+          "segment": "MOUSE_TEXT",
+          "offset": 123,
+          "width": 2,
+          "loc": "offset16",
+          "target_kind": "external",
+          "target": "_g_5FF6",
+          "displacement": 0,
+          "frame_kind": "group",
+          "frame": "DGROUP",
+          "encoded_addend": "0000"
+        },
+        {
+          "segment": "MOUSE_TEXT",
+          "offset": 129,
+          "width": 2,
+          "loc": "offset16",
+          "target_kind": "external",
+          "target": "_g_5FF4",
+          "displacement": 0,
+          "frame_kind": "group",
+          "frame": "DGROUP",
+          "encoded_addend": "0000"
+        },
+        {
+          "segment": "MOUSE_TEXT",
+          "offset": 135,
+          "width": 2,
+          "loc": "offset16",
+          "target_kind": "external",
+          "target": "_g_5FF2",
+          "displacement": 0,
+          "frame_kind": "group",
+          "frame": "DGROUP",
+          "encoded_addend": "0000"
+        },
+        {
+          "segment": "MOUSE_TEXT",
+          "offset": 139,
+          "width": 2,
+          "loc": "offset16",
+          "target_kind": "external",
+          "target": "_g_5FFE",
+          "displacement": 0,
+          "frame_kind": "group",
+          "frame": "DGROUP",
+          "encoded_addend": "0000"
+        }
+      ],
+      "all_frames": [
+        "DGROUP"
+      ]
+    },
+    "data_segment_frame_contrast": {
+      "queue_fixups": [
+        {
+          "segment": "MOUSE_TEXT",
+          "offset": 29,
+          "width": 2,
+          "loc": "offset16",
+          "target_kind": "external",
+          "target": "_g_5FF2",
+          "displacement": 0,
+          "frame_kind": "segment",
+          "frame": "_DATA",
+          "encoded_addend": "0000"
+        },
+        {
+          "segment": "MOUSE_TEXT",
+          "offset": 38,
+          "width": 2,
+          "loc": "offset16",
+          "target_kind": "external",
+          "target": "_g_5FF2",
+          "displacement": 0,
+          "frame_kind": "segment",
+          "frame": "_DATA",
+          "encoded_addend": "0000"
+        },
+        {
+          "segment": "MOUSE_TEXT",
+          "offset": 44,
+          "width": 2,
+          "loc": "offset16",
+          "target_kind": "external",
+          "target": "_g_5FF2",
+          "displacement": 0,
+          "frame_kind": "segment",
+          "frame": "_DATA",
+          "encoded_addend": "0000"
+        },
+        {
+          "segment": "MOUSE_TEXT",
+          "offset": 48,
+          "width": 2,
+          "loc": "offset16",
+          "target_kind": "external",
+          "target": "_g_5FF6",
+          "displacement": 0,
+          "frame_kind": "segment",
+          "frame": "_DATA",
+          "encoded_addend": "0000"
+        },
+        {
+          "segment": "MOUSE_TEXT",
+          "offset": 55,
+          "width": 2,
+          "loc": "offset16",
+          "target_kind": "external",
+          "target": "_g_5FF0",
+          "displacement": 0,
+          "frame_kind": "segment",
+          "frame": "_DATA",
+          "encoded_addend": "0000"
+        },
+        {
+          "segment": "MOUSE_TEXT",
+          "offset": 65,
+          "width": 2,
+          "loc": "offset16",
+          "target_kind": "external",
+          "target": "_g_5FF6",
+          "displacement": 0,
+          "frame_kind": "segment",
+          "frame": "_DATA",
+          "encoded_addend": "0000"
+        },
+        {
+          "segment": "MOUSE_TEXT",
+          "offset": 71,
+          "width": 2,
+          "loc": "offset16",
+          "target_kind": "external",
+          "target": "_g_5FFE",
+          "displacement": 0,
+          "frame_kind": "segment",
+          "frame": "_DATA",
+          "encoded_addend": "0000"
+        },
+        {
+          "segment": "MOUSE_TEXT",
+          "offset": 108,
+          "width": 2,
+          "loc": "offset16",
+          "target_kind": "external",
+          "target": "_g_5FF4",
+          "displacement": 0,
+          "frame_kind": "segment",
+          "frame": "_DATA",
+          "encoded_addend": "0000"
+        },
+        {
+          "segment": "MOUSE_TEXT",
+          "offset": 115,
+          "width": 2,
+          "loc": "offset16",
+          "target_kind": "external",
+          "target": "_g_5FF0",
+          "displacement": 0,
+          "frame_kind": "segment",
+          "frame": "_DATA",
+          "encoded_addend": "0000"
+        },
+        {
+          "segment": "MOUSE_TEXT",
+          "offset": 123,
+          "width": 2,
+          "loc": "offset16",
+          "target_kind": "external",
+          "target": "_g_5FF6",
+          "displacement": 0,
+          "frame_kind": "segment",
+          "frame": "_DATA",
+          "encoded_addend": "0000"
+        },
+        {
+          "segment": "MOUSE_TEXT",
+          "offset": 129,
+          "width": 2,
+          "loc": "offset16",
+          "target_kind": "external",
+          "target": "_g_5FF4",
+          "displacement": 0,
+          "frame_kind": "segment",
+          "frame": "_DATA",
+          "encoded_addend": "0000"
+        },
+        {
+          "segment": "MOUSE_TEXT",
+          "offset": 135,
+          "width": 2,
+          "loc": "offset16",
+          "target_kind": "external",
+          "target": "_g_5FF2",
+          "displacement": 0,
+          "frame_kind": "segment",
+          "frame": "_DATA",
+          "encoded_addend": "0000"
+        },
+        {
+          "segment": "MOUSE_TEXT",
+          "offset": 139,
+          "width": 2,
+          "loc": "offset16",
+          "target_kind": "external",
+          "target": "_g_5FFE",
+          "displacement": 0,
+          "frame_kind": "segment",
+          "frame": "_DATA",
+          "encoded_addend": "0000"
+        }
+      ],
+      "all_frames": [
+        "_DATA"
+      ]
+    }
+  },
+  "cases": [
+    {
+      "linker": "rtlink400",
+      "case": "canonical_source_positive",
+      "expected": "PASS",
+      "actual": "PASS",
+      "diagnostic": null,
+      "exe_built": true,
+      "emulator_exit": 0,
+      "passed": true,
+      "main_object_sha256": "b2f173df295c0c1cd212e8fc6793c0731296a3d6c394c9641f6282119a86444b",
+      "queue_object_sha256": "4f76253145f6a6977df6c21db6203bb233e2ac5c6353d5f8ac59d74331bf7ebb",
+      "prefix_object_sha256": "f84b2e66bfa7e9c69f109291410500e5b5e8406f12519d1111c855d556cb93db",
+      "artifact_hashes": {
+        "PROBE.EXE": {
+          "sha256": "66aa1df4f835ad7c7132f3cf6054cb50d05e4f9497db39efbdb759000affe7a8",
+          "size": 17229
+        },
+        "PROBE.MAP": {
+          "sha256": "ae6c588d65f4890e35aece14008a010007dbb70aba5d46911f6e68e299776b08",
+          "size": 12223
+        },
+        "PROBE.LNK": {
+          "sha256": "ff549cf2a5c28453184a5071e8c6430e14955f54413f3d946919d918619a628c",
+          "size": 275
+        },
+        "LINK.LOG": {
+          "sha256": "d9800ad63fed3bccaa92bc5f66a20ca5776849ad3346e603b3bc9bb30838697f",
+          "size": 660
+        },
+        "RUN.LOG": {
+          "sha256": "d938fa189912f8776c3deb31a6bec42f403f57b9c8e3ed936bdb076caf6bd61c",
+          "size": 6
+        }
+      },
+      "frame_mode": "canonical_source_assumption",
+      "expected_queue_fixup_frame": "DGROUP",
+      "actual_queue_fixup_frames": [
+        "DGROUP"
+      ],
+      "fixup_frame_check": true
+    },
+    {
+      "linker": "rtlink400",
+      "case": "reviewed_dgroup_positive",
+      "expected": "PASS",
+      "actual": "PASS",
+      "diagnostic": null,
+      "exe_built": true,
+      "emulator_exit": 0,
+      "passed": true,
+      "main_object_sha256": "b2f173df295c0c1cd212e8fc6793c0731296a3d6c394c9641f6282119a86444b",
+      "queue_object_sha256": "4a63833fc505d19fa342891aae460d48f0743f31c8e984205fdccd72f9ca5ca7",
+      "prefix_object_sha256": "f84b2e66bfa7e9c69f109291410500e5b5e8406f12519d1111c855d556cb93db",
+      "artifact_hashes": {
+        "PROBE.EXE": {
+          "sha256": "66aa1df4f835ad7c7132f3cf6054cb50d05e4f9497db39efbdb759000affe7a8",
+          "size": 17229
+        },
+        "PROBE.MAP": {
+          "sha256": "ae6c588d65f4890e35aece14008a010007dbb70aba5d46911f6e68e299776b08",
+          "size": 12223
+        },
+        "PROBE.LNK": {
+          "sha256": "ff549cf2a5c28453184a5071e8c6430e14955f54413f3d946919d918619a628c",
+          "size": 275
+        },
+        "LINK.LOG": {
+          "sha256": "d9800ad63fed3bccaa92bc5f66a20ca5776849ad3346e603b3bc9bb30838697f",
+          "size": 660
+        },
+        "RUN.LOG": {
+          "sha256": "d938fa189912f8776c3deb31a6bec42f403f57b9c8e3ed936bdb076caf6bd61c",
+          "size": 6
+        }
+      },
+      "frame_mode": "reviewed_explicit_dgroup",
+      "expected_queue_fixup_frame": "DGROUP",
+      "actual_queue_fixup_frames": [
+        "DGROUP"
+      ],
+      "fixup_frame_check": true
+    },
+    {
+      "linker": "rtlink400",
+      "case": "data_segment_frame_contrast",
+      "expected": "FAIL",
+      "actual": "FAIL",
+      "diagnostic": "FAIL CHECK 14 count=2573 ticks=1560 ptr=1560 q0=0 d0=0 q3=0 d3=0",
+      "exe_built": true,
+      "emulator_exit": 0,
+      "passed": true,
+      "main_object_sha256": "b2f173df295c0c1cd212e8fc6793c0731296a3d6c394c9641f6282119a86444b",
+      "queue_object_sha256": "b0715b2a570f6f09ab2d1fac1161d4c6ec788fbae5ca98c001adb7587d1c6d63",
+      "prefix_object_sha256": "f84b2e66bfa7e9c69f109291410500e5b5e8406f12519d1111c855d556cb93db",
+      "artifact_hashes": {
+        "PROBE.EXE": {
+          "sha256": "8a52b5abd8e4a9b7a83cb81ec63d275acddbec24dca8174d09c8ce1f7256fc7a",
+          "size": 17229
+        },
+        "PROBE.MAP": {
+          "sha256": "ae6c588d65f4890e35aece14008a010007dbb70aba5d46911f6e68e299776b08",
+          "size": 12223
+        },
+        "PROBE.LNK": {
+          "sha256": "ff549cf2a5c28453184a5071e8c6430e14955f54413f3d946919d918619a628c",
+          "size": 275
+        },
+        "LINK.LOG": {
+          "sha256": "d9800ad63fed3bccaa92bc5f66a20ca5776849ad3346e603b3bc9bb30838697f",
+          "size": 660
+        },
+        "RUN.LOG": {
+          "sha256": "c245cfbacb47258f585ea78538c091db3f7473bfc1c55ec2d8e765cdd1afe777",
+          "size": 73
+        }
+      },
+      "frame_mode": "data_segment_frame_contrast",
+      "expected_queue_fixup_frame": "_DATA",
+      "actual_queue_fixup_frames": [
+        "_DATA"
+      ],
+      "fixup_frame_check": true
+    },
+    {
+      "linker": "rtlink400",
+      "case": "queue_initializer_nonzero",
+      "expected": "FAIL",
+      "actual": "FAIL",
+      "diagnostic": "FAIL CHECK 15 count=0 ticks=1130 ptr=1130 q0=1 d0=0 q3=0 d3=0",
+      "exe_built": true,
+      "emulator_exit": 0,
+      "passed": true,
+      "main_object_sha256": "a9894031816c2404b4121c267b9959c20daee944b2d24d584c73d0f918e290a4",
+      "queue_object_sha256": "4a63833fc505d19fa342891aae460d48f0743f31c8e984205fdccd72f9ca5ca7",
+      "prefix_object_sha256": "f84b2e66bfa7e9c69f109291410500e5b5e8406f12519d1111c855d556cb93db",
+      "artifact_hashes": {
+        "PROBE.EXE": {
+          "sha256": "41cbeca47bd5e7f67df4832e82cb0d52da51490915132d371eba7680ceb3c42e",
+          "size": 17373
+        },
+        "PROBE.MAP": {
+          "sha256": "e5b972c444bc4b97ca94c5aa71116df51ed2ba3dde8d909325e6e08daf99327a",
+          "size": 12223
+        },
+        "PROBE.LNK": {
+          "sha256": "ff549cf2a5c28453184a5071e8c6430e14955f54413f3d946919d918619a628c",
+          "size": 275
+        },
+        "LINK.LOG": {
+          "sha256": "d9800ad63fed3bccaa92bc5f66a20ca5776849ad3346e603b3bc9bb30838697f",
+          "size": 660
+        },
+        "RUN.LOG": {
+          "sha256": "4a81fc4ed30dfbd63b330ca158975e71b8f90560a37712c918fbe9890f4cbad5",
+          "size": 70
+        }
+      },
+      "frame_mode": "reviewed_explicit_dgroup",
+      "expected_queue_fixup_frame": "DGROUP",
+      "actual_queue_fixup_frames": [
+        "DGROUP"
+      ],
+      "fixup_frame_check": true
+    },
+    {
+      "linker": "rtlink400",
+      "case": "buffer_pointer_plus_one",
+      "expected": "FAIL",
+      "actual": "FAIL",
+      "diagnostic": "FAIL CHECK 11 count=0 ticks=1561 ptr=1560 q0=0 d0=0 q3=0 d3=0",
+      "exe_built": true,
+      "emulator_exit": 0,
+      "passed": true,
+      "main_object_sha256": "bebd6404d3c91ea607a298903212eb9176d354af7495bad05954541388dc586a",
+      "queue_object_sha256": "4a63833fc505d19fa342891aae460d48f0743f31c8e984205fdccd72f9ca5ca7",
+      "prefix_object_sha256": "f84b2e66bfa7e9c69f109291410500e5b5e8406f12519d1111c855d556cb93db",
+      "artifact_hashes": {
+        "PROBE.EXE": {
+          "sha256": "e3c60359031f63c08188cdce4311717d4b37be61dbd1e560751b2a056a76b0d3",
+          "size": 17229
+        },
+        "PROBE.MAP": {
+          "sha256": "ae6c588d65f4890e35aece14008a010007dbb70aba5d46911f6e68e299776b08",
+          "size": 12223
+        },
+        "PROBE.LNK": {
+          "sha256": "ff549cf2a5c28453184a5071e8c6430e14955f54413f3d946919d918619a628c",
+          "size": 275
+        },
+        "LINK.LOG": {
+          "sha256": "d9800ad63fed3bccaa92bc5f66a20ca5776849ad3346e603b3bc9bb30838697f",
+          "size": 660
+        },
+        "RUN.LOG": {
+          "sha256": "e691e594335d812dab5e968be55a307f26a07fe809dd62a1fca6a57ab4572016",
+          "size": 70
+        }
+      },
+      "frame_mode": "reviewed_explicit_dgroup",
+      "expected_queue_fixup_frame": "DGROUP",
+      "actual_queue_fixup_frames": [
+        "DGROUP"
+      ],
+      "fixup_frame_check": true
+    },
+    {
+      "linker": "rtlink400",
+      "case": "capacity_eight",
+      "expected": "FAIL",
+      "actual": "FAIL",
+      "diagnostic": "FAIL CHECK 94 count=7 ticks=1560 ptr=1560 q0=a000 d0=0 q3=1100 d3=0",
+      "exe_built": true,
+      "emulator_exit": 0,
+      "passed": true,
+      "main_object_sha256": "ecfbaa8982e88ea42b96d36d5d1c3cd8bc12e2fcbe1d0377b72178c5e785b1a9",
+      "queue_object_sha256": "4a63833fc505d19fa342891aae460d48f0743f31c8e984205fdccd72f9ca5ca7",
+      "prefix_object_sha256": "f84b2e66bfa7e9c69f109291410500e5b5e8406f12519d1111c855d556cb93db",
+      "artifact_hashes": {
+        "PROBE.EXE": {
+          "sha256": "5a0ebecdc68bb61b0972778b1355aeb4e084e04705cf41b25b13be47bc7a267b",
+          "size": 17229
+        },
+        "PROBE.MAP": {
+          "sha256": "ae6c588d65f4890e35aece14008a010007dbb70aba5d46911f6e68e299776b08",
+          "size": 12223
+        },
+        "PROBE.LNK": {
+          "sha256": "ff549cf2a5c28453184a5071e8c6430e14955f54413f3d946919d918619a628c",
+          "size": 275
+        },
+        "LINK.LOG": {
+          "sha256": "d9800ad63fed3bccaa92bc5f66a20ca5776849ad3346e603b3bc9bb30838697f",
+          "size": 660
+        },
+        "RUN.LOG": {
+          "sha256": "45b14e5eee85184512965ce75c10cac7ebe20b19270e8babe5659cd96f8494ee",
+          "size": 76
+        }
+      },
+      "frame_mode": "reviewed_explicit_dgroup",
+      "expected_queue_fixup_frame": "DGROUP",
+      "actual_queue_fixup_frames": [
+        "DGROUP"
+      ],
+      "fixup_frame_check": true
+    },
+    {
+      "linker": "rtlink610",
+      "case": "canonical_source_positive",
+      "expected": "PASS",
+      "actual": "PASS",
+      "diagnostic": null,
+      "exe_built": true,
+      "emulator_exit": 0,
+      "passed": true,
+      "main_object_sha256": "b2f173df295c0c1cd212e8fc6793c0731296a3d6c394c9641f6282119a86444b",
+      "queue_object_sha256": "4f76253145f6a6977df6c21db6203bb233e2ac5c6353d5f8ac59d74331bf7ebb",
+      "prefix_object_sha256": "f84b2e66bfa7e9c69f109291410500e5b5e8406f12519d1111c855d556cb93db",
+      "artifact_hashes": {
+        "PROBE.EXE": {
+          "sha256": "04b7dda7b939bfe55e5bbc542b5c7f5da699065081d29ff2c1a4c57d6ee6c84e",
+          "size": 17229
+        },
+        "PROBE.MAP": {
+          "sha256": "5dae3717635a832ccbc7f7c4a9b8b269ce247520fbd40a2747901b3655df4c7e",
+          "size": 12323
+        },
+        "PROBE.LNK": {
+          "sha256": "ff549cf2a5c28453184a5071e8c6430e14955f54413f3d946919d918619a628c",
+          "size": 275
+        },
+        "LINK.LOG": {
+          "sha256": "46455399340ebfad750d03d8a71ca0e9ec8f75dca915c2511de840b58b9e3d1a",
+          "size": 1191
+        },
+        "RUN.LOG": {
+          "sha256": "d938fa189912f8776c3deb31a6bec42f403f57b9c8e3ed936bdb076caf6bd61c",
+          "size": 6
+        }
+      },
+      "frame_mode": "canonical_source_assumption",
+      "expected_queue_fixup_frame": "DGROUP",
+      "actual_queue_fixup_frames": [
+        "DGROUP"
+      ],
+      "fixup_frame_check": true
+    },
+    {
+      "linker": "rtlink610",
+      "case": "reviewed_dgroup_positive",
+      "expected": "PASS",
+      "actual": "PASS",
+      "diagnostic": null,
+      "exe_built": true,
+      "emulator_exit": 0,
+      "passed": true,
+      "main_object_sha256": "b2f173df295c0c1cd212e8fc6793c0731296a3d6c394c9641f6282119a86444b",
+      "queue_object_sha256": "4a63833fc505d19fa342891aae460d48f0743f31c8e984205fdccd72f9ca5ca7",
+      "prefix_object_sha256": "f84b2e66bfa7e9c69f109291410500e5b5e8406f12519d1111c855d556cb93db",
+      "artifact_hashes": {
+        "PROBE.EXE": {
+          "sha256": "04b7dda7b939bfe55e5bbc542b5c7f5da699065081d29ff2c1a4c57d6ee6c84e",
+          "size": 17229
+        },
+        "PROBE.MAP": {
+          "sha256": "5dae3717635a832ccbc7f7c4a9b8b269ce247520fbd40a2747901b3655df4c7e",
+          "size": 12323
+        },
+        "PROBE.LNK": {
+          "sha256": "ff549cf2a5c28453184a5071e8c6430e14955f54413f3d946919d918619a628c",
+          "size": 275
+        },
+        "LINK.LOG": {
+          "sha256": "46455399340ebfad750d03d8a71ca0e9ec8f75dca915c2511de840b58b9e3d1a",
+          "size": 1191
+        },
+        "RUN.LOG": {
+          "sha256": "d938fa189912f8776c3deb31a6bec42f403f57b9c8e3ed936bdb076caf6bd61c",
+          "size": 6
+        }
+      },
+      "frame_mode": "reviewed_explicit_dgroup",
+      "expected_queue_fixup_frame": "DGROUP",
+      "actual_queue_fixup_frames": [
+        "DGROUP"
+      ],
+      "fixup_frame_check": true
+    },
+    {
+      "linker": "rtlink610",
+      "case": "data_segment_frame_contrast",
+      "expected": "FAIL",
+      "actual": "FAIL",
+      "diagnostic": "FAIL CHECK 14 count=2573 ticks=1560 ptr=1560 q0=0 d0=0 q3=0 d3=0",
+      "exe_built": true,
+      "emulator_exit": 0,
+      "passed": true,
+      "main_object_sha256": "b2f173df295c0c1cd212e8fc6793c0731296a3d6c394c9641f6282119a86444b",
+      "queue_object_sha256": "b0715b2a570f6f09ab2d1fac1161d4c6ec788fbae5ca98c001adb7587d1c6d63",
+      "prefix_object_sha256": "f84b2e66bfa7e9c69f109291410500e5b5e8406f12519d1111c855d556cb93db",
+      "artifact_hashes": {
+        "PROBE.EXE": {
+          "sha256": "1613043c072a37527cd6b668d6f8c4ee03519e76da06bbae996adbcf03aee0a4",
+          "size": 17229
+        },
+        "PROBE.MAP": {
+          "sha256": "5dae3717635a832ccbc7f7c4a9b8b269ce247520fbd40a2747901b3655df4c7e",
+          "size": 12323
+        },
+        "PROBE.LNK": {
+          "sha256": "ff549cf2a5c28453184a5071e8c6430e14955f54413f3d946919d918619a628c",
+          "size": 275
+        },
+        "LINK.LOG": {
+          "sha256": "46455399340ebfad750d03d8a71ca0e9ec8f75dca915c2511de840b58b9e3d1a",
+          "size": 1191
+        },
+        "RUN.LOG": {
+          "sha256": "c245cfbacb47258f585ea78538c091db3f7473bfc1c55ec2d8e765cdd1afe777",
+          "size": 73
+        }
+      },
+      "frame_mode": "data_segment_frame_contrast",
+      "expected_queue_fixup_frame": "_DATA",
+      "actual_queue_fixup_frames": [
+        "_DATA"
+      ],
+      "fixup_frame_check": true
+    },
+    {
+      "linker": "rtlink610",
+      "case": "queue_initializer_nonzero",
+      "expected": "FAIL",
+      "actual": "FAIL",
+      "diagnostic": "FAIL CHECK 15 count=0 ticks=1130 ptr=1130 q0=1 d0=0 q3=0 d3=0",
+      "exe_built": true,
+      "emulator_exit": 0,
+      "passed": true,
+      "main_object_sha256": "a9894031816c2404b4121c267b9959c20daee944b2d24d584c73d0f918e290a4",
+      "queue_object_sha256": "4a63833fc505d19fa342891aae460d48f0743f31c8e984205fdccd72f9ca5ca7",
+      "prefix_object_sha256": "f84b2e66bfa7e9c69f109291410500e5b5e8406f12519d1111c855d556cb93db",
+      "artifact_hashes": {
+        "PROBE.EXE": {
+          "sha256": "e7c61e8c3f7a12484793f0ea78a126ac90e3b5cd483447971ef62980eb87e391",
+          "size": 17373
+        },
+        "PROBE.MAP": {
+          "sha256": "cf5fce5007c2945173bbf76b5842bd088d8bfada838b5ee730c2ad6b1832c086",
+          "size": 12323
+        },
+        "PROBE.LNK": {
+          "sha256": "ff549cf2a5c28453184a5071e8c6430e14955f54413f3d946919d918619a628c",
+          "size": 275
+        },
+        "LINK.LOG": {
+          "sha256": "46455399340ebfad750d03d8a71ca0e9ec8f75dca915c2511de840b58b9e3d1a",
+          "size": 1191
+        },
+        "RUN.LOG": {
+          "sha256": "4a81fc4ed30dfbd63b330ca158975e71b8f90560a37712c918fbe9890f4cbad5",
+          "size": 70
+        }
+      },
+      "frame_mode": "reviewed_explicit_dgroup",
+      "expected_queue_fixup_frame": "DGROUP",
+      "actual_queue_fixup_frames": [
+        "DGROUP"
+      ],
+      "fixup_frame_check": true
+    },
+    {
+      "linker": "rtlink610",
+      "case": "buffer_pointer_plus_one",
+      "expected": "FAIL",
+      "actual": "FAIL",
+      "diagnostic": "FAIL CHECK 11 count=0 ticks=1561 ptr=1560 q0=0 d0=0 q3=0 d3=0",
+      "exe_built": true,
+      "emulator_exit": 0,
+      "passed": true,
+      "main_object_sha256": "bebd6404d3c91ea607a298903212eb9176d354af7495bad05954541388dc586a",
+      "queue_object_sha256": "4a63833fc505d19fa342891aae460d48f0743f31c8e984205fdccd72f9ca5ca7",
+      "prefix_object_sha256": "f84b2e66bfa7e9c69f109291410500e5b5e8406f12519d1111c855d556cb93db",
+      "artifact_hashes": {
+        "PROBE.EXE": {
+          "sha256": "06655c9160a3f89d637ab22ae01edfbe90fd677dc725c680330ca79b35ff1d30",
+          "size": 17229
+        },
+        "PROBE.MAP": {
+          "sha256": "5dae3717635a832ccbc7f7c4a9b8b269ce247520fbd40a2747901b3655df4c7e",
+          "size": 12323
+        },
+        "PROBE.LNK": {
+          "sha256": "ff549cf2a5c28453184a5071e8c6430e14955f54413f3d946919d918619a628c",
+          "size": 275
+        },
+        "LINK.LOG": {
+          "sha256": "46455399340ebfad750d03d8a71ca0e9ec8f75dca915c2511de840b58b9e3d1a",
+          "size": 1191
+        },
+        "RUN.LOG": {
+          "sha256": "e691e594335d812dab5e968be55a307f26a07fe809dd62a1fca6a57ab4572016",
+          "size": 70
+        }
+      },
+      "frame_mode": "reviewed_explicit_dgroup",
+      "expected_queue_fixup_frame": "DGROUP",
+      "actual_queue_fixup_frames": [
+        "DGROUP"
+      ],
+      "fixup_frame_check": true
+    },
+    {
+      "linker": "rtlink610",
+      "case": "capacity_eight",
+      "expected": "FAIL",
+      "actual": "FAIL",
+      "diagnostic": "FAIL CHECK 94 count=7 ticks=1560 ptr=1560 q0=a000 d0=0 q3=1100 d3=0",
+      "exe_built": true,
+      "emulator_exit": 0,
+      "passed": true,
+      "main_object_sha256": "ecfbaa8982e88ea42b96d36d5d1c3cd8bc12e2fcbe1d0377b72178c5e785b1a9",
+      "queue_object_sha256": "4a63833fc505d19fa342891aae460d48f0743f31c8e984205fdccd72f9ca5ca7",
+      "prefix_object_sha256": "f84b2e66bfa7e9c69f109291410500e5b5e8406f12519d1111c855d556cb93db",
+      "artifact_hashes": {
+        "PROBE.EXE": {
+          "sha256": "a7d3b1a4bbf2a7b14baf67aef99d7939caa80334fcfa66076f02fa807fa92305",
+          "size": 17229
+        },
+        "PROBE.MAP": {
+          "sha256": "5dae3717635a832ccbc7f7c4a9b8b269ce247520fbd40a2747901b3655df4c7e",
+          "size": 12323
+        },
+        "PROBE.LNK": {
+          "sha256": "ff549cf2a5c28453184a5071e8c6430e14955f54413f3d946919d918619a628c",
+          "size": 275
+        },
+        "LINK.LOG": {
+          "sha256": "46455399340ebfad750d03d8a71ca0e9ec8f75dca915c2511de840b58b9e3d1a",
+          "size": 1191
+        },
+        "RUN.LOG": {
+          "sha256": "45b14e5eee85184512965ce75c10cac7ebe20b19270e8babe5659cd96f8494ee",
+          "size": 76
+        }
+      },
+      "frame_mode": "reviewed_explicit_dgroup",
+      "expected_queue_fixup_frame": "DGROUP",
+      "actual_queue_fixup_frames": [
+        "DGROUP"
+      ],
+      "fixup_frame_check": true
+    }
+  ],
+  "all_required_checks_pass": true,
+  "scope": "Test-owned execution and frame probe for the four exact m1B73 procedures and a C-owned near buffer. Startup zeroing here is only a fixture observation; this report does not establish original game executable startup behavior, historical object ownership, queue data identity, or a game-link contract.",
+  "probe_source": {
+    "path": "work/source-only-dos/queue-storage-probe.py",
+    "sha256": "8db0b19e802abe82963da9dbdf97bb40c898c1bae2f5cf6030af2b0559025b5f",
+    "size": 28573
+  },
+  "local_report": {
+    "path": "build/workers/dos_queue_runtime/report.json",
+    "sha256": "3cb87a07ddb57974656f0865040f6237a0000e04c5336ed5b5034c30c61a6c41",
+    "size": 172044
+  }
+}

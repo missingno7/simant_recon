@@ -1,0 +1,1015 @@
+{
+  "schema": "simant-dos-strict-static-review-v1",
+  "function": "LessonDone",
+  "status": "BEHAVIOR_EXACT_CONFIRMED",
+  "registered_evidence": {
+    "path": "evidence/behavior/functions/LessonDone/contracts/host-service-v1/evidence.json",
+    "sha256": "848ee18ec26e7ad2b0f9d541772d9c6d58bc3a9499cefcc9cc2eee126747f94a",
+    "size": 16730
+  },
+  "registered_source": {
+    "path": "evidence/behavior/functions/LessonDone/contracts/host-service-v1/module.c",
+    "sha256": "c611660dde4da7117c3232aa06e597871394cc4112466d46559705b235424359",
+    "whole_module": true,
+    "module": "root:0E2E"
+  },
+  "worker_receipt": {
+    "path": "build/workers/dos_static_lesson/LessonDone.json",
+    "sha256": "084cf982deb2cedde07562262ced6079fbcb1d915c59b031181fb77b44c43b8f",
+    "size": 38266
+  },
+  "audit": {
+    "schema": "simant-strict-static-completeness-v1",
+    "function": "LessonDone",
+    "status": "BEHAVIOR_EXACT_CONFIRMED",
+    "source": {
+      "path": "evidence/behavior/functions/LessonDone/contracts/host-service-v1/module.c",
+      "sha256": "c611660dde4da7117c3232aa06e597871394cc4112466d46559705b235424359"
+    },
+    "registry_evidence": {
+      "path": "evidence/behavior/functions/LessonDone/contracts/host-service-v1/evidence.json",
+      "sha256": "848ee18ec26e7ad2b0f9d541772d9c6d58bc3a9499cefcc9cc2eee126747f94a"
+    },
+    "inputs": [
+      {
+        "path": "layout/functions.json",
+        "sha256": "6089a06e18fbe8f0960392cfe30357f7c19c886f38f10f7f115c72d127a756e7"
+      },
+      {
+        "path": "layout/symbols.json",
+        "sha256": "0f5dd5b0a211945a97782cfccdb9bb31b0dfd07fcde5df4d4f9486b487eb0125"
+      },
+      {
+        "path": "layout/oracle.lock.json",
+        "sha256": "2c6d9e98c688621ad49a08c78d0e0968f4076b036be56ec0738217b533ccde13"
+      },
+      {
+        "path": "assets/SIMANT.EXE",
+        "sha256": "aa0596c6766322a8229ee3c36e57048c92adc82d50fbe2ef37afb8b85fcf4f11",
+        "use": "immutable disassembly research source identity only"
+      },
+      {
+        "path": "tools/context.py",
+        "sha256": "6d94d66482736663f4dd29945ae3d206e5543aaccdb062e96304f5cb0d1a97be"
+      },
+      {
+        "path": "tools/exe.py",
+        "sha256": "d560f69dcdf0d1c9e89278b50bebe225a9b86db2c259fa54ec9eace6ea05a8b5"
+      },
+      {
+        "path": "tools/functions.py",
+        "sha256": "0f67c8d9eb01e319620c9342e79c35f76006091d860894aad6dcf8d61ee2b39e"
+      },
+      {
+        "path": "tools/behavior_suites/archive/tutorial-menu-7043a99e654807271bb186442b8105f63d05f50bf18174726ee7a9e47343e172.py",
+        "sha256": "7043a99e654807271bb186442b8105f63d05f50bf18174726ee7a9e47343e172"
+      },
+      {
+        "path": "evidence/behavior/functions/LessonDone/contracts/host-service-v1/run.json",
+        "sha256": "1930667ce288db35aec4227619534a06b3a6e4e990e4a460f6f247818db96b32"
+      },
+      {
+        "path": "evidence/behavior/functions/LessonDone/contracts/host-service-v1/negative-controls.json",
+        "sha256": "2c21b29a7294fa99ce040628b65f03a1baf810c8a521ab48ccc0e72a65a013f5"
+      },
+      {
+        "path": "evidence/behavior/functions/LessonDone/contracts/host-service-v1/contract-review.json",
+        "sha256": "f5329826887ad702ec5d2afb2848281132f587c5dabefa3811751ce7dc887e88"
+      },
+      {
+        "path": "build/workers/behavior_tutorial_menu/helper-alias-abi-audit.json",
+        "sha256": "1ce37f3751b4660758892d0b49eeb0f1831c7f11099ba1e4c0df207bbb0a27cd"
+      },
+      {
+        "path": "build/workers/behavior_tutorial_menu/final_lesson_mapfix/abi-boundary-probes.json",
+        "sha256": "4dcc720db294c1dee2a942959b552f2bb32b1c7411d2b8169b445e090f7c3012"
+      },
+      {
+        "path": "evidence/behavior/helpers/tutorial-contracts-v1/LessonDone/InvalEuMap.json",
+        "sha256": "b21d782925d82b2a7391c6b320261274916ad955b09dffa727e36cece628b5bb"
+      },
+      {
+        "path": "evidence/behavior/helpers/tutorial-contracts-v1/LessonDone/TickCount.json",
+        "sha256": "b2719b3442ffebeb42df9c9f1283e93e81a9357148388bf2606485ec313f6802"
+      },
+      {
+        "path": "evidence/behavior/helpers/tutorial-contracts-v1/LessonDone/win_SetObjSelectedState.json",
+        "sha256": "33bc0d43638f28a7352d41921f0f5a7b6a1ee0d0c91163e863e3c59fe084c275"
+      },
+      {
+        "path": "build/workers/dos_static_lesson/context.txt",
+        "sha256": "7fe1bb0ddb810baafe99a0e85c625b933daa3355d3141eebda89fe193c84a132"
+      },
+      {
+        "path": "build/workers/dos_static_lesson/disassembly.txt",
+        "sha256": "e6e958de84be8a7a7dcd463405572ff5e8ceb45a44b2f1e6959c9773a4c230f5"
+      },
+      {
+        "path": "build/workers/dos_static_lesson/candidate-disassembly.txt",
+        "sha256": "5e6d1a87374c9eb2cb2c6c284113d427719e4b22dbfa741783e7ffd4d69bcdb1",
+        "use": "reachable CFG and relocation research for the registered candidate compiled under the pinned MSC profile; no original bytes are included"
+      },
+      {
+        "path": "tools/modctx.py",
+        "sha256": "33f3a4e3d77371e3095bfeb00358c13bc7838235c27bfe8898dba7e313f1cc25"
+      },
+      {
+        "path": "tools/compiler.py",
+        "sha256": "ef1d59a0fbe0e0780a6b8480e13d7d07859a14ae185c00a4420e1238a2ae35bb"
+      },
+      {
+        "path": "tools/omf.py",
+        "sha256": "951137ecbfaeb6e40fd5230c94398141da7ec7bdb7399d9cd74d46ded3045612"
+      },
+      {
+        "path": "layout/toolchain.json",
+        "sha256": "c0bb71cd8b1f4a1a1f91299bd3b6148aa67b7a1d12c3c3946a229272593eb274"
+      },
+      {
+        "path": "build/workers/dos_static_lesson/disasm_candidate.py",
+        "sha256": "8518ca18d91832b4fdfe4bd4699c588863e85351b502cb693796c738ce40edd7"
+      },
+      {
+        "path": "build/workers/dos_static_lesson/diag/index.json",
+        "sha256": "6afec929cdb9fed3d3d290339488cdd852e560d8a5a1f1a269d167a8b0a265ff"
+      },
+      {
+        "path": "build/workers/dos_static_lesson/diag/LessonDone.json",
+        "sha256": "d4f343f55836f9a5cbbde153a26c921fd69123cf57216a8615dafe084a18069c"
+      }
+    ],
+    "original_function": {
+      "unit": "root",
+      "seg": "0x0E2E",
+      "off": "0x065E",
+      "linear": "0x0E93E",
+      "size": 723,
+      "extent": "DESCENT",
+      "metadata_jump_table": {
+        "site_linear": "0x0E957",
+        "table_linear": "0x0E95C",
+        "entry_count": 56,
+        "entry_width": 2
+      }
+    },
+    "original_disassembly_research": {
+      "command": "python tools/context.py LessonDone (no --raw)",
+      "tool_sha256": "6d94d66482736663f4dd29945ae3d206e5543aaccdb062e96304f5cb0d1a97be",
+      "context_output": "build/workers/dos_static_lesson/context.txt",
+      "reachable_cfg_output": "build/workers/dos_static_lesson/disassembly.txt",
+      "method": "context.py's linear Capstone pass reaches inline jump-table data at 0x067C and stops. The function-table jump_tables record supplies 56 two-byte entries; each target was decoded recursively with conditional target/fallthrough traversal until returns or direct transfers. No original byte arrays or capsules were saved.",
+      "decode_note": "At 0x06FA Capstone in CS_MODE_16 prints `cdq`; the instruction length is one byte, so opcode 99 has default 16-bit operand size (CWD: sign-extend AX into DX), matching the signed 32-bit threshold comparison."
+    },
+    "candidate_disassembly_research": {
+      "command": "python build/workers/dos_static_lesson/disasm_candidate.py",
+      "tool": "pinned MSC 6.00AX profile msc600ax with /AL /Os /Oe /Og /Zi; registered C module only",
+      "candidate_public": {
+        "name": "_LessonDone",
+        "segment": "UNIT_TEXT",
+        "object_offset": "0x0654",
+        "length": 727
+      },
+      "reachable_cfg_output": "build/workers/dos_static_lesson/candidate-disassembly.txt",
+      "method": "The candidate OMF object was decoded from its LessonDone public; traversal begins at function entry and all 56 embedded switch table targets. The candidate has 20 reachable conditional instructions. Its in-function _MapA relocation is the disp16 of ES:[BX+disp16], while CONST offset 0x0032 holds the segment relocation; the symbol table places MapA at 3E1D:0180.",
+      "mapa_calculation": "Both original and candidate use 16-bit BX shift-left-six and 16-bit addition of MeLocY, with the MapA base offset added by the effective-address calculation. For all 16-bit MeLocX/MeLocY bit patterns, both compute EA=(0x0180+((64*MeLocX+MeLocY) mod 65536)) mod 65536. The source-level out-of-bounds concern does not create a candidate-vs-original target-machine divergence."
+    },
+    "branch_map": {
+      "switch_dispatch": {
+        "address": "0x0677",
+        "mnemonic": "jmp word ptr cs:[bx+0x067C]",
+        "index": "word lesson argument decremented modulo 2^16; guarded to 0..55",
+        "table_data_range": "0x067C-0x06EB inclusive",
+        "targets": [
+          {
+            "cases": [
+              1,
+              2,
+              6,
+              11,
+              15,
+              17,
+              23,
+              25,
+              28,
+              29,
+              31,
+              34,
+              35,
+              37,
+              40,
+              44,
+              45,
+              48,
+              51,
+              53,
+              55,
+              56
+            ],
+            "target": "0x06EC",
+            "source_anchor": "module.c:305-308, 319-320, 331-332, 341-342, 345-346, 357-358, 361-362, 371-374, 383-384, 389-392, 395-396, 401-402, 407-410, 413-414, 417-418, 421-422, 433-436",
+            "result": "return 1"
+          },
+          {
+            "cases": [
+              3,
+              4
+            ],
+            "target": "0x06F2",
+            "source_anchor": "module.c:309-316",
+            "result": "signed 32-bit counter > signed 32-bit threshold AND fd_50F6_0AA0==0; otherwise return 0"
+          },
+          {
+            "cases": [
+              5,
+              20
+            ],
+            "target": "0x07CC",
+            "source_anchor": "module.c:317-318, 351-352",
+            "result": "MePlane == 1"
+          },
+          {
+            "cases": [
+              7,
+              26
+            ],
+            "target": "0x07FF",
+            "source_anchor": "module.c:321-324, 363-366",
+            "result": "MeLocY+MeLocX != fd_50F6_1074 AND fd_50F6_0B1E==0 AND MacTickCount()>fd_50F6_0204; short-circuit order preserved"
+          },
+          {
+            "cases": [
+              8,
+              43,
+              46,
+              50
+            ],
+            "target": "0x087C",
+            "source_anchor": "module.c:378-382",
+            "result": "return fd_50F6_1074 != 0"
+          },
+          {
+            "cases": [
+              9
+            ],
+            "target": "0x0723",
+            "source_anchor": "module.c:325-328",
+            "result": "Point.y+Point.x != fd_50F6_1074 OR MacTickCount()>fd_50F6_0204; second operand is called only when first is false"
+          },
+          {
+            "cases": [
+              10,
+              32,
+              42
+            ],
+            "target": "0x075C",
+            "source_anchor": "module.c:329-330, 385-386, 405-406",
+            "result": "win_IsWinInFront(0x0100) != 0"
+          },
+          {
+            "cases": [
+              12,
+              49
+            ],
+            "target": "0x08D9",
+            "source_anchor": "module.c:333-334, 415-416",
+            "result": "win_IsWinInFront(0) != 0"
+          },
+          {
+            "cases": [
+              13
+            ],
+            "target": "0x0769",
+            "source_anchor": "module.c:335-338",
+            "result": "MePlane==1 AND unsigned MapA[MeLocX][MeLocY]>0x47; x is row index and y is column index"
+          },
+          {
+            "cases": [
+              14
+            ],
+            "target": "0x07A0",
+            "source_anchor": "module.c:339-340",
+            "result": "signed MeHealth>0x5A"
+          },
+          {
+            "cases": [
+              16
+            ],
+            "target": "0x07B2",
+            "source_anchor": "module.c:343-344",
+            "result": "fd_50F6_04C2==0x18"
+          },
+          {
+            "cases": [
+              18
+            ],
+            "target": "0x07BF",
+            "source_anchor": "module.c:347-348",
+            "result": "MePlane==2"
+          },
+          {
+            "cases": [
+              19,
+              22
+            ],
+            "target": "0x07E6",
+            "source_anchor": "module.c:349-350, 355-356",
+            "result": "fd_50F6_04C2==0x10"
+          },
+          {
+            "cases": [
+              21
+            ],
+            "target": "0x07D9",
+            "source_anchor": "module.c:353-354",
+            "result": "fd_50F6_04C2==0x28"
+          },
+          {
+            "cases": [
+              24
+            ],
+            "target": "0x07F3",
+            "source_anchor": "module.c:359-360",
+            "result": "signed fd_50F6_0B12[5]>1"
+          },
+          {
+            "cases": [
+              27
+            ],
+            "target": "0x082A",
+            "source_anchor": "module.c:367-370",
+            "result": "MeLocY+MeLocX != fd_50F6_1074 AND fd_50F6_104E!=0 AND fd_50F6_0B1E==0; short-circuit order preserved"
+          },
+          {
+            "cases": [
+              30
+            ],
+            "target": "0x0862",
+            "source_anchor": "module.c:375-382",
+            "result": "if fd_50F6_104E!=0 call SetAlarmDropState(0,1), then fall through to return fd_50F6_1074!=0"
+          },
+          {
+            "cases": [
+              33
+            ],
+            "target": "0x088E",
+            "source_anchor": "module.c:387-388",
+            "result": "fd_50F6_032E==0"
+          },
+          {
+            "cases": [
+              36
+            ],
+            "target": "0x089B",
+            "source_anchor": "module.c:393-394",
+            "result": "fd_50F6_035C==1"
+          },
+          {
+            "cases": [
+              38
+            ],
+            "target": "0x08A8",
+            "source_anchor": "module.c:397-398",
+            "result": "fd_50F6_032E==1"
+          },
+          {
+            "cases": [
+              39
+            ],
+            "target": "0x08B5",
+            "source_anchor": "module.c:399-400",
+            "result": "win_IsWinInFront(0x1200)!=0"
+          },
+          {
+            "cases": [
+              41
+            ],
+            "target": "0x08BB",
+            "source_anchor": "module.c:403-404",
+            "result": "modeLevels[1]+modeLevels[0] != fd_50F6_1074; 16-bit target int sum"
+          },
+          {
+            "cases": [
+              47
+            ],
+            "target": "0x08D3",
+            "source_anchor": "module.c:411-412",
+            "result": "win_IsWinInFront(0x1300)!=0"
+          },
+          {
+            "cases": [
+              52
+            ],
+            "target": "0x08DE",
+            "source_anchor": "module.c:419-420",
+            "result": "signed fd_50F6_0B12[5]>0x28"
+          },
+          {
+            "cases": [
+              54
+            ],
+            "target": "0x08EB",
+            "source_anchor": "module.c:423-432",
+            "result": "if MePlane==3 write fd_50F6_1074=0 and return 1; else if MePlane==2 write 1 and return 1; otherwise return 0"
+          }
+        ],
+        "default_path": "0x0671 -> 0x0706 -> 0x092B; return 0"
+      },
+      "conditional_sites": [
+        {
+          "address": "0x066F",
+          "mnemonic": "jbe",
+          "taken": "0x0674 dispatch table",
+          "fallthrough": "0x0671 then default false at 0x092B",
+          "predicate": "unsigned 16-bit (lesson-1) <= 0x37, exactly lessons 1..56",
+          "width": "word; dispatch range is unsigned after 16-bit DEC",
+          "source_anchor": "module.c:304-438"
+        },
+        {
+          "address": "0x0704",
+          "mnemonic": "jge",
+          "taken": "0x0709 compare high-word ordering",
+          "fallthrough": "0x0706 -> false",
+          "predicate": "signed high word of sign-extended fd_50F6_0224 >= signed high word fd_50F6_0204",
+          "width": "signed 16-bit high words of a signed 32-bit comparison",
+          "source_anchor": "module.c:310-315"
+        },
+        {
+          "address": "0x0709",
+          "mnemonic": "jg",
+          "taken": "0x0712 test fd_50F6_0AA0",
+          "fallthrough": "0x070B compare low words",
+          "predicate": "signed high-word comparison is greater; then full long comparison is already true",
+          "width": "signed 16-bit high words",
+          "source_anchor": "module.c:310-315"
+        },
+        {
+          "address": "0x0710",
+          "mnemonic": "jbe",
+          "taken": "0x071E -> false",
+          "fallthrough": "0x0712 test fd_50F6_0AA0",
+          "predicate": "unsigned low word of counter <= unsigned low word threshold after equal high words",
+          "width": "unsigned 16-bit low words",
+          "source_anchor": "module.c:310-315"
+        },
+        {
+          "address": "0x071C",
+          "mnemonic": "je",
+          "taken": "0x0721 -> shared true return",
+          "fallthrough": "0x071E -> false",
+          "predicate": "equality from the immediately preceding word CMP; cases 3/4 require fd_50F6_0AA0==0; equality cases are MePlane==1/2, fd_50F6_04C2==0x10/0x18/0x28, fd_50F6_032E==0/1, or fd_50F6_035C==1",
+          "width": "word equality; signedness immaterial",
+          "source_anchor": "module.c:310-315, 318, 344, 348, 350, 352, 354, 356, 388, 394, 398"
+        },
+        {
+          "address": "0x0739",
+          "mnemonic": "jne",
+          "taken": "0x06EC -> true",
+          "fallthrough": "0x073B call MacTickCount",
+          "predicate": "Point.y + Point.x != fd_50F6_1074",
+          "width": "signed 16-bit sum and word compare; target addition wraps at 16 bits",
+          "source_anchor": "module.c:325-328"
+        },
+        {
+          "address": "0x0749",
+          "mnemonic": "jle",
+          "taken": "0x074E compare high-word result",
+          "fallthrough": "0x074B -> false",
+          "predicate": "signed fd_50F6_0204 high word <= MacTickCount high word; high greater threshold makes the signed-long comparison false",
+          "width": "signed 16-bit high words",
+          "source_anchor": "module.c:326-328"
+        },
+        {
+          "address": "0x074E",
+          "mnemonic": "jl",
+          "taken": "0x06EC -> true",
+          "fallthrough": "0x0750 compare low words",
+          "predicate": "signed threshold high word < signed MacTickCount high word",
+          "width": "signed 16-bit high words of signed 32-bit comparison",
+          "source_anchor": "module.c:326-328"
+        },
+        {
+          "address": "0x0755",
+          "mnemonic": "jb",
+          "taken": "0x075A -> true",
+          "fallthrough": "0x0757 -> false",
+          "predicate": "threshold low word < clock low word after equal high words",
+          "width": "unsigned 16-bit low words",
+          "source_anchor": "module.c:326-328"
+        },
+        {
+          "address": "0x0773",
+          "mnemonic": "je",
+          "taken": "0x0778 read MapA",
+          "fallthrough": "0x0775 -> false",
+          "predicate": "MePlane == 1",
+          "width": "signed 16-bit equality (same result as word equality)",
+          "source_anchor": "module.c:335-338"
+        },
+        {
+          "address": "0x0798",
+          "mnemonic": "ja",
+          "taken": "0x079D -> true",
+          "fallthrough": "0x079A -> false",
+          "predicate": "MapA[MeLocX][MeLocY] > 0x47",
+          "width": "unsigned byte comparison",
+          "source_anchor": "module.c:336-338"
+        },
+        {
+          "address": "0x07AA",
+          "mnemonic": "jg",
+          "taken": "0x07AF -> true",
+          "fallthrough": "0x07AC -> false",
+          "predicate": "case 14: MeHealth > 0x5A; case 24: fd_50F6_0B12[5] > 1; case 52: fd_50F6_0B12[5] > 0x28",
+          "width": "signed 16-bit word comparisons",
+          "source_anchor": "module.c:339-340, 359-360, 419-420"
+        },
+        {
+          "address": "0x0819",
+          "mnemonic": "je",
+          "taken": "0x0852 -> false",
+          "fallthrough": "0x081B test fd_50F6_0B1E",
+          "predicate": "MeLocY + MeLocX == fd_50F6_1074",
+          "width": "signed 16-bit sum and word compare; target addition wraps at 16 bits",
+          "source_anchor": "module.c:321-324, 363-366"
+        },
+        {
+          "address": "0x0825",
+          "mnemonic": "jne",
+          "taken": "0x0852 -> false",
+          "fallthrough": "0x0827 call MacTickCount",
+          "predicate": "fd_50F6_0B1E != 0",
+          "width": "16-bit zero test",
+          "source_anchor": "module.c:322-324, 364-366"
+        },
+        {
+          "address": "0x0844",
+          "mnemonic": "je",
+          "taken": "0x0852 -> false",
+          "fallthrough": "0x0846 test fd_50F6_104E",
+          "predicate": "MeLocY + MeLocX == fd_50F6_1074",
+          "width": "signed 16-bit sum and word compare; target addition wraps at 16 bits",
+          "source_anchor": "module.c:367-370"
+        },
+        {
+          "address": "0x0850",
+          "mnemonic": "jne",
+          "taken": "0x0855 test fd_50F6_0B1E",
+          "fallthrough": "0x0852 -> false",
+          "predicate": "fd_50F6_104E != 0",
+          "width": "16-bit zero test",
+          "source_anchor": "module.c:368-370"
+        },
+        {
+          "address": "0x086C",
+          "mnemonic": "je",
+          "taken": "0x087C skip helper call",
+          "fallthrough": "0x086E push args and call SetAlarmDropState",
+          "predicate": "fd_50F6_104E == 0; source calls helper only when nonzero",
+          "width": "16-bit zero test",
+          "source_anchor": "module.c:375-382"
+        },
+        {
+          "address": "0x0886",
+          "mnemonic": "jne",
+          "taken": "0x088B -> true",
+          "fallthrough": "0x0888 -> false",
+          "predicate": "fd_50F6_1074 != 0",
+          "width": "16-bit zero test",
+          "source_anchor": "module.c:378-382"
+        },
+        {
+          "address": "0x08F6",
+          "mnemonic": "jne",
+          "taken": "0x090E compare MePlane with 2",
+          "fallthrough": "0x08F8 write fd_50F6_1074=0 and return 1",
+          "predicate": "MePlane != 3",
+          "width": "signed 16-bit comparison; equality result identical for this constant",
+          "source_anchor": "module.c:423-427"
+        },
+        {
+          "address": "0x0914",
+          "mnemonic": "je",
+          "taken": "0x091D write fd_50F6_1074=1 and return 1",
+          "fallthrough": "0x0916 -> false",
+          "predicate": "MePlane == 2 after the first test established MePlane != 3",
+          "width": "signed 16-bit equality",
+          "source_anchor": "module.c:428-432"
+        }
+      ],
+      "control_flow_notes": [
+        "The function has no loop back-edge and no loop instruction; the nested MapA iteration belongs to GiveLesson, not LessonDone.",
+        "0x06EC loads return value 1 and jumps to common epilogue 0x092D; 0x092B loads return value 0; 0x0930 is RETF.",
+        "Case 30 enters at 0x0862, conditionally calls SetAlarmDropState, then falls through to 0x087C. Cases 8/43/46/50 enter directly at 0x087C. This matches the deliberate lack of break after case 30 at module.c:377.",
+        "Case tests with constant true share 0x06EC. Equality and greater-than tests share compare/branch tails at 0x071C and 0x07AA; switch_cases records every table target and result."
+      ]
+    },
+    "call_map": [
+      {
+        "address": "0x0663",
+        "target": "__aFchkstk",
+        "kind": "compiler prologue stack-check call",
+        "source_counterpart": "none; MSC far-function frame setup",
+        "ordering": "first on every invocation, before reading lesson",
+        "abi": "runtime helper; no C-visible arguments or state result"
+      },
+      {
+        "address": "0x073B",
+        "target": "f_00F8_02BE / MacTickCount",
+        "source_counterpart": "module.c:326 (case 9)",
+        "ordering": "only after Point.y+Point.x == fd_50F6_1074 due || short-circuit; then compare DX:AX result as signed long against fd_50F6_0204",
+        "abi": "no arguments; signed 32-bit return in DX:AX; alias pins in layout/symbols.json and helper_alias_abi_audit"
+      },
+      {
+        "address": "0x075F",
+        "target": "f_22BF_0A22 / win_IsWinInFront",
+        "source_counterpart": "module.c:330,334,386,400,406,412,416",
+        "ordering": "one call for cases 10,12,32,39,42,47,49; AX argument is respectively 0x0100,0,0x0100,0x1200,0x0100,0x1300,0; return AX!=0",
+        "abi": "fastcall one 16-bit argument in AX, 16-bit return in AX; original callee continues through canonical body reading g_5702[0]"
+      },
+      {
+        "address": "0x0827",
+        "target": "f_00F8_02BE / MacTickCount",
+        "source_counterpart": "module.c:322 (case 7), module.c:364 (case 26)",
+        "ordering": "only after coordinate-sum mismatch and fd_50F6_0B1E==0 due && short-circuit; signed 32-bit result compared to fd_50F6_0204",
+        "abi": "no arguments; signed 32-bit return in DX:AX"
+      },
+      {
+        "address": "0x0875",
+        "target": "RTLink vector 0x2CFF:0x281C -> S22:39C7:1A57 SetAlarmDropState",
+        "source_counterpart": "module.c:376-377 (case 30)",
+        "ordering": "only if fd_50F6_104E!=0; then call completes before fd_50F6_1074 is read for the fallthrough result",
+        "arguments": "state=0, quiet=1; pushes quiet word then state word",
+        "abi": "far cdecl stack arguments at callee [bp+6]/[bp+8]; caller removes two words (0x087A-0x087B)",
+        "dependency": "Original overlay body executes its state==0 branch: writes fd_50F6_104E=0 and segment 0x50F6 offset 0x07BE=0xFFFF; calls win_SetObjSelectedState with AX=0x10, DX=0; quiet=1 skips myBeginSound; then calls InvalEuMap with its four original stack words. The two host boundaries have registered certificates; their projection limits remain explicit."
+      }
+    ],
+    "memory_state": {
+      "reads": [
+        {
+          "name": "lesson",
+          "width_bits": 16,
+          "signedness": "signed int argument",
+          "locations": "[bp+6], then 16-bit decrement/dispatch"
+        },
+        {
+          "name": "fd_50F6_0224",
+          "width_bits": 16,
+          "signedness": "signed int",
+          "cases": [
+            3,
+            4
+          ]
+        },
+        {
+          "name": "fd_50F6_0204",
+          "width_bits": 32,
+          "signedness": "signed long",
+          "cases": [
+            3,
+            4,
+            7,
+            9,
+            26
+          ]
+        },
+        {
+          "name": "fd_50F6_0AA0",
+          "width_bits": 16,
+          "signedness": "zero-tested word",
+          "cases": [
+            3,
+            4
+          ]
+        },
+        {
+          "name": "MePlane",
+          "width_bits": 16,
+          "signedness": "signed int; equality comparisons",
+          "cases": [
+            5,
+            13,
+            18,
+            20,
+            54
+          ]
+        },
+        {
+          "name": "MeLocX",
+          "width_bits": 16,
+          "signedness": "signed int",
+          "cases": [
+            7,
+            13,
+            26,
+            27
+          ]
+        },
+        {
+          "name": "MeLocY",
+          "width_bits": 16,
+          "signedness": "signed int",
+          "cases": [
+            7,
+            13,
+            26,
+            27
+          ]
+        },
+        {
+          "name": "MapA[MeLocX][MeLocY]",
+          "width_bits": 8,
+          "signedness": "unsigned char",
+          "cases": [
+            13
+          ],
+          "pointer_calculation": "Both original and MSC candidate use 16-bit (64*MeLocX + MeLocY) plus the MapA offset 0x0180, modulo 65536; candidate's disp16 fixup resolves through _MapA at 3E1D:0180. This is equal for every 16-bit coordinate bit pattern, including values outside nominal array bounds; read occurs only after MePlane==1"
+        },
+        {
+          "name": "fd_50F6_1074",
+          "width_bits": 16,
+          "signedness": "signed int",
+          "cases": [
+            7,
+            8,
+            9,
+            26,
+            27,
+            30,
+            41,
+            43,
+            46,
+            50
+          ]
+        },
+        {
+          "name": "fd_50F6_0B1E",
+          "width_bits": 16,
+          "signedness": "zero-tested word",
+          "cases": [
+            7,
+            26,
+            27
+          ]
+        },
+        {
+          "name": "fd_50F6_0508.y then .x",
+          "width_bits": "16 each",
+          "signedness": "signed Point fields",
+          "cases": [
+            9
+          ],
+          "pointer_calculation": "far Point at offset 0x0508; y at +2 and x at +0; sum order is y then x"
+        },
+        {
+          "name": "MeHealth",
+          "width_bits": 16,
+          "signedness": "signed int",
+          "cases": [
+            14
+          ]
+        },
+        {
+          "name": "fd_50F6_04C2",
+          "width_bits": 16,
+          "signedness": "word equality",
+          "cases": [
+            16,
+            19,
+            21,
+            22
+          ]
+        },
+        {
+          "name": "fd_50F6_0B12[5]",
+          "width_bits": 16,
+          "signedness": "signed int",
+          "cases": [
+            24,
+            52
+          ],
+          "pointer_calculation": "word at 0x0B12 + 5*2 = 0x0B1C"
+        },
+        {
+          "name": "fd_50F6_104E",
+          "width_bits": 16,
+          "signedness": "zero-tested word",
+          "cases": [
+            27,
+            30
+          ]
+        },
+        {
+          "name": "fd_50F6_032E",
+          "width_bits": 16,
+          "signedness": "word equality",
+          "cases": [
+            33,
+            38
+          ]
+        },
+        {
+          "name": "fd_50F6_035C",
+          "width_bits": 16,
+          "signedness": "word equality",
+          "cases": [
+            36
+          ]
+        },
+        {
+          "name": "modeLevels[1], modeLevels[0]",
+          "width_bits": "16 each",
+          "signedness": "signed int elements",
+          "cases": [
+            41
+          ],
+          "pointer_calculation": "base offset 0x049E; reads word offsets 0x04A0 then 0x049E and adds in 16-bit target int"
+        },
+        {
+          "name": "win_IsWinInFront result",
+          "width_bits": 16,
+          "signedness": "tested for nonzero",
+          "cases": [
+            10,
+            12,
+            32,
+            39,
+            42,
+            47,
+            49
+          ],
+          "dependency": "original callee reads top-window word g_5702[0]"
+        }
+      ],
+      "writes": [
+        {
+          "name": "fd_50F6_1074",
+          "width_bits": 16,
+          "values": [
+            0,
+            1
+          ],
+          "conditions": "case 54; value 0 when MePlane==3, value 1 when MePlane==2 after first test fails; each write precedes return 1"
+        },
+        {
+          "name": "indirect effects of SetAlarmDropState(0,1)",
+          "conditions": "case 30 and fd_50F6_104E!=0",
+          "writes": "fd_50F6_104E=0; segment 0x50F6 offset 0x07BE=0xFFFF",
+          "calls": "win_SetObjSelectedState(AX=0x10,DX=0), then InvalEuMap(four original stack arguments); quiet=1 skips myBeginSound",
+          "ordering": "helper call occurs before caller reads fd_50F6_1074 for return"
+        }
+      ],
+      "returns": {
+        "width_bits": 16,
+        "values": [
+          0,
+          1
+        ],
+        "locations": "shared false block 0x092B; shared true block 0x06EC; case 54 direct writes then returns 1; RETF at 0x0930"
+      }
+    },
+    "constants_widths": [
+      {
+        "constant": "1..56",
+        "use": "switch cases",
+        "width_bits": 16,
+        "signedness": "int labels; binary dispatch tests unsigned decremented index <=0x37"
+      },
+      {
+        "constant": "0x37",
+        "use": "dispatch bound after lesson-1",
+        "width_bits": 16,
+        "signedness": "unsigned compare"
+      },
+      {
+        "constant": "0x47",
+        "use": "MapA threshold",
+        "width_bits": 8,
+        "signedness": "unsigned greater-than"
+      },
+      {
+        "constant": "0x5A",
+        "use": "MeHealth threshold",
+        "width_bits": 16,
+        "signedness": "signed greater-than"
+      },
+      {
+        "constant": "1, 0x28",
+        "use": "fd_50F6_0B12[5] thresholds",
+        "width_bits": 16,
+        "signedness": "signed greater-than"
+      },
+      {
+        "constant": "0x10,0x18,0x28; 1,2,3",
+        "use": "state/plane equality tests",
+        "width_bits": 16,
+        "signedness": "equality"
+      },
+      {
+        "constant": "0,0x0100,0x1200,0x1300",
+        "use": "fastcall top-window arguments",
+        "width_bits": 16,
+        "signedness": "word values in AX"
+      },
+      {
+        "constant": "0,1",
+        "use": "SetAlarmDropState args and fd_50F6_1074 writes",
+        "width_bits": 16,
+        "signedness": "word values"
+      },
+      {
+        "constant": "64 and base 0x0180",
+        "use": "MapA row stride and element address",
+        "width_bits": "16-bit target offset math; 8-bit loaded element",
+        "signedness": "row-major X*64+Y"
+      },
+      {
+        "constant": "3",
+        "use": "MacTickCount helper implementation TickCount()*3",
+        "width_bits": 32,
+        "signedness": "signed result; caller compares long result"
+      }
+    ],
+    "static_axes": [
+      {
+        "axis": "complete reconstructed algorithm",
+        "evidence": "All 56 original table slots are enumerated in branch_map.switch_dispatch.targets and match source case labels/behavior in switch_cases; all other 16-bit lesson values reach default return 0. Constant-true cases, predicates, fallthrough case 30 and false exits are included."
+      },
+      {
+        "axis": "original CFG paths and predicates",
+        "evidence": "20 original and 20 candidate reachable conditional sites are enumerated in the original and candidate disassemblies. Both CFG traversals cover entry, all 56 jump-table slots / 25 distinct targets, direct transfers and the shared epilogue; no loop exists in LessonDone. Shared compare tails preserve each switch case's preceding CMP result. The candidate's different block layout and condition materialization are compiler lowering; all target predicates and case results map to the registered source."
+      },
+      {
+        "axis": "call identity, ABI, order and arguments",
+        "evidence": "All four far-call instructions enumerated including compiler stack check. MacTickCount aliases f_00F8_02BE and returns DX:AX; win_IsWinInFront aliases f_22BF_0A22 and receives AX; SetAlarmDropState uses vector 0x281C to S22 target and receives two caller-popped stack words. Short-circuit gates and case-30 call-before-read ordering are mapped."
+      },
+      {
+        "axis": "constants, widths and signedness",
+        "evidence": "See constants_widths and branch predicates: word/int comparisons, byte unsigned MapA comparison, signed long timer thresholds, and target 16-bit coordinate/mode sums are distinguished. At 0x06FA the one-byte opcode in CS_MODE_16 is CWD despite Capstone's `cdq` spelling."
+      },
+      {
+        "axis": "pointer calculations and state access",
+        "evidence": "Original and candidate MapA accesses have matching target 16-bit offset arithmetic for all coordinate words, not just caller-valid values: shift X by six in BX, add Y in BX, add MapA's 0x0180 offset in the memory effective address. Candidate OMF disp16 relocation targets _MapA, pinned at 3E1D:0180. Point field offsets and modeLevels/array element offsets are also mapped. All direct global reads and the two direct fd_50F6_1074 writes are listed under memory_state."
+      },
+      {
+        "axis": "observable side effects",
+        "evidence": "LessonDone directly writes only fd_50F6_1074 in case 54; case 30's only call-induced effects pass through the original SetAlarmDropState overlay body. Returns and call order are covered."
+      },
+      {
+        "axis": "dependency boundaries and pointer/ABI conversions",
+        "evidence": "No pointer arguments cross LessonDone's external call boundaries. f_22BF_0A22 is a fastcall alias of win_IsWinInFront; f_00F8_02BE is MacTickCount; SetAlarmDropState is an original RTLink overlay call. Registered helper certificates describe modeled host sinks reached beneath SetAlarmDropState."
+      },
+      {
+        "axis": "source and evidence identity",
+        "evidence": "Registered source/evidence pins match their manifest SHA-256 values; the run, suite, negative control, ABI probe, alias audit, function table, symbol table and oracle identity are pinned in inputs."
+      }
+    ],
+    "remaining_differences": [
+      {
+        "kind": "CODEGEN_ONLY",
+        "original_address": "root:0E2E:065E, entire 723-byte function extent",
+        "source_anchor": "module.c:302-439",
+        "explanation": "The registered C rebuild is 727 bytes (original 723; 527 differing positions; relocation count 9 vs 9), so historical byte/extent exactness remains open. The semantic CFG, predicates, calls, state reads/writes and value widths map completely. The original has a 56-entry table embedded at 0x067C-0x06EB and shared target blocks; linear instruction alignment misreads table words as instructions (diag decode_complete=false), so its residual labels are not semantic evidence. The surviving difference is source-to-machine lowering/layout debt, not an algorithm difference; this receipt does not claim byte identity."
+      }
+    ],
+    "unexplained_semantic_differences": [],
+    "differential_evidence": {
+      "run": {
+        "path": "evidence/behavior/functions/LessonDone/contracts/host-service-v1/run.json",
+        "sha256": "1930667ce288db35aec4227619534a06b3a6e4e990e4a460f6f247818db96b32",
+        "directed": 1728,
+        "randomized": 500,
+        "random_seed": "0x3BDB05DA",
+        "mismatches": 0,
+        "errors": 0,
+        "execution": "both the immutable original DOS function and compiled whole-module candidate executed"
+      },
+      "negative_controls": {
+        "path": "evidence/behavior/functions/LessonDone/contracts/host-service-v1/negative-controls.json",
+        "sha256": "2c21b29a7294fa99ce040628b65f03a1baf810c8a521ab48ccc0e72a65a013f5",
+        "control": "lesson-strict-threshold changes > to >= for case 3; baseline matches and compiled mutant differs with return 0 vs 1"
+      },
+      "positive_controls": [
+        "pc-LessonDone-InvalEuMap",
+        "pc-LessonDone-TickCount",
+        "pc-LessonDone-f_22BF_0A22",
+        "pc-LessonDone-win_SetObjSelectedState",
+        "pc-LessonDone-MacTickCount"
+      ],
+      "limits": "Finite directed/fixed-seed cases confirm recorded contract only. Static CFG review, not test count, supports all switch paths. Host driver/BIOS scheduling/arbitrary overlays/full framebuffer remain outside the registered contract."
+    },
+    "review_notes": [
+      "Case 13 has no bounds check in either implementation. Abstract-C out-of-bounds indexing is undefined, but the registered MSC 6.00AX candidate object computes the same 16-bit target effective address as the original for every 16-bit coordinate pattern; no caller-valid coordinate restriction is used for the target-machine equivalence conclusion.",
+      "The 16-bit C int and signed-long comparison conclusions rely on the pinned DOS ABI/compiler profile. They do not transfer to a modern 32-bit-int C compiler without explicit width types.",
+      "The strict module diagnostic reports 727 vs 723 bytes and is intentionally kept separate from behavioral status. It linearly decodes through inline switch data, so the 15 alignment residuals are not individually classified here.",
+      "Original source identity is the registered module.c; no comments were treated as proof. Original executable was read only for disassembly and identity hashing; no raw byte arrays/capsules were saved."
+    ]
+  },
+  "root_review": {
+    "reviewer": "root",
+    "complete_cfg": true,
+    "complete_data_widths": true,
+    "complete_calls_effects": true,
+    "codegen_only_residue": true,
+    "basis": "Reviewed the whole-function branch/call/state/width maps, source/evidence identities, explanations of residue and differential/negative limits. Matching observed service boundaries are composed through the actual caller ABI and same callee/slot/state; finite coverage alone is not acceptance."
+  }
+}

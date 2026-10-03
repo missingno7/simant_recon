@@ -1,0 +1,213 @@
+{
+  "schema": "simant-dos-strict-static-review-v1",
+  "function": "f_284A_0138",
+  "status": "BEHAVIOR_EXACT_CONFIRMED",
+  "registered_evidence": {
+    "path": "evidence/behavior/functions/f_284A_0138/evidence.json",
+    "sha256": "cbe831e8260b122b537c96510fe3c17c2409fe5247b40dd2574c4a16aac2e8e7",
+    "size": 11267
+  },
+  "registered_source": {
+    "path": "evidence/behavior/functions/f_284A_0138/module.c",
+    "sha256": "5d328bf943dd3b1dd8dd797ba7d63885777facf9ea5c194b6b222244bd937a35",
+    "whole_module": true,
+    "module": "root:284A"
+  },
+  "worker_receipt": {
+    "path": "build/workers/dos_static_small_helpers/f_284A_0138.json",
+    "sha256": "2f01bbbef1943f01a16aa546105d813da1603fd0df96fa086ca1933712547969",
+    "size": 10702
+  },
+  "audit": {
+    "schema": "simant-strict-static-completeness-v1",
+    "function": "f_284A_0138",
+    "status": "BEHAVIOR_EXACT_CONFIRMED",
+    "source": {
+      "path": "evidence/behavior/functions/f_284A_0138/module.c",
+      "sha256": "5d328bf943dd3b1dd8dd797ba7d63885777facf9ea5c194b6b222244bd937a35",
+      "function_anchor_line": 85
+    },
+    "registry_evidence": {
+      "path": "evidence/behavior/functions/f_284A_0138/evidence.json",
+      "sha256": "cbe831e8260b122b537c96510fe3c17c2409fe5247b40dd2574c4a16aac2e8e7",
+      "manifest_path": "evidence/behavior/manifest.json",
+      "manifest_sha256": "dae79bdf74d7660e7e2eb47e8b463a9576c8d74a8e6ccd9e91af6d51f871ecea",
+      "registered_status": "BEHAVIOR_EXACT",
+      "validation_receipt_sha256": "73846cb5ad0e5812e3fb1c469c908bdc9e6350d0acbdc15d2a9f633f5e41d12e"
+    },
+    "inputs": [
+      {
+        "path": "evidence/behavior/manifest.json",
+        "sha256": "dae79bdf74d7660e7e2eb47e8b463a9576c8d74a8e6ccd9e91af6d51f871ecea",
+        "role": "current behavioral registration index"
+      },
+      {
+        "path": "layout/functions.json",
+        "sha256": "6089a06e18fbe8f0960392cfe30357f7c19c886f38f10f7f115c72d127a756e7",
+        "role": "function identity/address table"
+      },
+      {
+        "path": "layout/oracle.lock.json",
+        "sha256": "2c6d9e98c688621ad49a08c78d0e0968f4076b036be56ec0738217b533ccde13",
+        "role": "locked original executable identity"
+      },
+      {
+        "path": "layout/manifest.json",
+        "sha256": "025a0a9255d910cae4b122ab5a3f3fb40888bb456d7fe42158db7c9e622fcf50",
+        "role": "historical source/build baseline pinned by run evidence"
+      },
+      {
+        "path": "assets/SIMANT.EXE",
+        "sha256": "aa0596c6766322a8229ee3c36e57048c92adc82d50fbe2ef37afb8b85fcf4f11",
+        "role": "original read only through context.py and archived behavioral runner"
+      },
+      {
+        "path": "tools/context.py",
+        "sha256": "6d94d66482736663f4dd29945ae3d206e5543aaccdb062e96304f5cb0d1a97be",
+        "role": "original disassembly extraction command; invoked by exact function name without --raw"
+      },
+      {
+        "path": "build/workers/dos_static_small_helpers/original-disassembly.md",
+        "sha256": "fb4e1263b90aebe3b3b4fed069b49a0c0f7f453071565ef86ece054f5f04654a",
+        "role": "readable context.py disassembly for targets and directly-called I/O helpers; contains no raw bytes"
+      },
+      {
+        "path": "evidence/behavior/functions/f_284A_0138/run.json",
+        "sha256": "23ce96543b2b1166946065d51fc9b40aadceea6df7e320eb4db791dc29176daf",
+        "role": "actual-original and candidate differential run"
+      },
+      {
+        "path": "evidence/behavior/functions/f_284A_0138/cases.jsonl.gz",
+        "sha256": "f470d173ef43fd18d2943335b301eb7761bb2b3c645dfe2cc83a38ac93aea69e",
+        "role": "pinned per-case execution ledger"
+      },
+      {
+        "path": "evidence/behavior/functions/f_284A_0138/negative-controls.json",
+        "sha256": "3087926fdb2bc2af98092d63677604b683dbbbc3490b57152d8412c6aba64ee4",
+        "role": "compiled mutant detection report"
+      },
+      {
+        "path": "evidence/behavior/functions/f_284A_0138/contract-review.json",
+        "sha256": "e2cd4c20145945e5f59d14e5965f0082461632d898e695aa8301a2089230818e",
+        "role": "reviewed input/effect contract"
+      },
+      {
+        "path": "tools/behavior_suites/archive/small-contracts-finalmanifest-20261002.py",
+        "sha256": "da20a6488c580b8e6b5b8f6f7b112210eff614a7ef3c9b1b7e37595848516fca",
+        "role": "archived directed/randomized suite"
+      },
+      {
+        "path": "evidence/behavior/harnesses/ss-ds-window-v1/tools/behavior.py",
+        "sha256": "ee7c997d2f89efa85ce932cd5ac7c674c465f1013a16a8c08e83d43c69f4be5b",
+        "role": "archived reviewed execution harness identity"
+      }
+    ],
+    "original_function": {
+      "unit": "root",
+      "seg": "284A",
+      "off": "0x0138",
+      "size": "0x0019",
+      "linear_start": "0x285D8",
+      "oracle_sha256": "aa0596c6766322a8229ee3c36e57048c92adc82d50fbe2ef37afb8b85fcf4f11",
+      "research": "python tools/context.py FUNCTION (no --raw); disassembly transcript is pinned in inputs"
+    },
+    "differential_evidence": {
+      "suite": {
+        "path": "tools/behavior_suites/archive/small-contracts-finalmanifest-20261002.py",
+        "sha256": "da20a6488c580b8e6b5b8f6f7b112210eff614a7ef3c9b1b7e37595848516fca"
+      },
+      "run": {
+        "path": "evidence/behavior/functions/f_284A_0138/run.json",
+        "sha256": "23ce96543b2b1166946065d51fc9b40aadceea6df7e320eb4db791dc29176daf",
+        "completion": "COMPLETE",
+        "cases": 20538,
+        "mismatches": 0,
+        "actual_original_execution": true,
+        "actual_candidate_execution": true
+      },
+      "case_ledger": {
+        "path": "evidence/behavior/functions/f_284A_0138/cases.jsonl.gz",
+        "sha256": "f470d173ef43fd18d2943335b301eb7761bb2b3c645dfe2cc83a38ac93aea69e",
+        "rows": 20538
+      },
+      "negative_controls": {
+        "path": "evidence/behavior/functions/f_284A_0138/negative-controls.json",
+        "sha256": "3087926fdb2bc2af98092d63677604b683dbbbc3490b57152d8412c6aba64ee4"
+      },
+      "contract_review": {
+        "path": "evidence/behavior/functions/f_284A_0138/contract-review.json",
+        "sha256": "e2cd4c20145945e5f59d14e5965f0082461632d898e695aa8301a2089230818e"
+      },
+      "harness_sha256": "ee7c997d2f89efa85ce932cd5ac7c674c465f1013a16a8c08e83d43c69f4be5b",
+      "validation_receipt_sha256": "73846cb5ad0e5812e3fb1c469c908bdc9e6350d0acbdc15d2a9f633f5e41d12e",
+      "limits": "These executions are corroboration only; the static CFG/dataflow/arithmetic comparison below is the completeness basis. See review_notes for valid-state and excluded-domain limits.",
+      "compiled_candidate_identity": {
+        "source": "work\\takeover\\hardtail\\seeds\\root_284A_5d328bf943dd.c",
+        "source_sha256": "5d328bf943dd3b1dd8dd797ba7d63885777facf9ea5c194b6b222244bd937a35",
+        "compiled_source_sha256": "5d328bf943dd3b1dd8dd797ba7d63885777facf9ea5c194b6b222244bd937a35",
+        "object_sha256": "3d69e2b56de5a167ca9d7f3f6abc1c5e875a25568ccc5cdd16d7cd964fa9a79e",
+        "linked_code_sha256": "6dca175e5e9734ca06b4af296d6d84775ec2d7e1a9802f1e23eab80d175445ad",
+        "profile": "msc600ax",
+        "flags": [
+          "/AL",
+          "/Os",
+          "/Oe",
+          "/Og",
+          "/Gs",
+          "/Zi"
+        ],
+        "manifest_sha256": "025a0a9255d910cae4b122ab5a3f3fb40888bb456d7fe42158db7c9e622fcf50"
+      }
+    },
+    "branch_map": [],
+    "cfg_summary": "Straight-line function: segment load, two byte reads, word result construction, one far return. The entire target contains no conditional/loop/switch/indirect branch and no call.",
+    "call_map": [],
+    "memory_state": {
+      "reads": [
+        "BP+0x06 signed 16-bit off argument.",
+        "One read of the 16-bit based segment global g_8DFC (DS:0x8DFC), used as ES for both accesses.",
+        "Unsigned byte at ES:off and unsigned byte at ES:(off+1 mod 65536)."
+      ],
+      "writes": [
+        "No data-memory writes. Prologue saves BP; epilogue restores it. No caller argument is modified."
+      ],
+      "return": "16-bit word (first byte << 8) | second byte; first byte is the high-order byte and the following based-segment byte is low-order."
+    },
+    "constants_widths_pointer_arithmetic": {
+      "widths_signedness": "off is a signed 16-bit C int but is consumed as its 16-bit offset bit pattern. SONG yields unsigned char and promotes to 16-bit int. The source shift can form bit patterns 0x8000..0xff00, beyond signed-int range; the historical MSC 16-bit lowering supplies the observed 16-bit result bits (as the target register construction does). This is a compiler-model assumption, not a portable ISO-C shift guarantee.",
+      "pointer_math": "SONGP(off) is an unsigned-byte _based(g_8DFC) pointer. Target loads at ES:BX then ES:BX+1; effective-address addition wraps the 16-bit offset within the same ES segment and does not carry into a different segment. C off+1 is evaluated as a 16-bit int by the pinned MSC compiler and its low word matches the target for all 16-bit offsets, including 0x7fff -> 0x8000 and 0xffff -> 0x0000; the latter is signed-safe (-1+1), while 0x7fff+1 relies on MSC word-wrap behavior.",
+      "constants": "Byte shift 8; byte width 8; result width 16. There are no table/index scale constants, loops or calls."
+    },
+    "static_axes": {
+      "algorithm": "Original moves the first byte to the high result byte and the second byte to the low result byte; source SONG(off)<<8 | SONG(off+1) is the same byte order and bit construction under MSC 16-bit target semantics.",
+      "control_flow": "No conditional, loop, switch, computed jump or alternate return exists; branch_map is empty because the full CFG is straight-line.",
+      "calls": "None.",
+      "memory": "Exactly two based-segment byte reads, same segment, second effective offset wrapping modulo 2^16; no writes.",
+      "return_abi": "int far word return; BP is restored and far return consumes no args.",
+      "completeness_basis": "Static comparison accounts for every instruction in the 25-byte context and the whole source expression, including byte order, offset width and based-segment carry behavior."
+    },
+    "remaining_differences": [
+      {
+        "kind": "CODEGEN_ONLY",
+        "original_address": "root:284A:0142..014F",
+        "source_anchor": "module.c:85-87",
+        "explanation": "The registered dossier notes different AH/AL assignment/code shape while both target and natural C read the high byte then low byte using 16-bit based-pointer wrap. The register construction and source shift/OR produce the same 16-bit word for the supported MSC target model; no data write or call difference remains."
+      }
+    ],
+    "unexplained_semantic_differences": [],
+    "review_notes": [
+      "Input domain pins g_8DFC to an accessible 64 KiB segment and includes every 16-bit offset, including 0xffff; malformed segment pointers are excluded.",
+      "The source expression relies on MSC 6.00AX 16-bit behavior both for left-shifting promoted unsigned-char values >=0x80 into the signed-int high bit and for off+1 at 0x7fff. The original disassembly directly specifies the returned bits and same-segment offset wrap; neither operation is being claimed portable under abstract ISO C overflow/shift rules.",
+      "Differential evidence: 538 directed plus 20,000 randomized actual original/candidate cases, 20,538 ledger rows, zero mismatches; byte-order mutation detected. Static byte-flow/wrap reasoning, not the finite corpus, closes the function.",
+      "This receipt is a worker audit candidate for independent root review; it does not edit or reclassify the historical or behavioral registry."
+    ]
+  },
+  "root_review": {
+    "reviewer": "root",
+    "complete_cfg": true,
+    "complete_data_widths": true,
+    "complete_calls_effects": true,
+    "codegen_only_residue": true,
+    "basis": "Reviewed the whole-function branch/call/state/width maps, source/evidence identities, explanations of residue and differential/negative limits. Matching observed service boundaries are composed through the actual caller ABI and same callee/slot/state; finite coverage alone is not acceptance."
+  }
+}

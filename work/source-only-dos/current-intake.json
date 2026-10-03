@@ -1,24 +1,31 @@
 {
   "schema": "simant-source-only-dos-compact-intake-v1",
-  "canonical_source_checkpoint": "6909977",
+  "source_only_base_checkpoint": "83627d3",
+  "canonical_manifest": {
+    "path": "layout/manifest.json",
+    "sha256": "025a0a9255d910cae4b122ab5a3f3fb40888bb456d7fe42158db7c9e622fcf50",
+    "size": 628980
+  },
   "full_local_report": {
     "path": "build/source-only-dos/build-report.json",
-    "sha256": "cb30d341bc2702a55b117df7d9a9387f6927ca9167d9728a3da463b9010bc27a",
-    "size": 1216457
+    "sha256": "0492aa7dae887ac086eb673085e76fc77392f42f67464d83673f103d622870ae",
+    "size": 1613572
   },
   "reproduction": "python tools/source_only_dos.py --compile --link --reuse --jobs 4",
   "status": "INCOMPLETE",
   "errors": [
     "data dispositions still need source-built semantic resolution",
-    "468 unresolved source symbols",
+    "433 unresolved source symbols",
     "source address/layout contracts remain unresolved",
     "independent link refused: incomplete source/data preflight"
   ],
-  "compiled_translation_units": 127,
+  "compiled_translation_units": 128,
   "function_dispositions": {
     "EXACT_C": 1244,
     "GENUINE_ASM": 367,
-    "BEHAVIOR_EXACT": 29,
+    "BEHAVIOR_EXACT_CONFIRMED": 29,
+    "EXACT_AFTER_STATIC_AUDIT": 0,
+    "CONTRACT_EQUIVALENT": 0,
     "UNRESOLVED": 0
   },
   "original_exe_bytes_used": {
@@ -32,12 +39,12 @@
   "runnable": "NOT_EXECUTED",
   "human_acceptance": "PENDING",
   "unresolved_data_disposition_bytes": 113,
-  "unresolved_symbols": 468,
+  "unresolved_symbols": 433,
   "unresolved_symbol_categories": {
-    "reviewed FAR_BSS definition and compatible consumer views": 422,
-    "source storage/reachability investigation": 46
+    "reviewed FAR_BSS definition and compatible consumer views": 410,
+    "source storage/reachability investigation": 23
   },
-  "symbolic_aliases": 155,
+  "symbolic_aliases": 181,
   "duplicate_publics": {},
   "layout_dependencies": [
     {
@@ -51,13 +58,21 @@
       "scope_limit": "This is one confirmed family, not a completed scan of every numeric operand."
     },
     {
+      "id": "driver-callback-table-owner",
+      "status": "RESOLVED",
+      "owner": "_driver_callback_table",
+      "slots": 25,
+      "slot_bytes": 4,
+      "reason": "Source reset/copy and four driver tables prove 25 far-pointer slots. One typed near communal owns the slots; 23 registered names are bounded aliases. The existing symbolic _g_3DF8 pointer is verified under shifted DGROUP on both linkers. Historical COMDEF TU/order and wider driver frame integration remain separate."
+    },
+    {
       "id": "remaining-assembly-address-audit",
       "status": "UNRESOLVED",
       "reason": "The broader audit of fixed numeric operands and segment/group frames is pending. Reviewed bindings close only the listed buffer and S00 callback operands."
     },
     {
       "id": "input-event-queue-fixed-pointer",
-      "status": "UNRESOLVED",
+      "status": "RESOLVED",
       "source": "src/root/m1FD2.c",
       "initializer": "(int)0x91b0",
       "storage_view": "g_5FF2 + 12 (_g_5FFE)",
@@ -68,7 +83,9 @@
       ],
       "capacity_from_source": 7,
       "event_stride_from_source": 16,
-      "reason": "The C initializer is an input-event queue address, not an ordinary timer count. ASM enqueue/dequeue load it into SI, index by 16*slot, and read/write 16 bytes with a seven-slot wrap bound. No accepted source placement owns DGROUP:91B0. Recover one queue buffer and a symbolic near-pointer initializer; the unchanged historical literal is unsafe after an independent link."
+      "generated_storage": "_input_queue",
+      "generated_symbolic_initializer": "(int)(struct Event near *)input_queue",
+      "reason": "The C initializer is an input-event queue address, not an ordinary timer count. ASM enqueue/dequeue load it into SI, index by 16*slot, and read/write 16 bytes with a seven-slot wrap bound. No accepted source placement owns DGROUP:91B0. The reviewed generated binding supplies a 112-byte near communal and symbolic pointer. Admission requires whole-object checks and the selected linker/MSC-startup execution contract; without that binding the literal remains unsafe."
     }
   ],
   "source_bindings": {
@@ -82,9 +99,9 @@
     "size": 17508
   },
   "linker_alias_contract": {
-    "path": "work/source-only-dos/linker-alias-contract-v1.json",
-    "sha256": "d1fb7df567445937ccd4da0e793d3e8dca304b5a74244d3e22fda2f81c184791",
-    "size": 5278
+    "path": "work/source-only-dos/linker-alias-contract-v2.json",
+    "sha256": "5041d6feba6ccabd3b34ce2fd067916df16e4a86ed1b0eb9dedfc96b45251b5b",
+    "size": 29124
   },
   "history_storage_bindings": {
     "path": "work/source-only-dos/history-storage-bindings-v1.json",
@@ -96,6 +113,291 @@
     "sha256": "7fc4c0f32f70521f8d730121fd75e9bccab0c4e87a7611e25c48f5dd7b8470bf",
     "size": 17745
   },
+  "queue_storage_bindings": {
+    "path": "work/source-only-dos/queue-storage-bindings-v1.json",
+    "sha256": "e722cdfc8c8e896f7dd1eb30547f9d6f3c2bc26b4c3a02134f2c27b42096c7f7",
+    "size": 3780
+  },
+  "queue_storage_contract": {
+    "path": "work/source-only-dos/queue-storage-contract-v1.json",
+    "sha256": "19b46416d3f47da7a27225466086787f50abbeff0474b53a620b1f554c8f6851",
+    "size": 44992
+  },
+  "queue_lifetime_contract": {
+    "path": "work/source-only-dos/queue-lifetime-contract-v1.json",
+    "sha256": "44b4f2afca0988722d1ff10df933771569c61cc02cd8f11b20ff4ffe8a8af97e",
+    "size": 6627
+  },
+  "assembly_frame_bindings": {
+    "path": "work/source-only-dos/assembly-frame-bindings-v1.json",
+    "sha256": "3aec6a05ee17e0e3ed972a5ae193c38524651095d9847b030970283734e7d8e5",
+    "size": 2362
+  },
+  "assembly_frame_contract": {
+    "path": "work/source-only-dos/assembly-frame-contract-v1.json",
+    "sha256": "4cfcdc0da5fa709342054ecd176962f141b3b395b9f0f197c37955a4a9057d67",
+    "size": 33334
+  },
+  "world_scalar_bindings": {
+    "path": "work/source-only-dos/world-scalar-bindings-v1.json",
+    "sha256": "db09c608aa67e7f1a1f18fd78eda91360629cf07460904f8e0cd47119dd36b19",
+    "size": 6814
+  },
+  "population_scalar_bindings": {
+    "path": "work/source-only-dos/population-owner-bindings-v1.json",
+    "sha256": "9a2aafedfd6648688470a2e12e11208c903647f142d96465007e9189b2abe61f",
+    "size": 5092
+  },
+  "lion_scalar_bindings": {
+    "path": "work/source-only-dos/lion-owner-bindings-v1.json",
+    "sha256": "e23db7889651dc087734cd5d6a7f69e5f1edc1b8913150d26e8ef2db7d555435",
+    "size": 3377
+  },
+  "callback_table_bindings": {
+    "path": "work/source-only-dos/callback-table-bindings-v1.json",
+    "sha256": "457cdc94b7b1c2b07908352e4b736d0de8cb47f8d65e44b475e993e5b93d648d",
+    "size": 17144
+  },
+  "strict_static_index": {
+    "path": "work/source-only-dos/static-completeness/index-v1.json",
+    "sha256": "092b3a15aaaf99737020c0c00e2a4340514dda3f0e2ff45369d1fa0a316d9a3a",
+    "size": 6796
+  },
+  "strict_static_audit": {
+    "f_0250_1018": {
+      "status": "BEHAVIOR_EXACT_CONFIRMED",
+      "receipt": {
+        "path": "work\\source-only-dos\\static-completeness\\f_0250_1018.json",
+        "sha256": "b5fe86ea28f66ddca56f5936d17d4313789399f18209e5ddf0d15df35be22682",
+        "size": 29049
+      }
+    },
+    "f_0250_129E": {
+      "status": "BEHAVIOR_EXACT_CONFIRMED",
+      "receipt": {
+        "path": "work\\source-only-dos\\static-completeness\\f_0250_129E.json",
+        "sha256": "1af913343736d6389742e7a86117dfbfb621328287d0f1a0fa2b3d0bbdf21d80",
+        "size": 24394
+      }
+    },
+    "DrawBalloons": {
+      "status": "BEHAVIOR_EXACT_CONFIRMED",
+      "receipt": {
+        "path": "work\\source-only-dos\\static-completeness\\DrawBalloons.json",
+        "sha256": "7f86d2fe0e5b44300572c7115398d05c25799a3d03ba1e57dc0288242a8a91cc",
+        "size": 46914
+      }
+    },
+    "SpiderScan": {
+      "status": "BEHAVIOR_EXACT_CONFIRMED",
+      "receipt": {
+        "path": "work\\source-only-dos\\static-completeness\\SpiderScan.json",
+        "sha256": "17e0a3640c87bae41616cdbe3683b1ccc95e92ba193af072a3ba7e91705b4c89",
+        "size": 22880
+      }
+    },
+    "LessonDone": {
+      "status": "BEHAVIOR_EXACT_CONFIRMED",
+      "receipt": {
+        "path": "work\\source-only-dos\\static-completeness\\LessonDone.json",
+        "sha256": "4aae722737a8b4d52384a70ed51521158603871d4ef99139ba2a2b48d30046db",
+        "size": 41553
+      }
+    },
+    "f_171C_09CC": {
+      "status": "BEHAVIOR_EXACT_CONFIRMED",
+      "receipt": {
+        "path": "work\\source-only-dos\\static-completeness\\f_171C_09CC.json",
+        "sha256": "86eec4845d02974e8b6764fe5884360cb7da5a796a5cbbfed78e8a423f8ed5a8",
+        "size": 16862
+      }
+    },
+    "f_171C_0ADC": {
+      "status": "BEHAVIOR_EXACT_CONFIRMED",
+      "receipt": {
+        "path": "work\\source-only-dos\\static-completeness\\f_171C_0ADC.json",
+        "sha256": "67a87d50fad0aec23795a8d29481a12db52f94a7f9b2e2ea7b66cbd5fcfd70ee",
+        "size": 18079
+      }
+    },
+    "f_171C_0FBC": {
+      "status": "BEHAVIOR_EXACT_CONFIRMED",
+      "receipt": {
+        "path": "work\\source-only-dos\\static-completeness\\f_171C_0FBC.json",
+        "sha256": "179a08d1234950861fab6d162ea5f0a2c8b7d332f27c10c03c118216686b6e80",
+        "size": 27289
+      }
+    },
+    "f_171C_0CF4": {
+      "status": "BEHAVIOR_EXACT_CONFIRMED",
+      "receipt": {
+        "path": "work\\source-only-dos\\static-completeness\\f_171C_0CF4.json",
+        "sha256": "b860fa8984346175477cf27005777a6af6580baf6bd2bfdcb78fe2e849562627",
+        "size": 17802
+      }
+    },
+    "FindIndex": {
+      "status": "BEHAVIOR_EXACT_CONFIRMED",
+      "receipt": {
+        "path": "work\\source-only-dos\\static-completeness\\FindIndex.json",
+        "sha256": "d9f61367df4d79b2bd07e284140b8c9a34db80dda5b1d4bceac7f31ffd6ec5fc",
+        "size": 14600
+      }
+    },
+    "f_1C62_0415": {
+      "status": "BEHAVIOR_EXACT_CONFIRMED",
+      "receipt": {
+        "path": "work\\source-only-dos\\static-completeness\\f_1C62_0415.json",
+        "sha256": "b6494106b027cdc91f1f53c3afbf9d479853658f50bff8d975fda7eb6aa7de59",
+        "size": 33234
+      }
+    },
+    "f_1E57_038E": {
+      "status": "BEHAVIOR_EXACT_CONFIRMED",
+      "receipt": {
+        "path": "work\\source-only-dos\\static-completeness\\f_1E57_038E.json",
+        "sha256": "c7977122410f6b0e80cac5b0317d55d2f4a04130bee0bd0f98d5a5de51a8a333",
+        "size": 26879
+      }
+    },
+    "f_20E8_0903": {
+      "status": "BEHAVIOR_EXACT_CONFIRMED",
+      "receipt": {
+        "path": "work\\source-only-dos\\static-completeness\\f_20E8_0903.json",
+        "sha256": "01d26e670b47c645029865b37962a3b53a711b3c23ee6fd4f702345f20f00f8a",
+        "size": 15629
+      }
+    },
+    "win_UnlockWin": {
+      "status": "BEHAVIOR_EXACT_CONFIRMED",
+      "receipt": {
+        "path": "work\\source-only-dos\\static-completeness\\win_UnlockWin.json",
+        "sha256": "078841cf92bdea90f52e733ff8587336f061d4045c784899553681bef8ca03a9",
+        "size": 26532
+      }
+    },
+    "f_23E6_0000": {
+      "status": "BEHAVIOR_EXACT_CONFIRMED",
+      "receipt": {
+        "path": "work\\source-only-dos\\static-completeness\\f_23E6_0000.json",
+        "sha256": "93340ca87d10bd2679b9905d882bd7f2867edc17a692c50a1450230cc9540508",
+        "size": 14839
+      }
+    },
+    "f_2505_0453": {
+      "status": "BEHAVIOR_EXACT_CONFIRMED",
+      "receipt": {
+        "path": "work\\source-only-dos\\static-completeness\\f_2505_0453.json",
+        "sha256": "ff8acbd9390b6f8ede9aa5ec465b37fb624de5bb80233521fac60f9c404f5c73",
+        "size": 18683
+      }
+    },
+    "win_DrawBitMap": {
+      "status": "BEHAVIOR_EXACT_CONFIRMED",
+      "receipt": {
+        "path": "work\\source-only-dos\\static-completeness\\win_DrawBitMap.json",
+        "sha256": "bb0288e993a44fedacb0ab657c2acb565133638098ca7c7e30eb56ec3d96937a",
+        "size": 34038
+      }
+    },
+    "f_2815_0165": {
+      "status": "BEHAVIOR_EXACT_CONFIRMED",
+      "receipt": {
+        "path": "work\\source-only-dos\\static-completeness\\f_2815_0165.json",
+        "sha256": "f681fde7fd5100f7e18463f4798df0697b805f73b9796e73bb5a19c9e0f765ad",
+        "size": 17249
+      }
+    },
+    "f_284A_0138": {
+      "status": "BEHAVIOR_EXACT_CONFIRMED",
+      "receipt": {
+        "path": "work\\source-only-dos\\static-completeness\\f_284A_0138.json",
+        "sha256": "d8c9cb12172b487a83c5d84426d0bceecb4b0099aa1be9a98d1c39ed2fe5db0e",
+        "size": 12344
+      }
+    },
+    "f_29D6_000A": {
+      "status": "BEHAVIOR_EXACT_CONFIRMED",
+      "receipt": {
+        "path": "work\\source-only-dos\\static-completeness\\f_29D6_000A.json",
+        "sha256": "3ad0a71454669b67e468b75d9d907639a4c3f78e1db1d044dbf0172579580234",
+        "size": 14942
+      }
+    },
+    "o10_35F5_0384": {
+      "status": "BEHAVIOR_EXACT_CONFIRMED",
+      "receipt": {
+        "path": "work\\source-only-dos\\static-completeness\\o10_35F5_0384.json",
+        "sha256": "beebdbfcfed76215fe7dbf69a61801b9142aef6686f7fdb3508e3342edb4a0c8",
+        "size": 60547
+      }
+    },
+    "DrawMapCursor": {
+      "status": "BEHAVIOR_EXACT_CONFIRMED",
+      "receipt": {
+        "path": "work\\source-only-dos\\static-completeness\\DrawMapCursor.json",
+        "sha256": "d40aac74106f86a115d56f01ca04c3aa6c98b6a1fa18306705490f92fce2e41a",
+        "size": 40582
+      }
+    },
+    "InvertPatch": {
+      "status": "BEHAVIOR_EXACT_CONFIRMED",
+      "receipt": {
+        "path": "work\\source-only-dos\\static-completeness\\InvertPatch.json",
+        "sha256": "8591af179c72f5f42457d64f7e84834c70381f7f00d3a164b165e480d88e214c",
+        "size": 41836
+      }
+    },
+    "o15_384C_0239": {
+      "status": "BEHAVIOR_EXACT_CONFIRMED",
+      "receipt": {
+        "path": "work\\source-only-dos\\static-completeness\\o15_384C_0239.json",
+        "sha256": "c00dadc8421083c9f2c33bb0b057b92e1c1a57867a5c7cc4e83bf9f9c5c6534a",
+        "size": 48386
+      }
+    },
+    "win_PrintStyleTextInRect": {
+      "status": "BEHAVIOR_EXACT_CONFIRMED",
+      "receipt": {
+        "path": "work\\source-only-dos\\static-completeness\\win_PrintStyleTextInRect.json",
+        "sha256": "ba6c9d3f06c6327a55273efa2b5181df3338c7af346d80b4c0cf327235e43ed0",
+        "size": 51131
+      }
+    },
+    "DisplayCard": {
+      "status": "BEHAVIOR_EXACT_CONFIRMED",
+      "receipt": {
+        "path": "work\\source-only-dos\\static-completeness\\DisplayCard.json",
+        "sha256": "a0be46440557ac606df28a451f62a228b3229a9ab04a10a56bbf374931ae841e",
+        "size": 51033
+      }
+    },
+    "drawHistGraph": {
+      "status": "BEHAVIOR_EXACT_CONFIRMED",
+      "receipt": {
+        "path": "work\\source-only-dos\\static-completeness\\drawHistGraph.json",
+        "sha256": "c611f04ff64c8a0ce969762670506fe2682a6ad697367c63011a1c18dc18a3a9",
+        "size": 91762
+      }
+    },
+    "o25_3BA4_1035": {
+      "status": "BEHAVIOR_EXACT_CONFIRMED",
+      "receipt": {
+        "path": "work\\source-only-dos\\static-completeness\\o25_3BA4_1035.json",
+        "sha256": "8fdd8925b614cc419c7dc1ab25fb262be105b29977e9c6c33ec5d862e5888274",
+        "size": 13286
+      }
+    },
+    "o25_3BA4_1686": {
+      "status": "BEHAVIOR_EXACT_CONFIRMED",
+      "receipt": {
+        "path": "work\\source-only-dos\\static-completeness\\o25_3BA4_1686.json",
+        "sha256": "ef11dec31ab3193184b52c308f25c67c70a49d2cd44a823fd91fbd90ac96204a",
+        "size": 21440
+      }
+    }
+  },
+  "historical_behavior_registrations": 29,
   "source_owned_history_arrays": [
     {
       "name": "_fd_50F6_0516",
@@ -246,6 +548,174 @@
       "initialization": "Uninitialized far communal; pinned MSC runtime plus RTLink fixtures establish zero-fill. Existing ClearHistory writes every word; no initializer values are introduced.",
       "views": "S24 signed words; S14 score reads for three arrays; S09 serialized bytes; d3D57 typed graph pointers",
       "registered_interior_names": []
+    }
+  ],
+  "source_owned_far_scalars": [
+    {
+      "name": "_HealthB",
+      "kind": "far",
+      "count": 2,
+      "element_size": 1,
+      "length": 2,
+      "historical_address": [
+        20726,
+        4286
+      ],
+      "source_extent_anchor": "int far word lvalues and persistent {2,1,&symbol} SaveRec address view; exact-base aliases share this one owner"
+    },
+    {
+      "name": "_HealthR",
+      "kind": "far",
+      "count": 2,
+      "element_size": 1,
+      "length": 2,
+      "historical_address": [
+        20726,
+        510
+      ],
+      "source_extent_anchor": "int far word lvalues and persistent {2,1,&symbol} SaveRec address view; exact-base aliases share this one owner"
+    },
+    {
+      "name": "_FoodB",
+      "kind": "far",
+      "count": 2,
+      "element_size": 1,
+      "length": 2,
+      "historical_address": [
+        20726,
+        4176
+      ],
+      "source_extent_anchor": "int far word lvalues and persistent {2,1,&symbol} SaveRec address view; exact-base aliases share this one owner"
+    },
+    {
+      "name": "_FoodR",
+      "kind": "far",
+      "count": 2,
+      "element_size": 1,
+      "length": 2,
+      "historical_address": [
+        20726,
+        4192
+      ],
+      "source_extent_anchor": "int far word lvalues and persistent {2,1,&symbol} SaveRec address view; exact-base aliases share this one owner"
+    },
+    {
+      "name": "_Cycle",
+      "kind": "far",
+      "count": 2,
+      "element_size": 1,
+      "length": 2,
+      "historical_address": [
+        20726,
+        3848
+      ],
+      "source_extent_anchor": "int far word lvalues and persistent {2,1,&symbol} SaveRec address view; exact-base aliases share this one owner"
+    },
+    {
+      "name": "_AntsEatenByLions",
+      "kind": "far",
+      "count": 2,
+      "element_size": 1,
+      "length": 2,
+      "historical_address": [
+        20726,
+        2568
+      ],
+      "source_extent_anchor": "int far AntsEatenByLions;",
+      "initialization": "tentative definition, zero-initialized in FAR_BSS at startup",
+      "views": [
+        "int far word reads/writes in root:0AD9",
+        "one {size=2,count=1,&AntsEatenByLions} SaveRec row",
+        "SaveRec byte-pointer view covers exactly two bytes"
+      ],
+      "registered_interior_names": []
+    },
+    {
+      "name": "_InitialLions",
+      "kind": "far",
+      "count": 2,
+      "element_size": 1,
+      "length": 2,
+      "historical_address": [
+        20726,
+        2282
+      ],
+      "source_extent_anchor": "int far InitialLions;",
+      "initialization": "tentative definition, zero-initialized in FAR_BSS at startup",
+      "views": [
+        "int far word reads/writes in root:0AD9",
+        "one {size=2,count=1,&InitialLions} SaveRec row",
+        "SaveRec byte-pointer view covers exactly two bytes"
+      ],
+      "registered_interior_names": []
+    },
+    {
+      "name": "_BpopT",
+      "kind": "far",
+      "count": 2,
+      "element_size": 1,
+      "length": 2,
+      "historical_address": [
+        20726,
+        816
+      ],
+      "source_extent_anchor": "root:0BE8 CountAnts assigns this int far scalar; S09 SaveRec has {2,1,&BpopT}; typed consumers read/write a word.",
+      "initialization": "Tentative int far definition with no source initializer; zero-fill is confirmed by the pinned MSC startup and RTLink 4.00/6.10 fixtures.",
+      "views": [
+        "root:0BE8 CountAnts signed int far scalar",
+        "S22:39C7 YellowBirth signed int far increment",
+        "S09:35F5 unsigned char far address-only SaveRec view",
+        "registered exact alias fd_50F6_0330"
+      ],
+      "registered_interior_names": []
+    },
+    {
+      "name": "_RpopT",
+      "kind": "far",
+      "count": 2,
+      "element_size": 1,
+      "length": 2,
+      "historical_address": [
+        20726,
+        848
+      ],
+      "source_extent_anchor": "root:0BE8 CountAnts assigns this int far scalar; S09 SaveRec has {2,1,&RpopT}; typed consumers read/write a word.",
+      "initialization": "Tentative int far definition with no source initializer; zero-fill is confirmed by the pinned MSC startup and RTLink 4.00/6.10 fixtures.",
+      "views": [
+        "root:0BE8 CountAnts signed int far scalar",
+        "S22:39C7 YellowBirth signed int far increment",
+        "S09:35F5 unsigned char far address-only SaveRec view",
+        "registered exact alias fd_50F6_0350"
+      ],
+      "registered_interior_names": []
+    }
+  ],
+  "storage_provider_proofs": [
+    {
+      "module": "source-owned:driver-callback-table",
+      "source": {
+        "path": "work\\source-only-dos\\providers\\callback-table.c",
+        "sha256": "0768e9340f7d062ca81979e97abeeed70f083232963649b4d20d0ceeda0fdcf7",
+        "size": 47
+      },
+      "object": {
+        "path": "build\\source-only-dos\\objects\\CBOWNER.OBJ",
+        "sha256": "74658ed2e7ef9f9461988dec8bd9b9c23150faaeed88ed51f945972c4332fde9",
+        "size": 219
+      },
+      "status": "PASS",
+      "data_only": true,
+      "live_initialized_bytes": 0,
+      "code_bytes": 0,
+      "communals": [
+        {
+          "name": "_driver_callback_table",
+          "kind": "near",
+          "length": 100
+        }
+      ],
+      "publics": [],
+      "fixups": []
     }
   ],
   "reviewed_data_aliases": [
@@ -790,8 +1260,12 @@
       },
       "status": "PASS",
       "segment_extents_unchanged": true,
+      "live_segment_extents_unchanged": true,
       "existing_publics_and_relocations_unchanged": true,
+      "live_existing_publics_and_relocations_unchanged": true,
+      "reviewed_frame_corrections": [],
       "storage_bytes_unchanged": true,
+      "reviewed_debug_contributions": {},
       "added_exports": [
         {
           "name": "_g_2078",
@@ -831,8 +1305,12 @@
       },
       "status": "PASS",
       "segment_extents_unchanged": true,
+      "live_segment_extents_unchanged": true,
       "existing_publics_and_relocations_unchanged": true,
+      "live_existing_publics_and_relocations_unchanged": true,
+      "reviewed_frame_corrections": [],
       "storage_bytes_unchanged": true,
+      "reviewed_debug_contributions": {},
       "added_exports": [],
       "added_communals": [],
       "symbolic_operand_checks": [
@@ -889,8 +1367,12 @@
       },
       "status": "PASS",
       "segment_extents_unchanged": true,
+      "live_segment_extents_unchanged": true,
       "existing_publics_and_relocations_unchanged": true,
+      "live_existing_publics_and_relocations_unchanged": true,
+      "reviewed_frame_corrections": [],
       "storage_bytes_unchanged": true,
+      "reviewed_debug_contributions": {},
       "added_exports": [],
       "added_communals": [],
       "symbolic_operand_checks": [
@@ -938,8 +1420,12 @@
       },
       "status": "PASS",
       "segment_extents_unchanged": true,
+      "live_segment_extents_unchanged": true,
       "existing_publics_and_relocations_unchanged": true,
+      "live_existing_publics_and_relocations_unchanged": true,
+      "reviewed_frame_corrections": [],
       "storage_bytes_unchanged": true,
+      "reviewed_debug_contributions": {},
       "added_exports": [],
       "added_communals": [],
       "symbolic_operand_checks": [
@@ -1059,8 +1545,12 @@
       },
       "status": "PASS",
       "segment_extents_unchanged": true,
+      "live_segment_extents_unchanged": true,
       "existing_publics_and_relocations_unchanged": true,
+      "live_existing_publics_and_relocations_unchanged": true,
+      "reviewed_frame_corrections": [],
       "storage_bytes_unchanged": true,
+      "reviewed_debug_contributions": {},
       "added_exports": [
         {
           "name": "_g_21A4",
@@ -1105,8 +1595,12 @@
       },
       "status": "PASS",
       "segment_extents_unchanged": true,
+      "live_segment_extents_unchanged": true,
       "existing_publics_and_relocations_unchanged": true,
+      "live_existing_publics_and_relocations_unchanged": true,
+      "reviewed_frame_corrections": [],
       "storage_bytes_unchanged": true,
+      "reviewed_debug_contributions": {},
       "added_exports": [],
       "added_communals": [],
       "symbolic_operand_checks": [
@@ -1136,6 +1630,101 @@
       }
     },
     {
+      "module": "S08:35F5",
+      "source": {
+        "path": "src\\S08\\m35F5.c",
+        "sha256": "ef6eea405f6497cb5a6648ef258cc1afeab308f995ded573794465d831e3501f",
+        "size": 22166
+      },
+      "control_source": {
+        "path": "build\\source-only-dos\\binding-controls\\U016.c",
+        "sha256": "ef6eea405f6497cb5a6648ef258cc1afeab308f995ded573794465d831e3501f",
+        "size": 22166
+      },
+      "object": {
+        "path": "build\\source-only-dos\\objects\\U016.OBJ",
+        "sha256": "1d7e248a33b86ae6e7ffc8b2676404488b81dad49410ef266fa361c771ef2436",
+        "size": 18548
+      },
+      "status": "PASS",
+      "segment_extents_unchanged": true,
+      "live_segment_extents_unchanged": true,
+      "existing_publics_and_relocations_unchanged": true,
+      "live_existing_publics_and_relocations_unchanged": true,
+      "reviewed_frame_corrections": [],
+      "storage_bytes_unchanged": true,
+      "reviewed_debug_contributions": {},
+      "added_exports": [],
+      "added_communals": [
+        {
+          "name": "_HealthB",
+          "kind": "far",
+          "count": 2,
+          "element_size": 1,
+          "length": 2,
+          "historical_address": [
+            20726,
+            4286
+          ],
+          "source_extent_anchor": "int far word lvalues and persistent {2,1,&symbol} SaveRec address view; exact-base aliases share this one owner"
+        },
+        {
+          "name": "_HealthR",
+          "kind": "far",
+          "count": 2,
+          "element_size": 1,
+          "length": 2,
+          "historical_address": [
+            20726,
+            510
+          ],
+          "source_extent_anchor": "int far word lvalues and persistent {2,1,&symbol} SaveRec address view; exact-base aliases share this one owner"
+        },
+        {
+          "name": "_FoodB",
+          "kind": "far",
+          "count": 2,
+          "element_size": 1,
+          "length": 2,
+          "historical_address": [
+            20726,
+            4176
+          ],
+          "source_extent_anchor": "int far word lvalues and persistent {2,1,&symbol} SaveRec address view; exact-base aliases share this one owner"
+        },
+        {
+          "name": "_FoodR",
+          "kind": "far",
+          "count": 2,
+          "element_size": 1,
+          "length": 2,
+          "historical_address": [
+            20726,
+            4192
+          ],
+          "source_extent_anchor": "int far word lvalues and persistent {2,1,&symbol} SaveRec address view; exact-base aliases share this one owner"
+        },
+        {
+          "name": "_Cycle",
+          "kind": "far",
+          "count": 2,
+          "element_size": 1,
+          "length": 2,
+          "historical_address": [
+            20726,
+            3848
+          ],
+          "source_extent_anchor": "int far word lvalues and persistent {2,1,&symbol} SaveRec address view; exact-base aliases share this one owner"
+        }
+      ],
+      "symbolic_operand_checks": [],
+      "canonical_control_object": {
+        "path": "build\\source-only-dos\\binding-controls\\U016.OBJ",
+        "sha256": "5c77bb2bd1edc298168442992f5acc3ba6c114a425b95a747ef40e147ec78c1e",
+        "size": 18492
+      }
+    },
+    {
       "module": "S12:384C",
       "source": {
         "path": "src\\S12\\m384C.c",
@@ -1154,8 +1743,12 @@
       },
       "status": "PASS",
       "segment_extents_unchanged": true,
+      "live_segment_extents_unchanged": true,
       "existing_publics_and_relocations_unchanged": true,
+      "live_existing_publics_and_relocations_unchanged": true,
+      "reviewed_frame_corrections": [],
       "storage_bytes_unchanged": true,
+      "reviewed_debug_contributions": {},
       "added_exports": [
         {
           "name": "_g_2996",
@@ -1191,8 +1784,12 @@
       },
       "status": "PASS",
       "segment_extents_unchanged": true,
+      "live_segment_extents_unchanged": true,
       "existing_publics_and_relocations_unchanged": true,
+      "live_existing_publics_and_relocations_unchanged": true,
+      "reviewed_frame_corrections": [],
       "storage_bytes_unchanged": true,
+      "reviewed_debug_contributions": {},
       "added_exports": [
         {
           "name": "_g_2A36",
@@ -1240,8 +1837,12 @@
       },
       "status": "PASS",
       "segment_extents_unchanged": true,
+      "live_segment_extents_unchanged": true,
       "existing_publics_and_relocations_unchanged": true,
+      "live_existing_publics_and_relocations_unchanged": true,
+      "reviewed_frame_corrections": [],
       "storage_bytes_unchanged": true,
+      "reviewed_debug_contributions": {},
       "added_exports": [
         {
           "name": "_g_610A",
@@ -1277,8 +1878,12 @@
       },
       "status": "PASS",
       "segment_extents_unchanged": true,
+      "live_segment_extents_unchanged": true,
       "existing_publics_and_relocations_unchanged": true,
+      "live_existing_publics_and_relocations_unchanged": true,
+      "reviewed_frame_corrections": [],
       "storage_bytes_unchanged": true,
+      "reviewed_debug_contributions": {},
       "added_exports": [],
       "added_communals": [
         {
@@ -1440,6 +2045,154 @@
       }
     },
     {
+      "module": "root:0AD9",
+      "source": {
+        "path": "src\\root\\m0AD9.c",
+        "sha256": "726585ecdb17d969b478bf5a55b726736614dbaa2d5f6477b8f6907c86f73d0b",
+        "size": 14288
+      },
+      "control_source": {
+        "path": "build\\source-only-dos\\binding-controls\\U058.c",
+        "sha256": "726585ecdb17d969b478bf5a55b726736614dbaa2d5f6477b8f6907c86f73d0b",
+        "size": 14288
+      },
+      "object": {
+        "path": "build\\source-only-dos\\objects\\U058.OBJ",
+        "sha256": "39b1c8623affbe48682a471d514d32b59fc501f1d7bd6bf6c213333d67bddd01",
+        "size": 12695
+      },
+      "status": "PASS",
+      "segment_extents_unchanged": true,
+      "live_segment_extents_unchanged": true,
+      "existing_publics_and_relocations_unchanged": true,
+      "live_existing_publics_and_relocations_unchanged": true,
+      "reviewed_frame_corrections": [],
+      "storage_bytes_unchanged": true,
+      "reviewed_debug_contributions": {},
+      "added_exports": [],
+      "added_communals": [
+        {
+          "name": "_AntsEatenByLions",
+          "kind": "far",
+          "count": 2,
+          "element_size": 1,
+          "length": 2,
+          "historical_address": [
+            20726,
+            2568
+          ],
+          "source_extent_anchor": "int far AntsEatenByLions;",
+          "initialization": "tentative definition, zero-initialized in FAR_BSS at startup",
+          "views": [
+            "int far word reads/writes in root:0AD9",
+            "one {size=2,count=1,&AntsEatenByLions} SaveRec row",
+            "SaveRec byte-pointer view covers exactly two bytes"
+          ],
+          "registered_interior_names": []
+        },
+        {
+          "name": "_InitialLions",
+          "kind": "far",
+          "count": 2,
+          "element_size": 1,
+          "length": 2,
+          "historical_address": [
+            20726,
+            2282
+          ],
+          "source_extent_anchor": "int far InitialLions;",
+          "initialization": "tentative definition, zero-initialized in FAR_BSS at startup",
+          "views": [
+            "int far word reads/writes in root:0AD9",
+            "one {size=2,count=1,&InitialLions} SaveRec row",
+            "SaveRec byte-pointer view covers exactly two bytes"
+          ],
+          "registered_interior_names": []
+        }
+      ],
+      "symbolic_operand_checks": [],
+      "canonical_control_object": {
+        "path": "build\\source-only-dos\\binding-controls\\U058.OBJ",
+        "sha256": "d58baeb5f4389f4017aead5a6035dd96eebe6bc2e4899b75fcc0dcfbb3bbdd9c",
+        "size": 12671
+      }
+    },
+    {
+      "module": "root:0BE8",
+      "source": {
+        "path": "src\\root\\m0BE8.c",
+        "sha256": "42664e07331fbba4cc257f1e49e03dff5e93deddb764d33101ad0f454a9377d7",
+        "size": 14621
+      },
+      "control_source": {
+        "path": "build\\source-only-dos\\binding-controls\\U059.c",
+        "sha256": "42664e07331fbba4cc257f1e49e03dff5e93deddb764d33101ad0f454a9377d7",
+        "size": 14621
+      },
+      "object": {
+        "path": "build\\source-only-dos\\objects\\U059.OBJ",
+        "sha256": "18d40341b94f9f2183283bb193cf4cc5d832da2f00027c657dba471bdac4e02e",
+        "size": 7457
+      },
+      "status": "PASS",
+      "segment_extents_unchanged": true,
+      "live_segment_extents_unchanged": true,
+      "existing_publics_and_relocations_unchanged": true,
+      "live_existing_publics_and_relocations_unchanged": true,
+      "reviewed_frame_corrections": [],
+      "storage_bytes_unchanged": true,
+      "reviewed_debug_contributions": {},
+      "added_exports": [],
+      "added_communals": [
+        {
+          "name": "_BpopT",
+          "kind": "far",
+          "count": 2,
+          "element_size": 1,
+          "length": 2,
+          "historical_address": [
+            20726,
+            816
+          ],
+          "source_extent_anchor": "root:0BE8 CountAnts assigns this int far scalar; S09 SaveRec has {2,1,&BpopT}; typed consumers read/write a word.",
+          "initialization": "Tentative int far definition with no source initializer; zero-fill is confirmed by the pinned MSC startup and RTLink 4.00/6.10 fixtures.",
+          "views": [
+            "root:0BE8 CountAnts signed int far scalar",
+            "S22:39C7 YellowBirth signed int far increment",
+            "S09:35F5 unsigned char far address-only SaveRec view",
+            "registered exact alias fd_50F6_0330"
+          ],
+          "registered_interior_names": []
+        },
+        {
+          "name": "_RpopT",
+          "kind": "far",
+          "count": 2,
+          "element_size": 1,
+          "length": 2,
+          "historical_address": [
+            20726,
+            848
+          ],
+          "source_extent_anchor": "root:0BE8 CountAnts assigns this int far scalar; S09 SaveRec has {2,1,&RpopT}; typed consumers read/write a word.",
+          "initialization": "Tentative int far definition with no source initializer; zero-fill is confirmed by the pinned MSC startup and RTLink 4.00/6.10 fixtures.",
+          "views": [
+            "root:0BE8 CountAnts signed int far scalar",
+            "S22:39C7 YellowBirth signed int far increment",
+            "S09:35F5 unsigned char far address-only SaveRec view",
+            "registered exact alias fd_50F6_0350"
+          ],
+          "registered_interior_names": []
+        }
+      ],
+      "symbolic_operand_checks": [],
+      "canonical_control_object": {
+        "path": "build\\source-only-dos\\binding-controls\\U059.OBJ",
+        "sha256": "748beb2745364e61c79ded7883dc81b5729faa74ccfbbd32ea180a2392f05272",
+        "size": 7439
+      }
+    },
+    {
       "module": "root:1B73",
       "source": {
         "path": "src\\root\\m1B73.asm",
@@ -1453,13 +2206,45 @@
       },
       "object": {
         "path": "build\\source-only-dos\\objects\\U087.OBJ",
-        "sha256": "d623c0ab6a8fe3ed434edc45e0c6ee24167081a0fcd67af1567b63a74e683a2e",
+        "sha256": "b7e532570c3bbe5afb0b43e76b387adc26a06f844d37680954ca02c9dabe7d5e",
         "size": 8751
       },
       "status": "PASS",
       "segment_extents_unchanged": true,
-      "existing_publics_and_relocations_unchanged": true,
+      "live_segment_extents_unchanged": true,
+      "existing_publics_and_relocations_unchanged": false,
+      "live_existing_publics_and_relocations_unchanged": false,
+      "reviewed_frame_corrections": [
+        {
+          "segment": "MOUSE_TEXT",
+          "offset": 3259,
+          "target": "_g_9120",
+          "old_frame_kind": "segment",
+          "old_frame": "_DATA",
+          "frame_kind": "group",
+          "frame": "DGROUP"
+        },
+        {
+          "segment": "MOUSE_TEXT",
+          "offset": 3264,
+          "target": "_g_9122",
+          "old_frame_kind": "segment",
+          "old_frame": "_DATA",
+          "frame_kind": "group",
+          "frame": "DGROUP"
+        },
+        {
+          "segment": "MOUSE_TEXT",
+          "offset": 3269,
+          "target": "_g_9124",
+          "old_frame_kind": "segment",
+          "old_frame": "_DATA",
+          "frame_kind": "group",
+          "frame": "DGROUP"
+        }
+      ],
       "storage_bytes_unchanged": true,
+      "reviewed_debug_contributions": {},
       "added_exports": [
         {
           "name": "_fd_1B73_0006",
@@ -1473,6 +2258,65 @@
         "path": "build\\source-only-dos\\binding-controls\\U087.OBJ",
         "sha256": "266246374921f3aca449a755e035a7a7f24536379f7cb6b123f71094ed1a9c95",
         "size": 8722
+      }
+    },
+    {
+      "module": "root:1FD2",
+      "source": {
+        "path": "src\\root\\m1FD2.c",
+        "sha256": "f4359bdaf4cfc0fe326a54cf8a1eacb9ba3098b710bf2a561b3d0f48569bf6d8",
+        "size": 10086
+      },
+      "control_source": {
+        "path": "build\\source-only-dos\\binding-controls\\U097.c",
+        "sha256": "f4359bdaf4cfc0fe326a54cf8a1eacb9ba3098b710bf2a561b3d0f48569bf6d8",
+        "size": 10086
+      },
+      "object": {
+        "path": "build\\source-only-dos\\objects\\U097.OBJ",
+        "sha256": "23376e993ef04bee5dee2d9b03298c337bc46eb1003671ba40338e7d9312038b",
+        "size": 12521
+      },
+      "status": "PASS",
+      "segment_extents_unchanged": false,
+      "live_segment_extents_unchanged": true,
+      "existing_publics_and_relocations_unchanged": false,
+      "live_existing_publics_and_relocations_unchanged": true,
+      "reviewed_frame_corrections": [],
+      "storage_bytes_unchanged": false,
+      "reviewed_debug_contributions": {
+        "$$SYMBOLS": {
+          "control": "51ec59a5cd2d82c497a305694f85209a6047458c3518eba13b5b90c31e4a2167",
+          "generated": "63013387661e734687bf2919b8667834ea9b3673175eb84dd27fe056ede78caa"
+        },
+        "$$TYPES": {
+          "control": "ddc3189d08a97550e345980ec25e1ab33aa469f933b504f9486d435466016149",
+          "generated": "82b266cb73c086a097dfc91814775acd744337290308d77f70dfbb48799506f6"
+        }
+      },
+      "added_exports": [],
+      "added_communals": [
+        {
+          "name": "_input_queue",
+          "kind": "near",
+          "length": 112
+        }
+      ],
+      "symbolic_operand_checks": [
+        {
+          "segment": "_DATA",
+          "offset": 24,
+          "old_operand": 37296,
+          "target": "_input_queue",
+          "frame": "_input_queue",
+          "displacement": 0,
+          "addend": "0000"
+        }
+      ],
+      "canonical_control_object": {
+        "path": "build\\source-only-dos\\binding-controls\\U097.OBJ",
+        "sha256": "58905601d6a607270663fb3418e2ca7eb7bb7f8ec40e85429e8a8821e0634de6",
+        "size": 12446
       }
     },
     {
@@ -1494,8 +2338,12 @@
       },
       "status": "PASS",
       "segment_extents_unchanged": true,
+      "live_segment_extents_unchanged": true,
       "existing_publics_and_relocations_unchanged": true,
+      "live_existing_publics_and_relocations_unchanged": true,
+      "reviewed_frame_corrections": [],
       "storage_bytes_unchanged": true,
+      "reviewed_debug_contributions": {},
       "added_exports": [
         {
           "name": "_fd_55B3_6B4C",
@@ -1530,8 +2378,8 @@
   "tool_inputs": [
     {
       "path": "tools\\source_only_dos.py",
-      "sha256": "13b48c029ef0fd0beb960064f0fb68b778665dee70f6a433147de5002340e810",
-      "size": 35870
+      "sha256": "2dd8e37450e9fa8fa36fe6fe43613fdc388b9d2a541fb3eb3e1054a6fa372910",
+      "size": 46238
     },
     {
       "path": "tools\\compiler.py",
@@ -1550,28 +2398,28 @@
     },
     {
       "path": "tools\\dos_source_bindings.py",
-      "sha256": "7249b4502123e13adb64e981074733d69da1f2f79ed2ef322d2c72e97d55bbdf",
-      "size": 10845
+      "sha256": "20cb3feea4c40278add0ce973929c100ce9b9d5ef60e8da21d71a82dcb147bbd",
+      "size": 26347
     }
   ],
   "validation_logs": [
     {
-      "path": "build/source-only-dos-run-v4.log",
-      "sha256": "d36f22cfad0e6aef68cdfcf4c6d937e487a135631e6344c0e4c25c77ce046dd4",
-      "size": 3721
+      "path": "build/source-only-dos-run-v8.log",
+      "sha256": "9ec9b0b56cf26f79420b652ae1a37742dd956b75f88d963616574ae5eaee67ea",
+      "size": 3773
     },
     {
-      "path": "build/source-only-dos-tests-v4.log",
-      "sha256": "1401e2d3d7f706ca877737788feafc9c2b2c5fde4bfe02cc1325c74d3253a714",
-      "size": 1513
+      "path": "build/source-only-dos-tests-v8.log",
+      "sha256": "47dd497d9b3be06cd48d96e496aa13a8d394360dbb4a1a7f4accf602737e33b4",
+      "size": 256
     },
     {
-      "path": "build/source-only-dos-validation-v4.log",
-      "sha256": "fe86895759534286937a671bfb5fec1bccd9384b6527d1e05ee172b171cd76d7",
-      "size": 4752
+      "path": "build/source-only-dos-validation-v8.log",
+      "sha256": "786ea0446e31ee04f020b58675893cfa939f724dddae99d859a181b6602b4ad5",
+      "size": 4736
     }
   ],
   "historical_validation": "PASS",
-  "source_only_tests": "13 tests PASS",
+  "source_only_tests": "21 targeted tests included in 335 repository tests PASS (2 skips)",
   "claim_limit": "Compile and symbolic binding proofs only; no complete link, runtime equivalence or human acceptance. Full inventories are reproducible build output."
 }
