@@ -1,4 +1,5 @@
 #include "portable/whole_program/platform/graphics.h"
+#include "portable/whole_program/platform/graphics_source_clip.h"
 
 #include <stdint.h>
 #include <stdio.h>
@@ -54,10 +55,12 @@ static void test_defaults_and_source_tables(void)
     CHECK(strcmp(slots[SIM_GFX_ENTRY_G9154].source_target, "o00_31AD_1206") == 0);
     CHECK(strcmp(slots[SIM_GFX_ENTRY_G9158].source_target, "o00_31AD_1213") == 0);
     CHECK(strcmp(slots[SIM_GFX_ENTRY_G9188].source_target, "o00_31AD_1950") == 0);
-    CHECK(slots[SIM_GFX_ENTRY_G914C].provided == 0);
+    CHECK(slots[SIM_GFX_ENTRY_G914C].provided == 1);
+    CHECK(slots[SIM_GFX_ENTRY_G9150].provided == 1);
     CHECK(slots[SIM_GFX_ENTRY_G9188].source_target != NULL);
     CHECK(slots[SIM_GFX_ENTRY_G9188].provided == 0);
-    CHECK(!sim_graphics_driver_entry_is_provided(SIM_GFX_ENTRY_G914C));
+    CHECK(sim_graphics_driver_entry_is_provided(SIM_GFX_ENTRY_G914C));
+    CHECK(sim_graphics_driver_entry_is_provided(SIM_GFX_ENTRY_G9150));
     s01 = sim_graphics_s01_source_targets(&count);
     CHECK(s01 != NULL && count == 25);
     CHECK(s01[0] != NULL && s01[24] != NULL);
@@ -138,7 +141,7 @@ static void test_six_pixel_fold_fails_explicitly(void)
 static void test_source_abi_and_vga_mode(void)
 {
     SimGraphicsDriver gfx;
-    uint16_t source_g_5AAE = 0;
+    struct Rect *source_g_5AAC = NULL;
     char bitmap[] = {(char)0x80};
     uint8_t *pixels;
     size_t size;
@@ -149,7 +152,7 @@ static void test_source_abi_and_vga_mode(void)
     CHECK(gfx.video_mode == SIM_GRAPHICS_MODE_EGA_640X350);
     CHECK(gfx.g_3DB2 == 640 && gfx.g_3DB4 == 350 && gfx.g_3DB6 == 80);
     sim_graphics_set_mode_changed_callback(&gfx, mode_changed, &mode_change_count);
-    CHECK(sim_graphics_bind_source_abi(&gfx, &source_g_5AAE) == SIM_GRAPHICS_OK);
+    CHECK(sim_graphics_bind_source_abi(&gfx, &source_g_5AAC) == SIM_GRAPHICS_OK);
     CHECK(g_9128 != NULL && g_912C != NULL && g_9130 != NULL &&
           g_9134 != NULL && g_9138 != NULL && g_913C != NULL &&
           g_9154 != NULL && g_9158 != NULL && g_9170 != NULL);
@@ -203,7 +206,7 @@ static void test_source_abi_and_vga_mode(void)
     g_9154(10, 2, bitmap, 8, 1);
     CHECK(sim_graphics_source_last_status() == SIM_GRAPHICS_OK);
     CHECK(pixels[2u * 640u + 10u] == 9);
-    source_g_5AAE = 1;
+    source_g_5AAC = &g_5A9C;
     g_9134(1, 2, 3, 4, 5);
     CHECK(sim_graphics_source_last_status() == SIM_GRAPHICS_UNSUPPORTED_MODE);
     g_9154(10, 3, bitmap, 8, 1);
@@ -245,7 +248,7 @@ static void test_source_abi_and_vga_mode(void)
 static void test_s00_pattern_rect_xor_and_font_slots(void)
 {
     SimGraphicsDriver gfx;
-    uint16_t source_g_5AAE = 0;
+    struct Rect *source_g_5AAC = NULL;
     uint8_t patterns[256] = {0};
     uint8_t bios8[256u * 8u] = {0};
     uint8_t bios14[256u * 14u] = {0};
@@ -260,7 +263,7 @@ static void test_s00_pattern_rect_xor_and_font_slots(void)
     patterns[3u * 16u + 3u] = 0x33u;
 
     CHECK(sim_graphics_init(&gfx) == SIM_GRAPHICS_OK);
-    CHECK(sim_graphics_bind_source_abi(&gfx, &source_g_5AAE) == SIM_GRAPHICS_OK);
+    CHECK(sim_graphics_bind_source_abi(&gfx, &source_g_5AAC) == SIM_GRAPHICS_OK);
     CHECK(g_912C != NULL && g_9130 != NULL && g_9138 != NULL && g_913C != NULL);
     CHECK(sim_graphics_set_bios_font_sources(&gfx, bios8, sizeof(bios8),
                                               bios14, sizeof(bios14)) == SIM_GRAPHICS_OK);
@@ -301,18 +304,18 @@ static void test_s00_pattern_rect_xor_and_font_slots(void)
     CHECK(pixels[0u * 640u + 0u] == (uint8_t)(5u ^ 15u));
     CHECK(pixels[0u * 640u + 1u] == (uint8_t)(2u ^ 15u));
 
-    source_g_5AAE = 1; /* unresolved overlay continuation remains fail-closed */
+    source_g_5AAC = &g_5A9C; /* non-null pointer matches DOS segment-word presence */
     g_9138(0, 0, 2, 1, 3);
     CHECK(sim_graphics_source_last_status() == SIM_GRAPHICS_UNSUPPORTED_MODE);
     g_913C(0, 0, 2, 1);
     CHECK(sim_graphics_source_last_status() == SIM_GRAPHICS_UNSUPPORTED_MODE);
-    source_g_5AAE = 0;
+    source_g_5AAC = NULL;
     CHECK(sim_graphics_bind_source_abi(NULL, NULL) == SIM_GRAPHICS_OK);
     sim_graphics_destroy(&gfx);
 
     /* Missing real source views report debt instead of inventing BIOS bytes. */
     CHECK(sim_graphics_init(&gfx) == SIM_GRAPHICS_OK);
-    CHECK(sim_graphics_bind_source_abi(&gfx, &source_g_5AAE) == SIM_GRAPHICS_OK);
+    CHECK(sim_graphics_bind_source_abi(&gfx, &source_g_5AAC) == SIM_GRAPHICS_OK);
     g_9138(0, 0, 2, 1, 3);
     CHECK(sim_graphics_source_last_status() == SIM_GRAPHICS_PATTERN_SOURCE_UNBOUND);
     g_9130();

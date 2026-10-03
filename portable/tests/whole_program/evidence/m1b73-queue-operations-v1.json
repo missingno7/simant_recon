@@ -1,0 +1,99 @@
+{
+  "schema": "whole-program-m1b73-queue-operations-v1",
+  "status": "PASS_TYPED_NATIVE_CONTROLS",
+  "scope": "native typed provider controls; no DOS execution or source-module whole-program run",
+  "inputs": {
+    "src/root/m1B73.asm": "3097a6b03ff1d8bdfa7d573632d9905de88d754c8b1e047de4014c4f186cb848",
+    "src/root/m1FD2.c": "f4359bdaf4cfc0fe326a54cf8a1eacb9ba3098b710bf2a561b3d0f48569bf6d8",
+    "src/S26/m39C7.c": "fb4938daa334a8e9f929b44a542392f47fc7c1a654ca87f303ee80528b34c4c4",
+    "src/S19/m384C.c": "fac1a097c3d992fed772002a87cb5a206050c67a3061e9e9168edc6032e1696b",
+    "src/S10/m35F5.c": "69be1d6a9649e99102131c702e1920b6e84acc0c1b4cd737d2a047552f917ed5",
+    "portable/whole_program/platform/m1b73_queue_source.c": "fe2a5e450dee2aa77eba09a14f8b7f00d193a5942b107dafcddb00cdb92b30fa",
+    "portable/whole_program/platform/m1b73_queue_source.h": "d37e1dd5b1a5a682bc93745dffbfa235460e21b8631cf3292e9e67c050bb670b",
+    "portable/whole_program/platform/m1b73_queues.c": "f2cbe78540eec11815ba5ff547b551039cb3940105f7f64108d13ae7f274d2c1",
+    "portable/whole_program/platform/m1b73_queues.h": "ce133080d5c159d2dc8a65ce87cbb647e11c73c8efeec1946195e4714fdf1f43",
+    "portable/whole_program/platform/m1b73_events.c": "fb9506a47b921b9c7281fa15b62d24a77760b241cedcf9ce92168a752bf0420f",
+    "portable/whole_program/platform/m1b73_events.h": "dea4d6685b3ccfb5ba76fb573cba73c789e169cf2ccdca41bc8f2a242dc88196",
+    "portable/whole_program/platform/sdl3/input_time_host.h": "ca0430c7f7493668895ebe1f1c8bd991850538c7025ae0635a33907b67007727",
+    "portable/whole_program/platform/input_time.h": "ea172bd15b9f7e9b8d06f357a243926351a8e23e3373d5bf27668fdba8e50e4c",
+    "portable/platform/host.h": "d19eaca0ab4f2d6d7fa7c43231ebe85302527cdf955a848311f35baffbe5869d",
+    "portable/game/timing.h": "4a5d00305f858509ed117dd91471c8fba6944c92b77eddc00bb00cb56d36fedd",
+    "portable/whole_program/types/timer.h": "b9d7ee40d617989f0b4bbf70b430948c3f5ec8be0ec1470fe033874fc8720514",
+    "portable/tests/whole_program/m1b73_queue_operations_probe.c": "e7f77783febac13f960fad80a2d008a7a07cdca35e46d266e57ca532c5e530c6",
+    "portable/tests/whole_program/run_m1b73_queue_operations_probe.py": "6f79763801a8a806d669a0560a4e81d209199e0315211a4d15c70320483752b8",
+    "portable/whole_program/conversions/m1b73_queue_source.py": "f1bbb2e872f49ee4a85dca4be503cc09c39f1aacd8c5295dfa97c3de1702728d",
+    "portable/tests/whole_program/test_m1b73_queue_source_lexing.py": "e762b64525880947611850126a03695944fbba8a4ae6d1c8359d340184de39ae"
+  },
+  "inputs_unchanged_during_run": true,
+  "compiler": {
+    "path": "C:\\msys64\\mingw64\\bin\\gcc.exe",
+    "sha256": "c5005ba5380351c10743e9ca53ef9632164c54be3bd6b93324795114e4589a7d",
+    "version": "gcc.exe (Rev10, Built by MSYS2 project) 12.2.0",
+    "command": [
+      "C:\\msys64\\mingw64\\bin\\gcc.exe",
+      "-std=c11",
+      "-Wall",
+      "-Wextra",
+      "-Wconversion",
+      "-Werror",
+      "-Wno-error=sign-conversion",
+      "-pedantic",
+      "-D__USE_MINGW_SETJMP_NON_SEH",
+      "-I",
+      "D:\\Prog\\simant_recon\\build\\sdl3-sdk\\SDL3-3.4.16\\x86_64-w64-mingw32\\include",
+      "portable/tests/whole_program/m1b73_queue_operations_probe.c",
+      "portable/whole_program/platform/m1b73_queue_source.c",
+      "portable/whole_program/platform/m1b73_queues.c",
+      "portable/whole_program/platform/m1b73_events.c",
+      "-o",
+      "D:\\Prog\\simant_recon\\build\\workers\\m1b73_queue_operations_v1\\queue_operations.exe"
+    ]
+  },
+  "lexical_rewrite_control": {
+    "exit_code": 0,
+    "stdout": "",
+    "stderr": "",
+    "covers": "identifiers in C code change while comments and string/character literals remain untouched"
+  },
+  "native_build": {
+    "exit_code": 0,
+    "stdout": "",
+    "stderr": ""
+  },
+  "native_run": {
+    "exit_code": 0,
+    "stdout": "",
+    "stderr": "",
+    "exe_sha256": "180497ef61993c66bce8129ff8197813797bcc2325ff330d8655791428669457"
+  },
+  "source_callsite_inventory": {
+    "src/S19/m384C.c": {
+      "four_word": 1,
+      "five_word": 0
+    },
+    "src/S10/m35F5.c": {
+      "four_word": 2,
+      "five_word": 1
+    }
+  },
+  "controls": {
+    "f_1B73_0C42": [
+      "typed native Rect* output receives words +0,+2,+4,+6 on found ID",
+      "not-found returns zero and leaves all output words unchanged"
+    ],
+    "f_1B73_030F": [
+      "five explicit int16_t words map BX,ES,AX,CX,DX into original event fields",
+      "four-word command helper supplies DX=0 only for audited command consumers that do not read Event.v"
+    ]
+  },
+  "four_word_event_v_audit": {
+    "src/S19/m384C.c": "the four-word calls enqueue command codes; o19_384C_0000 dispatches on ev.code, and ProcMenu/o19_384C_0383 read code/message only; no event.v reads in the TU",
+    "src/S10/m35F5.c": "the two four-word calls are command/selection returns; o10_35F5_0384 checks ev.code, with no ev.v reads in this TU",
+    "limit": "source-consumer audit only; not a whole-program reachability proof and not DOS stack-value equivalence"
+  },
+  "limitations": [
+    "Native tests use typed providers and controlled BIOS modifiers/ticks; no original DOS runner was executed.",
+    "The missing fifth stack word at four-word DOS callsites is not recovered; the named native helper sets only the consumer-unobserved Event.v to zero.",
+    "f_1B73_0C42 far-pointer mechanics are replaced by a native Rect* at the source wrapper boundary; DOS segmented pointer behavior is not emulated."
+  ]
+}

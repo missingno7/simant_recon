@@ -23,7 +23,7 @@ generation or compilation rejects the report.
 
 On 2026-10-03, 97 of the 98 historical C/data files syntax-compiled; the remaining
 file is the DOS paragraph/EMS allocator, replaced at its public handle boundary.
-The compiled modules and forty-five native support modules linked into one
+The compiled modules and sixty-five native support modules linked into one
 relocatable object without duplicate definitions. This is **not an executable
 or a whole-program behavioral acceptance**. Unresolved references remain in
 that object, and pointer-bearing DOS layouts still need explicit native
@@ -62,6 +62,12 @@ have no role in this target.
 | Lines | The S00 line walk passes 83 fresh DOS comparisons of ordered pixel writes, including octants, reversed endpoints, ties and all four raster operations. The source tie predicate is `error > floor(major/2)` after x-ordering endpoints. Cursor side effects and other driver slots remain separate work. |
 | File chooser | The genuine ASM wildcard control flow passes 4,437 fresh DOS/native predicate comparisons. A conventional host glob fails the retained negative control. Win32 directory services separately pass native file/attribute/lifecycle tests. |
 | Presentation | The whole-program SDL host supports original 640×350 EGA and 640×480 VGA modes. Real SDL dummy-driver controls exercise switching, frame export and rejected dimensions/strides. The older prototype host remains unchanged. |
+| Compound simulation state | Fourteen two-word point views and ten 64-word history arrays share 24 bounded owners. Actual central map-center and CalcScore bodies pass nonzero controls. Thirteen additional SaveRec-backed tables/triples round-trip 484 bytes through actual generated SaveGame/LoadGame and pass CountAnts controls. The independent grass proposal is retained as a diagnostic; it is not a second live owner. |
+| Audio state | Ten complete original TUs use one native instruction/channel/sample/voice owner. The preword converter retains declarations consumed by the existing scalar-owner passes; its composed compile and original initializer controls pass. This does not certify complete audio playback. |
+| Menus and lists | Kind-6 resource offsets use borrowed native pointer vectors, retaining original S17/S10 control flow and DB payload ownership. List text handles use the live window sidecar at object+0x34, protecting serialized neighboring fields. The original DOS menu trace and native source consumers remain separately identified. |
+| Clipping and bitmaps | Clip stack nodes reserve two native handle cells before their unchanged payload; 48 pushes/pops and 72 bounded copies pass, while the old eight-byte header is rejected. All 11 current clip consumers use the canonical rectangle/pointer view. Source g914C/g9150 callbacks preserve the original 112×112 four-plane image traversal; two-region clipping uses actual generated f_1D8E_07F6. Unsupported raster operations remain explicit. |
+| Platform data and startup | Four source-initialized private DATA scalars are made visible at their original initial values. Original ASM g21A4/g3D20 have typed native owners with source-consumer controls. Six handle cells and three overlapping viewport objects each have one native owner. Selected EGA/VGA startup profiles preserve actual source cursor-resource order, screen bounds and callback binding. The host current-directory service replaces the BIOS physical-floppy distinction in FileSelect. |
+| Native C ABI | Provider headers are included before source wire packing, preventing a packed source TU from changing native driver field offsets. Complete event-code switches preserve unsigned word keys across native integer promotion. Exhaustive word-domain controls and directed DOS comparisons exercise the event conversion; unadapted high-key controls fail. |
 
 ## Integration order
 
@@ -109,11 +115,11 @@ complete save/load acceptance. Reproduce them with
 `python portable/tests/whole_program/run_additive_integrated.py --out build/workers/whole_program/NEW-DIRECTORY`.
 The archived receipt is `tests/whole_program/evidence/additive-central-v2/`.
 
-The current foundation receipt is `tests/whole_program/evidence/whole-program-foundation-v7.json`;
-the earlier v1–v6 receipts remain preserved. Generate a new write-once receipt with
+The current foundation receipt is `tests/whole_program/evidence/whole-program-foundation-v9.json`;
+the earlier v1–v8 receipts remain preserved. Generate a new write-once receipt with
 `python portable/tools/whole_program_receipt.py --out portable/tests/whole_program/evidence/NEW-VERSION.json`.
-The v7 receipt records 97 compiled historical modules, forty-five compiled native providers,
-no duplicate definitions and 376 unresolved references in the relocatable
+The v9 receipt records 97 compiled historical modules, sixty-five compiled native providers,
+no duplicate definitions and 295 unresolved references in the relocatable
 object. Those references include native CRT imports and incomplete game
 providers; they are not a count of missing game functions. The original
 startup/main loop is present, but this object is not yet a runnable complete

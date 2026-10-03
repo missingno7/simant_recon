@@ -15,6 +15,18 @@ from portable.whole_program.conversions import history
 
 
 class MigrationControls(unittest.TestCase):
+    def test_native_headers_outside_source_packing(self):
+        source = ('/* #include "portable/comment.h" */\n'
+                  '#include "portable/whole_program/platform/graphics_source_fields.h"\n'
+                  '#pragma pack(1)\nstruct Wire { int word; };\n'
+                  '#include "native_owners.h"\n')
+        converted, headers = migration.lift_native_headers(source)
+        self.assertEqual(headers, ['portable/whole_program/platform/graphics_source_fields.h',
+                                   'native_owners.h'])
+        self.assertIn('/* #include "portable/comment.h" */', converted)
+        self.assertIn('#pragma pack(1)\nstruct Wire { int word; };', converted)
+        self.assertNotIn('#include "native_owners.h"', converted)
+
     def test_scaffold_signature_is_not_code(self):
         source = """/* SCAFFOLD BEGIN: f(int x) { this is a comment } */
 int far f(int x) { if (x) { return 3; } return 4; }

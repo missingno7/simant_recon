@@ -1,0 +1,822 @@
+{
+  "schema": "whole-audio-shared-state-original-preword-v1",
+  "compiler": "C:\\msys64\\mingw64\\bin\\gcc.exe",
+  "stage_order": [
+    "adapt_audio where registered",
+    "reviewed_overlays",
+    "audio_shared_state_preword",
+    "convert_words"
+  ],
+  "inputs": {
+    "src/root/m0000.c": {
+      "original_sha256": "d9ccffbb69c4fdcae55eef918bf420cff81ead6849f67298271c2844e04199f9",
+      "audio_stage_sha256": "d9ccffbb69c4fdcae55eef918bf420cff81ead6849f67298271c2844e04199f9",
+      "preword_source_sha256": "6e217b50efc1421ce0aeaf8fe71dd08a3b754713ef62e2bba0b8df460ecebf18",
+      "word_source_sha256": "dd7d46171d55e056125a2c413db28d7d62d989cfed5d0349df32b612faa350e7"
+    },
+    "src/root/m277E.c": {
+      "original_sha256": "4e928689c743f473c5a007bbbbb5287cdf8728d12e9cae5652b1cb55debf09ee",
+      "audio_stage_sha256": "60e06e7d8e569642599cc573fbef90e5376ab2597a433f0694aa6b3bc09c5356",
+      "preword_source_sha256": "73e2e20af7740b67dabb7b49a5adb93691f35c60e28e617bfc674ed4f8c5402d",
+      "word_source_sha256": "4aeefcc4946af3a577a91ff672d897b2295d302228648a5aee0ec054c7c5468c"
+    },
+    "src/root/m2815.c": {
+      "original_sha256": "7ab16f1356fd280057eb37d2cff8ec2cfbcd9dfbdf8ace444b7e300f49255a38",
+      "audio_stage_sha256": "7ab16f1356fd280057eb37d2cff8ec2cfbcd9dfbdf8ace444b7e300f49255a38",
+      "preword_source_sha256": "a0ed7e74efce450a5cf30cb01fe12270ee2ce88bc1caddaaa9d1599a9b7508a0",
+      "word_source_sha256": "d94b8607f97a8dedcd1b733f66c066e20f658fe0b64957ee445bc861e8549749"
+    },
+    "src/root/m290D.c": {
+      "original_sha256": "eaec23e8d37bd606616dc44208c7bbcf82ced13e24abe0362ef767c5e4cc4fed",
+      "audio_stage_sha256": "185f7a7006e5f69a8854a806f5721089cad1fff927e6004f5db8bec1cb5728bd",
+      "preword_source_sha256": "95986925b91f45de9158e82b0ebb88f2b3decf8bb73fbec42bd3264aee0ef802",
+      "word_source_sha256": "8bdfde36449b90e3a31deb9d32fd481412659a29536058a8b82067e6581f4a6f"
+    },
+    "src/root/m295C.c": {
+      "original_sha256": "d392b6ce886cfd664a192194b79569bb6a0d4dea8b0bc029ffa9e32ff44add89",
+      "audio_stage_sha256": "d392b6ce886cfd664a192194b79569bb6a0d4dea8b0bc029ffa9e32ff44add89",
+      "preword_source_sha256": "4e735669d0f89857b9c8dd5c13375516b7cfc6a26fa0611d330e964f4f4b5e48",
+      "word_source_sha256": "b5b1705fd563f09dfbfd6728b18c9304cb4bd6fbe8ffe03b5a1f43eed75f1161"
+    },
+    "src/root/m284A.c": {
+      "original_sha256": "bad7d3701a853ba2de166e4f875ba3043f33ca136b7d0dcff41db8e5459f9fa5",
+      "audio_stage_sha256": "7c49f51c308e8375299f3e6e86b85fb24d5f9f6124e28ce36012d03c6f1c9b16",
+      "preword_source_sha256": "e41651eb85275b2ddad51dfb51a032b19522ef9a2329a3c496f8fd7211375aff",
+      "word_source_sha256": "a922898ec74c89ef5cb4e2ff60fee64b5fe3f19f6c3e90f342b7732969c74912"
+    },
+    "src/root/m293A.c": {
+      "original_sha256": "601b4e4e9e8b9d128cc97cca3da7dcf0ad863dbb5c6df587c601530cbe4ec5e6",
+      "audio_stage_sha256": "8b79781fdcd5e9b8a56e6597c18f6cd3b442735f271bf3b8a18bc35283b2cf0d",
+      "preword_source_sha256": "7695afc835b05de555c7b7faeea0b9611a83cc0e2d74c94cd83617415846a3cb",
+      "word_source_sha256": "1d936522e0bb561ed7e3d2514482510525775678f168293d5f147abe3b68ff93"
+    },
+    "src/root/m29D6.c": {
+      "original_sha256": "55476efe4ad6d0cd853cd794f731ff8f33df921577e092fc3e80e9b322b4c388",
+      "audio_stage_sha256": "8f35bc8669b8dc303f51500af079bb11c21cba2680aefc760a5b25631fff9a2c",
+      "preword_source_sha256": "33428f2eb342843742727533a91356e74a671168d44486b93f243e0873e0d875",
+      "word_source_sha256": "f734a23ef6e33bd1e153289a875c8dda7dea915ec678cdc6b5494619660090f2"
+    },
+    "src/root/m29F0.c": {
+      "original_sha256": "2787050f6b809856cde2d2a60fe120357a195041d396bb55caf7dd1b8084e302",
+      "audio_stage_sha256": "2bdfa3aa24fb7f46453788554c96c14250e05ef6a9e02a9627bd42df8d72ca6a",
+      "preword_source_sha256": "f1a87bf4ac6bdc84dedc8b1ad30a3998a24f4e76ed810d0679f4bc4483002f19",
+      "word_source_sha256": "e1a9491befe5741d3c5e7b4ac150dea003288aeb2cba6bb74885a3163e482a69"
+    },
+    "src/data/d55B3_00B8.c": {
+      "original_sha256": "d04646a28691ff05ad93a50c5e7142405ab64932f875f2d2a4d10d04a4566f3d",
+      "audio_stage_sha256": "d04646a28691ff05ad93a50c5e7142405ab64932f875f2d2a4d10d04a4566f3d",
+      "preword_source_sha256": "2392a060ef0e0f9fea6503a5b9ab20f397aeced10dc306dc4e15703b9ca60e09",
+      "word_source_sha256": "9f74c41cc7d8ae5a0f70496d9c87004aab121609fa47117bba8faada57f19da7"
+    }
+  },
+  "modules": [
+    {
+      "path": "src/root/m0000.c",
+      "audio_adapter": null,
+      "reviewed_overlays": [],
+      "shared_state_adapter": {
+        "status": "SOURCE_SHARED_AUDIO_STATE",
+        "original_sha256": "d9ccffbb69c4fdcae55eef918bf420cff81ead6849f67298271c2844e04199f9",
+        "transformed_input_sha256": "d9ccffbb69c4fdcae55eef918bf420cff81ead6849f67298271c2844e04199f9",
+        "output_sha256": "6e217b50efc1421ce0aeaf8fe71dd08a3b754713ef62e2bba0b8df460ecebf18",
+        "owner_header": "portable/whole_program/platform/audio_state.h",
+        "state_ownership": {
+          "pointer_tables_records": "portable/whole_program/platform/audio_state.c",
+          "existing_scalar_aliases": "generated source_state_owners.c (V2/V3); no second definitions introduced"
+        },
+        "centralized_externs_removed": {
+          "fd_50F6_0150": 1,
+          "fd_50F6_0000": 1,
+          "fd_50F6_01F0": 1
+        },
+        "lexical_contract": "Only code tokens and exact complete struct blocks changed; comments and literals are protected by offset-preserving lexer."
+      },
+      "word_conversion": {
+        "uint8_t": 1,
+        "int8_t": 0,
+        "uint32_t": 0,
+        "int32_t": 4,
+        "uint16_t": 0,
+        "int16_t": 27,
+        "qualifier_removed": 57,
+        "main_renamed": 0,
+        "errno_namespaced": 0,
+        "malloc_namespaced": 0,
+        "free_namespaced": 0,
+        "_ffree_namespaced": 0,
+        "_frealloc_namespaced": 0,
+        "open_namespaced": 0,
+        "read_namespaced": 0,
+        "write_namespaced": 0,
+        "lseek_namespaced": 0,
+        "close_namespaced": 0,
+        "access_namespaced": 0,
+        "chdir_namespaced": 0,
+        "getcwd_namespaced": 0,
+        "remove_namespaced": 0,
+        "stricmp_namespaced": 0,
+        "fopen_namespaced": 0,
+        "fread_namespaced": 0,
+        "fclose_namespaced": 0,
+        "FILE_namespaced": 0,
+        "bare_unsigned": 8
+      },
+      "strict_compile": "PASS"
+    },
+    {
+      "path": "src/root/m277E.c",
+      "audio_adapter": {
+        "schema": "whole-program-audio-conversion-v1",
+        "source": {
+          "path": "src/root/m277E.c",
+          "sha256": "4e928689c743f473c5a007bbbbb5287cdf8728d12e9cae5652b1cb55debf09ee"
+        },
+        "dependency_pins": [
+          {
+            "path": "src/data/d55B3_00B8.c",
+            "sha256": "d04646a28691ff05ad93a50c5e7142405ab64932f875f2d2a4d10d04a4566f3d",
+            "role": "struct Instr declares void *p and the referenced 56-entry voice tables use that native pointer member"
+          }
+        ],
+        "output_sha256": "60e06e7d8e569642599cc573fbef90e5376ab2597a433f0694aa6b3bc09c5356",
+        "change": {
+          "field": "Voice.b",
+          "source_basis": "DATA fd_55B3_0C42 and sibling tables are arrays of {int kind, void *p}; m277E copies the second member verbatim in f_277E_010A and does not perform arithmetic on it",
+          "native_representation": "void * in both the source table projection and copied runtime table; target int remains a 16-bit word after standard whole-program lowering",
+          "source_behavior_changed": false,
+          "hardware_services": [
+            "dos_audio_host_bios_int1a_8100",
+            "dos_audio_host_read_far_u8",
+            "dos_audio_host_read_far_u16",
+            "dos_audio_host_in8",
+            "dos_audio_host_out8"
+          ],
+          "host_services_unprovided": true
+        }
+      },
+      "reviewed_overlays": [],
+      "shared_state_adapter": {
+        "status": "SOURCE_SHARED_AUDIO_STATE",
+        "original_sha256": "4e928689c743f473c5a007bbbbb5287cdf8728d12e9cae5652b1cb55debf09ee",
+        "transformed_input_sha256": "60e06e7d8e569642599cc573fbef90e5376ab2597a433f0694aa6b3bc09c5356",
+        "output_sha256": "73e2e20af7740b67dabb7b49a5adb93691f35c60e28e617bfc674ed4f8c5402d",
+        "owner_header": "portable/whole_program/platform/audio_state.h",
+        "state_ownership": {
+          "pointer_tables_records": "portable/whole_program/platform/audio_state.c",
+          "existing_scalar_aliases": "generated source_state_owners.c (V2/V3); no second definitions introduced"
+        },
+        "centralized_externs_removed": {
+          "fd_55B3_74DA": 1,
+          "fd_50F6_4A48": 1,
+          "fd_50F6_4A4C": 1,
+          "fd_50F6_01F0": 1,
+          "fd_50F6_4A4E": 1,
+          "fd_50F6_0000": 1,
+          "fd_50F6_4A4A": 1,
+          "fd_50F6_4B14": 1,
+          "fd_55B3_6B4A": 1,
+          "fd_55B3_74AD": 1,
+          "fd_55B3_6B9C": 1,
+          "fd_55B3_74C0": 1,
+          "fd_55B3_74B9": 1,
+          "fd_55B3_74B3": 1,
+          "fd_55B3_74AF": 1,
+          "fd_50F6_4B16": 1,
+          "fd_55B3_7564": 1,
+          "fd_55B3_6BA0": 1,
+          "fd_55B3_74B5": 1,
+          "fd_50F6_4A46": 1,
+          "fd_55B3_74B7": 1,
+          "fd_55B3_74B1": 1
+        },
+        "lexical_contract": "Only code tokens and exact complete struct blocks changed; comments and literals are protected by offset-preserving lexer."
+      },
+      "word_conversion": {
+        "uint8_t": 1,
+        "int8_t": 0,
+        "uint32_t": 0,
+        "int32_t": 0,
+        "uint16_t": 0,
+        "int16_t": 56,
+        "qualifier_removed": 71,
+        "main_renamed": 0,
+        "errno_namespaced": 0,
+        "malloc_namespaced": 0,
+        "free_namespaced": 0,
+        "_ffree_namespaced": 0,
+        "_frealloc_namespaced": 0,
+        "open_namespaced": 0,
+        "read_namespaced": 0,
+        "write_namespaced": 0,
+        "lseek_namespaced": 0,
+        "close_namespaced": 0,
+        "access_namespaced": 0,
+        "chdir_namespaced": 0,
+        "getcwd_namespaced": 0,
+        "remove_namespaced": 0,
+        "stricmp_namespaced": 0,
+        "fopen_namespaced": 0,
+        "fread_namespaced": 0,
+        "fclose_namespaced": 0,
+        "FILE_namespaced": 0,
+        "bare_unsigned": 1
+      },
+      "strict_compile": "PASS"
+    },
+    {
+      "path": "src/root/m2815.c",
+      "audio_adapter": null,
+      "reviewed_overlays": [
+        {
+          "function": "f_2815_0165",
+          "proof_category": "BEHAVIOR_EXACT",
+          "path": "evidence/behavior/functions/f_2815_0165/module.c",
+          "sha256": "8b6ca1b25908a00cdd6fea2212943f7345680945d25e1a59e0f1fb69352958bc",
+          "different_from_canonical_tokens": false
+        }
+      ],
+      "shared_state_adapter": {
+        "status": "SOURCE_SHARED_AUDIO_STATE",
+        "original_sha256": "7ab16f1356fd280057eb37d2cff8ec2cfbcd9dfbdf8ace444b7e300f49255a38",
+        "transformed_input_sha256": "7ab16f1356fd280057eb37d2cff8ec2cfbcd9dfbdf8ace444b7e300f49255a38",
+        "output_sha256": "a0ed7e74efce450a5cf30cb01fe12270ee2ce88bc1caddaaa9d1599a9b7508a0",
+        "owner_header": "portable/whole_program/platform/audio_state.h",
+        "state_ownership": {
+          "pointer_tables_records": "portable/whole_program/platform/audio_state.c",
+          "existing_scalar_aliases": "generated source_state_owners.c (V2/V3); no second definitions introduced"
+        },
+        "centralized_externs_removed": {
+          "fd_50F6_0000": 1,
+          "fd_50F6_4B16": 1,
+          "fd_55B3_6BA4": 1
+        },
+        "lexical_contract": "Only code tokens and exact complete struct blocks changed; comments and literals are protected by offset-preserving lexer."
+      },
+      "word_conversion": {
+        "uint8_t": 2,
+        "int8_t": 0,
+        "uint32_t": 0,
+        "int32_t": 0,
+        "uint16_t": 0,
+        "int16_t": 13,
+        "qualifier_removed": 10,
+        "main_renamed": 0,
+        "errno_namespaced": 0,
+        "malloc_namespaced": 0,
+        "free_namespaced": 0,
+        "_ffree_namespaced": 0,
+        "_frealloc_namespaced": 0,
+        "open_namespaced": 0,
+        "read_namespaced": 0,
+        "write_namespaced": 0,
+        "lseek_namespaced": 0,
+        "close_namespaced": 0,
+        "access_namespaced": 0,
+        "chdir_namespaced": 0,
+        "getcwd_namespaced": 0,
+        "remove_namespaced": 0,
+        "stricmp_namespaced": 0,
+        "fopen_namespaced": 0,
+        "fread_namespaced": 0,
+        "fclose_namespaced": 0,
+        "FILE_namespaced": 0,
+        "bare_unsigned": 1
+      },
+      "strict_compile": "PASS"
+    },
+    {
+      "path": "src/root/m290D.c",
+      "audio_adapter": {
+        "schema": "whole-program-audio-conversion-v1",
+        "source": {
+          "path": "src/root/m290D.c",
+          "sha256": "eaec23e8d37bd606616dc44208c7bbcf82ced13e24abe0362ef767c5e4cc4fed"
+        },
+        "dependency_pins": [
+          {
+            "path": "src/root/m0000.c",
+            "sha256": "d9ccffbb69c4fdcae55eef918bf420cff81ead6849f67298271c2844e04199f9",
+            "role": "f_0000_0090 stores the kind-5 decoded sample Handle in Sample.data; the native sample event dereferences that handle exactly once to borrow decoded PCM before copying it"
+          },
+          {
+            "path": "src/data/d55B3_00B8.c",
+            "sha256": "d04646a28691ff05ad93a50c5e7142405ab64932f875f2d2a4d10d04a4566f3d",
+            "role": "fd_55B3_0C42 and mode-specific sibling tables bind type-1 instrument entries to source Sample records consumed by f_290D_0193"
+          }
+        ],
+        "output_sha256": "185f7a7006e5f69a8854a806f5721089cad1fff927e6004f5db8bec1cb5728bd",
+        "change": {
+          "transformed_source_boundaries": [
+            "f_290D_0098 successful decoded-sample/channel commit",
+            "f_290D_026C channel stop/owner clear"
+          ],
+          "event_order": "The synchronous whole-program sequencer and source voice allocator call these original source functions in order; the event queue assigns one increasing sequence across starts and stops.",
+          "sample_view": "f_0000_0090 stores a decoded kind-5 Handle in Sample.data. The callback dereferences that Handle once while its resource remains owned, and the queue copies exactly the low-16-bit Sample.len bytes before returning.",
+          "source_parameters": "channel, decoded bytes, Sample.len, Sample.loop, computed 8.8 step, computed volume-table row, and looped flag are passed unchanged at the start commit; stop identifies the source channel.",
+          "unbound_policy": "source event queue not bound, exhausted, or given invalid source sample state calls the explicit audio event fault; no silent success is reported",
+          "leaves_unprovided": [
+            "MIDI/OPL event backends for type-2 and other non-DAC channel families"
+          ]
+        }
+      },
+      "reviewed_overlays": [],
+      "shared_state_adapter": {
+        "status": "SOURCE_SHARED_AUDIO_STATE",
+        "original_sha256": "eaec23e8d37bd606616dc44208c7bbcf82ced13e24abe0362ef767c5e4cc4fed",
+        "transformed_input_sha256": "185f7a7006e5f69a8854a806f5721089cad1fff927e6004f5db8bec1cb5728bd",
+        "output_sha256": "95986925b91f45de9158e82b0ebb88f2b3decf8bb73fbec42bd3264aee0ef802",
+        "owner_header": "portable/whole_program/platform/audio_state.h",
+        "state_ownership": {
+          "pointer_tables_records": "portable/whole_program/platform/audio_state.c",
+          "existing_scalar_aliases": "generated source_state_owners.c (V2/V3); no second definitions introduced"
+        },
+        "centralized_externs_removed": {
+          "fd_55B3_6B4C": 1,
+          "fd_50F6_0000": 1
+        },
+        "lexical_contract": "Only code tokens and exact complete struct blocks changed; comments and literals are protected by offset-preserving lexer."
+      },
+      "word_conversion": {
+        "uint8_t": 3,
+        "int8_t": 0,
+        "uint32_t": 0,
+        "int32_t": 0,
+        "uint16_t": 0,
+        "int16_t": 19,
+        "qualifier_removed": 29,
+        "main_renamed": 0,
+        "errno_namespaced": 0,
+        "malloc_namespaced": 0,
+        "free_namespaced": 0,
+        "_ffree_namespaced": 0,
+        "_frealloc_namespaced": 0,
+        "open_namespaced": 0,
+        "read_namespaced": 0,
+        "write_namespaced": 0,
+        "lseek_namespaced": 0,
+        "close_namespaced": 0,
+        "access_namespaced": 0,
+        "chdir_namespaced": 0,
+        "getcwd_namespaced": 0,
+        "remove_namespaced": 0,
+        "stricmp_namespaced": 0,
+        "fopen_namespaced": 0,
+        "fread_namespaced": 0,
+        "fclose_namespaced": 0,
+        "FILE_namespaced": 0,
+        "bare_unsigned": 12
+      },
+      "strict_compile": "PASS"
+    },
+    {
+      "path": "src/root/m295C.c",
+      "audio_adapter": null,
+      "reviewed_overlays": [],
+      "shared_state_adapter": {
+        "status": "SOURCE_SHARED_AUDIO_STATE",
+        "original_sha256": "d392b6ce886cfd664a192194b79569bb6a0d4dea8b0bc029ffa9e32ff44add89",
+        "transformed_input_sha256": "d392b6ce886cfd664a192194b79569bb6a0d4dea8b0bc029ffa9e32ff44add89",
+        "output_sha256": "4e735669d0f89857b9c8dd5c13375516b7cfc6a26fa0611d330e964f4f4b5e48",
+        "owner_header": "portable/whole_program/platform/audio_state.h",
+        "state_ownership": {
+          "pointer_tables_records": "portable/whole_program/platform/audio_state.c",
+          "existing_scalar_aliases": "generated source_state_owners.c (V2/V3); no second definitions introduced"
+        },
+        "centralized_externs_removed": {
+          "fd_50F6_4A4E": 1,
+          "fd_55B3_6B4E": 1,
+          "fd_50F6_0000": 1
+        },
+        "lexical_contract": "Only code tokens and exact complete struct blocks changed; comments and literals are protected by offset-preserving lexer."
+      },
+      "word_conversion": {
+        "uint8_t": 1,
+        "int8_t": 0,
+        "uint32_t": 0,
+        "int32_t": 0,
+        "uint16_t": 0,
+        "int16_t": 71,
+        "qualifier_removed": 48,
+        "main_renamed": 0,
+        "errno_namespaced": 0,
+        "malloc_namespaced": 0,
+        "free_namespaced": 0,
+        "_ffree_namespaced": 0,
+        "_frealloc_namespaced": 0,
+        "open_namespaced": 0,
+        "read_namespaced": 0,
+        "write_namespaced": 0,
+        "lseek_namespaced": 0,
+        "close_namespaced": 0,
+        "access_namespaced": 0,
+        "chdir_namespaced": 0,
+        "getcwd_namespaced": 0,
+        "remove_namespaced": 0,
+        "stricmp_namespaced": 0,
+        "fopen_namespaced": 0,
+        "fread_namespaced": 0,
+        "fclose_namespaced": 0,
+        "FILE_namespaced": 0,
+        "bare_unsigned": 2
+      },
+      "strict_compile": "PASS"
+    },
+    {
+      "path": "src/root/m284A.c",
+      "audio_adapter": {
+        "schema": "whole-program-audio-conversion-v1",
+        "source": {
+          "path": "src/root/m284A.c",
+          "sha256": "bad7d3701a853ba2de166e4f875ba3043f33ca136b7d0dcff41db8e5459f9fa5"
+        },
+        "dependency_pins": [
+          {
+            "path": "src/root/m0000.c",
+            "sha256": "d9ccffbb69c4fdcae55eef918bf420cff81ead6849f67298271c2844e04199f9",
+            "role": "f_0000_0193 obtains the song resource, locks its handle, and stores the handle in Song.data before m284A reads it"
+          },
+          {
+            "path": "src/root/m171C.c",
+            "sha256": "31bd9caa243220db2bd1ba940ac8fae7f5d189b2ec95f1662918e9ca2160b10e",
+            "role": "f_171C_1C1C returns the handle size as long; m284A's own int declaration/store retain the low 16-bit source-visible bound"
+          }
+        ],
+        "output_sha256": "7c49f51c308e8375299f3e6e86b85fb24d5f9f6124e28ce36012d03c6f1c9b16",
+        "change": {
+          "transformed_accesses": 6,
+          "handle_base": "g_8DFC is the native pointer stored in *fd_50F6_4B28 after f_0000_0193 locks the handle",
+          "record_bound": "f_171C_1C1C returns long in m171C, but m284A declares the call as int and stores it in int fd_50F6_4B2C; the source-visible bound is therefore the returned low 16 bits. The host span uses that same uint16_t size and checks each source offset at width 1.",
+          "invalid_offset_boundary": "dos_audio_host_song_bounds_fault is called instead of dereferencing outside the recorded song allocation",
+          "leaves_unprovided": [
+            "dos_audio_host_song_bounds_fault"
+          ]
+        }
+      },
+      "reviewed_overlays": [
+        {
+          "function": "f_284A_0138",
+          "proof_category": "BEHAVIOR_EXACT",
+          "path": "evidence/behavior/functions/f_284A_0138/module.c",
+          "sha256": "5d328bf943dd3b1dd8dd797ba7d63885777facf9ea5c194b6b222244bd937a35",
+          "different_from_canonical_tokens": false
+        }
+      ],
+      "shared_state_adapter": {
+        "status": "SOURCE_SHARED_AUDIO_DECLARATIONS",
+        "original_sha256": "bad7d3701a853ba2de166e4f875ba3043f33ca136b7d0dcff41db8e5459f9fa5",
+        "transformed_input_sha256": "7c49f51c308e8375299f3e6e86b85fb24d5f9f6124e28ce36012d03c6f1c9b16",
+        "output_sha256": "e41651eb85275b2ddad51dfb51a032b19522ef9a2329a3c496f8fd7211375aff",
+        "owner_header": "portable/whole_program/platform/audio_state.h",
+        "state_ownership": {
+          "pointer_tables_records": "portable/whole_program/platform/audio_state.c",
+          "existing_scalar_aliases": "generated source_state_owners.c (V2/V3); no second definitions introduced"
+        },
+        "centralized_externs_removed": {
+          "fd_50F6_4B28": 1,
+          "fd_50F6_4B2C": 1,
+          "fd_55B3_6B42": 1,
+          "fd_50F6_4B8E": 1,
+          "fd_50F6_4BAA": 1,
+          "fd_50F6_4B2E": 1,
+          "fd_50F6_4B42": 1,
+          "fd_50F6_4B30": 1,
+          "fd_50F6_4B8A": 1
+        },
+        "lexical_contract": "Only code tokens and exact complete struct blocks changed; comments and literals are protected by offset-preserving lexer."
+      },
+      "word_conversion": {
+        "uint8_t": 6,
+        "int8_t": 0,
+        "uint32_t": 0,
+        "int32_t": 14,
+        "uint16_t": 0,
+        "int16_t": 50,
+        "qualifier_removed": 44,
+        "main_renamed": 0,
+        "errno_namespaced": 0,
+        "malloc_namespaced": 0,
+        "free_namespaced": 0,
+        "_ffree_namespaced": 0,
+        "_frealloc_namespaced": 0,
+        "open_namespaced": 0,
+        "read_namespaced": 0,
+        "write_namespaced": 0,
+        "lseek_namespaced": 0,
+        "close_namespaced": 0,
+        "access_namespaced": 0,
+        "chdir_namespaced": 0,
+        "getcwd_namespaced": 0,
+        "remove_namespaced": 0,
+        "stricmp_namespaced": 0,
+        "fopen_namespaced": 0,
+        "fread_namespaced": 0,
+        "fclose_namespaced": 0,
+        "FILE_namespaced": 0,
+        "bare_unsigned": 6
+      },
+      "strict_compile": "PASS"
+    },
+    {
+      "path": "src/root/m293A.c",
+      "audio_adapter": {
+        "schema": "whole-program-audio-conversion-v1",
+        "source": {
+          "path": "src/root/m293A.c",
+          "sha256": "601b4e4e9e8b9d128cc97cca3da7dcf0ad863dbb5c6df587c601530cbe4ec5e6"
+        },
+        "dependency_pins": [],
+        "output_sha256": "8b79781fdcd5e9b8a56e6597c18f6cd3b442735f271bf3b8a18bc35283b2cf0d",
+        "change": {
+          "transformed_assembly": [
+            "f_293A_002D INT 1A BIOS base and far signature read",
+            "f_293A_0059 INT 15 descriptor plus CMOS register 2F read"
+          ],
+          "result_policy": "device predicates are returned only from the original BIOS/signature/CMOS host service results; no provider means unresolved service, never assumed success",
+          "host_services_unprovided": [
+            "dos_audio_host_bios_int1a_8100",
+            "dos_audio_host_bios_int15_c000",
+            "dos_audio_host_read_far_u8",
+            "dos_audio_host_read_far_u16",
+            "dos_audio_host_interrupt_disable",
+            "dos_audio_host_interrupt_enable",
+            "dos_audio_host_out8",
+            "dos_audio_host_in8"
+          ]
+        }
+      },
+      "reviewed_overlays": [],
+      "shared_state_adapter": {
+        "status": "SOURCE_SHARED_AUDIO_DECLARATIONS",
+        "original_sha256": "601b4e4e9e8b9d128cc97cca3da7dcf0ad863dbb5c6df587c601530cbe4ec5e6",
+        "transformed_input_sha256": "8b79781fdcd5e9b8a56e6597c18f6cd3b442735f271bf3b8a18bc35283b2cf0d",
+        "output_sha256": "7695afc835b05de555c7b7faeea0b9611a83cc0e2d74c94cd83617415846a3cb",
+        "owner_header": "portable/whole_program/platform/audio_state.h",
+        "state_ownership": {
+          "pointer_tables_records": "portable/whole_program/platform/audio_state.c",
+          "existing_scalar_aliases": "generated source_state_owners.c (V2/V3); no second definitions introduced"
+        },
+        "centralized_externs_removed": {
+          "fd_50F6_01F0": 1,
+          "fd_50F6_4B14": 1
+        },
+        "lexical_contract": "Only code tokens and exact complete struct blocks changed; comments and literals are protected by offset-preserving lexer."
+      },
+      "word_conversion": {
+        "uint8_t": 1,
+        "int8_t": 0,
+        "uint32_t": 0,
+        "int32_t": 0,
+        "uint16_t": 0,
+        "int16_t": 32,
+        "qualifier_removed": 25,
+        "main_renamed": 0,
+        "errno_namespaced": 0,
+        "malloc_namespaced": 0,
+        "free_namespaced": 0,
+        "_ffree_namespaced": 0,
+        "_frealloc_namespaced": 0,
+        "open_namespaced": 0,
+        "read_namespaced": 0,
+        "write_namespaced": 0,
+        "lseek_namespaced": 0,
+        "close_namespaced": 0,
+        "access_namespaced": 0,
+        "chdir_namespaced": 0,
+        "getcwd_namespaced": 0,
+        "remove_namespaced": 0,
+        "stricmp_namespaced": 0,
+        "fopen_namespaced": 0,
+        "fread_namespaced": 0,
+        "fclose_namespaced": 0,
+        "FILE_namespaced": 0,
+        "bare_unsigned": 3
+      },
+      "strict_compile": "PASS"
+    },
+    {
+      "path": "src/root/m29D6.c",
+      "audio_adapter": {
+        "schema": "whole-program-audio-conversion-v1",
+        "source": {
+          "path": "src/root/m29D6.c",
+          "sha256": "55476efe4ad6d0cd853cd794f731ff8f33df921577e092fc3e80e9b322b4c388"
+        },
+        "dependency_pins": [],
+        "output_sha256": "4499f5946e2277bd18d064b5c9a76d35eecd0649cd22117a3685f3adeae02221",
+        "change": {
+          "transformed_assembly": [
+            "f_29D6_000A channel << 5",
+            "f_29D6_00D9 16-bit and 8-bit register outputs"
+          ],
+          "frequency_output": "f_29D6_00D9 preserves the original masked high-frequency byte, channel/register low byte, output word, then output byte order",
+          "host_services_unprovided": [
+            "dos_audio_host_out16",
+            "dos_audio_host_out8"
+          ]
+        }
+      },
+      "reviewed_overlays": [
+        {
+          "function": "f_29D6_000A",
+          "proof_category": "BEHAVIOR_EXACT",
+          "path": "evidence/behavior/functions/f_29D6_000A/module.c",
+          "sha256": "43b2d29dea982299edc3d3b173f9cb70bc88b76c1b9bc268c02a9a52c6a21626",
+          "different_from_canonical_tokens": true
+        }
+      ],
+      "shared_state_adapter": {
+        "status": "SOURCE_SHARED_AUDIO_DECLARATIONS",
+        "original_sha256": "55476efe4ad6d0cd853cd794f731ff8f33df921577e092fc3e80e9b322b4c388",
+        "transformed_input_sha256": "8f35bc8669b8dc303f51500af079bb11c21cba2680aefc760a5b25631fff9a2c",
+        "output_sha256": "33428f2eb342843742727533a91356e74a671168d44486b93f243e0873e0d875",
+        "owner_header": "portable/whole_program/platform/audio_state.h",
+        "state_ownership": {
+          "pointer_tables_records": "portable/whole_program/platform/audio_state.c",
+          "existing_scalar_aliases": "generated source_state_owners.c (V2/V3); no second definitions introduced"
+        },
+        "centralized_externs_removed": {
+          "fd_50F6_4B14": 1
+        },
+        "lexical_contract": "Only code tokens and exact complete struct blocks changed; comments and literals are protected by offset-preserving lexer."
+      },
+      "word_conversion": {
+        "uint8_t": 0,
+        "int8_t": 0,
+        "uint32_t": 0,
+        "int32_t": 0,
+        "uint16_t": 0,
+        "int16_t": 26,
+        "qualifier_removed": 8,
+        "main_renamed": 0,
+        "errno_namespaced": 0,
+        "malloc_namespaced": 0,
+        "free_namespaced": 0,
+        "_ffree_namespaced": 0,
+        "_frealloc_namespaced": 0,
+        "open_namespaced": 0,
+        "read_namespaced": 0,
+        "write_namespaced": 0,
+        "lseek_namespaced": 0,
+        "close_namespaced": 0,
+        "access_namespaced": 0,
+        "chdir_namespaced": 0,
+        "getcwd_namespaced": 0,
+        "remove_namespaced": 0,
+        "stricmp_namespaced": 0,
+        "fopen_namespaced": 0,
+        "fread_namespaced": 0,
+        "fclose_namespaced": 0,
+        "FILE_namespaced": 0,
+        "bare_unsigned": 2
+      },
+      "strict_compile": "PASS"
+    },
+    {
+      "path": "src/root/m29F0.c",
+      "audio_adapter": {
+        "schema": "whole-program-audio-conversion-v1",
+        "source": {
+          "path": "src/root/m29F0.c",
+          "sha256": "2787050f6b809856cde2d2a60fe120357a195041d396bb55caf7dd1b8084e302"
+        },
+        "dependency_pins": [],
+        "output_sha256": "2bdfa3aa24fb7f46453788554c96c14250e05ef6a9e02a9627bd42df8d72ca6a",
+        "change": {
+          "transformed_functions": [
+            "f_29F0_000A",
+            "f_29F0_0012",
+            "f_29F0_001A",
+            "f_29F0_0022",
+            "f_29F0_002A",
+            "f_29F0_0038"
+          ],
+          "source_operations": {
+            "cli": "dos_audio_host_interrupt_disable()",
+            "sti": "dos_audio_host_interrupt_enable()",
+            "out": "DX receives the low word of port; AL receives the low byte of value; host call uses uint16_t/uint8_t",
+            "in": "DX receives the low word of port; returned AL byte is provided by dos_audio_host_in8"
+          },
+          "leaves_unprovided": [
+            "dos_audio_host_interrupt_disable",
+            "dos_audio_host_interrupt_enable",
+            "dos_audio_host_out8",
+            "dos_audio_host_in8"
+          ]
+        }
+      },
+      "reviewed_overlays": [],
+      "shared_state_adapter": {
+        "status": "SOURCE_SHARED_AUDIO_DECLARATIONS",
+        "original_sha256": "2787050f6b809856cde2d2a60fe120357a195041d396bb55caf7dd1b8084e302",
+        "transformed_input_sha256": "2bdfa3aa24fb7f46453788554c96c14250e05ef6a9e02a9627bd42df8d72ca6a",
+        "output_sha256": "f1a87bf4ac6bdc84dedc8b1ad30a3998a24f4e76ed810d0679f4bc4483002f19",
+        "owner_header": "portable/whole_program/platform/audio_state.h",
+        "state_ownership": {
+          "pointer_tables_records": "portable/whole_program/platform/audio_state.c",
+          "existing_scalar_aliases": "generated source_state_owners.c (V2/V3); no second definitions introduced"
+        },
+        "centralized_externs_removed": {},
+        "lexical_contract": "Only code tokens and exact complete struct blocks changed; comments and literals are protected by offset-preserving lexer."
+      },
+      "word_conversion": {
+        "uint8_t": 1,
+        "int8_t": 0,
+        "uint32_t": 0,
+        "int32_t": 0,
+        "uint16_t": 0,
+        "int16_t": 3,
+        "qualifier_removed": 6,
+        "main_renamed": 0,
+        "errno_namespaced": 0,
+        "malloc_namespaced": 0,
+        "free_namespaced": 0,
+        "_ffree_namespaced": 0,
+        "_frealloc_namespaced": 0,
+        "open_namespaced": 0,
+        "read_namespaced": 0,
+        "write_namespaced": 0,
+        "lseek_namespaced": 0,
+        "close_namespaced": 0,
+        "access_namespaced": 0,
+        "chdir_namespaced": 0,
+        "getcwd_namespaced": 0,
+        "remove_namespaced": 0,
+        "stricmp_namespaced": 0,
+        "fopen_namespaced": 0,
+        "fread_namespaced": 0,
+        "fclose_namespaced": 0,
+        "FILE_namespaced": 0,
+        "bare_unsigned": 0
+      },
+      "strict_compile": "PASS"
+    },
+    {
+      "path": "src/data/d55B3_00B8.c",
+      "audio_adapter": null,
+      "reviewed_overlays": [],
+      "shared_state_adapter": {
+        "status": "SOURCE_SHARED_AUDIO_STATE",
+        "original_sha256": "d04646a28691ff05ad93a50c5e7142405ab64932f875f2d2a4d10d04a4566f3d",
+        "transformed_input_sha256": "d04646a28691ff05ad93a50c5e7142405ab64932f875f2d2a4d10d04a4566f3d",
+        "output_sha256": "2392a060ef0e0f9fea6503a5b9ab20f397aeced10dc306dc4e15703b9ca60e09",
+        "owner_header": "portable/whole_program/platform/audio_state.h",
+        "state_ownership": {
+          "pointer_tables_records": "portable/whole_program/platform/audio_state.c",
+          "existing_scalar_aliases": "generated source_state_owners.c (V2/V3); no second definitions introduced"
+        },
+        "centralized_externs_removed": {},
+        "lexical_contract": "Only code tokens and exact complete struct blocks changed; comments and literals are protected by offset-preserving lexer."
+      },
+      "word_conversion": {
+        "uint8_t": 1,
+        "int8_t": 0,
+        "uint32_t": 0,
+        "int32_t": 0,
+        "uint16_t": 0,
+        "int16_t": 7,
+        "qualifier_removed": 2,
+        "main_renamed": 0,
+        "errno_namespaced": 0,
+        "malloc_namespaced": 0,
+        "free_namespaced": 0,
+        "_ffree_namespaced": 0,
+        "_frealloc_namespaced": 0,
+        "open_namespaced": 0,
+        "read_namespaced": 0,
+        "write_namespaced": 0,
+        "lseek_namespaced": 0,
+        "close_namespaced": 0,
+        "access_namespaced": 0,
+        "chdir_namespaced": 0,
+        "getcwd_namespaced": 0,
+        "remove_namespaced": 0,
+        "stricmp_namespaced": 0,
+        "fopen_namespaced": 0,
+        "fread_namespaced": 0,
+        "fclose_namespaced": 0,
+        "FILE_namespaced": 0,
+        "bare_unsigned": 0
+      },
+      "strict_compile": "PASS"
+    }
+  ],
+  "linked_source_flow": {
+    "source": "src/root/m277E.c:f_277E_017D -> f_277E_010A",
+    "table": "src/data/d55B3_00B8.c:fd_55B3_0C42[56]",
+    "owners": [
+      "generated/source_state_owners.c",
+      "portable/whole_program/platform/audio_state.c"
+    ],
+    "executed": "PASS source f_277E_017D initialized canonical mode/channel state and copied all 56 DATA rows",
+    "scope": "Mode-1 initializer source slice, not device detection or other hardware profiles.",
+    "source_slice_sha256": "fe47ce4e22586a34b0ab388b29e762eaf4d47df12c88b7ab1dd4350dc351221d"
+  },
+  "controls": {
+    "lexical_comment_and_string_preservation": "PASS",
+    "mutated_original_hash_rejected": "PASS"
+  },
+  "adapter_sha256": "765b1cb04a7b246f3538cb2f9fad12642dd61d7f7b1c7d2175354988afec9cb1",
+  "behavior_overlay_catalog_sha256": "e29f4fb8aa736c7adca105f846a6928954d95d6fa7b57d45dfcdfd8646d34c81",
+  "owner_header_sha256": "abe0d4b02944ebd1ed9c9b790c207d13287a9e224916cec308a343ffff4a9eb0",
+  "owner_implementation_sha256": "4645363028ec9ac385e42ced5ab8684ed97c5429dc2848881d719501a0a3c193"
+}

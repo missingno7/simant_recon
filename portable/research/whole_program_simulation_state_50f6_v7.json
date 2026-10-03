@@ -1,0 +1,877 @@
+{
+  "schema": "simant-whole-program-simulation-state-plan-v7",
+  "claim": "DIAGNOSTIC_ONLY: proposed shared owners for source-declared/save-record-backed simulation arrays and typed triples; no production selection.",
+  "scope": {
+    "target_count": 13,
+    "excluded_existing_owners": {
+      "fd_50F6_037C": "already-owned V3 100-byte ring array",
+      "fd_50F6_0404": "already-owned V3 100-byte ring array",
+      "fd_50F6_0508": "V6 point owner",
+      "fd_50F6_0596": "V6 point owner",
+      "fd_50F6_06A6": "V6 point owner",
+      "fd_50F6_072E": "V6 point owner",
+      "fd_50F6_07BC": "V6 point owner",
+      "fd_50F6_07CA": "V6 point owner",
+      "fd_50F6_0516": "V6 history owner",
+      "fd_50F6_05A0": "V6 history owner",
+      "fd_50F6_0626": "V6 history owner",
+      "fd_50F6_06AE": "V6 history owner",
+      "fd_50F6_073C": "V6 history owner",
+      "fd_50F6_07CE": "V6 history owner",
+      "fd_50F6_0856": "V6 history owner",
+      "fd_50F6_08F0": "V6 history owner",
+      "fd_50F6_0970": "V6 history owner",
+      "fd_50F6_0A0A": "V6 history owner",
+      "PillarMap": "V5 owner",
+      "SowX": "V5 owner",
+      "SowY": "V5 owner",
+      "SowDir": "V5 owner",
+      "SowSave": "V5 owner",
+      "MapA": "existing data owner",
+      "MapB": "existing data owner",
+      "MapR": "existing data owner",
+      "ExitMapB": "existing data owner",
+      "ExitMapR": "existing data owner",
+      "PherMapA": "existing data owner",
+      "PherMapBN": "existing data owner",
+      "PherMapBT": "existing data owner",
+      "PherMapRN": "existing data owner",
+      "PherMapRT": "existing data owner"
+    },
+    "data_audio_ui_out_of_scope": true
+  },
+  "targets": [
+    {
+      "symbol": "fd_50F6_0F46",
+      "address": "50F6:0F46",
+      "kind": "byte-table-signed-view",
+      "count": 50,
+      "extent_bytes": 50,
+      "save_rec_rows": [
+        {
+          "element_bytes": 1,
+          "count": 50,
+          "serialized_bytes": 50
+        }
+      ],
+      "source_declarations": [
+        {
+          "source": "src/S09/m35F5.c",
+          "line": 658,
+          "text": "extern unsigned char far fd_50F6_0F46[];"
+        },
+        {
+          "source": "src/S13/m384C.c",
+          "line": 634,
+          "text": "extern signed char far fd_50F6_0F46[];"
+        }
+      ],
+      "source_definitions": [],
+      "native_view": "union { int8_t signed_values[N]; uint8_t unsigned_values[N]; uint8_t raw_bytes[N]; }",
+      "extent_basis": "Exact S09 SaveRec row size*count; additionally complete fixed-size source array or struct view where present. No communal-gap or neighboring-address extent."
+    },
+    {
+      "symbol": "fd_50F6_0FC6",
+      "address": "50F6:0FC6",
+      "kind": "byte-table-signed-view",
+      "count": 50,
+      "extent_bytes": 50,
+      "save_rec_rows": [
+        {
+          "element_bytes": 1,
+          "count": 50,
+          "serialized_bytes": 50
+        }
+      ],
+      "source_declarations": [
+        {
+          "source": "src/S09/m35F5.c",
+          "line": 659,
+          "text": "extern unsigned char far fd_50F6_0FC6[];"
+        },
+        {
+          "source": "src/S13/m384C.c",
+          "line": 640,
+          "text": "extern signed char far fd_50F6_0FC6[];"
+        }
+      ],
+      "source_definitions": [],
+      "native_view": "union { int8_t signed_values[N]; uint8_t unsigned_values[N]; uint8_t raw_bytes[N]; }",
+      "extent_basis": "Exact S09 SaveRec row size*count; additionally complete fixed-size source array or struct view where present. No communal-gap or neighboring-address extent."
+    },
+    {
+      "symbol": "fd_50F6_0F84",
+      "address": "50F6:0F84",
+      "kind": "byte-table-signed-view",
+      "count": 50,
+      "extent_bytes": 50,
+      "save_rec_rows": [
+        {
+          "element_bytes": 1,
+          "count": 50,
+          "serialized_bytes": 50
+        }
+      ],
+      "source_declarations": [
+        {
+          "source": "src/S09/m35F5.c",
+          "line": 660,
+          "text": "extern unsigned char far fd_50F6_0F84[];"
+        },
+        {
+          "source": "src/S13/m384C.c",
+          "line": 635,
+          "text": "extern signed char far fd_50F6_0F84[];"
+        }
+      ],
+      "source_definitions": [],
+      "native_view": "union { int8_t signed_values[N]; uint8_t unsigned_values[N]; uint8_t raw_bytes[N]; }",
+      "extent_basis": "Exact S09 SaveRec row size*count; additionally complete fixed-size source array or struct view where present. No communal-gap or neighboring-address extent."
+    },
+    {
+      "symbol": "fd_50F6_1008",
+      "address": "50F6:1008",
+      "kind": "byte-table-signed-view",
+      "count": 50,
+      "extent_bytes": 50,
+      "save_rec_rows": [
+        {
+          "element_bytes": 1,
+          "count": 50,
+          "serialized_bytes": 50
+        }
+      ],
+      "source_declarations": [
+        {
+          "source": "src/S09/m35F5.c",
+          "line": 661,
+          "text": "extern unsigned char far fd_50F6_1008[];"
+        },
+        {
+          "source": "src/S13/m384C.c",
+          "line": 641,
+          "text": "extern signed char far fd_50F6_1008[];"
+        }
+      ],
+      "source_definitions": [],
+      "native_view": "union { int8_t signed_values[N]; uint8_t unsigned_values[N]; uint8_t raw_bytes[N]; }",
+      "extent_basis": "Exact S09 SaveRec row size*count; additionally complete fixed-size source array or struct view where present. No communal-gap or neighboring-address extent."
+    },
+    {
+      "symbol": "fd_50F6_0256",
+      "address": "50F6:0256",
+      "kind": "byte-table",
+      "count": 100,
+      "extent_bytes": 100,
+      "save_rec_rows": [
+        {
+          "element_bytes": 1,
+          "count": 100,
+          "serialized_bytes": 100
+        }
+      ],
+      "source_declarations": [
+        {
+          "source": "src/root/m0BE8.c",
+          "line": 39,
+          "text": "extern unsigned char far fd_50F6_0256[];"
+        },
+        {
+          "source": "src/S09/m35F5.c",
+          "line": 669,
+          "text": "extern unsigned char far fd_50F6_0256[];"
+        }
+      ],
+      "source_definitions": [],
+      "native_view": "union { uint8_t unsigned_values[N]; uint8_t raw_bytes[N]; }",
+      "extent_basis": "Exact S09 SaveRec row size*count; additionally complete fixed-size source array or struct view where present. No communal-gap or neighboring-address extent."
+    },
+    {
+      "symbol": "fd_50F6_02C0",
+      "address": "50F6:02C0",
+      "kind": "byte-table",
+      "count": 100,
+      "extent_bytes": 100,
+      "save_rec_rows": [
+        {
+          "element_bytes": 1,
+          "count": 100,
+          "serialized_bytes": 100
+        }
+      ],
+      "source_declarations": [
+        {
+          "source": "src/root/m0BE8.c",
+          "line": 40,
+          "text": "extern unsigned char far fd_50F6_02C0[];"
+        },
+        {
+          "source": "src/S09/m35F5.c",
+          "line": 670,
+          "text": "extern unsigned char far fd_50F6_02C0[];"
+        }
+      ],
+      "source_definitions": [],
+      "native_view": "union { uint8_t unsigned_values[N]; uint8_t raw_bytes[N]; }",
+      "extent_basis": "Exact S09 SaveRec row size*count; additionally complete fixed-size source array or struct view where present. No communal-gap or neighboring-address extent."
+    },
+    {
+      "symbol": "fd_50F6_0334",
+      "address": "50F6:0334",
+      "kind": "word-array",
+      "count": 12,
+      "extent_bytes": 24,
+      "save_rec_rows": [
+        {
+          "element_bytes": 2,
+          "count": 12,
+          "serialized_bytes": 24
+        }
+      ],
+      "source_declarations": [
+        {
+          "source": "src/S06/m35F5.c",
+          "line": 156,
+          "text": "extern int far fd_50F6_0334[12];"
+        },
+        {
+          "source": "src/S09/m35F5.c",
+          "line": 677,
+          "text": "extern unsigned char far fd_50F6_0334[];"
+        }
+      ],
+      "source_definitions": [],
+      "native_view": "union { int16_t signed_values[12]; uint16_t unsigned_values[12]; uint8_t raw_bytes[24]; }",
+      "extent_basis": "Exact S09 SaveRec row size*count; additionally complete fixed-size source array or struct view where present. No communal-gap or neighboring-address extent."
+    },
+    {
+      "symbol": "fd_50F6_0AEC",
+      "address": "50F6:0AEC",
+      "kind": "word-array-prefix-scalar",
+      "count": 6,
+      "extent_bytes": 12,
+      "save_rec_rows": [
+        {
+          "element_bytes": 2,
+          "count": 6,
+          "serialized_bytes": 12
+        }
+      ],
+      "source_declarations": [
+        {
+          "source": "src/root/m0798.c",
+          "line": 394,
+          "text": "extern int far fd_50F6_0AEC;"
+        },
+        {
+          "source": "src/root/m0BE8.c",
+          "line": 52,
+          "text": "extern int far fd_50F6_0AEC[6];"
+        },
+        {
+          "source": "src/root/m1383.c",
+          "line": 20,
+          "text": "extern int far fd_50F6_0AEC[6];"
+        },
+        {
+          "source": "src/S06/m35F5.c",
+          "line": 1099,
+          "text": "extern int far fd_50F6_0AEC[6];"
+        },
+        {
+          "source": "src/S09/m35F5.c",
+          "line": 675,
+          "text": "extern unsigned char far fd_50F6_0AEC[];"
+        },
+        {
+          "source": "src/S13/m384C.c",
+          "line": 63,
+          "text": "extern int far fd_50F6_0AEC[];"
+        },
+        {
+          "source": "src/S14/m384C.c",
+          "line": 321,
+          "text": "extern int far fd_50F6_0AEC[];"
+        },
+        {
+          "source": "src/S22/m39C7.c",
+          "line": 355,
+          "text": "extern int far fd_50F6_0AEC[6];"
+        },
+        {
+          "source": "src/S25/m39C7.c",
+          "line": 725,
+          "text": "extern int far fd_50F6_0AEC[6];"
+        }
+      ],
+      "source_definitions": [],
+      "native_view": "union { int16_t signed_values[6]; uint16_t unsigned_values[6]; uint8_t raw_bytes[12]; }",
+      "extent_basis": "Exact S09 SaveRec row size*count; additionally complete fixed-size source array or struct view where present. No communal-gap or neighboring-address extent."
+    },
+    {
+      "symbol": "fd_50F6_0AFA",
+      "address": "50F6:0AFA",
+      "kind": "word-array",
+      "count": 6,
+      "extent_bytes": 12,
+      "save_rec_rows": [
+        {
+          "element_bytes": 2,
+          "count": 6,
+          "serialized_bytes": 12
+        }
+      ],
+      "source_declarations": [
+        {
+          "source": "src/root/m0BE8.c",
+          "line": 53,
+          "text": "extern int far fd_50F6_0AFA[6];"
+        },
+        {
+          "source": "src/root/m0DEF.c",
+          "line": 107,
+          "text": "extern int far fd_50F6_0AFA[];"
+        },
+        {
+          "source": "src/root/m0F3F.c",
+          "line": 58,
+          "text": "extern int far fd_50F6_0AFA[6];"
+        },
+        {
+          "source": "src/root/m1383.c",
+          "line": 29,
+          "text": "extern int far fd_50F6_0AFA[6];"
+        },
+        {
+          "source": "src/S09/m35F5.c",
+          "line": 676,
+          "text": "extern unsigned char far fd_50F6_0AFA[];"
+        },
+        {
+          "source": "src/S14/m384C.c",
+          "line": 322,
+          "text": "extern int far fd_50F6_0AFA[];"
+        },
+        {
+          "source": "src/S22/m39C7.c",
+          "line": 357,
+          "text": "extern int far fd_50F6_0AFA[6];"
+        }
+      ],
+      "source_definitions": [],
+      "native_view": "union { int16_t signed_values[6]; uint16_t unsigned_values[6]; uint8_t raw_bytes[12]; }",
+      "extent_basis": "Exact S09 SaveRec row size*count; additionally complete fixed-size source array or struct view where present. No communal-gap or neighboring-address extent."
+    },
+    {
+      "symbol": "fd_50F6_0B12",
+      "address": "50F6:0B12",
+      "kind": "word-array",
+      "count": 6,
+      "extent_bytes": 12,
+      "save_rec_rows": [
+        {
+          "element_bytes": 2,
+          "count": 6,
+          "serialized_bytes": 12
+        }
+      ],
+      "source_declarations": [
+        {
+          "source": "src/root/m0798.c",
+          "line": 393,
+          "text": "extern int far fd_50F6_0B12[6];"
+        },
+        {
+          "source": "src/root/m0894.c",
+          "line": 36,
+          "text": "extern int far fd_50F6_0B12[6];"
+        },
+        {
+          "source": "src/root/m0DEF.c",
+          "line": 106,
+          "text": "extern int far fd_50F6_0B12[];"
+        },
+        {
+          "source": "src/root/m0E2E.c",
+          "line": 296,
+          "text": "extern int far fd_50F6_0B12[6];"
+        },
+        {
+          "source": "src/root/m1383.c",
+          "line": 24,
+          "text": "extern int far fd_50F6_0B12[6];"
+        },
+        {
+          "source": "src/S09/m35F5.c",
+          "line": 689,
+          "text": "extern unsigned char far fd_50F6_0B12[];"
+        }
+      ],
+      "source_definitions": [],
+      "native_view": "union { int16_t signed_values[6]; uint16_t unsigned_values[6]; uint8_t raw_bytes[12]; }",
+      "extent_basis": "Exact S09 SaveRec row size*count; additionally complete fixed-size source array or struct view where present. No communal-gap or neighboring-address extent."
+    },
+    {
+      "symbol": "fd_50F6_0C2A",
+      "address": "50F6:0C2A",
+      "kind": "word-array",
+      "count": 6,
+      "extent_bytes": 12,
+      "save_rec_rows": [
+        {
+          "element_bytes": 2,
+          "count": 6,
+          "serialized_bytes": 12
+        }
+      ],
+      "source_declarations": [
+        {
+          "source": "src/root/m0894.c",
+          "line": 37,
+          "text": "extern int far fd_50F6_0C2A[6];"
+        },
+        {
+          "source": "src/root/m1383.c",
+          "line": 76,
+          "text": "extern int far fd_50F6_0C2A[6];"
+        },
+        {
+          "source": "src/S09/m35F5.c",
+          "line": 690,
+          "text": "extern unsigned char far fd_50F6_0C2A[];"
+        }
+      ],
+      "source_definitions": [],
+      "native_view": "union { int16_t signed_values[6]; uint16_t unsigned_values[6]; uint8_t raw_bytes[12]; }",
+      "extent_basis": "Exact S09 SaveRec row size*count; additionally complete fixed-size source array or struct view where present. No communal-gap or neighboring-address extent."
+    },
+    {
+      "symbol": "casteLevels",
+      "address": "50F6:0482",
+      "kind": "tri-level-struct",
+      "count": 3,
+      "extent_bytes": 6,
+      "save_rec_rows": [
+        {
+          "element_bytes": 2,
+          "count": 3,
+          "serialized_bytes": 6
+        }
+      ],
+      "source_declarations": [
+        {
+          "source": "src/root/m0798.c",
+          "line": 74,
+          "text": "extern struct TriLevel far casteLevels;"
+        },
+        {
+          "source": "src/S09/m35F5.c",
+          "line": 671,
+          "text": "extern unsigned char far casteLevels[];"
+        }
+      ],
+      "source_definitions": [],
+      "native_view": "union { struct TriLevel tri; int16_t signed_values[3]; uint16_t unsigned_values[3]; uint8_t raw_bytes[6]; }",
+      "extent_basis": "Exact S09 SaveRec row size*count; additionally complete fixed-size source array or struct view where present. No communal-gap or neighboring-address extent."
+    },
+    {
+      "symbol": "modeLevels",
+      "address": "50F6:049E",
+      "kind": "word-array",
+      "count": 3,
+      "extent_bytes": 6,
+      "save_rec_rows": [
+        {
+          "element_bytes": 2,
+          "count": 3,
+          "serialized_bytes": 6
+        }
+      ],
+      "source_declarations": [
+        {
+          "source": "src/root/m0798.c",
+          "line": 86,
+          "text": "extern struct TriLevel far modeLevels;"
+        },
+        {
+          "source": "src/root/m0E2E.c",
+          "line": 87,
+          "text": "extern int far modeLevels[3];"
+        },
+        {
+          "source": "src/root/m1383.c",
+          "line": 25,
+          "text": "extern unsigned int far modeLevels[3];"
+        },
+        {
+          "source": "src/S09/m35F5.c",
+          "line": 673,
+          "text": "extern unsigned char far modeLevels[];"
+        },
+        {
+          "source": "src/S25/m39C7.c",
+          "line": 371,
+          "text": "extern unsigned int far modeLevels[3];"
+        }
+      ],
+      "source_definitions": [],
+      "native_view": "union { int16_t signed_values[3]; uint16_t unsigned_values[3]; uint8_t raw_bytes[6]; }",
+      "extent_basis": "Exact S09 SaveRec row size*count; additionally complete fixed-size source array or struct view where present. No communal-gap or neighboring-address extent."
+    }
+  ],
+  "source_hashes": {
+    "src/S06/m35F5.c": "db35a96a492a6d36f6580222c17daca015aa9373b457b8758c751d3a70844a86",
+    "src/S09/m35F5.c": "028e1575990d5d45233f9102a0d2a060810349bd2f1297182c4af435ecbe912a",
+    "src/S13/m384C.c": "fb6785e93f5c2ea1110f64b5eb200d7f4e346263c43ac521c0434629d9f5839a",
+    "src/S14/m384C.c": "245f8c01d5a330c571048b8cd1b134cf544394af84f7b502a153c73adbd91020",
+    "src/S22/m39C7.c": "e9add4ebd445bd943f24a65764be2a79581f2fc26c349741fdfe8efae3b7030d",
+    "src/S25/m39C7.c": "90a2cf12a9e527d1836099c92e5327d47342eac0a8403639d66471ecbc859ba6",
+    "src/root/m0798.c": "ecf807dc3159f583f6ee3ea8a9f5422650a64bb557d4551e9c97b5dcc7b6a1b8",
+    "src/root/m0894.c": "57b40ad0a9ee74c501fbcb0d521b86b8158f206f44f4867e960bcb800b5e7484",
+    "src/root/m0BE8.c": "42664e07331fbba4cc257f1e49e03dff5e93deddb764d33101ad0f454a9377d7",
+    "src/root/m0DEF.c": "4325b570055de5daf8b96fe529d53f316b1a8a046daf845672672bd376d08142",
+    "src/root/m0E2E.c": "9325b3426ef87771150912ce8f7cfaacc13380634505313417978b80974d10ed",
+    "src/root/m0F3F.c": "f1c903c7f29e4fbb64fd82c2de5390c00df4f7cf35c9c836007dfa07c56612e8",
+    "src/root/m1383.c": "489ee7d47f0ee27942bf6bea11fff7a8bbb90acd2c75fe4653d18a3e9efa5389"
+  },
+  "source_declaration_rows": {
+    "src/S09/m35F5.c": [
+      {
+        "line": 658,
+        "text": "extern unsigned char far fd_50F6_0F46[];",
+        "symbol": "fd_50F6_0F46"
+      },
+      {
+        "line": 659,
+        "text": "extern unsigned char far fd_50F6_0FC6[];",
+        "symbol": "fd_50F6_0FC6"
+      },
+      {
+        "line": 660,
+        "text": "extern unsigned char far fd_50F6_0F84[];",
+        "symbol": "fd_50F6_0F84"
+      },
+      {
+        "line": 661,
+        "text": "extern unsigned char far fd_50F6_1008[];",
+        "symbol": "fd_50F6_1008"
+      },
+      {
+        "line": 669,
+        "text": "extern unsigned char far fd_50F6_0256[];",
+        "symbol": "fd_50F6_0256"
+      },
+      {
+        "line": 670,
+        "text": "extern unsigned char far fd_50F6_02C0[];",
+        "symbol": "fd_50F6_02C0"
+      },
+      {
+        "line": 677,
+        "text": "extern unsigned char far fd_50F6_0334[];",
+        "symbol": "fd_50F6_0334"
+      },
+      {
+        "line": 675,
+        "text": "extern unsigned char far fd_50F6_0AEC[];",
+        "symbol": "fd_50F6_0AEC"
+      },
+      {
+        "line": 676,
+        "text": "extern unsigned char far fd_50F6_0AFA[];",
+        "symbol": "fd_50F6_0AFA"
+      },
+      {
+        "line": 689,
+        "text": "extern unsigned char far fd_50F6_0B12[];",
+        "symbol": "fd_50F6_0B12"
+      },
+      {
+        "line": 690,
+        "text": "extern unsigned char far fd_50F6_0C2A[];",
+        "symbol": "fd_50F6_0C2A"
+      },
+      {
+        "line": 671,
+        "text": "extern unsigned char far casteLevels[];",
+        "symbol": "casteLevels"
+      },
+      {
+        "line": 673,
+        "text": "extern unsigned char far modeLevels[];",
+        "symbol": "modeLevels"
+      }
+    ],
+    "src/S13/m384C.c": [
+      {
+        "line": 634,
+        "text": "extern signed char far fd_50F6_0F46[];",
+        "symbol": "fd_50F6_0F46"
+      },
+      {
+        "line": 640,
+        "text": "extern signed char far fd_50F6_0FC6[];",
+        "symbol": "fd_50F6_0FC6"
+      },
+      {
+        "line": 635,
+        "text": "extern signed char far fd_50F6_0F84[];",
+        "symbol": "fd_50F6_0F84"
+      },
+      {
+        "line": 641,
+        "text": "extern signed char far fd_50F6_1008[];",
+        "symbol": "fd_50F6_1008"
+      },
+      {
+        "line": 63,
+        "text": "extern int far fd_50F6_0AEC[];",
+        "symbol": "fd_50F6_0AEC"
+      }
+    ],
+    "src/root/m0BE8.c": [
+      {
+        "line": 39,
+        "text": "extern unsigned char far fd_50F6_0256[];",
+        "symbol": "fd_50F6_0256"
+      },
+      {
+        "line": 40,
+        "text": "extern unsigned char far fd_50F6_02C0[];",
+        "symbol": "fd_50F6_02C0"
+      },
+      {
+        "line": 52,
+        "text": "extern int far fd_50F6_0AEC[6];",
+        "symbol": "fd_50F6_0AEC"
+      },
+      {
+        "line": 53,
+        "text": "extern int far fd_50F6_0AFA[6];",
+        "symbol": "fd_50F6_0AFA"
+      }
+    ],
+    "src/S06/m35F5.c": [
+      {
+        "line": 156,
+        "text": "extern int far fd_50F6_0334[12];",
+        "symbol": "fd_50F6_0334"
+      },
+      {
+        "line": 1099,
+        "text": "extern int far fd_50F6_0AEC[6];",
+        "symbol": "fd_50F6_0AEC"
+      }
+    ],
+    "src/root/m0798.c": [
+      {
+        "line": 394,
+        "text": "extern int far fd_50F6_0AEC;",
+        "symbol": "fd_50F6_0AEC"
+      },
+      {
+        "line": 393,
+        "text": "extern int far fd_50F6_0B12[6];",
+        "symbol": "fd_50F6_0B12"
+      },
+      {
+        "line": 74,
+        "text": "extern struct TriLevel far casteLevels;",
+        "symbol": "casteLevels"
+      },
+      {
+        "line": 86,
+        "text": "extern struct TriLevel far modeLevels;",
+        "symbol": "modeLevels"
+      }
+    ],
+    "src/root/m1383.c": [
+      {
+        "line": 20,
+        "text": "extern int far fd_50F6_0AEC[6];",
+        "symbol": "fd_50F6_0AEC"
+      },
+      {
+        "line": 29,
+        "text": "extern int far fd_50F6_0AFA[6];",
+        "symbol": "fd_50F6_0AFA"
+      },
+      {
+        "line": 24,
+        "text": "extern int far fd_50F6_0B12[6];",
+        "symbol": "fd_50F6_0B12"
+      },
+      {
+        "line": 76,
+        "text": "extern int far fd_50F6_0C2A[6];",
+        "symbol": "fd_50F6_0C2A"
+      },
+      {
+        "line": 25,
+        "text": "extern unsigned int far modeLevels[3];",
+        "symbol": "modeLevels"
+      }
+    ],
+    "src/S14/m384C.c": [
+      {
+        "line": 321,
+        "text": "extern int far fd_50F6_0AEC[];",
+        "symbol": "fd_50F6_0AEC"
+      },
+      {
+        "line": 322,
+        "text": "extern int far fd_50F6_0AFA[];",
+        "symbol": "fd_50F6_0AFA"
+      }
+    ],
+    "src/S22/m39C7.c": [
+      {
+        "line": 355,
+        "text": "extern int far fd_50F6_0AEC[6];",
+        "symbol": "fd_50F6_0AEC"
+      },
+      {
+        "line": 357,
+        "text": "extern int far fd_50F6_0AFA[6];",
+        "symbol": "fd_50F6_0AFA"
+      }
+    ],
+    "src/S25/m39C7.c": [
+      {
+        "line": 725,
+        "text": "extern int far fd_50F6_0AEC[6];",
+        "symbol": "fd_50F6_0AEC"
+      },
+      {
+        "line": 371,
+        "text": "extern unsigned int far modeLevels[3];",
+        "symbol": "modeLevels"
+      }
+    ],
+    "src/root/m0DEF.c": [
+      {
+        "line": 107,
+        "text": "extern int far fd_50F6_0AFA[];",
+        "symbol": "fd_50F6_0AFA"
+      },
+      {
+        "line": 106,
+        "text": "extern int far fd_50F6_0B12[];",
+        "symbol": "fd_50F6_0B12"
+      }
+    ],
+    "src/root/m0F3F.c": [
+      {
+        "line": 58,
+        "text": "extern int far fd_50F6_0AFA[6];",
+        "symbol": "fd_50F6_0AFA"
+      }
+    ],
+    "src/root/m0894.c": [
+      {
+        "line": 36,
+        "text": "extern int far fd_50F6_0B12[6];",
+        "symbol": "fd_50F6_0B12"
+      },
+      {
+        "line": 37,
+        "text": "extern int far fd_50F6_0C2A[6];",
+        "symbol": "fd_50F6_0C2A"
+      }
+    ],
+    "src/root/m0E2E.c": [
+      {
+        "line": 296,
+        "text": "extern int far fd_50F6_0B12[6];",
+        "symbol": "fd_50F6_0B12"
+      },
+      {
+        "line": 87,
+        "text": "extern int far modeLevels[3];",
+        "symbol": "modeLevels"
+      }
+    ]
+  },
+  "input_hashes": {
+    "layout/manifest.json": {
+      "path": "layout/manifest.json",
+      "sha256": "025a0a9255d910cae4b122ab5a3f3fb40888bb456d7fe42158db7c9e622fcf50"
+    },
+    "layout/symbols.json": {
+      "path": "layout/symbols.json",
+      "sha256": "0f5dd5b0a211945a97782cfccdb9bb31b0dfd07fcde5df4d4f9486b487eb0125"
+    },
+    "src/S09/m35F5.c": {
+      "path": "src/S09/m35F5.c",
+      "sha256": "028e1575990d5d45233f9102a0d2a060810349bd2f1297182c4af435ecbe912a"
+    },
+    "src/root/m0BE8.c": {
+      "path": "src/root/m0BE8.c",
+      "sha256": "42664e07331fbba4cc257f1e49e03dff5e93deddb764d33101ad0f454a9377d7"
+    },
+    "src/root/m0894.c": {
+      "path": "src/root/m0894.c",
+      "sha256": "57b40ad0a9ee74c501fbcb0d521b86b8158f206f44f4867e960bcb800b5e7484"
+    },
+    "src/root/m0798.c": {
+      "path": "src/root/m0798.c",
+      "sha256": "ecf807dc3159f583f6ee3ea8a9f5422650a64bb557d4551e9c97b5dcc7b6a1b8"
+    },
+    "src/root/m0E2E.c": {
+      "path": "src/root/m0E2E.c",
+      "sha256": "9325b3426ef87771150912ce8f7cfaacc13380634505313417978b80974d10ed"
+    },
+    "src/root/m1383.c": {
+      "path": "src/root/m1383.c",
+      "sha256": "489ee7d47f0ee27942bf6bea11fff7a8bbb90acd2c75fe4653d18a3e9efa5389"
+    },
+    "src/S13/m384C.c": {
+      "path": "src/S13/m384C.c",
+      "sha256": "fb6785e93f5c2ea1110f64b5eb200d7f4e346263c43ac521c0434629d9f5839a"
+    },
+    "portable/research/whole_program_unprovided_owners_v2.json": {
+      "path": "portable/research/whole_program_unprovided_owners_v2.json",
+      "sha256": "ff91c70e7d1458816e9a10d69945e2d87d0510fd5ebeb4bf8c391028f29229ae"
+    },
+    "portable/research/whole_program_source_bounded_owners_v3.json": {
+      "path": "portable/research/whole_program_source_bounded_owners_v3.json",
+      "sha256": "ed54979f50150330df56b206e70da08a67df85ae424ff575006bed622bdfc897"
+    },
+    "portable/research/whole_program_source_bounded_owners_v5.json": {
+      "path": "portable/research/whole_program_source_bounded_owners_v5.json",
+      "sha256": "b9ff9a739930c85537dba59edcd3680d52a10b36ca7684878e161f3d436f084e"
+    },
+    "portable/research/whole_program_simulation_state_50f6_v6.json": {
+      "path": "portable/research/whole_program_simulation_state_50f6_v6.json",
+      "sha256": "47a5940df5784fccd41b3bc4328d5a4c374d6c5693f6a1e34f65514049f045e5"
+    },
+    "portable/research/whole_program_simulation_state_50f6_consumer_v6.json": {
+      "path": "portable/research/whole_program_simulation_state_50f6_consumer_v6.json",
+      "sha256": "ada3bec6526923591e4d175a0a8b8b0138aaa2afded72750d0612ad9e7049f6d"
+    }
+  },
+  "collision_check": {
+    "existing_v2_v3_v5_overlap_count": 0,
+    "candidate_internal_overlap_count": 0,
+    "overlaps": []
+  },
+  "initialized_data_review": {
+    "casteLevels_has_source_definition": false,
+    "modeLevels_has_source_definition": false,
+    "original_source_definitions": [],
+    "presets_are_separate_initialized_C_DATA": "fd_3D57_07EC and fd_3D57_080A defaults plus fd_3D57_07F2/fd_3D57_0810 preset tables remain their existing source definitions and are excluded; they are not aliases of the F6 mutable triples."
+  },
+  "alias_policy": {
+    "byte_tables": "signed-char and unsigned-char views use signed_values/unsigned_values members respectively; SaveRec uses raw_bytes overlay.",
+    "word_arrays": "signed and unsigned source views use same word slots; raw bytes exist solely for exact S09 serialization.",
+    "casteLevels": "source TriLevel view preserved; no zero initializer or copied defaults added.",
+    "modeLevels": "signed/unsigned three-word indexing views share one six-byte object.",
+    "fd_50F6_0AEC": "six-element array is primary storage view; lone scalar view maps only to element zero."
+  },
+  "nonclaims": [
+    "No 50F6 original MSC COMDEF extent artifact used.",
+    "No SaveGame compatibility is established until actual SaveGame/LoadGame test receipt passes.",
+    "No rendering/UI, audio, pixel, or full-game behavior claim.",
+    "No edits to original sources, existing plans, generated providers, or central generator."
+  ]
+}

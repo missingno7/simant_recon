@@ -1,0 +1,30 @@
+{
+  "schema": "simant-central-simulation-state-v6-v1",
+  "status": "PASS",
+  "inputs": {
+    "portable/tests/whole_program/run_simulation_state_integrated.py": "d52be1770146672b5ac3d3e3ab19b6228ede66687ffd0b0d426f0b2be993b2a9",
+    "build/workers/whole_program/generated/root_m004A.c": "22c6df432c67b41ce0c1039ddeb53e1b04dba4adbaf806e37dfcfd8ab63979a6",
+    "build/workers/whole_program/generated/S14_m384C.c": "995ae31f7b1d6c068328a4db1138a4b8c707a1780110c4470727bfa460042729",
+    "build/workers/whole_program/generated/simulation_state_50f6.h": "5c87fe9e12f755eee3e1beeaab9b2478bb5ec95782b031b805ecb828c8c6de1f",
+    "build/workers/whole_program/generated/simulation_state_50f6.c": "c2489524a8975665e0c49b3cfd19fb2b5e8161c3ac7b5ec4dca4eb9cda51c79a",
+    "build/workers/whole_program/generated/native_owners.h": "c5e3e611d9abe524533c5525648bf47bd0c3e54eba315f81f87c3bd66e807f7c",
+    "build/workers/whole_program/generated/native_owners.c": "bd0e88c6109407ea29a5cfdb4e9d84bbbfc047b3d87411f43a39efc684f1c9f1",
+    "portable/whole_program/conversions/source_bounded_simulation_state_v6.py": "e79adbe7ca23f81b070ed90a65dd1d7bc47630d2a8277cc327a6b3f5436646e0",
+    "portable/research/whole_program_simulation_state_50f6_v6.json": "47a5940df5784fccd41b3bc4328d5a4c374d6c5693f6a1e34f65514049f045e5"
+  },
+  "compiler_sha256": "c5005ba5380351c10743e9ca53ef9632164c54be3bd6b93324795114e4589a7d",
+  "results": {
+    "point": {
+      "exit": 0,
+      "stdout": "PASS: three source nest-plane center updates use shared point/raw views\n",
+      "source_sha256": "98b4972577478cce7c66478607753b798b7d0706cf3f3088f8ea9df98b8d6054"
+    },
+    "score": {
+      "exit": 0,
+      "stdout": "PASS: original CalcScore reads the selected history/raw owners\n",
+      "source_sha256": "9f7a36d781c62e149a436f3c9827ec527b707eeb1b9f0e3c798105fa748f39d8"
+    }
+  },
+  "claim": "Actual central source map-center and score consumers use the emitted V6 owners; source callbacks and non-owned score inputs are controlled boundaries",
+  "historical_claim": false
+}

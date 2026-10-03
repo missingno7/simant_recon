@@ -1,0 +1,56 @@
+{
+  "schema": "simant-win32-drive-directory-v2",
+  "claim": "Bounded native provider uses Win32 per-drive CWD resolution for the DOS f_1F66_00AF service; source FileSelect preword adapter retires only the physical BIOS equipment-word floppy override.",
+  "source_route": "src/S09/m35F5.c",
+  "source_sha256": "028e1575990d5d45233f9102a0d2a060810349bd2f1297182c4af435ecbe912a",
+  "adapted_sha256": "b839019da0a488af75e77bba2d43cfea50ce587225598889a89546a90b62d3ff",
+  "inputs": {
+    "src/S09/m35F5.c": "028e1575990d5d45233f9102a0d2a060810349bd2f1297182c4af435ecbe912a",
+    "portable/whole_program/platform/drive_directory.h": "52b564c54024f80bf59afa7de7714378fd8ceeed950ed3bf1299fd475c634c26",
+    "portable/whole_program/platform/drive_directory.c": "3efeaa4a45f1ab3a21a61116e30cb57c81609bd0ba29b884d1a2a06dd1d9de0a",
+    "portable/whole_program/platform/tests/drive_directory_test.c": "c197cb836732125bdb956be87d5b515a2ca0efd3085ef81d12b89fcf2bc69380"
+  },
+  "tooling_inputs": {
+    "src/root/m1F66.asm": "b477ccb8ce87afd98692cbf32dc11d4f0bb9df1000e3a6334ffc5ab8076f33b3",
+    "portable/whole_program/conversions/file_select_host.py": "bff25367d4eada92ad5beae9014cb709ce2800b446dd4609dc84d7b6996efdc1",
+    "portable/whole_program/conversions/tests/run_file_select_host_tests.py": "c7c993311ad0a1bc3c34a6c25572256bbbf03b2d19b6fbd6644d667945d9ff06"
+  },
+  "source_boundary": {
+    "list_allocation": "0xC80 bytes through a native Handle payload pointer",
+    "list_record_stride": 16,
+    "source_count_limit": 200,
+    "list_conversion": "none; list is a fixed byte-record buffer, not a pointer table",
+    "removed_policy": "physical equipment byte at 0040:0010 and B-to-A override"
+  },
+  "provider_contract": {
+    "source_name": "f_1F66_00AF(int16_t drive, char *path)",
+    "drive": "1=A..26=Z; zero resolves the actual process current drive",
+    "success": "1 and absolute drive-rooted path, within 67 bytes including NUL",
+    "failure": "0; caller buffer unchanged",
+    "implementation": "GetFullPathNameA(\"X:.\") plus GetFileAttributesA directory validation",
+    "path_extent": 67,
+    "integration_status": "standalone provider and test; production link/admission is outside this packet"
+  },
+  "positive": {
+    "current_drive_source_service": true,
+    "zero_means_real_current_drive": true,
+    "available_drives_checked_against_win32_per_drive_expansion": true,
+    "bounded_and_invalid_argument_controls": true,
+    "preword_only_removed_two_frozen_bios_policy_anchors": true
+  },
+  "negative": {
+    "wrong_source_route_rejected": true,
+    "source_drift_rejected": true
+  },
+  "native_test_output": "PASS: current-drive and available-drive Win32 CWD paths (6 drives, 8 successful checks); bounds and invalid-input controls passed",
+  "test_executable_sha256": "e947d2a10c391e0bb465cd5afb2f882b037efddcb306c3f18d6f3099a8f4ca51",
+  "limitations": [
+    "Provider test requires Windows Win32 path semantics and was run on the current Windows host.",
+    "No original DOS INT 21h execution was run; the ASM service semantics were read from src/root/m1F66.asm.",
+    "Long-path source cases beyond the 67-byte DOS caller buffer fail closed.",
+    "The preword adapter does not replace FileSelect's directory enumeration or retry/dialog behavior."
+  ],
+  "summary": {
+    "passed": true
+  }
+}

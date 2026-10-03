@@ -1,0 +1,396 @@
+{
+  "adapted_function_order": [
+    "f_1FD2_0008",
+    "f_1FD2_0059",
+    "f_1FD2_0077",
+    "f_1FD2_00D6",
+    "f_1FD2_0135",
+    "f_1FD2_0198",
+    "f_1FD2_021B",
+    "f_1FD2_02B1",
+    "f_1FD2_02FF",
+    "f_1FD2_031A",
+    "f_1FD2_032F",
+    "f_1FD2_0379",
+    "f_1FD2_0390",
+    "f_1FD2_03EB",
+    "f_1FD2_0438",
+    "f_1FD2_044F",
+    "f_1FD2_049C",
+    "f_1FD2_04B3",
+    "f_1FD2_04D0",
+    "f_1FD2_04E5",
+    "f_1FD2_052B",
+    "StillDown",
+    "ButtonHeldInit",
+    "ButtonHeld",
+    "ButtonHeldEnd",
+    "f_1FD2_05FD",
+    "SetMenuItemState",
+    "f_1FD2_0663",
+    "f_1FD2_07CB",
+    "f_1FD2_080D",
+    "f_1FD2_082E",
+    "f_1FD2_084F",
+    "f_1FD2_0883"
+  ],
+  "asm_abi_notes": {
+    "f_1B73_030F": "ASM reads five words at BP+6..BP+0E, but source callsites pass varying four/five argument lists through an empty prototype; this adapter does not normalize them",
+    "f_1B73_09E9": "two signed coordinate words in BP+6/BP+8",
+    "f_1B73_0AC3": "same far Timer/far queue stack order as 0B00",
+    "f_1B73_0B00": "stack arguments: far Timer pointer, far queue pointer; native Timer pointer then typed queue view",
+    "f_1B73_0B5B": "stack arguments: signed ticks word, far queue pointer; C slot arguments now use typed borrowed queue views",
+    "f_1B73_0BC5": "signed ID/ticks word plus far queue pointer; ASM returns AX while root C declaration/caller ignores it",
+    "f_1B73_0C42": "ID word, far queue pointer, output far pointer represented by two words; high-level caller pointer normalization remains an integration boundary"
+  },
+  "compiler": {
+    "path": "C:\\msys64\\mingw64\\bin\\gcc.exe",
+    "sha256": "c5005ba5380351c10743e9ca53ef9632164c54be3bd6b93324795114e4589a7d",
+    "version": "gcc.exe (Rev10, Built by MSYS2 project) 12.2.0"
+  },
+  "executable": "build/workers/m1b73_queue_source_adapter_v2/m1b73_queue_source_view_probe.exe",
+  "executable_sha256": "0fc75a895b1201925d6c3580e8d41e08811e7c10f02615bff38c135ccf2d2f69",
+  "inputs_after": {
+    "portable/tests/recovered/whole_program_asm_state/fixtures/v1-generated/dos_types.h": {
+      "sha256": "917da2a746f22bd61b32310a89a15ba16328bbe29a90895e47ad37e923dda705",
+      "size": 333
+    },
+    "portable/tests/whole_program/m1b73_queue_source_view_probe.c": {
+      "sha256": "7f13a95ccd9b4ed01a2dd33fce62ffaec8b7713bcab714370e27a0d8cfd1adc3",
+      "size": 986
+    },
+    "portable/tests/whole_program/run_m1b73_queue_source_adapter_probe.py": {
+      "sha256": "9cfd2107ef7dd5804a27541dac93486b2817d195dfaddb8a185410be989a86ac",
+      "size": 10792
+    },
+    "portable/tools/whole_program.py": {
+      "sha256": "da9f319db6fad58905268ea0c57d80ad2193143bb0034def96bd87929c738c9e",
+      "size": 47899
+    },
+    "portable/tools/word_spelling.py": {
+      "sha256": "fc398570e1c42079b463e13979a198437b56ebc8a2098e5cc7fbe3c6de93b63f",
+      "size": 1976
+    },
+    "portable/whole_program/conversions/m1b73_queue_source.py": {
+      "sha256": "4ffc08cb5cfae0a0d2e013a66887c5e54fc7e3d7d476cc2a136ea19911157593",
+      "size": 6018
+    },
+    "portable/whole_program/conversions/timer.py": {
+      "sha256": "f947e04d571711be2ca70028fa44f3c8b66679a0a797ddbb96f5d0b18712a094",
+      "size": 2272
+    },
+    "portable/whole_program/platform/dos_io.h": {
+      "sha256": "afa62ac7e715a4c8af9713de3ac49b9628b14d3d261dff35674a0abac277159a",
+      "size": 1487
+    },
+    "portable/whole_program/platform/dos_memory.h": {
+      "sha256": "ea5065004c8f52a26c7bb6c4c2344b85701370eee0784a172a7b0094774844ce",
+      "size": 1001
+    },
+    "portable/whole_program/platform/m1b73_mouse_state.c": {
+      "sha256": "2bd2ec4c07b3ba6e4283d26830732422be896214dc477fa6f96f27b6f69ec4b8",
+      "size": 1264
+    },
+    "portable/whole_program/platform/m1b73_mouse_state.h": {
+      "sha256": "cec31ba5a9a89e38e06ab56a15df356393e6a077ed4c5b9fb7933839c9c5d45a",
+      "size": 2533
+    },
+    "portable/whole_program/platform/m1b73_queue_source.c": {
+      "sha256": "5e4fa4a3159c8c2a53af72d5d23f1df7ecf4bbd32045dd652760d8386bdd98b8",
+      "size": 231
+    },
+    "portable/whole_program/platform/m1b73_queue_source.h": {
+      "sha256": "36148a5b9246708c9915aa32659c00357a6ab015e090361278d7a54cbf5dc75b",
+      "size": 1021
+    },
+    "portable/whole_program/platform/m1b73_queues.c": {
+      "sha256": "f2cbe78540eec11815ba5ff547b551039cb3940105f7f64108d13ae7f274d2c1",
+      "size": 3886
+    },
+    "portable/whole_program/platform/m1b73_queues.h": {
+      "sha256": "ce133080d5c159d2dc8a65ce87cbb647e11c73c8efeec1946195e4714fdf1f43",
+      "size": 3042
+    },
+    "portable/whole_program/types/timer.h": {
+      "sha256": "b9d7ee40d617989f0b4bbf70b430948c3f5ec8be0ec1470fe033874fc8720514",
+      "size": 1456
+    },
+    "src/root/m1B73.asm": {
+      "sha256": "3097a6b03ff1d8bdfa7d573632d9905de88d754c8b1e047de4014c4f186cb848",
+      "size": 35010
+    },
+    "src/root/m1FD2.c": {
+      "sha256": "f4359bdaf4cfc0fe326a54cf8a1eacb9ba3098b710bf2a561b3d0f48569bf6d8",
+      "size": 10086
+    }
+  },
+  "inputs_before": {
+    "portable/tests/recovered/whole_program_asm_state/fixtures/v1-generated/dos_types.h": {
+      "sha256": "917da2a746f22bd61b32310a89a15ba16328bbe29a90895e47ad37e923dda705",
+      "size": 333
+    },
+    "portable/tests/whole_program/m1b73_queue_source_view_probe.c": {
+      "sha256": "7f13a95ccd9b4ed01a2dd33fce62ffaec8b7713bcab714370e27a0d8cfd1adc3",
+      "size": 986
+    },
+    "portable/tests/whole_program/run_m1b73_queue_source_adapter_probe.py": {
+      "sha256": "9cfd2107ef7dd5804a27541dac93486b2817d195dfaddb8a185410be989a86ac",
+      "size": 10792
+    },
+    "portable/tools/whole_program.py": {
+      "sha256": "da9f319db6fad58905268ea0c57d80ad2193143bb0034def96bd87929c738c9e",
+      "size": 47899
+    },
+    "portable/tools/word_spelling.py": {
+      "sha256": "fc398570e1c42079b463e13979a198437b56ebc8a2098e5cc7fbe3c6de93b63f",
+      "size": 1976
+    },
+    "portable/whole_program/conversions/m1b73_queue_source.py": {
+      "sha256": "4ffc08cb5cfae0a0d2e013a66887c5e54fc7e3d7d476cc2a136ea19911157593",
+      "size": 6018
+    },
+    "portable/whole_program/conversions/timer.py": {
+      "sha256": "f947e04d571711be2ca70028fa44f3c8b66679a0a797ddbb96f5d0b18712a094",
+      "size": 2272
+    },
+    "portable/whole_program/platform/dos_io.h": {
+      "sha256": "afa62ac7e715a4c8af9713de3ac49b9628b14d3d261dff35674a0abac277159a",
+      "size": 1487
+    },
+    "portable/whole_program/platform/dos_memory.h": {
+      "sha256": "ea5065004c8f52a26c7bb6c4c2344b85701370eee0784a172a7b0094774844ce",
+      "size": 1001
+    },
+    "portable/whole_program/platform/m1b73_mouse_state.c": {
+      "sha256": "2bd2ec4c07b3ba6e4283d26830732422be896214dc477fa6f96f27b6f69ec4b8",
+      "size": 1264
+    },
+    "portable/whole_program/platform/m1b73_mouse_state.h": {
+      "sha256": "cec31ba5a9a89e38e06ab56a15df356393e6a077ed4c5b9fb7933839c9c5d45a",
+      "size": 2533
+    },
+    "portable/whole_program/platform/m1b73_queue_source.c": {
+      "sha256": "5e4fa4a3159c8c2a53af72d5d23f1df7ecf4bbd32045dd652760d8386bdd98b8",
+      "size": 231
+    },
+    "portable/whole_program/platform/m1b73_queue_source.h": {
+      "sha256": "36148a5b9246708c9915aa32659c00357a6ab015e090361278d7a54cbf5dc75b",
+      "size": 1021
+    },
+    "portable/whole_program/platform/m1b73_queues.c": {
+      "sha256": "f2cbe78540eec11815ba5ff547b551039cb3940105f7f64108d13ae7f274d2c1",
+      "size": 3886
+    },
+    "portable/whole_program/platform/m1b73_queues.h": {
+      "sha256": "ce133080d5c159d2dc8a65ce87cbb647e11c73c8efeec1946195e4714fdf1f43",
+      "size": 3042
+    },
+    "portable/whole_program/types/timer.h": {
+      "sha256": "b9d7ee40d617989f0b4bbf70b430948c3f5ec8be0ec1470fe033874fc8720514",
+      "size": 1456
+    },
+    "src/root/m1B73.asm": {
+      "sha256": "3097a6b03ff1d8bdfa7d573632d9905de88d754c8b1e047de4014c4f186cb848",
+      "size": 35010
+    },
+    "src/root/m1FD2.c": {
+      "sha256": "f4359bdaf4cfc0fe326a54cf8a1eacb9ba3098b710bf2a561b3d0f48569bf6d8",
+      "size": 10086
+    }
+  },
+  "limits": [
+    "The adapted C TU was syntax-compiled, not linked or executed; the native queue operation exports for 0B5B/0B00/0AC3/0BC5/0C42 are separate unresolved integration work.",
+    "No DOS far queue pointers or interrupt stack behavior are preserved; slots resolve to host-side typed queue views.",
+    "f_1B73_0C42's source split output pointer words and f_1B73_030F's varying argument counts are explicitly not represented as native pointer/callback equivalence.",
+    "m1FD2 does not reference g_4366; its source byte type is not widened or aliased by this adapter."
+  ],
+  "native_queue_view_bounds": {
+    "compile_command": [
+      "C:\\msys64\\mingw64\\bin\\gcc.exe",
+      "-std=c11",
+      "-Wall",
+      "-Wextra",
+      "-Wconversion",
+      "-Wno-sign-conversion",
+      "-Werror",
+      "-pedantic",
+      "-D__USE_MINGW_SETJMP_NON_SEH",
+      "portable/tests/whole_program/m1b73_queue_source_view_probe.c",
+      "portable/whole_program/platform/m1b73_queue_source.c",
+      "portable/whole_program/platform/m1b73_queues.c",
+      "portable/whole_program/platform/m1b73_mouse_state.c",
+      "-o",
+      "D:\\Prog\\simant_recon\\build\\workers\\m1b73_queue_source_adapter_v2\\m1b73_queue_source_view_probe.exe"
+    ],
+    "compile_stderr": "",
+    "coverage": "slot indices 0..3 return their exact canonical queue member addresses; 0xff returns NULL; queue row spans point to their exact 5/48/48/10 source-derived arrays; g_9120 byte accessor returns the low byte of the one 16-bit owner",
+    "run_returncode": 0,
+    "run_stderr": "",
+    "run_stdout": "",
+    "status": "PASS"
+  },
+  "queue_adapter_ledger": {
+    "changes": {
+      "f_1B73_0AC3_prototype": "typed native queue view; source argument order preserved",
+      "f_1B73_0B00_prototype": "typed native queue view; source argument order preserved",
+      "f_1B73_0B5B_prototype": "typed native queue view; source argument order preserved",
+      "f_1B73_0BC5_prototype": "typed native queue view; source argument order preserved",
+      "f_1B73_0C42_prototype": "typed native queue view; source argument order preserved",
+      "fd_5071_0060_argument_views": 3,
+      "fd_5071_03C4_argument_views": 5,
+      "fd_5071_0728_argument_views": 5,
+      "g_9120": "one C byte read through the canonical uint16 owner's low-byte accessor",
+      "g_9122": "uses the canonical int16_t mouse-state declaration",
+      "g_9124": "uses the canonical int16_t mouse-state declaration"
+    },
+    "function_order_preserved": true,
+    "historical_source_sha256": "f4359bdaf4cfc0fe326a54cf8a1eacb9ba3098b710bf2a561b3d0f48569bf6d8",
+    "kind": "SOURCE_M1B73_QUEUE_TYPED_VIEWS",
+    "output_sha256": "73413e34e474a2b9fd24b31bc0d87a42c7abb262ba6eac0e55e87c7b7ea70cde",
+    "owner_model": "all slot expressions are borrowed selectors into portable_m1b73_queue_set; no duplicate queue bytes or g_9120/g_9122/g_9124 globals",
+    "queue_operation_abi": {
+      "f_1B73_030F": "variadic callsites pass four or five words while ASM reads five words after the return address; remains explicitly outside this adapter",
+      "f_1B73_09E9": "two signed words x/y; no queue pointer",
+      "f_1B73_0AC3": "source stack words: far Timer*, far slot; native Timer* + PortableM1B73Queue*",
+      "f_1B73_0B00": "source stack words: far Timer*, far slot; native Timer* + PortableM1B73Queue*",
+      "f_1B73_0B5B": "source stack words: ticks, far slot; native typed int16_t + PortableM1B73Queue*",
+      "f_1B73_0BC5": "source stack words: ticks, far slot; declared void in C although ASM returns AX; caller ignores the result",
+      "f_1B73_0C42": "source stack words: id, far slot, output far pointer as offset/segment words; native source adapter retains source words pending caller pointer normalization"
+    },
+    "queue_source_slots": {
+      "Queue0": {
+        "native_capacity": 4,
+        "original_pointer_target": "Queue0",
+        "record_count": 5,
+        "slot_index": 0
+      },
+      "fd_5071_0060": {
+        "native_capacity": 47,
+        "record_count": 48,
+        "slot_index": 1
+      },
+      "fd_5071_03C4": {
+        "native_capacity": 47,
+        "record_count": 48,
+        "slot_index": 2
+      },
+      "fd_5071_0728": {
+        "native_capacity": 9,
+        "record_count": 10,
+        "slot_index": 3
+      }
+    },
+    "source_path": "src/root/m1FD2.c",
+    "timer_adapted_input_sha256": "fc2f78b956a5deeb8f678ecd73e919631ade3450e25a309adc2fc789aa1a7ed0"
+  },
+  "schema": "whole-program-m1b73-queue-source-adapter-v1",
+  "scope": "strict syntax compile of the full actual root:m1FD2 translation unit after the existing Timer lift, new pre-word mouse/queue adapter, and whole-program word converter; separate native getter bounds test; no function behavioral equivalence claim",
+  "shared_runtime_declaration_normalization": {
+    "basis": "same narrow post-word declaration centralization used by portable/tools/whole_program.py",
+    "dos_io_declarations_removed": 0,
+    "far_memory_declarations_removed": 2
+  },
+  "source_function_count": 33,
+  "source_function_order": [
+    "f_1FD2_0008",
+    "f_1FD2_0059",
+    "f_1FD2_0077",
+    "f_1FD2_00D6",
+    "f_1FD2_0135",
+    "f_1FD2_0198",
+    "f_1FD2_021B",
+    "f_1FD2_02B1",
+    "f_1FD2_02FF",
+    "f_1FD2_031A",
+    "f_1FD2_032F",
+    "f_1FD2_0379",
+    "f_1FD2_0390",
+    "f_1FD2_03EB",
+    "f_1FD2_0438",
+    "f_1FD2_044F",
+    "f_1FD2_049C",
+    "f_1FD2_04B3",
+    "f_1FD2_04D0",
+    "f_1FD2_04E5",
+    "f_1FD2_052B",
+    "StillDown",
+    "ButtonHeldInit",
+    "ButtonHeld",
+    "ButtonHeldEnd",
+    "f_1FD2_05FD",
+    "SetMenuItemState",
+    "f_1FD2_0663",
+    "f_1FD2_07CB",
+    "f_1FD2_080D",
+    "f_1FD2_082E",
+    "f_1FD2_084F",
+    "f_1FD2_0883"
+  ],
+  "source_function_order_preserved": true,
+  "status": "PASS_ADAPTED_ROOT_M1FD2_SYNTAX_AND_QUEUE_OWNER_BOUNDS",
+  "timer_ledger": {
+    "function_bodies_rewritten": 0,
+    "lifted_declarations": {
+      "struct Rect": 1,
+      "struct Timer": 1
+    },
+    "shared_header": "portable/whole_program/types/timer.h",
+    "source_owner_preserved": "struct Timer g_5FF2 initializer remains in m1FD2 TU",
+    "source_path": "src/root/m1FD2.c",
+    "source_sha256": "f4359bdaf4cfc0fe326a54cf8a1eacb9ba3098b710bf2a561b3d0f48569bf6d8"
+  },
+  "typed_queue_slot_callsite_counts": {
+    "1": 3,
+    "2": 5,
+    "3": 5
+  },
+  "whole_tu_compile": {
+    "candidate": "build/workers/m1b73_queue_source_adapter_v2/m1FD2-adapted.c",
+    "candidate_sha256": "f72e55cfe853426185ed0cd550e61ad0f87d6f8b290735811f992795e97b400d",
+    "command": [
+      "C:\\msys64\\mingw64\\bin\\gcc.exe",
+      "-std=c11",
+      "-fsyntax-only",
+      "-fno-builtin",
+      "-Werror=implicit-function-declaration",
+      "-Werror=incompatible-pointer-types",
+      "-I",
+      "D:\\Prog\\simant_recon",
+      "-I",
+      "D:\\Prog\\simant_recon\\build\\workers\\m1b73_queue_source_adapter_v2",
+      "D:\\Prog\\simant_recon\\build\\workers\\m1b73_queue_source_adapter_v2\\m1FD2-adapted.c"
+    ],
+    "diagnostics": "",
+    "returncode": 0
+  },
+  "word_conversion_ledger": {
+    "FILE_namespaced": 0,
+    "_ffree_namespaced": 0,
+    "_frealloc_namespaced": 0,
+    "access_namespaced": 0,
+    "bare_unsigned": 1,
+    "chdir_namespaced": 0,
+    "close_namespaced": 0,
+    "errno_namespaced": 0,
+    "fclose_namespaced": 0,
+    "fopen_namespaced": 0,
+    "fread_namespaced": 0,
+    "free_namespaced": 0,
+    "getcwd_namespaced": 0,
+    "int16_t": 96,
+    "int32_t": 1,
+    "int8_t": 0,
+    "lseek_namespaced": 0,
+    "main_renamed": 0,
+    "malloc_namespaced": 0,
+    "open_namespaced": 0,
+    "qualifier_removed": 114,
+    "read_namespaced": 0,
+    "remove_namespaced": 0,
+    "stricmp_namespaced": 0,
+    "uint16_t": 0,
+    "uint32_t": 1,
+    "uint8_t": 0,
+    "write_namespaced": 0
+  }
+}

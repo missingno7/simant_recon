@@ -1,0 +1,689 @@
+{
+  "schema": "simant-whole-program-central-hcegant-window-v1",
+  "created_unix_ns": 1790993210241652500,
+  "result": "PASS",
+  "classification": "native actual-source integration; not DOS differential",
+  "claim_scope": "The actual source OpenDB/OpenIndex/DBRecall/db_LoadObject and source allocator provide HCEGANT window 0; generated win_LockWin/win_LoadWindow/RepointObjects/win_Recalc/win_UnlockWin use one process-wide registry owner. Punt/WinPrintf and unavailable EMS are the bounded host-service edges. The original SetDefaultWindows resource orchestration is outside this call path. No PortableDatabase duplicate or test resource callback is used.",
+  "expected_from_independent_resource_parser": {
+    "payload_size": 1074,
+    "count": 23,
+    "objects": [
+      [
+        0,
+        136,
+        15,
+        41
+      ],
+      [
+        1,
+        177,
+        18,
+        51
+      ],
+      [
+        2,
+        228,
+        6,
+        42
+      ],
+      [
+        3,
+        270,
+        6,
+        42
+      ],
+      [
+        4,
+        312,
+        1,
+        40
+      ],
+      [
+        5,
+        352,
+        1,
+        40
+      ],
+      [
+        6,
+        392,
+        1,
+        40
+      ],
+      [
+        7,
+        432,
+        1,
+        40
+      ],
+      [
+        8,
+        472,
+        1,
+        40
+      ],
+      [
+        9,
+        512,
+        1,
+        40
+      ],
+      [
+        10,
+        552,
+        1,
+        40
+      ],
+      [
+        11,
+        592,
+        1,
+        40
+      ],
+      [
+        12,
+        632,
+        1,
+        40
+      ],
+      [
+        13,
+        672,
+        1,
+        40
+      ],
+      [
+        14,
+        712,
+        1,
+        40
+      ],
+      [
+        15,
+        752,
+        1,
+        40
+      ],
+      [
+        16,
+        792,
+        1,
+        40
+      ],
+      [
+        17,
+        832,
+        1,
+        40
+      ],
+      [
+        18,
+        872,
+        1,
+        40
+      ],
+      [
+        19,
+        912,
+        1,
+        40
+      ],
+      [
+        20,
+        952,
+        2,
+        41
+      ],
+      [
+        21,
+        993,
+        1,
+        40
+      ],
+      [
+        22,
+        1033,
+        2,
+        41
+      ]
+    ],
+    "payload_sha256": "67440433d7ef01202c6e07439224cd967a208c1be120f869c91647c20cd37905"
+  },
+  "observed_locked_state": [
+    0,
+    23,
+    1074,
+    1,
+    0
+  ],
+  "observed_objects": [
+    [
+      0,
+      136,
+      15,
+      41
+    ],
+    [
+      1,
+      177,
+      18,
+      51
+    ],
+    [
+      2,
+      228,
+      6,
+      42
+    ],
+    [
+      3,
+      270,
+      6,
+      42
+    ],
+    [
+      4,
+      312,
+      1,
+      40
+    ],
+    [
+      5,
+      352,
+      1,
+      40
+    ],
+    [
+      6,
+      392,
+      1,
+      40
+    ],
+    [
+      7,
+      432,
+      1,
+      40
+    ],
+    [
+      8,
+      472,
+      1,
+      40
+    ],
+    [
+      9,
+      512,
+      1,
+      40
+    ],
+    [
+      10,
+      552,
+      1,
+      40
+    ],
+    [
+      11,
+      592,
+      1,
+      40
+    ],
+    [
+      12,
+      632,
+      1,
+      40
+    ],
+    [
+      13,
+      672,
+      1,
+      40
+    ],
+    [
+      14,
+      712,
+      1,
+      40
+    ],
+    [
+      15,
+      752,
+      1,
+      40
+    ],
+    [
+      16,
+      792,
+      1,
+      40
+    ],
+    [
+      17,
+      832,
+      1,
+      40
+    ],
+    [
+      18,
+      872,
+      1,
+      40
+    ],
+    [
+      19,
+      912,
+      1,
+      40
+    ],
+    [
+      20,
+      952,
+      2,
+      41
+    ],
+    [
+      21,
+      993,
+      1,
+      40
+    ],
+    [
+      22,
+      1033,
+      2,
+      41
+    ]
+  ],
+  "observed_after_unlock": [
+    0,
+    1,
+    1
+  ],
+  "runtime_stdout": "WINDOW,0,23,1074,1,0\nOBJECT,0,136,15,41\nOBJECT,1,177,18,51\nOBJECT,2,228,6,42\nOBJECT,3,270,6,42\nOBJECT,4,312,1,40\nOBJECT,5,352,1,40\nOBJECT,6,392,1,40\nOBJECT,7,432,1,40\nOBJECT,8,472,1,40\nOBJECT,9,512,1,40\nOBJECT,10,552,1,40\nOBJECT,11,592,1,40\nOBJECT,12,632,1,40\nOBJECT,13,672,1,40\nOBJECT,14,712,1,40\nOBJECT,15,752,1,40\nOBJECT,16,792,1,40\nOBJECT,17,832,1,40\nOBJECT,18,872,1,40\nOBJECT,19,912,1,40\nOBJECT,20,952,2,41\nOBJECT,21,993,1,40\nOBJECT,22,1033,2,41\nUNLOCK,0,1,1\n",
+  "compile_command": [
+    "C:\\msys64\\mingw64\\bin\\gcc.exe",
+    "-std=c11",
+    "-O0",
+    "-fsigned-char",
+    "-fno-builtin-sprintf",
+    "-ffunction-sections",
+    "-fdata-sections",
+    "-Werror=implicit-function-declaration",
+    "-I",
+    "D:\\Prog\\simant_recon",
+    "D:\\Prog\\simant_recon\\build\\workers\\whole_program\\generated\\root_m1986.c",
+    "D:\\Prog\\simant_recon\\build\\workers\\whole_program\\generated\\root_m19A9.c",
+    "D:\\Prog\\simant_recon\\build\\workers\\whole_program\\generated\\root_m19DC.c",
+    "D:\\Prog\\simant_recon\\build\\workers\\whole_program\\generated\\root_m1A28.c",
+    "D:\\Prog\\simant_recon\\build\\workers\\whole_program\\generated\\root_m1A53.c",
+    "D:\\Prog\\simant_recon\\build\\workers\\whole_program\\generated\\root_m1A96.c",
+    "D:\\Prog\\simant_recon\\build\\workers\\whole_program\\generated\\root_m1B28.c",
+    "D:\\Prog\\simant_recon\\build\\workers\\whole_program\\generated\\root_m20E8.c",
+    "D:\\Prog\\simant_recon\\build\\workers\\whole_program\\generated\\root_m23AE.c",
+    "D:\\Prog\\simant_recon\\build\\workers\\whole_program\\generated\\root_m2505.c",
+    "D:\\Prog\\simant_recon\\portable\\whole_program\\state\\database.c",
+    "D:\\Prog\\simant_recon\\portable\\whole_program\\conversions\\pointer_globals.c",
+    "D:\\Prog\\simant_recon\\portable\\whole_program\\window_source_globals.c",
+    "D:\\Prog\\simant_recon\\portable\\whole_program\\window_refs.c",
+    "D:\\Prog\\simant_recon\\portable\\whole_program\\window_runtime_owner.c",
+    "D:\\Prog\\simant_recon\\portable\\whole_program\\platform\\handles.c",
+    "D:\\Prog\\simant_recon\\portable\\whole_program\\platform\\dos_io.c",
+    "D:\\Prog\\simant_recon\\portable\\whole_program\\platform\\dos_format.c",
+    "D:\\Prog\\simant_recon\\portable\\whole_program\\platform\\dos_memory.c",
+    "D:\\Prog\\simant_recon\\portable\\whole_program\\platform\\crt_abi.c",
+    "D:\\Prog\\simant_recon\\portable\\platform\\memory.c",
+    "D:\\Prog\\simant_recon\\portable\\whole_program\\algorithms\\lzss.c",
+    "D:\\Prog\\simant_recon\\portable\\tests\\whole_program\\window_refs\\central_hcegant_window_driver.c",
+    "-Wl,--gc-sections",
+    "-o",
+    "D:\\Prog\\simant_recon\\build\\workers\\behavior_window\\central-window\\hcegant-window-jeqwjmh2\\central-hcegant-window.exe"
+  ],
+  "compile_stdout": "",
+  "compile_stderr": "D:\\Prog\\simant_recon\\build\\workers\\whole_program\\generated\\root_m19DC.c: In function 'f_19DC_02FB':\nD:\\Prog\\simant_recon\\build\\workers\\whole_program\\generated\\root_m19DC.c:198:5: warning: 'return' with no value, in function returning non-void\n  198 |     return;\n      |     ^~~~~~\nD:\\Prog\\simant_recon\\build\\workers\\whole_program\\generated\\root_m19DC.c:158:10: note: declared here\n  158 | int16_t  f_19DC_02FB(int16_t file, int32_t offset, char  *buffer, int32_t count)\n      |          ^~~~~~~~~~~\nD:\\Prog\\simant_recon\\build\\workers\\whole_program\\generated\\root_m20E8.c:17:32: warning: initialization of 'void (*)(int16_t)' {aka 'void (*)(short int)'} from incompatible pointer type 'void (*)(void)' [-Wincompatible-pointer-types]\n   17 | void ( *g_62E0)(int16_t win) = f_20E8_0000;\n      |                                ^~~~~~~~~~~\nD:\\Prog\\simant_recon\\build\\workers\\whole_program\\generated\\root_m20E8.c:22:32: warning: initialization of 'void (*)(int16_t)' {aka 'void (*)(short int)'} from incompatible pointer type 'void (*)(void)' [-Wincompatible-pointer-types]\n   22 | void ( *g_62F4)(int16_t win) = f_20E8_0000;\n      |                                ^~~~~~~~~~~\n",
+  "executable": {
+    "sha256": "30f34854625dec03061e42d295317696853ca5859b65c36cd34e2efb29b34b74",
+    "size": 563098
+  },
+  "compiler": {
+    "path": "C:\\msys64\\mingw64\\bin\\gcc.exe",
+    "identity": {
+      "sha256": "c5005ba5380351c10743e9ca53ef9632164c54be3bd6b93324795114e4589a7d",
+      "size": 2350907
+    },
+    "version": "gcc.exe (Rev10, Built by MSYS2 project) 12.2.0"
+  },
+  "inputs_before": {
+    "build/workers/whole_program/generated/root_m1986.c": {
+      "sha256": "35f25251e4a12336aacc2842f79cc08569d16e37affd6f77623fc8b7f2709b7a",
+      "size": 3309
+    },
+    "build/workers/whole_program/generated/root_m19A9.c": {
+      "sha256": "eddce3726f1377cbc7192634f707ab34f1860eb1516830806633528352fbd95e",
+      "size": 4810
+    },
+    "build/workers/whole_program/generated/root_m19DC.c": {
+      "sha256": "35b91d61f33077b866d3754426faeb1d84f8792058119e30c8b8bc953449a911",
+      "size": 5080
+    },
+    "build/workers/whole_program/generated/root_m1A28.c": {
+      "sha256": "c80b16606acbb52bf6e97f0807e052ae2b036d36bc3f8fea4c15b34ca16c167e",
+      "size": 3090
+    },
+    "build/workers/whole_program/generated/root_m1A53.c": {
+      "sha256": "c2e128a71c0b4c21acb2b3e77f50146ac34c23d0a7730dfbdb2b15601d1b4ab2",
+      "size": 5634
+    },
+    "build/workers/whole_program/generated/root_m1A96.c": {
+      "sha256": "4bb59b223a9bb20c823e34cc9dafec21dc5ff9d0fedc51ef8c5eada5a37ab417",
+      "size": 7130
+    },
+    "build/workers/whole_program/generated/root_m1B28.c": {
+      "sha256": "f50a0d83f64605156b7d8a14af505842024cfadc78fa7b34ba74239df50ded32",
+      "size": 2666
+    },
+    "build/workers/whole_program/generated/root_m20E8.c": {
+      "sha256": "53bcc4ac0c5cbfbc23ef9bffa1d3fa4322f28f321800e9d8e355dc1109d5eb30",
+      "size": 12717
+    },
+    "build/workers/whole_program/generated/root_m23AE.c": {
+      "sha256": "43bc17c5affe56f84aff5583739882b48ce4e94023a2cca876674ed89f3889b2",
+      "size": 6739
+    },
+    "build/workers/whole_program/generated/root_m2505.c": {
+      "sha256": "b6ad767b6d4e3ccacd7b728154d212023333a55d21f7ab7b7183884e808e3944",
+      "size": 12052
+    },
+    "portable/whole_program/state/database.c": {
+      "sha256": "c37df65a816cfcc7f03ade9343e645220dbf54be101cfaf9c7c4f7aef11fad27",
+      "size": 182
+    },
+    "portable/whole_program/conversions/pointer_globals.c": {
+      "sha256": "f6be2f70061b4c00ab948303c7e2f8bab60808f1c4f5198599051526542bfdac",
+      "size": 399
+    },
+    "portable/whole_program/window_source_globals.c": {
+      "sha256": "e1d2d3603c70a05ff6d0ff47df3562db301d2f804cb5256a6bd8767436f947a5",
+      "size": 1643
+    },
+    "portable/whole_program/window_refs.c": {
+      "sha256": "6a477661785195a43d39057fafc01348c8a9d32335072c126f0d828eefafdf93",
+      "size": 17741
+    },
+    "portable/whole_program/window_runtime_owner.c": {
+      "sha256": "0739647b8dc8a460ff49daf474a033dd0b8e8dfd109bd06d340d07b57890a78f",
+      "size": 349
+    },
+    "portable/whole_program/platform/handles.c": {
+      "sha256": "068e9f92415773ebb087bcac78c523b49d3fb93ed60938795988a756f699dd70",
+      "size": 25481
+    },
+    "portable/whole_program/platform/dos_io.c": {
+      "sha256": "c46877dfc2d14057f6d57bf4e79c7a5d4899c1cdeb1c5a8b158e8b7dc6fbaff0",
+      "size": 10148
+    },
+    "portable/whole_program/platform/dos_format.c": {
+      "sha256": "7454989b77187ea7012681df606502084b353fa136e75c588d55fb01a5f51dd1",
+      "size": 9840
+    },
+    "portable/whole_program/platform/dos_memory.c": {
+      "sha256": "d821e60e0053ab73f648f3169e5d71c818eea0b2d2cef7dd0535720ab3ece750",
+      "size": 1717
+    },
+    "portable/whole_program/platform/crt_abi.c": {
+      "sha256": "2ac651c52b16e4d3c4c2b665ab1290f7b0eef71ec4c5148f564c717bef133604",
+      "size": 1479
+    },
+    "portable/platform/memory.c": {
+      "sha256": "de523d686a9153d11c83bd024e6b7b1131631ee03d8f20108c3359b66b95cfec",
+      "size": 1670
+    },
+    "portable/whole_program/algorithms/lzss.c": {
+      "sha256": "a23b65265e2d91cbd2a93333760d342dbc085bb0d9c1c676c756651d00529540",
+      "size": 3036
+    },
+    "portable/tests/whole_program/window_refs/central_hcegant_window_driver.c": {
+      "sha256": "0097c42cf3976b1db613c2379383ca218a4f439e1f8b2d98248b6246dd086f06",
+      "size": 5253
+    },
+    "build/workers/whole_program/generated/dos_types.h": {
+      "sha256": "917da2a746f22bd61b32310a89a15ba16328bbe29a90895e47ad37e923dda705",
+      "size": 333
+    },
+    "build/workers/whole_program/generated/migration.json": {
+      "sha256": "cc3ce53f8fb86ae8f7f946d64598d73ee365d6eaf7508fab40f368972229f460",
+      "size": 2958741
+    },
+    "portable/whole_program/window_refs.h": {
+      "sha256": "0a079e399247a4c8ee16eb0389a5a55c6bf1e9a8a5d4f86144b6db6e1977cd74",
+      "size": 6066
+    },
+    "portable/whole_program/window_runtime_owner.h": {
+      "sha256": "dc9b0751dbc14e4bc88f9c7648f4c132cba64fca76a2b1c5aab676b762b59c98",
+      "size": 537
+    },
+    "portable/whole_program/window_source_globals.h": {
+      "sha256": "6cb4cbfb21c816851eaab8ed8586316ca98b07fadb69c1a05808c026c1650ffa",
+      "size": 1381
+    },
+    "portable/whole_program/window_source_rects.h": {
+      "sha256": "b17ad3b03ad8eef6b79304f9a2fac9de94084d956093b34038b3ea409b832306",
+      "size": 483
+    },
+    "portable/whole_program/conversions/pointer_globals.h": {
+      "sha256": "8cc3ffc6ed145b8d0c185fffb3da35278327189bc89bf57ffcaecc5105da65a2",
+      "size": 1170
+    },
+    "portable/whole_program/types/database.h": {
+      "sha256": "8722c3fceb9f0af92bbe4129020d648ee69c8ee00c6f4614b89794fa815481a6",
+      "size": 2018
+    },
+    "portable/whole_program/platform/handles.h": {
+      "sha256": "2b7ee389256bec2b1ccdf6cebdf89612fe15b8cdf5e945d2cd49247a3e9b7f1b",
+      "size": 6000
+    },
+    "portable/whole_program/platform/dos_io.h": {
+      "sha256": "afa62ac7e715a4c8af9713de3ac49b9628b14d3d261dff35674a0abac277159a",
+      "size": 1487
+    },
+    "portable/whole_program/platform/dos_files.h": {
+      "sha256": "7febf02ee92777f9579ad40baa4448aa9b08c19ae80ac2982e60d521762f1957",
+      "size": 835
+    },
+    "portable/whole_program/platform/dos_memory.h": {
+      "sha256": "ea5065004c8f52a26c7bb6c4c2344b85701370eee0784a172a7b0094774844ce",
+      "size": 1001
+    },
+    "portable/whole_program/platform/dos_format.h": {
+      "sha256": "94f74d990e17b2412d25404fc27343eb81f12ba5e19e98f0000280f65deb07ff",
+      "size": 823
+    },
+    "portable/whole_program/platform/crt_abi.h": {
+      "sha256": "fe261e3408f1162138d8b4466c1b259a0908d18be0cce0c30d4b3d873fbc16c6",
+      "size": 950
+    },
+    "portable/whole_program/algorithms/lzss.h": {
+      "sha256": "5e732a4607b180afb5954c06e0a68c13bc6be5805af07610d285c93e4679e549",
+      "size": 351
+    },
+    "portable/tests/whole_program/window_refs/run_central_hcegant_window.py": {
+      "sha256": "482c1d659374615b5dec7639790e02d340fe3f438a642affb7468ab0dc228022",
+      "size": 9092
+    },
+    "assets/HCEGANT.NDX": {
+      "sha256": "077d8aecdad5e816f0828204f7ca500a68b3a4a3288740ac75e73e44eaa8efc4",
+      "size": 2444
+    },
+    "assets/HCEGANT.DAT": {
+      "sha256": "9c98c0f110e901a2c2db65944e4ebdf6b26392181e9415a34eb7b29617eaa899",
+      "size": 629438
+    }
+  },
+  "inputs_after": {
+    "build/workers/whole_program/generated/root_m1986.c": {
+      "sha256": "35f25251e4a12336aacc2842f79cc08569d16e37affd6f77623fc8b7f2709b7a",
+      "size": 3309
+    },
+    "build/workers/whole_program/generated/root_m19A9.c": {
+      "sha256": "eddce3726f1377cbc7192634f707ab34f1860eb1516830806633528352fbd95e",
+      "size": 4810
+    },
+    "build/workers/whole_program/generated/root_m19DC.c": {
+      "sha256": "35b91d61f33077b866d3754426faeb1d84f8792058119e30c8b8bc953449a911",
+      "size": 5080
+    },
+    "build/workers/whole_program/generated/root_m1A28.c": {
+      "sha256": "c80b16606acbb52bf6e97f0807e052ae2b036d36bc3f8fea4c15b34ca16c167e",
+      "size": 3090
+    },
+    "build/workers/whole_program/generated/root_m1A53.c": {
+      "sha256": "c2e128a71c0b4c21acb2b3e77f50146ac34c23d0a7730dfbdb2b15601d1b4ab2",
+      "size": 5634
+    },
+    "build/workers/whole_program/generated/root_m1A96.c": {
+      "sha256": "4bb59b223a9bb20c823e34cc9dafec21dc5ff9d0fedc51ef8c5eada5a37ab417",
+      "size": 7130
+    },
+    "build/workers/whole_program/generated/root_m1B28.c": {
+      "sha256": "f50a0d83f64605156b7d8a14af505842024cfadc78fa7b34ba74239df50ded32",
+      "size": 2666
+    },
+    "build/workers/whole_program/generated/root_m20E8.c": {
+      "sha256": "53bcc4ac0c5cbfbc23ef9bffa1d3fa4322f28f321800e9d8e355dc1109d5eb30",
+      "size": 12717
+    },
+    "build/workers/whole_program/generated/root_m23AE.c": {
+      "sha256": "43bc17c5affe56f84aff5583739882b48ce4e94023a2cca876674ed89f3889b2",
+      "size": 6739
+    },
+    "build/workers/whole_program/generated/root_m2505.c": {
+      "sha256": "b6ad767b6d4e3ccacd7b728154d212023333a55d21f7ab7b7183884e808e3944",
+      "size": 12052
+    },
+    "portable/whole_program/state/database.c": {
+      "sha256": "c37df65a816cfcc7f03ade9343e645220dbf54be101cfaf9c7c4f7aef11fad27",
+      "size": 182
+    },
+    "portable/whole_program/conversions/pointer_globals.c": {
+      "sha256": "f6be2f70061b4c00ab948303c7e2f8bab60808f1c4f5198599051526542bfdac",
+      "size": 399
+    },
+    "portable/whole_program/window_source_globals.c": {
+      "sha256": "e1d2d3603c70a05ff6d0ff47df3562db301d2f804cb5256a6bd8767436f947a5",
+      "size": 1643
+    },
+    "portable/whole_program/window_refs.c": {
+      "sha256": "6a477661785195a43d39057fafc01348c8a9d32335072c126f0d828eefafdf93",
+      "size": 17741
+    },
+    "portable/whole_program/window_runtime_owner.c": {
+      "sha256": "0739647b8dc8a460ff49daf474a033dd0b8e8dfd109bd06d340d07b57890a78f",
+      "size": 349
+    },
+    "portable/whole_program/platform/handles.c": {
+      "sha256": "068e9f92415773ebb087bcac78c523b49d3fb93ed60938795988a756f699dd70",
+      "size": 25481
+    },
+    "portable/whole_program/platform/dos_io.c": {
+      "sha256": "c46877dfc2d14057f6d57bf4e79c7a5d4899c1cdeb1c5a8b158e8b7dc6fbaff0",
+      "size": 10148
+    },
+    "portable/whole_program/platform/dos_format.c": {
+      "sha256": "7454989b77187ea7012681df606502084b353fa136e75c588d55fb01a5f51dd1",
+      "size": 9840
+    },
+    "portable/whole_program/platform/dos_memory.c": {
+      "sha256": "d821e60e0053ab73f648f3169e5d71c818eea0b2d2cef7dd0535720ab3ece750",
+      "size": 1717
+    },
+    "portable/whole_program/platform/crt_abi.c": {
+      "sha256": "2ac651c52b16e4d3c4c2b665ab1290f7b0eef71ec4c5148f564c717bef133604",
+      "size": 1479
+    },
+    "portable/platform/memory.c": {
+      "sha256": "de523d686a9153d11c83bd024e6b7b1131631ee03d8f20108c3359b66b95cfec",
+      "size": 1670
+    },
+    "portable/whole_program/algorithms/lzss.c": {
+      "sha256": "a23b65265e2d91cbd2a93333760d342dbc085bb0d9c1c676c756651d00529540",
+      "size": 3036
+    },
+    "portable/tests/whole_program/window_refs/central_hcegant_window_driver.c": {
+      "sha256": "0097c42cf3976b1db613c2379383ca218a4f439e1f8b2d98248b6246dd086f06",
+      "size": 5253
+    },
+    "build/workers/whole_program/generated/dos_types.h": {
+      "sha256": "917da2a746f22bd61b32310a89a15ba16328bbe29a90895e47ad37e923dda705",
+      "size": 333
+    },
+    "build/workers/whole_program/generated/migration.json": {
+      "sha256": "cc3ce53f8fb86ae8f7f946d64598d73ee365d6eaf7508fab40f368972229f460",
+      "size": 2958741
+    },
+    "portable/whole_program/window_refs.h": {
+      "sha256": "0a079e399247a4c8ee16eb0389a5a55c6bf1e9a8a5d4f86144b6db6e1977cd74",
+      "size": 6066
+    },
+    "portable/whole_program/window_runtime_owner.h": {
+      "sha256": "dc9b0751dbc14e4bc88f9c7648f4c132cba64fca76a2b1c5aab676b762b59c98",
+      "size": 537
+    },
+    "portable/whole_program/window_source_globals.h": {
+      "sha256": "6cb4cbfb21c816851eaab8ed8586316ca98b07fadb69c1a05808c026c1650ffa",
+      "size": 1381
+    },
+    "portable/whole_program/window_source_rects.h": {
+      "sha256": "b17ad3b03ad8eef6b79304f9a2fac9de94084d956093b34038b3ea409b832306",
+      "size": 483
+    },
+    "portable/whole_program/conversions/pointer_globals.h": {
+      "sha256": "8cc3ffc6ed145b8d0c185fffb3da35278327189bc89bf57ffcaecc5105da65a2",
+      "size": 1170
+    },
+    "portable/whole_program/types/database.h": {
+      "sha256": "8722c3fceb9f0af92bbe4129020d648ee69c8ee00c6f4614b89794fa815481a6",
+      "size": 2018
+    },
+    "portable/whole_program/platform/handles.h": {
+      "sha256": "2b7ee389256bec2b1ccdf6cebdf89612fe15b8cdf5e945d2cd49247a3e9b7f1b",
+      "size": 6000
+    },
+    "portable/whole_program/platform/dos_io.h": {
+      "sha256": "afa62ac7e715a4c8af9713de3ac49b9628b14d3d261dff35674a0abac277159a",
+      "size": 1487
+    },
+    "portable/whole_program/platform/dos_files.h": {
+      "sha256": "7febf02ee92777f9579ad40baa4448aa9b08c19ae80ac2982e60d521762f1957",
+      "size": 835
+    },
+    "portable/whole_program/platform/dos_memory.h": {
+      "sha256": "ea5065004c8f52a26c7bb6c4c2344b85701370eee0784a172a7b0094774844ce",
+      "size": 1001
+    },
+    "portable/whole_program/platform/dos_format.h": {
+      "sha256": "94f74d990e17b2412d25404fc27343eb81f12ba5e19e98f0000280f65deb07ff",
+      "size": 823
+    },
+    "portable/whole_program/platform/crt_abi.h": {
+      "sha256": "fe261e3408f1162138d8b4466c1b259a0908d18be0cce0c30d4b3d873fbc16c6",
+      "size": 950
+    },
+    "portable/whole_program/algorithms/lzss.h": {
+      "sha256": "5e732a4607b180afb5954c06e0a68c13bc6be5805af07610d285c93e4679e549",
+      "size": 351
+    },
+    "portable/tests/whole_program/window_refs/run_central_hcegant_window.py": {
+      "sha256": "482c1d659374615b5dec7639790e02d340fe3f438a642affb7468ab0dc228022",
+      "size": 9092
+    },
+    "assets/HCEGANT.NDX": {
+      "sha256": "077d8aecdad5e816f0828204f7ca500a68b3a4a3288740ac75e73e44eaa8efc4",
+      "size": 2444
+    },
+    "assets/HCEGANT.DAT": {
+      "sha256": "9c98c0f110e901a2c2db65944e4ebdf6b26392181e9415a34eb7b29617eaa899",
+      "size": 629438
+    }
+  }
+}

@@ -230,3 +230,21 @@ void f_1B73_0518(void)
 {
     sim_timing_set_tick_count_enabled(require_events()->clock, 1);
 }
+
+void f_1B73_030F(int16_t bx, int16_t es, int16_t ax,
+                 int16_t cx, int16_t dx)
+{
+    /* A full source ring is the original f_036E no-op path. */
+    (void)portable_m1b73_event_enqueue_registers(require_events(),
+        (uint16_t)ax, (uint16_t)cx, (uint16_t)dx,
+        (uint16_t)bx, (uint16_t)es);
+}
+
+void portable_m1b73_event_enqueue_four_word_command(
+    int16_t bx, int16_t es, int16_t ax, int16_t cx)
+{
+    /* The four source callsites enqueue command events whose Event.v is not
+     * read by their reachable consumers. The fifth DOS stack word is not
+     * represented by C; normalize only this unobserved field to zero. */
+    f_1B73_030F(bx, es, ax, cx, 0);
+}

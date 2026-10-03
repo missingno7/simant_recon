@@ -1,4 +1,5 @@
 #include "portable/whole_program/platform/graphics.h"
+#include "portable/whole_program/platform/graphics_source_clip.h"
 #include "portable/whole_program/text_bitmap_bridge.h"
 
 #include <stdio.h>
@@ -19,7 +20,6 @@ int main(void)
     SimGraphicsDriver graphics;
     uint8_t glyphs[256u * 14u];
     uint8_t fold_window[256];
-    uint16_t source_g_5AAE = 0;
     const PortableTextBitmapState *state;
     size_t i;
     size_t pixel_count = 0;
@@ -35,7 +35,8 @@ int main(void)
     if (!check(sim_graphics_set_glyph_source(&graphics, glyphs, sizeof(glyphs),
                                              14, 8, 14) == SIM_GRAPHICS_OK,
                "real source glyph owner binds")) return 1;
-    if (!check(sim_graphics_bind_source_abi(&graphics, &source_g_5AAE) ==
+    if (!check(sim_graphics_bind_source_abi(&graphics,
+                                             sim_graphics_source_clip_slot()) ==
                SIM_GRAPHICS_OK, "source graphics ABI binds")) return 1;
     if (!check(portable_text_bitmap_bind_source(0, NULL, 0) ==
                PORTABLE_TEXT_BITMAP_OK, "ASCII source context binds")) return 1;

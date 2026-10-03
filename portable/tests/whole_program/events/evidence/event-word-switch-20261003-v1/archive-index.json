@@ -1,0 +1,119 @@
+{
+  "schema": "event-word-switch-archive-v1",
+  "native_report_sha256": "4b277eab6ca8f77e6e8fa1a63d12ef989240a6f43963eea280941806c897cbc0",
+  "native_runner_sha256": "bfd8fa0ef177e67291a6b7a49fc3bc9e184a526710c71257396c7fb4ca8d2845",
+  "dos_report_sha256": "89565c0c7469e4211b45d7589736d9496e89319d0826a4e97b5e633ef7be6f18",
+  "native_source_hashes": {
+    "positive_path": "build\\workers\\event_word_switch\\native-exhaustive-v2\\event_word_positive.c",
+    "positive_sha256": "ca6bf22ff1155370d3695b6c771a54c08094338c82ad1023e2de037d75c6607f",
+    "negative_path": "build\\workers\\event_word_switch\\native-exhaustive-v2\\event_word_negative.c",
+    "negative_sha256": "6fd7cddf04e9fe741e30784900e340b6a30464da4d0b4e74ac5d5de08fdff4b3"
+  },
+  "pins": [
+    {
+      "workspace_path": "build/workers/event_word_switch/native_event_word_runner.py",
+      "archive_path": "dependencies/build/workers/event_word_switch/native_event_word_runner.py",
+      "sha256": "bfd8fa0ef177e67291a6b7a49fc3bc9e184a526710c71257396c7fb4ca8d2845"
+    },
+    {
+      "workspace_path": "build/workers/event_word_switch/native_event_word_probe.c",
+      "archive_path": "dependencies/build/workers/event_word_switch/native_event_word_probe.c",
+      "sha256": "f28c553d537546f51fa4a7f274bee009a38c79a2418a503f15a2efc742f99116"
+    },
+    {
+      "workspace_path": "build/workers/event_word_switch/dos_event_word_probe.py",
+      "archive_path": "dependencies/build/workers/event_word_switch/dos_event_word_probe.py",
+      "sha256": "bb2b262a05ffd4556f433dcd674a80827ea3a9e970753f7fdcd0ba5ff42f310d"
+    },
+    {
+      "workspace_path": "build/workers/event_word_switch/dos-directed/report.json",
+      "archive_path": "dependencies/build/workers/event_word_switch/dos-directed/report.json",
+      "sha256": "89565c0c7469e4211b45d7589736d9496e89319d0826a4e97b5e633ef7be6f18"
+    },
+    {
+      "workspace_path": "build/workers/event_word_switch/native-exhaustive-v2/event_word_positive.c",
+      "archive_path": "dependencies/build/workers/event_word_switch/native-exhaustive-v2/event_word_positive.c",
+      "sha256": "ca6bf22ff1155370d3695b6c771a54c08094338c82ad1023e2de037d75c6607f"
+    },
+    {
+      "workspace_path": "build/workers/event_word_switch/native-exhaustive-v2/event_word_negative.c",
+      "archive_path": "dependencies/build/workers/event_word_switch/native-exhaustive-v2/event_word_negative.c",
+      "sha256": "6fd7cddf04e9fe741e30784900e340b6a30464da4d0b4e74ac5d5de08fdff4b3"
+    },
+    {
+      "workspace_path": "build/workers/whole_program/generated/S19_m384C.c",
+      "archive_path": "dependencies/build/workers/whole_program/generated/S19_m384C.c",
+      "sha256": "9aa0af925a75c937c8206e24007cf04bfde2860e09e89526cfde97a446924dee"
+    },
+    {
+      "workspace_path": "src/S19/m384C.c",
+      "archive_path": "dependencies/src/S19/m384C.c",
+      "sha256": "fac1a097c3d992fed772002a87cb5a206050c67a3061e9e9168edc6032e1696b"
+    },
+    {
+      "workspace_path": "portable/whole_program/conversions/event_word_switch.py",
+      "archive_path": "dependencies/portable/whole_program/conversions/event_word_switch.py",
+      "sha256": "b583e47777412107d9d6e8619bade92c81b5c42a23805c2ce20af22685183878"
+    },
+    {
+      "workspace_path": "tools/behavior.py",
+      "archive_path": "dependencies/tools/behavior.py",
+      "sha256": "2c0799048057f59eae61a48be4d695278635594484adf0c70bf46c51b4e0c799"
+    },
+    {
+      "workspace_path": "tools/exe.py",
+      "archive_path": "dependencies/tools/exe.py",
+      "sha256": "d560f69dcdf0d1c9e89278b50bebe225a9b86db2c259fa54ec9eace6ea05a8b5"
+    },
+    {
+      "workspace_path": "tools/functions.py",
+      "archive_path": "dependencies/tools/functions.py",
+      "sha256": "0f67c8d9eb01e319620c9342e79c35f76006091d860894aad6dcf8d61ee2b39e"
+    },
+    {
+      "workspace_path": "tools/match.py",
+      "archive_path": "dependencies/tools/match.py",
+      "sha256": "44fdd8b939b2bbf135d8947d8f6ef6b1854dec133da4af86c55eb94f02869b56"
+    },
+    {
+      "workspace_path": "tools/modctx.py",
+      "archive_path": "dependencies/tools/modctx.py",
+      "sha256": "33f3a4e3d77371e3095bfeb00358c13bc7838235c27bfe8898dba7e313f1cc25"
+    },
+    {
+      "workspace_path": "tools/modules.py",
+      "archive_path": "dependencies/tools/modules.py",
+      "sha256": "8a5c1e85db6970cce3c693c016b313b7ee1922fa6eaf146a00391bfea86edf1a"
+    },
+    {
+      "workspace_path": "layout/functions.json",
+      "archive_path": "dependencies/layout/functions.json",
+      "sha256": "6089a06e18fbe8f0960392cfe30357f7c19c886f38f10f7f115c72d127a756e7"
+    },
+    {
+      "workspace_path": "layout/manifest.json",
+      "archive_path": "dependencies/layout/manifest.json",
+      "sha256": "025a0a9255d910cae4b122ab5a3f3fb40888bb456d7fe42158db7c9e622fcf50"
+    },
+    {
+      "workspace_path": "layout/symbols.json",
+      "archive_path": "dependencies/layout/symbols.json",
+      "sha256": "0f5dd5b0a211945a97782cfccdb9bb31b0dfd07fcde5df4d4f9486b487eb0125"
+    },
+    {
+      "workspace_path": "build/workers/event_word_switch/dos-directed/prepared-original-source/identity.json",
+      "archive_path": "dependencies/build/workers/event_word_switch/dos-directed/prepared-original-source/identity.json",
+      "sha256": "b684b18351ecfe60425e2edfba285bf19e52059cb37072648878a32ecf320b08"
+    },
+    {
+      "workspace_path": "build/workers/event_word_switch/dos-directed/prepared-original-source/behavior-harness.py",
+      "archive_path": "dependencies/build/workers/event_word_switch/dos-directed/prepared-original-source/behavior-harness.py",
+      "sha256": "2c0799048057f59eae61a48be4d695278635594484adf0c70bf46c51b4e0c799"
+    }
+  ],
+  "limits": [
+    "native exhaustive is exact generated function-body routing/payload only",
+    "84 original-DOS PreparedPair cases compile canonical MSC source and capture named callbacks; not generated-native DOS proof",
+    "original oracle EXE external prerequisite; no compiled binary copied"
+  ]
+}

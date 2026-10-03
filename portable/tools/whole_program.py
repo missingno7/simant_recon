@@ -52,6 +52,24 @@ from portable.whole_program.conversions.spider_inline_source import adapt as ada
 from portable.whole_program.conversions.spider_inline_reviewed import adapt_reviewed as adapt_spider_overlay
 from portable.whole_program.conversions.window_loader import adapt as adapt_window_globals
 from portable.whole_program.conversions.initialized_data_aliases_v1 import adapt_reviewed as adapt_data_views
+from portable.whole_program.conversions.private_data_lifts_v1 import adapt_reviewed as adapt_private_data_lifts
+from portable.whole_program.conversions.clip_stack_native import adapt as adapt_clip_stack
+from portable.whole_program.conversions.source_bounded_simulation_state_v6 import (
+    load_plan as load_simulation_plan, render_owners as render_simulation_owners,
+    adapt as adapt_simulation_state)
+from portable.whole_program.conversions.m1b73_queue_source import adapt as adapt_queue_source
+from portable.whole_program.conversions.file_select_host import adapt as adapt_file_select_host
+from portable.whole_program.conversions.m1b73_event_source import adapt as adapt_event_source
+from portable.whole_program.conversions.event_word_switch import adapt as adapt_event_word_switch
+from portable.whole_program.platform.graphics_clip_source_convert import convert_source as adapt_clip_views
+from portable.whole_program.conversions.menu_s17_preword import adapt_s17_source, adapt_s10_source
+from portable.whole_program.conversions.list_text_handle import adapt as adapt_list_text
+from portable.whole_program.conversions.game_view_state import load_plan as load_game_views, adapt as adapt_game_views
+from portable.whole_program.conversions.source_bounded_simulation_state_v7 import (
+    load_plan as load_simulation_v7, render_owners as render_simulation_v7,
+    adapt as adapt_simulation_v7)
+from portable.whole_program.conversions.audio_shared_state_preword import (
+    adapt_production as adapt_audio_state, SOURCE_SHA256 as AUDIO_STATE_TUS)
 
 IO_NAMES = {name: 'dos_' + name for name in
             ('open', 'read', 'write', 'lseek', 'close', 'access', 'chdir',
@@ -73,6 +91,21 @@ def centralize_io(source: str) -> tuple[str, int]:
 
 def digest(path: Path) -> str:
     return hashlib.sha256(path.read_bytes()).hexdigest()
+
+
+def lift_native_headers(source: str) -> tuple[str, list[str]]:
+    """Import native ABI definitions before the source's DOS packing scope."""
+    code = masked(source)
+    pattern = re.compile(r'(?m)^[ \t]*#include[ \t]+"([^"]+)"[ \t]*(?:\r?\n|$)')
+    generated_headers = {'native_owners.h', 'source_bounded_additive.h',
+                         'simulation_state_50f6.h', 'simulation_state_50f6_v7.h'}
+    matches = [m for m in pattern.finditer(source)
+               if (m.group(1).startswith('portable/') or m.group(1) in generated_headers)
+               and '#include' in code[m.start():m.end()]]
+    headers = list(dict.fromkeys(m.group(1) for m in matches))
+    for match in reversed(matches):
+        source = source[:match.start()] + source[match.end():]
+    return source, headers
 
 
 def convert_words(source: str, aliases: dict[str, str] | None = None) -> tuple[str, dict]:
@@ -251,6 +284,9 @@ def main() -> int:
     initialized_plan = load_initialized_plan()
     bounded_plan = load_bounded_plan()
     additive_plan = load_additive_plan()
+    simulation_plan = load_simulation_plan()
+    simulation_plan_v7 = load_simulation_v7()
+    game_view_plan = load_game_views()
     alias_failures = (validate_historical_pins(initialized_plan) +
                       validate_source_declarations(initialized_plan))
     if alias_failures:
@@ -342,6 +378,50 @@ def main() -> int:
     conversion_inputs += [ROOT / rel for rel in (
         'portable/whole_program/conversions/initialized_data_aliases_v1.py',
         'portable/research/initialized_data_aliases_v1.json')]
+    conversion_inputs += [ROOT / rel for rel in (
+        'portable/whole_program/conversions/private_data_lifts_v1.py',
+        'portable/research/private_data_lifts_v1.json',
+        'portable/whole_program/conversions/clip_stack_native.py',
+        'portable/game/resources/source_graphics_resources.h',
+        'portable/game/resources/bios_fonts.h',
+        'portable/ui_model/windows/render.h',
+        'portable/whole_program/window_runtime_owner.h')]
+    conversion_inputs += [ROOT / rel for rel in (
+        'portable/whole_program/platform/graphics_source_clip.h',)]
+    conversion_inputs += [ROOT / rel for rel in (
+        'portable/whole_program/conversions/m1b73_queue_source.py',
+        'portable/whole_program/conversions/m1b73_event_source.py',
+        'portable/whole_program/platform/m1b73_event_enqueue.h',
+        'portable/whole_program/conversions/event_word_switch.py',
+        'portable/whole_program/platform/m1b73_queue_source.h',
+        'portable/whole_program/platform/m1b73_queues.h',
+        'portable/whole_program/platform/m1b73_mouse.h',
+        'portable/whole_program/platform/m1b73_mouse_state.h',
+        'portable/whole_program/platform/graphics_bitmap_source.h',
+        'portable/whole_program/platform/graphics_clip_source_convert.py',
+        'portable/whole_program/conversions/file_select_host.py',
+        'portable/whole_program/platform/drive_directory.h')]
+    conversion_inputs += [ROOT / rel for rel in (
+        'portable/whole_program/conversions/menu_s17_preword.py',
+        'portable/ui_model/menus/source_record_view.h',
+        'portable/whole_program/menu_globals.h',
+        'portable/whole_program/conversions/list_text_handle.py',
+        'portable/whole_program/window_list_refs.h')]
+    conversion_inputs += [ROOT / rel for rel in (
+        'portable/whole_program/conversions/game_view_state.py',
+        'portable/research/game_view_state_v1.json',
+        'portable/whole_program/state/game_views.h',
+        'portable/whole_program/conversions/source_bounded_simulation_state_v7.py',
+        'portable/research/whole_program_simulation_state_50f6_v7.json')]
+    conversion_inputs += [ROOT / rel for rel in (
+        'portable/whole_program/conversions/audio_shared_state_preword.py',
+        'portable/whole_program/platform/audio_state.h',
+        'portable/whole_program/state/asm_display_data_v1.h')]
+    conversion_inputs += [ROOT / 'portable/whole_program/platform/native_video_profile.h']
+    conversion_inputs += [ROOT / rel for rel in (
+        'portable/whole_program/conversions/source_bounded_simulation_state_v6.py',
+        'portable/whole_program/conversions/simulation_state_50f6_preword.py',
+        'portable/research/whole_program_simulation_state_50f6_v6.json')]
     # The selected real SDL host compiles against the SDK. Pin all nested
     # public headers as well as SDL.h so a changed ABI cannot escape the
     # source stability guard.
@@ -356,6 +436,11 @@ def main() -> int:
         source = path.read_text(encoding="utf-8")
         original_functions = function_heads(source)
         platform_conversions = []
+        if rel == 'src/S09/m35F5.c':
+            source = adapt_file_select_host(path.read_bytes(), rel).decode('utf-8')
+            platform_conversions.append({'kind': 'NATIVE_FILE_SELECTOR_FLOPPY_POLICY_RETIREMENT',
+                'changes': 'Retire only BIOS equipment read and floppy B-to-A fallback; native drive directory availability replaces DOS hardware query',
+                'claim': 'Native platform policy, no historical proof change'})
         if rel == 'src/root/m0250.c':
             # This adapter validates the immutable raw original identity.
             converted, receipt = adapt_spider_inline(path.read_bytes(), rel)
@@ -366,6 +451,8 @@ def main() -> int:
             platform_conversions.append(startup_conversion)
         if rel == 'src/root/m1FD2.c':
             source, ledger = adapt_timer(source)
+            platform_conversions.append(ledger)
+            source, ledger = adapt_queue_source(source, rel)
             platform_conversions.append(ledger)
         if rel == 'src/S24/m39C7.c':
             source, ledger = adapt_history(source)
@@ -378,12 +465,43 @@ def main() -> int:
             source, ledger = adapt_audio(rel, source)
             platform_conversions.append(ledger)
         source, overlay_rows = reviewed_overlays(path, source, overlays)
+        if rel in AUDIO_STATE_TUS:
+            source, ledger = adapt_audio_state(rel, source, path.read_bytes())
+            platform_conversions.append(ledger)
+        if rel in {'src/S10/m35F5.c', 'src/S19/m384C.c'}:
+            # The S10 frozen reviewed body is already the canonical source;
+            # the strict complete-TU identity check still applies here.
+            source, ledger = adapt_event_source(source, rel)
+            platform_conversions.append(ledger)
+        source, ledger = adapt_event_word_switch(source, rel)
+        if ledger:
+            platform_conversions.append(ledger)
+        if rel in {'src/S17/m384C.c', 'src/S10/m35F5.c'}:
+            before_menu = source
+            source = adapt_s17_source(source) if rel.startswith('src/S17/') else adapt_s10_source(source)
+            if rel.startswith('src/S17/'):
+                source = '#include "portable/whole_program/menu_globals.h"\n' + source
+            platform_conversions.append({'kind': 'NATIVE_KIND6_BORROWED_POINTER_VECTORS',
+                'source_before_sha256': hashlib.sha256(before_menu.encode()).hexdigest(),
+                'source_after_sha256': hashlib.sha256(source.encode()).hexdigest(),
+                'claim': 'Resource offset pointers become native borrowed views; original menu control flow retained'})
+        if rel == 'src/root/m23E6.c':
+            source, list_sites = adapt_list_text(source)
+            platform_conversions.append({'kind': 'NATIVE_LIST_HANDLE_SIDECAR',
+                'sites': list_sites, 'wire_slot_offset': 'object+0x34',
+                'claim': 'Native handle stored outside serialized four-byte pointer cell'})
         if rel == 'src/root/m0250.c':
             source, receipt = adapt_spider_overlay(source, rel)
             platform_conversions.append({'kind': 'REVIEWED_INLINE_SPIDER_OVERLAY_COMPOSITION', **asdict(receipt)})
         source, data_view_ledger = adapt_data_views(source, rel)
         if data_view_ledger:
             platform_conversions.append(data_view_ledger)
+        source, private_data_ledger = adapt_private_data_lifts(source, rel)
+        if private_data_ledger:
+            platform_conversions.append(private_data_ledger)
+        source, clip_stack_ledger = adapt_clip_stack(source, rel)
+        if clip_stack_ledger:
+            platform_conversions.append(clip_stack_ledger)
         if rel in CRT_ABI_MODULES:
             source, ledger = adapt_crt_abi(source, rel)
             platform_conversions.append(ledger)
@@ -404,6 +522,15 @@ def main() -> int:
         source, additive_ledger = adapt_additive_state(source, rel, additive_plan)
         if additive_ledger:
             platform_conversions.append(additive_ledger)
+        source, simulation_ledger = adapt_simulation_state(source, rel, simulation_plan)
+        if simulation_ledger:
+            platform_conversions.append(simulation_ledger)
+        source, simulation_v7_ledger = adapt_simulation_v7(source, rel, simulation_plan_v7)
+        if simulation_v7_ledger:
+            platform_conversions.append(simulation_v7_ledger)
+        source, game_views_ledger = adapt_game_views(source, rel, game_view_plan)
+        if game_views_ledger:
+            platform_conversions.append(game_views_ledger)
         if rel in {'src/root/m15F8.c', 'src/S20/m39F1.c'}:
             source = '#include "portable/whole_program/state/source_tables.h"\n' + source
         source, alias_ledger = adapt_initialized_aliases(source, initialized_plan)
@@ -509,9 +636,11 @@ def main() -> int:
         if path.parent.name == "S09" and path.name == "m35F5.c":
             prefix += '#include "portable/whole_program/platform/dos_files.h"\n'
             operations["dos_directory_record_and_prototypes"] = 1
+        translated, native_headers = lift_native_headers(translated)
+        prefix += ''.join(f'#include "{name}"\n' for name in native_headers)
+        operations['native_abi_headers_before_source_pack'] = native_headers
         target = output / f"{path.parent.name}_{path.stem}.c"
         generated = prefix + "#pragma pack(push, 2)\n" + translated + "\n#pragma pack(pop)\n"
-        target.write_text(generated, encoding="utf-8", newline="\n")
         source_functions = function_heads(source)
         generated_functions = function_heads(generated)
         expected_names = [function_aliases.get(r["name"], r["name"]) for r in source_functions]
@@ -528,6 +657,26 @@ def main() -> int:
             if expected != actual:
                 raise ValueError(f"unexpected function body edit: {rel}:{old['name']}")
             body_checks.append({"name": new["name"], "mechanical_body_sha256": hashlib.sha256(actual.encode()).hexdigest()})
+        # This explicit post-word pass reconciles the original Rect/word/raw
+        # views of one clipping owner. Keep both transformation stages in the
+        # evidence; do not pretend the final body is only lexical word spelling.
+        before_clip_views = generated
+        generated = adapt_clip_views(target.name, generated)
+        final_functions = function_heads(generated)
+        if [r['name'] for r in final_functions] != expected_names:
+            raise ValueError(f'clip view conversion changed function membership/order: {rel}')
+        if generated != before_clip_views:
+            platform_conversions.append({'kind': 'NATIVE_TYPED_CLIP_SOURCE_VIEWS',
+                'changes': 'one shared Rect definition; explicit top-word sentinel and raw-byte/saved-pointer views',
+                'input_sha256': hashlib.sha256(before_clip_views.encode()).hexdigest(),
+                'output_sha256': hashlib.sha256(generated.encode()).hexdigest(),
+                'body_changes': [{'name': new['name'],
+                    'before_sha256': hashlib.sha256(before_clip_views[old['start']:old['end']].encode()).hexdigest(),
+                    'after_sha256': hashlib.sha256(generated[new['start']:new['end']].encode()).hexdigest()}
+                    for old, new in zip(generated_functions, final_functions)
+                    if before_clip_views[old['start']:old['end']] != generated[new['start']:new['end']]],
+                'claim': 'native shared pointer/record representation, no historical evidence change'})
+        target.write_text(generated, encoding="utf-8", newline="\n")
         hardware = [i + 1 for i, line in enumerate(masked(source).splitlines())
                     if re.search(r"\b_asm\b|\b_based\s*\(|^\s*#include\s*<dos.h>", line)]
         scaffold = re.findall(r"SCAFFOLD BEGIN:\s*(\w+)", source)
@@ -561,6 +710,23 @@ def main() -> int:
                       "_Static_assert((char)-1<0, \"MSC signed char\");\n#endif\n",
                       encoding="utf-8", newline="\n")
     support_rows = []
+    v7_header, v7_source = render_simulation_v7(simulation_plan_v7)
+    (output / 'simulation_state_50f6_v7.h').write_text(v7_header, encoding='utf-8', newline='\n')
+    v7_target = output / 'simulation_state_50f6_v7.c'
+    v7_target.write_text(v7_source, encoding='utf-8', newline='\n')
+    support_rows.append({'source': v7_target.relative_to(ROOT).as_posix(),
+        'source_sha256': digest(v7_target), 'generated': v7_target.relative_to(ROOT).as_posix(),
+        'module_kind': 'SOURCE_BOUNDED_SAVE_RECORD_STATE_V7', 'admitted': False,
+        'owners': len(simulation_plan_v7['targets'])})
+    simulation_header, simulation_source = render_simulation_owners(simulation_plan)
+    (output / 'simulation_state_50f6.h').write_text(simulation_header, encoding='utf-8', newline='\n')
+    simulation_target = output / 'simulation_state_50f6.c'
+    simulation_target.write_text(simulation_source, encoding='utf-8', newline='\n')
+    support_rows.append({'source': simulation_target.relative_to(ROOT).as_posix(),
+        'source_sha256': digest(simulation_target), 'generated': simulation_target.relative_to(ROOT).as_posix(),
+        'module_kind': 'SOURCE_BOUNDED_COMPOUND_SIMULATION_STATE', 'admitted': False,
+        'owners': len(simulation_plan['targets']),
+        'native_bytes': sum(owner['extent_bytes'] for owner in simulation_plan['targets'])})
     additive_header, additive_source = render_additive_owners(additive_plan)
     (output / 'source_bounded_additive.h').write_text(additive_header, encoding='utf-8', newline='\n')
     additive_target = output / 'source_bounded_additive.c'
@@ -589,10 +755,16 @@ def main() -> int:
         'source_extent_bytes': sum(g['owner_extent_bytes'] for g in state_plan['bss_owner_candidates'])})
     for rel, kind in [
         ("portable/whole_program/state/database.c", "NATIVE_SHARED_STATE"),
+        ("portable/whole_program/state/game_views.c", "SOURCE_BOUNDED_NATIVE_GAME_HANDLE_AND_RECTANGLE_STATE"),
+        ("portable/whole_program/state/asm_display_data_v1.c", "SOURCE_DERIVED_ASM_DISPLAY_DATA_OWNERS"),
         ("portable/whole_program/state/asm_shared_state.c", "SOURCE_PROVEN_ASM_DATA_SCALARS"),
         ("portable/whole_program/conversions/pointer_globals.c", "NATIVE_SHARED_POINTER_TABLES"),
         ("portable/whole_program/platform/font_blit.c", "SOURCE_DERIVED_FONT_RASTER_AND_STATE"),
         ("portable/whole_program/window_refs.c", "NATIVE_WINDOW_POINTER_OWNERSHIP"),
+        ("portable/whole_program/window_runtime_owner.c", "NATIVE_APPLICATION_WINDOW_REGISTRY_OWNER"),
+        ("portable/whole_program/window_list_refs.c", "NATIVE_LIST_HANDLE_SIDECAR"),
+        ("portable/whole_program/menu_globals.c", "NATIVE_MENU_POINTER_VECTOR_OWNER"),
+        ("portable/ui_model/menus/source_record_view.c", "SOURCE_DERIVED_BORROWED_KIND6_MENU_VIEW"),
         ("portable/whole_program/window_source_globals.c", "SOURCE_DERIVED_WINDOW_GLOBAL_OWNERS"),
         ("portable/whole_program/platform/dos_memory.c", "NATIVE_PLATFORM_SERVICE"),
         ("portable/whole_program/platform/crt_rng.c", "NATIVE_RUNTIME_SERVICE"),
@@ -604,6 +776,7 @@ def main() -> int:
         ("portable/whole_program/platform/ems_host.c", "NATIVE_NO_EMS_PLATFORM"),
         ("portable/whole_program/platform/ems_dos_abi.c", "NATIVE_NO_EMS_SOURCE_ABI"),
         ("portable/whole_program/platform/audio.c", "NATIVE_PLATFORM_SERVICE"),
+        ("portable/whole_program/platform/audio_state.c", "SOURCE_DERIVED_AUDIO_POINTER_AND_RECORD_OWNERS"),
         ("portable/whole_program/platform/audio_events.c", "SOURCE_AUDIO_INTENT_CAPTURE"),
         ("portable/whole_program/platform/whole_audio_provider.c", "NATIVE_SOURCE_EVENT_AUDIO_PROVIDER"),
         ("portable/research/audio_voice_scheduler.c", "DOS_VERIFIED_DAC_SAMPLE_SCHEDULER"),
@@ -613,7 +786,18 @@ def main() -> int:
         ("portable/whole_program/platform/m1b73_events.c", "SOURCE_DERIVED_EVENT_TIMER_SERVICE"),
         ("portable/whole_program/platform/m1b73_timer_view.c", "NATIVE_TYPED_TIMER_FIELD_BRIDGE"),
         ("portable/whole_program/platform/m1b73_main_input.c", "NATIVE_SOURCE_MAIN_INPUT_BINDING"),
+        ("portable/whole_program/platform/m1b73_mouse_state.c", "SOURCE_DERIVED_SINGLE_MOUSE_STATE_OWNER"),
+        ("portable/whole_program/platform/m1b73_mouse.c", "SOURCE_DERIVED_NATIVE_MOUSE_LIFECYCLE"),
+        ("portable/whole_program/platform/m1b73_queues.c", "SOURCE_DERIVED_QUEUE_OWNERS_AND_DISPATCH"),
+        ("portable/whole_program/platform/m1b73_queue_source.c", "SOURCE_DERIVED_TYPED_QUEUE_VIEW"),
         ("portable/whole_program/platform/graphics.c", "NATIVE_INDEXED_GRAPHICS_BOUNDARY"),
+        ("portable/whole_program/platform/graphics_source_clip.c", "SOURCE_DERIVED_SHARED_CLIP_POINTER_AND_RECTANGLE"),
+        ("portable/whole_program/platform/graphics_bitmap_source.c", "SOURCE_DERIVED_PLANAR_BITMAP_CLIP_BOUNDARY"),
+        ("portable/whole_program/platform/native_video_profile.c", "NATIVE_SELECTED_EGA_VGA_STARTUP_PROFILES"),
+        ("portable/whole_program/platform/drive_directory.c", "NATIVE_DRIVE_CURRENT_DIRECTORY_SERVICE"),
+        ("portable/game/resources/source_graphics_resources.c", "SOURCE_DERIVED_GRAPHICS_DATA_AND_FONT_BINDINGS"),
+        ("portable/game/resources/bios_fonts.c", "VERIFIED_EXTERNAL_BIOS_FONT_LOADER"),
+        ("portable/whole_program/platform/bios_font_view.c", "NATIVE_BORROWED_BIOS_FONT_VIEW"),
         ("portable/whole_program/platform/graphics_line_1499.c", "DOS_VERIFIED_SOURCE_PIXEL_WALK"),
         ("portable/whole_program/text_bitmap.c", "DOS_VERIFIED_TEXT_BITMAP_ALGORITHM"),
         ("portable/whole_program/text_bitmap_bridge.c", "NATIVE_TEXT_BITMAP_SOURCE_ABI"),

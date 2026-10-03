@@ -22,6 +22,7 @@ def main() -> None:
         ROOT / "portable/whole_program/text_bitmap_bridge.c",
         ROOT / "portable/whole_program/text_bitmap.c",
         ROOT / "portable/whole_program/platform/graphics.c",
+        ROOT / "portable/whole_program/platform/graphics_source_clip.c",
         ROOT / "portable/whole_program/platform/graphics_line_1499.c",
         ROOT / "portable/render/primitives.c",
     ]

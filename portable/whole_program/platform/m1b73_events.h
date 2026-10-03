@@ -74,5 +74,13 @@ int16_t f_1B73_032A(void);
 int16_t f_1B73_032E(void *event_record);
 void f_1B73_0511(void);
 void f_1B73_0518(void);
+/* Native form of ASM's five stack words: BX, ES, AX, CX, DX. Four-word C
+ * callsites are separate source domains and must opt into the explicit
+ * command helper; it supplies a normalized DX=0 only because those callers'
+ * reachable consumers ignore Event.v. */
+void f_1B73_030F(int16_t bx, int16_t es, int16_t ax,
+                 int16_t cx, int16_t dx);
+void portable_m1b73_event_enqueue_four_word_command(
+    int16_t bx, int16_t es, int16_t ax, int16_t cx);
 
 #endif

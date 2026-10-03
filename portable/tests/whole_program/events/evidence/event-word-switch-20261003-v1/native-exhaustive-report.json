@@ -1,0 +1,116 @@
+{
+  "schema": "generated-s19-event-word-switch-v1",
+  "status": "PASS",
+  "claim": "Actual generated S19 o19_384C_0383 function body has exhaustive native branch/payload coverage for every uint16 code under message classes 0/4/8; 84 directed original DOS PreparedPair controls match expected callback/enqueue trace.",
+  "scope": "Bounded function-body validation; no whole S19 module, game callback semantics, production event pump, or history changes. Original traces capture callbacks as host boundaries. Native callback harness checks routing and payload only.",
+  "directed_original_dos_cases": 84,
+  "directed_dos_report_sha256": "89565c0c7469e4211b45d7589736d9496e89319d0826a4e97b5e633ef7be6f18",
+  "native_exhaustive": {
+    "code_values": 65536,
+    "message_classes": [
+      0,
+      4,
+      8
+    ],
+    "invocations": 196608,
+    "stdout": "exhaustive cases=196608 routed=12\n",
+    "stderr": "",
+    "exit_code": 0
+  },
+  "negative_unadapted_native": {
+    "controls": 6,
+    "stdout": "unadapted signed event switch misses all six high-key controls\n",
+    "stderr": "",
+    "exit_code": 0,
+    "expected": "signed int16 event code promotes negative; all selected FAxx cases miss positive case labels"
+  },
+  "source_pins_before": {
+    "build/workers/whole_program/generated/S19_m384C.c": "9aa0af925a75c937c8206e24007cf04bfde2860e09e89526cfde97a446924dee",
+    "src/S19/m384C.c": "fac1a097c3d992fed772002a87cb5a206050c67a3061e9e9168edc6032e1696b",
+    "portable/whole_program/conversions/event_word_switch.py": "b583e47777412107d9d6e8619bade92c81b5c42a23805c2ce20af22685183878",
+    "build/workers/event_word_switch/native_event_word_probe.c": "f28c553d537546f51fa4a7f274bee009a38c79a2418a503f15a2efc742f99116",
+    "build/workers/event_word_switch/dos-directed/report.json": "89565c0c7469e4211b45d7589736d9496e89319d0826a4e97b5e633ef7be6f18",
+    "build/workers/event_word_switch/native_event_word_runner.py": "bfd8fa0ef177e67291a6b7a49fc3bc9e184a526710c71257396c7fb4ca8d2845",
+    "tools/behavior.py": "2c0799048057f59eae61a48be4d695278635594484adf0c70bf46c51b4e0c799",
+    "tools/exe.py": "d560f69dcdf0d1c9e89278b50bebe225a9b86db2c259fa54ec9eace6ea05a8b5",
+    "tools/functions.py": "0f67c8d9eb01e319620c9342e79c35f76006091d860894aad6dcf8d61ee2b39e",
+    "tools/match.py": "44fdd8b939b2bbf135d8947d8f6ef6b1854dec133da4af86c55eb94f02869b56",
+    "tools/modctx.py": "33f3a4e3d77371e3095bfeb00358c13bc7838235c27bfe8898dba7e313f1cc25",
+    "tools/modules.py": "8a5c1e85db6970cce3c693c016b313b7ee1922fa6eaf146a00391bfea86edf1a",
+    "layout/functions.json": "6089a06e18fbe8f0960392cfe30357f7c19c886f38f10f7f115c72d127a756e7",
+    "layout/manifest.json": "025a0a9255d910cae4b122ab5a3f3fb40888bb456d7fe42158db7c9e622fcf50",
+    "layout/symbols.json": "0f5dd5b0a211945a97782cfccdb9bb31b0dfd07fcde5df4d4f9486b487eb0125",
+    "assets/SIMANT.EXE": "aa0596c6766322a8229ee3c36e57048c92adc82d50fbe2ef37afb8b85fcf4f11"
+  },
+  "source_pins_after": {
+    "build/workers/whole_program/generated/S19_m384C.c": "9aa0af925a75c937c8206e24007cf04bfde2860e09e89526cfde97a446924dee",
+    "src/S19/m384C.c": "fac1a097c3d992fed772002a87cb5a206050c67a3061e9e9168edc6032e1696b",
+    "portable/whole_program/conversions/event_word_switch.py": "b583e47777412107d9d6e8619bade92c81b5c42a23805c2ce20af22685183878",
+    "build/workers/event_word_switch/native_event_word_probe.c": "f28c553d537546f51fa4a7f274bee009a38c79a2418a503f15a2efc742f99116",
+    "build/workers/event_word_switch/dos-directed/report.json": "89565c0c7469e4211b45d7589736d9496e89319d0826a4e97b5e633ef7be6f18",
+    "build/workers/event_word_switch/native_event_word_runner.py": "bfd8fa0ef177e67291a6b7a49fc3bc9e184a526710c71257396c7fb4ca8d2845",
+    "tools/behavior.py": "2c0799048057f59eae61a48be4d695278635594484adf0c70bf46c51b4e0c799",
+    "tools/exe.py": "d560f69dcdf0d1c9e89278b50bebe225a9b86db2c259fa54ec9eace6ea05a8b5",
+    "tools/functions.py": "0f67c8d9eb01e319620c9342e79c35f76006091d860894aad6dcf8d61ee2b39e",
+    "tools/match.py": "44fdd8b939b2bbf135d8947d8f6ef6b1854dec133da4af86c55eb94f02869b56",
+    "tools/modctx.py": "33f3a4e3d77371e3095bfeb00358c13bc7838235c27bfe8898dba7e313f1cc25",
+    "tools/modules.py": "8a5c1e85db6970cce3c693c016b313b7ee1922fa6eaf146a00391bfea86edf1a",
+    "layout/functions.json": "6089a06e18fbe8f0960392cfe30357f7c19c886f38f10f7f115c72d127a756e7",
+    "layout/manifest.json": "025a0a9255d910cae4b122ab5a3f3fb40888bb456d7fe42158db7c9e622fcf50",
+    "layout/symbols.json": "0f5dd5b0a211945a97782cfccdb9bb31b0dfd07fcde5df4d4f9486b487eb0125",
+    "assets/SIMANT.EXE": "aa0596c6766322a8229ee3c36e57048c92adc82d50fbe2ef37afb8b85fcf4f11"
+  },
+  "sources_stable": true,
+  "generated_function_body_sha256": "869986162e14acb240d17cef0bef0aa1116e9b36e9f0b097d14b11228b642bd4",
+  "native_positive_extracted_tu_sha256": "ca6bf22ff1155370d3695b6c771a54c08094338c82ad1023e2de037d75c6607f",
+  "native_negative_extracted_tu_sha256": "6fd7cddf04e9fe741e30784900e340b6a30464da4d0b4e74ac5d5de08fdff4b3",
+  "executable_sha256": {
+    "positive": "7021e7377a558a2fe94247e9fa0233f39530a2bd4053c23dcaef572ad2e63af3",
+    "unadapted_negative": "f1c221ac7993ba310bb140ed54eddf4eb3c8aba89d11b402a1a78735301f82af"
+  },
+  "compiler": "gcc",
+  "compiler_resolved_path": "C:\\msys64\\mingw64\\bin\\gcc.EXE",
+  "compiler_binary_sha256": "c5005ba5380351c10743e9ca53ef9632164c54be3bd6b93324795114e4589a7d",
+  "compiler_version": [
+    "gcc (Rev10, Built by MSYS2 project) 12.2.0"
+  ],
+  "compiler_subtools": {
+    "cc1": {
+      "path": "C:/msys64/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/12.2.0/cc1.exe",
+      "sha256": "4b8f580dfbb18a5b1dd32f68d432f8f44453ee636f93d4e1921a16c4e5dc8a36"
+    },
+    "collect2": {
+      "path": "C:/msys64/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/12.2.0/collect2.exe",
+      "sha256": "da4f4c181325655d7ad9c15318e4d45b4bb7baf7f9641f3e2606510b6b4c84ff"
+    },
+    "as": {
+      "path": "C:/msys64/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/12.2.0/../../../../x86_64-w64-mingw32/bin/as.exe",
+      "sha256": "c8d49ddaaed068031fe22f8403cfc18f7dffdba1e6d0d0c8386beb8f6298aad4"
+    },
+    "ld": {
+      "path": "C:/msys64/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/12.2.0/../../../../x86_64-w64-mingw32/bin/ld.exe",
+      "sha256": "bd94728f0c75d50c1f8e2ab22ee87a2603e831e4532dc0b2318fe46879589b7b"
+    }
+  },
+  "compiler_flags": [
+    "gcc",
+    "-std=c11",
+    "-O0",
+    "-Wall",
+    "-Wextra",
+    "-Werror",
+    "-pedantic",
+    "-Wno-overflow",
+    "-Wno-switch-outside-range"
+  ],
+  "compiler_warning_exceptions": [
+    "-Wno-overflow: intended conversion of source command words such as 0xFD22 into 16-bit command storage",
+    "-Wno-switch-outside-range: unadapted negative contrast deliberately preserves positive FAxx labels against signed int16 input"
+  ],
+  "extracted_native_sources": {
+    "positive_path": "build\\workers\\event_word_switch\\native-exhaustive-v2\\event_word_positive.c",
+    "positive_sha256": "ca6bf22ff1155370d3695b6c771a54c08094338c82ad1023e2de037d75c6607f",
+    "negative_path": "build\\workers\\event_word_switch\\native-exhaustive-v2\\event_word_negative.c",
+    "negative_sha256": "6fd7cddf04e9fe741e30784900e340b6a30464da4d0b4e74ac5d5de08fdff4b3"
+  }
+}

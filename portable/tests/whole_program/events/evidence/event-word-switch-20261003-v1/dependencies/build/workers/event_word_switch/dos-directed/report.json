@@ -1,0 +1,3680 @@
+{
+  "schema": "dos-event-word-switch-directed-v1",
+  "target": "o19_384C_0383",
+  "source_path": "src/S19/m384C.c",
+  "source_sha256": "fac1a097c3d992fed772002a87cb5a206050c67a3061e9e9168edc6032e1696b",
+  "function_identity": {
+    "function": "o19_384C_0383",
+    "address": {
+      "unit": "S19",
+      "seg": 14412,
+      "off": 899,
+      "size": 221
+    },
+    "source": "src\\S19\\m384C.c",
+    "source_sha256": "fac1a097c3d992fed772002a87cb5a206050c67a3061e9e9168edc6032e1696b",
+    "compiled_source_sha256": "fac1a097c3d992fed772002a87cb5a206050c67a3061e9e9168edc6032e1696b",
+    "object_sha256": "b6baba759253a5bc04e5103b1fc938f2308740e6238bff65bec0ed27973bb818",
+    "linked_code_sha256": "2538663027567a1ae6d2852e3b516d208b8462fef4e4bba141f764f72df51808",
+    "oracle_sha256": "aa0596c6766322a8229ee3c36e57048c92adc82d50fbe2ef37afb8b85fcf4f11",
+    "unicorn_version": "2.1.4",
+    "harness_sha256": "2c0799048057f59eae61a48be4d695278635594484adf0c70bf46c51b4e0c799",
+    "profile": "msc600ax",
+    "flags": [
+      "/AL",
+      "/Os",
+      "/Oe",
+      "/Og",
+      "/Zi"
+    ],
+    "manifest_sha256": "025a0a9255d910cae4b122ab5a3f3fb40888bb456d7fe42158db7c9e622fcf50"
+  },
+  "directed_case_count": 84,
+  "mismatch_count": 0,
+  "cases": [
+    {
+      "case": "code-fa05-message-0000",
+      "event_code": 64005,
+      "message": 0,
+      "exact": true,
+      "diff": {},
+      "original_trace": [
+        {
+          "name": "WinPrintf",
+          "args": [
+            11712,
+            21939,
+            64005,
+            0
+          ],
+          "state_at_entry": {
+            "event": "00000000341200000b00160005facdab"
+          },
+          "modified_state_at_entry": []
+        }
+      ],
+      "candidate_trace": [
+        {
+          "name": "WinPrintf",
+          "args": [
+            11712,
+            21939,
+            64005,
+            0
+          ],
+          "state_at_entry": {
+            "event": "00000000341200000b00160005facdab"
+          },
+          "modified_state_at_entry": []
+        }
+      ]
+    },
+    {
+      "case": "code-fa05-message-0004",
+      "event_code": 64005,
+      "message": 4,
+      "exact": true,
+      "diff": {},
+      "original_trace": [
+        {
+          "name": "WinPrintf",
+          "args": [
+            11712,
+            21939,
+            64005,
+            4
+          ],
+          "state_at_entry": {
+            "event": "00000400341200000b00160005facdab"
+          },
+          "modified_state_at_entry": []
+        },
+        {
+          "name": "YardToMap",
+          "args": [],
+          "state_at_entry": {
+            "event": "00000400341200000b00160005facdab"
+          },
+          "modified_state_at_entry": []
+        }
+      ],
+      "candidate_trace": [
+        {
+          "name": "WinPrintf",
+          "args": [
+            11712,
+            21939,
+            64005,
+            4
+          ],
+          "state_at_entry": {
+            "event": "00000400341200000b00160005facdab"
+          },
+          "modified_state_at_entry": []
+        },
+        {
+          "name": "YardToMap",
+          "args": [],
+          "state_at_entry": {
+            "event": "00000400341200000b00160005facdab"
+          },
+          "modified_state_at_entry": []
+        }
+      ]
+    },
+    {
+      "case": "code-fa05-message-0008",
+      "event_code": 64005,
+      "message": 8,
+      "exact": true,
+      "diff": {},
+      "original_trace": [
+        {
+          "name": "WinPrintf",
+          "args": [
+            11712,
+            21939,
+            64005,
+            8
+          ],
+          "state_at_entry": {
+            "event": "00000800341200000b00160005facdab"
+          },
+          "modified_state_at_entry": []
+        }
+      ],
+      "candidate_trace": [
+        {
+          "name": "WinPrintf",
+          "args": [
+            11712,
+            21939,
+            64005,
+            8
+          ],
+          "state_at_entry": {
+            "event": "00000800341200000b00160005facdab"
+          },
+          "modified_state_at_entry": []
+        }
+      ]
+    },
+    {
+      "case": "code-fa05-message-000c",
+      "event_code": 64005,
+      "message": 12,
+      "exact": true,
+      "diff": {},
+      "original_trace": [
+        {
+          "name": "WinPrintf",
+          "args": [
+            11712,
+            21939,
+            64005,
+            12
+          ],
+          "state_at_entry": {
+            "event": "00000c00341200000b00160005facdab"
+          },
+          "modified_state_at_entry": []
+        },
+        {
+          "name": "YardToMap",
+          "args": [],
+          "state_at_entry": {
+            "event": "00000c00341200000b00160005facdab"
+          },
+          "modified_state_at_entry": []
+        }
+      ],
+      "candidate_trace": [
+        {
+          "name": "WinPrintf",
+          "args": [
+            11712,
+            21939,
+            64005,
+            12
+          ],
+          "state_at_entry": {
+            "event": "00000c00341200000b00160005facdab"
+          },
+          "modified_state_at_entry": []
+        },
+        {
+          "name": "YardToMap",
+          "args": [],
+          "state_at_entry": {
+            "event": "00000c00341200000b00160005facdab"
+          },
+          "modified_state_at_entry": []
+        }
+      ]
+    },
+    {
+      "case": "code-fa06-message-0000",
+      "event_code": 64006,
+      "message": 0,
+      "exact": true,
+      "diff": {},
+      "original_trace": [
+        {
+          "name": "WinPrintf",
+          "args": [
+            11712,
+            21939,
+            64006,
+            0
+          ],
+          "state_at_entry": {
+            "event": "00000000341200000b00160006facdab"
+          },
+          "modified_state_at_entry": []
+        }
+      ],
+      "candidate_trace": [
+        {
+          "name": "WinPrintf",
+          "args": [
+            11712,
+            21939,
+            64006,
+            0
+          ],
+          "state_at_entry": {
+            "event": "00000000341200000b00160006facdab"
+          },
+          "modified_state_at_entry": []
+        }
+      ]
+    },
+    {
+      "case": "code-fa06-message-0004",
+      "event_code": 64006,
+      "message": 4,
+      "exact": true,
+      "diff": {},
+      "original_trace": [
+        {
+          "name": "WinPrintf",
+          "args": [
+            11712,
+            21939,
+            64006,
+            4
+          ],
+          "state_at_entry": {
+            "event": "00000400341200000b00160006facdab"
+          },
+          "modified_state_at_entry": []
+        },
+        {
+          "name": "f_1B73_030F",
+          "args": [
+            64802,
+            0,
+            0,
+            0,
+            0
+          ],
+          "state_at_entry": {
+            "event": "00000400341200000b00160006facdab"
+          },
+          "modified_state_at_entry": []
+        }
+      ],
+      "candidate_trace": [
+        {
+          "name": "WinPrintf",
+          "args": [
+            11712,
+            21939,
+            64006,
+            4
+          ],
+          "state_at_entry": {
+            "event": "00000400341200000b00160006facdab"
+          },
+          "modified_state_at_entry": []
+        },
+        {
+          "name": "f_1B73_030F",
+          "args": [
+            64802,
+            0,
+            0,
+            0,
+            0
+          ],
+          "state_at_entry": {
+            "event": "00000400341200000b00160006facdab"
+          },
+          "modified_state_at_entry": []
+        }
+      ]
+    },
+    {
+      "case": "code-fa06-message-0008",
+      "event_code": 64006,
+      "message": 8,
+      "exact": true,
+      "diff": {},
+      "original_trace": [
+        {
+          "name": "WinPrintf",
+          "args": [
+            11712,
+            21939,
+            64006,
+            8
+          ],
+          "state_at_entry": {
+            "event": "00000800341200000b00160006facdab"
+          },
+          "modified_state_at_entry": []
+        }
+      ],
+      "candidate_trace": [
+        {
+          "name": "WinPrintf",
+          "args": [
+            11712,
+            21939,
+            64006,
+            8
+          ],
+          "state_at_entry": {
+            "event": "00000800341200000b00160006facdab"
+          },
+          "modified_state_at_entry": []
+        }
+      ]
+    },
+    {
+      "case": "code-fa06-message-000c",
+      "event_code": 64006,
+      "message": 12,
+      "exact": true,
+      "diff": {},
+      "original_trace": [
+        {
+          "name": "WinPrintf",
+          "args": [
+            11712,
+            21939,
+            64006,
+            12
+          ],
+          "state_at_entry": {
+            "event": "00000c00341200000b00160006facdab"
+          },
+          "modified_state_at_entry": []
+        },
+        {
+          "name": "f_1B73_030F",
+          "args": [
+            64802,
+            0,
+            0,
+            0,
+            0
+          ],
+          "state_at_entry": {
+            "event": "00000c00341200000b00160006facdab"
+          },
+          "modified_state_at_entry": []
+        }
+      ],
+      "candidate_trace": [
+        {
+          "name": "WinPrintf",
+          "args": [
+            11712,
+            21939,
+            64006,
+            12
+          ],
+          "state_at_entry": {
+            "event": "00000c00341200000b00160006facdab"
+          },
+          "modified_state_at_entry": []
+        },
+        {
+          "name": "f_1B73_030F",
+          "args": [
+            64802,
+            0,
+            0,
+            0,
+            0
+          ],
+          "state_at_entry": {
+            "event": "00000c00341200000b00160006facdab"
+          },
+          "modified_state_at_entry": []
+        }
+      ]
+    },
+    {
+      "case": "code-fa07-message-0000",
+      "event_code": 64007,
+      "message": 0,
+      "exact": true,
+      "diff": {},
+      "original_trace": [
+        {
+          "name": "WinPrintf",
+          "args": [
+            11712,
+            21939,
+            64007,
+            0
+          ],
+          "state_at_entry": {
+            "event": "00000000341200000b00160007facdab"
+          },
+          "modified_state_at_entry": []
+        }
+      ],
+      "candidate_trace": [
+        {
+          "name": "WinPrintf",
+          "args": [
+            11712,
+            21939,
+            64007,
+            0
+          ],
+          "state_at_entry": {
+            "event": "00000000341200000b00160007facdab"
+          },
+          "modified_state_at_entry": []
+        }
+      ]
+    },
+    {
+      "case": "code-fa07-message-0004",
+      "event_code": 64007,
+      "message": 4,
+      "exact": true,
+      "diff": {},
+      "original_trace": [
+        {
+          "name": "WinPrintf",
+          "args": [
+            11712,
+            21939,
+            64007,
+            4
+          ],
+          "state_at_entry": {
+            "event": "00000400341200000b00160007facdab"
+          },
+          "modified_state_at_entry": []
+        },
+        {
+          "name": "f_1B73_030F",
+          "args": [
+            64803,
+            0,
+            0,
+            0,
+            0
+          ],
+          "state_at_entry": {
+            "event": "00000400341200000b00160007facdab"
+          },
+          "modified_state_at_entry": []
+        }
+      ],
+      "candidate_trace": [
+        {
+          "name": "WinPrintf",
+          "args": [
+            11712,
+            21939,
+            64007,
+            4
+          ],
+          "state_at_entry": {
+            "event": "00000400341200000b00160007facdab"
+          },
+          "modified_state_at_entry": []
+        },
+        {
+          "name": "f_1B73_030F",
+          "args": [
+            64803,
+            0,
+            0,
+            0,
+            0
+          ],
+          "state_at_entry": {
+            "event": "00000400341200000b00160007facdab"
+          },
+          "modified_state_at_entry": []
+        }
+      ]
+    },
+    {
+      "case": "code-fa07-message-0008",
+      "event_code": 64007,
+      "message": 8,
+      "exact": true,
+      "diff": {},
+      "original_trace": [
+        {
+          "name": "WinPrintf",
+          "args": [
+            11712,
+            21939,
+            64007,
+            8
+          ],
+          "state_at_entry": {
+            "event": "00000800341200000b00160007facdab"
+          },
+          "modified_state_at_entry": []
+        }
+      ],
+      "candidate_trace": [
+        {
+          "name": "WinPrintf",
+          "args": [
+            11712,
+            21939,
+            64007,
+            8
+          ],
+          "state_at_entry": {
+            "event": "00000800341200000b00160007facdab"
+          },
+          "modified_state_at_entry": []
+        }
+      ]
+    },
+    {
+      "case": "code-fa07-message-000c",
+      "event_code": 64007,
+      "message": 12,
+      "exact": true,
+      "diff": {},
+      "original_trace": [
+        {
+          "name": "WinPrintf",
+          "args": [
+            11712,
+            21939,
+            64007,
+            12
+          ],
+          "state_at_entry": {
+            "event": "00000c00341200000b00160007facdab"
+          },
+          "modified_state_at_entry": []
+        },
+        {
+          "name": "f_1B73_030F",
+          "args": [
+            64803,
+            0,
+            0,
+            0,
+            0
+          ],
+          "state_at_entry": {
+            "event": "00000c00341200000b00160007facdab"
+          },
+          "modified_state_at_entry": []
+        }
+      ],
+      "candidate_trace": [
+        {
+          "name": "WinPrintf",
+          "args": [
+            11712,
+            21939,
+            64007,
+            12
+          ],
+          "state_at_entry": {
+            "event": "00000c00341200000b00160007facdab"
+          },
+          "modified_state_at_entry": []
+        },
+        {
+          "name": "f_1B73_030F",
+          "args": [
+            64803,
+            0,
+            0,
+            0,
+            0
+          ],
+          "state_at_entry": {
+            "event": "00000c00341200000b00160007facdab"
+          },
+          "modified_state_at_entry": []
+        }
+      ]
+    },
+    {
+      "case": "code-fa08-message-0000",
+      "event_code": 64008,
+      "message": 0,
+      "exact": true,
+      "diff": {},
+      "original_trace": [
+        {
+          "name": "WinPrintf",
+          "args": [
+            11712,
+            21939,
+            64008,
+            0
+          ],
+          "state_at_entry": {
+            "event": "00000000341200000b00160008facdab"
+          },
+          "modified_state_at_entry": []
+        }
+      ],
+      "candidate_trace": [
+        {
+          "name": "WinPrintf",
+          "args": [
+            11712,
+            21939,
+            64008,
+            0
+          ],
+          "state_at_entry": {
+            "event": "00000000341200000b00160008facdab"
+          },
+          "modified_state_at_entry": []
+        }
+      ]
+    },
+    {
+      "case": "code-fa08-message-0004",
+      "event_code": 64008,
+      "message": 4,
+      "exact": true,
+      "diff": {},
+      "original_trace": [
+        {
+          "name": "WinPrintf",
+          "args": [
+            11712,
+            21939,
+            64008,
+            4
+          ],
+          "state_at_entry": {
+            "event": "00000400341200000b00160008facdab"
+          },
+          "modified_state_at_entry": []
+        },
+        {
+          "name": "f_1B73_030F",
+          "args": [
+            64804,
+            0,
+            0,
+            0,
+            0
+          ],
+          "state_at_entry": {
+            "event": "00000400341200000b00160008facdab"
+          },
+          "modified_state_at_entry": []
+        }
+      ],
+      "candidate_trace": [
+        {
+          "name": "WinPrintf",
+          "args": [
+            11712,
+            21939,
+            64008,
+            4
+          ],
+          "state_at_entry": {
+            "event": "00000400341200000b00160008facdab"
+          },
+          "modified_state_at_entry": []
+        },
+        {
+          "name": "f_1B73_030F",
+          "args": [
+            64804,
+            0,
+            0,
+            0,
+            0
+          ],
+          "state_at_entry": {
+            "event": "00000400341200000b00160008facdab"
+          },
+          "modified_state_at_entry": []
+        }
+      ]
+    },
+    {
+      "case": "code-fa08-message-0008",
+      "event_code": 64008,
+      "message": 8,
+      "exact": true,
+      "diff": {},
+      "original_trace": [
+        {
+          "name": "WinPrintf",
+          "args": [
+            11712,
+            21939,
+            64008,
+            8
+          ],
+          "state_at_entry": {
+            "event": "00000800341200000b00160008facdab"
+          },
+          "modified_state_at_entry": []
+        }
+      ],
+      "candidate_trace": [
+        {
+          "name": "WinPrintf",
+          "args": [
+            11712,
+            21939,
+            64008,
+            8
+          ],
+          "state_at_entry": {
+            "event": "00000800341200000b00160008facdab"
+          },
+          "modified_state_at_entry": []
+        }
+      ]
+    },
+    {
+      "case": "code-fa08-message-000c",
+      "event_code": 64008,
+      "message": 12,
+      "exact": true,
+      "diff": {},
+      "original_trace": [
+        {
+          "name": "WinPrintf",
+          "args": [
+            11712,
+            21939,
+            64008,
+            12
+          ],
+          "state_at_entry": {
+            "event": "00000c00341200000b00160008facdab"
+          },
+          "modified_state_at_entry": []
+        },
+        {
+          "name": "f_1B73_030F",
+          "args": [
+            64804,
+            0,
+            0,
+            0,
+            0
+          ],
+          "state_at_entry": {
+            "event": "00000c00341200000b00160008facdab"
+          },
+          "modified_state_at_entry": []
+        }
+      ],
+      "candidate_trace": [
+        {
+          "name": "WinPrintf",
+          "args": [
+            11712,
+            21939,
+            64008,
+            12
+          ],
+          "state_at_entry": {
+            "event": "00000c00341200000b00160008facdab"
+          },
+          "modified_state_at_entry": []
+        },
+        {
+          "name": "f_1B73_030F",
+          "args": [
+            64804,
+            0,
+            0,
+            0,
+            0
+          ],
+          "state_at_entry": {
+            "event": "00000c00341200000b00160008facdab"
+          },
+          "modified_state_at_entry": []
+        }
+      ]
+    },
+    {
+      "case": "code-fa09-message-0000",
+      "event_code": 64009,
+      "message": 0,
+      "exact": true,
+      "diff": {},
+      "original_trace": [
+        {
+          "name": "WinPrintf",
+          "args": [
+            11712,
+            21939,
+            64009,
+            0
+          ],
+          "state_at_entry": {
+            "event": "00000000341200000b00160009facdab"
+          },
+          "modified_state_at_entry": []
+        }
+      ],
+      "candidate_trace": [
+        {
+          "name": "WinPrintf",
+          "args": [
+            11712,
+            21939,
+            64009,
+            0
+          ],
+          "state_at_entry": {
+            "event": "00000000341200000b00160009facdab"
+          },
+          "modified_state_at_entry": []
+        }
+      ]
+    },
+    {
+      "case": "code-fa09-message-0004",
+      "event_code": 64009,
+      "message": 4,
+      "exact": true,
+      "diff": {},
+      "original_trace": [
+        {
+          "name": "WinPrintf",
+          "args": [
+            11712,
+            21939,
+            64009,
+            4
+          ],
+          "state_at_entry": {
+            "event": "00000400341200000b00160009facdab"
+          },
+          "modified_state_at_entry": []
+        },
+        {
+          "name": "f_1B73_030F",
+          "args": [
+            64806,
+            0,
+            0,
+            0,
+            0
+          ],
+          "state_at_entry": {
+            "event": "00000400341200000b00160009facdab"
+          },
+          "modified_state_at_entry": []
+        }
+      ],
+      "candidate_trace": [
+        {
+          "name": "WinPrintf",
+          "args": [
+            11712,
+            21939,
+            64009,
+            4
+          ],
+          "state_at_entry": {
+            "event": "00000400341200000b00160009facdab"
+          },
+          "modified_state_at_entry": []
+        },
+        {
+          "name": "f_1B73_030F",
+          "args": [
+            64806,
+            0,
+            0,
+            0,
+            0
+          ],
+          "state_at_entry": {
+            "event": "00000400341200000b00160009facdab"
+          },
+          "modified_state_at_entry": []
+        }
+      ]
+    },
+    {
+      "case": "code-fa09-message-0008",
+      "event_code": 64009,
+      "message": 8,
+      "exact": true,
+      "diff": {},
+      "original_trace": [
+        {
+          "name": "WinPrintf",
+          "args": [
+            11712,
+            21939,
+            64009,
+            8
+          ],
+          "state_at_entry": {
+            "event": "00000800341200000b00160009facdab"
+          },
+          "modified_state_at_entry": []
+        }
+      ],
+      "candidate_trace": [
+        {
+          "name": "WinPrintf",
+          "args": [
+            11712,
+            21939,
+            64009,
+            8
+          ],
+          "state_at_entry": {
+            "event": "00000800341200000b00160009facdab"
+          },
+          "modified_state_at_entry": []
+        }
+      ]
+    },
+    {
+      "case": "code-fa09-message-000c",
+      "event_code": 64009,
+      "message": 12,
+      "exact": true,
+      "diff": {},
+      "original_trace": [
+        {
+          "name": "WinPrintf",
+          "args": [
+            11712,
+            21939,
+            64009,
+            12
+          ],
+          "state_at_entry": {
+            "event": "00000c00341200000b00160009facdab"
+          },
+          "modified_state_at_entry": []
+        },
+        {
+          "name": "f_1B73_030F",
+          "args": [
+            64806,
+            0,
+            0,
+            0,
+            0
+          ],
+          "state_at_entry": {
+            "event": "00000c00341200000b00160009facdab"
+          },
+          "modified_state_at_entry": []
+        }
+      ],
+      "candidate_trace": [
+        {
+          "name": "WinPrintf",
+          "args": [
+            11712,
+            21939,
+            64009,
+            12
+          ],
+          "state_at_entry": {
+            "event": "00000c00341200000b00160009facdab"
+          },
+          "modified_state_at_entry": []
+        },
+        {
+          "name": "f_1B73_030F",
+          "args": [
+            64806,
+            0,
+            0,
+            0,
+            0
+          ],
+          "state_at_entry": {
+            "event": "00000c00341200000b00160009facdab"
+          },
+          "modified_state_at_entry": []
+        }
+      ]
+    },
+    {
+      "case": "code-fa0a-message-0000",
+      "event_code": 64010,
+      "message": 0,
+      "exact": true,
+      "diff": {},
+      "original_trace": [
+        {
+          "name": "WinPrintf",
+          "args": [
+            11712,
+            21939,
+            64010,
+            0
+          ],
+          "state_at_entry": {
+            "event": "00000000341200000b0016000afacdab"
+          },
+          "modified_state_at_entry": []
+        }
+      ],
+      "candidate_trace": [
+        {
+          "name": "WinPrintf",
+          "args": [
+            11712,
+            21939,
+            64010,
+            0
+          ],
+          "state_at_entry": {
+            "event": "00000000341200000b0016000afacdab"
+          },
+          "modified_state_at_entry": []
+        }
+      ]
+    },
+    {
+      "case": "code-fa0a-message-0004",
+      "event_code": 64010,
+      "message": 4,
+      "exact": true,
+      "diff": {},
+      "original_trace": [
+        {
+          "name": "WinPrintf",
+          "args": [
+            11712,
+            21939,
+            64010,
+            4
+          ],
+          "state_at_entry": {
+            "event": "00000400341200000b0016000afacdab"
+          },
+          "modified_state_at_entry": []
+        },
+        {
+          "name": "f_1B73_030F",
+          "args": [
+            64807,
+            0,
+            0,
+            0,
+            0
+          ],
+          "state_at_entry": {
+            "event": "00000400341200000b0016000afacdab"
+          },
+          "modified_state_at_entry": []
+        }
+      ],
+      "candidate_trace": [
+        {
+          "name": "WinPrintf",
+          "args": [
+            11712,
+            21939,
+            64010,
+            4
+          ],
+          "state_at_entry": {
+            "event": "00000400341200000b0016000afacdab"
+          },
+          "modified_state_at_entry": []
+        },
+        {
+          "name": "f_1B73_030F",
+          "args": [
+            64807,
+            0,
+            0,
+            0,
+            0
+          ],
+          "state_at_entry": {
+            "event": "00000400341200000b0016000afacdab"
+          },
+          "modified_state_at_entry": []
+        }
+      ]
+    },
+    {
+      "case": "code-fa0a-message-0008",
+      "event_code": 64010,
+      "message": 8,
+      "exact": true,
+      "diff": {},
+      "original_trace": [
+        {
+          "name": "WinPrintf",
+          "args": [
+            11712,
+            21939,
+            64010,
+            8
+          ],
+          "state_at_entry": {
+            "event": "00000800341200000b0016000afacdab"
+          },
+          "modified_state_at_entry": []
+        }
+      ],
+      "candidate_trace": [
+        {
+          "name": "WinPrintf",
+          "args": [
+            11712,
+            21939,
+            64010,
+            8
+          ],
+          "state_at_entry": {
+            "event": "00000800341200000b0016000afacdab"
+          },
+          "modified_state_at_entry": []
+        }
+      ]
+    },
+    {
+      "case": "code-fa0a-message-000c",
+      "event_code": 64010,
+      "message": 12,
+      "exact": true,
+      "diff": {},
+      "original_trace": [
+        {
+          "name": "WinPrintf",
+          "args": [
+            11712,
+            21939,
+            64010,
+            12
+          ],
+          "state_at_entry": {
+            "event": "00000c00341200000b0016000afacdab"
+          },
+          "modified_state_at_entry": []
+        },
+        {
+          "name": "f_1B73_030F",
+          "args": [
+            64807,
+            0,
+            0,
+            0,
+            0
+          ],
+          "state_at_entry": {
+            "event": "00000c00341200000b0016000afacdab"
+          },
+          "modified_state_at_entry": []
+        }
+      ],
+      "candidate_trace": [
+        {
+          "name": "WinPrintf",
+          "args": [
+            11712,
+            21939,
+            64010,
+            12
+          ],
+          "state_at_entry": {
+            "event": "00000c00341200000b0016000afacdab"
+          },
+          "modified_state_at_entry": []
+        },
+        {
+          "name": "f_1B73_030F",
+          "args": [
+            64807,
+            0,
+            0,
+            0,
+            0
+          ],
+          "state_at_entry": {
+            "event": "00000c00341200000b0016000afacdab"
+          },
+          "modified_state_at_entry": []
+        }
+      ]
+    },
+    {
+      "case": "code-fa0b-message-0000",
+      "event_code": 64011,
+      "message": 0,
+      "exact": true,
+      "diff": {},
+      "original_trace": [
+        {
+          "name": "WinPrintf",
+          "args": [
+            11712,
+            21939,
+            64011,
+            0
+          ],
+          "state_at_entry": {
+            "event": "00000000341200000b0016000bfacdab"
+          },
+          "modified_state_at_entry": []
+        }
+      ],
+      "candidate_trace": [
+        {
+          "name": "WinPrintf",
+          "args": [
+            11712,
+            21939,
+            64011,
+            0
+          ],
+          "state_at_entry": {
+            "event": "00000000341200000b0016000bfacdab"
+          },
+          "modified_state_at_entry": []
+        }
+      ]
+    },
+    {
+      "case": "code-fa0b-message-0004",
+      "event_code": 64011,
+      "message": 4,
+      "exact": true,
+      "diff": {},
+      "original_trace": [
+        {
+          "name": "WinPrintf",
+          "args": [
+            11712,
+            21939,
+            64011,
+            4
+          ],
+          "state_at_entry": {
+            "event": "00000400341200000b0016000bfacdab"
+          },
+          "modified_state_at_entry": []
+        },
+        {
+          "name": "f_1B73_030F",
+          "args": [
+            64808,
+            0,
+            0,
+            0,
+            0
+          ],
+          "state_at_entry": {
+            "event": "00000400341200000b0016000bfacdab"
+          },
+          "modified_state_at_entry": []
+        }
+      ],
+      "candidate_trace": [
+        {
+          "name": "WinPrintf",
+          "args": [
+            11712,
+            21939,
+            64011,
+            4
+          ],
+          "state_at_entry": {
+            "event": "00000400341200000b0016000bfacdab"
+          },
+          "modified_state_at_entry": []
+        },
+        {
+          "name": "f_1B73_030F",
+          "args": [
+            64808,
+            0,
+            0,
+            0,
+            0
+          ],
+          "state_at_entry": {
+            "event": "00000400341200000b0016000bfacdab"
+          },
+          "modified_state_at_entry": []
+        }
+      ]
+    },
+    {
+      "case": "code-fa0b-message-0008",
+      "event_code": 64011,
+      "message": 8,
+      "exact": true,
+      "diff": {},
+      "original_trace": [
+        {
+          "name": "WinPrintf",
+          "args": [
+            11712,
+            21939,
+            64011,
+            8
+          ],
+          "state_at_entry": {
+            "event": "00000800341200000b0016000bfacdab"
+          },
+          "modified_state_at_entry": []
+        }
+      ],
+      "candidate_trace": [
+        {
+          "name": "WinPrintf",
+          "args": [
+            11712,
+            21939,
+            64011,
+            8
+          ],
+          "state_at_entry": {
+            "event": "00000800341200000b0016000bfacdab"
+          },
+          "modified_state_at_entry": []
+        }
+      ]
+    },
+    {
+      "case": "code-fa0b-message-000c",
+      "event_code": 64011,
+      "message": 12,
+      "exact": true,
+      "diff": {},
+      "original_trace": [
+        {
+          "name": "WinPrintf",
+          "args": [
+            11712,
+            21939,
+            64011,
+            12
+          ],
+          "state_at_entry": {
+            "event": "00000c00341200000b0016000bfacdab"
+          },
+          "modified_state_at_entry": []
+        },
+        {
+          "name": "f_1B73_030F",
+          "args": [
+            64808,
+            0,
+            0,
+            0,
+            0
+          ],
+          "state_at_entry": {
+            "event": "00000c00341200000b0016000bfacdab"
+          },
+          "modified_state_at_entry": []
+        }
+      ],
+      "candidate_trace": [
+        {
+          "name": "WinPrintf",
+          "args": [
+            11712,
+            21939,
+            64011,
+            12
+          ],
+          "state_at_entry": {
+            "event": "00000c00341200000b0016000bfacdab"
+          },
+          "modified_state_at_entry": []
+        },
+        {
+          "name": "f_1B73_030F",
+          "args": [
+            64808,
+            0,
+            0,
+            0,
+            0
+          ],
+          "state_at_entry": {
+            "event": "00000c00341200000b0016000bfacdab"
+          },
+          "modified_state_at_entry": []
+        }
+      ]
+    },
+    {
+      "case": "code-fa17-message-0000",
+      "event_code": 64023,
+      "message": 0,
+      "exact": true,
+      "diff": {},
+      "original_trace": [
+        {
+          "name": "WinPrintf",
+          "args": [
+            11712,
+            21939,
+            64023,
+            0
+          ],
+          "state_at_entry": {
+            "event": "00000000341200000b00160017facdab"
+          },
+          "modified_state_at_entry": []
+        }
+      ],
+      "candidate_trace": [
+        {
+          "name": "WinPrintf",
+          "args": [
+            11712,
+            21939,
+            64023,
+            0
+          ],
+          "state_at_entry": {
+            "event": "00000000341200000b00160017facdab"
+          },
+          "modified_state_at_entry": []
+        }
+      ]
+    },
+    {
+      "case": "code-fa17-message-0004",
+      "event_code": 64023,
+      "message": 4,
+      "exact": true,
+      "diff": {},
+      "original_trace": [
+        {
+          "name": "WinPrintf",
+          "args": [
+            11712,
+            21939,
+            64023,
+            4
+          ],
+          "state_at_entry": {
+            "event": "00000400341200000b00160017facdab"
+          },
+          "modified_state_at_entry": []
+        },
+        {
+          "name": "f_1B73_030F",
+          "args": [
+            64790,
+            0,
+            0,
+            0,
+            0
+          ],
+          "state_at_entry": {
+            "event": "00000400341200000b00160017facdab"
+          },
+          "modified_state_at_entry": []
+        }
+      ],
+      "candidate_trace": [
+        {
+          "name": "WinPrintf",
+          "args": [
+            11712,
+            21939,
+            64023,
+            4
+          ],
+          "state_at_entry": {
+            "event": "00000400341200000b00160017facdab"
+          },
+          "modified_state_at_entry": []
+        },
+        {
+          "name": "f_1B73_030F",
+          "args": [
+            64790,
+            0,
+            0,
+            0,
+            0
+          ],
+          "state_at_entry": {
+            "event": "00000400341200000b00160017facdab"
+          },
+          "modified_state_at_entry": []
+        }
+      ]
+    },
+    {
+      "case": "code-fa17-message-0008",
+      "event_code": 64023,
+      "message": 8,
+      "exact": true,
+      "diff": {},
+      "original_trace": [
+        {
+          "name": "WinPrintf",
+          "args": [
+            11712,
+            21939,
+            64023,
+            8
+          ],
+          "state_at_entry": {
+            "event": "00000800341200000b00160017facdab"
+          },
+          "modified_state_at_entry": []
+        }
+      ],
+      "candidate_trace": [
+        {
+          "name": "WinPrintf",
+          "args": [
+            11712,
+            21939,
+            64023,
+            8
+          ],
+          "state_at_entry": {
+            "event": "00000800341200000b00160017facdab"
+          },
+          "modified_state_at_entry": []
+        }
+      ]
+    },
+    {
+      "case": "code-fa17-message-000c",
+      "event_code": 64023,
+      "message": 12,
+      "exact": true,
+      "diff": {},
+      "original_trace": [
+        {
+          "name": "WinPrintf",
+          "args": [
+            11712,
+            21939,
+            64023,
+            12
+          ],
+          "state_at_entry": {
+            "event": "00000c00341200000b00160017facdab"
+          },
+          "modified_state_at_entry": []
+        },
+        {
+          "name": "f_1B73_030F",
+          "args": [
+            64790,
+            0,
+            0,
+            0,
+            0
+          ],
+          "state_at_entry": {
+            "event": "00000c00341200000b00160017facdab"
+          },
+          "modified_state_at_entry": []
+        }
+      ],
+      "candidate_trace": [
+        {
+          "name": "WinPrintf",
+          "args": [
+            11712,
+            21939,
+            64023,
+            12
+          ],
+          "state_at_entry": {
+            "event": "00000c00341200000b00160017facdab"
+          },
+          "modified_state_at_entry": []
+        },
+        {
+          "name": "f_1B73_030F",
+          "args": [
+            64790,
+            0,
+            0,
+            0,
+            0
+          ],
+          "state_at_entry": {
+            "event": "00000c00341200000b00160017facdab"
+          },
+          "modified_state_at_entry": []
+        }
+      ]
+    },
+    {
+      "case": "code-fa23-message-0000",
+      "event_code": 64035,
+      "message": 0,
+      "exact": true,
+      "diff": {},
+      "original_trace": [
+        {
+          "name": "WinPrintf",
+          "args": [
+            11712,
+            21939,
+            64035,
+            0
+          ],
+          "state_at_entry": {
+            "event": "00000000341200000b00160023facdab"
+          },
+          "modified_state_at_entry": []
+        }
+      ],
+      "candidate_trace": [
+        {
+          "name": "WinPrintf",
+          "args": [
+            11712,
+            21939,
+            64035,
+            0
+          ],
+          "state_at_entry": {
+            "event": "00000000341200000b00160023facdab"
+          },
+          "modified_state_at_entry": []
+        }
+      ]
+    },
+    {
+      "case": "code-fa23-message-0004",
+      "event_code": 64035,
+      "message": 4,
+      "exact": true,
+      "diff": {},
+      "original_trace": [
+        {
+          "name": "WinPrintf",
+          "args": [
+            11712,
+            21939,
+            64035,
+            4
+          ],
+          "state_at_entry": {
+            "event": "00000400341200000b00160023facdab"
+          },
+          "modified_state_at_entry": []
+        },
+        {
+          "name": "f_1B73_030F",
+          "args": [
+            64789,
+            0,
+            0,
+            0,
+            0
+          ],
+          "state_at_entry": {
+            "event": "00000400341200000b00160023facdab"
+          },
+          "modified_state_at_entry": []
+        }
+      ],
+      "candidate_trace": [
+        {
+          "name": "WinPrintf",
+          "args": [
+            11712,
+            21939,
+            64035,
+            4
+          ],
+          "state_at_entry": {
+            "event": "00000400341200000b00160023facdab"
+          },
+          "modified_state_at_entry": []
+        },
+        {
+          "name": "f_1B73_030F",
+          "args": [
+            64789,
+            0,
+            0,
+            0,
+            0
+          ],
+          "state_at_entry": {
+            "event": "00000400341200000b00160023facdab"
+          },
+          "modified_state_at_entry": []
+        }
+      ]
+    },
+    {
+      "case": "code-fa23-message-0008",
+      "event_code": 64035,
+      "message": 8,
+      "exact": true,
+      "diff": {},
+      "original_trace": [
+        {
+          "name": "WinPrintf",
+          "args": [
+            11712,
+            21939,
+            64035,
+            8
+          ],
+          "state_at_entry": {
+            "event": "00000800341200000b00160023facdab"
+          },
+          "modified_state_at_entry": []
+        }
+      ],
+      "candidate_trace": [
+        {
+          "name": "WinPrintf",
+          "args": [
+            11712,
+            21939,
+            64035,
+            8
+          ],
+          "state_at_entry": {
+            "event": "00000800341200000b00160023facdab"
+          },
+          "modified_state_at_entry": []
+        }
+      ]
+    },
+    {
+      "case": "code-fa23-message-000c",
+      "event_code": 64035,
+      "message": 12,
+      "exact": true,
+      "diff": {},
+      "original_trace": [
+        {
+          "name": "WinPrintf",
+          "args": [
+            11712,
+            21939,
+            64035,
+            12
+          ],
+          "state_at_entry": {
+            "event": "00000c00341200000b00160023facdab"
+          },
+          "modified_state_at_entry": []
+        },
+        {
+          "name": "f_1B73_030F",
+          "args": [
+            64789,
+            0,
+            0,
+            0,
+            0
+          ],
+          "state_at_entry": {
+            "event": "00000c00341200000b00160023facdab"
+          },
+          "modified_state_at_entry": []
+        }
+      ],
+      "candidate_trace": [
+        {
+          "name": "WinPrintf",
+          "args": [
+            11712,
+            21939,
+            64035,
+            12
+          ],
+          "state_at_entry": {
+            "event": "00000c00341200000b00160023facdab"
+          },
+          "modified_state_at_entry": []
+        },
+        {
+          "name": "f_1B73_030F",
+          "args": [
+            64789,
+            0,
+            0,
+            0,
+            0
+          ],
+          "state_at_entry": {
+            "event": "00000c00341200000b00160023facdab"
+          },
+          "modified_state_at_entry": []
+        }
+      ]
+    },
+    {
+      "case": "code-fa03-message-0000",
+      "event_code": 64003,
+      "message": 0,
+      "exact": true,
+      "diff": {},
+      "original_trace": [
+        {
+          "name": "WinPrintf",
+          "args": [
+            11712,
+            21939,
+            64003,
+            0
+          ],
+          "state_at_entry": {
+            "event": "00000000341200000b00160003facdab"
+          },
+          "modified_state_at_entry": []
+        }
+      ],
+      "candidate_trace": [
+        {
+          "name": "WinPrintf",
+          "args": [
+            11712,
+            21939,
+            64003,
+            0
+          ],
+          "state_at_entry": {
+            "event": "00000000341200000b00160003facdab"
+          },
+          "modified_state_at_entry": []
+        }
+      ]
+    },
+    {
+      "case": "code-fa03-message-0004",
+      "event_code": 64003,
+      "message": 4,
+      "exact": true,
+      "diff": {},
+      "original_trace": [
+        {
+          "name": "WinPrintf",
+          "args": [
+            11712,
+            21939,
+            64003,
+            4
+          ],
+          "state_at_entry": {
+            "event": "00000400341200000b00160003facdab"
+          },
+          "modified_state_at_entry": []
+        }
+      ],
+      "candidate_trace": [
+        {
+          "name": "WinPrintf",
+          "args": [
+            11712,
+            21939,
+            64003,
+            4
+          ],
+          "state_at_entry": {
+            "event": "00000400341200000b00160003facdab"
+          },
+          "modified_state_at_entry": []
+        }
+      ]
+    },
+    {
+      "case": "code-fa03-message-0008",
+      "event_code": 64003,
+      "message": 8,
+      "exact": true,
+      "diff": {},
+      "original_trace": [
+        {
+          "name": "WinPrintf",
+          "args": [
+            11712,
+            21939,
+            64003,
+            8
+          ],
+          "state_at_entry": {
+            "event": "00000800341200000b00160003facdab"
+          },
+          "modified_state_at_entry": []
+        },
+        {
+          "name": "YellowCommand",
+          "args": [
+            3
+          ],
+          "state_at_entry": {
+            "event": "00000800341200000b00160003facdab"
+          },
+          "modified_state_at_entry": []
+        }
+      ],
+      "candidate_trace": [
+        {
+          "name": "WinPrintf",
+          "args": [
+            11712,
+            21939,
+            64003,
+            8
+          ],
+          "state_at_entry": {
+            "event": "00000800341200000b00160003facdab"
+          },
+          "modified_state_at_entry": []
+        },
+        {
+          "name": "YellowCommand",
+          "args": [
+            3
+          ],
+          "state_at_entry": {
+            "event": "00000800341200000b00160003facdab"
+          },
+          "modified_state_at_entry": []
+        }
+      ]
+    },
+    {
+      "case": "code-fa03-message-000c",
+      "event_code": 64003,
+      "message": 12,
+      "exact": true,
+      "diff": {},
+      "original_trace": [
+        {
+          "name": "WinPrintf",
+          "args": [
+            11712,
+            21939,
+            64003,
+            12
+          ],
+          "state_at_entry": {
+            "event": "00000c00341200000b00160003facdab"
+          },
+          "modified_state_at_entry": []
+        }
+      ],
+      "candidate_trace": [
+        {
+          "name": "WinPrintf",
+          "args": [
+            11712,
+            21939,
+            64003,
+            12
+          ],
+          "state_at_entry": {
+            "event": "00000c00341200000b00160003facdab"
+          },
+          "modified_state_at_entry": []
+        }
+      ]
+    },
+    {
+      "case": "code-fa0e-message-0000",
+      "event_code": 64014,
+      "message": 0,
+      "exact": true,
+      "diff": {},
+      "original_trace": [
+        {
+          "name": "WinPrintf",
+          "args": [
+            11712,
+            21939,
+            64014,
+            0
+          ],
+          "state_at_entry": {
+            "event": "00000000341200000b0016000efacdab"
+          },
+          "modified_state_at_entry": []
+        },
+        {
+          "name": "YellowCommandKey",
+          "args": [
+            136
+          ],
+          "state_at_entry": {
+            "event": "00000000341200000b0016000efacdab"
+          },
+          "modified_state_at_entry": []
+        }
+      ],
+      "candidate_trace": [
+        {
+          "name": "WinPrintf",
+          "args": [
+            11712,
+            21939,
+            64014,
+            0
+          ],
+          "state_at_entry": {
+            "event": "00000000341200000b0016000efacdab"
+          },
+          "modified_state_at_entry": []
+        },
+        {
+          "name": "YellowCommandKey",
+          "args": [
+            136
+          ],
+          "state_at_entry": {
+            "event": "00000000341200000b0016000efacdab"
+          },
+          "modified_state_at_entry": []
+        }
+      ]
+    },
+    {
+      "case": "code-fa0e-message-0004",
+      "event_code": 64014,
+      "message": 4,
+      "exact": true,
+      "diff": {},
+      "original_trace": [
+        {
+          "name": "WinPrintf",
+          "args": [
+            11712,
+            21939,
+            64014,
+            4
+          ],
+          "state_at_entry": {
+            "event": "00000400341200000b0016000efacdab"
+          },
+          "modified_state_at_entry": []
+        }
+      ],
+      "candidate_trace": [
+        {
+          "name": "WinPrintf",
+          "args": [
+            11712,
+            21939,
+            64014,
+            4
+          ],
+          "state_at_entry": {
+            "event": "00000400341200000b0016000efacdab"
+          },
+          "modified_state_at_entry": []
+        }
+      ]
+    },
+    {
+      "case": "code-fa0e-message-0008",
+      "event_code": 64014,
+      "message": 8,
+      "exact": true,
+      "diff": {},
+      "original_trace": [
+        {
+          "name": "WinPrintf",
+          "args": [
+            11712,
+            21939,
+            64014,
+            8
+          ],
+          "state_at_entry": {
+            "event": "00000800341200000b0016000efacdab"
+          },
+          "modified_state_at_entry": []
+        }
+      ],
+      "candidate_trace": [
+        {
+          "name": "WinPrintf",
+          "args": [
+            11712,
+            21939,
+            64014,
+            8
+          ],
+          "state_at_entry": {
+            "event": "00000800341200000b0016000efacdab"
+          },
+          "modified_state_at_entry": []
+        }
+      ]
+    },
+    {
+      "case": "code-fa0e-message-000c",
+      "event_code": 64014,
+      "message": 12,
+      "exact": true,
+      "diff": {},
+      "original_trace": [
+        {
+          "name": "WinPrintf",
+          "args": [
+            11712,
+            21939,
+            64014,
+            12
+          ],
+          "state_at_entry": {
+            "event": "00000c00341200000b0016000efacdab"
+          },
+          "modified_state_at_entry": []
+        }
+      ],
+      "candidate_trace": [
+        {
+          "name": "WinPrintf",
+          "args": [
+            11712,
+            21939,
+            64014,
+            12
+          ],
+          "state_at_entry": {
+            "event": "00000c00341200000b0016000efacdab"
+          },
+          "modified_state_at_entry": []
+        }
+      ]
+    },
+    {
+      "case": "code-fa0f-message-0000",
+      "event_code": 64015,
+      "message": 0,
+      "exact": true,
+      "diff": {},
+      "original_trace": [
+        {
+          "name": "WinPrintf",
+          "args": [
+            11712,
+            21939,
+            64015,
+            0
+          ],
+          "state_at_entry": {
+            "event": "00000000341200000b0016000ffacdab"
+          },
+          "modified_state_at_entry": []
+        },
+        {
+          "name": "DoTab",
+          "args": [],
+          "state_at_entry": {
+            "event": "00000000341200000b0016000ffacdab"
+          },
+          "modified_state_at_entry": []
+        }
+      ],
+      "candidate_trace": [
+        {
+          "name": "WinPrintf",
+          "args": [
+            11712,
+            21939,
+            64015,
+            0
+          ],
+          "state_at_entry": {
+            "event": "00000000341200000b0016000ffacdab"
+          },
+          "modified_state_at_entry": []
+        },
+        {
+          "name": "DoTab",
+          "args": [],
+          "state_at_entry": {
+            "event": "00000000341200000b0016000ffacdab"
+          },
+          "modified_state_at_entry": []
+        }
+      ]
+    },
+    {
+      "case": "code-fa0f-message-0004",
+      "event_code": 64015,
+      "message": 4,
+      "exact": true,
+      "diff": {},
+      "original_trace": [
+        {
+          "name": "WinPrintf",
+          "args": [
+            11712,
+            21939,
+            64015,
+            4
+          ],
+          "state_at_entry": {
+            "event": "00000400341200000b0016000ffacdab"
+          },
+          "modified_state_at_entry": []
+        }
+      ],
+      "candidate_trace": [
+        {
+          "name": "WinPrintf",
+          "args": [
+            11712,
+            21939,
+            64015,
+            4
+          ],
+          "state_at_entry": {
+            "event": "00000400341200000b0016000ffacdab"
+          },
+          "modified_state_at_entry": []
+        }
+      ]
+    },
+    {
+      "case": "code-fa0f-message-0008",
+      "event_code": 64015,
+      "message": 8,
+      "exact": true,
+      "diff": {},
+      "original_trace": [
+        {
+          "name": "WinPrintf",
+          "args": [
+            11712,
+            21939,
+            64015,
+            8
+          ],
+          "state_at_entry": {
+            "event": "00000800341200000b0016000ffacdab"
+          },
+          "modified_state_at_entry": []
+        }
+      ],
+      "candidate_trace": [
+        {
+          "name": "WinPrintf",
+          "args": [
+            11712,
+            21939,
+            64015,
+            8
+          ],
+          "state_at_entry": {
+            "event": "00000800341200000b0016000ffacdab"
+          },
+          "modified_state_at_entry": []
+        }
+      ]
+    },
+    {
+      "case": "code-fa0f-message-000c",
+      "event_code": 64015,
+      "message": 12,
+      "exact": true,
+      "diff": {},
+      "original_trace": [
+        {
+          "name": "WinPrintf",
+          "args": [
+            11712,
+            21939,
+            64015,
+            12
+          ],
+          "state_at_entry": {
+            "event": "00000c00341200000b0016000ffacdab"
+          },
+          "modified_state_at_entry": []
+        }
+      ],
+      "candidate_trace": [
+        {
+          "name": "WinPrintf",
+          "args": [
+            11712,
+            21939,
+            64015,
+            12
+          ],
+          "state_at_entry": {
+            "event": "00000c00341200000b0016000ffacdab"
+          },
+          "modified_state_at_entry": []
+        }
+      ]
+    },
+    {
+      "case": "code-f905-message-0000",
+      "event_code": 63749,
+      "message": 0,
+      "exact": true,
+      "diff": {},
+      "original_trace": [
+        {
+          "name": "WinPrintf",
+          "args": [
+            11712,
+            21939,
+            63749,
+            0
+          ],
+          "state_at_entry": {
+            "event": "00000000341200000b00160005f9cdab"
+          },
+          "modified_state_at_entry": []
+        }
+      ],
+      "candidate_trace": [
+        {
+          "name": "WinPrintf",
+          "args": [
+            11712,
+            21939,
+            63749,
+            0
+          ],
+          "state_at_entry": {
+            "event": "00000000341200000b00160005f9cdab"
+          },
+          "modified_state_at_entry": []
+        }
+      ]
+    },
+    {
+      "case": "code-f905-message-0004",
+      "event_code": 63749,
+      "message": 4,
+      "exact": true,
+      "diff": {},
+      "original_trace": [
+        {
+          "name": "WinPrintf",
+          "args": [
+            11712,
+            21939,
+            63749,
+            4
+          ],
+          "state_at_entry": {
+            "event": "00000400341200000b00160005f9cdab"
+          },
+          "modified_state_at_entry": []
+        }
+      ],
+      "candidate_trace": [
+        {
+          "name": "WinPrintf",
+          "args": [
+            11712,
+            21939,
+            63749,
+            4
+          ],
+          "state_at_entry": {
+            "event": "00000400341200000b00160005f9cdab"
+          },
+          "modified_state_at_entry": []
+        }
+      ]
+    },
+    {
+      "case": "code-f905-message-0008",
+      "event_code": 63749,
+      "message": 8,
+      "exact": true,
+      "diff": {},
+      "original_trace": [
+        {
+          "name": "WinPrintf",
+          "args": [
+            11712,
+            21939,
+            63749,
+            8
+          ],
+          "state_at_entry": {
+            "event": "00000800341200000b00160005f9cdab"
+          },
+          "modified_state_at_entry": []
+        }
+      ],
+      "candidate_trace": [
+        {
+          "name": "WinPrintf",
+          "args": [
+            11712,
+            21939,
+            63749,
+            8
+          ],
+          "state_at_entry": {
+            "event": "00000800341200000b00160005f9cdab"
+          },
+          "modified_state_at_entry": []
+        }
+      ]
+    },
+    {
+      "case": "code-f905-message-000c",
+      "event_code": 63749,
+      "message": 12,
+      "exact": true,
+      "diff": {},
+      "original_trace": [
+        {
+          "name": "WinPrintf",
+          "args": [
+            11712,
+            21939,
+            63749,
+            12
+          ],
+          "state_at_entry": {
+            "event": "00000c00341200000b00160005f9cdab"
+          },
+          "modified_state_at_entry": []
+        }
+      ],
+      "candidate_trace": [
+        {
+          "name": "WinPrintf",
+          "args": [
+            11712,
+            21939,
+            63749,
+            12
+          ],
+          "state_at_entry": {
+            "event": "00000c00341200000b00160005f9cdab"
+          },
+          "modified_state_at_entry": []
+        }
+      ]
+    },
+    {
+      "case": "code-fb05-message-0000",
+      "event_code": 64261,
+      "message": 0,
+      "exact": true,
+      "diff": {},
+      "original_trace": [
+        {
+          "name": "WinPrintf",
+          "args": [
+            11712,
+            21939,
+            64261,
+            0
+          ],
+          "state_at_entry": {
+            "event": "00000000341200000b00160005fbcdab"
+          },
+          "modified_state_at_entry": []
+        }
+      ],
+      "candidate_trace": [
+        {
+          "name": "WinPrintf",
+          "args": [
+            11712,
+            21939,
+            64261,
+            0
+          ],
+          "state_at_entry": {
+            "event": "00000000341200000b00160005fbcdab"
+          },
+          "modified_state_at_entry": []
+        }
+      ]
+    },
+    {
+      "case": "code-fb05-message-0004",
+      "event_code": 64261,
+      "message": 4,
+      "exact": true,
+      "diff": {},
+      "original_trace": [
+        {
+          "name": "WinPrintf",
+          "args": [
+            11712,
+            21939,
+            64261,
+            4
+          ],
+          "state_at_entry": {
+            "event": "00000400341200000b00160005fbcdab"
+          },
+          "modified_state_at_entry": []
+        }
+      ],
+      "candidate_trace": [
+        {
+          "name": "WinPrintf",
+          "args": [
+            11712,
+            21939,
+            64261,
+            4
+          ],
+          "state_at_entry": {
+            "event": "00000400341200000b00160005fbcdab"
+          },
+          "modified_state_at_entry": []
+        }
+      ]
+    },
+    {
+      "case": "code-fb05-message-0008",
+      "event_code": 64261,
+      "message": 8,
+      "exact": true,
+      "diff": {},
+      "original_trace": [
+        {
+          "name": "WinPrintf",
+          "args": [
+            11712,
+            21939,
+            64261,
+            8
+          ],
+          "state_at_entry": {
+            "event": "00000800341200000b00160005fbcdab"
+          },
+          "modified_state_at_entry": []
+        }
+      ],
+      "candidate_trace": [
+        {
+          "name": "WinPrintf",
+          "args": [
+            11712,
+            21939,
+            64261,
+            8
+          ],
+          "state_at_entry": {
+            "event": "00000800341200000b00160005fbcdab"
+          },
+          "modified_state_at_entry": []
+        }
+      ]
+    },
+    {
+      "case": "code-fb05-message-000c",
+      "event_code": 64261,
+      "message": 12,
+      "exact": true,
+      "diff": {},
+      "original_trace": [
+        {
+          "name": "WinPrintf",
+          "args": [
+            11712,
+            21939,
+            64261,
+            12
+          ],
+          "state_at_entry": {
+            "event": "00000c00341200000b00160005fbcdab"
+          },
+          "modified_state_at_entry": []
+        }
+      ],
+      "candidate_trace": [
+        {
+          "name": "WinPrintf",
+          "args": [
+            11712,
+            21939,
+            64261,
+            12
+          ],
+          "state_at_entry": {
+            "event": "00000c00341200000b00160005fbcdab"
+          },
+          "modified_state_at_entry": []
+        }
+      ]
+    },
+    {
+      "case": "code-00fa-message-0000",
+      "event_code": 250,
+      "message": 0,
+      "exact": true,
+      "diff": {},
+      "original_trace": [
+        {
+          "name": "WinPrintf",
+          "args": [
+            11712,
+            21939,
+            250,
+            0
+          ],
+          "state_at_entry": {
+            "event": "00000000341200000b001600fa00cdab"
+          },
+          "modified_state_at_entry": []
+        }
+      ],
+      "candidate_trace": [
+        {
+          "name": "WinPrintf",
+          "args": [
+            11712,
+            21939,
+            250,
+            0
+          ],
+          "state_at_entry": {
+            "event": "00000000341200000b001600fa00cdab"
+          },
+          "modified_state_at_entry": []
+        }
+      ]
+    },
+    {
+      "case": "code-00fa-message-0004",
+      "event_code": 250,
+      "message": 4,
+      "exact": true,
+      "diff": {},
+      "original_trace": [
+        {
+          "name": "WinPrintf",
+          "args": [
+            11712,
+            21939,
+            250,
+            4
+          ],
+          "state_at_entry": {
+            "event": "00000400341200000b001600fa00cdab"
+          },
+          "modified_state_at_entry": []
+        }
+      ],
+      "candidate_trace": [
+        {
+          "name": "WinPrintf",
+          "args": [
+            11712,
+            21939,
+            250,
+            4
+          ],
+          "state_at_entry": {
+            "event": "00000400341200000b001600fa00cdab"
+          },
+          "modified_state_at_entry": []
+        }
+      ]
+    },
+    {
+      "case": "code-00fa-message-0008",
+      "event_code": 250,
+      "message": 8,
+      "exact": true,
+      "diff": {},
+      "original_trace": [
+        {
+          "name": "WinPrintf",
+          "args": [
+            11712,
+            21939,
+            250,
+            8
+          ],
+          "state_at_entry": {
+            "event": "00000800341200000b001600fa00cdab"
+          },
+          "modified_state_at_entry": []
+        }
+      ],
+      "candidate_trace": [
+        {
+          "name": "WinPrintf",
+          "args": [
+            11712,
+            21939,
+            250,
+            8
+          ],
+          "state_at_entry": {
+            "event": "00000800341200000b001600fa00cdab"
+          },
+          "modified_state_at_entry": []
+        }
+      ]
+    },
+    {
+      "case": "code-00fa-message-000c",
+      "event_code": 250,
+      "message": 12,
+      "exact": true,
+      "diff": {},
+      "original_trace": [
+        {
+          "name": "WinPrintf",
+          "args": [
+            11712,
+            21939,
+            250,
+            12
+          ],
+          "state_at_entry": {
+            "event": "00000c00341200000b001600fa00cdab"
+          },
+          "modified_state_at_entry": []
+        }
+      ],
+      "candidate_trace": [
+        {
+          "name": "WinPrintf",
+          "args": [
+            11712,
+            21939,
+            250,
+            12
+          ],
+          "state_at_entry": {
+            "event": "00000c00341200000b001600fa00cdab"
+          },
+          "modified_state_at_entry": []
+        }
+      ]
+    },
+    {
+      "case": "code-7a05-message-0000",
+      "event_code": 31237,
+      "message": 0,
+      "exact": true,
+      "diff": {},
+      "original_trace": [
+        {
+          "name": "WinPrintf",
+          "args": [
+            11712,
+            21939,
+            31237,
+            0
+          ],
+          "state_at_entry": {
+            "event": "00000000341200000b001600057acdab"
+          },
+          "modified_state_at_entry": []
+        }
+      ],
+      "candidate_trace": [
+        {
+          "name": "WinPrintf",
+          "args": [
+            11712,
+            21939,
+            31237,
+            0
+          ],
+          "state_at_entry": {
+            "event": "00000000341200000b001600057acdab"
+          },
+          "modified_state_at_entry": []
+        }
+      ]
+    },
+    {
+      "case": "code-7a05-message-0004",
+      "event_code": 31237,
+      "message": 4,
+      "exact": true,
+      "diff": {},
+      "original_trace": [
+        {
+          "name": "WinPrintf",
+          "args": [
+            11712,
+            21939,
+            31237,
+            4
+          ],
+          "state_at_entry": {
+            "event": "00000400341200000b001600057acdab"
+          },
+          "modified_state_at_entry": []
+        }
+      ],
+      "candidate_trace": [
+        {
+          "name": "WinPrintf",
+          "args": [
+            11712,
+            21939,
+            31237,
+            4
+          ],
+          "state_at_entry": {
+            "event": "00000400341200000b001600057acdab"
+          },
+          "modified_state_at_entry": []
+        }
+      ]
+    },
+    {
+      "case": "code-7a05-message-0008",
+      "event_code": 31237,
+      "message": 8,
+      "exact": true,
+      "diff": {},
+      "original_trace": [
+        {
+          "name": "WinPrintf",
+          "args": [
+            11712,
+            21939,
+            31237,
+            8
+          ],
+          "state_at_entry": {
+            "event": "00000800341200000b001600057acdab"
+          },
+          "modified_state_at_entry": []
+        }
+      ],
+      "candidate_trace": [
+        {
+          "name": "WinPrintf",
+          "args": [
+            11712,
+            21939,
+            31237,
+            8
+          ],
+          "state_at_entry": {
+            "event": "00000800341200000b001600057acdab"
+          },
+          "modified_state_at_entry": []
+        }
+      ]
+    },
+    {
+      "case": "code-7a05-message-000c",
+      "event_code": 31237,
+      "message": 12,
+      "exact": true,
+      "diff": {},
+      "original_trace": [
+        {
+          "name": "WinPrintf",
+          "args": [
+            11712,
+            21939,
+            31237,
+            12
+          ],
+          "state_at_entry": {
+            "event": "00000c00341200000b001600057acdab"
+          },
+          "modified_state_at_entry": []
+        }
+      ],
+      "candidate_trace": [
+        {
+          "name": "WinPrintf",
+          "args": [
+            11712,
+            21939,
+            31237,
+            12
+          ],
+          "state_at_entry": {
+            "event": "00000c00341200000b001600057acdab"
+          },
+          "modified_state_at_entry": []
+        }
+      ]
+    },
+    {
+      "case": "code-ffff-message-0000",
+      "event_code": 65535,
+      "message": 0,
+      "exact": true,
+      "diff": {},
+      "original_trace": [
+        {
+          "name": "WinPrintf",
+          "args": [
+            11712,
+            21939,
+            65535,
+            0
+          ],
+          "state_at_entry": {
+            "event": "00000000341200000b001600ffffcdab"
+          },
+          "modified_state_at_entry": []
+        }
+      ],
+      "candidate_trace": [
+        {
+          "name": "WinPrintf",
+          "args": [
+            11712,
+            21939,
+            65535,
+            0
+          ],
+          "state_at_entry": {
+            "event": "00000000341200000b001600ffffcdab"
+          },
+          "modified_state_at_entry": []
+        }
+      ]
+    },
+    {
+      "case": "code-ffff-message-0004",
+      "event_code": 65535,
+      "message": 4,
+      "exact": true,
+      "diff": {},
+      "original_trace": [
+        {
+          "name": "WinPrintf",
+          "args": [
+            11712,
+            21939,
+            65535,
+            4
+          ],
+          "state_at_entry": {
+            "event": "00000400341200000b001600ffffcdab"
+          },
+          "modified_state_at_entry": []
+        }
+      ],
+      "candidate_trace": [
+        {
+          "name": "WinPrintf",
+          "args": [
+            11712,
+            21939,
+            65535,
+            4
+          ],
+          "state_at_entry": {
+            "event": "00000400341200000b001600ffffcdab"
+          },
+          "modified_state_at_entry": []
+        }
+      ]
+    },
+    {
+      "case": "code-ffff-message-0008",
+      "event_code": 65535,
+      "message": 8,
+      "exact": true,
+      "diff": {},
+      "original_trace": [
+        {
+          "name": "WinPrintf",
+          "args": [
+            11712,
+            21939,
+            65535,
+            8
+          ],
+          "state_at_entry": {
+            "event": "00000800341200000b001600ffffcdab"
+          },
+          "modified_state_at_entry": []
+        }
+      ],
+      "candidate_trace": [
+        {
+          "name": "WinPrintf",
+          "args": [
+            11712,
+            21939,
+            65535,
+            8
+          ],
+          "state_at_entry": {
+            "event": "00000800341200000b001600ffffcdab"
+          },
+          "modified_state_at_entry": []
+        }
+      ]
+    },
+    {
+      "case": "code-ffff-message-000c",
+      "event_code": 65535,
+      "message": 12,
+      "exact": true,
+      "diff": {},
+      "original_trace": [
+        {
+          "name": "WinPrintf",
+          "args": [
+            11712,
+            21939,
+            65535,
+            12
+          ],
+          "state_at_entry": {
+            "event": "00000c00341200000b001600ffffcdab"
+          },
+          "modified_state_at_entry": []
+        }
+      ],
+      "candidate_trace": [
+        {
+          "name": "WinPrintf",
+          "args": [
+            11712,
+            21939,
+            65535,
+            12
+          ],
+          "state_at_entry": {
+            "event": "00000c00341200000b001600ffffcdab"
+          },
+          "modified_state_at_entry": []
+        }
+      ]
+    },
+    {
+      "case": "code-8000-message-0000",
+      "event_code": 32768,
+      "message": 0,
+      "exact": true,
+      "diff": {},
+      "original_trace": [
+        {
+          "name": "WinPrintf",
+          "args": [
+            11712,
+            21939,
+            32768,
+            0
+          ],
+          "state_at_entry": {
+            "event": "00000000341200000b0016000080cdab"
+          },
+          "modified_state_at_entry": []
+        }
+      ],
+      "candidate_trace": [
+        {
+          "name": "WinPrintf",
+          "args": [
+            11712,
+            21939,
+            32768,
+            0
+          ],
+          "state_at_entry": {
+            "event": "00000000341200000b0016000080cdab"
+          },
+          "modified_state_at_entry": []
+        }
+      ]
+    },
+    {
+      "case": "code-8000-message-0004",
+      "event_code": 32768,
+      "message": 4,
+      "exact": true,
+      "diff": {},
+      "original_trace": [
+        {
+          "name": "WinPrintf",
+          "args": [
+            11712,
+            21939,
+            32768,
+            4
+          ],
+          "state_at_entry": {
+            "event": "00000400341200000b0016000080cdab"
+          },
+          "modified_state_at_entry": []
+        }
+      ],
+      "candidate_trace": [
+        {
+          "name": "WinPrintf",
+          "args": [
+            11712,
+            21939,
+            32768,
+            4
+          ],
+          "state_at_entry": {
+            "event": "00000400341200000b0016000080cdab"
+          },
+          "modified_state_at_entry": []
+        }
+      ]
+    },
+    {
+      "case": "code-8000-message-0008",
+      "event_code": 32768,
+      "message": 8,
+      "exact": true,
+      "diff": {},
+      "original_trace": [
+        {
+          "name": "WinPrintf",
+          "args": [
+            11712,
+            21939,
+            32768,
+            8
+          ],
+          "state_at_entry": {
+            "event": "00000800341200000b0016000080cdab"
+          },
+          "modified_state_at_entry": []
+        }
+      ],
+      "candidate_trace": [
+        {
+          "name": "WinPrintf",
+          "args": [
+            11712,
+            21939,
+            32768,
+            8
+          ],
+          "state_at_entry": {
+            "event": "00000800341200000b0016000080cdab"
+          },
+          "modified_state_at_entry": []
+        }
+      ]
+    },
+    {
+      "case": "code-8000-message-000c",
+      "event_code": 32768,
+      "message": 12,
+      "exact": true,
+      "diff": {},
+      "original_trace": [
+        {
+          "name": "WinPrintf",
+          "args": [
+            11712,
+            21939,
+            32768,
+            12
+          ],
+          "state_at_entry": {
+            "event": "00000c00341200000b0016000080cdab"
+          },
+          "modified_state_at_entry": []
+        }
+      ],
+      "candidate_trace": [
+        {
+          "name": "WinPrintf",
+          "args": [
+            11712,
+            21939,
+            32768,
+            12
+          ],
+          "state_at_entry": {
+            "event": "00000c00341200000b0016000080cdab"
+          },
+          "modified_state_at_entry": []
+        }
+      ]
+    },
+    {
+      "case": "code-0000-message-0000",
+      "event_code": 0,
+      "message": 0,
+      "exact": true,
+      "diff": {},
+      "original_trace": [
+        {
+          "name": "WinPrintf",
+          "args": [
+            11712,
+            21939,
+            0,
+            0
+          ],
+          "state_at_entry": {
+            "event": "00000000341200000b0016000000cdab"
+          },
+          "modified_state_at_entry": []
+        }
+      ],
+      "candidate_trace": [
+        {
+          "name": "WinPrintf",
+          "args": [
+            11712,
+            21939,
+            0,
+            0
+          ],
+          "state_at_entry": {
+            "event": "00000000341200000b0016000000cdab"
+          },
+          "modified_state_at_entry": []
+        }
+      ]
+    },
+    {
+      "case": "code-0000-message-0004",
+      "event_code": 0,
+      "message": 4,
+      "exact": true,
+      "diff": {},
+      "original_trace": [
+        {
+          "name": "WinPrintf",
+          "args": [
+            11712,
+            21939,
+            0,
+            4
+          ],
+          "state_at_entry": {
+            "event": "00000400341200000b0016000000cdab"
+          },
+          "modified_state_at_entry": []
+        }
+      ],
+      "candidate_trace": [
+        {
+          "name": "WinPrintf",
+          "args": [
+            11712,
+            21939,
+            0,
+            4
+          ],
+          "state_at_entry": {
+            "event": "00000400341200000b0016000000cdab"
+          },
+          "modified_state_at_entry": []
+        }
+      ]
+    },
+    {
+      "case": "code-0000-message-0008",
+      "event_code": 0,
+      "message": 8,
+      "exact": true,
+      "diff": {},
+      "original_trace": [
+        {
+          "name": "WinPrintf",
+          "args": [
+            11712,
+            21939,
+            0,
+            8
+          ],
+          "state_at_entry": {
+            "event": "00000800341200000b0016000000cdab"
+          },
+          "modified_state_at_entry": []
+        }
+      ],
+      "candidate_trace": [
+        {
+          "name": "WinPrintf",
+          "args": [
+            11712,
+            21939,
+            0,
+            8
+          ],
+          "state_at_entry": {
+            "event": "00000800341200000b0016000000cdab"
+          },
+          "modified_state_at_entry": []
+        }
+      ]
+    },
+    {
+      "case": "code-0000-message-000c",
+      "event_code": 0,
+      "message": 12,
+      "exact": true,
+      "diff": {},
+      "original_trace": [
+        {
+          "name": "WinPrintf",
+          "args": [
+            11712,
+            21939,
+            0,
+            12
+          ],
+          "state_at_entry": {
+            "event": "00000c00341200000b0016000000cdab"
+          },
+          "modified_state_at_entry": []
+        }
+      ],
+      "candidate_trace": [
+        {
+          "name": "WinPrintf",
+          "args": [
+            11712,
+            21939,
+            0,
+            12
+          ],
+          "state_at_entry": {
+            "event": "00000c00341200000b0016000000cdab"
+          },
+          "modified_state_at_entry": []
+        }
+      ]
+    },
+    {
+      "case": "code-fa04-message-0000",
+      "event_code": 64004,
+      "message": 0,
+      "exact": true,
+      "diff": {},
+      "original_trace": [
+        {
+          "name": "WinPrintf",
+          "args": [
+            11712,
+            21939,
+            64004,
+            0
+          ],
+          "state_at_entry": {
+            "event": "00000000341200000b00160004facdab"
+          },
+          "modified_state_at_entry": []
+        }
+      ],
+      "candidate_trace": [
+        {
+          "name": "WinPrintf",
+          "args": [
+            11712,
+            21939,
+            64004,
+            0
+          ],
+          "state_at_entry": {
+            "event": "00000000341200000b00160004facdab"
+          },
+          "modified_state_at_entry": []
+        }
+      ]
+    },
+    {
+      "case": "code-fa04-message-0004",
+      "event_code": 64004,
+      "message": 4,
+      "exact": true,
+      "diff": {},
+      "original_trace": [
+        {
+          "name": "WinPrintf",
+          "args": [
+            11712,
+            21939,
+            64004,
+            4
+          ],
+          "state_at_entry": {
+            "event": "00000400341200000b00160004facdab"
+          },
+          "modified_state_at_entry": []
+        }
+      ],
+      "candidate_trace": [
+        {
+          "name": "WinPrintf",
+          "args": [
+            11712,
+            21939,
+            64004,
+            4
+          ],
+          "state_at_entry": {
+            "event": "00000400341200000b00160004facdab"
+          },
+          "modified_state_at_entry": []
+        }
+      ]
+    },
+    {
+      "case": "code-fa04-message-0008",
+      "event_code": 64004,
+      "message": 8,
+      "exact": true,
+      "diff": {},
+      "original_trace": [
+        {
+          "name": "WinPrintf",
+          "args": [
+            11712,
+            21939,
+            64004,
+            8
+          ],
+          "state_at_entry": {
+            "event": "00000800341200000b00160004facdab"
+          },
+          "modified_state_at_entry": []
+        }
+      ],
+      "candidate_trace": [
+        {
+          "name": "WinPrintf",
+          "args": [
+            11712,
+            21939,
+            64004,
+            8
+          ],
+          "state_at_entry": {
+            "event": "00000800341200000b00160004facdab"
+          },
+          "modified_state_at_entry": []
+        }
+      ]
+    },
+    {
+      "case": "code-fa04-message-000c",
+      "event_code": 64004,
+      "message": 12,
+      "exact": true,
+      "diff": {},
+      "original_trace": [
+        {
+          "name": "WinPrintf",
+          "args": [
+            11712,
+            21939,
+            64004,
+            12
+          ],
+          "state_at_entry": {
+            "event": "00000c00341200000b00160004facdab"
+          },
+          "modified_state_at_entry": []
+        }
+      ],
+      "candidate_trace": [
+        {
+          "name": "WinPrintf",
+          "args": [
+            11712,
+            21939,
+            64004,
+            12
+          ],
+          "state_at_entry": {
+            "event": "00000c00341200000b00160004facdab"
+          },
+          "modified_state_at_entry": []
+        }
+      ]
+    },
+    {
+      "case": "code-fa10-message-0000",
+      "event_code": 64016,
+      "message": 0,
+      "exact": true,
+      "diff": {},
+      "original_trace": [
+        {
+          "name": "WinPrintf",
+          "args": [
+            11712,
+            21939,
+            64016,
+            0
+          ],
+          "state_at_entry": {
+            "event": "00000000341200000b00160010facdab"
+          },
+          "modified_state_at_entry": []
+        }
+      ],
+      "candidate_trace": [
+        {
+          "name": "WinPrintf",
+          "args": [
+            11712,
+            21939,
+            64016,
+            0
+          ],
+          "state_at_entry": {
+            "event": "00000000341200000b00160010facdab"
+          },
+          "modified_state_at_entry": []
+        }
+      ]
+    },
+    {
+      "case": "code-fa10-message-0004",
+      "event_code": 64016,
+      "message": 4,
+      "exact": true,
+      "diff": {},
+      "original_trace": [
+        {
+          "name": "WinPrintf",
+          "args": [
+            11712,
+            21939,
+            64016,
+            4
+          ],
+          "state_at_entry": {
+            "event": "00000400341200000b00160010facdab"
+          },
+          "modified_state_at_entry": []
+        }
+      ],
+      "candidate_trace": [
+        {
+          "name": "WinPrintf",
+          "args": [
+            11712,
+            21939,
+            64016,
+            4
+          ],
+          "state_at_entry": {
+            "event": "00000400341200000b00160010facdab"
+          },
+          "modified_state_at_entry": []
+        }
+      ]
+    },
+    {
+      "case": "code-fa10-message-0008",
+      "event_code": 64016,
+      "message": 8,
+      "exact": true,
+      "diff": {},
+      "original_trace": [
+        {
+          "name": "WinPrintf",
+          "args": [
+            11712,
+            21939,
+            64016,
+            8
+          ],
+          "state_at_entry": {
+            "event": "00000800341200000b00160010facdab"
+          },
+          "modified_state_at_entry": []
+        }
+      ],
+      "candidate_trace": [
+        {
+          "name": "WinPrintf",
+          "args": [
+            11712,
+            21939,
+            64016,
+            8
+          ],
+          "state_at_entry": {
+            "event": "00000800341200000b00160010facdab"
+          },
+          "modified_state_at_entry": []
+        }
+      ]
+    },
+    {
+      "case": "code-fa10-message-000c",
+      "event_code": 64016,
+      "message": 12,
+      "exact": true,
+      "diff": {},
+      "original_trace": [
+        {
+          "name": "WinPrintf",
+          "args": [
+            11712,
+            21939,
+            64016,
+            12
+          ],
+          "state_at_entry": {
+            "event": "00000c00341200000b00160010facdab"
+          },
+          "modified_state_at_entry": []
+        }
+      ],
+      "candidate_trace": [
+        {
+          "name": "WinPrintf",
+          "args": [
+            11712,
+            21939,
+            64016,
+            12
+          ],
+          "state_at_entry": {
+            "event": "00000c00341200000b00160010facdab"
+          },
+          "modified_state_at_entry": []
+        }
+      ]
+    }
+  ]
+}

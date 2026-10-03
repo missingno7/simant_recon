@@ -1,0 +1,1016 @@
+{
+  "schema": "simant-whole-program-simulation-state-production-v6",
+  "claim": "FINITE_STRICT_INTEGRATION_CHECK: fixed-plan owner emission and whole-generated-TU compile checks; no DOS behavioral, rendering, or general program-equivalence claim.",
+  "plan_sha256": "47a5940df5784fccd41b3bc4328d5a4c374d6c5693f6a1e34f65514049f045e5",
+  "plan_input_hashes_checked": 18,
+  "target_owner_count": 24,
+  "owner_emission_sha256": {
+    "header": "5c87fe9e12f755eee3e1beeaab9b2478bb5ec95782b031b805ecb828c8c6de1f",
+    "source": "c2489524a8975665e0c49b3cfd19fb2b5e8161c3ac7b5ec4dca4eb9cda51c79a"
+  },
+  "compiler": {
+    "path": "C:\\msys64\\mingw64\\bin\\gcc.exe",
+    "sha256": "c5005ba5380351c10743e9ca53ef9632164c54be3bd6b93324795114e4589a7d",
+    "version": "gcc.EXE (Rev10, Built by MSYS2 project) 12.2.0"
+  },
+  "whole_tu_consumer_count": 18,
+  "consumers": [
+    {
+      "source": "src/S04/m35F5.c",
+      "generated_path": "build/workers/whole_program/generated/S04_m35F5.c",
+      "generated_sha256_before": "6afbea7d6cb7f5422e582821e4dc7a21a7d1ce8957b73940a10536ae7b9db69b",
+      "adapter": {
+        "kind": "SOURCE_BOUNDED_SIMULATION_STATE_V6",
+        "plan": "portable/research/whole_program_simulation_state_50f6_v6.json",
+        "plan_sha256": "47a5940df5784fccd41b3bc4328d5a4c374d6c5693f6a1e34f65514049f045e5",
+        "source": "src/S04/m35F5.c",
+        "source_sha256": "65db48855f97c32600ff7527999a463019ba2884117f0c921b35e46d5d37d406",
+        "source_views": {
+          "fd_50F6_0508": "native_sim_state_fd_50F6_0508.words"
+        },
+        "removed_extern_declarations": {
+          "fd_50F6_0508": 1
+        },
+        "rewritten_identifier_tokens": {
+          "fd_50F6_0508": 4
+        },
+        "claim": "Strict source-bounded single-owner adaptation from complete declarations and exact SaveRec rows; not communal-gap extent evidence."
+      },
+      "adapted_source_sha256": "de1077682f5295e341e4790f741d5216447c690b4284adb0ae1f450eee1a68fb",
+      "object_sha256": "f7f31a75c00d1c97ddaeba58c91ab1a4162445b8a9c96941acdab233d6b7c874",
+      "command": [
+        "C:\\msys64\\mingw64\\bin\\gcc.EXE",
+        "-std=c11",
+        "-fsigned-char",
+        "-fno-builtin",
+        "-DSIMANT_NATIVE_LITTLE_ENDIAN=1",
+        "-Werror=implicit-function-declaration",
+        "-Werror=implicit-int",
+        "-ID:\\Prog\\simant_recon",
+        "-ID:\\Prog\\simant_recon\\portable\\whole_program",
+        "-ID:\\Prog\\simant_recon\\build\\workers\\whole_program\\generated",
+        "-ID:\\Prog\\simant_recon\\build\\workers\\whole_program\\simulation_state_50f6_v6_production",
+        "-c",
+        "D:\\Prog\\simant_recon\\build\\workers\\whole_program\\simulation_state_50f6_v6_production\\S04_m35F5_v6.c",
+        "-o",
+        "D:\\Prog\\simant_recon\\build\\workers\\whole_program\\simulation_state_50f6_v6_production\\S04_m35F5_v6.o"
+      ],
+      "compiler_output": ""
+    },
+    {
+      "source": "src/S05/m35F5.c",
+      "generated_path": "build/workers/whole_program/generated/S05_m35F5.c",
+      "generated_sha256_before": "2e0c0766b8c3257402e3b5f4200f53a40dddc2081581058e1bb065908b33522e",
+      "adapter": {
+        "kind": "SOURCE_BOUNDED_SIMULATION_STATE_V6",
+        "plan": "portable/research/whole_program_simulation_state_50f6_v6.json",
+        "plan_sha256": "47a5940df5784fccd41b3bc4328d5a4c374d6c5693f6a1e34f65514049f045e5",
+        "source": "src/S05/m35F5.c",
+        "source_sha256": "b1ab82dff86dc635ad10974bf70d31dc73d8755ba3fd1605f4f0573ef71f9e87",
+        "source_views": {
+          "fd_50F6_0508": "native_sim_state_fd_50F6_0508.words"
+        },
+        "removed_extern_declarations": {
+          "fd_50F6_0508": 1
+        },
+        "rewritten_identifier_tokens": {
+          "fd_50F6_0508": 4
+        },
+        "claim": "Strict source-bounded single-owner adaptation from complete declarations and exact SaveRec rows; not communal-gap extent evidence."
+      },
+      "adapted_source_sha256": "6c00aeafc6ad308c381224d8e94688b12260003ab02d03eed789b9d2e40b0ece",
+      "object_sha256": "ce7f7c1447c977aeda967f4653e9378920314e4b61d5c7a493a69c432f912bdf",
+      "command": [
+        "C:\\msys64\\mingw64\\bin\\gcc.EXE",
+        "-std=c11",
+        "-fsigned-char",
+        "-fno-builtin",
+        "-DSIMANT_NATIVE_LITTLE_ENDIAN=1",
+        "-Werror=implicit-function-declaration",
+        "-Werror=implicit-int",
+        "-ID:\\Prog\\simant_recon",
+        "-ID:\\Prog\\simant_recon\\portable\\whole_program",
+        "-ID:\\Prog\\simant_recon\\build\\workers\\whole_program\\generated",
+        "-ID:\\Prog\\simant_recon\\build\\workers\\whole_program\\simulation_state_50f6_v6_production",
+        "-c",
+        "D:\\Prog\\simant_recon\\build\\workers\\whole_program\\simulation_state_50f6_v6_production\\S05_m35F5_v6.c",
+        "-o",
+        "D:\\Prog\\simant_recon\\build\\workers\\whole_program\\simulation_state_50f6_v6_production\\S05_m35F5_v6.o"
+      ],
+      "compiler_output": ""
+    },
+    {
+      "source": "src/S06/m35F5.c",
+      "generated_path": "build/workers/whole_program/generated/S06_m35F5.c",
+      "generated_sha256_before": "5c15b3be78370cc0b7d78f0fb24a895e5ca47293aeb67c322db68b457a3bdf9b",
+      "adapter": {
+        "kind": "SOURCE_BOUNDED_SIMULATION_STATE_V6",
+        "plan": "portable/research/whole_program_simulation_state_50f6_v6.json",
+        "plan_sha256": "47a5940df5784fccd41b3bc4328d5a4c374d6c5693f6a1e34f65514049f045e5",
+        "source": "src/S06/m35F5.c",
+        "source_sha256": "db35a96a492a6d36f6580222c17daca015aa9373b457b8758c751d3a70844a86",
+        "source_views": {
+          "fd_50F6_07CA": "native_sim_state_fd_50F6_07CA.words"
+        },
+        "removed_extern_declarations": {
+          "fd_50F6_07CA": 1
+        },
+        "rewritten_identifier_tokens": {
+          "fd_50F6_07CA": 20
+        },
+        "claim": "Strict source-bounded single-owner adaptation from complete declarations and exact SaveRec rows; not communal-gap extent evidence."
+      },
+      "adapted_source_sha256": "1fa6dde37a6267f5bf8bf06edb18bdb634163d4fd84aa899248878584adbde77",
+      "object_sha256": "9e228a84d3d0a3084cdc9c98881f8b36c3b57f2d81695621138e73fad73866da",
+      "command": [
+        "C:\\msys64\\mingw64\\bin\\gcc.EXE",
+        "-std=c11",
+        "-fsigned-char",
+        "-fno-builtin",
+        "-DSIMANT_NATIVE_LITTLE_ENDIAN=1",
+        "-Werror=implicit-function-declaration",
+        "-Werror=implicit-int",
+        "-ID:\\Prog\\simant_recon",
+        "-ID:\\Prog\\simant_recon\\portable\\whole_program",
+        "-ID:\\Prog\\simant_recon\\build\\workers\\whole_program\\generated",
+        "-ID:\\Prog\\simant_recon\\build\\workers\\whole_program\\simulation_state_50f6_v6_production",
+        "-c",
+        "D:\\Prog\\simant_recon\\build\\workers\\whole_program\\simulation_state_50f6_v6_production\\S06_m35F5_v6.c",
+        "-o",
+        "D:\\Prog\\simant_recon\\build\\workers\\whole_program\\simulation_state_50f6_v6_production\\S06_m35F5_v6.o"
+      ],
+      "compiler_output": ""
+    },
+    {
+      "source": "src/S08/m35F5.c",
+      "generated_path": "build/workers/whole_program/generated/S08_m35F5.c",
+      "generated_sha256_before": "3fc6d51a193eaa33525e27386daf083d6eb08a620d66f4782245a6a7f4d5f09c",
+      "adapter": {
+        "kind": "SOURCE_BOUNDED_SIMULATION_STATE_V6",
+        "plan": "portable/research/whole_program_simulation_state_50f6_v6.json",
+        "plan_sha256": "47a5940df5784fccd41b3bc4328d5a4c374d6c5693f6a1e34f65514049f045e5",
+        "source": "src/S08/m35F5.c",
+        "source_sha256": "ef6eea405f6497cb5a6648ef258cc1afeab308f995ded573794465d831e3501f",
+        "source_views": {
+          "fd_50F6_0508": "native_sim_state_fd_50F6_0508.words",
+          "fd_50F6_0596": "native_sim_state_fd_50F6_0596.words",
+          "fd_50F6_06A6": "native_sim_state_fd_50F6_06A6.words",
+          "fd_50F6_072E": "native_sim_state_fd_50F6_072E.words",
+          "fd_50F6_07BC": "native_sim_state_fd_50F6_07BC.words",
+          "fd_50F6_07CA": "native_sim_state_fd_50F6_07CA.words"
+        },
+        "removed_extern_declarations": {
+          "fd_50F6_0508": 1,
+          "fd_50F6_0596": 1,
+          "fd_50F6_06A6": 1,
+          "fd_50F6_072E": 1,
+          "fd_50F6_07BC": 1,
+          "fd_50F6_07CA": 1
+        },
+        "rewritten_identifier_tokens": {
+          "fd_50F6_0508": 2,
+          "fd_50F6_0596": 4,
+          "fd_50F6_06A6": 4,
+          "fd_50F6_072E": 4,
+          "fd_50F6_07BC": 6,
+          "fd_50F6_07CA": 6
+        },
+        "claim": "Strict source-bounded single-owner adaptation from complete declarations and exact SaveRec rows; not communal-gap extent evidence."
+      },
+      "adapted_source_sha256": "305ed08565c27f061ec2d82e1ffe086685522e1708bf8bc5d34131b5ac9d9c9d",
+      "object_sha256": "15babf697d1bef80ebd4be17ee6a24d8b3742d9a45b970716e871ce1a444f7c4",
+      "command": [
+        "C:\\msys64\\mingw64\\bin\\gcc.EXE",
+        "-std=c11",
+        "-fsigned-char",
+        "-fno-builtin",
+        "-DSIMANT_NATIVE_LITTLE_ENDIAN=1",
+        "-Werror=implicit-function-declaration",
+        "-Werror=implicit-int",
+        "-ID:\\Prog\\simant_recon",
+        "-ID:\\Prog\\simant_recon\\portable\\whole_program",
+        "-ID:\\Prog\\simant_recon\\build\\workers\\whole_program\\generated",
+        "-ID:\\Prog\\simant_recon\\build\\workers\\whole_program\\simulation_state_50f6_v6_production",
+        "-c",
+        "D:\\Prog\\simant_recon\\build\\workers\\whole_program\\simulation_state_50f6_v6_production\\S08_m35F5_v6.c",
+        "-o",
+        "D:\\Prog\\simant_recon\\build\\workers\\whole_program\\simulation_state_50f6_v6_production\\S08_m35F5_v6.o"
+      ],
+      "compiler_output": ""
+    },
+    {
+      "source": "src/S09/m35F5.c",
+      "generated_path": "build/workers/whole_program/generated/S09_m35F5.c",
+      "generated_sha256_before": "93d7d51dbaaf5050908a3681142d54fe5e7faf30e5b95db8b305fe39905d5bc6",
+      "adapter": {
+        "kind": "SOURCE_BOUNDED_SIMULATION_STATE_V6",
+        "plan": "portable/research/whole_program_simulation_state_50f6_v6.json",
+        "plan_sha256": "47a5940df5784fccd41b3bc4328d5a4c374d6c5693f6a1e34f65514049f045e5",
+        "source": "src/S09/m35F5.c",
+        "source_sha256": "028e1575990d5d45233f9102a0d2a060810349bd2f1297182c4af435ecbe912a",
+        "source_views": {
+          "fd_50F6_0508": "native_sim_state_fd_50F6_0508.raw_bytes",
+          "fd_50F6_0596": "native_sim_state_fd_50F6_0596.raw_bytes",
+          "fd_50F6_06A6": "native_sim_state_fd_50F6_06A6.raw_bytes",
+          "fd_50F6_072E": "native_sim_state_fd_50F6_072E.raw_bytes",
+          "fd_50F6_07BC": "native_sim_state_fd_50F6_07BC.raw_bytes",
+          "fd_50F6_07CA": "native_sim_state_fd_50F6_07CA.raw_bytes"
+        },
+        "removed_extern_declarations": {
+          "fd_50F6_0508": 1,
+          "fd_50F6_0596": 1,
+          "fd_50F6_06A6": 1,
+          "fd_50F6_072E": 1,
+          "fd_50F6_07BC": 1,
+          "fd_50F6_07CA": 1
+        },
+        "rewritten_identifier_tokens": {
+          "fd_50F6_0508": 1,
+          "fd_50F6_0596": 1,
+          "fd_50F6_06A6": 1,
+          "fd_50F6_072E": 1,
+          "fd_50F6_07BC": 1,
+          "fd_50F6_07CA": 1
+        },
+        "claim": "Strict source-bounded single-owner adaptation from complete declarations and exact SaveRec rows; not communal-gap extent evidence."
+      },
+      "adapted_source_sha256": "b62c02213ee963c973afd7d3cefd8d790293c25a0cbf1b0d9c0b3c4c503ee0ed",
+      "object_sha256": "10d15a7c7a790d087f88475ddcfba8bcbf1a2b8e2089a3ccddf29c5bc194c3a8",
+      "command": [
+        "C:\\msys64\\mingw64\\bin\\gcc.EXE",
+        "-std=c11",
+        "-fsigned-char",
+        "-fno-builtin",
+        "-DSIMANT_NATIVE_LITTLE_ENDIAN=1",
+        "-Werror=implicit-function-declaration",
+        "-Werror=implicit-int",
+        "-ID:\\Prog\\simant_recon",
+        "-ID:\\Prog\\simant_recon\\portable\\whole_program",
+        "-ID:\\Prog\\simant_recon\\build\\workers\\whole_program\\generated",
+        "-ID:\\Prog\\simant_recon\\build\\workers\\whole_program\\simulation_state_50f6_v6_production",
+        "-c",
+        "D:\\Prog\\simant_recon\\build\\workers\\whole_program\\simulation_state_50f6_v6_production\\S09_m35F5_v6.c",
+        "-o",
+        "D:\\Prog\\simant_recon\\build\\workers\\whole_program\\simulation_state_50f6_v6_production\\S09_m35F5_v6.o"
+      ],
+      "compiler_output": "D:\\Prog\\simant_recon\\build\\workers\\whole_program\\simulation_state_50f6_v6_production\\S09_m35F5_v6.c: In function 'FileSelect':\nD:\\Prog\\simant_recon\\build\\workers\\whole_program\\simulation_state_50f6_v6_production\\S09_m35F5_v6.c:443:31: warning: cast from pointer to integer of different size [-Wpointer-to-int-cast]\n  443 |         if (f_1F58_0038() && ((uint16_t)path >= 0)) {\n      |                               ^"
+    },
+    {
+      "source": "src/S12/m384C.c",
+      "generated_path": "build/workers/whole_program/generated/S12_m384C.c",
+      "generated_sha256_before": "73852f746322b27335632a615d0ee94aaa430a13f84627d170aa0aa397bdadaa",
+      "adapter": {
+        "kind": "SOURCE_BOUNDED_SIMULATION_STATE_V6",
+        "plan": "portable/research/whole_program_simulation_state_50f6_v6.json",
+        "plan_sha256": "47a5940df5784fccd41b3bc4328d5a4c374d6c5693f6a1e34f65514049f045e5",
+        "source": "src/S12/m384C.c",
+        "source_sha256": "584bf940832e3f8e975afdf85ed398fc82b6470e4a5c3ec46c1b4fcd15240002",
+        "source_views": {
+          "fd_50F6_0508": "native_sim_state_fd_50F6_0508.words"
+        },
+        "removed_extern_declarations": {
+          "fd_50F6_0508": 1
+        },
+        "rewritten_identifier_tokens": {
+          "fd_50F6_0508": 2
+        },
+        "claim": "Strict source-bounded single-owner adaptation from complete declarations and exact SaveRec rows; not communal-gap extent evidence."
+      },
+      "adapted_source_sha256": "24704463d3a93668bc0a0562f856931f19cb51318b8a9cf9b31e78ada439f757",
+      "object_sha256": "af08161272eb0fbbdedef80d6a1ddb37c8091a388dff7b1f27a4de33200c86d8",
+      "command": [
+        "C:\\msys64\\mingw64\\bin\\gcc.EXE",
+        "-std=c11",
+        "-fsigned-char",
+        "-fno-builtin",
+        "-DSIMANT_NATIVE_LITTLE_ENDIAN=1",
+        "-Werror=implicit-function-declaration",
+        "-Werror=implicit-int",
+        "-ID:\\Prog\\simant_recon",
+        "-ID:\\Prog\\simant_recon\\portable\\whole_program",
+        "-ID:\\Prog\\simant_recon\\build\\workers\\whole_program\\generated",
+        "-ID:\\Prog\\simant_recon\\build\\workers\\whole_program\\simulation_state_50f6_v6_production",
+        "-c",
+        "D:\\Prog\\simant_recon\\build\\workers\\whole_program\\simulation_state_50f6_v6_production\\S12_m384C_v6.c",
+        "-o",
+        "D:\\Prog\\simant_recon\\build\\workers\\whole_program\\simulation_state_50f6_v6_production\\S12_m384C_v6.o"
+      ],
+      "compiler_output": ""
+    },
+    {
+      "source": "src/S13/m384C.c",
+      "generated_path": "build/workers/whole_program/generated/S13_m384C.c",
+      "generated_sha256_before": "a8fc550050cd84d38087b89b38131a206687ce3402c55651bb0f58e09812d275",
+      "adapter": {
+        "kind": "SOURCE_BOUNDED_SIMULATION_STATE_V6",
+        "plan": "portable/research/whole_program_simulation_state_50f6_v6.json",
+        "plan_sha256": "47a5940df5784fccd41b3bc4328d5a4c374d6c5693f6a1e34f65514049f045e5",
+        "source": "src/S13/m384C.c",
+        "source_sha256": "fb6785e93f5c2ea1110f64b5eb200d7f4e346263c43ac521c0434629d9f5839a",
+        "source_views": {
+          "fd_50F6_07BC": "native_sim_state_fd_50F6_07BC.words",
+          "fd_50F6_07CA": "native_sim_state_fd_50F6_07CA.words"
+        },
+        "removed_extern_declarations": {
+          "fd_50F6_07BC": 1,
+          "fd_50F6_07CA": 1
+        },
+        "rewritten_identifier_tokens": {
+          "fd_50F6_07BC": 2,
+          "fd_50F6_07CA": 7
+        },
+        "claim": "Strict source-bounded single-owner adaptation from complete declarations and exact SaveRec rows; not communal-gap extent evidence."
+      },
+      "adapted_source_sha256": "743965e8dd185dd7793271929239eafd649131b736b4ecff5f93cef0eaa1aee2",
+      "object_sha256": "c59b53725b61006a56dc1b0fb186991743fd4901359695e64c3b2e8fa74c4237",
+      "command": [
+        "C:\\msys64\\mingw64\\bin\\gcc.EXE",
+        "-std=c11",
+        "-fsigned-char",
+        "-fno-builtin",
+        "-DSIMANT_NATIVE_LITTLE_ENDIAN=1",
+        "-Werror=implicit-function-declaration",
+        "-Werror=implicit-int",
+        "-ID:\\Prog\\simant_recon",
+        "-ID:\\Prog\\simant_recon\\portable\\whole_program",
+        "-ID:\\Prog\\simant_recon\\build\\workers\\whole_program\\generated",
+        "-ID:\\Prog\\simant_recon\\build\\workers\\whole_program\\simulation_state_50f6_v6_production",
+        "-c",
+        "D:\\Prog\\simant_recon\\build\\workers\\whole_program\\simulation_state_50f6_v6_production\\S13_m384C_v6.c",
+        "-o",
+        "D:\\Prog\\simant_recon\\build\\workers\\whole_program\\simulation_state_50f6_v6_production\\S13_m384C_v6.o"
+      ],
+      "compiler_output": ""
+    },
+    {
+      "source": "src/S14/m384C.c",
+      "generated_path": "build/workers/whole_program/generated/S14_m384C.c",
+      "generated_sha256_before": "69934a4cf7d836c2edb90a89058a13e34426fe404b75655d825dcd1759259184",
+      "adapter": {
+        "kind": "SOURCE_BOUNDED_SIMULATION_STATE_V6",
+        "plan": "portable/research/whole_program_simulation_state_50f6_v6.json",
+        "plan_sha256": "47a5940df5784fccd41b3bc4328d5a4c374d6c5693f6a1e34f65514049f045e5",
+        "source": "src/S14/m384C.c",
+        "source_sha256": "245f8c01d5a330c571048b8cd1b134cf544394af84f7b502a153c73adbd91020",
+        "source_views": {
+          "fd_50F6_0626": "native_sim_state_fd_50F6_0626.signed_values",
+          "fd_50F6_06AE": "native_sim_state_fd_50F6_06AE.signed_values",
+          "fd_50F6_073C": "native_sim_state_fd_50F6_073C.signed_values"
+        },
+        "removed_extern_declarations": {
+          "fd_50F6_0626": 1,
+          "fd_50F6_06AE": 1,
+          "fd_50F6_073C": 1
+        },
+        "rewritten_identifier_tokens": {
+          "fd_50F6_0626": 1,
+          "fd_50F6_06AE": 1,
+          "fd_50F6_073C": 1
+        },
+        "claim": "Strict source-bounded single-owner adaptation from complete declarations and exact SaveRec rows; not communal-gap extent evidence."
+      },
+      "adapted_source_sha256": "98ada65361da06580be966872b377c8ecd83b103d1c900af22989f9201d275b1",
+      "object_sha256": "0a950c074f9c5aa09e038704308e3aa23ec855d73eff2b8b7c8bf4c2734bab8c",
+      "command": [
+        "C:\\msys64\\mingw64\\bin\\gcc.EXE",
+        "-std=c11",
+        "-fsigned-char",
+        "-fno-builtin",
+        "-DSIMANT_NATIVE_LITTLE_ENDIAN=1",
+        "-Werror=implicit-function-declaration",
+        "-Werror=implicit-int",
+        "-ID:\\Prog\\simant_recon",
+        "-ID:\\Prog\\simant_recon\\portable\\whole_program",
+        "-ID:\\Prog\\simant_recon\\build\\workers\\whole_program\\generated",
+        "-ID:\\Prog\\simant_recon\\build\\workers\\whole_program\\simulation_state_50f6_v6_production",
+        "-c",
+        "D:\\Prog\\simant_recon\\build\\workers\\whole_program\\simulation_state_50f6_v6_production\\S14_m384C_v6.c",
+        "-o",
+        "D:\\Prog\\simant_recon\\build\\workers\\whole_program\\simulation_state_50f6_v6_production\\S14_m384C_v6.o"
+      ],
+      "compiler_output": ""
+    },
+    {
+      "source": "src/S22/m39C7.c",
+      "generated_path": "build/workers/whole_program/generated/S22_m39C7.c",
+      "generated_sha256_before": "87cce02eebfc1a2cf4ec7b84f77c8ebcd2ca8df76cfe1a36e371dd4d22a0e03f",
+      "adapter": {
+        "kind": "SOURCE_BOUNDED_SIMULATION_STATE_V6",
+        "plan": "portable/research/whole_program_simulation_state_50f6_v6.json",
+        "plan_sha256": "47a5940df5784fccd41b3bc4328d5a4c374d6c5693f6a1e34f65514049f045e5",
+        "source": "src/S22/m39C7.c",
+        "source_sha256": "e9add4ebd445bd943f24a65764be2a79581f2fc26c349741fdfe8efae3b7030d",
+        "source_views": {
+          "fd_50F6_0508": "(*((struct Pt *)native_sim_state_fd_50F6_0508.raw_bytes))",
+          "fd_50F6_07BC": "native_sim_state_fd_50F6_07BC.words",
+          "fd_50F6_07CA": "native_sim_state_fd_50F6_07CA.words"
+        },
+        "removed_extern_declarations": {
+          "fd_50F6_0508": 1,
+          "fd_50F6_07BC": 1,
+          "fd_50F6_07CA": 1
+        },
+        "rewritten_identifier_tokens": {
+          "fd_50F6_0508": 4,
+          "fd_50F6_07BC": 2,
+          "fd_50F6_07CA": 2
+        },
+        "claim": "Strict source-bounded single-owner adaptation from complete declarations and exact SaveRec rows; not communal-gap extent evidence."
+      },
+      "adapted_source_sha256": "8ac61169cdd9034fdde8203bd7ad3dd81f2b4ebd2b088bb45332c03f35f73b87",
+      "object_sha256": "733d8297b3ee83252da3bb5ce00441ca8e183b411cba17a3e7431e2f218674de",
+      "command": [
+        "C:\\msys64\\mingw64\\bin\\gcc.EXE",
+        "-std=c11",
+        "-fsigned-char",
+        "-fno-builtin",
+        "-DSIMANT_NATIVE_LITTLE_ENDIAN=1",
+        "-Werror=implicit-function-declaration",
+        "-Werror=implicit-int",
+        "-ID:\\Prog\\simant_recon",
+        "-ID:\\Prog\\simant_recon\\portable\\whole_program",
+        "-ID:\\Prog\\simant_recon\\build\\workers\\whole_program\\generated",
+        "-ID:\\Prog\\simant_recon\\build\\workers\\whole_program\\simulation_state_50f6_v6_production",
+        "-c",
+        "D:\\Prog\\simant_recon\\build\\workers\\whole_program\\simulation_state_50f6_v6_production\\S22_m39C7_v6.c",
+        "-o",
+        "D:\\Prog\\simant_recon\\build\\workers\\whole_program\\simulation_state_50f6_v6_production\\S22_m39C7_v6.o"
+      ],
+      "compiler_output": ""
+    },
+    {
+      "source": "src/S22/m3BBD.c",
+      "generated_path": "build/workers/whole_program/generated/S22_m3BBD.c",
+      "generated_sha256_before": "9c83e2248e7164cc075cc0fda759e895577cfda04778d6d6dd49016569996954",
+      "adapter": {
+        "kind": "SOURCE_BOUNDED_SIMULATION_STATE_V6",
+        "plan": "portable/research/whole_program_simulation_state_50f6_v6.json",
+        "plan_sha256": "47a5940df5784fccd41b3bc4328d5a4c374d6c5693f6a1e34f65514049f045e5",
+        "source": "src/S22/m3BBD.c",
+        "source_sha256": "22ed7dc5dbf4687dc3e971e6845bf28ce1934f771c81ae551dd30bc782753da2",
+        "source_views": {
+          "fd_50F6_0508": "native_sim_state_fd_50F6_0508.words"
+        },
+        "removed_extern_declarations": {
+          "fd_50F6_0508": 1
+        },
+        "rewritten_identifier_tokens": {
+          "fd_50F6_0508": 2
+        },
+        "claim": "Strict source-bounded single-owner adaptation from complete declarations and exact SaveRec rows; not communal-gap extent evidence."
+      },
+      "adapted_source_sha256": "9c589ac74eb85777057333fe89928fc15c6b03755310f4cd3fde2820e35db38a",
+      "object_sha256": "5c3503c3a831affe82d6b832fdaf17d9b5f02e7dd60d4bae87ce9f06167b767c",
+      "command": [
+        "C:\\msys64\\mingw64\\bin\\gcc.EXE",
+        "-std=c11",
+        "-fsigned-char",
+        "-fno-builtin",
+        "-DSIMANT_NATIVE_LITTLE_ENDIAN=1",
+        "-Werror=implicit-function-declaration",
+        "-Werror=implicit-int",
+        "-ID:\\Prog\\simant_recon",
+        "-ID:\\Prog\\simant_recon\\portable\\whole_program",
+        "-ID:\\Prog\\simant_recon\\build\\workers\\whole_program\\generated",
+        "-ID:\\Prog\\simant_recon\\build\\workers\\whole_program\\simulation_state_50f6_v6_production",
+        "-c",
+        "D:\\Prog\\simant_recon\\build\\workers\\whole_program\\simulation_state_50f6_v6_production\\S22_m3BBD_v6.c",
+        "-o",
+        "D:\\Prog\\simant_recon\\build\\workers\\whole_program\\simulation_state_50f6_v6_production\\S22_m3BBD_v6.o"
+      ],
+      "compiler_output": ""
+    },
+    {
+      "source": "src/S24/m39C7.c",
+      "generated_path": "build/workers/whole_program/generated/S24_m39C7.c",
+      "generated_sha256_before": "c4fd0c67b4dd493744b66dccc5709c46c5803b0178c918b488c272b9da444175",
+      "adapter": {
+        "kind": "SOURCE_BOUNDED_SIMULATION_STATE_V6",
+        "plan": "portable/research/whole_program_simulation_state_50f6_v6.json",
+        "plan_sha256": "47a5940df5784fccd41b3bc4328d5a4c374d6c5693f6a1e34f65514049f045e5",
+        "source": "src/S24/m39C7.c",
+        "source_sha256": "3de9615a57dbe35eacd073726b451478dc5b12396360501631d7553b6139e240",
+        "source_views": {
+          "fd_50F6_0516": "native_sim_state_fd_50F6_0516.signed_values",
+          "fd_50F6_05A0": "native_sim_state_fd_50F6_05A0.signed_values",
+          "fd_50F6_0626": "native_sim_state_fd_50F6_0626.signed_values",
+          "fd_50F6_06AE": "native_sim_state_fd_50F6_06AE.signed_values",
+          "fd_50F6_073C": "native_sim_state_fd_50F6_073C.signed_values",
+          "fd_50F6_07CE": "native_sim_state_fd_50F6_07CE.signed_values",
+          "fd_50F6_0856": "native_sim_state_fd_50F6_0856.signed_values",
+          "fd_50F6_08F0": "native_sim_state_fd_50F6_08F0.signed_values",
+          "fd_50F6_0970": "native_sim_state_fd_50F6_0970.signed_values",
+          "fd_50F6_0A0A": "native_sim_state_fd_50F6_0A0A.signed_values"
+        },
+        "removed_extern_declarations": {
+          "fd_50F6_0516": 1,
+          "fd_50F6_05A0": 1,
+          "fd_50F6_0626": 1,
+          "fd_50F6_06AE": 1,
+          "fd_50F6_073C": 1,
+          "fd_50F6_07CE": 1,
+          "fd_50F6_0856": 1,
+          "fd_50F6_08F0": 1,
+          "fd_50F6_0970": 1,
+          "fd_50F6_0A0A": 1
+        },
+        "rewritten_identifier_tokens": {
+          "fd_50F6_0516": 2,
+          "fd_50F6_05A0": 2,
+          "fd_50F6_0626": 2,
+          "fd_50F6_06AE": 2,
+          "fd_50F6_073C": 2,
+          "fd_50F6_07CE": 2,
+          "fd_50F6_0856": 2,
+          "fd_50F6_08F0": 2,
+          "fd_50F6_0970": 2,
+          "fd_50F6_0A0A": 2
+        },
+        "claim": "Strict source-bounded single-owner adaptation from complete declarations and exact SaveRec rows; not communal-gap extent evidence."
+      },
+      "adapted_source_sha256": "029f8a12c5488fc4dd454f0323a96f1f334f5c6253b2192883959a60923f7420",
+      "object_sha256": "45277dbc38d1134768b0536cb76b30ba10eb846966e95043a4a41d033e87d9c6",
+      "command": [
+        "C:\\msys64\\mingw64\\bin\\gcc.EXE",
+        "-std=c11",
+        "-fsigned-char",
+        "-fno-builtin",
+        "-DSIMANT_NATIVE_LITTLE_ENDIAN=1",
+        "-Werror=implicit-function-declaration",
+        "-Werror=implicit-int",
+        "-ID:\\Prog\\simant_recon",
+        "-ID:\\Prog\\simant_recon\\portable\\whole_program",
+        "-ID:\\Prog\\simant_recon\\build\\workers\\whole_program\\generated",
+        "-ID:\\Prog\\simant_recon\\build\\workers\\whole_program\\simulation_state_50f6_v6_production",
+        "-c",
+        "D:\\Prog\\simant_recon\\build\\workers\\whole_program\\simulation_state_50f6_v6_production\\S24_m39C7_v6.c",
+        "-o",
+        "D:\\Prog\\simant_recon\\build\\workers\\whole_program\\simulation_state_50f6_v6_production\\S24_m39C7_v6.o"
+      ],
+      "compiler_output": ""
+    },
+    {
+      "source": "src/root/m004A.c",
+      "generated_path": "build/workers/whole_program/generated/root_m004A.c",
+      "generated_sha256_before": "83d6f3235662ee7a8ef0283df7eb16edc26ded80daa2421a4d68d0064df2129b",
+      "adapter": {
+        "kind": "SOURCE_BOUNDED_SIMULATION_STATE_V6",
+        "plan": "portable/research/whole_program_simulation_state_50f6_v6.json",
+        "plan_sha256": "47a5940df5784fccd41b3bc4328d5a4c374d6c5693f6a1e34f65514049f045e5",
+        "source": "src/root/m004A.c",
+        "source_sha256": "5456d454b2c16edb5eb6e3845976aaaa9d654a8833d3becbc3f7917bb978fc0a",
+        "source_views": {
+          "fd_50F6_0508": "(*((Point *)native_sim_state_fd_50F6_0508.raw_bytes))",
+          "fd_50F6_0596": "(*((Point *)native_sim_state_fd_50F6_0596.raw_bytes))",
+          "fd_50F6_06A6": "(*((Point *)native_sim_state_fd_50F6_06A6.raw_bytes))",
+          "fd_50F6_072E": "(*((Point *)native_sim_state_fd_50F6_072E.raw_bytes))"
+        },
+        "removed_extern_declarations": {
+          "fd_50F6_0508": 1,
+          "fd_50F6_0596": 1,
+          "fd_50F6_06A6": 1,
+          "fd_50F6_072E": 1
+        },
+        "rewritten_identifier_tokens": {
+          "fd_50F6_0508": 44,
+          "fd_50F6_0596": 4,
+          "fd_50F6_06A6": 4,
+          "fd_50F6_072E": 4
+        },
+        "claim": "Strict source-bounded single-owner adaptation from complete declarations and exact SaveRec rows; not communal-gap extent evidence."
+      },
+      "adapted_source_sha256": "cdffc5ad8070001aeaaa4f418edd84c46b1ec5d88f58be9c7a73294a70eaeda4",
+      "object_sha256": "97a2ba7729ea54956122bdd1c0105ad86eafa816918c56b98a1edcb3f212dcbd",
+      "command": [
+        "C:\\msys64\\mingw64\\bin\\gcc.EXE",
+        "-std=c11",
+        "-fsigned-char",
+        "-fno-builtin",
+        "-DSIMANT_NATIVE_LITTLE_ENDIAN=1",
+        "-Werror=implicit-function-declaration",
+        "-Werror=implicit-int",
+        "-ID:\\Prog\\simant_recon",
+        "-ID:\\Prog\\simant_recon\\portable\\whole_program",
+        "-ID:\\Prog\\simant_recon\\build\\workers\\whole_program\\generated",
+        "-ID:\\Prog\\simant_recon\\build\\workers\\whole_program\\simulation_state_50f6_v6_production",
+        "-c",
+        "D:\\Prog\\simant_recon\\build\\workers\\whole_program\\simulation_state_50f6_v6_production\\root_m004A_v6.c",
+        "-o",
+        "D:\\Prog\\simant_recon\\build\\workers\\whole_program\\simulation_state_50f6_v6_production\\root_m004A_v6.o"
+      ],
+      "compiler_output": ""
+    },
+    {
+      "source": "src/root/m00F8.c",
+      "generated_path": "build/workers/whole_program/generated/root_m00F8.c",
+      "generated_sha256_before": "226b49e9a63f4f9b98b7a975db235abffe1c86fb162cf6aef57d18d13e8e9020",
+      "adapter": {
+        "kind": "SOURCE_BOUNDED_SIMULATION_STATE_V6",
+        "plan": "portable/research/whole_program_simulation_state_50f6_v6.json",
+        "plan_sha256": "47a5940df5784fccd41b3bc4328d5a4c374d6c5693f6a1e34f65514049f045e5",
+        "source": "src/root/m00F8.c",
+        "source_sha256": "4ee148ec616e199f61b671df89da8a21f1789c4177d3dbc7b76a478acb98184a",
+        "source_views": {
+          "fd_50F6_0508": "(*((Point *)native_sim_state_fd_50F6_0508.raw_bytes))"
+        },
+        "removed_extern_declarations": {
+          "fd_50F6_0508": 1
+        },
+        "rewritten_identifier_tokens": {
+          "fd_50F6_0508": 4
+        },
+        "claim": "Strict source-bounded single-owner adaptation from complete declarations and exact SaveRec rows; not communal-gap extent evidence."
+      },
+      "adapted_source_sha256": "06df7d867c245d4878aebbe83874e3306fc41eff66271a5dc97a0a6b75e03ada",
+      "object_sha256": "1734f36c0dd59af2a4ef596c907604865904483a70d885f3b95a67d183e6ae4e",
+      "command": [
+        "C:\\msys64\\mingw64\\bin\\gcc.EXE",
+        "-std=c11",
+        "-fsigned-char",
+        "-fno-builtin",
+        "-DSIMANT_NATIVE_LITTLE_ENDIAN=1",
+        "-Werror=implicit-function-declaration",
+        "-Werror=implicit-int",
+        "-ID:\\Prog\\simant_recon",
+        "-ID:\\Prog\\simant_recon\\portable\\whole_program",
+        "-ID:\\Prog\\simant_recon\\build\\workers\\whole_program\\generated",
+        "-ID:\\Prog\\simant_recon\\build\\workers\\whole_program\\simulation_state_50f6_v6_production",
+        "-c",
+        "D:\\Prog\\simant_recon\\build\\workers\\whole_program\\simulation_state_50f6_v6_production\\root_m00F8_v6.c",
+        "-o",
+        "D:\\Prog\\simant_recon\\build\\workers\\whole_program\\simulation_state_50f6_v6_production\\root_m00F8_v6.o"
+      ],
+      "compiler_output": ""
+    },
+    {
+      "source": "src/root/m015B.c",
+      "generated_path": "build/workers/whole_program/generated/root_m015B.c",
+      "generated_sha256_before": "ebee8b2a8d1e851dc8659e40a87493b14abbb63d524057cd32c778e4c55f41fd",
+      "adapter": {
+        "kind": "SOURCE_BOUNDED_SIMULATION_STATE_V6",
+        "plan": "portable/research/whole_program_simulation_state_50f6_v6.json",
+        "plan_sha256": "47a5940df5784fccd41b3bc4328d5a4c374d6c5693f6a1e34f65514049f045e5",
+        "source": "src/root/m015B.c",
+        "source_sha256": "67f5c32deda5a49ab56243d50fba33647db7897c850706378fe2a8488277fa8f",
+        "source_views": {
+          "fd_50F6_0596": "(*((Point *)native_sim_state_fd_50F6_0596.raw_bytes))",
+          "fd_50F6_06A6": "(*((Point *)native_sim_state_fd_50F6_06A6.raw_bytes))",
+          "fd_50F6_072E": "(*((Point *)native_sim_state_fd_50F6_072E.raw_bytes))",
+          "fd_50F6_07BC": "(*((Point *)native_sim_state_fd_50F6_07BC.raw_bytes))",
+          "fd_50F6_07CA": "(*((Point *)native_sim_state_fd_50F6_07CA.raw_bytes))"
+        },
+        "removed_extern_declarations": {
+          "fd_50F6_0596": 1,
+          "fd_50F6_06A6": 1,
+          "fd_50F6_072E": 1,
+          "fd_50F6_07BC": 1,
+          "fd_50F6_07CA": 1
+        },
+        "rewritten_identifier_tokens": {
+          "fd_50F6_0596": 1,
+          "fd_50F6_06A6": 1,
+          "fd_50F6_072E": 1,
+          "fd_50F6_07BC": 6,
+          "fd_50F6_07CA": 11
+        },
+        "claim": "Strict source-bounded single-owner adaptation from complete declarations and exact SaveRec rows; not communal-gap extent evidence."
+      },
+      "adapted_source_sha256": "1ddbe2fed4f8719ffda231c15bf89cf16002b8c49c10b90217b189aecfd9e836",
+      "object_sha256": "e92e35ed8f60e24788dc11065e51bce629ed369a57ed141ffeb3c0c12e8ecdc0",
+      "command": [
+        "C:\\msys64\\mingw64\\bin\\gcc.EXE",
+        "-std=c11",
+        "-fsigned-char",
+        "-fno-builtin",
+        "-DSIMANT_NATIVE_LITTLE_ENDIAN=1",
+        "-Werror=implicit-function-declaration",
+        "-Werror=implicit-int",
+        "-ID:\\Prog\\simant_recon",
+        "-ID:\\Prog\\simant_recon\\portable\\whole_program",
+        "-ID:\\Prog\\simant_recon\\build\\workers\\whole_program\\generated",
+        "-ID:\\Prog\\simant_recon\\build\\workers\\whole_program\\simulation_state_50f6_v6_production",
+        "-c",
+        "D:\\Prog\\simant_recon\\build\\workers\\whole_program\\simulation_state_50f6_v6_production\\root_m015B_v6.c",
+        "-o",
+        "D:\\Prog\\simant_recon\\build\\workers\\whole_program\\simulation_state_50f6_v6_production\\root_m015B_v6.o"
+      ],
+      "compiler_output": ""
+    },
+    {
+      "source": "src/root/m0250.c",
+      "generated_path": "build/workers/whole_program/generated/root_m0250.c",
+      "generated_sha256_before": "a1b94af65f30d770aecdf946b0e4a59cb9269c01154a500130d43994d3b0eb4f",
+      "adapter": {
+        "kind": "SOURCE_BOUNDED_SIMULATION_STATE_V6",
+        "plan": "portable/research/whole_program_simulation_state_50f6_v6.json",
+        "plan_sha256": "47a5940df5784fccd41b3bc4328d5a4c374d6c5693f6a1e34f65514049f045e5",
+        "source": "src/root/m0250.c",
+        "source_sha256": "bb8a325c543151e09cb173d2194844877805a9e1058d3b24362ff5a7cbd9f61b",
+        "source_views": {
+          "fd_50F6_0508": "(*((Pnt *)native_sim_state_fd_50F6_0508.raw_bytes))",
+          "fd_50F6_0852": "(*((Pnt *)native_sim_state_fd_50F6_0852.raw_bytes))",
+          "fd_50F6_08DE": "(*((Pnt *)native_sim_state_fd_50F6_08DE.raw_bytes))",
+          "fd_50F6_08EC": "(*((Pnt *)native_sim_state_fd_50F6_08EC.raw_bytes))",
+          "fd_50F6_09F2": "(*((Pnt *)native_sim_state_fd_50F6_09F2.raw_bytes))",
+          "fd_50F6_0A02": "(*((Pnt *)native_sim_state_fd_50F6_0A02.raw_bytes))",
+          "fd_50F6_0A8A": "(*((Pnt *)native_sim_state_fd_50F6_0A8A.raw_bytes))",
+          "fd_50F6_0AA2": "(*((Pnt *)native_sim_state_fd_50F6_0AA2.raw_bytes))",
+          "fd_50F6_0AB2": "(*((Pnt *)native_sim_state_fd_50F6_0AB2.raw_bytes))"
+        },
+        "removed_extern_declarations": {
+          "fd_50F6_0508": 1,
+          "fd_50F6_0852": 1,
+          "fd_50F6_08DE": 1,
+          "fd_50F6_08EC": 1,
+          "fd_50F6_09F2": 1,
+          "fd_50F6_0A02": 1,
+          "fd_50F6_0A8A": 1,
+          "fd_50F6_0AA2": 1,
+          "fd_50F6_0AB2": 1
+        },
+        "rewritten_identifier_tokens": {
+          "fd_50F6_0508": 49,
+          "fd_50F6_0852": 5,
+          "fd_50F6_08DE": 5,
+          "fd_50F6_08EC": 5,
+          "fd_50F6_09F2": 7,
+          "fd_50F6_0A02": 5,
+          "fd_50F6_0A8A": 5,
+          "fd_50F6_0AA2": 5,
+          "fd_50F6_0AB2": 5
+        },
+        "claim": "Strict source-bounded single-owner adaptation from complete declarations and exact SaveRec rows; not communal-gap extent evidence."
+      },
+      "adapted_source_sha256": "2d6714907de4c64b610c6d150ecff14b71d4aa57e38c96909a5b6a2351dd52f5",
+      "object_sha256": "5ce11f9a2fc8ccbdf2d522e96da7907042761b208c86d58900cf1fe74add8b99",
+      "command": [
+        "C:\\msys64\\mingw64\\bin\\gcc.EXE",
+        "-std=c11",
+        "-fsigned-char",
+        "-fno-builtin",
+        "-DSIMANT_NATIVE_LITTLE_ENDIAN=1",
+        "-Werror=implicit-function-declaration",
+        "-Werror=implicit-int",
+        "-ID:\\Prog\\simant_recon",
+        "-ID:\\Prog\\simant_recon\\portable\\whole_program",
+        "-ID:\\Prog\\simant_recon\\build\\workers\\whole_program\\generated",
+        "-ID:\\Prog\\simant_recon\\build\\workers\\whole_program\\simulation_state_50f6_v6_production",
+        "-c",
+        "D:\\Prog\\simant_recon\\build\\workers\\whole_program\\simulation_state_50f6_v6_production\\root_m0250_v6.c",
+        "-o",
+        "D:\\Prog\\simant_recon\\build\\workers\\whole_program\\simulation_state_50f6_v6_production\\root_m0250_v6.o"
+      ],
+      "compiler_output": ""
+    },
+    {
+      "source": "src/root/m0894.c",
+      "generated_path": "build/workers/whole_program/generated/root_m0894.c",
+      "generated_sha256_before": "731467e492921a51283e89720adc2505ec8416d555701d1a4a1771d8ea072d09",
+      "adapter": {
+        "kind": "SOURCE_BOUNDED_SIMULATION_STATE_V6",
+        "plan": "portable/research/whole_program_simulation_state_50f6_v6.json",
+        "plan_sha256": "47a5940df5784fccd41b3bc4328d5a4c374d6c5693f6a1e34f65514049f045e5",
+        "source": "src/root/m0894.c",
+        "source_sha256": "57b40ad0a9ee74c501fbcb0d521b86b8158f206f44f4867e960bcb800b5e7484",
+        "source_views": {
+          "fd_50F6_0852": "(*((Point *)native_sim_state_fd_50F6_0852.raw_bytes))",
+          "fd_50F6_08EC": "(*((Point *)native_sim_state_fd_50F6_08EC.raw_bytes))",
+          "fd_50F6_0A02": "(*((Point *)native_sim_state_fd_50F6_0A02.raw_bytes))",
+          "fd_50F6_0AA2": "(*((Point *)native_sim_state_fd_50F6_0AA2.raw_bytes))"
+        },
+        "removed_extern_declarations": {
+          "fd_50F6_0852": 1,
+          "fd_50F6_08EC": 1,
+          "fd_50F6_0A02": 1,
+          "fd_50F6_0AA2": 1
+        },
+        "rewritten_identifier_tokens": {
+          "fd_50F6_0852": 1,
+          "fd_50F6_08EC": 5,
+          "fd_50F6_0A02": 1,
+          "fd_50F6_0AA2": 1
+        },
+        "claim": "Strict source-bounded single-owner adaptation from complete declarations and exact SaveRec rows; not communal-gap extent evidence."
+      },
+      "adapted_source_sha256": "d588188a9dec53c443eca9492a19a3a60ec6a521aad7ae14a61a271ef2018b53",
+      "object_sha256": "b96fd03081d174ae876b4e0db317fc9614b5ea429540b5ec4417d0df60996935",
+      "command": [
+        "C:\\msys64\\mingw64\\bin\\gcc.EXE",
+        "-std=c11",
+        "-fsigned-char",
+        "-fno-builtin",
+        "-DSIMANT_NATIVE_LITTLE_ENDIAN=1",
+        "-Werror=implicit-function-declaration",
+        "-Werror=implicit-int",
+        "-ID:\\Prog\\simant_recon",
+        "-ID:\\Prog\\simant_recon\\portable\\whole_program",
+        "-ID:\\Prog\\simant_recon\\build\\workers\\whole_program\\generated",
+        "-ID:\\Prog\\simant_recon\\build\\workers\\whole_program\\simulation_state_50f6_v6_production",
+        "-c",
+        "D:\\Prog\\simant_recon\\build\\workers\\whole_program\\simulation_state_50f6_v6_production\\root_m0894_v6.c",
+        "-o",
+        "D:\\Prog\\simant_recon\\build\\workers\\whole_program\\simulation_state_50f6_v6_production\\root_m0894_v6.o"
+      ],
+      "compiler_output": ""
+    },
+    {
+      "source": "src/root/m0BE8.c",
+      "generated_path": "build/workers/whole_program/generated/root_m0BE8.c",
+      "generated_sha256_before": "65d9224929962be4f8b7e8b16ec1366a82fb7949b6eb7c206219d896ced97986",
+      "adapter": {
+        "kind": "SOURCE_BOUNDED_SIMULATION_STATE_V6",
+        "plan": "portable/research/whole_program_simulation_state_50f6_v6.json",
+        "plan_sha256": "47a5940df5784fccd41b3bc4328d5a4c374d6c5693f6a1e34f65514049f045e5",
+        "source": "src/root/m0BE8.c",
+        "source_sha256": "42664e07331fbba4cc257f1e49e03dff5e93deddb764d33101ad0f454a9377d7",
+        "source_views": {
+          "fd_50F6_07CA": "native_sim_state_fd_50F6_07CA.words"
+        },
+        "removed_extern_declarations": {
+          "fd_50F6_07CA": 1
+        },
+        "rewritten_identifier_tokens": {
+          "fd_50F6_07CA": 2
+        },
+        "claim": "Strict source-bounded single-owner adaptation from complete declarations and exact SaveRec rows; not communal-gap extent evidence."
+      },
+      "adapted_source_sha256": "13fb5eb231ef7d5e409b990f96dc334f69348347bec098373873864e326a23a3",
+      "object_sha256": "f2e43424362659fa75370b319da6171d42749eb7768639383d88c909b2e368d5",
+      "command": [
+        "C:\\msys64\\mingw64\\bin\\gcc.EXE",
+        "-std=c11",
+        "-fsigned-char",
+        "-fno-builtin",
+        "-DSIMANT_NATIVE_LITTLE_ENDIAN=1",
+        "-Werror=implicit-function-declaration",
+        "-Werror=implicit-int",
+        "-ID:\\Prog\\simant_recon",
+        "-ID:\\Prog\\simant_recon\\portable\\whole_program",
+        "-ID:\\Prog\\simant_recon\\build\\workers\\whole_program\\generated",
+        "-ID:\\Prog\\simant_recon\\build\\workers\\whole_program\\simulation_state_50f6_v6_production",
+        "-c",
+        "D:\\Prog\\simant_recon\\build\\workers\\whole_program\\simulation_state_50f6_v6_production\\root_m0BE8_v6.c",
+        "-o",
+        "D:\\Prog\\simant_recon\\build\\workers\\whole_program\\simulation_state_50f6_v6_production\\root_m0BE8_v6.o"
+      ],
+      "compiler_output": ""
+    },
+    {
+      "source": "src/root/m0E2E.c",
+      "generated_path": "build/workers/whole_program/generated/root_m0E2E.c",
+      "generated_sha256_before": "962096caf9d5a0fe3ab768170315e61bc5c288ad151a50b87391ce4e3899af2f",
+      "adapter": {
+        "kind": "SOURCE_BOUNDED_SIMULATION_STATE_V6",
+        "plan": "portable/research/whole_program_simulation_state_50f6_v6.json",
+        "plan_sha256": "47a5940df5784fccd41b3bc4328d5a4c374d6c5693f6a1e34f65514049f045e5",
+        "source": "src/root/m0E2E.c",
+        "source_sha256": "9325b3426ef87771150912ce8f7cfaacc13380634505313417978b80974d10ed",
+        "source_views": {
+          "fd_50F6_0508": "(*((Point *)native_sim_state_fd_50F6_0508.raw_bytes))"
+        },
+        "removed_extern_declarations": {
+          "fd_50F6_0508": 1
+        },
+        "rewritten_identifier_tokens": {
+          "fd_50F6_0508": 4
+        },
+        "claim": "Strict source-bounded single-owner adaptation from complete declarations and exact SaveRec rows; not communal-gap extent evidence."
+      },
+      "adapted_source_sha256": "918a073afc9657ee17094f791a67322982d08179ceb99bbb2f54bcd03f78e195",
+      "object_sha256": "30e096c9c873a328ab781d5efca99fdec36c50a1df7b3f05bca3036b12f2be8e",
+      "command": [
+        "C:\\msys64\\mingw64\\bin\\gcc.EXE",
+        "-std=c11",
+        "-fsigned-char",
+        "-fno-builtin",
+        "-DSIMANT_NATIVE_LITTLE_ENDIAN=1",
+        "-Werror=implicit-function-declaration",
+        "-Werror=implicit-int",
+        "-ID:\\Prog\\simant_recon",
+        "-ID:\\Prog\\simant_recon\\portable\\whole_program",
+        "-ID:\\Prog\\simant_recon\\build\\workers\\whole_program\\generated",
+        "-ID:\\Prog\\simant_recon\\build\\workers\\whole_program\\simulation_state_50f6_v6_production",
+        "-c",
+        "D:\\Prog\\simant_recon\\build\\workers\\whole_program\\simulation_state_50f6_v6_production\\root_m0E2E_v6.c",
+        "-o",
+        "D:\\Prog\\simant_recon\\build\\workers\\whole_program\\simulation_state_50f6_v6_production\\root_m0E2E_v6.o"
+      ],
+      "compiler_output": ""
+    }
+  ],
+  "negative_controls": {
+    "modified_plan_argument_rejected": true,
+    "missing_pinned_generated_extern_rejected": true
+  },
+  "inputs": [
+    {
+      "path": "portable/research/whole_program_simulation_state_50f6_v6.json",
+      "sha256": "47a5940df5784fccd41b3bc4328d5a4c374d6c5693f6a1e34f65514049f045e5"
+    },
+    {
+      "path": "build/workers/whole_program/generated/migration.json",
+      "sha256": "cc3ce53f8fb86ae8f7f946d64598d73ee365d6eaf7508fab40f368972229f460"
+    },
+    {
+      "path": "portable/whole_program/conversions/source_bounded_simulation_state_v6.py",
+      "sha256": "f4802dbfd7cb9b55094418c20bea550b29f4c85f9b14b4f72db3647b33051906"
+    },
+    {
+      "path": "portable/whole_program/conversions/simulation_state_50f6_preword.py",
+      "sha256": "6a67b7878fb883d62d462bfd26f3e43cd7fb8a98c3738318dcd506a29fcebcac"
+    },
+    {
+      "path": "portable/whole_program/conversions/simulation_state_50f6_plan_v6.py",
+      "sha256": "363e78f909ef59795c94155855c452c2544383361b27c8c904739f654d6f18eb"
+    },
+    {
+      "path": "portable/whole_program/conversions/simulation_state_50f6_consumer_probe_v6.py",
+      "sha256": "437548de9bccae67d344e3caf06cea882c3b3b7ebbfc456c8bbf9a050544d3b4"
+    },
+    {
+      "path": "build/workers/whole_program/simulation_state_50f6_v6_production/simulation_state_50f6.h",
+      "sha256": "5c87fe9e12f755eee3e1beeaab9b2478bb5ec95782b031b805ecb828c8c6de1f"
+    },
+    {
+      "path": "build/workers/whole_program/simulation_state_50f6_v6_production/simulation_state_50f6.c",
+      "sha256": "c2489524a8975665e0c49b3cfd19fb2b5e8161c3ac7b5ec4dca4eb9cda51c79a"
+    },
+    {
+      "path": "build/workers/whole_program/generated/S04_m35F5.c",
+      "sha256": "6afbea7d6cb7f5422e582821e4dc7a21a7d1ce8957b73940a10536ae7b9db69b"
+    },
+    {
+      "path": "build/workers/whole_program/generated/S05_m35F5.c",
+      "sha256": "2e0c0766b8c3257402e3b5f4200f53a40dddc2081581058e1bb065908b33522e"
+    },
+    {
+      "path": "build/workers/whole_program/generated/S06_m35F5.c",
+      "sha256": "5c15b3be78370cc0b7d78f0fb24a895e5ca47293aeb67c322db68b457a3bdf9b"
+    },
+    {
+      "path": "build/workers/whole_program/generated/S08_m35F5.c",
+      "sha256": "3fc6d51a193eaa33525e27386daf083d6eb08a620d66f4782245a6a7f4d5f09c"
+    },
+    {
+      "path": "build/workers/whole_program/generated/S09_m35F5.c",
+      "sha256": "93d7d51dbaaf5050908a3681142d54fe5e7faf30e5b95db8b305fe39905d5bc6"
+    },
+    {
+      "path": "build/workers/whole_program/generated/S12_m384C.c",
+      "sha256": "73852f746322b27335632a615d0ee94aaa430a13f84627d170aa0aa397bdadaa"
+    },
+    {
+      "path": "build/workers/whole_program/generated/S13_m384C.c",
+      "sha256": "a8fc550050cd84d38087b89b38131a206687ce3402c55651bb0f58e09812d275"
+    },
+    {
+      "path": "build/workers/whole_program/generated/S14_m384C.c",
+      "sha256": "69934a4cf7d836c2edb90a89058a13e34426fe404b75655d825dcd1759259184"
+    },
+    {
+      "path": "build/workers/whole_program/generated/S22_m39C7.c",
+      "sha256": "87cce02eebfc1a2cf4ec7b84f77c8ebcd2ca8df76cfe1a36e371dd4d22a0e03f"
+    },
+    {
+      "path": "build/workers/whole_program/generated/S22_m3BBD.c",
+      "sha256": "9c83e2248e7164cc075cc0fda759e895577cfda04778d6d6dd49016569996954"
+    },
+    {
+      "path": "build/workers/whole_program/generated/S24_m39C7.c",
+      "sha256": "c4fd0c67b4dd493744b66dccc5709c46c5803b0178c918b488c272b9da444175"
+    },
+    {
+      "path": "build/workers/whole_program/generated/root_m004A.c",
+      "sha256": "83d6f3235662ee7a8ef0283df7eb16edc26ded80daa2421a4d68d0064df2129b"
+    },
+    {
+      "path": "build/workers/whole_program/generated/root_m00F8.c",
+      "sha256": "226b49e9a63f4f9b98b7a975db235abffe1c86fb162cf6aef57d18d13e8e9020"
+    },
+    {
+      "path": "build/workers/whole_program/generated/root_m015B.c",
+      "sha256": "ebee8b2a8d1e851dc8659e40a87493b14abbb63d524057cd32c778e4c55f41fd"
+    },
+    {
+      "path": "build/workers/whole_program/generated/root_m0250.c",
+      "sha256": "a1b94af65f30d770aecdf946b0e4a59cb9269c01154a500130d43994d3b0eb4f"
+    },
+    {
+      "path": "build/workers/whole_program/generated/root_m0894.c",
+      "sha256": "731467e492921a51283e89720adc2505ec8416d555701d1a4a1771d8ea072d09"
+    },
+    {
+      "path": "build/workers/whole_program/generated/root_m0BE8.c",
+      "sha256": "65d9224929962be4f8b7e8b16ec1366a82fb7949b6eb7c206219d896ced97986"
+    },
+    {
+      "path": "build/workers/whole_program/generated/root_m0E2E.c",
+      "sha256": "962096caf9d5a0fe3ab768170315e61bc5c288ad151a50b87391ce4e3899af2f"
+    }
+  ],
+  "nonclaims": [
+    "Diagnostic generated consumers are not executions of the DOS binary.",
+    "The owner converter is a separate module; this probe does not alter or invoke the central generator.",
+    "No output-size extent is inferred from FAR_BSS or address gaps."
+  ]
+}

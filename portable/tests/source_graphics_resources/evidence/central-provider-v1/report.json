@@ -1,0 +1,26 @@
+{
+  "schema": "simant-central-graphics-resources-v1",
+  "status": "PASS",
+  "inputs": {
+    "portable/game/resources/source_graphics_resources.c": "c89fb00301d909505aef702bda8cfd2911f8022ee3787a9eca49861fc9c7ab29",
+    "portable/game/resources/bios_fonts.c": "167ed9618d2ec2af7464ca7c531d15716059b05480219d021fbaa6b4763f617c",
+    "portable/whole_program/platform/bios_font_view.c": "b3b0dae7d29c155aab19dd9a901c8f4a8981a08bd1f6352cfdafb8ddb844a4f8",
+    "portable/whole_program/platform/graphics.c": "5e6a43ae8c79506b3c7d414900b3c116e2eefa5f5fa3ab55a09a217fb10572fe",
+    "portable/whole_program/platform/graphics_source_clip.c": "fbd040246523c043e8a6e263fc2a5ae1af6bd40911d49a826fc3cd5affa2d2a7",
+    "portable/whole_program/platform/graphics_line_1499.c": "1eb0fc1924a834df78fc57b2441e2e7bbd336a7e28d2ff27d549ae01acd06949",
+    "portable/render/primitives.c": "46f440ab374b1a83ba1f402c40cf9af73d88ca862ae747e786ee8b99b8e67df0",
+    "portable/tests/source_graphics_resources/source_graphics_resources_test.c": "d622bac5589dc7c05c8db14e80f29abd62d907ae2a51b9252dd66bf00f4c34e2",
+    "portable/tests/source_graphics_resources/run_central_provider.py": "74804481604b91fb3225464a37c63383c2c513c04d397592055f9d3c42472ba2",
+    "portable/tests/source_graphics_resources/run_source_graphics_resources.py": "283de56292b93d5270f2d86885b88edc39d4e40a6ca73c6647112e9cdc39a73b",
+    "src/root/m1B4E.asm": "a32d75d2d4ea36980b659d26e9ddd86bcde65d9e250ebac4cdc29c0e847c67a2",
+    "build/bios-reference/dosbox-staging-v0.83.0/manifest.json": "ccfb943edb92e17108bb3a74fa326052ab940839f9199df743182ef6280a5aa9",
+    "build/bios-reference/dosbox-staging-v0.83.0/font-8x8.bin": "75c79a7e7fa423dda67ec6d6d76cec86b63f85677726368750c75b0920ddf319",
+    "build/bios-reference/dosbox-staging-v0.83.0/font-8x14.bin": "657ca6588b6bf729f0ed71a3d3c781a465bd30cdfb11eb5fc7e27594c0717ea1"
+  },
+  "compiler_sha256": "c5005ba5380351c10743e9ca53ef9632164c54be3bd6b93324795114e4589a7d",
+  "stdout": "PASS: source m1B4E patterns, verified BIOS tables, actual graphics calls, cleanup\n",
+  "source_color_bytes": 16,
+  "source_pattern_bytes": 256,
+  "g4220_offset": 80,
+  "claim": "resource/font lifecycle and original pattern/glyph controls with the central native provider; no complete renderer or gameplay proof"
+}

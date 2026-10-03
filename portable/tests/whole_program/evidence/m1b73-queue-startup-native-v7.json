@@ -1,0 +1,81 @@
+{
+  "compile_command": [
+    "C:\\msys64\\mingw64\\bin\\gcc.EXE",
+    "-std=c11",
+    "-Wall",
+    "-Wextra",
+    "-Wconversion",
+    "-Wno-sign-conversion",
+    "-pedantic",
+    "-D__USE_MINGW_SETJMP_NON_SEH",
+    "-ffunction-sections",
+    "-fdata-sections",
+    "portable/tests/whole_program/m1b73_queue_startup_probe.c",
+    "portable/whole_program/platform/m1b73_queues.c",
+    "portable/whole_program/platform/m1b73_mouse_state.c",
+    "-Wl,--gc-sections",
+    "-o",
+    "D:\\Prog\\simant_recon\\build\\workers\\m1b73_queue_startup_probe_v7.exe"
+  ],
+  "compile_stderr": "In file included from portable/tests/whole_program/m1b73_queue_startup_probe.c:14:\nD:/Prog/simant_recon/src/S17/m384C.c: In function 'o17_384C_0000':\nD:/Prog/simant_recon/src/S17/m384C.c:26:26: warning: overflow in conversion from 'int' to 'short int' changes value from '65280' to '-256' [-Woverflow]\n   26 |     f_1FD2_03EB(&g_5A9C, 0xff00);\n      |                          ^~~~~~\nD:/Prog/simant_recon/src/S17/m384C.c: In function 'o17_384C_0039':\nD:/Prog/simant_recon/src/S17/m384C.c:56:15: warning: cast from pointer to integer of different size [-Wpointer-to-int-cast]\n   56 |         *p += (long)fd_55B3_6054;\n      |               ^\nD:/Prog/simant_recon/src/S17/m384C.c:58:19: warning: cast from pointer to integer of different size [-Wpointer-to-int-cast]\n   58 |             *q += (long)fd_55B3_6054;\n      |                   ^\nD:/Prog/simant_recon/src/S17/m384C.c:61:21: warning: cast to pointer from integer of different size [-Wint-to-pointer-cast]\n   61 |     for (i = 0, r = (long far *)*fd_55B3_6054; *r; i++, r++)\n      |                     ^\nD:/Prog/simant_recon/src/S17/m384C.c: In function 'o17_384C_0184':\nD:/Prog/simant_recon/src/S17/m384C.c:96:15: warning: conversion from 'int' to 'short int' may change value [-Wconversion]\n   96 |     r.right = g_3DDE * len + x;\n      |               ^~~~~~\n",
+  "compiler": {
+    "path": "C:\\msys64\\mingw64\\bin\\gcc.EXE",
+    "sha256": "c5005ba5380351c10743e9ca53ef9632164c54be3bd6b93324795114e4589a7d",
+    "version": "gcc.EXE (Rev10, Built by MSYS2 project) 12.2.0"
+  },
+  "controls": [
+    "source-derived queue counts, capacities, row extents, and descriptor masks",
+    "actual o17_384C_0000 call order reaches f0AA3 before the 0x10/0x10 mouse-ratio provider, which inspects canonical Timer state",
+    "f0AA3 clears only Queue0 and fd_5071_0060 count; other queue counts are sentinels and must remain intact",
+    "Timer.r.bottom receives the source byte pair 00h/1Fh through typed member value 1F00h, and Timer.fn receives f0CB3",
+    "dispatcher source-order filter uses descriptor mask, signed inclusive rectangle, full status condition, per-queue callback stop/continue behavior, and a callback-mutated coordinate positive control proves shared state reload",
+    "opaque far callback bytes are not cast; a matching record without an explicit native resolver returns PROVIDER_MISSING",
+    "bad native count bounds fail explicitly instead of reading beyond typed record storage",
+    "the ASM-owned g_9120 word is read through an explicit low-byte accessor for C code that historically declared only unsigned char"
+  ],
+  "executable": "build\\workers\\m1b73_queue_startup_probe_v7.exe",
+  "executable_sha256": "d68b326deafdfb6dcc578f2ba8aaf44012c4cd85b5f9b237c93fbdf1e0d8444f",
+  "executed_output_sha256": "ba5a0bcc5e5931e277924e154b6c113e48754ba381f445e0009247649b6b7085",
+  "execution_returncode": 0,
+  "execution_stderr": "",
+  "execution_stdout": "PASS: source o17_384C_0000 startup reaches f0AA3 and native m1B73 queue callback contract\n",
+  "input_sha256_after": {
+    "portable/tests/whole_program/m1b73_queue_startup_probe.c": "7f0c9016bfa65cfdc7c4bb36d05d026d8760e8b0a6e90e6e290ac3fce6bf272f",
+    "portable/tests/whole_program/run_m1b73_queue_startup_probe.py": "fe2ec0b3c64af0637b08f48bbf3993869321e35e55f53b6e5c7adc0193015994",
+    "portable/whole_program/platform/m1b73_mouse_state.c": "2bd2ec4c07b3ba6e4283d26830732422be896214dc477fa6f96f27b6f69ec4b8",
+    "portable/whole_program/platform/m1b73_mouse_state.h": "cec31ba5a9a89e38e06ab56a15df356393e6a077ed4c5b9fb7933839c9c5d45a",
+    "portable/whole_program/platform/m1b73_queues.c": "f2cbe78540eec11815ba5ff547b551039cb3940105f7f64108d13ae7f274d2c1",
+    "portable/whole_program/platform/m1b73_queues.h": "ce133080d5c159d2dc8a65ce87cbb647e11c73c8efeec1946195e4714fdf1f43",
+    "portable/whole_program/types/timer.h": "b9d7ee40d617989f0b4bbf70b430948c3f5ec8be0ec1470fe033874fc8720514",
+    "src/S17/m384C.c": "028adfd17423f115a800315be32a2aaee0f7049e0b8c3211eebd9d65ab7a1351",
+    "src/root/m1B73.asm": "3097a6b03ff1d8bdfa7d573632d9905de88d754c8b1e047de4014c4f186cb848",
+    "src/root/m1FD2.c": "f4359bdaf4cfc0fe326a54cf8a1eacb9ba3098b710bf2a561b3d0f48569bf6d8"
+  },
+  "input_sha256_before": {
+    "portable/tests/whole_program/m1b73_queue_startup_probe.c": "7f0c9016bfa65cfdc7c4bb36d05d026d8760e8b0a6e90e6e290ac3fce6bf272f",
+    "portable/tests/whole_program/run_m1b73_queue_startup_probe.py": "fe2ec0b3c64af0637b08f48bbf3993869321e35e55f53b6e5c7adc0193015994",
+    "portable/whole_program/platform/m1b73_mouse_state.c": "2bd2ec4c07b3ba6e4283d26830732422be896214dc477fa6f96f27b6f69ec4b8",
+    "portable/whole_program/platform/m1b73_mouse_state.h": "cec31ba5a9a89e38e06ab56a15df356393e6a077ed4c5b9fb7933839c9c5d45a",
+    "portable/whole_program/platform/m1b73_queues.c": "f2cbe78540eec11815ba5ff547b551039cb3940105f7f64108d13ae7f274d2c1",
+    "portable/whole_program/platform/m1b73_queues.h": "ce133080d5c159d2dc8a65ce87cbb647e11c73c8efeec1946195e4714fdf1f43",
+    "portable/whole_program/types/timer.h": "b9d7ee40d617989f0b4bbf70b430948c3f5ec8be0ec1470fe033874fc8720514",
+    "src/S17/m384C.c": "028adfd17423f115a800315be32a2aaee0f7049e0b8c3211eebd9d65ab7a1351",
+    "src/root/m1B73.asm": "3097a6b03ff1d8bdfa7d573632d9905de88d754c8b1e047de4014c4f186cb848",
+    "src/root/m1FD2.c": "f4359bdaf4cfc0fe326a54cf8a1eacb9ba3098b710bf2a561b3d0f48569bf6d8"
+  },
+  "limitations": [
+    "The actual S17 startup function is compiled from source with 16-bit int and far/near keyword mappings; adjacent startup dependencies are controlled observers, not full platform services.",
+    "The callback resolver owns application-specific function-pointer resolution and side effects; no DOS far call, interrupt timing, raw 18-byte far-queue address, or physical mouse hardware is emulated.",
+    "No original DOS differential was run in this focused provider test."
+  ],
+  "schema": "whole-program-m1b73-queue-startup-native-v1",
+  "scope": "native contract controls for f_1B73_0AA3/f_1B73_0CB3, including the actual src/S17/m384C.c o17_384C_0000 caller; startup's other services are ordered test providers; no DOS event-loop or hardware emulation claim",
+  "source_anchors": {
+    "actual_startup_caller": "src/S17/m384C.c:o17_384C_0000",
+    "canonical_timer_owner": "src/root/m1FD2.c g_5FF2; typed in portable/whole_program/types/timer.h",
+    "dispatcher": "src/root/m1B73.asm:f_1B73_0CB3/f_1B73_0CEF",
+    "queue_data": "src/root/m1B73.asm:122-151",
+    "queue_initializer": "src/root/m1B73.asm:f_1B73_0AA3"
+  },
+  "status": "PASS"
+}

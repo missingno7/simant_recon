@@ -1,0 +1,119 @@
+{
+  "schema": "simant-source-bounded-simulation-state-v7-test",
+  "claim": "DIAGNOSTIC_ONLY: fixed V7 converter owns 13 source-declared SaveRec-backed simulation arrays/triples; actual generated selected-row SaveGame/LoadGame and actual generated CountAnts pass controlled fixtures.",
+  "plan": {
+    "path": "portable/research/whole_program_simulation_state_50f6_v7.json",
+    "sha256": "83e3f4f80381b7b450c21127763ba8ca19ff27c5696af5c20633a4c7fa3a09ce"
+  },
+  "inputs": {
+    "portable/whole_program/conversions/simulation_state_50f6_plan_v7.py": "8e9919bc0b8cb639eff7c9944bbaa291106a0d990181d8675710a494d1a010c4",
+    "portable/whole_program/conversions/source_bounded_simulation_state_v7.py": "becc1ee32dfdfd1375d5916997e1e774cf042572410fe04af33b1c2d96f2af02",
+    "portable/whole_program/conversions/source_bounded_access_probe.py": "2b67d8768e04cc106bede218380c4400dee630db9fed57bc8418aeace61c0bee",
+    "build/workers/whole_program/generated/S09_m35F5.c": "1312342d67928f682294691a36c3548b3a33d48d9f905ca73728e391858a75c2",
+    "build/workers/whole_program/generated/root_m0BE8.c": "04651b5f921839bc2a29333b5a3ff33ae2f2acf101124658aae3ca82e7978110",
+    "build/workers/whole_program/generated/native_owners.c": "bd0e88c6109407ea29a5cfdb4e9d84bbbfc047b3d87411f43a39efc684f1c9f1",
+    "build/workers/whole_program/generated/native_owners.h": "c5e3e611d9abe524533c5525648bf47bd0c3e54eba315f81f87c3bd66e807f7c",
+    "build/workers/whole_program/generated/source_bounded_additive.c": "db48b8d28b413dffbc98197f797511372c17612d3a8e10bde0b4f4c147fff13b",
+    "build/workers/whole_program/generated/simulation_state_50f6.c": "c2489524a8975665e0c49b3cfd19fb2b5e8161c3ac7b5ec4dca4eb9cda51c79a",
+    "build/workers/whole_program/simulation_state_v7/simulation_state_50f6_v7.h": "25b2bc0ef4dc44119e303760d7a359bf24b9ce65d1f9cd0460921f287de031c3",
+    "build/workers/whole_program/simulation_state_v7/simulation_state_50f6_v7.c": "5b827f61f46edbb002e821efe81d8f25f44c098b412e19b93429a9d05065425d",
+    "build/workers/whole_program/simulation_state_v7/S09_fixture.c": "e905bb5b73a9d4a758f7cf80f8d4c7c9a655ab208b606f0ec20ae33cc1f62446",
+    "build/workers/whole_program/simulation_state_v7/CountAnts_consumer.c": "7401132c74633bce0f1b3f2b06dc76dceced415f3fb0e84c53bf3278e2949746",
+    "build/workers/whole_program/simulation_state_v7/save_load_probe.c": "77621456e0e2597859a5ed19128210d2dd847748cc39885db22fac117697e312",
+    "build/workers/whole_program/simulation_state_v7/count_ants_probe.c": "a19b060593f98986964a7ab8e58e5d9076a316fc36e10d3175a2cddc81be3b33",
+    "build/workers/whole_program/simulation_state_v7/S09_fixture_save.o": "9265e9aaeab6471f07bd8b55dbbd908cb5284ddd6a8e3f9c9077cfbb228857b9",
+    "build/workers/whole_program/simulation_state_v7/native_owners_save.o": "268e60e7c42021abaabbca0a65dc85053e435eddfe2d89d6727e423f2dfef036",
+    "build/workers/whole_program/simulation_state_v7/source_bounded_additive_save.o": "031d53651e9cfe5dcadf0812ab7acf0917a55c08dec6ffe20cb196cd1d39bd0b",
+    "build/workers/whole_program/simulation_state_v7/simulation_state_50f6_v7_save.o": "123d3173adbba77d4e40d8fbda0ef96fb042076d826c0c7bef95390416052802",
+    "build/workers/whole_program/simulation_state_v7/save_load_probe_save.o": "c247c39508b7243f295156ed9206cd58b2903f06d671b96f817f3b9af2ec4737",
+    "build/workers/whole_program/simulation_state_v7/CountAnts_consumer_count.o": "504903da4e74b7604825e9b422410e07a8f7cf7a7a75bd504781c6740905ac57",
+    "build/workers/whole_program/simulation_state_v7/native_owners_count.o": "268e60e7c42021abaabbca0a65dc85053e435eddfe2d89d6727e423f2dfef036",
+    "build/workers/whole_program/simulation_state_v7/source_bounded_additive_count.o": "031d53651e9cfe5dcadf0812ab7acf0917a55c08dec6ffe20cb196cd1d39bd0b",
+    "build/workers/whole_program/simulation_state_v7/simulation_state_50f6_count.o": "4f51c586e71d67c25047b9530a82daafc8f6e401d7289947f6f4284cc181ca62",
+    "build/workers/whole_program/simulation_state_v7/simulation_state_50f6_v7_count.o": "123d3173adbba77d4e40d8fbda0ef96fb042076d826c0c7bef95390416052802",
+    "build/workers/whole_program/simulation_state_v7/count_ants_probe_count.o": "56a8ca131dd1cc3e2c74e9182b9738b295213d99b33f05c5d3604d968aeb0064",
+    "build/workers/whole_program/simulation_state_v7/save_load_probe.exe": "d905cb347ed55f969422699a886090319dc28171ed08327358b7ff9e20657910",
+    "build/workers/whole_program/simulation_state_v7/count_ants_probe.exe": "c1035cf36a77afe12bb466e571f5b2f9e8d2fb1b3e75afcc855607b41b76c48a"
+  },
+  "source_hash_closure": {
+    "src/S06/m35F5.c": "db35a96a492a6d36f6580222c17daca015aa9373b457b8758c751d3a70844a86",
+    "src/S09/m35F5.c": "028e1575990d5d45233f9102a0d2a060810349bd2f1297182c4af435ecbe912a",
+    "src/S13/m384C.c": "fb6785e93f5c2ea1110f64b5eb200d7f4e346263c43ac521c0434629d9f5839a",
+    "src/S14/m384C.c": "245f8c01d5a330c571048b8cd1b134cf544394af84f7b502a153c73adbd91020",
+    "src/S22/m39C7.c": "e9add4ebd445bd943f24a65764be2a79581f2fc26c349741fdfe8efae3b7030d",
+    "src/S25/m39C7.c": "90a2cf12a9e527d1836099c92e5327d47342eac0a8403639d66471ecbc859ba6",
+    "src/root/m0798.c": "ecf807dc3159f583f6ee3ea8a9f5422650a64bb557d4551e9c97b5dcc7b6a1b8",
+    "src/root/m0894.c": "57b40ad0a9ee74c501fbcb0d521b86b8158f206f44f4867e960bcb800b5e7484",
+    "src/root/m0BE8.c": "42664e07331fbba4cc257f1e49e03dff5e93deddb764d33101ad0f454a9377d7",
+    "src/root/m0DEF.c": "4325b570055de5daf8b96fe529d53f316b1a8a046daf845672672bd376d08142",
+    "src/root/m0E2E.c": "9325b3426ef87771150912ce8f7cfaacc13380634505313417978b80974d10ed",
+    "src/root/m0F3F.c": "f1c903c7f29e4fbb64fd82c2de5390c00df4f7cf35c9c836007dfa07c56612e8",
+    "src/root/m1383.c": "489ee7d47f0ee27942bf6bea11fff7a8bbb90acd2c75fe4653d18a3e9efa5389"
+  },
+  "compiler": {
+    "path": "C:\\msys64\\mingw64\\bin\\gcc.exe",
+    "version": "gcc.exe (Rev10, Built by MSYS2 project) 12.2.0",
+    "sha256": "c5005ba5380351c10743e9ca53ef9632164c54be3bd6b93324795114e4589a7d"
+  },
+  "selected_save_rec_order": [
+    "fd_50F6_0F46",
+    "fd_50F6_0FC6",
+    "fd_50F6_0F84",
+    "fd_50F6_1008",
+    "fd_50F6_0256",
+    "fd_50F6_02C0",
+    "casteLevels",
+    "modeLevels",
+    "fd_50F6_0AEC",
+    "fd_50F6_0AFA",
+    "fd_50F6_0334",
+    "fd_50F6_0B12",
+    "fd_50F6_0C2A"
+  ],
+  "selected_actual_rows": {
+    "fd_50F6_0F46": "{ 1, 50, (void  *)&native_sim_state_fd_50F6_0F46.unsigned_values },",
+    "fd_50F6_0FC6": "{ 1, 50, (void  *)&native_sim_state_fd_50F6_0FC6.unsigned_values },",
+    "fd_50F6_0F84": "{ 1, 50, (void  *)&native_sim_state_fd_50F6_0F84.unsigned_values },",
+    "fd_50F6_1008": "{ 1, 50, (void  *)&native_sim_state_fd_50F6_1008.unsigned_values },",
+    "fd_50F6_0256": "{ 1, 100, (void  *)&native_sim_state_fd_50F6_0256.unsigned_values },",
+    "fd_50F6_02C0": "{ 1, 100, (void  *)&native_sim_state_fd_50F6_02C0.unsigned_values },",
+    "casteLevels": "{ 2, 3, (void  *)&native_sim_state_casteLevels.raw_bytes },",
+    "modeLevels": "{ 2, 3, (void  *)&native_sim_state_modeLevels.raw_bytes },",
+    "fd_50F6_0AEC": "{ 2, 6, (void  *)&native_sim_state_fd_50F6_0AEC.raw_bytes },",
+    "fd_50F6_0AFA": "{ 2, 6, (void  *)&native_sim_state_fd_50F6_0AFA.raw_bytes },",
+    "fd_50F6_0334": "{ 2, 12, (void  *)&native_sim_state_fd_50F6_0334.raw_bytes },",
+    "fd_50F6_0B12": "{ 2, 6, (void  *)&native_sim_state_fd_50F6_0B12.raw_bytes },",
+    "fd_50F6_0C2A": "{ 2, 6, (void  *)&native_sim_state_fd_50F6_0C2A.raw_bytes },"
+  },
+  "expected_serialized_bytes": 484,
+  "positive": {
+    "13_exact_rows_present_once": true,
+    "actual_savegame_expected_bytes": true,
+    "actual_loadgame_restores_all_13_extents": true,
+    "actual_countants_nonzero_counts": true,
+    "wrong_original_source_hash_rejected": true,
+    "caller_plan_mutation_rejected": true
+  },
+  "controlled_boundaries": [
+    "Only the 13 real rows and original zero terminator are kept in scratch S09 copy.",
+    "FileSelect and DOS file operations use pinned V1 harness controls.",
+    "Existing LoadGame post-load services are controlled stubs.",
+    "CountAnts uses explicit nonzero type vectors and controlled callbacks."
+  ],
+  "limitations": [
+    "Diagnostic evidence only; not centrally selected or full game acceptance.",
+    "Not full 307-row save compatibility.",
+    "Little-endian serialization path only.",
+    "No preset-data, rendering, UI or pixel claim."
+  ],
+  "outputs": {
+    "save_load": "PASS: actual generated S09 SaveGame/LoadGame round-trip 13 exact V7 rows",
+    "countants": "PASS: actual generated CountAnts aggregates explicit nonzero source ant types"
+  },
+  "summary": {
+    "owners": 13,
+    "records": 13,
+    "serialized_bytes": 484,
+    "passed": true
+  }
+}
