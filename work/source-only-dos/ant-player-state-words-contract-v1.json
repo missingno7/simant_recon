@@ -1,0 +1,2848 @@
+{
+  "schema": "simant-dos-v15-source-storage-contract-candidate-v1",
+  "category": "REVIEWED_SOURCE_STORAGE_CONTRACT",
+  "status": "REVIEWED_SOURCE_STORAGE_CONTRACT",
+  "root_reviewed": true,
+  "all_required_checks_pass": true,
+  "module": "source-owned:ant-player-state",
+  "members": [
+    "FuzLocX",
+    "FuzLocY",
+    "MeHealth",
+    "ModeAuto",
+    "StrategicModeB",
+    "TilesDugR"
+  ],
+  "dos_type": "signed int far scalar (16-bit int on msc600ax)",
+  "profile": "msc600ax",
+  "flags": [
+    "/AL",
+    "/Os",
+    "/Gs"
+  ],
+  "effective_flags_in_probe": [
+    "/AL",
+    "/Os",
+    "/Gs",
+    "/EM"
+  ],
+  "communals": [
+    {
+      "name": "_FuzLocX",
+      "kind": "far",
+      "length": 2,
+      "count": 2,
+      "element_size": 1
+    },
+    {
+      "name": "_FuzLocY",
+      "kind": "far",
+      "length": 2,
+      "count": 2,
+      "element_size": 1
+    },
+    {
+      "name": "_MeHealth",
+      "kind": "far",
+      "length": 2,
+      "count": 2,
+      "element_size": 1
+    },
+    {
+      "name": "_ModeAuto",
+      "kind": "far",
+      "length": 2,
+      "count": 2,
+      "element_size": 1
+    },
+    {
+      "name": "_StrategicModeB",
+      "kind": "far",
+      "length": 2,
+      "count": 2,
+      "element_size": 1
+    },
+    {
+      "name": "_TilesDugR",
+      "kind": "far",
+      "length": 2,
+      "count": 2,
+      "element_size": 1
+    }
+  ],
+  "required_cases": {
+    "SaveRec_BYTE_exact_aliases": "PASS",
+    "SaveRec_BYTE_wrong_MeHealth_alias_plus2": "FAIL",
+    "SaveRec_BYTE_wrong_ModeAuto_alias_plus2": "FAIL",
+    "SaveRec_BYTE_wrong_TilesDugR_alias_plus2": "FAIL",
+    "initialized_nonzero_owner_SaveRec_BYTE": "FAIL",
+    "initialized_nonzero_owner_word": "FAIL",
+    "typed_word_exact_aliases": "PASS",
+    "typed_word_wrong_MeHealth_alias_plus2": "FAIL",
+    "typed_word_wrong_ModeAuto_alias_plus2": "FAIL",
+    "typed_word_wrong_TilesDugR_alias_plus2": "FAIL",
+    "unsigned_consumer_sign_contrast": "FAIL",
+    "wrong_four_byte_extent_long_owner": "FAIL"
+  },
+  "cases": [
+    {
+      "linker": "rtlink400",
+      "case": "SaveRec_BYTE_exact_aliases",
+      "expected": "PASS",
+      "actual": "PASS",
+      "passed": true
+    },
+    {
+      "linker": "rtlink400",
+      "case": "SaveRec_BYTE_wrong_MeHealth_alias_plus2",
+      "expected": "FAIL",
+      "actual": "FAIL",
+      "passed": true
+    },
+    {
+      "linker": "rtlink400",
+      "case": "SaveRec_BYTE_wrong_ModeAuto_alias_plus2",
+      "expected": "FAIL",
+      "actual": "FAIL",
+      "passed": true
+    },
+    {
+      "linker": "rtlink400",
+      "case": "SaveRec_BYTE_wrong_TilesDugR_alias_plus2",
+      "expected": "FAIL",
+      "actual": "FAIL",
+      "passed": true
+    },
+    {
+      "linker": "rtlink400",
+      "case": "initialized_nonzero_owner_SaveRec_BYTE",
+      "expected": "FAIL",
+      "actual": "FAIL",
+      "passed": true
+    },
+    {
+      "linker": "rtlink400",
+      "case": "initialized_nonzero_owner_word",
+      "expected": "FAIL",
+      "actual": "FAIL",
+      "passed": true
+    },
+    {
+      "linker": "rtlink400",
+      "case": "typed_word_exact_aliases",
+      "expected": "PASS",
+      "actual": "PASS",
+      "passed": true
+    },
+    {
+      "linker": "rtlink400",
+      "case": "typed_word_wrong_MeHealth_alias_plus2",
+      "expected": "FAIL",
+      "actual": "FAIL",
+      "passed": true
+    },
+    {
+      "linker": "rtlink400",
+      "case": "typed_word_wrong_ModeAuto_alias_plus2",
+      "expected": "FAIL",
+      "actual": "FAIL",
+      "passed": true
+    },
+    {
+      "linker": "rtlink400",
+      "case": "typed_word_wrong_TilesDugR_alias_plus2",
+      "expected": "FAIL",
+      "actual": "FAIL",
+      "passed": true
+    },
+    {
+      "linker": "rtlink400",
+      "case": "unsigned_consumer_sign_contrast",
+      "expected": "FAIL",
+      "actual": "FAIL",
+      "passed": true
+    },
+    {
+      "linker": "rtlink400",
+      "case": "wrong_four_byte_extent_long_owner",
+      "expected": "FAIL",
+      "actual": "FAIL",
+      "passed": true
+    },
+    {
+      "linker": "rtlink610",
+      "case": "SaveRec_BYTE_exact_aliases",
+      "expected": "PASS",
+      "actual": "PASS",
+      "passed": true
+    },
+    {
+      "linker": "rtlink610",
+      "case": "SaveRec_BYTE_wrong_MeHealth_alias_plus2",
+      "expected": "FAIL",
+      "actual": "FAIL",
+      "passed": true
+    },
+    {
+      "linker": "rtlink610",
+      "case": "SaveRec_BYTE_wrong_ModeAuto_alias_plus2",
+      "expected": "FAIL",
+      "actual": "FAIL",
+      "passed": true
+    },
+    {
+      "linker": "rtlink610",
+      "case": "SaveRec_BYTE_wrong_TilesDugR_alias_plus2",
+      "expected": "FAIL",
+      "actual": "FAIL",
+      "passed": true
+    },
+    {
+      "linker": "rtlink610",
+      "case": "initialized_nonzero_owner_SaveRec_BYTE",
+      "expected": "FAIL",
+      "actual": "FAIL",
+      "passed": true
+    },
+    {
+      "linker": "rtlink610",
+      "case": "initialized_nonzero_owner_word",
+      "expected": "FAIL",
+      "actual": "FAIL",
+      "passed": true
+    },
+    {
+      "linker": "rtlink610",
+      "case": "typed_word_exact_aliases",
+      "expected": "PASS",
+      "actual": "PASS",
+      "passed": true
+    },
+    {
+      "linker": "rtlink610",
+      "case": "typed_word_wrong_MeHealth_alias_plus2",
+      "expected": "FAIL",
+      "actual": "FAIL",
+      "passed": true
+    },
+    {
+      "linker": "rtlink610",
+      "case": "typed_word_wrong_ModeAuto_alias_plus2",
+      "expected": "FAIL",
+      "actual": "FAIL",
+      "passed": true
+    },
+    {
+      "linker": "rtlink610",
+      "case": "typed_word_wrong_TilesDugR_alias_plus2",
+      "expected": "FAIL",
+      "actual": "FAIL",
+      "passed": true
+    },
+    {
+      "linker": "rtlink610",
+      "case": "unsigned_consumer_sign_contrast",
+      "expected": "FAIL",
+      "actual": "FAIL",
+      "passed": true
+    },
+    {
+      "linker": "rtlink610",
+      "case": "wrong_four_byte_extent_long_owner",
+      "expected": "FAIL",
+      "actual": "FAIL",
+      "passed": true
+    }
+  ],
+  "shape_only_controls": [],
+  "non_gating_diagnostics": [],
+  "inputs": [
+    {
+      "path": "C:/tools/RTLink-Plus-4.00-DiscMaster/installed/dest/RTLINK.DAT",
+      "sha256": "c1e206fe4b3c34d43b47aa9aa215e2959fbb23c69c89eb69e36d80b1d9194eea",
+      "size": 63824,
+      "receipt_path": "$.runtime_fixture.input_pins[0]"
+    },
+    {
+      "path": "C:/tools/RTLink-Plus-4.00-DiscMaster/installed/dest/RTLINK.EXE",
+      "sha256": "dff0a988738a2ba7716f7013ef5b8136e0857b6bfe700bccdeaad70ee5e87c74",
+      "size": 449497,
+      "receipt_path": "$.runtime_fixture.input_pins[1]"
+    },
+    {
+      "path": "C:/tools/RTLink-Plus-4.00-DiscMaster/installed/dest/RTLINKST.COM",
+      "sha256": "6ad9015869dc9598a2b498c58297224e5ab4a13fad9ada528650dfcedeb83cf2",
+      "size": 7184,
+      "receipt_path": "$.runtime_fixture.input_pins[2]"
+    },
+    {
+      "path": "C:/tools/RTLink-Plus-4.00-DiscMaster/installed/dest/RTLUTILS.LIB",
+      "sha256": "9060c022f65a2811b81936879f93eb16c5d349c14b56c704a3853d3cf79cd162",
+      "size": 266625,
+      "receipt_path": "$.runtime_fixture.input_pins[3]"
+    },
+    {
+      "path": "C:/tools/dosbox-x/dosbox-x.exe",
+      "sha256": "b028a4d328302ea270722dec69f3ec3a10ebf76beba72a51970db33a88df2bf6",
+      "size": 20481536,
+      "receipt_path": "$.runtime_fixture.input_pins[4]"
+    },
+    {
+      "path": "C:/tools/msc-6.00/LIB/libh.lib",
+      "sha256": "a4492e8f63da409d949643fd448f29e65e2cc9a8f2deea977372177bbe0ad818",
+      "size": 21033,
+      "receipt_path": "$.runtime_fixture.input_pins[5]"
+    },
+    {
+      "path": "C:/tools/msc-6.00/LIB/llibcr.lib",
+      "sha256": "3d0c6ae92972789e87def01fa96351c39216d731d5c880370155c5613d78c884",
+      "size": 148711,
+      "receipt_path": "$.runtime_fixture.input_pins[6]"
+    },
+    {
+      "path": "C:/tools/msc-6.00ax-archive/BIN/C1.ERR",
+      "sha256": "637444915870f3283d5df41c5cdb1be8c32cc6c19b080f2bb3891edbc3751c6e",
+      "size": 19500,
+      "receipt_path": "$.runtime_fixture.input_pins[7]"
+    },
+    {
+      "path": "C:/tools/msc-6.00ax-archive/BIN/C1L.EXE",
+      "sha256": "d3db38b875a95048bca2809cd1f84783c6c070805f188fec9161054d6350ded3",
+      "size": 213680,
+      "receipt_path": "$.runtime_fixture.input_pins[8]"
+    },
+    {
+      "path": "C:/tools/msc-6.00ax-archive/BIN/C23.ERR",
+      "sha256": "22944a0dffef336c0ebb8f6d5aeb97b4dbeb5c9758a48759557176bff49d1151",
+      "size": 3649,
+      "receipt_path": "$.runtime_fixture.input_pins[9]"
+    },
+    {
+      "path": "C:/tools/msc-6.00ax-archive/BIN/C2L.EXE",
+      "sha256": "62490de22e7b279ea59218a54d677bfc752cb5fc1287533d2e23d03519f155e0",
+      "size": 473258,
+      "receipt_path": "$.runtime_fixture.input_pins[10]"
+    },
+    {
+      "path": "C:/tools/msc-6.00ax-archive/BIN/C3L.EXE",
+      "sha256": "9e82ecc87ffcdb2def53ac64c0d1f048b26421c1415b5600ad4d8d6fcbc06553",
+      "size": 195439,
+      "receipt_path": "$.runtime_fixture.input_pins[11]"
+    },
+    {
+      "path": "C:/tools/msc-6.00ax-archive/BIN/CL.ERR",
+      "sha256": "ca22f37e5e0c09faebde9e4d549dd1f53523cc6f23049d2239a040cd19a424e7",
+      "size": 1656,
+      "receipt_path": "$.runtime_fixture.input_pins[12]"
+    },
+    {
+      "path": "C:/tools/msc-6.00ax-archive/BIN/CL.EXE",
+      "sha256": "92df4a0839aac77940189ce54f107381b829babe8103926cb05d1adffe947347",
+      "size": 81184,
+      "receipt_path": "$.runtime_fixture.input_pins[13]"
+    },
+    {
+      "path": "C:/tools/msc-6.00ax-archive/BIN/CL.MSG",
+      "sha256": "3379f283aec74842bc82205e4c848d759e6e2dcbb6d4820eec9719f1297213ec",
+      "size": 2697,
+      "receipt_path": "$.runtime_fixture.input_pins[14]"
+    },
+    {
+      "path": "C:/tools/rtlink-plus-6.10/installed/DOS4GW.EXE",
+      "sha256": "7192b80d1551769c2d2897b2f58015dc18fadca2b7e093a20f45b34011933c6c",
+      "size": 231179,
+      "receipt_path": "$.runtime_fixture.input_pins[15]"
+    },
+    {
+      "path": "C:/tools/rtlink-plus-6.10/installed/RTL-REAL.EXE",
+      "sha256": "228c5d429438ea32ee21dd02c65b7f8e198715b3fa957be9da328f9857482773",
+      "size": 717922,
+      "receipt_path": "$.runtime_fixture.input_pins[16]"
+    },
+    {
+      "path": "C:/tools/rtlink-plus-6.10/installed/RTL-SWAP.EXE",
+      "sha256": "daae0a8c358edc26f95540f4bc1629c0dc5c30652155d85ccd79bead4381cfe3",
+      "size": 692123,
+      "receipt_path": "$.runtime_fixture.input_pins[17]"
+    },
+    {
+      "path": "C:/tools/rtlink-plus-6.10/installed/RTLINK.DAT",
+      "sha256": "10723fb4d4381b6a38417a18409e32d254e59850bcd3b465fbb824e01367a77b",
+      "size": 100100,
+      "receipt_path": "$.runtime_fixture.input_pins[18]"
+    },
+    {
+      "path": "C:/tools/rtlink-plus-6.10/installed/RTLINK.EXE",
+      "sha256": "ea6f57a470a26801086593d54aa99f6bf983dd024fc19b5e13361a07f43e17fb",
+      "size": 687531,
+      "receipt_path": "$.runtime_fixture.input_pins[19]"
+    },
+    {
+      "path": "C:/tools/rtlink-plus-6.10/installed/RTLINKST.COM",
+      "sha256": "635425a8feff822ca98ec536c55a31824161bffbf9d24d37851cc0d9f7ce3b5f",
+      "size": 11031,
+      "receipt_path": "$.runtime_fixture.input_pins[20]"
+    },
+    {
+      "path": "C:/tools/rtlink-plus-6.10/installed/RTLUTILS.LIB",
+      "sha256": "c718bac09b0b1204a259494446acfa8bfffb129144cc7d36799855621f4fdccb",
+      "size": 423823,
+      "receipt_path": "$.runtime_fixture.input_pins[21]"
+    },
+    {
+      "path": "build/workers/dos_ant_player_state_owners/run-v1/fixtures/rtlink400/SaveRec_BYTE_exact_aliases/CRT.OBJ",
+      "sha256": "d3498ab0c4d46c816aa6770effeae318e2ee756c9b666e53d20423f8f9e2a234",
+      "size": 2308,
+      "receipt_path": "$.runtime_fixture.cases[1].artifacts[0]"
+    },
+    {
+      "path": "build/workers/dos_ant_player_state_owners/run-v1/fixtures/rtlink400/SaveRec_BYTE_exact_aliases/LINK.LOG",
+      "sha256": "742c300d330b4cc2c6d651e455944bfebb9d7fb8f18d37104e4543b38f77cac4",
+      "size": 605,
+      "receipt_path": "$.runtime_fixture.cases[1].artifacts[1]"
+    },
+    {
+      "path": "build/workers/dos_ant_player_state_owners/run-v1/fixtures/rtlink400/SaveRec_BYTE_exact_aliases/OWNER.OBJ",
+      "sha256": "2ec3add47e1b0220ae109f29cd1a0796a472a70e324ac1b63cc6add625680e77",
+      "size": 280,
+      "receipt_path": "$.runtime_fixture.cases[1].artifacts[2]"
+    },
+    {
+      "path": "build/workers/dos_ant_player_state_owners/run-v1/fixtures/rtlink400/SaveRec_BYTE_exact_aliases/PROBE.EXE",
+      "sha256": "fad67570f9c8552099f05cb1f03512a9d002de740d3a6f5902b85691bed52699",
+      "size": 10217,
+      "receipt_path": "$.runtime_fixture.cases[1].artifacts[3]"
+    },
+    {
+      "path": "build/workers/dos_ant_player_state_owners/run-v1/fixtures/rtlink400/SaveRec_BYTE_exact_aliases/PROBE.LNK",
+      "sha256": "35c58225527f24e6d395a010de8dc5929752d855a078c5f7912a8d12147b04d0",
+      "size": 220,
+      "receipt_path": "$.runtime_fixture.cases[1].artifacts[4]"
+    },
+    {
+      "path": "build/workers/dos_ant_player_state_owners/run-v1/fixtures/rtlink400/SaveRec_BYTE_exact_aliases/PROBE.MAP",
+      "sha256": "f7dff425674fdaa7038e097086211213b5aeba7f99f4f26a9efe44c7ee98a3cf",
+      "size": 12627,
+      "receipt_path": "$.runtime_fixture.cases[1].artifacts[5]"
+    },
+    {
+      "path": "build/workers/dos_ant_player_state_owners/run-v1/fixtures/rtlink400/SaveRec_BYTE_exact_aliases/RUN.LOG",
+      "sha256": "d938fa189912f8776c3deb31a6bec42f403f57b9c8e3ed936bdb076caf6bd61c",
+      "size": 6,
+      "receipt_path": "$.runtime_fixture.cases[1].artifacts[6]"
+    },
+    {
+      "path": "build/workers/dos_ant_player_state_owners/run-v1/fixtures/rtlink400/SaveRec_BYTE_wrong_MeHealth_alias_plus2/CRT.OBJ",
+      "sha256": "d3498ab0c4d46c816aa6770effeae318e2ee756c9b666e53d20423f8f9e2a234",
+      "size": 2308,
+      "receipt_path": "$.runtime_fixture.cases[3].artifacts[0]"
+    },
+    {
+      "path": "build/workers/dos_ant_player_state_owners/run-v1/fixtures/rtlink400/SaveRec_BYTE_wrong_MeHealth_alias_plus2/LINK.LOG",
+      "sha256": "80852f69c75c3b7fb80f45cb07f0369d4cd38ad98f59c719e5864e57be23740e",
+      "size": 609,
+      "receipt_path": "$.runtime_fixture.cases[3].artifacts[1]"
+    },
+    {
+      "path": "build/workers/dos_ant_player_state_owners/run-v1/fixtures/rtlink400/SaveRec_BYTE_wrong_MeHealth_alias_plus2/OWNER.OBJ",
+      "sha256": "2ec3add47e1b0220ae109f29cd1a0796a472a70e324ac1b63cc6add625680e77",
+      "size": 280,
+      "receipt_path": "$.runtime_fixture.cases[3].artifacts[2]"
+    },
+    {
+      "path": "build/workers/dos_ant_player_state_owners/run-v1/fixtures/rtlink400/SaveRec_BYTE_wrong_MeHealth_alias_plus2/PROBE.EXE",
+      "sha256": "e7c260cf58d8802eb96bd2c5cf7149617246c9a58d522da3fb67d08b77b5777c",
+      "size": 10217,
+      "receipt_path": "$.runtime_fixture.cases[3].artifacts[3]"
+    },
+    {
+      "path": "build/workers/dos_ant_player_state_owners/run-v1/fixtures/rtlink400/SaveRec_BYTE_wrong_MeHealth_alias_plus2/PROBE.LNK",
+      "sha256": "e024fc6036ee20895b46c88837c989016d773466aa4da2d73c288a5530fac42d",
+      "size": 224,
+      "receipt_path": "$.runtime_fixture.cases[3].artifacts[4]"
+    },
+    {
+      "path": "build/workers/dos_ant_player_state_owners/run-v1/fixtures/rtlink400/SaveRec_BYTE_wrong_MeHealth_alias_plus2/PROBE.MAP",
+      "sha256": "1d3621cddb5ea998c2605055ef3d3092e30906aa4aebb8df9dbdc38b7dd0eb09",
+      "size": 12627,
+      "receipt_path": "$.runtime_fixture.cases[3].artifacts[5]"
+    },
+    {
+      "path": "build/workers/dos_ant_player_state_owners/run-v1/fixtures/rtlink400/SaveRec_BYTE_wrong_MeHealth_alias_plus2/RUN.LOG",
+      "sha256": "765489fd1b16cabfd78a744ff35dbeccd0d050fb1bff907dca6e1eafa8d44938",
+      "size": 6,
+      "receipt_path": "$.runtime_fixture.cases[3].artifacts[6]"
+    },
+    {
+      "path": "build/workers/dos_ant_player_state_owners/run-v1/fixtures/rtlink400/SaveRec_BYTE_wrong_ModeAuto_alias_plus2/CRT.OBJ",
+      "sha256": "d3498ab0c4d46c816aa6770effeae318e2ee756c9b666e53d20423f8f9e2a234",
+      "size": 2308,
+      "receipt_path": "$.runtime_fixture.cases[5].artifacts[0]"
+    },
+    {
+      "path": "build/workers/dos_ant_player_state_owners/run-v1/fixtures/rtlink400/SaveRec_BYTE_wrong_ModeAuto_alias_plus2/LINK.LOG",
+      "sha256": "2ddb3da4fe307e95ddfea9d72a8232ba43a4cfa73cf285e41b95896c3392589e",
+      "size": 609,
+      "receipt_path": "$.runtime_fixture.cases[5].artifacts[1]"
+    },
+    {
+      "path": "build/workers/dos_ant_player_state_owners/run-v1/fixtures/rtlink400/SaveRec_BYTE_wrong_ModeAuto_alias_plus2/OWNER.OBJ",
+      "sha256": "2ec3add47e1b0220ae109f29cd1a0796a472a70e324ac1b63cc6add625680e77",
+      "size": 280,
+      "receipt_path": "$.runtime_fixture.cases[5].artifacts[2]"
+    },
+    {
+      "path": "build/workers/dos_ant_player_state_owners/run-v1/fixtures/rtlink400/SaveRec_BYTE_wrong_ModeAuto_alias_plus2/PROBE.EXE",
+      "sha256": "624c82269210536a547eb2f6852cea78187a7caf72bccf6c328cbc768c10dc31",
+      "size": 10217,
+      "receipt_path": "$.runtime_fixture.cases[5].artifacts[3]"
+    },
+    {
+      "path": "build/workers/dos_ant_player_state_owners/run-v1/fixtures/rtlink400/SaveRec_BYTE_wrong_ModeAuto_alias_plus2/PROBE.LNK",
+      "sha256": "8045829a186455df32ce90ae1d3a7f124f87e0a882fc9e56760f42d335cb045a",
+      "size": 224,
+      "receipt_path": "$.runtime_fixture.cases[5].artifacts[4]"
+    },
+    {
+      "path": "build/workers/dos_ant_player_state_owners/run-v1/fixtures/rtlink400/SaveRec_BYTE_wrong_ModeAuto_alias_plus2/PROBE.MAP",
+      "sha256": "cc9fea92c8c45242b15daaa664ca209fa2fca787d1ca903dd02017d33b40eded",
+      "size": 12627,
+      "receipt_path": "$.runtime_fixture.cases[5].artifacts[5]"
+    },
+    {
+      "path": "build/workers/dos_ant_player_state_owners/run-v1/fixtures/rtlink400/SaveRec_BYTE_wrong_ModeAuto_alias_plus2/RUN.LOG",
+      "sha256": "765489fd1b16cabfd78a744ff35dbeccd0d050fb1bff907dca6e1eafa8d44938",
+      "size": 6,
+      "receipt_path": "$.runtime_fixture.cases[5].artifacts[6]"
+    },
+    {
+      "path": "build/workers/dos_ant_player_state_owners/run-v1/fixtures/rtlink400/SaveRec_BYTE_wrong_TilesDugR_alias_plus2/CRT.OBJ",
+      "sha256": "d3498ab0c4d46c816aa6770effeae318e2ee756c9b666e53d20423f8f9e2a234",
+      "size": 2308,
+      "receipt_path": "$.runtime_fixture.cases[7].artifacts[0]"
+    },
+    {
+      "path": "build/workers/dos_ant_player_state_owners/run-v1/fixtures/rtlink400/SaveRec_BYTE_wrong_TilesDugR_alias_plus2/LINK.LOG",
+      "sha256": "5b96452d470e5ec6d170bb4d81e59d58ea7f082327fb627bfdd9c3ea333ac18b",
+      "size": 609,
+      "receipt_path": "$.runtime_fixture.cases[7].artifacts[1]"
+    },
+    {
+      "path": "build/workers/dos_ant_player_state_owners/run-v1/fixtures/rtlink400/SaveRec_BYTE_wrong_TilesDugR_alias_plus2/OWNER.OBJ",
+      "sha256": "2ec3add47e1b0220ae109f29cd1a0796a472a70e324ac1b63cc6add625680e77",
+      "size": 280,
+      "receipt_path": "$.runtime_fixture.cases[7].artifacts[2]"
+    },
+    {
+      "path": "build/workers/dos_ant_player_state_owners/run-v1/fixtures/rtlink400/SaveRec_BYTE_wrong_TilesDugR_alias_plus2/PROBE.EXE",
+      "sha256": "c47c3a1d08defde46344f37728b590925400ad22efcc00646edd307e51c2d709",
+      "size": 10217,
+      "receipt_path": "$.runtime_fixture.cases[7].artifacts[3]"
+    },
+    {
+      "path": "build/workers/dos_ant_player_state_owners/run-v1/fixtures/rtlink400/SaveRec_BYTE_wrong_TilesDugR_alias_plus2/PROBE.LNK",
+      "sha256": "ffff955e3f96e5a4f82ab745d113dee493ee7084391e324f64f50c4f6b1e7ae3",
+      "size": 224,
+      "receipt_path": "$.runtime_fixture.cases[7].artifacts[4]"
+    },
+    {
+      "path": "build/workers/dos_ant_player_state_owners/run-v1/fixtures/rtlink400/SaveRec_BYTE_wrong_TilesDugR_alias_plus2/PROBE.MAP",
+      "sha256": "53ae2a46a309b7db436e0903b9e6b08958db91a53555b281c7b7140d96d207fc",
+      "size": 12627,
+      "receipt_path": "$.runtime_fixture.cases[7].artifacts[5]"
+    },
+    {
+      "path": "build/workers/dos_ant_player_state_owners/run-v1/fixtures/rtlink400/SaveRec_BYTE_wrong_TilesDugR_alias_plus2/RUN.LOG",
+      "sha256": "765489fd1b16cabfd78a744ff35dbeccd0d050fb1bff907dca6e1eafa8d44938",
+      "size": 6,
+      "receipt_path": "$.runtime_fixture.cases[7].artifacts[6]"
+    },
+    {
+      "path": "build/workers/dos_ant_player_state_owners/run-v1/fixtures/rtlink400/initialized_nonzero_owner_SaveRec_BYTE/CRT.OBJ",
+      "sha256": "d3498ab0c4d46c816aa6770effeae318e2ee756c9b666e53d20423f8f9e2a234",
+      "size": 2308,
+      "receipt_path": "$.runtime_fixture.cases[9].artifacts[0]"
+    },
+    {
+      "path": "build/workers/dos_ant_player_state_owners/run-v1/fixtures/rtlink400/initialized_nonzero_owner_SaveRec_BYTE/LINK.LOG",
+      "sha256": "742c300d330b4cc2c6d651e455944bfebb9d7fb8f18d37104e4543b38f77cac4",
+      "size": 605,
+      "receipt_path": "$.runtime_fixture.cases[9].artifacts[1]"
+    },
+    {
+      "path": "build/workers/dos_ant_player_state_owners/run-v1/fixtures/rtlink400/initialized_nonzero_owner_SaveRec_BYTE/OWNER.OBJ",
+      "sha256": "f7c3653b8bc256e2258fb2b7c21ded5b3c746425ffca9a0cda7dd6317047fceb",
+      "size": 330,
+      "receipt_path": "$.runtime_fixture.cases[9].artifacts[2]"
+    },
+    {
+      "path": "build/workers/dos_ant_player_state_owners/run-v1/fixtures/rtlink400/initialized_nonzero_owner_SaveRec_BYTE/PROBE.EXE",
+      "sha256": "8c53d4272a81b591066d15e637448f8547cfdb4a420e8c53f408b43a4daf35e7",
+      "size": 10217,
+      "receipt_path": "$.runtime_fixture.cases[9].artifacts[3]"
+    },
+    {
+      "path": "build/workers/dos_ant_player_state_owners/run-v1/fixtures/rtlink400/initialized_nonzero_owner_SaveRec_BYTE/PROBE.LNK",
+      "sha256": "35c58225527f24e6d395a010de8dc5929752d855a078c5f7912a8d12147b04d0",
+      "size": 220,
+      "receipt_path": "$.runtime_fixture.cases[9].artifacts[4]"
+    },
+    {
+      "path": "build/workers/dos_ant_player_state_owners/run-v1/fixtures/rtlink400/initialized_nonzero_owner_SaveRec_BYTE/PROBE.MAP",
+      "sha256": "e393c25d1de9ecc7c8cb172bb8548e65b85e38df9d870aaf3b7c8f68e47afd24",
+      "size": 12628,
+      "receipt_path": "$.runtime_fixture.cases[9].artifacts[5]"
+    },
+    {
+      "path": "build/workers/dos_ant_player_state_owners/run-v1/fixtures/rtlink400/initialized_nonzero_owner_SaveRec_BYTE/RUN.LOG",
+      "sha256": "765489fd1b16cabfd78a744ff35dbeccd0d050fb1bff907dca6e1eafa8d44938",
+      "size": 6,
+      "receipt_path": "$.runtime_fixture.cases[9].artifacts[6]"
+    },
+    {
+      "path": "build/workers/dos_ant_player_state_owners/run-v1/fixtures/rtlink400/initialized_nonzero_owner_word/CRT.OBJ",
+      "sha256": "8bb680fd90841f298a80a30a756868a487b28f110308ed4d6e07278db48c0630",
+      "size": 1446,
+      "receipt_path": "$.runtime_fixture.cases[8].artifacts[0]"
+    },
+    {
+      "path": "build/workers/dos_ant_player_state_owners/run-v1/fixtures/rtlink400/initialized_nonzero_owner_word/LINK.LOG",
+      "sha256": "7c376dd6aaaf367425fee4a1ab810912a0f0fc5b8518cab4472cbac6059fd653",
+      "size": 605,
+      "receipt_path": "$.runtime_fixture.cases[8].artifacts[1]"
+    },
+    {
+      "path": "build/workers/dos_ant_player_state_owners/run-v1/fixtures/rtlink400/initialized_nonzero_owner_word/OWNER.OBJ",
+      "sha256": "f7c3653b8bc256e2258fb2b7c21ded5b3c746425ffca9a0cda7dd6317047fceb",
+      "size": 330,
+      "receipt_path": "$.runtime_fixture.cases[8].artifacts[2]"
+    },
+    {
+      "path": "build/workers/dos_ant_player_state_owners/run-v1/fixtures/rtlink400/initialized_nonzero_owner_word/PROBE.EXE",
+      "sha256": "beae9f019704344640944ee1b0edd13074326350223526d21ef93487cb03b6d9",
+      "size": 9619,
+      "receipt_path": "$.runtime_fixture.cases[8].artifacts[3]"
+    },
+    {
+      "path": "build/workers/dos_ant_player_state_owners/run-v1/fixtures/rtlink400/initialized_nonzero_owner_word/PROBE.LNK",
+      "sha256": "35c58225527f24e6d395a010de8dc5929752d855a078c5f7912a8d12147b04d0",
+      "size": 220,
+      "receipt_path": "$.runtime_fixture.cases[8].artifacts[4]"
+    },
+    {
+      "path": "build/workers/dos_ant_player_state_owners/run-v1/fixtures/rtlink400/initialized_nonzero_owner_word/PROBE.MAP",
+      "sha256": "b4a424f448b9bf8bdddfba7ad723ba4ab4f73ba3aaee0449fffd41c704e81c9e",
+      "size": 12227,
+      "receipt_path": "$.runtime_fixture.cases[8].artifacts[5]"
+    },
+    {
+      "path": "build/workers/dos_ant_player_state_owners/run-v1/fixtures/rtlink400/initialized_nonzero_owner_word/RUN.LOG",
+      "sha256": "765489fd1b16cabfd78a744ff35dbeccd0d050fb1bff907dca6e1eafa8d44938",
+      "size": 6,
+      "receipt_path": "$.runtime_fixture.cases[8].artifacts[6]"
+    },
+    {
+      "path": "build/workers/dos_ant_player_state_owners/run-v1/fixtures/rtlink400/typed_word_exact_aliases/CRT.OBJ",
+      "sha256": "8bb680fd90841f298a80a30a756868a487b28f110308ed4d6e07278db48c0630",
+      "size": 1446,
+      "receipt_path": "$.runtime_fixture.cases[0].artifacts[0]"
+    },
+    {
+      "path": "build/workers/dos_ant_player_state_owners/run-v1/fixtures/rtlink400/typed_word_exact_aliases/LINK.LOG",
+      "sha256": "7c376dd6aaaf367425fee4a1ab810912a0f0fc5b8518cab4472cbac6059fd653",
+      "size": 605,
+      "receipt_path": "$.runtime_fixture.cases[0].artifacts[1]"
+    },
+    {
+      "path": "build/workers/dos_ant_player_state_owners/run-v1/fixtures/rtlink400/typed_word_exact_aliases/OWNER.OBJ",
+      "sha256": "2ec3add47e1b0220ae109f29cd1a0796a472a70e324ac1b63cc6add625680e77",
+      "size": 280,
+      "receipt_path": "$.runtime_fixture.cases[0].artifacts[2]"
+    },
+    {
+      "path": "build/workers/dos_ant_player_state_owners/run-v1/fixtures/rtlink400/typed_word_exact_aliases/PROBE.EXE",
+      "sha256": "aad7c2d8e09d2638343160d056517a47604d01309af7901a356d467d6a98c377",
+      "size": 9619,
+      "receipt_path": "$.runtime_fixture.cases[0].artifacts[3]"
+    },
+    {
+      "path": "build/workers/dos_ant_player_state_owners/run-v1/fixtures/rtlink400/typed_word_exact_aliases/PROBE.LNK",
+      "sha256": "35c58225527f24e6d395a010de8dc5929752d855a078c5f7912a8d12147b04d0",
+      "size": 220,
+      "receipt_path": "$.runtime_fixture.cases[0].artifacts[4]"
+    },
+    {
+      "path": "build/workers/dos_ant_player_state_owners/run-v1/fixtures/rtlink400/typed_word_exact_aliases/PROBE.MAP",
+      "sha256": "c4229ac6ccf64ce6b9b02d7679bdf3ee04b1513373c9d88f6f87d981c06b43ae",
+      "size": 12226,
+      "receipt_path": "$.runtime_fixture.cases[0].artifacts[5]"
+    },
+    {
+      "path": "build/workers/dos_ant_player_state_owners/run-v1/fixtures/rtlink400/typed_word_exact_aliases/RUN.LOG",
+      "sha256": "d938fa189912f8776c3deb31a6bec42f403f57b9c8e3ed936bdb076caf6bd61c",
+      "size": 6,
+      "receipt_path": "$.runtime_fixture.cases[0].artifacts[6]"
+    },
+    {
+      "path": "build/workers/dos_ant_player_state_owners/run-v1/fixtures/rtlink400/typed_word_wrong_MeHealth_alias_plus2/CRT.OBJ",
+      "sha256": "8bb680fd90841f298a80a30a756868a487b28f110308ed4d6e07278db48c0630",
+      "size": 1446,
+      "receipt_path": "$.runtime_fixture.cases[2].artifacts[0]"
+    },
+    {
+      "path": "build/workers/dos_ant_player_state_owners/run-v1/fixtures/rtlink400/typed_word_wrong_MeHealth_alias_plus2/LINK.LOG",
+      "sha256": "be527329f145bfcbec8b62a29a788fbc0237f7a72f2115df3a4c4a32b89b17f4",
+      "size": 609,
+      "receipt_path": "$.runtime_fixture.cases[2].artifacts[1]"
+    },
+    {
+      "path": "build/workers/dos_ant_player_state_owners/run-v1/fixtures/rtlink400/typed_word_wrong_MeHealth_alias_plus2/OWNER.OBJ",
+      "sha256": "2ec3add47e1b0220ae109f29cd1a0796a472a70e324ac1b63cc6add625680e77",
+      "size": 280,
+      "receipt_path": "$.runtime_fixture.cases[2].artifacts[2]"
+    },
+    {
+      "path": "build/workers/dos_ant_player_state_owners/run-v1/fixtures/rtlink400/typed_word_wrong_MeHealth_alias_plus2/PROBE.EXE",
+      "sha256": "615df1ac0174c43f34969bda3572615ab885a009451c2685fa932d8241c2f3c0",
+      "size": 9619,
+      "receipt_path": "$.runtime_fixture.cases[2].artifacts[3]"
+    },
+    {
+      "path": "build/workers/dos_ant_player_state_owners/run-v1/fixtures/rtlink400/typed_word_wrong_MeHealth_alias_plus2/PROBE.LNK",
+      "sha256": "e024fc6036ee20895b46c88837c989016d773466aa4da2d73c288a5530fac42d",
+      "size": 224,
+      "receipt_path": "$.runtime_fixture.cases[2].artifacts[4]"
+    },
+    {
+      "path": "build/workers/dos_ant_player_state_owners/run-v1/fixtures/rtlink400/typed_word_wrong_MeHealth_alias_plus2/PROBE.MAP",
+      "sha256": "2fbd4d604db5ead94e26d508956d92e3c3a096c880815fbaf717bb619a7fc133",
+      "size": 12226,
+      "receipt_path": "$.runtime_fixture.cases[2].artifacts[5]"
+    },
+    {
+      "path": "build/workers/dos_ant_player_state_owners/run-v1/fixtures/rtlink400/typed_word_wrong_MeHealth_alias_plus2/RUN.LOG",
+      "sha256": "765489fd1b16cabfd78a744ff35dbeccd0d050fb1bff907dca6e1eafa8d44938",
+      "size": 6,
+      "receipt_path": "$.runtime_fixture.cases[2].artifacts[6]"
+    },
+    {
+      "path": "build/workers/dos_ant_player_state_owners/run-v1/fixtures/rtlink400/typed_word_wrong_ModeAuto_alias_plus2/CRT.OBJ",
+      "sha256": "8bb680fd90841f298a80a30a756868a487b28f110308ed4d6e07278db48c0630",
+      "size": 1446,
+      "receipt_path": "$.runtime_fixture.cases[4].artifacts[0]"
+    },
+    {
+      "path": "build/workers/dos_ant_player_state_owners/run-v1/fixtures/rtlink400/typed_word_wrong_ModeAuto_alias_plus2/LINK.LOG",
+      "sha256": "b790923600ed4f2b0f64b35e1bfb171672f924ffe2e3285ab8f6d5432bb60ad2",
+      "size": 609,
+      "receipt_path": "$.runtime_fixture.cases[4].artifacts[1]"
+    },
+    {
+      "path": "build/workers/dos_ant_player_state_owners/run-v1/fixtures/rtlink400/typed_word_wrong_ModeAuto_alias_plus2/OWNER.OBJ",
+      "sha256": "2ec3add47e1b0220ae109f29cd1a0796a472a70e324ac1b63cc6add625680e77",
+      "size": 280,
+      "receipt_path": "$.runtime_fixture.cases[4].artifacts[2]"
+    },
+    {
+      "path": "build/workers/dos_ant_player_state_owners/run-v1/fixtures/rtlink400/typed_word_wrong_ModeAuto_alias_plus2/PROBE.EXE",
+      "sha256": "3430db896ead05dca23271d5a8cf33bf6fa5c42bb3e8bb7bf874c8567cb5eded",
+      "size": 9619,
+      "receipt_path": "$.runtime_fixture.cases[4].artifacts[3]"
+    },
+    {
+      "path": "build/workers/dos_ant_player_state_owners/run-v1/fixtures/rtlink400/typed_word_wrong_ModeAuto_alias_plus2/PROBE.LNK",
+      "sha256": "8045829a186455df32ce90ae1d3a7f124f87e0a882fc9e56760f42d335cb045a",
+      "size": 224,
+      "receipt_path": "$.runtime_fixture.cases[4].artifacts[4]"
+    },
+    {
+      "path": "build/workers/dos_ant_player_state_owners/run-v1/fixtures/rtlink400/typed_word_wrong_ModeAuto_alias_plus2/PROBE.MAP",
+      "sha256": "efbbf134b815210be16b363386b9b9cd69b1d2641b11ac1fe1fef31a843c0584",
+      "size": 12226,
+      "receipt_path": "$.runtime_fixture.cases[4].artifacts[5]"
+    },
+    {
+      "path": "build/workers/dos_ant_player_state_owners/run-v1/fixtures/rtlink400/typed_word_wrong_ModeAuto_alias_plus2/RUN.LOG",
+      "sha256": "765489fd1b16cabfd78a744ff35dbeccd0d050fb1bff907dca6e1eafa8d44938",
+      "size": 6,
+      "receipt_path": "$.runtime_fixture.cases[4].artifacts[6]"
+    },
+    {
+      "path": "build/workers/dos_ant_player_state_owners/run-v1/fixtures/rtlink400/typed_word_wrong_TilesDugR_alias_plus2/CRT.OBJ",
+      "sha256": "8bb680fd90841f298a80a30a756868a487b28f110308ed4d6e07278db48c0630",
+      "size": 1446,
+      "receipt_path": "$.runtime_fixture.cases[6].artifacts[0]"
+    },
+    {
+      "path": "build/workers/dos_ant_player_state_owners/run-v1/fixtures/rtlink400/typed_word_wrong_TilesDugR_alias_plus2/LINK.LOG",
+      "sha256": "7474acd8627b7b081eef939d9c80b1ad98d153ed46fc6e51133d6257ca812745",
+      "size": 609,
+      "receipt_path": "$.runtime_fixture.cases[6].artifacts[1]"
+    },
+    {
+      "path": "build/workers/dos_ant_player_state_owners/run-v1/fixtures/rtlink400/typed_word_wrong_TilesDugR_alias_plus2/OWNER.OBJ",
+      "sha256": "2ec3add47e1b0220ae109f29cd1a0796a472a70e324ac1b63cc6add625680e77",
+      "size": 280,
+      "receipt_path": "$.runtime_fixture.cases[6].artifacts[2]"
+    },
+    {
+      "path": "build/workers/dos_ant_player_state_owners/run-v1/fixtures/rtlink400/typed_word_wrong_TilesDugR_alias_plus2/PROBE.EXE",
+      "sha256": "f02cfd5e32e1ac2751e3843b5a02aff5705349f090ccc5f119920fb34b6b32f5",
+      "size": 9619,
+      "receipt_path": "$.runtime_fixture.cases[6].artifacts[3]"
+    },
+    {
+      "path": "build/workers/dos_ant_player_state_owners/run-v1/fixtures/rtlink400/typed_word_wrong_TilesDugR_alias_plus2/PROBE.LNK",
+      "sha256": "ffff955e3f96e5a4f82ab745d113dee493ee7084391e324f64f50c4f6b1e7ae3",
+      "size": 224,
+      "receipt_path": "$.runtime_fixture.cases[6].artifacts[4]"
+    },
+    {
+      "path": "build/workers/dos_ant_player_state_owners/run-v1/fixtures/rtlink400/typed_word_wrong_TilesDugR_alias_plus2/PROBE.MAP",
+      "sha256": "0fe8b0d9c7e4231c3da40e1aad721a8a0241d73a0e290f87c5a2868987952996",
+      "size": 12226,
+      "receipt_path": "$.runtime_fixture.cases[6].artifacts[5]"
+    },
+    {
+      "path": "build/workers/dos_ant_player_state_owners/run-v1/fixtures/rtlink400/typed_word_wrong_TilesDugR_alias_plus2/RUN.LOG",
+      "sha256": "765489fd1b16cabfd78a744ff35dbeccd0d050fb1bff907dca6e1eafa8d44938",
+      "size": 6,
+      "receipt_path": "$.runtime_fixture.cases[6].artifacts[6]"
+    },
+    {
+      "path": "build/workers/dos_ant_player_state_owners/run-v1/fixtures/rtlink400/unsigned_consumer_sign_contrast/CRT.OBJ",
+      "sha256": "0c8d8dd4832ddc1aa34a4238cfee37799fc859cb784f3960b28e3676cbe9b172",
+      "size": 572,
+      "receipt_path": "$.runtime_fixture.cases[11].artifacts[0]"
+    },
+    {
+      "path": "build/workers/dos_ant_player_state_owners/run-v1/fixtures/rtlink400/unsigned_consumer_sign_contrast/LINK.LOG",
+      "sha256": "c20d3e0bd2c5896188ae55510b3fe859f07172b1133d71952f5149b6e020acb4",
+      "size": 1011,
+      "receipt_path": "$.runtime_fixture.cases[11].artifacts[1]"
+    },
+    {
+      "path": "build/workers/dos_ant_player_state_owners/run-v1/fixtures/rtlink400/unsigned_consumer_sign_contrast/OWNER.OBJ",
+      "sha256": "2ec3add47e1b0220ae109f29cd1a0796a472a70e324ac1b63cc6add625680e77",
+      "size": 280,
+      "receipt_path": "$.runtime_fixture.cases[11].artifacts[2]"
+    },
+    {
+      "path": "build/workers/dos_ant_player_state_owners/run-v1/fixtures/rtlink400/unsigned_consumer_sign_contrast/PROBE.EXE",
+      "sha256": "8e9d2b02839d58102a2269d483b990d8b8d70a045e55510220958107b4f89339",
+      "size": 9321,
+      "receipt_path": "$.runtime_fixture.cases[11].artifacts[3]"
+    },
+    {
+      "path": "build/workers/dos_ant_player_state_owners/run-v1/fixtures/rtlink400/unsigned_consumer_sign_contrast/PROBE.LNK",
+      "sha256": "35c58225527f24e6d395a010de8dc5929752d855a078c5f7912a8d12147b04d0",
+      "size": 220,
+      "receipt_path": "$.runtime_fixture.cases[11].artifacts[4]"
+    },
+    {
+      "path": "build/workers/dos_ant_player_state_owners/run-v1/fixtures/rtlink400/unsigned_consumer_sign_contrast/PROBE.MAP",
+      "sha256": "baaa76a0c959ef18bb8818cf250ceb08907a35c597f6991137d97ae0e33a8dbe",
+      "size": 11961,
+      "receipt_path": "$.runtime_fixture.cases[11].artifacts[5]"
+    },
+    {
+      "path": "build/workers/dos_ant_player_state_owners/run-v1/fixtures/rtlink400/unsigned_consumer_sign_contrast/RUN.LOG",
+      "sha256": "765489fd1b16cabfd78a744ff35dbeccd0d050fb1bff907dca6e1eafa8d44938",
+      "size": 6,
+      "receipt_path": "$.runtime_fixture.cases[11].artifacts[6]"
+    },
+    {
+      "path": "build/workers/dos_ant_player_state_owners/run-v1/fixtures/rtlink400/wrong_four_byte_extent_long_owner/CRT.OBJ",
+      "sha256": "b1d4609ee6d1ab41bbbe0227527c5c61f9a312876c360b419889589c2f4aab9c",
+      "size": 709,
+      "receipt_path": "$.runtime_fixture.cases[10].artifacts[0]"
+    },
+    {
+      "path": "build/workers/dos_ant_player_state_owners/run-v1/fixtures/rtlink400/wrong_four_byte_extent_long_owner/LINK.LOG",
+      "sha256": "c20d3e0bd2c5896188ae55510b3fe859f07172b1133d71952f5149b6e020acb4",
+      "size": 1011,
+      "receipt_path": "$.runtime_fixture.cases[10].artifacts[1]"
+    },
+    {
+      "path": "build/workers/dos_ant_player_state_owners/run-v1/fixtures/rtlink400/wrong_four_byte_extent_long_owner/OWNER.OBJ",
+      "sha256": "0a85e3b146ae8a39a766dc64a3711943927fc11691784a7df9d497c97be42109",
+      "size": 282,
+      "receipt_path": "$.runtime_fixture.cases[10].artifacts[2]"
+    },
+    {
+      "path": "build/workers/dos_ant_player_state_owners/run-v1/fixtures/rtlink400/wrong_four_byte_extent_long_owner/PROBE.EXE",
+      "sha256": "e63ebf4f9497e0a06ea438050b5ec1a5c9d501e5acc48e9f1fbb10ce25bdcbbf",
+      "size": 9319,
+      "receipt_path": "$.runtime_fixture.cases[10].artifacts[3]"
+    },
+    {
+      "path": "build/workers/dos_ant_player_state_owners/run-v1/fixtures/rtlink400/wrong_four_byte_extent_long_owner/PROBE.LNK",
+      "sha256": "35c58225527f24e6d395a010de8dc5929752d855a078c5f7912a8d12147b04d0",
+      "size": 220,
+      "receipt_path": "$.runtime_fixture.cases[10].artifacts[4]"
+    },
+    {
+      "path": "build/workers/dos_ant_player_state_owners/run-v1/fixtures/rtlink400/wrong_four_byte_extent_long_owner/PROBE.MAP",
+      "sha256": "4a8a81fd7686f51cf06d65aee662c57f4d9d8eb2d3e4672a1fe810821c495558",
+      "size": 11961,
+      "receipt_path": "$.runtime_fixture.cases[10].artifacts[5]"
+    },
+    {
+      "path": "build/workers/dos_ant_player_state_owners/run-v1/fixtures/rtlink400/wrong_four_byte_extent_long_owner/RUN.LOG",
+      "sha256": "765489fd1b16cabfd78a744ff35dbeccd0d050fb1bff907dca6e1eafa8d44938",
+      "size": 6,
+      "receipt_path": "$.runtime_fixture.cases[10].artifacts[6]"
+    },
+    {
+      "path": "build/workers/dos_ant_player_state_owners/run-v1/fixtures/rtlink610/SaveRec_BYTE_exact_aliases/CRT.OBJ",
+      "sha256": "d3498ab0c4d46c816aa6770effeae318e2ee756c9b666e53d20423f8f9e2a234",
+      "size": 2308,
+      "receipt_path": "$.runtime_fixture.cases[13].artifacts[0]"
+    },
+    {
+      "path": "build/workers/dos_ant_player_state_owners/run-v1/fixtures/rtlink610/SaveRec_BYTE_exact_aliases/LINK.LOG",
+      "sha256": "2b3ea029caf1d11c5650e1a87225d76e8fbff90e11406583656d6336a75f0d3c",
+      "size": 1297,
+      "receipt_path": "$.runtime_fixture.cases[13].artifacts[1]"
+    },
+    {
+      "path": "build/workers/dos_ant_player_state_owners/run-v1/fixtures/rtlink610/SaveRec_BYTE_exact_aliases/OWNER.OBJ",
+      "sha256": "2ec3add47e1b0220ae109f29cd1a0796a472a70e324ac1b63cc6add625680e77",
+      "size": 280,
+      "receipt_path": "$.runtime_fixture.cases[13].artifacts[2]"
+    },
+    {
+      "path": "build/workers/dos_ant_player_state_owners/run-v1/fixtures/rtlink610/SaveRec_BYTE_exact_aliases/PROBE.EXE",
+      "sha256": "f5a946871c942d8aa16752af8cf08e58dbcbbd06c95eebd62851c7c6e71efcdf",
+      "size": 11257,
+      "receipt_path": "$.runtime_fixture.cases[13].artifacts[3]"
+    },
+    {
+      "path": "build/workers/dos_ant_player_state_owners/run-v1/fixtures/rtlink610/SaveRec_BYTE_exact_aliases/PROBE.LNK",
+      "sha256": "35c58225527f24e6d395a010de8dc5929752d855a078c5f7912a8d12147b04d0",
+      "size": 220,
+      "receipt_path": "$.runtime_fixture.cases[13].artifacts[4]"
+    },
+    {
+      "path": "build/workers/dos_ant_player_state_owners/run-v1/fixtures/rtlink610/SaveRec_BYTE_exact_aliases/PROBE.MAP",
+      "sha256": "47d898f242314897295671961657404df487af0c8f1f5c6278afbe4c4187d195",
+      "size": 13810,
+      "receipt_path": "$.runtime_fixture.cases[13].artifacts[5]"
+    },
+    {
+      "path": "build/workers/dos_ant_player_state_owners/run-v1/fixtures/rtlink610/SaveRec_BYTE_exact_aliases/RUN.LOG",
+      "sha256": "d938fa189912f8776c3deb31a6bec42f403f57b9c8e3ed936bdb076caf6bd61c",
+      "size": 6,
+      "receipt_path": "$.runtime_fixture.cases[13].artifacts[6]"
+    },
+    {
+      "path": "build/workers/dos_ant_player_state_owners/run-v1/fixtures/rtlink610/SaveRec_BYTE_wrong_MeHealth_alias_plus2/CRT.OBJ",
+      "sha256": "d3498ab0c4d46c816aa6770effeae318e2ee756c9b666e53d20423f8f9e2a234",
+      "size": 2308,
+      "receipt_path": "$.runtime_fixture.cases[15].artifacts[0]"
+    },
+    {
+      "path": "build/workers/dos_ant_player_state_owners/run-v1/fixtures/rtlink610/SaveRec_BYTE_wrong_MeHealth_alias_plus2/LINK.LOG",
+      "sha256": "ac3ab2d685be462ccc14af001f2197e6c04ccb569f6e35dfd3289d38944f6ce0",
+      "size": 1301,
+      "receipt_path": "$.runtime_fixture.cases[15].artifacts[1]"
+    },
+    {
+      "path": "build/workers/dos_ant_player_state_owners/run-v1/fixtures/rtlink610/SaveRec_BYTE_wrong_MeHealth_alias_plus2/OWNER.OBJ",
+      "sha256": "2ec3add47e1b0220ae109f29cd1a0796a472a70e324ac1b63cc6add625680e77",
+      "size": 280,
+      "receipt_path": "$.runtime_fixture.cases[15].artifacts[2]"
+    },
+    {
+      "path": "build/workers/dos_ant_player_state_owners/run-v1/fixtures/rtlink610/SaveRec_BYTE_wrong_MeHealth_alias_plus2/PROBE.EXE",
+      "sha256": "ad10a95b1e7065acafc9df904d7b626e600babdc67a5c522f8de2be4a9f713a9",
+      "size": 11257,
+      "receipt_path": "$.runtime_fixture.cases[15].artifacts[3]"
+    },
+    {
+      "path": "build/workers/dos_ant_player_state_owners/run-v1/fixtures/rtlink610/SaveRec_BYTE_wrong_MeHealth_alias_plus2/PROBE.LNK",
+      "sha256": "e024fc6036ee20895b46c88837c989016d773466aa4da2d73c288a5530fac42d",
+      "size": 224,
+      "receipt_path": "$.runtime_fixture.cases[15].artifacts[4]"
+    },
+    {
+      "path": "build/workers/dos_ant_player_state_owners/run-v1/fixtures/rtlink610/SaveRec_BYTE_wrong_MeHealth_alias_plus2/PROBE.MAP",
+      "sha256": "e0abdd12083c9695eb493baff0cd67cfb416c2c66cb5034cb2a85eaeb0148a67",
+      "size": 13810,
+      "receipt_path": "$.runtime_fixture.cases[15].artifacts[5]"
+    },
+    {
+      "path": "build/workers/dos_ant_player_state_owners/run-v1/fixtures/rtlink610/SaveRec_BYTE_wrong_MeHealth_alias_plus2/RUN.LOG",
+      "sha256": "765489fd1b16cabfd78a744ff35dbeccd0d050fb1bff907dca6e1eafa8d44938",
+      "size": 6,
+      "receipt_path": "$.runtime_fixture.cases[15].artifacts[6]"
+    },
+    {
+      "path": "build/workers/dos_ant_player_state_owners/run-v1/fixtures/rtlink610/SaveRec_BYTE_wrong_ModeAuto_alias_plus2/CRT.OBJ",
+      "sha256": "d3498ab0c4d46c816aa6770effeae318e2ee756c9b666e53d20423f8f9e2a234",
+      "size": 2308,
+      "receipt_path": "$.runtime_fixture.cases[17].artifacts[0]"
+    },
+    {
+      "path": "build/workers/dos_ant_player_state_owners/run-v1/fixtures/rtlink610/SaveRec_BYTE_wrong_ModeAuto_alias_plus2/LINK.LOG",
+      "sha256": "0fc289b5941fbe6c828b068110b847074a8dfc990a7506a989333ccb481979fe",
+      "size": 1301,
+      "receipt_path": "$.runtime_fixture.cases[17].artifacts[1]"
+    },
+    {
+      "path": "build/workers/dos_ant_player_state_owners/run-v1/fixtures/rtlink610/SaveRec_BYTE_wrong_ModeAuto_alias_plus2/OWNER.OBJ",
+      "sha256": "2ec3add47e1b0220ae109f29cd1a0796a472a70e324ac1b63cc6add625680e77",
+      "size": 280,
+      "receipt_path": "$.runtime_fixture.cases[17].artifacts[2]"
+    },
+    {
+      "path": "build/workers/dos_ant_player_state_owners/run-v1/fixtures/rtlink610/SaveRec_BYTE_wrong_ModeAuto_alias_plus2/PROBE.EXE",
+      "sha256": "34b85c420063666d4ee9db380a66c2aaced3564d668c35e5943867ce08fb5948",
+      "size": 11257,
+      "receipt_path": "$.runtime_fixture.cases[17].artifacts[3]"
+    },
+    {
+      "path": "build/workers/dos_ant_player_state_owners/run-v1/fixtures/rtlink610/SaveRec_BYTE_wrong_ModeAuto_alias_plus2/PROBE.LNK",
+      "sha256": "8045829a186455df32ce90ae1d3a7f124f87e0a882fc9e56760f42d335cb045a",
+      "size": 224,
+      "receipt_path": "$.runtime_fixture.cases[17].artifacts[4]"
+    },
+    {
+      "path": "build/workers/dos_ant_player_state_owners/run-v1/fixtures/rtlink610/SaveRec_BYTE_wrong_ModeAuto_alias_plus2/PROBE.MAP",
+      "sha256": "81e303f7ecebcc46d1dfbf9ae63e58e537ae655424bdb742e75ba40caf0a4578",
+      "size": 13810,
+      "receipt_path": "$.runtime_fixture.cases[17].artifacts[5]"
+    },
+    {
+      "path": "build/workers/dos_ant_player_state_owners/run-v1/fixtures/rtlink610/SaveRec_BYTE_wrong_ModeAuto_alias_plus2/RUN.LOG",
+      "sha256": "765489fd1b16cabfd78a744ff35dbeccd0d050fb1bff907dca6e1eafa8d44938",
+      "size": 6,
+      "receipt_path": "$.runtime_fixture.cases[17].artifacts[6]"
+    },
+    {
+      "path": "build/workers/dos_ant_player_state_owners/run-v1/fixtures/rtlink610/SaveRec_BYTE_wrong_TilesDugR_alias_plus2/CRT.OBJ",
+      "sha256": "d3498ab0c4d46c816aa6770effeae318e2ee756c9b666e53d20423f8f9e2a234",
+      "size": 2308,
+      "receipt_path": "$.runtime_fixture.cases[19].artifacts[0]"
+    },
+    {
+      "path": "build/workers/dos_ant_player_state_owners/run-v1/fixtures/rtlink610/SaveRec_BYTE_wrong_TilesDugR_alias_plus2/LINK.LOG",
+      "sha256": "7168207e50a26a2173884cb82f3096f8ef52de80fdc34c787ecebec8d3b67df6",
+      "size": 1301,
+      "receipt_path": "$.runtime_fixture.cases[19].artifacts[1]"
+    },
+    {
+      "path": "build/workers/dos_ant_player_state_owners/run-v1/fixtures/rtlink610/SaveRec_BYTE_wrong_TilesDugR_alias_plus2/OWNER.OBJ",
+      "sha256": "2ec3add47e1b0220ae109f29cd1a0796a472a70e324ac1b63cc6add625680e77",
+      "size": 280,
+      "receipt_path": "$.runtime_fixture.cases[19].artifacts[2]"
+    },
+    {
+      "path": "build/workers/dos_ant_player_state_owners/run-v1/fixtures/rtlink610/SaveRec_BYTE_wrong_TilesDugR_alias_plus2/PROBE.EXE",
+      "sha256": "fb8d5aee059248f7d2b28e5b73b7d2b80205fcac6e3b8fc312bad3e443f73f07",
+      "size": 11257,
+      "receipt_path": "$.runtime_fixture.cases[19].artifacts[3]"
+    },
+    {
+      "path": "build/workers/dos_ant_player_state_owners/run-v1/fixtures/rtlink610/SaveRec_BYTE_wrong_TilesDugR_alias_plus2/PROBE.LNK",
+      "sha256": "ffff955e3f96e5a4f82ab745d113dee493ee7084391e324f64f50c4f6b1e7ae3",
+      "size": 224,
+      "receipt_path": "$.runtime_fixture.cases[19].artifacts[4]"
+    },
+    {
+      "path": "build/workers/dos_ant_player_state_owners/run-v1/fixtures/rtlink610/SaveRec_BYTE_wrong_TilesDugR_alias_plus2/PROBE.MAP",
+      "sha256": "3d5dffc0569613eb3bcfd48c5db1f89cd38cf374de0a6f9f6e6bdc4ac685f9e5",
+      "size": 13810,
+      "receipt_path": "$.runtime_fixture.cases[19].artifacts[5]"
+    },
+    {
+      "path": "build/workers/dos_ant_player_state_owners/run-v1/fixtures/rtlink610/SaveRec_BYTE_wrong_TilesDugR_alias_plus2/RUN.LOG",
+      "sha256": "765489fd1b16cabfd78a744ff35dbeccd0d050fb1bff907dca6e1eafa8d44938",
+      "size": 6,
+      "receipt_path": "$.runtime_fixture.cases[19].artifacts[6]"
+    },
+    {
+      "path": "build/workers/dos_ant_player_state_owners/run-v1/fixtures/rtlink610/initialized_nonzero_owner_SaveRec_BYTE/CRT.OBJ",
+      "sha256": "d3498ab0c4d46c816aa6770effeae318e2ee756c9b666e53d20423f8f9e2a234",
+      "size": 2308,
+      "receipt_path": "$.runtime_fixture.cases[21].artifacts[0]"
+    },
+    {
+      "path": "build/workers/dos_ant_player_state_owners/run-v1/fixtures/rtlink610/initialized_nonzero_owner_SaveRec_BYTE/LINK.LOG",
+      "sha256": "2b3ea029caf1d11c5650e1a87225d76e8fbff90e11406583656d6336a75f0d3c",
+      "size": 1297,
+      "receipt_path": "$.runtime_fixture.cases[21].artifacts[1]"
+    },
+    {
+      "path": "build/workers/dos_ant_player_state_owners/run-v1/fixtures/rtlink610/initialized_nonzero_owner_SaveRec_BYTE/OWNER.OBJ",
+      "sha256": "f7c3653b8bc256e2258fb2b7c21ded5b3c746425ffca9a0cda7dd6317047fceb",
+      "size": 330,
+      "receipt_path": "$.runtime_fixture.cases[21].artifacts[2]"
+    },
+    {
+      "path": "build/workers/dos_ant_player_state_owners/run-v1/fixtures/rtlink610/initialized_nonzero_owner_SaveRec_BYTE/PROBE.EXE",
+      "sha256": "c15b5bfcb82fa6f56e3b2d52d04771651b4c43dee3221445af28790527699a62",
+      "size": 11257,
+      "receipt_path": "$.runtime_fixture.cases[21].artifacts[3]"
+    },
+    {
+      "path": "build/workers/dos_ant_player_state_owners/run-v1/fixtures/rtlink610/initialized_nonzero_owner_SaveRec_BYTE/PROBE.LNK",
+      "sha256": "35c58225527f24e6d395a010de8dc5929752d855a078c5f7912a8d12147b04d0",
+      "size": 220,
+      "receipt_path": "$.runtime_fixture.cases[21].artifacts[4]"
+    },
+    {
+      "path": "build/workers/dos_ant_player_state_owners/run-v1/fixtures/rtlink610/initialized_nonzero_owner_SaveRec_BYTE/PROBE.MAP",
+      "sha256": "b094e0fedbbd1ab7f48dc3495ea0642b3554c953f0855e61af0d16f49debe291",
+      "size": 13811,
+      "receipt_path": "$.runtime_fixture.cases[21].artifacts[5]"
+    },
+    {
+      "path": "build/workers/dos_ant_player_state_owners/run-v1/fixtures/rtlink610/initialized_nonzero_owner_SaveRec_BYTE/RUN.LOG",
+      "sha256": "765489fd1b16cabfd78a744ff35dbeccd0d050fb1bff907dca6e1eafa8d44938",
+      "size": 6,
+      "receipt_path": "$.runtime_fixture.cases[21].artifacts[6]"
+    },
+    {
+      "path": "build/workers/dos_ant_player_state_owners/run-v1/fixtures/rtlink610/initialized_nonzero_owner_word/CRT.OBJ",
+      "sha256": "8bb680fd90841f298a80a30a756868a487b28f110308ed4d6e07278db48c0630",
+      "size": 1446,
+      "receipt_path": "$.runtime_fixture.cases[20].artifacts[0]"
+    },
+    {
+      "path": "build/workers/dos_ant_player_state_owners/run-v1/fixtures/rtlink610/initialized_nonzero_owner_word/LINK.LOG",
+      "sha256": "6c7a9f578bb61fb77df8ef2979610814cf9e2b14aecb838de00df84517748a9c",
+      "size": 1297,
+      "receipt_path": "$.runtime_fixture.cases[20].artifacts[1]"
+    },
+    {
+      "path": "build/workers/dos_ant_player_state_owners/run-v1/fixtures/rtlink610/initialized_nonzero_owner_word/OWNER.OBJ",
+      "sha256": "f7c3653b8bc256e2258fb2b7c21ded5b3c746425ffca9a0cda7dd6317047fceb",
+      "size": 330,
+      "receipt_path": "$.runtime_fixture.cases[20].artifacts[2]"
+    },
+    {
+      "path": "build/workers/dos_ant_player_state_owners/run-v1/fixtures/rtlink610/initialized_nonzero_owner_word/PROBE.EXE",
+      "sha256": "cbf3dae1ef4958c2b1ca4216bc2f763a5396dbc498d09115377d8d6ec0b2624a",
+      "size": 10659,
+      "receipt_path": "$.runtime_fixture.cases[20].artifacts[3]"
+    },
+    {
+      "path": "build/workers/dos_ant_player_state_owners/run-v1/fixtures/rtlink610/initialized_nonzero_owner_word/PROBE.LNK",
+      "sha256": "35c58225527f24e6d395a010de8dc5929752d855a078c5f7912a8d12147b04d0",
+      "size": 220,
+      "receipt_path": "$.runtime_fixture.cases[20].artifacts[4]"
+    },
+    {
+      "path": "build/workers/dos_ant_player_state_owners/run-v1/fixtures/rtlink610/initialized_nonzero_owner_word/PROBE.MAP",
+      "sha256": "932b4fb02f6daad1011a4d0d479c3b9e205d5e7436c4a3530fd78dd7c7c7c67b",
+      "size": 13410,
+      "receipt_path": "$.runtime_fixture.cases[20].artifacts[5]"
+    },
+    {
+      "path": "build/workers/dos_ant_player_state_owners/run-v1/fixtures/rtlink610/initialized_nonzero_owner_word/RUN.LOG",
+      "sha256": "765489fd1b16cabfd78a744ff35dbeccd0d050fb1bff907dca6e1eafa8d44938",
+      "size": 6,
+      "receipt_path": "$.runtime_fixture.cases[20].artifacts[6]"
+    },
+    {
+      "path": "build/workers/dos_ant_player_state_owners/run-v1/fixtures/rtlink610/typed_word_exact_aliases/CRT.OBJ",
+      "sha256": "8bb680fd90841f298a80a30a756868a487b28f110308ed4d6e07278db48c0630",
+      "size": 1446,
+      "receipt_path": "$.runtime_fixture.cases[12].artifacts[0]"
+    },
+    {
+      "path": "build/workers/dos_ant_player_state_owners/run-v1/fixtures/rtlink610/typed_word_exact_aliases/LINK.LOG",
+      "sha256": "6c7a9f578bb61fb77df8ef2979610814cf9e2b14aecb838de00df84517748a9c",
+      "size": 1297,
+      "receipt_path": "$.runtime_fixture.cases[12].artifacts[1]"
+    },
+    {
+      "path": "build/workers/dos_ant_player_state_owners/run-v1/fixtures/rtlink610/typed_word_exact_aliases/OWNER.OBJ",
+      "sha256": "2ec3add47e1b0220ae109f29cd1a0796a472a70e324ac1b63cc6add625680e77",
+      "size": 280,
+      "receipt_path": "$.runtime_fixture.cases[12].artifacts[2]"
+    },
+    {
+      "path": "build/workers/dos_ant_player_state_owners/run-v1/fixtures/rtlink610/typed_word_exact_aliases/PROBE.EXE",
+      "sha256": "b7289e8311758508829fa4495941c3e77be795fbd747aeead0a9931edc4575c2",
+      "size": 10659,
+      "receipt_path": "$.runtime_fixture.cases[12].artifacts[3]"
+    },
+    {
+      "path": "build/workers/dos_ant_player_state_owners/run-v1/fixtures/rtlink610/typed_word_exact_aliases/PROBE.LNK",
+      "sha256": "35c58225527f24e6d395a010de8dc5929752d855a078c5f7912a8d12147b04d0",
+      "size": 220,
+      "receipt_path": "$.runtime_fixture.cases[12].artifacts[4]"
+    },
+    {
+      "path": "build/workers/dos_ant_player_state_owners/run-v1/fixtures/rtlink610/typed_word_exact_aliases/PROBE.MAP",
+      "sha256": "be7a0219b5938833c5b3796856b2541e6614220ff990deea6c15fe50d5faf667",
+      "size": 13409,
+      "receipt_path": "$.runtime_fixture.cases[12].artifacts[5]"
+    },
+    {
+      "path": "build/workers/dos_ant_player_state_owners/run-v1/fixtures/rtlink610/typed_word_exact_aliases/RUN.LOG",
+      "sha256": "d938fa189912f8776c3deb31a6bec42f403f57b9c8e3ed936bdb076caf6bd61c",
+      "size": 6,
+      "receipt_path": "$.runtime_fixture.cases[12].artifacts[6]"
+    },
+    {
+      "path": "build/workers/dos_ant_player_state_owners/run-v1/fixtures/rtlink610/typed_word_wrong_MeHealth_alias_plus2/CRT.OBJ",
+      "sha256": "8bb680fd90841f298a80a30a756868a487b28f110308ed4d6e07278db48c0630",
+      "size": 1446,
+      "receipt_path": "$.runtime_fixture.cases[14].artifacts[0]"
+    },
+    {
+      "path": "build/workers/dos_ant_player_state_owners/run-v1/fixtures/rtlink610/typed_word_wrong_MeHealth_alias_plus2/LINK.LOG",
+      "sha256": "5d6d754fadd50216a9d3210e8b45c7bbb3d71e0702a117cc4cf3dd85998f1339",
+      "size": 1301,
+      "receipt_path": "$.runtime_fixture.cases[14].artifacts[1]"
+    },
+    {
+      "path": "build/workers/dos_ant_player_state_owners/run-v1/fixtures/rtlink610/typed_word_wrong_MeHealth_alias_plus2/OWNER.OBJ",
+      "sha256": "2ec3add47e1b0220ae109f29cd1a0796a472a70e324ac1b63cc6add625680e77",
+      "size": 280,
+      "receipt_path": "$.runtime_fixture.cases[14].artifacts[2]"
+    },
+    {
+      "path": "build/workers/dos_ant_player_state_owners/run-v1/fixtures/rtlink610/typed_word_wrong_MeHealth_alias_plus2/PROBE.EXE",
+      "sha256": "27affd8417fe2a8bd3b827c6ea27393e211a91a2f7129755f6b12148e8710be3",
+      "size": 10659,
+      "receipt_path": "$.runtime_fixture.cases[14].artifacts[3]"
+    },
+    {
+      "path": "build/workers/dos_ant_player_state_owners/run-v1/fixtures/rtlink610/typed_word_wrong_MeHealth_alias_plus2/PROBE.LNK",
+      "sha256": "e024fc6036ee20895b46c88837c989016d773466aa4da2d73c288a5530fac42d",
+      "size": 224,
+      "receipt_path": "$.runtime_fixture.cases[14].artifacts[4]"
+    },
+    {
+      "path": "build/workers/dos_ant_player_state_owners/run-v1/fixtures/rtlink610/typed_word_wrong_MeHealth_alias_plus2/PROBE.MAP",
+      "sha256": "792d1ce62c18ebd87583cb128e43f70e62e58595e1a2df6df95e146769b8e940",
+      "size": 13409,
+      "receipt_path": "$.runtime_fixture.cases[14].artifacts[5]"
+    },
+    {
+      "path": "build/workers/dos_ant_player_state_owners/run-v1/fixtures/rtlink610/typed_word_wrong_MeHealth_alias_plus2/RUN.LOG",
+      "sha256": "765489fd1b16cabfd78a744ff35dbeccd0d050fb1bff907dca6e1eafa8d44938",
+      "size": 6,
+      "receipt_path": "$.runtime_fixture.cases[14].artifacts[6]"
+    },
+    {
+      "path": "build/workers/dos_ant_player_state_owners/run-v1/fixtures/rtlink610/typed_word_wrong_ModeAuto_alias_plus2/CRT.OBJ",
+      "sha256": "8bb680fd90841f298a80a30a756868a487b28f110308ed4d6e07278db48c0630",
+      "size": 1446,
+      "receipt_path": "$.runtime_fixture.cases[16].artifacts[0]"
+    },
+    {
+      "path": "build/workers/dos_ant_player_state_owners/run-v1/fixtures/rtlink610/typed_word_wrong_ModeAuto_alias_plus2/LINK.LOG",
+      "sha256": "e206cabb6a4f0b431bc440fed8f7793aa33aefaf54f1cee444ebbcd55109af1c",
+      "size": 1301,
+      "receipt_path": "$.runtime_fixture.cases[16].artifacts[1]"
+    },
+    {
+      "path": "build/workers/dos_ant_player_state_owners/run-v1/fixtures/rtlink610/typed_word_wrong_ModeAuto_alias_plus2/OWNER.OBJ",
+      "sha256": "2ec3add47e1b0220ae109f29cd1a0796a472a70e324ac1b63cc6add625680e77",
+      "size": 280,
+      "receipt_path": "$.runtime_fixture.cases[16].artifacts[2]"
+    },
+    {
+      "path": "build/workers/dos_ant_player_state_owners/run-v1/fixtures/rtlink610/typed_word_wrong_ModeAuto_alias_plus2/PROBE.EXE",
+      "sha256": "be24ff5394e91cd6a50964ee9f14ea0dffaaf1d073b55781996adb99f7ec50a2",
+      "size": 10659,
+      "receipt_path": "$.runtime_fixture.cases[16].artifacts[3]"
+    },
+    {
+      "path": "build/workers/dos_ant_player_state_owners/run-v1/fixtures/rtlink610/typed_word_wrong_ModeAuto_alias_plus2/PROBE.LNK",
+      "sha256": "8045829a186455df32ce90ae1d3a7f124f87e0a882fc9e56760f42d335cb045a",
+      "size": 224,
+      "receipt_path": "$.runtime_fixture.cases[16].artifacts[4]"
+    },
+    {
+      "path": "build/workers/dos_ant_player_state_owners/run-v1/fixtures/rtlink610/typed_word_wrong_ModeAuto_alias_plus2/PROBE.MAP",
+      "sha256": "fdec94cd8fdb8096e22c39cc14874e4c4831ec38c76f9529b70b09e00c2b4824",
+      "size": 13409,
+      "receipt_path": "$.runtime_fixture.cases[16].artifacts[5]"
+    },
+    {
+      "path": "build/workers/dos_ant_player_state_owners/run-v1/fixtures/rtlink610/typed_word_wrong_ModeAuto_alias_plus2/RUN.LOG",
+      "sha256": "765489fd1b16cabfd78a744ff35dbeccd0d050fb1bff907dca6e1eafa8d44938",
+      "size": 6,
+      "receipt_path": "$.runtime_fixture.cases[16].artifacts[6]"
+    },
+    {
+      "path": "build/workers/dos_ant_player_state_owners/run-v1/fixtures/rtlink610/typed_word_wrong_TilesDugR_alias_plus2/CRT.OBJ",
+      "sha256": "8bb680fd90841f298a80a30a756868a487b28f110308ed4d6e07278db48c0630",
+      "size": 1446,
+      "receipt_path": "$.runtime_fixture.cases[18].artifacts[0]"
+    },
+    {
+      "path": "build/workers/dos_ant_player_state_owners/run-v1/fixtures/rtlink610/typed_word_wrong_TilesDugR_alias_plus2/LINK.LOG",
+      "sha256": "9c73078d65f02aa6edeef244c08d62f137f2afc56e088a279af26db1da3f3ce7",
+      "size": 1301,
+      "receipt_path": "$.runtime_fixture.cases[18].artifacts[1]"
+    },
+    {
+      "path": "build/workers/dos_ant_player_state_owners/run-v1/fixtures/rtlink610/typed_word_wrong_TilesDugR_alias_plus2/OWNER.OBJ",
+      "sha256": "2ec3add47e1b0220ae109f29cd1a0796a472a70e324ac1b63cc6add625680e77",
+      "size": 280,
+      "receipt_path": "$.runtime_fixture.cases[18].artifacts[2]"
+    },
+    {
+      "path": "build/workers/dos_ant_player_state_owners/run-v1/fixtures/rtlink610/typed_word_wrong_TilesDugR_alias_plus2/PROBE.EXE",
+      "sha256": "fb0b07d93efd85f3fdc06d096f7da6441a3c2a3981f165a26b75757bb945fd88",
+      "size": 10659,
+      "receipt_path": "$.runtime_fixture.cases[18].artifacts[3]"
+    },
+    {
+      "path": "build/workers/dos_ant_player_state_owners/run-v1/fixtures/rtlink610/typed_word_wrong_TilesDugR_alias_plus2/PROBE.LNK",
+      "sha256": "ffff955e3f96e5a4f82ab745d113dee493ee7084391e324f64f50c4f6b1e7ae3",
+      "size": 224,
+      "receipt_path": "$.runtime_fixture.cases[18].artifacts[4]"
+    },
+    {
+      "path": "build/workers/dos_ant_player_state_owners/run-v1/fixtures/rtlink610/typed_word_wrong_TilesDugR_alias_plus2/PROBE.MAP",
+      "sha256": "553df62a54eb4e75e9fd339e988e574e482d2e8860d2d068db026ceafe9056c5",
+      "size": 13409,
+      "receipt_path": "$.runtime_fixture.cases[18].artifacts[5]"
+    },
+    {
+      "path": "build/workers/dos_ant_player_state_owners/run-v1/fixtures/rtlink610/typed_word_wrong_TilesDugR_alias_plus2/RUN.LOG",
+      "sha256": "765489fd1b16cabfd78a744ff35dbeccd0d050fb1bff907dca6e1eafa8d44938",
+      "size": 6,
+      "receipt_path": "$.runtime_fixture.cases[18].artifacts[6]"
+    },
+    {
+      "path": "build/workers/dos_ant_player_state_owners/run-v1/fixtures/rtlink610/unsigned_consumer_sign_contrast/CRT.OBJ",
+      "sha256": "0c8d8dd4832ddc1aa34a4238cfee37799fc859cb784f3960b28e3676cbe9b172",
+      "size": 572,
+      "receipt_path": "$.runtime_fixture.cases[23].artifacts[0]"
+    },
+    {
+      "path": "build/workers/dos_ant_player_state_owners/run-v1/fixtures/rtlink610/unsigned_consumer_sign_contrast/LINK.LOG",
+      "sha256": "a8b4ed4f1f9afa403a8b5c2babd2cea6ad4ba007a6171247e25a23e28fc44cf2",
+      "size": 1756,
+      "receipt_path": "$.runtime_fixture.cases[23].artifacts[1]"
+    },
+    {
+      "path": "build/workers/dos_ant_player_state_owners/run-v1/fixtures/rtlink610/unsigned_consumer_sign_contrast/OWNER.OBJ",
+      "sha256": "2ec3add47e1b0220ae109f29cd1a0796a472a70e324ac1b63cc6add625680e77",
+      "size": 280,
+      "receipt_path": "$.runtime_fixture.cases[23].artifacts[2]"
+    },
+    {
+      "path": "build/workers/dos_ant_player_state_owners/run-v1/fixtures/rtlink610/unsigned_consumer_sign_contrast/PROBE.EXE",
+      "sha256": "f80fa943ad5db40e3f16834846833835ae84c9ac922fca87f072530d43ddeb7d",
+      "size": 10361,
+      "receipt_path": "$.runtime_fixture.cases[23].artifacts[3]"
+    },
+    {
+      "path": "build/workers/dos_ant_player_state_owners/run-v1/fixtures/rtlink610/unsigned_consumer_sign_contrast/PROBE.LNK",
+      "sha256": "35c58225527f24e6d395a010de8dc5929752d855a078c5f7912a8d12147b04d0",
+      "size": 220,
+      "receipt_path": "$.runtime_fixture.cases[23].artifacts[4]"
+    },
+    {
+      "path": "build/workers/dos_ant_player_state_owners/run-v1/fixtures/rtlink610/unsigned_consumer_sign_contrast/PROBE.MAP",
+      "sha256": "3466b6a5de8bbb13ddc5bf9716a52bc1598a732a5da67b6f88cd900542056725",
+      "size": 13144,
+      "receipt_path": "$.runtime_fixture.cases[23].artifacts[5]"
+    },
+    {
+      "path": "build/workers/dos_ant_player_state_owners/run-v1/fixtures/rtlink610/unsigned_consumer_sign_contrast/RUN.LOG",
+      "sha256": "765489fd1b16cabfd78a744ff35dbeccd0d050fb1bff907dca6e1eafa8d44938",
+      "size": 6,
+      "receipt_path": "$.runtime_fixture.cases[23].artifacts[6]"
+    },
+    {
+      "path": "build/workers/dos_ant_player_state_owners/run-v1/fixtures/rtlink610/wrong_four_byte_extent_long_owner/CRT.OBJ",
+      "sha256": "b1d4609ee6d1ab41bbbe0227527c5c61f9a312876c360b419889589c2f4aab9c",
+      "size": 709,
+      "receipt_path": "$.runtime_fixture.cases[22].artifacts[0]"
+    },
+    {
+      "path": "build/workers/dos_ant_player_state_owners/run-v1/fixtures/rtlink610/wrong_four_byte_extent_long_owner/LINK.LOG",
+      "sha256": "a8b4ed4f1f9afa403a8b5c2babd2cea6ad4ba007a6171247e25a23e28fc44cf2",
+      "size": 1756,
+      "receipt_path": "$.runtime_fixture.cases[22].artifacts[1]"
+    },
+    {
+      "path": "build/workers/dos_ant_player_state_owners/run-v1/fixtures/rtlink610/wrong_four_byte_extent_long_owner/OWNER.OBJ",
+      "sha256": "0a85e3b146ae8a39a766dc64a3711943927fc11691784a7df9d497c97be42109",
+      "size": 282,
+      "receipt_path": "$.runtime_fixture.cases[22].artifacts[2]"
+    },
+    {
+      "path": "build/workers/dos_ant_player_state_owners/run-v1/fixtures/rtlink610/wrong_four_byte_extent_long_owner/PROBE.EXE",
+      "sha256": "dbd7d94199f5ee8e71a669c663b63860d38cf379295a96e83f206ce8cb96f1db",
+      "size": 10359,
+      "receipt_path": "$.runtime_fixture.cases[22].artifacts[3]"
+    },
+    {
+      "path": "build/workers/dos_ant_player_state_owners/run-v1/fixtures/rtlink610/wrong_four_byte_extent_long_owner/PROBE.LNK",
+      "sha256": "35c58225527f24e6d395a010de8dc5929752d855a078c5f7912a8d12147b04d0",
+      "size": 220,
+      "receipt_path": "$.runtime_fixture.cases[22].artifacts[4]"
+    },
+    {
+      "path": "build/workers/dos_ant_player_state_owners/run-v1/fixtures/rtlink610/wrong_four_byte_extent_long_owner/PROBE.MAP",
+      "sha256": "2e6eaac2931d0b0f2ad466812bd8ffb306bef3246b9c2f406f1afc5d7be7e2f5",
+      "size": 13144,
+      "receipt_path": "$.runtime_fixture.cases[22].artifacts[5]"
+    },
+    {
+      "path": "build/workers/dos_ant_player_state_owners/run-v1/fixtures/rtlink610/wrong_four_byte_extent_long_owner/RUN.LOG",
+      "sha256": "765489fd1b16cabfd78a744ff35dbeccd0d050fb1bff907dca6e1eafa8d44938",
+      "size": 6,
+      "receipt_path": "$.runtime_fixture.cases[22].artifacts[6]"
+    },
+    {
+      "path": "build/workers/dos_ant_player_state_owners/run-v1/generated/ANTCOUNTS.c",
+      "sha256": "50aa2f69ec63fea3136105a14e496a68de81fb47fe469a9fb0a3eda650e481da",
+      "size": 203,
+      "receipt_path": "$.runtime_fixture.input_pins[22]"
+    },
+    {
+      "path": "build/workers/dos_ant_player_state_owners/run-v1/generated/COUNTBYTE.c",
+      "sha256": "fa63487c0a3f7643364d5c8220b6d4ef0169b0aae8920bd51043c8453f60ec9b",
+      "size": 2934,
+      "receipt_path": "$.runtime_fixture.input_pins[23]"
+    },
+    {
+      "path": "build/workers/dos_ant_player_state_owners/run-v1/generated/COUNTINIT.c",
+      "sha256": "3d7221c15e987e40a0a9703aad1833ccfe54c8de4e04507d30d48ec843086ee5",
+      "size": 143,
+      "receipt_path": "$.runtime_fixture.input_pins[24]"
+    },
+    {
+      "path": "build/workers/dos_ant_player_state_owners/run-v1/generated/COUNTLONG.c",
+      "sha256": "92f7c751f8fefaecb414f65648b7517144ce7c4c06f3eff16b0e4deadb4868ab",
+      "size": 125,
+      "receipt_path": "$.wrong_extent_control.source_pin"
+    },
+    {
+      "path": "build/workers/dos_ant_player_state_owners/run-v1/generated/COUNTUNSG.c",
+      "sha256": "3122e506addbbc2c9d1325885cb02078e3830e754ec493394e325909940b4ea7",
+      "size": 170,
+      "receipt_path": "$.runtime_fixture.input_pins[26]"
+    },
+    {
+      "path": "build/workers/dos_ant_player_state_owners/run-v1/generated/COUNTWIDE.c",
+      "sha256": "a1abe31468b24d4fd5d004d28b258e36d188d298f6824e21649efbf3bdf9472e",
+      "size": 434,
+      "receipt_path": "$.runtime_fixture.input_pins[27]"
+    },
+    {
+      "path": "build/workers/dos_ant_player_state_owners/run-v1/generated/COUNTWORD.c",
+      "sha256": "33253bc7759f777001874159c3404b05f2c016cbbdc53f13bc7bde08c706d001",
+      "size": 1265,
+      "receipt_path": "$.runtime_fixture.input_pins[28]"
+    },
+    {
+      "path": "build/workers/dos_ant_player_state_owners/run-v1/objects/ANTCNT.OBJ",
+      "sha256": "2ec3add47e1b0220ae109f29cd1a0796a472a70e324ac1b63cc6add625680e77",
+      "size": 280,
+      "receipt_path": "$.runtime_fixture.input_pins[29]"
+    },
+    {
+      "path": "build/workers/dos_ant_player_state_owners/run-v1/objects/CNTBYTE.OBJ",
+      "sha256": "d3498ab0c4d46c816aa6770effeae318e2ee756c9b666e53d20423f8f9e2a234",
+      "size": 2308,
+      "receipt_path": "$.runtime_fixture.input_pins[30]"
+    },
+    {
+      "path": "build/workers/dos_ant_player_state_owners/run-v1/objects/CNTINIT.OBJ",
+      "sha256": "f7c3653b8bc256e2258fb2b7c21ded5b3c746425ffca9a0cda7dd6317047fceb",
+      "size": 330,
+      "receipt_path": "$.runtime_fixture.input_pins[31]"
+    },
+    {
+      "path": "build/workers/dos_ant_player_state_owners/run-v1/objects/CNTLONG.OBJ",
+      "sha256": "0a85e3b146ae8a39a766dc64a3711943927fc11691784a7df9d497c97be42109",
+      "size": 282,
+      "receipt_path": "$.wrong_extent_control.object_pin"
+    },
+    {
+      "path": "build/workers/dos_ant_player_state_owners/run-v1/objects/CNTUNSG.OBJ",
+      "sha256": "0c8d8dd4832ddc1aa34a4238cfee37799fc859cb784f3960b28e3676cbe9b172",
+      "size": 572,
+      "receipt_path": "$.runtime_fixture.input_pins[33]"
+    },
+    {
+      "path": "build/workers/dos_ant_player_state_owners/run-v1/objects/CNTWIDE.OBJ",
+      "sha256": "b1d4609ee6d1ab41bbbe0227527c5c61f9a312876c360b419889589c2f4aab9c",
+      "size": 709,
+      "receipt_path": "$.runtime_fixture.input_pins[34]"
+    },
+    {
+      "path": "build/workers/dos_ant_player_state_owners/run-v1/objects/CNTWORD.OBJ",
+      "sha256": "8bb680fd90841f298a80a30a756868a487b28f110308ed4d6e07278db48c0630",
+      "size": 1446,
+      "receipt_path": "$.runtime_fixture.input_pins[35]"
+    },
+    {
+      "path": "build/workers/dos_ant_player_state_owners/run-v1/report.json",
+      "sha256": "fde40e1337278521d68f6698ef87b51db2c64c47ab5e1e0cbe1a0bb634266649",
+      "size": 473291,
+      "role": "selected_owner_report"
+    },
+    {
+      "path": "evidence/behavior/functions/DisplayCard/contracts/logical-text-v2/module.c",
+      "sha256": "5e8e5f39325914cc1a6f1b5de9e5c894818e47d68a7ce594b2a514c99b37a1ea",
+      "receipt_path": "$.source_audit.source_set.effective_behavior_sources[0]"
+    },
+    {
+      "path": "evidence/behavior/functions/DisplayCard/contracts/logical-text-v2/module.c",
+      "sha256": "5e8e5f39325914cc1a6f1b5de9e5c894818e47d68a7ce594b2a514c99b37a1ea",
+      "size": 19699,
+      "receipt_path": "$.source_audit.source_pins[0]"
+    },
+    {
+      "path": "evidence/behavior/functions/DrawMapCursor/contracts/logical-render-v2/module.c",
+      "sha256": "daa607847c4c0364358a7b57d3f790dd9981e284bf2cedd01fa1fb3ac4df918a",
+      "receipt_path": "$.source_audit.source_set.effective_behavior_sources[2]"
+    },
+    {
+      "path": "evidence/behavior/functions/DrawMapCursor/contracts/logical-render-v2/module.c",
+      "sha256": "daa607847c4c0364358a7b57d3f790dd9981e284bf2cedd01fa1fb3ac4df918a",
+      "size": 19339,
+      "receipt_path": "$.source_audit.source_pins[1]"
+    },
+    {
+      "path": "evidence/behavior/functions/FindIndex/module.c",
+      "sha256": "1af5252fe8449eeca44b4099fe4a4bd1ff5ab24521c7a888253adfdd4554ac5a",
+      "receipt_path": "$.source_audit.source_set.effective_behavior_sources[3]"
+    },
+    {
+      "path": "evidence/behavior/functions/FindIndex/module.c",
+      "sha256": "1af5252fe8449eeca44b4099fe4a4bd1ff5ab24521c7a888253adfdd4554ac5a",
+      "size": 2872,
+      "receipt_path": "$.source_audit.source_pins[2]"
+    },
+    {
+      "path": "evidence/behavior/functions/InvertPatch/contracts/logical-render-v2/module.c",
+      "sha256": "1ace9a2985696a7c254c9cfcfafc504be9126f07c47672c6bf79e3e2a570e801",
+      "receipt_path": "$.source_audit.source_set.effective_behavior_sources[4]"
+    },
+    {
+      "path": "evidence/behavior/functions/InvertPatch/contracts/logical-render-v2/module.c",
+      "sha256": "1ace9a2985696a7c254c9cfcfafc504be9126f07c47672c6bf79e3e2a570e801",
+      "size": 24333,
+      "receipt_path": "$.source_audit.source_pins[3]"
+    },
+    {
+      "path": "evidence/behavior/functions/LessonDone/contracts/host-service-v1/module.c",
+      "sha256": "c611660dde4da7117c3232aa06e597871394cc4112466d46559705b235424359",
+      "receipt_path": "$.source_audit.source_set.effective_behavior_sources[5]"
+    },
+    {
+      "path": "evidence/behavior/functions/LessonDone/contracts/host-service-v1/module.c",
+      "sha256": "c611660dde4da7117c3232aa06e597871394cc4112466d46559705b235424359",
+      "size": 10678,
+      "receipt_path": "$.source_audit.source_pins[4]"
+    },
+    {
+      "path": "evidence/behavior/functions/SpiderScan/reviews/contract-v2/module.c",
+      "sha256": "2d2192f4ada76eb4676d174932847e3807c987f294b1fbbae9287ddcbbd81734",
+      "receipt_path": "$.source_audit.source_set.effective_behavior_sources[6]"
+    },
+    {
+      "path": "evidence/behavior/functions/SpiderScan/reviews/contract-v2/module.c",
+      "sha256": "2d2192f4ada76eb4676d174932847e3807c987f294b1fbbae9287ddcbbd81734",
+      "size": 15027,
+      "receipt_path": "$.source_audit.source_pins[5]"
+    },
+    {
+      "path": "evidence/behavior/functions/drawHistGraph/contracts/logical-text-v3/module.c",
+      "sha256": "764bcd8f1272b6f9655a1fe305cea71d98e95b9ad9c285f69dc944fbfe21d34c",
+      "receipt_path": "$.source_audit.source_set.effective_behavior_sources[7]"
+    },
+    {
+      "path": "evidence/behavior/functions/drawHistGraph/contracts/logical-text-v3/module.c",
+      "sha256": "764bcd8f1272b6f9655a1fe305cea71d98e95b9ad9c285f69dc944fbfe21d34c",
+      "size": 8132,
+      "receipt_path": "$.source_audit.source_pins[6]"
+    },
+    {
+      "path": "evidence/behavior/functions/f_0250_1018/contracts/logical-render-v2/module.c",
+      "sha256": "e41a4ab8c56c0d4923ace8b02027f2471feee049aabe0577588e206e930b4db2",
+      "receipt_path": "$.source_audit.source_set.effective_behavior_sources[8]"
+    },
+    {
+      "path": "evidence/behavior/functions/f_0250_1018/contracts/logical-render-v2/module.c",
+      "sha256": "e41a4ab8c56c0d4923ace8b02027f2471feee049aabe0577588e206e930b4db2",
+      "size": 65234,
+      "receipt_path": "$.source_audit.source_pins[7]"
+    },
+    {
+      "path": "evidence/behavior/functions/f_0250_129E/contracts/logical-render-v2/module.c",
+      "sha256": "e41a4ab8c56c0d4923ace8b02027f2471feee049aabe0577588e206e930b4db2",
+      "receipt_path": "$.source_audit.source_set.effective_behavior_sources[9]"
+    },
+    {
+      "path": "evidence/behavior/functions/f_0250_129E/contracts/logical-render-v2/module.c",
+      "sha256": "e41a4ab8c56c0d4923ace8b02027f2471feee049aabe0577588e206e930b4db2",
+      "size": 65234,
+      "receipt_path": "$.source_audit.source_pins[8]"
+    },
+    {
+      "path": "evidence/behavior/functions/f_171C_09CC/contracts/live-state-v2/module.c",
+      "sha256": "3d24904696b29c36b118479ecc50dd80b8d173f58a632a339df9391d08ea085b",
+      "receipt_path": "$.source_audit.source_set.effective_behavior_sources[10]"
+    },
+    {
+      "path": "evidence/behavior/functions/f_171C_09CC/contracts/live-state-v2/module.c",
+      "sha256": "3d24904696b29c36b118479ecc50dd80b8d173f58a632a339df9391d08ea085b",
+      "size": 26297,
+      "receipt_path": "$.source_audit.source_pins[9]"
+    },
+    {
+      "path": "evidence/behavior/functions/f_171C_0ADC/contracts/live-state-v2/module.c",
+      "sha256": "3d24904696b29c36b118479ecc50dd80b8d173f58a632a339df9391d08ea085b",
+      "receipt_path": "$.source_audit.source_set.effective_behavior_sources[11]"
+    },
+    {
+      "path": "evidence/behavior/functions/f_171C_0ADC/contracts/live-state-v2/module.c",
+      "sha256": "3d24904696b29c36b118479ecc50dd80b8d173f58a632a339df9391d08ea085b",
+      "size": 26297,
+      "receipt_path": "$.source_audit.source_pins[10]"
+    },
+    {
+      "path": "evidence/behavior/functions/f_171C_0CF4/contracts/live-state-v2/module.c",
+      "sha256": "3d24904696b29c36b118479ecc50dd80b8d173f58a632a339df9391d08ea085b",
+      "receipt_path": "$.source_audit.source_set.effective_behavior_sources[12]"
+    },
+    {
+      "path": "evidence/behavior/functions/f_171C_0CF4/contracts/live-state-v2/module.c",
+      "sha256": "3d24904696b29c36b118479ecc50dd80b8d173f58a632a339df9391d08ea085b",
+      "size": 26297,
+      "receipt_path": "$.source_audit.source_pins[11]"
+    },
+    {
+      "path": "evidence/behavior/functions/f_171C_0FBC/contracts/live-state-v2/module.c",
+      "sha256": "3d24904696b29c36b118479ecc50dd80b8d173f58a632a339df9391d08ea085b",
+      "receipt_path": "$.source_audit.source_set.effective_behavior_sources[13]"
+    },
+    {
+      "path": "evidence/behavior/functions/f_171C_0FBC/contracts/live-state-v2/module.c",
+      "sha256": "3d24904696b29c36b118479ecc50dd80b8d173f58a632a339df9391d08ea085b",
+      "size": 26297,
+      "receipt_path": "$.source_audit.source_pins[12]"
+    },
+    {
+      "path": "evidence/behavior/functions/f_1C62_0415/contracts/host-service-v1/module.c",
+      "sha256": "1a75da44054b48e33e02b0dc551e9e690d1b0797b5e2cfe2e3e6e26ad3b632d4",
+      "receipt_path": "$.source_audit.source_set.effective_behavior_sources[14]"
+    },
+    {
+      "path": "evidence/behavior/functions/f_1C62_0415/contracts/host-service-v1/module.c",
+      "sha256": "1a75da44054b48e33e02b0dc551e9e690d1b0797b5e2cfe2e3e6e26ad3b632d4",
+      "size": 9681,
+      "receipt_path": "$.source_audit.source_pins[13]"
+    },
+    {
+      "path": "evidence/behavior/functions/f_1E57_038E/contracts/window-valid-v1/module.c",
+      "sha256": "edfb01cec348d79243d7cc1630248045fa7790a321192f83d185298d0e9b67f6",
+      "receipt_path": "$.source_audit.source_set.effective_behavior_sources[15]"
+    },
+    {
+      "path": "evidence/behavior/functions/f_1E57_038E/contracts/window-valid-v1/module.c",
+      "sha256": "edfb01cec348d79243d7cc1630248045fa7790a321192f83d185298d0e9b67f6",
+      "size": 12563,
+      "receipt_path": "$.source_audit.source_pins[14]"
+    },
+    {
+      "path": "evidence/behavior/functions/f_20E8_0903/contracts/window-valid-v1/module.c",
+      "sha256": "e9f7805d6d353e1d3d432cd146073bae6bb8ec0be13b20e3543a3895e2a1ef49",
+      "receipt_path": "$.source_audit.source_set.effective_behavior_sources[16]"
+    },
+    {
+      "path": "evidence/behavior/functions/f_20E8_0903/contracts/window-valid-v1/module.c",
+      "sha256": "e9f7805d6d353e1d3d432cd146073bae6bb8ec0be13b20e3543a3895e2a1ef49",
+      "size": 11130,
+      "receipt_path": "$.source_audit.source_pins[15]"
+    },
+    {
+      "path": "evidence/behavior/functions/f_23E6_0000/revisions/ss-ds-20261002/module.c",
+      "sha256": "867a7f15631db0ef33079daedea99f99e7ddc75b57f04b15bafca036f14c5ee7",
+      "receipt_path": "$.source_audit.source_set.effective_behavior_sources[17]"
+    },
+    {
+      "path": "evidence/behavior/functions/f_23E6_0000/revisions/ss-ds-20261002/module.c",
+      "sha256": "867a7f15631db0ef33079daedea99f99e7ddc75b57f04b15bafca036f14c5ee7",
+      "size": 11487,
+      "receipt_path": "$.source_audit.source_pins[16]"
+    },
+    {
+      "path": "evidence/behavior/functions/f_2505_0453/contracts/window-valid-v1/module.c",
+      "sha256": "22a03f15e95fff376d27211426c4f9e3395e16e5decd92ef501fbfe3c1aba623",
+      "receipt_path": "$.source_audit.source_set.effective_behavior_sources[18]"
+    },
+    {
+      "path": "evidence/behavior/functions/f_2505_0453/contracts/window-valid-v1/module.c",
+      "sha256": "22a03f15e95fff376d27211426c4f9e3395e16e5decd92ef501fbfe3c1aba623",
+      "size": 10178,
+      "receipt_path": "$.source_audit.source_pins[17]"
+    },
+    {
+      "path": "evidence/behavior/functions/f_2815_0165/module.c",
+      "sha256": "8b6ca1b25908a00cdd6fea2212943f7345680945d25e1a59e0f1fb69352958bc",
+      "receipt_path": "$.source_audit.source_set.effective_behavior_sources[19]"
+    },
+    {
+      "path": "evidence/behavior/functions/f_2815_0165/module.c",
+      "sha256": "8b6ca1b25908a00cdd6fea2212943f7345680945d25e1a59e0f1fb69352958bc",
+      "size": 2181,
+      "receipt_path": "$.source_audit.source_pins[18]"
+    },
+    {
+      "path": "evidence/behavior/functions/f_284A_0138/module.c",
+      "sha256": "5d328bf943dd3b1dd8dd797ba7d63885777facf9ea5c194b6b222244bd937a35",
+      "receipt_path": "$.source_audit.source_set.effective_behavior_sources[20]"
+    },
+    {
+      "path": "evidence/behavior/functions/f_284A_0138/module.c",
+      "sha256": "5d328bf943dd3b1dd8dd797ba7d63885777facf9ea5c194b6b222244bd937a35",
+      "size": 6612,
+      "receipt_path": "$.source_audit.source_pins[19]"
+    },
+    {
+      "path": "evidence/behavior/functions/f_29D6_000A/module.c",
+      "sha256": "43b2d29dea982299edc3d3b173f9cb70bc88b76c1b9bc268c02a9a52c6a21626",
+      "receipt_path": "$.source_audit.source_set.effective_behavior_sources[21]"
+    },
+    {
+      "path": "evidence/behavior/functions/f_29D6_000A/module.c",
+      "sha256": "43b2d29dea982299edc3d3b173f9cb70bc88b76c1b9bc268c02a9a52c6a21626",
+      "size": 2919,
+      "receipt_path": "$.source_audit.source_pins[20]"
+    },
+    {
+      "path": "evidence/behavior/functions/o10_35F5_0384/contracts/host-service-v1/module.c",
+      "sha256": "4b9dda15dbea1c8fd204ed95d4cb6a909751a59d0517909e90c4626cad3c7888",
+      "receipt_path": "$.source_audit.source_set.effective_behavior_sources[22]"
+    },
+    {
+      "path": "evidence/behavior/functions/o10_35F5_0384/contracts/host-service-v1/module.c",
+      "sha256": "4b9dda15dbea1c8fd204ed95d4cb6a909751a59d0517909e90c4626cad3c7888",
+      "size": 10518,
+      "receipt_path": "$.source_audit.source_pins[21]"
+    },
+    {
+      "path": "evidence/behavior/functions/o15_384C_0239/contracts/actual-window-v2/module.c",
+      "sha256": "01b51eecedcd28e2213819572c846a9754039f4a527e6da5e56e57783398bdd5",
+      "receipt_path": "$.source_audit.source_set.effective_behavior_sources[23]"
+    },
+    {
+      "path": "evidence/behavior/functions/o15_384C_0239/contracts/actual-window-v2/module.c",
+      "sha256": "01b51eecedcd28e2213819572c846a9754039f4a527e6da5e56e57783398bdd5",
+      "size": 8116,
+      "receipt_path": "$.source_audit.source_pins[22]"
+    },
+    {
+      "path": "evidence/behavior/functions/o25_3BA4_1035/module.c",
+      "sha256": "5fc31bb8f45f9e7fa299efe9667af06b29d61ab82a6a2f38715f40d939bd3947",
+      "receipt_path": "$.source_audit.source_set.effective_behavior_sources[24]"
+    },
+    {
+      "path": "evidence/behavior/functions/o25_3BA4_1035/module.c",
+      "sha256": "5fc31bb8f45f9e7fa299efe9667af06b29d61ab82a6a2f38715f40d939bd3947",
+      "size": 25550,
+      "receipt_path": "$.source_audit.source_pins[23]"
+    },
+    {
+      "path": "evidence/behavior/functions/o25_3BA4_1686/module.c",
+      "sha256": "5fc31bb8f45f9e7fa299efe9667af06b29d61ab82a6a2f38715f40d939bd3947",
+      "receipt_path": "$.source_audit.source_set.effective_behavior_sources[25]"
+    },
+    {
+      "path": "evidence/behavior/functions/o25_3BA4_1686/module.c",
+      "sha256": "5fc31bb8f45f9e7fa299efe9667af06b29d61ab82a6a2f38715f40d939bd3947",
+      "size": 25550,
+      "receipt_path": "$.source_audit.source_pins[24]"
+    },
+    {
+      "path": "evidence/behavior/functions/win_DrawBitMap/contracts/logical-render-v2/module.c",
+      "sha256": "c4329ddb75629a235043d9da1eb11c7dd6f2cb3826fe392bfc8a27c98eeb97e1",
+      "receipt_path": "$.source_audit.source_set.effective_behavior_sources[26]"
+    },
+    {
+      "path": "evidence/behavior/functions/win_DrawBitMap/contracts/logical-render-v2/module.c",
+      "sha256": "c4329ddb75629a235043d9da1eb11c7dd6f2cb3826fe392bfc8a27c98eeb97e1",
+      "size": 6533,
+      "receipt_path": "$.source_audit.source_pins[25]"
+    },
+    {
+      "path": "evidence/behavior/functions/win_PrintStyleTextInRect/contracts/logical-text-v2/module.c",
+      "sha256": "5e8e5f39325914cc1a6f1b5de9e5c894818e47d68a7ce594b2a514c99b37a1ea",
+      "receipt_path": "$.source_audit.source_set.effective_behavior_sources[27]"
+    },
+    {
+      "path": "evidence/behavior/functions/win_PrintStyleTextInRect/contracts/logical-text-v2/module.c",
+      "sha256": "5e8e5f39325914cc1a6f1b5de9e5c894818e47d68a7ce594b2a514c99b37a1ea",
+      "size": 19699,
+      "receipt_path": "$.source_audit.source_pins[26]"
+    },
+    {
+      "path": "evidence/behavior/functions/win_UnlockWin/contracts/window-valid-v1/module.c",
+      "sha256": "23aa124a97a2f213fcf99d0f3e9790e2a35813ee5e62d338f7ef205c5b03acc0",
+      "receipt_path": "$.source_audit.source_set.effective_behavior_sources[28]"
+    },
+    {
+      "path": "evidence/behavior/functions/win_UnlockWin/contracts/window-valid-v1/module.c",
+      "sha256": "23aa124a97a2f213fcf99d0f3e9790e2a35813ee5e62d338f7ef205c5b03acc0",
+      "size": 4802,
+      "receipt_path": "$.source_audit.source_pins[27]"
+    },
+    {
+      "path": "layout/manifest.json",
+      "sha256": "025a0a9255d910cae4b122ab5a3f3fb40888bb456d7fe42158db7c9e622fcf50",
+      "size": 628980,
+      "receipt_path": "$.source_audit.registry_pins[0]"
+    },
+    {
+      "path": "layout/symbols.json",
+      "sha256": "0f5dd5b0a211945a97782cfccdb9bb31b0dfd07fcde5df4d4f9486b487eb0125",
+      "size": 800809,
+      "receipt_path": "$.source_audit.registry_pins[1]"
+    },
+    {
+      "path": "layout/toolchain.json",
+      "sha256": "c0bb71cd8b1f4a1a1f91299bd3b6148aa67b7a1d12c3c3946a229272593eb274",
+      "size": 39241,
+      "receipt_path": "$.runtime_fixture.input_pins[66]"
+    },
+    {
+      "path": "src/S00/m3126.asm",
+      "sha256": "be7a4a3b0fd9c56c47be50d20c60b0c2835002b7721bd913d36f8183be47ce5a",
+      "size": 18484,
+      "receipt_path": "$.source_audit.source_pins[28]"
+    },
+    {
+      "path": "src/S00/m31AD.asm",
+      "sha256": "5d2ad69ff4affb4be4242e82187065cc5e0b3502cc0cc3e00ad3802ccee2656e",
+      "size": 81450,
+      "receipt_path": "$.source_audit.source_pins[29]"
+    },
+    {
+      "path": "src/S00/m31AD_2AB4.asm",
+      "sha256": "3ef3979a3c35e9e36c4ddc48408bc4cac601ad26f4728e044012a489f831fd55",
+      "size": 40286,
+      "receipt_path": "$.source_audit.source_pins[30]"
+    },
+    {
+      "path": "src/S00/m35A6.asm",
+      "sha256": "0e563a69e0bc7a2ea11d7b963a9b0be7fbd3479e5dac1ed9985c47ffc533db73",
+      "size": 10105,
+      "receipt_path": "$.source_audit.source_pins[31]"
+    },
+    {
+      "path": "src/S01/m3126.asm",
+      "sha256": "ac99ea7821999d034e64201798d49dfaf64632f34e5f5dee428c9b6dec01a44a",
+      "size": 44403,
+      "receipt_path": "$.source_audit.source_pins[32]"
+    },
+    {
+      "path": "src/S01/m328E.asm",
+      "sha256": "610b108145bbf912a6c1b11b454eaf54a7c6053624db8b7de8f2c672dce34351",
+      "size": 4615,
+      "receipt_path": "$.source_audit.source_pins[33]"
+    },
+    {
+      "path": "src/S01/m32B5.asm",
+      "sha256": "b8db05f10b37941e1a9cfa60f5dc87180e6075576703f29fc7b7557273b17394",
+      "size": 5260,
+      "receipt_path": "$.source_audit.source_pins[34]"
+    },
+    {
+      "path": "src/S02/m3126.asm",
+      "sha256": "4291e4084ff26dcee75016b03c1b8d8412129a97ad00787b41ac567c16f5178b",
+      "size": 20400,
+      "receipt_path": "$.source_audit.source_pins[35]"
+    },
+    {
+      "path": "src/S03/m3126.asm",
+      "sha256": "b0b9d296f23b4f8a5b4706008b21b6ad96429636da11bf22ddb2126ee362f2ff",
+      "size": 35317,
+      "receipt_path": "$.source_audit.source_pins[36]"
+    },
+    {
+      "path": "src/S03/m3253.asm",
+      "sha256": "5f67726c1477bfb28285078c835fef3b8e1b9a7e1ad19ce34e225b76366b8165",
+      "size": 1544,
+      "receipt_path": "$.source_audit.source_pins[37]"
+    },
+    {
+      "path": "src/S03/m3258.asm",
+      "sha256": "45182b0559f08e760e025fb1066203150637414c29e221ba7e6e5cea0bd30034",
+      "size": 40471,
+      "receipt_path": "$.source_audit.source_pins[38]"
+    },
+    {
+      "path": "src/S04/m35F5.c",
+      "sha256": "65db48855f97c32600ff7527999a463019ba2884117f0c921b35e46d5d37d406",
+      "size": 11387,
+      "receipt_path": "$.source_audit.source_pins[39]"
+    },
+    {
+      "path": "src/S05/m35F5.c",
+      "sha256": "b1ab82dff86dc635ad10974bf70d31dc73d8755ba3fd1605f4f0573ef71f9e87",
+      "size": 8438,
+      "receipt_path": "$.source_audit.source_pins[40]"
+    },
+    {
+      "path": "src/S05/m3663.c",
+      "sha256": "cbf0c66bfc857ecb0a592f6ba5760e47055230b6e33d6115254506a5f09f912c",
+      "size": 4421,
+      "receipt_path": "$.source_audit.source_pins[41]"
+    },
+    {
+      "path": "src/S06/m35F5.c",
+      "sha256": "db35a96a492a6d36f6580222c17daca015aa9373b457b8758c751d3a70844a86",
+      "size": 43385,
+      "receipt_path": "$.source_audit.source_pins[42]"
+    },
+    {
+      "path": "src/S07/m35F5.c",
+      "sha256": "8fdb123e14dbdc0d7895d9a0c581a8c2cf399962de1141be0f09db4f904a1e4d",
+      "size": 5028,
+      "receipt_path": "$.source_audit.source_pins[43]"
+    },
+    {
+      "path": "src/S08/m35F5.c",
+      "sha256": "ef6eea405f6497cb5a6648ef258cc1afeab308f995ded573794465d831e3501f",
+      "size": 22166,
+      "receipt_path": "$.source_audit.source_pins[44]"
+    },
+    {
+      "path": "src/S09/m35F5.c",
+      "sha256": "028e1575990d5d45233f9102a0d2a060810349bd2f1297182c4af435ecbe912a",
+      "size": 42150,
+      "receipt_path": "$.source_audit.source_pins[45]"
+    },
+    {
+      "path": "src/S09/m36EE.c",
+      "sha256": "e48ce08404481d1fa8921b14f24b5e1c6ea8a5afc06f8854b903c9225e91ca53",
+      "size": 5625,
+      "receipt_path": "$.source_audit.source_pins[46]"
+    },
+    {
+      "path": "src/S10/m35F5.c",
+      "sha256": "69be1d6a9649e99102131c702e1920b6e84acc0c1b4cd737d2a047552f917ed5",
+      "size": 10707,
+      "receipt_path": "$.source_audit.source_pins[47]"
+    },
+    {
+      "path": "src/S11/m35F5.c",
+      "sha256": "39b6df453387ee12a16dd07313e12cbe29a598eb1441011c03c6d33cba576ec8",
+      "size": 4345,
+      "receipt_path": "$.source_audit.source_pins[48]"
+    },
+    {
+      "path": "src/S12/m384C.c",
+      "sha256": "584bf940832e3f8e975afdf85ed398fc82b6470e4a5c3ec46c1b4fcd15240002",
+      "size": 19819,
+      "receipt_path": "$.source_audit.source_pins[49]"
+    },
+    {
+      "path": "src/S13/m384C.c",
+      "sha256": "fb6785e93f5c2ea1110f64b5eb200d7f4e346263c43ac521c0434629d9f5839a",
+      "size": 24768,
+      "receipt_path": "$.source_audit.source_pins[50]"
+    },
+    {
+      "path": "src/S14/m384C.c",
+      "sha256": "245f8c01d5a330c571048b8cd1b134cf544394af84f7b502a153c73adbd91020",
+      "size": 17919,
+      "receipt_path": "$.source_audit.source_pins[51]"
+    },
+    {
+      "path": "src/S15/m384C.c",
+      "sha256": "01b51eecedcd28e2213819572c846a9754039f4a527e6da5e56e57783398bdd5",
+      "size": 8116,
+      "receipt_path": "$.source_audit.source_pins[52]"
+    },
+    {
+      "path": "src/S16/m384C.c",
+      "sha256": "9e3f4c34c560ca4d93346a43bf383f4e6cc3549ec6878b6194c974164d49a540",
+      "size": 8239,
+      "receipt_path": "$.source_audit.source_pins[53]"
+    },
+    {
+      "path": "src/S17/m384C.c",
+      "sha256": "028adfd17423f115a800315be32a2aaee0f7049e0b8c3211eebd9d65ab7a1351",
+      "size": 2302,
+      "receipt_path": "$.source_audit.source_pins[54]"
+    },
+    {
+      "path": "src/S18/m384C.c",
+      "sha256": "78a0f63aa99b2c2346e799b4e63f5d94256ab62b17f88d301bb986112aeed8d3",
+      "size": 12432,
+      "receipt_path": "$.source_audit.source_pins[55]"
+    },
+    {
+      "path": "src/S19/m384C.c",
+      "sha256": "fac1a097c3d992fed772002a87cb5a206050c67a3061e9e9168edc6032e1696b",
+      "size": 7190,
+      "receipt_path": "$.source_audit.source_pins[56]"
+    },
+    {
+      "path": "src/S20/m39C7.c",
+      "sha256": "a392244a7023099b7e9930ea45bf3989eb0bff37202889249795db8b5ae7d13a",
+      "size": 2164,
+      "receipt_path": "$.source_audit.source_pins[57]"
+    },
+    {
+      "path": "src/S20/m39F1.c",
+      "sha256": "6fd0a02991a29325f214049a8a8961aaee4bc65fbf760b296e63a6ac8f6fbe7b",
+      "size": 6627,
+      "receipt_path": "$.source_audit.source_pins[58]"
+    },
+    {
+      "path": "src/S21/m39C7.asm",
+      "sha256": "537d7b811340a7615c2d49e8eb5253953937bd1b037344ecbaba246c27f338bd",
+      "size": 9847,
+      "receipt_path": "$.source_audit.source_pins[59]"
+    },
+    {
+      "path": "src/S22/m39C7.c",
+      "sha256": "e9add4ebd445bd943f24a65764be2a79581f2fc26c349741fdfe8efae3b7030d",
+      "size": 31328,
+      "receipt_path": "$.source_audit.source_pins[60]"
+    },
+    {
+      "path": "src/S22/m3BBD.c",
+      "sha256": "22ed7dc5dbf4687dc3e971e6845bf28ce1934f771c81ae551dd30bc782753da2",
+      "size": 18576,
+      "receipt_path": "$.source_audit.source_pins[61]"
+    },
+    {
+      "path": "src/S23/m39C7.c",
+      "sha256": "4e2ff0a4d57f3159b2fb58ff64c77bb7740e2a415292cc7f2fe2e9fad095daf4",
+      "size": 20263,
+      "receipt_path": "$.source_audit.source_pins[62]"
+    },
+    {
+      "path": "src/S24/m39C7.c",
+      "sha256": "3de9615a57dbe35eacd073726b451478dc5b12396360501631d7553b6139e240",
+      "size": 8405,
+      "receipt_path": "$.source_audit.source_pins[63]"
+    },
+    {
+      "path": "src/S25/m39C7.c",
+      "sha256": "90a2cf12a9e527d1836099c92e5327d47342eac0a8403639d66471ecbc859ba6",
+      "size": 27923,
+      "receipt_path": "$.source_audit.source_pins[64]"
+    },
+    {
+      "path": "src/S25/m3BA4.c",
+      "sha256": "d2937c80fe0ef4f2bd30c4c3ebe344ce4f993870f08515e7436c60d30cacdec4",
+      "size": 25998,
+      "receipt_path": "$.source_audit.source_pins[65]"
+    },
+    {
+      "path": "src/S26/m39C7.c",
+      "sha256": "fb4938daa334a8e9f929b44a542392f47fc7c1a654ca87f303ee80528b34c4c4",
+      "size": 9163,
+      "receipt_path": "$.source_audit.source_pins[66]"
+    },
+    {
+      "path": "src/data/d3D57.c",
+      "sha256": "983251ad55176050efcdea33c62f0a34a93686474b0de4b2bdde6c6c808716f5",
+      "size": 22927,
+      "receipt_path": "$.source_audit.source_pins[67]"
+    },
+    {
+      "path": "src/data/d3E1D.c",
+      "sha256": "ab35eb29d30ac1bcf6390bf8a979c5d018f43f4cae45f9f0d9a1f00200611d05",
+      "size": 1492,
+      "receipt_path": "$.source_audit.source_pins[68]"
+    },
+    {
+      "path": "src/data/d55B3_0042.c",
+      "sha256": "c5953a15914be21c0df170962254d663da6a163a44a7db96b558e7612c0f3c3f",
+      "size": 589,
+      "receipt_path": "$.source_audit.source_pins[69]"
+    },
+    {
+      "path": "src/data/d55B3_0064.c",
+      "sha256": "1f66577e566a3b7b1507e47f27892279f17057a6db449f591223a465d5184cc3",
+      "size": 1245,
+      "receipt_path": "$.source_audit.source_pins[70]"
+    },
+    {
+      "path": "src/data/d55B3_00B8.c",
+      "sha256": "d04646a28691ff05ad93a50c5e7142405ab64932f875f2d2a4d10d04a4566f3d",
+      "size": 23095,
+      "receipt_path": "$.source_audit.source_pins[71]"
+    },
+    {
+      "path": "src/root/m0000.c",
+      "sha256": "d9ccffbb69c4fdcae55eef918bf420cff81ead6849f67298271c2844e04199f9",
+      "size": 5066,
+      "receipt_path": "$.source_audit.source_pins[72]"
+    },
+    {
+      "path": "src/root/m004A.c",
+      "sha256": "5456d454b2c16edb5eb6e3845976aaaa9d654a8833d3becbc3f7917bb978fc0a",
+      "size": 5462,
+      "receipt_path": "$.source_audit.source_pins[73]"
+    },
+    {
+      "path": "src/root/m0093.c",
+      "sha256": "dd5a593457dd72297e41dabef1e00e0be2fbca53d7586adc2c47812e960297af",
+      "size": 3129,
+      "receipt_path": "$.source_audit.source_pins[74]"
+    },
+    {
+      "path": "src/root/m00BA.c",
+      "sha256": "d72629d827e2bccd7557566b725f652862d2b1199f40390361179c61cc9ff5dc",
+      "size": 3562,
+      "receipt_path": "$.source_audit.source_pins[75]"
+    },
+    {
+      "path": "src/root/m00DE.c",
+      "sha256": "ed0dcfe0256211fd6a2e368deb6ab4eae5df29b582c52966e21fd7dd31c3720c",
+      "size": 119,
+      "receipt_path": "$.source_audit.source_pins[76]"
+    },
+    {
+      "path": "src/root/m00DF.c",
+      "sha256": "6615da596be7ecdcdf432bd280d53e5d57ac75674b06e71a831989904a1a6ce4",
+      "size": 1881,
+      "receipt_path": "$.source_audit.source_pins[77]"
+    },
+    {
+      "path": "src/root/m00F8.c",
+      "sha256": "4ee148ec616e199f61b671df89da8a21f1789c4177d3dbc7b76a478acb98184a",
+      "size": 7304,
+      "receipt_path": "$.source_audit.source_pins[78]"
+    },
+    {
+      "path": "src/root/m015B.c",
+      "sha256": "67f5c32deda5a49ab56243d50fba33647db7897c850706378fe2a8488277fa8f",
+      "size": 16241,
+      "receipt_path": "$.source_audit.source_pins[79]"
+    },
+    {
+      "path": "src/root/m0244.c",
+      "sha256": "4af5c48bc82c52e82cbde616bab7606fdd0b61e38d72d8e53bd0e13a1df02a1a",
+      "size": 802,
+      "receipt_path": "$.source_audit.source_pins[80]"
+    },
+    {
+      "path": "src/root/m0250.c",
+      "sha256": "bb8a325c543151e09cb173d2194844877805a9e1058d3b24362ff5a7cbd9f61b",
+      "size": 65517,
+      "receipt_path": "$.source_audit.source_pins[81]"
+    },
+    {
+      "path": "src/root/m075B.c",
+      "sha256": "2826d3b81cf0bcbf67b8453c255ec29bfeb3e381f67028eecb3aa1ef1cf83f56",
+      "size": 3481,
+      "receipt_path": "$.source_audit.source_pins[82]"
+    },
+    {
+      "path": "src/root/m078E.c",
+      "sha256": "45c68892dbbe580d9bd1142676959b7951288a37f9018f6f335c112a34eef22f",
+      "size": 624,
+      "receipt_path": "$.source_audit.source_pins[83]"
+    },
+    {
+      "path": "src/root/m0798.c",
+      "sha256": "ecf807dc3159f583f6ee3ea8a9f5422650a64bb557d4551e9c97b5dcc7b6a1b8",
+      "size": 14874,
+      "receipt_path": "$.source_audit.source_pins[84]"
+    },
+    {
+      "path": "src/root/m0894.c",
+      "sha256": "57b40ad0a9ee74c501fbcb0d521b86b8158f206f44f4867e960bcb800b5e7484",
+      "size": 32636,
+      "receipt_path": "$.source_audit.source_pins[85]"
+    },
+    {
+      "path": "src/root/m0AD9.c",
+      "sha256": "726585ecdb17d969b478bf5a55b726736614dbaa2d5f6477b8f6907c86f73d0b",
+      "size": 14288,
+      "receipt_path": "$.source_audit.source_pins[86]"
+    },
+    {
+      "path": "src/root/m0BE8.c",
+      "sha256": "42664e07331fbba4cc257f1e49e03dff5e93deddb764d33101ad0f454a9377d7",
+      "size": 14621,
+      "receipt_path": "$.source_audit.source_pins[87]"
+    },
+    {
+      "path": "src/root/m0CDB.c",
+      "sha256": "ae615fe56d075de2a59449b444709c79a847e4f4fb5806e58a50b5c59418c033",
+      "size": 15324,
+      "receipt_path": "$.source_audit.source_pins[88]"
+    },
+    {
+      "path": "src/root/m0DEF.c",
+      "sha256": "4325b570055de5daf8b96fe529d53f316b1a8a046daf845672672bd376d08142",
+      "size": 4635,
+      "receipt_path": "$.source_audit.source_pins[89]"
+    },
+    {
+      "path": "src/root/m0E2E.c",
+      "sha256": "9325b3426ef87771150912ce8f7cfaacc13380634505313417978b80974d10ed",
+      "size": 11858,
+      "receipt_path": "$.source_audit.source_pins[90]"
+    },
+    {
+      "path": "src/root/m0EC1.c",
+      "sha256": "516121f3568fffaa6a6f17a0a87da5696dbb1e4db02cbcfa93ad5ad4497454cc",
+      "size": 7100,
+      "receipt_path": "$.source_audit.source_pins[91]"
+    },
+    {
+      "path": "src/root/m0F3F.c",
+      "sha256": "f1c903c7f29e4fbb64fd82c2de5390c00df4f7cf35c9c836007dfa07c56612e8",
+      "size": 22794,
+      "receipt_path": "$.source_audit.source_pins[92]"
+    },
+    {
+      "path": "src/root/m10F7.c",
+      "sha256": "a4cc271d57a4a80dd255953554a886026297b0560453c4b2c7b302b5878fff88",
+      "size": 35707,
+      "receipt_path": "$.source_audit.source_pins[93]"
+    },
+    {
+      "path": "src/root/m1383.c",
+      "sha256": "489ee7d47f0ee27942bf6bea11fff7a8bbb90acd2c75fe4653d18a3e9efa5389",
+      "size": 15679,
+      "receipt_path": "$.source_audit.source_pins[94]"
+    },
+    {
+      "path": "src/root/m1496.c",
+      "sha256": "2b158a9367c89c7acf496efe4ff8490865fda03c5c88cfd70343264d1e2d15de",
+      "size": 4606,
+      "receipt_path": "$.source_audit.source_pins[95]"
+    },
+    {
+      "path": "src/root/m14EE.c",
+      "sha256": "a9947226c73c4502f00e2b319b3cd7abc7f2acbc8ca9ef72448b31e55c6bdb59",
+      "size": 11666,
+      "receipt_path": "$.source_audit.source_pins[96]"
+    },
+    {
+      "path": "src/root/m15D9.c",
+      "sha256": "c50a15ede6504d434d8bdea499a3e070ad2c9878de73a18ca3f7ead5bb880688",
+      "size": 1776,
+      "receipt_path": "$.source_audit.source_pins[97]"
+    },
+    {
+      "path": "src/root/m15F8.c",
+      "sha256": "d6d4daddab943ee3436ca0e9c8dbc866a9d67659f7448f3c307f858abe06b70a",
+      "size": 4897,
+      "receipt_path": "$.source_audit.source_pins[98]"
+    },
+    {
+      "path": "src/root/m1629.c",
+      "sha256": "d8675d63616c6d1cd475ae37cf293d72b70b357d1da75cfff5e9da94f0ecf561",
+      "size": 7455,
+      "receipt_path": "$.source_audit.source_pins[99]"
+    },
+    {
+      "path": "src/root/m1699.asm",
+      "sha256": "26d9a76b86a8854105e905a11b59b83f84cac821edec495900bd296b2914a5fb",
+      "size": 3920,
+      "receipt_path": "$.source_audit.source_pins[100]"
+    },
+    {
+      "path": "src/root/m16B5.asm",
+      "sha256": "a38a5b8c6c44549a99a501b7931279b3c597e516d79238216c27e479f399bc8a",
+      "size": 12680,
+      "receipt_path": "$.source_audit.source_pins[101]"
+    },
+    {
+      "path": "src/root/m171C.c",
+      "sha256": "31bd9caa243220db2bd1ba940ac8fae7f5d189b2ec95f1662918e9ca2160b10e",
+      "size": 26452,
+      "receipt_path": "$.source_audit.source_pins[102]"
+    },
+    {
+      "path": "src/root/m194D.asm",
+      "sha256": "8becfaafd57faf7e3bfb7e7150d4438bf8d78e1319aa90618f76a2be89175c0f",
+      "size": 2109,
+      "receipt_path": "$.source_audit.source_pins[103]"
+    },
+    {
+      "path": "src/root/m1959.asm",
+      "sha256": "73186753eaea7bcf17b6419094a21937299b1cba5be10a79e7a513794d408f56",
+      "size": 1271,
+      "receipt_path": "$.source_audit.source_pins[104]"
+    },
+    {
+      "path": "src/root/m195A.asm",
+      "sha256": "b634ca4916d811140f6a06b29f731bd323d49f5c50a76ef3afee38a7f23f6a81",
+      "size": 7693,
+      "receipt_path": "$.source_audit.source_pins[105]"
+    },
+    {
+      "path": "src/root/m1986.c",
+      "sha256": "c6278f0729f2c7e8c1b36c423c7c4ab081573b8c26a8604ab1ee78036365fc96",
+      "size": 3351,
+      "receipt_path": "$.source_audit.source_pins[106]"
+    },
+    {
+      "path": "src/root/m19A9.c",
+      "sha256": "552ca373a3a3721885915acd0a95e2126b8405b0c555f02d1833381331cda523",
+      "size": 4870,
+      "receipt_path": "$.source_audit.source_pins[107]"
+    },
+    {
+      "path": "src/root/m19DC.c",
+      "sha256": "90b0d3a7a6e171bb7395410af72ec10d3a094865c0395824cb744b9ba5a48c8c",
+      "size": 4995,
+      "receipt_path": "$.source_audit.source_pins[108]"
+    },
+    {
+      "path": "src/root/m1A28.c",
+      "sha256": "5db49039ef64717680153a4b9445554b58ab2abf8a3c3fd9d67e6573af58a740",
+      "size": 3200,
+      "receipt_path": "$.source_audit.source_pins[109]"
+    },
+    {
+      "path": "src/root/m1A53.c",
+      "sha256": "6bb066ea34c3721c90956a5b7e8849cb3c5916628a842c2684a8c0137154b698",
+      "size": 5159,
+      "receipt_path": "$.source_audit.source_pins[110]"
+    },
+    {
+      "path": "src/root/m1A96.c",
+      "sha256": "c57124b9d75ea77eb30158c09a71550862cf7081ceed625a2550a26a262bfdfa",
+      "size": 6836,
+      "receipt_path": "$.source_audit.source_pins[111]"
+    },
+    {
+      "path": "src/root/m1B05.asm",
+      "sha256": "3124ef4a45c572a54529bd5a57cd9225b40fdcafadd63c6b06cb748683cacca4",
+      "size": 5568,
+      "receipt_path": "$.source_audit.source_pins[112]"
+    },
+    {
+      "path": "src/root/m1B28.c",
+      "sha256": "9e1c31226eae71d8ab1cc1e2de68bfd7840ba678b02dd72a4ba7757e25543343",
+      "size": 2422,
+      "receipt_path": "$.source_audit.source_pins[113]"
+    },
+    {
+      "path": "src/root/m1B4E.asm",
+      "sha256": "a32d75d2d4ea36980b659d26e9ddd86bcde65d9e250ebac4cdc29c0e847c67a2",
+      "size": 8451,
+      "receipt_path": "$.source_audit.source_pins[114]"
+    },
+    {
+      "path": "src/root/m1B73.asm",
+      "sha256": "3097a6b03ff1d8bdfa7d573632d9905de88d754c8b1e047de4014c4f186cb848",
+      "size": 35010,
+      "receipt_path": "$.source_audit.source_pins[115]"
+    },
+    {
+      "path": "src/root/m1C62.c",
+      "sha256": "927309d2bf5019e17e58962c7da6a0d45298a2f3bf18fef0b0347cc4498ada6c",
+      "size": 9885,
+      "receipt_path": "$.source_audit.source_pins[116]"
+    },
+    {
+      "path": "src/root/m1CE2.c",
+      "sha256": "e5c2cb4b8dbe7af6d263072002a49e012b290c1082f0fc877b479728b75bacd3",
+      "size": 10210,
+      "receipt_path": "$.source_audit.source_pins[117]"
+    },
+    {
+      "path": "src/root/m1D8E.c",
+      "sha256": "afe9364f319633dd85c276bed18e848a605934156bfbb4fc276d304cd2ec2556",
+      "size": 10996,
+      "receipt_path": "$.source_audit.source_pins[118]"
+    },
+    {
+      "path": "src/root/m1E57.c",
+      "sha256": "812e8ec90bcf25c56adf073e753bf72f8f6a3bc108055e112c43f894e9d8d0c3",
+      "size": 12957,
+      "receipt_path": "$.source_audit.source_pins[119]"
+    },
+    {
+      "path": "src/root/m1F58.asm",
+      "sha256": "9f314c6e964bcb0955c1f3e976819bdbeddf048781c1bb257c30b2c0b25d49d2",
+      "size": 2852,
+      "receipt_path": "$.source_audit.source_pins[120]"
+    },
+    {
+      "path": "src/root/m1F66.asm",
+      "sha256": "b477ccb8ce87afd98692cbf32dc11d4f0bb9df1000e3a6334ffc5ab8076f33b3",
+      "size": 3748,
+      "receipt_path": "$.source_audit.source_pins[121]"
+    },
+    {
+      "path": "src/root/m1F80.c",
+      "sha256": "8832c414385ec5b69a1805c9271196e17cb0b91961ef4db0ca83aaff04a3bc34",
+      "size": 3313,
+      "receipt_path": "$.source_audit.source_pins[122]"
+    },
+    {
+      "path": "src/root/m1FAA.c",
+      "sha256": "e13a110be3cf3643419027a40a18002af231b6f9e159e89fc78f031a70929f66",
+      "size": 1532,
+      "receipt_path": "$.source_audit.source_pins[123]"
+    },
+    {
+      "path": "src/root/m1FBD.asm",
+      "sha256": "5e32f1c409a2fc20cb7bba200a3d2fd11e43edc0b7e2b8781ca91415a1a43417",
+      "size": 3414,
+      "receipt_path": "$.source_audit.source_pins[124]"
+    },
+    {
+      "path": "src/root/m1FD2.c",
+      "sha256": "f4359bdaf4cfc0fe326a54cf8a1eacb9ba3098b710bf2a561b3d0f48569bf6d8",
+      "size": 10086,
+      "receipt_path": "$.source_audit.source_pins[125]"
+    },
+    {
+      "path": "src/root/m205F.c",
+      "sha256": "225326bdd127dd3825035ae0fe8434e6677c0ee81203fee2e16bac0cf90fffc6",
+      "size": 6015,
+      "receipt_path": "$.source_audit.source_pins[126]"
+    },
+    {
+      "path": "src/root/m208F.c",
+      "sha256": "57fc64215f6ff681790e1afe2321f0348ee0cb8c3fbce066cef5f2dd5a18a72e",
+      "size": 6853,
+      "receipt_path": "$.source_audit.source_pins[127]"
+    },
+    {
+      "path": "src/root/m20E8.c",
+      "sha256": "c2ec2474010ef9821fd46cdf72e50f164c850446b6f4b051a91d474b53dd5ae2",
+      "size": 11458,
+      "receipt_path": "$.source_audit.source_pins[128]"
+    },
+    {
+      "path": "src/root/m218D.c",
+      "sha256": "3ccc2dedf58831dc2f853beb3133847e7f1f8c1883c445379fd5584b3255112e",
+      "size": 8739,
+      "receipt_path": "$.source_audit.source_pins[129]"
+    },
+    {
+      "path": "src/root/m21FA.c",
+      "sha256": "49dc5ef1b2e34263336fea6a4ab5e9992c6dc5fdca404c7efc2d2315b98f6b1f",
+      "size": 13758,
+      "receipt_path": "$.source_audit.source_pins[130]"
+    },
+    {
+      "path": "src/root/m22BF.c",
+      "sha256": "f5b617067cdc711593e94dbb725ae9ceaeb12b890f198af0d66c1973e15133a0",
+      "size": 18937,
+      "receipt_path": "$.source_audit.source_pins[131]"
+    },
+    {
+      "path": "src/root/m23AE.c",
+      "sha256": "531c983e47c1f39b6be2d94bb9fa0ccc1fa557ca9ec35542178a566f4d48076c",
+      "size": 5115,
+      "receipt_path": "$.source_audit.source_pins[132]"
+    },
+    {
+      "path": "src/root/m23E6.c",
+      "sha256": "6992614db2546bf039d6e9fb3be17df0a48607dfa3b3e3faba05ed5e5e938bec",
+      "size": 11709,
+      "receipt_path": "$.source_audit.source_pins[133]"
+    },
+    {
+      "path": "src/root/m24AB.c",
+      "sha256": "1d263c6e1f242981d7c3e37d839dc481dc75deed45d7d1bcaaa075cad124de7f",
+      "size": 5171,
+      "receipt_path": "$.source_audit.source_pins[134]"
+    },
+    {
+      "path": "src/root/m24FA.asm",
+      "sha256": "e538d0a8df93c3bd7ba3aabccc9a48faa6f643b7f8489c3c379c0d23ad9ac412",
+      "size": 2095,
+      "receipt_path": "$.source_audit.source_pins[135]"
+    },
+    {
+      "path": "src/root/m2505.c",
+      "sha256": "22a03f15e95fff376d27211426c4f9e3395e16e5decd92ef501fbfe3c1aba623",
+      "size": 10178,
+      "receipt_path": "$.source_audit.source_pins[136]"
+    },
+    {
+      "path": "src/root/m259D.c",
+      "sha256": "c4329ddb75629a235043d9da1eb11c7dd6f2cb3826fe392bfc8a27c98eeb97e1",
+      "size": 6533,
+      "receipt_path": "$.source_audit.source_pins[137]"
+    },
+    {
+      "path": "src/root/m25E7.c",
+      "sha256": "6ec2aa7322e88e2b3f1aabc4f18b749ec21867d950424b6fc7c42e35fbcc6530",
+      "size": 5610,
+      "receipt_path": "$.source_audit.source_pins[138]"
+    },
+    {
+      "path": "src/root/m2650.asm",
+      "sha256": "8b86e1416ac34675a6f638ed8a17d8e5e3092e155e314cebc807a75711a410d8",
+      "size": 2925,
+      "receipt_path": "$.source_audit.source_pins[139]"
+    },
+    {
+      "path": "src/root/m2662.c",
+      "sha256": "78971de2531570a3fb9c7ae28d888de90e092470c4414f654948e5a4f5e1f8be",
+      "size": 15289,
+      "receipt_path": "$.source_audit.source_pins[140]"
+    },
+    {
+      "path": "src/root/m277D.c",
+      "sha256": "6b7b7e4b468987b3ad3c869934df31e0e9325ab7e1771735d1e6113971047591",
+      "size": 606,
+      "receipt_path": "$.source_audit.source_pins[141]"
+    },
+    {
+      "path": "src/root/m277E.c",
+      "sha256": "4e928689c743f473c5a007bbbbb5287cdf8728d12e9cae5652b1cb55debf09ee",
+      "size": 10363,
+      "receipt_path": "$.source_audit.source_pins[142]"
+    },
+    {
+      "path": "src/root/m2815.c",
+      "sha256": "7ab16f1356fd280057eb37d2cff8ec2cfbcd9dfbdf8ace444b7e300f49255a38",
+      "size": 2257,
+      "receipt_path": "$.source_audit.source_pins[143]"
+    },
+    {
+      "path": "src/root/m283E.asm",
+      "sha256": "c7fc07dbb9830dfad40597e5fe377c4a62bc9d3551a80aef602dad3925daa0c5",
+      "size": 3638,
+      "receipt_path": "$.source_audit.source_pins[144]"
+    },
+    {
+      "path": "src/root/m284A.c",
+      "sha256": "bad7d3701a853ba2de166e4f875ba3043f33ca136b7d0dcff41db8e5459f9fa5",
+      "size": 6899,
+      "receipt_path": "$.source_audit.source_pins[145]"
+    },
+    {
+      "path": "src/root/m28BC.asm",
+      "sha256": "361f33c1d86502fef4d43559cb7f424e350eee3fe8a31881ed3c21b4d865f7a5",
+      "size": 38288,
+      "receipt_path": "$.source_audit.source_pins[146]"
+    },
+    {
+      "path": "src/root/m290D.c",
+      "sha256": "eaec23e8d37bd606616dc44208c7bbcf82ced13e24abe0362ef767c5e4cc4fed",
+      "size": 3201,
+      "receipt_path": "$.source_audit.source_pins[147]"
+    },
+    {
+      "path": "src/root/m293A.c",
+      "sha256": "601b4e4e9e8b9d128cc97cca3da7dcf0ad863dbb5c6df587c601530cbe4ec5e6",
+      "size": 3635,
+      "receipt_path": "$.source_audit.source_pins[148]"
+    },
+    {
+      "path": "src/root/m295C.c",
+      "sha256": "d392b6ce886cfd664a192194b79569bb6a0d4dea8b0bc029ffa9e32ff44add89",
+      "size": 6086,
+      "receipt_path": "$.source_audit.source_pins[149]"
+    },
+    {
+      "path": "src/root/m29B8.c",
+      "sha256": "630261c9ce29ece91f48e1fa0ec6c4bf1ce6270245f30d4825a66ed2a661878b",
+      "size": 594,
+      "receipt_path": "$.source_audit.source_pins[150]"
+    },
+    {
+      "path": "src/root/m29BF.asm",
+      "sha256": "bb40cbd77f380b56c0ab0c27d41f08b40f63deb3b8c14f53b15e3d526fa753ac",
+      "size": 8357,
+      "receipt_path": "$.source_audit.source_pins[151]"
+    },
+    {
+      "path": "src/root/m29D6.c",
+      "sha256": "55476efe4ad6d0cd853cd794f731ff8f33df921577e092fc3e80e9b322b4c388",
+      "size": 2848,
+      "receipt_path": "$.source_audit.source_pins[152]"
+    },
+    {
+      "path": "src/root/m29F0.c",
+      "sha256": "2787050f6b809856cde2d2a60fe120357a195041d396bb55caf7dd1b8084e302",
+      "size": 633,
+      "receipt_path": "$.source_audit.source_pins[153]"
+    },
+    {
+      "path": "src/root/m2CFB.asm",
+      "sha256": "d12d1eedb44a03197c55abf8701ee5f6dfc71a4472ab66d610ae68a3da79d981",
+      "size": 1755,
+      "receipt_path": "$.source_audit.source_pins[154]"
+    },
+    {
+      "path": "tools/compiler.py",
+      "sha256": "ef1d59a0fbe0e0780a6b8480e13d7d07859a14ae185c00a4420e1238a2ae35bb",
+      "size": 11765,
+      "receipt_path": "$.runtime_fixture.input_pins[194]"
+    },
+    {
+      "path": "tools/dos_source_bindings.py",
+      "sha256": "92efce5d2831ad21334dc2938c4f16ed46a24624b22311fe7b4d7d7444b80bfa",
+      "size": 80830,
+      "receipt_path": "$.runtime_fixture.input_pins[195]"
+    },
+    {
+      "path": "tools/omf.py",
+      "sha256": "951137ecbfaeb6e40fd5230c94398141da7ec7bdb7399d9cd74d46ded3045612",
+      "size": 29112,
+      "receipt_path": "$.runtime_fixture.input_pins[196]"
+    },
+    {
+      "path": "tools/source_only_dos.py",
+      "sha256": "91486be53cbb83f80a7dbb6d0973741448a61c9dab63288c280a2664e7f8fcf5",
+      "size": 59187,
+      "receipt_path": "$.runtime_fixture.input_pins[197]"
+    },
+    {
+      "path": "work/source-only-dos/ant-player-state-owner-probe.py",
+      "sha256": "7fbf17a8dc79c3240484dad4ac8c9ba45e91793c3604f1216d019a486b51cb22",
+      "size": 60428,
+      "receipt_path": "$.runtime_fixture.input_pins[198]"
+    },
+    {
+      "path": "work/source-only-dos/ant-player-state-owner-review-v1.md",
+      "sha256": "d1d08568c81509aeb4b30e596cfe0f3dbcae670be8ac4263943eefdf663e1a50",
+      "size": 7965,
+      "role": "owner_review"
+    },
+    {
+      "path": "work/source-only-dos/compile-and-intake-v1.json",
+      "sha256": "807be52f3c2d346250587395298944b2ef97cd7a04224dbb65afc4335958fbe5",
+      "size": 1165285,
+      "receipt_path": "$.source_audit.source_only_link_identity_evidence.report"
+    },
+    {
+      "path": "work/source-only-dos/corrections/DrawBalloons/module.c",
+      "sha256": "e222bc77fd4d83a777507a8ba73aa2c0ba6dd4d6fc4cb42db69cd83f6374c920",
+      "receipt_path": "$.source_audit.source_set.effective_behavior_sources[1]"
+    },
+    {
+      "path": "work/source-only-dos/corrections/DrawBalloons/module.c",
+      "sha256": "e222bc77fd4d83a777507a8ba73aa2c0ba6dd4d6fc4cb42db69cd83f6374c920",
+      "size": 65384,
+      "receipt_path": "$.source_audit.source_pins[155]"
+    },
+    {
+      "path": "work/source-only-dos/providers/ant-player-state-words.c",
+      "sha256": "df1e92794d57c8fa0a602102b4d18fa8d42c2d1d9be1c87b3047de5fa8da7006",
+      "size": 196,
+      "receipt_path": "$.runtime_fixture.input_pins[201]"
+    },
+    {
+      "path": "work/source-only-dos/static-completeness/DisplayCard.json",
+      "sha256": "a0be46440557ac606df28a451f62a228b3229a9ab04a10a56bbf374931ae841e",
+      "size": 51033,
+      "receipt_path": "$.source_audit.receipt_pins[1]"
+    },
+    {
+      "path": "work/source-only-dos/static-completeness/DrawBalloons.json",
+      "sha256": "7f86d2fe0e5b44300572c7115398d05c25799a3d03ba1e57dc0288242a8a91cc",
+      "size": 46914,
+      "receipt_path": "$.source_audit.receipt_pins[2]"
+    },
+    {
+      "path": "work/source-only-dos/static-completeness/DrawMapCursor.json",
+      "sha256": "d40aac74106f86a115d56f01ca04c3aa6c98b6a1fa18306705490f92fce2e41a",
+      "size": 40582,
+      "receipt_path": "$.source_audit.receipt_pins[3]"
+    },
+    {
+      "path": "work/source-only-dos/static-completeness/FindIndex.json",
+      "sha256": "d9f61367df4d79b2bd07e284140b8c9a34db80dda5b1d4bceac7f31ffd6ec5fc",
+      "size": 14600,
+      "receipt_path": "$.source_audit.receipt_pins[4]"
+    },
+    {
+      "path": "work/source-only-dos/static-completeness/InvertPatch.json",
+      "sha256": "8591af179c72f5f42457d64f7e84834c70381f7f00d3a164b165e480d88e214c",
+      "size": 41836,
+      "receipt_path": "$.source_audit.receipt_pins[5]"
+    },
+    {
+      "path": "work/source-only-dos/static-completeness/LessonDone.json",
+      "sha256": "4aae722737a8b4d52384a70ed51521158603871d4ef99139ba2a2b48d30046db",
+      "size": 41553,
+      "receipt_path": "$.source_audit.receipt_pins[6]"
+    },
+    {
+      "path": "work/source-only-dos/static-completeness/SpiderScan.json",
+      "sha256": "17e0a3640c87bae41616cdbe3683b1ccc95e92ba193af072a3ba7e91705b4c89",
+      "size": 22880,
+      "receipt_path": "$.source_audit.receipt_pins[7]"
+    },
+    {
+      "path": "work/source-only-dos/static-completeness/drawHistGraph.json",
+      "sha256": "c611f04ff64c8a0ce969762670506fe2682a6ad697367c63011a1c18dc18a3a9",
+      "size": 91762,
+      "receipt_path": "$.source_audit.receipt_pins[8]"
+    },
+    {
+      "path": "work/source-only-dos/static-completeness/f_0250_1018.json",
+      "sha256": "b5fe86ea28f66ddca56f5936d17d4313789399f18209e5ddf0d15df35be22682",
+      "size": 29049,
+      "receipt_path": "$.source_audit.receipt_pins[9]"
+    },
+    {
+      "path": "work/source-only-dos/static-completeness/f_0250_129E.json",
+      "sha256": "1af913343736d6389742e7a86117dfbfb621328287d0f1a0fa2b3d0bbdf21d80",
+      "size": 24394,
+      "receipt_path": "$.source_audit.receipt_pins[10]"
+    },
+    {
+      "path": "work/source-only-dos/static-completeness/f_171C_09CC.json",
+      "sha256": "86eec4845d02974e8b6764fe5884360cb7da5a796a5cbbfed78e8a423f8ed5a8",
+      "size": 16862,
+      "receipt_path": "$.source_audit.receipt_pins[11]"
+    },
+    {
+      "path": "work/source-only-dos/static-completeness/f_171C_0ADC.json",
+      "sha256": "67a87d50fad0aec23795a8d29481a12db52f94a7f9b2e2ea7b66cbd5fcfd70ee",
+      "size": 18079,
+      "receipt_path": "$.source_audit.receipt_pins[12]"
+    },
+    {
+      "path": "work/source-only-dos/static-completeness/f_171C_0CF4.json",
+      "sha256": "b860fa8984346175477cf27005777a6af6580baf6bd2bfdcb78fe2e849562627",
+      "size": 17802,
+      "receipt_path": "$.source_audit.receipt_pins[13]"
+    },
+    {
+      "path": "work/source-only-dos/static-completeness/f_171C_0FBC.json",
+      "sha256": "179a08d1234950861fab6d162ea5f0a2c8b7d332f27c10c03c118216686b6e80",
+      "size": 27289,
+      "receipt_path": "$.source_audit.receipt_pins[14]"
+    },
+    {
+      "path": "work/source-only-dos/static-completeness/f_1C62_0415.json",
+      "sha256": "b6494106b027cdc91f1f53c3afbf9d479853658f50bff8d975fda7eb6aa7de59",
+      "size": 33234,
+      "receipt_path": "$.source_audit.receipt_pins[15]"
+    },
+    {
+      "path": "work/source-only-dos/static-completeness/f_1E57_038E.json",
+      "sha256": "c7977122410f6b0e80cac5b0317d55d2f4a04130bee0bd0f98d5a5de51a8a333",
+      "size": 26879,
+      "receipt_path": "$.source_audit.receipt_pins[16]"
+    },
+    {
+      "path": "work/source-only-dos/static-completeness/f_20E8_0903.json",
+      "sha256": "01d26e670b47c645029865b37962a3b53a711b3c23ee6fd4f702345f20f00f8a",
+      "size": 15629,
+      "receipt_path": "$.source_audit.receipt_pins[17]"
+    },
+    {
+      "path": "work/source-only-dos/static-completeness/f_23E6_0000.json",
+      "sha256": "93340ca87d10bd2679b9905d882bd7f2867edc17a692c50a1450230cc9540508",
+      "size": 14839,
+      "receipt_path": "$.source_audit.receipt_pins[18]"
+    },
+    {
+      "path": "work/source-only-dos/static-completeness/f_2505_0453.json",
+      "sha256": "ff8acbd9390b6f8ede9aa5ec465b37fb624de5bb80233521fac60f9c404f5c73",
+      "size": 18683,
+      "receipt_path": "$.source_audit.receipt_pins[19]"
+    },
+    {
+      "path": "work/source-only-dos/static-completeness/f_2815_0165.json",
+      "sha256": "f681fde7fd5100f7e18463f4798df0697b805f73b9796e73bb5a19c9e0f765ad",
+      "size": 17249,
+      "receipt_path": "$.source_audit.receipt_pins[20]"
+    },
+    {
+      "path": "work/source-only-dos/static-completeness/f_284A_0138.json",
+      "sha256": "d8c9cb12172b487a83c5d84426d0bceecb4b0099aa1be9a98d1c39ed2fe5db0e",
+      "size": 12344,
+      "receipt_path": "$.source_audit.receipt_pins[21]"
+    },
+    {
+      "path": "work/source-only-dos/static-completeness/f_29D6_000A.json",
+      "sha256": "3ad0a71454669b67e468b75d9d907639a4c3f78e1db1d044dbf0172579580234",
+      "size": 14942,
+      "receipt_path": "$.source_audit.receipt_pins[22]"
+    },
+    {
+      "path": "work/source-only-dos/static-completeness/index-v1.json",
+      "sha256": "092b3a15aaaf99737020c0c00e2a4340514dda3f0e2ff45369d1fa0a316d9a3a",
+      "size": 6796,
+      "receipt_path": "$.source_audit.receipt_pins[0]"
+    },
+    {
+      "path": "work/source-only-dos/static-completeness/o10_35F5_0384.json",
+      "sha256": "beebdbfcfed76215fe7dbf69a61801b9142aef6686f7fdb3508e3342edb4a0c8",
+      "size": 60547,
+      "receipt_path": "$.source_audit.receipt_pins[23]"
+    },
+    {
+      "path": "work/source-only-dos/static-completeness/o15_384C_0239.json",
+      "sha256": "c00dadc8421083c9f2c33bb0b057b92e1c1a57867a5c7cc4e83bf9f9c5c6534a",
+      "size": 48386,
+      "receipt_path": "$.source_audit.receipt_pins[24]"
+    },
+    {
+      "path": "work/source-only-dos/static-completeness/o25_3BA4_1035.json",
+      "sha256": "8fdd8925b614cc419c7dc1ab25fb262be105b29977e9c6c33ec5d862e5888274",
+      "size": 13286,
+      "receipt_path": "$.source_audit.receipt_pins[25]"
+    },
+    {
+      "path": "work/source-only-dos/static-completeness/o25_3BA4_1686.json",
+      "sha256": "ef11dec31ab3193184b52c308f25c67c70a49d2cd44a823fd91fbd90ac96204a",
+      "size": 21440,
+      "receipt_path": "$.source_audit.receipt_pins[26]"
+    },
+    {
+      "path": "work/source-only-dos/static-completeness/win_DrawBitMap.json",
+      "sha256": "bb0288e993a44fedacb0ab657c2acb565133638098ca7c7e30eb56ec3d96937a",
+      "size": 34038,
+      "receipt_path": "$.source_audit.receipt_pins[27]"
+    },
+    {
+      "path": "work/source-only-dos/static-completeness/win_PrintStyleTextInRect.json",
+      "sha256": "ba6c9d3f06c6327a55273efa2b5181df3338c7af346d80b4c0cf327235e43ed0",
+      "size": 51131,
+      "receipt_path": "$.source_audit.receipt_pins[28]"
+    },
+    {
+      "path": "work/source-only-dos/static-completeness/win_UnlockWin.json",
+      "sha256": "078841cf92bdea90f52e733ff8587336f061d4045c784899553681bef8ca03a9",
+      "size": 26532,
+      "receipt_path": "$.source_audit.receipt_pins[29]"
+    }
+  ],
+  "input_pin_conflicts": [],
+  "provider_source": {
+    "path": "work/source-only-dos/providers/ant-player-state-words.c",
+    "sha256": "df1e92794d57c8fa0a602102b4d18fa8d42c2d1d9be1c87b3047de5fa8da7006",
+    "size": 196
+  },
+  "probe_source": {
+    "path": "work/source-only-dos/ant-player-state-owner-probe.py",
+    "sha256": "7fbf17a8dc79c3240484dad4ac8c9ba45e91793c3604f1216d019a486b51cb22",
+    "size": 60428
+  },
+  "owner_review": {
+    "path": "work/source-only-dos/ant-player-state-owner-review-v1.md",
+    "sha256": "d1d08568c81509aeb4b30e596cfe0f3dbcae670be8ac4263943eefdf663e1a50",
+    "size": 7965
+  },
+  "owner_report": {
+    "path": "build/workers/dos_ant_player_state_owners/run-v1/report.json",
+    "sha256": "fde40e1337278521d68f6698ef87b51db2c64c47ab5e1e0cbe1a0bb634266649",
+    "size": 473291,
+    "role": "selected_owner_report"
+  },
+  "lifecycle_and_safety_limits": "The durable family review and far-owner-admission-v15.md define the admitted scope. Storage admission does not close wider backing-array extents, partial/raw SaveRec loads, timer wrap, pointer resource counts/index domains or payload lifetime. Reset callers must be joined through code-address/identifier aliases; exact-name absence does not establish an unresolved reset route. Historical producing TU/order/padding is not claimed.",
+  "historical_owner_module_identity_claimed": false,
+  "root_admission_review": {
+    "path": "work/source-only-dos/far-owner-admission-v15.md",
+    "sha256": "a01cfe9b9e07818e07527bf953d02cec2aaf5ef172895903bcee2f50b1861b98",
+    "size": 4451
+  },
+  "local_experiment_artifacts_required_for_source_build": false
+}

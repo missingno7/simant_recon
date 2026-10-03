@@ -79,7 +79,7 @@
       "size": 26599
     },
     {
-      "path": "tools/dos_source_bindings.py",
+      "path": "work/source-only-dos/provenance/dos-source-bindings-v14.py",
       "sha256": "d2ace80d04ea065422e0a546725b867fb0f54219f1ab2b0c7815bf4f7369da34",
       "size": 69594
     },
@@ -639,5 +639,17 @@
       "inventory_extent_bytes": 24
     }
   ],
-  "claim_limit": "Initialized source-owned 16-byte mutable mapping provider for bounded g_2108 slice and S00 import only; no historical TU/COMDEF/order/fixed combined placement or closure of wider DGROUP address-layout debt."
+  "claim_limit": "Initialized source-owned 16-byte mutable mapping provider for bounded g_2108 slice and S00 import only; no historical TU/COMDEF/order/fixed combined placement or closure of wider DGROUP address-layout debt.",
+  "historical_instrument_snapshot": {
+    "reason": "Preserve the exact v14 instrument bytes and hash at a stable research-only path. The current compiler uses tools/dos_source_bindings.py; no runtime result is repinned or represented as a new run.",
+    "initialized_functions_unchanged_in_current_AST": [
+      "initialized_payload",
+      "initialized_publics",
+      "review_initialized_provider",
+      "verify_initialized_provider",
+      "require_initialized_and_indexed_contracts"
+    ],
+    "root_reviewed": true,
+    "compiler_or_linker_input": false
+  }
 }

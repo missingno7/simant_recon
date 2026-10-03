@@ -586,18 +586,12 @@ def review_provider_source(text, provider, symbols=None):
             '_fd_50F6_06A6': 0x06A6, '_fd_50F6_072E': 0x072E,
             '_fd_50F6_07BC': 0x07BC})
         addresses.update({'_fd_50F6_3958': 0x3958, '_db_handles': 0x3B50})
-        addresses.update({name: row[0] for name, row in V15_STORAGE_ANCHORS.items()})
         for name, size in spec[2]:
             anchor = symbols['data'][name[1:]]
             segment = 0x50F6 if provider['module'] in FAR_PROVIDER_MODULES else 0x55B3
             interiors = [(n, s['off'] - anchor['off']) for n, s in symbols['data'].items()
                          if s['seg'] == anchor['seg'] and anchor['off'] < s['off'] < anchor['off'] + size]
             expected_interiors = [('g_5AAE', 2)] if name == '_g_5AAC' else []
-            if name in V15_STORAGE_ANCHORS:
-                same_base = sorted(n for n, s in symbols['data'].items()
-                                   if (s['seg'], s['off']) == (anchor['seg'], anchor['off']))
-                if same_base != sorted(V15_STORAGE_ANCHORS[name][1]):
-                    raise ValueError('functional storage exact-base views changed')
             if ((anchor['seg'], anchor['off']) != (segment, addresses[name])
                     or interiors != expected_interiors):
                 raise ValueError('functional storage extent conflicts with reviewed registry')
@@ -687,33 +681,6 @@ def require_additional_storage_contracts(report, profile, tool):
         ('source-owned:spider-controls', 'spider_control_contract', 14, 2),
         ('source-owned:point-state', 'point_state_contract', 2),
         ('source-owned:database-record-state', 'database_record_state_contract', 4, 2)])
-
-
-def require_v15_storage_contracts(report, profile, tool):
-    """Keep the exact reviewed case matrix, including non-generic result classes.
-
-    Wider-owner and overrun diagnostics cannot replace rejected type/extent
-    controls. They stay recorded outside this gating matrix.
-    """
-    from pathlib import Path
-    components = [(str(Path(tool['directory']) / name), digest) for name, digest in tool['files'].items()]
-    components += [(r['path'], r['sha256']) for r in report['runtime_components']]
-    modules = {r['module'] for r in report['translation_units']}
-    for module, (key, required) in V15_STORAGE_CONTRACTS.items():
-        if module not in modules:
-            continue
-        contract = report.get(key, {})
-        cases = [r for r in contract.get('cases', []) if r['linker'] == profile]
-        identities = {runtime_component_path(p['path']): p['sha256'] for p in contract.get('inputs', [])}
-        if (contract.get('root_reviewed') is not True
-                or contract.get('all_required_checks_pass') is not True
-                or contract.get('communals') != provider_communals(module)
-                or contract.get('required_cases') != required
-                or len(cases) != len(required) or {r['case'] for r in cases} != set(required)
-                or not all(r['passed'] is True and r['expected'] == r['actual'] == required[r['case']]
-                           and not r.get('timed_out', False) for r in cases)
-                or any(identities.get(runtime_component_path(path)) != digest for path, digest in components)):
-            raise ValueError(f'{module} lacks the selected linker/MSC startup contract')
 
 
 def require_provider_contracts(report, profile, tool, specifications):
@@ -1115,120 +1082,3 @@ def verify_objects(original, generated, binding):
 # Closed initialized owners: source recipes, not an executable-byte provider.
 PROVIDER_SPECS['source-owned:graphics-formulas'] = ('GFXOWNER', None, (('_g_2100', 8), ('_mono_tail_masks', 8), ('_packed_tail_masks', 2)), '#define PLANE_BIT(phase) \\ ((unsigned char)(0x80u >> (phase))) unsigned char near g_2100[8] = { PLANE_BIT(0), PLANE_BIT(1), PLANE_BIT(2), PLANE_BIT(3), PLANE_BIT(4), PLANE_BIT(5), PLANE_BIT(6), PLANE_BIT(7) }; #define BYTE_TAIL_MASK(residue) \\ ((unsigned char)((residue) == 0 ? 0xFFu : \\ ((0xFFu << (8 - (residue))) & 0xFFu))) unsigned char near mono_tail_masks[8] = { BYTE_TAIL_MASK(0), BYTE_TAIL_MASK(1), BYTE_TAIL_MASK(2), BYTE_TAIL_MASK(3), BYTE_TAIL_MASK(4), BYTE_TAIL_MASK(5), BYTE_TAIL_MASK(6), BYTE_TAIL_MASK(7) }; #define PACKED_TAIL_MASK(is_odd) \\ ((unsigned char)((is_odd) ? (0xFFu & ~0x0Fu) : 0xFFu)) unsigned char near packed_tail_masks[2] = { PACKED_TAIL_MASK(0), PACKED_TAIL_MASK(1) };')
 PROVIDER_SPECS['source-owned:g2108-color-translation'] = ('G210808', None, (('_g_2108', 16),), 'unsigned char near g_2108[16] = { 0x00F, 0x00E, 0x00C, 4, 0x00D, 5, 1, 0x00B, 2, 0x00A, 6, 6, 7, 7, 8, 0 };')
-
-
-# Reviewed functional FAR_BSS owners. These definitions establish types and
-# extents, not historical communal order, padding or producing TUs.
-PROVIDER_SPECS['source-owned:ant-list-counts'] = ('ALCOUNT', None, (('_ListIndexA', 2), ('_ListIndexB', 2), ('_ListIndexR', 2)), 'int far ListIndexA; int far ListIndexB; int far ListIndexR;')
-PROVIDER_SPECS['source-owned:colony-simulation-words'] = ('COLWORD', None, (('_fd_50F6_0254', 2), ('_fd_50F6_02BE', 2), ('_fd_50F6_032C', 2), ('_fd_50F6_0352', 2), ('_fd_50F6_0356', 2), ('_fd_50F6_03E0', 2), ('_fd_50F6_03E2', 2), ('_fd_50F6_0400', 2)), 'int far fd_50F6_0254; int far fd_50F6_02BE; int far fd_50F6_032C; int far fd_50F6_0352; int far fd_50F6_0356; int far fd_50F6_03E0; int far fd_50F6_03E2; int far fd_50F6_0400;')
-PROVIDER_SPECS['source-owned:player-locations'] = ('PLOCOWN', None, (('_MeLocX', 2), ('_MeLocY', 2), ('_MePlane', 2), ('_RedLocX', 2), ('_RedLocY', 2), ('_RedPlane', 2)), 'int far MeLocX; int far MeLocY; int far MePlane; int far RedLocX; int far RedLocY; int far RedPlane;')
-PROVIDER_SPECS['source-owned:ant-counters-timer'] = ('ANTCTR', None, (('_BAntsEaten', 4), ('_RAntsEaten', 4), ('_fd_50F6_0620', 4)), 'long far BAntsEaten; long far RAntsEaten; long far fd_50F6_0620;')
-PROVIDER_SPECS['source-owned:language-string-list-pointers'] = ('LANGPTR', None, (('_AdviceStrs', 4), ('_fd_50F6_02BA', 4), ('_fd_50F6_0324', 4), ('_fd_50F6_0328', 4), ('_fd_50F6_0368', 4)), 'typedef char far * far *StrList; StrList far AdviceStrs; StrList far fd_50F6_02BA; StrList far fd_50F6_0324; StrList far fd_50F6_0328; StrList far fd_50F6_0368;')
-PROVIDER_SPECS['source-owned:dead-ant-coordinate-rings'] = ('DEADXY', None, (('_fd_50F6_037C', 100), ('_fd_50F6_0404', 100)), 'unsigned char far fd_50F6_037C[100]; unsigned char far fd_50F6_0404[100];')
-PROVIDER_SPECS['source-owned:ant-player-state'] = ('ANTSTATE', None, (('_FuzLocX', 2), ('_FuzLocY', 2), ('_MeHealth', 2), ('_ModeAuto', 2), ('_StrategicModeB', 2), ('_TilesDugR', 2)), 'int far FuzLocX; int far FuzLocY; int far MeHealth; int far ModeAuto; int far StrategicModeB; int far TilesDugR;')
-
-FAR_PROVIDER_MODULES.update({'source-owned:ant-counters-timer',
- 'source-owned:ant-list-counts',
- 'source-owned:ant-player-state',
- 'source-owned:colony-simulation-words',
- 'source-owned:dead-ant-coordinate-rings',
- 'source-owned:language-string-list-pointers',
- 'source-owned:player-locations'})
-
-V15_STORAGE_ANCHORS = {'_ListIndexA': (3434, ('ListIndexA', 'fd_50F6_0D6A')),
- '_ListIndexB': (3496, ('ListIndexB', 'fd_50F6_0DA8')),
- '_ListIndexR': (3754, ('ListIndexR', 'fd_50F6_0EAA')),
- '_fd_50F6_0254': (596, ('fd_50F6_0254',)),
- '_fd_50F6_02BE': (702, ('fd_50F6_02BE',)),
- '_fd_50F6_032C': (812, ('fd_50F6_032C',)),
- '_fd_50F6_0352': (850, ('fd_50F6_0352',)),
- '_fd_50F6_0356': (854, ('fd_50F6_0356',)),
- '_fd_50F6_03E0': (992, ('fd_50F6_03E0',)),
- '_fd_50F6_03E2': (994, ('fd_50F6_03E2',)),
- '_fd_50F6_0400': (1024, ('fd_50F6_0400',)),
- '_MeLocX': (1148, ('MeLocX', 'fd_50F6_047C')),
- '_MeLocY': (1162, ('MeLocY', 'fd_50F6_048A')),
- '_MePlane': (1164, ('MePlane', 'fd_50F6_048C')),
- '_RedLocX': (1168, ('RedLocX',)),
- '_RedLocY': (1172, ('RedLocY',)),
- '_RedPlane': (1176, ('RedPlane',)),
- '_BAntsEaten': (3872, ('BAntsEaten',)),
- '_RAntsEaten': (3968, ('RAntsEaten',)),
- '_fd_50F6_0620': (1568, ('fd_50F6_0620',)),
- '_AdviceStrs': (864, ('AdviceStrs',)),
- '_fd_50F6_02BA': (698, ('fd_50F6_02BA',)),
- '_fd_50F6_0324': (804, ('fd_50F6_0324',)),
- '_fd_50F6_0328': (808, ('fd_50F6_0328',)),
- '_fd_50F6_0368': (872, ('fd_50F6_0368',)),
- '_fd_50F6_037C': (892, ('fd_50F6_037C',)),
- '_fd_50F6_0404': (1028, ('fd_50F6_0404',)),
- '_FuzLocX': (554, ('FuzLocX',)),
- '_FuzLocY': (568, ('FuzLocY',)),
- '_MeHealth': (3960, ('MeHealth', 'fd_50F6_0F78')),
- '_ModeAuto': (888, ('ModeAuto', 'fd_50F6_0378')),
- '_StrategicModeB': (4244, ('StrategicModeB',)),
- '_TilesDugR': (562, ('TilesDugR', 'fd_50F6_0232'))}
-
-V15_STORAGE_CONTRACTS = {'source-owned:ant-list-counts': ('ant_list_counts_contract',
-                                  {'SaveRec_BYTE_exact_aliases': 'PASS',
-                                   'SaveRec_BYTE_wrong_ListIndexA_alias_plus2': 'FAIL',
-                                   'SaveRec_BYTE_wrong_ListIndexB_alias_plus2': 'FAIL',
-                                   'SaveRec_BYTE_wrong_ListIndexR_alias_plus2': 'FAIL',
-                                   'initialized_nonzero_owner_SaveRec_BYTE': 'FAIL',
-                                   'initialized_nonzero_owner_word': 'FAIL',
-                                   'typed_word_exact_aliases': 'PASS',
-                                   'typed_word_wrong_ListIndexA_alias_plus2': 'FAIL',
-                                   'typed_word_wrong_ListIndexB_alias_plus2': 'FAIL',
-                                   'typed_word_wrong_ListIndexR_alias_plus2': 'FAIL',
-                                   'unsigned_consumer_sign_contrast': 'FAIL',
-                                   'wrong_four_byte_extent_long_owner': 'FAIL'}),
- 'source-owned:colony-simulation-words': ('colony_simulation_words_contract',
-                                          {'initialized_nonzero_owner_rejected': 'FAIL_ZERO',
-                                           'one_byte_interior_SaveRec_view_rejected': 'FAIL_PTR',
-                                           'signed_word_and_exact_SaveRec_byte_views': 'PASS'}),
- 'source-owned:player-locations': ('player_locations_contract',
-                                   {'SaveRec_byte_exact_aliases': 'PASS',
-                                    'nonzero_initializer_rejected': 'FAIL_ZERO',
-                                    'typed_word_exact_aliases': 'PASS',
-                                    'unsigned_consumer_sign_contrast': 'UNSIGNED_CONTRAST',
-                                    'wrong_MeLocX_alias_plus2': 'FAIL_ALIAS',
-                                    'wrong_MeLocY_alias_plus2': 'FAIL_ALIAS',
-                                    'wrong_MePlane_alias_plus2': 'FAIL_ALIAS'}),
- 'source-owned:ant-counters-timer': ('ant_counters_timer_contract',
-                                     {'SaveRec_four_byte_view': 'PASS',
-                                      'initialized_owner_startup_negative': 'FAIL',
-                                      'signed_long_semantics': 'PASS',
-                                      'typed_owner_startup_roundtrip': 'PASS',
-                                      'unsigned_long_view_negative': 'FAIL',
-                                      'wrong_SaveRec_count': 'FAIL',
-                                      'wrong_SaveRec_size': 'FAIL',
-                                      'wrong_two_byte_consumer_view': 'FAIL'}),
- 'source-owned:language-string-list-pointers': ('language_string_list_pointers_contract',
-                                                {'independent_BYTE_pointer_storage_roundtrip': 'PASS',
-                                                 'initialized_nonzero_owner_BYTE_zero_contrast': 'FAIL',
-                                                 'initialized_nonzero_owner_typed_zero_contrast': 'FAIL',
-                                                 'typed_far_pointer_halves_zero_and_write': 'PASS',
-                                                 'wrong_eight_byte_array_extent_view': 'FAIL',
-                                                 'wrong_near_outer_pointer_view': 'FAIL',
-                                                 'wrong_near_row_pointer_view': 'FAIL',
-                                                 'wrong_pointer_depth_view': 'FAIL'}),
- 'source-owned:dead-ant-coordinate-rings': ('dead_ant_coordinate_rings_contract',
-                                            {'SaveRec_direct_byte_view': 'PASS',
-                                             'initialized_nonzero_owner': 'FAIL',
-                                             'typed_unsigned_byte_exact_base_and_extent': 'PASS',
-                                             'wrong_base_plus1': 'FAIL',
-                                             'wrong_extent_101': 'FAIL',
-                                             'wrong_signed_byte_view': 'FAIL'}),
- 'source-owned:ant-player-state': ('ant_player_state_words_contract',
-                                   {'SaveRec_BYTE_exact_aliases': 'PASS',
-                                    'SaveRec_BYTE_wrong_MeHealth_alias_plus2': 'FAIL',
-                                    'SaveRec_BYTE_wrong_ModeAuto_alias_plus2': 'FAIL',
-                                    'SaveRec_BYTE_wrong_TilesDugR_alias_plus2': 'FAIL',
-                                    'initialized_nonzero_owner_SaveRec_BYTE': 'FAIL',
-                                    'initialized_nonzero_owner_word': 'FAIL',
-                                    'typed_word_exact_aliases': 'PASS',
-                                    'typed_word_wrong_MeHealth_alias_plus2': 'FAIL',
-                                    'typed_word_wrong_ModeAuto_alias_plus2': 'FAIL',
-                                    'typed_word_wrong_TilesDugR_alias_plus2': 'FAIL',
-                                    'unsigned_consumer_sign_contrast': 'FAIL',
-                                    'wrong_four_byte_extent_long_owner': 'FAIL'})}

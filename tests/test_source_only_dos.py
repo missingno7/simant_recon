@@ -17,6 +17,76 @@ import source_only_dos as dos
 
 
 class SourceOnlyDosTests(unittest.TestCase):
+    def test_v15_far_owners_reject_type_extent_and_registry_view_guesses(self):
+        worker = ROOT / 'build/workers/source_only_dos_tests'
+        worker.mkdir(parents=True, exist_ok=True)
+        with tempfile.TemporaryDirectory(dir=worker) as directory:
+            report = {'inputs': [], 'generated_files': [], 'translation_units': [], 'semantic_substitutions': []}
+            _, symbols = dos.prepare(Path(directory), report)
+            rows = [r for r in report['translation_units'] if r['module'] in bindings.V15_STORAGE_CONTRACTS]
+            self.assertEqual(len(rows), 7)
+            self.assertEqual(sum(len(r['storage_provider']['communals']) for r in rows), 33)
+            for row in rows:
+                provider = row['storage_provider']
+                source = (ROOT / row['source']['path']).read_text(encoding='ascii')
+                def compile(text):
+                    result = compiler.compile_c(text, row['profile'], row['flags'], basename=row['basename'])
+                    self.assertTrue(result.ok, result.log)
+                    return OmfReader(communals=True).read(result.obj)
+                bindings.review_provider_source(source, provider, symbols)
+                self.assertEqual(bindings.verify_provider(compile(source), provider)['status'], 'PASS')
+                if 'StrList' in source:
+                    wrong_type = source.replace('char far * far *StrList', 'char far * near *StrList')
+                elif 'unsigned char' in source:
+                    wrong_type = source.replace('unsigned char', 'signed char', 1)
+                elif 'long far' in source:
+                    wrong_type = source.replace('long far', 'unsigned long far', 1)
+                else:
+                    wrong_type = source.replace('int far', 'unsigned int far', 1)
+                with self.assertRaises(ValueError):
+                    bindings.review_provider_source(wrong_type, provider, symbols)
+                # OMF does not encode source signedness/pointer depth. Source
+                # guards and object guards therefore prove different facts.
+                with self.assertRaises(ValueError):
+                    bindings.verify_provider(compile(source + '\nint far extra_owner;\n'), provider)
+                changed = json.loads(json.dumps(symbols))
+                name = provider['communals'][0]['name'][1:]
+                changed['data'][name]['off'] += 1
+                with self.assertRaises(ValueError):
+                    bindings.review_provider_source(source, provider, changed)
+                changed = json.loads(json.dumps(symbols))
+                changed['data']['invented_same_base_view'] = dict(changed['data'][name])
+                with self.assertRaises(ValueError):
+                    bindings.review_provider_source(source, provider, changed)
+
+    def test_v15_runtime_matrix_preserves_special_results_and_excludes_diagnostics(self):
+        worker = ROOT / 'build/workers/source_only_dos_tests'
+        worker.mkdir(parents=True, exist_ok=True)
+        with tempfile.TemporaryDirectory(dir=worker) as directory:
+            report = {'inputs': [], 'generated_files': [], 'translation_units': [], 'semantic_substitutions': []}
+            dos.prepare(Path(directory), report)
+            report['runtime_components'] = []
+            tc = compiler.toolchain()
+            for profile in ('rtlink400', 'rtlink610'):
+                bindings.require_v15_storage_contracts(report, profile, tc['linkers'][profile])
+            for module, (key, required) in bindings.V15_STORAGE_CONTRACTS.items():
+                for change in ('missing', 'duplicate', 'result', 'dictionary', 'tool'):
+                    wrong = json.loads(json.dumps(report))
+                    contract = wrong[key]
+                    index = next(i for i, r in enumerate(contract['cases']) if r['linker'] == 'rtlink400')
+                    if change == 'missing': contract['cases'].pop(index)
+                    elif change == 'duplicate': contract['cases'].append(dict(contract['cases'][index]))
+                    elif change == 'result': contract['cases'][index]['actual'] = 'UNREVIEWED'
+                    elif change == 'dictionary': contract['required_cases']['invented_positive'] = 'PASS'
+                    else:
+                        for identity in contract['inputs']: identity['sha256'] = '0' * 64
+                    with self.assertRaisesRegex(ValueError, 'startup contract'):
+                        bindings.require_v15_storage_contracts(wrong, 'rtlink400', tc['linkers']['rtlink400'])
+            self.assertNotIn('wrong_long_extent_width_control',
+                             bindings.V15_STORAGE_CONTRACTS['source-owned:player-locations'][1])
+            self.assertNotIn('wrong_two_byte_owner_extent_diagnostic',
+                             bindings.V15_STORAGE_CONTRACTS['source-owned:ant-counters-timer'][1])
+
     def test_initialized_recipes_reject_wrong_values_types_and_extra_live_contributions(self):
         worker = ROOT / 'build/workers/source_only_dos_tests'
         worker.mkdir(parents=True, exist_ok=True)

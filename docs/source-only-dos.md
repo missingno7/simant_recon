@@ -157,7 +157,7 @@ The bare ASM entry with an overlay owner fails under RTLink 4.00 and passes unde
 only the MSC startup and byte/word view contracts authorize the generated history
 owners. The link gate checks the selected linker and runtime hashes against those controls.
 
-The remaining 353 imports are data: 347 FAR_BSS names and six requiring
+The remaining 316 imports are data: 310 FAR_BSS names and six requiring
 storage/reachability investigation. None remains inside an accepted data
 placement. These are link ingredients
 missing from the source-built target, distinct from the historical 113-byte debt.
@@ -401,3 +401,25 @@ generated glyph-table label over accepted data. Whole-object checks preserve all
 other bytes and ordered fixups. The functional data report has 79 unresolved
 bytes; historical ownership still has 113. Variable clip copies, returning-Punt
 reachability and the wider layout audit remain separate link blockers.
+
+The [v15 FAR_BSS admission](../work/source-only-dos/far-owner-admission-v15.md)
+adds seven data-only providers for 33 source-owned objects (278 bytes): list
+counts, colony words, player/red locations, long counters/timer, language pointer
+slots, dead-ant coordinate rings and ant/player words. Every provider has fresh
+MSC object checks and both RTLink startup/view controls. The 112 required cases
+retain their raw result classes; two passing width measurements and two passing
+overrun diagnostics remain non-gating. Registry/address alias joins correct the
+earlier missing-reset and missing-definition conclusions.
+
+The current lane compiles 150 complete translation units (127 canonical and
+23 functional providers) and resolves 37 previously missing imports, including
+four exact-base aliases. Canonical source and historical debt remain unchanged.
+The independent linker still refuses the 316 remaining imports, 79 functional
+data-debt bytes and open layout cases. All 29 effective semantic bodies retain
+strict BEHAVIOR_EXACT_CONFIRMED receipts. This is compile/storage progress;
+functional-source-oracle-v1, DOS execution and human acceptance remain pending.
+
+The v14 color-map proof retains its exact historical tool hash through a stable
+research-only provenance snapshot. Its five initialized-data verification
+functions have identical ASTs in the current tool. Current builds use the live
+tool and recheck complete objects; no old runtime outcome is repinned as fresh.

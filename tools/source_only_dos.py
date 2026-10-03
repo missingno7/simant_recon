@@ -192,7 +192,14 @@ def prepare(out, report):
                      'spider-control-storage-bindings-v1.json', 'point-state-bindings-v1.json',
                      'database-record-state-bindings-v1.json',
                      'graphics-formula-bindings-v1.json', 'g2108-color-translation-bindings-v1.json',
-                     'driver-indexed-address-bindings-v1.json'):
+                     'driver-indexed-address-bindings-v1.json',
+                     'ant-list-counts-bindings-v1.json',
+                     'colony-simulation-words-bindings-v1.json',
+                     'player-locations-bindings-v1.json',
+                     'ant-counters-timer-bindings-v1.json',
+                     'language-string-list-pointers-bindings-v1.json',
+                     'dead-ant-coordinate-rings-bindings-v1.json',
+                     'ant-player-state-words-bindings-v1.json'):
         binding_raw, binding_pin = pin(ROOT / 'work/source-only-dos' / filename)
         binding_packet = json.loads(binding_raw)
         if binding_packet['category'] not in ('REVIEWED_SOURCE_LINK_BINDING', 'REVIEWED_SOURCE_STORAGE_BINDING'):
@@ -751,6 +758,7 @@ def link_units(out, report, profile):
     dos_source_bindings.require_callback_storage_contract(report, profile, tool)
     dos_source_bindings.require_near_storage_contracts(report, profile, tool)
     dos_source_bindings.require_additional_storage_contracts(report, profile, tool)
+    dos_source_bindings.require_v15_storage_contracts(report, profile, tool)
     dos_source_bindings.require_queue_startup_contract(report, profile, tool)
     dos_source_bindings.require_assembly_frame_contract(report, profile, tool)
     dos_source_bindings.require_dgroup_rect_frame_contract(report, profile, tool)

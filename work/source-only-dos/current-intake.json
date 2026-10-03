@@ -1,6 +1,6 @@
 {
   "schema": "simant-source-only-dos-compact-intake-v1",
-  "source_only_base_checkpoint": "022089d",
+  "source_only_base_checkpoint": "b1cfc35",
   "canonical_manifest": {
     "path": "layout/manifest.json",
     "sha256": "025a0a9255d910cae4b122ab5a3f3fb40888bb456d7fe42158db7c9e622fcf50",
@@ -8,18 +8,18 @@
   },
   "full_local_report": {
     "path": "build/source-only-dos/build-report.json",
-    "sha256": "0e7b9b4a8547a498d3e4404fe2bf72a32d79ab93b00e59703564dfa9ea288bbf",
-    "size": 4110108
+    "sha256": "c4ab8cd54eee54779a416604bdf55f832703b105fe4633f710cda6f515f59f94",
+    "size": 4756489
   },
   "reproduction": "python tools/source_only_dos.py --compile --link --reuse --jobs 4",
   "status": "INCOMPLETE",
   "errors": [
     "data dispositions still need source-built semantic resolution",
-    "353 unresolved source symbols",
+    "316 unresolved source symbols",
     "source address/layout contracts remain unresolved",
     "independent link refused: incomplete source/data preflight"
   ],
-  "compiled_translation_units": 143,
+  "compiled_translation_units": 150,
   "function_dispositions": {
     "EXACT_C": 1244,
     "GENUINE_ASM": 367,
@@ -39,12 +39,12 @@
   "runnable": "NOT_EXECUTED",
   "human_acceptance": "PENDING",
   "unresolved_data_disposition_bytes": 79,
-  "unresolved_symbols": 353,
+  "unresolved_symbols": 316,
   "unresolved_symbol_categories": {
-    "reviewed FAR_BSS definition and compatible consumer views": 347,
+    "reviewed FAR_BSS definition and compatible consumer views": 310,
     "source storage/reachability investigation": 6
   },
-  "symbolic_aliases": 184,
+  "symbolic_aliases": 188,
   "duplicate_publics": {},
   "layout_dependencies": [
     {
@@ -327,13 +327,53 @@
   },
   "g2108_color_translation_bindings": {
     "path": "work/source-only-dos/g2108-color-translation-bindings-v1.json",
-    "sha256": "e5006c94f765571a1a69ab935cc3a30d3bf8b19fe01dddfbd8e4adbba24e957f",
-    "size": 23155
+    "sha256": "de422b686299af43d9aaf89bd52e42bd5f5bc9dae8c663aaa55e3825cab8f745",
+    "size": 23751
   },
   "driver_indexed_address_bindings": {
     "path": "work/source-only-dos/driver-indexed-address-bindings-v1.json",
     "sha256": "adee59a9d8569a7334205ca71639c3b23925ec36238debe81a045d081a496dc3",
     "size": 17365
+  },
+  "far_owner_admission_v15": {
+    "path": "work/source-only-dos/far-owner-admission-v15.md",
+    "sha256": "a01cfe9b9e07818e07527bf953d02cec2aaf5ef172895903bcee2f50b1861b98",
+    "size": 4451
+  },
+  "ant_list_counts_bindings": {
+    "path": "work/source-only-dos/ant-list-counts-bindings-v1.json",
+    "sha256": "d7c2aef5239cc214dc23d7298057bef51511afacee47e4284ab5682b4e7567b0",
+    "size": 31523
+  },
+  "colony_simulation_words_bindings": {
+    "path": "work/source-only-dos/colony-simulation-words-bindings-v1.json",
+    "sha256": "88e942fcd5de80870402cb38f481e773634ed7e8c63170d769bd5a2dfd2ab50c",
+    "size": 33764
+  },
+  "player_locations_bindings": {
+    "path": "work/source-only-dos/player-locations-bindings-v1.json",
+    "sha256": "67e129270bf139c5ab976028f08c81001ff85819baaf1839526b28839b508bee",
+    "size": 5630
+  },
+  "ant_counters_timer_bindings": {
+    "path": "work/source-only-dos/ant-counters-timer-bindings-v1.json",
+    "sha256": "89bbc6e6a1bc68fbfdead7dc6b18aaf6394ec8a00cfeb41b8821bdcf54730797",
+    "size": 31459
+  },
+  "language_string_list_pointers_bindings": {
+    "path": "work/source-only-dos/language-string-list-pointers-bindings-v1.json",
+    "sha256": "e97a75476cad69fca7905daf26629808c37cc157e9bdf0144ca138698d664ddd",
+    "size": 32381
+  },
+  "dead_ant_coordinate_rings_bindings": {
+    "path": "work/source-only-dos/dead-ant-coordinate-rings-bindings-v1.json",
+    "sha256": "ac56b1ceb0eba282d060f4206cc2c7005ceddc8d775b0035a19c479b18248b6b",
+    "size": 31344
+  },
+  "ant_player_state_words_bindings": {
+    "path": "work/source-only-dos/ant-player-state-words-bindings-v1.json",
+    "sha256": "02f934cd076bece301c9c4bc59a276e83cefa266113631f5f45f492e82118bac",
+    "size": 32765
   },
   "historical_data_debt_bytes": 113,
   "resolved_initialized_data": [
@@ -2530,6 +2570,384 @@
       "fixups": [],
       "recipe": "accepted_source_literal_translation",
       "value_sha256": "245ed6cc9e5dddab0f416c29ce43af32e3bfe42ebb50c94bc10f8da6cbef33c2"
+    },
+    {
+      "module": "source-owned:ant-list-counts",
+      "source": {
+        "path": "work\\source-only-dos\\providers\\ant-list-counts.c",
+        "sha256": "da1689b4afbed9e65a06c858990d7a852c737456c06d00b1b6354e25f9a43786",
+        "size": 143
+      },
+      "object": {
+        "path": "build\\source-only-dos\\objects\\ALCOUNT.OBJ",
+        "sha256": "96603dd548293eb6ed2841b0241b4c5d5c6e53a9a7b9d80db85fbbf994e3fc15",
+        "size": 241
+      },
+      "status": "PASS",
+      "data_only": true,
+      "live_initialized_bytes": 0,
+      "code_bytes": 0,
+      "communals": [
+        {
+          "name": "_ListIndexA",
+          "kind": "far",
+          "length": 2,
+          "count": 2,
+          "element_size": 1
+        },
+        {
+          "name": "_ListIndexB",
+          "kind": "far",
+          "length": 2,
+          "count": 2,
+          "element_size": 1
+        },
+        {
+          "name": "_ListIndexR",
+          "kind": "far",
+          "length": 2,
+          "count": 2,
+          "element_size": 1
+        }
+      ],
+      "publics": [],
+      "fixups": []
+    },
+    {
+      "module": "source-owned:colony-simulation-words",
+      "source": {
+        "path": "work\\source-only-dos\\providers\\colony-simulation-words.c",
+        "sha256": "8b1b0eb6cee06eaf04490d4ca6e4199238116ebb1eb3efbf51ee05f2dc404c52",
+        "size": 424
+      },
+      "object": {
+        "path": "build\\source-only-dos\\objects\\COLWORD.OBJ",
+        "sha256": "b849b70d0c3fe5cdc77b9e5be7ba6e92509d43b3befc8bcc72b8340ca3287412",
+        "size": 337
+      },
+      "status": "PASS",
+      "data_only": true,
+      "live_initialized_bytes": 0,
+      "code_bytes": 0,
+      "communals": [
+        {
+          "name": "_fd_50F6_0254",
+          "kind": "far",
+          "length": 2,
+          "count": 2,
+          "element_size": 1
+        },
+        {
+          "name": "_fd_50F6_02BE",
+          "kind": "far",
+          "length": 2,
+          "count": 2,
+          "element_size": 1
+        },
+        {
+          "name": "_fd_50F6_032C",
+          "kind": "far",
+          "length": 2,
+          "count": 2,
+          "element_size": 1
+        },
+        {
+          "name": "_fd_50F6_0352",
+          "kind": "far",
+          "length": 2,
+          "count": 2,
+          "element_size": 1
+        },
+        {
+          "name": "_fd_50F6_0356",
+          "kind": "far",
+          "length": 2,
+          "count": 2,
+          "element_size": 1
+        },
+        {
+          "name": "_fd_50F6_03E0",
+          "kind": "far",
+          "length": 2,
+          "count": 2,
+          "element_size": 1
+        },
+        {
+          "name": "_fd_50F6_03E2",
+          "kind": "far",
+          "length": 2,
+          "count": 2,
+          "element_size": 1
+        },
+        {
+          "name": "_fd_50F6_0400",
+          "kind": "far",
+          "length": 2,
+          "count": 2,
+          "element_size": 1
+        }
+      ],
+      "publics": [],
+      "fixups": []
+    },
+    {
+      "module": "source-owned:player-locations",
+      "source": {
+        "path": "work\\source-only-dos\\providers\\player-location-words.c",
+        "sha256": "635d6474cfd36c6706136c8f495f2c6cefe404512a3c00f75470f5f2613a8244",
+        "size": 178
+      },
+      "object": {
+        "path": "build\\source-only-dos\\objects\\PLOCOWN.OBJ",
+        "sha256": "e76232fba889e1a14929448ff083cafc18e339b65b2d02bf88d26e299322d6fe",
+        "size": 270
+      },
+      "status": "PASS",
+      "data_only": true,
+      "live_initialized_bytes": 0,
+      "code_bytes": 0,
+      "communals": [
+        {
+          "name": "_MeLocX",
+          "kind": "far",
+          "length": 2,
+          "count": 2,
+          "element_size": 1
+        },
+        {
+          "name": "_MeLocY",
+          "kind": "far",
+          "length": 2,
+          "count": 2,
+          "element_size": 1
+        },
+        {
+          "name": "_MePlane",
+          "kind": "far",
+          "length": 2,
+          "count": 2,
+          "element_size": 1
+        },
+        {
+          "name": "_RedLocX",
+          "kind": "far",
+          "length": 2,
+          "count": 2,
+          "element_size": 1
+        },
+        {
+          "name": "_RedLocY",
+          "kind": "far",
+          "length": 2,
+          "count": 2,
+          "element_size": 1
+        },
+        {
+          "name": "_RedPlane",
+          "kind": "far",
+          "length": 2,
+          "count": 2,
+          "element_size": 1
+        }
+      ],
+      "publics": [],
+      "fixups": []
+    },
+    {
+      "module": "source-owned:ant-counters-timer",
+      "source": {
+        "path": "work\\source-only-dos\\providers\\ant-counters-timer.c",
+        "sha256": "ca5eb0d24c723abf646adcb03a1afacfc0d5000e13136ec7807a764c8e567a5f",
+        "size": 65
+      },
+      "object": {
+        "path": "build\\source-only-dos\\objects\\ANTCTR.OBJ",
+        "sha256": "43437dac0d0e922865d15f2d22e127ac68877c087f8972237838a70eabaec410",
+        "size": 241
+      },
+      "status": "PASS",
+      "data_only": true,
+      "live_initialized_bytes": 0,
+      "code_bytes": 0,
+      "communals": [
+        {
+          "name": "_BAntsEaten",
+          "kind": "far",
+          "length": 4,
+          "count": 4,
+          "element_size": 1
+        },
+        {
+          "name": "_RAntsEaten",
+          "kind": "far",
+          "length": 4,
+          "count": 4,
+          "element_size": 1
+        },
+        {
+          "name": "_fd_50F6_0620",
+          "kind": "far",
+          "length": 4,
+          "count": 4,
+          "element_size": 1
+        }
+      ],
+      "publics": [],
+      "fixups": []
+    },
+    {
+      "module": "source-owned:language-string-list-pointers",
+      "source": {
+        "path": "work\\source-only-dos\\providers\\language-string-list-pointers.c",
+        "sha256": "600fda1972caf3b4d5016818fc3ad8900f370a00a02f2a5d670e92bfe848d466",
+        "size": 167
+      },
+      "object": {
+        "path": "build\\source-only-dos\\objects\\LANGPTR.OBJ",
+        "sha256": "2d29053f0e6e2e8c8486fa4401d1ebaa07380392a2d899bef0efbe2020ee5a9b",
+        "size": 281
+      },
+      "status": "PASS",
+      "data_only": true,
+      "live_initialized_bytes": 0,
+      "code_bytes": 0,
+      "communals": [
+        {
+          "name": "_AdviceStrs",
+          "kind": "far",
+          "length": 4,
+          "count": 4,
+          "element_size": 1
+        },
+        {
+          "name": "_fd_50F6_02BA",
+          "kind": "far",
+          "length": 4,
+          "count": 4,
+          "element_size": 1
+        },
+        {
+          "name": "_fd_50F6_0324",
+          "kind": "far",
+          "length": 4,
+          "count": 4,
+          "element_size": 1
+        },
+        {
+          "name": "_fd_50F6_0328",
+          "kind": "far",
+          "length": 4,
+          "count": 4,
+          "element_size": 1
+        },
+        {
+          "name": "_fd_50F6_0368",
+          "kind": "far",
+          "length": 4,
+          "count": 4,
+          "element_size": 1
+        }
+      ],
+      "publics": [],
+      "fixups": []
+    },
+    {
+      "module": "source-owned:dead-ant-coordinate-rings",
+      "source": {
+        "path": "work\\source-only-dos\\providers\\dead-ant-coordinate-rings.c",
+        "sha256": "b957f894c7703593a14444cddc20091e1695e75e4696cfe8d4502135925b7cbe",
+        "size": 76
+      },
+      "object": {
+        "path": "build\\source-only-dos\\objects\\DEADXY.OBJ",
+        "sha256": "d983b13e8ebfcbec19dc4a391451f9df00e29b95bce8884e760633bf65550b2a",
+        "size": 227
+      },
+      "status": "PASS",
+      "data_only": true,
+      "live_initialized_bytes": 0,
+      "code_bytes": 0,
+      "communals": [
+        {
+          "name": "_fd_50F6_037C",
+          "kind": "far",
+          "length": 100,
+          "count": 100,
+          "element_size": 1
+        },
+        {
+          "name": "_fd_50F6_0404",
+          "kind": "far",
+          "length": 100,
+          "count": 100,
+          "element_size": 1
+        }
+      ],
+      "publics": [],
+      "fixups": []
+    },
+    {
+      "module": "source-owned:ant-player-state",
+      "source": {
+        "path": "work\\source-only-dos\\providers\\ant-player-state-words.c",
+        "sha256": "df1e92794d57c8fa0a602102b4d18fa8d42c2d1d9be1c87b3047de5fa8da7006",
+        "size": 196
+      },
+      "object": {
+        "path": "build\\source-only-dos\\objects\\ANTSTATE.OBJ",
+        "sha256": "4f01054fc9d5873f583dd3b97e45a49dadeceb85937af7cae0b5d80e50ba092e",
+        "size": 284
+      },
+      "status": "PASS",
+      "data_only": true,
+      "live_initialized_bytes": 0,
+      "code_bytes": 0,
+      "communals": [
+        {
+          "name": "_FuzLocX",
+          "kind": "far",
+          "length": 2,
+          "count": 2,
+          "element_size": 1
+        },
+        {
+          "name": "_FuzLocY",
+          "kind": "far",
+          "length": 2,
+          "count": 2,
+          "element_size": 1
+        },
+        {
+          "name": "_MeHealth",
+          "kind": "far",
+          "length": 2,
+          "count": 2,
+          "element_size": 1
+        },
+        {
+          "name": "_ModeAuto",
+          "kind": "far",
+          "length": 2,
+          "count": 2,
+          "element_size": 1
+        },
+        {
+          "name": "_StrategicModeB",
+          "kind": "far",
+          "length": 2,
+          "count": 2,
+          "element_size": 1
+        },
+        {
+          "name": "_TilesDugR",
+          "kind": "far",
+          "length": 2,
+          "count": 2,
+          "element_size": 1
+        }
+      ],
+      "publics": [],
+      "fixups": []
     }
   ],
   "reviewed_data_aliases": [
@@ -7014,8 +7432,8 @@
   "tool_inputs": [
     {
       "path": "tools\\source_only_dos.py",
-      "sha256": "f3a0fad9cdafa30cb22071e358d0b59ab0bf04a2e06cd05f7170ebe248242470",
-      "size": 58668
+      "sha256": "91486be53cbb83f80a7dbb6d0973741448a61c9dab63288c280a2664e7f8fcf5",
+      "size": 59187
     },
     {
       "path": "tools\\compiler.py",
@@ -7034,8 +7452,8 @@
     },
     {
       "path": "tools\\dos_source_bindings.py",
-      "sha256": "d2ace80d04ea065422e0a546725b867fb0f54219f1ab2b0c7815bf4f7369da34",
-      "size": 69594
+      "sha256": "92efce5d2831ad21334dc2938c4f16ed46a24624b22311fe7b4d7d7444b80bfa",
+      "size": 80830
     },
     {
       "path": "tools\\farbss.py",
@@ -7045,22 +7463,22 @@
   ],
   "validation_logs": [
     {
-      "path": "build/source-only-dos-run-v14.log",
-      "sha256": "c5570fcf62ab99bdf2a094e0f5ac56ce3066bf19907c5a5402298b951f71be4c",
-      "size": 4415
+      "path": "build/source-only-dos-run-v15.log",
+      "sha256": "6f25e4c0d28067d3902026ca2f34669bb125a5ce7892e46cb2cbbe075e92bf9e",
+      "size": 4781
     },
     {
-      "path": "build/source-only-dos-tests-v14.log",
-      "sha256": "b9c93a71a207808c64348704d91fd39553bcb30bd9926f326817aece626ccca7",
-      "size": 664
+      "path": "build/source-only-dos-tests-v15.log",
+      "sha256": "345d8e78033a5dbb1434362b0398c0894c18d62f4bf039d94ffb44771145660b",
+      "size": 29715
     },
     {
-      "path": "build/source-only-dos-validation-v14.log",
+      "path": "build/source-only-dos-validation-v15.log",
       "sha256": "786ea0446e31ee04f020b58675893cfa939f724dddae99d859a181b6602b4ad5",
       "size": 4736
     }
   ],
   "historical_validation": "PASS",
-  "source_only_tests": "37 targeted tests included in 351 repository tests PASS (2 skips)",
+  "source_only_tests": "39 targeted tests included in 353 repository tests PASS (2 skips)",
   "claim_limit": "Compile and symbolic binding proofs only; no complete link, runtime equivalence or human acceptance. Full inventories are reproducible build output."
 }

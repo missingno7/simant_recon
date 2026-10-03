@@ -1,0 +1,202 @@
+{
+  "schema": "simant-dos-v15-source-storage-binding-candidate-v1",
+  "category": "REVIEWED_SOURCE_STORAGE_BINDING",
+  "status": "REVIEWED_SOURCE_STORAGE_BINDING",
+  "root_reviewed": true,
+  "bindings": [],
+  "providers": [
+    {
+      "module": "source-owned:player-locations",
+      "basename": "PLOCOWN",
+      "owner": null,
+      "profile": "msc600ax",
+      "flags": [
+        "/AL",
+        "/Os",
+        "/Gs"
+      ],
+      "source": {
+        "path": "work/source-only-dos/providers/player-location-words.c",
+        "sha256": "635d6474cfd36c6706136c8f495f2c6cefe404512a3c00f75470f5f2613a8244",
+        "size": 178
+      },
+      "communals": [
+        {
+          "name": "_MeLocX",
+          "kind": "far",
+          "length": 2,
+          "count": 2,
+          "element_size": 1
+        },
+        {
+          "name": "_MeLocY",
+          "kind": "far",
+          "length": 2,
+          "count": 2,
+          "element_size": 1
+        },
+        {
+          "name": "_MePlane",
+          "kind": "far",
+          "length": 2,
+          "count": 2,
+          "element_size": 1
+        },
+        {
+          "name": "_RedLocX",
+          "kind": "far",
+          "length": 2,
+          "count": 2,
+          "element_size": 1
+        },
+        {
+          "name": "_RedLocY",
+          "kind": "far",
+          "length": 2,
+          "count": 2,
+          "element_size": 1
+        },
+        {
+          "name": "_RedPlane",
+          "kind": "far",
+          "length": 2,
+          "count": 2,
+          "element_size": 1
+        }
+      ],
+      "source_type": "signed int far scalar (16-bit int on msc600ax)",
+      "effective_flags_in_probe": [
+        "/AL",
+        "/Os",
+        "/Gs",
+        "/EM"
+      ],
+      "source_provider_pin_matches_report": true,
+      "report_provider_pin": {
+        "path": "work\\source-only-dos\\providers\\player-location-words.c",
+        "sha256": "635d6474cfd36c6706136c8f495f2c6cefe404512a3c00f75470f5f2613a8244"
+      },
+      "historical_owner_module_claimed": false
+    }
+  ],
+  "runtime_contract": {
+    "path": "work/source-only-dos/player-locations-contract-v1.json",
+    "sha256": "5e0c384ca39a0a990d2e25e90f2e7365df85836d0c4ea1040f0520eee0d74a5b",
+    "size": 50804
+  },
+  "runtime_contract_key": "player_locations_contract",
+  "review_sources": [
+    {
+      "path": "work/source-only-dos/providers/player-location-words.c",
+      "sha256": "635d6474cfd36c6706136c8f495f2c6cefe404512a3c00f75470f5f2613a8244",
+      "size": 178
+    },
+    {
+      "path": "work/source-only-dos/player-location-owner-review-v1.md",
+      "sha256": "8e5c4e1a5143db044a4c23a418fa8dd9258eb906c8b9758d0eeb33b0bc8c53fc",
+      "size": 5300
+    },
+    {
+      "path": "work/source-only-dos/player-location-owner-probe.py",
+      "sha256": "2256481c964d94c4ab577ec01d8120536d7ecca993d3d8001af5443b250a10cf",
+      "size": 21520
+    },
+    {
+      "path": "layout/manifest.json",
+      "sha256": "025a0a9255d910cae4b122ab5a3f3fb40888bb456d7fe42158db7c9e622fcf50"
+    },
+    {
+      "path": "work/source-only-dos/far-owner-admission-v15.md",
+      "sha256": "a01cfe9b9e07818e07527bf953d02cec2aaf5ef172895903bcee2f50b1861b98",
+      "size": 4451
+    }
+  ],
+  "registry_address_proposal": {
+    "_MeLocX": {
+      "segment": 20726,
+      "offset": 1148,
+      "length": 2,
+      "same_base_names": [
+        "MeLocX",
+        "fd_50F6_047C"
+      ],
+      "interior_names": [],
+      "exact_end_boundary_names": [
+        "fd_50F6_047E"
+      ]
+    },
+    "_MeLocY": {
+      "segment": 20726,
+      "offset": 1162,
+      "length": 2,
+      "same_base_names": [
+        "MeLocY",
+        "fd_50F6_048A"
+      ],
+      "interior_names": [],
+      "exact_end_boundary_names": [
+        "MePlane",
+        "fd_50F6_048C"
+      ]
+    },
+    "_MePlane": {
+      "segment": 20726,
+      "offset": 1164,
+      "length": 2,
+      "same_base_names": [
+        "MePlane",
+        "fd_50F6_048C"
+      ],
+      "interior_names": [],
+      "exact_end_boundary_names": [
+        "fd_50F6_048E"
+      ]
+    },
+    "_RedLocX": {
+      "segment": 20726,
+      "offset": 1168,
+      "length": 2,
+      "same_base_names": [
+        "RedLocX"
+      ],
+      "interior_names": [],
+      "exact_end_boundary_names": [
+        "fd_50F6_0492"
+      ]
+    },
+    "_RedLocY": {
+      "segment": 20726,
+      "offset": 1172,
+      "length": 2,
+      "same_base_names": [
+        "RedLocY"
+      ],
+      "interior_names": [],
+      "exact_end_boundary_names": [
+        "fd_50F6_0496"
+      ]
+    },
+    "_RedPlane": {
+      "segment": 20726,
+      "offset": 1176,
+      "length": 2,
+      "same_base_names": [
+        "RedPlane"
+      ],
+      "interior_names": [],
+      "exact_end_boundary_names": [
+        "fd_50F6_049A"
+      ]
+    }
+  },
+  "input_pin_count": 153,
+  "input_pin_conflicts": [],
+  "historical_COMDEF_module_order_padding_or_original_values_claimed": false,
+  "selection_caveat": "The durable family review and far-owner-admission-v15.md define the admitted scope. Storage admission does not close wider backing-array extents, partial/raw SaveRec loads, timer wrap, pointer resource counts/index domains or payload lifetime. Reset callers must be joined through code-address/identifier aliases; exact-name absence does not establish an unresolved reset route. Historical producing TU/order/padding is not claimed.",
+  "research_report_identity": {
+    "path": "build/workers/dos_player_location_owners/runtime-v2/player-location-runtime-probe-v1.json",
+    "sha256": "47cd7c42e332c29ef12dbfdcbf65dfad4d8dc93d03c34712aae7ca094335b1e5",
+    "size": 69213,
+    "role": "selected_owner_report"
+  }
+}

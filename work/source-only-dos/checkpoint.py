@@ -60,7 +60,7 @@ def main():
     report = json.loads(report_path.read_text())
     if any(report['original_exe_bytes_used'].values()) or report['denied_oracle_reads']:
         raise ValueError('source-only invariant failed')
-    if len(report['translation_units']) != 143 or any('object' not in r for r in report['translation_units']):
+    if len(report['translation_units']) != 150 or any('object' not in r for r in report['translation_units']):
         raise ValueError('not all TUs compiled')
     bound = [r for r in report['translation_units'] if r.get('source_binding')]
     if any(r.get('binding_verification', {}).get('status') != 'PASS' for r in bound):
@@ -72,19 +72,19 @@ def main():
             or report['function_dispositions']['CONTRACT_EQUIVALENT']
             or report['function_dispositions']['UNRESOLVED']):
         raise ValueError('strict static function audit is incomplete')
-    logs = [pin(ROOT / p) for p in ('build/source-only-dos-run-v14.log',
-        'build/source-only-dos-tests-v14.log', 'build/source-only-dos-validation-v14.log')]
+    logs = [pin(ROOT / p) for p in ('build/source-only-dos-run-v15.log',
+        'build/source-only-dos-tests-v15.log', 'build/source-only-dos-validation-v15.log')]
     test_log = (ROOT / logs[1]['path']).read_text().strip()
-    if not test_log.splitlines()[-1].startswith('OK'):
+    if not re.search(r'(?m)^OK(?: \(skipped=2\))?$', test_log):
         raise ValueError('source-only tests did not finish successfully')
     test_counts = [int(n) for n in re.findall(r'Ran (\d+) tests', test_log)]
-    if test_counts != [37, 314] or len(re.findall(r'(?m)^OK(?: \(skipped=2\))?$', test_log)) != 2:
+    if test_counts != [39, 314] or len(re.findall(r'(?m)^OK(?: \(skipped=2\))?$', test_log)) != 2:
         raise ValueError('split repository test boundary is incomplete')
     test_count = sum(test_counts)
     if not (ROOT / logs[2]['path']).read_text().strip().endswith('VALIDATION PASS'):
         raise ValueError('historical validation did not finish successfully')
     receipt = {'schema': 'simant-source-only-dos-compact-intake-v1',
-        'source_only_base_checkpoint': '022089d',
+        'source_only_base_checkpoint': 'b1cfc35',
         'canonical_manifest': pin(ROOT / 'layout/manifest.json'),
         'full_local_report': pin(report_path),
         'reproduction': 'python tools/source_only_dos.py --compile --link --reuse --jobs 4',
@@ -138,6 +138,14 @@ def main():
         'graphics_formula_bindings': pin(OUT / 'graphics-formula-bindings-v1.json'),
         'g2108_color_translation_bindings': pin(OUT / 'g2108-color-translation-bindings-v1.json'),
         'driver_indexed_address_bindings': pin(OUT / 'driver-indexed-address-bindings-v1.json'),
+        'far_owner_admission_v15': pin(OUT / 'far-owner-admission-v15.md'),
+        'ant_list_counts_bindings': pin(OUT / 'ant-list-counts-bindings-v1.json'),
+        'colony_simulation_words_bindings': pin(OUT / 'colony-simulation-words-bindings-v1.json'),
+        'player_locations_bindings': pin(OUT / 'player-locations-bindings-v1.json'),
+        'ant_counters_timer_bindings': pin(OUT / 'ant-counters-timer-bindings-v1.json'),
+        'language_string_list_pointers_bindings': pin(OUT / 'language-string-list-pointers-bindings-v1.json'),
+        'dead_ant_coordinate_rings_bindings': pin(OUT / 'dead-ant-coordinate-rings-bindings-v1.json'),
+        'ant_player_state_words_bindings': pin(OUT / 'ant-player-state-words-bindings-v1.json'),
         'historical_data_debt_bytes': sum(r['size'] for r in report['historical_data_debt']),
         'resolved_initialized_data': report['resolved_initialized_data'],
         'strict_static_index': pin(OUT / 'static-completeness/index-v1.json'),
@@ -160,7 +168,7 @@ def main():
         'tool_inputs': [p for p in report['inputs'] if p['path'].startswith('tools')],
         'validation_logs': logs,
         'historical_validation': 'PASS',
-        'source_only_tests': f'37 targeted tests included in {test_count} repository tests PASS (2 skips)',
+        'source_only_tests': f'39 targeted tests included in {test_count} repository tests PASS (2 skips)',
         'claim_limit': 'Compile and symbolic binding proofs only; no complete link, runtime '
                        'equivalence or human acceptance. Full inventories are reproducible build output.'}
     (OUT / 'current-intake.json').write_text(json.dumps(receipt, indent=2) + '\n')
