@@ -1,5 +1,13 @@
 # Handoff: state and next steps (2026-10-02)
 
+**2026-10-03 priority update:** SDL3 v17 is paused and preserved at
+`portable-sdl3-v17-paused-20261003`. Follow [SOURCE_ONLY_DOS](source-only-dos.md)
+before resuming portable symptom fixes. The immediate gate is a standalone,
+zero-original-byte DOS executable using exact C, genuine ASM and the frozen
+reviewed behavioral bodies, followed by DOSBox-X integration checks and human
+acceptance. Earlier historical-link and SDL3 next actions below are retained
+research history and do not supersede this priority.
+
 Read README.md, AGENTS.md, docs/codegen-rules.md and docs/tu-evidence.md before work.
 The active phase now follows `docs/behavioral-proof.md`: preserve all EXACT
 claims, close the remaining game contracts through original-DOS differential

@@ -2,6 +2,11 @@
 
 **Start here:** [docs/next-steps.md](docs/next-steps.md) is the current handoff (state, open work, installed fixes, operating rules); `python tools/validate.py` regenerates docs/progress.md.
 
+**Current priority:** [SOURCE_ONLY_DOS](docs/source-only-dos.md), a complete DOS
+build with zero original executable fallback. SDL3 v17 is preserved and paused at
+`portable-sdl3-v17-paused-20261003`. The byte-identical hybrid is a placement
+diagnostic, not a standalone reconstruction or the functional source baseline.
+
 
 Byte-matching reconstruction of the DOS `SIMANT.EXE` (Maxis, Dec 1991): readable C and
 genuine assembly that the period Microsoft toolchain compiles to exactly the original
@@ -105,6 +110,11 @@ opaque data, oracle-derived runtime words, manifest hash).
 1. exact reconstructed contributions (today),
 2. oracle-assisted hybrid image equality (future: `validate.py --image`),
 3. independently reconstructed historical link (future: needs RTLink).
+
+The separate SOURCE_ONLY_DOS functional milestone requires an independently
+source-built runnable DOS game, semantic integration checks and human acceptance.
+Historical executable identity is not required. The semantic freeze and hybrid
+equality do not establish this milestone.
 
 ## After the freeze
 

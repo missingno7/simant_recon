@@ -1,0 +1,1597 @@
+{
+  "schema": "simant-portable-sdl3-pause-v1",
+  "branch": "codex/portable-sdl3",
+  "preserved_tag": "portable-sdl3-v17-paused-20261003",
+  "commit": "c850830006e0b7d456bb500bf101dd432bbe8ee3",
+  "status": "PAUSED_PENDING_SOURCE_ONLY_DOS_HUMAN_ACCEPTANCE",
+  "migration_receipt": {
+    "path": "build/whole-application-v17/migration.json",
+    "sha256": "529c0988cf1bf18d76387566375f63444e305668493b1c3365251c67f4b37588",
+    "size": 3311482
+  },
+  "artifacts": [
+    {
+      "path": "build/whole-application-v17/report.json",
+      "sha256": "27c56da07841108c73e2f943bae8648c8193d7f473f68f4e0a8f56c6fc56f5d9",
+      "size": 72161
+    },
+    {
+      "path": "build/whole-application-v17/simant-whole-sdl3.exe",
+      "sha256": "53a0e3c2a5073cc787e2473d653c3b756e0ca855b2291ef46c2d6fc3c83d1fc5",
+      "size": 2779821
+    },
+    {
+      "path": "build/releases/simant-preview-v17/package-report.json",
+      "sha256": "e7c9e0c20e68e2bbd6901515fb45c711db8dda51c1095a6a389eaef15a91c253",
+      "size": 2215
+    },
+    {
+      "path": "build/releases/simant-preview-v17/simant-dos-oracle.zip",
+      "sha256": "a9f4ade5087f5aa22bc20e99de3328bfe69c3f25aa085c750b8128f51a7c70b1",
+      "size": 196409
+    },
+    {
+      "path": "build/releases/simant-preview-v17/simant-sdl3-preview.zip",
+      "sha256": "6419a73fc9393cfe7dc7d845550232218be8d1f19e02de9eb81496c762761a7d",
+      "size": 3011964
+    }
+  ],
+  "native_providers": [
+    {
+      "source": "build/workers/whole_program/generated/balloon_queue_state_v1.c",
+      "source_sha256": "57340ab259f3f6bc08758adc8d13992ec6f4ec7f7a019eccab5470d40d1ddec7",
+      "preserved_snapshot": {
+        "path": "build/whole-application-v17/inputs/build/workers/whole_program/generated/balloon_queue_state_v1.c",
+        "sha256": "57340ab259f3f6bc08758adc8d13992ec6f4ec7f7a019eccab5470d40d1ddec7",
+        "size": 295
+      },
+      "existing_receipt_role": "SOURCE_BOUNDED_BALLOON_QUEUE",
+      "existing_receipt_admitted": false,
+      "dos_target_input": false,
+      "consolidation_review": "REVIEW_REQUIRED_BEFORE_REUSE",
+      "reason": "Preserve the specific v17 implementation and evidence. Its role label, compilation and native replay do not themselves authorize a DOS semantic substitute."
+    },
+    {
+      "source": "build/workers/whole_program/generated/minimap_scales_v1.c",
+      "source_sha256": "e4e264baf3333e5eb59e21e4b6a578d3f76dedbe36dcdf37b7e43d4e64f91f90",
+      "preserved_snapshot": {
+        "path": "build/whole-application-v17/inputs/build/workers/whole_program/generated/minimap_scales_v1.c",
+        "sha256": "e4e264baf3333e5eb59e21e4b6a578d3f76dedbe36dcdf37b7e43d4e64f91f90",
+        "size": 151
+      },
+      "existing_receipt_role": "SOURCE_ASSIGNED_MINIMAP_SCALES",
+      "existing_receipt_admitted": false,
+      "dos_target_input": false,
+      "consolidation_review": "REVIEW_REQUIRED_BEFORE_REUSE",
+      "reason": "Preserve the specific v17 implementation and evidence. Its role label, compilation and native replay do not themselves authorize a DOS semantic substitute."
+    },
+    {
+      "source": "build/workers/whole_program/generated/triangle_dimensions_v1.c",
+      "source_sha256": "573430af6f602bd4916922d88015a0641ea05dd960b8d703e1066cd7b4a3b4f4",
+      "preserved_snapshot": {
+        "path": "build/whole-application-v17/inputs/build/workers/whole_program/generated/triangle_dimensions_v1.c",
+        "sha256": "573430af6f602bd4916922d88015a0641ea05dd960b8d703e1066cd7b4a3b4f4",
+        "size": 248
+      },
+      "existing_receipt_role": "SOURCE_ASSIGNED_TRIANGLE_DIMENSIONS",
+      "existing_receipt_admitted": false,
+      "dos_target_input": false,
+      "consolidation_review": "REVIEW_REQUIRED_BEFORE_REUSE",
+      "reason": "Preserve the specific v17 implementation and evidence. Its role label, compilation and native replay do not themselves authorize a DOS semantic substitute."
+    },
+    {
+      "source": "build/workers/whole_program/generated/simulation_grid_3e1d_v8.c",
+      "source_sha256": "7b2f124a46bd1ee8fa74f441f2fc31ef3609093f91dc9c773bc6850a5e3c7834",
+      "preserved_snapshot": {
+        "path": "build/whole-application-v17/inputs/build/workers/whole_program/generated/simulation_grid_3e1d_v8.c",
+        "sha256": "7b2f124a46bd1ee8fa74f441f2fc31ef3609093f91dc9c773bc6850a5e3c7834",
+        "size": 150
+      },
+      "existing_receipt_role": "SOURCE_COMPLETE_SIMULATION_GRID_V8",
+      "existing_receipt_admitted": false,
+      "dos_target_input": false,
+      "consolidation_review": "REVIEW_REQUIRED_BEFORE_REUSE",
+      "reason": "Preserve the specific v17 implementation and evidence. Its role label, compilation and native replay do not themselves authorize a DOS semantic substitute."
+    },
+    {
+      "source": "build/workers/whole_program/generated/simulation_state_50f6_v7.c",
+      "source_sha256": "5b827f61f46edbb002e821efe81d8f25f44c098b412e19b93429a9d05065425d",
+      "preserved_snapshot": {
+        "path": "build/whole-application-v17/inputs/build/workers/whole_program/generated/simulation_state_50f6_v7.c",
+        "sha256": "5b827f61f46edbb002e821efe81d8f25f44c098b412e19b93429a9d05065425d",
+        "size": 788
+      },
+      "existing_receipt_role": "SOURCE_BOUNDED_SAVE_RECORD_STATE_V7",
+      "existing_receipt_admitted": false,
+      "dos_target_input": false,
+      "consolidation_review": "REVIEW_REQUIRED_BEFORE_REUSE",
+      "reason": "Preserve the specific v17 implementation and evidence. Its role label, compilation and native replay do not themselves authorize a DOS semantic substitute."
+    },
+    {
+      "source": "build/workers/whole_program/generated/simulation_state_50f6.c",
+      "source_sha256": "c2489524a8975665e0c49b3cfd19fb2b5e8161c3ac7b5ec4dca4eb9cda51c79a",
+      "preserved_snapshot": {
+        "path": "build/whole-application-v17/inputs/build/workers/whole_program/generated/simulation_state_50f6.c",
+        "sha256": "c2489524a8975665e0c49b3cfd19fb2b5e8161c3ac7b5ec4dca4eb9cda51c79a",
+        "size": 1357
+      },
+      "existing_receipt_role": "SOURCE_BOUNDED_COMPOUND_SIMULATION_STATE",
+      "existing_receipt_admitted": false,
+      "dos_target_input": false,
+      "consolidation_review": "REVIEW_REQUIRED_BEFORE_REUSE",
+      "reason": "Preserve the specific v17 implementation and evidence. Its role label, compilation and native replay do not themselves authorize a DOS semantic substitute."
+    },
+    {
+      "source": "build/workers/whole_program/generated/source_bounded_additive.c",
+      "source_sha256": "db48b8d28b413dffbc98197f797511372c17612d3a8e10bde0b4f4c147fff13b",
+      "preserved_snapshot": {
+        "path": "build/whole-application-v17/inputs/build/workers/whole_program/generated/source_bounded_additive.c",
+        "sha256": "db48b8d28b413dffbc98197f797511372c17612d3a8e10bde0b4f4c147fff13b",
+        "size": 707
+      },
+      "existing_receipt_role": "ADDITIVE_SOURCE_BOUNDED_NATIVE_STATE",
+      "existing_receipt_admitted": false,
+      "dos_target_input": false,
+      "consolidation_review": "REVIEW_REQUIRED_BEFORE_REUSE",
+      "reason": "Preserve the specific v17 implementation and evidence. Its role label, compilation and native replay do not themselves authorize a DOS semantic substitute."
+    },
+    {
+      "source": "build/workers/whole_program/generated/native_owners.c",
+      "source_sha256": "bd0e88c6109407ea29a5cfdb4e9d84bbbfc047b3d87411f43a39efc684f1c9f1",
+      "preserved_snapshot": {
+        "path": "build/whole-application-v17/inputs/build/workers/whole_program/generated/native_owners.c",
+        "sha256": "bd0e88c6109407ea29a5cfdb4e9d84bbbfc047b3d87411f43a39efc684f1c9f1",
+        "size": 9014
+      },
+      "existing_receipt_role": "SOURCE_BOUNDED_NATIVE_STATE",
+      "existing_receipt_admitted": false,
+      "dos_target_input": false,
+      "consolidation_review": "REVIEW_REQUIRED_BEFORE_REUSE",
+      "reason": "Preserve the specific v17 implementation and evidence. Its role label, compilation and native replay do not themselves authorize a DOS semantic substitute."
+    },
+    {
+      "source": "build/workers/whole_program/generated/source_state_owners.c",
+      "source_sha256": "3edf7ac51e71da9c0f10ad538178416dfafe6ca14271bcc65ddb521c2005244d",
+      "preserved_snapshot": {
+        "path": "build/whole-application-v17/inputs/build/workers/whole_program/generated/source_state_owners.c",
+        "sha256": "3edf7ac51e71da9c0f10ad538178416dfafe6ca14271bcc65ddb521c2005244d",
+        "size": 2789
+      },
+      "existing_receipt_role": "SOURCE_PROVEN_NATIVE_COMMON_STATE",
+      "existing_receipt_admitted": false,
+      "dos_target_input": false,
+      "consolidation_review": "REVIEW_REQUIRED_BEFORE_REUSE",
+      "reason": "Preserve the specific v17 implementation and evidence. Its role label, compilation and native replay do not themselves authorize a DOS semantic substitute."
+    },
+    {
+      "source": "portable/whole_program/state/database.c",
+      "source_sha256": "c37df65a816cfcc7f03ade9343e645220dbf54be101cfaf9c7c4f7aef11fad27",
+      "preserved_snapshot": {
+        "path": "build/whole-application-v17/inputs/portable/whole_program/state/database.c",
+        "sha256": "c37df65a816cfcc7f03ade9343e645220dbf54be101cfaf9c7c4f7aef11fad27",
+        "size": 182
+      },
+      "existing_receipt_role": "NATIVE_SHARED_STATE",
+      "existing_receipt_admitted": false,
+      "dos_target_input": false,
+      "consolidation_review": "REVIEW_REQUIRED_BEFORE_REUSE",
+      "reason": "Preserve the specific v17 implementation and evidence. Its role label, compilation and native replay do not themselves authorize a DOS semantic substitute."
+    },
+    {
+      "source": "portable/whole_program/state/game_views.c",
+      "source_sha256": "ae0638ac6f00413fd1c79017002ae52bc89039aeaa3e78fdab62d4d27ada4098",
+      "preserved_snapshot": {
+        "path": "build/whole-application-v17/inputs/portable/whole_program/state/game_views.c",
+        "sha256": "ae0638ac6f00413fd1c79017002ae52bc89039aeaa3e78fdab62d4d27ada4098",
+        "size": 361
+      },
+      "existing_receipt_role": "SOURCE_BOUNDED_NATIVE_GAME_HANDLE_AND_RECTANGLE_STATE",
+      "existing_receipt_admitted": false,
+      "dos_target_input": false,
+      "consolidation_review": "REVIEW_REQUIRED_BEFORE_REUSE",
+      "reason": "Preserve the specific v17 implementation and evidence. Its role label, compilation and native replay do not themselves authorize a DOS semantic substitute."
+    },
+    {
+      "source": "portable/whole_program/state/asm_display_data_v1.c",
+      "source_sha256": "847dfac4918b110190a56315ee900e7f3d5396792238cf0a65f2ad41d445ac96",
+      "preserved_snapshot": {
+        "path": "build/whole-application-v17/inputs/portable/whole_program/state/asm_display_data_v1.c",
+        "sha256": "847dfac4918b110190a56315ee900e7f3d5396792238cf0a65f2ad41d445ac96",
+        "size": 1082
+      },
+      "existing_receipt_role": "SOURCE_DERIVED_ASM_DISPLAY_DATA_OWNERS",
+      "existing_receipt_admitted": false,
+      "dos_target_input": false,
+      "consolidation_review": "REVIEW_REQUIRED_BEFORE_REUSE",
+      "reason": "Preserve the specific v17 implementation and evidence. Its role label, compilation and native replay do not themselves authorize a DOS semantic substitute."
+    },
+    {
+      "source": "portable/whole_program/state/asm_startup_flags_v1.c",
+      "source_sha256": "c2c836613b73024374e6f3b07bc505f99e9b590f932fdacb2bcd34a25b935d0d",
+      "preserved_snapshot": {
+        "path": "build/whole-application-v17/inputs/portable/whole_program/state/asm_startup_flags_v1.c",
+        "sha256": "c2c836613b73024374e6f3b07bc505f99e9b590f932fdacb2bcd34a25b935d0d",
+        "size": 130
+      },
+      "existing_receipt_role": "SOURCE_DERIVED_ASM_STARTUP_FLAG",
+      "existing_receipt_admitted": false,
+      "dos_target_input": false,
+      "consolidation_review": "REVIEW_REQUIRED_BEFORE_REUSE",
+      "reason": "Preserve the specific v17 implementation and evidence. Its role label, compilation and native replay do not themselves authorize a DOS semantic substitute."
+    },
+    {
+      "source": "portable/whole_program/state/eu_map_cache.c",
+      "source_sha256": "d1b9507dd0a24e4841853c701621875a83bb56ae168f4e2122dec76ee6fe4677",
+      "preserved_snapshot": {
+        "path": "build/whole-application-v17/inputs/portable/whole_program/state/eu_map_cache.c",
+        "sha256": "d1b9507dd0a24e4841853c701621875a83bb56ae168f4e2122dec76ee6fe4677",
+        "size": 299
+      },
+      "existing_receipt_role": "SOURCE_BOUNDED_EU_MAP_CACHE",
+      "existing_receipt_admitted": false,
+      "dos_target_input": false,
+      "consolidation_review": "REVIEW_REQUIRED_BEFORE_REUSE",
+      "reason": "Preserve the specific v17 implementation and evidence. Its role label, compilation and native replay do not themselves authorize a DOS semantic substitute."
+    },
+    {
+      "source": "portable/whole_program/state/animation_state.c",
+      "source_sha256": "b296014539a55ea39626bb067d8cbf1d1038eed7ecd1a2c36eb0b69a615a1c82",
+      "preserved_snapshot": {
+        "path": "build/whole-application-v17/inputs/portable/whole_program/state/animation_state.c",
+        "sha256": "b296014539a55ea39626bb067d8cbf1d1038eed7ecd1a2c36eb0b69a615a1c82",
+        "size": 277
+      },
+      "existing_receipt_role": "SOURCE_NATIVE_ANIMATION_OBJECT_SELECTOR",
+      "existing_receipt_admitted": false,
+      "dos_target_input": false,
+      "consolidation_review": "REVIEW_REQUIRED_BEFORE_REUSE",
+      "reason": "Preserve the specific v17 implementation and evidence. Its role label, compilation and native replay do not themselves authorize a DOS semantic substitute."
+    },
+    {
+      "source": "portable/whole_program/ui_string_lists.c",
+      "source_sha256": "cfdaf5d0b04b8fbd11e3bdc9e956415e406c89646afc6c5891a0ef5eef09813b",
+      "preserved_snapshot": {
+        "path": "build/whole-application-v17/inputs/portable/whole_program/ui_string_lists.c",
+        "sha256": "cfdaf5d0b04b8fbd11e3bdc9e956415e406c89646afc6c5891a0ef5eef09813b",
+        "size": 572
+      },
+      "existing_receipt_role": "SOURCE_NATIVE_STARTUP_STRING_LIST_OWNERS",
+      "existing_receipt_admitted": false,
+      "dos_target_input": false,
+      "consolidation_review": "REVIEW_REQUIRED_BEFORE_REUSE",
+      "reason": "Preserve the specific v17 implementation and evidence. Its role label, compilation and native replay do not themselves authorize a DOS semantic substitute."
+    },
+    {
+      "source": "portable/whole_program/state/menu_bar_rect.c",
+      "source_sha256": "30b1d11d048ad9baccda38887e479fce8b7b9d0de627afa1bd6e451db263026d",
+      "preserved_snapshot": {
+        "path": "build/whole-application-v17/inputs/portable/whole_program/state/menu_bar_rect.c",
+        "sha256": "30b1d11d048ad9baccda38887e479fce8b7b9d0de627afa1bd6e451db263026d",
+        "size": 611
+      },
+      "existing_receipt_role": "SOURCE_TYPED_MENU_BAR_RECT_OWNER",
+      "existing_receipt_admitted": false,
+      "dos_target_input": false,
+      "consolidation_review": "REVIEW_REQUIRED_BEFORE_REUSE",
+      "reason": "Preserve the specific v17 implementation and evidence. Its role label, compilation and native replay do not themselves authorize a DOS semantic substitute."
+    },
+    {
+      "source": "portable/whole_program/state/elevator_thumb_size.c",
+      "source_sha256": "64e72511859a6ac8d02fec4ca3df6546e8817a6b44b0a066486a58075cd22b40",
+      "preserved_snapshot": {
+        "path": "build/whole-application-v17/inputs/portable/whole_program/state/elevator_thumb_size.c",
+        "sha256": "64e72511859a6ac8d02fec4ca3df6546e8817a6b44b0a066486a58075cd22b40",
+        "size": 453
+      },
+      "existing_receipt_role": "SOURCE_TYPED_ELEVATOR_THUMB_SIZE_OWNER",
+      "existing_receipt_admitted": false,
+      "dos_target_input": false,
+      "consolidation_review": "REVIEW_REQUIRED_BEFORE_REUSE",
+      "reason": "Preserve the specific v17 implementation and evidence. Its role label, compilation and native replay do not themselves authorize a DOS semantic substitute."
+    },
+    {
+      "source": "portable/whole_program/state/minimap_rects.c",
+      "source_sha256": "7da26295d14e2e99d424203726f32b2bdb48a8cbd81e40d113d3933ef0ab1646",
+      "preserved_snapshot": {
+        "path": "build/whole-application-v17/inputs/portable/whole_program/state/minimap_rects.c",
+        "sha256": "7da26295d14e2e99d424203726f32b2bdb48a8cbd81e40d113d3933ef0ab1646",
+        "size": 466
+      },
+      "existing_receipt_role": "SOURCE_TYPED_MINIMAP_RECTANGLE_OWNERS",
+      "existing_receipt_admitted": false,
+      "dos_target_input": false,
+      "consolidation_review": "REVIEW_REQUIRED_BEFORE_REUSE",
+      "reason": "Preserve the specific v17 implementation and evidence. Its role label, compilation and native replay do not themselves authorize a DOS semantic substitute."
+    },
+    {
+      "source": "portable/whole_program/state/tri_control_state.c",
+      "source_sha256": "8cbb3570789b88d8d90438f7226aab6df6706eb20805b352bb0cfc0a2342cda3",
+      "preserved_snapshot": {
+        "path": "build/whole-application-v17/inputs/portable/whole_program/state/tri_control_state.c",
+        "sha256": "8cbb3570789b88d8d90438f7226aab6df6706eb20805b352bb0cfc0a2342cda3",
+        "size": 910
+      },
+      "existing_receipt_role": "SOURCE_TYPED_TRIANGLE_CONTROL_STATE_OWNERS",
+      "existing_receipt_admitted": false,
+      "dos_target_input": false,
+      "consolidation_review": "REVIEW_REQUIRED_BEFORE_REUSE",
+      "reason": "Preserve the specific v17 implementation and evidence. Its role label, compilation and native replay do not themselves authorize a DOS semantic substitute."
+    },
+    {
+      "source": "portable/whole_program/state/map_cursor_rect.c",
+      "source_sha256": "b24c58227d3154846dd2fea374b081dbf1984f1883c1513a1f317db59a5265b2",
+      "preserved_snapshot": {
+        "path": "build/whole-application-v17/inputs/portable/whole_program/state/map_cursor_rect.c",
+        "sha256": "b24c58227d3154846dd2fea374b081dbf1984f1883c1513a1f317db59a5265b2",
+        "size": 431
+      },
+      "existing_receipt_role": "SOURCE_TYPED_MAP_CURSOR_RECT_OWNER",
+      "existing_receipt_admitted": false,
+      "dos_target_input": false,
+      "consolidation_review": "REVIEW_REQUIRED_BEFORE_REUSE",
+      "reason": "Preserve the specific v17 implementation and evidence. Its role label, compilation and native replay do not themselves authorize a DOS semantic substitute."
+    },
+    {
+      "source": "portable/whole_program/state/asm_shared_state.c",
+      "source_sha256": "4a4450e1db8c6bd89e7a1e1a5cd8be3d88fa947d7cb2aa9cfb8ff18eceef8386",
+      "preserved_snapshot": {
+        "path": "build/whole-application-v17/inputs/portable/whole_program/state/asm_shared_state.c",
+        "sha256": "4a4450e1db8c6bd89e7a1e1a5cd8be3d88fa947d7cb2aa9cfb8ff18eceef8386",
+        "size": 197
+      },
+      "existing_receipt_role": "SOURCE_PROVEN_ASM_DATA_SCALARS",
+      "existing_receipt_admitted": false,
+      "dos_target_input": false,
+      "consolidation_review": "REVIEW_REQUIRED_BEFORE_REUSE",
+      "reason": "Preserve the specific v17 implementation and evidence. Its role label, compilation and native replay do not themselves authorize a DOS semantic substitute."
+    },
+    {
+      "source": "portable/whole_program/conversions/pointer_globals.c",
+      "source_sha256": "f6be2f70061b4c00ab948303c7e2f8bab60808f1c4f5198599051526542bfdac",
+      "preserved_snapshot": {
+        "path": "build/whole-application-v17/inputs/portable/whole_program/conversions/pointer_globals.c",
+        "sha256": "f6be2f70061b4c00ab948303c7e2f8bab60808f1c4f5198599051526542bfdac",
+        "size": 399
+      },
+      "existing_receipt_role": "NATIVE_SHARED_POINTER_TABLES",
+      "existing_receipt_admitted": false,
+      "dos_target_input": false,
+      "consolidation_review": "REVIEW_REQUIRED_BEFORE_REUSE",
+      "reason": "Preserve the specific v17 implementation and evidence. Its role label, compilation and native replay do not themselves authorize a DOS semantic substitute."
+    },
+    {
+      "source": "portable/whole_program/platform/font_blit.c",
+      "source_sha256": "df522fd22e8a0b639bc90806cf6cfa8659efbc87d0aa28fdb291bef618fe743e",
+      "preserved_snapshot": {
+        "path": "build/whole-application-v17/inputs/portable/whole_program/platform/font_blit.c",
+        "sha256": "df522fd22e8a0b639bc90806cf6cfa8659efbc87d0aa28fdb291bef618fe743e",
+        "size": 5272
+      },
+      "existing_receipt_role": "SOURCE_DERIVED_FONT_RASTER_AND_STATE",
+      "existing_receipt_admitted": false,
+      "dos_target_input": false,
+      "consolidation_review": "REVIEW_REQUIRED_BEFORE_REUSE",
+      "reason": "Preserve the specific v17 implementation and evidence. Its role label, compilation and native replay do not themselves authorize a DOS semantic substitute."
+    },
+    {
+      "source": "portable/whole_program/window_refs.c",
+      "source_sha256": "6a477661785195a43d39057fafc01348c8a9d32335072c126f0d828eefafdf93",
+      "preserved_snapshot": {
+        "path": "build/whole-application-v17/inputs/portable/whole_program/window_refs.c",
+        "sha256": "6a477661785195a43d39057fafc01348c8a9d32335072c126f0d828eefafdf93",
+        "size": 17741
+      },
+      "existing_receipt_role": "NATIVE_WINDOW_POINTER_OWNERSHIP",
+      "existing_receipt_admitted": false,
+      "dos_target_input": false,
+      "consolidation_review": "REVIEW_REQUIRED_BEFORE_REUSE",
+      "reason": "Preserve the specific v17 implementation and evidence. Its role label, compilation and native replay do not themselves authorize a DOS semantic substitute."
+    },
+    {
+      "source": "portable/whole_program/window_runtime_owner.c",
+      "source_sha256": "0739647b8dc8a460ff49daf474a033dd0b8e8dfd109bd06d340d07b57890a78f",
+      "preserved_snapshot": {
+        "path": "build/whole-application-v17/inputs/portable/whole_program/window_runtime_owner.c",
+        "sha256": "0739647b8dc8a460ff49daf474a033dd0b8e8dfd109bd06d340d07b57890a78f",
+        "size": 349
+      },
+      "existing_receipt_role": "NATIVE_APPLICATION_WINDOW_REGISTRY_OWNER",
+      "existing_receipt_admitted": false,
+      "dos_target_input": false,
+      "consolidation_review": "REVIEW_REQUIRED_BEFORE_REUSE",
+      "reason": "Preserve the specific v17 implementation and evidence. Its role label, compilation and native replay do not themselves authorize a DOS semantic substitute."
+    },
+    {
+      "source": "portable/whole_program/window_list_refs.c",
+      "source_sha256": "14830a954383cf878344a8d39ad0fb7f0697833d47459df1cb33417b17a1531d",
+      "preserved_snapshot": {
+        "path": "build/whole-application-v17/inputs/portable/whole_program/window_list_refs.c",
+        "sha256": "14830a954383cf878344a8d39ad0fb7f0697833d47459df1cb33417b17a1531d",
+        "size": 387
+      },
+      "existing_receipt_role": "NATIVE_LIST_HANDLE_SIDECAR",
+      "existing_receipt_admitted": false,
+      "dos_target_input": false,
+      "consolidation_review": "REVIEW_REQUIRED_BEFORE_REUSE",
+      "reason": "Preserve the specific v17 implementation and evidence. Its role label, compilation and native replay do not themselves authorize a DOS semantic substitute."
+    },
+    {
+      "source": "portable/whole_program/menu_globals.c",
+      "source_sha256": "5c8df2c8497511d9f0fc5f5451308a1c609d3a5ec02bceb8e27870f8303a01d5",
+      "preserved_snapshot": {
+        "path": "build/whole-application-v17/inputs/portable/whole_program/menu_globals.c",
+        "sha256": "5c8df2c8497511d9f0fc5f5451308a1c609d3a5ec02bceb8e27870f8303a01d5",
+        "size": 217
+      },
+      "existing_receipt_role": "NATIVE_MENU_POINTER_VECTOR_OWNER",
+      "existing_receipt_admitted": false,
+      "dos_target_input": false,
+      "consolidation_review": "REVIEW_REQUIRED_BEFORE_REUSE",
+      "reason": "Preserve the specific v17 implementation and evidence. Its role label, compilation and native replay do not themselves authorize a DOS semantic substitute."
+    },
+    {
+      "source": "portable/ui_model/menus/source_record_view.c",
+      "source_sha256": "ac2ef13e2ce7b0e20801605d09324f58292e104bc1364f1d8629356cc60d61a7",
+      "preserved_snapshot": {
+        "path": "build/whole-application-v17/inputs/portable/ui_model/menus/source_record_view.c",
+        "sha256": "ac2ef13e2ce7b0e20801605d09324f58292e104bc1364f1d8629356cc60d61a7",
+        "size": 5584
+      },
+      "existing_receipt_role": "SOURCE_DERIVED_BORROWED_KIND6_MENU_VIEW",
+      "existing_receipt_admitted": false,
+      "dos_target_input": false,
+      "consolidation_review": "REVIEW_REQUIRED_BEFORE_REUSE",
+      "reason": "Preserve the specific v17 implementation and evidence. Its role label, compilation and native replay do not themselves authorize a DOS semantic substitute."
+    },
+    {
+      "source": "portable/whole_program/window_source_globals.c",
+      "source_sha256": "e1d2d3603c70a05ff6d0ff47df3562db301d2f804cb5256a6bd8767436f947a5",
+      "preserved_snapshot": {
+        "path": "build/whole-application-v17/inputs/portable/whole_program/window_source_globals.c",
+        "sha256": "e1d2d3603c70a05ff6d0ff47df3562db301d2f804cb5256a6bd8767436f947a5",
+        "size": 1643
+      },
+      "existing_receipt_role": "SOURCE_DERIVED_WINDOW_GLOBAL_OWNERS",
+      "existing_receipt_admitted": false,
+      "dos_target_input": false,
+      "consolidation_review": "REVIEW_REQUIRED_BEFORE_REUSE",
+      "reason": "Preserve the specific v17 implementation and evidence. Its role label, compilation and native replay do not themselves authorize a DOS semantic substitute."
+    },
+    {
+      "source": "portable/whole_program/platform/dos_memory.c",
+      "source_sha256": "d821e60e0053ab73f648f3169e5d71c818eea0b2d2cef7dd0535720ab3ece750",
+      "preserved_snapshot": {
+        "path": "build/whole-application-v17/inputs/portable/whole_program/platform/dos_memory.c",
+        "sha256": "d821e60e0053ab73f648f3169e5d71c818eea0b2d2cef7dd0535720ab3ece750",
+        "size": 1717
+      },
+      "existing_receipt_role": "NATIVE_PLATFORM_SERVICE",
+      "existing_receipt_admitted": false,
+      "dos_target_input": false,
+      "consolidation_review": "REVIEW_REQUIRED_BEFORE_REUSE",
+      "reason": "Preserve the specific v17 implementation and evidence. Its role label, compilation and native replay do not themselves authorize a DOS semantic substitute."
+    },
+    {
+      "source": "portable/whole_program/platform/crt_rng.c",
+      "source_sha256": "26c9462315829ebf80e74ce2c470e7bc7b02e2f5f9f71a6889956d9e7c1f77ff",
+      "preserved_snapshot": {
+        "path": "build/whole-application-v17/inputs/portable/whole_program/platform/crt_rng.c",
+        "sha256": "26c9462315829ebf80e74ce2c470e7bc7b02e2f5f9f71a6889956d9e7c1f77ff",
+        "size": 643
+      },
+      "existing_receipt_role": "NATIVE_RUNTIME_SERVICE",
+      "existing_receipt_admitted": false,
+      "dos_target_input": false,
+      "consolidation_review": "REVIEW_REQUIRED_BEFORE_REUSE",
+      "reason": "Preserve the specific v17 implementation and evidence. Its role label, compilation and native replay do not themselves authorize a DOS semantic substitute."
+    },
+    {
+      "source": "portable/whole_program/platform/crt_abi.c",
+      "source_sha256": "2ac651c52b16e4d3c4c2b665ab1290f7b0eef71ec4c5148f564c717bef133604",
+      "preserved_snapshot": {
+        "path": "build/whole-application-v17/inputs/portable/whole_program/platform/crt_abi.c",
+        "sha256": "2ac651c52b16e4d3c4c2b665ab1290f7b0eef71ec4c5148f564c717bef133604",
+        "size": 1479
+      },
+      "existing_receipt_role": "SOURCE_VISIBLE_MSC_RUNTIME_CONTRACT",
+      "existing_receipt_admitted": false,
+      "dos_target_input": false,
+      "consolidation_review": "REVIEW_REQUIRED_BEFORE_REUSE",
+      "reason": "Preserve the specific v17 implementation and evidence. Its role label, compilation and native replay do not themselves authorize a DOS semantic substitute."
+    },
+    {
+      "source": "portable/whole_program/platform/seed_source.c",
+      "source_sha256": "3108f7d9ad500026accae6a10cc0214c489b70acf6251d57bbf1b9c6f7184b76",
+      "preserved_snapshot": {
+        "path": "build/whole-application-v17/inputs/portable/whole_program/platform/seed_source.c",
+        "sha256": "3108f7d9ad500026accae6a10cc0214c489b70acf6251d57bbf1b9c6f7184b76",
+        "size": 750
+      },
+      "existing_receipt_role": "EXPLICIT_HOST_STARTUP_SEED_BOUNDARY",
+      "existing_receipt_admitted": false,
+      "dos_target_input": false,
+      "consolidation_review": "REVIEW_REQUIRED_BEFORE_REUSE",
+      "reason": "Preserve the specific v17 implementation and evidence. Its role label, compilation and native replay do not themselves authorize a DOS semantic substitute."
+    },
+    {
+      "source": "portable/whole_program/platform/dos_io.c",
+      "source_sha256": "c46877dfc2d14057f6d57bf4e79c7a5d4899c1cdeb1c5a8b158e8b7dc6fbaff0",
+      "preserved_snapshot": {
+        "path": "build/whole-application-v17/inputs/portable/whole_program/platform/dos_io.c",
+        "sha256": "c46877dfc2d14057f6d57bf4e79c7a5d4899c1cdeb1c5a8b158e8b7dc6fbaff0",
+        "size": 10148
+      },
+      "existing_receipt_role": "NATIVE_PLATFORM_SERVICE",
+      "existing_receipt_admitted": false,
+      "dos_target_input": false,
+      "consolidation_review": "REVIEW_REQUIRED_BEFORE_REUSE",
+      "reason": "Preserve the specific v17 implementation and evidence. Its role label, compilation and native replay do not themselves authorize a DOS semantic substitute."
+    },
+    {
+      "source": "portable/whole_program/platform/startup_preflight.c",
+      "source_sha256": "dcf4eca4d1036cfdcc076d4243ab42afdb1952f667eae182259cb4207f713d79",
+      "preserved_snapshot": {
+        "path": "build/whole-application-v17/inputs/portable/whole_program/platform/startup_preflight.c",
+        "sha256": "dcf4eca4d1036cfdcc076d4243ab42afdb1952f667eae182259cb4207f713d79",
+        "size": 2570
+      },
+      "existing_receipt_role": "NATIVE_FILE_STARTUP_CONTRACT",
+      "existing_receipt_admitted": false,
+      "dos_target_input": false,
+      "consolidation_review": "REVIEW_REQUIRED_BEFORE_REUSE",
+      "reason": "Preserve the specific v17 implementation and evidence. Its role label, compilation and native replay do not themselves authorize a DOS semantic substitute."
+    },
+    {
+      "source": "portable/whole_program/platform/startup_host.c",
+      "source_sha256": "359f00d964d6e5bbd92b6b3e27960bc81ed8cf4a6c9049747e6e87ffa2da8a1e",
+      "preserved_snapshot": {
+        "path": "build/whole-application-v17/inputs/portable/whole_program/platform/startup_host.c",
+        "sha256": "359f00d964d6e5bbd92b6b3e27960bc81ed8cf4a6c9049747e6e87ffa2da8a1e",
+        "size": 587
+      },
+      "existing_receipt_role": "NATIVE_LEGACY_PLATFORM_RETIREMENT",
+      "existing_receipt_admitted": false,
+      "dos_target_input": false,
+      "consolidation_review": "REVIEW_REQUIRED_BEFORE_REUSE",
+      "reason": "Preserve the specific v17 implementation and evidence. Its role label, compilation and native replay do not themselves authorize a DOS semantic substitute."
+    },
+    {
+      "source": "portable/whole_program/platform/ems_host.c",
+      "source_sha256": "94845411504986cef551c7504ff8875d0c76c23192e37af976c40fb042c87a2d",
+      "preserved_snapshot": {
+        "path": "build/whole-application-v17/inputs/portable/whole_program/platform/ems_host.c",
+        "sha256": "94845411504986cef551c7504ff8875d0c76c23192e37af976c40fb042c87a2d",
+        "size": 1483
+      },
+      "existing_receipt_role": "NATIVE_NO_EMS_PLATFORM",
+      "existing_receipt_admitted": false,
+      "dos_target_input": false,
+      "consolidation_review": "REVIEW_REQUIRED_BEFORE_REUSE",
+      "reason": "Preserve the specific v17 implementation and evidence. Its role label, compilation and native replay do not themselves authorize a DOS semantic substitute."
+    },
+    {
+      "source": "portable/whole_program/platform/ems_dos_abi.c",
+      "source_sha256": "adfcdcf6dd91a806908978912d5978b846169980a64ceee18fb465a179978d42",
+      "preserved_snapshot": {
+        "path": "build/whole-application-v17/inputs/portable/whole_program/platform/ems_dos_abi.c",
+        "sha256": "adfcdcf6dd91a806908978912d5978b846169980a64ceee18fb465a179978d42",
+        "size": 1531
+      },
+      "existing_receipt_role": "NATIVE_NO_EMS_SOURCE_ABI",
+      "existing_receipt_admitted": false,
+      "dos_target_input": false,
+      "consolidation_review": "REVIEW_REQUIRED_BEFORE_REUSE",
+      "reason": "Preserve the specific v17 implementation and evidence. Its role label, compilation and native replay do not themselves authorize a DOS semantic substitute."
+    },
+    {
+      "source": "portable/whole_program/platform/audio.c",
+      "source_sha256": "ba8a9a9ff65f8276c29a5ba5b76a0f6272bc8b0406e2ba6811ffc491503779d8",
+      "preserved_snapshot": {
+        "path": "build/whole-application-v17/inputs/portable/whole_program/platform/audio.c",
+        "sha256": "ba8a9a9ff65f8276c29a5ba5b76a0f6272bc8b0406e2ba6811ffc491503779d8",
+        "size": 321
+      },
+      "existing_receipt_role": "NATIVE_PLATFORM_SERVICE",
+      "existing_receipt_admitted": false,
+      "dos_target_input": false,
+      "consolidation_review": "REVIEW_REQUIRED_BEFORE_REUSE",
+      "reason": "Preserve the specific v17 implementation and evidence. Its role label, compilation and native replay do not themselves authorize a DOS semantic substitute."
+    },
+    {
+      "source": "portable/whole_program/platform/audio_state.c",
+      "source_sha256": "4645363028ec9ac385e42ced5ab8684ed97c5429dc2848881d719501a0a3c193",
+      "preserved_snapshot": {
+        "path": "build/whole-application-v17/inputs/portable/whole_program/platform/audio_state.c",
+        "sha256": "4645363028ec9ac385e42ced5ab8684ed97c5429dc2848881d719501a0a3c193",
+        "size": 1792
+      },
+      "existing_receipt_role": "SOURCE_DERIVED_AUDIO_POINTER_AND_RECORD_OWNERS",
+      "existing_receipt_admitted": false,
+      "dos_target_input": false,
+      "consolidation_review": "REVIEW_REQUIRED_BEFORE_REUSE",
+      "reason": "Preserve the specific v17 implementation and evidence. Its role label, compilation and native replay do not themselves authorize a DOS semantic substitute."
+    },
+    {
+      "source": "portable/whole_program/platform/audio_events.c",
+      "source_sha256": "f6cd2237cb32a74ec8ab8f7b73ba162a4df8e3d0e6f0a7ce86393300d8a60e9e",
+      "preserved_snapshot": {
+        "path": "build/whole-application-v17/inputs/portable/whole_program/platform/audio_events.c",
+        "sha256": "f6cd2237cb32a74ec8ab8f7b73ba162a4df8e3d0e6f0a7ce86393300d8a60e9e",
+        "size": 5030
+      },
+      "existing_receipt_role": "SOURCE_AUDIO_INTENT_CAPTURE",
+      "existing_receipt_admitted": false,
+      "dos_target_input": false,
+      "consolidation_review": "REVIEW_REQUIRED_BEFORE_REUSE",
+      "reason": "Preserve the specific v17 implementation and evidence. Its role label, compilation and native replay do not themselves authorize a DOS semantic substitute."
+    },
+    {
+      "source": "portable/whole_program/platform/audio_startup.c",
+      "source_sha256": "9444f05434232faac05e8578fbf02cbf9c8fc743aace88edf73f24732ea70397",
+      "preserved_snapshot": {
+        "path": "build/whole-application-v17/inputs/portable/whole_program/platform/audio_startup.c",
+        "sha256": "9444f05434232faac05e8578fbf02cbf9c8fc743aace88edf73f24732ea70397",
+        "size": 1243
+      },
+      "existing_receipt_role": "NATIVE_SUPPORTED_AUDIO_PROFILE_GATE",
+      "existing_receipt_admitted": false,
+      "dos_target_input": false,
+      "consolidation_review": "REVIEW_REQUIRED_BEFORE_REUSE",
+      "reason": "Preserve the specific v17 implementation and evidence. Its role label, compilation and native replay do not themselves authorize a DOS semantic substitute."
+    },
+    {
+      "source": "portable/whole_program/platform/audio_native_mode1.c",
+      "source_sha256": "a48d4f1141b52a5ee7082a23ba711c9b9f24ae2ac5c93660e3c42f16dceb2124",
+      "preserved_snapshot": {
+        "path": "build/whole-application-v17/inputs/portable/whole_program/platform/audio_native_mode1.c",
+        "sha256": "a48d4f1141b52a5ee7082a23ba711c9b9f24ae2ac5c93660e3c42f16dceb2124",
+        "size": 8226
+      },
+      "existing_receipt_role": "NATIVE_MODE1_AUDIO_SOURCE_SERVICES",
+      "existing_receipt_admitted": false,
+      "dos_target_input": false,
+      "consolidation_review": "REVIEW_REQUIRED_BEFORE_REUSE",
+      "reason": "Preserve the specific v17 implementation and evidence. Its role label, compilation and native replay do not themselves authorize a DOS semantic substitute."
+    },
+    {
+      "source": "portable/whole_program/platform/audio_clock.c",
+      "source_sha256": "63cdb04177f812fc98b2adc95fa0917105a539a2779aaf1786c8466fe858030b",
+      "preserved_snapshot": {
+        "path": "build/whole-application-v17/inputs/portable/whole_program/platform/audio_clock.c",
+        "sha256": "63cdb04177f812fc98b2adc95fa0917105a539a2779aaf1786c8466fe858030b",
+        "size": 697
+      },
+      "existing_receipt_role": "SOURCE_DIVISOR_D6_AUDIO_STEP_CLOCK",
+      "existing_receipt_admitted": false,
+      "dos_target_input": false,
+      "consolidation_review": "REVIEW_REQUIRED_BEFORE_REUSE",
+      "reason": "Preserve the specific v17 implementation and evidence. Its role label, compilation and native replay do not themselves authorize a DOS semantic substitute."
+    },
+    {
+      "source": "portable/audio/dac_mixer.c",
+      "source_sha256": "8c5650d24ab79d1740f4f11c0941df8423e761f1c18e0bb2bcc9c29411b2e5b6",
+      "preserved_snapshot": {
+        "path": "build/whole-application-v17/inputs/portable/audio/dac_mixer.c",
+        "sha256": "8c5650d24ab79d1740f4f11c0941df8423e761f1c18e0bb2bcc9c29411b2e5b6",
+        "size": 6690
+      },
+      "existing_receipt_role": "SOURCE_DERIVED_DAC_SAMPLE_PROFILE",
+      "existing_receipt_admitted": false,
+      "dos_target_input": false,
+      "consolidation_review": "REVIEW_REQUIRED_BEFORE_REUSE",
+      "reason": "Preserve the specific v17 implementation and evidence. Its role label, compilation and native replay do not themselves authorize a DOS semantic substitute."
+    },
+    {
+      "source": "portable/audio/intent.c",
+      "source_sha256": "01ba4f7a26e52582970565e52a755fbaca418c3fcfb97a4b70edb63920e64e77",
+      "preserved_snapshot": {
+        "path": "build/whole-application-v17/inputs/portable/audio/intent.c",
+        "sha256": "01ba4f7a26e52582970565e52a755fbaca418c3fcfb97a4b70edb63920e64e77",
+        "size": 6717
+      },
+      "existing_receipt_role": "EXISTING_GENERIC_AUDIO_PCM_API",
+      "existing_receipt_admitted": false,
+      "dos_target_input": false,
+      "consolidation_review": "REVIEW_REQUIRED_BEFORE_REUSE",
+      "reason": "Preserve the specific v17 implementation and evidence. Its role label, compilation and native replay do not themselves authorize a DOS semantic substitute."
+    },
+    {
+      "source": "portable/game/resources/database.c",
+      "source_sha256": "de237a7b134c1d938a334f504a5f9abb9f10f3da33ee931ef58d3dfca3c708aa",
+      "preserved_snapshot": {
+        "path": "build/whole-application-v17/inputs/portable/game/resources/database.c",
+        "sha256": "de237a7b134c1d938a334f504a5f9abb9f10f3da33ee931ef58d3dfca3c708aa",
+        "size": 18671
+      },
+      "existing_receipt_role": "GENERIC_PCM_API_RECORD_DECODER_NO_SOURCE_DATABASE_INSTANCE",
+      "existing_receipt_admitted": false,
+      "dos_target_input": false,
+      "consolidation_review": "REVIEW_REQUIRED_BEFORE_REUSE",
+      "reason": "Preserve the specific v17 implementation and evidence. Its role label, compilation and native replay do not themselves authorize a DOS semantic substitute."
+    },
+    {
+      "source": "portable/platform/sdl3/audio.c",
+      "source_sha256": "322725c015bb3262dd321f60204034434d56d83ce52444b369e54881c637a4f3",
+      "preserved_snapshot": {
+        "path": "build/whole-application-v17/inputs/portable/platform/sdl3/audio.c",
+        "sha256": "322725c015bb3262dd321f60204034434d56d83ce52444b369e54881c637a4f3",
+        "size": 2299
+      },
+      "existing_receipt_role": "SDL3_NATIVE_AUDIO_OUTPUT",
+      "existing_receipt_admitted": false,
+      "dos_target_input": false,
+      "consolidation_review": "REVIEW_REQUIRED_BEFORE_REUSE",
+      "reason": "Preserve the specific v17 implementation and evidence. Its role label, compilation and native replay do not themselves authorize a DOS semantic substitute."
+    },
+    {
+      "source": "portable/platform/sdl3/whole_audio_provider.c",
+      "source_sha256": "46f9dc3d9efd8b9aad7489eaa73b0ca695618840f7f296fe4233ed7c2f01221a",
+      "preserved_snapshot": {
+        "path": "build/whole-application-v17/inputs/portable/platform/sdl3/whole_audio_provider.c",
+        "sha256": "46f9dc3d9efd8b9aad7489eaa73b0ca695618840f7f296fe4233ed7c2f01221a",
+        "size": 3718
+      },
+      "existing_receipt_role": "SDL3_SOURCE_AUDIO_EVENT_OUTPUT",
+      "existing_receipt_admitted": false,
+      "dos_target_input": false,
+      "consolidation_review": "REVIEW_REQUIRED_BEFORE_REUSE",
+      "reason": "Preserve the specific v17 implementation and evidence. Its role label, compilation and native replay do not themselves authorize a DOS semantic substitute."
+    },
+    {
+      "source": "portable/platform/sdl3/whole_audio_startup.c",
+      "source_sha256": "ee835456dc942a9aa7a9ddc4c862f441e8b172a0dd97b3250ade36de5d99d543",
+      "preserved_snapshot": {
+        "path": "build/whole-application-v17/inputs/portable/platform/sdl3/whole_audio_startup.c",
+        "sha256": "ee835456dc942a9aa7a9ddc4c862f441e8b172a0dd97b3250ade36de5d99d543",
+        "size": 4535
+      },
+      "existing_receipt_role": "SDL3_MODE1_PREENTRY_SERVICES",
+      "existing_receipt_admitted": false,
+      "dos_target_input": false,
+      "consolidation_review": "REVIEW_REQUIRED_BEFORE_REUSE",
+      "reason": "Preserve the specific v17 implementation and evidence. Its role label, compilation and native replay do not themselves authorize a DOS semantic substitute."
+    },
+    {
+      "source": "portable/whole_program/platform/whole_audio_provider.c",
+      "source_sha256": "2f78455ace60a05d03d481d97bf1fa5a54449dd13d665e98abd421a7321b1b01",
+      "preserved_snapshot": {
+        "path": "build/whole-application-v17/inputs/portable/whole_program/platform/whole_audio_provider.c",
+        "sha256": "2f78455ace60a05d03d481d97bf1fa5a54449dd13d665e98abd421a7321b1b01",
+        "size": 8004
+      },
+      "existing_receipt_role": "NATIVE_SOURCE_EVENT_AUDIO_PROVIDER",
+      "existing_receipt_admitted": false,
+      "dos_target_input": false,
+      "consolidation_review": "REVIEW_REQUIRED_BEFORE_REUSE",
+      "reason": "Preserve the specific v17 implementation and evidence. Its role label, compilation and native replay do not themselves authorize a DOS semantic substitute."
+    },
+    {
+      "source": "portable/research/audio_voice_scheduler.c",
+      "source_sha256": "d04765178883d59798522ffd333e212135a5faf690f253afd3dcb6da898a6857",
+      "preserved_snapshot": {
+        "path": "build/whole-application-v17/inputs/portable/research/audio_voice_scheduler.c",
+        "sha256": "d04765178883d59798522ffd333e212135a5faf690f253afd3dcb6da898a6857",
+        "size": 6610
+      },
+      "existing_receipt_role": "DOS_VERIFIED_DAC_SAMPLE_SCHEDULER",
+      "existing_receipt_admitted": false,
+      "dos_target_input": false,
+      "consolidation_review": "REVIEW_REQUIRED_BEFORE_REUSE",
+      "reason": "Preserve the specific v17 implementation and evidence. Its role label, compilation and native replay do not themselves authorize a DOS semantic substitute."
+    },
+    {
+      "source": "portable/research/audio_voice_admission.c",
+      "source_sha256": "3498084baabcb850245715490991b2cc7a599332d8ed09dd6b5e5760a09041e7",
+      "preserved_snapshot": {
+        "path": "build/whole-application-v17/inputs/portable/research/audio_voice_admission.c",
+        "sha256": "3498084baabcb850245715490991b2cc7a599332d8ed09dd6b5e5760a09041e7",
+        "size": 3908
+      },
+      "existing_receipt_role": "DOS_VERIFIED_DAC_VOICE_ARITHMETIC",
+      "existing_receipt_admitted": false,
+      "dos_target_input": false,
+      "consolidation_review": "REVIEW_REQUIRED_BEFORE_REUSE",
+      "reason": "Preserve the specific v17 implementation and evidence. Its role label, compilation and native replay do not themselves authorize a DOS semantic substitute."
+    },
+    {
+      "source": "portable/whole_program/platform/handles.c",
+      "source_sha256": "5874ee755c5ca8541bea7456d91d050a755524581975d7a6332d0671eb68f970",
+      "preserved_snapshot": {
+        "path": "build/whole-application-v17/inputs/portable/whole_program/platform/handles.c",
+        "sha256": "5874ee755c5ca8541bea7456d91d050a755524581975d7a6332d0671eb68f970",
+        "size": 26565
+      },
+      "existing_receipt_role": "NATIVE_PLATFORM_SERVICE",
+      "existing_receipt_admitted": false,
+      "dos_target_input": false,
+      "consolidation_review": "REVIEW_REQUIRED_BEFORE_REUSE",
+      "reason": "Preserve the specific v17 implementation and evidence. Its role label, compilation and native replay do not themselves authorize a DOS semantic substitute."
+    },
+    {
+      "source": "portable/whole_program/platform/input_time.c",
+      "source_sha256": "d70deed56fe6cbc5a9c4edad71e25155888871281648610cfeaba0b293682731",
+      "preserved_snapshot": {
+        "path": "build/whole-application-v17/inputs/portable/whole_program/platform/input_time.c",
+        "sha256": "d70deed56fe6cbc5a9c4edad71e25155888871281648610cfeaba0b293682731",
+        "size": 9621
+      },
+      "existing_receipt_role": "NATIVE_PLATFORM_SERVICE",
+      "existing_receipt_admitted": false,
+      "dos_target_input": false,
+      "consolidation_review": "REVIEW_REQUIRED_BEFORE_REUSE",
+      "reason": "Preserve the specific v17 implementation and evidence. Its role label, compilation and native replay do not themselves authorize a DOS semantic substitute."
+    },
+    {
+      "source": "portable/whole_program/platform/m1b73_events.c",
+      "source_sha256": "fb9506a47b921b9c7281fa15b62d24a77760b241cedcf9ce92168a752bf0420f",
+      "preserved_snapshot": {
+        "path": "build/whole-application-v17/inputs/portable/whole_program/platform/m1b73_events.c",
+        "sha256": "fb9506a47b921b9c7281fa15b62d24a77760b241cedcf9ce92168a752bf0420f",
+        "size": 9395
+      },
+      "existing_receipt_role": "SOURCE_DERIVED_EVENT_TIMER_SERVICE",
+      "existing_receipt_admitted": false,
+      "dos_target_input": false,
+      "consolidation_review": "REVIEW_REQUIRED_BEFORE_REUSE",
+      "reason": "Preserve the specific v17 implementation and evidence. Its role label, compilation and native replay do not themselves authorize a DOS semantic substitute."
+    },
+    {
+      "source": "portable/whole_program/platform/m1b73_timer_view.c",
+      "source_sha256": "6d9123fe6eed192d019b0747e116775cb28869e93c61a711315de9dcb5ecbd36",
+      "preserved_snapshot": {
+        "path": "build/whole-application-v17/inputs/portable/whole_program/platform/m1b73_timer_view.c",
+        "sha256": "6d9123fe6eed192d019b0747e116775cb28869e93c61a711315de9dcb5ecbd36",
+        "size": 392
+      },
+      "existing_receipt_role": "NATIVE_TYPED_TIMER_FIELD_BRIDGE",
+      "existing_receipt_admitted": false,
+      "dos_target_input": false,
+      "consolidation_review": "REVIEW_REQUIRED_BEFORE_REUSE",
+      "reason": "Preserve the specific v17 implementation and evidence. Its role label, compilation and native replay do not themselves authorize a DOS semantic substitute."
+    },
+    {
+      "source": "portable/whole_program/platform/m1b73_main_input.c",
+      "source_sha256": "652d66ca5732a860a701e9577ed0f8aa373f3a7eafe6756f493e54f06e142f0a",
+      "preserved_snapshot": {
+        "path": "build/whole-application-v17/inputs/portable/whole_program/platform/m1b73_main_input.c",
+        "sha256": "652d66ca5732a860a701e9577ed0f8aa373f3a7eafe6756f493e54f06e142f0a",
+        "size": 2195
+      },
+      "existing_receipt_role": "NATIVE_SOURCE_MAIN_INPUT_BINDING",
+      "existing_receipt_admitted": false,
+      "dos_target_input": false,
+      "consolidation_review": "REVIEW_REQUIRED_BEFORE_REUSE",
+      "reason": "Preserve the specific v17 implementation and evidence. Its role label, compilation and native replay do not themselves authorize a DOS semantic substitute."
+    },
+    {
+      "source": "portable/whole_program/platform/m1b73_mouse_state.c",
+      "source_sha256": "ed8196fbf480abdc6fd6fe3e3b80362106b9f712ce6cc175d32a3d1494fe9d42",
+      "preserved_snapshot": {
+        "path": "build/whole-application-v17/inputs/portable/whole_program/platform/m1b73_mouse_state.c",
+        "sha256": "ed8196fbf480abdc6fd6fe3e3b80362106b9f712ce6cc175d32a3d1494fe9d42",
+        "size": 1321
+      },
+      "existing_receipt_role": "SOURCE_DERIVED_SINGLE_MOUSE_STATE_OWNER",
+      "existing_receipt_admitted": false,
+      "dos_target_input": false,
+      "consolidation_review": "REVIEW_REQUIRED_BEFORE_REUSE",
+      "reason": "Preserve the specific v17 implementation and evidence. Its role label, compilation and native replay do not themselves authorize a DOS semantic substitute."
+    },
+    {
+      "source": "portable/whole_program/platform/m1b73_mouse.c",
+      "source_sha256": "3975847cc8a493dc7d3c25278ab82f9b1e0a1552e07ca5bd3b9eec5a1d54cec1",
+      "preserved_snapshot": {
+        "path": "build/whole-application-v17/inputs/portable/whole_program/platform/m1b73_mouse.c",
+        "sha256": "3975847cc8a493dc7d3c25278ab82f9b1e0a1552e07ca5bd3b9eec5a1d54cec1",
+        "size": 13199
+      },
+      "existing_receipt_role": "SOURCE_DERIVED_NATIVE_MOUSE_LIFECYCLE",
+      "existing_receipt_admitted": false,
+      "dos_target_input": false,
+      "consolidation_review": "REVIEW_REQUIRED_BEFORE_REUSE",
+      "reason": "Preserve the specific v17 implementation and evidence. Its role label, compilation and native replay do not themselves authorize a DOS semantic substitute."
+    },
+    {
+      "source": "portable/whole_program/platform/m1b73_queues.c",
+      "source_sha256": "3dab8e279242365abaa5a3896042fad0a552c7067eed7c3fd9464d0c9cad884c",
+      "preserved_snapshot": {
+        "path": "build/whole-application-v17/inputs/portable/whole_program/platform/m1b73_queues.c",
+        "sha256": "3dab8e279242365abaa5a3896042fad0a552c7067eed7c3fd9464d0c9cad884c",
+        "size": 3911
+      },
+      "existing_receipt_role": "SOURCE_DERIVED_QUEUE_OWNERS_AND_DISPATCH",
+      "existing_receipt_admitted": false,
+      "dos_target_input": false,
+      "consolidation_review": "REVIEW_REQUIRED_BEFORE_REUSE",
+      "reason": "Preserve the specific v17 implementation and evidence. Its role label, compilation and native replay do not themselves authorize a DOS semantic substitute."
+    },
+    {
+      "source": "portable/whole_program/platform/m1b73_queue_source.c",
+      "source_sha256": "fe2a5e450dee2aa77eba09a14f8b7f00d193a5942b107dafcddb00cdb92b30fa",
+      "preserved_snapshot": {
+        "path": "build/whole-application-v17/inputs/portable/whole_program/platform/m1b73_queue_source.c",
+        "sha256": "fe2a5e450dee2aa77eba09a14f8b7f00d193a5942b107dafcddb00cdb92b30fa",
+        "size": 1525
+      },
+      "existing_receipt_role": "SOURCE_DERIVED_TYPED_QUEUE_VIEW",
+      "existing_receipt_admitted": false,
+      "dos_target_input": false,
+      "consolidation_review": "REVIEW_REQUIRED_BEFORE_REUSE",
+      "reason": "Preserve the specific v17 implementation and evidence. Its role label, compilation and native replay do not themselves authorize a DOS semantic substitute."
+    },
+    {
+      "source": "portable/whole_program/platform/m1b73_queue_ops.c",
+      "source_sha256": "e9dddcc61749817824bd979834410bbe9b1f457be97ac7e4cee556a3f9c8b0e1",
+      "preserved_snapshot": {
+        "path": "build/whole-application-v17/inputs/portable/whole_program/platform/m1b73_queue_ops.c",
+        "sha256": "e9dddcc61749817824bd979834410bbe9b1f457be97ac7e4cee556a3f9c8b0e1",
+        "size": 12841
+      },
+      "existing_receipt_role": "SOURCE_DERIVED_QUEUE_OPERATIONS_AND_TYPED_CALLBACK_SIDECARS",
+      "existing_receipt_admitted": false,
+      "dos_target_input": false,
+      "consolidation_review": "REVIEW_REQUIRED_BEFORE_REUSE",
+      "reason": "Preserve the specific v17 implementation and evidence. Its role label, compilation and native replay do not themselves authorize a DOS semantic substitute."
+    },
+    {
+      "source": "portable/whole_program/platform/m1b73_queue_runtime.c",
+      "source_sha256": "e63bc543789d28ad7d3a150d03679179ad6c2bdf48b3e545356f329dea1084b7",
+      "preserved_snapshot": {
+        "path": "build/whole-application-v17/inputs/portable/whole_program/platform/m1b73_queue_runtime.c",
+        "sha256": "e63bc543789d28ad7d3a150d03679179ad6c2bdf48b3e545356f329dea1084b7",
+        "size": 12792
+      },
+      "existing_receipt_role": "NATIVE_SOURCE_QUEUE_EVENT_MOUSE_RUNTIME_BINDER",
+      "existing_receipt_admitted": false,
+      "dos_target_input": false,
+      "consolidation_review": "REVIEW_REQUIRED_BEFORE_REUSE",
+      "reason": "Preserve the specific v17 implementation and evidence. Its role label, compilation and native replay do not themselves authorize a DOS semantic substitute."
+    },
+    {
+      "source": "portable/whole_program/platform/graphics.c",
+      "source_sha256": "965057f9139750866b983b052113f1920d23f3acce3bb6ad53f2d190deb6fef5",
+      "preserved_snapshot": {
+        "path": "build/whole-application-v17/inputs/portable/whole_program/platform/graphics.c",
+        "sha256": "965057f9139750866b983b052113f1920d23f3acce3bb6ad53f2d190deb6fef5",
+        "size": 34268
+      },
+      "existing_receipt_role": "NATIVE_INDEXED_GRAPHICS_BOUNDARY",
+      "existing_receipt_admitted": false,
+      "dos_target_input": false,
+      "consolidation_review": "REVIEW_REQUIRED_BEFORE_REUSE",
+      "reason": "Preserve the specific v17 implementation and evidence. Its role label, compilation and native replay do not themselves authorize a DOS semantic substitute."
+    },
+    {
+      "source": "portable/whole_program/platform/graphics_cursor_source.c",
+      "source_sha256": "4f4c42b9b3224c620d99315880b2628678a2bebf699bf80e06cb141609024966",
+      "preserved_snapshot": {
+        "path": "build/whole-application-v17/inputs/portable/whole_program/platform/graphics_cursor_source.c",
+        "sha256": "4f4c42b9b3224c620d99315880b2628678a2bebf699bf80e06cb141609024966",
+        "size": 10566
+      },
+      "existing_receipt_role": "SOURCE_DERIVED_CURSOR_SAVE_UNDER_AND_LOGIC",
+      "existing_receipt_admitted": false,
+      "dos_target_input": false,
+      "consolidation_review": "REVIEW_REQUIRED_BEFORE_REUSE",
+      "reason": "Preserve the specific v17 implementation and evidence. Its role label, compilation and native replay do not themselves authorize a DOS semantic substitute."
+    },
+    {
+      "source": "portable/whole_program/platform/graphics_cursor_hooks.c",
+      "source_sha256": "d5da4849f6598c725d56f5ba94475a3b5eb59b73afb74079de5d501c7837a243",
+      "preserved_snapshot": {
+        "path": "build/whole-application-v17/inputs/portable/whole_program/platform/graphics_cursor_hooks.c",
+        "sha256": "d5da4849f6598c725d56f5ba94475a3b5eb59b73afb74079de5d501c7837a243",
+        "size": 1520
+      },
+      "existing_receipt_role": "NATIVE_SHARED_SOURCE_CURSOR_LIFECYCLE_BRIDGE",
+      "existing_receipt_admitted": false,
+      "dos_target_input": false,
+      "consolidation_review": "REVIEW_REQUIRED_BEFORE_REUSE",
+      "reason": "Preserve the specific v17 implementation and evidence. Its role label, compilation and native replay do not themselves authorize a DOS semantic substitute."
+    },
+    {
+      "source": "portable/whole_program/platform/graphics_source_slots.c",
+      "source_sha256": "86096f7ad6b51fcec2b04006c66f2441c57fc7847f68553184b039749d301157",
+      "preserved_snapshot": {
+        "path": "build/whole-application-v17/inputs/portable/whole_program/platform/graphics_source_slots.c",
+        "sha256": "86096f7ad6b51fcec2b04006c66f2441c57fc7847f68553184b039749d301157",
+        "size": 553
+      },
+      "existing_receipt_role": "SOURCE_TYPED_RASTER_CALLBACK_RESOURCE_OWNERS",
+      "existing_receipt_admitted": false,
+      "dos_target_input": false,
+      "consolidation_review": "REVIEW_REQUIRED_BEFORE_REUSE",
+      "reason": "Preserve the specific v17 implementation and evidence. Its role label, compilation and native replay do not themselves authorize a DOS semantic substitute."
+    },
+    {
+      "source": "portable/whole_program/platform/graphics_s00_raster_source.c",
+      "source_sha256": "89e049dd53fef44b7e55f296fe41fd5031e5d5cb488cef251d1b6023be587167",
+      "preserved_snapshot": {
+        "path": "build/whole-application-v17/inputs/portable/whole_program/platform/graphics_s00_raster_source.c",
+        "sha256": "89e049dd53fef44b7e55f296fe41fd5031e5d5cb488cef251d1b6023be587167",
+        "size": 13899
+      },
+      "existing_receipt_role": "DOS_VERIFIED_S00_BUFFER_RASTER_LEAVES",
+      "existing_receipt_admitted": false,
+      "dos_target_input": false,
+      "consolidation_review": "REVIEW_REQUIRED_BEFORE_REUSE",
+      "reason": "Preserve the specific v17 implementation and evidence. Its role label, compilation and native replay do not themselves authorize a DOS semantic substitute."
+    },
+    {
+      "source": "portable/whole_program/platform/graphics_s00_unowned_source.c",
+      "source_sha256": "8f4949652e8db7c1ba171c26aea99513429ce60e89051ca379d2f22390d853fb",
+      "preserved_snapshot": {
+        "path": "build/whole-application-v17/inputs/portable/whole_program/platform/graphics_s00_unowned_source.c",
+        "sha256": "8f4949652e8db7c1ba171c26aea99513429ce60e89051ca379d2f22390d853fb",
+        "size": 449
+      },
+      "existing_receipt_role": "SOURCE_EMPTY_ENTRY_AND_REJECTED_CGA_BOUNDARY",
+      "existing_receipt_admitted": false,
+      "dos_target_input": false,
+      "consolidation_review": "REVIEW_REQUIRED_BEFORE_REUSE",
+      "reason": "Preserve the specific v17 implementation and evidence. Its role label, compilation and native replay do not themselves authorize a DOS semantic substitute."
+    },
+    {
+      "source": "portable/whole_program/platform/graphics_s00_map_tables.c",
+      "source_sha256": "3895ad077a4165a3224f9883e133ded16fdb778fb92e675e03ba1b0f4b9073da",
+      "preserved_snapshot": {
+        "path": "build/whole-application-v17/inputs/portable/whole_program/platform/graphics_s00_map_tables.c",
+        "sha256": "3895ad077a4165a3224f9883e133ded16fdb778fb92e675e03ba1b0f4b9073da",
+        "size": 16175
+      },
+      "existing_receipt_role": "DOS_VERIFIED_S00_MAP_COLOR_TRANSFORMS",
+      "existing_receipt_admitted": false,
+      "dos_target_input": false,
+      "consolidation_review": "REVIEW_REQUIRED_BEFORE_REUSE",
+      "reason": "Preserve the specific v17 implementation and evidence. Its role label, compilation and native replay do not themselves authorize a DOS semantic substitute."
+    },
+    {
+      "source": "portable/whole_program/state/map_render_selectors.c",
+      "source_sha256": "7cb0473cc00ebc1826bb5e17696bb31d97a5afbda0b0c163ebba44ae0a4a0bcf",
+      "preserved_snapshot": {
+        "path": "build/whole-application-v17/inputs/portable/whole_program/state/map_render_selectors.c",
+        "sha256": "7cb0473cc00ebc1826bb5e17696bb31d97a5afbda0b0c163ebba44ae0a4a0bcf",
+        "size": 380
+      },
+      "existing_receipt_role": "SOURCE_TYPED_MAP_RENDER_SELECTOR_OWNERS",
+      "existing_receipt_admitted": false,
+      "dos_target_input": false,
+      "consolidation_review": "REVIEW_REQUIRED_BEFORE_REUSE",
+      "reason": "Preserve the specific v17 implementation and evidence. Its role label, compilation and native replay do not themselves authorize a DOS semantic substitute."
+    },
+    {
+      "source": "portable/whole_program/state/font_pointer_state_v1.c",
+      "source_sha256": "8e244a84450ff8317549a809ec4887f884026772ea15ae51e78825b05028ef2d",
+      "preserved_snapshot": {
+        "path": "build/whole-application-v17/inputs/portable/whole_program/state/font_pointer_state_v1.c",
+        "sha256": "8e244a84450ff8317549a809ec4887f884026772ea15ae51e78825b05028ef2d",
+        "size": 804
+      },
+      "existing_receipt_role": "SOURCE_RESOURCE_FONT_POINTER_OWNERS",
+      "existing_receipt_admitted": false,
+      "dos_target_input": false,
+      "consolidation_review": "REVIEW_REQUIRED_BEFORE_REUSE",
+      "reason": "Preserve the specific v17 implementation and evidence. Its role label, compilation and native replay do not themselves authorize a DOS semantic substitute."
+    },
+    {
+      "source": "portable/whole_program/state/startup_globals_v1.c",
+      "source_sha256": "9e771ef1cdf7971fd57943c29c1df38794713915488eb52d8250c11c5ed846ef",
+      "preserved_snapshot": {
+        "path": "build/whole-application-v17/inputs/portable/whole_program/state/startup_globals_v1.c",
+        "sha256": "9e771ef1cdf7971fd57943c29c1df38794713915488eb52d8250c11c5ed846ef",
+        "size": 142
+      },
+      "existing_receipt_role": "SOURCE_STARTUP_RESIDENT_LOGICAL_VALUES",
+      "existing_receipt_admitted": false,
+      "dos_target_input": false,
+      "consolidation_review": "REVIEW_REQUIRED_BEFORE_REUSE",
+      "reason": "Preserve the specific v17 implementation and evidence. Its role label, compilation and native replay do not themselves authorize a DOS semantic substitute."
+    },
+    {
+      "source": "portable/whole_program/state/yard_cache_globals_v1.c",
+      "source_sha256": "1479bc2258534d3dd32820a09923bbd2297c260f11165243565f88e19805c3b0",
+      "preserved_snapshot": {
+        "path": "build/whole-application-v17/inputs/portable/whole_program/state/yard_cache_globals_v1.c",
+        "sha256": "1479bc2258534d3dd32820a09923bbd2297c260f11165243565f88e19805c3b0",
+        "size": 188
+      },
+      "existing_receipt_role": "SOURCE_SHARED_YARD_CACHE_HANDLES_AND_POINTS",
+      "existing_receipt_admitted": false,
+      "dos_target_input": false,
+      "consolidation_review": "REVIEW_REQUIRED_BEFORE_REUSE",
+      "reason": "Preserve the specific v17 implementation and evidence. Its role label, compilation and native replay do not themselves authorize a DOS semantic substitute."
+    },
+    {
+      "source": "portable/whole_program/window_parameters.c",
+      "source_sha256": "a44826f47bb2e945125ac7b6724d4d6e06a6d883bfca3ce7c3e3ca916f707e5b",
+      "preserved_snapshot": {
+        "path": "build/whole-application-v17/inputs/portable/whole_program/window_parameters.c",
+        "sha256": "a44826f47bb2e945125ac7b6724d4d6e06a6d883bfca3ce7c3e3ca916f707e5b",
+        "size": 3598
+      },
+      "existing_receipt_role": "SOURCE_EXPLICIT_OPTIONAL_WINDOW_PARAMETER_WORDS",
+      "existing_receipt_admitted": false,
+      "dos_target_input": false,
+      "consolidation_review": "REVIEW_REQUIRED_BEFORE_REUSE",
+      "reason": "Preserve the specific v17 implementation and evidence. Its role label, compilation and native replay do not themselves authorize a DOS semantic substitute."
+    },
+    {
+      "source": "portable/whole_program/state/main_loop_counter.c",
+      "source_sha256": "7dfd10d9e97d5b5c1c29f6531c825a020061191c74aa5ac9f4a387146de7fe41",
+      "preserved_snapshot": {
+        "path": "build/whole-application-v17/inputs/portable/whole_program/state/main_loop_counter.c",
+        "sha256": "7dfd10d9e97d5b5c1c29f6531c825a020061191c74aa5ac9f4a387146de7fe41",
+        "size": 202
+      },
+      "existing_receipt_role": "SOURCE_MAIN_FRAME_COUNTER_OWNER",
+      "existing_receipt_admitted": false,
+      "dos_target_input": false,
+      "consolidation_review": "REVIEW_REQUIRED_BEFORE_REUSE",
+      "reason": "Preserve the specific v17 implementation and evidence. Its role label, compilation and native replay do not themselves authorize a DOS semantic substitute."
+    },
+    {
+      "source": "portable/game/state/source_runtime_globals.c",
+      "source_sha256": "0e5bacbc87b7264cc35ac7ea83af3b88f363993fdca7d8e0e730fbcdee725d71",
+      "preserved_snapshot": {
+        "path": "build/whole-application-v17/inputs/portable/game/state/source_runtime_globals.c",
+        "sha256": "0e5bacbc87b7264cc35ac7ea83af3b88f363993fdca7d8e0e730fbcdee725d71",
+        "size": 2081
+      },
+      "existing_receipt_role": "SOURCE_SHARED_RUNTIME_UI_STATE_OWNERS",
+      "existing_receipt_admitted": false,
+      "dos_target_input": false,
+      "consolidation_review": "REVIEW_REQUIRED_BEFORE_REUSE",
+      "reason": "Preserve the specific v17 implementation and evidence. Its role label, compilation and native replay do not themselves authorize a DOS semantic substitute."
+    },
+    {
+      "source": "portable/whole_program/platform/map_transform_callbacks.c",
+      "source_sha256": "1895a03e700b33a78b06d2b5b652a5101ec501cbe4b705d10c0632b93caa4903",
+      "preserved_snapshot": {
+        "path": "build/whole-application-v17/inputs/portable/whole_program/platform/map_transform_callbacks.c",
+        "sha256": "1895a03e700b33a78b06d2b5b652a5101ec501cbe4b705d10c0632b93caa4903",
+        "size": 764
+      },
+      "existing_receipt_role": "SOURCE_MAP_TRANSFORM_CALLBACK_CELLS",
+      "existing_receipt_admitted": false,
+      "dos_target_input": false,
+      "consolidation_review": "REVIEW_REQUIRED_BEFORE_REUSE",
+      "reason": "Preserve the specific v17 implementation and evidence. Its role label, compilation and native replay do not themselves authorize a DOS semantic substitute."
+    },
+    {
+      "source": "portable/whole_program/platform/graphics_source_clip.c",
+      "source_sha256": "e41019bbe98fa1fd7d0d618ab3241dd9a963fcebb06a1befa2d645a18f146e3b",
+      "preserved_snapshot": {
+        "path": "build/whole-application-v17/inputs/portable/whole_program/platform/graphics_source_clip.c",
+        "sha256": "e41019bbe98fa1fd7d0d618ab3241dd9a963fcebb06a1befa2d645a18f146e3b",
+        "size": 996
+      },
+      "existing_receipt_role": "SOURCE_DERIVED_SHARED_CLIP_POINTER_AND_RECTANGLE",
+      "existing_receipt_admitted": false,
+      "dos_target_input": false,
+      "consolidation_review": "REVIEW_REQUIRED_BEFORE_REUSE",
+      "reason": "Preserve the specific v17 implementation and evidence. Its role label, compilation and native replay do not themselves authorize a DOS semantic substitute."
+    },
+    {
+      "source": "portable/whole_program/platform/graphics_bitmap_source.c",
+      "source_sha256": "1a4c8154d24ee72eb2d35143585e381a1d78ff7816b6c7001f8a9925db06af5d",
+      "preserved_snapshot": {
+        "path": "build/whole-application-v17/inputs/portable/whole_program/platform/graphics_bitmap_source.c",
+        "sha256": "1a4c8154d24ee72eb2d35143585e381a1d78ff7816b6c7001f8a9925db06af5d",
+        "size": 5125
+      },
+      "existing_receipt_role": "SOURCE_DERIVED_PLANAR_BITMAP_CLIP_BOUNDARY",
+      "existing_receipt_admitted": false,
+      "dos_target_input": false,
+      "consolidation_review": "REVIEW_REQUIRED_BEFORE_REUSE",
+      "reason": "Preserve the specific v17 implementation and evidence. Its role label, compilation and native replay do not themselves authorize a DOS semantic substitute."
+    },
+    {
+      "source": "portable/whole_program/platform/graphics_capture_source.c",
+      "source_sha256": "d2d10be6caeb828962f85c499c2094d48f10f3ec963932fae2656ea737b13d69",
+      "preserved_snapshot": {
+        "path": "build/whole-application-v17/inputs/portable/whole_program/platform/graphics_capture_source.c",
+        "sha256": "d2d10be6caeb828962f85c499c2094d48f10f3ec963932fae2656ea737b13d69",
+        "size": 16614
+      },
+      "existing_receipt_role": "SOURCE_DERIVED_PLANAR_CAPTURE_WITH_EXPLICIT_CURSOR_DOMAIN",
+      "existing_receipt_admitted": false,
+      "dos_target_input": false,
+      "consolidation_review": "REVIEW_REQUIRED_BEFORE_REUSE",
+      "reason": "Preserve the specific v17 implementation and evidence. Its role label, compilation and native replay do not themselves authorize a DOS semantic substitute."
+    },
+    {
+      "source": "portable/whole_program/platform/graphics_entry_source.c",
+      "source_sha256": "43f720bd83ebda2fd6cbe0708c12aab69004a0dc55cf9ef6cd5ca7b04e565685",
+      "preserved_snapshot": {
+        "path": "build/whole-application-v17/inputs/portable/whole_program/platform/graphics_entry_source.c",
+        "sha256": "43f720bd83ebda2fd6cbe0708c12aab69004a0dc55cf9ef6cd5ca7b04e565685",
+        "size": 5401
+      },
+      "existing_receipt_role": "SOURCE_DERIVED_BITMAP_FONT_PALETTE_AND_LOGIC_ENTRYPOINTS",
+      "existing_receipt_admitted": false,
+      "dos_target_input": false,
+      "consolidation_review": "REVIEW_REQUIRED_BEFORE_REUSE",
+      "reason": "Preserve the specific v17 implementation and evidence. Its role label, compilation and native replay do not themselves authorize a DOS semantic substitute."
+    },
+    {
+      "source": "portable/whole_program/platform/graphics_misc_source.c",
+      "source_sha256": "294dafd82d3bc4b553bb0417c4dfe3271ba372fb142c63972d75e51bce21fd4d",
+      "preserved_snapshot": {
+        "path": "build/whole-application-v17/inputs/portable/whole_program/platform/graphics_misc_source.c",
+        "sha256": "294dafd82d3bc4b553bb0417c4dfe3271ba372fb142c63972d75e51bce21fd4d",
+        "size": 5615
+      },
+      "existing_receipt_role": "SOURCE_DERIVED_MASKED_FILL_CLIPPED_LINE_SCREEN_COPY_AND_RETIREMENT",
+      "existing_receipt_admitted": false,
+      "dos_target_input": false,
+      "consolidation_review": "REVIEW_REQUIRED_BEFORE_REUSE",
+      "reason": "Preserve the specific v17 implementation and evidence. Its role label, compilation and native replay do not themselves authorize a DOS semantic substitute."
+    },
+    {
+      "source": "portable/whole_program/platform/graphics_tile_upload.c",
+      "source_sha256": "5fe5e0a59b27157a986f1fb06b984a8e0a0f696261109ab45fe6bc7c8ddfb706",
+      "preserved_snapshot": {
+        "path": "build/whole-application-v17/inputs/portable/whole_program/platform/graphics_tile_upload.c",
+        "sha256": "5fe5e0a59b27157a986f1fb06b984a8e0a0f696261109ab45fe6bc7c8ddfb706",
+        "size": 17065
+      },
+      "existing_receipt_role": "SOURCE_DERIVED_PLANAR_TILE_APERTURE_UPLOADS",
+      "existing_receipt_admitted": false,
+      "dos_target_input": false,
+      "consolidation_review": "REVIEW_REQUIRED_BEFORE_REUSE",
+      "reason": "Preserve the specific v17 implementation and evidence. Its role label, compilation and native replay do not themselves authorize a DOS semantic substitute."
+    },
+    {
+      "source": "portable/whole_program/platform/sdl3/palette_host.c",
+      "source_sha256": "829a67b035b841de2586bad1e97763ba67c36942fa510597ba5b7d9a87fa6dec",
+      "preserved_snapshot": {
+        "path": "build/whole-application-v17/inputs/portable/whole_program/platform/sdl3/palette_host.c",
+        "sha256": "829a67b035b841de2586bad1e97763ba67c36942fa510597ba5b7d9a87fa6dec",
+        "size": 3047
+      },
+      "existing_receipt_role": "NATIVE_SOURCE_PALETTE_PRESENTATION_SERVICE",
+      "existing_receipt_admitted": false,
+      "dos_target_input": false,
+      "consolidation_review": "REVIEW_REQUIRED_BEFORE_REUSE",
+      "reason": "Preserve the specific v17 implementation and evidence. Its role label, compilation and native replay do not themselves authorize a DOS semantic substitute."
+    },
+    {
+      "source": "portable/whole_program/platform/ega_map_readback.c",
+      "source_sha256": "1322e846b4522e310cf27d24fd3ea7ea5a1467f46343d58ca9027191ffaa6931",
+      "preserved_snapshot": {
+        "path": "build/whole-application-v17/inputs/portable/whole_program/platform/ega_map_readback.c",
+        "sha256": "1322e846b4522e310cf27d24fd3ea7ea5a1467f46343d58ca9027191ffaa6931",
+        "size": 840
+      },
+      "existing_receipt_role": "SOURCE_DERIVED_EGA_MAP_SCRATCH_READBACK",
+      "existing_receipt_admitted": false,
+      "dos_target_input": false,
+      "consolidation_review": "REVIEW_REQUIRED_BEFORE_REUSE",
+      "reason": "Preserve the specific v17 implementation and evidence. Its role label, compilation and native replay do not themselves authorize a DOS semantic substitute."
+    },
+    {
+      "source": "portable/whole_program/platform/native_video_profile.c",
+      "source_sha256": "f2086a6be0f7205ba45cb9074457c947c325b879b33845663cc2c93d6eb556dc",
+      "preserved_snapshot": {
+        "path": "build/whole-application-v17/inputs/portable/whole_program/platform/native_video_profile.c",
+        "sha256": "f2086a6be0f7205ba45cb9074457c947c325b879b33845663cc2c93d6eb556dc",
+        "size": 6352
+      },
+      "existing_receipt_role": "NATIVE_SELECTED_EGA_VGA_STARTUP_PROFILES",
+      "existing_receipt_admitted": false,
+      "dos_target_input": false,
+      "consolidation_review": "REVIEW_REQUIRED_BEFORE_REUSE",
+      "reason": "Preserve the specific v17 implementation and evidence. Its role label, compilation and native replay do not themselves authorize a DOS semantic substitute."
+    },
+    {
+      "source": "portable/whole_program/platform/unsupported_video_profiles.c",
+      "source_sha256": "6cb9fa7dcc76645257a0b87d2e5a1939d28d54fad64223a830c92de688d96f32",
+      "preserved_snapshot": {
+        "path": "build/whole-application-v17/inputs/portable/whole_program/platform/unsupported_video_profiles.c",
+        "sha256": "6cb9fa7dcc76645257a0b87d2e5a1939d28d54fad64223a830c92de688d96f32",
+        "size": 2432
+      },
+      "existing_receipt_role": "EXPLICIT_REJECTION_OF_UNSELECTED_LEGACY_DISPLAY_PROFILES",
+      "existing_receipt_admitted": false,
+      "dos_target_input": false,
+      "consolidation_review": "REVIEW_REQUIRED_BEFORE_REUSE",
+      "reason": "Preserve the specific v17 implementation and evidence. Its role label, compilation and native replay do not themselves authorize a DOS semantic substitute."
+    },
+    {
+      "source": "portable/whole_program/platform/drive_directory.c",
+      "source_sha256": "3efeaa4a45f1ab3a21a61116e30cb57c81609bd0ba29b884d1a2a06dd1d9de0a",
+      "preserved_snapshot": {
+        "path": "build/whole-application-v17/inputs/portable/whole_program/platform/drive_directory.c",
+        "sha256": "3efeaa4a45f1ab3a21a61116e30cb57c81609bd0ba29b884d1a2a06dd1d9de0a",
+        "size": 2332
+      },
+      "existing_receipt_role": "NATIVE_DRIVE_CURRENT_DIRECTORY_SERVICE",
+      "existing_receipt_admitted": false,
+      "dos_target_input": false,
+      "consolidation_review": "REVIEW_REQUIRED_BEFORE_REUSE",
+      "reason": "Preserve the specific v17 implementation and evidence. Its role label, compilation and native replay do not themselves authorize a DOS semantic substitute."
+    },
+    {
+      "source": "portable/game/resources/source_graphics_resources.c",
+      "source_sha256": "c89fb00301d909505aef702bda8cfd2911f8022ee3787a9eca49861fc9c7ab29",
+      "preserved_snapshot": {
+        "path": "build/whole-application-v17/inputs/portable/game/resources/source_graphics_resources.c",
+        "sha256": "c89fb00301d909505aef702bda8cfd2911f8022ee3787a9eca49861fc9c7ab29",
+        "size": 9160
+      },
+      "existing_receipt_role": "SOURCE_DERIVED_GRAPHICS_DATA_AND_FONT_BINDINGS",
+      "existing_receipt_admitted": false,
+      "dos_target_input": false,
+      "consolidation_review": "REVIEW_REQUIRED_BEFORE_REUSE",
+      "reason": "Preserve the specific v17 implementation and evidence. Its role label, compilation and native replay do not themselves authorize a DOS semantic substitute."
+    },
+    {
+      "source": "portable/game/resources/bios_fonts.c",
+      "source_sha256": "167ed9618d2ec2af7464ca7c531d15716059b05480219d021fbaa6b4763f617c",
+      "preserved_snapshot": {
+        "path": "build/whole-application-v17/inputs/portable/game/resources/bios_fonts.c",
+        "sha256": "167ed9618d2ec2af7464ca7c531d15716059b05480219d021fbaa6b4763f617c",
+        "size": 11446
+      },
+      "existing_receipt_role": "VERIFIED_EXTERNAL_BIOS_FONT_LOADER",
+      "existing_receipt_admitted": false,
+      "dos_target_input": false,
+      "consolidation_review": "REVIEW_REQUIRED_BEFORE_REUSE",
+      "reason": "Preserve the specific v17 implementation and evidence. Its role label, compilation and native replay do not themselves authorize a DOS semantic substitute."
+    },
+    {
+      "source": "portable/whole_program/platform/bios_font_view.c",
+      "source_sha256": "b3b0dae7d29c155aab19dd9a901c8f4a8981a08bd1f6352cfdafb8ddb844a4f8",
+      "preserved_snapshot": {
+        "path": "build/whole-application-v17/inputs/portable/whole_program/platform/bios_font_view.c",
+        "sha256": "b3b0dae7d29c155aab19dd9a901c8f4a8981a08bd1f6352cfdafb8ddb844a4f8",
+        "size": 963
+      },
+      "existing_receipt_role": "NATIVE_BORROWED_BIOS_FONT_VIEW",
+      "existing_receipt_admitted": false,
+      "dos_target_input": false,
+      "consolidation_review": "REVIEW_REQUIRED_BEFORE_REUSE",
+      "reason": "Preserve the specific v17 implementation and evidence. Its role label, compilation and native replay do not themselves authorize a DOS semantic substitute."
+    },
+    {
+      "source": "portable/whole_program/platform/graphics_line_1499.c",
+      "source_sha256": "1eb0fc1924a834df78fc57b2441e2e7bbd336a7e28d2ff27d549ae01acd06949",
+      "preserved_snapshot": {
+        "path": "build/whole-application-v17/inputs/portable/whole_program/platform/graphics_line_1499.c",
+        "sha256": "1eb0fc1924a834df78fc57b2441e2e7bbd336a7e28d2ff27d549ae01acd06949",
+        "size": 2767
+      },
+      "existing_receipt_role": "DOS_VERIFIED_SOURCE_PIXEL_WALK",
+      "existing_receipt_admitted": false,
+      "dos_target_input": false,
+      "consolidation_review": "REVIEW_REQUIRED_BEFORE_REUSE",
+      "reason": "Preserve the specific v17 implementation and evidence. Its role label, compilation and native replay do not themselves authorize a DOS semantic substitute."
+    },
+    {
+      "source": "portable/whole_program/text_bitmap.c",
+      "source_sha256": "b88238cd5effba626d28baaa7f56a725d15bba9de8aeafe4d9c57636ee9f38d7",
+      "preserved_snapshot": {
+        "path": "build/whole-application-v17/inputs/portable/whole_program/text_bitmap.c",
+        "sha256": "b88238cd5effba626d28baaa7f56a725d15bba9de8aeafe4d9c57636ee9f38d7",
+        "size": 5360
+      },
+      "existing_receipt_role": "DOS_VERIFIED_TEXT_BITMAP_ALGORITHM",
+      "existing_receipt_admitted": false,
+      "dos_target_input": false,
+      "consolidation_review": "REVIEW_REQUIRED_BEFORE_REUSE",
+      "reason": "Preserve the specific v17 implementation and evidence. Its role label, compilation and native replay do not themselves authorize a DOS semantic substitute."
+    },
+    {
+      "source": "portable/whole_program/text_bitmap_bridge.c",
+      "source_sha256": "5842b1705358b156a0d51041490210cc1347137ca06b0ee258417222c67a8c64",
+      "preserved_snapshot": {
+        "path": "build/whole-application-v17/inputs/portable/whole_program/text_bitmap_bridge.c",
+        "sha256": "5842b1705358b156a0d51041490210cc1347137ca06b0ee258417222c67a8c64",
+        "size": 5554
+      },
+      "existing_receipt_role": "NATIVE_TEXT_BITMAP_SOURCE_ABI",
+      "existing_receipt_admitted": false,
+      "dos_target_input": false,
+      "consolidation_review": "REVIEW_REQUIRED_BEFORE_REUSE",
+      "reason": "Preserve the specific v17 implementation and evidence. Its role label, compilation and native replay do not themselves authorize a DOS semantic substitute."
+    },
+    {
+      "source": "portable/render/primitives.c",
+      "source_sha256": "46f440ab374b1a83ba1f402c40cf9af73d88ca862ae747e786ee8b99b8e67df0",
+      "preserved_snapshot": {
+        "path": "build/whole-application-v17/inputs/portable/render/primitives.c",
+        "sha256": "46f440ab374b1a83ba1f402c40cf9af73d88ca862ae747e786ee8b99b8e67df0",
+        "size": 5303
+      },
+      "existing_receipt_role": "EXISTING_NATIVE_RASTER_STORAGE",
+      "existing_receipt_admitted": false,
+      "dos_target_input": false,
+      "consolidation_review": "REVIEW_REQUIRED_BEFORE_REUSE",
+      "reason": "Preserve the specific v17 implementation and evidence. Its role label, compilation and native replay do not themselves authorize a DOS semantic substitute."
+    },
+    {
+      "source": "portable/whole_program/platform/sdl3/input_time_host.c",
+      "source_sha256": "46bc3301cd12ed15729ff2bb857660a3babfb1e568b6ccc2beca89a52555b575",
+      "preserved_snapshot": {
+        "path": "build/whole-application-v17/inputs/portable/whole_program/platform/sdl3/input_time_host.c",
+        "sha256": "46bc3301cd12ed15729ff2bb857660a3babfb1e568b6ccc2beca89a52555b575",
+        "size": 14437
+      },
+      "existing_receipt_role": "NATIVE_HOST_BINDING",
+      "existing_receipt_admitted": false,
+      "dos_target_input": false,
+      "consolidation_review": "REVIEW_REQUIRED_BEFORE_REUSE",
+      "reason": "Preserve the specific v17 implementation and evidence. Its role label, compilation and native replay do not themselves authorize a DOS semantic substitute."
+    },
+    {
+      "source": "portable/whole_program/platform/sdl3/m1b73_application_input.c",
+      "source_sha256": "cc2604b706ed1c08f75311ed6e9a75b2fb8d36457268d905a34cd02d132fa2c4",
+      "preserved_snapshot": {
+        "path": "build/whole-application-v17/inputs/portable/whole_program/platform/sdl3/m1b73_application_input.c",
+        "sha256": "cc2604b706ed1c08f75311ed6e9a75b2fb8d36457268d905a34cd02d132fa2c4",
+        "size": 20718
+      },
+      "existing_receipt_role": "NATIVE_SOURCE_MAIN_INPUT_AND_COUNTDOWN_BINDER",
+      "existing_receipt_admitted": false,
+      "dos_target_input": false,
+      "consolidation_review": "REVIEW_REQUIRED_BEFORE_REUSE",
+      "reason": "Preserve the specific v17 implementation and evidence. Its role label, compilation and native replay do not themselves authorize a DOS semantic substitute."
+    },
+    {
+      "source": "portable/whole_program/platform/sdl3/host.c",
+      "source_sha256": "8210e28ba4a0da173ced2b3547ea3e168e44100b37d4d15b8e70d2e24f8c412a",
+      "preserved_snapshot": {
+        "path": "build/whole-application-v17/inputs/portable/whole_program/platform/sdl3/host.c",
+        "sha256": "8210e28ba4a0da173ced2b3547ea3e168e44100b37d4d15b8e70d2e24f8c412a",
+        "size": 13233
+      },
+      "existing_receipt_role": "SDL3_ORIGINAL_GEOMETRY_PRESENTATION_AND_INPUT",
+      "existing_receipt_admitted": false,
+      "dos_target_input": false,
+      "consolidation_review": "REVIEW_REQUIRED_BEFORE_REUSE",
+      "reason": "Preserve the specific v17 implementation and evidence. Its role label, compilation and native replay do not themselves authorize a DOS semantic substitute."
+    },
+    {
+      "source": "portable/game/timing.c",
+      "source_sha256": "90fddb1eed99a3511fecad98ff26fc147529246a3d0ff2c930420942d38cab91",
+      "preserved_snapshot": {
+        "path": "build/whole-application-v17/inputs/portable/game/timing.c",
+        "sha256": "90fddb1eed99a3511fecad98ff26fc147529246a3d0ff2c930420942d38cab91",
+        "size": 7586
+      },
+      "existing_receipt_role": "SOURCE_DERIVED_TIMING_CONTRACT",
+      "existing_receipt_admitted": false,
+      "dos_target_input": false,
+      "consolidation_review": "REVIEW_REQUIRED_BEFORE_REUSE",
+      "reason": "Preserve the specific v17 implementation and evidence. Its role label, compilation and native replay do not themselves authorize a DOS semantic substitute."
+    },
+    {
+      "source": "portable/whole_program/platform/directory.c",
+      "source_sha256": "facca93cd9280376a55304c187297c9ef409de24967bfb198d46cf923c57ac09",
+      "preserved_snapshot": {
+        "path": "build/whole-application-v17/inputs/portable/whole_program/platform/directory.c",
+        "sha256": "facca93cd9280376a55304c187297c9ef409de24967bfb198d46cf923c57ac09",
+        "size": 10710
+      },
+      "existing_receipt_role": "NATIVE_PLATFORM_SERVICE",
+      "existing_receipt_admitted": false,
+      "dos_target_input": false,
+      "consolidation_review": "REVIEW_REQUIRED_BEFORE_REUSE",
+      "reason": "Preserve the specific v17 implementation and evidence. Its role label, compilation and native replay do not themselves authorize a DOS semantic substitute."
+    },
+    {
+      "source": "portable/whole_program/platform/dos_format.c",
+      "source_sha256": "7454989b77187ea7012681df606502084b353fa136e75c588d55fb01a5f51dd1",
+      "preserved_snapshot": {
+        "path": "build/whole-application-v17/inputs/portable/whole_program/platform/dos_format.c",
+        "sha256": "7454989b77187ea7012681df606502084b353fa136e75c588d55fb01a5f51dd1",
+        "size": 9840
+      },
+      "existing_receipt_role": "NATIVE_RUNTIME_SERVICE",
+      "existing_receipt_admitted": false,
+      "dos_target_input": false,
+      "consolidation_review": "REVIEW_REQUIRED_BEFORE_REUSE",
+      "reason": "Preserve the specific v17 implementation and evidence. Its role label, compilation and native replay do not themselves authorize a DOS semantic substitute."
+    },
+    {
+      "source": "portable/whole_program/algorithms/lzss.c",
+      "source_sha256": "a23b65265e2d91cbd2a93333760d342dbc085bb0d9c1c676c756651d00529540",
+      "preserved_snapshot": {
+        "path": "build/whole-application-v17/inputs/portable/whole_program/algorithms/lzss.c",
+        "sha256": "a23b65265e2d91cbd2a93333760d342dbc085bb0d9c1c676c756651d00529540",
+        "size": 3036
+      },
+      "existing_receipt_role": "SOURCE_DERIVED_ASM_ALGORITHMS",
+      "existing_receipt_admitted": false,
+      "dos_target_input": false,
+      "consolidation_review": "REVIEW_REQUIRED_BEFORE_REUSE",
+      "reason": "Preserve the specific v17 implementation and evidence. Its role label, compilation and native replay do not themselves authorize a DOS semantic substitute."
+    },
+    {
+      "source": "portable/whole_program/algorithms/wildcard.c",
+      "source_sha256": "e7b0ff49c1df3ecf8af693dd2aaa076fdd417fa2fd10f5b320d3b6b1f9c6a636",
+      "preserved_snapshot": {
+        "path": "build/whole-application-v17/inputs/portable/whole_program/algorithms/wildcard.c",
+        "sha256": "e7b0ff49c1df3ecf8af693dd2aaa076fdd417fa2fd10f5b320d3b6b1f9c6a636",
+        "size": 1314
+      },
+      "existing_receipt_role": "SOURCE_DERIVED_ASM_ALGORITHMS",
+      "existing_receipt_admitted": false,
+      "dos_target_input": false,
+      "consolidation_review": "REVIEW_REQUIRED_BEFORE_REUSE",
+      "reason": "Preserve the specific v17 implementation and evidence. Its role label, compilation and native replay do not themselves authorize a DOS semantic substitute."
+    },
+    {
+      "source": "portable/whole_program/algorithms/asm_utilities.c",
+      "source_sha256": "e89b985c38ac4f8241fd84ed8e42f9308afaa8573815e4b79e7e423f2f85098f",
+      "preserved_snapshot": {
+        "path": "build/whole-application-v17/inputs/portable/whole_program/algorithms/asm_utilities.c",
+        "sha256": "e89b985c38ac4f8241fd84ed8e42f9308afaa8573815e4b79e7e423f2f85098f",
+        "size": 2922
+      },
+      "existing_receipt_role": "SOURCE_DERIVED_ASM_ALGORITHMS",
+      "existing_receipt_admitted": false,
+      "dos_target_input": false,
+      "consolidation_review": "REVIEW_REQUIRED_BEFORE_REUSE",
+      "reason": "Preserve the specific v17 implementation and evidence. Its role label, compilation and native replay do not themselves authorize a DOS semantic substitute."
+    },
+    {
+      "source": "portable/whole_program/algorithms/balloon.c",
+      "source_sha256": "e3e07c9bbc7770b4092e31d0162b0af96972710456d7cd04f7460ac5c4894aca",
+      "preserved_snapshot": {
+        "path": "build/whole-application-v17/inputs/portable/whole_program/algorithms/balloon.c",
+        "sha256": "e3e07c9bbc7770b4092e31d0162b0af96972710456d7cd04f7460ac5c4894aca",
+        "size": 3320
+      },
+      "existing_receipt_role": "SOURCE_DERIVED_ASM_ALGORITHMS",
+      "existing_receipt_admitted": false,
+      "dos_target_input": false,
+      "consolidation_review": "REVIEW_REQUIRED_BEFORE_REUSE",
+      "reason": "Preserve the specific v17 implementation and evidence. Its role label, compilation and native replay do not themselves authorize a DOS semantic substitute."
+    },
+    {
+      "source": "portable/whole_program/algorithms/line16b5.c",
+      "source_sha256": "56615ca64d7a1bca406383d392a58fee6c5722e2a807cbdae8b503411fa0e54d",
+      "preserved_snapshot": {
+        "path": "build/whole-application-v17/inputs/portable/whole_program/algorithms/line16b5.c",
+        "sha256": "56615ca64d7a1bca406383d392a58fee6c5722e2a807cbdae8b503411fa0e54d",
+        "size": 12047
+      },
+      "existing_receipt_role": "DOS_VERIFIED_INLINE_SPIDER_LINE_ALGORITHM",
+      "existing_receipt_admitted": false,
+      "dos_target_input": false,
+      "consolidation_review": "REVIEW_REQUIRED_BEFORE_REUSE",
+      "reason": "Preserve the specific v17 implementation and evidence. Its role label, compilation and native replay do not themselves authorize a DOS semantic substitute."
+    },
+    {
+      "source": "portable/game/simulation/rng.c",
+      "source_sha256": "e8cd2b561f91fbb6cda7c07b9f7dbe5deca798869f31edc98178e37cdb19d589",
+      "preserved_snapshot": {
+        "path": "build/whole-application-v17/inputs/portable/game/simulation/rng.c",
+        "sha256": "e8cd2b561f91fbb6cda7c07b9f7dbe5deca798869f31edc98178e37cdb19d589",
+        "size": 3231
+      },
+      "existing_receipt_role": "EXISTING_VERIFIED_RUNTIME_ALGORITHM",
+      "existing_receipt_admitted": false,
+      "dos_target_input": false,
+      "consolidation_review": "REVIEW_REQUIRED_BEFORE_REUSE",
+      "reason": "Preserve the specific v17 implementation and evidence. Its role label, compilation and native replay do not themselves authorize a DOS semantic substitute."
+    },
+    {
+      "source": "portable/platform/memory.c",
+      "source_sha256": "de523d686a9153d11c83bd024e6b7b1131631ee03d8f20108c3359b66b95cfec",
+      "preserved_snapshot": {
+        "path": "build/whole-application-v17/inputs/portable/platform/memory.c",
+        "sha256": "de523d686a9153d11c83bd024e6b7b1131631ee03d8f20108c3359b66b95cfec",
+        "size": 1670
+      },
+      "existing_receipt_role": "EXISTING_PLATFORM_SERVICE",
+      "existing_receipt_admitted": false,
+      "dos_target_input": false,
+      "consolidation_review": "REVIEW_REQUIRED_BEFORE_REUSE",
+      "reason": "Preserve the specific v17 implementation and evidence. Its role label, compilation and native replay do not themselves authorize a DOS semantic substitute."
+    }
+  ],
+  "old_dos_package_proof": "ORACLE_ASSISTED_HYBRID_ONLY",
+  "scope": "Preservation/provenance intake; no provider deleted, changed or admitted by this audit."
+}
