@@ -7,6 +7,7 @@ contributions against the same source before the reviewed edits.
 from collections import Counter
 import hashlib
 import json
+import re
 
 
 # Each family was reviewed against the complete owner and every direct consumer,
@@ -16,7 +17,51 @@ SCALAR_FAMILIES = {
     'food_cycle': ('S08:35F5', ('FoodB', 'FoodR', 'Cycle'), 'food_cycle_storage_contract'),
     'population': ('root:0BE8', ('BpopT', 'RpopT'), 'population_storage_contract'),
     'lion': ('root:0AD9', ('AntsEatenByLions', 'InitialLions'), 'lion_storage_contract'),
+    'init_sim': ('S08:35F5', ('fd_50F6_06AA', 'fd_50F6_073A', 'fd_50F6_07C8',
+                'fd_50F6_0850', 'fd_50F6_0FBA', 'fd_50F6_0FFE', 'CurExpTool'), 'init_sim_storage_contract'),
+    'yellow_reset': ('S22:39C7', ('fd_50F6_0A8E', 'fd_50F6_0AA0', 'fd_50F6_0B1E',
+                    'fd_50F6_0C38', 'fd_50F6_0C3E'), 'yellow_reset_storage_contract'),
 }
+
+# Signed sets of (code contribution, operand offset, external target). Only the
+# reviewed SS operands are admitted; local symbols and numeric literals remain
+# separate layout debt. A different or partial site set fails closed.
+DRIVER_SS_SITE_HASHES = {
+    'S00:31AD': '5ed1fef640710371d36612bbe51af8c8497efb84db933df55383d6087a31299b',
+    'S01:3126': '651ef155dc18f42ded5276c96a99493d490a2ed10250880b491eb0a577263e48',
+    'S02:3126': '1e3658784fcf277018f03c60eb9639e340225230de8e08f1131b3cfb3d543759',
+    'S03:3126': '9aff44521bb566483058f8faee74a706275881294afa3e77079cfa143d8eccbb',
+}
+
+PROVIDER_SPECS = {
+    'source-owned:driver-callback-table': ('CBOWNER', '_driver_callback_table',
+        (('_driver_callback_table', 100),), 'void (far * near driver_callback_table[25])();'),
+    'source-owned:mouse-words': ('MSOWNER', None,
+        (('_g_9120', 2), ('_g_9122', 2), ('_g_9124', 2)),
+        'int near g_9120; int near g_9122; int near g_9124;'),
+    'source-owned:memory-state': ('MMOWNER', None,
+        (('_g_91A0', 2), ('_g_91A2', 2), ('_g_91A4', 4), ('_g_91A8', 4), ('_g_91AC', 4)),
+        'typedef struct Block { int handle; long size; unsigned paras; unsigned char type; '
+        'unsigned char lock; long age; unsigned next; unsigned prev; unsigned char attr; '
+        'char name[13]; } Block; unsigned near g_91A0; unsigned near g_91A2; '
+        'Block far * near g_91A4; Block far * near g_91A8; Block far * near g_91AC;'),
+}
+
+
+def review_frame_sites(binding):
+    specs = binding.get('reframes', [])
+    if not specs:
+        return
+    sites = sorted((s['segment'], s['offset'], s['target']) for s in specs)
+    if binding['module'] == 'root:1B73':
+        accepted = [('MOUSE_TEXT', 0xCBB, '_g_9120'),
+                    ('MOUSE_TEXT', 0xCC0, '_g_9122'), ('MOUSE_TEXT', 0xCC5, '_g_9124')]
+        valid = sites == accepted
+    else:
+        digest = hashlib.sha256(json.dumps(sites, separators=(',', ':')).encode()).hexdigest()
+        valid = DRIVER_SS_SITE_HASHES.get(binding['module']) == digest
+    if not valid:
+        raise ValueError('unreviewed assembly frame correction location set')
 
 
 def rtlink_alias_delta(offset):
@@ -85,9 +130,9 @@ def review_addresses(binding, module, symbols):
         anchor = symbols['data'][public.get('registry_symbol', public['name'][1:])]
         if (segment, offset) != (anchor['seg'], anchor['off']):
             raise ValueError('DOS storage export conflicts with reviewed symbol address')
+    review_frame_sites(binding)
     for spec in binding.get('reframes', []):
-        if (binding['module'] != 'root:1B73' or spec['target'] not in ('_g_9120', '_g_9122', '_g_9124')
-                or symbols['data'][spec['target'][1:]]['seg'] != 0x55B3
+        if (symbols['data'][spec['target'][1:]]['seg'] != 0x55B3
                 or (spec['old_frame_kind'], spec['old_frame'], spec['frame_kind'], spec['frame']) !=
                    ('segment', '_DATA', 'group', 'DGROUP')):
             raise ValueError('unreviewed assembly segment/group frame correction')
@@ -124,22 +169,36 @@ def communal_key(row):
     return tuple(row.get(k) for k in ('name', 'kind', 'count', 'element_size', 'length'))
 
 
-def review_provider_source(text, provider):
-    """Admit one recovered object, never an arbitrary generated stub module."""
-    if (provider.get('module') != 'source-owned:driver-callback-table'
-            or provider.get('owner') != '_driver_callback_table'
-            or provider.get('communals') != [{'name': '_driver_callback_table', 'kind': 'near', 'length': 100}]
-            or ' '.join(text.split()) != 'void (far * near driver_callback_table[25])();'):
+def review_provider_source(text, provider, symbols=None):
+    """Admit only explicitly recovered types and objects, never generic stubs."""
+    spec = PROVIDER_SPECS.get(provider.get('module'))
+    text = re.sub(r'/\*.*?\*/|//[^\n]*', '', text, flags=re.S)
+    if (not spec or provider.get('owner') != spec[1]
+            or provider.get('communals') != [{'name': n, 'kind': 'near', 'length': size} for n, size in spec[2]]
+            or ' '.join(text.split()) != spec[3]):
         raise ValueError('unreviewed functional storage provider')
+    if symbols is not None and spec[1] is None:
+        addresses = dict(zip(('_g_9120', '_g_9122', '_g_9124', '_g_91A0', '_g_91A2',
+                             '_g_91A4', '_g_91A8', '_g_91AC'),
+                            (0x9120, 0x9122, 0x9124, 0x91A0, 0x91A2, 0x91A4, 0x91A8, 0x91AC)))
+        for name, size in spec[2]:
+            anchor = symbols['data'][name[1:]]
+            if ((anchor['seg'], anchor['off']) != (0x55B3, addresses[name])
+                    or any(s['seg'] == anchor['seg'] and anchor['off'] < s['off'] < anchor['off'] + size
+                           for s in symbols['data'].values())):
+                raise ValueError('functional storage extent conflicts with reviewed registry')
 
 
 def verify_provider(obj, provider):
+    spec = PROVIDER_SPECS.get(provider.get('module'))
+    if not spec or provider.get('communals') != [{'name': n, 'kind': 'near', 'length': size} for n, size in spec[2]]:
+        raise ValueError('unreviewed functional storage provider')
     expected = Counter(communal_key(c) for c in provider['communals'])
     if (Counter(communal_key(c) for c in obj.communals) != expected
             or obj.publics or obj.local_publics or obj.linker_fixups
             or any(obj.segment_lengths.values()) or any(obj.segments.values())
-            or obj.externals != ['_driver_callback_table']
-            or obj.external_scopes != ['communal']):
+            or obj.externals != [n for n, _ in spec[2]]
+            or obj.external_scopes != ['communal'] * len(spec[2])):
         raise ValueError('functional storage provider introduced code/data/extra allocation')
     return {'status': 'PASS', 'data_only': True, 'live_initialized_bytes': 0,
             'code_bytes': 0, 'communals': provider['communals'], 'publics': [], 'fixups': []}
@@ -168,7 +227,7 @@ def bind_communal_alias(spec, obj, row, symbols):
 
 
 def require_callback_storage_contract(report, profile, tool):
-    if not any(row.get('storage_provider') for row in report['translation_units']):
+    if not any(row['module'] == 'source-owned:driver-callback-table' for row in report['translation_units']):
         return
     contract = report.get('callback_storage_contract', {})
     required = contract.get('required_cases', {})
@@ -185,6 +244,28 @@ def require_callback_storage_contract(report, profile, tool):
             or not all(r['passed'] and r['expected'] == r['actual'] == required[r['case']] for r in cases)
             or any(identities.get(path.replace('\\', '/')) != digest for path, digest in components)):
         raise ValueError('callback table lacks the selected linker/MSC startup contract')
+
+
+def require_near_storage_contracts(report, profile, tool):
+    from pathlib import Path
+    components = [(str(Path(tool['directory']) / name), digest) for name, digest in tool['files'].items()]
+    components += [(r['path'], r['sha256']) for r in report['runtime_components']]
+    for module, key, negatives in [('source-owned:mouse-words', 'mouse_storage_contract', 2),
+                                   ('source-owned:memory-state', 'memory_storage_contract', 3)]:
+        if not any(r['module'] == module for r in report['translation_units']):
+            continue
+        contract = report.get(key, {})
+        required = contract.get('required_cases', {})
+        cases = [r for r in contract.get('cases', []) if r['linker'] == profile]
+        identities = {p['path'].replace('\\', '/'): p['sha256'] for p in contract.get('inputs', [])}
+        if (contract.get('root_reviewed') is not True or not contract.get('all_required_checks_pass')
+                or contract.get('communals') != [{'name': n, 'kind': 'near', 'length': size}
+                                                for n, size in PROVIDER_SPECS[module][2]]
+                or Counter(required.values()) != Counter({'PASS': 1, 'FAIL': negatives})
+                or len(cases) != 1 + negatives or {r['case'] for r in cases} != set(required)
+                or not all(r['passed'] and r['expected'] == r['actual'] == required[r['case']] for r in cases)
+                or any(identities.get(path.replace('\\', '/')) != digest for path, digest in components)):
+            raise ValueError(f'{module} lacks the selected linker/MSC startup contract')
 
 
 def require_history_startup_contract(report, profile, tool):
@@ -220,11 +301,12 @@ def require_scalar_startup_contracts(report, profile, tool):
         required = contract.get('required_cases', {})
         cases = [r for r in contract.get('cases', []) if r['linker'] == profile]
         identities = {p['path'].replace('\\', '/'): p['sha256'] for p in contract.get('inputs', [])}
+        negative_count = 7 if family == 'yellow_reset' else 4
         if (not contract.get('all_required_checks_pass') or contract.get('root_reviewed') is not True
                 or contract.get('members') != list(members)
                 or contract.get('dos_type') != 'int far' or contract.get('word_bytes') != 2
-                or Counter(required.values()) != Counter({'PASS': 2, 'FAIL': 4})
-                or len(cases) != 6 or {r['case'] for r in cases} != set(required)
+                or Counter(required.values()) != Counter({'PASS': 2, 'FAIL': negative_count})
+                or len(cases) != 2 + negative_count or {r['case'] for r in cases} != set(required)
                 or not all(r['passed'] and r['expected'] == r['actual'] == required[r['case']] for r in cases)
                 or any(identities.get(path.replace('\\', '/')) != digest for path, digest in components)):
             raise ValueError(f'{family} scalar storage lacks the selected linker/MSC startup contract')
@@ -253,8 +335,8 @@ def require_queue_startup_contract(report, profile, tool):
 
 
 def require_assembly_frame_contract(report, profile, tool):
-    if not any(r.get('source_binding', {}).get('reframes') for r in report['translation_units']
-               if r.get('source_binding')):
+    if not any(r['module'] == 'root:1B73' and r.get('source_binding', {}).get('reframes')
+               for r in report['translation_units'] if r.get('source_binding')):
         return
     contract = report.get('assembly_frame_contract', {})
     cases = [r for r in contract.get('cases', []) if r['linker'] == profile]
@@ -268,6 +350,32 @@ def require_assembly_frame_contract(report, profile, tool):
             or not all(r['passed'] and r['expected'] == r['actual'] == expected[r['case']] for r in cases)
             or any(identities.get(path.replace('\\', '/')) != digest for path, digest in components)):
         raise ValueError('assembly frame correction lacks the selected linker/shifted DGROUP contract')
+
+
+def require_driver_ss_frame_contract(report, profile, tool):
+    rows = [r for r in report['translation_units'] if r['module'] in DRIVER_SS_SITE_HASHES
+            and r.get('source_binding', {}).get('reframes')]
+    if not rows:
+        return
+    contract = report.get('driver_ss_frame_contract', {})
+    expected = {'canonical_DATA': 'FAIL', 'reviewed_DGROUP': 'PASS'}
+    cases = [r for r in contract.get('runtime_fixture', {}).get('cases', []) if r['linker'] == profile]
+    identities = {p['path'].replace('\\', '/'): p['sha256'] for p in contract.get('inputs', [])}
+    from pathlib import Path
+    components = [(str(Path(tool['directory']) / name), digest) for name, digest in tool['files'].items()]
+    components += [(r['path'], r['sha256']) for r in report['runtime_components']]
+    signatures = contract.get('signed_site_tuples', [])
+    hashes = {module: hashlib.sha256(json.dumps(sorted(tuple(s[1:]) for s in signatures if s[0] == module),
+                separators=(',', ':')).encode()).hexdigest() for module in DRIVER_SS_SITE_HASHES}
+    if (contract.get('root_reviewed') is not True or not contract.get('all_required_checks_pass')
+            or hashes != DRIVER_SS_SITE_HASHES or len(signatures) != 128
+            or {r['module'] for r in rows} != set(DRIVER_SS_SITE_HASHES)
+            or len(cases) != 2 or {r['variant'] for r in cases} != set(expected)
+            or not all(r['passed'] and r['expected'] == r['actual'] == expected[r['variant']]
+                       and r['actual_DS_SS_DGROUP'] and r['map']['passed']
+                       and r['map']['data_group_delta'] > 0 for r in cases)
+            or any(identities.get(path.replace('\\', '/')) != digest for path, digest in components)):
+        raise ValueError('driver SS frames lack the selected linker/shifted DGROUP contract')
 
 
 def bind_data_alias(spec, obj, row, module, symbols):
@@ -299,6 +407,7 @@ def bind_data_alias(spec, obj, row, module, symbols):
 
 
 def verify_objects(original, generated, binding):
+    review_frame_sites(binding)
     debug = binding.get('debug_contributions', {})
     for segment, contract in debug.items():
         if (not binding.get('queue_storage') or segment not in ('$$SYMBOLS', '$$TYPES')
@@ -337,9 +446,7 @@ def verify_objects(original, generated, binding):
         matches = [f for f in original_fixups if f['segment'] == spec['segment']
                    and f['offset'] == spec['offset'] and f['target_kind'] == 'external'
                    and f['target'] == spec['target']]
-        if (binding['module'] != 'root:1B73' or len(matches) != 1
-                or (spec['target'], spec['offset']) not in
-                   (('_g_9120', 0xCBB), ('_g_9122', 0xCC0), ('_g_9124', 0xCC5))):
+        if len(matches) != 1:
             raise ValueError('unreviewed assembly frame correction location')
         f = matches[0]
         if ((f['width'], f['loc'], f['self_relative'], f['frame_kind'], f['frame'],
@@ -355,6 +462,10 @@ def verify_objects(original, generated, binding):
     if old_fixups - new_fixups:
         raise ValueError('DOS binding changed an existing relocation')
     additions = new_fixups - old_fixups
+    if frame_checks and [fixup_key(f) for f in original_fixups] != [
+            fixup_key(f) for f in generated.linker_fixups
+            if f['segment'] not in debug and not additions[fixup_key(f)]]:
+        raise ValueError('assembly frame correction changed ordered existing relocations')
     actual = [f for f in generated.linker_fixups if additions[fixup_key(f)]]
     if len(actual) != sum(s['count'] for s in binding.get('relocations', [])):
         raise ValueError('DOS binding added unexpected relocations')

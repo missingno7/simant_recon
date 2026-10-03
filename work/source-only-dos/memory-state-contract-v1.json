@@ -1,0 +1,4201 @@
+{
+  "schema": "simant-source-only-memory-state-candidate-v1",
+  "status": "SOURCE_FUNCTIONAL_OWNER_REVIEWED",
+  "scope": "Separate source-functional owner proposal for five named near objects; no historical TU, order, padding, or fixed placement claim.",
+  "source_pins": [
+    {
+      "path": "src\\root\\m171C.c",
+      "sha256": "31bd9caa243220db2bd1ba940ac8fae7f5d189b2ec95f1662918e9ca2160b10e",
+      "size": 26452
+    },
+    {
+      "path": "src\\root\\m194D.asm",
+      "sha256": "8becfaafd57faf7e3bfb7e7150d4438bf8d78e1319aa90618f76a2be89175c0f",
+      "size": 2109
+    },
+    {
+      "path": "evidence\\behavior\\manifest.json",
+      "sha256": "dae79bdf74d7660e7e2eb47e8b463a9576c8d74a8e6ccd9e91af6d51f871ecea",
+      "size": 28379
+    },
+    {
+      "path": "evidence\\behavior\\functions\\f_171C_09CC\\contracts\\live-state-v2\\evidence.json",
+      "sha256": "3eb10d7520c4f48c708d5c16d18e16b66d72f7262cc39d8a2863c9f4fd90f88d",
+      "size": 13879
+    },
+    {
+      "path": "evidence\\behavior\\functions\\f_171C_0ADC\\contracts\\live-state-v2\\evidence.json",
+      "sha256": "357d1709069e947c450fe39e64254bda89d83c76f95b18c944e32f3439512600",
+      "size": 13879
+    },
+    {
+      "path": "evidence\\behavior\\functions\\f_171C_0FBC\\contracts\\live-state-v2\\evidence.json",
+      "sha256": "283d65f7c8d32de78190b5f6b34186d77470833629771af3c66ce58ca6adb02c",
+      "size": 13879
+    },
+    {
+      "path": "evidence\\behavior\\functions\\f_171C_09CC\\contracts\\live-state-v2\\module.c",
+      "sha256": "3d24904696b29c36b118479ecc50dd80b8d173f58a632a339df9391d08ea085b",
+      "size": 26297
+    },
+    {
+      "path": "layout\\symbols.json",
+      "sha256": "0f5dd5b0a211945a97782cfccdb9bb31b0dfd07fcde5df4d4f9486b487eb0125",
+      "size": 800809
+    },
+    {
+      "path": "work\\source-only-dos\\compile-and-intake-v1.json",
+      "sha256": "807be52f3c2d346250587395298944b2ef97cd7a04224dbb65afc4335958fbe5",
+      "size": 1165285
+    },
+    {
+      "path": "layout\\manifest.json",
+      "sha256": "025a0a9255d910cae4b122ab5a3f3fb40888bb456d7fe42158db7c9e622fcf50",
+      "size": 628980
+    },
+    {
+      "path": "layout\\toolchain.json",
+      "sha256": "c0bb71cd8b1f4a1a1f91299bd3b6148aa67b7a1d12c3c3946a229272593eb274",
+      "size": 39241
+    },
+    {
+      "path": "layout\\oracle.lock.json",
+      "sha256": "2c6d9e98c688621ad49a08c78d0e0968f4076b036be56ec0738217b533ccde13",
+      "size": 18807
+    },
+    {
+      "path": "work\\source-only-dos\\queue-lifetime-contract-v1.json",
+      "sha256": "44b4f2afca0988722d1ff10df933771569c61cc02cd8f11b20ff4ffe8a8af97e",
+      "size": 6627
+    },
+    {
+      "path": "work\\source-only-dos\\queue-lifetime-research.py",
+      "sha256": "e505d40ca60631078a49a3d905a5f8b84f2bc6499ea03fa4a449d2bc012aed4d",
+      "size": 17615
+    },
+    {
+      "path": "work\\source-only-dos\\history-storage-contract-v1.json",
+      "sha256": "7fc4c0f32f70521f8d730121fd75e9bccab0c4e87a7611e25c48f5dd7b8470bf",
+      "size": 17745
+    },
+    {
+      "path": "work\\source-only-dos\\providers\\memory-state.c",
+      "sha256": "5cfc5157f5e6e131433190b1360702d75fba6708283ec4ca74765fd699531948",
+      "size": 658
+    },
+    {
+      "path": "work\\source-only-dos\\memory-state-probe.py",
+      "sha256": "f9252f11ced01e484889ee22d45c268b6a385503b1277120d372ff3d7695c6b7",
+      "size": 27540
+    },
+    {
+      "path": "C:\\tools\\dosbox-x\\dosbox-x.exe",
+      "sha256": "b028a4d328302ea270722dec69f3ec3a10ebf76beba72a51970db33a88df2bf6",
+      "size": 20481536
+    },
+    {
+      "path": "C:\\tools\\msc-6.00ax-archive\\BIN\\CL.EXE",
+      "sha256": "92df4a0839aac77940189ce54f107381b829babe8103926cb05d1adffe947347",
+      "size": 81184
+    },
+    {
+      "path": "C:\\tools\\msc-6.00ax-archive\\BIN\\C1L.EXE",
+      "sha256": "d3db38b875a95048bca2809cd1f84783c6c070805f188fec9161054d6350ded3",
+      "size": 213680
+    },
+    {
+      "path": "C:\\tools\\msc-6.00ax-archive\\BIN\\C2L.EXE",
+      "sha256": "62490de22e7b279ea59218a54d677bfc752cb5fc1287533d2e23d03519f155e0",
+      "size": 473258
+    },
+    {
+      "path": "C:\\tools\\msc-6.00ax-archive\\BIN\\C3L.EXE",
+      "sha256": "9e82ecc87ffcdb2def53ac64c0d1f048b26421c1415b5600ad4d8d6fcbc06553",
+      "size": 195439
+    },
+    {
+      "path": "C:\\tools\\msc-6.00ax-archive\\BIN\\CL.ERR",
+      "sha256": "ca22f37e5e0c09faebde9e4d549dd1f53523cc6f23049d2239a040cd19a424e7",
+      "size": 1656
+    },
+    {
+      "path": "C:\\tools\\msc-6.00ax-archive\\BIN\\C1.ERR",
+      "sha256": "637444915870f3283d5df41c5cdb1be8c32cc6c19b080f2bb3891edbc3751c6e",
+      "size": 19500
+    },
+    {
+      "path": "C:\\tools\\msc-6.00ax-archive\\BIN\\C23.ERR",
+      "sha256": "22944a0dffef336c0ebb8f6d5aeb97b4dbeb5c9758a48759557176bff49d1151",
+      "size": 3649
+    },
+    {
+      "path": "C:\\tools\\msc-6.00ax-archive\\BIN\\CL.MSG",
+      "sha256": "3379f283aec74842bc82205e4c848d759e6e2dcbb6d4820eec9719f1297213ec",
+      "size": 2697
+    },
+    {
+      "path": "C:\\tools\\msc-6.00ax-archive\\INCLUDE\\assert.h",
+      "sha256": "55c174aec7e593e24c36768e5f542b564c4719f8155e49e2883560d511847c11",
+      "size": 594
+    },
+    {
+      "path": "C:\\tools\\msc-6.00ax-archive\\INCLUDE\\bios.h",
+      "sha256": "d144f91dd4ec686a38509842e35106e91af021487e2a45e7182ba350e35df66e",
+      "size": 4499
+    },
+    {
+      "path": "C:\\tools\\msc-6.00ax-archive\\INCLUDE\\bse.h",
+      "sha256": "64f26efdebe49d5cf98947a7214723ce128fc98e7c786a7cd692c0e65061d1e1",
+      "size": 1462
+    },
+    {
+      "path": "C:\\tools\\msc-6.00ax-archive\\INCLUDE\\bsedev.h",
+      "sha256": "506cad55079bf330c9fcf2cff5797955fa4dce2563b11b38b4667367daa7aca4",
+      "size": 12893
+    },
+    {
+      "path": "C:\\tools\\msc-6.00ax-archive\\INCLUDE\\bsedos.h",
+      "sha256": "6766919b0baa7cda9218907159047001b7f03b8b2fada6ed64721bd8c26d1f40",
+      "size": 48326
+    },
+    {
+      "path": "C:\\tools\\msc-6.00ax-archive\\INCLUDE\\bseerr.h",
+      "sha256": "bf8d57ec23c45747fac4dc52ab0140f6f8ba11086453b3a506c60d17f840d5a4",
+      "size": 26788
+    },
+    {
+      "path": "C:\\tools\\msc-6.00ax-archive\\INCLUDE\\bsesub.h",
+      "sha256": "e3018f4c397ba09c2a1dbc22ee58d2dbbac3278a9417ac53be46c3d1c82e63a1",
+      "size": 19051
+    },
+    {
+      "path": "C:\\tools\\msc-6.00ax-archive\\INCLUDE\\conio.h",
+      "sha256": "2a7c54dc07ef767042861324a2f73ced293577f57ca2e4901cc16e1e2a7b7c27",
+      "size": 965
+    },
+    {
+      "path": "C:\\tools\\msc-6.00ax-archive\\INCLUDE\\ctype.h",
+      "sha256": "5e2bc8b6e5fa103dc9b51d6a711553d435446dd5f23f102f34e3d868236d00b6",
+      "size": 2979
+    },
+    {
+      "path": "C:\\tools\\msc-6.00ax-archive\\INCLUDE\\direct.h",
+      "sha256": "c5f9f40f80bc538b253a8fe564cd1f264db515581e500c1b3ca7859b0ac621c2",
+      "size": 892
+    },
+    {
+      "path": "C:\\tools\\msc-6.00ax-archive\\INCLUDE\\dos.h",
+      "sha256": "027e81abad4ceae2892863858b939694e42aa24d73bd96cab8278fcc868c0b33",
+      "size": 5343
+    },
+    {
+      "path": "C:\\tools\\msc-6.00ax-archive\\INCLUDE\\errno.h",
+      "sha256": "1db2af1fcfbcb33cf1be4f97430cdf8194bf1d60f586c1f432832d69aa5bfe91",
+      "size": 1428
+    },
+    {
+      "path": "C:\\tools\\msc-6.00ax-archive\\INCLUDE\\fcntl.h",
+      "sha256": "d3b8e59fc779acde127068898ee1233119d1d79fb1e1f919666b38556f2c02c7",
+      "size": 1126
+    },
+    {
+      "path": "C:\\tools\\msc-6.00ax-archive\\INCLUDE\\float.h",
+      "sha256": "d5705d56bc25b990759f8c83669be2f99e404d6219f08fec0a45d8ae95b0c3b6",
+      "size": 4911
+    },
+    {
+      "path": "C:\\tools\\msc-6.00ax-archive\\INCLUDE\\graph.h",
+      "sha256": "dfc59cf76b6e25efe4a327063d2b7c9f4e7db243228c6e6e5d83ee05e1952869",
+      "size": 15438
+    },
+    {
+      "path": "C:\\tools\\msc-6.00ax-archive\\INCLUDE\\io.h",
+      "sha256": "f81a13f740240a05b48f6dc614e44e2269c6ecca07bae0393ab71fab30691f32",
+      "size": 1512
+    },
+    {
+      "path": "C:\\tools\\msc-6.00ax-archive\\INCLUDE\\limits.h",
+      "sha256": "53bb5efef276dfbe55628891764cc082fbb7b99f669c0055190d2ae8d0ab4a3b",
+      "size": 1326
+    },
+    {
+      "path": "C:\\tools\\msc-6.00ax-archive\\INCLUDE\\locale.h",
+      "sha256": "35d553ec119b669bf4fd0594c593fc8a6c48699afbf8bf60d106bbe485a940f7",
+      "size": 1519
+    },
+    {
+      "path": "C:\\tools\\msc-6.00ax-archive\\INCLUDE\\malloc.h",
+      "sha256": "94d10282abde89eb57b7d533a9a029bc0444ab0aebea8064d61a86fd97678a24",
+      "size": 4008
+    },
+    {
+      "path": "C:\\tools\\msc-6.00ax-archive\\INCLUDE\\math.h",
+      "sha256": "08f043122f5aff286a88bc1f4680c314347c3fae7c6b7ce0a78bea0a0d1083bc",
+      "size": 7881
+    },
+    {
+      "path": "C:\\tools\\msc-6.00ax-archive\\INCLUDE\\memory.h",
+      "sha256": "04af9356c798a0a8eb0274cf9e1e2660485ca972bd449a7ec3709b408400b196",
+      "size": 1628
+    },
+    {
+      "path": "C:\\tools\\msc-6.00ax-archive\\INCLUDE\\os2.h",
+      "sha256": "25b38cebe5219e6309e9656ec2f63f9ddccd40811d23542674bee4c80520f595",
+      "size": 676
+    },
+    {
+      "path": "C:\\tools\\msc-6.00ax-archive\\INCLUDE\\os2def.h",
+      "sha256": "c87ee78532176e5738aad764c3fec8418891960d7eecf2c4dcf84aa36e11deff",
+      "size": 10400
+    },
+    {
+      "path": "C:\\tools\\msc-6.00ax-archive\\INCLUDE\\pgchart.h",
+      "sha256": "ff92f7c9b7e6d699d59dbed276b506368848e4c145ddb2a90f02726b74476ce7",
+      "size": 8749
+    },
+    {
+      "path": "C:\\tools\\msc-6.00ax-archive\\INCLUDE\\pm.h",
+      "sha256": "b7ff7321180f2606742828294772ba4ea356baaac66193823172b92fb2e47355",
+      "size": 2255
+    },
+    {
+      "path": "C:\\tools\\msc-6.00ax-archive\\INCLUDE\\pmavio.h",
+      "sha256": "41425daa766423853a10c0d489392cb2e47fa9919d77d82e271fe1624b560386",
+      "size": 2069
+    },
+    {
+      "path": "C:\\tools\\msc-6.00ax-archive\\INCLUDE\\pmbitmap.h",
+      "sha256": "e8db1c7bf0b5e2f7e54a32766c2d7b1e7bc40e552b31de4e65c2cd6df1227b42",
+      "size": 1851
+    },
+    {
+      "path": "C:\\tools\\msc-6.00ax-archive\\INCLUDE\\pmdev.h",
+      "sha256": "9f01221d6a20e988f11c197ef04a2e3562d8ab6bf8b075267fcbadaac1ae2016",
+      "size": 8606
+    },
+    {
+      "path": "C:\\tools\\msc-6.00ax-archive\\INCLUDE\\pmerr.h",
+      "sha256": "ef08d00e473f6b9b4550f2561a523898b12383d6839cd5ebef409abef9400502",
+      "size": 30095
+    },
+    {
+      "path": "C:\\tools\\msc-6.00ax-archive\\INCLUDE\\pmfont.h",
+      "sha256": "973206a870ff44b98c6a4f10aeb94c7caea15e184aaeb58182a1015018f5770b",
+      "size": 3458
+    },
+    {
+      "path": "C:\\tools\\msc-6.00ax-archive\\INCLUDE\\pmgpi.h",
+      "sha256": "ee083b988e86ac67e98d1b170fb525b2bcf89cb5e7309b1ae4083905d7f89030",
+      "size": 49655
+    },
+    {
+      "path": "C:\\tools\\msc-6.00ax-archive\\INCLUDE\\pmhelp.h",
+      "sha256": "76954218875fa2788c307d171b9e25e5faa8fc83707176298f24b1804cda7121",
+      "size": 11291
+    },
+    {
+      "path": "C:\\tools\\msc-6.00ax-archive\\INCLUDE\\pmmle.h",
+      "sha256": "9d59a584824afef28fdc33dd77be1b64f5aaee126b454ebd2e36f9c82e0090de",
+      "size": 8802
+    },
+    {
+      "path": "C:\\tools\\msc-6.00ax-archive\\INCLUDE\\pmord.h",
+      "sha256": "81c6cbb06d06abaeb89307a9679325e7baa0cdb5e03ab6cecb0563794bdd7263",
+      "size": 23140
+    },
+    {
+      "path": "C:\\tools\\msc-6.00ax-archive\\INCLUDE\\pmpic.h",
+      "sha256": "b2646c5af6ed2dc781c5a4ce45ea4900f2d2bcf97048ae244f06aa26b2f0341e",
+      "size": 691
+    },
+    {
+      "path": "C:\\tools\\msc-6.00ax-archive\\INCLUDE\\pmshl.h",
+      "sha256": "aff9fc71b3049b741970f1bb8d81258b24ec22f7139dffddf1b5d261acb6cde9",
+      "size": 14249
+    },
+    {
+      "path": "C:\\tools\\msc-6.00ax-archive\\INCLUDE\\pmtypes.h",
+      "sha256": "462c35a20f284beeabcd930255f44845b28e2fcf451c3a9dec58d9951baaec10",
+      "size": 9645
+    },
+    {
+      "path": "C:\\tools\\msc-6.00ax-archive\\INCLUDE\\pmwin.h",
+      "sha256": "4f738c700b89d350631137f0b36e08ff465c570b5e4f98d6a2c34c5bdd8b305c",
+      "size": 85827
+    },
+    {
+      "path": "C:\\tools\\msc-6.00ax-archive\\INCLUDE\\process.h",
+      "sha256": "3a5f567651e9077b434c5e905b8c1308ea0f7557bb334bf40ef1d1cfd9e11119",
+      "size": 2829
+    },
+    {
+      "path": "C:\\tools\\msc-6.00ax-archive\\INCLUDE\\search.h",
+      "sha256": "3bbc62866ae6f4d62db16d9a77ee3066418b38698aa9556f6836dedc4aac2f9e",
+      "size": 1159
+    },
+    {
+      "path": "C:\\tools\\msc-6.00ax-archive\\INCLUDE\\setjmp.h",
+      "sha256": "99dd10459385315d95e2ba24091282eff815045e24027039e7790ddc4080648f",
+      "size": 822
+    },
+    {
+      "path": "C:\\tools\\msc-6.00ax-archive\\INCLUDE\\share.h",
+      "sha256": "0f632bbfc28e3ec3981e06e7ac27e1fabdf57b26dae3a805b75a00fed16d4e18",
+      "size": 450
+    },
+    {
+      "path": "C:\\tools\\msc-6.00ax-archive\\INCLUDE\\signal.h",
+      "sha256": "efff5cf9a3001b675def57dc4ec1bcf4e0475ae5fad10fc7e89f123deb0d204a",
+      "size": 2019
+    },
+    {
+      "path": "C:\\tools\\msc-6.00ax-archive\\INCLUDE\\stdarg.h",
+      "sha256": "e294f329eb9ae698502ec1d90989afb09b7a077804213d6edfd5442335d43e62",
+      "size": 894
+    },
+    {
+      "path": "C:\\tools\\msc-6.00ax-archive\\INCLUDE\\stddef.h",
+      "sha256": "1d6a31e2ca5c8453bfc18bfa94fd4e8a33425eb88214f55c920400c9d56a7ac2",
+      "size": 1254
+    },
+    {
+      "path": "C:\\tools\\msc-6.00ax-archive\\INCLUDE\\stdio.h",
+      "sha256": "9d3c3e54366c393dbd99982f90e1a2bca878fe4637eb8974fd3b6244c053e93b",
+      "size": 6047
+    },
+    {
+      "path": "C:\\tools\\msc-6.00ax-archive\\INCLUDE\\stdlib.h",
+      "sha256": "ff3c7aee2170b511396284608e61e11fb55c2976d4bf90d3ea58a539e55c9476",
+      "size": 6539
+    },
+    {
+      "path": "C:\\tools\\msc-6.00ax-archive\\INCLUDE\\string.h",
+      "sha256": "ff36b60adcf99a547032981a149cc6d37f48cfa2f556cebe327c59d79c93823e",
+      "size": 4975
+    },
+    {
+      "path": "C:\\tools\\msc-6.00ax-archive\\INCLUDE\\sys\\locking.h",
+      "sha256": "85e4a4663dd666f896ccdf3b76ac38dafa1d69a07b87d7ee9a2b418d904a213b",
+      "size": 468
+    },
+    {
+      "path": "C:\\tools\\msc-6.00ax-archive\\INCLUDE\\sys\\stat.h",
+      "sha256": "095555066b4880a40e56ed868e403536be326cfd9da1e067ccf22faec5314051",
+      "size": 1330
+    },
+    {
+      "path": "C:\\tools\\msc-6.00ax-archive\\INCLUDE\\sys\\timeb.h",
+      "sha256": "5281bdb34fb8f86c17251362abbefbd289574deeb7ea8e21263fee252fc0f880",
+      "size": 827
+    },
+    {
+      "path": "C:\\tools\\msc-6.00ax-archive\\INCLUDE\\sys\\types.h",
+      "sha256": "8cd9efa8807be8dd811d840a56eca6baa7d7798d4b571d4fb05255454f264abe",
+      "size": 734
+    },
+    {
+      "path": "C:\\tools\\msc-6.00ax-archive\\INCLUDE\\sys\\utime.h",
+      "sha256": "aa947a46dfba15c139cc7f043a545ee3a263255858d7f2f8e81b9448e6c2115c",
+      "size": 968
+    },
+    {
+      "path": "C:\\tools\\msc-6.00ax-archive\\INCLUDE\\time.h",
+      "sha256": "68204d55db0602d15263efddf0de7e77d789f9d7f3d4594416fedd4959e21c32",
+      "size": 3069
+    },
+    {
+      "path": "C:\\tools\\msc-6.00ax-archive\\INCLUDE\\varargs.h",
+      "sha256": "a71b1f4437d08073e0bbe5559a1cac64d63f2318677a827568b49ec12a99af7b",
+      "size": 922
+    },
+    {
+      "path": "C:\\tools\\nmlgcdos\\msdos.exe",
+      "sha256": "f7f6cb0a3e816c5edb13112d327c1bddbf7463fe7bf9a005ca1eb5317751bd02",
+      "size": 686592
+    },
+    {
+      "path": "C:\\tools\\masm-5.10\\files\\MASM.EXE",
+      "sha256": "233120302473749eafe9a54a30f8bda0127140c44346e5bcc047d113828a741e",
+      "size": 124712
+    },
+    {
+      "path": "C:\\tools\\dosbox-x\\dosbox-x.exe",
+      "sha256": "b028a4d328302ea270722dec69f3ec3a10ebf76beba72a51970db33a88df2bf6",
+      "size": 20481536
+    },
+    {
+      "path": "C:\\tools\\RTLink-Plus-4.00-DiscMaster\\installed\\dest\\RTLINK.EXE",
+      "sha256": "dff0a988738a2ba7716f7013ef5b8136e0857b6bfe700bccdeaad70ee5e87c74",
+      "size": 449497
+    },
+    {
+      "path": "C:\\tools\\RTLink-Plus-4.00-DiscMaster\\installed\\dest\\RTLINK.DAT",
+      "sha256": "c1e206fe4b3c34d43b47aa9aa215e2959fbb23c69c89eb69e36d80b1d9194eea",
+      "size": 63824
+    },
+    {
+      "path": "C:\\tools\\RTLink-Plus-4.00-DiscMaster\\installed\\dest\\RTLUTILS.LIB",
+      "sha256": "9060c022f65a2811b81936879f93eb16c5d349c14b56c704a3853d3cf79cd162",
+      "size": 266625
+    },
+    {
+      "path": "C:\\tools\\RTLink-Plus-4.00-DiscMaster\\installed\\dest\\RTLINKST.COM",
+      "sha256": "6ad9015869dc9598a2b498c58297224e5ab4a13fad9ada528650dfcedeb83cf2",
+      "size": 7184
+    },
+    {
+      "path": "C:\\tools\\rtlink-plus-6.10\\installed\\RTL-REAL.EXE",
+      "sha256": "228c5d429438ea32ee21dd02c65b7f8e198715b3fa957be9da328f9857482773",
+      "size": 717922
+    },
+    {
+      "path": "C:\\tools\\rtlink-plus-6.10\\installed\\RTL-SWAP.EXE",
+      "sha256": "daae0a8c358edc26f95540f4bc1629c0dc5c30652155d85ccd79bead4381cfe3",
+      "size": 692123
+    },
+    {
+      "path": "C:\\tools\\rtlink-plus-6.10\\installed\\RTLINK.DAT",
+      "sha256": "10723fb4d4381b6a38417a18409e32d254e59850bcd3b465fbb824e01367a77b",
+      "size": 100100
+    },
+    {
+      "path": "C:\\tools\\rtlink-plus-6.10\\installed\\RTLUTILS.LIB",
+      "sha256": "c718bac09b0b1204a259494446acfa8bfffb129144cc7d36799855621f4fdccb",
+      "size": 423823
+    },
+    {
+      "path": "C:\\tools\\rtlink-plus-6.10\\installed\\RTLINKST.COM",
+      "sha256": "635425a8feff822ca98ec536c55a31824161bffbf9d24d37851cc0d9f7ce3b5f",
+      "size": 11031
+    },
+    {
+      "path": "C:\\tools\\rtlink-plus-6.10\\installed\\RTLINK.EXE",
+      "sha256": "ea6f57a470a26801086593d54aa99f6bf983dd024fc19b5e13361a07f43e17fb",
+      "size": 687531
+    },
+    {
+      "path": "C:\\tools\\rtlink-plus-6.10\\installed\\DOS4GW.EXE",
+      "sha256": "7192b80d1551769c2d2897b2f58015dc18fadca2b7e093a20f45b34011933c6c",
+      "size": 231179
+    },
+    {
+      "path": "C:\\tools\\msc-6.00\\LIB\\llibcr.lib",
+      "sha256": "3d0c6ae92972789e87def01fa96351c39216d731d5c880370155c5613d78c884",
+      "size": 148711
+    },
+    {
+      "path": "C:\\tools\\msc-6.00\\LIB\\libh.lib",
+      "sha256": "a4492e8f63da409d949643fd448f29e65e2cc9a8f2deea977372177bbe0ad818",
+      "size": 21033
+    }
+  ],
+  "provider": {
+    "path": "work/source-only-dos/providers/memory-state.c",
+    "sha256": "5cfc5157f5e6e131433190b1360702d75fba6708283ec4ca74765fd699531948",
+    "kind": "five uninitialized tentative definitions; no functions or initializers"
+  },
+  "objects": {
+    "g_91A0": {
+      "public": "_g_91A0",
+      "seg": 21939,
+      "off": 37280,
+      "grounding": "f_171C_07BE: _dos_allocmem(0xFF00, &[91A0]) max-paragraphs out, then sub [91A0],10h (heap size in paragraphs); also read by root:194D"
+    },
+    "g_91A2": {
+      "public": "_g_91A2",
+      "seg": 21939,
+      "off": 37282,
+      "grounding": "f_171C_07BE: _dos_allocmem([91A0], &[91A2]) segment out (heap DOS block segment); also read by root:194D"
+    },
+    "g_91A4": {
+      "public": "_g_91A4",
+      "seg": 21939,
+      "off": 37284,
+      "grounding": "f_171C_07BE: mov [91A4],0; mov [91A6],seg (far pointer to first heap block)"
+    },
+    "g_91A8": {
+      "public": "_g_91A8",
+      "seg": 21939,
+      "off": 37288,
+      "grounding": "f_171C_07BE: mov [91A8],0; mov [91AA],seg (far pointer to heap end)"
+    },
+    "g_91AC": {
+      "public": "_g_91AC",
+      "seg": 21939,
+      "off": 37292,
+      "grounding": "f_171C_07BE/0160: les bx,[91AC] (far pointer to free list head)"
+    }
+  },
+  "source_bounds_and_consumers": {
+    "unresolved_intake_rows": {
+      "_g_91A0": {
+        "name": "_g_91A0",
+        "kind": "data",
+        "consumers": [
+          "root:171C",
+          "root:194D"
+        ],
+        "registry": {
+          "seg": 21939,
+          "off": 37280,
+          "grounding": "f_171C_07BE: _dos_allocmem(0xFF00, &[91A0]) max-paragraphs out, then sub [91A0],10h (heap size in paragraphs); also read by root:194D"
+        },
+        "accepted_storage_candidates": [],
+        "required_resolution": "source storage/reachability investigation",
+        "declaration_contexts": [
+          {
+            "module": "root:171C",
+            "declaration": "extern unsigned near g_91A0;",
+            "source": {
+              "path": "build\\source-only-dos\\sources\\U074.c",
+              "sha256": "71e6ff43fa21eaaa83aea5263bd9403e0f4a3a2d7120fd80955c0409f7a77052",
+              "size": 25820
+            }
+          }
+        ]
+      },
+      "_g_91A2": {
+        "name": "_g_91A2",
+        "kind": "data",
+        "consumers": [
+          "root:171C",
+          "root:194D"
+        ],
+        "registry": {
+          "seg": 21939,
+          "off": 37282,
+          "grounding": "f_171C_07BE: _dos_allocmem([91A0], &[91A2]) segment out (heap DOS block segment); also read by root:194D"
+        },
+        "accepted_storage_candidates": [],
+        "required_resolution": "source storage/reachability investigation",
+        "declaration_contexts": [
+          {
+            "module": "root:171C",
+            "declaration": "extern unsigned near g_91A2;",
+            "source": {
+              "path": "build\\source-only-dos\\sources\\U074.c",
+              "sha256": "71e6ff43fa21eaaa83aea5263bd9403e0f4a3a2d7120fd80955c0409f7a77052",
+              "size": 25820
+            }
+          }
+        ]
+      },
+      "_g_91A4": {
+        "name": "_g_91A4",
+        "kind": "data",
+        "consumers": [
+          "root:171C"
+        ],
+        "registry": {
+          "seg": 21939,
+          "off": 37284,
+          "grounding": "f_171C_07BE: mov [91A4],0; mov [91A6],seg (far pointer to first heap block)"
+        },
+        "accepted_storage_candidates": [],
+        "required_resolution": "source storage/reachability investigation",
+        "declaration_contexts": [
+          {
+            "module": "root:171C",
+            "declaration": "extern Block far * near g_91A4;",
+            "source": {
+              "path": "build\\source-only-dos\\sources\\U074.c",
+              "sha256": "71e6ff43fa21eaaa83aea5263bd9403e0f4a3a2d7120fd80955c0409f7a77052",
+              "size": 25820
+            }
+          }
+        ]
+      },
+      "_g_91A8": {
+        "name": "_g_91A8",
+        "kind": "data",
+        "consumers": [
+          "root:171C"
+        ],
+        "registry": {
+          "seg": 21939,
+          "off": 37288,
+          "grounding": "f_171C_07BE: mov [91A8],0; mov [91AA],seg (far pointer to heap end)"
+        },
+        "accepted_storage_candidates": [],
+        "required_resolution": "source storage/reachability investigation",
+        "declaration_contexts": [
+          {
+            "module": "root:171C",
+            "declaration": "extern Block far * near g_91A8;",
+            "source": {
+              "path": "build\\source-only-dos\\sources\\U074.c",
+              "sha256": "71e6ff43fa21eaaa83aea5263bd9403e0f4a3a2d7120fd80955c0409f7a77052",
+              "size": 25820
+            }
+          }
+        ]
+      },
+      "_g_91AC": {
+        "name": "_g_91AC",
+        "kind": "data",
+        "consumers": [
+          "root:171C"
+        ],
+        "registry": {
+          "seg": 21939,
+          "off": 37292,
+          "grounding": "f_171C_07BE/0160: les bx,[91AC] (far pointer to free list head)"
+        },
+        "accepted_storage_candidates": [],
+        "required_resolution": "source storage/reachability investigation",
+        "declaration_contexts": [
+          {
+            "module": "root:171C",
+            "declaration": "extern Block far * near g_91AC;",
+            "source": {
+              "path": "build\\source-only-dos\\sources\\U074.c",
+              "sha256": "71e6ff43fa21eaaa83aea5263bd9403e0f4a3a2d7120fd80955c0409f7a77052",
+              "size": 25820
+            }
+          }
+        ]
+      }
+    },
+    "sources": {
+      "canonical_module": {
+        "path": "src/root/m171C.c",
+        "sha256": "31bd9caa243220db2bd1ba940ac8fae7f5d189b2ec95f1662918e9ca2160b10e",
+        "line_anchors": {
+          "declarations": [
+            59,
+            63
+          ],
+          "block_definition": [
+            23,
+            36
+          ],
+          "free_and_reset": [
+            308,
+            309
+          ],
+          "allocator_guard_and_outputs": [
+            368,
+            375
+          ],
+          "heap_bounds_and_pointer_setup": [
+            379,
+            397
+          ],
+          "free_list_pointer_access": [
+            202,
+            227,
+            326,
+            337,
+            461,
+            565,
+            596,
+            647,
+            657
+          ],
+          "by_location_bounds": [
+            277,
+            417,
+            518,
+            521
+          ]
+        }
+      },
+      "canonical_asm_consumer": {
+        "path": "src/root/m194D.asm",
+        "sha256": "8becfaafd57faf7e3bfb7e7150d4438bf8d78e1319aa90618f76a2be89175c0f",
+        "line_anchors": {
+          "byte_import_declarations": [
+            8,
+            9
+          ],
+          "explicit_word_uses": [
+            70,
+            71
+          ]
+        }
+      },
+      "registered_behavior_sources": {
+        "f_171C_09CC": {
+          "status": "BEHAVIOR_EXACT",
+          "evidence_path": "evidence/behavior/functions/f_171C_09CC/contracts/live-state-v2/evidence.json",
+          "evidence_sha256": "3eb10d7520c4f48c708d5c16d18e16b66d72f7262cc39d8a2863c9f4fd90f88d",
+          "source_path": "evidence/behavior/functions/f_171C_09CC/contracts/live-state-v2/module.c",
+          "source_sha256": "3d24904696b29c36b118479ecc50dd80b8d173f58a632a339df9391d08ea085b",
+          "whole_module": true,
+          "module": "root:171C"
+        },
+        "f_171C_0ADC": {
+          "status": "BEHAVIOR_EXACT",
+          "evidence_path": "evidence/behavior/functions/f_171C_0ADC/contracts/live-state-v2/evidence.json",
+          "evidence_sha256": "357d1709069e947c450fe39e64254bda89d83c76f95b18c944e32f3439512600",
+          "source_path": "evidence/behavior/functions/f_171C_0ADC/contracts/live-state-v2/module.c",
+          "source_sha256": "3d24904696b29c36b118479ecc50dd80b8d173f58a632a339df9391d08ea085b",
+          "whole_module": true,
+          "module": "root:171C"
+        },
+        "f_171C_0FBC": {
+          "status": "BEHAVIOR_EXACT",
+          "evidence_path": "evidence/behavior/functions/f_171C_0FBC/contracts/live-state-v2/evidence.json",
+          "evidence_sha256": "283d65f7c8d32de78190b5f6b34186d77470833629771af3c66ce58ca6adb02c",
+          "source_path": "evidence/behavior/functions/f_171C_0FBC/contracts/live-state-v2/module.c",
+          "source_sha256": "3d24904696b29c36b118479ecc50dd80b8d173f58a632a339df9391d08ea085b",
+          "whole_module": true,
+          "module": "root:171C"
+        }
+      },
+      "provider_proposal": {
+        "path": "work/source-only-dos/providers/memory-state.c",
+        "sha256": "5cfc5157f5e6e131433190b1360702d75fba6708283ec4ca74765fd699531948",
+        "kind": "five uninitialized tentative definitions; no functions or initializers"
+      }
+    },
+    "line_anchors": {
+      "src/root/m171C.c": {
+        "declarations": [
+          59,
+          63
+        ],
+        "block_definition": [
+          23,
+          36
+        ],
+        "free_and_reset": [
+          308,
+          309
+        ],
+        "allocator_guard_and_outputs": [
+          368,
+          375
+        ],
+        "heap_bounds_and_pointer_setup": [
+          379,
+          397
+        ],
+        "free_list_pointer_access": [
+          202,
+          227,
+          326,
+          337,
+          461,
+          565,
+          596,
+          647,
+          657
+        ],
+        "by_location_bounds": [
+          277,
+          417,
+          518,
+          521
+        ]
+      },
+      "src/root/m194D.asm": {
+        "byte_import_declarations": [
+          8,
+          9
+        ],
+        "explicit_word_uses": [
+          70,
+          71
+        ]
+      }
+    },
+    "original_direct_access_operands": {
+      "root:171C:f_171C_0160": [
+        "01AC read [91AE]",
+        "01AF read [91AC]",
+        "01B8 write [91AC]",
+        "01BC write [91AE]",
+        "02B8 write [91AC]",
+        "02BC write [91AE]"
+      ],
+      "root:171C:f_171C_030C": [
+        "052F read [91A4]",
+        "0532 read [91A6]",
+        "065A read [91AA]"
+      ],
+      "root:171C:f_171C_0678": [
+        "0678 read [91A2]"
+      ],
+      "root:171C:f_171C_068C": [
+        "06D5 write [91AC]",
+        "06D9 write [91AE]",
+        "073D write [91AC]",
+        "0741 write [91AE]"
+      ],
+      "root:171C:f_171C_07BE": [
+        "07D0 address [91A0] to __dos_allocmem",
+        "07E5 address [91A2] to __dos_allocmem",
+        "07EA write [91A0]",
+        "07EF read [91A0]",
+        "07FB write [91A0]",
+        "0829 read [91A2]",
+        "083D write [91A0]",
+        "0845 write [91A2]",
+        "0849 read [91A2]",
+        "084E write [91A4]",
+        "0852 write [91A6]",
+        "0855 write [91AC]",
+        "0859 write [91AE]",
+        "0865 LES [91AC]",
+        "086D LES [91AC]",
+        "0891 read [91A2]",
+        "089B LES [91AC]",
+        "08A6 read [91A2]",
+        "08B4 write [91A8]",
+        "08B8 write [91AA]",
+        "08C0 read [91A0]",
+        "08D1 read [91A0]",
+        "08EF read [91A2]",
+        "08F3 read [91A0]",
+        "08FA read [91A2]",
+        "08FD read [91A0]",
+        "0911 read [91A2]",
+        "0922 read [91A0]",
+        "092B LES [91AC]",
+        "0936 read [91A2]",
+        "093C write [91A8]",
+        "0940 write [91AA]"
+      ],
+      "root:171C:f_171C_09CC": [
+        "0A12 read [91AA]"
+      ],
+      "root:171C:f_171C_0ADC": [
+        "0B7C write [91AC]",
+        "0B7F write [91AE]"
+      ],
+      "root:171C:f_171C_0CF4": [
+        "0D01 read [91A4]",
+        "0D04 read [91A6]"
+      ],
+      "root:171C:f_171C_0EEA": [
+        "0EF5 read [91AC]",
+        "0EF8 read [91AE]"
+      ],
+      "root:171C:f_171C_0FBC": [
+        "0FCE read [91AC]",
+        "0FD1 read [91AE]"
+      ],
+      "root:171C:f_171C_11F2": [
+        "11F9 read [91AC]",
+        "11FC read [91AE]"
+      ],
+      "root:194D:f_194D_003F": [
+        "0058 read word [91A2]",
+        "005B add word [91A0]"
+      ]
+    },
+    "pointer_and_escape_review": {
+      "g_91A0_g_91A2": "Addresses pass only to __dos_allocmem output parameters; values remain paragraph count and DOS segment state.",
+      "g_91A4_g_91A8_g_91AC": "Near-held far Block pointers; values are assigned/read/dereferenced as complete pointers. No address of these pointer objects is taken or retained.",
+      "pointer_word_view": "offset word at object +0, segment word at +2; original LES and halfword accesses, source SEG/OFF macros, and fresh C/MASM controls agree.",
+      "off_macro": "OFF is used for handles; no OFF(g_91A0..g_91AC) source access was found.",
+      "aggregate": "Five separate names/objects; no whole-range struct or array access. Historical adjacency is not required by the candidate source."
+    }
+  },
+  "lifetime": {
+    "initialize": "f_171C_07BE (s_2F34 guard; DOS allocation output addresses; assignments to all five objects; atexit registration)",
+    "cleanup": "f_171C_0678 calls __dos_freemem(g_91A2) and clears s_2F34 only; none of the five values is zeroed there.",
+    "process_start": "MSC runtime startup clears uninitialized state before C main; both fresh-linker controls verify zero on entry.",
+    "original_startup_clear": {
+      "anchor_receipt": "work/source-only-dos/queue-lifetime-contract-v1.json",
+      "anchor_schema": "dos-queue-lifetime-research-v1",
+      "anchor_research_only": true,
+      "oracle_identity_pin": {
+        "name": "SIMANT.EXE",
+        "sha256": "aa0596c6766322a8229ee3c36e57048c92adc82d50fbe2ef37afb8b85fcf4f11",
+        "size": 506509
+      },
+      "crt0_member": {
+        "accepted_manifest_match": true,
+        "exact_runtime_verifier_result": true,
+        "linear": "0x29f5c",
+        "member": "dos\\crt0.asm",
+        "module_index": 0,
+        "segment": "_TEXT",
+        "sha256": "2e9a254b9bd00ea59884089e78e951f0e40343e11d24976f32d9582f4ded259d",
+        "size": 255
+      },
+      "runtime_library": {
+        "matches_accepted_manifest": true,
+        "name": "llibcr.lib",
+        "path": "C:/tools/msc-6.00/LIB/llibcr.lib",
+        "sha256": "3d0c6ae92972789e87def01fa96351c39216d731d5c880370155c5613d78c884"
+      },
+      "accepted_runtime_library": {
+        "path": "C:/tools/msc-6.00/LIB/llibcr.lib",
+        "sha256": "3d0c6ae92972789e87def01fa96351c39216d731d5c880370155c5613d78c884"
+      },
+      "function": "__astart",
+      "clear_instruction": {
+        "linear": "0x29fe9",
+        "text": "rep stosb byte ptr es:[di], al"
+      },
+      "clear_interval": {
+        "element": "byte",
+        "end_exclusive": "0x94f0",
+        "fill": 0,
+        "length_bytes": 2386,
+        "segment": "DGROUP",
+        "start_inclusive": "0x8b9e"
+      },
+      "historical_objects_interval": {
+        "start_inclusive": "0x91a0",
+        "end_exclusive": "0x91b0",
+        "contained_in_clear": true,
+        "symbol_total_bytes": 16
+      },
+      "main_call": {
+        "canonical_location": "15F8:0004",
+        "canonical_module": "root:15F8",
+        "canonical_symbol": "main",
+        "claim_source": "src/root/m15F8.c",
+        "fixup_kind": "pointer32",
+        "fixup_site_linear": "0x2a01d",
+        "instruction_linear": "0x2a01c",
+        "obj_symbol": "_main",
+        "occurs_after_clear": true,
+        "resolved_identity": {
+          "offset": "0004",
+          "segment": "15F8",
+          "unit": "root"
+        },
+        "text": "lcall 0x15f8, 4"
+      },
+      "queue_lifetime_report_verdict": {
+        "historical_array_owner": "unresolved; no original COMDEF/TU ownership identity is asserted",
+        "per_enqueue_slot_prefix": "not reset by the enqueue writes; this report proves startup zeroing only",
+        "startup_zeroing_lifecycle": "confirmed for [DGROUP:0x91b0, DGROUP:0x9220) before the accepted root main call"
+      }
+    },
+    "reset_rule": "Provider has no initializer or custom reset. After cleanup the globals may be stale until the next f_171C_07BE invocation overwrites them."
+  },
+  "omf_owner_controls": {
+    "expected_communal_shape": {
+      "_g_91A0": {
+        "kind": "near",
+        "length": 2
+      },
+      "_g_91A2": {
+        "kind": "near",
+        "length": 2
+      },
+      "_g_91A4": {
+        "kind": "near",
+        "length": 4
+      },
+      "_g_91A8": {
+        "kind": "near",
+        "length": 4
+      },
+      "_g_91AC": {
+        "kind": "near",
+        "length": 4
+      }
+    },
+    "candidate_actual_communal_shape": {
+      "_g_91A0": {
+        "kind": "near",
+        "length": 2
+      },
+      "_g_91A2": {
+        "kind": "near",
+        "length": 2
+      },
+      "_g_91A4": {
+        "kind": "near",
+        "length": 4
+      },
+      "_g_91A8": {
+        "kind": "near",
+        "length": 4
+      },
+      "_g_91AC": {
+        "kind": "near",
+        "length": 4
+      }
+    },
+    "candidate_matches_expected": true,
+    "wrong_extent_actual_communal_shape": {
+      "_g_91A0": {
+        "kind": "near",
+        "length": 2
+      },
+      "_g_91A2": {
+        "kind": "near",
+        "length": 2
+      },
+      "_g_91A4": {
+        "kind": "near",
+        "length": 8
+      },
+      "_g_91A8": {
+        "kind": "near",
+        "length": 4
+      },
+      "_g_91AC": {
+        "kind": "near",
+        "length": 4
+      }
+    },
+    "wrong_extent_rejected": true,
+    "wrong_signed_type_actual_communal_shape": {
+      "_g_91A0": {
+        "kind": "near",
+        "length": 2
+      },
+      "_g_91A2": {
+        "kind": "near",
+        "length": 2
+      },
+      "_g_91A4": {
+        "kind": "near",
+        "length": 4
+      },
+      "_g_91A8": {
+        "kind": "near",
+        "length": 4
+      },
+      "_g_91AC": {
+        "kind": "near",
+        "length": 4
+      }
+    },
+    "wrong_signed_type_preserves_extent": true,
+    "object_compilations": {
+      "OWNER": {
+        "source": {
+          "path": "build\\workers\\dos_memory_state_candidate\\sources\\OWNER.C",
+          "sha256": "718cb79ff36d51251aad16c064ad0dcc2022847771676fdb4ea1ad71215bfc27",
+          "size": 682
+        },
+        "object": {
+          "path": "build\\workers\\dos_memory_state_candidate\\objects\\OWNER.OBJ",
+          "sha256": "026fcb420122b592e4c4ac24792009bebd220bf5faae992421443b82d45f6e1b",
+          "size": 578
+        },
+        "segment_defs": [
+          {
+            "index": 1,
+            "name": "OWNER_TEXT",
+            "class": "CODE",
+            "length": 0,
+            "alignment_code": 2,
+            "alignment": "word",
+            "combine_code": 2,
+            "combine": "public",
+            "big": false,
+            "use_32bit_offset": false,
+            "frame": null,
+            "offset": null,
+            "overlay_index": 1,
+            "acbp": 72
+          },
+          {
+            "index": 2,
+            "name": "_DATA",
+            "class": "DATA",
+            "length": 0,
+            "alignment_code": 2,
+            "alignment": "word",
+            "combine_code": 2,
+            "combine": "public",
+            "big": false,
+            "use_32bit_offset": false,
+            "frame": null,
+            "offset": null,
+            "overlay_index": 1,
+            "acbp": 72
+          },
+          {
+            "index": 3,
+            "name": "CONST",
+            "class": "CONST",
+            "length": 0,
+            "alignment_code": 2,
+            "alignment": "word",
+            "combine_code": 2,
+            "combine": "public",
+            "big": false,
+            "use_32bit_offset": false,
+            "frame": null,
+            "offset": null,
+            "overlay_index": 1,
+            "acbp": 72
+          },
+          {
+            "index": 4,
+            "name": "_BSS",
+            "class": "BSS",
+            "length": 0,
+            "alignment_code": 2,
+            "alignment": "word",
+            "combine_code": 2,
+            "combine": "public",
+            "big": false,
+            "use_32bit_offset": false,
+            "frame": null,
+            "offset": null,
+            "overlay_index": 1,
+            "acbp": 72
+          },
+          {
+            "index": 5,
+            "name": "$$SYMBOLS",
+            "class": "DEBSYM",
+            "length": 81,
+            "alignment_code": 1,
+            "alignment": "byte",
+            "combine_code": 0,
+            "combine": "private",
+            "big": false,
+            "use_32bit_offset": false,
+            "frame": null,
+            "offset": null,
+            "overlay_index": 1,
+            "acbp": 32
+          },
+          {
+            "index": 6,
+            "name": "$$TYPES",
+            "class": "DEBTYP",
+            "length": 158,
+            "alignment_code": 1,
+            "alignment": "byte",
+            "combine_code": 0,
+            "combine": "private",
+            "big": false,
+            "use_32bit_offset": false,
+            "frame": null,
+            "offset": null,
+            "overlay_index": 1,
+            "acbp": 32
+          }
+        ],
+        "segment_lengths": {
+          "OWNER_TEXT": 0,
+          "_DATA": 0,
+          "CONST": 0,
+          "_BSS": 0,
+          "$$SYMBOLS": 81,
+          "$$TYPES": 158
+        },
+        "groups": [
+          {
+            "index": 1,
+            "name": "DGROUP",
+            "segment_indices": [
+              3,
+              4,
+              2
+            ],
+            "segments": [
+              "CONST",
+              "_BSS",
+              "_DATA"
+            ]
+          }
+        ],
+        "publics": [],
+        "externals": [
+          "_g_91A0",
+          "_g_91A2",
+          "_g_91A4",
+          "_g_91A8",
+          "_g_91AC"
+        ],
+        "communals": [
+          {
+            "name": "_g_91A0",
+            "kind": "near",
+            "type_index": 133,
+            "length": 2
+          },
+          {
+            "name": "_g_91A2",
+            "kind": "near",
+            "type_index": 133,
+            "length": 2
+          },
+          {
+            "name": "_g_91A4",
+            "kind": "near",
+            "type_index": 518,
+            "length": 4
+          },
+          {
+            "name": "_g_91A8",
+            "kind": "near",
+            "type_index": 518,
+            "length": 4
+          },
+          {
+            "name": "_g_91AC",
+            "kind": "near",
+            "type_index": 518,
+            "length": 4
+          }
+        ],
+        "initialized_publics": [],
+        "data_bytes_sha256": null
+      },
+      "NONZERO": {
+        "source": {
+          "path": "build\\workers\\dos_memory_state_candidate\\sources\\NONZERO.C",
+          "sha256": "009f249df3a7d77d4c690826023cb6fbcbadd335b9c92f6ed0b5374289b14af1",
+          "size": 744
+        },
+        "object": {
+          "path": "build\\workers\\dos_memory_state_candidate\\objects\\NONZERO.OBJ",
+          "sha256": "58bb25d64f7f0a0038e9bdcc583fd2146c5389177aad5e085956920ed652879a",
+          "size": 602
+        },
+        "segment_defs": [
+          {
+            "index": 1,
+            "name": "NONZERO_TEXT",
+            "class": "CODE",
+            "length": 0,
+            "alignment_code": 2,
+            "alignment": "word",
+            "combine_code": 2,
+            "combine": "public",
+            "big": false,
+            "use_32bit_offset": false,
+            "frame": null,
+            "offset": null,
+            "overlay_index": 1,
+            "acbp": 72
+          },
+          {
+            "index": 2,
+            "name": "_DATA",
+            "class": "DATA",
+            "length": 16,
+            "alignment_code": 2,
+            "alignment": "word",
+            "combine_code": 2,
+            "combine": "public",
+            "big": false,
+            "use_32bit_offset": false,
+            "frame": null,
+            "offset": null,
+            "overlay_index": 1,
+            "acbp": 72
+          },
+          {
+            "index": 3,
+            "name": "CONST",
+            "class": "CONST",
+            "length": 0,
+            "alignment_code": 2,
+            "alignment": "word",
+            "combine_code": 2,
+            "combine": "public",
+            "big": false,
+            "use_32bit_offset": false,
+            "frame": null,
+            "offset": null,
+            "overlay_index": 1,
+            "acbp": 72
+          },
+          {
+            "index": 4,
+            "name": "_BSS",
+            "class": "BSS",
+            "length": 0,
+            "alignment_code": 2,
+            "alignment": "word",
+            "combine_code": 2,
+            "combine": "public",
+            "big": false,
+            "use_32bit_offset": false,
+            "frame": null,
+            "offset": null,
+            "overlay_index": 1,
+            "acbp": 72
+          },
+          {
+            "index": 5,
+            "name": "$$SYMBOLS",
+            "class": "DEBSYM",
+            "length": 81,
+            "alignment_code": 1,
+            "alignment": "byte",
+            "combine_code": 0,
+            "combine": "private",
+            "big": false,
+            "use_32bit_offset": false,
+            "frame": null,
+            "offset": null,
+            "overlay_index": 1,
+            "acbp": 32
+          },
+          {
+            "index": 6,
+            "name": "$$TYPES",
+            "class": "DEBTYP",
+            "length": 158,
+            "alignment_code": 1,
+            "alignment": "byte",
+            "combine_code": 0,
+            "combine": "private",
+            "big": false,
+            "use_32bit_offset": false,
+            "frame": null,
+            "offset": null,
+            "overlay_index": 1,
+            "acbp": 32
+          }
+        ],
+        "segment_lengths": {
+          "NONZERO_TEXT": 0,
+          "_DATA": 16,
+          "CONST": 0,
+          "_BSS": 0,
+          "$$SYMBOLS": 81,
+          "$$TYPES": 158
+        },
+        "groups": [
+          {
+            "index": 1,
+            "name": "DGROUP",
+            "segment_indices": [
+              3,
+              4,
+              2
+            ],
+            "segments": [
+              "CONST",
+              "_BSS",
+              "_DATA"
+            ]
+          }
+        ],
+        "publics": [
+          {
+            "name": "_g_91A0",
+            "segment": "_DATA",
+            "offset": 0
+          },
+          {
+            "name": "_g_91A2",
+            "segment": "_DATA",
+            "offset": 2
+          },
+          {
+            "name": "_g_91A4",
+            "segment": "_DATA",
+            "offset": 4
+          },
+          {
+            "name": "_g_91A8",
+            "segment": "_DATA",
+            "offset": 8
+          },
+          {
+            "name": "_g_91AC",
+            "segment": "_DATA",
+            "offset": 12
+          }
+        ],
+        "externals": [],
+        "communals": [],
+        "initialized_publics": [
+          {
+            "name": "_g_91A0",
+            "segment": "_DATA",
+            "offset": 0
+          },
+          {
+            "name": "_g_91A2",
+            "segment": "_DATA",
+            "offset": 2
+          },
+          {
+            "name": "_g_91A4",
+            "segment": "_DATA",
+            "offset": 4
+          },
+          {
+            "name": "_g_91A8",
+            "segment": "_DATA",
+            "offset": 8
+          },
+          {
+            "name": "_g_91AC",
+            "segment": "_DATA",
+            "offset": 12
+          }
+        ],
+        "data_bytes_sha256": "4f411bd6c96c5414dda2e412768efd82fd92f298eda38bbc98aad1bd4b516c41"
+      },
+      "BADX": {
+        "source": {
+          "path": "build\\workers\\dos_memory_state_candidate\\sources\\BADX.C",
+          "sha256": "cc61bb146498eb0b3c5d41299cc8c38a50d229a29e7282fda1aa862ecde77750",
+          "size": 685
+        },
+        "object": {
+          "path": "build\\workers\\dos_memory_state_candidate\\objects\\BADX.OBJ",
+          "sha256": "362471521f89d2d5c9e53f48ffc48a53bc779cdb9db64fcc6e4dfe991e111093",
+          "size": 584
+        },
+        "segment_defs": [
+          {
+            "index": 1,
+            "name": "BADX_TEXT",
+            "class": "CODE",
+            "length": 0,
+            "alignment_code": 2,
+            "alignment": "word",
+            "combine_code": 2,
+            "combine": "public",
+            "big": false,
+            "use_32bit_offset": false,
+            "frame": null,
+            "offset": null,
+            "overlay_index": 1,
+            "acbp": 72
+          },
+          {
+            "index": 2,
+            "name": "_DATA",
+            "class": "DATA",
+            "length": 0,
+            "alignment_code": 2,
+            "alignment": "word",
+            "combine_code": 2,
+            "combine": "public",
+            "big": false,
+            "use_32bit_offset": false,
+            "frame": null,
+            "offset": null,
+            "overlay_index": 1,
+            "acbp": 72
+          },
+          {
+            "index": 3,
+            "name": "CONST",
+            "class": "CONST",
+            "length": 0,
+            "alignment_code": 2,
+            "alignment": "word",
+            "combine_code": 2,
+            "combine": "public",
+            "big": false,
+            "use_32bit_offset": false,
+            "frame": null,
+            "offset": null,
+            "overlay_index": 1,
+            "acbp": 72
+          },
+          {
+            "index": 4,
+            "name": "_BSS",
+            "class": "BSS",
+            "length": 0,
+            "alignment_code": 2,
+            "alignment": "word",
+            "combine_code": 2,
+            "combine": "public",
+            "big": false,
+            "use_32bit_offset": false,
+            "frame": null,
+            "offset": null,
+            "overlay_index": 1,
+            "acbp": 72
+          },
+          {
+            "index": 5,
+            "name": "$$SYMBOLS",
+            "class": "DEBSYM",
+            "length": 81,
+            "alignment_code": 1,
+            "alignment": "byte",
+            "combine_code": 0,
+            "combine": "private",
+            "big": false,
+            "use_32bit_offset": false,
+            "frame": null,
+            "offset": null,
+            "overlay_index": 1,
+            "acbp": 32
+          },
+          {
+            "index": 6,
+            "name": "$$TYPES",
+            "class": "DEBTYP",
+            "length": 166,
+            "alignment_code": 1,
+            "alignment": "byte",
+            "combine_code": 0,
+            "combine": "private",
+            "big": false,
+            "use_32bit_offset": false,
+            "frame": null,
+            "offset": null,
+            "overlay_index": 1,
+            "acbp": 32
+          }
+        ],
+        "segment_lengths": {
+          "BADX_TEXT": 0,
+          "_DATA": 0,
+          "CONST": 0,
+          "_BSS": 0,
+          "$$SYMBOLS": 81,
+          "$$TYPES": 166
+        },
+        "groups": [
+          {
+            "index": 1,
+            "name": "DGROUP",
+            "segment_indices": [
+              3,
+              4,
+              2
+            ],
+            "segments": [
+              "CONST",
+              "_BSS",
+              "_DATA"
+            ]
+          }
+        ],
+        "publics": [],
+        "externals": [
+          "_g_91A0",
+          "_g_91A2",
+          "_g_91A4",
+          "_g_91A8",
+          "_g_91AC"
+        ],
+        "communals": [
+          {
+            "name": "_g_91A0",
+            "kind": "near",
+            "type_index": 133,
+            "length": 2
+          },
+          {
+            "name": "_g_91A2",
+            "kind": "near",
+            "type_index": 133,
+            "length": 2
+          },
+          {
+            "name": "_g_91A4",
+            "kind": "near",
+            "type_index": 518,
+            "length": 8
+          },
+          {
+            "name": "_g_91A8",
+            "kind": "near",
+            "type_index": 519,
+            "length": 4
+          },
+          {
+            "name": "_g_91AC",
+            "kind": "near",
+            "type_index": 519,
+            "length": 4
+          }
+        ],
+        "initialized_publics": [],
+        "data_bytes_sha256": null
+      },
+      "BADT": {
+        "source": {
+          "path": "build\\workers\\dos_memory_state_candidate\\sources\\BADT.C",
+          "sha256": "c960cf71929a5d7097664b1587d0708f77e0014d88a4b2169e078ce8a933f92e",
+          "size": 677
+        },
+        "object": {
+          "path": "build\\workers\\dos_memory_state_candidate\\objects\\BADT.OBJ",
+          "sha256": "daabd2733f33548fd468f1c8633fc12718fc671ff476014a4ecab92b5c4c280a",
+          "size": 576
+        },
+        "segment_defs": [
+          {
+            "index": 1,
+            "name": "BADT_TEXT",
+            "class": "CODE",
+            "length": 0,
+            "alignment_code": 2,
+            "alignment": "word",
+            "combine_code": 2,
+            "combine": "public",
+            "big": false,
+            "use_32bit_offset": false,
+            "frame": null,
+            "offset": null,
+            "overlay_index": 1,
+            "acbp": 72
+          },
+          {
+            "index": 2,
+            "name": "_DATA",
+            "class": "DATA",
+            "length": 0,
+            "alignment_code": 2,
+            "alignment": "word",
+            "combine_code": 2,
+            "combine": "public",
+            "big": false,
+            "use_32bit_offset": false,
+            "frame": null,
+            "offset": null,
+            "overlay_index": 1,
+            "acbp": 72
+          },
+          {
+            "index": 3,
+            "name": "CONST",
+            "class": "CONST",
+            "length": 0,
+            "alignment_code": 2,
+            "alignment": "word",
+            "combine_code": 2,
+            "combine": "public",
+            "big": false,
+            "use_32bit_offset": false,
+            "frame": null,
+            "offset": null,
+            "overlay_index": 1,
+            "acbp": 72
+          },
+          {
+            "index": 4,
+            "name": "_BSS",
+            "class": "BSS",
+            "length": 0,
+            "alignment_code": 2,
+            "alignment": "word",
+            "combine_code": 2,
+            "combine": "public",
+            "big": false,
+            "use_32bit_offset": false,
+            "frame": null,
+            "offset": null,
+            "overlay_index": 1,
+            "acbp": 72
+          },
+          {
+            "index": 5,
+            "name": "$$SYMBOLS",
+            "class": "DEBSYM",
+            "length": 81,
+            "alignment_code": 1,
+            "alignment": "byte",
+            "combine_code": 0,
+            "combine": "private",
+            "big": false,
+            "use_32bit_offset": false,
+            "frame": null,
+            "offset": null,
+            "overlay_index": 1,
+            "acbp": 32
+          },
+          {
+            "index": 6,
+            "name": "$$TYPES",
+            "class": "DEBTYP",
+            "length": 158,
+            "alignment_code": 1,
+            "alignment": "byte",
+            "combine_code": 0,
+            "combine": "private",
+            "big": false,
+            "use_32bit_offset": false,
+            "frame": null,
+            "offset": null,
+            "overlay_index": 1,
+            "acbp": 32
+          }
+        ],
+        "segment_lengths": {
+          "BADT_TEXT": 0,
+          "_DATA": 0,
+          "CONST": 0,
+          "_BSS": 0,
+          "$$SYMBOLS": 81,
+          "$$TYPES": 158
+        },
+        "groups": [
+          {
+            "index": 1,
+            "name": "DGROUP",
+            "segment_indices": [
+              3,
+              4,
+              2
+            ],
+            "segments": [
+              "CONST",
+              "_BSS",
+              "_DATA"
+            ]
+          }
+        ],
+        "publics": [],
+        "externals": [
+          "_g_91A0",
+          "_g_91A2",
+          "_g_91A4",
+          "_g_91A8",
+          "_g_91AC"
+        ],
+        "communals": [
+          {
+            "name": "_g_91A0",
+            "kind": "near",
+            "type_index": 129,
+            "length": 2
+          },
+          {
+            "name": "_g_91A2",
+            "kind": "near",
+            "type_index": 133,
+            "length": 2
+          },
+          {
+            "name": "_g_91A4",
+            "kind": "near",
+            "type_index": 518,
+            "length": 4
+          },
+          {
+            "name": "_g_91A8",
+            "kind": "near",
+            "type_index": 518,
+            "length": 4
+          },
+          {
+            "name": "_g_91AC",
+            "kind": "near",
+            "type_index": 518,
+            "length": 4
+          }
+        ],
+        "initialized_publics": [],
+        "data_bytes_sha256": null
+      },
+      "MAIN": {
+        "source": {
+          "path": "build\\workers\\dos_memory_state_candidate\\sources\\MAIN.C",
+          "sha256": "03ed367c7607f6711da1d7a5b602597a4cdea9b6c163d1dc224794a69dc29569",
+          "size": 1567
+        },
+        "object": {
+          "path": "build\\workers\\dos_memory_state_candidate\\objects\\MAIN.OBJ",
+          "sha256": "29c6066c85cb6b6a2bd50d8037768e5535391ac5b917a0a7612c6eb40ab4ddf0",
+          "size": 1242
+        },
+        "segment_defs": [
+          {
+            "index": 1,
+            "name": "MAIN_TEXT",
+            "class": "CODE",
+            "length": 229,
+            "alignment_code": 2,
+            "alignment": "word",
+            "combine_code": 2,
+            "combine": "public",
+            "big": false,
+            "use_32bit_offset": false,
+            "frame": null,
+            "offset": null,
+            "overlay_index": 1,
+            "acbp": 72
+          },
+          {
+            "index": 2,
+            "name": "_DATA",
+            "class": "DATA",
+            "length": 20,
+            "alignment_code": 2,
+            "alignment": "word",
+            "combine_code": 2,
+            "combine": "public",
+            "big": false,
+            "use_32bit_offset": false,
+            "frame": null,
+            "offset": null,
+            "overlay_index": 1,
+            "acbp": 72
+          },
+          {
+            "index": 3,
+            "name": "CONST",
+            "class": "CONST",
+            "length": 0,
+            "alignment_code": 2,
+            "alignment": "word",
+            "combine_code": 2,
+            "combine": "public",
+            "big": false,
+            "use_32bit_offset": false,
+            "frame": null,
+            "offset": null,
+            "overlay_index": 1,
+            "acbp": 72
+          },
+          {
+            "index": 4,
+            "name": "_BSS",
+            "class": "BSS",
+            "length": 0,
+            "alignment_code": 2,
+            "alignment": "word",
+            "combine_code": 2,
+            "combine": "public",
+            "big": false,
+            "use_32bit_offset": false,
+            "frame": null,
+            "offset": null,
+            "overlay_index": 1,
+            "acbp": 72
+          },
+          {
+            "index": 5,
+            "name": "$$SYMBOLS",
+            "class": "DEBSYM",
+            "length": 109,
+            "alignment_code": 1,
+            "alignment": "byte",
+            "combine_code": 0,
+            "combine": "private",
+            "big": false,
+            "use_32bit_offset": false,
+            "frame": null,
+            "offset": null,
+            "overlay_index": 1,
+            "acbp": 32
+          },
+          {
+            "index": 6,
+            "name": "$$TYPES",
+            "class": "DEBTYP",
+            "length": 191,
+            "alignment_code": 1,
+            "alignment": "byte",
+            "combine_code": 0,
+            "combine": "private",
+            "big": false,
+            "use_32bit_offset": false,
+            "frame": null,
+            "offset": null,
+            "overlay_index": 1,
+            "acbp": 32
+          }
+        ],
+        "segment_lengths": {
+          "MAIN_TEXT": 229,
+          "_DATA": 20,
+          "CONST": 0,
+          "_BSS": 0,
+          "$$SYMBOLS": 109,
+          "$$TYPES": 191
+        },
+        "groups": [
+          {
+            "index": 1,
+            "name": "DGROUP",
+            "segment_indices": [
+              3,
+              4,
+              2
+            ],
+            "segments": [
+              "CONST",
+              "_BSS",
+              "_DATA"
+            ]
+          }
+        ],
+        "publics": [
+          {
+            "name": "_main",
+            "segment": "MAIN_TEXT",
+            "offset": 0
+          }
+        ],
+        "externals": [
+          "__acrtused",
+          "__aFchkstk",
+          "_g_91A0",
+          "_g_91A2",
+          "_g_91A4",
+          "_g_91A8",
+          "_g_91AC",
+          "_asm_set_views",
+          "_asm_check_zero",
+          "_asm_check_views",
+          "_puts",
+          "_main"
+        ],
+        "communals": [],
+        "initialized_publics": [],
+        "data_bytes_sha256": "a90ce6749287db8d34dcd86ece1fe6ee6b2e2249080f355501bcc62e768dafdb"
+      },
+      "EXTMAIN": {
+        "source": {
+          "path": "build\\workers\\dos_memory_state_candidate\\sources\\EXTMAIN.C",
+          "sha256": "3d0f607a80748f65703008d7da1ff7721db4d8452afba04b4bde912570ce0d7b",
+          "size": 462
+        },
+        "object": {
+          "path": "build\\workers\\dos_memory_state_candidate\\objects\\EXTMAIN.OBJ",
+          "sha256": "c482c81c47ad09081301a039d4009cdd10dd8329287355652fc41857ac775ea9",
+          "size": 708
+        },
+        "segment_defs": [
+          {
+            "index": 1,
+            "name": "EXTMAIN_TEXT",
+            "class": "CODE",
+            "length": 23,
+            "alignment_code": 2,
+            "alignment": "word",
+            "combine_code": 2,
+            "combine": "public",
+            "big": false,
+            "use_32bit_offset": false,
+            "frame": null,
+            "offset": null,
+            "overlay_index": 1,
+            "acbp": 72
+          },
+          {
+            "index": 2,
+            "name": "_DATA",
+            "class": "DATA",
+            "length": 10,
+            "alignment_code": 2,
+            "alignment": "word",
+            "combine_code": 2,
+            "combine": "public",
+            "big": false,
+            "use_32bit_offset": false,
+            "frame": null,
+            "offset": null,
+            "overlay_index": 1,
+            "acbp": 72
+          },
+          {
+            "index": 3,
+            "name": "CONST",
+            "class": "CONST",
+            "length": 0,
+            "alignment_code": 2,
+            "alignment": "word",
+            "combine_code": 2,
+            "combine": "public",
+            "big": false,
+            "use_32bit_offset": false,
+            "frame": null,
+            "offset": null,
+            "overlay_index": 1,
+            "acbp": 72
+          },
+          {
+            "index": 4,
+            "name": "_BSS",
+            "class": "BSS",
+            "length": 0,
+            "alignment_code": 2,
+            "alignment": "word",
+            "combine_code": 2,
+            "combine": "public",
+            "big": false,
+            "use_32bit_offset": false,
+            "frame": null,
+            "offset": null,
+            "overlay_index": 1,
+            "acbp": 72
+          },
+          {
+            "index": 5,
+            "name": "$$SYMBOLS",
+            "class": "DEBSYM",
+            "length": 49,
+            "alignment_code": 1,
+            "alignment": "byte",
+            "combine_code": 0,
+            "combine": "private",
+            "big": false,
+            "use_32bit_offset": false,
+            "frame": null,
+            "offset": null,
+            "overlay_index": 1,
+            "acbp": 32
+          },
+          {
+            "index": 6,
+            "name": "$$TYPES",
+            "class": "DEBTYP",
+            "length": 199,
+            "alignment_code": 1,
+            "alignment": "byte",
+            "combine_code": 0,
+            "combine": "private",
+            "big": false,
+            "use_32bit_offset": false,
+            "frame": null,
+            "offset": null,
+            "overlay_index": 1,
+            "acbp": 32
+          }
+        ],
+        "segment_lengths": {
+          "EXTMAIN_TEXT": 23,
+          "_DATA": 10,
+          "CONST": 0,
+          "_BSS": 0,
+          "$$SYMBOLS": 49,
+          "$$TYPES": 199
+        },
+        "groups": [
+          {
+            "index": 1,
+            "name": "DGROUP",
+            "segment_indices": [
+              3,
+              4,
+              2
+            ],
+            "segments": [
+              "CONST",
+              "_BSS",
+              "_DATA"
+            ]
+          }
+        ],
+        "publics": [
+          {
+            "name": "_main",
+            "segment": "EXTMAIN_TEXT",
+            "offset": 0
+          }
+        ],
+        "externals": [
+          "__acrtused",
+          "__aFchkstk",
+          "_g_91A4",
+          "_puts",
+          "_main"
+        ],
+        "communals": [],
+        "initialized_publics": [],
+        "data_bytes_sha256": "1c1a618bccb7f2f3757059133f7eba758f00a94a53f1549ed773e54d0014bd78"
+      },
+      "TYPEMAIN": {
+        "source": {
+          "path": "build\\workers\\dos_memory_state_candidate\\sources\\TYPEMAIN.C",
+          "sha256": "974b5a39e7a34be7ad231fb91244ff448924feae8ed947e1ed837bc18b353202",
+          "size": 199
+        },
+        "object": {
+          "path": "build\\workers\\dos_memory_state_candidate\\objects\\TYPEMAIN.OBJ",
+          "sha256": "3913ca6ef4563f9e14e5c4e9cd2944b6ec16512d802072489a361c871b9a7d37",
+          "size": 566
+        },
+        "segment_defs": [
+          {
+            "index": 1,
+            "name": "TYPEMAIN_TEXT",
+            "class": "CODE",
+            "length": 29,
+            "alignment_code": 2,
+            "alignment": "word",
+            "combine_code": 2,
+            "combine": "public",
+            "big": false,
+            "use_32bit_offset": false,
+            "frame": null,
+            "offset": null,
+            "overlay_index": 1,
+            "acbp": 72
+          },
+          {
+            "index": 2,
+            "name": "_DATA",
+            "class": "DATA",
+            "length": 10,
+            "alignment_code": 2,
+            "alignment": "word",
+            "combine_code": 2,
+            "combine": "public",
+            "big": false,
+            "use_32bit_offset": false,
+            "frame": null,
+            "offset": null,
+            "overlay_index": 1,
+            "acbp": 72
+          },
+          {
+            "index": 3,
+            "name": "CONST",
+            "class": "CONST",
+            "length": 0,
+            "alignment_code": 2,
+            "alignment": "word",
+            "combine_code": 2,
+            "combine": "public",
+            "big": false,
+            "use_32bit_offset": false,
+            "frame": null,
+            "offset": null,
+            "overlay_index": 1,
+            "acbp": 72
+          },
+          {
+            "index": 4,
+            "name": "_BSS",
+            "class": "BSS",
+            "length": 0,
+            "alignment_code": 2,
+            "alignment": "word",
+            "combine_code": 2,
+            "combine": "public",
+            "big": false,
+            "use_32bit_offset": false,
+            "frame": null,
+            "offset": null,
+            "overlay_index": 1,
+            "acbp": 72
+          },
+          {
+            "index": 5,
+            "name": "$$SYMBOLS",
+            "class": "DEBSYM",
+            "length": 49,
+            "alignment_code": 1,
+            "alignment": "byte",
+            "combine_code": 0,
+            "combine": "private",
+            "big": false,
+            "use_32bit_offset": false,
+            "frame": null,
+            "offset": null,
+            "overlay_index": 1,
+            "acbp": 32
+          },
+          {
+            "index": 6,
+            "name": "$$TYPES",
+            "class": "DEBTYP",
+            "length": 41,
+            "alignment_code": 1,
+            "alignment": "byte",
+            "combine_code": 0,
+            "combine": "private",
+            "big": false,
+            "use_32bit_offset": false,
+            "frame": null,
+            "offset": null,
+            "overlay_index": 1,
+            "acbp": 32
+          }
+        ],
+        "segment_lengths": {
+          "TYPEMAIN_TEXT": 29,
+          "_DATA": 10,
+          "CONST": 0,
+          "_BSS": 0,
+          "$$SYMBOLS": 49,
+          "$$TYPES": 41
+        },
+        "groups": [
+          {
+            "index": 1,
+            "name": "DGROUP",
+            "segment_indices": [
+              3,
+              4,
+              2
+            ],
+            "segments": [
+              "CONST",
+              "_BSS",
+              "_DATA"
+            ]
+          }
+        ],
+        "publics": [
+          {
+            "name": "_main",
+            "segment": "TYPEMAIN_TEXT",
+            "offset": 0
+          }
+        ],
+        "externals": [
+          "__acrtused",
+          "__aFchkstk",
+          "_g_91A0",
+          "_puts",
+          "_main"
+        ],
+        "communals": [],
+        "initialized_publics": [],
+        "data_bytes_sha256": "1c1a618bccb7f2f3757059133f7eba758f00a94a53f1549ed773e54d0014bd78"
+      },
+      "ASM": {
+        "source": {
+          "path": "build\\workers\\dos_memory_state_candidate\\sources\\ASM.ASM",
+          "sha256": "ac2f471da2b39f6c9ef5129a692fb5b6e4685dd2ef297be02847a789a3b468f5",
+          "size": 1549
+        },
+        "object": {
+          "path": "build\\workers\\dos_memory_state_candidate\\objects\\ASM.OBJ",
+          "sha256": "57080304c81c2b798ad7b8e6226563faf8482d2255759688d644ee570b13db43",
+          "size": 513
+        },
+        "segment_defs": [
+          {
+            "index": 1,
+            "name": "_DATA",
+            "class": "DATA",
+            "length": 0,
+            "alignment_code": 2,
+            "alignment": "word",
+            "combine_code": 2,
+            "combine": "public",
+            "big": false,
+            "use_32bit_offset": false,
+            "frame": null,
+            "offset": null,
+            "overlay_index": 1,
+            "acbp": 72
+          },
+          {
+            "index": 2,
+            "name": "TEST_TEXT",
+            "class": "CODE",
+            "length": 163,
+            "alignment_code": 2,
+            "alignment": "word",
+            "combine_code": 2,
+            "combine": "public",
+            "big": false,
+            "use_32bit_offset": false,
+            "frame": null,
+            "offset": null,
+            "overlay_index": 1,
+            "acbp": 72
+          }
+        ],
+        "segment_lengths": {
+          "_DATA": 0,
+          "TEST_TEXT": 163
+        },
+        "groups": [
+          {
+            "index": 1,
+            "name": "DGROUP",
+            "segment_indices": [
+              1
+            ],
+            "segments": [
+              "_DATA"
+            ]
+          }
+        ],
+        "publics": [
+          {
+            "name": "_asm_set_views",
+            "segment": "TEST_TEXT",
+            "offset": 0
+          },
+          {
+            "name": "_asm_check_zero",
+            "segment": "TEST_TEXT",
+            "offset": 52
+          },
+          {
+            "name": "_asm_check_views",
+            "segment": "TEST_TEXT",
+            "offset": 92
+          }
+        ],
+        "externals": [
+          "_g_91A0",
+          "_g_91A2",
+          "_g_91A4",
+          "_g_91A8",
+          "_g_91AC"
+        ],
+        "communals": [],
+        "initialized_publics": [],
+        "data_bytes_sha256": null
+      }
+    }
+  },
+  "runtime_controls": [
+    {
+      "linker": "rtlink400",
+      "case": "typed_owner_c_and_asm_views",
+      "object_names": [
+        "MAIN",
+        "OWNER",
+        "ASM"
+      ],
+      "expected": "PASS",
+      "actual": "PASS",
+      "emulator_exit": 0,
+      "passed": true,
+      "link_log": ".RTLink(R)/Plus  with Virtual Memory/Overlays/RTLs/CodeView/Profiler  Ver. 4.00\n(C) Copyright Pocket Soft Inc., 1988-1990.  All Rights Reserved.\n\nSerial# 854-002-0162\n\nPocket Soft, Inc. is an Authorized Licensee of Microsoft(R) CodeView(R)\nInformation. \"Microsoft\" and \"CodeView\" are registered trademarks of\nMicrosoft Corporation.\n\n=> OUTPUT PROBE\n=> MAP = PROBE S,N,A,L\n=> NODEFLIB\n=> LIBRARY LLIBCR, LIBH\n=> FILE MAIN\n=> FILE OWNER\n=> FILE ASM\n=> \n8K\n",
+      "files": [
+        {
+          "path": "build\\workers\\dos_memory_state_candidate\\cases\\rtlink400\\typed_owner_c_and_asm_views\\ASM.OBJ",
+          "sha256": "57080304c81c2b798ad7b8e6226563faf8482d2255759688d644ee570b13db43",
+          "size": 513
+        },
+        {
+          "path": "build\\workers\\dos_memory_state_candidate\\cases\\rtlink400\\typed_owner_c_and_asm_views\\dosbox.conf",
+          "sha256": "2b26d6d2a081667aba29affa1966cd32faf47908a67b68294b90416f0cee521d",
+          "size": 429
+        },
+        {
+          "path": "build\\workers\\dos_memory_state_candidate\\cases\\rtlink400\\typed_owner_c_and_asm_views\\LIBH.LIB",
+          "sha256": "a4492e8f63da409d949643fd448f29e65e2cc9a8f2deea977372177bbe0ad818",
+          "size": 21033
+        },
+        {
+          "path": "build\\workers\\dos_memory_state_candidate\\cases\\rtlink400\\typed_owner_c_and_asm_views\\LINK.LOG",
+          "sha256": "6710c720789852cf6d770bbbe55de5c489776ca3cbd2565f47880bd98cb236d9",
+          "size": 472
+        },
+        {
+          "path": "build\\workers\\dos_memory_state_candidate\\cases\\rtlink400\\typed_owner_c_and_asm_views\\LLIBCR.LIB",
+          "sha256": "3d0c6ae92972789e87def01fa96351c39216d731d5c880370155c5613d78c884",
+          "size": 148711
+        },
+        {
+          "path": "build\\workers\\dos_memory_state_candidate\\cases\\rtlink400\\typed_owner_c_and_asm_views\\MAIN.OBJ",
+          "sha256": "29c6066c85cb6b6a2bd50d8037768e5535391ac5b917a0a7612c6eb40ab4ddf0",
+          "size": 1242
+        },
+        {
+          "path": "build\\workers\\dos_memory_state_candidate\\cases\\rtlink400\\typed_owner_c_and_asm_views\\OWNER.OBJ",
+          "sha256": "026fcb420122b592e4c4ac24792009bebd220bf5faae992421443b82d45f6e1b",
+          "size": 578
+        },
+        {
+          "path": "build\\workers\\dos_memory_state_candidate\\cases\\rtlink400\\typed_owner_c_and_asm_views\\PROBE.EXE",
+          "sha256": "99a8d43b76c7bbe3dfc62daaa71c3ef1f47ed1be157f31c0a2f48279447674d3",
+          "size": 6113
+        },
+        {
+          "path": "build\\workers\\dos_memory_state_candidate\\cases\\rtlink400\\typed_owner_c_and_asm_views\\PROBE.LNK",
+          "sha256": "315ab1b5c3ca0de397fa9ea0ec0cb1128260d8ee2de2763f86bcee48d83ba759",
+          "size": 100
+        },
+        {
+          "path": "build\\workers\\dos_memory_state_candidate\\cases\\rtlink400\\typed_owner_c_and_asm_views\\PROBE.MAP",
+          "sha256": "5aeb28538a2b768309219411bd75aefe3dbc7394ae6397707284fddf42f23fef",
+          "size": 9547
+        },
+        {
+          "path": "build\\workers\\dos_memory_state_candidate\\cases\\rtlink400\\typed_owner_c_and_asm_views\\RTLINK.CFG",
+          "sha256": "5d0c3a5bbc20976e57a8a99e35732f9f2d314ac80485a17f6b7ddaec8f8e81e8",
+          "size": 21
+        },
+        {
+          "path": "build\\workers\\dos_memory_state_candidate\\cases\\rtlink400\\typed_owner_c_and_asm_views\\RUN.BAT",
+          "sha256": "164577f4cfc5ffa5b92aaf77779ef6f209a85bb039d194ae3745f35bffd51c41",
+          "size": 75
+        },
+        {
+          "path": "build\\workers\\dos_memory_state_candidate\\cases\\rtlink400\\typed_owner_c_and_asm_views\\RUN.LOG",
+          "sha256": "d938fa189912f8776c3deb31a6bec42f403f57b9c8e3ed936bdb076caf6bd61c",
+          "size": 6
+        }
+      ]
+    },
+    {
+      "linker": "rtlink400",
+      "case": "wrong_extent_pointer_array",
+      "object_names": [
+        "EXTMAIN",
+        "BADX"
+      ],
+      "expected": "FAIL",
+      "actual": "FAIL",
+      "emulator_exit": 0,
+      "passed": true,
+      "link_log": ".RTLink(R)/Plus  with Virtual Memory/Overlays/RTLs/CodeView/Profiler  Ver. 4.00\n(C) Copyright Pocket Soft Inc., 1988-1990.  All Rights Reserved.\n\nSerial# 854-002-0162\n\nPocket Soft, Inc. is an Authorized Licensee of Microsoft(R) CodeView(R)\nInformation. \"Microsoft\" and \"CodeView\" are registered trademarks of\nMicrosoft Corporation.\n\n=> OUTPUT PROBE\n=> MAP = PROBE S,N,A,L\n=> NODEFLIB\n=> LIBRARY LLIBCR, LIBH\n=> FILE EXTMAIN\n=> FILE BADX\n=> \n8K\n",
+      "files": [
+        {
+          "path": "build\\workers\\dos_memory_state_candidate\\cases\\rtlink400\\wrong_extent_pointer_array\\BADX.OBJ",
+          "sha256": "362471521f89d2d5c9e53f48ffc48a53bc779cdb9db64fcc6e4dfe991e111093",
+          "size": 584
+        },
+        {
+          "path": "build\\workers\\dos_memory_state_candidate\\cases\\rtlink400\\wrong_extent_pointer_array\\dosbox.conf",
+          "sha256": "8d4068ee24c3fb54559ade40981e2d64f71879bc777ce6472520a16c16a51001",
+          "size": 428
+        },
+        {
+          "path": "build\\workers\\dos_memory_state_candidate\\cases\\rtlink400\\wrong_extent_pointer_array\\EXTMAIN.OBJ",
+          "sha256": "c482c81c47ad09081301a039d4009cdd10dd8329287355652fc41857ac775ea9",
+          "size": 708
+        },
+        {
+          "path": "build\\workers\\dos_memory_state_candidate\\cases\\rtlink400\\wrong_extent_pointer_array\\LIBH.LIB",
+          "sha256": "a4492e8f63da409d949643fd448f29e65e2cc9a8f2deea977372177bbe0ad818",
+          "size": 21033
+        },
+        {
+          "path": "build\\workers\\dos_memory_state_candidate\\cases\\rtlink400\\wrong_extent_pointer_array\\LINK.LOG",
+          "sha256": "a0d92710fde40e0a1e3005de0478aacdafe2d03a5a1359311e2843db01deb046",
+          "size": 461
+        },
+        {
+          "path": "build\\workers\\dos_memory_state_candidate\\cases\\rtlink400\\wrong_extent_pointer_array\\LLIBCR.LIB",
+          "sha256": "3d0c6ae92972789e87def01fa96351c39216d731d5c880370155c5613d78c884",
+          "size": 148711
+        },
+        {
+          "path": "build\\workers\\dos_memory_state_candidate\\cases\\rtlink400\\wrong_extent_pointer_array\\PROBE.EXE",
+          "sha256": "da922fc5934e8cfe9421d0d3884dfd7480148ca52edd44042a9fb57dc2d1ae07",
+          "size": 5735
+        },
+        {
+          "path": "build\\workers\\dos_memory_state_candidate\\cases\\rtlink400\\wrong_extent_pointer_array\\PROBE.LNK",
+          "sha256": "c2c561c7667d0b605490207b9dfe4b2b466b0c6f67fbccf9a375f83a0838bd5f",
+          "size": 92
+        },
+        {
+          "path": "build\\workers\\dos_memory_state_candidate\\cases\\rtlink400\\wrong_extent_pointer_array\\PROBE.MAP",
+          "sha256": "6370abb4d8a87da15bb59e7e0d5564df7bc5580aafdf03337506d7c83f031f11",
+          "size": 9103
+        },
+        {
+          "path": "build\\workers\\dos_memory_state_candidate\\cases\\rtlink400\\wrong_extent_pointer_array\\RTLINK.CFG",
+          "sha256": "5d0c3a5bbc20976e57a8a99e35732f9f2d314ac80485a17f6b7ddaec8f8e81e8",
+          "size": 21
+        },
+        {
+          "path": "build\\workers\\dos_memory_state_candidate\\cases\\rtlink400\\wrong_extent_pointer_array\\RUN.BAT",
+          "sha256": "164577f4cfc5ffa5b92aaf77779ef6f209a85bb039d194ae3745f35bffd51c41",
+          "size": 75
+        },
+        {
+          "path": "build\\workers\\dos_memory_state_candidate\\cases\\rtlink400\\wrong_extent_pointer_array\\RUN.LOG",
+          "sha256": "765489fd1b16cabfd78a744ff35dbeccd0d050fb1bff907dca6e1eafa8d44938",
+          "size": 6
+        }
+      ]
+    },
+    {
+      "linker": "rtlink400",
+      "case": "wrong_signed_word_type",
+      "object_names": [
+        "TYPEMAIN",
+        "BADT"
+      ],
+      "expected": "FAIL",
+      "actual": "FAIL",
+      "emulator_exit": 0,
+      "passed": true,
+      "link_log": ".RTLink(R)/Plus  with Virtual Memory/Overlays/RTLs/CodeView/Profiler  Ver. 4.00\n(C) Copyright Pocket Soft Inc., 1988-1990.  All Rights Reserved.\n\nSerial# 854-002-0162\n\nPocket Soft, Inc. is an Authorized Licensee of Microsoft(R) CodeView(R)\nInformation. \"Microsoft\" and \"CodeView\" are registered trademarks of\nMicrosoft Corporation.\n\n=> OUTPUT PROBE\n=> MAP = PROBE S,N,A,L\n=> NODEFLIB\n=> LIBRARY LLIBCR, LIBH\n=> FILE TYPEMAIN\n=> FILE BADT\n=> \n8K\n",
+      "files": [
+        {
+          "path": "build\\workers\\dos_memory_state_candidate\\cases\\rtlink400\\wrong_signed_word_type\\BADT.OBJ",
+          "sha256": "daabd2733f33548fd468f1c8633fc12718fc671ff476014a4ecab92b5c4c280a",
+          "size": 576
+        },
+        {
+          "path": "build\\workers\\dos_memory_state_candidate\\cases\\rtlink400\\wrong_signed_word_type\\dosbox.conf",
+          "sha256": "ee97beff014bd7874510f969a164aebb8bc921fd9134bd331785ba8a9502579d",
+          "size": 424
+        },
+        {
+          "path": "build\\workers\\dos_memory_state_candidate\\cases\\rtlink400\\wrong_signed_word_type\\LIBH.LIB",
+          "sha256": "a4492e8f63da409d949643fd448f29e65e2cc9a8f2deea977372177bbe0ad818",
+          "size": 21033
+        },
+        {
+          "path": "build\\workers\\dos_memory_state_candidate\\cases\\rtlink400\\wrong_signed_word_type\\LINK.LOG",
+          "sha256": "d17af914100754b5641a4755710d189c168fe6ea0a15196010623fb9b51aac1c",
+          "size": 462
+        },
+        {
+          "path": "build\\workers\\dos_memory_state_candidate\\cases\\rtlink400\\wrong_signed_word_type\\LLIBCR.LIB",
+          "sha256": "3d0c6ae92972789e87def01fa96351c39216d731d5c880370155c5613d78c884",
+          "size": 148711
+        },
+        {
+          "path": "build\\workers\\dos_memory_state_candidate\\cases\\rtlink400\\wrong_signed_word_type\\PROBE.EXE",
+          "sha256": "c87deeeb8f26ae70bb9ea55186b34beb889b9dee1a192a687a39f46af3000654",
+          "size": 5735
+        },
+        {
+          "path": "build\\workers\\dos_memory_state_candidate\\cases\\rtlink400\\wrong_signed_word_type\\PROBE.LNK",
+          "sha256": "f9d48b58aa0e782d87120dc3f8196061106ec444c9694df10167585e350d1906",
+          "size": 93
+        },
+        {
+          "path": "build\\workers\\dos_memory_state_candidate\\cases\\rtlink400\\wrong_signed_word_type\\PROBE.MAP",
+          "sha256": "2d1e1db658835ded69cef7678cc5454ffe235aab4962e45af707f2770b9582e6",
+          "size": 9122
+        },
+        {
+          "path": "build\\workers\\dos_memory_state_candidate\\cases\\rtlink400\\wrong_signed_word_type\\RTLINK.CFG",
+          "sha256": "5d0c3a5bbc20976e57a8a99e35732f9f2d314ac80485a17f6b7ddaec8f8e81e8",
+          "size": 21
+        },
+        {
+          "path": "build\\workers\\dos_memory_state_candidate\\cases\\rtlink400\\wrong_signed_word_type\\RUN.BAT",
+          "sha256": "164577f4cfc5ffa5b92aaf77779ef6f209a85bb039d194ae3745f35bffd51c41",
+          "size": 75
+        },
+        {
+          "path": "build\\workers\\dos_memory_state_candidate\\cases\\rtlink400\\wrong_signed_word_type\\RUN.LOG",
+          "sha256": "765489fd1b16cabfd78a744ff35dbeccd0d050fb1bff907dca6e1eafa8d44938",
+          "size": 6
+        },
+        {
+          "path": "build\\workers\\dos_memory_state_candidate\\cases\\rtlink400\\wrong_signed_word_type\\TYPEMAIN.OBJ",
+          "sha256": "3913ca6ef4563f9e14e5c4e9cd2944b6ec16512d802072489a361c871b9a7d37",
+          "size": 566
+        }
+      ]
+    },
+    {
+      "linker": "rtlink400",
+      "case": "nonzero_initializer",
+      "object_names": [
+        "MAIN",
+        "NONZERO",
+        "ASM"
+      ],
+      "expected": "FAIL",
+      "actual": "FAIL",
+      "emulator_exit": 0,
+      "passed": true,
+      "link_log": ".RTLink(R)/Plus  with Virtual Memory/Overlays/RTLs/CodeView/Profiler  Ver. 4.00\n(C) Copyright Pocket Soft Inc., 1988-1990.  All Rights Reserved.\n\nSerial# 854-002-0162\n\nPocket Soft, Inc. is an Authorized Licensee of Microsoft(R) CodeView(R)\nInformation. \"Microsoft\" and \"CodeView\" are registered trademarks of\nMicrosoft Corporation.\n\n=> OUTPUT PROBE\n=> MAP = PROBE S,N,A,L\n=> NODEFLIB\n=> LIBRARY LLIBCR, LIBH\n=> FILE MAIN\n=> FILE NONZERO\n=> FILE ASM\n=> \n8K\n",
+      "files": [
+        {
+          "path": "build\\workers\\dos_memory_state_candidate\\cases\\rtlink400\\nonzero_initializer\\ASM.OBJ",
+          "sha256": "57080304c81c2b798ad7b8e6226563faf8482d2255759688d644ee570b13db43",
+          "size": 513
+        },
+        {
+          "path": "build\\workers\\dos_memory_state_candidate\\cases\\rtlink400\\nonzero_initializer\\dosbox.conf",
+          "sha256": "81014f8cb68e634fc54a0422ea8f16a815d0f9cac2cc01a06af322ebef19e267",
+          "size": 421
+        },
+        {
+          "path": "build\\workers\\dos_memory_state_candidate\\cases\\rtlink400\\nonzero_initializer\\LIBH.LIB",
+          "sha256": "a4492e8f63da409d949643fd448f29e65e2cc9a8f2deea977372177bbe0ad818",
+          "size": 21033
+        },
+        {
+          "path": "build\\workers\\dos_memory_state_candidate\\cases\\rtlink400\\nonzero_initializer\\LINK.LOG",
+          "sha256": "82396931cad7ace7743413a1c2c359250e4d7ac48251c3167654e7b99145d135",
+          "size": 474
+        },
+        {
+          "path": "build\\workers\\dos_memory_state_candidate\\cases\\rtlink400\\nonzero_initializer\\LLIBCR.LIB",
+          "sha256": "3d0c6ae92972789e87def01fa96351c39216d731d5c880370155c5613d78c884",
+          "size": 148711
+        },
+        {
+          "path": "build\\workers\\dos_memory_state_candidate\\cases\\rtlink400\\nonzero_initializer\\MAIN.OBJ",
+          "sha256": "29c6066c85cb6b6a2bd50d8037768e5535391ac5b917a0a7612c6eb40ab4ddf0",
+          "size": 1242
+        },
+        {
+          "path": "build\\workers\\dos_memory_state_candidate\\cases\\rtlink400\\nonzero_initializer\\NONZERO.OBJ",
+          "sha256": "58bb25d64f7f0a0038e9bdcc583fd2146c5389177aad5e085956920ed652879a",
+          "size": 602
+        },
+        {
+          "path": "build\\workers\\dos_memory_state_candidate\\cases\\rtlink400\\nonzero_initializer\\PROBE.EXE",
+          "sha256": "0434e9808e505b3334d26bd184fe22b4a59be3365f531962c3e75e12320d7c97",
+          "size": 6129
+        },
+        {
+          "path": "build\\workers\\dos_memory_state_candidate\\cases\\rtlink400\\nonzero_initializer\\PROBE.LNK",
+          "sha256": "93cf3997b770dcfe4df090d49e97f44453ab3dcd0df5a4cb6e80d2442d5188bf",
+          "size": 102
+        },
+        {
+          "path": "build\\workers\\dos_memory_state_candidate\\cases\\rtlink400\\nonzero_initializer\\PROBE.MAP",
+          "sha256": "be6a8ef3f6772cf118885ea9ca6d2e94d2aa3048fda19c65ea1baf2fadecaf5b",
+          "size": 9547
+        },
+        {
+          "path": "build\\workers\\dos_memory_state_candidate\\cases\\rtlink400\\nonzero_initializer\\RTLINK.CFG",
+          "sha256": "5d0c3a5bbc20976e57a8a99e35732f9f2d314ac80485a17f6b7ddaec8f8e81e8",
+          "size": 21
+        },
+        {
+          "path": "build\\workers\\dos_memory_state_candidate\\cases\\rtlink400\\nonzero_initializer\\RUN.BAT",
+          "sha256": "164577f4cfc5ffa5b92aaf77779ef6f209a85bb039d194ae3745f35bffd51c41",
+          "size": 75
+        },
+        {
+          "path": "build\\workers\\dos_memory_state_candidate\\cases\\rtlink400\\nonzero_initializer\\RUN.LOG",
+          "sha256": "765489fd1b16cabfd78a744ff35dbeccd0d050fb1bff907dca6e1eafa8d44938",
+          "size": 6
+        }
+      ]
+    },
+    {
+      "linker": "rtlink610",
+      "case": "typed_owner_c_and_asm_views",
+      "object_names": [
+        "MAIN",
+        "OWNER",
+        "ASM"
+      ],
+      "expected": "PASS",
+      "actual": "PASS",
+      "emulator_exit": 0,
+      "passed": true,
+      "link_log": ".RTLink(R)/Plus  w/ Virtual Memory Linking, Overlays, CodeView, Turbo Debugger,\nVersion 6.10        Demo Versions, .RTLs, Profiling, & Environment Var. Burn-in\nDOS 386-Mode    (C) Copyright Pocket Soft Inc., 1988-1993. All Rights Reserved.\nwith data swapping  Serial Number: 836-103-6260\n\nPocket Soft, Inc. is an Authorized Licensee of Microsoft(R) CodeView(R)\nInformation. \"Microsoft\" and \"CodeView\" are registered trademarks of\nMicrosoft Corporation.\n\n=> OUTPUT PROBE\n=> MAP = PROBE S,N,A,L\n=> NODEFLIB\n=> LIBRARY LLIBCR, LIBH\n=> FILE MAIN\n=> FILE OWNER\n=> FILE ASM\n=> \n\n____________________________________________________________________________\n\nMEMORY LAYOUT SUMMARY for: PROBE.EXE\n\n  Load Size:\t\t\t\t\t\t8.K\t+0H Para\n\nNOTE: Your program may have additional memory requirements depending on the\n  memory usage characteristics of your compiler. See your compiler\n  documentation for specifics.\n____________________________________________________________________________\n\n",
+      "files": [
+        {
+          "path": "build\\workers\\dos_memory_state_candidate\\cases\\rtlink610\\typed_owner_c_and_asm_views\\ASM.OBJ",
+          "sha256": "57080304c81c2b798ad7b8e6226563faf8482d2255759688d644ee570b13db43",
+          "size": 513
+        },
+        {
+          "path": "build\\workers\\dos_memory_state_candidate\\cases\\rtlink610\\typed_owner_c_and_asm_views\\dosbox.conf",
+          "sha256": "5e159cbc793b0f3b3f3c21d794399e6bc38b03e2e36ed79fdda70860ddf7b8d3",
+          "size": 429
+        },
+        {
+          "path": "build\\workers\\dos_memory_state_candidate\\cases\\rtlink610\\typed_owner_c_and_asm_views\\LIBH.LIB",
+          "sha256": "a4492e8f63da409d949643fd448f29e65e2cc9a8f2deea977372177bbe0ad818",
+          "size": 21033
+        },
+        {
+          "path": "build\\workers\\dos_memory_state_candidate\\cases\\rtlink610\\typed_owner_c_and_asm_views\\LINK.LOG",
+          "sha256": "976d562339f23564aec3bf074a1ba0bae6982c423e652bb366d1b645d0d1791f",
+          "size": 1002
+        },
+        {
+          "path": "build\\workers\\dos_memory_state_candidate\\cases\\rtlink610\\typed_owner_c_and_asm_views\\LLIBCR.LIB",
+          "sha256": "3d0c6ae92972789e87def01fa96351c39216d731d5c880370155c5613d78c884",
+          "size": 148711
+        },
+        {
+          "path": "build\\workers\\dos_memory_state_candidate\\cases\\rtlink610\\typed_owner_c_and_asm_views\\MAIN.OBJ",
+          "sha256": "29c6066c85cb6b6a2bd50d8037768e5535391ac5b917a0a7612c6eb40ab4ddf0",
+          "size": 1242
+        },
+        {
+          "path": "build\\workers\\dos_memory_state_candidate\\cases\\rtlink610\\typed_owner_c_and_asm_views\\OWNER.OBJ",
+          "sha256": "026fcb420122b592e4c4ac24792009bebd220bf5faae992421443b82d45f6e1b",
+          "size": 578
+        },
+        {
+          "path": "build\\workers\\dos_memory_state_candidate\\cases\\rtlink610\\typed_owner_c_and_asm_views\\PROBE.EXE",
+          "sha256": "ae3c5e4f50149a0bbbcdacffed3cbb98ac211a3b7a1d3e5276665cfb3d6c8a89",
+          "size": 6113
+        },
+        {
+          "path": "build\\workers\\dos_memory_state_candidate\\cases\\rtlink610\\typed_owner_c_and_asm_views\\PROBE.LNK",
+          "sha256": "315ab1b5c3ca0de397fa9ea0ec0cb1128260d8ee2de2763f86bcee48d83ba759",
+          "size": 100
+        },
+        {
+          "path": "build\\workers\\dos_memory_state_candidate\\cases\\rtlink610\\typed_owner_c_and_asm_views\\PROBE.MAP",
+          "sha256": "eb66fedcc261e9657035a8582c9d6da8dfcb172438cf16b79f687ff149466f32",
+          "size": 9647
+        },
+        {
+          "path": "build\\workers\\dos_memory_state_candidate\\cases\\rtlink610\\typed_owner_c_and_asm_views\\RTLINK.CFG",
+          "sha256": "5d0c3a5bbc20976e57a8a99e35732f9f2d314ac80485a17f6b7ddaec8f8e81e8",
+          "size": 21
+        },
+        {
+          "path": "build\\workers\\dos_memory_state_candidate\\cases\\rtlink610\\typed_owner_c_and_asm_views\\RUN.BAT",
+          "sha256": "9351c86209ef8577c4042608e5173beb279210d743df083ea7585789f9c43b9f",
+          "size": 77
+        },
+        {
+          "path": "build\\workers\\dos_memory_state_candidate\\cases\\rtlink610\\typed_owner_c_and_asm_views\\RUN.LOG",
+          "sha256": "d938fa189912f8776c3deb31a6bec42f403f57b9c8e3ed936bdb076caf6bd61c",
+          "size": 6
+        }
+      ]
+    },
+    {
+      "linker": "rtlink610",
+      "case": "wrong_extent_pointer_array",
+      "object_names": [
+        "EXTMAIN",
+        "BADX"
+      ],
+      "expected": "FAIL",
+      "actual": "FAIL",
+      "emulator_exit": 0,
+      "passed": true,
+      "link_log": ".RTLink(R)/Plus  w/ Virtual Memory Linking, Overlays, CodeView, Turbo Debugger,\nVersion 6.10        Demo Versions, .RTLs, Profiling, & Environment Var. Burn-in\nDOS 386-Mode    (C) Copyright Pocket Soft Inc., 1988-1993. All Rights Reserved.\nwith data swapping  Serial Number: 836-103-6260\n\nPocket Soft, Inc. is an Authorized Licensee of Microsoft(R) CodeView(R)\nInformation. \"Microsoft\" and \"CodeView\" are registered trademarks of\nMicrosoft Corporation.\n\n=> OUTPUT PROBE\n=> MAP = PROBE S,N,A,L\n=> NODEFLIB\n=> LIBRARY LLIBCR, LIBH\n=> FILE EXTMAIN\n=> FILE BADX\n=> \n\n____________________________________________________________________________\n\nMEMORY LAYOUT SUMMARY for: PROBE.EXE\n\n  Load Size:\t\t\t\t\t\t7.K\t+29H Para\n\nNOTE: Your program may have additional memory requirements depending on the\n  memory usage characteristics of your compiler. See your compiler\n  documentation for specifics.\n____________________________________________________________________________\n\n",
+      "files": [
+        {
+          "path": "build\\workers\\dos_memory_state_candidate\\cases\\rtlink610\\wrong_extent_pointer_array\\BADX.OBJ",
+          "sha256": "362471521f89d2d5c9e53f48ffc48a53bc779cdb9db64fcc6e4dfe991e111093",
+          "size": 584
+        },
+        {
+          "path": "build\\workers\\dos_memory_state_candidate\\cases\\rtlink610\\wrong_extent_pointer_array\\dosbox.conf",
+          "sha256": "1d19f5bedc859d4fffebaf929564e1c7bf1be734381cc61b72f03faea05399cf",
+          "size": 428
+        },
+        {
+          "path": "build\\workers\\dos_memory_state_candidate\\cases\\rtlink610\\wrong_extent_pointer_array\\EXTMAIN.OBJ",
+          "sha256": "c482c81c47ad09081301a039d4009cdd10dd8329287355652fc41857ac775ea9",
+          "size": 708
+        },
+        {
+          "path": "build\\workers\\dos_memory_state_candidate\\cases\\rtlink610\\wrong_extent_pointer_array\\LIBH.LIB",
+          "sha256": "a4492e8f63da409d949643fd448f29e65e2cc9a8f2deea977372177bbe0ad818",
+          "size": 21033
+        },
+        {
+          "path": "build\\workers\\dos_memory_state_candidate\\cases\\rtlink610\\wrong_extent_pointer_array\\LINK.LOG",
+          "sha256": "04806c63177368a0e90484374d2b9b651ef4aae2c9879267c4cda600de8a76e0",
+          "size": 992
+        },
+        {
+          "path": "build\\workers\\dos_memory_state_candidate\\cases\\rtlink610\\wrong_extent_pointer_array\\LLIBCR.LIB",
+          "sha256": "3d0c6ae92972789e87def01fa96351c39216d731d5c880370155c5613d78c884",
+          "size": 148711
+        },
+        {
+          "path": "build\\workers\\dos_memory_state_candidate\\cases\\rtlink610\\wrong_extent_pointer_array\\PROBE.EXE",
+          "sha256": "a1721a32c2923ca7ddad77f581db1e2db684f19179aa99e6c49e2d2075bc83fe",
+          "size": 5735
+        },
+        {
+          "path": "build\\workers\\dos_memory_state_candidate\\cases\\rtlink610\\wrong_extent_pointer_array\\PROBE.LNK",
+          "sha256": "c2c561c7667d0b605490207b9dfe4b2b466b0c6f67fbccf9a375f83a0838bd5f",
+          "size": 92
+        },
+        {
+          "path": "build\\workers\\dos_memory_state_candidate\\cases\\rtlink610\\wrong_extent_pointer_array\\PROBE.MAP",
+          "sha256": "7055c30c26884091cec4d7c13aed31298782709589b20b66a8cdc38046f5fdf8",
+          "size": 9203
+        },
+        {
+          "path": "build\\workers\\dos_memory_state_candidate\\cases\\rtlink610\\wrong_extent_pointer_array\\RTLINK.CFG",
+          "sha256": "5d0c3a5bbc20976e57a8a99e35732f9f2d314ac80485a17f6b7ddaec8f8e81e8",
+          "size": 21
+        },
+        {
+          "path": "build\\workers\\dos_memory_state_candidate\\cases\\rtlink610\\wrong_extent_pointer_array\\RUN.BAT",
+          "sha256": "9351c86209ef8577c4042608e5173beb279210d743df083ea7585789f9c43b9f",
+          "size": 77
+        },
+        {
+          "path": "build\\workers\\dos_memory_state_candidate\\cases\\rtlink610\\wrong_extent_pointer_array\\RUN.LOG",
+          "sha256": "765489fd1b16cabfd78a744ff35dbeccd0d050fb1bff907dca6e1eafa8d44938",
+          "size": 6
+        }
+      ]
+    },
+    {
+      "linker": "rtlink610",
+      "case": "wrong_signed_word_type",
+      "object_names": [
+        "TYPEMAIN",
+        "BADT"
+      ],
+      "expected": "FAIL",
+      "actual": "FAIL",
+      "emulator_exit": 0,
+      "passed": true,
+      "link_log": ".RTLink(R)/Plus  w/ Virtual Memory Linking, Overlays, CodeView, Turbo Debugger,\nVersion 6.10        Demo Versions, .RTLs, Profiling, & Environment Var. Burn-in\nDOS 386-Mode    (C) Copyright Pocket Soft Inc., 1988-1993. All Rights Reserved.\nwith data swapping  Serial Number: 836-103-6260\n\nPocket Soft, Inc. is an Authorized Licensee of Microsoft(R) CodeView(R)\nInformation. \"Microsoft\" and \"CodeView\" are registered trademarks of\nMicrosoft Corporation.\n\n=> OUTPUT PROBE\n=> MAP = PROBE S,N,A,L\n=> NODEFLIB\n=> LIBRARY LLIBCR, LIBH\n=> FILE TYPEMAIN\n=> FILE BADT\n=> \n\n____________________________________________________________________________\n\nMEMORY LAYOUT SUMMARY for: PROBE.EXE\n\n  Load Size:\t\t\t\t\t\t7.K\t+28H Para\n\nNOTE: Your program may have additional memory requirements depending on the\n  memory usage characteristics of your compiler. See your compiler\n  documentation for specifics.\n____________________________________________________________________________\n\n",
+      "files": [
+        {
+          "path": "build\\workers\\dos_memory_state_candidate\\cases\\rtlink610\\wrong_signed_word_type\\BADT.OBJ",
+          "sha256": "daabd2733f33548fd468f1c8633fc12718fc671ff476014a4ecab92b5c4c280a",
+          "size": 576
+        },
+        {
+          "path": "build\\workers\\dos_memory_state_candidate\\cases\\rtlink610\\wrong_signed_word_type\\dosbox.conf",
+          "sha256": "5d64f1455d516ba23f2ffce755beed3272371467aa501214e29e742934ffdb79",
+          "size": 424
+        },
+        {
+          "path": "build\\workers\\dos_memory_state_candidate\\cases\\rtlink610\\wrong_signed_word_type\\LIBH.LIB",
+          "sha256": "a4492e8f63da409d949643fd448f29e65e2cc9a8f2deea977372177bbe0ad818",
+          "size": 21033
+        },
+        {
+          "path": "build\\workers\\dos_memory_state_candidate\\cases\\rtlink610\\wrong_signed_word_type\\LINK.LOG",
+          "sha256": "8c2d8058822fd563da9ba093e1c1fda3d3c140f2f12e78a162cc68d8bcd50cf8",
+          "size": 993
+        },
+        {
+          "path": "build\\workers\\dos_memory_state_candidate\\cases\\rtlink610\\wrong_signed_word_type\\LLIBCR.LIB",
+          "sha256": "3d0c6ae92972789e87def01fa96351c39216d731d5c880370155c5613d78c884",
+          "size": 148711
+        },
+        {
+          "path": "build\\workers\\dos_memory_state_candidate\\cases\\rtlink610\\wrong_signed_word_type\\PROBE.EXE",
+          "sha256": "ed6daa331b3b8a3c9d4ae4998afea3704ac64769df30be6949f02112fbb59b3d",
+          "size": 5735
+        },
+        {
+          "path": "build\\workers\\dos_memory_state_candidate\\cases\\rtlink610\\wrong_signed_word_type\\PROBE.LNK",
+          "sha256": "f9d48b58aa0e782d87120dc3f8196061106ec444c9694df10167585e350d1906",
+          "size": 93
+        },
+        {
+          "path": "build\\workers\\dos_memory_state_candidate\\cases\\rtlink610\\wrong_signed_word_type\\PROBE.MAP",
+          "sha256": "d4c0094128b5ab7a7a018bbe6a547225abcc636205041c61ed8ab95b5ffae538",
+          "size": 9222
+        },
+        {
+          "path": "build\\workers\\dos_memory_state_candidate\\cases\\rtlink610\\wrong_signed_word_type\\RTLINK.CFG",
+          "sha256": "5d0c3a5bbc20976e57a8a99e35732f9f2d314ac80485a17f6b7ddaec8f8e81e8",
+          "size": 21
+        },
+        {
+          "path": "build\\workers\\dos_memory_state_candidate\\cases\\rtlink610\\wrong_signed_word_type\\RUN.BAT",
+          "sha256": "9351c86209ef8577c4042608e5173beb279210d743df083ea7585789f9c43b9f",
+          "size": 77
+        },
+        {
+          "path": "build\\workers\\dos_memory_state_candidate\\cases\\rtlink610\\wrong_signed_word_type\\RUN.LOG",
+          "sha256": "765489fd1b16cabfd78a744ff35dbeccd0d050fb1bff907dca6e1eafa8d44938",
+          "size": 6
+        },
+        {
+          "path": "build\\workers\\dos_memory_state_candidate\\cases\\rtlink610\\wrong_signed_word_type\\TYPEMAIN.OBJ",
+          "sha256": "3913ca6ef4563f9e14e5c4e9cd2944b6ec16512d802072489a361c871b9a7d37",
+          "size": 566
+        }
+      ]
+    },
+    {
+      "linker": "rtlink610",
+      "case": "nonzero_initializer",
+      "object_names": [
+        "MAIN",
+        "NONZERO",
+        "ASM"
+      ],
+      "expected": "FAIL",
+      "actual": "FAIL",
+      "emulator_exit": 0,
+      "passed": true,
+      "link_log": ".RTLink(R)/Plus  w/ Virtual Memory Linking, Overlays, CodeView, Turbo Debugger,\nVersion 6.10        Demo Versions, .RTLs, Profiling, & Environment Var. Burn-in\nDOS 386-Mode    (C) Copyright Pocket Soft Inc., 1988-1993. All Rights Reserved.\nwith data swapping  Serial Number: 836-103-6260\n\nPocket Soft, Inc. is an Authorized Licensee of Microsoft(R) CodeView(R)\nInformation. \"Microsoft\" and \"CodeView\" are registered trademarks of\nMicrosoft Corporation.\n\n=> OUTPUT PROBE\n=> MAP = PROBE S,N,A,L\n=> NODEFLIB\n=> LIBRARY LLIBCR, LIBH\n=> FILE MAIN\n=> FILE NONZERO\n=> FILE ASM\n=> \n\n____________________________________________________________________________\n\nMEMORY LAYOUT SUMMARY for: PROBE.EXE\n\n  Load Size:\t\t\t\t\t\t8.K\t+0H Para\n\nNOTE: Your program may have additional memory requirements depending on the\n  memory usage characteristics of your compiler. See your compiler\n  documentation for specifics.\n____________________________________________________________________________\n\n",
+      "files": [
+        {
+          "path": "build\\workers\\dos_memory_state_candidate\\cases\\rtlink610\\nonzero_initializer\\ASM.OBJ",
+          "sha256": "57080304c81c2b798ad7b8e6226563faf8482d2255759688d644ee570b13db43",
+          "size": 513
+        },
+        {
+          "path": "build\\workers\\dos_memory_state_candidate\\cases\\rtlink610\\nonzero_initializer\\dosbox.conf",
+          "sha256": "8f9455d75ddabb202f50c94956536807c151c3b90d73852cc0ac7c5248a9adf4",
+          "size": 421
+        },
+        {
+          "path": "build\\workers\\dos_memory_state_candidate\\cases\\rtlink610\\nonzero_initializer\\LIBH.LIB",
+          "sha256": "a4492e8f63da409d949643fd448f29e65e2cc9a8f2deea977372177bbe0ad818",
+          "size": 21033
+        },
+        {
+          "path": "build\\workers\\dos_memory_state_candidate\\cases\\rtlink610\\nonzero_initializer\\LINK.LOG",
+          "sha256": "38ac1d096c9fca0ef156a563769b8b4080b049ed8625832561b970f4065f4c44",
+          "size": 1004
+        },
+        {
+          "path": "build\\workers\\dos_memory_state_candidate\\cases\\rtlink610\\nonzero_initializer\\LLIBCR.LIB",
+          "sha256": "3d0c6ae92972789e87def01fa96351c39216d731d5c880370155c5613d78c884",
+          "size": 148711
+        },
+        {
+          "path": "build\\workers\\dos_memory_state_candidate\\cases\\rtlink610\\nonzero_initializer\\MAIN.OBJ",
+          "sha256": "29c6066c85cb6b6a2bd50d8037768e5535391ac5b917a0a7612c6eb40ab4ddf0",
+          "size": 1242
+        },
+        {
+          "path": "build\\workers\\dos_memory_state_candidate\\cases\\rtlink610\\nonzero_initializer\\NONZERO.OBJ",
+          "sha256": "58bb25d64f7f0a0038e9bdcc583fd2146c5389177aad5e085956920ed652879a",
+          "size": 602
+        },
+        {
+          "path": "build\\workers\\dos_memory_state_candidate\\cases\\rtlink610\\nonzero_initializer\\PROBE.EXE",
+          "sha256": "92f0bad68476fbfa32c2042cd3aa72e456074c2d1555e0d2346d81f99200b768",
+          "size": 6129
+        },
+        {
+          "path": "build\\workers\\dos_memory_state_candidate\\cases\\rtlink610\\nonzero_initializer\\PROBE.LNK",
+          "sha256": "93cf3997b770dcfe4df090d49e97f44453ab3dcd0df5a4cb6e80d2442d5188bf",
+          "size": 102
+        },
+        {
+          "path": "build\\workers\\dos_memory_state_candidate\\cases\\rtlink610\\nonzero_initializer\\PROBE.MAP",
+          "sha256": "0084bcfa87145f432fdfdb62a9156f0070b6b56368b6f99ba790eb7894690bf3",
+          "size": 9647
+        },
+        {
+          "path": "build\\workers\\dos_memory_state_candidate\\cases\\rtlink610\\nonzero_initializer\\RTLINK.CFG",
+          "sha256": "5d0c3a5bbc20976e57a8a99e35732f9f2d314ac80485a17f6b7ddaec8f8e81e8",
+          "size": 21
+        },
+        {
+          "path": "build\\workers\\dos_memory_state_candidate\\cases\\rtlink610\\nonzero_initializer\\RUN.BAT",
+          "sha256": "9351c86209ef8577c4042608e5173beb279210d743df083ea7585789f9c43b9f",
+          "size": 77
+        },
+        {
+          "path": "build\\workers\\dos_memory_state_candidate\\cases\\rtlink610\\nonzero_initializer\\RUN.LOG",
+          "sha256": "765489fd1b16cabfd78a744ff35dbeccd0d050fb1bff907dca6e1eafa8d44938",
+          "size": 6
+        }
+      ]
+    }
+  ],
+  "negative_controls": [
+    "wrong pointer-array extent emits 8 instead of 4 bytes and test executable reports FAIL",
+    "signed 16-bit g_91A0 retains a 2-byte common but high-bit comparison reports FAIL",
+    "five explicit nonzero initializers are visible at C main and report FAIL"
+  ],
+  "original_startup_clear_anchor": {
+    "receipt_path": "work/source-only-dos/queue-lifetime-contract-v1.json",
+    "receipt_sha256": "44b4f2afca0988722d1ff10df933771569c61cc02cd8f11b20ff4ffe8a8af97e",
+    "research_script_path": "work/source-only-dos/queue-lifetime-research.py",
+    "research_script_sha256": "e505d40ca60631078a49a3d905a5f8b84f2bc6499ea03fa4a449d2bc012aed4d",
+    "receipt_facts": {
+      "anchor_receipt": "work/source-only-dos/queue-lifetime-contract-v1.json",
+      "anchor_schema": "dos-queue-lifetime-research-v1",
+      "anchor_research_only": true,
+      "oracle_identity_pin": {
+        "name": "SIMANT.EXE",
+        "sha256": "aa0596c6766322a8229ee3c36e57048c92adc82d50fbe2ef37afb8b85fcf4f11",
+        "size": 506509
+      },
+      "crt0_member": {
+        "accepted_manifest_match": true,
+        "exact_runtime_verifier_result": true,
+        "linear": "0x29f5c",
+        "member": "dos\\crt0.asm",
+        "module_index": 0,
+        "segment": "_TEXT",
+        "sha256": "2e9a254b9bd00ea59884089e78e951f0e40343e11d24976f32d9582f4ded259d",
+        "size": 255
+      },
+      "runtime_library": {
+        "matches_accepted_manifest": true,
+        "name": "llibcr.lib",
+        "path": "C:/tools/msc-6.00/LIB/llibcr.lib",
+        "sha256": "3d0c6ae92972789e87def01fa96351c39216d731d5c880370155c5613d78c884"
+      },
+      "accepted_runtime_library": {
+        "path": "C:/tools/msc-6.00/LIB/llibcr.lib",
+        "sha256": "3d0c6ae92972789e87def01fa96351c39216d731d5c880370155c5613d78c884"
+      },
+      "function": "__astart",
+      "clear_instruction": {
+        "linear": "0x29fe9",
+        "text": "rep stosb byte ptr es:[di], al"
+      },
+      "clear_interval": {
+        "element": "byte",
+        "end_exclusive": "0x94f0",
+        "fill": 0,
+        "length_bytes": 2386,
+        "segment": "DGROUP",
+        "start_inclusive": "0x8b9e"
+      },
+      "historical_objects_interval": {
+        "start_inclusive": "0x91a0",
+        "end_exclusive": "0x91b0",
+        "contained_in_clear": true,
+        "symbol_total_bytes": 16
+      },
+      "main_call": {
+        "canonical_location": "15F8:0004",
+        "canonical_module": "root:15F8",
+        "canonical_symbol": "main",
+        "claim_source": "src/root/m15F8.c",
+        "fixup_kind": "pointer32",
+        "fixup_site_linear": "0x2a01d",
+        "instruction_linear": "0x2a01c",
+        "obj_symbol": "_main",
+        "occurs_after_clear": true,
+        "resolved_identity": {
+          "offset": "0004",
+          "segment": "15F8",
+          "unit": "root"
+        },
+        "text": "lcall 0x15f8, 4"
+      },
+      "queue_lifetime_report_verdict": {
+        "historical_array_owner": "unresolved; no original COMDEF/TU ownership identity is asserted",
+        "per_enqueue_slot_prefix": "not reset by the enqueue writes; this report proves startup zeroing only",
+        "startup_zeroing_lifecycle": "confirmed for [DGROUP:0x91b0, DGROUP:0x9220) before the accepted root main call"
+      }
+    },
+    "note": "Read-only original-CRT research anchor only; no original executable enters this probe's inputs."
+  },
+  "denied_oracle_reads": [],
+  "no_original_executable_build_inputs": true,
+  "all_runtime_cases_match_expected": true,
+  "root_reviewed": true,
+  "all_required_checks_pass": true,
+  "cases": [
+    {
+      "linker": "rtlink400",
+      "case": "typed_owner_c_and_asm_views",
+      "object_names": [
+        "MAIN",
+        "OWNER",
+        "ASM"
+      ],
+      "expected": "PASS",
+      "actual": "PASS",
+      "emulator_exit": 0,
+      "passed": true,
+      "link_log": ".RTLink(R)/Plus  with Virtual Memory/Overlays/RTLs/CodeView/Profiler  Ver. 4.00\n(C) Copyright Pocket Soft Inc., 1988-1990.  All Rights Reserved.\n\nSerial# 854-002-0162\n\nPocket Soft, Inc. is an Authorized Licensee of Microsoft(R) CodeView(R)\nInformation. \"Microsoft\" and \"CodeView\" are registered trademarks of\nMicrosoft Corporation.\n\n=> OUTPUT PROBE\n=> MAP = PROBE S,N,A,L\n=> NODEFLIB\n=> LIBRARY LLIBCR, LIBH\n=> FILE MAIN\n=> FILE OWNER\n=> FILE ASM\n=> \n8K\n",
+      "files": [
+        {
+          "path": "build\\workers\\dos_memory_state_candidate\\cases\\rtlink400\\typed_owner_c_and_asm_views\\ASM.OBJ",
+          "sha256": "57080304c81c2b798ad7b8e6226563faf8482d2255759688d644ee570b13db43",
+          "size": 513
+        },
+        {
+          "path": "build\\workers\\dos_memory_state_candidate\\cases\\rtlink400\\typed_owner_c_and_asm_views\\dosbox.conf",
+          "sha256": "2b26d6d2a081667aba29affa1966cd32faf47908a67b68294b90416f0cee521d",
+          "size": 429
+        },
+        {
+          "path": "build\\workers\\dos_memory_state_candidate\\cases\\rtlink400\\typed_owner_c_and_asm_views\\LIBH.LIB",
+          "sha256": "a4492e8f63da409d949643fd448f29e65e2cc9a8f2deea977372177bbe0ad818",
+          "size": 21033
+        },
+        {
+          "path": "build\\workers\\dos_memory_state_candidate\\cases\\rtlink400\\typed_owner_c_and_asm_views\\LINK.LOG",
+          "sha256": "6710c720789852cf6d770bbbe55de5c489776ca3cbd2565f47880bd98cb236d9",
+          "size": 472
+        },
+        {
+          "path": "build\\workers\\dos_memory_state_candidate\\cases\\rtlink400\\typed_owner_c_and_asm_views\\LLIBCR.LIB",
+          "sha256": "3d0c6ae92972789e87def01fa96351c39216d731d5c880370155c5613d78c884",
+          "size": 148711
+        },
+        {
+          "path": "build\\workers\\dos_memory_state_candidate\\cases\\rtlink400\\typed_owner_c_and_asm_views\\MAIN.OBJ",
+          "sha256": "29c6066c85cb6b6a2bd50d8037768e5535391ac5b917a0a7612c6eb40ab4ddf0",
+          "size": 1242
+        },
+        {
+          "path": "build\\workers\\dos_memory_state_candidate\\cases\\rtlink400\\typed_owner_c_and_asm_views\\OWNER.OBJ",
+          "sha256": "026fcb420122b592e4c4ac24792009bebd220bf5faae992421443b82d45f6e1b",
+          "size": 578
+        },
+        {
+          "path": "build\\workers\\dos_memory_state_candidate\\cases\\rtlink400\\typed_owner_c_and_asm_views\\PROBE.EXE",
+          "sha256": "99a8d43b76c7bbe3dfc62daaa71c3ef1f47ed1be157f31c0a2f48279447674d3",
+          "size": 6113
+        },
+        {
+          "path": "build\\workers\\dos_memory_state_candidate\\cases\\rtlink400\\typed_owner_c_and_asm_views\\PROBE.LNK",
+          "sha256": "315ab1b5c3ca0de397fa9ea0ec0cb1128260d8ee2de2763f86bcee48d83ba759",
+          "size": 100
+        },
+        {
+          "path": "build\\workers\\dos_memory_state_candidate\\cases\\rtlink400\\typed_owner_c_and_asm_views\\PROBE.MAP",
+          "sha256": "5aeb28538a2b768309219411bd75aefe3dbc7394ae6397707284fddf42f23fef",
+          "size": 9547
+        },
+        {
+          "path": "build\\workers\\dos_memory_state_candidate\\cases\\rtlink400\\typed_owner_c_and_asm_views\\RTLINK.CFG",
+          "sha256": "5d0c3a5bbc20976e57a8a99e35732f9f2d314ac80485a17f6b7ddaec8f8e81e8",
+          "size": 21
+        },
+        {
+          "path": "build\\workers\\dos_memory_state_candidate\\cases\\rtlink400\\typed_owner_c_and_asm_views\\RUN.BAT",
+          "sha256": "164577f4cfc5ffa5b92aaf77779ef6f209a85bb039d194ae3745f35bffd51c41",
+          "size": 75
+        },
+        {
+          "path": "build\\workers\\dos_memory_state_candidate\\cases\\rtlink400\\typed_owner_c_and_asm_views\\RUN.LOG",
+          "sha256": "d938fa189912f8776c3deb31a6bec42f403f57b9c8e3ed936bdb076caf6bd61c",
+          "size": 6
+        }
+      ]
+    },
+    {
+      "linker": "rtlink400",
+      "case": "wrong_extent_pointer_array",
+      "object_names": [
+        "EXTMAIN",
+        "BADX"
+      ],
+      "expected": "FAIL",
+      "actual": "FAIL",
+      "emulator_exit": 0,
+      "passed": true,
+      "link_log": ".RTLink(R)/Plus  with Virtual Memory/Overlays/RTLs/CodeView/Profiler  Ver. 4.00\n(C) Copyright Pocket Soft Inc., 1988-1990.  All Rights Reserved.\n\nSerial# 854-002-0162\n\nPocket Soft, Inc. is an Authorized Licensee of Microsoft(R) CodeView(R)\nInformation. \"Microsoft\" and \"CodeView\" are registered trademarks of\nMicrosoft Corporation.\n\n=> OUTPUT PROBE\n=> MAP = PROBE S,N,A,L\n=> NODEFLIB\n=> LIBRARY LLIBCR, LIBH\n=> FILE EXTMAIN\n=> FILE BADX\n=> \n8K\n",
+      "files": [
+        {
+          "path": "build\\workers\\dos_memory_state_candidate\\cases\\rtlink400\\wrong_extent_pointer_array\\BADX.OBJ",
+          "sha256": "362471521f89d2d5c9e53f48ffc48a53bc779cdb9db64fcc6e4dfe991e111093",
+          "size": 584
+        },
+        {
+          "path": "build\\workers\\dos_memory_state_candidate\\cases\\rtlink400\\wrong_extent_pointer_array\\dosbox.conf",
+          "sha256": "8d4068ee24c3fb54559ade40981e2d64f71879bc777ce6472520a16c16a51001",
+          "size": 428
+        },
+        {
+          "path": "build\\workers\\dos_memory_state_candidate\\cases\\rtlink400\\wrong_extent_pointer_array\\EXTMAIN.OBJ",
+          "sha256": "c482c81c47ad09081301a039d4009cdd10dd8329287355652fc41857ac775ea9",
+          "size": 708
+        },
+        {
+          "path": "build\\workers\\dos_memory_state_candidate\\cases\\rtlink400\\wrong_extent_pointer_array\\LIBH.LIB",
+          "sha256": "a4492e8f63da409d949643fd448f29e65e2cc9a8f2deea977372177bbe0ad818",
+          "size": 21033
+        },
+        {
+          "path": "build\\workers\\dos_memory_state_candidate\\cases\\rtlink400\\wrong_extent_pointer_array\\LINK.LOG",
+          "sha256": "a0d92710fde40e0a1e3005de0478aacdafe2d03a5a1359311e2843db01deb046",
+          "size": 461
+        },
+        {
+          "path": "build\\workers\\dos_memory_state_candidate\\cases\\rtlink400\\wrong_extent_pointer_array\\LLIBCR.LIB",
+          "sha256": "3d0c6ae92972789e87def01fa96351c39216d731d5c880370155c5613d78c884",
+          "size": 148711
+        },
+        {
+          "path": "build\\workers\\dos_memory_state_candidate\\cases\\rtlink400\\wrong_extent_pointer_array\\PROBE.EXE",
+          "sha256": "da922fc5934e8cfe9421d0d3884dfd7480148ca52edd44042a9fb57dc2d1ae07",
+          "size": 5735
+        },
+        {
+          "path": "build\\workers\\dos_memory_state_candidate\\cases\\rtlink400\\wrong_extent_pointer_array\\PROBE.LNK",
+          "sha256": "c2c561c7667d0b605490207b9dfe4b2b466b0c6f67fbccf9a375f83a0838bd5f",
+          "size": 92
+        },
+        {
+          "path": "build\\workers\\dos_memory_state_candidate\\cases\\rtlink400\\wrong_extent_pointer_array\\PROBE.MAP",
+          "sha256": "6370abb4d8a87da15bb59e7e0d5564df7bc5580aafdf03337506d7c83f031f11",
+          "size": 9103
+        },
+        {
+          "path": "build\\workers\\dos_memory_state_candidate\\cases\\rtlink400\\wrong_extent_pointer_array\\RTLINK.CFG",
+          "sha256": "5d0c3a5bbc20976e57a8a99e35732f9f2d314ac80485a17f6b7ddaec8f8e81e8",
+          "size": 21
+        },
+        {
+          "path": "build\\workers\\dos_memory_state_candidate\\cases\\rtlink400\\wrong_extent_pointer_array\\RUN.BAT",
+          "sha256": "164577f4cfc5ffa5b92aaf77779ef6f209a85bb039d194ae3745f35bffd51c41",
+          "size": 75
+        },
+        {
+          "path": "build\\workers\\dos_memory_state_candidate\\cases\\rtlink400\\wrong_extent_pointer_array\\RUN.LOG",
+          "sha256": "765489fd1b16cabfd78a744ff35dbeccd0d050fb1bff907dca6e1eafa8d44938",
+          "size": 6
+        }
+      ]
+    },
+    {
+      "linker": "rtlink400",
+      "case": "wrong_signed_word_type",
+      "object_names": [
+        "TYPEMAIN",
+        "BADT"
+      ],
+      "expected": "FAIL",
+      "actual": "FAIL",
+      "emulator_exit": 0,
+      "passed": true,
+      "link_log": ".RTLink(R)/Plus  with Virtual Memory/Overlays/RTLs/CodeView/Profiler  Ver. 4.00\n(C) Copyright Pocket Soft Inc., 1988-1990.  All Rights Reserved.\n\nSerial# 854-002-0162\n\nPocket Soft, Inc. is an Authorized Licensee of Microsoft(R) CodeView(R)\nInformation. \"Microsoft\" and \"CodeView\" are registered trademarks of\nMicrosoft Corporation.\n\n=> OUTPUT PROBE\n=> MAP = PROBE S,N,A,L\n=> NODEFLIB\n=> LIBRARY LLIBCR, LIBH\n=> FILE TYPEMAIN\n=> FILE BADT\n=> \n8K\n",
+      "files": [
+        {
+          "path": "build\\workers\\dos_memory_state_candidate\\cases\\rtlink400\\wrong_signed_word_type\\BADT.OBJ",
+          "sha256": "daabd2733f33548fd468f1c8633fc12718fc671ff476014a4ecab92b5c4c280a",
+          "size": 576
+        },
+        {
+          "path": "build\\workers\\dos_memory_state_candidate\\cases\\rtlink400\\wrong_signed_word_type\\dosbox.conf",
+          "sha256": "ee97beff014bd7874510f969a164aebb8bc921fd9134bd331785ba8a9502579d",
+          "size": 424
+        },
+        {
+          "path": "build\\workers\\dos_memory_state_candidate\\cases\\rtlink400\\wrong_signed_word_type\\LIBH.LIB",
+          "sha256": "a4492e8f63da409d949643fd448f29e65e2cc9a8f2deea977372177bbe0ad818",
+          "size": 21033
+        },
+        {
+          "path": "build\\workers\\dos_memory_state_candidate\\cases\\rtlink400\\wrong_signed_word_type\\LINK.LOG",
+          "sha256": "d17af914100754b5641a4755710d189c168fe6ea0a15196010623fb9b51aac1c",
+          "size": 462
+        },
+        {
+          "path": "build\\workers\\dos_memory_state_candidate\\cases\\rtlink400\\wrong_signed_word_type\\LLIBCR.LIB",
+          "sha256": "3d0c6ae92972789e87def01fa96351c39216d731d5c880370155c5613d78c884",
+          "size": 148711
+        },
+        {
+          "path": "build\\workers\\dos_memory_state_candidate\\cases\\rtlink400\\wrong_signed_word_type\\PROBE.EXE",
+          "sha256": "c87deeeb8f26ae70bb9ea55186b34beb889b9dee1a192a687a39f46af3000654",
+          "size": 5735
+        },
+        {
+          "path": "build\\workers\\dos_memory_state_candidate\\cases\\rtlink400\\wrong_signed_word_type\\PROBE.LNK",
+          "sha256": "f9d48b58aa0e782d87120dc3f8196061106ec444c9694df10167585e350d1906",
+          "size": 93
+        },
+        {
+          "path": "build\\workers\\dos_memory_state_candidate\\cases\\rtlink400\\wrong_signed_word_type\\PROBE.MAP",
+          "sha256": "2d1e1db658835ded69cef7678cc5454ffe235aab4962e45af707f2770b9582e6",
+          "size": 9122
+        },
+        {
+          "path": "build\\workers\\dos_memory_state_candidate\\cases\\rtlink400\\wrong_signed_word_type\\RTLINK.CFG",
+          "sha256": "5d0c3a5bbc20976e57a8a99e35732f9f2d314ac80485a17f6b7ddaec8f8e81e8",
+          "size": 21
+        },
+        {
+          "path": "build\\workers\\dos_memory_state_candidate\\cases\\rtlink400\\wrong_signed_word_type\\RUN.BAT",
+          "sha256": "164577f4cfc5ffa5b92aaf77779ef6f209a85bb039d194ae3745f35bffd51c41",
+          "size": 75
+        },
+        {
+          "path": "build\\workers\\dos_memory_state_candidate\\cases\\rtlink400\\wrong_signed_word_type\\RUN.LOG",
+          "sha256": "765489fd1b16cabfd78a744ff35dbeccd0d050fb1bff907dca6e1eafa8d44938",
+          "size": 6
+        },
+        {
+          "path": "build\\workers\\dos_memory_state_candidate\\cases\\rtlink400\\wrong_signed_word_type\\TYPEMAIN.OBJ",
+          "sha256": "3913ca6ef4563f9e14e5c4e9cd2944b6ec16512d802072489a361c871b9a7d37",
+          "size": 566
+        }
+      ]
+    },
+    {
+      "linker": "rtlink400",
+      "case": "nonzero_initializer",
+      "object_names": [
+        "MAIN",
+        "NONZERO",
+        "ASM"
+      ],
+      "expected": "FAIL",
+      "actual": "FAIL",
+      "emulator_exit": 0,
+      "passed": true,
+      "link_log": ".RTLink(R)/Plus  with Virtual Memory/Overlays/RTLs/CodeView/Profiler  Ver. 4.00\n(C) Copyright Pocket Soft Inc., 1988-1990.  All Rights Reserved.\n\nSerial# 854-002-0162\n\nPocket Soft, Inc. is an Authorized Licensee of Microsoft(R) CodeView(R)\nInformation. \"Microsoft\" and \"CodeView\" are registered trademarks of\nMicrosoft Corporation.\n\n=> OUTPUT PROBE\n=> MAP = PROBE S,N,A,L\n=> NODEFLIB\n=> LIBRARY LLIBCR, LIBH\n=> FILE MAIN\n=> FILE NONZERO\n=> FILE ASM\n=> \n8K\n",
+      "files": [
+        {
+          "path": "build\\workers\\dos_memory_state_candidate\\cases\\rtlink400\\nonzero_initializer\\ASM.OBJ",
+          "sha256": "57080304c81c2b798ad7b8e6226563faf8482d2255759688d644ee570b13db43",
+          "size": 513
+        },
+        {
+          "path": "build\\workers\\dos_memory_state_candidate\\cases\\rtlink400\\nonzero_initializer\\dosbox.conf",
+          "sha256": "81014f8cb68e634fc54a0422ea8f16a815d0f9cac2cc01a06af322ebef19e267",
+          "size": 421
+        },
+        {
+          "path": "build\\workers\\dos_memory_state_candidate\\cases\\rtlink400\\nonzero_initializer\\LIBH.LIB",
+          "sha256": "a4492e8f63da409d949643fd448f29e65e2cc9a8f2deea977372177bbe0ad818",
+          "size": 21033
+        },
+        {
+          "path": "build\\workers\\dos_memory_state_candidate\\cases\\rtlink400\\nonzero_initializer\\LINK.LOG",
+          "sha256": "82396931cad7ace7743413a1c2c359250e4d7ac48251c3167654e7b99145d135",
+          "size": 474
+        },
+        {
+          "path": "build\\workers\\dos_memory_state_candidate\\cases\\rtlink400\\nonzero_initializer\\LLIBCR.LIB",
+          "sha256": "3d0c6ae92972789e87def01fa96351c39216d731d5c880370155c5613d78c884",
+          "size": 148711
+        },
+        {
+          "path": "build\\workers\\dos_memory_state_candidate\\cases\\rtlink400\\nonzero_initializer\\MAIN.OBJ",
+          "sha256": "29c6066c85cb6b6a2bd50d8037768e5535391ac5b917a0a7612c6eb40ab4ddf0",
+          "size": 1242
+        },
+        {
+          "path": "build\\workers\\dos_memory_state_candidate\\cases\\rtlink400\\nonzero_initializer\\NONZERO.OBJ",
+          "sha256": "58bb25d64f7f0a0038e9bdcc583fd2146c5389177aad5e085956920ed652879a",
+          "size": 602
+        },
+        {
+          "path": "build\\workers\\dos_memory_state_candidate\\cases\\rtlink400\\nonzero_initializer\\PROBE.EXE",
+          "sha256": "0434e9808e505b3334d26bd184fe22b4a59be3365f531962c3e75e12320d7c97",
+          "size": 6129
+        },
+        {
+          "path": "build\\workers\\dos_memory_state_candidate\\cases\\rtlink400\\nonzero_initializer\\PROBE.LNK",
+          "sha256": "93cf3997b770dcfe4df090d49e97f44453ab3dcd0df5a4cb6e80d2442d5188bf",
+          "size": 102
+        },
+        {
+          "path": "build\\workers\\dos_memory_state_candidate\\cases\\rtlink400\\nonzero_initializer\\PROBE.MAP",
+          "sha256": "be6a8ef3f6772cf118885ea9ca6d2e94d2aa3048fda19c65ea1baf2fadecaf5b",
+          "size": 9547
+        },
+        {
+          "path": "build\\workers\\dos_memory_state_candidate\\cases\\rtlink400\\nonzero_initializer\\RTLINK.CFG",
+          "sha256": "5d0c3a5bbc20976e57a8a99e35732f9f2d314ac80485a17f6b7ddaec8f8e81e8",
+          "size": 21
+        },
+        {
+          "path": "build\\workers\\dos_memory_state_candidate\\cases\\rtlink400\\nonzero_initializer\\RUN.BAT",
+          "sha256": "164577f4cfc5ffa5b92aaf77779ef6f209a85bb039d194ae3745f35bffd51c41",
+          "size": 75
+        },
+        {
+          "path": "build\\workers\\dos_memory_state_candidate\\cases\\rtlink400\\nonzero_initializer\\RUN.LOG",
+          "sha256": "765489fd1b16cabfd78a744ff35dbeccd0d050fb1bff907dca6e1eafa8d44938",
+          "size": 6
+        }
+      ]
+    },
+    {
+      "linker": "rtlink610",
+      "case": "typed_owner_c_and_asm_views",
+      "object_names": [
+        "MAIN",
+        "OWNER",
+        "ASM"
+      ],
+      "expected": "PASS",
+      "actual": "PASS",
+      "emulator_exit": 0,
+      "passed": true,
+      "link_log": ".RTLink(R)/Plus  w/ Virtual Memory Linking, Overlays, CodeView, Turbo Debugger,\nVersion 6.10        Demo Versions, .RTLs, Profiling, & Environment Var. Burn-in\nDOS 386-Mode    (C) Copyright Pocket Soft Inc., 1988-1993. All Rights Reserved.\nwith data swapping  Serial Number: 836-103-6260\n\nPocket Soft, Inc. is an Authorized Licensee of Microsoft(R) CodeView(R)\nInformation. \"Microsoft\" and \"CodeView\" are registered trademarks of\nMicrosoft Corporation.\n\n=> OUTPUT PROBE\n=> MAP = PROBE S,N,A,L\n=> NODEFLIB\n=> LIBRARY LLIBCR, LIBH\n=> FILE MAIN\n=> FILE OWNER\n=> FILE ASM\n=> \n\n____________________________________________________________________________\n\nMEMORY LAYOUT SUMMARY for: PROBE.EXE\n\n  Load Size:\t\t\t\t\t\t8.K\t+0H Para\n\nNOTE: Your program may have additional memory requirements depending on the\n  memory usage characteristics of your compiler. See your compiler\n  documentation for specifics.\n____________________________________________________________________________\n\n",
+      "files": [
+        {
+          "path": "build\\workers\\dos_memory_state_candidate\\cases\\rtlink610\\typed_owner_c_and_asm_views\\ASM.OBJ",
+          "sha256": "57080304c81c2b798ad7b8e6226563faf8482d2255759688d644ee570b13db43",
+          "size": 513
+        },
+        {
+          "path": "build\\workers\\dos_memory_state_candidate\\cases\\rtlink610\\typed_owner_c_and_asm_views\\dosbox.conf",
+          "sha256": "5e159cbc793b0f3b3f3c21d794399e6bc38b03e2e36ed79fdda70860ddf7b8d3",
+          "size": 429
+        },
+        {
+          "path": "build\\workers\\dos_memory_state_candidate\\cases\\rtlink610\\typed_owner_c_and_asm_views\\LIBH.LIB",
+          "sha256": "a4492e8f63da409d949643fd448f29e65e2cc9a8f2deea977372177bbe0ad818",
+          "size": 21033
+        },
+        {
+          "path": "build\\workers\\dos_memory_state_candidate\\cases\\rtlink610\\typed_owner_c_and_asm_views\\LINK.LOG",
+          "sha256": "976d562339f23564aec3bf074a1ba0bae6982c423e652bb366d1b645d0d1791f",
+          "size": 1002
+        },
+        {
+          "path": "build\\workers\\dos_memory_state_candidate\\cases\\rtlink610\\typed_owner_c_and_asm_views\\LLIBCR.LIB",
+          "sha256": "3d0c6ae92972789e87def01fa96351c39216d731d5c880370155c5613d78c884",
+          "size": 148711
+        },
+        {
+          "path": "build\\workers\\dos_memory_state_candidate\\cases\\rtlink610\\typed_owner_c_and_asm_views\\MAIN.OBJ",
+          "sha256": "29c6066c85cb6b6a2bd50d8037768e5535391ac5b917a0a7612c6eb40ab4ddf0",
+          "size": 1242
+        },
+        {
+          "path": "build\\workers\\dos_memory_state_candidate\\cases\\rtlink610\\typed_owner_c_and_asm_views\\OWNER.OBJ",
+          "sha256": "026fcb420122b592e4c4ac24792009bebd220bf5faae992421443b82d45f6e1b",
+          "size": 578
+        },
+        {
+          "path": "build\\workers\\dos_memory_state_candidate\\cases\\rtlink610\\typed_owner_c_and_asm_views\\PROBE.EXE",
+          "sha256": "ae3c5e4f50149a0bbbcdacffed3cbb98ac211a3b7a1d3e5276665cfb3d6c8a89",
+          "size": 6113
+        },
+        {
+          "path": "build\\workers\\dos_memory_state_candidate\\cases\\rtlink610\\typed_owner_c_and_asm_views\\PROBE.LNK",
+          "sha256": "315ab1b5c3ca0de397fa9ea0ec0cb1128260d8ee2de2763f86bcee48d83ba759",
+          "size": 100
+        },
+        {
+          "path": "build\\workers\\dos_memory_state_candidate\\cases\\rtlink610\\typed_owner_c_and_asm_views\\PROBE.MAP",
+          "sha256": "eb66fedcc261e9657035a8582c9d6da8dfcb172438cf16b79f687ff149466f32",
+          "size": 9647
+        },
+        {
+          "path": "build\\workers\\dos_memory_state_candidate\\cases\\rtlink610\\typed_owner_c_and_asm_views\\RTLINK.CFG",
+          "sha256": "5d0c3a5bbc20976e57a8a99e35732f9f2d314ac80485a17f6b7ddaec8f8e81e8",
+          "size": 21
+        },
+        {
+          "path": "build\\workers\\dos_memory_state_candidate\\cases\\rtlink610\\typed_owner_c_and_asm_views\\RUN.BAT",
+          "sha256": "9351c86209ef8577c4042608e5173beb279210d743df083ea7585789f9c43b9f",
+          "size": 77
+        },
+        {
+          "path": "build\\workers\\dos_memory_state_candidate\\cases\\rtlink610\\typed_owner_c_and_asm_views\\RUN.LOG",
+          "sha256": "d938fa189912f8776c3deb31a6bec42f403f57b9c8e3ed936bdb076caf6bd61c",
+          "size": 6
+        }
+      ]
+    },
+    {
+      "linker": "rtlink610",
+      "case": "wrong_extent_pointer_array",
+      "object_names": [
+        "EXTMAIN",
+        "BADX"
+      ],
+      "expected": "FAIL",
+      "actual": "FAIL",
+      "emulator_exit": 0,
+      "passed": true,
+      "link_log": ".RTLink(R)/Plus  w/ Virtual Memory Linking, Overlays, CodeView, Turbo Debugger,\nVersion 6.10        Demo Versions, .RTLs, Profiling, & Environment Var. Burn-in\nDOS 386-Mode    (C) Copyright Pocket Soft Inc., 1988-1993. All Rights Reserved.\nwith data swapping  Serial Number: 836-103-6260\n\nPocket Soft, Inc. is an Authorized Licensee of Microsoft(R) CodeView(R)\nInformation. \"Microsoft\" and \"CodeView\" are registered trademarks of\nMicrosoft Corporation.\n\n=> OUTPUT PROBE\n=> MAP = PROBE S,N,A,L\n=> NODEFLIB\n=> LIBRARY LLIBCR, LIBH\n=> FILE EXTMAIN\n=> FILE BADX\n=> \n\n____________________________________________________________________________\n\nMEMORY LAYOUT SUMMARY for: PROBE.EXE\n\n  Load Size:\t\t\t\t\t\t7.K\t+29H Para\n\nNOTE: Your program may have additional memory requirements depending on the\n  memory usage characteristics of your compiler. See your compiler\n  documentation for specifics.\n____________________________________________________________________________\n\n",
+      "files": [
+        {
+          "path": "build\\workers\\dos_memory_state_candidate\\cases\\rtlink610\\wrong_extent_pointer_array\\BADX.OBJ",
+          "sha256": "362471521f89d2d5c9e53f48ffc48a53bc779cdb9db64fcc6e4dfe991e111093",
+          "size": 584
+        },
+        {
+          "path": "build\\workers\\dos_memory_state_candidate\\cases\\rtlink610\\wrong_extent_pointer_array\\dosbox.conf",
+          "sha256": "1d19f5bedc859d4fffebaf929564e1c7bf1be734381cc61b72f03faea05399cf",
+          "size": 428
+        },
+        {
+          "path": "build\\workers\\dos_memory_state_candidate\\cases\\rtlink610\\wrong_extent_pointer_array\\EXTMAIN.OBJ",
+          "sha256": "c482c81c47ad09081301a039d4009cdd10dd8329287355652fc41857ac775ea9",
+          "size": 708
+        },
+        {
+          "path": "build\\workers\\dos_memory_state_candidate\\cases\\rtlink610\\wrong_extent_pointer_array\\LIBH.LIB",
+          "sha256": "a4492e8f63da409d949643fd448f29e65e2cc9a8f2deea977372177bbe0ad818",
+          "size": 21033
+        },
+        {
+          "path": "build\\workers\\dos_memory_state_candidate\\cases\\rtlink610\\wrong_extent_pointer_array\\LINK.LOG",
+          "sha256": "04806c63177368a0e90484374d2b9b651ef4aae2c9879267c4cda600de8a76e0",
+          "size": 992
+        },
+        {
+          "path": "build\\workers\\dos_memory_state_candidate\\cases\\rtlink610\\wrong_extent_pointer_array\\LLIBCR.LIB",
+          "sha256": "3d0c6ae92972789e87def01fa96351c39216d731d5c880370155c5613d78c884",
+          "size": 148711
+        },
+        {
+          "path": "build\\workers\\dos_memory_state_candidate\\cases\\rtlink610\\wrong_extent_pointer_array\\PROBE.EXE",
+          "sha256": "a1721a32c2923ca7ddad77f581db1e2db684f19179aa99e6c49e2d2075bc83fe",
+          "size": 5735
+        },
+        {
+          "path": "build\\workers\\dos_memory_state_candidate\\cases\\rtlink610\\wrong_extent_pointer_array\\PROBE.LNK",
+          "sha256": "c2c561c7667d0b605490207b9dfe4b2b466b0c6f67fbccf9a375f83a0838bd5f",
+          "size": 92
+        },
+        {
+          "path": "build\\workers\\dos_memory_state_candidate\\cases\\rtlink610\\wrong_extent_pointer_array\\PROBE.MAP",
+          "sha256": "7055c30c26884091cec4d7c13aed31298782709589b20b66a8cdc38046f5fdf8",
+          "size": 9203
+        },
+        {
+          "path": "build\\workers\\dos_memory_state_candidate\\cases\\rtlink610\\wrong_extent_pointer_array\\RTLINK.CFG",
+          "sha256": "5d0c3a5bbc20976e57a8a99e35732f9f2d314ac80485a17f6b7ddaec8f8e81e8",
+          "size": 21
+        },
+        {
+          "path": "build\\workers\\dos_memory_state_candidate\\cases\\rtlink610\\wrong_extent_pointer_array\\RUN.BAT",
+          "sha256": "9351c86209ef8577c4042608e5173beb279210d743df083ea7585789f9c43b9f",
+          "size": 77
+        },
+        {
+          "path": "build\\workers\\dos_memory_state_candidate\\cases\\rtlink610\\wrong_extent_pointer_array\\RUN.LOG",
+          "sha256": "765489fd1b16cabfd78a744ff35dbeccd0d050fb1bff907dca6e1eafa8d44938",
+          "size": 6
+        }
+      ]
+    },
+    {
+      "linker": "rtlink610",
+      "case": "wrong_signed_word_type",
+      "object_names": [
+        "TYPEMAIN",
+        "BADT"
+      ],
+      "expected": "FAIL",
+      "actual": "FAIL",
+      "emulator_exit": 0,
+      "passed": true,
+      "link_log": ".RTLink(R)/Plus  w/ Virtual Memory Linking, Overlays, CodeView, Turbo Debugger,\nVersion 6.10        Demo Versions, .RTLs, Profiling, & Environment Var. Burn-in\nDOS 386-Mode    (C) Copyright Pocket Soft Inc., 1988-1993. All Rights Reserved.\nwith data swapping  Serial Number: 836-103-6260\n\nPocket Soft, Inc. is an Authorized Licensee of Microsoft(R) CodeView(R)\nInformation. \"Microsoft\" and \"CodeView\" are registered trademarks of\nMicrosoft Corporation.\n\n=> OUTPUT PROBE\n=> MAP = PROBE S,N,A,L\n=> NODEFLIB\n=> LIBRARY LLIBCR, LIBH\n=> FILE TYPEMAIN\n=> FILE BADT\n=> \n\n____________________________________________________________________________\n\nMEMORY LAYOUT SUMMARY for: PROBE.EXE\n\n  Load Size:\t\t\t\t\t\t7.K\t+28H Para\n\nNOTE: Your program may have additional memory requirements depending on the\n  memory usage characteristics of your compiler. See your compiler\n  documentation for specifics.\n____________________________________________________________________________\n\n",
+      "files": [
+        {
+          "path": "build\\workers\\dos_memory_state_candidate\\cases\\rtlink610\\wrong_signed_word_type\\BADT.OBJ",
+          "sha256": "daabd2733f33548fd468f1c8633fc12718fc671ff476014a4ecab92b5c4c280a",
+          "size": 576
+        },
+        {
+          "path": "build\\workers\\dos_memory_state_candidate\\cases\\rtlink610\\wrong_signed_word_type\\dosbox.conf",
+          "sha256": "5d64f1455d516ba23f2ffce755beed3272371467aa501214e29e742934ffdb79",
+          "size": 424
+        },
+        {
+          "path": "build\\workers\\dos_memory_state_candidate\\cases\\rtlink610\\wrong_signed_word_type\\LIBH.LIB",
+          "sha256": "a4492e8f63da409d949643fd448f29e65e2cc9a8f2deea977372177bbe0ad818",
+          "size": 21033
+        },
+        {
+          "path": "build\\workers\\dos_memory_state_candidate\\cases\\rtlink610\\wrong_signed_word_type\\LINK.LOG",
+          "sha256": "8c2d8058822fd563da9ba093e1c1fda3d3c140f2f12e78a162cc68d8bcd50cf8",
+          "size": 993
+        },
+        {
+          "path": "build\\workers\\dos_memory_state_candidate\\cases\\rtlink610\\wrong_signed_word_type\\LLIBCR.LIB",
+          "sha256": "3d0c6ae92972789e87def01fa96351c39216d731d5c880370155c5613d78c884",
+          "size": 148711
+        },
+        {
+          "path": "build\\workers\\dos_memory_state_candidate\\cases\\rtlink610\\wrong_signed_word_type\\PROBE.EXE",
+          "sha256": "ed6daa331b3b8a3c9d4ae4998afea3704ac64769df30be6949f02112fbb59b3d",
+          "size": 5735
+        },
+        {
+          "path": "build\\workers\\dos_memory_state_candidate\\cases\\rtlink610\\wrong_signed_word_type\\PROBE.LNK",
+          "sha256": "f9d48b58aa0e782d87120dc3f8196061106ec444c9694df10167585e350d1906",
+          "size": 93
+        },
+        {
+          "path": "build\\workers\\dos_memory_state_candidate\\cases\\rtlink610\\wrong_signed_word_type\\PROBE.MAP",
+          "sha256": "d4c0094128b5ab7a7a018bbe6a547225abcc636205041c61ed8ab95b5ffae538",
+          "size": 9222
+        },
+        {
+          "path": "build\\workers\\dos_memory_state_candidate\\cases\\rtlink610\\wrong_signed_word_type\\RTLINK.CFG",
+          "sha256": "5d0c3a5bbc20976e57a8a99e35732f9f2d314ac80485a17f6b7ddaec8f8e81e8",
+          "size": 21
+        },
+        {
+          "path": "build\\workers\\dos_memory_state_candidate\\cases\\rtlink610\\wrong_signed_word_type\\RUN.BAT",
+          "sha256": "9351c86209ef8577c4042608e5173beb279210d743df083ea7585789f9c43b9f",
+          "size": 77
+        },
+        {
+          "path": "build\\workers\\dos_memory_state_candidate\\cases\\rtlink610\\wrong_signed_word_type\\RUN.LOG",
+          "sha256": "765489fd1b16cabfd78a744ff35dbeccd0d050fb1bff907dca6e1eafa8d44938",
+          "size": 6
+        },
+        {
+          "path": "build\\workers\\dos_memory_state_candidate\\cases\\rtlink610\\wrong_signed_word_type\\TYPEMAIN.OBJ",
+          "sha256": "3913ca6ef4563f9e14e5c4e9cd2944b6ec16512d802072489a361c871b9a7d37",
+          "size": 566
+        }
+      ]
+    },
+    {
+      "linker": "rtlink610",
+      "case": "nonzero_initializer",
+      "object_names": [
+        "MAIN",
+        "NONZERO",
+        "ASM"
+      ],
+      "expected": "FAIL",
+      "actual": "FAIL",
+      "emulator_exit": 0,
+      "passed": true,
+      "link_log": ".RTLink(R)/Plus  w/ Virtual Memory Linking, Overlays, CodeView, Turbo Debugger,\nVersion 6.10        Demo Versions, .RTLs, Profiling, & Environment Var. Burn-in\nDOS 386-Mode    (C) Copyright Pocket Soft Inc., 1988-1993. All Rights Reserved.\nwith data swapping  Serial Number: 836-103-6260\n\nPocket Soft, Inc. is an Authorized Licensee of Microsoft(R) CodeView(R)\nInformation. \"Microsoft\" and \"CodeView\" are registered trademarks of\nMicrosoft Corporation.\n\n=> OUTPUT PROBE\n=> MAP = PROBE S,N,A,L\n=> NODEFLIB\n=> LIBRARY LLIBCR, LIBH\n=> FILE MAIN\n=> FILE NONZERO\n=> FILE ASM\n=> \n\n____________________________________________________________________________\n\nMEMORY LAYOUT SUMMARY for: PROBE.EXE\n\n  Load Size:\t\t\t\t\t\t8.K\t+0H Para\n\nNOTE: Your program may have additional memory requirements depending on the\n  memory usage characteristics of your compiler. See your compiler\n  documentation for specifics.\n____________________________________________________________________________\n\n",
+      "files": [
+        {
+          "path": "build\\workers\\dos_memory_state_candidate\\cases\\rtlink610\\nonzero_initializer\\ASM.OBJ",
+          "sha256": "57080304c81c2b798ad7b8e6226563faf8482d2255759688d644ee570b13db43",
+          "size": 513
+        },
+        {
+          "path": "build\\workers\\dos_memory_state_candidate\\cases\\rtlink610\\nonzero_initializer\\dosbox.conf",
+          "sha256": "8f9455d75ddabb202f50c94956536807c151c3b90d73852cc0ac7c5248a9adf4",
+          "size": 421
+        },
+        {
+          "path": "build\\workers\\dos_memory_state_candidate\\cases\\rtlink610\\nonzero_initializer\\LIBH.LIB",
+          "sha256": "a4492e8f63da409d949643fd448f29e65e2cc9a8f2deea977372177bbe0ad818",
+          "size": 21033
+        },
+        {
+          "path": "build\\workers\\dos_memory_state_candidate\\cases\\rtlink610\\nonzero_initializer\\LINK.LOG",
+          "sha256": "38ac1d096c9fca0ef156a563769b8b4080b049ed8625832561b970f4065f4c44",
+          "size": 1004
+        },
+        {
+          "path": "build\\workers\\dos_memory_state_candidate\\cases\\rtlink610\\nonzero_initializer\\LLIBCR.LIB",
+          "sha256": "3d0c6ae92972789e87def01fa96351c39216d731d5c880370155c5613d78c884",
+          "size": 148711
+        },
+        {
+          "path": "build\\workers\\dos_memory_state_candidate\\cases\\rtlink610\\nonzero_initializer\\MAIN.OBJ",
+          "sha256": "29c6066c85cb6b6a2bd50d8037768e5535391ac5b917a0a7612c6eb40ab4ddf0",
+          "size": 1242
+        },
+        {
+          "path": "build\\workers\\dos_memory_state_candidate\\cases\\rtlink610\\nonzero_initializer\\NONZERO.OBJ",
+          "sha256": "58bb25d64f7f0a0038e9bdcc583fd2146c5389177aad5e085956920ed652879a",
+          "size": 602
+        },
+        {
+          "path": "build\\workers\\dos_memory_state_candidate\\cases\\rtlink610\\nonzero_initializer\\PROBE.EXE",
+          "sha256": "92f0bad68476fbfa32c2042cd3aa72e456074c2d1555e0d2346d81f99200b768",
+          "size": 6129
+        },
+        {
+          "path": "build\\workers\\dos_memory_state_candidate\\cases\\rtlink610\\nonzero_initializer\\PROBE.LNK",
+          "sha256": "93cf3997b770dcfe4df090d49e97f44453ab3dcd0df5a4cb6e80d2442d5188bf",
+          "size": 102
+        },
+        {
+          "path": "build\\workers\\dos_memory_state_candidate\\cases\\rtlink610\\nonzero_initializer\\PROBE.MAP",
+          "sha256": "0084bcfa87145f432fdfdb62a9156f0070b6b56368b6f99ba790eb7894690bf3",
+          "size": 9647
+        },
+        {
+          "path": "build\\workers\\dos_memory_state_candidate\\cases\\rtlink610\\nonzero_initializer\\RTLINK.CFG",
+          "sha256": "5d0c3a5bbc20976e57a8a99e35732f9f2d314ac80485a17f6b7ddaec8f8e81e8",
+          "size": 21
+        },
+        {
+          "path": "build\\workers\\dos_memory_state_candidate\\cases\\rtlink610\\nonzero_initializer\\RUN.BAT",
+          "sha256": "9351c86209ef8577c4042608e5173beb279210d743df083ea7585789f9c43b9f",
+          "size": 77
+        },
+        {
+          "path": "build\\workers\\dos_memory_state_candidate\\cases\\rtlink610\\nonzero_initializer\\RUN.LOG",
+          "sha256": "765489fd1b16cabfd78a744ff35dbeccd0d050fb1bff907dca6e1eafa8d44938",
+          "size": 6
+        }
+      ]
+    }
+  ],
+  "required_cases": {
+    "typed_owner_c_and_asm_views": "PASS",
+    "wrong_extent_pointer_array": "FAIL",
+    "wrong_signed_word_type": "FAIL",
+    "nonzero_initializer": "FAIL"
+  },
+  "inputs": [
+    {
+      "path": "src\\root\\m171C.c",
+      "sha256": "31bd9caa243220db2bd1ba940ac8fae7f5d189b2ec95f1662918e9ca2160b10e",
+      "size": 26452
+    },
+    {
+      "path": "src\\root\\m194D.asm",
+      "sha256": "8becfaafd57faf7e3bfb7e7150d4438bf8d78e1319aa90618f76a2be89175c0f",
+      "size": 2109
+    },
+    {
+      "path": "evidence\\behavior\\manifest.json",
+      "sha256": "dae79bdf74d7660e7e2eb47e8b463a9576c8d74a8e6ccd9e91af6d51f871ecea",
+      "size": 28379
+    },
+    {
+      "path": "evidence\\behavior\\functions\\f_171C_09CC\\contracts\\live-state-v2\\evidence.json",
+      "sha256": "3eb10d7520c4f48c708d5c16d18e16b66d72f7262cc39d8a2863c9f4fd90f88d",
+      "size": 13879
+    },
+    {
+      "path": "evidence\\behavior\\functions\\f_171C_0ADC\\contracts\\live-state-v2\\evidence.json",
+      "sha256": "357d1709069e947c450fe39e64254bda89d83c76f95b18c944e32f3439512600",
+      "size": 13879
+    },
+    {
+      "path": "evidence\\behavior\\functions\\f_171C_0FBC\\contracts\\live-state-v2\\evidence.json",
+      "sha256": "283d65f7c8d32de78190b5f6b34186d77470833629771af3c66ce58ca6adb02c",
+      "size": 13879
+    },
+    {
+      "path": "evidence\\behavior\\functions\\f_171C_09CC\\contracts\\live-state-v2\\module.c",
+      "sha256": "3d24904696b29c36b118479ecc50dd80b8d173f58a632a339df9391d08ea085b",
+      "size": 26297
+    },
+    {
+      "path": "layout\\symbols.json",
+      "sha256": "0f5dd5b0a211945a97782cfccdb9bb31b0dfd07fcde5df4d4f9486b487eb0125",
+      "size": 800809
+    },
+    {
+      "path": "work\\source-only-dos\\compile-and-intake-v1.json",
+      "sha256": "807be52f3c2d346250587395298944b2ef97cd7a04224dbb65afc4335958fbe5",
+      "size": 1165285
+    },
+    {
+      "path": "layout\\manifest.json",
+      "sha256": "025a0a9255d910cae4b122ab5a3f3fb40888bb456d7fe42158db7c9e622fcf50",
+      "size": 628980
+    },
+    {
+      "path": "layout\\toolchain.json",
+      "sha256": "c0bb71cd8b1f4a1a1f91299bd3b6148aa67b7a1d12c3c3946a229272593eb274",
+      "size": 39241
+    },
+    {
+      "path": "layout\\oracle.lock.json",
+      "sha256": "2c6d9e98c688621ad49a08c78d0e0968f4076b036be56ec0738217b533ccde13",
+      "size": 18807
+    },
+    {
+      "path": "work\\source-only-dos\\queue-lifetime-contract-v1.json",
+      "sha256": "44b4f2afca0988722d1ff10df933771569c61cc02cd8f11b20ff4ffe8a8af97e",
+      "size": 6627
+    },
+    {
+      "path": "work\\source-only-dos\\queue-lifetime-research.py",
+      "sha256": "e505d40ca60631078a49a3d905a5f8b84f2bc6499ea03fa4a449d2bc012aed4d",
+      "size": 17615
+    },
+    {
+      "path": "work\\source-only-dos\\history-storage-contract-v1.json",
+      "sha256": "7fc4c0f32f70521f8d730121fd75e9bccab0c4e87a7611e25c48f5dd7b8470bf",
+      "size": 17745
+    },
+    {
+      "path": "work\\source-only-dos\\providers\\memory-state.c",
+      "sha256": "5cfc5157f5e6e131433190b1360702d75fba6708283ec4ca74765fd699531948",
+      "size": 658
+    },
+    {
+      "path": "work\\source-only-dos\\memory-state-probe.py",
+      "sha256": "f9252f11ced01e484889ee22d45c268b6a385503b1277120d372ff3d7695c6b7",
+      "size": 27540
+    },
+    {
+      "path": "C:\\tools\\dosbox-x\\dosbox-x.exe",
+      "sha256": "b028a4d328302ea270722dec69f3ec3a10ebf76beba72a51970db33a88df2bf6",
+      "size": 20481536
+    },
+    {
+      "path": "C:\\tools\\msc-6.00ax-archive\\BIN\\CL.EXE",
+      "sha256": "92df4a0839aac77940189ce54f107381b829babe8103926cb05d1adffe947347",
+      "size": 81184
+    },
+    {
+      "path": "C:\\tools\\msc-6.00ax-archive\\BIN\\C1L.EXE",
+      "sha256": "d3db38b875a95048bca2809cd1f84783c6c070805f188fec9161054d6350ded3",
+      "size": 213680
+    },
+    {
+      "path": "C:\\tools\\msc-6.00ax-archive\\BIN\\C2L.EXE",
+      "sha256": "62490de22e7b279ea59218a54d677bfc752cb5fc1287533d2e23d03519f155e0",
+      "size": 473258
+    },
+    {
+      "path": "C:\\tools\\msc-6.00ax-archive\\BIN\\C3L.EXE",
+      "sha256": "9e82ecc87ffcdb2def53ac64c0d1f048b26421c1415b5600ad4d8d6fcbc06553",
+      "size": 195439
+    },
+    {
+      "path": "C:\\tools\\msc-6.00ax-archive\\BIN\\CL.ERR",
+      "sha256": "ca22f37e5e0c09faebde9e4d549dd1f53523cc6f23049d2239a040cd19a424e7",
+      "size": 1656
+    },
+    {
+      "path": "C:\\tools\\msc-6.00ax-archive\\BIN\\C1.ERR",
+      "sha256": "637444915870f3283d5df41c5cdb1be8c32cc6c19b080f2bb3891edbc3751c6e",
+      "size": 19500
+    },
+    {
+      "path": "C:\\tools\\msc-6.00ax-archive\\BIN\\C23.ERR",
+      "sha256": "22944a0dffef336c0ebb8f6d5aeb97b4dbeb5c9758a48759557176bff49d1151",
+      "size": 3649
+    },
+    {
+      "path": "C:\\tools\\msc-6.00ax-archive\\BIN\\CL.MSG",
+      "sha256": "3379f283aec74842bc82205e4c848d759e6e2dcbb6d4820eec9719f1297213ec",
+      "size": 2697
+    },
+    {
+      "path": "C:\\tools\\msc-6.00ax-archive\\INCLUDE\\assert.h",
+      "sha256": "55c174aec7e593e24c36768e5f542b564c4719f8155e49e2883560d511847c11",
+      "size": 594
+    },
+    {
+      "path": "C:\\tools\\msc-6.00ax-archive\\INCLUDE\\bios.h",
+      "sha256": "d144f91dd4ec686a38509842e35106e91af021487e2a45e7182ba350e35df66e",
+      "size": 4499
+    },
+    {
+      "path": "C:\\tools\\msc-6.00ax-archive\\INCLUDE\\bse.h",
+      "sha256": "64f26efdebe49d5cf98947a7214723ce128fc98e7c786a7cd692c0e65061d1e1",
+      "size": 1462
+    },
+    {
+      "path": "C:\\tools\\msc-6.00ax-archive\\INCLUDE\\bsedev.h",
+      "sha256": "506cad55079bf330c9fcf2cff5797955fa4dce2563b11b38b4667367daa7aca4",
+      "size": 12893
+    },
+    {
+      "path": "C:\\tools\\msc-6.00ax-archive\\INCLUDE\\bsedos.h",
+      "sha256": "6766919b0baa7cda9218907159047001b7f03b8b2fada6ed64721bd8c26d1f40",
+      "size": 48326
+    },
+    {
+      "path": "C:\\tools\\msc-6.00ax-archive\\INCLUDE\\bseerr.h",
+      "sha256": "bf8d57ec23c45747fac4dc52ab0140f6f8ba11086453b3a506c60d17f840d5a4",
+      "size": 26788
+    },
+    {
+      "path": "C:\\tools\\msc-6.00ax-archive\\INCLUDE\\bsesub.h",
+      "sha256": "e3018f4c397ba09c2a1dbc22ee58d2dbbac3278a9417ac53be46c3d1c82e63a1",
+      "size": 19051
+    },
+    {
+      "path": "C:\\tools\\msc-6.00ax-archive\\INCLUDE\\conio.h",
+      "sha256": "2a7c54dc07ef767042861324a2f73ced293577f57ca2e4901cc16e1e2a7b7c27",
+      "size": 965
+    },
+    {
+      "path": "C:\\tools\\msc-6.00ax-archive\\INCLUDE\\ctype.h",
+      "sha256": "5e2bc8b6e5fa103dc9b51d6a711553d435446dd5f23f102f34e3d868236d00b6",
+      "size": 2979
+    },
+    {
+      "path": "C:\\tools\\msc-6.00ax-archive\\INCLUDE\\direct.h",
+      "sha256": "c5f9f40f80bc538b253a8fe564cd1f264db515581e500c1b3ca7859b0ac621c2",
+      "size": 892
+    },
+    {
+      "path": "C:\\tools\\msc-6.00ax-archive\\INCLUDE\\dos.h",
+      "sha256": "027e81abad4ceae2892863858b939694e42aa24d73bd96cab8278fcc868c0b33",
+      "size": 5343
+    },
+    {
+      "path": "C:\\tools\\msc-6.00ax-archive\\INCLUDE\\errno.h",
+      "sha256": "1db2af1fcfbcb33cf1be4f97430cdf8194bf1d60f586c1f432832d69aa5bfe91",
+      "size": 1428
+    },
+    {
+      "path": "C:\\tools\\msc-6.00ax-archive\\INCLUDE\\fcntl.h",
+      "sha256": "d3b8e59fc779acde127068898ee1233119d1d79fb1e1f919666b38556f2c02c7",
+      "size": 1126
+    },
+    {
+      "path": "C:\\tools\\msc-6.00ax-archive\\INCLUDE\\float.h",
+      "sha256": "d5705d56bc25b990759f8c83669be2f99e404d6219f08fec0a45d8ae95b0c3b6",
+      "size": 4911
+    },
+    {
+      "path": "C:\\tools\\msc-6.00ax-archive\\INCLUDE\\graph.h",
+      "sha256": "dfc59cf76b6e25efe4a327063d2b7c9f4e7db243228c6e6e5d83ee05e1952869",
+      "size": 15438
+    },
+    {
+      "path": "C:\\tools\\msc-6.00ax-archive\\INCLUDE\\io.h",
+      "sha256": "f81a13f740240a05b48f6dc614e44e2269c6ecca07bae0393ab71fab30691f32",
+      "size": 1512
+    },
+    {
+      "path": "C:\\tools\\msc-6.00ax-archive\\INCLUDE\\limits.h",
+      "sha256": "53bb5efef276dfbe55628891764cc082fbb7b99f669c0055190d2ae8d0ab4a3b",
+      "size": 1326
+    },
+    {
+      "path": "C:\\tools\\msc-6.00ax-archive\\INCLUDE\\locale.h",
+      "sha256": "35d553ec119b669bf4fd0594c593fc8a6c48699afbf8bf60d106bbe485a940f7",
+      "size": 1519
+    },
+    {
+      "path": "C:\\tools\\msc-6.00ax-archive\\INCLUDE\\malloc.h",
+      "sha256": "94d10282abde89eb57b7d533a9a029bc0444ab0aebea8064d61a86fd97678a24",
+      "size": 4008
+    },
+    {
+      "path": "C:\\tools\\msc-6.00ax-archive\\INCLUDE\\math.h",
+      "sha256": "08f043122f5aff286a88bc1f4680c314347c3fae7c6b7ce0a78bea0a0d1083bc",
+      "size": 7881
+    },
+    {
+      "path": "C:\\tools\\msc-6.00ax-archive\\INCLUDE\\memory.h",
+      "sha256": "04af9356c798a0a8eb0274cf9e1e2660485ca972bd449a7ec3709b408400b196",
+      "size": 1628
+    },
+    {
+      "path": "C:\\tools\\msc-6.00ax-archive\\INCLUDE\\os2.h",
+      "sha256": "25b38cebe5219e6309e9656ec2f63f9ddccd40811d23542674bee4c80520f595",
+      "size": 676
+    },
+    {
+      "path": "C:\\tools\\msc-6.00ax-archive\\INCLUDE\\os2def.h",
+      "sha256": "c87ee78532176e5738aad764c3fec8418891960d7eecf2c4dcf84aa36e11deff",
+      "size": 10400
+    },
+    {
+      "path": "C:\\tools\\msc-6.00ax-archive\\INCLUDE\\pgchart.h",
+      "sha256": "ff92f7c9b7e6d699d59dbed276b506368848e4c145ddb2a90f02726b74476ce7",
+      "size": 8749
+    },
+    {
+      "path": "C:\\tools\\msc-6.00ax-archive\\INCLUDE\\pm.h",
+      "sha256": "b7ff7321180f2606742828294772ba4ea356baaac66193823172b92fb2e47355",
+      "size": 2255
+    },
+    {
+      "path": "C:\\tools\\msc-6.00ax-archive\\INCLUDE\\pmavio.h",
+      "sha256": "41425daa766423853a10c0d489392cb2e47fa9919d77d82e271fe1624b560386",
+      "size": 2069
+    },
+    {
+      "path": "C:\\tools\\msc-6.00ax-archive\\INCLUDE\\pmbitmap.h",
+      "sha256": "e8db1c7bf0b5e2f7e54a32766c2d7b1e7bc40e552b31de4e65c2cd6df1227b42",
+      "size": 1851
+    },
+    {
+      "path": "C:\\tools\\msc-6.00ax-archive\\INCLUDE\\pmdev.h",
+      "sha256": "9f01221d6a20e988f11c197ef04a2e3562d8ab6bf8b075267fcbadaac1ae2016",
+      "size": 8606
+    },
+    {
+      "path": "C:\\tools\\msc-6.00ax-archive\\INCLUDE\\pmerr.h",
+      "sha256": "ef08d00e473f6b9b4550f2561a523898b12383d6839cd5ebef409abef9400502",
+      "size": 30095
+    },
+    {
+      "path": "C:\\tools\\msc-6.00ax-archive\\INCLUDE\\pmfont.h",
+      "sha256": "973206a870ff44b98c6a4f10aeb94c7caea15e184aaeb58182a1015018f5770b",
+      "size": 3458
+    },
+    {
+      "path": "C:\\tools\\msc-6.00ax-archive\\INCLUDE\\pmgpi.h",
+      "sha256": "ee083b988e86ac67e98d1b170fb525b2bcf89cb5e7309b1ae4083905d7f89030",
+      "size": 49655
+    },
+    {
+      "path": "C:\\tools\\msc-6.00ax-archive\\INCLUDE\\pmhelp.h",
+      "sha256": "76954218875fa2788c307d171b9e25e5faa8fc83707176298f24b1804cda7121",
+      "size": 11291
+    },
+    {
+      "path": "C:\\tools\\msc-6.00ax-archive\\INCLUDE\\pmmle.h",
+      "sha256": "9d59a584824afef28fdc33dd77be1b64f5aaee126b454ebd2e36f9c82e0090de",
+      "size": 8802
+    },
+    {
+      "path": "C:\\tools\\msc-6.00ax-archive\\INCLUDE\\pmord.h",
+      "sha256": "81c6cbb06d06abaeb89307a9679325e7baa0cdb5e03ab6cecb0563794bdd7263",
+      "size": 23140
+    },
+    {
+      "path": "C:\\tools\\msc-6.00ax-archive\\INCLUDE\\pmpic.h",
+      "sha256": "b2646c5af6ed2dc781c5a4ce45ea4900f2d2bcf97048ae244f06aa26b2f0341e",
+      "size": 691
+    },
+    {
+      "path": "C:\\tools\\msc-6.00ax-archive\\INCLUDE\\pmshl.h",
+      "sha256": "aff9fc71b3049b741970f1bb8d81258b24ec22f7139dffddf1b5d261acb6cde9",
+      "size": 14249
+    },
+    {
+      "path": "C:\\tools\\msc-6.00ax-archive\\INCLUDE\\pmtypes.h",
+      "sha256": "462c35a20f284beeabcd930255f44845b28e2fcf451c3a9dec58d9951baaec10",
+      "size": 9645
+    },
+    {
+      "path": "C:\\tools\\msc-6.00ax-archive\\INCLUDE\\pmwin.h",
+      "sha256": "4f738c700b89d350631137f0b36e08ff465c570b5e4f98d6a2c34c5bdd8b305c",
+      "size": 85827
+    },
+    {
+      "path": "C:\\tools\\msc-6.00ax-archive\\INCLUDE\\process.h",
+      "sha256": "3a5f567651e9077b434c5e905b8c1308ea0f7557bb334bf40ef1d1cfd9e11119",
+      "size": 2829
+    },
+    {
+      "path": "C:\\tools\\msc-6.00ax-archive\\INCLUDE\\search.h",
+      "sha256": "3bbc62866ae6f4d62db16d9a77ee3066418b38698aa9556f6836dedc4aac2f9e",
+      "size": 1159
+    },
+    {
+      "path": "C:\\tools\\msc-6.00ax-archive\\INCLUDE\\setjmp.h",
+      "sha256": "99dd10459385315d95e2ba24091282eff815045e24027039e7790ddc4080648f",
+      "size": 822
+    },
+    {
+      "path": "C:\\tools\\msc-6.00ax-archive\\INCLUDE\\share.h",
+      "sha256": "0f632bbfc28e3ec3981e06e7ac27e1fabdf57b26dae3a805b75a00fed16d4e18",
+      "size": 450
+    },
+    {
+      "path": "C:\\tools\\msc-6.00ax-archive\\INCLUDE\\signal.h",
+      "sha256": "efff5cf9a3001b675def57dc4ec1bcf4e0475ae5fad10fc7e89f123deb0d204a",
+      "size": 2019
+    },
+    {
+      "path": "C:\\tools\\msc-6.00ax-archive\\INCLUDE\\stdarg.h",
+      "sha256": "e294f329eb9ae698502ec1d90989afb09b7a077804213d6edfd5442335d43e62",
+      "size": 894
+    },
+    {
+      "path": "C:\\tools\\msc-6.00ax-archive\\INCLUDE\\stddef.h",
+      "sha256": "1d6a31e2ca5c8453bfc18bfa94fd4e8a33425eb88214f55c920400c9d56a7ac2",
+      "size": 1254
+    },
+    {
+      "path": "C:\\tools\\msc-6.00ax-archive\\INCLUDE\\stdio.h",
+      "sha256": "9d3c3e54366c393dbd99982f90e1a2bca878fe4637eb8974fd3b6244c053e93b",
+      "size": 6047
+    },
+    {
+      "path": "C:\\tools\\msc-6.00ax-archive\\INCLUDE\\stdlib.h",
+      "sha256": "ff3c7aee2170b511396284608e61e11fb55c2976d4bf90d3ea58a539e55c9476",
+      "size": 6539
+    },
+    {
+      "path": "C:\\tools\\msc-6.00ax-archive\\INCLUDE\\string.h",
+      "sha256": "ff36b60adcf99a547032981a149cc6d37f48cfa2f556cebe327c59d79c93823e",
+      "size": 4975
+    },
+    {
+      "path": "C:\\tools\\msc-6.00ax-archive\\INCLUDE\\sys\\locking.h",
+      "sha256": "85e4a4663dd666f896ccdf3b76ac38dafa1d69a07b87d7ee9a2b418d904a213b",
+      "size": 468
+    },
+    {
+      "path": "C:\\tools\\msc-6.00ax-archive\\INCLUDE\\sys\\stat.h",
+      "sha256": "095555066b4880a40e56ed868e403536be326cfd9da1e067ccf22faec5314051",
+      "size": 1330
+    },
+    {
+      "path": "C:\\tools\\msc-6.00ax-archive\\INCLUDE\\sys\\timeb.h",
+      "sha256": "5281bdb34fb8f86c17251362abbefbd289574deeb7ea8e21263fee252fc0f880",
+      "size": 827
+    },
+    {
+      "path": "C:\\tools\\msc-6.00ax-archive\\INCLUDE\\sys\\types.h",
+      "sha256": "8cd9efa8807be8dd811d840a56eca6baa7d7798d4b571d4fb05255454f264abe",
+      "size": 734
+    },
+    {
+      "path": "C:\\tools\\msc-6.00ax-archive\\INCLUDE\\sys\\utime.h",
+      "sha256": "aa947a46dfba15c139cc7f043a545ee3a263255858d7f2f8e81b9448e6c2115c",
+      "size": 968
+    },
+    {
+      "path": "C:\\tools\\msc-6.00ax-archive\\INCLUDE\\time.h",
+      "sha256": "68204d55db0602d15263efddf0de7e77d789f9d7f3d4594416fedd4959e21c32",
+      "size": 3069
+    },
+    {
+      "path": "C:\\tools\\msc-6.00ax-archive\\INCLUDE\\varargs.h",
+      "sha256": "a71b1f4437d08073e0bbe5559a1cac64d63f2318677a827568b49ec12a99af7b",
+      "size": 922
+    },
+    {
+      "path": "C:\\tools\\nmlgcdos\\msdos.exe",
+      "sha256": "f7f6cb0a3e816c5edb13112d327c1bddbf7463fe7bf9a005ca1eb5317751bd02",
+      "size": 686592
+    },
+    {
+      "path": "C:\\tools\\masm-5.10\\files\\MASM.EXE",
+      "sha256": "233120302473749eafe9a54a30f8bda0127140c44346e5bcc047d113828a741e",
+      "size": 124712
+    },
+    {
+      "path": "C:\\tools\\RTLink-Plus-4.00-DiscMaster\\installed\\dest\\RTLINK.EXE",
+      "sha256": "dff0a988738a2ba7716f7013ef5b8136e0857b6bfe700bccdeaad70ee5e87c74",
+      "size": 449497
+    },
+    {
+      "path": "C:\\tools\\RTLink-Plus-4.00-DiscMaster\\installed\\dest\\RTLINK.DAT",
+      "sha256": "c1e206fe4b3c34d43b47aa9aa215e2959fbb23c69c89eb69e36d80b1d9194eea",
+      "size": 63824
+    },
+    {
+      "path": "C:\\tools\\RTLink-Plus-4.00-DiscMaster\\installed\\dest\\RTLUTILS.LIB",
+      "sha256": "9060c022f65a2811b81936879f93eb16c5d349c14b56c704a3853d3cf79cd162",
+      "size": 266625
+    },
+    {
+      "path": "C:\\tools\\RTLink-Plus-4.00-DiscMaster\\installed\\dest\\RTLINKST.COM",
+      "sha256": "6ad9015869dc9598a2b498c58297224e5ab4a13fad9ada528650dfcedeb83cf2",
+      "size": 7184
+    },
+    {
+      "path": "C:\\tools\\rtlink-plus-6.10\\installed\\RTL-REAL.EXE",
+      "sha256": "228c5d429438ea32ee21dd02c65b7f8e198715b3fa957be9da328f9857482773",
+      "size": 717922
+    },
+    {
+      "path": "C:\\tools\\rtlink-plus-6.10\\installed\\RTL-SWAP.EXE",
+      "sha256": "daae0a8c358edc26f95540f4bc1629c0dc5c30652155d85ccd79bead4381cfe3",
+      "size": 692123
+    },
+    {
+      "path": "C:\\tools\\rtlink-plus-6.10\\installed\\RTLINK.DAT",
+      "sha256": "10723fb4d4381b6a38417a18409e32d254e59850bcd3b465fbb824e01367a77b",
+      "size": 100100
+    },
+    {
+      "path": "C:\\tools\\rtlink-plus-6.10\\installed\\RTLUTILS.LIB",
+      "sha256": "c718bac09b0b1204a259494446acfa8bfffb129144cc7d36799855621f4fdccb",
+      "size": 423823
+    },
+    {
+      "path": "C:\\tools\\rtlink-plus-6.10\\installed\\RTLINKST.COM",
+      "sha256": "635425a8feff822ca98ec536c55a31824161bffbf9d24d37851cc0d9f7ce3b5f",
+      "size": 11031
+    },
+    {
+      "path": "C:\\tools\\rtlink-plus-6.10\\installed\\RTLINK.EXE",
+      "sha256": "ea6f57a470a26801086593d54aa99f6bf983dd024fc19b5e13361a07f43e17fb",
+      "size": 687531
+    },
+    {
+      "path": "C:\\tools\\rtlink-plus-6.10\\installed\\DOS4GW.EXE",
+      "sha256": "7192b80d1551769c2d2897b2f58015dc18fadca2b7e093a20f45b34011933c6c",
+      "size": 231179
+    },
+    {
+      "path": "C:\\tools\\msc-6.00\\LIB\\llibcr.lib",
+      "sha256": "3d0c6ae92972789e87def01fa96351c39216d731d5c880370155c5613d78c884",
+      "size": 148711
+    },
+    {
+      "path": "C:\\tools\\msc-6.00\\LIB\\libh.lib",
+      "sha256": "a4492e8f63da409d949643fd448f29e65e2cc9a8f2deea977372177bbe0ad818",
+      "size": 21033
+    }
+  ],
+  "probe_source": {
+    "path": "work/source-only-dos/memory-state-probe.py",
+    "sha256": "f9252f11ced01e484889ee22d45c268b6a385503b1277120d372ff3d7695c6b7",
+    "size": 27540
+  },
+  "communals": [
+    {
+      "name": "_g_91A0",
+      "kind": "near",
+      "length": 2
+    },
+    {
+      "name": "_g_91A2",
+      "kind": "near",
+      "length": 2
+    },
+    {
+      "name": "_g_91A4",
+      "kind": "near",
+      "length": 4
+    },
+    {
+      "name": "_g_91A8",
+      "kind": "near",
+      "length": 4
+    },
+    {
+      "name": "_g_91AC",
+      "kind": "near",
+      "length": 4
+    }
+  ],
+  "root_review": {
+    "reviewer": "root",
+    "basis": "Complete direct accesses, compatible scalar/byte or far-pointer half-word views, independent named objects and lifetime; pinned original startup-clear containment and actual MSC startup controls under both linkers. Production provider is checked as zero-code, zero-initialized-data exact typed commons.",
+    "limit": "No aggregate, original producing TU, common ordering or placement claim. Full game execution remains pending."
+  }
+}

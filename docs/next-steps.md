@@ -12,19 +12,21 @@ research history and do not supersede this priority.
 behavioral registrations. The effective imported set has 29
 `BEHAVIOR_EXACT_CONFIRMED` implementations; DrawBalloons uses a reviewed signed
 allocation-width correction, with the original registered body separately marked
-unresolved. The source-only build compiles 127 canonical TUs plus one data-only
-callback provider. The seven-slot input queue, nine far word scalars, 25-slot
+unresolved. The source-only build compiles 127 canonical TUs plus three data-only
+providers. The seven-slot input queue, 21 far word scalars, 25-slot
 callback owner and their bounded views are reviewed; three mouse ES operand
-frames are corrected. There are 433 missing data imports (410 FAR_BSS and 23
+frames and 128 external driver SS frames are corrected. Eight independently typed
+mouse/allocator objects are source-owned. There are 412 missing data imports (397 FAR_BSS and 15
 storage/reachability cases), 113 data-disposition bytes and an open wider address/
 frame audit. No independent executable, game runtime acceptance or functional
 milestone is claimed. The compact current receipt is
 `work/source-only-dos/current-intake.json`; exact canonical ownership is unchanged.
 
-Next ownership work is bounded: InitSimVars/ResetYellowVars scalar groups, mouse
-button/coordinate words, memory-manager state and the window-handle table's real
-extent. The 128 external driver SS frames have a separate provenance/shifted-layout
-review awaiting admission; ten local operands, the g_5A9C segment pair and three
+Next ownership work is bounded: water coordinate arrays and the window-handle
+table's real extent. InitSimVars/ResetYellowVars scalar groups, mouse words and
+memory-manager state now have reviewed functional owners. The window-table audit
+found no source cap or original owner extent; adjacent arrays/runtime commons do
+not close it. Ten local driver operands, the g_5A9C segment pair and three
 S00 `SS:[SI+41D0h]` literals remain distinct audit items. The 18-byte formula-table
 candidate is not admitted because indirect-write reachability is still open.
 Prioritize these source/type/layout proofs over behavioral byte matching. After

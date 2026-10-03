@@ -1,6 +1,6 @@
 {
   "schema": "simant-source-only-dos-compact-intake-v1",
-  "source_only_base_checkpoint": "83627d3",
+  "source_only_base_checkpoint": "25e15e7",
   "canonical_manifest": {
     "path": "layout/manifest.json",
     "sha256": "025a0a9255d910cae4b122ab5a3f3fb40888bb456d7fe42158db7c9e622fcf50",
@@ -8,18 +8,18 @@
   },
   "full_local_report": {
     "path": "build/source-only-dos/build-report.json",
-    "sha256": "0492aa7dae887ac086eb673085e76fc77392f42f67464d83673f103d622870ae",
-    "size": 1613572
+    "sha256": "6b34eab381c6b2dea6855e40c0bf28c73f19d33a2d1abedb748a3d58459f2371",
+    "size": 2518092
   },
   "reproduction": "python tools/source_only_dos.py --compile --link --reuse --jobs 4",
   "status": "INCOMPLETE",
   "errors": [
     "data dispositions still need source-built semantic resolution",
-    "433 unresolved source symbols",
+    "412 unresolved source symbols",
     "source address/layout contracts remain unresolved",
     "independent link refused: incomplete source/data preflight"
   ],
-  "compiled_translation_units": 128,
+  "compiled_translation_units": 130,
   "function_dispositions": {
     "EXACT_C": 1244,
     "GENUINE_ASM": 367,
@@ -39,12 +39,12 @@
   "runnable": "NOT_EXECUTED",
   "human_acceptance": "PENDING",
   "unresolved_data_disposition_bytes": 113,
-  "unresolved_symbols": 433,
+  "unresolved_symbols": 412,
   "unresolved_symbol_categories": {
-    "reviewed FAR_BSS definition and compatible consumer views": 410,
-    "source storage/reachability investigation": 23
+    "reviewed FAR_BSS definition and compatible consumer views": 397,
+    "source storage/reachability investigation": 15
   },
-  "symbolic_aliases": 181,
+  "symbolic_aliases": 182,
   "duplicate_publics": {},
   "layout_dependencies": [
     {
@@ -68,7 +68,14 @@
     {
       "id": "remaining-assembly-address-audit",
       "status": "UNRESOLVED",
-      "reason": "The broader audit of fixed numeric operands and segment/group frames is pending. Reviewed bindings close only the listed buffer and S00 callback operands."
+      "reason": "The broader audit of fixed numeric operands and segment/group frames is pending. The ten local SS operands, fill-pattern numeric operands and g_5A9C pointer frame remain separate gates."
+    },
+    {
+      "id": "driver-external-ss-frames",
+      "status": "RESOLVED",
+      "operand_count": 128,
+      "reason": "CRT and interrupt CFG provenance establishes SS=DGROUP. Only the signed external OFFSET16 sites receive scoped DGROUP frames; whole-object checks preserve all bytes and ordered unrelated fixups.",
+      "scope_limit": "This excludes local-symbol operands, numeric pattern addresses and g_5A9C."
     },
     {
       "id": "input-event-queue-fixed-pointer",
@@ -157,6 +164,26 @@
     "path": "work/source-only-dos/callback-table-bindings-v1.json",
     "sha256": "457cdc94b7b1c2b07908352e4b736d0de8cb47f8d65e44b475e993e5b93d648d",
     "size": 17144
+  },
+  "init_sim_scalar_bindings": {
+    "path": "work/source-only-dos/init-sim-scalar-bindings-v1.json",
+    "sha256": "3e5f07da9b3cafeef09afc0ebf4a11656bcdbf593b2fe5addf7305b9f1e067d7",
+    "size": 14178
+  },
+  "yellow_scalar_bindings": {
+    "path": "work/source-only-dos/yellow-scalar-bindings-v1.json",
+    "sha256": "af12ff2521d14a06f03b8fc0cd4d8f46ed16a941a6787c262f463cfaa5b0e7ab",
+    "size": 30175
+  },
+  "near_state_bindings": {
+    "path": "work/source-only-dos/near-state-bindings-v1.json",
+    "sha256": "fb3ce1026d2be2b85846183218f6fa6f57e2803307455f6ca40b1aab45b2a64e",
+    "size": 13403
+  },
+  "driver_ss_frame_bindings": {
+    "path": "work/source-only-dos/driver-ss-frame-bindings-v1.json",
+    "sha256": "c3820edb19a3b0ad5981b4b929fb5dc756b6f5614894014eedfeaaf9a3a46f24",
+    "size": 69890
   },
   "strict_static_index": {
     "path": "work/source-only-dos/static-completeness/index-v1.json",
@@ -612,6 +639,860 @@
       "source_extent_anchor": "int far word lvalues and persistent {2,1,&symbol} SaveRec address view; exact-base aliases share this one owner"
     },
     {
+      "name": "_fd_50F6_06AA",
+      "source_name": "fd_50F6_06AA",
+      "kind": "far",
+      "type_index": 129,
+      "count": 2,
+      "element_size": 1,
+      "length": 2,
+      "historical_address": [
+        20726,
+        1706
+      ],
+      "source_extent_anchor": "complete int far word views, InitSimVars scalar assignment, and persistent {2,1,&symbol} SaveRec byte view",
+      "registered_exact_base_views": [
+        "fd_50F6_06AA"
+      ],
+      "SaveRec_source_line": 1162,
+      "InitSimVars_source_line": 184
+    },
+    {
+      "name": "_fd_50F6_073A",
+      "source_name": "fd_50F6_073A",
+      "kind": "far",
+      "type_index": 129,
+      "count": 2,
+      "element_size": 1,
+      "length": 2,
+      "historical_address": [
+        20726,
+        1850
+      ],
+      "source_extent_anchor": "complete int far word views, InitSimVars scalar assignment, and persistent {2,1,&symbol} SaveRec byte view",
+      "registered_exact_base_views": [
+        "fd_50F6_073A"
+      ],
+      "SaveRec_source_line": 1163,
+      "InitSimVars_source_line": 183
+    },
+    {
+      "name": "_fd_50F6_07C8",
+      "source_name": "fd_50F6_07C8",
+      "kind": "far",
+      "type_index": 129,
+      "count": 2,
+      "element_size": 1,
+      "length": 2,
+      "historical_address": [
+        20726,
+        1992
+      ],
+      "source_extent_anchor": "complete int far word views, InitSimVars scalar assignment, and persistent {2,1,&symbol} SaveRec byte view",
+      "registered_exact_base_views": [
+        "fd_50F6_07C8"
+      ],
+      "SaveRec_source_line": 1127,
+      "InitSimVars_source_line": 186
+    },
+    {
+      "name": "_fd_50F6_0850",
+      "source_name": "fd_50F6_0850",
+      "kind": "far",
+      "type_index": 129,
+      "count": 2,
+      "element_size": 1,
+      "length": 2,
+      "historical_address": [
+        20726,
+        2128
+      ],
+      "source_extent_anchor": "complete int far word views, InitSimVars scalar assignment, and persistent {2,1,&symbol} SaveRec byte view",
+      "registered_exact_base_views": [
+        "fd_50F6_0850"
+      ],
+      "SaveRec_source_line": 1128,
+      "InitSimVars_source_line": 185
+    },
+    {
+      "name": "_fd_50F6_0FBA",
+      "source_name": "fd_50F6_0FBA",
+      "kind": "far",
+      "type_index": 129,
+      "count": 2,
+      "element_size": 1,
+      "length": 2,
+      "historical_address": [
+        20726,
+        4026
+      ],
+      "source_extent_anchor": "complete int far word views, InitSimVars scalar assignment, and persistent {2,1,&symbol} SaveRec byte view",
+      "registered_exact_base_views": [
+        "fd_50F6_0FBA"
+      ],
+      "SaveRec_source_line": 1114,
+      "InitSimVars_source_line": 180
+    },
+    {
+      "name": "_fd_50F6_0FFE",
+      "source_name": "fd_50F6_0FFE",
+      "kind": "far",
+      "type_index": 129,
+      "count": 2,
+      "element_size": 1,
+      "length": 2,
+      "historical_address": [
+        20726,
+        4094
+      ],
+      "source_extent_anchor": "complete int far word views, InitSimVars scalar assignment, and persistent {2,1,&symbol} SaveRec byte view",
+      "registered_exact_base_views": [
+        "fd_50F6_0FFE"
+      ],
+      "SaveRec_source_line": 1007,
+      "InitSimVars_source_line": 181
+    },
+    {
+      "name": "_CurExpTool",
+      "source_name": "CurExpTool",
+      "kind": "far",
+      "type_index": 129,
+      "count": 2,
+      "element_size": 1,
+      "length": 2,
+      "historical_address": [
+        20726,
+        4172
+      ],
+      "source_extent_anchor": "complete int far word views, InitSimVars scalar assignment, and persistent {2,1,&symbol} SaveRec byte view",
+      "registered_exact_base_views": [
+        "CurExpTool",
+        "fd_50F6_104C"
+      ],
+      "SaveRec_source_line": 1033,
+      "InitSimVars_source_line": 182
+    },
+    {
+      "name": "_fd_50F6_0A8E",
+      "kind": "far",
+      "count": 2,
+      "element_size": 1,
+      "length": 2,
+      "type_index": 129,
+      "omf_record_form": "COMDEF data type 0x61 far COMM2B; count=2, element_size=1, length=2",
+      "source_definition_form": "natural C tentative int far definition without initializer",
+      "historical_address": [
+        20726,
+        2702
+      ],
+      "registered_address_source": "layout/symbols.json exact registered source name",
+      "source_extent_anchor": "src/S22/m39C7.c:59 `extern int far fd_50F6_0A8E;`; src/S22/m39C7.c:311 `fd_50F6_0A8E = 0;`; SaveRec src/S09/m35F5.c:1081 is size=2,count=1.",
+      "initialization": "natural tentative int far definition with no initializer; zero fill confirmed by pinned MSC startup and both RTLink fixtures",
+      "views": {
+        "behavioral_int_far_declarations": [
+          {
+            "file": "src/root/m0CDB.c",
+            "line": 54,
+            "source": "extern int far fd_50F6_0A8E;"
+          },
+          {
+            "file": "src/S22/m39C7.c",
+            "line": 59,
+            "source": "extern int far fd_50F6_0A8E;"
+          },
+          {
+            "file": "src/S25/m3BA4.c",
+            "line": 11,
+            "source": "extern int far fd_50F6_0A8E;"
+          }
+        ],
+        "S09_byte_array_address_only_declarations": [
+          {
+            "file": "src/S09/m35F5.c",
+            "line": 780,
+            "source": "extern unsigned char far fd_50F6_0A8E[];"
+          }
+        ],
+        "direct_reads": [
+          {
+            "file": "src/root/m0CDB.c",
+            "line": 124,
+            "source": "if (fd_50F6_0A8E && d > 2) {",
+            "access_modes": [
+              "read"
+            ]
+          },
+          {
+            "file": "src/S25/m3BA4.c",
+            "line": 99,
+            "source": "if (fd_50F6_0A8E >= 3) {",
+            "access_modes": [
+              "read"
+            ]
+          },
+          {
+            "file": "src/S25/m3BA4.c",
+            "line": 119,
+            "source": "if (fd_50F6_0A8E == 1 && fd_50F6_0AF8 == fd_50F6_048C) {",
+            "access_modes": [
+              "read"
+            ]
+          },
+          {
+            "file": "src/S25/m3BA4.c",
+            "line": 214,
+            "source": "&& fd_50F6_0AE8 == fd_50F6_048A && fd_50F6_0A8E == 0)",
+            "access_modes": [
+              "read"
+            ]
+          },
+          {
+            "file": "src/S25/m3BA4.c",
+            "line": 221,
+            "source": "} else if (fd_50F6_0A8E == 3) {",
+            "access_modes": [
+              "read"
+            ]
+          },
+          {
+            "file": "src/S25/m3BA4.c",
+            "line": 225,
+            "source": "} else if (fd_50F6_0A8E == 4) {",
+            "access_modes": [
+              "read"
+            ]
+          },
+          {
+            "file": "src/S25/m3BA4.c",
+            "line": 473,
+            "source": "if (fd_50F6_0A8E == 3 && fd_50F6_048C == fd_50F6_08DA && fd_50F6_07C0 == index)",
+            "access_modes": [
+              "read"
+            ]
+          },
+          {
+            "file": "src/S25/m3BA4.c",
+            "line": 625,
+            "source": "flag = (fd_50F6_0A8E == 2) ? 1 : 0;",
+            "access_modes": [
+              "read"
+            ]
+          },
+          {
+            "file": "src/S25/m3BA4.c",
+            "line": 665,
+            "source": "flag = (fd_50F6_0A8E == 2) ? 1 : 0;",
+            "access_modes": [
+              "read"
+            ]
+          }
+        ],
+        "direct_writes": [
+          {
+            "file": "src/S22/m39C7.c",
+            "line": 122,
+            "source": "fd_50F6_0A8E = ((fd_50F6_04E2 ^ life) & 0x80) ? 3 : 4;",
+            "access_modes": [
+              "write"
+            ]
+          },
+          {
+            "file": "src/S22/m39C7.c",
+            "line": 140,
+            "source": "fd_50F6_0A8E = shift;",
+            "access_modes": [
+              "write"
+            ]
+          },
+          {
+            "file": "src/S22/m39C7.c",
+            "line": 148,
+            "source": "fd_50F6_0A8E = 2;",
+            "access_modes": [
+              "write"
+            ]
+          },
+          {
+            "file": "src/S22/m39C7.c",
+            "line": 150,
+            "source": "fd_50F6_0A8E = 1;",
+            "access_modes": [
+              "write"
+            ]
+          },
+          {
+            "file": "src/S22/m39C7.c",
+            "line": 152,
+            "source": "fd_50F6_0A8E = 2;",
+            "access_modes": [
+              "write"
+            ]
+          },
+          {
+            "file": "src/S22/m39C7.c",
+            "line": 154,
+            "source": "fd_50F6_0A8E = 0;",
+            "access_modes": [
+              "write"
+            ]
+          },
+          {
+            "file": "src/S22/m39C7.c",
+            "line": 259,
+            "source": "fd_50F6_0A8E = mode;",
+            "access_modes": [
+              "write"
+            ]
+          },
+          {
+            "file": "src/S22/m39C7.c",
+            "line": 286,
+            "source": "fd_50F6_0A8E = mode;",
+            "access_modes": [
+              "write"
+            ]
+          },
+          {
+            "file": "src/S22/m39C7.c",
+            "line": 311,
+            "source": "fd_50F6_0A8E = 0;",
+            "access_modes": [
+              "write"
+            ]
+          }
+        ],
+        "pointer_escapes": [
+          {
+            "file": "src/S09/m35F5.c",
+            "line": 1081,
+            "source": "{ 2, 1, (void far *)&fd_50F6_0A8E },",
+            "access_modes": [
+              "address_escape"
+            ]
+          }
+        ],
+        "SaveRec": {
+          "file": "src/S09/m35F5.c",
+          "line": 1081,
+          "table_index_1based": 188,
+          "record": "{ 2, 1, (void far *)&fd_50F6_0A8E },",
+          "size": 2,
+          "count": 1,
+          "serialized_bytes": 2
+        },
+        "registered_exact_base_names": [
+          "fd_50F6_0A8E"
+        ],
+        "registered_extent_entries_two_byte_scan": [
+          {
+            "name": "fd_50F6_0A8E",
+            "address": "50F6:0A8E",
+            "role": "exact_base",
+            "registry_row": {
+              "seg": 20726,
+              "off": 2702,
+              "grounding": "S25:3BA4 DoAntMoveY:0029 cmp word es:[0A8E],3 (CONST seg word 8944 = 50F6)"
+            }
+          }
+        ],
+        "registered_interior_names": []
+      },
+      "registered_interior_names": [],
+      "source_read_limitation": null
+    },
+    {
+      "name": "_fd_50F6_0AA0",
+      "kind": "far",
+      "count": 2,
+      "element_size": 1,
+      "length": 2,
+      "type_index": 129,
+      "omf_record_form": "COMDEF data type 0x61 far COMM2B; count=2, element_size=1, length=2",
+      "source_definition_form": "natural C tentative int far definition without initializer",
+      "historical_address": [
+        20726,
+        2720
+      ],
+      "registered_address_source": "layout/symbols.json exact registered source name",
+      "source_extent_anchor": "src/S22/m39C7.c:65 `extern int far fd_50F6_0AA0;`; src/S22/m39C7.c:312 `fd_50F6_0AA0 = 0;`; SaveRec src/S09/m35F5.c:1101 is size=2,count=1.",
+      "initialization": "natural tentative int far definition with no initializer; zero fill confirmed by pinned MSC startup and both RTLink fixtures",
+      "views": {
+        "behavioral_int_far_declarations": [
+          {
+            "file": "src/root/m0E2E.c",
+            "line": 290,
+            "source": "extern int far fd_50F6_0AA0;"
+          },
+          {
+            "file": "src/root/m15F8.c",
+            "line": 47,
+            "source": "extern int far fd_50F6_0AA0;"
+          },
+          {
+            "file": "src/S22/m39C7.c",
+            "line": 65,
+            "source": "extern int far fd_50F6_0AA0;"
+          },
+          {
+            "file": "src/S25/m3BA4.c",
+            "line": 10,
+            "source": "extern int far fd_50F6_0AA0;"
+          }
+        ],
+        "S09_byte_array_address_only_declarations": [
+          {
+            "file": "src/S09/m35F5.c",
+            "line": 796,
+            "source": "extern unsigned char far fd_50F6_0AA0[];"
+          }
+        ],
+        "direct_reads": [
+          {
+            "file": "src/root/m0E2E.c",
+            "line": 311,
+            "source": "if (fd_50F6_0224 > fd_50F6_0204 && fd_50F6_0AA0 == 0)",
+            "access_modes": [
+              "read"
+            ]
+          },
+          {
+            "file": "src/root/m0E2E.c",
+            "line": 315,
+            "source": "if (fd_50F6_0224 > fd_50F6_0204 && fd_50F6_0AA0 == 0)",
+            "access_modes": [
+              "read"
+            ]
+          },
+          {
+            "file": "src/root/m15F8.c",
+            "line": 113,
+            "source": "if (fd_50F6_047E == 0 || (fd_50F6_0AA0 != 0 && fd_50F6_105E < 10)) {",
+            "access_modes": [
+              "read"
+            ]
+          },
+          {
+            "file": "src/S22/m39C7.c",
+            "line": 942,
+            "source": "if (fd_50F6_0AA0)",
+            "access_modes": [
+              "read"
+            ]
+          },
+          {
+            "file": "src/S25/m3BA4.c",
+            "line": 96,
+            "source": "if (fd_50F6_0AA0 == 0)",
+            "access_modes": [
+              "read"
+            ]
+          }
+        ],
+        "direct_writes": [
+          {
+            "file": "src/S22/m39C7.c",
+            "line": 131,
+            "source": "fd_50F6_0AA0 = 1;",
+            "access_modes": [
+              "write"
+            ]
+          },
+          {
+            "file": "src/S22/m39C7.c",
+            "line": 157,
+            "source": "fd_50F6_0AA0 = 1;",
+            "access_modes": [
+              "write"
+            ]
+          },
+          {
+            "file": "src/S22/m39C7.c",
+            "line": 312,
+            "source": "fd_50F6_0AA0 = 0;",
+            "access_modes": [
+              "write"
+            ]
+          }
+        ],
+        "pointer_escapes": [
+          {
+            "file": "src/S09/m35F5.c",
+            "line": 1101,
+            "source": "{ 2, 1, (void far *)&fd_50F6_0AA0 },",
+            "access_modes": [
+              "address_escape"
+            ]
+          }
+        ],
+        "SaveRec": {
+          "file": "src/S09/m35F5.c",
+          "line": 1101,
+          "table_index_1based": 208,
+          "record": "{ 2, 1, (void far *)&fd_50F6_0AA0 },",
+          "size": 2,
+          "count": 1,
+          "serialized_bytes": 2
+        },
+        "registered_exact_base_names": [
+          "fd_50F6_0AA0"
+        ],
+        "registered_extent_entries_two_byte_scan": [
+          {
+            "name": "fd_50F6_0AA0",
+            "address": "50F6:0AA0",
+            "role": "exact_base",
+            "registry_row": {
+              "seg": 20726,
+              "off": 2720,
+              "grounding": "S25:3BA4 DoAntMoveY:0015 cmp word es:[0AA0],0 (CONST seg word 8942 = 50F6)"
+            }
+          }
+        ],
+        "registered_interior_names": []
+      },
+      "registered_interior_names": [],
+      "source_read_limitation": null
+    },
+    {
+      "name": "_fd_50F6_0B1E",
+      "kind": "far",
+      "count": 2,
+      "element_size": 1,
+      "length": 2,
+      "type_index": 129,
+      "omf_record_form": "COMDEF data type 0x61 far COMM2B; count=2, element_size=1, length=2",
+      "source_definition_form": "natural C tentative int far definition without initializer",
+      "historical_address": [
+        20726,
+        2846
+      ],
+      "registered_address_source": "layout/symbols.json exact registered source name",
+      "source_extent_anchor": "src/S22/m39C7.c:296 `extern int far fd_50F6_0B1E;`; src/S22/m39C7.c:313 `fd_50F6_0B1E = 0;`; SaveRec src/S09/m35F5.c:1087 is size=2,count=1.",
+      "initialization": "natural tentative int far definition with no initializer; zero fill confirmed by pinned MSC startup and both RTLink fixtures",
+      "views": {
+        "behavioral_int_far_declarations": [
+          {
+            "file": "src/root/m0E2E.c",
+            "line": 292,
+            "source": "extern int far fd_50F6_0B1E;"
+          },
+          {
+            "file": "src/root/m10F7.c",
+            "line": 52,
+            "source": "extern int far fd_50F6_0B1E;"
+          },
+          {
+            "file": "src/S22/m39C7.c",
+            "line": 296,
+            "source": "extern int far fd_50F6_0B1E;"
+          }
+        ],
+        "S09_byte_array_address_only_declarations": [
+          {
+            "file": "src/S09/m35F5.c",
+            "line": 785,
+            "source": "extern unsigned char far fd_50F6_0B1E[];"
+          }
+        ],
+        "direct_reads": [
+          {
+            "file": "src/root/m0E2E.c",
+            "line": 325,
+            "source": "if (MeLocY + MeLocX != fd_50F6_1074 && fd_50F6_0B1E == 0 && f_00F8_02BE() > fd_50F6_0204)",
+            "access_modes": [
+              "read"
+            ]
+          },
+          {
+            "file": "src/root/m0E2E.c",
+            "line": 391,
+            "source": "if (MeLocY + MeLocX != fd_50F6_1074 && fd_50F6_0B1E == 0 && f_00F8_02BE() > fd_50F6_0204)",
+            "access_modes": [
+              "read"
+            ]
+          },
+          {
+            "file": "src/root/m0E2E.c",
+            "line": 395,
+            "source": "if (MeLocY + MeLocX != fd_50F6_1074 && fd_50F6_104E != 0 && fd_50F6_0B1E == 0)",
+            "access_modes": [
+              "read"
+            ]
+          },
+          {
+            "file": "src/root/m10F7.c",
+            "line": 1139,
+            "source": "fd_50F6_0C38 = fd_50F6_0B1E + 1;",
+            "access_modes": [
+              "read"
+            ]
+          }
+        ],
+        "direct_writes": [
+          {
+            "file": "src/root/m10F7.c",
+            "line": 1138,
+            "source": "fd_50F6_0B1E = GetDis(x, y, fd_3D57_02AC[0], fd_3D57_02AC[1]);",
+            "access_modes": [
+              "write"
+            ]
+          },
+          {
+            "file": "src/S22/m39C7.c",
+            "line": 313,
+            "source": "fd_50F6_0B1E = 0;",
+            "access_modes": [
+              "write"
+            ]
+          }
+        ],
+        "pointer_escapes": [
+          {
+            "file": "src/S09/m35F5.c",
+            "line": 1087,
+            "source": "{ 2, 1, (void far *)&fd_50F6_0B1E },",
+            "access_modes": [
+              "address_escape"
+            ]
+          }
+        ],
+        "SaveRec": {
+          "file": "src/S09/m35F5.c",
+          "line": 1087,
+          "table_index_1based": 194,
+          "record": "{ 2, 1, (void far *)&fd_50F6_0B1E },",
+          "size": 2,
+          "count": 1,
+          "serialized_bytes": 2
+        },
+        "registered_exact_base_names": [
+          "fd_50F6_0B1E"
+        ],
+        "registered_extent_entries_two_byte_scan": [
+          {
+            "name": "fd_50F6_0B1E",
+            "address": "50F6:0B1E",
+            "role": "exact_base",
+            "registry_row": {
+              "seg": 20726,
+              "off": 2846,
+              "grounding": "f_10F7_20BF (root:10F7): mov es,[CONST word = 50F6]; es:[..0B1E] far data reference"
+            }
+          }
+        ],
+        "registered_interior_names": []
+      },
+      "registered_interior_names": [],
+      "source_read_limitation": null
+    },
+    {
+      "name": "_fd_50F6_0C38",
+      "kind": "far",
+      "count": 2,
+      "element_size": 1,
+      "length": 2,
+      "type_index": 129,
+      "omf_record_form": "COMDEF data type 0x61 far COMM2B; count=2, element_size=1, length=2",
+      "source_definition_form": "natural C tentative int far definition without initializer",
+      "historical_address": [
+        20726,
+        3128
+      ],
+      "registered_address_source": "layout/symbols.json exact registered source name",
+      "source_extent_anchor": "src/S22/m39C7.c:297 `extern int far fd_50F6_0C38;`; src/S22/m39C7.c:314 `fd_50F6_0C38 = 0;`; SaveRec src/S09/m35F5.c:1104 is size=2,count=1.",
+      "initialization": "natural tentative int far definition with no initializer; zero fill confirmed by pinned MSC startup and both RTLink fixtures",
+      "views": {
+        "behavioral_int_far_declarations": [
+          {
+            "file": "src/root/m10F7.c",
+            "line": 53,
+            "source": "extern int far fd_50F6_0C38;"
+          },
+          {
+            "file": "src/S22/m39C7.c",
+            "line": 297,
+            "source": "extern int far fd_50F6_0C38;"
+          }
+        ],
+        "S09_byte_array_address_only_declarations": [
+          {
+            "file": "src/S09/m35F5.c",
+            "line": 798,
+            "source": "extern unsigned char far fd_50F6_0C38[];"
+          }
+        ],
+        "direct_reads": [],
+        "direct_writes": [
+          {
+            "file": "src/root/m10F7.c",
+            "line": 1139,
+            "source": "fd_50F6_0C38 = fd_50F6_0B1E + 1;",
+            "access_modes": [
+              "write"
+            ]
+          },
+          {
+            "file": "src/S22/m39C7.c",
+            "line": 314,
+            "source": "fd_50F6_0C38 = 0;",
+            "access_modes": [
+              "write"
+            ]
+          }
+        ],
+        "pointer_escapes": [
+          {
+            "file": "src/S09/m35F5.c",
+            "line": 1104,
+            "source": "{ 2, 1, (void far *)&fd_50F6_0C38 },",
+            "access_modes": [
+              "address_escape"
+            ]
+          }
+        ],
+        "SaveRec": {
+          "file": "src/S09/m35F5.c",
+          "line": 1104,
+          "table_index_1based": 211,
+          "record": "{ 2, 1, (void far *)&fd_50F6_0C38 },",
+          "size": 2,
+          "count": 1,
+          "serialized_bytes": 2
+        },
+        "registered_exact_base_names": [
+          "fd_50F6_0C38"
+        ],
+        "registered_extent_entries_two_byte_scan": [
+          {
+            "name": "fd_50F6_0C38",
+            "address": "50F6:0C38",
+            "role": "exact_base",
+            "registry_row": {
+              "seg": 20726,
+              "off": 3128,
+              "grounding": "f_10F7_20BF (root:10F7): mov es,[CONST word = 50F6]; es:[..0C38] far data reference"
+            }
+          }
+        ],
+        "registered_interior_names": []
+      },
+      "registered_interior_names": [],
+      "source_read_limitation": "no direct canonical C reads found; only ResetYellowVars reset and root:10F7 derived write found"
+    },
+    {
+      "name": "_fd_50F6_0C3E",
+      "kind": "far",
+      "count": 2,
+      "element_size": 1,
+      "length": 2,
+      "type_index": 129,
+      "omf_record_form": "COMDEF data type 0x61 far COMM2B; count=2, element_size=1, length=2",
+      "source_definition_form": "natural C tentative int far definition without initializer",
+      "historical_address": [
+        20726,
+        3134
+      ],
+      "registered_address_source": "layout/symbols.json exact registered source name",
+      "source_extent_anchor": "src/S22/m39C7.c:298 `extern int far fd_50F6_0C3E;`; src/S22/m39C7.c:315 `fd_50F6_0C3E = 0;`; SaveRec src/S09/m35F5.c:1107 is size=2,count=1.",
+      "initialization": "natural tentative int far definition with no initializer; zero fill confirmed by pinned MSC startup and both RTLink fixtures",
+      "views": {
+        "behavioral_int_far_declarations": [
+          {
+            "file": "src/S22/m39C7.c",
+            "line": 298,
+            "source": "extern int far fd_50F6_0C3E;"
+          },
+          {
+            "file": "src/S25/m3BA4.c",
+            "line": 39,
+            "source": "extern int far fd_50F6_0C3E;"
+          }
+        ],
+        "S09_byte_array_address_only_declarations": [
+          {
+            "file": "src/S09/m35F5.c",
+            "line": 801,
+            "source": "extern unsigned char far fd_50F6_0C3E[];"
+          }
+        ],
+        "direct_reads": [
+          {
+            "file": "src/S25/m3BA4.c",
+            "line": 145,
+            "source": "fd_50F6_0C3E++;",
+            "access_modes": [
+              "read",
+              "write"
+            ]
+          },
+          {
+            "file": "src/S25/m3BA4.c",
+            "line": 161,
+            "source": "if (fd_50F6_0C3E & 1) {",
+            "access_modes": [
+              "read"
+            ]
+          }
+        ],
+        "direct_writes": [
+          {
+            "file": "src/S22/m39C7.c",
+            "line": 315,
+            "source": "fd_50F6_0C3E = 0;",
+            "access_modes": [
+              "write"
+            ]
+          },
+          {
+            "file": "src/S25/m3BA4.c",
+            "line": 145,
+            "source": "fd_50F6_0C3E++;",
+            "access_modes": [
+              "read",
+              "write"
+            ]
+          }
+        ],
+        "pointer_escapes": [
+          {
+            "file": "src/S09/m35F5.c",
+            "line": 1107,
+            "source": "{ 2, 1, (void far *)&fd_50F6_0C3E },",
+            "access_modes": [
+              "address_escape"
+            ]
+          }
+        ],
+        "SaveRec": {
+          "file": "src/S09/m35F5.c",
+          "line": 1107,
+          "table_index_1based": 214,
+          "record": "{ 2, 1, (void far *)&fd_50F6_0C3E },",
+          "size": 2,
+          "count": 1,
+          "serialized_bytes": 2
+        },
+        "registered_exact_base_names": [
+          "fd_50F6_0C3E"
+        ],
+        "registered_extent_entries_two_byte_scan": [
+          {
+            "name": "fd_50F6_0C3E",
+            "address": "50F6:0C3E",
+            "role": "exact_base",
+            "registry_row": {
+              "seg": 20726,
+              "off": 3134,
+              "grounding": "S25:3BA4 DoAntMoveY:0309 inc word es:[0C3E] (CONST seg word 896C = 50F6)"
+            }
+          }
+        ],
+        "registered_interior_names": []
+      },
+      "registered_interior_names": [],
+      "source_read_limitation": null
+    },
+    {
       "name": "_AntsEatenByLions",
       "kind": "far",
       "count": 2,
@@ -712,6 +1593,88 @@
           "name": "_driver_callback_table",
           "kind": "near",
           "length": 100
+        }
+      ],
+      "publics": [],
+      "fixups": []
+    },
+    {
+      "module": "source-owned:mouse-words",
+      "source": {
+        "path": "work\\source-only-dos\\providers\\mouse-words.c",
+        "sha256": "64335f44c5f3104ffb8fc81d26fc8bc7aaf5e0e1d126bb8d79c02a6cc5802d32",
+        "size": 280
+      },
+      "object": {
+        "path": "build\\source-only-dos\\objects\\MSOWNER.OBJ",
+        "sha256": "04ab7a979fb1b43babc78282263e1306b1e1503ec1ee7cd39aebcff30a3c943b",
+        "size": 226
+      },
+      "status": "PASS",
+      "data_only": true,
+      "live_initialized_bytes": 0,
+      "code_bytes": 0,
+      "communals": [
+        {
+          "name": "_g_9120",
+          "kind": "near",
+          "length": 2
+        },
+        {
+          "name": "_g_9122",
+          "kind": "near",
+          "length": 2
+        },
+        {
+          "name": "_g_9124",
+          "kind": "near",
+          "length": 2
+        }
+      ],
+      "publics": [],
+      "fixups": []
+    },
+    {
+      "module": "source-owned:memory-state",
+      "source": {
+        "path": "work\\source-only-dos\\providers\\memory-state.c",
+        "sha256": "5cfc5157f5e6e131433190b1360702d75fba6708283ec4ca74765fd699531948",
+        "size": 658
+      },
+      "object": {
+        "path": "build\\source-only-dos\\objects\\MMOWNER.OBJ",
+        "sha256": "7ee44f25e06b597fb9a2269b8bf8131d597bba0094c6f236baefa4fcea8d3908",
+        "size": 248
+      },
+      "status": "PASS",
+      "data_only": true,
+      "live_initialized_bytes": 0,
+      "code_bytes": 0,
+      "communals": [
+        {
+          "name": "_g_91A0",
+          "kind": "near",
+          "length": 2
+        },
+        {
+          "name": "_g_91A2",
+          "kind": "near",
+          "length": 2
+        },
+        {
+          "name": "_g_91A4",
+          "kind": "near",
+          "length": 4
+        },
+        {
+          "name": "_g_91A8",
+          "kind": "near",
+          "length": 4
+        },
+        {
+          "name": "_g_91AC",
+          "kind": "near",
+          "length": 4
         }
       ],
       "publics": [],
@@ -1300,15 +2263,720 @@
       },
       "object": {
         "path": "build\\source-only-dos\\objects\\U001.OBJ",
-        "sha256": "b4260c41b1fa6ca0acbc260f80659cdecf38b9cbbfbc5565c97091117c6127e6",
+        "sha256": "f2aebeb338e24d33473d638d39163f522b621b32ac22633af9bc2c9f22c0abe7",
         "size": 14747
       },
       "status": "PASS",
       "segment_extents_unchanged": true,
       "live_segment_extents_unchanged": true,
-      "existing_publics_and_relocations_unchanged": true,
-      "live_existing_publics_and_relocations_unchanged": true,
-      "reviewed_frame_corrections": [],
+      "existing_publics_and_relocations_unchanged": false,
+      "live_existing_publics_and_relocations_unchanged": false,
+      "reviewed_frame_corrections": [
+        {
+          "segment": "S00B_TEXT",
+          "offset": 703,
+          "target": "_g_3DB6",
+          "old_frame_kind": "segment",
+          "old_frame": "_DATA",
+          "frame_kind": "group",
+          "frame": "DGROUP",
+          "source_line": 433,
+          "bound_source_line": 433
+        },
+        {
+          "segment": "S00B_TEXT",
+          "offset": 750,
+          "target": "_g_3DB6",
+          "old_frame_kind": "segment",
+          "old_frame": "_DATA",
+          "frame_kind": "group",
+          "frame": "DGROUP",
+          "source_line": 458,
+          "bound_source_line": 458
+        },
+        {
+          "segment": "S00B_TEXT",
+          "offset": 872,
+          "target": "_g_3DB6",
+          "old_frame_kind": "segment",
+          "old_frame": "_DATA",
+          "frame_kind": "group",
+          "frame": "DGROUP",
+          "source_line": 520,
+          "bound_source_line": 520
+        },
+        {
+          "segment": "S00B_TEXT",
+          "offset": 1519,
+          "target": "_g_3DB6",
+          "old_frame_kind": "segment",
+          "old_frame": "_DATA",
+          "frame_kind": "group",
+          "frame": "DGROUP",
+          "source_line": 838,
+          "bound_source_line": 838
+        },
+        {
+          "segment": "S00B_TEXT",
+          "offset": 1712,
+          "target": "_g_3DD4",
+          "old_frame_kind": "segment",
+          "old_frame": "_DATA",
+          "frame_kind": "group",
+          "frame": "DGROUP",
+          "source_line": 945,
+          "bound_source_line": 945
+        },
+        {
+          "segment": "S00B_TEXT",
+          "offset": 1727,
+          "target": "_g_3DB0",
+          "old_frame_kind": "segment",
+          "old_frame": "_DATA",
+          "frame_kind": "group",
+          "frame": "DGROUP",
+          "source_line": 950,
+          "bound_source_line": 950
+        },
+        {
+          "segment": "S00B_TEXT",
+          "offset": 1908,
+          "target": "_g_3DB6",
+          "old_frame_kind": "segment",
+          "old_frame": "_DATA",
+          "frame_kind": "group",
+          "frame": "DGROUP",
+          "source_line": 1037,
+          "bound_source_line": 1037
+        },
+        {
+          "segment": "S00B_TEXT",
+          "offset": 1917,
+          "target": "_g_3DB6",
+          "old_frame_kind": "segment",
+          "old_frame": "_DATA",
+          "frame_kind": "group",
+          "frame": "DGROUP",
+          "source_line": 1042,
+          "bound_source_line": 1042
+        },
+        {
+          "segment": "S00B_TEXT",
+          "offset": 1926,
+          "target": "_g_3DB6",
+          "old_frame_kind": "segment",
+          "old_frame": "_DATA",
+          "frame_kind": "group",
+          "frame": "DGROUP",
+          "source_line": 1047,
+          "bound_source_line": 1047
+        },
+        {
+          "segment": "S00B_TEXT",
+          "offset": 1935,
+          "target": "_g_3DB6",
+          "old_frame_kind": "segment",
+          "old_frame": "_DATA",
+          "frame_kind": "group",
+          "frame": "DGROUP",
+          "source_line": 1052,
+          "bound_source_line": 1052
+        },
+        {
+          "segment": "S00B_TEXT",
+          "offset": 1944,
+          "target": "_g_3DB6",
+          "old_frame_kind": "segment",
+          "old_frame": "_DATA",
+          "frame_kind": "group",
+          "frame": "DGROUP",
+          "source_line": 1057,
+          "bound_source_line": 1057
+        },
+        {
+          "segment": "S00B_TEXT",
+          "offset": 1953,
+          "target": "_g_3DB6",
+          "old_frame_kind": "segment",
+          "old_frame": "_DATA",
+          "frame_kind": "group",
+          "frame": "DGROUP",
+          "source_line": 1062,
+          "bound_source_line": 1062
+        },
+        {
+          "segment": "S00B_TEXT",
+          "offset": 1962,
+          "target": "_g_3DB6",
+          "old_frame_kind": "segment",
+          "old_frame": "_DATA",
+          "frame_kind": "group",
+          "frame": "DGROUP",
+          "source_line": 1067,
+          "bound_source_line": 1067
+        },
+        {
+          "segment": "S00B_TEXT",
+          "offset": 1971,
+          "target": "_g_3DB6",
+          "old_frame_kind": "segment",
+          "old_frame": "_DATA",
+          "frame_kind": "group",
+          "frame": "DGROUP",
+          "source_line": 1072,
+          "bound_source_line": 1072
+        },
+        {
+          "segment": "S00B_TEXT",
+          "offset": 1980,
+          "target": "_g_3DB6",
+          "old_frame_kind": "segment",
+          "old_frame": "_DATA",
+          "frame_kind": "group",
+          "frame": "DGROUP",
+          "source_line": 1077,
+          "bound_source_line": 1077
+        },
+        {
+          "segment": "S00B_TEXT",
+          "offset": 1989,
+          "target": "_g_3DB6",
+          "old_frame_kind": "segment",
+          "old_frame": "_DATA",
+          "frame_kind": "group",
+          "frame": "DGROUP",
+          "source_line": 1082,
+          "bound_source_line": 1082
+        },
+        {
+          "segment": "S00B_TEXT",
+          "offset": 1998,
+          "target": "_g_3DB6",
+          "old_frame_kind": "segment",
+          "old_frame": "_DATA",
+          "frame_kind": "group",
+          "frame": "DGROUP",
+          "source_line": 1087,
+          "bound_source_line": 1087
+        },
+        {
+          "segment": "S00B_TEXT",
+          "offset": 2007,
+          "target": "_g_3DB6",
+          "old_frame_kind": "segment",
+          "old_frame": "_DATA",
+          "frame_kind": "group",
+          "frame": "DGROUP",
+          "source_line": 1092,
+          "bound_source_line": 1092
+        },
+        {
+          "segment": "S00B_TEXT",
+          "offset": 2016,
+          "target": "_g_3DB6",
+          "old_frame_kind": "segment",
+          "old_frame": "_DATA",
+          "frame_kind": "group",
+          "frame": "DGROUP",
+          "source_line": 1097,
+          "bound_source_line": 1097
+        },
+        {
+          "segment": "S00B_TEXT",
+          "offset": 2025,
+          "target": "_g_3DB6",
+          "old_frame_kind": "segment",
+          "old_frame": "_DATA",
+          "frame_kind": "group",
+          "frame": "DGROUP",
+          "source_line": 1102,
+          "bound_source_line": 1102
+        },
+        {
+          "segment": "S00B_TEXT",
+          "offset": 2034,
+          "target": "_g_3DB6",
+          "old_frame_kind": "segment",
+          "old_frame": "_DATA",
+          "frame_kind": "group",
+          "frame": "DGROUP",
+          "source_line": 1107,
+          "bound_source_line": 1107
+        },
+        {
+          "segment": "S00B_TEXT",
+          "offset": 3510,
+          "target": "_g_3DB6",
+          "old_frame_kind": "segment",
+          "old_frame": "_DATA",
+          "frame_kind": "group",
+          "frame": "DGROUP",
+          "source_line": 1939,
+          "bound_source_line": 1939
+        },
+        {
+          "segment": "S00B_TEXT",
+          "offset": 3522,
+          "target": "_g_3DB6",
+          "old_frame_kind": "segment",
+          "old_frame": "_DATA",
+          "frame_kind": "group",
+          "frame": "DGROUP",
+          "source_line": 1943,
+          "bound_source_line": 1943
+        },
+        {
+          "segment": "S00B_TEXT",
+          "offset": 3534,
+          "target": "_g_3DB6",
+          "old_frame_kind": "segment",
+          "old_frame": "_DATA",
+          "frame_kind": "group",
+          "frame": "DGROUP",
+          "source_line": 1947,
+          "bound_source_line": 1947
+        },
+        {
+          "segment": "S00B_TEXT",
+          "offset": 3546,
+          "target": "_g_3DB6",
+          "old_frame_kind": "segment",
+          "old_frame": "_DATA",
+          "frame_kind": "group",
+          "frame": "DGROUP",
+          "source_line": 1951,
+          "bound_source_line": 1951
+        },
+        {
+          "segment": "S00B_TEXT",
+          "offset": 3558,
+          "target": "_g_3DB6",
+          "old_frame_kind": "segment",
+          "old_frame": "_DATA",
+          "frame_kind": "group",
+          "frame": "DGROUP",
+          "source_line": 1955,
+          "bound_source_line": 1955
+        },
+        {
+          "segment": "S00B_TEXT",
+          "offset": 3570,
+          "target": "_g_3DB6",
+          "old_frame_kind": "segment",
+          "old_frame": "_DATA",
+          "frame_kind": "group",
+          "frame": "DGROUP",
+          "source_line": 1959,
+          "bound_source_line": 1959
+        },
+        {
+          "segment": "S00B_TEXT",
+          "offset": 3582,
+          "target": "_g_3DB6",
+          "old_frame_kind": "segment",
+          "old_frame": "_DATA",
+          "frame_kind": "group",
+          "frame": "DGROUP",
+          "source_line": 1963,
+          "bound_source_line": 1963
+        },
+        {
+          "segment": "S00B_TEXT",
+          "offset": 3594,
+          "target": "_g_3DB6",
+          "old_frame_kind": "segment",
+          "old_frame": "_DATA",
+          "frame_kind": "group",
+          "frame": "DGROUP",
+          "source_line": 1967,
+          "bound_source_line": 1967
+        },
+        {
+          "segment": "S00B_TEXT",
+          "offset": 3606,
+          "target": "_g_3DB6",
+          "old_frame_kind": "segment",
+          "old_frame": "_DATA",
+          "frame_kind": "group",
+          "frame": "DGROUP",
+          "source_line": 1971,
+          "bound_source_line": 1971
+        },
+        {
+          "segment": "S00B_TEXT",
+          "offset": 3618,
+          "target": "_g_3DB6",
+          "old_frame_kind": "segment",
+          "old_frame": "_DATA",
+          "frame_kind": "group",
+          "frame": "DGROUP",
+          "source_line": 1975,
+          "bound_source_line": 1975
+        },
+        {
+          "segment": "S00B_TEXT",
+          "offset": 3630,
+          "target": "_g_3DB6",
+          "old_frame_kind": "segment",
+          "old_frame": "_DATA",
+          "frame_kind": "group",
+          "frame": "DGROUP",
+          "source_line": 1979,
+          "bound_source_line": 1979
+        },
+        {
+          "segment": "S00B_TEXT",
+          "offset": 3642,
+          "target": "_g_3DB6",
+          "old_frame_kind": "segment",
+          "old_frame": "_DATA",
+          "frame_kind": "group",
+          "frame": "DGROUP",
+          "source_line": 1983,
+          "bound_source_line": 1983
+        },
+        {
+          "segment": "S00B_TEXT",
+          "offset": 3654,
+          "target": "_g_3DB6",
+          "old_frame_kind": "segment",
+          "old_frame": "_DATA",
+          "frame_kind": "group",
+          "frame": "DGROUP",
+          "source_line": 1987,
+          "bound_source_line": 1987
+        },
+        {
+          "segment": "S00B_TEXT",
+          "offset": 3666,
+          "target": "_g_3DB6",
+          "old_frame_kind": "segment",
+          "old_frame": "_DATA",
+          "frame_kind": "group",
+          "frame": "DGROUP",
+          "source_line": 1991,
+          "bound_source_line": 1991
+        },
+        {
+          "segment": "S00B_TEXT",
+          "offset": 3678,
+          "target": "_g_3DB6",
+          "old_frame_kind": "segment",
+          "old_frame": "_DATA",
+          "frame_kind": "group",
+          "frame": "DGROUP",
+          "source_line": 1995,
+          "bound_source_line": 1995
+        },
+        {
+          "segment": "S00B_TEXT",
+          "offset": 3690,
+          "target": "_g_3DB6",
+          "old_frame_kind": "segment",
+          "old_frame": "_DATA",
+          "frame_kind": "group",
+          "frame": "DGROUP",
+          "source_line": 1999,
+          "bound_source_line": 1999
+        },
+        {
+          "segment": "S00B_TEXT",
+          "offset": 3738,
+          "target": "_g_3DB6",
+          "old_frame_kind": "segment",
+          "old_frame": "_DATA",
+          "frame_kind": "group",
+          "frame": "DGROUP",
+          "source_line": 2024,
+          "bound_source_line": 2024
+        },
+        {
+          "segment": "S00B_TEXT",
+          "offset": 3763,
+          "target": "_g_3DD2",
+          "old_frame_kind": "segment",
+          "old_frame": "_DATA",
+          "frame_kind": "group",
+          "frame": "DGROUP",
+          "source_line": 2034,
+          "bound_source_line": 2034
+        },
+        {
+          "segment": "S00B_TEXT",
+          "offset": 3795,
+          "target": "_g_3DB6",
+          "old_frame_kind": "segment",
+          "old_frame": "_DATA",
+          "frame_kind": "group",
+          "frame": "DGROUP",
+          "source_line": 2051,
+          "bound_source_line": 2051
+        },
+        {
+          "segment": "S00B_TEXT",
+          "offset": 3913,
+          "target": "_g_3DB6",
+          "old_frame_kind": "segment",
+          "old_frame": "_DATA",
+          "frame_kind": "group",
+          "frame": "DGROUP",
+          "source_line": 2108,
+          "bound_source_line": 2108
+        },
+        {
+          "segment": "S00B_TEXT",
+          "offset": 3925,
+          "target": "_g_3DD2",
+          "old_frame_kind": "segment",
+          "old_frame": "_DATA",
+          "frame_kind": "group",
+          "frame": "DGROUP",
+          "source_line": 2115,
+          "bound_source_line": 2115
+        },
+        {
+          "segment": "S00B_TEXT",
+          "offset": 4061,
+          "target": "_g_3DEF",
+          "old_frame_kind": "segment",
+          "old_frame": "_DATA",
+          "frame_kind": "group",
+          "frame": "DGROUP",
+          "source_line": 2167,
+          "bound_source_line": 2167
+        },
+        {
+          "segment": "S00B_TEXT",
+          "offset": 4089,
+          "target": "_g_3DEF",
+          "old_frame_kind": "segment",
+          "old_frame": "_DATA",
+          "frame_kind": "group",
+          "frame": "DGROUP",
+          "source_line": 2177,
+          "bound_source_line": 2177
+        },
+        {
+          "segment": "S00B_TEXT",
+          "offset": 4097,
+          "target": "_g_3DEF",
+          "old_frame_kind": "segment",
+          "old_frame": "_DATA",
+          "frame_kind": "group",
+          "frame": "DGROUP",
+          "source_line": 2183,
+          "bound_source_line": 2183
+        },
+        {
+          "segment": "S00B_TEXT",
+          "offset": 4109,
+          "target": "_g_3DEC",
+          "old_frame_kind": "segment",
+          "old_frame": "_DATA",
+          "frame_kind": "group",
+          "frame": "DGROUP",
+          "source_line": 2187,
+          "bound_source_line": 2187
+        },
+        {
+          "segment": "S00B_TEXT",
+          "offset": 4149,
+          "target": "_g_3DED",
+          "old_frame_kind": "segment",
+          "old_frame": "_DATA",
+          "frame_kind": "group",
+          "frame": "DGROUP",
+          "source_line": 2210,
+          "bound_source_line": 2210
+        },
+        {
+          "segment": "S00B_TEXT",
+          "offset": 4190,
+          "target": "_g_3DEA",
+          "old_frame_kind": "segment",
+          "old_frame": "_DATA",
+          "frame_kind": "group",
+          "frame": "DGROUP",
+          "source_line": 2236,
+          "bound_source_line": 2236
+        },
+        {
+          "segment": "S00B_TEXT",
+          "offset": 4196,
+          "target": "_g_3DEF",
+          "old_frame_kind": "segment",
+          "old_frame": "_DATA",
+          "frame_kind": "group",
+          "frame": "DGROUP",
+          "source_line": 2241,
+          "bound_source_line": 2241
+        },
+        {
+          "segment": "S00B_TEXT",
+          "offset": 4208,
+          "target": "_g_3DEC",
+          "old_frame_kind": "segment",
+          "old_frame": "_DATA",
+          "frame_kind": "group",
+          "frame": "DGROUP",
+          "source_line": 2245,
+          "bound_source_line": 2245
+        },
+        {
+          "segment": "S00B_TEXT",
+          "offset": 4245,
+          "target": "_g_3DED",
+          "old_frame_kind": "segment",
+          "old_frame": "_DATA",
+          "frame_kind": "group",
+          "frame": "DGROUP",
+          "source_line": 2265,
+          "bound_source_line": 2265
+        },
+        {
+          "segment": "S00B_TEXT",
+          "offset": 4295,
+          "target": "_g_3DEA",
+          "old_frame_kind": "segment",
+          "old_frame": "_DATA",
+          "frame_kind": "group",
+          "frame": "DGROUP",
+          "source_line": 2293,
+          "bound_source_line": 2293
+        },
+        {
+          "segment": "S00B_TEXT",
+          "offset": 4371,
+          "target": "_g_3DEE",
+          "old_frame_kind": "segment",
+          "old_frame": "_DATA",
+          "frame_kind": "group",
+          "frame": "DGROUP",
+          "source_line": 2325,
+          "bound_source_line": 2325
+        },
+        {
+          "segment": "S00B_TEXT",
+          "offset": 4376,
+          "target": "_g_3DF2",
+          "old_frame_kind": "segment",
+          "old_frame": "_DATA",
+          "frame_kind": "group",
+          "frame": "DGROUP",
+          "source_line": 2326,
+          "bound_source_line": 2326
+        },
+        {
+          "segment": "S00B_TEXT",
+          "offset": 4414,
+          "target": "_g_3DEF",
+          "old_frame_kind": "segment",
+          "old_frame": "_DATA",
+          "frame_kind": "group",
+          "frame": "DGROUP",
+          "source_line": 2345,
+          "bound_source_line": 2345
+        },
+        {
+          "segment": "S00B_TEXT",
+          "offset": 4426,
+          "target": "_g_3DEC",
+          "old_frame_kind": "segment",
+          "old_frame": "_DATA",
+          "frame_kind": "group",
+          "frame": "DGROUP",
+          "source_line": 2349,
+          "bound_source_line": 2349
+        },
+        {
+          "segment": "S00B_TEXT",
+          "offset": 4467,
+          "target": "_g_3DED",
+          "old_frame_kind": "segment",
+          "old_frame": "_DATA",
+          "frame_kind": "group",
+          "frame": "DGROUP",
+          "source_line": 2372,
+          "bound_source_line": 2372
+        },
+        {
+          "segment": "S00B_TEXT",
+          "offset": 4526,
+          "target": "_g_3DEC",
+          "old_frame_kind": "segment",
+          "old_frame": "_DATA",
+          "frame_kind": "group",
+          "frame": "DGROUP",
+          "source_line": 2408,
+          "bound_source_line": 2408
+        },
+        {
+          "segment": "S00B_TEXT",
+          "offset": 4551,
+          "target": "_g_3DED",
+          "old_frame_kind": "segment",
+          "old_frame": "_DATA",
+          "frame_kind": "group",
+          "frame": "DGROUP",
+          "source_line": 2421,
+          "bound_source_line": 2421
+        },
+        {
+          "segment": "S00B_TEXT",
+          "offset": 4596,
+          "target": "_g_3DEA",
+          "old_frame_kind": "segment",
+          "old_frame": "_DATA",
+          "frame_kind": "group",
+          "frame": "DGROUP",
+          "source_line": 2446,
+          "bound_source_line": 2446
+        },
+        {
+          "segment": "S00B_TEXT",
+          "offset": 4931,
+          "target": "_g_3DD2",
+          "old_frame_kind": "segment",
+          "old_frame": "_DATA",
+          "frame_kind": "group",
+          "frame": "DGROUP",
+          "source_line": 2603,
+          "bound_source_line": 2603
+        },
+        {
+          "segment": "S00B_TEXT",
+          "offset": 5053,
+          "target": "_g_3DB6",
+          "old_frame_kind": "segment",
+          "old_frame": "_DATA",
+          "frame_kind": "group",
+          "frame": "DGROUP",
+          "source_line": 2660,
+          "bound_source_line": 2660
+        },
+        {
+          "segment": "S00B_TEXT",
+          "offset": 5110,
+          "target": "_g_3DB6",
+          "old_frame_kind": "segment",
+          "old_frame": "_DATA",
+          "frame_kind": "group",
+          "frame": "DGROUP",
+          "source_line": 2686,
+          "bound_source_line": 2686
+        },
+        {
+          "segment": "S00B_TEXT",
+          "offset": 6841,
+          "target": "_g_3DD4",
+          "old_frame_kind": "segment",
+          "old_frame": "_DATA",
+          "frame_kind": "group",
+          "frame": "DGROUP",
+          "source_line": 3553,
+          "bound_source_line": 3553
+        }
+      ],
       "storage_bytes_unchanged": true,
       "reviewed_debug_contributions": {},
       "added_exports": [],
@@ -1415,15 +3083,412 @@
       },
       "object": {
         "path": "build\\source-only-dos\\objects\\U004.OBJ",
-        "sha256": "d97357fd25bef58711256fafe1eb4b8fe144748957d0b4674dd420b176a304ab",
+        "sha256": "d8067133416c8096eaf0c3f3dd060274ee5cefee9277ad4470a5a8fef554a0d5",
         "size": 10051
       },
       "status": "PASS",
       "segment_extents_unchanged": true,
       "live_segment_extents_unchanged": true,
-      "existing_publics_and_relocations_unchanged": true,
-      "live_existing_publics_and_relocations_unchanged": true,
-      "reviewed_frame_corrections": [],
+      "existing_publics_and_relocations_unchanged": false,
+      "live_existing_publics_and_relocations_unchanged": false,
+      "reviewed_frame_corrections": [
+        {
+          "segment": "S01A_TEXT",
+          "offset": 1427,
+          "target": "_g_3DE5",
+          "old_frame_kind": "segment",
+          "old_frame": "_DATA",
+          "frame_kind": "group",
+          "frame": "DGROUP",
+          "source_line": 784,
+          "bound_source_line": 788
+        },
+        {
+          "segment": "S01A_TEXT",
+          "offset": 1543,
+          "target": "_g_3DE5",
+          "old_frame_kind": "segment",
+          "old_frame": "_DATA",
+          "frame_kind": "group",
+          "frame": "DGROUP",
+          "source_line": 832,
+          "bound_source_line": 838
+        },
+        {
+          "segment": "S01A_TEXT",
+          "offset": 1585,
+          "target": "_g_3DEF",
+          "old_frame_kind": "segment",
+          "old_frame": "_DATA",
+          "frame_kind": "group",
+          "frame": "DGROUP",
+          "source_line": 851,
+          "bound_source_line": 859
+        },
+        {
+          "segment": "S01A_TEXT",
+          "offset": 1590,
+          "target": "_g_3DF1",
+          "old_frame_kind": "segment",
+          "old_frame": "_DATA",
+          "frame_kind": "group",
+          "frame": "DGROUP",
+          "source_line": 852,
+          "bound_source_line": 860
+        },
+        {
+          "segment": "S01A_TEXT",
+          "offset": 1607,
+          "target": "_g_3DEC",
+          "old_frame_kind": "segment",
+          "old_frame": "_DATA",
+          "frame_kind": "group",
+          "frame": "DGROUP",
+          "source_line": 857,
+          "bound_source_line": 865
+        },
+        {
+          "segment": "S01A_TEXT",
+          "offset": 1639,
+          "target": "_g_3DED",
+          "old_frame_kind": "segment",
+          "old_frame": "_DATA",
+          "frame_kind": "group",
+          "frame": "DGROUP",
+          "source_line": 875,
+          "bound_source_line": 883
+        },
+        {
+          "segment": "S01A_TEXT",
+          "offset": 1665,
+          "target": "_g_3DED",
+          "old_frame_kind": "segment",
+          "old_frame": "_DATA",
+          "frame_kind": "group",
+          "frame": "DGROUP",
+          "source_line": 891,
+          "bound_source_line": 899
+        },
+        {
+          "segment": "S01A_TEXT",
+          "offset": 1689,
+          "target": "_g_3DEA",
+          "old_frame_kind": "segment",
+          "old_frame": "_DATA",
+          "frame_kind": "group",
+          "frame": "DGROUP",
+          "source_line": 905,
+          "bound_source_line": 913
+        },
+        {
+          "segment": "S01A_TEXT",
+          "offset": 1702,
+          "target": "_g_3DEE",
+          "old_frame_kind": "segment",
+          "old_frame": "_DATA",
+          "frame_kind": "group",
+          "frame": "DGROUP",
+          "source_line": 914,
+          "bound_source_line": 922
+        },
+        {
+          "segment": "S01A_TEXT",
+          "offset": 1707,
+          "target": "_g_3DF2",
+          "old_frame_kind": "segment",
+          "old_frame": "_DATA",
+          "frame_kind": "group",
+          "frame": "DGROUP",
+          "source_line": 915,
+          "bound_source_line": 923
+        },
+        {
+          "segment": "S01A_TEXT",
+          "offset": 1744,
+          "target": "_g_3DEF",
+          "old_frame_kind": "segment",
+          "old_frame": "_DATA",
+          "frame_kind": "group",
+          "frame": "DGROUP",
+          "source_line": 933,
+          "bound_source_line": 941
+        },
+        {
+          "segment": "S01A_TEXT",
+          "offset": 1749,
+          "target": "_g_3DF1",
+          "old_frame_kind": "segment",
+          "old_frame": "_DATA",
+          "frame_kind": "group",
+          "frame": "DGROUP",
+          "source_line": 934,
+          "bound_source_line": 942
+        },
+        {
+          "segment": "S01A_TEXT",
+          "offset": 1761,
+          "target": "_g_3DEC",
+          "old_frame_kind": "segment",
+          "old_frame": "_DATA",
+          "frame_kind": "group",
+          "frame": "DGROUP",
+          "source_line": 938,
+          "bound_source_line": 946
+        },
+        {
+          "segment": "S01A_TEXT",
+          "offset": 1794,
+          "target": "_g_3DED",
+          "old_frame_kind": "segment",
+          "old_frame": "_DATA",
+          "frame_kind": "group",
+          "frame": "DGROUP",
+          "source_line": 956,
+          "bound_source_line": 964
+        },
+        {
+          "segment": "S01A_TEXT",
+          "offset": 1823,
+          "target": "_g_3DED",
+          "old_frame_kind": "segment",
+          "old_frame": "_DATA",
+          "frame_kind": "group",
+          "frame": "DGROUP",
+          "source_line": 973,
+          "bound_source_line": 981
+        },
+        {
+          "segment": "S01A_TEXT",
+          "offset": 1975,
+          "target": "_g_3DD2",
+          "old_frame_kind": "segment",
+          "old_frame": "_DATA",
+          "frame_kind": "group",
+          "frame": "DGROUP",
+          "source_line": 1044,
+          "bound_source_line": 1052
+        },
+        {
+          "segment": "S01A_TEXT",
+          "offset": 2229,
+          "target": "_g_3DEF",
+          "old_frame_kind": "segment",
+          "old_frame": "_DATA",
+          "frame_kind": "group",
+          "frame": "DGROUP",
+          "source_line": 1150,
+          "bound_source_line": 1164
+        },
+        {
+          "segment": "S01A_TEXT",
+          "offset": 2251,
+          "target": "_g_3DB0",
+          "old_frame_kind": "segment",
+          "old_frame": "_DATA",
+          "frame_kind": "group",
+          "frame": "DGROUP",
+          "source_line": 1157,
+          "bound_source_line": 1171
+        },
+        {
+          "segment": "S01A_TEXT",
+          "offset": 2258,
+          "target": "_g_3DEF",
+          "old_frame_kind": "segment",
+          "old_frame": "_DATA",
+          "frame_kind": "group",
+          "frame": "DGROUP",
+          "source_line": 1159,
+          "bound_source_line": 1173
+        },
+        {
+          "segment": "S01A_TEXT",
+          "offset": 2272,
+          "target": "_g_3DF1",
+          "old_frame_kind": "segment",
+          "old_frame": "_DATA",
+          "frame_kind": "group",
+          "frame": "DGROUP",
+          "source_line": 1164,
+          "bound_source_line": 1178
+        },
+        {
+          "segment": "S01A_TEXT",
+          "offset": 2278,
+          "target": "_g_3DEF",
+          "old_frame_kind": "segment",
+          "old_frame": "_DATA",
+          "frame_kind": "group",
+          "frame": "DGROUP",
+          "source_line": 1169,
+          "bound_source_line": 1183
+        },
+        {
+          "segment": "S01A_TEXT",
+          "offset": 2290,
+          "target": "_g_3DEC",
+          "old_frame_kind": "segment",
+          "old_frame": "_DATA",
+          "frame_kind": "group",
+          "frame": "DGROUP",
+          "source_line": 1173,
+          "bound_source_line": 1187
+        },
+        {
+          "segment": "S01A_TEXT",
+          "offset": 2320,
+          "target": "_g_3DED",
+          "old_frame_kind": "segment",
+          "old_frame": "_DATA",
+          "frame_kind": "group",
+          "frame": "DGROUP",
+          "source_line": 1189,
+          "bound_source_line": 1203
+        },
+        {
+          "segment": "S01A_TEXT",
+          "offset": 2361,
+          "target": "_g_3DEA",
+          "old_frame_kind": "segment",
+          "old_frame": "_DATA",
+          "frame_kind": "group",
+          "frame": "DGROUP",
+          "source_line": 1214,
+          "bound_source_line": 1228
+        },
+        {
+          "segment": "S01A_TEXT",
+          "offset": 2367,
+          "target": "_g_3DEF",
+          "old_frame_kind": "segment",
+          "old_frame": "_DATA",
+          "frame_kind": "group",
+          "frame": "DGROUP",
+          "source_line": 1219,
+          "bound_source_line": 1233
+        },
+        {
+          "segment": "S01A_TEXT",
+          "offset": 2379,
+          "target": "_g_3DEC",
+          "old_frame_kind": "segment",
+          "old_frame": "_DATA",
+          "frame_kind": "group",
+          "frame": "DGROUP",
+          "source_line": 1223,
+          "bound_source_line": 1237
+        },
+        {
+          "segment": "S01A_TEXT",
+          "offset": 2407,
+          "target": "_g_3DED",
+          "old_frame_kind": "segment",
+          "old_frame": "_DATA",
+          "frame_kind": "group",
+          "frame": "DGROUP",
+          "source_line": 1237,
+          "bound_source_line": 1251
+        },
+        {
+          "segment": "S01A_TEXT",
+          "offset": 2443,
+          "target": "_g_3DEA",
+          "old_frame_kind": "segment",
+          "old_frame": "_DATA",
+          "frame_kind": "group",
+          "frame": "DGROUP",
+          "source_line": 1258,
+          "bound_source_line": 1272
+        },
+        {
+          "segment": "S01A_TEXT",
+          "offset": 2457,
+          "target": "_g_3DEE",
+          "old_frame_kind": "segment",
+          "old_frame": "_DATA",
+          "frame_kind": "group",
+          "frame": "DGROUP",
+          "source_line": 1268,
+          "bound_source_line": 1282
+        },
+        {
+          "segment": "S01A_TEXT",
+          "offset": 2462,
+          "target": "_g_3DF2",
+          "old_frame_kind": "segment",
+          "old_frame": "_DATA",
+          "frame_kind": "group",
+          "frame": "DGROUP",
+          "source_line": 1269,
+          "bound_source_line": 1283
+        },
+        {
+          "segment": "S01A_TEXT",
+          "offset": 2500,
+          "target": "_g_3DEF",
+          "old_frame_kind": "segment",
+          "old_frame": "_DATA",
+          "frame_kind": "group",
+          "frame": "DGROUP",
+          "source_line": 1288,
+          "bound_source_line": 1302
+        },
+        {
+          "segment": "S01A_TEXT",
+          "offset": 2512,
+          "target": "_g_3DEC",
+          "old_frame_kind": "segment",
+          "old_frame": "_DATA",
+          "frame_kind": "group",
+          "frame": "DGROUP",
+          "source_line": 1292,
+          "bound_source_line": 1306
+        },
+        {
+          "segment": "S01A_TEXT",
+          "offset": 2543,
+          "target": "_g_3DED",
+          "old_frame_kind": "segment",
+          "old_frame": "_DATA",
+          "frame_kind": "group",
+          "frame": "DGROUP",
+          "source_line": 1308,
+          "bound_source_line": 1322
+        },
+        {
+          "segment": "S01A_TEXT",
+          "offset": 3083,
+          "target": "_g_3DEC",
+          "old_frame_kind": "segment",
+          "old_frame": "_DATA",
+          "frame_kind": "group",
+          "frame": "DGROUP",
+          "source_line": 1501,
+          "bound_source_line": 1515
+        },
+        {
+          "segment": "S01A_TEXT",
+          "offset": 3112,
+          "target": "_g_3DED",
+          "old_frame_kind": "segment",
+          "old_frame": "_DATA",
+          "frame_kind": "group",
+          "frame": "DGROUP",
+          "source_line": 1515,
+          "bound_source_line": 1529
+        },
+        {
+          "segment": "S01A_TEXT",
+          "offset": 3152,
+          "target": "_g_3DEA",
+          "old_frame_kind": "segment",
+          "old_frame": "_DATA",
+          "frame_kind": "group",
+          "frame": "DGROUP",
+          "source_line": 1537,
+          "bound_source_line": 1551
+        }
+      ],
       "storage_bytes_unchanged": true,
       "reviewed_debug_contributions": {},
       "added_exports": [],
@@ -1540,15 +3605,38 @@
       },
       "object": {
         "path": "build\\source-only-dos\\objects\\U007.OBJ",
-        "sha256": "c4b8845cadd4eaf550d836db2dfcc3b1a7ebc8bfd972e740d9dc8d1ea6572187",
+        "sha256": "53ddfdfc7369a32ec227c6716af11410b976ec1b955a78dd698a1da98bcb2746",
         "size": 5000
       },
       "status": "PASS",
       "segment_extents_unchanged": true,
       "live_segment_extents_unchanged": true,
-      "existing_publics_and_relocations_unchanged": true,
-      "live_existing_publics_and_relocations_unchanged": true,
-      "reviewed_frame_corrections": [],
+      "existing_publics_and_relocations_unchanged": false,
+      "live_existing_publics_and_relocations_unchanged": false,
+      "reviewed_frame_corrections": [
+        {
+          "segment": "S02A_TEXT",
+          "offset": 1510,
+          "target": "_g_3DD2",
+          "old_frame_kind": "segment",
+          "old_frame": "_DATA",
+          "frame_kind": "group",
+          "frame": "DGROUP",
+          "source_line": 792,
+          "bound_source_line": 794
+        },
+        {
+          "segment": "S02A_TEXT",
+          "offset": 1756,
+          "target": "_g_3DEA",
+          "old_frame_kind": "segment",
+          "old_frame": "_DATA",
+          "frame_kind": "group",
+          "frame": "DGROUP",
+          "source_line": 900,
+          "bound_source_line": 902
+        }
+      ],
       "storage_bytes_unchanged": true,
       "reviewed_debug_contributions": {},
       "added_exports": [
@@ -1590,15 +3678,302 @@
       },
       "object": {
         "path": "build\\source-only-dos\\objects\\U008.OBJ",
-        "sha256": "32abfa2cff93bac085f21ebf8a24c63bf3bc3687c3ec559d6286e3ad6348f206",
+        "sha256": "9dbece61e69233c4d8a483da3ee91d184cdee124feb9fda4e7723985caa784c9",
         "size": 8252
       },
       "status": "PASS",
       "segment_extents_unchanged": true,
       "live_segment_extents_unchanged": true,
-      "existing_publics_and_relocations_unchanged": true,
-      "live_existing_publics_and_relocations_unchanged": true,
-      "reviewed_frame_corrections": [],
+      "existing_publics_and_relocations_unchanged": false,
+      "live_existing_publics_and_relocations_unchanged": false,
+      "reviewed_frame_corrections": [
+        {
+          "segment": "S03A_TEXT",
+          "offset": 2504,
+          "target": "_g_3DD2",
+          "old_frame_kind": "segment",
+          "old_frame": "_DATA",
+          "frame_kind": "group",
+          "frame": "DGROUP",
+          "source_line": 1105,
+          "bound_source_line": 1107
+        },
+        {
+          "segment": "S03A_TEXT",
+          "offset": 2778,
+          "target": "_g_3DB0",
+          "old_frame_kind": "segment",
+          "old_frame": "_DATA",
+          "frame_kind": "group",
+          "frame": "DGROUP",
+          "source_line": 1220,
+          "bound_source_line": 1222
+        },
+        {
+          "segment": "S03A_TEXT",
+          "offset": 2789,
+          "target": "_g_3DEF",
+          "old_frame_kind": "segment",
+          "old_frame": "_DATA",
+          "frame_kind": "group",
+          "frame": "DGROUP",
+          "source_line": 1224,
+          "bound_source_line": 1226
+        },
+        {
+          "segment": "S03A_TEXT",
+          "offset": 2796,
+          "target": "_g_3DEF",
+          "old_frame_kind": "segment",
+          "old_frame": "_DATA",
+          "frame_kind": "group",
+          "frame": "DGROUP",
+          "source_line": 1226,
+          "bound_source_line": 1228
+        },
+        {
+          "segment": "S03A_TEXT",
+          "offset": 2802,
+          "target": "_g_3DEF",
+          "old_frame_kind": "segment",
+          "old_frame": "_DATA",
+          "frame_kind": "group",
+          "frame": "DGROUP",
+          "source_line": 1231,
+          "bound_source_line": 1233
+        },
+        {
+          "segment": "S03A_TEXT",
+          "offset": 2811,
+          "target": "_g_3DEC",
+          "old_frame_kind": "segment",
+          "old_frame": "_DATA",
+          "frame_kind": "group",
+          "frame": "DGROUP",
+          "source_line": 1234,
+          "bound_source_line": 1236
+        },
+        {
+          "segment": "S03A_TEXT",
+          "offset": 2838,
+          "target": "_g_3DED",
+          "old_frame_kind": "segment",
+          "old_frame": "_DATA",
+          "frame_kind": "group",
+          "frame": "DGROUP",
+          "source_line": 1248,
+          "bound_source_line": 1250
+        },
+        {
+          "segment": "S03A_TEXT",
+          "offset": 2876,
+          "target": "_g_3DEA",
+          "old_frame_kind": "segment",
+          "old_frame": "_DATA",
+          "frame_kind": "group",
+          "frame": "DGROUP",
+          "source_line": 1270,
+          "bound_source_line": 1272
+        },
+        {
+          "segment": "S03A_TEXT",
+          "offset": 2882,
+          "target": "_g_3DEF",
+          "old_frame_kind": "segment",
+          "old_frame": "_DATA",
+          "frame_kind": "group",
+          "frame": "DGROUP",
+          "source_line": 1275,
+          "bound_source_line": 1277
+        },
+        {
+          "segment": "S03A_TEXT",
+          "offset": 2891,
+          "target": "_g_3DEC",
+          "old_frame_kind": "segment",
+          "old_frame": "_DATA",
+          "frame_kind": "group",
+          "frame": "DGROUP",
+          "source_line": 1278,
+          "bound_source_line": 1280
+        },
+        {
+          "segment": "S03A_TEXT",
+          "offset": 2916,
+          "target": "_g_3DED",
+          "old_frame_kind": "segment",
+          "old_frame": "_DATA",
+          "frame_kind": "group",
+          "frame": "DGROUP",
+          "source_line": 1290,
+          "bound_source_line": 1292
+        },
+        {
+          "segment": "S03A_TEXT",
+          "offset": 2949,
+          "target": "_g_3DEA",
+          "old_frame_kind": "segment",
+          "old_frame": "_DATA",
+          "frame_kind": "group",
+          "frame": "DGROUP",
+          "source_line": 1308,
+          "bound_source_line": 1310
+        },
+        {
+          "segment": "S03A_TEXT",
+          "offset": 2965,
+          "target": "_g_3DF2",
+          "old_frame_kind": "segment",
+          "old_frame": "_DATA",
+          "frame_kind": "group",
+          "frame": "DGROUP",
+          "source_line": 1319,
+          "bound_source_line": 1321
+        },
+        {
+          "segment": "S03A_TEXT",
+          "offset": 3525,
+          "target": "_g_3DB0",
+          "old_frame_kind": "segment",
+          "old_frame": "_DATA",
+          "frame_kind": "group",
+          "frame": "DGROUP",
+          "source_line": 1563,
+          "bound_source_line": 1565
+        },
+        {
+          "segment": "S03A_TEXT",
+          "offset": 3536,
+          "target": "_g_3DEF",
+          "old_frame_kind": "segment",
+          "old_frame": "_DATA",
+          "frame_kind": "group",
+          "frame": "DGROUP",
+          "source_line": 1567,
+          "bound_source_line": 1569
+        },
+        {
+          "segment": "S03A_TEXT",
+          "offset": 3545,
+          "target": "_g_3DEF",
+          "old_frame_kind": "segment",
+          "old_frame": "_DATA",
+          "frame_kind": "group",
+          "frame": "DGROUP",
+          "source_line": 1569,
+          "bound_source_line": 1571
+        },
+        {
+          "segment": "S03A_TEXT",
+          "offset": 3663,
+          "target": "_g_3DEF",
+          "old_frame_kind": "segment",
+          "old_frame": "_DATA",
+          "frame_kind": "group",
+          "frame": "DGROUP",
+          "source_line": 1621,
+          "bound_source_line": 1623
+        },
+        {
+          "segment": "S03A_TEXT",
+          "offset": 3675,
+          "target": "_g_3DEC",
+          "old_frame_kind": "segment",
+          "old_frame": "_DATA",
+          "frame_kind": "group",
+          "frame": "DGROUP",
+          "source_line": 1625,
+          "bound_source_line": 1627
+        },
+        {
+          "segment": "S03A_TEXT",
+          "offset": 3705,
+          "target": "_g_3DED",
+          "old_frame_kind": "segment",
+          "old_frame": "_DATA",
+          "frame_kind": "group",
+          "frame": "DGROUP",
+          "source_line": 1640,
+          "bound_source_line": 1642
+        },
+        {
+          "segment": "S03A_TEXT",
+          "offset": 3945,
+          "target": "_g_3DF2",
+          "old_frame_kind": "segment",
+          "old_frame": "_DATA",
+          "frame_kind": "group",
+          "frame": "DGROUP",
+          "source_line": 1753,
+          "bound_source_line": 1755
+        },
+        {
+          "segment": "S03A_TEXT",
+          "offset": 3993,
+          "target": "_g_3DEF",
+          "old_frame_kind": "segment",
+          "old_frame": "_DATA",
+          "frame_kind": "group",
+          "frame": "DGROUP",
+          "source_line": 1775,
+          "bound_source_line": 1777
+        },
+        {
+          "segment": "S03A_TEXT",
+          "offset": 4000,
+          "target": "_g_3DEC",
+          "old_frame_kind": "segment",
+          "old_frame": "_DATA",
+          "frame_kind": "group",
+          "frame": "DGROUP",
+          "source_line": 1777,
+          "bound_source_line": 1779
+        },
+        {
+          "segment": "S03A_TEXT",
+          "offset": 4030,
+          "target": "_g_3DED",
+          "old_frame_kind": "segment",
+          "old_frame": "_DATA",
+          "frame_kind": "group",
+          "frame": "DGROUP",
+          "source_line": 1792,
+          "bound_source_line": 1794
+        },
+        {
+          "segment": "S03A_TEXT",
+          "offset": 4084,
+          "target": "_g_3DEC",
+          "old_frame_kind": "segment",
+          "old_frame": "_DATA",
+          "frame_kind": "group",
+          "frame": "DGROUP",
+          "source_line": 1822,
+          "bound_source_line": 1824
+        },
+        {
+          "segment": "S03A_TEXT",
+          "offset": 4118,
+          "target": "_g_3DED",
+          "old_frame_kind": "segment",
+          "old_frame": "_DATA",
+          "frame_kind": "group",
+          "frame": "DGROUP",
+          "source_line": 1837,
+          "bound_source_line": 1839
+        },
+        {
+          "segment": "S03A_TEXT",
+          "offset": 4170,
+          "target": "_g_3DEA",
+          "old_frame_kind": "segment",
+          "old_frame": "_DATA",
+          "frame_kind": "group",
+          "frame": "DGROUP",
+          "source_line": 1860,
+          "bound_source_line": 1862
+        }
+      ],
       "storage_bytes_unchanged": true,
       "reviewed_debug_contributions": {},
       "added_exports": [],
@@ -1643,8 +4018,8 @@
       },
       "object": {
         "path": "build\\source-only-dos\\objects\\U016.OBJ",
-        "sha256": "1d7e248a33b86ae6e7ffc8b2676404488b81dad49410ef266fa361c771ef2436",
-        "size": 18548
+        "sha256": "1817feeddd6ebb64412c85843d527e31bad76a591daaaa1ecb4996e2dca6848f",
+        "size": 18628
       },
       "status": "PASS",
       "segment_extents_unchanged": true,
@@ -1715,6 +4090,140 @@
             3848
           ],
           "source_extent_anchor": "int far word lvalues and persistent {2,1,&symbol} SaveRec address view; exact-base aliases share this one owner"
+        },
+        {
+          "name": "_fd_50F6_06AA",
+          "source_name": "fd_50F6_06AA",
+          "kind": "far",
+          "type_index": 129,
+          "count": 2,
+          "element_size": 1,
+          "length": 2,
+          "historical_address": [
+            20726,
+            1706
+          ],
+          "source_extent_anchor": "complete int far word views, InitSimVars scalar assignment, and persistent {2,1,&symbol} SaveRec byte view",
+          "registered_exact_base_views": [
+            "fd_50F6_06AA"
+          ],
+          "SaveRec_source_line": 1162,
+          "InitSimVars_source_line": 184
+        },
+        {
+          "name": "_fd_50F6_073A",
+          "source_name": "fd_50F6_073A",
+          "kind": "far",
+          "type_index": 129,
+          "count": 2,
+          "element_size": 1,
+          "length": 2,
+          "historical_address": [
+            20726,
+            1850
+          ],
+          "source_extent_anchor": "complete int far word views, InitSimVars scalar assignment, and persistent {2,1,&symbol} SaveRec byte view",
+          "registered_exact_base_views": [
+            "fd_50F6_073A"
+          ],
+          "SaveRec_source_line": 1163,
+          "InitSimVars_source_line": 183
+        },
+        {
+          "name": "_fd_50F6_07C8",
+          "source_name": "fd_50F6_07C8",
+          "kind": "far",
+          "type_index": 129,
+          "count": 2,
+          "element_size": 1,
+          "length": 2,
+          "historical_address": [
+            20726,
+            1992
+          ],
+          "source_extent_anchor": "complete int far word views, InitSimVars scalar assignment, and persistent {2,1,&symbol} SaveRec byte view",
+          "registered_exact_base_views": [
+            "fd_50F6_07C8"
+          ],
+          "SaveRec_source_line": 1127,
+          "InitSimVars_source_line": 186
+        },
+        {
+          "name": "_fd_50F6_0850",
+          "source_name": "fd_50F6_0850",
+          "kind": "far",
+          "type_index": 129,
+          "count": 2,
+          "element_size": 1,
+          "length": 2,
+          "historical_address": [
+            20726,
+            2128
+          ],
+          "source_extent_anchor": "complete int far word views, InitSimVars scalar assignment, and persistent {2,1,&symbol} SaveRec byte view",
+          "registered_exact_base_views": [
+            "fd_50F6_0850"
+          ],
+          "SaveRec_source_line": 1128,
+          "InitSimVars_source_line": 185
+        },
+        {
+          "name": "_fd_50F6_0FBA",
+          "source_name": "fd_50F6_0FBA",
+          "kind": "far",
+          "type_index": 129,
+          "count": 2,
+          "element_size": 1,
+          "length": 2,
+          "historical_address": [
+            20726,
+            4026
+          ],
+          "source_extent_anchor": "complete int far word views, InitSimVars scalar assignment, and persistent {2,1,&symbol} SaveRec byte view",
+          "registered_exact_base_views": [
+            "fd_50F6_0FBA"
+          ],
+          "SaveRec_source_line": 1114,
+          "InitSimVars_source_line": 180
+        },
+        {
+          "name": "_fd_50F6_0FFE",
+          "source_name": "fd_50F6_0FFE",
+          "kind": "far",
+          "type_index": 129,
+          "count": 2,
+          "element_size": 1,
+          "length": 2,
+          "historical_address": [
+            20726,
+            4094
+          ],
+          "source_extent_anchor": "complete int far word views, InitSimVars scalar assignment, and persistent {2,1,&symbol} SaveRec byte view",
+          "registered_exact_base_views": [
+            "fd_50F6_0FFE"
+          ],
+          "SaveRec_source_line": 1007,
+          "InitSimVars_source_line": 181
+        },
+        {
+          "name": "_CurExpTool",
+          "source_name": "CurExpTool",
+          "kind": "far",
+          "type_index": 129,
+          "count": 2,
+          "element_size": 1,
+          "length": 2,
+          "historical_address": [
+            20726,
+            4172
+          ],
+          "source_extent_anchor": "complete int far word views, InitSimVars scalar assignment, and persistent {2,1,&symbol} SaveRec byte view",
+          "registered_exact_base_views": [
+            "CurExpTool",
+            "fd_50F6_104C"
+          ],
+          "SaveRec_source_line": 1033,
+          "InitSimVars_source_line": 182
         }
       ],
       "symbolic_operand_checks": [],
@@ -1857,6 +4366,761 @@
         "path": "build\\source-only-dos\\binding-controls\\U030.OBJ",
         "sha256": "7204d9910795660593c3c021465c8ca8d51ea0c57ed287bc6982d2ff0f1910ba",
         "size": 5194
+      }
+    },
+    {
+      "module": "S22:39C7",
+      "source": {
+        "path": "src\\S22\\m39C7.c",
+        "sha256": "e9add4ebd445bd943f24a65764be2a79581f2fc26c349741fdfe8efae3b7030d",
+        "size": 31328
+      },
+      "control_source": {
+        "path": "build\\source-only-dos\\binding-controls\\U032.c",
+        "sha256": "e9add4ebd445bd943f24a65764be2a79581f2fc26c349741fdfe8efae3b7030d",
+        "size": 31328
+      },
+      "object": {
+        "path": "build\\source-only-dos\\objects\\U032.OBJ",
+        "sha256": "2ab58e8f3c3f3a3813a44fc124d56119f967e14b9f9a8795cd2d9c9b25184a4f",
+        "size": 23358
+      },
+      "status": "PASS",
+      "segment_extents_unchanged": true,
+      "live_segment_extents_unchanged": true,
+      "existing_publics_and_relocations_unchanged": true,
+      "live_existing_publics_and_relocations_unchanged": true,
+      "reviewed_frame_corrections": [],
+      "storage_bytes_unchanged": true,
+      "reviewed_debug_contributions": {},
+      "added_exports": [],
+      "added_communals": [
+        {
+          "name": "_fd_50F6_0A8E",
+          "kind": "far",
+          "count": 2,
+          "element_size": 1,
+          "length": 2,
+          "type_index": 129,
+          "omf_record_form": "COMDEF data type 0x61 far COMM2B; count=2, element_size=1, length=2",
+          "source_definition_form": "natural C tentative int far definition without initializer",
+          "historical_address": [
+            20726,
+            2702
+          ],
+          "registered_address_source": "layout/symbols.json exact registered source name",
+          "source_extent_anchor": "src/S22/m39C7.c:59 `extern int far fd_50F6_0A8E;`; src/S22/m39C7.c:311 `fd_50F6_0A8E = 0;`; SaveRec src/S09/m35F5.c:1081 is size=2,count=1.",
+          "initialization": "natural tentative int far definition with no initializer; zero fill confirmed by pinned MSC startup and both RTLink fixtures",
+          "views": {
+            "behavioral_int_far_declarations": [
+              {
+                "file": "src/root/m0CDB.c",
+                "line": 54,
+                "source": "extern int far fd_50F6_0A8E;"
+              },
+              {
+                "file": "src/S22/m39C7.c",
+                "line": 59,
+                "source": "extern int far fd_50F6_0A8E;"
+              },
+              {
+                "file": "src/S25/m3BA4.c",
+                "line": 11,
+                "source": "extern int far fd_50F6_0A8E;"
+              }
+            ],
+            "S09_byte_array_address_only_declarations": [
+              {
+                "file": "src/S09/m35F5.c",
+                "line": 780,
+                "source": "extern unsigned char far fd_50F6_0A8E[];"
+              }
+            ],
+            "direct_reads": [
+              {
+                "file": "src/root/m0CDB.c",
+                "line": 124,
+                "source": "if (fd_50F6_0A8E && d > 2) {",
+                "access_modes": [
+                  "read"
+                ]
+              },
+              {
+                "file": "src/S25/m3BA4.c",
+                "line": 99,
+                "source": "if (fd_50F6_0A8E >= 3) {",
+                "access_modes": [
+                  "read"
+                ]
+              },
+              {
+                "file": "src/S25/m3BA4.c",
+                "line": 119,
+                "source": "if (fd_50F6_0A8E == 1 && fd_50F6_0AF8 == fd_50F6_048C) {",
+                "access_modes": [
+                  "read"
+                ]
+              },
+              {
+                "file": "src/S25/m3BA4.c",
+                "line": 214,
+                "source": "&& fd_50F6_0AE8 == fd_50F6_048A && fd_50F6_0A8E == 0)",
+                "access_modes": [
+                  "read"
+                ]
+              },
+              {
+                "file": "src/S25/m3BA4.c",
+                "line": 221,
+                "source": "} else if (fd_50F6_0A8E == 3) {",
+                "access_modes": [
+                  "read"
+                ]
+              },
+              {
+                "file": "src/S25/m3BA4.c",
+                "line": 225,
+                "source": "} else if (fd_50F6_0A8E == 4) {",
+                "access_modes": [
+                  "read"
+                ]
+              },
+              {
+                "file": "src/S25/m3BA4.c",
+                "line": 473,
+                "source": "if (fd_50F6_0A8E == 3 && fd_50F6_048C == fd_50F6_08DA && fd_50F6_07C0 == index)",
+                "access_modes": [
+                  "read"
+                ]
+              },
+              {
+                "file": "src/S25/m3BA4.c",
+                "line": 625,
+                "source": "flag = (fd_50F6_0A8E == 2) ? 1 : 0;",
+                "access_modes": [
+                  "read"
+                ]
+              },
+              {
+                "file": "src/S25/m3BA4.c",
+                "line": 665,
+                "source": "flag = (fd_50F6_0A8E == 2) ? 1 : 0;",
+                "access_modes": [
+                  "read"
+                ]
+              }
+            ],
+            "direct_writes": [
+              {
+                "file": "src/S22/m39C7.c",
+                "line": 122,
+                "source": "fd_50F6_0A8E = ((fd_50F6_04E2 ^ life) & 0x80) ? 3 : 4;",
+                "access_modes": [
+                  "write"
+                ]
+              },
+              {
+                "file": "src/S22/m39C7.c",
+                "line": 140,
+                "source": "fd_50F6_0A8E = shift;",
+                "access_modes": [
+                  "write"
+                ]
+              },
+              {
+                "file": "src/S22/m39C7.c",
+                "line": 148,
+                "source": "fd_50F6_0A8E = 2;",
+                "access_modes": [
+                  "write"
+                ]
+              },
+              {
+                "file": "src/S22/m39C7.c",
+                "line": 150,
+                "source": "fd_50F6_0A8E = 1;",
+                "access_modes": [
+                  "write"
+                ]
+              },
+              {
+                "file": "src/S22/m39C7.c",
+                "line": 152,
+                "source": "fd_50F6_0A8E = 2;",
+                "access_modes": [
+                  "write"
+                ]
+              },
+              {
+                "file": "src/S22/m39C7.c",
+                "line": 154,
+                "source": "fd_50F6_0A8E = 0;",
+                "access_modes": [
+                  "write"
+                ]
+              },
+              {
+                "file": "src/S22/m39C7.c",
+                "line": 259,
+                "source": "fd_50F6_0A8E = mode;",
+                "access_modes": [
+                  "write"
+                ]
+              },
+              {
+                "file": "src/S22/m39C7.c",
+                "line": 286,
+                "source": "fd_50F6_0A8E = mode;",
+                "access_modes": [
+                  "write"
+                ]
+              },
+              {
+                "file": "src/S22/m39C7.c",
+                "line": 311,
+                "source": "fd_50F6_0A8E = 0;",
+                "access_modes": [
+                  "write"
+                ]
+              }
+            ],
+            "pointer_escapes": [
+              {
+                "file": "src/S09/m35F5.c",
+                "line": 1081,
+                "source": "{ 2, 1, (void far *)&fd_50F6_0A8E },",
+                "access_modes": [
+                  "address_escape"
+                ]
+              }
+            ],
+            "SaveRec": {
+              "file": "src/S09/m35F5.c",
+              "line": 1081,
+              "table_index_1based": 188,
+              "record": "{ 2, 1, (void far *)&fd_50F6_0A8E },",
+              "size": 2,
+              "count": 1,
+              "serialized_bytes": 2
+            },
+            "registered_exact_base_names": [
+              "fd_50F6_0A8E"
+            ],
+            "registered_extent_entries_two_byte_scan": [
+              {
+                "name": "fd_50F6_0A8E",
+                "address": "50F6:0A8E",
+                "role": "exact_base",
+                "registry_row": {
+                  "seg": 20726,
+                  "off": 2702,
+                  "grounding": "S25:3BA4 DoAntMoveY:0029 cmp word es:[0A8E],3 (CONST seg word 8944 = 50F6)"
+                }
+              }
+            ],
+            "registered_interior_names": []
+          },
+          "registered_interior_names": [],
+          "source_read_limitation": null
+        },
+        {
+          "name": "_fd_50F6_0AA0",
+          "kind": "far",
+          "count": 2,
+          "element_size": 1,
+          "length": 2,
+          "type_index": 129,
+          "omf_record_form": "COMDEF data type 0x61 far COMM2B; count=2, element_size=1, length=2",
+          "source_definition_form": "natural C tentative int far definition without initializer",
+          "historical_address": [
+            20726,
+            2720
+          ],
+          "registered_address_source": "layout/symbols.json exact registered source name",
+          "source_extent_anchor": "src/S22/m39C7.c:65 `extern int far fd_50F6_0AA0;`; src/S22/m39C7.c:312 `fd_50F6_0AA0 = 0;`; SaveRec src/S09/m35F5.c:1101 is size=2,count=1.",
+          "initialization": "natural tentative int far definition with no initializer; zero fill confirmed by pinned MSC startup and both RTLink fixtures",
+          "views": {
+            "behavioral_int_far_declarations": [
+              {
+                "file": "src/root/m0E2E.c",
+                "line": 290,
+                "source": "extern int far fd_50F6_0AA0;"
+              },
+              {
+                "file": "src/root/m15F8.c",
+                "line": 47,
+                "source": "extern int far fd_50F6_0AA0;"
+              },
+              {
+                "file": "src/S22/m39C7.c",
+                "line": 65,
+                "source": "extern int far fd_50F6_0AA0;"
+              },
+              {
+                "file": "src/S25/m3BA4.c",
+                "line": 10,
+                "source": "extern int far fd_50F6_0AA0;"
+              }
+            ],
+            "S09_byte_array_address_only_declarations": [
+              {
+                "file": "src/S09/m35F5.c",
+                "line": 796,
+                "source": "extern unsigned char far fd_50F6_0AA0[];"
+              }
+            ],
+            "direct_reads": [
+              {
+                "file": "src/root/m0E2E.c",
+                "line": 311,
+                "source": "if (fd_50F6_0224 > fd_50F6_0204 && fd_50F6_0AA0 == 0)",
+                "access_modes": [
+                  "read"
+                ]
+              },
+              {
+                "file": "src/root/m0E2E.c",
+                "line": 315,
+                "source": "if (fd_50F6_0224 > fd_50F6_0204 && fd_50F6_0AA0 == 0)",
+                "access_modes": [
+                  "read"
+                ]
+              },
+              {
+                "file": "src/root/m15F8.c",
+                "line": 113,
+                "source": "if (fd_50F6_047E == 0 || (fd_50F6_0AA0 != 0 && fd_50F6_105E < 10)) {",
+                "access_modes": [
+                  "read"
+                ]
+              },
+              {
+                "file": "src/S22/m39C7.c",
+                "line": 942,
+                "source": "if (fd_50F6_0AA0)",
+                "access_modes": [
+                  "read"
+                ]
+              },
+              {
+                "file": "src/S25/m3BA4.c",
+                "line": 96,
+                "source": "if (fd_50F6_0AA0 == 0)",
+                "access_modes": [
+                  "read"
+                ]
+              }
+            ],
+            "direct_writes": [
+              {
+                "file": "src/S22/m39C7.c",
+                "line": 131,
+                "source": "fd_50F6_0AA0 = 1;",
+                "access_modes": [
+                  "write"
+                ]
+              },
+              {
+                "file": "src/S22/m39C7.c",
+                "line": 157,
+                "source": "fd_50F6_0AA0 = 1;",
+                "access_modes": [
+                  "write"
+                ]
+              },
+              {
+                "file": "src/S22/m39C7.c",
+                "line": 312,
+                "source": "fd_50F6_0AA0 = 0;",
+                "access_modes": [
+                  "write"
+                ]
+              }
+            ],
+            "pointer_escapes": [
+              {
+                "file": "src/S09/m35F5.c",
+                "line": 1101,
+                "source": "{ 2, 1, (void far *)&fd_50F6_0AA0 },",
+                "access_modes": [
+                  "address_escape"
+                ]
+              }
+            ],
+            "SaveRec": {
+              "file": "src/S09/m35F5.c",
+              "line": 1101,
+              "table_index_1based": 208,
+              "record": "{ 2, 1, (void far *)&fd_50F6_0AA0 },",
+              "size": 2,
+              "count": 1,
+              "serialized_bytes": 2
+            },
+            "registered_exact_base_names": [
+              "fd_50F6_0AA0"
+            ],
+            "registered_extent_entries_two_byte_scan": [
+              {
+                "name": "fd_50F6_0AA0",
+                "address": "50F6:0AA0",
+                "role": "exact_base",
+                "registry_row": {
+                  "seg": 20726,
+                  "off": 2720,
+                  "grounding": "S25:3BA4 DoAntMoveY:0015 cmp word es:[0AA0],0 (CONST seg word 8942 = 50F6)"
+                }
+              }
+            ],
+            "registered_interior_names": []
+          },
+          "registered_interior_names": [],
+          "source_read_limitation": null
+        },
+        {
+          "name": "_fd_50F6_0B1E",
+          "kind": "far",
+          "count": 2,
+          "element_size": 1,
+          "length": 2,
+          "type_index": 129,
+          "omf_record_form": "COMDEF data type 0x61 far COMM2B; count=2, element_size=1, length=2",
+          "source_definition_form": "natural C tentative int far definition without initializer",
+          "historical_address": [
+            20726,
+            2846
+          ],
+          "registered_address_source": "layout/symbols.json exact registered source name",
+          "source_extent_anchor": "src/S22/m39C7.c:296 `extern int far fd_50F6_0B1E;`; src/S22/m39C7.c:313 `fd_50F6_0B1E = 0;`; SaveRec src/S09/m35F5.c:1087 is size=2,count=1.",
+          "initialization": "natural tentative int far definition with no initializer; zero fill confirmed by pinned MSC startup and both RTLink fixtures",
+          "views": {
+            "behavioral_int_far_declarations": [
+              {
+                "file": "src/root/m0E2E.c",
+                "line": 292,
+                "source": "extern int far fd_50F6_0B1E;"
+              },
+              {
+                "file": "src/root/m10F7.c",
+                "line": 52,
+                "source": "extern int far fd_50F6_0B1E;"
+              },
+              {
+                "file": "src/S22/m39C7.c",
+                "line": 296,
+                "source": "extern int far fd_50F6_0B1E;"
+              }
+            ],
+            "S09_byte_array_address_only_declarations": [
+              {
+                "file": "src/S09/m35F5.c",
+                "line": 785,
+                "source": "extern unsigned char far fd_50F6_0B1E[];"
+              }
+            ],
+            "direct_reads": [
+              {
+                "file": "src/root/m0E2E.c",
+                "line": 325,
+                "source": "if (MeLocY + MeLocX != fd_50F6_1074 && fd_50F6_0B1E == 0 && f_00F8_02BE() > fd_50F6_0204)",
+                "access_modes": [
+                  "read"
+                ]
+              },
+              {
+                "file": "src/root/m0E2E.c",
+                "line": 391,
+                "source": "if (MeLocY + MeLocX != fd_50F6_1074 && fd_50F6_0B1E == 0 && f_00F8_02BE() > fd_50F6_0204)",
+                "access_modes": [
+                  "read"
+                ]
+              },
+              {
+                "file": "src/root/m0E2E.c",
+                "line": 395,
+                "source": "if (MeLocY + MeLocX != fd_50F6_1074 && fd_50F6_104E != 0 && fd_50F6_0B1E == 0)",
+                "access_modes": [
+                  "read"
+                ]
+              },
+              {
+                "file": "src/root/m10F7.c",
+                "line": 1139,
+                "source": "fd_50F6_0C38 = fd_50F6_0B1E + 1;",
+                "access_modes": [
+                  "read"
+                ]
+              }
+            ],
+            "direct_writes": [
+              {
+                "file": "src/root/m10F7.c",
+                "line": 1138,
+                "source": "fd_50F6_0B1E = GetDis(x, y, fd_3D57_02AC[0], fd_3D57_02AC[1]);",
+                "access_modes": [
+                  "write"
+                ]
+              },
+              {
+                "file": "src/S22/m39C7.c",
+                "line": 313,
+                "source": "fd_50F6_0B1E = 0;",
+                "access_modes": [
+                  "write"
+                ]
+              }
+            ],
+            "pointer_escapes": [
+              {
+                "file": "src/S09/m35F5.c",
+                "line": 1087,
+                "source": "{ 2, 1, (void far *)&fd_50F6_0B1E },",
+                "access_modes": [
+                  "address_escape"
+                ]
+              }
+            ],
+            "SaveRec": {
+              "file": "src/S09/m35F5.c",
+              "line": 1087,
+              "table_index_1based": 194,
+              "record": "{ 2, 1, (void far *)&fd_50F6_0B1E },",
+              "size": 2,
+              "count": 1,
+              "serialized_bytes": 2
+            },
+            "registered_exact_base_names": [
+              "fd_50F6_0B1E"
+            ],
+            "registered_extent_entries_two_byte_scan": [
+              {
+                "name": "fd_50F6_0B1E",
+                "address": "50F6:0B1E",
+                "role": "exact_base",
+                "registry_row": {
+                  "seg": 20726,
+                  "off": 2846,
+                  "grounding": "f_10F7_20BF (root:10F7): mov es,[CONST word = 50F6]; es:[..0B1E] far data reference"
+                }
+              }
+            ],
+            "registered_interior_names": []
+          },
+          "registered_interior_names": [],
+          "source_read_limitation": null
+        },
+        {
+          "name": "_fd_50F6_0C38",
+          "kind": "far",
+          "count": 2,
+          "element_size": 1,
+          "length": 2,
+          "type_index": 129,
+          "omf_record_form": "COMDEF data type 0x61 far COMM2B; count=2, element_size=1, length=2",
+          "source_definition_form": "natural C tentative int far definition without initializer",
+          "historical_address": [
+            20726,
+            3128
+          ],
+          "registered_address_source": "layout/symbols.json exact registered source name",
+          "source_extent_anchor": "src/S22/m39C7.c:297 `extern int far fd_50F6_0C38;`; src/S22/m39C7.c:314 `fd_50F6_0C38 = 0;`; SaveRec src/S09/m35F5.c:1104 is size=2,count=1.",
+          "initialization": "natural tentative int far definition with no initializer; zero fill confirmed by pinned MSC startup and both RTLink fixtures",
+          "views": {
+            "behavioral_int_far_declarations": [
+              {
+                "file": "src/root/m10F7.c",
+                "line": 53,
+                "source": "extern int far fd_50F6_0C38;"
+              },
+              {
+                "file": "src/S22/m39C7.c",
+                "line": 297,
+                "source": "extern int far fd_50F6_0C38;"
+              }
+            ],
+            "S09_byte_array_address_only_declarations": [
+              {
+                "file": "src/S09/m35F5.c",
+                "line": 798,
+                "source": "extern unsigned char far fd_50F6_0C38[];"
+              }
+            ],
+            "direct_reads": [],
+            "direct_writes": [
+              {
+                "file": "src/root/m10F7.c",
+                "line": 1139,
+                "source": "fd_50F6_0C38 = fd_50F6_0B1E + 1;",
+                "access_modes": [
+                  "write"
+                ]
+              },
+              {
+                "file": "src/S22/m39C7.c",
+                "line": 314,
+                "source": "fd_50F6_0C38 = 0;",
+                "access_modes": [
+                  "write"
+                ]
+              }
+            ],
+            "pointer_escapes": [
+              {
+                "file": "src/S09/m35F5.c",
+                "line": 1104,
+                "source": "{ 2, 1, (void far *)&fd_50F6_0C38 },",
+                "access_modes": [
+                  "address_escape"
+                ]
+              }
+            ],
+            "SaveRec": {
+              "file": "src/S09/m35F5.c",
+              "line": 1104,
+              "table_index_1based": 211,
+              "record": "{ 2, 1, (void far *)&fd_50F6_0C38 },",
+              "size": 2,
+              "count": 1,
+              "serialized_bytes": 2
+            },
+            "registered_exact_base_names": [
+              "fd_50F6_0C38"
+            ],
+            "registered_extent_entries_two_byte_scan": [
+              {
+                "name": "fd_50F6_0C38",
+                "address": "50F6:0C38",
+                "role": "exact_base",
+                "registry_row": {
+                  "seg": 20726,
+                  "off": 3128,
+                  "grounding": "f_10F7_20BF (root:10F7): mov es,[CONST word = 50F6]; es:[..0C38] far data reference"
+                }
+              }
+            ],
+            "registered_interior_names": []
+          },
+          "registered_interior_names": [],
+          "source_read_limitation": "no direct canonical C reads found; only ResetYellowVars reset and root:10F7 derived write found"
+        },
+        {
+          "name": "_fd_50F6_0C3E",
+          "kind": "far",
+          "count": 2,
+          "element_size": 1,
+          "length": 2,
+          "type_index": 129,
+          "omf_record_form": "COMDEF data type 0x61 far COMM2B; count=2, element_size=1, length=2",
+          "source_definition_form": "natural C tentative int far definition without initializer",
+          "historical_address": [
+            20726,
+            3134
+          ],
+          "registered_address_source": "layout/symbols.json exact registered source name",
+          "source_extent_anchor": "src/S22/m39C7.c:298 `extern int far fd_50F6_0C3E;`; src/S22/m39C7.c:315 `fd_50F6_0C3E = 0;`; SaveRec src/S09/m35F5.c:1107 is size=2,count=1.",
+          "initialization": "natural tentative int far definition with no initializer; zero fill confirmed by pinned MSC startup and both RTLink fixtures",
+          "views": {
+            "behavioral_int_far_declarations": [
+              {
+                "file": "src/S22/m39C7.c",
+                "line": 298,
+                "source": "extern int far fd_50F6_0C3E;"
+              },
+              {
+                "file": "src/S25/m3BA4.c",
+                "line": 39,
+                "source": "extern int far fd_50F6_0C3E;"
+              }
+            ],
+            "S09_byte_array_address_only_declarations": [
+              {
+                "file": "src/S09/m35F5.c",
+                "line": 801,
+                "source": "extern unsigned char far fd_50F6_0C3E[];"
+              }
+            ],
+            "direct_reads": [
+              {
+                "file": "src/S25/m3BA4.c",
+                "line": 145,
+                "source": "fd_50F6_0C3E++;",
+                "access_modes": [
+                  "read",
+                  "write"
+                ]
+              },
+              {
+                "file": "src/S25/m3BA4.c",
+                "line": 161,
+                "source": "if (fd_50F6_0C3E & 1) {",
+                "access_modes": [
+                  "read"
+                ]
+              }
+            ],
+            "direct_writes": [
+              {
+                "file": "src/S22/m39C7.c",
+                "line": 315,
+                "source": "fd_50F6_0C3E = 0;",
+                "access_modes": [
+                  "write"
+                ]
+              },
+              {
+                "file": "src/S25/m3BA4.c",
+                "line": 145,
+                "source": "fd_50F6_0C3E++;",
+                "access_modes": [
+                  "read",
+                  "write"
+                ]
+              }
+            ],
+            "pointer_escapes": [
+              {
+                "file": "src/S09/m35F5.c",
+                "line": 1107,
+                "source": "{ 2, 1, (void far *)&fd_50F6_0C3E },",
+                "access_modes": [
+                  "address_escape"
+                ]
+              }
+            ],
+            "SaveRec": {
+              "file": "src/S09/m35F5.c",
+              "line": 1107,
+              "table_index_1based": 214,
+              "record": "{ 2, 1, (void far *)&fd_50F6_0C3E },",
+              "size": 2,
+              "count": 1,
+              "serialized_bytes": 2
+            },
+            "registered_exact_base_names": [
+              "fd_50F6_0C3E"
+            ],
+            "registered_extent_entries_two_byte_scan": [
+              {
+                "name": "fd_50F6_0C3E",
+                "address": "50F6:0C3E",
+                "role": "exact_base",
+                "registry_row": {
+                  "seg": 20726,
+                  "off": 3134,
+                  "grounding": "S25:3BA4 DoAntMoveY:0309 inc word es:[0C3E] (CONST seg word 896C = 50F6)"
+                }
+              }
+            ],
+            "registered_interior_names": []
+          },
+          "registered_interior_names": [],
+          "source_read_limitation": null
+        }
+      ],
+      "symbolic_operand_checks": [],
+      "canonical_control_object": {
+        "path": "build\\source-only-dos\\binding-controls\\U032.OBJ",
+        "sha256": "16eff3306b8815d2df30e55e7790cef19aa3502e355fb4b5649b3c1ee4b791d1",
+        "size": 23302
       }
     },
     {
@@ -2378,8 +5642,8 @@
   "tool_inputs": [
     {
       "path": "tools\\source_only_dos.py",
-      "sha256": "2dd8e37450e9fa8fa36fe6fe43613fdc388b9d2a541fb3eb3e1054a6fa372910",
-      "size": 46238
+      "sha256": "f17b3d0f0522f285b99c4e39a56babbb7ef808f15507645273b15e89fde532ac",
+      "size": 47941
     },
     {
       "path": "tools\\compiler.py",
@@ -2398,28 +5662,28 @@
     },
     {
       "path": "tools\\dos_source_bindings.py",
-      "sha256": "20cb3feea4c40278add0ce973929c100ce9b9d5ef60e8da21d71a82dcb147bbd",
-      "size": 26347
+      "sha256": "fb994fb321d6c343ae99849fdf898ce53791d03060016b37eb235a13a8da4ee8",
+      "size": 33476
     }
   ],
   "validation_logs": [
     {
-      "path": "build/source-only-dos-run-v8.log",
-      "sha256": "9ec9b0b56cf26f79420b652ae1a37742dd956b75f88d963616574ae5eaee67ea",
-      "size": 3773
+      "path": "build/source-only-dos-run-v9.log",
+      "sha256": "c07c4b46fb6f2c2d4a5ee0b35e3ea15f8381d5b25d13c022f7630fc85adea5eb",
+      "size": 3802
     },
     {
-      "path": "build/source-only-dos-tests-v8.log",
-      "sha256": "47dd497d9b3be06cd48d96e496aa13a8d394360dbb4a1a7f4accf602737e33b4",
-      "size": 256
+      "path": "build/source-only-dos-tests-v9.log",
+      "sha256": "7313f598d2bef2e235a012854b3ede6c92ae3d84165adcc4e8b82aff872cc290",
+      "size": 595
     },
     {
-      "path": "build/source-only-dos-validation-v8.log",
+      "path": "build/source-only-dos-validation-v9.log",
       "sha256": "786ea0446e31ee04f020b58675893cfa939f724dddae99d859a181b6602b4ad5",
       "size": 4736
     }
   ],
   "historical_validation": "PASS",
-  "source_only_tests": "21 targeted tests included in 335 repository tests PASS (2 skips)",
+  "source_only_tests": "23 targeted tests included in 337 repository tests PASS (2 skips)",
   "claim_limit": "Compile and symbolic binding proofs only; no complete link, runtime equivalence or human acceptance. Full inventories are reproducible build output."
 }

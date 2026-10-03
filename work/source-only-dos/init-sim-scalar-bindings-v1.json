@@ -1,0 +1,430 @@
+{
+  "schema": "simant-dos-init-sim-scalar-binding-extension-v1",
+  "category": "REVIEWED_SOURCE_STORAGE_BINDING",
+  "extends_packet": {
+    "path": "work/source-only-dos/world-scalar-bindings-v1.json",
+    "sha256": "db09c608aa67e7f1a1f18fd78eda91360629cf07460904f8e0cd47119dd36b19",
+    "size": 6814
+  },
+  "bindings": [
+    {
+      "module": "S08:35F5",
+      "source": "src/S08/m35F5.c",
+      "source_sha256": "ef6eea405f6497cb5a6648ef258cc1afeab308f995ded573794465d831e3501f",
+      "apply_after_base_packet": true,
+      "edits": [
+        {
+          "before": "extern int far fd_50F6_06AA;",
+          "after": "int far fd_50F6_06AA;",
+          "count": 1
+        },
+        {
+          "before": "extern int far fd_50F6_073A;",
+          "after": "int far fd_50F6_073A;",
+          "count": 1
+        },
+        {
+          "before": "extern int far fd_50F6_07C8;",
+          "after": "int far fd_50F6_07C8;",
+          "count": 1
+        },
+        {
+          "before": "extern int far fd_50F6_0850;",
+          "after": "int far fd_50F6_0850;",
+          "count": 1
+        },
+        {
+          "before": "extern int far fd_50F6_0FBA;",
+          "after": "int far fd_50F6_0FBA;",
+          "count": 1
+        },
+        {
+          "before": "extern int far fd_50F6_0FFE;",
+          "after": "int far fd_50F6_0FFE;",
+          "count": 1
+        },
+        {
+          "before": "extern int far CurExpTool;",
+          "after": "int far CurExpTool;",
+          "count": 1
+        }
+      ],
+      "communals": [
+        {
+          "name": "_fd_50F6_06AA",
+          "source_name": "fd_50F6_06AA",
+          "kind": "far",
+          "type_index": 129,
+          "count": 2,
+          "element_size": 1,
+          "length": 2,
+          "historical_address": [
+            20726,
+            1706
+          ],
+          "source_extent_anchor": "complete int far word views, InitSimVars scalar assignment, and persistent {2,1,&symbol} SaveRec byte view",
+          "registered_exact_base_views": [
+            "fd_50F6_06AA"
+          ],
+          "SaveRec_source_line": 1162,
+          "InitSimVars_source_line": 184
+        },
+        {
+          "name": "_fd_50F6_073A",
+          "source_name": "fd_50F6_073A",
+          "kind": "far",
+          "type_index": 129,
+          "count": 2,
+          "element_size": 1,
+          "length": 2,
+          "historical_address": [
+            20726,
+            1850
+          ],
+          "source_extent_anchor": "complete int far word views, InitSimVars scalar assignment, and persistent {2,1,&symbol} SaveRec byte view",
+          "registered_exact_base_views": [
+            "fd_50F6_073A"
+          ],
+          "SaveRec_source_line": 1163,
+          "InitSimVars_source_line": 183
+        },
+        {
+          "name": "_fd_50F6_07C8",
+          "source_name": "fd_50F6_07C8",
+          "kind": "far",
+          "type_index": 129,
+          "count": 2,
+          "element_size": 1,
+          "length": 2,
+          "historical_address": [
+            20726,
+            1992
+          ],
+          "source_extent_anchor": "complete int far word views, InitSimVars scalar assignment, and persistent {2,1,&symbol} SaveRec byte view",
+          "registered_exact_base_views": [
+            "fd_50F6_07C8"
+          ],
+          "SaveRec_source_line": 1127,
+          "InitSimVars_source_line": 186
+        },
+        {
+          "name": "_fd_50F6_0850",
+          "source_name": "fd_50F6_0850",
+          "kind": "far",
+          "type_index": 129,
+          "count": 2,
+          "element_size": 1,
+          "length": 2,
+          "historical_address": [
+            20726,
+            2128
+          ],
+          "source_extent_anchor": "complete int far word views, InitSimVars scalar assignment, and persistent {2,1,&symbol} SaveRec byte view",
+          "registered_exact_base_views": [
+            "fd_50F6_0850"
+          ],
+          "SaveRec_source_line": 1128,
+          "InitSimVars_source_line": 185
+        },
+        {
+          "name": "_fd_50F6_0FBA",
+          "source_name": "fd_50F6_0FBA",
+          "kind": "far",
+          "type_index": 129,
+          "count": 2,
+          "element_size": 1,
+          "length": 2,
+          "historical_address": [
+            20726,
+            4026
+          ],
+          "source_extent_anchor": "complete int far word views, InitSimVars scalar assignment, and persistent {2,1,&symbol} SaveRec byte view",
+          "registered_exact_base_views": [
+            "fd_50F6_0FBA"
+          ],
+          "SaveRec_source_line": 1114,
+          "InitSimVars_source_line": 180
+        },
+        {
+          "name": "_fd_50F6_0FFE",
+          "source_name": "fd_50F6_0FFE",
+          "kind": "far",
+          "type_index": 129,
+          "count": 2,
+          "element_size": 1,
+          "length": 2,
+          "historical_address": [
+            20726,
+            4094
+          ],
+          "source_extent_anchor": "complete int far word views, InitSimVars scalar assignment, and persistent {2,1,&symbol} SaveRec byte view",
+          "registered_exact_base_views": [
+            "fd_50F6_0FFE"
+          ],
+          "SaveRec_source_line": 1007,
+          "InitSimVars_source_line": 181
+        },
+        {
+          "name": "_CurExpTool",
+          "source_name": "CurExpTool",
+          "kind": "far",
+          "type_index": 129,
+          "count": 2,
+          "element_size": 1,
+          "length": 2,
+          "historical_address": [
+            20726,
+            4172
+          ],
+          "source_extent_anchor": "complete int far word views, InitSimVars scalar assignment, and persistent {2,1,&symbol} SaveRec byte view",
+          "registered_exact_base_views": [
+            "CurExpTool",
+            "fd_50F6_104C"
+          ],
+          "SaveRec_source_line": 1033,
+          "InitSimVars_source_line": 182
+        }
+      ],
+      "registered_aliases": [
+        {
+          "alias": "_fd_50F6_104C",
+          "owner": "_CurExpTool",
+          "same_segment": true,
+          "same_offset": true,
+          "offset_bytes": 0,
+          "source_view": "int far in S04/S05/S12 and root m0250; SaveRec BYTE placeholder in S09"
+        }
+      ],
+      "source_inputs": [
+        {
+          "path": "src/S04/m35F5.c",
+          "sha256": "65db48855f97c32600ff7527999a463019ba2884117f0c921b35e46d5d37d406",
+          "size": 11387
+        },
+        {
+          "path": "src/S05/m35F5.c",
+          "sha256": "b1ab82dff86dc635ad10974bf70d31dc73d8755ba3fd1605f4f0573ef71f9e87",
+          "size": 8438
+        },
+        {
+          "path": "src/S05/m3663.c",
+          "sha256": "cbf0c66bfc857ecb0a592f6ba5760e47055230b6e33d6115254506a5f09f912c",
+          "size": 4421
+        },
+        {
+          "path": "src/S06/m35F5.c",
+          "sha256": "db35a96a492a6d36f6580222c17daca015aa9373b457b8758c751d3a70844a86",
+          "size": 43385
+        },
+        {
+          "path": "src/S07/m35F5.c",
+          "sha256": "8fdb123e14dbdc0d7895d9a0c581a8c2cf399962de1141be0f09db4f904a1e4d",
+          "size": 5028
+        },
+        {
+          "path": "src/S08/m35F5.c",
+          "sha256": "ef6eea405f6497cb5a6648ef258cc1afeab308f995ded573794465d831e3501f",
+          "size": 22166
+        },
+        {
+          "path": "src/S09/m35F5.c",
+          "sha256": "028e1575990d5d45233f9102a0d2a060810349bd2f1297182c4af435ecbe912a",
+          "size": 42150
+        },
+        {
+          "path": "src/S12/m384C.c",
+          "sha256": "584bf940832e3f8e975afdf85ed398fc82b6470e4a5c3ec46c1b4fcd15240002",
+          "size": 19819
+        },
+        {
+          "path": "src/S13/m384C.c",
+          "sha256": "fb6785e93f5c2ea1110f64b5eb200d7f4e346263c43ac521c0434629d9f5839a",
+          "size": 24768
+        },
+        {
+          "path": "src/S15/m384C.c",
+          "sha256": "01b51eecedcd28e2213819572c846a9754039f4a527e6da5e56e57783398bdd5",
+          "size": 8116
+        },
+        {
+          "path": "src/S22/m3BBD.c",
+          "sha256": "22ed7dc5dbf4687dc3e971e6845bf28ce1934f771c81ae551dd30bc782753da2",
+          "size": 18576
+        },
+        {
+          "path": "src/root/m015B.c",
+          "sha256": "67f5c32deda5a49ab56243d50fba33647db7897c850706378fe2a8488277fa8f",
+          "size": 16241
+        },
+        {
+          "path": "src/root/m0250.c",
+          "sha256": "bb8a325c543151e09cb173d2194844877805a9e1058d3b24362ff5a7cbd9f61b",
+          "size": 65517
+        },
+        {
+          "path": "src/root/m075B.c",
+          "sha256": "2826d3b81cf0bcbf67b8453c255ec29bfeb3e381f67028eecb3aa1ef1cf83f56",
+          "size": 3481
+        },
+        {
+          "path": "src/root/m0894.c",
+          "sha256": "57b40ad0a9ee74c501fbcb0d521b86b8158f206f44f4867e960bcb800b5e7484",
+          "size": 32636
+        },
+        {
+          "path": "src/root/m0E2E.c",
+          "sha256": "9325b3426ef87771150912ce8f7cfaacc13380634505313417978b80974d10ed",
+          "size": 11858
+        },
+        {
+          "path": "src/root/m10F7.c",
+          "sha256": "a4cc271d57a4a80dd255953554a886026297b0560453c4b2c7b302b5878fff88",
+          "size": 35707
+        }
+      ],
+      "required_contract": "build/workers/dos_init_sim_scalar_owners/init-sim-scalar-contract-candidate-v1.json",
+      "whole_module_transition_checks_pass": true,
+      "scalar_storage": {
+        "families": [
+          "init_sim"
+        ]
+      },
+      "exports": [],
+      "relocations": []
+    }
+  ],
+  "runtime_contract_key": "init_sim_storage_contract",
+  "runtime_contract": {
+    "path": "work/source-only-dos/init-sim-scalar-contract-v1.json",
+    "sha256": "07b04c6de16fcc23b11a9cf15e82042a43de603dcc9792c4c72bdd08df1e857e",
+    "size": 128679
+  },
+  "review_sources": [
+    {
+      "path": "layout/manifest.json",
+      "sha256": "025a0a9255d910cae4b122ab5a3f3fb40888bb456d7fe42158db7c9e622fcf50",
+      "size": 628980
+    },
+    {
+      "path": "layout/symbols.json",
+      "sha256": "0f5dd5b0a211945a97782cfccdb9bb31b0dfd07fcde5df4d4f9486b487eb0125",
+      "size": 800809
+    },
+    {
+      "path": "layout/toolchain.json",
+      "sha256": "c0bb71cd8b1f4a1a1f91299bd3b6148aa67b7a1d12c3c3946a229272593eb274",
+      "size": 39241
+    },
+    {
+      "path": "src/S04/m35F5.c",
+      "sha256": "65db48855f97c32600ff7527999a463019ba2884117f0c921b35e46d5d37d406",
+      "size": 11387
+    },
+    {
+      "path": "src/S05/m35F5.c",
+      "sha256": "b1ab82dff86dc635ad10974bf70d31dc73d8755ba3fd1605f4f0573ef71f9e87",
+      "size": 8438
+    },
+    {
+      "path": "src/S05/m3663.c",
+      "sha256": "cbf0c66bfc857ecb0a592f6ba5760e47055230b6e33d6115254506a5f09f912c",
+      "size": 4421
+    },
+    {
+      "path": "src/S06/m35F5.c",
+      "sha256": "db35a96a492a6d36f6580222c17daca015aa9373b457b8758c751d3a70844a86",
+      "size": 43385
+    },
+    {
+      "path": "src/S07/m35F5.c",
+      "sha256": "8fdb123e14dbdc0d7895d9a0c581a8c2cf399962de1141be0f09db4f904a1e4d",
+      "size": 5028
+    },
+    {
+      "path": "src/S08/m35F5.c",
+      "sha256": "ef6eea405f6497cb5a6648ef258cc1afeab308f995ded573794465d831e3501f",
+      "size": 22166
+    },
+    {
+      "path": "src/S09/m35F5.c",
+      "sha256": "028e1575990d5d45233f9102a0d2a060810349bd2f1297182c4af435ecbe912a",
+      "size": 42150
+    },
+    {
+      "path": "src/S12/m384C.c",
+      "sha256": "584bf940832e3f8e975afdf85ed398fc82b6470e4a5c3ec46c1b4fcd15240002",
+      "size": 19819
+    },
+    {
+      "path": "src/S13/m384C.c",
+      "sha256": "fb6785e93f5c2ea1110f64b5eb200d7f4e346263c43ac521c0434629d9f5839a",
+      "size": 24768
+    },
+    {
+      "path": "src/S15/m384C.c",
+      "sha256": "01b51eecedcd28e2213819572c846a9754039f4a527e6da5e56e57783398bdd5",
+      "size": 8116
+    },
+    {
+      "path": "src/S22/m3BBD.c",
+      "sha256": "22ed7dc5dbf4687dc3e971e6845bf28ce1934f771c81ae551dd30bc782753da2",
+      "size": 18576
+    },
+    {
+      "path": "src/root/m015B.c",
+      "sha256": "67f5c32deda5a49ab56243d50fba33647db7897c850706378fe2a8488277fa8f",
+      "size": 16241
+    },
+    {
+      "path": "src/root/m0250.c",
+      "sha256": "bb8a325c543151e09cb173d2194844877805a9e1058d3b24362ff5a7cbd9f61b",
+      "size": 65517
+    },
+    {
+      "path": "src/root/m075B.c",
+      "sha256": "2826d3b81cf0bcbf67b8453c255ec29bfeb3e381f67028eecb3aa1ef1cf83f56",
+      "size": 3481
+    },
+    {
+      "path": "src/root/m0894.c",
+      "sha256": "57b40ad0a9ee74c501fbcb0d521b86b8158f206f44f4867e960bcb800b5e7484",
+      "size": 32636
+    },
+    {
+      "path": "src/root/m0E2E.c",
+      "sha256": "9325b3426ef87771150912ce8f7cfaacc13380634505313417978b80974d10ed",
+      "size": 11858
+    },
+    {
+      "path": "src/root/m10F7.c",
+      "sha256": "a4cc271d57a4a80dd255953554a886026297b0560453c4b2c7b302b5878fff88",
+      "size": 35707
+    },
+    {
+      "path": "work/source-only-dos/farbss-mechanical-worklist-v2.json",
+      "sha256": "fc2b353933acaaf1e346a8bfb2f12576230b90590e00ee541288b902cf60d6ad",
+      "size": 19290
+    },
+    {
+      "path": "work/source-only-dos/food-cycle-contract-v1.json",
+      "sha256": "3507a29105c355cf8485b8c14e80f5cd8c62975bd9ecb57920b5638ad74bac8e",
+      "size": 57039
+    },
+    {
+      "path": "work/source-only-dos/health-pair-contract-v1.json",
+      "sha256": "7ec9c91aade31942eb1d3f0b61554bf050cb3fe8a51ad24d95c075b2edb17047",
+      "size": 42785
+    },
+    {
+      "path": "work/source-only-dos/init-sim-scalar-probe.py",
+      "sha256": "1ed35bf1c1d998595a551da2171435abbacb35cb669cf5ecae0a7fde3e41fade",
+      "size": 57734
+    },
+    {
+      "path": "work/source-only-dos/world-scalar-bindings-v1.json",
+      "sha256": "db09c608aa67e7f1a1f18fd78eda91360629cf07460904f8e0cd47119dd36b19",
+      "size": 6814
+    }
+  ],
+  "claim_limit": "Functional source ownership only; original COMDEF-producing TU/order/placement not claimed."
+}

@@ -179,7 +179,9 @@ def prepare(out, report):
     for filename in ('source-bindings-v1.json', 'c-data-bindings-v1.json', 'history-storage-bindings-v1.json',
                      'queue-storage-bindings-v1.json', 'assembly-frame-bindings-v1.json',
                      'world-scalar-bindings-v1.json', 'population-owner-bindings-v1.json',
-                     'lion-owner-bindings-v1.json', 'callback-table-bindings-v1.json'):
+                     'lion-owner-bindings-v1.json', 'callback-table-bindings-v1.json',
+                     'init-sim-scalar-bindings-v1.json', 'yellow-scalar-bindings-v1.json',
+                     'driver-ss-frame-bindings-v1.json', 'near-state-bindings-v1.json'):
         binding_raw, binding_pin = pin(ROOT / 'work/source-only-dos' / filename)
         binding_packet = json.loads(binding_raw)
         if binding_packet['category'] not in ('REVIEWED_SOURCE_LINK_BINDING', 'REVIEWED_SOURCE_STORAGE_BINDING'):
@@ -208,7 +210,10 @@ def prepare(out, report):
             if binding['module'] in bindings:
                 previous = bindings[binding['module']]
                 base = binding_packet.get('extends_packet')
-                if not base or not binding.get('reframes'):
+                scalar_extension = (binding['module'] == 'S08:35F5'
+                                    and binding.get('scalar_storage') == {'families': ['init_sim']}
+                                    and previous.get('scalar_storage') == {'families': ['health', 'food_cycle']})
+                if not base or not (binding.get('reframes') or scalar_extension):
                     raise ValueError('duplicate DOS binding module')
                 base_raw, base_pin = pin(ROOT / base['path'], base['sha256'])
                 if previous not in json.loads(base_raw)['bindings'] or any(
@@ -216,9 +221,12 @@ def prepare(out, report):
                     raise ValueError('DOS frame extension has a different source/control binding')
                 report['inputs'].append(base_pin)
                 combined = dict(previous)
-                for key in ('edits', 'exports', 'relocations', 'reframes'):
+                for key in ('edits', 'exports', 'relocations', 'reframes', 'communals'):
                     combined[key] = previous.get(key, []) + binding.get(key, [])
-                combined['frame_review'] = binding['frame_review']
+                if scalar_extension:
+                    combined['scalar_storage'] = {'families': previous['scalar_storage']['families'] + ['init_sim']}
+                if binding.get('reframes'):
+                    combined['frame_review'] = binding['frame_review']
                 binding = combined
             bindings[binding['module']] = binding
         report['reviewed_data_aliases'] += binding_packet.get('aliases', [])
@@ -326,9 +334,10 @@ def prepare(out, report):
         source = provider['source']
         raw, source_pin = pin(ROOT / source['path'], source['sha256'])
         text = raw.decode('ascii')
-        dos_source_bindings.review_provider_source(text, provider)
+        dos_source_bindings.review_provider_source(text, provider, symbols)
         basename = provider['basename']
-        if (basename != 'CBOWNER' or provider['profile'] != 'msc600ax'
+        if (basename != dos_source_bindings.PROVIDER_SPECS[provider['module']][0]
+                or provider['profile'] != 'msc600ax'
                 or provider['flags'] != ['/AL', '/Os', '/Gs']):
             raise ValueError('unreviewed storage provider compiler context')
         path = source_dir / (basename + '.c')
@@ -465,12 +474,20 @@ def audit_layout(report):
                   'A changed layout needs reviewed symbolic references or proven placement.',
         'scope_limit': 'This is one confirmed family, not a completed scan of every numeric operand.'}, {
         'id': 'driver-callback-table-owner',
-        'status': 'SOURCE_BOUND' if any(r.get('storage_provider') for r in report['translation_units']) else 'UNRESOLVED',
+        'status': 'SOURCE_BOUND' if any(r['module'] == 'source-owned:driver-callback-table' for r in report['translation_units']) else 'UNRESOLVED',
         'owner': '_driver_callback_table', 'slots': 25, 'slot_bytes': 4,
         'reason': 'Source reset/copy and four driver tables prove 25 far-pointer slots. One typed near communal owns the slots; 23 registered names are bounded aliases. The existing symbolic _g_3DF8 pointer is verified under shifted DGROUP on both linkers. Historical COMDEF TU/order and wider driver frame integration remain separate.'}, {
         'id': 'remaining-assembly-address-audit', 'status': 'UNRESOLVED',
         'reason': 'The broader audit of fixed numeric operands and segment/group frames is pending. '
-                  'Reviewed bindings close only the listed buffer and S00 callback operands.'}, {
+                  'The ten local SS operands, fill-pattern numeric operands and g_5A9C pointer frame remain separate gates.'}, {
+        'id': 'driver-external-ss-frames',
+        'status': 'SOURCE_BOUND' if all(any(r['module'] == module and len(
+            (r.get('source_binding') or {}).get('reframes', [])) == count
+            for r in report['translation_units']) for module, count in
+            [('S00:31AD', 64), ('S01:3126', 36), ('S02:3126', 2), ('S03:3126', 26)]) else 'UNRESOLVED',
+        'operand_count': 128,
+        'reason': 'CRT and interrupt CFG provenance establishes SS=DGROUP. Only the signed external OFFSET16 sites receive scoped DGROUP frames; whole-object checks preserve all bytes and ordered unrelated fixups.',
+        'scope_limit': 'This excludes local-symbol operands, numeric pattern addresses and g_5A9C.'}, {
         'id': 'input-event-queue-fixed-pointer', 'status': 'SOURCE_BOUND' if queue_bound else 'UNRESOLVED',
         'source': 'src/root/m1FD2.c', 'initializer': '(int)0x91b0',
         'storage_view': 'g_5FF2 + 12 (_g_5FFE)',
@@ -611,8 +628,10 @@ def link_units(out, report, profile):
     dos_source_bindings.require_history_startup_contract(report, profile, tool)
     dos_source_bindings.require_scalar_startup_contracts(report, profile, tool)
     dos_source_bindings.require_callback_storage_contract(report, profile, tool)
+    dos_source_bindings.require_near_storage_contracts(report, profile, tool)
     dos_source_bindings.require_queue_startup_contract(report, profile, tool)
     dos_source_bindings.require_assembly_frame_contract(report, profile, tool)
+    dos_source_bindings.require_driver_ss_frame_contract(report, profile, tool)
     contract = report.get('linker_alias_contract', {})
     if any(row.get('offset') for row in report.get('symbolic_aliases', [])):
         cases = [r for r in contract.get('cases', []) if r['linker'] == profile]

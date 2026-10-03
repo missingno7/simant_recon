@@ -1,0 +1,2171 @@
+{
+  "schema": "simant-driver-ss-frame-binding-extension-v1",
+  "status": "ROOT_REVIEWED",
+  "application_order": [
+    "work/source-only-dos/source-bindings-v1.json",
+    "this packet's per-module scoped ASSUME edits"
+  ],
+  "extends_packet": {
+    "path": "work/source-only-dos/source-bindings-v1.json",
+    "sha256": "c7fed5e7e2caac6cad41e63de2eb0ba3cfcbba112fa2877d9799c562b8f52bc4",
+    "size": 11388
+  },
+  "contract": {
+    "path": "build\\workers\\dos_assembly_frame_inventory\\driver-ss-frame-contract-v1.json",
+    "sha256": "d04420472c30476deaf4b5a030d3570d228fe85a52cb1ab189214786563efcab",
+    "size": 138301
+  },
+  "claim": "For each listed existing external OFFSET16 fixup, add a local ASSUME SS:DGROUP around exactly the source operand and reset to SS:NOTHING after it; preserve all other generated object identities.",
+  "bindings": [
+    {
+      "module": "S00:31AD",
+      "source": "src/S00/m31AD.asm",
+      "source_sha256": "5d2ad69ff4affb4be4242e82187065cc5e0b3502cc0cc3e00ad3802ccee2656e",
+      "extends_module_binding": "S00:31AD",
+      "apply_after": "work/source-only-dos/source-bindings-v1.json binding for this module",
+      "edits": [
+        {
+          "before": "\tadd di, word ptr ss:_g_3DB6",
+          "after": "\tassume ss:DGROUP\n\tadd di, word ptr ss:_g_3DB6\n\tassume ss:nothing",
+          "count": 36
+        },
+        {
+          "before": "\tmov al, byte ptr ss:_g_3DB6",
+          "after": "\tassume ss:DGROUP\n\tmov al, byte ptr ss:_g_3DB6\n\tassume ss:nothing",
+          "count": 1
+        },
+        {
+          "before": "\tadd si, word ptr ss:_g_3DB6",
+          "after": "\tassume ss:DGROUP\n\tadd si, word ptr ss:_g_3DB6\n\tassume ss:nothing",
+          "count": 1
+        },
+        {
+          "before": "\tinc byte ptr ss:_g_3DD4",
+          "after": "\tassume ss:DGROUP\n\tinc byte ptr ss:_g_3DD4\n\tassume ss:nothing",
+          "count": 1
+        },
+        {
+          "before": "\tmov ds, word ptr ss:_g_3DB0",
+          "after": "\tassume ss:DGROUP\n\tmov ds, word ptr ss:_g_3DB0\n\tassume ss:nothing",
+          "count": 1
+        },
+        {
+          "before": "\tcmp byte ptr ss:_g_3DD2, 0",
+          "after": "\tassume ss:DGROUP\n\tcmp byte ptr ss:_g_3DD2, 0\n\tassume ss:nothing",
+          "count": 1
+        },
+        {
+          "before": "\tmov ch, byte ptr ss:_g_3DD2",
+          "after": "\tassume ss:DGROUP\n\tmov ch, byte ptr ss:_g_3DD2\n\tassume ss:nothing",
+          "count": 2
+        },
+        {
+          "before": "\tsub bl, byte ptr ss:_g_3DEF",
+          "after": "\tassume ss:DGROUP\n\tsub bl, byte ptr ss:_g_3DEF\n\tassume ss:nothing",
+          "count": 1
+        },
+        {
+          "before": "\tadd di, word ptr ss:_g_3DEF",
+          "after": "\tassume ss:DGROUP\n\tadd di, word ptr ss:_g_3DEF\n\tassume ss:nothing",
+          "count": 1
+        },
+        {
+          "before": "\tadd si, word ptr ss:_g_3DEF",
+          "after": "\tassume ss:DGROUP\n\tadd si, word ptr ss:_g_3DEF\n\tassume ss:nothing",
+          "count": 3
+        },
+        {
+          "before": "\tmov bh, byte ptr ss:_g_3DEC",
+          "after": "\tassume ss:DGROUP\n\tmov bh, byte ptr ss:_g_3DEC\n\tassume ss:nothing",
+          "count": 3
+        },
+        {
+          "before": "\tmov bh, byte ptr ss:_g_3DED",
+          "after": "\tassume ss:DGROUP\n\tmov bh, byte ptr ss:_g_3DED\n\tassume ss:nothing",
+          "count": 4
+        },
+        {
+          "before": "\tadd si, word ptr ss:_g_3DEA",
+          "after": "\tassume ss:DGROUP\n\tadd si, word ptr ss:_g_3DEA\n\tassume ss:nothing",
+          "count": 3
+        },
+        {
+          "before": "\tmov cl, byte ptr ss:_g_3DEE",
+          "after": "\tassume ss:DGROUP\n\tmov cl, byte ptr ss:_g_3DEE\n\tassume ss:nothing",
+          "count": 1
+        },
+        {
+          "before": "\tmov ch, byte ptr ss:_g_3DF2",
+          "after": "\tassume ss:DGROUP\n\tmov ch, byte ptr ss:_g_3DF2\n\tassume ss:nothing",
+          "count": 1
+        },
+        {
+          "before": "\tmov ah, byte ptr ss:_g_3DEC",
+          "after": "\tassume ss:DGROUP\n\tmov ah, byte ptr ss:_g_3DEC\n\tassume ss:nothing",
+          "count": 1
+        },
+        {
+          "before": "\tmov cx, word ptr ss:_g_3DB6",
+          "after": "\tassume ss:DGROUP\n\tmov cx, word ptr ss:_g_3DB6\n\tassume ss:nothing",
+          "count": 2
+        },
+        {
+          "before": "\tdec byte ptr ss:_g_3DD4",
+          "after": "\tassume ss:DGROUP\n\tdec byte ptr ss:_g_3DD4\n\tassume ss:nothing",
+          "count": 1
+        }
+      ],
+      "exports": [],
+      "relocations": [],
+      "reframes": [
+        {
+          "segment": "S00B_TEXT",
+          "offset": 703,
+          "target": "_g_3DB6",
+          "old_frame_kind": "segment",
+          "old_frame": "_DATA",
+          "frame_kind": "group",
+          "frame": "DGROUP",
+          "source_line": 433,
+          "bound_source_line": 433
+        },
+        {
+          "segment": "S00B_TEXT",
+          "offset": 750,
+          "target": "_g_3DB6",
+          "old_frame_kind": "segment",
+          "old_frame": "_DATA",
+          "frame_kind": "group",
+          "frame": "DGROUP",
+          "source_line": 458,
+          "bound_source_line": 458
+        },
+        {
+          "segment": "S00B_TEXT",
+          "offset": 872,
+          "target": "_g_3DB6",
+          "old_frame_kind": "segment",
+          "old_frame": "_DATA",
+          "frame_kind": "group",
+          "frame": "DGROUP",
+          "source_line": 520,
+          "bound_source_line": 520
+        },
+        {
+          "segment": "S00B_TEXT",
+          "offset": 1519,
+          "target": "_g_3DB6",
+          "old_frame_kind": "segment",
+          "old_frame": "_DATA",
+          "frame_kind": "group",
+          "frame": "DGROUP",
+          "source_line": 838,
+          "bound_source_line": 838
+        },
+        {
+          "segment": "S00B_TEXT",
+          "offset": 1712,
+          "target": "_g_3DD4",
+          "old_frame_kind": "segment",
+          "old_frame": "_DATA",
+          "frame_kind": "group",
+          "frame": "DGROUP",
+          "source_line": 945,
+          "bound_source_line": 945
+        },
+        {
+          "segment": "S00B_TEXT",
+          "offset": 1727,
+          "target": "_g_3DB0",
+          "old_frame_kind": "segment",
+          "old_frame": "_DATA",
+          "frame_kind": "group",
+          "frame": "DGROUP",
+          "source_line": 950,
+          "bound_source_line": 950
+        },
+        {
+          "segment": "S00B_TEXT",
+          "offset": 1908,
+          "target": "_g_3DB6",
+          "old_frame_kind": "segment",
+          "old_frame": "_DATA",
+          "frame_kind": "group",
+          "frame": "DGROUP",
+          "source_line": 1037,
+          "bound_source_line": 1037
+        },
+        {
+          "segment": "S00B_TEXT",
+          "offset": 1917,
+          "target": "_g_3DB6",
+          "old_frame_kind": "segment",
+          "old_frame": "_DATA",
+          "frame_kind": "group",
+          "frame": "DGROUP",
+          "source_line": 1042,
+          "bound_source_line": 1042
+        },
+        {
+          "segment": "S00B_TEXT",
+          "offset": 1926,
+          "target": "_g_3DB6",
+          "old_frame_kind": "segment",
+          "old_frame": "_DATA",
+          "frame_kind": "group",
+          "frame": "DGROUP",
+          "source_line": 1047,
+          "bound_source_line": 1047
+        },
+        {
+          "segment": "S00B_TEXT",
+          "offset": 1935,
+          "target": "_g_3DB6",
+          "old_frame_kind": "segment",
+          "old_frame": "_DATA",
+          "frame_kind": "group",
+          "frame": "DGROUP",
+          "source_line": 1052,
+          "bound_source_line": 1052
+        },
+        {
+          "segment": "S00B_TEXT",
+          "offset": 1944,
+          "target": "_g_3DB6",
+          "old_frame_kind": "segment",
+          "old_frame": "_DATA",
+          "frame_kind": "group",
+          "frame": "DGROUP",
+          "source_line": 1057,
+          "bound_source_line": 1057
+        },
+        {
+          "segment": "S00B_TEXT",
+          "offset": 1953,
+          "target": "_g_3DB6",
+          "old_frame_kind": "segment",
+          "old_frame": "_DATA",
+          "frame_kind": "group",
+          "frame": "DGROUP",
+          "source_line": 1062,
+          "bound_source_line": 1062
+        },
+        {
+          "segment": "S00B_TEXT",
+          "offset": 1962,
+          "target": "_g_3DB6",
+          "old_frame_kind": "segment",
+          "old_frame": "_DATA",
+          "frame_kind": "group",
+          "frame": "DGROUP",
+          "source_line": 1067,
+          "bound_source_line": 1067
+        },
+        {
+          "segment": "S00B_TEXT",
+          "offset": 1971,
+          "target": "_g_3DB6",
+          "old_frame_kind": "segment",
+          "old_frame": "_DATA",
+          "frame_kind": "group",
+          "frame": "DGROUP",
+          "source_line": 1072,
+          "bound_source_line": 1072
+        },
+        {
+          "segment": "S00B_TEXT",
+          "offset": 1980,
+          "target": "_g_3DB6",
+          "old_frame_kind": "segment",
+          "old_frame": "_DATA",
+          "frame_kind": "group",
+          "frame": "DGROUP",
+          "source_line": 1077,
+          "bound_source_line": 1077
+        },
+        {
+          "segment": "S00B_TEXT",
+          "offset": 1989,
+          "target": "_g_3DB6",
+          "old_frame_kind": "segment",
+          "old_frame": "_DATA",
+          "frame_kind": "group",
+          "frame": "DGROUP",
+          "source_line": 1082,
+          "bound_source_line": 1082
+        },
+        {
+          "segment": "S00B_TEXT",
+          "offset": 1998,
+          "target": "_g_3DB6",
+          "old_frame_kind": "segment",
+          "old_frame": "_DATA",
+          "frame_kind": "group",
+          "frame": "DGROUP",
+          "source_line": 1087,
+          "bound_source_line": 1087
+        },
+        {
+          "segment": "S00B_TEXT",
+          "offset": 2007,
+          "target": "_g_3DB6",
+          "old_frame_kind": "segment",
+          "old_frame": "_DATA",
+          "frame_kind": "group",
+          "frame": "DGROUP",
+          "source_line": 1092,
+          "bound_source_line": 1092
+        },
+        {
+          "segment": "S00B_TEXT",
+          "offset": 2016,
+          "target": "_g_3DB6",
+          "old_frame_kind": "segment",
+          "old_frame": "_DATA",
+          "frame_kind": "group",
+          "frame": "DGROUP",
+          "source_line": 1097,
+          "bound_source_line": 1097
+        },
+        {
+          "segment": "S00B_TEXT",
+          "offset": 2025,
+          "target": "_g_3DB6",
+          "old_frame_kind": "segment",
+          "old_frame": "_DATA",
+          "frame_kind": "group",
+          "frame": "DGROUP",
+          "source_line": 1102,
+          "bound_source_line": 1102
+        },
+        {
+          "segment": "S00B_TEXT",
+          "offset": 2034,
+          "target": "_g_3DB6",
+          "old_frame_kind": "segment",
+          "old_frame": "_DATA",
+          "frame_kind": "group",
+          "frame": "DGROUP",
+          "source_line": 1107,
+          "bound_source_line": 1107
+        },
+        {
+          "segment": "S00B_TEXT",
+          "offset": 3510,
+          "target": "_g_3DB6",
+          "old_frame_kind": "segment",
+          "old_frame": "_DATA",
+          "frame_kind": "group",
+          "frame": "DGROUP",
+          "source_line": 1939,
+          "bound_source_line": 1939
+        },
+        {
+          "segment": "S00B_TEXT",
+          "offset": 3522,
+          "target": "_g_3DB6",
+          "old_frame_kind": "segment",
+          "old_frame": "_DATA",
+          "frame_kind": "group",
+          "frame": "DGROUP",
+          "source_line": 1943,
+          "bound_source_line": 1943
+        },
+        {
+          "segment": "S00B_TEXT",
+          "offset": 3534,
+          "target": "_g_3DB6",
+          "old_frame_kind": "segment",
+          "old_frame": "_DATA",
+          "frame_kind": "group",
+          "frame": "DGROUP",
+          "source_line": 1947,
+          "bound_source_line": 1947
+        },
+        {
+          "segment": "S00B_TEXT",
+          "offset": 3546,
+          "target": "_g_3DB6",
+          "old_frame_kind": "segment",
+          "old_frame": "_DATA",
+          "frame_kind": "group",
+          "frame": "DGROUP",
+          "source_line": 1951,
+          "bound_source_line": 1951
+        },
+        {
+          "segment": "S00B_TEXT",
+          "offset": 3558,
+          "target": "_g_3DB6",
+          "old_frame_kind": "segment",
+          "old_frame": "_DATA",
+          "frame_kind": "group",
+          "frame": "DGROUP",
+          "source_line": 1955,
+          "bound_source_line": 1955
+        },
+        {
+          "segment": "S00B_TEXT",
+          "offset": 3570,
+          "target": "_g_3DB6",
+          "old_frame_kind": "segment",
+          "old_frame": "_DATA",
+          "frame_kind": "group",
+          "frame": "DGROUP",
+          "source_line": 1959,
+          "bound_source_line": 1959
+        },
+        {
+          "segment": "S00B_TEXT",
+          "offset": 3582,
+          "target": "_g_3DB6",
+          "old_frame_kind": "segment",
+          "old_frame": "_DATA",
+          "frame_kind": "group",
+          "frame": "DGROUP",
+          "source_line": 1963,
+          "bound_source_line": 1963
+        },
+        {
+          "segment": "S00B_TEXT",
+          "offset": 3594,
+          "target": "_g_3DB6",
+          "old_frame_kind": "segment",
+          "old_frame": "_DATA",
+          "frame_kind": "group",
+          "frame": "DGROUP",
+          "source_line": 1967,
+          "bound_source_line": 1967
+        },
+        {
+          "segment": "S00B_TEXT",
+          "offset": 3606,
+          "target": "_g_3DB6",
+          "old_frame_kind": "segment",
+          "old_frame": "_DATA",
+          "frame_kind": "group",
+          "frame": "DGROUP",
+          "source_line": 1971,
+          "bound_source_line": 1971
+        },
+        {
+          "segment": "S00B_TEXT",
+          "offset": 3618,
+          "target": "_g_3DB6",
+          "old_frame_kind": "segment",
+          "old_frame": "_DATA",
+          "frame_kind": "group",
+          "frame": "DGROUP",
+          "source_line": 1975,
+          "bound_source_line": 1975
+        },
+        {
+          "segment": "S00B_TEXT",
+          "offset": 3630,
+          "target": "_g_3DB6",
+          "old_frame_kind": "segment",
+          "old_frame": "_DATA",
+          "frame_kind": "group",
+          "frame": "DGROUP",
+          "source_line": 1979,
+          "bound_source_line": 1979
+        },
+        {
+          "segment": "S00B_TEXT",
+          "offset": 3642,
+          "target": "_g_3DB6",
+          "old_frame_kind": "segment",
+          "old_frame": "_DATA",
+          "frame_kind": "group",
+          "frame": "DGROUP",
+          "source_line": 1983,
+          "bound_source_line": 1983
+        },
+        {
+          "segment": "S00B_TEXT",
+          "offset": 3654,
+          "target": "_g_3DB6",
+          "old_frame_kind": "segment",
+          "old_frame": "_DATA",
+          "frame_kind": "group",
+          "frame": "DGROUP",
+          "source_line": 1987,
+          "bound_source_line": 1987
+        },
+        {
+          "segment": "S00B_TEXT",
+          "offset": 3666,
+          "target": "_g_3DB6",
+          "old_frame_kind": "segment",
+          "old_frame": "_DATA",
+          "frame_kind": "group",
+          "frame": "DGROUP",
+          "source_line": 1991,
+          "bound_source_line": 1991
+        },
+        {
+          "segment": "S00B_TEXT",
+          "offset": 3678,
+          "target": "_g_3DB6",
+          "old_frame_kind": "segment",
+          "old_frame": "_DATA",
+          "frame_kind": "group",
+          "frame": "DGROUP",
+          "source_line": 1995,
+          "bound_source_line": 1995
+        },
+        {
+          "segment": "S00B_TEXT",
+          "offset": 3690,
+          "target": "_g_3DB6",
+          "old_frame_kind": "segment",
+          "old_frame": "_DATA",
+          "frame_kind": "group",
+          "frame": "DGROUP",
+          "source_line": 1999,
+          "bound_source_line": 1999
+        },
+        {
+          "segment": "S00B_TEXT",
+          "offset": 3738,
+          "target": "_g_3DB6",
+          "old_frame_kind": "segment",
+          "old_frame": "_DATA",
+          "frame_kind": "group",
+          "frame": "DGROUP",
+          "source_line": 2024,
+          "bound_source_line": 2024
+        },
+        {
+          "segment": "S00B_TEXT",
+          "offset": 3763,
+          "target": "_g_3DD2",
+          "old_frame_kind": "segment",
+          "old_frame": "_DATA",
+          "frame_kind": "group",
+          "frame": "DGROUP",
+          "source_line": 2034,
+          "bound_source_line": 2034
+        },
+        {
+          "segment": "S00B_TEXT",
+          "offset": 3795,
+          "target": "_g_3DB6",
+          "old_frame_kind": "segment",
+          "old_frame": "_DATA",
+          "frame_kind": "group",
+          "frame": "DGROUP",
+          "source_line": 2051,
+          "bound_source_line": 2051
+        },
+        {
+          "segment": "S00B_TEXT",
+          "offset": 3913,
+          "target": "_g_3DB6",
+          "old_frame_kind": "segment",
+          "old_frame": "_DATA",
+          "frame_kind": "group",
+          "frame": "DGROUP",
+          "source_line": 2108,
+          "bound_source_line": 2108
+        },
+        {
+          "segment": "S00B_TEXT",
+          "offset": 3925,
+          "target": "_g_3DD2",
+          "old_frame_kind": "segment",
+          "old_frame": "_DATA",
+          "frame_kind": "group",
+          "frame": "DGROUP",
+          "source_line": 2115,
+          "bound_source_line": 2115
+        },
+        {
+          "segment": "S00B_TEXT",
+          "offset": 4061,
+          "target": "_g_3DEF",
+          "old_frame_kind": "segment",
+          "old_frame": "_DATA",
+          "frame_kind": "group",
+          "frame": "DGROUP",
+          "source_line": 2167,
+          "bound_source_line": 2167
+        },
+        {
+          "segment": "S00B_TEXT",
+          "offset": 4089,
+          "target": "_g_3DEF",
+          "old_frame_kind": "segment",
+          "old_frame": "_DATA",
+          "frame_kind": "group",
+          "frame": "DGROUP",
+          "source_line": 2177,
+          "bound_source_line": 2177
+        },
+        {
+          "segment": "S00B_TEXT",
+          "offset": 4097,
+          "target": "_g_3DEF",
+          "old_frame_kind": "segment",
+          "old_frame": "_DATA",
+          "frame_kind": "group",
+          "frame": "DGROUP",
+          "source_line": 2183,
+          "bound_source_line": 2183
+        },
+        {
+          "segment": "S00B_TEXT",
+          "offset": 4109,
+          "target": "_g_3DEC",
+          "old_frame_kind": "segment",
+          "old_frame": "_DATA",
+          "frame_kind": "group",
+          "frame": "DGROUP",
+          "source_line": 2187,
+          "bound_source_line": 2187
+        },
+        {
+          "segment": "S00B_TEXT",
+          "offset": 4149,
+          "target": "_g_3DED",
+          "old_frame_kind": "segment",
+          "old_frame": "_DATA",
+          "frame_kind": "group",
+          "frame": "DGROUP",
+          "source_line": 2210,
+          "bound_source_line": 2210
+        },
+        {
+          "segment": "S00B_TEXT",
+          "offset": 4190,
+          "target": "_g_3DEA",
+          "old_frame_kind": "segment",
+          "old_frame": "_DATA",
+          "frame_kind": "group",
+          "frame": "DGROUP",
+          "source_line": 2236,
+          "bound_source_line": 2236
+        },
+        {
+          "segment": "S00B_TEXT",
+          "offset": 4196,
+          "target": "_g_3DEF",
+          "old_frame_kind": "segment",
+          "old_frame": "_DATA",
+          "frame_kind": "group",
+          "frame": "DGROUP",
+          "source_line": 2241,
+          "bound_source_line": 2241
+        },
+        {
+          "segment": "S00B_TEXT",
+          "offset": 4208,
+          "target": "_g_3DEC",
+          "old_frame_kind": "segment",
+          "old_frame": "_DATA",
+          "frame_kind": "group",
+          "frame": "DGROUP",
+          "source_line": 2245,
+          "bound_source_line": 2245
+        },
+        {
+          "segment": "S00B_TEXT",
+          "offset": 4245,
+          "target": "_g_3DED",
+          "old_frame_kind": "segment",
+          "old_frame": "_DATA",
+          "frame_kind": "group",
+          "frame": "DGROUP",
+          "source_line": 2265,
+          "bound_source_line": 2265
+        },
+        {
+          "segment": "S00B_TEXT",
+          "offset": 4295,
+          "target": "_g_3DEA",
+          "old_frame_kind": "segment",
+          "old_frame": "_DATA",
+          "frame_kind": "group",
+          "frame": "DGROUP",
+          "source_line": 2293,
+          "bound_source_line": 2293
+        },
+        {
+          "segment": "S00B_TEXT",
+          "offset": 4371,
+          "target": "_g_3DEE",
+          "old_frame_kind": "segment",
+          "old_frame": "_DATA",
+          "frame_kind": "group",
+          "frame": "DGROUP",
+          "source_line": 2325,
+          "bound_source_line": 2325
+        },
+        {
+          "segment": "S00B_TEXT",
+          "offset": 4376,
+          "target": "_g_3DF2",
+          "old_frame_kind": "segment",
+          "old_frame": "_DATA",
+          "frame_kind": "group",
+          "frame": "DGROUP",
+          "source_line": 2326,
+          "bound_source_line": 2326
+        },
+        {
+          "segment": "S00B_TEXT",
+          "offset": 4414,
+          "target": "_g_3DEF",
+          "old_frame_kind": "segment",
+          "old_frame": "_DATA",
+          "frame_kind": "group",
+          "frame": "DGROUP",
+          "source_line": 2345,
+          "bound_source_line": 2345
+        },
+        {
+          "segment": "S00B_TEXT",
+          "offset": 4426,
+          "target": "_g_3DEC",
+          "old_frame_kind": "segment",
+          "old_frame": "_DATA",
+          "frame_kind": "group",
+          "frame": "DGROUP",
+          "source_line": 2349,
+          "bound_source_line": 2349
+        },
+        {
+          "segment": "S00B_TEXT",
+          "offset": 4467,
+          "target": "_g_3DED",
+          "old_frame_kind": "segment",
+          "old_frame": "_DATA",
+          "frame_kind": "group",
+          "frame": "DGROUP",
+          "source_line": 2372,
+          "bound_source_line": 2372
+        },
+        {
+          "segment": "S00B_TEXT",
+          "offset": 4526,
+          "target": "_g_3DEC",
+          "old_frame_kind": "segment",
+          "old_frame": "_DATA",
+          "frame_kind": "group",
+          "frame": "DGROUP",
+          "source_line": 2408,
+          "bound_source_line": 2408
+        },
+        {
+          "segment": "S00B_TEXT",
+          "offset": 4551,
+          "target": "_g_3DED",
+          "old_frame_kind": "segment",
+          "old_frame": "_DATA",
+          "frame_kind": "group",
+          "frame": "DGROUP",
+          "source_line": 2421,
+          "bound_source_line": 2421
+        },
+        {
+          "segment": "S00B_TEXT",
+          "offset": 4596,
+          "target": "_g_3DEA",
+          "old_frame_kind": "segment",
+          "old_frame": "_DATA",
+          "frame_kind": "group",
+          "frame": "DGROUP",
+          "source_line": 2446,
+          "bound_source_line": 2446
+        },
+        {
+          "segment": "S00B_TEXT",
+          "offset": 4931,
+          "target": "_g_3DD2",
+          "old_frame_kind": "segment",
+          "old_frame": "_DATA",
+          "frame_kind": "group",
+          "frame": "DGROUP",
+          "source_line": 2603,
+          "bound_source_line": 2603
+        },
+        {
+          "segment": "S00B_TEXT",
+          "offset": 5053,
+          "target": "_g_3DB6",
+          "old_frame_kind": "segment",
+          "old_frame": "_DATA",
+          "frame_kind": "group",
+          "frame": "DGROUP",
+          "source_line": 2660,
+          "bound_source_line": 2660
+        },
+        {
+          "segment": "S00B_TEXT",
+          "offset": 5110,
+          "target": "_g_3DB6",
+          "old_frame_kind": "segment",
+          "old_frame": "_DATA",
+          "frame_kind": "group",
+          "frame": "DGROUP",
+          "source_line": 2686,
+          "bound_source_line": 2686
+        },
+        {
+          "segment": "S00B_TEXT",
+          "offset": 6841,
+          "target": "_g_3DD4",
+          "old_frame_kind": "segment",
+          "old_frame": "_DATA",
+          "frame_kind": "group",
+          "frame": "DGROUP",
+          "source_line": 3553,
+          "bound_source_line": 3553
+        }
+      ],
+      "reframe_count": 64,
+      "frame_review": "SS=DGROUP proven by source-wide CRT/interrupt CFG provenance; exact site list signed by driver-ss-frame-contract-v1."
+    },
+    {
+      "module": "S01:3126",
+      "source": "src/S01/m3126.asm",
+      "source_sha256": "ac99ea7821999d034e64201798d49dfaf64632f34e5f5dee428c9b6dec01a44a",
+      "extends_module_binding": "S01:3126",
+      "apply_after": "work/source-only-dos/source-bindings-v1.json binding for this module",
+      "edits": [
+        {
+          "before": "\tadd bl, byte ptr ss:_g_3DE5",
+          "after": "\tassume ss:DGROUP\n\tadd bl, byte ptr ss:_g_3DE5\n\tassume ss:nothing",
+          "count": 2
+        },
+        {
+          "before": "\tadd si, word ptr ss:_g_3DEF",
+          "after": "\tassume ss:DGROUP\n\tadd si, word ptr ss:_g_3DEF\n\tassume ss:nothing",
+          "count": 5
+        },
+        {
+          "before": "\tmov bl, byte ptr ss:_g_3DF1",
+          "after": "\tassume ss:DGROUP\n\tmov bl, byte ptr ss:_g_3DF1\n\tassume ss:nothing",
+          "count": 1
+        },
+        {
+          "before": "\tmov ch, byte ptr ss:_g_3DEC",
+          "after": "\tassume ss:DGROUP\n\tmov ch, byte ptr ss:_g_3DEC\n\tassume ss:nothing",
+          "count": 1
+        },
+        {
+          "before": "\tmov bl, byte ptr ss:_g_3DED",
+          "after": "\tassume ss:DGROUP\n\tmov bl, byte ptr ss:_g_3DED\n\tassume ss:nothing",
+          "count": 4
+        },
+        {
+          "before": "\tadd si, word ptr ss:_g_3DEA",
+          "after": "\tassume ss:DGROUP\n\tadd si, word ptr ss:_g_3DEA\n\tassume ss:nothing",
+          "count": 4
+        },
+        {
+          "before": "\tmov cl, byte ptr ss:_g_3DEE",
+          "after": "\tassume ss:DGROUP\n\tmov cl, byte ptr ss:_g_3DEE\n\tassume ss:nothing",
+          "count": 2
+        },
+        {
+          "before": "\tmov ch, byte ptr ss:_g_3DF2",
+          "after": "\tassume ss:DGROUP\n\tmov ch, byte ptr ss:_g_3DF2\n\tassume ss:nothing",
+          "count": 2
+        },
+        {
+          "before": "\tmov cl, byte ptr ss:_g_3DF1",
+          "after": "\tassume ss:DGROUP\n\tmov cl, byte ptr ss:_g_3DF1\n\tassume ss:nothing",
+          "count": 1
+        },
+        {
+          "before": "\tmov bl, byte ptr ss:_g_3DEC",
+          "after": "\tassume ss:DGROUP\n\tmov bl, byte ptr ss:_g_3DEC\n\tassume ss:nothing",
+          "count": 1
+        },
+        {
+          "before": "\tcmp byte ptr ss:_g_3DD2, 0",
+          "after": "\tassume ss:DGROUP\n\tcmp byte ptr ss:_g_3DD2, 0\n\tassume ss:nothing",
+          "count": 1
+        },
+        {
+          "before": "\tsub bl, byte ptr ss:_g_3DEF",
+          "after": "\tassume ss:DGROUP\n\tsub bl, byte ptr ss:_g_3DEF\n\tassume ss:nothing",
+          "count": 1
+        },
+        {
+          "before": "\tmov es, word ptr ss:_g_3DB0",
+          "after": "\tassume ss:DGROUP\n\tmov es, word ptr ss:_g_3DB0\n\tassume ss:nothing",
+          "count": 1
+        },
+        {
+          "before": "\tmov ax, word ptr ss:_g_3DEF",
+          "after": "\tassume ss:DGROUP\n\tmov ax, word ptr ss:_g_3DEF\n\tassume ss:nothing",
+          "count": 1
+        },
+        {
+          "before": "\tmov byte ptr ss:_g_3DF1, bl",
+          "after": "\tassume ss:DGROUP\n\tmov byte ptr ss:_g_3DF1, bl\n\tassume ss:nothing",
+          "count": 1
+        },
+        {
+          "before": "\tmov bh, byte ptr ss:_g_3DEC",
+          "after": "\tassume ss:DGROUP\n\tmov bh, byte ptr ss:_g_3DEC\n\tassume ss:nothing",
+          "count": 3
+        },
+        {
+          "before": "\tmov bh, byte ptr ss:_g_3DED",
+          "after": "\tassume ss:DGROUP\n\tmov bh, byte ptr ss:_g_3DED\n\tassume ss:nothing",
+          "count": 4
+        },
+        {
+          "before": "\tmov ah, byte ptr ss:_g_3DEC",
+          "after": "\tassume ss:DGROUP\n\tmov ah, byte ptr ss:_g_3DEC\n\tassume ss:nothing",
+          "count": 1
+        }
+      ],
+      "exports": [],
+      "relocations": [],
+      "reframes": [
+        {
+          "segment": "S01A_TEXT",
+          "offset": 1427,
+          "target": "_g_3DE5",
+          "old_frame_kind": "segment",
+          "old_frame": "_DATA",
+          "frame_kind": "group",
+          "frame": "DGROUP",
+          "source_line": 784,
+          "bound_source_line": 788
+        },
+        {
+          "segment": "S01A_TEXT",
+          "offset": 1543,
+          "target": "_g_3DE5",
+          "old_frame_kind": "segment",
+          "old_frame": "_DATA",
+          "frame_kind": "group",
+          "frame": "DGROUP",
+          "source_line": 832,
+          "bound_source_line": 838
+        },
+        {
+          "segment": "S01A_TEXT",
+          "offset": 1585,
+          "target": "_g_3DEF",
+          "old_frame_kind": "segment",
+          "old_frame": "_DATA",
+          "frame_kind": "group",
+          "frame": "DGROUP",
+          "source_line": 851,
+          "bound_source_line": 859
+        },
+        {
+          "segment": "S01A_TEXT",
+          "offset": 1590,
+          "target": "_g_3DF1",
+          "old_frame_kind": "segment",
+          "old_frame": "_DATA",
+          "frame_kind": "group",
+          "frame": "DGROUP",
+          "source_line": 852,
+          "bound_source_line": 860
+        },
+        {
+          "segment": "S01A_TEXT",
+          "offset": 1607,
+          "target": "_g_3DEC",
+          "old_frame_kind": "segment",
+          "old_frame": "_DATA",
+          "frame_kind": "group",
+          "frame": "DGROUP",
+          "source_line": 857,
+          "bound_source_line": 865
+        },
+        {
+          "segment": "S01A_TEXT",
+          "offset": 1639,
+          "target": "_g_3DED",
+          "old_frame_kind": "segment",
+          "old_frame": "_DATA",
+          "frame_kind": "group",
+          "frame": "DGROUP",
+          "source_line": 875,
+          "bound_source_line": 883
+        },
+        {
+          "segment": "S01A_TEXT",
+          "offset": 1665,
+          "target": "_g_3DED",
+          "old_frame_kind": "segment",
+          "old_frame": "_DATA",
+          "frame_kind": "group",
+          "frame": "DGROUP",
+          "source_line": 891,
+          "bound_source_line": 899
+        },
+        {
+          "segment": "S01A_TEXT",
+          "offset": 1689,
+          "target": "_g_3DEA",
+          "old_frame_kind": "segment",
+          "old_frame": "_DATA",
+          "frame_kind": "group",
+          "frame": "DGROUP",
+          "source_line": 905,
+          "bound_source_line": 913
+        },
+        {
+          "segment": "S01A_TEXT",
+          "offset": 1702,
+          "target": "_g_3DEE",
+          "old_frame_kind": "segment",
+          "old_frame": "_DATA",
+          "frame_kind": "group",
+          "frame": "DGROUP",
+          "source_line": 914,
+          "bound_source_line": 922
+        },
+        {
+          "segment": "S01A_TEXT",
+          "offset": 1707,
+          "target": "_g_3DF2",
+          "old_frame_kind": "segment",
+          "old_frame": "_DATA",
+          "frame_kind": "group",
+          "frame": "DGROUP",
+          "source_line": 915,
+          "bound_source_line": 923
+        },
+        {
+          "segment": "S01A_TEXT",
+          "offset": 1744,
+          "target": "_g_3DEF",
+          "old_frame_kind": "segment",
+          "old_frame": "_DATA",
+          "frame_kind": "group",
+          "frame": "DGROUP",
+          "source_line": 933,
+          "bound_source_line": 941
+        },
+        {
+          "segment": "S01A_TEXT",
+          "offset": 1749,
+          "target": "_g_3DF1",
+          "old_frame_kind": "segment",
+          "old_frame": "_DATA",
+          "frame_kind": "group",
+          "frame": "DGROUP",
+          "source_line": 934,
+          "bound_source_line": 942
+        },
+        {
+          "segment": "S01A_TEXT",
+          "offset": 1761,
+          "target": "_g_3DEC",
+          "old_frame_kind": "segment",
+          "old_frame": "_DATA",
+          "frame_kind": "group",
+          "frame": "DGROUP",
+          "source_line": 938,
+          "bound_source_line": 946
+        },
+        {
+          "segment": "S01A_TEXT",
+          "offset": 1794,
+          "target": "_g_3DED",
+          "old_frame_kind": "segment",
+          "old_frame": "_DATA",
+          "frame_kind": "group",
+          "frame": "DGROUP",
+          "source_line": 956,
+          "bound_source_line": 964
+        },
+        {
+          "segment": "S01A_TEXT",
+          "offset": 1823,
+          "target": "_g_3DED",
+          "old_frame_kind": "segment",
+          "old_frame": "_DATA",
+          "frame_kind": "group",
+          "frame": "DGROUP",
+          "source_line": 973,
+          "bound_source_line": 981
+        },
+        {
+          "segment": "S01A_TEXT",
+          "offset": 1975,
+          "target": "_g_3DD2",
+          "old_frame_kind": "segment",
+          "old_frame": "_DATA",
+          "frame_kind": "group",
+          "frame": "DGROUP",
+          "source_line": 1044,
+          "bound_source_line": 1052
+        },
+        {
+          "segment": "S01A_TEXT",
+          "offset": 2229,
+          "target": "_g_3DEF",
+          "old_frame_kind": "segment",
+          "old_frame": "_DATA",
+          "frame_kind": "group",
+          "frame": "DGROUP",
+          "source_line": 1150,
+          "bound_source_line": 1164
+        },
+        {
+          "segment": "S01A_TEXT",
+          "offset": 2251,
+          "target": "_g_3DB0",
+          "old_frame_kind": "segment",
+          "old_frame": "_DATA",
+          "frame_kind": "group",
+          "frame": "DGROUP",
+          "source_line": 1157,
+          "bound_source_line": 1171
+        },
+        {
+          "segment": "S01A_TEXT",
+          "offset": 2258,
+          "target": "_g_3DEF",
+          "old_frame_kind": "segment",
+          "old_frame": "_DATA",
+          "frame_kind": "group",
+          "frame": "DGROUP",
+          "source_line": 1159,
+          "bound_source_line": 1173
+        },
+        {
+          "segment": "S01A_TEXT",
+          "offset": 2272,
+          "target": "_g_3DF1",
+          "old_frame_kind": "segment",
+          "old_frame": "_DATA",
+          "frame_kind": "group",
+          "frame": "DGROUP",
+          "source_line": 1164,
+          "bound_source_line": 1178
+        },
+        {
+          "segment": "S01A_TEXT",
+          "offset": 2278,
+          "target": "_g_3DEF",
+          "old_frame_kind": "segment",
+          "old_frame": "_DATA",
+          "frame_kind": "group",
+          "frame": "DGROUP",
+          "source_line": 1169,
+          "bound_source_line": 1183
+        },
+        {
+          "segment": "S01A_TEXT",
+          "offset": 2290,
+          "target": "_g_3DEC",
+          "old_frame_kind": "segment",
+          "old_frame": "_DATA",
+          "frame_kind": "group",
+          "frame": "DGROUP",
+          "source_line": 1173,
+          "bound_source_line": 1187
+        },
+        {
+          "segment": "S01A_TEXT",
+          "offset": 2320,
+          "target": "_g_3DED",
+          "old_frame_kind": "segment",
+          "old_frame": "_DATA",
+          "frame_kind": "group",
+          "frame": "DGROUP",
+          "source_line": 1189,
+          "bound_source_line": 1203
+        },
+        {
+          "segment": "S01A_TEXT",
+          "offset": 2361,
+          "target": "_g_3DEA",
+          "old_frame_kind": "segment",
+          "old_frame": "_DATA",
+          "frame_kind": "group",
+          "frame": "DGROUP",
+          "source_line": 1214,
+          "bound_source_line": 1228
+        },
+        {
+          "segment": "S01A_TEXT",
+          "offset": 2367,
+          "target": "_g_3DEF",
+          "old_frame_kind": "segment",
+          "old_frame": "_DATA",
+          "frame_kind": "group",
+          "frame": "DGROUP",
+          "source_line": 1219,
+          "bound_source_line": 1233
+        },
+        {
+          "segment": "S01A_TEXT",
+          "offset": 2379,
+          "target": "_g_3DEC",
+          "old_frame_kind": "segment",
+          "old_frame": "_DATA",
+          "frame_kind": "group",
+          "frame": "DGROUP",
+          "source_line": 1223,
+          "bound_source_line": 1237
+        },
+        {
+          "segment": "S01A_TEXT",
+          "offset": 2407,
+          "target": "_g_3DED",
+          "old_frame_kind": "segment",
+          "old_frame": "_DATA",
+          "frame_kind": "group",
+          "frame": "DGROUP",
+          "source_line": 1237,
+          "bound_source_line": 1251
+        },
+        {
+          "segment": "S01A_TEXT",
+          "offset": 2443,
+          "target": "_g_3DEA",
+          "old_frame_kind": "segment",
+          "old_frame": "_DATA",
+          "frame_kind": "group",
+          "frame": "DGROUP",
+          "source_line": 1258,
+          "bound_source_line": 1272
+        },
+        {
+          "segment": "S01A_TEXT",
+          "offset": 2457,
+          "target": "_g_3DEE",
+          "old_frame_kind": "segment",
+          "old_frame": "_DATA",
+          "frame_kind": "group",
+          "frame": "DGROUP",
+          "source_line": 1268,
+          "bound_source_line": 1282
+        },
+        {
+          "segment": "S01A_TEXT",
+          "offset": 2462,
+          "target": "_g_3DF2",
+          "old_frame_kind": "segment",
+          "old_frame": "_DATA",
+          "frame_kind": "group",
+          "frame": "DGROUP",
+          "source_line": 1269,
+          "bound_source_line": 1283
+        },
+        {
+          "segment": "S01A_TEXT",
+          "offset": 2500,
+          "target": "_g_3DEF",
+          "old_frame_kind": "segment",
+          "old_frame": "_DATA",
+          "frame_kind": "group",
+          "frame": "DGROUP",
+          "source_line": 1288,
+          "bound_source_line": 1302
+        },
+        {
+          "segment": "S01A_TEXT",
+          "offset": 2512,
+          "target": "_g_3DEC",
+          "old_frame_kind": "segment",
+          "old_frame": "_DATA",
+          "frame_kind": "group",
+          "frame": "DGROUP",
+          "source_line": 1292,
+          "bound_source_line": 1306
+        },
+        {
+          "segment": "S01A_TEXT",
+          "offset": 2543,
+          "target": "_g_3DED",
+          "old_frame_kind": "segment",
+          "old_frame": "_DATA",
+          "frame_kind": "group",
+          "frame": "DGROUP",
+          "source_line": 1308,
+          "bound_source_line": 1322
+        },
+        {
+          "segment": "S01A_TEXT",
+          "offset": 3083,
+          "target": "_g_3DEC",
+          "old_frame_kind": "segment",
+          "old_frame": "_DATA",
+          "frame_kind": "group",
+          "frame": "DGROUP",
+          "source_line": 1501,
+          "bound_source_line": 1515
+        },
+        {
+          "segment": "S01A_TEXT",
+          "offset": 3112,
+          "target": "_g_3DED",
+          "old_frame_kind": "segment",
+          "old_frame": "_DATA",
+          "frame_kind": "group",
+          "frame": "DGROUP",
+          "source_line": 1515,
+          "bound_source_line": 1529
+        },
+        {
+          "segment": "S01A_TEXT",
+          "offset": 3152,
+          "target": "_g_3DEA",
+          "old_frame_kind": "segment",
+          "old_frame": "_DATA",
+          "frame_kind": "group",
+          "frame": "DGROUP",
+          "source_line": 1537,
+          "bound_source_line": 1551
+        }
+      ],
+      "reframe_count": 36,
+      "frame_review": "SS=DGROUP proven by source-wide CRT/interrupt CFG provenance; exact site list signed by driver-ss-frame-contract-v1."
+    },
+    {
+      "module": "S02:3126",
+      "source": "src/S02/m3126.asm",
+      "source_sha256": "4291e4084ff26dcee75016b03c1b8d8412129a97ad00787b41ac567c16f5178b",
+      "extends_module_binding": "S02:3126",
+      "apply_after": "work/source-only-dos/source-bindings-v1.json binding for this module",
+      "edits": [
+        {
+          "before": "\tcmp byte ptr ss:_g_3DD2, 0",
+          "after": "\tassume ss:DGROUP\n\tcmp byte ptr ss:_g_3DD2, 0\n\tassume ss:nothing",
+          "count": 1
+        },
+        {
+          "before": "\tadd si, word ptr ss:_g_3DEA",
+          "after": "\tassume ss:DGROUP\n\tadd si, word ptr ss:_g_3DEA\n\tassume ss:nothing",
+          "count": 1
+        }
+      ],
+      "exports": [],
+      "relocations": [],
+      "reframes": [
+        {
+          "segment": "S02A_TEXT",
+          "offset": 1510,
+          "target": "_g_3DD2",
+          "old_frame_kind": "segment",
+          "old_frame": "_DATA",
+          "frame_kind": "group",
+          "frame": "DGROUP",
+          "source_line": 792,
+          "bound_source_line": 794
+        },
+        {
+          "segment": "S02A_TEXT",
+          "offset": 1756,
+          "target": "_g_3DEA",
+          "old_frame_kind": "segment",
+          "old_frame": "_DATA",
+          "frame_kind": "group",
+          "frame": "DGROUP",
+          "source_line": 900,
+          "bound_source_line": 902
+        }
+      ],
+      "reframe_count": 2,
+      "frame_review": "SS=DGROUP proven by source-wide CRT/interrupt CFG provenance; exact site list signed by driver-ss-frame-contract-v1."
+    },
+    {
+      "module": "S03:3126",
+      "source": "src/S03/m3126.asm",
+      "source_sha256": "b0b9d296f23b4f8a5b4706008b21b6ad96429636da11bf22ddb2126ee362f2ff",
+      "extends_module_binding": "S03:3126",
+      "apply_after": "work/source-only-dos/source-bindings-v1.json binding for this module",
+      "edits": [
+        {
+          "before": "\tcmp byte ptr ss:_g_3DD2, 0",
+          "after": "\tassume ss:DGROUP\n\tcmp byte ptr ss:_g_3DD2, 0\n\tassume ss:nothing",
+          "count": 1
+        },
+        {
+          "before": "\tmov es, word ptr ss:_g_3DB0",
+          "after": "\tassume ss:DGROUP\n\tmov es, word ptr ss:_g_3DB0\n\tassume ss:nothing",
+          "count": 2
+        },
+        {
+          "before": "\tadd di, word ptr ss:_g_3DEF",
+          "after": "\tassume ss:DGROUP\n\tadd di, word ptr ss:_g_3DEF\n\tassume ss:nothing",
+          "count": 2
+        },
+        {
+          "before": "\tsub bl, byte ptr ss:_g_3DEF",
+          "after": "\tassume ss:DGROUP\n\tsub bl, byte ptr ss:_g_3DEF\n\tassume ss:nothing",
+          "count": 2
+        },
+        {
+          "before": "\tadd si, word ptr ss:_g_3DEF",
+          "after": "\tassume ss:DGROUP\n\tadd si, word ptr ss:_g_3DEF\n\tassume ss:nothing",
+          "count": 4
+        },
+        {
+          "before": "\tmov bh, byte ptr ss:_g_3DEC",
+          "after": "\tassume ss:DGROUP\n\tmov bh, byte ptr ss:_g_3DEC\n\tassume ss:nothing",
+          "count": 4
+        },
+        {
+          "before": "\tmov bh, byte ptr ss:_g_3DED",
+          "after": "\tassume ss:DGROUP\n\tmov bh, byte ptr ss:_g_3DED\n\tassume ss:nothing",
+          "count": 5
+        },
+        {
+          "before": "\tadd si, word ptr ss:_g_3DEA",
+          "after": "\tassume ss:DGROUP\n\tadd si, word ptr ss:_g_3DEA\n\tassume ss:nothing",
+          "count": 3
+        },
+        {
+          "before": "\tmov ch, byte ptr ss:_g_3DF2",
+          "after": "\tassume ss:DGROUP\n\tmov ch, byte ptr ss:_g_3DF2\n\tassume ss:nothing",
+          "count": 2
+        },
+        {
+          "before": "\tmov ah, byte ptr ss:_g_3DEC",
+          "after": "\tassume ss:DGROUP\n\tmov ah, byte ptr ss:_g_3DEC\n\tassume ss:nothing",
+          "count": 1
+        }
+      ],
+      "exports": [],
+      "relocations": [],
+      "reframes": [
+        {
+          "segment": "S03A_TEXT",
+          "offset": 2504,
+          "target": "_g_3DD2",
+          "old_frame_kind": "segment",
+          "old_frame": "_DATA",
+          "frame_kind": "group",
+          "frame": "DGROUP",
+          "source_line": 1105,
+          "bound_source_line": 1107
+        },
+        {
+          "segment": "S03A_TEXT",
+          "offset": 2778,
+          "target": "_g_3DB0",
+          "old_frame_kind": "segment",
+          "old_frame": "_DATA",
+          "frame_kind": "group",
+          "frame": "DGROUP",
+          "source_line": 1220,
+          "bound_source_line": 1222
+        },
+        {
+          "segment": "S03A_TEXT",
+          "offset": 2789,
+          "target": "_g_3DEF",
+          "old_frame_kind": "segment",
+          "old_frame": "_DATA",
+          "frame_kind": "group",
+          "frame": "DGROUP",
+          "source_line": 1224,
+          "bound_source_line": 1226
+        },
+        {
+          "segment": "S03A_TEXT",
+          "offset": 2796,
+          "target": "_g_3DEF",
+          "old_frame_kind": "segment",
+          "old_frame": "_DATA",
+          "frame_kind": "group",
+          "frame": "DGROUP",
+          "source_line": 1226,
+          "bound_source_line": 1228
+        },
+        {
+          "segment": "S03A_TEXT",
+          "offset": 2802,
+          "target": "_g_3DEF",
+          "old_frame_kind": "segment",
+          "old_frame": "_DATA",
+          "frame_kind": "group",
+          "frame": "DGROUP",
+          "source_line": 1231,
+          "bound_source_line": 1233
+        },
+        {
+          "segment": "S03A_TEXT",
+          "offset": 2811,
+          "target": "_g_3DEC",
+          "old_frame_kind": "segment",
+          "old_frame": "_DATA",
+          "frame_kind": "group",
+          "frame": "DGROUP",
+          "source_line": 1234,
+          "bound_source_line": 1236
+        },
+        {
+          "segment": "S03A_TEXT",
+          "offset": 2838,
+          "target": "_g_3DED",
+          "old_frame_kind": "segment",
+          "old_frame": "_DATA",
+          "frame_kind": "group",
+          "frame": "DGROUP",
+          "source_line": 1248,
+          "bound_source_line": 1250
+        },
+        {
+          "segment": "S03A_TEXT",
+          "offset": 2876,
+          "target": "_g_3DEA",
+          "old_frame_kind": "segment",
+          "old_frame": "_DATA",
+          "frame_kind": "group",
+          "frame": "DGROUP",
+          "source_line": 1270,
+          "bound_source_line": 1272
+        },
+        {
+          "segment": "S03A_TEXT",
+          "offset": 2882,
+          "target": "_g_3DEF",
+          "old_frame_kind": "segment",
+          "old_frame": "_DATA",
+          "frame_kind": "group",
+          "frame": "DGROUP",
+          "source_line": 1275,
+          "bound_source_line": 1277
+        },
+        {
+          "segment": "S03A_TEXT",
+          "offset": 2891,
+          "target": "_g_3DEC",
+          "old_frame_kind": "segment",
+          "old_frame": "_DATA",
+          "frame_kind": "group",
+          "frame": "DGROUP",
+          "source_line": 1278,
+          "bound_source_line": 1280
+        },
+        {
+          "segment": "S03A_TEXT",
+          "offset": 2916,
+          "target": "_g_3DED",
+          "old_frame_kind": "segment",
+          "old_frame": "_DATA",
+          "frame_kind": "group",
+          "frame": "DGROUP",
+          "source_line": 1290,
+          "bound_source_line": 1292
+        },
+        {
+          "segment": "S03A_TEXT",
+          "offset": 2949,
+          "target": "_g_3DEA",
+          "old_frame_kind": "segment",
+          "old_frame": "_DATA",
+          "frame_kind": "group",
+          "frame": "DGROUP",
+          "source_line": 1308,
+          "bound_source_line": 1310
+        },
+        {
+          "segment": "S03A_TEXT",
+          "offset": 2965,
+          "target": "_g_3DF2",
+          "old_frame_kind": "segment",
+          "old_frame": "_DATA",
+          "frame_kind": "group",
+          "frame": "DGROUP",
+          "source_line": 1319,
+          "bound_source_line": 1321
+        },
+        {
+          "segment": "S03A_TEXT",
+          "offset": 3525,
+          "target": "_g_3DB0",
+          "old_frame_kind": "segment",
+          "old_frame": "_DATA",
+          "frame_kind": "group",
+          "frame": "DGROUP",
+          "source_line": 1563,
+          "bound_source_line": 1565
+        },
+        {
+          "segment": "S03A_TEXT",
+          "offset": 3536,
+          "target": "_g_3DEF",
+          "old_frame_kind": "segment",
+          "old_frame": "_DATA",
+          "frame_kind": "group",
+          "frame": "DGROUP",
+          "source_line": 1567,
+          "bound_source_line": 1569
+        },
+        {
+          "segment": "S03A_TEXT",
+          "offset": 3545,
+          "target": "_g_3DEF",
+          "old_frame_kind": "segment",
+          "old_frame": "_DATA",
+          "frame_kind": "group",
+          "frame": "DGROUP",
+          "source_line": 1569,
+          "bound_source_line": 1571
+        },
+        {
+          "segment": "S03A_TEXT",
+          "offset": 3663,
+          "target": "_g_3DEF",
+          "old_frame_kind": "segment",
+          "old_frame": "_DATA",
+          "frame_kind": "group",
+          "frame": "DGROUP",
+          "source_line": 1621,
+          "bound_source_line": 1623
+        },
+        {
+          "segment": "S03A_TEXT",
+          "offset": 3675,
+          "target": "_g_3DEC",
+          "old_frame_kind": "segment",
+          "old_frame": "_DATA",
+          "frame_kind": "group",
+          "frame": "DGROUP",
+          "source_line": 1625,
+          "bound_source_line": 1627
+        },
+        {
+          "segment": "S03A_TEXT",
+          "offset": 3705,
+          "target": "_g_3DED",
+          "old_frame_kind": "segment",
+          "old_frame": "_DATA",
+          "frame_kind": "group",
+          "frame": "DGROUP",
+          "source_line": 1640,
+          "bound_source_line": 1642
+        },
+        {
+          "segment": "S03A_TEXT",
+          "offset": 3945,
+          "target": "_g_3DF2",
+          "old_frame_kind": "segment",
+          "old_frame": "_DATA",
+          "frame_kind": "group",
+          "frame": "DGROUP",
+          "source_line": 1753,
+          "bound_source_line": 1755
+        },
+        {
+          "segment": "S03A_TEXT",
+          "offset": 3993,
+          "target": "_g_3DEF",
+          "old_frame_kind": "segment",
+          "old_frame": "_DATA",
+          "frame_kind": "group",
+          "frame": "DGROUP",
+          "source_line": 1775,
+          "bound_source_line": 1777
+        },
+        {
+          "segment": "S03A_TEXT",
+          "offset": 4000,
+          "target": "_g_3DEC",
+          "old_frame_kind": "segment",
+          "old_frame": "_DATA",
+          "frame_kind": "group",
+          "frame": "DGROUP",
+          "source_line": 1777,
+          "bound_source_line": 1779
+        },
+        {
+          "segment": "S03A_TEXT",
+          "offset": 4030,
+          "target": "_g_3DED",
+          "old_frame_kind": "segment",
+          "old_frame": "_DATA",
+          "frame_kind": "group",
+          "frame": "DGROUP",
+          "source_line": 1792,
+          "bound_source_line": 1794
+        },
+        {
+          "segment": "S03A_TEXT",
+          "offset": 4084,
+          "target": "_g_3DEC",
+          "old_frame_kind": "segment",
+          "old_frame": "_DATA",
+          "frame_kind": "group",
+          "frame": "DGROUP",
+          "source_line": 1822,
+          "bound_source_line": 1824
+        },
+        {
+          "segment": "S03A_TEXT",
+          "offset": 4118,
+          "target": "_g_3DED",
+          "old_frame_kind": "segment",
+          "old_frame": "_DATA",
+          "frame_kind": "group",
+          "frame": "DGROUP",
+          "source_line": 1837,
+          "bound_source_line": 1839
+        },
+        {
+          "segment": "S03A_TEXT",
+          "offset": 4170,
+          "target": "_g_3DEA",
+          "old_frame_kind": "segment",
+          "old_frame": "_DATA",
+          "frame_kind": "group",
+          "frame": "DGROUP",
+          "source_line": 1860,
+          "bound_source_line": 1862
+        }
+      ],
+      "reframe_count": 26,
+      "frame_review": "SS=DGROUP proven by source-wide CRT/interrupt CFG provenance; exact site list signed by driver-ss-frame-contract-v1."
+    }
+  ],
+  "site_count": 128,
+  "unresolved_families": {
+    "module_local_ss_symbol_operands": {
+      "count": 10,
+      "sites": [
+        {
+          "source": "src/S01/m3126.asm",
+          "source_line": 799,
+          "instruction": "mov byte ptr ss:_g_2118, bh",
+          "target": "_g_2118",
+          "procedure": "_o01_3126_0523",
+          "distance": "FAR",
+          "status": "no matching external fixup"
+        },
+        {
+          "source": "src/S01/m3126.asm",
+          "source_line": 861,
+          "instruction": "mov bh, byte ptr ss:_g_2118",
+          "target": "_g_2118",
+          "procedure": "_o01_3126_0523",
+          "distance": "FAR",
+          "status": "no matching external fixup"
+        },
+        {
+          "source": "src/S03/m3126.asm",
+          "source_line": 1570,
+          "instruction": "mov word ptr ss:_g_222C, ax",
+          "target": "_g_222C",
+          "procedure": "_o03_3126_0C1E",
+          "distance": "FAR",
+          "status": "no matching external fixup"
+        },
+        {
+          "source": "src/S03/m3126.asm",
+          "source_line": 1576,
+          "instruction": "mov cx, word ptr ss:_g_222A",
+          "target": "_g_222A",
+          "procedure": "_o03_3126_0C1E",
+          "distance": "FAR",
+          "status": "no matching external fixup"
+        },
+        {
+          "source": "src/S03/m3126.asm",
+          "source_line": 1621,
+          "instruction": "add si, word ptr ss:_g_222C",
+          "target": "_g_222C",
+          "procedure": "_o03_3126_0C1E",
+          "distance": "FAR",
+          "status": "no matching external fixup"
+        },
+        {
+          "source": "src/S03/m3126.asm",
+          "source_line": 1701,
+          "instruction": "mov cx, word ptr ss:_g_222A",
+          "target": "_g_222A",
+          "procedure": "_o03_3126_0C1E",
+          "distance": "FAR",
+          "status": "no matching external fixup"
+        },
+        {
+          "source": "src/S03/m3126.asm",
+          "source_line": 1746,
+          "instruction": "add si, word ptr ss:_g_222C",
+          "target": "_g_222C",
+          "procedure": "_o03_3126_0C1E",
+          "distance": "FAR",
+          "status": "no matching external fixup"
+        },
+        {
+          "source": "src/S03/m3126.asm",
+          "source_line": 1835,
+          "instruction": "and al, byte ptr ss:_g_22E4",
+          "target": "_g_22E4",
+          "procedure": "_o03_3126_0F5D",
+          "distance": "FAR",
+          "status": "no matching external fixup"
+        },
+        {
+          "source": "src/S03/m3126.asm",
+          "source_line": 1847,
+          "instruction": "and al, byte ptr ss:_g_22E4",
+          "target": "_g_22E4",
+          "procedure": "_o03_3126_0F5D",
+          "distance": "FAR",
+          "status": "no matching external fixup"
+        },
+        {
+          "source": "src/S03/m3126.asm",
+          "source_line": 1859,
+          "instruction": "and al, byte ptr ss:_g_22E4",
+          "target": "_g_22E4",
+          "procedure": "_o03_3126_0F5D",
+          "distance": "FAR",
+          "status": "no matching external fixup"
+        }
+      ],
+      "disposition": "Ten SS:_g references outside the 128 selected external OFFSET16/_DATA fixups remain unresolved; do not infer a frame binding from this batch."
+    },
+    "_g_5A9C_segment_offset_pair": {
+      "source": "src/root/m1B73.asm",
+      "sites": [
+        {
+          "line": 357,
+          "instruction": "mov cx, seg _g_5A9C",
+          "fixup": {
+            "segment": "MOUSE_TEXT",
+            "offset": 307,
+            "width": 2,
+            "loc": "base16",
+            "self_relative": false,
+            "target_kind": "external",
+            "target": "_g_5A9C",
+            "displacement": 0,
+            "frame_method": 0,
+            "frame_index": 1,
+            "target_method": 2,
+            "target_index": 23,
+            "frame_kind": "segment",
+            "frame": "_DATA",
+            "encoded_addend": "0000"
+          }
+        },
+        {
+          "line": 359,
+          "instruction": "mov cx, offset DGROUP:_g_5A9C",
+          "fixup": {
+            "segment": "MOUSE_TEXT",
+            "offset": 313,
+            "width": 2,
+            "loc": "offset16",
+            "self_relative": false,
+            "target_kind": "external",
+            "target": "_g_5A9C",
+            "displacement": 0,
+            "frame_method": 1,
+            "frame_index": 1,
+            "target_method": 2,
+            "target_index": 23,
+            "frame_kind": "group",
+            "frame": "DGROUP",
+            "encoded_addend": "0000"
+          }
+        }
+      ],
+      "disposition": "Keep unresolved: storage owner, complete segment-address producer, and ES consumer paths are not established by this driver-frame audit."
+    },
+    "literal_ss_numeric_family": {
+      "count": 3,
+      "sites": [
+        {
+          "source": "src/S00/m31AD.asm",
+          "line": 422,
+          "instruction": "mov bh, byte ptr ss:[si+41D0h]",
+          "procedure": "_o00_31AD_013A"
+        },
+        {
+          "source": "src/S00/m31AD.asm",
+          "line": 472,
+          "instruction": "mov bh, byte ptr ss:[si+41D0h]",
+          "procedure": "_o00_31AD_013A"
+        },
+        {
+          "source": "src/S00/m31AD.asm",
+          "line": 509,
+          "instruction": "mov bh, byte ptr ss:[si+41D0h]",
+          "procedure": "_o00_31AD_013A"
+        }
+      ],
+      "candidate_owner": {
+        "source": "src/root/m1B4E.asm",
+        "symbol_line": 58,
+        "symbol": "_g_41C0",
+        "symbol_extent_bytes": 16,
+        "pattern_line": 59,
+        "candidate_relation": "41D0h is the nominal _g_41C0 address plus its 16-byte color map.",
+        "unproven": [
+          "live SI bounds",
+          "complete reachable storage ownership"
+        ]
+      },
+      "disposition": "No relocation exists; keep outside the 128 external fixups."
+    }
+  },
+  "category": "REVIEWED_SOURCE_LINK_BINDING",
+  "runtime_contract_key": "driver_ss_frame_contract",
+  "runtime_contract": {
+    "path": "work/source-only-dos/driver-ss-frame-contract-v1.json",
+    "sha256": "d7187b30f6c474e69ec38594a71727e4dab34e18afa81406162a94135e1c5fda",
+    "size": 303238
+  },
+  "review_sources": [
+    {
+      "path": "work\\source-only-dos\\source-bindings-v1.json",
+      "sha256": "c7fed5e7e2caac6cad41e63de2eb0ba3cfcbba112fa2877d9799c562b8f52bc4",
+      "size": 11388
+    },
+    {
+      "path": "work\\source-only-dos\\queue-lifetime-contract-v1.json",
+      "sha256": "44b4f2afca0988722d1ff10df933771569c61cc02cd8f11b20ff4ffe8a8af97e",
+      "size": 6627
+    },
+    {
+      "path": "work/source-only-dos/static-completeness/index-v1.json",
+      "sha256": "092b3a15aaaf99737020c0c00e2a4340514dda3f0e2ff45369d1fa0a316d9a3a",
+      "size": 6796,
+      "role": "registration index"
+    },
+    {
+      "path": "layout\\toolchain.json",
+      "sha256": "c0bb71cd8b1f4a1a1f91299bd3b6148aa67b7a1d12c3c3946a229272593eb274",
+      "size": 39241
+    },
+    {
+      "path": "layout\\manifest.json",
+      "sha256": "025a0a9255d910cae4b122ab5a3f3fb40888bb456d7fe42158db7c9e622fcf50",
+      "size": 628980
+    },
+    {
+      "path": "work/source-only-dos/static-completeness/f_0250_1018.json",
+      "sha256": "b5fe86ea28f66ddca56f5936d17d4313789399f18209e5ddf0d15df35be22682",
+      "size": 29049,
+      "role": "static-completeness receipt"
+    },
+    {
+      "path": "work/source-only-dos/static-completeness/f_0250_129E.json",
+      "sha256": "1af913343736d6389742e7a86117dfbfb621328287d0f1a0fa2b3d0bbdf21d80",
+      "size": 24394,
+      "role": "static-completeness receipt"
+    },
+    {
+      "path": "work/source-only-dos/static-completeness/DrawBalloons.json",
+      "sha256": "7f86d2fe0e5b44300572c7115398d05c25799a3d03ba1e57dc0288242a8a91cc",
+      "size": 46914,
+      "role": "static-completeness receipt"
+    },
+    {
+      "path": "work/source-only-dos/static-completeness/SpiderScan.json",
+      "sha256": "17e0a3640c87bae41616cdbe3683b1ccc95e92ba193af072a3ba7e91705b4c89",
+      "size": 22880,
+      "role": "static-completeness receipt"
+    },
+    {
+      "path": "work/source-only-dos/static-completeness/LessonDone.json",
+      "sha256": "4aae722737a8b4d52384a70ed51521158603871d4ef99139ba2a2b48d30046db",
+      "size": 41553,
+      "role": "static-completeness receipt"
+    },
+    {
+      "path": "work/source-only-dos/static-completeness/f_171C_09CC.json",
+      "sha256": "86eec4845d02974e8b6764fe5884360cb7da5a796a5cbbfed78e8a423f8ed5a8",
+      "size": 16862,
+      "role": "static-completeness receipt"
+    },
+    {
+      "path": "work/source-only-dos/static-completeness/f_171C_0ADC.json",
+      "sha256": "67a87d50fad0aec23795a8d29481a12db52f94a7f9b2e2ea7b66cbd5fcfd70ee",
+      "size": 18079,
+      "role": "static-completeness receipt"
+    },
+    {
+      "path": "work/source-only-dos/static-completeness/f_171C_0FBC.json",
+      "sha256": "179a08d1234950861fab6d162ea5f0a2c8b7d332f27c10c03c118216686b6e80",
+      "size": 27289,
+      "role": "static-completeness receipt"
+    },
+    {
+      "path": "work/source-only-dos/static-completeness/f_171C_0CF4.json",
+      "sha256": "b860fa8984346175477cf27005777a6af6580baf6bd2bfdcb78fe2e849562627",
+      "size": 17802,
+      "role": "static-completeness receipt"
+    },
+    {
+      "path": "work/source-only-dos/static-completeness/FindIndex.json",
+      "sha256": "d9f61367df4d79b2bd07e284140b8c9a34db80dda5b1d4bceac7f31ffd6ec5fc",
+      "size": 14600,
+      "role": "static-completeness receipt"
+    },
+    {
+      "path": "work/source-only-dos/static-completeness/f_1C62_0415.json",
+      "sha256": "b6494106b027cdc91f1f53c3afbf9d479853658f50bff8d975fda7eb6aa7de59",
+      "size": 33234,
+      "role": "static-completeness receipt"
+    },
+    {
+      "path": "work/source-only-dos/static-completeness/f_1E57_038E.json",
+      "sha256": "c7977122410f6b0e80cac5b0317d55d2f4a04130bee0bd0f98d5a5de51a8a333",
+      "size": 26879,
+      "role": "static-completeness receipt"
+    },
+    {
+      "path": "work/source-only-dos/static-completeness/f_20E8_0903.json",
+      "sha256": "01d26e670b47c645029865b37962a3b53a711b3c23ee6fd4f702345f20f00f8a",
+      "size": 15629,
+      "role": "static-completeness receipt"
+    },
+    {
+      "path": "work/source-only-dos/static-completeness/win_UnlockWin.json",
+      "sha256": "078841cf92bdea90f52e733ff8587336f061d4045c784899553681bef8ca03a9",
+      "size": 26532,
+      "role": "static-completeness receipt"
+    },
+    {
+      "path": "work/source-only-dos/static-completeness/f_23E6_0000.json",
+      "sha256": "93340ca87d10bd2679b9905d882bd7f2867edc17a692c50a1450230cc9540508",
+      "size": 14839,
+      "role": "static-completeness receipt"
+    },
+    {
+      "path": "work/source-only-dos/static-completeness/f_2505_0453.json",
+      "sha256": "ff8acbd9390b6f8ede9aa5ec465b37fb624de5bb80233521fac60f9c404f5c73",
+      "size": 18683,
+      "role": "static-completeness receipt"
+    },
+    {
+      "path": "work/source-only-dos/static-completeness/win_DrawBitMap.json",
+      "sha256": "bb0288e993a44fedacb0ab657c2acb565133638098ca7c7e30eb56ec3d96937a",
+      "size": 34038,
+      "role": "static-completeness receipt"
+    },
+    {
+      "path": "work/source-only-dos/static-completeness/f_2815_0165.json",
+      "sha256": "f681fde7fd5100f7e18463f4798df0697b805f73b9796e73bb5a19c9e0f765ad",
+      "size": 17249,
+      "role": "static-completeness receipt"
+    },
+    {
+      "path": "work/source-only-dos/static-completeness/f_284A_0138.json",
+      "sha256": "d8c9cb12172b487a83c5d84426d0bceecb4b0099aa1be9a98d1c39ed2fe5db0e",
+      "size": 12344,
+      "role": "static-completeness receipt"
+    },
+    {
+      "path": "work/source-only-dos/static-completeness/f_29D6_000A.json",
+      "sha256": "3ad0a71454669b67e468b75d9d907639a4c3f78e1db1d044dbf0172579580234",
+      "size": 14942,
+      "role": "static-completeness receipt"
+    },
+    {
+      "path": "work/source-only-dos/static-completeness/o10_35F5_0384.json",
+      "sha256": "beebdbfcfed76215fe7dbf69a61801b9142aef6686f7fdb3508e3342edb4a0c8",
+      "size": 60547,
+      "role": "static-completeness receipt"
+    },
+    {
+      "path": "work/source-only-dos/static-completeness/DrawMapCursor.json",
+      "sha256": "d40aac74106f86a115d56f01ca04c3aa6c98b6a1fa18306705490f92fce2e41a",
+      "size": 40582,
+      "role": "static-completeness receipt"
+    },
+    {
+      "path": "work/source-only-dos/static-completeness/InvertPatch.json",
+      "sha256": "8591af179c72f5f42457d64f7e84834c70381f7f00d3a164b165e480d88e214c",
+      "size": 41836,
+      "role": "static-completeness receipt"
+    },
+    {
+      "path": "work/source-only-dos/static-completeness/o15_384C_0239.json",
+      "sha256": "c00dadc8421083c9f2c33bb0b057b92e1c1a57867a5c7cc4e83bf9f9c5c6534a",
+      "size": 48386,
+      "role": "static-completeness receipt"
+    },
+    {
+      "path": "work/source-only-dos/static-completeness/win_PrintStyleTextInRect.json",
+      "sha256": "ba6c9d3f06c6327a55273efa2b5181df3338c7af346d80b4c0cf327235e43ed0",
+      "size": 51131,
+      "role": "static-completeness receipt"
+    },
+    {
+      "path": "work/source-only-dos/static-completeness/DisplayCard.json",
+      "sha256": "a0be46440557ac606df28a451f62a228b3229a9ab04a10a56bbf374931ae841e",
+      "size": 51033,
+      "role": "static-completeness receipt"
+    },
+    {
+      "path": "work/source-only-dos/static-completeness/drawHistGraph.json",
+      "sha256": "c611f04ff64c8a0ce969762670506fe2682a6ad697367c63011a1c18dc18a3a9",
+      "size": 91762,
+      "role": "static-completeness receipt"
+    },
+    {
+      "path": "work/source-only-dos/static-completeness/o25_3BA4_1035.json",
+      "sha256": "8fdd8925b614cc419c7dc1ab25fb262be105b29977e9c6c33ec5d862e5888274",
+      "size": 13286,
+      "role": "static-completeness receipt"
+    },
+    {
+      "path": "work/source-only-dos/static-completeness/o25_3BA4_1686.json",
+      "sha256": "ef11dec31ab3193184b52c308f25c67c70a49d2cd44a823fd91fbd90ac96204a",
+      "size": 21440,
+      "role": "static-completeness receipt"
+    },
+    {
+      "path": "work\\source-only-dos\\corrections\\DrawBalloons\\module.c",
+      "sha256": "e222bc77fd4d83a777507a8ba73aa2c0ba6dd4d6fc4cb42db69cd83f6374c920",
+      "size": 65384
+    },
+    {
+      "path": "src\\S00\\m31AD.asm",
+      "sha256": "5d2ad69ff4affb4be4242e82187065cc5e0b3502cc0cc3e00ad3802ccee2656e",
+      "size": 81450
+    },
+    {
+      "path": "src\\S01\\m3126.asm",
+      "sha256": "ac99ea7821999d034e64201798d49dfaf64632f34e5f5dee428c9b6dec01a44a",
+      "size": 44403
+    },
+    {
+      "path": "src\\S02\\m3126.asm",
+      "sha256": "4291e4084ff26dcee75016b03c1b8d8412129a97ad00787b41ac567c16f5178b",
+      "size": 20400
+    },
+    {
+      "path": "src\\S03\\m3126.asm",
+      "sha256": "b0b9d296f23b4f8a5b4706008b21b6ad96429636da11bf22ddb2126ee362f2ff",
+      "size": 35317
+    },
+    {
+      "path": "src\\root\\m1B73.asm",
+      "sha256": "3097a6b03ff1d8bdfa7d573632d9905de88d754c8b1e047de4014c4f186cb848",
+      "size": 35010
+    },
+    {
+      "path": "src\\root\\m28BC.asm",
+      "sha256": "361f33c1d86502fef4d43559cb7f424e350eee3fe8a31881ed3c21b4d865f7a5",
+      "size": 38288
+    },
+    {
+      "path": "src\\root\\m1B4E.asm",
+      "sha256": "a32d75d2d4ea36980b659d26e9ddd86bcde65d9e250ebac4cdc29c0e847c67a2",
+      "size": 8451
+    },
+    {
+      "path": "work\\source-only-dos\\ss-provenance-audit.py",
+      "sha256": "e8c3c9f995a1281dcd2c618c2f6ccf73d9916e61544f011fcc74202279f4403e",
+      "size": 40424
+    },
+    {
+      "path": "work\\source-only-dos\\driver-ss-frame-probe.py",
+      "sha256": "cb1e1ca6126253970c49721217f2ba4481b4c108529b13347348149f537395b8",
+      "size": 34689
+    }
+  ]
+}

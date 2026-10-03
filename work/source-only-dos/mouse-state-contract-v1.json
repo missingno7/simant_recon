@@ -1,0 +1,1324 @@
+{
+  "schema": "simant-source-only-dos-mouse-words-candidate-v1",
+  "status": "SOURCE_FUNCTIONAL_OWNER_REVIEWED",
+  "research_only": true,
+  "candidate_provider": {
+    "path": "work/source-only-dos/providers/mouse-words.c",
+    "sha256": "64335f44c5f3104ffb8fc81d26fc8bc7aaf5e0e1d126bb8d79c02a6cc5802d32",
+    "size": 280
+  },
+  "members": [
+    {
+      "name": "g_9120",
+      "dos_view": "16-bit word",
+      "candidate_c_definition": "int near tentative definition",
+      "registered_address": {
+        "segment": 21939,
+        "offset": 37152
+      },
+      "size_bytes": 2,
+      "ownership_claim": "generated-only candidate; historical TU unknown"
+    },
+    {
+      "name": "g_9122",
+      "dos_view": "16-bit word",
+      "candidate_c_definition": "int near tentative definition",
+      "registered_address": {
+        "segment": 21939,
+        "offset": 37154
+      },
+      "size_bytes": 2,
+      "ownership_claim": "generated-only candidate; historical TU unknown"
+    },
+    {
+      "name": "g_9124",
+      "dos_view": "16-bit word",
+      "candidate_c_definition": "int near tentative definition",
+      "registered_address": {
+        "segment": 21939,
+        "offset": 37156
+      },
+      "size_bytes": 2,
+      "ownership_claim": "generated-only candidate; historical TU unknown"
+    }
+  ],
+  "allocation_claims": {
+    "aggregate": false,
+    "source_order": false,
+    "historical_communal_order": false,
+    "registered_addresses_are_adjacent": true
+  },
+  "source_inventory": {
+    "canonical_reference_files": [
+      {
+        "path": "src/root/m00F8.c",
+        "sha256": "4ee148ec616e199f61b671df89da8a21f1789c4177d3dbc7b76a478acb98184a",
+        "manifest_sha256": "4ee148ec616e199f61b671df89da8a21f1789c4177d3dbc7b76a478acb98184a",
+        "refs": [
+          {
+            "line": 102,
+            "text": "extern int near g_9122;"
+          },
+          {
+            "line": 104,
+            "text": "extern int near g_9124;"
+          },
+          {
+            "line": 118,
+            "text": "        if (g_9122 <= 1)"
+          },
+          {
+            "line": 120,
+            "text": "        else if (g_3DB2 - 4 <= g_9122)"
+          },
+          {
+            "line": 122,
+            "text": "        if (g_9124 < 1)"
+          },
+          {
+            "line": 124,
+            "text": "        else if (g_3DB4 - 4 <= g_9124)"
+          }
+        ]
+      },
+      {
+        "path": "src/root/m1B73.asm",
+        "sha256": "3097a6b03ff1d8bdfa7d573632d9905de88d754c8b1e047de4014c4f186cb848",
+        "manifest_sha256": "3097a6b03ff1d8bdfa7d573632d9905de88d754c8b1e047de4014c4f186cb848",
+        "refs": [
+          {
+            "line": 40,
+            "text": "\textrn\t_g_9120:byte"
+          },
+          {
+            "line": 41,
+            "text": "\textrn\t_g_9122:byte"
+          },
+          {
+            "line": 42,
+            "text": "\textrn\t_g_9124:byte"
+          },
+          {
+            "line": 304,
+            "text": "\tmov word ptr _g_9122, ax"
+          },
+          {
+            "line": 307,
+            "text": "\tmov word ptr _g_9124, ax"
+          },
+          {
+            "line": 324,
+            "text": "\tmov cx, word ptr _g_9122"
+          },
+          {
+            "line": 325,
+            "text": "\tmov dx, word ptr _g_9124"
+          },
+          {
+            "line": 699,
+            "text": "\tmov cx, word ptr _g_9122"
+          },
+          {
+            "line": 700,
+            "text": "\tmov dx, word ptr _g_9124"
+          },
+          {
+            "line": 748,
+            "text": "\tmov word ptr _g_9120, ax"
+          },
+          {
+            "line": 749,
+            "text": "\tmov word ptr _g_9122, cx"
+          },
+          {
+            "line": 750,
+            "text": "\tmov word ptr _g_9124, dx"
+          },
+          {
+            "line": 772,
+            "text": "\tmov ax, word ptr _g_9120"
+          },
+          {
+            "line": 799,
+            "text": "\tmov ax, word ptr _g_9120"
+          },
+          {
+            "line": 800,
+            "text": "\tmov cx, word ptr _g_9122"
+          },
+          {
+            "line": 801,
+            "text": "\tmov dx, word ptr _g_9124"
+          },
+          {
+            "line": 934,
+            "text": "\tadd ax, word ptr _g_9122"
+          },
+          {
+            "line": 945,
+            "text": "\tmov word ptr _g_9122, ax"
+          },
+          {
+            "line": 948,
+            "text": "\tadd ax, word ptr _g_9124"
+          },
+          {
+            "line": 959,
+            "text": "\tmov word ptr _g_9124, ax"
+          },
+          {
+            "line": 1331,
+            "text": "\tmov word ptr _g_9124, bx"
+          },
+          {
+            "line": 1334,
+            "text": "\tmov word ptr _g_9122, bx"
+          },
+          {
+            "line": 1340,
+            "text": "\tmov bx, word ptr _g_9122"
+          },
+          {
+            "line": 1345,
+            "text": "\tmov word ptr _g_9122, ax"
+          },
+          {
+            "line": 1354,
+            "text": "\tcmp bx, word ptr _g_9122"
+          },
+          {
+            "line": 1358,
+            "text": "\tmov word ptr _g_9122, ax"
+          },
+          {
+            "line": 1364,
+            "text": "\tmov bx, word ptr _g_9124"
+          },
+          {
+            "line": 1369,
+            "text": "\tmov word ptr _g_9124, ax"
+          },
+          {
+            "line": 1378,
+            "text": "\tcmp bx, word ptr _g_9124"
+          },
+          {
+            "line": 1382,
+            "text": "\tmov word ptr _g_9124, ax"
+          },
+          {
+            "line": 1387,
+            "text": "\tmov al, byte ptr _g_9120"
+          },
+          {
+            "line": 1397,
+            "text": "\tmov al, byte ptr _g_9120"
+          },
+          {
+            "line": 1429,
+            "text": "\tmov cx, word ptr _g_9122"
+          },
+          {
+            "line": 1430,
+            "text": "\tmov dx, word ptr _g_9124"
+          },
+          {
+            "line": 1434,
+            "text": "\tmov bl, byte ptr _g_9120"
+          },
+          {
+            "line": 1456,
+            "text": "\tmov cx, word ptr _g_9122"
+          },
+          {
+            "line": 1457,
+            "text": "\tmov dx, word ptr _g_9124"
+          },
+          {
+            "line": 1481,
+            "text": "\tmov word ptr _g_9120, bx"
+          },
+          {
+            "line": 1685,
+            "text": "\tmov bx, word ptr _g_9122"
+          },
+          {
+            "line": 1690,
+            "text": "\tmov bx, word ptr _g_9124"
+          },
+          {
+            "line": 1710,
+            "text": "\tmov cx, word ptr _g_9122"
+          },
+          {
+            "line": 1711,
+            "text": "\tmov dx, word ptr _g_9124"
+          },
+          {
+            "line": 1808,
+            "text": "\tmov ax, word ptr es:_g_9120"
+          },
+          {
+            "line": 1809,
+            "text": "\tmov cx, word ptr es:_g_9122"
+          },
+          {
+            "line": 1810,
+            "text": "\tmov dx, word ptr es:_g_9124"
+          },
+          {
+            "line": 1865,
+            "text": "\tmov ax, word ptr _g_9120"
+          },
+          {
+            "line": 1866,
+            "text": "\tmov cx, word ptr _g_9122"
+          },
+          {
+            "line": 1867,
+            "text": "\tmov dx, word ptr _g_9124"
+          },
+          {
+            "line": 1946,
+            "text": "\tmov cx, word ptr _g_9122"
+          },
+          {
+            "line": 1947,
+            "text": "\tmov dx, word ptr _g_9124"
+          },
+          {
+            "line": 1989,
+            "text": "\tmov di, word ptr _g_9122"
+          },
+          {
+            "line": 1994,
+            "text": "\tmov si, word ptr _g_9124"
+          }
+        ]
+      },
+      {
+        "path": "src/root/m1FD2.c",
+        "sha256": "f4359bdaf4cfc0fe326a54cf8a1eacb9ba3098b710bf2a561b3d0f48569bf6d8",
+        "manifest_sha256": "f4359bdaf4cfc0fe326a54cf8a1eacb9ba3098b710bf2a561b3d0f48569bf6d8",
+        "refs": [
+          {
+            "line": 271,
+            "text": "extern int near g_9122;"
+          },
+          {
+            "line": 272,
+            "text": "extern int near g_9124;"
+          },
+          {
+            "line": 276,
+            "text": "    pt->x = g_9122;"
+          },
+          {
+            "line": 277,
+            "text": "    pt->y = g_9124;"
+          },
+          {
+            "line": 294,
+            "text": "extern unsigned char near g_9120;"
+          },
+          {
+            "line": 301,
+            "text": "    mods = g_9120 & 3;"
+          }
+        ]
+      },
+      {
+        "path": "src/S26/m39C7.c",
+        "sha256": "fb4938daa334a8e9f929b44a542392f47fc7c1a654ca87f303ee80528b34c4c4",
+        "manifest_sha256": "fb4938daa334a8e9f929b44a542392f47fc7c1a654ca87f303ee80528b34c4c4",
+        "refs": [
+          {
+            "line": 214,
+            "text": "extern int near g_9122;"
+          },
+          {
+            "line": 215,
+            "text": "extern int near g_9124;"
+          },
+          {
+            "line": 263,
+            "text": "        if (pt.x != g_9122 || pt.y != g_9124) {"
+          },
+          {
+            "line": 335,
+            "text": "        if (pt.x != g_9122 || pt.y != g_9124) {"
+          }
+        ]
+      }
+    ],
+    "registered_behavior_exact_source_count": 29,
+    "registered_behavior_exact_reference_files": [],
+    "all_current_references_in_canonical_manifest": true,
+    "pointer_escape_index_or_arithmetic_refs": [],
+    "adjacent_non_members": {
+      "g_9126": {
+        "seg": 21939,
+        "off": 37158,
+        "grounding": "f_0250_0721: cmp word ptr [9126],380h; sub [9126],280h (DS word life/tile value)"
+      },
+      "g_9128": {
+        "seg": 21939,
+        "off": 37160,
+        "grounding": "f_21FA_00EE/0144/01D0: lcall [9128](fore*0x101, back*0x101, pat*0x101) attribute setter (far function pointer)"
+      }
+    }
+  },
+  "lifecycle": {
+    "mouse_initialization": "root:m1B73 _f_1B73_0046 seeds g_9122/g_9124 from screen midpoints at lines 304/307; it does not clear g_9120",
+    "functional_event_writer": "root:m1B73 _f_1B73_0445 stores AX/CX/DX as words to all three at lines 748-750",
+    "keyboard_updates": "root:m1B73 _f_1B73_051F and _f_1B73_0747 update x/y words; _f_1B73_0747 also edits low-byte button bits",
+    "button_refresh": "root:m1B73 _f_1B73_0A40 writes the INT 33h function-3 BX result to g_9120 as a word at line 1481; this is driver refresh, not explicit zeroing",
+    "other_consumers": "root:m1FD2, root:m00F8, and S26:m39C7 only read scalar values; none takes an address or indexes these symbols",
+    "evidence_source_pins": [
+      {
+        "path": "src/S26/m39C7.c",
+        "sha256": "fb4938daa334a8e9f929b44a542392f47fc7c1a654ca87f303ee80528b34c4c4",
+        "size": 9163
+      },
+      {
+        "path": "src/root/m00F8.c",
+        "sha256": "4ee148ec616e199f61b671df89da8a21f1789c4177d3dbc7b76a478acb98184a",
+        "size": 7304
+      },
+      {
+        "path": "src/root/m15F8.c",
+        "sha256": "d6d4daddab943ee3436ca0e9c8dbc866a9d67659f7448f3c307f858abe06b70a",
+        "size": 4897
+      },
+      {
+        "path": "src/root/m1B73.asm",
+        "sha256": "3097a6b03ff1d8bdfa7d573632d9905de88d754c8b1e047de4014c4f186cb848",
+        "size": 35010
+      },
+      {
+        "path": "src/root/m1FD2.c",
+        "sha256": "f4359bdaf4cfc0fe326a54cf8a1eacb9ba3098b710bf2a561b3d0f48569bf6d8",
+        "size": 10086
+      }
+    ]
+  },
+  "original_startup_zero_range": {
+    "evidence_path": "work/source-only-dos/queue-lifetime-contract-v1.json",
+    "evidence_sha256": "44b4f2afca0988722d1ff10df933771569c61cc02cd8f11b20ff4ffe8a8af97e",
+    "verified_actual_clear": {
+      "element": "byte",
+      "end_exclusive": "0x94f0",
+      "fill": 0,
+      "length_bytes": 2386,
+      "segment": "DGROUP",
+      "start_inclusive": "0x8b9e"
+    },
+    "clear_instruction": {
+      "linear": "0x29fe9",
+      "text": "rep stosb byte ptr es:[di], al"
+    },
+    "main_call": {
+      "canonical_location": "15F8:0004",
+      "canonical_module": "root:15F8",
+      "canonical_symbol": "main",
+      "claim_source": "src/root/m15F8.c",
+      "fixup_kind": "pointer32",
+      "fixup_site_linear": "0x2a01d",
+      "instruction_linear": "0x2a01c",
+      "obj_symbol": "_main",
+      "occurs_after_clear": true,
+      "resolved_identity": {
+        "offset": "0004",
+        "segment": "15F8",
+        "unit": "root"
+      },
+      "text": "lcall 0x15f8, 4"
+    },
+    "target_interval": {
+      "segment": "DGROUP",
+      "start_inclusive": "0x9120",
+      "end_exclusive": "0x9126",
+      "length_bytes": 6
+    },
+    "target_fully_within_clear": true,
+    "crt0_member_pin": {
+      "accepted_manifest_match": true,
+      "exact_runtime_verifier_result": true,
+      "linear": "0x29f5c",
+      "member": "dos\\crt0.asm",
+      "module_index": 0,
+      "segment": "_TEXT",
+      "sha256": "2e9a254b9bd00ea59884089e78e951f0e40343e11d24976f32d9582f4ded259d",
+      "size": 255
+    },
+    "runtime_library_pin": {
+      "matches_accepted_manifest": true,
+      "name": "llibcr.lib",
+      "path": "C:/tools/msc-6.00/LIB/llibcr.lib",
+      "sha256": "3d0c6ae92972789e87def01fa96351c39216d731d5c880370155c5613d78c884"
+    },
+    "research_script_pin": {
+      "path": "work/source-only-dos/queue-lifetime-research.py",
+      "sha256": "e505d40ca60631078a49a3d905a5f8b84f2bc6499ea03fa4a449d2bc012aed4d",
+      "size": 17615
+    },
+    "original_exe_identity_pin_only": {
+      "name": "SIMANT.EXE",
+      "sha256": "aa0596c6766322a8229ee3c36e57048c92adc82d50fbe2ef37afb8b85fcf4f11",
+      "size": 506509
+    },
+    "original_exe_opened_by_probe": false,
+    "scope": "The cited historical startup clears the registered original DGROUP interval before main; this does not establish that this generated candidate lands at those offsets or identify historical ownership."
+  },
+  "toolchain_probe": {
+    "compiler_profile": "msc600ax",
+    "compiler_profile_files": [
+      {
+        "path": "BIN/CL.EXE",
+        "sha256": "92df4a0839aac77940189ce54f107381b829babe8103926cb05d1adffe947347"
+      },
+      {
+        "path": "BIN/C1L.EXE",
+        "sha256": "d3db38b875a95048bca2809cd1f84783c6c070805f188fec9161054d6350ded3"
+      },
+      {
+        "path": "BIN/C2L.EXE",
+        "sha256": "62490de22e7b279ea59218a54d677bfc752cb5fc1287533d2e23d03519f155e0"
+      },
+      {
+        "path": "BIN/C3L.EXE",
+        "sha256": "9e82ecc87ffcdb2def53ac64c0d1f048b26421c1415b5600ad4d8d6fcbc06553"
+      },
+      {
+        "path": "BIN/CL.ERR",
+        "sha256": "ca22f37e5e0c09faebde9e4d549dd1f53523cc6f23049d2239a040cd19a424e7"
+      },
+      {
+        "path": "BIN/C1.ERR",
+        "sha256": "637444915870f3283d5df41c5cdb1be8c32cc6c19b080f2bb3891edbc3751c6e"
+      },
+      {
+        "path": "BIN/C23.ERR",
+        "sha256": "22944a0dffef336c0ebb8f6d5aeb97b4dbeb5c9758a48759557176bff49d1151"
+      },
+      {
+        "path": "BIN/CL.MSG",
+        "sha256": "3379f283aec74842bc82205e4c848d759e6e2dcbb6d4820eec9719f1297213ec"
+      }
+    ],
+    "linkers": {
+      "rtlink400": {
+        "RTLINK.EXE": "dff0a988738a2ba7716f7013ef5b8136e0857b6bfe700bccdeaad70ee5e87c74",
+        "RTLINK.DAT": "c1e206fe4b3c34d43b47aa9aa215e2959fbb23c69c89eb69e36d80b1d9194eea",
+        "RTLUTILS.LIB": "9060c022f65a2811b81936879f93eb16c5d349c14b56c704a3853d3cf79cd162",
+        "RTLINKST.COM": "6ad9015869dc9598a2b498c58297224e5ab4a13fad9ada528650dfcedeb83cf2"
+      },
+      "rtlink610": {
+        "RTL-REAL.EXE": "228c5d429438ea32ee21dd02c65b7f8e198715b3fa957be9da328f9857482773",
+        "RTL-SWAP.EXE": "daae0a8c358edc26f95540f4bc1629c0dc5c30652155d85ccd79bead4381cfe3",
+        "RTLINK.DAT": "10723fb4d4381b6a38417a18409e32d254e59850bcd3b465fbb824e01367a77b",
+        "RTLUTILS.LIB": "c718bac09b0b1204a259494446acfa8bfffb129144cc7d36799855621f4fdccb",
+        "RTLINKST.COM": "635425a8feff822ca98ec536c55a31824161bffbf9d24d37851cc0d9f7ce3b5f",
+        "RTLINK.EXE": "ea6f57a470a26801086593d54aa99f6bf983dd024fc19b5e13361a07f43e17fb",
+        "DOS4GW.EXE": "7192b80d1551769c2d2897b2f58015dc18fadca2b7e093a20f45b34011933c6c"
+      }
+    },
+    "runtime_libraries": [
+      {
+        "path": "C:/tools/msc-6.00/LIB/llibcr.lib",
+        "sha256": "3d0c6ae92972789e87def01fa96351c39216d731d5c880370155c5613d78c884"
+      },
+      {
+        "path": "C:/tools/msc-6.00/LIB/libh.lib",
+        "sha256": "a4492e8f63da409d949643fd448f29e65e2cc9a8f2deea977372177bbe0ad818"
+      }
+    ],
+    "omf_candidate_communal_rows": [
+      {
+        "name": "_g_9120",
+        "kind": "near",
+        "type_index": 0,
+        "length": 2
+      },
+      {
+        "name": "_g_9122",
+        "kind": "near",
+        "type_index": 0,
+        "length": 2
+      },
+      {
+        "name": "_g_9124",
+        "kind": "near",
+        "type_index": 0,
+        "length": 2
+      }
+    ],
+    "candidate_data_only_shape": {
+      "publics": [],
+      "local_publics": [],
+      "fixups": [],
+      "segment_lengths": {
+        "MOWNER_TEXT": 0,
+        "_DATA": 0,
+        "CONST": 0,
+        "_BSS": 0
+      }
+    },
+    "wrong_word_extent_rows": [
+      {
+        "name": "_g_9120",
+        "kind": "near",
+        "length": 2
+      },
+      {
+        "name": "_g_9122",
+        "kind": "near",
+        "length": 1
+      },
+      {
+        "name": "_g_9124",
+        "kind": "near",
+        "length": 2
+      }
+    ],
+    "wrong_word_extent_rejected_by_shape_check": true,
+    "initialized_owner_communal_rows": [
+      {
+        "name": "_g_9122",
+        "kind": "near",
+        "type_index": 0,
+        "length": 2
+      },
+      {
+        "name": "_g_9124",
+        "kind": "near",
+        "type_index": 0,
+        "length": 2
+      }
+    ],
+    "cases": [
+      {
+        "linker": "rtlink400",
+        "case": "positive_word_and_low_byte_view",
+        "owner_object": "MOWNER",
+        "view_object": "MBYTE",
+        "expected_log": "PASS",
+        "actual_log": "PASS",
+        "emulator_exit": 0,
+        "exe_sha256": "68d617907817c191788ac4db130f8e5d5606f1a45722a3f5ef2fe4a7379d16bd",
+        "link_log": ".RTLink(R)/Plus  with Virtual Memory/Overlays/RTLs/CodeView/Profiler  Ver. 4.00\n(C) Copyright Pocket Soft Inc., 1988-1990.  All Rights Reserved.\n\nSerial# 854-002-0162\n\nPocket Soft, Inc. is an Authorized Licensee of Microsoft(R) CodeView(R)\nInformation. \"Microsoft\" and \"CodeView\" are registered trademarks of\nMicrosoft Corporation.\n\n=> OUTPUT PROBE\n=> MAP = PROBE S,N,A,L\n=> NODEFLIB\n=> LIBRARY LLIBCR, LIBH\n=> FILE MOWNER, MBYTE, MMAIN\n=> \n8K\n",
+        "passed": true,
+        "expected": "PASS",
+        "actual": "PASS"
+      },
+      {
+        "linker": "rtlink400",
+        "case": "wrong_high_byte_view",
+        "owner_object": "MOWNER",
+        "view_object": "MBADVW",
+        "expected_log": "FAIL",
+        "actual_log": "FAIL",
+        "emulator_exit": 0,
+        "exe_sha256": "89a4abd4c1798bc4913bfbd2dea17b4c58988c6b3b5b7df814a71c4ec3775eb0",
+        "link_log": ".RTLink(R)/Plus  with Virtual Memory/Overlays/RTLs/CodeView/Profiler  Ver. 4.00\n(C) Copyright Pocket Soft Inc., 1988-1990.  All Rights Reserved.\n\nSerial# 854-002-0162\n\nPocket Soft, Inc. is an Authorized Licensee of Microsoft(R) CodeView(R)\nInformation. \"Microsoft\" and \"CodeView\" are registered trademarks of\nMicrosoft Corporation.\n\n=> OUTPUT PROBE\n=> MAP = PROBE S,N,A,L\n=> NODEFLIB\n=> LIBRARY LLIBCR, LIBH\n=> FILE MOWNER, MBADVW, MMAIN\n=> \n8K\n",
+        "passed": true,
+        "expected": "FAIL",
+        "actual": "FAIL"
+      },
+      {
+        "linker": "rtlink400",
+        "case": "initialized_owner_nonzero_contrast",
+        "owner_object": "MINIT",
+        "view_object": "MBYTE",
+        "expected_log": "FAIL",
+        "actual_log": "FAIL",
+        "emulator_exit": 0,
+        "exe_sha256": "6d58c6a395d05e5c90866dc4f4ba7ab258487de05776947e1a6388db425fe64d",
+        "link_log": ".RTLink(R)/Plus  with Virtual Memory/Overlays/RTLs/CodeView/Profiler  Ver. 4.00\n(C) Copyright Pocket Soft Inc., 1988-1990.  All Rights Reserved.\n\nSerial# 854-002-0162\n\nPocket Soft, Inc. is an Authorized Licensee of Microsoft(R) CodeView(R)\nInformation. \"Microsoft\" and \"CodeView\" are registered trademarks of\nMicrosoft Corporation.\n\n=> OUTPUT PROBE\n=> MAP = PROBE S,N,A,L\n=> NODEFLIB\n=> LIBRARY LLIBCR, LIBH\n=> FILE MINIT, MBYTE, MMAIN\n=> \n8K\n",
+        "passed": true,
+        "expected": "FAIL",
+        "actual": "FAIL"
+      },
+      {
+        "linker": "rtlink610",
+        "case": "positive_word_and_low_byte_view",
+        "owner_object": "MOWNER",
+        "view_object": "MBYTE",
+        "expected_log": "PASS",
+        "actual_log": "PASS",
+        "emulator_exit": 0,
+        "exe_sha256": "88c6ed6f23abd8f4dc8407279a88c95a53a54f5c1b4f7f4d41aba79c63abd3a9",
+        "link_log": ".RTLink(R)/Plus  w/ Virtual Memory Linking, Overlays, CodeView, Turbo Debugger,\nVersion 6.10        Demo Versions, .RTLs, Profiling, & Environment Var. Burn-in\nDOS 386-Mode    (C) Copyright Pocket Soft Inc., 1988-1993. All Rights Reserved.\nwith data swapping  Serial Number: 836-103-6260\n\nPocket Soft, Inc. is an Authorized Licensee of Microsoft(R) CodeView(R)\nInformation. \"Microsoft\" and \"CodeView\" are registered trademarks of\nMicrosoft Corporation.\n\n=> OUTPUT PROBE\n=> MAP = PROBE S,N,A,L\n=> NODEFLIB\n=> LIBRARY LLIBCR, LIBH\n=> FILE MOWNER, MBYTE, MMAIN\n=> \n\n____________________________________________________________________________\n\nMEMORY LAYOUT SUMMARY for: PROBE.EXE\n\n  Load Size:\t\t\t\t\t\t7.K\t+30H Para\n\nNOTE: Your program may have additional memory requirements depending on the\n  memory usage characteristics of your compiler. See your compiler\n  documentation for specifics.\n____________________________________________________________________________\n\n",
+        "passed": true,
+        "expected": "PASS",
+        "actual": "PASS"
+      },
+      {
+        "linker": "rtlink610",
+        "case": "wrong_high_byte_view",
+        "owner_object": "MOWNER",
+        "view_object": "MBADVW",
+        "expected_log": "FAIL",
+        "actual_log": "FAIL",
+        "emulator_exit": 0,
+        "exe_sha256": "8f4920fbdbff2d97d44d3656a096b071cc99a9260595b489f9be787a2313c004",
+        "link_log": ".RTLink(R)/Plus  w/ Virtual Memory Linking, Overlays, CodeView, Turbo Debugger,\nVersion 6.10        Demo Versions, .RTLs, Profiling, & Environment Var. Burn-in\nDOS 386-Mode    (C) Copyright Pocket Soft Inc., 1988-1993. All Rights Reserved.\nwith data swapping  Serial Number: 836-103-6260\n\nPocket Soft, Inc. is an Authorized Licensee of Microsoft(R) CodeView(R)\nInformation. \"Microsoft\" and \"CodeView\" are registered trademarks of\nMicrosoft Corporation.\n\n=> OUTPUT PROBE\n=> MAP = PROBE S,N,A,L\n=> NODEFLIB\n=> LIBRARY LLIBCR, LIBH\n=> FILE MOWNER, MBADVW, MMAIN\n=> \n\n____________________________________________________________________________\n\nMEMORY LAYOUT SUMMARY for: PROBE.EXE\n\n  Load Size:\t\t\t\t\t\t7.K\t+30H Para\n\nNOTE: Your program may have additional memory requirements depending on the\n  memory usage characteristics of your compiler. See your compiler\n  documentation for specifics.\n____________________________________________________________________________\n\n",
+        "passed": true,
+        "expected": "FAIL",
+        "actual": "FAIL"
+      },
+      {
+        "linker": "rtlink610",
+        "case": "initialized_owner_nonzero_contrast",
+        "owner_object": "MINIT",
+        "view_object": "MBYTE",
+        "expected_log": "FAIL",
+        "actual_log": "FAIL",
+        "emulator_exit": 0,
+        "exe_sha256": "f200ec0db2ae43047c49a6988062715e6f5ed3da5b0354b549403a675960da5f",
+        "link_log": ".RTLink(R)/Plus  w/ Virtual Memory Linking, Overlays, CodeView, Turbo Debugger,\nVersion 6.10        Demo Versions, .RTLs, Profiling, & Environment Var. Burn-in\nDOS 386-Mode    (C) Copyright Pocket Soft Inc., 1988-1993. All Rights Reserved.\nwith data swapping  Serial Number: 836-103-6260\n\nPocket Soft, Inc. is an Authorized Licensee of Microsoft(R) CodeView(R)\nInformation. \"Microsoft\" and \"CodeView\" are registered trademarks of\nMicrosoft Corporation.\n\n=> OUTPUT PROBE\n=> MAP = PROBE S,N,A,L\n=> NODEFLIB\n=> LIBRARY LLIBCR, LIBH\n=> FILE MINIT, MBYTE, MMAIN\n=> \n\n____________________________________________________________________________\n\nMEMORY LAYOUT SUMMARY for: PROBE.EXE\n\n  Load Size:\t\t\t\t\t\t7.K\t+30H Para\n\nNOTE: Your program may have additional memory requirements depending on the\n  memory usage characteristics of your compiler. See your compiler\n  documentation for specifics.\n____________________________________________________________________________\n\n",
+        "passed": true,
+        "expected": "FAIL",
+        "actual": "FAIL"
+      }
+    ],
+    "all_required_controls_match": true
+  },
+  "pins": [
+    {
+      "path": "work/source-only-dos/mouse-word-probe.py",
+      "sha256": "4d17beb2e525fd503ab469b52a2af38142ee65d9c6947e611e8fedb9e57e2600",
+      "size": 24848
+    },
+    {
+      "path": "work/source-only-dos/providers/mouse-words.c",
+      "sha256": "64335f44c5f3104ffb8fc81d26fc8bc7aaf5e0e1d126bb8d79c02a6cc5802d32",
+      "size": 280
+    },
+    {
+      "path": "layout/manifest.json",
+      "sha256": "025a0a9255d910cae4b122ab5a3f3fb40888bb456d7fe42158db7c9e622fcf50",
+      "size": 628980
+    },
+    {
+      "path": "layout/symbols.json",
+      "sha256": "0f5dd5b0a211945a97782cfccdb9bb31b0dfd07fcde5df4d4f9486b487eb0125",
+      "size": 800809
+    },
+    {
+      "path": "evidence/behavior/manifest.json",
+      "sha256": "dae79bdf74d7660e7e2eb47e8b463a9576c8d74a8e6ccd9e91af6d51f871ecea",
+      "size": 28379
+    },
+    {
+      "path": "work/source-only-dos/queue-lifetime-contract-v1.json",
+      "sha256": "44b4f2afca0988722d1ff10df933771569c61cc02cd8f11b20ff4ffe8a8af97e",
+      "size": 6627
+    },
+    {
+      "path": "work/source-only-dos/queue-lifetime-research.py",
+      "sha256": "e505d40ca60631078a49a3d905a5f8b84f2bc6499ea03fa4a449d2bc012aed4d",
+      "size": 17615
+    },
+    {
+      "path": "layout/toolchain.json",
+      "sha256": "c0bb71cd8b1f4a1a1f91299bd3b6148aa67b7a1d12c3c3946a229272593eb274",
+      "size": 39241
+    },
+    {
+      "path": "layout/oracle.lock.json",
+      "sha256": "2c6d9e98c688621ad49a08c78d0e0968f4076b036be56ec0738217b533ccde13",
+      "size": 18807
+    },
+    {
+      "path": "src/S26/m39C7.c",
+      "sha256": "fb4938daa334a8e9f929b44a542392f47fc7c1a654ca87f303ee80528b34c4c4",
+      "size": 9163
+    },
+    {
+      "path": "src/root/m00F8.c",
+      "sha256": "4ee148ec616e199f61b671df89da8a21f1789c4177d3dbc7b76a478acb98184a",
+      "size": 7304
+    },
+    {
+      "path": "src/root/m15F8.c",
+      "sha256": "d6d4daddab943ee3436ca0e9c8dbc866a9d67659f7448f3c307f858abe06b70a",
+      "size": 4897
+    },
+    {
+      "path": "src/root/m1B73.asm",
+      "sha256": "3097a6b03ff1d8bdfa7d573632d9905de88d754c8b1e047de4014c4f186cb848",
+      "size": 35010
+    },
+    {
+      "path": "src/root/m1FD2.c",
+      "sha256": "f4359bdaf4cfc0fe326a54cf8a1eacb9ba3098b710bf2a561b3d0f48569bf6d8",
+      "size": 10086
+    },
+    {
+      "path": "evidence/behavior/functions/DisplayCard/contracts/logical-text-v2/module.c",
+      "sha256": "5e8e5f39325914cc1a6f1b5de9e5c894818e47d68a7ce594b2a514c99b37a1ea"
+    },
+    {
+      "path": "evidence/behavior/functions/DrawBalloons/contracts/logical-render-v1/module.c",
+      "sha256": "e41a4ab8c56c0d4923ace8b02027f2471feee049aabe0577588e206e930b4db2"
+    },
+    {
+      "path": "evidence/behavior/functions/DrawMapCursor/contracts/logical-render-v2/module.c",
+      "sha256": "daa607847c4c0364358a7b57d3f790dd9981e284bf2cedd01fa1fb3ac4df918a"
+    },
+    {
+      "path": "evidence/behavior/functions/FindIndex/module.c",
+      "sha256": "1af5252fe8449eeca44b4099fe4a4bd1ff5ab24521c7a888253adfdd4554ac5a"
+    },
+    {
+      "path": "evidence/behavior/functions/InvertPatch/contracts/logical-render-v2/module.c",
+      "sha256": "1ace9a2985696a7c254c9cfcfafc504be9126f07c47672c6bf79e3e2a570e801"
+    },
+    {
+      "path": "evidence/behavior/functions/LessonDone/contracts/host-service-v1/module.c",
+      "sha256": "c611660dde4da7117c3232aa06e597871394cc4112466d46559705b235424359"
+    },
+    {
+      "path": "evidence/behavior/functions/SpiderScan/reviews/contract-v2/module.c",
+      "sha256": "2d2192f4ada76eb4676d174932847e3807c987f294b1fbbae9287ddcbbd81734"
+    },
+    {
+      "path": "evidence/behavior/functions/drawHistGraph/contracts/logical-text-v3/module.c",
+      "sha256": "764bcd8f1272b6f9655a1fe305cea71d98e95b9ad9c285f69dc944fbfe21d34c"
+    },
+    {
+      "path": "evidence/behavior/functions/f_0250_1018/contracts/logical-render-v2/module.c",
+      "sha256": "e41a4ab8c56c0d4923ace8b02027f2471feee049aabe0577588e206e930b4db2"
+    },
+    {
+      "path": "evidence/behavior/functions/f_0250_129E/contracts/logical-render-v2/module.c",
+      "sha256": "e41a4ab8c56c0d4923ace8b02027f2471feee049aabe0577588e206e930b4db2"
+    },
+    {
+      "path": "evidence/behavior/functions/f_171C_09CC/contracts/live-state-v2/module.c",
+      "sha256": "3d24904696b29c36b118479ecc50dd80b8d173f58a632a339df9391d08ea085b"
+    },
+    {
+      "path": "evidence/behavior/functions/f_171C_0ADC/contracts/live-state-v2/module.c",
+      "sha256": "3d24904696b29c36b118479ecc50dd80b8d173f58a632a339df9391d08ea085b"
+    },
+    {
+      "path": "evidence/behavior/functions/f_171C_0CF4/contracts/live-state-v2/module.c",
+      "sha256": "3d24904696b29c36b118479ecc50dd80b8d173f58a632a339df9391d08ea085b"
+    },
+    {
+      "path": "evidence/behavior/functions/f_171C_0FBC/contracts/live-state-v2/module.c",
+      "sha256": "3d24904696b29c36b118479ecc50dd80b8d173f58a632a339df9391d08ea085b"
+    },
+    {
+      "path": "evidence/behavior/functions/f_1C62_0415/contracts/host-service-v1/module.c",
+      "sha256": "1a75da44054b48e33e02b0dc551e9e690d1b0797b5e2cfe2e3e6e26ad3b632d4"
+    },
+    {
+      "path": "evidence/behavior/functions/f_1E57_038E/contracts/window-valid-v1/module.c",
+      "sha256": "edfb01cec348d79243d7cc1630248045fa7790a321192f83d185298d0e9b67f6"
+    },
+    {
+      "path": "evidence/behavior/functions/f_20E8_0903/contracts/window-valid-v1/module.c",
+      "sha256": "e9f7805d6d353e1d3d432cd146073bae6bb8ec0be13b20e3543a3895e2a1ef49"
+    },
+    {
+      "path": "evidence/behavior/functions/f_23E6_0000/revisions/ss-ds-20261002/module.c",
+      "sha256": "867a7f15631db0ef33079daedea99f99e7ddc75b57f04b15bafca036f14c5ee7"
+    },
+    {
+      "path": "evidence/behavior/functions/f_2505_0453/contracts/window-valid-v1/module.c",
+      "sha256": "22a03f15e95fff376d27211426c4f9e3395e16e5decd92ef501fbfe3c1aba623"
+    },
+    {
+      "path": "evidence/behavior/functions/f_2815_0165/module.c",
+      "sha256": "8b6ca1b25908a00cdd6fea2212943f7345680945d25e1a59e0f1fb69352958bc"
+    },
+    {
+      "path": "evidence/behavior/functions/f_284A_0138/module.c",
+      "sha256": "5d328bf943dd3b1dd8dd797ba7d63885777facf9ea5c194b6b222244bd937a35"
+    },
+    {
+      "path": "evidence/behavior/functions/f_29D6_000A/module.c",
+      "sha256": "43b2d29dea982299edc3d3b173f9cb70bc88b76c1b9bc268c02a9a52c6a21626"
+    },
+    {
+      "path": "evidence/behavior/functions/o10_35F5_0384/contracts/host-service-v1/module.c",
+      "sha256": "4b9dda15dbea1c8fd204ed95d4cb6a909751a59d0517909e90c4626cad3c7888"
+    },
+    {
+      "path": "evidence/behavior/functions/o15_384C_0239/contracts/actual-window-v2/module.c",
+      "sha256": "01b51eecedcd28e2213819572c846a9754039f4a527e6da5e56e57783398bdd5"
+    },
+    {
+      "path": "evidence/behavior/functions/o25_3BA4_1035/module.c",
+      "sha256": "5fc31bb8f45f9e7fa299efe9667af06b29d61ab82a6a2f38715f40d939bd3947"
+    },
+    {
+      "path": "evidence/behavior/functions/o25_3BA4_1686/module.c",
+      "sha256": "5fc31bb8f45f9e7fa299efe9667af06b29d61ab82a6a2f38715f40d939bd3947"
+    },
+    {
+      "path": "evidence/behavior/functions/win_DrawBitMap/contracts/logical-render-v2/module.c",
+      "sha256": "c4329ddb75629a235043d9da1eb11c7dd6f2cb3826fe392bfc8a27c98eeb97e1"
+    },
+    {
+      "path": "evidence/behavior/functions/win_PrintStyleTextInRect/contracts/logical-text-v2/module.c",
+      "sha256": "5e8e5f39325914cc1a6f1b5de9e5c894818e47d68a7ce594b2a514c99b37a1ea"
+    },
+    {
+      "path": "evidence/behavior/functions/win_UnlockWin/contracts/window-valid-v1/module.c",
+      "sha256": "23aa124a97a2f213fcf99d0f3e9790e2a35813ee5e62d338f7ef205c5b03acc0"
+    },
+    {
+      "path": "C:/tools/msc-6.00/LIB/llibcr.lib",
+      "sha256": "3d0c6ae92972789e87def01fa96351c39216d731d5c880370155c5613d78c884"
+    },
+    {
+      "path": "C:/tools/msc-6.00/LIB/libh.lib",
+      "sha256": "a4492e8f63da409d949643fd448f29e65e2cc9a8f2deea977372177bbe0ad818"
+    },
+    {
+      "path": "C:/tools/dosbox-x/dosbox-x.exe",
+      "sha256": "b028a4d328302ea270722dec69f3ec3a10ebf76beba72a51970db33a88df2bf6"
+    },
+    {
+      "path": "C:\\tools\\rtlink-plus-6.10\\installed\\RTL-REAL.EXE",
+      "sha256": "228c5d429438ea32ee21dd02c65b7f8e198715b3fa957be9da328f9857482773",
+      "size": 717922
+    },
+    {
+      "path": "C:\\tools\\rtlink-plus-6.10\\installed\\RTL-SWAP.EXE",
+      "sha256": "daae0a8c358edc26f95540f4bc1629c0dc5c30652155d85ccd79bead4381cfe3",
+      "size": 692123
+    },
+    {
+      "path": "C:\\tools\\rtlink-plus-6.10\\installed\\RTLINK.DAT",
+      "sha256": "10723fb4d4381b6a38417a18409e32d254e59850bcd3b465fbb824e01367a77b",
+      "size": 100100
+    },
+    {
+      "path": "C:\\tools\\rtlink-plus-6.10\\installed\\RTLUTILS.LIB",
+      "sha256": "c718bac09b0b1204a259494446acfa8bfffb129144cc7d36799855621f4fdccb",
+      "size": 423823
+    },
+    {
+      "path": "C:\\tools\\rtlink-plus-6.10\\installed\\RTLINKST.COM",
+      "sha256": "635425a8feff822ca98ec536c55a31824161bffbf9d24d37851cc0d9f7ce3b5f",
+      "size": 11031
+    },
+    {
+      "path": "C:\\tools\\rtlink-plus-6.10\\installed\\RTLINK.EXE",
+      "sha256": "ea6f57a470a26801086593d54aa99f6bf983dd024fc19b5e13361a07f43e17fb",
+      "size": 687531
+    },
+    {
+      "path": "C:\\tools\\rtlink-plus-6.10\\installed\\DOS4GW.EXE",
+      "sha256": "7192b80d1551769c2d2897b2f58015dc18fadca2b7e093a20f45b34011933c6c",
+      "size": 231179
+    },
+    {
+      "path": "C:\\tools\\RTLink-Plus-4.00-DiscMaster\\installed\\dest\\RTLINK.EXE",
+      "sha256": "dff0a988738a2ba7716f7013ef5b8136e0857b6bfe700bccdeaad70ee5e87c74",
+      "size": 449497
+    },
+    {
+      "path": "C:\\tools\\RTLink-Plus-4.00-DiscMaster\\installed\\dest\\RTLINK.DAT",
+      "sha256": "c1e206fe4b3c34d43b47aa9aa215e2959fbb23c69c89eb69e36d80b1d9194eea",
+      "size": 63824
+    },
+    {
+      "path": "C:\\tools\\RTLink-Plus-4.00-DiscMaster\\installed\\dest\\RTLUTILS.LIB",
+      "sha256": "9060c022f65a2811b81936879f93eb16c5d349c14b56c704a3853d3cf79cd162",
+      "size": 266625
+    },
+    {
+      "path": "C:\\tools\\RTLink-Plus-4.00-DiscMaster\\installed\\dest\\RTLINKST.COM",
+      "sha256": "6ad9015869dc9598a2b498c58297224e5ab4a13fad9ada528650dfcedeb83cf2",
+      "size": 7184
+    }
+  ],
+  "limits": [
+    "No original COMDEF-producing module or communal order is identified.",
+    "No aggregate layout is claimed.",
+    "Generated linker addresses and broader fixed-layout dependencies are not verified.",
+    "Source lifecycle evidence does not prove initialization before every game use beyond the cited startup clear.",
+    "No production tools, tests, canonical files, or evidence registries are modified."
+  ],
+  "root_reviewed": true,
+  "all_required_checks_pass": true,
+  "cases": [
+    {
+      "linker": "rtlink400",
+      "case": "positive_word_and_low_byte_view",
+      "owner_object": "MOWNER",
+      "view_object": "MBYTE",
+      "expected_log": "PASS",
+      "actual_log": "PASS",
+      "emulator_exit": 0,
+      "exe_sha256": "68d617907817c191788ac4db130f8e5d5606f1a45722a3f5ef2fe4a7379d16bd",
+      "link_log": ".RTLink(R)/Plus  with Virtual Memory/Overlays/RTLs/CodeView/Profiler  Ver. 4.00\n(C) Copyright Pocket Soft Inc., 1988-1990.  All Rights Reserved.\n\nSerial# 854-002-0162\n\nPocket Soft, Inc. is an Authorized Licensee of Microsoft(R) CodeView(R)\nInformation. \"Microsoft\" and \"CodeView\" are registered trademarks of\nMicrosoft Corporation.\n\n=> OUTPUT PROBE\n=> MAP = PROBE S,N,A,L\n=> NODEFLIB\n=> LIBRARY LLIBCR, LIBH\n=> FILE MOWNER, MBYTE, MMAIN\n=> \n8K\n",
+      "passed": true,
+      "expected": "PASS",
+      "actual": "PASS"
+    },
+    {
+      "linker": "rtlink400",
+      "case": "wrong_high_byte_view",
+      "owner_object": "MOWNER",
+      "view_object": "MBADVW",
+      "expected_log": "FAIL",
+      "actual_log": "FAIL",
+      "emulator_exit": 0,
+      "exe_sha256": "89a4abd4c1798bc4913bfbd2dea17b4c58988c6b3b5b7df814a71c4ec3775eb0",
+      "link_log": ".RTLink(R)/Plus  with Virtual Memory/Overlays/RTLs/CodeView/Profiler  Ver. 4.00\n(C) Copyright Pocket Soft Inc., 1988-1990.  All Rights Reserved.\n\nSerial# 854-002-0162\n\nPocket Soft, Inc. is an Authorized Licensee of Microsoft(R) CodeView(R)\nInformation. \"Microsoft\" and \"CodeView\" are registered trademarks of\nMicrosoft Corporation.\n\n=> OUTPUT PROBE\n=> MAP = PROBE S,N,A,L\n=> NODEFLIB\n=> LIBRARY LLIBCR, LIBH\n=> FILE MOWNER, MBADVW, MMAIN\n=> \n8K\n",
+      "passed": true,
+      "expected": "FAIL",
+      "actual": "FAIL"
+    },
+    {
+      "linker": "rtlink400",
+      "case": "initialized_owner_nonzero_contrast",
+      "owner_object": "MINIT",
+      "view_object": "MBYTE",
+      "expected_log": "FAIL",
+      "actual_log": "FAIL",
+      "emulator_exit": 0,
+      "exe_sha256": "6d58c6a395d05e5c90866dc4f4ba7ab258487de05776947e1a6388db425fe64d",
+      "link_log": ".RTLink(R)/Plus  with Virtual Memory/Overlays/RTLs/CodeView/Profiler  Ver. 4.00\n(C) Copyright Pocket Soft Inc., 1988-1990.  All Rights Reserved.\n\nSerial# 854-002-0162\n\nPocket Soft, Inc. is an Authorized Licensee of Microsoft(R) CodeView(R)\nInformation. \"Microsoft\" and \"CodeView\" are registered trademarks of\nMicrosoft Corporation.\n\n=> OUTPUT PROBE\n=> MAP = PROBE S,N,A,L\n=> NODEFLIB\n=> LIBRARY LLIBCR, LIBH\n=> FILE MINIT, MBYTE, MMAIN\n=> \n8K\n",
+      "passed": true,
+      "expected": "FAIL",
+      "actual": "FAIL"
+    },
+    {
+      "linker": "rtlink610",
+      "case": "positive_word_and_low_byte_view",
+      "owner_object": "MOWNER",
+      "view_object": "MBYTE",
+      "expected_log": "PASS",
+      "actual_log": "PASS",
+      "emulator_exit": 0,
+      "exe_sha256": "88c6ed6f23abd8f4dc8407279a88c95a53a54f5c1b4f7f4d41aba79c63abd3a9",
+      "link_log": ".RTLink(R)/Plus  w/ Virtual Memory Linking, Overlays, CodeView, Turbo Debugger,\nVersion 6.10        Demo Versions, .RTLs, Profiling, & Environment Var. Burn-in\nDOS 386-Mode    (C) Copyright Pocket Soft Inc., 1988-1993. All Rights Reserved.\nwith data swapping  Serial Number: 836-103-6260\n\nPocket Soft, Inc. is an Authorized Licensee of Microsoft(R) CodeView(R)\nInformation. \"Microsoft\" and \"CodeView\" are registered trademarks of\nMicrosoft Corporation.\n\n=> OUTPUT PROBE\n=> MAP = PROBE S,N,A,L\n=> NODEFLIB\n=> LIBRARY LLIBCR, LIBH\n=> FILE MOWNER, MBYTE, MMAIN\n=> \n\n____________________________________________________________________________\n\nMEMORY LAYOUT SUMMARY for: PROBE.EXE\n\n  Load Size:\t\t\t\t\t\t7.K\t+30H Para\n\nNOTE: Your program may have additional memory requirements depending on the\n  memory usage characteristics of your compiler. See your compiler\n  documentation for specifics.\n____________________________________________________________________________\n\n",
+      "passed": true,
+      "expected": "PASS",
+      "actual": "PASS"
+    },
+    {
+      "linker": "rtlink610",
+      "case": "wrong_high_byte_view",
+      "owner_object": "MOWNER",
+      "view_object": "MBADVW",
+      "expected_log": "FAIL",
+      "actual_log": "FAIL",
+      "emulator_exit": 0,
+      "exe_sha256": "8f4920fbdbff2d97d44d3656a096b071cc99a9260595b489f9be787a2313c004",
+      "link_log": ".RTLink(R)/Plus  w/ Virtual Memory Linking, Overlays, CodeView, Turbo Debugger,\nVersion 6.10        Demo Versions, .RTLs, Profiling, & Environment Var. Burn-in\nDOS 386-Mode    (C) Copyright Pocket Soft Inc., 1988-1993. All Rights Reserved.\nwith data swapping  Serial Number: 836-103-6260\n\nPocket Soft, Inc. is an Authorized Licensee of Microsoft(R) CodeView(R)\nInformation. \"Microsoft\" and \"CodeView\" are registered trademarks of\nMicrosoft Corporation.\n\n=> OUTPUT PROBE\n=> MAP = PROBE S,N,A,L\n=> NODEFLIB\n=> LIBRARY LLIBCR, LIBH\n=> FILE MOWNER, MBADVW, MMAIN\n=> \n\n____________________________________________________________________________\n\nMEMORY LAYOUT SUMMARY for: PROBE.EXE\n\n  Load Size:\t\t\t\t\t\t7.K\t+30H Para\n\nNOTE: Your program may have additional memory requirements depending on the\n  memory usage characteristics of your compiler. See your compiler\n  documentation for specifics.\n____________________________________________________________________________\n\n",
+      "passed": true,
+      "expected": "FAIL",
+      "actual": "FAIL"
+    },
+    {
+      "linker": "rtlink610",
+      "case": "initialized_owner_nonzero_contrast",
+      "owner_object": "MINIT",
+      "view_object": "MBYTE",
+      "expected_log": "FAIL",
+      "actual_log": "FAIL",
+      "emulator_exit": 0,
+      "exe_sha256": "f200ec0db2ae43047c49a6988062715e6f5ed3da5b0354b549403a675960da5f",
+      "link_log": ".RTLink(R)/Plus  w/ Virtual Memory Linking, Overlays, CodeView, Turbo Debugger,\nVersion 6.10        Demo Versions, .RTLs, Profiling, & Environment Var. Burn-in\nDOS 386-Mode    (C) Copyright Pocket Soft Inc., 1988-1993. All Rights Reserved.\nwith data swapping  Serial Number: 836-103-6260\n\nPocket Soft, Inc. is an Authorized Licensee of Microsoft(R) CodeView(R)\nInformation. \"Microsoft\" and \"CodeView\" are registered trademarks of\nMicrosoft Corporation.\n\n=> OUTPUT PROBE\n=> MAP = PROBE S,N,A,L\n=> NODEFLIB\n=> LIBRARY LLIBCR, LIBH\n=> FILE MINIT, MBYTE, MMAIN\n=> \n\n____________________________________________________________________________\n\nMEMORY LAYOUT SUMMARY for: PROBE.EXE\n\n  Load Size:\t\t\t\t\t\t7.K\t+30H Para\n\nNOTE: Your program may have additional memory requirements depending on the\n  memory usage characteristics of your compiler. See your compiler\n  documentation for specifics.\n____________________________________________________________________________\n\n",
+      "passed": true,
+      "expected": "FAIL",
+      "actual": "FAIL"
+    }
+  ],
+  "required_cases": {
+    "positive_word_and_low_byte_view": "PASS",
+    "wrong_high_byte_view": "FAIL",
+    "initialized_owner_nonzero_contrast": "FAIL"
+  },
+  "inputs": [
+    {
+      "path": "work/source-only-dos/mouse-word-probe.py",
+      "sha256": "4d17beb2e525fd503ab469b52a2af38142ee65d9c6947e611e8fedb9e57e2600",
+      "size": 24848
+    },
+    {
+      "path": "work/source-only-dos/providers/mouse-words.c",
+      "sha256": "64335f44c5f3104ffb8fc81d26fc8bc7aaf5e0e1d126bb8d79c02a6cc5802d32",
+      "size": 280
+    },
+    {
+      "path": "layout/manifest.json",
+      "sha256": "025a0a9255d910cae4b122ab5a3f3fb40888bb456d7fe42158db7c9e622fcf50",
+      "size": 628980
+    },
+    {
+      "path": "layout/symbols.json",
+      "sha256": "0f5dd5b0a211945a97782cfccdb9bb31b0dfd07fcde5df4d4f9486b487eb0125",
+      "size": 800809
+    },
+    {
+      "path": "evidence/behavior/manifest.json",
+      "sha256": "dae79bdf74d7660e7e2eb47e8b463a9576c8d74a8e6ccd9e91af6d51f871ecea",
+      "size": 28379
+    },
+    {
+      "path": "work/source-only-dos/queue-lifetime-contract-v1.json",
+      "sha256": "44b4f2afca0988722d1ff10df933771569c61cc02cd8f11b20ff4ffe8a8af97e",
+      "size": 6627
+    },
+    {
+      "path": "work/source-only-dos/queue-lifetime-research.py",
+      "sha256": "e505d40ca60631078a49a3d905a5f8b84f2bc6499ea03fa4a449d2bc012aed4d",
+      "size": 17615
+    },
+    {
+      "path": "layout/toolchain.json",
+      "sha256": "c0bb71cd8b1f4a1a1f91299bd3b6148aa67b7a1d12c3c3946a229272593eb274",
+      "size": 39241
+    },
+    {
+      "path": "layout/oracle.lock.json",
+      "sha256": "2c6d9e98c688621ad49a08c78d0e0968f4076b036be56ec0738217b533ccde13",
+      "size": 18807
+    },
+    {
+      "path": "src/S26/m39C7.c",
+      "sha256": "fb4938daa334a8e9f929b44a542392f47fc7c1a654ca87f303ee80528b34c4c4",
+      "size": 9163
+    },
+    {
+      "path": "src/root/m00F8.c",
+      "sha256": "4ee148ec616e199f61b671df89da8a21f1789c4177d3dbc7b76a478acb98184a",
+      "size": 7304
+    },
+    {
+      "path": "src/root/m15F8.c",
+      "sha256": "d6d4daddab943ee3436ca0e9c8dbc866a9d67659f7448f3c307f858abe06b70a",
+      "size": 4897
+    },
+    {
+      "path": "src/root/m1B73.asm",
+      "sha256": "3097a6b03ff1d8bdfa7d573632d9905de88d754c8b1e047de4014c4f186cb848",
+      "size": 35010
+    },
+    {
+      "path": "src/root/m1FD2.c",
+      "sha256": "f4359bdaf4cfc0fe326a54cf8a1eacb9ba3098b710bf2a561b3d0f48569bf6d8",
+      "size": 10086
+    },
+    {
+      "path": "evidence/behavior/functions/DisplayCard/contracts/logical-text-v2/module.c",
+      "sha256": "5e8e5f39325914cc1a6f1b5de9e5c894818e47d68a7ce594b2a514c99b37a1ea"
+    },
+    {
+      "path": "evidence/behavior/functions/DrawBalloons/contracts/logical-render-v1/module.c",
+      "sha256": "e41a4ab8c56c0d4923ace8b02027f2471feee049aabe0577588e206e930b4db2"
+    },
+    {
+      "path": "evidence/behavior/functions/DrawMapCursor/contracts/logical-render-v2/module.c",
+      "sha256": "daa607847c4c0364358a7b57d3f790dd9981e284bf2cedd01fa1fb3ac4df918a"
+    },
+    {
+      "path": "evidence/behavior/functions/FindIndex/module.c",
+      "sha256": "1af5252fe8449eeca44b4099fe4a4bd1ff5ab24521c7a888253adfdd4554ac5a"
+    },
+    {
+      "path": "evidence/behavior/functions/InvertPatch/contracts/logical-render-v2/module.c",
+      "sha256": "1ace9a2985696a7c254c9cfcfafc504be9126f07c47672c6bf79e3e2a570e801"
+    },
+    {
+      "path": "evidence/behavior/functions/LessonDone/contracts/host-service-v1/module.c",
+      "sha256": "c611660dde4da7117c3232aa06e597871394cc4112466d46559705b235424359"
+    },
+    {
+      "path": "evidence/behavior/functions/SpiderScan/reviews/contract-v2/module.c",
+      "sha256": "2d2192f4ada76eb4676d174932847e3807c987f294b1fbbae9287ddcbbd81734"
+    },
+    {
+      "path": "evidence/behavior/functions/drawHistGraph/contracts/logical-text-v3/module.c",
+      "sha256": "764bcd8f1272b6f9655a1fe305cea71d98e95b9ad9c285f69dc944fbfe21d34c"
+    },
+    {
+      "path": "evidence/behavior/functions/f_0250_1018/contracts/logical-render-v2/module.c",
+      "sha256": "e41a4ab8c56c0d4923ace8b02027f2471feee049aabe0577588e206e930b4db2"
+    },
+    {
+      "path": "evidence/behavior/functions/f_0250_129E/contracts/logical-render-v2/module.c",
+      "sha256": "e41a4ab8c56c0d4923ace8b02027f2471feee049aabe0577588e206e930b4db2"
+    },
+    {
+      "path": "evidence/behavior/functions/f_171C_09CC/contracts/live-state-v2/module.c",
+      "sha256": "3d24904696b29c36b118479ecc50dd80b8d173f58a632a339df9391d08ea085b"
+    },
+    {
+      "path": "evidence/behavior/functions/f_171C_0ADC/contracts/live-state-v2/module.c",
+      "sha256": "3d24904696b29c36b118479ecc50dd80b8d173f58a632a339df9391d08ea085b"
+    },
+    {
+      "path": "evidence/behavior/functions/f_171C_0CF4/contracts/live-state-v2/module.c",
+      "sha256": "3d24904696b29c36b118479ecc50dd80b8d173f58a632a339df9391d08ea085b"
+    },
+    {
+      "path": "evidence/behavior/functions/f_171C_0FBC/contracts/live-state-v2/module.c",
+      "sha256": "3d24904696b29c36b118479ecc50dd80b8d173f58a632a339df9391d08ea085b"
+    },
+    {
+      "path": "evidence/behavior/functions/f_1C62_0415/contracts/host-service-v1/module.c",
+      "sha256": "1a75da44054b48e33e02b0dc551e9e690d1b0797b5e2cfe2e3e6e26ad3b632d4"
+    },
+    {
+      "path": "evidence/behavior/functions/f_1E57_038E/contracts/window-valid-v1/module.c",
+      "sha256": "edfb01cec348d79243d7cc1630248045fa7790a321192f83d185298d0e9b67f6"
+    },
+    {
+      "path": "evidence/behavior/functions/f_20E8_0903/contracts/window-valid-v1/module.c",
+      "sha256": "e9f7805d6d353e1d3d432cd146073bae6bb8ec0be13b20e3543a3895e2a1ef49"
+    },
+    {
+      "path": "evidence/behavior/functions/f_23E6_0000/revisions/ss-ds-20261002/module.c",
+      "sha256": "867a7f15631db0ef33079daedea99f99e7ddc75b57f04b15bafca036f14c5ee7"
+    },
+    {
+      "path": "evidence/behavior/functions/f_2505_0453/contracts/window-valid-v1/module.c",
+      "sha256": "22a03f15e95fff376d27211426c4f9e3395e16e5decd92ef501fbfe3c1aba623"
+    },
+    {
+      "path": "evidence/behavior/functions/f_2815_0165/module.c",
+      "sha256": "8b6ca1b25908a00cdd6fea2212943f7345680945d25e1a59e0f1fb69352958bc"
+    },
+    {
+      "path": "evidence/behavior/functions/f_284A_0138/module.c",
+      "sha256": "5d328bf943dd3b1dd8dd797ba7d63885777facf9ea5c194b6b222244bd937a35"
+    },
+    {
+      "path": "evidence/behavior/functions/f_29D6_000A/module.c",
+      "sha256": "43b2d29dea982299edc3d3b173f9cb70bc88b76c1b9bc268c02a9a52c6a21626"
+    },
+    {
+      "path": "evidence/behavior/functions/o10_35F5_0384/contracts/host-service-v1/module.c",
+      "sha256": "4b9dda15dbea1c8fd204ed95d4cb6a909751a59d0517909e90c4626cad3c7888"
+    },
+    {
+      "path": "evidence/behavior/functions/o15_384C_0239/contracts/actual-window-v2/module.c",
+      "sha256": "01b51eecedcd28e2213819572c846a9754039f4a527e6da5e56e57783398bdd5"
+    },
+    {
+      "path": "evidence/behavior/functions/o25_3BA4_1035/module.c",
+      "sha256": "5fc31bb8f45f9e7fa299efe9667af06b29d61ab82a6a2f38715f40d939bd3947"
+    },
+    {
+      "path": "evidence/behavior/functions/o25_3BA4_1686/module.c",
+      "sha256": "5fc31bb8f45f9e7fa299efe9667af06b29d61ab82a6a2f38715f40d939bd3947"
+    },
+    {
+      "path": "evidence/behavior/functions/win_DrawBitMap/contracts/logical-render-v2/module.c",
+      "sha256": "c4329ddb75629a235043d9da1eb11c7dd6f2cb3826fe392bfc8a27c98eeb97e1"
+    },
+    {
+      "path": "evidence/behavior/functions/win_PrintStyleTextInRect/contracts/logical-text-v2/module.c",
+      "sha256": "5e8e5f39325914cc1a6f1b5de9e5c894818e47d68a7ce594b2a514c99b37a1ea"
+    },
+    {
+      "path": "evidence/behavior/functions/win_UnlockWin/contracts/window-valid-v1/module.c",
+      "sha256": "23aa124a97a2f213fcf99d0f3e9790e2a35813ee5e62d338f7ef205c5b03acc0"
+    },
+    {
+      "path": "C:/tools/msc-6.00/LIB/llibcr.lib",
+      "sha256": "3d0c6ae92972789e87def01fa96351c39216d731d5c880370155c5613d78c884"
+    },
+    {
+      "path": "C:/tools/msc-6.00/LIB/libh.lib",
+      "sha256": "a4492e8f63da409d949643fd448f29e65e2cc9a8f2deea977372177bbe0ad818"
+    },
+    {
+      "path": "C:/tools/dosbox-x/dosbox-x.exe",
+      "sha256": "b028a4d328302ea270722dec69f3ec3a10ebf76beba72a51970db33a88df2bf6"
+    },
+    {
+      "path": "C:\\tools\\rtlink-plus-6.10\\installed\\RTL-REAL.EXE",
+      "sha256": "228c5d429438ea32ee21dd02c65b7f8e198715b3fa957be9da328f9857482773",
+      "size": 717922
+    },
+    {
+      "path": "C:\\tools\\rtlink-plus-6.10\\installed\\RTL-SWAP.EXE",
+      "sha256": "daae0a8c358edc26f95540f4bc1629c0dc5c30652155d85ccd79bead4381cfe3",
+      "size": 692123
+    },
+    {
+      "path": "C:\\tools\\rtlink-plus-6.10\\installed\\RTLINK.DAT",
+      "sha256": "10723fb4d4381b6a38417a18409e32d254e59850bcd3b465fbb824e01367a77b",
+      "size": 100100
+    },
+    {
+      "path": "C:\\tools\\rtlink-plus-6.10\\installed\\RTLUTILS.LIB",
+      "sha256": "c718bac09b0b1204a259494446acfa8bfffb129144cc7d36799855621f4fdccb",
+      "size": 423823
+    },
+    {
+      "path": "C:\\tools\\rtlink-plus-6.10\\installed\\RTLINKST.COM",
+      "sha256": "635425a8feff822ca98ec536c55a31824161bffbf9d24d37851cc0d9f7ce3b5f",
+      "size": 11031
+    },
+    {
+      "path": "C:\\tools\\rtlink-plus-6.10\\installed\\RTLINK.EXE",
+      "sha256": "ea6f57a470a26801086593d54aa99f6bf983dd024fc19b5e13361a07f43e17fb",
+      "size": 687531
+    },
+    {
+      "path": "C:\\tools\\rtlink-plus-6.10\\installed\\DOS4GW.EXE",
+      "sha256": "7192b80d1551769c2d2897b2f58015dc18fadca2b7e093a20f45b34011933c6c",
+      "size": 231179
+    },
+    {
+      "path": "C:\\tools\\RTLink-Plus-4.00-DiscMaster\\installed\\dest\\RTLINK.EXE",
+      "sha256": "dff0a988738a2ba7716f7013ef5b8136e0857b6bfe700bccdeaad70ee5e87c74",
+      "size": 449497
+    },
+    {
+      "path": "C:\\tools\\RTLink-Plus-4.00-DiscMaster\\installed\\dest\\RTLINK.DAT",
+      "sha256": "c1e206fe4b3c34d43b47aa9aa215e2959fbb23c69c89eb69e36d80b1d9194eea",
+      "size": 63824
+    },
+    {
+      "path": "C:\\tools\\RTLink-Plus-4.00-DiscMaster\\installed\\dest\\RTLUTILS.LIB",
+      "sha256": "9060c022f65a2811b81936879f93eb16c5d349c14b56c704a3853d3cf79cd162",
+      "size": 266625
+    },
+    {
+      "path": "C:\\tools\\RTLink-Plus-4.00-DiscMaster\\installed\\dest\\RTLINKST.COM",
+      "sha256": "6ad9015869dc9598a2b498c58297224e5ab4a13fad9ada528650dfcedeb83cf2",
+      "size": 7184
+    }
+  ],
+  "probe_source": {
+    "path": "work/source-only-dos/mouse-word-probe.py",
+    "sha256": "4d17beb2e525fd503ab469b52a2af38142ee65d9c6947e611e8fedb9e57e2600",
+    "size": 24848
+  },
+  "communals": [
+    {
+      "name": "_g_9120",
+      "kind": "near",
+      "length": 2
+    },
+    {
+      "name": "_g_9122",
+      "kind": "near",
+      "length": 2
+    },
+    {
+      "name": "_g_9124",
+      "kind": "near",
+      "length": 2
+    }
+  ],
+  "root_review": {
+    "reviewer": "root",
+    "basis": "Complete direct accesses, compatible scalar/byte or far-pointer half-word views, independent named objects and lifetime; pinned original startup-clear containment and actual MSC startup controls under both linkers. Production provider is checked as zero-code, zero-initialized-data exact typed commons.",
+    "limit": "No aggregate, original producing TU, common ordering or placement claim. Full game execution remains pending."
+  }
+}

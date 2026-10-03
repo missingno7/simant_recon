@@ -1,0 +1,369 @@
+{
+  "schema": "simant-dos-near-state-bindings-v1",
+  "category": "REVIEWED_SOURCE_STORAGE_BINDING",
+  "bindings": [],
+  "providers": [
+    {
+      "module": "source-owned:mouse-words",
+      "basename": "MSOWNER",
+      "profile": "msc600ax",
+      "flags": [
+        "/AL",
+        "/Os",
+        "/Gs"
+      ],
+      "source": {
+        "path": "work/source-only-dos/providers/mouse-words.c",
+        "sha256": "64335f44c5f3104ffb8fc81d26fc8bc7aaf5e0e1d126bb8d79c02a6cc5802d32",
+        "size": 280
+      },
+      "owner": null,
+      "communals": [
+        {
+          "name": "_g_9120",
+          "kind": "near",
+          "length": 2
+        },
+        {
+          "name": "_g_9122",
+          "kind": "near",
+          "length": 2
+        },
+        {
+          "name": "_g_9124",
+          "kind": "near",
+          "length": 2
+        }
+      ]
+    },
+    {
+      "module": "source-owned:memory-state",
+      "basename": "MMOWNER",
+      "profile": "msc600ax",
+      "flags": [
+        "/AL",
+        "/Os",
+        "/Gs"
+      ],
+      "source": {
+        "path": "work/source-only-dos/providers/memory-state.c",
+        "sha256": "5cfc5157f5e6e131433190b1360702d75fba6708283ec4ca74765fd699531948",
+        "size": 658
+      },
+      "owner": null,
+      "communals": [
+        {
+          "name": "_g_91A0",
+          "kind": "near",
+          "length": 2
+        },
+        {
+          "name": "_g_91A2",
+          "kind": "near",
+          "length": 2
+        },
+        {
+          "name": "_g_91A4",
+          "kind": "near",
+          "length": 4
+        },
+        {
+          "name": "_g_91A8",
+          "kind": "near",
+          "length": 4
+        },
+        {
+          "name": "_g_91AC",
+          "kind": "near",
+          "length": 4
+        }
+      ]
+    }
+  ],
+  "runtime_contracts": {
+    "mouse_storage_contract": {
+      "path": "work/source-only-dos/mouse-state-contract-v1.json",
+      "sha256": "ff42b7259d90fe22a274049c80d6ca9d396cbaab4b6016b638fa95bb8d695fc8",
+      "size": 55044
+    },
+    "memory_storage_contract": {
+      "path": "work/source-only-dos/memory-state-contract-v1.json",
+      "sha256": "3005fc4641cc9bc115fc762943a78bea4e6e22278165fdcf5f8d82673baec247",
+      "size": 162497
+    }
+  },
+  "review_sources": [
+    {
+      "path": "work/source-only-dos/mouse-word-probe.py",
+      "sha256": "4d17beb2e525fd503ab469b52a2af38142ee65d9c6947e611e8fedb9e57e2600",
+      "size": 24848
+    },
+    {
+      "path": "work/source-only-dos/providers/mouse-words.c",
+      "sha256": "64335f44c5f3104ffb8fc81d26fc8bc7aaf5e0e1d126bb8d79c02a6cc5802d32",
+      "size": 280
+    },
+    {
+      "path": "layout/manifest.json",
+      "sha256": "025a0a9255d910cae4b122ab5a3f3fb40888bb456d7fe42158db7c9e622fcf50",
+      "size": 628980
+    },
+    {
+      "path": "layout/symbols.json",
+      "sha256": "0f5dd5b0a211945a97782cfccdb9bb31b0dfd07fcde5df4d4f9486b487eb0125",
+      "size": 800809
+    },
+    {
+      "path": "evidence/behavior/manifest.json",
+      "sha256": "dae79bdf74d7660e7e2eb47e8b463a9576c8d74a8e6ccd9e91af6d51f871ecea",
+      "size": 28379
+    },
+    {
+      "path": "work/source-only-dos/queue-lifetime-contract-v1.json",
+      "sha256": "44b4f2afca0988722d1ff10df933771569c61cc02cd8f11b20ff4ffe8a8af97e",
+      "size": 6627
+    },
+    {
+      "path": "work/source-only-dos/queue-lifetime-research.py",
+      "sha256": "e505d40ca60631078a49a3d905a5f8b84f2bc6499ea03fa4a449d2bc012aed4d",
+      "size": 17615
+    },
+    {
+      "path": "layout/toolchain.json",
+      "sha256": "c0bb71cd8b1f4a1a1f91299bd3b6148aa67b7a1d12c3c3946a229272593eb274",
+      "size": 39241
+    },
+    {
+      "path": "layout/oracle.lock.json",
+      "sha256": "2c6d9e98c688621ad49a08c78d0e0968f4076b036be56ec0738217b533ccde13",
+      "size": 18807
+    },
+    {
+      "path": "src/S26/m39C7.c",
+      "sha256": "fb4938daa334a8e9f929b44a542392f47fc7c1a654ca87f303ee80528b34c4c4",
+      "size": 9163
+    },
+    {
+      "path": "src/root/m00F8.c",
+      "sha256": "4ee148ec616e199f61b671df89da8a21f1789c4177d3dbc7b76a478acb98184a",
+      "size": 7304
+    },
+    {
+      "path": "src/root/m15F8.c",
+      "sha256": "d6d4daddab943ee3436ca0e9c8dbc866a9d67659f7448f3c307f858abe06b70a",
+      "size": 4897
+    },
+    {
+      "path": "src/root/m1B73.asm",
+      "sha256": "3097a6b03ff1d8bdfa7d573632d9905de88d754c8b1e047de4014c4f186cb848",
+      "size": 35010
+    },
+    {
+      "path": "src/root/m1FD2.c",
+      "sha256": "f4359bdaf4cfc0fe326a54cf8a1eacb9ba3098b710bf2a561b3d0f48569bf6d8",
+      "size": 10086
+    },
+    {
+      "path": "evidence/behavior/functions/DisplayCard/contracts/logical-text-v2/module.c",
+      "sha256": "5e8e5f39325914cc1a6f1b5de9e5c894818e47d68a7ce594b2a514c99b37a1ea"
+    },
+    {
+      "path": "evidence/behavior/functions/DrawBalloons/contracts/logical-render-v1/module.c",
+      "sha256": "e41a4ab8c56c0d4923ace8b02027f2471feee049aabe0577588e206e930b4db2"
+    },
+    {
+      "path": "evidence/behavior/functions/DrawMapCursor/contracts/logical-render-v2/module.c",
+      "sha256": "daa607847c4c0364358a7b57d3f790dd9981e284bf2cedd01fa1fb3ac4df918a"
+    },
+    {
+      "path": "evidence/behavior/functions/FindIndex/module.c",
+      "sha256": "1af5252fe8449eeca44b4099fe4a4bd1ff5ab24521c7a888253adfdd4554ac5a"
+    },
+    {
+      "path": "evidence/behavior/functions/InvertPatch/contracts/logical-render-v2/module.c",
+      "sha256": "1ace9a2985696a7c254c9cfcfafc504be9126f07c47672c6bf79e3e2a570e801"
+    },
+    {
+      "path": "evidence/behavior/functions/LessonDone/contracts/host-service-v1/module.c",
+      "sha256": "c611660dde4da7117c3232aa06e597871394cc4112466d46559705b235424359"
+    },
+    {
+      "path": "evidence/behavior/functions/SpiderScan/reviews/contract-v2/module.c",
+      "sha256": "2d2192f4ada76eb4676d174932847e3807c987f294b1fbbae9287ddcbbd81734"
+    },
+    {
+      "path": "evidence/behavior/functions/drawHistGraph/contracts/logical-text-v3/module.c",
+      "sha256": "764bcd8f1272b6f9655a1fe305cea71d98e95b9ad9c285f69dc944fbfe21d34c"
+    },
+    {
+      "path": "evidence/behavior/functions/f_0250_1018/contracts/logical-render-v2/module.c",
+      "sha256": "e41a4ab8c56c0d4923ace8b02027f2471feee049aabe0577588e206e930b4db2"
+    },
+    {
+      "path": "evidence/behavior/functions/f_0250_129E/contracts/logical-render-v2/module.c",
+      "sha256": "e41a4ab8c56c0d4923ace8b02027f2471feee049aabe0577588e206e930b4db2"
+    },
+    {
+      "path": "evidence/behavior/functions/f_171C_09CC/contracts/live-state-v2/module.c",
+      "sha256": "3d24904696b29c36b118479ecc50dd80b8d173f58a632a339df9391d08ea085b"
+    },
+    {
+      "path": "evidence/behavior/functions/f_171C_0ADC/contracts/live-state-v2/module.c",
+      "sha256": "3d24904696b29c36b118479ecc50dd80b8d173f58a632a339df9391d08ea085b"
+    },
+    {
+      "path": "evidence/behavior/functions/f_171C_0CF4/contracts/live-state-v2/module.c",
+      "sha256": "3d24904696b29c36b118479ecc50dd80b8d173f58a632a339df9391d08ea085b"
+    },
+    {
+      "path": "evidence/behavior/functions/f_171C_0FBC/contracts/live-state-v2/module.c",
+      "sha256": "3d24904696b29c36b118479ecc50dd80b8d173f58a632a339df9391d08ea085b"
+    },
+    {
+      "path": "evidence/behavior/functions/f_1C62_0415/contracts/host-service-v1/module.c",
+      "sha256": "1a75da44054b48e33e02b0dc551e9e690d1b0797b5e2cfe2e3e6e26ad3b632d4"
+    },
+    {
+      "path": "evidence/behavior/functions/f_1E57_038E/contracts/window-valid-v1/module.c",
+      "sha256": "edfb01cec348d79243d7cc1630248045fa7790a321192f83d185298d0e9b67f6"
+    },
+    {
+      "path": "evidence/behavior/functions/f_20E8_0903/contracts/window-valid-v1/module.c",
+      "sha256": "e9f7805d6d353e1d3d432cd146073bae6bb8ec0be13b20e3543a3895e2a1ef49"
+    },
+    {
+      "path": "evidence/behavior/functions/f_23E6_0000/revisions/ss-ds-20261002/module.c",
+      "sha256": "867a7f15631db0ef33079daedea99f99e7ddc75b57f04b15bafca036f14c5ee7"
+    },
+    {
+      "path": "evidence/behavior/functions/f_2505_0453/contracts/window-valid-v1/module.c",
+      "sha256": "22a03f15e95fff376d27211426c4f9e3395e16e5decd92ef501fbfe3c1aba623"
+    },
+    {
+      "path": "evidence/behavior/functions/f_2815_0165/module.c",
+      "sha256": "8b6ca1b25908a00cdd6fea2212943f7345680945d25e1a59e0f1fb69352958bc"
+    },
+    {
+      "path": "evidence/behavior/functions/f_284A_0138/module.c",
+      "sha256": "5d328bf943dd3b1dd8dd797ba7d63885777facf9ea5c194b6b222244bd937a35"
+    },
+    {
+      "path": "evidence/behavior/functions/f_29D6_000A/module.c",
+      "sha256": "43b2d29dea982299edc3d3b173f9cb70bc88b76c1b9bc268c02a9a52c6a21626"
+    },
+    {
+      "path": "evidence/behavior/functions/o10_35F5_0384/contracts/host-service-v1/module.c",
+      "sha256": "4b9dda15dbea1c8fd204ed95d4cb6a909751a59d0517909e90c4626cad3c7888"
+    },
+    {
+      "path": "evidence/behavior/functions/o15_384C_0239/contracts/actual-window-v2/module.c",
+      "sha256": "01b51eecedcd28e2213819572c846a9754039f4a527e6da5e56e57783398bdd5"
+    },
+    {
+      "path": "evidence/behavior/functions/o25_3BA4_1035/module.c",
+      "sha256": "5fc31bb8f45f9e7fa299efe9667af06b29d61ab82a6a2f38715f40d939bd3947"
+    },
+    {
+      "path": "evidence/behavior/functions/o25_3BA4_1686/module.c",
+      "sha256": "5fc31bb8f45f9e7fa299efe9667af06b29d61ab82a6a2f38715f40d939bd3947"
+    },
+    {
+      "path": "evidence/behavior/functions/win_DrawBitMap/contracts/logical-render-v2/module.c",
+      "sha256": "c4329ddb75629a235043d9da1eb11c7dd6f2cb3826fe392bfc8a27c98eeb97e1"
+    },
+    {
+      "path": "evidence/behavior/functions/win_PrintStyleTextInRect/contracts/logical-text-v2/module.c",
+      "sha256": "5e8e5f39325914cc1a6f1b5de9e5c894818e47d68a7ce594b2a514c99b37a1ea"
+    },
+    {
+      "path": "evidence/behavior/functions/win_UnlockWin/contracts/window-valid-v1/module.c",
+      "sha256": "23aa124a97a2f213fcf99d0f3e9790e2a35813ee5e62d338f7ef205c5b03acc0"
+    },
+    {
+      "path": "src\\root\\m171C.c",
+      "sha256": "31bd9caa243220db2bd1ba940ac8fae7f5d189b2ec95f1662918e9ca2160b10e",
+      "size": 26452
+    },
+    {
+      "path": "src\\root\\m194D.asm",
+      "sha256": "8becfaafd57faf7e3bfb7e7150d4438bf8d78e1319aa90618f76a2be89175c0f",
+      "size": 2109
+    },
+    {
+      "path": "evidence\\behavior\\manifest.json",
+      "sha256": "dae79bdf74d7660e7e2eb47e8b463a9576c8d74a8e6ccd9e91af6d51f871ecea",
+      "size": 28379
+    },
+    {
+      "path": "evidence\\behavior\\functions\\f_171C_09CC\\contracts\\live-state-v2\\evidence.json",
+      "sha256": "3eb10d7520c4f48c708d5c16d18e16b66d72f7262cc39d8a2863c9f4fd90f88d",
+      "size": 13879
+    },
+    {
+      "path": "evidence\\behavior\\functions\\f_171C_0ADC\\contracts\\live-state-v2\\evidence.json",
+      "sha256": "357d1709069e947c450fe39e64254bda89d83c76f95b18c944e32f3439512600",
+      "size": 13879
+    },
+    {
+      "path": "evidence\\behavior\\functions\\f_171C_0FBC\\contracts\\live-state-v2\\evidence.json",
+      "sha256": "283d65f7c8d32de78190b5f6b34186d77470833629771af3c66ce58ca6adb02c",
+      "size": 13879
+    },
+    {
+      "path": "evidence\\behavior\\functions\\f_171C_09CC\\contracts\\live-state-v2\\module.c",
+      "sha256": "3d24904696b29c36b118479ecc50dd80b8d173f58a632a339df9391d08ea085b",
+      "size": 26297
+    },
+    {
+      "path": "layout\\symbols.json",
+      "sha256": "0f5dd5b0a211945a97782cfccdb9bb31b0dfd07fcde5df4d4f9486b487eb0125",
+      "size": 800809
+    },
+    {
+      "path": "work\\source-only-dos\\compile-and-intake-v1.json",
+      "sha256": "807be52f3c2d346250587395298944b2ef97cd7a04224dbb65afc4335958fbe5",
+      "size": 1165285
+    },
+    {
+      "path": "layout\\manifest.json",
+      "sha256": "025a0a9255d910cae4b122ab5a3f3fb40888bb456d7fe42158db7c9e622fcf50",
+      "size": 628980
+    },
+    {
+      "path": "layout\\toolchain.json",
+      "sha256": "c0bb71cd8b1f4a1a1f91299bd3b6148aa67b7a1d12c3c3946a229272593eb274",
+      "size": 39241
+    },
+    {
+      "path": "layout\\oracle.lock.json",
+      "sha256": "2c6d9e98c688621ad49a08c78d0e0968f4076b036be56ec0738217b533ccde13",
+      "size": 18807
+    },
+    {
+      "path": "work\\source-only-dos\\queue-lifetime-contract-v1.json",
+      "sha256": "44b4f2afca0988722d1ff10df933771569c61cc02cd8f11b20ff4ffe8a8af97e",
+      "size": 6627
+    },
+    {
+      "path": "work\\source-only-dos\\queue-lifetime-research.py",
+      "sha256": "e505d40ca60631078a49a3d905a5f8b84f2bc6499ea03fa4a449d2bc012aed4d",
+      "size": 17615
+    },
+    {
+      "path": "work\\source-only-dos\\history-storage-contract-v1.json",
+      "sha256": "7fc4c0f32f70521f8d730121fd75e9bccab0c4e87a7611e25c48f5dd7b8470bf",
+      "size": 17745
+    },
+    {
+      "path": "work\\source-only-dos\\providers\\memory-state.c",
+      "sha256": "5cfc5157f5e6e131433190b1360702d75fba6708283ec4ca74765fd699531948",
+      "size": 658
+    },
+    {
+      "path": "work\\source-only-dos\\memory-state-probe.py",
+      "sha256": "f9252f11ced01e484889ee22d45c268b6a385503b1277120d372ff3d7695c6b7",
+      "size": 27540
+    }
+  ],
+  "claim_limit": "Eight independently typed near objects; no historical producing TU/order/placement."
+}

@@ -157,7 +157,7 @@ The bare ASM entry with an overlay owner fails under RTLink 4.00 and passes unde
 only the MSC startup and byte/word view contracts authorize the generated history
 owners. The link gate checks the selected linker and runtime hashes against those controls.
 
-The remaining 433 imports are data: 410 FAR_BSS names and 23 requiring
+The remaining 412 imports are data: 397 FAR_BSS names and 15 requiring
 storage/reachability investigation. None remains inside an accepted data
 placement. These are link ingredients
 missing from the source-built target, distinct from the historical 113-byte debt.
@@ -230,6 +230,35 @@ with wrong type/extent/alias/initializer contrasts. The combined five-owner S08
 edit is verified as a whole module on every build. These allocations resolve
 twelve imports including existing exact-base aliases; they do not establish
 historical COMDEF module identity, order or full-game save/load integration.
+
+The next scalar batch supplies seven InitSimVars words in S08 and five
+ResetYellowVars words in S22. Each has complete integer consumers, a constructor
+or reset assignment and an exact two-byte persistent SaveRec view. The S08
+extension pins and preserves its previously admitted five-owner binding; the
+fresh whole-module proof covers all twelve commons together. The S22 proof
+changes only five external scopes. Its `fd_50F6_0C38` member is serialized and
+written but has no direct C reader; the evidence does not invent one. Both
+linkers pass typed word/BYTE views and reject alias/initializer contrasts. There
+are now 21 source-owned far word scalars; this batch resolves thirteen imports.
+
+Two further data-only providers own three independent mouse words and five
+allocator objects. The latter are two unsigned near words and three near objects
+holding four-byte far `Block` pointers. Complete reads/writes, DOS allocation
+output-pointer escapes, teardown behavior and original startup-clear containment
+support their types and lifetimes. Actual MSC startup tests on both linkers check
+zero entry, byte/word overlap and offset/segment halves, with wrong type, extent
+and initializer contrasts. These eight allocations resolve eight more of the
+original 46 storage/reachability cases, leaving fifteen open. They claim no
+original TU, communal ordering or aggregate.
+
+The 128 external SS operands in S00–S03 now have scoped DGROUP frames. The
+source-wide audit covers 127 canonical files, all 29 registered module snapshots
+and corrected DrawBalloons. CRT startup and interrupt CFG dominance establish
+SS=DGROUP at every audited driver entry. Signed operand tuples, whole-object
+comparisons and shifted-origin controls on both linkers reject partial site sets,
+different targets and unrelated relocation changes. Ten module-local operands,
+the `g_5A9C` segment/offset pair and three numeric pattern reads remain separate
+layout investigations. This does not close the wider address gate.
 
 The driver callback table now has one typed near array of 25 far pointers.
 The source reset writes 25 two-word slots, copy moves 50 words, and all four

@@ -49,7 +49,7 @@ class SourceOnlyDosTests(unittest.TestCase):
             report = {'inputs': [], 'generated_files': [], 'translation_units': [],
                       'semantic_substitutions': []}
             manifest, symbols = dos.prepare(Path(directory), report)
-            self.assertEqual(len(report['translation_units']), len(manifest['modules']) + 1)
+            self.assertEqual(len(report['translation_units']), len(manifest['modules']) + 3)
             self.assertEqual(report['function_dispositions'], {
                 'EXACT_C': 1244, 'GENUINE_ASM': 367, 'BEHAVIOR_EXACT_CONFIRMED': 29,
                 'EXACT_AFTER_STATIC_AUDIT': 0, 'CONTRACT_EQUIVALENT': 0, 'UNRESOLVED': 0})
@@ -276,7 +276,8 @@ class SourceOnlyDosTests(unittest.TestCase):
             report = {'inputs': [], 'generated_files': [], 'translation_units': [], 'semantic_substitutions': []}
             manifest, symbols = dos.prepare(Path(directory), report)
             rows = [r for r in report['translation_units'] if (r.get('source_binding') or {}).get('scalar_storage')]
-            self.assertEqual({r['module'] for r in rows}, {'S08:35F5', 'root:0BE8', 'root:0AD9'})
+            self.assertEqual({r['module'] for r in rows}, {'S08:35F5', 'S22:39C7', 'root:0BE8', 'root:0AD9'})
+            self.assertEqual(sum(len(r['source_binding']['communals']) for r in rows), 21)
             for row in rows:
                 before = (ROOT / row['binding_control_source']['path']).read_text(encoding='latin1')
                 after = (ROOT / row['generated_source']['path']).read_text(encoding='latin1')
@@ -307,7 +308,8 @@ class SourceOnlyDosTests(unittest.TestCase):
             for profile in ('rtlink400', 'rtlink610'):
                 bindings.require_scalar_startup_contracts(report, profile, tc['linkers'][profile])
             for key in ('health_storage_contract', 'food_cycle_storage_contract',
-                        'population_storage_contract', 'lion_storage_contract'):
+                        'population_storage_contract', 'lion_storage_contract',
+                        'init_sim_storage_contract', 'yellow_reset_storage_contract'):
                 wrong = json.loads(json.dumps(report))
                 wrong[key]['cases'].pop(0)
                 with self.assertRaisesRegex(ValueError, 'startup contract'):
@@ -390,7 +392,7 @@ class SourceOnlyDosTests(unittest.TestCase):
         with tempfile.TemporaryDirectory(dir=worker) as directory:
             report = {'inputs': [], 'generated_files': [], 'translation_units': [], 'semantic_substitutions': []}
             _, symbols = dos.prepare(Path(directory), report)
-            row = next(r for r in report['translation_units'] if r.get('storage_provider'))
+            row = next(r for r in report['translation_units'] if r['module'] == 'source-owned:driver-callback-table')
             text = (ROOT / row['source']['path']).read_text(encoding='ascii')
             def compile(text):
                 result = compiler.compile_c(text, row['profile'], row['flags'], basename=row['basename'])
@@ -445,6 +447,95 @@ class SourceOnlyDosTests(unittest.TestCase):
                                                          if r['case'] != 'canonical_data_frame']
             with self.assertRaisesRegex(ValueError, 'shifted DGROUP contract'):
                 bindings.require_assembly_frame_contract(report, 'rtlink400', tc['linkers']['rtlink400'])
+
+    def test_typed_near_owners_reject_extent_type_initialization_and_runtime_gaps(self):
+        worker = ROOT / 'build/workers/source_only_dos_tests'
+        worker.mkdir(parents=True, exist_ok=True)
+        with tempfile.TemporaryDirectory(dir=worker) as directory:
+            report = {'inputs': [], 'generated_files': [], 'translation_units': [], 'semantic_substitutions': []}
+            _, symbols = dos.prepare(Path(directory), report)
+            rows = [r for r in report['translation_units'] if r['module'] in
+                    ('source-owned:mouse-words', 'source-owned:memory-state')]
+            self.assertEqual(sum(sum(c['length'] for c in r['storage_provider']['communals']) for r in rows), 22)
+            for row in rows:
+                text = (ROOT / row['source']['path']).read_text(encoding='ascii')
+                provider = row['storage_provider']
+                def compile(source):
+                    result = compiler.compile_c(source, row['profile'], row['flags'], basename=row['basename'])
+                    self.assertTrue(result.ok, result.log)
+                    return OmfReader(communals=True).read(result.obj)
+                bindings.review_provider_source(text, provider, symbols)
+                self.assertEqual(bindings.verify_provider(compile(text), provider)['status'], 'PASS')
+                if row['module'] == 'source-owned:mouse-words':
+                    contrasts = [text.replace('int near g_9122;', 'char near g_9122;'),
+                                 text.replace('int near g_9120;', 'int near g_9120 = 1;')]
+                    wrong_type = text.replace('int near g_9122;', 'unsigned near g_9122;')
+                else:
+                    contrasts = [text.replace('Block far * near g_91A4;', 'Block near * near g_91A4;'),
+                                 text.replace('unsigned near g_91A0;', 'unsigned near g_91A0 = 1;')]
+                    wrong_type = text.replace('unsigned near g_91A0;', 'int near g_91A0;')
+                with self.assertRaises(ValueError):
+                    bindings.review_provider_source(wrong_type, provider, symbols)
+                for contrast in contrasts + [text + '\nvoid extra(void) {}\n']:
+                    with self.assertRaises(ValueError):
+                        bindings.verify_provider(compile(contrast), provider)
+                wrong = json.loads(json.dumps(symbols))
+                name = provider['communals'][0]['name'][1:]
+                wrong['data'][name]['off'] += 1
+                with self.assertRaises(ValueError):
+                    bindings.review_provider_source(text, provider, wrong)
+            tc = compiler.toolchain()
+            for profile in ('rtlink400', 'rtlink610'):
+                bindings.require_near_storage_contracts(report, profile, tc['linkers'][profile])
+            for key in ('mouse_storage_contract', 'memory_storage_contract'):
+                wrong = json.loads(json.dumps(report))
+                wrong[key]['cases'].pop(0)
+                with self.assertRaisesRegex(ValueError, 'startup contract'):
+                    bindings.require_near_storage_contracts(wrong, 'rtlink400', tc['linkers']['rtlink400'])
+            wrong = json.loads(json.dumps(report))
+            wrong['runtime_components'][0]['sha256'] = '0' * 64
+            with self.assertRaisesRegex(ValueError, 'startup contract'):
+                bindings.require_near_storage_contracts(wrong, 'rtlink400', tc['linkers']['rtlink400'])
+
+    def test_driver_ss_frames_preserve_whole_modules_and_require_exact_site_sets(self):
+        worker = ROOT / 'build/workers/source_only_dos_tests'
+        worker.mkdir(parents=True, exist_ok=True)
+        with tempfile.TemporaryDirectory(dir=worker) as directory:
+            report = {'inputs': [], 'generated_files': [], 'translation_units': [], 'semantic_substitutions': []}
+            dos.prepare(Path(directory), report)
+            rows = [r for r in report['translation_units'] if r['module'] in bindings.DRIVER_SS_SITE_HASHES]
+            self.assertEqual(sum(len(r['source_binding']['reframes']) for r in rows), 128)
+            for row in rows:
+                before = (ROOT / row['binding_control_source']['path']).read_text(encoding='latin1')
+                after = (ROOT / row['generated_source']['path']).read_text(encoding='latin1')
+                def assemble(text):
+                    result = compiler.assemble(text, row['profile'], row['flags'], basename=row['basename'])
+                    self.assertTrue(result.ok, result.log)
+                    return OmfReader(communals=True).read(result.obj)
+                control, generated = assemble(before), assemble(after)
+                proof = bindings.verify_objects(control, generated, row['source_binding'])
+                self.assertEqual(len(proof['reviewed_frame_corrections']), len(row['source_binding']['reframes']))
+                contrast = after.replace('assume ss:DGROUP', 'assume ss:_DATA', 1)
+                self.assertNotEqual(contrast, after)
+                with self.assertRaises(ValueError):
+                    bindings.verify_objects(control, assemble(contrast), row['source_binding'])
+                for change in ('remove', 'offset', 'target'):
+                    wrong = json.loads(json.dumps(row['source_binding']))
+                    if change == 'remove': wrong['reframes'].pop()
+                    elif change == 'offset': wrong['reframes'][0]['offset'] += 1
+                    else: wrong['reframes'][0]['target'] = '_g_9120'
+                    with self.assertRaisesRegex(ValueError, 'location set'):
+                        bindings.verify_objects(control, generated, wrong)
+            tc = compiler.toolchain()
+            for profile in ('rtlink400', 'rtlink610'):
+                bindings.require_driver_ss_frame_contract(report, profile, tc['linkers'][profile])
+            for change in ('case', 'site', 'runtime'):
+                wrong = json.loads(json.dumps(report))
+                if change == 'case': wrong['driver_ss_frame_contract']['runtime_fixture']['cases'].pop(0)
+                elif change == 'site': wrong['driver_ss_frame_contract']['signed_site_tuples'][0][2] += 1
+                else: wrong['runtime_components'][0]['sha256'] = '0' * 64
+                with self.assertRaisesRegex(ValueError, 'shifted DGROUP contract'):
+                    bindings.require_driver_ss_frame_contract(wrong, 'rtlink400', tc['linkers']['rtlink400'])
 
 
 if __name__ == '__main__':

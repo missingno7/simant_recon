@@ -1,0 +1,2325 @@
+{
+  "schema": "simant-dos-yellow-reset-scalar-contract-v1",
+  "category": "REVIEWED_SOURCE_STORAGE_CONTRACT",
+  "status": "SOURCE_FUNCTIONAL_OWNER_REVIEWED",
+  "root_reviewed": true,
+  "all_required_checks_pass": true,
+  "probe_source": {
+    "path": "work\\source-only-dos\\yellow-scalar-probe.py",
+    "sha256": "77df78f675be742dfab5170e49ac46f75e6f0920270d5eee84bc5b063dbe2eff",
+    "size": 46289
+  },
+  "probe_report": {
+    "path": "build\\workers\\dos_yellow_scalar_owners\\report.json",
+    "sha256": "d7161cb54d5170b9e9460bade21b98b05451b263f2182e2ddd724aab1d936df1",
+    "size": 72111
+  },
+  "source_module": {
+    "key": "S22:39C7",
+    "source": "src/S22/m39C7.c",
+    "sha256": "e9add4ebd445bd943f24a65764be2a79581f2fc26c349741fdfe8efae3b7030d",
+    "profile": "msc600ax",
+    "flags": [
+      "/AL",
+      "/Os",
+      "/Oe",
+      "/Og",
+      "/Zi"
+    ],
+    "compiler_basename": "S022",
+    "manifest_source_pin_matches": true,
+    "control_regenerated_from_canonical_source_each_run": true
+  },
+  "source_edits": [
+    {
+      "before": "extern int far fd_50F6_0A8E;",
+      "after": "int far fd_50F6_0A8E;",
+      "scope": "generated full-module S22:39C7 source copy only"
+    },
+    {
+      "before": "extern int far fd_50F6_0AA0;",
+      "after": "int far fd_50F6_0AA0;",
+      "scope": "generated full-module S22:39C7 source copy only"
+    },
+    {
+      "before": "extern int far fd_50F6_0B1E;",
+      "after": "int far fd_50F6_0B1E;",
+      "scope": "generated full-module S22:39C7 source copy only"
+    },
+    {
+      "before": "extern int far fd_50F6_0C38;",
+      "after": "int far fd_50F6_0C38;",
+      "scope": "generated full-module S22:39C7 source copy only"
+    },
+    {
+      "before": "extern int far fd_50F6_0C3E;",
+      "after": "int far fd_50F6_0C3E;",
+      "scope": "generated full-module S22:39C7 source copy only"
+    }
+  ],
+  "whole_module_compile_checks": {
+    "checks": {
+      "segment_payloads_equal": true,
+      "segment_definitions_equal": true,
+      "groups_equal": true,
+      "publics_equal": true,
+      "local_publics_equal": true,
+      "fixups_equal": true,
+      "ordered_linker_fixups_equal": true,
+      "non_target_external_scope_order_equal": true,
+      "target_externals_exactly_replaced": true,
+      "exact_expected_communal_records": true,
+      "no_other_communal_records": true,
+      "all_other_parsed_omf_contributions_equal": true
+    },
+    "all_live_contribution_checks_pass": true,
+    "control_object_sha256": "715d276c0ddd07fb8bb47d0b953ca9cb03f947b8360f496a810a0285de4d8ac0",
+    "candidate_object_sha256": "f7f57370964875ec89d6f382a6afc1a62f46c7ec4558a7644e755b51aa292a25",
+    "object_size_delta_bytes": 56,
+    "candidate_communal_rows": [
+      {
+        "name": "_fd_50F6_0A8E",
+        "kind": "far",
+        "type_index": 129,
+        "count": 2,
+        "element_size": 1,
+        "length": 2
+      },
+      {
+        "name": "_fd_50F6_0AA0",
+        "kind": "far",
+        "type_index": 129,
+        "count": 2,
+        "element_size": 1,
+        "length": 2
+      },
+      {
+        "name": "_fd_50F6_0B1E",
+        "kind": "far",
+        "type_index": 129,
+        "count": 2,
+        "element_size": 1,
+        "length": 2
+      },
+      {
+        "name": "_fd_50F6_0C38",
+        "kind": "far",
+        "type_index": 129,
+        "count": 2,
+        "element_size": 1,
+        "length": 2
+      },
+      {
+        "name": "_fd_50F6_0C3E",
+        "kind": "far",
+        "type_index": 129,
+        "count": 2,
+        "element_size": 1,
+        "length": 2
+      }
+    ],
+    "exactly_five_expected_far_communal_records": true,
+    "negative_controls": {
+      "wrong_width_long": {
+        "communal": {
+          "name": "_fd_50F6_0A8E",
+          "kind": "far",
+          "type_index": 130,
+          "count": 4,
+          "element_size": 1,
+          "length": 4
+        },
+        "function_segment_changed": true,
+        "object_sha256": "c9a0c8167e9ab09e027dde4b1334419d70358e63474479502331e3b43559e0b1"
+      },
+      "invalid_array_extent": {
+        "compile_rejected": true,
+        "diagnostic": "S022.C\nS022.C(315) : error C2106: '=' : left operand must be lvalue\n"
+      },
+      "initialized_owner": {
+        "initialized_public_present": true,
+        "communal_absent": true,
+        "segment_payloads_changed": true,
+        "object_sha256": "f395bd0badebc2b0efc32be5ab162626ad28557473fd7308ac9e7479a30ddfcc"
+      }
+    },
+    "control_segment_payloads": {
+      "$$SYMBOLS": {
+        "declared_length": 2922,
+        "initialized_length": 2922,
+        "initialized_sha256": "3edbffb796fdc8ee9d1c82f4fab48a3f2ecddb956a0887720ffafd518efbcc94"
+      },
+      "$$TYPES": {
+        "declared_length": 947,
+        "initialized_length": 947,
+        "initialized_sha256": "c600fa8668a84731f39eebb00c354cf2da37b2e23cf92788bbbc3dd4a6b5d37f"
+      },
+      "CONST": {
+        "declared_length": 154,
+        "initialized_length": 154,
+        "initialized_sha256": "f911d00c6d988eeb76aa722c8c01f0c9b77d90f0bd23da5dc056f4dab1860896"
+      },
+      "S022_TEXT": {
+        "declared_length": 8042,
+        "initialized_length": 8042,
+        "initialized_sha256": "d84aec00bf2298f4fb8b3601ca029f914a746b29270cd4a3a42293ebdcb5ebb2"
+      },
+      "_BSS": {
+        "declared_length": 0,
+        "initialized_length": 0,
+        "initialized_sha256": null
+      },
+      "_DATA": {
+        "declared_length": 34,
+        "initialized_length": 34,
+        "initialized_sha256": "831d8930db375ff0fe8e6581aba220bf7fec11fafad93bc393457918e52b5c96"
+      }
+    },
+    "candidate_segment_payloads": {
+      "$$SYMBOLS": {
+        "declared_length": 2922,
+        "initialized_length": 2922,
+        "initialized_sha256": "3edbffb796fdc8ee9d1c82f4fab48a3f2ecddb956a0887720ffafd518efbcc94"
+      },
+      "$$TYPES": {
+        "declared_length": 947,
+        "initialized_length": 947,
+        "initialized_sha256": "c600fa8668a84731f39eebb00c354cf2da37b2e23cf92788bbbc3dd4a6b5d37f"
+      },
+      "CONST": {
+        "declared_length": 154,
+        "initialized_length": 154,
+        "initialized_sha256": "f911d00c6d988eeb76aa722c8c01f0c9b77d90f0bd23da5dc056f4dab1860896"
+      },
+      "S022_TEXT": {
+        "declared_length": 8042,
+        "initialized_length": 8042,
+        "initialized_sha256": "d84aec00bf2298f4fb8b3601ca029f914a746b29270cd4a3a42293ebdcb5ebb2"
+      },
+      "_BSS": {
+        "declared_length": 0,
+        "initialized_length": 0,
+        "initialized_sha256": null
+      },
+      "_DATA": {
+        "declared_length": 34,
+        "initialized_length": 34,
+        "initialized_sha256": "831d8930db375ff0fe8e6581aba220bf7fec11fafad93bc393457918e52b5c96"
+      }
+    }
+  },
+  "communal_specs": [
+    {
+      "name": "_fd_50F6_0A8E",
+      "source_name": "fd_50F6_0A8E",
+      "kind": "far",
+      "count": 2,
+      "element_size": 1,
+      "length": 2,
+      "type_index": 129,
+      "omf_record": "COMDEF",
+      "omf_data_type": "0x61 far COMM2B (element count and size)",
+      "source_definition_form": "natural C tentative int far definition without initializer"
+    },
+    {
+      "name": "_fd_50F6_0AA0",
+      "source_name": "fd_50F6_0AA0",
+      "kind": "far",
+      "count": 2,
+      "element_size": 1,
+      "length": 2,
+      "type_index": 129,
+      "omf_record": "COMDEF",
+      "omf_data_type": "0x61 far COMM2B (element count and size)",
+      "source_definition_form": "natural C tentative int far definition without initializer"
+    },
+    {
+      "name": "_fd_50F6_0B1E",
+      "source_name": "fd_50F6_0B1E",
+      "kind": "far",
+      "count": 2,
+      "element_size": 1,
+      "length": 2,
+      "type_index": 129,
+      "omf_record": "COMDEF",
+      "omf_data_type": "0x61 far COMM2B (element count and size)",
+      "source_definition_form": "natural C tentative int far definition without initializer"
+    },
+    {
+      "name": "_fd_50F6_0C38",
+      "source_name": "fd_50F6_0C38",
+      "kind": "far",
+      "count": 2,
+      "element_size": 1,
+      "length": 2,
+      "type_index": 129,
+      "omf_record": "COMDEF",
+      "omf_data_type": "0x61 far COMM2B (element count and size)",
+      "source_definition_form": "natural C tentative int far definition without initializer"
+    },
+    {
+      "name": "_fd_50F6_0C3E",
+      "source_name": "fd_50F6_0C3E",
+      "kind": "far",
+      "count": 2,
+      "element_size": 1,
+      "length": 2,
+      "type_index": 129,
+      "omf_record": "COMDEF",
+      "omf_data_type": "0x61 far COMM2B (element count and size)",
+      "source_definition_form": "natural C tentative int far definition without initializer"
+    }
+  ],
+  "runtime_owner": {
+    "source": "build/workers/dos_yellow_scalar_owners/YELLOWOWNER.c",
+    "source_sha256": "b121365202edc0a0ec55dbaf167b8fb9044a8a6d734600008d384b2f26e95aa2",
+    "object_sha256": "b683ff5472e4e0dd3a799d493575aebe77c450b03a63e70e0920310c2f89a8f5",
+    "source_shape": "five typed int far tentative definitions plus test-only yellow_owner_sum overlay accessor",
+    "communal_rows": [
+      {
+        "name": "_fd_50F6_0A8E",
+        "kind": "far",
+        "type_index": 129,
+        "count": 2,
+        "element_size": 1,
+        "length": 2
+      },
+      {
+        "name": "_fd_50F6_0AA0",
+        "kind": "far",
+        "type_index": 129,
+        "count": 2,
+        "element_size": 1,
+        "length": 2
+      },
+      {
+        "name": "_fd_50F6_0B1E",
+        "kind": "far",
+        "type_index": 129,
+        "count": 2,
+        "element_size": 1,
+        "length": 2
+      },
+      {
+        "name": "_fd_50F6_0C38",
+        "kind": "far",
+        "type_index": 129,
+        "count": 2,
+        "element_size": 1,
+        "length": 2
+      },
+      {
+        "name": "_fd_50F6_0C3E",
+        "kind": "far",
+        "type_index": 129,
+        "count": 2,
+        "element_size": 1,
+        "length": 2
+      }
+    ],
+    "matches_fresh_full_S22_candidate_communal_records": true,
+    "full_S22_candidate_linked": false,
+    "game_functions_or_stubs": 0
+  },
+  "members": [
+    "fd_50F6_0A8E",
+    "fd_50F6_0AA0",
+    "fd_50F6_0B1E",
+    "fd_50F6_0C38",
+    "fd_50F6_0C3E"
+  ],
+  "dos_type": "int far",
+  "word_bytes": 2,
+  "required_cases": {
+    "typed_word_exact_fixture_aliases": "PASS",
+    "SaveRec_BYTE_exact_fixture_aliases": "PASS",
+    "word_wrong_fixture_alias_plus2_0a8e": "FAIL",
+    "word_wrong_fixture_alias_plus2_0aa0": "FAIL",
+    "word_wrong_fixture_alias_plus2_0b1e": "FAIL",
+    "word_wrong_fixture_alias_plus2_0c38": "FAIL",
+    "word_wrong_fixture_alias_plus2_0c3e": "FAIL",
+    "initialized_nonzero_word_contrast": "FAIL",
+    "initialized_nonzero_SaveRec_BYTE_contrast": "FAIL"
+  },
+  "required_linkers": [
+    "rtlink400",
+    "rtlink610"
+  ],
+  "cases": [
+    {
+      "linker": "rtlink400",
+      "case": "typed_word_exact_fixture_aliases",
+      "expected": "PASS",
+      "actual": "PASS",
+      "passed": true
+    },
+    {
+      "linker": "rtlink400",
+      "case": "SaveRec_BYTE_exact_fixture_aliases",
+      "expected": "PASS",
+      "actual": "PASS",
+      "passed": true
+    },
+    {
+      "linker": "rtlink400",
+      "case": "word_wrong_fixture_alias_plus2_0a8e",
+      "expected": "FAIL",
+      "actual": "FAIL",
+      "passed": true
+    },
+    {
+      "linker": "rtlink400",
+      "case": "word_wrong_fixture_alias_plus2_0aa0",
+      "expected": "FAIL",
+      "actual": "FAIL",
+      "passed": true
+    },
+    {
+      "linker": "rtlink400",
+      "case": "word_wrong_fixture_alias_plus2_0b1e",
+      "expected": "FAIL",
+      "actual": "FAIL",
+      "passed": true
+    },
+    {
+      "linker": "rtlink400",
+      "case": "word_wrong_fixture_alias_plus2_0c38",
+      "expected": "FAIL",
+      "actual": "FAIL",
+      "passed": true
+    },
+    {
+      "linker": "rtlink400",
+      "case": "word_wrong_fixture_alias_plus2_0c3e",
+      "expected": "FAIL",
+      "actual": "FAIL",
+      "passed": true
+    },
+    {
+      "linker": "rtlink400",
+      "case": "initialized_nonzero_word_contrast",
+      "expected": "FAIL",
+      "actual": "FAIL",
+      "passed": true
+    },
+    {
+      "linker": "rtlink400",
+      "case": "initialized_nonzero_SaveRec_BYTE_contrast",
+      "expected": "FAIL",
+      "actual": "FAIL",
+      "passed": true
+    },
+    {
+      "linker": "rtlink610",
+      "case": "typed_word_exact_fixture_aliases",
+      "expected": "PASS",
+      "actual": "PASS",
+      "passed": true
+    },
+    {
+      "linker": "rtlink610",
+      "case": "SaveRec_BYTE_exact_fixture_aliases",
+      "expected": "PASS",
+      "actual": "PASS",
+      "passed": true
+    },
+    {
+      "linker": "rtlink610",
+      "case": "word_wrong_fixture_alias_plus2_0a8e",
+      "expected": "FAIL",
+      "actual": "FAIL",
+      "passed": true
+    },
+    {
+      "linker": "rtlink610",
+      "case": "word_wrong_fixture_alias_plus2_0aa0",
+      "expected": "FAIL",
+      "actual": "FAIL",
+      "passed": true
+    },
+    {
+      "linker": "rtlink610",
+      "case": "word_wrong_fixture_alias_plus2_0b1e",
+      "expected": "FAIL",
+      "actual": "FAIL",
+      "passed": true
+    },
+    {
+      "linker": "rtlink610",
+      "case": "word_wrong_fixture_alias_plus2_0c38",
+      "expected": "FAIL",
+      "actual": "FAIL",
+      "passed": true
+    },
+    {
+      "linker": "rtlink610",
+      "case": "word_wrong_fixture_alias_plus2_0c3e",
+      "expected": "FAIL",
+      "actual": "FAIL",
+      "passed": true
+    },
+    {
+      "linker": "rtlink610",
+      "case": "initialized_nonzero_word_contrast",
+      "expected": "FAIL",
+      "actual": "FAIL",
+      "passed": true
+    },
+    {
+      "linker": "rtlink610",
+      "case": "initialized_nonzero_SaveRec_BYTE_contrast",
+      "expected": "FAIL",
+      "actual": "FAIL",
+      "passed": true
+    }
+  ],
+  "pinned_runtime_tool_inputs": [
+    {
+      "path": "C:\\tools\\RTLink-Plus-4.00-DiscMaster\\installed\\dest\\RTLINK.DAT",
+      "sha256": "c1e206fe4b3c34d43b47aa9aa215e2959fbb23c69c89eb69e36d80b1d9194eea",
+      "size": 63824
+    },
+    {
+      "path": "C:\\tools\\RTLink-Plus-4.00-DiscMaster\\installed\\dest\\RTLINK.EXE",
+      "sha256": "dff0a988738a2ba7716f7013ef5b8136e0857b6bfe700bccdeaad70ee5e87c74",
+      "size": 449497
+    },
+    {
+      "path": "C:\\tools\\RTLink-Plus-4.00-DiscMaster\\installed\\dest\\RTLINKST.COM",
+      "sha256": "6ad9015869dc9598a2b498c58297224e5ab4a13fad9ada528650dfcedeb83cf2",
+      "size": 7184
+    },
+    {
+      "path": "C:\\tools\\RTLink-Plus-4.00-DiscMaster\\installed\\dest\\RTLUTILS.LIB",
+      "sha256": "9060c022f65a2811b81936879f93eb16c5d349c14b56c704a3853d3cf79cd162",
+      "size": 266625
+    },
+    {
+      "path": "C:\\tools\\dosbox-x\\dosbox-x.exe",
+      "sha256": "b028a4d328302ea270722dec69f3ec3a10ebf76beba72a51970db33a88df2bf6",
+      "size": 20481536
+    },
+    {
+      "path": "C:\\tools\\msc-6.00\\LIB\\libh.lib",
+      "sha256": "a4492e8f63da409d949643fd448f29e65e2cc9a8f2deea977372177bbe0ad818",
+      "size": 21033
+    },
+    {
+      "path": "C:\\tools\\msc-6.00\\LIB\\llibcr.lib",
+      "sha256": "3d0c6ae92972789e87def01fa96351c39216d731d5c880370155c5613d78c884",
+      "size": 148711
+    },
+    {
+      "path": "C:\\tools\\msc-6.00ax-archive\\BIN\\C1.ERR",
+      "sha256": "637444915870f3283d5df41c5cdb1be8c32cc6c19b080f2bb3891edbc3751c6e",
+      "size": 19500
+    },
+    {
+      "path": "C:\\tools\\msc-6.00ax-archive\\BIN\\C1L.EXE",
+      "sha256": "d3db38b875a95048bca2809cd1f84783c6c070805f188fec9161054d6350ded3",
+      "size": 213680
+    },
+    {
+      "path": "C:\\tools\\msc-6.00ax-archive\\BIN\\C23.ERR",
+      "sha256": "22944a0dffef336c0ebb8f6d5aeb97b4dbeb5c9758a48759557176bff49d1151",
+      "size": 3649
+    },
+    {
+      "path": "C:\\tools\\msc-6.00ax-archive\\BIN\\C2L.EXE",
+      "sha256": "62490de22e7b279ea59218a54d677bfc752cb5fc1287533d2e23d03519f155e0",
+      "size": 473258
+    },
+    {
+      "path": "C:\\tools\\msc-6.00ax-archive\\BIN\\C3L.EXE",
+      "sha256": "9e82ecc87ffcdb2def53ac64c0d1f048b26421c1415b5600ad4d8d6fcbc06553",
+      "size": 195439
+    },
+    {
+      "path": "C:\\tools\\msc-6.00ax-archive\\BIN\\CL.ERR",
+      "sha256": "ca22f37e5e0c09faebde9e4d549dd1f53523cc6f23049d2239a040cd19a424e7",
+      "size": 1656
+    },
+    {
+      "path": "C:\\tools\\msc-6.00ax-archive\\BIN\\CL.EXE",
+      "sha256": "92df4a0839aac77940189ce54f107381b829babe8103926cb05d1adffe947347",
+      "size": 81184
+    },
+    {
+      "path": "C:\\tools\\msc-6.00ax-archive\\BIN\\CL.MSG",
+      "sha256": "3379f283aec74842bc82205e4c848d759e6e2dcbb6d4820eec9719f1297213ec",
+      "size": 2697
+    },
+    {
+      "path": "C:\\tools\\rtlink-plus-6.10\\installed\\DOS4GW.EXE",
+      "sha256": "7192b80d1551769c2d2897b2f58015dc18fadca2b7e093a20f45b34011933c6c",
+      "size": 231179
+    },
+    {
+      "path": "C:\\tools\\rtlink-plus-6.10\\installed\\RTL-REAL.EXE",
+      "sha256": "228c5d429438ea32ee21dd02c65b7f8e198715b3fa957be9da328f9857482773",
+      "size": 717922
+    },
+    {
+      "path": "C:\\tools\\rtlink-plus-6.10\\installed\\RTL-SWAP.EXE",
+      "sha256": "daae0a8c358edc26f95540f4bc1629c0dc5c30652155d85ccd79bead4381cfe3",
+      "size": 692123
+    },
+    {
+      "path": "C:\\tools\\rtlink-plus-6.10\\installed\\RTLINK.DAT",
+      "sha256": "10723fb4d4381b6a38417a18409e32d254e59850bcd3b465fbb824e01367a77b",
+      "size": 100100
+    },
+    {
+      "path": "C:\\tools\\rtlink-plus-6.10\\installed\\RTLINK.EXE",
+      "sha256": "ea6f57a470a26801086593d54aa99f6bf983dd024fc19b5e13361a07f43e17fb",
+      "size": 687531
+    },
+    {
+      "path": "C:\\tools\\rtlink-plus-6.10\\installed\\RTLINKST.COM",
+      "sha256": "635425a8feff822ca98ec536c55a31824161bffbf9d24d37851cc0d9f7ce3b5f",
+      "size": 11031
+    },
+    {
+      "path": "C:\\tools\\rtlink-plus-6.10\\installed\\RTLUTILS.LIB",
+      "sha256": "c718bac09b0b1204a259494446acfa8bfffb129144cc7d36799855621f4fdccb",
+      "size": 423823
+    },
+    {
+      "path": "layout\\manifest.json",
+      "sha256": "025a0a9255d910cae4b122ab5a3f3fb40888bb456d7fe42158db7c9e622fcf50",
+      "size": 628980
+    },
+    {
+      "path": "layout\\symbols.json",
+      "sha256": "0f5dd5b0a211945a97782cfccdb9bb31b0dfd07fcde5df4d4f9486b487eb0125",
+      "size": 800809
+    },
+    {
+      "path": "layout\\toolchain.json",
+      "sha256": "c0bb71cd8b1f4a1a1f91299bd3b6148aa67b7a1d12c3c3946a229272593eb274",
+      "size": 39241
+    },
+    {
+      "path": "tools\\compiler.py",
+      "sha256": "ef1d59a0fbe0e0780a6b8480e13d7d07859a14ae185c00a4420e1238a2ae35bb",
+      "size": 11765
+    },
+    {
+      "path": "tools\\dos_source_bindings.py",
+      "sha256": "fb994fb321d6c343ae99849fdf898ce53791d03060016b37eb235a13a8da4ee8",
+      "size": 33476
+    },
+    {
+      "path": "tools\\omf.py",
+      "sha256": "951137ecbfaeb6e40fd5230c94398141da7ec7bdb7399d9cd74d46ded3045612",
+      "size": 29112
+    },
+    {
+      "path": "tools\\source_only_dos.py",
+      "sha256": "f17b3d0f0522f285b99c4e39a56babbb7ef808f15507645273b15e89fde532ac",
+      "size": 47941
+    },
+    {
+      "path": "work\\source-only-dos\\yellow-scalar-probe.py",
+      "sha256": "77df78f675be742dfab5170e49ac46f75e6f0920270d5eee84bc5b063dbe2eff",
+      "size": 46289
+    }
+  ],
+  "pinned_source_consumer_inputs": [
+    {
+      "path": "src\\S09\\m35F5.c",
+      "sha256": "028e1575990d5d45233f9102a0d2a060810349bd2f1297182c4af435ecbe912a",
+      "size": 42150
+    },
+    {
+      "path": "src\\S22\\m39C7.c",
+      "sha256": "e9add4ebd445bd943f24a65764be2a79581f2fc26c349741fdfe8efae3b7030d",
+      "size": 31328
+    },
+    {
+      "path": "src\\S25\\m3BA4.c",
+      "sha256": "d2937c80fe0ef4f2bd30c4c3ebe344ce4f993870f08515e7436c60d30cacdec4",
+      "size": 25998
+    },
+    {
+      "path": "src\\root\\m0CDB.c",
+      "sha256": "ae615fe56d075de2a59449b444709c79a847e4f4fb5806e58a50b5c59418c033",
+      "size": 15324
+    },
+    {
+      "path": "src\\root\\m0E2E.c",
+      "sha256": "9325b3426ef87771150912ce8f7cfaacc13380634505313417978b80974d10ed",
+      "size": 11858
+    },
+    {
+      "path": "src\\root\\m10F7.c",
+      "sha256": "a4cc271d57a4a80dd255953554a886026297b0560453c4b2c7b302b5878fff88",
+      "size": 35707
+    },
+    {
+      "path": "src\\root\\m15F8.c",
+      "sha256": "d6d4daddab943ee3436ca0e9c8dbc866a9d67659f7448f3c307f858abe06b70a",
+      "size": 4897
+    }
+  ],
+  "pinned_static_evidence_inputs": [
+    {
+      "path": "layout\\manifest.json",
+      "sha256": "025a0a9255d910cae4b122ab5a3f3fb40888bb456d7fe42158db7c9e622fcf50",
+      "size": 628980
+    },
+    {
+      "path": "layout\\symbols.json",
+      "sha256": "0f5dd5b0a211945a97782cfccdb9bb31b0dfd07fcde5df4d4f9486b487eb0125",
+      "size": 800809
+    },
+    {
+      "path": "src\\S09\\m35F5.c",
+      "sha256": "028e1575990d5d45233f9102a0d2a060810349bd2f1297182c4af435ecbe912a",
+      "size": 42150
+    }
+  ],
+  "pinned_inputs": [
+    {
+      "path": "C:\\tools\\RTLink-Plus-4.00-DiscMaster\\installed\\dest\\RTLINK.DAT",
+      "sha256": "c1e206fe4b3c34d43b47aa9aa215e2959fbb23c69c89eb69e36d80b1d9194eea",
+      "size": 63824
+    },
+    {
+      "path": "C:\\tools\\RTLink-Plus-4.00-DiscMaster\\installed\\dest\\RTLINK.EXE",
+      "sha256": "dff0a988738a2ba7716f7013ef5b8136e0857b6bfe700bccdeaad70ee5e87c74",
+      "size": 449497
+    },
+    {
+      "path": "C:\\tools\\RTLink-Plus-4.00-DiscMaster\\installed\\dest\\RTLINKST.COM",
+      "sha256": "6ad9015869dc9598a2b498c58297224e5ab4a13fad9ada528650dfcedeb83cf2",
+      "size": 7184
+    },
+    {
+      "path": "C:\\tools\\RTLink-Plus-4.00-DiscMaster\\installed\\dest\\RTLUTILS.LIB",
+      "sha256": "9060c022f65a2811b81936879f93eb16c5d349c14b56c704a3853d3cf79cd162",
+      "size": 266625
+    },
+    {
+      "path": "C:\\tools\\dosbox-x\\dosbox-x.exe",
+      "sha256": "b028a4d328302ea270722dec69f3ec3a10ebf76beba72a51970db33a88df2bf6",
+      "size": 20481536
+    },
+    {
+      "path": "C:\\tools\\msc-6.00\\LIB\\libh.lib",
+      "sha256": "a4492e8f63da409d949643fd448f29e65e2cc9a8f2deea977372177bbe0ad818",
+      "size": 21033
+    },
+    {
+      "path": "C:\\tools\\msc-6.00\\LIB\\llibcr.lib",
+      "sha256": "3d0c6ae92972789e87def01fa96351c39216d731d5c880370155c5613d78c884",
+      "size": 148711
+    },
+    {
+      "path": "C:\\tools\\msc-6.00ax-archive\\BIN\\C1.ERR",
+      "sha256": "637444915870f3283d5df41c5cdb1be8c32cc6c19b080f2bb3891edbc3751c6e",
+      "size": 19500
+    },
+    {
+      "path": "C:\\tools\\msc-6.00ax-archive\\BIN\\C1L.EXE",
+      "sha256": "d3db38b875a95048bca2809cd1f84783c6c070805f188fec9161054d6350ded3",
+      "size": 213680
+    },
+    {
+      "path": "C:\\tools\\msc-6.00ax-archive\\BIN\\C23.ERR",
+      "sha256": "22944a0dffef336c0ebb8f6d5aeb97b4dbeb5c9758a48759557176bff49d1151",
+      "size": 3649
+    },
+    {
+      "path": "C:\\tools\\msc-6.00ax-archive\\BIN\\C2L.EXE",
+      "sha256": "62490de22e7b279ea59218a54d677bfc752cb5fc1287533d2e23d03519f155e0",
+      "size": 473258
+    },
+    {
+      "path": "C:\\tools\\msc-6.00ax-archive\\BIN\\C3L.EXE",
+      "sha256": "9e82ecc87ffcdb2def53ac64c0d1f048b26421c1415b5600ad4d8d6fcbc06553",
+      "size": 195439
+    },
+    {
+      "path": "C:\\tools\\msc-6.00ax-archive\\BIN\\CL.ERR",
+      "sha256": "ca22f37e5e0c09faebde9e4d549dd1f53523cc6f23049d2239a040cd19a424e7",
+      "size": 1656
+    },
+    {
+      "path": "C:\\tools\\msc-6.00ax-archive\\BIN\\CL.EXE",
+      "sha256": "92df4a0839aac77940189ce54f107381b829babe8103926cb05d1adffe947347",
+      "size": 81184
+    },
+    {
+      "path": "C:\\tools\\msc-6.00ax-archive\\BIN\\CL.MSG",
+      "sha256": "3379f283aec74842bc82205e4c848d759e6e2dcbb6d4820eec9719f1297213ec",
+      "size": 2697
+    },
+    {
+      "path": "C:\\tools\\rtlink-plus-6.10\\installed\\DOS4GW.EXE",
+      "sha256": "7192b80d1551769c2d2897b2f58015dc18fadca2b7e093a20f45b34011933c6c",
+      "size": 231179
+    },
+    {
+      "path": "C:\\tools\\rtlink-plus-6.10\\installed\\RTL-REAL.EXE",
+      "sha256": "228c5d429438ea32ee21dd02c65b7f8e198715b3fa957be9da328f9857482773",
+      "size": 717922
+    },
+    {
+      "path": "C:\\tools\\rtlink-plus-6.10\\installed\\RTL-SWAP.EXE",
+      "sha256": "daae0a8c358edc26f95540f4bc1629c0dc5c30652155d85ccd79bead4381cfe3",
+      "size": 692123
+    },
+    {
+      "path": "C:\\tools\\rtlink-plus-6.10\\installed\\RTLINK.DAT",
+      "sha256": "10723fb4d4381b6a38417a18409e32d254e59850bcd3b465fbb824e01367a77b",
+      "size": 100100
+    },
+    {
+      "path": "C:\\tools\\rtlink-plus-6.10\\installed\\RTLINK.EXE",
+      "sha256": "ea6f57a470a26801086593d54aa99f6bf983dd024fc19b5e13361a07f43e17fb",
+      "size": 687531
+    },
+    {
+      "path": "C:\\tools\\rtlink-plus-6.10\\installed\\RTLINKST.COM",
+      "sha256": "635425a8feff822ca98ec536c55a31824161bffbf9d24d37851cc0d9f7ce3b5f",
+      "size": 11031
+    },
+    {
+      "path": "C:\\tools\\rtlink-plus-6.10\\installed\\RTLUTILS.LIB",
+      "sha256": "c718bac09b0b1204a259494446acfa8bfffb129144cc7d36799855621f4fdccb",
+      "size": 423823
+    },
+    {
+      "path": "build\\workers\\dos_yellow_scalar_owners\\report.json",
+      "sha256": "d7161cb54d5170b9e9460bade21b98b05451b263f2182e2ddd724aab1d936df1",
+      "size": 72111
+    },
+    {
+      "path": "layout\\manifest.json",
+      "sha256": "025a0a9255d910cae4b122ab5a3f3fb40888bb456d7fe42158db7c9e622fcf50",
+      "size": 628980
+    },
+    {
+      "path": "layout\\symbols.json",
+      "sha256": "0f5dd5b0a211945a97782cfccdb9bb31b0dfd07fcde5df4d4f9486b487eb0125",
+      "size": 800809
+    },
+    {
+      "path": "layout\\toolchain.json",
+      "sha256": "c0bb71cd8b1f4a1a1f91299bd3b6148aa67b7a1d12c3c3946a229272593eb274",
+      "size": 39241
+    },
+    {
+      "path": "src\\S09\\m35F5.c",
+      "sha256": "028e1575990d5d45233f9102a0d2a060810349bd2f1297182c4af435ecbe912a",
+      "size": 42150
+    },
+    {
+      "path": "src\\S22\\m39C7.c",
+      "sha256": "e9add4ebd445bd943f24a65764be2a79581f2fc26c349741fdfe8efae3b7030d",
+      "size": 31328
+    },
+    {
+      "path": "src\\S25\\m3BA4.c",
+      "sha256": "d2937c80fe0ef4f2bd30c4c3ebe344ce4f993870f08515e7436c60d30cacdec4",
+      "size": 25998
+    },
+    {
+      "path": "src\\root\\m0CDB.c",
+      "sha256": "ae615fe56d075de2a59449b444709c79a847e4f4fb5806e58a50b5c59418c033",
+      "size": 15324
+    },
+    {
+      "path": "src\\root\\m0E2E.c",
+      "sha256": "9325b3426ef87771150912ce8f7cfaacc13380634505313417978b80974d10ed",
+      "size": 11858
+    },
+    {
+      "path": "src\\root\\m10F7.c",
+      "sha256": "a4cc271d57a4a80dd255953554a886026297b0560453c4b2c7b302b5878fff88",
+      "size": 35707
+    },
+    {
+      "path": "src\\root\\m15F8.c",
+      "sha256": "d6d4daddab943ee3436ca0e9c8dbc866a9d67659f7448f3c307f858abe06b70a",
+      "size": 4897
+    },
+    {
+      "path": "tools\\compiler.py",
+      "sha256": "ef1d59a0fbe0e0780a6b8480e13d7d07859a14ae185c00a4420e1238a2ae35bb",
+      "size": 11765
+    },
+    {
+      "path": "tools\\dos_source_bindings.py",
+      "sha256": "fb994fb321d6c343ae99849fdf898ce53791d03060016b37eb235a13a8da4ee8",
+      "size": 33476
+    },
+    {
+      "path": "tools\\omf.py",
+      "sha256": "951137ecbfaeb6e40fd5230c94398141da7ec7bdb7399d9cd74d46ded3045612",
+      "size": 29112
+    },
+    {
+      "path": "tools\\source_only_dos.py",
+      "sha256": "f17b3d0f0522f285b99c4e39a56babbb7ef808f15507645273b15e89fde532ac",
+      "size": 47941
+    },
+    {
+      "path": "work\\source-only-dos\\yellow-scalar-probe.py",
+      "sha256": "77df78f675be742dfab5170e49ac46f75e6f0920270d5eee84bc5b063dbe2eff",
+      "size": 46289
+    }
+  ],
+  "static_ownership_facts": {
+    "functional_owner": {
+      "module": "S22:39C7",
+      "source": "src/S22/m39C7.c",
+      "function": "ResetYellowVars",
+      "reset_anchors": [
+        {
+          "name": "fd_50F6_0A8E",
+          "source": "src/S22/m39C7.c",
+          "line": 311,
+          "text": "fd_50F6_0A8E = 0;",
+          "function": "ResetYellowVars"
+        },
+        {
+          "name": "fd_50F6_0AA0",
+          "source": "src/S22/m39C7.c",
+          "line": 312,
+          "text": "fd_50F6_0AA0 = 0;",
+          "function": "ResetYellowVars"
+        },
+        {
+          "name": "fd_50F6_0B1E",
+          "source": "src/S22/m39C7.c",
+          "line": 313,
+          "text": "fd_50F6_0B1E = 0;",
+          "function": "ResetYellowVars"
+        },
+        {
+          "name": "fd_50F6_0C38",
+          "source": "src/S22/m39C7.c",
+          "line": 314,
+          "text": "fd_50F6_0C38 = 0;",
+          "function": "ResetYellowVars"
+        },
+        {
+          "name": "fd_50F6_0C3E",
+          "source": "src/S22/m39C7.c",
+          "line": 315,
+          "text": "fd_50F6_0C3E = 0;",
+          "function": "ResetYellowVars"
+        }
+      ],
+      "call_sites": [
+        {
+          "line": 400,
+          "source": "ResetYellowVars(fd_50F6_048C, fd_50F6_047C, fd_50F6_048A);"
+        },
+        {
+          "line": 670,
+          "source": "ResetYellowVars(fd_50F6_048C, fd_50F6_0F0E, fd_50F6_0F26);"
+        },
+        {
+          "line": 943,
+          "source": "ResetYellowVars(fd_50F6_048C, fd_50F6_047C, fd_50F6_048A);"
+        }
+      ],
+      "reason": "ResetYellowVars directly clears all five scalar state fields; it is also reached from edit-mode event handling. Parameter-fed coordinates and the -2 sentinel are separate state fields and are excluded.",
+      "historical_COMDEF_owner_or_order_claimed": false
+    },
+    "members": {
+      "fd_50F6_0A8E": {
+        "address": "50F6:0A8E",
+        "registry_row": {
+          "seg": 20726,
+          "off": 2702,
+          "grounding": "S25:3BA4 DoAntMoveY:0029 cmp word es:[0A8E],3 (CONST seg word 8944 = 50F6)"
+        },
+        "registered_exact_base_aliases": [
+          [
+            "fd_50F6_0A8E",
+            {
+              "seg": 20726,
+              "off": 2702,
+              "grounding": "S25:3BA4 DoAntMoveY:0029 cmp word es:[0A8E],3 (CONST seg word 8944 = 50F6)"
+            }
+          ]
+        ],
+        "registered_extent_entries_two_byte_scan": [
+          {
+            "name": "fd_50F6_0A8E",
+            "address": "50F6:0A8E",
+            "role": "exact_base",
+            "registry_row": {
+              "seg": 20726,
+              "off": 2702,
+              "grounding": "S25:3BA4 DoAntMoveY:0029 cmp word es:[0A8E],3 (CONST seg word 8944 = 50F6)"
+            }
+          }
+        ],
+        "registered_interior_names": [],
+        "typed_and_save_view_declarations": [
+          {
+            "file": "src/root/m0CDB.c",
+            "line": 54,
+            "source": "extern int far fd_50F6_0A8E;"
+          },
+          {
+            "file": "src/S09/m35F5.c",
+            "line": 780,
+            "source": "extern unsigned char far fd_50F6_0A8E[];"
+          },
+          {
+            "file": "src/S22/m39C7.c",
+            "line": 59,
+            "source": "extern int far fd_50F6_0A8E;"
+          },
+          {
+            "file": "src/S25/m3BA4.c",
+            "line": 11,
+            "source": "extern int far fd_50F6_0A8E;"
+          }
+        ],
+        "direct_uses": [
+          {
+            "file": "src/root/m0CDB.c",
+            "line": 124,
+            "source": "if (fd_50F6_0A8E && d > 2) {",
+            "access_modes": [
+              "read"
+            ]
+          },
+          {
+            "file": "src/S09/m35F5.c",
+            "line": 1081,
+            "source": "{ 2, 1, (void far *)&fd_50F6_0A8E },",
+            "access_modes": [
+              "address_escape"
+            ]
+          },
+          {
+            "file": "src/S22/m39C7.c",
+            "line": 122,
+            "source": "fd_50F6_0A8E = ((fd_50F6_04E2 ^ life) & 0x80) ? 3 : 4;",
+            "access_modes": [
+              "write"
+            ]
+          },
+          {
+            "file": "src/S22/m39C7.c",
+            "line": 140,
+            "source": "fd_50F6_0A8E = shift;",
+            "access_modes": [
+              "write"
+            ]
+          },
+          {
+            "file": "src/S22/m39C7.c",
+            "line": 148,
+            "source": "fd_50F6_0A8E = 2;",
+            "access_modes": [
+              "write"
+            ]
+          },
+          {
+            "file": "src/S22/m39C7.c",
+            "line": 150,
+            "source": "fd_50F6_0A8E = 1;",
+            "access_modes": [
+              "write"
+            ]
+          },
+          {
+            "file": "src/S22/m39C7.c",
+            "line": 152,
+            "source": "fd_50F6_0A8E = 2;",
+            "access_modes": [
+              "write"
+            ]
+          },
+          {
+            "file": "src/S22/m39C7.c",
+            "line": 154,
+            "source": "fd_50F6_0A8E = 0;",
+            "access_modes": [
+              "write"
+            ]
+          },
+          {
+            "file": "src/S22/m39C7.c",
+            "line": 259,
+            "source": "fd_50F6_0A8E = mode;",
+            "access_modes": [
+              "write"
+            ]
+          },
+          {
+            "file": "src/S22/m39C7.c",
+            "line": 286,
+            "source": "fd_50F6_0A8E = mode;",
+            "access_modes": [
+              "write"
+            ]
+          },
+          {
+            "file": "src/S22/m39C7.c",
+            "line": 311,
+            "source": "fd_50F6_0A8E = 0;",
+            "access_modes": [
+              "write"
+            ]
+          },
+          {
+            "file": "src/S25/m3BA4.c",
+            "line": 99,
+            "source": "if (fd_50F6_0A8E >= 3) {",
+            "access_modes": [
+              "read"
+            ]
+          },
+          {
+            "file": "src/S25/m3BA4.c",
+            "line": 119,
+            "source": "if (fd_50F6_0A8E == 1 && fd_50F6_0AF8 == fd_50F6_048C) {",
+            "access_modes": [
+              "read"
+            ]
+          },
+          {
+            "file": "src/S25/m3BA4.c",
+            "line": 214,
+            "source": "&& fd_50F6_0AE8 == fd_50F6_048A && fd_50F6_0A8E == 0)",
+            "access_modes": [
+              "read"
+            ]
+          },
+          {
+            "file": "src/S25/m3BA4.c",
+            "line": 221,
+            "source": "} else if (fd_50F6_0A8E == 3) {",
+            "access_modes": [
+              "read"
+            ]
+          },
+          {
+            "file": "src/S25/m3BA4.c",
+            "line": 225,
+            "source": "} else if (fd_50F6_0A8E == 4) {",
+            "access_modes": [
+              "read"
+            ]
+          },
+          {
+            "file": "src/S25/m3BA4.c",
+            "line": 473,
+            "source": "if (fd_50F6_0A8E == 3 && fd_50F6_048C == fd_50F6_08DA && fd_50F6_07C0 == index)",
+            "access_modes": [
+              "read"
+            ]
+          },
+          {
+            "file": "src/S25/m3BA4.c",
+            "line": 625,
+            "source": "flag = (fd_50F6_0A8E == 2) ? 1 : 0;",
+            "access_modes": [
+              "read"
+            ]
+          },
+          {
+            "file": "src/S25/m3BA4.c",
+            "line": 665,
+            "source": "flag = (fd_50F6_0A8E == 2) ? 1 : 0;",
+            "access_modes": [
+              "read"
+            ]
+          }
+        ],
+        "direct_reads": [
+          {
+            "file": "src/root/m0CDB.c",
+            "line": 124,
+            "source": "if (fd_50F6_0A8E && d > 2) {",
+            "access_modes": [
+              "read"
+            ]
+          },
+          {
+            "file": "src/S25/m3BA4.c",
+            "line": 99,
+            "source": "if (fd_50F6_0A8E >= 3) {",
+            "access_modes": [
+              "read"
+            ]
+          },
+          {
+            "file": "src/S25/m3BA4.c",
+            "line": 119,
+            "source": "if (fd_50F6_0A8E == 1 && fd_50F6_0AF8 == fd_50F6_048C) {",
+            "access_modes": [
+              "read"
+            ]
+          },
+          {
+            "file": "src/S25/m3BA4.c",
+            "line": 214,
+            "source": "&& fd_50F6_0AE8 == fd_50F6_048A && fd_50F6_0A8E == 0)",
+            "access_modes": [
+              "read"
+            ]
+          },
+          {
+            "file": "src/S25/m3BA4.c",
+            "line": 221,
+            "source": "} else if (fd_50F6_0A8E == 3) {",
+            "access_modes": [
+              "read"
+            ]
+          },
+          {
+            "file": "src/S25/m3BA4.c",
+            "line": 225,
+            "source": "} else if (fd_50F6_0A8E == 4) {",
+            "access_modes": [
+              "read"
+            ]
+          },
+          {
+            "file": "src/S25/m3BA4.c",
+            "line": 473,
+            "source": "if (fd_50F6_0A8E == 3 && fd_50F6_048C == fd_50F6_08DA && fd_50F6_07C0 == index)",
+            "access_modes": [
+              "read"
+            ]
+          },
+          {
+            "file": "src/S25/m3BA4.c",
+            "line": 625,
+            "source": "flag = (fd_50F6_0A8E == 2) ? 1 : 0;",
+            "access_modes": [
+              "read"
+            ]
+          },
+          {
+            "file": "src/S25/m3BA4.c",
+            "line": 665,
+            "source": "flag = (fd_50F6_0A8E == 2) ? 1 : 0;",
+            "access_modes": [
+              "read"
+            ]
+          }
+        ],
+        "direct_writes": [
+          {
+            "file": "src/S22/m39C7.c",
+            "line": 122,
+            "source": "fd_50F6_0A8E = ((fd_50F6_04E2 ^ life) & 0x80) ? 3 : 4;",
+            "access_modes": [
+              "write"
+            ]
+          },
+          {
+            "file": "src/S22/m39C7.c",
+            "line": 140,
+            "source": "fd_50F6_0A8E = shift;",
+            "access_modes": [
+              "write"
+            ]
+          },
+          {
+            "file": "src/S22/m39C7.c",
+            "line": 148,
+            "source": "fd_50F6_0A8E = 2;",
+            "access_modes": [
+              "write"
+            ]
+          },
+          {
+            "file": "src/S22/m39C7.c",
+            "line": 150,
+            "source": "fd_50F6_0A8E = 1;",
+            "access_modes": [
+              "write"
+            ]
+          },
+          {
+            "file": "src/S22/m39C7.c",
+            "line": 152,
+            "source": "fd_50F6_0A8E = 2;",
+            "access_modes": [
+              "write"
+            ]
+          },
+          {
+            "file": "src/S22/m39C7.c",
+            "line": 154,
+            "source": "fd_50F6_0A8E = 0;",
+            "access_modes": [
+              "write"
+            ]
+          },
+          {
+            "file": "src/S22/m39C7.c",
+            "line": 259,
+            "source": "fd_50F6_0A8E = mode;",
+            "access_modes": [
+              "write"
+            ]
+          },
+          {
+            "file": "src/S22/m39C7.c",
+            "line": 286,
+            "source": "fd_50F6_0A8E = mode;",
+            "access_modes": [
+              "write"
+            ]
+          },
+          {
+            "file": "src/S22/m39C7.c",
+            "line": 311,
+            "source": "fd_50F6_0A8E = 0;",
+            "access_modes": [
+              "write"
+            ]
+          }
+        ],
+        "pointer_taking_uses": [
+          {
+            "file": "src/S09/m35F5.c",
+            "line": 1081,
+            "source": "{ 2, 1, (void far *)&fd_50F6_0A8E },",
+            "access_modes": [
+              "address_escape"
+            ]
+          }
+        ],
+        "save_rec": {
+          "file": "src/S09/m35F5.c",
+          "line": 1081,
+          "table_index_1based": 188,
+          "record": "{ 2, 1, (void far *)&fd_50F6_0A8E },",
+          "size": 2,
+          "count": 1,
+          "serialized_bytes": 2
+        }
+      },
+      "fd_50F6_0AA0": {
+        "address": "50F6:0AA0",
+        "registry_row": {
+          "seg": 20726,
+          "off": 2720,
+          "grounding": "S25:3BA4 DoAntMoveY:0015 cmp word es:[0AA0],0 (CONST seg word 8942 = 50F6)"
+        },
+        "registered_exact_base_aliases": [
+          [
+            "fd_50F6_0AA0",
+            {
+              "seg": 20726,
+              "off": 2720,
+              "grounding": "S25:3BA4 DoAntMoveY:0015 cmp word es:[0AA0],0 (CONST seg word 8942 = 50F6)"
+            }
+          ]
+        ],
+        "registered_extent_entries_two_byte_scan": [
+          {
+            "name": "fd_50F6_0AA0",
+            "address": "50F6:0AA0",
+            "role": "exact_base",
+            "registry_row": {
+              "seg": 20726,
+              "off": 2720,
+              "grounding": "S25:3BA4 DoAntMoveY:0015 cmp word es:[0AA0],0 (CONST seg word 8942 = 50F6)"
+            }
+          }
+        ],
+        "registered_interior_names": [],
+        "typed_and_save_view_declarations": [
+          {
+            "file": "src/root/m0E2E.c",
+            "line": 290,
+            "source": "extern int far fd_50F6_0AA0;"
+          },
+          {
+            "file": "src/root/m15F8.c",
+            "line": 47,
+            "source": "extern int far fd_50F6_0AA0;"
+          },
+          {
+            "file": "src/S09/m35F5.c",
+            "line": 796,
+            "source": "extern unsigned char far fd_50F6_0AA0[];"
+          },
+          {
+            "file": "src/S22/m39C7.c",
+            "line": 65,
+            "source": "extern int far fd_50F6_0AA0;"
+          },
+          {
+            "file": "src/S25/m3BA4.c",
+            "line": 10,
+            "source": "extern int far fd_50F6_0AA0;"
+          }
+        ],
+        "direct_uses": [
+          {
+            "file": "src/root/m0E2E.c",
+            "line": 311,
+            "source": "if (fd_50F6_0224 > fd_50F6_0204 && fd_50F6_0AA0 == 0)",
+            "access_modes": [
+              "read"
+            ]
+          },
+          {
+            "file": "src/root/m0E2E.c",
+            "line": 315,
+            "source": "if (fd_50F6_0224 > fd_50F6_0204 && fd_50F6_0AA0 == 0)",
+            "access_modes": [
+              "read"
+            ]
+          },
+          {
+            "file": "src/root/m15F8.c",
+            "line": 113,
+            "source": "if (fd_50F6_047E == 0 || (fd_50F6_0AA0 != 0 && fd_50F6_105E < 10)) {",
+            "access_modes": [
+              "read"
+            ]
+          },
+          {
+            "file": "src/S09/m35F5.c",
+            "line": 1101,
+            "source": "{ 2, 1, (void far *)&fd_50F6_0AA0 },",
+            "access_modes": [
+              "address_escape"
+            ]
+          },
+          {
+            "file": "src/S22/m39C7.c",
+            "line": 131,
+            "source": "fd_50F6_0AA0 = 1;",
+            "access_modes": [
+              "write"
+            ]
+          },
+          {
+            "file": "src/S22/m39C7.c",
+            "line": 157,
+            "source": "fd_50F6_0AA0 = 1;",
+            "access_modes": [
+              "write"
+            ]
+          },
+          {
+            "file": "src/S22/m39C7.c",
+            "line": 312,
+            "source": "fd_50F6_0AA0 = 0;",
+            "access_modes": [
+              "write"
+            ]
+          },
+          {
+            "file": "src/S22/m39C7.c",
+            "line": 942,
+            "source": "if (fd_50F6_0AA0)",
+            "access_modes": [
+              "read"
+            ]
+          },
+          {
+            "file": "src/S25/m3BA4.c",
+            "line": 96,
+            "source": "if (fd_50F6_0AA0 == 0)",
+            "access_modes": [
+              "read"
+            ]
+          }
+        ],
+        "direct_reads": [
+          {
+            "file": "src/root/m0E2E.c",
+            "line": 311,
+            "source": "if (fd_50F6_0224 > fd_50F6_0204 && fd_50F6_0AA0 == 0)",
+            "access_modes": [
+              "read"
+            ]
+          },
+          {
+            "file": "src/root/m0E2E.c",
+            "line": 315,
+            "source": "if (fd_50F6_0224 > fd_50F6_0204 && fd_50F6_0AA0 == 0)",
+            "access_modes": [
+              "read"
+            ]
+          },
+          {
+            "file": "src/root/m15F8.c",
+            "line": 113,
+            "source": "if (fd_50F6_047E == 0 || (fd_50F6_0AA0 != 0 && fd_50F6_105E < 10)) {",
+            "access_modes": [
+              "read"
+            ]
+          },
+          {
+            "file": "src/S22/m39C7.c",
+            "line": 942,
+            "source": "if (fd_50F6_0AA0)",
+            "access_modes": [
+              "read"
+            ]
+          },
+          {
+            "file": "src/S25/m3BA4.c",
+            "line": 96,
+            "source": "if (fd_50F6_0AA0 == 0)",
+            "access_modes": [
+              "read"
+            ]
+          }
+        ],
+        "direct_writes": [
+          {
+            "file": "src/S22/m39C7.c",
+            "line": 131,
+            "source": "fd_50F6_0AA0 = 1;",
+            "access_modes": [
+              "write"
+            ]
+          },
+          {
+            "file": "src/S22/m39C7.c",
+            "line": 157,
+            "source": "fd_50F6_0AA0 = 1;",
+            "access_modes": [
+              "write"
+            ]
+          },
+          {
+            "file": "src/S22/m39C7.c",
+            "line": 312,
+            "source": "fd_50F6_0AA0 = 0;",
+            "access_modes": [
+              "write"
+            ]
+          }
+        ],
+        "pointer_taking_uses": [
+          {
+            "file": "src/S09/m35F5.c",
+            "line": 1101,
+            "source": "{ 2, 1, (void far *)&fd_50F6_0AA0 },",
+            "access_modes": [
+              "address_escape"
+            ]
+          }
+        ],
+        "save_rec": {
+          "file": "src/S09/m35F5.c",
+          "line": 1101,
+          "table_index_1based": 208,
+          "record": "{ 2, 1, (void far *)&fd_50F6_0AA0 },",
+          "size": 2,
+          "count": 1,
+          "serialized_bytes": 2
+        }
+      },
+      "fd_50F6_0B1E": {
+        "address": "50F6:0B1E",
+        "registry_row": {
+          "seg": 20726,
+          "off": 2846,
+          "grounding": "f_10F7_20BF (root:10F7): mov es,[CONST word = 50F6]; es:[..0B1E] far data reference"
+        },
+        "registered_exact_base_aliases": [
+          [
+            "fd_50F6_0B1E",
+            {
+              "seg": 20726,
+              "off": 2846,
+              "grounding": "f_10F7_20BF (root:10F7): mov es,[CONST word = 50F6]; es:[..0B1E] far data reference"
+            }
+          ]
+        ],
+        "registered_extent_entries_two_byte_scan": [
+          {
+            "name": "fd_50F6_0B1E",
+            "address": "50F6:0B1E",
+            "role": "exact_base",
+            "registry_row": {
+              "seg": 20726,
+              "off": 2846,
+              "grounding": "f_10F7_20BF (root:10F7): mov es,[CONST word = 50F6]; es:[..0B1E] far data reference"
+            }
+          }
+        ],
+        "registered_interior_names": [],
+        "typed_and_save_view_declarations": [
+          {
+            "file": "src/root/m0E2E.c",
+            "line": 292,
+            "source": "extern int far fd_50F6_0B1E;"
+          },
+          {
+            "file": "src/root/m10F7.c",
+            "line": 52,
+            "source": "extern int far fd_50F6_0B1E;"
+          },
+          {
+            "file": "src/S09/m35F5.c",
+            "line": 785,
+            "source": "extern unsigned char far fd_50F6_0B1E[];"
+          },
+          {
+            "file": "src/S22/m39C7.c",
+            "line": 296,
+            "source": "extern int far fd_50F6_0B1E;"
+          }
+        ],
+        "direct_uses": [
+          {
+            "file": "src/root/m0E2E.c",
+            "line": 325,
+            "source": "if (MeLocY + MeLocX != fd_50F6_1074 && fd_50F6_0B1E == 0 && f_00F8_02BE() > fd_50F6_0204)",
+            "access_modes": [
+              "read"
+            ]
+          },
+          {
+            "file": "src/root/m0E2E.c",
+            "line": 391,
+            "source": "if (MeLocY + MeLocX != fd_50F6_1074 && fd_50F6_0B1E == 0 && f_00F8_02BE() > fd_50F6_0204)",
+            "access_modes": [
+              "read"
+            ]
+          },
+          {
+            "file": "src/root/m0E2E.c",
+            "line": 395,
+            "source": "if (MeLocY + MeLocX != fd_50F6_1074 && fd_50F6_104E != 0 && fd_50F6_0B1E == 0)",
+            "access_modes": [
+              "read"
+            ]
+          },
+          {
+            "file": "src/root/m10F7.c",
+            "line": 1138,
+            "source": "fd_50F6_0B1E = GetDis(x, y, fd_3D57_02AC[0], fd_3D57_02AC[1]);",
+            "access_modes": [
+              "write"
+            ]
+          },
+          {
+            "file": "src/root/m10F7.c",
+            "line": 1139,
+            "source": "fd_50F6_0C38 = fd_50F6_0B1E + 1;",
+            "access_modes": [
+              "read"
+            ]
+          },
+          {
+            "file": "src/S09/m35F5.c",
+            "line": 1087,
+            "source": "{ 2, 1, (void far *)&fd_50F6_0B1E },",
+            "access_modes": [
+              "address_escape"
+            ]
+          },
+          {
+            "file": "src/S22/m39C7.c",
+            "line": 313,
+            "source": "fd_50F6_0B1E = 0;",
+            "access_modes": [
+              "write"
+            ]
+          }
+        ],
+        "direct_reads": [
+          {
+            "file": "src/root/m0E2E.c",
+            "line": 325,
+            "source": "if (MeLocY + MeLocX != fd_50F6_1074 && fd_50F6_0B1E == 0 && f_00F8_02BE() > fd_50F6_0204)",
+            "access_modes": [
+              "read"
+            ]
+          },
+          {
+            "file": "src/root/m0E2E.c",
+            "line": 391,
+            "source": "if (MeLocY + MeLocX != fd_50F6_1074 && fd_50F6_0B1E == 0 && f_00F8_02BE() > fd_50F6_0204)",
+            "access_modes": [
+              "read"
+            ]
+          },
+          {
+            "file": "src/root/m0E2E.c",
+            "line": 395,
+            "source": "if (MeLocY + MeLocX != fd_50F6_1074 && fd_50F6_104E != 0 && fd_50F6_0B1E == 0)",
+            "access_modes": [
+              "read"
+            ]
+          },
+          {
+            "file": "src/root/m10F7.c",
+            "line": 1139,
+            "source": "fd_50F6_0C38 = fd_50F6_0B1E + 1;",
+            "access_modes": [
+              "read"
+            ]
+          }
+        ],
+        "direct_writes": [
+          {
+            "file": "src/root/m10F7.c",
+            "line": 1138,
+            "source": "fd_50F6_0B1E = GetDis(x, y, fd_3D57_02AC[0], fd_3D57_02AC[1]);",
+            "access_modes": [
+              "write"
+            ]
+          },
+          {
+            "file": "src/S22/m39C7.c",
+            "line": 313,
+            "source": "fd_50F6_0B1E = 0;",
+            "access_modes": [
+              "write"
+            ]
+          }
+        ],
+        "pointer_taking_uses": [
+          {
+            "file": "src/S09/m35F5.c",
+            "line": 1087,
+            "source": "{ 2, 1, (void far *)&fd_50F6_0B1E },",
+            "access_modes": [
+              "address_escape"
+            ]
+          }
+        ],
+        "save_rec": {
+          "file": "src/S09/m35F5.c",
+          "line": 1087,
+          "table_index_1based": 194,
+          "record": "{ 2, 1, (void far *)&fd_50F6_0B1E },",
+          "size": 2,
+          "count": 1,
+          "serialized_bytes": 2
+        }
+      },
+      "fd_50F6_0C38": {
+        "address": "50F6:0C38",
+        "registry_row": {
+          "seg": 20726,
+          "off": 3128,
+          "grounding": "f_10F7_20BF (root:10F7): mov es,[CONST word = 50F6]; es:[..0C38] far data reference"
+        },
+        "registered_exact_base_aliases": [
+          [
+            "fd_50F6_0C38",
+            {
+              "seg": 20726,
+              "off": 3128,
+              "grounding": "f_10F7_20BF (root:10F7): mov es,[CONST word = 50F6]; es:[..0C38] far data reference"
+            }
+          ]
+        ],
+        "registered_extent_entries_two_byte_scan": [
+          {
+            "name": "fd_50F6_0C38",
+            "address": "50F6:0C38",
+            "role": "exact_base",
+            "registry_row": {
+              "seg": 20726,
+              "off": 3128,
+              "grounding": "f_10F7_20BF (root:10F7): mov es,[CONST word = 50F6]; es:[..0C38] far data reference"
+            }
+          }
+        ],
+        "registered_interior_names": [],
+        "typed_and_save_view_declarations": [
+          {
+            "file": "src/root/m10F7.c",
+            "line": 53,
+            "source": "extern int far fd_50F6_0C38;"
+          },
+          {
+            "file": "src/S09/m35F5.c",
+            "line": 798,
+            "source": "extern unsigned char far fd_50F6_0C38[];"
+          },
+          {
+            "file": "src/S22/m39C7.c",
+            "line": 297,
+            "source": "extern int far fd_50F6_0C38;"
+          }
+        ],
+        "direct_uses": [
+          {
+            "file": "src/root/m10F7.c",
+            "line": 1139,
+            "source": "fd_50F6_0C38 = fd_50F6_0B1E + 1;",
+            "access_modes": [
+              "write"
+            ]
+          },
+          {
+            "file": "src/S09/m35F5.c",
+            "line": 1104,
+            "source": "{ 2, 1, (void far *)&fd_50F6_0C38 },",
+            "access_modes": [
+              "address_escape"
+            ]
+          },
+          {
+            "file": "src/S22/m39C7.c",
+            "line": 314,
+            "source": "fd_50F6_0C38 = 0;",
+            "access_modes": [
+              "write"
+            ]
+          }
+        ],
+        "direct_reads": [],
+        "direct_writes": [
+          {
+            "file": "src/root/m10F7.c",
+            "line": 1139,
+            "source": "fd_50F6_0C38 = fd_50F6_0B1E + 1;",
+            "access_modes": [
+              "write"
+            ]
+          },
+          {
+            "file": "src/S22/m39C7.c",
+            "line": 314,
+            "source": "fd_50F6_0C38 = 0;",
+            "access_modes": [
+              "write"
+            ]
+          }
+        ],
+        "pointer_taking_uses": [
+          {
+            "file": "src/S09/m35F5.c",
+            "line": 1104,
+            "source": "{ 2, 1, (void far *)&fd_50F6_0C38 },",
+            "access_modes": [
+              "address_escape"
+            ]
+          }
+        ],
+        "save_rec": {
+          "file": "src/S09/m35F5.c",
+          "line": 1104,
+          "table_index_1based": 211,
+          "record": "{ 2, 1, (void far *)&fd_50F6_0C38 },",
+          "size": 2,
+          "count": 1,
+          "serialized_bytes": 2
+        }
+      },
+      "fd_50F6_0C3E": {
+        "address": "50F6:0C3E",
+        "registry_row": {
+          "seg": 20726,
+          "off": 3134,
+          "grounding": "S25:3BA4 DoAntMoveY:0309 inc word es:[0C3E] (CONST seg word 896C = 50F6)"
+        },
+        "registered_exact_base_aliases": [
+          [
+            "fd_50F6_0C3E",
+            {
+              "seg": 20726,
+              "off": 3134,
+              "grounding": "S25:3BA4 DoAntMoveY:0309 inc word es:[0C3E] (CONST seg word 896C = 50F6)"
+            }
+          ]
+        ],
+        "registered_extent_entries_two_byte_scan": [
+          {
+            "name": "fd_50F6_0C3E",
+            "address": "50F6:0C3E",
+            "role": "exact_base",
+            "registry_row": {
+              "seg": 20726,
+              "off": 3134,
+              "grounding": "S25:3BA4 DoAntMoveY:0309 inc word es:[0C3E] (CONST seg word 896C = 50F6)"
+            }
+          }
+        ],
+        "registered_interior_names": [],
+        "typed_and_save_view_declarations": [
+          {
+            "file": "src/S09/m35F5.c",
+            "line": 801,
+            "source": "extern unsigned char far fd_50F6_0C3E[];"
+          },
+          {
+            "file": "src/S22/m39C7.c",
+            "line": 298,
+            "source": "extern int far fd_50F6_0C3E;"
+          },
+          {
+            "file": "src/S25/m3BA4.c",
+            "line": 39,
+            "source": "extern int far fd_50F6_0C3E;"
+          }
+        ],
+        "direct_uses": [
+          {
+            "file": "src/S09/m35F5.c",
+            "line": 1107,
+            "source": "{ 2, 1, (void far *)&fd_50F6_0C3E },",
+            "access_modes": [
+              "address_escape"
+            ]
+          },
+          {
+            "file": "src/S22/m39C7.c",
+            "line": 315,
+            "source": "fd_50F6_0C3E = 0;",
+            "access_modes": [
+              "write"
+            ]
+          },
+          {
+            "file": "src/S25/m3BA4.c",
+            "line": 145,
+            "source": "fd_50F6_0C3E++;",
+            "access_modes": [
+              "read",
+              "write"
+            ]
+          },
+          {
+            "file": "src/S25/m3BA4.c",
+            "line": 161,
+            "source": "if (fd_50F6_0C3E & 1) {",
+            "access_modes": [
+              "read"
+            ]
+          }
+        ],
+        "direct_reads": [
+          {
+            "file": "src/S25/m3BA4.c",
+            "line": 145,
+            "source": "fd_50F6_0C3E++;",
+            "access_modes": [
+              "read",
+              "write"
+            ]
+          },
+          {
+            "file": "src/S25/m3BA4.c",
+            "line": 161,
+            "source": "if (fd_50F6_0C3E & 1) {",
+            "access_modes": [
+              "read"
+            ]
+          }
+        ],
+        "direct_writes": [
+          {
+            "file": "src/S22/m39C7.c",
+            "line": 315,
+            "source": "fd_50F6_0C3E = 0;",
+            "access_modes": [
+              "write"
+            ]
+          },
+          {
+            "file": "src/S25/m3BA4.c",
+            "line": 145,
+            "source": "fd_50F6_0C3E++;",
+            "access_modes": [
+              "read",
+              "write"
+            ]
+          }
+        ],
+        "pointer_taking_uses": [
+          {
+            "file": "src/S09/m35F5.c",
+            "line": 1107,
+            "source": "{ 2, 1, (void far *)&fd_50F6_0C3E },",
+            "access_modes": [
+              "address_escape"
+            ]
+          }
+        ],
+        "save_rec": {
+          "file": "src/S09/m35F5.c",
+          "line": 1107,
+          "table_index_1based": 214,
+          "record": "{ 2, 1, (void far *)&fd_50F6_0C3E },",
+          "size": 2,
+          "count": 1,
+          "serialized_bytes": 2
+        }
+      }
+    },
+    "SaveRec_table": {
+      "record_definition": 14,
+      "table_definition": 893,
+      "load_calls": [
+        {
+          "line": 118,
+          "source": "if ((r = read(fd, p->data, n = p->count * p->size)) != n) {"
+        }
+      ],
+      "save_calls": [
+        {
+          "line": 183,
+          "source": "if (write(fd, p->data, p->count * p->size) == -1) {"
+        }
+      ],
+      "rows": {
+        "fd_50F6_0A8E": {
+          "file": "src/S09/m35F5.c",
+          "line": 1081,
+          "table_index_1based": 188,
+          "record": "{ 2, 1, (void far *)&fd_50F6_0A8E },",
+          "size": 2,
+          "count": 1,
+          "serialized_bytes": 2
+        },
+        "fd_50F6_0B1E": {
+          "file": "src/S09/m35F5.c",
+          "line": 1087,
+          "table_index_1based": 194,
+          "record": "{ 2, 1, (void far *)&fd_50F6_0B1E },",
+          "size": 2,
+          "count": 1,
+          "serialized_bytes": 2
+        },
+        "fd_50F6_0AA0": {
+          "file": "src/S09/m35F5.c",
+          "line": 1101,
+          "table_index_1based": 208,
+          "record": "{ 2, 1, (void far *)&fd_50F6_0AA0 },",
+          "size": 2,
+          "count": 1,
+          "serialized_bytes": 2
+        },
+        "fd_50F6_0C38": {
+          "file": "src/S09/m35F5.c",
+          "line": 1104,
+          "table_index_1based": 211,
+          "record": "{ 2, 1, (void far *)&fd_50F6_0C38 },",
+          "size": 2,
+          "count": 1,
+          "serialized_bytes": 2
+        },
+        "fd_50F6_0C3E": {
+          "file": "src/S09/m35F5.c",
+          "line": 1107,
+          "table_index_1based": 214,
+          "record": "{ 2, 1, (void far *)&fd_50F6_0C3E },",
+          "size": 2,
+          "count": 1,
+          "serialized_bytes": 2
+        }
+      },
+      "table_pointers_persist": true,
+      "semantic_target_type_from_byte_view": false
+    },
+    "source_file_scan_count": 98,
+    "registered_address_and_interior_scan": {
+      "fd_50F6_0A8E": {
+        "registered_address": "50F6:0A8E",
+        "two_byte_extent_entries": [
+          {
+            "name": "fd_50F6_0A8E",
+            "address": "50F6:0A8E",
+            "role": "exact_base",
+            "registry_row": {
+              "seg": 20726,
+              "off": 2702,
+              "grounding": "S25:3BA4 DoAntMoveY:0029 cmp word es:[0A8E],3 (CONST seg word 8944 = 50F6)"
+            }
+          }
+        ],
+        "registered_interior_names": []
+      },
+      "fd_50F6_0AA0": {
+        "registered_address": "50F6:0AA0",
+        "two_byte_extent_entries": [
+          {
+            "name": "fd_50F6_0AA0",
+            "address": "50F6:0AA0",
+            "role": "exact_base",
+            "registry_row": {
+              "seg": 20726,
+              "off": 2720,
+              "grounding": "S25:3BA4 DoAntMoveY:0015 cmp word es:[0AA0],0 (CONST seg word 8942 = 50F6)"
+            }
+          }
+        ],
+        "registered_interior_names": []
+      },
+      "fd_50F6_0B1E": {
+        "registered_address": "50F6:0B1E",
+        "two_byte_extent_entries": [
+          {
+            "name": "fd_50F6_0B1E",
+            "address": "50F6:0B1E",
+            "role": "exact_base",
+            "registry_row": {
+              "seg": 20726,
+              "off": 2846,
+              "grounding": "f_10F7_20BF (root:10F7): mov es,[CONST word = 50F6]; es:[..0B1E] far data reference"
+            }
+          }
+        ],
+        "registered_interior_names": []
+      },
+      "fd_50F6_0C38": {
+        "registered_address": "50F6:0C38",
+        "two_byte_extent_entries": [
+          {
+            "name": "fd_50F6_0C38",
+            "address": "50F6:0C38",
+            "role": "exact_base",
+            "registry_row": {
+              "seg": 20726,
+              "off": 3128,
+              "grounding": "f_10F7_20BF (root:10F7): mov es,[CONST word = 50F6]; es:[..0C38] far data reference"
+            }
+          }
+        ],
+        "registered_interior_names": []
+      },
+      "fd_50F6_0C3E": {
+        "registered_address": "50F6:0C3E",
+        "two_byte_extent_entries": [
+          {
+            "name": "fd_50F6_0C3E",
+            "address": "50F6:0C3E",
+            "role": "exact_base",
+            "registry_row": {
+              "seg": 20726,
+              "off": 3134,
+              "grounding": "S25:3BA4 DoAntMoveY:0309 inc word es:[0C3E] (CONST seg word 896C = 50F6)"
+            }
+          }
+        ],
+        "registered_interior_names": []
+      }
+    }
+  },
+  "fixture_limits": {
+    "ignored_object_prerequisite_used": false,
+    "full_S22_candidate_linked": false,
+    "game_functions_or_stubs": 0,
+    "original_byte_fallback_used": false,
+    "historical_COMDEF_owner_or_order_claimed": false,
+    "fixture_aliases_are_not_registered_source_aliases": true,
+    "denied_oracle_reads": []
+  },
+  "review_limitations": [
+    "fd_50F6_0C38 has no direct read in canonical C; source references write it only at root:10F7 line 1139 and ResetYellowVars line 314. Its two-byte view is supported by int far declarations, the size=2,count=1 persistent SaveRec row, exact two-byte COMDEF, and runtime word/BYTE coherence.",
+    "The other four selected members have direct canonical C reads and writes.",
+    "The exact-base registry spellings are identity-only; fixture DEFINE aliases test exact base versus +2 relocation and are not claimed as production aliases.",
+    "Parameter-fed ResetYellowVars coordinate fields and the separate -2 sentinel are excluded.",
+    "No historical COMDEF translation-unit identity, communal order, or padding is claimed."
+  ],
+  "inputs": [
+    {
+      "path": "C:\\tools\\RTLink-Plus-4.00-DiscMaster\\installed\\dest\\RTLINK.DAT",
+      "sha256": "c1e206fe4b3c34d43b47aa9aa215e2959fbb23c69c89eb69e36d80b1d9194eea",
+      "size": 63824
+    },
+    {
+      "path": "C:\\tools\\RTLink-Plus-4.00-DiscMaster\\installed\\dest\\RTLINK.EXE",
+      "sha256": "dff0a988738a2ba7716f7013ef5b8136e0857b6bfe700bccdeaad70ee5e87c74",
+      "size": 449497
+    },
+    {
+      "path": "C:\\tools\\RTLink-Plus-4.00-DiscMaster\\installed\\dest\\RTLINKST.COM",
+      "sha256": "6ad9015869dc9598a2b498c58297224e5ab4a13fad9ada528650dfcedeb83cf2",
+      "size": 7184
+    },
+    {
+      "path": "C:\\tools\\RTLink-Plus-4.00-DiscMaster\\installed\\dest\\RTLUTILS.LIB",
+      "sha256": "9060c022f65a2811b81936879f93eb16c5d349c14b56c704a3853d3cf79cd162",
+      "size": 266625
+    },
+    {
+      "path": "C:\\tools\\dosbox-x\\dosbox-x.exe",
+      "sha256": "b028a4d328302ea270722dec69f3ec3a10ebf76beba72a51970db33a88df2bf6",
+      "size": 20481536
+    },
+    {
+      "path": "C:\\tools\\msc-6.00\\LIB\\libh.lib",
+      "sha256": "a4492e8f63da409d949643fd448f29e65e2cc9a8f2deea977372177bbe0ad818",
+      "size": 21033
+    },
+    {
+      "path": "C:\\tools\\msc-6.00\\LIB\\llibcr.lib",
+      "sha256": "3d0c6ae92972789e87def01fa96351c39216d731d5c880370155c5613d78c884",
+      "size": 148711
+    },
+    {
+      "path": "C:\\tools\\msc-6.00ax-archive\\BIN\\C1.ERR",
+      "sha256": "637444915870f3283d5df41c5cdb1be8c32cc6c19b080f2bb3891edbc3751c6e",
+      "size": 19500
+    },
+    {
+      "path": "C:\\tools\\msc-6.00ax-archive\\BIN\\C1L.EXE",
+      "sha256": "d3db38b875a95048bca2809cd1f84783c6c070805f188fec9161054d6350ded3",
+      "size": 213680
+    },
+    {
+      "path": "C:\\tools\\msc-6.00ax-archive\\BIN\\C23.ERR",
+      "sha256": "22944a0dffef336c0ebb8f6d5aeb97b4dbeb5c9758a48759557176bff49d1151",
+      "size": 3649
+    },
+    {
+      "path": "C:\\tools\\msc-6.00ax-archive\\BIN\\C2L.EXE",
+      "sha256": "62490de22e7b279ea59218a54d677bfc752cb5fc1287533d2e23d03519f155e0",
+      "size": 473258
+    },
+    {
+      "path": "C:\\tools\\msc-6.00ax-archive\\BIN\\C3L.EXE",
+      "sha256": "9e82ecc87ffcdb2def53ac64c0d1f048b26421c1415b5600ad4d8d6fcbc06553",
+      "size": 195439
+    },
+    {
+      "path": "C:\\tools\\msc-6.00ax-archive\\BIN\\CL.ERR",
+      "sha256": "ca22f37e5e0c09faebde9e4d549dd1f53523cc6f23049d2239a040cd19a424e7",
+      "size": 1656
+    },
+    {
+      "path": "C:\\tools\\msc-6.00ax-archive\\BIN\\CL.EXE",
+      "sha256": "92df4a0839aac77940189ce54f107381b829babe8103926cb05d1adffe947347",
+      "size": 81184
+    },
+    {
+      "path": "C:\\tools\\msc-6.00ax-archive\\BIN\\CL.MSG",
+      "sha256": "3379f283aec74842bc82205e4c848d759e6e2dcbb6d4820eec9719f1297213ec",
+      "size": 2697
+    },
+    {
+      "path": "C:\\tools\\rtlink-plus-6.10\\installed\\DOS4GW.EXE",
+      "sha256": "7192b80d1551769c2d2897b2f58015dc18fadca2b7e093a20f45b34011933c6c",
+      "size": 231179
+    },
+    {
+      "path": "C:\\tools\\rtlink-plus-6.10\\installed\\RTL-REAL.EXE",
+      "sha256": "228c5d429438ea32ee21dd02c65b7f8e198715b3fa957be9da328f9857482773",
+      "size": 717922
+    },
+    {
+      "path": "C:\\tools\\rtlink-plus-6.10\\installed\\RTL-SWAP.EXE",
+      "sha256": "daae0a8c358edc26f95540f4bc1629c0dc5c30652155d85ccd79bead4381cfe3",
+      "size": 692123
+    },
+    {
+      "path": "C:\\tools\\rtlink-plus-6.10\\installed\\RTLINK.DAT",
+      "sha256": "10723fb4d4381b6a38417a18409e32d254e59850bcd3b465fbb824e01367a77b",
+      "size": 100100
+    },
+    {
+      "path": "C:\\tools\\rtlink-plus-6.10\\installed\\RTLINK.EXE",
+      "sha256": "ea6f57a470a26801086593d54aa99f6bf983dd024fc19b5e13361a07f43e17fb",
+      "size": 687531
+    },
+    {
+      "path": "C:\\tools\\rtlink-plus-6.10\\installed\\RTLINKST.COM",
+      "sha256": "635425a8feff822ca98ec536c55a31824161bffbf9d24d37851cc0d9f7ce3b5f",
+      "size": 11031
+    },
+    {
+      "path": "C:\\tools\\rtlink-plus-6.10\\installed\\RTLUTILS.LIB",
+      "sha256": "c718bac09b0b1204a259494446acfa8bfffb129144cc7d36799855621f4fdccb",
+      "size": 423823
+    },
+    {
+      "path": "build\\workers\\dos_yellow_scalar_owners\\report.json",
+      "sha256": "d7161cb54d5170b9e9460bade21b98b05451b263f2182e2ddd724aab1d936df1",
+      "size": 72111
+    },
+    {
+      "path": "layout\\manifest.json",
+      "sha256": "025a0a9255d910cae4b122ab5a3f3fb40888bb456d7fe42158db7c9e622fcf50",
+      "size": 628980
+    },
+    {
+      "path": "layout\\symbols.json",
+      "sha256": "0f5dd5b0a211945a97782cfccdb9bb31b0dfd07fcde5df4d4f9486b487eb0125",
+      "size": 800809
+    },
+    {
+      "path": "layout\\toolchain.json",
+      "sha256": "c0bb71cd8b1f4a1a1f91299bd3b6148aa67b7a1d12c3c3946a229272593eb274",
+      "size": 39241
+    },
+    {
+      "path": "src\\S09\\m35F5.c",
+      "sha256": "028e1575990d5d45233f9102a0d2a060810349bd2f1297182c4af435ecbe912a",
+      "size": 42150
+    },
+    {
+      "path": "src\\S22\\m39C7.c",
+      "sha256": "e9add4ebd445bd943f24a65764be2a79581f2fc26c349741fdfe8efae3b7030d",
+      "size": 31328
+    },
+    {
+      "path": "src\\S25\\m3BA4.c",
+      "sha256": "d2937c80fe0ef4f2bd30c4c3ebe344ce4f993870f08515e7436c60d30cacdec4",
+      "size": 25998
+    },
+    {
+      "path": "src\\root\\m0CDB.c",
+      "sha256": "ae615fe56d075de2a59449b444709c79a847e4f4fb5806e58a50b5c59418c033",
+      "size": 15324
+    },
+    {
+      "path": "src\\root\\m0E2E.c",
+      "sha256": "9325b3426ef87771150912ce8f7cfaacc13380634505313417978b80974d10ed",
+      "size": 11858
+    },
+    {
+      "path": "src\\root\\m10F7.c",
+      "sha256": "a4cc271d57a4a80dd255953554a886026297b0560453c4b2c7b302b5878fff88",
+      "size": 35707
+    },
+    {
+      "path": "src\\root\\m15F8.c",
+      "sha256": "d6d4daddab943ee3436ca0e9c8dbc866a9d67659f7448f3c307f858abe06b70a",
+      "size": 4897
+    },
+    {
+      "path": "tools\\compiler.py",
+      "sha256": "ef1d59a0fbe0e0780a6b8480e13d7d07859a14ae185c00a4420e1238a2ae35bb",
+      "size": 11765
+    },
+    {
+      "path": "tools\\dos_source_bindings.py",
+      "sha256": "fb994fb321d6c343ae99849fdf898ce53791d03060016b37eb235a13a8da4ee8",
+      "size": 33476
+    },
+    {
+      "path": "tools\\omf.py",
+      "sha256": "951137ecbfaeb6e40fd5230c94398141da7ec7bdb7399d9cd74d46ded3045612",
+      "size": 29112
+    },
+    {
+      "path": "tools\\source_only_dos.py",
+      "sha256": "f17b3d0f0522f285b99c4e39a56babbb7ef808f15507645273b15e89fde532ac",
+      "size": 47941
+    },
+    {
+      "path": "work\\source-only-dos\\yellow-scalar-probe.py",
+      "sha256": "77df78f675be742dfab5170e49ac46f75e6f0920270d5eee84bc5b063dbe2eff",
+      "size": 46289
+    }
+  ],
+  "root_review": {
+    "reviewer": "root",
+    "basis": "Complete scalar consumer types, initialization/reset assignments, exact persistent two-byte SaveRec address views, no aggregate/interior/other pointer escapes; fresh whole-module scope-only OMF transitions and actual MSC startup word/BYTE controls under both pinned linkers.",
+    "limit": "Functional source ownership only; original COMDEF-producing TU/order/placement not claimed.",
+    "write_only_member": "fd_50F6_0C38 has reset and computed writes plus a two-byte persistent SaveRec view; no direct C reader is invented."
+  }
+}
