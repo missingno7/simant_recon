@@ -1,0 +1,28 @@
+{
+  "schema": "simant.source-typed-runtime-owner.v1",
+  "migration_snapshot": {
+    "path": "build/workers/whole_program/generated/migration.json",
+    "sha256": "d0887b9295fc40f39355262449bc5faed8565841ffff5b4a1c717e8b48621ea7"
+  },
+  "source": {
+    "path": "src/S12/m384C.c",
+    "sha256": "584bf940832e3f8e975afdf85ed398fc82b6470e4a5c3ec46c1b4fcd15240002",
+    "symbol": "fd_50F6_38C2",
+    "dos_address_observation": "50F6:38C2",
+    "type": "struct Rect { int16_t left, top, right, bottom; }",
+    "source_bytes": 8,
+    "active_references": 9,
+    "role": "Map cursor rectangle shared by DrawMapCursor and EraseMapCursor"
+  },
+  "native_owner": "portable/whole_program/state/map_cursor_rect.c:map_cursor_rect",
+  "source_order": {
+    "draw": "DrawMapCursor writes top/bottom/left/right before draw callback and sets g_298E=1",
+    "erase": "EraseMapCursor reads the rectangle only when g_298E==1, then resets g_298E"
+  },
+  "claims": {
+    "native_single_typed_owner": true,
+    "historical_omf_extent_or_ownership": false,
+    "historical_initial_value": false,
+    "historical_draw_behavior_equivalence": false
+  }
+}

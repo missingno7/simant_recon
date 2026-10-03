@@ -1,0 +1,31 @@
+{
+  "schema": "simant-source-font-pointer-state-v1",
+  "claim": "The S20 loader's g_3DA4 and g_3DA8 pointer slots are source-shaped native pointer owners. root:m1B4E.asm initializes each DOS far-pointer slot to null; generated S20 procedures assign pointers returned by the actual database loader. A pre-g912C native view measures the registered handle payload containing g_3DA8 and borrows it without copying or guessing a size.",
+  "inputs": {
+    "source": {
+      "path": "src/S20/m39C7.c",
+      "sha256": "a392244a7023099b7e9930ea45bf3989eb0bff37202889249795db8b5ae7d13a"
+    },
+    "generated_source": {
+      "path": "portable/tests/whole_program/font_pointer_state_v1/inputs/S20_m39C7.generated.c",
+      "sha256": "615fc1aa6930ed469e9ac3a6966a9f826b151f740b35033337c798e7026cf285"
+    },
+    "asm_initializer": {
+      "path": "src/root/m1B4E.asm",
+      "sha256": "a32d75d2d4ea36980b659d26e9ddd86bcde65d9e250ebac4cdc29c0e847c67a2"
+    }
+  },
+  "initialization": {
+    "g_3DA4": {"address": "55B3:3DA4", "asm": "dd 0", "native_type": "char *"},
+    "g_3DA8": {"address": "55B3:3DA8", "asm": "dw 0; g_3DAA dw 0", "native_type": "char *"}
+  },
+  "native_owner": "portable/whole_program/state/font_pointer_state_v1.c",
+  "native_header": "portable/whole_program/state/font_pointer_state_v1.h",
+  "native_driver_view_hook": "sim_source_font_bind_driver_view_v1",
+  "adapted_source": "src/S20/m39C7.c",
+  "nonclaims": [
+    "The native pointers do not preserve 16-bit far-pointer serialization or DOS DGROUP layout.",
+    "The database handle manager owns resource payloads; this owner does not copy, allocate, lock, or free them.",
+    "The g_3DA8 borrowed view uses the remaining bytes in its registered payload; no font bitmap extent or pixels are inferred."
+  ]
+}

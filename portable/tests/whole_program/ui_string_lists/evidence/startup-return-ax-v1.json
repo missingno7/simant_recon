@@ -1,0 +1,180 @@
+{
+  "schema": "whole-program-startup-return-ax-probe-v1",
+  "status": "PASS",
+  "claim": "The hash-locked original DOS f_00F8_02EF returns AX=0 for the six controlled incoming AX/BX/CX/DX patterns. Its exact eight-byte body is XOR AX,AX; far call __aFchkstk; RETF. The return value does not depend on incoming AX or the varied scratch registers in these cases.",
+  "source_mismatch": {
+    "definition": "src/root/m00F8.c defines f_00F8_02EF as an empty void function.",
+    "caller": "src/root/m075B.c declares it as int and branches on == 0 in initStuff.",
+    "native_contract": "Represent this compiled original ABI as int16_t f_00F8_02EF(void) returning 0; keep the historical source untouched."
+  },
+  "target": {
+    "unit": "root",
+    "seg": 248,
+    "off": 751,
+    "size": 8,
+    "region": "game_or_library",
+    "extent": "DESCENT",
+    "evidence": [
+      "far_call"
+    ],
+    "name": "f_00F8_02EF"
+  },
+  "original_exe_sha256": "aa0596c6766322a8229ee3c36e57048c92adc82d50fbe2ef37afb8b85fcf4f11",
+  "original_bytes": "33c09acc02f429cb",
+  "cases": [
+    {
+      "case": 0,
+      "incoming_registers": {
+        "ax": 0,
+        "bx": 4951,
+        "cx": 9320,
+        "dx": 13978
+      },
+      "returned_signed_ax": 0,
+      "returned_ax_word": 0,
+      "preserved_registers": {
+        "si": 22136,
+        "di": 26505,
+        "bp": 30874,
+        "sp": 41988,
+        "ss": 21939,
+        "ds": 21939
+      },
+      "written_nonstack_addresses": [],
+      "executed_blocks": 5
+    },
+    {
+      "case": 1,
+      "incoming_registers": {
+        "ax": 1,
+        "bx": 65535,
+        "cx": 0,
+        "dx": 32768
+      },
+      "returned_signed_ax": 0,
+      "returned_ax_word": 0,
+      "preserved_registers": {
+        "si": 22136,
+        "di": 26505,
+        "bp": 30874,
+        "sp": 41988,
+        "ss": 21939,
+        "ds": 21939
+      },
+      "written_nonstack_addresses": [],
+      "executed_blocks": 5
+    },
+    {
+      "case": 2,
+      "incoming_registers": {
+        "ax": 4660,
+        "bx": 8738,
+        "cx": 21845,
+        "dx": 43690
+      },
+      "returned_signed_ax": 0,
+      "returned_ax_word": 0,
+      "preserved_registers": {
+        "si": 22136,
+        "di": 26505,
+        "bp": 30874,
+        "sp": 41988,
+        "ss": 21939,
+        "ds": 21939
+      },
+      "written_nonstack_addresses": [],
+      "executed_blocks": 5
+    },
+    {
+      "case": 3,
+      "incoming_registers": {
+        "ax": 32767,
+        "bx": 51966,
+        "cx": 48879,
+        "dx": 23130
+      },
+      "returned_signed_ax": 0,
+      "returned_ax_word": 0,
+      "preserved_registers": {
+        "si": 22136,
+        "di": 26505,
+        "bp": 30874,
+        "sp": 41988,
+        "ss": 21939,
+        "ds": 21939
+      },
+      "written_nonstack_addresses": [],
+      "executed_blocks": 5
+    },
+    {
+      "case": 4,
+      "incoming_registers": {
+        "ax": 32768,
+        "bx": 257,
+        "cx": 65278,
+        "dx": 32767
+      },
+      "returned_signed_ax": 0,
+      "returned_ax_word": 0,
+      "preserved_registers": {
+        "si": 22136,
+        "di": 26505,
+        "bp": 30874,
+        "sp": 41988,
+        "ss": 21939,
+        "ds": 21939
+      },
+      "written_nonstack_addresses": [],
+      "executed_blocks": 5
+    },
+    {
+      "case": 5,
+      "incoming_registers": {
+        "ax": 65535,
+        "bx": 39030,
+        "cx": 21554,
+        "dx": 4350
+      },
+      "returned_signed_ax": 0,
+      "returned_ax_word": 0,
+      "preserved_registers": {
+        "si": 22136,
+        "di": 26505,
+        "bp": 30874,
+        "sp": 41988,
+        "ss": 21939,
+        "ds": 21939
+      },
+      "written_nonstack_addresses": [],
+      "executed_blocks": 5
+    }
+  ],
+  "inputs_sha256": {
+    "src/root/m00F8.c": "4ee148ec616e199f61b671df89da8a21f1789c4177d3dbc7b76a478acb98184a",
+    "src/root/m075B.c": "2826d3b81cf0bcbf67b8453c255ec29bfeb3e381f67028eecb3aa1ef1cf83f56",
+    "build/workers/whole_program/generated/root_m00F8.c": "c4193e2328062b5e65878a01e428dccacd21117f3b2bce930eff8428f0d41b69",
+    "build/workers/whole_program/generated/root_m075B.c": "a28ddfd6147cbf62053bbe1c20c299c6e1b1ac3216676d0a45c090974058eae3",
+    "tools/behavior.py": "2c0799048057f59eae61a48be4d695278635594484adf0c70bf46c51b4e0c799",
+    "tools/exe.py": "d560f69dcdf0d1c9e89278b50bebe225a9b86db2c259fa54ec9eace6ea05a8b5",
+    "tools/functions.py": "0f67c8d9eb01e319620c9342e79c35f76006091d860894aad6dcf8d61ee2b39e",
+    "tools/match.py": "44fdd8b939b2bbf135d8947d8f6ef6b1854dec133da4af86c55eb94f02869b56",
+    "tools/modctx.py": "33f3a4e3d77371e3095bfeb00358c13bc7838235c27bfe8898dba7e313f1cc25",
+    "tools/modules.py": "8a5c1e85db6970cce3c693c016b313b7ee1922fa6eaf146a00391bfea86edf1a",
+    "layout/functions.json": "6089a06e18fbe8f0960392cfe30357f7c19c886f38f10f7f115c72d127a756e7",
+    "layout/symbols.json": "0f5dd5b0a211945a97782cfccdb9bb31b0dfd07fcde5df4d4f9486b487eb0125",
+    "layout/manifest.json": "025a0a9255d910cae4b122ab5a3f3fb40888bb456d7fe42158db7c9e622fcf50",
+    "layout/oracle.lock.json": "2c6d9e98c688621ad49a08c78d0e0968f4076b036be56ec0738217b533ccde13",
+    "portable/tests/whole_program/ui_string_lists/probe_startup_return_ax_v1.py": "e457dc1333f52001311f9537674d6b9344ecfaa71f097f713225803697d50815"
+  },
+  "execution": {
+    "engine": "tools.behavior.Machine, original DOS image only",
+    "callee_pop_bytes": 0,
+    "return_interpretation": "signed 16-bit AX, also recorded as raw AX word",
+    "python": "C:\\msys64\\mingw64\\bin\\python.exe",
+    "python_version": "3.10.11",
+    "unicorn_version": "2.1.4",
+    "unicorn_module": "D:\\Prog\\simant_recon\\build\\behavior\\deps\\unicorn\\__init__.py",
+    "harness_sha256": "e457dc1333f52001311f9537674d6b9344ecfaa71f097f713225803697d50815"
+  },
+  "non_claim": "This is a bounded direct DOS ABI probe, not proof over every possible machine state or a native/differential acceptance run."
+}

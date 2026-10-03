@@ -1,0 +1,156 @@
+{
+  "schema": "simant-yard-cache-handles-v1-test",
+  "status": "PASS",
+  "claim": "The post-word source forms in the v8 generated modules convert to pointer-width shared yard handle storage/callbacks and one full eight-word point table.",
+  "snapshot": "build/whole-application-v8/inputs/build/workers/whole_program/generated",
+  "inputs_before": {
+    "src/S13/m384C.c": "fb6785e93f5c2ea1110f64b5eb200d7f4e346263c43ac521c0434629d9f5839a",
+    "src/root/m00F8.c": "4ee148ec616e199f61b671df89da8a21f1789c4177d3dbc7b76a478acb98184a",
+    "src/root/m1A96.c": "c57124b9d75ea77eb30158c09a71550862cf7081ceed625a2550a26a262bfdfa",
+    "src/root/m015B.c": "67f5c32deda5a49ab56243d50fba33647db7897c850706378fe2a8488277fa8f",
+    "src/S22/m39C7.c": "e9add4ebd445bd943f24a65764be2a79581f2fc26c349741fdfe8efae3b7030d",
+    "src/root/m1629.c": "d8675d63616c6d1cd475ae37cf293d72b70b357d1da75cfff5e9da94f0ecf561",
+    "src/root/m24AB.c": "1d263c6e1f242981d7c3e37d839dc481dc75deed45d7d1bcaaa075cad124de7f",
+    "build/whole-application-v8/inputs/build/workers/whole_program/generated/S13_m384C.c": "5c846253fd54978e72816153a2c736751c05541e10b373cca16a3486234d4f32",
+    "build/whole-application-v8/inputs/build/workers/whole_program/generated/root_m00F8.c": "20312fc70aeb83bf9b427c95e35c4e5220caabb25f22f2118574515ac407bfd1",
+    "build/whole-application-v8/inputs/build/workers/whole_program/generated/root_m1A96.c": "1a612c91ea0832ca095bdb48fd04af9cc628a5c91f4891fce8963aa1aaf2d042",
+    "build/whole-application-v8/inputs/build/workers/whole_program/generated/root_m015B.c": "05a9c5ee15ee0d87b6f313b2a12c4d4eb2bb78e8a3bcd4d342980fdf4599783a",
+    "build/whole-application-v8/inputs/build/workers/whole_program/generated/S22_m39C7.c": "9cdce27d67818818ae9c4d2d27114a31d17b264ef864f75dfb5e25c19d3f14c4",
+    "portable/whole_program/conversions/yard_cache_handles_v1.py": "051caca300399126c3966129e57864659430a995bdb4a77125878d86bbbf2f36",
+    "portable/whole_program/state/yard_cache_globals_v1.h": "ef704d3e3df8c3def2abb6a0a7052bb05776f3e19e760dcd2dc205ed3e9e1cc1",
+    "portable/whole_program/state/yard_cache_globals_v1.c": "1479bc2258534d3dd32820a09923bbd2297c260f11165243565f88e19805c3b0",
+    "portable/whole_program/state/startup_globals_v1.h": "f240602bb671908f9e32d5ca2dc174bddf7530ca43b0d040d783dab286d20963",
+    "portable/whole_program/state/startup_globals_v1.c": "9e771ef1cdf7971fd57943c29c1df38794713915488eb52d8250c11c5ed846ef",
+    "portable/whole_program/platform/handles.h": "e0b6858928e1d3d9d306109bea32030f8c50e70ffe0008ade9337ba57df34f02",
+    "portable/tests/whole_program/yard_cache_handles_v1/test_owner.c": "be97e9aa61212af886670965683c11d24cd6413ab9418136e7d3bbb30ffc88c1"
+  },
+  "inputs_after": {
+    "src/S13/m384C.c": "fb6785e93f5c2ea1110f64b5eb200d7f4e346263c43ac521c0434629d9f5839a",
+    "src/root/m00F8.c": "4ee148ec616e199f61b671df89da8a21f1789c4177d3dbc7b76a478acb98184a",
+    "src/root/m1A96.c": "c57124b9d75ea77eb30158c09a71550862cf7081ceed625a2550a26a262bfdfa",
+    "src/root/m015B.c": "67f5c32deda5a49ab56243d50fba33647db7897c850706378fe2a8488277fa8f",
+    "src/S22/m39C7.c": "e9add4ebd445bd943f24a65764be2a79581f2fc26c349741fdfe8efae3b7030d",
+    "src/root/m1629.c": "d8675d63616c6d1cd475ae37cf293d72b70b357d1da75cfff5e9da94f0ecf561",
+    "src/root/m24AB.c": "1d263c6e1f242981d7c3e37d839dc481dc75deed45d7d1bcaaa075cad124de7f",
+    "build/whole-application-v8/inputs/build/workers/whole_program/generated/S13_m384C.c": "5c846253fd54978e72816153a2c736751c05541e10b373cca16a3486234d4f32",
+    "build/whole-application-v8/inputs/build/workers/whole_program/generated/root_m00F8.c": "20312fc70aeb83bf9b427c95e35c4e5220caabb25f22f2118574515ac407bfd1",
+    "build/whole-application-v8/inputs/build/workers/whole_program/generated/root_m1A96.c": "1a612c91ea0832ca095bdb48fd04af9cc628a5c91f4891fce8963aa1aaf2d042",
+    "build/whole-application-v8/inputs/build/workers/whole_program/generated/root_m015B.c": "05a9c5ee15ee0d87b6f313b2a12c4d4eb2bb78e8a3bcd4d342980fdf4599783a",
+    "build/whole-application-v8/inputs/build/workers/whole_program/generated/S22_m39C7.c": "9cdce27d67818818ae9c4d2d27114a31d17b264ef864f75dfb5e25c19d3f14c4",
+    "portable/whole_program/conversions/yard_cache_handles_v1.py": "051caca300399126c3966129e57864659430a995bdb4a77125878d86bbbf2f36",
+    "portable/whole_program/state/yard_cache_globals_v1.h": "ef704d3e3df8c3def2abb6a0a7052bb05776f3e19e760dcd2dc205ed3e9e1cc1",
+    "portable/whole_program/state/yard_cache_globals_v1.c": "1479bc2258534d3dd32820a09923bbd2297c260f11165243565f88e19805c3b0",
+    "portable/whole_program/state/startup_globals_v1.h": "f240602bb671908f9e32d5ca2dc174bddf7530ca43b0d040d783dab286d20963",
+    "portable/whole_program/state/startup_globals_v1.c": "9e771ef1cdf7971fd57943c29c1df38794713915488eb52d8250c11c5ed846ef",
+    "portable/whole_program/platform/handles.h": "e0b6858928e1d3d9d306109bea32030f8c50e70ffe0008ade9337ba57df34f02",
+    "portable/tests/whole_program/yard_cache_handles_v1/test_owner.c": "be97e9aa61212af886670965683c11d24cd6413ab9418136e7d3bbb30ffc88c1"
+  },
+  "converted_modules": {
+    "src/S13/m384C.c": {
+      "kind": "YARD_CACHE_SHARED_HANDLE_V1",
+      "source": "src/S13/m384C.c",
+      "input_sha256": "5c846253fd54978e72816153a2c736751c05541e10b373cca16a3486234d4f32",
+      "output_sha256": "e83171f3398ceb8235b56c36962e43cd2ace4329d8f8f1ab4a1d2e3183e0baa2",
+      "owner_header": "portable/whole_program/state/yard_cache_globals_v1.h",
+      "owner_source": "portable/whole_program/state/yard_cache_globals_v1.c",
+      "details": {
+        "rewritten_uses": {
+          "g_2A36": 6,
+          "g_2A3A": 4,
+          "g_2A42": 10
+        },
+        "owner_header": "portable/whole_program/state/yard_cache_globals_v1.h",
+        "owner_source": "portable/whole_program/state/yard_cache_globals_v1.c"
+      },
+      "claim": "Native yard cache cells are SimYardCacheHandle (char **); source handle producers, cache callbacks, and consumers share that nontruncating type. The four yard points use the full source eight-word table."
+    },
+    "src/root/m00F8.c": {
+      "kind": "YARD_CACHE_SHARED_HANDLE_V1",
+      "source": "src/root/m00F8.c",
+      "input_sha256": "20312fc70aeb83bf9b427c95e35c4e5220caabb25f22f2118574515ac407bfd1",
+      "output_sha256": "14487a1c628682754b24e32139723d7b2464ddff9d6f4069f69eef81a585d202",
+      "owner_header": "portable/whole_program/state/yard_cache_globals_v1.h",
+      "owner_source": "portable/whole_program/state/yard_cache_globals_v1.c",
+      "details": {
+        "cached_handle_provider": "f_00F8_0543",
+        "owner_header": "portable/whole_program/state/yard_cache_globals_v1.h",
+        "obsolete_externs_removed": 0
+      },
+      "claim": "Native yard cache cells are SimYardCacheHandle (char **); source handle producers, cache callbacks, and consumers share that nontruncating type. The four yard points use the full source eight-word table."
+    },
+    "src/root/m1A96.c": {
+      "kind": "YARD_CACHE_SHARED_HANDLE_V1",
+      "source": "src/root/m1A96.c",
+      "input_sha256": "1a612c91ea0832ca095bdb48fd04af9cc628a5c91f4891fce8963aa1aaf2d042",
+      "output_sha256": "e1bf41ae01359fbaaa04e4ec442480c10130b601407a2ca75ccad4aa77180f18",
+      "owner_header": "portable/whole_program/state/yard_cache_globals_v1.h",
+      "owner_source": "portable/whole_program/state/yard_cache_globals_v1.c",
+      "details": {
+        "typed_handle_fields": 1,
+        "typed_cache_entry_apis": 5,
+        "owner_header": "portable/whole_program/state/yard_cache_globals_v1.h"
+      },
+      "claim": "Native yard cache cells are SimYardCacheHandle (char **); source handle producers, cache callbacks, and consumers share that nontruncating type. The four yard points use the full source eight-word table."
+    },
+    "src/root/m015B.c": {
+      "kind": "YARD_CACHE_SHARED_HANDLE_V1",
+      "source": "src/root/m015B.c",
+      "input_sha256": "05a9c5ee15ee0d87b6f313b2a12c4d4eb2bb78e8a3bcd4d342980fdf4599783a",
+      "output_sha256": "c4b40f531154f200dd2f5e46106640f2e32af625eded0197b38e1bc09b11cb88",
+      "owner_header": "portable/whole_program/state/yard_cache_globals_v1.h",
+      "owner_source": "portable/whole_program/state/yard_cache_globals_v1.c",
+      "details": {
+        "point_table_extent": 8,
+        "owner_header": "portable/whole_program/state/yard_cache_globals_v1.h",
+        "narrow_declarations_removed": 0
+      },
+      "claim": "Native yard cache cells are SimYardCacheHandle (char **); source handle producers, cache callbacks, and consumers share that nontruncating type. The four yard points use the full source eight-word table."
+    },
+    "src/S22/m39C7.c": {
+      "kind": "YARD_CACHE_SHARED_HANDLE_V1",
+      "source": "src/S22/m39C7.c",
+      "input_sha256": "9cdce27d67818818ae9c4d2d27114a31d17b264ef864f75dfb5e25c19d3f14c4",
+      "output_sha256": "23e45724f89fdd607f8ee426c6e0e2566f6a304d65a6bf3c5b24c33aec17f938",
+      "owner_header": "portable/whole_program/state/yard_cache_globals_v1.h",
+      "owner_source": "portable/whole_program/state/yard_cache_globals_v1.c",
+      "details": {
+        "point_table_extent": 8,
+        "owner_header": "portable/whole_program/state/yard_cache_globals_v1.h",
+        "narrow_declarations_removed": 0
+      },
+      "claim": "Native yard cache cells are SimYardCacheHandle (char **); source handle producers, cache callbacks, and consumers share that nontruncating type. The four yard points use the full source eight-word table."
+    }
+  },
+  "negative_controls": {
+    "wrong_cached_handle_return": {
+      "rejected": true,
+      "reason": "cached-handle producer return declaration: expected exactly one source-shaped match, found 0"
+    }
+  },
+  "native": {
+    "command": [
+      "C:\\msys64\\mingw64\\bin\\gcc.exe",
+      "-std=c11",
+      "-O0",
+      "-Wall",
+      "-Wextra",
+      "-Wconversion",
+      "-Werror",
+      "-I",
+      "D:\\Prog\\simant_recon",
+      "D:\\Prog\\simant_recon\\portable\\whole_program\\state\\startup_globals_v1.c",
+      "D:\\Prog\\simant_recon\\portable\\whole_program\\state\\yard_cache_globals_v1.c",
+      "D:\\Prog\\simant_recon\\portable\\tests\\whole_program\\yard_cache_handles_v1\\test_owner.c",
+      "-o",
+      "D:\\Prog\\simant_recon\\build\\workers\\yard_cache_handles_v1\\report-v3\\yard_cache_owner.exe"
+    ],
+    "compiler": "gcc.exe (Rev10, Built by MSYS2 project) 12.2.0",
+    "compile_output": "",
+    "run_output": "",
+    "executable_sha256": "9e7185624080d1d3d563fe2c7d264e9db4324c4e392c2ca41d115f9d97fcfe12"
+  },
+  "limits": [
+    "This is a post-word conversion and owner ABI control against the pinned v8 generated source snapshot, not a central whole-application link or DOS execution differential.",
+    "The conversion removes the specific 32-bit cache-handle cells and wrong cache callback/entry pointer levels; other generated-source type normalization is outside this receipt."
+  ]
+}

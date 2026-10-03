@@ -1,0 +1,130 @@
+{
+  "schema": "startup-retained-dos-descriptor-v2",
+  "status": "PASS",
+  "claim": "The five INSTALL.EXE descriptors are closed; fh[0]'s numeric slot is invalid before the first later open and is reused by the actual SHARED.DAT data file. The source m00BA reader can then consume the actual 256-byte database tail through that descriptor.",
+  "test_output": "PASS closed_slot=3 shared_dat_fd=3 header_offset=95847 tail_bytes=256 tail_fnv1a=acb8dd87",
+  "adapter": {
+    "schema": "whole-program-startup-conversion-v1",
+    "public_api": "startup_bundle.convert_startup_sources(main_text, s15_text)",
+    "sources": {
+      "src/root/m15F8.c": {
+        "sha256": "d6d4daddab943ee3436ca0e9c8dbc866a9d67659f7448f3c307f858abe06b70a",
+        "adapter": {
+          "kind": "MAIN_INSTALL_PREFLIGHT",
+          "source_path": "src\\root\\m15F8.c",
+          "source_sha256": "d6d4daddab943ee3436ca0e9c8dbc866a9d67659f7448f3c307f858abe06b70a",
+          "old_block_sha256": "e95b3ed5346ec2eed63f817b6beb55893090cdaaa31245dd6ba964e75e4a5613",
+          "new_block_sha256": "9aee1fc21cff29753c8fd96eddb6fdd673ff298f2705b25505046fa470e15ea9",
+          "policy": "Preserve the closed numeric fh[0] slot after five simultaneous INSTALL.EXE opens; the virtual DOS allocator reuses it for the first retained database data file (language.dat if present, otherwise SHARED.DAT). This restores m00BA's original descriptor-number alias without treating INSTALL.EXE as the later file."
+        }
+      },
+      "src/S15/m384C.c": {
+        "sha256": "01b51eecedcd28e2213819572c846a9754039f4a527e6da5e56e57783398bdd5",
+        "retired_function_sha256": "972a80930c13e9d8892e2e22580a01bf36f78804e43dc79d06f09109cff62d5b"
+      }
+    },
+    "outputs": {
+      "src/root/m15F8.c": "5d539823f57aa6df279c2e48b376532edd447dd0aa4bc0f71d8705f06dc3cd36",
+      "src/S15/m384C.c": "1f8ab7d72a0d89b499cea8f1225b7df93e0d3447dbd94462846a99460d6bdc1c"
+    },
+    "boundaries": {
+      "install_probe": "Five real simultaneous INSTALL.EXE opens are preserved; only a separate bounded optional-header descriptor may survive.",
+      "interrupt_policy": "Numeric MSC SIGBREAK/SIGINT calls map to native SIGBREAK/SIGINT ignore policy.",
+      "bios_reset": "The physical INT 13h drive scan is retired through an explicit no-I/O host policy."
+    }
+  },
+  "compile_command": [
+    "C:\\msys64\\mingw64\\bin\\gcc.exe",
+    "-std=c11",
+    "-Wall",
+    "-Wextra",
+    "-Werror",
+    "-I",
+    "D:\\Prog\\simant_recon\\portable\\whole_program\\platform",
+    "D:\\Prog\\simant_recon\\portable\\whole_program\\platform\\tests\\startup_preflight_retained_slot_test.c",
+    "D:\\Prog\\simant_recon\\portable\\whole_program\\platform\\startup_preflight.c",
+    "D:\\Prog\\simant_recon\\portable\\whole_program\\platform\\dos_io.c",
+    "-o",
+    "D:\\Prog\\simant_recon\\build\\workers\\startup_preflight_retained_slot_v2\\startup_preflight_retained_slot_test.exe"
+  ],
+  "source_asset_pins_before": {
+    "portable/whole_program/platform/dos_io.h": "afa62ac7e715a4c8af9713de3ac49b9628b14d3d261dff35674a0abac277159a",
+    "portable/whole_program/platform/dos_io.c": "c46877dfc2d14057f6d57bf4e79c7a5d4899c1cdeb1c5a8b158e8b7dc6fbaff0",
+    "portable/whole_program/platform/dos_files.h": "7febf02ee92777f9579ad40baa4448aa9b08c19ae80ac2982e60d521762f1957",
+    "portable/whole_program/platform/startup_preflight.h": "a56616666a328b12880a97849b1a8d338637bd389edbceac588980c85bf64709",
+    "portable/whole_program/platform/startup_preflight.c": "dcf4eca4d1036cfdcc076d4243ab42afdb1952f667eae182259cb4207f713d79",
+    "portable/whole_program/platform/tests/startup_preflight_retained_slot_test.c": "eaf4279fc238d65f351a239af8ae98b4c9ac5aacb20dd03bdfd29d5cd6c4aad2",
+    "portable/whole_program/platform/tests/run_startup_preflight_retained_slot_v2.py": "d4967b28205834292f41072132205e7ba073af6822d7dbe1bf4e03b462222a47",
+    "portable/whole_program/conversions/main_preflight.py": "0a6ab1e522cce188d2f8b98a86d0a870c2779aa43440dd2da94d83e1fd41d36e",
+    "portable/whole_program/conversions/startup_bundle.py": "38054ee5338a2a36e0e3c9eb0f26a4cf46b793ebb3c696bdab700aa9dfa851ed",
+    "src/root/m15F8.c": "d6d4daddab943ee3436ca0e9c8dbc866a9d67659f7448f3c307f858abe06b70a",
+    "src/S15/m384C.c": "01b51eecedcd28e2213819572c846a9754039f4a527e6da5e56e57783398bdd5",
+    "src/root/m00BA.c": "d72629d827e2bccd7557566b725f652862d2b1199f40390361179c61cc9ff5dc",
+    "src/root/m1A28.c": "5db49039ef64717680153a4b9445554b58ab2abf8a3c3fd9d67e6573af58a740",
+    "src/root/m1986.c": "c6278f0729f2c7e8c1b36c423c7c4ab081573b8c26a8604ab1ee78036365fc96",
+    "src/S20/m39F1.c": "6fd0a02991a29325f214049a8a8961aaee4bc65fbf760b296e63a6ac8f6fbe7b",
+    "src/root/m19A9.c": "552ca373a3a3721885915acd0a95e2126b8405b0c555f02d1833381331cda523",
+    "src/root/m19DC.c": "90b0d3a7a6e171bb7395410af72ec10d3a094865c0395824cb744b9ba5a48c8c",
+    "portable/whole_program/platform/startup_contract.md": "22746782d45ef1ae092725ea458a030770d4b799fd66d79a178a05e9e8a9edc3",
+    "assets/INSTALL.EXE": "a0d9866aab2adca0fffc312236a08e9fa0dc553d316139cc2736b980a25ac486",
+    "assets/SHARED.DAT": "aa0d2342510f99abf57a685ea93178d9dd8d2d5be1e65b556c9b27f974012750",
+    "assets/SHARED.NDX": "e172f030c11f417af4b5be34dacbda9a63f157820827b40d62c08ca2c6ea7477",
+    "layout/oracle.lock.json": "2c6d9e98c688621ad49a08c78d0e0968f4076b036be56ec0738217b533ccde13",
+    "C:\\tools\\msc-6.00a-simantw\\INCLUDE\\dos.h": "027e81abad4ceae2892863858b939694e42aa24d73bd96cab8278fcc868c0b33"
+  },
+  "source_asset_pins_after": {
+    "portable/whole_program/platform/dos_io.h": "afa62ac7e715a4c8af9713de3ac49b9628b14d3d261dff35674a0abac277159a",
+    "portable/whole_program/platform/dos_io.c": "c46877dfc2d14057f6d57bf4e79c7a5d4899c1cdeb1c5a8b158e8b7dc6fbaff0",
+    "portable/whole_program/platform/dos_files.h": "7febf02ee92777f9579ad40baa4448aa9b08c19ae80ac2982e60d521762f1957",
+    "portable/whole_program/platform/startup_preflight.h": "a56616666a328b12880a97849b1a8d338637bd389edbceac588980c85bf64709",
+    "portable/whole_program/platform/startup_preflight.c": "dcf4eca4d1036cfdcc076d4243ab42afdb1952f667eae182259cb4207f713d79",
+    "portable/whole_program/platform/tests/startup_preflight_retained_slot_test.c": "eaf4279fc238d65f351a239af8ae98b4c9ac5aacb20dd03bdfd29d5cd6c4aad2",
+    "portable/whole_program/platform/tests/run_startup_preflight_retained_slot_v2.py": "d4967b28205834292f41072132205e7ba073af6822d7dbe1bf4e03b462222a47",
+    "portable/whole_program/conversions/main_preflight.py": "0a6ab1e522cce188d2f8b98a86d0a870c2779aa43440dd2da94d83e1fd41d36e",
+    "portable/whole_program/conversions/startup_bundle.py": "38054ee5338a2a36e0e3c9eb0f26a4cf46b793ebb3c696bdab700aa9dfa851ed",
+    "src/root/m15F8.c": "d6d4daddab943ee3436ca0e9c8dbc866a9d67659f7448f3c307f858abe06b70a",
+    "src/S15/m384C.c": "01b51eecedcd28e2213819572c846a9754039f4a527e6da5e56e57783398bdd5",
+    "src/root/m00BA.c": "d72629d827e2bccd7557566b725f652862d2b1199f40390361179c61cc9ff5dc",
+    "src/root/m1A28.c": "5db49039ef64717680153a4b9445554b58ab2abf8a3c3fd9d67e6573af58a740",
+    "src/root/m1986.c": "c6278f0729f2c7e8c1b36c423c7c4ab081573b8c26a8604ab1ee78036365fc96",
+    "src/S20/m39F1.c": "6fd0a02991a29325f214049a8a8961aaee4bc65fbf760b296e63a6ac8f6fbe7b",
+    "src/root/m19A9.c": "552ca373a3a3721885915acd0a95e2126b8405b0c555f02d1833381331cda523",
+    "src/root/m19DC.c": "90b0d3a7a6e171bb7395410af72ec10d3a094865c0395824cb744b9ba5a48c8c",
+    "portable/whole_program/platform/startup_contract.md": "22746782d45ef1ae092725ea458a030770d4b799fd66d79a178a05e9e8a9edc3",
+    "assets/INSTALL.EXE": "a0d9866aab2adca0fffc312236a08e9fa0dc553d316139cc2736b980a25ac486",
+    "assets/SHARED.DAT": "aa0d2342510f99abf57a685ea93178d9dd8d2d5be1e65b556c9b27f974012750",
+    "assets/SHARED.NDX": "e172f030c11f417af4b5be34dacbda9a63f157820827b40d62c08ca2c6ea7477",
+    "layout/oracle.lock.json": "2c6d9e98c688621ad49a08c78d0e0968f4076b036be56ec0738217b533ccde13",
+    "C:\\tools\\msc-6.00a-simantw\\INCLUDE\\dos.h": "027e81abad4ceae2892863858b939694e42aa24d73bd96cab8278fcc868c0b33"
+  },
+  "inputs_stable": true,
+  "gcc": {
+    "path": "C:\\msys64\\mingw64\\bin\\gcc.exe",
+    "sha256_before": "c5005ba5380351c10743e9ca53ef9632164c54be3bd6b93324795114e4589a7d",
+    "sha256_after": "c5005ba5380351c10743e9ca53ef9632164c54be3bd6b93324795114e4589a7d",
+    "version": "gcc.exe (Rev10, Built by MSYS2 project) 12.2.0"
+  },
+  "oracle_assets": {
+    "install_exe": {
+      "sha256": "a0d9866aab2adca0fffc312236a08e9fa0dc553d316139cc2736b980a25ac486",
+      "size": 24931
+    },
+    "shared_dat": {
+      "sha256": "aa0d2342510f99abf57a685ea93178d9dd8d2d5be1e65b556c9b27f974012750",
+      "size": 96117
+    },
+    "shared_ndx": {
+      "sha256": "e172f030c11f417af4b5be34dacbda9a63f157820827b40d62c08ca2c6ea7477",
+      "size": 3868
+    }
+  },
+  "contract": {
+    "five_probe_opens": "Five simultaneous real opens occur before any DB open and are closed in the original order.",
+    "pre_db_invalidity": "dos_read(closed fh[0]) returns -1 with DOS error 9 before database reopen.",
+    "descriptor_reuse": "The actual SHARED.DAT binary read/write open receives exactly fh[0]'s now-free virtual DOS descriptor number.",
+    "source_db_sequence": "The test reads the actual 14-byte DAT header, opens and closes actual SHARED.NDX as OpenIndex does, then uses the retained DAT descriptor to read the 256-byte tail at headers+14 and observes EOF on the following byte read.",
+    "language_database": "IBMInitStuff probes language.dat before SHARED; when present, that probe's closed lowest-free slot is likewise reused by the language DB data open. When absent, SHARED.DAT is first. No filename-specific substitute is used.",
+    "m00ba": "src/root/m00BA.c remains unchanged; its actual source reads fd_50F6_10D0, follows the DAT header offset, and loads the 256-byte tail.",
+    "claim_limit": "Native DOS-descriptor contract and real-asset read only; no fresh DOS main execution is claimed."
+  }
+}

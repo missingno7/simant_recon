@@ -1,0 +1,217 @@
+{
+  "schema": "simant-whole-program-asm-state-plan-v2",
+  "claim": "FIXED_SOURCE_DERIVED_PLAN; decisions copied from reviewed v1 receipt and pinned source/accepted layout evidence; no live migration recollection",
+  "parent_receipt": {
+    "path": "portable/tests/recovered/evidence/whole-program-asm-state-v1/report.json",
+    "sha256": "aa69f605309f8ad2e37d620b0cf20a74ab0b63c69daed2f63317d2d8bf95b334"
+  },
+  "historical_migration_identity": "82005416e44cbcdbc9f6e9b56d8144e5286bbebbf4bb700488af607430e26b44",
+  "pinned_source_hashes": {
+    "src/root/m195A.asm": "b634ca4916d811140f6a06b29f731bd323d49f5c50a76ef3afee38a7f23f6a81",
+    "src/root/m0250.c": "bb8a325c543151e09cb173d2194844877805a9e1058d3b24362ff5a7cbd9f61b",
+    "src/root/m15F8.c": "d6d4daddab943ee3436ca0e9c8dbc866a9d67659f7448f3c307f858abe06b70a",
+    "src/root/m15D9.c": "c50a15ede6504d434d8bdea499a3e070ad2c9878de73a18ca3f7ead5bb880688",
+    "src/S04/m35F5.c": "65db48855f97c32600ff7527999a463019ba2884117f0c921b35e46d5d37d406",
+    "src/S05/m35F5.c": "b1ab82dff86dc635ad10974bf70d31dc73d8755ba3fd1605f4f0573ef71f9e87",
+    "src/S22/m39C7.c": "e9add4ebd445bd943f24a65764be2a79581f2fc26c349741fdfe8efae3b7030d",
+    "src/S22/m3BBD.c": "22ed7dc5dbf4687dc3e971e6845bf28ce1934f771c81ae551dd30bc782753da2",
+    "src/S20/m39F1.c": "6fd0a02991a29325f214049a8a8961aaee4bc65fbf760b296e63a6ac8f6fbe7b",
+    "layout/manifest.json": "025a0a9255d910cae4b122ab5a3f3fb40888bb456d7fe42158db7c9e622fcf50",
+    "layout/symbols.json": "0f5dd5b0a211945a97782cfccdb9bb31b0dfd07fcde5df4d4f9486b487eb0125",
+    "portable/whole_program/state/asm_shared_state.c": "4a4450e1db8c6bd89e7a1e1a5cd8be3d88fa947d7cb2aa9cfb8ff18eceef8386",
+    "portable/whole_program/state/asm_shared_state.h": "f3177c6e6c2c1c5be0a3401bee57654061ef1d877f56dcb7ecc65ea1a385c8b8",
+    "portable/whole_program/state/source_tables.h": "3019b35afb9d08f777b8234572d1286dc0b7382b14836e792334e40ad8cdc71a"
+  },
+  "fixture_hashes": {
+    "portable/tests/recovered/whole_program_asm_state/fixtures/v1-generated/root_m15D9.c": "86c02c23c5a9d3c711b07dd332926b3f3b20b5f52338c3aea6f6fa43177e90d9",
+    "portable/tests/recovered/whole_program_asm_state/fixtures/v1-generated/S04_m35F5.c": "00e1f81e7294342cbc8889ba9d095a2010339114369cd6d37fb28f6a3db997b5",
+    "portable/tests/recovered/whole_program_asm_state/fixtures/v1-generated/S05_m35F5.c": "dfe9917d138acc7cbbc04a01c8b47a5157ef147a36f5d929ee3b712c7a22df6b",
+    "portable/tests/recovered/whole_program_asm_state/fixtures/v1-generated/S22_m39C7.c": "6ed41fc6c18f6847a651074f387e38d0dc0bd8eea3cdbb235e8e95efacda129e",
+    "portable/tests/recovered/whole_program_asm_state/fixtures/v1-generated/S22_m3BBD.c": "1e2b1bae072d73824798f972cf4e7615b4654335f0177009290229f1093a4383",
+    "portable/tests/recovered/whole_program_asm_state/fixtures/v1-generated/S20_m39F1.c": "622638ab353e5935423899713cbcd35cc060b5f3c167990ef3e93b86b33e72a5",
+    "portable/tests/recovered/whole_program_asm_state/fixtures/v1-generated/dos_types.h": "917da2a746f22bd61b32310a89a15ba16328bbe29a90895e47ad37e923dda705",
+    "portable/tests/recovered/whole_program_asm_state/fixtures/v1-generated/source_tables.h": "3019b35afb9d08f777b8234572d1286dc0b7382b14836e792334e40ad8cdc71a"
+  },
+  "fixture_parent_generated_hashes": {
+    "root_m15D9.c": "ff9575ce8f79ef6543eb769b4311169b61400f79b6c87a62df2ba18a8d64a049",
+    "S04_m35F5.c": "9a1707cea8d15892f277983261494aa76df5c20ac94b8c900b7585021a5100d4",
+    "S05_m35F5.c": "8a4aa312bd2a78935c9a49c5e4eeca64a50aae597c4a11210121add527aaf396",
+    "S22_m39C7.c": "dda9f01f84f29448e9c31a79f7f1df73f6c1450d9da27757381aba831fc6622b",
+    "S22_m3BBD.c": "4540eb6bc5cc0a93728d80186186ea21cd4acc954db62ec4a22987026b386dc8",
+    "S20_m39F1.c": "873eb8a8cf8a98b19c93f811661509037511e577b14e92b966f15c6e8541f201"
+  },
+  "source_declarations_exact": {
+    "src/S04/m35F5.c": [
+      "extern int far fd_55B3_19C0;"
+    ],
+    "src/S05/m35F5.c": [
+      "extern int far fd_55B3_19C0;"
+    ],
+    "src/S22/m39C7.c": [
+      "extern int far fd_55B3_19C0;"
+    ],
+    "src/S22/m3BBD.c": [
+      "extern int far fd_55B3_19C0;"
+    ],
+    "src/root/m15D9.c": [
+      "extern char far * far fd_55B3_19C6;",
+      "extern long far fd_55B3_19CA;",
+      "extern int far fd_55B3_19CE;"
+    ],
+    "src/S20/m39F1.c": [
+      "extern char far * far fd_55B3_1CE4;",
+      "extern char far * far fd_55B3_1CE0;"
+    ],
+    "src/root/m0250.c": [
+      "int g_19BE = 16;",
+      "int g_19C0 = 16;",
+      "int g_19C2 = 13;",
+      "int g_19C4 = 7;",
+      "char far *g_19C6 = 0;",
+      "long g_19CA = 0;",
+      "int g_19CE = 1;"
+    ],
+    "src/root/m15F8.c": [
+      "char far *fd_55B3_1CD4[] = {",
+      "    \"SimAnt configuration file missing\",",
+      "    \"simant.cfg\""
+    ]
+  },
+  "asm_scalars": [
+    {
+      "name": "fd_55B3_360C",
+      "c_type": "int8_t",
+      "initializer": "0",
+      "address": [
+        21939,
+        13836
+      ]
+    },
+    {
+      "name": "fd_55B3_3612",
+      "c_type": "int16_t",
+      "initializer": "0",
+      "address": [
+        21939,
+        13842
+      ]
+    },
+    {
+      "name": "fd_55B3_3614",
+      "c_type": "int16_t",
+      "initializer": "0",
+      "address": [
+        21939,
+        13844
+      ]
+    }
+  ],
+  "alias_rewrites": [
+    {
+      "alias": "fd_55B3_19C0",
+      "target": "g_19C0",
+      "kind": "scalar-lvalue",
+      "c_type": "int16_t",
+      "dos_type": "int",
+      "address": [
+        21939,
+        6592
+      ],
+      "canonical_owner": "root:0250:g_19C0",
+      "initializer": "16",
+      "declaration_sources": [
+        "src/S04/m35F5.c",
+        "src/S05/m35F5.c",
+        "src/S22/m39C7.c",
+        "src/S22/m3BBD.c"
+      ]
+    },
+    {
+      "alias": "fd_55B3_19C6",
+      "target": "g_19C6",
+      "kind": "scalar-lvalue",
+      "c_type": "char *",
+      "dos_type": "char far *",
+      "address": [
+        21939,
+        6598
+      ],
+      "canonical_owner": "root:0250:g_19C6",
+      "initializer": "0",
+      "declaration_sources": [
+        "src/root/m15D9.c"
+      ]
+    },
+    {
+      "alias": "fd_55B3_19CA",
+      "target": "g_19CA",
+      "kind": "scalar-lvalue",
+      "c_type": "int32_t",
+      "dos_type": "long",
+      "address": [
+        21939,
+        6602
+      ],
+      "canonical_owner": "root:0250:g_19CA",
+      "initializer": "0",
+      "declaration_sources": [
+        "src/root/m15D9.c"
+      ]
+    },
+    {
+      "alias": "fd_55B3_19CE",
+      "target": "g_19CE",
+      "kind": "scalar-lvalue",
+      "c_type": "int16_t",
+      "dos_type": "int",
+      "address": [
+        21939,
+        6606
+      ],
+      "canonical_owner": "root:0250:g_19CE",
+      "initializer": "1",
+      "declaration_sources": [
+        "src/root/m15D9.c"
+      ]
+    },
+    {
+      "alias": "fd_55B3_1CE0",
+      "target": "fd_55B3_1CD4[3]",
+      "kind": "interior-pointer-table-lvalue",
+      "c_type": "char *",
+      "dos_type": "char far *",
+      "address": [
+        21939,
+        7392
+      ],
+      "canonical_owner": "root:15F8:fd_55B3_1CD4",
+      "initializer": "\"SimAnt configuration file missing\"",
+      "declaration_sources": [
+        "src/S20/m39F1.c"
+      ],
+      "table_index": 3
+    },
+    {
+      "alias": "fd_55B3_1CE4",
+      "target": "fd_55B3_1CD4[4]",
+      "kind": "interior-pointer-table-lvalue",
+      "c_type": "char *",
+      "dos_type": "char far *",
+      "address": [
+        21939,
+        7396
+      ],
+      "canonical_owner": "root:15F8:fd_55B3_1CD4",
+      "initializer": "\"simant.cfg\"",
+      "declaration_sources": [
+        "src/S20/m39F1.c"
+      ],
+      "table_index": 4
+    }
+  ],
+  "negative_controls": {
+    "reject_fd_55B3_360E": "ASM declaration is dd far-pointer; no native pointer owner is declared",
+    "reject_pointer_base_rewrite": "fd_55B3_1CD4 is already canonical table owner; v2 only resolves interior views 1CE0/1CE4",
+    "wrong_alias_address": "fd_55B3_19C0 at any address other than 21939:6592 must fail"
+  }
+}

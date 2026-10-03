@@ -1,0 +1,16 @@
+/* One native owner per source-bounded V7 SaveRec state object. */
+#include "simulation_state_50f6_v7.h"
+
+NativeV7_fd_50F6_0F46 native_sim_state_fd_50F6_0F46;
+NativeV7_fd_50F6_0FC6 native_sim_state_fd_50F6_0FC6;
+NativeV7_fd_50F6_0F84 native_sim_state_fd_50F6_0F84;
+NativeV7_fd_50F6_1008 native_sim_state_fd_50F6_1008;
+NativeV7_fd_50F6_0256 native_sim_state_fd_50F6_0256;
+NativeV7_fd_50F6_02C0 native_sim_state_fd_50F6_02C0;
+NativeV7_fd_50F6_0334 native_sim_state_fd_50F6_0334;
+NativeV7_fd_50F6_0AEC native_sim_state_fd_50F6_0AEC;
+NativeV7_fd_50F6_0AFA native_sim_state_fd_50F6_0AFA;
+NativeV7_fd_50F6_0B12 native_sim_state_fd_50F6_0B12;
+NativeV7_fd_50F6_0C2A native_sim_state_fd_50F6_0C2A;
+NativeV7_casteLevels native_sim_state_casteLevels;
+NativeV7_modeLevels native_sim_state_modeLevels;

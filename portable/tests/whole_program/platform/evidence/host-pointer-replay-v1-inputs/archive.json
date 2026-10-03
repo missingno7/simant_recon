@@ -1,0 +1,43 @@
+{
+  "schema": "simant-native-input-archive-v1",
+  "scope": "Native evidence retention; no new DOS claim",
+  "receipt_source": "portable/tests/whole_program/platform/evidence/host-pointer-replay-v1.json",
+  "receipt_sha256": "83c8e4ccb06095ab346f6d60cc58742c99b0ff238d69e579ea1057250690e7a7",
+  "inputs": [
+    {
+      "source": "portable/tests/whole_program/platform/host_pointer_replay_test.c",
+      "sha256": "aa216520d4e5accef3a13c0546a435987d38413a3fe940ede1485426115e663f",
+      "retention": "EXACT_READABLE_INPUT",
+      "archive": "inputs/portable/tests/whole_program/platform/host_pointer_replay_test.c",
+      "recovered_from": "workspace"
+    },
+    {
+      "source": "portable/tests/whole_program/platform/run_host_pointer_replay.py",
+      "sha256": "35044f1a23edccf959fd1cebe9a6467570aabf652b17f517641ee4efa844da67",
+      "retention": "EXACT_READABLE_INPUT",
+      "archive": "inputs/portable/tests/whole_program/platform/run_host_pointer_replay.py",
+      "recovered_from": "workspace"
+    },
+    {
+      "source": "portable/whole_program/platform/sdl3/host.c",
+      "sha256": "8210e28ba4a0da173ced2b3547ea3e168e44100b37d4d15b8e70d2e24f8c412a",
+      "retention": "EXACT_READABLE_INPUT",
+      "archive": "inputs/portable/whole_program/platform/sdl3/host.c",
+      "recovered_from": "workspace"
+    },
+    {
+      "source": "portable/whole_program/platform/sdl3/host_modes.h",
+      "sha256": "b33b4078a432cfc364c2991a52518fad2a474df4bb731fe39c3344b0cda9ac9b",
+      "retention": "EXACT_READABLE_INPUT",
+      "archive": "inputs/portable/whole_program/platform/sdl3/host_modes.h",
+      "recovered_from": "workspace"
+    },
+    {
+      "source": "portable/platform/host.h",
+      "sha256": "d19eaca0ab4f2d6d7fa7c43231ebe85302527cdf955a848311f35baffbe5869d",
+      "retention": "EXACT_READABLE_INPUT",
+      "archive": "inputs/portable/platform/host.h",
+      "recovered_from": "workspace"
+    }
+  ]
+}

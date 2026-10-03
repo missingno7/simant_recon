@@ -1,0 +1,27 @@
+{
+  "schema": "simant-map-render-selector-owner-plan-v1",
+  "source": {
+    "path": "src/root/m0250.c",
+    "sha256": "bb8a325c543151e09cb173d2194844877805a9e1058d3b24362ff5a7cbd9f61b",
+    "declarations": {
+      "g_94E4": "extern unsigned char near g_94E4;",
+      "g_9126": "extern unsigned near g_9126;"
+    },
+    "active_references": {
+      "g_94E4": 28,
+      "g_9126": 54
+    }
+  },
+  "native": {
+    "header": "portable/whole_program/state/map_render_selectors.h",
+    "owners": {
+      "g_94E4": {"type": "uint8_t", "width": 1},
+      "g_9126": {"type": "uint16_t", "width": 2}
+    }
+  },
+  "evidence": [
+    "Original C declares both selectors unsigned; g_94E4 is unsigned char and g_9126 is unsigned int under MSC 16-bit widths.",
+    "The source uses unsigned range comparisons, shifts and subtraction in map rendering and assigns them from map and geometry fields.",
+    "The native owners retain unsigned 8-bit and 16-bit semantics; this adapter only replaces generated extern declarations with the shared typed-owner header."
+  ]
+}

@@ -1,0 +1,36 @@
+{
+  "schema": "simant-source-assigned-minimap-scales-v1",
+  "claim": "OpenMiniMapWin sets the two source-declared near int scales together to 2 when g_5A97 bit 0 is set and together to 1 otherwise, before opening/drawing and before map coordinate division. This is a runtime-assigned native-state model, not a historical storage-extent or initial-zero claim.",
+  "source": {
+    "path": "src/S04/m35F5.c",
+    "sha256": "65db48855f97c32600ff7527999a463019ba2884117f0c921b35e46d5d37d406"
+  },
+  "targets": [
+    {
+      "symbol": "g_8BD2",
+      "declaration": "extern int near g_8BD2;",
+      "native_type": "int16_t",
+      "producer": "OpenMiniMapWin first scale in paired branch"
+    },
+    {
+      "symbol": "g_8BD4",
+      "declaration": "extern int near g_8BD4;",
+      "native_type": "int16_t",
+      "producer": "OpenMiniMapWin second scale in paired branch"
+    }
+  ],
+  "owner_names": {
+    "g_8BD2": "native_minimap_scale_x_v1",
+    "g_8BD4": "native_minimap_scale_y_v1"
+  },
+  "branch_source": "if (g_5A97 & 1)\n        g_8BD2 = g_8BD4 = 2;\n    else\n        g_8BD2 = g_8BD4 = 1;",
+  "nonclaims": [
+    "No historical communal/BSS extent is claimed.",
+    "No initial zero value is required or inferred.",
+    "No pixel or gameplay equivalence is claimed."
+  ],
+  "expected_uses": {
+    "g_8BD2": 7,
+    "g_8BD4": 7
+  }
+}

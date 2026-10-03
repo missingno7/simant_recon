@@ -1,0 +1,112 @@
+{
+  "schema": "simant-cursor-source-slot-order-v1",
+  "status": "SOURCE_SLOT_INSTALL_RETURNED; WHOLE_STARTUP_BLOCKED_LATER",
+  "claim": "The actual original startup path loaded canonical cursor resources, accepted their source-format extents, and returned from f_1B73_01E1 with source dimensions populated.",
+  "not_claimed": [
+    "pixel-equivalent cursor rendering",
+    "completed startup frame",
+    "successful full application startup"
+  ],
+  "source_contract": {
+    "caller": "src/root/m1B28.c:f_1B28_0006 loads kind 8 into g_8C7C and kind 7 into g_8C9C; f_1B28_006A passes the dereferenced kind-8 resource as first argument and kind-7 as second.",
+    "slot_mapping": "src/root/m1B73.asm:_f_1B73_01E1 loads [bp+0Ah] (second argument) into g_4D8E and reads width/height there; it loads [bp+6] (first argument) into g_4D92. _0DA4 copies g_4D8E to its first raster input and g_4D92 to its second raster input.",
+    "raster_roles": "The source callback route uses the first raster input for one-plane AND and second for four-plane XOR; therefore kind 7 occupies g_4D8E/AND and kind 8 occupies g_4D92/XOR. This follows original slot/callback order, not source variable names."
+  },
+  "resource_measurements": [
+    {
+      "database": "HCEGANT",
+      "id": 0,
+      "kind": 8,
+      "decoded_size": 132,
+      "width": 16,
+      "height": 16,
+      "planes": 4,
+      "formula": "4 + ceil(width/8)*height*4"
+    },
+    {
+      "database": "SHARED",
+      "id": 0,
+      "kind": 7,
+      "decoded_size": 36,
+      "width": 16,
+      "height": 16,
+      "planes": 1,
+      "formula": "4 + ceil(width/8)*height"
+    },
+    {
+      "database": "HCEGANT",
+      "id": 1,
+      "kind": 8,
+      "decoded_size": 388,
+      "width": 24,
+      "height": 32,
+      "planes": 4,
+      "formula": "4 + ceil(width/8)*height*4"
+    },
+    {
+      "database": "HCEGANT",
+      "id": 1,
+      "kind": 7,
+      "decoded_size": 100,
+      "width": 24,
+      "height": 32,
+      "planes": 1,
+      "formula": "4 + ceil(width/8)*height"
+    }
+  ],
+  "execution": {
+    "application_executable": "build/whole-application-v6/simant-whole-sdl3.exe",
+    "startup_report": "build/workers/whole_program/source-main-smoke-cursor-v6/report.json",
+    "exit_code": 70,
+    "timed_out": false,
+    "later_failure": "whole-program audio host service unavailable in native mode 1: unexpected source timer stop",
+    "original_assets_unchanged": true,
+    "runtime_asset_changes": {
+      "RALLOC.DMP": {
+        "before": "57e837e834e2af51a344d36367eb0fc81c53a9a9ee512ce1934f5c6b03f9f022",
+        "after": "be690a32f87011bdeb384d0eea49bbe9d0abceec7f676afdc52b72f24a6a56a7"
+      }
+    },
+    "gdb_observation": "At f_1B73_01E1, raw Windows x64 argument registers RCX/RDX pointed to readable resource bytes with 16x16 headers; finish returned to f_1B28_006A and g_4348/g_434A were 16/16. GDB symbolic parameter display was inconsistent with the raw argument registers, so only register/memory and post-return globals are used.",
+    "resource_probe_output": "portable/tests/whole_program/evidence/m1b73-cursor-resource-probes-v1.txt",
+    "startup_runner_sha256_recorded_by_receipt": "a6307fa3bd6ea29bed14d34128cb288b91472985784f65d2da13d685c83b953e"
+  },
+  "source_identity_note": {
+    "tested_application_input_sha256": "7d4a7cfc609eb90a4d7023bf7941639f065e0c717ef834292d0c52b9fc16c921",
+    "current_application_input_sha256": "cc2604b706ed1c08f75311ed6e9a75b2fb8d36457268d905a34cd02d132fa2c4",
+    "delta": "Only the explanatory cursor-role comment changed after v6 was linked/run; executable validation and argument-slot code are identical."
+  },
+  "inputs": {
+    "src/root/m1B28.c": "9e1c31226eae71d8ab1cc1e2de68bfd7840ba678b02dd72a4ba7757e25543343",
+    "src/root/m1B73.asm": "3097a6b03ff1d8bdfa7d573632d9905de88d754c8b1e047de4014c4f186cb848",
+    "portable/whole_program/platform/m1b73_mouse.c": "3975847cc8a493dc7d3c25278ab82f9b1e0a1552e07ca5bd3b9eec5a1d54cec1",
+    "portable/whole_program/platform/sdl3/m1b73_application_input.c": "cc2604b706ed1c08f75311ed6e9a75b2fb8d36457268d905a34cd02d132fa2c4",
+    "portable/whole_program/platform/graphics_cursor_source.c": "4f4c42b9b3224c620d99315880b2628678a2bebf699bf80e06cb141609024966",
+    "portable/game/resources/database.c": "de237a7b134c1d938a334f504a5f9abb9f10f3da33ee931ef58d3dfca3c708aa",
+    "assets/HCEGANT.DAT": "9c98c0f110e901a2c2db65944e4ebdf6b26392181e9415a34eb7b29617eaa899",
+    "assets/HCEGANT.NDX": "077d8aecdad5e816f0828204f7ca500a68b3a4a3288740ac75e73e44eaa8efc4",
+    "assets/SHARED.DAT": "aa0d2342510f99abf57a685ea93178d9dd8d2d5be1e65b556c9b27f974012750",
+    "assets/SHARED.NDX": "e172f030c11f417af4b5be34dacbda9a63f157820827b40d62c08ca2c6ea7477",
+    "build/workers/cursor_resource_probe.c": "22ea6fa6c084a8af95603bb52719cc1a65edde108aaa63d78c4d4d9e3ccf71fe",
+    "build/workers/cursor_resource_probe.exe": "95ff98731d0bcc1012b0def7168a2800d07f01fec146cd608450dfa84ea65b71",
+    "build/workers/cursor_shared_probe.c": "c8ac904c91ddeb18d8f3149e15b7178fd8ee439f70560b819f650ccdbebefe80",
+    "build/workers/cursor_shared_probe.exe": "40656fe916eaab062f0abdf7cc0c2223bb36662efb3e5e0f647c9cbd96002e1c",
+    "build/whole-application-v6/simant-whole-sdl3.exe": "4c4f1907abad5ef05d797ba49c309ce686d97b79b2cac8a4c7b76f8502e08fc3",
+    "build/whole-application-v6/report.json": "ff947139f1493ed52991647ceaa15f985b5a03e8a7e41fddc5a1002cc42d07de",
+    "build/workers/whole_program/source-main-smoke-cursor-v6/report.json": "721f5b5f770e014891e0015bcd6be87fff41cedeaf4bc81cfde58f104993b815",
+    "build/workers/whole_program/source-main-smoke-cursor-v6/gdb-cursor-registers.txt": "6e299468cfbf2a36da088909295943aa9a785f610408e785df7c48714ec15a66",
+    "portable/tests/whole_program/evidence/m1b73-cursor-resource-probes-v1.txt": "2727cbb77c55007168c107571dc1764d2c15d205d044d1d4310ac0bf04cfa4d5"
+  },
+  "application_link_source_snapshot_sha256": "7d4a7cfc609eb90a4d7023bf7941639f065e0c717ef834292d0c52b9fc16c921",
+  "application_link_receipt_inputs": {
+    "portable/whole_program/application.c": "f03cf21a3300bd9baf53b0cc61cd6e1cd2a46f2551821af9a14eee0d9895e503",
+    "build/workers/whole_program/generated/migration.json": "5d676cccba10858f2fc11b61ea0baaeb4b923ff6eb5472a5cfd3c15879b7f37c",
+    "build/workers/whole_program/generated/whole_program_core.o": "435edccc99845948845ec38e9293535d557ba10a146ed263bcb820794860c97d",
+    "portable/tools/build_whole_application.py": "705cf41733c3e308fd1e4e01e5beaf5ee0e847b9f91aa1c2a84557df2c821ebe"
+  },
+  "run_receipt_inputs": {
+    "build/whole-application-v6/simant-whole-sdl3.exe": "4c4f1907abad5ef05d797ba49c309ce686d97b79b2cac8a4c7b76f8502e08fc3",
+    "build/whole-application-v6/report.json": "ff947139f1493ed52991647ceaa15f985b5a03e8a7e41fddc5a1002cc42d07de",
+    "portable/tools/run_whole_startup.py": "a6307fa3bd6ea29bed14d34128cb288b91472985784f65d2da13d685c83b953e"
+  }
+}

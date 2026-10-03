@@ -1,0 +1,874 @@
+{
+  "schema": "simant-native-source-bounded-owners-v5",
+  "claim": "DIAGNOSTIC_ONLY: additive native owners from exact source declarations and S09 SaveRec extents; historical FAR_BSS communal gaps are not used as object bounds; no production selection.",
+  "inputs": {
+    "v2_owner_report": {
+      "path": "portable/research/whole_program_unprovided_owners_v2.json",
+      "sha256": "ff91c70e7d1458816e9a10d69945e2d87d0510fd5ebeb4bf8c391028f29229ae"
+    },
+    "v3_plan": {
+      "path": "portable/research/whole_program_source_bounded_owners_v3.json",
+      "sha256": "ed54979f50150330df56b206e70da08a67df85ae424ff575006bed622bdfc897"
+    },
+    "manifest": {
+      "path": "layout/manifest.json",
+      "sha256": "025a0a9255d910cae4b122ab5a3f3fb40888bb456d7fe42158db7c9e622fcf50"
+    },
+    "symbols": {
+      "path": "layout/symbols.json",
+      "sha256": "0f5dd5b0a211945a97782cfccdb9bb31b0dfd07fcde5df4d4f9486b487eb0125"
+    },
+    "save_source": {
+      "path": "src/S09/m35F5.c",
+      "sha256": "028e1575990d5d45233f9102a0d2a060810349bd2f1297182c4af435ecbe912a"
+    },
+    "producer": {
+      "path": "portable/whole_program/conversions/source_bounded_owners_v5.py",
+      "sha256": "fafd694ceececb68b734a93a4317130fbc1c99bd6e03e0d78b0e688a9492af7d"
+    },
+    "source_files": {
+      "src/root/m0894.c": {
+        "sha256": "57b40ad0a9ee74c501fbcb0d521b86b8158f206f44f4867e960bcb800b5e7484",
+        "manifest_source_sha256": "57b40ad0a9ee74c501fbcb0d521b86b8158f206f44f4867e960bcb800b5e7484"
+      },
+      "src/root/m0F3F.c": {
+        "sha256": "f1c903c7f29e4fbb64fd82c2de5390c00df4f7cf35c9c836007dfa07c56612e8",
+        "manifest_source_sha256": "f1c903c7f29e4fbb64fd82c2de5390c00df4f7cf35c9c836007dfa07c56612e8"
+      },
+      "src/S08/m35F5.c": {
+        "sha256": "ef6eea405f6497cb5a6648ef258cc1afeab308f995ded573794465d831e3501f",
+        "manifest_source_sha256": "ef6eea405f6497cb5a6648ef258cc1afeab308f995ded573794465d831e3501f"
+      },
+      "src/S09/m35F5.c": {
+        "sha256": "028e1575990d5d45233f9102a0d2a060810349bd2f1297182c4af435ecbe912a",
+        "manifest_source_sha256": "028e1575990d5d45233f9102a0d2a060810349bd2f1297182c4af435ecbe912a"
+      },
+      "src/S25/m39C7.c": {
+        "sha256": "90a2cf12a9e527d1836099c92e5327d47342eac0a8403639d66471ecbc859ba6",
+        "manifest_source_sha256": "90a2cf12a9e527d1836099c92e5327d47342eac0a8403639d66471ecbc859ba6"
+      },
+      "src/S25/m3BA4.c": {
+        "sha256": "d2937c80fe0ef4f2bd30c4c3ebe344ce4f993870f08515e7436c60d30cacdec4",
+        "manifest_source_sha256": "d2937c80fe0ef4f2bd30c4c3ebe344ce4f993870f08515e7436c60d30cacdec4"
+      },
+      "src/root/m0BE8.c": {
+        "sha256": "42664e07331fbba4cc257f1e49e03dff5e93deddb764d33101ad0f454a9377d7",
+        "manifest_source_sha256": "42664e07331fbba4cc257f1e49e03dff5e93deddb764d33101ad0f454a9377d7"
+      },
+      "src/root/m0EC1.c": {
+        "sha256": "516121f3568fffaa6a6f17a0a87da5696dbb1e4db02cbcfa93ad5ad4497454cc",
+        "manifest_source_sha256": "516121f3568fffaa6a6f17a0a87da5696dbb1e4db02cbcfa93ad5ad4497454cc"
+      },
+      "src/root/m10F7.c": {
+        "sha256": "a4cc271d57a4a80dd255953554a886026297b0560453c4b2c7b302b5878fff88",
+        "manifest_source_sha256": "a4cc271d57a4a80dd255953554a886026297b0560453c4b2c7b302b5878fff88"
+      },
+      "src/root/m1383.c": {
+        "sha256": "489ee7d47f0ee27942bf6bea11fff7a8bbb90acd2c75fe4653d18a3e9efa5389",
+        "manifest_source_sha256": "489ee7d47f0ee27942bf6bea11fff7a8bbb90acd2c75fe4653d18a3e9efa5389"
+      },
+      "src/S22/m39C7.c": {
+        "sha256": "e9add4ebd445bd943f24a65764be2a79581f2fc26c349741fdfe8efae3b7030d",
+        "manifest_source_sha256": "e9add4ebd445bd943f24a65764be2a79581f2fc26c349741fdfe8efae3b7030d"
+      },
+      "src/S22/m3BBD.c": {
+        "sha256": "22ed7dc5dbf4687dc3e971e6845bf28ce1934f771c81ae551dd30bc782753da2",
+        "manifest_source_sha256": "22ed7dc5dbf4687dc3e971e6845bf28ce1934f771c81ae551dd30bc782753da2"
+      },
+      "src/root/m0AD9.c": {
+        "sha256": "726585ecdb17d969b478bf5a55b726736614dbaa2d5f6477b8f6907c86f73d0b",
+        "manifest_source_sha256": "726585ecdb17d969b478bf5a55b726736614dbaa2d5f6477b8f6907c86f73d0b"
+      }
+    }
+  },
+  "owners": [
+    {
+      "name": "Cycle",
+      "address": "50F6:0F08",
+      "kind": "word-union",
+      "native_declaration": "union { int16_t signed_value; uint8_t raw_bytes[2]; }",
+      "width_bytes": 2,
+      "save_rec": {
+        "size": 2,
+        "count": 1,
+        "bytes": 2
+      },
+      "source_mappings": [
+        {
+          "source": "src/root/m0894.c",
+          "name": "Cycle",
+          "expression": "native_state_Cycle.signed_value",
+          "view": "word-scalar",
+          "remove_extern": {
+            "source": "src/root/m0894.c",
+            "line": 14,
+            "text": "extern int far Cycle;"
+          }
+        },
+        {
+          "source": "src/root/m0F3F.c",
+          "name": "Cycle",
+          "expression": "native_state_Cycle.signed_value",
+          "view": "word-scalar",
+          "remove_extern": {
+            "source": "src/root/m0F3F.c",
+            "line": 39,
+            "text": "extern int far Cycle;"
+          }
+        },
+        {
+          "source": "src/S08/m35F5.c",
+          "name": "Cycle",
+          "expression": "native_state_Cycle.signed_value",
+          "view": "word-scalar",
+          "remove_extern": {
+            "source": "src/S08/m35F5.c",
+            "line": 53,
+            "text": "extern int far Cycle;"
+          }
+        },
+        {
+          "source": "src/S09/m35F5.c",
+          "name": "Cycle",
+          "expression": "native_state_Cycle.raw_bytes",
+          "view": "raw-byte",
+          "remove_extern": {
+            "source": "src/S09/m35F5.c",
+            "line": 738,
+            "text": "extern unsigned char far Cycle[];"
+          }
+        },
+        {
+          "source": "src/S25/m39C7.c",
+          "name": "fd_50F6_0F08",
+          "expression": "native_state_Cycle.signed_value",
+          "view": "word-scalar",
+          "remove_extern": {
+            "source": "src/S25/m39C7.c",
+            "line": 368,
+            "text": "extern int far fd_50F6_0F08;"
+          }
+        },
+        {
+          "source": "src/S25/m3BA4.c",
+          "name": "fd_50F6_0F08",
+          "expression": "native_state_Cycle.raw_bytes[0]",
+          "view": "raw-byte",
+          "remove_extern": {
+            "source": "src/S25/m3BA4.c",
+            "line": 244,
+            "text": "extern unsigned char far fd_50F6_0F08;"
+          }
+        }
+      ],
+      "serialized_byte_view": "Cycle has an explicit S09 raw array plus S25 byte scalar; ListIndexB/R serialization uses the same storage address through the S09 SaveRec pointer.",
+      "basis": "complete 16-bit scalar declaration and exact S09 SaveRec 2x1; any same-address byte aliases are explicit raw views",
+      "source_group_modules": [
+        "src/S08/m35F5.c",
+        "src/S09/m35F5.c",
+        "src/S25/m39C7.c",
+        "src/S25/m3BA4.c",
+        "src/root/m0894.c",
+        "src/root/m0F3F.c"
+      ]
+    },
+    {
+      "name": "ListIndexB",
+      "address": "50F6:0DA8",
+      "kind": "word-union",
+      "native_declaration": "union { int16_t signed_value; uint8_t raw_bytes[2]; }",
+      "width_bytes": 2,
+      "save_rec": {
+        "size": 2,
+        "count": 1,
+        "bytes": 2
+      },
+      "source_mappings": [
+        {
+          "source": "src/root/m0894.c",
+          "name": "ListIndexB",
+          "expression": "native_state_ListIndexB.signed_value",
+          "view": "word-scalar",
+          "remove_extern": {
+            "source": "src/root/m0894.c",
+            "line": 67,
+            "text": "extern int far ListIndexB;"
+          }
+        },
+        {
+          "source": "src/root/m0BE8.c",
+          "name": "ListIndexB",
+          "expression": "native_state_ListIndexB.signed_value",
+          "view": "word-scalar",
+          "remove_extern": {
+            "source": "src/root/m0BE8.c",
+            "line": 55,
+            "text": "extern int far ListIndexB;"
+          }
+        },
+        {
+          "source": "src/root/m0EC1.c",
+          "name": "ListIndexB",
+          "expression": "native_state_ListIndexB.signed_value",
+          "view": "word-scalar",
+          "remove_extern": {
+            "source": "src/root/m0EC1.c",
+            "line": 9,
+            "text": "extern int far ListIndexB;"
+          }
+        },
+        {
+          "source": "src/root/m10F7.c",
+          "name": "ListIndexB",
+          "expression": "native_state_ListIndexB.signed_value",
+          "view": "word-scalar",
+          "remove_extern": {
+            "source": "src/root/m10F7.c",
+            "line": 61,
+            "text": "extern int far ListIndexB;"
+          }
+        },
+        {
+          "source": "src/root/m1383.c",
+          "name": "ListIndexB",
+          "expression": "native_state_ListIndexB.signed_value",
+          "view": "word-scalar",
+          "remove_extern": {
+            "source": "src/root/m1383.c",
+            "line": 50,
+            "text": "extern int far ListIndexB;"
+          }
+        },
+        {
+          "source": "src/S09/m35F5.c",
+          "name": "ListIndexB",
+          "expression": "native_state_ListIndexB.signed_value",
+          "view": "word-scalar",
+          "remove_extern": {
+            "source": "src/S09/m35F5.c",
+            "line": 51,
+            "text": "extern int far ListIndexB;"
+          }
+        },
+        {
+          "source": "src/S22/m39C7.c",
+          "name": "ListIndexB",
+          "expression": "native_state_ListIndexB.signed_value",
+          "view": "word-scalar",
+          "remove_extern": {
+            "source": "src/S22/m39C7.c",
+            "line": 471,
+            "text": "extern int far ListIndexB;"
+          }
+        },
+        {
+          "source": "src/S22/m3BBD.c",
+          "name": "ListIndexB",
+          "expression": "native_state_ListIndexB.signed_value",
+          "view": "word-scalar",
+          "remove_extern": {
+            "source": "src/S22/m3BBD.c",
+            "line": 280,
+            "text": "extern int far ListIndexB;"
+          }
+        },
+        {
+          "source": "src/S25/m39C7.c",
+          "name": "ListIndexB",
+          "expression": "native_state_ListIndexB.signed_value",
+          "view": "word-scalar",
+          "remove_extern": {
+            "source": "src/S25/m39C7.c",
+            "line": 19,
+            "text": "extern int far ListIndexB;"
+          }
+        }
+      ],
+      "serialized_byte_view": "Cycle has an explicit S09 raw array plus S25 byte scalar; ListIndexB/R serialization uses the same storage address through the S09 SaveRec pointer.",
+      "basis": "complete 16-bit scalar declaration and exact S09 SaveRec 2x1; any same-address byte aliases are explicit raw views",
+      "source_group_modules": [
+        "src/S09/m35F5.c",
+        "src/S22/m39C7.c",
+        "src/S22/m3BBD.c",
+        "src/S25/m39C7.c",
+        "src/root/m0894.c",
+        "src/root/m0BE8.c",
+        "src/root/m0EC1.c",
+        "src/root/m10F7.c",
+        "src/root/m1383.c"
+      ]
+    },
+    {
+      "name": "ListIndexR",
+      "address": "50F6:0EAA",
+      "kind": "word-union",
+      "native_declaration": "union { int16_t signed_value; uint8_t raw_bytes[2]; }",
+      "width_bytes": 2,
+      "save_rec": {
+        "size": 2,
+        "count": 1,
+        "bytes": 2
+      },
+      "source_mappings": [
+        {
+          "source": "src/root/m0894.c",
+          "name": "ListIndexR",
+          "expression": "native_state_ListIndexR.signed_value",
+          "view": "word-scalar",
+          "remove_extern": {
+            "source": "src/root/m0894.c",
+            "line": 69,
+            "text": "extern int far ListIndexR;"
+          }
+        },
+        {
+          "source": "src/root/m0BE8.c",
+          "name": "ListIndexR",
+          "expression": "native_state_ListIndexR.signed_value",
+          "view": "word-scalar",
+          "remove_extern": {
+            "source": "src/root/m0BE8.c",
+            "line": 56,
+            "text": "extern int far ListIndexR;"
+          }
+        },
+        {
+          "source": "src/root/m0EC1.c",
+          "name": "ListIndexR",
+          "expression": "native_state_ListIndexR.signed_value",
+          "view": "word-scalar",
+          "remove_extern": {
+            "source": "src/root/m0EC1.c",
+            "line": 15,
+            "text": "extern int far ListIndexR;"
+          }
+        },
+        {
+          "source": "src/root/m0F3F.c",
+          "name": "ListIndexR",
+          "expression": "native_state_ListIndexR.signed_value",
+          "view": "word-scalar",
+          "remove_extern": {
+            "source": "src/root/m0F3F.c",
+            "line": 5,
+            "text": "extern int far ListIndexR;"
+          }
+        },
+        {
+          "source": "src/root/m10F7.c",
+          "name": "ListIndexR",
+          "expression": "native_state_ListIndexR.signed_value",
+          "view": "word-scalar",
+          "remove_extern": {
+            "source": "src/root/m10F7.c",
+            "line": 67,
+            "text": "extern int far ListIndexR;"
+          }
+        },
+        {
+          "source": "src/root/m1383.c",
+          "name": "ListIndexR",
+          "expression": "native_state_ListIndexR.signed_value",
+          "view": "word-scalar",
+          "remove_extern": {
+            "source": "src/root/m1383.c",
+            "line": 52,
+            "text": "extern int far ListIndexR;"
+          }
+        },
+        {
+          "source": "src/S09/m35F5.c",
+          "name": "ListIndexR",
+          "expression": "native_state_ListIndexR.signed_value",
+          "view": "word-scalar",
+          "remove_extern": {
+            "source": "src/S09/m35F5.c",
+            "line": 55,
+            "text": "extern int far ListIndexR;"
+          }
+        },
+        {
+          "source": "src/S22/m39C7.c",
+          "name": "ListIndexR",
+          "expression": "native_state_ListIndexR.signed_value",
+          "view": "word-scalar",
+          "remove_extern": {
+            "source": "src/S22/m39C7.c",
+            "line": 482,
+            "text": "extern int far ListIndexR;"
+          }
+        },
+        {
+          "source": "src/S22/m3BBD.c",
+          "name": "ListIndexR",
+          "expression": "native_state_ListIndexR.signed_value",
+          "view": "word-scalar",
+          "remove_extern": {
+            "source": "src/S22/m3BBD.c",
+            "line": 298,
+            "text": "extern int far ListIndexR;"
+          }
+        }
+      ],
+      "serialized_byte_view": "Cycle has an explicit S09 raw array plus S25 byte scalar; ListIndexB/R serialization uses the same storage address through the S09 SaveRec pointer.",
+      "basis": "complete 16-bit scalar declaration and exact S09 SaveRec 2x1; any same-address byte aliases are explicit raw views",
+      "source_group_modules": [
+        "src/S09/m35F5.c",
+        "src/S22/m39C7.c",
+        "src/S22/m3BBD.c",
+        "src/root/m0894.c",
+        "src/root/m0BE8.c",
+        "src/root/m0EC1.c",
+        "src/root/m0F3F.c",
+        "src/root/m10F7.c",
+        "src/root/m1383.c"
+      ]
+    },
+    {
+      "name": "LionListM",
+      "address": "50F6:0ABA",
+      "kind": "byte-array",
+      "native_declaration": "uint8_t values[10]",
+      "width_bytes": 10,
+      "save_rec": {
+        "size": 1,
+        "count": 10,
+        "bytes": 10
+      },
+      "source_mappings": [
+        {
+          "source": "src/root/m0AD9.c",
+          "name": "LionListM",
+          "expression": "native_state_LionListM.values",
+          "view": "byte-array",
+          "remove_extern": {
+            "source": "src/root/m0AD9.c",
+            "line": 23,
+            "text": "extern unsigned char far LionListM[];"
+          }
+        },
+        {
+          "source": "src/S09/m35F5.c",
+          "name": "LionListM",
+          "expression": "native_state_LionListM.values",
+          "view": "byte-array",
+          "remove_extern": {
+            "source": "src/S09/m35F5.c",
+            "line": 664,
+            "text": "extern unsigned char far LionListM[];"
+          }
+        }
+      ],
+      "basis": "source index is bounded by LionIndex < 10; S09 SaveRec is 1x10; declarations are byte-array views",
+      "source_group_modules": [
+        "src/S09/m35F5.c",
+        "src/root/m0AD9.c"
+      ]
+    },
+    {
+      "name": "LionListS",
+      "address": "50F6:0ACC",
+      "kind": "byte-array",
+      "native_declaration": "uint8_t values[10]",
+      "width_bytes": 10,
+      "save_rec": {
+        "size": 1,
+        "count": 10,
+        "bytes": 10
+      },
+      "source_mappings": [
+        {
+          "source": "src/root/m0AD9.c",
+          "name": "LionListS",
+          "expression": "native_state_LionListS.values",
+          "view": "byte-array",
+          "remove_extern": {
+            "source": "src/root/m0AD9.c",
+            "line": 24,
+            "text": "extern unsigned char far LionListS[];"
+          }
+        },
+        {
+          "source": "src/S09/m35F5.c",
+          "name": "LionListS",
+          "expression": "native_state_LionListS.values",
+          "view": "byte-array",
+          "remove_extern": {
+            "source": "src/S09/m35F5.c",
+            "line": 665,
+            "text": "extern unsigned char far LionListS[];"
+          }
+        }
+      ],
+      "basis": "source index is bounded by LionIndex < 10; S09 SaveRec is 1x10; declarations are byte-array views",
+      "source_group_modules": [
+        "src/S09/m35F5.c",
+        "src/root/m0AD9.c"
+      ]
+    },
+    {
+      "name": "LionListT",
+      "address": "50F6:0ADE",
+      "kind": "byte-array",
+      "native_declaration": "uint8_t values[10]",
+      "width_bytes": 10,
+      "save_rec": {
+        "size": 1,
+        "count": 10,
+        "bytes": 10
+      },
+      "source_mappings": [
+        {
+          "source": "src/root/m0AD9.c",
+          "name": "LionListT",
+          "expression": "native_state_LionListT.values",
+          "view": "byte-array",
+          "remove_extern": {
+            "source": "src/root/m0AD9.c",
+            "line": 25,
+            "text": "extern unsigned char far LionListT[];"
+          }
+        },
+        {
+          "source": "src/S09/m35F5.c",
+          "name": "LionListT",
+          "expression": "native_state_LionListT.values",
+          "view": "byte-array",
+          "remove_extern": {
+            "source": "src/S09/m35F5.c",
+            "line": 666,
+            "text": "extern unsigned char far LionListT[];"
+          }
+        }
+      ],
+      "basis": "source index is bounded by LionIndex < 10; S09 SaveRec is 1x10; declarations are byte-array views",
+      "source_group_modules": [
+        "src/S09/m35F5.c",
+        "src/root/m0AD9.c"
+      ]
+    },
+    {
+      "name": "LionListX",
+      "address": "50F6:0A92",
+      "kind": "byte-array",
+      "native_declaration": "uint8_t values[10]",
+      "width_bytes": 10,
+      "save_rec": {
+        "size": 1,
+        "count": 10,
+        "bytes": 10
+      },
+      "source_mappings": [
+        {
+          "source": "src/root/m0AD9.c",
+          "name": "LionListX",
+          "expression": "native_state_LionListX.values",
+          "view": "byte-array",
+          "remove_extern": {
+            "source": "src/root/m0AD9.c",
+            "line": 21,
+            "text": "extern unsigned char far LionListX[];"
+          }
+        },
+        {
+          "source": "src/S09/m35F5.c",
+          "name": "LionListX",
+          "expression": "native_state_LionListX.values",
+          "view": "byte-array",
+          "remove_extern": {
+            "source": "src/S09/m35F5.c",
+            "line": 667,
+            "text": "extern unsigned char far LionListX[];"
+          }
+        }
+      ],
+      "basis": "source index is bounded by LionIndex < 10; S09 SaveRec is 1x10; declarations are byte-array views",
+      "source_group_modules": [
+        "src/S09/m35F5.c",
+        "src/root/m0AD9.c"
+      ]
+    },
+    {
+      "name": "LionListY",
+      "address": "50F6:0AA8",
+      "kind": "byte-array",
+      "native_declaration": "uint8_t values[10]",
+      "width_bytes": 10,
+      "save_rec": {
+        "size": 1,
+        "count": 10,
+        "bytes": 10
+      },
+      "source_mappings": [
+        {
+          "source": "src/root/m0AD9.c",
+          "name": "LionListY",
+          "expression": "native_state_LionListY.values",
+          "view": "byte-array",
+          "remove_extern": {
+            "source": "src/root/m0AD9.c",
+            "line": 22,
+            "text": "extern unsigned char far LionListY[];"
+          }
+        },
+        {
+          "source": "src/S09/m35F5.c",
+          "name": "LionListY",
+          "expression": "native_state_LionListY.values",
+          "view": "byte-array",
+          "remove_extern": {
+            "source": "src/S09/m35F5.c",
+            "line": 668,
+            "text": "extern unsigned char far LionListY[];"
+          }
+        }
+      ],
+      "basis": "source index is bounded by LionIndex < 10; S09 SaveRec is 1x10; declarations are byte-array views",
+      "source_group_modules": [
+        "src/S09/m35F5.c",
+        "src/root/m0AD9.c"
+      ]
+    },
+    {
+      "name": "SowX",
+      "address": "50F6:0EAE",
+      "kind": "word-array-union",
+      "native_declaration": "union { int16_t signed_values[3]; uint8_t raw_bytes[6]; }",
+      "count": 3,
+      "width_bytes": 6,
+      "save_rec": {
+        "size": 2,
+        "count": 3,
+        "bytes": 6
+      },
+      "source_mappings": [
+        {
+          "source": "src/root/m0AD9.c",
+          "name": "SowX",
+          "expression": "native_state_SowX.signed_values",
+          "view": "word-array",
+          "remove_extern": {
+            "source": "src/root/m0AD9.c",
+            "line": 5,
+            "text": "extern int far SowX[3];"
+          }
+        },
+        {
+          "source": "src/S09/m35F5.c",
+          "name": "SowX",
+          "expression": "native_state_SowX.raw_bytes",
+          "view": "serialized-bytes",
+          "remove_extern": {
+            "source": "src/S09/m35F5.c",
+            "line": 694,
+            "text": "extern unsigned char far SowX[];"
+          }
+        }
+      ],
+      "basis": "complete int[3] source array and exact S09 SaveRec 2x3; S09 byte view is serialized overlay",
+      "source_group_modules": [
+        "src/S09/m35F5.c",
+        "src/root/m0AD9.c"
+      ]
+    },
+    {
+      "name": "SowY",
+      "address": "50F6:0F00",
+      "kind": "word-array-union",
+      "native_declaration": "union { int16_t signed_values[3]; uint8_t raw_bytes[6]; }",
+      "count": 3,
+      "width_bytes": 6,
+      "save_rec": {
+        "size": 2,
+        "count": 3,
+        "bytes": 6
+      },
+      "source_mappings": [
+        {
+          "source": "src/root/m0AD9.c",
+          "name": "SowY",
+          "expression": "native_state_SowY.signed_values",
+          "view": "word-array",
+          "remove_extern": {
+            "source": "src/root/m0AD9.c",
+            "line": 6,
+            "text": "extern int far SowY[3];"
+          }
+        },
+        {
+          "source": "src/S09/m35F5.c",
+          "name": "SowY",
+          "expression": "native_state_SowY.raw_bytes",
+          "view": "serialized-bytes",
+          "remove_extern": {
+            "source": "src/S09/m35F5.c",
+            "line": 695,
+            "text": "extern unsigned char far SowY[];"
+          }
+        }
+      ],
+      "basis": "complete int[3] source array and exact S09 SaveRec 2x3; S09 byte view is serialized overlay",
+      "source_group_modules": [
+        "src/S09/m35F5.c",
+        "src/root/m0AD9.c"
+      ]
+    },
+    {
+      "name": "SowDir",
+      "address": "50F6:0F1A",
+      "kind": "word-array-union",
+      "native_declaration": "union { int16_t signed_values[3]; uint8_t raw_bytes[6]; }",
+      "count": 3,
+      "width_bytes": 6,
+      "save_rec": {
+        "size": 2,
+        "count": 3,
+        "bytes": 6
+      },
+      "source_mappings": [
+        {
+          "source": "src/root/m0AD9.c",
+          "name": "SowDir",
+          "expression": "native_state_SowDir.signed_values",
+          "view": "word-array",
+          "remove_extern": {
+            "source": "src/root/m0AD9.c",
+            "line": 7,
+            "text": "extern int far SowDir[3];"
+          }
+        },
+        {
+          "source": "src/S09/m35F5.c",
+          "name": "SowDir",
+          "expression": "native_state_SowDir.raw_bytes",
+          "view": "serialized-bytes",
+          "remove_extern": {
+            "source": "src/S09/m35F5.c",
+            "line": 692,
+            "text": "extern unsigned char far SowDir[];"
+          }
+        }
+      ],
+      "basis": "complete int[3] source array and exact S09 SaveRec 2x3; S09 byte view is serialized overlay",
+      "source_group_modules": [
+        "src/S09/m35F5.c",
+        "src/root/m0AD9.c"
+      ]
+    },
+    {
+      "name": "SowSave",
+      "address": "50F6:0F28",
+      "kind": "word-array-union",
+      "native_declaration": "union { int16_t signed_values[3]; uint8_t raw_bytes[6]; }",
+      "count": 3,
+      "width_bytes": 6,
+      "save_rec": {
+        "size": 2,
+        "count": 3,
+        "bytes": 6
+      },
+      "source_mappings": [
+        {
+          "source": "src/root/m0AD9.c",
+          "name": "SowSave",
+          "expression": "native_state_SowSave.signed_values",
+          "view": "word-array",
+          "remove_extern": {
+            "source": "src/root/m0AD9.c",
+            "line": 8,
+            "text": "extern int far SowSave[3];"
+          }
+        },
+        {
+          "source": "src/S09/m35F5.c",
+          "name": "SowSave",
+          "expression": "native_state_SowSave.raw_bytes",
+          "view": "serialized-bytes",
+          "remove_extern": {
+            "source": "src/S09/m35F5.c",
+            "line": 693,
+            "text": "extern unsigned char far SowSave[];"
+          }
+        }
+      ],
+      "basis": "complete int[3] source array and exact S09 SaveRec 2x3; S09 byte view is serialized overlay",
+      "source_group_modules": [
+        "src/S09/m35F5.c",
+        "src/root/m0AD9.c"
+      ]
+    },
+    {
+      "name": "PillarMap",
+      "address": "50F6:0D9C",
+      "kind": "word-array-union",
+      "native_declaration": "union { int16_t signed_values[6]; uint8_t raw_bytes[12]; }",
+      "count": 6,
+      "width_bytes": 12,
+      "save_rec": {
+        "size": 2,
+        "count": 6,
+        "bytes": 12
+      },
+      "source_mappings": [
+        {
+          "source": "src/root/m0AD9.c",
+          "name": "PillarMap",
+          "expression": "native_state_PillarMap.signed_values",
+          "view": "word-array",
+          "remove_extern": {
+            "source": "src/root/m0AD9.c",
+            "line": 49,
+            "text": "extern int far PillarMap[6];"
+          }
+        },
+        {
+          "source": "src/S09/m35F5.c",
+          "name": "PillarMap",
+          "expression": "native_state_PillarMap.raw_bytes",
+          "view": "serialized-bytes",
+          "remove_extern": {
+            "source": "src/S09/m35F5.c",
+            "line": 691,
+            "text": "extern unsigned char far PillarMap[];"
+          }
+        }
+      ],
+      "basis": "complete int[6] source array and exact S09 SaveRec 2x6; S09 byte view is serialized overlay",
+      "source_group_modules": [
+        "src/S09/m35F5.c",
+        "src/root/m0AD9.c"
+      ]
+    }
+  ],
+  "controls": {
+    "positive": {
+      "all_13_named_groups_resolve_once": true,
+      "save_rows_match_source_shapes": true,
+      "same_address_aliases_agree": true,
+      "no_v3_interval_overlap": true,
+      "no_v2_interval_overlap": true,
+      "all_extents_nonoverlapping": true
+    },
+    "negative": {
+      "duplicate_save_record_rejected": true,
+      "save_extent_mutation_rejected": true,
+      "known_source_address_conflict_rejected": true,
+      "interior_interval_collision_detected": true
+    }
+  },
+  "limitations": [
+    "No historical communal/gap extent claim.",
+    "Cycle byte-zero alias and native word overlap are little-endian-host specific; big-endian use needs an explicit DOS-little-endian accessor.",
+    "Proposal is diagnostic and not integrated into the production adapter.",
+    "SaveRec serialization endianness remains the separately documented host-codec boundary."
+  ],
+  "summary": {
+    "owners": 13,
+    "native_bytes": 92,
+    "by_kind": {
+      "byte-array": 5,
+      "word-array-union": 5,
+      "word-union": 3
+    }
+  }
+}

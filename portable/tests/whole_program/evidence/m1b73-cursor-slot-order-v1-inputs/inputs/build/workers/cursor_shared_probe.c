@@ -1,0 +1,3 @@
+#include "portable/game/resources/database.h"
+#include <stdio.h>
+int main(void) { PortableDatabase db; PortableDbRecord r; if(portable_db_open(&db,"assets/SHARED")!=PORTABLE_DB_OK){puts(db.error);return 1;} for(int id=0;id<8;id++)for(int k=7;k<=8;k++){PortableDbStatus s=portable_db_load(&db,(int16_t)id,(int16_t)k,&r);if(s){printf("miss %d %d\n",id,k);continue;}printf("id=%d kind=%d flags=%u size=%zu",id,k,r.index_flags,r.size);if(r.size>=4){unsigned w=r.data[0]|r.data[1]<<8,h=r.data[2]|r.data[3]<<8;size_t rb=(w+7)/8;printf(" w=%u h=%u row=%zu 1p=%zu 4p=%zu",w,h,rb,4+rb*h,4+rb*h*4);}printf(" bytes=");for(size_t x=0;x<(r.size<8?r.size:8);x++)printf("%02x",r.data[x]);puts("");portable_db_record_free(&r);}portable_db_close(&db);}
