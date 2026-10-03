@@ -1,0 +1,76 @@
+{
+  "schema": "simant-dropin-preview-retention-v1",
+  "scope": "Bounded startup/caption/package proof; not complete-game equivalence",
+  "files": [
+    {
+      "archive_path": "package-report.json",
+      "source_path": "build/releases/simant-preview-v17/package-report.json",
+      "sha256": "e7c9e0c20e68e2bbd6901515fb45c711db8dda51c1095a6a389eaef15a91c253"
+    },
+    {
+      "archive_path": "build-report.json",
+      "source_path": "build/whole-application-v17/report.json",
+      "sha256": "27c56da07841108c73e2f943bae8648c8193d7f473f68f4e0a8f56c6fc56f5d9"
+    },
+    {
+      "archive_path": "dropin-smoke-report.json",
+      "source_path": "build/workers/whole_program/dropin-v17-full-game/report.json",
+      "sha256": "ec5106c08578a798c7c8a9bb847b90d5efa625c91e7eba0be6fdf26508bf8a3d"
+    },
+    {
+      "archive_path": "vga-caption-report.json",
+      "source_path": "build/workers/whole_program/source-main-vga-caption-v1/report.json",
+      "sha256": "a13f126276b0a91a6ab50a85ead2116f982a4fb52ed5e6fbb151d41d69170710"
+    },
+    {
+      "archive_path": "ega-caption-report.json",
+      "source_path": "build/workers/whole_program/source-main-ega-caption-v1/report.json",
+      "sha256": "755def082ba0c76330e9ccac82131aea60a6136dd5bf133454fdb6358ce02416"
+    },
+    {
+      "archive_path": "full-game-vga-input.txt",
+      "source_path": "portable/tests/whole_program/application_input/full-game-vga-v1.txt",
+      "sha256": "76cb0aa0dd78fe3ec01c2af74790df2f4b4b1cfb9e24b22e064396fe20f088fd"
+    },
+    {
+      "archive_path": "vga-caption-frame.bmp",
+      "source_path": "build/workers/whole_program/source-main-vga-caption-v1/frame.bmp",
+      "sha256": "c4a5ffd215b8d8959c99fb6e1065578ef4387a5d5f102b32811fd09f6030ae45"
+    },
+    {
+      "archive_path": "ega-caption-frame.bmp",
+      "source_path": "build/workers/whole_program/source-main-ega-caption-v1/frame.bmp",
+      "sha256": "414b94958ac4aae78eec9f14b99495d40d3d91c6b8fae477d30e8d02d79ca523"
+    },
+    {
+      "archive_path": "historical-validation-initial.txt",
+      "source_path": "build/workers/whole_program/historical-validation-handover.txt",
+      "sha256": "4b386660508fb1ced582e8fe0fb8568817fc049c2e7b6de7e08ced49f5b708a1"
+    },
+    {
+      "archive_path": "historical-validation-final.txt",
+      "source_path": "build/workers/whole_program/historical-validation-handover-final.txt",
+      "sha256": "fe86895759534286937a671bfb5fec1bccd9384b6527d1e05ee172b171cd76d7"
+    },
+    {
+      "archive_path": "historical-progress-final.json",
+      "source_path": "docs/progress.json",
+      "sha256": "0b73e4222730bedadf384abe8f0e4c5b2bb8613ddd38d10d43832f206a6386b1"
+    },
+    {
+      "archive_path": "hybrid-rebuild.txt",
+      "source_path": "build/workers/whole_program/hybrid-handover.txt",
+      "sha256": "dbf58540d2b7f4b65686f64d35345345f404dd0e7ad5d9859e9e2993d98393e5"
+    },
+    {
+      "archive_path": "hybrid-provenance.json",
+      "source_path": "build/link/provenance.json",
+      "sha256": "0a6b662496ad742a23b3542ad3f267ceb31b800d3957f9b8555f4d3b577d96d2"
+    }
+  ],
+  "binaries": "Identity-only in reports; packages and original resources remain local ignored build outputs",
+  "validation": {
+    "final": "PASS",
+    "initial": "Only oracle-lock mismatch; preserved as negative evidence. Fresh current oracle audit and complete rerun PASS. Cause of transient initial mismatch not established."
+  }
+}

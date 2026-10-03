@@ -1,0 +1,568 @@
+{
+  "map_raster_replay": {
+    "events": {
+      "path": "D:\\Prog\\simant_recon\\build\\workers\\whole_runtime_flow_review\\gdb-map-pixels.jsonl",
+      "sha256": "56fc171a88cf1234dda7a226d3de3b40fcf141fd78c62579ca0da413763887df"
+    },
+    "first_native_blits": [
+      {
+        "args": {
+          "bits": 19636176,
+          "h": 4,
+          "w": 256,
+          "x": 192,
+          "y": 82
+        },
+        "event": "map-pixel-row",
+        "frame": [
+          640,
+          480,
+          640
+        ],
+        "index": 1,
+        "pixel_store": 19196016,
+        "sample": {
+          "colors": {
+            "7": 16,
+            "8": 1008
+          },
+          "head": "08080808080808080808080808080808080808080808080808080808080808080808080808080808080808080808080808080808080808080808080808080808",
+          "length": 1024,
+          "nonzero": 1024,
+          "sha256": "58ecf67b16c5ce5cac83741795b72230934cb6f631229d2a1a3c1072dc536f9f"
+        }
+      },
+      {
+        "args": {
+          "bits": 19636176,
+          "h": 4,
+          "w": 256,
+          "x": 192,
+          "y": 86
+        },
+        "event": "map-pixel-row",
+        "frame": [
+          640,
+          480,
+          640
+        ],
+        "index": 2,
+        "pixel_store": 19196016,
+        "sample": {
+          "colors": {
+            "10": 1008,
+            "12": 16
+          },
+          "head": "0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a",
+          "length": 1024,
+          "nonzero": 1024,
+          "sha256": "8f848665eba60bf8c0aad86a23ff0e9adbc5fd5a8f31b3f8be0c325c5dc3ce59"
+        }
+      }
+    ],
+    "first_present": {
+      "event": "present",
+      "frame": 1,
+      "map_window": {
+        "box": [
+          418,
+          96,
+          578,
+          342
+        ],
+        "colors": {
+          "10": 3,
+          "14": 215,
+          "15": 38840,
+          "3": 302
+        },
+        "n": 39360,
+        "sha256": "1048f40cbbae2391f7b271c501d993dddbc482ab81af6d05bf340049995cddb9"
+      },
+      "pixels": 14215280,
+      "stride": 640,
+      "transformed_rows": {
+        "box": [
+          192,
+          82,
+          448,
+          338
+        ],
+        "colors": {
+          "0": 677,
+          "1": 2660,
+          "10": 77,
+          "11": 161,
+          "12": 1285,
+          "13": 428,
+          "14": 2088,
+          "15": 49367,
+          "2": 2681,
+          "3": 884,
+          "5": 2214,
+          "6": 2683,
+          "7": 16,
+          "8": 315
+        },
+        "n": 65536,
+        "sha256": "e4ee9fe8e08b69baa764ca5ed42c829af72a4eb002ec0fc75bbbd10606e677f5"
+      }
+    },
+    "frame": {
+      "path": "D:\\Prog\\simant_recon\\build\\workers\\whole_runtime_flow_review\\frame-v13-present.bmp",
+      "sha256": "b8acbe606f4152562e32f9336c2197870b916ea618f1efbf15c488ede764ecbf"
+    },
+    "gdb_script": {
+      "path": "D:\\Prog\\simant_recon\\build\\workers\\whole_runtime_flow_review\\run_v13_pixels.gdb",
+      "sha256": "92fa1a4859632bedfc277ea72cf836e444adf68d7dae11399168da817877273f"
+    },
+    "interpretation": "Map source bytes are transformed to four-plane rows, clipped by generated f_1D8E_07F6 and written through source_g9150_callback into the indexed framebuffer. The first sampled row produced indices 8 and 7; next rows produced 10 and 12. Native indexed output is nonblack; index 15 maps to RGB black and occupies most of the exposed right-side pane.",
+    "last_sampled_present": {
+      "event": "present",
+      "frame": 1800,
+      "map_window": {
+        "box": [
+          418,
+          96,
+          578,
+          342
+        ],
+        "colors": {
+          "0": 68,
+          "1": 492,
+          "10": 7260,
+          "12": 146,
+          "13": 79,
+          "14": 5,
+          "15": 31306,
+          "9": 4
+        },
+        "n": 39360,
+        "sha256": "198916cd077f110282f18d3f496b539f7459a569a9a7e503a017a3992941f314"
+      },
+      "pixels": 14215280,
+      "stride": 640,
+      "transformed_rows": {
+        "box": [
+          192,
+          82,
+          448,
+          338
+        ],
+        "colors": {
+          "0": 52,
+          "1": 553,
+          "10": 55151,
+          "11": 1535,
+          "12": 15,
+          "13": 1443,
+          "14": 6427,
+          "15": 201,
+          "2": 1,
+          "3": 24,
+          "8": 120,
+          "9": 14
+        },
+        "n": 65536,
+        "sha256": "c7a50f7ac9d3c2305fc9b0feca61c2a53904324fd09d5306fcb6d29bd472f312"
+      }
+    },
+    "map_blit_count": 2944,
+    "palette": {
+      "host_present_palette_bytes_hex": "fffffffff304ff6500df0804f308864500a60000d700aaeb1cb614006510552d04927139c2c2c2828282414141000000",
+      "index15_black": true,
+      "rgb": [
+        [
+          255,
+          255,
+          255
+        ],
+        [
+          255,
+          243,
+          4
+        ],
+        [
+          255,
+          101,
+          0
+        ],
+        [
+          223,
+          8,
+          4
+        ],
+        [
+          243,
+          8,
+          134
+        ],
+        [
+          69,
+          0,
+          166
+        ],
+        [
+          0,
+          0,
+          215
+        ],
+        [
+          0,
+          170,
+          235
+        ],
+        [
+          28,
+          182,
+          20
+        ],
+        [
+          0,
+          101,
+          16
+        ],
+        [
+          85,
+          45,
+          4
+        ],
+        [
+          146,
+          113,
+          57
+        ],
+        [
+          194,
+          194,
+          194
+        ],
+        [
+          130,
+          130,
+          130
+        ],
+        [
+          65,
+          65,
+          65
+        ],
+        [
+          0,
+          0,
+          0
+        ]
+      ]
+    },
+    "present_console": {
+      "path": "D:\\Prog\\simant_recon\\build\\workers\\whole_runtime_flow_review\\gdb-console-present.txt",
+      "sha256": "085e7954c627a792f1b59101562479b30ac47edbce946487aa557fe1f24159ef"
+    },
+    "present_events": {
+      "path": "D:\\Prog\\simant_recon\\build\\workers\\whole_runtime_flow_review\\gdb-present-pixels.jsonl",
+      "sha256": "df2ae6de315c6b8594529c1f8e109dc7294da24a6260838bd57819d2fd0aad27"
+    },
+    "present_gdb_script": {
+      "path": "D:\\Prog\\simant_recon\\build\\workers\\whole_runtime_flow_review\\run_v13_present.gdb",
+      "sha256": "ed3fff53695f885676eeb879dbee8bc0ff90fa91bbb50b5545627b5f30c4d637"
+    },
+    "present_probe": {
+      "path": "D:\\Prog\\simant_recon\\build\\workers\\whole_runtime_flow_review\\probe_v13_present.py",
+      "sha256": "514bbb62ef560d53dd0916eda3a5e79cb92fa12666004c3fed7dac106c0f382b"
+    },
+    "present_sample_count": 28,
+    "probe": {
+      "path": "D:\\Prog\\simant_recon\\build\\workers\\whole_runtime_flow_review\\probe_v13_pixels.py",
+      "sha256": "c4928dbeb094cd7444480ad65eec1131d902b58a0c32714fbd82c32b76fe6469"
+    }
+  },
+  "result": "PASS_BOUNDED_NATIVE_FLOW",
+  "run_contract": {
+    "application_args": [
+      "--headless",
+      "--smoke-ms",
+      "30000",
+      "--seed",
+      "1",
+      "/dV",
+      "--input-script quick-game-vga-v1.txt"
+    ],
+    "assets_isolation": {
+      "all_equal": true,
+      "isolate4_RALLOC": {
+        "path": "D:\\Prog\\simant_recon\\build\\workers\\whole_runtime_flow_review\\isolate4\\runtime-assets\\RALLOC.DMP",
+        "sha256": "c3e40df71a75efaf72f88e7eab1245e4ee8acc93dd6bef848b5fdf34957e47f0"
+      },
+      "isolate5_RALLOC": {
+        "path": "D:\\Prog\\simant_recon\\build\\workers\\whole_runtime_flow_review\\isolate5\\runtime-assets\\RALLOC.DMP",
+        "sha256": "c3e40df71a75efaf72f88e7eab1245e4ee8acc93dd6bef848b5fdf34957e47f0"
+      },
+      "source_RALLOC": {
+        "path": "D:\\Prog\\simant_recon\\assets\\RALLOC.DMP",
+        "sha256": "c3e40df71a75efaf72f88e7eab1245e4ee8acc93dd6bef848b5fdf34957e47f0"
+      }
+    },
+    "build_report": {
+      "path": "D:\\Prog\\simant_recon\\build\\workers\\whole_program\\source-main-vga-quick-game-v4\\report.json",
+      "sha256": "d38a0674a65025d473cd203b470eeead8aa918d6a85c57a6b414794cffb83771"
+    },
+    "claims": [
+      "normal QuickGame replay called DoAntSim and mutated source simulation state",
+      "map-generation and native indexed blit run in mapped windows",
+      "map pane position/content extents are consistent with overlapping source window geometry"
+    ],
+    "debugger": "GNU gdb (GDB) 13.1",
+    "exe": {
+      "path": "D:\\Prog\\simant_recon\\build\\whole-application-v13\\simant-whole-sdl3.exe",
+      "sha256": "4d9ae0f0129467b565b563da2af0c52bd93e4efb9aa4cb66d950c998ebcbe019"
+    },
+    "input_replay": {
+      "path": "D:\\Prog\\simant_recon\\portable\\tests\\whole_program\\application_input\\quick-game-vga-v1.txt",
+      "sha256": "4478b7806bd91b2ae6740e960d854d25d0b384c9c82ece6dcf06588d811cbc37"
+    },
+    "not_claimed": [
+      "DOS full-frame/pixel differential",
+      "full gameplay acceptance",
+      "map-window content equivalence to an original DOS screenshot"
+    ]
+  },
+  "schema": "whole-runtime-v13-readonly-flow-review-v1",
+  "screen_clip_initial_owner_archive": {
+    "archive_directory": "D:\\Prog\\simant_recon\\build\\workers\\whole_runtime_flow_review\\screen_clip_archive",
+    "generated_source_1": {
+      "path": "D:\\Prog\\simant_recon\\build\\workers\\whole_runtime_flow_review\\screen_clip_archive\\root_m1E57.c",
+      "sha256": "34ceb13fddd9466bfb83ecb381fd72a8d4c076a29a89afa081f74498e8ccb2ca"
+    },
+    "generated_source_2": {
+      "path": "D:\\Prog\\simant_recon\\build\\workers\\whole_runtime_flow_review\\screen_clip_archive\\root_m1D8E.c",
+      "sha256": "5562663e75632b4f675f13bb5cb68e7f5f6bbd8afdb63d975782bb1f6c66a835"
+    },
+    "report": {
+      "path": "D:\\Prog\\simant_recon\\build\\workers\\whole_runtime_flow_review\\screen_clip_archive\\report.json",
+      "sha256": "877d5591ea213ee34a51da8a26237fb0e2b9d19cca02d4d45789d813b7bc6b21"
+    },
+    "runner": {
+      "path": "D:\\Prog\\simant_recon\\build\\workers\\whole_runtime_flow_review\\screen_clip_archive\\run.py",
+      "sha256": "1833ac1dbe298724bbb213e1a8466d1de243159df2efc13f6382689e8c88b53e"
+    },
+    "source_snapshot_hashes_match_report": true,
+    "source_snapshot_paths": [
+      "build/whole-application-v13/inputs/build/workers/whole_program/generated/root_m1E57.c",
+      "build/whole-application-v13/inputs/build/workers/whole_program/generated/root_m1D8E.c"
+    ]
+  },
+  "simulation_replay": {
+    "DoAntSim_return_samples": 110,
+    "console": {
+      "path": "D:\\Prog\\simant_recon\\build\\workers\\whole_runtime_flow_review\\gdb-console-v13.txt",
+      "sha256": "886b99f7c76a178c7395c13d15c683f3e54cbf44dd6025cdaa8ffb39912cdfa9"
+    },
+    "events": {
+      "path": "D:\\Prog\\simant_recon\\build\\workers\\whole_runtime_flow_review\\gdb-events.jsonl",
+      "sha256": "13e2fb9ff9427461d85b9d8ba22422ebc77d3c54c31a46d08409bf9652335438"
+    },
+    "first_call": {
+      "after": {
+        "AlistM": "50cff72c8e550546d661ec235431888fb2f9f7bada40c17020d47f6ccc117aae",
+        "AlistT": "fb47cfe48a4e9fba0390e23f953009b26236a2e54f6533b66f63e7af66324a6f",
+        "AlistX": "48de503fa3b2cc24ef523a8e2450bc8cae1d1f035caedee33d37a5d41b85dcab",
+        "AlistY": "6bd97a91c76d2b4c2dae4a9d6ff099a567259ed55e1d4ea28b37dcb4cc3fe5ac",
+        "LifeA": "bdd9f834afeec3db4cb9d850e6ba6aff56636cf2b0418b67e8d0d566099148c0",
+        "MapA": "6283681986735c00901d26a83e49e2b1664c8483979abe8ccc76a276e02e4123",
+        "cycle": 1,
+        "list_count": 2,
+        "sim_tick": 1
+      },
+      "before": {
+        "AlistM": "50cff72c8e550546d661ec235431888fb2f9f7bada40c17020d47f6ccc117aae",
+        "AlistT": "5009871b7b54d3327d1f631c5bc27d4e33582865d09ae8319c9685fbad06a2bc",
+        "AlistX": "8e770fd2075663c032f69e282bf19be4446105cd601833eb8a8af0a12a88c06a",
+        "AlistY": "e92056d3084c2ce746fb0e59b33badbf8128ea391dd675d935af5048a3798457",
+        "LifeA": "c90ba2dac1dd80e4bd889c272c8210a4c4fba9ed45ebd4eeb494257a1e425aea",
+        "MapA": "5b3f73fae73957d6a851ce2c4aefe6641bb82f80239eb8b7e8181cbef1011f0b",
+        "cycle": 0,
+        "list_count": 2,
+        "sim_tick": 0
+      }
+    },
+    "frame": {
+      "path": "D:\\Prog\\simant_recon\\build\\workers\\whole_runtime_flow_review\\frame-v13.bmp",
+      "sha256": "42b0608a768aabce18c4245d61ab0c6a977c71864a56cbbcda1b5e137b12c11d"
+    },
+    "gdb_script": {
+      "path": "D:\\Prog\\simant_recon\\build\\workers\\whole_runtime_flow_review\\run_v13.gdb",
+      "sha256": "c50df133af80cd50436a8d73b7118e870ffa4686f4b8d85d8e899ae7dac13a48"
+    },
+    "interpretation": "DoAntSim entered and returned 110 times; every return advanced Cycle and fd_50F6_0C26. LifeA/MapA and active ant-list arrays changed repeatedly. Breakpoint code only reads inferior memory.",
+    "probe": {
+      "path": "D:\\Prog\\simant_recon\\build\\workers\\whole_runtime_flow_review\\probe_v13.py",
+      "sha256": "e586cb967c06af222331c8872b5f429e033a535e5006ff0fbe782edee3810b6c"
+    },
+    "state_changes_over_calls": {
+      "AlistM": 15,
+      "AlistT": 88,
+      "AlistX": 80,
+      "AlistY": 69,
+      "LifeA": 95,
+      "MapA": 50,
+      "cycle": 110,
+      "sim_tick": 110
+    },
+    "summary": {
+      "bitmap_callback_calls": 5197,
+      "event": "probe-summary",
+      "map_build_calls": 0,
+      "map_image_lock_calls": 56,
+      "map_paint_calls": 55,
+      "map_raster_calls": 56,
+      "map_row_conversion_calls": 3584,
+      "map_subsurface_build_calls": 56,
+      "sim_calls": 110
+    }
+  },
+  "window_geometry_replay": {
+    "captured_rects": [
+      {
+        "bytes": "3e003e0042028201",
+        "event": "get-obj-rect-return",
+        "obj": 256,
+        "rect": [
+          62,
+          62,
+          578,
+          386
+        ],
+        "rect_ptr": 6289558
+      },
+      {
+        "bytes": "3e003e0042028201",
+        "event": "get-obj-rect-return",
+        "obj": 256,
+        "rect": [
+          62,
+          62,
+          578,
+          386
+        ],
+        "rect_ptr": 6289558
+      },
+      {
+        "bytes": "4000520040025201",
+        "event": "get-obj-rect-return",
+        "obj": 258,
+        "rect": [
+          64,
+          82,
+          576,
+          338
+        ],
+        "rect_ptr": 140699932728560
+      },
+      {
+        "bytes": "4000520040025201",
+        "event": "get-obj-rect-return",
+        "obj": 258,
+        "rect": [
+          64,
+          82,
+          576,
+          338
+        ],
+        "rect_ptr": 140699932728560
+      },
+      {
+        "bytes": "4000520040025201",
+        "event": "get-obj-rect-return",
+        "obj": 258,
+        "rect": [
+          64,
+          82,
+          576,
+          338
+        ],
+        "rect_ptr": 140699932728560
+      },
+      {
+        "bytes": "4000520040025201",
+        "event": "get-obj-rect-return",
+        "obj": 258,
+        "rect": [
+          64,
+          82,
+          576,
+          338
+        ],
+        "rect_ptr": 140699932728560
+      },
+      {
+        "bytes": "3e003e0042028201",
+        "event": "get-obj-rect-return",
+        "obj": 256,
+        "rect": [
+          62,
+          62,
+          578,
+          386
+        ],
+        "rect_ptr": 6289558
+      },
+      {
+        "bytes": "3e003e0042028201",
+        "event": "get-obj-rect-return",
+        "obj": 256,
+        "rect": [
+          62,
+          62,
+          578,
+          386
+        ],
+        "rect_ptr": 6289558
+      }
+    ],
+    "console": {
+      "path": "D:\\Prog\\simant_recon\\build\\workers\\whole_runtime_flow_review\\gdb-console-windows.txt",
+      "sha256": "853bfaed4cec0c77952b1333290427c595374b72cf5d3168a4bb16becc2efd75"
+    },
+    "events": {
+      "path": "D:\\Prog\\simant_recon\\build\\workers\\whole_runtime_flow_review\\gdb-window-rects.jsonl",
+      "sha256": "700a4cbef93a2c90b32bfc98c74c5836c3bf597ae904e162981c6d4ced9a297e"
+    },
+    "gdb_script": {
+      "path": "D:\\Prog\\simant_recon\\build\\workers\\whole_runtime_flow_review\\run_v13_windows.gdb",
+      "sha256": "2a28f61c1f46a806a9ce83f4981ee7bdc9976fe509c2c680557d0f6cd88d5f06"
+    },
+    "interpretation": "The actively rendered 256x256 map body is centered inside the map object Rect; its window overlaps the yard window and only the exposed edge of that body can appear in the right-side exposed pane. The observed pane is not sufficient evidence of missing rendering. Separate window captions remain outside this check.",
+    "probe": {
+      "path": "D:\\Prog\\simant_recon\\build\\workers\\whole_runtime_flow_review\\probe_v13_windows.py",
+      "sha256": "5fe59e3b45f4b38ae5d36b642cbd45f877b6e003cd68f40d34d1fc1519fa0db6"
+    },
+    "source_anchors": [
+      {
+        "path": "build/whole-application-v13/inputs/src/root/m00F8.c",
+        "sha256": "4ee148ec616e199f61b671df89da8a21f1789c4177d3dbc7b76a478acb98184a",
+        "symbol": "YardToMap"
+      },
+      {
+        "path": "build/whole-application-v13/inputs/src/S15/m384C.c",
+        "sha256": "01b51eecedcd28e2213819572c846a9754039f4a527e6da5e56e57783398bdd5",
+        "symbol": "SetDefaultWindows"
+      },
+      {
+        "path": "build/whole-application-v13/inputs/src/root/m00BA.c",
+        "sha256": "d72629d827e2bccd7557566b725f652862d2b1199f40390361179c61cc9ff5dc",
+        "symbol": "f_00BA_0002 window draw hooks and initial position copy"
+      },
+      {
+        "path": "build/whole-application-v13/inputs/src/root/m22BF.c",
+        "sha256": "f5b617067cdc711593e94dbb725ae9ceaeb12b890f198af0d66c1973e15133a0",
+        "symbol": "f_22BF_0E83 copies source window left/top to destination"
+      },
+      {
+        "path": "build/whole-application-v13/inputs/evidence/behavior/functions/DrawMapCursor/contracts/logical-render-v2/module.c",
+        "sha256": "daa607847c4c0364358a7b57d3f790dd9981e284bf2cedd01fa1fb3ac4df918a",
+        "symbol": "DrawMapCursor mapped row call"
+      }
+    ],
+    "source_geometry": "YardToMap opens window 0x100. win_GetObjRect(0x100) returned [62,62,578,386]; object 0x102 returned [64,82,576,338]. DrawMapCursor uses x=left+128=192, y=top=82, width=64*4=256, height=4. f_00BA_0002 installs the map hook and calls f_22BF_0E83(0x1900,0x100), copying the yard origin to the map window and recalculating it."
+  }
+}

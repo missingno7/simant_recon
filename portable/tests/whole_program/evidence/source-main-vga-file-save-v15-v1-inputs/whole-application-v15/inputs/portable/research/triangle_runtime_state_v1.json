@@ -1,0 +1,52 @@
+{
+  "schema": "simant-source-assigned-triangle-dimensions-v1",
+  "claim": "One native uint16_t owner per complete source-declared triangle dimension output. InitTriVars assigns rect width, first half-width, second half-width, then rect height; its actual consumer functions use those outputs after control geometry initialization. This is a runtime-assigned native-state model, not a DOS storage-extent or initial-zero claim.",
+  "source": {
+    "path": "src/root/m0798.c",
+    "sha256": "ecf807dc3159f583f6ee3ea8a9f5422650a64bb557d4551e9c97b5dcc7b6a1b8",
+    "native_source_type": "unsigned translates to uint16_t in the whole-program native TU."
+  },
+  "targets": [
+    {
+      "symbol": "triWidth",
+      "declaration": "extern unsigned far triWidth;",
+      "native_type": "uint16_t",
+      "producer": "InitTriVars: rect.right - rect.left"
+    },
+    {
+      "symbol": "triWidthR",
+      "declaration": "extern unsigned far triWidthR;",
+      "native_type": "uint16_t",
+      "producer": "InitTriVars: first half-width store"
+    },
+    {
+      "symbol": "triWidthL",
+      "declaration": "extern unsigned far triWidthL;",
+      "native_type": "uint16_t",
+      "producer": "InitTriVars: second half-width store; used by triangle math"
+    },
+    {
+      "symbol": "triHeight",
+      "declaration": "extern unsigned far triHeight;",
+      "native_type": "uint16_t",
+      "producer": "InitTriVars: rect.bottom - rect.top"
+    }
+  ],
+  "owner_names": {
+    "triWidth": "native_triangle_triWidth_v1",
+    "triWidthR": "native_triangle_triWidthR_v1",
+    "triWidthL": "native_triangle_triWidthL_v1",
+    "triHeight": "native_triangle_triHeight_v1"
+  },
+  "nonclaims": [
+    "No historical communal/BSS extent is claimed.",
+    "No initial zero value is required or inferred.",
+    "No pixel or DOS binary equivalence is claimed."
+  ],
+  "expected_uses": {
+    "triWidth": 4,
+    "triWidthR": 1,
+    "triWidthL": 3,
+    "triHeight": 6
+  }
+}

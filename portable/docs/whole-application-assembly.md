@@ -103,10 +103,33 @@ The direct-call arity audit now checks 7,528 calls and finds no missing required
 arguments. Its 75 extra-argument findings remain diagnostic; it is not a C type
 checker. The original keyboard's `MOV AH,8` behavior is also restored, with five
 direct DOS/native controls. F2 consequently enters the menu path, exposing an
-independent modal host-servicing stall. Blank caption bars and the black
-underground map remain visible rendering debt. Tutorial completion, interaction,
+independent modal host-servicing stall. The v14 trace still had blank caption
+bars and an exposed black map pane; later findings below narrow those issues.
+Tutorial completion, interaction,
 save/load and full audio/UI coverage are still open. These results and limits
 are pinned in `portable/evidence/whole-application-runtime-progress-v2.json`.
+
+The v15 application binds the bitmap-text service at video installation and
+unbinds it at teardown. The v14 debugger trace had recorded five valid caption
+requests rejected by that service's unbound guard. Its bitmap callback now
+receives pixels after the four-byte image header, matching the original ASM
+entry boundary. The focused test compares all 70 payload bytes. Fresh VGA Full
+Game and EGA Quick Game runs display their original captions and menu headings;
+both exit normally after 20 seconds and 54 outer-loop iterations.
+
+BIOS key polls and blocking reads now service the existing application clock
+owner. The File-menu modal consequently presents while waiting, accepts a
+delayed SDL Escape, and returns to the source game loop. FIFO and nonconsuming
+key-peek controls pass. The user's mouse-pointer defect is a separate 24-by-16
+patch near the center of the screen; the lower-right resize icon investigated
+earlier does not explain or resolve it.
+
+The read-only v13 simulation/map packet is retained under
+`portable/tests/whole_program/runtime_flow_v13/`. It records 110 DoAntSim returns
+and counter advances, with repeated map and ant-array mutations. Map raster
+callbacks produce indexed framebuffer pixels, and source window geometry
+accounts for an overlapping map/yard layout. This narrows the earlier black-pane
+concern without claiming a DOS full-frame comparison.
 
 Fresh historical validation passes. The original assets match the oracle lock;
 an older menu test's diagnostic append to RALLOC.DMP was preserved separately
@@ -117,3 +140,9 @@ The selected-source prototype in `build/portable/simant-sdl3.exe` remains a
 separate executable with its previously recorded scope. Whole-program evidence
 does not retroactively broaden its claims. Historical `EXACT` and
 `BEHAVIOR_EXACT` evidence remains at the frozen oracle checkpoint.
+
+The v17 drop-in package reads game resources beside its executable when no
+isolated `runtime-assets` directory exists. Its DLL, BIOS fonts, licenses and
+VGA launcher are bundled by `portable/tools/package_game.py`. The packaged
+Full Game entry replay passes from outside the game directory. See the
+[handover](handover-2026-10-03.md) for package locations and remaining work.

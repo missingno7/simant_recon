@@ -38,7 +38,10 @@ def main():
     if not linked['passed'] or linked['executable_sha256'] != sha(executable):
         raise ValueError('a verified whole-application executable is required')
     originals = asset_identities(ROOT / 'assets')
-    runtime = asset_identities(executable.parent / 'runtime-assets')
+    runtime_directory = executable.parent / 'runtime-assets'
+    if not runtime_directory.is_dir():
+        runtime_directory = executable.parent
+    runtime = asset_identities(runtime_directory)
     output.mkdir(parents=True)
     command = [str(executable), '--headless', '--smoke-ms', str(args.milliseconds),
                '--frame', str(output / 'frame.bmp'), '--seed', str(args.seed)]
@@ -56,7 +59,7 @@ def main():
         stdout, stderr, code, timed_out = exc.stdout or b'', exc.stderr or b'', None, True
     (output / 'stdout.txt').write_bytes(stdout)
     (output / 'stderr.txt').write_bytes(stderr)
-    after_runtime = asset_identities(executable.parent / 'runtime-assets')
+    after_runtime = asset_identities(runtime_directory)
     unchanged = originals == asset_identities(ROOT / 'assets')
     frame = output / 'frame.bmp'
     loop_count = re.search(rb'outer game loop count=(-?\d+)', stderr)
@@ -70,6 +73,7 @@ def main():
                    link_report.relative_to(ROOT).as_posix(): sha(link_report),
                    Path(__file__).relative_to(ROOT).as_posix(): sha(Path(__file__))},
         'original_assets_unchanged': unchanged,
+        'runtime_assets_directory': runtime_directory.relative_to(ROOT).as_posix(),
         'runtime_asset_changes': {name: {'before': runtime.get(name), 'after': after_runtime.get(name)}
                                   for name in sorted(set(runtime) | set(after_runtime))
                                   if runtime.get(name) != after_runtime.get(name)},

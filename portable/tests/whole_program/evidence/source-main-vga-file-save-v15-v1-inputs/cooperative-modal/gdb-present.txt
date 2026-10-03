@@ -1,0 +1,34 @@
+[New Thread 51212.0xab30]
+[New Thread 51212.0xceac]
+[New Thread 51212.0xe670]
+[New Thread 51212.0xa81c]
+[New Thread 51212.0xc5b0]
+[New Thread 51212.0xe6c8]
+Breakpoint 1 at 0x7ff672fa6710: file D:\Prog\simant_recon\portable\whole_program\platform\sdl3\m1b73_application_input.c, line 385.
+[Thread 51212.0xe6c8 exited with code 0]
+[Switching to Thread 51212.0xd5bc]
+
+Thread 1 hit Breakpoint 1, portable_m1b73_sdl_application_input_present (binding=0x7ff672fdd228 <app+488>) at D:\Prog\simant_recon\portable\whole_program\platform\sdl3\m1b73_application_input.c:385
+385	{
+[Switching to thread 1 (Thread 51212.0xd5bc)]
+#0  portable_m1b73_sdl_application_input_present (binding=0x7ff672fdd228 <app+488>) at D:\Prog\simant_recon\portable\whole_program\platform\sdl3\m1b73_application_input.c:385
+385	{
+#0  portable_m1b73_sdl_application_input_present (binding=0x7ff672fdd228 <app+488>) at D:\Prog\simant_recon\portable\whole_program\platform\sdl3\m1b73_application_input.c:385
+#1  0x00007ff672f223d2 in idle (context=0x7ff672fdd040 <app>) at D:\Prog\simant_recon\portable\whole_program\application.c:315
+#2  0x00007ff672fa5f49 in refresh_application (context=0x7ff672fdd920 <app+2272>, clock=0x7ff672fdfd90 <app+11600>) at D:\Prog\simant_recon\portable\whole_program\platform\sdl3\m1b73_application_input.c:206
+#3  0x00007ff672fa5196 in portable_input_time_host_refresh_clock (binding=0x7ff672fdd948 <app+2312>) at D:\Prog\simant_recon\portable\whole_program\platform\sdl3\input_time_host.c:268
+#4  0x00007ff672fa4b62 in host_key_available (context=0x7ff672fdd948 <app+2312>, key=0x27925ff67a) at D:\Prog\simant_recon\portable\whole_program\platform\sdl3\input_time_host.c:101
+#5  0x00007ff672f9344c in portable_input_time_key_available (input_time=0x7ff672fdd948 <app+2312>, bios_ax=0x27925ff6be) at D:\Prog\simant_recon\portable\whole_program\platform\input_time.c:71
+#6  0x00007ff672f93892 in f_1F58_0038 () at D:\Prog\simant_recon\portable\whole_program\platform\input_time.c:214
+#7  0x00007ff672f6dd17 in o10_35F5_0384 (sel=0x27925ff7ca "�r�\177", items=0x1789015d480) at D:\Prog\simant_recon\build\workers\whole_program\generated\S10_m35F5.c:300
+#8  0x00007ff672f6d4f5 in o10_35F5_01C3 (ev=0x27925ff810) at D:\Prog\simant_recon\build\workers\whole_program\generated\S10_m35F5.c:119
+#9  0x00007ff672f77a6d in o19_384C_0000 () at D:\Prog\simant_recon\build\workers\whole_program\generated\S19_m384C.c:138
+#10 0x00007ff672f24add in f_00F8_01BE () at D:\Prog\simant_recon\build\workers\whole_program\generated\root_m00F8.c:112
+#11 0x00007ff672f4960a in dos_game_main (argc=4, argv=0x1789015c970) at D:\Prog\simant_recon\build\workers\whole_program\generated\root_m15F8.c:156
+#12 0x00007ff672f230b7 in main (argc=11, argv=0x17890157a60) at D:\Prog\simant_recon\portable\whole_program\application.c:438
+$1 = 1 '\001'
+$2 = 1 '\001'
+$3 = (struct Rect *) 0x0
+$4 = 0
+$5 = 0
+[Inferior 1 (process 51212) detached]

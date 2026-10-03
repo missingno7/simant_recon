@@ -28,3 +28,11 @@ layout/functions.json text eol=crlf
 layout/oracle.lock.json text eol=crlf
 layout/symbols.json text eol=crlf
 layout/toolchain.json text eol=crlf
+# Native proof archives also pin exact file bytes, including scripts and logs.
+portable/evidence/** -text
+portable/tests/**/evidence/** -text
+portable/tests/whole_program/runtime_flow_v13/** -text
+portable/tests/whole_program/text_bitmap/bridge-payload-v1-inputs/** -text
+portable/tests/whole_program/text_bitmap/caption-runtime-v14/** -text
+portable/tests/whole_program/s26_window_object_views_v1/fixtures/** -text
+portable/tests/whole_program/title_drag_s26_v17/** -text

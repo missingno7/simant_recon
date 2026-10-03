@@ -1,0 +1,71 @@
+{
+  "schema": "simant-source-shaped-eu-map-cache-owner-v1",
+  "claim": "One exact native owner for root:m0250's source-declared 30x40 signed EU tile cache, plus explicit linear alias for original [0][i] accesses. Does not claim a DOS FAR_BSS OMF owner or storage extent.",
+  "source": {
+    "path": "src/root/m0250.c",
+    "sha256": "bb8a325c543151e09cb173d2194844877805a9e1058d3b24362ff5a7cbd9f61b",
+    "declaration": "extern int far fd_50F6_15C4[30][40];",
+    "source_extent_bytes": 2400,
+    "storage": "unresolved historical BSS placement; native owner is based only on the complete source type",
+    "uses": [
+      { "function": "ZapEuMapAt", "view": "rows[v][h]", "effect": "write -1 when TileIsVisible==1 and x/y are within current EU dimensions" },
+      { "function": "InvalEuMap", "view": "linear[i] through original [0][i]", "effect": "invalidate covered visible EU cells" },
+      { "function": "f_0250_05CB", "view": "base byte pointer", "effect": "fill 0x960 bytes with 0xFF, marking 1200 words as -1" },
+      { "function": "f_0250_129E", "view": "linear[i] through original [0][i]", "effect": "compare/update tile-cache value" }
+    ]
+  },
+  "native_owner": {
+    "header": "portable/whole_program/state/eu_map_cache.h",
+    "source": "portable/whole_program/state/eu_map_cache.c",
+    "type": "union { int16_t rows[30][40]; int16_t linear[1200]; }",
+    "bytes": 2400,
+    "padding": 0,
+    "initialization": "ordinary static zero initialization; source's first explicit invalidation remains f_0250_05CB",
+    "dos_storage_claim": false
+  },
+  "conversion": {
+    "module": "portable/whole_program/conversions/eu_map_cache_v1.py",
+    "api": "adapt_source(source: bytes, rel: str) -> (bytes, receipt)",
+    "phase": "before whole-program word conversion",
+    "declaration_action": "remove exactly the one source extern and include the typed owner header",
+    "row_access": "replace target with portable_eu_map_cache.rows",
+    "linear_access": "rewrite only [0][i] and [0][idx] views to portable_eu_map_cache.linear[i/idx]"
+  },
+  "excluded_targets": {
+    "sdl_menu_physical_v7": [
+      "fd_50F6_0F46", "fd_50F6_0FC6", "fd_50F6_0F84", "fd_50F6_1008",
+      "fd_50F6_0256", "fd_50F6_02C0", "fd_50F6_0334", "fd_50F6_0AEC",
+      "fd_50F6_0AFA", "fd_50F6_0B12", "fd_50F6_0C2A", "casteLevels",
+      "modeLevels"
+    ]
+  },
+  "data_backing_audit": {
+    "source": "src/data/d3E1D.c",
+    "source_sha256": "ab35eb29d30ac1bcf6390bf8a979c5d018f43f4cae45f9f0d9a1f00200611d05",
+    "save_source": "src/S09/m35F5.c",
+    "save_source_sha256": "028e1575990d5d45233f9102a0d2a060810349bd2f1297182c4af435ecbe912a",
+    "map_records": {
+      "MapA": { "source_bytes": 8192, "save_element_size": 1, "save_count": 8192 },
+      "MapB": { "source_bytes": 4096, "save_element_size": 1, "save_count": 4096 },
+      "MapR": { "source_bytes": 4096, "save_element_size": 1, "save_count": 4096 },
+      "ExitMapB": { "source_bytes": 4096, "save_element_size": 1, "save_count": 4096 },
+      "ExitMapR": { "source_bytes": 4096, "save_element_size": 1, "save_count": 4096 }
+    },
+    "pheromone_records": {
+      "PherMapA": { "source_bytes": 2048, "save_element_size": 1, "save_count": 2048 },
+      "PherMapBN": { "source_bytes": 2048, "save_element_size": 1, "save_count": 2048 },
+      "PherMapBT": { "source_bytes": 2048, "save_element_size": 1, "save_count": 2048 },
+      "PherMapRN": { "source_bytes": 2048, "save_element_size": 1, "save_count": 2048 },
+      "PherMapRT": { "source_bytes": 2048, "save_element_size": 1, "save_count": 2048 }
+    },
+    "save_pointer_encoding": "native struct SaveRec data members are actual pointer relocations to the corresponding source-defined array objects, not serialized far-pointer bytes",
+    "life_maps": "LifeA/B/R have complete DATA source arrays but are rebuilt from ant lists and are not SaveRec entries",
+    "status": "static source identity and table-consumer audit only; not a DOS/native save/load differential"
+  },
+  "historical_evidence": {
+    "manifest_sha256": "025a0a9255d910cae4b122ab5a3f3fb40888bb456d7fe42158db7c9e622fcf50",
+    "symbols_sha256": "0f5dd5b0a211945a97782cfccdb9bb31b0dfd07fcde5df4d4f9486b487eb0125",
+    "prior_bss_plan_sha256": "d50da60020111161531d3ea302a71d1fd05c1605e3e2c96123357dc2197fb106",
+    "prior_plan_conclusion": "fd_50F6_15C4 was left unresolved because the entire zero BSS range was tiled by other registered owners and no exact accepted OMF PUBLIC uniquely grounded this object; this native source-shaped owner does not override that conclusion"
+  }
+}

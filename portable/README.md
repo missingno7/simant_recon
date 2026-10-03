@@ -6,11 +6,12 @@ Native work lives here. The DOS checkpoint preserves 1,611 EXACT functions and
 29 separately registered BEHAVIOR_EXACT contracts; it is not a 100% matching
 decompilation.
 
-The complete-game work now follows the [whole-program mechanical migration](docs/whole-program-migration.md).
-It converts every original C translation unit and targets the original startup
-and main loop with shared native platform services. Its relocatable core is
-under integration; it has not yet replaced the selected-module executable
-described below.
+The current runnable preview uses the [whole-source application](docs/whole-application-assembly.md)
+and original main loop. See the [current handover](docs/handover-2026-10-03.md)
+for drop-in packages, build commands, verified flows, and open defects.
+The [whole-program mechanical migration](docs/whole-program-migration.md) converts
+the original C translation units and connects shared native platform services.
+The selected-module executable described below is an older, separate prototype.
 
 The [source conversion policy](docs/source-porting-rules.md) keeps recovered
 game bodies and shared state as the authority. Mechanical type/pointer

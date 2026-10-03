@@ -1,0 +1,1 @@
+This packet retains v17 package/build/drop-in receipts and the v15 caption EGA/VGA captures. Each receipt retains its original input hashes and scope. Runtime binaries and original resources are local-only identity-pinned inputs; they are not archived here. The previews have not passed complete-game acceptance.

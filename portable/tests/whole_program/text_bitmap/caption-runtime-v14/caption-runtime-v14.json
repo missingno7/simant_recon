@@ -1,0 +1,219 @@
+{
+  "schema": "caption-runtime-unbound-v14-v1",
+  "result": "diagnostic-only",
+  "application_source": {
+    "path": "inputs/portable/whole_program/application.c",
+    "sha256": "21f93b6c7cec6981e3c32513f9524ef73e63b0c3af6aaf89919f6c9827b358de"
+  },
+  "bridge_source": {
+    "path": "inputs/portable/whole_program/text_bitmap_bridge.c",
+    "sha256": "60f8c63c5c615090cd8d7b03cbd0ada8fba7f60c401608f31e3ada2f23277a2e"
+  },
+  "build_report": {
+    "path": "v14-build-report.json",
+    "sha256": "09130f4b9d32cd67d3dcd846b1d980eaa343ebcb308c568eb59e933977f87239"
+  },
+  "executable": {
+    "path": "build/whole-application-v14/simant-whole-sdl3.exe",
+    "sha256": "72bebfba969409c4be252f23682a6ba232e1a8508e795eb82e767c5557624ab3",
+    "binary_archived": false
+  },
+  "run": {
+    "gdb_script": "run/caption-v5.gdb",
+    "gdb_script_sha256": "b6c9b3c8564e2f5f03e9f561aaf057362296726f487a9ea2702c891d188d9492",
+    "gdb_trace": "run/gdb-caption-bridge-states.txt",
+    "gdb_trace_sha256": "36ea39c515df0bf622175ee0185eeea6888680b77e625fa124a75a227557b26b",
+    "gdb_stdout": "run/gdb-caption-v5.out",
+    "gdb_stdout_sha256": "9050638c3fecc11de0889ace2a30ffecdb7f4cb8998da3cf6643de850af2a182",
+    "replay": "run/full-game-vga-v1.txt",
+    "replay_sha256": "76cb0aa0dd78fe3ec01c2af74790df2f4b4b1cfb9e24b22e064396fe20f088fd",
+    "screenshot": "run/frame-v5.bmp",
+    "screenshot_sha256": "c80a8e084a205f05e3932c83cb2baec428f3c458deead36b977b1f2bb5be918a"
+  },
+  "captions": {
+    "entries": 5,
+    "bridge_bound_zero": 5,
+    "graphics_status_ok": 5,
+    "prepare_entries": 0,
+    "bitmap_callback_entries": 0,
+    "events": [
+      {
+        "x": 271,
+        "y": 66,
+        "text": "Surface View",
+        "graphics_status": 0,
+        "bridge_bound": 0,
+        "hardware_profile": 0
+      },
+      {
+        "x": 271,
+        "y": 66,
+        "text": "Surface View",
+        "graphics_status": 0,
+        "bridge_bound": 0,
+        "hardware_profile": 0
+      },
+      {
+        "x": 144,
+        "y": 26,
+        "text": "SimAnt - Full Game",
+        "graphics_status": 0,
+        "bridge_bound": 0,
+        "hardware_profile": 0
+      },
+      {
+        "x": 271,
+        "y": 66,
+        "text": "Surface View",
+        "graphics_status": 0,
+        "bridge_bound": 0,
+        "hardware_profile": 0
+      },
+      {
+        "x": 271,
+        "y": 66,
+        "text": "Surface View",
+        "graphics_status": 0,
+        "bridge_bound": 0,
+        "hardware_profile": 0
+      }
+    ]
+  },
+  "runtime_assets": {
+    "payloads_copied_into_archive": false,
+    "files": [
+      {
+        "runtime_path": "assets/FONT1",
+        "source_path": "assets\\FONT1",
+        "size_bytes": 2950,
+        "sha256": "bb9591cc742e39864722b9dab2a7e59c82c1a3804f00da684f8459912c993cc3"
+      },
+      {
+        "runtime_path": "assets/FONT2",
+        "source_path": "assets\\FONT2",
+        "size_bytes": 2930,
+        "sha256": "f5a9f39e46ae7f789ae7b7c5339aff905d2675db8149a1c0c794e33b0f6dedbc"
+      },
+      {
+        "runtime_path": "assets/FONT3",
+        "source_path": "assets\\FONT3",
+        "size_bytes": 3198,
+        "sha256": "56480958990bda60d7f798d1922ae40762261c7453cc9e99c0573e5f7a2286ff"
+      },
+      {
+        "runtime_path": "assets/FONT4",
+        "source_path": "assets\\FONT4",
+        "size_bytes": 3326,
+        "sha256": "0d0ccb62f197213e6ea793913c0b68d194fefeed63d58f6b7e36dbe25347bc15"
+      },
+      {
+        "runtime_path": "assets/HCEGANT.DAT",
+        "source_path": "assets\\HCEGANT.DAT",
+        "size_bytes": 629438,
+        "sha256": "9c98c0f110e901a2c2db65944e4ebdf6b26392181e9415a34eb7b29617eaa899"
+      },
+      {
+        "runtime_path": "assets/HCEGANT.NDX",
+        "source_path": "assets\\HCEGANT.NDX",
+        "size_bytes": 2444,
+        "sha256": "077d8aecdad5e816f0828204f7ca500a68b3a4a3288740ac75e73e44eaa8efc4"
+      },
+      {
+        "runtime_path": "assets/INFO.EXE",
+        "source_path": "assets\\INFO.EXE",
+        "size_bytes": 10841,
+        "sha256": "2379b8dbf8d2866e736be1cafce0845c7f0f7cc0c58137781e72167542fb85cd"
+      },
+      {
+        "runtime_path": "assets/INSTALL.EXE",
+        "source_path": "assets\\INSTALL.EXE",
+        "size_bytes": 24931,
+        "sha256": "a0d9866aab2adca0fffc312236a08e9fa0dc553d316139cc2736b980a25ac486"
+      },
+      {
+        "runtime_path": "assets/RALLOC.DMP",
+        "source_path": "assets\\RALLOC.DMP",
+        "size_bytes": 18577,
+        "sha256": "c3e40df71a75efaf72f88e7eab1245e4ee8acc93dd6bef848b5fdf34957e47f0"
+      },
+      {
+        "runtime_path": "assets/READ.ME",
+        "source_path": "assets\\READ.ME",
+        "size_bytes": 3760,
+        "sha256": "1d663cdce90d26afcc4dcfe6c66d15b9c3c1118473bb067e7465da49644be3b9"
+      },
+      {
+        "runtime_path": "assets/SHARED.DAT",
+        "source_path": "assets\\SHARED.DAT",
+        "size_bytes": 96117,
+        "sha256": "aa0d2342510f99abf57a685ea93178d9dd8d2d5be1e65b556c9b27f974012750"
+      },
+      {
+        "runtime_path": "assets/SHARED.NDX",
+        "source_path": "assets\\SHARED.NDX",
+        "size_bytes": 3868,
+        "sha256": "e172f030c11f417af4b5be34dacbda9a63f157820827b40d62c08ca2c6ea7477"
+      },
+      {
+        "runtime_path": "assets/SIMANT.CFG",
+        "source_path": "assets\\SIMANT.CFG",
+        "size_bytes": 32,
+        "sha256": "55e111a6ccec71fef69c0e78e43f417665512d392d5dde2be11d23d2a58f1840"
+      },
+      {
+        "runtime_path": "assets/SIMANT.EXE",
+        "source_path": "assets\\SIMANT.EXE",
+        "size_bytes": 506509,
+        "sha256": "aa0596c6766322a8229ee3c36e57048c92adc82d50fbe2ef37afb8b85fcf4f11"
+      },
+      {
+        "runtime_path": "assets/SOUND.DAT",
+        "source_path": "assets\\SOUND.DAT",
+        "size_bytes": 111470,
+        "sha256": "6a884b946d842bbddb4100a644a7aee6b3d8a9c9832aa65c0989ae50510d6629"
+      },
+      {
+        "runtime_path": "assets/SOUND.NDX",
+        "source_path": "assets\\SOUND.NDX",
+        "size_bytes": 1236,
+        "sha256": "4b73be9e633b612946aac043f930b620df2483676be54c27acc08b699a84ac80"
+      }
+    ]
+  },
+  "runtime_bios_fonts": {
+    "payloads_copied_into_archive": false,
+    "files": [
+      {
+        "runtime_path": "fonts/DOSBox-Staging-LICENSE",
+        "source_path": "build\\whole-application-v14\\runtime-bios-fonts\\DOSBox-Staging-LICENSE",
+        "size_bytes": 4489,
+        "sha256": "17f1201299b4984dafadcdc62ce70167ac41b6f4ac9e8d3ba1bcc05eea2982e3"
+      },
+      {
+        "runtime_path": "fonts/font-8x14.bin",
+        "source_path": "build\\whole-application-v14\\runtime-bios-fonts\\font-8x14.bin",
+        "size_bytes": 3584,
+        "sha256": "657ca6588b6bf729f0ed71a3d3c781a465bd30cdfb11eb5fc7e27594c0717ea1"
+      },
+      {
+        "runtime_path": "fonts/font-8x8.bin",
+        "source_path": "build\\whole-application-v14\\runtime-bios-fonts\\font-8x8.bin",
+        "size_bytes": 2048,
+        "sha256": "75c79a7e7fa423dda67ec6d6d76cec86b63f85677726368750c75b0920ddf319"
+      },
+      {
+        "runtime_path": "fonts/int10_memory.cpp",
+        "source_path": "build\\whole-application-v14\\runtime-bios-fonts\\int10_memory.cpp",
+        "size_bytes": 77423,
+        "sha256": "8044424619405c51b0f6a31e676e9d4b931aac5746d844d0a6fb2e955328a14e"
+      },
+      {
+        "runtime_path": "fonts/manifest.json",
+        "source_path": "build\\whole-application-v14\\runtime-bios-fonts\\manifest.json",
+        "size_bytes": 1515,
+        "sha256": "ccfb943edb92e17108bb3a74fa326052ab940839f9199df743182ef6280a5aa9"
+      }
+    ]
+  },
+  "interpretation": "At each f_1FBD_0000 title call, text and draw coordinates are present and source graphics status is OK, but source_bridge.bound is zero. The bridge early-return therefore occurs before prepare/callback; this is the first demonstrated loss stage. The independent four-byte payload offset issue is not tested by this runtime receipt."
+}

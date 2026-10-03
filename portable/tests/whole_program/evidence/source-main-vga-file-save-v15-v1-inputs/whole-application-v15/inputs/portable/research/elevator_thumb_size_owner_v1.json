@@ -1,0 +1,36 @@
+{
+  "schema": "simant.source-typed-runtime-owner.v1",
+  "symbol": "fd_50F6_47DA",
+  "dos_address_observation": "50F6:47DA",
+  "native_owner": "portable/whole_program/state/elevator_thumb_size.c:elevator_thumb_size",
+  "view": "struct Pt { int16_t x, y; }",
+  "source_size_bytes": 4,
+  "migration_snapshot": {
+    "path": "build/workers/whole_program/generated/migration.json",
+    "sha256": "da4a64a8760c73e3cb6964d85d87c0c02aa5d844e694ddf0c62f7d9cbb89ffb3"
+  },
+  "source_modules": {
+    "src/root/m20E8.c": {
+      "sha256": "c2ec2474010ef9821fd46cdf72e50f164c850446b6f4b051a91d474b53dd5ae2",
+      "active_reference_count": 2,
+      "role": "loads thumb dimensions from resource 0x6f during window initialization"
+    },
+    "src/root/m23E6.c": {
+      "sha256": "6992614db2546bf039d6e9fb3be17df0a48607dfa3b3e3faba05ed5e5e938bec",
+      "active_reference_count": 8,
+      "role": "uses Pt.y when drawing and hit-testing list elevator"
+    }
+  },
+  "writer": {
+    "path": "src/root/m208F.c",
+    "sha256": "57fc64215f6ff681790e1afe2321f0348ee0cb8c3fbce066cef5f2dd5a18a72e",
+    "function": "f_208F_0419",
+    "source_contract": "writes size->x and size->y from resource 0x6f; missing resource writes 1 to both"
+  },
+  "claims": {
+    "native_single_owner": true,
+    "historical_omf_extent_or_ownership": false,
+    "historical_initial_value": false,
+    "historical_resource_pixel_or_dos_equivalence": false
+  }
+}

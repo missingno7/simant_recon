@@ -1,0 +1,174 @@
+{
+  "schema": "simant-whole-program-s26-title-drag-v17-v1",
+  "status": "FIXED_POINTER_CRASH_MODAL_INPUT_STILL_BLOCKS_DRAG_COMPLETION",
+  "scope": "Ordinary QuickGame SDL replay under read-only GDB observation; no source/runtime writes, no forced state, no DOS frame equivalence claim.",
+  "v15_control": {
+    "result": "FAILS at S26 o26_39C7_040F due pointer-width Win::objs overlay.",
+    "captured_log": "v15_failure/gdb-crash-state.txt",
+    "crash_site": "S26_m39C7.c:245, dereference of w->objs[1] (pre-adapter captured source)."
+  },
+  "v17_observation": {
+    "result": "Pointer-table crash absent; source reaches titlebar drag handler and enters ButtonHeld modal loop; drag does not return.",
+    "drag_event_words": [
+      0,
+      0,
+      306,
+      513,
+      215,
+      32,
+      1,
+      257
+    ],
+    "front_window_id": 0,
+    "window_registry_count": 23,
+    "source_window_rect_before": [
+      14,
+      22,
+      418,
+      379
+    ],
+    "title_object1_source_type": 18,
+    "object0_rect_before": [
+      14,
+      22,
+      418,
+      379
+    ],
+    "object0_xywh_before": [
+      14,
+      22,
+      404,
+      357
+    ],
+    "replay_last_ingested_event": "index 8 mouse-down at (215,32), 16800ms",
+    "move_release_not_ingested": [
+      "17000ms move (255,105)",
+      "17250ms mouse-up (255,105)"
+    ],
+    "after_drag_geometry": "not observed; no drag-return event or captured frame",
+    "termination": "Isolated GDB and application processes stopped after the expected replay window because the modal loop did not release; no repository or source state was written."
+  },
+  "boundary": {
+    "observed": "The v17 replay logs the 16.8s left-button down and enters S26 drag with front window 0, title object type 0x12, valid registered object pointers, and unchanged root rect. No 17.0s move, 17.25s release, drag-return event, or frame is observed.",
+    "source_modal": "S26 o26_39C7_040F executes ButtonHeldInit() and loops while ButtonHeld() (frozen source lines 261-262).",
+    "countdown": "root m1FD2 ButtonHeldInit sets countdown=2; ButtonHeld calls TickCount only in that two-changed-tick countdown path, then repeatedly calls StillDown() without TickCount (source lines 314-337).",
+    "clock_refresh": "The source TickCount wrapper calls portable_input_time_host_refresh_clock, whose installed application refresh can ingest events and invoke the idle hook. This corrects the earlier assumption that TickCount never yields.",
+    "still_down": "The SDL live-game StillDown query returns latched left_down. It performs control_pointer_poll only under history_input_active; this S26 window drag does not enter that history-input mode.",
+    "timing_inference": "The script schedules move 200ms after mouse-down. Under the configured 18.2Hz BIOS tick cadence, ButtonHeld\u2019s two startup countdown ticks finish before that move is due. After the countdown, ButtonHeld no longer calls TickCount/refresh, and StillDown does not poll for this drag. This is source-derived inference; live values of countdown, refreshing, idle_hook_active, and suppress_idle_hook were not captured.",
+    "consequence": "The S26 pointer-table crash is fixed, but ordinary drag completion remains unverified and this replay remains blocked in the modal loop. No conclusion about final moved geometry is made."
+  },
+  "inputs": {
+    "v15": {
+      "executable": {
+        "path": "build/workers/whole_runtime_flow_review/v15_title_drag/simant-whole-sdl3.exe",
+        "sha256": "7ad9f6b0123c40544ccd3221256fe9c4e020a788c00f953df9f527d9d832b090"
+      },
+      "SDL3_dll": {
+        "path": "build/workers/whole_runtime_flow_review/v15_title_drag/SDL3.dll",
+        "sha256": "8d6167e6d27e27e640deb0b259445d606ec011c63e580396dff76fd8d46f9631"
+      },
+      "runtime_asset_files": {
+        "FONT1": "bb9591cc742e39864722b9dab2a7e59c82c1a3804f00da684f8459912c993cc3",
+        "FONT2": "f5a9f39e46ae7f789ae7b7c5339aff905d2675db8149a1c0c794e33b0f6dedbc",
+        "FONT3": "56480958990bda60d7f798d1922ae40762261c7453cc9e99c0573e5f7a2286ff",
+        "FONT4": "0d0ccb62f197213e6ea793913c0b68d194fefeed63d58f6b7e36dbe25347bc15",
+        "HCEGANT.DAT": "9c98c0f110e901a2c2db65944e4ebdf6b26392181e9415a34eb7b29617eaa899",
+        "HCEGANT.NDX": "077d8aecdad5e816f0828204f7ca500a68b3a4a3288740ac75e73e44eaa8efc4",
+        "INFO.EXE": "2379b8dbf8d2866e736be1cafce0845c7f0f7cc0c58137781e72167542fb85cd",
+        "INSTALL.EXE": "a0d9866aab2adca0fffc312236a08e9fa0dc553d316139cc2736b980a25ac486",
+        "RALLOC.DMP": "c3e40df71a75efaf72f88e7eab1245e4ee8acc93dd6bef848b5fdf34957e47f0",
+        "READ.ME": "1d663cdce90d26afcc4dcfe6c66d15b9c3c1118473bb067e7465da49644be3b9",
+        "SHARED.DAT": "aa0d2342510f99abf57a685ea93178d9dd8d2d5be1e65b556c9b27f974012750",
+        "SHARED.NDX": "e172f030c11f417af4b5be34dacbda9a63f157820827b40d62c08ca2c6ea7477",
+        "SIMANT.CFG": "55e111a6ccec71fef69c0e78e43f417665512d392d5dde2be11d23d2a58f1840",
+        "SIMANT.EXE": "aa0596c6766322a8229ee3c36e57048c92adc82d50fbe2ef37afb8b85fcf4f11",
+        "SOUND.DAT": "6a884b946d842bbddb4100a644a7aee6b3d8a9c9832aa65c0989ae50510d6629",
+        "SOUND.NDX": "4b73be9e633b612946aac043f930b620df2483676be54c27acc08b699a84ac80"
+      },
+      "runtime_bios_font_files": {
+        "DOSBox-Staging-LICENSE": "17f1201299b4984dafadcdc62ce70167ac41b6f4ac9e8d3ba1bcc05eea2982e3",
+        "font-8x14.bin": "657ca6588b6bf729f0ed71a3d3c781a465bd30cdfb11eb5fc7e27594c0717ea1",
+        "font-8x8.bin": "75c79a7e7fa423dda67ec6d6d76cec86b63f85677726368750c75b0920ddf319",
+        "int10_memory.cpp": "8044424619405c51b0f6a31e676e9d4b931aac5746d844d0a6fb2e955328a14e",
+        "manifest.json": "ccfb943edb92e17108bb3a74fa326052ab940839f9199df743182ef6280a5aa9"
+      },
+      "whole_application_report": {
+        "path": "build/whole-application-v15/report.json",
+        "sha256": "c0ddb32a8ab1b970c3bd0a81191f945176d7e782d48ed9ebc6562309afa08c40"
+      },
+      "captured_S26_generated_sha256": "7dca4ba983881c6309863f34d03d7093d95a079a5cb23cf0f26b767a84c69bbb"
+    },
+    "v17": {
+      "executable": {
+        "path": "build/workers/whole_runtime_flow_review/v17_title_drag/simant-whole-sdl3.exe",
+        "sha256": "53a0e3c2a5073cc787e2473d653c3b756e0ca855b2291ef46c2d6fc3c83d1fc5"
+      },
+      "SDL3_dll": {
+        "path": "build/workers/whole_runtime_flow_review/v17_title_drag/SDL3.dll",
+        "sha256": "8d6167e6d27e27e640deb0b259445d606ec011c63e580396dff76fd8d46f9631"
+      },
+      "runtime_asset_files": {
+        "FONT1": "bb9591cc742e39864722b9dab2a7e59c82c1a3804f00da684f8459912c993cc3",
+        "FONT2": "f5a9f39e46ae7f789ae7b7c5339aff905d2675db8149a1c0c794e33b0f6dedbc",
+        "FONT3": "56480958990bda60d7f798d1922ae40762261c7453cc9e99c0573e5f7a2286ff",
+        "FONT4": "0d0ccb62f197213e6ea793913c0b68d194fefeed63d58f6b7e36dbe25347bc15",
+        "HCEGANT.DAT": "9c98c0f110e901a2c2db65944e4ebdf6b26392181e9415a34eb7b29617eaa899",
+        "HCEGANT.NDX": "077d8aecdad5e816f0828204f7ca500a68b3a4a3288740ac75e73e44eaa8efc4",
+        "INFO.EXE": "2379b8dbf8d2866e736be1cafce0845c7f0f7cc0c58137781e72167542fb85cd",
+        "INSTALL.EXE": "a0d9866aab2adca0fffc312236a08e9fa0dc553d316139cc2736b980a25ac486",
+        "RALLOC.DMP": "c3e40df71a75efaf72f88e7eab1245e4ee8acc93dd6bef848b5fdf34957e47f0",
+        "READ.ME": "1d663cdce90d26afcc4dcfe6c66d15b9c3c1118473bb067e7465da49644be3b9",
+        "SHARED.DAT": "aa0d2342510f99abf57a685ea93178d9dd8d2d5be1e65b556c9b27f974012750",
+        "SHARED.NDX": "e172f030c11f417af4b5be34dacbda9a63f157820827b40d62c08ca2c6ea7477",
+        "SIMANT.CFG": "55e111a6ccec71fef69c0e78e43f417665512d392d5dde2be11d23d2a58f1840",
+        "SIMANT.EXE": "aa0596c6766322a8229ee3c36e57048c92adc82d50fbe2ef37afb8b85fcf4f11",
+        "SOUND.DAT": "6a884b946d842bbddb4100a644a7aee6b3d8a9c9832aa65c0989ae50510d6629",
+        "SOUND.NDX": "4b73be9e633b612946aac043f930b620df2483676be54c27acc08b699a84ac80"
+      },
+      "runtime_bios_font_files": {
+        "DOSBox-Staging-LICENSE": "17f1201299b4984dafadcdc62ce70167ac41b6f4ac9e8d3ba1bcc05eea2982e3",
+        "font-8x14.bin": "657ca6588b6bf729f0ed71a3d3c781a465bd30cdfb11eb5fc7e27594c0717ea1",
+        "font-8x8.bin": "75c79a7e7fa423dda67ec6d6d76cec86b63f85677726368750c75b0920ddf319",
+        "int10_memory.cpp": "8044424619405c51b0f6a31e676e9d4b931aac5746d844d0a6fb2e955328a14e",
+        "manifest.json": "ccfb943edb92e17108bb3a74fa326052ab940839f9199df743182ef6280a5aa9"
+      },
+      "whole_application_report": {
+        "path": "build/whole-application-v17/report.json",
+        "sha256": "27c56da07841108c73e2f943bae8648c8193d7f473f68f4e0a8f56c6fc56f5d9"
+      },
+      "captured_S26_generated_sha256": "651f38e50e54923ab82cb7d2f32989e8ad7851a1b5781e1c91cb20b961e27ccd",
+      "captured_core_object_sha256": null
+    },
+    "shared_original_S26_source_sha256": "fb4938daa334a8e9f929b44a542392f47fc7c1a654ca87f303ee80528b34c4c4",
+    "shared_root_m1FD2_source_sha256": "f4359bdaf4cfc0fe326a54cf8a1eacb9ba3098b710bf2a561b3d0f48569bf6d8",
+    "s26_v15_compile_fixture": {
+      "portable/tests/whole_program/s26_window_object_views_v1/fixtures/v15/S26_m39C7.c": "7dca4ba983881c6309863f34d03d7093d95a079a5cb23cf0f26b767a84c69bbb",
+      "portable/tests/whole_program/s26_window_object_views_v1/fixtures/v15/dos_types.h": "917da2a746f22bd61b32310a89a15ba16328bbe29a90895e47ad37e923dda705"
+    }
+  },
+  "evidence_files": {
+    "README.md": "65c2a0392916bf96d18029e8d64983f71308aa1402959cb80935f8e403165ba9",
+    "v15_failure/events.jsonl": "5ffac888a2367efab11e70eb9bf4024103af4fdd71cff577ba2c2e4796777a2f",
+    "v15_failure/gdb-console.txt": "04cfa36fecf76bcbab5c93a0a3532cbfd9bc53a99d41533d8a7502d64c7d7cf6",
+    "v15_failure/gdb-crash-state.txt": "fdc3c625c6744997351a8fdd0209b21b9811855f0b62dec082934c2eb990deed",
+    "v15_failure/probe_v15_drag.py": "b8fd07bdcfaf1b953b94fa0687744568d71f231e45463c0af01e7ddc27dc09b9",
+    "v15_failure/quick-game-title-drag-v1.txt": "a8a70f789c82bc7c902fa26a99b324f477ef1372847c60ff121df4a1921d2fe3",
+    "v15_failure/run_v15_drag.gdb": "d7641d8d6cf5fe4207e137c04340346bed403714aca8fa14c724715fb94c8cd3",
+    "v17_modal_wait/events.jsonl": "4e12a1f88389e0b0437eaf0f504951e00c70eeec097bd42233e9a38aeebf1ee0",
+    "v17_modal_wait/gdb-console.txt": "1ad8b4bff52f97d77a501991a9eba5f0cc4f48e97cf2c4f2671b063e35bbee8c",
+    "v17_modal_wait/probe_v17_drag.py": "29bd6586845b74e1b2eaa988fbddfd55fdc2421c3da52165566216ae81fb1a66",
+    "v17_modal_wait/quick-game-title-drag-v1.txt": "a8a70f789c82bc7c902fa26a99b324f477ef1372847c60ff121df4a1921d2fe3",
+    "v17_modal_wait/run_v17_drag.gdb": "395017e8bcc8898f03f9bb26cf538a4af77f2c1a067a67ab9950342df2f968f9"
+  },
+  "v15_build_report_sha256": "c0ddb32a8ab1b970c3bd0a81191f945176d7e782d48ed9ebc6562309afa08c40",
+  "v17_build_report_sha256": "27c56da07841108c73e2f943bae8648c8193d7f473f68f4e0a8f56c6fc56f5d9",
+  "reproducibility_note": "S26 window pointer compile control uses archived exact v15 generated TU/header fixtures at portable/tests/whole_program/s26_window_object_views_v1/fixtures/v15, so generator refresh does not invalidate that standalone test.",
+  "mechanism_source_pins": {
+    "src/S26/m39C7.c": "fb4938daa334a8e9f929b44a542392f47fc7c1a654ca87f303ee80528b34c4c4",
+    "src/root/m1FD2.c": "f4359bdaf4cfc0fe326a54cf8a1eacb9ba3098b710bf2a561b3d0f48569bf6d8",
+    "portable/whole_program/platform/m1b73_events.c": "fb9506a47b921b9c7281fa15b62d24a77760b241cedcf9ce92168a752bf0420f",
+    "portable/whole_program/platform/sdl3/m1b73_application_input.c": "cc2604b706ed1c08f75311ed6e9a75b2fb8d36457268d905a34cd02d132fa2c4",
+    "portable/whole_program/platform/sdl3/input_time_host.c": "46bc3301cd12ed15729ff2bb857660a3babfb1e568b6ccc2beca89a52555b575",
+    "portable/platform/sdl3/live_game.c": "df85cc4b7e75d10701a29a703ee7f754575777deeb4669f1d5b6e48c8dce736d"
+  }
+}

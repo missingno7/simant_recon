@@ -107,6 +107,7 @@ from portable.whole_program.conversions.window_parameter_abi_v1 import adapt as 
 from portable.whole_program.conversions.window_swap_parameter_abi_v2 import adapt as adapt_window_swap_parameters
 from portable.whole_program.conversions.unused_platform_parameters_v1 import adapt as adapt_unused_parameters
 from portable.whole_program.conversions.newgame_zoom_window_v1 import adapt_postword as adapt_newgame_zoom_window
+from portable.whole_program.conversions.s26_window_object_views_v1 import adapt as adapt_s26_window_objects
 
 IO_NAMES = {name: 'dos_' + name for name in
             ('open', 'read', 'write', 'lseek', 'close', 'access', 'chdir',
@@ -536,6 +537,7 @@ def main() -> int:
                            ROOT / 'portable/whole_program/conversions/window_swap_parameter_abi_v2.py',
                            ROOT / 'portable/whole_program/conversions/unused_platform_parameters_v1.py',
                            ROOT / 'portable/whole_program/conversions/newgame_zoom_window_v1.py',
+                           ROOT / 'portable/whole_program/conversions/s26_window_object_views_v1.py',
                           ROOT / 'portable/research/startup_globals_v1.json']
     for directory in ('portable/whole_program', 'portable/audio', 'portable/platform/sdl3'):
         conversion_inputs += [p for p in (ROOT / directory).rglob('*.h')
@@ -576,6 +578,9 @@ def main() -> int:
         if rel in native_startups:
             source = native_startups[rel]
             platform_conversions.append(startup_conversion)
+        if rel == 'src/S26/m39C7.c':
+            source, ledger = adapt_s26_window_objects(path.read_bytes(), rel)
+            platform_conversions.append(ledger)
         if rel == 'src/root/m1FD2.c':
             source, ledger = adapt_timer(source)
             platform_conversions.append(ledger)

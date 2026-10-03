@@ -1,0 +1,56 @@
+[New Thread 50560.0xac50]
+[New Thread 50560.0xbc04]
+[New Thread 50560.0xdef8]
+[New Thread 50560.0xdcf0]
+[New Thread 50560.0xd5ec]
+[New Thread 50560.0xbc28]
+Breakpoint 1 at 0x7ff6915ab8e3: file D:\Prog\simant_recon\build\workers\whole_program\generated\S09_m35F5.c, line 362.
+[Thread 50560.0xbc28 exited with code 0]
+[Switching to Thread 50560.0xc910]
+
+Thread 1 hit Breakpoint 1, FileSelect (name=0x378dff3f0 "", title=0x7ff691604334 "Save Game", verb=0x7ff69160432f "SAVE", save=1) at D:\Prog\simant_recon\build\workers\whole_program\generated\S09_m35F5.c:362
+362	    WinPrintf("\n<PATH=%s>", path);
+warning: Source file is more recent than executable.
+name = 0x378dff3f0 ""
+title = 0x7ff691604334 "Save Game"
+verb = 0x7ff69160432f "SAVE"
+save = 1
+buf = "D:\\Prog\\simant_recon\\build\\fsmenu\\runtime-assets\\0��x\003\000\000*\000\000\000\006\001\000\000 ��x\003\000\000\000�f^��\177\000"
+list = 0x114003161f0 ""
+path = "D:\\Prog\\simant_recon\\build\\fsmenu\\runtime-assets\000\000�x\003\000\000\000�T^��\177\000\000H�a"
+ff = {reserved = '\000' <repeats 20 times>, attrib = 0 '\000', wr_time = 0, wr_date = 18314, size = 2146972422, name = "\000\000��qw\024\001\000\000`��"}
+h = 0x11479282790
+ev = {what = -3152, message = 30943, x4 = 3, modifiers = 0, h = 10576, v = 30577, code = 276, xE = 0}
+fname = "\000\000\000\000\000\000\220��x\003\000\000"
+x = 0
+y = 4
+r3 = {left = 30943, top = 3, right = 0, bottom = 44}
+r2 = {left = 30943, top = 3, right = 0, bottom = -3280}
+r = {left = 8, top = 23, right = 225, bottom = 35}
+nDirs = 0
+oldDrive = 0
+sel = -1
+p = 0x7ff6915623a0 <idle+227> "H��tOH�E�H�\200�F"
+best = 0x378dff380 "\220��x\003"
+q = 0x0
+count = 0
+i = 0
+nFiles = 0
+n = -28319
+j = 0
+ok = 1 '\001'
+key = 32758
+tmp2 = 0
+$1 = 68
+$2 = 68
+0x378dff250:	"D:\\Prog\\simant_recon\\build\\fsmenu\\runtime-assets"
+0x7ff691604334:	"Save Game"
+0x7ff69160432f:	"SAVE"
+0x378dff3f0:	""
+#0  FileSelect (name=0x378dff3f0 "", title=0x7ff691604334 "Save Game", verb=0x7ff69160432f "SAVE", save=1) at D:\Prog\simant_recon\build\workers\whole_program\generated\S09_m35F5.c:362
+#1  0x00007ff6915ab2c9 in o09_35F5_0188 (useLast=1) at D:\Prog\simant_recon\build\workers\whole_program\generated\S09_m35F5.c:173
+#2  0x00007ff6915b78b3 in o19_384C_0000 () at D:\Prog\simant_recon\build\workers\whole_program\generated\S19_m384C.c:92
+#3  0x00007ff691564add in f_00F8_01BE () at D:\Prog\simant_recon\build\workers\whole_program\generated\root_m00F8.c:112
+#4  0x00007ff69158960a in dos_game_main (argc=4, argv=0x1147771cef0) at D:\Prog\simant_recon\build\workers\whole_program\generated\root_m15F8.c:156
+#5  0x00007ff6915630b7 in main (argc=11, argv=0x114777127f0) at D:\Prog\simant_recon\portable\whole_program\application.c:438
+[Inferior 1 (process 50560) detached]

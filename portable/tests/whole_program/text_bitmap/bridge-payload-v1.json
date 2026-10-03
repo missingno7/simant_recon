@@ -1,0 +1,164 @@
+{
+  "schema": "text-bitmap-g9154-payload-proof-v1",
+  "result": "PASS",
+  "kind": "focused-native-callback-byte-contract",
+  "source_boundary": {
+    "historical_source": "src/root/m1B4E.asm",
+    "routine": "_f_1B4E_005E",
+    "line_range": "161-174",
+    "semantics": "Read width and height from the first two words; add BX,4; pass the advanced pixel pointer plus x,y,width,height to _g_9154.",
+    "sha256": "a32d75d2d4ea36980b659d26e9ddd86bcde65d9e250ebac4cdc29c0e847c67a2"
+  },
+  "production_change": {
+    "path": "portable/whole_program/text_bitmap_bridge.c",
+    "behavior": "Pass source_bridge.bitmap + 4 to g_9154; retain width/height header at the beginning of bridge storage.",
+    "sha256": "5842b1705358b156a0d51041490210cc1347137ca06b0ee258417222c67a8c64"
+  },
+  "positive_case": {
+    "text": "ASCII",
+    "width": 40,
+    "height": 14,
+    "stride_bytes": 5,
+    "payload_bytes": 70,
+    "captured_matches_prepared_pixel_plane": true,
+    "delegated_to_actual_graphics_callback": true
+  },
+  "negative_control": {
+    "control": "Simulate old header-prefixed base pointer",
+    "old_prefix_bytes": [
+      40,
+      0,
+      14,
+      0
+    ],
+    "first_four_bytes_match_payload": false,
+    "asserted_by_test": true
+  },
+  "test_execution": {
+    "command": "python portable/tests/whole_program/text_bitmap/bridge-payload-v1-inputs/portable/tests/whole_program/text_bitmap/run_bridge_test.py",
+    "outcome": "PASS text bitmap ABI bridge",
+    "compiler": {
+      "path": "C:\\msys64\\mingw64\\bin\\gcc.exe",
+      "version": "gcc.exe (Rev10, Built by MSYS2 project) 12.2.0",
+      "target": "x86_64-w64-mingw32",
+      "full_version": "12.2.0"
+    },
+    "executable": {
+      "path": "build/workers/whole_program/text_bitmap/text-bitmap-bridge-test.exe",
+      "sha256": "b4736d290771e1900ac4197a1f336037694e07e6fbdb00fdc2e0c4d887fd8487",
+      "binary_archived": false
+    }
+  },
+  "archive": {
+    "path": "portable/tests/whole_program/text_bitmap/bridge-payload-v1-inputs",
+    "files": [
+      {
+        "path": "portable/render/primitives.c",
+        "archive_path": "portable/render/primitives.c",
+        "size_bytes": 5303,
+        "sha256": "46f440ab374b1a83ba1f402c40cf9af73d88ca862ae747e786ee8b99b8e67df0"
+      },
+      {
+        "path": "portable/render/primitives.h",
+        "archive_path": "portable/render/primitives.h",
+        "size_bytes": 2227,
+        "sha256": "19e705578695c72e281322b75772bd031f37c1bb82dc3857fa990aa23dfdd1f0"
+      },
+      {
+        "path": "portable/tests/whole_program/text_bitmap/run_bridge_test.py",
+        "archive_path": "portable/tests/whole_program/text_bitmap/run_bridge_test.py",
+        "size_bytes": 1514,
+        "sha256": "f681a22c5ed20fc8d0bd62e19e73d4efbe4c98f5a36223687821648de2dab7a1"
+      },
+      {
+        "path": "portable/tests/whole_program/text_bitmap/text_bitmap_bridge_test.c",
+        "archive_path": "portable/tests/whole_program/text_bitmap/text_bitmap_bridge_test.c",
+        "size_bytes": 7149,
+        "sha256": "e5554dff51d6932963f0f22f40e0704cf1a7dc69859151ab71a8892719b9a8b4"
+      },
+      {
+        "path": "portable/whole_program/text_bitmap_bridge.c",
+        "archive_path": "portable/whole_program/text_bitmap_bridge.c",
+        "size_bytes": 5554,
+        "sha256": "5842b1705358b156a0d51041490210cc1347137ca06b0ee258417222c67a8c64"
+      },
+      {
+        "path": "portable/whole_program/text_bitmap_bridge.h",
+        "archive_path": "portable/whole_program/text_bitmap_bridge.h",
+        "size_bytes": 1117,
+        "sha256": "b347ab704f17d217958adaa78c5d10e0ec1b4bffabfebdd7575651dd7b49bad8"
+      },
+      {
+        "path": "portable/whole_program/text_bitmap.c",
+        "archive_path": "portable/whole_program/text_bitmap.c",
+        "size_bytes": 5360,
+        "sha256": "b88238cd5effba626d28baaa7f56a725d15bba9de8aeafe4d9c57636ee9f38d7"
+      },
+      {
+        "path": "portable/whole_program/text_bitmap.h",
+        "archive_path": "portable/whole_program/text_bitmap.h",
+        "size_bytes": 2164,
+        "sha256": "278c895e8dc157cc991cd87838c4e9359a7492c95beb91837854f269df6ed416"
+      },
+      {
+        "path": "portable/whole_program/window_source_rects.h",
+        "archive_path": "portable/whole_program/window_source_rects.h",
+        "size_bytes": 562,
+        "sha256": "ce985ea23146c274b18f311dde71a8a858f4c1bb27f59fdf8726fb5601802a79"
+      },
+      {
+        "path": "portable/whole_program/platform/graphics_line_1499.c",
+        "archive_path": "portable/whole_program/platform/graphics_line_1499.c",
+        "size_bytes": 2767,
+        "sha256": "1eb0fc1924a834df78fc57b2441e2e7bbd336a7e28d2ff27d549ae01acd06949"
+      },
+      {
+        "path": "portable/whole_program/platform/graphics_line_1499.h",
+        "archive_path": "portable/whole_program/platform/graphics_line_1499.h",
+        "size_bytes": 738,
+        "sha256": "bdade059afdc4ddbe1d64d2b436ba88530449315c3a456208efe58f1f45a3a10"
+      },
+      {
+        "path": "portable/whole_program/platform/graphics_source_clip.c",
+        "archive_path": "portable/whole_program/platform/graphics_source_clip.c",
+        "size_bytes": 996,
+        "sha256": "e41019bbe98fa1fd7d0d618ab3241dd9a963fcebb06a1befa2d645a18f146e3b"
+      },
+      {
+        "path": "portable/whole_program/platform/graphics_source_clip.h",
+        "archive_path": "portable/whole_program/platform/graphics_source_clip.h",
+        "size_bytes": 1338,
+        "sha256": "b9b40eb658f64e9a35b4b9656f198dcd810d1dac66c7baa5630bb4446be4b55c"
+      },
+      {
+        "path": "portable/whole_program/platform/graphics.c",
+        "archive_path": "portable/whole_program/platform/graphics.c",
+        "size_bytes": 34268,
+        "sha256": "965057f9139750866b983b052113f1920d23f3acce3bb6ad53f2d190deb6fef5"
+      },
+      {
+        "path": "portable/whole_program/platform/graphics.h",
+        "archive_path": "portable/whole_program/platform/graphics.h",
+        "size_bytes": 13176,
+        "sha256": "b0a2ecc5f87ab4d91cd05e1a95c2e0e872b6c6285604a50105e97f7b19e4d91a"
+      },
+      {
+        "path": "portable/whole_program/state/font_pointer_state_v1.h",
+        "archive_path": "portable/whole_program/state/font_pointer_state_v1.h",
+        "size_bytes": 668,
+        "sha256": "478346b5c5a6d3098fe3083dbb33d4edbfbd5fc41cad301322f6b09e12657be5"
+      },
+      {
+        "path": "src/root/m1B4E.asm",
+        "archive_path": "src/root/m1B4E.asm",
+        "size_bytes": 8451,
+        "sha256": "a32d75d2d4ea36980b659d26e9ddd86bcde65d9e250ebac4cdc29c0e847c67a2"
+      }
+    ]
+  },
+  "limitations": [
+    "Focused native callback payload proof only; not a full original-DOS rendering differential.",
+    "The archive includes the exact compile dependency set and source anchor, but omits generated test binaries.",
+    "The v14 unbound runtime finding is separately pinned under caption-runtime-v14."
+  ]
+}
