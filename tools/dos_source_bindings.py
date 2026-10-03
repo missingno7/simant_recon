@@ -586,6 +586,7 @@ def review_provider_source(text, provider, symbols=None):
             '_fd_50F6_06A6': 0x06A6, '_fd_50F6_072E': 0x072E,
             '_fd_50F6_07BC': 0x07BC})
         addresses.update({'_fd_50F6_3958': 0x3958, '_db_handles': 0x3B50})
+        addresses.update({'_g_5A97': 0x5A97})
         addresses.update({name: row[0] for name, row in V15_STORAGE_ANCHORS.items()})
         for name, size in spec[2]:
             anchor = symbols['data'][name[1:]]
@@ -598,6 +599,9 @@ def review_provider_source(text, provider, symbols=None):
                                    if (s['seg'], s['off']) == (anchor['seg'], anchor['off']))
                 if same_base != sorted(V15_STORAGE_ANCHORS[name][1]):
                     raise ValueError('functional storage exact-base views changed')
+            if name == '_g_5A97' and sorted(n for n, s in symbols['data'].items()
+                    if (s['seg'], s['off']) == (anchor['seg'], anchor['off'])) != ['g_5A97']:
+                raise ValueError('display selector exact-base views changed')
             if ((anchor['seg'], anchor['off']) != (segment, addresses[name])
                     or interiors != expected_interiors):
                 raise ValueError('functional storage extent conflicts with reviewed registry')
@@ -714,6 +718,54 @@ def require_v15_storage_contracts(report, profile, tool):
                            and not r.get('timed_out', False) for r in cases)
                 or any(identities.get(runtime_component_path(path)) != digest for path, digest in components)):
             raise ValueError(f'{module} lacks the selected linker/MSC startup contract')
+
+
+def display_selector_cases():
+    """The closed producer matrix: two entry bytes, eight modes and two exits."""
+    modes = [(-1, -1, 255), (0, 0, 0), (3, 3, 3), (5, 5, 5),
+             (2, 2, 2), (8, 8, 8), (4, 4, 4), (7, 7, 7)]
+    rows = {}
+    for seed, before in enumerate(([0, 0, 0], [-1, -1, 255])):
+        for index, after in enumerate(modes, 1):
+            rows[f'C{seed * 8 + index:02d}'] = {
+                'expected_before': before, 'expected_after': list(after),
+                'expected_status': 0, 'expected_message': None}
+        for index, message in enumerate(("Bad 'Display Mode' in configuration file", 'Fixture config missing'), 17):
+            rows[f'C{seed * 2 + index:02d}'] = {
+                'expected_before': before, 'expected_after': None,
+                'expected_status': 1, 'expected_message': message}
+    rows['C21'] = {'expected_before': [0, 0, 0], 'expected_after': [0, 0, 0],
+                   'expected_status': 0, 'expected_message': None}
+    return rows
+
+
+def require_display_selector_contract(report, profile, tool):
+    from pathlib import Path
+    module = 'source-owned:display-mode-selector'
+    if not any(r['module'] == module for r in report['translation_units']):
+        return
+    contract = report.get('display_mode_selector_contract', {})
+    required = display_selector_cases()
+    cases = [r for r in contract.get('cases', []) if r['linker'] == profile]
+    components = [(str(Path(tool['directory']) / name), digest) for name, digest in tool['files'].items()]
+    components += [(r['path'], r['sha256']) for r in report['runtime_components']]
+    identities = {runtime_component_path(p['path']): p['sha256'] for p in contract.get('inputs', [])}
+    closed = {f'{p}:{name}': row for p in ('rtlink400', 'rtlink610') for name, row in required.items()}
+    if (contract.get('root_reviewed') is not True or contract.get('all_required_checks_pass') is not True
+            or contract.get('communals') != provider_communals(module)
+            or contract.get('required_cases') != closed
+            or len(cases) != 21 or {r['case'] for r in cases} != set(required)
+            or any(identities.get(runtime_component_path(path)) != digest for path, digest in components)):
+        raise ValueError('display selector lacks closed producer/runtime evidence')
+    for row in cases:
+        expected = required[row['case']]
+        if (row.get('passed') is not True or row.get('timed_out', False)
+                or any(row.get(k) != v for k, v in expected.items())
+                or row.get('actual_before') != expected['expected_before']
+                or row.get('actual_after') != expected['expected_after']
+                or row.get('actual_status') != expected['expected_status']
+                or (expected['expected_message'] and expected['expected_message'] not in row.get('actual_before_and_after_log', ''))):
+            raise ValueError('display selector lacks closed producer/runtime evidence')
 
 
 def require_provider_contracts(report, profile, tool, specifications):
@@ -1126,6 +1178,7 @@ PROVIDER_SPECS['source-owned:ant-counters-timer'] = ('ANTCTR', None, (('_BAntsEa
 PROVIDER_SPECS['source-owned:language-string-list-pointers'] = ('LANGPTR', None, (('_AdviceStrs', 4), ('_fd_50F6_02BA', 4), ('_fd_50F6_0324', 4), ('_fd_50F6_0328', 4), ('_fd_50F6_0368', 4)), 'typedef char far * far *StrList; StrList far AdviceStrs; StrList far fd_50F6_02BA; StrList far fd_50F6_0324; StrList far fd_50F6_0328; StrList far fd_50F6_0368;')
 PROVIDER_SPECS['source-owned:dead-ant-coordinate-rings'] = ('DEADXY', None, (('_fd_50F6_037C', 100), ('_fd_50F6_0404', 100)), 'unsigned char far fd_50F6_037C[100]; unsigned char far fd_50F6_0404[100];')
 PROVIDER_SPECS['source-owned:ant-player-state'] = ('ANTSTATE', None, (('_FuzLocX', 2), ('_FuzLocY', 2), ('_MeHealth', 2), ('_ModeAuto', 2), ('_StrategicModeB', 2), ('_TilesDugR', 2)), 'int far FuzLocX; int far FuzLocY; int far MeHealth; int far ModeAuto; int far StrategicModeB; int far TilesDugR;')
+PROVIDER_SPECS['source-owned:display-mode-selector'] = ('MODEOWN', None, (('_g_5A97', 1),), 'char near g_5A97;')
 
 FAR_PROVIDER_MODULES.update({'source-owned:ant-counters-timer',
  'source-owned:ant-list-counts',

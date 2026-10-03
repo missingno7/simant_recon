@@ -199,7 +199,8 @@ def prepare(out, report):
                      'ant-counters-timer-bindings-v1.json',
                      'language-string-list-pointers-bindings-v1.json',
                      'dead-ant-coordinate-rings-bindings-v1.json',
-                     'ant-player-state-words-bindings-v1.json'):
+                     'ant-player-state-words-bindings-v1.json',
+                     'display-mode-selector-bindings-v1.json'):
         binding_raw, binding_pin = pin(ROOT / 'work/source-only-dos' / filename)
         binding_packet = json.loads(binding_raw)
         if binding_packet['category'] not in ('REVIEWED_SOURCE_LINK_BINDING', 'REVIEWED_SOURCE_STORAGE_BINDING'):
@@ -639,6 +640,18 @@ def accept_binding_checks(report):
                 {'id': 'dgroup_2100', 'offset': 8, 'size': 16, 'module': 'source-owned:g2108-color-translation'},
                 {'id': 'dgroup_68ac', 'offset': 0, 'size': 10, 'module': 'source-owned:graphics-formulas'}]
             report['unresolved_data'] = [s for s in report['unresolved_data'] if s['id'] not in ('dgroup_2100', 'dgroup_68ac')]
+        if (any(r['module'] == 'source-owned:display-mode-selector' for r in providers)
+                and not report.get('resolved_source_state')):
+            shared = next(s for s in report['unresolved_data'] if s['id'] == 'dgroup_5a96')
+            if shared['size'] != 26:
+                raise ValueError('display selector shared-state debt inventory changed')
+            shared['size'] = 25
+            shared['residual_ranges'] = [{'offset': 0, 'size': 1}, {'offset': 2, 'size': 24}]
+            report['resolved_source_state'] = [{
+                'id': 'dgroup_5a96', 'offset': 1, 'size': 1,
+                'module': 'source-owned:display-mode-selector',
+                'proof': 'Reviewed source first-write dominance plus real config-producer/CRT tests; original initializer unobserved.',
+                'scope_limit': 'Other shared UI bytes, Rect sentinel and computed-copy layout remain unresolved.'}]
 
 
 def unresolved_symbols(out, report, symbols, manifest):
@@ -759,6 +772,7 @@ def link_units(out, report, profile):
     dos_source_bindings.require_near_storage_contracts(report, profile, tool)
     dos_source_bindings.require_additional_storage_contracts(report, profile, tool)
     dos_source_bindings.require_v15_storage_contracts(report, profile, tool)
+    dos_source_bindings.require_display_selector_contract(report, profile, tool)
     dos_source_bindings.require_queue_startup_contract(report, profile, tool)
     dos_source_bindings.require_assembly_frame_contract(report, profile, tool)
     dos_source_bindings.require_dgroup_rect_frame_contract(report, profile, tool)

@@ -17,6 +17,54 @@ import source_only_dos as dos
 
 
 class SourceOnlyDosTests(unittest.TestCase):
+    def test_display_selector_owner_requires_closed_producer_and_partial_debt_proof(self):
+        worker = ROOT / 'build/workers/source_only_dos_tests'
+        worker.mkdir(parents=True, exist_ok=True)
+        with tempfile.TemporaryDirectory(dir=worker) as directory:
+            report = {'inputs': [], 'generated_files': [], 'translation_units': [], 'semantic_substitutions': []}
+            _, symbols = dos.prepare(Path(directory), report)
+            row = next(r for r in report['translation_units'] if r['module'] == 'source-owned:display-mode-selector')
+            provider = row['storage_provider']
+            source = (ROOT / row['source']['path']).read_text(encoding='ascii')
+            def compile(text):
+                result = compiler.compile_c(text, row['profile'], row['flags'], basename=row['basename'])
+                self.assertTrue(result.ok, result.log)
+                return OmfReader(communals=True).read(result.obj)
+            self.assertEqual(bindings.verify_provider(compile(source), provider)['status'], 'PASS')
+            for text in ('int near g_5A97;', 'unsigned char near g_5A97;', 'char far g_5A97;', 'char near g_5A97 = -1;'):
+                with self.assertRaises(ValueError):
+                    bindings.review_provider_source(text, provider, symbols)
+            with self.assertRaises(ValueError):
+                bindings.verify_provider(compile(source + '\nchar near extra_owner;\n'), provider)
+            report['runtime_components'] = []
+            for profile in ('rtlink400', 'rtlink610'):
+                bindings.require_display_selector_contract(report, profile, compiler.toolchain()['linkers'][profile])
+            for change in ('missing', 'duplicate', 'question_unsigned', 'status', 'message', 'dictionary', 'tool'):
+                wrong = json.loads(json.dumps(report))
+                c = wrong['display_mode_selector_contract']
+                if change == 'missing': c['cases'].pop(0)
+                elif change == 'duplicate': c['cases'].append(dict(c['cases'][0]))
+                elif change == 'question_unsigned': c['cases'][0]['actual_after'] = [255, 255, 255]
+                elif change == 'status': c['cases'][16]['actual_status'] = 0
+                elif change == 'message': c['cases'][16]['actual_before_and_after_log'] = 'BEFORE=0/0/0'
+                elif change == 'dictionary': c['required_cases']['rtlink400:C99'] = {}
+                else:
+                    for identity in c['inputs']: identity['sha256'] = '0' * 64
+                with self.assertRaisesRegex(ValueError, 'closed producer/runtime'):
+                    bindings.require_display_selector_contract(wrong, 'rtlink400', compiler.toolchain()['linkers']['rtlink400'])
+            # Admission removes precisely the overwritten selector byte. It
+            # cannot turn ownership into initialization of the neighboring Rect.
+            report['translation_units'] = [row]
+            row['provider_verification'] = {'status': 'PASS'}
+            report['layout_dependencies'] = [{'id': 'graphics-computed-copy-layout', 'status': 'UNRESOLVED'}]
+            report['unresolved_data'] = [{'id': 'dgroup_5a96', 'size': 26}]
+            # accept_binding_checks also requires an actual bound TU.
+            report['translation_units'].append({'source_binding': {'module': 'root:15F8'}, 'binding_verification': {'status': 'PASS'}})
+            dos.accept_binding_checks(report)
+            self.assertEqual(report['unresolved_data'][0]['size'], 25)
+            self.assertEqual(report['resolved_source_state'][0]['offset'], 1)
+            self.assertEqual(report['layout_dependencies'][0]['status'], 'UNRESOLVED')
+
     def test_v15_far_owners_reject_type_extent_and_registry_view_guesses(self):
         worker = ROOT / 'build/workers/source_only_dos_tests'
         worker.mkdir(parents=True, exist_ok=True)
@@ -123,7 +171,7 @@ class SourceOnlyDosTests(unittest.TestCase):
                 if row.get('storage_provider'):
                     row['provider_verification'] = {'status': 'PASS'}
             dos.accept_binding_checks(report)
-            self.assertEqual(sum(r['size'] for r in report['unresolved_data']), 79)
+            self.assertEqual(sum(r['size'] for r in report['unresolved_data']), 78)
             self.assertEqual(sum(r['size'] for r in report['historical_data_debt']), 113)
             self.assertEqual(sum(r['size'] for r in report['resolved_initialized_data']), 34)
             self.assertEqual(next(r['status'] for r in report['layout_dependencies']

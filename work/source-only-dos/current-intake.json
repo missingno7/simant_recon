@@ -1,6 +1,6 @@
 {
   "schema": "simant-source-only-dos-compact-intake-v1",
-  "source_only_base_checkpoint": "b1cfc35",
+  "source_only_base_checkpoint": "bfe8fb7",
   "canonical_manifest": {
     "path": "layout/manifest.json",
     "sha256": "025a0a9255d910cae4b122ab5a3f3fb40888bb456d7fe42158db7c9e622fcf50",
@@ -8,18 +8,18 @@
   },
   "full_local_report": {
     "path": "build/source-only-dos/build-report.json",
-    "sha256": "c4ab8cd54eee54779a416604bdf55f832703b105fe4633f710cda6f515f59f94",
-    "size": 4756489
+    "sha256": "818cb62df2594695836217c4c8c822f688a924055076417f22b2fc71425530b6",
+    "size": 4890887
   },
   "reproduction": "python tools/source_only_dos.py --compile --link --reuse --jobs 4",
   "status": "INCOMPLETE",
   "errors": [
     "data dispositions still need source-built semantic resolution",
-    "316 unresolved source symbols",
+    "315 unresolved source symbols",
     "source address/layout contracts remain unresolved",
     "independent link refused: incomplete source/data preflight"
   ],
-  "compiled_translation_units": 150,
+  "compiled_translation_units": 151,
   "function_dispositions": {
     "EXACT_C": 1244,
     "GENUINE_ASM": 367,
@@ -38,11 +38,11 @@
   "standalone_dos_executable": false,
   "runnable": "NOT_EXECUTED",
   "human_acceptance": "PENDING",
-  "unresolved_data_disposition_bytes": 79,
-  "unresolved_symbols": 316,
+  "unresolved_data_disposition_bytes": 78,
+  "unresolved_symbols": 315,
   "unresolved_symbol_categories": {
     "reviewed FAR_BSS definition and compatible consumer views": 310,
-    "source storage/reachability investigation": 6
+    "source storage/reachability investigation": 5
   },
   "symbolic_aliases": 188,
   "duplicate_publics": {},
@@ -375,6 +375,26 @@
     "sha256": "02f934cd076bece301c9c4bc59a276e83cefa266113631f5f45f492e82118bac",
     "size": 32765
   },
+  "display_mode_selector_bindings": {
+    "path": "work/source-only-dos/display-mode-selector-bindings-v1.json",
+    "sha256": "6b184935cae66168d75bd80cc2f6491a029398e049e8239d1039e2e2591b35ba",
+    "size": 3850
+  },
+  "display_mode_selector_admission": {
+    "path": "work/source-only-dos/display-mode-selector-admission-v16.md",
+    "sha256": "ef7344eed1a7a8c60be1c153f6d75d5ad94d78009d5eecf329e9a499279b6594",
+    "size": 2304
+  },
+  "resolved_source_state": [
+    {
+      "id": "dgroup_5a96",
+      "offset": 1,
+      "size": 1,
+      "module": "source-owned:display-mode-selector",
+      "proof": "Reviewed source first-write dominance plus real config-producer/CRT tests; original initializer unobserved.",
+      "scope_limit": "Other shared UI bytes, Rect sentinel and computed-copy layout remain unresolved."
+    }
+  ],
   "historical_data_debt_bytes": 113,
   "resolved_initialized_data": [
     {
@@ -2944,6 +2964,32 @@
           "length": 2,
           "count": 2,
           "element_size": 1
+        }
+      ],
+      "publics": [],
+      "fixups": []
+    },
+    {
+      "module": "source-owned:display-mode-selector",
+      "source": {
+        "path": "work\\source-only-dos\\providers\\display-mode-selector.c",
+        "sha256": "f5c1287217cc9863e38a636036a62b1c47ba72d073e557b5c6289bdd5647605f",
+        "size": 18
+      },
+      "object": {
+        "path": "build\\source-only-dos\\objects\\MODEOWN.OBJ",
+        "sha256": "61240402b6e412d187673ad616c9a0d3075cea8d047287427c058ad62230dde1",
+        "size": 204
+      },
+      "status": "PASS",
+      "data_only": true,
+      "live_initialized_bytes": 0,
+      "code_bytes": 0,
+      "communals": [
+        {
+          "name": "_g_5A97",
+          "kind": "near",
+          "length": 1
         }
       ],
       "publics": [],
@@ -7432,8 +7478,8 @@
   "tool_inputs": [
     {
       "path": "tools\\source_only_dos.py",
-      "sha256": "91486be53cbb83f80a7dbb6d0973741448a61c9dab63288c280a2664e7f8fcf5",
-      "size": 59187
+      "sha256": "d51f5739b094cb6e39b85ed164f324ca85f3ff6c4374bccf0756b629e64bbd41",
+      "size": 60251
     },
     {
       "path": "tools\\compiler.py",
@@ -7452,8 +7498,8 @@
     },
     {
       "path": "tools\\dos_source_bindings.py",
-      "sha256": "92efce5d2831ad21334dc2938c4f16ed46a24624b22311fe7b4d7d7444b80bfa",
-      "size": 80830
+      "sha256": "ea046c5607063bd8719f851b751522bb42b1c956658e3d9daf1701e1d28e8459",
+      "size": 84215
     },
     {
       "path": "tools\\farbss.py",
@@ -7463,22 +7509,22 @@
   ],
   "validation_logs": [
     {
-      "path": "build/source-only-dos-run-v15.log",
-      "sha256": "6f25e4c0d28067d3902026ca2f34669bb125a5ce7892e46cb2cbbe075e92bf9e",
-      "size": 4781
+      "path": "build/source-only-dos-run-v16.log",
+      "sha256": "45554de79f3208fa699e2d0a21495e35531afeb6a0520c1142e3234ec882cf8c",
+      "size": 4875
     },
     {
-      "path": "build/source-only-dos-tests-v15.log",
-      "sha256": "345d8e78033a5dbb1434362b0398c0894c18d62f4bf039d94ffb44771145660b",
-      "size": 29715
+      "path": "build/source-only-dos-tests-v16.log",
+      "sha256": "a36c111feffead3488175cfd9d5928c9cba0d286cdd77cbc4a591ee71e735f69",
+      "size": 25228
     },
     {
-      "path": "build/source-only-dos-validation-v15.log",
+      "path": "build/source-only-dos-validation-v16.log",
       "sha256": "786ea0446e31ee04f020b58675893cfa939f724dddae99d859a181b6602b4ad5",
       "size": 4736
     }
   ],
   "historical_validation": "PASS",
-  "source_only_tests": "39 targeted tests included in 353 repository tests PASS (2 skips)",
+  "source_only_tests": "40 targeted tests included in 354 repository tests PASS (2 skips)",
   "claim_limit": "Compile and symbolic binding proofs only; no complete link, runtime equivalence or human acceptance. Full inventories are reproducible build output."
 }

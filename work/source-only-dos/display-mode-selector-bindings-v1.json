@@ -1,0 +1,111 @@
+{
+  "schema": "simant-source-only-dos-display-mode-selector-bindings-candidate-v1",
+  "category": "REVIEWED_SOURCE_STORAGE_BINDING",
+  "status": "REVIEWED_FUNCTIONAL_OWNER",
+  "root_reviewed": true,
+  "bindings": [],
+  "providers": [
+    {
+      "module": "source-owned:display-mode-selector",
+      "basename": "MODEOWN",
+      "owner": null,
+      "profile": "msc600ax",
+      "flags": [
+        "/AL",
+        "/Os",
+        "/Gs"
+      ],
+      "source": {
+        "path": "work/source-only-dos/providers/display-mode-selector.c",
+        "sha256": "f5c1287217cc9863e38a636036a62b1c47ba72d073e557b5c6289bdd5647605f",
+        "size": 18
+      },
+      "communals": [
+        {
+          "name": "_g_5A97",
+          "kind": "near",
+          "length": 1
+        }
+      ]
+    }
+  ],
+  "runtime_contract_key": "display_mode_selector_contract",
+  "runtime_contract": {
+    "path": "work/source-only-dos/display-mode-selector-contract-v1.json",
+    "sha256": "e7b98356a838bfad60e2264d1f049888f83bc71f7918a2d925a325c9d88c93c0",
+    "size": 125397
+  },
+  "source_review": {
+    "path": "work/source-only-dos/display-mode-selector-review-v1.json",
+    "sha256": "f5b0d390c1125d8c99dc71887495c10f77ac936f674d0cfa2af6e42ec26847ed",
+    "size": 117486
+  },
+  "review_sources": [
+    {
+      "path": "layout/manifest.json",
+      "sha256": "025a0a9255d910cae4b122ab5a3f3fb40888bb456d7fe42158db7c9e622fcf50",
+      "size": 628980
+    },
+    {
+      "path": "layout/symbols.json",
+      "sha256": "0f5dd5b0a211945a97782cfccdb9bb31b0dfd07fcde5df4d4f9486b487eb0125",
+      "size": 800809
+    },
+    {
+      "path": "evidence/behavior/manifest.json",
+      "sha256": "dae79bdf74d7660e7e2eb47e8b463a9576c8d74a8e6ccd9e91af6d51f871ecea",
+      "size": 28379
+    },
+    {
+      "path": "work/source-only-dos/static-completeness/index-v1.json",
+      "sha256": "092b3a15aaaf99737020c0c00e2a4340514dda3f0e2ff45369d1fa0a316d9a3a",
+      "size": 6796
+    },
+    {
+      "path": "work/source-only-dos/near-state-debt-audit.py",
+      "sha256": "a765712d2e119abf8696f047e4d467264be632cf595131e161cdc2ae033f8637",
+      "size": 6819
+    },
+    {
+      "path": "work/source-only-dos/near-state-debt-runtime-scan.py",
+      "sha256": "0c1e80a2c591a72c09afb71d0ccf88c80bbf76ce6fbd184878d9ba9a5cc807c8",
+      "size": 9268
+    },
+    {
+      "path": "work/source-only-dos/g5a97-startup-dominance-review-v1.md",
+      "sha256": "7fc887469e6c3633caf77ddf13a9b35da0d059cef6a3fe3abb382c9a69ea8494",
+      "size": 5733
+    },
+    {
+      "path": "work/source-only-dos/providers/display-mode-selector.c",
+      "sha256": "f5c1287217cc9863e38a636036a62b1c47ba72d073e557b5c6289bdd5647605f",
+      "size": 18
+    },
+    {
+      "path": "work/source-only-dos/g5a97-config-producer-probe.py",
+      "sha256": "469b64cde876977323e2cefd27af50c9bd475f092c26e76df4ea2a339f06807a",
+      "size": 46786
+    },
+    {
+      "path": "work/source-only-dos/display-mode-selector-review-v1.json",
+      "sha256": "f5b0d390c1125d8c99dc71887495c10f77ac936f674d0cfa2af6e42ec26847ed",
+      "size": 117486
+    },
+    {
+      "path": "work/source-only-dos/display-mode-selector-review-v1.md",
+      "sha256": "7b66ac08c40946748c0936e8364c984a0e43e32481d56afe91cc64c83cbaba9c",
+      "size": 4258
+    },
+    {
+      "path": "work/source-only-dos/display-mode-selector-admission-v16.md",
+      "sha256": "ef7344eed1a7a8c60be1c153f6d75d5ad94d78009d5eecf329e9a499279b6594",
+      "size": 2304
+    }
+  ],
+  "claim_limit": "One generated-only source-functional byte owner candidate; no original initializer, pre-main contents, original TU/order, fixed placement, byte identity, or whole-game runtime claim.",
+  "root_admission": {
+    "path": "work/source-only-dos/display-mode-selector-admission-v16.md",
+    "sha256": "ef7344eed1a7a8c60be1c153f6d75d5ad94d78009d5eecf329e9a499279b6594",
+    "size": 2304
+  }
+}

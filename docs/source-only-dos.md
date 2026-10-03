@@ -113,7 +113,7 @@ are hypotheses, not definitions. Multiple names for the same storage must bind
 to one source owner. Preserve the original DOS allocator, interrupt, video and
 window implementations; do not import native substitutes to make DOS link.
 
-The current compilation passes all 127 canonical TUs plus sixteen reviewed data-only
+The current compilation passes all 127 canonical TUs plus 24 reviewed data-only
 providers. Symbol-address joins provide 121
 code aliases and thirteen exact-base data aliases without rewriting objects. Reviewed generated
 ASM bindings expose eight names in existing storage: S00's memory-size table and
@@ -157,7 +157,7 @@ The bare ASM entry with an overlay owner fails under RTLink 4.00 and passes unde
 only the MSC startup and byte/word view contracts authorize the generated history
 owners. The link gate checks the selected linker and runtime hashes against those controls.
 
-The remaining 316 imports are data: 310 FAR_BSS names and six requiring
+The remaining 315 imports are data: 310 FAR_BSS names and five requiring
 storage/reachability investigation. None remains inside an accepted data
 placement. These are link ingredients
 missing from the source-built target, distinct from the historical 113-byte debt.
@@ -251,7 +251,7 @@ and initializer contrasts. These eight allocations resolve eight more of the
 original 46 storage/reachability cases, leaving fifteen open at that checkpoint. They claim no
 original TU, communal ordering or aggregate.
 
-The 128 external SS operands in S00â€“S03 now have scoped DGROUP frames. The
+The 128 external SS operands in S00Ă˘â‚¬â€śS03 now have scoped DGROUP frames. The
 source-wide audit covers 127 canonical files, all 29 registered module snapshots
 and corrected DrawBalloons. CRT startup and interrupt CFG dominance establish
 SS=DGROUP at every audited driver entry. Signed operand tuples, whole-object
@@ -270,7 +270,7 @@ the existing `g_4220` view is at byte 80. Both shifted-linker controls exercise 
 table bytes remain unchanged; no data-debt initializer is supplied.
 
 Two 100-byte water coordinate arrays extend the existing population-owner binding.
-Initialization and simulation loops bound entries 0â€“99, and two `{1,100,&array}`
+Initialization and simulation loops bound entries 0Ă˘â‚¬â€ś99, and two `{1,100,&array}`
 SaveRec records establish their byte views. Reset/load ordering is accounted for,
 including failed partial loads. The combined whole-TU check preserves all code,
 data, debug and ordered fixups and adds only the two far commons.
@@ -411,10 +411,10 @@ retain their raw result classes; two passing width measurements and two passing
 overrun diagnostics remain non-gating. Registry/address alias joins correct the
 earlier missing-reset and missing-definition conclusions.
 
-The current lane compiles 150 complete translation units (127 canonical and
+At the v15 checkpoint the lane compiled 150 complete translation units (127 canonical and
 23 functional providers) and resolves 37 previously missing imports, including
 four exact-base aliases. Canonical source and historical debt remain unchanged.
-The independent linker still refuses the 316 remaining imports, 79 functional
+At that checkpoint the independent linker refused the 316 remaining imports, 79 functional
 data-debt bytes and open layout cases. All 29 effective semantic bodies retain
 strict BEHAVIOR_EXACT_CONFIRMED receipts. This is compile/storage progress;
 functional-source-oracle-v1, DOS execution and human acceptance remain pending.
@@ -423,3 +423,24 @@ The v14 color-map proof retains its exact historical tool hash through a stable
 research-only provenance snapshot. Its five initialized-data verification
 functions have identical ASTs in the current tool. Current builds use the live
 tool and recheck complete objects; no old runtime outcome is repinned as fresh.
+
+## v16: display-selector storage and first-write dominance
+
+The generated-only `char near g_5A97` provider owns one byte. Accepted startup
+calls ReadConfig before any source-visible selector read, and every returning
+mode branch writes the byte. The real config producer and MSC CRT pass 42
+cases across RTLink 4.00 and 6.10 from both 00 and FF entry states. The complete
+startup/first database consumer remains a static proof, not a claimed runtime
+fixture. See the [root admission](../work/source-only-dos/display-mode-selector-admission-v16.md).
+
+SOURCE_ONLY_DOS compiles 151 TUs, including 24 typed providers. Missing imports
+are 315: 310 FAR_BSS and five DGROUP cases. This closes 41 of the original 46
+DGROUP cases. Only offset 1 of dgroup_5a96 is functionally discharged; its other
+25 bytes remain unresolved. Functional data debt is 78 bytes; historical debt
+stays 113 bytes. Clip-sentinel, computed-copy, database error-path and wider
+numeric/frame gates remain open. No standalone executable or runtime acceptance
+is claimed.
+
+The boundary checks 40 source-only tests plus 314 other repository tests, with
+two skips, and historical validation. Probe reruns write scratch candidate
+packets and cannot overwrite the admitted selector binding/contract.
