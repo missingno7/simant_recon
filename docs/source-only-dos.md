@@ -97,12 +97,26 @@ window implementations; do not import native substitutes to make DOS link.
 
 The first full compilation passes all 127 TUs. Symbol-address joins provide 121
 code aliases and eight data aliases without rewriting objects. Reviewed generated
-ASM bindings now expose eight names in existing storage: S00's memory-size table and
+ASM bindings expose eight names in existing storage: S00's memory-size table and
 dispatch pointer, S02's save-rectangle flag, and the timer countdown word shared
 with root:208F, plus four sample-channel/volume-table views in the recovered audio
-module. No storage or initializer is added. The remaining
-504 imports are data: 432 FAR_BSS names, 26 names within accepted data placements,
-and 46 requiring storage/reachability investigation. These are link ingredients
+module. Three C TUs additionally expose five existing private objects. Their
+complete reviewed-body control objects and exported objects have identical code,
+data, debug segments, segment definitions and relocations; only the five public
+records differ. No storage or initializer is added.
+
+The reviewed `c-data-bindings-v1.json` joins 26 consumer names to those owners and
+other already public C objects. Thirteen views refer to array elements or Timer
+fields inside an existing object; the others start at their existing owner. Each
+binding checks source identity, public location, accepted contribution extent,
+view bounds and the reviewed consumer address. No C references or types are
+rewritten to get these aliases. Source-built near/far controls executed under
+DOSBox-X verify RTLink 4.00/6.10 `DEFINE owner + offset`, with separate wrong-near
+and wrong-far contrasts. This is a linker contract, not a game runtime proof.
+
+The remaining 478 imports are data: 432 FAR_BSS names and 46 requiring
+storage/reachability investigation. None remains inside an accepted data
+placement. These are link ingredients
 missing from the source-built target, distinct from the historical 113-byte debt.
 The report retains consumers, source declarations and possible accepted storage
 owners per missing name; an ownership candidate is not an accepted definition.
@@ -111,17 +125,34 @@ The generated drivers replace 16 literal `3DFCh` operands with references to the
 accepted `_g_3DFC` row-offset buffer in `src/root/m1B4E.asm`. Two S00 near callback
 offsets likewise refer to their existing procedures. The pinned transformations
 are in `work/source-only-dos/source-bindings-v1.json`. Canonical ASM remains intact.
-For each of eight derived TUs, compilation reassembles a canonical control and
+For each of eleven derived TUs, compilation builds a source control and
 checks unchanged segment extents, data, existing publics and relocations, and every
 byte outside the 18 reviewed address operands. Added fixups must have the correct
 target, frame, width and addend. DGROUP framing is explicit, including scoped
 `ASSUME SS:DGROUP` at indexed SS operands; an ordinary MASM `OFFSET` or group
 expression alone can still select the wrong frame. Negative source contrasts
-test wrong frames, the wrong timer word and unrelated instruction changes.
+test wrong frames, the wrong timer word, unrelated instruction changes, changed C
+initializers and invalid interior views.
+
+`farbss-source-review-v1.json` is a research worklist, not new DOS state. Direct
+reading of the reconstructed S09 SaveRec table confirms serialization extents for
+29 earlier source-view candidates; eight further candidates lack that anchor.
+Consumer bounds, pointer escapes, DOS type/COMDEF measurements and initialization
+still need review before any owner definitions enter the target. Save length
+alone does not establish an object's full storage extent.
 
 Fixed code offsets, numeric data operands and segment/group framing still need a
 broader semantic audit, which remains a link gate. Exact instruction bytes at an
 original placement do not imply correct operands after an independent link.
+
+The audit also includes initialized C addresses. In root:1FD2 the source object
+spelled `Timer g_5FF2` is used by the ASM input queue as a different set of views.
+Its word at +12 (`_g_5FFE`) is initialized to literal `0x91B0`; enqueue/dequeue load
+it into SI and index seven 16-byte event slots. No accepted source placement owns
+that DGROUP buffer. This remains an explicit gate: recover its one buffer owner
+and a symbolic near-pointer initializer, preserving the queue operations and its
+other fields. The public/interior aliases expose this problem; they do not fix it
+by adding guessed storage or keeping a historical absolute address at a new layout.
 
 The simplest initial linker candidate is the already available, pinned
 RTLink/Plus 4.00 or 6.10 with source-built objects and its own stock manager.

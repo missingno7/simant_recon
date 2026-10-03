@@ -25,7 +25,7 @@ def review_addresses(binding, module, symbols):
             offset = module['extent']['start'] - segment * 16 + public['offset']
         else:
             raise ValueError('unanchored DOS storage export')
-        anchor = symbols['data'][public['name'][1:]]
+        anchor = symbols['data'][public.get('registry_symbol', public['name'][1:])]
         if (segment, offset) != (anchor['seg'], anchor['off']):
             raise ValueError('DOS storage export conflicts with reviewed symbol address')
     for spec in binding.get('relocations', []):
@@ -45,6 +45,34 @@ def fixup_key(fixup):
     return tuple(fixup[k] for k in ('segment', 'offset', 'width', 'loc',
         'self_relative', 'target_kind', 'target', 'displacement',
         'frame_kind', 'frame', 'encoded_addend'))
+
+
+def bind_data_alias(spec, obj, row, module, symbols):
+    """Bind a reviewed consumer view to a public in its one source owner."""
+    if (module['source'] != spec['source'] or
+            module['source_sha256'] != spec['source_sha256']):
+        raise ValueError('data alias source owner changed')
+    placement = module['placements'][spec['segment']]
+    segment = (spec['segment'].replace('UNIT', row['basename'], 1)
+               if spec['segment'].startswith('UNIT') else spec['segment'])
+    public = [p for p in obj.publics if p['name'] == spec['owner']]
+    if len(public) != 1 or (public[0]['segment'], public[0]['offset']) != (segment, spec['owner_offset']):
+        raise ValueError('data alias public does not match its reviewed source location')
+    if obj.segment_length(segment) != placement['size']:
+        raise ValueError('data alias contribution extent changed')
+    if not (0 <= spec['offset'] < spec['owner_size'] and spec['view_size'] > 0
+            and spec['offset'] + spec['view_size'] <= spec['owner_size']
+            and spec['owner_offset'] + spec['owner_size'] <= placement['size']):
+        raise ValueError('data alias view extends outside its existing source object')
+    address = symbols['data'][spec['alias'][1:]]
+    historical = (placement['seg'], placement['off'] + spec['owner_offset'] + spec['offset'])
+    if historical != (address['seg'], address['off']):
+        raise ValueError('data alias view conflicts with reviewed consumer address')
+    return {'alias': spec['alias'], 'owner': spec['owner'], 'offset': spec['offset'],
+            'kind': 'data', 'reason': 'reviewed source owner/interior view',
+            'module': row['module'], 'address': list(historical),
+            'object_public': public[0], 'owner_size': spec['owner_size'],
+            'view_size': spec['view_size'], 'source_anchor': spec['source_anchor']}
 
 
 def verify_objects(original, generated, binding):

@@ -118,12 +118,26 @@ def prepare(out, report):
     symbols = json.loads(symbols_raw)
     aliases = identifier_aliases(symbols)
     report['inputs'] += [manifest_pin, registry_pin, symbols_pin]
-    binding_raw, binding_pin = pin(ROOT / 'work/source-only-dos/source-bindings-v1.json')
-    binding_packet = json.loads(binding_raw)
-    if binding_packet['category'] != 'REVIEWED_SOURCE_LINK_BINDING':
-        raise ValueError('unreviewed DOS source bindings')
-    report['inputs'].append(binding_pin)
-    bindings = {r['module']: r for r in binding_packet['bindings']}
+    bindings = {}
+    report['reviewed_data_aliases'] = []
+    for filename in ('source-bindings-v1.json', 'c-data-bindings-v1.json'):
+        binding_raw, binding_pin = pin(ROOT / 'work/source-only-dos' / filename)
+        binding_packet = json.loads(binding_raw)
+        if binding_packet['category'] != 'REVIEWED_SOURCE_LINK_BINDING':
+            raise ValueError('unreviewed DOS source bindings')
+        report['inputs'].append(binding_pin)
+        for binding in binding_packet['bindings']:
+            if binding['module'] in bindings:
+                raise ValueError('duplicate DOS binding module')
+            bindings[binding['module']] = binding
+        report['reviewed_data_aliases'] += binding_packet.get('aliases', [])
+    contract_raw, contract_pin = pin(ROOT / 'work/source-only-dos/linker-alias-contract-v1.json')
+    contract = json.loads(contract_raw)
+    if not contract['all_checks_pass'] or len(contract['cases']) != 6:
+        raise ValueError('linker interior alias contract not verified')
+    _, probe_pin = pin(ROOT / contract['probe_source']['path'], contract['probe_source']['sha256'])
+    report['inputs'] += [contract_pin, probe_pin]
+    report['linker_alias_contract'] = contract
     replacements = {}
     for name, entry in registry['entries'].items():
         if entry['status'] != 'BEHAVIOR_EXACT':
@@ -156,12 +170,6 @@ def prepare(out, report):
         report['inputs'].append(source_pin)
         text = raw.decode('latin1')
         binding = bindings.get(key)
-        if binding:
-            if (module['lang'] != 'asm' or module['source'] != binding['source']
-                    or source_pin['sha256'] != binding['source_sha256']):
-                raise ValueError('DOS binding canonical source changed: ' + key)
-            dos_source_bindings.review_addresses(binding, module, symbols)
-            text = dos_source_bindings.apply_binding(text.replace('\r\n', '\n'), binding)
         imported = replacements.get(key, {})
         if imported:
             text = rename_identifiers(text, aliases)
@@ -190,6 +198,25 @@ def prepare(out, report):
             text = re.sub(r'/\*\s*SCAFFOLD BEGIN.*?\*/|/\*\s*SCAFFOLD END\s*\*/', '', text, flags=re.S)
         suffix = '.asm' if module.get('lang') == 'asm' else '.c'
         basename = f'U{number:03d}'
+        control_pin = None
+        if binding:
+            if (module['source'] != binding['source']
+                    or source_pin['sha256'] != binding['source_sha256']):
+                raise ValueError('DOS binding canonical source changed: ' + key)
+            dos_source_bindings.review_addresses(binding, module, symbols)
+            # C controls include exactly the same reviewed body substitutions.
+            # A visibility change is compared after semantic closure, not against
+            # the historical partial TU's unclaimed candidate bodies.
+            if suffix == '.c':
+                control_dir = out / 'binding-controls'
+                control_dir.mkdir(exist_ok=True)
+                control = control_dir / (basename + suffix)
+                control.write_bytes(text.encode('latin1'))
+                control_pin = pin(control)[1]
+                report['generated_files'].append(control_pin)
+            else:
+                control_pin = source_pin
+            text = dos_source_bindings.apply_binding(text.replace('\r\n', '\n'), binding)
         path = source_dir / (basename + suffix)
         path.write_bytes(text.encode('latin1'))
         generated_pin = pin(path)[1]
@@ -198,7 +225,8 @@ def prepare(out, report):
             'module': key, 'unit': module['unit'], 'basename': basename,
             'source': source_pin, 'generated_source': generated_pin,
             'lang': module.get('lang', 'c'), 'profile': module['profile'], 'flags': module['flags'],
-            'reviewed_bodies': sorted(imported), 'source_binding': binding, 'status': 'PREPARED'})
+            'reviewed_bodies': sorted(imported), 'source_binding': binding,
+            'binding_control_source': control_pin, 'status': 'PREPARED'})
     report['function_dispositions'] = {
         'EXACT_C': sum(c.get('kind') == 'C' for m in manifest['modules'].values() for c in m.get('claims', [])),
         'GENUINE_ASM': sum(c.get('kind') == 'ASM' for m in manifest['modules'].values() for c in m.get('claims', [])),
@@ -262,10 +290,12 @@ def compile_units(out, report, jobs, reuse):
             row['status'] = 'COMPILED'
         row['object'] = pin(path)[1]
         if row.get('source_binding'):
-            # This reference object is built from canonical source, never linked.
+            # This reference object is source-built before visibility/address edits, never linked.
             # Reassemble it so a cached derived object cannot bypass the proof.
-            canonical = pin(ROOT / row['source']['path'], row['source']['sha256'])[0].decode('latin1')
-            reference = compiler.assemble(canonical, row['profile'], row['flags'], basename=row['basename'])
+            control_pin = row['binding_control_source']
+            canonical = pin(ROOT / control_pin['path'], control_pin['sha256'])[0].decode('latin1')
+            build_control = compiler.assemble if row['lang'] == 'asm' else compiler.compile_c
+            reference = build_control(canonical, row['profile'], row['flags'], basename=row['basename'])
             if not reference.ok:
                 raise ValueError('canonical binding control failed: ' + row['module'])
             reference_dir = out / 'binding-controls'
@@ -309,7 +339,18 @@ def audit_layout(report):
         'scope_limit': 'This is one confirmed family, not a completed scan of every numeric operand.'}, {
         'id': 'remaining-assembly-address-audit', 'status': 'UNRESOLVED',
         'reason': 'The broader audit of fixed numeric operands and segment/group frames is pending. '
-                  'Reviewed bindings close only the listed buffer and S00 callback operands.'}]
+                  'Reviewed bindings close only the listed buffer and S00 callback operands.'}, {
+        'id': 'input-event-queue-fixed-pointer', 'status': 'UNRESOLVED',
+        'source': 'src/root/m1FD2.c', 'initializer': '(int)0x91b0',
+        'storage_view': 'g_5FF2 + 12 (_g_5FFE)',
+        'consumer_source': 'src/root/m1B73.asm',
+        'consumer_functions': ['_f_1B73_032E', '_f_1B73_036E'],
+        'capacity_from_source': 7, 'event_stride_from_source': 16,
+        'reason': 'The C initializer is an input-event queue address, not an ordinary timer '
+                  'count. ASM enqueue/dequeue load it into SI, index by 16*slot, and read/write '
+                  '16 bytes with a seven-slot wrap bound. No accepted source placement owns '
+                  'DGROUP:91B0. Recover one queue buffer and a symbolic near-pointer initializer; '
+                  'the unchanged historical literal is unsafe after an independent link.'}]
 
 
 def accept_binding_checks(report):
@@ -322,11 +363,12 @@ def accept_binding_checks(report):
 
 def unresolved_symbols(out, report, symbols, manifest):
     reader = OmfReader(communals=True)
-    owners, uses, kinds = {}, {}, {}
+    owners, uses, kinds, objects = {}, {}, {}, {}
     for row in report['translation_units']:
         if 'object' not in row:
             continue
         obj = reader.read((ROOT / row['object']['path']).read_bytes(), row['module'])
+        objects[row['module']] = obj
         for p in obj.publics:
             owners.setdefault(p['name'], []).append(row['module'])
             kinds[p['name']] = 'code' if p['segment'].endswith('_TEXT') else 'data'
@@ -361,6 +403,14 @@ def unresolved_symbols(out, report, symbols, manifest):
                 definitions.append({'alias': name, 'owner': candidates[0],
                                     'kind': table, 'reason': 'same reviewed symbol registry address',
                                     'address': list(address[1:])})
+    for spec in report.get('reviewed_data_aliases', []):
+        if spec['alias'] in owners or spec['alias'] in {d['alias'] for d in definitions}:
+            raise ValueError('data alias already has a different definition')
+        if owners.get(spec['owner']) != [spec['module']]:
+            raise ValueError('data alias source owner is missing or duplicated')
+        row = next(r for r in report['translation_units'] if r['module'] == spec['module'])
+        definitions.append(dos_source_bindings.bind_data_alias(
+            spec, objects[spec['module']], row, manifest['modules'][spec['module']], symbols))
     report['symbolic_aliases'] = definitions
     linker_publics.update(d['alias'] for d in definitions)
     missing = sorted(set(uses) - set(owners) - libraries - linker_publics)
@@ -414,6 +464,14 @@ def link_units(out, report, profile):
     link_dir.mkdir()
     tc = compiler.toolchain()
     tool = tc['linkers'][profile]
+    contract = report.get('linker_alias_contract', {})
+    if any(row.get('offset') for row in report.get('symbolic_aliases', [])):
+        cases = [r for r in contract.get('cases', []) if r['linker'] == profile]
+        contract_inputs = {p['path'].replace('\\', '/'): p['sha256'] for p in contract.get('inputs', [])}
+        if (len(cases) != 3 or not all(r['passed'] for r in cases)
+                or any(contract_inputs.get(str(Path(tool['directory']) / name).replace('\\', '/')) != digest
+                       for name, digest in tool['files'].items())):
+            raise ValueError('selected linker lacks a matching reviewed interior alias contract')
     runner = tc['runners']['dosbox-x']
     report['linker_components'].append({'profile': profile,
         'role': 'third-party linker and stock overlay manager; not extracted from SimAnt', 'definition': tool})
@@ -448,7 +506,8 @@ def link_units(out, report, profile):
         lines.append('ENDAREA')
     quote = lambda name: '"' + name + '"' if name.startswith('@') else name
     for row in report.get('symbolic_aliases', []):
-        lines.append(f"DEFINE {quote(row['alias'])} = {quote(row['owner'])}")
+        delta = f" + {row['offset']}" if row.get('offset') else ''
+        lines.append(f"DEFINE {quote(row['alias'])} = {quote(row['owner'])}{delta}")
     script = link_dir / 'SOURCE.LNK'
     script.write_bytes(('\r\n'.join(lines) + '\r\n').encode('ascii'))
     (link_dir / 'RTLINK.CFG').write_bytes(b'SYNTAX = FREEFORMAT\r\n')
@@ -526,7 +585,7 @@ def main():
         if report.get('duplicate_publics'):
             report['errors'].append('duplicate mutable storage/function owners')
         if any(r['status'] != 'RESOLVED' for r in report.get('layout_dependencies', [])):
-            report['errors'].append('assembly address/layout contracts remain unresolved')
+            report['errors'].append('source address/layout contracts remain unresolved')
         if any(report['original_exe_bytes_used'].values()):
             report['errors'].append('zero-original-byte invariant violated')
         if args.link:

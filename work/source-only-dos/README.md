@@ -25,8 +25,16 @@ S00 callbacks). Canonical source remains untouched. Each derived object is check
 against a freshly assembled canonical control; negative source contrasts cover
 wrong group/segment frames, a wrong exported timer word and unrelated instructions.
 
-The current missing-data worklist includes 432 FAR_BSS names with no definitions, 26
-names lying within accepted data placements, and 46 needing storage/reachability
+Three generated C TUs export five existing private objects with every compiled
+segment byte and relocation unchanged. `c-data-bindings-v1.json` grounds 26 direct
+or interior aliases in these and existing public C objects. Source identity,
+accepted placement, public offset and object/view bounds are checked before an
+alias is admitted. `linker-alias-probe.py` reproduces six near/far link-and-execute
+controls with RTLink 4.00 and 6.10 under DOSBox-X; the compact contract receipt is
+`linker-alias-contract-v1.json`. These test-owned fixtures are not game images.
+
+The current missing-data worklist includes 432 FAR_BSS names with no definitions
+and 46 needing storage/reachability
 research. Each report row retains consumers, reconstructed declarations and any
 accepted placement candidate. Original declarations have not been silently
 turned into definitions. The historical 113-byte data disposition debt remains
@@ -38,6 +46,18 @@ source save table, and complete the numeric-address/segment-frame audit of deriv
 DOS ASM. Then exercise the independent linker, retaining its legitimate
 stock runtime/overlay manager with provenance. No linker invocation, game runtime
 comparison or human acceptance is claimed by this checkpoint.
+
+`farbss-source-review-v1.json` records an independent read of the reconstructed
+save table: 29 research candidates have matching serialization extents, and eight
+others lack that anchor. This is a pending ownership worklist; no definitions or
+native state/providers from those plans have entered the DOS target.
+
+An additional confirmed layout gate is the input-event queue. The word exposed as
+`_g_5FFE` inside the C object spelled `Timer g_5FF2` is an ASM queue-buffer pointer
+initialized to `0x91B0`, not a timer count. The original logic indexes seven
+16-byte slots; no accepted source placement defines that buffer. Recover its
+single near owner and symbolic initializer before linking. Its exposed aliases
+currently preserve the existing bytes and leave this contract visibly unresolved.
 
 `checkpoint.py` verifies preservation hashes and writes the compact current receipt.
 The initial evidence files stay frozen; full current inventories, objects and

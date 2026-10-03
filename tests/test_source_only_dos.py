@@ -82,6 +82,18 @@ class SourceOnlyDosTests(unittest.TestCase):
         dos.link_units(ROOT / 'build/workers/source_only_dos_tests/never-link', report, 'rtlink400')
         self.assertIn('independent link refused: incomplete source/data preflight', report['errors'])
 
+    def test_link_refuses_unknown_queue_layout_with_other_gates_clear(self):
+        worker = ROOT / 'build/workers/source_only_dos_tests'
+        worker.mkdir(parents=True, exist_ok=True)
+        with tempfile.TemporaryDirectory(dir=worker) as directory:
+            report = {'errors': [], 'unresolved_functions': [], 'unresolved_data': [],
+                      'unresolved_symbols': [], 'duplicate_publics': {},
+                      'translation_units': [], 'layout_dependencies': [
+                          {'id': 'input-event-queue-fixed-pointer', 'status': 'UNRESOLVED'}]}
+            dos.link_units(Path(directory), report, 'rtlink400')
+            self.assertIn('independent link refused: incomplete source/data preflight', report['errors'])
+            self.assertFalse((Path(directory) / 'link').exists())
+
     def test_binding_proof_rejects_wrong_frames_and_unrelated_instruction_changes(self):
         packet = json.loads((ROOT / 'work/source-only-dos/source-bindings-v1.json').read_text())
         binding = next(r for r in packet['bindings'] if r['module'] == 'S01:3126')
@@ -118,6 +130,50 @@ class SourceOnlyDosTests(unittest.TestCase):
         self.assertEqual(bindings.verify_objects(control, assemble(generated), binding)['status'], 'PASS')
         with self.assertRaisesRegex(ValueError, 'exported wrong storage'):
             bindings.verify_objects(control, assemble(contrast), binding)
+
+    def test_c_visibility_exports_preserve_full_reviewed_objects(self):
+        worker = ROOT / 'build/workers/source_only_dos_tests'
+        worker.mkdir(parents=True, exist_ok=True)
+        with tempfile.TemporaryDirectory(dir=worker) as directory:
+            report = {'inputs': [], 'generated_files': [], 'translation_units': [],
+                      'semantic_substitutions': []}
+            dos.prepare(Path(directory), report)
+            for row in report['translation_units']:
+                if row['lang'] != 'c' or not row.get('source_binding'):
+                    continue
+                before = (ROOT / row['binding_control_source']['path']).read_text(encoding='latin1')
+                after = (ROOT / row['generated_source']['path']).read_text(encoding='latin1')
+                def compile(text):
+                    result = compiler.compile_c(text, row['profile'], row['flags'], basename=row['basename'])
+                    self.assertTrue(result.ok, result.log)
+                    return OmfReader().read(result.obj)
+                control = compile(before)
+                self.assertEqual(bindings.verify_objects(control, compile(after),
+                    row['source_binding'])['status'], 'PASS')
+                if row['module'] == 'S12:384C':
+                    contrast = after.replace('int g_2996 = 0;', 'int g_2996 = 1;')
+                    self.assertTrue(contrast != after)
+                    with self.assertRaisesRegex(ValueError, 'outside reviewed address operands'):
+                        bindings.verify_objects(control, compile(contrast), row['source_binding'])
+
+    def test_data_aliases_require_existing_bounded_source_storage(self):
+        source = ("_DATA segment word public 'DATA'\npublic _owner\n"
+                  "db 30 dup (0)\n_owner db 8 dup (1)\n_DATA ends\nend\n")
+        result = compiler.assemble(source, 'masm510', ['/Mx'], basename='ALIAS')
+        self.assertTrue(result.ok, result.log)
+        obj = OmfReader().read(result.obj)
+        spec = {'alias': '_view', 'owner': '_owner', 'source': 'fixture.asm',
+                'source_sha256': 'a'*64, 'segment': '_DATA', 'owner_offset': 30,
+                'owner_size': 8, 'offset': 2, 'view_size': 2, 'source_anchor': 'fixture'}
+        module = {'source': 'fixture.asm', 'source_sha256': 'a'*64,
+                  'placements': {'_DATA': {'seg': 0x55B3, 'off': 100, 'size': 38}}}
+        row = {'basename': 'ALIAS', 'module': 'fixture'}
+        symbols = {'data': {'view': {'seg': 0x55B3, 'off': 132}}}
+        self.assertEqual(bindings.bind_data_alias(spec, obj, row, module, symbols)['offset'], 2)
+        for field, wrong in (('offset', 4), ('view_size', 7), ('owner', '_missing'),
+                             ('source_sha256', 'b'*64), ('owner_offset', 32)):
+            with self.assertRaises(ValueError):
+                bindings.bind_data_alias({**spec, field: wrong}, obj, row, module, symbols)
 
 
 if __name__ == '__main__':

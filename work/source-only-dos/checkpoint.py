@@ -64,14 +64,14 @@ def main():
     bound = [r for r in report['translation_units'] if r.get('source_binding')]
     if any(r.get('binding_verification', {}).get('status') != 'PASS' for r in bound):
         raise ValueError('source binding proof did not pass')
-    logs = [pin(ROOT / p) for p in ('build/source-only-dos-run-v2.log',
-        'build/source-only-dos-tests-v2.log', 'build/source-only-dos-validation-v2.log')]
+    logs = [pin(ROOT / p) for p in ('build/source-only-dos-run-v3.log',
+        'build/source-only-dos-tests-v3.log', 'build/source-only-dos-validation-v3.log')]
     if not (ROOT / logs[1]['path']).read_text().strip().endswith('OK'):
         raise ValueError('source-only tests did not finish successfully')
     if not (ROOT / logs[2]['path']).read_text().strip().endswith('VALIDATION PASS'):
         raise ValueError('historical validation did not finish successfully')
     receipt = {'schema': 'simant-source-only-dos-compact-intake-v1',
-        'canonical_source_checkpoint': '1214fde',
+        'canonical_source_checkpoint': '556a80d',
         'full_local_report': pin(report_path),
         'reproduction': 'python tools/source_only_dos.py --compile --link --reuse --jobs 4',
         'status': report['status'], 'errors': report['errors'],
@@ -89,11 +89,16 @@ def main():
         'duplicate_publics': report['duplicate_publics'],
         'layout_dependencies': report['layout_dependencies'],
         'source_bindings': pin(OUT / 'source-bindings-v1.json'),
+        'c_data_bindings': pin(OUT / 'c-data-bindings-v1.json'),
+        'linker_alias_contract': pin(OUT / 'linker-alias-contract-v1.json'),
+        'reviewed_data_aliases': [r for r in report['symbolic_aliases']
+                                 if r['reason'] == 'reviewed source owner/interior view'],
         'binding_proofs': [{'module': r['module'], 'source': r['source'],
-            'object': r['object'], **r['binding_verification']} for r in bound],
+            'control_source': r['binding_control_source'], 'object': r['object'],
+            **r['binding_verification']} for r in bound],
         'tool_inputs': [p for p in report['inputs'] if p['path'].startswith('tools')],
         'validation_logs': logs,
-        'historical_validation': 'PASS', 'source_only_tests': '8 tests PASS',
+        'historical_validation': 'PASS', 'source_only_tests': '11 tests PASS',
         'claim_limit': 'Compile and symbolic binding proofs only; no complete link, runtime '
                        'equivalence or human acceptance. Full inventories are reproducible build output.'}
     (OUT / 'current-intake.json').write_text(json.dumps(receipt, indent=2) + '\n')

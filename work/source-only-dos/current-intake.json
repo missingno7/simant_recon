@@ -1,17 +1,17 @@
 {
   "schema": "simant-source-only-dos-compact-intake-v1",
-  "canonical_source_checkpoint": "1214fde",
+  "canonical_source_checkpoint": "556a80d",
   "full_local_report": {
     "path": "build/source-only-dos/build-report.json",
-    "sha256": "e2c8463c0289e821963691a7fdbd881830c0a2cf1a59bab0327751d2db574809",
-    "size": 1178633
+    "sha256": "37f3a4cade5b91fcb724f8c0e1543b7c8c6cb4a84000612dec6b0caf87f759e3",
+    "size": 1195339
   },
   "reproduction": "python tools/source_only_dos.py --compile --link --reuse --jobs 4",
   "status": "INCOMPLETE",
   "errors": [
     "data dispositions still need source-built semantic resolution",
-    "504 unresolved source symbols",
-    "assembly address/layout contracts remain unresolved",
+    "478 unresolved source symbols",
+    "source address/layout contracts remain unresolved",
     "independent link refused: incomplete source/data preflight"
   ],
   "compiled_translation_units": 127,
@@ -32,13 +32,12 @@
   "runnable": "NOT_EXECUTED",
   "human_acceptance": "PENDING",
   "unresolved_data_disposition_bytes": 113,
-  "unresolved_symbols": 504,
+  "unresolved_symbols": 478,
   "unresolved_symbol_categories": {
     "reviewed FAR_BSS definition and compatible consumer views": 432,
-    "source owner/public or interior symbolic alias": 26,
     "source storage/reachability investigation": 46
   },
-  "symbolic_aliases": 129,
+  "symbolic_aliases": 155,
   "duplicate_publics": {},
   "layout_dependencies": [
     {
@@ -55,6 +54,21 @@
       "id": "remaining-assembly-address-audit",
       "status": "UNRESOLVED",
       "reason": "The broader audit of fixed numeric operands and segment/group frames is pending. Reviewed bindings close only the listed buffer and S00 callback operands."
+    },
+    {
+      "id": "input-event-queue-fixed-pointer",
+      "status": "UNRESOLVED",
+      "source": "src/root/m1FD2.c",
+      "initializer": "(int)0x91b0",
+      "storage_view": "g_5FF2 + 12 (_g_5FFE)",
+      "consumer_source": "src/root/m1B73.asm",
+      "consumer_functions": [
+        "_f_1B73_032E",
+        "_f_1B73_036E"
+      ],
+      "capacity_from_source": 7,
+      "event_stride_from_source": 16,
+      "reason": "The C initializer is an input-event queue address, not an ordinary timer count. ASM enqueue/dequeue load it into SI, index by 16*slot, and read/write 16 bytes with a seven-slot wrap bound. No accepted source placement owns DGROUP:91B0. Recover one queue buffer and a symbolic near-pointer initializer; the unchanged historical literal is unsafe after an independent link."
     }
   ],
   "source_bindings": {
@@ -62,10 +76,547 @@
     "sha256": "c7fed5e7e2caac6cad41e63de2eb0ba3cfcbba112fa2877d9799c562b8f52bc4",
     "size": 11388
   },
+  "c_data_bindings": {
+    "path": "work/source-only-dos/c-data-bindings-v1.json",
+    "sha256": "dbc792e0fba712cd1fb251149078cb3aa902c8860d6cc5e738aa1b8ddecc6f89",
+    "size": 17508
+  },
+  "linker_alias_contract": {
+    "path": "work/source-only-dos/linker-alias-contract-v1.json",
+    "sha256": "d1fb7df567445937ccd4da0e793d3e8dca304b5a74244d3e22fda2f81c184791",
+    "size": 5278
+  },
+  "reviewed_data_aliases": [
+    {
+      "alias": "_fd_3D57_07CE",
+      "owner": "_fd_3D57_07CC",
+      "offset": 2,
+      "kind": "data",
+      "reason": "reviewed source owner/interior view",
+      "module": "data:3D57",
+      "address": [
+        15703,
+        1998
+      ],
+      "object_public": {
+        "name": "_fd_3D57_07CC",
+        "segment": "U0397_DATA",
+        "offset": 1996
+      },
+      "owner_size": 14,
+      "view_size": 12,
+      "source_anchor": "Existing 14-byte speed selection/table object; main indexes its six-word tail at +2."
+    },
+    {
+      "alias": "_fd_3D57_0852",
+      "owner": "_fd_3D57_082A",
+      "offset": 40,
+      "kind": "data",
+      "reason": "reviewed source owner/interior view",
+      "module": "data:3D57",
+      "address": [
+        15703,
+        2130
+      ],
+      "object_public": {
+        "name": "_fd_3D57_082A",
+        "segment": "U0397_DATA",
+        "offset": 2090
+      },
+      "owner_size": 80,
+      "view_size": 40,
+      "source_anchor": "Existing 20-entry far-pointer history table; graph consumer selects the second ten-entry half."
+    },
+    {
+      "alias": "_fd_3D57_0C1C",
+      "owner": "_fd_3D57_0C1A",
+      "offset": 2,
+      "kind": "data",
+      "reason": "reviewed source owner/interior view",
+      "module": "data:3D57",
+      "address": [
+        15703,
+        3100
+      ],
+      "object_public": {
+        "name": "_fd_3D57_0C1A",
+        "segment": "U0397_DATA",
+        "offset": 3098
+      },
+      "owner_size": 4,
+      "view_size": 2,
+      "source_anchor": "Existing four-byte object; MakeRedInitiator consumers access its second word."
+    },
+    {
+      "alias": "_fd_55B3_19BE",
+      "owner": "_g_19BE",
+      "offset": 0,
+      "kind": "data",
+      "reason": "reviewed source owner/interior view",
+      "module": "root:0250",
+      "address": [
+        21939,
+        6590
+      ],
+      "object_public": {
+        "name": "_g_19BE",
+        "segment": "_DATA",
+        "offset": 0
+      },
+      "owner_size": 2,
+      "view_size": 2,
+      "source_anchor": "Existing initialized canonical object g_19BE; far consumer refers to the same DGROUP address."
+    },
+    {
+      "alias": "_fd_55B3_19C0",
+      "owner": "_g_19C0",
+      "offset": 0,
+      "kind": "data",
+      "reason": "reviewed source owner/interior view",
+      "module": "root:0250",
+      "address": [
+        21939,
+        6592
+      ],
+      "object_public": {
+        "name": "_g_19C0",
+        "segment": "_DATA",
+        "offset": 2
+      },
+      "owner_size": 2,
+      "view_size": 2,
+      "source_anchor": "Existing initialized canonical object g_19C0; far consumer refers to the same DGROUP address."
+    },
+    {
+      "alias": "_fd_55B3_19C6",
+      "owner": "_g_19C6",
+      "offset": 0,
+      "kind": "data",
+      "reason": "reviewed source owner/interior view",
+      "module": "root:0250",
+      "address": [
+        21939,
+        6598
+      ],
+      "object_public": {
+        "name": "_g_19C6",
+        "segment": "_DATA",
+        "offset": 8
+      },
+      "owner_size": 4,
+      "view_size": 4,
+      "source_anchor": "Existing initialized canonical object g_19C6; far consumer refers to the same DGROUP address."
+    },
+    {
+      "alias": "_fd_55B3_19CA",
+      "owner": "_g_19CA",
+      "offset": 0,
+      "kind": "data",
+      "reason": "reviewed source owner/interior view",
+      "module": "root:0250",
+      "address": [
+        21939,
+        6602
+      ],
+      "object_public": {
+        "name": "_g_19CA",
+        "segment": "_DATA",
+        "offset": 12
+      },
+      "owner_size": 4,
+      "view_size": 4,
+      "source_anchor": "Existing initialized canonical object g_19CA; far consumer refers to the same DGROUP address."
+    },
+    {
+      "alias": "_fd_55B3_19CE",
+      "owner": "_g_19CE",
+      "offset": 0,
+      "kind": "data",
+      "reason": "reviewed source owner/interior view",
+      "module": "root:0250",
+      "address": [
+        21939,
+        6606
+      ],
+      "object_public": {
+        "name": "_g_19CE",
+        "segment": "_DATA",
+        "offset": 16
+      },
+      "owner_size": 2,
+      "view_size": 2,
+      "source_anchor": "Existing initialized canonical object g_19CE; far consumer refers to the same DGROUP address."
+    },
+    {
+      "alias": "_fd_55B3_1CD8",
+      "owner": "_fd_55B3_1CD4",
+      "offset": 4,
+      "kind": "data",
+      "reason": "reviewed source owner/interior view",
+      "module": "root:15F8",
+      "address": [
+        21939,
+        7384
+      ],
+      "object_public": {
+        "name": "_fd_55B3_1CD4",
+        "segment": "_DATA",
+        "offset": 282
+      },
+      "owner_size": 20,
+      "view_size": 4,
+      "source_anchor": "Existing five-entry array of far message/config-name pointers. These are entries 1..4, not copied strings or separate pointer owners."
+    },
+    {
+      "alias": "_fd_55B3_1CDC",
+      "owner": "_fd_55B3_1CD4",
+      "offset": 8,
+      "kind": "data",
+      "reason": "reviewed source owner/interior view",
+      "module": "root:15F8",
+      "address": [
+        21939,
+        7388
+      ],
+      "object_public": {
+        "name": "_fd_55B3_1CD4",
+        "segment": "_DATA",
+        "offset": 282
+      },
+      "owner_size": 20,
+      "view_size": 4,
+      "source_anchor": "Existing five-entry array of far message/config-name pointers. These are entries 1..4, not copied strings or separate pointer owners."
+    },
+    {
+      "alias": "_fd_55B3_1CE0",
+      "owner": "_fd_55B3_1CD4",
+      "offset": 12,
+      "kind": "data",
+      "reason": "reviewed source owner/interior view",
+      "module": "root:15F8",
+      "address": [
+        21939,
+        7392
+      ],
+      "object_public": {
+        "name": "_fd_55B3_1CD4",
+        "segment": "_DATA",
+        "offset": 282
+      },
+      "owner_size": 20,
+      "view_size": 4,
+      "source_anchor": "Existing five-entry array of far message/config-name pointers. These are entries 1..4, not copied strings or separate pointer owners."
+    },
+    {
+      "alias": "_fd_55B3_1CE4",
+      "owner": "_fd_55B3_1CD4",
+      "offset": 16,
+      "kind": "data",
+      "reason": "reviewed source owner/interior view",
+      "module": "root:15F8",
+      "address": [
+        21939,
+        7396
+      ],
+      "object_public": {
+        "name": "_fd_55B3_1CD4",
+        "segment": "_DATA",
+        "offset": 282
+      },
+      "owner_size": 20,
+      "view_size": 4,
+      "source_anchor": "Existing five-entry array of far message/config-name pointers. These are entries 1..4, not copied strings or separate pointer owners."
+    },
+    {
+      "alias": "_fd_55B3_2996",
+      "owner": "_g_2996",
+      "offset": 0,
+      "kind": "data",
+      "reason": "reviewed source owner/interior view",
+      "module": "S12:384C",
+      "address": [
+        21939,
+        10646
+      ],
+      "object_public": {
+        "name": "_g_2996",
+        "segment": "_DATA",
+        "offset": 8
+      },
+      "owner_size": 2,
+      "view_size": 2,
+      "source_anchor": "Existing typed canonical C object g_2996; visibility is the only generated-source change where it was private."
+    },
+    {
+      "alias": "_fd_55B3_2A36",
+      "owner": "_g_2A36",
+      "offset": 0,
+      "kind": "data",
+      "reason": "reviewed source owner/interior view",
+      "module": "S13:384C",
+      "address": [
+        21939,
+        10806
+      ],
+      "object_public": {
+        "name": "_g_2A36",
+        "segment": "_DATA",
+        "offset": 12
+      },
+      "owner_size": 4,
+      "view_size": 4,
+      "source_anchor": "Existing typed canonical C object g_2A36; visibility is the only generated-source change where it was private."
+    },
+    {
+      "alias": "_fd_55B3_2A3A",
+      "owner": "_g_2A3A",
+      "offset": 0,
+      "kind": "data",
+      "reason": "reviewed source owner/interior view",
+      "module": "S13:384C",
+      "address": [
+        21939,
+        10810
+      ],
+      "object_public": {
+        "name": "_g_2A3A",
+        "segment": "_DATA",
+        "offset": 16
+      },
+      "owner_size": 4,
+      "view_size": 4,
+      "source_anchor": "Existing typed canonical C object g_2A3A; visibility is the only generated-source change where it was private."
+    },
+    {
+      "alias": "_fd_55B3_2A42",
+      "owner": "_g_2A42",
+      "offset": 0,
+      "kind": "data",
+      "reason": "reviewed source owner/interior view",
+      "module": "S13:384C",
+      "address": [
+        21939,
+        10818
+      ],
+      "object_public": {
+        "name": "_g_2A42",
+        "segment": "_DATA",
+        "offset": 24
+      },
+      "owner_size": 16,
+      "view_size": 16,
+      "source_anchor": "Existing typed canonical C object g_2A42; visibility is the only generated-source change where it was private."
+    },
+    {
+      "alias": "_fd_55B3_38A0",
+      "owner": "_g_38A0",
+      "offset": 0,
+      "kind": "data",
+      "reason": "reviewed source owner/interior view",
+      "module": "root:19DC",
+      "address": [
+        21939,
+        14496
+      ],
+      "object_public": {
+        "name": "_g_38A0",
+        "segment": "_DATA",
+        "offset": 4
+      },
+      "owner_size": 2,
+      "view_size": 2,
+      "source_anchor": "Existing typed canonical C object g_38A0; visibility is the only generated-source change where it was private."
+    },
+    {
+      "alias": "_fd_55B3_604C",
+      "owner": "_g_604C",
+      "offset": 0,
+      "kind": "data",
+      "reason": "reviewed source owner/interior view",
+      "module": "root:1FD2",
+      "address": [
+        21939,
+        24652
+      ],
+      "object_public": {
+        "name": "_g_604C",
+        "segment": "_DATA",
+        "offset": 102
+      },
+      "owner_size": 2,
+      "view_size": 2,
+      "source_anchor": "Existing typed canonical C object g_604C; visibility is the only generated-source change where it was private."
+    },
+    {
+      "alias": "_fd_55B3_6054",
+      "owner": "_g_6054",
+      "offset": 0,
+      "kind": "data",
+      "reason": "reviewed source owner/interior view",
+      "module": "root:1FD2",
+      "address": [
+        21939,
+        24660
+      ],
+      "object_public": {
+        "name": "_g_6054",
+        "segment": "_DATA",
+        "offset": 110
+      },
+      "owner_size": 4,
+      "view_size": 4,
+      "source_anchor": "Existing typed canonical C object g_6054; visibility is the only generated-source change where it was private."
+    },
+    {
+      "alias": "_fd_55B3_610A",
+      "owner": "_g_610A",
+      "offset": 0,
+      "kind": "data",
+      "reason": "reviewed source owner/interior view",
+      "module": "S20:39F1",
+      "address": [
+        21939,
+        24842
+      ],
+      "object_public": {
+        "name": "_g_610A",
+        "segment": "_DATA",
+        "offset": 72
+      },
+      "owner_size": 2,
+      "view_size": 2,
+      "source_anchor": "Existing typed canonical C object g_610A; visibility is the only generated-source change where it was private."
+    },
+    {
+      "alias": "_g_5FF4",
+      "owner": "_g_5FF2",
+      "offset": 2,
+      "kind": "data",
+      "reason": "reviewed source owner/interior view",
+      "module": "root:1FD2",
+      "address": [
+        21939,
+        24564
+      ],
+      "object_public": {
+        "name": "_g_5FF2",
+        "segment": "_DATA",
+        "offset": 12
+      },
+      "owner_size": 18,
+      "view_size": 2,
+      "source_anchor": "Existing 18-byte source object spelled Timer, used by the ASM input queue as count/head/tail/flags/callback/buffer views. This binding preserves only its physical offset; +12 is the queue-buffer pointer, not a timer count. The literal 91B0 remains an explicit unresolved layout contract."
+    },
+    {
+      "alias": "_g_5FF6",
+      "owner": "_g_5FF2",
+      "offset": 4,
+      "kind": "data",
+      "reason": "reviewed source owner/interior view",
+      "module": "root:1FD2",
+      "address": [
+        21939,
+        24566
+      ],
+      "object_public": {
+        "name": "_g_5FF2",
+        "segment": "_DATA",
+        "offset": 12
+      },
+      "owner_size": 18,
+      "view_size": 2,
+      "source_anchor": "Existing 18-byte source object spelled Timer, used by the ASM input queue as count/head/tail/flags/callback/buffer views. This binding preserves only its physical offset; +12 is the queue-buffer pointer, not a timer count. The literal 91B0 remains an explicit unresolved layout contract."
+    },
+    {
+      "alias": "_g_5FF8",
+      "owner": "_g_5FF2",
+      "offset": 6,
+      "kind": "data",
+      "reason": "reviewed source owner/interior view",
+      "module": "root:1FD2",
+      "address": [
+        21939,
+        24568
+      ],
+      "object_public": {
+        "name": "_g_5FF2",
+        "segment": "_DATA",
+        "offset": 12
+      },
+      "owner_size": 18,
+      "view_size": 1,
+      "source_anchor": "Existing 18-byte source object spelled Timer, used by the ASM input queue as count/head/tail/flags/callback/buffer views. This binding preserves only its physical offset; +12 is the queue-buffer pointer, not a timer count. The literal 91B0 remains an explicit unresolved layout contract."
+    },
+    {
+      "alias": "_g_5FF9",
+      "owner": "_g_5FF2",
+      "offset": 7,
+      "kind": "data",
+      "reason": "reviewed source owner/interior view",
+      "module": "root:1FD2",
+      "address": [
+        21939,
+        24569
+      ],
+      "object_public": {
+        "name": "_g_5FF2",
+        "segment": "_DATA",
+        "offset": 12
+      },
+      "owner_size": 18,
+      "view_size": 1,
+      "source_anchor": "Existing 18-byte source object spelled Timer, used by the ASM input queue as count/head/tail/flags/callback/buffer views. This binding preserves only its physical offset; +12 is the queue-buffer pointer, not a timer count. The literal 91B0 remains an explicit unresolved layout contract."
+    },
+    {
+      "alias": "_g_5FFA",
+      "owner": "_g_5FF2",
+      "offset": 8,
+      "kind": "data",
+      "reason": "reviewed source owner/interior view",
+      "module": "root:1FD2",
+      "address": [
+        21939,
+        24570
+      ],
+      "object_public": {
+        "name": "_g_5FF2",
+        "segment": "_DATA",
+        "offset": 12
+      },
+      "owner_size": 18,
+      "view_size": 2,
+      "source_anchor": "Existing 18-byte source object spelled Timer, used by the ASM input queue as count/head/tail/flags/callback/buffer views. This binding preserves only its physical offset; +12 is the queue-buffer pointer, not a timer count. The literal 91B0 remains an explicit unresolved layout contract."
+    },
+    {
+      "alias": "_g_5FFE",
+      "owner": "_g_5FF2",
+      "offset": 12,
+      "kind": "data",
+      "reason": "reviewed source owner/interior view",
+      "module": "root:1FD2",
+      "address": [
+        21939,
+        24574
+      ],
+      "object_public": {
+        "name": "_g_5FF2",
+        "segment": "_DATA",
+        "offset": 12
+      },
+      "owner_size": 18,
+      "view_size": 2,
+      "source_anchor": "Existing 18-byte source object spelled Timer, used by the ASM input queue as count/head/tail/flags/callback/buffer views. This binding preserves only its physical offset; +12 is the queue-buffer pointer, not a timer count. The literal 91B0 remains an explicit unresolved layout contract."
+    }
+  ],
   "binding_proofs": [
     {
       "module": "S00:3126",
       "source": {
+        "path": "src\\S00\\m3126.asm",
+        "sha256": "be7a4a3b0fd9c56c47be50d20c60b0c2835002b7721bd913d36f8183be47ce5a",
+        "size": 18484
+      },
+      "control_source": {
         "path": "src\\S00\\m3126.asm",
         "sha256": "be7a4a3b0fd9c56c47be50d20c60b0c2835002b7721bd913d36f8183be47ce5a",
         "size": 18484
@@ -101,6 +652,11 @@
     {
       "module": "S00:31AD",
       "source": {
+        "path": "src\\S00\\m31AD.asm",
+        "sha256": "5d2ad69ff4affb4be4242e82187065cc5e0b3502cc0cc3e00ad3802ccee2656e",
+        "size": 81450
+      },
+      "control_source": {
         "path": "src\\S00\\m31AD.asm",
         "sha256": "5d2ad69ff4affb4be4242e82187065cc5e0b3502cc0cc3e00ad3802ccee2656e",
         "size": 81450
@@ -157,6 +713,11 @@
         "sha256": "3ef3979a3c35e9e36c4ddc48408bc4cac601ad26f4728e044012a489f831fd55",
         "size": 40286
       },
+      "control_source": {
+        "path": "src\\S00\\m31AD_2AB4.asm",
+        "sha256": "3ef3979a3c35e9e36c4ddc48408bc4cac601ad26f4728e044012a489f831fd55",
+        "size": 40286
+      },
       "object": {
         "path": "build\\source-only-dos\\objects\\U002.OBJ",
         "sha256": "6e21287124cbbe6f8268dd161ae307053076a1eb70ee091aed7f2c5a68e6a695",
@@ -196,6 +757,11 @@
     {
       "module": "S01:3126",
       "source": {
+        "path": "src\\S01\\m3126.asm",
+        "sha256": "ac99ea7821999d034e64201798d49dfaf64632f34e5f5dee428c9b6dec01a44a",
+        "size": 44403
+      },
+      "control_source": {
         "path": "src\\S01\\m3126.asm",
         "sha256": "ac99ea7821999d034e64201798d49dfaf64632f34e5f5dee428c9b6dec01a44a",
         "size": 44403
@@ -315,6 +881,11 @@
         "sha256": "4291e4084ff26dcee75016b03c1b8d8412129a97ad00787b41ac567c16f5178b",
         "size": 20400
       },
+      "control_source": {
+        "path": "src\\S02\\m3126.asm",
+        "sha256": "4291e4084ff26dcee75016b03c1b8d8412129a97ad00787b41ac567c16f5178b",
+        "size": 20400
+      },
       "object": {
         "path": "build\\source-only-dos\\objects\\U007.OBJ",
         "sha256": "c4b8845cadd4eaf550d836db2dfcc3b1a7ebc8bfd972e740d9dc8d1ea6572187",
@@ -351,6 +922,11 @@
     {
       "module": "S03:3126",
       "source": {
+        "path": "src\\S03\\m3126.asm",
+        "sha256": "b0b9d296f23b4f8a5b4706008b21b6ad96429636da11bf22ddb2126ee362f2ff",
+        "size": 35317
+      },
+      "control_source": {
         "path": "src\\S03\\m3126.asm",
         "sha256": "b0b9d296f23b4f8a5b4706008b21b6ad96429636da11bf22ddb2126ee362f2ff",
         "size": 35317
@@ -392,8 +968,133 @@
       }
     },
     {
+      "module": "S12:384C",
+      "source": {
+        "path": "src\\S12\\m384C.c",
+        "sha256": "584bf940832e3f8e975afdf85ed398fc82b6470e4a5c3ec46c1b4fcd15240002",
+        "size": 19819
+      },
+      "control_source": {
+        "path": "build\\source-only-dos\\binding-controls\\U021.c",
+        "sha256": "e821cbf561c5d2731ca92d2514e15bb46121ae31a4a179a02b5e65e85b35f077",
+        "size": 22049
+      },
+      "object": {
+        "path": "build\\source-only-dos\\objects\\U021.OBJ",
+        "sha256": "59a2ad980f4b79664aef3cca259290ddbde66ab23bd324a8bc880facd2dc1172",
+        "size": 16974
+      },
+      "status": "PASS",
+      "segment_extents_unchanged": true,
+      "existing_publics_and_relocations_unchanged": true,
+      "storage_bytes_unchanged": true,
+      "added_exports": [
+        {
+          "name": "_g_2996",
+          "segment": "_DATA",
+          "offset": 8,
+          "registry_symbol": "fd_55B3_2996"
+        }
+      ],
+      "symbolic_operand_checks": [],
+      "canonical_control_object": {
+        "path": "build\\source-only-dos\\binding-controls\\U021.OBJ",
+        "sha256": "5e7871720df3600a645954ba6f0b2cdf4bdefa887f808983a7fc605a9bbd0b9e",
+        "size": 16962
+      }
+    },
+    {
+      "module": "S13:384C",
+      "source": {
+        "path": "src\\S13\\m384C.c",
+        "sha256": "fb6785e93f5c2ea1110f64b5eb200d7f4e346263c43ac521c0434629d9f5839a",
+        "size": 24768
+      },
+      "control_source": {
+        "path": "build\\source-only-dos\\binding-controls\\U022.c",
+        "sha256": "7af93661de6e55e2ffce33a5876ec94b6175d735e5d75bd10a2eb7e533efb76b",
+        "size": 24691
+      },
+      "object": {
+        "path": "build\\source-only-dos\\objects\\U022.OBJ",
+        "sha256": "d4d05eacbe1ad0e3fb4b7fac8e1794bc1e1aacae24889df6a10d721002847618",
+        "size": 19799
+      },
+      "status": "PASS",
+      "segment_extents_unchanged": true,
+      "existing_publics_and_relocations_unchanged": true,
+      "storage_bytes_unchanged": true,
+      "added_exports": [
+        {
+          "name": "_g_2A36",
+          "segment": "_DATA",
+          "offset": 12,
+          "registry_symbol": "fd_55B3_2A36"
+        },
+        {
+          "name": "_g_2A3A",
+          "segment": "_DATA",
+          "offset": 16,
+          "registry_symbol": "fd_55B3_2A3A"
+        },
+        {
+          "name": "_g_2A42",
+          "segment": "_DATA",
+          "offset": 24,
+          "registry_symbol": "fd_55B3_2A42"
+        }
+      ],
+      "symbolic_operand_checks": [],
+      "canonical_control_object": {
+        "path": "build\\source-only-dos\\binding-controls\\U022.OBJ",
+        "sha256": "7fbbf2ca5aa5afa4eee70f9a9d4e21f0a079b32d0f3d4c4f55bebebf5edee4ac",
+        "size": 19751
+      }
+    },
+    {
+      "module": "S20:39F1",
+      "source": {
+        "path": "src\\S20\\m39F1.c",
+        "sha256": "6fd0a02991a29325f214049a8a8961aaee4bc65fbf760b296e63a6ac8f6fbe7b",
+        "size": 6627
+      },
+      "control_source": {
+        "path": "build\\source-only-dos\\binding-controls\\U030.c",
+        "sha256": "6fd0a02991a29325f214049a8a8961aaee4bc65fbf760b296e63a6ac8f6fbe7b",
+        "size": 6627
+      },
+      "object": {
+        "path": "build\\source-only-dos\\objects\\U030.OBJ",
+        "sha256": "5e801d6062c29d6beddba2641b536835031fc6f97e0f9cb05ddd955ac8981a01",
+        "size": 5218
+      },
+      "status": "PASS",
+      "segment_extents_unchanged": true,
+      "existing_publics_and_relocations_unchanged": true,
+      "storage_bytes_unchanged": true,
+      "added_exports": [
+        {
+          "name": "_g_610A",
+          "segment": "_DATA",
+          "offset": 72,
+          "registry_symbol": "fd_55B3_610A"
+        }
+      ],
+      "symbolic_operand_checks": [],
+      "canonical_control_object": {
+        "path": "build\\source-only-dos\\binding-controls\\U030.OBJ",
+        "sha256": "7204d9910795660593c3c021465c8ca8d51ea0c57ed287bc6982d2ff0f1910ba",
+        "size": 5194
+      }
+    },
+    {
       "module": "root:1B73",
       "source": {
+        "path": "src\\root\\m1B73.asm",
+        "sha256": "3097a6b03ff1d8bdfa7d573632d9905de88d754c8b1e047de4014c4f186cb848",
+        "size": 35010
+      },
+      "control_source": {
         "path": "src\\root\\m1B73.asm",
         "sha256": "3097a6b03ff1d8bdfa7d573632d9905de88d754c8b1e047de4014c4f186cb848",
         "size": 35010
@@ -424,6 +1125,11 @@
     {
       "module": "root:28BC",
       "source": {
+        "path": "src\\root\\m28BC.asm",
+        "sha256": "361f33c1d86502fef4d43559cb7f424e350eee3fe8a31881ed3c21b4d865f7a5",
+        "size": 38288
+      },
+      "control_source": {
         "path": "src\\root\\m28BC.asm",
         "sha256": "361f33c1d86502fef4d43559cb7f424e350eee3fe8a31881ed3c21b4d865f7a5",
         "size": 38288
@@ -470,8 +1176,8 @@
   "tool_inputs": [
     {
       "path": "tools\\source_only_dos.py",
-      "sha256": "8b0c6985ecab3cee57601154ef0f8b28536a11d1e8a6db4af5dd9a8558e8227c",
-      "size": 31012
+      "sha256": "1f416dcaa18f6f2cab45065e534864f8095c70538b490cdd965ceee08f1b464d",
+      "size": 34963
     },
     {
       "path": "tools\\compiler.py",
@@ -490,28 +1196,28 @@
     },
     {
       "path": "tools\\dos_source_bindings.py",
-      "sha256": "12a9e5407312eb71da21147e80d6bb1a9ed026c56a07cc495bca515aa6512d8f",
-      "size": 6244
+      "sha256": "173cdbc5f62c79053021b0dc58e412a550f1fd7e13ba6ee5c17e0ea087f29b7e",
+      "size": 8152
     }
   ],
   "validation_logs": [
     {
-      "path": "build/source-only-dos-run-v2.log",
-      "sha256": "2fe1c0745eec70e4027c3b92d05823bf80a8a182155780f5ee230a50a2930533",
-      "size": 3716
+      "path": "build/source-only-dos-run-v3.log",
+      "sha256": "698403b1d9f895c074daa3acc48a01cd581b1b9690fae188d238d8b9bcad6672",
+      "size": 3721
     },
     {
-      "path": "build/source-only-dos-tests-v2.log",
-      "sha256": "1c47de3caaeef72ebde892e4c2750766f7556f4b5bdab5c932a39af6347734e2",
-      "size": 941
+      "path": "build/source-only-dos-tests-v3.log",
+      "sha256": "c561990d7cf0949e08a5d49d8d7087d811f4a0bbe1f43d2d21893c0eb4122a3b",
+      "size": 1270
     },
     {
-      "path": "build/source-only-dos-validation-v2.log",
+      "path": "build/source-only-dos-validation-v3.log",
       "sha256": "fe86895759534286937a671bfb5fec1bccd9384b6527d1e05ee172b171cd76d7",
       "size": 4752
     }
   ],
   "historical_validation": "PASS",
-  "source_only_tests": "8 tests PASS",
+  "source_only_tests": "11 tests PASS",
   "claim_limit": "Compile and symbolic binding proofs only; no complete link, runtime equivalence or human acceptance. Full inventories are reproducible build output."
 }

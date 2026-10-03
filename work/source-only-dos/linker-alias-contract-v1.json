@@ -1,0 +1,167 @@
+{
+  "schema": "simant-dos-linker-alias-contract-v1",
+  "probe_source": {
+    "path": "work/source-only-dos/linker-alias-probe.py",
+    "sha256": "99b06bb8001bdab1a8a4c6c20f034b865a53d677eed0b34dc191019607b8f652"
+  },
+  "local_report": {
+    "path": "build/workers/dos_linker_aliases/report.json",
+    "sha256": "5121814931cfd648875d061c1afb787b9ae252959a31b7fc61e778fd6b2ed348"
+  },
+  "inputs": [
+    {
+      "path": "work\\source-only-dos\\linker-alias-probe.py",
+      "sha256": "99b06bb8001bdab1a8a4c6c20f034b865a53d677eed0b34dc191019607b8f652",
+      "size": 6267
+    },
+    {
+      "path": "layout\\toolchain.json",
+      "sha256": "c0bb71cd8b1f4a1a1f91299bd3b6148aa67b7a1d12c3c3946a229272593eb274",
+      "size": 39241
+    },
+    {
+      "path": "build\\workers\\dos_linker_aliases\\OWNER.asm",
+      "sha256": "eb0bbf4d1595351af26d7f64f1e5a8ef210b033367833e49b6b1636bcf29d891",
+      "size": 236
+    },
+    {
+      "path": "build\\workers\\dos_linker_aliases\\USE.asm",
+      "sha256": "e7321b11858e6ad1a443c680cc551e0afd59245c82c9a1e04bcd4766a51034b6",
+      "size": 996
+    },
+    {
+      "path": "C:\\tools\\masm-5.10\\files\\MASM.EXE",
+      "sha256": "233120302473749eafe9a54a30f8bda0127140c44346e5bcc047d113828a741e",
+      "size": 124712
+    },
+    {
+      "path": "C:\\tools\\nmlgcdos\\msdos.exe",
+      "sha256": "f7f6cb0a3e816c5edb13112d327c1bddbf7463fe7bf9a005ca1eb5317751bd02",
+      "size": 686592
+    },
+    {
+      "path": "C:\\tools\\dosbox-x\\dosbox-x.exe",
+      "sha256": "b028a4d328302ea270722dec69f3ec3a10ebf76beba72a51970db33a88df2bf6",
+      "size": 20481536
+    },
+    {
+      "path": "C:\\tools\\RTLink-Plus-4.00-DiscMaster\\installed\\dest\\RTLINK.EXE",
+      "sha256": "dff0a988738a2ba7716f7013ef5b8136e0857b6bfe700bccdeaad70ee5e87c74",
+      "size": 449497
+    },
+    {
+      "path": "C:\\tools\\RTLink-Plus-4.00-DiscMaster\\installed\\dest\\RTLINK.DAT",
+      "sha256": "c1e206fe4b3c34d43b47aa9aa215e2959fbb23c69c89eb69e36d80b1d9194eea",
+      "size": 63824
+    },
+    {
+      "path": "C:\\tools\\RTLink-Plus-4.00-DiscMaster\\installed\\dest\\RTLUTILS.LIB",
+      "sha256": "9060c022f65a2811b81936879f93eb16c5d349c14b56c704a3853d3cf79cd162",
+      "size": 266625
+    },
+    {
+      "path": "C:\\tools\\RTLink-Plus-4.00-DiscMaster\\installed\\dest\\RTLINKST.COM",
+      "sha256": "6ad9015869dc9598a2b498c58297224e5ab4a13fad9ada528650dfcedeb83cf2",
+      "size": 7184
+    },
+    {
+      "path": "C:\\tools\\rtlink-plus-6.10\\installed\\RTL-REAL.EXE",
+      "sha256": "228c5d429438ea32ee21dd02c65b7f8e198715b3fa957be9da328f9857482773",
+      "size": 717922
+    },
+    {
+      "path": "C:\\tools\\rtlink-plus-6.10\\installed\\RTL-SWAP.EXE",
+      "sha256": "daae0a8c358edc26f95540f4bc1629c0dc5c30652155d85ccd79bead4381cfe3",
+      "size": 692123
+    },
+    {
+      "path": "C:\\tools\\rtlink-plus-6.10\\installed\\RTLINK.DAT",
+      "sha256": "10723fb4d4381b6a38417a18409e32d254e59850bcd3b465fbb824e01367a77b",
+      "size": 100100
+    },
+    {
+      "path": "C:\\tools\\rtlink-plus-6.10\\installed\\RTLUTILS.LIB",
+      "sha256": "c718bac09b0b1204a259494446acfa8bfffb129144cc7d36799855621f4fdccb",
+      "size": 423823
+    },
+    {
+      "path": "C:\\tools\\rtlink-plus-6.10\\installed\\RTLINKST.COM",
+      "sha256": "635425a8feff822ca98ec536c55a31824161bffbf9d24d37851cc0d9f7ce3b5f",
+      "size": 11031
+    },
+    {
+      "path": "C:\\tools\\rtlink-plus-6.10\\installed\\RTLINK.EXE",
+      "sha256": "ea6f57a470a26801086593d54aa99f6bf983dd024fc19b5e13361a07f43e17fb",
+      "size": 687531
+    },
+    {
+      "path": "C:\\tools\\rtlink-plus-6.10\\installed\\DOS4GW.EXE",
+      "sha256": "7192b80d1551769c2d2897b2f58015dc18fadca2b7e093a20f45b34011933c6c",
+      "size": 231179
+    }
+  ],
+  "cases": [
+    {
+      "linker": "rtlink400",
+      "case": "correct",
+      "near_delta": 2,
+      "far_delta": 2,
+      "expected": "PASS",
+      "actual": "PASS",
+      "process_exit": 0,
+      "passed": true
+    },
+    {
+      "linker": "rtlink400",
+      "case": "wrong_near",
+      "near_delta": 4,
+      "far_delta": 2,
+      "expected": "FAIL",
+      "actual": "FAIL",
+      "process_exit": 0,
+      "passed": true
+    },
+    {
+      "linker": "rtlink400",
+      "case": "wrong_far",
+      "near_delta": 2,
+      "far_delta": 4,
+      "expected": "FAIL",
+      "actual": "FAIL",
+      "process_exit": 0,
+      "passed": true
+    },
+    {
+      "linker": "rtlink610",
+      "case": "correct",
+      "near_delta": 2,
+      "far_delta": 2,
+      "expected": "PASS",
+      "actual": "PASS",
+      "process_exit": 0,
+      "passed": true
+    },
+    {
+      "linker": "rtlink610",
+      "case": "wrong_near",
+      "near_delta": 4,
+      "far_delta": 2,
+      "expected": "FAIL",
+      "actual": "FAIL",
+      "process_exit": 0,
+      "passed": true
+    },
+    {
+      "linker": "rtlink610",
+      "case": "wrong_far",
+      "near_delta": 2,
+      "far_delta": 4,
+      "expected": "FAIL",
+      "actual": "FAIL",
+      "process_exit": 0,
+      "passed": true
+    }
+  ],
+  "all_checks_pass": true,
+  "scope": "Test-owned near/far record aliases only; no game link or runtime proof."
+}
