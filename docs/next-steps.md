@@ -12,7 +12,7 @@ research history and do not supersede this priority.
 behavioral registrations. The effective imported set has 29
 `BEHAVIOR_EXACT_CONFIRMED` implementations; DrawBalloons uses a reviewed signed
 allocation-width correction, with the original registered body separately marked
-unresolved. The source-only build compiles 127 canonical TUs plus fourteen data-only
+unresolved. The source-only build compiles 127 canonical TUs plus sixteen data-only
 providers. The seven-slot input queue, 48 far word scalars, 25-slot
 callback owner and their bounded views are reviewed; three mouse ES operand
 frames, 128 external and ten local driver SS frames are corrected. Three numeric
@@ -23,20 +23,22 @@ source-owned. The paired `g_5A9C` SEG now targets DGROUP, with whole-object and
 shifted-group controls; its data remains unresolved. Six spider control words,
 five Point objects, four 124-byte database records and four signed handle words
 also have source owners. The two database returning-Punt layout gates remain open.
-There are 355 missing data imports (347 FAR_BSS and eight
-storage/reachability cases), 113 data-disposition bytes and an open wider address/
+There are 353 missing data imports (347 FAR_BSS and six
+storage/reachability cases), 79 functional data-disposition bytes (113 historical bytes) and an open wider address/
 frame audit. No independent executable, game runtime acceptance or functional
 milestone is claimed. The compact current receipt is
 `work/source-only-dos/current-intake.json`; exact canonical ownership is unchanged.
 
-Next ownership work is bounded: the remaining database record state, the window-handle table's
+Next ownership work is bounded: the remaining FAR_BSS owners, the window-handle table's
 real extent, and the remaining numeric bases. The window-table audit
 found no source cap or original owner extent; adjacent arrays/runtime commons do
 not close it. The g_5A9C storage/initializers and S01's `8ED8h` base remain distinct audit
 items. The database audit also found a real unchecked slot `-1` path if `Punt`
 returns; a four-slot normal extent cannot silently close that layout dependency.
-The 18-byte formula-table
-candidate is not admitted because indirect-write reachability is still open.
+Two mutable initialized providers now own 34 graphics bytes from consumer formulas
+and accepted-source literal translation. Two mask operands and ten other indexed
+operands use symbolic DGROUP references. Their computed-copy overlap gate remains
+open; initial-state ownership does not prove error-path layout equivalence.
 Prioritize these source/type/layout proofs over behavioral byte matching. After
 clean preflight, build with the pinned stock RTLink runtime, then compare both DOS
 executables in DOSBox-X and deliver the standalone build for human acceptance.

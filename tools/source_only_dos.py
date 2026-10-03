@@ -190,7 +190,9 @@ def prepare(out, report):
                      'database-index-state-bindings-v1.json', 'spider-counter-bindings-v1.json',
                      'lion-array-storage-bindings-v1.json', 'dgroup-rect-frame-bindings-v1.json',
                      'spider-control-storage-bindings-v1.json', 'point-state-bindings-v1.json',
-                     'database-record-state-bindings-v1.json'):
+                     'database-record-state-bindings-v1.json',
+                     'graphics-formula-bindings-v1.json', 'g2108-color-translation-bindings-v1.json',
+                     'driver-indexed-address-bindings-v1.json'):
         binding_raw, binding_pin = pin(ROOT / 'work/source-only-dos' / filename)
         binding_packet = json.loads(binding_raw)
         if binding_packet['category'] not in ('REVIEWED_SOURCE_LINK_BINDING', 'REVIEWED_SOURCE_STORAGE_BINDING'):
@@ -231,7 +233,9 @@ def prepare(out, report):
                                    and bool(binding.get('local_reframes')))
                 segment_extension = (binding['module'] == 'root:1B73'
                                      and bool(binding.get('segment_corrections')))
-                if pattern_extension or local_extension or segment_extension:
+                indexed_extension = (binding['module'] in dos_source_bindings.INDEXED_OPERANDS
+                                     and binding.get('indexed_address_operands') is True)
+                if pattern_extension or local_extension or segment_extension or indexed_extension:
                     # This third layer extends the effective binding, including the
                     # previously admitted frames. Pin its complete provenance and
                     # content rather than silently replacing either frozen packet.
@@ -246,7 +250,7 @@ def prepare(out, report):
                         raise ValueError('DOS layout extension has a different effective control binding')
                 elif not base or not (binding.get('reframes') or scalar_extension or water_extension):
                     raise ValueError('duplicate DOS binding module')
-                if not (pattern_extension or local_extension or segment_extension):
+                if not (pattern_extension or local_extension or segment_extension or indexed_extension):
                     base_raw, base_pin = pin(ROOT / base['path'], base['sha256'])
                     if previous not in json.loads(base_raw)['bindings']:
                         raise ValueError('DOS frame extension has a different source/control binding')
@@ -269,6 +273,8 @@ def prepare(out, report):
                     combined['pattern_bank_operands'] = True
                 if water_extension:
                     combined['array_storage'] = binding['array_storage']
+                if indexed_extension:
+                    combined['indexed_address_operands'] = True
                 binding = combined
             bindings[binding['module']] = binding
             binding_origins.setdefault(binding['module'], []).append(binding_pin['path'].replace('\\', '/'))
@@ -407,6 +413,8 @@ def prepare(out, report):
     report['inputs'].append(debt_pin)
     report['unresolved_data'] = [{k: s[k] for k in ('id', 'classification', 'size', 'semantic_assessment')}
                                  for s in json.loads(debt_raw)['spans']]
+    report['historical_data_debt'] = [dict(s) for s in report['unresolved_data']]
+    report['resolved_initialized_data'] = []
     report['runtime_components'] = []
     for name, library in manifest['runtime']['libraries'].items():
         _, library_pin = pin(Path(library['path']), library['sha256'])
@@ -523,6 +531,29 @@ def audit_layout(report):
         'id': 'remaining-assembly-address-audit', 'status': 'UNRESOLVED',
         'reason': 'The broader audit of fixed numeric operands and segment/group frames is pending. '
                   'Indexed numeric bases, g_5A9C storage/initializers and unchecked error-path addresses remain separate gates.'}, {
+        'id': 'graphics-computed-copy-layout', 'status': 'UNRESOLVED',
+        'source': 'src/root/m1E57.c',
+        'reason': 'The clip sentinel/generation count controls a copy to FAR_BSS 50F6:3C14. '
+                  'Large counts can intersect the historical graphics table addresses. '
+                  'Initial-state recipes do not prove those counts unreachable or preserve '
+                  'such physical overlap under an independent layout. Punt return and '
+                  'sentinel-copy bounds remain unresolved.'}, {
+        'id': 'driver-indexed-addresses',
+        'status': 'SOURCE_BOUND' if all(any(r['module'] == module and
+            (r.get('source_binding') or {}).get('indexed_address_operands') for r in report['translation_units'])
+            for module in dos_source_bindings.INDEXED_OPERANDS) and any(r['module'] == 'root:2650' and
+            (r.get('source_binding') or {}).get('glyph_edge_owner') for r in report['translation_units']) else 'UNRESOLVED',
+        'operand_count': 10,
+        'reason': 'The bounded 3DCA, 6778 and 2226 indexed reads bind to existing source storage. '
+                  'A generated-only glyph label adds no allocation. Closed site sets and '
+                  'whole-object checks preserve all other bytes and ordered fixups.'}, {
+        'id': 'graphics-tail-mask-addresses',
+        'status': 'SOURCE_BOUND' if all(any(r['module'] == module and any(s.get('graphics_mask_operand')
+            for s in (r.get('source_binding') or {}).get('relocations', [])) for r in report['translation_units'])
+            for module in dos_source_bindings.GRAPHICS_MASK_OPERANDS) else 'UNRESOLVED',
+        'operand_count': 2,
+        'reason': 'Two bounded mask reads bind symbolically to mutable formula-derived near arrays '
+                  'with exact DGROUP-frame OFFSET16 sites. Initial state and unchecked copies are separate proofs.'}, {
         'id': 'database-open-minus-one-record', 'status': 'UNRESOLVED',
         'source': 'src/root/m1A28.c', 'normal_owner': 'fd_50F6_3958[4]',
         'historical_failure_address': '50F6:38DC',
@@ -589,6 +620,18 @@ def accept_binding_checks(report):
         for dependency in report['layout_dependencies']:
             if dependency['status'] == 'SOURCE_BOUND':
                 dependency['status'] = 'RESOLVED'
+        initialized = {r['module'] for r in providers if r['module'] in dos_source_bindings.INITIALIZED_PROVIDER_SPECS}
+        if initialized == set(dos_source_bindings.INITIALIZED_PROVIDER_SPECS) and not report.get('resolved_initialized_data'):
+            # Functional initialization is discharged only after whole-object proof.
+            # Keep the historical ownership ledger and the independent copy gate.
+            sizes = {s['id']: s['size'] for s in report['unresolved_data']}
+            if sizes.get('dgroup_2100') != 24 or sizes.get('dgroup_68ac') != 10:
+                raise ValueError('initialized data debt inventory changed')
+            report['resolved_initialized_data'] = [
+                {'id': 'dgroup_2100', 'offset': 0, 'size': 8, 'module': 'source-owned:graphics-formulas'},
+                {'id': 'dgroup_2100', 'offset': 8, 'size': 16, 'module': 'source-owned:g2108-color-translation'},
+                {'id': 'dgroup_68ac', 'offset': 0, 'size': 10, 'module': 'source-owned:graphics-formulas'}]
+            report['unresolved_data'] = [s for s in report['unresolved_data'] if s['id'] not in ('dgroup_2100', 'dgroup_68ac')]
 
 
 def unresolved_symbols(out, report, symbols, manifest):
@@ -714,6 +757,7 @@ def link_units(out, report, profile):
     dos_source_bindings.require_driver_ss_frame_contract(report, profile, tool)
     dos_source_bindings.require_pattern_bank_contract(report, profile, tool)
     dos_source_bindings.require_local_frame_contract(report, profile, tool)
+    dos_source_bindings.require_initialized_and_indexed_contracts(report, profile, tool)
     contract = report.get('linker_alias_contract', {})
     if any(row.get('offset') for row in report.get('symbolic_aliases', [])):
         cases = [r for r in contract.get('cases', []) if r['linker'] == profile]

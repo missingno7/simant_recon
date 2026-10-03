@@ -1,0 +1,321 @@
+{
+  "schema": "simant-graphics-formula-initial-state-research-v1",
+  "purpose": "typed original-image formula predicates before guest instructions",
+  "original_input": {
+    "path": "assets/SIMANT.EXE",
+    "sha256": "aa0596c6766322a8229ee3c36e57048c92adc82d50fbe2ef37afb8b85fcf4f11",
+    "size": 506509,
+    "identity_source": "layout/oracle.lock.json"
+  },
+  "boundary": "image loaded into research VM; no guest instruction, DOS startup, RTLink, or CRT startup executed",
+  "original_values_emitted": false,
+  "data_intervals": [
+    {
+      "family": "high_bit_selector",
+      "segment": "DGROUP",
+      "offset": "2100",
+      "count": 8,
+      "symbolic_consumer_name": "_g_2100"
+    },
+    {
+      "family": "one_bit_byte_tail_mask",
+      "segment": "DGROUP",
+      "offset": "68AC",
+      "count": 8,
+      "consumer_binding": "absolute SS displacement in S01"
+    },
+    {
+      "family": "packed_nibble_tail_mask",
+      "segment": "DGROUP",
+      "offset": "68B4",
+      "count": 2,
+      "consumer_binding": "absolute SS displacement in S03"
+    }
+  ],
+  "consumer_intervals": [
+    {
+      "function": "o00_31AD_013A",
+      "unit": "S00",
+      "code_interval": {
+        "segment": "31AD",
+        "start_offset": "013A",
+        "end_offset_exclusive": "037C",
+        "extent": 578
+      },
+      "source_anchor": {
+        "path": "src/S00/m31AD.asm",
+        "lines": [
+          2884,
+          2886
+        ]
+      },
+      "operand": "symbolic _g_2100",
+      "target_family": "selector"
+    },
+    {
+      "function": "o01_3126_0C87",
+      "unit": "S01",
+      "code_interval": {
+        "segment": "3126",
+        "start_offset": "0C87",
+        "end_offset_exclusive": "0F33",
+        "extent": 684
+      },
+      "source_anchor": {
+        "path": "src/S01/m3126.asm",
+        "lines": [
+          1710,
+          1711
+        ]
+      },
+      "operand": "symbolic _g_2100",
+      "target_family": "selector"
+    },
+    {
+      "function": "o01_32B5_00AA",
+      "unit": "S01",
+      "code_interval": {
+        "segment": "32B5",
+        "start_offset": "00AA",
+        "end_offset_exclusive": "0152",
+        "extent": 168
+      },
+      "source_anchor": {
+        "path": "src/S01/m32B5.asm",
+        "lines": [
+          119,
+          121
+        ]
+      },
+      "operand": "SS:[BX+68AC]",
+      "target_family": "byte_residue_masks"
+    },
+    {
+      "function": "o03_3258_04CE",
+      "unit": "S03",
+      "code_interval": {
+        "segment": "3258",
+        "start_offset": "04CE",
+        "end_offset_exclusive": "05A7",
+        "extent": 217
+      },
+      "source_anchor": {
+        "path": "src/S03/m3258.asm",
+        "lines": [
+          189,
+          191
+        ]
+      },
+      "operand": "SS:[BX+68B4]",
+      "target_family": "packed_parity_masks"
+    }
+  ],
+  "positive_formula_checks": [
+    {
+      "family": "high_bit_selector",
+      "index": 0,
+      "predicate": "one high-bit-first plane selector for phase",
+      "result": "PASS"
+    },
+    {
+      "family": "high_bit_selector",
+      "index": 1,
+      "predicate": "one high-bit-first plane selector for phase",
+      "result": "PASS"
+    },
+    {
+      "family": "high_bit_selector",
+      "index": 2,
+      "predicate": "one high-bit-first plane selector for phase",
+      "result": "PASS"
+    },
+    {
+      "family": "high_bit_selector",
+      "index": 3,
+      "predicate": "one high-bit-first plane selector for phase",
+      "result": "PASS"
+    },
+    {
+      "family": "high_bit_selector",
+      "index": 4,
+      "predicate": "one high-bit-first plane selector for phase",
+      "result": "PASS"
+    },
+    {
+      "family": "high_bit_selector",
+      "index": 5,
+      "predicate": "one high-bit-first plane selector for phase",
+      "result": "PASS"
+    },
+    {
+      "family": "high_bit_selector",
+      "index": 6,
+      "predicate": "one high-bit-first plane selector for phase",
+      "result": "PASS"
+    },
+    {
+      "family": "high_bit_selector",
+      "index": 7,
+      "predicate": "one high-bit-first plane selector for phase",
+      "result": "PASS"
+    },
+    {
+      "family": "one_bit_byte_tail_mask",
+      "index": 0,
+      "predicate": "retain full byte at residue zero; otherwise retain high residue bits",
+      "result": "PASS"
+    },
+    {
+      "family": "one_bit_byte_tail_mask",
+      "index": 1,
+      "predicate": "retain full byte at residue zero; otherwise retain high residue bits",
+      "result": "PASS"
+    },
+    {
+      "family": "one_bit_byte_tail_mask",
+      "index": 2,
+      "predicate": "retain full byte at residue zero; otherwise retain high residue bits",
+      "result": "PASS"
+    },
+    {
+      "family": "one_bit_byte_tail_mask",
+      "index": 3,
+      "predicate": "retain full byte at residue zero; otherwise retain high residue bits",
+      "result": "PASS"
+    },
+    {
+      "family": "one_bit_byte_tail_mask",
+      "index": 4,
+      "predicate": "retain full byte at residue zero; otherwise retain high residue bits",
+      "result": "PASS"
+    },
+    {
+      "family": "one_bit_byte_tail_mask",
+      "index": 5,
+      "predicate": "retain full byte at residue zero; otherwise retain high residue bits",
+      "result": "PASS"
+    },
+    {
+      "family": "one_bit_byte_tail_mask",
+      "index": 6,
+      "predicate": "retain full byte at residue zero; otherwise retain high residue bits",
+      "result": "PASS"
+    },
+    {
+      "family": "one_bit_byte_tail_mask",
+      "index": 7,
+      "predicate": "retain full byte at residue zero; otherwise retain high residue bits",
+      "result": "PASS"
+    },
+    {
+      "family": "packed_nibble_tail_mask",
+      "index": 0,
+      "predicate": "retain both nibbles for even width; high nibble for odd width",
+      "result": "PASS"
+    },
+    {
+      "family": "packed_nibble_tail_mask",
+      "index": 1,
+      "predicate": "retain both nibbles for even width; high nibble for odd width",
+      "result": "PASS"
+    }
+  ],
+  "negative_formula_contrasts": [
+    {
+      "contrast": "reversed_plane_order",
+      "result": "PASS"
+    },
+    {
+      "contrast": "low_bit_byte_tail_masks",
+      "result": "PASS"
+    },
+    {
+      "contrast": "packed_odd_low_nibble",
+      "result": "PASS"
+    }
+  ],
+  "all_positive_checks_pass": true,
+  "all_negative_contrasts_reject": true,
+  "pins": [
+    {
+      "path": "work/source-only-dos/graphics-formula-initial-state-research.py",
+      "sha256": "96fa5143ed4da13848e2605c3790fbdb3ad2c2fbaf7faa168104b3bdf9cc2dfc",
+      "size": 9605
+    },
+    {
+      "path": "layout/oracle.lock.json",
+      "sha256": "2c6d9e98c688621ad49a08c78d0e0968f4076b036be56ec0738217b533ccde13",
+      "size": 18807
+    },
+    {
+      "path": "layout/functions.json",
+      "sha256": "6089a06e18fbe8f0960392cfe30357f7c19c886f38f10f7f115c72d127a756e7",
+      "size": 356104
+    },
+    {
+      "path": "layout/symbols.json",
+      "sha256": "0f5dd5b0a211945a97782cfccdb9bb31b0dfd07fcde5df4d4f9486b487eb0125",
+      "size": 800809
+    },
+    {
+      "path": "layout/manifest.json",
+      "sha256": "025a0a9255d910cae4b122ab5a3f3fb40888bb456d7fe42158db7c9e622fcf50",
+      "size": 628980
+    },
+    {
+      "path": "tools/behavior.py",
+      "sha256": "2c0799048057f59eae61a48be4d695278635594484adf0c70bf46c51b4e0c799",
+      "size": 29979
+    },
+    {
+      "path": "tools/exe.py",
+      "sha256": "d560f69dcdf0d1c9e89278b50bebe225a9b86db2c259fa54ec9eace6ea05a8b5",
+      "size": 7645
+    },
+    {
+      "path": "tools/functions.py",
+      "sha256": "0f67c8d9eb01e319620c9342e79c35f76006091d860894aad6dcf8d61ee2b39e",
+      "size": 13467
+    },
+    {
+      "path": "tools/match.py",
+      "sha256": "44fdd8b939b2bbf135d8947d8f6ef6b1854dec133da4af86c55eb94f02869b56",
+      "size": 18033
+    },
+    {
+      "path": "tools/modctx.py",
+      "sha256": "33f3a4e3d77371e3095bfeb00358c13bc7838235c27bfe8898dba7e313f1cc25",
+      "size": 14408
+    },
+    {
+      "path": "tools/modules.py",
+      "sha256": "8a5c1e85db6970cce3c693c016b313b7ee1922fa6eaf146a00391bfea86edf1a",
+      "size": 60548
+    },
+    {
+      "path": "src/S00/m31AD.asm",
+      "sha256": "5d2ad69ff4affb4be4242e82187065cc5e0b3502cc0cc3e00ad3802ccee2656e",
+      "size": 81450
+    },
+    {
+      "path": "src/S01/m3126.asm",
+      "sha256": "ac99ea7821999d034e64201798d49dfaf64632f34e5f5dee428c9b6dec01a44a",
+      "size": 44403
+    },
+    {
+      "path": "src/S01/m32B5.asm",
+      "sha256": "b8db05f10b37941e1a9cfa60f5dc87180e6075576703f29fc7b7557273b17394",
+      "size": 5260
+    },
+    {
+      "path": "src/S03/m3258.asm",
+      "sha256": "45182b0559f08e760e025fb1066203150637414c29e221ba7e6e5cea0bd30034",
+      "size": 40471
+    }
+  ],
+  "limits": [
+    "This observes original loaded-image initial values only; no historical declaration, initializer TU, or physical owner is asserted.",
+    "Symbolic normal reads are named for _g_2100; 68AC and 68B4 remain absolute SS-displacement consumers.",
+    "This does not prove source-only startup initialization, post-startup mutability, arbitrary alias closure, or copy/write layout bounds."
+  ]
+}

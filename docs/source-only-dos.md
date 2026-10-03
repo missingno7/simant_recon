@@ -113,7 +113,7 @@ are hypotheses, not definitions. Multiple names for the same storage must bind
 to one source owner. Preserve the original DOS allocator, interrupt, video and
 window implementations; do not import native substitutes to make DOS link.
 
-The current compilation passes all 127 canonical TUs plus fourteen reviewed data-only
+The current compilation passes all 127 canonical TUs plus sixteen reviewed data-only
 providers. Symbol-address joins provide 121
 code aliases and thirteen exact-base data aliases without rewriting objects. Reviewed generated
 ASM bindings expose eight names in existing storage: S00's memory-size table and
@@ -157,7 +157,7 @@ The bare ASM entry with an overlay owner fails under RTLink 4.00 and passes unde
 only the MSC startup and byte/word view contracts authorize the generated history
 owners. The link gate checks the selected linker and runtime hashes against those controls.
 
-The remaining 368 imports are data: 360 FAR_BSS names and eight requiring
+The remaining 353 imports are data: 347 FAR_BSS names and six requiring
 storage/reachability investigation. None remains inside an accepted data
 placement. These are link ingredients
 missing from the source-built target, distinct from the historical 113-byte debt.
@@ -251,7 +251,7 @@ and initializer contrasts. These eight allocations resolve eight more of the
 original 46 storage/reachability cases, leaving fifteen open at that checkpoint. They claim no
 original TU, communal ordering or aggregate.
 
-The 128 external SS operands in S00–S03 now have scoped DGROUP frames. The
+The 128 external SS operands in S00â€“S03 now have scoped DGROUP frames. The
 source-wide audit covers 127 canonical files, all 29 registered module snapshots
 and corrected DrawBalloons. CRT startup and interrupt CFG dominance establish
 SS=DGROUP at every audited driver entry. Signed operand tuples, whole-object
@@ -270,7 +270,7 @@ the existing `g_4220` view is at byte 80. Both shifted-linker controls exercise 
 table bytes remain unchanged; no data-debt initializer is supplied.
 
 Two 100-byte water coordinate arrays extend the existing population-owner binding.
-Initialization and simulation loops bound entries 0–99, and two `{1,100,&array}`
+Initialization and simulation loops bound entries 0â€“99, and two `{1,100,&array}`
 SaveRec records establish their byte views. Reset/load ordering is accounted for,
 including failed partial loads. The combined whole-TU check preserves all code,
 data, debug and ordered fixups and adds only the two far commons.
@@ -390,3 +390,14 @@ hybrid or trial image. Check ordinary startup, scenarios, simulation, dialogs an
 save/load, reducing divergences to source/state/ABI contracts. Deliver it for the
 user's normal-use comparison and stop for human acceptance. Do not tag
 `functional-source-oracle-v1` or resume major SDL3 cleanup before that acceptance.
+
+The [initialized graphics admission](../work/source-only-dos/initialized-graphics-admission-v1.md)
+owns 34 functional initial-state bytes with two mutable near providers. Eighteen
+bytes follow closed consumer formulas; sixteen translate accepted S03 source
+literals into a distinct color map. Complete MSC objects and both RTLink profiles
+check payloads, types, publics, frames, bases and aliasing. Two mask reads and ten
+other indexed reads now bind symbolic DGROUP owners, including a zero-byte
+generated glyph-table label over accepted data. Whole-object checks preserve all
+other bytes and ordered fixups. The functional data report has 79 unresolved
+bytes; historical ownership still has 113. Variable clip copies, returning-Punt
+reachability and the wider layout audit remain separate link blockers.

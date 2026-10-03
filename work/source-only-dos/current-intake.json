@@ -1,6 +1,6 @@
 {
   "schema": "simant-source-only-dos-compact-intake-v1",
-  "source_only_base_checkpoint": "a9b1d1a",
+  "source_only_base_checkpoint": "022089d",
   "canonical_manifest": {
     "path": "layout/manifest.json",
     "sha256": "025a0a9255d910cae4b122ab5a3f3fb40888bb456d7fe42158db7c9e622fcf50",
@@ -8,18 +8,18 @@
   },
   "full_local_report": {
     "path": "build/source-only-dos/build-report.json",
-    "sha256": "ed50ce28d8a5b0f93a482ac8046f3465ed7f66bbe8ca9fa67c36ff756983e55d",
-    "size": 3855546
+    "sha256": "0e7b9b4a8547a498d3e4404fe2bf72a32d79ab93b00e59703564dfa9ea288bbf",
+    "size": 4110108
   },
   "reproduction": "python tools/source_only_dos.py --compile --link --reuse --jobs 4",
   "status": "INCOMPLETE",
   "errors": [
     "data dispositions still need source-built semantic resolution",
-    "355 unresolved source symbols",
+    "353 unresolved source symbols",
     "source address/layout contracts remain unresolved",
     "independent link refused: incomplete source/data preflight"
   ],
-  "compiled_translation_units": 141,
+  "compiled_translation_units": 143,
   "function_dispositions": {
     "EXACT_C": 1244,
     "GENUINE_ASM": 367,
@@ -38,11 +38,11 @@
   "standalone_dos_executable": false,
   "runnable": "NOT_EXECUTED",
   "human_acceptance": "PENDING",
-  "unresolved_data_disposition_bytes": 113,
-  "unresolved_symbols": 355,
+  "unresolved_data_disposition_bytes": 79,
+  "unresolved_symbols": 353,
   "unresolved_symbol_categories": {
     "reviewed FAR_BSS definition and compatible consumer views": 347,
-    "source storage/reachability investigation": 8
+    "source storage/reachability investigation": 6
   },
   "symbolic_aliases": 184,
   "duplicate_publics": {},
@@ -69,6 +69,24 @@
       "id": "remaining-assembly-address-audit",
       "status": "UNRESOLVED",
       "reason": "The broader audit of fixed numeric operands and segment/group frames is pending. Indexed numeric bases, g_5A9C storage/initializers and unchecked error-path addresses remain separate gates."
+    },
+    {
+      "id": "graphics-computed-copy-layout",
+      "status": "UNRESOLVED",
+      "source": "src/root/m1E57.c",
+      "reason": "The clip sentinel/generation count controls a copy to FAR_BSS 50F6:3C14. Large counts can intersect the historical graphics table addresses. Initial-state recipes do not prove those counts unreachable or preserve such physical overlap under an independent layout. Punt return and sentinel-copy bounds remain unresolved."
+    },
+    {
+      "id": "driver-indexed-addresses",
+      "status": "RESOLVED",
+      "operand_count": 10,
+      "reason": "The bounded 3DCA, 6778 and 2226 indexed reads bind to existing source storage. A generated-only glyph label adds no allocation. Closed site sets and whole-object checks preserve all other bytes and ordered fixups."
+    },
+    {
+      "id": "graphics-tail-mask-addresses",
+      "status": "RESOLVED",
+      "operand_count": 2,
+      "reason": "Two bounded mask reads bind symbolically to mutable formula-derived near arrays with exact DGROUP-frame OFFSET16 sites. Initial state and unchecked copies are separate proofs."
     },
     {
       "id": "database-open-minus-one-record",
@@ -302,6 +320,42 @@
     "sha256": "eb170ae0622b157da8b20c836935fe938c3a0b0bf6a10bec93022b90430daec9",
     "size": 10328
   },
+  "graphics_formula_bindings": {
+    "path": "work/source-only-dos/graphics-formula-bindings-v1.json",
+    "sha256": "49eb04d1a592f70da762661105a5fcf5216fe2d21f1639d6bb89ebfcf74c592b",
+    "size": 9471
+  },
+  "g2108_color_translation_bindings": {
+    "path": "work/source-only-dos/g2108-color-translation-bindings-v1.json",
+    "sha256": "e5006c94f765571a1a69ab935cc3a30d3bf8b19fe01dddfbd8e4adbba24e957f",
+    "size": 23155
+  },
+  "driver_indexed_address_bindings": {
+    "path": "work/source-only-dos/driver-indexed-address-bindings-v1.json",
+    "sha256": "adee59a9d8569a7334205ca71639c3b23925ec36238debe81a045d081a496dc3",
+    "size": 17365
+  },
+  "historical_data_debt_bytes": 113,
+  "resolved_initialized_data": [
+    {
+      "id": "dgroup_2100",
+      "offset": 0,
+      "size": 8,
+      "module": "source-owned:graphics-formulas"
+    },
+    {
+      "id": "dgroup_2100",
+      "offset": 8,
+      "size": 16,
+      "module": "source-owned:g2108-color-translation"
+    },
+    {
+      "id": "dgroup_68ac",
+      "offset": 0,
+      "size": 10,
+      "module": "source-owned:graphics-formulas"
+    }
+  ],
   "strict_static_index": {
     "path": "work/source-only-dos/static-completeness/index-v1.json",
     "sha256": "092b3a15aaaf99737020c0c00e2a4340514dda3f0e2ff45369d1fa0a316d9a3a",
@@ -2410,6 +2464,72 @@
       ],
       "publics": [],
       "fixups": []
+    },
+    {
+      "module": "source-owned:graphics-formulas",
+      "source": {
+        "path": "work\\source-only-dos\\providers\\graphics-formulas.c",
+        "sha256": "27c6dd4d4f5781765b866824b125470b66a3c1b2aae463f2a270d59717100e40",
+        "size": 1526
+      },
+      "object": {
+        "path": "build\\source-only-dos\\objects\\GFXOWNER.OBJ",
+        "sha256": "9c91a242f71afdc157c00616c010da03cc73f8ddf83f2f01d541cec57d349a97",
+        "size": 275
+      },
+      "status": "PASS",
+      "data_only": true,
+      "live_initialized_bytes": 18,
+      "code_bytes": 0,
+      "communals": [],
+      "publics": [
+        {
+          "name": "_g_2100",
+          "segment": "_DATA",
+          "offset": 0
+        },
+        {
+          "name": "_mono_tail_masks",
+          "segment": "_DATA",
+          "offset": 8
+        },
+        {
+          "name": "_packed_tail_masks",
+          "segment": "_DATA",
+          "offset": 16
+        }
+      ],
+      "fixups": [],
+      "recipe": "consumer_mask_formulas",
+      "value_sha256": "668dab22ec9888a6a28e152b2f0512abd6fada7e457bab9b464d019ba07df86f"
+    },
+    {
+      "module": "source-owned:g2108-color-translation",
+      "source": {
+        "path": "work\\source-only-dos\\providers\\color-translation.c",
+        "sha256": "df0f034940f170aa0c8c2de9945e3b46f5104c4c4003656624d184f8e598a690",
+        "size": 183
+      },
+      "object": {
+        "path": "build\\source-only-dos\\objects\\G210808.OBJ",
+        "sha256": "bf14f21d4c5d5ff791dafd5b457f9efa2ee20afbc619d66b698f700e738a946d",
+        "size": 229
+      },
+      "status": "PASS",
+      "data_only": true,
+      "live_initialized_bytes": 16,
+      "code_bytes": 0,
+      "communals": [],
+      "publics": [
+        {
+          "name": "_g_2108",
+          "segment": "_DATA",
+          "offset": 0
+        }
+      ],
+      "fixups": [],
+      "recipe": "accepted_source_literal_translation",
+      "value_sha256": "245ed6cc9e5dddab0f416c29ce43af32e3bfe42ebb50c94bc10f8da6cbef33c2"
     }
   ],
   "reviewed_data_aliases": [
@@ -2994,8 +3114,8 @@
       },
       "object": {
         "path": "build\\source-only-dos\\objects\\U001.OBJ",
-        "sha256": "e2e0a36b0f777c3fad35364e1e9cb4694995cbf3989f5f0ff61e3e187c78f7f7",
-        "size": 14771
+        "sha256": "f44df0165e7ab30e4a31d98ee73cc9af066de4850a5122e9c568a120cdc07858",
+        "size": 14776
       },
       "status": "PASS",
       "segment_extents_unchanged": true,
@@ -3766,6 +3886,15 @@
           "frame": "DGROUP",
           "displacement": 0,
           "addend": "0000"
+        },
+        {
+          "segment": "S00B_TEXT",
+          "offset": 833,
+          "old_operand": 15818,
+          "target": "_g_3DCA",
+          "frame": "DGROUP",
+          "displacement": 0,
+          "addend": "0000"
         }
       ],
       "canonical_control_object": {
@@ -3825,6 +3954,50 @@
         "path": "build\\source-only-dos\\binding-controls\\U002.OBJ",
         "sha256": "da884b67720cb3bb3b57c40882a0c6e81d25b4dc784365a3fa74ec3a5a5d2301",
         "size": 5853
+      }
+    },
+    {
+      "module": "S00:35A6",
+      "source": {
+        "path": "src\\S00\\m35A6.asm",
+        "sha256": "0e563a69e0bc7a2ea11d7b963a9b0be7fbd3479e5dac1ed9985c47ffc533db73",
+        "size": 10105
+      },
+      "control_source": {
+        "path": "src\\S00\\m35A6.asm",
+        "sha256": "0e563a69e0bc7a2ea11d7b963a9b0be7fbd3479e5dac1ed9985c47ffc533db73",
+        "size": 10105
+      },
+      "object": {
+        "path": "build\\source-only-dos\\objects\\U003.OBJ",
+        "sha256": "f9e47a15bf4bf29287e09ca4150ac5290e0d5a4f35ffcb6aeaa4fb68b5ffaaf2",
+        "size": 1494
+      },
+      "status": "PASS",
+      "segment_extents_unchanged": true,
+      "live_segment_extents_unchanged": true,
+      "existing_publics_and_relocations_unchanged": true,
+      "live_existing_publics_and_relocations_unchanged": true,
+      "reviewed_frame_corrections": [],
+      "storage_bytes_unchanged": true,
+      "reviewed_debug_contributions": {},
+      "added_exports": [],
+      "added_communals": [],
+      "symbolic_operand_checks": [
+        {
+          "segment": "S00C_TEXT",
+          "offset": 405,
+          "old_operand": 26488,
+          "target": "_glyph_edge_masks",
+          "frame": "DGROUP",
+          "displacement": 0,
+          "addend": "0000"
+        }
+      ],
+      "canonical_control_object": {
+        "path": "build\\source-only-dos\\binding-controls\\U003.OBJ",
+        "sha256": "4bcdf8b6e3dac89461bb55d9990a314bc43df4f028ad842542ec8bf40cfce25f",
+        "size": 1466
       }
     },
     {
@@ -4380,6 +4553,50 @@
       }
     },
     {
+      "module": "S01:32B5",
+      "source": {
+        "path": "src\\S01\\m32B5.asm",
+        "sha256": "b8db05f10b37941e1a9cfa60f5dc87180e6075576703f29fc7b7557273b17394",
+        "size": 5260
+      },
+      "control_source": {
+        "path": "src\\S01\\m32B5.asm",
+        "sha256": "b8db05f10b37941e1a9cfa60f5dc87180e6075576703f29fc7b7557273b17394",
+        "size": 5260
+      },
+      "object": {
+        "path": "build\\source-only-dos\\objects\\U006.OBJ",
+        "sha256": "29df29f96a0a016c4728e41f83d3f0ec2e75a418fd7efe279f9b6966f48058d8",
+        "size": 891
+      },
+      "status": "PASS",
+      "segment_extents_unchanged": true,
+      "live_segment_extents_unchanged": true,
+      "existing_publics_and_relocations_unchanged": true,
+      "live_existing_publics_and_relocations_unchanged": true,
+      "reviewed_frame_corrections": [],
+      "storage_bytes_unchanged": true,
+      "reviewed_debug_contributions": {},
+      "added_exports": [],
+      "added_communals": [],
+      "symbolic_operand_checks": [
+        {
+          "segment": "S01C_TEXT",
+          "offset": 192,
+          "old_operand": 26796,
+          "target": "_mono_tail_masks",
+          "frame": "DGROUP",
+          "displacement": 0,
+          "addend": "0000"
+        }
+      ],
+      "canonical_control_object": {
+        "path": "build\\source-only-dos\\binding-controls\\U006.OBJ",
+        "sha256": "0b189f3cd0aef0232ecc449b89cc88db15a85b2364325ec5f1600ab6a37710d7",
+        "size": 868
+      }
+    },
+    {
       "module": "S02:3126",
       "source": {
         "path": "src\\S02\\m3126.asm",
@@ -4466,8 +4683,8 @@
       },
       "object": {
         "path": "build\\source-only-dos\\objects\\U008.OBJ",
-        "sha256": "d578466a13940167f55cb06ecdac14e3c8d389aa0c4cffa0d1f427b7f769f963",
-        "size": 8252
+        "sha256": "86356a5819ca72aa5490ba2e35cc7a432bcb83c796d6c57763d98646cf200999",
+        "size": 8308
       },
       "status": "PASS",
       "segment_extents_unchanged": true,
@@ -4904,12 +5121,128 @@
           "frame": "DGROUP",
           "displacement": 0,
           "addend": "0000"
+        },
+        {
+          "segment": "S03A_TEXT",
+          "offset": 3575,
+          "old_operand": 8742,
+          "target": "_DATA",
+          "frame": "DGROUP",
+          "displacement": 24,
+          "addend": "0000"
+        },
+        {
+          "segment": "S03A_TEXT",
+          "offset": 3596,
+          "old_operand": 8742,
+          "target": "_DATA",
+          "frame": "DGROUP",
+          "displacement": 24,
+          "addend": "0000"
+        },
+        {
+          "segment": "S03A_TEXT",
+          "offset": 3617,
+          "old_operand": 8742,
+          "target": "_DATA",
+          "frame": "DGROUP",
+          "displacement": 24,
+          "addend": "0000"
+        },
+        {
+          "segment": "S03A_TEXT",
+          "offset": 3638,
+          "old_operand": 8742,
+          "target": "_DATA",
+          "frame": "DGROUP",
+          "displacement": 24,
+          "addend": "0000"
+        },
+        {
+          "segment": "S03A_TEXT",
+          "offset": 3850,
+          "old_operand": 8742,
+          "target": "_DATA",
+          "frame": "DGROUP",
+          "displacement": 24,
+          "addend": "0000"
+        },
+        {
+          "segment": "S03A_TEXT",
+          "offset": 3871,
+          "old_operand": 8742,
+          "target": "_DATA",
+          "frame": "DGROUP",
+          "displacement": 24,
+          "addend": "0000"
+        },
+        {
+          "segment": "S03A_TEXT",
+          "offset": 3892,
+          "old_operand": 8742,
+          "target": "_DATA",
+          "frame": "DGROUP",
+          "displacement": 24,
+          "addend": "0000"
+        },
+        {
+          "segment": "S03A_TEXT",
+          "offset": 3913,
+          "old_operand": 8742,
+          "target": "_DATA",
+          "frame": "DGROUP",
+          "displacement": 24,
+          "addend": "0000"
         }
       ],
       "canonical_control_object": {
         "path": "build\\source-only-dos\\binding-controls\\U008.OBJ",
         "sha256": "2f77786773fb3bf5479254e9678e35cb69d3e916610a44dbacc997fb9e2d68d6",
         "size": 8242
+      }
+    },
+    {
+      "module": "S03:3258",
+      "source": {
+        "path": "src\\S03\\m3258.asm",
+        "sha256": "45182b0559f08e760e025fb1066203150637414c29e221ba7e6e5cea0bd30034",
+        "size": 40471
+      },
+      "control_source": {
+        "path": "src\\S03\\m3258.asm",
+        "sha256": "45182b0559f08e760e025fb1066203150637414c29e221ba7e6e5cea0bd30034",
+        "size": 40471
+      },
+      "object": {
+        "path": "build\\source-only-dos\\objects\\U010.OBJ",
+        "sha256": "353aa26b33bd7b51718e103be9d37f6427984117e599ea078f941295af738709",
+        "size": 6420
+      },
+      "status": "PASS",
+      "segment_extents_unchanged": true,
+      "live_segment_extents_unchanged": true,
+      "existing_publics_and_relocations_unchanged": true,
+      "live_existing_publics_and_relocations_unchanged": true,
+      "reviewed_frame_corrections": [],
+      "storage_bytes_unchanged": true,
+      "reviewed_debug_contributions": {},
+      "added_exports": [],
+      "added_communals": [],
+      "symbolic_operand_checks": [
+        {
+          "segment": "S03C_TEXT",
+          "offset": 1252,
+          "old_operand": 26804,
+          "target": "_packed_tail_masks",
+          "frame": "DGROUP",
+          "displacement": 0,
+          "addend": "0000"
+        }
+      ],
+      "canonical_control_object": {
+        "path": "build\\source-only-dos\\binding-controls\\U010.OBJ",
+        "sha256": "c8f40634a7c699ed250c526999d6ce1bfa7a9d12d4ef327b71784edc618080f3",
+        "size": 6395
       }
     },
     {
@@ -6582,6 +6915,47 @@
       }
     },
     {
+      "module": "root:2650",
+      "source": {
+        "path": "src\\root\\m2650.asm",
+        "sha256": "8b86e1416ac34675a6f638ed8a17d8e5e3092e155e314cebc807a75711a410d8",
+        "size": 2925
+      },
+      "control_source": {
+        "path": "src\\root\\m2650.asm",
+        "sha256": "8b86e1416ac34675a6f638ed8a17d8e5e3092e155e314cebc807a75711a410d8",
+        "size": 2925
+      },
+      "object": {
+        "path": "build\\source-only-dos\\objects\\U111.OBJ",
+        "sha256": "4f8690be47b3d59578d56785d45b513b31b41532adfd03521e5e076b75e874b9",
+        "size": 614
+      },
+      "status": "PASS",
+      "segment_extents_unchanged": true,
+      "live_segment_extents_unchanged": true,
+      "existing_publics_and_relocations_unchanged": true,
+      "live_existing_publics_and_relocations_unchanged": true,
+      "reviewed_frame_corrections": [],
+      "storage_bytes_unchanged": true,
+      "reviewed_debug_contributions": {},
+      "added_exports": [
+        {
+          "name": "_glyph_edge_masks",
+          "segment": "_DATA",
+          "offset": 12,
+          "generated_existing_view": true
+        }
+      ],
+      "added_communals": [],
+      "symbolic_operand_checks": [],
+      "canonical_control_object": {
+        "path": "build\\source-only-dos\\binding-controls\\U111.OBJ",
+        "sha256": "500b750e29535ca78e2d2407b7519c6b637187f1097b97b49d5b2de98cb28e08",
+        "size": 593
+      }
+    },
+    {
       "module": "root:28BC",
       "source": {
         "path": "src\\root\\m28BC.asm",
@@ -6640,8 +7014,8 @@
   "tool_inputs": [
     {
       "path": "tools\\source_only_dos.py",
-      "sha256": "46157a39f475a8b21c0f6adac360578a34faea8256093ce4ef9c8fb5fea5aa91",
-      "size": 54897
+      "sha256": "f3a0fad9cdafa30cb22071e358d0b59ab0bf04a2e06cd05f7170ebe248242470",
+      "size": 58668
     },
     {
       "path": "tools\\compiler.py",
@@ -6660,8 +7034,8 @@
     },
     {
       "path": "tools\\dos_source_bindings.py",
-      "sha256": "41289f8d39ac02cdb17200e1d70a8e5d8c48576c6801366f7fd65b7b3a50bb9b",
-      "size": 56279
+      "sha256": "d2ace80d04ea065422e0a546725b867fb0f54219f1ab2b0c7815bf4f7369da34",
+      "size": 69594
     },
     {
       "path": "tools\\farbss.py",
@@ -6671,22 +7045,22 @@
   ],
   "validation_logs": [
     {
-      "path": "build/source-only-dos-run-v13.log",
-      "sha256": "e0eab253a6de45a9755f440c9886e87008452e782c867114a28fa8012ec68c0f",
-      "size": 4348
+      "path": "build/source-only-dos-run-v14.log",
+      "sha256": "c5570fcf62ab99bdf2a094e0f5ac56ce3066bf19907c5a5402298b951f71be4c",
+      "size": 4415
     },
     {
-      "path": "build/source-only-dos-tests-v13.log",
-      "sha256": "b17fcb4da02ca6b5f90296b054825a936b8cdb076957fe9261161cb4ce534baf",
-      "size": 766
+      "path": "build/source-only-dos-tests-v14.log",
+      "sha256": "b9c93a71a207808c64348704d91fd39553bcb30bd9926f326817aece626ccca7",
+      "size": 664
     },
     {
-      "path": "build/source-only-dos-validation-v13.log",
-      "sha256": "fe86895759534286937a671bfb5fec1bccd9384b6527d1e05ee172b171cd76d7",
-      "size": 4752
+      "path": "build/source-only-dos-validation-v14.log",
+      "sha256": "786ea0446e31ee04f020b58675893cfa939f724dddae99d859a181b6602b4ad5",
+      "size": 4736
     }
   ],
   "historical_validation": "PASS",
-  "source_only_tests": "35 targeted tests included in 349 repository tests PASS (2 skips)",
+  "source_only_tests": "37 targeted tests included in 351 repository tests PASS (2 skips)",
   "claim_limit": "Compile and symbolic binding proofs only; no complete link, runtime equivalence or human acceptance. Full inventories are reproducible build output."
 }

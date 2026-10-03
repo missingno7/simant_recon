@@ -193,6 +193,8 @@ def provider_communals(module):
     spec = PROVIDER_SPECS.get(module)
     if not spec:
         raise ValueError('unreviewed functional storage provider')
+    if module in INITIALIZED_PROVIDER_SPECS:
+        return []
     far = module in FAR_PROVIDER_MODULES
     words = FAR_PROVIDER_WORD_ARRAYS.get(module, set())
     records = FAR_PROVIDER_RECORD_ARRAYS.get(module, {})
@@ -226,6 +228,186 @@ def rtlink_alias_delta(offset):
     return f' + 0{offset:X}h' if offset else ''
 
 
+# Generated names below describe functional roles, never historical spellings.
+INDEXED_OPERANDS = {
+    'S00:31AD': ('S00B_TEXT', [0x341], 'external', '_g_3DCA', 0, 0x3DCA),
+    'S00:35A6': ('S00C_TEXT', [0x195], 'external', '_glyph_edge_masks', 0, 0x6778),
+    'S03:3126': ('S03A_TEXT', [0xDF7, 0xE0C, 0xE21, 0xE36, 0xF0A, 0xF1F, 0xF34, 0xF49],
+                  'segment', '_DATA', 0x18, 0x2226),
+}
+GRAPHICS_MASK_OPERANDS = {
+    'S01:32B5': ('S01C_TEXT', [0xC0], 'external', '_mono_tail_masks', 0, 0x68AC),
+    'S03:3258': ('S03C_TEXT', [0x4E4], 'external', '_packed_tail_masks', 0, 0x68B4),
+}
+GLYPH_EXPORT = {'name': '_glyph_edge_masks', 'segment': '_DATA', 'offset': 12,
+                'generated_existing_view': True}
+
+
+def closed_operand(module, families, flag):
+    segment, offsets, kind, target, displacement, original = families[module]
+    return {flag: True, 'segment': segment, 'offsets': offsets, 'count': len(offsets),
+            'target_kind': kind, 'target': target, 'displacement': displacement,
+            'original_value': original, 'frame_kind': 'group', 'frame': 'DGROUP',
+            'encoded_addend': '0000'}
+
+
+def review_indexed_binding(binding, module=None, symbols=None):
+    specs = [s for s in binding.get('relocations', []) if s.get('indexed_operand')]
+    enabled = binding.get('indexed_address_operands')
+    if enabled:
+        if binding['module'] not in INDEXED_OPERANDS or specs != [
+                closed_operand(binding['module'], INDEXED_OPERANDS, 'indexed_operand')]:
+            raise ValueError('unreviewed indexed address site set')
+    elif specs:
+        raise ValueError('indexed operands lack reviewed ownership')
+    exports = [p for p in binding.get('exports', []) if p.get('generated_existing_view')]
+    if binding.get('glyph_edge_owner'):
+        if binding['module'] != 'root:2650' or exports != [GLYPH_EXPORT]:
+            raise ValueError('unreviewed generated existing-data view')
+        if module is not None and module['placements']['_DATA'] != {
+                'seg': 0x55B3, 'off': 0x676C, 'size': 20}:
+            raise ValueError('glyph edge source contribution changed')
+    elif exports:
+        raise ValueError('generated existing view lacks closed source owner')
+    if module is not None and enabled:
+        if binding['module'] == 'S03:3126':
+            placement = module['placements']['_DATA']
+            if (placement['seg'], placement['off'] + 24) != (0x55B3, 0x2226):
+                raise ValueError('indexed local table source anchor changed')
+            for delta in range(4):
+                anchor = symbols['data'][f'g_{0x2226+delta:04X}']
+                if (anchor['seg'], anchor['off']) != (0x55B3, 0x2226+delta):
+                    raise ValueError('indexed local table field changed')
+        elif binding['module'] == 'S00:31AD':
+            anchor = symbols['data']['g_3DCA']
+            if (anchor['seg'], anchor['off']) != (0x55B3, 0x3DCA):
+                raise ValueError('indexed external owner anchor changed')
+
+
+def review_graphics_binding(binding):
+    specs = [s for s in binding.get('relocations', []) if s.get('graphics_mask_operand')]
+    if specs and (binding['module'] not in GRAPHICS_MASK_OPERANDS or specs != [
+            closed_operand(binding['module'], GRAPHICS_MASK_OPERANDS, 'graphics_mask_operand')]):
+        raise ValueError('unreviewed graphics mask operand site')
+
+
+INITIALIZED_PROVIDER_SPECS = {
+    'source-owned:graphics-formulas': ('consumer_mask_formulas',
+        [('_g_2100', 0, 8), ('_mono_tail_masks', 8, 8), ('_packed_tail_masks', 16, 2)]),
+    'source-owned:g2108-color-translation': ('accepted_source_literal_translation', [('_g_2108', 0, 16)]),
+}
+
+
+def initialized_payload(module):
+    if module == 'source-owned:graphics-formulas':
+        return bytes([0x80 >> phase for phase in range(8)] +
+                     [0xFF if r == 0 else (0xFF << (8-r)) & 0xFF for r in range(8)] +
+                     [0xFF, 0xFF & ~0x0F])
+    if module == 'source-owned:g2108-color-translation':
+        from pathlib import Path
+        # Read only the accepted source table, never the research image/debt bytes.
+        source = (Path(__file__).resolve().parents[1] / 'src/S03/m3126.asm').read_text(encoding='latin1')
+        match = re.search(r'(?m)^_g_2216\s+db\s+([^\n]+)\n\s*db\s+([^\n]+)', source)
+        if not match:
+            raise ValueError('accepted color-map source anchor changed')
+        tokens = [t.strip() for t in ','.join(match.groups()).split(',')]
+        values = [int(t[:-1], 16) if re.fullmatch(r'[0-9A-Fa-f]+h', t) else int(t) for t in tokens]
+        if len(values) != 16:
+            raise ValueError('accepted color-map extent changed')
+        return bytes(values)
+    raise ValueError('unreviewed initialized source recipe')
+
+
+def initialized_publics(module):
+    payload = initialized_payload(module)
+    return [{'name': name, 'segment': '_DATA', 'offset': offset, 'extent_bytes': length,
+             'initialized': True, 'value_sha256': hashlib.sha256(payload[offset:offset+length]).hexdigest()}
+            for name, offset, length in INITIALIZED_PROVIDER_SPECS[module][1]]
+
+
+def review_initialized_provider(provider, symbols=None):
+    module = provider['module']
+    if (provider.get('storage_kind') != 'initialized_storage'
+            or provider.get('recipe') != INITIALIZED_PROVIDER_SPECS[module][0]
+            or provider.get('public_DATA') != initialized_publics(module)):
+        raise ValueError('initialized owner recipe/public contract changed')
+    if symbols is not None:
+        for name, offset in (('_g_2100', 0x2100), ('_g_2108', 0x2108)):
+            if name not in {r['name'] for r in provider['public_DATA']}:
+                continue
+            anchor = symbols['data'][name[1:]]
+            if (anchor['seg'], anchor['off']) != (0x55B3, offset):
+                raise ValueError('initialized source owner registry anchor changed')
+
+
+def verify_initialized_provider(obj, provider):
+    review_initialized_provider(provider)
+    module = provider['module']
+    payload = initialized_payload(module)
+    expected_publics = [{'name': name, 'segment': '_DATA', 'offset': offset}
+                        for name, offset, _ in INITIALIZED_PROVIDER_SPECS[module][1]]
+    live = [d for d in obj.segment_defs if d['length']]
+    if (obj.communals or obj.externals or obj.local_publics or obj.linker_fixups or obj.fixups
+            or obj.publics != expected_publics
+            or len(live) != 1 or live[0]['name'] != '_DATA'
+            or (live[0]['class'], live[0]['combine'], live[0]['use_32bit_offset']) != ('DATA', 'public', False)
+            or not any(g['name'] == 'DGROUP' and '_DATA' in g['segments'] for g in obj.groups)
+            or obj.segment_length('_DATA') != len(payload) or obj.segment_bytes('_DATA') != payload
+            or any(length for name, length in obj.segment_lengths.items() if name != '_DATA')
+            or any(data for name, data in obj.segments.items() if name != '_DATA')):
+        raise ValueError('initialized provider introduced wrong values/layout/imports/code')
+    return {'status': 'PASS', 'data_only': True, 'live_initialized_bytes': len(payload),
+            'code_bytes': 0, 'communals': [], 'publics': expected_publics, 'fixups': [],
+            'recipe': provider['recipe'], 'value_sha256': hashlib.sha256(payload).hexdigest()}
+
+
+def require_initialized_and_indexed_contracts(report, profile, tool):
+    from pathlib import Path
+    components = [(str(Path(tool['directory']) / name), digest) for name, digest in tool['files'].items()]
+    components += [(r['path'], r['sha256']) for r in report['runtime_components']]
+    rows = {r['module']: r for r in report['translation_units']}
+    specifications = [
+        ('source-owned:g2108-color-translation', 'g2108_color_translation_contract', {
+            'separate_mutable_exact_values': 'PASS', 'reversed_mapping_negative': 'FAIL_VALUES',
+            'one_byte_shifted_map_base_negative': 'FAIL_VALUES', 'alias_view_negative': 'FAIL_ALIAS'}),
+        ('source-owned:graphics-formulas', 'graphics_formula_binding_contract', {
+            'positive': 'PASS', 'negative_s01_wrong_frame': 'FAIL', 'negative_s01_wrong_base': 'FAIL',
+            'negative_s03_wrong_frame': 'FAIL', 'negative_s03_wrong_base': 'FAIL',
+            'negative_reversed_selector': 'FAIL', 'negative_low_bit_mono': 'FAIL',
+            'negative_low_nibble_packed': 'FAIL'}),
+        ('S00:35A6', 'driver_indexed_address_contract', {'LITERAL': 'LITERAL', 'DGROUP': 'DGROUP', 'DATA': 'OTHER'})]
+    for module, key, required in specifications:
+        if module not in rows or (module == 'S00:35A6' and not (rows[module].get('source_binding') or {}).get('indexed_address_operands')):
+            continue
+        contract = report.get(key, {})
+        cases = [r for r in contract.get('cases', []) if r['linker'] == profile]
+        identities = {runtime_component_path(p['path']): p['sha256'] for p in contract.get('inputs', [])}
+        if (contract.get('root_reviewed') is not True or not contract.get('all_required_checks_pass')
+                or contract.get('required_cases') != required
+                or len(cases) != len(required) or {r['case'] for r in cases} != set(required)
+                or not all(r['passed'] and r['expected'] == r['actual'] == required[r['case']] for r in cases)
+                or any(identities.get(runtime_component_path(path)) != digest for path, digest in components)):
+            raise ValueError(f'{key} lacks selected linker/closed source runtime evidence')
+        if module in INITIALIZED_PROVIDER_SPECS and contract.get('public_DATA') != initialized_publics(module):
+            raise ValueError('initialized runtime contract belongs to different owner')
+        if module == 'source-owned:graphics-formulas':
+            if not all((rows.get(m, {}).get('source_binding') or {}).get('relocations') == [
+                    closed_operand(m, GRAPHICS_MASK_OPERANDS, 'graphics_mask_operand')] for m in GRAPHICS_MASK_OPERANDS):
+                raise ValueError('graphics runtime contract lacks complete consumer site set')
+        if module == 'S00:35A6':
+            sites = [[m, segment, offset, target] for m, (segment, offsets, _, target, _, _) in INDEXED_OPERANDS.items()
+                     for offset in offsets]
+            if (contract.get('signed_site_tuples') != sites
+                    or not (rows.get('root:2650', {}).get('source_binding') or {}).get('glyph_edge_owner')
+                    or not all((rows.get(m, {}).get('source_binding') or {}).get('indexed_address_operands') for m in INDEXED_OPERANDS)
+                    or not all(r.get('actual_DS_SS_DGROUP') and r.get('expectation_matched')
+                               and r['observed_hex'] == r['expected_observation_hex']
+                               and r.get('emulator_exit') == 0
+                               and r['link_map']['data_group_offset'] > 0
+                               and r['link_map']['data_frame_skew'] == 2 for r in cases)):
+                raise ValueError('indexed runtime contract lacks shifted-group site proof')
+
+
 def debug_fingerprint(obj, segment):
     """Account for an entire compiler debug contribution, including every fixup."""
     packet = {'definition': [s for s in obj.segment_defs if s['name'] == segment],
@@ -246,6 +428,8 @@ def review_addresses(binding, module, symbols):
     """Join source-owned relative locations to already reviewed symbol anchors."""
     review_pattern_binding(binding)
     review_local_frame_sites(binding)
+    review_indexed_binding(binding, module, symbols)
+    review_graphics_binding(binding)
     scalar_names = set()
     array_names = {}
     if binding.get('scalar_storage'):
@@ -287,6 +471,8 @@ def review_addresses(binding, module, symbols):
                 for s in symbols['data'].values()):
             raise ValueError('communal contains another registered storage view')
     for public in binding.get('exports', []):
+        if public.get('generated_existing_view'):
+            continue  # Exact source extent/address checked by review_indexed_binding.
         if public['segment'] in module['placements']:
             placement = module['placements'][public['segment']]
             segment, offset = placement['seg'], placement['off'] + public['offset']
@@ -323,6 +509,8 @@ def review_addresses(binding, module, symbols):
         if (placement['seg'], placement['off'] + spec['displacement']) != (anchor['seg'], anchor['off']):
             raise ValueError('local frame source owner conflicts with registry anchor')
     for spec in binding.get('relocations', []):
+        if spec.get('indexed_operand') or spec.get('graphics_mask_operand'):
+            continue  # Closed site sets checked above, not speculative registry names.
         if spec.get('pattern_operand'):
             if (symbols['data']['g_41C0']['seg'], symbols['data']['g_41C0']['off'] + 16) != (0x55B3, 0x41D0):
                 raise ValueError('pattern bank base anchor changed')
@@ -372,6 +560,9 @@ def review_provider_source(text, provider, symbols=None):
             or provider.get('communals') != provider_communals(provider.get('module'))
             or ' '.join(text.split()) != spec[3]):
         raise ValueError('unreviewed functional storage provider')
+    if provider['module'] in INITIALIZED_PROVIDER_SPECS:
+        review_initialized_provider(provider, symbols)
+        return
     if symbols is not None and spec[1] is None:
         addresses = dict(zip(('_g_9120', '_g_9122', '_g_9124', '_g_91A0', '_g_91A2',
                              '_g_91A4', '_g_91A8', '_g_91AC', '_g_8BD2', '_g_8BD4', '_g_9126', '_g_94E4',
@@ -407,6 +598,8 @@ def review_provider_source(text, provider, symbols=None):
 
 
 def verify_provider(obj, provider):
+    if provider.get('module') in INITIALIZED_PROVIDER_SPECS:
+        return verify_initialized_provider(obj, provider)
     spec = PROVIDER_SPECS.get(provider.get('module'))
     if not spec or provider.get('communals') != provider_communals(provider.get('module')):
         raise ValueError('unreviewed functional storage provider')
@@ -752,6 +945,8 @@ def verify_objects(original, generated, binding):
     review_pattern_binding(binding)
     review_local_frame_sites(binding)
     review_segment_corrections(binding)
+    review_indexed_binding(binding)
+    review_graphics_binding(binding)
     debug = binding.get('debug_contributions', {})
     for segment, contract in debug.items():
         if (not binding.get('queue_storage') or segment not in ('$$SYMBOLS', '$$TYPES')
@@ -813,7 +1008,7 @@ def verify_objects(original, generated, binding):
     if old_fixups - new_fixups:
         raise ValueError('DOS binding changed an existing relocation')
     additions = new_fixups - old_fixups
-    if frame_checks and [fixup_key(f) for f in original_fixups] != [
+    if [fixup_key(f) for f in original_fixups] != [
             fixup_key(f) for f in generated.linker_fixups
             if f['segment'] not in debug and not additions[fixup_key(f)]]:
         raise ValueError('assembly frame correction changed ordered existing relocations')
@@ -833,6 +1028,10 @@ def verify_objects(original, generated, binding):
         if spec.get('pattern_operand') and sorted((f['segment'], f['offset']) for f in matches) != [
                 (spec['segment'], offset) for offset in PATTERN_BANK_SITES]:
             raise ValueError('pattern bank relocation location set changed')
+        if (spec.get('indexed_operand') or spec.get('graphics_mask_operand')) and sorted(
+                (f['segment'], f['offset']) for f in matches) != [
+                (spec['segment'], offset) for offset in spec['offsets']]:
+            raise ValueError('indexed relocation location set changed')
         for f in matches:
             if (f['width'] != 2 or f['loc'] != 'offset16' or f['self_relative']
                     or f['frame_kind'] != spec['frame_kind']
@@ -878,3 +1077,8 @@ def verify_objects(original, generated, binding):
             'reviewed_debug_contributions': debug, 'added_exports': binding.get('exports', []),
             'added_communals': binding.get('communals', []),
             'symbolic_operand_checks': checks}
+
+
+# Closed initialized owners: source recipes, not an executable-byte provider.
+PROVIDER_SPECS['source-owned:graphics-formulas'] = ('GFXOWNER', None, (('_g_2100', 8), ('_mono_tail_masks', 8), ('_packed_tail_masks', 2)), '#define PLANE_BIT(phase) \\ ((unsigned char)(0x80u >> (phase))) unsigned char near g_2100[8] = { PLANE_BIT(0), PLANE_BIT(1), PLANE_BIT(2), PLANE_BIT(3), PLANE_BIT(4), PLANE_BIT(5), PLANE_BIT(6), PLANE_BIT(7) }; #define BYTE_TAIL_MASK(residue) \\ ((unsigned char)((residue) == 0 ? 0xFFu : \\ ((0xFFu << (8 - (residue))) & 0xFFu))) unsigned char near mono_tail_masks[8] = { BYTE_TAIL_MASK(0), BYTE_TAIL_MASK(1), BYTE_TAIL_MASK(2), BYTE_TAIL_MASK(3), BYTE_TAIL_MASK(4), BYTE_TAIL_MASK(5), BYTE_TAIL_MASK(6), BYTE_TAIL_MASK(7) }; #define PACKED_TAIL_MASK(is_odd) \\ ((unsigned char)((is_odd) ? (0xFFu & ~0x0Fu) : 0xFFu)) unsigned char near packed_tail_masks[2] = { PACKED_TAIL_MASK(0), PACKED_TAIL_MASK(1) };')
+PROVIDER_SPECS['source-owned:g2108-color-translation'] = ('G210808', None, (('_g_2108', 16),), 'unsigned char near g_2108[16] = { 0x00F, 0x00E, 0x00C, 4, 0x00D, 5, 1, 0x00B, 2, 0x00A, 6, 6, 7, 7, 8, 0 };')

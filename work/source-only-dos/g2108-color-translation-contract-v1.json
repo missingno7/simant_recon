@@ -1,0 +1,1136 @@
+{
+  "schema": "simant-dos-initialized-storage-contract-candidate-v1",
+  "category": "REVIEWED_SOURCE_STORAGE_CONTRACT",
+  "status": "REVIEWED_SOURCE_RUNTIME_CONTRACT",
+  "root_reviewed": true,
+  "all_required_checks_pass": true,
+  "members": [
+    "g_2108"
+  ],
+  "dos_type": "unsigned char near[16]",
+  "element_bytes": 1,
+  "extent_bytes": 16,
+  "storage_kind": "initialized_storage",
+  "public_DATA": [
+    {
+      "name": "_g_2108",
+      "segment": "_DATA",
+      "offset": 0,
+      "extent_bytes": 16,
+      "initialized": true,
+      "value_sha256": "245ed6cc9e5dddab0f416c29ce43af32e3bfe42ebb50c94bc10f8da6cbef33c2"
+    }
+  ],
+  "initialized_storage": {
+    "recipe": "accepted_source_literal_translation",
+    "provider_source": {
+      "path": "work/source-only-dos/providers/color-translation.c",
+      "sha256": "df0f034940f170aa0c8c2de9945e3b46f5104c4c4003656624d184f8e598a690",
+      "size": 183
+    },
+    "public_DATA": [
+      {
+        "name": "_g_2108",
+        "segment": "_DATA",
+        "offset": 0,
+        "extent_bytes": 16,
+        "initialized": true,
+        "value_sha256": "245ed6cc9e5dddab0f416c29ce43af32e3bfe42ebb50c94bc10f8da6cbef33c2"
+      }
+    ],
+    "candidate_object_sha256": "bf14f21d4c5d5ff791dafd5b457f9efa2ee20afbc619d66b698f700e738a946d",
+    "candidate_object_basename": "G210808",
+    "compiler_profile": "msc600ax",
+    "compiler_flags": [
+      "/AL",
+      "/Os",
+      "/Gs"
+    ],
+    "segment_extents": {
+      "G210808_TEXT": 0,
+      "_DATA": 16,
+      "CONST": 0,
+      "_BSS": 0
+    },
+    "initialized_data_size": 16,
+    "initialized_data_sha256": "245ed6cc9e5dddab0f416c29ce43af32e3bfe42ebb50c94bc10f8da6cbef33c2",
+    "matches_accepted_source_data_sha256": true,
+    "fixup_count": 0,
+    "ordered_linker_fixup_count": 0,
+    "external_names": [],
+    "communal_records": [],
+    "exact_one_public_16_byte_initialized_DATA_extent": true
+  },
+  "source_recipe": {
+    "kind": "accepted_source_literal_translation",
+    "source": {
+      "path": "src\\S03\\m3126.asm",
+      "sha256": "b0b9d296f23b4f8a5b4706008b21b6ad96429636da11bf22ddb2126ee362f2ff",
+      "size": 35317
+    },
+    "accepted_declaration": "_g_2216 in src/S03/m3126.asm, lines 52-53",
+    "translation": "Each accepted MASM literal is copied in source order. Hex suffix H is translated to C prefix 0x while retaining the digits; decimal literals remain decimal. No original-executable value is used to generate source.",
+    "source_literal_map": [
+      {
+        "source_line": 52,
+        "masm_literal": "00Fh",
+        "c_literal": "0x00F",
+        "value": 15
+      },
+      {
+        "source_line": 52,
+        "masm_literal": "00Eh",
+        "c_literal": "0x00E",
+        "value": 14
+      },
+      {
+        "source_line": 52,
+        "masm_literal": "00Ch",
+        "c_literal": "0x00C",
+        "value": 12
+      },
+      {
+        "source_line": 52,
+        "masm_literal": "4",
+        "c_literal": "4",
+        "value": 4
+      },
+      {
+        "source_line": 52,
+        "masm_literal": "00Dh",
+        "c_literal": "0x00D",
+        "value": 13
+      },
+      {
+        "source_line": 52,
+        "masm_literal": "5",
+        "c_literal": "5",
+        "value": 5
+      },
+      {
+        "source_line": 52,
+        "masm_literal": "1",
+        "c_literal": "1",
+        "value": 1
+      },
+      {
+        "source_line": 52,
+        "masm_literal": "00Bh",
+        "c_literal": "0x00B",
+        "value": 11
+      },
+      {
+        "source_line": 52,
+        "masm_literal": "2",
+        "c_literal": "2",
+        "value": 2
+      },
+      {
+        "source_line": 52,
+        "masm_literal": "00Ah",
+        "c_literal": "0x00A",
+        "value": 10
+      },
+      {
+        "source_line": 52,
+        "masm_literal": "6",
+        "c_literal": "6",
+        "value": 6
+      },
+      {
+        "source_line": 52,
+        "masm_literal": "6",
+        "c_literal": "6",
+        "value": 6
+      },
+      {
+        "source_line": 53,
+        "masm_literal": "7",
+        "c_literal": "7",
+        "value": 7
+      },
+      {
+        "source_line": 53,
+        "masm_literal": "7",
+        "c_literal": "7",
+        "value": 7
+      },
+      {
+        "source_line": 53,
+        "masm_literal": "8",
+        "c_literal": "8",
+        "value": 8
+      },
+      {
+        "source_line": 53,
+        "masm_literal": "0",
+        "c_literal": "0",
+        "value": 0
+      }
+    ],
+    "candidate_declaration": "unsigned char near g_2108[16]",
+    "distinct_object": true,
+    "lifetime_mutability_claim": "The object is initialized and writable; no claim that its value remains immutable for the full game lifetime.",
+    "original_executable_used_to_generate_provider": false
+  },
+  "independent_research_corroboration": {
+    "receipt": {
+      "path": "work/source-only-dos/color-translation-initial-state-research-v1.json",
+      "sha256": "135f1178cdf2c8b022677d37aa66c00e5394e63c9c3d6a36c0d9a73a463cf2c4",
+      "size": 5417
+    },
+    "original_image_sha256_recorded_in_receipt": "aa0596c6766322a8229ee3c36e57048c92adc82d50fbe2ef37afb8b85fcf4f11",
+    "original_g_2108_width": 16,
+    "original_g_2108_value_sha256": "245ed6cc9e5dddab0f416c29ce43af32e3bfe42ebb50c94bc10f8da6cbef33c2",
+    "accepted_source_value_sha256": "245ed6cc9e5dddab0f416c29ce43af32e3bfe42ebb50c94bc10f8da6cbef33c2",
+    "digest_match": true,
+    "source_predicate": {
+      "exactly_16_literals": true,
+      "all_values_are_color_nibbles": true,
+      "accepted_source_parsers_agree": true
+    },
+    "receipt_contains_raw_table_bytes": false
+  },
+  "normalizer_object_check": {
+    "status": "PASS",
+    "tool": {
+      "path": "tools/dos_source_bindings.py",
+      "sha256": "d2ace80d04ea065422e0a546725b867fb0f54219f1ab2b0c7815bf4f7369da34",
+      "size": 69594
+    },
+    "compiler": {
+      "path": "tools/compiler.py",
+      "sha256": "ef1d59a0fbe0e0780a6b8480e13d7d07859a14ae185c00a4420e1238a2ae35bb",
+      "size": 11765
+    },
+    "omf_reader": {
+      "path": "tools/omf.py",
+      "sha256": "951137ecbfaeb6e40fd5230c94398141da7ec7bdb7399d9cd74d46ded3045612",
+      "size": 29112
+    },
+    "provider_source": {
+      "path": "work/source-only-dos/providers/color-translation.c",
+      "sha256": "df0f034940f170aa0c8c2de9945e3b46f5104c4c4003656624d184f8e598a690",
+      "size": 183
+    },
+    "module": "source-owned:g2108-color-translation",
+    "basename": "G210808",
+    "profile": "msc600ax",
+    "flags": [
+      "/AL",
+      "/Os",
+      "/Gs"
+    ],
+    "object_sha256": "bf14f21d4c5d5ff791dafd5b457f9efa2ee20afbc619d66b698f700e738a946d",
+    "object_size": 229,
+    "verification": {
+      "status": "PASS",
+      "data_only": true,
+      "live_initialized_bytes": 16,
+      "code_bytes": 0,
+      "communals": [],
+      "publics": [
+        {
+          "name": "_g_2108",
+          "segment": "_DATA",
+          "offset": 0
+        }
+      ],
+      "fixups": [],
+      "recipe": "accepted_source_literal_translation",
+      "value_sha256": "245ed6cc9e5dddab0f416c29ce43af32e3bfe42ebb50c94bc10f8da6cbef33c2"
+    },
+    "registry_anchor_check": {
+      "status": "PASS",
+      "symbol": "g_2108",
+      "segment": 21939,
+      "offset": 8456,
+      "source": {
+        "path": "layout/symbols.json",
+        "sha256": "0f5dd5b0a211945a97782cfccdb9bb31b0dfd07fcde5df4d4f9486b487eb0125",
+        "size": 800809
+      },
+      "provider_public_name": "_g_2108"
+    }
+  },
+  "required_cases": {
+    "separate_mutable_exact_values": "PASS",
+    "reversed_mapping_negative": "FAIL_VALUES",
+    "one_byte_shifted_map_base_negative": "FAIL_VALUES",
+    "alias_view_negative": "FAIL_ALIAS"
+  },
+  "runtime_profiles": [
+    {
+      "linker": "rtlink400",
+      "case_count": 4,
+      "positive_pass_count": 1,
+      "negative_outcome_count": 3,
+      "all_cases_passed": true
+    },
+    {
+      "linker": "rtlink610",
+      "case_count": 4,
+      "positive_pass_count": 1,
+      "negative_outcome_count": 3,
+      "all_cases_passed": true
+    }
+  ],
+  "cases": [
+    {
+      "linker": "rtlink400",
+      "case": "separate_mutable_exact_values",
+      "expected": "PASS",
+      "actual": "PASS",
+      "passed": true,
+      "emulator_exit": 0,
+      "timed_out": false
+    },
+    {
+      "linker": "rtlink400",
+      "case": "reversed_mapping_negative",
+      "expected": "FAIL_VALUES",
+      "actual": "FAIL_VALUES",
+      "passed": true,
+      "emulator_exit": 0,
+      "timed_out": false
+    },
+    {
+      "linker": "rtlink400",
+      "case": "one_byte_shifted_map_base_negative",
+      "expected": "FAIL_VALUES",
+      "actual": "FAIL_VALUES",
+      "passed": true,
+      "emulator_exit": 0,
+      "timed_out": false
+    },
+    {
+      "linker": "rtlink400",
+      "case": "alias_view_negative",
+      "expected": "FAIL_ALIAS",
+      "actual": "FAIL_ALIAS",
+      "passed": true,
+      "emulator_exit": 0,
+      "timed_out": false
+    },
+    {
+      "linker": "rtlink610",
+      "case": "separate_mutable_exact_values",
+      "expected": "PASS",
+      "actual": "PASS",
+      "passed": true,
+      "emulator_exit": 0,
+      "timed_out": false
+    },
+    {
+      "linker": "rtlink610",
+      "case": "reversed_mapping_negative",
+      "expected": "FAIL_VALUES",
+      "actual": "FAIL_VALUES",
+      "passed": true,
+      "emulator_exit": 0,
+      "timed_out": false
+    },
+    {
+      "linker": "rtlink610",
+      "case": "one_byte_shifted_map_base_negative",
+      "expected": "FAIL_VALUES",
+      "actual": "FAIL_VALUES",
+      "passed": true,
+      "emulator_exit": 0,
+      "timed_out": false
+    },
+    {
+      "linker": "rtlink610",
+      "case": "alias_view_negative",
+      "expected": "FAIL_ALIAS",
+      "actual": "FAIL_ALIAS",
+      "passed": true,
+      "emulator_exit": 0,
+      "timed_out": false
+    }
+  ],
+  "probe_source": {
+    "path": "work/source-only-dos/g2108-color-map-admission-probe-v14-final.py",
+    "sha256": "f9f611eee2851ccbeb959b95b03548a609b1eac3a09aa8324cd91391601333db",
+    "size": 24818
+  },
+  "fresh_probe_report": {
+    "path": "build/workers/dos_color_translation_owners/admission-source-only-v14-final/g2108-color-map-admission-report.json",
+    "sha256": "96837f7878ae6ababe101bd12484bf3bc6b1a50cfef204e3b3fa2920e1e0bba8",
+    "size": 26599
+  },
+  "probe_run_input_pins": [
+    {
+      "path": "work/source-only-dos/g2108-color-map-admission-probe-v14-final.py",
+      "sha256": "f9f611eee2851ccbeb959b95b03548a609b1eac3a09aa8324cd91391601333db",
+      "size": 24818
+    },
+    {
+      "path": "src\\S03\\m3126.asm",
+      "sha256": "b0b9d296f23b4f8a5b4706008b21b6ad96429636da11bf22ddb2126ee362f2ff",
+      "size": 35317
+    },
+    {
+      "path": "src/S00/m31AD.asm",
+      "sha256": "5d2ad69ff4affb4be4242e82187065cc5e0b3502cc0cc3e00ad3802ccee2656e",
+      "size": 81450
+    },
+    {
+      "path": "src/S03/m3126.asm",
+      "sha256": "b0b9d296f23b4f8a5b4706008b21b6ad96429636da11bf22ddb2126ee362f2ff",
+      "size": 35317
+    },
+    {
+      "path": "src/root/m1B4E.asm",
+      "sha256": "a32d75d2d4ea36980b659d26e9ddd86bcde65d9e250ebac4cdc29c0e847c67a2",
+      "size": 8451
+    },
+    {
+      "path": "layout/symbols.json",
+      "sha256": "0f5dd5b0a211945a97782cfccdb9bb31b0dfd07fcde5df4d4f9486b487eb0125",
+      "size": 800809
+    },
+    {
+      "path": "layout\\manifest.json",
+      "sha256": "025a0a9255d910cae4b122ab5a3f3fb40888bb456d7fe42158db7c9e622fcf50",
+      "size": 628980
+    },
+    {
+      "path": "layout\\toolchain.json",
+      "sha256": "c0bb71cd8b1f4a1a1f91299bd3b6148aa67b7a1d12c3c3946a229272593eb274",
+      "size": 39241
+    },
+    {
+      "path": "tools/compiler.py",
+      "sha256": "ef1d59a0fbe0e0780a6b8480e13d7d07859a14ae185c00a4420e1238a2ae35bb",
+      "size": 11765
+    },
+    {
+      "path": "tools/source_only_dos.py",
+      "sha256": "f3a0fad9cdafa30cb22071e358d0b59ab0bf04a2e06cd05f7170ebe248242470",
+      "size": 58668
+    },
+    {
+      "path": "tools/omf.py",
+      "sha256": "951137ecbfaeb6e40fd5230c94398141da7ec7bdb7399d9cd74d46ded3045612",
+      "size": 29112
+    },
+    {
+      "path": "work/source-only-dos/color-translation-initial-state-research-v1.json",
+      "sha256": "135f1178cdf2c8b022677d37aa66c00e5394e63c9c3d6a36c0d9a73a463cf2c4",
+      "size": 5417
+    },
+    {
+      "path": "C:/tools/msc-6.00ax-archive/BIN/CL.EXE",
+      "sha256": "92df4a0839aac77940189ce54f107381b829babe8103926cb05d1adffe947347",
+      "size": 81184
+    },
+    {
+      "path": "C:/tools/msc-6.00ax-archive/BIN/C1L.EXE",
+      "sha256": "d3db38b875a95048bca2809cd1f84783c6c070805f188fec9161054d6350ded3",
+      "size": 213680
+    },
+    {
+      "path": "C:/tools/msc-6.00ax-archive/BIN/C2L.EXE",
+      "sha256": "62490de22e7b279ea59218a54d677bfc752cb5fc1287533d2e23d03519f155e0",
+      "size": 473258
+    },
+    {
+      "path": "C:/tools/msc-6.00ax-archive/BIN/C3L.EXE",
+      "sha256": "9e82ecc87ffcdb2def53ac64c0d1f048b26421c1415b5600ad4d8d6fcbc06553",
+      "size": 195439
+    },
+    {
+      "path": "C:/tools/msc-6.00ax-archive/BIN/CL.ERR",
+      "sha256": "ca22f37e5e0c09faebde9e4d549dd1f53523cc6f23049d2239a040cd19a424e7",
+      "size": 1656
+    },
+    {
+      "path": "C:/tools/msc-6.00ax-archive/BIN/C1.ERR",
+      "sha256": "637444915870f3283d5df41c5cdb1be8c32cc6c19b080f2bb3891edbc3751c6e",
+      "size": 19500
+    },
+    {
+      "path": "C:/tools/msc-6.00ax-archive/BIN/C23.ERR",
+      "sha256": "22944a0dffef336c0ebb8f6d5aeb97b4dbeb5c9758a48759557176bff49d1151",
+      "size": 3649
+    },
+    {
+      "path": "C:/tools/msc-6.00ax-archive/BIN/CL.MSG",
+      "sha256": "3379f283aec74842bc82205e4c848d759e6e2dcbb6d4820eec9719f1297213ec",
+      "size": 2697
+    },
+    {
+      "path": "C:/tools/masm-5.10/files/MASM.EXE",
+      "sha256": "233120302473749eafe9a54a30f8bda0127140c44346e5bcc047d113828a741e",
+      "size": 124712
+    },
+    {
+      "path": "C:/tools/dosbox-x/dosbox-x.exe",
+      "sha256": "b028a4d328302ea270722dec69f3ec3a10ebf76beba72a51970db33a88df2bf6",
+      "size": 20481536
+    },
+    {
+      "path": "C:/tools/msc-6.00/LIB/llibcr.lib",
+      "sha256": "3d0c6ae92972789e87def01fa96351c39216d731d5c880370155c5613d78c884",
+      "size": 148711
+    },
+    {
+      "path": "C:/tools/msc-6.00/LIB/libh.lib",
+      "sha256": "a4492e8f63da409d949643fd448f29e65e2cc9a8f2deea977372177bbe0ad818",
+      "size": 21033
+    },
+    {
+      "path": "C:/tools/RTLink-Plus-4.00-DiscMaster/installed/dest/RTLINK.EXE",
+      "sha256": "dff0a988738a2ba7716f7013ef5b8136e0857b6bfe700bccdeaad70ee5e87c74",
+      "size": 449497
+    },
+    {
+      "path": "C:/tools/RTLink-Plus-4.00-DiscMaster/installed/dest/RTLINK.DAT",
+      "sha256": "c1e206fe4b3c34d43b47aa9aa215e2959fbb23c69c89eb69e36d80b1d9194eea",
+      "size": 63824
+    },
+    {
+      "path": "C:/tools/RTLink-Plus-4.00-DiscMaster/installed/dest/RTLUTILS.LIB",
+      "sha256": "9060c022f65a2811b81936879f93eb16c5d349c14b56c704a3853d3cf79cd162",
+      "size": 266625
+    },
+    {
+      "path": "C:/tools/RTLink-Plus-4.00-DiscMaster/installed/dest/RTLINKST.COM",
+      "sha256": "6ad9015869dc9598a2b498c58297224e5ab4a13fad9ada528650dfcedeb83cf2",
+      "size": 7184
+    },
+    {
+      "path": "C:/tools/rtlink-plus-6.10/installed/RTL-REAL.EXE",
+      "sha256": "228c5d429438ea32ee21dd02c65b7f8e198715b3fa957be9da328f9857482773",
+      "size": 717922
+    },
+    {
+      "path": "C:/tools/rtlink-plus-6.10/installed/RTL-SWAP.EXE",
+      "sha256": "daae0a8c358edc26f95540f4bc1629c0dc5c30652155d85ccd79bead4381cfe3",
+      "size": 692123
+    },
+    {
+      "path": "C:/tools/rtlink-plus-6.10/installed/RTLINK.DAT",
+      "sha256": "10723fb4d4381b6a38417a18409e32d254e59850bcd3b465fbb824e01367a77b",
+      "size": 100100
+    },
+    {
+      "path": "C:/tools/rtlink-plus-6.10/installed/RTLUTILS.LIB",
+      "sha256": "c718bac09b0b1204a259494446acfa8bfffb129144cc7d36799855621f4fdccb",
+      "size": 423823
+    },
+    {
+      "path": "C:/tools/rtlink-plus-6.10/installed/RTLINKST.COM",
+      "sha256": "635425a8feff822ca98ec536c55a31824161bffbf9d24d37851cc0d9f7ce3b5f",
+      "size": 11031
+    },
+    {
+      "path": "C:/tools/rtlink-plus-6.10/installed/RTLINK.EXE",
+      "sha256": "ea6f57a470a26801086593d54aa99f6bf983dd024fc19b5e13361a07f43e17fb",
+      "size": 687531
+    },
+    {
+      "path": "C:/tools/rtlink-plus-6.10/installed/DOS4GW.EXE",
+      "sha256": "7192b80d1551769c2d2897b2f58015dc18fadca2b7e093a20f45b34011933c6c",
+      "size": 231179
+    },
+    {
+      "path": "build/workers/dos_color_translation_owners/admission-source-only-v14-final/generated/separate-g2108-provider.c",
+      "sha256": "df0f034940f170aa0c8c2de9945e3b46f5104c4c4003656624d184f8e598a690",
+      "size": 183
+    },
+    {
+      "path": "build/workers/dos_color_translation_owners/admission-source-only-v14-final/generated/reverse-g2108-provider.c",
+      "sha256": "95c989facb796db6bc3c65f624a734d358ee4c31240cbc9687207c5a13fc1248",
+      "size": 183
+    },
+    {
+      "path": "build/workers/dos_color_translation_owners/admission-source-only-v14-final/generated/shifted_backing-g2108-provider.c",
+      "sha256": "1db16df77c5af1f3e5f9bc042c927c42fe72790564b525e7e712bf10d88d4e80",
+      "size": 189
+    },
+    {
+      "path": "build/workers/dos_color_translation_owners/admission-source-only-v14-final/generated/separate-main.c",
+      "sha256": "0344037ac2c9943beb86deea87206329cd79352543e2d76e4671f341c1e7d389",
+      "size": 703
+    },
+    {
+      "path": "build/workers/dos_color_translation_owners/admission-source-only-v14-final/generated/reverse-main.c",
+      "sha256": "0344037ac2c9943beb86deea87206329cd79352543e2d76e4671f341c1e7d389",
+      "size": 703
+    },
+    {
+      "path": "build/workers/dos_color_translation_owners/admission-source-only-v14-final/generated/shifted_base-main.c",
+      "sha256": "79a858cad0012cdeb42ce3a5fba6904456e3377393b754460ae0e367e291c234",
+      "size": 707
+    },
+    {
+      "path": "build/workers/dos_color_translation_owners/admission-source-only-v14-final/generated/alias_view-main.c",
+      "sha256": "46405da02c647297092ebd971b3325f79bcfb6d73788849d277f6f1726e92a45",
+      "size": 378
+    }
+  ],
+  "inputs": [
+    {
+      "path": "work/source-only-dos/g2108-color-map-admission-probe-v14-final.py",
+      "sha256": "f9f611eee2851ccbeb959b95b03548a609b1eac3a09aa8324cd91391601333db",
+      "size": 24818
+    },
+    {
+      "path": "src/S03/m3126.asm",
+      "sha256": "b0b9d296f23b4f8a5b4706008b21b6ad96429636da11bf22ddb2126ee362f2ff",
+      "size": 35317
+    },
+    {
+      "path": "src/S00/m31AD.asm",
+      "sha256": "5d2ad69ff4affb4be4242e82187065cc5e0b3502cc0cc3e00ad3802ccee2656e",
+      "size": 81450
+    },
+    {
+      "path": "src/root/m1B4E.asm",
+      "sha256": "a32d75d2d4ea36980b659d26e9ddd86bcde65d9e250ebac4cdc29c0e847c67a2",
+      "size": 8451
+    },
+    {
+      "path": "layout/symbols.json",
+      "sha256": "0f5dd5b0a211945a97782cfccdb9bb31b0dfd07fcde5df4d4f9486b487eb0125",
+      "size": 800809
+    },
+    {
+      "path": "layout\\manifest.json",
+      "sha256": "025a0a9255d910cae4b122ab5a3f3fb40888bb456d7fe42158db7c9e622fcf50",
+      "size": 628980
+    },
+    {
+      "path": "layout\\toolchain.json",
+      "sha256": "c0bb71cd8b1f4a1a1f91299bd3b6148aa67b7a1d12c3c3946a229272593eb274",
+      "size": 39241
+    },
+    {
+      "path": "tools/compiler.py",
+      "sha256": "ef1d59a0fbe0e0780a6b8480e13d7d07859a14ae185c00a4420e1238a2ae35bb",
+      "size": 11765
+    },
+    {
+      "path": "tools/source_only_dos.py",
+      "sha256": "f3a0fad9cdafa30cb22071e358d0b59ab0bf04a2e06cd05f7170ebe248242470",
+      "size": 58668
+    },
+    {
+      "path": "tools/omf.py",
+      "sha256": "951137ecbfaeb6e40fd5230c94398141da7ec7bdb7399d9cd74d46ded3045612",
+      "size": 29112
+    },
+    {
+      "path": "work/source-only-dos/color-translation-initial-state-research-v1.json",
+      "sha256": "135f1178cdf2c8b022677d37aa66c00e5394e63c9c3d6a36c0d9a73a463cf2c4",
+      "size": 5417
+    },
+    {
+      "path": "C:/tools/msc-6.00ax-archive/BIN/CL.EXE",
+      "sha256": "92df4a0839aac77940189ce54f107381b829babe8103926cb05d1adffe947347",
+      "size": 81184
+    },
+    {
+      "path": "C:/tools/msc-6.00ax-archive/BIN/C1L.EXE",
+      "sha256": "d3db38b875a95048bca2809cd1f84783c6c070805f188fec9161054d6350ded3",
+      "size": 213680
+    },
+    {
+      "path": "C:/tools/msc-6.00ax-archive/BIN/C2L.EXE",
+      "sha256": "62490de22e7b279ea59218a54d677bfc752cb5fc1287533d2e23d03519f155e0",
+      "size": 473258
+    },
+    {
+      "path": "C:/tools/msc-6.00ax-archive/BIN/C3L.EXE",
+      "sha256": "9e82ecc87ffcdb2def53ac64c0d1f048b26421c1415b5600ad4d8d6fcbc06553",
+      "size": 195439
+    },
+    {
+      "path": "C:/tools/msc-6.00ax-archive/BIN/CL.ERR",
+      "sha256": "ca22f37e5e0c09faebde9e4d549dd1f53523cc6f23049d2239a040cd19a424e7",
+      "size": 1656
+    },
+    {
+      "path": "C:/tools/msc-6.00ax-archive/BIN/C1.ERR",
+      "sha256": "637444915870f3283d5df41c5cdb1be8c32cc6c19b080f2bb3891edbc3751c6e",
+      "size": 19500
+    },
+    {
+      "path": "C:/tools/msc-6.00ax-archive/BIN/C23.ERR",
+      "sha256": "22944a0dffef336c0ebb8f6d5aeb97b4dbeb5c9758a48759557176bff49d1151",
+      "size": 3649
+    },
+    {
+      "path": "C:/tools/msc-6.00ax-archive/BIN/CL.MSG",
+      "sha256": "3379f283aec74842bc82205e4c848d759e6e2dcbb6d4820eec9719f1297213ec",
+      "size": 2697
+    },
+    {
+      "path": "C:/tools/masm-5.10/files/MASM.EXE",
+      "sha256": "233120302473749eafe9a54a30f8bda0127140c44346e5bcc047d113828a741e",
+      "size": 124712
+    },
+    {
+      "path": "C:/tools/dosbox-x/dosbox-x.exe",
+      "sha256": "b028a4d328302ea270722dec69f3ec3a10ebf76beba72a51970db33a88df2bf6",
+      "size": 20481536
+    },
+    {
+      "path": "C:/tools/msc-6.00/LIB/llibcr.lib",
+      "sha256": "3d0c6ae92972789e87def01fa96351c39216d731d5c880370155c5613d78c884",
+      "size": 148711
+    },
+    {
+      "path": "C:/tools/msc-6.00/LIB/libh.lib",
+      "sha256": "a4492e8f63da409d949643fd448f29e65e2cc9a8f2deea977372177bbe0ad818",
+      "size": 21033
+    },
+    {
+      "path": "C:/tools/RTLink-Plus-4.00-DiscMaster/installed/dest/RTLINK.EXE",
+      "sha256": "dff0a988738a2ba7716f7013ef5b8136e0857b6bfe700bccdeaad70ee5e87c74",
+      "size": 449497
+    },
+    {
+      "path": "C:/tools/RTLink-Plus-4.00-DiscMaster/installed/dest/RTLINK.DAT",
+      "sha256": "c1e206fe4b3c34d43b47aa9aa215e2959fbb23c69c89eb69e36d80b1d9194eea",
+      "size": 63824
+    },
+    {
+      "path": "C:/tools/RTLink-Plus-4.00-DiscMaster/installed/dest/RTLUTILS.LIB",
+      "sha256": "9060c022f65a2811b81936879f93eb16c5d349c14b56c704a3853d3cf79cd162",
+      "size": 266625
+    },
+    {
+      "path": "C:/tools/RTLink-Plus-4.00-DiscMaster/installed/dest/RTLINKST.COM",
+      "sha256": "6ad9015869dc9598a2b498c58297224e5ab4a13fad9ada528650dfcedeb83cf2",
+      "size": 7184
+    },
+    {
+      "path": "C:/tools/rtlink-plus-6.10/installed/RTL-REAL.EXE",
+      "sha256": "228c5d429438ea32ee21dd02c65b7f8e198715b3fa957be9da328f9857482773",
+      "size": 717922
+    },
+    {
+      "path": "C:/tools/rtlink-plus-6.10/installed/RTL-SWAP.EXE",
+      "sha256": "daae0a8c358edc26f95540f4bc1629c0dc5c30652155d85ccd79bead4381cfe3",
+      "size": 692123
+    },
+    {
+      "path": "C:/tools/rtlink-plus-6.10/installed/RTLINK.DAT",
+      "sha256": "10723fb4d4381b6a38417a18409e32d254e59850bcd3b465fbb824e01367a77b",
+      "size": 100100
+    },
+    {
+      "path": "C:/tools/rtlink-plus-6.10/installed/RTLUTILS.LIB",
+      "sha256": "c718bac09b0b1204a259494446acfa8bfffb129144cc7d36799855621f4fdccb",
+      "size": 423823
+    },
+    {
+      "path": "C:/tools/rtlink-plus-6.10/installed/RTLINKST.COM",
+      "sha256": "635425a8feff822ca98ec536c55a31824161bffbf9d24d37851cc0d9f7ce3b5f",
+      "size": 11031
+    },
+    {
+      "path": "C:/tools/rtlink-plus-6.10/installed/RTLINK.EXE",
+      "sha256": "ea6f57a470a26801086593d54aa99f6bf983dd024fc19b5e13361a07f43e17fb",
+      "size": 687531
+    },
+    {
+      "path": "C:/tools/rtlink-plus-6.10/installed/DOS4GW.EXE",
+      "sha256": "7192b80d1551769c2d2897b2f58015dc18fadca2b7e093a20f45b34011933c6c",
+      "size": 231179
+    },
+    {
+      "path": "build/workers/dos_color_translation_owners/admission-source-only-v14-final/generated/separate-g2108-provider.c",
+      "sha256": "df0f034940f170aa0c8c2de9945e3b46f5104c4c4003656624d184f8e598a690",
+      "size": 183
+    },
+    {
+      "path": "build/workers/dos_color_translation_owners/admission-source-only-v14-final/generated/reverse-g2108-provider.c",
+      "sha256": "95c989facb796db6bc3c65f624a734d358ee4c31240cbc9687207c5a13fc1248",
+      "size": 183
+    },
+    {
+      "path": "build/workers/dos_color_translation_owners/admission-source-only-v14-final/generated/shifted_backing-g2108-provider.c",
+      "sha256": "1db16df77c5af1f3e5f9bc042c927c42fe72790564b525e7e712bf10d88d4e80",
+      "size": 189
+    },
+    {
+      "path": "build/workers/dos_color_translation_owners/admission-source-only-v14-final/generated/separate-main.c",
+      "sha256": "0344037ac2c9943beb86deea87206329cd79352543e2d76e4671f341c1e7d389",
+      "size": 703
+    },
+    {
+      "path": "build/workers/dos_color_translation_owners/admission-source-only-v14-final/generated/reverse-main.c",
+      "sha256": "0344037ac2c9943beb86deea87206329cd79352543e2d76e4671f341c1e7d389",
+      "size": 703
+    },
+    {
+      "path": "build/workers/dos_color_translation_owners/admission-source-only-v14-final/generated/shifted_base-main.c",
+      "sha256": "79a858cad0012cdeb42ce3a5fba6904456e3377393b754460ae0e367e291c234",
+      "size": 707
+    },
+    {
+      "path": "build/workers/dos_color_translation_owners/admission-source-only-v14-final/generated/alias_view-main.c",
+      "sha256": "46405da02c647297092ebd971b3325f79bcfb6d73788849d277f6f1726e92a45",
+      "size": 378
+    },
+    {
+      "path": "build/workers/dos_color_translation_owners/admission-source-only-v14-final/g2108-color-map-admission-report.json",
+      "sha256": "96837f7878ae6ababe101bd12484bf3bc6b1a50cfef204e3b3fa2920e1e0bba8",
+      "size": 26599
+    },
+    {
+      "path": "work/source-only-dos/providers/color-translation.c",
+      "sha256": "df0f034940f170aa0c8c2de9945e3b46f5104c4c4003656624d184f8e598a690",
+      "size": 183
+    },
+    {
+      "path": "work/source-only-dos/g2108-color-translation-initial-review-v14.md",
+      "sha256": "017b4282b342ecc9af9c8b37d8084e8d9150f31ef2f3bf7c3c7f631cd028337d",
+      "size": 2464
+    },
+    {
+      "path": "tools/dos_source_bindings.py",
+      "sha256": "d2ace80d04ea065422e0a546725b867fb0f54219f1ab2b0c7815bf4f7369da34",
+      "size": 69594
+    }
+  ],
+  "flattened_input_pins": [
+    {
+      "path": "work/source-only-dos/g2108-color-map-admission-probe-v14-final.py",
+      "sha256": "f9f611eee2851ccbeb959b95b03548a609b1eac3a09aa8324cd91391601333db",
+      "size": 24818
+    },
+    {
+      "path": "src/S03/m3126.asm",
+      "sha256": "b0b9d296f23b4f8a5b4706008b21b6ad96429636da11bf22ddb2126ee362f2ff",
+      "size": 35317
+    },
+    {
+      "path": "src/S00/m31AD.asm",
+      "sha256": "5d2ad69ff4affb4be4242e82187065cc5e0b3502cc0cc3e00ad3802ccee2656e",
+      "size": 81450
+    },
+    {
+      "path": "src/root/m1B4E.asm",
+      "sha256": "a32d75d2d4ea36980b659d26e9ddd86bcde65d9e250ebac4cdc29c0e847c67a2",
+      "size": 8451
+    },
+    {
+      "path": "layout/symbols.json",
+      "sha256": "0f5dd5b0a211945a97782cfccdb9bb31b0dfd07fcde5df4d4f9486b487eb0125",
+      "size": 800809
+    },
+    {
+      "path": "layout\\manifest.json",
+      "sha256": "025a0a9255d910cae4b122ab5a3f3fb40888bb456d7fe42158db7c9e622fcf50",
+      "size": 628980
+    },
+    {
+      "path": "layout\\toolchain.json",
+      "sha256": "c0bb71cd8b1f4a1a1f91299bd3b6148aa67b7a1d12c3c3946a229272593eb274",
+      "size": 39241
+    },
+    {
+      "path": "tools/compiler.py",
+      "sha256": "ef1d59a0fbe0e0780a6b8480e13d7d07859a14ae185c00a4420e1238a2ae35bb",
+      "size": 11765
+    },
+    {
+      "path": "tools/source_only_dos.py",
+      "sha256": "f3a0fad9cdafa30cb22071e358d0b59ab0bf04a2e06cd05f7170ebe248242470",
+      "size": 58668
+    },
+    {
+      "path": "tools/omf.py",
+      "sha256": "951137ecbfaeb6e40fd5230c94398141da7ec7bdb7399d9cd74d46ded3045612",
+      "size": 29112
+    },
+    {
+      "path": "work/source-only-dos/color-translation-initial-state-research-v1.json",
+      "sha256": "135f1178cdf2c8b022677d37aa66c00e5394e63c9c3d6a36c0d9a73a463cf2c4",
+      "size": 5417
+    },
+    {
+      "path": "C:/tools/msc-6.00ax-archive/BIN/CL.EXE",
+      "sha256": "92df4a0839aac77940189ce54f107381b829babe8103926cb05d1adffe947347",
+      "size": 81184
+    },
+    {
+      "path": "C:/tools/msc-6.00ax-archive/BIN/C1L.EXE",
+      "sha256": "d3db38b875a95048bca2809cd1f84783c6c070805f188fec9161054d6350ded3",
+      "size": 213680
+    },
+    {
+      "path": "C:/tools/msc-6.00ax-archive/BIN/C2L.EXE",
+      "sha256": "62490de22e7b279ea59218a54d677bfc752cb5fc1287533d2e23d03519f155e0",
+      "size": 473258
+    },
+    {
+      "path": "C:/tools/msc-6.00ax-archive/BIN/C3L.EXE",
+      "sha256": "9e82ecc87ffcdb2def53ac64c0d1f048b26421c1415b5600ad4d8d6fcbc06553",
+      "size": 195439
+    },
+    {
+      "path": "C:/tools/msc-6.00ax-archive/BIN/CL.ERR",
+      "sha256": "ca22f37e5e0c09faebde9e4d549dd1f53523cc6f23049d2239a040cd19a424e7",
+      "size": 1656
+    },
+    {
+      "path": "C:/tools/msc-6.00ax-archive/BIN/C1.ERR",
+      "sha256": "637444915870f3283d5df41c5cdb1be8c32cc6c19b080f2bb3891edbc3751c6e",
+      "size": 19500
+    },
+    {
+      "path": "C:/tools/msc-6.00ax-archive/BIN/C23.ERR",
+      "sha256": "22944a0dffef336c0ebb8f6d5aeb97b4dbeb5c9758a48759557176bff49d1151",
+      "size": 3649
+    },
+    {
+      "path": "C:/tools/msc-6.00ax-archive/BIN/CL.MSG",
+      "sha256": "3379f283aec74842bc82205e4c848d759e6e2dcbb6d4820eec9719f1297213ec",
+      "size": 2697
+    },
+    {
+      "path": "C:/tools/masm-5.10/files/MASM.EXE",
+      "sha256": "233120302473749eafe9a54a30f8bda0127140c44346e5bcc047d113828a741e",
+      "size": 124712
+    },
+    {
+      "path": "C:/tools/dosbox-x/dosbox-x.exe",
+      "sha256": "b028a4d328302ea270722dec69f3ec3a10ebf76beba72a51970db33a88df2bf6",
+      "size": 20481536
+    },
+    {
+      "path": "C:/tools/msc-6.00/LIB/llibcr.lib",
+      "sha256": "3d0c6ae92972789e87def01fa96351c39216d731d5c880370155c5613d78c884",
+      "size": 148711
+    },
+    {
+      "path": "C:/tools/msc-6.00/LIB/libh.lib",
+      "sha256": "a4492e8f63da409d949643fd448f29e65e2cc9a8f2deea977372177bbe0ad818",
+      "size": 21033
+    },
+    {
+      "path": "C:/tools/RTLink-Plus-4.00-DiscMaster/installed/dest/RTLINK.EXE",
+      "sha256": "dff0a988738a2ba7716f7013ef5b8136e0857b6bfe700bccdeaad70ee5e87c74",
+      "size": 449497
+    },
+    {
+      "path": "C:/tools/RTLink-Plus-4.00-DiscMaster/installed/dest/RTLINK.DAT",
+      "sha256": "c1e206fe4b3c34d43b47aa9aa215e2959fbb23c69c89eb69e36d80b1d9194eea",
+      "size": 63824
+    },
+    {
+      "path": "C:/tools/RTLink-Plus-4.00-DiscMaster/installed/dest/RTLUTILS.LIB",
+      "sha256": "9060c022f65a2811b81936879f93eb16c5d349c14b56c704a3853d3cf79cd162",
+      "size": 266625
+    },
+    {
+      "path": "C:/tools/RTLink-Plus-4.00-DiscMaster/installed/dest/RTLINKST.COM",
+      "sha256": "6ad9015869dc9598a2b498c58297224e5ab4a13fad9ada528650dfcedeb83cf2",
+      "size": 7184
+    },
+    {
+      "path": "C:/tools/rtlink-plus-6.10/installed/RTL-REAL.EXE",
+      "sha256": "228c5d429438ea32ee21dd02c65b7f8e198715b3fa957be9da328f9857482773",
+      "size": 717922
+    },
+    {
+      "path": "C:/tools/rtlink-plus-6.10/installed/RTL-SWAP.EXE",
+      "sha256": "daae0a8c358edc26f95540f4bc1629c0dc5c30652155d85ccd79bead4381cfe3",
+      "size": 692123
+    },
+    {
+      "path": "C:/tools/rtlink-plus-6.10/installed/RTLINK.DAT",
+      "sha256": "10723fb4d4381b6a38417a18409e32d254e59850bcd3b465fbb824e01367a77b",
+      "size": 100100
+    },
+    {
+      "path": "C:/tools/rtlink-plus-6.10/installed/RTLUTILS.LIB",
+      "sha256": "c718bac09b0b1204a259494446acfa8bfffb129144cc7d36799855621f4fdccb",
+      "size": 423823
+    },
+    {
+      "path": "C:/tools/rtlink-plus-6.10/installed/RTLINKST.COM",
+      "sha256": "635425a8feff822ca98ec536c55a31824161bffbf9d24d37851cc0d9f7ce3b5f",
+      "size": 11031
+    },
+    {
+      "path": "C:/tools/rtlink-plus-6.10/installed/RTLINK.EXE",
+      "sha256": "ea6f57a470a26801086593d54aa99f6bf983dd024fc19b5e13361a07f43e17fb",
+      "size": 687531
+    },
+    {
+      "path": "C:/tools/rtlink-plus-6.10/installed/DOS4GW.EXE",
+      "sha256": "7192b80d1551769c2d2897b2f58015dc18fadca2b7e093a20f45b34011933c6c",
+      "size": 231179
+    },
+    {
+      "path": "build/workers/dos_color_translation_owners/admission-source-only-v14-final/generated/separate-g2108-provider.c",
+      "sha256": "df0f034940f170aa0c8c2de9945e3b46f5104c4c4003656624d184f8e598a690",
+      "size": 183
+    },
+    {
+      "path": "build/workers/dos_color_translation_owners/admission-source-only-v14-final/generated/reverse-g2108-provider.c",
+      "sha256": "95c989facb796db6bc3c65f624a734d358ee4c31240cbc9687207c5a13fc1248",
+      "size": 183
+    },
+    {
+      "path": "build/workers/dos_color_translation_owners/admission-source-only-v14-final/generated/shifted_backing-g2108-provider.c",
+      "sha256": "1db16df77c5af1f3e5f9bc042c927c42fe72790564b525e7e712bf10d88d4e80",
+      "size": 189
+    },
+    {
+      "path": "build/workers/dos_color_translation_owners/admission-source-only-v14-final/generated/separate-main.c",
+      "sha256": "0344037ac2c9943beb86deea87206329cd79352543e2d76e4671f341c1e7d389",
+      "size": 703
+    },
+    {
+      "path": "build/workers/dos_color_translation_owners/admission-source-only-v14-final/generated/reverse-main.c",
+      "sha256": "0344037ac2c9943beb86deea87206329cd79352543e2d76e4671f341c1e7d389",
+      "size": 703
+    },
+    {
+      "path": "build/workers/dos_color_translation_owners/admission-source-only-v14-final/generated/shifted_base-main.c",
+      "sha256": "79a858cad0012cdeb42ce3a5fba6904456e3377393b754460ae0e367e291c234",
+      "size": 707
+    },
+    {
+      "path": "build/workers/dos_color_translation_owners/admission-source-only-v14-final/generated/alias_view-main.c",
+      "sha256": "46405da02c647297092ebd971b3325f79bcfb6d73788849d277f6f1726e92a45",
+      "size": 378
+    },
+    {
+      "path": "build/workers/dos_color_translation_owners/admission-source-only-v14-final/g2108-color-map-admission-report.json",
+      "sha256": "96837f7878ae6ababe101bd12484bf3bc6b1a50cfef204e3b3fa2920e1e0bba8",
+      "size": 26599
+    },
+    {
+      "path": "work/source-only-dos/providers/color-translation.c",
+      "sha256": "df0f034940f170aa0c8c2de9945e3b46f5104c4c4003656624d184f8e598a690",
+      "size": 183
+    },
+    {
+      "path": "work/source-only-dos/g2108-color-translation-initial-review-v14.md",
+      "sha256": "017b4282b342ecc9af9c8b37d8084e8d9150f31ef2f3bf7c3c7f631cd028337d",
+      "size": 2464
+    },
+    {
+      "path": "tools/dos_source_bindings.py",
+      "sha256": "d2ace80d04ea065422e0a546725b867fb0f54219f1ab2b0c7815bf4f7369da34",
+      "size": 69594
+    }
+  ],
+  "flattened_input_pin_count": 45,
+  "static_ownership": {
+    "registered_symbol": {
+      "name": "g_2108",
+      "segment": 21939,
+      "segment_hex": "0x55B3",
+      "dgroup_offset": 8456,
+      "dgroup_offset_hex": "0x2108"
+    },
+    "canonical_identifier_references": [
+      {
+        "path": "src/S00/m31AD.asm",
+        "line": 18,
+        "text": "extrn\t_g_2108:byte"
+      },
+      {
+        "path": "src/S00/m31AD.asm",
+        "line": 3606,
+        "text": "lea si, _g_2108"
+      }
+    ],
+    "direct_numeric_operands_scanned": [
+      {
+        "path": "src/S15/m384C.c",
+        "line": 167,
+        "text": "win_Open(0x2100);",
+        "classification": "Win16 window/object handle passed to win_Open/win_GetObjRect/win_Close; not a DOS DGROUP data address"
+      },
+      {
+        "path": "src/S15/m384C.c",
+        "line": 172,
+        "text": "win_GetObjRect(0x2100, &r);",
+        "classification": "Win16 window/object handle passed to win_Open/win_GetObjRect/win_Close; not a DOS DGROUP data address"
+      },
+      {
+        "path": "src/S15/m384C.c",
+        "line": 216,
+        "text": "win_Close(0x2100);",
+        "classification": "Win16 window/object handle passed to win_Open/win_GetObjRect/win_Close; not a DOS DGROUP data address"
+      }
+    ],
+    "direct_numeric_g2108_address_operands": [],
+    "source_consumers": [
+      {
+        "path": "src/S00/m31AD.asm",
+        "anchors": [
+          18,
+          3605,
+          3606,
+          3607,
+          3608
+        ],
+        "finding": "Video-mode 0Dh path copies eight words from g_2108 into mutable g_41C0; no pointer is retained by REP MOVSW."
+      },
+      {
+        "path": "src/S03/m3126.asm",
+        "anchors": [
+          52,
+          53,
+          180,
+          182
+        ],
+        "finding": "Accepted mode 09h source carries separate g_2216 table and copies eight words into g_41C0."
+      },
+      {
+        "path": "src/root/m1B4E.asm",
+        "anchors": [
+          58,
+          111,
+          114,
+          115,
+          116,
+          117,
+          118,
+          119,
+          120
+        ],
+        "finding": "g_41C0 begins as identity mapping; runtime consumer masks low nibble and uses XLAT through the mutable map."
+      }
+    ],
+    "scope_limit": "No direct numeric address operands were found in canonical C/ASM source. Computed or indirect pointer paths, unregistered aliases, other runtime writes, and complete lifetime immutability remain unresolved."
+  },
+  "debt_mapping": {
+    "id": "dgroup_2100",
+    "offset": 8,
+    "length": 16,
+    "functional_slice_only": true,
+    "inventory_extent_bytes": 24
+  },
+  "claim_limit": "Candidate resolves only the bounded initialized owner recipe for DGROUP 0x2108..0x2117 and the S00 _g_2108:byte import. It makes no historical COMDEF/TU identity, alias identity, fixed-order, wider 0x2100..0x2117 owner, full lifetime immutability, computed-pointer, or unregistered-alias claim.",
+  "unresolved_layout_assumptions": [
+    "No historical COMDEF/TU identity, module order, or fixed combined-provider placement is claimed.",
+    "Only dgroup_2100 offset 8 length 16 (g_2108..g_2117) is mapped; no owner is inferred for the wider 24-byte region.",
+    "Computed or indirect pointer paths, unregistered aliases, and full-lifetime immutability remain unresolved."
+  ],
+  "candidate_review": {
+    "path": "work/source-only-dos/g2108-color-translation-initial-review-v14.md",
+    "sha256": "017b4282b342ecc9af9c8b37d8084e8d9150f31ef2f3bf7c3c7f631cd028337d",
+    "size": 2464
+  },
+  "root_review": {
+    "reviewer": "root",
+    "closed_source_type_recipe_and_sites": true,
+    "full_objects_and_ordered_fixups": true,
+    "runtime_negatives": true,
+    "independent_computed_copy_layout_gate": "UNRESOLVED",
+    "historical_tu_order_or_immutability_claimed": false
+  }
+}

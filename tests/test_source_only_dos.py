@@ -17,6 +17,90 @@ import source_only_dos as dos
 
 
 class SourceOnlyDosTests(unittest.TestCase):
+    def test_initialized_recipes_reject_wrong_values_types_and_extra_live_contributions(self):
+        worker = ROOT / 'build/workers/source_only_dos_tests'
+        worker.mkdir(parents=True, exist_ok=True)
+        with tempfile.TemporaryDirectory(dir=worker) as directory:
+            report = {'inputs': [], 'generated_files': [], 'translation_units': [], 'semantic_substitutions': []}
+            _, symbols = dos.prepare(Path(directory), report)
+            for module in bindings.INITIALIZED_PROVIDER_SPECS:
+                row = next(r for r in report['translation_units'] if r['module'] == module)
+                provider = row['storage_provider']
+                text = (ROOT / row['source']['path']).read_text(encoding='ascii')
+                def compile(source):
+                    result = compiler.compile_c(source, row['profile'], row['flags'], basename=row['basename'])
+                    self.assertTrue(result.ok, result.log)
+                    return OmfReader(communals=True).read(result.obj)
+                bindings.review_provider_source(text, provider, symbols)
+                self.assertEqual(bindings.verify_provider(compile(text), provider)['status'], 'PASS')
+                wrong_value = text.replace('0x80u', '0x40u') if module.endswith('graphics-formulas') else text.replace('0x00F', '0x00A')
+                for contrast in (wrong_value, text.replace('unsigned char near', 'unsigned char far'),
+                                 text + '\nint near extra_live = 1;\n', text + '\nint extra_code(void) { return 1; }\n'):
+                    with self.assertRaises(ValueError):
+                        bindings.verify_provider(compile(contrast), provider)
+                    with self.assertRaises(ValueError):
+                        bindings.review_provider_source(contrast, provider, symbols)
+                changed = json.loads(json.dumps(provider))
+                changed['public_DATA'][0]['offset'] += 1
+                with self.assertRaises(ValueError):
+                    bindings.verify_provider(compile(text), changed)
+            # Initialization closes functional payload only; historical ledger and
+            # the unchecked clip-copy layout gate stay explicit.
+            dos.audit_layout(report)
+            for row in report['translation_units']:
+                if row.get('source_binding'):
+                    row['binding_verification'] = {'status': 'PASS'}
+                if row.get('storage_provider'):
+                    row['provider_verification'] = {'status': 'PASS'}
+            dos.accept_binding_checks(report)
+            self.assertEqual(sum(r['size'] for r in report['unresolved_data']), 79)
+            self.assertEqual(sum(r['size'] for r in report['historical_data_debt']), 113)
+            self.assertEqual(sum(r['size'] for r in report['resolved_initialized_data']), 34)
+            self.assertEqual(next(r['status'] for r in report['layout_dependencies']
+                                  if r['id'] == 'graphics-computed-copy-layout'), 'UNRESOLVED')
+            self.assertFalse(any(r['id'] in ('dgroup_2100', 'dgroup_68ac') for r in report['unresolved_data']))
+
+    def test_indexed_sites_and_generated_glyph_view_are_closed_and_preserve_whole_objects(self):
+        worker = ROOT / 'build/workers/source_only_dos_tests'
+        worker.mkdir(parents=True, exist_ok=True)
+        with tempfile.TemporaryDirectory(dir=worker) as directory:
+            report = {'inputs': [], 'generated_files': [], 'translation_units': [], 'semantic_substitutions': []}
+            manifest, symbols = dos.prepare(Path(directory), report)
+            modules = set(bindings.INDEXED_OPERANDS) | set(bindings.GRAPHICS_MASK_OPERANDS) | {'root:2650'}
+            for row in report['translation_units']:
+                if row['module'] not in modules:
+                    continue
+                binding = row['source_binding']
+                original = (ROOT / row['source']['path']).read_text(encoding='latin1')
+                generated = (ROOT / row['generated_source']['path']).read_text(encoding='latin1')
+                def assemble(source):
+                    result = compiler.assemble(source, row['profile'], row['flags'], basename=row['basename'])
+                    self.assertTrue(result.ok, result.log)
+                    return OmfReader(communals=True).read(result.obj)
+                control, candidate = assemble(original), assemble(generated)
+                bindings.review_addresses(binding, manifest['modules'][row['module']], symbols)
+                self.assertEqual(bindings.verify_objects(control, candidate, binding)['status'], 'PASS')
+                changed = json.loads(json.dumps(binding))
+                selected = next((s for s in changed['relocations'] if s.get('indexed_operand') or s.get('graphics_mask_operand')), None)
+                if selected:
+                    selected['offsets'][0] += 1
+                else:
+                    changed['exports'][0]['offset'] += 1
+                with self.assertRaises(ValueError):
+                    bindings.verify_objects(control, candidate, changed)
+            report['runtime_components'] = []
+            tc = compiler.toolchain()
+            for profile in ('rtlink400', 'rtlink610'):
+                bindings.require_initialized_and_indexed_contracts(report, profile, tc['linkers'][profile])
+            changed = json.loads(json.dumps(report))
+            changed['driver_indexed_address_contract']['cases'][0]['actual'] = 'PASS'
+            with self.assertRaises(ValueError):
+                bindings.require_initialized_and_indexed_contracts(changed, 'rtlink400', tc['linkers']['rtlink400'])
+            changed = json.loads(json.dumps(report))
+            changed['g2108_color_translation_contract']['cases'].pop()
+            with self.assertRaises(ValueError):
+                bindings.require_initialized_and_indexed_contracts(changed, 'rtlink610', tc['linkers']['rtlink610'])
+
     def test_rtlink_alias_offsets_are_explicit_hexadecimal(self):
         self.assertEqual(bindings.runtime_component_path('C:/TOOLS/runtime.lib'),
                          bindings.runtime_component_path(r'C:\\tools\\RUNTIME.lib'))

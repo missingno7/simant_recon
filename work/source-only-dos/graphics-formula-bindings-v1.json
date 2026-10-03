@@ -1,0 +1,329 @@
+{
+  "schema": "simant-dos-graphics-formula-bindings-candidate-v14",
+  "status": "REVIEWED_SOURCE_LINK_BINDING",
+  "root_reviewed": true,
+  "module_identity_source": "layout/manifest.json",
+  "bindings": [
+    {
+      "module": "S01:32B5",
+      "source": "src/S01/m32B5.asm",
+      "source_sha256": "b8db05f10b37941e1a9cfa60f5dc87180e6075576703f29fc7b7557273b17394",
+      "edits": [
+        {
+          "before": "\textrn\t_g_3D20:byte",
+          "after": "\textrn\t_g_3D20:byte\n\textrn\t_mono_tail_masks:byte",
+          "count": 1
+        },
+        {
+          "before": "\tmov al, byte ptr ss:[bx+68ACh]",
+          "after": "\tassume ss:DGROUP\n\tmov al, byte ptr ss:_mono_tail_masks[bx]\n\tassume ss:nothing",
+          "count": 1
+        }
+      ],
+      "exports": [],
+      "relocations": [
+        {
+          "graphics_mask_operand": true,
+          "segment": "S01C_TEXT",
+          "offsets": [
+            192
+          ],
+          "count": 1,
+          "target_kind": "external",
+          "target": "_mono_tail_masks",
+          "original_value": 26796,
+          "frame_kind": "group",
+          "frame": "DGROUP",
+          "displacement": 0,
+          "encoded_addend": "0000"
+        }
+      ],
+      "candidate_binding_sha256": "640a8c91e96adc6edd4143c1a08874180e8dda43d7ba9959a1de5215a918a9fe"
+    },
+    {
+      "module": "S03:3258",
+      "source": "src/S03/m3258.asm",
+      "source_sha256": "45182b0559f08e760e025fb1066203150637414c29e221ba7e6e5cea0bd30034",
+      "edits": [
+        {
+          "before": "\textrn\t_g_3D20:byte",
+          "after": "\textrn\t_g_3D20:byte\n\textrn\t_packed_tail_masks:byte",
+          "count": 1
+        },
+        {
+          "before": "\tmov al, byte ptr ss:[bx+68B4h]",
+          "after": "\tassume ss:DGROUP\n\tmov al, byte ptr ss:_packed_tail_masks[bx]\n\tassume ss:nothing",
+          "count": 1
+        }
+      ],
+      "exports": [],
+      "relocations": [
+        {
+          "graphics_mask_operand": true,
+          "segment": "S03C_TEXT",
+          "offsets": [
+            1252
+          ],
+          "count": 1,
+          "target_kind": "external",
+          "target": "_packed_tail_masks",
+          "original_value": 26804,
+          "frame_kind": "group",
+          "frame": "DGROUP",
+          "displacement": 0,
+          "encoded_addend": "0000"
+        }
+      ],
+      "candidate_binding_sha256": "3514854fbe5d36694018c1a725b8245fcc8209ab5cb29717e2da1e8ddbd1bfa1"
+    }
+  ],
+  "effective_digest_convention": "Each candidate_binding_sha256 is SHA256 of that complete binding entry without the digest field, serialized with sorted keys and compact JSON separators.",
+  "production_v14_closed_binding_checks": [
+    {
+      "module": "S01:32B5",
+      "closed_operand": {
+        "graphics_mask_operand": true,
+        "segment": "S01C_TEXT",
+        "offsets": [
+          192
+        ],
+        "count": 1,
+        "target_kind": "external",
+        "target": "_mono_tail_masks",
+        "displacement": 0,
+        "original_value": 26796,
+        "frame_kind": "group",
+        "frame": "DGROUP",
+        "encoded_addend": "0000"
+      },
+      "status": "PASS"
+    },
+    {
+      "module": "S03:3258",
+      "closed_operand": {
+        "graphics_mask_operand": true,
+        "segment": "S03C_TEXT",
+        "offsets": [
+          1252
+        ],
+        "count": 1,
+        "target_kind": "external",
+        "target": "_packed_tail_masks",
+        "displacement": 0,
+        "original_value": 26804,
+        "frame_kind": "group",
+        "frame": "DGROUP",
+        "encoded_addend": "0000"
+      },
+      "status": "PASS"
+    }
+  ],
+  "whole_object_proof": [
+    {
+      "module": "S01:32B5",
+      "segment_lengths": {
+        "S01C_TEXT": 653,
+        "_DATA": 0
+      },
+      "public_records": 5,
+      "public_offsets_and_segment_membership_unchanged": true,
+      "changed_bytes": {
+        "S01C_TEXT": [
+          192,
+          193
+        ]
+      },
+      "all_prior_fixups_semantically_unchanged": true,
+      "selected_fixup": {
+        "segment": "S01C_TEXT",
+        "offset": 192,
+        "width": 2,
+        "loc": "offset16",
+        "target": "_mono_tail_masks",
+        "displacement": 0,
+        "frame_kind": "group",
+        "frame": "DGROUP",
+        "encoded_addend": "0000"
+      },
+      "passed": true
+    },
+    {
+      "module": "S03:3258",
+      "segment_lengths": {
+        "S03C_TEXT": 6055,
+        "_DATA": 0
+      },
+      "public_records": 7,
+      "public_offsets_and_segment_membership_unchanged": true,
+      "changed_bytes": {
+        "S03C_TEXT": [
+          1252,
+          1253
+        ]
+      },
+      "all_prior_fixups_semantically_unchanged": true,
+      "selected_fixup": {
+        "segment": "S03C_TEXT",
+        "offset": 1252,
+        "width": 2,
+        "loc": "offset16",
+        "target": "_packed_tail_masks",
+        "displacement": 0,
+        "frame_kind": "group",
+        "frame": "DGROUP",
+        "encoded_addend": "0000"
+      },
+      "passed": true
+    }
+  ],
+  "fresh_probe_report": {
+    "path": "build/workers/dos_graphics_formula_admission_v14_final/report.json",
+    "sha256": "f567cf3058ba89ec0a13822422d4b7c4c403968053771350fef536f816badafd",
+    "size": 44609,
+    "roles": [
+      "fresh_probe_report"
+    ]
+  },
+  "providers": [
+    {
+      "module": "source-owned:graphics-formulas",
+      "basename": "GFXOWNER",
+      "profile": "msc600ax",
+      "flags": [
+        "/AL",
+        "/Os",
+        "/Gs"
+      ],
+      "owner": null,
+      "communals": [],
+      "storage_kind": "initialized_storage",
+      "recipe": "consumer_mask_formulas",
+      "source": {
+        "path": "work/source-only-dos/providers/graphics-formulas.c",
+        "sha256": "27c6dd4d4f5781765b866824b125470b66a3c1b2aae463f2a270d59717100e40",
+        "size": 1526
+      },
+      "source_sha256": "27c6dd4d4f5781765b866824b125470b66a3c1b2aae463f2a270d59717100e40",
+      "mutable": true,
+      "historical_translation_unit_claim": false,
+      "segment": "_DATA",
+      "length": 18,
+      "public_DATA": [
+        {
+          "name": "_g_2100",
+          "segment": "_DATA",
+          "offset": 0,
+          "extent_bytes": 8,
+          "initialized": true,
+          "value_sha256": "237ee2ad60c37d29a6b16156101c55987faede67a905daf2e64453b6db2035fb"
+        },
+        {
+          "name": "_mono_tail_masks",
+          "segment": "_DATA",
+          "offset": 8,
+          "extent_bytes": 8,
+          "initialized": true,
+          "value_sha256": "21487eb497dc14cdefd584dae3f6f0b769c793261ad1a59f54da783146b1eba3"
+        },
+        {
+          "name": "_packed_tail_masks",
+          "segment": "_DATA",
+          "offset": 16,
+          "extent_bytes": 2,
+          "initialized": true,
+          "value_sha256": "cb48cb917df319f0bbbd3fc3f004ef8428f954bbcaf7f734d32357dd53875507"
+        }
+      ],
+      "public_DATA_offsets": [
+        {
+          "name": "_g_2100",
+          "offset": 0,
+          "length": 8,
+          "type": "unsigned char near[8]"
+        },
+        {
+          "name": "_mono_tail_masks",
+          "offset": 8,
+          "length": 8,
+          "type": "unsigned char near[8]"
+        },
+        {
+          "name": "_packed_tail_masks",
+          "offset": 16,
+          "length": 2,
+          "type": "unsigned char near[2]"
+        }
+      ],
+      "closed_recipes": [
+        {
+          "name": "_g_2100",
+          "offset": 0,
+          "length": 8,
+          "index": "phase",
+          "domain": [
+            0,
+            7
+          ],
+          "expression": "0x80u >> phase",
+          "source_macro": "PLANE_BIT(phase)",
+          "closed": true
+        },
+        {
+          "name": "_mono_tail_masks",
+          "offset": 8,
+          "length": 8,
+          "index": "residue",
+          "domain": [
+            0,
+            7
+          ],
+          "expression": "residue==0 ? 0xFFu : ((0xFFu << (8-residue)) & 0xFFu)",
+          "source_macro": "BYTE_TAIL_MASK(residue)",
+          "closed": true
+        },
+        {
+          "name": "_packed_tail_masks",
+          "offset": 16,
+          "length": 2,
+          "index": "is_odd",
+          "domain": [
+            0,
+            1
+          ],
+          "expression": "is_odd ? (0xFFu & ~0x0Fu) : 0xFFu",
+          "source_macro": "PACKED_TAIL_MASK(is_odd)",
+          "closed": true
+        }
+      ]
+    }
+  ],
+  "review_sources": [
+    {
+      "path": "work/source-only-dos/graphics-formula-admission-review-v1.md",
+      "sha256": "1d09bf0c5fcc4c6c619a19e5e684fd54e266f8a002d0245eb3ded9a6d1933d0d",
+      "size": 4896
+    },
+    {
+      "path": "work/source-only-dos/graphics-formula-write-review-v1.md",
+      "sha256": "95bd36db4f558ec0f5b94bb1a5cfd318b0bfaef5470db41d2973796016dae94c",
+      "size": 7079
+    },
+    {
+      "path": "work/source-only-dos/graphics-formula-initial-state-research-v1.json",
+      "sha256": "688c31522374fe6c902aa47f1609b58ce278678ae55eb9adbc3c8028a2c5bb5c",
+      "size": 9388
+    },
+    {
+      "path": "work/source-only-dos/initialized-graphics-admission-v1.md",
+      "sha256": "ffde6e2874680f25fc42b454a1b788e6ace637d2afdd77a77b6d76c8b857edce",
+      "size": 3229
+    }
+  ],
+  "category": "REVIEWED_SOURCE_LINK_BINDING",
+  "runtime_contract": {
+    "path": "work/source-only-dos/graphics-formula-contract-v1.json",
+    "sha256": "1ba1408b63377baef67db98d9ababee5a3c4e3d6a2b1de76499487b47610383a",
+    "size": 131325
+  },
+  "runtime_contract_key": "graphics_formula_binding_contract"
+}

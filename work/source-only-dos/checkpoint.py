@@ -60,7 +60,7 @@ def main():
     report = json.loads(report_path.read_text())
     if any(report['original_exe_bytes_used'].values()) or report['denied_oracle_reads']:
         raise ValueError('source-only invariant failed')
-    if len(report['translation_units']) != 141 or any('object' not in r for r in report['translation_units']):
+    if len(report['translation_units']) != 143 or any('object' not in r for r in report['translation_units']):
         raise ValueError('not all TUs compiled')
     bound = [r for r in report['translation_units'] if r.get('source_binding')]
     if any(r.get('binding_verification', {}).get('status') != 'PASS' for r in bound):
@@ -72,19 +72,19 @@ def main():
             or report['function_dispositions']['CONTRACT_EQUIVALENT']
             or report['function_dispositions']['UNRESOLVED']):
         raise ValueError('strict static function audit is incomplete')
-    logs = [pin(ROOT / p) for p in ('build/source-only-dos-run-v13.log',
-        'build/source-only-dos-tests-v13.log', 'build/source-only-dos-validation-v13.log')]
+    logs = [pin(ROOT / p) for p in ('build/source-only-dos-run-v14.log',
+        'build/source-only-dos-tests-v14.log', 'build/source-only-dos-validation-v14.log')]
     test_log = (ROOT / logs[1]['path']).read_text().strip()
     if not test_log.splitlines()[-1].startswith('OK'):
         raise ValueError('source-only tests did not finish successfully')
     test_counts = [int(n) for n in re.findall(r'Ran (\d+) tests', test_log)]
-    if test_counts != [35, 314] or len(re.findall(r'(?m)^OK(?: \(skipped=2\))?$', test_log)) != 2:
+    if test_counts != [37, 314] or len(re.findall(r'(?m)^OK(?: \(skipped=2\))?$', test_log)) != 2:
         raise ValueError('split repository test boundary is incomplete')
     test_count = sum(test_counts)
     if not (ROOT / logs[2]['path']).read_text().strip().endswith('VALIDATION PASS'):
         raise ValueError('historical validation did not finish successfully')
     receipt = {'schema': 'simant-source-only-dos-compact-intake-v1',
-        'source_only_base_checkpoint': 'a9b1d1a',
+        'source_only_base_checkpoint': '022089d',
         'canonical_manifest': pin(ROOT / 'layout/manifest.json'),
         'full_local_report': pin(report_path),
         'reproduction': 'python tools/source_only_dos.py --compile --link --reuse --jobs 4',
@@ -135,6 +135,11 @@ def main():
         'spider_control_storage_bindings': pin(OUT / 'spider-control-storage-bindings-v1.json'),
         'point_state_bindings': pin(OUT / 'point-state-bindings-v1.json'),
         'database_record_state_bindings': pin(OUT / 'database-record-state-bindings-v1.json'),
+        'graphics_formula_bindings': pin(OUT / 'graphics-formula-bindings-v1.json'),
+        'g2108_color_translation_bindings': pin(OUT / 'g2108-color-translation-bindings-v1.json'),
+        'driver_indexed_address_bindings': pin(OUT / 'driver-indexed-address-bindings-v1.json'),
+        'historical_data_debt_bytes': sum(r['size'] for r in report['historical_data_debt']),
+        'resolved_initialized_data': report['resolved_initialized_data'],
         'strict_static_index': pin(OUT / 'static-completeness/index-v1.json'),
         'strict_static_audit': {name: {'status': row['status'], 'receipt': row['receipt']}
                                for name, row in report['strict_static_audit'].items()},
@@ -155,7 +160,7 @@ def main():
         'tool_inputs': [p for p in report['inputs'] if p['path'].startswith('tools')],
         'validation_logs': logs,
         'historical_validation': 'PASS',
-        'source_only_tests': f'35 targeted tests included in {test_count} repository tests PASS (2 skips)',
+        'source_only_tests': f'37 targeted tests included in {test_count} repository tests PASS (2 skips)',
         'claim_limit': 'Compile and symbolic binding proofs only; no complete link, runtime '
                        'equivalence or human acceptance. Full inventories are reproducible build output.'}
     (OUT / 'current-intake.json').write_text(json.dumps(receipt, indent=2) + '\n')

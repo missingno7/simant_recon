@@ -1,0 +1,221 @@
+{
+  "schema": "dos-g2108-original-research-v1",
+  "original_sha256": "aa0596c6766322a8229ee3c36e57048c92adc82d50fbe2ef37afb8b85fcf4f11",
+  "g_2108": {
+    "dgroup_offset": 8456,
+    "read_width": 16,
+    "value_sha256": "245ed6cc9e5dddab0f416c29ce43af32e3bfe42ebb50c94bc10f8da6cbef33c2",
+    "accepted_source_value_sha256": "245ed6cc9e5dddab0f416c29ce43af32e3bfe42ebb50c94bc10f8da6cbef33c2",
+    "matches_accepted_S03_g_2216_values": true
+  },
+  "neighbor_g_2100": {
+    "dgroup_offset": 8448,
+    "read_width": 8,
+    "value_sha256": "237ee2ad60c37d29a6b16156101c55987faede67a905daf2e64453b6db2035fb",
+    "matches_0x80_shift_right_index": true
+  },
+  "registered_views_2100_2117": [
+    {
+      "name": "g_2100",
+      "off": 8448,
+      "alias_of": null
+    },
+    {
+      "name": "g_2108",
+      "off": 8456,
+      "alias_of": null
+    }
+  ],
+  "known_datarefs": {
+    "S00:31AD g_2108": [
+      {
+        "offset": "2108",
+        "record": "DATA",
+        "view": "var",
+        "consumer": "o00_31AD_1AE7"
+      }
+    ],
+    "S01:3126 g_2100": [
+      {
+        "offset": "2100",
+        "record": "DATA",
+        "view": "table",
+        "consumer": "o01_3126_0C87"
+      }
+    ],
+    "S03:3126 g_2216": [
+      {
+        "offset": "2216",
+        "record": "DATA",
+        "view": "var",
+        "consumer": "o03_3126_0140"
+      }
+    ],
+    "root:1B4E g_41C0": [
+      {
+        "offset": "41C0",
+        "record": "DATA",
+        "view": "var",
+        "consumer": "f_1B4E_000D"
+      }
+    ]
+  },
+  "canonical_direct_identifier_refs": [
+    {
+      "path": "src/root/m1B4E.asm",
+      "line": 16,
+      "names": [
+        "g_41C0"
+      ],
+      "text": "public\t_g_41C0, _g_4220"
+    },
+    {
+      "path": "src/root/m1B4E.asm",
+      "line": 58,
+      "names": [
+        "g_41C0"
+      ],
+      "text": "_g_41C0\t\tdb\t0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15\t; colour map"
+    },
+    {
+      "path": "src/root/m1B4E.asm",
+      "line": 114,
+      "names": [
+        "g_41C0"
+      ],
+      "text": "lea bx, _g_41C0"
+    },
+    {
+      "path": "src/S00/m31AD.asm",
+      "line": 18,
+      "names": [
+        "g_2108"
+      ],
+      "text": "extrn\t_g_2108:byte"
+    },
+    {
+      "path": "src/S00/m31AD.asm",
+      "line": 45,
+      "names": [
+        "g_41C0"
+      ],
+      "text": "extrn\t_g_41C0:byte"
+    },
+    {
+      "path": "src/S00/m31AD.asm",
+      "line": 3605,
+      "names": [
+        "g_41C0"
+      ],
+      "text": "lea di, _g_41C0"
+    },
+    {
+      "path": "src/S00/m31AD.asm",
+      "line": 3606,
+      "names": [
+        "g_2108"
+      ],
+      "text": "lea si, _g_2108"
+    },
+    {
+      "path": "src/S03/m3126.asm",
+      "line": 36,
+      "names": [
+        "g_41C0"
+      ],
+      "text": "extrn\t_g_41C0:byte"
+    },
+    {
+      "path": "src/S03/m3126.asm",
+      "line": 52,
+      "names": [
+        "g_2216"
+      ],
+      "text": "_g_2216\tdb\t00Fh, 00Eh, 00Ch, 4, 00Dh, 5, 1, 00Bh, 2, 00Ah, 6, 6"
+    },
+    {
+      "path": "src/S03/m3126.asm",
+      "line": 179,
+      "names": [
+        "g_41C0"
+      ],
+      "text": "lea di, _g_41C0"
+    },
+    {
+      "path": "src/S03/m3126.asm",
+      "line": 180,
+      "names": [
+        "g_2216"
+      ],
+      "text": "lea si, _g_2216"
+    }
+  ],
+  "accepted_neighbor_placements": {
+    "previous": {
+      "module": "S00:3126",
+      "source": "src/S00/m3126.asm",
+      "start": 8094,
+      "end": 8448
+    },
+    "next": {
+      "module": "S01:3126",
+      "source": "src/S01/m3126.asm",
+      "start": 8472,
+      "end": 8604
+    },
+    "gap_2100_to_2118_is_24_bytes": true
+  },
+  "inputs": [
+    {
+      "path": "layout/symbols.json",
+      "sha256": "0f5dd5b0a211945a97782cfccdb9bb31b0dfd07fcde5df4d4f9486b487eb0125",
+      "size": 800809
+    },
+    {
+      "path": "layout/manifest.json",
+      "sha256": "025a0a9255d910cae4b122ab5a3f3fb40888bb456d7fe42158db7c9e622fcf50",
+      "size": 628980
+    },
+    {
+      "path": "src/S00/m31AD.asm",
+      "sha256": "5d2ad69ff4affb4be4242e82187065cc5e0b3502cc0cc3e00ad3802ccee2656e",
+      "size": 81450
+    },
+    {
+      "path": "src/S00/m3126.asm",
+      "sha256": "be7a4a3b0fd9c56c47be50d20c60b0c2835002b7721bd913d36f8183be47ce5a",
+      "size": 18484
+    },
+    {
+      "path": "src/S01/m3126.asm",
+      "sha256": "ac99ea7821999d034e64201798d49dfaf64632f34e5f5dee428c9b6dec01a44a",
+      "size": 44403
+    },
+    {
+      "path": "src/S03/m3126.asm",
+      "sha256": "b0b9d296f23b4f8a5b4706008b21b6ad96429636da11bf22ddb2126ee362f2ff",
+      "size": 35317
+    },
+    {
+      "path": "src/root/m1B4E.asm",
+      "sha256": "a32d75d2d4ea36980b659d26e9ddd86bcde65d9e250ebac4cdc29c0e847c67a2",
+      "size": 8451
+    },
+    {
+      "path": "tools/exe.py",
+      "sha256": "d560f69dcdf0d1c9e89278b50bebe225a9b86db2c259fa54ec9eace6ea05a8b5",
+      "size": 7645
+    },
+    {
+      "path": "tools/dataref.py",
+      "sha256": "c9764b5f728538eb7417c6b76289d5e9d11d40caa12adfed05997008a9997d68",
+      "size": 10357
+    },
+    {
+      "path": "work/source-only-dos/g2108-color-map-research.py",
+      "sha256": "8853e7256e72e602004b0e0a562a2fcc7f90c73f82852dcc215506fdf7cd3d6c",
+      "size": 6292
+    }
+  ],
+  "raw_original_bytes_emitted": false
+}
