@@ -33,11 +33,28 @@ alias is admitted. `linker-alias-probe.py` reproduces six near/far link-and-exec
 controls with RTLink 4.00 and 6.10 under DOSBox-X; the compact contract receipt is
 `linker-alias-contract-v1.json`. These test-owned fixtures are not game images.
 
-The current missing-data worklist includes 432 FAR_BSS names with no definitions
+`history-storage-bindings-v1.json` separately assigns the ten source-bounded
+64-word history arrays to generated S24. One whole-module control proves that
+only the ten far COMDEF records are added; segment bytes, publics and symbolic
+fixups remain unchanged. Existing reset, ring index, graph/score views and save
+records ground the 128-byte functional extents. No source initializer, native
+state or game operation is added, and historical object owner/order are not claimed.
+
+`history-storage-probe.py` establishes far communal allocation, zero-fill and
+first/last word access with pinned MSC startup under both linkers, including a
+nonzero initializer contrast. Further controls bind the canonical byte extern
+spellings to word storage through SaveRec addresses and initialized pointer tables,
+check serialized words, and call the overlay owner. These establish the period
+DOS address ABI; the byte externs in canonical source only form addresses.
+Its compact contract also preserves the RTLink 4.00
+bare-ASM/overlay startup failure. Only the verified MSC path admits these owners;
+the link gate checks linker/runtime identities. This is no game runtime proof.
+
+The current missing-data worklist includes 422 FAR_BSS names with no definitions
 and 46 needing storage/reachability
 research. Each report row retains consumers, reconstructed declarations and any
-accepted placement candidate. Original declarations have not been silently
-turned into definitions. The historical 113-byte data disposition debt remains
+accepted placement candidate. Canonical declarations stay frozen; generated
+definitions require the explicit reviewed storage contract. The historical 113-byte data disposition debt remains
 explicit and no disposition byte strings are emitted into source.
 
 The immediate next implementation work is to recover remaining source owners for
@@ -49,8 +66,15 @@ comparison or human acceptance is claimed by this checkpoint.
 
 `farbss-source-review-v1.json` records an independent read of the reconstructed
 save table: 29 research candidates have matching serialization extents, and eight
-others lack that anchor. This is a pending ownership worklist; no definitions or
-native state/providers from those plans have entered the DOS target.
+others lack that anchor. Ten saved candidates now have the independent history
+storage review; the remaining 27 stay pending. No native state/providers from
+those plans enter the DOS target.
+
+`farbss-mechanical-worklist-v2.json` is the compact broader declaration/save-table
+inventory. It records 204 non-history length matches, including 195 consistent
+type candidates and nine conflicts after excluding S09's nonassertive target-only
+byte views. No owner definitions are admitted from that inventory. Consumer
+bounds, object boundaries, pointer escapes and compiler controls remain required.
 
 An additional confirmed layout gate is the input-event queue. The word exposed as
 `_g_5FFE` inside the C object spelled `Timer g_5FF2` is an ASM queue-buffer pointer

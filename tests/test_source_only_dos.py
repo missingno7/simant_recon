@@ -141,6 +141,8 @@ class SourceOnlyDosTests(unittest.TestCase):
             for row in report['translation_units']:
                 if row['lang'] != 'c' or not row.get('source_binding'):
                     continue
+                if row['source_binding'].get('communals'):
+                    continue
                 before = (ROOT / row['binding_control_source']['path']).read_text(encoding='latin1')
                 after = (ROOT / row['generated_source']['path']).read_text(encoding='latin1')
                 def compile(text):
@@ -155,6 +157,54 @@ class SourceOnlyDosTests(unittest.TestCase):
                     self.assertTrue(contrast != after)
                     with self.assertRaisesRegex(ValueError, 'outside reviewed address operands'):
                         bindings.verify_objects(control, compile(contrast), row['source_binding'])
+
+    def test_history_communal_contract_rejects_wrong_extent_type_initialization_and_code(self):
+        worker = ROOT / 'build/workers/source_only_dos_tests'
+        worker.mkdir(parents=True, exist_ok=True)
+        with tempfile.TemporaryDirectory(dir=worker) as directory:
+            report = {'inputs': [], 'generated_files': [], 'translation_units': [],
+                      'semantic_substitutions': []}
+            dos.prepare(Path(directory), report)
+            row = next(r for r in report['translation_units'] if r['module'] == 'S24:39C7')
+            before = (ROOT / row['binding_control_source']['path']).read_text(encoding='latin1')
+            after = (ROOT / row['generated_source']['path']).read_text(encoding='latin1')
+            def compile(text):
+                result = compiler.compile_c(text, row['profile'], row['flags'], basename=row['basename'])
+                self.assertTrue(result.ok, result.log)
+                return OmfReader(communals=True).read(result.obj)
+            control = compile(before)
+            proof = bindings.verify_objects(control, compile(after), row['source_binding'])
+            self.assertEqual(proof['status'], 'PASS')
+            self.assertEqual(len(proof['added_communals']), 10)
+            declaration = 'int far fd_50F6_0516[64];'
+            for contrast in (after.replace(declaration, 'int far fd_50F6_0516[63];'),
+                             after.replace(declaration, 'long far fd_50F6_0516[64];'),
+                             after.replace(declaration, 'int far fd_50F6_0516[64] = {1};'),
+                             after.replace('for (i = 0; i < 64; i++)', 'for (i = 0; i < 63; i++)')):
+                self.assertNotEqual(after, contrast)
+                with self.assertRaises(ValueError):
+                    bindings.verify_objects(control, compile(contrast), row['source_binding'])
+
+    def test_history_storage_requires_matching_linker_and_msc_runtime(self):
+        worker = ROOT / 'build/workers/source_only_dos_tests'
+        worker.mkdir(parents=True, exist_ok=True)
+        with tempfile.TemporaryDirectory(dir=worker) as directory:
+            report = {'inputs': [], 'generated_files': [], 'translation_units': [],
+                      'semantic_substitutions': []}
+            dos.prepare(Path(directory), report)
+            tc = compiler.toolchain()
+            for profile in ('rtlink400', 'rtlink610'):
+                bindings.require_history_startup_contract(report, profile, tc['linkers'][profile])
+            wrong = json.loads(json.dumps(report))
+            wrong['runtime_components'][0]['sha256'] = '0'*64
+            with self.assertRaisesRegex(ValueError, 'startup contract'):
+                bindings.require_history_startup_contract(wrong, 'rtlink400', tc['linkers']['rtlink400'])
+            wrong = json.loads(json.dumps(report))
+            for case in wrong['history_storage_contract']['cases']:
+                if case['case'] == 'crt_overlay_zero_communal':
+                    case['startup'] = 'USE'
+            with self.assertRaisesRegex(ValueError, 'startup contract'):
+                bindings.require_history_startup_contract(wrong, 'rtlink400', tc['linkers']['rtlink400'])
 
     def test_data_aliases_require_existing_bounded_source_storage(self):
         source = ("_DATA segment word public 'DATA'\npublic _owner\n"

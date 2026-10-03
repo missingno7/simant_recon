@@ -64,6 +64,9 @@ definition is imported from its registered, hash-checked module snapshot. Its
 reviewed definition replaces the canonical candidate in place; canonical TU
 declarations, other functions and data remain intact. Name aliases come only from
 the existing reviewed symbol registry. Unreviewed scaffolds fail preparation.
+Explicit storage contracts may assign a functional owner in a generated TU;
+they require separate source bounds, whole-object controls and runtime allocation
+evidence. This never changes a frozen historical declaration or its proof level.
 
 The report inventories source/evidence and generated-file hashes, actual compiled
 TUs, toolchain files/headers/runners, third-party runtime libraries, function
@@ -114,7 +117,31 @@ rewritten to get these aliases. Source-built near/far controls executed under
 DOSBox-X verify RTLink 4.00/6.10 `DEFINE owner + offset`, with separate wrong-near
 and wrong-far contrasts. This is a linker contract, not a game runtime proof.
 
-The remaining 478 imports are data: 432 FAR_BSS names and 46 requiring
+Ten history arrays now have one functional owner in generated S24 under
+`history-storage-bindings-v1.json`. Their signed-word declarations, ClearHistory's
+64-entry writes, HistUpdate's index mask, graph pointer-table views, score reads
+and S09's ten `{2,64,&array}` records establish the observable 128-byte extent of
+each array. The declaration edit adds ten far COMDEF records (1,280 bytes of
+linker allocation) and changes no compiled segment byte, public or symbolic fixup.
+No source initializer or game operation is introduced. Original object ownership,
+communal order and unused historical padding are not claimed. Canonical extern
+declarations and historical FAR_BSS accounting stay frozen; the general worklist
+does not automatically become definitions.
+
+`history-storage-probe.py` compiles, links and executes test-owned fixtures under
+both RTLink versions. Zero-fill and first/last word access pass with the pinned
+MSC runtime startup; a nonzero initializer is detected by each runtime control.
+Separate fixtures reproduce the byte extern/word owner declarations, SaveRec
+addresses and initialized graph pointers, check the first/last serialized words,
+and call the overlay word owner. Both linkers pass. The canonical byte externs
+only form addresses; they do not index those symbols or apply pointer arithmetic.
+This establishes the period DOS address ABI, not a modern cross-TU type policy.
+The bare ASM entry with an overlay owner fails under RTLink 4.00 and passes under
+6.10. That counterexample is retained in `history-storage-contract-v1.json`;
+only the MSC startup and byte/word view contracts authorize the generated history
+owners. The link gate checks the selected linker and runtime hashes against those controls.
+
+The remaining 468 imports are data: 422 FAR_BSS names and 46 requiring
 storage/reachability investigation. None remains inside an accepted data
 placement. These are link ingredients
 missing from the source-built target, distinct from the historical 113-byte debt.
@@ -125,21 +152,31 @@ The generated drivers replace 16 literal `3DFCh` operands with references to the
 accepted `_g_3DFC` row-offset buffer in `src/root/m1B4E.asm`. Two S00 near callback
 offsets likewise refer to their existing procedures. The pinned transformations
 are in `work/source-only-dos/source-bindings-v1.json`. Canonical ASM remains intact.
-For each of eleven derived TUs, compilation builds a source control and
+For each of twelve derived TUs, compilation builds a source control and
 checks unchanged segment extents, data, existing publics and relocations, and every
 byte outside the 18 reviewed address operands. Added fixups must have the correct
 target, frame, width and addend. DGROUP framing is explicit, including scoped
 `ASSUME SS:DGROUP` at indexed SS operands; an ordinary MASM `OFFSET` or group
 expression alone can still select the wrong frame. Negative source contrasts
 test wrong frames, the wrong timer word, unrelated instruction changes, changed C
-initializers and invalid interior views.
+initializers, invalid interior views and wrong communal type/extent/initialization.
 
 `farbss-source-review-v1.json` is a research worklist, not new DOS state. Direct
 reading of the reconstructed S09 SaveRec table confirms serialization extents for
 29 earlier source-view candidates; eight further candidates lack that anchor.
-Consumer bounds, pointer escapes, DOS type/COMDEF measurements and initialization
-still need review before any owner definitions enter the target. Save length
-alone does not establish an object's full storage extent.
+Ten of these candidates are the separately reviewed history arrays described
+above. The other 19 saved candidates and eight without save anchors still need
+consumer bounds, pointer escapes, DOS type/COMDEF measurements and initialization
+review. Save length alone does not establish an object's full storage extent.
+
+`farbss-mechanical-worklist-v2.json` preserves a compact inventory from the
+Luna mechanical scan. It recognizes declarations for 430 of 469 registered
+50F6 names; unsupported syntax leaves 39 unknown. Beyond history, 204 save rows
+match a complete declaration's mechanical size. Ignoring S09's explicitly
+nonassertive target-only byte declarations leaves 195 consistent type candidates
+and nine conflicts. These are review candidates, with no definitions admitted:
+object boundaries, indirect pointer uses, initialization and compiler controls
+still need evidence. The full derivative inventory stays in ignored build output.
 
 Fixed code offsets, numeric data operands and segment/group framing still need a
 broader semantic audit, which remains a link gate. Exact instruction bytes at an

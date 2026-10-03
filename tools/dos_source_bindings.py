@@ -1,7 +1,8 @@
 """Reviewed symbolic bindings for an independently laid out DOS image.
 
-Changes apply to generated whole TUs only. No new storage, object edits or oracle
-bytes are allowed. Verify assembled contributions against canonical source builds.
+Changes apply to generated whole TUs only. Storage needs an explicit reviewed
+communal contract; object edits and oracle bytes are forbidden. Compare whole
+contributions against the same source before the reviewed edits.
 """
 from collections import Counter
 
@@ -16,6 +17,16 @@ def apply_binding(text, binding):
 
 def review_addresses(binding, module, symbols):
     """Join source-owned relative locations to already reviewed symbol anchors."""
+    for communal in binding.get('communals', []):
+        anchor = symbols['data'][communal['name'][1:]]
+        if (anchor['seg'], anchor['off']) != tuple(communal['historical_address']):
+            raise ValueError('DOS communal symbol address changed')
+        if (communal['kind'], communal['count'], communal['element_size'], communal['length']) != ('far', 64, 2, 128):
+            raise ValueError('unreviewed history communal type or extent')
+        if anchor['seg'] != 0x50F6 or any(s['seg'] == anchor['seg'] and
+                anchor['off'] < s['off'] < anchor['off'] + communal['length']
+                for s in symbols['data'].values()):
+            raise ValueError('history communal contains another registered storage view')
     for public in binding.get('exports', []):
         if public['segment'] in module['placements']:
             placement = module['placements'][public['segment']]
@@ -47,6 +58,30 @@ def fixup_key(fixup):
         'frame_kind', 'frame', 'encoded_addend'))
 
 
+def communal_key(row):
+    return tuple(row.get(k) for k in ('name', 'kind', 'count', 'element_size', 'length'))
+
+
+def require_history_startup_contract(report, profile, tool):
+    """Require the proven MSC-startup path for any admitted far history storage."""
+    if not any(r.get('source_binding', {}).get('communals') for r in report['translation_units']
+               if r.get('source_binding')):
+        return
+    contract = report.get('history_storage_contract', {})
+    required = {'crt_overlay_zero_communal': 'CRT', 'crt_overlay_nonzero_contrast': 'CRT',
+                'crt_byte_and_word_views': 'BYTE', 'crt_byte_and_word_nonzero_contrast': 'BYTE'}
+    cases = [r for r in contract.get('cases', []) if r['linker'] == profile and r['case'] in required]
+    identities = {p['path'].replace('\\', '/'): p['sha256'] for p in contract.get('inputs', [])}
+    from pathlib import Path
+    components = [(str(Path(tool['directory']) / name), digest) for name, digest in tool['files'].items()]
+    components += [(r['path'], r['sha256']) for r in report['runtime_components']]
+    if (not contract.get('all_required_checks_pass') or len(cases) != 4
+            or {r['case'] for r in cases} != set(required)
+            or not all(r['passed'] and r['startup'] == required[r['case']] for r in cases)
+            or any(identities.get(path.replace('\\', '/')) != digest for path, digest in components)):
+        raise ValueError('far history storage lacks the selected linker/MSC startup contract')
+
+
 def bind_data_alias(spec, obj, row, module, symbols):
     """Bind a reviewed consumer view to a public in its one source owner."""
     if (module['source'] != spec['source'] or
@@ -76,6 +111,10 @@ def bind_data_alias(spec, obj, row, module, symbols):
 
 
 def verify_objects(original, generated, binding):
+    expected_communals = Counter(communal_key(c) for c in original.communals)
+    expected_communals.update(communal_key(c) for c in binding.get('communals', []))
+    if expected_communals != Counter(communal_key(c) for c in generated.communals):
+        raise ValueError('DOS binding changed communal type, extent or ownership')
     if (original.segment_lengths != generated.segment_lengths
             or set(original.segments) != set(generated.segments)
             or original.segment_defs != generated.segment_defs or original.groups != generated.groups):
@@ -133,4 +172,5 @@ def verify_objects(original, generated, binding):
     return {'status': 'PASS', 'segment_extents_unchanged': True,
             'existing_publics_and_relocations_unchanged': True,
             'storage_bytes_unchanged': True, 'added_exports': binding.get('exports', []),
+            'added_communals': binding.get('communals', []),
             'symbolic_operand_checks': checks}

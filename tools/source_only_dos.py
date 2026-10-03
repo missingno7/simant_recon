@@ -120,12 +120,23 @@ def prepare(out, report):
     report['inputs'] += [manifest_pin, registry_pin, symbols_pin]
     bindings = {}
     report['reviewed_data_aliases'] = []
-    for filename in ('source-bindings-v1.json', 'c-data-bindings-v1.json'):
+    for filename in ('source-bindings-v1.json', 'c-data-bindings-v1.json', 'history-storage-bindings-v1.json'):
         binding_raw, binding_pin = pin(ROOT / 'work/source-only-dos' / filename)
         binding_packet = json.loads(binding_raw)
-        if binding_packet['category'] != 'REVIEWED_SOURCE_LINK_BINDING':
+        if binding_packet['category'] not in ('REVIEWED_SOURCE_LINK_BINDING', 'REVIEWED_SOURCE_STORAGE_BINDING'):
             raise ValueError('unreviewed DOS source bindings')
         report['inputs'].append(binding_pin)
+        for review_source in binding_packet.get('review_sources', []):
+            report['inputs'].append(pin(ROOT / review_source['path'], review_source['sha256'])[1])
+        if binding_packet.get('runtime_contract'):
+            contract_pin = binding_packet['runtime_contract']
+            raw, identity = pin(ROOT / contract_pin['path'], contract_pin['sha256'])
+            contract = json.loads(raw)
+            if not contract['all_required_checks_pass']:
+                raise ValueError('history storage startup is not verified')
+            script = contract['probe_source']
+            report['inputs'] += [identity, pin(ROOT / script['path'], script['sha256'])[1]]
+            report['history_storage_contract'] = contract
         for binding in binding_packet['bindings']:
             if binding['module'] in bindings:
                 raise ValueError('duplicate DOS binding module')
@@ -302,7 +313,7 @@ def compile_units(out, report, jobs, reuse):
             reference_dir.mkdir(exist_ok=True)
             reference_path = reference_dir / path.name
             reference_path.write_bytes(reference.obj)
-            reader = OmfReader()
+            reader = OmfReader(communals=True)
             row['binding_verification'] = dos_source_bindings.verify_objects(
                 reader.read(reference.obj), reader.read(path.read_bytes()), row['source_binding'])
             row['binding_verification']['canonical_control_object'] = pin(reference_path)[1]
@@ -464,6 +475,7 @@ def link_units(out, report, profile):
     link_dir.mkdir()
     tc = compiler.toolchain()
     tool = tc['linkers'][profile]
+    dos_source_bindings.require_history_startup_contract(report, profile, tool)
     contract = report.get('linker_alias_contract', {})
     if any(row.get('offset') for row in report.get('symbolic_aliases', [])):
         cases = [r for r in contract.get('cases', []) if r['linker'] == profile]

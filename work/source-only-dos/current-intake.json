@@ -1,16 +1,16 @@
 {
   "schema": "simant-source-only-dos-compact-intake-v1",
-  "canonical_source_checkpoint": "556a80d",
+  "canonical_source_checkpoint": "6909977",
   "full_local_report": {
     "path": "build/source-only-dos/build-report.json",
-    "sha256": "37f3a4cade5b91fcb724f8c0e1543b7c8c6cb4a84000612dec6b0caf87f759e3",
-    "size": 1195339
+    "sha256": "cb30d341bc2702a55b117df7d9a9387f6927ca9167d9728a3da463b9010bc27a",
+    "size": 1216457
   },
   "reproduction": "python tools/source_only_dos.py --compile --link --reuse --jobs 4",
   "status": "INCOMPLETE",
   "errors": [
     "data dispositions still need source-built semantic resolution",
-    "478 unresolved source symbols",
+    "468 unresolved source symbols",
     "source address/layout contracts remain unresolved",
     "independent link refused: incomplete source/data preflight"
   ],
@@ -32,9 +32,9 @@
   "runnable": "NOT_EXECUTED",
   "human_acceptance": "PENDING",
   "unresolved_data_disposition_bytes": 113,
-  "unresolved_symbols": 478,
+  "unresolved_symbols": 468,
   "unresolved_symbol_categories": {
-    "reviewed FAR_BSS definition and compatible consumer views": 432,
+    "reviewed FAR_BSS definition and compatible consumer views": 422,
     "source storage/reachability investigation": 46
   },
   "symbolic_aliases": 155,
@@ -86,6 +86,168 @@
     "sha256": "d1fb7df567445937ccd4da0e793d3e8dca304b5a74244d3e22fda2f81c184791",
     "size": 5278
   },
+  "history_storage_bindings": {
+    "path": "work/source-only-dos/history-storage-bindings-v1.json",
+    "sha256": "9de05b5bf7b34c168581189d4f4749a53b37576600205be32f0500e14b17c80a",
+    "size": 11658
+  },
+  "history_storage_contract": {
+    "path": "work/source-only-dos/history-storage-contract-v1.json",
+    "sha256": "7fc4c0f32f70521f8d730121fd75e9bccab0c4e87a7611e25c48f5dd7b8470bf",
+    "size": 17745
+  },
+  "source_owned_history_arrays": [
+    {
+      "name": "_fd_50F6_0516",
+      "kind": "far",
+      "count": 64,
+      "element_size": 2,
+      "length": 128,
+      "historical_address": [
+        20726,
+        1302
+      ],
+      "source_extent_anchor": "S24 int far [64]; ClearHistory i<64; HistUpdate ring index masked to 63; S09 {2,64,&array}",
+      "initialization": "Uninitialized far communal; pinned MSC runtime plus RTLink fixtures establish zero-fill. Existing ClearHistory writes every word; no initializer values are introduced.",
+      "views": "S24 signed words; S14 score reads for three arrays; S09 serialized bytes; d3D57 typed graph pointers",
+      "registered_interior_names": []
+    },
+    {
+      "name": "_fd_50F6_05A0",
+      "kind": "far",
+      "count": 64,
+      "element_size": 2,
+      "length": 128,
+      "historical_address": [
+        20726,
+        1440
+      ],
+      "source_extent_anchor": "S24 int far [64]; ClearHistory i<64; HistUpdate ring index masked to 63; S09 {2,64,&array}",
+      "initialization": "Uninitialized far communal; pinned MSC runtime plus RTLink fixtures establish zero-fill. Existing ClearHistory writes every word; no initializer values are introduced.",
+      "views": "S24 signed words; S14 score reads for three arrays; S09 serialized bytes; d3D57 typed graph pointers",
+      "registered_interior_names": []
+    },
+    {
+      "name": "_fd_50F6_0626",
+      "kind": "far",
+      "count": 64,
+      "element_size": 2,
+      "length": 128,
+      "historical_address": [
+        20726,
+        1574
+      ],
+      "source_extent_anchor": "S24 int far [64]; ClearHistory i<64; HistUpdate ring index masked to 63; S09 {2,64,&array}",
+      "initialization": "Uninitialized far communal; pinned MSC runtime plus RTLink fixtures establish zero-fill. Existing ClearHistory writes every word; no initializer values are introduced.",
+      "views": "S24 signed words; S14 score reads for three arrays; S09 serialized bytes; d3D57 typed graph pointers",
+      "registered_interior_names": []
+    },
+    {
+      "name": "_fd_50F6_06AE",
+      "kind": "far",
+      "count": 64,
+      "element_size": 2,
+      "length": 128,
+      "historical_address": [
+        20726,
+        1710
+      ],
+      "source_extent_anchor": "S24 int far [64]; ClearHistory i<64; HistUpdate ring index masked to 63; S09 {2,64,&array}",
+      "initialization": "Uninitialized far communal; pinned MSC runtime plus RTLink fixtures establish zero-fill. Existing ClearHistory writes every word; no initializer values are introduced.",
+      "views": "S24 signed words; S14 score reads for three arrays; S09 serialized bytes; d3D57 typed graph pointers",
+      "registered_interior_names": []
+    },
+    {
+      "name": "_fd_50F6_073C",
+      "kind": "far",
+      "count": 64,
+      "element_size": 2,
+      "length": 128,
+      "historical_address": [
+        20726,
+        1852
+      ],
+      "source_extent_anchor": "S24 int far [64]; ClearHistory i<64; HistUpdate ring index masked to 63; S09 {2,64,&array}",
+      "initialization": "Uninitialized far communal; pinned MSC runtime plus RTLink fixtures establish zero-fill. Existing ClearHistory writes every word; no initializer values are introduced.",
+      "views": "S24 signed words; S14 score reads for three arrays; S09 serialized bytes; d3D57 typed graph pointers",
+      "registered_interior_names": []
+    },
+    {
+      "name": "_fd_50F6_07CE",
+      "kind": "far",
+      "count": 64,
+      "element_size": 2,
+      "length": 128,
+      "historical_address": [
+        20726,
+        1998
+      ],
+      "source_extent_anchor": "S24 int far [64]; ClearHistory i<64; HistUpdate ring index masked to 63; S09 {2,64,&array}",
+      "initialization": "Uninitialized far communal; pinned MSC runtime plus RTLink fixtures establish zero-fill. Existing ClearHistory writes every word; no initializer values are introduced.",
+      "views": "S24 signed words; S14 score reads for three arrays; S09 serialized bytes; d3D57 typed graph pointers",
+      "registered_interior_names": []
+    },
+    {
+      "name": "_fd_50F6_0856",
+      "kind": "far",
+      "count": 64,
+      "element_size": 2,
+      "length": 128,
+      "historical_address": [
+        20726,
+        2134
+      ],
+      "source_extent_anchor": "S24 int far [64]; ClearHistory i<64; HistUpdate ring index masked to 63; S09 {2,64,&array}",
+      "initialization": "Uninitialized far communal; pinned MSC runtime plus RTLink fixtures establish zero-fill. Existing ClearHistory writes every word; no initializer values are introduced.",
+      "views": "S24 signed words; S14 score reads for three arrays; S09 serialized bytes; d3D57 typed graph pointers",
+      "registered_interior_names": []
+    },
+    {
+      "name": "_fd_50F6_08F0",
+      "kind": "far",
+      "count": 64,
+      "element_size": 2,
+      "length": 128,
+      "historical_address": [
+        20726,
+        2288
+      ],
+      "source_extent_anchor": "S24 int far [64]; ClearHistory i<64; HistUpdate ring index masked to 63; S09 {2,64,&array}",
+      "initialization": "Uninitialized far communal; pinned MSC runtime plus RTLink fixtures establish zero-fill. Existing ClearHistory writes every word; no initializer values are introduced.",
+      "views": "S24 signed words; S14 score reads for three arrays; S09 serialized bytes; d3D57 typed graph pointers",
+      "registered_interior_names": []
+    },
+    {
+      "name": "_fd_50F6_0970",
+      "kind": "far",
+      "count": 64,
+      "element_size": 2,
+      "length": 128,
+      "historical_address": [
+        20726,
+        2416
+      ],
+      "source_extent_anchor": "S24 int far [64]; ClearHistory i<64; HistUpdate ring index masked to 63; S09 {2,64,&array}",
+      "initialization": "Uninitialized far communal; pinned MSC runtime plus RTLink fixtures establish zero-fill. Existing ClearHistory writes every word; no initializer values are introduced.",
+      "views": "S24 signed words; S14 score reads for three arrays; S09 serialized bytes; d3D57 typed graph pointers",
+      "registered_interior_names": []
+    },
+    {
+      "name": "_fd_50F6_0A0A",
+      "kind": "far",
+      "count": 64,
+      "element_size": 2,
+      "length": 128,
+      "historical_address": [
+        20726,
+        2570
+      ],
+      "source_extent_anchor": "S24 int far [64]; ClearHistory i<64; HistUpdate ring index masked to 63; S09 {2,64,&array}",
+      "initialization": "Uninitialized far communal; pinned MSC runtime plus RTLink fixtures establish zero-fill. Existing ClearHistory writes every word; no initializer values are introduced.",
+      "views": "S24 signed words; S14 score reads for three arrays; S09 serialized bytes; d3D57 typed graph pointers",
+      "registered_interior_names": []
+    }
+  ],
   "reviewed_data_aliases": [
     {
       "alias": "_fd_3D57_07CE",
@@ -642,6 +804,7 @@
           "offset": 350
         }
       ],
+      "added_communals": [],
       "symbolic_operand_checks": [],
       "canonical_control_object": {
         "path": "build\\source-only-dos\\binding-controls\\U000.OBJ",
@@ -671,6 +834,7 @@
       "existing_publics_and_relocations_unchanged": true,
       "storage_bytes_unchanged": true,
       "added_exports": [],
+      "added_communals": [],
       "symbolic_operand_checks": [
         {
           "segment": "S00B_TEXT",
@@ -728,6 +892,7 @@
       "existing_publics_and_relocations_unchanged": true,
       "storage_bytes_unchanged": true,
       "added_exports": [],
+      "added_communals": [],
       "symbolic_operand_checks": [
         {
           "segment": "S00B_TEXT",
@@ -776,6 +941,7 @@
       "existing_publics_and_relocations_unchanged": true,
       "storage_bytes_unchanged": true,
       "added_exports": [],
+      "added_communals": [],
       "symbolic_operand_checks": [
         {
           "segment": "S01A_TEXT",
@@ -902,6 +1068,7 @@
           "offset": 8
         }
       ],
+      "added_communals": [],
       "symbolic_operand_checks": [
         {
           "segment": "S02A_TEXT",
@@ -941,6 +1108,7 @@
       "existing_publics_and_relocations_unchanged": true,
       "storage_bytes_unchanged": true,
       "added_exports": [],
+      "added_communals": [],
       "symbolic_operand_checks": [
         {
           "segment": "S03A_TEXT",
@@ -996,6 +1164,7 @@
           "registry_symbol": "fd_55B3_2996"
         }
       ],
+      "added_communals": [],
       "symbolic_operand_checks": [],
       "canonical_control_object": {
         "path": "build\\source-only-dos\\binding-controls\\U021.OBJ",
@@ -1044,6 +1213,7 @@
           "registry_symbol": "fd_55B3_2A42"
         }
       ],
+      "added_communals": [],
       "symbolic_operand_checks": [],
       "canonical_control_object": {
         "path": "build\\source-only-dos\\binding-controls\\U022.OBJ",
@@ -1080,11 +1250,193 @@
           "registry_symbol": "fd_55B3_610A"
         }
       ],
+      "added_communals": [],
       "symbolic_operand_checks": [],
       "canonical_control_object": {
         "path": "build\\source-only-dos\\binding-controls\\U030.OBJ",
         "sha256": "7204d9910795660593c3c021465c8ca8d51ea0c57ed287bc6982d2ff0f1910ba",
         "size": 5194
+      }
+    },
+    {
+      "module": "S24:39C7",
+      "source": {
+        "path": "src\\S24\\m39C7.c",
+        "sha256": "3de9615a57dbe35eacd073726b451478dc5b12396360501631d7553b6139e240",
+        "size": 8405
+      },
+      "control_source": {
+        "path": "build\\source-only-dos\\binding-controls\\U035.c",
+        "sha256": "ec3c092d7ad54138e8778e31f7d7a1d13b69ce14d84d92cd722c8d0242b8886b",
+        "size": 8328
+      },
+      "object": {
+        "path": "build\\source-only-dos\\objects\\U035.OBJ",
+        "sha256": "31ec7d57b7f3add6269f5f1fe47102a63ccc7789d3d4c900a95449a74a559d12",
+        "size": 7515
+      },
+      "status": "PASS",
+      "segment_extents_unchanged": true,
+      "existing_publics_and_relocations_unchanged": true,
+      "storage_bytes_unchanged": true,
+      "added_exports": [],
+      "added_communals": [
+        {
+          "name": "_fd_50F6_0516",
+          "kind": "far",
+          "count": 64,
+          "element_size": 2,
+          "length": 128,
+          "historical_address": [
+            20726,
+            1302
+          ],
+          "source_extent_anchor": "S24 int far [64]; ClearHistory i<64; HistUpdate ring index masked to 63; S09 {2,64,&array}",
+          "initialization": "Uninitialized far communal; pinned MSC runtime plus RTLink fixtures establish zero-fill. Existing ClearHistory writes every word; no initializer values are introduced.",
+          "views": "S24 signed words; S14 score reads for three arrays; S09 serialized bytes; d3D57 typed graph pointers",
+          "registered_interior_names": []
+        },
+        {
+          "name": "_fd_50F6_05A0",
+          "kind": "far",
+          "count": 64,
+          "element_size": 2,
+          "length": 128,
+          "historical_address": [
+            20726,
+            1440
+          ],
+          "source_extent_anchor": "S24 int far [64]; ClearHistory i<64; HistUpdate ring index masked to 63; S09 {2,64,&array}",
+          "initialization": "Uninitialized far communal; pinned MSC runtime plus RTLink fixtures establish zero-fill. Existing ClearHistory writes every word; no initializer values are introduced.",
+          "views": "S24 signed words; S14 score reads for three arrays; S09 serialized bytes; d3D57 typed graph pointers",
+          "registered_interior_names": []
+        },
+        {
+          "name": "_fd_50F6_0626",
+          "kind": "far",
+          "count": 64,
+          "element_size": 2,
+          "length": 128,
+          "historical_address": [
+            20726,
+            1574
+          ],
+          "source_extent_anchor": "S24 int far [64]; ClearHistory i<64; HistUpdate ring index masked to 63; S09 {2,64,&array}",
+          "initialization": "Uninitialized far communal; pinned MSC runtime plus RTLink fixtures establish zero-fill. Existing ClearHistory writes every word; no initializer values are introduced.",
+          "views": "S24 signed words; S14 score reads for three arrays; S09 serialized bytes; d3D57 typed graph pointers",
+          "registered_interior_names": []
+        },
+        {
+          "name": "_fd_50F6_06AE",
+          "kind": "far",
+          "count": 64,
+          "element_size": 2,
+          "length": 128,
+          "historical_address": [
+            20726,
+            1710
+          ],
+          "source_extent_anchor": "S24 int far [64]; ClearHistory i<64; HistUpdate ring index masked to 63; S09 {2,64,&array}",
+          "initialization": "Uninitialized far communal; pinned MSC runtime plus RTLink fixtures establish zero-fill. Existing ClearHistory writes every word; no initializer values are introduced.",
+          "views": "S24 signed words; S14 score reads for three arrays; S09 serialized bytes; d3D57 typed graph pointers",
+          "registered_interior_names": []
+        },
+        {
+          "name": "_fd_50F6_073C",
+          "kind": "far",
+          "count": 64,
+          "element_size": 2,
+          "length": 128,
+          "historical_address": [
+            20726,
+            1852
+          ],
+          "source_extent_anchor": "S24 int far [64]; ClearHistory i<64; HistUpdate ring index masked to 63; S09 {2,64,&array}",
+          "initialization": "Uninitialized far communal; pinned MSC runtime plus RTLink fixtures establish zero-fill. Existing ClearHistory writes every word; no initializer values are introduced.",
+          "views": "S24 signed words; S14 score reads for three arrays; S09 serialized bytes; d3D57 typed graph pointers",
+          "registered_interior_names": []
+        },
+        {
+          "name": "_fd_50F6_07CE",
+          "kind": "far",
+          "count": 64,
+          "element_size": 2,
+          "length": 128,
+          "historical_address": [
+            20726,
+            1998
+          ],
+          "source_extent_anchor": "S24 int far [64]; ClearHistory i<64; HistUpdate ring index masked to 63; S09 {2,64,&array}",
+          "initialization": "Uninitialized far communal; pinned MSC runtime plus RTLink fixtures establish zero-fill. Existing ClearHistory writes every word; no initializer values are introduced.",
+          "views": "S24 signed words; S14 score reads for three arrays; S09 serialized bytes; d3D57 typed graph pointers",
+          "registered_interior_names": []
+        },
+        {
+          "name": "_fd_50F6_0856",
+          "kind": "far",
+          "count": 64,
+          "element_size": 2,
+          "length": 128,
+          "historical_address": [
+            20726,
+            2134
+          ],
+          "source_extent_anchor": "S24 int far [64]; ClearHistory i<64; HistUpdate ring index masked to 63; S09 {2,64,&array}",
+          "initialization": "Uninitialized far communal; pinned MSC runtime plus RTLink fixtures establish zero-fill. Existing ClearHistory writes every word; no initializer values are introduced.",
+          "views": "S24 signed words; S14 score reads for three arrays; S09 serialized bytes; d3D57 typed graph pointers",
+          "registered_interior_names": []
+        },
+        {
+          "name": "_fd_50F6_08F0",
+          "kind": "far",
+          "count": 64,
+          "element_size": 2,
+          "length": 128,
+          "historical_address": [
+            20726,
+            2288
+          ],
+          "source_extent_anchor": "S24 int far [64]; ClearHistory i<64; HistUpdate ring index masked to 63; S09 {2,64,&array}",
+          "initialization": "Uninitialized far communal; pinned MSC runtime plus RTLink fixtures establish zero-fill. Existing ClearHistory writes every word; no initializer values are introduced.",
+          "views": "S24 signed words; S14 score reads for three arrays; S09 serialized bytes; d3D57 typed graph pointers",
+          "registered_interior_names": []
+        },
+        {
+          "name": "_fd_50F6_0970",
+          "kind": "far",
+          "count": 64,
+          "element_size": 2,
+          "length": 128,
+          "historical_address": [
+            20726,
+            2416
+          ],
+          "source_extent_anchor": "S24 int far [64]; ClearHistory i<64; HistUpdate ring index masked to 63; S09 {2,64,&array}",
+          "initialization": "Uninitialized far communal; pinned MSC runtime plus RTLink fixtures establish zero-fill. Existing ClearHistory writes every word; no initializer values are introduced.",
+          "views": "S24 signed words; S14 score reads for three arrays; S09 serialized bytes; d3D57 typed graph pointers",
+          "registered_interior_names": []
+        },
+        {
+          "name": "_fd_50F6_0A0A",
+          "kind": "far",
+          "count": 64,
+          "element_size": 2,
+          "length": 128,
+          "historical_address": [
+            20726,
+            2570
+          ],
+          "source_extent_anchor": "S24 int far [64]; ClearHistory i<64; HistUpdate ring index masked to 63; S09 {2,64,&array}",
+          "initialization": "Uninitialized far communal; pinned MSC runtime plus RTLink fixtures establish zero-fill. Existing ClearHistory writes every word; no initializer values are introduced.",
+          "views": "S24 signed words; S14 score reads for three arrays; S09 serialized bytes; d3D57 typed graph pointers",
+          "registered_interior_names": []
+        }
+      ],
+      "symbolic_operand_checks": [],
+      "canonical_control_object": {
+        "path": "build\\source-only-dos\\binding-controls\\U035.OBJ",
+        "sha256": "9c35bcb53ad04b84a384287b9224634058eec7d3cb135c619999af3c98e37f60",
+        "size": 7419
       }
     },
     {
@@ -1115,6 +1467,7 @@
           "offset": 0
         }
       ],
+      "added_communals": [],
       "symbolic_operand_checks": [],
       "canonical_control_object": {
         "path": "build\\source-only-dos\\binding-controls\\U087.OBJ",
@@ -1165,6 +1518,7 @@
           "offset": 616
         }
       ],
+      "added_communals": [],
       "symbolic_operand_checks": [],
       "canonical_control_object": {
         "path": "build\\source-only-dos\\binding-controls\\U118.OBJ",
@@ -1176,8 +1530,8 @@
   "tool_inputs": [
     {
       "path": "tools\\source_only_dos.py",
-      "sha256": "1f416dcaa18f6f2cab45065e534864f8095c70538b490cdd965ceee08f1b464d",
-      "size": 34963
+      "sha256": "13b48c029ef0fd0beb960064f0fb68b778665dee70f6a433147de5002340e810",
+      "size": 35870
     },
     {
       "path": "tools\\compiler.py",
@@ -1196,28 +1550,28 @@
     },
     {
       "path": "tools\\dos_source_bindings.py",
-      "sha256": "173cdbc5f62c79053021b0dc58e412a550f1fd7e13ba6ee5c17e0ea087f29b7e",
-      "size": 8152
+      "sha256": "7249b4502123e13adb64e981074733d69da1f2f79ed2ef322d2c72e97d55bbdf",
+      "size": 10845
     }
   ],
   "validation_logs": [
     {
-      "path": "build/source-only-dos-run-v3.log",
-      "sha256": "698403b1d9f895c074daa3acc48a01cd581b1b9690fae188d238d8b9bcad6672",
+      "path": "build/source-only-dos-run-v4.log",
+      "sha256": "d36f22cfad0e6aef68cdfcf4c6d937e487a135631e6344c0e4c25c77ce046dd4",
       "size": 3721
     },
     {
-      "path": "build/source-only-dos-tests-v3.log",
-      "sha256": "c561990d7cf0949e08a5d49d8d7087d811f4a0bbe1f43d2d21893c0eb4122a3b",
-      "size": 1270
+      "path": "build/source-only-dos-tests-v4.log",
+      "sha256": "1401e2d3d7f706ca877737788feafc9c2b2c5fde4bfe02cc1325c74d3253a714",
+      "size": 1513
     },
     {
-      "path": "build/source-only-dos-validation-v3.log",
+      "path": "build/source-only-dos-validation-v4.log",
       "sha256": "fe86895759534286937a671bfb5fec1bccd9384b6527d1e05ee172b171cd76d7",
       "size": 4752
     }
   ],
   "historical_validation": "PASS",
-  "source_only_tests": "11 tests PASS",
+  "source_only_tests": "13 tests PASS",
   "claim_limit": "Compile and symbolic binding proofs only; no complete link, runtime equivalence or human acceptance. Full inventories are reproducible build output."
 }
