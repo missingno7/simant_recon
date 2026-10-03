@@ -1,0 +1,53 @@
+{
+  "schema": "source-window-loader-resource-integration-v1",
+  "status": "PASS",
+  "claim": "converted generated win_LoadAllWindows body executed against real HCEGANT records",
+  "limitations": [
+    "The test extracts the exact generated function body and replaces only its downstream win_LoadWindow call with an ID recorder.",
+    "font_InitFonts, win_LockInit, bitmap-size query, and database unhook are ordered service recorders; no DOS-equivalence claim is made.",
+    "Profile 0 kind-9, resources 0x80/0x81/0x83 are loaded from actual HCEGANT NDX/DAT files."
+  ],
+  "observations": "PASS converted win_LoadAllWindows: profile=0 windows=34 colors=16 groups=6 loaded=5 calls=21",
+  "command": [
+    "C:\\msys64\\mingw64\\bin\\gcc.EXE",
+    "-std=c11",
+    "-O2",
+    "-Wall",
+    "-Wextra",
+    "-Wconversion",
+    "-Werror",
+    "-MMD",
+    "-MF",
+    "D:\\Prog\\simant_recon\\build\\workers\\whole_program\\window_source_loader\\window-source-loader-test.d",
+    "-I",
+    "D:\\Prog\\simant_recon",
+    "-I",
+    "D:\\Prog\\simant_recon\\portable",
+    "D:\\Prog\\simant_recon\\build\\workers\\whole_program\\window_source_loader\\window_source_loader_test.c",
+    "D:\\Prog\\simant_recon\\portable\\whole_program\\window_source_globals.c",
+    "D:\\Prog\\simant_recon\\portable\\whole_program\\platform\\dos_memory.c",
+    "D:\\Prog\\simant_recon\\portable\\platform\\memory.c",
+    "D:\\Prog\\simant_recon\\portable\\game\\resources\\database.c",
+    "-o",
+    "D:\\Prog\\simant_recon\\build\\workers\\whole_program\\window_source_loader\\window-source-loader-test.exe"
+  ],
+  "compiler": "C:\\msys64\\mingw64\\bin\\gcc.exe",
+  "compiler_version": "gcc.EXE (Rev10, Built by MSYS2 project) 12.2.0",
+  "inputs": {
+    "src/root/m20E8.c": "c2ec2474010ef9821fd46cdf72e50f164c850446b6f4b051a91d474b53dd5ae2",
+    "build/workers/whole_program/generated/root_m20E8.c": "b810bc5ece7316e88a670167cf8d3f4584bbd0ab58919f899cb38c4074a009a5",
+    "portable/whole_program/conversions/window_loader.py": "afbb3ea4d78cc06047d0d276ab438c13a305bacb5ea1dca7fd10be317b2c548a",
+    "portable/whole_program/window_source_globals.h": "fc2752bd9438aefef22f2c51affb5e64732b5268fe374796f7dc13938d532145",
+    "portable/whole_program/window_source_globals.c": "4e917939ef506d0f47f4ce9462e8faa048851b7ec9f34071d1b475d7ab977966",
+    "portable/whole_program/window_source_rects.h": "b17ad3b03ad8eef6b79304f9a2fac9de94084d956093b34038b3ea409b832306",
+    "portable/tests/whole_program/window_source_loader/window_source_loader_test.c.in": "c8bb6c25066d8ccd37f085c0ae6ff740bd4087cadfba193aa36cc19b2ea280cf",
+    "build/workers/whole_program/window_source_loader/window_source_loader_test.c": "19dba16cef84e034db60178d532844f0b96a4bb0c86b8e9f47f817cef0656dc4",
+    "assets/HCEGANT.NDX": "077d8aecdad5e816f0828204f7ca500a68b3a4a3288740ac75e73e44eaa8efc4",
+    "assets/HCEGANT.DAT": "9c98c0f110e901a2c2db65944e4ebdf6b26392181e9415a34eb7b29617eaa899"
+  },
+  "compiler_dependencies": "D:\\Prog\\simant_recon\\build\\workers\\whole_program\\window_source_loader\\window-source-loader-test.exe: \\\n D:\\Prog\\simant_recon\\portable\\game\\resources\\database.c \\\n D:\\Prog\\simant_recon\\portable\\game\\resources\\database.h\n",
+  "executable": {
+    "path": "build/workers/whole_program/window_source_loader/window-source-loader-test.exe",
+    "sha256": "575c2af63b25fb2a389dc8453cc8dae36bf47c4f7d1a03e48a243b87f003a9c4"
+  }
+}

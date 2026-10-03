@@ -1,0 +1,210 @@
+{
+  "schema": "root-m16b5-line-provider-dos-native-v1",
+  "status": "pass",
+  "proof_boundary": "frozen 16-bit root machine code at f_16B5_0033/f_16B5_0008, direct Unicorn execution; native C pixels compared byte-for-byte",
+  "runner": {
+    "python": "3.10.11",
+    "platform": "Windows-10-10.0.26200-SP0",
+    "unicorn": "2.1.4",
+    "compiler": "gcc.exe (Rev10, Built by MSYS2 project) 12.2.0",
+    "compiler_path": "C:\\msys64\\mingw64\\bin\\gcc.exe",
+    "compiler_sha256": "c5005ba5380351c10743e9ca53ef9632164c54be3bd6b93324795114e4589a7d",
+    "compiler_tools": {
+      "cc1": {
+        "path": "C:\\msys64\\mingw64\\bin\\..\\lib\\gcc\\x86_64-w64-mingw32\\12.2.0\\cc1.exe",
+        "sha256": "4b8f580dfbb18a5b1dd32f68d432f8f44453ee636f93d4e1921a16c4e5dc8a36"
+      },
+      "collect2": {
+        "path": "C:\\msys64\\mingw64\\bin\\..\\lib\\gcc\\x86_64-w64-mingw32\\12.2.0\\collect2.exe",
+        "sha256": "da4f4c181325655d7ad9c15318e4d45b4bb7baf7f9641f3e2606510b6b4c84ff"
+      },
+      "as": {
+        "path": "C:\\msys64\\mingw64\\bin\\..\\lib\\gcc\\x86_64-w64-mingw32\\12.2.0\\..\\..\\..\\..\\x86_64-w64-mingw32\\bin\\as.exe",
+        "sha256": "c8d49ddaaed068031fe22f8403cfc18f7dffdba1e6d0d0c8386beb8f6298aad4"
+      },
+      "ld": {
+        "path": "C:\\msys64\\mingw64\\bin\\..\\lib\\gcc\\x86_64-w64-mingw32\\12.2.0\\..\\..\\..\\..\\x86_64-w64-mingw32\\bin\\ld.exe",
+        "sha256": "bd94728f0c75d50c1f8e2ab22ee87a2603e831e4532dc0b2318fe46879589b7b"
+      }
+    },
+    "compile_command": [
+      "C:\\msys64\\mingw64\\bin\\gcc.exe",
+      "-std=c11",
+      "-O2",
+      "-Wall",
+      "-Wextra",
+      "-Wconversion",
+      "-Werror",
+      "-shared",
+      "-I",
+      "D:\\Prog\\simant_recon\\portable",
+      "D:\\Prog\\simant_recon\\portable\\whole_program\\algorithms\\line16b5.c",
+      "-o",
+      "C:\\Users\\jiriv\\AppData\\Local\\Temp\\simant-line16b5-j52lossf\\line16b5.dll"
+    ]
+  },
+  "oracle": {
+    "path": "assets/SIMANT.EXE",
+    "sha256": "aa0596c6766322a8229ee3c36e57048c92adc82d50fbe2ef37afb8b85fcf4f11",
+    "asm_source": {
+      "path": "src/root/m16B5.asm",
+      "sha256": "a38a5b8c6c44549a99a501b7931279b3c597e516d79238216c27e479f399bc8a"
+    },
+    "caller_source": {
+      "path": "src/root/m0250.c",
+      "sha256": "bb8a325c543151e09cb173d2194844877805a9e1058d3b24362ff5a7cbd9f61b"
+    },
+    "bitmap_adapter_source": {
+      "path": "src/root/m1B4E.asm",
+      "sha256": "a32d75d2d4ea36980b659d26e9ddd86bcde65d9e250ebac4cdc29c0e847c67a2"
+    },
+    "entries": {
+      "f_16B5_0033": {
+        "unit": "root",
+        "seg": 5813,
+        "off": 51,
+        "size": 76,
+        "region": "game_or_library",
+        "extent": "DESCENT",
+        "evidence": [
+          "far_call"
+        ],
+        "name": "f_16B5_0033"
+      },
+      "f_16B5_0008": {
+        "unit": "root",
+        "seg": 5813,
+        "off": 8,
+        "size": 43,
+        "region": "game_or_library",
+        "extent": "DESCENT",
+        "evidence": [
+          "far_call"
+        ],
+        "name": "f_16B5_0008"
+      }
+    }
+  },
+  "runtime": {
+    "native_library_sha256": "f12603707df3c7f2f052282acfe672c2479a67120550339202c0f41fe12bb201",
+    "unicorn_package": "D:\\Prog\\simant_recon\\build\\behavior\\deps\\unicorn\\__init__.py",
+    "unicorn_package_sha256": "0e8ac7115c755994a968fa865bd1b2f2075edea715c17e91d62af2cc52c13392",
+    "unicorn_loaded_library": "D:\\Prog\\simant_recon\\build\\behavior\\deps\\unicorn\\lib\\unicorn.dll",
+    "unicorn_loaded_library_sha256": "010d85dce84b8f6ffaec3d5420f1b5f7768f859eb831be574c7da23e656ee8f1"
+  },
+  "current_inputs_before": {
+    "external:C:\\msys64\\mingw64\\bin\\gcc.exe": "c5005ba5380351c10743e9ca53ef9632164c54be3bd6b93324795114e4589a7d",
+    "external:C:\\msys64\\mingw64\\lib\\gcc\\x86_64-w64-mingw32\\12.2.0\\cc1.exe": "4b8f580dfbb18a5b1dd32f68d432f8f44453ee636f93d4e1921a16c4e5dc8a36",
+    "external:C:\\msys64\\mingw64\\lib\\gcc\\x86_64-w64-mingw32\\12.2.0\\collect2.exe": "da4f4c181325655d7ad9c15318e4d45b4bb7baf7f9641f3e2606510b6b4c84ff",
+    "external:C:\\msys64\\mingw64\\x86_64-w64-mingw32\\bin\\as.exe": "c8d49ddaaed068031fe22f8403cfc18f7dffdba1e6d0d0c8386beb8f6298aad4",
+    "external:C:\\msys64\\mingw64\\x86_64-w64-mingw32\\bin\\ld.exe": "bd94728f0c75d50c1f8e2ab22ee87a2603e831e4532dc0b2318fe46879589b7b",
+    "assets/SIMANT.EXE": "aa0596c6766322a8229ee3c36e57048c92adc82d50fbe2ef37afb8b85fcf4f11",
+    "build/behavior/deps/unicorn/__init__.py": "0e8ac7115c755994a968fa865bd1b2f2075edea715c17e91d62af2cc52c13392",
+    "build/behavior/deps/unicorn/arm64_const.py": "ddadd814eccd0a312bb43da7b4f2298690660bd5698c27edc306b1d981cff972",
+    "build/behavior/deps/unicorn/arm_const.py": "ace0c3e49f61649034a1bec4279576b67e064df146ea8062c67e68dc14e6eb7b",
+    "build/behavior/deps/unicorn/lib/unicorn.dll": "010d85dce84b8f6ffaec3d5420f1b5f7768f859eb831be574c7da23e656ee8f1",
+    "build/behavior/deps/unicorn/m68k_const.py": "af95f32f2810fe19888ac723db70c74c7fb1df2bc8ba3578ede0a28b8eca94a7",
+    "build/behavior/deps/unicorn/mips_const.py": "087925a25a128662e095bb861af3c38a2a6c522fc21e222e31b71aeacaaa63d3",
+    "build/behavior/deps/unicorn/ppc_const.py": "11e0c52a1c137874352119fb3d1621639079feda6574ee575271ef683a0a8f17",
+    "build/behavior/deps/unicorn/riscv_const.py": "86e08d5f6327d154306d5d02899331892de6f44020ff86900a84d2b212205925",
+    "build/behavior/deps/unicorn/s390x_const.py": "4f6194d1697d8684921782a81f494458dc859f8ebf2f78e30f673bd5f7cd590f",
+    "build/behavior/deps/unicorn/sparc_const.py": "9dd58fa5aeab225a0f8186f653f5c8fc5fd161b75ccc6a541e5af79f36af2698",
+    "build/behavior/deps/unicorn/tricore_const.py": "88310f61e12b731b2550031eb6423fbf815e66428b483132d3df47614c9d53ae",
+    "build/behavior/deps/unicorn/unicorn.py": "2aed71e6d5bc60807198cdcc3ed43a485a7acae1f41f08d986137afc55df2029",
+    "build/behavior/deps/unicorn/unicorn_const.py": "c21d7c49f62296591a5f09ed0119ef95083b82f5f3f66b829578784c7b164368",
+    "build/behavior/deps/unicorn/unicorn_py2.py": "b82ccc7c00762e10f0326e8d8ad4381872cf531799d5e003ad52c9d7ac61ae42",
+    "build/behavior/deps/unicorn/unicorn_py3/__init__.py": "2cd4a0d95ef236b5b9e3efb68b20fb6a6d1fb4190db2e9cc0a6447eb2c0aa755",
+    "build/behavior/deps/unicorn/unicorn_py3/arch/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "build/behavior/deps/unicorn/unicorn_py3/arch/arm.py": "d486ff4a9c3f797e5e57a5201a1e2304b97a54b6bc61e320062f1290f4e3dc33",
+    "build/behavior/deps/unicorn/unicorn_py3/arch/arm64.py": "2e393f3f863da1576619e03abcbda2a2e2e54d673aac98979cf0b6caed8926b4",
+    "build/behavior/deps/unicorn/unicorn_py3/arch/intel.py": "b3b8338a85ac74623e7a67dfb4f44dc9933786a329e64d772987490dbf751637",
+    "build/behavior/deps/unicorn/unicorn_py3/arch/types.py": "525ed179db874a13291f9469bd6243e7293aba17454de9b10a9227106d093787",
+    "build/behavior/deps/unicorn/unicorn_py3/unicorn.py": "b4de7d560790a587157b17edd71c83b4f2d2bade2447d1a5433c497468ac8aeb",
+    "build/behavior/deps/unicorn/x86_const.py": "d7663db6425f52838f3e79e45a8fe22b6c02be7edb44367ea2118aec04ee5728",
+    "layout/functions.json": "6089a06e18fbe8f0960392cfe30357f7c19c886f38f10f7f115c72d127a756e7",
+    "layout/symbols.json": "0f5dd5b0a211945a97782cfccdb9bb31b0dfd07fcde5df4d4f9486b487eb0125",
+    "portable/tests/asm_line16b5/run_differential.py": "5205efce35b7e2f1471775e6ef2dcf9912bde14e4923275198b21e09bc84d911",
+    "portable/whole_program/algorithms/line16b5.c": "28730cc04993bfc4772a5348f221e50843b7d2fe684241ea9171da9ee2147515",
+    "portable/whole_program/algorithms/line16b5.h": "ea808339589892a618d845073c64a9bc3ceaf4b4843934cf6160284b8a0d5520",
+    "portable/whole_program/types/fonts.h": "c54dfa0767b53dabff2f3e5c35ee9d7b004359b85d66ab33ea224523c10ce241",
+    "src/root/m0250.c": "bb8a325c543151e09cb173d2194844877805a9e1058d3b24362ff5a7cbd9f61b",
+    "src/root/m16B5.asm": "a38a5b8c6c44549a99a501b7931279b3c597e516d79238216c27e479f399bc8a",
+    "src/root/m1B4E.asm": "a32d75d2d4ea36980b659d26e9ddd86bcde65d9e250ebac4cdc29c0e847c67a2",
+    "tools/exe.py": "d560f69dcdf0d1c9e89278b50bebe225a9b86db2c259fa54ec9eace6ea05a8b5",
+    "tools/functions.py": "0f67c8d9eb01e319620c9342e79c35f76006091d860894aad6dcf8d61ee2b39e",
+    "tools/symbols.py": "e3f25fb66717f743dea126e56b5b44538d452fb5a2d52695ef27cb5069bc1793"
+  },
+  "current_inputs_after": {
+    "external:C:\\msys64\\mingw64\\bin\\gcc.exe": "c5005ba5380351c10743e9ca53ef9632164c54be3bd6b93324795114e4589a7d",
+    "external:C:\\msys64\\mingw64\\lib\\gcc\\x86_64-w64-mingw32\\12.2.0\\cc1.exe": "4b8f580dfbb18a5b1dd32f68d432f8f44453ee636f93d4e1921a16c4e5dc8a36",
+    "external:C:\\msys64\\mingw64\\lib\\gcc\\x86_64-w64-mingw32\\12.2.0\\collect2.exe": "da4f4c181325655d7ad9c15318e4d45b4bb7baf7f9641f3e2606510b6b4c84ff",
+    "external:C:\\msys64\\mingw64\\x86_64-w64-mingw32\\bin\\as.exe": "c8d49ddaaed068031fe22f8403cfc18f7dffdba1e6d0d0c8386beb8f6298aad4",
+    "external:C:\\msys64\\mingw64\\x86_64-w64-mingw32\\bin\\ld.exe": "bd94728f0c75d50c1f8e2ab22ee87a2603e831e4532dc0b2318fe46879589b7b",
+    "assets/SIMANT.EXE": "aa0596c6766322a8229ee3c36e57048c92adc82d50fbe2ef37afb8b85fcf4f11",
+    "build/behavior/deps/unicorn/__init__.py": "0e8ac7115c755994a968fa865bd1b2f2075edea715c17e91d62af2cc52c13392",
+    "build/behavior/deps/unicorn/arm64_const.py": "ddadd814eccd0a312bb43da7b4f2298690660bd5698c27edc306b1d981cff972",
+    "build/behavior/deps/unicorn/arm_const.py": "ace0c3e49f61649034a1bec4279576b67e064df146ea8062c67e68dc14e6eb7b",
+    "build/behavior/deps/unicorn/lib/unicorn.dll": "010d85dce84b8f6ffaec3d5420f1b5f7768f859eb831be574c7da23e656ee8f1",
+    "build/behavior/deps/unicorn/m68k_const.py": "af95f32f2810fe19888ac723db70c74c7fb1df2bc8ba3578ede0a28b8eca94a7",
+    "build/behavior/deps/unicorn/mips_const.py": "087925a25a128662e095bb861af3c38a2a6c522fc21e222e31b71aeacaaa63d3",
+    "build/behavior/deps/unicorn/ppc_const.py": "11e0c52a1c137874352119fb3d1621639079feda6574ee575271ef683a0a8f17",
+    "build/behavior/deps/unicorn/riscv_const.py": "86e08d5f6327d154306d5d02899331892de6f44020ff86900a84d2b212205925",
+    "build/behavior/deps/unicorn/s390x_const.py": "4f6194d1697d8684921782a81f494458dc859f8ebf2f78e30f673bd5f7cd590f",
+    "build/behavior/deps/unicorn/sparc_const.py": "9dd58fa5aeab225a0f8186f653f5c8fc5fd161b75ccc6a541e5af79f36af2698",
+    "build/behavior/deps/unicorn/tricore_const.py": "88310f61e12b731b2550031eb6423fbf815e66428b483132d3df47614c9d53ae",
+    "build/behavior/deps/unicorn/unicorn.py": "2aed71e6d5bc60807198cdcc3ed43a485a7acae1f41f08d986137afc55df2029",
+    "build/behavior/deps/unicorn/unicorn_const.py": "c21d7c49f62296591a5f09ed0119ef95083b82f5f3f66b829578784c7b164368",
+    "build/behavior/deps/unicorn/unicorn_py2.py": "b82ccc7c00762e10f0326e8d8ad4381872cf531799d5e003ad52c9d7ac61ae42",
+    "build/behavior/deps/unicorn/unicorn_py3/__init__.py": "2cd4a0d95ef236b5b9e3efb68b20fb6a6d1fb4190db2e9cc0a6447eb2c0aa755",
+    "build/behavior/deps/unicorn/unicorn_py3/arch/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "build/behavior/deps/unicorn/unicorn_py3/arch/arm.py": "d486ff4a9c3f797e5e57a5201a1e2304b97a54b6bc61e320062f1290f4e3dc33",
+    "build/behavior/deps/unicorn/unicorn_py3/arch/arm64.py": "2e393f3f863da1576619e03abcbda2a2e2e54d673aac98979cf0b6caed8926b4",
+    "build/behavior/deps/unicorn/unicorn_py3/arch/intel.py": "b3b8338a85ac74623e7a67dfb4f44dc9933786a329e64d772987490dbf751637",
+    "build/behavior/deps/unicorn/unicorn_py3/arch/types.py": "525ed179db874a13291f9469bd6243e7293aba17454de9b10a9227106d093787",
+    "build/behavior/deps/unicorn/unicorn_py3/unicorn.py": "b4de7d560790a587157b17edd71c83b4f2d2bade2447d1a5433c497468ac8aeb",
+    "build/behavior/deps/unicorn/x86_const.py": "d7663db6425f52838f3e79e45a8fe22b6c02be7edb44367ea2118aec04ee5728",
+    "layout/functions.json": "6089a06e18fbe8f0960392cfe30357f7c19c886f38f10f7f115c72d127a756e7",
+    "layout/symbols.json": "0f5dd5b0a211945a97782cfccdb9bb31b0dfd07fcde5df4d4f9486b487eb0125",
+    "portable/tests/asm_line16b5/run_differential.py": "5205efce35b7e2f1471775e6ef2dcf9912bde14e4923275198b21e09bc84d911",
+    "portable/whole_program/algorithms/line16b5.c": "28730cc04993bfc4772a5348f221e50843b7d2fe684241ea9171da9ee2147515",
+    "portable/whole_program/algorithms/line16b5.h": "ea808339589892a618d845073c64a9bc3ceaf4b4843934cf6160284b8a0d5520",
+    "portable/whole_program/types/fonts.h": "c54dfa0767b53dabff2f3e5c35ee9d7b004359b85d66ab33ea224523c10ce241",
+    "src/root/m0250.c": "bb8a325c543151e09cb173d2194844877805a9e1058d3b24362ff5a7cbd9f61b",
+    "src/root/m16B5.asm": "a38a5b8c6c44549a99a501b7931279b3c597e516d79238216c27e479f399bc8a",
+    "src/root/m1B4E.asm": "a32d75d2d4ea36980b659d26e9ddd86bcde65d9e250ebac4cdc29c0e847c67a2",
+    "tools/exe.py": "d560f69dcdf0d1c9e89278b50bebe225a9b86db2c259fa54ec9eace6ea05a8b5",
+    "tools/functions.py": "0f67c8d9eb01e319620c9342e79c35f76006091d860894aad6dcf8d61ee2b39e",
+    "tools/symbols.py": "e3f25fb66717f743dea126e56b5b44538d452fb5a2d52695ef27cb5069bc1793"
+  },
+  "current_inputs_unchanged": true,
+  "native_inputs": {
+    "portable/whole_program/algorithms/line16b5.c": "28730cc04993bfc4772a5348f221e50843b7d2fe684241ea9171da9ee2147515",
+    "portable/whole_program/algorithms/line16b5.h": "ea808339589892a618d845073c64a9bc3ceaf4b4843934cf6160284b8a0d5520"
+  },
+  "case_count": 264,
+  "all_native_pixels_equal": true,
+  "negative_controls": {
+    "null_state": true,
+    "zero_width": true,
+    "bad_mode": true,
+    "non_square_source_clipper": true,
+    "undersized_mode1": true,
+    "height_over_row_table": true
+  },
+  "legacy_inline_adapter_matches_typed_view": 3,
+  "case_scope": "mode 0/1/2; square 84/112 source geometries (mode/size cross-combinations where payload span is safe); signed-word endpoints sampled within [-4096,4096]; fixed-seed randomized line sets; typed API rejects nonsquare source geometry and checks payload capacity",
+  "source_domain": {
+    "inline_width_max": 112,
+    "inline_height_max": 112,
+    "max_inline_allocation_bytes": 6276,
+    "payload_max_bytes": 6272,
+    "draw_spider_dimensions": "m0250 sets width=7*g_19BE and height=7*g_19C0; g_19BE/g_19C0 initialize to 16 and are both set to 12 in g_5A97 case 2",
+    "mode_geometry": {
+      "mode_0": "g_5A97 odd; 112x112 at default tile size; 1bpp",
+      "mode_1": "g_5A97==2; 84x84; packed 4bpp",
+      "mode_2": "otherwise; 112x112 at default tile size; four 1bpp planes"
+    },
+    "nonsquare_geometry": "excluded: source clipper compares y against width-1 and x against height-1 while init builds height row entries; rectangular inputs can exceed the initialized row table",
+    "historic_inline_object_extent": "not recovered; 6276-byte native owner upper bound derives from m0250 DrawSpider dimensions and m16B5 write-address formulas"
+  }
+}

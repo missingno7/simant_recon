@@ -1,0 +1,67 @@
+{
+  "adapted_sha256": "b237281bc7fb72ee9a82c45e5db017498442cef45f536f969f1b599be83943d8",
+  "checks": {
+    "explicit_owner_byte_addresses": true,
+    "f0008_dos_word_abi": true,
+    "f16b5_void_prefix_abi": true,
+    "f2662_byte_destination": true,
+    "old_object_extern_removed": true,
+    "typed_owner_bound": true
+  },
+  "closure_after": {
+    "compiler_executable": "c5005ba5380351c10743e9ca53ef9632164c54be3bd6b93324795114e4589a7d",
+    "portable/tests/spider_inline_source/test_adapt.py": "ad59e8f150822f7f2dd02fcb8573fbb4aa792c3f20ba4979a9002013f6488389",
+    "portable/whole_program/algorithms/line16b5.h": "2b0bdacd1cf204b1d29d81530b883f62d68b6bf152fd907bf446935decbd1236",
+    "portable/whole_program/conversions/spider_inline_source.py": "020e439aedf35fd96d755cddbf25d9693ca0a6b7903f6d393a3dd00d44aa304c",
+    "src/root/m0250.c": "bb8a325c543151e09cb173d2194844877805a9e1058d3b24362ff5a7cbd9f61b"
+  },
+  "closure_before": {
+    "compiler_executable": "c5005ba5380351c10743e9ca53ef9632164c54be3bd6b93324795114e4589a7d",
+    "portable/tests/spider_inline_source/test_adapt.py": "ad59e8f150822f7f2dd02fcb8573fbb4aa792c3f20ba4979a9002013f6488389",
+    "portable/whole_program/algorithms/line16b5.h": "2b0bdacd1cf204b1d29d81530b883f62d68b6bf152fd907bf446935decbd1236",
+    "portable/whole_program/conversions/spider_inline_source.py": "020e439aedf35fd96d755cddbf25d9693ca0a6b7903f6d393a3dd00d44aa304c",
+    "src/root/m0250.c": "bb8a325c543151e09cb173d2194844877805a9e1058d3b24362ff5a7cbd9f61b"
+  },
+  "command": [
+    "C:\\msys64\\mingw64\\bin\\gcc.EXE",
+    "-std=gnu11",
+    "-Dfar=",
+    "-Dnear=",
+    "-fsyntax-only",
+    "-w",
+    "-I",
+    "D:\\Prog\\simant_recon",
+    "C:\\Users\\jiriv\\AppData\\Local\\Temp\\spider-inline-source-94zhl_eo\\m0250_adapted.c"
+  ],
+  "compiler": {
+    "path": "C:\\msys64\\mingw64\\bin\\gcc.EXE",
+    "sha256": "c5005ba5380351c10743e9ca53ef9632164c54be3bd6b93324795114e4589a7d"
+  },
+  "compiler_stderr": "",
+  "compiler_stdout": "",
+  "conversions": {
+    "explicit_f16b5_setup_bytecasts": 3,
+    "explicit_f2662_bytecasts": 3,
+    "f16b5_line_prototype_fixed_width": 1,
+    "f16b5_setup_prototype_void_pointer": 1,
+    "f2662_prototype_byte_pointer": 1,
+    "lexically_replaced_active_identifiers": 16,
+    "removed_Pnt_object_extern": 1
+  },
+  "negative_controls": [
+    "source byte mutation rejected",
+    "wrong source route rejected",
+    "same spelling in C comments/string/line comment preserved"
+  ],
+  "owner": {
+    "pixels_offset": 4,
+    "size": 6276,
+    "symbol": "portable_line16b5_source_buffer"
+  },
+  "schema": "spider-inline-source-adapt-v1",
+  "source": {
+    "path": "src/root/m0250.c",
+    "sha256": "bb8a325c543151e09cb173d2194844877805a9e1058d3b24362ff5a7cbd9f61b"
+  },
+  "status": "pass"
+}

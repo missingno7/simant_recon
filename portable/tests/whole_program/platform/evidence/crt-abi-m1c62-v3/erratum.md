@@ -1,0 +1,3 @@
+# CRT adapter parenthesis correction
+
+A previous expression rewrite consumed the grouping around `(_ctype[c + 1] & 2)`, producing `if sim_msc_ctype_is_lower_ascii(...)` in the direct branch. The current converter preserves the expression parentheses. This v3 report is a fresh complete-module m1C62 compile receipt with source overlay applied before the CRT adapter, followed by the normal word conversion. Its negative control intentionally removes the `if` condition parentheses and fails compilation. The prior converter was transient and is not substituted for this pinned current source; the failure shape and corrected behavior are recorded here and in the report.

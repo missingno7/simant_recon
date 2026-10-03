@@ -1,0 +1,185 @@
+{
+  "schema": "simant-crt-m1c62-whole-module-compile-v3",
+  "status": "PASS_ADAPTED_WHOLE_MODULE_SYNTAX_AND_NEGATIVE_CONTROL",
+  "historical_oracle_claim": null,
+  "conversion_order": [
+    "reviewed_overlays",
+    "crt_abi.adapt",
+    "whole_program.convert_words"
+  ],
+  "module_function_count": 13,
+  "reviewed_overlay_rows": [
+    {
+      "function": "f_1C62_0415",
+      "proof_category": "BEHAVIOR_EXACT",
+      "path": "evidence/behavior/functions/f_1C62_0415/contracts/host-service-v1/module.c",
+      "sha256": "1a75da44054b48e33e02b0dc551e9e690d1b0797b5e2cfe2e3e6e26ad3b632d4",
+      "different_from_canonical_tokens": true
+    }
+  ],
+  "crt_adapter_ledger": {
+    "kind": "NATIVE_CRT_ABI_NAME_ADAPTATION",
+    "module_path": "src/root/m1C62.c",
+    "input_source_sha256": "07e400cd33773737dd8c838504e7ed57f658f3d047fc182eb4de12e5f3132e63",
+    "output_source_sha256": "fa53bce12ba8de8c2a6a57e49955fc0418f548bd9f03ca4583a41772b6a56095",
+    "changes": {
+      "ctype_lower_uses": 2,
+      "sys_errlist_names": 2,
+      "sys_nerr_names": 2
+    },
+    "provider_header": "portable/whole_program/platform/crt_abi.h",
+    "scope": "source-visible DOS error strings, ASCII _LOWER checks, and stored _harderr policy; INT 24 delivery remains retired"
+  },
+  "word_conversion_counts": {
+    "uint8_t": 3,
+    "int8_t": 0,
+    "uint32_t": 0,
+    "int32_t": 4,
+    "uint16_t": 2,
+    "int16_t": 89,
+    "qualifier_removed": 126,
+    "main_renamed": 0,
+    "errno_namespaced": 0,
+    "malloc_namespaced": 0,
+    "free_namespaced": 0,
+    "_ffree_namespaced": 0,
+    "_frealloc_namespaced": 0,
+    "open_namespaced": 0,
+    "read_namespaced": 0,
+    "write_namespaced": 0,
+    "lseek_namespaced": 0,
+    "close_namespaced": 0,
+    "access_namespaced": 0,
+    "chdir_namespaced": 0,
+    "getcwd_namespaced": 0,
+    "remove_namespaced": 0,
+    "stricmp_namespaced": 0,
+    "fopen_namespaced": 0,
+    "fread_namespaced": 0,
+    "fclose_namespaced": 0,
+    "FILE_namespaced": 0,
+    "bare_unsigned": 0
+  },
+  "positive_command": [
+    "C:\\msys64\\mingw64\\bin\\gcc.exe",
+    "-std=c11",
+    "-fsyntax-only",
+    "-fno-builtin",
+    "-Werror=implicit-function-declaration",
+    "-I",
+    "D:\\Prog\\simant_recon",
+    "C:\\Users\\jiriv\\AppData\\Local\\Temp\\crt-abi-m1c62-kyjlu_mk\\m1C62-adapted.c"
+  ],
+  "positive": {
+    "returncode": 0,
+    "stdout": "",
+    "stderr": ""
+  },
+  "negative_command": [
+    "C:\\msys64\\mingw64\\bin\\gcc.exe",
+    "-std=c11",
+    "-fsyntax-only",
+    "-fno-builtin",
+    "-Werror=implicit-function-declaration",
+    "-I",
+    "D:\\Prog\\simant_recon",
+    "C:\\Users\\jiriv\\AppData\\Local\\Temp\\crt-abi-m1c62-kyjlu_mk\\m1C62-omitted-parens-negative.c"
+  ],
+  "negative_missing_condition_parentheses": {
+    "returncode": 1,
+    "diagnostics": "C:\\Users\\jiriv\\AppData\\Local\\Temp\\crt-abi-m1c62-kyjlu_mk\\m1C62-omitted-parens-negative.c: In function 'f_1C62_0415':\nC:\\Users\\jiriv\\AppData\\Local\\Temp\\crt-abi-m1c62-kyjlu_mk\\m1C62-omitted-parens-negative.c:306:16: error: expected '(' before 'sim_msc_ctype_is_lower_ascii'\n  306 |             if sim_msc_ctype_is_lower_ascii((uint8_t)c)\n      |                ^~~~~~~~~~~~~~~~~~~~~~~~~~~~\n      |                (\n"
+  },
+  "compiler": {
+    "path": "C:\\msys64\\mingw64\\bin\\gcc.exe",
+    "identity": {
+      "sha256": "c5005ba5380351c10743e9ca53ef9632164c54be3bd6b93324795114e4589a7d",
+      "size": 2350907
+    }
+  },
+  "input_identities_before": {
+    "src/root/m1C62.c": {
+      "sha256": "927309d2bf5019e17e58962c7da6a0d45298a2f3bf18fef0b0347cc4498ada6c",
+      "size": 9885
+    },
+    "portable/research/whole_program_behavior_sources.json": {
+      "sha256": "e29f4fb8aa736c7adca105f846a6928954d95d6fa7b57d45dfcdfd8646d34c81",
+      "size": 304406
+    },
+    "evidence/behavior/functions/f_1C62_0415/contracts/host-service-v1/module.c": {
+      "sha256": "1a75da44054b48e33e02b0dc551e9e690d1b0797b5e2cfe2e3e6e26ad3b632d4",
+      "size": 9681
+    },
+    "portable/tools/whole_program.py": {
+      "sha256": "83884111322423e56945331e3b729aac5343886f9b189dd75cfa657803f978a3",
+      "size": 44625
+    },
+    "portable/whole_program/conversions/crt_abi.py": {
+      "sha256": "fea8c9268c871e0b5e933f88e689a432b9b801c1ef76cb11f893594061d77aa5",
+      "size": 3569
+    },
+    "portable/whole_program/platform/crt_abi.h": {
+      "sha256": "fe261e3408f1162138d8b4466c1b259a0908d18be0cce0c30d4b3d873fbc16c6",
+      "size": 950
+    },
+    "portable/whole_program/conversions/unprovided_state_v2.py": {
+      "sha256": "8b6a30ad94d00f912091a3d5f1132ad05725932326982bc39f5049af0ab8477e",
+      "size": 16398
+    },
+    "portable/whole_program/conversions/source_bounded_state.py": {
+      "sha256": "5fc17abd838b0da8082416afd4df597376acd534cf29d7d757cc03c86f86aab2",
+      "size": 4540
+    },
+    "portable/tools/word_spelling.py": {
+      "sha256": "fc398570e1c42079b463e13979a198437b56ebc8a2098e5cc7fbe3c6de93b63f",
+      "size": 1976
+    },
+    "portable/tests/whole_program/platform/run_crt_abi_source_compile.py": {
+      "sha256": "eae551326106233ecb9509f1817dd7381c2defe16fe7ee449bf28307b22a0617",
+      "size": 6097
+    }
+  },
+  "input_identities_after": {
+    "src/root/m1C62.c": {
+      "sha256": "927309d2bf5019e17e58962c7da6a0d45298a2f3bf18fef0b0347cc4498ada6c",
+      "size": 9885
+    },
+    "portable/research/whole_program_behavior_sources.json": {
+      "sha256": "e29f4fb8aa736c7adca105f846a6928954d95d6fa7b57d45dfcdfd8646d34c81",
+      "size": 304406
+    },
+    "evidence/behavior/functions/f_1C62_0415/contracts/host-service-v1/module.c": {
+      "sha256": "1a75da44054b48e33e02b0dc551e9e690d1b0797b5e2cfe2e3e6e26ad3b632d4",
+      "size": 9681
+    },
+    "portable/tools/whole_program.py": {
+      "sha256": "83884111322423e56945331e3b729aac5343886f9b189dd75cfa657803f978a3",
+      "size": 44625
+    },
+    "portable/whole_program/conversions/crt_abi.py": {
+      "sha256": "fea8c9268c871e0b5e933f88e689a432b9b801c1ef76cb11f893594061d77aa5",
+      "size": 3569
+    },
+    "portable/whole_program/platform/crt_abi.h": {
+      "sha256": "fe261e3408f1162138d8b4466c1b259a0908d18be0cce0c30d4b3d873fbc16c6",
+      "size": 950
+    },
+    "portable/whole_program/conversions/unprovided_state_v2.py": {
+      "sha256": "8b6a30ad94d00f912091a3d5f1132ad05725932326982bc39f5049af0ab8477e",
+      "size": 16398
+    },
+    "portable/whole_program/conversions/source_bounded_state.py": {
+      "sha256": "5fc17abd838b0da8082416afd4df597376acd534cf29d7d757cc03c86f86aab2",
+      "size": 4540
+    },
+    "portable/tools/word_spelling.py": {
+      "sha256": "fc398570e1c42079b463e13979a198437b56ebc8a2098e5cc7fbe3c6de93b63f",
+      "size": 1976
+    },
+    "portable/tests/whole_program/platform/run_crt_abi_source_compile.py": {
+      "sha256": "eae551326106233ecb9509f1817dd7381c2defe16fe7ee449bf28307b22a0617",
+      "size": 6097
+    }
+  },
+  "candidate_sha256": "c68153751d44adacc9d266d32fa69b8e9dfa7fa42b08e6ed66793f6ed874371f",
+  "scope": "complete m1C62 TU parser/compile control for adapter syntax; not linked behavior or DOS equivalence"
+}

@@ -23,7 +23,7 @@ generation or compilation rejects the report.
 
 On 2026-10-03, 97 of the 98 historical C/data files syntax-compiled; the remaining
 file is the DOS paragraph/EMS allocator, replaced at its public handle boundary.
-The compiled modules and forty native support modules linked into one
+The compiled modules and forty-five native support modules linked into one
 relocatable object without duplicate definitions. This is **not an executable
 or a whole-program behavioral acceptance**. Unresolved references remain in
 that object, and pointer-bearing DOS layouts still need explicit native
@@ -52,8 +52,11 @@ have no role in this target.
 | Layout | Actual generated window/font TUs pass the wire/native layout assertions. Four-byte default window-header alignment and the old 42-byte native font allocation are rejected by negative controls. |
 | History | The previously DOS-verified Next10 lowering removes only the one-past word that the following sentinel store discards. Historical sources and earlier proof packets remain unchanged. |
 | Input and audio | Original entrypoints have explicit provider contracts and bounded DOS/native controls. Separate BIOS/private clocks pass pause, re-enable, rollover and actual SDL input controls. Ordered multi-voice playback and complete rendering remain under integration. |
-| Shared state | Twenty-one reviewed aliases and four pointer-table interior views use their source owners. Eighty-seven complete primitive common owners preserve their source widths, array shapes and 1,550 bytes of historical extent. Three source-initialized EMS scalars retain zero initial values. An additional 172 scalar/raw-byte unions and four bounded arrays use complete source declarations and matching SaveRec lengths (660 native bytes); these allocations make no historical gap-extent claim. Ambiguous storage stays unresolved. |
+| Shared state | Twenty-one reviewed aliases and four pointer-table interior views use their source owners. Eighty-seven complete primitive common owners preserve their source widths, array shapes and 1,550 bytes of historical extent. Three source-initialized EMS scalars retain zero initial values. An additional 172 scalar/raw-byte unions and four bounded arrays use complete source declarations and matching SaveRec lengths (660 native bytes). Thirteen more source-bounded owners provide 92 bytes for Cycle, list indices, ant-lion lists, sow coordinates and PillarMap. Four initialized DATA aliases retain their complete source word images and native pointer-table interiors. These conversions make no historical gap-extent claim. |
 | Windows | Actual generated load/lock/repoint/unlock paths pass independent parsing controls for all 34 valid HCEGANT windows and 285 objects. The resource-provider and recalculation test boundaries remain explicit; this is native integration, not new DOS equivalence. |
+| Window globals | One owner supplies profile, counts, 45 hooks and 45 offset rectangles. The actual source loader reserves its signed-byte color table between loading resources 0x80 and 0x81. Shipped-resource tests cover 34 windows, 16 colors, six groups, 40 profile rectangles and the source purge/load ordering; per-window loads remain a recorded boundary in that test. |
+| CRT | The native error table preserves all 38 observed MSC strings and sys_nerr=37. Source lowercase checks use the observed ASCII domain; other bytes fail explicitly. The original hard-error policy is retained while DOS INT 24 delivery is retired. A whole-module text-conversion compile catches malformed predicate lowering. |
+| Spider image backing | The actual DrawSpider/PreDrawSpider source uses one contiguous 6,276-byte native prefix/payload owner, with corrected byte-buffer entrypoint declarations. Three 84/112-pixel consumer cases check 49 tile calls and header/payload addresses. The separate original ASM line differential remains a bounded algorithm proof. |
 | Startup | Five real INSTALL.EXE opens remain. A closed descriptor is replaced by a separately validated optional-header descriptor; native signal policies and retirement of the BIOS disk-reset scan have actual host controls. Original subsequent startup calls and main-loop order remain. |
 | Balloon bitmaps | All five genuine ASM helpers pass 320 fresh DOS/native buffer comparisons. Native font-image pointers are distinguished from serialized mask headers. Source byte-sized loop and multiplication semantics remain. |
 | Lines | The S00 line walk passes 83 fresh DOS comparisons of ordered pixel writes, including octants, reversed endpoints, ties and all four raster operations. The source tie predicate is `error > floor(major/2)` after x-ordering endpoints. Cursor side effects and other driver slots remain separate work. |
@@ -98,11 +101,19 @@ test boundaries; they do not certify full save/load yet. The original song
 sequencer also reaches its end state for SOUND song 10001 through the native
 two-voice provider after 36,096 PIT frames. The same source song path also passes actual SDL dummy-stream cancellation and restart controls. Broader song coverage remains a separate check.
 
-The current foundation receipt is `tests/whole_program/evidence/whole-program-foundation-v5.json`;
-the earlier v1/v2/v3/v4 receipts remain preserved. Generate a new write-once receipt with
+The central V5 state integration also executes the actual generated SaveGame
+body over its thirteen original selected records, producing the expected 92
+little-endian bytes, and executes AddAntLion through the same owner views.
+Those controls retain explicit dialog/file/map boundaries and do not establish
+complete save/load acceptance. Reproduce them with
+`python portable/tests/whole_program/run_additive_integrated.py --out build/workers/whole_program/NEW-DIRECTORY`.
+The archived receipt is `tests/whole_program/evidence/additive-central-v2/`.
+
+The current foundation receipt is `tests/whole_program/evidence/whole-program-foundation-v7.json`;
+the earlier v1–v6 receipts remain preserved. Generate a new write-once receipt with
 `python portable/tools/whole_program_receipt.py --out portable/tests/whole_program/evidence/NEW-VERSION.json`.
-The v5 receipt records 97 compiled historical modules, forty compiled native providers,
-no duplicate definitions and 384 unresolved references in the relocatable
+The v7 receipt records 97 compiled historical modules, forty-five compiled native providers,
+no duplicate definitions and 376 unresolved references in the relocatable
 object. Those references include native CRT imports and incomplete game
 providers; they are not a count of missing game functions. The original
 startup/main loop is present, but this object is not yet a runnable complete

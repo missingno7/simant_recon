@@ -1,0 +1,86 @@
+{
+  "schema": "initialized-data-alias-source-probe-v1",
+  "status": "PASS",
+  "claim": "source-phase diagnostic adapter only; not behavior proof or historical acceptance",
+  "plan_sha256": "d8190398da454f151fb19af0b074462f9f04b3e262fe7973aeba70194b1d42ec",
+  "adapter_sha256": "02581c54936b7d28d91ddc144d774efd832dac2ef3cff2ed4627942af4ecc227",
+  "test_sha256": "cbf5bbe2dad3993f34b09500ac3c176f6ec8e701de5e2e6fa7f20cf4a338e36c",
+  "source_outputs": {
+    "src/data/d3D57.c": {
+      "source_sha256": "983251ad55176050efcdea33c62f0a34a93686474b0de4b2bdde6c6c808716f5",
+      "output_sha256": "c1680880287eb3cf7a5f2e5c9331dec642ffe4620718d61221bde91147bebea9",
+      "identifier_rewrites": {}
+    },
+    "src/S05/m3663.c": {
+      "source_sha256": "cbf0c66bfc857ecb0a592f6ba5760e47055230b6e33d6115254506a5f09f912c",
+      "output_sha256": "d7e6b1bb50f57b6d52d3404df0d286a9d1f41120c2081797ca9e9a04f90aa61e",
+      "identifier_rewrites": {
+        "fd_3D57_07B6": 3
+      }
+    },
+    "src/root/m15F8.c": {
+      "source_sha256": "d6d4daddab943ee3436ca0e9c8dbc866a9d67659f7448f3c307f858abe06b70a",
+      "output_sha256": "38d5020929b2600d19ea2357f882e3c965f5a685d617f03fde01615a0c4af6e6",
+      "identifier_rewrites": {
+        "fd_3D57_07CC": 4,
+        "fd_3D57_07CE": 1
+      }
+    },
+    "src/S08/m35F5.c": {
+      "source_sha256": "ef6eea405f6497cb5a6648ef258cc1afeab308f995ded573794465d831e3501f",
+      "output_sha256": "b6a6613062c393897b407aa8214becfd6a85a1a0036831aacf2c70931d85a469",
+      "identifier_rewrites": {
+        "fd_3D57_07CC": 1
+      }
+    },
+    "src/S11/m35F5.c": {
+      "source_sha256": "39b6df453387ee12a16dd07313e12cbe29a598eb1441011c03c6d33cba576ec8",
+      "output_sha256": "510236aed6f05a9c71b32dc35b9a7417009652d247da08ef69632630844dbb18",
+      "identifier_rewrites": {
+        "fd_3D57_07CC": 2
+      }
+    },
+    "src/S24/m39C7.c": {
+      "source_sha256": "3de9615a57dbe35eacd073726b451478dc5b12396360501631d7553b6139e240",
+      "output_sha256": "1180bb4c9128b389a3a47be0490b52c9b3240f3ec741c544ceb2498e8d824cab",
+      "identifier_rewrites": {
+        "fd_3D57_0852": 1
+      }
+    },
+    "src/root/m0DEF.c": {
+      "source_sha256": "4325b570055de5daf8b96fe529d53f316b1a8a046daf845672672bd376d08142",
+      "output_sha256": "dfb63318192af40e039519bdf1ba62fdedb824569f705c5b4e5d8e281c087252",
+      "identifier_rewrites": {
+        "fd_3D57_0C1C": 2
+      }
+    },
+    "src/root/m0894.c": {
+      "source_sha256": "57b40ad0a9ee74c501fbcb0d521b86b8158f206f44f4867e960bcb800b5e7484",
+      "output_sha256": "1aeb6e1ddfe7494af9fef93e507d6dc73eb9164ad3ab2df73a87aa5238689a85",
+      "identifier_rewrites": {
+        "fd_3D57_0C1A": 2
+      }
+    },
+    "src/S09/m35F5.c": {
+      "source_sha256": "028e1575990d5d45233f9102a0d2a060810349bd2f1297182c4af435ecbe912a",
+      "output_sha256": "b25097e156bdd5fbe13726ef4c99f16d0c0082600f69b674398b7c1d8a1ff497",
+      "identifier_rewrites": {}
+    }
+  },
+  "units_adapted": 9,
+  "identifier_tokens_rewritten": 16,
+  "positive_controls": [
+    "exact initialized word values preserve complete owner byte images",
+    "signed byte view uses int8_t over canonical unsigned owner",
+    "07CE uses owner element offset one",
+    "0852 uses native pointer slot ten",
+    "0C1C points to word owner element one"
+  ],
+  "negative_controls": [
+    "altered source rejected",
+    "mutated owner/address plan rejected",
+    "foreign path unchanged",
+    "comments, literals, and character literals not rewritten"
+  ],
+  "diagnostic_v6_report_sha256": "fdd38e6f72d16e2e001d43e29928e88e324637820127c97a4ded0e7bc7b5c505"
+}

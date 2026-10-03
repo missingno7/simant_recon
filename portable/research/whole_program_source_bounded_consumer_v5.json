@@ -1,0 +1,40 @@
+{
+  "schema": "simant-source-bounded-native-consumer-v5",
+  "claim": "DIAGNOSTIC_ONLY: the actual current generated AddAntLion body writes V5 native lion-list views. This does not prove the DOS SaveGame wire format or full game behavior.",
+  "plan": {
+    "path": "portable/research/whole_program_source_bounded_owners_v5.json",
+    "sha256": "b9ff9a739930c85537dba59edcd3680d52a10b36ca7684878e161f3d436f084e"
+  },
+  "inputs": {
+    "build/workers/whole_program/generated/root_m0AD9.c": "ae6b81605d9df9fe4ef3d45b7874f2c49ccbcbc5d85bf8085a517f46fef45644",
+    "build/workers/whole_program/source_bounded_v5_consumer/source_bounded_additive.h": "d252cf7c3028e10669d3945f90e8f1e1634190ccd34a060a623bd52efbabd409",
+    "build/workers/whole_program/source_bounded_v5_consumer/source_bounded_additive.c": "db48b8d28b413dffbc98197f797511372c17612d3a8e10bde0b4f4c147fff13b",
+    "build/workers/whole_program/source_bounded_v5_consumer/AddAntLion.c": "86a451f13a576e22d0ce3a7cabf49e68a52813418413e5ba262c25e27344f5b8",
+    "build/workers/whole_program/source_bounded_v5_consumer/probe.c": "d2c65f8906b964065ef3e37fe82c38fb9e78503719925be5633cb6709eecce0f",
+    "build/workers/whole_program/source_bounded_v5_consumer/source_bounded_additive.o": "031d53651e9cfe5dcadf0812ab7acf0917a55c08dec6ffe20cb196cd1d39bd0b",
+    "build/workers/whole_program/source_bounded_v5_consumer/AddAntLion.o": "ad3d0191bab25c3d6fab252be37cead2f649202219800c9958d1d34a4c3531ac",
+    "build/workers/whole_program/source_bounded_v5_consumer/probe.o": "553208b7720a4f3f889f9e7d25dac32d08dfce09375ad1efa1673bc08c255b6b",
+    "build/workers/whole_program/source_bounded_v5_consumer/probe.exe": "b3da38a7b1562d0ec32c831011aab704a48666e331d5e9e6bea26a0a00b11a56"
+  },
+  "controls": {
+    "actual_add_ant_lion_body_extracted": true,
+    "actual_five_v5_lion_views_mutated": true,
+    "little_endian_target_macro_required": true,
+    "compile_and_run": "PASS: actual generated AddAntLion writes its six source-owned list fields through V5 native owner views"
+  },
+  "limitations": [
+    "No SaveGame/LoadGame execution in this probe.",
+    "SetMap and IsClearTile are controlled to isolate AddAntLion writes; placement behavior is outside this state-access probe.",
+    "Only first list slot and one call are exercised."
+  ],
+  "summary": {
+    "passed": true,
+    "mutated_fields": [
+      "LionListX[0]",
+      "LionListY[0]",
+      "LionListM[0]",
+      "LionListS[0]",
+      "LionListT[0]"
+    ]
+  }
+}

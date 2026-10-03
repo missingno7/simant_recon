@@ -9,6 +9,7 @@ from __future__ import annotations
 
 import argparse
 from collections import Counter
+from dataclasses import asdict
 import hashlib
 import json
 from pathlib import Path
@@ -42,6 +43,15 @@ from portable.whole_program.conversions.unprovided_state_v2 import (
 from portable.whole_program.conversions.source_bounded_state import (
     load_plan as load_bounded_plan, render_owners as render_bounded_owners,
     adapt as adapt_bounded_state)
+from portable.whole_program.conversions.source_bounded_additive import (
+    load_plan as load_additive_plan, render_owners as render_additive_owners,
+    adapt as adapt_additive_state)
+from portable.whole_program.conversions.crt_abi import (
+    adapt as adapt_crt_abi, SUPPORTED as CRT_ABI_MODULES)
+from portable.whole_program.conversions.spider_inline_source import adapt as adapt_spider_inline
+from portable.whole_program.conversions.spider_inline_reviewed import adapt_reviewed as adapt_spider_overlay
+from portable.whole_program.conversions.window_loader import adapt as adapt_window_globals
+from portable.whole_program.conversions.initialized_data_aliases_v1 import adapt_reviewed as adapt_data_views
 
 IO_NAMES = {name: 'dos_' + name for name in
             ('open', 'read', 'write', 'lseek', 'close', 'access', 'chdir',
@@ -210,6 +220,9 @@ def main() -> int:
     if not frozen["ready"]:
         raise RuntimeError("frozen historical source/evidence input identity failed")
     compiler = shutil.which("gcc") or "C:/msys64/mingw64/bin/gcc.exe"
+    sdl_sdk = ROOT / 'build/sdl3-sdk/SDL3-3.4.16/x86_64-w64-mingw32'
+    if args.compile and not (sdl_sdk / 'include/SDL3/SDL.h').is_file():
+        raise ValueError('the verified SDL3 3.4.16 SDK is required for the native host provider')
     rows = []
     declarations = []
     symbols = json.loads((ROOT / "layout/symbols.json").read_text())["data"]
@@ -237,6 +250,7 @@ def main() -> int:
         raise ValueError('state pointer table source control failed')
     initialized_plan = load_initialized_plan()
     bounded_plan = load_bounded_plan()
+    additive_plan = load_additive_plan()
     alias_failures = (validate_historical_pins(initialized_plan) +
                       validate_source_declarations(initialized_plan))
     if alias_failures:
@@ -312,6 +326,27 @@ def main() -> int:
     conversion_inputs += [ROOT / entry['path'] for entry in bounded_plan['inputs'].values()
                          if isinstance(entry, dict) and 'path' in entry]
     conversion_inputs += [ROOT / rel for rel in initialized_plan['pinned_source_hashes']]
+    conversion_inputs += [ROOT / rel for rel in (
+        'portable/whole_program/conversions/source_bounded_additive.py',
+        'portable/whole_program/conversions/source_bounded_additive_v5.py',
+        'portable/research/whole_program_source_bounded_owners_v5.json',
+        'portable/whole_program/conversions/crt_abi.py',
+        'portable/whole_program/platform/crt_abi.h',
+        'portable/whole_program/conversions/spider_inline_source.py',
+        'portable/whole_program/conversions/spider_inline_reviewed.py',
+        'portable/whole_program/algorithms/line16b5.h',
+        'portable/whole_program/conversions/window_loader.py',
+        'portable/whole_program/window_source_globals.h',
+        'portable/whole_program/window_source_rects.h',
+        'portable/whole_program/platform/sdl3/host_modes.h')]
+    conversion_inputs += [ROOT / rel for rel in (
+        'portable/whole_program/conversions/initialized_data_aliases_v1.py',
+        'portable/research/initialized_data_aliases_v1.json')]
+    # The selected real SDL host compiles against the SDK. Pin all nested
+    # public headers as well as SDL.h so a changed ABI cannot escape the
+    # source stability guard.
+    if args.compile:
+        conversion_inputs += sorted((sdl_sdk / 'include/SDL3').glob('*.h'))
     initial_inputs = {p.relative_to(ROOT).as_posix(): digest(p) for p in conversion_inputs}
     native_startups, startup_conversion = convert_startup_sources(
         (ROOT / 'src/root/m15F8.c').read_text(encoding='utf-8'),
@@ -321,6 +356,11 @@ def main() -> int:
         source = path.read_text(encoding="utf-8")
         original_functions = function_heads(source)
         platform_conversions = []
+        if rel == 'src/root/m0250.c':
+            # This adapter validates the immutable raw original identity.
+            converted, receipt = adapt_spider_inline(path.read_bytes(), rel)
+            source = converted.decode('utf-8')
+            platform_conversions.append({'kind': 'SOURCE_INLINE_SPIDER_BUFFER', **asdict(receipt)})
         if rel in native_startups:
             source = native_startups[rel]
             platform_conversions.append(startup_conversion)
@@ -338,6 +378,15 @@ def main() -> int:
             source, ledger = adapt_audio(rel, source)
             platform_conversions.append(ledger)
         source, overlay_rows = reviewed_overlays(path, source, overlays)
+        if rel == 'src/root/m0250.c':
+            source, receipt = adapt_spider_overlay(source, rel)
+            platform_conversions.append({'kind': 'REVIEWED_INLINE_SPIDER_OVERLAY_COMPOSITION', **asdict(receipt)})
+        source, data_view_ledger = adapt_data_views(source, rel)
+        if data_view_ledger:
+            platform_conversions.append(data_view_ledger)
+        if rel in CRT_ABI_MODULES:
+            source, ledger = adapt_crt_abi(source, rel)
+            platform_conversions.append(ledger)
         if rel == 'src/root/m1986.c':
             source, ledger = adapt_findindex(source, rel)
             platform_conversions.append(ledger)
@@ -352,6 +401,9 @@ def main() -> int:
         source, bounded_ledger = adapt_bounded_state(source, rel, bounded_plan)
         if bounded_ledger:
             platform_conversions.append(bounded_ledger)
+        source, additive_ledger = adapt_additive_state(source, rel, additive_plan)
+        if additive_ledger:
+            platform_conversions.append(additive_ledger)
         if rel in {'src/root/m15F8.c', 'src/S20/m39F1.c'}:
             source = '#include "portable/whole_program/state/source_tables.h"\n' + source
         source, alias_ledger = adapt_initialized_aliases(source, initialized_plan)
@@ -385,6 +437,14 @@ def main() -> int:
             platform_conversions.append({'kind': 'DOS_WINDOW_POINTER_SIDECARS',
                 'source': rel, 'replacements': windows.replacements,
                 'claim': 'Native pointer/record conversion; no new DOS equivalence claim'})
+        window_globals = adapt_window_globals(source, rel)
+        if window_globals.unresolved:
+            raise ValueError(f'unconverted window global ABI: {rel}: {window_globals.unresolved}')
+        source = window_globals.text
+        if any(window_globals.replacements.values()):
+            platform_conversions.append({'kind': 'NATIVE_WINDOW_GLOBAL_STORAGE',
+                'replacements': window_globals.replacements,
+                'claim': 'Typed native ownership and checked color allocation; original loader flow retained'})
         source, format_conversion = adapt_varargs(source, rel)
         if (format_conversion['lowered_variadic_functions'] or
                 format_conversion['removed_legacy_prototypes'] or
@@ -501,6 +561,15 @@ def main() -> int:
                       "_Static_assert((char)-1<0, \"MSC signed char\");\n#endif\n",
                       encoding="utf-8", newline="\n")
     support_rows = []
+    additive_header, additive_source = render_additive_owners(additive_plan)
+    (output / 'source_bounded_additive.h').write_text(additive_header, encoding='utf-8', newline='\n')
+    additive_target = output / 'source_bounded_additive.c'
+    additive_target.write_text(additive_source, encoding='utf-8', newline='\n')
+    support_rows.append({'source': additive_target.relative_to(ROOT).as_posix(),
+        'source_sha256': digest(additive_target), 'generated': additive_target.relative_to(ROOT).as_posix(),
+        'module_kind': 'ADDITIVE_SOURCE_BOUNDED_NATIVE_STATE', 'admitted': False,
+        'owners': len(additive_plan['owners']),
+        'native_bytes': sum(owner['width_bytes'] for owner in additive_plan['owners'])})
     bounded_header, bounded_source = render_bounded_owners(bounded_plan)
     (output / 'native_owners.h').write_text(bounded_header, encoding='utf-8', newline='\n')
     bounded_target = output / 'native_owners.c'
@@ -524,8 +593,10 @@ def main() -> int:
         ("portable/whole_program/conversions/pointer_globals.c", "NATIVE_SHARED_POINTER_TABLES"),
         ("portable/whole_program/platform/font_blit.c", "SOURCE_DERIVED_FONT_RASTER_AND_STATE"),
         ("portable/whole_program/window_refs.c", "NATIVE_WINDOW_POINTER_OWNERSHIP"),
+        ("portable/whole_program/window_source_globals.c", "SOURCE_DERIVED_WINDOW_GLOBAL_OWNERS"),
         ("portable/whole_program/platform/dos_memory.c", "NATIVE_PLATFORM_SERVICE"),
         ("portable/whole_program/platform/crt_rng.c", "NATIVE_RUNTIME_SERVICE"),
+        ("portable/whole_program/platform/crt_abi.c", "SOURCE_VISIBLE_MSC_RUNTIME_CONTRACT"),
         ("portable/whole_program/platform/seed_source.c", "EXPLICIT_HOST_STARTUP_SEED_BOUNDARY"),
         ("portable/whole_program/platform/dos_io.c", "NATIVE_PLATFORM_SERVICE"),
         ("portable/whole_program/platform/startup_preflight.c", "NATIVE_FILE_STARTUP_CONTRACT"),
@@ -548,6 +619,7 @@ def main() -> int:
         ("portable/whole_program/text_bitmap_bridge.c", "NATIVE_TEXT_BITMAP_SOURCE_ABI"),
         ("portable/render/primitives.c", "EXISTING_NATIVE_RASTER_STORAGE"),
         ("portable/whole_program/platform/sdl3/input_time_host.c", "NATIVE_HOST_BINDING"),
+        ("portable/whole_program/platform/sdl3/host.c", "SDL3_ORIGINAL_GEOMETRY_PRESENTATION_AND_INPUT"),
         ("portable/game/timing.c", "SOURCE_DERIVED_TIMING_CONTRACT"),
         ("portable/whole_program/platform/directory.c", "NATIVE_PLATFORM_SERVICE"),
         ("portable/whole_program/platform/dos_format.c", "NATIVE_RUNTIME_SERVICE"),
@@ -555,6 +627,7 @@ def main() -> int:
         ("portable/whole_program/algorithms/wildcard.c", "SOURCE_DERIVED_ASM_ALGORITHMS"),
         ("portable/whole_program/algorithms/asm_utilities.c", "SOURCE_DERIVED_ASM_ALGORITHMS"),
         ("portable/whole_program/algorithms/balloon.c", "SOURCE_DERIVED_ASM_ALGORITHMS"),
+        ("portable/whole_program/algorithms/line16b5.c", "DOS_VERIFIED_INLINE_SPIDER_LINE_ALGORITHM"),
         ("portable/game/simulation/rng.c", "EXISTING_VERIFIED_RUNTIME_ALGORITHM"),
         ("portable/platform/memory.c", "EXISTING_PLATFORM_SERVICE")]:
         path = ROOT / rel
@@ -565,10 +638,13 @@ def main() -> int:
             target = ROOT / row["generated"]
             object_path = (output / (Path(row["source"]).stem + "-native.o")) if row in support_rows else target.with_suffix(".o")
             command = [compiler, "-std=c11", "-fsigned-char", "-fno-builtin",
+                       "-DSIMANT_NATIVE_LITTLE_ENDIAN=1",
                        "-I", str(ROOT),
                        "-I", str(ROOT / 'portable/whole_program'),
                        "-Werror=implicit-function-declaration", "-Werror=implicit-int",
                        "-c", str(target), "-o", str(object_path)]
+            if row['source'] == 'portable/whole_program/platform/sdl3/host.c':
+                command[1:1] = ['-I', str(sdl_sdk / 'include')]
             if row['source'] == 'src/root/m25E7.c':
                 # Keep the entire original renderer body; its original public
                 # name is supplied by the checked native span boundary.
